@@ -1,19 +1,12 @@
-import { Breadcrumb, cl } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo, useState } from 'react';
 
-import Header from '../../../common/Header';
-import { LoadingState } from '../commons/LoadingState';
-import { CheckoutContext } from '../context';
-import useGetCheckout from '../hooks/useGetCheckout';
-import useGetOrganization from '../hooks/useGetOrganization';
-import useUpdateCheckout from '../hooks/useUpdateCheckout';
-
-import AirCheckout from './AirCheckout';
-import FclCheckout from './FclCheckout';
-import LclCheckout from './LclCheckout';
-import styles from './styles.module.css';
+import useGetCheckout from './hooks/useGetCheckout';
+import useGetOrganization from './hooks/useGetOrganization';
+import useUpdateCheckout from './hooks/useUpdateCheckout';
+import AirCheckout from './page-components/AirCheckout';
+import FclCheckout from './page-components/FclCheckout';
+import LclCheckout from './page-components/LclCheckout';
 
 const BREADCRUMB_MAPPING = {
 	draft                : 'Add or Edit Margin',
@@ -27,12 +20,7 @@ const MAPPING = {
 	air_freight : AirCheckout,
 };
 
-function Checkout({ checkout_type = '' }) {
-	const { query, entity_types } = useSelector(({ general, profile }) => ({
-		query        : general?.query,
-		entity_types : profile?.partner?.entity_types,
-	}));
-
+const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_type = '' }) => {
 	const [headerProps, setHeaderProps] = useState({});
 
 	const { checkout_id = '', shipment_id = '' } = query;
@@ -51,7 +39,6 @@ function Checkout({ checkout_type = '' }) {
 		primary_service,
 		services,
 		importer_exporter_id = '',
-		importer_exporter = {},
 		checkout_type: checkoutMethod = '',
 		credit_details = {},
 		margin_approval_status = '',
@@ -75,15 +62,10 @@ function Checkout({ checkout_type = '' }) {
 	const {
 		data: orgData = {},
 		loading: orgLoading,
-		// getOrganization,
 	} = useGetOrganization({ importer_exporter_id });
-
-	const { organization_settings = [], tags = [] } = importer_exporter || {};
 
 	const isChannelPartner = entity_types?.includes('channel_partner')
 		&& !entity_types?.includes('cogoport');
-
-	const isOrgCP = (tags || []).includes('partner');
 
 	const primaryService = Object.values(services || {}).find(
 		(service) => service?.service_type === primary_service || !service?.trade_type,
@@ -125,8 +107,6 @@ function Checkout({ checkout_type = '' }) {
 			loading,
 			orgData,
 			getCheckout,
-			isOrgCP,
-			organization_settings,
 			checkoutMethod,
 			isChannelPartner,
 			shouldEditMargin,
@@ -152,8 +132,6 @@ function Checkout({ checkout_type = '' }) {
 			loading,
 			orgData,
 			getCheckout,
-			isOrgCP,
-			organization_settings,
 			checkoutMethod,
 			isChannelPartner,
 			shouldEditMargin,
@@ -169,57 +147,30 @@ function Checkout({ checkout_type = '' }) {
 		],
 	);
 
-	if (loading && isEmpty(data)) {
-		return <LoadingState />;
-	}
-
-	const ActiveComponent = MAPPING[primary_service];
-
-	if (!ActiveComponent) {
-		return null;
-	}
-
-	const showAdditionalHeader = headerProps && !isEmpty(headerProps);
-
-	const resultsUrl = () => {
+	const resultsUrl = useMemo(() => {
 		if (shipment_id) {
-			return `/book/${search_id}/${importer_exporter_id}/${shipment_id}`;
+			return `/v2/${partner_id}/book/${search_id}/${importer_exporter_id}/${shipment_id}`;
 		}
-		return `/book/${search_id}/${importer_exporter_id}`;
+		return `/v2/${partner_id}/book/${search_id}`;
+	}, [importer_exporter_id, partner_id, search_id, shipment_id]);
+
+	const serviceDiscoveryUrl = useMemo(() => `/v2/${partner_id}/service_discovery`, [partner_id]);
+
+	return {
+		resultsUrl,
+		serviceDiscoveryUrl,
+		checkoutData,
+		state,
+		BREADCRUMB_MAPPING,
+		MAPPING,
+		data,
+		loading,
+		primary_service,
+		detail,
+		headerProps,
+		search_id,
+		importer_exporter_id,
 	};
+};
 
-	return (
-		<CheckoutContext.Provider value={checkoutData}>
-			<div className={styles.container}>
-				<Header
-					data={detail}
-					service_key="primary_service"
-					activePage="checkout"
-					loading={loading}
-					headerProps={headerProps}
-					showAdditionalHeader={showAdditionalHeader}
-				/>
-
-				<Breadcrumb className={styles.breadcrumb}>
-					<Breadcrumb.Item
-						label={<a href={resultsUrl()}>Service Discovery</a>}
-					/>
-
-					<Breadcrumb.Item label="Results" />
-
-					{Object.entries(BREADCRUMB_MAPPING).map(([key, value]) => (
-						<Breadcrumb.Item
-							className={cl`${styles.Breadcrumb_item} ${key === state && styles.active}`}
-							key={key}
-							label={value}
-						/>
-					))}
-				</Breadcrumb>
-
-				<ActiveComponent state={state} />
-			</div>
-		</CheckoutContext.Provider>
-	);
-}
-
-export default Checkout;
+export default useCheckout;

@@ -35,7 +35,8 @@ const GLOBAL_CONSTANTS = {
 	cargo_insurance: {
 		IN: ['fcl_freight', 'air_freight', 'lcl_freight'],
 	},
-	formats: {
+	s2c_supported_services : ['fcl_freight'],
+	formats                : {
 		date: {
 			'dd/MM/yyyy'        : 'dd/MM/yyyy',
 			'dd MMM yyyy'       : 'dd MMM yyyy',

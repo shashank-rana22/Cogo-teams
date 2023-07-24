@@ -1,6 +1,8 @@
-import { Button, Loader } from '@cogoport/components';
+import { Button, Loader, Toast } from '@cogoport/components';
 import { IcMDelete, IcMCrossInCircle, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+
+import getErrors from '../../../../../utils/getErrors';
 
 import styles from './styles.module.css';
 
@@ -52,6 +54,16 @@ function HandleButtons({
 			bl_type          : documentType || undefined,
 			bl_delivery_mode : documentDeliveryMode || undefined,
 		};
+
+		const { hasError, message } = getErrors({
+			selectedServices,
+			paymentModesArray: [paymentMode, paymentTerms, paymentMethods],
+		});
+
+		if (hasError) {
+			Toast.error(message);
+			return;
+		}
 
 		const payload = {
 			services: selectedServices.map(({ service, service_id }) => ({

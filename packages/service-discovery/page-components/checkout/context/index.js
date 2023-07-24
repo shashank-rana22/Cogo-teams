@@ -1,3 +1,27 @@
 import { createContext } from 'react';
 
-export const CheckoutContext = createContext({});
+export const CheckoutContext = createContext([{
+	primaryService               : {},
+	detail                       : {},
+	services                     : [],
+	rate                         : {},
+	conversions                  : {},
+	orgLoading                   : false,
+	checkout_id                  : '',
+	loading                      : false,
+	orgData                      : {},
+	getCheckout                  : () => {},
+	checkoutMethod               : '',
+	isChannelPartner             : false,
+	shouldEditMargin             : false,
+	invoice                      : {},
+	updateCheckout               : () => {},
+	updateLoading                : false,
+	showSendTncEmail             : false,
+	showOverallCreditRisk        : false,
+	kycShowCondition             : false,
+	tncPresent                   : false,
+	headerProps                  : {},
+	setHeaderProps               : () => {},
+	possible_subsidiary_services : [],
+}]);
