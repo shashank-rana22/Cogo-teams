@@ -1,23 +1,26 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import injectCustomFormValidations from './inject-custom-form-validations';
 
-const injectValues = (
+const ONE = 1;
+const injectValues = ({
 	selectedMail,
 	populatedControls,
 	task,
 	getApisData,
 	shipment_data,
 	stepConfig,
-) => {
+}) => {
 	const controls = populatedControls || [];
 
 	if (!controls?.length) return controls;
 
 	if (task?.task === 'upload_si') {
-		controls[0].value = [
+		controls[GLOBAL_CONSTANTS.zeroth_index].value = [
 			{
-				url         : selectedMail?.formatted?.[0]?.url,
-				description : selectedMail?.formatted?.[0]?.description,
-				si_filed_at : selectedMail?.formatted?.[0]?.si_filed_at,
+				url         : selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.url,
+				description : selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.description,
+				si_filed_at : selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.si_filed_at,
 			},
 		];
 	} else if (
@@ -50,8 +53,8 @@ const injectValues = (
 	) {
 		(controls || []).forEach((control, index) => {
 			if (control?.type === 'fieldArray') {
-				controls[index].value = Array(shipment_data.bls_count || 1)
-					.fill(0)
+				controls[index].value = Array(shipment_data.bls_count || ONE)
+					.fill(GLOBAL_CONSTANTS.zeroth_index)
 					?.map(() => ({
 						description : '',
 						url         : selectedMail?.formatted?.[index]?.url || '',
@@ -66,7 +69,7 @@ const injectValues = (
 		(controls || []).forEach((control, index) => {
 			if (control.type === 'fieldArray') {
 				controls[index].value = controls[index]?.value?.length
-					? controls[index]?.value : [{ url: selectedMail?.formatted?.[0]?.url }];
+					? controls[index]?.value : [{ url: selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.url }];
 			}
 		});
 	}
