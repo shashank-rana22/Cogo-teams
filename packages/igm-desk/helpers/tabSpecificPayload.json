@@ -42,7 +42,7 @@
             {
                 "task": ["upload_checklist"],
                 "state": ["vessel_departed"],
-                "status": ["pending"],
+                "status": ["completed"],
                 "assigned_stakeholder": ["service_ops2"]
             }
         ],
