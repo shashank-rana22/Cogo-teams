@@ -1,30 +1,32 @@
 import { Pill, Placeholder } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
 import FilterService from './FilterServices';
+import { getOtherServiceOptions } from './getOtherServiceOptions';
 import Price from './Price';
 import ServicesList from './ServicesList';
 import styles from './styles.module.css';
 import tableFields from './tableFields';
 
 function ChooseService({
-	setAddRate,
-	isSeller,
-	list,
-	loading,
-	setFilters,
-	filters,
+	setAddRate = () => {},
+	isSeller = false,
+	list = {},
+	loading = false,
+	setFilters = () => {},
+	filters = {},
 	setShowPrice = () => { },
 	refetch = () => { },
 	setShowChargeCodes = () => {},
-	serviceCountTotal,
+	serviceCountTotal = '',
 }) {
 	const tagDisplay = (item) => (
 		<div>
 			{item?.tags ? (
-				<Pill className="primary">{startCase(item?.tags?.[0])}</Pill>
+				<Pill className="primary">{startCase(item?.tags?.[GLOBAL_CONSTANTS.zeroth_index])}</Pill>
 			) : null}
 		</div>
 	);
@@ -46,9 +48,10 @@ function ChooseService({
 
 	const fields = tableFields(priceRequest, countObj, tagDisplay);
 
-	const serviceOptions = (shipment_data?.services || []
+	let serviceOptions = (shipment_data?.services || []
 	).map((service) => ({ label: startCase(service), value: service }));
 
+	serviceOptions = getOtherServiceOptions({ shipment_data, serviceOptions });
 	return (
 		<div>
 			<FilterService

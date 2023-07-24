@@ -1,4 +1,5 @@
 import { Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, {
 	useState,
@@ -10,8 +11,12 @@ import React, {
 import stakeholderMappings from './stakeholder-mappings';
 import styles from './styles.module.css';
 
+const TOTAL_STAKEHOLDERS_LENGTH = 2;
+const CHAR_LENGTH = 1;
+const SUGGESTION_LENGTH = 0;
+
 function Sendto(
-	{ data, setStakeHolderView = () => { }, isStakeholder = true },
+	{ data = {}, setStakeHolderView = () => {}, isStakeholder = true },
 	ref,
 ) {
 	const [suggestions, setSuggestions] = useState([]);
@@ -19,8 +24,8 @@ function Sendto(
 	const [userName, setUserName] = useState({});
 	const [text, setText] = useState('');
 
-	const stakeholder_type = isStakeholder
-		? data?.channelData?.stakeholder_types?.[0] : 'default';
+	const stakeholder_type = isStakeholder && data?.channelData?.stakeholder_types?.length < TOTAL_STAKEHOLDERS_LENGTH
+		? data?.channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index] : 'default';
 
 	const stakeholders = stakeholderMappings[stakeholder_type];
 
@@ -32,7 +37,7 @@ function Sendto(
 	});
 
 	const handleMentions = (value) => {
-		const lastChar = value.split('')[value.length - 1];
+		const lastChar = value.split('')[value.length - CHAR_LENGTH];
 
 		if (lastChar === ' ' || value === '') {
 			setSuggestions([]);
@@ -46,7 +51,7 @@ function Sendto(
 
 		if (isTypingName) {
 			const words = value.split(' ');
-			const v = words[words.length - 1].substring(1);
+			const v = words[words.length - CHAR_LENGTH].substring(CHAR_LENGTH);
 			setUserName(v);
 		}
 
@@ -54,7 +59,7 @@ function Sendto(
 	};
 
 	useEffect(() => {
-		if (userName.length > 0) {
+		if (userName.length > SUGGESTION_LENGTH) {
 			const updatedUserName = userName.replace(/\\/g, '\\\\');
 			const regex = new RegExp(`^${updatedUserName}`, 'i');
 			const suggestion = cond.sort().filter((v) => regex.test(v));
@@ -73,11 +78,11 @@ function Sendto(
 
 	const selectedText = (value) => {
 		setSuggestions([]);
-		setText(`${text.substr(0, text.length - userName.length) + value} `);
+		setText(`${text.substr(SUGGESTION_LENGTH, text.length - userName.length) + value} `);
 	};
 
 	const renderSuggestions = () => {
-		if (suggestions.length === 0) {
+		if (suggestions.length === SUGGESTION_LENGTH) {
 			return null;
 		}
 
@@ -85,6 +90,7 @@ function Sendto(
 			<div className={styles.container} role="listbox">
 				{(suggestions || []).map((item) => (
 					<div
+						key={item}
 						className={styles.options}
 						onKeyPress={selectedText}
 						role="button"
