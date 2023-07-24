@@ -7,7 +7,8 @@
 	height: 100vh;
 	padding: 0;
 	margin: var(--layout-top-shift) var(--layout-side-shift);
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 	clip-path: inset(0 -4px 0 0);
 	background-color: #fff;
 	box-shadow: 0 0 4px rgb(5 28 61 / 20%);
@@ -20,6 +21,13 @@
 	@media (max-width: 480px) {
 		--layout-side-panel: 100vw;
 	}
+}
+
+.sticky_container {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	background-color: #fff;
 }
 
 .heading {
@@ -98,6 +106,9 @@
 }
 
 .card {
+	display: flex;
+	gap: 8px;
+	width: 100%;
 	padding: 18px;
 	margin: 16px 0;
 	background: #fdfbf7;
@@ -108,5 +119,19 @@
 		cursor: pointer;
 		border: 1px solid #edd7a9;
 		box-shadow: 0 0 8px #627fac33;
+	}
+}
+
+.right {
+	width: 80px;
+}
+
+.left {
+	flex: 1;
+
+	> div {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	}
 }
