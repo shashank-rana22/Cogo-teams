@@ -60,13 +60,11 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 				</div>
 			</div>
 
-			{!['fcl_freight', 'air_freight', 'lcl_freight'].includes(shipment_type) && (
-				<div className={styles.single_box}>
-					<div style={{ display: 'flex' }}>
-						{getOrdinalNumber(service_trade_type_shipment_count)}
-					</div>
+			<div className={styles.single_box}>
+				<div style={{ display: 'flex' }}>
+					{getOrdinalNumber(service_trade_type_shipment_count)}
 				</div>
-			)}
+			</div>
 
 			{['fcl_freight', 'air_freight', 'lcl_freight'].includes(shipment_type) && (
 				<div className={styles.port_pair_container}>

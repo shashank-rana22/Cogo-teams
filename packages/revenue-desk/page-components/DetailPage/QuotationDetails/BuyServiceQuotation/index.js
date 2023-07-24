@@ -51,7 +51,7 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 			role="button"
 			tabIndex={0}
 		>
-			view more
+			view
 		</div>
 	</Popover>,
 			}),

@@ -61,6 +61,7 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 						</Pill>
 					</div>
 				) : null}
+				{data?.rowData?.remarks ? <div /> : null}
 			</div>
 			<div className={styles.progress_bar_section}>
 

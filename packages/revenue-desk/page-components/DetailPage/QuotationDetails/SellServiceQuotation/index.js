@@ -54,7 +54,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 			role="button"
 			tabIndex={0}
 		>
-			view more
+			view
 		</div>
 	</Popover>,
 		}));
@@ -93,7 +93,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 			role="button"
 			tabIndex={0}
 		>
-			view more
+			view
 		</div>
 	</Popover>,
 		}));
