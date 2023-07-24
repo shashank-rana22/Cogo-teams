@@ -34,9 +34,8 @@ function MiddleSection({
 	primaryServiceRates = [],
 	rateCardData = {},
 	scheduleData = {},
-	setSelectedCard = () => {},
-	setScreen = () => {},
 	isSelectedCard = false,
+	setScreen = () => {},
 }) {
 	return (
 		<div className={styles.middle}>
@@ -73,7 +72,6 @@ function MiddleSection({
 				<QuotationDetails
 					rateCardData={rateCardData}
 					detail={detail}
-					setSelectedCard={setSelectedCard}
 					isSelectedCard={isSelectedCard}
 					setScreen={setScreen}
 				/>
@@ -102,7 +100,6 @@ function BottomSection({
 function FclCard({
 	rateCardData = {},
 	detail = {},
-	setSelectedCard = () => {},
 	isSelectedCard = false,
 	setScreen = () => {},
 	setComparisonCheckbox = () => {},
@@ -156,7 +153,6 @@ function FclCard({
 				primaryServiceRates={primaryServiceRates}
 				rateCardData={rateCardData}
 				scheduleData={scheduleData}
-				setSelectedCard={setSelectedCard}
 				isSelectedCard={isSelectedCard}
 				setScreen={setScreen}
 			/>

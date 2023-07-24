@@ -46,6 +46,10 @@
 	color: #000;
 }
 
+.rate_found {
+	margin-right: 12px;
+}
+
 .add_icon {
 	margin-right: 8px;
 	cursor: pointer;
@@ -58,9 +62,4 @@
 	margin-right: 8px;
 	color: #ee3425;
 	cursor: pointer;
-}
-
-.rate_found {
-	font-size: 14px;
-	font-weight: 600;
 }

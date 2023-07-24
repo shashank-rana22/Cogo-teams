@@ -1,26 +1,19 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
-import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import AdditionalServices from '../../../../../common/OtherServices/AdditionalServices';
-import SubsidiaryServices from '../../../../../common/OtherServices/SubsidiaryServices';
-import Bundles from '../../../components/Bundles';
-import useCreateCheckout from '../../../hooks/useCreateCheckout';
-import useGetRateCard from '../../../hooks/useGetRateCard';
-import FclCard from '../FclCard';
+import AdditionalServices from '../../../../../../common/OtherServices/AdditionalServices';
+import CargoInsurance from '../../../../../../common/OtherServices/CargoInsurance';
+import SubsidiaryServices from '../../../../../../common/OtherServices/SubsidiaryServices';
+import Bundles from '../../../../components/Bundles';
+import FclCard from '../../FclCard';
 
 import LoadingState from './loadingState';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
-
-const CargoInsuranceContainer = dynamic(
-	() => import('../../../../../common/OtherServices/CargoInsurance'),
-	{ ssr: false },
-);
 
 function TotalLandedCost({ total_price_discounted = '', total_price_currency = '' }) {
 	return (
@@ -58,19 +51,12 @@ function ProceedButton({ onClick = () => {} }) {
 }
 
 function SelectedRateCard({
-	setSelectedCard = () => {},
+	data = {},
+	refetch = () => {},
+	loading = false,
 	setScreen = () => {},
 	setHeaderProps = () => {},
-	listLoading = false,
 }) {
-	const {
-		data = {},
-		refetch,
-		loading = false,
-		// setHeaderProps,
-		// setScreen,
-	} = useGetRateCard();
-
 	const {
 		possible_subsidiary_services = [],
 		rate_card: rateCardData = {},
@@ -79,16 +65,11 @@ function SelectedRateCard({
 
 	const primary_service = detail?.service_type;
 
-	const { handleBook = () => {} } = useCreateCheckout({
-		rateCardData,
-		spot_search_id: detail?.spot_search_id,
-	});
-
 	const handleProceedClick = () => {
 		setScreen('bookCheckout');
 	};
 
-	if (isEmpty(data) && (listLoading || loading)) {
+	if (loading && isEmpty(data)) {
 		return (
 			<LoadingState />
 		);
@@ -116,7 +97,6 @@ function SelectedRateCard({
 					rateCardData={rateCardData}
 					detail={detail}
 					isSelectedCard
-					setSelectedCard={setSelectedCard}
 					setScreen={setScreen}
 				/>
 
@@ -135,7 +115,7 @@ function SelectedRateCard({
 							refetchSearch={refetch}
 						/>
 
-						<CargoInsuranceContainer
+						<CargoInsurance
 							data={detail}
 							refetch={refetch}
 							primary_service={primary_service}
@@ -147,7 +127,7 @@ function SelectedRateCard({
 								total_price_currency={rateCardData.total_price_currency}
 							/>
 
-							<ProceedButton onClick={handleBook} />
+							<ProceedButton onClick={handleProceedClick} />
 						</div>
 
 						{!isEmpty(possible_subsidiary_services) && (

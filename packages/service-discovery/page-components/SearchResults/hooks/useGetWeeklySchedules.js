@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
@@ -30,9 +29,7 @@ const useGetWeeklySchedules = ({ filters = {}, setSelectedWeek = () => {} }) => 
 			const { data = {} } = res;
 
 			const alreadyPresent = isAlreadyApplied(filters, data);
-
-			if (alreadyPresent)setSelectedWeek(alreadyPresent);
-			else setSelectedWeek(data?.[GLOBAL_CONSTANTS.zeroth_index]);
+			if (alreadyPresent) setSelectedWeek(alreadyPresent);
 		} catch (error) {
 			if (error?.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));

@@ -1,17 +1,17 @@
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../common/EmptyState';
-import BookCheckout from '../../components/BookToCheckout';
 import Comparison from '../../components/Comparison';
 
 import ListRateCards from './ListRateCards';
-import SelectedRateCard from './SelectedRateCard';
+import SelectedCardScreen from './SelectedCardScreen';
+import BookCheckout from './SelectedCardScreen/BookToCheckout';
 
 const SCREEN_MAPPING = {
-	listRateCard : ListRateCards,
-	selectedCard : SelectedRateCard,
-	comparison   : Comparison,
-	bookCheckout : BookCheckout,
+	listRateCard       : ListRateCards,
+	selectedCardScreen : SelectedCardScreen,
+	comparison         : Comparison,
+	bookCheckout       : BookCheckout,
 };
 
 function FCLResults({
@@ -26,12 +26,11 @@ function FCLResults({
 	comparisonCheckbox = [],
 	filters = {},
 	setFilters = () => {},
+	headerProps = {},
+	setHeaderProps = () => {},
 	paginationProps,
 	loading,
-	setHeaderProps,
-	refetchSearch,
 	screen,
-	possible_subsidiary_services,
 }) {
 	const SCREEN_PROPS_MAPPING = {
 		listRateCard: {
@@ -49,26 +48,13 @@ function FCLResults({
 			paginationProps,
 			loading,
 		},
-		selectedCard: {
-			rateCardData : selectedCard,
-			detail,
-			setSelectedCard,
-			setScreen,
-			setHeaderProps,
-			refetchSearch,
-			screen,
-			possible_subsidiary_services,
-			listLoading  : loading,
-		},
 		comparison: {
 			setScreen,
 			rateCardsForComparison,
 		},
-		bookCheckout: {
-			rateCardData: selectedCard,
-			detail,
-			setSelectedCard,
-			setScreen,
+		selectedCardScreen: {
+			headerProps,
+			setHeaderProps,
 		},
 	};
 

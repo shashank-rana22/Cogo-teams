@@ -9,7 +9,7 @@ const useDeleteCargoInsurance = ({
 	refetch = () => {},
 	setShow = () => {},
 }) => {
-	const url = checkout_id ? '/create_checkout_service' : '/add_spot_search_service';
+	const url = checkout_id ? '/update_checkout_service' : '/remove_spot_search';
 	const idKey = checkout_id ? 'id' : 'spot_search_id';
 	const key = checkout_id ? 'cargo_insurance_services_attributes' : 'cargo_insurance_services';
 

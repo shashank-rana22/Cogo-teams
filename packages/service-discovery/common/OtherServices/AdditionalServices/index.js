@@ -1,13 +1,13 @@
 import { Select } from '@cogoport/components';
-import { IcCFtick, IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import { serviceMappings } from '../../../configs/AdditionalServicesConfig';
 import Incoterms from '../../../configs/incoterms.json';
 import useSpotSearchService from '../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
+import useGetMinPrice from '../useGetMinPrice';
 
 import { getFclPayload } from './configs';
-import ICONS_MAPPING from './icons-mapping';
+import List from './List';
 import styles from './styles.module.css';
 
 const INCOTERM_MAPPING = {
@@ -42,6 +42,8 @@ function AdditionalServices({ // used in search results and checkout
 		rateCardData,
 		checkout_id,
 	});
+
+	const { minPrice = {}, loading: minPriceLoading } = useGetMinPrice({ detail });
 
 	const handleAddServices = async (serviceItem) => {
 		if (!serviceItem.controls.length) {
@@ -151,6 +153,9 @@ function AdditionalServices({ // used in search results and checkout
 				? transportationData
 				: serviceData[service.name],
 			isSelected,
+			rateData: Object.values(service_rates).find(
+				(serviceItem) => serviceItem.service_type === service.service_type,
+			),
 		});
 	});
 
@@ -184,107 +189,19 @@ function AdditionalServices({ // used in search results and checkout
 
 			</div>
 			<div className={styles.additional_services}>
+				<List
+					list={shipperSideServices}
+					loading={loading}
+					onClickAdd={handleAddServices}
+					type="seller"
+				/>
 
-				{shipperSideServices.length ? (
-					<div style={{ marginBottom: 16 }}>
-						<div className={styles.header}>
-							<span>Seller Responsibilities</span>
-							<span>Total landed Cost:</span>
-						</div>
-						{shipperSideServices.map((serviceItem) => (
-							<div
-								role="presentation"
-								key={serviceItem.name}
-								disabled={loading}
-								className={`${styles.service} ${serviceItem.isSelected ? styles.active : null}`}
-							>
-
-								<div className={styles.service_div}>
-									<span className={styles.icon}>
-										{ICONS_MAPPING[serviceItem.service_type]}
-									</span>
-
-									<span className={styles.service_text}>
-										{serviceItem.title}
-									</span>
-								</div>
-
-								{serviceItem.isSelected ? (
-									<IcCFtick
-										height={25}
-										width={25}
-										className={styles.tick_icon}
-
-									/>
-								) : (
-									<IcMPlus
-										disabled={loading}
-										height={22}
-										width={22}
-										className={styles.add_icon}
-										fill="black"
-										onClick={(event) => {
-											event.stopPropagation();
-											handleAddServices(serviceItem);
-										}}
-									/>
-								)}
-
-							</div>
-						))}
-					</div>
-				) : null}
-
-				{consigneeSideServices.length ? (
-					<div>
-						<div className={styles.header}>
-							<span>Buyer Responsibilities</span>
-							<span>Total landed Cost:</span>
-
-						</div>
-						{consigneeSideServices.map((serviceItem) => (
-							<div
-								role="presentation"
-								key={serviceItem.name}
-								disabled={loading}
-								className={`${styles.service} ${serviceItem.isSelected ? styles.active : null}`}
-							>
-
-								<div className={styles.service_div}>
-									<span className={styles.icon}>
-										{ICONS_MAPPING[serviceItem.service_type]}
-									</span>
-									<span className={styles.service_text}>
-										{serviceItem.title}
-									</span>
-								</div>
-
-								{serviceItem.isSelected ? (
-									<IcCFtick
-										height={25}
-										width={25}
-										className={styles.tick_icon}
-
-									/>
-								) : (
-									<IcMPlus
-										height={22}
-										width={22}
-										disabled={loading}
-										className={styles.add_icon}
-										fill="black"
-										onClick={(event) => {
-											event.stopPropagation();
-											handleAddServices(serviceItem);
-										}}
-									/>
-								)}
-
-							</div>
-						))}
-					</div>
-				) : null}
-
+				<List
+					list={consigneeSideServices}
+					loading={loading}
+					onClickAdd={handleAddServices}
+					type="buyer"
+				/>
 			</div>
 		</>
 	);

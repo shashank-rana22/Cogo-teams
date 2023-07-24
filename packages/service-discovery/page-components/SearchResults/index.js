@@ -41,7 +41,6 @@ function SearchResults() {
 		page,
 		page_limit,
 	} = data || {};
-	// const { detail = {}, rates = [], possible_subsidiary_services = [] } = data || {};
 
 	const paginationProps = { page, page_limit, total_count };
 

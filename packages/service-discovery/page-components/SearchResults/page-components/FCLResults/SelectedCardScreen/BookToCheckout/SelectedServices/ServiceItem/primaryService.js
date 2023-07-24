@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
-import getLocationInfo from '../../../../utils/locations-search';
+import getLocationInfo from '../../../../../../utils/locations-search';
 
 import styles from './styles.module.css';
 

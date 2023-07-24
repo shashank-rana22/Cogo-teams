@@ -2,17 +2,17 @@ import { Button } from '@cogoport/components';
 import { IcCFtick } from '@cogoport/icons-react';
 import React from 'react';
 
-import useCreateCheckout from '../../hooks/useCreateCheckout';
+import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 
 import SelectedServices from './SelectedServices';
 import styles from './styles.module.css';
 
-function BookCheckout({
-	rateCardData = {},
-	detail = {},
-	setSelectedCard = () => {},
-	setScreen = () => {},
-}) {
+function BookCheckout({ data = {} }) {
+	const {
+		rate_card: rateCardData = {},
+		spot_search_detail: detail = {},
+	} = data || {};
+
 	const { handleBook = () => {}, loading } = useCreateCheckout({
 		rateCardData,
 		spot_search_id: detail?.spot_search_id,
@@ -36,6 +36,7 @@ function BookCheckout({
 						on this booking.
 					</div>
 				</div>
+
 				<div className={styles.button_wrapper}>
 					<Button
 						onClick={() => {

@@ -6,8 +6,6 @@ import { useState, useEffect, useCallback } from 'react';
 
 const useGetRateCard = () => {
 	const { general: { query = {} } } = useSelector((state) => state);
-	const [headerProps, setHeaderProps] = useState({});
-	const [screen, setScreen] = useState('rate_card');
 	const { rate_card_id = '' } = query;
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -37,10 +35,6 @@ const useGetRateCard = () => {
 		loading,
 		data,
 		refetch: getRateDetails,
-		headerProps,
-		setHeaderProps,
-		screen,
-		setScreen,
 	};
 };
 export default useGetRateCard;

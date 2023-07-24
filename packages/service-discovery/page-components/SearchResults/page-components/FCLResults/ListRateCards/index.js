@@ -1,7 +1,7 @@
 import { Loader, Pagination } from '@cogoport/components';
 import React from 'react';
 
-import useScrollDirection from '../../../../../common/Header/useScrollDirection';
+// import useScrollDirection from '../../../../../common/Header/useScrollDirection';
 import FclCard from '../FclCard';
 
 import ComparisonHeader from './ComparisonHeader';
@@ -14,10 +14,10 @@ function HeaderTop({
 	filters = {},
 	setFilters = () => {}, total_count = '', showComparison = false, rateCardsForComparison = [], setScreen = () => {},
 }) {
-	const { scrollDirection } = useScrollDirection();
+	// const { scrollDirection } = useScrollDirection();
 
 	return (
-		<div className={styles.header} style={{ top: scrollDirection === 'up' ? '115px' : '80px' }}>
+		<div className={styles.header}>
 			<Header
 				details={detail}
 				filters={filters}
@@ -48,7 +48,6 @@ function RateCard({
 	rateCardData = {},
 	loading = false,
 	detail = {},
-	setSelectedCard = () => {},
 	setScreen = () => {}, setComparisonCheckbox = () => {}, comparisonCheckbox = '', refetchSearch = () => {},
 }) {
 	if (loading) {
@@ -60,7 +59,6 @@ function RateCard({
 			key={rateCardData.id}
 			rateCardData={rateCardData}
 			detail={detail}
-			setSelectedCard={setSelectedCard}
 			setScreen={setScreen}
 			setComparisonCheckbox={setComparisonCheckbox}
 			comparisonCheckbox={comparisonCheckbox}

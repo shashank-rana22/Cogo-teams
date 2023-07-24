@@ -2,16 +2,14 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
-// import ToggleSwitch from '../../../page-components/SearchResults/components/DarkLightMode';
-
 import styles from './styles.module.css';
 
 const backScreen = (currentScreen) => {
 	const MAPPING = {
-		listRateCard : 'back',
-		selectedCard : 'back',
-		comparison   : 'selectedCard',
-		bookCheckout : 'selectedCard',
+		listRateCard       : 'back',
+		selectedCardScreen : 'back',
+		comparison         : 'selectedCardScreen',
+		bookCheckout       : 'selectedCardScreen',
 	};
 	return MAPPING[currentScreen] || 'back';
 };
@@ -45,10 +43,6 @@ function Back({
 
 				<span>{heading || 'Back'}</span>
 			</div>
-
-			{/* <div style={{ marginRight: 8 }}>
-				<ToggleSwitch />
-			</div> */}
 		</div>
 	);
 }

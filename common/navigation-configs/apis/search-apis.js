@@ -558,5 +558,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},
+	{
+		api          : 'get_freight_rate_min_price',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'fcl_freight_rate',
+	},
 ];
 export default apis;

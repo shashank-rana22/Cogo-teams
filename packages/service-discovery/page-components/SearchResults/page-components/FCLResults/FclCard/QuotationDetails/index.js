@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 
 function QuotationDetails({
 	rateCardData = {},
-	setSelectedCard = () => {},
 	isSelectedCard = false,
 	detail = {},
 	setScreen = () => {},
@@ -33,12 +32,9 @@ function QuotationDetails({
 	const handleSelectButtonClick = () => {
 		if (!isSelectedCard) {
 			router.push(`/book/${router.query.spot_search_id}?rate_card_id=${rateCardData?.id}`);
-			setSelectedCard(rateCardData);
-			setScreen('selectedCard');
+			setScreen('selectedCardScreen');
 		} else {
 			router.back();
-			setSelectedCard({});
-			setScreen('listRateCard');
 		}
 	};
 
