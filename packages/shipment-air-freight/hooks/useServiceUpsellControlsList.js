@@ -49,7 +49,25 @@ const useGetControls = ({ truckTypeToggle }) => {
 			},
 		],
 		air_customs : [],
-		ltl_freight : [
+		warehouse   : [
+			{
+				label       : 'Expected Cargo Gated In',
+				name        : 'expected_cargo_gated_in',
+				placeholder : 'Select Date',
+				type        : 'datepicker',
+				rules       : { required: 'This is required' },
+				span        : 6,
+			},
+			{
+				label       : 'Expected Cargo Gated Out',
+				name        : 'expected_cargo_gated_out',
+				placeholder : 'Select Date',
+				type        : 'datepicker',
+				rules       : { required: 'This is required' },
+				span        : 6,
+			},
+		],
+		ltl_freight: [
 			{
 				label       : 'Pickup/Drop Pincode',
 				name        : 'location_id',

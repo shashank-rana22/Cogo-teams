@@ -58,6 +58,24 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		}];
 	}
 
+	if (search_type === 'warehouse') {
+		if (trade_type === 'export') {
+			return [{
+				location_id              : primary_service?.origin_airport?.id,
+				expected_cargo_gated_in  : formValues?.expected_cargo_gated_in,
+				expected_cargo_gated_out : formValues?.expected_cargo_gated_in,
+				...common,
+				...common2,
+			}];
+		} return [{
+			location_id              : primary_service?.destination_airport?.id,
+			expected_cargo_gated_in  : formValues?.expected_cargo_gated_in,
+			expected_cargo_gated_out : formValues?.expected_cargo_gated_in,
+			...common,
+			...common2,
+		}];
+	}
+
 	if (search_type === 'ltl_freight') {
 		if (trade_type === 'export') {
 			return [{

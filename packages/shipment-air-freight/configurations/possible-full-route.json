@@ -12,6 +12,12 @@
 		"is_main"       : false
 	},
 	{
+		"service_type"  : "warehouse_service",
+		"display_label" : "Origin Warehouse Service",
+		"trade_type"    : "export",
+		"is_main"       : false
+	},
+	{
 		"service_type"  : "air_customs_service",
 		"display_label" : "Origin Custom Clearance",
 		"trade_type"    : "export",
@@ -37,6 +43,12 @@
 	{
 		"service_type"  : "air_customs_service",
 		"display_label" : "Destination Custom Clearance",
+		"trade_type"    : "import",
+		"is_main"       : false
+	},
+	{
+		"service_type"  : "warehouse_service",
+		"display_label" : "Origin Warehouse Service",
 		"trade_type"    : "import",
 		"is_main"       : false
 	},
