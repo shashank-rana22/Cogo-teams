@@ -22,7 +22,7 @@ export default function useListIGMDeskShipments() {
 	const [data, setData] = useState(EMPTY_DATA);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/fcl_freight/list_igm_desk_shipments',
+		url    : 'fcl_freight/list_igm_desk_shipments',
 		method : 'GET',
 	}, { manual: true });
 
