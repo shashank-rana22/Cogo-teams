@@ -32,7 +32,7 @@ export default function useListIGMDeskShipments() {
 				params: getPayload({ filters, tabState, selected_agent_id, userId: user?.id }),
 			});
 
-			if (isEmpty(res.data?.list) && filters.page > PAGE_ONE) {
+			if (isEmpty(res.data?.list) && filters?.page > PAGE_ONE) {
 				setFilters({ ...filters, page: 1 });
 			} else {
 				setData(res.data || {});

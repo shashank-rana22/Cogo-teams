@@ -5,27 +5,12 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api          : 'get_organization_trade_requirement_draft',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
-		api          : 'list_shipment_audits',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'list_shipment_additional_services',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
 	{
 		api          : 'list_shipment_documents',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'list_shipment_notes',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -46,21 +31,6 @@ const apis = [
 	},
 	{
 		api          : 'list_shipment_bl_details',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'list_organization_users',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
-		api          : 'list_organization_addresses',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
-		api          : 'get_shipment_messages',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
