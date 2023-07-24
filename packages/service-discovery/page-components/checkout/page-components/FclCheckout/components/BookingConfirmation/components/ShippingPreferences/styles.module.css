@@ -1,0 +1,36 @@
+.container {
+    margin: 40px 0px;
+
+    :global {
+        .ui_select_options_container {
+            z-index: 3;
+        }
+    }
+}
+
+.header {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.flex {
+    display: flex;
+    gap: 20px;
+}
+
+.text {
+    color: #4F4F4F;
+}
+
+.form_container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.label {
+    font-weight: 500;
+    margin-bottom: 4px;
+    justify-content: space-between;
+}

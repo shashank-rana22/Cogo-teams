@@ -1,6 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
+import CardLoadingState from '../../../../../../../../LoadingState/CardLoadingState';
 import EmptyState from '../../../../../../EmptyState';
 
 import SelfInvoice from './components/SelfInvoice';
@@ -95,6 +96,10 @@ function ViewBillingAddresses({
 	const newList = reorderedList.filter(
 		(item) => !isEmpty(item[address_to_use] || []),
 	);
+
+	if (loading) {
+		return <div style={{ marginTop: '32px' }}><CardLoadingState /></div>;
+	}
 
 	if (isEmpty(newList)) {
 		return <EmptyState />;

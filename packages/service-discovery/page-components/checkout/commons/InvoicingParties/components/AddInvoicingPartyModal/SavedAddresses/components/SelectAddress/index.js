@@ -1,5 +1,3 @@
-import { Button } from '@cogoport/components';
-import { IcMDashedArrow } from '@cogoport/icons-react';
 import { useContext, useState } from 'react';
 
 import { CheckoutContext } from '../../../../../../../context';
@@ -42,34 +40,14 @@ function AddNewItem({
 	}
 
 	return (
-		<div className={styles.create_container}>
-			<div className={styles.flex}>
-				<div className={styles.bold_text}>UPTO 15%</div>
-				<div className={styles.large_text}>CASHBACK*</div>
-			</div>
-
-			<div className={styles.flex}>
-				<div className={styles.text}>Invite your consignee</div>
-				<IcMDashedArrow style={{ margin: 'auto 12px' }} width={24} height={24} />
-				<div className={styles.text}>They place their first booking</div>
-				<IcMDashedArrow style={{ margin: 'auto 12px' }} width={24} height={24} />
-				<div className={styles.text}>You get 15% cashback.</div>
-			</div>
-
-			<div style={{ marginTop: '12px' }} className={styles.flex}>
-				<Button
-					size="lg"
-					type="button"
-					onClick={() => {
-						setActiveState('create_trade_party');
-					}}
-					themeType="accent"
-				>
-					Invite Trade Partner
-				</Button>
-
-				<div className={styles.terms_text}>*Terms & Conditions Apply</div>
-			</div>
+		<div
+			role="presentation"
+			onClick={() => {
+				setActiveState('create_trade_party');
+			}}
+			className={styles.add_container}
+		>
+			+ ADD NEW TRADE PARTY
 		</div>
 	);
 }

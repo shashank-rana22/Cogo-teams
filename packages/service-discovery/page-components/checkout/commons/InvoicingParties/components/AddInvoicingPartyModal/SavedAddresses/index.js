@@ -19,7 +19,6 @@ function SavedAddresses({
 	setShowAddInvoicingPartyModal = () => {},
 	services = [],
 	rate = {},
-	paymentModes = {},
 	getCheckoutInvoices = () => {},
 	primary_service = '',
 }) {

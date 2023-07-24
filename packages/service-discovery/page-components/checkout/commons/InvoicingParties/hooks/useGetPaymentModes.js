@@ -127,6 +127,7 @@ const useGetPaymentModes = ({
 		trade_type = '',
 		importer_exporter = {},
 		existing_shipment_id = '',
+		id:checkout_id = '',
 	} = detail;
 
 	const { cogo_entity_id = '' } = importer_exporter;
@@ -151,6 +152,7 @@ const useGetPaymentModes = ({
 		cogo_entity_id,
 		rate_id,
 		existing_shipment_id: existing_shipment_id || undefined,
+		checkout_id,
 	};
 
 	const [{ data = {}, loading }] = useRequest(

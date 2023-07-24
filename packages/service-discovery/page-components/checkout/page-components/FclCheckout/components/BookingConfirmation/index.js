@@ -1,3 +1,4 @@
+import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useContext, useState } from 'react';
@@ -8,6 +9,7 @@ import { CheckoutContext } from '../../../../context';
 
 import BookingConfirmationFooter from './components/BookingConfirmationFooter';
 // import ShipmentDetails from './components/ShipmentDetails';
+import ShippingPreferences from './components/ShippingPreferences';
 import styles from './styles.module.css';
 
 function BookingConfirmation() {
@@ -32,6 +34,8 @@ function BookingConfirmation() {
 
 	const [isControlBookingDetailsFilled, setIsControlBookingDetailsFilled] = useState(iscommercialInvoicePresent);
 
+	const formProps = useForm();
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Set Invoicing Parties</div>
@@ -48,6 +52,8 @@ function BookingConfirmation() {
 			) : null}
 
 			<InvoicingParties />
+
+			<ShippingPreferences formProps={formProps} />
 
 			<BookingConfirmationFooter
 				detail={detail}
