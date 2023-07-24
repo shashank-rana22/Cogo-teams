@@ -18,7 +18,7 @@
         "task_attributes":[
             {
                 "task": ["mark_igm_shipment_confirmed"],
-                "state": ["vessel_departed"],
+                "state": ["containers_gated_in"],
                 "status": ["completed"],
                 "assigned_stakeholder": ["service_ops2"]
             },
