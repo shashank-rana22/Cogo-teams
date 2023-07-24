@@ -21,9 +21,7 @@ function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, show
 
 	const controls = service_type === 'fcl' ? fclControls : airControls;
 	const containerType = watch('container_type');
-	const rateSource = watch('mode');
-
-	const { newFields } = mutateFields({ controls, containerType });
+	const { newFields } = mutateFields({ controls, containerType, setGlobalFilters });
 
 	useEffect(() => {
 		setValue('commodity', []);
@@ -35,12 +33,6 @@ function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, show
 			rate_type,
 		);
 	}, [rate_type, setValue]);
-
-	useEffect(() => {
-		if (rateSource) {
-			setGlobalFilters((prev) => ({ ...prev, rate_type: rateSource }));
-		}
-	}, [rateSource, setGlobalFilters]);
 
 	const resetPopover = () => {
 		setGlobalFilters((prev) => ({ ...prev, rate_type: undefined }));
