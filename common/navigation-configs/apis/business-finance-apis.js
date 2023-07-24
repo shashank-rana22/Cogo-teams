@@ -173,16 +173,14 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api          : 'create_chat_message',
-			access_type  : 'private',
-			feature      : 'coeFinance',
-			service_name : 'chat',
+			api         : 'create_chat_message',
+			access_type : 'private',
+			feature     : 'coeFinance',
 		},
 		{
-			api          : 'list_chat_channels',
-			access_type  : 'private',
-			feature      : 'coeFinance',
-			service_name : 'chat',
+			api         : 'list_chat_channels',
+			access_type : 'private',
+			feature     : 'coeFinance',
 		},
 		{
 			api         : 'delete_chat_message',
@@ -190,10 +188,9 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api          : 'update_chat_message',
-			access_type  : 'private',
-			feature      : 'coeFinance',
-			service_name : 'chat',
+			api         : 'update_chat_message',
+			access_type : 'private',
+			feature     : 'coeFinance',
 		},
 		{
 			api         : 'get_chat_channel',
@@ -206,10 +203,9 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api          : 'update_chat_channel_seen',
-			access_type  : 'private',
-			feature      : 'coeFinance',
-			service_name : 'chat',
+			api         : 'update_chat_channel_seen',
+			access_type : 'private',
+			feature     : 'coeFinance',
 		},
 		{
 			api          : 'update_shipment_manifest',

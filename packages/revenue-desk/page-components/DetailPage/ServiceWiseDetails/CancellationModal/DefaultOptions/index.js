@@ -17,7 +17,7 @@ function DefaultOptions({
 		<>
 			<Radio
 				label="Feasible rates not available"
-				value="profitability_issue"
+				value="rates_do_not_match"
 				onChange={() => handleOnChange('profitability_issue')}
 				checked={cancellationReason === 'profitability_issue'}
 			/>
