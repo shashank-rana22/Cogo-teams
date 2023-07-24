@@ -2,12 +2,12 @@ import { addDoc, collection, doc, setDoc, updateDoc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-export const stopStream = ({ stream_type, current_stream }) => {
-	if (!current_stream || !current_stream[stream_type]) {
+export const stopStream = ({ streamType, currentStream }) => {
+	if (!currentStream || !currentStream[streamType]) {
 		return;
 	}
 
-	const tracks = current_stream[stream_type].getTracks();
+	const tracks = currentStream[streamType].getTracks();
 
 	tracks.forEach((track) => {
 		track.stop();

@@ -31,7 +31,10 @@ function VideoCallScreen({
 		peer_details: roomPeerDetails = {},
 		user_call_options = {},
 	} = callingRoomDetails || {};
-	const { isVideoActive = false, isScreenShareActive = false } = user_call_options || {};
+	const {
+		is_video_active: isVideoActive = false,
+		is_screen_share_active:isScreenShareActive = false,
+	} = user_call_options || {};
 	const { isMinimize } = toggleState || {};
 
 	const tempRef = ref;
@@ -86,9 +89,7 @@ function VideoCallScreen({
 			</div>
 			<div className={!isMinimize ? styles.content : styles.hide_container}>
 				<IcMMinus className={styles.minus_icon} onClick={handleMinimize} />
-				<div className={(isVideoActive || isScreenShareActive)
-					? styles.peer_screen : styles.call_screen}
-				>
+				<div className={styles.call_screen}>
 					<div
 						className={(isVideoActive || isScreenShareActive)
 							? styles.hide_container : styles.avatar_screen}
