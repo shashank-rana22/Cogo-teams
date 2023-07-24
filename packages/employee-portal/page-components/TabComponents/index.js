@@ -40,8 +40,9 @@ const KEY_COMPONENT_MAPPING = {
 };
 
 function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails, getEmployeeDetailsLoading }) {
-	const { progress_stats, signed_documents } = data || {};
-
+	const { progress_stats, signed_documents, offer_letter, detail } = data || {};
+	const { share_company_policies } = detail || {};
+	const { is_offer_letter_applicable } = offer_letter || {};
 	const {
 		// offer_letter_signed,
 		documents_signed, additional_info_added = {},
@@ -51,17 +52,22 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 
 	const MAPPING = {
 		new_hire_information   : true,
-		// offer_letter           : !isEmpty(offer_letter),
+		offer_letter           : !(isEmpty(offer_letter) || offer_letter?.status === 'active'),
 		additional_information : true,
 		day_1                  : signDocEnableContd,
 		sign_your_docs         : signDocEnableContd && !isEmpty(signed_documents),
-		company_policies       : signDocEnableContd && documents_signed?.documents_signed && !isEmpty(signed_documents),
+		company_policies       : signDocEnableContd
+			&& documents_signed?.documents_signed && !isEmpty(signed_documents) && share_company_policies,
 		// maps: {
 		// icon: GLOBAL_CONSTANTS.image_url.map_png,
 		// 	component : Maps,
 		// 	enable    : signDocEnableContd && company_policies_read?.company_policies_read,
 		// },
 	};
+
+	if (!is_offer_letter_applicable) {
+		delete MAPPING.offer_letter;
+	}
 
 	const onClickTiles = ({ item }) => {
 		if (MAPPING[item]) {
