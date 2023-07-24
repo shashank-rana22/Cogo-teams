@@ -120,7 +120,13 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 				setEditedValue={setEditedValue}
 			/>
 		),
-		renderBankDetails: (itemData, field) => (<BankDetails itemData={itemData} field={field} />),
+		renderBankDetails: (itemData, field) => (
+			<BankDetails
+				itemData={itemData}
+				field={field}
+				setEditedValue={setEditedValue}
+			/>
+		),
 	};
 
 	return (

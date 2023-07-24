@@ -11,6 +11,7 @@ function BankSelect({
 	itemData,
 	setBankEdit,
 	showRollback,
+	setEditedValue,
 }) {
 	const newItem = itemData;
 	const [bankObject, setBankObject] = useState({});
@@ -43,7 +44,7 @@ function BankSelect({
 					className={styles.pointer}
 					onClick={() => {
 						if (!isEmpty(bankObject)) {
-							newItem.bankDetail = bankObject;
+							setEditedValue(newItem, bankObject, 'bankDetail', true);
 							showRollback(true);
 						}
 						setBankEdit(false);

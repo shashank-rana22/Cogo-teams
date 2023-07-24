@@ -14,7 +14,7 @@ const viewDocument = (url) => {
 	}
 };
 
-function BankDetails({ itemData }) {
+function BankDetails({ itemData, setEditedValue }) {
 	const newItem = itemData;
 	const [bankEdit, setBankEdit] = useState(false);
 	const [rollback, showRollback] = useState(true);
@@ -22,7 +22,6 @@ function BankDetails({ itemData }) {
 		invoiceType = '',
 		bankDetail,
 		tradePartyMappingId,
-		oldBankData,
 	} = itemData || {};
 	const {
 		bankName = '',
@@ -42,7 +41,7 @@ function BankDetails({ itemData }) {
 				itemData={itemData}
 				setBankEdit={setBankEdit}
 				showRollback={showRollback}
-				oldBankData={oldBankData}
+				setEditedValue={setEditedValue}
 			/>
 		);
 	} else if (bankDetail) {
@@ -76,13 +75,13 @@ function BankDetails({ itemData }) {
 								width={12}
 								onClick={setBankEdit}
 							/>
-							{oldBankData && rollback && (
+							{newItem?.bankValue && rollback && (
 								<IcMUndo
 									className={styles.pointer}
 									height={14}
 									width={14}
 									onClick={() => {
-										newItem.bankDetail = newItem.bankValue;
+										setEditedValue(newItem, newItem.bankValue, 'bankDetail', true);
 										setBankEdit(false);
 										showRollback(false);
 									}}
