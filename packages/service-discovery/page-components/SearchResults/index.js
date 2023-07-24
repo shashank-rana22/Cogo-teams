@@ -51,7 +51,7 @@ function SearchResults() {
 
 	const showAdditionalHeader = headerProps && !isEmpty(headerProps);
 
-	if (loading && isEmpty(data)) {
+	if (loading && isEmpty(data) && screen === 'listRateCard') {
 		return (
 			<div className={styles.loading}>
 				<span className={styles.loading_text}>Looking for Rates</span>

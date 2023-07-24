@@ -23,6 +23,8 @@ const useGetSpotSearch = () => {
 	}, { manual: true });
 
 	const getSearch = useCallback(async () => {
+		if (!spot_search_id) return;
+
 		let finalFilters = {};
 
 		Object.keys(filters).forEach((key) => {
@@ -40,7 +42,7 @@ const useGetSpotSearch = () => {
 					spot_search_id,
 					page       : filters.page,
 					page_limit : 10,
-					filters    : { ...finalFilters },
+					filters    : { ...finalFilters, status: 'active' },
 				},
 			});
 		} catch (error) {
@@ -51,9 +53,8 @@ const useGetSpotSearch = () => {
 	}, [filters, spot_search_id, trigger]);
 
 	useEffect(() => {
-		if (rate_card_id) return;
 		getSearch();
-	}, [getSearch, filters, rate_card_id]);
+	}, [getSearch, filters]);
 
 	useEffect(() => {
 		setScreen(rate_card_id ? 'selectedCard' : 'listRateCard');

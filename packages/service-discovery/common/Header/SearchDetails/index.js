@@ -20,7 +20,8 @@ function SearchDetails({
 	const { business_name = '' } = importer_exporter || {};
 	const { name: user_name = '' } = user || {};
 
-	const handleEdit = () => {
+	const handleEdit = (event) => {
+		event.stopPropagation();
 		setHeaderProps({ key: 'edit_details', data, setShow: setHeaderProps });
 	};
 

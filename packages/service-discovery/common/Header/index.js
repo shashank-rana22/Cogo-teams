@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
+import { useRef, useEffect } from 'react';
 
 import EditDetailsHeader from '../../page-components/SearchResults/components/EditDetailsHeader';
 import AdditionalServicesForm from '../OtherServices/AdditionalServices/AdditionalServicesForm';
@@ -28,35 +28,41 @@ function Header({
 	activePage = '',
 	...rest
 }) {
-	const { platformTheme } = useSelector(({ profile }) => profile);
-
 	const { scrollDirection } = useScrollDirection();
 
-	const styledTheme = {
-		container      : `${styles.container} ${styles[platformTheme]}`,
-		header_wrapper : `${styles.header_wrapper}${styles[platformTheme]}`,
-		back_button    : `${styles.back_button} ${styles[platformTheme]} `,
-		details_header : `${styles.details_header} ${styles[platformTheme]} `,
-	};
+	const headerRef = useRef(null);
+
+	// const handleClickOutside = (event) => {
+	// 	if (headerRef.current && !headerRef.current.contains(event.target)) {
+	// 		setHeaderProps({});
+	// 	}
+	// };
+
+	// useEffect(() => {
+	// 	document.addEventListener('click', handleClickOutside);
+
+	// 	return () => {
+	// 		document.removeEventListener('click', handleClickOutside);
+	// 	};
+	// }, []);
 
 	const SubHeaderComponent = SUB_HEADER_COMPONENT_MAPPING[headerProps?.key] || null;
 	const isAllowedToEdit = activePage === 'search_results';
 
 	return (
-		<div className={cl`${styledTheme.container} ${showAdditionalHeader ? styles.show : {}}`}>
-			<div className={styledTheme.header_wrapper}>
+		<div ref={headerRef} className={cl`${styles.container} ${showAdditionalHeader ? styles.show : {}}`}>
+			<div className={styles.header_wrapper}>
 				{scrollDirection === 'up' && activePage !== 'checkout' ? (
 					<Back heading={rest.headerHeading} {...rest} />
 				) : null}
 
-				<div className={styledTheme.details_header}>
+				<div className={styles.details_header}>
 					<div className={styles.search_details}>
 						<SearchDetails
 							data={data}
 							service_key={service_key}
 							loading={loading && isEmpty(data)}
 							setHeaderProps={setHeaderProps}
-							platformTheme={platformTheme}
 							showAdditionalHeader={showAdditionalHeader}
 							isAllowedToEdit={isAllowedToEdit}
 							activePage={activePage}

@@ -42,22 +42,24 @@ const useAddSubsidiaryService = ({
 
 		const MAPPING = {
 			true: {
-				keyToUse : 'id',
-				value    : checkout_id,
+				keyToUse    : 'id',
+				value       : checkout_id,
+				service_key : 'subsidiary_services_attributes',
 			},
 			false: {
-				keyToUse : 'spot_search_id',
-				value    : spot_search_id,
+				keyToUse    : 'spot_search_id',
+				value       : spot_search_id,
+				service_key : 'subsidiary_services',
 			},
 		};
 
-		const { keyToUse, value } = MAPPING[!isEmpty(checkout_id)];
+		const { keyToUse, value, service_key } = MAPPING[!isEmpty(checkout_id)];
 
 		try {
 			const payload = {
-				[keyToUse]                     : value,
-				service                        : 'subsidiary',
-				subsidiary_services_attributes : subsidiaryServicesArr,
+				[keyToUse]    : value,
+				service       : 'subsidiary',
+				[service_key] : subsidiaryServicesArr,
 			};
 
 			await trigger({ data: payload });

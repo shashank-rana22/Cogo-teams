@@ -1,4 +1,4 @@
-import { Loader } from '@cogoport/components';
+import { Loader, Pagination } from '@cogoport/components';
 import React from 'react';
 
 import useScrollDirection from '../../../../../common/Header/useScrollDirection';
@@ -123,6 +123,20 @@ function ListRateCards({
 				/>
 			))}
 
+			{rates.length > 5 ? (
+				<div className={styles.pagination}>
+					<Pagination
+						type="table"
+						currentPage={filters.page}
+						totalItems={paginationProps?.total_count}
+						pageSize={paginationProps?.page_limit}
+						onPageChange={(val) => setFilters((prev) => ({
+							...prev,
+							page: val,
+						}))}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }

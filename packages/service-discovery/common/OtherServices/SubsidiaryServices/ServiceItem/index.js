@@ -38,8 +38,9 @@ function ServiceItem({
 	const { loading: deleteLoading, handleDeleteService } = useDeleteSubsidiaryService({
 		refetch,
 		data,
-		setShow: setShowDelete,
+		setShow        : setShowDelete,
 		checkout_id,
+		spot_search_id : data?.spot_search_id,
 	});
 
 	const { label, value } = itemData || {};

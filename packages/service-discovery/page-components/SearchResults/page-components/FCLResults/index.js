@@ -50,7 +50,7 @@ function FCLResults({
 			loading,
 		},
 		selectedCard: {
-			rateCardData: selectedCard,
+			rateCardData : selectedCard,
 			detail,
 			setSelectedCard,
 			setScreen,
@@ -58,6 +58,7 @@ function FCLResults({
 			refetchSearch,
 			screen,
 			possible_subsidiary_services,
+			listLoading  : loading,
 		},
 		comparison: {
 			setScreen,
