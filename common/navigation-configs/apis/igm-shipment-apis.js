@@ -45,11 +45,6 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_spot_negotiations',
-		access_type  : 'private',
-		service_name : 'spot_negotiation',
-	},
-	{
 		api          : 'list_shipment_bl_details',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -61,16 +56,6 @@ const apis = [
 	},
 	{
 		api          : 'list_organization_addresses',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
-		api          : 'list_organization_pocs',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
-		api          : 'list_organization_invoicing_parties',
 		access_type  : 'private',
 		service_name : 'organization',
 	},
@@ -120,22 +105,7 @@ const apis = [
 		service_name : 'trade',
 	},
 	{
-		api          : 'list_organization_documents',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
 		api          : 'get_task_config',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'list_shipment_operating_procedures',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'list_organization_billing_addresses',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -150,19 +120,9 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_shipment_collection_party',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'list_organization_trade_parties',
 		access_type  : 'private',
 		service_name : 'organization',
-	},
-	{
-		api          : 'get_shipment_fault_alarm_description',
-		access_type  : 'private',
-		service_name : 'shipment',
 	},
 	{
 		api          : 'list_shipment_stakeholders',
@@ -228,6 +188,11 @@ const apis = [
 		api          : 'get_timeline',
 		access_type  : 'private',
 		service_name : 'bookings',
+	},
+	{
+		api          : 'update_shipment_pending_task',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 ];
 
