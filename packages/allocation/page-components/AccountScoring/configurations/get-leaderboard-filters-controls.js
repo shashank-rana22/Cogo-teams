@@ -48,6 +48,8 @@ const controls = [
 		asyncKey    : 'partner_roles',
 		initialCall : false,
 		isClearable : true,
+		disabled    : true,
+
 	},
 	{
 		name        : 'user_id',
@@ -56,6 +58,11 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users',
 		valueKey    : 'user_id',
+		params      : {
+			filters: {
+				partner_entity_types: ['cogoport'],
+			},
+		},
 		multiple    : true,
 		initialCall : true,
 		isClearable : true,

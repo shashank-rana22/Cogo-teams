@@ -49,6 +49,13 @@ const useGetAccountLeaderboardData = () => {
 			};
 		}
 
+		if (newControl.name === 'role_id' && service) {
+			newControl = {
+				...newControl,
+				disabled: false,
+			};
+		}
+
 		if (newControl.name === 'warmth' && bulkDeallocateFilter) {
 			newControl = {
 				...newControl,
