@@ -92,14 +92,14 @@ export function mountFlashChats({
 export function mountPinnedSnapShot({
 	setLoadingState, pinSnapshotListener, setListData, userId,
 	omniChannelCollection, queryForSearch, canShowPinnedChats, omniChannelQuery, viewType,
-	activeSubTab, updateLoadingState,
+	activeSubTab, updateLoadingState, workPrefernceLoading,
 }) {
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
 
 	setListData((prev) => ({ ...prev, pinnedMessagesData: {}, messagesListData: {} }));
 
-	if (activeSubTab !== 'all' || viewType === 'shipment_specialist' || !canShowPinnedChats) {
+	if (activeSubTab !== 'all' || viewType === 'shipment_specialist' || !canShowPinnedChats || workPrefernceLoading) {
 		return;
 	}
 
@@ -156,12 +156,16 @@ export function mountUnreadCountSnapShot({
 
 export function mountSnapShot({
 	setLoadingState, setListData, snapshotListener, omniChannelCollection,
-	queryForSearch, omniChannelQuery, updateLoadingState,
+	queryForSearch, omniChannelQuery, updateLoadingState, workPrefernceLoading,
 }) {
 	const snapshotRef = snapshotListener;
 	setListData((prev) => ({ ...prev, messagesListData: {}, pinnedMessagesData: {} }));
 	snapshotCleaner({ ref: snapshotListener });
 	setLoadingState((prev) => ({ ...prev, chatsLoading: true }));
+
+	if (workPrefernceLoading) {
+		return;
+	}
 
 	const newChatsQuery = query(
 		omniChannelCollection,
@@ -235,22 +239,23 @@ export function mountActiveRoomSnapShot({
 }) {
 	const snapshotRef = activeRoomSnapshotListener;
 
-	setActiveRoomLoading(true);
 	snapshotCleaner({ ref: activeRoomSnapshotListener });
 
-	if (activeCardId) {
-		const activeMessageDoc = doc(
-			firestore,
-			`${FIRESTORE_PATH[activeChannelType]}/${activeCardId}`,
-		);
-
-		snapshotRef.current = onSnapshot(activeMessageDoc, (activeMessageData) => {
-			setActiveTab((prev) => ({
-				...prev,
-				data: { ...(prev.data || {}), id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
-			}));
-		});
-
-		setActiveRoomLoading(false);
+	if (!activeCardId) {
+		return;
 	}
+
+	setActiveRoomLoading(true);
+	const activeMessageDoc = doc(
+		firestore,
+		`${FIRESTORE_PATH[activeChannelType]}/${activeCardId}`,
+	);
+
+	snapshotRef.current = onSnapshot(activeMessageDoc, (activeMessageData) => {
+		setActiveTab((prev) => ({
+			...prev,
+			data: { ...(prev.data || {}), id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
+		}));
+		setActiveRoomLoading(false);
+	});
 }

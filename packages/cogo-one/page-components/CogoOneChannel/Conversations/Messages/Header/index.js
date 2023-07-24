@@ -41,6 +41,7 @@ function Header({
 	firestore = {},
 	escalateToSupplyRm = () => {},
 	supplierLoading = false,
+	hasNoFireBaseRoom = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -85,7 +86,7 @@ function Header({
 	};
 
 	const handleUpdateUser = () => {
-		if (!updateRoomLoading) {
+		if (!updateRoomLoading || !hasNoFireBaseRoom) {
 			updateUserRoom(mobile_no);
 		}
 	};
@@ -157,20 +158,22 @@ function Header({
 							accountType={account_type}
 							isPartOfGroup={isPartOfGroup}
 							isManager={isManager}
+							hasNoFireBaseRoom={hasNoFireBaseRoom}
 						/>
 
 						{channel_type === 'whatsapp' && (
 							<div
 								role="presentation"
-								className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
+								className={cl`${styles.icon_div} 
+								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
 								onClick={handleUpdateUser}
 							>
 								<IcMProfile
 									className={cl`${styles.profile_icon} 
-								${updateRoomLoading ? styles.disable_icon : ''}`}
+								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
 								/>
 								<IcMRefresh className={cl`${styles.update_icon} 
-								${updateRoomLoading ? styles.disable_icon : ''}`}
+								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
 								/>
 							</div>
 						)}

@@ -1,0 +1,44 @@
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.flex {
+	display: flex;
+}
+
+.view {
+	margin: 4px;
+	color: rgb(0 255 0);
+	text-decoration: underline;
+	background-color: transparent;
+}
+
+.view_flex {
+	display: flex;
+	align-items: center;
+}
+
+.value_data {
+	margin: 20px 40px 20px 0;
+}
+
+.label_value {
+	font-size: 12px;
+}
+
+.date_value {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.document {
+	margin: 4px 0;
+	font-weight: 600;
+}
+
+.document_flex {
+	display: flex;
+	align-items: center;
+	text-align: center;
+}

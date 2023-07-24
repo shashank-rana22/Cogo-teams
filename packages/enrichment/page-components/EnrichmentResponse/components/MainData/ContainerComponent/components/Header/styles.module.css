@@ -1,0 +1,11 @@
+.top {
+	display: flex;
+	justify-content: space-between;
+	font-size: 16px;
+	font-weight: 600;
+	color: #333;
+}
+
+.btn {
+	display: flex;
+}

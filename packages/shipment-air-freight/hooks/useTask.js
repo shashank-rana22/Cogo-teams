@@ -4,6 +4,12 @@ import { useContext, useState, useEffect } from 'react';
 
 import useListShipmentPendingTasks from './useListShipmentPendingTasks';
 
+const STAKEHOLDER_MAPPINGS = {
+	booking_agent : 'booking_agent',
+	booking_desk  : 'service_ops1',
+	document_desk : 'service_ops2',
+};
+
 const useTask = ({ shipment_data = {}, isGettingShipment = false }) => {
 	const { user_id } = useSelector(({ profile }) => ({ user_id: profile?.user?.id }));
 
@@ -42,14 +48,16 @@ const useTask = ({ shipment_data = {}, isGettingShipment = false }) => {
 			setSelectedTaskId(task.id);
 		}
 	};
-
 	useEffect(() => {
 		if (!!tasks.is_task_assigned && showMyTasks) {
-			setFilters({ [`${activeStakeholder}_id`]: user_id });
+			setFilters({
+				[`${STAKEHOLDER_MAPPINGS[activeStakeholder]}_id`] : user_id,
+				show_stakeholder_all_task                         : STAKEHOLDER_MAPPINGS[activeStakeholder],
+			});
 		} else {
 			setFilters({});
 		}
-	}, [showMyTasks, setFilters, activeStakeholder, tasks.is_task_assigned, user_id]);
+	}, [showMyTasks, activeStakeholder, tasks.is_task_assigned, user_id]);
 
 	return {
 		showMyTasks,

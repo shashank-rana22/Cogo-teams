@@ -42,6 +42,7 @@ const VALID_ADVANCE_ATH_RANGE = 80;
 const PERCENTAGE_FACTOR = 100;
 const MAX_DECIMAL_PLACES = 2;
 const DEFAULT_GRAND_TOTAL = 1;
+const MIN_AMOUNT = 0;
 
 function ShipmentDetailsCard({
 	data = {},
@@ -69,6 +70,7 @@ function ShipmentDetailsCard({
 		address = '',
 		registrationNumber: registrationNumberBuyer = '',
 		taxNumber: taxNumberBuyer = '',
+		tdsRate = '',
 	} = buyerDetail || {};
 	const {
 		organizationName = '', taxNumber = '', registrationNumber = '',
@@ -90,6 +92,8 @@ function ShipmentDetailsCard({
 		isProforma = false,
 		billDocumentUrl,
 		grandTotal,
+		paidTds,
+		subTotal,
 	} = bill || {};
 
 	const {
@@ -154,7 +158,8 @@ function ShipmentDetailsCard({
 	const { data : shipmentDocData, refetchShipmentDocument } = useShipmentDocument(shipmentId);
 
 	const [advancedPaymentObj = {}] = (shipmentDocData?.list
-		?.filter((item) => item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
+		?.filter((item) => JSON.parse(item?.data)?.invoice_number === billNumber
+		&& item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
 
 	const handleClickUndo = (id: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
@@ -244,6 +249,10 @@ function ShipmentDetailsCard({
 					setLineItem={setLineItem}
 					invoiceType={invoiceType}
 					isInvoiceApproved={isInvoiceApproved}
+					shipmentType={shipmentType}
+					subTotal={subTotal}
+					tdsRate={tdsRate}
+					paidTds={paidTds}
 				/>
 			) : (
 				<div>
@@ -834,6 +843,20 @@ function ShipmentDetailsCard({
 																/>
 															)
 														: null}
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
+											&& advancedPaymentObj?.data
+											&& (
+												<div className={styles.margin_bottom}>
+													Updated Advanced Amount -
+													{' '}
+													{advancedAmountCurrency}
+													{' '}
+													<span>
+														{JSON.parse(advancedPaymentObj?.data)?.updated_advanced_amount
+														|| MIN_AMOUNT}
+													</span>
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'

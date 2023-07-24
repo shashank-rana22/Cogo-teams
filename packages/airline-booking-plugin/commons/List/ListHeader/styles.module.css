@@ -1,0 +1,23 @@
+.header {
+	padding: 8px;
+	background-color: var(--color-secondary-5);
+	border-radius: 8px 8px 0 0;
+}
+
+.header_row {
+	display: flex;
+	align-items: center;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+	color: var(--color-secondary-greyscale-2);
+	border-bottom: 1px solid var(--color-accent-orange-2);
+}
+
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 4px;
+	margin-left: 16px;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+}

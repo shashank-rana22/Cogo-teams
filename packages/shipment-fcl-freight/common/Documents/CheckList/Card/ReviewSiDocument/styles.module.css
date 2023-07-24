@@ -1,0 +1,12 @@
+.remark_container {
+	margin: 12px 0;
+
+	.ui-textarea {
+		padding: 6px;
+	}
+}
+
+.error {
+	font-size: 12px;
+	color: var(--color-primary-error-red-2);
+}
