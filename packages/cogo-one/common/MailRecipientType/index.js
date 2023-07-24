@@ -1,6 +1,7 @@
 import { Popover, Input, ButtonIcon } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import useGetListEmailSuggestions from '../../hooks/useGetListEmailSuggestions';
 
@@ -8,28 +9,24 @@ import EmailCustomTag from './EmailCustomTag';
 import ListEmails from './ListEmails';
 import styles from './styles.module.css';
 
-const TRIGGER_WHEN_QUERY_LENGTH_GREATER_THAN = 3;
-
 function MailRecipientType({
 	emailRecipientType = [],
 	handleDelete = () => {},
 	showControl = '',
 	type = '',
-	value = '',
 	errorValue = '',
 	handleChange = () => {},
 	handleKeyPress = () => {},
-	handleError = () => {},
+	handleCancel = () => {},
 	handleEdit = () => {},
 }) {
-	const shouldShowSuggestions = value.length > TRIGGER_WHEN_QUERY_LENGTH_GREATER_THAN;
+	const [newEmailInput, setNewEmailInput] = useState('');
 
 	const { emailSuggestions, loading } = useGetListEmailSuggestions({
-		searchQuery: value,
-		shouldShowSuggestions,
+		searchQuery: newEmailInput,
 	});
 
-	const showPopover = shouldShowSuggestions && !isEmpty(emailSuggestions) && !loading;
+	const showPopover = !isEmpty(emailSuggestions) && !loading;
 
 	return (
 		<div className={styles.tags_div}>
@@ -47,7 +44,6 @@ function MailRecipientType({
 			{showControl === type && (
 				<Popover
 					placement="bottom"
-					key={showControl}
 					visible={showPopover}
 					caret={false}
 					render={(
@@ -56,6 +52,7 @@ function MailRecipientType({
 								loading={loading}
 								emailSuggestions={emailSuggestions}
 								type={type}
+								setNewEmailInput={setNewEmailInput}
 								handleKeyPress={handleKeyPress}
 							/>
 						) : null
@@ -67,16 +64,16 @@ function MailRecipientType({
 								size="xs"
 								placeholder="Enter recipient"
 								type="text"
-								value={value}
-								onChange={(val) => handleChange({ val, type })}
-								onKeyDown={(event) => handleKeyPress({ event, type })}
-								suffix={value ? (
+								value={newEmailInput}
+								onChange={(val) => handleChange({ val, type, setNewEmailInput })}
+								onKeyDown={(event) => handleKeyPress({ event, type, newEmailInput, setNewEmailInput })}
+								suffix={newEmailInput ? (
 									<ButtonIcon
 										size="xs"
 										icon={<IcMCross />}
 										disabled={false}
 										themeType="primary"
-										onClick={() => handleError(type)}
+										onClick={() => handleCancel({ type, setNewEmailInput })}
 									/>
 								) : null}
 								className={errorValue
@@ -96,7 +93,7 @@ function MailRecipientType({
 
 			<div
 				className={styles.add_icon}
-				onClick={() => handleEdit(type)}
+				onClick={() => handleEdit({ type, setNewEmailInput })}
 				role="presentation"
 			>
 				+

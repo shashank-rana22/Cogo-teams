@@ -31,7 +31,6 @@ function MailModal({
 	const uploaderRef = useRef(null);
 
 	const [showControl, setShowControl] = useState(null);
-	const [value, setValue] = useState('');
 	const [errorValue, setErrorValue] = useState('');
 	const [uploading, setUploading] = useState(false);
 	const [attachments, setAttachments] = useState([]);
@@ -41,15 +40,13 @@ function MailModal({
 		handleEdit = () => {},
 		handleChange = () => {},
 		handleDelete = () => {},
-		handleError = () => {},
+		handleCancel = () => {},
 		handleClose = () => {},
 		handleAttachmentDelete = () => {},
 		getDecodedData = () => {},
 	} = mailFunction({
 		...mailProps,
 		setErrorValue,
-		value,
-		setValue,
 		setShowControl,
 		showControl,
 		setAttachments,
@@ -138,10 +135,9 @@ function MailModal({
 					handleChange={handleChange}
 					handleDelete={handleDelete}
 					handleKeyPress={handleKeyPress}
-					handleError={handleError}
+					handleCancel={handleCancel}
 					handleEdit={handleEdit}
 					showControl={showControl}
-					value={value}
 					errorValue={errorValue}
 					setEmailState={setEmailState}
 				/>

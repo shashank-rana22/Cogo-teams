@@ -8,7 +8,6 @@ const getParams = ({ search }) => ({
 
 function useGetListEmailSuggestions({
 	searchQuery = '',
-	shouldShowSuggestions = false,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
@@ -35,10 +34,10 @@ function useGetListEmailSuggestions({
 	}, [debounceQuery, searchQuery]);
 
 	useEffect(() => {
-		if (shouldShowSuggestions) {
+		if (query) {
 			getEmailSuggestions({ search: query });
 		}
-	}, [getEmailSuggestions, query, shouldShowSuggestions]);
+	}, [getEmailSuggestions, query]);
 
 	return {
 		emailSuggestions: data,
