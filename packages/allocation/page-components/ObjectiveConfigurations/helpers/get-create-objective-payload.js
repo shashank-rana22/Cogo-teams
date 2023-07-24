@@ -2,7 +2,7 @@ const getCreateObjectivePayload = ({ data }) => {
 	const { generalConfiguration, objectiveRequirements } = data;
 
 	const {
-		type: objective_type,
+		objective_type,
 		name,
 		partner,
 		channels,

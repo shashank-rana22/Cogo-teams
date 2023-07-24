@@ -1,4 +1,4 @@
-import { Accordion, Pill } from '@cogoport/components';
+import { Accordion, Pill, cl } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
 import { IcMTick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -8,7 +8,7 @@ import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../../../configuratio
 import styles from './styles.module.css';
 
 function Objective(props) {
-	const { objective, user, control, defaultWeightage } = props;
+	const { currentObjective = false, objective, user, control, defaultWeightage } = props;
 
 	const { id, name, objective_type, status } = objective || {};
 
@@ -17,12 +17,16 @@ function Objective(props) {
 	return (
 		<Accordion
 			type="text"
-			className={styles.accordian}
+			className={currentObjective ? cl`${styles.accordian} ${styles.current_objective}` : styles.accordian}
 			title={(
 				<div className={styles.accordian_title}>
 					<div className={styles.title_left_container}>
-						<div>{name}</div>
-						<Pill>{startCase(objective_type)}</Pill>
+						<div className={currentObjective && styles.current_name}>{name}</div>
+						<Pill color="blue">
+							{startCase(objective_type)}
+							{' '}
+							Objective
+						</Pill>
 						<Pill color={OBJECTIVE_STATUS_COLOR_MAPPING[status]}>
 							{startCase(status)}
 						</Pill>
@@ -34,7 +38,7 @@ function Objective(props) {
 							name={`${id}_${userId}_weightage`}
 							size="sm"
 							control={control}
-							defaultValue={defaultWeightage}
+							value={defaultWeightage}
 							suffix={(
 								<IcMTick
 									height={20}

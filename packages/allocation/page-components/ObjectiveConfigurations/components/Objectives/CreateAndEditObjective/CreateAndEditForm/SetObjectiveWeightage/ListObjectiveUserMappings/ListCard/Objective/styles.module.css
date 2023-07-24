@@ -8,6 +8,17 @@
 	}
 }
 
+.current_objective {
+	button {
+		background-color: var(--color-tertiary-success-green-5);
+	}
+}
+
+.current_name {
+	font-weight: 600;
+	color: var(--color-tertiary-success-green-1);
+}
+
 .accordian_title {
 	display: flex;
 	align-items: center;

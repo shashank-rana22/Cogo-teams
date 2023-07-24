@@ -34,6 +34,7 @@ function CreateAndEditForm(props) {
 		/>,
 		[SET_OBJECTIVE_WEIGHTAGE]: <SetObjectiveWeightage
 			activeTabDetails={activeTabDetails}
+			formValues={formValues}
 		/>,
 	};
 

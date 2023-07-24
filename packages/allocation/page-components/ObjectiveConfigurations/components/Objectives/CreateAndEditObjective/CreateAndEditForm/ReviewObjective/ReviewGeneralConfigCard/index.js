@@ -7,9 +7,9 @@ const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 
 const CARD_DATA_MAPPING = [
 	{
-		name     : 'type',
+		name     : 'objective_type',
 		label    : 'Objective Type',
-		accessor : ({ type }) => <div>{startCase(type || '')}</div>,
+		accessor : ({ objective_type }) => <div>{startCase(objective_type || '')}</div>,
 	},
 	{
 		name     : 'partner',

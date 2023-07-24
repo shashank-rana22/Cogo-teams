@@ -4,7 +4,7 @@ import ListCard from './ListCard';
 import styles from './styles.module.css';
 
 function ListObjectiveUserMappings(props) {
-	const { list, control } = props;
+	const { list, control, formValues } = props;
 
 	return (
 		<div className={styles.container}>
@@ -13,6 +13,7 @@ function ListObjectiveUserMappings(props) {
 					key={item.user?.id}
 					objectiveUserMappingData={item}
 					control={control}
+					formValues={formValues}
 				/>
 			))}
 

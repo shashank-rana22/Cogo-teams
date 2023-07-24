@@ -9,7 +9,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 
 	const controls = [
 		{
-			name  : 'type',
+			name  : 'objective_type',
 			label : (
 				<>
 					Select Objective Type

@@ -12,7 +12,7 @@ const useSetGeneralConfiguration = (props) => {
 	const {
 		generalConfiguration:
 		{
-			type,
+			objective_type,
 			name,
 			partner:{ id: partner_id, business_name: partner_name } = {},
 			channels,
@@ -25,7 +25,7 @@ const useSetGeneralConfiguration = (props) => {
 
 	const { control, watch, handleSubmit, setValue, formState: { errors } } = useForm({
 		defaultValues: {
-			type,
+			objective_type,
 			name,
 			partner : (partner_id && partner_name) ? `${partner_id}_${partner_name}` : '',
 			channels,

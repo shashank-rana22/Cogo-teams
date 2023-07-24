@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 const getObjectiveFilterControls = () => {
 	const controls = [
 		{
-			name    : 'type',
+			name    : 'objective_type',
 			type    : 'chips',
 			label   : 'Type',
 			options : [

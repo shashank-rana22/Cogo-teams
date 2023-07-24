@@ -20,3 +20,7 @@
 .agent {
 	margin: 0 8px 0 0;
 }
+
+.current_objective {
+	border: 1px solid red;
+}

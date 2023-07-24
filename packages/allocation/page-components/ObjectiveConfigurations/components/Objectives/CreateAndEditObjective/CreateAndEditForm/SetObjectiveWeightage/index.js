@@ -58,7 +58,7 @@ const MODE_BASIS_BUTTON_MAPPING = {
 };
 
 function SetObjectiveWeightage(props) {
-	const { activeTabDetails } = props;
+	const { activeTabDetails, formValues } = props;
 
 	const { list } = useGetObjectiveUserMappings();
 
@@ -88,6 +88,7 @@ function SetObjectiveWeightage(props) {
 			<ListObjectiveUserMappings
 				list={list}
 				control={control}
+				formValues={formValues}
 			/>
 
 			<div className={styles.footer}>

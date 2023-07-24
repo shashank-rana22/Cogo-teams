@@ -53,7 +53,7 @@ function Objectives(props) {
 						<div className={styles.accordian_title}>
 							<div className={styles.title_left_container}>
 								<div>{objective.name}</div>
-								<Pill>{startCase(objective.type)}</Pill>
+								<Pill>{startCase(objective.objective_type)}</Pill>
 								<Pill color={OBJECTIVE_STATUS_COLOR_MAPPING[objective.status]}>
 									{startCase(objective.status)}
 								</Pill>
