@@ -1,5 +1,8 @@
 import { Collapse, Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useMemo } from 'react';
+
+import EmptyState from '../../../../../../../common/EmptyState';
 
 import ListCard from './ListCard';
 import getListColumnMapping from './ListCard/get-list-column-mapping';
@@ -256,6 +259,17 @@ function List(props) {
 	})), [activeObjectiveId, list, LIST_COLUMN_MAPPING]);
 
 	if (loading) return <LoadingState />;
+
+	if (isEmpty(objectiveList)) {
+		return (
+			<EmptyState
+				flexDirection="column"
+				height={400}
+				width={700}
+				textSize={24}
+			/>
+		);
+	}
 
 	return (
 		<section>
