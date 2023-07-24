@@ -15,6 +15,7 @@ import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import RolloveDetails from '../../../common/RolloverDetails';
 import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
+import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -165,6 +166,10 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 							<Tasks />
+						</TabPanel>
+
+						<TabPanel name="invoice" title="Sales Invoice">
+							<SalesInvoice />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
