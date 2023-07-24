@@ -15,6 +15,7 @@ function Heading({
 			<h1 className={styles.heading}>
 				{backView && (
 					<IcMArrowBack
+						className={styles.back_icon}
 						onClick={() => setView(backView)}
 					/>
 				)}
