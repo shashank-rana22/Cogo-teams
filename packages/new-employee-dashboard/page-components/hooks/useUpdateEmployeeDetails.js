@@ -6,7 +6,7 @@ const getPayload = ({ SOURCE, companyPolicyValue, status, id }) => {
 	const payload = { id };
 
 	if (SOURCE === 'save') {
-		payload.share_company_policies = companyPolicyValue === 'Yes' ? true : null;
+		payload.share_company_policies = !!companyPolicyValue;
 	}
 
 	if (SOURCE === 'reject') {
@@ -20,7 +20,7 @@ const useUpdateEmployeeDeatils = ({
 	id,
 	status,
 	getEmployeeDetails = () => {},
-	companyPolicyValue = null,
+	companyPolicyValue = false,
 	SOURCE = 'save',
 }) => {
 	const [{ btnloading }, trigger] = useHarbourRequest({

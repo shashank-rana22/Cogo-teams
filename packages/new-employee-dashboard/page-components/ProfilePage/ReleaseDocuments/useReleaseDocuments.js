@@ -23,13 +23,13 @@ const useReleaseDocuments = ({
 	profileData,
 	getEmployeeDetails,
 }) => {
-	const [companyPolicyValue, setCompanyPolicyValue] = useState('');
 	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 	const [selectedItems, setSelectedItems] = useState([]);
 	const [additionalClause, setAdditionalClause] = useState('');
 
 	const { detail, signed_documents, signed_documents_names } = profileData || {};
 	const { id, status, share_company_policies } = detail || {};
+	const [companyPolicyValue, setCompanyPolicyValue] = useState(share_company_policies);
 	const signedDocumentList = (signed_documents_names || []).map((name) => ({ name }));
 
 	const { createEmployeeSignedDocumentsStatus, btnloading } = useCreateEmployeeSignedDocuments(

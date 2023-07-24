@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 import useReleaseDocuments from './useReleaseDocuments';
 
 const COMPANY_POLICIES_OPTIONS = [
-	{ name: 'yes', value: 'Yes', label: 'Yes' },
-	{ name: 'no', value: 'No', label: 'No' },
+	{ value: 'yes', label: 'Yes' },
+	{ value: 'no', label: 'No' },
 ];
 
 function ReleaseDocuments({
@@ -25,7 +25,6 @@ function ReleaseDocuments({
 		columns,
 		signedDocumentList,
 		setCompanyPolicyValue,
-		share_company_policies,
 		loading,
 		updateEmployeeStatus,
 		additionalClause,
@@ -34,6 +33,7 @@ function ReleaseDocuments({
 		editorValue,
 		setEditorValue,
 		RichTextEditor,
+		companyPolicyValue,
 	} = useReleaseDocuments({
 		profileData,
 		getEmployeeDetails,
@@ -56,6 +56,10 @@ function ReleaseDocuments({
 		setAdditionalClause('');
 	};
 
+	const handleChange = (val) => {
+		if (val === 'yes') { setCompanyPolicyValue(true); } else { setCompanyPolicyValue(false); }
+	};
+
 	return (
 		<div className={styles.container}>
 			<StyledTable columns={columns} data={signedDocumentList} />
@@ -66,8 +70,8 @@ function ReleaseDocuments({
 				</div>
 				<RadioGroup
 					options={COMPANY_POLICIES_OPTIONS}
-					onChange={setCompanyPolicyValue}
-					value={(share_company_policies) ? 'Yes' : 'No'}
+					onChange={handleChange}
+					value={(companyPolicyValue) ? 'yes' : 'no'}
 				/>
 				<div className={styles.styled_button}>
 					<Button loading={loading} onClick={() => updateEmployeeStatus()}>
