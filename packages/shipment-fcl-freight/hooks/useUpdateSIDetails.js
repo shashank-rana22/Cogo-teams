@@ -5,6 +5,8 @@ import { useRequest } from '@cogoport/request';
 
 import getControls from '../common/Tasks/TaskExecution/CustomTasks/UploadSI/TaskForm/controls';
 
+const FILE_NAME_IN_URL_SLICE_INDEX = -1;
+
 const formatData = (data, pendingTask, services) => {
 	const modifiedData = (data.container || []).map((item) => ({
 		id   : item?.id,
@@ -14,15 +16,23 @@ const formatData = (data, pendingTask, services) => {
 		},
 	}));
 
-	const modifiedSIData = (data.documents || []).map((item) => ({
-		document_type : 'si',
-		document_url  : item?.url?.fileUrl,
-		file_name     : item?.url?.fileName,
-		data          : {
-			description : item?.description || undefined,
-			url         : item?.url?.fileUrl,
-		},
-	}));
+	const modifiedSIData = (data.documents || []).map((item) => {
+		const url = typeof (item?.url) === 'string'
+			? {
+				fileName : item?.url?.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join(''),
+				finalUrl : item?.url,
+			} : item?.url;
+
+		return {
+			document_type : 'si',
+			document_url  : url?.finalUrl,
+			file_name     : url?.fileName,
+			data          : {
+				description : item?.description || undefined,
+				url         : url?.finalUrl,
+			},
+		};
+	});
 
 	const formattedData = {
 		id   : pendingTask.id,

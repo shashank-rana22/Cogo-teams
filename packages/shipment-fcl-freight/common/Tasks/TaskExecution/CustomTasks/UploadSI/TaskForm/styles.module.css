@@ -4,7 +4,7 @@
 	margin: 20px 0;
 
 	:global {
-		.ui_button_container.ui_ps_themeType_primary {
+		.ui_button_container {
 			margin-right: 12px;
 		}
 	}

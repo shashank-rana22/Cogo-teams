@@ -8,6 +8,7 @@ const STAKEHOLDER_MAPPINGS = {
 	lastmile_ops  : 'lastmile_ops',
 	document_desk : 'service_ops',
 	so1_so2_ops   : 'service_ops',
+	booking_agent : 'booking_agent',
 };
 
 function useListTasks({

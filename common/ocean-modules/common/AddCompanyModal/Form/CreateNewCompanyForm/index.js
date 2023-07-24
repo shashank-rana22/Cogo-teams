@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import {
 	CheckboxController,
 	CountrySelectController,
@@ -7,12 +8,12 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
-import { getCountryConstants } from '@cogoport/globalization/constants/geo';
+import getGeoConstants, { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
-import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
-import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
+import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
+import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
+import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
 import getBillingAddressFromRegNum, { getAddressRespectivePincodeAndPoc } from
 	'../../helpers/getBillingAddressFromRegNum';
 
@@ -28,11 +29,20 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function CreateNewCompanyForm({ tradePartyType }, ref) {
+function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref) {
 	const { data, setFilters } = useListOrganizationTradeParties({
 		defaultParams  : DEFAULT_ORG_TRADE_PARTIES_PARAMS,
 		defaultFilters : { organization_status: 'active' },
 	});
+
+	const geo = getGeoConstants();
+
+	const { destination_port, origin_port } = primary_service || {};
+
+	const COUNTRY_DATA = {
+		shipper   : origin_port,
+		consignee : destination_port,
+	};
 
 	const [addressOptions, setAddressOptions] = useState([]);
 	const [addressData, setAddressData] = useState([]);
@@ -92,9 +102,17 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 		}
 	}, [formValues?.name, pocNameOptions, setValue, resetMultipleFields]);
 
-	const workScopeOptions = convertObjectMappingToArray(POC_WORKSCOPE_MAPPING);
-
 	const countryValidation = getCountryConstants({ country_id: formValues.country_id, isDefaultData: false });
+
+	const taxLabel = countryValidation?.others?.registration_number?.label || 'PAN';
+
+	useEffect(() => {
+		if (formValues?.country_id) {
+			setValue('mobile_number', { country_code: countryValidation?.country?.mobile_country_code });
+		}
+	}, [formValues?.country_id, countryValidation?.country?.mobile_country_code, setValue]);
+
+	const workScopeOptions = convertObjectMappingToArray(POC_WORKSCOPE_MAPPING);
 
 	return (
 		<div>
@@ -108,6 +126,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							placeholder="Enter or Select Country"
 							optionValueKey="id"
+							value={(COUNTRY_DATA?.[tradePartyType])?.country_id}
 							rules={{ required: 'Country of Registration is required' }}
 						/>
 						{Error('country', errors)}
@@ -115,14 +134,14 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 
 					<div className={styles.pan_number}>
 						<label className={styles.form_label}>
-							{`PAN Number / Registration Number ${
+							{`${countryValidation?.others?.identification_number?.label || 'PAN'} ${
 								['collection_party', 'paying_party'].includes(tradePartyType) ? '' : '(Optional)'}`}
 						</label>
 						<InputController
 							size="sm"
 							name="registration_number"
 							control={control}
-							placeholder="Enter Registration Number"
+							placeholder={`Enter ${geo.others.identification_number.label}`}
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
 								pattern  : { value: countryValidation?.regex?.PAN, message: 'Pan Number is invalid' },
@@ -218,51 +237,77 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							control={control}
 							name="mobile_number"
+
 						/>
 						{Error('mobile_number', errors)}
 					</div>
 
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>Alternate Mobile Number (optional)</label>
-						<MobileNumberController size="sm" control={control} name="alternate_mobile_number" />
-					</div>
-				</div>
-
-				<div className={styles.checkbox}>
-					<CheckboxController name="not_reg_under_gst" control={control} />
-					<label className={styles.form_label}>Not registered under GST</label>
-				</div>
-
-				<div className={styles.row}>
-					<div>
-						<label className={styles.form_label}>GST Number</label>
-						<InputController
+						<MobileNumberController
 							size="sm"
-							name="tax_number"
 							control={control}
-							rules={{
-								required : { value: !formValues.not_reg_under_gst, message: 'GST Number is required' },
-								pattern  : { value: countryValidation?.regex?.GST, message: 'GST Number is invalid' },
-							}}
-							disabled={formValues.not_reg_under_gst}
+							name="alternate_mobile_number"
 						/>
-						{Error('tax_number', errors)}
-					</div>
-
-					<div className={styles.upload_container}>
-						<label className={styles.form_label}>GST Proof</label>
-						<UploadController
-							className="tax_document"
-							name="tax_number_document_url"
-							disabled={formValues.not_reg_under_gst}
-							control={control}
-							rules={{
-								required: { value: !formValues.not_reg_under_gst, message: 'GST Proof is required' },
-							}}
-						/>
-						{Error('tax_number_document_url', errors)}
 					</div>
 				</div>
+
+				{ countryValidation?.others?.ask_gst_details === false
+					? (
+
+						null
+
+					) : (
+						<>
+							<div className={styles.checkbox}>
+								<CheckboxController name="not_reg_under_gst" control={control} checked />
+								<label className={styles.form_label}>Not registered under GST</label>
+							</div>
+
+							<div className={styles.row}>
+								<div>
+									<label className={styles.form_label}>GST Number</label>
+									<InputController
+										size="sm"
+										name="tax_number"
+										control={control}
+										rules={{
+
+											required:
+									{ value: !formValues.not_reg_under_gst, message: 'GST Number is required' },
+											pattern:
+									{ value: countryValidation?.regex?.GST, message: 'GST Number is invalid' },
+										}}
+										disabled={formValues.not_reg_under_gst}
+									/>
+									{Error('tax_number', errors)}
+								</div>
+
+								<div className={styles.upload_container}>
+									<label className={styles.form_label}>
+										{taxLabel}
+										{' '}
+										Proof
+									</label>
+									<UploadController
+										className="tax_document"
+										name="tax_number_document_url"
+										disabled={formValues.not_reg_under_gst}
+										control={control}
+										rules={{
+											required: {
+												value   : !formValues.not_reg_under_gst,
+												message : `${taxLabel} Proof is required`,
+											},
+										}}
+									/>
+									{Error('tax_number_document_url', errors)}
+								</div>
+							</div>
+
+						</>
+					)}
+
 			</form>
 		</div>
 	);

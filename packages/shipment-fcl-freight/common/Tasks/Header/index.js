@@ -59,6 +59,7 @@ function Header({
 
 					<div className={styles.toggle_container}>
 						<div>Show only my tasks</div>
+
 						<Toggle
 							checked={showMyTasks}
 							onChange={() => setShowMyTasks(!showMyTasks)}

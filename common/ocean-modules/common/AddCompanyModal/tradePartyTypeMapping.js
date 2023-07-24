@@ -6,20 +6,12 @@ const tradePartyTypeMapping = (trade_party_type = '') => {
 				label : 'Same as Booking Party',
 			},
 			{
-				value : 'self',
-				label : 'Self',
-			},
-			{
 				value : 'trade_partner',
 				label : 'Select Trade Partner',
 			},
 			{
 				value : 'create_new_company',
 				label : 'Create New Company',
-			},
-			{
-				value : 'historical',
-				label : 'Historical',
 			},
 		],
 		consignee: [
@@ -30,10 +22,6 @@ const tradePartyTypeMapping = (trade_party_type = '') => {
 			{
 				value : 'create_new_company',
 				label : 'Create New Company',
-			},
-			{
-				value : 'historical',
-				label : 'Historical',
 			},
 		],
 		self: [

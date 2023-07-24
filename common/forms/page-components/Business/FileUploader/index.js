@@ -36,12 +36,16 @@ function FileUploader(props) {
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
 			const names = defaultValues.map((url) => ({
-				name: url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
+				name: typeof (url) === 'string'
+					? url?.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join('') : url?.fileName,
 			}));
-			const urls = defaultValues.map((url) => ({
-				fileName : url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
-				finalUrl : url,
-			}));
+			const urls = defaultValues.map((url) => (
+				typeof (url) === 'string'
+					? {
+						fileName : url?.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join(''),
+						finalUrl : url,
+					} : url
+			));
 
 			setFileName(names);
 			setUrlStore(urls);

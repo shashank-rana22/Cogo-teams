@@ -18,7 +18,7 @@ function FormElement(props) {
 	if (type in controlsMapping) {
 		return (
 			<div>
-				<div className={styles.label}>{label}</div>
+				<h4>{label}</h4>
 				<Element {...props} />
 				{errors[name] && (<span className={styles.errors}>{errors[name].message}</span>)}
 			</div>
@@ -84,15 +84,9 @@ function SupplierReallocation({
 			closeOnOuterClick={false}
 			showCloseIcon={!loading}
 		>
-			<Modal.Body>
-				<Modal.Header title={(
-					<div className={styles.header}>
-						Supplier Reallocation
-						{showAllControls ? ' & BL Details' : null}
-					</div>
-				)}
-				/>
+			<Modal.Header title={`Supplier Reallocation${showAllControls ? ' & BL Details' : ''}`} />
 
+			<Modal.Body style={{ overflow: 'visible' }}>
 				<div className={styles.form_wrapper}>
 					{controls.map((ctrl) => (
 						<FormElement
@@ -115,7 +109,7 @@ function SupplierReallocation({
 				</Button>
 
 				<Button
-					className="reviewed"
+					className={styles.primary_button}
 					onClick={handleSubmit(onUpdate)}
 					disabled={loading}
 				>

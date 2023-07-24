@@ -8,15 +8,23 @@ const injectForm = ({
 	shipment_data = {},
 	formValues = {},
 	getApisData = {},
+	options,
+	allCommodity = [],
+	commodityUnit,
 }) => {
 	const showElements = getShowTaskFields(formValues, stepConfig.controls, getApisData);
 
 	const finalControls = mutateControls(
-		stepConfig?.controls,
-		formProps?.setValue,
-		task,
-		shipment_data,
-		formValues,
+		{
+			controls : stepConfig?.controls,
+			setValue : formProps?.setValue,
+			task,
+			shipment_data,
+			formValues,
+			options,
+			allCommodity,
+			commodityUnit,
+		},
 	);
 
 	return {

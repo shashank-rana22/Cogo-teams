@@ -1,5 +1,5 @@
-const extraApiPayload = (values, end_point) => {
-	if (end_point === 'create_shipment_document') {
+const extraApiPayload = (values, endPoint) => {
+	if (['create_shipment_document', 'fcl_freight/create_document'].includes(endPoint)) {
 		let documentArr = values?.documents;
 
 		if (!documentArr) documentArr = [values];
@@ -19,7 +19,7 @@ const extraApiPayload = (values, end_point) => {
 		return { documents: formatValues };
 	}
 
-	if (end_point === 'update_shipment_service') return { data: values };
+	if (endPoint === 'update_shipment_service') return { data: values };
 
 	return values;
 };

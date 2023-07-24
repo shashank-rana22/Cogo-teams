@@ -792,6 +792,11 @@ const getAsyncFields = (key) => {
 			lableKey : 'name',
 			asyncKey : 'insurance_commodities',
 		},
+		'hscode-list': {
+			valueKey : 'id',
+			lableKey : 'name',
+			asyncKey : 'hs_code_list',
+		},
 
 	};
 

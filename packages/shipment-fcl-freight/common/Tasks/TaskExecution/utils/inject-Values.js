@@ -5,14 +5,15 @@ import injectCustomFormValidations from './inject-custom-form-validations';
 const MINIMUM_BLS_COUNT = 1;
 const MINIMUM_CONTAINERS_COUNT = 1;
 
-const injectValues = (
+const injectValues = ({
 	selectedMail,
 	populatedControls,
 	task,
 	getApisData,
 	shipment_data,
 	stepConfig,
-) => {
+	setCommodityUnit = () => {},
+}) => {
 	const controls = populatedControls || [];
 
 	if (!controls?.length) return controls;
@@ -123,6 +124,41 @@ const injectValues = (
 			if (control.name === 'containers_count') {
 				controls[index].value = containersCount;
 				controls[index].rules.max = containersCount;
+			}
+		});
+	} else if (
+		task?.task === 'mark_confirmed'
+	) {
+		(controls || []).forEach((ctrl, index) => {
+			if (ctrl?.name === 'bl_category') {
+				controls[index].disabled = !!shipment_data?.bl_category;
+				controls[index].value = shipment_data?.bl_category || 'hbl';
+			}
+
+			if (ctrl?.name === 'commodity_category') {
+				if (shipment_data?.commodity_category) {
+					controls[index].value = shipment_data?.commodity_category;
+					controls[index].disabled = true;
+				}
+			}
+
+			if (ctrl?.name === 'hs_code') {
+				controls[index].onChange = (val, obj) => {
+					setCommodityUnit(obj);
+				};
+			}
+
+			if (ctrl?.name === 'bl_type') {
+				controls[index].disabled = !!shipment_data?.bl_type;
+				controls[index].value = shipment_data?.bl_type;
+			}
+
+			if (
+				shipment_data?.bl_category === 'mbl'
+				&& ctrl?.name === 'payment_term'
+			) {
+				controls[index].disabled = true;
+				controls[index].value = ctrl?.value;
 			}
 		});
 	}

@@ -2,6 +2,8 @@ import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
 import { useRef } from 'react';
 
+import useGetCommodityOptions from '../../../hooks/useGetCommodityOptions';
+
 import EditBookingParams from './EditBookingParams';
 import { getCanShipmentRollover } from './helpers/getCanShipmentRollover';
 import useHandleSubmit from './helpers/useHandleSubmit';
@@ -19,6 +21,8 @@ function ExecuteStep({
 	selectedMail = [],
 	serviceIdMapping = [],
 }) {
+	const { options, allCommodity } = useGetCommodityOptions({ task });
+
 	const {
 		formProps,
 		fields,
@@ -28,7 +32,10 @@ function ExecuteStep({
 		stepConfig,
 		getApisData,
 		selectedMail,
+		options,
+		allCommodity,
 	});
+
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 
 	const { editBookingParams } = showElements || {};

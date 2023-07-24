@@ -19,8 +19,14 @@ function useHandleSubmit({
 }) {
 	const [isLoading, setIsLoading] = useState();
 
+	let endPoint = finalConfig.end_point ?? 'update_shipment_pending_task';
+
+	if (endPoint === 'create_shipment_document') {
+		endPoint = 'fcl_freight/create_document';
+	}
+
 	const [{ loading }, trigger] = useRequest({
-		url    : finalConfig.end_point || 'update_shipment_pending_task',
+		url    : endPoint,
 		method : 'POST',
 	}, { manual: true });
 
@@ -46,7 +52,6 @@ function useHandleSubmit({
 				}
 			});
 		}
-
 		const dataToSend = finalConfig?.data_to_send;
 
 		const transformedRawValues = formatRawValues(rawValues, task);
@@ -64,7 +69,7 @@ function useHandleSubmit({
 		if (finalConfig?.end_point) {
 			finalPayload = extraApiPayload(
 				rawValues,
-				finalConfig?.end_point,
+				endPoint,
 			);
 
 			finalPayload = {

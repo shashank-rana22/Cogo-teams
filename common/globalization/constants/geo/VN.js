@@ -516,9 +516,16 @@ export default {
 			pattern : undefined,
 		},
 
+		identification_number: {
+			label   : 'VAT Number',
+			pattern : /^[0-3]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		},
+
 		economic_zone: {
 			label: 'Non-Tariff Zone',
 		},
+
+		ask_gst_details: false,
 
 		navigations: {
 			onboard_vendor: {
