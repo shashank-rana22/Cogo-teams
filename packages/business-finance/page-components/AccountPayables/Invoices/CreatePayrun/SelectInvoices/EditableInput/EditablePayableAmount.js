@@ -66,28 +66,31 @@ function EditablePayableAmount({ itemData, field, setEditedValue }) {
 		setEdit(false);
 	};
 
-	return (edit ? (
-		<div className={`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
-			<Input
-				onChange={(val) => {
-					setEditedValue(newItem, val, key, true);
-					setValue(val);
-				}}
-				defaultValue={value}
-				value={value}
-				placeholder="Amount"
-				type="number"
-			/>
-			<Tooltip content={content}>
-				<IcMInformation
-					height={14}
-					width={14}
-					className={`${styles.icon} ${isError ? styles.error : ''}`}
+	if (edit) {
+		return (
+			<div className={`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
+				<Input
+					onChange={(val) => {
+						setEditedValue(newItem, val, key, true);
+						setValue(val);
+					}}
+					defaultValue={value}
+					value={value}
+					placeholder="Amount"
+					type="number"
 				/>
-			</Tooltip>
-			<IcMLineundo height={14} width={14} onClick={handleUndo} className={styles.icon} />
-		</div>
-	) : (
+				<Tooltip content={content}>
+					<IcMInformation
+						height={14}
+						width={14}
+						className={`${styles.icon} ${isError ? styles.error : ''}`}
+					/>
+				</Tooltip>
+				<IcMLineundo height={14} width={14} onClick={handleUndo} className={styles.icon} />
+			</div>
+		);
+	}
+	return (
 		<div>
 			{getFormattedAmount({
 				amount   : value,
@@ -107,7 +110,7 @@ function EditablePayableAmount({ itemData, field, setEditedValue }) {
 				)}
 			</span>
 		</div>
-	));
+	);
 }
 
 export default EditablePayableAmount;

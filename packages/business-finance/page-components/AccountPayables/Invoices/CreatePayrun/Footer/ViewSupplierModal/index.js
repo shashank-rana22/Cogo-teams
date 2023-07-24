@@ -9,6 +9,14 @@ import { CN_CONFIG } from '../../Configurations/viewCnConfig';
 
 import styles from './styles.module.css';
 
+function RenderAccordianData(item) {
+	return (
+		<div className={styles.listdata}>
+			<List itemData={{ list: item?.creditNotes }} config={CN_CONFIG} showPagination={false} />
+		</div>
+	);
+}
+
 function ViewSupplierModal({
 	suppliers,
 	viewSupplier,
@@ -17,7 +25,7 @@ function ViewSupplierModal({
 	setApiData,
 	setFilters,
 }) {
-	const [showId, setShowId] = useState();
+	const [showId, setShowId] = useState(null);
 	const {
 		onExclude,
 		loading,
@@ -25,11 +33,6 @@ function ViewSupplierModal({
 		getTableBodyCheckbox,
 	} = useDeleteExcludePayrun({ refetch, setApiData, apiData: suppliers });
 
-	const renderAccordianData = (item) => (
-		<div className={styles.listdata}>
-			<List itemData={{ list: item?.creditNotes }} config={CN_CONFIG} showPagination={false} />
-		</div>
-	);
 	const FUNCTIONS = {
 		renderCn: (itemData) => (
 			<Button
@@ -69,7 +72,7 @@ function ViewSupplierModal({
 							config={SUPPLIER_CONFIG}
 							functions={FUNCTIONS}
 							renderHeaderCheckbox={getTableHeaderCheckbox}
-							renderAccordianData={renderAccordianData}
+							RenderAccordianData={RenderAccordianData}
 							showId={showId}
 							idKey="organizationId"
 							rowStyle="border"

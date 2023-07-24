@@ -33,7 +33,7 @@ export interface Props {
 	rowStyle?: string;
 	idKey?: string;
 	showId?: string;
-	renderAccordianData?: Function;
+	RenderAccordianData?: any;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
 }
 
@@ -51,7 +51,7 @@ function List({
 	showPagination = true,
 	showId = '',
 	idKey = 'id',
-	renderAccordianData = () => null,
+	RenderAccordianData = () => null,
 	subActiveTab = undefined,
 	width = null,
 	rowStyle = null,
@@ -84,31 +84,6 @@ function List({
 				/>
 			)}
 			<div style={bodyStyles}>
-				{isEmpty(list) && !loading ? null : (
-					<>
-						{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-							<>
-								<CardColumn
-									key={singleitem.id || singleitem}
-									fields={fields}
-									itemStyles={itemStyles}
-									singleitem={singleitem}
-									config={config}
-									loading={loading}
-									functions={commonFunctions(functions)}
-									isMobile={isMobile}
-									subActiveTab={subActiveTab}
-									width={width}
-									rowStyle={rowStyle}
-								/>
-								{showId === singleitem?.[idKey]
-									? renderAccordianData(singleitem)
-									: null}
-							</>
-						))}
-					</>
-				)}
-
 				{isEmpty(list) && !loading ? (
 					<div className={styles.no_data}>
 						<img
@@ -120,10 +95,9 @@ function List({
 						/>
 					</div>
 				) : (
-					<div>
-						{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+					(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+						<React.Fragment key={singleitem.id || singleitem}>
 							<CardColumn
-								key={singleitem.id}
 								fields={fields}
 								itemStyles={itemStyles}
 								singleitem={singleitem}
@@ -135,8 +109,13 @@ function List({
 								width={width}
 								rowStyle={rowStyle}
 							/>
-						))}
-					</div>
+							{showId === singleitem?.[idKey] ? (
+								<RenderAccordianData
+									singleitem={singleitem}
+								/>
+							) : null}
+						</React.Fragment>
+					))
 				)}
 			</div>
 			{showPagination && (

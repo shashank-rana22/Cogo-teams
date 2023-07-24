@@ -5,10 +5,10 @@ import { useSelector } from '@cogoport/store';
 import toastApiError from '../../../commons/toastApiError.ts';
 
 const useDeleteSelectedInvoice = ({ refetch = () => {}, itemData }) => {
-	const { user_data: UserData } = useSelector(({ profile }) => ({
+	const { user_data: userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user, session_type: sessionType } = UserData;
+	const { user, session_type: sessionType } = userData;
 	const { id: userId = '', name } = user || {};
 	const [
 		{ loading },

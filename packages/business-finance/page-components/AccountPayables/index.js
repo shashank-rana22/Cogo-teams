@@ -12,6 +12,7 @@ import Invoices from './Invoices';
 import styles from './styles.module.css';
 
 const ENTITY_CODE_LENGTH = 1;
+const FILTER_TABS = ['invoices', 'dashboard', 'advance-payment'];
 
 function AccountPayables() {
 	const { query, push } = useRouter();
@@ -27,8 +28,6 @@ function AccountPayables() {
 	const entityDataCount = entityData.length;
 
 	const entity = getDefaultEntityCode(partnerId);
-
-	const FILTER_TABS = ['invoices', 'dashboard', 'advance-payment'];
 
 	const handleTabChange = (v) => {
 		if (
@@ -46,7 +45,7 @@ function AccountPayables() {
 
 	const [activeEntity, setActiveEntity] = useState(entity);
 
-	const EntityOptions = (entityData || []).map((item) => {
+	const entityOptions = (entityData || []).map((item) => {
 		const {
 			business_name: companyName = '',
 			entity_code: entityCode = '',
@@ -72,7 +71,7 @@ function AccountPayables() {
 								value={activeEntity}
 								onChange={(entityVal) => setActiveEntity(entityVal)}
 								placeholder="Select Entity"
-								options={EntityOptions}
+								options={entityOptions}
 								size="sm"
 								style={{ width: '284px' }}
 								disabled={entityDataCount <= ENTITY_CODE_LENGTH}

@@ -6,6 +6,14 @@ import BankSelect from '..';
 
 import styles from './styles.module.css';
 
+const viewDocument = (url) => {
+	if (url) {
+		window.open(url, '_blank');
+	} else {
+		Toast.info('Document not found ');
+	}
+};
+
 function BankDetails({ itemData }) {
 	const newItem = itemData;
 	const [bankEdit, setBankEdit] = useState(false);
@@ -26,14 +34,6 @@ function BankDetails({ itemData }) {
 		bank_account_number = '',
 	} = bankDetail || {};
 
-	const viewDocument = (url) => {
-		if (url) {
-			window.open(url, '_blank');
-		} else {
-			Toast.info('Document not found ');
-		}
-	};
-
 	let renderComponent = null;
 
 	if (bankEdit) {
@@ -46,21 +46,21 @@ function BankDetails({ itemData }) {
 			/>
 		);
 	} else if (bankDetail) {
-		const BankName = bankName || bank_name;
-		const AccountNumber = accountNo || bank_account_number;
-		const IFSCode = ifscCode || ifsc_number;
+		const getBankName = bankName || bank_name;
+		const getAccountNumber = accountNo || bank_account_number;
+		const getIFSCCode = ifscCode || ifsc_number;
 		renderComponent = (
 			<div className={styles.flex}>
 				<div className={styles.font}>
-					<div className={styles.bold}>{BankName}</div>
+					<div className={styles.bold}>{getBankName}</div>
 					<div className={styles.flex}>
 						A/C No.
 						{' '}
-						{AccountNumber}
+						{getAccountNumber}
 					</div>
 
 					<div style={{ display: 'flex' }}>
-						<div>{IFSCode}</div>
+						<div>{getIFSCCode}</div>
 
 						<div role="presentation" className={styles.icon} onClick={() => viewDocument(imageUrl)}>
 							<IcMEyeopen className={styles.eye} />
@@ -95,10 +95,10 @@ function BankDetails({ itemData }) {
 		);
 	}
 
-	if (invoiceType !== 'CREDIT NOTE') {
-		return <div>{renderComponent}</div>;
+	if (invoiceType === 'CREDIT NOTE') {
+		return null;
 	}
-	return null;
+	return <div>{renderComponent}</div>;
 }
 
 export default BankDetails;

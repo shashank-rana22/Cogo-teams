@@ -15,8 +15,8 @@ function SavePayRunModal({
 	setSavePayrunModal,
 	setViewSelectedInvoice,
 }) {
-	const [viewSupplier, showViewSupplier] = useState();
 	const { push } = useRouter();
+	const [viewSupplier, showViewSupplier] = useState(null);
 	const handleCloseModal = () => {
 		setSavePayrunModal(false);
 	};

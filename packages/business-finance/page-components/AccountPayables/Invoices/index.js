@@ -30,6 +30,21 @@ const TABS = [
 
 const FIRST_PAGE = 1;
 
+const FUNCTIONS = {
+	renderToolTip: (itemData, field) => (
+		<RenderToolTip itemData={itemData} field={field} />
+	),
+	renderInvoiceDates: (itemData, field) => (
+		<RenderInvoiceDates itemData={itemData} field={field} />
+	),
+	renderUrgencyTag: (itemData, field) => (
+		<RenderUrgency itemData={itemData} field={field} />
+	),
+	renderAction: (itemData) => (
+		<RenderAction itemData={itemData} />
+	),
+};
+
 function Invoices({ activeEntity }) {
 	const { query } = useRouter();
 	const [activeTab, setActiveTab] = useState('all');
@@ -54,21 +69,6 @@ function Invoices({ activeEntity }) {
 
 	const handleVersionChange = () => {
 		window.location.href = `/${query.partner_id}/business-finance/account-payables/invoices`;
-	};
-
-	const FUNCTIONS = {
-		renderToolTip: (itemData, field) => (
-			<RenderToolTip itemData={itemData} field={field} />
-		),
-		renderInvoiceDates: (itemData, field) => (
-			<RenderInvoiceDates itemData={itemData} field={field} />
-		),
-		renderUrgencyTag: (itemData, field) => (
-			<RenderUrgency itemData={itemData} field={field} />
-		),
-		renderAction: (itemData) => (
-			<RenderAction itemData={itemData} />
-		),
 	};
 
 	return (

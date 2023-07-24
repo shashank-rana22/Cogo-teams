@@ -42,8 +42,8 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 	} = useGetPayrunInvoices({ apiData, setApiData });
 
 	const setEditedValue = (itemData, value, key, checked = false) => {
-		setApiData((p) => {
-			const newValue = { ...p };
+		setApiData((prevApiData) => {
+			const newValue = { ...prevApiData };
 			const index = newValue?.list?.findIndex(
 				(item) => item?.id === itemData?.id,
 			);
@@ -148,7 +148,11 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 							name="search"
 							size="sm"
 							value={filters?.search || ''}
-							onChange={(val) => setFilters((p) => ({ ...p, search: val, pageIndex: 1 }))}
+							onChange={(val) => setFilters((prevFilters) => ({
+								...prevFilters,
+								search    : val,
+								pageIndex : 1,
+							}))}
 							placeholder="Search By Name/Invoice Number/Sid"
 							suffix={(
 								<div style={{ margin: '4px', display: 'flex' }}>

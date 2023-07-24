@@ -22,6 +22,65 @@ const getFormattedAmount = ({ amount, currency }) => (
 	})
 );
 
+const getErrorMessage = ({
+	lessValueCrossed,
+	maxValueCrossed,
+	value,
+	currency,
+	invoiceAmount,
+	totalTds,
+}) => {
+	if (lessValueCrossed) {
+		return 'TDS cannot be less than 0';
+	} if (maxValueCrossed) {
+		return `${getFormattedAmount({
+			amount: value,
+			currency,
+		})} TDS cannot be greater than 10% of invoice amount : ${getFormattedAmount({
+			amount: invoiceAmount,
+			currency,
+		})}`;
+	}
+	return getFormattedAmount({ amount: totalTds, currency });
+};
+
+function Content({
+	isError,
+	lessValueCrossed,
+	maxValueCrossed,
+	value,
+	currency,
+	invoiceAmount,
+	totalTds,
+	tdsDeducted,
+}) {
+	return (
+		<div>
+			<div className={styles.flex}>
+				{!isError && <div className={styles.text}>Actual TDS:</div>}
+				<div className={`${styles.message} ${isError ? styles.errormessage : ''}`}>
+					{getErrorMessage({
+						lessValueCrossed,
+						maxValueCrossed,
+						value,
+						currency,
+						invoiceAmount,
+						totalTds,
+					})}
+				</div>
+			</div>
+			{!isError && (
+				<div className={styles.flex}>
+					<div className={styles.text}>Deducted TDS:</div>
+					<div className={`${styles.message} ${isError ? styles.errormessage : ''}`}>
+						{getFormattedAmount({ amount: tdsDeducted, currency })}
+					</div>
+				</div>
+			)}
+		</div>
+	);
+}
+
 function EditableTdsInput({ itemData, field, setEditedValue }) {
 	const newItem = itemData;
 	const { key, fallBackKey } = field;
@@ -38,39 +97,6 @@ function EditableTdsInput({ itemData, field, setEditedValue }) {
 	const maxValueCrossed = +value + +tdsDeducted > +checkAmount;
 	const lessValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
 	const isError = lessValueCrossed || maxValueCrossed;
-
-	let errorMessege = '';
-
-	if (lessValueCrossed) {
-		errorMessege = 'TDS cannot be less than 0';
-	} else if (maxValueCrossed) {
-		errorMessege = `${getFormattedAmount({
-			amount: value,
-			currency,
-		})} TDS cannot be greater than 10% of invoice amount : ${getFormattedAmount({
-			amount: invoiceAmount,
-			currency,
-		})}`;
-	} else {
-		errorMessege = getFormattedAmount({ amount: totalTds, currency });
-	}
-
-	const content = (
-		<div>
-			<div className={styles.flex}>
-				{!isError && <div className={styles.text}>Actual TDS:</div>}
-				<div className={`${styles.message} ${isError ? styles.errormessage : ''}`}>{errorMessege}</div>
-			</div>
-			{!isError && (
-				<div className={styles.flex}>
-					<div className={styles.text}>Deducted TDS:</div>
-					<div className={`${styles.message} ${isError ? styles.errormessage : ''}`}>
-						{getFormattedAmount({ amount: tdsDeducted, currency })}
-					</div>
-				</div>
-			)}
-		</div>
-	);
 
 	const handleUndo = () => {
 		setEditedValue(newItem, newItem[fallBackKey], key, false);
@@ -90,7 +116,19 @@ function EditableTdsInput({ itemData, field, setEditedValue }) {
 				placeholder="Amount"
 				type="number"
 			/>
-			<Tooltip content={content}>
+			<Tooltip content={(
+				<Content
+					isError={isError}
+					lessValueCrossed={lessValueCrossed}
+					maxValueCrossed={maxValueCrossed}
+					value={value}
+					currency={currency}
+					invoiceAmount={invoiceAmount}
+					totalTds={totalTds}
+					tdsDeducted={tdsDeducted}
+				/>
+			)}
+			>
 				<IcMInformation
 					height={14}
 					width={14}

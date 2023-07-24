@@ -7,11 +7,11 @@ import toastApiError from '../../../commons/toastApiError.ts';
 const useGetPayrunId = ({ activeEntity, currency, setShowPayrunModal }) => {
 	const { push } = useRouter();
 	const {
-		user_data: UserData,
+		user_data: userData,
 	} = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user, session_type: sessionType } = UserData;
+	const { user, session_type: sessionType } = userData;
 	const { id: userId = '', name } = user || {};
 	const [
 		{ data, loading },

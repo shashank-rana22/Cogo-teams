@@ -9,14 +9,14 @@ import styles from './styles.module.css';
 const ELEMENT_NOT_FOUND = -1;
 
 const useDeleteExcludePayrun = ({ refetch = () => { }, setApiData, apiData }) => {
-	const { user_data: UserData, query: urlQuery } = useSelector(({ profile, general }) => ({
+	const { user_data: userData, query: urlQuery } = useSelector(({ profile, general }) => ({
 		user_data: profile || {}, query: general.query,
 	}));
 
 	const {
 		payrun,
 	} = urlQuery || {};
-	const { user, session_type: sessionType } = UserData;
+	const { user, session_type: sessionType } = userData;
 	const { id: userId = '', name } = user || {};
 	const [
 		{ loading },
