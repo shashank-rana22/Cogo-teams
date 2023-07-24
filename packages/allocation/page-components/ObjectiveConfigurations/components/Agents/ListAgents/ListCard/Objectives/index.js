@@ -3,9 +3,9 @@ import { InputController } from '@cogoport/forms';
 import { IcMTick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import ObjectiveDetailsCard from '../../../../../common/ObjectiveDetailsCard';
 import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../configurations/objective-status-color-mapping';
 
+import ObjectiveDetails from './ObjectiveDetails';
 import styles from './styles.module.css';
 
 function Objectives(props) {
@@ -65,7 +65,7 @@ function Objectives(props) {
 						</div>
 					)}
 				>
-					<ObjectiveDetailsCard activeObjectiveId={objective.id} />
+					<ObjectiveDetails activeObjectiveId={objective.id} />
 				</Accordion>
 			))}
 		</>

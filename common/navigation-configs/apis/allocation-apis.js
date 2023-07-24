@@ -460,17 +460,22 @@ const allocation = {
 	],
 	objective_configurations: [
 		{
-			api          : 'post_allocation_objective_attributes',
-			access_type  : 'private',
-			service_name : 'allocation',
-		},
-		{
 			api          : 'get_allocation_objectives',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
 		{
+			api          : 'get_allocation_objective_details',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
 			api          : 'get_allocation_objective_user_mappings',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_objective_attributes',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},

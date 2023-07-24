@@ -7,7 +7,7 @@ import useGetObjectiveDetails from '../../../../../../hooks/useGetObjectiveDetai
 
 import styles from './styles.module.css';
 
-function ListChildCard(props) {
+function ObjectiveDetails(props) {
 	const { activeObjectiveId } = props;
 
 	const { data, loading } = useGetObjectiveDetails({ activeObjectiveId });
@@ -25,4 +25,4 @@ function ListChildCard(props) {
 	return <ObjectiveDetailsCard objectiveData={data} />;
 }
 
-export default ListChildCard;
+export default ObjectiveDetails;
