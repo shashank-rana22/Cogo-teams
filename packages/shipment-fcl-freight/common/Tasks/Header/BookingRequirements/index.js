@@ -11,8 +11,10 @@ import styles from './styles.module.css';
 function BookingRequirements({ showBookingReq = false, setShowBookingReq = () => {} }) {
 	const { servicesList = [], primary_service = {}, bookingRequirementsList = {} } = useContext(ShipmentDetailContext);
 
-	let main_service = servicesList?.find((s) => s?.main_service_id === null);
-	main_service = { ...main_service, ...bookingRequirementsList };
+	const main_service = {
+		...servicesList?.find((s) => s?.main_service_id === null),
+		...bookingRequirementsList,
+	};
 
 	const bookingDeskDetails = serviceMapping?.booking_desk_details;
 	const multiServiceDetails = serviceMapping?.multi_service_details;
