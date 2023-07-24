@@ -124,8 +124,6 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
-	...managerDashboard,
-	...employeeDashboard,
 	...printingDesk,
 	...ftlAdmin,
 	...igmDesk,
