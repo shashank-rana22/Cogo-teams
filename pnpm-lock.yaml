@@ -84,6 +84,7 @@ importers:
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/ground-ops': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
+      '@cogoport/igm-desk': workspace:0.1.0
       '@cogoport/ihls': workspace:0.1.0
       '@cogoport/ingestion': workspace:0.1.0
       '@cogoport/kam-desk': workspace:0.1.0
@@ -174,6 +175,7 @@ importers:
       '@cogoport/globalization': link:../common/globalization
       '@cogoport/ground-ops': link:../packages/ground-ops
       '@cogoport/icons-react': 1.0.85_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/igm-desk': link:../packages/igm-desk
       '@cogoport/ihls': link:../packages/ihls
       '@cogoport/ingestion': link:../packages/ingestion
       '@cogoport/kam-desk': link:../packages/kam-desk
@@ -229,7 +231,7 @@ importers:
       react-redux: 8.1.1_clwdj742dood3wxkovrqay7cta
       typescript: 4.9.5
     devDependencies:
-      '@types/node': 18.16.20
+      '@types/node': 18.17.0
       '@types/react': 18.2.15
 
   common/air-modules:
@@ -987,10 +989,10 @@ importers:
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.432_iiqcy6nd2qcbytr4g6g5nqqeii
+      '@cogoport/components': 1.0.432_mt7xt2bhqvqycrxffswha2krau
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.85_react@18.2.0
+      '@cogoport/icons-react': 1.0.85_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
@@ -1045,11 +1047,11 @@ importers:
       stylelint: ^14.16.1
       uuid: ^9.0.0
     dependencies:
-      '@cogoport/charts': 1.0.3_sh5qlbywuemxd2y3xkrw2y2kr4
-      '@cogoport/components': 1.0.432_iiqcy6nd2qcbytr4g6g5nqqeii
+      '@cogoport/charts': 1.0.3_v2m5e27vhdewzwhryxwfaorcca
+      '@cogoport/components': 1.0.432_mt7xt2bhqvqycrxffswha2krau
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.85_react@18.2.0
+      '@cogoport/icons-react': 1.0.85_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
@@ -1298,6 +1300,28 @@ importers:
       jspdf: 2.5.1
       react: 18.2.0
       uuid: 9.0.0
+
+  packages/igm-desk:
+    specifiers:
+      '@cogoport/components': ^1.0.390
+      '@cogoport/core': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.61
+      '@cogoport/next': workspace:^0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.432_mt7xt2bhqvqycrxffswha2krau
+      '@cogoport/core': link:../../common/core
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.85_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
 
   packages/ihls:
     specifiers:
@@ -4852,7 +4876,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.8
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
     dev: false
 
   /@grpc/grpc-js/1.8.18:
@@ -4860,7 +4884,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.8
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
     dev: false
     optional: true
 
@@ -6647,13 +6671,13 @@ packages:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
     dev: false
 
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
     dev: false
 
   /@types/cookie/0.4.1:
@@ -6678,7 +6702,7 @@ packages:
   /@types/express-serve-static-core/4.17.35:
     resolution: {integrity: sha512-wALWQwrgiB2AWTT91CB62b6Yt0sNHpznUXeZEcnPU3DRdlDIz74x8Qg1UUYKSVFi+va5vKOLYRBI1bRKiLLKIg==}
     dependencies:
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
       '@types/send': 0.17.1
@@ -6701,7 +6725,7 @@ packages:
     resolution: {integrity: sha512-IO+MJPVhoqz+28h1qLAcBEH2+xHMK6MTyHJc7MTnnYb6wsoLR29POVGJ7LycmVXIqyy/4/2ShP5sUwTXuOwb/w==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
     dev: false
     optional: true
 
@@ -6727,7 +6751,7 @@ packages:
   /@types/jsonwebtoken/9.0.2:
     resolution: {integrity: sha512-drE6uz7QBKq1fYqqoFKTDRdFCPHd5TCub75BM+D+cMx7NU9hUz7SESLfC2fSCXVFMO5Yj8sOWHuGqPgjc+fz0Q==}
     dependencies:
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
     dev: false
 
   /@types/linkify-it/3.0.2:
@@ -6772,12 +6796,12 @@ packages:
     resolution: {integrity: sha512-8q9ZexmdYYyc5/cfujaXb4YOucpQxAV4RMG0himLyDUOEr8Mr79VrqsFI+cQ2M2h89YIuy95lbxuYjxT4Hk4kQ==}
     dev: false
 
-  /@types/node/18.16.20:
-    resolution: {integrity: sha512-nL54VfDjThdP2UXJXZao5wp76CDiDw4zSRO8d4Tk7UgDqNKGKVEQB0/t3ti63NS+YNNkIQDvwEAF04BO+WYu7Q==}
+  /@types/node/18.17.0:
+    resolution: {integrity: sha512-GXZxEtOxYGFchyUzxvKI14iff9KZ2DI+A6a37o6EQevtg6uO9t+aUZKcaC1Te5Ng1OnLM7K9NVVj+FbecD9cJg==}
     dev: true
 
-  /@types/node/20.4.3:
-    resolution: {integrity: sha512-Yu3+r4Mn/iY6Mf0aihncZQ1qOjOUrCiodbHHY1hds5O+7BbKp9t+Li7zLO13zO8j9L2C6euz8xsYQP0rjGvVXw==}
+  /@types/node/20.4.4:
+    resolution: {integrity: sha512-CukZhumInROvLq3+b5gLev+vgpsIqC2D0deQr/yS1WnxvmYLlJXZpaQrQiseMY+6xusl79E04UjWoqyr+t1/Ew==}
     dev: false
 
   /@types/normalize-package-data/2.4.1:
@@ -6833,7 +6857,7 @@ packages:
     resolution: {integrity: sha512-F3OznnSLAUxFrCEu/L5PY8+ny8DtcFRjx7fZZ9bycvXRi3KPTRS9HOitGZwvPg0juRhXFWIeKX58cnX5YqLohQ==}
     dependencies:
       '@types/glob': 8.1.0
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
     dev: false
     optional: true
 
@@ -6848,7 +6872,7 @@ packages:
     resolution: {integrity: sha512-Cwo8LE/0rnvX7kIIa3QHCkcuF21c05Ayb0ZfxPiv0W8VRiZiNW/WuRupHKpqqGVGf7SUA44QSOUKaEd9lIrd/Q==}
     dependencies:
       '@types/mime': 1.3.2
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
     dev: false
 
   /@types/serve-static/1.15.2:
@@ -6856,7 +6880,7 @@ packages:
     dependencies:
       '@types/http-errors': 2.0.1
       '@types/mime': 3.0.1
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
     dev: false
 
   /@types/use-sync-external-store/0.0.3:
@@ -8852,7 +8876,7 @@ packages:
       '@fastify/busboy': 1.2.1
       '@firebase/database-compat': 0.3.4
       '@firebase/database-types': 0.10.4
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
       jsonwebtoken: 9.0.1
       jwks-rsa: 3.0.1
       node-forge: 1.3.1
@@ -10601,7 +10625,7 @@ packages:
       levn: 0.3.0
       prelude-ls: 1.1.2
       type-check: 0.3.2
-      word-wrap: 1.2.4
+      word-wrap: 1.2.5
     dev: false
     optional: true
 
@@ -11205,7 +11229,7 @@ packages:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
       '@types/long': 4.0.2
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
       long: 4.0.0
     dev: false
 
@@ -11224,7 +11248,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.4.3
+      '@types/node': 20.4.4
       long: 5.2.3
     dev: false
 
@@ -12830,8 +12854,8 @@ packages:
     dependencies:
       isexe: 2.0.0
 
-  /word-wrap/1.2.4:
-    resolution: {integrity: sha512-2V81OA4ugVo5pRo46hAoD2ivUJx8jXmWXfUkY4KFNw0hEptvN0QfH3K4nHiwzGeKl5rFKedV48QVoqYavy4YpA==}
+  /word-wrap/1.2.5:
+    resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
     dev: false
     optional: true
