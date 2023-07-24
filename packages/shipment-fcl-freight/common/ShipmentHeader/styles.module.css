@@ -6,6 +6,10 @@
 	background-color: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+
+	&.igm_desk {
+		width: 100%;
+	}
 }
 
 .po_number {
@@ -19,6 +23,10 @@
 	width: 18%;
 	padding-right: 20px 4px;
 	border-right: 1px solid var(--color-secondary-greyscale-5);
+
+	&.igm_desk {
+		width: 25%;
+	}
 }
 
 .port_details {
@@ -31,7 +39,7 @@
 
 .business_name {
 	width: fit-content;
-	max-width: 100px;
+	max-width: 210px;
 	overflow: hidden;
 	font-size: var(--font-size-md);
 	text-overflow: ellipsis;
@@ -58,11 +66,6 @@
 	font-size: var(--font-size-md);
 	color: var(--color-primary-error-red-2);
 	text-decoration: underline;
-	cursor: pointer;
-
-	:hover {
-		box-shadow: 0 0 8px rgb(0 0 0 / 20%);
-	}
 }
 
 .three_dot_icon {
@@ -75,4 +78,29 @@
 .cancel_button {
 	font-size: var(--font-size-md);
 	cursor: pointer;
+}
+
+.cfs_details {
+	margin-left: 5px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-1);
+	white-space: break-spaces;
+}
+
+.heading {
+	display: flex;
+	align-items: flex-start;
+	margin: 16px;
+	font-size: var(--font-size-md);
+	font-weight: 400;
+	color: var(--color-secondary-greyscale-3);
+
+	& > span {
+		white-space: nowrap;
+	}
+
+	& > svg {
+		cursor: pointer;
+	}
 }
