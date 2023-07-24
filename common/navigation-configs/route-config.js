@@ -31,6 +31,7 @@ import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import liabilityDashboard from './config/liability-dashboard';
 import locations from './config/location';
+import managerDashboard from './config/manager-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
@@ -125,6 +126,7 @@ const routeConfig = {
 	...liabilityDashboard,
 	...rfqDashboard,
 	...employeeDashboard,
+	...managerDashboard,
 	...printingDesk,
 	...ftlAdmin,
 	...airlinePluginBooking,
