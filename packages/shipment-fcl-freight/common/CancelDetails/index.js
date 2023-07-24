@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 export default function CancelDetails() {
 	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { cancellation_reason = '', cancellation_subreason = '' } = shipment_data || {};
 
 	return (
 		<div className={styles.container}>
@@ -16,13 +17,15 @@ export default function CancelDetails() {
 				<h2>This shipment has been cancelled.</h2>
 
 				<h3>
-					Reason:&nbsp;
-					{startCase(shipment_data?.cancellation_reason || '')}
+					Reason:
+					{' '}
+					{startCase(cancellation_reason)}
 				</h3>
 
 				<p>
-					Remarks:&nbsp;
-					{shipment_data?.cancellation_subreason || ''}
+					Remarks:
+					{' '}
+					{cancellation_subreason}
 				</p>
 			</div>
 		</div>
