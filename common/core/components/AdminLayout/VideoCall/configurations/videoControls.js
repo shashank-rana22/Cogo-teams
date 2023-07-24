@@ -1,9 +1,7 @@
 import {
 	IcMMicrophone,
 	IcMScreenShare,
-	IcMVideoCall,
 	IcMStopShare,
-	IcMVideoCallMute,
 	IcMMicrophoneMute,
 } from '@cogoport/icons-react';
 
@@ -12,8 +10,6 @@ const getVideoControls = ({
 	isScreenShareActive = false,
 	toggleMic = () => {},
 	isMicActive = false,
-	toggleVideo = () => {},
-	isVideoActive = false,
 }) => [
 	{
 		name            : 'screen_share',
@@ -32,15 +28,6 @@ const getVideoControls = ({
 		InactiveIcon    : IcMMicrophoneMute,
 		activeContet    : 'Mute',
 		inActiveContent : 'Unmute',
-	},
-	{
-		name            : 'video_on',
-		clickFunc       : toggleVideo,
-		isActive        : isVideoActive,
-		ActiveIcon      : IcMVideoCall,
-		InactiveIcon    : IcMVideoCallMute,
-		activeContet    : 'Turn off Camera',
-		inActiveContent : 'Turn on camera',
 	},
 ];
 

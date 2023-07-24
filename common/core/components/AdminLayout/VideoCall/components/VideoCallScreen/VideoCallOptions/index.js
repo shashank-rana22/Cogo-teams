@@ -33,11 +33,10 @@ function VideoCallOptions({
 	options = {},
 	setOptions = () => {},
 	toggleMic = () => {},
-	toggleVideo = () => {},
 	callingDetails = {},
 	type = '',
 }) {
-	const { isScreenShareActive = false, isMicActive = false, isVideoActive = false } = options || {};
+	const { isScreenShareActive = false, isMicActive = false } = options || {};
 	const { request_screen_share = false } = callingDetails || {};
 
 	const handleRequestScreenShare = ({ e, clickType }) => {
@@ -56,8 +55,6 @@ function VideoCallOptions({
 		isScreenShareActive,
 		toggleMic,
 		isMicActive,
-		toggleVideo,
-		isVideoActive,
 	});
 
 	useEffect(() => {

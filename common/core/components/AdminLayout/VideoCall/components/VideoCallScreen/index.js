@@ -44,7 +44,7 @@ function VideoCallScreen({
 		return myDetails?.user_name || roomMyDetails?.user_name || 'Unknown user';
 	};
 
-	const { stopCall, shareScreen, toggleMic, toggleVideo } = useVideocallOptions({
+	const { stopCall, shareScreen, toggleMic } = useVideocallOptions({
 		options,
 		setOptions,
 		streams,
@@ -79,7 +79,6 @@ function VideoCallScreen({
 						options={options}
 						setOptions={setOptions}
 						toggleMic={toggleMic}
-						toggleVideo={toggleVideo}
 						callingDetails={calling_details}
 						type="mini_screen"
 					/>
@@ -105,9 +104,7 @@ function VideoCallScreen({
 						? styles.peer_video_stream : styles.hide_container}
 					>
 						<video
-							ref={(e) => {
-								tempRef.current = e;
-							}}
+							ref={tempRef}
 							autoPlay
 						/>
 					</div>
@@ -133,7 +130,6 @@ function VideoCallScreen({
 							options={options}
 							setOptions={setOptions}
 							toggleMic={toggleMic}
-							toggleVideo={toggleVideo}
 							callingDetails={calling_details}
 						/>
 					</div>

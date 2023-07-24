@@ -5,7 +5,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 
 import IncomingCall from './components/IncomingCall';
 import VideoCallScreen from './components/VideoCallScreen';
-import { firebaseConfig } from './configurations/firebase-config';
+import { FIREBASE_CONFIG } from './configurations/firebase-config';
 import { CALL_RING_TIME_LIMIT } from './constants';
 import useComingCall from './hooks/useComingCall';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
@@ -15,7 +15,7 @@ function VideoCall({
 	videoCallRecipientData = {},
 	inVideoCall = false,
 }) {
-	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
+	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
 
 	const [callComing, setCallComing] = useState(false);
