@@ -22,11 +22,13 @@ export default function CancelDetails() {
 					{startCase(cancellation_reason)}
 				</h3>
 
-				<p>
-					Remarks:
-					{' '}
-					{cancellation_subreason}
-				</p>
+				{cancellation_subreason ? (
+					<p>
+						Remarks:
+						{' '}
+						{cancellation_subreason}
+					</p>
+				) : null}
 			</div>
 		</div>
 	);
