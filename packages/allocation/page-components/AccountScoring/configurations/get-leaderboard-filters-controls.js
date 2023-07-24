@@ -60,7 +60,8 @@ const controls = [
 		valueKey    : 'user_id',
 		params      : {
 			filters: {
-				partner_entity_types: ['cogoport'],
+				partner_entity_types : ['cogoport'],
+				status               : 'active',
 			},
 		},
 		multiple    : true,
