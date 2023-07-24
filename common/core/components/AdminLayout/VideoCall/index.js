@@ -15,18 +15,21 @@ function VideoCall({
 	videoCallRecipientData = {},
 	inVideoCall = false,
 }) {
+	const streamRef = useRef(null);
+	const peerRef = useRef(null);
+
 	const [callComing, setCallComing] = useState(false);
 	const [webrtcToken, setWebrtcToken] = useState({
-		userToken : null,
-		peerToken : null,
+		userToken : {},
+		peerToken : {},
 	});
 	const [callDetails, setCallDetails] = useState({
-		myDetails          : null,
-		peerDetails        : null,
-		callingRoomDetails : null,
-		callingRoomId      : null,
-		webrtcTokenRoomId  : null,
-		callingType        : null,
+		myDetails          : {},
+		peerDetails        : {},
+		callingRoomDetails : {},
+		callingRoomId      : '',
+		webrtcTokenRoomId  : '',
+		callingType        : '',
 	});
 	const [streams, setStreams] = useState({
 		userStream : null,
@@ -38,9 +41,6 @@ function VideoCall({
 		isScreenShareActive : false,
 		isMinimize          : false,
 	});
-
-	const streamRef = useRef(null);
-	const peerRef = useRef(null);
 
 	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);

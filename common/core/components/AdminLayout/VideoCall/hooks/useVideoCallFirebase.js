@@ -1,14 +1,9 @@
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
-import {
-	doc,
-	onSnapshot,
-} from 'firebase/firestore';
 import { useEffect, useCallback, useRef } from 'react';
 import Peer from 'simple-peer';
 
-import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { ICESERVER } from '../constants';
+import { updateCallDetails } from '../helpers/snapshortHelpers';
 import { callUpdate, saveCallingData, saveWebrtcToken, stopStream } from '../utils/callFunctions';
 
 import { useSetInACall } from './useSetInACall';
@@ -27,9 +22,11 @@ function useVideoCallFirebase({
 		user_data: state.profile.user,
 	}));
 
+	const { saveInACallStatus } = useSetInACall();
+
 	const newRoomRef = useRef(null);
 
-	const { saveInACallStatus } = useSetInACall();
+	const { callingRoomId = '' } = callDetails || {};
 
 	const { id: userId, name: userName } = user_data || {};
 
@@ -44,17 +41,17 @@ function useVideoCallFirebase({
 		localPeerRef.current = null;
 
 		setCallDetails({
-			myDetails          : null,
-			peerDetails        : null,
-			callingRoomDetails : null,
-			callingRoomId      : null,
-			webrtcTokenRoomId  : null,
-			callingType        : null,
+			myDetails          : {},
+			peerDetails        : {},
+			callingRoomDetails : {},
+			callingRoomId      : '',
+			webrtcTokenRoomId  : '',
+			callingType        : '',
 		});
 
 		setWebrtcToken({
-			userToken : null,
-			peerToken : null,
+			userToken : {},
+			peerToken : {},
 		});
 
 		setToggleState({
@@ -106,16 +103,16 @@ function useVideoCallFirebase({
 						peer_id              : peerDetails?.user_id,
 						webrtc_token_room_id : userId,
 					},
-					callBackFunc: (callingRoomId) => {
+					callBackFunc: (getCallingRoomId) => {
 						saveWebrtcToken({
-							data : { user_token: data },
-							callingRoomId,
-							path : userId,
+							data          : { user_token: data },
+							callingRoomId : getCallingRoomId,
+							path          : userId,
 							firestore,
 						});
 						setCallDetails((prev) => ({
 							...prev,
-							callingRoomId,
+							callingRoomId: getCallingRoomId,
 						}));
 					},
 					firestore,
@@ -133,7 +130,7 @@ function useVideoCallFirebase({
 						call_status   : 'technical_error',
 						error_message : 'peer js technical error',
 					},
-					callingRoomId: callDetails?.callingRoomId,
+					callingRoomId,
 					firestore,
 				});
 			});
@@ -144,17 +141,17 @@ function useVideoCallFirebase({
 					call_status   : 'technical_error',
 					error_message : 'peer video audio is not working',
 				},
-				callingRoomId: callDetails?.callingRoomId,
+				callingRoomId,
 				firestore,
 			});
 			callEnd();
 		}
-	}, [callDetails?.callingRoomId, callEnd, firestore,
+	}, [callingRoomId, callEnd, firestore,
 		peerRef, saveInACallStatus, setCallDetails, setStreams, userId, userName]);
 
 	const callingTo = useCallback(
 		(peerDetails = {}) => {
-			if (isEmpty(peerDetails?.user_id)) {
+			if (!peerDetails?.user_id) {
 				return;
 			}
 
@@ -168,7 +165,7 @@ function useVideoCallFirebase({
 					user_type : 'admin',
 				},
 				peerDetails,
-				peerId            : peerDetails?.user_id,
+				peerId            : peerDetails.user_id,
 				webrtcTokenRoomId : userId,
 				callingType       : 'outgoing',
 			}));
@@ -177,33 +174,17 @@ function useVideoCallFirebase({
 		[setCallDetails, callingToMediaStream, userName, userId],
 	);
 
-	const updateCallDetails = useCallback(() => {
-		newRoomRef?.current?.();
-
-		if (callDetails?.callingRoomId) {
-			const videoCallDocRef = doc(
-				firestore,
-				FIRESTORE_PATH.video_calls,
-				callDetails?.callingRoomId,
-			);
-			newRoomRef.current = onSnapshot(videoCallDocRef, (roomDocument) => {
-				const roomData = roomDocument.data();
-				setCallDetails((prev) => ({
-					...prev,
-					callingRoomDetails : roomData,
-					webrtcTokenRoomId  : roomData?.webrtc_token_room_id,
-				}));
-			});
-		}
-	}, [callDetails?.callingRoomId, firestore, setCallDetails]);
-
 	useEffect(() => {
-		updateCallDetails();
+		const unsubscribe = newRoomRef?.current;
+
+		updateCallDetails({
+			newRoomRef, callingRoomId, firestore, setCallDetails,
+		});
 
 		return () => {
-			newRoomRef?.current?.();
+			unsubscribe?.();
 		};
-	}, [updateCallDetails]);
+	}, [callingRoomId, firestore, setCallDetails]);
 
 	return {
 		callingTo,

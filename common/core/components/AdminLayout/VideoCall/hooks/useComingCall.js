@@ -1,16 +1,14 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { collection, doc, getDoc, limit, onSnapshot, query, where } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useCallback, useRef } from 'react';
 import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import { getCallingRoomData, getTokenData } from '../helpers/snapshortHelpers';
 import { callUpdate, saveWebrtcToken } from '../utils/callFunctions';
 
 import { useSetInACall } from './useSetInACall';
-
-const ONE = 1;
 
 function useComingCall({
 	firestore,
@@ -63,7 +61,7 @@ function useComingCall({
 			const localPeerRef = peerRef;
 			localPeerRef.current = peer;
 
-			if (webrtcToken.userToken) {
+			if (!isEmpty(webrtcToken.userToken)) {
 				peer.signal(webrtcToken.userToken);
 			}
 
@@ -136,70 +134,31 @@ function useComingCall({
 		setCallComing(false);
 	}, [callingRoomId, firestore, setCallComing]);
 
-	const getCallingRoomData = useCallback(() => {
-		callComingSnapshotRef?.current?.();
-
-		const videoCallRef = collection(firestore, FIRESTORE_PATH.video_calls);
-		const videoCallComingQuery = query(
-			videoCallRef,
-			where('call_status', '==', 'calling'),
-			where('calling_by', '==', 'user'),
-			where('peer_id', '==', userId),
-			limit(ONE),
-		);
-
-		callComingSnapshotRef.current = onSnapshot(videoCallComingQuery, (querySnapshot) => {
-			const callingRoom = querySnapshot?.docs?.[GLOBAL_CONSTANTS.zeroth_index];
-
-			if (!isEmpty(callingRoom) && !inVideoCall && !callingRoomId) {
-				setCallDetails((prev) => ({
-					...prev,
-					peer_details       : callingRoom?.peer_details,
-					callingRoomDetails : callingRoom,
-					callingRoomId      : callingRoom?.id,
-					callingType        : 'incoming',
-					webrtcTokenRoomId  : callingRoom?.webrtc_token_room_id,
-				}));
-				setCallComing(true);
-			}
+	useEffect(() => {
+		const loaclcalComingSnapshotRef = callComingSnapshotRef;
+		getCallingRoomData({
+			callingRoomId,
+			firestore,
+			inVideoCall,
+			setCallComing,
+			setCallDetails,
+			userId,
+			callComingSnapshotRef,
 		});
+
+		return () => {
+			loaclcalComingSnapshotRef?.current?.();
+		};
 	}, [callingRoomId, firestore, inVideoCall, setCallComing, setCallDetails, userId]);
 
-	const getTokenData = useCallback(() => {
-		tokenSnapshotRef?.current?.();
-
-		if (webrtcTokenRoomId && callingRoomId) {
-			const tokenDocRef = doc(
-				firestore,
-				`${FIRESTORE_PATH.video_calls}/${callingRoomId}/${FIRESTORE_PATH.webrtc_token}`,
-				webrtcTokenRoomId,
-			);
-			tokenSnapshotRef.current = onSnapshot(tokenDocRef, (docp) => {
-				const roomData = docp.data();
-				setWebrtcToken((prev) => ({
-					...prev,
-					peerToken : roomData?.peer_token,
-					userToken : roomData?.user_token,
-				}));
-			});
-		}
-	}, [webrtcTokenRoomId, callingRoomId, firestore, setWebrtcToken]);
-
 	useEffect(() => {
-		getCallingRoomData();
+		const loaclTokenSnapshotRef = tokenSnapshotRef;
+		getTokenData({ webrtcTokenRoomId, callingRoomId, firestore, setWebrtcToken, tokenSnapshotRef });
 
 		return () => {
-			callComingSnapshotRef?.current?.();
+			loaclTokenSnapshotRef?.current?.();
 		};
-	}, [getCallingRoomData]);
-
-	useEffect(() => {
-		getTokenData();
-
-		return () => {
-			tokenSnapshotRef?.current?.();
-		};
-	}, [getTokenData]);
+	}, [callingRoomId, firestore, setWebrtcToken, webrtcTokenRoomId]);
 
 	useEffect(() => {
 		const room_data = callDetails?.callingRoomDetails;
