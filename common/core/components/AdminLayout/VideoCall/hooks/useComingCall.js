@@ -10,7 +10,7 @@ import { callUpdate, saveWebrtcToken } from '../utils/callFunctions';
 
 import { useSetInACall } from './useSetInACall';
 
-const NOT_CALLING_CALL_STATUS = ['rejected', 'end_call', 'miss_call', 'technical_error'];
+const NOT_CALLING_CALL_STATUS = ['rejected', 'end_call', 'miss_call', 'technical_error', 'accepted'];
 const STOP_CALL_STATUS = ['rejected', 'end_call', 'technical_error'];
 
 function useComingCall({
