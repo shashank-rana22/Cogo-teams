@@ -3,11 +3,11 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import { getIsActive, updateCogooneConstants } from '../../../helpers/configurationHelpers';
-import { formatAgentList } from '../../../helpers/groupAgentsHelpers';
-import useGetOmnichannelAgentTypes from '../../../hooks/useGetOmnichannelAgentTypes';
-import useListChatAgents from '../../../hooks/useListChatAgents';
-import useUpdateAgentPreference from '../../../hooks/useUpdateAgentPreference';
+import { getIsActive, updateCogooneConstants } from '../../../../../helpers/configurationHelpers';
+import { formatAgentList } from '../../../../../helpers/groupAgentsHelpers';
+import useGetOmnichannelAgentTypes from '../../../../../hooks/useGetOmnichannelAgentTypes';
+import useListChatAgents from '../../../../../hooks/useListChatAgents';
+import useUpdateAgentPreference from '../../../../../hooks/useUpdateAgentPreference';
 
 import GroupedAgents from './GroupedAgents';
 import styles from './styles.module.css';
