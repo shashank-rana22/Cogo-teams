@@ -1,6 +1,18 @@
+import checkClearanceDate from '../utils/checkClearanceDate';
 import checkValidation from '../utils/checkValidation';
 
-const awbControls = [
+const COMMODITY_TYPE_OPTIONS = {
+	general: [
+		{ label: 'All', value: 'all' },
+	],
+	special_consideration: [
+		{ label: 'Dangerous Goods', value: 'dangerous' },
+		{ label: 'Temperature Controlled/Pharma', value: 'temp_controlled' },
+		{ label: 'Other Special Commodity Sub Type', value: 'other_special' },
+	],
+};
+
+const awbControls = ({ commodity, booking_date }) => [
 	{
 		name        : 'serviceProviderId',
 		type        : 'async-select',
@@ -69,9 +81,20 @@ const awbControls = [
 		options     : [
 			{ label: 'General', value: 'general' },
 			{ label: 'Special Consideration', value: 'special_consideration' },
-
 		],
 		rules: {
+			required: true,
+		},
+		isClearable: true,
+	},
+	{
+		name        : 'commodity_type',
+		type        : 'select',
+		label       : 'Commodity Type',
+		placeholder : 'Select Commodity Type',
+		span        : 6,
+		options     : COMMODITY_TYPE_OPTIONS[commodity],
+		rules       : {
 			required: true,
 		},
 		isClearable: true,
@@ -107,7 +130,6 @@ const awbControls = [
 		label                 : 'Booking Date',
 		placeholder           : 'Select Date',
 		isPreviousDaysAllowed : true,
-		value                 : new Date(),
 		span                  : 6,
 		rules                 : {
 			required: true,
@@ -119,10 +141,10 @@ const awbControls = [
 		label                 : 'Custom Clearance Date',
 		placeholder           : 'Select Date',
 		isPreviousDaysAllowed : true,
-		value                 : new Date(),
 		span                  : 6,
 		rules                 : {
-			required: true,
+			required : true,
+			validate : (value) => checkClearanceDate({ value, booking_date }),
 		},
 	},
 	{

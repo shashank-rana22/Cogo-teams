@@ -13,10 +13,15 @@ function EditAwbNumber({
 	editAwbNumber = () => {},
 	loading = false,
 }) {
-	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
+	const { control, handleSubmit, watch, setValue, formState:{ errors } } = useForm();
+
+	const formValues = watch();
+	const { commodity, booking_date } = formValues;
+
+	const mutatedControls = awbControls({ commodity, booking_date });
 
 	useEffect(() => {
-		awbControls.forEach((controlFields) => {
+		mutatedControls.forEach((controlFields) => {
 			setValue(controlFields.name, item[controlFields.name] || controlFields?.value);
 		});
 		setValue('procured_date', item?.procured_date ? new Date(item?.procured_date) : new Date());
@@ -27,7 +32,7 @@ function EditAwbNumber({
 		<div className={styles.addawb_container}>
 			<div className={styles.modal_header}>EDIT AWB NUMBER</div>
 			<Layout
-				fields={awbControls}
+				fields={mutatedControls}
 				control={control}
 				errors={errors}
 			/>

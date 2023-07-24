@@ -31,7 +31,7 @@ const useEditAwbNumber = ({
 	});
 
 	const editAwbNumber = async (finalData) => {
-		const { commodity = '', ...rest } = finalData || {};
+		const { commodity = '', commodity_type = '', ...rest } = finalData || {};
 
 		const payload = {
 			id,
@@ -39,6 +39,7 @@ const useEditAwbNumber = ({
 			status            : status !== changedStatus ? changedStatus : undefined,
 			commodity_details : {
 				commodity,
+				commodity_type,
 			},
 		};
 		try {
