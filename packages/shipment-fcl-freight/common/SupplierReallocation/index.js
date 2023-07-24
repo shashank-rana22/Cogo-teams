@@ -40,6 +40,7 @@ function SupplierReallocation({
 	const serviceObj = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { defaultValues, controls, showAllControls } = getControls({
+		primary_service,
 		serviceObj,
 		shipment_type,
 		documents,
