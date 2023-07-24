@@ -2,7 +2,7 @@ import { Modal, Button, RatingComponent, Textarea } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import useCreateCustomerFeedback from '../../../hooks/useCreateCustomerFeedback';
+import useCreateCustomerFeedback from '../../../../hooks/useCreateCustomerFeedback';
 
 import styles from './styles.module.css';
 

@@ -23,6 +23,7 @@ import faq from './faq-apis';
 import feedback from './feedback-apis';
 import ff_cost_booking from './ff-cost-booking-apis';
 import hrms from './hrms-apis';
+import igm_desk from './igm-desk-apis';
 import ingestion from './ingestion-apis';
 import cargo_insurance from './insurance-apis';
 import kam_desk from './kam-desk-apis';
@@ -46,6 +47,7 @@ import saas from './saas';
 import saas_subscription from './saas-subscription';
 import saas_tools from './saas-tools';
 import sales_invoice from './sales-invoice-apis';
+import schedules from './schedules-apis';
 import search from './search-apis';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
@@ -53,32 +55,30 @@ import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
 import tools from './tools';
 import vendor_rm_apis from './vendor_rm_apis';
-import schedules from "./schedules-apis";
-
 
 const apis = {
-    search: search.map((api) => ({
-        ...api,
-        module: "search",
-    })),
-    shipment: shipment.map((api) => ({
-        module: "shipment",
-        feature: "shipment",
-        ...api,
-    })),
-    sop: sop.map((api) => ({
-        ...api,
-        module: "demand_crm",
-    })),
-    vendor_rm_apis: vendor_rm_apis.map((api) => ({
-        ...api,
-        module: "vendor_rm",
-    })),
-    revenue_desk: revenue_desk_apis.map((api) => ({
-        ...api,
-        module: "shipment",
-        feature: "revenue_desk",
-    })),
+	search: search.map((api) => ({
+		...api,
+		module: 'search',
+	})),
+	shipment: shipment.map((api) => ({
+		module  : 'shipment',
+		feature : 'shipment',
+		...api,
+	})),
+	sop: sop.map((api) => ({
+		...api,
+		module: 'demand_crm',
+	})),
+	vendor_rm_apis: vendor_rm_apis.map((api) => ({
+		...api,
+		module: 'vendor_rm',
+	})),
+	revenue_desk: revenue_desk_apis.map((api) => ({
+		...api,
+		module  : 'shipment',
+		feature : 'revenue_desk',
+	})),
 
 	enquiry_supply: enquiry_supply.map((api) => ({
 		...api,
@@ -153,7 +153,8 @@ const apis = {
 	...saas_subscription,
 	...chakravyuh,
 	risk_management,
-    ...schedules
+	...schedules,
+	igm_desk,
 };
 
 export default apis;

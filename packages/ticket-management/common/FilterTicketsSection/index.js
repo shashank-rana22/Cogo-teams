@@ -12,7 +12,7 @@ function FilterTicketsSection({ type = '', setRefreshList =	() => {}, refreshLis
 	const { query: { ticket_id } } = useRouter();
 
 	const [showReassign, setShowReassign] = useState(false);
-	const [searchParams, setSearchParams] = useState({ text: '', spectatorType: '', agent: '', category: '' });
+	const [searchParams, setSearchParams] = useState({ text: '', spectatorType: 'agent', agent: '', category: '' });
 	const [modalData, setModalData] = useState(ticket_id ? { ticketId: ticket_id } : {});
 	const [isUpdated, setIsUpdated] = useState(false);
 
