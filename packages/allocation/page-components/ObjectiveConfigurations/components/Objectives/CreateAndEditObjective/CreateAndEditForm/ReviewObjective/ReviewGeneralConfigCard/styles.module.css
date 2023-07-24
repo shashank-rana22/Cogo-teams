@@ -2,8 +2,17 @@
 	margin: 24px 0;
 }
 
+.heading_container {
+	display: flex;
+}
+
 .heading {
 	margin-bottom: 12px;
+}
+
+.objective_name {
+	margin-left: 12px;
+	color: var(--color-tertiary-success-green-1);
 }
 
 .card {

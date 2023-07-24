@@ -72,7 +72,11 @@ function ReviewGeneralConfigCard(props) {
 
 	return (
 		<div className={styles.container}>
-			<h4 className={styles.heading}>General Configuration</h4>
+			<div className={styles.heading_container}>
+				<h4 className={styles.heading}>General Configuration</h4>
+
+				<h4 className={styles.objective_name}>{generalConfiguration.name || ''}</h4>
+			</div>
 
 			<div className={styles.card}>
 				{CARD_DATA_MAPPING.map((item) => {

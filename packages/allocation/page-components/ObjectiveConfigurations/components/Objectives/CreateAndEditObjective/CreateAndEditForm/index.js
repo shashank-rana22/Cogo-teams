@@ -11,7 +11,9 @@ import styles from './styles.module.css';
 
 const { SET_OBJECTIVE, REVIEW_OBJECTIVE, SET_OBJECTIVE_WEIGHTAGE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
-function CreateAndEditForm() {
+function CreateAndEditForm(props) {
+	const { activeTabDetails } = props;
+
 	const [activeStep, setActiveStep] = useState(SET_OBJECTIVE);
 	const [formValues, setFormValues] = useState(
 		{
@@ -30,7 +32,9 @@ function CreateAndEditForm() {
 			formValues={formValues}
 			setActiveStep={setActiveStep}
 		/>,
-		[SET_OBJECTIVE_WEIGHTAGE]: <SetObjectiveWeightage />,
+		[SET_OBJECTIVE_WEIGHTAGE]: <SetObjectiveWeightage
+			activeTabDetails={activeTabDetails}
+		/>,
 	};
 
 	useEffect(() => {

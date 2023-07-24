@@ -5,7 +5,9 @@ import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../../../constants/create-fo
 
 import ReviewGeneralConfigCard from './ReviewGeneralConfigCard';
 import styles from './styles.module.css';
-import useCreateObjective from './useCreateObjective';
+// import useCreateObjective from './useCreateObjective';
+
+const { SET_OBJECTIVE_WEIGHTAGE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
 const { SET_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
@@ -14,7 +16,7 @@ function ReviewObjective(props) {
 
 	const { generalConfiguration, objectiveRequirements } = formValues;
 
-	const { loading, onProceed } = useCreateObjective({ formValues, setActiveStep });
+	// const { loading, onProceed } = useCreateObjective({ formValues, setActiveStep });
 
 	return (
 		<div className={styles.container}>
@@ -36,7 +38,7 @@ function ReviewObjective(props) {
 					type="button"
 					themeType="link"
 					onClick={() => setActiveStep(SET_OBJECTIVE)}
-					disabled={loading}
+					// disabled={loading}
 				>
 					Back
 				</Button>
@@ -44,8 +46,8 @@ function ReviewObjective(props) {
 				<Button
 					type="button"
 					themeType="primary"
-					loading={loading}
-					onClick={onProceed}
+					// loading={loading}
+					onClick={() => setActiveStep(SET_OBJECTIVE_WEIGHTAGE)}
 				>
 					Procees & Set Waightage
 				</Button>

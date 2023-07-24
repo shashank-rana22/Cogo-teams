@@ -479,6 +479,11 @@ const allocation = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'list_locations',
+			access_type  : 'public',
+			service_name : 'location',
+		},
 	],
 };
 
