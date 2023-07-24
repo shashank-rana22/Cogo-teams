@@ -224,7 +224,7 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
-		igm_desk: '5de782f6-f59d-41fc-84f4-8425dc1fa670',
+		igm_desk: '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 	},
 	options: {
 		registration_types: [
