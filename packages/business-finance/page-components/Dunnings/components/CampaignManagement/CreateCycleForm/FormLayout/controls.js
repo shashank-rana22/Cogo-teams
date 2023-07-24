@@ -192,7 +192,15 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			type     : 'radioGroup',
 			value    : formData?.triggerType || 'ONE_TIME',
 			onChange : (value) => {
-				setFormData((prev) => ({ ...prev, triggerType: value }));
+				if (value === 'PERIODIC') {
+					setFormData((prev) => ({
+						...prev,
+						triggerType : value,
+						frequency   : 'DAILY',
+					}));
+				} else {
+					setFormData((prev) => ({ ...prev, triggerType: value }));
+				}
 			},
 			radioOptions: [
 				{ name: 'ONE_TIME', value: 'ONE_TIME', label: 'One Time' },
