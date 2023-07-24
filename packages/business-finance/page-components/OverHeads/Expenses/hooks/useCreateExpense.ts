@@ -115,7 +115,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		account_number: accountNumber,
 		id: bankId,
 		vendor_id: collectionPartyId,
-	} = bankDetails?.[0] || {};
+	} = bankDetails?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const [{ data: responseData, loading }, trigger] = useRequestBf(
 		{
