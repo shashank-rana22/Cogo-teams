@@ -88,6 +88,14 @@
 .main_container_lowerpart {
 	display: flex;
 	flex-wrap: wrap;
+	height: 100%;
+	overflow-y: scroll;
+	background: #fbf7f1;
+}
+
+.list_div {
+	display: flex;
+	flex-wrap: wrap;
 	overflow-y: scroll;
 	background: #fbf7f1;
 }
@@ -120,8 +128,8 @@
 
 .circle_icon {
 	position: absolute;
-	top: 2px;
-	left: 6px;
+	top: 6%;
+	left: 2%;
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
@@ -153,6 +161,7 @@
 
 .name {
 	width: 70%;
+	max-width: 160px;
 	overflow: hidden;
 	font-weight: 600;
 	color: #4f4f4f;
@@ -172,13 +181,15 @@
 	padding-top: 2px;
 }
 
-.icon_plus_nos {
-	display: flex;
-	justify-content: flex-start;
-}
-
 .active_assigned_chats {
-	padding-left: 4px;
+	max-width: 190px;
+	overflow: hidden;
 	font-size: 10px;
 	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.styled_pagination {
+	justify-content: flex-end;
 }

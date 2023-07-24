@@ -10,37 +10,12 @@
 
 .label {
 	font-size: 16px;
-	line-height: 22px;
 	color: #828282;
 	text-align: center;
 }
 
-.date_container {
-	scroll-snap-stop: always;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 65px;
-	height: 60px;
-	margin: 0 10px;
-	background: rgb(255 255 255 / 40%);
-	border-radius: 6px;
-}
-
-.date_container:hover {
-	background: #fff;
-	box-shadow: 0 0 10px #d4d4d4;
-	transition: 0.1s;
-}
-
-.week_calendar {
-	display: flex;
-}
-
 .sub_label {
 	font-size: 10px;
-	line-height: 22px;
 	color: #828282;
 	text-align: center;
 	white-space: nowrap;
@@ -52,7 +27,6 @@
 	transition: 0.1s;
 
 	&:hover {
-		box-shadow: 0 0 10px #ababab;
 		transition: 0.1s;
 	}
 
@@ -75,18 +49,41 @@
 	white-space: nowrap;
 }
 
-.date_container:hover .label {
-	font-size: 16px;
-	font-weight: 500;
-	color: #444;
-	transition: 0.3s;
+.date_container {
+	scroll-snap-stop: always;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 65px;
+	height: 60px;
+	margin: 0 10px;
+	background: rgb(255 255 255 / 40%);
+	border-radius: 6px;
+
+	&:hover {
+		background: #fff;
+		box-shadow: 0 0 10px #d4d4d4;
+		transition: 0.1s;
+
+		.label {
+			font-size: 16px;
+			font-weight: 500;
+			color: #444;
+			transition: 0.3s;
+		}
+
+		.sub_label {
+			font-size: 12px;
+			font-weight: 500;
+			color: #444;
+			transition: 0.3s;
+		}
+	}
 }
 
-.date_container:hover .sub_label {
-	font-size: 12px;
-	font-weight: 500;
-	color: #444;
-	transition: 0.3s;
+.week_calendar {
+	display: flex;
 }
 
 .week_calendar .date_container {

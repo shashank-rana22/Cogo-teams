@@ -1,6 +1,5 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMProfile } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
@@ -22,7 +21,8 @@ function MyAgents({ list = [], redirectToAgentView = () => {}, activeTab = '' })
 	return (
 		<>
 			{(list || []).map((item) => {
-				const { name = '', active_assigned_chats, agent_id = '', id = '' } = item;
+				const { agent_data = {}, agent_id = '', id = '' } = item;
+				const { email = '', name = '' } = agent_data || {};
 
 				return (
 					<div
@@ -48,12 +48,7 @@ function MyAgents({ list = [], redirectToAgentView = () => {}, activeTab = '' })
 								<div className={styles.call_status}>{CALL_STATUS_MAPPING[activeTab]}</div>
 							</div>
 							<div className={styles.profile_box_right_down}>
-								<div className={styles.icon_plus_nos}>
-									<div><IcMProfile fill="#BDBDBD" /></div>
-									<div className={styles.active_assigned_chats}>
-										{active_assigned_chats || GLOBAL_CONSTANTS.zeroth_index}
-									</div>
-								</div>
+								<div className={styles.active_assigned_chats}>{email}</div>
 							</div>
 						</div>
 					</div>

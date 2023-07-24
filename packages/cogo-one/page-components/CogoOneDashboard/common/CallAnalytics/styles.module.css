@@ -12,7 +12,6 @@
 .heading {
 	font-size: 16px;
 	font-weight: 600;
-	line-height: 28px;
 	color: #4f4f4f;
 }
 
@@ -35,7 +34,6 @@
 .time_durations_header {
 	font-size: 16px;
 	font-weight: 500;
-	line-height: 20px;
 	color: #221f20;
 }
 
@@ -67,7 +65,6 @@
 
 .time_durations_text {
 	font-size: 10px;
-	line-height: 20px;
 	color: #828282;
 }
 
@@ -93,13 +90,11 @@
 
 .social_name {
 	padding-left: 10px;
-	line-height: 20px;
 	color: #475569;
 	transition: 0.4s;
 }
 
 .customer_nos {
-	line-height: 20px;
 	color: #828282;
 	text-align: right;
 	transition: 0.4s;

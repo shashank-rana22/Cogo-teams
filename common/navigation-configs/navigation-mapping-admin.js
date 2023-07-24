@@ -2004,8 +2004,8 @@ const navigationMappingAdmin = {
 			<img
 				src={GLOBAL_CONSTANTS.image_url.cogo_one_svg}
 				alt="cogo-one"
-				width="18px"
-				height="18px"
+				width="22px"
+				height="22px"
 			/>
 		),
 		isSubNavs     : true,

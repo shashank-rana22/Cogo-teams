@@ -4,7 +4,7 @@
   "description": "Package for Cogo One",
   "private": true,
   "main": "./index.js",
-	"sideEffects": false,
+  "sideEffects": false,
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
     "@cogoport/components": "^1.0.431",

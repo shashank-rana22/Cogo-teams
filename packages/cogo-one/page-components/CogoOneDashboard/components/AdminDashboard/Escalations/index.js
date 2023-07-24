@@ -11,8 +11,9 @@ import styles from './styles.module.css';
 const MIN_ESCALATED_CHAT = 0;
 
 function Escalation() {
-	const { data = {}, loading = false } = useListEscalationChat();
-	const { list = [] } = data || {};
+	const { listData = {}, loading = false, handleScroll = () => {} } = useListEscalationChat();
+
+	const { list = [] } = listData || {};
 
 	if (loading) {
 		return (
@@ -36,7 +37,7 @@ function Escalation() {
 				/>
 			)
 				: (
-					<div className={styles.redflags_lists}>
+					<div className={styles.redflags_lists} onScroll={handleScroll}>
 						{(list || []).map((item) => {
 							const { agent_data = {}, escalated, id } = item || {};
 							const { email = '', name = '' } = agent_data || {};

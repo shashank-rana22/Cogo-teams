@@ -1,10 +1,12 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const PAGE_LIMIT = 20;
+const PAGE_LIMIT = 10;
+const DEFAULT_PAGE_NUMBER = 1;
 
-const getParams = ({ activeTab }) => ({
+const getParams = ({ activeTab, page }) => ({
 	page_limit            : PAGE_LIMIT,
+	page,
 	status_stats_required : true,
 	filters               : {
 		status: activeTab,
@@ -17,10 +19,10 @@ const useListChatAgents = ({ activeTab }) => {
 		method : 'get',
 	}, { manual: true });
 
-	const chatAgent = useCallback(() => {
+	const chatAgent = useCallback(({ page }) => {
 		try {
 			trigger({
-				params: getParams({ activeTab }),
+				params: getParams({ activeTab, page }),
 			});
 		} catch (error) {
 			console.error(error);
@@ -28,12 +30,13 @@ const useListChatAgents = ({ activeTab }) => {
 	}, [trigger, activeTab]);
 
 	useEffect(() => {
-		chatAgent();
+		chatAgent({ page: DEFAULT_PAGE_NUMBER });
 	}, [chatAgent]);
 
 	return {
 		data,
 		loading,
+		chatAgent,
 	};
 };
 

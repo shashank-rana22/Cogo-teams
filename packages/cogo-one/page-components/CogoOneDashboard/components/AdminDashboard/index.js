@@ -37,7 +37,7 @@ function AdminDashboard(props) {
 				<div className={styles.calenderchart_plus_escalations}>
 					<div className={styles.calender_chart}>
 						<div className={styles.calender_container}>
-							<Calendar props={props} />
+							<Calendar {...props} />
 						</div>
 						<LineChart
 							graph={graph}

@@ -1,16 +1,39 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { format } from '@cogoport/utils';
 import {
 	useEffect,
 	useRef,
 } from 'react';
 
+import checkForActiveItem from '../../../utils/calendarEntity';
+
 import styles from './styles.module.css';
 
-const CONSTANT_ONE = 1;
-const CONSTANT_THIRTY = 30;
+const DEFAULT_MONTH_NUMBER = 1;
+const MIN_CALENDAR_DATA_LENGTH = 30;
 const SCROLL_DURATION_DELAY = 300;
+
+const getTimelineItems = ({ date, endDate }) => {
+	const MONTH_END_DATE = new Date(
+		date.getFullYear(),
+		date.getMonth() + DEFAULT_MONTH_NUMBER,
+		GLOBAL_CONSTANTS.zeroth_index,
+	);
+
+	const TIMELINE_MAPPING_DATES = {
+		day: {
+			endDate: date,
+		},
+		week: {
+			endDate,
+		},
+		month: {
+			endDate: MONTH_END_DATE,
+		},
+	};
+
+	return TIMELINE_MAPPING_DATES;
+};
 
 export function CalendarEntity({
 	selectedItem = {},
@@ -19,56 +42,22 @@ export function CalendarEntity({
 	timeline = 'day',
 	setSelectedDate = () => {},
 }) {
-	const middle = useRef();
+	const middleRef = useRef();
 
 	const isWeek = timeline === 'week';
 
 	const handleClick = (item) => {
 		const { date, endDate } = item || {};
 		setSelectedItem(item?.date);
-		if (timeline === 'day') {
-			setSelectedDate({
-				startDate : date,
-				endDate   : date,
-			});
-		}
-		if (timeline === 'week') {
-			setSelectedDate({
-				startDate: date,
-				endDate,
-			});
-		}
-		if (timeline === 'month') {
-			setSelectedDate({
-				startDate : date,
-				endDate   : new Date(date.getFullYear(), date.getMonth() + CONSTANT_ONE, GLOBAL_CONSTANTS.zeroth_index),
-			});
-		}
-	};
-
-	const isEqualDate = (date) => format(selectedItem, GLOBAL_CONSTANTS.formats.date['dd MMM YYYY'])
-		=== format(date, GLOBAL_CONSTANTS.formats.date['dd MMM YYYY']);
-
-	const isEqualWeek = (date, endDate) => (selectedItem.getTime() >= date.getTime())
-	&& (selectedItem.getTime() <= endDate?.getTime());
-
-	const isEqualMonth = (date) => selectedItem.getMonth() === date.getMonth()
-	&& selectedItem.getFullYear() === date.getFullYear();
-
-	const checkForActiveItem = (date, endDate) => {
-		if (timeline === 'day') {
-			return isEqualDate(date);
-		} if (timeline === 'week') {
-			return isEqualWeek(date, endDate);
-		} if (timeline === 'month') {
-			return isEqualMonth(date);
-		}
-		return false;
+		setSelectedDate({
+			startDate : date,
+			endDate   : getTimelineItems({ date, endDate })[timeline]?.endDate,
+		});
 	};
 
 	useEffect(() => {
 		setTimeout(() => {
-			middle?.current?.scrollIntoView({
+			middleRef?.current?.scrollIntoView({
 				behavior : 'instant',
 				block    : 'nearest',
 				inline   : 'start',
@@ -80,12 +69,13 @@ export function CalendarEntity({
 		<div className={cl`${styles.calendar} ${isWeek ? styles.week_calendar : ''}`}>
 			{calendarData?.map((item, index) => {
 				const { label, subLabel, key, date, endDate } = item || {};
-				const isDateEqual = checkForActiveItem(date, endDate);
+				const isDateEqual = checkForActiveItem({ date, endDate, timeline, selectedItem });
+
 				return (
 					<div
 						key={key}
 						className={cl`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
-						ref={index === Number(calendarData.length - CONSTANT_THIRTY) ? middle : null}
+						ref={index === Number(calendarData.length - MIN_CALENDAR_DATA_LENGTH) ? middleRef : null}
 						onClick={() => handleClick(item)}
 						role="presentation"
 					>

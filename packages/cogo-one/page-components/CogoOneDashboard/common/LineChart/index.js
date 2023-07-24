@@ -48,7 +48,7 @@ function LineChart({
 		<div className={styles.main_container}>
 			<Header graph={graph} />
 
-			{isEmpty(data) ? (
+			{isEmpty(graph) ? (
 				<Image
 					src={GLOBAL_CONSTANTS.image_url.empty_customer_card}
 					alt="empty"
