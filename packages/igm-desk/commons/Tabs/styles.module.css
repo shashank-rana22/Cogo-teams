@@ -1,0 +1,10 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+
+	:global {
+		.ui_tabs_container {
+			padding-bottom: 10px;
+		}
+	}
+}

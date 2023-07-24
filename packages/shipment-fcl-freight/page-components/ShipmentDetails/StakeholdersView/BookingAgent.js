@@ -21,11 +21,13 @@ import Tasks from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
+import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const UNAUTHORIZED_STATUS_CODE = 403;
+const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -50,6 +52,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 		...servicesGet,
 		...getTimeline,
 		activeStakeholder,
+		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	useEffect(() => {
@@ -78,7 +81,8 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;Refresh
+						{' '}
+						Refresh
 					</Button>
 				</div>
 			</div>
@@ -109,7 +113,8 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;Refresh
+						{' '}
+						Refresh
 					</Button>
 				</div>
 			</div>
