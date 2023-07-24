@@ -1,0 +1,52 @@
+[
+	{
+		"label":"Black Listed Service Provider (Criticality - 5)",
+		"value":"black_listed_customer-5",
+		"criticality":5
+	},
+	{
+		"label":"Multiple Freight Forwarders involved (Criticality - 4)",
+		"value":"multiple_freight_forwarders-4",
+		"criticality":4
+	},
+	{
+		"label":"Containers not available at the Yard (Criticality - 1)",
+		"value":"containers_not_available-1",
+		"criticality":1
+	},
+	{
+		"label":"Key documentation delayed by Supplier/wrong document (Criticality - 2)",
+		"value":"key_documents_delayed-2",
+		"criticality":2
+	},
+	{
+		"label":"Document on hold by Supplier (BL/DO) (Criticality - 4)",
+		"value":"document_on_hold-4",
+		"criticality":4
+	},
+	{
+		"label":"Supplier not responsive/denying the service (Criticality - 2)",
+		"value":"supplier_not_responsive-2",
+		"criticality":2
+	},
+	{
+		"label":"Delay in invoice (Criticality - 3)",
+		"value":"delay_in_invoice-3",
+		"criticality":3
+	},
+	{
+		"label":"Irrelevant charges on the invoice (Criticality - 4)",
+		"value":"irrelevant_charges-4",
+		"criticality":4
+	},
+	{
+		"label":"Tech error (Criticality - 1)",
+		"value":"tech_error-1",
+		"criticality":1
+	},
+	{
+		"label":"Other (Criticality - 1)",
+		"value":"other-1",
+		"criticality":1
+	}
+]

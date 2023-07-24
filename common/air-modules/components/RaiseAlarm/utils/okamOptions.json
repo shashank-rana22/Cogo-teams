@@ -1,0 +1,42 @@
+[
+	{
+		"label":"Black Listed Customer (Criticality - 5)",
+		"value":"black_listed_customer-5",
+		"criticality":5
+	},
+	{
+		"label":"Low Cargo Value (Criticality - 1)",
+		"value":"low_cargo_value-1",
+		"criticality":1
+	},
+	{
+		"label":"Collection Issue (Criticality - 3)",
+		"value":"collection_issue-3",
+		"criticality":3
+	},
+	{
+		"label":"Fake LEO Copy (Criticality - 4)",
+		"value":"fake_leo_copy-4",
+		"criticality":4
+	},
+	{
+		"label":"Mis-statement of commodity (Criticality - 4)",
+		"value":"mis_statement_of_commodity-4",
+		"criticality":4
+	},
+	{
+		"label":"Mis-declaration of weight (Criticality - 3)",
+		"value":"mis_declaration_of_weight-3",
+		"criticality":3
+	},
+	{
+		"label":"Tech Error (Criticality - 1)",
+		"value":"tech_error-1",
+		"criticality":1
+	},
+	{
+		"label":"Other (Criticality - 1)",
+		"value":"other-1",
+		"criticality":1
+	}
+]

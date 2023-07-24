@@ -1,0 +1,17 @@
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.field {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.bold {
+	width: 200px;
+	margin-left: 4px;
+	font-weight: bold;
+}

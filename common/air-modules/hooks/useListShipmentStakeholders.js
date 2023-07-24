@@ -3,14 +3,15 @@ import { useState, useEffect, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useListStakeholders = ({ shipment_id = '' }) => {
-	const [apiData, setApiData] = useState({});
+const useListStakeholders = ({ shipment_id = '', stakeholder_type = '' }) => {
+	const [apiData, setApiData] = useState([]);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'list_shipment_stakeholders',
 		params : {
 			filters: {
 				shipment_id,
+				stakeholder_type: stakeholder_type || undefined,
 			},
 			page_limit : 50,
 			sort_by    : 'created_at',
