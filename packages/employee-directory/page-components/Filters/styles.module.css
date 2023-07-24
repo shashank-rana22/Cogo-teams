@@ -1,0 +1,61 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 16px;
+}
+
+.left_container {
+	display: flex;
+	align-items: center;
+}
+
+.right_container {
+	display: flex;
+	align-items: center;
+}
+
+.total_employees {
+	display: flex;
+	align-items: center;
+	padding: 8px 10px;
+	font-size: 14px;
+	font-weight: 500;
+	background-color: #fff;
+	border: 1px solid #cacaca;
+	border-radius: 4px;
+}
+
+.employee_no {
+	margin-left: 4px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #ed3726;
+}
+
+.search_icon {
+	margin: 0 12px;
+}
+
+.search_input {
+	width: 300px;
+	margin-left: 20px;
+}
+
+.sort_by {
+	width: 200px;
+	margin-right: 20px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.filter_text {
+	margin-right: 8px;
+}
+
+.filters {
+	margin-right: 20px;
+}

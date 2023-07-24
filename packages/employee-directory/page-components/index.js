@@ -1,9 +1,10 @@
-import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import StyledTable from '../common/StyledTable';
 import useGetColumns from '../common/useGetColumns';
 
+import Filters from './Filters';
+import Header from './Header';
 import styles from './styles.module.css';
 
 const randomDataArray = [
@@ -120,24 +121,13 @@ const randomDataArray = [
 ];
 
 function EmployeeDirectory() {
-	const [activeTab, setActiveTab] = useState('local_rates');
+	const [activeTab, setActiveTab] = useState('regular');
 	const columns = useGetColumns();
 	return (
 		<>
-			<h2 className={styles.heading}>Employee Directory</h2>
-			<Tabs
-				activeTab={activeTab}
-				themeType="primary"
-				onChange={setActiveTab}
-			>
-				<TabPanel name="local_rates" title="Local Rates" badge={3}>
-					<div>This is local search</div>
-				</TabPanel>
-
-				<TabPanel name="suggested_rates" title="Suggested Rates" badge={5}>
-					<div>This is suggested</div>
-				</TabPanel>
-			</Tabs>
+			<h3 className={styles.heading}>Employee Directory</h3>
+			<Header activeTab={activeTab} setActiveTab={setActiveTab} />
+			<Filters />
 			<StyledTable columns={columns} data={randomDataArray} />
 		</>
 	);
