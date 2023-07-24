@@ -32,8 +32,8 @@ function AllotBankList({
 			setCheckedRow,
 		},
 	);
-	const initiatePaymentClick = async () => {
-		await selectBank(selectedBankId, selectedPayrun, checkedRow);
+	const initiatePaymentClick = () => {
+		selectBank(selectedBankId, selectedPayrun, checkedRow);
 	};
 	return (
 		<div>

@@ -6,7 +6,7 @@ function ModifiedCurrency({ itemData = {}, selectedPayrun = {}, checkedRow = nul
 	const { totalValue } = selectedPayrun || checkedRow || {};
 	const { balance, currency } = itemData || {};
 	return (
-		<div className={balance < totalValue ? styles.text : ''}>{currency}</div>
+		<div className={balance < totalValue ? styles.text : undefined}>{currency}</div>
 	);
 }
 

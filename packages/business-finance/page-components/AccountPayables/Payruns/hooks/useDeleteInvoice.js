@@ -6,7 +6,7 @@ const useDeleteInvoice = ({ overseasData = '', setShowDeleteInvoiceModal = () =>
 	const { profile = {} } = useSelector((state) => state);
 	const { user = {}, session_type = '' } = profile;
 	const { id: user_id } = user;
-	const [{ data:deleteInvoiceData, loading: deleteinvoiceLoading }, deleteinvoiceTrigger] = useRequestBf({
+	const [{ data: deleteInvoiceData, loading: deleteinvoiceLoading }, deleteinvoiceTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill',
 		method  : 'delete',
 		authKey : 'delete_purchase_payrun_bill',

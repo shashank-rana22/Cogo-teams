@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
+
+import { dateFormatter } from '../helpers';
 
 const useGetUploadHistoryList = ({ sort, query, globalFilters }) => {
 	const { pageIndex, pageSize, uploadedDate, status } = globalFilters || {};
@@ -11,22 +11,8 @@ const useGetUploadHistoryList = ({ sort, query, globalFilters }) => {
 		method  : 'get',
 		authKey : 'get_purchase_payment_upload_list',
 	}, { manual: true, autoCancel: false });
-	const selectFromDate =		uploadedDate
-		&& formatDate({
-			date       : uploadedDate.startDate,
-			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-			formatType : 'dateTime',
-			separator  : ' ',
-		});
-	const selectToDate =		uploadedDate
-		&& formatDate({
-			date       : uploadedDate.endDate,
-			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-			formatType : 'dateTime',
-			separator  : ' ',
-		});
+	const { selectFromDate, selectToDate } = dateFormatter(uploadedDate);
+
 	const getUploadHistoryList = useCallback(async () => {
 		try {
 			await uploadHistoryListTrigger({

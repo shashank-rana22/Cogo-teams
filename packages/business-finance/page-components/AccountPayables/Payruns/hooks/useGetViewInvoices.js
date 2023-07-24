@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 const useGetViewInvoices = ({ activePayrunTab, globalFilters, selectedPayrun, query }) => {
 	const { id, batchNo } = selectedPayrun || {};
 	const { pageIndex, pageSize } = globalFilters || {};
-	const [{ data:viewInvoiceDataList, loading:viewInvoiceDataLoading }, viewInvoiceTrigger] = useRequestBf({
+	const [{ data: viewInvoiceDataList, loading: viewInvoiceDataLoading }, viewInvoiceTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill',
 		method  : 'get',
 		authKey : 'get_purchase_payrun_bill',

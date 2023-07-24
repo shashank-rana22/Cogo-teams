@@ -12,9 +12,7 @@
 	display: flex;
 	align-items: center;
 	padding: 28px 10px 0;
-	margin-top: 16px;
-	margin-right: 2px;
-	margin-left: 2px;
+	margin: 16px 2px 0;
 	background: #fff;
 	border-radius: 8px;
 }

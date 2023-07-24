@@ -4,12 +4,12 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import styles from './styles.module.css';
 
-const TIMELINE_DEFAULT_LENGTH = 0;
-function AmountWithDetails({ itemData = {}, selectedPayrun = {}, checkedRow = null }) {
+const FUND_ALLOTMENT_TIMELINE_DEFAULT_LENGTH = 0;
+function AmountWithDetails({ itemData = {}, selectedPayrun = {}, checkedRow = {} }) {
 	const { fundAllotmentTimeline, balance, currency, allocatedAmount } = itemData;
-	const { totalValue } = selectedPayrun || checkedRow || {};
+	const { totalValue } = selectedPayrun || checkedRow;
 
-	const length = fundAllotmentTimeline?.length;
+	const fundAllotmentTimelineLength = fundAllotmentTimeline?.length;
 
 	return (
 		<div className={styles.container}>
@@ -26,7 +26,7 @@ function AmountWithDetails({ itemData = {}, selectedPayrun = {}, checkedRow = nu
 					})}
 				</div>
 			</div>
-			{length > TIMELINE_DEFAULT_LENGTH && (
+			{fundAllotmentTimelineLength > FUND_ALLOTMENT_TIMELINE_DEFAULT_LENGTH && (
 				<div className={styles.details_text}>
 					Updated By :
 					{' '}

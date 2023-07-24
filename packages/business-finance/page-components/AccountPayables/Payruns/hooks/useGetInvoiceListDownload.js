@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
+
+import { dateFormatter } from '../helpers';
 
 const useGetInvoiceListDownload = ({ globalFilters = {}, overseasData = '', size = '', activePayrunTab }) => {
 	const [{ data:normalDownlodData, loading:normalLoading }, normalTrigger] = useRequestBf({
@@ -17,23 +17,7 @@ const useGetInvoiceListDownload = ({ globalFilters = {}, overseasData = '', size
 	}, { manual: true });
 
 	const { createdAt, ...rest } = globalFilters;
-
-	const selectFromDate =		createdAt
-		&& formatDate({
-			date       : createdAt.startDate,
-			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-			formatType : 'dateTime',
-			separator  : ' ',
-		});
-	const selectToDate =		createdAt
-		&& formatDate({
-			date       : createdAt.endDate,
-			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-			formatType : 'dateTime',
-			separator  : ' ',
-		});
+	const { selectFromDate, selectToDate } = dateFormatter(createdAt);
 
 	const getApi = overseasData === 'ADVANCE_PAYMENT' ? advanceDownloadTrigger : normalTrigger;
 

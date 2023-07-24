@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+
+import { dateFormatter } from '../helpers';
 
 const useGetPaidBillReport = ({
 	size,
@@ -21,22 +21,7 @@ const useGetPaidBillReport = ({
 		authKey : 'get_purchase_report_paid_bills',
 	}, { manual: true, autoCancel: false });
 	const { ...rest } = globalFilters;
-	const selectFromDate =		newdate
-	&& formatDate({
-		date       : newdate.startDate,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-		formatType : 'dateTime',
-		separator  : ' ',
-	});
-	const selectToDate =		newdate
-	&& formatDate({
-		date       : newdate.endDate,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-		formatType : 'dateTime',
-		separator  : ' ',
-	});
+	const { selectFromDate, selectToDate } = dateFormatter(newdate);
 
 	const sendInvoiceReport = async (dates) => {
 		if (dates === 'Invalid_Range') {

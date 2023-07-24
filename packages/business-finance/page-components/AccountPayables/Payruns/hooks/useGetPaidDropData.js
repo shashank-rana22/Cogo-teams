@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 
 const useGetPaidDropData = ({ itemData = {}, overseasData = '' }) => {
 	const { objectId = '' } = itemData;
-	const [{ data:domesticData, loading:domesticLoading }, trigger] = useRequestBf({
+	const [{ data: domesticData, loading: domesticLoading }, trigger] = useRequestBf({
 		url     : `/purchase/payrun-bill/list-paid-bill/${objectId}`,
 		method  : 'get',
 		authKey : 'get_purchase_payrun_bill_list_paid_bill_by_id',

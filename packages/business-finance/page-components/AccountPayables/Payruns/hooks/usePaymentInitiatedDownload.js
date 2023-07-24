@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
 const usePaymentInitiatedDownload = () => {
-	const [{ data:downloadData, loading }, trigger] = useRequestBf({
+	const [{ data: downloadData, loading }, trigger] = useRequestBf({
 		url     : '/purchase/payrun/download',
 		method  : 'get',
 		authKey : 'get_purchase_payrun_download',

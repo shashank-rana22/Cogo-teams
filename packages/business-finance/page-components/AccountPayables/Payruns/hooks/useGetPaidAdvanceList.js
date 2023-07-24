@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
+
+import { dateFormatter } from '../helpers';
 
 const useGetPaidAdvanceList = ({ activePayrunTab, query, globalFilters }) => {
 	const { pageIndex, pageSize, selectDate, cogoBankId } = globalFilters || {};
@@ -11,22 +11,8 @@ const useGetPaidAdvanceList = ({ activePayrunTab, query, globalFilters }) => {
 		method  : 'get',
 		authKey : 'get_purchase_payrun_bill_list_paid_advance_doc',
 	}, { manual: true, autoCancel: false });
-	const selectFromDate =		selectDate
-	&& formatDate({
-		date       : selectDate.startDate,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-		formatType : 'dateTime',
-		separator  : ' ',
-	});
-	const selectToDate =		selectDate
-	&& formatDate({
-		date       : selectDate.endDate,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-		formatType : 'dateTime',
-		separator  : ' ',
-	});
+	const { selectFromDate, selectToDate } = dateFormatter(selectDate);
+
 	const getAdvancePaidData = useCallback(() => {
 		try {
 			paidAdvanceListTrigger({

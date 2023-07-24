@@ -8,7 +8,7 @@ function FormatedAmount({ itemData = {}, selectedPayrun = null, checkedRow = nul
 	const { totalValue } = selectedPayrun || checkedRow || {};
 
 	return (
-		<div className={balance < totalValue ? styles.text : ''}>
+		<div className={balance < totalValue ? styles.text : undefined}>
 			{formatAmount({
 				amount  : utilizedAmount,
 				currency,

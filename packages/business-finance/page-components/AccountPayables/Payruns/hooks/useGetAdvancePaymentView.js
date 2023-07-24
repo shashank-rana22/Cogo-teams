@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 const useGetAdvancePaymentView = ({ globalFilters, selectedPayrun, query }) => {
 	const { pageIndex, pageSize } = globalFilters || {};
 	const { id, batchNo } = selectedPayrun || {};
-	const [{ data:viewInvoicesAdvancePaymentData, loading:viewInvoicesAdvancePaymentLoading },
+	const [{ data: viewInvoicesAdvancePaymentData, loading: viewInvoicesAdvancePaymentLoading },
 		viewInvoicesAdvancePaymentTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill/advance-payment',
 		method  : 'get',
