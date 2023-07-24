@@ -4,7 +4,7 @@ import Peer from 'simple-peer';
 
 import { ICESERVER } from '../constants';
 import { updateCallDetails } from '../helpers/snapshortHelpers';
-import { callUpdate, saveCallingData, saveWebrtcToken, stopStream } from '../utils/callFunctions';
+import { callUpdate, saveCallData, saveWebrtcToken, stopStream } from '../utils/callFunctions';
 
 import { useSetInACall } from './useSetInACall';
 
@@ -30,7 +30,7 @@ function useVideoCallFirebase({
 
 	const { id: userId, name: userName } = user_data || {};
 
-	const callEnd = useCallback(() => {
+	const handleCallEnd = useCallback(() => {
 		saveInACallStatus(false);
 		setCallComing(false);
 
@@ -90,7 +90,7 @@ function useVideoCallFirebase({
 			localPeerRef.current = peer;
 
 			peer.on('signal', (data) => {
-				saveCallingData({
+				saveCallData({
 					data: {
 						call_status : 'calling',
 						calling_by  : 'admin',
@@ -124,7 +124,7 @@ function useVideoCallFirebase({
 			});
 
 			peer.on('error', () => {
-				callEnd();
+				handleCallEnd();
 				callUpdate({
 					data: {
 						call_status   : 'technical_error',
@@ -144,12 +144,12 @@ function useVideoCallFirebase({
 				callingRoomId,
 				firestore,
 			});
-			callEnd();
+			handleCallEnd();
 		}
-	}, [callingRoomId, callEnd, firestore,
+	}, [callingRoomId, handleCallEnd, firestore,
 		peerRef, saveInACallStatus, setCallDetails, setStreams, userId, userName]);
 
-	const callingTo = useCallback(
+	const handleOutgoingCall = useCallback(
 		(peerDetails = {}) => {
 			if (!peerDetails?.user_id) {
 				return;
@@ -187,8 +187,8 @@ function useVideoCallFirebase({
 	}, [callingRoomId, firestore, setCallDetails]);
 
 	return {
-		callingTo,
-		callEnd,
+		handleOutgoingCall,
+		handleCallEnd,
 	};
 }
 

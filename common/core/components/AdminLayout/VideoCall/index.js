@@ -45,7 +45,7 @@ function VideoCall({
 	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
 
-	const { callingTo, callEnd } = useVideoCallFirebase({
+	const { handleOutgoingCall, handleCallEnd } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
 		setCallDetails,
@@ -66,7 +66,7 @@ function VideoCall({
 		peerRef,
 		webrtcToken,
 		setWebrtcToken,
-		callEnd,
+		handleCallEnd,
 	});
 
 	const missCallHandle = useCallback(() => {
@@ -76,21 +76,21 @@ function VideoCall({
 				firestore,
 				callingRoomId : callDetails?.callingRoomId,
 			});
-			callEnd();
+			handleCallEnd();
 		}
-	}, [callDetails?.callingRoomId, callDetails?.callingRoomDetails?.call_status, callEnd, firestore]);
+	}, [callDetails?.callingRoomId, callDetails?.callingRoomDetails?.call_status, handleCallEnd, firestore]);
 
 	useEffect(
 		() => {
 			if (inVideoCall && videoCallRecipientData?.user_id) {
-				callingTo(videoCallRecipientData);
+				handleOutgoingCall(videoCallRecipientData);
 			}
 
 			const timeoutMissCallId = setTimeout(missCallHandle, CALL_RING_TIME_LIMIT);
 
 			return () => clearTimeout(timeoutMissCallId);
 		},
-		[inVideoCall, videoCallRecipientData, callingTo, missCallHandle],
+		[inVideoCall, videoCallRecipientData, handleOutgoingCall, missCallHandle],
 	);
 
 	useEffect(() => {
@@ -127,7 +127,7 @@ function VideoCall({
 					toggleState={toggleState}
 					setToggleState={setToggleState}
 					streams={streams}
-					callEnd={callEnd}
+					handleCallEnd={handleCallEnd}
 					callDetails={callDetails}
 					firestore={firestore}
 					ref={streamRef}

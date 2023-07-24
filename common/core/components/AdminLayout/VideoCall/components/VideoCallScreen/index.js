@@ -14,7 +14,7 @@ function VideoCallScreen({
 	toggleState = {},
 	setToggleState = () => {},
 	streams = {},
-	callEnd = () => {},
+	handleCallEnd = () => {},
 	callDetails = {},
 	firestore = {},
 }, ref) {
@@ -48,7 +48,7 @@ function VideoCallScreen({
 		toggleState,
 		setToggleState,
 		streams,
-		callEnd,
+		handleCallEnd,
 		callDetails,
 		firestore,
 	});

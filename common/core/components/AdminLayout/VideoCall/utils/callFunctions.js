@@ -33,7 +33,7 @@ export const callUpdate = ({ data, firestore, callingRoomId }) => {
 	}
 };
 
-export const saveCallingData = async ({ data, callBackFunc, firestore }) => {
+export const saveCallData = async ({ data, callBackFunc, firestore }) => {
 	const videoCallRoomCollection = collection(
 		firestore,
 		`${FIRESTORE_PATH.video_calls}`,

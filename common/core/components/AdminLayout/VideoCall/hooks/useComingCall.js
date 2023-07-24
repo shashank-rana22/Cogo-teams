@@ -20,7 +20,7 @@ function useComingCall({
 	peerRef,
 	webrtcToken,
 	setWebrtcToken,
-	callEnd,
+	handleCallEnd,
 }) {
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
@@ -89,7 +89,7 @@ function useComingCall({
 					firestore,
 					callingRoomId,
 				});
-				callEnd();
+				handleCallEnd();
 			});
 		} catch (error) {
 			console.error('user stream is not working', error);
@@ -102,9 +102,9 @@ function useComingCall({
 				callingRoomId,
 				firestore,
 			});
-			callEnd();
+			handleCallEnd();
 		}
-	}, [setStreams, peerRef, webrtcToken.userToken, callingRoomId, webrtcTokenRoomId, firestore, callEnd]);
+	}, [setStreams, peerRef, webrtcToken.userToken, callingRoomId, webrtcTokenRoomId, firestore, handleCallEnd]);
 
 	const answerCall = useCallback(async () => {
 		await getWebrtcToken();
@@ -171,13 +171,13 @@ function useComingCall({
 			&& stopCallStatus.includes(room_data?.call_status)
 			&& callingRoomId
 		) {
-			callEnd();
+			handleCallEnd();
 		}
 
 		if (notCallingCallStatus.includes(room_data?.call_status)) {
 			setCallComing(false);
 		}
-	}, [callDetails?.callingRoomDetails, callEnd, setCallComing, callingRoomId]);
+	}, [callDetails?.callingRoomDetails, handleCallEnd, setCallComing, callingRoomId]);
 
 	return {
 		answerCall,

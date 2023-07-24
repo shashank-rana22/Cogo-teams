@@ -7,7 +7,7 @@ function useVideocallOptions({
 	toggleState,
 	setToggleState,
 	streams,
-	callEnd,
+	handleCallEnd,
 	callDetails,
 	firestore,
 }) {
@@ -15,7 +15,7 @@ function useVideocallOptions({
 		if (clickType === 'mini_screen') {
 			e.stopPropagation();
 		}
-		callEnd();
+		handleCallEnd();
 		callUpdate({
 			data: {
 				call_status: 'end_call',
@@ -23,16 +23,16 @@ function useVideocallOptions({
 			firestore,
 			callingRoomId: callDetails?.callingRoomId,
 		});
-	}, [callDetails?.callingRoomId, callEnd, firestore]);
+	}, [callDetails?.callingRoomId, handleCallEnd, firestore]);
 
 	const toggleMic = useCallback(({ e, clickType }) => {
 		if (clickType === 'mini_screen') {
 			e.stopPropagation();
 		}
 		setToggleState((prev) => ({ ...prev, isMicActive: !prev.isMicActive }));
-		const loaclStream = streams;
-		if (loaclStream?.userStream) {
-			loaclStream.userStream.getAudioTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !toggleState.isMicActive;
+		const localStream = streams;
+		if (localStream?.userStream) {
+			localStream.userStream.getAudioTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !toggleState.isMicActive;
 		}
 	}, [toggleState.isMicActive, setToggleState, streams]);
 
@@ -41,9 +41,9 @@ function useVideocallOptions({
 			e.stopPropagation();
 		}
 		setToggleState((prev) => ({ ...prev, isVideoActive: !prev.isVideoActive }));
-		const loaclStream = streams;
-		if (loaclStream?.userStream) {
-			loaclStream.userStream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !toggleState.isVideoActive;
+		const localStream = streams;
+		if (localStream?.userStream) {
+			localStream.userStream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !toggleState.isVideoActive;
 		}
 	}, [toggleState.isVideoActive, setToggleState, streams]);
 

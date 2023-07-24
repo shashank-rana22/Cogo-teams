@@ -45,8 +45,8 @@ function Header({
 	supplierLoading = false,
 	hasNoFireBaseRoom = false,
 }) {
-	const [isVisible, setIsVisible] = useState(false);
 	const dispatch = useDispatch();
+	const [isVisible, setIsVisible] = useState(false);
 
 	const { requestToJoinGroup, dissmissTransferRequest } = useTransferChat({ firestore, activeMessageCard });
 
