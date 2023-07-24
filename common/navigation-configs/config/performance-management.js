@@ -1,26 +1,41 @@
-const PERFORMANCE_MANAGEMENT = {
-	'/[partner_id]/performance-management/configuration': {
-		navigation : 'performance_management-performance_management_configuration',
+const performanceManagement = {
+	'/[partner_id]/performance-management/employee-directory': {
+		layoutType : 'no_header',
+		navigation : 'performance_management-employee_directory',
+	},
+	'/[partner_id]/performance-management/user-dashboard': {
+		layoutType : 'no_header',
+		navigation : 'performance_management-user_dashboard',
+	},
+	'/[partner_id]/performance-management/manager-dashboard': {
+		layoutType : 'no_header',
+		navigation : 'performance_management-manager_dashboard',
+	},
+	'/[partner_id]/performance-management/manager-dashboard/feedback-management/[user_id]': {
+		layoutType : 'no_header',
+		navigation : 'performance_management-manager_dashboard',
+	},
+	'/[partner_id]/performance-management/manager-dashboard/feedback-management': {
+		layoutType : 'no_header',
+		navigation : 'performance_management-manager_dashboard',
+	},
+	'/[partner_id]/performance-management/hr-dashboard': {
+		layoutType : 'no_header',
+		navigation : 'performance_management-hr_dashboard',
 		isMainNav  : true,
 	},
-	'/[partner_id]/performance-management/rating-review': {
-		navigation: 'performance_management-performance_rating_review',
+	'/[partner_id]/performance-management/hr-dashboard/feedback-forms': {
+		layoutType : 'no_header',
+		navigation : 'performance_management-hr_dashboard',
 	},
-	'/[partner_id]/performance-management/kra-assignment': {
-		navigation: 'performance_management-kra_assignment',
+	'/[partner_id]/performance-management/hr-dashboard/feedback-management': {
+		layoutType : 'no_header',
+		navigation : 'performance_management-hr_dashboard',
 	},
-	'/[partner_id]/performance-management/kra-management': {
-		navigation: 'performance_management-kra_management',
-	},
-	'/[partner_id]/performance-management/kra-management/manage-kra': {
-		navigation: 'performance_management-kra_management',
-	},
-	'/[partner_id]/performance-management/kra-management/manage-kra/create-kra': {
-		navigation: 'performance_management-kra_management',
-	},
-	'/[partner_id]/performance-management/kra-management/manage-kra/update-kra/[kra_id]': {
-		navigation: 'performance_management-kra_management',
+	'/[partner_id]/performance-management/hr-dashboard/feedback-management/[user_id]': {
+		layoutType : 'no_header',
+		navigation : 'performance_management-hr_dashboard',
 	},
 };
 
-module.exports = PERFORMANCE_MANAGEMENT;
+module.exports = performanceManagement;

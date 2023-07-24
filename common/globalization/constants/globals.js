@@ -256,7 +256,6 @@ const GLOBAL_CONSTANTS = {
 		spam_flag_icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam_flag_black.png',
 		email_inbox_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/inbox_icon.png',
 		colored_loading     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
-		empty_data          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 		empty_data_image    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		awb_docs_images     : {
 			original_3:

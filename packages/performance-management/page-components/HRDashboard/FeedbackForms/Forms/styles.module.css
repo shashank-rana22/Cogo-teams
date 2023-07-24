@@ -1,0 +1,105 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.form_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 16px;
+
+	.form_cat {
+		font-size: 18px;
+		font-weight: 600;
+	}
+}
+
+.no_role {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.forms {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	margin-top: 16px;
+}
+
+.form {
+	display: flex;
+	align-items: center;
+	height: 80px;
+	padding: 0 16px;
+	margin: 0 16px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+
+	.form_name {
+		flex: 0.25;
+	}
+
+	.published {
+		flex: 0.4;
+	}
+
+	.status {
+		flex: 0.25;
+
+		:global(.ui_pill_container) {
+			margin: 0;
+		}
+	}
+
+	.action {
+		display: flex;
+		flex: 0.25;
+		justify-content: flex-end;
+	}
+}
+
+.form:not(:last-child) {
+	margin-bottom: 16px;
+}
+
+.label {
+	margin: 0;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.value {
+	margin-top: 8px;
+
+	span {
+		padding-left: 4px;
+		font-weight: 700;
+		border-left: 1px solid #bdbdbd;
+	}
+}
+
+.pagination_container {
+	position: sticky;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding-top: 16px;
+	background-color: #fff;
+}
+
+.loading_right_form {
+	margin-bottom: 16px;
+	border-radius: 4px;
+}
+
+.right_form_div {
+	padding: 0 16px;
+	margin-top: 8px;
+}

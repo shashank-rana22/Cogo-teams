@@ -42,7 +42,7 @@ const useCompanyPolicyDetails = () => {
 					},
 				});
 			} catch (error) {
-				if (error?.response?.data) {
+				if (error?.response) {
 					Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 				}
 			}
