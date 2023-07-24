@@ -49,10 +49,10 @@ function EmployeeDetails() {
 		return (
 			<div className={styles.placeholder_container}>
 				<Placeholder type="circle" radius="100px" margin="0px 0px 30px 0px" />
-				{[...Array(ARRAY_LENGTH)]
-					.map((_, index) => (
+				{[...Array(ARRAY_LENGTH).keys()]
+					.map((key) => (
 						<Placeholder
-							key={`${index + ARRAY_LENGTH}`}
+							key={key}
 							height="20px"
 							width="100%"
 							margin="0px 0px 20px 0px"
