@@ -7,9 +7,7 @@ import ReviewGeneralConfigCard from './ReviewGeneralConfigCard';
 import styles from './styles.module.css';
 // import useCreateObjective from './useCreateObjective';
 
-const { SET_OBJECTIVE_WEIGHTAGE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
-
-const { SET_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
+const { SET_OBJECTIVE_WEIGHTAGE, SET_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
 function ReviewObjective(props) {
 	const { formValues, setActiveStep } = props;

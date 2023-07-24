@@ -1,9 +1,13 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
+import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../../../constants/create-form-stepper-keys-mapping';
+
 import ListObjectiveUserMappings from './ListObjectiveUserMappings';
 import styles from './styles.module.css';
 import useGetObjectiveUserMappings from './useGetObjectiveUserMappings';
+
+const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
 const MODE_BASIS_BUTTON_MAPPING = {
 	create: (
@@ -58,7 +62,7 @@ const MODE_BASIS_BUTTON_MAPPING = {
 };
 
 function SetObjectiveWeightage(props) {
-	const { activeTabDetails, formValues } = props;
+	const { activeTabDetails, setActiveStep, formValues } = props;
 
 	const { list } = useGetObjectiveUserMappings();
 
@@ -96,6 +100,7 @@ function SetObjectiveWeightage(props) {
 					size="lg"
 					type="button"
 					themeType="link"
+					onClick={() => setActiveStep(REVIEW_OBJECTIVE)}
 				>
 					Back
 				</Button>
