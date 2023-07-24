@@ -1,9 +1,10 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { escalateTicketsControls } from '../../../../configurations/escalate-controls';
 import { getFieldController } from '../../../../utils/getFieldController';
+import Confirmation from '../../../Confirmation';
 
 import styles from './styles.module.css';
 
@@ -11,9 +12,12 @@ function EscalateTicket({
 	ticketId = '', showEscalate = false, setShowEscalate = () => {},
 	updateTicketActivity = () => {}, updateLoading = false,
 }) {
+	const [showConfirmation, setShowConfirmation] = useState(false);
+
 	const { control, handleSubmit, formState: { errors }, reset } = useForm();
 
 	const handleClose = () => {
+		setShowConfirmation(false);
 		setShowEscalate(false);
 		reset();
 	};
@@ -67,9 +71,17 @@ function EscalateTicket({
 				</Modal.Body>
 
 				<Modal.Footer>
-					<Button size="md" type="submit" loading={updateLoading}>
-						Submit
-					</Button>
+					{showConfirmation
+						? (
+							<Confirmation
+								loading={updateLoading}
+								handleChange={setShowConfirmation}
+							/>
+						) : (
+							<Button size="md" onClick={() => setShowConfirmation(true)} loading={updateLoading}>
+								Submit
+							</Button>
+						)}
 				</Modal.Footer>
 			</form>
 		</Modal>

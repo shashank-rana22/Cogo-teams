@@ -26,12 +26,17 @@ const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent'
 	'superadmin', 'admin'];
 
 function List({ isSeller = false }) {
-	const { servicesList, refetchServices = () => {}, shipment_data, activeStakeholder, primary_service } = useContext(
+	const {
+		servicesList, refetchServices = () => {},
+		shipment_data, activeStakeholder, primary_service, stakeholderConfig,
+	} = useContext(
 		ShipmentDetailContext,
 	);
 
 	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
 		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
+
+	const canEditCancelService = !!stakeholderConfig?.overview?.can_edit_cancel_service;
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
@@ -58,7 +63,7 @@ function List({ isSeller = false }) {
 	const isCargoInsured = servicesList?.some((service) => service?.service_type === 'cargo_insurance_service');
 
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 			{loading ? <Loader /> : null}
 
 			{!isEmpty(additionalServiceList) && !loading ? (
@@ -79,6 +84,7 @@ function List({ isSeller = false }) {
 									setItem,
 									shipment_data,
 									activeStakeholder,
+									canEditCancelService,
 								})}
 								refetch={handleRefetch}
 								services={servicesList}
@@ -117,9 +123,9 @@ function List({ isSeller = false }) {
 			{additionalServiceList?.length ? (
 				<div className={styles.info_container}>
 					<div className={styles.circle} />
-					<div className={styles.service_name}>Incidental Services</div>
+					<span className={styles.service_name}>Incidental Services</span>
 					<div className={cl` ${styles.circle} ${styles.upsell}`} />
-					<div className={styles.service_name}>Upselling Services</div>
+					<span className={styles.service_name}>Upselling Services</span>
 					<Info />
 				</div>
 			) : null}
@@ -132,20 +138,22 @@ function List({ isSeller = false }) {
 							onClick={() => setShowModal('charge_code')}
 							disabled={shipment_data?.is_job_closed}
 						>
-							<div className={styles.add_icon}>+</div>
+							<span className={styles.add_icon}>+</span>
 							Add Additional Services
 						</Button>
 					)
 					: null }
 
-				<Button
-					onClick={() => setShowModal('cargo_insurance_service')}
-					className={styles.btn_div}
-					disabled={!!isCargoInsured}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Cargo Insurance
-				</Button>
+				{canEditCancelService ? (
+					<Button
+						onClick={() => setShowModal('cargo_insurance_service')}
+						className={styles.btn_div}
+						disabled={!!isCargoInsured}
+					>
+						<span className={styles.add_icon}>+</span>
+						Add Cargo Insurance
+					</Button>
+				) : null }
 			</div>
 
 			{showModal === 'add_sell_price'
@@ -203,7 +211,7 @@ function List({ isSeller = false }) {
 					primary_service={primary_service}
 				/>
 			) : null}
-		</div>
+		</section>
 	);
 }
 
