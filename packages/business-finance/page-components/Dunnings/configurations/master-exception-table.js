@@ -1,12 +1,15 @@
-import { Tooltip, Toggle, Button } from '@cogoport/components';
+import { Toggle, Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDelete } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
+import showOverflowingNumber from '../../commons/showOverflowingNumber.tsx';
 import GetSortingData from '../components/ExceptionsManagement/sorting.tsx';
 
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
+const NAME_LIMIT = 32;
 
 const masterExceptionColumn = ({
 	sort,
@@ -24,18 +27,7 @@ const masterExceptionColumn = ({
 			id       : 'name',
 			accessor : (row) => (
 				<div>
-					<Tooltip
-						content={(
-							<div className={styles.tooltip_text}>
-								{row?.name}
-							</div>
-						)}
-						interactive
-					>
-						<div className={styles.customer_name}>
-							{row?.name || ''}
-						</div>
-					</Tooltip>
+					{!isEmpty(row?.name) ? showOverflowingNumber(row?.name, NAME_LIMIT) : '-'}
 				</div>
 			),
 		},

@@ -28,6 +28,7 @@ function ExceptionsManagement() {
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 	const [masterCount, setMasterCount] = useState(0);
 	const [cyclewiseCount, setCyclewiseCount] = useState(0);
+	const [entityId, setEntityId] = useState(null);
 
 	const {
 		data,
@@ -52,6 +53,7 @@ function ExceptionsManagement() {
 		setExceptionFilter,
 		setShowCycleExceptions,
 		setCycleListId,
+		setEntityId,
 	});
 	const MASTER_COLUMN = masterExceptionColumn({
 		sort,
@@ -132,6 +134,7 @@ function ExceptionsManagement() {
 				setShowCycleExceptions={setShowCycleExceptions}
 				cycleListId={cycleListId}
 				getMasterList={getMasterList}
+				entityId={entityId}
 				{...rest}
 			/>
 

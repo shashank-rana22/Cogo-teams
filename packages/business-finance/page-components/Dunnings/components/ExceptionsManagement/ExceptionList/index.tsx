@@ -22,6 +22,7 @@ function ExceptionList({
 	setSearchValue,
 	cycleListId,
 	getMasterList,
+	entityId = '',
 	...rest
 }:ExceptionListProps) {
 	const { loading } = rest || {};
@@ -38,6 +39,7 @@ function ExceptionList({
 				setShowCycleExceptions={setShowCycleExceptions}
 				cycleListId={cycleListId}
 				getMasterList={getMasterList}
+				entityId={entityId}
 			/>
 			<Table
 				columns={columns}
