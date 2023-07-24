@@ -1331,6 +1331,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'list_communications',
+		access_type  : 'private',
+		service_name : 'communication',
+	},
+	{
 		api          : 'get_process',
 		access_type  : 'private',
 		service_name : 'bookings',
