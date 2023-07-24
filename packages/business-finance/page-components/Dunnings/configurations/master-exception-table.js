@@ -60,54 +60,6 @@ const masterExceptionColumn = ({
 		{
 			Header: (
 				<div style={{ display: 'flex' }}>
-					<span style={{ marginRight: '8px' }}>Credit Days</span>
-					<GetSortingData
-						setSort={setSort}
-						type="creditDays"
-						exceptionFilter={exceptionFilter}
-						setExceptionFilter={setExceptionFilter}
-						sort={sort}
-					/>
-				</div>
-			),
-			id       : 'creditDays',
-			accessor : (row) => (
-				<div className={styles.text}>
-					{row?.creditDays || DEFAULT_VALUE}
-				</div>
-			),
-		},
-		{
-			Header: (
-				<div style={{ display: 'flex' }}>
-					<span style={{ marginRight: '8px' }}>Credit Amount</span>
-					<GetSortingData
-						setSort={setSort}
-						type="creditAmount"
-						exceptionFilter={exceptionFilter}
-						setExceptionFilter={setExceptionFilter}
-						sort={sort}
-					/>
-				</div>
-			),
-			id       : 'creditAmount',
-			accessor : (row) => (
-				<div className={styles.text}>
-					{formatAmount({
-						amount   : row?.creditAmount || DEFAULT_VALUE,
-						currency : row?.currency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'code',
-							minimumFractionDigits : 2,
-						},
-					})}
-				</div>
-			),
-		},
-		{
-			Header: (
-				<div style={{ display: 'flex' }}>
 					<span style={{ marginRight: '8px' }}>Total Due</span>
 					<GetSortingData
 						type="dueAmount"
