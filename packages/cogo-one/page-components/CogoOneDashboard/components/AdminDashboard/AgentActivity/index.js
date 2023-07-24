@@ -17,14 +17,14 @@ const TAB_MAPPING = {
 function AgentActivity({ activeTab = '', setActiveTab = () => {} }) {
 	const { data = {}, loading = false } = useListChatAgents({ activeTab });
 
-	const { list = [] } = data || {};
+	const { list = [], status_stats = {} } = data || {};
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.activity_name}>Your Agents</div>
 			<div className={styles.main_container_upperpart}>
 				{STATUS_WISE_AGENTS_MAPPING.map((val) => {
-					const { label, name, total } = val || {};
+					const { label, name } = val || {};
 
 					return (
 						<div
@@ -36,7 +36,7 @@ function AgentActivity({ activeTab = '', setActiveTab = () => {} }) {
 							onClick={() => setActiveTab(name)}
 						>
 							<div className={styles.agent_nos_box_uppersection}>
-								<div className={styles.agents_nos}>{total}</div>
+								<div className={styles.agents_nos}>{status_stats[name]}</div>
 								<div className={cl`${styles.agent_status} ${TAB_MAPPING[name]}`} />
 							</div>
 							<div className={styles.agents_status_text}>

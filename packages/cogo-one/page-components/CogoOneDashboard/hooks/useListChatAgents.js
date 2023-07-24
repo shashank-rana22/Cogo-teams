@@ -4,9 +4,9 @@ import { useEffect, useCallback } from 'react';
 const PAGE_LIMIT = 20;
 
 const getParams = ({ activeTab }) => ({
-	sort_by    : 'escalations',
-	page_limit : PAGE_LIMIT,
-	filters    : {
+	page_limit            : PAGE_LIMIT,
+	status_stats_required : true,
+	filters               : {
 		status: activeTab,
 	},
 });

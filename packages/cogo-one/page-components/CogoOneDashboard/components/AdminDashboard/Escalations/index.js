@@ -8,6 +8,8 @@ import useListEscalationChat from '../../../hooks/useListEscalationChat';
 import LoaderEscalation from './LoaderEscalations';
 import styles from './styles.module.css';
 
+const MIN_ESCALATED_CHAT = 0;
+
 function Escalation() {
 	const { data = {}, loading = false } = useListEscalationChat();
 	const { list = [] } = data || {};
@@ -36,7 +38,7 @@ function Escalation() {
 				: (
 					<div className={styles.redflags_lists}>
 						{(list || []).map((item) => {
-							const { agent_data = {}, active_assigned_chats, id } = item || {};
+							const { agent_data = {}, escalated, id } = item || {};
 							const { email = '', name = '' } = agent_data || {};
 
 							return (
@@ -55,7 +57,7 @@ function Escalation() {
 											<div className={styles.email_content}>{email}</div>
 										</div>
 									</div>
-									<div className={styles.notification_nos}>{active_assigned_chats}</div>
+									<div className={styles.notification_nos}>{escalated || MIN_ESCALATED_CHAT}</div>
 								</div>
 							);
 						})}

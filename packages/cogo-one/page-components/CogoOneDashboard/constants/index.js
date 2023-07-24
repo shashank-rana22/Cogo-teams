@@ -71,17 +71,14 @@ export const STATUS_WISE_AGENTS_MAPPING = [
 	{
 		label : 'Online Agents',
 		name  : 'active',
-		total : 0,
 	},
 	{
 		label : 'Offline Agents',
 		name  : 'inactive',
-		total : 0,
 	},
 	{
 		label : 'On Break Agents',
 		name  : 'break',
-		total : 0,
 	},
 ];
 

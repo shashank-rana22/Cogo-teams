@@ -4,8 +4,9 @@ import { useEffect, useCallback } from 'react';
 const PAGE_LIMIT = 30;
 
 const getParams = () => ({
-	sort_by    : 'escalations',
-	page_limit : PAGE_LIMIT,
+	sort_by                   : 'escalations',
+	page_limit                : PAGE_LIMIT,
+	escalation_stats_required : true,
 });
 
 const useListEscalationChat = () => {
