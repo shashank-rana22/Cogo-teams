@@ -10,14 +10,13 @@
 	top: 76px;
 	right: 10px;
 	z-index: 999;
+	width: 30px !important;
+	height: 30px !important;
 	box-shadow: 0 0 8px #0402022e;
+	stroke: #040202;
 
 	svg {
-		transition: transform 0.25s ease;
-	}
-
-	&:hover svg {
-		transform: rotate(-25deg);
+		margin-top: 2px;
 	}
 }
 
