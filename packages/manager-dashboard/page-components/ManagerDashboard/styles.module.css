@@ -124,3 +124,16 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.right_table {
+	:global {
+		.ui_table_container {
+			width: 230px;
+		}
+	}
+}
+
+.mean_value_wrapper {
+	padding: 10px 0  0 20px;
+	font-weight: 600;
+}
