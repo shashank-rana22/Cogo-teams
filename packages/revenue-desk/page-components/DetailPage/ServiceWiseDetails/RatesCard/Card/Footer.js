@@ -17,6 +17,7 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 	const isDisplayLineItems = !isEmpty([...lineItems, ...originLocalsLineItems, ...destinationLocalsLineItems]);
 	const isShowSellRate = singleServiceData?.service_type === 'fcl_freight_service';
 	const [showLineItems, setShowLineItems] = useState(false);
+	const [showRemarks, setShowRemarks] = useState(false);
 	const showValidity = (item) => {
 		if (item?.rowData?.is_rate_expired) {
 			return <span style={{ color: 'red' }}> (This Rate is Expired)</span>;
@@ -61,7 +62,25 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 						</Pill>
 					</div>
 				) : null}
-				{data?.rowData?.remarks ? <div /> : null}
+				{data?.rowData?.remarks ? (
+					<Popover
+						placement="bottom"
+						trigger="mouseenter"
+						render={(
+							<div className={styles.text}>
+								{data?.rowData?.remarks}
+							</div>
+						)}
+					>
+						<div className={styles.text3}
+							onClick={() => setShowRemarks(!showRemarks)}
+							role="button"
+							tabIndex={0}
+						>
+							remarks : <span style={{ textDecoration: 'underline' }}>view</span>
+						</div>
+					</Popover>
+				): null}
 			</div>
 			<div className={styles.progress_bar_section}>
 

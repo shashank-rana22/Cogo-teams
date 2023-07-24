@@ -74,6 +74,10 @@
 	font-weight: 500;
 	color: #f37166;
 }
+.text3 {
+	font-size: 12px;
+	font-weight: 500;
+}
 
 .progress_bar_section {
 	display: flex;

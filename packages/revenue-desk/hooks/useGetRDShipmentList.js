@@ -50,7 +50,7 @@ const useGetRDShipmentList = () => {
 			origin_airport_id               : filters?.origin_airport_id || undefined,
 			destination_airport_id          : filters?.destination_airport_id || undefined,
 			port_id                         : filters?.port_id || undefined,
-			airpot_id                       : filters?.airpot_id || undefined,
+			airport_id                      : filters?.airport_id || undefined,
 			trade_type                      : filters?.trade_type || undefined,
 			state                           : shipmentStatusMapping[filters?.state] || undefined,
 			source                          : filters?.source || undefined,
