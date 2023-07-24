@@ -73,16 +73,20 @@
 	background-color: #221f20;
 	border-radius: 50%;
 
-	&.pie_chart_key_1 {
+	&.manual {
 		background-color: #63bec8;
 	}
 
-	&.pie_chart_key_2 {
+	&.predicted {
 		background-color: #f9ae64;
 	}
 
-	&.pie_chart_key_3 {
+	&.rate_extension {
 		background-color: #9ba0cb;
+	}
+
+	&.cluster_rate_extension {
+		background-color: #58d3fe;
 	}
 }
 
