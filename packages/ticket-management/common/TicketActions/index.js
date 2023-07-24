@@ -40,7 +40,7 @@ function RenderContent({
 	filteredActions = [], isModal = false, isCurrentReviewer = false, handleAction = () => {},
 	updateLoading = false, actionLoading = '', setConfirmationConfig = () => {},
 }) {
-	const handleConfirmation = (e, { item }) => {
+	const handleConfirmation = ({ e, item }) => {
 		if (isModal) {
 			handleAction(e, item);
 		} else {
@@ -59,7 +59,7 @@ function RenderContent({
 						size="sm"
 						themeType={isModal ? 'primary' : 'linkUi'}
 						className={cl`${styles.action_button} ${isModal ? styles.modal_button : ''}`}
-						onClick={(e) => handleConfirmation(e, { item })}
+						onClick={(e) => handleConfirmation({ e, item })}
 						loading={updateLoading && actionLoading === item}
 						disabled={updateLoading && actionLoading !== item}
 					>
