@@ -16,7 +16,7 @@ function ViewInvoices() {
 	const [remarksVal, setRemarksVal] = useState({
 		collectionPartyRemark : null,
 		billingPartyRemark    : null,
-		invoiceDetailsRemark  : null,
+		invoiceDetailsRemark  : [],
 		taggingRemark         : null,
 	});
 	const [overAllRemark, setOverAllRemark] = useState('');

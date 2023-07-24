@@ -6,16 +6,18 @@ import {
 	Textarea,
 	Checkbox,
 	ButtonIcon,
+	CheckboxGroup,
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMCrossInCircle, IcMInfo, IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
+import invoiceDetailsRejectCheckboxList from '../../../../constants/invoice-details-checkbox-list';
 import useListShipment from '../../../../hook/useListShipment';
 import useShipmentDocument from '../../../../hook/useShipmentDocument';
 import isDisabled from '../../../../utils/isDisabled';
@@ -56,6 +58,8 @@ function ShipmentDetailsCard({
 	const [showLineItem, setShowLineItem] = useState(false);
 	const [showRejected, setShowRejected] = useState({});
 	const [showHighAdvanceModal, setShowHighAdvancedModal] = useState(false);
+	const [checkedValue, setCheckedValue] = useState([]);
+
 	const {
 		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject, serviceProviderDetail,
 	} = data || {};
@@ -163,7 +167,7 @@ function ShipmentDetailsCard({
 		} else if (id === 2) {
 			setRemarksVal({ ...remarksVal, billingPartyRemark: null });
 		} else if (id === 3) {
-			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: null });
+			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: [] });
 		}
 	};
 
@@ -183,7 +187,7 @@ function ShipmentDetailsCard({
 		} else if (Object.keys(showRejected).includes('2')) {
 			setRemarksVal({ ...remarksVal, billingPartyRemark: null });
 		} else {
-			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: null });
+			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: [] });
 		}
 		setShowRejected(false);
 	};
@@ -197,6 +201,17 @@ function ShipmentDetailsCard({
 		setShowLineItem(true);
 		setItemCheck(true);
 	};
+
+	const stringifyRemarksVal = JSON.stringify(remarksVal);
+
+	useEffect(() => {
+		setRemarksVal({
+			...JSON.parse(stringifyRemarksVal),
+			invoiceDetailsRemark:
+			[...checkedValue, JSON.parse(stringifyRemarksVal).invoiceDetailsRemark[
+				JSON.parse(stringifyRemarksVal).invoiceDetailsRemark.length - 1]],
+		});
+	}, [checkedValue, stringifyRemarksVal, setRemarksVal]);
 
 	return (
 		<div>
@@ -409,56 +424,28 @@ function ShipmentDetailsCard({
 											{Object.keys(showRejected).includes('3') && (
 												<div>
 													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															Invoice Number -
-															{' '}
-															<span>{billNumber}</span>
-														</div>
-													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															Invoice Date -
-															{' '}
-															<span>
-																{formatDate({
-																	date: billDate,
-																	dateFormat:
-																	GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
-																	formatType: 'date',
-																})}
-															</span>
-														</div>
-													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															Status -
-															{' '}
-															<span>{status}</span>
-														</div>
-													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															Place Of Supply -
-															{' '}
-															<span>{placeOfSupply}</span>
-														</div>
+														<CheckboxGroup
+															options={invoiceDetailsRejectCheckboxList(
+																billNumber,
+																billDate,
+																status,
+																placeOfSupply,
+															)}
+															onChange={setCheckedValue}
+															value={checkedValue}
+															style={{ display: 'flex', flexDirection: 'column' }}
+														/>
 													</div>
 
 													<Textarea
 														name="remark"
 														size="md"
 														placeholder="Remarks Here ..."
-														value={remarksVal.invoiceDetailsRemark}
-														onChange={(value: string) => setRemarksVal({
+														value={remarksVal.invoiceDetailsRemark[remarksVal
+															.invoiceDetailsRemark.length - 1]}
+														onChange={(value) => setRemarksVal({
 															...remarksVal,
-															invoiceDetailsRemark: value,
+															invoiceDetailsRemark: [...checkedValue, value],
 														})}
 														style={{ width: '700', height: '100px' }}
 													/>
@@ -693,7 +680,6 @@ function ShipmentDetailsCard({
 											>
 												{label}
 												{' '}
-												Invoice Details
 												<div
 													style={{ justifyContent: 'center', display: 'flex' }}
 												>
