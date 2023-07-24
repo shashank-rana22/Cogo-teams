@@ -11,7 +11,7 @@ function InitialMessage({ ticketData = {}, userId = '' }) {
 		UserID : activityUserId = '',
 	} = ticket || {};
 	const { Attachment: mediaUrls = [], ...restData } = data || {};
-	const { SystemUserID: systemUserID = '', Name:name = '' } = ticketUser || {};
+	const { SystemUserID: systemUserID = '', Name: name = '' } = ticketUser || {};
 
 	return (
 		<TicketComment
