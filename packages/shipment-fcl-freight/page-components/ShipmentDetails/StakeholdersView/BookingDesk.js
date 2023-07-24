@@ -20,11 +20,13 @@ import Tasks from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
+import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const UNAUTHORIZED_STATUS_CODE = 403;
+const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function BookingDesk({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -50,6 +52,7 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 		...servicesGet,
 		...getTimeline,
 		activeStakeholder,
+		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	useEffect(() => {
