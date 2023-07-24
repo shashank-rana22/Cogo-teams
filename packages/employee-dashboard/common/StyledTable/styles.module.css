@@ -1,0 +1,44 @@
+.container {
+	width: 100%;
+	overflow-x: auto;
+	scroll-behavior: smooth;
+
+	:global {
+		table {
+			padding: 0;
+		}
+
+		.ui_table_head_cell {
+			padding: 10px;
+			background-color: #deebed;
+			border-bottom: 1px solid #f68b21;
+		}
+
+		.ui_table_body_cell {
+			flex-wrap: wrap;
+			padding: 12px 8px;
+			background: #fff;
+			background-color: #fff;
+		}
+
+		.ui_table_body_row {
+			position: relative;
+		}
+
+		.ui_table_body_cell:first-child {
+			border-radius: 6px 0 0 6px;
+		}
+
+		.ui_table_body_cell:last-child {
+			border-radius: 0 6px 6px 0;
+		}
+
+		.ui_table_head_cell:first-child {
+			border-radius: 6px 0 0 6px;
+		}
+
+		.ui_table_head_cell:last-child {
+			border-radius: 0 6px 6px 0;
+		}
+	}
+}
