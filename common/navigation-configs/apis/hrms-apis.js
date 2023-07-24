@@ -1,4 +1,4 @@
-const HRMS = {
+const consolidated_invoices = {
 	new_employee_dashboard: [
 		{
 			api          : 'create_employee_detail',
@@ -464,4 +464,4 @@ const HRMS = {
 	],
 };
 
-export default HRMS;
+export default consolidated_invoices;

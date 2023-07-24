@@ -1,0 +1,17 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	:global(.ui_select_display_container) {
+		width: 160px;
+	}
+}
+
+.modal_body {
+	:global {
+		.ui_modal_body_container {
+			max-height: fit-content;
+		}
+	}
+}

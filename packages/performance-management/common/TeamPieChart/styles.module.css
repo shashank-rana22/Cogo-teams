@@ -1,0 +1,22 @@
+.pie_container {
+	height: 100%;
+}
+
+.empty_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 90%;
+	padding: 12px;
+	margin-top: 8px;
+	background: #fff;
+	border-radius: 5px;
+}
+
+.pie_tooltip {
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #bdbdbd;
+	border-radius: 4px;
+}

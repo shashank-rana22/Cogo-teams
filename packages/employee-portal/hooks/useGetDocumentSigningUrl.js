@@ -13,6 +13,7 @@ const useGetDocumentSigningUrl = ({ getEmployeeDetails, document_type }) => {
 				params: {
 					document_id: id,
 					document_type,
+
 				},
 			});
 

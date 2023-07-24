@@ -18,11 +18,11 @@ import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
-import employeeDashboard from './config/employee-dashboard';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
 import groundOps from './config/ground-ops';
+import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
@@ -31,11 +31,10 @@ import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import liabilityDashboard from './config/liability-dashboard';
 import locations from './config/location';
-import managerDashboard from './config/manager-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
-import PERFORMANCE_MANAGEMENT from './config/performance-management';
+import performanceManagement from './config/performance-management';
 import printingDesk from './config/printing-desk';
 import referral from './config/referral';
 import revenueDesk from './config/revenue-desk';
@@ -84,7 +83,7 @@ const routeConfig = {
 	...myProfile,
 	...inventory_management,
 	...kamMonitoring,
-	...PERFORMANCE_MANAGEMENT,
+	...performanceManagement,
 	...employeePortal,
 	...shipmentFclFreight,
 	...shipmentFclCfs,
@@ -125,10 +124,9 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
-	...managerDashboard,
-	...employeeDashboard,
 	...printingDesk,
 	...ftlAdmin,
+	...igmDesk,
 	...airlinePluginBooking,
 	...bookingDeskSurface,
 };

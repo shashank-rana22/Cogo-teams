@@ -1,0 +1,9 @@
+.popover_item {
+	padding: 8px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.popover_item:hover {
+	background: #bdbdbd;
+}
