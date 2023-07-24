@@ -1,0 +1,8 @@
+.container {
+	margin: 24px 0;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}

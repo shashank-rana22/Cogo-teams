@@ -1,0 +1,22 @@
+.card_container {
+	padding: 24px;
+	margin: 16px 0;
+	border: 1px solid #ebebeb;
+	border-radius: 4px;
+}
+
+.card_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.agent_detail {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.agent {
+	margin: 0 8px 0 0;
+}

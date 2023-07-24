@@ -1,6 +1,9 @@
 import { Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 
+import ListObjectiveUserMappings from './ListObjectiveUserMappings';
 import styles from './styles.module.css';
+import useGetObjectiveUserMappings from './useGetObjectiveUserMappings';
 
 const MODE_BASIS_BUTTON_MAPPING = {
 	create: (
@@ -57,6 +60,10 @@ const MODE_BASIS_BUTTON_MAPPING = {
 function SetObjectiveWeightage(props) {
 	const { activeTabDetails } = props;
 
+	const { list } = useGetObjectiveUserMappings();
+
+	const { control } = useForm();
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
@@ -77,6 +84,11 @@ function SetObjectiveWeightage(props) {
 					Group Users by Objective
 				</Button>
 			</div>
+
+			<ListObjectiveUserMappings
+				list={list}
+				control={control}
+			/>
 
 			<div className={styles.footer}>
 				<Button
