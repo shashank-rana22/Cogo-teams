@@ -8,8 +8,8 @@ const TIME_SEC = 60;
 const MILI_SEC = 1000;
 const MIN_IN_MILI_SEC = 60000;
 
-function VideoCallTimer({ callingDetails = {}, time = 0, setTime = () => {} }) {
-	const { call_status = '' } = callingDetails || {};
+function VideoCallTimer({ callingRoomDetails = {}, time = 0, setTime = () => {} }) {
+	const { call_status = '' } = callingRoomDetails || {};
 
 	useEffect(() => {
 		let interval = null;

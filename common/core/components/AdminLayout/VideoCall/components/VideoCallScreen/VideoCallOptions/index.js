@@ -33,20 +33,20 @@ function VideoCallOptions({
 	options = {},
 	setOptions = () => {},
 	toggleMic = () => {},
-	callingDetails = {},
+	callingRoomDetails = {},
 	type = '',
 }) {
 	const { isScreenShareActive = false, isMicActive = false } = options || {};
-	const { request_screen_share = false } = callingDetails || {};
+	const { request_screen_share = false } = callingRoomDetails || {};
 
 	const handleRequestScreenShare = ({ e, clickType }) => {
 		if (clickType === 'mini_screen') {
 			e.stopPropagation();
 		}
 		callUpdate({
-			data            : { request_screen_share: !request_screen_share },
+			data          : { request_screen_share: !request_screen_share },
 			firestore,
-			calling_room_id : callDetails?.calling_room_id,
+			callingRoomId : callDetails?.callingRoomId,
 		});
 	};
 

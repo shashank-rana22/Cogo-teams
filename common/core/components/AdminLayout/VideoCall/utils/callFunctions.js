@@ -14,12 +14,12 @@ export const stopStream = ({ stream_type, current_stream }) => {
 	});
 };
 
-export const callUpdate = ({ data, firestore, calling_room_id }) => {
-	if (calling_room_id) {
+export const callUpdate = ({ data, firestore, callingRoomId }) => {
+	if (callingRoomId) {
 		try {
 			const videCallRoomDoc = doc(
 				firestore,
-				`${FIRESTORE_PATH.video_calls}/${calling_room_id}`,
+				`${FIRESTORE_PATH.video_calls}/${callingRoomId}`,
 			);
 
 			updateDoc(videCallRoomDoc, {
@@ -51,11 +51,11 @@ export const saveCallingData = async ({ data, callBackFunc, firestore }) => {
 	}
 };
 
-export const saveWebrtcToken = ({ data, calling_room_id, path, firestore }) => {
-	if (calling_room_id) {
+export const saveWebrtcToken = ({ data, callingRoomId, path, firestore }) => {
+	if (callingRoomId) {
 		const WebrtcTokenRoomDoc = doc(
 			firestore,
-			`${FIRESTORE_PATH.video_calls}/${calling_room_id}/${FIRESTORE_PATH.webrtc_token}/${path}`,
+			`${FIRESTORE_PATH.video_calls}/${callingRoomId}/${FIRESTORE_PATH.webrtc_token}/${path}`,
 		);
 
 		try {

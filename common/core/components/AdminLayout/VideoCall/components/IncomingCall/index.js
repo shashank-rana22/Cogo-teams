@@ -14,7 +14,7 @@ function CallComing({
 	const audioRef = useRef(null);
 	const [isMaximize, setIsMaximize] = useState(true);
 
-	const { my_details } = callDetails?.calling_details || {};
+	const { my_details } = callDetails?.callingRoomDetails || {};
 
 	useEffect(() => {
 		const audioRefCopy = audioRef;

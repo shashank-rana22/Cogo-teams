@@ -5,11 +5,11 @@ import { useCallback } from 'react';
 export const useSetInACall = () => {
 	const dispatch = useDispatch();
 
-	const saveInACallStatus = useCallback((call_status) => {
+	const saveInACallStatus = useCallback((callStatus) => {
 		dispatch(
 			setProfileState({
 				video_call_recipient_data : {},
-				is_in_video_call          : call_status,
+				is_in_video_call          : callStatus,
 			}),
 		);
 	}, [dispatch]);

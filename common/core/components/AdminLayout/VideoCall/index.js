@@ -20,21 +20,20 @@ function VideoCall({
 
 	const [callComing, setCallComing] = useState(false);
 	const [webrtcToken, setWebrtcToken] = useState({
-		user_token : null,
-		peer_token : null,
+		userToken : null,
+		peerToken : null,
 	});
 	const [callDetails, setCallDetails] = useState({
-		my_details           : null,
-		peer_details         : null,
-		calling_details      : null,
-		calling_room_id      : null,
-		webrtc_token_room_id : null,
-		calling_type         : null,
+		myDetails          : null,
+		peerDetails        : null,
+		callingRoomDetails : null,
+		callingRoomId      : null,
+		webrtcTokenRoomId  : null,
+		callingType        : null,
 	});
 	const [streams, setStreams] = useState({
-		user_stream  : null,
-		video_stream : null,
-		peer_stream  : null,
+		userStream : null,
+		peerStream : null,
 	});
 	const [options, setOptions] = useState({
 		isMicActive         : true,
@@ -71,15 +70,15 @@ function VideoCall({
 	});
 
 	const missCallHandle = useCallback(() => {
-		if (callDetails?.calling_details?.call_status === 'calling') {
+		if (callDetails?.callingRoomDetails?.call_status === 'calling') {
 			callUpdate({
-				data            : { call_status: 'miss_call' },
+				data          : { call_status: 'miss_call' },
 				firestore,
-				calling_room_id : callDetails?.calling_room_id,
+				callingRoomId : callDetails?.callingRoomId,
 			});
 			callEnd();
 		}
-	}, [callDetails?.calling_room_id, callDetails?.calling_details?.call_status, callEnd, firestore]);
+	}, [callDetails?.callingRoomId, callDetails?.callingRoomDetails?.call_status, callEnd, firestore]);
 
 	useEffect(
 		() => {
@@ -95,24 +94,24 @@ function VideoCall({
 	);
 
 	useEffect(() => {
-		if (streams.peer_stream && streamRef.current) {
-			streamRef.current.srcObject = streams.peer_stream;
+		if (streams.peerStream && streamRef.current) {
+			streamRef.current.srcObject = streams.peerStream;
 		}
 	}, [streams]);
 
 	useEffect(() => {
 		if (
-			webrtcToken?.peer_token
-			&& callDetails?.calling_type === 'outgoing'
+			webrtcToken?.peerToken
+			&& callDetails?.callingType === 'outgoing'
 			&& peerRef.current
 		) {
 			try {
-				peerRef.current?.signal?.(webrtcToken?.peer_token);
+				peerRef.current?.signal?.(webrtcToken?.peerToken);
 			} catch (error) {
 				console.error('not able to load signal', error);
 			}
 		}
-	}, [callDetails?.calling_type, webrtcToken?.peer_token]);
+	}, [callDetails?.callingType, webrtcToken?.peerToken]);
 
 	return (
 		<div>

@@ -21,9 +21,9 @@ function useVideocallOptions({
 				call_status: 'end_call',
 			},
 			firestore,
-			calling_room_id: callDetails?.calling_room_id,
+			callingRoomId: callDetails?.callingRoomId,
 		});
-	}, [callDetails?.calling_room_id, callEnd, firestore]);
+	}, [callDetails?.callingRoomId, callEnd, firestore]);
 
 	const toggleMic = useCallback(({ e, clickType }) => {
 		if (clickType === 'mini_screen') {
@@ -31,8 +31,8 @@ function useVideocallOptions({
 		}
 		setOptions((prev) => ({ ...prev, isMicActive: !prev.isMicActive }));
 		const loaclStream = streams;
-		if (loaclStream?.user_stream) {
-			loaclStream.user_stream.getAudioTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !options.isMicActive;
+		if (loaclStream?.userStream) {
+			loaclStream.userStream.getAudioTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !options.isMicActive;
 		}
 	}, [options.isMicActive, setOptions, streams]);
 
@@ -42,8 +42,8 @@ function useVideocallOptions({
 		}
 		setOptions((prev) => ({ ...prev, isVideoActive: !prev.isVideoActive }));
 		const loaclStream = streams;
-		if (loaclStream?.user_stream) {
-			loaclStream.user_stream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !options.isVideoActive;
+		if (loaclStream?.userStream) {
+			loaclStream.userStream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !options.isVideoActive;
 		}
 	}, [options.isVideoActive, setOptions, streams]);
 

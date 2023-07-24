@@ -21,23 +21,23 @@ function VideoCallScreen({
 	const [time, setTime] = useState(INIT_TIME_ZERO);
 
 	const {
-		calling_type,
-		peer_details : peerDetails = {},
-		my_details: myDetails = {},
-		calling_details = {},
+		callingType,
+		peerDetails = {},
+		myDetails = {},
+		callingRoomDetails = {},
 	} = callDetails || {};
 	const {
 		my_details: roomMyDetails = {},
 		peer_details: roomPeerDetails = {},
 		user_call_options = {},
-	} = calling_details || {};
+	} = callingRoomDetails || {};
 	const { isVideoActive = false, isScreenShareActive = false } = user_call_options || {};
 	const { isMinimize } = options || {};
 
 	const tempRef = ref;
 
 	const getUserName = () => {
-		if (calling_type === 'outgoing') {
+		if (callingType === 'outgoing') {
 			return peerDetails?.user_name || roomPeerDetails?.user_name || 'Unknown user';
 		}
 
@@ -68,7 +68,7 @@ function VideoCallScreen({
 				onClick={() => setOptions((prev) => ({ ...prev, isMinimize: false }))}
 			>
 				<div className={styles.timer}>
-					<VideoCallTimer callingDetails={calling_details} time={time} setTime={setTime} />
+					<VideoCallTimer callingRoomDetails={callingRoomDetails} time={time} setTime={setTime} />
 				</div>
 				<div className={styles.calling_options}>
 					<VideoCallOptions
@@ -79,7 +79,7 @@ function VideoCallScreen({
 						options={options}
 						setOptions={setOptions}
 						toggleMic={toggleMic}
-						callingDetails={calling_details}
+						callingRoomDetails={callingRoomDetails}
 						type="mini_screen"
 					/>
 				</div>
@@ -110,14 +110,14 @@ function VideoCallScreen({
 					</div>
 				</div>
 				<div className={styles.footer}>
-					{streams.peer_stream ? (
+					{streams.peerStream ? (
 						<div className={styles.call_text}>
 							On Call
-							<VideoCallTimer callingDetails={calling_details} time={time} setTime={setTime} />
+							<VideoCallTimer callingRoomDetails={callingRoomDetails} time={time} setTime={setTime} />
 						</div>
 					) : (
 						<div className={styles.call_text}>
-							{calling_type === 'incoming' ? 'Connecting...' : 'Ringing...'}
+							{callingType === 'incoming' ? 'Connecting...' : 'Ringing...'}
 						</div>
 					)}
 
@@ -130,7 +130,7 @@ function VideoCallScreen({
 							options={options}
 							setOptions={setOptions}
 							toggleMic={toggleMic}
-							callingDetails={calling_details}
+							callingRoomDetails={callingRoomDetails}
 						/>
 					</div>
 				</div>
