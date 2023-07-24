@@ -10,6 +10,9 @@ import { callUpdate, saveWebrtcToken } from '../utils/callFunctions';
 
 import { useSetInACall } from './useSetInACall';
 
+const NOT_CALLING_CALL_STATUS = ['rejected', 'end_call', 'miss_call', 'technical_error'];
+const STOP_CALL_STATUS = ['rejected', 'end_call', 'technical_error'];
+
 function useComingCall({
 	firestore,
 	setCallDetails,
@@ -162,19 +165,16 @@ function useComingCall({
 
 	useEffect(() => {
 		const room_data = callDetails?.callingRoomDetails;
-		const notCallingCallStatus = ['rejected', 'end_call', 'miss_call', 'technical_error'];
-		const stopCallStatus = ['rejected', 'end_call', 'technical_error'];
 
 		if (
 			room_data?.call_status
-			&& room_data?.call_status !== 'calling'
-			&& stopCallStatus.includes(room_data?.call_status)
+			&& STOP_CALL_STATUS.includes(room_data?.call_status)
 			&& callingRoomId
 		) {
 			handleCallEnd();
 		}
 
-		if (notCallingCallStatus.includes(room_data?.call_status)) {
+		if (NOT_CALLING_CALL_STATUS.includes(room_data?.call_status)) {
 			setCallComing(false);
 		}
 	}, [callDetails?.callingRoomDetails, handleCallEnd, setCallComing, callingRoomId]);

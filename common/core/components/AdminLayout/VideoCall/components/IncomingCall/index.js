@@ -14,7 +14,7 @@ function IncomingCall({
 	const audioRef = useRef(null);
 	const [isMaximize, setIsMaximize] = useState(true);
 
-	const { my_details } = callDetails?.callingRoomDetails || {};
+	const { my_details: myDetails = {} } = callDetails?.callingRoomDetails || {};
 
 	useEffect(() => {
 		const audioRefCopy = audioRef;
@@ -53,7 +53,7 @@ function IncomingCall({
 					/>
 					<div className={styles.coming_call_text}>
 						Incoming call from
-						<div className={styles.agent_name}>{my_details?.user_name || 'Unknown'}</div>
+						<div className={styles.agent_name}>{myDetails?.user_name || 'Unknown'}</div>
 					</div>
 					<div className={styles.coming_call_options}>
 						<IcMCall
@@ -80,7 +80,7 @@ function IncomingCall({
 						className={styles.call_coming_text}
 						onClick={() => setIsMaximize(true)}
 					>
-						{my_details?.user_name || 'Unknown'}
+						{myDetails?.user_name || 'Unknown'}
 					</div>
 					<div className={styles.call_coming_btn}>
 						<IcMCall

@@ -22,9 +22,9 @@ function useVideoCallFirebase({
 		user_data: state.profile.user,
 	}));
 
-	const { saveInACallStatus } = useSetInACall();
-
 	const newRoomRef = useRef(null);
+
+	const { saveInACallStatus } = useSetInACall();
 
 	const { callingRoomId = '' } = callDetails || {};
 

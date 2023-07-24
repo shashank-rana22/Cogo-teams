@@ -1,4 +1,4 @@
-import { Avatar, cl } from '@cogoport/components';
+import { Avatar } from '@cogoport/components';
 import { IcMMinus } from '@cogoport/icons-react';
 import { forwardRef, useState } from 'react';
 
@@ -18,6 +18,8 @@ function VideoCallScreen({
 	callDetails = {},
 	firestore = {},
 }, ref) {
+	const tempRef = ref;
+
 	const [time, setTime] = useState(INIT_TIME_ZERO);
 
 	const {
@@ -26,26 +28,19 @@ function VideoCallScreen({
 		myDetails = {},
 		callingRoomDetails = {},
 	} = callDetails || {};
+
 	const {
 		my_details: roomMyDetails = {},
 		peer_details: roomPeerDetails = {},
-		user_call_options = {},
+		user_call_options: userCallOptions = {},
 	} = callingRoomDetails || {};
+
 	const {
 		is_video_active: isVideoActive = false,
-		is_screen_share_active:isScreenShareActive = false,
-	} = user_call_options || {};
+		is_screen_share_active: isScreenShareActive = false,
+	} = userCallOptions || {};
+
 	const { isMinimize } = toggleState || {};
-
-	const tempRef = ref;
-
-	const getUserName = () => {
-		if (callingType === 'outgoing') {
-			return peerDetails?.user_name || roomPeerDetails?.user_name || 'Unknown user';
-		}
-
-		return myDetails?.user_name || roomMyDetails?.user_name || 'Unknown user';
-	};
 
 	const { stopCall, shareScreen, toggleMic } = useVideocallOptions({
 		toggleState,
@@ -56,14 +51,22 @@ function VideoCallScreen({
 		firestore,
 	});
 
-	const handleMinimize = () => {
-		setToggleState((prev) => ({ ...prev, isMinimize: true }));
+	const getUserName = () => {
+		if (callingType === 'outgoing') {
+			return peerDetails?.user_name || roomPeerDetails?.user_name || 'Unknown user';
+		}
+
+		return myDetails?.user_name || roomMyDetails?.user_name || 'Unknown user';
 	};
 
 	const avaterUserName = getUserName();
 
+	const handleMinimize = () => {
+		setToggleState((prev) => ({ ...prev, isMinimize: true }));
+	};
+
 	return (
-		<div className={cl`${!isMinimize ? styles.container : styles.minimize_container}`}>
+		<div className={!isMinimize ? styles.container : styles.minimize_container}>
 			<div
 				role="presentation"
 				type="button"
