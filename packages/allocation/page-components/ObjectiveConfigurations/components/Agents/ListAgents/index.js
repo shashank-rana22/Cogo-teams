@@ -116,15 +116,13 @@ function ListAgents(props) {
 
 	return (
 		<>
-			<div>
-				{list.map((item) => (
-					<ListCard
-						key={item.id}
-						item={item}
-						setActiveTabDetails={setActiveTabDetails}
-					/>
-				))}
-			</div>
+			{list.map((item) => (
+				<ListCard
+					key={item.id}
+					item={item}
+					setActiveTabDetails={setActiveTabDetails}
+				/>
+			))}
 
 			<div className={styles.pagination_container}>
 				<Pagination type="table" />

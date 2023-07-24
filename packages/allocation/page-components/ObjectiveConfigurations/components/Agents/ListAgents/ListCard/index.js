@@ -12,22 +12,36 @@ const { OBJECTIVES } = TAB_PANNEL_KEYS;
 function ListCard(props) {
 	const { item, setActiveTabDetails } = props;
 
-	const { objectives, ...rest } = item;
+	const { objectives, ...restItems } = item;
 
 	const [mode, setMode] = useState('view');
 
 	const DEFAULT_VALUES = {};
-	objectives.forEach((objective) => { DEFAULT_VALUES[`${objective.id}_weightage`] = objective.weightage; });
+	objectives.forEach((objective) => {
+		DEFAULT_VALUES[`${objective.id}_weightage`] = objective.weightage;
+	});
 
-	const { control, handleSubmit } = useForm({
+	const { control, setValue, reset, handleSubmit } = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
 
 	return (
 		<div className={styles.card_container}>
-			<Header mode={mode} setMode={setMode} handleSubmit={handleSubmit} {...rest} />
+			<Header
+				mode={mode}
+				setMode={setMode}
+				handleSubmit={handleSubmit}
+				setValue={setValue}
+				reset={reset}
+				objectives={objectives}
+				{...restItems}
+			/>
 
-			<Objectives objectives={objectives} mode={mode} control={control} />
+			<Objectives
+				objectives={objectives}
+				mode={mode}
+				control={control}
+			/>
 
 			<div
 				className={styles.create_new}

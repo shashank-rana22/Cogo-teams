@@ -3,11 +3,37 @@ import { IcMTick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
+const DEFAULT_WEIGHTAGE = 100;
+const DECIMAL_COUNT = 2;
+const INDEX_LENGTH_NORMALIZATION = 1;
+
 function Header(props) {
-	const { role, user, partner, mode, setMode, handleSubmit } = props;
+	const {
+		role, user, partner, objectives, mode, setMode, handleSubmit, setValue, reset,
+	} = props;
 
 	const onSaveChanges = (values) => {
 		console.log('values :: ', values);
+	};
+
+	const onDistributeEqually = () => {
+		const objectivesCount = objectives?.length;
+		const equalWeight = (DEFAULT_WEIGHTAGE / objectivesCount).toFixed(DECIMAL_COUNT);
+		let lastWeightage = 100.00;
+
+		objectives.forEach((objective, index) => {
+			if (index === objectivesCount - INDEX_LENGTH_NORMALIZATION) {
+				setValue(`${objective.id}_weightage`, (lastWeightage).toFixed(DECIMAL_COUNT));
+			} else {
+				setValue(`${objective.id}_weightage`, equalWeight);
+				lastWeightage -= equalWeight;
+			}
+		});
+	};
+
+	const onDiscardChanges = () => {
+		setMode('view');
+		reset();
 	};
 
 	const BUTTON_MAPPING_BASIS_MODE = {
@@ -22,19 +48,27 @@ function Header(props) {
 		),
 		edit: (
 			<>
-				<Button type="button" themeType="link">
+				<Button
+					type="button"
+					themeType="link"
+					onClick={onDistributeEqually}
+				>
 					Distribute Equally
 				</Button>
 
 				<Button
 					type="button"
 					themeType="secondary"
-					onClick={() => setMode('view')}
+					onClick={onDiscardChanges}
 				>
 					Discard Changes
 				</Button>
 
-				<Button type="button" themeType="accent" onClick={handleSubmit(onSaveChanges)}>
+				<Button
+					type="button"
+					themeType="accent"
+					onClick={handleSubmit(onSaveChanges)}
+				>
 					<IcMTick style={{ marginRight: '4px' }} />
 					Save Changes
 				</Button>

@@ -1,5 +1,5 @@
 import { Accordion, Pill } from '@cogoport/components';
-import { InputController } from '@cogoport/forms';
+import { InputNumberController } from '@cogoport/forms';
 import { IcMTick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -25,11 +25,11 @@ function Objectives(props) {
 		edit: ({ id, weightage }) => (
 			<>
 				<p className={styles.set_weightage}>Set Weightage (%)</p>
-				<InputController
+				<InputNumberController
 					name={`${id}_weightage`}
 					size="sm"
 					control={control}
-					defaultValue={weightage}
+					value={weightage}
 					suffix={(
 						<IcMTick
 							height={20}
