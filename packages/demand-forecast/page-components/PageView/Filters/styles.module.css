@@ -1,0 +1,31 @@
+.filters {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 8%;
+	padding: 12px;
+	background-color: #fff;
+	border: 1px solid var(--black-20, #e0e0e0);
+	border-radius: 6px;
+}
+
+.filter_title {
+	margin-left: 4px;
+}
+
+.label {
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.controls {
+	margin-bottom: 16px;
+}
+
+.apply {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}

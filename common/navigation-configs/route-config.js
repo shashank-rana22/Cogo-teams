@@ -17,6 +17,7 @@ import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
+import demandForecast from './config/demand-forecast';
 import documentDesk from './config/document-desk';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
@@ -127,6 +128,7 @@ const routeConfig = {
 	...ftlAdmin,
 	...airlinePluginBooking,
 	...bookingDeskSurface,
+	...demandForecast,
 };
 
 export default routeConfig;
