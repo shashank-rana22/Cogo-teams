@@ -2,7 +2,7 @@ import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from 'next/router';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
@@ -41,10 +41,6 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 		activeStakeholder,
 		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
-
-	useEffect(() => {
-		router.prefetch(router.asPath);
-	}, [router]);
 
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
@@ -87,6 +83,24 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
+	const TAB_PANELS = [
+		{
+			name      : 'overview',
+			title     : 'Overview',
+			component : <Overview shipmentData={shipment_data} />,
+		},
+		{
+			name      : 'timeline_and_tasks',
+			title     : 'Timeline and Tasks',
+			component : <Tasks />,
+		},
+		{
+			name      : 'documents',
+			title     : 'Documents',
+			component : <Documents />,
+		},
+	];
+
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
 			<main>
@@ -107,17 +121,15 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 						themeType="secondary"
 						onChange={setActiveTab}
 					>
-						<TabPanel name="overview" title="Overview">
-							<Overview shipmentData={shipment_data} />
-						</TabPanel>
-
-						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-							<Tasks />
-						</TabPanel>
-
-						<TabPanel name="documents" title="Documents">
-							<Documents />
-						</TabPanel>
+						{TAB_PANELS.map(({ name, title, component }) => (
+							<TabPanel
+								name={name}
+								title={title}
+								key={name}
+							>
+								{component}
+							</TabPanel>
+						))}
 					</Tabs>
 				</section>
 			</main>
