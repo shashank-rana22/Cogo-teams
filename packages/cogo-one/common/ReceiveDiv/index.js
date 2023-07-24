@@ -1,4 +1,4 @@
-import { cl, Tooltip } from '@cogoport/components';
+import { Button, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot, IcMCross } from '@cogoport/icons-react';
@@ -10,12 +10,30 @@ import RepliedMessage from '../RepliedMessage';
 
 import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
+import SuggestedActions from './SuggestedActions';
+
+function TicketPopoverContent({ formattedData = {}, setRaiseTicketModal = () => {}, data = {} }) {
+	const triggerModal = () => {
+		setRaiseTicketModal((previous) => {
+			if (previous?.state) {
+				return { state: false, data: {}, source: null };
+			}
+			return { state: true, data: { messageData: data, formattedData }, source: 'message' };
+		});
+	};
+	return (
+		<Button size="md" themeType="secondary" onClick={triggerModal}>
+			Raise a ticket
+		</Button>
+	);
+}
 
 function ReceiveDiv({
 	eachMessage = {},
 	canRaiseTicket = true,
-	ticketPopoverContent = () => {},
 	user_name = '',
+	setRaiseTicketModal = () => {},
+	formattedData = {},
 }) {
 	const [showOrder, setShowOrder] = useState(false);
 	const {
@@ -47,7 +65,17 @@ function ReceiveDiv({
 					<RepliedMessage user_name={user_name} reply_metadata={reply_metadata} />
 				)}
 				{canRaiseTicket && (
-					<Tooltip placement="right" content={ticketPopoverContent(eachMessage)} interactive>
+					<Tooltip
+						placement="right"
+						content={(
+							<TicketPopoverContent
+								setRaiseTicketModal={setRaiseTicketModal}
+								data={eachMessage}
+								formattedData={formattedData}
+							/>
+						)}
+						interactive
+					>
 						<div className={styles.flex_div}>
 							<IcMOverflowDot className={styles.hamburger_styles} />
 						</div>
@@ -57,18 +85,24 @@ function ReceiveDiv({
 					<MessageBody
 						response={response}
 						message_type={message_type}
+						eachMessage={eachMessage}
+						formattedData={formattedData}
 					/>
 				</div>
 			</div>
+
+			{message_type === 'event' && (
+				<SuggestedActions formattedData={formattedData} />
+			)}
+
 			{message_type === 'order' && (
 				<div
 					className={styles.order_container}
 				>
 					<div
-						role="button"
-						tabIndex={0}
+						role="presentation"
 						className={styles.list_button}
-						onClick={() => setShowOrder((p) => !p)}
+						onClick={() => setShowOrder((previous) => !previous)}
 					>
 						{showOrder ? (
 							<span className={styles.btn_container}>

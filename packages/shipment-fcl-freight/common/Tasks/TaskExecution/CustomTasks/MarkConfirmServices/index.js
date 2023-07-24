@@ -4,12 +4,15 @@ import EditRate from './EditRate';
 import formatRate from './helper/formatRate';
 import SelectRate from './SelectRate';
 
-const revenueDeskServices = [
+const REVENUE_DESK_SERVICES = [
 	'ftl_freight_service',
 	'fcl_customs_service',
 	'fcl_cfs_service',
 	'haulage_freight_service',
 ];
+
+const SELECT_RATE_STEP = 1;
+const EDIT_RATE_STEP = 2;
 
 function MarkServiceConfirmed({
 	task = {},
@@ -21,23 +24,25 @@ function MarkServiceConfirmed({
 	refetch = () => {},
 	localService = '',
 }) {
-	const intialStep = revenueDeskServices.includes(task.service_type) ? 1 : 2;
-	const [selectedCard, setSelectedCard] = useState(null);
-	const [step, setStep] = useState(intialStep);
+	const initialStep = REVENUE_DESK_SERVICES.includes(task.service_type) ? SELECT_RATE_STEP : EDIT_RATE_STEP;
+	const [selectedCard, setSelectedCard] = useState([]);
+	const [step, setStep] = useState(initialStep);
 
-	if (step === 1) {
+	if (step === SELECT_RATE_STEP) {
 		return (
 			<SelectRate
 				setStep={setStep}
 				setSelectedCard={setSelectedCard}
+				selectedCard={selectedCard}
 				task={task}
+				servicesList={servicesList}
+				step={step}
 			/>
 		);
 	}
 
 	const formattedRate = formatRate(
 		selectedCard,
-		shipment_data,
 		task.service_type,
 		primaryService,
 		servicesList,

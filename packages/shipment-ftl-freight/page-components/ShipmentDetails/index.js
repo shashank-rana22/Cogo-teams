@@ -1,15 +1,19 @@
 import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
+import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
+import AddService from '../../common/AdditionalServices/components/List/AddService';
 import CancelDetails from '../../common/CancelDetails';
 import Documents from '../../common/Documents';
+import FieldExecutive from '../../common/FieldExecutive';
 import Overview from '../../common/Overview';
+import OverviewManageServices from '../../common/Overview/OverviewManageServices';
 import PocSop from '../../common/PocSop';
 import SalesInvoice from '../../common/SalesInvoice';
 import ShipmentHeader from '../../common/ShipmentHeader';
@@ -23,11 +27,13 @@ import getStakeholderConfig from '../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
+const ACTIVE_STAKEHOLDER = 'superadmin';
+const FORBIDDEN_STATUS_CODE = 403;
+
 function ShipmentDetails() {
-	const activeStakeholder = 'superadmin';
 	const router = useRouter();
 
-	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
+	const stakeholderConfig = getStakeholderConfig({ stakeholder: ACTIVE_STAKEHOLDER });
 	const { get } = useGetShipment();
 
 	const [activeTab, setActiveTab] = useState('overview');
@@ -46,9 +52,9 @@ function ShipmentDetails() {
 		...get,
 		...getTimeline,
 		...servicesGet,
-		activeStakeholder,
+		activeStakeholder: ACTIVE_STAKEHOLDER,
 		stakeholderConfig,
-	}), [get, servicesGet, getTimeline, activeStakeholder, stakeholderConfig]);
+	}), [get, servicesGet, getTimeline, stakeholderConfig]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
@@ -63,7 +69,7 @@ function ShipmentDetails() {
 		);
 	}
 
-	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
+	if (!shipment_data && ![FORBIDDEN_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -76,14 +82,15 @@ function ShipmentDetails() {
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;Refresh
+						{' '}
+						Refresh
 					</Button>
 				</div>
 			</div>
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+	if (getShipmentStatusCode === FORBIDDEN_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>
@@ -136,8 +143,25 @@ function ShipmentDetails() {
 							<Tasks />
 						</TabPanel>
 
+						<TabPanel name="field_executive" title="Field Executive">
+							<FieldExecutive shipment_data={shipment_data} servicesList={servicesGet?.servicesList} />
+						</TabPanel>
+
 						<TabPanel name="invoice_and_quotation" title="Sales Invoice">
 							<SalesInvoice />
+						</TabPanel>
+
+						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
+							<main className={styles.purchasecontainer}>
+								<OverviewManageServices isOpen isPurchaseTab />
+							</main>
+							<main className={styles.accordian}>
+								<PurchaseInvoicing
+									shipmentData={shipment_data}
+									servicesData={servicesGet?.servicesList}
+									AddService={AddService}
+								/>
+							</main>
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">

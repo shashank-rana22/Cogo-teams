@@ -3,8 +3,10 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
+import getNavigationFromUrl from '@cogoport/request/helpers/getNavigationFromUrl';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
+import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
@@ -13,6 +15,8 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
@@ -20,24 +24,34 @@ import Tasks from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
+import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
 const UNAUTHORIZED_STATUS_CODE = 403;
 const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
+const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function Superadmin({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
 
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
-	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
+	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
 	const handleVersionChange = useCallback(() => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
+		const navigation = getNavigationFromUrl();
+
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}
+		${navigation ? `?navigation=${navigation}` : ''}`;
+
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
 	}, [router?.query?.partner_id, shipment_data?.id]);
+
+	const rollover_containers = (container_details || []).filter(
+		(container) => container?.rollover_status === 'requested',
+	);
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
@@ -52,6 +66,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 		...servicesGet,
 		...getTimeline,
 		activeStakeholder,
+		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	useEffect(() => {
@@ -80,7 +95,8 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;Refresh
+						{' '}
+						Refresh
 					</Button>
 				</div>
 			</div>
@@ -103,6 +119,8 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 			<div>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
+
+					<RolloveDetails />
 
 					<div className={styles.toggle_chat}>
 						<Toggle
@@ -167,6 +185,10 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 						</TabPanel>
 					</Tabs>
 				</div>
+
+				{!isEmpty(rollover_containers) ? (
+					<RolloverRequestedModal rollover_containers={rollover_containers} />
+				) : null}
 			</div>
 		</ShipmentDetailContext.Provider>
 	);

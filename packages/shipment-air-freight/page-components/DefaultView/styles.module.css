@@ -36,3 +36,23 @@
 		}
 	}
 }
+
+.shipment_not_found {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.error_heading {
+	font-size: 60px;
+	font-weight: 900;
+	color: #ee3425;
+}
+
+.error_subheading {
+	font-size: 20px;
+	font-weight: 600;
+	color: #444;
+}

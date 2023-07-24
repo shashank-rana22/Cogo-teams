@@ -1,30 +1,40 @@
 import { cl } from '@cogoport/components';
 
 import useListTickets from '../../../../hooks/useListTickets';
+import useUpdateTicketActivity from '../../../../hooks/useUpdateTicketActivity';
 import TicketStructure from '../../../TicketStructure';
 
 import styles from './styles.module.css';
 
-function TicketsSectionPart({ label, status, searchParams, refreshList, setRefreshList, isAdmin }) {
-	const { tickets, listLoading, handleScroll } = useListTickets({
+function TicketsSectionPart({
+	label, status, searchParams, refreshList, setRefreshList, isAdmin, setModalData, isUpdated, setIsUpdated,
+}) {
+	const { tickets, listLoading, handleScroll, fetchTickets = () => {} } = useListTickets({
 		searchParams,
 		status,
 		label,
 		refreshList,
 		setRefreshList,
+		isUpdated,
+		setIsUpdated,
 	});
+
+	const { list, total = 0 } = tickets || {};
 
 	const refreshTickets = () => {
 		setRefreshList((prev) => {
-			const newState = {};
+			const NEW_STATE = {};
 			Object.keys(prev).forEach((key) => {
-				newState[key] = true;
+				NEW_STATE[key] = true;
 			});
-			return newState;
+			return NEW_STATE;
 		});
 	};
 
-	const { list, total = 0 } = tickets;
+	const { updateTicketActivity } = useUpdateTicketActivity({
+		refreshTickets,
+		fetchTickets,
+	});
 
 	return (
 		<div className={cl`${styles.tickets_section_part} ${isAdmin ? styles.admin_ticket_view : ''}`}>
@@ -34,10 +44,11 @@ function TicketsSectionPart({ label, status, searchParams, refreshList, setRefre
 			</div>
 			<TicketStructure
 				data={list}
-				handleScroll={handleScroll}
-				loading={listLoading}
-				refreshTickets={refreshTickets}
 				label={label}
+				listLoading={listLoading}
+				setModalData={setModalData}
+				handleScroll={handleScroll}
+				updateTicketActivity={updateTicketActivity}
 			/>
 		</div>
 	);

@@ -41,16 +41,16 @@
       "value": "air_freight"
     },
     {
-      "label": "Domestic",
-      "value": "domestic_air_freight"
-    },
-    {
       "label": "Customs",
       "value": "air_customs"
     },
     {
       "label": "Local",
       "value": "air_freight_local"
+    },
+    {
+      "label": "Domestic",
+      "value": "domestic_air_freight"
     }
   ],
   "surface": [

@@ -1,0 +1,64 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 16px;
+}
+
+.card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32%;
+	height: 92px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid;
+	border-radius: 12px;
+}
+
+.card:hover {
+	background: var(--color-primary-error-red-5);
+}
+
+.active_card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32%;
+	height: 92px;
+	color: #fff;
+	background: var(--color-primary-error-red-2);
+	border: 1px solid #000;
+	border-radius: 12px;
+}
+
+.campaign_card {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+}
+
+.vertical_border {
+	height: 52px;
+	border-right: 2px solid;
+}
+
+.campaign_card_data {
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+	text-align: left;
+}
+
+.collection_rate {
+	display: flex;
+	margin-top: 12px;
+}
+
+.heading_text {
+	margin: 0;
+}
+
+.stats_data {
+	margin-left: 8px;
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
 import useCheckCustomerCheckoutQuotationConflict from '../../../hooks/useCheckCustomerCheckoutQuotationConflict';
 import useListOmnichannelDocuments from '../../../hooks/useListOmnichannelDocuments';
@@ -13,19 +14,21 @@ function ProfileDetails({
 	activeMessageCard,
 	activeTab,
 	activeVoiceCard,
-	updateLeaduser,
 	activeCardId,
 	setModalType = () => {},
-	setActiveMessage = () => {},
 	activeRoomLoading,
 	setRaiseTicketModal = () => {},
 	zippedTicketsData = {},
 	viewType = '',
-	hasVoiceCallAccess,
+	firestore,
+	userId = '',
+	setActiveTab,
 }) {
-	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
+	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
 
-	const [activeSelect, setActiveSelect] = useState(viewType === 'shipment_view' ? 'user_activity' : 'profile');
+	const [activeSelect, setActiveSelect] = useState(
+		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
+	);
 	const [showMore, setShowMore] = useState(false);
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 	const formattedMessageData = getActiveCardDetails(activeMessageCard) || {};
@@ -74,14 +77,12 @@ function ProfileDetails({
 						loading={loading}
 						openNewTab={openNewTab}
 						ORG_PAGE_URL={ORG_PAGE_URL}
-						updateLeaduser={updateLeaduser}
 						orgId={orgId}
 						disableQuickActions={disableQuickActions}
 						documents_count={documents_count}
 						setModalType={setModalType}
 						hideCpButton={hideCpButton}
 						getOrgDetails={getOrgDetails}
-						setActiveMessage={setActiveMessage}
 						activeRoomLoading={activeRoomLoading}
 						setActiveSelect={setActiveSelect}
 						showMore={showMore}
@@ -89,7 +90,10 @@ function ProfileDetails({
 						setRaiseTicketModal={setRaiseTicketModal}
 						zippedTicketsData={zippedTicketsData}
 						quotationSentData={quotationEmailSentAt}
-						hasVoiceCallAccess={hasVoiceCallAccess}
+						viewType={viewType}
+						firestore={firestore}
+						userId={userId}
+						setActiveTab={setActiveTab}
 					/>
 				)}
 			</div>
@@ -100,12 +104,13 @@ function ProfileDetails({
 				openNewTab={openNewTab}
 				loading={loading}
 				disableQuickActions={disableQuickActions}
-				documents_count={documents_count}
+				documentsCount={documents_count}
 				activeMessageCard={activeMessageCard}
 				activeVoiceCard={activeVoiceCard}
 				activeTab={activeTab}
 				quotationEmailSentAt={quotationEmailSentAt}
 				orgId={orgId}
+				viewType={viewType}
 			/>
 		</div>
 	);

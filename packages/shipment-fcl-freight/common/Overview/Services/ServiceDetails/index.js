@@ -3,11 +3,7 @@ import React from 'react';
 import Header from './Header';
 
 function ServiceDetails({ servicesData = [] }) {
-	const addedServiceComponent = (
-		<Header serviceData={servicesData} />
-	);
-
-	return addedServiceComponent;
+	return <Header serviceData={servicesData} />;
 }
 
 export default ServiceDetails;

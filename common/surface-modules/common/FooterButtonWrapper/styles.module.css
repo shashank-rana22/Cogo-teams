@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 
-	& > button:first-child {
+	& > button:not(:last-child) {
 		margin-right: 12px;
 	}
 }

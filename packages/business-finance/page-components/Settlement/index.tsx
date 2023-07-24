@@ -1,19 +1,56 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Select, Placeholder } from '@cogoport/components';
+import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
+import { upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useListCogoEntities from '../AccountPayables/Dashboard/hooks/useListCogoEntities';
+
+import History from './page-components/History';
 import JournalVoucher from './page-components/JournalVoucher';
 import OnAccountCollection from './page-components/OnAccountCollection';
 import TdsSettlement from './page-components/TdsSettlement';
 import styles from './styles.module.css';
 
+interface ItemProps {
+	business_name: string;
+	entity_code: string;
+}
+interface Profile {
+	profile?: { partner: { id: string } };
+}
 function Settlement() {
 	const { query, push } = useRouter();
+	const { profile }:Profile = useSelector((state) => state);
+
+	const { partner } = profile || {};
+
+	const { id: partnerId } = partner || {};
+
+	const entity = getDefaultEntityCode(partnerId);
+
+	const { loading, entityData = [] } = useListCogoEntities();
+
+	const [entityCode, setEntityCode] = useState(entity);
+
+	const entityDataCount = entityData.length;
+
+	const entityOptions = (entityData || []).map((item: ItemProps) => {
+		const {
+			business_name: companyName = '',
+			entity_code: listEntityCode = '',
+		} = item || {};
+		return {
+			label : `${upperCase(companyName)} (${listEntityCode})`,
+			value : listEntityCode,
+		};
+	});
 
 	const [activeTab, setActiveTab] = useState(query?.active_tab);
 
 	const handleChange = (tab: string) => {
-		if (['JournalVoucher', 'tds-settlement', 'onAccountCollection'].includes(tab)) {
+		if (['JournalVoucher', 'tds-settlement', 'onAccountCollection', 'history'].includes(tab)) {
 			setActiveTab(tab);
 			push(
 				'/business-finance/settlement/[active_tab]',
@@ -26,7 +63,27 @@ function Settlement() {
 
 	return (
 		<div>
-			<div className={styles.main_heading}>Settlement</div>
+			<div className={styles.header}>
+				<div className={styles.header_style}>Settlement</div>
+
+				{loading ? (
+					<Placeholder width="200px" height="30px" />
+				) : (
+					<div className={styles.input}>
+
+						<Select
+							name="business_name"
+							onChange={(entityVal: string) => setEntityCode(entityVal)}
+							value={entityCode}
+							options={entityOptions}
+							placeholder="Select Entity Code"
+							size="sm"
+							disabled={entityDataCount <= 1}
+						/>
+
+					</div>
+				)}
+			</div>
 			<Tabs
 				activeTab={activeTab}
 				fullWidth
@@ -40,14 +97,14 @@ function Settlement() {
 					<TdsSettlement />
 				</TabPanel>
 				<TabPanel name="history" title="History">
-					-
+					<History />
 				</TabPanel>
 
 				<TabPanel name="onAccountCollection" title="On Account Collection">
 					<OnAccountCollection />
 				</TabPanel>
 				<TabPanel name="JournalVoucher" title="Journal Voucher">
-					<JournalVoucher />
+					<JournalVoucher entityCode={entityCode} />
 				</TabPanel>
 			</Tabs>
 		</div>

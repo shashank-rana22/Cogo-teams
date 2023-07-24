@@ -1,0 +1,17 @@
+.container {
+	padding: 30px;
+
+	.core-ui-select__menu {
+		min-width: 100%;
+	}
+
+	.form-item-label {
+		margin-top: 0;
+	}
+}
+
+.placeholder_wrap {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}

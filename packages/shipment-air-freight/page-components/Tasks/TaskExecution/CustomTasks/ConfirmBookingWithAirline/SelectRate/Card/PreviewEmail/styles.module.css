@@ -1,0 +1,38 @@
+.header {
+	position: sticky;
+	top: 0;
+	padding: 10px;
+	margin: 10px;
+	font-size: 18px;
+	font-weight: 600;
+	background: white;
+}
+
+.button_container {
+	margin-right: 8px;
+}
+
+.footer {
+	position: sticky;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	height: 50px;
+	background: white;
+	border-top: 1px solid #000;
+
+	:global {
+		.core-ui-button-root {
+			margin: 5px 10px;
+		}
+	}
+}
+
+.container {
+	:global {
+		.styles_label__w_POy {
+			display: none;
+		}
+	}
+}

@@ -3,38 +3,34 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import CargoDetails from '../../../CargoDetails';
 
 import formatDeadlineDate from './formatDeadlineDate';
+import getTaskDisplayName from './helpers/getTaskDisplayName';
 import styles from './styles.module.css';
 
 function TaskDetails({
 	task = {},
 	isTaskOpen = false,
 }) {
-	const { servicesList } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
-	const requiredServiceArr = [];
+	const REQUIRED_SERVICE_ARR = [];
 	(task.task_field_ids || []).forEach((id) => {
 		(servicesList || []).forEach((serviceObj) => {
 			if (serviceObj.id === id) {
-				requiredServiceArr.push(serviceObj);
+				REQUIRED_SERVICE_ARR.push(serviceObj);
 			}
 		});
 	});
-	let taskName = startCase(task?.label || task?.task);
 
-	if (task?.service_type === 'subsidiary_service') {
-		taskName = `Mark ( ${requiredServiceArr?.[0]?.service_name} ) ${
-			task?.task === 'mark_completed' ? 'Completed' : 'Confirm'
-		}` || 	startCase(task?.label) || startCase(task?.task);
-	}
+	const taskName = getTaskDisplayName({ shipment_data, task, REQUIRED_SERVICE_ARR });
 
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 			<div className={styles.task_and_icon}>
 				<div className={styles.icon}>
 					{task?.status === 'completed' ? (
@@ -51,10 +47,10 @@ function TaskDetails({
 
 			<div>
 				<div className={styles.details}>
-					<div className={styles.task_name}>{taskName}</div>
+					<span className={styles.task_name}>{taskName}</span>
 
 					<div className={styles.task_date_details}>
-						{task?.deadline ? (
+						{task?.status !== 'completed' && task?.deadline ? (
 							<Tooltip
 								interactive
 								theme="light"
@@ -73,8 +69,9 @@ function TaskDetails({
 								<div>
 									<div className={styles.deadline}>
 										<IcMTimer />
-
-										&nbsp;Deadline: &nbsp;
+										{' '}
+										Deadline:
+										{' '}
 										{formatDeadlineDate(new Date(task?.deadline))}
 									</div>
 								</div>
@@ -97,7 +94,7 @@ function TaskDetails({
 						{task?.due_in ? (
 							<div className={styles.completed}>
 								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg"
+									src={GLOBAL_CONSTANTS.image_url.due_in_svg}
 									alt="due-in"
 								/>
 								{`( Due In: ${task.due_in} )`}
@@ -107,7 +104,7 @@ function TaskDetails({
 						{task?.over_due ? (
 							<div className={styles.completed}>
 								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg"
+									src={GLOBAL_CONSTANTS.image_url.over_due_svg}
 									alt="over-due"
 								/>
 								{`( Due In: ${task.over_due} )`}
@@ -118,11 +115,11 @@ function TaskDetails({
 
 				{!isTaskOpen && task?.service_type ? (
 					<div className={styles.cargo_details}>
-						<CargoDetails primary_service={requiredServiceArr?.[0] || {}} />
+						<CargoDetails primary_service={REQUIRED_SERVICE_ARR?.[GLOBAL_CONSTANTS.zeroth_index] || {}} />
 					</div>
 				) : null}
 			</div>
-		</div>
+		</section>
 	);
 }
 

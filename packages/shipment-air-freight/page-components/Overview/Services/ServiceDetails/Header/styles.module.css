@@ -1,0 +1,65 @@
+.container {
+	display: flex;
+	padding: 12px 24px;
+}
+
+.service_details {
+	width: 25%;
+	border-right: 2px solid #f68b21;
+}
+
+.cancelled.service_details {
+	border-right: 2px solid #828282;
+}
+
+.completed.service_details {
+	border-right: 2px solid #abcd62;
+}
+
+.confirmed_by_service_provider.service_details {
+	border-right: 2px solid #abcd62;
+}
+
+.confirmed_by_importer_exporter.service_details {
+	border-right: 2px solid #abcd62;
+}
+
+.service_name {
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.service_provider {
+	font-size: 10px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.state {
+	padding: 2px 4px;
+	font-size: 10px;
+	background-color: #cdf7d4;
+	border-radius: 4px;
+}
+
+.secondary_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 75%;
+	padding-left: 30px;
+}
+
+.details_cta {
+	margin-right: 24px;
+}
+
+.extra_details {
+	display: flex;
+	align-items: center;
+}
+
+.cancelled .state {
+	background-color: #d3d3d3;
+}

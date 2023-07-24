@@ -3,11 +3,6 @@ import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/conve
 
 import { handleServiceType } from './handleServiceType';
 
-const DEFAULT_PRICE = 0;
-const DEFAULT_QUANTITY = 0;
-const DEFAULT_EXCHANGE_RATE = 1;
-const DEFAULT_TAX_PERCENT = 0;
-const DEFAULT_TOTAL = 0;
 const commonControls = (service) => [
 	{
 		label    : handleServiceType(service),
@@ -56,7 +51,7 @@ const commonControls = (service) => [
 		type   : 'static',
 		name   : 'total',
 		span   : 2,
-		render : (item) => <div style={{ marginTop: '5px' }}>{item?.total}</div>,
+		render : (item) => <div style={{ marginLeft: '24px' }}>{item?.total}</div>,
 	},
 ];
 
@@ -105,19 +100,37 @@ const creditNoteControls = ({
 }) => {
 	const control = services?.map((service) => ({
 		...rawControls(service),
-		value: service?.line_items?.map((item) => ({
-			is_checked       : item?.is_checked,
-			code             : item?.code,
-			sac_code         : item?.hsn_code || 'NA',
-			currency         : item?.currency,
-			price_discounted : item?.price_discounted || DEFAULT_PRICE,
-			quantity         : item?.quantity || DEFAULT_QUANTITY,
-			exchange_rate    : item?.exchange_rate || DEFAULT_EXCHANGE_RATE,
-			tax_percent      : item?.tax_percent || DEFAULT_TAX_PERCENT,
-			unit             : item?.unit,
-			total            : item?.tax_total_price_discounted || DEFAULT_TOTAL,
-			name             : item?.name,
-		})),
+		value: service?.line_items?.map((item) => {
+			const {
+				is_checked,
+				code,
+				currency,
+				price_discounted = 0,
+				quantity = 0,
+				exchange_rate = 1,
+				tax_percent = 0,
+				unit,
+				tax_total_price_discounted = 0,
+				sac_code,
+				total,
+				name,
+			} = item || {};
+
+			return {
+				is_checked,
+				code,
+				sac_code,
+				currency,
+				price_discounted,
+				quantity,
+				exchange_rate,
+				tax_percent,
+				unit,
+				total,
+				name,
+				tax_total_price_discounted,
+			};
+		}),
 	}));
 
 	control.push(...controls);

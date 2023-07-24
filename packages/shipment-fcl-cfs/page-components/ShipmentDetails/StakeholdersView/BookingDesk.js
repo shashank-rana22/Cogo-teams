@@ -21,6 +21,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 import styles from './styles.module.css';
 
 const SERVICES_ADDTIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const FORBIDDEN_STATUS_CODE = 403;
 
 function BookingDesk({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -32,7 +33,6 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
 		additional_methods: SERVICES_ADDTIONAL_METHODS,
-		activeStakeholder,
 	});
 
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
@@ -57,7 +57,7 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
+	if (!shipment_data && ![FORBIDDEN_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -78,7 +78,7 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+	if (getShipmentStatusCode === FORBIDDEN_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>

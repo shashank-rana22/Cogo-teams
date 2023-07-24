@@ -3,6 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
+import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
 
@@ -11,24 +12,32 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
+import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const UNAUTHORIZED_STATUS_CODE = 403;
+const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee_shipper_booking_agent' }) {
 	const router = useRouter();
 
 	const [activeTab, setActiveTab] = useState('overview');
 
-	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
+	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
+
+	const rollover_containers = (container_details || []).filter(
+		(container) => container?.rollover_status === 'requested',
+	);
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
@@ -43,6 +52,7 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 		...servicesGet,
 		...getTimeline,
 		activeStakeholder,
+		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	useEffect(() => {
@@ -71,7 +81,8 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;Refresh
+						{' '}
+						Refresh
 					</Button>
 				</div>
 			</div>
@@ -94,6 +105,8 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 			<div>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
+
+					<RolloveDetails />
 
 					<ShipmentChat />
 				</div>
@@ -138,6 +151,10 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 						</TabPanel>
 					</Tabs>
 				</div>
+
+				{!isEmpty(rollover_containers) ? (
+					<RolloverActionModal rollover_containers={rollover_containers} />
+				) : null}
 			</div>
 		</ShipmentDetailContext.Provider>
 	);

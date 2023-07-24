@@ -133,6 +133,27 @@ const controls = (state, cancelReason) => {
 					required: 'Remarks is required',
 				},
 			},
+			{
+				name           : 'sid',
+				type           : 'select',
+				placeholder    : 'Select...',
+				defaultOptions : true,
+				label          : 'Select SIDs',
+				span           : 6,
+				optionsListKey : 'shipment_sid_list',
+				multiple       : true,
+				params         : {
+					filters: {
+						status : 'active',
+						state  : [
+							'in_progress',
+							'shipment_received',
+							'confirmed_by_importer_exporter',
+						],
+					},
+				},
+				rules: { required: 'SID is required' },
+			},
 		],
 
 		supply: [

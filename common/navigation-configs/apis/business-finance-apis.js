@@ -122,6 +122,11 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api      			: 'get_purchase_bills_bill_accept_by_finance_stats',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api         : 'put_purchase_bills_by_id_urgeny_tag',
 			access_type : 'private',
 			feature     : 'coeFinance',
@@ -168,16 +173,14 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api          : 'create_chat_message',
-			access_type  : 'private',
-			feature      : 'coeFinance',
-			service_name : 'chat',
+			api         : 'create_chat_message',
+			access_type : 'private',
+			feature     : 'coeFinance',
 		},
 		{
-			api          : 'list_chat_channels',
-			access_type  : 'private',
-			feature      : 'coeFinance',
-			service_name : 'chat',
+			api         : 'list_chat_channels',
+			access_type : 'private',
+			feature     : 'coeFinance',
 		},
 		{
 			api         : 'delete_chat_message',
@@ -185,10 +188,9 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api          : 'update_chat_message',
-			access_type  : 'private',
-			feature      : 'coeFinance',
-			service_name : 'chat',
+			api         : 'update_chat_message',
+			access_type : 'private',
+			feature     : 'coeFinance',
 		},
 		{
 			api         : 'get_chat_channel',
@@ -201,10 +203,9 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api          : 'update_chat_channel_seen',
-			access_type  : 'private',
-			feature      : 'coeFinance',
-			service_name : 'chat',
+			api         : 'update_chat_channel_seen',
+			access_type : 'private',
+			feature     : 'coeFinance',
 		},
 		{
 			api          : 'update_shipment_manifest',
@@ -226,6 +227,24 @@ const business_finance = {
 			api          : 'update_shipment',
 			access_type  : 'private',
 			feature      : 'coeFinance',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_shipment_invoice_preference',
+			access_type  : 'private',
+			feature      : 'coeFinance',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_document',
+			access_type  : 'private',
+			feature      : 'coe_finance',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_document',
+			access_type  : 'private',
+			feature      : 'coe_finance',
 			service_name : 'shipment',
 		},
 	],

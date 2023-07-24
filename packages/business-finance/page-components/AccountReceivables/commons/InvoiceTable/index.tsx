@@ -1,4 +1,4 @@
-import { Button, Pagination } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters';
@@ -7,6 +7,7 @@ import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
 import { INVOICE_FILTER } from '../../Utils/invoicelistFilter';
 import FilterModal from '../FilterModal';
+import FooterCard from '../FooterCard';
 import SearchInput from '../searchInput';
 import StyledTable from '../styledTable';
 
@@ -21,7 +22,7 @@ interface Props {
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
-function InvoiceTable({ organizationId, entityCode, showName }: Props) {
+function InvoiceTable({ organizationId = '', entityCode = '', showName = false }: Props) {
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
 
@@ -41,6 +42,7 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		bulkIrnGenerate,
 		bulkIrnLoading,
 	} = useBulkIrnGenerate({
+		entityCode,
 		getOrganizationInvoices,
 		checkedRows,
 		setCheckedRows,
@@ -105,16 +107,6 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 					/>
 				</div>
 				<div className={styles.filter_container}>
-
-					{checkedRows?.length > 0 ? (
-						<Button
-							style={{ marginRight: '20px' }}
-							onClick={bulkIrnGenerate}
-							loading={bulkIrnLoading}
-						>
-							Bulk IRN Generate
-						</Button>
-					) : null}
 					<div
 						className={styles.send_report}
 						onClick={() => { sendReport(); }}
@@ -147,7 +139,12 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 				/>
 
 			</div>
-
+			<FooterCard
+				entityCode={entityCode}
+				bulkIrnGenerate={bulkIrnGenerate}
+				bulkIrnLoading={bulkIrnLoading}
+				checkedRows={checkedRows}
+			/>
 		</div>
 	);
 }

@@ -101,7 +101,7 @@ const saas = {
 			service_name : 'saas_subscriptions_v2',
 		},
 		{
-			api          : 'get_shipping_line_for_container_no',
+			api          : 'get_shipping_line_for_search_value',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
@@ -2500,6 +2500,36 @@ const saas = {
 			access_type : 'private',
 			module      : 'product-catalogue',
 			feature     : 'product-catalogue',
+		},
+	],
+	app_saas_live_vessel_tracking: [
+		{
+			api         : 'get_saas_vessel_tracking',
+			access_type : 'private',
+			module      : 'live-vessel-tracking',
+			feature     : 'live-vessel-tracking',
+		},
+	],
+	app_saas_air_ocean_tracking: [
+		{
+			api          : 'update_external_reference_number',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'export_tracking_data',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'list_saas_container_subscriptions_summary',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'list_saas_air_subscriptions_summary',
+			access_type  : 'private',
+			service_name : 'air_tracking',
 		},
 	],
 
