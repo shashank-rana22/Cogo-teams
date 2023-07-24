@@ -1,13 +1,15 @@
 import Layout from '@cogoport/air-modules/components/Layout';
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useEffect } from 'react';
 
-import { usePopupFilterControls } from '../../../../constants/popup_filter_controls';
+import airControls from '../../../../configurations/air-freight-filters';
+import fclControls from '../../../../configurations/fcl-freight-filters';
+import mutateFields from '../../../../utils/mutate-fields';
 
 import styles from './styles.module.css';
 
-function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {} }) {
+function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, showText = true }) {
 	const { service_type = 'fcl', rate_type = null } = globalFilters;
 	const {
 		control,
@@ -15,21 +17,25 @@ function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {} }) {
 		reset,
 		watch,
 		setValue,
-		// handleSubmit,
 	} = useForm();
 
-	const final_controls = usePopupFilterControls(service_type, watch('container_type'));
+	const controls = service_type === 'fcl' ? fclControls : airControls;
 	const containerType = watch('container_type');
+	const rateSource = watch('mode');
+
+	const { newFields } = mutateFields({ controls, containerType });
 
 	useEffect(() => {
-		if (containerType) {
-			setValue('commodity_type', []);
-		}
+		setValue('commodity', []);
 	}, [containerType, setValue]);
 
-	useEffect(() => { setValue('rate_source', rate_type); }, [rate_type, setValue]);
+	useEffect(() => {
+		setValue(
+			'mode',
+			rate_type,
+		);
+	}, [rate_type, setValue]);
 
-	const rateSource = watch('rate_source');
 	useEffect(() => {
 		if (rateSource) {
 			setGlobalFilters((prev) => ({ ...prev, rate_type: rateSource }));
@@ -37,12 +43,12 @@ function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {} }) {
 	}, [rateSource, setGlobalFilters]);
 
 	const resetPopover = () => {
-		setGlobalFilters((prev) => ({ ...prev, rate_type: rateSource }));
+		setGlobalFilters((prev) => ({ ...prev, rate_type: undefined }));
 		reset();
 	};
 
 	return (
-		<div className={styles.main_container}>
+		<div className={cl`${styles.main_container} ${!showText ? styles.small_view : ''}`}>
 			<div className={styles.header_row}>
 				<span className={styles.title}>Filters</span>
 				<div className={styles.filter_action_buttons}>
@@ -50,7 +56,13 @@ function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {} }) {
 					<Button themeType="accent">Apply</Button>
 				</div>
 			</div>
-			<Layout className={styles.layout_container} fields={final_controls} errors={errors} control={control} />
+			<Layout
+				key={service_type}
+				className={styles.layout_container}
+				fields={newFields}
+				errors={errors}
+				control={control}
+			/>
 		</div>
 	);
 }
