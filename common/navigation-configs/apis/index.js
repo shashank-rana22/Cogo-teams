@@ -22,6 +22,7 @@ import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
 import ff_cost_booking from './ff-cost-booking-apis';
+import ftl_field_service_ops_apis from './ftl_field_service_ops_app_apis';
 import hrms from './hrms-apis';
 import ingestion from './ingestion-apis';
 import cargo_insurance from './insurance-apis';
@@ -151,6 +152,7 @@ const apis = {
 	...saas_subscription,
 	...chakravyuh,
 	risk_management,
+	ftl_field_service_ops_apis,
 };
 
 export default apis;

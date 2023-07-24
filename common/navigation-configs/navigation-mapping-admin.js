@@ -1377,6 +1377,15 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment],
 			},
+			{
+				key           : 'coe-ftl_field_service_ops',
+				title         : 'FTL Field Service OPS',
+				href          : '/v2/ftl-field-service-ops',
+				as            : '/v2/ftl-field-service-ops',
+				type          : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : apis.ftl_field_service_ops_apis,
+			},
 		],
 	},
 	terms_and_conditions: {
