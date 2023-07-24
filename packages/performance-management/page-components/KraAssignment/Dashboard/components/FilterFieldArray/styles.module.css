@@ -1,0 +1,16 @@
+.form_container {
+	margin: 0 10px;
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0 10px 10px 0;
+}
+
+.container {
+	margin: 14px 20px 14px 0;
+	border: 1px solid var(--color-tertiary-beige-4);
+	border-radius: 6px;
+}
