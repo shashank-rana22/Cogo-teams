@@ -1,0 +1,39 @@
+.empty {
+	margin: 40px;
+}
+
+.sub_container {
+	padding: 16px 0;
+}
+
+.flex_container {
+	display: flex;
+	align-items: center;
+}
+
+.circle {
+	width: 12px;
+	height: 12px;
+	margin: 0 16px 0 0;
+	background-color: #f68b21;
+	border-radius: 6px;
+}
+
+.date {
+	font-size: 10px;
+	color: #828282;
+}
+
+.content {
+	padding-left: 24px;
+	margin: 8px 0 0 4px;
+	border-left: 2px solid #f68b21;
+
+	p {
+		margin: 16px 0;
+	}
+}
+
+.label {
+	color: #828282;
+}

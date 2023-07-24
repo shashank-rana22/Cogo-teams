@@ -1,0 +1,25 @@
+.list_item_container {
+	display: flex;
+}
+
+.search {
+	width: 30%;
+	padding-right: 12px;
+}
+
+.inner_list {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.selects {
+	display: flex;
+
+	:global {
+		.ui_select_display_container {
+			width: 160px;
+		}
+	}
+}
