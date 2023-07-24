@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { useEffect, useCallback } from 'react';
 
 const useGetFclFreightRateStats = () => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -6,19 +7,22 @@ const useGetFclFreightRateStats = () => {
 		method : 'GET',
 	}, { manual: true });
 
-	const getStats = async () => {
-		try {
-			await trigger({ params: { filters: { } } });
-		} catch (err) {
-			// console.log(err);
-		}
-	};
+	const getStats = useCallback(
+		async () => {
+			try {
+				await trigger();
+			} catch (err) {
+				// console.log(err);
+			}
+		},
+		[trigger],
+	);
 
-	// useEffect(() => () => {
-	// 	getStats();
-	// }, [getStats()]);
+	useEffect(() => () => {
+		getStats();
+	}, [getStats]);
 
-	return { data, loading, getStats };
+	return { data, loading };
 };
 
 export default useGetFclFreightRateStats;

@@ -1,36 +1,32 @@
 .main_container {
 	width: 600px;
-	padding: 24px 8px 24px 12px;
+	padding: 12px 0;
+
+	&.small_view {
+		width: 380px;
+		overflow-y: scroll;
+	}
 
 	:global .form_layout_row {
+		.ui_chips_container {
+			flex-wrap: wrap;
+		}
+
 		.ui_chip_container.ui_ps_size_md {
-			height: fit-content;
 			padding: 4px 8px;
 			margin: 0 8px 0 0;
 			font-size: 14px;
 			color: #221f20;
 		}
 
-		h4 {
-			font-size: 14px;
-			font-weight: 400;
-			color: #4f4f4f;
-		}
-
 		.react-datepicker__aria-live {
 			display: none;
 		}
 
-		.ui_multiselect_container.ui_ps_size_sm .ui_multiselect_display_container {
-			height: 40px;
-		}
-
-		.shipping-line-select {
-			margin-right: 8px;
-		}
-
-		.filter-row-flex {
-			flex-wrap: wrap;
+		h4 {
+			font-size: 14px;
+			font-weight: 400;
+			color: #4f4f4f;
 		}
 	}
 }
@@ -39,8 +35,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding-bottom: 24px;
-	margin: 0 16px 0 12px;
+	width: 100%;
+	padding: 4px 12px 8px;
 	border-bottom: 1px solid #bdbdbd;
 
 	.title {
@@ -51,7 +47,7 @@
 
 	.filter_action_buttons {
 		display: flex;
+		gap: 16px;
 		justify-content: space-between;
-		width: 150px;
 	}
 }

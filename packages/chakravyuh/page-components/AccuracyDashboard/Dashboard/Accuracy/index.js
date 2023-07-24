@@ -2,7 +2,6 @@ import { ResponsiveLine } from '@cogoport/charts/line';
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import CustomTooltip from '../../../../common/CustomTooltip';
@@ -15,13 +14,12 @@ const CONSTANT_POINT_TWO = 0.2;
 const TICK_SIZE = 5;
 
 function Accuracy({ data = [] }) {
-	const formatedData = data.map(({ id, ...rest }) => ({ id: startCase(id), ...rest }));
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Accuracy with Time</h3>
 			<div className={styles.line_chart_container}>
 				<ResponsiveLine
-					data={formatedData}
+					data={data}
 					margin={{ top: 50, right: 20, bottom: 60, left: 50 }}
 					xScale={{ type: 'point' }}
 					yScale={{

@@ -35,11 +35,17 @@ function AccuracyDashboard() {
 		<div className={styles.container}>
 			{showCommons && (
 				<>
-					<Heading
-						heading={heading}
-						setView={setView}
-						backView={backView}
-					/>
+					<div>
+						<Heading
+							heading={heading}
+							setView={setView}
+							backView={backView}
+							showFilters
+							globalFilters={globalFilters}
+							setGlobalFilters={setGlobalFilters}
+						/>
+
+					</div>
 					<Filters
 						globalFilters={globalFilters}
 						setGlobalFilters={setGlobalFilters}
