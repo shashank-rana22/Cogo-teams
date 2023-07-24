@@ -56,8 +56,8 @@ const GLOBAL_CONSTANTS = {
 		razer_pay_url: 'https://checkout.razorpay.com/v1/checkout.js',
 	},
 	sample_document_url: {
-		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com
-		/ab3309b85b52e198b4c2bb691a7fb609/new_employee_bulk_upload_sample_sheet.csv`,
+		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
+						a3072d28df04315514414abe46a8c2f0/new_employee_bulk_upload_sample_sheet.csv`,
 	},
 	flash_booking_charge_codes: [
 		'OTC',
@@ -364,6 +364,7 @@ const GLOBAL_CONSTANTS = {
 			{ value: 'business_analyst', label: 'Business Analyst' },
 			{ value: 'product_analyst', label: 'Product Analyst' },
 			{ value: 'business_consultant', label: 'Business Consultant' },
+			{ value: 'key_accounts_manager', label: 'Key Accounts Manager' },
 		],
 		timezone_options: [
 			{
