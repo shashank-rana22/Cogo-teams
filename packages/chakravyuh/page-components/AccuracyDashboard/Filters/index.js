@@ -1,7 +1,9 @@
 import { Select, cl } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMSearchlight, IcMPortArrow } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, subtractDays } from '@cogoport/utils';
 
 import {
 	SELECT_ICON_MAPPING,
@@ -44,6 +46,33 @@ function Filters(props) {
 
 	const changePrimaryFilters = (key, value) => {
 		setGlobalFilters((prev) => ({ ...prev, [key]: value }));
+	};
+
+	const changeDateRange = (key, value, { date_diff }) => {
+		console.log(key, value, date_diff);
+		const endDate = new Date();
+		let startDate = null;
+
+		if (value && value !== 'all') {
+			startDate = subtractDays(endDate, date_diff);
+		}
+
+		setGlobalFilters((prev) => ({
+			...prev,
+			[key]: {
+				key   : value,
+				value : {
+					start_date: formatDate({
+						date       : startDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+					}),
+					end_date: formatDate({
+						date       : endDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+					}),
+				},
+			},
+		}));
 	};
 
 	return (
@@ -113,10 +142,10 @@ function Filters(props) {
 					size="sm"
 					isClearable={false}
 					placeholder="Select here"
-					value={time_range}
+					value={time_range.key}
 					options={TIME_RANGE_OPTIONS}
 					prefix={null}
-					onChange={(value) => changePrimaryFilters('time_range', value)}
+					onChange={(val, option) => changeDateRange('time_range', val, option)}
 					className={styles.time_range_drop_down}
 				/>
 			</div>

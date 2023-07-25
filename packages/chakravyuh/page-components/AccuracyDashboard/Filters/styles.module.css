@@ -118,4 +118,10 @@
 		width: 16px;
 		height: 16px;
 	}
+
+	:global .tippy-box.ui_popover_container {
+		max-height: unset;
+		padding: 8px;
+		margin-right: 30px;
+	}
 }

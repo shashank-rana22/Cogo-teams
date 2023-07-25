@@ -3,7 +3,7 @@
 	padding: 12px 0;
 
 	&.small_view {
-		width: 380px;
+		width: 360px;
 		overflow-y: scroll;
 	}
 
@@ -27,6 +27,14 @@
 			font-size: 14px;
 			font-weight: 400;
 			color: #4f4f4f;
+		}
+
+		.shipping-line-select {
+			margin-right: 8px;
+		}
+
+		.filter-row-flex.md > button {
+			min-height: 26px;
 		}
 	}
 }

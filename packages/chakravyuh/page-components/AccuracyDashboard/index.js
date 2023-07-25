@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Heading from '../../common/Heading';
 
@@ -26,10 +26,21 @@ const VIEW_MAPPING = {
 
 function AccuracyDashboard() {
 	const [view, setView] = useState('dashboard');
-	const [globalFilters, setGlobalFilters] = useState({ service_type: 'fcl', rate_type: null, time_range: 'all' });
+	const [globalFilters, setGlobalFilters] = useState({
+		service_type : 'fcl',
+		rate_type    : null,
+		time_range   : {
+			key   : 'all',
+			value : null,
+		},
+	});
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];
 	const showCommons = view !== 'map_view';
+
+	useEffect(() => {
+		console.log('global_filters', globalFilters);
+	}, [globalFilters]);
 
 	return (
 		<div className={styles.container}>
