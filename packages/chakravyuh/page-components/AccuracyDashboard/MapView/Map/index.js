@@ -67,14 +67,16 @@ function Map({
 
 	useEffect(() => {
 		if (!map) return;
+		const paddingOptions = { paddingTopLeft: [paddingTopLeft, GLOBAL_CONSTANTS.zeroth_index] };
+
 		if (isEmpty(hierarchy)) {
 			map.setView(
 				[INITIAL_ZOOM * CENTER_LNG, CENTER_LNG],
 				INITIAL_ZOOM,
-				{ paddingTopLeft: [paddingTopLeft, GLOBAL_CONSTANTS.zeroth_index] },
+				paddingOptions,
 			);
 		} else if (bounds instanceof L.LatLngBounds) {
-			map.fitBounds(bounds, { paddingTopLeft: [paddingTopLeft, GLOBAL_CONSTANTS.zeroth_index] });
+			map.fitBounds(bounds, paddingOptions);
 		}
 	}, [bounds, map, paddingTopLeft, hierarchy]);
 
