@@ -1,6 +1,7 @@
 import {
 	IcMSearchdark,
-	IcMDocument, IcMShip, IcMDefault,
+	IcMDocument, IcMShip,
+	IcMTicket,
 } from '@cogoport/icons-react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
@@ -74,10 +75,7 @@ const ICON_MAPPING = [
 	{
 		name    : 'tickets',
 		content : 'Tickets',
-		icon:
-		(
-			<IcMDefault width={26} height={26} />
-		),
+		icon    : <IcMTicket width={26} height={26} />,
 
 	},
 	{

@@ -1,4 +1,5 @@
 import { Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSpecificUsers } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
@@ -12,7 +13,7 @@ function EachTicket({
 	eachTicket = {},
 	createTicketActivity = () => {},
 	agentId = '',
-	handleCardClick,
+	handleCardClick = () => {},
 }) {
 	const {
 		Data: {
@@ -37,7 +38,7 @@ function EachTicket({
 		ReviewerName = '',
 	} = eachTicket || {};
 
-	const date = CreatedAt && format(new Date(CreatedAt), 'dd MMM YYYY');
+	const date = CreatedAt && format(new Date(CreatedAt), GLOBAL_CONSTANTS.formats.date['dd MMM YYYY']);
 
 	const handleTicketActivity = ({ type = '', status = '' }) => {
 		const payload = {
@@ -75,8 +76,7 @@ function EachTicket({
 		>
 			<div className={styles.header}>
 				<div
-					role="button"
-					tabIndex={0}
+					role="presentation"
 					onClick={() => handleCardClick(ID)}
 					className={cl`${styles.details_div} 
 							${Status === 'closed' ? styles.closed_details : ''}`}
@@ -90,6 +90,7 @@ function EachTicket({
 							activityPayload = {}, icon: Icon, iconStyles = {},
 						}) => Icon && (
 							<Tooltip
+								key={tooltipContent}
 								placement="bottom"
 								content={tooltipContent}
 							>
@@ -158,7 +159,7 @@ function EachTicket({
 				</div>
 				<div>
 					{DATA_MAPPING.map(({ title = '', value = '' }) => (value ? (
-						<div className={styles.header_value}>
+						<div key={title} className={styles.header_value}>
 							{title}
 							:
 							<span>{value}</span>

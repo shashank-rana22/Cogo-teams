@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { TextAreaController, InputController, useForm, SelectController } from '@cogoport/forms';
+import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 import useRaiseTicketControls from '../../configurations/raise-ticket-controls';
@@ -14,7 +15,13 @@ const CONTROLLER_MAPPING = {
 	select   : SelectController,
 	textarea : TextAreaController,
 };
-function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, refetchTickets = () => {} }) {
+function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, refetchTickets = () => {}, orgId = '' }) {
+	const {
+		performedByID,
+	} = useSelector(({ profile }) => ({
+		performedByID: profile.user.id,
+	}));
+
 	const { data:{ messageData = {}, formattedData = {} } = {}, source = null } = raiseTicketModal || {};
 	const closeModal = () => {
 		setRaiseTicketModal({ state: false, data: {} });
@@ -45,14 +52,16 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 			created_at = '',
 		} = messageData;
 
-		const { user_id = null, lead_user_id = null } = formattedData || {};
+		const { user_id = null, lead_user_id = null, organization_id: organizationID = '' } = formattedData || {};
 		const { ticket_data = null, ticket_type = null, description = null } = val || {};
 		const payload = {
-			UserID      : user_id || lead_user_id,
-			Source      : 'client',
-			Type        : ticket_type,
-			Description : description,
-			Data        : {
+			PerformedByID  : performedByID,
+			OrganizationID : organizationID || orgId || undefined,
+			UserID         : user_id || lead_user_id,
+			Source         : 'client',
+			Type           : ticket_type,
+			Description    : description,
+			Data           : {
 				MessageData: {
 					Message     : message,
 					MediaUrl    : media_url,

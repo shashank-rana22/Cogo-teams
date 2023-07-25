@@ -16,13 +16,15 @@
 .stats_div {
 	display: flex;
 	justify-content: space-between;
-	height: 15%;
 	margin: 10px 5px;
 }
 
 .individual_stats {
-	min-width: 30%;
-	padding: 0 2px 7px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 33%;
+	padding: 2px;
 	margin-left: 10px;
 	cursor: pointer;
 	background: #fff;
@@ -78,7 +80,7 @@
 }
 
 .selected_tab {
-	border: 1px solid #d58e8e;
+	border: 1.5px solid #d58e8e;
 }
 
 .no_tickets {
@@ -152,4 +154,8 @@
 		text-decoration: underline;
 		cursor: pointer;
 	}
+}
+
+.placeholder_container {
+	border-radius: 6px;
 }
