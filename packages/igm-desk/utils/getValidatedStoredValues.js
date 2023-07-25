@@ -47,6 +47,8 @@ export default function getValidatedStoredValues() {
 			page,
 			fileType,
 			trade_type,
+			sort_by,
+			sort_type,
 		},
 		tabState: {
 			activeTab,

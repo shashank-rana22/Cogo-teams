@@ -43,8 +43,8 @@ function ButtonFilter({
 	return (
 		<div className={styles.btn_div}>
 			<Button
-				onClick={(val) => handleSortState(
-					val,
+				onClick={() => handleSortState(
+					value,
 					setState,
 					sort_by,
 					showCurrentFilter,
