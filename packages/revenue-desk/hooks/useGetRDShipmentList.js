@@ -64,9 +64,9 @@ const useGetRDShipmentList = () => {
 			sort_type                       : filters?.sort_by.split('_').pop() || undefined,
 			sort_by                         : filters?.sort_by.split('_').slice(VALUE_ZERO, VALUE_TWO).join('_')
 												|| undefined,
-			cargo_readiness_greater_than : filters?.cargo_readiness_date?.startDate || undefined,
-			cargo_readiness_less_than    : filters?.cargo_readiness_date?.endDate || undefined,
-			reverts_recieved             : filters?.primary_service_reverts_recieved ? true : undefined,
+			cargo_readiness_greater_than     : filters?.cargo_readiness_date?.startDate || undefined,
+			cargo_readiness_less_than        : filters?.cargo_readiness_date?.endDate || undefined,
+			primary_service_reverts_recieved : filters?.reverts_recieved ? true : undefined,
 		};
 		try {
 			const resp = await trigger({
