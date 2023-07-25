@@ -1596,6 +1596,14 @@ importers:
       react: 18.2.0
       react-rte: 0.16.5_biqbaboplfbrettd7655fr4n2y
 
+  packages/notifications:
+    specifiers:
+      react: 18.2.0
+      react-dom: 18.2.0
+    devDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+
   packages/operators:
     specifiers:
       '@cogoport/components': ^1.0.322
@@ -11434,7 +11442,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-    dev: false
 
   /react-draggable/4.4.5_react@18.2.0:
     resolution: {integrity: sha512-OMHzJdyJbYTZo4uQE393fHcqqPYsEtkjfMgvCHr6rejT+Ezn4OZbNyGH50vv+SunC1RMvwOTSWkEODQLzw1M9g==}
@@ -11950,7 +11957,6 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
-    dev: false
 
   /semver/5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
