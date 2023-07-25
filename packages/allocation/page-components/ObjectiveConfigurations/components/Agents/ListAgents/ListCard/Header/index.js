@@ -1,13 +1,14 @@
 import { Button, Pill } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function Header(props) {
 	const {
-		role = {},
-		user = {},
-		partner = {},
+		role,
+		user,
+		partner,
 		mode,
 		setMode,
 		handleSubmit,
@@ -66,11 +67,13 @@ function Header(props) {
 					<strong>{user.name}</strong>
 				</h4>
 
-				<Pill size="md">
-					Entity:
-					{' '}
-					{partner.business_name}
-				</Pill>
+				{!isEmpty(partner) && (
+					<Pill size="md">
+						Entity:
+						{' '}
+						{partner.business_name}
+					</Pill>
+				)}
 
 				{/* <Pill size="md">
 					Channel:
