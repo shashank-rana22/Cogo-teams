@@ -39,6 +39,7 @@ function AwbNumberDeleted({
 		setShowConfirm,
 		page,
 		changedStatus,
+		status,
 	});
 
 	const redirectToShipment = (shipmentId) => {

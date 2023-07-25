@@ -4,16 +4,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const CONDITIONAL_STATUS = ['available_non_reserved', 'available_reserved'];
-
 function ConfirmDelete({
 	setShowConfirm = () => {},
 	editAwbNumber = () => {},
 	loading = false,
 	status = '',
 }) {
-	const confirmMessage = CONDITIONAL_STATUS.includes(status) ? 'delete' : 'recover';
-	const updateStatus = CONDITIONAL_STATUS.includes(status) ? 'cancelled' : 'available';
+	const confirmMessage = status === 'used' ? 'delete' : 'recover';
 	return (
 		<div className={styles.delete_container}>
 			<h2 className={styles.modal_title}>
@@ -32,7 +29,7 @@ function ConfirmDelete({
 				<Button
 					size="md"
 					onClick={() => {
-						editAwbNumber({ status: updateStatus });
+						editAwbNumber();
 					}}
 					disabled={loading}
 				>

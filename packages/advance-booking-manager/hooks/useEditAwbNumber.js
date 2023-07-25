@@ -14,13 +14,13 @@ const { START_PAGE } = CONSTANTS;
 
 const useEditAwbNumber = ({
 	item = {},
-	awbList,
+	awbList = () => {},
 	setShowEdit = () => {},
-	setPage,
+	setPage = () => {},
 	setFinalList,
-	setQfilter,
+	setQfilter = () => {},
 	setShowConfirm = () => {},
-	page,
+	page = 1,
 	changedStatus,
 	status,
 }) => {

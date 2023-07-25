@@ -17,6 +17,7 @@ function AwbNumberUsed({
 	data = {},
 	loading = false,
 	setFinalList = () => {},
+	awbList = () => {},
 	finalList = [],
 	page = 1,
 	setPage = () => {},
@@ -38,6 +39,8 @@ function AwbNumberUsed({
 		setShowConfirm,
 		page,
 		changedStatus,
+		status,
+		awbList,
 	});
 
 	const redirectToShipment = (shipmentId) => {
