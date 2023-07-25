@@ -7,10 +7,10 @@ import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
-const DEFAULT_SPAN = 12;
+const DEFAULT_SPAN = 6;
 const REPLACE_SPAN_BY = 0;
 function Layout({
-	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {},
+	control = {}, fields = [], showElements = {}, errors = {}, customValues = {}, formValues = {},
 	shipment_id = '', disabledProps = false,
 }) {
 	const TOTAL_FIELDS = [];
