@@ -15,7 +15,9 @@ const DEFAULT_STAT_COUNT = 0;
 const PAGE_COUNT = 1;
 
 function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
-	const router = useRouter();
+	const { query } = useRouter();
+	const { partner_id: partnerId = '' } = query || {};
+
 	const {
 		statsLoading,
 		ticketData,
@@ -61,9 +63,10 @@ function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
 	const { items = [], page = 0, size = 0, total = 0	} = ticketData || {};
 
 	const handleCardClick = (id) => {
-		const URL = `${window.location.origin}/${router?.query?.partner_id}/ticket-management/dashboard/${id}`;
-		window.open(URL, '_blank');
+		const redirectUrl = `${window.location.origin}/v2/${partnerId}/ticket-management/my-tickets?ticket_id=${id}`;
+		window.open(redirectUrl, '_blank');
 	};
+
 	const refetchLoading = statsLoading || listLoading;
 	if (!isUserOnboarded) {
 		return (
