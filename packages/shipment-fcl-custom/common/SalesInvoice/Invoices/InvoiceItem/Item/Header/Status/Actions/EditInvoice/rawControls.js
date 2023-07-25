@@ -1,5 +1,6 @@
 import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
+import currencyCodeOptions from '@cogoport/ocean-modules/utils/currencyCode';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 const MIN_ALIAS_LENGTH = 3;
@@ -76,15 +77,15 @@ const rawControls = (
 			span     : 2,
 		},
 		{
-			name           : 'currency',
-			label          : 'Currency',
-			type           : 'select',
-			showOptional   : false,
-			optionsListKey : 'exchange-rate-currencies',
-			placeholder    : 'Select Currency',
-			rules          : { required: 'currency is required' },
-			span           : 1.5,
-			disabled       : !isAdminSuperAdmin,
+			name         : 'currency',
+			label        : 'Currency',
+			type         : 'select',
+			showOptional : false,
+			options      : currencyCodeOptions,
+			placeholder  : 'Select Currency',
+			rules        : { required: 'currency is required' },
+			span         : 1.5,
+			disabled     : !isAdminSuperAdmin,
 		},
 		{
 			label       : 'Price',
