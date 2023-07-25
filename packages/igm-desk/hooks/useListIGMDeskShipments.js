@@ -1,4 +1,4 @@
-import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -16,7 +16,7 @@ const PAGE_ONE = 1;
 const EMPTY_DATA = { list: [], total: 0, total_page: 0 };
 
 export default function useListIGMDeskShipments() {
-	const { authParams, selected_agent_id, user } = useSelector(({ profile }) => profile) || {};
+	const { user } = useSelector(({ profile }) => profile) || {};
 	const { filters, setFilters, tabState } = useContext(IGMDeskContext) || {};
 
 	const [data, setData] = useState(EMPTY_DATA);
@@ -29,22 +29,21 @@ export default function useListIGMDeskShipments() {
 	const listShipments = useCallback(async () => {
 		try {
 			const res = await trigger({
-				params: getPayload({ filters, tabState, selected_agent_id, userId: user?.id }),
+				params: getPayload({ filters, tabState, userId: user?.id }),
 			});
 
-			if (isEmpty(res.data?.list) && filters.page > PAGE_ONE) {
+			if (isEmpty(res.data?.list) && filters?.page > PAGE_ONE) {
 				setFilters({ ...filters, page: 1 });
 			} else {
 				setData(res.data || {});
 			}
 		} catch (err) {
-			const message = err?.response?.data?.message || err?.message || 'Something went wrong !!';
-			Toast.error(message);
+			toastApiError(err);
 			setData(EMPTY_DATA);
 		}
-	}, [filters, selected_agent_id, setFilters, tabState, trigger, user?.id]);
+	}, [filters, setFilters, tabState, trigger, user?.id]);
 
-	useCallApi({ listShipments, filters, authParams, tabState, userId: user?.id });
+	useCallApi({ listShipments, filters, tabState, userId: user?.id });
 
 	return {
 		data: {
