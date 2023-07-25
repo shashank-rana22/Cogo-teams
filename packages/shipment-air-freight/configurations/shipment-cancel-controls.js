@@ -7,9 +7,9 @@ import {
 } from './supply-reason-options';
 
 const SALES_OPTION_START_POINT = 0;
-const LENGTH_INDEX = 1;
+const DECREMENT_LIMIT_BY_ONE = 1;
 const SHIPMENT_RECEIVED_LIMIT = SALES_REASON_OPTIONS.length;
-const SHIPMENT_NOT_RECEIVED_LIMIT = SALES_REASON_OPTIONS.length - LENGTH_INDEX;
+const SHIPMENT_NOT_RECEIVED_LIMIT = SALES_REASON_OPTIONS.length - DECREMENT_LIMIT_BY_ONE;
 
 const controls = (state, cancelReason) => {
 	const salesOptionLimit = state === 'shipment_received' ? SHIPMENT_RECEIVED_LIMIT : SHIPMENT_NOT_RECEIVED_LIMIT;
