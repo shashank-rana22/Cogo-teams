@@ -4,12 +4,11 @@ import React, { useMemo } from 'react';
 
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
+import getTotalFields from '../helpers/getTotalFields';
 import getAsyncFields from '../Item/getAsyncKeys';
 
 import styles from './styles.module.css';
 
-const DEFAULT_SPAN = 12;
-const EMPTY_SPAN = 0;
 const ELEMENTS_INCR_BY = 1;
 const INDEX_INCR_BY = 1;
 const REMOVE_UPTO_INDEX = 1;
@@ -26,35 +25,12 @@ function Child({
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	field = {},
-	disabled,
+	disabled = false,
 	error = {},
 	formValues = {},
+	showElements = {},
 }) {
-	const TOTAL_FIELDS = [];
-
-	let rowWiseFields = [];
-	let span = EMPTY_SPAN;
-
-	controls.forEach((fields) => {
-		span += fields.span || DEFAULT_SPAN;
-		if (span === DEFAULT_SPAN) {
-			rowWiseFields.push(fields);
-			TOTAL_FIELDS.push(rowWiseFields);
-			rowWiseFields = [];
-			span = EMPTY_SPAN;
-		} else if (span < DEFAULT_SPAN) {
-			rowWiseFields.push(fields);
-		} else {
-			TOTAL_FIELDS.push(rowWiseFields);
-			rowWiseFields = [];
-			rowWiseFields.push(fields);
-			span = fields.span;
-		}
-	});
-
-	if (rowWiseFields.length) {
-		TOTAL_FIELDS.push(rowWiseFields);
-	}
+	const { TOTAL_FIELDS, MAX_SPAN, DEFAULT_SPAN } = getTotalFields({ fields: controls, showElements });
 
 	const keysForFields = useMemo(
 		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
@@ -127,7 +103,7 @@ function Child({
 							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
-						const flex = ((controlItem?.span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR;
+						const flex = ((controlItem?.span || DEFAULT_SPAN) / MAX_SPAN) * PERCENT_FACTOR;
 						if (!Element || !show) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>

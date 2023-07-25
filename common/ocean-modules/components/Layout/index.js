@@ -4,47 +4,15 @@ import React, { useMemo } from 'react';
 import EditServiceCharges from '../EditServiceCharges';
 
 import FieldArray from './ChildFormat';
+import getTotalFields from './helpers/getTotalFields';
 import Item from './Item';
 import styles from './styles.module.css';
 
-const DEFAULT_SPAN = 6;
-const REPLACE_SPAN_BY = 0;
 function Layout({
 	control = {}, fields = [], showElements = {}, errors = {}, customValues = {}, formValues = {},
 	shipment_id = '', disabledProps = false,
 }) {
-	const TOTAL_FIELDS = [];
-
-	let rowWiseFields = [];
-	let span = 0;
-
-	(fields || []).forEach((field) => {
-		const { [field?.name]: showItem = true } = showElements;
-		if (showItem) {
-			span += field?.span || DEFAULT_SPAN;
-			if (span === DEFAULT_SPAN) {
-				span = REPLACE_SPAN_BY;
-
-				rowWiseFields.push(field);
-				TOTAL_FIELDS.push(rowWiseFields);
-
-				rowWiseFields = [];
-			} else if (span > DEFAULT_SPAN) {
-				span = REPLACE_SPAN_BY;
-
-				TOTAL_FIELDS.push(rowWiseFields);
-				rowWiseFields = [];
-
-				rowWiseFields.push(field);
-			} else {
-				rowWiseFields.push(field);
-			}
-		}
-	});
-
-	if (rowWiseFields.length) {
-		TOTAL_FIELDS.push(rowWiseFields);
-	}
+	const { TOTAL_FIELDS = [] } = getTotalFields({ fields, showElements });
 
 	const keysForFields = useMemo(
 		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
