@@ -1684,6 +1684,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api         : 'send_booking_confirmation_mail',
+		access_type : 'private',
+	},
 ];
 
 export default apis;
