@@ -18,6 +18,8 @@
 }
 
 .control_label {
+	display: flex;
+	align-items: center;
 	width: 50%;
 }
 
@@ -58,4 +60,14 @@
 	justify-content: flex-end;
 	width: 50%;
 	margin: 0 8px;
+}
+
+.text_container {
+	display: flex;
+	align-items: center;
+}
+
+.button_container {
+	margin-top: 10px;
+	margin-left: 20px;
 }
