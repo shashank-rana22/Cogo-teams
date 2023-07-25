@@ -8,39 +8,39 @@ import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../configurations/object
 import ObjectiveDetails from './ObjectiveDetails';
 import styles from './styles.module.css';
 
+const MODE_BASIS_MAPPING = {
+	view: ({ weightage }) => (
+		<p className={styles.set_weightage}>
+			Weightage:
+			{' '}
+			<strong>
+				{weightage}
+				%
+			</strong>
+		</p>
+	),
+	edit: ({ id, weightage, control }) => (
+		<>
+			<p className={styles.set_weightage}>Set Weightage (%)</p>
+			<InputNumberController
+				name={`${id}_weightage`}
+				size="sm"
+				control={control}
+				value={weightage}
+				suffix={(
+					<IcMTick
+						height={20}
+						width={20}
+						style={{ marginRight: '12px' }}
+					/>
+				)}
+			/>
+		</>
+	),
+};
+
 function Objectives(props) {
 	const { objectives, mode, control } = props;
-
-	const MODE_BASIS_MAPPING = {
-		view: ({ weightage }) => (
-			<p className={styles.set_weightage}>
-				Weightage:
-				{' '}
-				<strong>
-					{weightage}
-					%
-				</strong>
-			</p>
-		),
-		edit: ({ id, weightage }) => (
-			<>
-				<p className={styles.set_weightage}>Set Weightage (%)</p>
-				<InputNumberController
-					name={`${id}_weightage`}
-					size="sm"
-					control={control}
-					value={weightage}
-					suffix={(
-						<IcMTick
-							height={20}
-							width={20}
-							style={{ marginRight: '12px' }}
-						/>
-					)}
-				/>
-			</>
-		),
-	};
 
 	return (
 		<>
@@ -63,7 +63,7 @@ function Objectives(props) {
 								</div>
 
 								<div className={styles.title_right_container}>
-									{MODE_BASIS_MAPPING[mode]({ weightage })}
+									{MODE_BASIS_MAPPING[mode]({ id: objective.id, weightage, control })}
 								</div>
 							</div>
 						)}
