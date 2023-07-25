@@ -4,10 +4,13 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
+import TAB_PANNEL_KEYS from '../../../../../constants/tab-pannel-keys-mapping';
 import getCreateObjectivePayload from '../../../../../helpers/get-create-objective-payload';
 
+const { OBJECTIVES } = TAB_PANNEL_KEYS;
+
 const useCreateObjective = (props) => {
-	const { formValues } = props;
+	const { formValues, setActiveTabDetails } = props;
 
 	const [weightageData, setWeightageData] = useState({});
 
@@ -23,7 +26,11 @@ const useCreateObjective = (props) => {
 		try {
 			const payload = getCreateObjectivePayload({ data: formValues, weightageData, distribute_equally });
 
-			trigger({ data: payload });
+			await trigger({ data: payload });
+
+			Toast.success('Objective has been created and sent for verification. Please check after some time');
+
+			setActiveTabDetails({ tab: OBJECTIVES, mode: 'list' });
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err?.response?.data)

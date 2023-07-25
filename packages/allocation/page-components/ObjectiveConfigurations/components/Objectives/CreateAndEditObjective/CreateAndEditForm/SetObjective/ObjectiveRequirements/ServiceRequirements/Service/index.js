@@ -40,6 +40,10 @@ function Service(props) {
 
 	useEffect(() => {
 		const subscription = watch((value, { name: controlName }) => {
+			if (controlName === `${name}.${index}.trade_type`) {
+				setValue(`${name}.${index}.inco_term`, []);
+			}
+
 			if (controlName === `${name}.${index}.service_type`) {
 				setValue(`${name}.${index}.trade_type`, '');
 				setValue(`${name}.${index}.origin_location`, '');

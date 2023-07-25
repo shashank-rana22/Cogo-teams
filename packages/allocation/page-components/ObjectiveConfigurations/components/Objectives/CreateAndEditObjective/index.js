@@ -11,7 +11,10 @@ function CreateAndEditObjective(props) {
 				setActiveTabDetails={setActiveTabDetails}
 			/>
 
-			<CreateAndEditForm activeTabDetails={activeTabDetails} />
+			<CreateAndEditForm
+				activeTabDetails={activeTabDetails}
+				setActiveTabDetails={setActiveTabDetails}
+			/>
 		</>
 	);
 }

@@ -10,11 +10,11 @@ import useGetObjectiveUserMappings from './useGetObjectiveUserMappings';
 const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
 function SetObjectiveWeightage(props) {
-	const { activeTabDetails, setActiveStep, formValues } = props;
+	const { activeTabDetails, setActiveTabDetails, setActiveStep, formValues } = props;
 
 	const { list, getNextPage, paginationData } = useGetObjectiveUserMappings({ formValues });
 
-	const { control, createLoading, onCreate } = useCreateObjective({ formValues });
+	const { control, createLoading, onCreate } = useCreateObjective({ formValues, setActiveTabDetails });
 
 	const MODE_BASIS_BUTTON_MAPPING = {
 		create: (
