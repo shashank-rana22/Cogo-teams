@@ -12263,14 +12263,12 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'create_shipment_document',
-			access_type  : 'private',
-			service_name : 'shipment',
+			api         : 'post_air_coe_documents',
+			access_type : 'private',
 		},
 		{
-			api          : 'update_shipment_document',
-			access_type  : 'private',
-			service_name : 'shipment',
+			api         : 'put_air_coe_documents',
+			access_type : 'private',
 		},
 		{
 			api          : 'list_rate_charge_codes',
