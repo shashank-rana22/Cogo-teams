@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -8,10 +9,9 @@ import SelectedServices from './SelectedServices';
 import styles from './styles.module.css';
 
 function BookCheckout({ data = {} }) {
-	const {
-		rate_card: rateCardData = {},
-		spot_search_detail: detail = {},
-	} = data || {};
+	const { rate_card: rateCardData = {}, spot_search_detail: detail = {} } = data || {};
+
+	const { total_price_discounted, total_price, total_price_currency = '' } = rateCardData;
 
 	const { handleBook = () => {}, loading } = useCreateCheckout({
 		rateCardData,
@@ -32,13 +32,24 @@ function BookCheckout({ data = {} }) {
 						<div>Congratulations!</div>
 						You are saving
 						{' '}
-						<strong>INR 56,234 </strong>
+						<strong>
+							{formatAmount({
+								amount   : (total_price - total_price_discounted),
+								currency : total_price_currency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 0,
+								},
+							})}
+						</strong>
+						{' '}
 						on this booking.
 					</div>
 				</div>
 
 				<div className={styles.button_wrapper}>
-					<Button
+					{/* <Button
 						onClick={() => {
 
 						}}
@@ -49,7 +60,7 @@ function BookCheckout({ data = {} }) {
 					>
 
 						Share Quick Quotation
-					</Button>
+					</Button> */}
 					<Button
 						onClick={handleBook}
 						size="md"

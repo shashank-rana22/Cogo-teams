@@ -1,4 +1,5 @@
 import { Select } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { serviceMappings } from '../../../configs/AdditionalServicesConfig';
@@ -9,20 +10,15 @@ import useGetMinPrice from '../useGetMinPrice';
 import { getFclPayload } from './configs';
 import List from './List';
 import styles from './styles.module.css';
+import getServiceName from './utils/getServiceName';
 
 const INCOTERM_MAPPING = {
 	export : 'ddp',
 	import : 'exw',
 };
 
-const getServiceName = (service) => {
-	const { trade_type = '', service_type = '' } = service || {};
-	return trade_type ? `${trade_type}_${service_type}` : service_type;
-};
-
 const singleLocationServices = ['fcl_freight_local'];
 
-// eslint-disable-next-line max-lines-per-function
 function AdditionalServices({ // used in search results and checkout
 	rateCardData = {},
 	detail = {},
@@ -153,8 +149,8 @@ function AdditionalServices({ // used in search results and checkout
 				? transportationData
 				: serviceData[service.name],
 			isSelected,
-			rateData: Object.values(service_rates).find(
-				(serviceItem) => serviceItem.service_type === service.service_type,
+			rateData: Object.values(service_rates).filter(
+				(serviceItem) => getServiceName(serviceItem) === service.name,
 			),
 		});
 	});
@@ -172,6 +168,9 @@ function AdditionalServices({ // used in search results and checkout
 		}
 	});
 
+	const SERVICES_CANNOT_BE_REMOVED = [trade_type === 'export'
+		? 'export_fcl_freight_local' : 'import_fcl_freight_local', 'fcl_freight'];
+
 	return (
 		<>
 			<div className={styles.heading}>
@@ -188,20 +187,27 @@ function AdditionalServices({ // used in search results and checkout
 				</div>
 
 			</div>
-			<div className={styles.additional_services}>
-				<List
-					list={shipperSideServices}
-					loading={loading}
-					onClickAdd={handleAddServices}
-					type="seller"
-				/>
 
-				<List
-					list={consigneeSideServices}
-					loading={loading}
-					onClickAdd={handleAddServices}
-					type="buyer"
-				/>
+			<div className={styles.additional_services}>
+				{isEmpty(shipperSideServices) ? null : (
+					<List
+						list={shipperSideServices}
+						loading={loading}
+						type="seller"
+						onClickAdd={handleAddServices}
+						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
+					/>
+				)}
+
+				{isEmpty(consigneeSideServices) ? null : (
+					<List
+						list={consigneeSideServices}
+						loading={loading}
+						type="buyer"
+						onClickAdd={handleAddServices}
+						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
+					/>
+				)}
 			</div>
 		</>
 	);

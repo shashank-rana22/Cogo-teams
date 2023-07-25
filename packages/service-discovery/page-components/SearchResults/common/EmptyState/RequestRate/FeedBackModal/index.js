@@ -11,20 +11,19 @@ import useRequestForRate from './useRequestForRate';
 const MARGIN_FIRST_BUTTON = 12;
 const ZERO_MARGIN = 0;
 
-function FeedBackModal({ data = {}, show, onClose = () => {}, proceeedWithFeedback }) {
+function FeedBackModal({ data = {}, show, onClose = () => {}, requestService = {}, proceeedWithFeedback }) {
 	const { control, formState:{ errors }, handleSubmit, reset } = useForm();
 
-	const controls = getControls(data?.service_type);
+	const controls = getControls(requestService?.service_type || data?.service_type);
 
 	const { loading, onSubmitFeedback } = useRequestForRate({
 		onClose,
 		reset,
 		data,
+		requestService,
 	});
 
-	const onSubmit = (values) => {
-		onSubmitFeedback(values);
-	};
+	const onSubmit = (values) => { onSubmitFeedback(values); };
 
 	const renderButton = ({
 		btnText = '',

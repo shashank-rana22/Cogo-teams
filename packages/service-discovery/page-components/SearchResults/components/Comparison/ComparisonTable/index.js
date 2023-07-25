@@ -10,7 +10,7 @@ function compareByArrayLength(a, b) {
 	return b[bKey].length - a[aKey].length;
 }
 
-function Table({ comparisonKey, allLineItems }) {
+function Table({ comparisonKey, allLineItems, LOGO_MAPPING }) {
 	const renderTableHeader = () => (
 		<div className={styles.table_header}>
 			<div className={styles.header_column} />
@@ -21,6 +21,7 @@ function Table({ comparisonKey, allLineItems }) {
 
 				return (
 					<div key={key} className={styles.header_column}>
+						<img src={LOGO_MAPPING[key]} alt="shipping-line" style={{ objectFit: 'cover', width: 88 }} />
 						{columnHeader}
 					</div>
 				);
@@ -82,7 +83,7 @@ function Table({ comparisonKey, allLineItems }) {
 	);
 }
 
-function ComparisonTable({ allLineItems = [], summary }) {
+function ComparisonTable({ allLineItems = [], summary = {}, LOGO_MAPPING = {} }) {
 	const { container_size = '', container_type = '', commodity = '' } = summary;
 
 	const newAllLineItems = [...allLineItems];
@@ -116,6 +117,7 @@ function ComparisonTable({ allLineItems = [], summary }) {
 				comparisonKey={COMPARISON_KEY}
 				allLineItems={newAllLineItems}
 				summary={summary}
+				LOGO_MAPPING={LOGO_MAPPING}
 			/>
 		</div>
 	);

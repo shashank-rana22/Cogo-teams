@@ -1,16 +1,3 @@
-.header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 12px;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
-	color: #000;
-	text-align: right;
-}
-
 .service {
 	display: flex;
 	align-items: center;
@@ -26,49 +13,20 @@
 	}
 }
 
-.service_div {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	height: 60px;
-	border-radius: 4px;
-}
+.container {
+	margin-bottom: 16px;
 
-.service_text {
-	margin-left: 12px;
-	font-size: 14px;
-	font-weight: 600;
-	color: #000;
-	text-transform: capitalize;
-}
+	:global {
+		.ui_accordion_header {
+			padding: 0;
+		}
 
-.icn_container {
-	display: flex;
-	align-items: center;
-}
+		.ui_accordion_title {
+			width: 100%;
+		}
 
-.rate {
-	margin-right: 16px;
-}
-
-.cost_label {
-	margin-right: 8px;
-}
-
-.icon {
-	margin-right: 16px;
-	margin-left: 20px;
-}
-
-.add_icon {
-	margin-right: 25px;
-	cursor: pointer;
-	background: #fff;
-	border: 1.5px solid #221f20;
-	border-radius: 50%;
-}
-
-.tick_icon {
-	margin-right: 25px;
-	cursor: pointer;
+		.ui_accordion_icon {
+			display: none;
+		}
+	}
 }

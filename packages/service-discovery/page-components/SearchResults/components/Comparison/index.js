@@ -127,7 +127,7 @@ const getStaticLineItems = (item, mode, summary) => {
 			),
 			validity_end: () => createValueObject(
 				formatDate({
-					date       : item.validity_end,
+					date       : item.schedules?.departure || item.schedules?.validity_end,
 					formattype : 'date',
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MMM-yyyy'],
 				}),
@@ -173,14 +173,15 @@ function Comparison({
 	setScreen = () => {},
 	mode = 'fcl_freight',
 	comparisonRates = {},
-	setComparisonRates = () => {},
 }) {
 	const selectedCards = Object.values(comparisonRates);
+
+	const LOGO_MAPPING = {};
 
 	const [showShare, setShowShare] = useState(false);
 
 	const allLineItems = selectedCards.map((cardItem) => {
-		const { service_rates = [], shipping_line = {} } = cardItem;
+		const { service_rates = [], shipping_line = {}, source } = cardItem;
 
 		const services = Object.values(service_rates);
 
@@ -195,6 +196,11 @@ function Comparison({
 		const flattenedArraylineItems = getDyanmicLineItems(lineItems);
 
 		const finalArray = flattenedArraylineItems.concat(staticComparisonKeys);
+
+		const logo = source === 'cogo_assured_rate'
+			? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : shipping_line.logo_url;
+
+		LOGO_MAPPING[toSnakeCase(shipping_line.short_name)] = logo;
 
 		return {
 			[toSnakeCase(shipping_line.short_name)]: finalArray,
@@ -243,7 +249,11 @@ function Comparison({
 				</div>
 			</div>
 
-			<ComparisonTable summary={detail} allLineItems={allLineItems} />
+			<ComparisonTable
+				summary={detail}
+				allLineItems={allLineItems}
+				LOGO_MAPPING={LOGO_MAPPING}
+			/>
 
 			{showShare ? (
 				<ShareToUsers

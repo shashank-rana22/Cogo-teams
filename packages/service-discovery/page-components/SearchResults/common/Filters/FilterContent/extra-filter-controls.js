@@ -5,6 +5,7 @@ const EXTRA_FILTERS = {
 			{
 				name        : 'shipping_line_id',
 				label       : 'Select Shipping Line',
+				multiple    : true,
 				type        : 'async-select',
 				asyncKey    : 'list_operators',
 				initialCall : true,

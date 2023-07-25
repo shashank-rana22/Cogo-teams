@@ -13,7 +13,7 @@ function HeaderTop({
 	detail = {},
 	filters = {},
 	setFilters = () => {},
-	total_count = '',
+	total_rates_count = 0,
 	comparisonRates = {},
 	setComparisonRates = () => {},
 	setScreen = () => {},
@@ -27,7 +27,7 @@ function HeaderTop({
 				details={detail}
 				filters={filters}
 				setFilters={setFilters}
-				total_count={total_count}
+				total_rates_count={total_rates_count}
 			/>
 
 			{showComparison ? (
@@ -100,7 +100,7 @@ function ListRateCards({
 				detail={detail}
 				filters={filters}
 				setFilters={setFilters}
-				total_count={paginationProps?.total_count}
+				total_rates_count={detail?.rates_count}
 				comparisonRates={comparisonRates}
 				setComparisonRates={setComparisonRates}
 				setScreen={setScreen}

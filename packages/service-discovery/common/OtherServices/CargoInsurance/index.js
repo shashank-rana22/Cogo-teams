@@ -65,8 +65,6 @@ function CargoInsurance({ data = {}, refetch = () => {} }) {
 		setIsSelected(cargoInsuranceAlreadyTaken);
 	}, [cargoInsuranceAlreadyTaken]);
 
-	console.log('isgcfvhb', isSelected);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Other Services</div>

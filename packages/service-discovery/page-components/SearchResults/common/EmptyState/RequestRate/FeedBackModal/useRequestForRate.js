@@ -9,6 +9,7 @@ const useRequestForRate = ({
 	onClose,
 	reset,
 	data,
+	requestService,
 }) => {
 	const router = useRouter();
 
@@ -19,6 +20,8 @@ const useRequestForRate = ({
 
 	const { query = {} } = router;
 	const { spot_search_id = '' } = query;
+
+	const { service_data = {} } = requestService || {};
 
 	const handleResponse = () => {
 		onClose();
