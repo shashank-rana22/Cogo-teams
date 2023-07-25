@@ -6,7 +6,7 @@ import Header from './Header';
 import LoadingHeader from './Header/LoadingHeader';
 import styles from './styles.module.css';
 
-function Card({ item, loading, setShowDetailPage }) {
+function Card({ item, loading, setShowDetailPage, filters }) {
 	const handleOnClick = () => {
 		if (loading) {
 			return null;
@@ -20,7 +20,7 @@ function Card({ item, loading, setShowDetailPage }) {
 			onClick={handleOnClick}
 		>
 			<div>
-				{loading ? <LoadingHeader /> : <Header data={item} />}
+				{loading ? <LoadingHeader /> : <Header data={item} filters={filters} />}
 			</div>
 			<div>
 				{loading ? <LoadingBody /> : <Body data={item} />}

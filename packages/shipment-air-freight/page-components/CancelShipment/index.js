@@ -5,21 +5,27 @@ import { useForm } from '@cogoport/forms';
 import { useContext } from 'react';
 
 import controls from '../../configurations/shipment-cancel-controls';
+import useCancelEBookingShipment from '../../hooks/useCancelEBookingShipment';
 import useUpdateShipment from '../../hooks/useUpdateShipment';
 
 import getCancelShipmentPayload from './getCancelShipmentPayload';
 import getShowElements from './getShowElements';
 import styles from './styles.module.css';
 
-export default function CancelShipment({ setShow }) {
+export default function CancelShipment({ setShow = () => {} }) {
+	const { shipment_data, stakeholderConfig = {} } = useContext(ShipmentDetailContext);
+
 	const closeModal = () => setShow(false);
+
+	const { cancelEBooking, loading: cancelEBookingLoading } = useCancelEBookingShipment(shipment_data);
 
 	const { loading: updateShipmentLoading, updateShipment } = useUpdateShipment({
 		refetch        : closeModal,
 		successMessage : 'Shipment has been cancelled!!',
+		cancelEBooking,
+		shipment_data,
 	});
 
-	const { shipment_data, stakeholderConfig = {} } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
 
 	const role = stakeholderConfig?.cancel_shipment?.role || '';
@@ -63,7 +69,7 @@ export default function CancelShipment({ setShow }) {
 
 			<Modal.Footer className={styles.modal_footer}>
 				<Button
-					disabled={updateShipmentLoading}
+					disabled={updateShipmentLoading || cancelEBookingLoading}
 					themeType="secondary"
 					onClick={closeModal}
 				>
@@ -71,7 +77,7 @@ export default function CancelShipment({ setShow }) {
 				</Button>
 
 				<Button
-					disabled={updateShipmentLoading}
+					disabled={updateShipmentLoading || cancelEBookingLoading}
 					onClick={handleSubmit(onSubmit)}
 				>
 					Submit
