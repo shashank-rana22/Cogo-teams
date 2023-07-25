@@ -20,6 +20,7 @@ function ApprovedAWB({
 	listAPI = () => {},
 }) {
 	const [triggerManifest, setTriggerManifest] = useState('');
+	const [handoverModal, setHandoverModal] = useState(false);
 	const { fields } = approvedAWBFields;
 
 	const { loading: updateLoading, updateShipment } = useUpdateShipmentDocument({ listAPI });
@@ -36,13 +37,28 @@ function ApprovedAWB({
 				documentUrl,
 			};
 			return (
-				<Button
-					themeType="secondary"
-					onClick={() => { updateShipment({ payload }); }}
-					disabled={updateLoading}
-				>
-					Handover
-				</Button>
+				<>
+					<Button
+						themeType="secondary"
+						onClick={setHandoverModal((prev) => !prev)}
+						disabled={updateLoading}
+					>
+						Handover
+					</Button>
+					{handoverModal && (
+						<Modal
+							show={handoverModal}
+							onClose={() => { setHandoverModal(false); }}
+						>
+							<Modal.Body>
+								Do you wish to confirm the Handover?
+							</Modal.Body>
+							<Modal.Footer>
+								<Button onClick={() => updateShipment({ payload })}>Confirm</Button>
+							</Modal.Footer>
+						</Modal>
+					)}
+				</>
 			);
 		},
 	};
