@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetOrganization = ({ primary_service = {} }) => {
+const useGetOrganization = ({ primary_service = {}, task = {} }) => {
 	const [{ loading, data: orgData }, trigger] = useRequest({
 		url    : '/get_organization',
 		method : 'GET',
@@ -20,8 +20,10 @@ const useGetOrganization = ({ primary_service = {} }) => {
 	}, [trigger]);
 
 	useEffect(() => {
-		getTradeData();
-	}, [getTradeData]);
+		if (task?.task === 'mark_confirmed' && primary_service?.trade_type === 'export') {
+			getTradeData();
+		}
+	}, [getTradeData, task, primary_service?.trade_type]);
 
 	return {
 		loading,

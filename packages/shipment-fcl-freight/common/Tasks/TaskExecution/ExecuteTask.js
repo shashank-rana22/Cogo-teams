@@ -55,6 +55,7 @@ function ExecuteTask({
 
 	const { orgData } = useGetOrganization({
 		primary_service,
+		task,
 	});
 
 	const stepConfigValue = steps.length
