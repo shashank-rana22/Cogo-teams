@@ -1,10 +1,5 @@
 const apis = [
 	{
-		api          : 'list_organizations',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
 		api          : 'list_shipment_additional_services',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -50,21 +45,6 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_organization',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
-		api          : 'list_shipment_organizations',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'list_partner_users',
-		access_type  : 'private',
-		service_name : 'partner',
-	},
-	{
 		api          : 'list_shipment_trade_documents',
 		access_type  : 'private',
 		service_name : 'trade',
@@ -85,16 +65,6 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_organization_trade_parties',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
-		api          : 'list_shipment_stakeholders',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'list_shipment_trade_partners',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -103,11 +73,6 @@ const apis = [
 		api          : 'list_shipment_service_providers',
 		access_type  : 'private',
 		service_name : 'shipment',
-	},
-	{
-		api          : 'list_partner_user_rm_mappings',
-		access_type  : 'private',
-		service_name : 'partner',
 	},
 	{
 		api          : 'list_trade_documents',
