@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 
 function Footer({ item = {} }) {
 	const { kam = {}, so1 = {}, cargo_readiness_date = '', estimated_departure = '' } = item || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.details}>
@@ -26,13 +27,13 @@ function Footer({ item = {} }) {
 				<div>
 					KAM:
 					{' '}
-					<b>{kam.name}</b>
+					<b>{kam?.name}</b>
 				</div>
 
 				<div>
 					SO1:
 					{' '}
-					<b>{so1.name}</b>
+					<b>{so1?.name}</b>
 				</div>
 			</div>
 		</div>
