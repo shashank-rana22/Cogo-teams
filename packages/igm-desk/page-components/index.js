@@ -30,12 +30,13 @@ export default function IGMDesk() {
 		? ResolveIgmDesk.fcl_freight
 		: null;
 
-	if (RenderDesk) {
-		return (
-			<IGMDeskContext.Provider value={contextValues}>
-				<RenderDesk />
-			</IGMDeskContext.Provider>
-		);
+	if (!RenderDesk) {
+		return null;
 	}
-	return null;
+
+	return (
+		<IGMDeskContext.Provider value={contextValues}>
+			<RenderDesk />
+		</IGMDeskContext.Provider>
+	);
 }
