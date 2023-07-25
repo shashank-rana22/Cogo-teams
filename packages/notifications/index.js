@@ -1,2 +1,1 @@
-// eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/notifications/page-components';
+export { default as Notifications } from './page-components';
