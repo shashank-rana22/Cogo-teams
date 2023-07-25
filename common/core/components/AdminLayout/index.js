@@ -51,7 +51,7 @@ function AdminLayout({
 
 	const { partner = [], pinnedNavs = [] } = nav_items || {};
 
-	const isTnCModalVisible = Object.keys(partnerData).includes('is_joining_tnc_accepted')
+	const isTnCModalVisible = partnerData && Object.keys(partnerData).includes('is_joining_tnc_accepted')
 									&& is_joining_tnc_accepted === false;
 
 	return (
