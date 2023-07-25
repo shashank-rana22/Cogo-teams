@@ -11,7 +11,7 @@ const useGetObjectiveDetails = (props) => {
 	}, { manual: false });
 
 	return {
-		data,
+		data: data?.data,
 		loading,
 	};
 };
