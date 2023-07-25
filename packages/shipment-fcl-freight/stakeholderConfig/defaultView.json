@@ -25,13 +25,13 @@
         "tab_title":"Overview",
         "can_upsell": true,
         "can_edit_cancel_service": true,
-        "can_edit_container_details": true
+        "can_edit_container_details": true,
+        "show_terms_and_conditions": true
     },
 
     "tasks":{
         "feature_permission" : { "api_permission":["list_tasks"]  },
         "tab_title":"Timeline and Tasks",
-        "checked_show_my_tasks": false,
         "show_others_tasks": true,
         "show_igm_tasks": false
     },
@@ -50,7 +50,7 @@
         "default_wallet":"trade_documents",
         "feature_permission": { "api_permission":["list_documents", "list_tasks", "get_process"]},
         "can_edit_documents": true,
-        "show_igm_docs": false
+        "show_igm_docs": true
     },
 
     "emails":{
