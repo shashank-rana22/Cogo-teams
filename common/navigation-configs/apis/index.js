@@ -22,7 +22,7 @@ import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
 import ff_cost_booking from './ff-cost-booking-apis';
-import hrms from './hrms-apis';
+import HRMS from './hrms-apis';
 import igm_desk from './igm-desk-apis';
 import igm_shipment from './igm-shipment-apis';
 import ingestion from './ingestion-apis';
@@ -150,7 +150,7 @@ const apis = {
 	ingestion,
 	booking_desk,
 	poc,
-	...hrms,
+	...HRMS,
 	...athena_dashboard,
 	chro,
 	ff_cost_booking,
