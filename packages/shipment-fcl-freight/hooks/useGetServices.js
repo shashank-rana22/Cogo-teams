@@ -2,7 +2,12 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-function useGetServices({ shipment_data = {}, additional_methods = [] }) {
+const ACTIVE_STAKEHOLDER_MAPPING = {
+	consignee_shipper_booking_agent : 'consignee_shipper_id',
+	booking_agent                   : 'importer_exporter_id',
+};
+
+function useGetServices({ shipment_data = {}, additional_methods = [], activeStakeholder = '' }) {
 	const [{ loading : servicesLoading }, trigger] = useRequest({
 		url    : 'fcl_freight/get_services',
 		method : 'GET',
@@ -22,12 +27,20 @@ function useGetServices({ shipment_data = {}, additional_methods = [] }) {
 					},
 				});
 
-				setServicesData(res?.data?.summary);
+				if (activeStakeholder in ACTIVE_STAKEHOLDER_MAPPING) {
+					const servicesToShow = (res?.data?.summary || [])
+						.filter((service) => service?.importer_exporter?.id
+							=== shipment_data?.[ACTIVE_STAKEHOLDER_MAPPING[activeStakeholder]]);
+
+					setServicesData(servicesToShow);
+				} else {
+					setServicesData(res?.data?.summary);
+				}
 			} catch (err) {
 				toastApiError(err);
 			}
 		},
-		[trigger, id, additional_methods],
+		[trigger, id, additional_methods, activeStakeholder, shipment_data],
 	);
 
 	useEffect(() => {

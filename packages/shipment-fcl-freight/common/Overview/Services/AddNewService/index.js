@@ -65,7 +65,8 @@ function AddNewService({
 		setUpsellModal(!upsellModal);
 	};
 
-	const showAddServiceBox = !cancelUpsell && isUpsellable && canUpsellForTradeType;
+	const showAddServiceBox = !cancelUpsell
+	&& isUpsellable && canUpsellForTradeType && upsellableService?.service_type !== 'fcl_freight_service';
 
 	const { origin, destination, main } = showTradeHeading;
 
