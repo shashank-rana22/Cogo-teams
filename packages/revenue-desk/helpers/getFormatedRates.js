@@ -25,6 +25,7 @@ const getFormatedRates = (type, data, singleServiceData) => {
 				currency                          : validities?.currency,
 				profit                            : validities?.profit || DEFAULT_VALUE,
 				profit_percentage                 : validities?.profit_percentage || DEFAULT_VALUE,
+				agent                             : element?.procured_by?.name,
 				active_booking                    : element?.ongoing_shipments,
 				service_provider_id               : element?.service_provider_id || element?.service_provider?.id,
 				via_route                         : element?.destination_main_port?.name,
