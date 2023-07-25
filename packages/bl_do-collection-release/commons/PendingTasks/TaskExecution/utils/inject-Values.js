@@ -1,11 +1,13 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import injectCustomFormValidations from './inject-custom-form-validations';
 
-const injectValues = (
+const injectValues = ({
 	populatedControls,
 	task,
 	getApisData,
 	selectedMail = [],
-) => {
+}) => {
 	const controls = populatedControls || [];
 
 	if (!controls?.length) return controls;
@@ -35,7 +37,7 @@ const injectValues = (
 		(controls || []).forEach((control, index) => {
 			if (control.type === 'fieldArray') {
 				controls[index].value = controls[index]?.value?.length
-					? controls[index]?.value : [{ url: selectedMail?.formatted?.[0]?.url }];
+					? controls[index]?.value : [{ url: selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.url }];
 			}
 		});
 	}

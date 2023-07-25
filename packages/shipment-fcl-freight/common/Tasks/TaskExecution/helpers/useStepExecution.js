@@ -17,13 +17,14 @@ function useStepExecution({
 
 	const populatedControls = populateControls(stepConfig.controls);
 
-	const valueInjectedControls = injectValues(
+	const valueInjectedControls = injectValues({
 		selectedMail,
 		populatedControls,
 		task,
 		getApisData,
+		shipment_data,
 		stepConfig,
-	);
+	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);
 
