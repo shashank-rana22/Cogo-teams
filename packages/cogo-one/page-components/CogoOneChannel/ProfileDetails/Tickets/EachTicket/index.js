@@ -27,7 +27,7 @@ function EachTicket({
 			ShipmentId = 0,
 			AdditionalData = '',
 		} = {},
-		CreatedAt = '',
+		CreatedAt : createdAt = '',
 		TicketActivity:{ Description:ticketActivityDescription = '' } = {},
 		Priority = '',
 		Status = '',
@@ -38,9 +38,9 @@ function EachTicket({
 		ReviewerName = '',
 	} = eachTicket || {};
 
-	const date = CreatedAt
+	const date = createdAt
 		? formatDate({
-			date       : CreatedAt,
+			date       : createdAt,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM YYYY'],
 			timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 			formatType : 'dateTime',

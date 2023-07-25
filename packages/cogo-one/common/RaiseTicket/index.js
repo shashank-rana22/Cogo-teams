@@ -17,9 +17,9 @@ const CONTROLLER_MAPPING = {
 };
 function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, refetchTickets = () => {}, orgId = '' }) {
 	const {
-		performedByID,
+		performedById,
 	} = useSelector(({ profile }) => ({
-		performedByID: profile.user.id,
+		performedById: profile.user.id,
 	}));
 
 	const { data:{ messageData = {}, formattedData = {} } = {}, source = null } = raiseTicketModal || {};
@@ -52,11 +52,11 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 			created_at = '',
 		} = messageData;
 
-		const { user_id = null, lead_user_id = null, organization_id: organizationID = '' } = formattedData || {};
+		const { user_id = null, lead_user_id = null, organization_id: organizationId = '' } = formattedData || {};
 		const { ticket_data = null, ticket_type = null, description = null } = val || {};
 		const payload = {
-			PerformedByID  : performedByID,
-			OrganizationID : organizationID || orgId || undefined,
+			PerformedByID  : performedById,
+			OrganizationID : organizationId || orgId || undefined,
 			UserID         : user_id || lead_user_id,
 			Source         : 'client',
 			Type           : ticket_type,
