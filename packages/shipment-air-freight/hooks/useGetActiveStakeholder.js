@@ -11,13 +11,14 @@ const useGetActiveStakeholder = () => {
 	const stakeholderMap = [
 		{ role_ids: geo.uuid.kam_ids, stakeholder: 'booking_agent' },
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
-		{ role_ids: geo.uuid.so_1_manager, stakeholder: 'booking_desk_manager' },
+		{ role_ids: geo.uuid.air_so_1_manager, stakeholder: 'booking_desk_manager' },
 		{ role_ids: geo.uuid.service_ops2_role_id, stakeholder: 'document_desk' },
 		{ role_ids: geo.uuid.so_2_manager, stakeholder: 'document_desk_manager' },
 		{ role_ids: [geo.uuid.super_admin_id, geo.uuid.tech_super_admin_id], stakeholder: 'superadmin' },
 		{ role_ids: geo.uuid.sales_role, stakeholder: 'sales_agent' },
 		{ role_ids: geo.uuid.admin_id, stakeholder: 'admin' },
-		{ role_ids: geo.uuid.prod_process_owner, stakeholder: 'prod_process_owner' },
+		{ role_ids: geo.uuid.air_prod_process_owner, stakeholder: 'prod_process_owner' },
+		{ role_ids: geo.uuid.coe_head, stakeholder: 'coe_head' },
 		{
 			role_ids: [geo.uuid.coe_finance_head,
 				geo.uuid.super_admin_id,

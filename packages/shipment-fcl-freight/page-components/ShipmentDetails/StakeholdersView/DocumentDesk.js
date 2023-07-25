@@ -23,11 +23,14 @@ import Tasks from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
+import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
 const SERVICES_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
 const UNAUTHORIZED_STATUS_CODE = 403;
+const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
+
 export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
 
@@ -62,6 +65,7 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 		...servicesGet,
 		...getTimeline,
 		activeStakeholder,
+		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	useEffect(() => {
@@ -90,7 +94,7 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;
+						{' '}
 						Refresh
 					</Button>
 				</div>
@@ -166,7 +170,7 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 							<ShipmentMails
 								source="cogo_rpa"
 								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={`${shipment_data?.serial_id}`}
+								pre_subject_text={shipment_data?.serial_id}
 							/>
 						</TabPanel>
 

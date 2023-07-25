@@ -1,5 +1,5 @@
-import { Placeholder } from '@cogoport/components';
-import React, { ReactNode } from 'react';
+import { cl, Placeholder } from '@cogoport/components';
+import React, { ReactNode, ReactFragment } from 'react';
 
 import { FieldType, FunctionObjects, NestedObj } from '../Interfaces';
 
@@ -12,22 +12,26 @@ export interface Props {
 	functions?: FunctionObjects;
 	loading?: boolean;
 	isMobile?: boolean;
+	Child?: ReactFragment;
+	open?: string;
 }
 
 const INCLUDE_LINE_SEPARATION = ['booking_mode', 'poc_email', 'lms_password'];
 
 function CardItem({
-	fields,
-	singleitem,
+	fields = [],
+	singleitem = {},
 	functions = {},
 	loading = false,
 	isMobile = false,
+	Child = <div />,
+	open = '',
 }:Props) {
 	return (
 		<div>
 			<section className={styles.list_container}>
 				<div
-					className={`${styles.row} ${
+					className={cl`${styles.row} ${
 						isMobile ? styles.is_mobile : ''
 					}`}
 				>
@@ -36,7 +40,7 @@ function CardItem({
 						return (
 							<>
 								<div
-									className={`${styles.col} ${field.className || ''} ${
+									className={cl`${styles.col} ${field.className || ''} ${
 										isMobile ? styles.is_mobile : ''
 									}`}
 									style={{
@@ -71,6 +75,11 @@ function CardItem({
 					})}
 				</div>
 			</section>
+			{open === singleitem.id && (
+				<Child
+					data={singleitem}
+				/>
+			)}
 		</div>
 	);
 }

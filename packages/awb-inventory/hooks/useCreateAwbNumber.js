@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 import CONSTANTS from '../constants/constants';
@@ -37,10 +38,7 @@ const useCreateAwbNumber = (
 				setPage(START_PAGE);
 			}
 		} catch (error) {
-			const { data = {} } = error;
-			const { base = '' } = data || {};
-			const cleanStr = base.replace(/Base/g, '');
-			Toast.error(cleanStr || 'Unable to Add AWB Number');
+			Toast.error(getApiErrorString(error?.response?.data) || 'Unable to Add AWB Number');
 		}
 	};
 

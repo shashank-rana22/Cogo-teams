@@ -26,9 +26,11 @@ const useListShipmentPendingTasks = ({ defaultParams = {}, defaultFilters = {}, 
 		}
 	}, [trigger]);
 
+	const filtersInJSON = JSON.stringify(filters);
+
 	useEffect(() => {
 		apiTrigger();
-	}, [apiTrigger, filters]);
+	}, [apiTrigger, filtersInJSON]);
 
 	return {
 		loading,

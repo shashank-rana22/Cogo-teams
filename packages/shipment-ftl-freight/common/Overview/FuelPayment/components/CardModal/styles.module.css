@@ -1,0 +1,43 @@
+.warning_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.detail_row {
+	display: flex;
+}
+
+.label {
+	font-weight: 500;
+	color: #828282;
+}
+
+.value {
+	margin-left: 5px;
+}
+
+.footer_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.info {
+	font-size: 12px;
+	color: #828282;
+}
+
+.asterisk_mark {
+	color: #ee3425;
+}
+
+.button_wrapper {
+	display: flex;
+
+	> button:not(:last-of-type) {
+		margin-right: 10px;
+	}
+}

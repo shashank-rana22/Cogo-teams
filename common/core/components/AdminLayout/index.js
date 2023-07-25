@@ -14,6 +14,7 @@ import TnC from './newTnC';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
+import VideoCall from './VideoCall';
 import VoiceCall from './VoiceCall';
 
 const WHITE_BACKGROUND_MAPPING = [
@@ -41,7 +42,8 @@ function AdminLayout({
 	const {
 		user: { id: user_id = '' },
 		partner: partnerData,
-		is_in_voice_call:inCall = false, voice_call_recipient_data = {},
+		is_in_voice_call: inCall = false, voice_call_recipient_data = {},
+		is_in_video_call: inVideoCall = false, video_call_recipient_data = {},
 	} = user_data;
 
 	const {
@@ -104,6 +106,11 @@ function AdminLayout({
 					loggedInAgentId: user_id,
 				}}
 				inCall={inCall}
+				firestore={firestore}
+			/>
+			<VideoCall
+				videoCallRecipientData={video_call_recipient_data}
+				inVideoCall={inVideoCall}
 			/>
 			<AnnouncementModal data={announcements} />
 
@@ -113,6 +120,7 @@ function AdminLayout({
 				agentId={user_id}
 				userRoleIds={user_role_ids}
 				firestore={firestore}
+				inCall={inCall}
 			/>
 		</div>
 	);
