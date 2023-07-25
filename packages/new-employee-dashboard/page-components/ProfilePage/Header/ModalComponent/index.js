@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Input, RadioGroup } from '@cogoport/components';
 
 import getElementController from '../../../../configs/getElementController';
 import getControls from '../../../../utils/ctc-modal-form-controls';
@@ -8,17 +8,32 @@ import styles from './styles.module.css';
 const DEFAULT_VALUE = 0;
 const TOFIXED_NUMBER = 2;
 
+const OPTIONS = [
+	{ value: 'yes', label: 'Yes' },
+	{ value: 'no', label: 'No' },
+];
+
 function ModalComponent({
 	ctcStructure,
 	initialQuestion,
 	setInitialQuestion,
 	control,
 	error,
+	shareOfferLetter,
+	setShareOfferLetter,
 }) {
 	const finalControls = getControls(initialQuestion);
-
 	return (
 		<div>
+			<div className={styles.text_container}>
+				Share offer letter?
+				<RadioGroup
+					options={OPTIONS}
+					onChange={setShareOfferLetter}
+					value={shareOfferLetter}
+				/>
+			</div>
+
 			<div className={styles.header_field}>
 				<div className={styles.control_label}>
 					Input Target Annual Gross Salary (Fixed component)

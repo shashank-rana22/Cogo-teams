@@ -2,10 +2,17 @@
     "features":["shipment_info", "shipment_header", "cancel_details", "document_hold_details", "timeline", "overview","add_service","add_rate","emails"],
     "main_api":["get_shipment", "get_services", "get_timeline"],
 
+    "shipment_info":{
+        "show_source": true
+    },
+
     "shipment_header" : {
         "can_add_po_number": false,
         "can_cancel_shipment": false,
-        "feature_permission":{ "api_permission":["list_tasks"],"add_key_in_feature":"test_case"}
+        "feature_permission":{ "api_permission":["list_tasks"],"add_key_in_feature":"test_case"},
+        "show_po_number": true,
+        "show_cfs_details": false,
+        "show_poc_details": true
     },
 
     "timeline": {
@@ -15,13 +22,18 @@
     "default_tab":"tasks",
 
     "overview":{
-        "tab_title":"Overview"
+        "tab_title":"Overview",
+        "can_upsell": true,
+        "can_edit_cancel_service": true,
+        "can_edit_container_details": true
     },
 
     "tasks":{
         "feature_permission" : { "api_permission":["list_tasks"]  },
         "tab_title":"Timeline and Tasks",
-        "checked_show_my_tasks": false
+        "checked_show_my_tasks": false,
+        "show_others_tasks": true,
+        "show_igm_tasks": false
     },
 
     "purchase":{
@@ -36,7 +48,9 @@
     "documents":{
         "tab_title":"Documents",
         "default_wallet":"trade_documents",
-        "feature_permission": { "api_permission":["list_documents", "list_tasks", "get_process"]}
+        "feature_permission": { "api_permission":["list_documents", "list_tasks", "get_process"]},
+        "can_edit_documents": false,
+        "show_igm_docs": false
     },
 
     "emails":{
