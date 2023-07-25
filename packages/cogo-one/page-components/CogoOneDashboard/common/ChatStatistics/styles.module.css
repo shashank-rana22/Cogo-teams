@@ -21,7 +21,6 @@
 .small_data_box {
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
 	width: 100%;
 	padding-top: 12px;
 }
@@ -36,7 +35,7 @@
 .chat_numbers {
 	position: relative;
 	display: inline-block;
-	font-size: 40px;
+	font-size: 30px;
 	color: #4f4f4f;
 }
 
@@ -55,18 +54,6 @@
 .chat_numbers:hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
-}
-
-.positive {
-	color: #abcd62;
-}
-
-.negative {
-	color: #f8aea8;
-}
-
-.arrow_icon {
-	padding: 3px;
 }
 
 .placeholder {

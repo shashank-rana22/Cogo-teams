@@ -12844,6 +12844,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'list_assigned_chats',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 
 	referral_dashboard: [

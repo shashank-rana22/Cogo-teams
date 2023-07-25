@@ -1,17 +1,22 @@
 import { Placeholder, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
 import React from 'react';
 
 import { CHAT_STATS_DATA } from '../../constants';
+import useListAssignedChats from '../../hooks/ListAssignedChats';
+import { getFormattedNumber } from '../../utils/getFormattedNumber';
 
 import styles from './styles.module.css';
 
-function ChatStatistics({ isAdminView = false, loading = false, statusOfChats = {} }) {
+const MIN_CHAT_NUMBER = 0;
+
+function ChatStatistics({ isAdminView = false }) {
+	const { data = {}, loading = false } = useListAssignedChats();
+	const { chat_stats : chatStats = {} } = data || {};
+
 	return (
 		<>
 			{CHAT_STATS_DATA.map((item) => {
-				const { label = '', percentage, isAgent, key } = item;
+				const { label = '', isAgent, key } = item;
 
 				return (
 					(isAdminView || isAgent) && (
@@ -26,27 +31,7 @@ function ChatStatistics({ isAdminView = false, loading = false, statusOfChats = 
 								: (
 									<div className={styles.small_data_box}>
 										<div className={styles.chat_numbers}>
-											{statusOfChats[key]
-										|| GLOBAL_CONSTANTS.zeroth_index}
-
-										</div>
-										<div
-											className={cl`${styles.percentage} 
-											${percentage < GLOBAL_CONSTANTS.zeroth_index ? styles.negative
-												: styles.positive}`}
-										>
-											{statusOfChats[percentage] || GLOBAL_CONSTANTS.zeroth_index}
-											%
-										</div>
-										<div className={styles.arrow_icon}>
-											<Image
-												src={`${percentage < GLOBAL_CONSTANTS.zeroth_index
-													? GLOBAL_CONSTANTS.image_url.decreasing_arrow
-													: GLOBAL_CONSTANTS.image_url.increasing_arrow}`}
-												alt="percentage"
-												width={20}
-												height={20}
-											/>
+											{getFormattedNumber(chatStats[key]) || MIN_CHAT_NUMBER}
 										</div>
 									</div>
 								)}

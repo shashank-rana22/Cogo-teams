@@ -291,7 +291,6 @@ const GLOBAL_CONSTANTS = {
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
 		increasing_arrow     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg',
-		decreasing_arrow     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/decreasing_arrow.png',
 		happy_emoji          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/happy_user.svg',
 		neutral_user_emoji   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/neutral_user.svg',
 		angry_emoji          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/angry_user.svg',
