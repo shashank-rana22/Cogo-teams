@@ -7,8 +7,23 @@ import useLikeFeedback from '../../../../hooks/useLikeFeedback';
 import DislikeModal from './DislikeModal';
 import styles from './styles.module.css';
 
+const LIKE_DISLIKE_ALLOWED = [
+	'fcl_freight',
+	'air_freight',
+	'ftl_freight',
+	'ltl_freight',
+	'lcl_freight',
+	'fcl_customs',
+	'lcl_customs',
+	'air_customs',
+	'haulage_freight',
+	'trailer_freight',
+];
+
 function LikeDislike({ rateCardData = {}, detail = {} }) {
 	const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+
+	const { service_type = '' } = detail;
 
 	const { is_liked = false, likes_count = 0, is_disliked = false } = rateCardData;
 
@@ -20,6 +35,10 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 		rate: rateCardData,
 		likeState,
 	});
+
+	if (!LIKE_DISLIKE_ALLOWED.includes(service_type)) {
+		return null;
+	}
 
 	const handleLikeAction = () => {
 		if (likeState.is_liked) { return; }

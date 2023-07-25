@@ -6,29 +6,40 @@
 	background: white;
 }
 
-.line_div {
+.content_container {
 	display: flex;
+	align-items: center;
 }
 
-.pills {
-	height: 30px;
-	padding: 6px;
-	margin-right: 8px;
+.count_heading {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.pills_container {
+	display: flex;
+	align-items: center;
+	margin-left: 30px;
+}
+
+.pill {
+	padding: 6px 12px;
+	margin-right: 12px;
 	background: #f2f3fa;
 	border: 1px solid #ececec;
 	border-radius: 24px;
 }
 
-.traders_line {
-	margin-left: 20px;
+.unselect_button {
+	margin-left: 8px;
 }
 
-.button_wrapper {
+.buttons_container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
 .button {
-	margin-right: 12px;
+	margin-right: 20px;
 }

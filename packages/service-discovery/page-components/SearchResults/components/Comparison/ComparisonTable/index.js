@@ -1,70 +1,122 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function flattenArray(arr) {
-	return arr.reduce((flat, toFlatten) => flat.concat(Array.isArray(toFlatten)
-		? flattenArray(toFlatten) : toFlatten), []);
+function compareByArrayLength(a, b) {
+	const aKey = Object.keys(a)[GLOBAL_CONSTANTS.zeroth_index];
+	const bKey = Object.keys(b)[GLOBAL_CONSTANTS.zeroth_index];
+	return b[bKey].length - a[aKey].length;
 }
 
-const COMPARISON_KEY = {
-	guranteed_booking      : 'Guranteed booking',
-	total_discounted_price : 'Total Landed Cost',
-	free_origin_days       : 'Free days At Origin',
-	free_detention_days    : 'Free days At Detention',
-};
+function Table({ comparisonKey, allLineItems }) {
+	const renderTableHeader = () => (
+		<div className={styles.table_header}>
+			<div className={styles.header_column} />
 
-function MyTable({ comparisonKey, allLineItems }) {
+			{allLineItems.map((item) => {
+				const key = Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index];
+				const columnHeader = key === 'cogo_line' ? 'Cogo Assured' : startCase(key);
+
+				return (
+					<div key={key} className={styles.header_column}>
+						{columnHeader}
+					</div>
+				);
+			})}
+		</div>
+	);
+
+	const renderTableBody = () => Object.entries(comparisonKey).map(([key, value], index) => {
+		const rowClass = index % 2 === 0 ? styles.even : styles.odd;
+
+		return (
+			<div key={key} className={`${styles.row} ${rowClass}`}>
+				<div
+					className={`${styles.column} ${key === 'total_landed_price' ? styles.bold : {}}`}
+				>
+					{value}
+				</div>
+
+				{allLineItems.map((item) => {
+					const [lineItem] = Object.values(item);
+
+					const lineItemObj = lineItem.find((childItem) => childItem?.code === key) || {};
+
+					if (key.includes('THC')) {
+						return (
+							<div key={key} className={styles.column}>
+								{lineItemObj.value || '*At actuals'}
+							</div>
+						);
+					}
+
+					if (key === 'total_landed_price') {
+						return (
+							<div
+								key={key}
+								className={`${styles.column} ${styles.bold}`}
+							>
+								{lineItemObj.value}
+							</div>
+						);
+					}
+
+					return (
+						<div key={key} className={styles.column}>
+							{lineItemObj.value || '-'}
+						</div>
+					);
+				})}
+			</div>
+		);
+	});
+
 	return (
 		<div className={styles.table}>
-			<div className={styles.tableHeader}>
-				<div className={styles.column} />
-				{allLineItems.map((item) => (
-					<div key={item} className={styles.column}>{Object.keys(item)}</div>
-				))}
+			{renderTableHeader()}
 
-			</div>
-			<div className={styles.tableBody}>
-				{Object.entries(comparisonKey).reverse().map(([key, value], index) => (
-					<div
-						key={key}
-						className={`${styles.row} ${index % 2 === 0 ? styles.even : styles.odd}`}
-					>
-						<div className={styles.column}>{value}</div>
-						<div className={styles.column}>row.column2</div>
-						<div className={styles.column}>row.column3</div>
-					</div>
-				))}
-			</div>
+			<div className={styles.table_body}>{renderTableBody()}</div>
 		</div>
 	);
 }
 
-function ComparisonTable({ rateCardsForComparison = [] }) {
-	const allLineItems = rateCardsForComparison.map((item) => {
-		const { service_rates, shipping_line = {} } = item;
-		const lineItems = Object.values(service_rates).map(((service) => service.line_items));
+function ComparisonTable({ allLineItems = [], summary }) {
+	const { container_size = '', container_type = '', commodity = '' } = summary;
 
-		const flattenedArraylineItems = flattenArray(lineItems);
+	const newAllLineItems = [...allLineItems];
 
-		return {
-			[shipping_line.short_name]: flattenedArraylineItems,
+	newAllLineItems.sort(compareByArrayLength);
+
+	const getCustomNames = (item = {}) => {
+		const MAPPING = {
+			BAS: `${item.name} Price (${['20', '40'].includes(container_size) ? `${container_size}ft.`
+				: container_size} ${startCase(container_type)} ${startCase(commodity)} Container)`,
 		};
-	});
 
-	allLineItems.forEach((obj) => {
+		return MAPPING[item.code] || item.name;
+	};
+
+	const COMPARISON_KEY = {};
+
+	newAllLineItems.forEach((obj) => {
 		Object.values(obj).forEach((arr) => {
 			arr.forEach((item) => {
-				COMPARISON_KEY[item.code] = item.name;
+				if (item?.code) {
+					COMPARISON_KEY[item?.code] = getCustomNames(item) || '';
+				}
 			});
 		});
 	});
 
-	console.log('allLineItems', allLineItems);
-
 	return (
 		<div className={styles.container}>
-			<MyTable comparisonKey={COMPARISON_KEY} allLineItems={allLineItems} />
+			<Table
+				comparisonKey={COMPARISON_KEY}
+				allLineItems={newAllLineItems}
+				summary={summary}
+			/>
 		</div>
 	);
 }

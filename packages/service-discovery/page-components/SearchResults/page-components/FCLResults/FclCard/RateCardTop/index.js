@@ -1,24 +1,12 @@
-import { Checkbox } from '@cogoport/components';
+import { Checkbox, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMShare } from '@cogoport/icons-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import ShareToUsers from '../../../../common/ShareToUsers';
 import LikeDislike from '../LikeDislike';
 
 import styles from './styles.module.css';
-
-const LIKE_DISLIKE_ALLOWED = [
-	'fcl_freight',
-	'air_freight',
-	'ftl_freight',
-	'ltl_freight',
-	'lcl_freight',
-	'fcl_customs',
-	'lcl_customs',
-	'air_customs',
-	'haulage_freight',
-	'trailer_freight',
-];
 
 function ShareRate({ showShareModal, rateCardData, detail, setShowShareModal }) {
 	if (showShareModal) {
@@ -35,43 +23,72 @@ function ShareRate({ showShareModal, rateCardData, detail, setShowShareModal }) 
 	return null;
 }
 
-function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = () => {}, isSelectedCard = false }) {
-	const { shipping_line = {}, card } = rateCardData;
-	const [isChecked, setIsChecked] = useState(false);
+function RateCardTop({
+	rateCardData = {},
+	detail = {},
+	setComparisonRates = () => {},
+	comparisonRates = {},
+	isSelectedCard = false,
+	isCogoAssured = false,
+}) {
+	const { shipping_line = {}, id: card_id } = rateCardData;
 	const [showShareModal, setShowShareModal] = useState(false);
 
-	useEffect(() => {
-		if (isChecked) {
-			setComparisonCheckbox((prevValue) => ({
-				...prevValue,
-				[card]: shipping_line?.id,
+	const selectedCardIDs = Object.keys(comparisonRates);
+
+	const handleCheckbox = () => {
+		if (!selectedCardIDs.includes(card_id)) {
+			setComparisonRates((pv) => ({
+				...pv,
+				[card_id]: rateCardData,
 			}));
 		} else {
-			setComparisonCheckbox((prevValue) => {
-				const temp = { ...prevValue };
-				delete temp[card];
+			setComparisonRates((pv) => {
+				const temp = { ...pv };
+				delete temp[card_id];
 				return temp;
 			});
 		}
-	}, [card, isChecked, setComparisonCheckbox, shipping_line.id]);
+	};
 
-	const handleCheckboxChange = () => {
-		setIsChecked(!isChecked);
+	const getTooltipMessage = () => {
+		if (selectedCardIDs.length > 3 && !selectedCardIDs.includes(card_id)) {
+			return 'Maximum 4 cards can be compared';
+		}
+		if (selectedCardIDs.includes(card_id)) {
+			return 'Click to remove';
+		}
+
+		return 'Select to compare rates';
 	};
 
 	const renderCheckbox = () => {
 		if (isSelectedCard) return null;
-		return <Checkbox checked={isChecked} onChange={handleCheckboxChange} />;
+		return (
+			<Tooltip content={getTooltipMessage()} placement="top">
+				<div>
+					<Checkbox
+						checked={selectedCardIDs.includes(card_id)}
+						onChange={() => {
+							handleCheckbox();
+						}}
+						disabled={
+					selectedCardIDs.length > 3
+					&& !selectedCardIDs.includes(card_id)
+				}
+					/>
+				</div>
+			</Tooltip>
+		);
 	};
 
-	const renderLikeDislike = () => {
-		if (!LIKE_DISLIKE_ALLOWED.includes(detail?.search_type)) return null;
-		return <LikeDislike rateCardData={rateCardData} detail={detail} />;
-	};
+	const renderLikeDislike = () => <LikeDislike rateCardData={rateCardData} detail={detail} />;
 
 	const handleShareIconClick = () => {
 		setShowShareModal(!showShareModal);
 	};
+
+	const imageUrl = isCogoAssured ? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : shipping_line?.logo_url;
 
 	return (
 		<div className={styles.container}>
@@ -79,7 +96,7 @@ function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = (
 				{renderCheckbox()}
 
 				<img
-					src={shipping_line?.logo_url}
+					src={imageUrl}
 					alt={rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
 					style={{ height: 24, objectFit: 'cover' }}
 				/>

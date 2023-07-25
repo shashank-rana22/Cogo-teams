@@ -1,32 +1,37 @@
 .container {
+	/* display: flex; */
+
+	/* align-items: center; */
+
+	/* justify-content: space-between; */
+	width: 100%;
+	padding: 20px;
+	animation: top-animation 0.4s ease-in-out;
+}
+
+@keyframes top-animation {
+	0% {
+		opacity: 0;
+		transform: translateY(-40px);
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 10px;
-	margin: 10px;
-	background: white;
 }
 
-.line_div {
-	font-size: 21px;
-	font-weight: 500;
-	color: #000;
+.heading {
+	font-size: 20px;
+	font-weight: 600;
 }
 
-.pills {
-	height: 30px;
-	padding: 6px;
-	margin-right: 8px;
-	background: #f2f3fa;
-	border: 1px solid #ececec;
-	border-radius: 24px;
-}
-
-.traders_line {
-	margin-left: 20px;
-}
-
-.button_wrapper {
+.buttons_container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -34,4 +39,10 @@
 
 .button {
 	margin-right: 12px;
+}
+
+.book_buttons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }

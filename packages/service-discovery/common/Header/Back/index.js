@@ -8,7 +8,7 @@ const backScreen = (currentScreen) => {
 	const MAPPING = {
 		listRateCard       : 'back',
 		selectedCardScreen : 'back',
-		comparison         : 'selectedCardScreen',
+		comparison         : 'listRateCard',
 		bookCheckout       : 'selectedCardScreen',
 	};
 	return MAPPING[currentScreen] || 'back';
@@ -23,6 +23,8 @@ function Back({
 	const onBack = () => {
 		const { currentScreen = '', setCurrentScreen = () => {} } = rest;
 		const backscreen = backScreen(currentScreen);
+
+		console.log('backscreen', backscreen);
 
 		if (backscreen !== 'back') {
 			setCurrentScreen(() => backscreen);

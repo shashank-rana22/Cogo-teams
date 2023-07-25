@@ -12,9 +12,14 @@ import styles from './styles.module.css';
 function HeaderTop({
 	detail = {},
 	filters = {},
-	setFilters = () => {}, total_count = '', showComparison = false, rateCardsForComparison = [], setScreen = () => {},
+	setFilters = () => {},
+	total_count = '',
+	comparisonRates = {},
+	setComparisonRates = () => {},
+	setScreen = () => {},
 }) {
 	// const { scrollDirection } = useScrollDirection();
+	const showComparison = Object.keys(comparisonRates).length > 1;
 
 	return (
 		<div className={styles.header}>
@@ -27,7 +32,8 @@ function HeaderTop({
 
 			{showComparison ? (
 				<ComparisonHeader
-					rateCardsForComparison={rateCardsForComparison}
+					comparisonRates={comparisonRates}
+					setComparisonRates={setComparisonRates}
 					setScreen={setScreen}
 				/>
 			) : null}
@@ -48,7 +54,10 @@ function RateCard({
 	rateCardData = {},
 	loading = false,
 	detail = {},
-	setScreen = () => {}, setComparisonCheckbox = () => {}, comparisonCheckbox = '', refetchSearch = () => {},
+	setScreen = () => {},
+	setComparisonRates = () => {},
+	comparisonRates = {},
+	refetchSearch = () => {},
 }) {
 	if (loading) {
 		return null;
@@ -60,8 +69,8 @@ function RateCard({
 			rateCardData={rateCardData}
 			detail={detail}
 			setScreen={setScreen}
-			setComparisonCheckbox={setComparisonCheckbox}
-			comparisonCheckbox={comparisonCheckbox}
+			setComparisonRates={setComparisonRates}
+			comparisonRates={comparisonRates}
 			refetchSearch={refetchSearch}
 		/>
 	);
@@ -71,10 +80,8 @@ function ListRateCards({
 	rates = [], detail = {},
 	setSelectedCard = () => {},
 	setScreen = () => {},
-	setComparisonCheckbox = () => {},
-	showComparison = false,
-	rateCardsForComparison = [],
-	comparisonCheckbox = {},
+	setComparisonRates = () => {},
+	comparisonRates = {},
 	filters = {},
 	setFilters = () => {},
 	refetchSearch = () => {},
@@ -94,8 +101,8 @@ function ListRateCards({
 				filters={filters}
 				setFilters={setFilters}
 				total_count={paginationProps?.total_count}
-				showComparison={showComparison}
-				rateCardsForComparison={rateCardsForComparison}
+				comparisonRates={comparisonRates}
+				setComparisonRates={setComparisonRates}
 				setScreen={setScreen}
 			/>
 
@@ -115,8 +122,8 @@ function ListRateCards({
 					detail={detail}
 					setSelectedCard={setSelectedCard}
 					setScreen={setScreen}
-					setComparisonCheckbox={setComparisonCheckbox}
-					comparisonCheckbox={comparisonCheckbox}
+					setComparisonRates={setComparisonRates}
+					comparisonRates={comparisonRates}
 					refetchSearch={refetchSearch}
 				/>
 			))}

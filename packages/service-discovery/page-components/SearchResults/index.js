@@ -15,11 +15,9 @@ import styles from './styles.module.css';
 
 // Listratecards ki mapping krdo not card
 
-const MAGIC_NUMBER = 2;
-
 function SearchResults() {
 	const [headerProps, setHeaderProps] = useState({});
-	const [comparisonCheckbox, setComparisonCheckbox] = useState({});
+	const [comparisonRates, setComparisonRates] = useState([]);
 
 	const {
 		refetchSearch = () => {},
@@ -43,10 +41,6 @@ function SearchResults() {
 	} = data || {};
 
 	const paginationProps = { page, page_limit, total_count };
-
-	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.id));
-
-	const showComparison = rateCardsForComparison.length >= MAGIC_NUMBER;
 
 	const showAdditionalHeader = headerProps && !isEmpty(headerProps);
 
@@ -79,10 +73,8 @@ function SearchResults() {
 					setSelectedCard={setSelectedCard}
 					selectedCard={selectedCard}
 					setScreen={setScreen}
-					setComparisonCheckbox={setComparisonCheckbox}
-					showComparison={showComparison}
-					rateCardsForComparison={rateCardsForComparison}
-					comparisonCheckbox={comparisonCheckbox}
+					setComparisonRates={setComparisonRates}
+					comparisonRates={comparisonRates}
 					filters={filters}
 					setFilters={setFilters}
 					paginationProps={paginationProps}
