@@ -1,4 +1,4 @@
-let OPTIONS = [];
+let options = [];
 
 const shouldShowField = (field, formValues) => {
 	const { name } = field;
@@ -22,7 +22,7 @@ const shouldShowField = (field, formValues) => {
 };
 
 const getControls = ({ taskData = {}, formValues = {} }) => {
-	OPTIONS = (taskData?.apis_data?.list_organization_users || []).map((user) => ({
+	options = (taskData?.apis_data?.list_organization_users || []).map((user) => ({
 		label : user?.name,
 		value : user?.user_id,
 	}));
@@ -67,7 +67,7 @@ const getControls = ({ taskData = {}, formValues = {} }) => {
 			type        : 'select',
 			label       : 'Email for Confirm Booking will be sent To',
 			span        : 6,
-			options     : OPTIONS,
+			options,
 			placeholder : 'Select Agent',
 			rules       : { required: 'Agent is required' },
 			size        : 'sm',

@@ -7,7 +7,7 @@ const useSendBookingConfirmationEmail = ({
 	refetch = () => {},
 	successMessage = 'Email Successfully Send',
 }) => {
-	const [response, setResponse] = useState();
+	const [response, setResponse] = useState('');
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/send_booking_confirmation_mail',

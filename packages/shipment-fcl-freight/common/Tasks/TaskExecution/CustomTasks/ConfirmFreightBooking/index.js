@@ -46,7 +46,7 @@ function ConfirmFreightBooking({
 
 	const sendConfirmationMail = ({ preview = false, mailData }) => {
 		const payload = {
-			pending_task_id   : task.id,
+			pending_task_id   : task?.id,
 			recipient_id      : mailData?.agent_id || getValues()?.agent_id,
 			show_preview_only : preview,
 		};
