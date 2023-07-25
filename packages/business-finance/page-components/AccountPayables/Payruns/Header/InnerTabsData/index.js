@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 const STATS_VALUE = 0;
 function InnerTabsData({ setActivePayrunTab = () => {}, isActive = false, payrunStats = {}, name = '', title = '' }) {
 	const stats = payrunStats[name];
+
 	return (
 		<div
 			className={cl`${styles.container} ${isActive ? styles.active : undefined}`}

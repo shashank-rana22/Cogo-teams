@@ -14,6 +14,8 @@ function AllotBankList({
 	selectedIds = [], setSelectedIds = () => {},
 }) {
 	const { entityCode } = selectedPayrun || checkedRow || {};
+	const [selectedBankId, setSelectedBankId] = useState(null);
+
 	const { selectBank, loading } = useInitiatePaymentAllotBank({
 		setCheckedRow,
 		setShowAllotBank,
@@ -22,7 +24,7 @@ function AllotBankList({
 		selectedIds,
 		setSelectedIds,
 	});
-	const [selectedBankId, setSelectedBankId] = useState(null);
+
 	const { functions } = RenderFunction(
 		{
 			selectedPayrun,
@@ -35,6 +37,7 @@ function AllotBankList({
 	const initiatePaymentClick = () => {
 		selectBank(selectedBankId, selectedPayrun, checkedRow);
 	};
+
 	return (
 		<div>
 			<Modal size="xl" show={showAllotBank} onClose={() => setShowAllotBank(false)} placement="top">

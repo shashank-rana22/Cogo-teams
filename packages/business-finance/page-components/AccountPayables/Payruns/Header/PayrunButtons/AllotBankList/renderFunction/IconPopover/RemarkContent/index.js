@@ -57,7 +57,7 @@ function RemarkContent({ fundAllotmentTimeline = [], currency = '' }) {
 				</div>
 			) : (
 				<div>
-					No Data
+					No Remarks
 				</div>
 			)}
 		</div>

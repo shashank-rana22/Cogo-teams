@@ -24,9 +24,7 @@ function RequestAmount({ itemData = {}, selectedPayrun = null, checkedRow = null
 					type="button"
 					size="sm"
 					className="secondary"
-					onClick={() => {
-						setShowRequestModal(true);
-					}}
+					onClick={() => setShowRequestModal(true)}
 				>
 					Request
 				</Button>
@@ -34,9 +32,7 @@ function RequestAmount({ itemData = {}, selectedPayrun = null, checkedRow = null
 			{showRequestModal && (
 				<Modal
 					show={showRequestModal}
-					onClose={() => {
-						setShowRequestModal(false);
-					}}
+					onClose={() => setShowRequestModal(false)}
 					size="sm"
 				>
 					<Modal.Header title={`Payrun Amount: ${formatAmount({
@@ -87,9 +83,7 @@ function RequestAmount({ itemData = {}, selectedPayrun = null, checkedRow = null
 							type="reset"
 							themeType="secondary"
 							className={styles.button}
-							onClick={() => {
-								setShowRequestModal(false);
-							}}
+							onClick={() => setShowRequestModal(false)}
 						>
 							Cancel
 
