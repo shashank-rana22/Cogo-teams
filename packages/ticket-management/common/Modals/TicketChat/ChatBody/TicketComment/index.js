@@ -16,6 +16,7 @@ function TicketComment({
 	ticketType = '',
 	name = '',
 	userType = '',
+	agentName = '',
 	oldReviewerName = '',
 	reviewerName = '',
 	restData = {},
@@ -45,7 +46,7 @@ function TicketComment({
 				<div className={cl`${isCurrentUser ? styles.user_message_flex : ''}`}>
 					<div className={styles.header_flex}>
 						<div className={styles.name_div}>
-							{isCurrentUser ? currentAgentName : name}
+							{isCurrentUser ? currentAgentName : agentName}
 							,
 						</div>
 						<div className={styles.time}>

@@ -30,7 +30,7 @@ export { default as RangeSliderController } from './page-components/Controlled/R
 export { default as SingleDateRangeController } from './page-components/Controlled/SingleDateRangeController';
 export { default as PriceSelectController } from './page-components/Controlled/PriceSelectController';
 export { default as AsyncSelect } from './page-components/Business/AsyncSelect';
-
+export { default as RatingController } from './page-components/Controlled/RatingController';
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';
 export { default as useDebounceQuery } from './hooks/useDebounceQuery';
