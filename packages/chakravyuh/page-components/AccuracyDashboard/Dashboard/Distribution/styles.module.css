@@ -73,7 +73,7 @@
 	background-color: #221f20;
 	border-radius: 50%;
 
-	&.manual {
+	&.supply_rates {
 		background-color: #63bec8;
 	}
 
@@ -85,7 +85,7 @@
 		background-color: #9ba0cb;
 	}
 
-	&.cluster_rate_extension {
+	&.cluster_extension {
 		background-color: #58d3fe;
 	}
 }

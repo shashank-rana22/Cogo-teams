@@ -1,17 +1,15 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { Button, cl } from '@cogoport/components';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { CUSTOM_THEME, usePieChartConfigs } from '../../../../constants/pie_chart_config';
 import { section_header, section_container } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
-const CONSTANT_ZERO = 0;
-
-function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
+function Distribution({ globalFilters = {}, setGlobalFilters = () => {}, data = [], setModeOptions = () => {} }) {
 	const { rate_type = null } = globalFilters;
-	const { customData, pieColors } = usePieChartConfigs(rate_type);
+	const { pieChartData, pieColors } = usePieChartConfigs(rate_type, data);
 
 	const handlePieClick = (event) => {
 		if (!rate_type) {
@@ -23,6 +21,10 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 		setGlobalFilters((prev) => ({ ...prev, rate_type: null }));
 	};
 
+	useEffect(() => {
+		setModeOptions(Object.keys(data).filter((item) => item !== 'total_rates'));
+	}, [data, setModeOptions]);
+
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Distribution</h3>
@@ -30,7 +32,7 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 				<div className={styles.pie_chart_left_container}>
 					<ResponsivePie
 						onClick={handlePieClick}
-						data={customData}
+						data={pieChartData}
 						margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
 						innerRadius={0.7}
 						activeOuterRadiusOffset={8}
@@ -38,6 +40,7 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 						borderColor={{
 							from: 'color',
 						}}
+						enableArcLabels={false}
 						enableArcLinkLabels={false}
 						arcLinkLabelsSkipAngle={10}
 						arcLinkLabelsTextColor="#333333"
@@ -73,7 +76,7 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 				<div className={styles.pie_chart_middle_container}>
 					<p className={styles.pie_center_text}>Total Rates</p>
 					<p className={styles.pie_center_count}>
-						{customData.reduce((total, item) => total + item.value, CONSTANT_ZERO)}
+						{data?.total_rates}
 					</p>
 					{ rate_type
 					&& (
@@ -90,7 +93,7 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 				</div>
 				<div className={styles.pie_chart_right_container}>
 					{
-						customData.map(({ key, label, value, cancellation }, index) => (
+						pieChartData.map(({ key, label, value, cancellation }, index) => (
 							<div className={styles.legend_box} key={key}>
 								<div className={styles.legend_row}>
 									<div

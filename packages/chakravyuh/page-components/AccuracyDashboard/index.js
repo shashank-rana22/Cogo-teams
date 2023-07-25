@@ -26,6 +26,7 @@ const VIEW_MAPPING = {
 
 function AccuracyDashboard() {
 	const [view, setView] = useState('dashboard');
+	const [modeOptions, setModeOptions] = useState([]);
 	const [globalFilters, setGlobalFilters] = useState({
 		service_type : 'fcl',
 		rate_type    : null,
@@ -47,6 +48,7 @@ function AccuracyDashboard() {
 							showFilters
 							globalFilters={globalFilters}
 							setGlobalFilters={setGlobalFilters}
+							modeOptions={modeOptions}
 						/>
 
 					</div>
@@ -61,6 +63,7 @@ function AccuracyDashboard() {
 				globalFilters={globalFilters}
 				setGlobalFilters={setGlobalFilters}
 				backView={backView}
+				setModeOptions={setModeOptions}
 			/>
 		</div>
 	);
