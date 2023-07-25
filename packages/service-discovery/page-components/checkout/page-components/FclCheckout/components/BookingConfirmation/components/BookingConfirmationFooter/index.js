@@ -118,7 +118,7 @@ function BookingConfirmationFooter({
 			return () => clearInterval(interval);
 		}
 		return () => {};
-	}, [hasExpired, timerRef, validity_end]);
+	}, [hasExpired, validity_end]);
 
 	const {
 		booking_status = '',
