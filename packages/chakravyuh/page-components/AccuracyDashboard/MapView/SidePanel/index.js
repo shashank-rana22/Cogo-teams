@@ -19,14 +19,14 @@ const SCOPE_MAPPING = {
 function SidePanel({
 	setView = () => {}, backView = () => {}, setHierarchy = () => {},
 	isFull = false, setIsFull = () => {}, locationFilters = {}, setLocationFilters = () => {}, activeList = [],
-	data = [],
+	data = [], hierarchy = {},
 }) {
 	const originName = locationFilters.origin?.name || countriesHash?.[locationFilters?.origin?.id]?.name;
 	const destinationType = locationFilters?.destination?.type || '';
 	const destination = destinationType.includes('port')
 		? locationFilters?.destination?.name : SCOPE_MAPPING[destinationType];
 
-	const currentList = isEmpty(activeList) ? data : activeList;
+	const currentList = isEmpty(hierarchy) ? data : activeList;
 
 	return (
 		<>
@@ -63,7 +63,6 @@ function SidePanel({
 									<h4>{originName}</h4>
 									<IcMPortArrow />
 									<p>{item?.name}</p>
-
 								</div>
 							</div>
 							<div className={styles.right}>
