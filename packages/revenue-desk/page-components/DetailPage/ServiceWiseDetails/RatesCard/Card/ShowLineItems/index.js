@@ -22,7 +22,7 @@ function ShowLineItems({
 		HEADINGS.destination_local_line_items = destinationLocalLineItems;
 	}
 	return Object.keys(HEADINGS).map((key) => (
-		<>
+		<div key={key} className={styles.container}>
 			<div className={styles.heading_text}>{startCase(key)}</div>
 			<div style={{ display: 'flex' }}>
 				{columns.map((item) => (
@@ -44,7 +44,7 @@ function ShowLineItems({
 					))
 				}
 			</div>
-		</>
+		</div>
 	));
 }
 export default ShowLineItems;
