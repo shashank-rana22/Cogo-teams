@@ -1,14 +1,17 @@
 import React from 'react';
 
-import CreateCofiguration from './CreateConfiguration';
-// import Header from './Header';
+import useGetCsdConfigurations from '../../hooks/useGetCsdConfigurations';
+
+import ConfigList from './ConfigList';
+import Header from './Header';
 
 function ShipmentCapacityCofiguration() {
+	const { list = [], loading, pageData = {}, page, setPage = () => {} } = useGetCsdConfigurations({});
+
 	return (
 		<>
-			<h3>Existing Configurations</h3>
-			{/* <Header /> */}
-			<CreateCofiguration />
+			<Header />
+			<ConfigList list={list} loading={loading} pageData={pageData} page={page} setPage={setPage} />
 		</>
 
 	);

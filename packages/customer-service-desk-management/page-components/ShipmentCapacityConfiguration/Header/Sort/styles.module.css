@@ -1,0 +1,48 @@
+.sort_container {
+	display: flex;
+	align-items: center;
+	padding: 6px 12px;
+	cursor: pointer;
+	background-color: white;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	margin-left: 14px;
+}
+
+.sort_icon {
+	margin-right: 4px;
+}
+
+.right_space {
+	margin-right: 8px;
+}
+
+.container {
+	:global {
+		.ui_popover_container {
+			padding: unset !important;
+		}
+	}
+}
+
+.item {
+	padding: 10px 6px;
+	margin-bottom: 2px;
+	background: #fff;
+	border-bottom: 1px solid #f2e3c3;
+	border-radius: 6px;
+
+	&:hover {
+		cursor: pointer;
+		background: #f8f2e7;
+	}
+}
+
+.selected {
+	background: #f8f2e7;
+}
+
+.active {
+	background: #fef199;
+	border: 1px solid #fde74d;
+}

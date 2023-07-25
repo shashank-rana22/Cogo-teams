@@ -13,3 +13,86 @@
 		color: #4f4f4f;
 	}
 }
+
+.element_container{
+	display: flex;
+}
+
+.slab_unit{
+	margin-right: 60px;
+	margin-bottom: 30px;
+}
+
+.control_item {
+	margin-right: 20px;
+	margin-bottom: 30px;
+}
+
+.sup {
+	color: #f00;
+}
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.label {
+	margin-bottom: 4px;
+}
+
+.add_item_container {
+	cursor: pointer;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+}
+
+.add_icon {
+	margin-right: 4px;
+}
+
+.experience_details {
+	background: #fff;
+	border-radius: 6px;
+	padding: 20px 30px;
+
+	:global{
+		.ui_radiogroup_container{
+			padding: unset;
+			margin-bottom: 40px;
+		}
+
+		.ui_radio_container{
+			padding: unset;
+			margin-right: 30px;
+		}
+	}
+}
+
+.btn {
+	margin-left: auto;
+	margin-top: 30px;
+}
+
+.experience_container {
+	margin-top: 50px;
+
+	h4 {
+		margin-bottom: 10px;
+	}
+}
+
+.inner_container {
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+
+}
+
+.delete_icon {
+	cursor: pointer;
+	margin-left: 20px;
+}

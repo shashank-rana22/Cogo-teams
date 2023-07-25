@@ -1,0 +1,76 @@
+.container {
+    margin-top: 30px;
+
+    h4 {
+        color: #4f4f4f;
+    }
+
+    span{
+        font-weight: normal;
+    }
+}
+
+.service_item, .header_card{
+    display: flex;
+    align-items: center;
+    background: #fff;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    padding: 16px;
+    justify-content: space-between;
+}
+
+.header_card {
+    background: #FDFBF6;
+}
+
+.label, .trigger{
+    flex-basis: 16%;
+    font-weight: 600;
+    color: #4f4f4f;
+}
+
+.exp_container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    color: #4f4f4f;
+    font-weight: 600;
+    align-self: center;
+    margin-bottom: 16px;
+}
+
+.capacity_container, .slab_details {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.item, .capacity_input {
+    margin-right: 30px;
+    flex-basis: 25%;
+}
+
+.item{
+    text-align: center;
+}
+
+.err_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.btn_container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.reset_btn {
+    margin-right: 10px;
+}

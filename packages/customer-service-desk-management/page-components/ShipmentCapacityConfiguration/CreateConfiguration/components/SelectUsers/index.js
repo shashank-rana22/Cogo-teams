@@ -1,22 +1,32 @@
-import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
-import React from 'react';
+import { Button, Accordion } from '@cogoport/components';
+import { useForm, RadioGroupController } from '@cogoport/forms';
+import React, { useEffect } from 'react';
 
 import getElementController from '../../../../../configurations/getElementController';
+import orgSubTypeOptions from '../../../../../configurations/org-subtype-options-mapping';
 
-import controls from './controls';
+import getControls from './controls';
 import styles from './styles.module.css';
 
 function SelectUsers({
 	// setActiveItem = () => {},
 	createCsdConfig = () => {},
+	loading = false,
 }) {
-	const { control, formState:{ errors }, handleSubmit } = useForm();
+	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
+
+	const orgType = watch('organization_type');
+	const cogoEntityId = watch('cogo_entity_id');
+	const reportingManagerIds = watch('reporting_managers');
+
+	useEffect(() => {
+		setValue('segment', undefined);
+	}, [orgType, setValue]);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.form_container}>
-				{controls.map((controlItem) => {
+				{getControls({ cogoEntityId, reportingManagerIds })?.map((controlItem) => {
 					const { type, label, name, showAstrick } = controlItem || {};
 
 					const Element = getElementController(type);
@@ -32,6 +42,7 @@ function SelectUsers({
 								<Element
 									control={control}
 									{...controlItem}
+									{...(name === 'segment' && { options: orgSubTypeOptions[orgType] })}
 								/>
 								{errors[name] && <div className={styles.error_msg}>This is required</div>}
 							</div>
@@ -40,14 +51,50 @@ function SelectUsers({
 				})}
 
 			</div>
+
+			<div className={styles.config_container}>
+				<div className={styles.label}>
+					Select Configuration Priority
+					<sup className={styles.sup}>*</sup>
+				</div>
+
+				<RadioGroupController
+					className={styles.instruction_input}
+					control={control}
+					size="sm"
+					name="config_type"
+					rules={{ required: 'This is required' }}
+					options={[
+						{
+							name  : 'primary',
+							value : 'primary',
+							label : 'Override Current System Logic',
+						},
+						{
+							name  : 'fallback',
+							value : 'fallback',
+							label : 'Fall Back Logic',
+						},
+					]}
+				/>
+
+				{errors.config_type && <div className={styles.error_msg}>This is required</div>}
+
+			</div>
+
+			<Accordion type="text" title="View Current System Logic" className={styles.accordion}>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+				condimentum, nisl eget aliquam tincidunt, nunc nisl aliquam
+			</Accordion>
+
 			<Button
 				size="md"
 				themeType="primary"
 				className={styles.btn}
+				loading={loading}
 				onClick={handleSubmit((values) => createCsdConfig({ values }))}
 			>
 				Save
-
 			</Button>
 		</div>
 

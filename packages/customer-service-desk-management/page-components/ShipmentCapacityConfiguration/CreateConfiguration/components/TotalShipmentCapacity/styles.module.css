@@ -1,0 +1,54 @@
+.container {
+    h4 {
+        margin: unset;
+    }
+}
+
+.exp_text {
+    margin-top: 30px;
+}
+
+.table_container {
+
+    :global {
+        .ui_table_container {
+            padding: unset !important;
+            background: #fff;
+            margin-top: 24px;
+        }
+
+        .ui_table_head_container {
+            background: 
+            #FDFBF6;
+        }
+
+        .ui_table_head_cell, .ui_table_body_cell {
+           padding: 16px 8px;
+        }
+
+        .ui_table_body_row:first-child {
+            background: 
+            #FDFBF6;
+            font-weight: 600;
+        }
+
+        .ui_table_body_row {
+            .ui_table_body_cell:first-child {
+                background: 
+            #FDFBF6;
+            font-weight: bold;
+            }
+        }
+    }
+}
+
+.btn_container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.btn {
+    margin-left: 14px;
+}

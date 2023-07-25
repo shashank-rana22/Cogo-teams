@@ -1,4 +1,4 @@
-const controls = [
+const getControls = ({ cogoEntityId = '', reportingManagerIds = [] }) => ([
 	{
 		name        : 'cogo_entity_id',
 		label       : 'Select Cogo Entity',
@@ -30,45 +30,56 @@ const controls = [
 				label : 'Channel Partner',
 			},
 		],
+		rules: { required: 'This is required' },
+
 	},
 	{
-		name        : 'organization_sub_type',
+		name        : 'segment',
 		showAstrick : true,
 		label       : 'Organization Sub-Type',
 		type        : 'select',
+		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'h',
+		name        : 'reporting_managers',
 		label       : 'Select Teams by Reporting Manager',
 		type        : 'async-select',
+		multiple    : true,
 		placeholder : 'Select Organization',
 		initialCall : true,
-		asyncKey    : 'partners',
+		asyncKey    : 'partner_users',
+		valueKey    : 'user_id',
 		params      : {
 			filters: {
-				entity_types : ['cogoport'],
+				partner_id   : cogoEntityId,
 				status       : 'active',
+				block_access : [null, false],
 			},
-			page_limit: 10,
 		},
 	},
 	{
-		name        : 'a',
+		name        : 'organization_ids',
 		label       : 'Select Organization',
 		type        : 'async-select',
 		placeholder : 'Select Organization',
 		initialCall : true,
-		asyncKey    : 'partners',
+		multiple    : true,
+		asyncKey    : 'organizations',
 		params      : {
 			filters: {
-				entity_types : ['cogoport'],
-				status       : 'active',
+				sales_agent_rm_ids : reportingManagerIds,
+				status             : 'active',
+				account_type       : 'importer_exporter',
+				kyc_status         : 'verified',
 			},
-			page_limit: 10,
+			pagination_data_required     : false,
+			agent_data_required          : false,
+			add_service_objects_required : false,
+			page_limit                   : 99999999,
 		},
 	},
 	{
-		name    : 'booking_platform',
+		name    : 'booking_source',
 		label   : 'Booking Platform',
 		type    : 'multi-select',
 		options : [
@@ -81,15 +92,11 @@ const controls = [
 				label : 'Cogoverse',
 			},
 			{
-				value : 'cp_platform',
-				label : 'CP',
-			},
-			{
 				value : 'app_platform',
 				label : 'APP',
 			},
 		],
 	},
-];
+]);
 
-export default controls;
+export default getControls;

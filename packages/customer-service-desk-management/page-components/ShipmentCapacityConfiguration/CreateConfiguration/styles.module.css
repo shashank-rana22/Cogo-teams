@@ -9,3 +9,19 @@
 		}
 	}
 }
+
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.back_icon {
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 600;
+}

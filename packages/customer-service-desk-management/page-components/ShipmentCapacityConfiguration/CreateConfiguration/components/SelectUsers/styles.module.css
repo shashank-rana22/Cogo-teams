@@ -35,3 +35,25 @@
 	margin-top: 20px;
 	margin-left: auto;
 }
+
+.config_container {
+
+	:global{
+		.ui_radiogroup_container{
+			padding: unset;
+			margin-top: 16px;
+			margin-bottom: 6px;
+		}
+
+		.ui_radio_container{
+			padding: unset;
+			margin-right: 30px;
+		}
+	}
+}
+
+.accordion {
+	width: 50%;
+	margin-top: 40px;
+	color: #4F4F4F;
+}

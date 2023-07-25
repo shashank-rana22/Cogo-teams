@@ -1,4 +1,6 @@
 import { Stepper } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useCreateCsdConfig from '../../../hooks/useCreateCsdConfig';
@@ -15,15 +17,18 @@ const STEPPER_ITEMS = [
 ];
 
 function CreateCofiguration() {
-	const [activeItem, setActiveItem] = useState('set_configuration');
+	const router = useRouter();
 
-	const { createCsdConfig } = useCreateCsdConfig();
+	const [activeItem, setActiveItem] = useState('select_users');
+
+	const { loading, createCsdConfig } = useCreateCsdConfig({ setActiveItem });
 
 	const COMPONENT_MAPPING = {
 		select_users: {
 			component : SelectUsers,
 			props     : {
 				setActiveItem,
+				loading,
 				createCsdConfig,
 			},
 		},
@@ -45,6 +50,18 @@ function CreateCofiguration() {
 
 	return (
 		<div className={styles.container}>
+
+			<div className={styles.header}>
+				<IcMArrowBack
+					className={styles.back_icon}
+					width={20}
+					height={20}
+					onClick={() => router.push('/customer-service-desk-management')}
+				/>
+
+				<div role="presentation" className={styles.title}>New Config. Creation</div>
+			</div>
+
 			<Stepper active={activeItem} setActive={setActiveItem} items={STEPPER_ITEMS} arrowed />
 			<ActiveComponent {...activeComponentProps} />
 		</div>

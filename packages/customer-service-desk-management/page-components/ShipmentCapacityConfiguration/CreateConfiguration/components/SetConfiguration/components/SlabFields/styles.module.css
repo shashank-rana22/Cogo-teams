@@ -1,0 +1,29 @@
+.slab_unit{
+	margin-right: 60px;
+	margin-bottom: 30px;
+}
+
+.item {
+	margin-right: 20px;
+	margin-bottom: 30px;
+}
+
+.sup {
+	color: #f00;
+}
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.label {
+	margin-bottom: 4px;
+}
+
+.hyphen {
+	align-self: center;
+	margin-right: 20px;
+}

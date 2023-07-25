@@ -1,21 +1,30 @@
-const controls = [
+const fieldArrayControls = [
 	{
-		name    : 'select_users',
-		type    : 'radioGroup',
+		name    : 'slab_unit',
+		type    : 'select',
 		options : [
 			{
-				name  : 'default',
-				value : 'default',
-				label : 'Default Experience Slabs',
+				value : 'month',
+				label : 'in months',
 			},
 			{
-				name  : 'custom',
-				value : 'custom',
-				label : 'Custom Experience Slabs (4 Slabs Maximum)',
+				value : 'year',
+				label : 'in years',
 			},
 		],
 		rules: { required: 'This is required' },
 	},
+	{
+		name     : 'slab_lower_limit',
+		label    : 'Experience Level Slab From',
+		type     : 'number',
+		disabled : true,
+	},
+	{
+		name  : 'slab_upper_limit',
+		label : 'Experience Level Slab Upto',
+		type  : 'number',
+	},
 ];
 
-export default controls;
+export default fieldArrayControls;

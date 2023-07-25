@@ -135,8 +135,6 @@ function AsyncSelect(props) {
 		...rest
 	} = props;
 
-	console.log(asyncKey);
-
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
 	const asyncOptionsHook = (microService || defaultParams.microService)

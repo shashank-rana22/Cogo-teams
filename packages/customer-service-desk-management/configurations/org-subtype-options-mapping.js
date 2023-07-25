@@ -1,25 +1,25 @@
 const orgSubTypeOptions = {
 	importer_exporter: [
 		{
-			value : '1',
+			value : 'long_tail',
 			label : 'Long Tail',
 		},
 		{
-			value : '2',
+			value : 'mid_size',
 			label : 'Mid Size',
 		},
 		{
-			value : '3',
+			value : 'enterprise',
 			label : 'Enterprise',
 		},
 	],
 	channel_partner: [
 		{
-			value : 'ocp',
+			value : 'overseas',
 			label : 'Overseas CP',
 		},
 		{
-			value : 'dcp',
+			value : 'domestic',
 			label : 'Domestic CP',
 		},
 	],
