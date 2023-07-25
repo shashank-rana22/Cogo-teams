@@ -1,26 +1,7 @@
-let options = [];
-
-const shouldShowField = (field, formValues) => {
-	const { name } = field || {};
-	const { booking_ref_status } = formValues || {};
-
-	if (name === 'booking_ref_status') {
-		return !formValues.booking_ref_status;
-	}
-
-	if (booking_ref_status === 'not_placed'
-		&& ['booking_reference_delay_reasons', 'booking_reference_delay_remarks'].includes(name)) {
-		return true;
-	}
-
-	if (booking_ref_status === 'placed' && name === 'agent_id') {
-		return true;
-	}
-	return false;
-};
+import getShouldShowField from './getShouldShowField';
 
 const getControls = ({ taskData = {}, formValues = {} }) => {
-	options = (taskData?.apis_data?.list_organization_users || []).map((user) => ({
+	const options = (taskData?.apis_data?.list_organization_users || []).map((user) => ({
 		label : user?.name,
 		value : user?.user_id,
 	}));
@@ -75,7 +56,7 @@ const getControls = ({ taskData = {}, formValues = {} }) => {
 	const SHOW_ELEMENTS = {};
 
 	formControls.forEach((ctrl) => {
-		SHOW_ELEMENTS[ctrl?.name] = shouldShowField(ctrl, formValues);
+		SHOW_ELEMENTS[ctrl?.name] = getShouldShowField({ ctrl, formValues });
 	});
 
 	return {
