@@ -7,7 +7,7 @@ import Header from '../../common/Header';
 
 import { LoadingState } from './commons/LoadingState';
 import DotLoader from './commons/LoadingState/DotLoader';
-import { CheckoutContext } from './context';
+import CheckoutContext from './context';
 import styles from './styles.module.css';
 import useCheckout from './useCheckout';
 import getRedirectionDetails from './utils/getRedirectionDetails';
