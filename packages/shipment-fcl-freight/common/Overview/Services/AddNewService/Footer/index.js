@@ -42,7 +42,7 @@ function Footer({
 
 	return (
 		<div className={styles.container}>
-			{step !== FIRST_STEP
+			{ !haveToUpsell
 				? (
 					<Button
 						onClick={onClose}
