@@ -36,10 +36,12 @@ function ExecuteStep({
 
 	const editParams = useRef(null);
 
+	const { state = '', service_type = '', task: taskName = '' } = task;
+
 	const showBookingPreference = (
-		task?.state === 'awaiting_service_provider_confirmation'
-		&& task?.service_type === 'fcl_freight_service'
-		&& task?.task === 'mark_confirmed'
+		state === 'awaiting_service_provider_confirmation'
+		&& service_type === 'fcl_freight_service'
+		&& taskName === 'mark_confirmed'
 	);
 
 	const isShipmentRolloverable = getCanShipmentRollover(getApisData);

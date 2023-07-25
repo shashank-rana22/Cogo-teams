@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const ONE = 1;
+const STEP_INCREMENT = 1;
 
 const useUpdateShipmentBookingConfirmationPreferences = ({
 	successMessage = 'Updated Successfully!',
@@ -33,7 +33,7 @@ const useUpdateShipmentBookingConfirmationPreferences = ({
 
 			if (source === 'upload_booking_note') {
 				setSelectedServiceProvider((prev) => [...prev, item]);
-				setStep((prev) => prev + ONE);
+				setStep((prev) => prev + STEP_INCREMENT);
 			}
 		} catch (err) {
 			toastApiError(err);

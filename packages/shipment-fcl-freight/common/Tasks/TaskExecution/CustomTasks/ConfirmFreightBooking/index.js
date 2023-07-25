@@ -5,11 +5,7 @@ function ConfirmFreightBooking({ getApisData = {} }) {
 
 	const selectedPriority = list?.find((item) => item.priority === item.selected_priority);
 
-	return (
-
-		<BookingPreferenceCard item={selectedPriority} isProceedEnabled={false} />
-
-	);
+	return <BookingPreferenceCard item={selectedPriority} isProceedEnabled={false} />;
 }
 
 export default ConfirmFreightBooking;
