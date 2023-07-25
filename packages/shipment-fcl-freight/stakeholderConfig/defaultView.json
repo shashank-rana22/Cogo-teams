@@ -25,7 +25,8 @@
         "tab_title":"Overview",
         "can_upsell": true,
         "can_edit_cancel_service": true,
-        "can_edit_container_details": true
+        "can_edit_container_details": true,
+        "show_terms_and_conditions": true
     },
 
     "tasks":{

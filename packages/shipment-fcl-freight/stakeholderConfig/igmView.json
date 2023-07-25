@@ -15,7 +15,8 @@
         "tab_title":"Overview",
         "can_upsell": false,
         "can_edit_cancel_service": false,
-        "can_edit_container_details": false
+        "can_edit_container_details": false,
+        "show_terms_and_conditions": false
     },
     "tasks":{
         "tab_title":"Timeline and Tasks",
