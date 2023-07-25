@@ -10,6 +10,7 @@ function useUpdateOrganizationContract() {
 		try {
 			await trigger({
 				params: {
+
 				},
 			});
 		} catch (err) {
