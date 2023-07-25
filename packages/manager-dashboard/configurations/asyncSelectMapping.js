@@ -9,7 +9,7 @@ export const ASYNC_SELECT_MAPPING = [
 	},
 	{
 		placeholder : 'Squads',
-		asyncKey    : 'list_all_squads',
+		asyncKey    : 'list_squads',
 		isClearable : true,
 		size        : 'sm',
 		multiple    : true,
@@ -17,7 +17,7 @@ export const ASYNC_SELECT_MAPPING = [
 	},
 	{
 		placeholder : 'Tribes',
-		asyncKey    : 'list_all_tribes',
+		asyncKey    : 'list_tribes',
 		isClearable : true,
 		size        : 'sm',
 		multiple    : true,
@@ -25,7 +25,7 @@ export const ASYNC_SELECT_MAPPING = [
 	},
 	{
 		placeholder : 'Chapters',
-		asyncKey    : 'list_all_chapters',
+		asyncKey    : 'list_chapters',
 		isClearable : true,
 		size        : 'sm',
 		multiple    : true,
@@ -33,7 +33,7 @@ export const ASYNC_SELECT_MAPPING = [
 	},
 	{
 		placeholder : 'Employees',
-		asyncKey    : 'list_employee_details',
+		asyncKey    : 'list_employees',
 		isClearable : true,
 		size        : 'sm',
 		multiple    : true,
