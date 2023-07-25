@@ -34,14 +34,14 @@ function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterT
 						{ getValue(totalAmountBeforeTax)}
 					</span>
 				</div>
-				<div className={`${styles.col}`} style={{ width: '14%' }}>
+				<div className={styles.col} style={{ width: '14%' }}>
 					Tax
 					<span>
 						{ getValue(totalTax)}
 						%
 					</span>
 				</div>
-				<div className={`${styles.col}`} style={{ width: '18%' }}>
+				<div className={styles.col} style={{ width: '18%' }}>
 					Amount after Tax
 					<span>
 						{ getValue(totalAmountAfterTax)}
@@ -49,12 +49,12 @@ function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterT
 				</div>
 				{!geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds
 					&& (
-						<div className={`${styles.col}`} style={{ width: '10%' }}>
+						<div className={styles.col} style={{ width: '10%' }}>
 							TDS
 							<span>{totalTds ? showOverflowingNumber(totalTds, MAX_LENGTH) : null}</span>
 						</div>
 					)}
-				<div className={`${styles.col}`} style={{ width: '10%' }}>
+				<div className={styles.col} style={{ width: '10%' }}>
 					Payable
 					<span>{ getValue(payableAmount)}</span>
 				</div>
