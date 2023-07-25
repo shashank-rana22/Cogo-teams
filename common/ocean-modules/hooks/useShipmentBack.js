@@ -9,11 +9,11 @@ import {
 } from '../helpers/getRedirectNavMapping';
 
 export default function useShipmentBack() {
+	const router = useRouter();
 	const profileData = useSelector(({ profile }) => profile);
 	const { permissions_navigations = {}, email = '' } = profileData;
 
-	const [isBackAllowed, setIsBackAllowed] = useState();
-	const router = useRouter();
+	const [isBackAllowed, setIsBackAllowed] = useState(false);
 
 	const { navToRedirect, version } = useMemo(() => {
 		const { nav_items: { partner: allSideBarNavs } } = getSideBarConfigs({
@@ -31,12 +31,6 @@ export default function useShipmentBack() {
 			}
 			return false;
 		});
-
-		return () => {
-			window.sessionStorage.removeItem('prev_nav_restricted');
-			window.sessionStorage.removeItem('prev_nav');
-			window.removeEventListener('beforeunload', eventListener);
-		};
 	}, [router.components]);
 
 	const handleShipmentsClick = (e) => {
@@ -51,6 +45,10 @@ export default function useShipmentBack() {
 
 			window.location.href = newUrl;
 		}
+
+		window.sessionStorage.removeItem('prev_nav_restricted');
+		window.sessionStorage.removeItem('prev_nav');
+		window.removeEventListener('beforeunload', eventListener);
 	};
 
 	return { handleShipmentsClick };

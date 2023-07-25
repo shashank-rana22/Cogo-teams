@@ -5,14 +5,14 @@ import injectCustomFormValidations from './inject-custom-form-validations';
 const MINIMUM_BLS_COUNT = 1;
 const MINIMUM_CONTAINERS_COUNT = 1;
 
-const injectValues = (
+const injectValues = ({
 	selectedMail,
 	populatedControls,
 	task,
 	getApisData,
 	shipment_data,
 	stepConfig,
-) => {
+}) => {
 	const controls = populatedControls || [];
 
 	if (!controls?.length) return controls;

@@ -8,7 +8,7 @@ import useUpdateEmployeeDeatils from '../../hooks/useUpdateEmployeeDetails';
 
 import styles from './styles.module.css';
 
-const STATUS_MAPPING = ['approved', 'active', 'accepted'];
+const DISABLE_ADD_CTC_BUTTON_STATUS_LIST = ['approved', 'active', 'accepted', 'draft'];
 
 function Header({
 	detail,
@@ -21,8 +21,9 @@ function Header({
 }) {
 	const router = useRouter();
 	const { id, name, employee_code, designation, passport_size_photo_url, status } = detail || {};
+	const SOURCE = 'reject';
 
-	const { updateEmployeeStatus, btnloading } = useUpdateEmployeeDeatils({ id, status, getEmployeeDetails });
+	const { updateEmployeeStatus, btnloading } = useUpdateEmployeeDeatils({ id, status, getEmployeeDetails, SOURCE });
 
 	const { personal_information, identification_documents, address_details } = personalDetails || {};
 
@@ -33,7 +34,7 @@ function Header({
 	const isLoading = loading || isEmpty(detail || {}) || false;
 
 	const offer_letter_active = (offerLetter || []).find((element) => (
-		STATUS_MAPPING.includes(element?.status)
+		DISABLE_ADD_CTC_BUTTON_STATUS_LIST.includes(element?.status)
 	));
 
 	return (

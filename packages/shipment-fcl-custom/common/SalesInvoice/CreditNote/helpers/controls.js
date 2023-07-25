@@ -1,5 +1,6 @@
 import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
+import currencyCodeOptions from '@cogoport/ocean-modules/utils/currencyCode';
 
 import { handleServiceType } from './handleServiceType';
 
@@ -21,16 +22,16 @@ const commonControls = (service) => [
 		span     : 2,
 	},
 	{
-		name           : 'currency',
-		label          : 'Currency',
-		type           : 'select',
-		showOptional   : false,
-		className      : 'size-sm',
-		optionsListKey : 'exchange-rate-currencies',
-		placeholder    : 'Select Currency',
-		disabled       : true,
-		rules          : { required: 'currency is required' },
-		span           : 2,
+		name         : 'currency',
+		label        : 'Currency',
+		type         : 'select',
+		showOptional : false,
+		className    : 'size-sm',
+		options      : currencyCodeOptions,
+		placeholder  : 'Select Currency',
+		disabled     : true,
+		rules        : { required: 'currency is required' },
+		span         : 2,
 	},
 	{
 		label : 'Price',
