@@ -7,9 +7,7 @@ const useGetOrganization = ({ primary_service = {} }) => {
 		url    : '/get_organization',
 		method : 'GET',
 		params : {
-
 			id: primary_service?.service_provider?.id,
-
 		},
 	}, { manual: true });
 

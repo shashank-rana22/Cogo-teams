@@ -1,8 +1,8 @@
 let options = [];
 
 const shouldShowField = (field, formValues) => {
-	const { name } = field;
-	const { booking_ref_status } = formValues;
+	const { name } = field || {};
+	const { booking_ref_status } = formValues || {};
 
 	if (name === 'booking_ref_status') {
 		return !formValues.booking_ref_status;
@@ -13,10 +13,8 @@ const shouldShowField = (field, formValues) => {
 		return true;
 	}
 
-	if (booking_ref_status === 'placed') {
-		if (name === 'agent_id') {
-			return true;
-		}
+	if (booking_ref_status === 'placed' && name === 'agent_id') {
+		return true;
 	}
 	return false;
 };

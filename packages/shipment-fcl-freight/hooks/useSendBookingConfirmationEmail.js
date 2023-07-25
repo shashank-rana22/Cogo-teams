@@ -21,9 +21,7 @@ const useSendBookingConfirmationEmail = ({
 			if (!payload?.show_preview_only) {
 				Toast.success(successMessage);
 			}
-
 			refetch();
-
 			setResponse(res?.data);
 		} catch (err) {
 			toastApiError(err);

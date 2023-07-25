@@ -118,6 +118,7 @@ function ConfirmFreightBooking({
 				<Button
 					themeType="secondary"
 					onClick={onCancel}
+					disabled={loading}
 				>
 					Cancel
 				</Button>
