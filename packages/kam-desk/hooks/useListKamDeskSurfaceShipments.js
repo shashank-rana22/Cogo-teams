@@ -1,10 +1,14 @@
-import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback, useContext, useRef } from 'react';
 
 import KamDeskContext from '../context/KamDeskContext';
 import getKamDeskSurfaceFilters from '../helpers/getKamDeskSurfaceFilters';
+
+const CHECK_PAGE = 1;
+const TIMEOUT_VALUE = 600;
 
 const useListKamDeskSurfaceShipments = () => {
 	const [apiData, setApiData] = useState({});
@@ -33,12 +37,12 @@ const useListKamDeskSurfaceShipments = () => {
 			try {
 				const res = await trigger();
 
-				if (res?.data?.list === 0 && filters.page > 1) setFilters({ ...filters, page: 1 });
+				if (isEmpty(res?.data?.list) && filters.page > CHECK_PAGE) setFilters({ ...filters, page: 1 });
 
 				setApiData(res?.data || {});
 			} catch (err) {
 				setApiData({});
-				Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');
+				toastApiError(err);
 			}
 		})();
 	}, [trigger, setFilters, filters]);
@@ -54,7 +58,7 @@ const useListKamDeskSurfaceShipments = () => {
 			clearTimeout(debounceQuery.current.timerId);
 
 			debounceQuery.current.q = filters.q;
-			debounceQuery.current.timerId = setTimeout(apiTrigger, 600);
+			debounceQuery.current.timerId = setTimeout(apiTrigger, TIMEOUT_VALUE);
 		} else {
 			apiTrigger();
 		}
