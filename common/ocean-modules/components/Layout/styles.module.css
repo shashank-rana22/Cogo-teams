@@ -16,7 +16,7 @@
 	padding: 8px;
 
 	> *:not(:last-of-type) {
-		margin-right: auto;
+		margin-right: max(1%, 16px);
 	}
 }
 
