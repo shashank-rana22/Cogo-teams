@@ -1,5 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
 import { getDate } from '../utils/getDate';
+
+const FLIGHT_STATE_ORIGIN = ['flight_departed', 'cargo_handed_over_at_origin'];
+const FLIGHT_STATE_DEPART = ['flight_departed'];
 
 const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) => {
 	const state = primary_service?.state || '';
@@ -9,11 +14,10 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 
 	const finalControls = [
 		{
-			name    : 'cargo_handed_over_at_origin_at',
-			label   : 'Cargo Handover At Airport',
-			disable : disabledState
-			|| ['flight_arrived', 'flight_departed', 'cargo_handed_over_at_origin'].includes(state),
-			dateFormat            : 'MMM dd, yyyy',
+			name                  : 'cargo_handed_over_at_origin_at',
+			label                 : 'Cargo Handover At Airport',
+			disable               : disabledState || FLIGHT_STATE_ORIGIN.includes(state),
+			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			placeholder           : 'Select Date',
 			isPreviousDaysAllowed : true,
 		},
@@ -21,8 +25,8 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 			name                  : 'schedule_departure',
 			label                 : 'Actual time of departure',
 			maxDate               : null,
-			disable               : disabledState || ['flight_arrived', 'flight_departed'].includes(state),
-			dateFormat            : 'MMM dd, yyyy',
+			disable               : disabledState || FLIGHT_STATE_DEPART.includes(state),
+			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			placeholder           : 'Select Date',
 			isPreviousDaysAllowed : true,
 		},
@@ -31,8 +35,8 @@ const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) =>
 			label                 : 'Actual time of arrival',
 			maxDate               : null,
 			minDate               : departureDate,
-			disable               : disabledState || ['flight_arrived'].includes(state),
-			dateFormat            : 'MMM dd, yyyy',
+			disable               : disabledState,
+			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			placeholder           : 'Select Date',
 			isPreviousDaysAllowed : true,
 		},
