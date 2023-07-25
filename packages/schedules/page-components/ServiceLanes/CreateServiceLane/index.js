@@ -11,7 +11,7 @@ function CreateModal({ showModal, setShowModal, makeRequest }) {
 	const { handleSubmit, control, formState: { errors }, watch } = useForm();
 	const formValues = watch();
 	const {
-		createServiceLane, handleClose, fields,
+		createServiceLane, fields,
 	} = useCreateServiceLane({ makeRequest, formValues, setShowModal, watch });
 
 	return (
@@ -19,7 +19,7 @@ function CreateModal({ showModal, setShowModal, makeRequest }) {
 			size="lg"
 			show={showModal}
 			onClose={() => {
-				handleClose();
+				setShowModal(false);
 			}}
 			closeOnOuterClick
 			scroll
@@ -47,7 +47,7 @@ function CreateModal({ showModal, setShowModal, makeRequest }) {
 					<Button
 						themeType="secondary"
 						onClick={() => {
-							handleClose();
+							setShowModal(false);
 						}}
 					>
 						Cancel
