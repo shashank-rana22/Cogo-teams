@@ -5,7 +5,6 @@ import { useCallback, useEffect, useState } from 'react';
 import formatOrganizationUsers from '../helpers/formatOrganizationUsers';
 
 const getParams = ({ organizationId, query, filterKey }) => ({
-	// filters    : { [filterKey]: organizationId,	q: query || undefined },
 	filters: filterKey === 'organization_id'
 		? { [filterKey]: organizationId,	q: query || undefined } : undefined,
 	lead_organization_id : filterKey === 'lead_organization_id' ? organizationId : undefined,
