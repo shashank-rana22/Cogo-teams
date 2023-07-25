@@ -9,6 +9,7 @@ export const BASE_LAYER = [
 	},
 ];
 const MAX_LNG = 90;
+export const LOCATION_KEYS = ['origin', 'destination'];
 export const COLORS = [
 	{ weight: 0.5 },
 	{ fillColor: '#F7FAEF', color: '#849E4C', fillOpacity: 0.8, opacity: 0.8, min: 0, max: 40 },

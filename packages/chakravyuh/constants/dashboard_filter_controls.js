@@ -20,23 +20,19 @@ export const SELECT_ICON_MAPPING = {
 
 export const TIME_RANGE_OPTIONS = [
 	{
-		label     : 'Last one month',
-		value     : 'last_one_month',
+		label     : '1m',
 		date_diff : 30,
 	},
 	{
-		label     : 'Last three months',
-		value     : 'last_three_months',
+		label     : '3m',
 		date_diff : 90,
 	},
 	{
-		label     : 'Last six months',
-		value     : 'last_six_months',
+		label     : '6m',
 		date_diff : 180,
 	},
 	{
-		label     : 'All',
-		value     : 'all',
+		label     : 'all',
 		date_diff : null,
 	},
 ];

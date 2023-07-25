@@ -9,53 +9,50 @@ import styles from './styles.module.css';
 
 const OPTIONS = [
 	{
-		key             : 'view_details',
-		heading         : 'Rate DrillDown',
-		highlight_key   : 'dropoffs_percentage',
-		highligh_suffix : 'From Search to Checkout',
+		key              : 'view_details',
+		heading          : 'Rate DrillDown',
+		highlight_key    : 'spot_search_to_checkout_count',
+		highlight_suffix : '% Dropoffs',
+		highlight_info   : 'From Search to Checkout',
 	},
 	{
-		key             : 'map_view',
-		heading         : 'Map View',
-		highlight_key   : 'rates_count',
-		highligh_suffix : 'With Deviation more than 30%',
+		key              : 'map_view',
+		heading          : 'Map View',
+		highlight_key    : 'rate_count_with_deviation_more_than_30',
+		highlight_suffix : ' Rates',
+		highlight_info   : 'With Deviation more than 30%',
 	},
 ];
 
-const DATA = { dropoffs_percentage: '93%', rates_count: '4532' };
-
-function Views({ setView = () => {} }) {
+function Views({ setView = () => {}, data = {} }) {
 	const handleClick = (key) => {
 		setView(key === 'view_details' ? 'drilldown' : key);
 	};
 
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
-			{OPTIONS.map(({ key, highlight_key, heading, highligh_suffix }) => {
-				const highlightText = startCase(highlight_key.split('_')[GLOBAL_CONSTANTS.zeroth_index]);
-
-				return (
-					<div className={styles.card} key={key}>
-						<h3 className={section_header}>{heading}</h3>
-						<div className={styles.flex_between}>
-							<div className={styles.highlight_container}>
-								<h1>
-									{`${getByKey(DATA, highlight_key)} ${highlightText}`}
-								</h1>
-								<p>{highligh_suffix}</p>
-							</div>
-							<Button
-								onClick={() => handleClick(key)}
-								themeType="secondary"
-								className={styles.custom_btn}
-							>
-								{startCase(key)}
-								<span className={styles.arrow_right}>&gt;</span>
-							</Button>
+			{OPTIONS.map(({ key, highlight_key, heading, highlight_info, highlight_suffix }) => (
+				<div className={styles.card} key={key}>
+					<h3 className={section_header}>{heading}</h3>
+					<div className={styles.flex_between}>
+						<div className={styles.highlight_container}>
+							<h1>
+								{`${getByKey(data, highlight_key)
+									|| GLOBAL_CONSTANTS.zeroth_index} ${highlight_suffix}`}
+							</h1>
+							<p>{highlight_info}</p>
 						</div>
+						<Button
+							onClick={() => handleClick(key)}
+							themeType="secondary"
+							className={styles.custom_btn}
+						>
+							{startCase(key)}
+							<span className={styles.arrow_right}>&gt;</span>
+						</Button>
 					</div>
-				);
-			})}
+				</div>
+			))}
 		</div>
 	);
 }

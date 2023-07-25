@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 export const CUSTOM_THEME = {
 	legends: {
 		text: {
@@ -90,7 +92,7 @@ export const usePieChartConfigs = (type) => {
 	if (!type) {
 		return {
 			customData : CUMSTOM_DATA,
-			pieColors  : CUMSTOM_DATA.map((item) => item.color),
+			pieColors  : Object.values(ColorMappings).map((color) => color[GLOBAL_CONSTANTS.zeroth_index]),
 		};
 	}
 	return {

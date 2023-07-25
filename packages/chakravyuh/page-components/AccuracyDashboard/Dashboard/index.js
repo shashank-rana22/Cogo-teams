@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useGetFclFreightDistribution from '../../../hooks/useGetFclFreightRateDistribution';
 import useGetFclFreightRateStats from '../../../hooks/useGetFclFreightRateStats';
 import SupplyRates from '../RatesList';
 
@@ -13,18 +14,21 @@ function DashboardView(props) {
 	const { setView = () => {}, globalFilters = {} } = props;
 	const { rate_type } = globalFilters;
 
-	const { data, loading } = useGetFclFreightRateStats({ filters: globalFilters });
-
+	const {
+		data, loading,
+	} = useGetFclFreightRateStats({ filters: globalFilters });
+	const { data: distribution } = useGetFclFreightDistribution({ filters: globalFilters });
+	const { accuracy = [], deviation = [], ...rest } = data || {};
 	return (
 		<>
 			<div className={styles.main_container}>
 				<div className={styles.graph_container}>
-					<Accuracy data={data?.accuracy} loading={loading} />
-					<Deviation data={data?.deviation} loading={loading} />
+					<Accuracy data={accuracy} loading={loading} />
+					<Deviation data={deviation} loading={loading} />
 				</div>
 				<div className={styles.side_container}>
-					<Views setView={setView} />
-					<Distribution {...props} />
+					<Views setView={setView} data={rest} loading={loading} />
+					<Distribution {...props} data={distribution} />
 				</div>
 			</div>
 			{rate_type && <SupplyRates heading="Supply Rates" {...props} />}

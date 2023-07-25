@@ -41,8 +41,32 @@
 		}
 	}
 
-	.time_range_drop_down {
-		width: 200px;
+	&:last-of-type {
+		margin-left: auto;
+	}
+}
+
+.time_range_container {
+	display: flex;
+	align-items: center;
+	height: 40px;
+	padding: 0 8px;
+	background-color: #fff;
+	border-radius: 8px;
+
+	.custom_pill {
+		padding: 8px 12px;
+		margin: 6px;
+		color: #221f20;
+		background: #fff;
+		border: none;
+
+		&:hover,
+		&.active {
+			color: #7b6637;
+			cursor: pointer;
+			background: #fdfbf6;
+		}
 	}
 }
 

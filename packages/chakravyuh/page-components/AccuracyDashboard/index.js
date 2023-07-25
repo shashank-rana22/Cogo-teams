@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Heading from '../../common/Heading';
 
@@ -29,18 +29,11 @@ function AccuracyDashboard() {
 	const [globalFilters, setGlobalFilters] = useState({
 		service_type : 'fcl',
 		rate_type    : null,
-		time_range   : {
-			key   : 'all',
-			value : null,
-		},
+		endDate      : new Date(),
 	});
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];
 	const showCommons = view !== 'map_view';
-
-	useEffect(() => {
-		console.log('global_filters', globalFilters);
-	}, [globalFilters]);
 
 	return (
 		<div className={styles.container}>

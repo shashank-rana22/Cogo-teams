@@ -1,7 +1,5 @@
 import { Select, cl } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMSearchlight, IcMPortArrow } from '@cogoport/icons-react';
 import { startCase, subtractDays } from '@cogoport/utils';
 
@@ -10,6 +8,7 @@ import {
 	SERVICE_TYPE_OPTIONS,
 	TIME_RANGE_OPTIONS,
 } from '../../../constants/dashboard_filter_controls';
+import { LOCATION_KEYS } from '../../../constants/map_constants';
 
 import styles from './styles.module.css';
 
@@ -28,12 +27,11 @@ const MAIN_PORT_PROPS = {
 	size        : 'sm',
 	isClearable : true,
 };
-const LOCATION_KEYS = ['origin', 'destination'];
 const TYPE_MAPPING = { seaport: 'port', airport: 'airport' };
 
 function Filters(props) {
 	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
-	const { service_type, time_range } = globalFilters;
+	const { service_type } = globalFilters;
 
 	const params = {
 		filters: {
@@ -45,33 +43,16 @@ function Filters(props) {
 	};
 
 	const changePrimaryFilters = (key, value) => {
-		setGlobalFilters((prev) => ({ ...prev, [key]: value }));
+		setGlobalFilters((prev) => ({ ...prev, [key]: value || undefined }));
 	};
 
-	const changeDateRange = (key, value, { date_diff }) => {
-		console.log(key, value, date_diff);
+	const handleTimeChange = (date_diff) => {
 		const endDate = new Date();
-		let startDate = null;
-
-		if (value && value !== 'all') {
-			startDate = subtractDays(endDate, date_diff);
-		}
+		const startDate = subtractDays(endDate, date_diff);
 
 		setGlobalFilters((prev) => ({
 			...prev,
-			[key]: {
-				key   : value,
-				value : {
-					start_date: formatDate({
-						date       : startDate,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
-					}),
-					end_date: formatDate({
-						date       : endDate,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
-					}),
-				},
-			},
+			startDate,
 		}));
 	};
 
@@ -120,7 +101,7 @@ function Filters(props) {
 										onChange={(value) => {
 											changePrimaryFilters(`${key}_main_port`, value);
 										}}
-										value={globalFilters[key]}
+										value={globalFilters[`${key}_main_port`]}
 										className={styles.location_select}
 										params={{ location_id: globalFilters[key], type: 'main_ports' }}
 										{...MAIN_PORT_PROPS}
@@ -138,16 +119,13 @@ function Filters(props) {
 			</div>
 			<div className={styles.single_filter}>
 				<p className={styles.title_label}>Time Range</p>
-				<Select
-					size="sm"
-					isClearable={false}
-					placeholder="Select here"
-					value={time_range.key}
-					options={TIME_RANGE_OPTIONS}
-					prefix={null}
-					onChange={(val, option) => changeDateRange('time_range', val, option)}
-					className={styles.time_range_drop_down}
-				/>
+				<div className={styles.time_range_container}>
+					{TIME_RANGE_OPTIONS.map(({ label, date_diff }) => (
+						<button key={label} className={styles.custom_pill} onClick={() => handleTimeChange(date_diff)}>
+							{label}
+						</button>
+					))}
+				</div>
 			</div>
 		</div>
 	);

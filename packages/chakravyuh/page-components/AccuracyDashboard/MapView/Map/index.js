@@ -23,6 +23,8 @@ const MARKER_OPTIONS = {
 	fillOpacity : 0.8,
 	weight      : 1,
 };
+const CENTER_LNG = 20;
+const INITIAL_ZOOM = 2;
 
 function Map({
 	isFull = false, bounds = null, data = [], loading = false, setBounds = () => {},
@@ -64,10 +66,17 @@ function Map({
 	}, [map, isFull]);
 
 	useEffect(() => {
-		if (map && bounds instanceof L.LatLngBounds) {
+		if (!map) return;
+		if (isEmpty(hierarchy)) {
+			map.setView(
+				[INITIAL_ZOOM * CENTER_LNG, CENTER_LNG],
+				INITIAL_ZOOM,
+				{ paddingTopLeft: [paddingTopLeft, GLOBAL_CONSTANTS.zeroth_index] },
+			);
+		} else if (bounds instanceof L.LatLngBounds) {
 			map.fitBounds(bounds, { paddingTopLeft: [paddingTopLeft, GLOBAL_CONSTANTS.zeroth_index] });
 		}
-	}, [bounds, map, paddingTopLeft]);
+	}, [bounds, map, paddingTopLeft, hierarchy]);
 
 	return (
 		<CogoMaps

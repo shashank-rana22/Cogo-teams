@@ -3,9 +3,9 @@ import { useEffect, useCallback } from 'react';
 
 import { LOCATION_KEYS } from '../constants/map_constants';
 
-const useGetFclFreightRateStats = ({ filters }) => {
+const useGetFclFreightDistribution = ({ filters }) => {
 	const [{ data, loading }, trigger] = useRequest({
-		url    : 'get_fcl_freight_rate_charts',
+		url    : 'get_fcl_freight_rate_distribution',
 		method : 'GET',
 	}, { manual: true });
 
@@ -38,4 +38,4 @@ const useGetFclFreightRateStats = ({ filters }) => {
 	return { data, loading };
 };
 
-export default useGetFclFreightRateStats;
+export default useGetFclFreightDistribution;
