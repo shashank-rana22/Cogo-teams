@@ -18,9 +18,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+	margin-left: 10px;
 	overflow-x: auto;
 	white-space: nowrap;
-	margin-left: 10px;
 }
 
 .more_details_popover_text {
