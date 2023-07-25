@@ -10,7 +10,7 @@ import controls from '../../configurations/filters-controls';
 
 import styles from './styles.module.css';
 
-function Filters({ filters, setFilters, activeTab }) {
+function Filters({ filters = {}, setFilters = () => {}, activeTab = '' }) {
 	const [open, setOpen] = useState(false);
 
 	const { control, handleSubmit, reset, formState:{ errors } } = useForm();

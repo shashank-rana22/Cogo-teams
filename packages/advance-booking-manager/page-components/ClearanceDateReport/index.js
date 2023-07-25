@@ -11,14 +11,14 @@ import EditClearanceDateReport from '../EditClearanceDateReport';
 import styles from './styles.module.css';
 
 function ClearanceDateReport({
-	loading,
-	setPage,
-	page,
-	data,
-	clearanceDateReport,
-	finalList,
-	setFinalList,
-	setQfilter,
+	loading = false,
+	setPage = () => {},
+	page = 1,
+	data = {},
+	clearanceDateReport = () => {},
+	finalList = [],
+	setFinalList = () => {},
+	setQfilter = () => {},
 }) {
 	const [item, setItem] = useState({ id: '' });
 	const [showEdit, setShowEdit] = useState(false);
