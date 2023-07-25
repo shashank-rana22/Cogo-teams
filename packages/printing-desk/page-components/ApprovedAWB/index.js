@@ -54,6 +54,7 @@ function ApprovedAWB({
 								Do you wish to confirm the Handover?
 							</Modal.Body>
 							<Modal.Footer>
+								<Button onClick={() => setHandoverModal(false)}>Cancel</Button>
 								<Button onClick={() => updateShipment({ payload })}>Confirm</Button>
 							</Modal.Footer>
 						</Modal>
