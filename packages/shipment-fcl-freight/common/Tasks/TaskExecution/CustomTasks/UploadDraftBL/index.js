@@ -27,6 +27,13 @@ function UploadDraftBL({
 	const [canUseSwitch, setcanUseSwitch] = useState(true);
 	const mblRef = useRef();
 
+	const { list:hblList } = useListDocuments({
+		filters: {
+			document_type : 'si',
+			shipment_id   : shipmentData?.id,
+		},
+	});
+
 	const isHBL = (primaryService.bl_category || '').toLowerCase() === 'hbl';
 
 	const initial_step = primaryService.bl_category;
@@ -179,6 +186,7 @@ function UploadDraftBL({
 											{i + INCREMENT_VALUE}
 										</div>
 										<HBLCreate
+											hblList={hblList?.list?.[i]}
 											completed={tradeDocList?.list?.[i]}
 											hblData={hblData[i] || tradeDocList?.list?.[i]?.data}
 											onSave={(v) => handleSaveHBL(i, v)}
