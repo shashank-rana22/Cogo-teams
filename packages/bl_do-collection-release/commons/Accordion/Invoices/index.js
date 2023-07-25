@@ -22,33 +22,35 @@ const TRADE_TYPE_COMPONENT_MAPPING = {
 	export : ExportInvoices,
 };
 
-const invoiceHover = (invoice) => (
-	<div className={styles.invoice_hover_container}>
-		<div className={cl`${styles.text} ${styles.bold}`}>{invoice?.invoice_no}</div>
+function InvoiceHover({ invoice = {} }) {
+	return (
+		<div className={styles.invoice_hover_container}>
+			<div className={cl`${styles.text} ${styles.bold}`}>{invoice?.invoice_no}</div>
 
-		<div className={cl`${styles.invoice_hover_container} ${styles.row}`}>
-			<div className={cl`${styles.text}`}>
-				<div className={cl`${styles.text}`}>UTR</div>
-				<div className={cl`${styles.text} ${styles.bold_colored}`}>{invoice?.utr_nos}</div>
-			</div>
+			<div className={cl`${styles.invoice_hover_container} ${styles.row}`}>
+				<div className={cl`${styles.text}`}>
+					<div className={cl`${styles.text}`}>UTR</div>
+					<div className={cl`${styles.text} ${styles.bold_colored}`}>{invoice?.utr_nos}</div>
+				</div>
 
-			<div className={cl`${styles.text} ${styles.margin_left}`}>
-				<div className={cl`${styles.text}`}>AMOUNT</div>
-				<div className={cl`${styles.text} ${styles.bold_colored}`}>
-					{formatAmount({
-						amount   : invoice?.inr_invoice_total,
-						currency : invoice?.invoice_currency || 'INR',
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'code',
-							maximumFractionDigits : 2,
-						},
-					})}
+				<div className={cl`${styles.text} ${styles.margin_left}`}>
+					<div className={cl`${styles.text}`}>AMOUNT</div>
+					<div className={cl`${styles.text} ${styles.bold_colored}`}>
+						{formatAmount({
+							amount   : invoice?.inr_invoice_total,
+							currency : invoice?.invoice_currency || 'INR',
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+							},
+						})}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-);
+	);
+}
 
 function RenderAccordion({
 	item = {},
@@ -118,7 +120,7 @@ export default function Invoices({
 						{renderPart.map((invoice, i) => (
 							<Tooltip
 								interactive
-								content={invoiceHover(invoice)}
+								content={<InvoiceHover invoice={invoice} />}
 								className={styles.tooltip}
 								caret={false}
 								key={uuid()}
