@@ -124,7 +124,7 @@ function Form({
 				{ isEmpty(controls) && step === FIRST_STEP
 					? (
 						<div className={styles.modal_content}>
-							<div className={styles.label}> Are you sure you want to upsell this service?</div>
+							<div className={styles.label}> Are you sure you want to Upsell this service?</div>
 							<div className={styles.destination_label}>
 								Destination Port:
 								{' '}
