@@ -1,0 +1,23 @@
+.container {
+	background-color: #ffffff;
+	border: 1px solid #e0e0e0;
+	margin: 40px 0px;
+	padding: 20px;
+    border-radius: 8px;
+
+    :global {
+        .ui_radiogroup_container {
+            padding: unset;
+            padding-top: 8px;
+        }
+
+        .ui_radio_container {
+            padding-left: unset;
+            padding-bottom: unset;
+        }
+    }
+}
+
+.title {
+	font-weight: 600;
+}

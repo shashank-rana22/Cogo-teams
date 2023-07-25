@@ -33,8 +33,6 @@ function ControlledBooking({
 		setIsControlBookingDetailsFilled,
 	});
 
-	console.log('bookingStatus', checkout_approvals, checkout_approvals[0]);
-
 	const handleSubmitForm = () => {
 		ref.current.handleSubmit();
 	};

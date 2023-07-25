@@ -40,6 +40,12 @@
 			padding: 10px 16px;
 		}
 	}
+
+
+	&.preview_booking {
+		margin: unset;
+		margin-bottom: 20px;
+	}
 }
 
 .select_container {

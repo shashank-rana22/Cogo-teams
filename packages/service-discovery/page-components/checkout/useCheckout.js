@@ -23,7 +23,7 @@ const MAPPING = {
 const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_type = '' }) => {
 	const [headerProps, setHeaderProps] = useState({});
 
-	const { checkout_id = '', shipment_id = '' } = query;
+	const { checkout_id = '', shipment_id = '', checkoutType = '' } = query;
 
 	const { data = {}, loading, getCheckout } = useGetCheckout({ checkout_id });
 
@@ -120,6 +120,7 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 			headerProps,
 			setHeaderProps,
 			possible_subsidiary_services,
+			checkoutType,
 		}),
 		[
 			primaryService,
@@ -144,6 +145,7 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 			tncPresent,
 			headerProps,
 			possible_subsidiary_services,
+			checkoutType,
 		],
 	);
 

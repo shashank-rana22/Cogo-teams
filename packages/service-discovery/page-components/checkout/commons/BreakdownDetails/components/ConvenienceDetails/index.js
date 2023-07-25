@@ -1,4 +1,4 @@
-import { Input, Select, Accordion } from '@cogoport/components';
+import { Input, Select, Accordion, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import currencies from '../../../../helpers/currencies';
@@ -16,6 +16,7 @@ function ConvenienceDetails({
 	conversions = {},
 	detail = {},
 	getCheckout = () => {},
+	source = '',
 }) {
 	const subTotal = total;
 
@@ -60,7 +61,7 @@ function ConvenienceDetails({
 
 	return (
 		<Accordion
-			className={styles.container}
+			className={cl`${styles.container} ${styles[source]}`}
 			title={(
 				<ServiceChargesTitle
 					convenienceFeeDisplay={convenienceFeeDisplay}

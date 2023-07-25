@@ -1,17 +1,24 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
-import { useRef, useEffect } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect, useRef } from 'react';
 
-import useBookShipment from '../../../../../../hooks/useBookShipment';
-import useControlBookingApproval from '../../../../../../hooks/useControlBookingApproval';
+import OTPLayout from '../../../../../../commons/WhatsappNoVerificationModal/WhatsappVerification/OTPLayout';
 import handleTimer from '../../../../../../utils/handleTimer';
 
 import styles from './styles.module.css';
+import useHandleBookingConfirmationFooter from './useHandleBookingConfirmationFooter';
 
 const SECOND_TO_MILLISECOND = 1000;
 
-const getButtonLabel = ({ checkoutMethod, booking_status }) => {
+const OTP_LENGTH = 4;
+
+const getButtonLabel = ({
+	checkoutMethod,
+	booking_status,
+	bookingConfirmationMode,
+}) => {
 	if (
 		checkoutMethod === 'controlled_checkout'
 		&& booking_status === 'pending_approval'
@@ -30,6 +37,10 @@ const getButtonLabel = ({ checkoutMethod, booking_status }) => {
 		return 'Send for Approval';
 	}
 
+	if (bookingConfirmationMode === 'mobile_otp') {
+		return 'Send OTP For Approval';
+	}
+
 	return 'Place Booking';
 };
 
@@ -38,11 +49,21 @@ const getDisabledCondition = ({
 	booking_status,
 	manager_approval_proof,
 	isControlBookingDetailsFilled,
+	bookingConfirmationMode = '',
+	detail = {},
 }) => {
+	const { booking_proof } = detail;
+
 	if (checkoutMethod === 'controlled_checkout') {
-		return ['pending_approval', 'rejected'].includes(booking_status)
+		return (
+			['pending_approval', 'rejected'].includes(booking_status)
 			|| !manager_approval_proof
-			|| !isControlBookingDetailsFilled;
+			|| !isControlBookingDetailsFilled
+		);
+	}
+
+	if (bookingConfirmationMode === 'booking_proof') {
+		return isEmpty(booking_proof);
 	}
 
 	return false;
@@ -52,43 +73,32 @@ function BookingConfirmationFooter({
 	detail = {},
 	checkoutMethod = '',
 	isControlBookingDetailsFilled = false,
+	formProps = {},
+	getCheckout = () => {},
+	bookingConfirmationMode = '',
 }) {
 	const timerRef = useRef(null);
 
 	const {
-		validity_end,
-		checkout_approvals = [],
-		importer_exporter_id,
-		importer_exporter,
-		id,
-	} = detail;
-
-	const {
-		booking_status = '',
-		manager_approval_proof = '',
-	} = checkout_approvals[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	const { controlBookingApproval, loading } = useControlBookingApproval({
+		handleSubmit,
+		onClickSubmitOtp,
+		submitButtonLoading,
+		verifyOtpLoading,
 		checkout_approvals,
-		importer_exporter_id,
-		importer_exporter,
+		hasExpired = false,
+		showOtpModal = false,
+		setOtpValue = () => {},
+		setShowOtpModal = () => {},
+		otpValue = '',
+		submitForOtpVerification = () => {},
+		validity_end = '',
+	} = useHandleBookingConfirmationFooter({
+		detail,
+		formProps,
+		checkoutMethod,
+		getCheckout,
+		bookingConfirmationMode,
 	});
-
-	const {
-		bookShipment,
-		loading:bookCheckoutLoading,
-	} = useBookShipment({ checkout_id: id });
-
-	const handleSubmit = () => {
-		if (checkoutMethod === 'controlled_checkout') {
-			controlBookingApproval();
-			return;
-		}
-
-		bookShipment();
-	};
-
-	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
 	useEffect(() => {
 		let time;
@@ -108,7 +118,12 @@ function BookingConfirmationFooter({
 			return () => clearInterval(interval);
 		}
 		return () => {};
-	}, [hasExpired, validity_end]);
+	}, [hasExpired, timerRef, validity_end]);
+
+	const {
+		booking_status = '',
+		manager_approval_proof = '',
+	} = checkout_approvals[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	return (
 		<div className={styles.container}>
@@ -136,23 +151,63 @@ function BookingConfirmationFooter({
 			</div>
 
 			<div className={styles.button_container}>
-				{!hasExpired ? (
+				{!hasExpired && bookingConfirmationMode !== 'email' ? (
 					<Button
 						type="button"
 						size="lg"
 						onClick={handleSubmit}
-						loading={loading || bookCheckoutLoading}
+						loading={submitButtonLoading}
 						disabled={getDisabledCondition({
 							checkoutMethod,
 							booking_status,
 							manager_approval_proof,
 							isControlBookingDetailsFilled,
+							bookingConfirmationMode,
+							detail,
 						})}
 					>
-						{getButtonLabel({ checkoutMethod, booking_status })}
+						{getButtonLabel({
+							checkoutMethod,
+							booking_status,
+							bookingConfirmationMode,
+						})}
 					</Button>
 				) : null}
 			</div>
+
+			<Modal
+				show={showOtpModal}
+				onClose={() => setShowOtpModal(false)}
+				onOuterClick={() => setShowOtpModal(false)}
+			>
+				<Modal.Header title="ENTER OTP RECEIVED" />
+
+				<Modal.Body>
+					<OTPLayout
+						otpLength={OTP_LENGTH}
+						setOtpValue={setOtpValue}
+						loading={false}
+						resendOtpTimerDuration={10}
+						sendOtp={submitForOtpVerification}
+					/>
+				</Modal.Body>
+
+				<Modal.Footer>
+					<Button
+						style={{
+							width     : '100%',
+							marginTop : 8,
+							fontSize  : 12,
+							height    : 36,
+						}}
+						onClick={onClickSubmitOtp}
+						loading={verifyOtpLoading}
+						disabled={otpValue.length < OTP_LENGTH}
+					>
+						Submit
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</div>
 	);
 }

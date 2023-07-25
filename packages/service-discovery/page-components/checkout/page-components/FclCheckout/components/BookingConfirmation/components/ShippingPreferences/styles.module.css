@@ -5,6 +5,10 @@
         .ui_select_options_container {
             z-index: 3;
         }
+
+        .react-datepicker__aria-live {
+            display: none;
+        }
     }
 }
 

@@ -54,9 +54,21 @@ const useUpdateCheckoutService = ({
 		}
 	};
 
+	const updateCheckoutService = async ({ values }) => {
+		try {
+			await trigger({ data: values });
+
+			Toast.success('Updated successfully!');
+			refetch();
+		} catch (err) {
+			Toast.error('Something went wrong!');
+		}
+	};
+
 	return {
 		handleDeleteRate,
 		deleteRateLoading: loading,
+		updateCheckoutService,
 	};
 };
 

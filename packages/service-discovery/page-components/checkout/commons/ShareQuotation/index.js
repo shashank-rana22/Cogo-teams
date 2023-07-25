@@ -59,12 +59,14 @@ function ShareQuotation({
 			value : 'email',
 		},
 		{
-			label : 'Whatsapp',
-			value : 'whatsapp',
+			label    : 'Whatsapp',
+			value    : 'whatsapp',
+			disabled : true,
 		},
 		{
-			label : 'Sms',
-			value : 'sms',
+			label    : 'Sms',
+			value    : 'sms',
+			disabled : true,
 		},
 	];
 

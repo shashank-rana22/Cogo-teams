@@ -23,6 +23,8 @@ const useBookShipment = ({ checkout_id }) => {
 		try {
 			const res = await trigger({ data: params });
 
+			Toast.success('Shipment booked successflly');
+
 			const newHref = `${window.location.origin}/${partner_id}/shipments/${shipment_id || res.data.shipment_id}`;
 			window.location.href = newHref;
 		} catch (error) {
