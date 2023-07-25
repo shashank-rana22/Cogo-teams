@@ -22,11 +22,15 @@ function MailRecipientType({
 }) {
 	const [newEmailInput, setNewEmailInput] = useState('');
 
-	const { emailSuggestions, loading } = useGetListEmailSuggestions({
+	const { emailSuggestionsData, loading } = useGetListEmailSuggestions({
 		searchQuery: newEmailInput,
 	});
 
-	const showPopover = !isEmpty(emailSuggestions) && !loading;
+	const { body = [] } = emailSuggestionsData || {};
+
+	const emailSuggestions = body?.map((itm) => itm.email) || [];
+
+	const showPopover = newEmailInput && !isEmpty(emailSuggestions) && !loading;
 
 	return (
 		<div className={styles.tags_div}>
