@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Pill } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -10,9 +10,16 @@ import useUpdateShipmentBookingConfirmationPreferences from
 
 import styles from './styles.module.css';
 
-function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds = [], setStep = () => {} }) {
+function BookingPreferenceCard({
+	item = {},
+	step0_data = {},
+	similarServiceIds = [],
+	setStep = () => {},
+	isProceedEnabled = true,
+}) {
 	const ONE = 1;
 	const { priority, source, data } = item || {};
+	const isSelectedPriority = item?.priority === item?.selected_priority;
 
 	const {
 		setSelectedServiceProvider,
@@ -22,13 +29,15 @@ function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds =
 	const dataArray = Array.isArray(data) ? data : [data];
 	const { remarks, supplier_contract_no } = dataArray?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ });
+	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({
+		setStep,
+		source: 'upload_booking_note',
+		setSelectedServiceProvider,
+	});
 
 	const handleProceed = async () => {
-		setSelectedServiceProvider((prev) => [...prev, item]);
 		if (selectedServiceProvider.length >= similarServiceIds.length - ONE) {
 			await apiTrigger([...selectedServiceProvider, item]);
-			setStep((prev) => prev + ONE);
 		}
 	};
 
@@ -68,6 +77,10 @@ function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds =
 				<div className={cl`${styles.heading_text} ${styles.priority}`}>{`(${priority} Priority)`}</div>
 
 				<div className={cl`${styles.heading_text} ${styles.source}`}>{`${startCase(source)} Booking Note`}</div>
+
+				{isSelectedPriority && (
+					<Pill className={styles.selected_priority} color="green"> Selected </Pill>
+				)}
 			</div>
 
 			<div className={styles.divider} />
@@ -109,7 +122,7 @@ function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds =
 					}
 				</div>
 
-				<div>
+				{isProceedEnabled && (
 					<Button
 						themeType="accent"
 						size="sm"
@@ -121,7 +134,7 @@ function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds =
 							{selectedServiceProvider.length === (similarServiceIds.length - ONE) ? 'Proceed' : 'Save'}
 						</b>
 					</Button>
-				</div>
+				)}
 			</div>
 		</div>
 	);

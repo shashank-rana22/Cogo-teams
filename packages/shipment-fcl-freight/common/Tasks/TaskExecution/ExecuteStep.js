@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
 import { useRef } from 'react';
 
+import ConfirmFreightBooking from './CustomTasks/ConfirmFreightBooking';
 import EditBookingParams from './EditBookingParams';
 import { getCanShipmentRollover } from './helpers/getCanShipmentRollover';
 import useHandleSubmit from './helpers/useHandleSubmit';
@@ -35,6 +36,12 @@ function ExecuteStep({
 
 	const editParams = useRef(null);
 
+	const showBookingPreference = (
+		task?.state === 'awaiting_service_provider_confirmation'
+		&& task?.service_type === 'fcl_freight_service'
+		&& task?.task === 'mark_confirmed'
+	);
+
 	const isShipmentRolloverable = getCanShipmentRollover(getApisData);
 
 	const { loading: isLoading, setIsLoading, onSubmit } = useHandleSubmit({
@@ -66,6 +73,10 @@ function ExecuteStep({
 
 	return (
 		<div className={styles.container}>
+			{showBookingPreference ? (
+				<ConfirmFreightBooking getApisData={getApisData} />
+			) : null }
+
 			<div className={styles.form}>
 				<Layout
 					fields={fields}
