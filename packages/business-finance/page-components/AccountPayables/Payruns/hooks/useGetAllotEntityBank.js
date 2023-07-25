@@ -10,6 +10,7 @@ const useGetAllotEntityBank = ({ selectedPayrun, checkedRow }) => {
 		method  : 'get',
 		authKey : 'get_purchase_treasury_live_status',
 	}, { manual: true, autoCancel: false });
+
 	const getEntityBank = useCallback(() => {
 		try {
 			trigger({

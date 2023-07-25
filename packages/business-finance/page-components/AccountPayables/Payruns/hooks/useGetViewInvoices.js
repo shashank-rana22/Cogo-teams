@@ -11,25 +11,28 @@ const useGetViewInvoices = ({ activePayrunTab, globalFilters, selectedPayrun, qu
 		authKey : 'get_purchase_payrun_bill',
 	}, { manual: true, autoCancel: false });
 
+	const viewInvoicePayload = useCallback(() => ({
+		payrunId           : id,
+		batchNo,
+		pageIndex,
+		pageSize,
+		uploadDateSortType : 'desc',
+		dueDateSortType    : 'asc',
+		createdAtSortType  : 'desc',
+		status             : activePayrunTab === 'COMPLETED' ? 'COMPLETED' : undefined,
+		q                  : query !== '' ? query : undefined,
+	}), [activePayrunTab, batchNo, id, pageIndex, pageSize, query]);
+
 	const getViewInvoice = useCallback(() => {
+		const getPayload = viewInvoicePayload();
 		try {
 			viewInvoiceTrigger({
-				params: {
-					payrunId           : id,
-					batchNo,
-					pageIndex,
-					pageSize,
-					uploadDateSortType : 'desc',
-					dueDateSortType    : 'asc',
-					createdAtSortType  : 'desc',
-					status             : activePayrunTab === 'COMPLETED' ? 'COMPLETED' : undefined,
-					q                  : query !== '' ? query : undefined,
-				},
+				params: getPayload,
 			});
 		} catch (err) {
 			Toast.error(err.message, 'Somthing went wrong');
 		}
-	}, [activePayrunTab, batchNo, id, pageIndex, pageSize, query, viewInvoiceTrigger]);
+	}, [viewInvoicePayload, viewInvoiceTrigger]);
 	return {
 		getViewInvoice,
 		viewInvoiceDataList,

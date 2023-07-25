@@ -6,30 +6,36 @@ import { dateFormatter } from '../helpers';
 
 const useGetUploadHistoryList = ({ sort, query, globalFilters }) => {
 	const { pageIndex, pageSize, uploadedDate, status } = globalFilters || {};
-	const [{ data:uploadHistoryDataList, loading:uploadHistoryListLoading }, uploadHistoryListTrigger] = useRequestBf({
+
+	const [{ data: uploadHistoryDataList, loading: uploadHistoryListLoading },
+		uploadHistoryListTrigger] = useRequestBf({
 		url     : '/purchase/payment-upload/list',
 		method  : 'get',
 		authKey : 'get_purchase_payment_upload_list',
 	}, { manual: true, autoCancel: false });
+
 	const { selectFromDate, selectToDate } = dateFormatter(uploadedDate);
 
-	const getUploadHistoryList = useCallback(async () => {
+	const getUploadHistoryPayload = useCallback(() => ({
+		pageIndex,
+		pageSize,
+		q        : query !== '' ? query : undefined,
+		fromDate : selectFromDate || undefined,
+		toDate   : selectToDate || undefined,
+		status   : status || undefined,
+		...sort,
+	}), [pageIndex, pageSize, query, selectFromDate, selectToDate, sort, status]);
+
+	const getUploadHistoryList = useCallback(() => {
+		const getPayload = getUploadHistoryPayload();
 		try {
-			await uploadHistoryListTrigger({
-				params: {
-					pageIndex,
-					pageSize,
-					q        : query !== '' ? query : undefined,
-					fromDate : selectFromDate || undefined,
-					toDate   : selectToDate || undefined,
-					status   : status || undefined,
-					...sort,
-				},
+			uploadHistoryListTrigger({
+				params: getPayload,
 			});
 		} catch (err) {
 			Toast.error(err.message || 'somthing went wrong');
 		}
-	}, [pageIndex, pageSize, query, selectFromDate, selectToDate, sort, status, uploadHistoryListTrigger]);
+	}, [getUploadHistoryPayload, uploadHistoryListTrigger]);
 	return {
 		getUploadHistoryList,
 		uploadHistoryListLoading,

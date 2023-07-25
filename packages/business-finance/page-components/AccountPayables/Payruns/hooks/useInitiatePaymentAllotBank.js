@@ -20,21 +20,24 @@ const useInitiatePaymentAllotBank = ({
 		method  : 'post',
 	}, { manual: true, autoCancel: false });
 
+	const getInitiatePaymentPayload = (id, payrunId, entityCode) => ({
+		bankId          : id,
+		payrunId,
+		entity          : entityCode,
+		performedByName : name,
+		performedBy     : user_id,
+		performedByType : session_type,
+		billIds         : selectedIds,
+		payrunType:
+					overseasData === 'ADVANCE_PAYMENT' ? 'ADVANCE_PAYMENT' : undefined,
+	});
+
 	const selectBank = async (id, selectedPayrun = undefined, checkedRow = undefined) => {
 		const { id: payrunId = '', entityCode = '' } = selectedPayrun || checkedRow || {};
+		const getPayload = getInitiatePaymentPayload(id, payrunId, entityCode);
 		try {
 			await trigger({
-				data: {
-					bankId          : id,
-					payrunId,
-					entity          : entityCode,
-					performedByName : name,
-					performedBy     : user_id,
-					performedByType : session_type,
-					billIds         : selectedIds,
-					payrunType:
-					overseasData === 'ADVANCE_PAYMENT' ? 'ADVANCE_PAYMENT' : undefined,
-				},
+				data: getPayload,
 			});
 			setCheckedRows({});
 			setSelectedIds([]);

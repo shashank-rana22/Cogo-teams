@@ -15,23 +15,27 @@ const useGetAdvPaymentInvoiceList = ({ activePayrunTab, globalFilters, query, so
 
 	const { selectFromDate, selectToDate } = dateFormatter(createdAt);
 
-	const getAdvancePaymentInvoiceList = useCallback(async () => {
+	const getAdvancePaymentInvoicePayload = useCallback(() => ({
+		pageIndex,
+		pageSize,
+		state     : activePayrunTab,
+		q         : query !== '' ? query : undefined,
+		startDate : selectFromDate || undefined,
+		endDate   : selectToDate || undefined,
+		...sort,
+	}), [activePayrunTab, pageIndex, pageSize, query, selectFromDate, selectToDate, sort]);
+
+	const getAdvancePaymentInvoiceList = useCallback(() => {
+		const getPayload = getAdvancePaymentInvoicePayload();
+
 		try {
-			await trigger({
-				params: {
-					pageIndex,
-					pageSize,
-					state     : activePayrunTab,
-					q         : query !== '' ? query : undefined,
-					startDate : selectFromDate || undefined,
-					endDate   : selectToDate || undefined,
-					...sort,
-				},
+			trigger({
+				params: getPayload,
 			});
 		} catch (error) {
 			Toast.error(error.message || 'Somthing went wrong');
 		}
-	}, [trigger, pageIndex, pageSize, activePayrunTab, query, selectFromDate, selectToDate, sort]);
+	}, [getAdvancePaymentInvoicePayload, trigger]);
 
 	return {
 		getAdvancePaymentInvoiceList,

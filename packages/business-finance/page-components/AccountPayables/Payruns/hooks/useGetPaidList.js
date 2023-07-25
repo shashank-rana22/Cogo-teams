@@ -6,33 +6,39 @@ import { dateFormatter } from '../helpers';
 
 const useGetPaidList = ({ activePayrunTab, query, globalFilters }) => {
 	const { paymentStatusList, billStatus, pageIndex, pageSize, selectDate, cogoBankId } = globalFilters || {};
+
 	const [{ data: paidDataList, loading: paidDataLoading }, paidTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill/list-paid-bill',
 		method  : 'get',
 		authKey : 'get_purchase_payrun_bill_list_paid_bill',
 	}, { manual: true, autoCancel: false });
+
 	const { selectFromDate, selectToDate } = dateFormatter(selectDate);
 
-	const getPaidList = useCallback(async () => {
+	const getPaidListPayload = useCallback(() => ({
+		pageIndex,
+		pageSize,
+		state             : activePayrunTab,
+		q                 : query !== '' ? query : undefined,
+		status            : billStatus || undefined,
+		paymentStatusList : paymentStatusList || undefined,
+		startDate         : selectFromDate || undefined,
+		endDate           : selectToDate || undefined,
+		cogoBankId        : cogoBankId || undefined,
+	}), [activePayrunTab, billStatus, cogoBankId, pageIndex,
+		pageSize, paymentStatusList, query, selectFromDate, selectToDate]);
+
+	const getPaidList = useCallback(() => {
+		const getPayload = getPaidListPayload();
+
 		try {
-			await paidTrigger({
-				params: {
-					pageIndex,
-					pageSize,
-					state             : activePayrunTab,
-					q                 : query !== '' ? query : undefined,
-					status            : billStatus || undefined,
-					paymentStatusList : paymentStatusList || undefined,
-					startDate         : selectFromDate || undefined,
-					endDate           : selectToDate || undefined,
-					cogoBankId        : cogoBankId || undefined,
-				},
+			paidTrigger({
+				params: getPayload,
 			});
 		} catch (error) {
 			Toast.error(error.message || 'Somthing went wrong');
 		}
-	}, [activePayrunTab, billStatus, pageIndex, pageSize, paidTrigger,
-		paymentStatusList, query, selectFromDate, selectToDate, cogoBankId]);
+	}, [getPaidListPayload, paidTrigger]);
 
 	return {
 		paidDataList,

@@ -5,27 +5,32 @@ import { useCallback } from 'react';
 const useGetAdvancePaymentView = ({ globalFilters, selectedPayrun, query }) => {
 	const { pageIndex, pageSize } = globalFilters || {};
 	const { id, batchNo } = selectedPayrun || {};
+
 	const [{ data: viewInvoicesAdvancePaymentData, loading: viewInvoicesAdvancePaymentLoading },
 		viewInvoicesAdvancePaymentTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill/advance-payment',
 		method  : 'get',
 		authKey : 'get_purchase_payrun_bill_advance_payment',
 	}, { manual: true, autoCancel: false });
+
+	const getAdvancePaymentPayload = useCallback(() => ({
+		payrunId : id,
+		q        : query !== '' ? query : undefined,
+		pageIndex,
+		pageSize,
+		batchNo,
+	}), [batchNo, id, pageIndex, pageSize, query]);
+
 	const getViewInvoicesAdvancePayment = useCallback(() => {
+		const getPayload = getAdvancePaymentPayload();
 		try {
 			viewInvoicesAdvancePaymentTrigger({
-				params: {
-					payrunId : id,
-					q        : query !== '' ? query : undefined,
-					pageIndex,
-					pageSize,
-					batchNo,
-				},
+				params: getPayload,
 			});
 		} catch (err) {
 			Toast.error(err.message, 'Somthing went wrong');
 		}
-	}, [batchNo, id, pageIndex, pageSize, query, viewInvoicesAdvancePaymentTrigger]);
+	}, [getAdvancePaymentPayload, viewInvoicesAdvancePaymentTrigger]);
 	return {
 		getViewInvoicesAdvancePayment,
 		viewInvoicesAdvancePaymentData,

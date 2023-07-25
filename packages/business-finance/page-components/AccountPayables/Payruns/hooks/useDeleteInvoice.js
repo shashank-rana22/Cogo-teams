@@ -6,22 +6,28 @@ const useDeleteInvoice = ({ overseasData = '', setShowDeleteInvoiceModal = () =>
 	const { profile = {} } = useSelector((state) => state);
 	const { user = {}, session_type = '' } = profile;
 	const { id: user_id } = user;
+
 	const [{ data: deleteInvoiceData, loading: deleteinvoiceLoading }, deleteinvoiceTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill',
 		method  : 'delete',
 		authKey : 'delete_purchase_payrun_bill',
 	}, { manual: true, autoCancel: false });
 
+	const getDeleteInvoicePayload = (id) => ({
+
+		id,
+		performedBy     : user_id,
+		performedByType : session_type,
+		objectType:
+				overseasData === 'ADVANCE_PAYMENT' ? 'ADVANCE_DOCUMENT' : undefined,
+	});
+
 	const deleteInvoice = async (id) => {
+		const getPayload = getDeleteInvoicePayload(id);
+
 		try {
 			await deleteinvoiceTrigger({
-				data: {
-					id,
-					performedBy     : user_id,
-					performedByType : session_type,
-					objectType:
-                            overseasData === 'ADVANCE_PAYMENT' ? 'ADVANCE_DOCUMENT' : undefined,
-				},
+				data: getPayload,
 			});
 			Toast.success(deleteInvoiceData?.message || 'Invoice Deleted Successfully');
 			setShowDeleteInvoiceModal(false);

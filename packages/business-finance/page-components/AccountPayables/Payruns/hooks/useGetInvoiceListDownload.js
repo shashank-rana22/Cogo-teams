@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import { dateFormatter } from '../helpers';
 
 const useGetInvoiceListDownload = ({ globalFilters = {}, overseasData = '', size = '', activePayrunTab }) => {
-	const [{ data:normalDownlodData, loading:normalLoading }, normalTrigger] = useRequestBf({
+	const [{ data: normalDownlodData, loading: normalLoading }, normalTrigger] = useRequestBf({
 		url     : 'purchase/payrun/bill-list-view-download',
 		method  : 'get',
 		authKey : 'get_purchase_payrun_bill_list_view_download',
@@ -21,16 +21,18 @@ const useGetInvoiceListDownload = ({ globalFilters = {}, overseasData = '', size
 
 	const getApi = overseasData === 'ADVANCE_PAYMENT' ? advanceDownloadTrigger : normalTrigger;
 
+	const getDownloadPayload = () => ({
+		...rest,
+		startDate : selectFromDate || undefined,
+		endDate   : selectToDate || undefined,
+		pageSize  : size,
+		state     : activePayrunTab,
+	});
 	const downloadInvoice = async () => {
+		const getPayload = getDownloadPayload();
 		try {
 			const resp = await getApi({
-				params: {
-					...rest,
-					startDate : selectFromDate || undefined,
-					endDate   : selectToDate || undefined,
-					pageSize  : size,
-					state     : activePayrunTab,
-				},
+				params: getPayload,
 			});
 			const { data = {} } = resp || {};
 			const bfUrl = process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL;

@@ -3,6 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 
 const useGetPaidDropData = ({ itemData = {}, overseasData = '' }) => {
 	const { objectId = '' } = itemData;
+
 	const [{ data: domesticData, loading: domesticLoading }, trigger] = useRequestBf({
 		url     : `/purchase/payrun-bill/list-paid-bill/${objectId}`,
 		method  : 'get',
@@ -14,9 +15,9 @@ const useGetPaidDropData = ({ itemData = {}, overseasData = '' }) => {
 		method  : 'get',
 		authKey : 'get_purchase_payrun_bill_list_paid_advance_doc_by_id',
 	}, { manual: true, autoCancel: false });
-	const getApi =		overseasData === 'ADVANCE_PAYMENT'
-		? advanceTrigger
-		: trigger;
+
+	const getApi = overseasData === 'ADVANCE_PAYMENT' ? advanceTrigger : trigger;
+
 	const getData = async () => {
 		try {
 			await getApi({ params: {} });

@@ -15,28 +15,33 @@ const useGetPaidBillReport = ({
 	const { profile = {} } = useSelector((state) => state);
 	const { user = {} } = profile;
 	const { id: user_id } = user;
+
 	const [{ data, loading: sendReportLoading }, trigger] = useRequestBf({
 		url     : '/purchase/report/paid-bills',
 		method  : 'get',
 		authKey : 'get_purchase_report_paid_bills',
 	}, { manual: true, autoCancel: false });
+
 	const { ...rest } = globalFilters;
 	const { selectFromDate, selectToDate } = dateFormatter(newdate);
+
+	const getSendReportPayload = () => ({
+		...rest,
+		startDate   : selectFromDate || undefined,
+		endDate     : selectToDate || undefined,
+		pageSize    : size,
+		performedBy : user_id,
+		state       : activePayrunTab,
+	});
 
 	const sendInvoiceReport = async (dates) => {
 		if (dates === 'Invalid_Range') {
 			Toast.error('Please select a range less then a month');
 		} else if (dates) {
+			const payload = getSendReportPayload();
 			try {
 				await trigger({
-					params: {
-						...rest,
-						startDate   : selectFromDate || undefined,
-						endDate     : selectToDate || undefined,
-						pageSize    : size,
-						performedBy : user_id,
-						state       : activePayrunTab,
-					},
+					params: payload,
 				});
 				setNewDate();
 				Toast.success('Report has been sent successfully');

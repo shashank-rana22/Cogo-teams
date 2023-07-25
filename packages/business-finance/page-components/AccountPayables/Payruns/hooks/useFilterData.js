@@ -46,13 +46,13 @@ const useFilterData = ({
 
 	const [selectedPayrun, setSelectedPayrun] = useState(null);
 	const [selectedIds, setSelectedIds] = useState([]);
-	const { search, pageIndex, createdAt } = globalFilters || {};
+	const { search, createdAt } = globalFilters || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const { payrunData, payrunLoading, payrunStats, getPayrunList } = useGetPayrun({
 		activePayrunTab,
 		overseasData,
 		query,
-		pageIndex,
+		globalFilters,
 	});
 
 	const {

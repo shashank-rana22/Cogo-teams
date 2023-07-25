@@ -7,14 +7,17 @@ const usePaymentInitiatedDownload = () => {
 		method  : 'get',
 		authKey : 'get_purchase_payrun_download',
 	}, { manual: true, autoCancel: false });
+
+	const getDownloadPayrunPayload = (id, batchNo) => ({
+		payrunId: id,
+		batchNo,
+	});
 	const downloadPayrun = async (itemData) => {
 		const { id = '', batchNo = '' } = itemData || {};
+		const getPayload = getDownloadPayrunPayload(id, batchNo);
 		try {
 			const res = await trigger({
-				params: {
-					payrunId: id,
-					batchNo,
-				},
+				params: getPayload,
 			});
 			const { data = {} } = res || {};
 			const downloadFile = `${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}`

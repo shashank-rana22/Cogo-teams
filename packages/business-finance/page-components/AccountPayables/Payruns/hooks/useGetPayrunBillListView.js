@@ -6,6 +6,7 @@ import { dateFormatter } from '../helpers';
 
 const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters }) => {
 	const { pageIndex, pageSize, createdAt } = globalFilters || {};
+
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun/bill-list-view',
@@ -14,30 +15,32 @@ const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters 
 		},
 		{ manual: true, autoCancel: false },
 	);
-	const { selectFromDate, selectToDate } = dateFormatter(createdAt);
-	const getPayrunListView = useCallback(() => {
-		(async () => {
-			try {
-				await trigger({
-					params: {
-						pageIndex,
-						pageSize,
-						state             : activePayrunTab,
-						q                 : query !== '' ? query : undefined,
-						startDate         : selectFromDate || undefined,
-						endDate           : selectToDate || undefined,
-						dueDateSortType   : 'asc',
-						createdAtSortType : 'desc',
-						...sort,
-					},
-				});
-			} catch (err) {
-				Toast.error(err.message);
-			}
-		}
 
-		)();
-	}, [trigger, pageIndex, pageSize, activePayrunTab, query, selectFromDate, selectToDate, sort]);
+	const { selectFromDate, selectToDate } = dateFormatter(createdAt);
+
+	const getListofInvoicePayload = useCallback(() => ({
+		pageIndex,
+		pageSize,
+		state             : activePayrunTab,
+		q                 : query !== '' ? query : undefined,
+		startDate         : selectFromDate || undefined,
+		endDate           : selectToDate || undefined,
+		dueDateSortType   : 'asc',
+		createdAtSortType : 'desc',
+		...sort,
+	}), [activePayrunTab, pageIndex, pageSize, query, selectFromDate, selectToDate, sort]);
+
+	const getPayrunListView = useCallback(() => {
+		const getPayload = getListofInvoicePayload();
+
+		try {
+			trigger({
+				params: getPayload,
+			});
+		} catch (err) {
+			Toast.error(err.message);
+		}
+	}, [getListofInvoicePayload, trigger]);
 
 	return {
 		getPayrunListView,
