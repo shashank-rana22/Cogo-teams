@@ -20,6 +20,7 @@
 	align-items: center;
 	overflow-x: auto;
 	white-space: nowrap;
+	margin-left: 10px;
 }
 
 .more_details_popover_text {

@@ -5,31 +5,24 @@ import Stakeholders from '../Stakeholders';
 
 import styles from './styles.module.css';
 
-const DATA_BY_SERVICE_ID = {};
 const INDEX_0 = 0;
 
 function ServiceIDGroup({ data = [], setAddPoc = () => {}, rolesPermission = {}, shipment_type = '' }) {
-	data.forEach((item) => {
+	const newData = data
+		.filter((item) => item.service_id !== null)
+		.map((item) => {
+			const { service_id, ...rest } = item;
+			return { service_id, ...rest };
+		});
+
+	const DATA_BY_SERVICE_ID = newData.reduce((acc, item) => {
 		const { service_id, ...rest } = item;
-
-		if (!DATA_BY_SERVICE_ID[service_id]) {
-			DATA_BY_SERVICE_ID[service_id] = [];
+		if (!acc[service_id]) {
+			acc[service_id] = [];
 		}
-
-		DATA_BY_SERVICE_ID[service_id].push({ service_id, ...rest });
-	});
-
-	data.forEach((item) => {
-		const { service_id, ...rest } = item;
-
-		if (service_id !== null && service_id !== undefined) {
-			if (!DATA_BY_SERVICE_ID[service_id]) {
-				DATA_BY_SERVICE_ID[service_id] = [];
-			}
-
-			DATA_BY_SERVICE_ID[service_id].push({ service_id, ...rest });
-		}
-	});
+		acc[service_id].push({ service_id, ...rest });
+		return acc;
+	}, {});
 
 	return (
 		<div>
