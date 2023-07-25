@@ -97,7 +97,7 @@ function DefaultForm({
 
 							{!isEmpty(formValues?.address) && (
 								<div className={styles.form_item_container}>
-									<div>Pincode</div>
+									<label className={styles.form_label}>Pincode</label>
 
 									<Input
 										disabled

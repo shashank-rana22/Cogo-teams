@@ -1,5 +1,7 @@
-import countries from '../helpers/countries.json';
 import sort from '../helpers/sortTabel';
+
+// eslint-disable-next-line import/no-unresolved
+import countries from '@/data-store/constants/countries.json';
 
 const PREVIOUS_CURRIENCIES = [];
 const OPTIONS_ALL = [];

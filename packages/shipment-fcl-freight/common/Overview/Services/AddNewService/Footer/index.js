@@ -5,6 +5,9 @@ import useCreateUpsell from '../../../../../hooks/useCreateUpsell';
 
 import styles from './styles.module.css';
 
+const FIRST_STEP = 1;
+const SECOND_STEP = 2;
+
 function Footer({
 	onClose = () => {},
 	primary_service = {},
@@ -31,7 +34,7 @@ function Footer({
 	const goToSecondStep = async () => {
 		const formValid = await trigger();
 		if (formValid) {
-			setStep(2);
+			setStep(SECOND_STEP);
 		} else {
 			Toast.error('Some form fields are empty or invalid');
 		}
@@ -39,16 +42,19 @@ function Footer({
 
 	return (
 		<div className={styles.container}>
-			<Button
-				onClick={onClose}
-				disabled={loading || haveToUpsell}
-				themeType="secondary"
-				id="shipment_form_header_cancel"
-			>
-				Cancel
-			</Button>
+			{step !== FIRST_STEP
+				? (
+					<Button
+						onClick={onClose}
+						disabled={loading || haveToUpsell}
+						themeType="secondary"
+						id="shipment_form_header_cancel"
+					>
+						Cancel
+					</Button>
+				) : null}
 
-			{step === 1
+			{step === FIRST_STEP
 				? (
 					<Button
 						onClick={goToSecondStep}

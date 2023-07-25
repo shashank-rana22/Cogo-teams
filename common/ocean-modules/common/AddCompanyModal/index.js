@@ -1,5 +1,5 @@
 import { Button, Modal, RadioGroup, Select } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useRef } from 'react';
 
 import TRADE_PARTY_MAPPING from '../../constants/TRADE_PARTY_MAPPING';
@@ -16,8 +16,8 @@ function AddCompanyModal({
 	addCompany = {},
 	setAddCompany = () => {},
 	tradePartnerTrigger = () => {},
-	shipment_id,
-	importer_exporter_id,
+	shipment_id = '',
+	importer_exporter_id = '',
 	throughPoc = true,
 	shipment_data = {},
 	primary_service = {},
@@ -64,16 +64,26 @@ function AddCompanyModal({
 
 	const modalBodyContent = (
 		<div className={styles.modal_body_container}>
-			<div className={styles.role_container}>
-				<label>Role</label>
-				<Select
-					options={tradePartyOptions}
-					value={role}
-					size="sm"
-					disabled={trade_party_type}
-					onChange={(val) => setRole(val)}
-				/>
-			</div>
+			{trade_party_type
+				? (
+					<div className={styles.role_container}>
+						<b>Role:</b>
+						{' '}
+						<span>{startCase(trade_party_type)}</span>
+					</div>
+				)
+				: (
+					<div className={styles.role_container}>
+						<label>Role</label>
+						<Select
+							options={tradePartyOptions}
+							value={role}
+							size="sm"
+							disabled={trade_party_type}
+							onChange={(val) => setRole(val)}
+						/>
+					</div>
+				) }
 			<div className={styles.radio_container}>
 				<RadioGroup
 					options={options}
