@@ -7,6 +7,7 @@ const controls = [
 		label       : 'Alternate Line',
 		name        : 'preferred_shipping_line_ids',
 		type        : 'async-select',
+		multiple    : true,
 		placeholder : 'Select Line',
 		asyncKey    : 'list_operators',
 		params      : {

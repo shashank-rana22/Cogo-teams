@@ -175,39 +175,41 @@ function BookingConfirmationFooter({
 				) : null}
 			</div>
 
-			<Modal
-				show={showOtpModal}
-				onClose={() => setShowOtpModal(false)}
-				onOuterClick={() => setShowOtpModal(false)}
-			>
-				<Modal.Header title="ENTER OTP RECEIVED" />
+			{showOtpModal ? (
+				<Modal
+					show={showOtpModal}
+					onClose={() => setShowOtpModal(false)}
+					onOuterClick={() => setShowOtpModal(false)}
+				>
+					<Modal.Header title="ENTER OTP RECEIVED" />
 
-				<Modal.Body>
-					<OTPLayout
-						otpLength={OTP_LENGTH}
-						setOtpValue={setOtpValue}
-						loading={false}
-						resendOtpTimerDuration={10}
-						sendOtp={submitForOtpVerification}
-					/>
-				</Modal.Body>
+					<Modal.Body>
+						<OTPLayout
+							otpLength={OTP_LENGTH}
+							setOtpValue={setOtpValue}
+							loading={false}
+							resendOtpTimerDuration={10}
+							sendOtp={submitForOtpVerification}
+						/>
+					</Modal.Body>
 
-				<Modal.Footer>
-					<Button
-						style={{
-							width     : '100%',
-							marginTop : 8,
-							fontSize  : 12,
-							height    : 36,
-						}}
-						onClick={onClickSubmitOtp}
-						loading={verifyOtpLoading}
-						disabled={otpValue.length < OTP_LENGTH}
-					>
-						Submit
-					</Button>
-				</Modal.Footer>
-			</Modal>
+					<Modal.Footer>
+						<Button
+							style={{
+								width     : '100%',
+								marginTop : 8,
+								fontSize  : 12,
+								height    : 36,
+							}}
+							onClick={onClickSubmitOtp}
+							loading={verifyOtpLoading}
+							disabled={otpValue.length < OTP_LENGTH}
+						>
+							Submit
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
 		</div>
 	);
 }

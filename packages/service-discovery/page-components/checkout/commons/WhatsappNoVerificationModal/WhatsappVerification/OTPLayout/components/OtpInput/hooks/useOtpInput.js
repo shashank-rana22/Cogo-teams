@@ -46,7 +46,8 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null, verifyOtp
 		}
 
 		onChange(isAllOtpInputValuePresent ? value : '');
-	}, [onChange, otpLength, values]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [values]);
 
 	useEffect(() => {
 		otpInputElementsRef.current.forEach((element) => {
