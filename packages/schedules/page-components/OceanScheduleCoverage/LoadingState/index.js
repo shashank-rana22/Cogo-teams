@@ -1,17 +1,17 @@
-import { Placeholder } from "@cogoport/components";
+import { Placeholder } from '@cogoport/components';
 
 function LoadingState() {
-    return (
-        <Placeholder height="182px" width="100%" margin="0px 0px 20px 0px">
-            <svg
-                width="76"
-                height="76"
-                viewBox="0 0 76 76"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    d="M68.1727 38.5588H37.4414V7.82751C37.4414 7.44939 37.132 7.14001
+	return (
+		<Placeholder height="182px" width="100%" margin="0px 0px 20px 0px">
+			<svg
+				width="76"
+				height="76"
+				viewBox="0 0 76 76"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					d="M68.1727 38.5588H37.4414V7.82751C37.4414 7.44939 37.132 7.14001
 			36.7539 7.14001H34.5195C30.0102
 			7.13541 25.5444 8.02124 21.3783 9.74667C17.2122 11.4721 13.4278 14.0032
 		10.2422 17.1947C7.10575 20.3214 4.6073 24.0283 2.88594 28.1088C1.09844
@@ -32,11 +32,11 @@ function LoadingState() {
 		41.3859 0.548606 41.3859 0.952513V33.9267C41.3859 34.3049 41.6953 34.6142
 		42.0734 34.6142L75.0391
 		34.5283C75.443 34.5197 75.7609 34.1845 75.7266 33.7892Z"
-                    fill="#BDBDBD"
-                />
-            </svg>
-        </Placeholder>
-    );
+					fill="#BDBDBD"
+				/>
+			</svg>
+		</Placeholder>
+	);
 }
 
 export default LoadingState;

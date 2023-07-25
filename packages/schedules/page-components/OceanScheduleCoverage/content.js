@@ -9,9 +9,10 @@ import useListSailingSchedulePortPairs from './hooks/useListSailingSchedulePortP
 import OSCPortToPort from './OSCPortToPort';
 import styles from './styles.module.css';
 
+const ONE = 1;
 function OceanScheduleCoverage() {
 	const [filters, setFilters] = useState({});
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(ONE);
 
 	const onPageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);

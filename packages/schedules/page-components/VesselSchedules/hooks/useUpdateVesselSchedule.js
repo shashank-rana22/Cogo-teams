@@ -1,10 +1,10 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 import getPayload from '../helpers/update_payload';
 
-const ZERO = 0;
 const ONE = 1;
 const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute, refetch }) => {
 	const [edit, setEdit] = useState(false);
@@ -30,7 +30,9 @@ const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute, refet
 
 	const onClickAdd = (index) => {
 		setForm(index);
-		modifiedRoute = [...tempRoute?.slice(ZERO, index), { ...submit }, ...tempRoute?.slice(index, tempRoute.length)];
+		modifiedRoute = [...(tempRoute || []).slice(GLOBAL_CONSTANTS.zeroth_index, index),
+			{ ...submit },
+			...(tempRoute || []).slice(index, tempRoute.length)];
 		const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
 		setFinalRoute(order);
 		setAdd(index);
@@ -50,7 +52,10 @@ const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute, refet
 		} else if (!portEdit) {
 			setForm(null);
 			setDeletePort((prevDeletePort) => (prevDeletePort ? [...prevDeletePort, index] : [index]));
-			modifiedRoute = [...finalRoute.slice(ZERO, index), ...finalRoute.slice(index + ONE, finalRoute.length)];
+			modifiedRoute = [...finalRoute.slice(
+				GLOBAL_CONSTANTS.zeroth_index,
+				index,
+			), ...finalRoute.slice(index + ONE, finalRoute.length)];
 			const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
 			setFinalRoute(order);
 		}

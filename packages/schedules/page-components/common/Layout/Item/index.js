@@ -5,6 +5,9 @@ import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
 
+const TWELVE = 12;
+const HUNDRED = 100;
+const ONE = 1;
 function Item({
 	type,
 	control,
@@ -27,7 +30,7 @@ function Item({
 
 	const Element = getElementController(type);
 
-	const flex = ((span || 12) / 12) * 100 - 1;
+	const flex = ((span || TWELVE) / TWELVE) * HUNDRED - ONE;
 
 	return (
 		<div className={styles.element} style={{ width: `${flex}%` }}>

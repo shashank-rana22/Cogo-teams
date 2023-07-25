@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
 
 import styles from '../styles.module.css';
@@ -108,9 +109,9 @@ export const getColumns = ({
 			Header   : 'Explore',
 			accessor : (item) => (
 				<Button
-					themeType="sceondary"
+					themeType="secondary"
 					onClick={() => setShow(item)}
-					disabled={item?.patterns?.length === 0}
+					disabled={!(item?.patterns || [])?.length}
 				>
 					View Schedules
 				</Button>
@@ -123,7 +124,7 @@ export const getColumns = ({
 			Header   : 'Arrival',
 			accessor : (item) => (
 				<div className={styles.td}>
-					{format(item?.arrival, 'dd MMMM YYYY') || '-'}
+					{format(item?.arrival, GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy']) || '-'}
 				</div>
 			),
 		},
@@ -131,7 +132,7 @@ export const getColumns = ({
 			Header   : 'Departure',
 			accessor : (item) => (
 				<div className={styles.td}>
-					{format(item?.departure, 'dd MMMM YYYY') || '-'}
+					{format(item?.departure, GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy']) || '-'}
 				</div>
 			),
 		},

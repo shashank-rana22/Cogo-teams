@@ -1,11 +1,14 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
-import { NestedObj } from '../../List/Interfaces';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
 
+const HUNDRED = 100;
+const ONE = 1;
+const TWELVE = 12;
 function Child({
 	controls,
 	control,
@@ -16,29 +19,35 @@ function Child({
 	length,
 }) {
 	let rowWiseFields = [];
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	controls.forEach((fields) => {
-		span += fields.span || 12;
-		if (span === 12) {
+		span += fields.span || TWELVE;
+		if (span === TWELVE) {
 			rowWiseFields.push(fields);
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
-			span = 0;
-		} else if (span < 12) {
+			span = GLOBAL_CONSTANTS.zeroth_index;
+		} else if (span < TWELVE) {
 			rowWiseFields.push(fields);
 		} else {
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
 			rowWiseFields.push(fields);
 			span = fields.span;
 		}
 	});
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
-	const totalFieldsObject = { ...totalFields };
+	const totalFieldsObject = { ...TOTAL_FIELDS };
+
+	const getLabel = (controlItem) => {
+		if (index === GLOBAL_CONSTANTS.zeroth_index) return 'Origin';
+		if (index === length - ONE) return 'Destination';
+		return controlItem?.label;
+	};
 
 	return (
 		<div key={field.id}>
@@ -54,20 +63,21 @@ function Child({
 							rules : controlItem?.rules,
 							label : controlItem?.label,
 						});
-						const extraProps:NestedObj = {};
+						const EXTRA_PROPS = {};
 						if (controlItem.customProps?.options) {
-							extraProps.options = controlItem.customProps.options[index];
+							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
-						const flex = ((controlItem?.span || 12) / 12) * 100 - 1;
+						const flex = ((controlItem?.span || TWELVE) / TWELVE) * HUNDRED - ONE;
 						if (!Element) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
 								<h4 className={styles.child_label}>
-									{controlItem?.name === 'location' ? (index === 0 ? 'Origin' : length - 1 === index ? 'Destination' : controlItem?.label) : controlItem?.label }
+									{controlItem?.name === 'location'
+										? getLabel(controlItem) : controlItem?.label }
 								</h4>
 								<Element
 									{...controlItem}
-									{...extraProps}
+									{...EXTRA_PROPS}
 									style={{ minWidth: '0px' }}
 									key={`${name}.${index}.${controlItem.name}`}
 									name={`${name}.${index}.${controlItem.name}`}

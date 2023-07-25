@@ -2,11 +2,11 @@ import { Button, MultiSelect } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { merge } from '@cogoport/utils';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Filter({ filters, setFilters, setCurrentPage }) {
+const ONE = 1;
+function Filter({ filters = {}, setFilters = () => {}, setCurrentPage = () => {} }) {
 	const originPortOptions = useGetAsyncOptions(
 		merge(asyncFieldsLocations(), {
 			params: { filters: { type: ['seaport'] } },
@@ -25,7 +25,7 @@ function Filter({ filters, setFilters, setCurrentPage }) {
 
 	const handleFilter = (value, location_type) => {
 		setFilters((prev) => ({ ...prev, [location_type]: value }));
-		setCurrentPage(1);
+		setCurrentPage(ONE);
 	};
 
 	return (

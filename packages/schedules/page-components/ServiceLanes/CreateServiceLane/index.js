@@ -2,7 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import Layout from '../../common/Layout/index.tsx';
+import Layout from '../../common/Layout';
 import useCreateServiceLane from '../hooks/useCreateServiceLane';
 
 import styles from './styles.module.css';

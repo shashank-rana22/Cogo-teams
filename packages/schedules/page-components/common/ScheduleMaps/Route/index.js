@@ -1,7 +1,6 @@
-import { Polyline, L } from '@cogoport/maps';
-import { useEffect } from 'react';
+import { Polyline } from '@cogoport/maps';
 
-function Route({ positions, map, pathOptions, setBounds = () => {} }) {
+function Route({ positions, map, pathOptions }) {
 	// useEffect(() => {
 	//     const bounds = new L.LatLngBounds(positions);
 	//     setBounds(bounds);
@@ -12,9 +11,9 @@ function Route({ positions, map, pathOptions, setBounds = () => {} }) {
 			positions={positions}
 			pathOptions={pathOptions}
 			eventHandlers={{
-            	add: (e) => {
-            		if (map) map?.fitBounds(e.target?.getBounds());
-            	},
+				add: (e) => {
+					if (map) map?.fitBounds(e.target?.getBounds());
+				},
 			}}
 		/>
 	);

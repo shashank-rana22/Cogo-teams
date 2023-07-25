@@ -1,27 +1,31 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
+const TWELVE = 12;
+const HUNDRED = 100;
+const ONE = 1;
 function Layout({
 	control, fields, showElements = {}, errors,
 }) {
 	let rowWiseFields = [];
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	(fields || []).forEach((field) => {
 		if (!(field.name in showElements) || showElements[field.name]) {
-			span += field.span || 12;
-			if (span === 12) {
+			span += field.span || TWELVE;
+			if (span === TWELVE) {
 				rowWiseFields.push(field);
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
-				span = 0;
-			} else if (span < 12) {
+				span = GLOBAL_CONSTANTS.zeroth_index;
+			} else if (span < TWELVE) {
 				rowWiseFields.push(field);
 			} else {
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
 				rowWiseFields.push(field);
 				span = field.span;
@@ -29,10 +33,10 @@ function Layout({
 		}
 	});
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
-	const totalFieldsObject = { ...totalFields };
+	const totalFieldsObject = { ...TOTAL_FIELDS };
 
 	return (
 		<div className={styles.layout}>
@@ -40,7 +44,7 @@ function Layout({
 				<div className={styles.row} key={field}>
 					{totalFieldsObject[field].map((fieldsItem) => {
 						const { type, heading = '', label = '', span:fieldArraySpan } = fieldsItem;
-						const flex = ((fieldArraySpan || 12) / 12) * 100 - 1;
+						const flex = ((fieldArraySpan || TWELVE) / TWELVE) * HUNDRED - ONE;
 						const show = (!(totalFieldsObject[field].name in showElements)
 						|| showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {

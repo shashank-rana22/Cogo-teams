@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -36,7 +37,7 @@ function RoutePort({
 					onMouseEnter={() => { handleMouseEnter(index); }}
 					onMouseLeave={() => { handleMouseLeave(index); }}
 				>
-					{port?.display_name.split(',')[0]}
+					{port?.display_name.split(',')[GLOBAL_CONSTANTS.zeroth_index]}
 
 					<span className={styles.port_terminal} />
 				</div>

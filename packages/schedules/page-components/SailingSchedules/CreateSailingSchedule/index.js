@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import React from 'react';
 
-import Layout from '../../common/Layout/index.tsx';
+import Layout from '../../common/Layout';
 import useCreateSailingSchedule from '../hooks/useCreateSailingSchedule';
 
 import styles from './styles.module.css';

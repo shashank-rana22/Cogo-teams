@@ -1,25 +1,29 @@
 import Point from '@cogoport/map-components/ui/Point';
 import { CogoMaps, L } from '@cogoport/maps';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import Route from './Route';
 
-const center = [20.5937, 78.9629];
+const CENTER_COORDINATES_X = 20.5937;
+const CENTER_COORDINATES_Y = 78.9629;
+
+const center = [CENTER_COORDINATES_X, CENTER_COORDINATES_Y];
 
 const baseLayer = [
 	{
 		name : 'Cogo Maps',
 		url  : `${process.env.NEXT_PUBLIC_MAPS_BASE_URL}/{z}/{x}/{y}.png`,
 		attribution:
-            '<a href="https://www.cogoport.com/en/terms-and-conditions/">&copy;Cogoport T&C</a> | <a href="https://www.cogoport.com/en/privacy-policy/">Privacy & data protection</a>',
+            // eslint-disable-next-line max-len
+            '<a href="https://www.cogoport.com/en/terms-and-conditions/">&copy;Cogoport T&C</a>| <a href="https://www.cogoport.com/en/privacy-policy/">Privacy & data protection</a>',
 		minZoom : 0,
 		maxZoom : 15,
 	},
 ];
 
 function MapComp({
-	path, points, bounds, setBounds, displayNameArray, data, tooltipRefArray, isTooltipVisible,
+	path, points, bounds, displayNameArray, tooltipRefArray, isTooltipVisible,
 }) {
 	const [map, setMap] = useState();
 	useEffect(() => {
@@ -28,7 +32,7 @@ function MapComp({
 		}
 	}, [bounds, map]);
 
-	const lineOptions = { color: '#007FFF' };
+	const LINE_OPTIONS = { color: '#007FFF' };
 	return (
 		<CogoMaps
 			center={center}
@@ -50,7 +54,7 @@ function MapComp({
 					isTooltipVisible={isTooltipVisible}
 				/>
 			))}
-			{(path || []).length ? <Route positions={path} map={map} pathOptions={lineOptions} /> : null}
+			{(path || []).length ? <Route positions={path} map={map} pathOptions={LINE_OPTIONS} /> : null}
 		</CogoMaps>
 	);
 }

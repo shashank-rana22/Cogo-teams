@@ -1,5 +1,5 @@
 import { useRouter } from '@cogoport/next';
-import { useState, useRef, useEffect, createRef } from 'react';
+import { useState, useEffect, createRef } from 'react';
 
 import BackButton from '../../common/BackButtom';
 import useGetVesselScheduleById from '../hooks/useGetVesselScheduleById';
@@ -30,9 +30,7 @@ function VesselScheduele() {
 		}
 	};
 
-	const handleMouseEnter = (index) => {
-		const { children } = tooltipRefArray[index]?.current?.options || '';
-
+	const handleMouseEnter = () => {
 		setIsTooltipVisible(true);
 	};
 

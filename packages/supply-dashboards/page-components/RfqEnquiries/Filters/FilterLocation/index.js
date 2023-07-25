@@ -17,7 +17,7 @@ function FilterLocation({ filters, hookSetters }) {
 	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: filterOption } },
 	}));
-    let heading = service === 'air_freight' ? 'airport' : 'port';
+	let heading = service === 'air_freight' ? 'airport' : 'port';
 	if (!service) {
 		heading = 'Location';
 	}

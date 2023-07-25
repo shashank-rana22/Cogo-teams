@@ -1,4 +1,5 @@
 import { useFieldArray } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcM0, IcC1, IcC2, IcC3, IcC4, IcC5, IcC6, IcC7, IcC9, IcC8,
 } from '@cogoport/icons-react';
@@ -7,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import Child from './child';
 import styles from './styles.module.css';
 
+const ONE = 1;
 function FieldArray({
 	name,
 	control,
@@ -23,25 +25,26 @@ function FieldArray({
 		name,
 	});
 
-	const [prevTotal, setPrevTotal] = useState(0);
+	const [prevTotal, setPrevTotal] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
 	useEffect(() => {
-		const childEmptyValues = {};
-		if (prevTotal > total && total > 0) {
-			Array.from({ length: prevTotal }, (index) => remove(index, 1));
-			const newFields = Array.from({ length: total }, () => childEmptyValues);
+		const CHILD_EMPTY_VALUES = {};
+		if (prevTotal > total && total > GLOBAL_CONSTANTS.zeroth_index) {
+			Array.from({ length: prevTotal }, (index) => remove(index, ONE));
+			const newFields = Array.from({ length: total }, () => CHILD_EMPTY_VALUES);
 
 			append(newFields);
 
 			setPrevTotal(total);
 		}
-		if (total > prevTotal && total > 0) {
-			const newFields = Array.from({ length: total - prevTotal }, () => childEmptyValues);
+		if (total > prevTotal && total > GLOBAL_CONSTANTS.zeroth_index) {
+			const newFields = Array.from({ length: total - prevTotal }, () => CHILD_EMPTY_VALUES);
 			append(newFields);
 		}
-		if (total > 0) {
+		if (total > GLOBAL_CONSTANTS.zeroth_index) {
 			setPrevTotal(total);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [total]);
 	const ICONS_MAPPINGS = {
 		0 : <IcM0 className={styles.number_icon} />,
@@ -61,8 +64,8 @@ function FieldArray({
 		<div className={styles.child}>
 			{(fields || []).map((field, index) => (
 
-				<div style={{ padding: '2px' }}>
-					{String(index+1).split('').map((digit) => ICONS_MAPPINGS[parseInt(digit)])}
+				<div key={field.id} style={{ padding: '2px' }}>
+					{String(index + ONE).split('').map((digit) => ICONS_MAPPINGS[parseInt(digit, 10)])}
 					<Child
 						{...rest}
 						key={field.id}

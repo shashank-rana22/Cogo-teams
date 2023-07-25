@@ -1,4 +1,5 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -9,6 +10,7 @@ const KEYS_TO_SHOW = {
 	service_lane  : 'Service Lane',
 };
 
+const ONE = 1;
 function SailingDetails({ data, loading }) {
 	return (
 		<div className={styles.sailing_details}>
@@ -33,7 +35,8 @@ function SailingDetails({ data, loading }) {
 						)}
 						{loading ? <Placeholder width="60px" /> : (
 							<div className={styles.date}>
-								{format(data?.departure, 'dd MMM yyyy hh:mm')}
+								{format(data?.departure, `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
+								 ${GLOBAL_CONSTANTS.formats.time['HH:mm']}`)}
 							</div>
 						)}
 					</div>
@@ -59,7 +62,7 @@ function SailingDetails({ data, loading }) {
 				<div className={styles.middle}>
 					{loading ? <Placeholder width="60px" /> : (
 						<div className={styles.transit_time}>
-							{`${data?.transit_time} ${data?.transit_time > 1 ? 'days' : 'day'}`}
+							{`${data?.transit_time} ${data?.transit_time > ONE ? 'days' : 'day'}`}
 
 						</div>
 					)}
@@ -81,7 +84,8 @@ function SailingDetails({ data, loading }) {
 						) }
 						{loading ? <Placeholder width="60px" /> : (
 							<div className={styles.date}>
-								{format(data?.arival, 'dd MMM yyyy hh:mm')}
+								{format(data?.arival, `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
+								 ${GLOBAL_CONSTANTS.formats.time['HH:mm']}`)}
 							</div>
 
 						)}

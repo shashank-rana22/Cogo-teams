@@ -1,9 +1,10 @@
 import { Button, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-const ZERO = 0;
+const TWO = 2;
 function Lower({ vessel, loading }) {
 	const { push } = useRouter();
 	const navigateTo = () => {
@@ -13,7 +14,7 @@ function Lower({ vessel, loading }) {
 		);
 	};
 	const route_length = parseFloat(vessel?.route?.length);
-	const displayText = `${(route_length)?.toFixed(2) || '-'} km`;
+	const displayText = `${(route_length)?.toFixed(TWO) || '-'} km`;
 
 	return (
 		<div className={styles.lower}>
@@ -24,7 +25,7 @@ function Lower({ vessel, loading }) {
 				{loading ? <Placeholder width="100px" />
 					: (
 						<div className={styles.feature_value}>
-							{vessel?.vessel_schedule_link?.[ZERO]?.arrival_voyage_number}
+							{vessel?.vessel_schedule_link?.[GLOBAL_CONSTANTS.zeroth_index]?.arrival_voyage_number}
 						</div>
 					)}
 				{loading ? <Placeholder width="100px" />

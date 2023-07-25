@@ -1,14 +1,20 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-magic-numbers */
+/* eslint-disable no-bitwise */
+const ZERO = 0;
+const SIX = 6;
+const TEN = 10;
 const getDecodedPath = (str, precision) => {
-	let index = 0;
-	let lat = 0;
-	let lng = 0;
-	const coordinates = [];
-	let shift = 0;
-	let result = 0;
+	let index = ZERO;
+	let lat = ZERO;
+	let lng = ZERO;
+	const COORDINATES = [];
+	let shift = ZERO;
+	let result = ZERO;
 	let byte = null;
 	let latitude_change;
 	let longitude_change;
-	const factor = 10 ** (precision || 6);
+	const factor = TEN ** (precision || SIX);
 
 	while (index < str.length) {
 		byte = null;
@@ -23,6 +29,7 @@ const getDecodedPath = (str, precision) => {
 
 		latitude_change = result & 1 ? ~(result >> 1) : result >> 1;
 
+		// eslint-disable-next-line no-multi-assign
 		shift = result = 0;
 
 		do {
@@ -36,9 +43,9 @@ const getDecodedPath = (str, precision) => {
 		lat += latitude_change;
 		lng += longitude_change;
 
-		coordinates.push([lat / factor, lng / factor]);
+		COORDINATES.push([lat / factor, lng / factor]);
 	}
-	return coordinates;
+	return COORDINATES;
 };
 
 export default getDecodedPath;
