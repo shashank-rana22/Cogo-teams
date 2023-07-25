@@ -177,9 +177,9 @@ export interface DetailInterface {
 	destinationmainport?: PortDetailsInt
 }
 export interface RemarksValInterface {
-	collectionPartyRemark?:string,
-	billingPartyRemark?:string,
-	invoiceDetailsRemark?:string,
-	overallRemark?: string
-	taggingRemark?:string
+	collectionPartyRemark?: string[],
+	billingPartyRemark?: string[],
+	invoiceDetailsRemark?: string[],
+	overallRemark?: string,
+	taggingRemark?: string[]
 }

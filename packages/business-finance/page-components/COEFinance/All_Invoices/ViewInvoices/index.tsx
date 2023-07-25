@@ -14,10 +14,10 @@ function ViewInvoices() {
 	const { query } = useRouter();
 	const { billId, orgId, status, jobNumber, jobType } = query || {};
 	const [remarksVal, setRemarksVal] = useState({
-		collectionPartyRemark : null,
-		billingPartyRemark    : null,
+		collectionPartyRemark : [],
+		billingPartyRemark    : [],
 		invoiceDetailsRemark  : [],
-		taggingRemark         : null,
+		taggingRemark         : [],
 	});
 	const [overAllRemark, setOverAllRemark] = useState('');
 	const [lineItemsRemarks, setLineItemsRemarks] = useState({});

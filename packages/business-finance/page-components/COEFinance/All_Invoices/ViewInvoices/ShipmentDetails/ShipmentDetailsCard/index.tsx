@@ -4,7 +4,6 @@ import {
 	Tooltip,
 	Modal,
 	Textarea,
-	Checkbox,
 	ButtonIcon,
 	CheckboxGroup,
 } from '@cogoport/components';
@@ -17,6 +16,8 @@ import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
+import billingPartyRejectCheckboxList from '../../../../constants/billing-party-remark-checkbox-list';
+import collectionPartyRejectCheckboxList from '../../../../constants/collection-party-remark-checkbox-list';
 import invoiceDetailsRejectCheckboxList from '../../../../constants/invoice-details-checkbox-list';
 import useListShipment from '../../../../hook/useListShipment';
 import useShipmentDocument from '../../../../hook/useShipmentDocument';
@@ -59,7 +60,11 @@ function ShipmentDetailsCard({
 	const [showLineItem, setShowLineItem] = useState(false);
 	const [showRejected, setShowRejected] = useState({});
 	const [showHighAdvanceModal, setShowHighAdvancedModal] = useState(false);
-	const [checkedValue, setCheckedValue] = useState([]);
+	const [checkedValue, setCheckedValue] = useState({
+		collectionPartyRemark : [],
+		billingPartyRemark    : [],
+		invoiceDetailsRemark  : [],
+	});
 
 	const {
 		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject, serviceProviderDetail,
@@ -168,9 +173,9 @@ function ShipmentDetailsCard({
 		setRejected(undoRejectedData);
 
 		if (id === 1) {
-			setRemarksVal({ ...remarksVal, collectionPartyRemark: null });
+			setRemarksVal({ ...remarksVal, collectionPartyRemark: [] });
 		} else if (id === 2) {
-			setRemarksVal({ ...remarksVal, billingPartyRemark: null });
+			setRemarksVal({ ...remarksVal, billingPartyRemark: [] });
 		} else if (id === 3) {
 			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: [] });
 		}
@@ -188,11 +193,23 @@ function ShipmentDetailsCard({
 	};
 	const onClose = () => {
 		if (Object.keys(showRejected).includes('1')) {
-			setRemarksVal({ ...remarksVal, collectionPartyRemark: null });
+			setRemarksVal({ ...remarksVal, collectionPartyRemark: [] });
+			setCheckedValue({
+				...checkedValue,
+				collectionPartyRemark: [],
+			});
 		} else if (Object.keys(showRejected).includes('2')) {
-			setRemarksVal({ ...remarksVal, billingPartyRemark: null });
+			setRemarksVal({ ...remarksVal, billingPartyRemark: [] });
+			setCheckedValue({
+				...checkedValue,
+				billingPartyRemark: [],
+			});
 		} else {
 			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: [] });
+			setCheckedValue({
+				...checkedValue,
+				invoiceDetailsRemark: [],
+			});
 		}
 		setShowRejected(false);
 	};
@@ -212,8 +229,14 @@ function ShipmentDetailsCard({
 	useEffect(() => {
 		setRemarksVal({
 			...JSON.parse(stringifyRemarksVal),
+			collectionPartyRemark:
+			[...checkedValue.collectionPartyRemark, JSON.parse(stringifyRemarksVal).collectionPartyRemark[
+				JSON.parse(stringifyRemarksVal).collectionPartyRemark.length - 1]],
+			billingPartyRemark:
+			[...checkedValue.billingPartyRemark, JSON.parse(stringifyRemarksVal).billingPartyRemark[
+				JSON.parse(stringifyRemarksVal).billingPartyRemark.length - 1]],
 			invoiceDetailsRemark:
-			[...checkedValue, JSON.parse(stringifyRemarksVal).invoiceDetailsRemark[
+			[...checkedValue.invoiceDetailsRemark, JSON.parse(stringifyRemarksVal).invoiceDetailsRemark[
 				JSON.parse(stringifyRemarksVal).invoiceDetailsRemark.length - 1]],
 		});
 	}, [checkedValue, stringifyRemarksVal, setRemarksVal]);
@@ -297,75 +320,36 @@ function ShipmentDetailsCard({
 											{Object.keys(showRejected).includes('1') && (
 												<div>
 													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															Name -
-															{' '}
-															<span>{organizationName}</span>
-														</div>
+														<CheckboxGroup
+															options={collectionPartyRejectCheckboxList(
+																organizationName,
+																bankName,
+																accountNumber,
+																ifscCode,
+																registrationNumber,
+																taxNumber,
+																beneficiaryName,
+															)}
+															onChange={(val) => {
+																setCheckedValue(
+																	{ ...checkedValue, collectionPartyRemark: val },
+																);
+															}}
+															value={checkedValue.collectionPartyRemark}
+															style={{ display: 'flex', flexDirection: 'column' }}
+														/>
 													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															{' '}
-															Bank Name -
-															{' '}
-															<span>{bankName}</span>
-														</div>
-													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															{' '}
-															Account Number -
-															{' '}
-															<span className={styles.bold_data}>
-																{accountNumber}
-															</span>
-														</div>
-													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															{' '}
-															IFSC -
-															{' '}
-															<span className={styles.bold_data}>
-																{ifscCode}
-															</span>
-														</div>
-													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															PAN Number -
-															{' '}
-															<span>{(registrationNumber || '')}</span>
-														</div>
-													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															GST Number -
-															{' '}
-															<span>{taxNumber}</span>
-														</div>
-													</div>
-
 													<Textarea
 														name="remark"
 														size="md"
 														placeholder="Remarks Here ..."
 														style={{ width: '700', height: '100px' }}
-														value={remarksVal.collectionPartyRemark}
-														onChange={(value: string) => setRemarksVal({
+														value={remarksVal.collectionPartyRemark[remarksVal
+															.collectionPartyRemark.length - 1]}
+														onChange={(value) => setRemarksVal({
 															...remarksVal,
-															collectionPartyRemark: value,
+															collectionPartyRemark: [
+																...checkedValue.collectionPartyRemark, value],
 														})}
 													/>
 												</div>
@@ -374,57 +358,33 @@ function ShipmentDetailsCard({
 											{Object.keys(showRejected).includes('2') && (
 												<div>
 													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															Entity -
-															{' '}
-															<span style={{ fontWeight: '600' }}>
-																{entityCode}
-															</span>
-															{' '}
-															-
-															{' '}
-															<span style={{ fontWeight: '600' }}>
-																{organizationNameBuyer}
-															</span>
-														</div>
+														<CheckboxGroup
+															options={billingPartyRejectCheckboxList(
+																entityCode,
+																organizationNameBuyer,
+																address,
+																registrationNumberBuyer,
+																taxNumberBuyer,
+															)}
+															onChange={(val) => {
+																setCheckedValue(
+																	{ ...checkedValue, billingPartyRemark: val },
+																);
+															}}
+															value={checkedValue.billingPartyRemark}
+															style={{ display: 'flex', flexDirection: 'column' }}
+														/>
 													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															Address -
-															{' '}
-															<span>{address}</span>
-														</div>
-													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															PAN Number -
-															{' '}
-															<span>{registrationNumberBuyer}</span>
-														</div>
-													</div>
-
-													<div className={styles.flex_center}>
-														<Checkbox />
-														<div className={styles.margin_bottom}>
-															GST Number -
-															{' '}
-															<span>{taxNumberBuyer}</span>
-														</div>
-													</div>
-
 													<Textarea
 														name="remark"
 														size="md"
 														placeholder="Remarks Here ..."
-														value={remarksVal.billingPartyRemark}
-														onChange={(value: string) => setRemarksVal({
+														value={remarksVal.billingPartyRemark[remarksVal
+															.billingPartyRemark.length - 1]}
+														onChange={(value) => setRemarksVal({
 															...remarksVal,
-															billingPartyRemark: value,
+															billingPartyRemark: [
+																...checkedValue.billingPartyRemark, value],
 														})}
 														style={{ width: '700', height: '100px' }}
 													/>
@@ -440,8 +400,12 @@ function ShipmentDetailsCard({
 																status,
 																placeOfSupply,
 															)}
-															onChange={setCheckedValue}
-															value={checkedValue}
+															onChange={(val) => {
+																setCheckedValue(
+																	{ ...checkedValue, invoiceDetailsRemark: val },
+																);
+															}}
+															value={checkedValue.invoiceDetailsRemark}
 															style={{ display: 'flex', flexDirection: 'column' }}
 														/>
 													</div>
@@ -454,7 +418,8 @@ function ShipmentDetailsCard({
 															.invoiceDetailsRemark.length - 1]}
 														onChange={(value) => setRemarksVal({
 															...remarksVal,
-															invoiceDetailsRemark: [...checkedValue, value],
+															invoiceDetailsRemark: [
+																...checkedValue.invoiceDetailsRemark, value],
 														})}
 														style={{ width: '700', height: '100px' }}
 													/>
@@ -534,47 +499,19 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 
 										<div className={styles.billing_party_container}>
-											<div className={styles.margin_bottom}>
-												Collection Party Name -
-												{' '}
-												<span>{organizationName}</span>
-											</div>
-											<div className={styles.margin_bottom}>
-												{' '}
-												Beneficiary Name-
-												{' '}
-												<span>{beneficiaryName}</span>
-											</div>
-											<div className={styles.margin_bottom}>
-												{' '}
-												Bank Name -
-												{' '}
-												<span>{bankName}</span>
-											</div>
-											<div className={styles.margin_bottom}>
-												{' '}
-												Account Number -
-												{' '}
-												<span className={styles.bold_data}>
-													{accountNumber}
-												</span>
-											</div>
-											<div className={styles.margin_bottom}>
-												{' '}
-												IFSC -
-												{' '}
-												<span className={styles.bold_data}>{ifscCode}</span>
-											</div>
-											<div className={styles.margin_bottom}>
-												PAN Number -
-												{' '}
-												<span>{(registrationNumber || '')}</span>
-											</div>
-											<div className={styles.margin_bottom}>
-												GST Number -
-												{' '}
-												<span>{taxNumber}</span>
-											</div>
+											{collectionPartyRejectCheckboxList(
+												organizationName,
+												beneficiaryName,
+												bankName,
+												accountNumber,
+												ifscCode,
+												registrationNumber,
+												taxNumber,
+											).map((item) => (
+												<div key={item.label} className={styles.margin_bottom}>
+													{item.label}
+												</div>
+											))}
 										</div>
 									</div>
 								)}
@@ -647,32 +584,17 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 
 										<div className={styles.billing_party_container}>
-											<div className={styles.margin_bottom}>
-												Entity -
-												{' '}
-												<span style={{ fontWeight: '600' }}>{entityCode}</span>
-												{' '}
-												-
-												{' '}
-												<span style={{ fontWeight: '600' }}>
-													{organizationNameBuyer}
-												</span>
-											</div>
-											<div className={styles.margin_bottom}>
-												Address -
-												{' '}
-												<span>{address}</span>
-											</div>
-											<div className={styles.margin_bottom}>
-												PAN Number -
-												{' '}
-												<span>{registrationNumberBuyer}</span>
-											</div>
-											<div className={styles.margin_bottom}>
-												GST Number -
-												{' '}
-												<span>{taxNumberBuyer}</span>
-											</div>
+											{billingPartyRejectCheckboxList(
+												entityCode,
+												organizationNameBuyer,
+												address,
+												registrationNumberBuyer,
+												taxNumberBuyer,
+											).map((item) => (
+												<div key={item.label} className={styles.margin_bottom}>
+													{item.label}
+												</div>
+											))}
 										</div>
 									</div>
 								)}
