@@ -9,6 +9,8 @@ import commonFunctions from '../../utils/commonFunctions';
 import GenerateManifestDoc from '../GenerateManifestDoc';
 import HAWBList from '../HawbList';
 
+import styles from './styles.module.css';
+
 function ApprovedAWB({
 	data = {},
 	loading = false,
@@ -40,7 +42,7 @@ function ApprovedAWB({
 				<>
 					<Button
 						themeType="secondary"
-						onClick={setHandoverModal((prev) => !prev)}
+						onClick={() => setHandoverModal(true)}
 						disabled={updateLoading}
 					>
 						Handover
@@ -50,12 +52,18 @@ function ApprovedAWB({
 							show={handoverModal}
 							onClose={() => { setHandoverModal(false); }}
 						>
-							<Modal.Body>
-								Do you wish to confirm the Handover?
+							<Modal.Header title="Confirm Handover?" />
+							<Modal.Body className={styles.modal_body}>
+								Are you sure you want to confirm the Handover?
 							</Modal.Body>
 							<Modal.Footer>
-								<Button onClick={() => setHandoverModal(false)}>Cancel</Button>
-								<Button onClick={() => updateShipment({ payload })}>Confirm</Button>
+								<Button themeType="secondary" onClick={() => setHandoverModal(false)}>Cancel</Button>
+								<Button
+									className={styles.confirm_button}
+									onClick={() => updateShipment({ payload })}
+								>
+									Confirm
+								</Button>
 							</Modal.Footer>
 						</Modal>
 					)}
