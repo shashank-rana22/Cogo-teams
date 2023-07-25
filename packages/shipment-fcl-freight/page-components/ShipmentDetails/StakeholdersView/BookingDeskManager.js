@@ -54,6 +54,7 @@ function BookingDeskManager({ get = {}, activeStakeholder = '' }) {
 		...servicesGet,
 		...getTimeline,
 		activeStakeholder,
+		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	useEffect(() => {
