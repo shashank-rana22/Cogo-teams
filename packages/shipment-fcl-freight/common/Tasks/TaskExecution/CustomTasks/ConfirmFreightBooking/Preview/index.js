@@ -14,7 +14,7 @@ function PreviewAndSubmit({
 	return (
 		<Modal
 			show={show}
-			onClose={() => setShow(!show)}
+			onClose={() => setShow(false)}
 			interactive
 			width={700}
 		>

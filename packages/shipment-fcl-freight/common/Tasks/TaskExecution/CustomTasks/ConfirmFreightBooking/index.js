@@ -115,7 +115,10 @@ function ConfirmFreightBooking({
 			/>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary">
+				<Button
+					themeType="secondary"
+					onClick={onCancel}
+				>
 					Cancel
 				</Button>
 
