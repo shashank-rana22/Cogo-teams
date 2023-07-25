@@ -1,15 +1,48 @@
 import { cl, Tooltip, Table } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowUp, IcMArrowDown, IcMDocument } from '@cogoport/icons-react';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
+import useGetBill from '../../../hooks/useGetBill';
 import ClickableDiv from '../../ClickableDiv';
 import PendingKnockOff from '../PendingKnockOff';
 
 import styles from './styles.module.css';
 import { columns } from './tableColumn';
+
+const MINIMUM_INVOICES = 3;
+const DEFAULT_LENGTH = 1;
+
+const invoiceHover = (invoice) => (
+	<div className={styles.invoice_hover_container}>
+		<div className={cl`${styles.text} ${styles.bold}`}>{invoice?.invoice_no}</div>
+
+		<div className={cl`${styles.invoice_hover_container} ${styles.row}`}>
+			<div className={cl`${styles.text}`}>
+				<div className={cl`${styles.text}`}>UTR</div>
+				<div className={cl`${styles.text} ${styles.bold_colored}`}>{invoice?.utr_nos}</div>
+			</div>
+
+			<div className={cl`${styles.text} ${styles.margin_left}`}>
+				<div className={cl`${styles.text}`}>AMOUNT</div>
+				<div className={cl`${styles.text} ${styles.bold_colored}`}>
+					{formatAmount({
+						amount   : invoice?.inr_invoice_total,
+						currency : invoice?.invoice_currency || 'inr',
+						options  : {
+							style                 : 'currency',
+							currencyDisplay       : 'code',
+							maximumFractionDigits : 2,
+						},
+					})}
+				</div>
+			</div>
+		</div>
+	</div>
+);
 
 export default function Invoices({
 	item = {},
@@ -24,39 +57,13 @@ export default function Invoices({
 	const list_of_invoices = (item?.invoice_data || []).filter(
 		(inv) => inv.status !== 'init',
 	);
-	const tableData = getTableFormatedData(list_of_invoices);
+	const { data } = useGetBill({ serial_id: item?.serial_id, accordionOpen });
+	const tableData = getTableFormatedData({ list_of_invoices, data });
 
-	const renderPart = (list_of_invoices || []).slice(0, 3);
+	const renderPart = (list_of_invoices || []).slice(GLOBAL_CONSTANTS.zeroth_index, MINIMUM_INVOICES);
 	const invoiceLength = list_of_invoices.length;
-	const remainLength = invoiceLength > 3 ? invoiceLength - 3 : 0;
-
-	const invoiceHover = (invoice) => (
-		<div className={styles.invoice_hover_container}>
-			<div className={cl`${styles.text} ${styles.bold}`}>{invoice?.invoice_no}</div>
-
-			<div className={cl`${styles.invoice_hover_container} ${styles.row}`}>
-				<div className={cl`${styles.text}`}>
-					<div className={cl`${styles.text}`}>UTR</div>
-					<div className={cl`${styles.text} ${styles.bold_colored}`}>{invoice?.utr_nos}</div>
-				</div>
-
-				<div className={cl`${styles.text} ${styles.margin_left}`}>
-					<div className={cl`${styles.text}`}>AMOUNT</div>
-					<div className={cl`${styles.text} ${styles.bold_colored}`}>
-						{formatAmount({
-							amount   : invoice?.inr_invoice_total,
-							currency : invoice?.invoice_currency || 'inr',
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-								maximumFractionDigits : 2,
-							},
-						})}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+	const remainLength = invoiceLength > MINIMUM_INVOICES ? invoiceLength - MINIMUM_INVOICES
+		: GLOBAL_CONSTANTS.zeroth_index;
 
 	const renderAccordion = () => {
 		if (item?.trade_type === 'import') {
@@ -104,7 +111,7 @@ export default function Invoices({
 							>
 								<div className={cl`${styles.text} ${styles.invoice_hover}`}>
 									{invoice?.invoice_no}
-									{i < renderPart.length - 1 ? ', ' : ' '}
+									{i < renderPart.length - DEFAULT_LENGTH ? ', ' : ' '}
 								</div>
 							</Tooltip>
 						))}
