@@ -1,5 +1,4 @@
-import { Accordion, Pill, cl } from '@cogoport/components';
-import { InputController } from '@cogoport/forms';
+import { Accordion, Pill, cl, InputNumber } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -8,7 +7,7 @@ import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../../../configuratio
 import styles from './styles.module.css';
 
 function Objective(props) {
-	const { currentObjective = false, objective, user, control, defaultWeightage } = props;
+	const { currentObjective = false, objective, user, role, control, defaultWeightage } = props;
 
 	const { id, name, objective_type, status } = objective || {};
 
@@ -34,8 +33,8 @@ function Objective(props) {
 
 					<div className={styles.title_right_container}>
 						<p className={styles.set_weightage}>Set Weightage (%)</p>
-						<InputController
-							name={`${id}_${userId}_weightage`}
+						<InputNumber
+							name={`${id || ''}_${userId}_${role?.id}_weightage`}
 							size="sm"
 							control={control}
 							value={defaultWeightage}

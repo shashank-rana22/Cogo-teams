@@ -1,72 +1,76 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 
 import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../../../constants/create-form-stepper-keys-mapping';
 
 import ListObjectiveUserMappings from './ListObjectiveUserMappings';
 import styles from './styles.module.css';
+import useCreateObjective from './useCreateObjective';
 import useGetObjectiveUserMappings from './useGetObjectiveUserMappings';
 
 const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
-
-const MODE_BASIS_BUTTON_MAPPING = {
-	create: (
-		<>
-			<Button
-				size="lg"
-				type="button"
-				themeType="secondary"
-				style={{ marginRight: '12px' }}
-			>
-				Equally Distribute & Send For Verification
-			</Button>
-
-			<Button
-				size="lg"
-				type="button"
-				themeType="primary"
-			>
-				Create Objective & Send For Verification
-			</Button>
-		</>
-	),
-	edit: (
-		<>
-			<Button
-				size="lg"
-				type="button"
-				themeType="tertiary"
-				style={{ marginRight: '12px' }}
-			>
-				Equally Distribute
-			</Button>
-
-			<Button
-				size="lg"
-				type="button"
-				themeType="secondary"
-				style={{ marginRight: '12px' }}
-			>
-				Replace & Send For Verification
-			</Button>
-
-			<Button
-				size="lg"
-				type="button"
-				themeType="primary"
-			>
-				Duplicate & Send For Verification
-			</Button>
-		</>
-	),
-};
 
 function SetObjectiveWeightage(props) {
 	const { activeTabDetails, setActiveStep, formValues } = props;
 
 	const { list, getNextPage, paginationData } = useGetObjectiveUserMappings({ formValues });
 
-	const { control } = useForm();
+	const { control, createLoading, onCreate } = useCreateObjective({ formValues });
+
+	const MODE_BASIS_BUTTON_MAPPING = {
+		create: (
+			<>
+				<Button
+					size="lg"
+					type="button"
+					themeType="secondary"
+					style={{ marginRight: '12px' }}
+					onClick={() => onCreate({ distribute_equally: true })}
+					loading={createLoading}
+				>
+					Equally Distribute & Send For Verification
+				</Button>
+
+				<Button
+					size="lg"
+					type="button"
+					themeType="primary"
+					onClick={() => onCreate({ distribute_equally: false })}
+					loading={createLoading}
+				>
+					Create Objective & Send For Verification
+				</Button>
+			</>
+		),
+		edit: (
+			<>
+				<Button
+					size="lg"
+					type="button"
+					themeType="tertiary"
+					style={{ marginRight: '12px' }}
+				>
+					Equally Distribute
+				</Button>
+
+				<Button
+					size="lg"
+					type="button"
+					themeType="secondary"
+					style={{ marginRight: '12px' }}
+				>
+					Replace & Send For Verification
+				</Button>
+
+				<Button
+					size="lg"
+					type="button"
+					themeType="primary"
+				>
+					Duplicate & Send For Verification
+				</Button>
+			</>
+		),
+	};
 
 	return (
 		<div className={styles.container}>
@@ -81,12 +85,12 @@ function SetObjectiveWeightage(props) {
 					</p>
 				</div>
 
-				<Button
+				{/* <Button
 					type="button"
 					themeType="secondary"
 				>
 					Group Users by Objective
-				</Button>
+				</Button> */}
 			</div>
 
 			<ListObjectiveUserMappings

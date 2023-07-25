@@ -9,7 +9,9 @@ const DEFAULT_WEIGHTAGE = 100;
 function ListCard(props) {
 	const { objectiveUserMappingData, control, formValues } = props;
 
-	const { user, partner, role, objectives } = objectiveUserMappingData || {};
+	const { user, role, objectives = [] } = objectiveUserMappingData || {};
+
+	const { generalConfiguration: { partner = {} } = {} } = formValues;
 
 	return (
 		<div className={styles.card_container}>
@@ -41,6 +43,7 @@ function ListCard(props) {
 				className={styles.current_objective}
 				objective={formValues.generalConfiguration}
 				user={user}
+				role={role}
 				control={control}
 				defaultWeightage={isEmpty(objectives) && DEFAULT_WEIGHTAGE}
 			/>
@@ -50,6 +53,7 @@ function ListCard(props) {
 					key={objective.id}
 					objective={objective}
 					user={user}
+					role={role}
 					control={control}
 				/>
 			))}

@@ -137,7 +137,7 @@ const CARD_DATA_MAPPING = [
 	},
 	{
 		name     : 'trade_lane',
-		accessor : ({ origin_location, destination_location }) => {
+		accessor : ({ origin_location = {}, destination_location = {} }) => {
 			if (isEmpty(origin_location) && isEmpty(destination_location)) return null;
 
 			return (

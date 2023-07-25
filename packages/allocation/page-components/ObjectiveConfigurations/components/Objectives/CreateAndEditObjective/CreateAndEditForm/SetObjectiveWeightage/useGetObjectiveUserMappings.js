@@ -11,9 +11,9 @@ const useGetObjectiveUserMappings = (props) => {
 	const { generalConfiguration: { roles = [], selectMode = '', user_ids = [] } = {} } = formValues;
 
 	const [params, setParams] = useState({
-		page     : 1,
-		role_ids : roles.map((role) => role.id),
-		filters  : {
+		page    : 1,
+		filters : {
+			role_ids           : roles.map((role) => role.id),
 			user_ids           : selectMode === SELECT_ONLY ? user_ids : undefined,
 			excluding_user_ids : selectMode === EXCLUDE_ONLY ? user_ids : undefined,
 		},
@@ -37,7 +37,7 @@ const useGetObjectiveUserMappings = (props) => {
 
 	return {
 		list,
-		loading,
+		listLoading: loading,
 		getNextPage,
 		paginationData,
 	};

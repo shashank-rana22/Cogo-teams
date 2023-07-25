@@ -1,4 +1,8 @@
-const getCreateObjectivePayload = ({ data }) => {
+import { isEmpty } from '@cogoport/utils';
+
+const getCreateObjectivePayload = (props) => {
+	const { data, weightageData, distribute_equally } = props;
+
 	const { generalConfiguration, objectiveRequirements } = data;
 
 	const {
@@ -8,8 +12,8 @@ const getCreateObjectivePayload = ({ data }) => {
 		channels,
 		roles,
 		lifecycle_stage,
-		selectMode,
-		user_ids,
+		// selectMode,
+		// user_ids,
 	} = generalConfiguration || {};
 
 	const {
@@ -21,17 +25,42 @@ const getCreateObjectivePayload = ({ data }) => {
 
 	const { countries, states, cities, pincodes, segments } = organization_details || {};
 
+	const getUserObjectiveWeightage = () => {
+		const USER_OBJECTIVE_WEIGHTAGE_MAPPING = {};
+
+		Object.entries(weightageData).forEach(([controlName, weightage]) => {
+			const [objectiveId, userId, roleId] = controlName.split('_');
+
+			USER_OBJECTIVE_WEIGHTAGE_MAPPING[userId] = {
+				...(USER_OBJECTIVE_WEIGHTAGE_MAPPING[userId] || {}),
+				user_id                   : userId,
+				role_id                   : roleId,
+				user_objective_weightages : {
+					...(USER_OBJECTIVE_WEIGHTAGE_MAPPING[userId].user_objective_weightages || {}),
+					[objectiveId]: {
+						objective_id : objectiveId || undefined,
+						weightage,
+						action       : isEmpty(objectiveId) ? 'create' : 'update',
+					},
+				},
+			};
+		});
+
+		return Object.values(USER_OBJECTIVE_WEIGHTAGE_MAPPING).map((item) => ({
+			...item,
+			user_objective_weightages: Object.values(item.user_objective_weightages),
+		}));
+	};
+
 	const payload = {
 		objective_type,
 		name,
-		partner_id        : partner?.id,
+		partner_id       : partner?.id,
 		channels,
-		role_ids          : roles?.map((role) => role.id),
-		lifecycle_stages  : lifecycle_stage,
-		users_select_type : selectMode,
-		user_ids          : selectMode === 'custom' ? user_ids : undefined,
+		role_ids         : roles?.map((role) => role.id),
+		lifecycle_stages : lifecycle_stage,
 		service_requirement_operator,
-		service_details   : service_requirements?.map((service) => ({
+		service_details  : service_requirements?.map((service) => ({
 			...service,
 			origin_id      : service?.origin_location?.id,
 			destination_id : service?.destination_location?.id,
@@ -44,6 +73,8 @@ const getCreateObjectivePayload = ({ data }) => {
 			segments,
 		},
 		stats_details,
+		distribute_equally,
+		objective_weightages: getUserObjectiveWeightage(),
 	};
 
 	return payload;
