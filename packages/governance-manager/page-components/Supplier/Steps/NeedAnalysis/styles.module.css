@@ -10,7 +10,12 @@
 	padding: 26px 0;
 }
 
-.submit_btn {
+.submit_btn,
+.pagination {
 	display: flex;
 	justify-content: right;
+}
+
+.pagination {
+	margin-bottom: 10px;
 }

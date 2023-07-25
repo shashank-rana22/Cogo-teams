@@ -1,9 +1,8 @@
 import { Button, Modal, Table, Radio, Textarea } from '@cogoport/components';
 import { useState } from 'react';
 
-import useGetOrganizationServiceExpertises from '../../../../hooks/useGetOrganizationServiceExpertises';
-import useUpdateOrganizationServiceExpertiseFeedback from
-	'../../../../hooks/useUpdateOrganizationServiceExpertiseFeedback';
+import useGetOrganizationServiceExpertises from '../hooks/useGetOrganizationServiceExpertises';
+import useUpdateOrganizationServiceExpertiseFeedback from '../hooks/useUpdateOrganizationServiceExpertiseFeedback';
 
 import styles from './styles.module.css';
 
@@ -13,8 +12,8 @@ function EvaluateModal({ show, setShow }) {
 	const [checkbox, setCheckbox] = useState('');
 	const { UpdateOrganizationServiceExpertiseFeedback } = useUpdateOrganizationServiceExpertiseFeedback({
 		feedback,
-		service_requirement : checkbox,
-		id                  : show,
+		service_requirement: checkbox,
+		show,
 		setShow,
 	});
 
@@ -69,7 +68,7 @@ function EvaluateModal({ show, setShow }) {
 							<Textarea
 								className={styles.feedback_box}
 								size="md"
-								defaultValue="Rishi"
+								defaultValue=""
 								placeholder="Minimum 50 characters"
 								value={feedback}
 								onChange={(val) => setFeedback(val)}

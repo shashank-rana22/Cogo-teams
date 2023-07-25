@@ -49,6 +49,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
+	{
+		api          : 'get_organization_contract',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_contract',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 
 ];
 export default apis;

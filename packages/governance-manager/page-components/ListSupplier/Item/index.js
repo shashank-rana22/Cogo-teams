@@ -1,4 +1,4 @@
-import { Button, Pill } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
@@ -11,12 +11,7 @@ function Item({ isSupplierPage = false, item }) {
 			`/governance-manager/${item?.id}`,
 		);
 	};
-	const goBack = () => {
-		push(
-			'/governance-manager/',
-			'/governance-manager/',
-		);
-	};
+
 	const SERVICE_NAME_MAPPING = {
 		fcl_freight             : 'FCL Freight',
 		lcl_freight             : 'LCL Freight',
@@ -38,7 +33,15 @@ function Item({ isSupplierPage = false, item }) {
 		<div className={styles.item}>
 			{ isSupplierPage && (
 				<div>
-					<Button themeType="secondary" onClick={() => goBack()}>
+					<Button
+						themeType="secondary"
+						onClick={() => {
+							push(
+								'/governance-manager/',
+								'/governance-manager/',
+							);
+						}}
+					>
 						Go Back
 					</Button>
 				</div>
@@ -59,26 +62,11 @@ function Item({ isSupplierPage = false, item }) {
 			</div>
 
 			{ !isSupplierPage && (
-				<>
-					<div>
-						<div className={styles.key}>Analysis Status</div>
-						<div className={styles.value}>
-							<Pill
-								size="md"
-								color="blue"
-							>
-								2/4 Services Needed
-							</Pill>
-
-						</div>
-					</div>
-					<div>
-						<Button themeType="accent" onClick={() => navigate()}>
-							View
-						</Button>
-					</div>
-
-				</>
+				<div>
+					<Button themeType="accent" onClick={() => navigate()}>
+						View
+					</Button>
+				</div>
 			)}
 
 		</div>

@@ -1,38 +1,25 @@
-import { Button, Pill } from '@cogoport/components';
+import { cfsColumns } from './servicewise-columns/cfs-columns';
+import { chaColumns } from './servicewise-columns/cha-columns';
+import { fclColumns } from './servicewise-columns/fcl-columns';
+import { trailerColumns } from './servicewise-columns/trailer-controls';
 
-import styles from '../styles.module.css';
+export const columns = ({ setShow, service_type }) => {
+	const SERVICE_COLUMNS_MAPPING = {
+		fcl_freight             : fclColumns,
+		lcl_freight             : fclColumns,
+		ftl_freight             : trailerColumns,
+		ltl_freight             : trailerColumns,
+		air_freight             : trailerColumns,
+		trailer_freight         : trailerColumns,
+		haulage_freight         : trailerColumns,
+		rail_domestic_freight   : trailerColumns,
+		fcl_freight_local_agent : trailerColumns,
+		air_customs             : chaColumns,
+		air_freight_local       : trailerColumns,
+		fcl_customs             : chaColumns,
+		lcl_customs             : chaColumns,
+		fcl_cfs                 : cfsColumns,
+	};
 
-export const columns = ({ setShow, service_type }) => [
-	{ Header: 'Origin Country', accessor: (row) => (<div>{row?.expertise_data?.origin_name}</div>) },
-	{ Header: 'Destination Trade Lane', accessor: (row) => (<div>{row?.expertise_data?.destination_name}</div>) },
-	{
-		Header   : 'Current Supplier (Total Count)',
-		accessor : (row) => (<div>{row?.expertise_data?.current_supplier_count}</div>),
-	},
-	{
-		Header   : 'Volume Served (Total Containers)',
-		accessor : (row) => (<div>{row?.expertise_data?.total_volume_served?.total_teus}</div>),
-	},
-	{
-		id     : 'status',
-		Header : () => (
-			<div className={styles.th}>
-				Status
-			</div>
-		),
-		accessor: (row) => (
-			<div className={styles.td}>
-				<Pill color="green">{row?.status}</Pill>
-			</div>
-		),
-	},
-	{
-		Header   : ' ',
-		accessor : (row) => !row?.service_requirement && (
-			<Button themeType="accent" onClick={() => setShow({ ...row, service_type })}>
-				Evaluate
-			</Button>
-		)
-		,
-	},
-];
+	return SERVICE_COLUMNS_MAPPING[service_type]({ setShow, service_type });
+};

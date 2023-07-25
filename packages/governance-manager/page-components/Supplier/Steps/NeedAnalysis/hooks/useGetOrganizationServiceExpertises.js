@@ -32,7 +32,8 @@ function useGetOrganizationServiceExpertises({ show }) {
 		}
 	};
 	useEffect(() => {
-		if (show && show?.origin_location_id && show?.destination_location_id) { getOrganizationServiceExpertises(); }
+		if ((show?.origin_location_id && show?.destination_location_id)
+		|| show?.location_id) { getOrganizationServiceExpertises(); }
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [show]);
 	return {

@@ -1,21 +1,26 @@
-import { Button, Placeholder, Table } from '@cogoport/components';
+import { Button, Pagination, Placeholder, Table } from '@cogoport/components';
 import { useState } from 'react';
 
-import useGetOrganizationServiceSuppliers from '../../../hooks/useListOrganizationExpertiseSuppliers';
-import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationService';
+import useUpdateOrganizationService from '../../hooks/useUpdateOrganizationService';
 
 import EvaluateModal from './EvaluateModal';
+import useGetOrganizationServiceSuppliers from './hooks/useListOrganizationExpertiseSuppliers';
 import styles from './styles.module.css';
 import { columns } from './utils/need-analysis-utils';
 
 function NeedAnalysis({ organization_id, service, getOrganizationService, service_type }) {
+	const ONE = 1;
+	const [currentPage, setCurrentPage] = useState(ONE);
+
 	const {
 		data: serviceExpertiseData,
 		loading:loadingSE,
+		totalCount,
 	} = useGetOrganizationServiceSuppliers(
 		{
 			organization_id,
-			service_type: service,
+			service_type : service,
+			page         : currentPage,
 		},
 	);
 
@@ -42,6 +47,17 @@ function NeedAnalysis({ organization_id, service, getOrganizationService, servic
 					/>
 				)
 			}
+			<div className={styles.pagination}>
+				<Pagination
+					className={styles.pagination}
+					type="number"
+					currentPage={currentPage}
+					totalItems={totalCount || ONE}
+					pageSize={10}
+					onPageChange={setCurrentPage}
+				/>
+			</div>
+
 			<div className={styles.submit_btn}>
 				<Button onClick={() => UpdateOrganizationService()}>
 					Submit & Next

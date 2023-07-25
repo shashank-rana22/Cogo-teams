@@ -2,7 +2,7 @@
 import { Pagination } from '@cogoport/components';
 import { useState } from 'react';
 
-import useListOrganizationServices from './hooks/useLIstOrgnizationServices';
+import useListOrganizationServices from './hooks/useListOrgnizationServices';
 import ListSupplier from './ListSupplier';
 import Stats from './Stats';
 import StatusBar from './StatusBar';
@@ -38,7 +38,7 @@ function Content() {
 						className={styles.pagination}
 						type="number"
 						currentPage={currentPage}
-						totalItems={totalCount}
+						totalItems={totalCount || 1}
 						pageSize={10}
 						onPageChange={setCurrentPage}
 					/>

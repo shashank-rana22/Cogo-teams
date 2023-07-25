@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useListOrganizationExpertiseSuppliers({ organization_id, service_type }) {
+function useListOrganizationExpertiseSuppliers({ organization_id, service_type, page }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list_organization_service_expertise_suppliers',
@@ -16,6 +16,7 @@ function useListOrganizationExpertiseSuppliers({ organization_id, service_type }
 						service_type,
 						status: 'active',
 					},
+					page,
 				},
 			});
 		} catch (err) {

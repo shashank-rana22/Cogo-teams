@@ -1,7 +1,7 @@
 import { Button, Modal, Input, Textarea } from '@cogoport/components';
 import { useState } from 'react';
 
-import useUpdateOrganizationEvaluationTask from '../../../../hooks/useUpdateOrganizationEvaluationTask';
+import useUpdateOrganizationEvaluationTask from '../hooks/useUpdateOrganizationEvaluationTask';
 
 import styles from './styles.module.css';
 

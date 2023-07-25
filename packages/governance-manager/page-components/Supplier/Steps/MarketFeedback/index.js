@@ -2,7 +2,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationService';
+import useUpdateOrganizationService from '../../hooks/useUpdateOrganizationService';
 
 import useCreateOrganizationMarketFeedback from './hooks/useCreateOrganizationMarketFeedback';
 import Layout from './Layout';

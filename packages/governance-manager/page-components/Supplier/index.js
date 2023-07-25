@@ -53,7 +53,11 @@ function Supplier() {
 				/>,
 				due_dilligance    : <SupplierApproval setStatus={setStatus} />,
 				supplier_approval : <SupplierApproval setStatus={setStatus} />,
-				contract_sla      : <ContractSla setStatus={setStatus} />,
+				contract_sla      : <ContractSla
+					setStatus={setStatus}
+					service_type={supplierData?.service}
+					organization_id={supplierData?.organization_id}
+				/>,
 			}[status]}
 
 		</div>

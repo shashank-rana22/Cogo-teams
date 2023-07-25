@@ -3,10 +3,10 @@ import { Table, Toggle, Textarea, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import useCreateOrganizationEvaluation from '../../../hooks/useCreateOrganizationEvaluation';
-import useGetOrganizationEvaluationDetails from '../../../hooks/useGetOrganizationEvaluationDetails';
-import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationService';
+import useUpdateOrganizationService from '../../hooks/useUpdateOrganizationService';
 
+import useCreateOrganizationEvaluation from './hooks/useCreateOrganizationEvaluation';
+import useGetOrganizationEvaluationDetails from './hooks/useGetOrganizationEvaluationDetails';
 import ScoreModal from './ScoreModal';
 import styles from './styles.module.css';
 import { columns, filterData } from './utils/supplier-evaluation-utils';
@@ -82,7 +82,7 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 							className={styles.middle_right}
 							name="a4"
 							size="lg"
-							defaultValue="Rishi"
+							defaultValue=""
 							placeholder="A4"
 						/>
 					</div>
@@ -92,8 +92,8 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 							className={styles.lower_right_feedback}
 							name="a4"
 							size="lg"
-							defaultValue="Rishi"
-							placeholder="A4"
+							defaultValue=""
+							placeholder="Enter your Feedback...."
 							onChange={setFeedback}
 						/>
 					</div>
