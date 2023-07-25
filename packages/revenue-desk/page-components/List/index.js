@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 const loadingArray = [VALUE_ONE, VALUE_TWO, VALUE_THREE, VALUE_FOUR];
 
-function List({ shipmentList, loading, setShowDetailPage }) {
+function List({ shipmentList, loading, setShowDetailPage, filters }) {
 	return (
 		<div className={styles.container}>
 			{loading && (loadingArray).map((item) => (
@@ -19,6 +19,7 @@ function List({ shipmentList, loading, setShowDetailPage }) {
 					key={item?.id}
 					loading={loading}
 					setShowDetailPage={setShowDetailPage}
+					filters={filters}
 				/>
 			)) : null}
 		</div>

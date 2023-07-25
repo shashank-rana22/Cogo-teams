@@ -96,6 +96,7 @@ const useGetRDShipmentList = () => {
 	}, [fetchShipments, filters.service]);
 
 	return {
+		fetchShipments,
 		shipmentList,
 		loading,
 		setFilters,

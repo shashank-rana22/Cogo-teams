@@ -59,21 +59,23 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 					{getOrdinalNumber(service_shipment_count)}
 				</div>
 			</div>
-			<div className={styles.single_box}>
-				{!['ftl_freight', 'ltl_freight'].includes(shipment_type)
-					? (
-						<div style={{ display: 'flex' }}>
-							{getOrdinalNumber(service_trade_type_shipment_count)}
-						</div>
-					) : null}
-			</div>
-			<div className={styles.port_pair_container}>
 
-				<div style={{ display: 'flex' }}>
-					{getOrdinalNumber(service_port_pair_shipment_count)}
+			{!['fcl_freight', 'air_freight', 'lcl_freight'].includes(shipment_type) && (
+				<div className={styles.single_box}>
+					<div style={{ display: 'flex' }}>
+						{getOrdinalNumber(service_trade_type_shipment_count)}
+					</div>
 				</div>
+			)}
 
-			</div>
+			{['fcl_freight', 'air_freight', 'lcl_freight'].includes(shipment_type) && (
+				<div className={styles.port_pair_container}>
+					<div style={{ display: 'flex' }}>
+						{getOrdinalNumber(service_port_pair_shipment_count)}
+					</div>
+
+				</div>
+			)}
 			<div className={styles.single_box}>
 				<div style={{ display: 'flex' }}>
 					<div>{total_shipment_count}</div>
