@@ -3,14 +3,14 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-import Header from '../../common/Header';
+import Header from '../../../common/Header';
+import { LoadingState } from '../commons/LoadingState';
+import DotLoader from '../commons/LoadingState/DotLoader';
+import { CheckoutContext } from '../context';
+import getRedirectionDetails from '../utils/getRedirectionDetails';
 
-import { LoadingState } from './commons/LoadingState';
-import DotLoader from './commons/LoadingState/DotLoader';
-import CheckoutContext from './context';
 import styles from './styles.module.css';
 import useCheckout from './useCheckout';
-import getRedirectionDetails from './utils/getRedirectionDetails';
 
 function Checkout({ checkout_type = '' }) {
 	const { query, entity_types, partner_id } = useSelector(({ general, profile }) => ({

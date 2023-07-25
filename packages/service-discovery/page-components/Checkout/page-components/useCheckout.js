@@ -1,12 +1,13 @@
 import { isEmpty } from '@cogoport/utils';
 import { useMemo, useState } from 'react';
 
-import useGetCheckout from './hooks/useGetCheckout';
-import useGetOrganization from './hooks/useGetOrganization';
-import useUpdateCheckout from './hooks/useUpdateCheckout';
-import AirCheckout from './page-components/AirCheckout';
-import FclCheckout from './page-components/FclCheckout';
-import LclCheckout from './page-components/LclCheckout';
+import useGetCheckout from '../hooks/useGetCheckout';
+import useGetOrganization from '../hooks/useGetOrganization';
+import useUpdateCheckout from '../hooks/useUpdateCheckout';
+
+import AirCheckout from './AirCheckout';
+import FclCheckout from './FclCheckout';
+import LclCheckout from './LclCheckout';
 
 const BREADCRUMB_MAPPING = {
 	draft                : 'Add or Edit Margin',
