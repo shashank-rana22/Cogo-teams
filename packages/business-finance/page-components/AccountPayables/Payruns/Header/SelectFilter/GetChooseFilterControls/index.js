@@ -15,11 +15,15 @@ const GetChooseFilterControls = ({ activePayrunTab, overseasData, isInvoiceView 
 
 	const bankDetails = powerControls(banks);
 	const flatBankDetails = (bankDetails || []).flat();
-	if (activePayrunTab === 'PAID') {
-		return PAYRUNS_BANK_DATE_FILTERS(flatBankDetails, overseasData);
-	}
-	if (activePayrunTab === 'UPLOAD_HISTORY') {
-		return UPLOAD_HISTORY_FILTERS;
+
+	const filtersControlsMapping = {
+		PAID           : () => PAYRUNS_BANK_DATE_FILTERS(flatBankDetails, overseasData),
+		UPLOAD_HISTORY : () => UPLOAD_HISTORY_FILTERS,
+	};
+
+	const filterFunction = filtersControlsMapping[activePayrunTab];
+	if (filterFunction) {
+		return filterFunction();
 	}
 	if (activePayrunTab !== 'PAID' && isInvoiceView) {
 		return INVOICE_VIEW_FILTERS;
