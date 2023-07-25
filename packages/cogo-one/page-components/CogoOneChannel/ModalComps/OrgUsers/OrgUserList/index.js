@@ -14,13 +14,15 @@ function OrgUsersList({
 	setActiveTab = () => {},
 	setOpenKamContacts = () => {},
 	setOrgId = () => {},
+	endPoint = '',
+	filterKey = '',
 }) {
 	const {
 		formattedOrgUsersList = [],
 		loading = false,
 		setSearch = () => {},
 		search = '',
-	} = useListOrganizationUsers({ organizationId: orgId });
+	} = useListOrganizationUsers({ organizationId: orgId, endPoint, filterKey });
 
 	const onCardClick = ({ item }) => {
 		const {

@@ -56,6 +56,10 @@
 .list_container {
 	height: 90%;
 	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .select_org_text {
