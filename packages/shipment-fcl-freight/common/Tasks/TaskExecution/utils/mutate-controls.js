@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const mutateControls = (
 	{
 		controls,
@@ -17,6 +19,7 @@ const mutateControls = (
 
 		if (control?.name === 'commodity_category') {
 			newControl.options = options || [];
+			newControl.key = options?.[GLOBAL_CONSTANTS.zeroth_index]?.value;
 		}
 		if (control?.name === 'commodity_subtype') {
 			newControl.options = (allCommodity || [])

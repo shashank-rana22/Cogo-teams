@@ -138,7 +138,7 @@ const injectValues = ({
 			if (ctrl?.name === 'commodity_category') {
 				if (shipment_data?.commodity_category) {
 					controls[index].value = shipment_data?.commodity_category;
-					controls[index].disabled = true;
+					controls[index].disabled = !!shipment_data?.commodity_category;
 				}
 			}
 
