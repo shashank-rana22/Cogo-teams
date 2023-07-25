@@ -11,11 +11,11 @@
 .details_text {
 	margin-top: 1px;
 	margin-left: 4px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 500;
-	color: #a5a5a5;
+	color: var(--color-secondary-greyscale-4);
 }
 
 .text {
-	color: #bdbdbd;
+	color: var(--color-secondary-greyscale-4);
 }

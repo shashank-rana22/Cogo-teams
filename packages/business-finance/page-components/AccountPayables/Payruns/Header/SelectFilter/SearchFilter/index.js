@@ -12,18 +12,20 @@ function SearchFilter({
 	activePayrunTab = '', isInvoiceView = false, selectedPayrun = null, setIsInvoiceView = () => {},
 }) {
 	const { search } = globalFilters;
-	let searchType = '';
-	if (activePayrunTab === 'PAID') {
-		searchType = 'Search by Invoice/SID/Supplier/UTR/BRN';
-	} else if (activePayrunTab === 'UPLOAD_HISTORY') {
-		searchType = 'Search by File Name';
-	} else if (isInvoiceView) {
-		searchType = 'Search by Invoice/SID/Payrun/Supplier ';
-	} else if (selectedPayrun) {
-		searchType = 'Search by Invoice Number/SID';
-	} else {
-		searchType = 'Search by PayRun Name';
-	}
+
+	const SEARCH_PLACEHOLDER_MAPPING = {
+		PAID           : 'Search by Invoice/SID/Supplier/UTR/BRN',
+		UPLOAD_HISTORY : 'Search by File Name',
+		isInvoiceView  : 'Search by Invoice/SID/Payrun/Supplier',
+		selectedPayrun : 'Search by Invoice Number/SID',
+		default        : 'Search by PayRun Name',
+	};
+
+	const searchType = SEARCH_PLACEHOLDER_MAPPING[activePayrunTab]
+		|| (isInvoiceView && SEARCH_PLACEHOLDER_MAPPING.isInvoiceView)
+		|| (selectedPayrun && SEARCH_PLACEHOLDER_MAPPING.selectedPayrun)
+		|| SEARCH_PLACEHOLDER_MAPPING.default;
+
 	return (
 		<div className={styles.right_filter}>
 			<div>
@@ -52,7 +54,6 @@ function SearchFilter({
 									onChange={() => setIsInvoiceView(!isInvoiceView)}
 									showOnOff
 									size="md"
-									disabled={false}
 									onLabel="Invoices"
 									offLabel="Payrun"
 								/>

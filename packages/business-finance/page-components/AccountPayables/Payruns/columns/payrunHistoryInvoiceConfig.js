@@ -7,18 +7,16 @@ export const payrunHistoryInvoiceConfig = {
 		fontWeight : 600,
 	},
 	bodyStyles: {
-		color      : '#333333',
-		fontWeight : '400',
-		fontSize   : '12px',
-		borderTop  : '2px solid #F68B21',
+		color     : '#333333',
+		fontSize  : '12px',
+		borderTop : '2px solid #F68B21',
 	},
 	fields: [
 		{
-			key    : 'organizationName',
-			label  : 'Name',
-			span   : 1.4,
-			func   : 'renderTooltip',
-			styles : { marginLeft: '-8px' },
+			key   : 'organizationName',
+			label : 'Name',
+			span  : 1.4,
+			func  : 'renderTooltip',
 		},
 		{
 			label  : 'Invoice Number',

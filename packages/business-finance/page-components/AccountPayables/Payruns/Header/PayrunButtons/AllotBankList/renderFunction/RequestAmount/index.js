@@ -21,6 +21,7 @@ function RequestAmount({ itemData = {}, selectedPayrun = null, checkedRow = null
 		<div>
 			{balance < totalValue ? (
 				<Button
+					type="button"
 					size="sm"
 					className="secondary"
 					onClick={() => {
@@ -83,6 +84,7 @@ function RequestAmount({ itemData = {}, selectedPayrun = null, checkedRow = null
 					</Modal.Body>
 					<Modal.Footer>
 						<Button
+							type="reset"
 							themeType="secondary"
 							className={styles.button}
 							onClick={() => {
@@ -92,7 +94,7 @@ function RequestAmount({ itemData = {}, selectedPayrun = null, checkedRow = null
 							Cancel
 
 						</Button>
-						<Button disabled={loading} onClick={handleSubmit(onRequest)}>
+						<Button type="submit" disabled={loading} onClick={handleSubmit(onRequest)}>
 							Send Request
 						</Button>
 					</Modal.Footer>

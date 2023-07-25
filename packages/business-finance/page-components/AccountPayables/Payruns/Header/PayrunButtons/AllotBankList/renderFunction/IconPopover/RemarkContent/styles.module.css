@@ -2,9 +2,9 @@
 	.history_tl_container ul.tl li {
 		position: relative;
 		padding: 0 30px 30px;
-		font-size: 12px;
+		font-size: var(--font-size-md);
 		list-style: none;
-		border-left: 1px solid #f68b21;
+		border-left: 1px solid var(--color-accent-orange-2);
 	}
 
 	.history_tl_container ul.tl li:last-child {
@@ -16,8 +16,8 @@
 		position: absolute;
 		left: -8px;
 		content: " ";
-		background: #f68b21;
-		border: 8px solid #f68b21;
+		background: var(--color-accent-orange-2);
+		border: 8px solid var(--color-accent-orange-2);
 		border-radius: 500%;
 	}
 }
@@ -29,14 +29,13 @@
 
 .amount_text {
 	width: 100px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
-	color: #000;
 }
 
 .date_name_text {
 	flex-direction: column;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 500;
-	color: #a5a5a5;
+	color: var(--color-secondary-greyscale-3);
 }

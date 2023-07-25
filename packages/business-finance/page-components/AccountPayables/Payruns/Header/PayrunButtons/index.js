@@ -30,15 +30,14 @@ function PayrunButtons({
 	if (activePayrunTab === 'AUDITED' && !isInvoiceView) {
 		return (
 			<div>
-				<div>
-					<Button
-						className={styles.upload_button}
-						disabled={allotBankDisabledCondition}
-						onClick={() => { setShowAllotBank(true); getEntityBank(); }}
-					>
-						ALLOT BANK
-					</Button>
-				</div>
+				<Button
+					type="button"
+					className={styles.upload_button}
+					disabled={allotBankDisabledCondition}
+					onClick={() => { setShowAllotBank(true); getEntityBank(); }}
+				>
+					ALLOT BANK
+				</Button>
 				{showAllotBank ? (
 					<AllotBankList
 						selectedPayrun={selectedPayrun}

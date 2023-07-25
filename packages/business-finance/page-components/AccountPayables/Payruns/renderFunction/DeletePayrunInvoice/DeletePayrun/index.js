@@ -29,12 +29,14 @@ function DeletePayrun({
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
+						type="reset"
 						themeType="secondary"
 						style={{ marginRight: '20px' }}
 					>
 						Cancel
 					</Button>
 					<Button
+						type="submit"
 						disabled={deletePayrunLoading}
 						onClick={() => deletePayrun(id)}
 					>

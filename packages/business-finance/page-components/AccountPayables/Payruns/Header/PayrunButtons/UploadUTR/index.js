@@ -60,6 +60,7 @@ function UploadUTR({
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
+						type="reset"
 						themeType="secondary"
 						style={{ marginRight: '12px' }}
 						onClick={() => setShowUploadUTR(false)}
@@ -68,6 +69,7 @@ function UploadUTR({
 					</Button>
 					<Button
 						onClick={() => upload(fileValue)}
+						type="submit"
 						disabled={!fileValue || loading}
 					>
 						UPLOAD

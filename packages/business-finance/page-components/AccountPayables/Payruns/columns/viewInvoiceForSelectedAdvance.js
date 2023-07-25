@@ -8,10 +8,9 @@ export const ADVANCE_PAYMENT_VIEW_INVOICE = {
 		marginLeft   : '8px',
 	},
 	bodyStyles: {
-		color      : ' #333333',
-		fontWeight : '400',
-		fontSize   : '12px',
-		borderTop  : '1.8px solid #F68B21',
+		color     : ' #333333',
+		fontSize  : '12px',
+		borderTop : '1.8px solid #F68B21',
 	},
 	fields: [
 		{

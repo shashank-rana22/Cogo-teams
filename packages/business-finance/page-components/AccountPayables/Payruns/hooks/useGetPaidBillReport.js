@@ -34,13 +34,13 @@ const useGetPaidBillReport = ({
 		state       : activePayrunTab,
 	});
 
-	const sendInvoiceReport = async (dates) => {
+	const sendInvoiceReport = (dates) => {
 		if (dates === 'Invalid_Range') {
 			Toast.error('Please select a range less then a month');
 		} else if (dates) {
 			const payload = getSendReportPayload();
 			try {
-				await trigger({
+				trigger({
 					params: payload,
 				});
 				setNewDate();

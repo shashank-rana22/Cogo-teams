@@ -50,13 +50,14 @@ function AllotBankList({
 				<Modal.Footer>
 
 					<Button
+						type="reset"
 						disabled={loading}
 						className={styles.button}
 						onClick={() => setShowAllotBank(false)}
 					>
 						Cancel
 					</Button>
-					<Button disabled={!selectedBankId || loading} onClick={initiatePaymentClick}>
+					<Button type="submit" disabled={!selectedBankId || loading} onClick={initiatePaymentClick}>
 						Initiate Payment
 					</Button>
 
