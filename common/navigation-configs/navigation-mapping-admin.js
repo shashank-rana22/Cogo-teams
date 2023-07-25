@@ -2428,6 +2428,15 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	manager_dashboard: {
+		key           : 'manager_dashboard',
+		title         : 'Manager Dashboard',
+		icon          : IcMDashboard,
+		href          : '/v2/manager-dashboard',
+		as            : '/v2/manager-dashboard',
+		type          : 'link',
+		possible_apis : apis.performance_manager_dashboard,
+	},
 	employee_dashboard: {
 		key           : 'employee_dashboard',
 		title         : 'Employee Dashboard',
@@ -2437,15 +2446,6 @@ const navigationMappingAdmin = {
 		icon          : IcMDashboard,
 		possible_apis : apis.employee_performance_dashboard,
 		main_apis     : [],
-	},
-	manager_dashboard: {
-		key           : 'manager_dashboard',
-		title         : 'Manager Dashboard',
-		icon          : IcMDashboard,
-		href          : '/v2/manager-dashboard',
-		as            : '/v2/manager-dashboard',
-		type          : 'link',
-		possible_apis : apis.performance_manager_dashboard,
 		module_type   : 'dashboards',
 	},
 	ftl_admin: {

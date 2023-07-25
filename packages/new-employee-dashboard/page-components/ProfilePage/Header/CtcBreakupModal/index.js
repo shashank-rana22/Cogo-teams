@@ -23,8 +23,10 @@ export default function CtcBreakupModal({
 
 	const {
 		loading,
-		onFinalSubmit,
+		onFinalSubmit, shareOfferLetter, setShareOfferLetter,
 	} = usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch });
+
+	const { is_offer_letter_applicable } = detail || {};
 
 	const {
 		handleSubmit,
@@ -58,6 +60,10 @@ export default function CtcBreakupModal({
 					setInitialQuestion={setInitialQuestion}
 					control={control}
 					error={error}
+					shareOfferLetter={shareOfferLetter}
+					setShareOfferLetter={setShareOfferLetter}
+					is_offer_letter_applicable={is_offer_letter_applicable}
+
 				/>
 			</Modal.Body>
 
@@ -79,6 +85,8 @@ export default function CtcBreakupModal({
 								setInitialQuestion={setInitialQuestion}
 								setError={setError}
 								loading={loading}
+								shareOfferLetter={shareOfferLetter}
+								setShareOfferLetter={setShareOfferLetter}
 								onFinalSubmit={onFinalSubmit}
 							/>
 						)}
