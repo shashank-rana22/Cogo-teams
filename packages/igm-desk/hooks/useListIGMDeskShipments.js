@@ -1,4 +1,4 @@
-import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -38,8 +38,7 @@ export default function useListIGMDeskShipments() {
 				setData(res.data || {});
 			}
 		} catch (err) {
-			const message = err?.response?.data?.message || err?.message || 'Something went wrong !!';
-			Toast.error(message);
+			toastApiError(err);
 			setData(EMPTY_DATA);
 		}
 	}, [filters, setFilters, tabState, trigger, user?.id]);

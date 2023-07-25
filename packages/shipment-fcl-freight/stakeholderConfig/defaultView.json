@@ -32,7 +32,6 @@
     "tasks":{
         "feature_permission" : { "api_permission":["list_tasks"]  },
         "tab_title":"Timeline and Tasks",
-        "checked_show_my_tasks": false,
         "show_others_tasks": true,
         "show_igm_tasks": false
     },
@@ -50,8 +49,8 @@
         "tab_title":"Documents",
         "default_wallet":"trade_documents",
         "feature_permission": { "api_permission":["list_documents", "list_tasks", "get_process"]},
-        "can_edit_documents": false,
-        "show_igm_docs": false
+        "can_edit_documents": true,
+        "show_igm_docs": true
     },
 
     "emails":{
