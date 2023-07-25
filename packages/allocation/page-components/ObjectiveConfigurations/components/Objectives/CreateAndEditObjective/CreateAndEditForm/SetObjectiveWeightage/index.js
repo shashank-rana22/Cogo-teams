@@ -12,7 +12,7 @@ const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 function SetObjectiveWeightage(props) {
 	const { activeTabDetails, setActiveTabDetails, setActiveStep, formValues } = props;
 
-	const { list, getNextPage, paginationData } = useGetObjectiveUserMappings({ formValues });
+	const { list, listLoading, getNextPage, paginationData } = useGetObjectiveUserMappings({ formValues });
 
 	const { control, createLoading, onCreate } = useCreateObjective({ formValues, setActiveTabDetails });
 
@@ -95,6 +95,7 @@ function SetObjectiveWeightage(props) {
 
 			<ListObjectiveUserMappings
 				list={list}
+				listLoading={listLoading}
 				control={control}
 				formValues={formValues}
 				getNextPage={getNextPage}

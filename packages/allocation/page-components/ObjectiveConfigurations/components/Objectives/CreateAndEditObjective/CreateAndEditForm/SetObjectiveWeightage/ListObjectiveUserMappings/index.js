@@ -1,12 +1,22 @@
 import { Pagination } from '@cogoport/components';
 
+import LoadingState from '../../../../../../common/LoadingState';
+
 import ListCard from './ListCard';
 import styles from './styles.module.css';
 
 function ListObjectiveUserMappings(props) {
-	const { list, control, formValues, getNextPage, paginationData } = props;
+	const { list, listLoading, control, formValues, getNextPage, paginationData } = props;
 
-	const { page, page_limit, total_count } = paginationData || {};
+	const { page = 1, page_limit = 0, total_count = 0 } = paginationData || {};
+
+	if (listLoading) {
+		return (
+			<div className={styles.loading_state_container}>
+				<LoadingState loadingRows={3} />
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

@@ -4,7 +4,7 @@ const LOADING_ROWS = 3;
 
 function LoadingState() {
 	return (
-		<div>
+		<>
 			<Placeholder height="60px" margin="16px 0px" />
 
 			{[...Array(LOADING_ROWS).keys()].map((item) => (
@@ -14,7 +14,7 @@ function LoadingState() {
 					margin="12px 0"
 				/>
 			))}
-		</div>
+		</>
 	);
 }
 

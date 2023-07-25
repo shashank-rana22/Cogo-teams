@@ -1,7 +1,8 @@
-import { Pagination, Loader } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../common/EmptyState';
+import LoadingState from '../../../common/LoadingState';
 
 import ListCard from './ListCard';
 import styles from './styles.module.css';
@@ -128,7 +129,7 @@ function ListAgents(props) {
 
 	const { page, page_limit, total_count } = paginationData;
 
-	if (loading) return <Loader />;
+	if (loading) return <LoadingState loadingRows={5} />;
 
 	if (isEmpty(list)) {
 		return 			(
