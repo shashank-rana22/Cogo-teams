@@ -9,7 +9,7 @@
 	border-radius: 6px;
 	box-shadow: 0 0 44px 0 rgb(98 127 172 / 20%);
 	transition: 0.5s ease;
-	animation: 0.5s filter-card both;
+	animation: 0.2s filter-card both;
 
 	@keyframes filter-card {
 		0% {
@@ -44,7 +44,7 @@
 	z-index: 1;
 	display: flex;
 	align-items: center;
-	animation: 0.8s form both;
+	animation: 0.3s form both;
 
 	@keyframes form {
 		0% {
@@ -60,7 +60,7 @@
 
 .user_actions {
 	display: flex;
-	margin-top: 8px;
+	margin-top: 4px;
 }
 
 .clear_filters {
@@ -74,7 +74,6 @@
 .template_container {
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
 	margin-top: 10px;
 }
 

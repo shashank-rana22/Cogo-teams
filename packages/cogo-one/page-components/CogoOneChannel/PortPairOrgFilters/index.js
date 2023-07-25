@@ -138,7 +138,7 @@ function PortPairOrgFilters({ setOpenSpContacts = () => {}, setActiveTab = () =>
 					<div className={styles.user_actions}>
 						<Button
 							loading={serviceProvidersloading}
-							size="sm"
+							size="md"
 							themeType="primary"
 							onClick={handleSubmit(onSubmit)}
 							type="button"
@@ -148,7 +148,7 @@ function PortPairOrgFilters({ setOpenSpContacts = () => {}, setActiveTab = () =>
 
 						<div className={cl`${styles.clear_filters} ${isEmpty(errors) ? styles.action : ''}`}>
 							<Button
-								size="sm"
+								size="md"
 								themeType="secondary"
 								onClick={handleClear}
 								type="button"
@@ -169,6 +169,7 @@ function PortPairOrgFilters({ setOpenSpContacts = () => {}, setActiveTab = () =>
 						selectedUsers={selectedUsers}
 						setOpenSpContacts={setOpenSpContacts}
 						setModalType={setModalType}
+						modalType={modalType}
 					/>
 
 					{modalType && (

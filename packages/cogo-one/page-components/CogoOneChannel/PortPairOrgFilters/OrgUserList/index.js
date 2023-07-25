@@ -1,4 +1,4 @@
-import { Placeholder, Checkbox, Button } from '@cogoport/components';
+import { Placeholder, Checkbox, Button, cl } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
@@ -17,6 +17,7 @@ function OrgUsersList({
 	setSelectedUsers = () => {},
 	selectedUsers = {},
 	setOpenSpContacts = () => {},
+	modalType = '',
 }) {
 	const {
 		formattedOrgUsersList = [],
@@ -69,7 +70,7 @@ function OrgUsersList({
 	const modifiedList = loading ? [...Array(LOADER_COUNT).fill({})] : formattedOrgUsersList;
 
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${!modalType || isEmpty(modifiedList) ? styles.empty_list : ''}`}>
 			<div className={styles.list_container} onScroll={handleScroll}>
 				{!isEmpty(modifiedList) ? modifiedList?.map((eachUser) => {
 					const {
@@ -108,18 +109,17 @@ function OrgUsersList({
 				}) : <div className={styles.no_data_found}>No Users Found</div>}
 			</div>
 
-			{!isEmpty(selectedUsers) ? (
-				<div className={styles.send_action}>
-					<Button
-						size="sm"
-						themeType="primary"
-						onClick={() => setModalType('bulk_communication')}
-						type="button"
-					>
-						Choose Template
-					</Button>
-				</div>
-			) : null}
+			<div className={styles.send_action}>
+				<Button
+					size="md"
+					themeType="accent"
+					disabled={isEmpty(selectedUsers)}
+					onClick={() => setModalType('bulk_communication')}
+					type="button"
+				>
+					Choose Template
+				</Button>
+			</div>
 
 		</div>
 	);

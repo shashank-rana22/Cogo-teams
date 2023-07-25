@@ -1,10 +1,15 @@
 .container {
 	position: relative;
 	width: 280px;
-	padding: 10px;
-	margin: 12px 20px 12px 0;
+	padding: 8px;
 	overflow-y: hidden;
-	border: 1px solid #e0e0e0;
+	border-top: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+}
+
+.empty_list {
+	border-right: 1px solid #e0e0e0;
 }
 
 .placeholder_styles {
@@ -112,17 +117,4 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 8px;
-	animation: field-name 0.5s both;
-
-	@keyframes field-name {
-		0% {
-			opacity: 0;
-			transform: translate3d(-30px, 0, 0);
-		}
-
-		100% {
-			opacity: 1;
-			transform: none;
-		}
-	}
 }
