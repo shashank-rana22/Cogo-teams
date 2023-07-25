@@ -49,7 +49,7 @@
         "tab_title":"Documents",
         "default_wallet":"trade_documents",
         "feature_permission": { "api_permission":["list_documents", "list_tasks", "get_process"]},
-        "can_edit_documents": false,
+        "can_edit_documents": true,
         "show_igm_docs": false
     },
 
