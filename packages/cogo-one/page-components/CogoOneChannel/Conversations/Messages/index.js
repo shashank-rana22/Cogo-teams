@@ -36,7 +36,6 @@ function Messages({
 }) {
 	const activeRoomSnapshotListener = useRef(null);
 
-	const [headertags, setheaderTags] = useState('');
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
@@ -179,8 +178,6 @@ function Messages({
 			<div className={styles.container}>
 				<Header
 					setOpenModal={setOpenModal}
-					setheaderTags={setheaderTags}
-					headertags={headertags}
 					assignChat={assignChat}
 					formattedData={formattedData}
 					updateChat={updateChat}

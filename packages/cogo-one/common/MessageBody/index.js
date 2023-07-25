@@ -1,14 +1,4 @@
-import { cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMUserAllocations, IcMEyeclose } from '@cogoport/icons-react';
-
-import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
-import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
-
-import CustomFileDiv from './CustomFileDiv';
-import Order from './Order';
-import styles from './styles.module.css';
-import UserActivityMessages from './UserActivityMessages';
+import { MESSAGE_TYPE_WISE_MAPPING } from './messageBodyMapping';
 
 function MessageBody({
 	response = {},
@@ -17,140 +7,25 @@ function MessageBody({
 	formattedData = {},
 }) {
 	const { message = '', media_url = '', profanity_check = '' } = response;
+
 	const hasProfanity = profanity_check === 'nudity';
+
 	const fileExtension = media_url?.split('.').pop();
-	const { renderURLText, renderBoldText } = whatsappTextFormatting();
 
-	const renderText = (txt = '') => {
-		let newTxt = renderURLText(txt);
-		newTxt = renderBoldText(newTxt);
-		return newTxt;
-	};
+	const Component = MESSAGE_TYPE_WISE_MAPPING[message_type] || MESSAGE_TYPE_WISE_MAPPING.default;
 
-	function ShowMessage() {
-		return message_type === 'template'
-			? (
-				<div dangerouslySetInnerHTML={{
-					__html: message.replace(GLOBAL_CONSTANTS
-						.regex_patterns.occurrences_of_line_breaks, '<br>'),
-				}}
-				/>
-			)
-			: (
-				<div dangerouslySetInnerHTML={{
-					__html: renderText(message.replace(GLOBAL_CONSTANTS
-						.regex_patterns.occurrences_of_line_breaks, '<br>')),
-				}}
-				/>
-			);
-	}
-
-	function LoadMedia(type) {
-		switch (type) {
-			case 'image':
-				return (
-					<img
-						src={media_url}
-						alt={message_type}
-						className={cl`${styles.object_styles}
-						 ${hasProfanity ? styles.profanity_blur : ''}`}
-					/>
-				);
-			case 'audio':
-				return (
-					<audio
-						controls
-						className={styles.object_styles}
-					>
-						<source src={media_url} type={`audio/${fileExtension}`} />
-					</audio>
-				);
-			case 'video':
-				return (
-					<video
-						controls
-						className={styles.object_styles}
-					>
-						<source src={media_url} type={`video/${fileExtension}`} />
-					</video>
-				);
-			default:
-				return null;
-		}
-	}
-
-	if (MESSAGE_MAPPING.media.includes(message_type)) {
-		return (
-			<>
-				<div
-					className={cl`${styles.clickable_object} ${hasProfanity ? styles.reduce_blur : ''}`}
-					role="presentation"
-					onClick={() => {
-						window.open(
-							media_url,
-							'_blank',
-							'noreferrer',
-						);
-					}}
-				>
-					{hasProfanity && (
-						<div className={styles.sensitive_content}>
-							<IcMEyeclose fill="#828282" />
-							<div className={styles.sensitive_text}>Sensitive Content</div>
-						</div>
-					)}
-					{LoadMedia(message_type)}
-				</div>
-
-				<ShowMessage />
-			</>
-		);
-	}
-	if (MESSAGE_MAPPING.document.includes(message_type)) {
-		return (
-			<>
-				<CustomFileDiv mediaUrl={media_url} />
-				<ShowMessage />
-			</>
-		);
-	}
-	if (message_type === 'contacts') {
-		const { name: { formatted_name = '' } = {}, phones = [] } = JSON.parse(message || '') || {};
-
-		return (
-			<div className={styles.contact_card}>
-				<IcMUserAllocations height="30px" width="30px" fill="#7278AD" className={styles.user_allocation} />
-				<div>
-					<div className={styles.contact_name}>
-						{formatted_name}
-					</div>
-					{(phones || []).map(({ phone = '' }) => (
-						<div
-							key={phone}
-							className={styles.mobile_no}
-						>
-							{phone}
-						</div>
-					))}
-				</div>
-			</div>
-		);
-	}
-
-	if (message_type === 'event') {
-		return (
-			<UserActivityMessages
-				eachMessage={eachMessage}
-				formattedData={formattedData}
-			/>
-		);
-	}
-
-	if (message_type === 'order') {
-		return <Order message={message} />;
-	}
-
-	return <ShowMessage />;
+	return (
+		<Component
+			message={message}
+			mediaUrl={media_url}
+			hasProfanity={hasProfanity}
+			fileExtension={fileExtension}
+			messageType={message_type}
+			eachMessage={eachMessage}
+			formattedData={formattedData}
+			response={response}
+		/>
+	);
 }
 
 export default MessageBody;

@@ -22,7 +22,7 @@ function MessagesThread({
 	lastPage = false,
 	getNextData = () => {},
 	messagesData = [],
-	activeMessageCard = () => {},
+	activeMessageCard = {},
 	formattedData = {},
 	setRaiseTicketModal = () => {},
 	hasNoFireBaseRoom = false,

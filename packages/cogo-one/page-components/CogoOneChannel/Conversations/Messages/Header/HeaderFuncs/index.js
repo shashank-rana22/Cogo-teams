@@ -1,42 +1,31 @@
 import { Popover, Select, Button } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { v1 as uuid } from 'uuid';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function TagsPopOver({
+function PopoverContent({
+	loading = false,
+	filteredOptions = [],
 	prevtags = [],
-	setheaderTags = () => {},
-	headertags = '',
-	isVisible,
 	setIsVisible = () => {},
 	updateChat = () => {},
-	hasPermissionToEdit = false,
-	tagOptions = [],
-	loading = false,
 }) {
-	const filteredOptions = tagOptions.filter(
-		({ value }) => !prevtags?.includes(value),
-	);
-	const resetFunc = () => {
-		setheaderTags(null);
-		setIsVisible(false);
-	};
+	const [headertags, setheaderTags] = useState('');
 
-	const popOverContent = (
+	return (
 		<div>
 			<div className={styles.input_container}>
 				<Select
-					key={uuid()}
-					onChange={(e) => setheaderTags(e)}
+					onChange={setheaderTags}
 					value={loading ? '' : headertags}
 					options={filteredOptions}
 					placeholder="Select Tags"
 				/>
 			</div>
 			<div className={styles.buttons_container}>
-				<Button size="sm" themeType="tertiary" onClick={resetFunc}>
+				<Button size="sm" themeType="tertiary" onClick={() => setIsVisible(false)}>
 					reset
 				</Button>
 				<Button
@@ -46,7 +35,6 @@ function TagsPopOver({
 					onClick={() => {
 						updateChat({ tags: [headertags, ...(prevtags || [])] });
 						setIsVisible(false);
-						resetFunc();
 					}}
 				>
 					submit
@@ -54,21 +42,48 @@ function TagsPopOver({
 			</div>
 		</div>
 	);
-	if (!isEmpty(filteredOptions) && hasPermissionToEdit) {
-		return (
-			<Popover
-				placement="bottom"
-				interactive
-				render={popOverContent}
-				onClickOutside={resetFunc}
-				visible={isVisible}
-			>
-				<div className={styles.flex}>
-					<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} width={18} height={18} />
-				</div>
-			</Popover>
-		);
+}
+
+function TagsPopOver({
+	prevtags = [],
+	updateChat = () => {},
+	hasPermissionToEdit = false,
+	tagOptions = [],
+	loading = false,
+}) {
+	const [isVisible, setIsVisible] = useState(false);
+
+	const filteredOptions = tagOptions.filter(
+		({ value }) => !prevtags?.includes(value),
+	);
+
+	if (isEmpty(filteredOptions) || !hasPermissionToEdit) {
+		return null;
 	}
+
+	return (
+		<Popover
+			placement="bottom"
+			interactive
+			render={(
+				isVisible && (
+					<PopoverContent
+						loading={loading}
+						filteredOptions={filteredOptions}
+						prevtags={prevtags}
+						setIsVisible={setIsVisible}
+						updateChat={updateChat}
+					/>
+				)
+			)}
+			onClickOutside={() => setIsVisible(false)}
+			visible={isVisible}
+		>
+			<div className={styles.flex}>
+				<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} width={18} height={18} />
+			</div>
+		</Popover>
+	);
 }
 
 export default TagsPopOver;

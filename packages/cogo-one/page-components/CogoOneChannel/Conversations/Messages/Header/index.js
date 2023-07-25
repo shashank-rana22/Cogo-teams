@@ -1,7 +1,6 @@
 import { Button, cl } from '@cogoport/components';
 import { IcMProfile, IcMRefresh, IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import HeaderName from '../../../../../common/HeaderName';
@@ -17,8 +16,6 @@ import styles from './styles.module.css';
 function Header({
 	setOpenModal = () => {},
 	formattedData = {},
-	setheaderTags = () => {},
-	headertags = '',
 	updateChat = () => {},
 	loading = false,
 	closeModal = () => {},
@@ -43,8 +40,6 @@ function Header({
 	supplierLoading = false,
 	hasNoFireBaseRoom = false,
 }) {
-	const [isVisible, setIsVisible] = useState(false);
-
 	const { requestToJoinGroup, dissmissTransferRequest } = useTransferChat({ firestore, activeMessageCard });
 
 	const openAssignModal = () => {
@@ -112,10 +107,6 @@ function Header({
 					<div className={styles.flex}>
 						<TagsPopOver
 							prevtags={chat_tags}
-							headertags={headertags}
-							setheaderTags={setheaderTags}
-							isVisible={isVisible}
-							setIsVisible={setIsVisible}
 							updateChat={updateChat}
 							loading={loading}
 							tagOptions={tagOptions}
