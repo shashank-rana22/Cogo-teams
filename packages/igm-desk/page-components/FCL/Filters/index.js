@@ -17,7 +17,7 @@ const ICON = {
 	IcMDescending : <IcMDescending style={STYLES_ICON} />,
 };
 
-const handleSortState = (state, setState, sort_by, showCurrentFilter, setShowCurrentFilter, setFilters) => {
+const handleSortState = (state, setState, sort_by, setShowCurrentFilter, setFilters) => {
 	let sort_type;
 	if (sort_by === 'schedule_arrival') {
 		sort_type = state ? 'asc' : 'desc';
@@ -32,7 +32,7 @@ const handleSortState = (state, setState, sort_by, showCurrentFilter, setShowCur
 		...prev,
 		sort_by,
 		sort_type,
-		current_filter: showCurrentFilter,
+		current_filter: sort_by,
 	}));
 };
 
@@ -47,7 +47,6 @@ function ButtonFilter({
 					value,
 					setState,
 					sort_by,
-					showCurrentFilter,
 					setShowCurrentFilter,
 					setFilters,
 				)}
@@ -71,10 +70,10 @@ function ButtonFilter({
 function Filters() {
 	const { filters = {}, setFilters = () => {}, tabState = {} } = useContext(IGMDeskContext);
 
-	const { q = '', fileType, current_filter } = filters || {};
+	const { q = '', fileType, current_filter, sort_by } = filters || {};
 
-	const [showArrivalDesc, setShowArrivalDesc] = useState(true);
-	const [showDepartureDesc, setShowDepartureDesc] = useState(true);
+	const [showArrivalDesc, setShowArrivalDesc] = useState(sort_by === 'schedule_arrival');
+	const [showDepartureDesc, setShowDepartureDesc] = useState(sort_by === 'schedule_departure');
 	const [showCurrentFilter, setShowCurrentFilter] = useState(current_filter || 'schedule_arrival');
 
 	return (
