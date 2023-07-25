@@ -12,7 +12,7 @@ function ListObjectiveUserMappings(props) {
 		<div className={styles.container}>
 			{list.map((item) => (
 				<ListCard
-					key={item.user?.id}
+					key={item.user_id}
 					objectiveUserMappingData={item}
 					control={control}
 					formValues={formValues}

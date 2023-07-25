@@ -48,13 +48,14 @@ function ListCard(props) {
 				defaultWeightage={isEmpty(objectives) && DEFAULT_WEIGHTAGE}
 			/>
 
-			{objectives.map((objective) => (
+			{objectives.map((item) => (
 				<Objective
-					key={objective.id}
-					objective={objective}
+					key={item.objective_id}
+					objective={item.objective}
 					user={user}
 					role={role}
 					control={control}
+					defaultWeightage={item.weightage}
 				/>
 			))}
 		</div>
