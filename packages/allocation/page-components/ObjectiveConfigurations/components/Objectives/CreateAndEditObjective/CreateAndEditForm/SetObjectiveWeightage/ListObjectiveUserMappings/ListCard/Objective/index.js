@@ -3,12 +3,13 @@ import { InputNumberController } from '@cogoport/forms';
 import { IcMTick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import ObjectiveDetailsCard from '../../../../../../../../common/ObjectiveDetailsCard';
 import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../../../configurations/objective-status-color-mapping';
 
 import styles from './styles.module.css';
 
 function Objective(props) {
-	const { currentObjective = false, objective, user, role, control, defaultWeightage } = props;
+	const { currentObjective = false, formValues = {}, objective, user, role, control, defaultWeightage } = props;
 
 	const { id, name, objective_type, status } = objective || {};
 
@@ -51,7 +52,7 @@ function Objective(props) {
 				</div>
 			)}
 		>
-			Hello
+			{currentObjective && <ObjectiveDetailsCard objectiveData={formValues.objectiveRequirements} />}
 		</Accordion>
 	);
 }

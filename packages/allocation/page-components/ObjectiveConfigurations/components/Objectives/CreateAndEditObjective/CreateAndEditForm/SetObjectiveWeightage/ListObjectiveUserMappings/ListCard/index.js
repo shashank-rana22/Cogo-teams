@@ -40,7 +40,7 @@ function ListCard(props) {
 
 			<Objective
 				currentObjective
-				className={styles.current_objective}
+				formValues={formValues}
 				objective={formValues.generalConfiguration}
 				user={user}
 				role={role}
