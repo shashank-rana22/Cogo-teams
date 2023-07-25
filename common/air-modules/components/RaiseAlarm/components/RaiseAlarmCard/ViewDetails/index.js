@@ -13,12 +13,8 @@ function ModalContent({ content = {} }) {
 		{ label: 'Source :', value: alarm_reason?.source },
 		{ label: 'Detailed Explanation :', value: alarm_reason?.detailed_explain },
 		{ label: 'Name of the yard :', value: alarm_reason?.name_of_yard },
-		{ label: 'Delayed document :', value: alarm_reason?.fcl_export },
-		{ label: 'Delayed document :', value: alarm_reason?.fcl_import },
 		{ label: 'Delayed document :', value: alarm_reason?.air_import },
 		{ label: 'Delayed document :', value: alarm_reason?.air_export },
-		{ label: 'Delayed document :', value: alarm_reason?.lcl_import },
-		{ label: 'Delayed document :', value: alarm_reason?.lcl_export },
 		{ label: 'Delayed document :', value: alarm_reason?.customs },
 		{
 			label: `Is it escalated to ${
