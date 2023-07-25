@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 const getCreateObjectivePayload = (props) => {
 	const { data, weightageData, distribute_equally } = props;
 
-	const { generalConfiguration, objectiveRequirements } = data;
+	const { generalConfiguration, objectiveRequirements } = data || {};
 
 	const {
 		objective_type,
