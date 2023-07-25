@@ -55,7 +55,7 @@ function Card({ item = {} }) {
 				/>
 			) : null}
 
-			<Footer />
+			<Footer item={item} />
 		</div>
 	);
 }
