@@ -1,0 +1,36 @@
+.list_container {
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #88cad1;
+	border-top: none;
+
+	.card-list-root {
+		border: none;
+	}
+
+	.card-list-header-root {
+		padding: 0 20px;
+		background: #393f70;
+		border-bottom: none;
+
+		.card-list-header-root-row {
+			align-items: center !important;
+			padding: 8px 0 !important;
+		}
+
+		.card-list-header-title {
+			font-size: 12px;
+			font-weight: normal;
+			color: #fff;
+		}
+	}
+
+	.card-body-row {
+		margin: 0 !important;
+		cursor: initial !important;
+
+		.card-body-col {
+			font-size: 12px;
+		}
+	}
+}
