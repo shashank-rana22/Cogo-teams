@@ -1,0 +1,32 @@
+.container {
+	padding: 16px;
+	cursor: pointer;
+	border-bottom: 1px solid #e0e0e0;
+
+	&.new {
+		background: #f9f9f9;
+	}
+}
+
+.space_between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.row {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin: -5px 0;
+}
+
+.new_notification {
+	position: absolute;
+	left: -12px;
+	display: flex;
+	width: 6px;
+	height: 6px;
+	background: #cb6464;
+	border-radius: 50%;
+}
