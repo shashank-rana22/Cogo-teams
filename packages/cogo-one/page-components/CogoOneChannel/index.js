@@ -21,6 +21,7 @@ import EmptyChatPage from './EmptyChatPage';
 import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
 import ProfileDetails from './ProfileDetails';
+import PunchInOut from './PunchInOut';
 import styles from './styles.module.css';
 
 function CogoOne() {
@@ -183,6 +184,8 @@ function CogoOne() {
 				setOpenKamContacts={setOpenKamContacts}
 				setActiveTab={setActiveTab}
 			/>
+
+			<PunchInOut />
 		</>
 	);
 }
