@@ -9,8 +9,12 @@ import styles from './styles.module.css';
 
 function Content() {
 	const formProps = useForm();
-	const { control } = formProps;
+	const { control, handleSubmit } = formProps;
 	const controls = getControls();
+
+	const applyFilters = (value) => {
+		console.log('value::', value);
+	};
 
 	return (
 		<div>
@@ -36,7 +40,7 @@ function Content() {
 				);
 			})}
 			<div className={styles.apply}>
-				<Button size="md" themeType="accent">Apply Filter</Button>
+				<Button size="md" themeType="accent" onClick={handleSubmit(applyFilters)}>Apply Filter</Button>
 			</div>
 		</div>
 	);

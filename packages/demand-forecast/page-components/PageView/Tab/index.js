@@ -1,30 +1,25 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-import { useState } from 'react';
-
-import ForecastList from '../ForecastList';
 
 const TABS_MAPPING = [
 	{
-		name      : 'port_pairs',
-		title     : 'Port Pairs',
-		component : ForecastList,
+		name  : 'port_pairs',
+		title : 'Port Pairs',
+
 	},
 	{
-		name      : 'announcements',
-		title     : 'Announcements',
-		component : ForecastList,
+		name  : 'clusters',
+		title : 'Clusters',
+
 	},
 ];
 
-function Tab() {
-	const [activeTab, setActiveTab] = useState('port_pairs');
-
+function Tab({ activeTab, setActiveTab }) {
 	// useEffect(() => {
 
 	// }, [activeTab]);
 
 	return (
-		<div style={{ margin: 20 }}>
+		<div style={{ marginBottom: 20 }}>
 			<Tabs
 				activeTab={activeTab}
 				onChange={setActiveTab}
@@ -32,13 +27,10 @@ function Tab() {
 				themeType="primary"
 			>
 				{TABS_MAPPING.map((tabItem) => {
-					const { name, title, component: Component } = tabItem;
+					const { name, title } = tabItem;
 
 					return (
-						<TabPanel key={name} name={name} title={title}>
-							<div>title</div>
-							<Component {...activeTab} />
-						</TabPanel>
+						<TabPanel key={name} name={name} title={title} />
 					);
 				})}
 			</Tabs>

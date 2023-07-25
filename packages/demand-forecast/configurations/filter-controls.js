@@ -1,14 +1,22 @@
 const getControls = () => {
 	const filterControls = [
 		{
-			name  : 'origin',
-			label : 'Origin',
-			type  : 'select',
+			name        : 'origin',
+			label       : 'Origin',
+			type        : 'asyncSelect',
+			asyncKey    : 'list_locations',
+			placeholder : 'Origin Port',
+			initialCall : true,
+			isClearable : true,
 		},
 		{
-			name  : 'destination',
-			label : 'Destination',
-			type  : 'select',
+			name        : 'destination',
+			label       : 'Destination Port',
+			type        : 'asyncSelect',
+			asyncKey    : 'list_locations',
+			placeholder : 'Destination Port',
+			initialCall : true,
+			isClearable : true,
 		},
 		{
 			name    : 'service_type',
