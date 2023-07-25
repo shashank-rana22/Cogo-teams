@@ -16,7 +16,7 @@ function OrgUsersList({
 	setModalType = () => {},
 	setSelectedUsers = () => {},
 	selectedUsers = {},
-	setOpenSpContacts = () => {},
+	setSendBulkTemplates = () => {},
 	modalType = '',
 }) {
 	const {
@@ -51,7 +51,7 @@ function OrgUsersList({
 			},
 			activeTab: 'message',
 		}));
-		setOpenSpContacts(false);
+		setSendBulkTemplates(false);
 		setListServiceProviders([]);
 	};
 

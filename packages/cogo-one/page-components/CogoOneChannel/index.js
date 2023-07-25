@@ -55,7 +55,7 @@ function CogoOne() {
 	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 	const [openKamContacts, setOpenKamContacts] = useState(false);
-	const [openSpContacts, setOpenSpContacts] = useState(false);
+	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -121,15 +121,14 @@ function CogoOne() {
 						suggestions={suggestions}
 						workPrefernceLoading={workPrefernceLoading}
 						setOpenKamContacts={setOpenKamContacts}
-						setOpenSpContacts={setOpenSpContacts}
+						setSendBulkTemplates={setSendBulkTemplates}
 					/>
 				</div>
 
-				{openSpContacts ? (
+				{sendBulkTemplates ? (
 					<PortPairOrgFilters
-						setOpenSpContacts={setOpenSpContacts}
+						setSendBulkTemplates={setSendBulkTemplates}
 						setActiveTab={setActiveTab}
-						openSpContacts={openSpContacts}
 					/>
 				) : null}
 

@@ -2,7 +2,6 @@ import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectM
 import { IcCSendWhatsapp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import BulkCommunicationTemplate from './BulkCommunicaitonTemplate';
 import styles from './styles.module.css';
 
 function MobileNumberInput({
@@ -48,7 +47,6 @@ const HEADER_COMPONENT_MAPPING = {
 	whatsapp_new_message_modal : MobileNumberInput,
 	voice_call_component       : UserName,
 	new_user_outbound          : UserName,
-	bulk_communication         : BulkCommunicationTemplate,
 };
 
 export function Header({

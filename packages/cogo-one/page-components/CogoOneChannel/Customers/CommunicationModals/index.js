@@ -22,7 +22,7 @@ function CommunicationModals({
 	setSelectedAutoAssign = () => {},
 	setAutoAssignChats = () => {},
 	setOpenKamContacts = () => {},
-	setOpenSpContacts = () => {},
+	setSendBulkTemplates = () => {},
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
@@ -101,7 +101,7 @@ function CommunicationModals({
 							{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.sp_contacts ? (
 								<div className={cl`${styles.action} ${styles.sp_contacts}`}>
 									<IcMAppAddAccount
-										onClick={() => setOpenSpContacts((prevVal) => !prevVal)}
+										onClick={() => setSendBulkTemplates((prevVal) => !prevVal)}
 										height={25}
 										width={25}
 										fill="#432609"

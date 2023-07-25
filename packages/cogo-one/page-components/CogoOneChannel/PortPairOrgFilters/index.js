@@ -13,7 +13,7 @@ import Form from './Form';
 import OrgUsersList from './OrgUserList';
 import styles from './styles.module.css';
 
-function PortPairOrgFilters({ setOpenSpContacts = () => {}, setActiveTab = () => {} }) {
+function PortPairOrgFilters({ setSendBulkTemplates = () => {}, setActiveTab = () => {} }) {
 	const [listServiceProviders, setListServiceProviders] = useState([]);
 	const [selectedUsers, setSelectedUsers] = useState({});
 	const [modalType, setModalType] = useState('');
@@ -59,7 +59,7 @@ function PortPairOrgFilters({ setOpenSpContacts = () => {}, setActiveTab = () =>
 		callbackfunc          : closeModal,
 		setSelectedAutoAssign : setSelectedUsers,
 		setModalType,
-		setOpenSpContacts,
+		setSendBulkTemplates,
 	});
 
 	const bulkCommunication = (args) => {
@@ -125,7 +125,7 @@ function PortPairOrgFilters({ setOpenSpContacts = () => {}, setActiveTab = () =>
 				<Button
 					size="sm"
 					themeType="tertiary"
-					onClick={() => setOpenSpContacts(false)}
+					onClick={() => setSendBulkTemplates(false)}
 					type="button"
 				>
 					<IcMCross width={15} height={15} />
@@ -167,12 +167,12 @@ function PortPairOrgFilters({ setOpenSpContacts = () => {}, setActiveTab = () =>
 						setListServiceProviders={setListServiceProviders}
 						setSelectedUsers={setSelectedUsers}
 						selectedUsers={selectedUsers}
-						setOpenSpContacts={setOpenSpContacts}
+						setSendBulkTemplates={setSendBulkTemplates}
 						setModalType={setModalType}
 						modalType={modalType}
 					/>
 
-					{modalType && (
+					{modalType ? (
 						<div className={styles.template}>
 							<Templates
 								data={data}
@@ -180,7 +180,7 @@ function PortPairOrgFilters({ setOpenSpContacts = () => {}, setActiveTab = () =>
 								type={modalType}
 							/>
 						</div>
-					)}
+					) : null}
 				</div>
 
 			</div>

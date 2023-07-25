@@ -24,7 +24,7 @@ const getPayload = ({ selectedAutoAssign = {}, variables = {}, template_name = '
 function useSendUsersBulkCommunication({
 	setSelectedAutoAssign = () => {},
 	setAutoAssignChats = () => {}, callbackfunc = () => {},
-	setOpenSpContacts = () => {},
+	setSendBulkTemplates = () => {},
 	setModalType = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
@@ -43,7 +43,7 @@ function useSendUsersBulkCommunication({
 			setSelectedAutoAssign({});
 			setAutoAssignChats(true);
 			callbackfunc();
-			setOpenSpContacts(false);
+			setSendBulkTemplates(false);
 			setModalType('');
 		}
 	};
