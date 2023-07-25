@@ -1,7 +1,7 @@
 import { Select, cl } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMSearchlight, IcMPortArrow } from '@cogoport/icons-react';
-import { startCase, subtractDays } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import {
 	SELECT_ICON_MAPPING,
@@ -44,16 +44,6 @@ function Filters(props) {
 
 	const changePrimaryFilters = (key, value) => {
 		setGlobalFilters((prev) => ({ ...prev, [key]: value || undefined }));
-	};
-
-	const handleTimeChange = (date_diff) => {
-		const endDate = new Date();
-		const startDate = subtractDays(endDate, date_diff);
-
-		setGlobalFilters((prev) => ({
-			...prev,
-			startDate,
-		}));
 	};
 
 	return (
@@ -121,7 +111,12 @@ function Filters(props) {
 				<p className={styles.title_label}>Time Range</p>
 				<div className={styles.time_range_container}>
 					{TIME_RANGE_OPTIONS.map(({ label, date_diff }) => (
-						<button key={label} className={styles.custom_pill} onClick={() => handleTimeChange(date_diff)}>
+						<button
+							key={label}
+							className={cl`${styles.custom_pill}
+							 ${date_diff === globalFilters.date_diff ? styles.active : ''}`}
+							onClick={() => changePrimaryFilters('date_diff', date_diff)}
+						>
 							{label}
 						</button>
 					))}
