@@ -44,30 +44,34 @@ function Objectives(props) {
 
 	return (
 		<>
-			{objectives.map((objective) => (
-				<Accordion
-					key={objective.id}
-					className={styles.accordian}
-					type="text"
-					title={(
-						<div className={styles.accordian_title}>
-							<div className={styles.title_left_container}>
-								<div>{objective.name}</div>
-								<Pill>{startCase(objective.objective_type)}</Pill>
-								<Pill color={OBJECTIVE_STATUS_COLOR_MAPPING[objective.status]}>
-									{startCase(objective.status)}
-								</Pill>
-							</div>
+			{objectives.map((item) => {
+				const { weightage = '', objective = {} } = item;
 
-							<div className={styles.title_right_container}>
-								{MODE_BASIS_MAPPING[mode](objective)}
+				return (
+					<Accordion
+						key={objective.id}
+						className={styles.accordian}
+						type="text"
+						title={(
+							<div className={styles.accordian_title}>
+								<div className={styles.title_left_container}>
+									<div>{objective.name}</div>
+									<Pill>{startCase(objective.objective_type)}</Pill>
+									<Pill color={OBJECTIVE_STATUS_COLOR_MAPPING[objective.lead_objective_status]}>
+										{startCase(objective.lead_objective_status)}
+									</Pill>
+								</div>
+
+								<div className={styles.title_right_container}>
+									{MODE_BASIS_MAPPING[mode]({ weightage })}
+								</div>
 							</div>
-						</div>
-					)}
-				>
-					<ObjectiveDetails activeObjectiveId={objective.id} />
-				</Accordion>
-			))}
+						)}
+					>
+						<ObjectiveDetails activeObjectiveId={objective.id} />
+					</Accordion>
+				);
+			})}
 		</>
 	);
 }

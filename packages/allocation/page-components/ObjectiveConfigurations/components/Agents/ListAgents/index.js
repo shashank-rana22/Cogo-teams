@@ -12,12 +12,15 @@ import styles from './styles.module.css';
 // 		role : {
 // 			name              : 'IE Owner SME Demand',
 // 			role_sub_function : 'SME',
+// 			id                : 2,
 // 		},
 // 		user: {
-// 			name: 'Mohit Nagar',
+// 			id   : 1,
+// 			name : 'Mohit Nagar',
 // 		},
 // 		partner: {
-// 			business_name: 'COGO Freight PVT LTD',
+// 			id            : 1,
+// 			business_name : 'COGO Freight PVT LTD',
 // 		},
 // 		objectives: [
 // 			{
@@ -47,12 +50,15 @@ import styles from './styles.module.css';
 // 		role : {
 // 			name              : 'KAM SME Demand',
 // 			role_sub_function : 'SME',
+// 			id                : 1,
 // 		},
 // 		user: {
-// 			name: 'Mohit Nagar',
+// 			id   : 1,
+// 			name : 'Mohit Nagar',
 // 		},
 // 		partner: {
-// 			business_name: 'COGO Freight PVT LTD',
+// 			id            : 2,
+// 			business_name : 'COGO Freight PVT LTD',
 // 		},
 // 		objectives: [
 // 			{
@@ -92,12 +98,15 @@ import styles from './styles.module.css';
 // 		role : {
 // 			name              : 'KAM SME Enterprise',
 // 			role_sub_function : 'Enterprise',
+// 			id                : 3,
 // 		},
 // 		user: {
-// 			name: 'Parth Sharma',
+// 			id   : 1,
+// 			name : 'Parth Sharma',
 // 		},
 // 		partner: {
-// 			business_name: 'COGO Freight PVT LTD',
+// 			id            : 2,
+// 			business_name : 'COGO Freight PVT LTD',
 // 		},
 // 		objectives: [
 // 			{
@@ -115,7 +124,7 @@ import styles from './styles.module.css';
 // ];
 
 function ListAgents(props) {
-	const { setActiveTabDetails, list, loading, paginationData, getNextPage } = props;
+	const { setActiveTabDetails, list, loading, refetch, paginationData, getNextPage } = props;
 
 	const { page, page_limit, total_count } = paginationData;
 
@@ -139,6 +148,7 @@ function ListAgents(props) {
 					key={item.id}
 					item={item}
 					setActiveTabDetails={setActiveTabDetails}
+					refetch={refetch}
 				/>
 			))}
 

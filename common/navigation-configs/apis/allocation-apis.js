@@ -480,6 +480,11 @@ const allocation = {
 			service_name : 'allocation',
 		},
 		{
+			api          : 'post_allocation_objective_weightages',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
 			api          : 'list_auth_roles',
 			access_type  : 'private',
 			service_name : 'auth',

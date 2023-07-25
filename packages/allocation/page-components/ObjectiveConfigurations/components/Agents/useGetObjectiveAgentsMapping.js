@@ -7,7 +7,7 @@ const useGetObjectiveAgentsMapping = () => {
 		role_ids : [],
 	});
 
-	const [{ data, loading }] = useAllocationRequest({
+	const [{ data, loading }, refetch] = useAllocationRequest({
 		url     : '/objective_user_mappings',
 		method  : 'GET',
 		authkey : 'get_allocation_objective_user_mappings',
@@ -26,6 +26,7 @@ const useGetObjectiveAgentsMapping = () => {
 	return {
 		list,
 		loading,
+		refetch,
 		paginationData,
 		getNextPage,
 		setParams,

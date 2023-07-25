@@ -1,40 +1,40 @@
-import { useForm } from '@cogoport/forms';
-import { useState } from 'react';
-
 import TAB_PANNEL_KEYS from '../../../../constants/tab-pannel-keys-mapping';
 
 import Header from './Header';
 import Objectives from './Objectives';
 import styles from './styles.module.css';
+import useEditWeightage from './useEditWeightage';
 
 const { OBJECTIVES } = TAB_PANNEL_KEYS;
 
 function ListCard(props) {
-	const { item, setActiveTabDetails } = props;
+	const { item, refetch, setActiveTabDetails } = props;
 
-	const { objectives, ...restItems } = item;
+	const { objectives, user, role, partner } = item;
 
-	const [mode, setMode] = useState('view');
+	const {
+		mode,
+		setMode,
+		formProps,
+		onSaveChanges,
+		onDistributeEqually,
+		onDiscardChanges,
+	} = useEditWeightage({ objectives, user, role, refetch });
 
-	const DEFAULT_VALUES = {};
-	objectives.forEach((objective) => {
-		DEFAULT_VALUES[`${objective.id}_weightage`] = objective.weightage;
-	});
-
-	const { control, setValue, reset, handleSubmit } = useForm({
-		defaultValues: DEFAULT_VALUES,
-	});
+	const { control, handleSubmit } = formProps;
 
 	return (
 		<div className={styles.card_container}>
 			<Header
+				user={user}
+				role={role}
+				partner={partner}
 				mode={mode}
 				setMode={setMode}
 				handleSubmit={handleSubmit}
-				setValue={setValue}
-				reset={reset}
-				objectives={objectives}
-				{...restItems}
+				onSaveChanges={onSaveChanges}
+				onDistributeEqually={onDistributeEqually}
+				onDiscardChanges={onDiscardChanges}
 			/>
 
 			<Objectives

@@ -3,38 +3,18 @@ import { IcMTick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const DEFAULT_WEIGHTAGE = 100;
-const DECIMAL_COUNT = 2;
-const INDEX_LENGTH_NORMALIZATION = 1;
-
 function Header(props) {
 	const {
-		role, user, partner, objectives, mode, setMode, handleSubmit, setValue, reset,
+		role = {},
+		user = {},
+		partner = {},
+		mode,
+		setMode,
+		handleSubmit,
+		onSaveChanges,
+		onDistributeEqually,
+		onDiscardChanges,
 	} = props;
-
-	const onSaveChanges = (values) => {
-		console.log('values :: ', values);
-	};
-
-	const onDistributeEqually = () => {
-		const objectivesCount = objectives?.length;
-		const equalWeight = (DEFAULT_WEIGHTAGE / objectivesCount).toFixed(DECIMAL_COUNT);
-		let lastWeightage = 100.00;
-
-		objectives.forEach((objective, index) => {
-			if (index === objectivesCount - INDEX_LENGTH_NORMALIZATION) {
-				setValue(`${objective.id}_weightage`, (lastWeightage).toFixed(DECIMAL_COUNT));
-			} else {
-				setValue(`${objective.id}_weightage`, equalWeight);
-				lastWeightage -= equalWeight;
-			}
-		});
-	};
-
-	const onDiscardChanges = () => {
-		setMode('view');
-		reset();
-	};
 
 	const BUTTON_MAPPING_BASIS_MODE = {
 		view: (
@@ -92,11 +72,11 @@ function Header(props) {
 					{partner.business_name}
 				</Pill>
 
-				<Pill size="md">
+				{/* <Pill size="md">
 					Channel:
 					{' '}
 					{role.role_sub_function}
-				</Pill>
+				</Pill> */}
 			</div>
 
 			<div className={styles.button_container}>{BUTTON_MAPPING_BASIS_MODE[mode]}</div>
