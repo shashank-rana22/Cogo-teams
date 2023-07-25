@@ -33,7 +33,8 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 						maximumFractionDigits : 2,
 					},
 				}),
-				source: startCase(source),
+				source : startCase(source),
+				key    : service_id,
 				details:
 	<Popover
 		placement="top"

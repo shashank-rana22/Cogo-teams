@@ -37,6 +37,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 			service_id,
 			currency,
 			total_price_discount : total_price_discounted,
+			key                  : service_id,
 			details:
 	<Popover
 		placement="top"
@@ -75,6 +76,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 			source               : startCase(source),
 			service_id,
 			currency,
+			key                  : service_id,
 			total_price_discount : total_price_discounted,
 			details:
 	<Popover
