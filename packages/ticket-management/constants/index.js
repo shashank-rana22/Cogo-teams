@@ -101,4 +101,5 @@ export const SPECTATOR_TYPE_OPTIONS = [
 	{ label: 'Tickets raised by me', value: 'agent' },
 	{ label: 'Tickets assigned to me', value: 'reviewer' },
 	{ label: 'Closure Authorizer', value: 'closure_authorizer' },
+	{ label: 'My Configurations', value: 'configuration_owner' },
 ];
