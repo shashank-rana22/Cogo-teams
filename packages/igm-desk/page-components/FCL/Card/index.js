@@ -27,7 +27,7 @@ export default function Card({ item = {}, activeTab = '' }) {
 				<div className={styles.heading}>
 					<span>CFS Address:</span>
 					<span className={styles.cfs_details}>
-						NA
+						{item?.cfs_address ?? 'NA'}
 					</span>
 				</div>
 			</section>

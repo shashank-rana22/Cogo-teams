@@ -29,11 +29,11 @@ function CfsDetails({ showPocDetails = true, primary_service = {} }) {
 		<div className={styles.heading}>
 			<span>CFS Address:</span>
 			<div className={styles.cfs_details}>
-				NA
+				{primary_service?.cfs_address ?? 'NA'}
 			</div>
-			{showPocDetails && primary_service?.cfs_service ? (
+			{showPocDetails && primary_service?.cfs_address ? (
 				<IcMCopy
-					onClick={() => handleCopy(primary_service?.cfs_service)}
+					onClick={() => handleCopy(primary_service?.cfs_address)}
 					style={STYLE_ICON}
 				/>
 			) : null }
