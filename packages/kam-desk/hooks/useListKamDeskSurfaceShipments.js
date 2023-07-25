@@ -1,4 +1,4 @@
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -11,14 +11,14 @@ const CHECK_PAGE = 1;
 const TIMEOUT_VALUE = 600;
 
 const useListKamDeskSurfaceShipments = () => {
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
+	const kamDeskContextValues = useContext(KamDeskContext);
+
 	const [apiData, setApiData] = useState({});
 
-	const kamDeskContextValues = useContext(KamDeskContext);
 	const { activeTab, filters = {}, setFilters, stepperTab, shipmentType } = kamDeskContextValues || {};
 	const { page = 1, ...restFilters } = filters || {};
 	const debounceQuery = useRef({ q: filters.q });
-
-	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'list_kam_desk_surface_shipments',
@@ -42,7 +42,8 @@ const useListKamDeskSurfaceShipments = () => {
 				setApiData(res?.data || {});
 			} catch (err) {
 				setApiData({});
-				toastApiError(err);
+				const message = err?.response?.data?.message || err?.message || 'Something went wrong !!';
+				if (message !== 'canceled') { Toast.error(message); }
 			}
 		})();
 	}, [trigger, setFilters, filters]);
