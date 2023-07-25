@@ -1,11 +1,10 @@
 .form_item_container {
-	&:not(:first-child) {
-		margin: 0 6px;
-	}
+	margin: 2px 6px;
 }
 
 .form_container {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .errors {

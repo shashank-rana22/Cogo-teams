@@ -104,6 +104,7 @@ function AdminLayout({
 					loggedInAgentId: user_id,
 				}}
 				inCall={inCall}
+				firestore={firestore}
 			/>
 			<AnnouncementModal data={announcements} />
 
@@ -113,6 +114,7 @@ function AdminLayout({
 				agentId={user_id}
 				userRoleIds={user_role_ids}
 				firestore={firestore}
+				inCall={inCall}
 			/>
 		</div>
 	);
