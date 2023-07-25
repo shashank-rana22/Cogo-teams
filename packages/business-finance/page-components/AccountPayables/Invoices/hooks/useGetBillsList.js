@@ -17,12 +17,17 @@ function formatToTimeStamp(dateString) {
 	return formatedDate;
 }
 
-function useGetBillsList({ activeTab }) {
-	const [billsFilters, setBillsFilters] = useState({ invoiceView: 'coe_accepted', pageSize: 10, pageIndex: 1 });
+function useGetBillsList({ activeTab, activeEntity }) {
+	const [billsFilters, setBillsFilters] = useState({
+		invoiceView : 'coe_accepted',
+		entity      : activeEntity,
+		pageSize    : 10,
+		pageIndex   : 1,
+	});
 	const [orderBy, setOrderBy] = useState({});
 
 	const {
-		search = '', pageSize, pageIndex, invoiceView, category, currency, invoiceType, entity, urgencyTag,
+		search = '', pageSize, pageIndex, invoiceView, category, currency, invoiceType, urgencyTag,
 		serviceType, invoiceDate, dueDate, updatedDate,
 	} = billsFilters || {};
 
@@ -59,7 +64,7 @@ function useGetBillsList({ activeTab }) {
 						invoiceView        : invoiceView || undefined,
 						currency           : currency || undefined,
 						invoiceType        : invoiceType || undefined,
-						entity             : entity || undefined,
+						entity             : activeEntity || undefined,
 						urgencyTag         : urgencyTag || undefined,
 						type               : activeTab || undefined,
 						serviceType        : serviceType || undefined,
@@ -77,11 +82,11 @@ function useGetBillsList({ activeTab }) {
 			}
 		},
 		[pageIndex, pageSize,
-			query, currency, urgencyTag, entity, invoiceType,
+			query, currency, urgencyTag, invoiceType,
 			invoiceView, category, dueDateSortType, serviceType, startDate,
 			endDate, fromBillDate,
 			toBillDate, fromUploadBillDate,
-			toUploadBillDate, activeTab, billsTrigger],
+			toUploadBillDate, activeTab, billsTrigger, activeEntity],
 	);
 
 	useEffect(() => {

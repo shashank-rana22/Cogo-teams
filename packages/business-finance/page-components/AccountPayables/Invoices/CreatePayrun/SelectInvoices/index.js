@@ -29,6 +29,39 @@ const HUNDERED_PERCENT = 100;
 
 const TEN_PERCENT = 10;
 
+const getFunctions = ({ getTableBodyCheckbox, setEditedValue }) => ({
+	renderCheckbox : (itemData) => getTableBodyCheckbox(itemData),
+	renderToolTip  : (itemData, field) => (
+		<RenderToolTip itemData={itemData} field={field} />
+	),
+	renderInvoiceDates: (itemData, field) => (
+		<RenderInvoiceDates itemData={itemData} field={field} />
+	),
+	renderUrgencyTag: (itemData, field) => (
+		<RenderUrgency itemData={itemData} field={field} />
+	),
+	renderAction: (itemData) => (
+		<RenderAction itemData={itemData} />
+	),
+	renderEditableTds: (itemData, field) => (
+		<EditableTdsInput itemData={itemData} field={field} setEditedValue={setEditedValue} />
+	),
+	renderEditablePayable: (itemData, field) => (
+		<EditablePayableAmount
+			itemData={itemData}
+			field={field}
+			setEditedValue={setEditedValue}
+		/>
+	),
+	renderBankDetails: (itemData, field) => (
+		<BankDetails
+			itemData={itemData}
+			field={field}
+			setEditedValue={setEditedValue}
+		/>
+	),
+});
+
 function SelectInvoices({ apiData, setApiData }, ref) {
 	const {
 		billsLoading,
@@ -96,38 +129,7 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 		getPayrunInvoices,
 	}));
 
-	const FUNCTIONS = {
-		renderCheckbox : (itemData) => getTableBodyCheckbox(itemData),
-		renderToolTip  : (itemData, field) => (
-			<RenderToolTip itemData={itemData} field={field} />
-		),
-		renderInvoiceDates: (itemData, field) => (
-			<RenderInvoiceDates itemData={itemData} field={field} />
-		),
-		renderUrgencyTag: (itemData, field) => (
-			<RenderUrgency itemData={itemData} field={field} />
-		),
-		renderAction: (itemData) => (
-			<RenderAction itemData={itemData} />
-		),
-		renderEditableTds: (itemData, field) => (
-			<EditableTdsInput itemData={itemData} field={field} setEditedValue={setEditedValue} />
-		),
-		renderEditablePayable: (itemData, field) => (
-			<EditablePayableAmount
-				itemData={itemData}
-				field={field}
-				setEditedValue={setEditedValue}
-			/>
-		),
-		renderBankDetails: (itemData, field) => (
-			<BankDetails
-				itemData={itemData}
-				field={field}
-				setEditedValue={setEditedValue}
-			/>
-		),
-	};
+	const FUNCTIONS = getFunctions({ getTableBodyCheckbox, setEditedValue });
 
 	return (
 		<div>

@@ -17,6 +17,18 @@ function RenderAccordianData(item) {
 	);
 }
 
+const getFunctions = ({ setShowId, showId, getTableBodyCheckbox }) => ({
+	renderCn: (itemData) => (
+		<Button
+			onClick={() => setShowId(itemData?.organizationId === showId ? null : itemData?.organizationId)}
+			disabled={isEmpty(itemData?.creditNotes)}
+		>
+			{itemData?.organizationId === showId ? 'View Less' : 'View CN'}
+		</Button>
+	),
+	renderCheckbox: (itemData) => getTableBodyCheckbox(itemData),
+});
+
 function ViewSupplierModal({
 	suppliers,
 	viewSupplier,
@@ -33,17 +45,7 @@ function ViewSupplierModal({
 		getTableBodyCheckbox,
 	} = useDeleteExcludePayrun({ refetch, setApiData, apiData: suppliers });
 
-	const FUNCTIONS = {
-		renderCn: (itemData) => (
-			<Button
-				onClick={() => setShowId(itemData?.organizationId === showId ? null : itemData?.organizationId)}
-				disabled={isEmpty(itemData?.creditNotes)}
-			>
-				{itemData?.organizationId === showId ? 'View Less' : 'View CN'}
-			</Button>
-		),
-		renderCheckbox: (itemData) => getTableBodyCheckbox(itemData),
-	};
+	const FUNCTIONS = getFunctions({ setShowId, showId, getTableBodyCheckbox });
 
 	const { list: dataList = [] } = suppliers || {};
 

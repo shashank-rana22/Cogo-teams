@@ -17,6 +17,23 @@ import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
 
+const getFunctions = ({ getInvoices }) => ({
+	renderToolTip: (itemData, field) => (
+		<RenderToolTip itemData={itemData} field={field} />
+	),
+	renderInvoiceDates: (itemData, field) => (
+		<RenderInvoiceDates itemData={itemData} field={field} />
+	),
+	renderUrgencyTag: (itemData, field) => (
+		<RenderUrgency itemData={itemData} field={field} />
+	),
+	renderAction: (itemData) => (
+		<RenderAction itemData={itemData} />
+	),
+	renderBankDetails : (itemData) => (<BankDetails itemData={itemData} />),
+	renderDelete      : (itemData) => (<Delete itemData={itemData} refetch={getInvoices} />),
+});
+
 function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }) {
 	const {
 		selectedInvoiceLoading,
@@ -25,22 +42,7 @@ function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }) 
 		getInvoices,
 	} = useGetSelectedInvoices({ apiData, setApiData });
 
-	const FUNCTIONS = {
-		renderToolTip: (itemData, field) => (
-			<RenderToolTip itemData={itemData} field={field} />
-		),
-		renderInvoiceDates: (itemData, field) => (
-			<RenderInvoiceDates itemData={itemData} field={field} />
-		),
-		renderUrgencyTag: (itemData, field) => (
-			<RenderUrgency itemData={itemData} field={field} />
-		),
-		renderAction: (itemData) => (
-			<RenderAction itemData={itemData} />
-		),
-		renderBankDetails : (itemData) => (<BankDetails itemData={itemData} />),
-		renderDelete      : (itemData) => (<Delete itemData={itemData} refetch={getInvoices} />),
-	};
+	const FUNCTIONS = getFunctions({ getInvoices });
 
 	return (
 		<div>

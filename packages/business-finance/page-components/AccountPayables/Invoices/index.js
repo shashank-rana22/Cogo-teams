@@ -58,7 +58,7 @@ function Invoices({ activeEntity }) {
 		setBillsFilters,
 		orderBy,
 		setOrderBy,
-	} = useGetBillsList({ activeTab });
+	} = useGetBillsList({ activeTab, activeEntity });
 
 	const { stats = {} } = billsData || {};
 

@@ -75,7 +75,7 @@ function BankDetails({ itemData, setEditedValue }) {
 								width={12}
 								onClick={setBankEdit}
 							/>
-							{newItem?.bankValue && rollback && (
+							{newItem?.bankDetail && rollback && (
 								<IcMUndo
 									className={styles.pointer}
 									height={14}
