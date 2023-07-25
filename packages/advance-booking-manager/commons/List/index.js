@@ -92,16 +92,18 @@ function List({
 					initialLoad={false}
 					loadMore={loadMore}
 					hasMore={page < Math.ceil(totalCount / SCROLLING_LIMIT)}
-					loader={loading ? (
-						<div className={styles.loading_style}>
-							<Loader />
-						</div>
-					) : null}
 					useWindow={false}
 					threshold={600}
 				>
 					<div>{render()}</div>
 				</InfiniteScroll>
+				{
+					loading && (
+						<div className={styles.loading_style}>
+							<Loader />
+						</div>
+					)
+				}
 				{isEmpty(finalList) && !loading ? <EmptyState /> : null}
 				{(finalList || []).length === totalCount && !isEmpty(finalList) ? (
 					<div className={styles.end_message}>No more data to show</div>
