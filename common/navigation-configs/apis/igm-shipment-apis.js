@@ -50,11 +50,6 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_shipment_document_types',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'get_organization',
 		access_type  : 'private',
 		service_name : 'organization',
