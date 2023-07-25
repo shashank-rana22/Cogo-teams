@@ -1,7 +1,7 @@
 import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMSpecificUsers } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 
 import ReceiveDiv from '../../../../../common/ReceiveDiv';
 import { PRIORITY_MAPPING } from '../../../../../constants';
@@ -38,7 +38,14 @@ function EachTicket({
 		ReviewerName = '',
 	} = eachTicket || {};
 
-	const date = CreatedAt && format(new Date(CreatedAt), GLOBAL_CONSTANTS.formats.date['dd MMM YYYY']);
+	const date = CreatedAt
+		? formatDate({
+			date       : CreatedAt,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM YYYY'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+			formatType : 'dateTime',
+			separator  : ', ',
+		}) : '';
 
 	const handleTicketActivity = ({ type = '', status = '' }) => {
 		const payload = {

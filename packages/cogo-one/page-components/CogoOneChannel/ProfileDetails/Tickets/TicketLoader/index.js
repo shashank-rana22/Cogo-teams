@@ -2,12 +2,12 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-const TICKER_LOADER_COUNT = 3;
-const TICKER_LOADER = [...Array(TICKER_LOADER_COUNT).keys()];
+const TICKET_LOADER_COUNT = 3;
+const TICKET_LOADER = [...Array(TICKET_LOADER_COUNT).keys()];
 
 function TicketLoader() {
 	return (
-		TICKER_LOADER.map((item) => (
+		(TICKET_LOADER || []).map((item) => (
 			<div key={item} className={styles.container}>
 				<div className={styles.header}>
 					<Placeholder width="50%" height="20px" />

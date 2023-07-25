@@ -121,13 +121,6 @@
 	transform: rotate(13deg);
 }
 
-.stats_container_styles {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 100%;
-}
-
 .icon_container {
 	display: flex;
 	align-items: center;
