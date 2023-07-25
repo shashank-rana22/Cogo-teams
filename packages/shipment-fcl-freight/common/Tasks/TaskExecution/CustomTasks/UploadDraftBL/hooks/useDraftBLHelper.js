@@ -9,6 +9,7 @@ import useUpdatePendingTask from '../../../../../../hooks/useUpdateShipmentPendi
 
 const useDraftBLHelper = ({
 	pendingTask = {},
+	shipmentData = {},
 }) => {
 	const {
 		refetch: getShipmentRefetch,
@@ -37,7 +38,7 @@ const useDraftBLHelper = ({
 					shipment_id     : pendingTask?.shipment_id,
 					service_id      : pendingTask?.service_id,
 					service_type    : pendingTask?.service_type,
-					organization_id : pendingTask?.organization_id,
+					organization_id : shipmentData?.importer_exporter_id,
 					data            : {
 						...data,
 						service_id   : pendingTask?.service_id,

@@ -66,10 +66,12 @@ function EditServiceCharges(props) {
 	}, [allOptions, onOptionsChange, service_name]);
 
 	if (loading) {
-		<section className={styles.loading_wrapper}>
-			<Loader />
-			Loading Line Items...
-		</section>;
+		return (
+			<section className={`${styles.loading_wrapper} loading_wrapper`}>
+				<Loader />
+				Loading Line Items...
+			</section>
+		);
 	}
 
 	return (
