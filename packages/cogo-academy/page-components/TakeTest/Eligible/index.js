@@ -45,11 +45,11 @@ function Eligible() {
 
 	const { test_user_mapping_state = 'introduction', user_appearance = [] } = data || {};
 
-	const currentQuestion = user_appearance[(user_appearance || []).length - LAST_ELEMENT_OF_ARRAY];
+	const page = (user_appearance || []).length;
+
+	const currentQuestion = user_appearance[page - LAST_ELEMENT_OF_ARRAY];
 
 	const { test_question_id: currentQuestionId } = currentQuestion || {};
-
-	const page = (user_appearance || []).length;
 
 	useEffect(() => {
 		setActiveState(test_user_mapping_state);
