@@ -1,4 +1,3 @@
-import { IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
 import formatDistanceToNow from '../../utils/formatDistanceToNow';
@@ -46,7 +45,6 @@ function Notification({
 						{!item.is_rpa ? <p className={styles.time_status}>{getStatus()}</p> : null}
 					</div>
 				</div>
-				<IcMArrowRight size={1.5} />
 			</div>
 		</div>
 	);

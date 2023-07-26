@@ -27,6 +27,7 @@ function Header({
 			{formattedData >= ZERO_VALUE && (
 				<div className={styles.row}>
 					<Button
+						themeType="secondary"
 						className={styles.mark_read}
 						onClick={() => {
 							// eslint-disable-next-line no-unused-expressions

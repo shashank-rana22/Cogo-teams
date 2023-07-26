@@ -1,4 +1,4 @@
-import { Pagination } from '@cogoport/components';
+import { Pagination, Button } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -19,12 +19,13 @@ function Header({
 				<span className="small">{formattedData?.not_seen_count}</span>
 			</p>
 			<div className={styles.row}>
-				<button className={styles.mark_read} onClick={onMarkAllAsRead}>Mark all as read</button>
+				<Button className={styles.mark_read} onClick={onMarkAllAsRead}>Mark all as read</Button>
 				<div>
 					<Pagination
-						page={formattedData?.page}
-						total={formattedData?.total_count}
-						pageLimit={formattedData?.page_limit}
+						type="table"
+						currentPage={formattedData?.page}
+						totalItems={formattedData?.total_count}
+						pageSize={formattedData?.page_limit}
 						onPageChange={onPageChange}
 					/>
 				</div>

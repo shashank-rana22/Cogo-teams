@@ -26,7 +26,7 @@ function Notifications() {
 			filters                        : { type: 'platform_notification' },
 		},
 		scope,
-	}, { manual: true });
+	}, { manual: false });
 
 	const [{ data: updateCommunications }] = useRequest({
 		url    : '/bulk_update_communications',
