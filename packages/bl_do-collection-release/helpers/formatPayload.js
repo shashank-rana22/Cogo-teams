@@ -1,5 +1,8 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
+
+const RETURN_BL_ID_KEYS = [];
 
 const evaluateDate = (val) => {
 	if (val === 'now') {
@@ -10,14 +13,13 @@ const evaluateDate = (val) => {
 
 const formatForBLIds = (item, customVal) => {
 	const bl_ids = item?.bl_ids;
-	const returnBLIdKeys = [];
 
 	(Object.keys(bl_ids) || []).forEach((id_key) => {
 		if (bl_ids[id_key] === customVal) {
-			returnBLIdKeys.push(id_key);
+			RETURN_BL_ID_KEYS.push(id_key);
 		}
 	});
-	return returnBLIdKeys;
+	return RETURN_BL_ID_KEYS;
 };
 
 const evaluateTernary = (val, item, formValues) => {
@@ -122,6 +124,7 @@ const getCurrentReleaseStatus = (item, inner_tab, formValues) => {
 
 export default function getFormattedPayload({
 	inner_tab = '',
+	active_tab = '',
 	item = {},
 	formValues = {},
 	taskConfig = {},
@@ -129,20 +132,44 @@ export default function getFormattedPayload({
 }) {
 	let finalPayload = {};
 
+	const { invoice_data = [] } = item;
+
+	const invoicesToBeKnockedOffInBL = Array.from(
+		new Set(
+			invoice_data
+				.filter((invoice) => (invoice?.services || []).some((service) => (
+					(service?.service_type === 'fcl_freight_service' && active_tab === 'bl')
+		|| service?.trade_type === 'export'
+				)))
+				.map((invoice) => invoice.id),
+		),
+	);
+
+	const invoicesToBeKnockedOffInDO = Array.from(
+		new Set(
+			invoice_data
+				.filter((invoice) => (invoice?.services || []).some((service) => (
+					(service?.service_type === 'fcl_freight_service' && active_tab === 'do')
+				|| service?.trade_type === 'import'
+				)))
+				.map((invoice) => invoice.id),
+		),
+	);
+
 	if (inner_tab === 'knockoff_pending') {
 		const knockoffTask = (pendingTasks || []).filter(
 			(task) => task.task === 'knockoff_invoices',
 		);
-		if (knockoffTask.length === 0) {
+		if (knockoffTask.length) {
 			Toast.error('Task not found');
 			return false;
 		}
 		finalPayload = {
-			id   : knockoffTask?.[0]?.id,
+			id   : knockoffTask?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
 			data : {
 				collection_party: {
 					is_knocked_off : true,
-					id             : (item?.invoice_data || []).map((invoice) => invoice?.id),
+					id             : active_tab === 'bl' ? invoicesToBeKnockedOffInBL : invoicesToBeKnockedOffInDO,
 				},
 			},
 		};
@@ -153,12 +180,12 @@ export default function getFormattedPayload({
 		const doTask = (pendingTasks || []).filter(
 			(task) => task.task === 'mark_do_released',
 		);
-		if (doTask.length === 0) {
+		if (doTask.length) {
 			Toast.error('Task not found');
 			return false;
 		}
 		finalPayload = {
-			id   : doTask?.[0]?.id,
+			id   : doTask?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
 			data : {
 				do_detail: {
 					status      : 'released',
@@ -171,14 +198,14 @@ export default function getFormattedPayload({
 
 	(taskConfig?.static_data_to_send || []).forEach((data) => {
 		if (data?.key === 'id') {
-			finalPayload[data.key] = pendingTasks?.[0]?.id;
+			finalPayload[data.key] = pendingTasks?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 			if (finalPayload[data.key] === undefined) {
 				Toast.error('Task not found');
 				finalPayload = false;
 			}
 		} else if (finalPayload && data?.key === 'data') {
 			finalPayload.data = fillData(data?.value, item, formValues);
-			if (finalPayload.data?.bl_detail?.id?.length === 0) {
+			if (finalPayload.data?.bl_detail?.id?.length) {
 				Toast.error('BL ID not found');
 				finalPayload = false;
 			}

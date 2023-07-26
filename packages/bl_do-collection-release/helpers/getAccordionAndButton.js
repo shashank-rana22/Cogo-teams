@@ -10,12 +10,12 @@ const ACTION_BUTTON_MAPPING = {
 };
 
 const conditionMapping = {
-	fcl_freight_import : ['fcl_freight_local'],
-	fcl_freight_export : ['fcl_freight', 'fcl_freight_local'],
-	lcl_freight_import : ['lcl_freight_local'],
-	lcl_freight_export : ['lcl_freight', 'lcl_freight_local'],
-	fcl_local_import   : ['fcl_freight_local'],
-	fcl_local_export   : ['fcl_freight_local'],
+	fcl_freight_import : ['fcl_freight_local_service'],
+	fcl_freight_export : ['fcl_freight', 'fcl_freight_local_service'],
+	lcl_freight_import : ['lcl_freight_local_service'],
+	lcl_freight_export : ['lcl_freight_service', 'lcl_freight_local_service'],
+	fcl_local_import   : ['fcl_freight_local_service'],
+	fcl_local_export   : ['fcl_freight_local_service'],
 };
 
 const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) => {
@@ -45,9 +45,9 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 
 	if (!isOldCollectionParty) {
 		const filteredInvoiceData = invoice_data?.filter(
-			(inv) => inv?.service_name?.some((e) => conditionMapping[
+			(inv) => inv?.services?.some((e) => conditionMapping[
 				`${stateProps.shipment_type}_${item?.trade_type}`
-			]?.includes(e))
+			]?.includes(e?.service_type))
 				&& !['reimbursement', 'credit_note'].includes(inv?.invoice_type)
 				&& inv.status !== 'init',
 		);
@@ -57,7 +57,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 				&& ['FULL', 'OVERPAID'].includes(ele?.payment_status),
 		);
 
-		showKnockOff = invoice_data && checkInvoices && !isEmpty(filteredInvoiceData);
+		showKnockOff = !isEmpty(invoice_data) && checkInvoices && !isEmpty(filteredInvoiceData);
 	}
 
 	switch (activeTab) {
