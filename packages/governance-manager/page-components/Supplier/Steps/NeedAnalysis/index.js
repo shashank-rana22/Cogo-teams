@@ -8,7 +8,7 @@ import useGetOrganizationServiceSuppliers from './hooks/useListOrganizationExper
 import styles from './styles.module.css';
 import { columns } from './utils/need-analysis-utils';
 
-function NeedAnalysis({ organization_id, service, getOrganizationService, service_type }) {
+function NeedAnalysis({ organization_id, service, getOrganizationService, service_type, id, setStatus }) {
 	const ONE = 1;
 	const [currentPage, setCurrentPage] = useState(ONE);
 
@@ -16,11 +16,13 @@ function NeedAnalysis({ organization_id, service, getOrganizationService, servic
 		data: serviceExpertiseData,
 		loading:loadingSE,
 		totalCount,
+		isProceedable,
 	} = useGetOrganizationServiceSuppliers(
 		{
 			organization_id,
 			service_type : service,
 			page         : currentPage,
+			service_id   : id,
 		},
 	);
 
@@ -59,9 +61,18 @@ function NeedAnalysis({ organization_id, service, getOrganizationService, servic
 			</div>
 
 			<div className={styles.submit_btn}>
-				<Button onClick={() => UpdateOrganizationService()}>
+				{
+					false && 				(
+						<Button onClick={() => UpdateOrganizationService()} disabled={!isProceedable}>
+							Submit & Next
+						</Button>
+					)
+
+				}
+				<Button onClick={() => setStatus('market_feedback')}>
 					Submit & Next
 				</Button>
+
 			</div>
 			{
 				show && <EvaluateModal show={show} setShow={setShow} />

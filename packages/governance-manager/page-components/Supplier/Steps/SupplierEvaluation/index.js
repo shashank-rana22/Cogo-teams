@@ -112,7 +112,11 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 					Save & Do it Later
 
 				</Button>
-				<Button onClick={handleSubmit}>Submit & Next</Button>
+				{/* <Button onClick={handleSubmit}>Submit & Next</Button> */
+					<Button onClick={() => setStatus('supplier_approval')}>
+						Submit & Next
+					</Button>
+			}
 			</div>
 		</>
 	);

@@ -26,7 +26,6 @@ function Supplier() {
 				active={status}
 				setActive={setStatus}
 				items={items}
-				shadowed
 				className={styles.stepper}
 			/>
 
@@ -37,12 +36,14 @@ function Supplier() {
 					id={id}
 					service={supplierData?.service}
 					getOrganizationService={getOrganizationService}
+					setStatus={setStatus}
 				/>,
 				market_feedback: <MarketFeedback
 					organization_id={supplierData?.organization_id}
 					id={id}
 					service={supplierData?.service}
 					getOrganizationService={getOrganizationService}
+					setStatus={setStatus}
 				/>,
 				organization_evaluation: <SupplierEvaluation
 					id={id}

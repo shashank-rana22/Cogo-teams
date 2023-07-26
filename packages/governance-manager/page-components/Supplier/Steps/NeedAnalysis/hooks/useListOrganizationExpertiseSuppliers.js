@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useListOrganizationExpertiseSuppliers({ organization_id, service_type, page }) {
+function useListOrganizationExpertiseSuppliers({ organization_id, service_type, page, service_id }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list_organization_service_expertise_suppliers',
@@ -15,7 +15,9 @@ function useListOrganizationExpertiseSuppliers({ organization_id, service_type, 
 						organization_id,
 						service_type,
 						status: 'active',
+						service_id,
 					},
+					all_service_requirement_checked_data_required: true,
 					page,
 				},
 			});
@@ -28,9 +30,10 @@ function useListOrganizationExpertiseSuppliers({ organization_id, service_type, 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [organization_id]);
 	return {
-		data       : data?.list,
+		data          : data?.list,
 		loading,
-		totalCount : data?.total_count,
+		totalCount    : data?.total_count,
+		isProceedable : data?.check_proceed,
 	};
 }
 export default useListOrganizationExpertiseSuppliers;
