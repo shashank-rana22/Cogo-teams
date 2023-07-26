@@ -26,6 +26,10 @@ function ProfileManager({
 		router.push('/my-profile');
 	};
 
+	const notificationRedirect = () => {
+		router.push('/notifications');
+	};
+
 	const { logoutOfAllAccounts = () => {} } = useRemoveUserSessions();
 
 	const { removeProfile = () => {} } = useGetAllActions({ refetch, profile: 'default' });
@@ -41,6 +45,7 @@ function ProfileManager({
 		{
 			title : 'Notifications',
 			name  : 'notifications',
+			fun   : notificationRedirect,
 			icon  : IcMNotifications,
 		},
 		{
