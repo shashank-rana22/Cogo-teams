@@ -1,11 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import SINGLE_ACCOUNT_STATS from '../../../../constants/get-single-account-stats';
 
 import styles from './styles.module.css';
-
-const DEFAULT_FIRST_ELEMENT = 0;
 
 function SingleCheckedAccount({ modalDetailsArray = [] }) {
 	return (
@@ -14,7 +13,7 @@ function SingleCheckedAccount({ modalDetailsArray = [] }) {
 				You are about to
 				<strong> de-allocate </strong>
 				&quot;
-				{startCase(modalDetailsArray[DEFAULT_FIRST_ELEMENT].business_name)}
+				{startCase(modalDetailsArray[GLOBAL_CONSTANTS.zeroth_index].business_name || '')}
 				&quot;.
 				Please verify from the list below before de-allocation
 
@@ -26,7 +25,7 @@ function SingleCheckedAccount({ modalDetailsArray = [] }) {
 					const { detail_label, stats, detail_key } = detailsObject;
 					return (
 						<>
-							<div className={styles.detail_label}>{detail_label}</div>
+							<div key={detail_key} className={styles.detail_label}>{detail_label}</div>
 							<div className={styles.single_card} key={detail_key}>
 								{stats?.map((item) => {
 									const { key, label, flex } = item;
@@ -34,16 +33,14 @@ function SingleCheckedAccount({ modalDetailsArray = [] }) {
 									return (
 										<div key={key} style={{ flex }}>
 
-											{label ? (
-												<div className={styles.label}>
-													{' '}
-													{label}
-													{' '}
-												</div>
-											) : null}
+											<div className={styles.label}>
+												{' '}
+												{label}
+												{' '}
+											</div>
 
 											<div className={styles.value}>
-												{modalDetailsArray[DEFAULT_FIRST_ELEMENT][key]}
+												{modalDetailsArray[GLOBAL_CONSTANTS.zeroth_index]?.[key] || ''}
 
 											</div>
 

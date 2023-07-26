@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 
@@ -6,8 +7,6 @@ import controls from '../configurations/get-leaderboard-filters-controls';
 
 import useGetAccountDistributionGraph from './useGetAccountDistributionGraph';
 import useGetEngagementScoringLeaderboard from './useGetEngagementScoringLeaderboard';
-
-const MILISECONDS_IN_ONE_DAY = 86400000;
 
 const useGetAccountLeaderboardData = () => {
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
@@ -78,7 +77,7 @@ const useGetAccountLeaderboardData = () => {
 	useEffect(() => {
 		if (duration !== 'custom') {
 			setValue('date_range', {
-				startDate : new Date(Date.now() - (duration * MILISECONDS_IN_ONE_DAY)),
+				startDate : new Date(Date.now() - (duration * GLOBAL_CONSTANTS.milliseconds_in_one_day)),
 				endDate   : new Date(),
 			});
 		}

@@ -6,12 +6,12 @@ const INITAIL_SET_DURATION = 60;
 const MILISECONDS_IN_ONE_DAY = 86400000;
 
 const useGetEngagementScoringGraphStats = (props) => {
-	const { scoreTrendIds } = props;
+	const { scoreTrendIds = {} } = props;
 
 	const {
-		service_id,
-		service_type,
-		service_user_id,
+		service_id = '',
+		service_type = '',
+		service_user_id = '',
 	} = scoreTrendIds;
 
 	const [duration, setDuration] = useState(INITAIL_SET_DURATION);
@@ -19,7 +19,7 @@ const useGetEngagementScoringGraphStats = (props) => {
 	const [params, setParams] = useState({});
 
 	const [{ data }] = useAllocationRequest({
-		url     : 'engagement_scoring_score_graph',
+		url     : '/engagement_scoring_score_graph',
 		method  : 'GET',
 		authkey : 'get_allocation_engagement_scoring_score_graph',
 		params,
@@ -36,7 +36,6 @@ const useGetEngagementScoringGraphStats = (props) => {
 
 	useEffect(() => {
 		if (!(isEmpty(scoreTrendIds)) && !(isEmpty(dateRange))) {
-			// console.log('Hello');
 			setParams((pv) => ({
 				...pv,
 				service_id,

@@ -11,12 +11,12 @@ const DEFAULT_CHECKED_ACCOUNT = 1;
 function DeallocateModal({
 	setShowDeallocateModal = () => {},
 	showDeallocateModal = false,
-	modalDetailsArray,
+	modalDetailsArray = [],
 	setCheckedRowsId = () => {},
 	setModalDetailsArray = () => {},
 	refetch = () => {},
 }) {
-	const isSingleSelected = modalDetailsArray.length === DEFAULT_CHECKED_ACCOUNT;
+	const isSingleSelected = modalDetailsArray?.length === DEFAULT_CHECKED_ACCOUNT;
 
 	const { onDeallocate } = useBulkDeallocation({
 		modalDetailsArray,
@@ -41,8 +41,15 @@ function DeallocateModal({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button themeType="secondary" onClick={() => setShowDeallocateModal(false)}>Cancel</Button>
-				<Button style={{ marginLeft: '8px' }} onClick={() => onDeallocate()}>De-Allocate</Button>
+				<Button
+					type="button"
+					themeType="secondary"
+					onClick={() => setShowDeallocateModal(false)}
+				>
+					Cancel
+
+				</Button>
+				<Button type="button" style={{ marginLeft: '8px' }} onClick={() => onDeallocate()}>De-Allocate</Button>
 			</Modal.Footer>
 		</Modal>
 	);

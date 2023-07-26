@@ -8,15 +8,6 @@ import ScoreTrendChart from '../../../../common/ScoreTrendChart';
 
 import styles from './styles.module.css';
 
-const CONSTANTS = {
-	TREND_BREAK_POINT                 : 0,
-	MIN_STAKEHOLDERS                  : 0,
-	FIRST_INDEX                       : 0,
-	MIN_STAKEHOLDER_TO_RENDER_TOOLTIP : 1,
-	DEFAULT_SINGLE_CHECKED_ACCOUNT    : 1,
-	MILISECONDS_IN_ONE_DAY            : 86400000,
-};
-
 const getLeaderBoardColumns = ({
 	setScoreTrendIds,
 	checkedRowsId = [],
@@ -110,7 +101,7 @@ const getLeaderBoardColumns = ({
 			Header   : 'Position',
 			accessor : ({ current_position, previous_position }) => {
 				const trend = (!current_position || !previous_position)
-					? CONSTANTS.TREND_BREAK_POINT : current_position - previous_position;
+					? GLOBAL_CONSTANTS.zeroth_index : current_position - previous_position;
 
 				const val = Math.abs(trend);
 
@@ -125,15 +116,15 @@ const getLeaderBoardColumns = ({
 									width={12}
 									style={{
 										marginRight : '4px',
-										color       : (trend < CONSTANTS.TREND_BREAK_POINT
+										color       : (trend < GLOBAL_CONSTANTS.zeroth_index
 											? '#34C759' : '#ED3726'),
-										transform: (trend < CONSTANTS.TREND_BREAK_POINT
+										transform: (trend < GLOBAL_CONSTANTS.zeroth_index
 											? 'rotate(0deg)' : 'rotate(-180deg)'),
 									}}
 								/>
 							) : ''}
 
-							{(val !== CONSTANTS.TREND_BREAK_POINT) ? val : ''}
+							{(val !== GLOBAL_CONSTANTS.zeroth_index) ? val : ''}
 						</div>
 					</div>
 				);
@@ -157,35 +148,32 @@ const getLeaderBoardColumns = ({
 		},
 		{
 			Header   : 'WARMTH',
-			accessor : ({ warmth }) => (
+			accessor : ({ warmth = '' }) => (
 				<div>
-					{startCase(warmth) || ''}
+					{startCase(warmth || '') }
 				</div>
 			),
 		},
 		{
 			Header   : 'SEGMENT',
-			accessor : ({ segment }) => (
+			accessor : ({ segment = '' }) => (
 				<div>
-					{startCase(segment) || ''}
+					{startCase(segment || '') }
 				</div>
 			),
 		},
 		{
 			Header   : 'ORG NAME',
-			accessor : ({ business_name }) => {
-				const renderOrgName = () => `${startCase(business_name)}`;
+			accessor : ({ business_name = '' }) => (
+				<Tooltip content={startCase(business_name || '')} placement="bottom">
 
-				return (
-					<Tooltip content={renderOrgName()} placement="bottom">
-						<div className={styles.org_name}>
-							{startCase(business_name) || '-'}
-						</div>
+					<div className={styles.org_name}>
+						{startCase(business_name || '-')}
+					</div>
 
-					</Tooltip>
+				</Tooltip>
 
-				);
-			},
+			),
 		},
 		{
 			Header   : 'USER NAME',
@@ -210,7 +198,12 @@ const getLeaderBoardColumns = ({
 		{
 			Header   : 'ALLOCATED KAM',
 			accessor : ({ stakeholder_name = '', role_name = '' }) => {
-				const renderToolTip = () => `${startCase(stakeholder_name)}`;
+				const renderToolTip = () => (
+					<>
+						<div>{startCase(stakeholder_name) || '-'}</div>
+						<div className={styles.tooltip_lower_label}>{role_name || ''}</div>
+					</>
+				);
 
 				return (
 					<Tooltip content={renderToolTip()} placement="bottom">
@@ -228,7 +221,7 @@ const getLeaderBoardColumns = ({
 			Header   : 'ALLOCATED AT',
 			accessor : ({ allocated_at }) => {
 				const daysSinceAllocated = Math.floor((Date.now() - new Date(allocated_at))
-				/ CONSTANTS.MILISECONDS_IN_ONE_DAY);
+				/ GLOBAL_CONSTANTS.milliseconds_in_one_day);
 
 				return (
 					<div>

@@ -1,21 +1,10 @@
 import React from 'react';
 
+import WARMTH_ACCOUNTS_STATS from '../../../../constants/get-multiple-account-stats';
+
 import styles from './styles.module.css';
 
-const WARMTH_ACCOUNTS_STATS = [
-	{
-		key   : 'ice_cold_accounts',
-		label : 'Ice Cold',
-		flex  : 1,
-	},
-	{
-		key   : 'cold_accounts',
-		label : 'Cold',
-		flex  : 1,
-	},
-];
-
-function MultipleCheckedAccounts({ modalDetailsArray }) {
+function MultipleCheckedAccounts({ modalDetailsArray = [] }) {
 	const filteredList = modalDetailsArray.reduce(
 		(result, singleAccount) => {
 			const { warmth } = singleAccount;
@@ -42,13 +31,12 @@ function MultipleCheckedAccounts({ modalDetailsArray }) {
 					const { key, label, flex } = item;
 					return (
 						<div key={key} style={{ flex }}>
-							{label ? (
-								<div className={styles.label}>
-									{' '}
-									{label}
-									{' '}
-								</div>
-							) : null}
+
+							<div className={styles.label}>
+								{' '}
+								{label}
+								{' '}
+							</div>
 
 							<div className={styles.value}>{filteredList[key].length}</div>
 
