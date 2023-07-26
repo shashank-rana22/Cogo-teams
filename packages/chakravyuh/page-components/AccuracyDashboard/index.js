@@ -30,6 +30,7 @@ function AccuracyDashboard() {
 		service_type : 'fcl',
 		rate_type    : null,
 		endDate      : new Date(),
+		date_diff    : 2500,
 	});
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];

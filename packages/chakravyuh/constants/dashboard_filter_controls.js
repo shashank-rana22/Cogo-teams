@@ -33,6 +33,6 @@ export const TIME_RANGE_OPTIONS = [
 	},
 	{
 		label     : 'all',
-		date_diff : 'all',
+		date_diff : 2500,
 	},
 ];

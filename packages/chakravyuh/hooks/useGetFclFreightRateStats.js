@@ -28,7 +28,7 @@ const useGetFclFreightRateStats = ({ filters }) => {
 		} = filters;
 
 		const endDate = new Date();
-		params.startDate = date_diff === 'all' ? undefined : subtractDays(endDate, date_diff);
+		params.startDate = subtractDays(endDate, date_diff);
 
 		LOCATION_KEYS.forEach((key) => {
 			if (filters[key]) {
