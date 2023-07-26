@@ -40,7 +40,6 @@ const awbControls = ({
 		label                 : 'AWB Validity',
 		placeholder           : 'Select Date',
 		isPreviousDaysAllowed : true,
-		value                 : new Date(),
 		span                  : 6,
 		rules                 : {
 			required: true,
@@ -52,7 +51,6 @@ const awbControls = ({
 		label                 : 'Procured Date',
 		placeholder           : 'Select Date',
 		isPreviousDaysAllowed : true,
-		value                 : new Date(),
 		span                  : 6,
 		rules                 : {
 			required: true,

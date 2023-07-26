@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import React, { useEffect } from 'react';
 
 import Layout from '../../commons/Layout';
-import editClearanceDateReportContols from '../../configurations/edit-clearance-date-report-controls';
+import editClearanceDateReportControls from '../../configurations/edit-clearance-date-report-controls';
 
 import styles from './styles.module.css';
 
@@ -13,13 +13,21 @@ function EditClearanceDateReport({
 	editClearanceDateReport = () => {},
 	loading = false,
 }) {
-	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
+	const { control, handleSubmit, setValue, watch, formState:{ errors } } = useForm();
+
+	const formValues = watch();
+	const { booking_date } = formValues;
+
+	const mutatedControls = editClearanceDateReportControls({ booking_date });
 
 	useEffect(() => {
-		editClearanceDateReportContols.forEach((controlFields) => {
-			setValue(controlFields.name, item[controlFields.name] || controlFields?.value);
+		mutatedControls.forEach((controlFields) => {
+			if (controlFields.name === 'airlineId'
+				|| controlFields.name === 'airportId'
+				|| controlFields.name === 'awbNumber') {
+				setValue(controlFields.name, item[controlFields.name] || controlFields?.value);
+			}
 		});
-		setValue('procured_date', item?.procured_date ? new Date(item?.procured_date) : new Date());
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -27,7 +35,7 @@ function EditClearanceDateReport({
 		<div className={styles.edit_clearancereport_container}>
 			<div className={styles.modal_header}>EDIT</div>
 			<Layout
-				fields={editClearanceDateReportContols}
+				fields={mutatedControls}
 				control={control}
 				errors={errors}
 			/>

@@ -46,7 +46,12 @@ const controls = [
 		span        : 6,
 		placeholder : 'Service Provider',
 		params      : {
-			filters: { service_type: 'air_freight' },
+			filters: {
+				service_type : 'air_freight',
+				status       : 'active',
+				kyc_status   : 'verified',
+				account_type : 'service_provider',
+			},
 		},
 	},
 	{
@@ -82,7 +87,11 @@ const controls = [
 		span        : 6,
 		params      : {
 			branches_data_required : true,
-			filters                : { status: 'active', account_type: 'importer_exporter' },
+			filters                : {
+				status       : 'active',
+				account_type : 'importer_exporter',
+				kyc_status   : 'verified',
+			},
 		},
 		isClearable: true,
 	},

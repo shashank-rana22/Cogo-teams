@@ -22,7 +22,12 @@ const awbControls = ({ commodity, booking_date }) => [
 		placeholder : 'Select Service Provider',
 		disabled    : true,
 		params      : {
-			filters: { service_type: 'air_freight' },
+			filters: {
+				service_type : 'air_freight',
+				status       : 'active',
+				kyc_status   : 'verified',
+				account_type : 'service_provider',
+			},
 		},
 		rules: {
 			required: true,

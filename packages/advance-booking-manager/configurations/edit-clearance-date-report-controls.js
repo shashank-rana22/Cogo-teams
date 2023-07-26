@@ -1,6 +1,7 @@
+import checkClearanceDate from '../utils/checkClearanceDate';
 import checkValidation from '../utils/checkValidation';
 
-const editClearanceDateReportContols = [
+const editClearanceDateReportControls = ({ booking_date }) => [
 	{
 		name        : 'airlineId',
 		type        : 'async-select',
@@ -64,7 +65,6 @@ const editClearanceDateReportContols = [
 		label                 : 'Booking Date',
 		placeholder           : 'Select Date',
 		isPreviousDaysAllowed : true,
-		value                 : new Date(),
 		span                  : 6,
 		rules                 : {
 			required: true,
@@ -76,12 +76,12 @@ const editClearanceDateReportContols = [
 		label                 : 'Custom Clearance Date',
 		placeholder           : 'Select Date',
 		isPreviousDaysAllowed : true,
-		value                 : new Date(),
 		span                  : 6,
 		rules                 : {
-			required: true,
+			required : true,
+			validate : (value) => checkClearanceDate({ value, booking_date }),
 		},
 	},
 ];
 
-export default editClearanceDateReportContols;
+export default editClearanceDateReportControls;

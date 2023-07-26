@@ -1,7 +1,6 @@
 import { Button, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCrossInCircle, IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import Layout from '../../commons/Layout';
@@ -16,7 +15,10 @@ function Filters({ filters = {}, setFilters = () => {}, activeTab = '' }) {
 	const { control, handleSubmit, reset, formState:{ errors } } = useForm();
 
 	const handleData = (val) => {
-		setFilters(val);
+		setFilters((prev) => ({
+			...prev,
+			...val,
+		}));
 		setOpen(false);
 	};
 
@@ -25,8 +27,9 @@ function Filters({ filters = {}, setFilters = () => {}, activeTab = '' }) {
 		reset();
 		setOpen(false);
 	};
+
 	const showFilterDot = () => {
-		const isFilterApplied = Object.values(filters).some((value) => !isEmpty(value));
+		const isFilterApplied = Object.values(filters).some((value) => !!value);
 
 		return isFilterApplied ? <IcCRedCircle height={8} width={8} className={styles.filter_dot} /> : null;
 	};
