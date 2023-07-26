@@ -74,6 +74,10 @@ const useGetAuthorizationChecked = ({ firestoreToken }) => {
 					if (pathname.includes('/[partner_id]')) {
 						redirectPath = pathname.replace('/[partner_id]', '');
 
+						if (redirectPath.includes('[test_id]')) {
+							redirectPath = '/learning/tests/dashboard';
+						}
+
 						const [, redirectPathQuery] = asPath.split('?');
 
 						const additionalQuery = redirectPathQuery ? `?${redirectPathQuery}` : '';
