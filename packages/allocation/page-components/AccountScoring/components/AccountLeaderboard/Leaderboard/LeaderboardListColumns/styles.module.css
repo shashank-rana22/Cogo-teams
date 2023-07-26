@@ -31,15 +31,15 @@
 }
 
 .lower_label {
-	font-size: 10px;
-	color: #4f4f4f;
 	max-width: 100px;
 	overflow: hidden;
+	font-size: 10px;
+	color: #4f4f4f;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
-.tooltip_lower_label{
+.tooltip_lower_label {
 	font-size: 10px;
 	color: #4f4f4f;
 }
