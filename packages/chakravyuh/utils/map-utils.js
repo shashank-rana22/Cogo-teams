@@ -1,4 +1,9 @@
+import { COLORS } from '../constants/map_constants';
+
 const INCREMENT = 1;
+const DENOMINATOR = 40;
+
+export const getPolygonStyleProps = (accuracy = 0) => COLORS[Math.ceil(accuracy / DENOMINATOR)];
 
 export function isPointInsidePoly(coords, poly) {
 	let isInside = false;
@@ -19,7 +24,7 @@ export function isPointInsidePoly(coords, poly) {
 	return isInside;
 }
 
-function isPointInsideRegion(coords, region) {
+export function isPointInsideRegion(coords, region) {
 	let flag = false;
 
 	if (region.getBounds().contains(coords)) {
@@ -33,5 +38,3 @@ function isPointInsideRegion(coords, region) {
 	}
 	return flag;
 }
-
-export default isPointInsideRegion;

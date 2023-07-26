@@ -135,3 +135,14 @@
 		justify-content: space-between;
 	}
 }
+
+.has_more {
+	margin: 24px 0 12px;
+	text-align: center;
+}
+
+.total_rates {
+	margin: 4px 12px;
+	font-size: 12px;
+	text-align: start;
+}
