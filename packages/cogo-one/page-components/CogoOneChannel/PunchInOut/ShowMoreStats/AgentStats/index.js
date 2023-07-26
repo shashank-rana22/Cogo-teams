@@ -4,22 +4,26 @@ import { useState } from 'react';
 
 import { TIMELINE_FILTER_OPTIOINS } from '../../../../../configurations/agent-wise-feedback-mapping';
 import useListAgentCheckout from '../../../../../hooks/useListAgentCheckout';
+import useListAssignedChats from '../../../../../hooks/useListAssignedChats';
+import useListCallDetails from '../../../../../hooks/useListCallDetails';
 
 import AgentActivityGraph from './AgentActivitiesGraph';
 import Stats from './Stats';
 import styles from './styles.module.css';
 
-function AgentStats({ userId = '', showDetails = false, name = '' }) {
+function AgentStats({ showDetails = false, name = '' }) {
 	const [value, setValue] = useState('day');
 
 	const {
-		loading = false,
-		data = {},
-	} = useListAgentCheckout({ agentId: userId, value, showDetails });
+		shiplentLoading = false,
+		shipmentData = {},
+	} = useListAgentCheckout({ value, showDetails });
 
-	console.log(data, 'data');
+	const { statsData = {}, statsLoading = false } = useListAssignedChats({ value });
 
-	const { total_count } = data || {};
+	const { callLoading = false, callData = {} } = useListCallDetails({ value });
+
+	const { total_count: bookingCount = 0 } = shipmentData || {};
 
 	return (
 		<>
@@ -36,7 +40,14 @@ function AgentStats({ userId = '', showDetails = false, name = '' }) {
 			</div>
 			<div className={styles.stats_content}>
 				<div className={styles.left_div}>
-					<Stats total_count={total_count} loading={loading} />
+					<Stats
+						bookingCount={bookingCount}
+						loading={shiplentLoading}
+						statsData={statsData}
+						statsLoading={statsLoading}
+						callData={callData}
+						callLoading={callLoading}
+					/>
 				</div>
 				<div className={styles.graph_container}>
 					<div className={styles.wrap}>
@@ -49,7 +60,12 @@ function AgentStats({ userId = '', showDetails = false, name = '' }) {
 							options={TIMELINE_FILTER_OPTIOINS}
 						/>
 					</div>
-					<AgentActivityGraph />
+					<AgentActivityGraph
+						loading={shiplentLoading || callLoading || statsLoading}
+						bookingCount={bookingCount}
+						callData={callData}
+						statsData={statsData}
+					/>
 				</div>
 			</div>
 		</>

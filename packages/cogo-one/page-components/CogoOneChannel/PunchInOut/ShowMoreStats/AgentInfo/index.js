@@ -5,13 +5,14 @@ import styles from './styles.module.css';
 
 function AgentInfo({
 	updateWorkPreference = () => {},
-	// data = {},
 	loading = false,
 	name = '',
-	// picture,
 	email = '',
+	punchedTime = '',
+	status = '',
+	handleClick = () => {},
 }) {
-	const handleClick = () => {
+	const handleUpdate = () => {
 		updateWorkPreference({ type: 'punched_out' });
 	};
 
@@ -20,19 +21,23 @@ function AgentInfo({
 			<div className={styles.agent_name}>{startCase(name)}</div>
 			<div className={styles.sub_label}>{email}</div>
 			<Avatar personName={name} size="140px" className={styles.user_icon} />
-			{/* <Image
-				src={GLOBAL_CONSTANTS.image_url.girl_avatar}
-				alt="user"
-				width={110}
-				height={130}
-				className={styles.user_icon}
-			/> */}
-
 			<div className={styles.text}>Time Clocked In Today</div>
-			<div className={styles.start_time}>
-				<div className={styles.time}>07:45:15</div>
-				<Button size="md" themeType="accent" onClick={handleClick} disabled={loading}>End Shift</Button>
-			</div>
+			{status === 'punched_out'
+				? <Button size="md" onClick={handleClick} disabled={loading}>Start Shift</Button>
+				: (
+					<div className={styles.start_time}>
+						<div className={styles.time}>{punchedTime}</div>
+						<Button
+							size="md"
+							themeType="accent"
+							onClick={handleUpdate}
+							disabled={loading}
+						>
+							End Shift
+						</Button>
+					</div>
+
+				)}
 		</>
 	);
 }

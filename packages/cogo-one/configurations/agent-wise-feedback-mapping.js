@@ -8,7 +8,7 @@ export const AGENT_WISE_FEEDACK_MAPPING = [
 	{
 		label   : 'Customer Satisfaction Score',
 		name    : 'customer_satisfaction_score',
-		count   : 'dsf',
+		count   : 'customer_satisfaction_score',
 		hasIcon : true,
 	},
 
@@ -18,17 +18,10 @@ export const AGENT_WISE_STATS_MAPPING = [
 	{
 		label : 'Calls Made',
 		name  : 'calls_made',
-		count : 5,
 	},
 	{
 		label : 'Chats Assigned',
 		name  : 'chats_assigned',
-		count : 5,
-	},
-	{
-		label : 'Events Assigned',
-		name  : 'events_assigned',
-		count : 5,
 	},
 ];
 

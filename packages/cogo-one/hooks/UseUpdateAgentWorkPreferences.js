@@ -11,21 +11,22 @@ const getPayload = ({ type }) => ({
 	validity_end   : type === 'punched_out' ? currentDateTime : undefined,
 });
 
-function useUpdateAgentWorkPreferences() {
+function useUpdateAgentWorkPreferences({ fetchworkPrefernce = () => {} }) {
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/update_agent_work_preferences',
+		url    : '/update_agent_work_preference',
 		method : 'post',
 	}, { manual: true });
 
-	const updateWorkPreference = useCallback(({ type = '' }) => {
+	const updateWorkPreference = useCallback(async ({ type = '' }) => {
 		try {
-			trigger({
+			await trigger({
 				data: getPayload({ type }),
 			});
+			fetchworkPrefernce();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			Toast.error(getApiErrorString(error));
 		}
-	}, [trigger]);
+	}, [trigger, fetchworkPrefernce]);
 
 	useEffect(() => {
 		updateWorkPreference({});

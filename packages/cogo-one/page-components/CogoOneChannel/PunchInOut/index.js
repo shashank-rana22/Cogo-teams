@@ -1,20 +1,33 @@
 import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDown, IcMArrowDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
+
+import useAgentWorkPrefernce from '../../../hooks/useAgentWorkPrefernce';
+import useUpdateAgentWorkPreferences from '../../../hooks/UseUpdateAgentWorkPreferences';
 
 import ShowMoreStats from './ShowMoreStats';
 import styles from './styles.module.css';
 
-function PunchInOut({
-	userId = '',
-	updateWorkPreference = () => {},
-	data = {},
-	loading = false,
-}) {
+const punchedTime = formatDate({
+	date       : new Date(),
+	formatType : 'time',
+	dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+});
+
+function PunchInOut() {
 	const [showDetails, setShowDetails] = useState(false);
+
+	const { agentStatus = {}, fetchworkPrefernce = () => {} } = useAgentWorkPrefernce();
+
+	const { status = '' } = agentStatus || {};
+
+	const {
+		updateWorkPreference = () => {},
+		loading = false,
+	} = useUpdateAgentWorkPreferences({ fetchworkPrefernce });
 
 	const handleClick = () => {
 		updateWorkPreference({ type: 'punched_in' });
@@ -27,32 +40,36 @@ function PunchInOut({
 					<ShowMoreStats
 						setShowDetails={setShowDetails}
 						showDetails={showDetails}
-						userId={userId}
 						updateWorkPreference={updateWorkPreference}
-						data={data}
 						loading={loading}
-						// firestore={firestore}
+						punchedTime={punchedTime}
+						status={status}
+						handleClick={handleClick}
 					/>
 				)}
 			</div>
-			{!isEmpty(data) ? (
-				<div className={styles.minimize_container}>
+
+			<div
+				role="presentation"
+				className={styles.minimize_container}
+				onClick={() => setShowDetails((prev) => !prev)}
+			>
+				<Image src={GLOBAL_CONSTANTS.image_url.sad_icon} alt="sad-emoji" width={18} height={18} />
+				<div className={styles.break_time}>4.5</div>
+				<IcMDown className={styles.down_icon} />
+				{status === 'punched_out' ? (
 					<Button size="xs" onClick={handleClick} disabled={loading}>Start Shift</Button>
-				</div>
-			) : (
-				<div
-					role="presentation"
-					className={styles.minimize_container}
-					onClick={() => setShowDetails((prev) => !prev)}
-				>
-					<Image src={GLOBAL_CONSTANTS.image_url.sad_icon} alt="sad-emoji" width={18} height={18} />
-					<div className={styles.break_time}>4.5</div>
-					<IcMDown className={styles.down_icon} />
-					<Image src={GLOBAL_CONSTANTS.image_url.clock_icon} alt="clock" width={18} height={18} />
-					<div className={styles.shift_time}>07:45:15</div>
-					<IcMArrowDown className={cl`${showDetails ? styles.up_arrow : styles.arrow_down}`} />
-				</div>
-			)}
+				) : (
+					<>
+						<Image src={GLOBAL_CONSTANTS.image_url.clock_icon} alt="clock" width={18} height={18} />
+						<div className={styles.shift_time}>
+							{punchedTime}
+						</div>
+					</>
+				)}
+				<IcMArrowDown className={cl`${showDetails ? styles.up_arrow : styles.arrow_down}`} />
+			</div>
+
 		</div>
 	);
 }

@@ -1,8 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest } from '@cogoport/request';
-import { startOfDay, startOfMonth, startOfWeek } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
+
+import { DATE_FILTER_MAPPING } from '../configurations/time-filter-mapping';
 
 const getDateString = (date) => formatDate({
 	date,
@@ -10,22 +11,15 @@ const getDateString = (date) => formatDate({
 	formatType : 'date',
 }) || '';
 
-const DATE_UTILS_MAPPING = {
-	day   : startOfDay,
-	week  : startOfWeek,
-	month : startOfMonth,
-};
-
-const getParams = ({ value, agentId }) => ({
-	// data_required : false,
-	agent_id : agentId,
-	filters  : {
+const getParams = ({ value }) => ({
+	data_required : false,
+	filters       : {
 		is_converted_to_booking        : true,
-		quotation_sent_at_greater_than : getDateString(DATE_UTILS_MAPPING[value](new Date())),
+		quotation_sent_at_greater_than : getDateString(DATE_FILTER_MAPPING[value](new Date())),
 	},
 });
 
-function useListAgentCheckout({ agentId = '', value, showDetails = false }) {
+function useListAgentCheckout({ value, showDetails = false }) {
 	const [{ loading, data }, trigger] = useRequest(
 		{
 			url    : '/list_checkouts',
@@ -39,20 +33,20 @@ function useListAgentCheckout({ agentId = '', value, showDetails = false }) {
 
 		try {
 			trigger({
-				params: getParams({ value, agentId }),
+				params: getParams({ value }),
 			});
 		} catch (error) {
 			console.error(error, 'error');
 		}
-	}, [trigger, value, agentId, showDetails]);
+	}, [trigger, value, showDetails]);
 
 	useEffect(() => {
 		getAgentShipmentsCount();
 	}, [getAgentShipmentsCount]);
 
 	return {
-		loading,
-		data,
+		shiplentLoading : loading,
+		shipmentData    : data,
 	};
 }
 export default useListAgentCheckout;

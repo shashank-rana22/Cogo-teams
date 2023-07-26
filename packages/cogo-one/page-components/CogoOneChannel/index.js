@@ -9,11 +9,11 @@ import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
-import useUpdateAgentWorkPreferences from '../../hooks/UseUpdateAgentWorkPreferences';
 
 import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
@@ -69,12 +69,6 @@ function CogoOne() {
 
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
-
-	const {
-		updateWorkPreference = () => {},
-		data = {},
-		loading = false,
-	} = useUpdateAgentWorkPreferences();
 
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 
@@ -192,13 +186,9 @@ function CogoOne() {
 				setActiveTab={setActiveTab}
 			/>
 
-			<PunchInOut
-				userId={userId}
-				updateWorkPreference={updateWorkPreference}
-				loading={loading}
-				data={data}
-				firestore={firestore}
-			/>
+			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out && (
+				<PunchInOut />
+			)}
 		</>
 	);
 }

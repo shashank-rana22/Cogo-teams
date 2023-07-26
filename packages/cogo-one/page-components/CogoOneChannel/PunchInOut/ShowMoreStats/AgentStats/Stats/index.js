@@ -1,4 +1,3 @@
-import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
@@ -12,9 +11,22 @@ import styles from './styles.module.css';
 
 const MIN_COUNT = 0;
 
-function Stats({ total_count = 0, loading = false }) {
-	const COUNT_MAPPING = {
-		no_of_bookings: total_count,
+function Stats({
+	bookingCount = 0,
+	statsData = {},
+	callData = {},
+}) {
+	const { chat_stats = {} } = statsData || {};
+	const { active = 0 } = chat_stats || {};
+	const { total_count: callCount = 0 } = callData || {};
+
+	const FEEDBACK_COUNT_MAPPING = {
+		no_of_bookings: bookingCount,
+	};
+
+	const STATS_COUNT_MAPPING = {
+		chats_assigned : active,
+		calls_made     : callCount,
 	};
 
 	return (
@@ -35,8 +47,7 @@ function Stats({ total_count = 0, loading = false }) {
 											height={55}
 										/>
 									) : null}
-								{loading ? <Placeholder width="60px" height="40px" />
-									: <div className={styles.count}>{COUNT_MAPPING[name] || MIN_COUNT}</div>}
+								<div className={styles.count}>{FEEDBACK_COUNT_MAPPING[name] || MIN_COUNT}</div>
 								{hasIcon ? <IcMDown className={styles.arrow_icon} /> : null}
 							</div>
 						</div>
@@ -45,12 +56,12 @@ function Stats({ total_count = 0, loading = false }) {
 			</div>
 			<div className={styles.bottom_stats_content}>
 				{AGENT_WISE_STATS_MAPPING.map((item) => {
-					const { label, name, count } = item;
+					const { label, name } = item;
 
 					return (
 						<div className={styles.each_div} key={name}>
 							<div className={styles.title}>{label}</div>
-							<div className={styles.count}>{count}</div>
+							<div className={styles.count}>{STATS_COUNT_MAPPING[name] || MIN_COUNT}</div>
 						</div>
 					);
 				})}
