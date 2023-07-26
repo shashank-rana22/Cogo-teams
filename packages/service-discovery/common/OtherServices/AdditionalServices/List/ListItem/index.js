@@ -1,49 +1,23 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import DeleteServiceModal from '../../../DeleteServiceModal';
+import DeleteServiceModal from '../../../common/DeleteServiceModal';
 import useDeleteAdditionalService from '../../hooks/useDeleteAdditionalService';
 import ICONS_MAPPING from '../../icons-mapping';
 
 import styles from './styles.module.css';
 
-const getRates = (service = {}) => {
-	const { rateData = [] } = service;
-
-	if (!rateData || isEmpty(rateData)) {
-		return 'No Rates';
-	}
-
-	let currency = '';
-
-	const totalPrice = rateData
-		.map((rateItem) => {
-			currency = rateItem.total_price_currency;
-			return rateItem.total_price_discounted;
-		})
-		.reduce((accumulator, value) => accumulator + value, 0);
-
-	return formatAmount({
-		amount  : totalPrice,
-		currency,
-		options : {
-			style                 : 'currency',
-			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
-		},
-	});
-};
+const INITIAL_REDUCE_VALUE = 0;
 
 function ListItem({
 	serviceItem = {},
 	loading,
 	onClickAdd = () => {},
-	setIsOpen = () => {},
 	refetch = () => {},
-	isOpen = {},
 	SERVICES_CANNOT_BE_REMOVED = [],
 }) {
 	const [isHovered, setIsHovered] = useState(false);
@@ -51,7 +25,10 @@ function ListItem({
 
 	const { isSelected = false, name = '', service_type = '', title = '' } = serviceItem;
 
-	const { handleRemoveService } = useDeleteAdditionalService({ service: serviceItem, refetch });
+	const {
+		handleRemoveService,
+		loading:deleteLoading,
+	} = useDeleteAdditionalService({ service: serviceItem, refetch });
 
 	const handleMouseEnter = () => { setIsHovered(true); };
 	const handleMouseLeave = () => { setIsHovered(false); };
@@ -65,21 +42,42 @@ function ListItem({
 		}
 		setShowDeleteModal(true);
 	};
-	const handleClickOnContainer = () => {
-		if (isOpen.name === serviceItem.name) {
-			setIsOpen(false);
-		} else setIsOpen(serviceItem);
+
+	const renderRate = () => {
+		if (!isSelected) return null;
+
+		const { rateData = [] } = serviceItem;
+
+		if (!rateData || isEmpty(rateData) || !rateData[GLOBAL_CONSTANTS.zeroth_index]?.total_price_discounted) {
+			return 'No Rates';
+		}
+
+		let currency = '';
+		const totalPrice = rateData
+			.map((rateItem) => {
+				currency = rateItem.total_price_currency;
+				return rateItem.total_price_discounted;
+			})
+			.reduce((accumulator, value) => accumulator + value, INITIAL_REDUCE_VALUE);
+
+		return formatAmount({
+			amount  : totalPrice,
+			currency,
+			options : {
+				style                 : 'currency',
+				currencyDisplay       : 'code',
+				maximumFractionDigits : 0,
+			},
+		});
 	};
 
 	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
 
 	return (
 		<div
-			role="presentation"
 			key={name}
 			disabled={loading}
 			className={`${styles.service} ${isSelected ? styles.active : null}`}
-			onClick={handleClickOnContainer}
 		>
 
 			<div className={styles.service_div}>
@@ -89,9 +87,7 @@ function ListItem({
 			</div>
 
 			<div className={styles.icn_container}>
-				{isSelected ? (
-					<strong className={styles.rate}>{getRates(serviceItem)}</strong>
-				) : null}
+				<strong className={styles.rate}>{renderRate()}</strong>
 
 				{isSelected ? (
 					<SelectedIcon
@@ -129,7 +125,7 @@ function ListItem({
 						setShow={setShowDeleteModal}
 						service_name={serviceItem.title}
 						onClick={handleRemoveService}
-						loading={loading}
+						loading={deleteLoading}
 					/>
 				</div>
 			) : null}

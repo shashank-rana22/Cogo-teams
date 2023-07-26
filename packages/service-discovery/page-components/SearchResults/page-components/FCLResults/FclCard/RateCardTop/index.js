@@ -52,8 +52,8 @@ function RateCardTop({
 	};
 
 	const getTooltipMessage = () => {
-		if (selectedCardIDs.length > 3 && !selectedCardIDs.includes(card_id)) {
-			return 'Maximum 4 cards can be compared';
+		if (selectedCardIDs.length > 2 && !selectedCardIDs.includes(card_id)) {
+			return 'Maximum 3 cards can be compared';
 		}
 		if (selectedCardIDs.includes(card_id)) {
 			return 'Click to remove';
@@ -63,7 +63,7 @@ function RateCardTop({
 	};
 
 	const renderCheckbox = () => {
-		if (isSelectedCard) return null;
+		if (isSelectedCard && comparisonRates && Object.keys.length > 1) return null;
 		return (
 			<Tooltip content={getTooltipMessage()} placement="top">
 				<div>

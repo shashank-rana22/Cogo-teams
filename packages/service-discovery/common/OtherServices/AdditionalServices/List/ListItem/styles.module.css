@@ -38,6 +38,7 @@
 
 .rate {
 	margin-right: 16px;
+	min-width: max-content;
 }
 
 .cost_label {

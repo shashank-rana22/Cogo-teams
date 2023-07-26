@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import DeleteServiceModal from '../../DeleteServiceModal';
+import DeleteServiceModal from '../../common/DeleteServiceModal';
 import useAddSubsidiaryService from '../hooks/useAddSubsidiaryService';
 import useDeleteSubsidiaryService from '../hooks/useDeleteSubsidiaryService';
 

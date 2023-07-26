@@ -33,7 +33,7 @@ const useRequestForRate = ({
 	const { query = {} } = router;
 	const { spot_search_id = '' } = query;
 
-	const { service_data = {} } = requestService || {};
+	const { service_data = {} } = requestService;
 
 	const handleResponse = () => {
 		onClose();
@@ -68,7 +68,7 @@ const useRequestForRate = ({
 					data,
 				});
 				const body = {
-					id: spot_search_id,
+					id: spot_search_id || details?.source_id,
 					commodity_description:
 						`${reefer_commodity_description} ${commodity_description}`
 						|| undefined,

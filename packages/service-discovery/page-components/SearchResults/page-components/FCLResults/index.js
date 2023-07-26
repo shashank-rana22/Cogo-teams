@@ -28,6 +28,7 @@ function FCLResults({
 	setHeaderProps = () => {},
 	selectedWeek = {},
 	setSelectedWeek = () => {},
+	refetchSearch = () => {},
 	paginationProps,
 	loading,
 	screen,
@@ -47,6 +48,7 @@ function FCLResults({
 			loading,
 			selectedWeek,
 			setSelectedWeek,
+			refetchSearch,
 		},
 		comparison: {
 			detail,
@@ -64,7 +66,7 @@ function FCLResults({
 
 	const RateCardsComponent = SCREEN_MAPPING[screen] || null;
 
-	if (!loading && isEmpty(rates)) {
+	if (!loading && isEmpty(rates) && screen === 'listRateCard') {
 		return (
 			<EmptyState
 				details={detail}
@@ -75,7 +77,7 @@ function FCLResults({
 	}
 
 	return (
-		<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen || 'listRateCard']} />
+		<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen]} />
 	);
 }
 

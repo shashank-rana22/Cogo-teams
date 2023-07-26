@@ -52,6 +52,7 @@ function AdditionalServices({
 			<CargoInsurance
 				key={loading}
 				data={finalDetails}
+				rateCardData={rateCardData}
 				refetch={getCheckout}
 			/>
 

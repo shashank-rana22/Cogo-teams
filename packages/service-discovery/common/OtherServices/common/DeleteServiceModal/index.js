@@ -1,4 +1,4 @@
-import { Modal, Button, Toast } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 

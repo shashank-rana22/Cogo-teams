@@ -1,7 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import AccordianView from './AccordianView';
+import AccordianView from '../../common/AccordianView';
+
 import ItemContent from './ItemContent';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
@@ -20,7 +21,7 @@ function List({
 	refetch = () => {},
 	SERVICES_CANNOT_BE_REMOVED = [],
 }) {
-	const [isOpen, setIsOpen] = useState({});
+	const [active, setActive] = useState('');
 
 	let currency = '';
 
@@ -51,15 +52,15 @@ function List({
 				{list.map((serviceItem) => (
 					<AccordianView
 						key={serviceItem.name}
-						active={isOpen.name === serviceItem.name && serviceItem.isSelected}
-						setActive={setIsOpen}
+						itemKey={serviceItem.name}
+						active={active}
+						isOpen={serviceItem.isSelected}
+						setActive={setActive}
 						title={(
 							<ListItem
 								serviceItem={serviceItem}
 								loading={loading}
 								onClickAdd={onClickAdd}
-								setIsOpen={setIsOpen}
-								isOpen={isOpen}
 								refetch={refetch}
 								SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
 							/>

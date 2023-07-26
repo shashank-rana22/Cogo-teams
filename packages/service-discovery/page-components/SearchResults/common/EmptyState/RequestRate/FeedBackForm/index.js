@@ -50,7 +50,6 @@ function FeedBackForm({ controls, control, errors }) {
 								{errorOriginal}
 							</div>
 						)}
-
 					</div>
 				);
 			})}

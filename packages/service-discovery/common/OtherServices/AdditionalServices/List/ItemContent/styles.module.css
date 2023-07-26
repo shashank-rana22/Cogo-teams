@@ -31,12 +31,6 @@
 	align-items: center;
 }
 
-.line_items {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-}
-
 .no_rates_found {
 	display: flex;
 	flex-direction: column;

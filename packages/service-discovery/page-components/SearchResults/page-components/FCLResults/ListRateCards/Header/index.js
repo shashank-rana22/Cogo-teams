@@ -1,15 +1,18 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 
-// import Currency from '../../../../common/CurrencyFilter';
 import Filters from '../../../../common/Filters';
 
-// import DetentionDemurrage from './D&D';
+import RefreshRate from './RefreshRate';
 import styles from './styles.module.css';
+
+const CopyUrl = dynamic(() => import('./CopyUrl'), { ssr: false });
 
 function Header({
 	details = {},
 	filters = {},
 	setFilters = () => {},
+	refetch = () => {},
 	total_rates_count = 0,
 }) {
 	return (
@@ -30,6 +33,10 @@ function Header({
 					filters={filters}
 					setFilters={setFilters}
 				/>
+
+				<RefreshRate refetch={refetch} details={details} />
+
+				<CopyUrl details={details} />
 			</div>
 		</div>
 

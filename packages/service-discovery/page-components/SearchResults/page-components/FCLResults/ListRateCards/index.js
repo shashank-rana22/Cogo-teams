@@ -17,6 +17,7 @@ function HeaderTop({
 	comparisonRates = {},
 	setComparisonRates = () => {},
 	setScreen = () => {},
+	refetch = () => {},
 }) {
 	// const { scrollDirection } = useScrollDirection();
 	const showComparison = Object.keys(comparisonRates).length > 1;
@@ -28,6 +29,7 @@ function HeaderTop({
 				filters={filters}
 				setFilters={setFilters}
 				total_rates_count={total_rates_count}
+				refetch={refetch}
 			/>
 
 			{showComparison ? (
@@ -106,6 +108,7 @@ function ListRateCards({
 				comparisonRates={comparisonRates}
 				setComparisonRates={setComparisonRates}
 				setScreen={setScreen}
+				refetch={refetchSearch}
 			/>
 
 			<Schedules

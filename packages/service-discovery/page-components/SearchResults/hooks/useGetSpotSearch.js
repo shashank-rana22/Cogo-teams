@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -55,41 +54,14 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 
 	useEffect(() => {
 		getSearch();
-	}, [getSearch, filters]);
+	}, [getSearch, filters, screen]);
 
 	useEffect(() => {
 		setScreen(rate_card_id ? 'selectedCardScreen' : 'listRateCard');
 	}, [rate_card_id]);
 
-	const refetch = async ({ screenObj = {} } = {}) => {
-		try {
-			const res = await trigger({
-				params: {
-					spot_search_id,
-					page       : filters.page,
-					page_limit : 100,
-					filters    : {
-						...filters.reduce((obj, key) => ({ ...obj, [key]: filters[key] || undefined }), {}),
-					},
-				},
-			});
-
-			setScreen(screenObj?.screen || 'listRateCard');
-
-			if (screenObj?.screen === 'selectedCard') {
-				setSelectedCard(res.data.list.filter(
-					(item) => item.id === screenObj?.card_id,
-				)?.[GLOBAL_CONSTANTS.zeroth_index]);
-			}
-		} catch (error) {
-			if (error?.response?.data) {
-				Toast.error(getApiErrorString(error.response?.data));
-			}
-		}
-	};
-
 	return {
-		refetchSearch: refetch,
+		refetchSearch: getSearch,
 		loading,
 		data,
 		setScreen,

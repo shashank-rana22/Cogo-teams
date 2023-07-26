@@ -5,6 +5,7 @@ import React from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 import useSpotSearchService from '../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
+import getOptions from '../../../../page-components/SearchResults/utils/getOptions';
 import { getFclPayload } from '../configs';
 import findKey from '../utils/findKeyInObject';
 
@@ -82,9 +83,11 @@ function AdditionalServicesForm({
 			</div>
 			<div className={styles.control_container}>
 				{service.controls.map((controlItem) => {
-					const { condition = {} } = controlItem;
+					let newControl = { ...controlItem };
 
-					const Element = getElementController(controlItem.type);
+					const { condition = {} } = newControl;
+
+					const Element = getElementController(newControl.type);
 
 					let flag = true;
 
@@ -104,16 +107,22 @@ function AdditionalServicesForm({
 						return null;
 					}
 
-					const value = commonControls.includes(controlItem.name) ? findKey(detail, controlItem.name) : '';
+					const value = commonControls.includes(newControl.name) ? findKey(detail, newControl.name) : '';
+
+					if (newControl.optionsListKey) {
+						const finalOptions = getOptions(newControl.optionsListKey, {});
+
+						newControl = { ...newControl, options: finalOptions };
+					}
 
 					return (
-						<div key={controlItem.name} className={styles.control_style}>
+						<div key={newControl.name} className={styles.control_style}>
 
 							<div className={styles.label}>
-								{ controlItem.label}
+								{ newControl.label}
 							</div>
 
-							<Element {...controlItem} control={control} value={value} />
+							<Element {...newControl} control={control} value={value} />
 
 						</div>
 					);

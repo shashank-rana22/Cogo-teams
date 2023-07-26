@@ -38,6 +38,9 @@
 		.ui_chips_container {
 			flex-wrap: wrap;
 		}
+		.react-datepicker__aria-live {
+			display:none;
+		}
 	}
 }
 
