@@ -12,7 +12,7 @@ const useGetSailingSchedulePortPairCoverage = ({
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			method : 'GET',
-			url    : 'get_sailing_schedule_port_pair_coverages',
+			url    : '/get_sailing_schedule_port_pair_coverages',
 			scope,
 		},
 		{ manual: true },

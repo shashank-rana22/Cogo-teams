@@ -738,18 +738,6 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'crm',
 	},
-	ocean_port_pair: {
-		key           : 'ocean_port_pair',
-		title         : 'Ocean Port Pairs',
-		href          : '/schedules',
-		as            : '/schedules',
-		type          : 'link',
-		possible_apis : apis.ocean_port_pair,
-		icon          : IcMPortManagement,
-		main_apis     : ['list_sailing_schedule_port_pairs'],
-		module_type   : 'crm',
-	},
-
 	air_port_pair: {
 		key           : 'air_port_pair',
 		title         : 'Air Port Pairs',

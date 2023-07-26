@@ -20,7 +20,7 @@
 }
 
 .hr_line {
-	height: 100px; /* Adjust the height as needed */
+	height: 8vh;
 	margin: 10px;
 	border: none;
 	border-left: 1px dotted rgb(187 187 187);
@@ -29,8 +29,7 @@
 .port_details {
 	display: flex;
 	flex-direction: column;
-	padding-left: 20px;
-	margin: 60px 0 0 40px;
+	padding: 60px 0 0 40px;
 }
 
 .port {
@@ -44,7 +43,7 @@
 	overflow: hidden;
 	font-size: 14px;
 	font-weight: 500;
-	line-height: 21px;
+	line-height: 20px;
 	text-align: left;
 	text-overflow: ellipsis;
 	white-space: nowrap;

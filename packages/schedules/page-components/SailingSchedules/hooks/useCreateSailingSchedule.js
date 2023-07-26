@@ -1,10 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import {
-	asyncFieldsOperators, asyncFieldsLocations,
-}
-	from '@cogoport/forms/utils/getAsyncFields';
+import { asyncFieldsOperators, asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useState } from 'react';
@@ -77,7 +74,7 @@ const useCreateVesselSchedules = ({
 					haz_bk_cutoff             : formValues?.haz_bk_cutoff || undefined,
 					origin_terminal_name      : formValues?.origin_terminal_name || undefined,
 					destination_terminal_name : formValues?.destination_terminal_name || undefined,
-				} || undefined,
+				},
 			};
 			await trigger({ data: formattedFormValues });
 

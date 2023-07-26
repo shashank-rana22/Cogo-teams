@@ -13,7 +13,7 @@ function UpdateScheduleModal({ setUpdate, update }) {
 	return (
 		<Modal
 			size="lg"
-			show={update}
+			show={!!update}
 			onClose={() => setUpdate(null)}
 			placement="center"
 		>

@@ -18,7 +18,6 @@ const useGetSeaRoute = ({ origin_port_id, destination_port_id }) => {
 				params: {
 					origin_port_id,
 					destination_port_id,
-					// enable_sea_route_processing: true,
 				},
 			});
 		} catch (e) {

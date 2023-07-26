@@ -12,7 +12,7 @@
 	display: flex;
 	align-items: center;
 	width: 45%;
-	height: 135px;
+	height: 136px;
 	padding: 8px;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .port_name {
-	font-size: 14.5px;
+	font-size: 14px;
 	font-weight: 600;
 	color: #221f20;
 }
@@ -83,7 +83,7 @@
 }
 
 .vertical_dots {
-	margin: 5px;
+	margin: 6px;
 }
 
 .popover_content {
@@ -97,14 +97,14 @@
 .eta_etd_form {
 	display: flex;
 	flex-direction: column;
-	gap: 15px;
+	gap: 16px;
 	margin-top: 40px;
 }
 
 .port_name_form {
 	width: 200px;
 	padding: 10px;
-	margin-left: -15px;
+	margin-left: -16px;
 	font-size: 14px;
 	font-weight: 500;
 	color: #221f20;

@@ -2,7 +2,7 @@
 	z-index: 90 !important;
 	width: 100%;
 
-	@media (max-width: 1465px) {
+	@media (max-width: 1466px) {
 		width: 600px;
 	}
 }

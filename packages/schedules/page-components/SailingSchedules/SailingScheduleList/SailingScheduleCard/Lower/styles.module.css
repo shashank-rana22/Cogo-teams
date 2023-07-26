@@ -6,9 +6,9 @@
 
 .lower_left {
 	display: flex;
-	gap: 35px;
+	gap: 36px;
 	align-items: center;
-	padding: 17px 12px;
+	padding: 16px 12px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #4f4f4f;

@@ -9,8 +9,8 @@
 
 .element {
 	padding: 4px;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: 6px;
+	margin-bottom: 6px;
 
 	:global {
 		.ui_select_input_placeholder {
@@ -28,13 +28,13 @@
 .item_heading {
 	min-height: 16px;
 	margin-bottom: 6px;
-	font-size: 13px;
+	font-size: 12px;
 	font-weight: 600;
 }
 
 .item_label {
 	max-height: 16px;
-	padding: -3px;
+	padding: -2px;
 	margin-bottom: 6px;
 	font-size: 14px;
 	font-weight: 500;

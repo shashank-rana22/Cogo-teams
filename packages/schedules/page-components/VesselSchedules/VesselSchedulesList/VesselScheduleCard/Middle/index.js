@@ -1,9 +1,9 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
 
@@ -13,22 +13,22 @@ function Middle({ vessel_schedule_link, loading }) {
 			<div className={styles.port}>
 				{loading ? <Placeholder width="100px" /> : (
 					<div className={styles.port_name}>
-						{vessel_schedule_link?.[ZERO]?.display_name}
+						{vessel_schedule_link?.[GLOBAL_CONSTANTS.zeroth_index]?.display_name}
 					</div>
 				)}
 				{loading ? <Placeholder width="100px" /> : (
 					<div className={styles.date}>
-						{format(vessel_schedule_link?.[ZERO]?.etd, 'dd MMM yyyy hh:mm')}
+						{format(vessel_schedule_link?.[GLOBAL_CONSTANTS.zeroth_index]?.etd, 'dd MMM yyyy hh:mm')}
 					</div>
 				)}
 				{loading ? <Placeholder width="100px" /> : (
 					<div className={styles.voyage_number}>
 						{
-                            vessel_schedule_link?.[ZERO].departure_voyage_number
+                            vessel_schedule_link?.[GLOBAL_CONSTANTS.zeroth_index].departure_voyage_number
                             && (
 	<>
 		Voyage No :
-		{vessel_schedule_link?.[ZERO].departure_voyage_number}
+		{vessel_schedule_link?.[GLOBAL_CONSTANTS.zeroth_index].departure_voyage_number}
 	</>
                             )
                     }

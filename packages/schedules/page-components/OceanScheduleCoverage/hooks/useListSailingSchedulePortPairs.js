@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
@@ -19,13 +18,10 @@ const useListSailingSchedulePortPairs = ({ filters, currentPage }) => {
 		try {
 			await trigger({
 				params: {
-					filters:
-                        filters?.origin_port && filters?.destination_port
-                        	? {
-                        		origin_port_id      : filters.origin_port,
-                        		destination_port_id : filters.destination_port,
-                        	}
-                        	: null,
+					filters: {
+						origin_port_id      : filters?.origin_port_id || undefined,
+						destination_port_id : filters?.destination_port_id || undefined,
+					},
 					page       : currentPage,
 					page_limit : 15,
 				},

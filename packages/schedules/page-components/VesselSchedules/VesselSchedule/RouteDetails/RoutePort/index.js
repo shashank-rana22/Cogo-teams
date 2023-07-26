@@ -25,7 +25,7 @@ function RoutePort({
 					</div>
 				</div>
 			</div>
-			<div style={{ margin: '7px' }} />
+			<div style={{ margin: '8px' }} />
 			<div className={styles.middle}>
 				{!isFirst && <div className={styles.hr_line_up} />}
 				<div className={styles.circle} />
