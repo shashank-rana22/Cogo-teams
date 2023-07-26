@@ -8,6 +8,7 @@ const DEFAULT_PAGE = 1;
 const useGetCsdConfigurations = (source = '') => {
 	const router = useRouter();
 	const configId = router?.query?.id;
+	const mode = router?.query?.mode;
 
 	const [params, setParams] = useState({});
 
@@ -44,7 +45,11 @@ const useGetCsdConfigurations = (source = '') => {
 	}, [trigger, source, params, page, configId]);
 
 	useEffect(() => {
-		fetchList();
+		if (source === 'create') {
+			if (configId && mode) {
+				fetchList();
+			}
+		} else fetchList();
 	}, []);
 
 	const { list = [], ...pageData } = data || {};

@@ -24,7 +24,7 @@ function CreateCofiguration() {
 	const [activeItem, setActiveItem] = useState('select_users');
 
 	const { loading, createCsdConfig } = useCreateCsdConfig({ setActiveItem });
-	const { list = [] } = useGetCsdConfigurations();
+	const { list = [] } = useGetCsdConfigurations('create');
 
 	const data = list[GLOBAL_CONSTANTS.zeroth_index] || {};
 
