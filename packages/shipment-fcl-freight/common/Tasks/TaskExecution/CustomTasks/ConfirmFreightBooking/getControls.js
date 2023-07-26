@@ -1,4 +1,4 @@
-import getShouldShowField from './getShouldShowField';
+import getShowElements from './getShouldShowField';
 
 const getControls = ({ taskData = {}, formValues = {} }) => {
 	const options = (taskData?.apis_data?.list_organization_users || []).map((user) => ({
@@ -53,11 +53,7 @@ const getControls = ({ taskData = {}, formValues = {} }) => {
 		},
 	];
 
-	const SHOW_ELEMENTS = {};
-
-	formControls.forEach((ctrl) => {
-		SHOW_ELEMENTS[ctrl?.name] = getShouldShowField({ ctrl, formValues });
-	});
+	const SHOW_ELEMENTS = getShowElements({ controls: formControls, formValues });
 
 	return {
 		controls     : formControls,
