@@ -17,6 +17,7 @@ function List({
 	loading = false,
 	type = 'seller',
 	onClickAdd = () => {},
+	refetch = () => {},
 	SERVICES_CANNOT_BE_REMOVED = [],
 }) {
 	const [isOpen, setIsOpen] = useState({});
@@ -59,6 +60,7 @@ function List({
 								onClickAdd={onClickAdd}
 								setIsOpen={setIsOpen}
 								isOpen={isOpen}
+								refetch={refetch}
 								SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
 							/>
 						)}

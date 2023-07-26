@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Toast } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -38,7 +38,12 @@ function DeleteServiceModal({
 					themeType="secondary"
 					disabled={loading}
 					loading={loading}
-					onClick={onClick}
+					onClick={async (event) => {
+						event.stopPropagation();
+						event.preventDefault();
+						const done = await onClick();
+						if (done) { setShow(false); }
+					}}
 				>
 					Delete
 				</Button>

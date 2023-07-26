@@ -1,7 +1,9 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useDeleteAdditionalService = ({ service, source = '' }) => {
+const useDeleteAdditionalService = ({ service, source = '', refetch = () => {} }) => {
 	const { general: { query = {} } } = useSelector((state) => state);
 	const { spot_search_id = '', checkout_id = '' } = query;
 
@@ -53,13 +55,14 @@ const useDeleteAdditionalService = ({ service, source = '' }) => {
 		};
 
 		try {
-			const res = await trigger({
-				data: params,
-			});
-
-			return res;
+			await trigger({ data: params });
+			Toast.success('Service deleted successfully!');
+			refetch();
+			return true;
 		} catch (error) {
-			console.log('erroe');
+			if (error?.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 
 		return {};
