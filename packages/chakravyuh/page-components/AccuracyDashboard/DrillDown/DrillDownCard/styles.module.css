@@ -8,7 +8,7 @@
 	width: 180px;
 	height: 100px;
 	padding: 12px 12px 8px;
-	margin-right: 50px;
+	margin-right: 40px;
 	background-color: #fff;
 	border: 1px solid transparent;
 	border-radius: 8px;
@@ -23,15 +23,15 @@
 		--card-color: #044863dd;
 	}
 
-	&.missing {
+	&.missing_rates {
 		--card-color: #0a9396;
 	}
 
-	&.dislike {
+	&.disliked_rates {
 		--card-color: #ca6702;
 	}
 
-	&.dropoff {
+	&.stale_rates {
 		--card-color: #9b2226;
 	}
 
@@ -47,6 +47,10 @@
 		border-left: none;
 		border-top-left-radius: 0;
 		border-bottom-left-radius: 0;
+	}
+
+	&:last-of-type {
+		margin-right: 24px;
 	}
 }
 
@@ -70,20 +74,21 @@
 		background-color: #001219;
 	}
 
-	&.missing {
+	&.missing_rates {
 		background-color: #0a9396;
 	}
 
-	&.dislike {
+	&.disliked_rates {
 		background-color: #ca6702;
 	}
 
-	&.dropoff {
+	&.stale_rates {
 		background-color: #9b2226;
 	}
 }
 
 .rate_amount {
+	margin-left: 12px;
 	font-size: 16px;
 	font-weight: 600;
 }
@@ -116,4 +121,9 @@
 	margin-right: auto;
 	font-size: 12px;
 	color: #828282;
+}
+
+.drop_icon {
+	margin-right: 4px;
+	transform: rotate(10deg);
 }

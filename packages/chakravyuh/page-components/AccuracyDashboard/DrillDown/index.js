@@ -62,7 +62,7 @@ function DrillDown({ globalFilters = {} }) {
 				)}
 
 				{drillDownCards?.map((row, rowIdx) => {
-					const isActive = activeParent === row[GLOBAL_CONSTANTS.zeroth_index].parent;
+					const isActive = activeParent === row[GLOBAL_CONSTANTS.zeroth_index].action_type;
 
 					return (!activeParent || isActive) && (
 						<div
@@ -81,6 +81,7 @@ function DrillDown({ globalFilters = {} }) {
 									animate={!activeParent}
 									isAtTop={isActive}
 									parentAction={row[colIdx - FACTOR]?.action_type || 'search'}
+									parent={row[GLOBAL_CONSTANTS.zeroth_index].action_type}
 								/>
 							))}
 						</div>

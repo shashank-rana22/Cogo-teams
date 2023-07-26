@@ -12,7 +12,7 @@ const CONSTANT_TWENTY = 20;
 
 function DrillDownCard({
 	data = {}, cardIndex = 1, delay = 2, handleClick = () => {}, animate = false,
-	isAtTop = false, parentAction = 'Search',
+	isAtTop = false, parentAction = 'Search', parent = null,
 }) {
 	const isMainCard = !cardIndex;
 	const action_text = parentAction.split('_').join(' ');
@@ -21,13 +21,13 @@ function DrillDownCard({
 		<div
 			style={{ animationDelay: `${delay}s` }}
 			className={cl`${styles.container} ${(isAtTop || isMainCard) ? styles.main_card : styles.secondary_card}
-			${isAtTop ? styles.custom_card : ''} ${styles[data.parent]} ${animate ? styles.animate : ''}`}
+			${isAtTop ? styles.custom_card : ''} ${styles[parent]} ${animate ? styles.animate : ''}`}
 		>
 			{
 				isAtTop && (
 					<div
 						style={{ height: `${CONSTANT_HUNDRED - cardIndex * CONSTANT_TWENTY}px` }}
-						className={cl`${styles.indicator} ${styles[data.parent]}`}
+						className={cl`${styles.indicator} ${styles[parent]}`}
 					/>
 				)
 			}
@@ -41,6 +41,11 @@ function DrillDownCard({
 			</div>
 			<div className={styles.flex_between}>
 				<p className={styles.drop_off_text}>
+					<img
+						src={GLOBAL_CONSTANTS.image_url.drop_down_red}
+						alt="drop"
+						className={styles.drop_icon}
+					/>
 					{`${formatBigNumbers(data?.drop || GLOBAL_CONSTANTS.zeroth_index)}%`}
 				</p>
 				{isAtTop && (
@@ -48,7 +53,7 @@ function DrillDownCard({
 				)}
 				{!isAtTop
 				&& (isMainCard
-					? <Button themeType="linkUi" onClick={() => handleClick(data.parent)}>View Dropoff</Button>
+					? <Button themeType="linkUi" onClick={() => handleClick(parent)}>View Dropoff</Button>
 					: <h3 className={styles.rate_amount}>{formatBigNumbers(data?.rates_count)}</h3>
 				)}
 			</div>
