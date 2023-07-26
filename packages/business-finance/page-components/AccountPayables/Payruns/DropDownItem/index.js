@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import RenderTooltip from '../../RenderTooltip';
+import RenderTooltip from '../../../commons/RenderTooltip';
 
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';

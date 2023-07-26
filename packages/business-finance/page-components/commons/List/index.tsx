@@ -14,7 +14,6 @@ import {
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
 import commonFunctions from './commonFunctions';
-import DropDownItem from './DropDownItem';
 import styles from './styles.module.css';
 
 export interface Props {
@@ -34,9 +33,7 @@ export interface Props {
 	rowStyle?: string;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
 	viewId?:null;
-	dropDownData?:[];
-	loadingDropDown?: boolean;
-	activePayrunTab?:string;
+	renderDropDown?:Function;
 }
 
 function List({
@@ -56,9 +53,7 @@ function List({
 	rowStyle = null,
 	paginationType = 'table',
 	viewId = null,
-	dropDownData = [],
-	loadingDropDown = false,
-	activePayrunTab = '',
+	renderDropDown = () => {},
 }: Props) {
 	const {
 		showHeader = true,
@@ -113,13 +108,7 @@ function List({
 									rowStyle={rowStyle}
 									viewId={viewId}
 								/>
-								{(activePayrunTab === 'PAID' && viewId === singleitem?.objectId) ? (
-									<DropDownItem
-										data={dropDownData}
-										loadingDropDown={loadingDropDown}
-										key={viewId}
-									/>
-								) : null}
+								{renderDropDown(singleitem)}
 							</>
 						))}
 					</div>

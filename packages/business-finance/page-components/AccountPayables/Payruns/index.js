@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import List from '../../commons/List/index.tsx';
 
+import DropDownItem from './DropDownItem';
 import Header from './Header';
 import useFilterData from './hooks/useFilterData';
 import InvoiceCard from './InvoiceCard/index';
@@ -46,6 +47,21 @@ function Payruns({ activeEntity = '' }) {
 			setSelectedIds,
 		},
 	);
+
+	const renderPaidDropDownAccordian = (singleitem) => {
+		if (viewId === singleitem?.objectId) {
+			return (
+				<div>
+					<DropDownItem
+						data={dropDownData}
+						loadingDropDown={loadingDropDown}
+						key={viewId}
+					/>
+				</div>
+			);
+		}
+		return null;
+	};
 
 	return (
 
@@ -97,7 +113,7 @@ function Payruns({ activeEntity = '' }) {
 				loadingDropDown={loadingDropDown}
 				activePayrunTab={activePayrunTab}
 				paginationType="number"
-
+				renderDropDown={renderPaidDropDownAccordian}
 			/>
 		</div>
 	);
