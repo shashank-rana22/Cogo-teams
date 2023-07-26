@@ -290,9 +290,18 @@ const GLOBAL_CONSTANTS = {
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
+		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
+		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
+		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',
+		organization         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/organ-svg.svg',
+		user_activity        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user-actrivity.svg',
+		clock                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/alarm-timer.svg',
+		note                 : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note.svg',
+		quick_actions        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg',
+		customer_insights    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg',
+		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
 		clock_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
 		sad_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
-
 	},
 
 	video_call_ring_tone_url:

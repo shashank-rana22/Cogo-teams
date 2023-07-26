@@ -16,6 +16,7 @@ import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
+import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
 import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
@@ -106,6 +107,11 @@ function CogoOne() {
 	};
 	const { hasNoFireBaseRoom = false } = activeTab || {};
 
+	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
+	const orgId = activeTab === 'message'
+		? formattedMessageData?.organization_id
+		: activeTab?.data?.organization_id;
+
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
 			const auth = getAuth();
@@ -188,6 +194,8 @@ function CogoOne() {
 										firestore={firestore}
 										userId={userId}
 										setActiveTab={setActiveTab}
+										formattedMessageData={formattedMessageData}
+										orgId={orgId}
 									/>
 									{hasNoFireBaseRoom && <div className={styles.overlay_div} />}
 								</div>
@@ -206,6 +214,7 @@ function CogoOne() {
 				openKamContacts={openKamContacts}
 				setOpenKamContacts={setOpenKamContacts}
 				setActiveTab={setActiveTab}
+				orgId={orgId}
 			/>
 
 			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out && (
