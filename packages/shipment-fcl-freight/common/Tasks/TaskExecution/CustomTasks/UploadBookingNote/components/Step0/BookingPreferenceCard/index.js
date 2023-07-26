@@ -4,7 +4,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import useUpdateShipmentBookingConfirmationPreferences from
 	'../../../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
-import LABEL_VALUE_MAPPING from '../../../helpers/getPreferenceLabel';
+import getPreferenceLabel from '../../../helpers/getPreferenceLabel';
 
 import styles from './styles.module.css';
 
@@ -58,7 +58,7 @@ function BookingPreferenceCard({
 			<div>
 				{(dataArray || []).map((obj) => (
 					<div key={obj?.id} className={cl`${styles.sub_container} ${styles.justify_space_between}`}>
-						{LABEL_VALUE_MAPPING(obj).map((eachObj) => (
+						{getPreferenceLabel(obj).map((eachObj) => (
 							<div key={eachObj?.id}>
 								<div className={styles.label}>{eachObj?.label}</div>
 								<div className={styles.value}>{eachObj?.value}</div>

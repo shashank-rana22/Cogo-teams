@@ -1,7 +1,7 @@
 import { getFormattedPrice } from '@cogoport/forms';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-const LABEL_VALUE_MAPPING = (obj) => [
+const getPreferenceLabel = (obj) => [
 	{
 		id    : 'supplier_name',
 		label : 'Supplier Name',
@@ -36,4 +36,4 @@ const LABEL_VALUE_MAPPING = (obj) => [
 	},
 ];
 
-export default LABEL_VALUE_MAPPING;
+export default getPreferenceLabel;
