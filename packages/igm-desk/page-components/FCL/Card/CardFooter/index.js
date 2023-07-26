@@ -28,7 +28,7 @@ export default function CardFooter({ item = {} }) {
 
 					{item?.documents?.map((doc) => (
 						<div key={doc?.label} className={cl`${styles.text} ${styles.heading}`}>
-							{doc?.status === 'daily_report' ? (
+							{doc?.status === 'completed' ? (
 								<IcCGreenCircle height={8} width={8} />
 							) : (
 								<IcCRedCircle height={8} width={8} />
