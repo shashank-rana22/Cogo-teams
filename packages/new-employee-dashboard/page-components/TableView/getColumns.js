@@ -30,7 +30,7 @@ const getColumns = ({
 				onClick={() => onClickNewJoinerColumn(item?.id)}
 			>
 				<div className={styles.name}>{item?.name || '-'}</div>
-				{item?.personal_email || '-'}
+				{item?.cogoport_email || item?.personal_email || '-'}
 			</div>
 		),
 	},
