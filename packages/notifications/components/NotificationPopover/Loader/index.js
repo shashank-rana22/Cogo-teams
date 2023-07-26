@@ -7,7 +7,7 @@ function LoaderComp() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.loader}>
-				<IcMRadioLoader size={1} />
+				<IcMRadioLoader />
 			</div>
 			<div className={styles.load_heading}>Loading...</div>
 		</div>
