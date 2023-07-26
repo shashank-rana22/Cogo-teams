@@ -19,6 +19,8 @@ import getColumns from './getColumns';
 import styles from './styles.module.css';
 import useGetRatingColumns from './useGetRatingColumns';
 
+const ROUND_OFF_DIGITS = 100;
+
 function ManagerDashboard() {
 	const [employeeId, setEmployeeId] = useState('');
 	const [openKraModal, setOpenKraModal] = useState(false);
@@ -154,7 +156,7 @@ function ManagerDashboard() {
 						<div className={styles.mean_value_wrapper}>
 							Organization Rating:
 							{' '}
-							{mean_rating}
+							{Math.round(mean_rating * ROUND_OFF_DIGITS) / ROUND_OFF_DIGITS}
 						</div>
 					</div>
 				)}
