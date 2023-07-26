@@ -13,6 +13,7 @@ import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
+import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
 import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
@@ -87,6 +88,11 @@ function CogoOne() {
 		},
 	};
 	const { hasNoFireBaseRoom = false } = activeTab || {};
+
+	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
+	const orgId = activeTab === 'message'
+		? formattedMessageData?.organization_id
+		: activeTab?.data?.organization_id;
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -164,6 +170,8 @@ function CogoOne() {
 										firestore={firestore}
 										userId={userId}
 										setActiveTab={setActiveTab}
+										formattedMessageData={formattedMessageData}
+										orgId={orgId}
 									/>
 									{hasNoFireBaseRoom && <div className={styles.overlay_div} />}
 								</div>
@@ -182,6 +190,7 @@ function CogoOne() {
 				openKamContacts={openKamContacts}
 				setOpenKamContacts={setOpenKamContacts}
 				setActiveTab={setActiveTab}
+				orgId={orgId}
 			/>
 		</>
 	);

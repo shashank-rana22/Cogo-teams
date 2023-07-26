@@ -1,7 +1,11 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMSearchdark,
-	IcMDocument, IcMShip, IcMDefault,
+	IcMDocument, IcMShip,
+	IcMTicket,
+	IcMProfile,
 } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
@@ -19,92 +23,97 @@ const ICON_MAPPING = [
 	{
 		name    : 'profile',
 		content : 'Profile',
-		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/profile.svg"
-			alt="profile"
-			style={{ width: '18px', heigh: '18px' }}
-		/>,
+		icon    : <IcMProfile width={20} height={20} />,
 	},
 	{
 		name    : 'organization',
 		content : 'Organization Details',
-		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/organ-svg.svg"
+		icon    : <Image
+			src={GLOBAL_CONSTANTS.image_url.organization}
 			alt="organization"
-			style={{ width: '20px', heigh: '20px' }}
+			width={20}
+			height={20}
 		/>,
 	},
 	{
 		name    : 'flash_shipment_bookings',
 		content : 'Flash Shipment Bookings',
-		icon    : <IcMShip width={20} height={20} />,
+		icon    : <IcMShip width={22} height={22} />,
 	},
 	{
 		name    : 'user_activity',
 		content : 'User Activity',
-		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user-actrivity.svg"
+		icon    : <Image
+			src={GLOBAL_CONSTANTS.image_url.user_activity}
 			alt="activities"
+			width={40}
+			height={40}
 		/>,
 	},
 	{
 		name    : 'reminder',
 		content : 'Reminder',
-		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/alarm-timer.svg"
+		icon    : <Image
+			src={GLOBAL_CONSTANTS.image_url.clock}
 			alt="reminder"
+			width={20}
+			height={20}
 		/>,
 	},
 	{
 		name    : 'notes',
 		content : 'Notes',
-		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note.svg"
+		icon    : <Image
+			src={GLOBAL_CONSTANTS.image_url.note}
 			alt="notes"
+			width={18}
+			height={18}
 		/>,
 	},
 	{
 		name    : 'quick_actions',
 		content : 'Quick Actions',
-		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
+		icon    : <Image
+			src={GLOBAL_CONSTANTS.image_url.quick_actions}
 			alt="actions"
+			width={20}
+			height={20}
 		/>,
 	},
 	{
 		name    : 'tickets',
 		content : 'Tickets',
-		icon:
-		(
-			<IcMDefault width={26} height={26} />
-		),
+		icon    : <IcMTicket width={22} height={22} />,
 
 	},
 	{
 		name    : 'spot_search',
 		content : 'Spot Search',
-		icon    : <IcMSearchdark width={16} height={16} />,
+		icon    : <IcMSearchdark width={20} height={20} />,
 	},
 	{
 		name    : 'customer_insights',
 		content : 'Customer Insights',
-		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg"
+		icon    : <Image
+			src={GLOBAL_CONSTANTS.image_url.customer_insights}
 			alt="insights"
+			width={20}
+			height={20}
 		/>,
 	},
 	{
 		name    : 'documents',
 		content : 'Documents',
-		icon    : <IcMDocument width={18} height={18} />,
+		icon    : <IcMDocument width={20} height={20} />,
 	},
 	{
 		name    : 'help_desk',
 		content : 'Help Desk',
-		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg"
+		icon    : <Image
+			src={GLOBAL_CONSTANTS.image_url.help_desk}
 			alt="faq"
-			style={{ width: '25px', heigh: '25px' }}
+			width={22}
+			height={22}
 		/>,
 	},
 ];
