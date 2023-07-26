@@ -49,7 +49,7 @@ function ExecuteTask({
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
-	const { apiTrigger, data } = useListShipmentTradePartners({ shipment_id: shipment_data?.id });
+	const { data } = useListShipmentTradePartners({ shipment_id: shipment_data?.id });
 
 	const {
 		steps = [],
@@ -198,10 +198,11 @@ function ExecuteTask({
 			<AddCompanyModal
 				tradePartnersData={data}
 				addCompany={TRADE_PARTY_TYPE[task.task]}
-				tradePartnerTrigger={apiTrigger}
+				tradePartnerTrigger={taskListRefetch}
 				shipment_id={shipment_data?.id}
 				importer_exporter_id={shipment_data?.importer_exporter_id}
 				throughPoc={false}
+				setAddCompany={onCancel}
 			/>
 		);
 	}

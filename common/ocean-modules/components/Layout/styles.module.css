@@ -2,12 +2,22 @@
 	display: flex;
 	flex-direction: column;
 	margin-right: 16px;
+
+	:global {
+		.react-datepicker-wrapper {
+			display: block;
+		}
+	}
 }
 
 .row {
 	display: flex;
 	flex-wrap: wrap;
 	padding: 8px;
+
+	> *:not(:last-of-type) {
+		margin-right: max(1%, 16px);
+	}
 }
 
 .width_100 {
