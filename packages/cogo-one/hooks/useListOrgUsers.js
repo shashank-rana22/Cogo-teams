@@ -7,12 +7,13 @@ import formatOrganizationUsers from '../helpers/formatOrganizationUsers';
 const FIRST_PAGE = 1;
 const SCROLL_HEIGHT = 20;
 
-const getParams = ({ organizationId, page }) => ({
-	filters: { organization_id: organizationId },
+const getParams = ({ organizationId, page, pageLimit }) => ({
+	filters    : { organization_id: organizationId },
 	page,
+	page_limit : pageLimit || undefined,
 });
 
-const useListOrgUsers = ({ organizationId = [] }) => {
+const useListOrgUsers = ({ organizationId = [], pageLimit }) => {
 	const [pagination, setPagination] = useState(FIRST_PAGE);
 	const [listData, setListData] = useState({
 		list  : [],
@@ -30,7 +31,7 @@ const useListOrgUsers = ({ organizationId = [] }) => {
 		}
 
 		try {
-			const res = await trigger({ params: getParams({ organizationId, page }) });
+			const res = await trigger({ params: getParams({ organizationId, page, pageLimit }) });
 			setPagination(page);
 
 			if (res?.data) {
@@ -40,7 +41,7 @@ const useListOrgUsers = ({ organizationId = [] }) => {
 		} catch (err) {
 			console.error('err', err);
 		}
-	}, [trigger, organizationId]);
+	}, [organizationId, trigger, pageLimit]);
 
 	const handleScroll = (e) => {
 		const { clientHeight, scrollTop, scrollHeight } = e.target;
@@ -63,8 +64,6 @@ const useListOrgUsers = ({ organizationId = [] }) => {
 		formattedOrgUsersList: organizationId ? formatOrganizationUsers({ data: listData }) : [],
 		loading,
 		handleScroll,
-		pagination,
-		setPagination,
 	};
 };
 export default useListOrgUsers;

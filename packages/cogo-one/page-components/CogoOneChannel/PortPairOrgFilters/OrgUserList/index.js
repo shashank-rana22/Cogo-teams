@@ -1,6 +1,7 @@
 import { Placeholder, Checkbox, Button, cl, Select } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import UserAvatar from '../../../../common/UserAvatar';
 import useListOrgUsers from '../../../../hooks/useListOrgUsers';
@@ -28,13 +29,13 @@ function OrgUsersList({
 	selectedAutoAssign = {},
 	setSelectedAutoAssign = () => {},
 }) {
+	const [pageLimit, setPageLimit] = useState(null);
+
 	const {
 		formattedOrgUsersList = [],
 		loading = false,
 		handleScroll = () => {},
-		pagination,
-		setPagination = () => {},
-	} = useListOrgUsers({ organizationId: listServiceProviders });
+	} = useListOrgUsers({ organizationId: listServiceProviders, pageLimit });
 
 	const onCardClick = ({ item }) => {
 		const {
@@ -118,12 +119,12 @@ function OrgUsersList({
 	return (
 		<div className={styles.port_pair_view}>
 			<div className={styles.all_user_select}>
-				<Checkbox onChange={(event) => handleSelectAll({ event })} />
+				<Checkbox disabled={isEmpty(modifiedList)} onChange={(event) => handleSelectAll({ event })} />
 				{' '}
 				Select All
 				<Select
-					value={pagination}
-					onChange={setPagination}
+					value={pageLimit}
+					onChange={setPageLimit}
 					size="sm"
 					placeholder="Select Books"
 					options={USER_SELECT_PAGINATION}
