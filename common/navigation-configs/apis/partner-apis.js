@@ -6818,6 +6818,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
+		{
+			api          : 'get_ledger',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
 	],
 	unified_dashboard: [
 		{
