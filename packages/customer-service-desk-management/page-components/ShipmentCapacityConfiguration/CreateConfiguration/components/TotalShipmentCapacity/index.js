@@ -9,7 +9,7 @@ import CapacityDetailsTable from '../../../CapacityDetailsTable';
 
 import styles from './styles.module.css';
 
-function TotalShipmentCapacity() {
+function TotalShipmentCapacity({ routeLoading = false }) {
 	const router = useRouter();
 
 	const [showModal, setShowModal] = useState(false);
@@ -43,7 +43,7 @@ function TotalShipmentCapacity() {
 				<Button
 					size="md"
 					themeType="secondary"
-					loading={loading}
+					loading={loading || routeLoading}
 					onClick={() => updateCsdConfig({ status: 'draft', id: configId })}
 				>
 					Save As Draft
@@ -53,7 +53,7 @@ function TotalShipmentCapacity() {
 					size="md"
 					themeType="primary"
 					className={styles.btn}
-					loading={loading}
+					loading={loading || routeLoading}
 					onClick={() => setShowModal(true)}
 				>
 					Activate Configuration
@@ -78,7 +78,7 @@ function TotalShipmentCapacity() {
 						<div className={styles.btn_container}>
 							<Button
 								type="button"
-								loading={loading}
+								loading={loading || routeLoading}
 								themeType="secondary"
 								onClick={() => setShowModal(false)}
 							>
@@ -87,7 +87,7 @@ function TotalShipmentCapacity() {
 
 							<Button
 								type="button"
-								loading={loading}
+								loading={loading || routeLoading}
 								style={{ marginLeft: '12px' }}
 								onClick={() => updateCsdConfig({ status: 'active', id: configId })}
 							>

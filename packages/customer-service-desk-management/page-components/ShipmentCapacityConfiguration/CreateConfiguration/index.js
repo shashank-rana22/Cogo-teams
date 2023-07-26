@@ -2,7 +2,7 @@ import { Stepper } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useCreateCsdConfig from '../../../hooks/useCreateCsdConfig';
 import useGetCsdConfigurations from '../../../hooks/useGetCsdConfigurations';
@@ -22,6 +22,7 @@ function CreateCofiguration() {
 	const router = useRouter();
 
 	const [activeItem, setActiveItem] = useState('select_users');
+	const [routeLoading, setRouteLoading] = useState(false);
 
 	const { loading, createCsdConfig } = useCreateCsdConfig({ setActiveItem });
 	const { list = [] } = useGetCsdConfigurations('create');
@@ -36,6 +37,7 @@ function CreateCofiguration() {
 				loading,
 				createCsdConfig,
 				data,
+				routeLoading,
 			},
 		},
 		set_configuration: {
@@ -43,17 +45,30 @@ function CreateCofiguration() {
 			props     : {
 				setActiveItem,
 				data,
+				routeLoading,
 			},
 		},
 		total_shipment_capacity: {
 			component : TotalShipmentCapacity,
 			props     : {
 				setActiveItem,
+				routeLoading,
 			},
 		},
 	};
 
 	const { component: ActiveComponent, props: activeComponentProps } = COMPONENT_MAPPING[activeItem];
+
+	useEffect(() => {
+		router.events.on('routeChangeStart', () => setRouteLoading(true));
+		router.events.on('routeChangeComplete', () => setRouteLoading(false));
+
+		return () => {
+			router.events.off('routeChangeStart', () => setRouteLoading(true));
+			router.events.off('routeChangeComplete', () => setRouteLoading(false));
+		};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<div className={styles.container}>
@@ -69,7 +84,12 @@ function CreateCofiguration() {
 				<div role="presentation" className={styles.title}>New Config. Creation</div>
 			</div>
 
-			<Stepper active={activeItem} setActive={setActiveItem} items={STEPPER_ITEMS} arrowed />
+			<Stepper
+				active={activeItem}
+				setActive={setActiveItem}
+				items={STEPPER_ITEMS}
+				arrowed
+			/>
 			<ActiveComponent {...activeComponentProps} />
 		</div>
 

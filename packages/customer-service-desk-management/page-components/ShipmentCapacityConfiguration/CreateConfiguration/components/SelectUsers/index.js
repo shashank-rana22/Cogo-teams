@@ -25,6 +25,7 @@ function SelectUsers({
 	createCsdConfig = () => {},
 	loading = false,
 	data = {},
+	routeLoading = false,
 }) {
 	const { control, formState:{ errors }, handleSubmit, watch, setValue = () => {} } = useForm();
 	const { cogo_entity_id, config_type, organization_type, segment, organization_ids } = data;
@@ -117,7 +118,7 @@ function SelectUsers({
 				size="md"
 				themeType="primary"
 				className={styles.btn}
-				loading={loading}
+				loading={loading || routeLoading}
 				onClick={handleSubmit((values) => createCsdConfig({ values }))}
 			>
 				Save & Proceed

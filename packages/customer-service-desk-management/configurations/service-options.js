@@ -1,19 +1,19 @@
 const services = [
 	{
 		label : 'FCL Short Transit',
-		value : 'fcl_freight_short_transit',
+		value : 'fcl_freight-short_transit',
 	},
 	{
 		label : 'FCL Long Transit',
-		value : 'fcl_freight_long_transit',
+		value : 'fcl_freight-long_transit',
 	},
 	{
 		label : 'LCL Short Transit',
-		value : 'lcl_freight_short_transit',
+		value : 'lcl_freight-short_transit',
 	},
 	{
 		label : 'LCL Long Transit',
-		value : 'lcl_freight_long_transit',
+		value : 'lcl_freight-long_transit',
 	},
 	{
 		label : 'AIR',

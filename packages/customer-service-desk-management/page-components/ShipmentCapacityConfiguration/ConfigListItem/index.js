@@ -39,8 +39,6 @@ function ConfigListItem({ data = {}, setShowModal = () => {} }) {
 
 	const { title, content } = activationStatus({ status, activated_at });
 
-	console.log('data', data);
-
 	const handleEditClick = () => router.push(`/customer-service-desk-management/create-config?
 												id=${data.id}&mode=edit`);
 

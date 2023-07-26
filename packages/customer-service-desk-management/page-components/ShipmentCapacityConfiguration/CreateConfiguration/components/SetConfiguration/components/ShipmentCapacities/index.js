@@ -10,15 +10,27 @@ import useCreateShipmentCapacities from '../../../../../../../hooks/useCreateShi
 
 import styles from './styles.module.css';
 
-function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiveItem = () => {}, data = {} }) {
+function ShipmentCapacities({
+	agentExperienceSlabs = [], configId = '',
+	setActiveItem = () => {}, data = {}, routeLoading = false,
+	trigger = () => {},
+}) {
 	const { loading, createShipmentCapacities } = useCreateShipmentCapacities({ setActiveItem });
 
-	const { control, formState: { errors }, handleSubmit, reset, setValue } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue, getValues } = useForm();
+
+	const handleReset = () => {
+		const registeredFieldNames = Object.keys(getValues());
+
+		registeredFieldNames.forEach((fieldName) => {
+			setValue(fieldName, '');
+		});
+	};
 
 	useEffect(() => {
 		const serviceWiseData = services?.map((service) => {
 			const filteredData = data.shipment_capacities?.filter((item) => ((item.service_transit_type
-				? `${item.service_type}_${item.service_transit_type}` : item.service_type) === service.value)) || [];
+				? `${item.service_type}-${item.service_transit_type}` : item.service_type) === service.value)) || [];
 
 			return {
 				service : service.value,
@@ -30,7 +42,7 @@ function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiv
 			const serviceValue = item.service;
 
 			item.data.forEach((subItem, index) => {
-				setValue(`${serviceValue}${index}`, subItem.shipment_capacity);
+				setValue(`${index}-${serviceValue}`, subItem.shipment_capacity);
 			});
 		});
 	}, [data, setValue]);
@@ -76,7 +88,7 @@ function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiv
 
 					<div className={styles.label}>{service.label}</div>
 
-					<div className={styles.capacity_container}>
+					<div className={styles.capacity_container} key={agentExperienceSlabs}>
 
 						{[...Array(agentExperienceSlabs.length).keys()].map((key) => (
 
@@ -85,17 +97,17 @@ function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiv
 								className={styles.capacity_input}
 							>
 								<InputController
-									name={`${service.value}${key}`}
+									name={`${key}-${service.value}`}
 									control={control}
 									rules={{
 										required: 'Required',
 									}}
 								/>
 
-								{errors?.[`${service.value}${key}`]?.message
+								{errors?.[`${key}-${service.value}`]?.message
 							&& (
 								<p className={styles.err_msg}>
-									{errors?.[`${service.value}${key}`]?.message}
+									{errors?.[`${key}-${service.value}`]?.message}
 								</p>
 							)}
 
@@ -119,8 +131,8 @@ function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiv
 					size="md"
 					themeType="secondary"
 					className={styles.reset_btn}
-					loading={loading}
-					onClick={() => reset()}
+					loading={loading || routeLoading}
+					onClick={handleReset}
 				>
 					Reset
 				</Button>
@@ -128,7 +140,7 @@ function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiv
 				<Button
 					size="md"
 					themeType="primary"
-					loading={loading}
+					loading={loading || routeLoading}
 					onClick={handleSubmit((values) => createShipmentCapacities({
 						values,
 						agentExperienceSlabs,

@@ -35,13 +35,16 @@ const useCreateShipmentCapacities = ({ setActiveItem = () => {} }) => {
 
 	const createShipmentCapacities = async ({ values = {}, agentExperienceSlabs = [], configId = '' }) => {
 		try {
+			console.log('try');
 			await trigger({
 				data: getPayload({ values, agentExperienceSlabs, configId, isEditMode }),
 			});
+
+			await router.push(`/customer-service-desk-management/create-config?id=${configId}&stage=shipmentCapacity`);
+
 			setActiveItem('total_shipment_capacity');
 			Toast.success('Shipment Capacities have been set successfully');
 		} catch (error) {
-			console.log('error', error);
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};

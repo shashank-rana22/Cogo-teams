@@ -3,6 +3,7 @@ import { RadioGroupController, useForm, useFieldArray } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import DEFAULT_SLABS from '../../../../../configurations/defaultExperienceSlabs';
@@ -22,7 +23,7 @@ const CUSTOM_DEFAULT_SLAB = [{ slab_unit: 'month', slab_lower_limit: '0', slab_u
 const getSlabs = ({ experience = 'default', isEditMode = false, data = {} }) => {
 	if (experience === 'default') return DEFAULT_SLABS;
 
-	if (isEditMode) {
+	if (isEditMode && !isEmpty(data.agent_experience_slabs)) {
 		return data.agent_experience_slabs?.map((item, index) => {
 			const { slab_unit, slab_lower_limit, slab_upper_limit } = item;
 
@@ -36,7 +37,7 @@ const getSlabs = ({ experience = 'default', isEditMode = false, data = {} }) => 
 	return CUSTOM_DEFAULT_SLAB;
 };
 
-function SetConfiguration({ setActiveItem = () => {}, data = {} }) {
+function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = false }) {
 	const router = useRouter();
 
 	const [showForm, setShowForm] = useState(false);
@@ -47,7 +48,7 @@ function SetConfiguration({ setActiveItem = () => {}, data = {} }) {
 
 	const { loading, createAgentExperienceSlabs } = useCreateAgentExperienceSlabs({ isEditMode });
 
-	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm({
+	const { control, formState: { errors }, handleSubmit, watch, setValue, trigger } = useForm({
 		defaultValues: {
 			experience: isEditMode ? 'custom' : 'default',
 		},
@@ -158,7 +159,7 @@ function SetConfiguration({ setActiveItem = () => {}, data = {} }) {
 								size="md"
 								themeType="primary"
 								className={styles.btn}
-								loading={loading}
+								loading={loading || routeLoading}
 								onClick={handleSubmit((values) => createAgentExperienceSlabs({
 									values,
 									configId,
@@ -180,6 +181,8 @@ function SetConfiguration({ setActiveItem = () => {}, data = {} }) {
 					configId={configId}
 					setActiveItem={setActiveItem}
 					data={data}
+					routeLoading={routeLoading}
+					trigger={trigger}
 				/>
 			)}
 
