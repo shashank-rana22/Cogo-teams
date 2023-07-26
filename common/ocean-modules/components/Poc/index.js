@@ -17,7 +17,13 @@ import roleBasedView from './config/role_base_view.json';
 import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
-function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '', primary_service = {} }) {
+function Poc({
+	shipment_data = {},
+	servicesList = [],
+	activeStakeholder = '',
+	primary_service = {},
+	getShipmentRefetch = () => {},
+}) {
 	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
@@ -113,6 +119,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '', pr
 								shipment_data={shipment_data}
 								primary_service={primary_service}
 								stakeholdersTrigger={stakeholdersTrigger}
+								getShipmentRefetch={getShipmentRefetch}
 							/>
 						)}
 
@@ -127,6 +134,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '', pr
 								stakeholdersTrigger={stakeholdersTrigger}
 								servicesList={servicesList}
 								listStakeholdersData={shipmentStakeholderData}
+								getShipmentRefetch={getShipmentRefetch}
 							/>
 						)}
 					</div>
