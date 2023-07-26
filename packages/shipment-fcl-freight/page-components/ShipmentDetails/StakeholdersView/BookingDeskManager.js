@@ -1,6 +1,7 @@
-import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
+import { Tabs, TabPanel, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
@@ -63,9 +64,8 @@ function BookingDeskManager({ get = {}, activeStakeholder = '' }) {
 
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
-			<div className={styles.loader}>
-				Loading Shipment Data....
-				<Loader themeType="primary" className={styles.loader_icon} />
+			<div className={styles.loading_wrapper}>
+				<ThreeDotLoader message="Loading Shipment Data" fontSize={18} width={45} />
 			</div>
 		);
 	}

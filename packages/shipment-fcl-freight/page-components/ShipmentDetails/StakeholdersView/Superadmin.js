@@ -1,7 +1,7 @@
-import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { Tracking } from '@cogoport/ocean-modules';
+import { ThreeDotLoader, Tracking } from '@cogoport/ocean-modules';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import getNavigationFromUrl from '@cogoport/request/helpers/getNavigationFromUrl';
 import { ShipmentChat } from '@cogoport/shipment-chat';
@@ -75,9 +75,8 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
-			<div className={styles.loader}>
-				Loading Shipment Data....
-				<Loader themeType="primary" className={styles.loader_icon} />
+			<div className={styles.loading_wrapper}>
+				<ThreeDotLoader message="Loading Shipment Data" fontSize={18} width={45} />
 			</div>
 		);
 	}

@@ -1,4 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { useContext } from 'react';
 
 import useGetOrganization from '../../../hooks/useGetOrganization';
@@ -63,7 +64,9 @@ function ExecuteTask({
 		: {};
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return (
+			<ThreeDotLoader message="Fetching Task Data" />
+		);
 	}
 
 	if (
