@@ -14,7 +14,7 @@ on:
 
 jobs:
   test-lint:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/lint')
+
     name: Test Lint
     runs-on: ${{ inputs.platform }}
     steps:

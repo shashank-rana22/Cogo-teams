@@ -1,9 +1,8 @@
 name: Lint
 
-on: 
-  pull_request:
-    types: [review_requested]
-    branches: [main, pre-release]
+on:
+  issue_comment:
+    types: [created]
 
 env:
   AWS_REGION: ap-south-1
@@ -11,7 +10,7 @@ env:
 jobs:
   start-runner:
     name: Start self-hosted EC2 runner
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/tests')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/lint')
     runs-on: ubuntu-latest
 
     environment: production

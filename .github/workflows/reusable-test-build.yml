@@ -14,7 +14,7 @@ on:
 
 jobs:
   test-build:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/build')
+
     name: Test Build
     runs-on: ${{ inputs.platform }}
     steps:
