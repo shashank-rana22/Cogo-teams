@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { upperCase } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
@@ -64,16 +65,22 @@ function EditServiceCharges(props) {
 		}
 	}, [allOptions, onOptionsChange, service_name]);
 
+	if (loading) {
+		return (
+			<section className={`${styles.loading_wrapper} loading_wrapper`}>
+				<Loader />
+				Loading Line Items...
+			</section>
+		);
+	}
+
 	return (
-		<div>
-			{!loading ? (
-				<EditLineItems
-					{...props}
-					controls={finalControls}
-					customValues={customValues}
-				/>
-			) : null}
-		</div>
+		<EditLineItems
+			{...props}
+			controls={finalControls}
+			customValues={customValues}
+		/>
+
 	);
 }
 

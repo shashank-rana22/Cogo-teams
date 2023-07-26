@@ -1,6 +1,9 @@
 import { Button, cl } from '@cogoport/components';
-import { IcMProfile, IcMRefresh, IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
+import { IcMProfile, IcMRefresh, IcCFcrossInCircle, IcCFtick, IcMCallmonitor } from '@cogoport/icons-react';
+import { useDispatch } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
+import { useCallback } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import HeaderName from '../../../../../common/HeaderName';
@@ -39,6 +42,8 @@ function Header({
 	supplierLoading = false,
 	hasNoFireBaseRoom = false,
 }) {
+	const dispatch = useDispatch();
+
 	const {
 		updateRoomLoading,
 		updateUserRoom,
@@ -68,6 +73,8 @@ function Header({
 		group_members = [],
 		organization_id = '',
 		user_id,
+		user_name,
+		user_type = '',
 		account_type = '',
 		managers_ids = [],
 		id,
@@ -89,6 +96,18 @@ function Header({
 			updateUserRoom(mobile_no);
 		}
 	};
+
+	const mountVideoCall = useCallback(() => {
+		dispatch(
+			setProfileState({
+				video_call_recipient_data: {
+					user_id,
+					user_name,
+				},
+				is_in_video_call: true,
+			}),
+		);
+	}, [dispatch, user_id, user_name]);
 
 	const { agent_id = '', agent_name = '' } = has_requested_by || {};
 
@@ -177,6 +196,13 @@ function Header({
 				<div className={styles.flex_space_between}>
 					<HeaderName formattedData={formattedData} />
 					<div className={styles.button_flex}>
+						{user_type === 'cp' ? (
+							<div role="presentation" className={styles.video_call_btn} onClick={mountVideoCall}>
+								<IcMCallmonitor />
+							</div>
+
+						) : null}
+
 						{account_type === 'service_provider' && (
 							<Button
 								themeType="secondary"
@@ -205,6 +231,7 @@ function Header({
 						</Button>
 					</div>
 				</div>
+
 			</div>
 			<div className={styles.approve_req} style={{ height: showApprovePanel ? '30px' : '0' }}>
 				{showApprovePanel && (
