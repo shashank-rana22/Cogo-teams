@@ -61,7 +61,8 @@ const useListOrgUsers = ({ organizationId = [], pageLimit }) => {
 	}, [getOrganizationUsers, organizationId]);
 
 	return {
-		formattedOrgUsersList: organizationId ? formatOrganizationUsers({ data: listData }) : [],
+		formattedOrgUsersList: organizationId
+			? formatOrganizationUsers({ data: listData, filterKey: 'organization_id' }) : [],
 		loading,
 		setListData,
 		handleScroll,
