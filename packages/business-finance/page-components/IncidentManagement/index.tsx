@@ -47,7 +47,10 @@ function IncidentManagement() {
 		isSettlementExecutive,
 		incidentLoading,
 		getIncidentData,
-	}: IncidentDataInterface = useGetIncidentData({ activeTab });
+	}: IncidentDataInterface = useGetIncidentData({
+		activeTab,
+		incidentId: query?.incidentId,
+	});
 
 	const { statsData } = incidentData || {};
 

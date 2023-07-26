@@ -55,6 +55,7 @@ interface ItemDataInterface {
 	billCurrency?: string;
 	approvedByName?: string;
 	payableTds?: number;
+	incidentId?: string;
 	categoryName?: string;
 }
 
@@ -353,7 +354,7 @@ function ExpenseComponent() {
 			const { updatedAt, status, approvedByName } = itemData || {};
 			return (
 				<div>
-					{status !== 'LOCKED' ? (
+					{!['LOCKED', 'INITIATED']?.includes(status) ? (
 						<div style={{ fontSize: '12px' }}>
 							<div>{approvedByName}</div>
 							<div>
@@ -383,8 +384,7 @@ function ExpenseComponent() {
 									disabled={mailLoading}
 									onClick={() => {
 										sendMail({
-											rowData: itemData,
-											recurringState,
+											incidentId: itemData?.incidentId,
 										});
 									}}
 								>
