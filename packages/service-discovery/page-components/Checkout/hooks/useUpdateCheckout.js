@@ -17,11 +17,13 @@ const useUpdateCheckout = ({ getCheckout, detail = {} }) => {
 		url    : '/update_checkout',
 	}, { manual: true });
 
-	const updateCheckout = async ({ values, closeFunction, stateValue = false, type = '' }) => {
+	const updateCheckout = async ({ values, closeFunction, stateValue = false, type = '', refetchRequired = true }) => {
 		try {
 			await trigger({ data: values });
 
-			await getCheckout();
+			if (refetchRequired) {
+				await getCheckout();
+			}
 
 			if (closeFunction) {
 				closeFunction(stateValue);

@@ -33,7 +33,6 @@
 .flex {
 	display: flex;
 	align-items: center;
-	margin-bottom: 4px;
 
 	svg {
 		color: #2f9df6;
@@ -49,4 +48,14 @@
 .sub_heading {
 	margin-bottom: 16px;
 	font-weight: 600;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: sticky;
+	top: 0px;
+	background-color: #fbfbff;
+	padding-bottom: 8px;
 }

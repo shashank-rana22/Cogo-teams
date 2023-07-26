@@ -5,12 +5,21 @@ const getRedirectionDetails = ({
 	importer_exporter_id = '',
 	tags = [],
 	checkout_id = '',
+	shipment_id = '',
 }) => {
 	if (!isCheckoutApiSuccess) {
 		return {
 			url: `/v2/${partner_id}/service_discovery`,
 			message:
 				'There is some issue in checkout, redirecting to service discovery',
+		};
+	}
+
+	if (shipment_id) {
+		return {
+			url: `/${partner_id}/shipments/${shipment_id}`,
+			message:
+				'The checkout is already booked',
 		};
 	}
 

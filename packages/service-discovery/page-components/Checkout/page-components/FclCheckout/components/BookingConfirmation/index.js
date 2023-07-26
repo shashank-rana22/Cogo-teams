@@ -15,8 +15,7 @@ function BookingConfirmation() {
 		detail = {},
 		checkoutMethod,
 		getCheckout,
-		updateCheckout = () => {},
-		updateLoading = false,
+		primaryService,
 	} = useContext(CheckoutContext);
 
 	const {
@@ -45,23 +44,22 @@ function BookingConfirmation() {
 
 			<InvoicingParties />
 
+			<ShippingPreferences
+				formProps={formProps}
+				primaryService={primaryService}
+			/>
+
 			<BookingTypeOptions
 				radioOption={radioOption}
 				bookingConfirmationMode={bookingConfirmationMode}
 				setBookingConfirmationMode={setBookingConfirmationMode}
-				detail={detail}
-				updateCheckout={updateCheckout}
-				updateLoading={updateLoading}
 			/>
-
-			<ShippingPreferences formProps={formProps} />
 
 			<BookingConfirmationFooter
 				detail={detail}
 				checkoutMethod={checkoutMethod}
 				isControlBookingDetailsFilled={isControlBookingDetailsFilled}
 				formProps={formProps}
-				getCheckout={getCheckout}
 				bookingConfirmationMode={bookingConfirmationMode}
 			/>
 		</div>

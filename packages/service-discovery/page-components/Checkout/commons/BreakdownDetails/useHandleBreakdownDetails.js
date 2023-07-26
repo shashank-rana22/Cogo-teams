@@ -3,11 +3,13 @@ import { useState, useEffect } from 'react';
 
 const DEFAULT_VALUE = 0;
 
-const useHandleBreakdownDetails = ({ rate, setRateDetails }) => {
+const useHandleBreakdownDetails = ({ rate, setRateDetails, setNoRatesPresent = () => {} }) => {
 	const [addLineItemData, setAddLineItemData] = useState({});
 	const [editLineItemData, setEditLineItemData] = useState({});
 
 	useEffect(() => {
+		setNoRatesPresent(false);
+
 		setRateDetails((prev) => Object.entries(rate?.services || {}).map(([key, serviceData = {}]) => {
 			const { line_items = [] } = serviceData;
 
@@ -70,7 +72,7 @@ const useHandleBreakdownDetails = ({ rate, setRateDetails }) => {
 				line_items : updateLineItems,
 			};
 		}));
-	}, [rate?.services, setRateDetails]);
+	}, [rate?.services, setNoRatesPresent, setRateDetails]);
 
 	return {
 		addLineItemData,

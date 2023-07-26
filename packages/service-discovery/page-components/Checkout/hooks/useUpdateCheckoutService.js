@@ -5,7 +5,6 @@ const useUpdateCheckoutService = ({
 	detail,
 	checkout_id,
 	refetch = () => {},
-	setNoRatesPresent = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -46,7 +45,6 @@ const useUpdateCheckoutService = ({
 
 			await trigger({ data: payload });
 
-			setNoRatesPresent(false);
 			Toast.success('Service deleted successfully!');
 			refetch();
 		} catch (err) {
@@ -54,21 +52,10 @@ const useUpdateCheckoutService = ({
 		}
 	};
 
-	const updateCheckoutService = async ({ values }) => {
-		try {
-			await trigger({ data: values });
-
-			Toast.success('Updated successfully!');
-			refetch();
-		} catch (err) {
-			Toast.error('Something went wrong!');
-		}
-	};
-
 	return {
 		handleDeleteRate,
 		deleteRateLoading: loading,
-		updateCheckoutService,
+
 	};
 };
 

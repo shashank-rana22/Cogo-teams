@@ -13,7 +13,9 @@ const MAPPING = [
 		component       : Datepicker,
 		key             : 'cargo_readiness_date',
 		icon            : GLOBAL_CONSTANTS.image_url.cargo_readiness_date_s2c_png,
-		componentProps  : {},
+		componentProps  : {
+			minDate: new Date(),
+		},
 	},
 	{
 		heading         : 'Estimated Cargo Value',
@@ -23,7 +25,9 @@ const MAPPING = [
 		component       : Input,
 		key             : 'cargo_value',
 		icon            : GLOBAL_CONSTANTS.image_url.cargo_value_s2c_png,
-		componentProps  : {},
+		componentProps  : {
+			type: 'number',
+		},
 	},
 	{
 		heading         : 'Commodity we’re transporting',
@@ -34,7 +38,8 @@ const MAPPING = [
 		key             : 'hs_code',
 		icon            : GLOBAL_CONSTANTS.image_url.hs_code_s2c_png,
 		componentProps  : {
-			asyncKey: 'list_saas_hs_codes',
+			asyncKey : 'list_saas_hs_codes',
+			disabled : true,
 		},
 	},
 ];

@@ -1,4 +1,4 @@
-import { Toggle } from '@cogoport/components';
+import { Toggle, Button } from '@cogoport/components';
 import { IcMEmail } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -22,14 +22,28 @@ function EmailComponent({
 	emailContent,
 	emailControl: control,
 	emailErrors: errors,
+	buttonDisabled = false,
+	handleNext = () => {},
 }) {
 	const [activateTerms, setActivateTerms] = useState(true);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.flex}>
-				<IcMEmail width={20} height={20} />
-				<div className={styles.heading}>Customize Email</div>
+			<div className={styles.header}>
+				<div className={styles.flex}>
+					<IcMEmail width={20} height={20} />
+					<div className={styles.heading}>Customize Email</div>
+				</div>
+
+				<Button
+					type="button"
+					themeType="accent"
+					onClick={handleNext}
+					disabled={buttonDisabled}
+					style={{ marginLeft: '20px' }}
+				>
+					Next (Set Recipient)
+				</Button>
 			</div>
 
 			<ToEmailList

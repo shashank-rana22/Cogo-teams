@@ -34,7 +34,6 @@ function EditMargin() {
 		refetch: getCheckout,
 		detail,
 		checkout_id,
-		setNoRatesPresent,
 	});
 
 	const { margin_approval_request_remarks = [] } = detail;

@@ -6,13 +6,11 @@ import { useState } from 'react';
 
 import useBookShipment from '../../../../../../hooks/useBookShipment';
 import useControlBookingApproval from '../../../../../../hooks/useControlBookingApproval';
-import useUpdateCheckoutService from '../../../../../../hooks/useUpdateCheckoutService';
 
 const useHandleBookingConfirmationFooter = ({
 	detail = {},
 	formProps = {},
 	checkoutMethod = '',
-	getCheckout = () => {},
 	bookingConfirmationMode = '',
 }) => {
 	const {
@@ -55,16 +53,19 @@ const useHandleBookingConfirmationFooter = ({
 		{ manual: true },
 	);
 
+	const [{ loading :updateLoading }, triggerUpdateCheckoutService] = useRequest(
+		{
+			method : 'post',
+			url    : '/update_checkout_service',
+		},
+		{ manual: true },
+	);
+
 	const { controlBookingApproval, loading } = useControlBookingApproval({
 		checkout_approvals,
 		importer_exporter_id,
 		importer_exporter,
 	});
-
-	const {
-		deleteRateLoading: updateLoading,
-		updateCheckoutService,
-	} =	useUpdateCheckoutService({ refetch: getCheckout });
 
 	const { bookShipment, loading: bookCheckoutLoading } = useBookShipment({
 		checkout_id: id,
@@ -105,7 +106,7 @@ const useHandleBookingConfirmationFooter = ({
 	};
 
 	const handleSubmit = async () => {
-		const { sailing_range = {}, ...restValues } = getValues();
+		const { sailing_range = {}, max_price, min_price, ...restValues } = getValues();
 
 		const { startDate = '', endDate = '' } = sailing_range;
 
@@ -118,6 +119,11 @@ const useHandleBookingConfirmationFooter = ({
 			return;
 		}
 
+		if (Number(min_price) > Number(max_price)) {
+			Toast.error('Min price cannot be greater than max price');
+			return;
+		}
+
 		const payload = {
 			id,
 			update_rates                    : false,
@@ -126,15 +132,22 @@ const useHandleBookingConfirmationFooter = ({
 				({ id: service_id }) => ({
 					id                   : service_id,
 					shipping_preferences : {
-						sailing_start_date : startDate,
-						sailing_end_date   : endDate,
+						sailing_start_date : startDate || undefined,
+						sailing_end_date   : endDate || undefined,
+						min_price          : Number(min_price) || undefined,
+						max_price          : Number(max_price) || undefined,
 						...restValues,
 					},
 				}),
 			),
 		};
 
-		await updateCheckoutService({ values: payload });
+		const res = await triggerUpdateCheckoutService({ data: payload });
+
+		if (!res || res?.hasError) {
+			Toast.error('Something went wrong while saving shipping preferences');
+			return;
+		}
 
 		if (bookingConfirmationMode === 'mobile_otp') {
 			submitForOtpVerification();

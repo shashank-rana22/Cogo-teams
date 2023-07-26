@@ -19,7 +19,6 @@ const useHandleQuotationModal = ({
 	widths,
 	selectedModes,
 	setShowShareQuotationModal,
-	updateCheckout = () => {},
 	updateLoading,
 }) => {
 	const { query, agent_id } = useSelector(({ general, profile }) => ({
@@ -235,15 +234,9 @@ const useHandleQuotationModal = ({
 				emailContent,
 				emailControl,
 				emailErrors,
+				handleNext,
 			},
 			buttons: [
-				{
-					key       : 'next',
-					label     : 'Next (Set Recipient)',
-					onClick   : handleNext,
-					disabled  : loading || updateLoading,
-					themeType : 'link',
-				},
 				{
 					key       : 'cancel',
 					label     : 'Cancel & Close Preview',
@@ -277,13 +270,6 @@ const useHandleQuotationModal = ({
 			},
 			buttons: [
 				{
-					key       : 'back',
-					label     : 'Back',
-					themeType : 'link',
-					disabled  : loading || updateLoading,
-					onClick   : () => setActiveState('customize'),
-				},
-				{
 					key       : 'cancel',
 					label     : 'Cancel & Close Preview',
 					themeType : 'secondary',
@@ -314,6 +300,8 @@ const useHandleQuotationModal = ({
 		MAPPING,
 		handleNext,
 		handleEmailSend,
+		setActiveState,
+		buttonDisabled: loading || updateLoading,
 	};
 };
 

@@ -1,4 +1,4 @@
-import { Button, CheckboxGroup, Toast } from '@cogoport/components';
+import { Button, CheckboxGroup } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useContext } from 'react';

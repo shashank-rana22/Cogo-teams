@@ -18,6 +18,8 @@ function QuotationModal({
 		triggerListOrgUsers,
 		MAPPING,
 		handleEmailSend,
+		setActiveState,
+		buttonDisabled,
 	} = useHandleQuotationModal({
 		...restProps,
 		setShowShareQuotationModal,
@@ -53,13 +55,26 @@ function QuotationModal({
 								/>
 							</div>
 
-							<Button
-								type="button"
-								themeType="accent"
-								onClick={() => handleEmailSend()}
-							>
-								Save
-							</Button>
+							<div style={{ display: 'flex', alignItems: 'center' }}>
+								<Button
+									type="button"
+									themeType="secondary"
+									onClick={() => setActiveState('customize')}
+									disabled={buttonDisabled}
+								>
+									Back
+								</Button>
+
+								<Button
+									type="button"
+									themeType="accent"
+									onClick={() => handleEmailSend()}
+									disabled={buttonDisabled}
+									style={{ marginLeft: '20px' }}
+								>
+									Save
+								</Button>
+							</div>
 						</div>
 					)}
 				/>

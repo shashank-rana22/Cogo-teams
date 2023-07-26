@@ -13,6 +13,7 @@ function Customize({
 	emailContent,
 	emailControl,
 	emailErrors,
+	handleNext = () => {},
 }) {
 	const { email, message } = widths;
 
@@ -28,6 +29,7 @@ function Customize({
 						selected={selected}
 						emailContent={emailContent}
 						emailControl={emailControl}
+						handleNext={handleNext}
 						emailErrors={emailErrors}
 					/>
 				</div>

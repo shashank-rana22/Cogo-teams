@@ -1,14 +1,30 @@
+import { useEffect } from 'react';
+
 import getElementController from '../../../../../../commons/forms/getElementController';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function ShippingPreferences({ formProps = {} }) {
+function ShippingPreferences({ formProps = {}, primaryService = {} }) {
 	const {
 		control,
-		handleSubmit,
 		formState: { errors = {} },
+		setValue,
 	} = formProps;
+
+	const { shipping_preferences = {} } = primaryService;
+
+	useEffect(() => {
+		const { sailing_start_date = '', sailing_end_date = '', ...restValues } = shipping_preferences || {};
+
+		Object.entries(restValues).forEach(([key, value]) => {
+			setValue(key, value);
+		});
+
+		if (sailing_start_date) {
+			setValue('sailing_range', { startDate: new Date(sailing_start_date), endDate: new Date(sailing_end_date) });
+		}
+	}, [setValue, shipping_preferences]);
 
 	return (
 		<div className={styles.container}>

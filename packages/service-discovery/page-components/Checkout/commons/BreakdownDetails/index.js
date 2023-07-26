@@ -42,7 +42,7 @@ function BreakdownDetails({
 		setAddLineItemData,
 		editLineItemData,
 		setEditLineItemData,
-	} = useHandleBreakdownDetails({ rate, setRateDetails });
+	} = useHandleBreakdownDetails({ rate, setRateDetails, setNoRatesPresent });
 
 	let total = 0;
 

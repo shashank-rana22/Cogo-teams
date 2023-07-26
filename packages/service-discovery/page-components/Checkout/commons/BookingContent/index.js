@@ -2,12 +2,12 @@ import BookingVerification from './components/BookingVerification';
 import PointOfContact from './components/PointOfContact';
 import styles from './styles.module.css';
 
-function BookingContent({ detail = {}, getCheckout, isChannelPartner }) {
+function BookingContent({ detail = {}, getCheckout = () => {}, isChannelPartner = false }) {
 	const MAPPING = [
 		{
 			key       : 'booking_verification',
 			component : BookingVerification,
-			label     : 'Booking verification',
+			label     : 'Share Quotation',
 			props     : {
 				detail,
 			},

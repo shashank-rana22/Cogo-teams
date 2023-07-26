@@ -39,17 +39,20 @@ function Checkout({ checkout_type = '' }) {
 		return <LoadingState />;
 	}
 
+	const { shipment_id = '', tags = [] } = detail;
+
 	const isCheckoutApiSuccess = !isEmpty(data);
 	const isServiceSupported = GLOBAL_CONSTANTS.s2c_supported_services.includes(primary_service);
 
-	if (!isCheckoutApiSuccess || !isServiceSupported || !detail?.tags.includes('new_admin')) {
+	if (!isCheckoutApiSuccess || !isServiceSupported || !tags.includes('new_admin') || shipment_id) {
 		const { url = '', message = '' } = getRedirectionDetails({
 			isCheckoutApiSuccess,
 			partner_id,
 			search_id,
 			importer_exporter_id,
-			tags        : detail?.tags,
-			checkout_id : detail.id,
+			tags,
+			checkout_id: detail.id,
+			shipment_id,
 		});
 
 		window.location.replace(url);
