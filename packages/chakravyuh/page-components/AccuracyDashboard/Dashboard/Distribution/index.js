@@ -23,7 +23,7 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {}, data = 
 	};
 
 	useEffect(() => {
-		if (data && data.length > GLOBAL_CONSTANTS.zeroth_index) {
+		if (data && Object.keys(data).length > GLOBAL_CONSTANTS.zeroth_index) {
 			setModeOptions(Object.keys(data).filter((item) => item !== 'total_rates'));
 		}
 	}, [data, setModeOptions]);

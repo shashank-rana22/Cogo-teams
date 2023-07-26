@@ -3,7 +3,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { DUMMY_DATA } from '../../../constants/drilldown_config';
+// import { DUMMY_DATA } from '../../../constants/drilldown_config';
+import useGetDrillDownStats from '../../../hooks/useGetDrillDownStats';
+import { formatBigNumbers } from '../../../utils/formatBigNumbers';
 import SupplyRates from '../RatesList';
 
 import BranchAnimation from './BranchAnimation';
@@ -22,6 +24,8 @@ function DrillDown({ globalFilters = {} }) {
 	const handleClick = (val) => {
 		setActiveParent(val);
 	};
+
+	const { drillDownCards, totalSearches } = useGetDrillDownStats();
 
 	return (
 		<div className={styles.container}>
@@ -42,7 +46,10 @@ function DrillDown({ globalFilters = {} }) {
 								{startCase(type)}
 							</div>
 						))}
-						<div className={cl`${styles.source_card} ${styles.main_card}`}>11000 Searches</div>
+						<div className={cl`${styles.source_card} ${styles.main_card}`}>
+							<h4>{formatBigNumbers(totalSearches)}</h4>
+							<span>Searches</span>
+						</div>
 					</>
 				) : (
 					<Button
@@ -54,7 +61,7 @@ function DrillDown({ globalFilters = {} }) {
 					</Button>
 				)}
 
-				{DUMMY_DATA.map((row, rowIdx) => {
+				{drillDownCards?.map((row, rowIdx) => {
 					const isActive = activeParent === row[GLOBAL_CONSTANTS.zeroth_index].parent;
 
 					return (!activeParent || isActive) && (
