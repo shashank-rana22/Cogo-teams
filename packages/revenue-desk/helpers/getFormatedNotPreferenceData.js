@@ -12,8 +12,8 @@ const getFormatedNotPreferenceData = ({ ratesDataNotPrefered, singleServiceData 
 		};
 		const rowData = {
 			service_provider         : element?.service_provider,
-			air_line                 : data?.airline?.business_name,
-			shipping_line            :	data?.shipping_line?.business_name,
+			air_line                 : element?.airline?.business_name,
+			shipping_line            : element?.shipping_line?.business_name,
 			total_price              : validities?.total_price || DEFAULT_VALUE,
 			currency                 : validities?.currency || '',
 			agent                    : element?.procured_by?.name,
