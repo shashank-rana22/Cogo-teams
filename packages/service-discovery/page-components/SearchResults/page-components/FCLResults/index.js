@@ -26,6 +26,8 @@ function FCLResults({
 	setFilters = () => {},
 	headerProps = {},
 	setHeaderProps = () => {},
+	selectedWeek = {},
+	setSelectedWeek = () => {},
 	paginationProps,
 	loading,
 	screen,
@@ -43,6 +45,8 @@ function FCLResults({
 			setFilters,
 			paginationProps,
 			loading,
+			selectedWeek,
+			setSelectedWeek,
 		},
 		comparison: {
 			detail,

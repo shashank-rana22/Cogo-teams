@@ -10,13 +10,15 @@ const getKey = (data) => `${data.start_date} ${data.end_date}`;
 
 function ScheduleItem({
 	data = {},
-	selectedWeek = 0,
+	selectedWeek = {},
 	setSelectedWeek = () => {},
 	setFilters = () => {},
+	setComparisonRates = () => {},
 }) {
 	const { end_date = '', start_date = '', min_price = '', min_price_currency = 'USD' } = data;
 
 	const handleChange = () => {
+		setComparisonRates({});
 		setSelectedWeek(data);
 		setFilters((prev) => ({
 			...prev,

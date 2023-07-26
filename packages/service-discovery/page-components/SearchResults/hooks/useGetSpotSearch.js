@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
-const useGetSpotSearch = () => {
+const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 	const { general: { query = {} } } = useSelector((state) => state);
 	const { spot_search_id = '', rate_card_id } = query;
 
@@ -45,12 +45,13 @@ const useGetSpotSearch = () => {
 					filters    : { ...finalFilters, status: 'active' },
 				},
 			});
+			setComparisonRates({});
 		} catch (error) {
 			if (error?.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		}
-	}, [filters, spot_search_id, trigger]);
+	}, [filters, setComparisonRates, spot_search_id, trigger]);
 
 	useEffect(() => {
 		getSearch();

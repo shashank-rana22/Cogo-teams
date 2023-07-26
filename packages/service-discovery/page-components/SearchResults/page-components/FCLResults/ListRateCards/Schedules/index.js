@@ -1,6 +1,6 @@
 import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import useGetWeeklySchedules from '../../../../hooks/useGetWeeklySchedules';
 
@@ -13,10 +13,11 @@ const LOADING_ARRAY_LENGTH = 5;
 function Schedules({
 	paginationProps = {},
 	filters = {},
+	selectedWeek = {},
+	setSelectedWeek = () => {},
 	setFilters = () => {},
+	setComparisonRates = () => {},
 }) {
-	const [selectedWeek, setSelectedWeek] = useState({});
-
 	const { schedules = [], loading } = useGetWeeklySchedules({
 		filters,
 		setSelectedWeek,
@@ -48,6 +49,7 @@ function Schedules({
 								selectedWeek={selectedWeek}
 								setSelectedWeek={setSelectedWeek}
 								setFilters={setFilters}
+								setComparisonRates={setComparisonRates}
 							/>
 						))}
 					</div>
