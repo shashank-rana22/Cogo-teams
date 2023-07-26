@@ -1,5 +1,6 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useEffect } from 'react';
 
 import { CUSTOM_THEME, usePieChartConfigs } from '../../../../constants/pie_chart_config';
@@ -22,7 +23,9 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {}, data = 
 	};
 
 	useEffect(() => {
-		setModeOptions(Object.keys(data).filter((item) => item !== 'total_rates'));
+		if (data && data.length > GLOBAL_CONSTANTS.zeroth_index) {
+			setModeOptions(Object.keys(data).filter((item) => item !== 'total_rates'));
+		}
 	}, [data, setModeOptions]);
 
 	return (
