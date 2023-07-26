@@ -23,61 +23,65 @@ const getControls = ({
 	setModalType = () => {},
 	setSelectedUsers = () => {},
 	setListServiceProviders = () => {},
-}) => [
-	{
-		name        : 'service_type',
-		label       : 'Select Service',
-		controlType : 'select',
-		placeholder : 'Select Service Type',
-		size        : 'sm',
-		onChange    : (val) => { handleReset({ val }); },
-		rules       : { required: 'Please Select Service' },
-		options     : [
-			{ label: 'FCL Freight', value: 'fcl_freight' },
-			{ label: 'LCL Freight', value: 'lcl_freight' },
-			{ label: 'Air Freight', value: 'air_freight' },
-		],
-	},
-	{
-		label       : ORIGIN_LABEL_MAPPING[serviceType],
-		name        : 'origin_port_id',
-		placeholder : 'Select Origin Port',
-		controlType : 'asyncSelect',
-		rules       : { required: 'Origin Port is Required' },
-		asyncKey    : 'list_locations',
-		size        : 'sm',
-		onChange    : (_, obj) => {
-			setPortDetails((prevState) => ({
-				...prevState,
-				originDetails: obj,
-			}));
-			setModalType('');
-			setSelectedUsers({});
-			setListServiceProviders([]);
-		},
-		initialCall : true,
-		params      : { filters: { type: [ROUTE_MAPPING[serviceType]] } },
-	},
-	{
-		label       : DESTINATION_LABEL_MAPPING[serviceType],
-		name        : 'destination_port_id',
-		placeholder : 'Select Destination Port',
-		controlType : 'asyncSelect',
-		rules       : { required: 'Destination Port is Required' },
-		asyncKey    : 'list_locations',
-		size        : 'sm',
-		onChange    : (_, obj) => {
-			setPortDetails((prevState) => ({
-				...prevState,
-				destinationDetails: obj,
-			}));
-			setModalType('');
-			setSelectedUsers({});
-			setListServiceProviders([]);
-		},
-		initialCall : true,
-		params      : { filters: { type: [ROUTE_MAPPING[serviceType]] } },
+}) => {
+	const handleCall = () => {
+		setModalType('');
+		setSelectedUsers({});
+		setListServiceProviders([]);
+	};
 
-	},
-];
+	return [
+		{
+			name        : 'service_type',
+			label       : 'Select Service',
+			controlType : 'select',
+			placeholder : 'Select Service Type',
+			size        : 'sm',
+			onChange    : (val) => { handleReset({ val }); },
+			rules       : { required: 'Please Select Service' },
+			options     : [
+				{ label: 'FCL Freight', value: 'fcl_freight' },
+				{ label: 'LCL Freight', value: 'lcl_freight' },
+				{ label: 'Air Freight', value: 'air_freight' },
+			],
+		},
+		{
+			label       : ORIGIN_LABEL_MAPPING[serviceType],
+			name        : 'origin_port_id',
+			placeholder : 'Select Origin Port',
+			controlType : 'asyncSelect',
+			rules       : { required: 'Origin Port is Required' },
+			asyncKey    : 'list_locations',
+			size        : 'sm',
+			onChange    : (_, obj) => {
+				setPortDetails((prevState) => ({
+					...prevState,
+					originDetails: obj,
+				}));
+				handleCall();
+			},
+			initialCall : true,
+			params      : { filters: { type: [ROUTE_MAPPING[serviceType]] } },
+		},
+		{
+			label       : DESTINATION_LABEL_MAPPING[serviceType],
+			name        : 'destination_port_id',
+			placeholder : 'Select Destination Port',
+			controlType : 'asyncSelect',
+			rules       : { required: 'Destination Port is Required' },
+			asyncKey    : 'list_locations',
+			size        : 'sm',
+			onChange    : (_, obj) => {
+				setPortDetails((prevState) => ({
+					...prevState,
+					destinationDetails: obj,
+				}));
+				handleCall();
+			},
+			initialCall : true,
+			params      : { filters: { type: [ROUTE_MAPPING[serviceType]] } },
+
+		},
+	];
+};
 export default getControls;
