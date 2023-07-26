@@ -816,7 +816,7 @@ const apis = [
 	{
 		api          : 'delete_contract_service',
 		access_type  : 'private',
-		service_name : 'checkout',
+		service_name : 'contract',
 	},
 ];
 
