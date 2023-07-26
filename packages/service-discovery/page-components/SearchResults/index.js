@@ -18,6 +18,7 @@ import styles from './styles.module.css';
 function SearchResults() {
 	const [headerProps, setHeaderProps] = useState({});
 	const [comparisonRates, setComparisonRates] = useState([]);
+	const [selectedWeek, setSelectedWeek] = useState({});
 
 	const {
 		refetchSearch = () => {},
@@ -29,7 +30,7 @@ function SearchResults() {
 		setScreen,
 		setSelectedCard,
 		selectedCard,
-	} = useGetSpotSearch();
+	} = useGetSpotSearch({ setComparisonRates });
 
 	const {
 		spot_search_detail:detail = {},
@@ -82,6 +83,8 @@ function SearchResults() {
 					setHeaderProps={setHeaderProps}
 					refetchSearch={refetchSearch}
 					screen={screen}
+					selectedWeek={selectedWeek}
+					setSelectedWeek={setSelectedWeek}
 					possible_subsidiary_services={possible_subsidiary_services}
 				/>
 			</div>

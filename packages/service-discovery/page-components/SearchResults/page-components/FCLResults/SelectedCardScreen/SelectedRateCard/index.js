@@ -8,6 +8,7 @@ import AdditionalServices from '../../../../../../common/OtherServices/Additiona
 import CargoInsurance from '../../../../../../common/OtherServices/CargoInsurance';
 import SubsidiaryServices from '../../../../../../common/OtherServices/SubsidiaryServices';
 import Bundles from '../../../../components/Bundles';
+import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 import FclCard from '../../FclCard';
 
 import LoadingState from './loadingState';
@@ -34,22 +35,6 @@ function TotalLandedCost({ total_price_discounted = '', total_price_currency = '
 	);
 }
 
-function ProceedButton({ onClick = () => {} }) {
-	return (
-		<div className={styles.proceed_container}>
-			<Button
-				onClick={onClick}
-				size="lg"
-				themeType="accent"
-				style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 16, paddingBottom: 16 }}
-				className={styles.proceed_button}
-			>
-				Proceed
-			</Button>
-		</div>
-	);
-}
-
 function SelectedRateCard({
 	data = {},
 	refetch = () => {},
@@ -65,9 +50,10 @@ function SelectedRateCard({
 
 	const primary_service = detail?.service_type;
 
-	const handleProceedClick = () => {
-		setScreen('bookCheckout');
-	};
+	const { handleBook = () => {}, loading: createCheckoutLoading } = useCreateCheckout({
+		rateCardData,
+		spot_search_id: detail?.spot_search_id,
+	});
 
 	if (loading && isEmpty(data)) {
 		return (
@@ -127,7 +113,18 @@ function SelectedRateCard({
 								total_price_currency={rateCardData.total_price_currency}
 							/>
 
-							<ProceedButton onClick={handleProceedClick} />
+							<div className={styles.proceed_container}>
+								<Button
+									onClick={handleBook}
+									size="lg"
+									themeType="accent"
+									style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 16, paddingBottom: 16 }}
+									className={styles.proceed_button}
+									loading={createCheckoutLoading}
+								>
+									Proceed to checkout
+								</Button>
+							</div>
 						</div>
 
 						{!isEmpty(possible_subsidiary_services) && (

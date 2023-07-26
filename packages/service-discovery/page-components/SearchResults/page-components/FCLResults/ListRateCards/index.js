@@ -85,6 +85,8 @@ function ListRateCards({
 	filters = {},
 	setFilters = () => {},
 	refetchSearch = () => {},
+	selectedWeek = {},
+	setSelectedWeek = () => {},
 	paginationProps = {},
 	loading = false,
 }) {
@@ -110,6 +112,9 @@ function ListRateCards({
 				paginationProps={paginationProps}
 				filters={filters}
 				setFilters={setFilters}
+				setComparisonRates={setComparisonRates}
+				setSelectedWeek={setSelectedWeek}
+				selectedWeek={selectedWeek}
 			/>
 
 			{loading ? <LoaderComponent /> : null}

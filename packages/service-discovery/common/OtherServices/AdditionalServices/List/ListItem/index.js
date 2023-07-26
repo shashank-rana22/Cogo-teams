@@ -42,6 +42,7 @@ function ListItem({
 	loading,
 	onClickAdd = () => {},
 	setIsOpen = () => {},
+	refetch = () => {},
 	isOpen = {},
 	SERVICES_CANNOT_BE_REMOVED = [],
 }) {
@@ -50,7 +51,7 @@ function ListItem({
 
 	const { isSelected = false, name = '', service_type = '', title = '' } = serviceItem;
 
-	const { handleRemoveService } = useDeleteAdditionalService({ service: serviceItem });
+	const { handleRemoveService } = useDeleteAdditionalService({ service: serviceItem, refetch });
 
 	const handleMouseEnter = () => { setIsHovered(true); };
 	const handleMouseLeave = () => { setIsHovered(false); };
@@ -127,11 +128,7 @@ function ListItem({
 						show={showDeleteModal}
 						setShow={setShowDeleteModal}
 						service_name={serviceItem.title}
-						onClick={(event) => {
-							event.stopPropagation();
-							event.preventDefault();
-							handleRemoveService();
-						}}
+						onClick={handleRemoveService}
 						loading={loading}
 					/>
 				</div>

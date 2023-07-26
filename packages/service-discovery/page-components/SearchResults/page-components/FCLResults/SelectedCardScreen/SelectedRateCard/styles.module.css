@@ -59,9 +59,9 @@
 .proceed_button {
 	width: 100%; /* Initially take up the entire width */
 
-	@media (min-width: 768px) {
-		max-width: 200px; /* For larger screens, set a maximum width of 200px */
-	}
+	/* @media (min-width: 768px) {
+		max-width: 200px; 
+	} */
 }
 
 .wrapper {

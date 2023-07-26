@@ -6,8 +6,6 @@ import { useEffect, useCallback } from 'react';
 const useGetMinPrice = ({ detail = {} }) => {
 	const { destination_port_id, origin_port_id } = detail;
 
-	console.log('detail', detail);
-
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
 		url    : 'get_freight_rate_min_price',
@@ -26,9 +24,10 @@ const useGetMinPrice = ({ detail = {} }) => {
 				},
 			});
 		} catch (err) {
-			if (err?.response?.data) {
-				Toast.error(getApiErrorString(err.response?.data));
-			}
+			// if (err?.response?.data) {
+			// 	Toast.error(getApiErrorString(err.response?.data));
+			// }
+			console.log(err);
 		}
 	}, [trigger]);
 

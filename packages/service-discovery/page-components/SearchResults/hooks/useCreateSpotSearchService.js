@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useSpotSearchService = ({ refetchSearch = () => {}, rateCardData = {}, checkout_id = '' }) => {
@@ -18,8 +19,10 @@ const useSpotSearchService = ({ refetchSearch = () => {}, rateCardData = {}, che
 					screen  : 'selectedCard',
 				},
 			});
-		} catch (e) {
-			Toast.error(e?.response?.message);
+		} catch (error) {
+			if (error?.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 	};
 
