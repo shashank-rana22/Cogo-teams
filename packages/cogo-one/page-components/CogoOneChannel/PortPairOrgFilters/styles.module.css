@@ -25,7 +25,9 @@
 
 .header {
 	display: flex;
-	justify-content: flex-end;
+	align-items: center;
+	justify-content: space-between;
+	margin-left: 10px;
 }
 
 .org_users_styles {
@@ -62,13 +64,14 @@
 }
 
 .container {
-	margin: 6px 20px 0 0;
+	margin: 6px 20px 0 10px;
 }
 
 .template_container {
 	display: flex;
 	align-items: center;
 	margin-top: 10px;
+	transition: 0.3s ease-in-out;
 }
 
 .template {
@@ -90,4 +93,9 @@
 	align-items: center;
 	justify-content: center;
 	margin-top: 6%;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
 }

@@ -10,11 +10,13 @@ import SelecetdUsers from './selecetdUsers';
 import styles from './styles.module.css';
 
 const LOADER_COUNT = 4;
+const PAGE_LIMIT = 10;
 
 const USER_SELECT_PAGINATION = [
-	{ label: 'Page Limit 100', value: 100 },
-	{ label: 'Page Limit 150', value: 150 },
-	{ label: 'Page Limit 200', value: 200 },
+	{ label: '10', value: 10 },
+	{ label: '100', value: 100 },
+	{ label: '150', value: 150 },
+	{ label: '200', value: 200 },
 ];
 
 function OrgUsersList({
@@ -31,7 +33,7 @@ function OrgUsersList({
 	setSelectAll = () => {},
 	selectAll = false,
 }) {
-	const [pageLimit, setPageLimit] = useState(null);
+	const [pageLimit, setPageLimit] = useState(PAGE_LIMIT);
 
 	const {
 		formattedOrgUsersList = [],
@@ -131,26 +133,26 @@ function OrgUsersList({
 					disabled={isEmpty(modifiedList)}
 					onChange={(event) => handleSelectAll({ event })}
 				/>
-				{' '}
 				Select All
-				<Select
-					value={pageLimit}
-					onChange={(val) => {
-						setPageLimit(val);
-						setListData({
-							list  : [],
-							total : 0,
-						});
-						setSelectAll(false);
-						setSelectedUsers({});
-					}}
-					disabled={isEmpty(modifiedList)}
-					size="sm"
-					placeholder="Select Books"
-					options={USER_SELECT_PAGINATION}
-					className={styles.selector}
+				<div className={styles.page_limit_selection}>
+					Page Limit
+					<Select
+						value={pageLimit}
+						onChange={(val) => {
+							setPageLimit(val);
+							setListData({
+								list  : [],
+								total : 0,
+							});
+							setSelectAll(false);
+							setSelectedUsers({});
+						}}
+						size="sm"
+						options={USER_SELECT_PAGINATION}
+						className={styles.selector}
+					/>
+				</div>
 
-				/>
 			</div>
 			<div className={cl`${styles.container} ${!modalType || isEmpty(modifiedList) ? styles.empty_list : ''}`}>
 				<div className={styles.list_container} onScroll={handleScroll}>
