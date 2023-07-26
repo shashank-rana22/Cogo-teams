@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 const DEFAULT_SPAN = 6;
@@ -27,7 +28,9 @@ export default function getTotalFields({ fields = [], showElements = {} }) {
 		const { type, name, span: fieldSpan = DEFAULT_SPAN, controls = [] } = field || {};
 		const isFullWidthControl = FULL_WIDTH_CONTROL_TYPES.includes(type);
 
-		const { [name]: showItem = !isFullWidthControl } = showElements;
+		const {
+			[name]: showItem = !isFullWidthControl,
+		} = (isFullWidthControl ? showElements?.[GLOBAL_CONSTANTS.zeroth_index] : showElements) || {};
 
 		if (isFullWidthControl && checkIfFieldArrayVisible(controls)) {
 			if (!isEmpty(rowWiseFields)) {
