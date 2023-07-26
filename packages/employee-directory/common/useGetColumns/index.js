@@ -1,6 +1,12 @@
+import { Checkbox } from '@cogoport/components';
 import React from 'react';
 
-const useGetColumns = () => {
+import styles from './styles.module.css';
+
+const useGetColumns = ({
+	bulkEdit, handleAllSelect, handleSelectId, selectedIds,
+	dataArr, handleEmployeeId,
+}) => {
 	const columns = [
 		{
 			Header   : 'Employee Name',
@@ -14,7 +20,11 @@ const useGetColumns = () => {
 		{
 			Header   : 'COGO ID',
 			accessor : (item) => (
-				<div>
+				<div
+					className={styles.cogo_id}
+					onClick={() => handleEmployeeId(item)}
+					aria-hidden
+				>
 					{item?.cogo_id}
 				</div>
 			),
@@ -85,7 +95,23 @@ const useGetColumns = () => {
 		},
 	];
 
-	return columns;
+	const checkBoxColumn = [
+		{
+			Header: <Checkbox
+				checked={dataArr.length === selectedIds.length}
+				onChange={(e) => handleAllSelect(e)}
+			/>,
+			accessor: (item) => (
+				<Checkbox
+					checked={selectedIds.includes(item.id)}
+					onChange={(e) => handleSelectId(e, item.id)}
+				/>
+			),
+			id: 'select_all',
+		},
+	];
+
+	return bulkEdit ? [...checkBoxColumn, ...columns] : columns;
 };
 
 export default useGetColumns;

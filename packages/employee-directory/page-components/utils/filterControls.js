@@ -1,10 +1,12 @@
+import { SelectController, AsyncSelectController } from '@cogoport/forms';
+
 export const CONTROLS = [
 	{
 		name        : 'cogo_id',
 		label       : 'Select COGO ID',
 		controlType : 'asyncSelect',
 		placeholder : 'Search ID',
-		asyncKey    : 'list_operators',
+		asyncKey    : 'list_employee_details',
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
@@ -28,7 +30,7 @@ export const CONTROLS = [
 		label       : 'Select Tribe',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Tribe',
-		asyncKey    : 'list_operators',
+		asyncKey    : 'list_all_tribes',
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
@@ -40,7 +42,7 @@ export const CONTROLS = [
 		label       : 'Select Squad',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Squad',
-		asyncKey    : 'list_operators',
+		asyncKey    : 'list_all_squads',
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
@@ -52,7 +54,7 @@ export const CONTROLS = [
 		label       : 'Select Reporting Manager',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Reporting Manager',
-		asyncKey    : 'list_operators',
+		asyncKey    : 'list_all_managers',
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
@@ -76,7 +78,7 @@ export const CONTROLS = [
 		label       : 'Select Chapter',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Chapter',
-		asyncKey    : 'list_operators',
+		asyncKey    : 'list_all_chapters',
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
@@ -88,7 +90,7 @@ export const CONTROLS = [
 		label       : 'Select Sub-Chapter',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Sub-Chapter',
-		asyncKey    : 'list_operators',
+		asyncKey    : 'list_sub_chapters',
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
@@ -98,13 +100,30 @@ export const CONTROLS = [
 	{
 		name        : 'status',
 		label       : 'Select Status',
-		controlType : 'asyncSelect',
+		controlType : 'select',
 		placeholder : 'Search Status',
-		asyncKey    : 'list_operators',
-		params      : {
-			filters    : { status: 'active' },
-			page_limit : 100,
-		},
-		initialCall: true,
+		options     : [
+			{
+				label : 'Regular',
+				value : 'regular',
+			},
+			{
+				label : 'Probation',
+				value : 'probation',
+			},
+			{
+				label : 'Notice Period',
+				value : 'notice_period',
+			},
+			{
+				label : 'Inactive',
+				value : 'inactive',
+			},
+		],
 	},
 ];
+
+export const CONTROL_MAPPING = {
+	select      : SelectController,
+	asyncSelect : AsyncSelectController,
+};

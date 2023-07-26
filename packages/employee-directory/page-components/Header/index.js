@@ -6,14 +6,14 @@ import { EMPLOYEE_STATUS_TABS } from '../utils/constants';
 
 import styles from './styles.module.css';
 
-function Header({ activeTab, setActiveTab }) {
+function Header({ activeTab = 'regular', setActiveTab = () => {} }) {
 	return (
 		<div className={styles.container}>
 			<Tabs
 				tabIcon={<IcMProfile />}
 				activeTab={activeTab}
 				themeType="primary"
-				onChange={setActiveTab}
+				onChange={(e) => setActiveTab((prev) => ({ ...prev, activeTab: e }))}
 			>
 				{EMPLOYEE_STATUS_TABS.map((val) => (
 					<TabPanel key={val.value} name={val.value} title={val.label} badge={3} />

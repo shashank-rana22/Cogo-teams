@@ -1,14 +1,19 @@
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import StyledTable from '../common/StyledTable';
 import useGetColumns from '../common/useGetColumns';
+import useGetEmployeeList from '../hooks/useGetEmployeeList';
 
+import EmployeeDetails from './EmployeeDetails';
+import EmployeeList from './EmployeeList';
 import Filters from './Filters';
+import FixedCard from './FixedCard';
 import Header from './Header';
 import styles from './styles.module.css';
 
 const randomDataArray = [
 	{
+		id                : 1,
 		employee_name     : 'Aanchal Kapoor',
 		cogo_id           : 'COGO-0001',
 		designation       : 'Product Designer',
@@ -20,6 +25,7 @@ const randomDataArray = [
 		status            : 'active',
 	},
 	{
+		id                : 2,
 		employee_name     : 'John Doe',
 		cogo_id           : 'COGO-1234',
 		designation       : 'Software Engineer',
@@ -31,6 +37,7 @@ const randomDataArray = [
 		status            : 'active',
 	},
 	{
+		id                : 3,
 		employee_name     : 'Jane Smith',
 		cogo_id           : 'COGO-5678',
 		designation       : 'Marketing Manager',
@@ -42,6 +49,7 @@ const randomDataArray = [
 		status            : 'active',
 	},
 	{
+		id                : 4,
 		employee_name     : 'Robert Johnson',
 		cogo_id           : 'COGO-9123',
 		designation       : 'HR Specialist',
@@ -53,6 +61,7 @@ const randomDataArray = [
 		status            : 'active',
 	},
 	{
+		id                : 5,
 		employee_name     : 'Emily Williams',
 		cogo_id           : 'COGO-4567',
 		designation       : 'Data Analyst',
@@ -64,6 +73,7 @@ const randomDataArray = [
 		status            : 'active',
 	},
 	{
+		id                : 6,
 		employee_name     : 'Michael Anderson',
 		cogo_id           : 'COGO-8912',
 		designation       : 'Finance Manager',
@@ -75,6 +85,7 @@ const randomDataArray = [
 		status            : 'active',
 	},
 	{
+		id                : 7,
 		employee_name     : 'Olivia Martinez',
 		cogo_id           : 'COGO-3456',
 		designation       : 'Product Manager',
@@ -86,6 +97,7 @@ const randomDataArray = [
 		status            : 'active',
 	},
 	{
+		id                : 8,
 		employee_name     : 'James Robinson',
 		cogo_id           : 'COGO-7890',
 		designation       : 'Sales Representative',
@@ -97,6 +109,7 @@ const randomDataArray = [
 		status            : 'active',
 	},
 	{
+		id                : 9,
 		employee_name     : 'Sophia Harris',
 		cogo_id           : 'COGO-2345',
 		designation       : 'Quality Assurance Specialist',
@@ -108,6 +121,7 @@ const randomDataArray = [
 		status            : 'active',
 	},
 	{
+		id                : 10,
 		employee_name     : 'Noah King',
 		cogo_id           : 'COGO-6789',
 		designation       : 'Graphic Designer',
@@ -121,14 +135,70 @@ const randomDataArray = [
 ];
 
 function EmployeeDirectory() {
-	const [activeTab, setActiveTab] = useState('regular');
-	const columns = useGetColumns();
+	const [bulkActions, setBlukActions] = useState({});
+	const [selectedIds, setSelectedIds] = useState([]);
+	const [openEmployeeDetails, setOpenEmployeeDetails] = useState(false);
+	const [employeeDetails, setEmployeeDetails] = useState({});
+
+	const { bulkEdit } = bulkActions;
+
+	const handleAllSelect = (e) => {
+		const { checked } = e.target;
+
+		if (checked) {
+			const ids = randomDataArray.map((val) => val.id);
+			return setSelectedIds(ids);
+		}
+
+		return setSelectedIds([]);
+	};
+
+	const handleSelectId = (e, id) => {
+		const { checked } = e.target;
+		if (checked) {
+			return setSelectedIds((prev) => ([...prev, id]));
+		}
+		const filterArr = selectedIds.filter((val) => val !== id);
+		return setSelectedIds(filterArr);
+	};
+
+	const handleEmployeeId = (dataValues) => {
+		setOpenEmployeeDetails(true);
+		setEmployeeDetails(dataValues);
+	};
+
+	const columns = useGetColumns({
+		bulkEdit,
+		handleAllSelect,
+		handleSelectId,
+		selectedIds,
+		dataArr: randomDataArray,
+		handleEmployeeId,
+	});
+
+	const { filters, setFilters, debounceQuery } = useGetEmployeeList();
+
 	return (
 		<>
-			<h3 className={styles.heading}>Employee Directory</h3>
-			<Header activeTab={activeTab} setActiveTab={setActiveTab} />
-			<Filters />
-			<StyledTable columns={columns} data={randomDataArray} />
+			<div className={styles.container}>
+				<h3 className={styles.heading}>Employee Directory</h3>
+				<Header activeTab={filters.activeTab} setActiveTab={setFilters} />
+				<Filters
+					setFilters={setFilters}
+					setBlukActions={setBlukActions}
+					setSelectedIds={setSelectedIds}
+					debounceQuery={debounceQuery}
+				/>
+				<EmployeeList
+					selectedIds={selectedIds}
+					columns={columns}
+					randomDataArray={randomDataArray}
+					setFilters={setFilters}
+					setSelectedIds={setSelectedIds}
+				/>
+			</div>
+			{!isEmpty(selectedIds) && <FixedCard selectedIds={selectedIds} />}
+			{openEmployeeDetails && employeeDetails && <EmployeeDetails />}
 		</>
 	);
 }

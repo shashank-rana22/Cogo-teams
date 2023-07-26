@@ -3,3 +3,13 @@
 	font-weight: bold;
 	color: #333;
 }
+
+.container {
+	margin-bottom: 20px;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 2px;
+		}
+	}
+}

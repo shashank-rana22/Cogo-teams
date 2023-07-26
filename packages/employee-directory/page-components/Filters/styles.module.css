@@ -13,6 +13,12 @@
 .right_container {
 	display: flex;
 	align-items: center;
+
+	:global {
+		.ui_select_options_container {
+			z-index: 10;
+		}
+	}
 }
 
 .total_employees {

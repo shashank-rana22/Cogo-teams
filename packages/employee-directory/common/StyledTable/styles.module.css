@@ -1,11 +1,17 @@
 .container {
 	width: 100%;
 	padding-bottom: 4px;
-	overflow-x: auto;
+	overflow: auto;
 
 	:global {
 		table {
 			padding: 0;
+		}
+
+		.ui_table_head_container {
+			position: sticky;
+			top: 0;
+			z-index: 1;
 		}
 
 		.ui_table_head_row {
@@ -16,7 +22,7 @@
 		border-radius: 10px;
 
 		.ui_table_head_cell {
-			padding: 10px;
+			padding: 16px;
 			font-weight: 700;
 			color: #fff;
 			white-space: nowrap;
@@ -26,7 +32,7 @@
 		.ui_table_body_cell {
 			flex-wrap: wrap;
 			width: auto;
-			padding: 12px 8px;
+			padding: 16px;
 			font-size: 14px;
 			background: #fff;
 			background-color: #fff;
@@ -71,4 +77,12 @@
 			}
 		}
 	}
+}
+
+.height_100 {
+	height: 100%;
+}
+
+.height_500 {
+	height: 500px;
 }

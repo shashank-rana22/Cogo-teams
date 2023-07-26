@@ -1097,7 +1097,7 @@ const navigationMappingAdmin = {
 		as            : '/v2/employee-directory',
 		type          : 'link',
 		icon          : IcMDashboard,
-		possible_apis : [],
+		possible_apis : apis.employee_directory,
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
