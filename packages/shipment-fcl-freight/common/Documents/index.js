@@ -23,7 +23,7 @@ function RenderContent({
 	if (loading) {
 		return <LoadingState />;
 	}
-	if (!activeToggle && !canEditDocuments) {
+	if (!activeToggle && canEditDocuments) {
 		return (
 			<CheckList
 				taskList={filteredTaskList}
