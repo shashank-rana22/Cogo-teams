@@ -106,7 +106,12 @@ const useHandleBookingConfirmationFooter = ({
 	};
 
 	const handleSubmit = async () => {
-		const { sailing_range = {}, max_price, min_price, ...restValues } = getValues();
+		const {
+			sailing_range = {},
+			max_price, min_price,
+			agreed_for_partial_shipment = false,
+			...restValues
+		} = getValues();
 
 		const { startDate = '', endDate = '' } = sailing_range;
 
@@ -132,10 +137,11 @@ const useHandleBookingConfirmationFooter = ({
 				({ id: service_id }) => ({
 					id                   : service_id,
 					shipping_preferences : {
-						sailing_start_date : startDate || undefined,
-						sailing_end_date   : endDate || undefined,
-						min_price          : Number(min_price) || undefined,
-						max_price          : Number(max_price) || undefined,
+						sailing_start_date          : startDate || undefined,
+						sailing_end_date            : endDate || undefined,
+						min_price                   : Number(min_price) || undefined,
+						max_price                   : Number(max_price) || undefined,
+						agreed_for_partial_shipment : agreed_for_partial_shipment === 'yes',
 						...restValues,
 					},
 				}),

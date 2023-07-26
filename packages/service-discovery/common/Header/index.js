@@ -26,6 +26,8 @@ function Header({
 	service_key = 'search_type',
 	loading = false,
 	activePage = '',
+	infoBanner = {},
+	setInfoBanner = () => {},
 	...rest
 }) {
 	// const { scrollDirection } = useScrollDirection();
@@ -52,9 +54,9 @@ function Header({
 	return (
 		<div ref={headerRef} className={cl`${styles.container} ${showAdditionalHeader ? styles.show : {}}`}>
 			<div className={styles.header_wrapper}>
-				{/* {scrollDirection === 'up' && activePage !== 'checkout' ? ( */}
-				<Back heading={rest.headerHeading} {...rest} />
-				{/* ) : null} */}
+				{activePage !== 'checkout' ? (
+					<Back heading={rest.headerHeading} {...rest} />
+				) : null}
 
 				<div className={styles.details_header}>
 					<div className={styles.search_details}>
@@ -76,6 +78,8 @@ function Header({
 							loading={loading && isEmpty(data)}
 							activePage={rest.activePage}
 							isAllowedToEdit={isAllowedToEdit}
+							infoBanner={infoBanner}
+							setInfoBanner={setInfoBanner}
 						/>
 
 						<Wallet

@@ -32,6 +32,8 @@ function FCLResults({
 	paginationProps,
 	loading,
 	screen,
+	infoBanner = {},
+	setInfoBanner = () => {},
 }) {
 	const SCREEN_PROPS_MAPPING = {
 		listRateCard: {
@@ -49,6 +51,8 @@ function FCLResults({
 			selectedWeek,
 			setSelectedWeek,
 			refetchSearch,
+			infoBanner,
+			setInfoBanner,
 		},
 		comparison: {
 			detail,

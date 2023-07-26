@@ -6,7 +6,7 @@ import getElementController from '../../../../forms/getElementController';
 import { getlineItemControls } from './getlineItemControls';
 import styles from './styles.module.css';
 
-function EditLineItem({ lineItemOptions, service_type = '', lineItems = [], detail = {} }, ref) {
+function EditLineItem({ lineItemOptions = [], service_type = '', lineItems = [], detail = {} }, ref) {
 	const {
 		control,
 		handleSubmit,

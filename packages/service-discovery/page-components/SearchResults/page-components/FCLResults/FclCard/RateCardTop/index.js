@@ -1,12 +1,15 @@
-import { Checkbox, Tooltip } from '@cogoport/components';
+import { Checkbox, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMShare } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import InfoBannerContent from '../../../../../../common/InfoBannerContent';
 import ShareToUsers from '../../../../common/ShareToUsers';
 import LikeDislike from '../LikeDislike';
 
 import styles from './styles.module.css';
+
+const MAX_COMPARABLE_RATE_CARD_INDEX = 3;
 
 function ShareRate({ showShareModal, rateCardData, detail, setShowShareModal }) {
 	if (showShareModal) {
@@ -30,6 +33,9 @@ function RateCardTop({
 	comparisonRates = {},
 	isSelectedCard = false,
 	isCogoAssured = false,
+	infoBanner = {},
+	index = 0,
+	setInfoBanner = () => {},
 }) {
 	const { shipping_line = {}, id: card_id } = rateCardData;
 	const [showShareModal, setShowShareModal] = useState(false);
@@ -51,34 +57,39 @@ function RateCardTop({
 		}
 	};
 
-	const getTooltipMessage = () => {
-		if (selectedCardIDs.length > 2 && !selectedCardIDs.includes(card_id)) {
-			return 'Maximum 3 cards can be compared';
-		}
-		if (selectedCardIDs.includes(card_id)) {
-			return 'Click to remove';
-		}
+	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
-		return 'Select to compare rates';
-	};
+	const showPopover = current === 'comparision_button';
+
+	const popoverComponentData = buttonProps.comparision_button || {};
 
 	const renderCheckbox = () => {
-		if (isSelectedCard && comparisonRates && Object.keys.length > 1) return null;
+		if (isSelectedCard) return null;
+
 		return (
-			<Tooltip content={getTooltipMessage()} placement="top">
-				<div>
-					<Checkbox
-						checked={selectedCardIDs.includes(card_id)}
-						onChange={() => {
-							handleCheckbox();
-						}}
-						disabled={
-					selectedCardIDs.length > 3
+			<Popover
+				placement="bottom"
+				caret
+				render={(
+					<InfoBannerContent
+						popoverComponentData={popoverComponentData}
+						totalBanners={totalBanners}
+						setInfoBanner={setInfoBanner}
+					/>
+				)}
+				visible={showPopover && !index}
+			>
+				<Checkbox
+					checked={selectedCardIDs.includes(card_id)}
+					onChange={() => {
+						handleCheckbox();
+					}}
+					disabled={
+					selectedCardIDs.length > MAX_COMPARABLE_RATE_CARD_INDEX
 					&& !selectedCardIDs.includes(card_id)
 				}
-					/>
-				</div>
-			</Tooltip>
+				/>
+			</Popover>
 		);
 	};
 

@@ -9,10 +9,10 @@ import EditLineItem from './EditLineItem';
 function EditLineItemModal({
 	editLineItemData = {},
 	setEditLineItemData = () => {},
-	checkout_id = '',
 	rateDetails = [],
 	detail = {},
 	getCheckout = () => {},
+	checkoutLoading = false,
 }) {
 	const ref = useRef({});
 
@@ -52,9 +52,7 @@ function EditLineItemModal({
 
 			<Modal.Body>
 				<EditLineItem
-					service_id={service_id}
 					ref={ref}
-					checkout_id={checkout_id}
 					lineItemOptions={lineItems}
 					service_type={service_type}
 					lineItems={serviceObject.line_items}
@@ -63,8 +61,8 @@ function EditLineItemModal({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button disabled={loading} onClick={handleSubmitForm}>
-					{!loading ? 'Edit Line Item' : 'Saving...'}
+				<Button loading={loading || checkoutLoading} onClick={handleSubmitForm}>
+					{!loading && !checkoutLoading ? 'Edit Line Item' : 'Saving...'}
 				</Button>
 			</Modal.Footer>
 		</Modal>
