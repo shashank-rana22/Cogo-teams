@@ -6,19 +6,34 @@ import { useAllocationRequest } from '@cogoport/request';
 const OFFSET = -1;
 const MAX_SLAB_INDEX = 3;
 
-const useCreateAgentExperienceSlabs = () => {
-	const [{ loading }, trigger] = useAllocationRequest({
+const apiMapping = ({ isEditMode = false }) => {
+	if (isEditMode) {
+		return {
+			url     : 'update_csd_config',
+			authkey : 'post_allocation_update_csd_config',
+		};
+	}
+	return {
 		url     : 'csd_config_agent_experience_slabs',
-		method  : 'POST',
 		authkey : 'post_allocation_csd_config_agent_experience_slabs',
+	};
+};
+
+const useCreateAgentExperienceSlabs = ({ isEditMode = false }) => {
+	const { url = '', authkey = '' } = apiMapping({ isEditMode });
+
+	const [{ loading }, trigger] = useAllocationRequest({
+		url,
+		method: 'POST',
+		authkey,
 	}, { manual: true });
 
 	const createAgentExperienceSlabs = async ({ values = {}, configId, setShowForm = () => {} }) => {
 		try {
 			await trigger({
 				data: {
-					config_id              : configId,
-					agent_experience_slabs : values.agent_experience_slabs.map((slab, index) => {
+					...(isEditMode ? { id: configId } : { config_id: configId }),
+					agent_experience_slabs: values.agent_experience_slabs.map((slab, index) => {
 						const { slab_unit, slab_lower_limit, slab_upper_limit } = slab;
 
 						if (index === MAX_SLAB_INDEX) {

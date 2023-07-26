@@ -1,9 +1,11 @@
 import { Stepper } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useCreateCsdConfig from '../../../hooks/useCreateCsdConfig';
+import useGetCsdConfigurations from '../../../hooks/useGetCsdConfigurations';
 
 import SelectUsers from './components/SelectUsers';
 import SetConfiguration from './components/SetConfiguration';
@@ -22,6 +24,9 @@ function CreateCofiguration() {
 	const [activeItem, setActiveItem] = useState('select_users');
 
 	const { loading, createCsdConfig } = useCreateCsdConfig({ setActiveItem });
+	const { list = [] } = useGetCsdConfigurations();
+
+	const data = list[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const COMPONENT_MAPPING = {
 		select_users: {
@@ -30,12 +35,14 @@ function CreateCofiguration() {
 				setActiveItem,
 				loading,
 				createCsdConfig,
+				data,
 			},
 		},
 		set_configuration: {
 			component : SetConfiguration,
 			props     : {
 				setActiveItem,
+				data,
 			},
 		},
 		total_shipment_capacity: {

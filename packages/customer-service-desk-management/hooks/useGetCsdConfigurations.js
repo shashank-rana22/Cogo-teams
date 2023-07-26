@@ -3,13 +3,15 @@ import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-const useGetCsdConfigurations = ({ source = '' }) => {
+const DEFAULT_PAGE = 1;
+
+const useGetCsdConfigurations = (source = '') => {
 	const router = useRouter();
 	const configId = router?.query?.id;
 
-	const [params, setParams] = useState({});
+	const [params] = useState({});
 
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const [{ loading, data }, trigger] = useAllocationRequest({
 		url     : 'csd_configurations',

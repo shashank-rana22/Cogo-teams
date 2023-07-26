@@ -17,21 +17,36 @@ const OFFSET = 1;
 const MAX_SLAB_INDEX = 3;
 const MAX_SLAB_LENGTH = 4;
 
-const EXPERIENCE_MAPPING = {
-	default : DEFAULT_SLABS,
-	custom  : [{ slab_unit: 'month', slab_lower_limit: '0', slab_upper_limit: '' }],
+const CUSTOM_DEFAULT_SLAB = [{ slab_unit: 'month', slab_lower_limit: '0', slab_upper_limit: '' }];
+
+const getSlabs = ({ experience = 'default', isEditMode = false, data = {} }) => {
+	if (experience === 'default') return DEFAULT_SLABS;
+
+	if (isEditMode) {
+		return data.agent_experience_slabs?.map((item) => {
+			const { slab_unit, slab_lower_limit, slab_upper_limit } = item;
+			return { slab_unit, slab_lower_limit, slab_upper_limit };
+		});
+	}
+	return CUSTOM_DEFAULT_SLAB;
 };
 
-function SetConfiguration({ setActiveItem = () => {} }) {
+function SetConfiguration({ setActiveItem = () => {}, data = {} }) {
 	const router = useRouter();
 
 	const [showForm, setShowForm] = useState(false);
 
-	const configId = router?.query?.id;
+	const { mode = '', configId } = router.query;
 
-	const { loading, createAgentExperienceSlabs } = useCreateAgentExperienceSlabs();
+	const isEditMode = mode === 'edit';
 
-	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm();
+	const { loading, createAgentExperienceSlabs } = useCreateAgentExperienceSlabs({ isEditMode });
+
+	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm({
+		defaultValues: {
+			experience: isEditMode ? 'custom' : 'default',
+		},
+	});
 
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -59,12 +74,8 @@ function SetConfiguration({ setActiveItem = () => {} }) {
 	};
 
 	useEffect(() => {
-		setValue('agent_experience_slabs', EXPERIENCE_MAPPING[experience]);
-	}, [experience, setValue]);
-
-	useEffect(() => {
-		setValue('experience', 'default');
-	}, [setValue]);
+		setValue('agent_experience_slabs', getSlabs({ experience, isEditMode, data }));
+	}, [data, experience, isEditMode, setValue]);
 
 	return (
 		<>
@@ -137,20 +148,36 @@ function SetConfiguration({ setActiveItem = () => {} }) {
 							</div>
 						)}
 
-						<Button
-							size="md"
-							themeType="primary"
-							className={styles.btn}
-							loading={loading}
-							onClick={handleSubmit((values) => createAgentExperienceSlabs({
-								values,
-								configId,
-								setShowForm,
-							}))}
-						>
-							Save
+						<div className={styles.btn_container}>
 
-						</Button>
+							{experience === 'default' && (
+								<Button
+									size="md"
+									themeType="secondary"
+									className={styles.reset_btn}
+									loading={loading}
+									onClick={() => setValue('agent_experience_slabs', CUSTOM_DEFAULT_SLAB)}
+								>
+									Reset
+								</Button>
+							)}
+
+							<Button
+								size="md"
+								themeType="primary"
+								className={styles.btn}
+								loading={loading}
+								onClick={handleSubmit((values) => createAgentExperienceSlabs({
+									values,
+									configId,
+									setShowForm,
+								}))}
+							>
+								Save
+							</Button>
+
+						</div>
+
 					</div>
 				</div>
 
@@ -161,6 +188,7 @@ function SetConfiguration({ setActiveItem = () => {} }) {
 					agentExperienceSlabs={agentExperienceSlabs}
 					configId={configId}
 					setActiveItem={setActiveItem}
+					data={data}
 				/>
 			)}
 

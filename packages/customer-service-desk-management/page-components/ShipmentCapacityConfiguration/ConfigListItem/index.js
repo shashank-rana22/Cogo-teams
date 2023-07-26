@@ -2,6 +2,7 @@ import { Tooltip, Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowDown, IcMOverflowDot, IcMEdit } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -22,11 +23,13 @@ const activationStatus = ({ status, activated_at = '' }) => {
 	}
 	return {
 		title   : 'Status',
-		content : <Pill size="sm" color="yellow">Draft</Pill>,
+		content : <Pill size="sm" color="yellow">{startCase(status)}</Pill>,
 	};
 };
 
-function ConfigListItem({ data = {} }) {
+function ConfigListItem({ data = {}, setShowModal = () => {} }) {
+	const router = useRouter();
+
 	const [showDetails, setShowDetails] = useState(false);
 
 	const {
@@ -35,6 +38,11 @@ function ConfigListItem({ data = {} }) {
 	} = data;
 
 	const { title, content } = activationStatus({ status, activated_at });
+
+	console.log('data', data);
+
+	const handleEditClick = () => router.push(`/customer-service-desk-management/create-config?
+												id=${data.id}&mode=edit`);
 
 	return (
 		<div style={{ marginBottom: '20px' }}>
@@ -84,6 +92,7 @@ function ConfigListItem({ data = {} }) {
 								<Button
 									themeType="primary"
 									className={styles.btn}
+									onClick={handleEditClick}
 								>
 									<IcMEdit />
 									<div>Edit</div>
@@ -93,6 +102,7 @@ function ConfigListItem({ data = {} }) {
 									themeType="secondary"
 									className={styles.btn}
 									type="button"
+									onClick={() => setShowModal(true)}
 								>
 									<div>Deactive Config.</div>
 								</Button>

@@ -3,17 +3,37 @@ import {
 	InputController,
 	useForm,
 } from '@cogoport/forms';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import services from '../../../../../../../configurations/service-options';
 import useCreateShipmentCapacities from '../../../../../../../hooks/useCreateShipmentCapacities';
 
 import styles from './styles.module.css';
 
-function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiveItem = () => {} }) {
+function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiveItem = () => {}, data = {} }) {
 	const { loading, createShipmentCapacities } = useCreateShipmentCapacities({ setActiveItem });
 
-	const { control, formState: { errors }, handleSubmit, setValue, getValues, watch, reset } = useForm();
+	const { control, formState: { errors }, handleSubmit, reset, setValue } = useForm();
+
+	useEffect(() => {
+		const serviceWiseData = services?.map((service) => {
+			const filteredData = data.shipment_capacities?.filter((item) => ((item.service_transit_type
+				? `${item.service_type}_${item.service_transit_type}` : item.service_type) === service.value)) || [];
+
+			return {
+				service : service.value,
+				data    : filteredData.sort((a, b) => a.slab_lower_limit - b.slab_lower_limit),
+			};
+		});
+
+		serviceWiseData.forEach((service) => {
+			const serviceValue = service.value;
+
+			service.data.forEach((item, index) => {
+				setValue(`${serviceValue}${index}`, item.shipment_capacity);
+			});
+		});
+	}, [data, setValue]);
 
 	return (
 		<div className={styles.container}>
@@ -116,7 +136,6 @@ function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiv
 					}))}
 				>
 					Save And Proceed
-
 				</Button>
 			</div>
 

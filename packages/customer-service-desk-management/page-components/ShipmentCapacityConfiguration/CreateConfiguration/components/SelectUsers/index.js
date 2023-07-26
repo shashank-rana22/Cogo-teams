@@ -8,12 +8,26 @@ import orgSubTypeOptions from '../../../../../configurations/org-subtype-options
 import getControls from './controls';
 import styles from './styles.module.css';
 
+const ACCORD_CONTENT = [{
+	title   : 'Small Medium Enterprise',
+	content : 'Agent = Booking Agent',
+},
+{
+	title   : 'Channel Partner',
+	content : 'PM = Portfolio Manager, CP User = Sales Agent, KAM = Booking Agent = Entity Manager',
+},
+{
+	title   : 'Enterprise',
+	content : 'Sales Agent = Sales Agent, KAM = C-KAM = Booking Agent',
+}];
+
 function SelectUsers({
-	// setActiveItem = () => {},
 	createCsdConfig = () => {},
 	loading = false,
+	data = {},
 }) {
-	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
+	const { control, formState:{ errors }, handleSubmit, watch, setValue = () => {} } = useForm();
+	const { cogo_entity_id, config_type, organization_type, segment, organization_ids } = data;
 
 	const orgType = watch('organization_type');
 	const cogoEntityId = watch('cogo_entity_id');
@@ -22,6 +36,14 @@ function SelectUsers({
 	useEffect(() => {
 		setValue('segment', undefined);
 	}, [orgType, setValue]);
+
+	useEffect(() => {
+		setValue('cogo_entity_id', cogo_entity_id);
+		setValue('config_type', config_type);
+		setValue('organization_ids', organization_ids);
+		setValue('organization_type', organization_type);
+		setValue('segment', segment);
+	}, [cogo_entity_id, config_type, organization_ids, organization_type, segment, setValue]);
 
 	return (
 		<div className={styles.container}>
@@ -83,8 +105,12 @@ function SelectUsers({
 			</div>
 
 			<Accordion type="text" title="View Current System Logic" className={styles.accordion}>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-				condimentum, nisl eget aliquam tincidunt, nunc nisl aliquam
+				{ACCORD_CONTENT.map((item) => (
+					<div className={styles.accord_item} key={item.title}>
+						<div className={styles.title}>{item.title}</div>
+						<div>{item.content}</div>
+					</div>
+				))}
 			</Accordion>
 
 			<Button
@@ -94,7 +120,7 @@ function SelectUsers({
 				loading={loading}
 				onClick={handleSubmit((values) => createCsdConfig({ values }))}
 			>
-				Save
+				Save & Proceed
 			</Button>
 		</div>
 

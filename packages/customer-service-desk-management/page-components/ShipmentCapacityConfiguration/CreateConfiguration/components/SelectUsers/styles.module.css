@@ -57,3 +57,20 @@
 	margin-top: 40px;
 	color: #4F4F4F;
 }
+
+.accord_item {
+	border-radius: 4px;
+	background-color: #fff;
+}
+
+.title {
+	font-weight: 600;
+}
+
+.accord_item {
+	padding: 8px 12px;
+}
+
+.accord_item:not(:last-child){
+	margin-bottom: 20px;
+}

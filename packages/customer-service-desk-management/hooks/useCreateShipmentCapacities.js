@@ -1,20 +1,42 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 
 import getPayload from '../utils/getPayload';
 
-const useCreateShipmentCapacities = ({ setActiveItem = () => {} }) => {
-	const [{ loading }, trigger] = useAllocationRequest({
+const apiMapping = ({ mode = '' }) => {
+	if (mode === 'edit') {
+		return {
+			url     : 'update_csd_config',
+			authkey : 'post_allocation_update_csd_config',
+		};
+	}
+	return {
 		url     : 'csd_config_shipment_capacities',
-		method  : 'POST',
 		authkey : 'post_allocation_csd_config_shipment_capacities',
+	};
+};
+
+const useCreateShipmentCapacities = ({ setActiveItem = () => {} }) => {
+	const router = useRouter();
+
+	const { mode = '' } = router.query;
+
+	const { url = '', authkey = '' } = apiMapping({ mode });
+
+	const isEditMode = mode === 'edit';
+
+	const [{ loading }, trigger] = useAllocationRequest({
+		url,
+		method: 'POST',
+		authkey,
 	}, { manual: true });
 
 	const createShipmentCapacities = async ({ values = {}, agentExperienceSlabs = [], configId = '' }) => {
 		try {
 			await trigger({
-				data: getPayload({ values, agentExperienceSlabs, configId }),
+				data: getPayload({ values, agentExperienceSlabs, configId, isEditMode }),
 			});
 			setActiveItem('total_shipment_capacity');
 			Toast.success('Shipment Capacities have been set successfully');

@@ -6,7 +6,7 @@ import ConfigList from './ConfigList';
 import Header from './Header';
 
 function ShipmentCapacityCofiguration() {
-	const { list = [], loading, pageData = {}, page, setPage = () => {} } = useGetCsdConfigurations({});
+	const { list = [], loading, pageData = {}, page, setPage = () => {} } = useGetCsdConfigurations();
 
 	return (
 		<>

@@ -22,6 +22,9 @@ const functionSubFunctionMapping = {
 		{ label: 'Booking Desk', value: 'booking_desk' },
 		{ label: 'Post Shipment', value: 'post_shipment' },
 		{ label: 'FinOps', value: 'finops' },
+		{ label: 'SME - Customer Operations', value: 'sme_customer_operations' },
+		{ label: 'CP - Customer Operations', value: 'cp_customer_operations' },
+		{ label: 'ES - Customer Operations', value: 'es_customer_operations' },
 	],
 	finance  : [],
 	training : [

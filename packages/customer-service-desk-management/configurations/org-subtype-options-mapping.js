@@ -12,6 +12,10 @@ const orgSubTypeOptions = {
 			value : 'enterprise',
 			label : 'Enterprise',
 		},
+		{
+			value : 'sme',
+			label : 'SME',
+		},
 	],
 	channel_partner: [
 		{

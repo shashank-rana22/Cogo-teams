@@ -73,8 +73,7 @@
 }
 
 .btn {
-	margin-left: auto;
-	margin-top: 30px;
+	margin-left: 14px;
 }
 
 .experience_container {
@@ -95,4 +94,11 @@
 .delete_icon {
 	cursor: pointer;
 	margin-left: 20px;
+}
+
+.btn_container {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-top: 30px;
 }

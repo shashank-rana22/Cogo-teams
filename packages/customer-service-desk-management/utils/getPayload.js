@@ -1,11 +1,13 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const getServiceDetails = (str = '') => {
 	const SERVICE_OBJ = {};
 
 	if (str.includes('short')) {
-		SERVICE_OBJ.service_type = str[0] === 'f' ? 'fcl_freight' : 'lcl_freight';
+		SERVICE_OBJ.service_type = str[GLOBAL_CONSTANTS.zeroth_index] === 'f' ? 'fcl_freight' : 'lcl_freight';
 		SERVICE_OBJ.service_duration_type = 'short_transit';
 	} else if (str.includes('long')) {
-		SERVICE_OBJ.service_type = str[0] === 'f' ? 'fcl_freight' : 'lcl_freight';
+		SERVICE_OBJ.service_type = str[GLOBAL_CONSTANTS.zeroth_index] === 'f' ? 'fcl_freight' : 'lcl_freight';
 		SERVICE_OBJ.service_duration_type = 'long_transit';
 	} else {
 		SERVICE_OBJ.service_type = str;
@@ -14,7 +16,7 @@ const getServiceDetails = (str = '') => {
 	return SERVICE_OBJ;
 };
 
-const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '' }) => {
+const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '', isEditMode = false }) => {
 	const shipmentCapacities = Object.keys(values).map((item) => {
 		let str = item;
 		const lastCharacter = str.slice(-1);
@@ -37,8 +39,8 @@ const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '' }) =
 	});
 
 	const payload = {
-		shipments_capacity_details : shipmentCapacities,
-		config_id                  : configId,
+		shipments_capacity_details: shipmentCapacities,
+		...(isEditMode ? { id: configId } : { config_id: configId }),
 	};
 
 	return payload;
