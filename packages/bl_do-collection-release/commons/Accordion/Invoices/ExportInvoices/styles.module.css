@@ -1,7 +1,7 @@
 .list_container {
 	padding: 20px;
-	background-color: #fff;
-	border: 1px solid #88cad1;
+	background-color: var(--color-secondary-5);
+	border: 1px solid var(--color-tertiary-blue-2);
 	border-top: none;
 
 	.card-list-root {
@@ -10,7 +10,7 @@
 
 	.card-list-header-root {
 		padding: 0 20px;
-		background: #393f70;
+		background: var(--color-tertiary-blue-4);
 		border-bottom: none;
 
 		.card-list-header-root-row {
@@ -19,9 +19,9 @@
 		}
 
 		.card-list-header-title {
-			font-size: 12px;
+			font-size: var(--font-size-md);
 			font-weight: normal;
-			color: #fff;
+			color: var(--color-secondary-5);
 		}
 	}
 
@@ -30,7 +30,7 @@
 		cursor: initial !important;
 
 		.card-body-col {
-			font-size: 12px;
+			font-size: var(--font-size-md);
 		}
 	}
 }

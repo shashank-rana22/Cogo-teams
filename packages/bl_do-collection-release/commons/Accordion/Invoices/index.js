@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowUp, IcMArrowDown, IcMDocument } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { v4 as uuid } from 'uuid';
 
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
 import useGetBill from '../../../hooks/useGetBill';
@@ -38,7 +37,7 @@ function InvoiceHover({ invoice = {} }) {
 					<div className={cl`${styles.text} ${styles.bold_colored}`}>
 						{formatAmount({
 							amount   : invoice?.inr_invoice_total,
-							currency : invoice?.invoice_currency || 'INR',
+							currency : invoice?.invoice_currency,
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',
@@ -123,7 +122,7 @@ export default function Invoices({
 								content={<InvoiceHover invoice={invoice} />}
 								className={styles.tooltip}
 								caret={false}
-								key={uuid()}
+								key={invoice?.id}
 							>
 								<div className={cl`${styles.text} ${styles.invoice_hover}`}>
 									{invoice?.invoice_no}

@@ -17,9 +17,9 @@ const useGetBill = ({ serial_id, accordionOpen }) => {
 		{ manual: true, autoCancel: false },
 	);
 
-	const listApi = useCallback(async () => {
+	const listApi = useCallback(() => {
 		try {
-			await listExpenseInvoicesTrigger({
+			listExpenseInvoicesTrigger({
 				params: {
 					jobNumbers : serial_id,
 					jobSource  : 'LOGISTICS',
