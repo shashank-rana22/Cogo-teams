@@ -39,9 +39,9 @@ function useGetServices({ shipment_data = {}, additional_methods = [] }) {
 	return {
 		servicesGet: {
 			servicesLoading,
-			refetchServices         : listServices,
-			servicesList            : servicesData,
-			bookingRequirementsList : bookingReqData,
+			refetchServices     : listServices,
+			servicesList        : servicesData,
+			bookingRequirements : bookingReqData,
 		},
 
 	};

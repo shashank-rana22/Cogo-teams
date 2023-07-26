@@ -3,12 +3,46 @@ import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { v4 as uuid } from 'uuid';
 
 import useUpdateShipmentBookingConfirmationPreferences from
 	'../../../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
 
 import styles from './styles.module.css';
+
+const LABEL_VALUE_MAPPING = (obj) => [
+	{
+		id    : 'supplier_name',
+		label : 'Supplier Name',
+		value : obj?.service_provider?.business_name,
+	},
+	{
+		id    : 'shipping_line',
+		label : 'Shipping Line',
+		value : obj?.reverted_shipping_line?.business_name || obj?.operator?.business_name
+				|| obj?.shipping_line?.business_name,
+	},
+	{
+		id    : 'source_of_rate',
+		label : 'Source of Rate',
+		value : obj?.source,
+	},
+	{
+		id    : 'buy_rate',
+		label : 'Buy Rate',
+		value : getFormattedPrice(
+			obj?.price,
+			obj?.buy_currency || obj?.currency,
+		),
+	},
+	{
+		id    : 'sailing_date',
+		label : 'Sailing Date',
+		value : formatDate({
+			date       : new Date(),
+			formatType : 'dd MMM yyyy',
+		}),
+	},
+];
 
 function BookingPreferenceCard({
 	item = {},
@@ -29,7 +63,7 @@ function BookingPreferenceCard({
 	const dataArray = Array.isArray(data) ? data : [data];
 	const { remarks, supplier_contract_no } = dataArray?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({
+	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({
 		setStep,
 		source: 'upload_booking_note',
 		setSelectedServiceProvider,
@@ -40,34 +74,6 @@ function BookingPreferenceCard({
 			await apiTrigger([...selectedServiceProvider, item]);
 		}
 	};
-
-	const labelValueMapping = (obj) => [
-		{ label: 'Supplier Name', value: obj?.service_provider?.business_name },
-		{
-			label : 'Shipping Line',
-			value : obj?.reverted_shipping_line?.business_name || obj?.operator?.business_name
-				|| obj?.shipping_line?.business_name,
-		},
-		{
-			label : 'Source of Rate',
-			value : obj?.source,
-		},
-		{
-			label : 'Buy Rate',
-			value : getFormattedPrice(
-				obj?.price,
-				obj?.buy_currency || obj?.currency,
-			),
-		},
-		{
-			label : 'Sailing Date',
-			value : formatDate({
-				date       : new Date(),
-				formatType : 'dd MMM yyyy',
-			}),
-		},
-
-	];
 
 	const remarksAndContactNotPresent = isEmpty(remarks) && isEmpty(supplier_contract_no);
 
@@ -87,9 +93,9 @@ function BookingPreferenceCard({
 
 			<div>
 				{(dataArray || []).map((obj) => (
-					<div key={uuid()} className={cl`${styles.sub_container} ${styles.justify_space_between}`}>
-						{labelValueMapping(obj).map((eachObj) => (
-							<div key={uuid()}>
+					<div key={obj?.id} className={cl`${styles.sub_container} ${styles.justify_space_between}`}>
+						{LABEL_VALUE_MAPPING(obj).map((eachObj) => (
+							<div key={eachObj?.id}>
 								<div className={styles.label}>{eachObj?.label}</div>
 								<div className={styles.value}>{eachObj?.value}</div>
 							</div>
@@ -98,7 +104,7 @@ function BookingPreferenceCard({
 				))}
 			</div>
 
-			<div className={`${styles.supplier_proceed_wrapper} ${remarksAndContactNotPresent
+			<div className={cl`${styles.supplier_proceed_wrapper} ${remarksAndContactNotPresent
 				? styles.justify_flex_end : styles.justify_space_between}`}
 			>
 				<div>
@@ -129,6 +135,7 @@ function BookingPreferenceCard({
 						onClick={handleProceed}
 						disabled={(selectedServiceProvider || [])
 							.find((service) => item.service_id === service.service_id)}
+						loading={loading}
 					>
 						<b>
 							{selectedServiceProvider.length === (similarServiceIds.length - ONE) ? 'Proceed' : 'Save'}

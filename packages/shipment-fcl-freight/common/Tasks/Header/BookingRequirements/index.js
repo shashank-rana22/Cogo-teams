@@ -9,11 +9,11 @@ import serviceMapping from './mapping.json';
 import styles from './styles.module.css';
 
 function BookingRequirements({ showBookingReq = false, setShowBookingReq = () => {} }) {
-	const { servicesList = [], primary_service = {}, bookingRequirementsList = {} } = useContext(ShipmentDetailContext);
+	const { servicesList = [], primary_service = {}, bookingRequirements = {} } = useContext(ShipmentDetailContext);
 
 	const main_service = {
 		...servicesList?.find((s) => s?.main_service_id === null),
-		...bookingRequirementsList,
+		...bookingRequirements,
 	};
 
 	const bookingDeskDetails = serviceMapping?.booking_desk_details;
