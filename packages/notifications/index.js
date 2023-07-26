@@ -1,1 +1,2 @@
-export { default as Notifications } from './page-components';
+export { default as NotificationsPopover } from './components/NotificationPopover';
+export { default as NotificationPage } from './components/NotificationPage';

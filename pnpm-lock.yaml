@@ -1601,8 +1601,11 @@ importers:
   packages/notifications:
     specifiers:
       '@cogoport/components': ^1.0.432
+      '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.86
+      '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.10
       date-fns: ^2.29.3
       react: 18.2.0
@@ -1610,8 +1613,11 @@ importers:
       react-redux: ^8.0.5
     dependencies:
       '@cogoport/components': 1.0.432_33anfcebeh5c4mwpkkbioyhs2q
+      '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.86_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       date-fns: 2.30.0
       react-redux: 8.1.1_biqbaboplfbrettd7655fr4n2y
@@ -8300,7 +8306,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -8311,7 +8317,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -8322,7 +8328,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -8334,7 +8340,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -8345,7 +8351,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -8357,7 +8363,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       immutable: 3.8.2
     dev: false
 

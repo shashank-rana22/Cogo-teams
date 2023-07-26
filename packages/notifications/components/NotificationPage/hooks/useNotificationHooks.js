@@ -13,9 +13,16 @@ const useNotificationHooks = () => {
 	const {
 		general: { scope = '' },
 	} = useSelector((state) => state);
-	const { trigger, loading } = useRequest('get', false, scope, {
-		encodeParams: false,
-	})('/recent_notification?record_per_page=10');
+
+	const [{ loading }, trigger] = useRequest({
+		url    : '/recent_notification',
+		method : 'GET',
+		// { encodeParams: false},
+		params : {
+			record_per_page: 10,
+		},
+		scope,
+	}, { manual: false });
 
 	const setActiveTabFunction = (tab) => {
 		setActiveTab(tab);
