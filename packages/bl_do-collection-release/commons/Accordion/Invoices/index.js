@@ -1,36 +1,28 @@
-import { cl, Tooltip, Table } from '@cogoport/components';
+import { cl, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowUp, IcMArrowDown, IcMDocument } from '@cogoport/icons-react';
-import { useState } from 'react';
-import { v4 as uuid } from 'uuid';
+import { isEmpty } from '@cogoport/utils';
 
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
+import useGetBill from '../../../hooks/useGetBill';
 import ClickableDiv from '../../ClickableDiv';
 import PendingKnockOff from '../PendingKnockOff';
 
+import ExportInvoices from './ExportInvoices';
 import styles from './styles.module.css';
 import { columns } from './tableColumn';
 
-export default function Invoices({
-	item = {},
-	accordionOpen = false,
-	handleAccordionOpen = () => {},
-	tasks = [],
-	refetch = () => {},
-	getShipmentPendingTask = () => {},
-	taskLoading = false,
-}) {
-	const [knockoffTabs, setKnockoffTabs] = useState('invoice');
-	const list_of_invoices = (item?.invoice_data || []).filter(
-		(inv) => inv.status !== 'init',
-	);
-	const tableData = getTableFormatedData(list_of_invoices);
+const MINIMUM_INVOICES = 3;
+const MINIMUM_TOOLTIP_DISPLAY_VALUE = 1;
 
-	const renderPart = (list_of_invoices || []).slice(0, 3);
-	const invoiceLength = list_of_invoices.length;
-	const remainLength = invoiceLength > 3 ? invoiceLength - 3 : 0;
+const TRADE_TYPE_COMPONENT_MAPPING = {
+	import : PendingKnockOff,
+	export : ExportInvoices,
+};
 
-	const invoiceHover = (invoice) => (
+function InvoiceHover({ invoice = {} }) {
+	return (
 		<div className={styles.invoice_hover_container}>
 			<div className={cl`${styles.text} ${styles.bold}`}>{invoice?.invoice_no}</div>
 
@@ -45,7 +37,7 @@ export default function Invoices({
 					<div className={cl`${styles.text} ${styles.bold_colored}`}>
 						{formatAmount({
 							amount   : invoice?.inr_invoice_total,
-							currency : invoice?.invoice_currency || 'inr',
+							currency : invoice?.invoice_currency,
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',
@@ -57,33 +49,63 @@ export default function Invoices({
 			</div>
 		</div>
 	);
+}
 
-	const renderAccordion = () => {
-		if (item?.trade_type === 'import') {
-			return (
-				<PendingKnockOff
-					item={item}
-					tasks={tasks}
-					handleAccordionOpen={handleAccordionOpen}
-					refetch={refetch}
-					getShipmentPendingTask={getShipmentPendingTask}
-					taskLoading={taskLoading}
-					knockoffTabs={knockoffTabs}
-					setKnockoffTabs={setKnockoffTabs}
-				/>
-			);
-		}
+function RenderAccordion({
+	item = {},
+	tasks = [],
+	handleAccordionOpen = () => {},
+	refetch = () => {},
+	getShipmentPendingTask = () => {},
+	taskLoading = false,
+	tableData = [],
+}) {
+	const propsMapping = {
+		import: {
+			item,
+			tasks,
+			handleAccordionOpen,
+			refetchList: refetch,
+			getShipmentPendingTask,
+			taskLoading,
+		},
 
-		if (item?.trade_type === 'export') {
-			return (
-				<div className={styles.list_container}>
-					<Table columns={columns} data={tableData} />
-				</div>
-			);
-		}
-
-		return null;
+		export: {
+			columns,
+			tableData,
+		},
 	};
+
+	const props = propsMapping[item?.trade_type];
+
+	const Component = !isEmpty(item?.trade_type)
+		? TRADE_TYPE_COMPONENT_MAPPING[item?.trade_type]
+		: null;
+
+	if (!Component) return null;
+
+	return <Component key={item?.id} {...props} />;
+}
+
+export default function Invoices({
+	item = {},
+	accordionOpen = false,
+	handleAccordionOpen = () => {},
+	tasks = [],
+	refetch = () => {},
+	getShipmentPendingTask = () => {},
+	taskLoading = false,
+}) {
+	const list_of_invoices = (item?.invoice_data || []).filter(
+		(inv) => inv.status !== 'init',
+	);
+	const { data } = useGetBill({ serial_id: item?.serial_id, accordionOpen });
+	const tableData = getTableFormatedData({ list_of_invoices, data });
+
+	const renderPart = (list_of_invoices || []).slice(GLOBAL_CONSTANTS.zeroth_index, MINIMUM_INVOICES);
+	const invoiceLength = list_of_invoices.length;
+	const remainLength = invoiceLength > MINIMUM_INVOICES ? invoiceLength - MINIMUM_INVOICES
+		: GLOBAL_CONSTANTS.zeroth_index;
 
 	return (
 		<>
@@ -97,14 +119,14 @@ export default function Invoices({
 						{renderPart.map((invoice, i) => (
 							<Tooltip
 								interactive
-								content={invoiceHover(invoice)}
+								content={<InvoiceHover invoice={invoice} />}
 								className={styles.tooltip}
 								caret={false}
-								key={uuid()}
+								key={invoice?.id}
 							>
 								<div className={cl`${styles.text} ${styles.invoice_hover}`}>
 									{invoice?.invoice_no}
-									{i < renderPart.length - 1 ? ', ' : ' '}
+									{i < renderPart.length - MINIMUM_TOOLTIP_DISPLAY_VALUE ? ', ' : ' '}
 								</div>
 							</Tooltip>
 						))}
@@ -135,7 +157,17 @@ export default function Invoices({
 				</div>
 			</div>
 
-			{accordionOpen ? renderAccordion() : null}
+			{accordionOpen ? (
+				<RenderAccordion
+					item={item}
+					tasks={tasks}
+					handleAccordionOpen={handleAccordionOpen}
+					refetch={refetch}
+					getShipmentPendingTask={getShipmentPendingTask}
+					taskLoading={taskLoading}
+					tableData={tableData}
+				/>
+			) : null}
 		</>
 	);
 }
