@@ -39,6 +39,14 @@ jobs:
           subnet-id: subnet-09da324b7914394f1
           security-group-id: sg-0a476b8f086d3abd1
 
+    test:
+    name: Test
+    needs: start-runner
+    uses: ./.github/workflows/test-case.yml
+    secrets: inherit
+    with:
+      platform: ${{ needs.start-runner.outputs.label }}       
+
   init:
     name: Init
     if: ${{ github.triggering_actor != 'dependabot[bot]' }}
