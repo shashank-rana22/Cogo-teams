@@ -13,6 +13,11 @@ const partner = {
 	],
 	prm: [
 		{
+			api          : 'list_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'create_user_contact_request',
 			access_type  : 'private',
 			service_name : 'user',
@@ -1067,6 +1072,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'list_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'create_user_contact_request',
 			access_type  : 'private',
 			service_name : 'user',
@@ -1943,6 +1953,11 @@ const partner = {
 		},
 	],
 	supply_crm: [
+		{
+			api          : 'list_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
 		{
 			feature      : 'supply_crm',
 			api          : 'list_organization_service_expertises',
