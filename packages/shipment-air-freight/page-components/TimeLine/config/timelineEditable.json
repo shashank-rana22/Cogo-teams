@@ -6,8 +6,7 @@
             "confirmed_by_service_provider",
             "cargo_carted_in",
             "cargo_handed_over_at_origin",
-            "flight_departed",
-            "flight_arrived"
+            "flight_departed"
         ]
     }
 }
