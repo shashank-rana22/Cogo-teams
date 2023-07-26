@@ -33,6 +33,7 @@ function Services() {
 	});
 
 	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
+	const isSuperadmin = ['admin', 'superadmin'].includes(activeStakeholder);
 
 	const heading = (serviceCategory) => (
 		<div className={styles.header}>{ startCase(serviceCategory)}</div>
@@ -44,7 +45,8 @@ function Services() {
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<>
-							{!isKam ? heading(serviceCategory) : null}
+							{!isKam && !isEmpty(serviceObj[serviceCategory])
+								? heading(serviceCategory) : null}
 
 							{isKam
 							&& showTradeHeading[`${serviceCategory.split('Services')[GLOBAL_CONSTANTS.zeroth_index]}`]
@@ -59,22 +61,25 @@ function Services() {
 								))}
 							</div>
 
-							<div className={styles.upselling}>
-								{(upsellServices[serviceCategory]).map((service) => (
-									<AddNewService
-										key={`${service?.trade_type}_${service?.service_type}`}
-										upsellableService={service}
-										servicesList={servicesList}
-										shipmentData={shipment_data}
-										primary_service={primary_service}
-										cancelUpsellDestinationFor={cancelUpsellDestinationFor}
-										cancelUpsellOriginFor={cancelUpsellOriginFor}
-										activeStakeholder={activeStakeholder}
-										setShowTradeHeading={setShowTradeHeading}
-										showTradeHeading={showTradeHeading}
-									/>
-								))}
-							</div>
+							{ isKam || isSuperadmin
+								? (
+									<div className={styles.upselling}>
+										{(upsellServices[serviceCategory]).map((service) => (
+											<AddNewService
+												key={`${service?.trade_type}_${service?.service_type}`}
+												upsellableService={service}
+												servicesList={servicesList}
+												shipmentData={shipment_data}
+												primary_service={primary_service}
+												cancelUpsellDestinationFor={cancelUpsellDestinationFor}
+												cancelUpsellOriginFor={cancelUpsellOriginFor}
+												activeStakeholder={activeStakeholder}
+												setShowTradeHeading={setShowTradeHeading}
+												showTradeHeading={showTradeHeading}
+											/>
+										))}
+									</div>
+								) : null}
 						</>
 					))}
 				</div>
