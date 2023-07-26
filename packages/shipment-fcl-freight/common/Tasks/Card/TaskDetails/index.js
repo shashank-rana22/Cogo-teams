@@ -27,7 +27,7 @@ function TaskDetails({
 		});
 	});
 
-	const taskName = getTaskDisplayName({ shipment_data, task, REQUIRED_SERVICE_ARR });
+	const taskName = getTaskDisplayName({ shipment_data, task, REQUIRED_SERVICE_ARR, servicesList });
 
 	return (
 		<section className={styles.container}>

@@ -1,4 +1,5 @@
 .container {
+	display: block;
 	margin: 12px 0;
 	cursor: pointer;
 	background: #fff;
@@ -6,6 +7,7 @@
 	box-shadow: 0 1px 6px rgb(169 188 218 / 65%);
 
 	&:hover {
+		text-decoration: none;
 		box-shadow: 0 0 4px rgb(0 0 0 / 25%);
 	}
 }

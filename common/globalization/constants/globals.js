@@ -293,6 +293,10 @@ const GLOBAL_CONSTANTS = {
 		ic_initial_state_svg: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
 
 	},
+
+	video_call_ring_tone_url:
+	'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/microsoft_teams_audio_call_tone.mp3',
+
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 			+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',

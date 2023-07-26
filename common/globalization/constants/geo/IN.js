@@ -84,6 +84,7 @@ export default {
 
 		cogo_freight_supplier      : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 		prod_process_owner         : 'ae80297f-e30d-45fb-845c-61c302523476',
+		air_prod_process_owner     : '9e6dad55-dc0c-42b4-a7d1-9908204cdca7',
 		corporate_owner_id         : '89184155-1f77-4265-826a-e997d140002f',
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
