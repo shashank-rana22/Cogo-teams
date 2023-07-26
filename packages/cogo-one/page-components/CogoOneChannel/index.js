@@ -12,6 +12,8 @@ import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
+import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
+import useGetAgentPreference from '../../hooks/useGetAgentPreference';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 
@@ -56,6 +58,7 @@ function CogoOne() {
 	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 	const [openKamContacts, setOpenKamContacts] = useState(false);
+	const [openInactiveModal, setOpenInactiveModal] = useState(false);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -67,8 +70,21 @@ function CogoOne() {
 
 	const { viewType, loading: workPrefernceLoading = false } = useAgentWorkPrefernce();
 
+	const {
+		fetchWorkStatus = () => {},
+		agentWorkStatus = {},
+	} = useGetAgentPreference();
+
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
+
+	const {
+		loading: statusLoading,
+		updateUserStatus = () => {},
+	} = useCreateUserInactiveStatus({
+		fetchworkPrefernce : fetchWorkStatus,
+		setOpenModal       : setOpenInactiveModal,
+	});
 
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 
@@ -121,6 +137,12 @@ function CogoOne() {
 						suggestions={suggestions}
 						workPrefernceLoading={workPrefernceLoading}
 						setOpenKamContacts={setOpenKamContacts}
+						agentStatus={agentWorkStatus}
+						statusLoading={statusLoading}
+						updateUserStatus={updateUserStatus}
+						openInactiveModal={openInactiveModal}
+						setOpenInactiveModal={setOpenInactiveModal}
+						fetchworkPrefernce={fetchWorkStatus}
 					/>
 				</div>
 
@@ -187,7 +209,10 @@ function CogoOne() {
 			/>
 
 			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out && (
-				<PunchInOut />
+				<PunchInOut
+					fetchworkPrefernce={fetchWorkStatus}
+					agentStatus={agentWorkStatus}
+				/>
 			)}
 		</>
 	);

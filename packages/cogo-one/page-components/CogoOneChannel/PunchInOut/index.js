@@ -5,7 +5,6 @@ import { IcMDown, IcMArrowDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
-import useAgentWorkPrefernce from '../../../hooks/useAgentWorkPrefernce';
 import useUpdateAgentWorkPreferences from '../../../hooks/UseUpdateAgentWorkPreferences';
 
 import ShowMoreStats from './ShowMoreStats';
@@ -17,10 +16,8 @@ const punchedTime = formatDate({
 	dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 });
 
-function PunchInOut() {
+function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
 	const [showDetails, setShowDetails] = useState(false);
-
-	const { agentStatus = {}, fetchworkPrefernce = () => {} } = useAgentWorkPrefernce();
 
 	const { status = '' } = agentStatus || {};
 

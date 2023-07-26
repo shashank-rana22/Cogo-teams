@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
 const currentDateTime = new Date();
 
@@ -27,10 +27,6 @@ function useUpdateAgentWorkPreferences({ fetchworkPrefernce = () => {} }) {
 			Toast.error(getApiErrorString(error));
 		}
 	}, [trigger, fetchworkPrefernce]);
-
-	useEffect(() => {
-		updateWorkPreference({});
-	}, [updateWorkPreference]);
 
 	return {
 		updateWorkPreference,
