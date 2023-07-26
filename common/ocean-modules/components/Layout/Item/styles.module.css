@@ -27,6 +27,10 @@
 .element {
 	padding: 4px;
 
+	&:first-of-type {
+		padding-left: 0;
+	}
+
 	:global {
 		.react-datepicker__input-container {
 			width: 100%;

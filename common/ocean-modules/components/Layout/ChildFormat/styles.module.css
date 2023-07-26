@@ -4,7 +4,7 @@
 	width: 100%;
 
 	> *:not(:last-of-type) {
-		margin-right: max(1%, 16px);
+		margin-right: min(1%, 14px);
 	}
 }
 

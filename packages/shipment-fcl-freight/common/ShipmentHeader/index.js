@@ -27,6 +27,8 @@ function ShipmentHeader() {
 		return <Loader />;
 	}
 
+	console.log('for deployment');
+
 	const showCancelShipmentIcon = getCanCancelShipment({
 		shipment_data,
 		primary_service,

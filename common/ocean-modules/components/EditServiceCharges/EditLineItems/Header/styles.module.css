@@ -5,9 +5,14 @@
 .label {
 	display: flex;
 	align-items: center;
+	padding: 4px;
 	margin: 0;
 	font-size: var(--font-size-lg);
 	font-weight: 600;
 	line-height: 16px;
 	color: #333;
+
+	&:first-of-type {
+		padding-left: 0;
+	}
 }
