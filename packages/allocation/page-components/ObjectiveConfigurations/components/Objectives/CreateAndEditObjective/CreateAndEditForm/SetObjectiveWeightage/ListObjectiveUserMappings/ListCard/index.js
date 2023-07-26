@@ -6,13 +6,37 @@ import ObjectiveAccordian from '../ObjectiveAccordian';
 import styles from './styles.module.css';
 
 const DEFAULT_WEIGHTAGE = 100;
+const DECIMAL_COUNT = 2;
+const CURRENT_OBJECTIVE_COUNT = 1;
 
 function ListCard(props) {
-	const { objectiveUserMappingData, control, formValues } = props;
+	const { objectiveUserMappingData, control, setValue, formValues } = props;
 
-	const { user = {}, role = {}, objectives = [] } = objectiveUserMappingData || {};
+	const {
+		user = {},
+		role = {},
+		objectives = [],
+	} = objectiveUserMappingData || {};
 
 	const { generalConfiguration: { partner = {} } = {} } = formValues;
+
+	const onDistributeEqually = () => {
+		if (isEmpty(objectives)) return;
+
+		const objectivesCount = objectives.length + CURRENT_OBJECTIVE_COUNT;
+		const equalWeight = (DEFAULT_WEIGHTAGE / objectivesCount).toFixed(DECIMAL_COUNT);
+		let lastWeightage = 100.00;
+
+		objectives.forEach((item) => {
+			const { objective_id = '' } = item;
+
+			setValue(`${objective_id}_${user?.id}_${role?.id}_weightage`, equalWeight);
+
+			lastWeightage -= equalWeight;
+		});
+
+		setValue(`undefined_${user?.id}_${role?.id}_weightage`, lastWeightage.toFixed(DECIMAL_COUNT));
+	};
 
 	return (
 		<div className={styles.card_container}>
@@ -42,6 +66,7 @@ function ListCard(props) {
 					size="md"
 					type="button"
 					themeType="secondary"
+					onClick={() => onDistributeEqually()}
 				>
 					Equally Distribute Weightage
 				</Button>

@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 const DEFAULT_WEIGHTAGE = 100;
@@ -59,7 +60,9 @@ const useEditWeightage = (props) => {
 	};
 
 	const onDistributeEqually = () => {
-		const objectivesCount = objectives?.length;
+		if (isEmpty(objectives)) return;
+
+		const objectivesCount = objectives.length;
 		const equalWeight = (DEFAULT_WEIGHTAGE / objectivesCount).toFixed(DECIMAL_COUNT);
 		let lastWeightage = 100.00;
 

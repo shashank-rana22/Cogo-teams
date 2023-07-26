@@ -10,7 +10,7 @@ const FIRST_PAGE = 1;
 const MIN_TOTAL_PAGES = 0;
 
 function ListObjectiveUserMappings(props) {
-	const { list, listLoading, control, formValues, getNextPage, paginationData } = props;
+	const { list, listLoading, control, setValue, formValues, getNextPage, paginationData } = props;
 
 	const { page = 1, page_limit = 0, total = 0, total_count = 0 } = paginationData || {};
 
@@ -29,6 +29,7 @@ function ListObjectiveUserMappings(props) {
 					key={item.user_id}
 					objectiveUserMappingData={item}
 					control={control}
+					setValue={setValue}
 					formValues={formValues}
 				/>
 			))}

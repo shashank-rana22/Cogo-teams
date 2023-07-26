@@ -34,11 +34,13 @@ function ObjectiveAccordian(props) {
 				<div className={styles.accordian_title}>
 					<div className={styles.title_left_container}>
 						<div className={currentObjective && styles.current_name}>{name}</div>
+
 						<Pill color="blue">
 							{startCase(objective_type)}
 							{' '}
 							Objective
 						</Pill>
+
 						<Pill color={OBJECTIVE_STATUS_COLOR_MAPPING[status]}>
 							{startCase(status)}
 						</Pill>
@@ -46,12 +48,16 @@ function ObjectiveAccordian(props) {
 
 					<div className={styles.title_right_container}>
 						<p className={styles.set_weightage}>Set Weightage (%)</p>
+
 						<InputNumberController
-							name={`${id || ''}_${userId}_${roleId}_weightage`}
+							className={styles.input}
+							name={`${id}_${userId}_${roleId}_weightage`}
 							size="sm"
 							control={control}
 							value={defaultWeightage}
 							disabled={disabledEditWeightage}
+							max={100}
+							min={0}
 							suffix={(
 								<IcMTick
 									height={20}

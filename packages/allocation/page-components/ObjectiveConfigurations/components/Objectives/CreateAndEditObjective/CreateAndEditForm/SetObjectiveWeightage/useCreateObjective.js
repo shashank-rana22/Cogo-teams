@@ -14,7 +14,7 @@ const useCreateObjective = (props) => {
 
 	const [weightageData, setWeightageData] = useState({});
 
-	const { control, watch } = useForm();
+	const { control, watch, setValue } = useForm();
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/objective_attributes',
@@ -40,11 +40,8 @@ const useCreateObjective = (props) => {
 	};
 
 	useEffect(() => {
-		const subscription = watch((value, { name: controlName }) => {
-			setWeightageData((previousValues) => ({
-				...previousValues,
-				[controlName]: value,
-			}));
+		const subscription = watch((value) => {
+			setWeightageData(value);
 		});
 
 		return () => subscription.unsubscribe();
@@ -52,6 +49,7 @@ const useCreateObjective = (props) => {
 
 	return {
 		control,
+		setValue,
 		createLoading: loading,
 		onCreate,
 	};

@@ -1,5 +1,9 @@
 import { isEmpty } from '@cogoport/utils';
 
+import SELECT_AGENTS_KEYS_MAPPING from '../constants/select-agents-keys-mapping';
+
+const { SELECT_ONLY, EXCLUDE_ONLY } = SELECT_AGENTS_KEYS_MAPPING;
+
 const getCreateObjectivePayload = (props) => {
 	const { data, weightageData, distribute_equally } = props;
 
@@ -12,8 +16,8 @@ const getCreateObjectivePayload = (props) => {
 		channels,
 		roles,
 		lifecycle_stage,
-		// selectMode,
-		// user_ids,
+		selectMode,
+		user_ids,
 	} = generalConfiguration || {};
 
 	const {
@@ -38,11 +42,11 @@ const getCreateObjectivePayload = (props) => {
 				user_id                   : userId,
 				role_id                   : roleId,
 				user_objective_weightages : {
-					...(USER_OBJECTIVE_WEIGHTAGE_MAPPING[userId].user_objective_weightages || {}),
+					...(USER_OBJECTIVE_WEIGHTAGE_MAPPING[userId]?.user_objective_weightages || {}),
 					[objectiveId]: {
-						objective_id : objectiveId || undefined,
+						objective_id : objectiveId === 'undefined' ? undefined : objectiveId,
 						weightage,
-						action       : isEmpty(objectiveId) ? 'create' : 'update',
+						action       : objectiveId === 'undefined' ? 'create' : 'update',
 					},
 				},
 			};
@@ -61,6 +65,8 @@ const getCreateObjectivePayload = (props) => {
 		channels,
 		role_ids         : roles?.map((role) => role.id),
 		lifecycle_stages : !isEmpty(lifecycle_stage) ? [lifecycle_stage] : undefined,
+		user_ids         : selectMode === SELECT_ONLY ? user_ids : undefined,
+		except_user_ids  : selectMode === EXCLUDE_ONLY ? user_ids : undefined,
 		service_requirement_operator,
 		service_details  : service_requirements?.map((service) => ({
 			...service,

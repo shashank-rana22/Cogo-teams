@@ -38,6 +38,10 @@
 }
 
 .set_weightage {
-	width: 100%;
-	margin: 0;
+	min-width: fit-content;
+	margin: 0 12px 0 0;
+}
+
+.input {
+	min-width: 200px;
 }

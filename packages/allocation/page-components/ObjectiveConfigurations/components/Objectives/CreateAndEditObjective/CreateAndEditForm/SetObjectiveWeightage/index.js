@@ -15,7 +15,7 @@ function SetObjectiveWeightage(props) {
 
 	const { list, listLoading, getNextPage, paginationData } = useGetObjectiveUserMappings({ formValues });
 
-	const { control, createLoading, onCreate } = useCreateObjective({ formValues, setActiveTabDetails });
+	const { control, setValue, createLoading, onCreate } = useCreateObjective({ formValues, setActiveTabDetails });
 
 	return (
 		<div className={styles.container}>
@@ -42,6 +42,7 @@ function SetObjectiveWeightage(props) {
 				list={list}
 				listLoading={listLoading}
 				control={control}
+				setValue={setValue}
 				formValues={formValues}
 				getNextPage={getNextPage}
 				paginationData={paginationData}
