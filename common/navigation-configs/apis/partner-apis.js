@@ -2694,6 +2694,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'list_organization_approvals',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	support_crm: [
 		{
