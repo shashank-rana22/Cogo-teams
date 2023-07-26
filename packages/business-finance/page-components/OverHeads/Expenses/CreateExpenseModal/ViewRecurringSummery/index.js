@@ -8,34 +8,41 @@ import Summery from './Summery';
 function ViewRecurringSummery({ itemData = {}, recurringState = '' }) {
 	const [showModal, setShowModal] = useState(false);
 
-	const Element = recurringState === 'recurring' ? RecurringSummery : Summery;
 	return (
 		<div>
-			<Modal
-				size="xl"
-				show={showModal}
-				placement="center"
-				onClose={() => setShowModal(null)}
-			>
-				<Modal.Header title="Details" />
-				<Modal.Body className={styles.modal_data}>
-					<div style={{ marginTop: '20px' }}>
-						<Element
-							itemData={itemData}
-						/>
-					</div>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button
-						style={{ marginRight: '10px' }}
-						onClick={() => setShowModal(null)}
-						themeType="secondary"
-					>
-						Back
-					</Button>
+			{showModal ? (
+				<Modal
+					size="xl"
+					show={showModal}
+					placement="center"
+					onClose={() => setShowModal(null)}
+				>
+					<Modal.Header title="Details" />
+					<Modal.Body className={styles.modal_data}>
+						<div style={{ marginTop: '20px' }}>
+							{recurringState === 'recurring' ? (
+								<RecurringSummery
+									itemData={itemData}
+								/>
+							) : (
+								<Summery
+									itemData={itemData}
+								/>
+							)}
+						</div>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							style={{ marginRight: '10px' }}
+							onClick={() => setShowModal(null)}
+							themeType="secondary"
+						>
+							Back
+						</Button>
 
-				</Modal.Footer>
-			</Modal>
+					</Modal.Footer>
+				</Modal>
+			) : null}
 			<Button
 				onClick={() => {
 					setShowModal(true);

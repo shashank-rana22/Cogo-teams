@@ -21,7 +21,6 @@ interface Props {
 	setShowModal?: (p: any) => void;
 	getList?: (p: any) => void;
 	rowData?: any;
-	incidentApprovalManagementId?: string;
 }
 
 function MailTemplate({
@@ -29,7 +28,6 @@ function MailTemplate({
 	setShowModal,
 	getList,
 	rowData,
-	incidentApprovalManagementId,
 }: Props) {
 	const { uploadedInvoice, vendorData, stakeholderEmail } = expenseData || {};
 	const { categoryName } = rowData || {};
@@ -43,7 +41,6 @@ function MailTemplate({
 		setShowModal,
 		getList,
 		rowData,
-		incidentApprovalManagementId,
 	});
 
 	return (

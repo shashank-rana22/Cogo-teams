@@ -15,7 +15,6 @@ interface Props {
 	nonRecurringData?: any;
 	setNonRecurringData?: (obj: any) => void;
 	setIsFormValidated?: (obj: any) => void;
-	setIncidentMangementId?: (obj) => void;
 }
 
 function CreateExpenseForm({
@@ -26,7 +25,6 @@ function CreateExpenseForm({
 	nonRecurringData = {},
 	setNonRecurringData = () => {},
 	setIsFormValidated = () => {},
-	setIncidentMangementId = () => {},
 }: Props) {
 	const [categoryOptions, setCategoryOptions] = useState([]);
 	const [subCategoryOptions, setSubCategoryOptions] = useState([]);
@@ -90,7 +88,6 @@ function CreateExpenseForm({
 						<NonRecurringSummary
 							nonRecurringData={nonRecurringData}
 							setNonRecurringData={setNonRecurringData}
-							setIncidentMangementId={setIncidentMangementId}
 							tradePartyData={tradePartyData}
 						/>
 					)}
@@ -98,7 +95,6 @@ function CreateExpenseForm({
 						<RecurringSummary
 							recurringData={recurringData}
 							setRecurringData={setRecurringData}
-							setIncidentMangementId={setIncidentMangementId}
 						/>
 					)}
 				</div>

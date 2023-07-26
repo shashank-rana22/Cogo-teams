@@ -16,7 +16,7 @@ interface AddressInterface {
 	branchId?: number | string;
 }
 
-const useAddExpense = ({ expenseData, setShowModal, getList, incidentApprovalManagementId, rowData }) => {
+const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 	const {
 		vendorId: vendorID,
 		businessName: vendorName,
@@ -171,17 +171,16 @@ const useAddExpense = ({ expenseData, setShowModal, getList, incidentApprovalMan
 		vendorBusinessName,
 		vendorCountryId,
 		vendorRegistrationNumber,
-		expenseCategory     : expenseCategory || categoryId,
+		expenseCategory : expenseCategory || categoryId,
 		stakeholderEmail,
 		stakeholderId,
 		stakeholderName,
 		kycStatus,
 		lineItemsList,
-		expenseType         : 'RECURRING',
+		expenseType     : 'RECURRING',
 		expenseConfigurationId,
 		remarks,
 		categoryName,
-		incidentMangementId : incidentApprovalManagementId,
 	});
 
 	const submitData = async () => {

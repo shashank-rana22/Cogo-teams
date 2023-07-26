@@ -67,7 +67,7 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch =
 	};
 
 	const formData = {
-		referenceId     : item?.referenceId || '_',
+		referenceId     : item?.id || '_',
 		incidentType    : startCase(item?.incidentType || '-'),
 		incidentSubType : startCase(item?.incidentSubType || '_'),
 		entityCode      : item?.entityCode || '-',

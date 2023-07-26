@@ -31,7 +31,6 @@ function AddExpenseModal({
 	const [taxOptions, setTaxOptions] = useState([]);
 	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
 	const [isFormValidated, setIsFormValidated] = useState(false);
-	const [incidentApprovalManagementId, setIncidentApprovalManagementId] =		useState(null);
 
 	const { cogoEntityId, vendorId } = rowData;
 
@@ -91,9 +90,6 @@ function AddExpenseModal({
 						expenseData={expenseData}
 						setExpenseData={setExpenseData}
 						rowData={rowData}
-						setIncidentApprovalManagementId={
-						setIncidentApprovalManagementId
-						}
 					/>
 				)}
 			</Modal.Body>
@@ -125,9 +121,6 @@ function AddExpenseModal({
 						setShowModal={setShowExpenseModal}
 						getList={() => {}}
 						rowData={rowData}
-						incidentApprovalManagementId={
-						incidentApprovalManagementId
-						}
 					/>
 				</Modal.Body>
 			</Modal>

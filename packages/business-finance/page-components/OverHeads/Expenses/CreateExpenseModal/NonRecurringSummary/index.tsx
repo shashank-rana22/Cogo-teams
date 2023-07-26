@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-indent */
-import { Placeholder, Textarea } from '@cogoport/components';
+import { Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -7,8 +7,6 @@ import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../commons/utils/formatDate';
-import useGetStakeholders from '../../hooks/useGetStakeholders';
-import StakeHolderTimeline from '../StakeHolderTimeline';
 
 import styles from './styles.module.css';
 
@@ -45,14 +43,12 @@ interface Data {
 interface Props {
 	nonRecurringData?: Data;
 	setNonRecurringData?: (obj) => void;
-	setIncidentMangementId?: (val) => void;
-	tradePartyData?: object
+	tradePartyData?: object;
 }
 
 function NonRecurringSummary({
 	nonRecurringData = {},
 	setNonRecurringData = () => {},
-	setIncidentMangementId = () => {},
 	tradePartyData = {},
 }: Props) {
 	const {
@@ -69,94 +65,8 @@ function NonRecurringSummary({
 		categoryName,
 	} = nonRecurringData || {};
 
-	const { stakeholdersData, loading: stakeholderLoading } =		useGetStakeholders({
-		incidentSubType : categoryName,
-		incidentType    : 'OVERHEAD_APPROVAL',
-		entityId        : entityObject?.id,
-	});
-
-	const { level3, level2, level1 } = stakeholdersData || {};
-	const { stakeholder: stakeholder3, status:status3 } = level3 || {};
-	const { stakeholder: stakeholder2, status:status2 } = level2 || {};
-	const { stakeholder: stakeholder1, status:status1 } = level1 || {};
-
-	const stakeHolderTimeLine = () => {
-		if (!isEmpty(level3)) {
-			return [
-				{
-					...(stakeholder1 ? {
-						email   : stakeholder1?.userEmail,
-						name    : stakeholder1?.userName,
-						remarks : level1?.remarks,
-						status  : status1,
-					} : {}),
-				},
-				{
-					...(stakeholder2 ? {
-						email   : stakeholder2?.userEmail,
-						name    : stakeholder2?.userName,
-						remarks : level2?.remarks,
-						status  : status2,
-					} : {}),
-				},
-				{
-					...(stakeholder3 ? {
-						email   : stakeholder3?.userEmail,
-						name    : stakeholder3?.userName,
-						remarks : level3?.remarks,
-						status  : status3,
-					} : {}),
-				},
-			];
-		}
-		if (!isEmpty(level2)) {
-			return [
-				{
-					...(stakeholder1 ? {
-						email   : stakeholder1?.userEmail,
-						name    : stakeholder1?.userName,
-						remarks : level1?.remarks,
-						status  : status1,
-					} : {}),
-				},
-				{
-					...(stakeholder2 ? {
-						email   : stakeholder2?.userEmail,
-						name    : stakeholder2?.userName,
-						remarks : level2?.remarks,
-						status  : status2,
-					} : {}),
-				},
-			];
-		}
-		return [
-			{
-				email   : stakeholder1?.userEmail,
-				name    : stakeholder1?.userName,
-				remarks : level1?.remarks,
-				status  : status1,
-			},
-		];
-	};
-
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - 1];
-
-	useEffect(() => {
-		setIncidentMangementId(stakeholdersData?.id);
-	}, [stakeholdersData, setIncidentMangementId]);
-
-	useEffect(() => {
-		if (stakeholder1) {
-			const { userEmail, userId, userName } = stakeholder1 || {};
-			setNonRecurringData((prev: object) => ({
-				...prev,
-				stakeholderEmail : userEmail,
-				stakeholderId    : userId,
-				stakeholderName  : userName,
-			}));
-		}
-	}, [stakeholder1, setNonRecurringData]);
 
 	useEffect(() => {
 		if (!isEmpty(tradePartyData)) {
@@ -234,7 +144,6 @@ function NonRecurringSummary({
 				</div>
 			),
 		},
-
 	];
 	const summaryDataThird = [
 		{
@@ -291,22 +200,6 @@ function NonRecurringSummary({
 					size="lg"
 					placeholder="Reason..."
 				/>
-			</div>
-			<div>
-				<div className={styles.approved}>To be Approved by</div>
-				{isEmpty(stakeholdersData) && !stakeholderLoading ? (
-					<div className={styles.value}>No Stakeholders Present</div>
-				) : (
-					<div className={styles.steeper}>
-						{stakeholderLoading ? (
-							<Placeholder height="20px" width="150px" />
-						) : (
-							<StakeHolderTimeline
-								timeline={stakeHolderTimeLine()}
-							/>
-						)}
-					</div>
-				)}
 			</div>
 		</div>
 	);

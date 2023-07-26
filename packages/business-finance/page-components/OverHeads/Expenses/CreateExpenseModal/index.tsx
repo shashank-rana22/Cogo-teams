@@ -51,7 +51,6 @@ function CreateExpenseModal({
 	});
 	const [active, setActive] = useState('Expense Details');
 	const [isFormValidated, setIsFormValidated] = useState(false);
-	const [incidentMangementId, setIncidentMangementId] = useState(null);
 
 	const handleClick = () => {
 		const current = timeline.indexOf(active);
@@ -114,7 +113,6 @@ function CreateExpenseModal({
 						nonRecurringData={nonRecurringData}
 						setNonRecurringData={setNonRecurringData}
 						setIsFormValidated={setIsFormValidated}
-						setIncidentMangementId={setIncidentMangementId}
 					/>
 				</div>
 			</Modal.Body>
@@ -154,7 +152,6 @@ function CreateExpenseModal({
 							getList={getList}
 							getRecurringList={getRecurringList}
 							createExpenseType={createExpenseType}
-							incidentMangementId={incidentMangementId}
 						/>
 					</Modal.Body>
 				</Modal>

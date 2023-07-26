@@ -1,7 +1,7 @@
+import { startCase } from '@cogoport/utils';
+
 import officeLocations from '../../../../../../../../../utils/office-locations.json';
 import workScopes from '../../../../../../../../../utils/work-scopes.json';
-import categoryOptions from '../../../../../../../../utils/category-options';
-import subCategoryOptions from '../../../../../../../../utils/sub-category-options';
 
 const controls = [
 	{
@@ -50,21 +50,13 @@ const controls = [
 	{
 		name        : 'category',
 		label       : 'Category',
-		type        : 'select',
+		type        : 'asyncSelect',
 		placeholder : 'Select Category',
-		options     : categoryOptions,
+		asyncKey    : 'list_expense_category',
+		renderLabel : (item) => startCase(item.categoryName),
+		valueKey    : 'categoryName',
 		style       : { flexBasis: '42%' },
 		rules       : { required: 'Category is required' },
-
-	},
-	{
-		name        : 'sub_category',
-		label       : 'Sub Category',
-		type        : 'select',
-		placeholder : 'Select Sub-Category',
-		options     : subCategoryOptions,
-		style       : { flexBasis: '42%' },
-		rules       : { required: 'Sub Category is required' },
 
 	},
 	{

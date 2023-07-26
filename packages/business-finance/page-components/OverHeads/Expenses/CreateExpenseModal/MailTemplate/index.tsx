@@ -23,7 +23,6 @@ interface Props {
 	getList?: (p: any) => void;
 	getRecurringList?: (p: any) => void;
 	createExpenseType?: string;
-	incidentMangementId?: string;
 }
 
 function MailTemplate({
@@ -32,7 +31,6 @@ function MailTemplate({
 	getList = () => {},
 	getRecurringList = () => {},
 	createExpenseType = '',
-	incidentMangementId = '',
 }: Props) {
 	const {
 		uploadedInvoice,
@@ -48,13 +46,11 @@ function MailTemplate({
 		formData: mailData,
 		setShowModal,
 		getList,
-		incidentMangementId,
 	});
 	const { createRecurring, recurringLoading } = useCreateExpenseConfig({
 		mailData,
 		setShowModal,
 		getRecurringList,
-		incidentMangementId,
 	});
 
 	const handleClick = () => {
@@ -77,7 +73,7 @@ function MailTemplate({
 			<div className={styles.section}>
 				<div className={styles.keys}>To :</div>
 				<div className={styles.recipient_values}>
-					<Details text={stakeholderEmail || 'N/A'} />
+					<Details text={stakeholderEmail || 'Stakeholder'} />
 				</div>
 			</div>
 

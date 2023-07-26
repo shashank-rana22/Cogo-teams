@@ -3,6 +3,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber.tsx';
 import { formatDate } from '../../../../../commons/utils/formatDate.ts';
+import useGetStakeholder from '../../../hooks/useGetStakeholder';
 import StakeHolderTimeline from '../../StakeHolderTimeline';
 
 import styles from './styles.module.css';
@@ -22,24 +23,25 @@ function Summery({
 		billCurrency,
 		createdDate,
 		billDate,
-		level3,
-		level2,
-		level1,
 		billNumber,
 		category,
 		sellerDetails,
 		ledgerTotal,
 		ledgerCurrency,
+		billId,
 	} = itemData || {};
+	const { stakeholders } = useGetStakeholder({ billId });
+
+	const { level3, level2, level1 } = stakeholders || {};
 
 	const { organizationName } = sellerDetails || {};
 
 	const splitArray = (billDocumentUrl || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - FIRST_INDEX];
 
-	const { stakeholder: stakeholder3, status:status3 } = level3 || {};
-	const { stakeholder: stakeholder2, status:status2 } = level2 || {};
-	const { stakeholder: stakeholder1, status:status1 } = level1 || {};
+	const { stakeholder: stakeholder3, status: status3 } = level3 || {};
+	const { stakeholder: stakeholder2, status: status2 } = level2 || {};
+	const { stakeholder: stakeholder1, status: status1 } = level1 || {};
 
 	const stakeHolderTimeLine = () => {
 		if (!isEmpty(level3)) {
@@ -167,7 +169,7 @@ function Summery({
 					currencyDisplay : 'code',
 				},
 			})
-			|| '-',
+				|| '-',
 		},
 
 		{

@@ -1,6 +1,5 @@
-import { Placeholder } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
@@ -8,8 +7,6 @@ import { formatDate } from '../../../../commons/utils/formatDate';
 import { SummaryInterface } from '../../../commons/Interfaces';
 import { DURATION_MAPPING } from '../../../constants/DURATION_MAPPING';
 import { officeLocations } from '../../../utils/officeLocations';
-import StakeHolderTimeline from '../../CreateExpenseModal/StakeHolderTimeline';
-import useGetStakeholders from '../../hooks/useGetStakeholders';
 import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
@@ -49,15 +46,9 @@ interface Props {
 	expenseData?: Data;
 	setExpenseData?: (p: any) => void;
 	rowData?: SummaryInterface;
-	setIncidentApprovalManagementId?: (a) => void;
 }
 
-function Summary({
-	expenseData,
-	setExpenseData,
-	rowData,
-	setIncidentApprovalManagementId = () => {},
-}: Props) {
+function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	const { entityObject, branch } = expenseData || {};
 	const { entity_code: entityCode } = entityObject || {};
 	const { name: branchName } = branch || {};
@@ -78,105 +69,11 @@ function Summary({
 		payableAmount,
 		invoiceCurrency: currency,
 	} = expenseData || {};
-	const { stakeholdersData, loading: stakeholdersLoading } =		useGetStakeholders({
-		incidentType    : 'OVERHEAD_APPROVAL',
-		incidentSubType : categoryName,
-		entityId        : entityObject?.id,
-	});
 
-	useEffect(() => {
-		setIncidentApprovalManagementId(stakeholdersData?.id);
-	}, [stakeholdersData, setIncidentApprovalManagementId]);
-
-	const { level3, level2, level1 } = stakeholdersData || {};
-	const { stakeholder: stakeholder3, status: status3 } = level3 || {};
-	const { stakeholder: stakeholder2, status: status2 } = level2 || {};
-	const { stakeholder: stakeholder1, status: status1 } = level1 || {};
-
-	const stakeHolderTimeLine = () => {
-		if (!isEmpty(level3)) {
-			return [
-				{
-					...(stakeholder1
-						? {
-							email   : stakeholder1?.userEmail,
-							name    : stakeholder1?.userName,
-							remarks : level1?.remarks,
-							status  : status1,
-						}
-						: {}),
-				},
-				{
-					...(stakeholder2
-						? {
-							email   : stakeholder2?.userEmail,
-							name    : stakeholder2?.userName,
-							remarks : level2?.remarks,
-							status  : status2,
-						}
-						: {}),
-				},
-				{
-					...(stakeholder3
-						? {
-							email   : stakeholder3?.userEmail,
-							name    : stakeholder3?.userName,
-							remarks : level3?.remarks,
-							status  : status3,
-						}
-						: {}),
-				},
-			];
-		}
-		if (!isEmpty(level2)) {
-			return [
-				{
-					...(stakeholder1
-						? {
-							email   : stakeholder1?.userEmail,
-							name    : stakeholder1?.userName,
-							remarks : level1?.remarks,
-							status  : status1,
-						}
-						: {}),
-				},
-				{
-					...(stakeholder2
-						? {
-							email   : stakeholder2?.userEmail,
-							name    : stakeholder2?.userName,
-							remarks : level2?.remarks,
-							status  : status2,
-						}
-						: {}),
-				},
-			];
-		}
-		return [
-			{
-				email   : stakeholder1?.userEmail,
-				name    : stakeholder1?.userName,
-				remarks : level1?.remarks,
-				status  : status1,
-			},
-		];
-	};
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - 1];
-
-	useEffect(() => {
-		if (stakeholder1) {
-			const { userEmail, userId, userName } = stakeholder1 || {};
-			setExpenseData((prev: object) => ({
-				...prev,
-				stakeholderEmail : userEmail,
-				stakeholderId    : userId,
-				stakeholderName  : userName,
-			}));
-		}
-	}, [stakeholder1, setExpenseData]);
 
 	useEffect(() => {
 		if (tradePartyData?.length > 0) {
@@ -312,26 +209,6 @@ function Summary({
 			{renderSummary(summaryDataFirst)}
 			{renderSummary(summaryDataSecond)}
 			{renderSummary(summaryDataThird)}
-			<div>
-				<div className={styles.title}>To be Approved by</div>
-				<div className={styles.steeper}>
-					{isEmpty(stakeholdersData) && !stakeholdersLoading ? (
-						<div className={styles.value}>
-							No Stakeholders Present
-						</div>
-					) : (
-						<div className={styles.steeper}>
-							{stakeholdersLoading ? (
-								<Placeholder height="20px" width="150px" />
-							) : (
-								<StakeHolderTimeline
-									timeline={stakeHolderTimeLine()}
-								/>
-							)}
-						</div>
-					)}
-				</div>
-			</div>
 		</div>
 	);
 }
