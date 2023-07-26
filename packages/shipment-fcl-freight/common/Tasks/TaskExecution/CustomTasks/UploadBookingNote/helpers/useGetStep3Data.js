@@ -58,9 +58,9 @@ const useGetStep3Data = ({
 			service_detail_required : true,
 		},
 	});
-	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({});
+	const { apiTrigger:updateBuyQuotationTrigger, loading: quotationLoading } = useUpdateBuyQuotations({});
 
-	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({
+	const { apiTrigger:updateTask, loading } = useUpdateShipmentPendingTask({
 		refetch: () => {
 			onCancel();
 			taskListRefetch();
@@ -169,7 +169,8 @@ const useGetStep3Data = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		defaultValues: DEFAULT_VALUES,
+		loading       : quotationLoading || loading,
+		defaultValues : DEFAULT_VALUES,
 	};
 };
 
