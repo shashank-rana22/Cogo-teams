@@ -3,7 +3,7 @@ const getAsyncFields = (key) => {
 	const OPTIONS = {
 		'shipping-lines': {
 			valueKey       : 'id',
-			lableKey       : 'short_name',
+			labelKey       : 'short_name',
 			asyncKey       : 'list_operators',
 			defaultOptions : true,
 			defaultParams  : {
@@ -18,7 +18,7 @@ const getAsyncFields = (key) => {
 		},
 		'cogo-entities': {
 			valueKey       : 'entity_code',
-			lableKey       : 'entity_code',
+			labelKey       : 'entity_code',
 			asyncKey       : 'list_cogo_entities',
 			defaultOptions : true,
 			defaultParams  : {
@@ -31,7 +31,7 @@ const getAsyncFields = (key) => {
 		},
 		'cogo-entities-id': {
 			valueKey       : 'id',
-			lableKey       : 'entity_code',
+			labelKey       : 'entity_code',
 			asyncKey       : 'list_cogo_entities',
 			defaultOptions : true,
 			defaultParams  : {
@@ -44,7 +44,7 @@ const getAsyncFields = (key) => {
 		},
 		'unpaid-invoices': {
 			valueKey      : 'id',
-			lableKey      : 'invoice_no',
+			labelKey      : 'invoice_no',
 			asyncKey      : 'list_sage_invoices',
 			defaultParams : {
 				page_limit : 100,
@@ -72,7 +72,7 @@ const getAsyncFields = (key) => {
 		},
 		locations_v2: {
 			valueKey      : 'id',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_locations_v2',
 			defaultParams : {
 				filters: {
@@ -87,7 +87,7 @@ const getAsyncFields = (key) => {
 		},
 		container_shipping_lines: {
 			valueKey       : 'id',
-			lableKey       : 'short_name',
+			labelKey       : 'short_name',
 			asyncKey       : 'get_container_shipping_lines',
 			defaultParams  : {},
 			defaultOptions : true,
@@ -95,7 +95,7 @@ const getAsyncFields = (key) => {
 		},
 		hs_codes: {
 			valueKey      : 'id',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_hs_codes',
 			defaultParams : {
 				page_limit: 10,
@@ -104,12 +104,12 @@ const getAsyncFields = (key) => {
 		},
 		'port-type-grouped': {
 			valueKey     : 'id',
-			lableKey     : 'name',
+			labelKey     : 'name',
 			asyncKey     : 'list_organization_serviceable_ports',
 			groupedLabel : 'Your Ports',
 			grouped      : [{
 				valueKey      : 'id',
-				lableKey      : 'name',
+				labelKey      : 'name',
 				asyncKey      : 'list_locations',
 				groupedLabel  : 'All Ports',
 				defaultParams : {
@@ -134,7 +134,7 @@ const getAsyncFields = (key) => {
 		},
 		'organization-users': {
 			valueKey       : 'id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'list_organization_users',
 			defaultParams  : {},
 			defaultOptions : true,
@@ -142,7 +142,7 @@ const getAsyncFields = (key) => {
 		},
 		'partner-addresses': {
 			valueKey       : 'id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'list_partner_addresses',
 			defaultParams  : {},
 			defaultOptions : true,
@@ -150,7 +150,7 @@ const getAsyncFields = (key) => {
 		},
 		'organization-pocs': {
 			valueKey       : 'id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'list_organization_pocs',
 			defaultParams  : {},
 			defaultOptions : true,
@@ -158,7 +158,7 @@ const getAsyncFields = (key) => {
 		},
 		'organization-billing-addresses': {
 			valueKey       : 'id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'list_organization_billing_addresses',
 			defaultParams  : {},
 			defaultOptions : true,
@@ -166,7 +166,7 @@ const getAsyncFields = (key) => {
 		},
 		'trade-parties': {
 			valueKey       : 'organization_id',
-			lableKey       : 'business_name',
+			labelKey       : 'business_name',
 			asyncKey       : 'list_organization_trade_parties',
 			defaultOptions : true,
 			defaultParams  : {
@@ -178,7 +178,7 @@ const getAsyncFields = (key) => {
 		},
 		trade_party_details: {
 			valueKey       : 'id',
-			lableKey       : 'legal_business_name',
+			labelKey       : 'legal_business_name',
 			asyncKey       : 'list_organization_trade_party_details',
 			defaultOptions : true,
 			defaultParams  : {
@@ -190,7 +190,7 @@ const getAsyncFields = (key) => {
 		},
 		trade_party_kyc_status_details: {
 			valueKey       : 'registration_number',
-			lableKey       : 'business_name',
+			labelKey       : 'business_name',
 			asyncKey       : 'list_organization_trade_parties',
 			defaultOptions : true,
 			defaultParams  : {
@@ -202,7 +202,7 @@ const getAsyncFields = (key) => {
 		},
 		trade_contacts: {
 			valueKey      : 'id',
-			lableKey      : 'company_name',
+			labelKey      : 'company_name',
 			asyncKey      : 'list_trade_contacts',
 			defaultParams : {
 				page_limit: 20,
@@ -221,13 +221,13 @@ const getAsyncFields = (key) => {
 		},
 		'fcl-freight-rate-line-items': {
 			valueKey       : 'code',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'get_fcl_freight_rate',
 			defaultOptions : true,
 		},
 		'verified-service-providers': {
 			valueKey       : 'id',
-			lableKey       : 'business_name',
+			labelKey       : 'business_name',
 			asyncKey       : 'organizations',
 			defaultOptions : true,
 			defaultParams  : {
@@ -240,7 +240,7 @@ const getAsyncFields = (key) => {
 		},
 		'verified-importer-exporters': {
 			valueKey       : 'id',
-			lableKey       : 'business_name',
+			labelKey       : 'business_name',
 			asyncKey       : 'organizations',
 			defaultOptions : true,
 			defaultParams  : {
@@ -253,7 +253,7 @@ const getAsyncFields = (key) => {
 		},
 		organizations: {
 			valueKey       : 'id',
-			lableKey       : 'business_name',
+			labelKey       : 'business_name',
 			asyncKey       : 'organizations',
 			defaultOptions : true,
 			defaultParams  : {
@@ -264,19 +264,19 @@ const getAsyncFields = (key) => {
 		},
 		'bpr-list': {
 			valueKey       : 'value',
-			lableKey       : 'bpr_name',
+			labelKey       : 'bpr_name',
 			asyncKey       : 'search_bpr_number',
 			defaultOptions : true,
 		},
 		'dunning-templates': {
 			valueKey       : 'id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'list_dunning_templates',
 			defaultOptions : true,
 		},
 		'local-agents': {
 			valueKey       : 'value',
-			lableKey       : 'label',
+			labelKey       : 'label',
 			asyncKey       : 'list_organization_services',
 			defaultOptions : true,
 			defaultParams  : {
@@ -289,7 +289,7 @@ const getAsyncFields = (key) => {
 		},
 		'partner-users': {
 			valueKey       : 'id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'list_partner_users',
 			defaultOptions : true,
 			defaultParams  : {
@@ -301,7 +301,7 @@ const getAsyncFields = (key) => {
 		},
 		partners: {
 			valueKey       : 'id',
-			lableKey       : 'label',
+			labelKey       : 'label',
 			asyncKey       : 'list_partners',
 			defaultOptions : true,
 			defaultParams  : {
@@ -313,7 +313,7 @@ const getAsyncFields = (key) => {
 		},
 		'partner-roles': {
 			valueKey       : 'id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'list_auth_roles',
 			defaultOptions : true,
 			defaultParams  : {
@@ -325,7 +325,7 @@ const getAsyncFields = (key) => {
 		},
 		lcl_pudo_locations: {
 			valueKey      : 'id',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_lcl_pudo_locations',
 			defaultParams : {
 				filters: {
@@ -336,28 +336,28 @@ const getAsyncFields = (key) => {
 		},
 		'purchase-invoice-line-items': {
 			valueKey       : 'code',
-			lableKey       : 'item_name',
+			labelKey       : 'item_name',
 			asyncKey       : 'search_products_v2',
 			defaultOptions : true,
 			defaultParams  : {},
 		},
 		shipment_container_details: {
 			valueKey       : 'container_number',
-			lableKey       : 'container_number',
+			labelKey       : 'container_number',
 			asyncKey       : 'list_shipment_container_details',
 			defaultOptions : true,
 			defaultParams  : {},
 		},
 		'invoice-line-items': {
 			valueKey       : 'product_code',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'search_products_v2',
 			defaultOptions : true,
 			defaultParams  : {},
 		},
 		'lead-users': {
 			valueKey      : 'id',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_lead_users',
 			defaultParams : {
 				defaultOptions : true,
@@ -366,7 +366,7 @@ const getAsyncFields = (key) => {
 		},
 		'lead-organizations': {
 			valueKey      : 'id',
-			lableKey      : 'business_name',
+			labelKey      : 'business_name',
 			asyncKey      : 'list_lead_organizations',
 			defaultParams : {
 				defaultOptions : true,
@@ -375,7 +375,7 @@ const getAsyncFields = (key) => {
 		},
 		'organization-branches': {
 			valueKey       : 'id',
-			lableKey       : 'branch_name',
+			labelKey       : 'branch_name',
 			asyncKey       : 'list_organization_branches',
 			defaultOptions : true,
 			defaultParams  : {
@@ -387,7 +387,7 @@ const getAsyncFields = (key) => {
 		},
 		'lead-segments': {
 			valueKey      : 'id',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_lead_segments',
 			defaultParams : {
 				defaultOptions : true,
@@ -396,7 +396,7 @@ const getAsyncFields = (key) => {
 		},
 		list_unique_events: {
 			valueKey      : 'name',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'get_unique_event_names',
 			defaultParams : {
 				defaultOptions : true,
@@ -405,12 +405,12 @@ const getAsyncFields = (key) => {
 		},
 		list_org_doc: {
 			valueKey : 'value',
-			lableKey : 'label',
+			labelKey : 'label',
 			asyncKey : 'list_organization_documents',
 		},
 		bank_documents: {
 			valueKey      : 'id',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_organization_documents',
 			defaultParams : {
 				filters: {
@@ -422,7 +422,7 @@ const getAsyncFields = (key) => {
 		},
 		'communication-templates': {
 			valueKey      : 'id',
-			lableKey      : 'label',
+			labelKey      : 'label',
 			asyncKey      : 'list_communication_templates',
 			defaultParams : {
 				defaultOptions : true,
@@ -431,7 +431,7 @@ const getAsyncFields = (key) => {
 		},
 		'event-data': {
 			valueKey      : 'name',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'get_unique_event_data',
 			defaultParams : {
 				defaultOptions : true,
@@ -440,7 +440,7 @@ const getAsyncFields = (key) => {
 		},
 		'campaign-tags': {
 			valueKey      : 'name',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'get_campaign_tags',
 			defaultParams : {
 				defaultOptions : true,
@@ -449,7 +449,7 @@ const getAsyncFields = (key) => {
 		},
 		'template-tags': {
 			valueKey      : 'name',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'get_template_tags',
 			defaultParams : {
 				defaultOptions : true,
@@ -458,7 +458,7 @@ const getAsyncFields = (key) => {
 		},
 		'event-mappings': {
 			valueKey      : 'name',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_event_mappings',
 			defaultParams : {
 				defaultOptions : true,
@@ -467,7 +467,7 @@ const getAsyncFields = (key) => {
 		},
 		'promotion-tags': {
 			valueKey      : 'name',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_promotion_tags',
 			defaultParams : {
 				defaultOptions : true,
@@ -477,7 +477,7 @@ const getAsyncFields = (key) => {
 		trade_parties: {
 			asyncKey      : 'list_organization_trade_parties',
 			valueKey      : 'id',
-			lableKey      : 'business_name',
+			labelKey      : 'business_name',
 			defaultParams : {
 				defaultOptions : true,
 				isSearchable   : true,
@@ -485,7 +485,7 @@ const getAsyncFields = (key) => {
 		},
 		'item-taxes': {
 			valueKey       : 'id',
-			lableKey       : 'code',
+			labelKey       : 'code',
 			authkey        : 'get_common_item',
 			asyncKey       : 'common/item',
 			defaultOptions : true,
@@ -495,7 +495,7 @@ const getAsyncFields = (key) => {
 		},
 		'item-tax-rule': {
 			valueKey       : 'id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			authkey        : 'get_common_tax_rule',
 			asyncKey       : 'common/tax-rule',
 			defaultOptions : true,
@@ -505,7 +505,7 @@ const getAsyncFields = (key) => {
 		},
 		'item-tax-level': {
 			valueKey       : 'id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			authkey        : 'get_common_tax_level',
 			asyncKey       : 'common/tax-level',
 			defaultOptions : true,
@@ -515,7 +515,7 @@ const getAsyncFields = (key) => {
 		},
 		'campaign-sender-email': {
 			valueKey       : 'email',
-			lableKey       : 'email',
+			labelKey       : 'email',
 			asyncKey       : 'list_campaign_email_configuration',
 			defaultOptions : true,
 			defaultParams  : {
@@ -526,7 +526,7 @@ const getAsyncFields = (key) => {
 		},
 		'charge-codes': {
 			valueKey       : 'code',
-			lableKey       : 'label',
+			labelKey       : 'label',
 			asyncKey       : 'list_air_freight_charge_codes',
 			defaultOptions : true,
 			defaultParams  : {
@@ -535,7 +535,7 @@ const getAsyncFields = (key) => {
 		},
 		'charge-codes-domestic': {
 			valueKey       : 'code',
-			lableKey       : 'label',
+			labelKey       : 'label',
 			asyncKey       : 'list_domestic_air_freight_charge_codes',
 			defaultOptions : true,
 			defaultParams  : {
@@ -544,14 +544,14 @@ const getAsyncFields = (key) => {
 		},
 		utm_data: {
 			valueKey       : 'value',
-			lableKey       : 'label',
+			labelKey       : 'label',
 			asyncKey       : 'get_utm_campaign_audience_data',
 			defaultOptions : true,
 		},
 
 		fcl_freight_contracts: {
 			valueKey      : 'value',
-			lableKey      : 'label',
+			labelKey      : 'label',
 			asyncKey      : 'list_contract_fcl_freight_services',
 			defaultParams : {
 				page_limit: 10,
@@ -559,7 +559,7 @@ const getAsyncFields = (key) => {
 		},
 		lcl_freight_contracts: {
 			valueKey      : 'value',
-			lableKey      : 'label',
+			labelKey      : 'label',
 			asyncKey      : 'list_contract_lcl_freight_services',
 			defaultParams : {
 				page_limit: 10,
@@ -568,7 +568,7 @@ const getAsyncFields = (key) => {
 		'location-clusters': {
 			valueKey      : 'id',
 			asyncKey      : 'list_location_clusters',
-			lableKey      : 'cluster_name',
+			labelKey      : 'cluster_name',
 			defaultParams : {
 				filters: {
 					status: 'active',
@@ -579,7 +579,7 @@ const getAsyncFields = (key) => {
 		'global-segments': {
 			valueKey      : 'id',
 			asyncKey      : 'list_segmentations',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			defaultParams : {
 				segment_type         : 'global',
 				page_limit           : 50,
@@ -590,14 +590,14 @@ const getAsyncFields = (key) => {
 		segment_tags: {
 			valueKey      : 'name',
 			asyncKey      : 'get_segment_tags',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			defaultParams : {
 				page_limit: 10,
 			},
 		},
 		'list-segments': {
 			valueKey      : 'id',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_segments',
 			defaultParams : {
 				defaultOptions : true,
@@ -606,7 +606,7 @@ const getAsyncFields = (key) => {
 		},
 		'commodity-clusters': {
 			valueKey      : 'id',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_fcl_freight_commodity_clusters',
 			defaultParams : {
 				page_limit : 50,
@@ -619,7 +619,7 @@ const getAsyncFields = (key) => {
 		},
 		'list-shipments-lr-number': {
 			valueKey      : 'lr_number',
-			lableKey      : 'lr_number',
+			labelKey      : 'lr_number',
 			asyncKey      : 'list_shipments',
 			defaultParams : {
 				page_limit     : 100,
@@ -630,7 +630,7 @@ const getAsyncFields = (key) => {
 		},
 		'list-shipments-prs-number': {
 			valueKey      : 'prs_number',
-			lableKey      : 'prs_number',
+			labelKey      : 'prs_number',
 			asyncKey      : 'list_shipments',
 			defaultParams : {
 				page_limit : 100,
@@ -643,7 +643,7 @@ const getAsyncFields = (key) => {
 		},
 		'list-shipments-drs-number': {
 			valueKey      : 'drs_number',
-			lableKey      : 'drs_number',
+			labelKey      : 'drs_number',
 			asyncKey      : 'list_shipments',
 			defaultParams : {
 				page_limit : 100,
@@ -656,7 +656,7 @@ const getAsyncFields = (key) => {
 		},
 		'list-shipments-thc-number': {
 			valueKey      : 'thc_number',
-			lableKey      : 'thc_number',
+			labelKey      : 'thc_number',
 			asyncKey      : 'list_shipments',
 			defaultParams : {
 				page_limit : 100,
@@ -669,7 +669,7 @@ const getAsyncFields = (key) => {
 		},
 		'analytics-dashboard': {
 			valueKey       : 'id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'list_analytics_dashboards',
 			defaultOptions : true,
 			defaultParams  : {
@@ -678,7 +678,7 @@ const getAsyncFields = (key) => {
 		},
 		'list-ltl-warehouses': {
 			valueKey      : 'id',
-			lableKey      : 'name',
+			labelKey      : 'name',
 			asyncKey      : 'list_ltl_freight_warehouses',
 			defaultParams : {
 				page_limit : 100,
@@ -691,7 +691,7 @@ const getAsyncFields = (key) => {
 		},
 		'list-pickup-requests': {
 			valueKey      : 'pickup_request_number',
-			lableKey      : 'pickup_request_number',
+			labelKey      : 'pickup_request_number',
 			asyncKey      : 'list_ltl_booking_requests',
 			defaultParams : {
 				page_limit : 100,
@@ -704,7 +704,7 @@ const getAsyncFields = (key) => {
 		},
 		'list-overseas-trade-parties': {
 			valueKey      : 'organizationId',
-			lableKey      : 'description',
+			labelKey      : 'description',
 			asyncKey      : 'purchase/bills/list-overseas-trade-parties',
 			defaultParams : {
 				defaultOptions : true,
@@ -714,7 +714,7 @@ const getAsyncFields = (key) => {
 		},
 		'unloading-dockets': {
 			valueKey      : 'lr_number',
-			lableKey      : 'lr_number',
+			labelKey      : 'lr_number',
 			asyncKey      : 'list_ltl_booking_requests',
 			defaultParams : {
 				page_limit     : 100,
@@ -725,7 +725,7 @@ const getAsyncFields = (key) => {
 		},
 		'invoice-filter': {
 			valueKey      : 'id',
-			lableKey      : 'invoice_number',
+			labelKey      : 'invoice_number',
 			asyncKey      : 'list_shipment_consolidated_sell_invoices',
 			defaultParams : {
 				page_limit : 100,
@@ -739,7 +739,7 @@ const getAsyncFields = (key) => {
 		},
 		operators: {
 			valueKey       : 'id',
-			lableKey       : 'short_name',
+			labelKey       : 'short_name',
 			asyncKey       : 'list_operators',
 			defaultOptions : true,
 			defaultParams  : {
@@ -753,7 +753,7 @@ const getAsyncFields = (key) => {
 		},
 		'partner-users-id': {
 			valueKey       : 'user_id',
-			lableKey       : 'name',
+			labelKey       : 'name',
 			asyncKey       : 'list_partner_users',
 			defaultOptions : true,
 			defaultParams  : {
@@ -765,7 +765,7 @@ const getAsyncFields = (key) => {
 		},
 		'exchange-rate-currencies': {
 			valueKey      : 'iso_code',
-			lableKey      : 'iso_code',
+			labelKey      : 'iso_code',
 			asyncKey      : 'list_exchange_rate_currencies',
 			initialCall   : true,
 			defaultParams : {
@@ -777,7 +777,7 @@ const getAsyncFields = (key) => {
 		},
 		'cogo-entities-name': {
 			valueKey      : 'id',
-			lableKey      : 'business_name',
+			labelKey      : 'business_name',
 			asyncKey      : 'list_cogo_entities',
 			defaultParams : {
 				filters: {

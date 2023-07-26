@@ -56,8 +56,8 @@ const GLOBAL_CONSTANTS = {
 		razer_pay_url: 'https://checkout.razorpay.com/v1/checkout.js',
 	},
 	sample_document_url: {
-		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com
-		/ab3309b85b52e198b4c2bb691a7fb609/new_employee_bulk_upload_sample_sheet.csv`,
+		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
+						a3072d28df04315514414abe46a8c2f0/new_employee_bulk_upload_sample_sheet.csv`,
 	},
 	flash_booking_charge_codes: [
 		'OTC',
@@ -143,6 +143,7 @@ const GLOBAL_CONSTANTS = {
 		cogoacademy_admin_id    : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
 		sagar_bankar_user_id    : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
 		ajeet_singh_user_id     : '4bafde92-a30f-44d3-ace4-584dd460143e',
+		hk_user_id              : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
 		sachin_mehra_user_id    : '68c7e272-0c66-43a9-9537-eedb4e543194',
 		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
 		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
@@ -255,6 +256,11 @@ const GLOBAL_CONSTANTS = {
 		spam_flag_icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam_flag_black.png',
 		email_inbox_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/inbox_icon.png',
 		colored_loading     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
+		over_due_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg',
+		due_in_svg          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg',
+		cogo_assured_svg    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg',
+		empty_data          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
+		empty_data_image    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		awb_docs_images     : {
 			original_3:
 			'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',
@@ -283,7 +289,22 @@ const GLOBAL_CONSTANTS = {
 		},
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
+		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
+		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
+		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
+		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',
+		organization         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/organ-svg.svg',
+		user_activity        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user-actrivity.svg',
+		clock                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/alarm-timer.svg',
+		note                 : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note.svg',
+		quick_actions        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg',
+		customer_insights    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg',
+		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
 	},
+
+	video_call_ring_tone_url:
+	'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/microsoft_teams_audio_call_tone.mp3',
+
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 			+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
@@ -357,6 +378,7 @@ const GLOBAL_CONSTANTS = {
 			{ value: 'business_analyst', label: 'Business Analyst' },
 			{ value: 'product_analyst', label: 'Product Analyst' },
 			{ value: 'business_consultant', label: 'Business Consultant' },
+			{ value: 'key_accounts_manager', label: 'Key Accounts Manager' },
 		],
 		timezone_options: [
 			{
@@ -392,11 +414,13 @@ const GLOBAL_CONSTANTS = {
 		occurrences_of_line_breaks        : /(\r\n|\r|\n)/g,
 		url_match_regex:
 		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/,
-		ends_with_star_space : /\* /,
-		ends_with_star_char  : /\*[^0-9a-zA-Z]/,
-		string_to_array      : /'/g,
-		file_upload_url      : /:finalUrl=>"([^"]*)"/,
-		amount_seperator     : /\D/g,
+		ends_with_star_space   : /\* /,
+		ends_with_star_char    : /\*[^0-9a-zA-Z]/,
+		string_to_array        : /'/g,
+		file_upload_url        : /:finalUrl=>"([^"]*)"/,
+		four_characters_pin    : /^.{4}$/,
+		amount_seperator       : /\D/g,
+		white_space_characters : /\s/g,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
@@ -423,6 +447,9 @@ const GLOBAL_CONSTANTS = {
 		feature_supported_service: {
 			cargo_insurance: {
 				countries: ['IN'],
+			},
+			treasury: {
+				currencies: ['INR', 'USD', 'VND'],
 			},
 		},
 	},

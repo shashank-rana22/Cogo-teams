@@ -1,7 +1,18 @@
+const validServiceType = ['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service'];
+const displayServiceType = ['ftl_freight', 'haulage_freight'];
+const SPLIT_SERVICE_TEXT = 2;
+
 export default function getControls({
+	primary_service_type = '',
 	serviceObj = {},
 }) {
-	const { service_provider, service_type } = serviceObj || {};
+	const { service_provider, service_type, shipment_type } = serviceObj || {};
+
+	const serviceType = service_type?.split('_', SPLIT_SERVICE_TEXT).join('_');
+	let services = primary_service_type !== service_type ? [shipment_type, serviceType] : serviceType;
+	if (validServiceType.includes(serviceObj?.service_type)) {
+		services = displayServiceType;
+	}
 
 	const controls = [
 		{
@@ -14,7 +25,7 @@ export default function getControls({
 				filters: {
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
-					service      : (service_type || '').split('_', 2).join('_'),
+					service      : services,
 				},
 			},
 			size  : 'sm',

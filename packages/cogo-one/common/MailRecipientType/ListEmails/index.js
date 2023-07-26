@@ -9,10 +9,11 @@ function ListEmails({
 	emailSuggestions = [],
 	type = '',
 	handleKeyPress = () => {},
+	setNewEmailInput = () => {},
 }) {
 	return (
 		<div className={styles.list_container}>
-			{emailSuggestions.slice(
+			{(emailSuggestions || [])?.slice(
 				GLOBAL_CONSTANTS.zeroth_index,
 				EMAILS_TO_BE_SHOWN,
 			).map(
@@ -21,7 +22,7 @@ function ListEmails({
 						className={styles.email_container}
 						key={itm}
 						role="presentation"
-						onClick={() => handleKeyPress({ type, email: itm })}
+						onClick={() => handleKeyPress({ type, email: itm, setNewEmailInput })}
 					>
 						{itm}
 					</div>

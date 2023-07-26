@@ -11,6 +11,7 @@ import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import AddService from '../../common/AdditionalServices/components/List/AddService';
 import CancelDetails from '../../common/CancelDetails';
 import Documents from '../../common/Documents';
+import FieldExecutive from '../../common/FieldExecutive';
 import Overview from '../../common/Overview';
 import OverviewManageServices from '../../common/Overview/OverviewManageServices';
 import PocSop from '../../common/PocSop';
@@ -142,6 +143,10 @@ function ShipmentDetails() {
 							<Tasks />
 						</TabPanel>
 
+						<TabPanel name="field_executive" title="Field Executive">
+							<FieldExecutive shipment_data={shipment_data} servicesList={servicesGet?.servicesList} />
+						</TabPanel>
+
 						<TabPanel name="invoice_and_quotation" title="Sales Invoice">
 							<SalesInvoice />
 						</TabPanel>
@@ -167,7 +172,7 @@ function ShipmentDetails() {
 							<ShipmentMails
 								source="cogo_rpa"
 								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={`${shipment_data?.serial_id}`}
+								pre_subject_text={shipment_data?.serial_id}
 							/>
 						</TabPanel>
 
