@@ -13,6 +13,7 @@ import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
+import useUpdateAgentWorkPreferences from '../../hooks/UseUpdateAgentWorkPreferences';
 
 import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
@@ -68,6 +69,12 @@ function CogoOne() {
 
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
+
+	const {
+		updateWorkPreference = () => {},
+		data = {},
+		loading = false,
+	} = useUpdateAgentWorkPreferences();
 
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 
@@ -185,7 +192,13 @@ function CogoOne() {
 				setActiveTab={setActiveTab}
 			/>
 
-			<PunchInOut />
+			<PunchInOut
+				userId={userId}
+				updateWorkPreference={updateWorkPreference}
+				loading={loading}
+				data={data}
+				firestore={firestore}
+			/>
 		</>
 	);
 }

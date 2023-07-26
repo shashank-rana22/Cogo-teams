@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
@@ -9,12 +10,18 @@ import {
 
 import styles from './styles.module.css';
 
-function Stats() {
+const MIN_COUNT = 0;
+
+function Stats({ total_count = 0, loading = false }) {
+	const COUNT_MAPPING = {
+		no_of_bookings: total_count,
+	};
+
 	return (
 		<>
 			<div className={styles.top_stats_content}>
 				{AGENT_WISE_FEEDACK_MAPPING.map((item) => {
-					const { label, name, hasIcon, count } = item;
+					const { label, name, hasIcon } = item;
 					return (
 						<div className={styles.each_stats_div} key={name}>
 							<div className={styles.title}>{label}</div>
@@ -28,7 +35,8 @@ function Stats() {
 											height={55}
 										/>
 									) : null}
-								<div className={styles.count}>{count}</div>
+								{loading ? <Placeholder width="60px" height="40px" />
+									: <div className={styles.count}>{COUNT_MAPPING[name] || MIN_COUNT}</div>}
 								{hasIcon ? <IcMDown className={styles.arrow_icon} /> : null}
 							</div>
 						</div>

@@ -11,10 +11,13 @@
 	font-size: 22px;
 	font-weight: 500;
 	color: #000;
+
+	span {
+		margin-left: 4px;
+	}
 }
 
 .sub_label {
-	/* display: flex; */
 	font-size: 22px;
 	color: #000;
 
