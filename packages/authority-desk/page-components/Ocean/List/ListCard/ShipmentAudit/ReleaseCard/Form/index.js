@@ -66,8 +66,8 @@ function Form({
 			ids  : formData?.ids,
 			data : {
 				[trade_type === 'export' ? 'bl_remarks' : 'remarks']: {
-					comment : formData?.remarks,
-					status  : 'requested',
+					comment: formData?.remarks,
+					status,
 				},
 				status,
 			},
@@ -86,7 +86,7 @@ function Form({
 
 			<Modal.Body>
 				<div className={styles.form}>
-					{(docOptions()).length === 0 ? (
+					{!(docOptions()).length ? (
 						<div className={styles.no_data_warning}>
 							No document has been uploaded!
 						</div>

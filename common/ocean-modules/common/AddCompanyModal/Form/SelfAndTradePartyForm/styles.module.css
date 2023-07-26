@@ -65,3 +65,11 @@
 		}
 	}
 }
+
+.mobile_number_controller {
+	& > div {
+		& > div:first-child {
+			margin-right: 4px;
+		}
+	}
+}
