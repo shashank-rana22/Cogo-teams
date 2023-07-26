@@ -147,6 +147,7 @@ function OrgUsersList({
 							setSelectAll(false);
 							setSelectedUsers({});
 						}}
+						disabled={isEmpty(modifiedList)}
 						size="sm"
 						options={USER_SELECT_PAGINATION}
 						className={styles.selector}
