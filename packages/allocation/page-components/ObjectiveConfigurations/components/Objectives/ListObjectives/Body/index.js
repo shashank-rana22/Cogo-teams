@@ -13,7 +13,7 @@ function Body(props) {
 	} = props;
 
 	return (
-		<section>
+		<>
 			<ObjectiveFilters
 				setParams={setParams}
 			/>
@@ -25,7 +25,7 @@ function Body(props) {
 				paginationData={paginationData}
 				getNextPage={getNextPage}
 			/>
-		</section>
+		</>
 	);
 }
 

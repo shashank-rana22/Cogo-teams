@@ -3,17 +3,19 @@ import { InputNumberController } from '@cogoport/forms';
 import { IcMTick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import ObjectiveDetailsCard from '../../../../../../../../common/ObjectiveDetailsCard';
-import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../../../configurations/objective-status-color-mapping';
+import ObjectiveDetailsCard from '../../../../../../../common/ObjectiveDetailsCard';
+import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../../configurations/objective-status-color-mapping';
 
 import styles from './styles.module.css';
 
-function Objective(props) {
+function ObjectiveAccordian(props) {
 	const { currentObjective = false, formValues = {}, objective, user, role, control, defaultWeightage } = props;
 
 	const { id, name, objective_type, status } = objective || {};
 
 	const { id: userId } = user || {};
+
+	const { id: roleId } = role || {};
 
 	return (
 		<Accordion
@@ -36,7 +38,7 @@ function Objective(props) {
 					<div className={styles.title_right_container}>
 						<p className={styles.set_weightage}>Set Weightage (%)</p>
 						<InputNumberController
-							name={`${id || ''}_${userId}_${role?.id}_weightage`}
+							name={`${id || ''}_${userId}_${roleId}_weightage`}
 							size="sm"
 							control={control}
 							value={defaultWeightage}
@@ -57,4 +59,4 @@ function Objective(props) {
 	);
 }
 
-export default Objective;
+export default ObjectiveAccordian;

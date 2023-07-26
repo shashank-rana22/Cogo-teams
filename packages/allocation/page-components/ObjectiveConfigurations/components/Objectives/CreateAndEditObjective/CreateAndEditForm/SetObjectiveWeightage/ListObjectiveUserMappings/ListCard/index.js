@@ -1,7 +1,8 @@
 import { Pill } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import Objective from './Objective';
+import ObjectiveAccordian from '../ObjectiveAccordian';
+
 import styles from './styles.module.css';
 
 const DEFAULT_WEIGHTAGE = 100;
@@ -38,7 +39,7 @@ function ListCard(props) {
 				</div>
 			</div>
 
-			<Objective
+			<ObjectiveAccordian
 				currentObjective
 				formValues={formValues}
 				objective={formValues.generalConfiguration}
@@ -49,7 +50,7 @@ function ListCard(props) {
 			/>
 
 			{objectives.map((item) => (
-				<Objective
+				<ObjectiveAccordian
 					key={item.objective_id}
 					objective={item.objective}
 					user={user}

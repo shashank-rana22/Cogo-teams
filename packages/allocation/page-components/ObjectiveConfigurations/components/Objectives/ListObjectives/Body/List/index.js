@@ -272,7 +272,7 @@ function List(props) {
 	}
 
 	return (
-		<section>
+		<>
 			<ListHeader LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING} />
 
 			<Collapse
@@ -292,7 +292,7 @@ function List(props) {
 					onPageChange={getNextPage}
 				/>
 			</div>
-		</section>
+		</>
 	);
 }
 

@@ -475,6 +475,11 @@ const allocation = {
 			service_name : 'allocation',
 		},
 		{
+			api          : 'get_allocation_objective_non_overlapping_mappings',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
 			api          : 'post_allocation_objective_attributes',
 			access_type  : 'private',
 			service_name : 'allocation',
