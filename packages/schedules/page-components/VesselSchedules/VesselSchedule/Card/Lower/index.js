@@ -94,7 +94,7 @@ function Lower({ vessel, loading }) {
 					)}
 					{loading ? <Placeholder width="100px" /> : (
 						<div>
-							<span className={styles.key}>Length </span>
+							<span className={styles.key}>Distance </span>
 							{' '}
 							{displayText}
 						</div>

@@ -1,6 +1,6 @@
 {
     "bk_cutoff": "Booking",
-    "estimated_terminal_cutoff": "Gate In",
+    "terminal_cutoff": "Gate In",
     "vgm_cutoff": "VGM",
     "si_cutoff": "SI",
     "reefer_cutoff": "Reefer"

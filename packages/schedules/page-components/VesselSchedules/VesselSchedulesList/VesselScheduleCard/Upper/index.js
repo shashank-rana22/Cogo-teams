@@ -1,5 +1,5 @@
 import { Placeholder } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -9,7 +9,7 @@ function Upper({ vessel, loading }) {
 			<div className={styles.upper_left}>
 				{loading ? <Placeholder width="100px" /> : (
 					<div className={styles.vessel_title}>
-						{vessel?.vessel?.name}
+						{startCase(vessel?.vessel?.name)}
 						{' '}
 						:
 						{vessel?.vessel?.imo}

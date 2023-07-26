@@ -21,7 +21,7 @@ function PopoverContent({ setFilters, setShowPopover }) {
 	);
 	const shippingLineOptions = useGetAsyncOptions(merge(
 		asyncFieldsOperators(),
-		{ params: { filters: { operator_type: 'shipping_line' } } },
+		{ params: { filters: { operator_type: 'shipping_line', status: 'active' } } },
 	));
 	const [popoverFilters, setPopoverFilters] = useState({});
 

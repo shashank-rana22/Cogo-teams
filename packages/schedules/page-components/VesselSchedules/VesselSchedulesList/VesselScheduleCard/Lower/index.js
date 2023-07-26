@@ -37,7 +37,7 @@ function Lower({ vessel, loading }) {
 						</div>
 					)}
 				{loading ? <Placeholder width="100px" />
-					: <div className={styles.feature_name}>Length</div>}
+					: <div className={styles.feature_name}>Distance</div>}
 				{loading ? <Placeholder width="100px" />
 					: (
 						<div className={styles.feature_value}>

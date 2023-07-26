@@ -66,7 +66,7 @@ function SailingDetails({ data, loading }) {
 
 						</div>
 					)}
-					<hr width="200px" className={styles.hr_line} />
+					<hr className={styles.hr_line} />
 				</div>
 				<div className={styles.port}>
 					<div>

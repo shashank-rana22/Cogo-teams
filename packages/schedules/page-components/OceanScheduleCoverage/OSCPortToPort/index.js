@@ -6,7 +6,6 @@ import EmptyState from '../../common/EmptyState';
 import useGetSailingSchedulePortPairCoverage from '../hooks/useGetSailingSchedulePortPairCoverage';
 import ViewScheduleModal from '../ViewScheduleModal';
 
-// import LoadingState from "../LoadingState";
 import styles from './styles.module.css';
 
 function OSCPortToPort({

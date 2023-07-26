@@ -17,7 +17,6 @@
 	font-weight: 500;
 	color: var(--black-80, #4f4f4f);
 	text-align: center;
-	letter-spacing: 0.28px;
 }
 
 .date_type {
@@ -28,7 +27,6 @@
 	font-size: 16px;
 	font-weight: 600;
 	color: var(--black-80, #4f4f4f);
-	letter-spacing: 0.32px;
 }
 
 .updated_on {
@@ -37,5 +35,4 @@
 	font-weight: 500;
 	color: var(--black-60, #828282);
 	text-align: center;
-	letter-spacing: 0.28px;
 }
