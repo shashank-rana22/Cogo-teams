@@ -84,9 +84,9 @@ function BookingPreferenceCard({
 
 				<div className={cl`${styles.heading_text} ${styles.source}`}>{`${startCase(source)} Booking Note`}</div>
 
-				{isSelectedPriority && (
+				{isSelectedPriority ? (
 					<Pill className={styles.selected_priority} color="green"> Selected </Pill>
-				)}
+				) : null}
 			</div>
 
 			<div className={styles.divider} />
@@ -128,7 +128,7 @@ function BookingPreferenceCard({
 					}
 				</div>
 
-				{isProceedEnabled && (
+				{isProceedEnabled ? (
 					<Button
 						themeType="accent"
 						size="sm"
@@ -141,7 +141,7 @@ function BookingPreferenceCard({
 							{selectedServiceProvider.length === (similarServiceIds.length - ONE) ? 'Proceed' : 'Save'}
 						</b>
 					</Button>
-				)}
+				) : null}
 			</div>
 		</div>
 	);
