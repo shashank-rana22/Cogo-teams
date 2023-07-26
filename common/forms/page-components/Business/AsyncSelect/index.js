@@ -144,6 +144,8 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 };
 
+const SINGLE_ENTITY = 1;
+
 function AsyncSelect(props) {
 	const {
 		params,
@@ -174,8 +176,6 @@ function AsyncSelect(props) {
 		valueKey     : rest.valueKey || defaultParams.valueKey,
 		microService : microService || defaultParams.microService,
 	});
-
-	const SINGLE_ENTITY = 1;
 
 	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'
 	&& getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
