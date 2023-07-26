@@ -1,13 +1,14 @@
 import { Modal, Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 function LockMarginModal({
 	updateQuotation = () => {},
-	showLockMarginModal = false,
-	setShowLockMarginModal = () => {},
+	lockMarginModalData = '',
+	setLockMarginModalData = () => {},
 	loading = false,
 }) {
 	const onClose = () => {
-		setShowLockMarginModal(false);
+		setLockMarginModalData('');
 	};
 
 	const onClickMLockMargin = () => {
@@ -16,7 +17,7 @@ function LockMarginModal({
 
 	return (
 		<Modal
-			show={showLockMarginModal}
+			show={!isEmpty(lockMarginModalData)}
 			onClose={onClose}
 			placement="top"
 			size="lg"
