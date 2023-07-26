@@ -10,9 +10,9 @@ function AgentInfo({
 	email = '',
 	punchedTime = '',
 	status = '',
-	handleClick = () => {},
+	handlePunchIn = () => {},
 }) {
-	const handleUpdate = () => {
+	const handlePunchOut = () => {
 		updateWorkPreference({ type: 'punched_out' });
 	};
 
@@ -23,14 +23,14 @@ function AgentInfo({
 			<Avatar personName={name} size="140px" className={styles.user_icon} />
 			<div className={styles.text}>Time Clocked In Today</div>
 			{status === 'punched_out'
-				? <Button size="md" onClick={handleClick} disabled={loading}>Start Shift</Button>
+				? <Button size="md" onClick={handlePunchIn} disabled={loading}>Start Shift</Button>
 				: (
 					<div className={styles.start_time}>
 						<div className={styles.time}>{punchedTime}</div>
 						<Button
 							size="md"
 							themeType="accent"
-							onClick={handleUpdate}
+							onClick={handlePunchOut}
 							disabled={loading}
 						>
 							End Shift

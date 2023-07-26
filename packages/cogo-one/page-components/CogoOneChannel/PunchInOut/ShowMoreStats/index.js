@@ -11,7 +11,7 @@ function ShowMoreStats({
 	loading = false,
 	punchedTime = '',
 	status = '',
-	handleClick = () => {},
+	handlePunchIn = () => {},
 }) {
 	const {
 		profile: { user = {} },
@@ -21,7 +21,7 @@ function ShowMoreStats({
 
 	return (
 		<>
-			<div className={styles.left_div}>
+			<div className={styles.agent_info_container}>
 				<AgentInfo
 					updateWorkPreference={updateWorkPreference}
 					loading={loading}
@@ -30,10 +30,10 @@ function ShowMoreStats({
 					picture={picture}
 					punchedTime={punchedTime}
 					status={status}
-					handleClick={handleClick}
+					handlePunchIn={handlePunchIn}
 				/>
 			</div>
-			<div className={styles.right_div}>
+			<div className={styles.agent_stats_container}>
 				<AgentStats
 					setShowDetails={setShowDetails}
 					showDetails={showDetails}

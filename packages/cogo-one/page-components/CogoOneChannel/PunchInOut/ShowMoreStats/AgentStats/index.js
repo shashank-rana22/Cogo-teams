@@ -26,8 +26,8 @@ function AgentStats({ showDetails = false, name = '' }) {
 	const { total_count: bookingCount = 0 } = shipmentData || {};
 
 	return (
-		<>
-			<div className={styles.header_div}>
+		<div className={styles.section}>
+			<div className={styles.header_container}>
 				<div className={styles.header}>
 					Hi
 					<span>{startCase(name)}</span>
@@ -39,7 +39,7 @@ function AgentStats({ showDetails = false, name = '' }) {
 				</div>
 			</div>
 			<div className={styles.stats_content}>
-				<div className={styles.left_div}>
+				<div className={styles.stats_count_container}>
 					<Stats
 						bookingCount={bookingCount}
 						loading={shiplentLoading}
@@ -58,6 +58,7 @@ function AgentStats({ showDetails = false, name = '' }) {
 							size="sm"
 							placeholder="Select Books"
 							options={TIMELINE_FILTER_OPTIOINS}
+							className={styles.select_section}
 						/>
 					</div>
 					<AgentActivityGraph
@@ -68,7 +69,7 @@ function AgentStats({ showDetails = false, name = '' }) {
 					/>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 

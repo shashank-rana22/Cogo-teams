@@ -26,13 +26,13 @@ function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
 		loading = false,
 	} = useUpdateAgentWorkPreferences({ fetchworkPrefernce });
 
-	const handleClick = () => {
+	const handlePunchIn = () => {
 		updateWorkPreference({ type: 'punched_in' });
 	};
 
 	return (
 		<div className={styles.container}>
-			<div className={cl`${styles.hide_div} ${showDetails ? styles.show_div : ''}`}>
+			<div className={cl`${styles.hide_stats_section} ${showDetails ? styles.show_stats_section : ''}`}>
 				{showDetails && (
 					<ShowMoreStats
 						setShowDetails={setShowDetails}
@@ -41,7 +41,7 @@ function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
 						loading={loading}
 						punchedTime={punchedTime}
 						status={status}
-						handleClick={handleClick}
+						handlePunchIn={handlePunchIn}
 					/>
 				)}
 			</div>
@@ -52,10 +52,10 @@ function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
 				onClick={() => setShowDetails((prev) => !prev)}
 			>
 				<Image src={GLOBAL_CONSTANTS.image_url.sad_icon} alt="sad-emoji" width={18} height={18} />
-				<div className={styles.break_time}>4.5</div>
+				<div className={styles.break_time}>2</div>
 				<IcMDown className={styles.down_icon} />
 				{status === 'punched_out' ? (
-					<Button size="xs" onClick={handleClick} disabled={loading}>Start Shift</Button>
+					<Button size="xs" onClick={handlePunchIn} disabled={loading}>Start Shift</Button>
 				) : (
 					<>
 						<Image src={GLOBAL_CONSTANTS.image_url.clock_icon} alt="clock" width={18} height={18} />

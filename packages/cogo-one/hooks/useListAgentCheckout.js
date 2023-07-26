@@ -19,7 +19,7 @@ const getParams = ({ value }) => ({
 	},
 });
 
-function useListAgentCheckout({ value, showDetails = false }) {
+function useListAgentCheckout({ value }) {
 	const [{ loading, data }, trigger] = useRequest(
 		{
 			url    : '/list_checkouts',
@@ -29,8 +29,6 @@ function useListAgentCheckout({ value, showDetails = false }) {
 	);
 
 	const getAgentShipmentsCount = useCallback(() => {
-		if (!showDetails) return;
-
 		try {
 			trigger({
 				params: getParams({ value }),
@@ -38,7 +36,7 @@ function useListAgentCheckout({ value, showDetails = false }) {
 		} catch (error) {
 			console.error(error, 'error');
 		}
-	}, [trigger, value, showDetails]);
+	}, [trigger, value]);
 
 	useEffect(() => {
 		getAgentShipmentsCount();
