@@ -535,6 +535,16 @@ export default {
 		disable_options: ['10th', '12th', 'Diploma'],
 	},
 	navigations: {
+
+		settlement_onAccountCollection: {
+			tabs: [
+				'ap-ar-settlement',
+				'tds-settlement',
+				'history',
+				'onAccountCollection',
+				'JournalVoucher',
+			],
+		},
 		supply_dashboard: {
 			rfq_enquiries: {
 				tabs: [

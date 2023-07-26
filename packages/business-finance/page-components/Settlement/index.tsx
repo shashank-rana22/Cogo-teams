@@ -1,4 +1,5 @@
 import { Tabs, TabPanel, Select, Placeholder } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -7,10 +8,7 @@ import React, { useState } from 'react';
 
 import useListCogoEntities from '../AccountPayables/Dashboard/hooks/useListCogoEntities';
 
-import History from './page-components/History';
-import JournalVoucher from './page-components/JournalVoucher';
-import OnAccountCollection from './page-components/OnAccountCollection';
-import TdsSettlement from './page-components/TdsSettlement';
+import tabPanelMapping from './configurations/tab-mappings';
 import styles from './styles.module.css';
 
 interface ItemProps {
@@ -20,6 +18,8 @@ interface ItemProps {
 interface Profile {
 	profile?: { partner: { id: string } };
 }
+const geo = getGeoConstants();
+
 function Settlement() {
 	const { query, push } = useRouter();
 	const { profile }:Profile = useSelector((state) => state);
@@ -47,6 +47,8 @@ function Settlement() {
 		};
 	});
 
+	const TabPanelMapping = tabPanelMapping(entityCode);
+
 	const [activeTab, setActiveTab] = useState(query?.active_tab);
 
 	const handleChange = (tab: string) => {
@@ -70,7 +72,6 @@ function Settlement() {
 					<Placeholder width="200px" height="30px" />
 				) : (
 					<div className={styles.input}>
-
 						<Select
 							name="business_name"
 							onChange={(entityVal: string) => setEntityCode(entityVal)}
@@ -80,7 +81,6 @@ function Settlement() {
 							size="sm"
 							disabled={entityDataCount <= 1}
 						/>
-
 					</div>
 				)}
 			</div>
@@ -90,22 +90,17 @@ function Settlement() {
 				themeType="primary"
 				onChange={(tab) => handleChange(tab)}
 			>
-				<TabPanel name="ap-ar-settlement" title="AR/AP Settlement">
-					-
-				</TabPanel>
-				<TabPanel name="tds-settlement" title="TDS Settlement">
-					<TdsSettlement />
-				</TabPanel>
-				<TabPanel name="history" title="History">
-					<History />
-				</TabPanel>
-
-				<TabPanel name="onAccountCollection" title="On Account Collection">
-					<OnAccountCollection />
-				</TabPanel>
-				<TabPanel name="JournalVoucher" title="Journal Voucher">
-					<JournalVoucher entityCode={entityCode} />
-				</TabPanel>
+				{(TabPanelMapping || []).map((tab) => {
+					const { name, title, component } = tab || {};
+					if (!geo.navigations.settlement_onAccountCollection.tabs.includes(name)) {
+						return null;
+					}
+					return (
+						<TabPanel key={name} name={name} title={title}>
+							{component}
+						</TabPanel>
+					);
+				})}
 			</Tabs>
 		</div>
 	);
