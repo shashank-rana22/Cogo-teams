@@ -48,11 +48,16 @@ function Item({
 	) : null;
 
 	const renderServicesTaken = (services || []).map((service) => {
-		const trade_type = MAIN_SERVICES !== service?.service_type
+		const trade_type = !MAIN_SERVICES.includes(service?.service_type)
 			? service?.trade_type
 			: null;
 
-		const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
+		let tradeType = '';
+		if (trade_type === 'export') {
+			tradeType = 'Origin';
+		} else if (trade_type === 'import') {
+			tradeType = 'Destination';
+		}
 		const isBas = (service?.line_items || []).some(
 			(lineItem) => lineItem?.code === 'BAS',
 		);
