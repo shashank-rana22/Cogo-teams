@@ -25,6 +25,8 @@ const getCreateObjectivePayload = (props) => {
 
 	const { countries, states, cities, pincodes, segments } = organization_details || {};
 
+	const { date_range = {}, ...restStatsDetails } = stats_details || {};
+
 	const getUserObjectiveWeightage = () => {
 		const USER_OBJECTIVE_WEIGHTAGE_MAPPING = {};
 
@@ -58,12 +60,14 @@ const getCreateObjectivePayload = (props) => {
 		partner_id       : partner?.id,
 		channels,
 		role_ids         : roles?.map((role) => role.id),
-		lifecycle_stages : lifecycle_stage,
+		lifecycle_stages : !isEmpty(lifecycle_stage) ? [lifecycle_stage] : undefined,
 		service_requirement_operator,
 		service_details  : service_requirements?.map((service) => ({
 			...service,
-			origin_id      : service?.origin_location?.id,
-			destination_id : service?.destination_location?.id,
+			origin_location_id      : service?.origin_location?.id,
+			destination_location_id : service?.destination_location?.id,
+			origin_location         : undefined,
+			destination_location    : undefined,
 		})),
 		organization_details: {
 			country_ids : countries?.map((country) => country.id),
@@ -72,7 +76,11 @@ const getCreateObjectivePayload = (props) => {
 			pincode_ids : pincodes?.map((country) => country.id),
 			segments,
 		},
-		stats_details,
+		stats_details: {
+			start_date : date_range.startDate,
+			end_date   : date_range.endDate,
+			...restStatsDetails,
+		},
 		distribute_equally,
 		objective_weightages: getUserObjectiveWeightage(),
 	};

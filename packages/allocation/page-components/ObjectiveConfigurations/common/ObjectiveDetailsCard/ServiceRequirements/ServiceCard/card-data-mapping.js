@@ -5,10 +5,10 @@ import styles from './styles.module.css';
 
 const CARD_DATA_MAPPING = [
 	{
-		name     : 'inco_term',
+		name     : 'inco_terms',
 		label    : 'Incoterm',
-		accessor : ({ inco_term }) => {
-			if (isEmpty(inco_term)) return null;
+		accessor : ({ inco_terms }) => {
+			if (isEmpty(inco_terms)) return null;
 
 			return (
 				<div className={styles.key_value_container}>
@@ -17,7 +17,7 @@ const CARD_DATA_MAPPING = [
 					</div>
 
 					<div className={styles.value_container}>
-						{inco_term.map((value) => ` ${value.toUpperCase()},`)}
+						{inco_terms.map((value) => ` ${value.toUpperCase()},`)}
 					</div>
 				</div>
 			);
@@ -44,8 +44,8 @@ const CARD_DATA_MAPPING = [
 	},
 	{
 		name     : 'container_details',
-		accessor : ({ container_count, cargo_weight, volume }) => {
-			if (isEmpty(container_count) && isEmpty(cargo_weight) && isEmpty(volume)) return null;
+		accessor : ({ container_count, weight, volume }) => {
+			if (isEmpty(container_count) && isEmpty(weight) && isEmpty(volume)) return null;
 
 			return (
 				<div className={styles.key_value_container}>
@@ -55,9 +55,9 @@ const CARD_DATA_MAPPING = [
 
 					<div className={styles.key_value_container}>
 						{container_count && <Pill>{container_count}</Pill>}
-						{cargo_weight && (
+						{weight && (
 							<Pill>
-								{cargo_weight}
+								{weight}
 								{' '}
 								Kg
 							</Pill>

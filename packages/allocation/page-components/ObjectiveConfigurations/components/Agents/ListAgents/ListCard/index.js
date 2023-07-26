@@ -10,7 +10,7 @@ const { OBJECTIVES } = TAB_PANNEL_KEYS;
 function ListCard(props) {
 	const { item, refetch, setActiveTabDetails } = props;
 
-	const { objectives, user, role, partner } = item;
+	const { objectives = [], user = {}, role = {}, partner = {} } = item;
 
 	const {
 		mode,

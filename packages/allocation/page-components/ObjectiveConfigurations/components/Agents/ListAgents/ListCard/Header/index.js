@@ -61,10 +61,10 @@ function Header(props) {
 		<div className={styles.card_header}>
 			<div className={styles.agent_detail}>
 				<h4 className={styles.agent}>
-					{role.name}
+					{role?.name}
 					:
 					{' '}
-					<strong>{user.name}</strong>
+					<strong>{user?.name}</strong>
 				</h4>
 
 				{!isEmpty(partner) && (

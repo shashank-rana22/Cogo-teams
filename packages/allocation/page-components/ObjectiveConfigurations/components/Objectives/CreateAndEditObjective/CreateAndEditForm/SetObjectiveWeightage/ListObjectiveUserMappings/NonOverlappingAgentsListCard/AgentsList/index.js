@@ -22,12 +22,12 @@ function AgentsList(props) {
 				const { role = {}, user = {}, partner = {} } = item || {};
 
 				return (
-					<div key={user.id} className={styles.list_item}>
+					<div key={user?.id} className={styles.list_item}>
 						<p className={styles.agent}>
-							{role.name}
+							{role?.name}
 							:
 							{' '}
-							<b>{user.name}</b>
+							<b>{user?.name}</b>
 						</p>
 
 						{!isEmpty(partner) && (

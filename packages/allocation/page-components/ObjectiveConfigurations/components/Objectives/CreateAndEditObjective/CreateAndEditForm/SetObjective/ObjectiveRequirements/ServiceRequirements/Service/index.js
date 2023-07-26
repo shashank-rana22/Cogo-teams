@@ -41,17 +41,17 @@ function Service(props) {
 	useEffect(() => {
 		const subscription = watch((value, { name: controlName }) => {
 			if (controlName === `${name}.${index}.trade_type`) {
-				setValue(`${name}.${index}.inco_term`, []);
+				setValue(`${name}.${index}.inco_terms`, []);
 			}
 
 			if (controlName === `${name}.${index}.service_type`) {
 				setValue(`${name}.${index}.trade_type`, '');
 				setValue(`${name}.${index}.origin_location`, '');
 				setValue(`${name}.${index}.destination_location`, '');
-				setValue(`${name}.${index}.inco_term`, []);
+				setValue(`${name}.${index}.inco_terms`, []);
 				setValue(`${name}.${index}.hs_codes`, []);
 				setValue(`${name}.${index}.container_count`, '');
-				setValue(`${name}.${index}.cargo_weight`, '');
+				setValue(`${name}.${index}.weight`, '');
 				setValue(`${name}.${index}.volume`, '');
 				setValue(`${name}.${index}.container_size`, []);
 				setValue(`${name}.${index}.container_type`, []);

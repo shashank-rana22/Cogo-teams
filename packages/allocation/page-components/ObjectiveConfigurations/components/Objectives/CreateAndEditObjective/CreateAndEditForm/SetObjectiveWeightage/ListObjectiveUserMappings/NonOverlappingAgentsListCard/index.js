@@ -14,7 +14,7 @@ function NonOverlappingAgentsListCard(props) {
 
 	const { page = 1, page_limit = 0, total_count = 0 } = paginationData || {};
 
-	if (isEmpty(list)) return null;
+	if (!loading && isEmpty(list)) return null;
 
 	return (
 		<div className={styles.card_container}>
@@ -41,6 +41,7 @@ function NonOverlappingAgentsListCard(props) {
 				objective={formValues.generalConfiguration}
 				control={control}
 				defaultWeightage={100}
+				disabledEditWeightage
 			/>
 		</div>
 	);

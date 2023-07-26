@@ -13,9 +13,9 @@ const useGetObjectiveUserMappings = (props) => {
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			role_ids           : roles.map((role) => role.id),
-			user_ids           : selectMode === SELECT_ONLY ? user_ids : undefined,
-			excluding_user_ids : selectMode === EXCLUDE_ONLY ? user_ids : undefined,
+			role_ids        : roles.map((role) => role.id),
+			user_ids        : selectMode === SELECT_ONLY ? user_ids : undefined,
+			except_user_ids : selectMode === EXCLUDE_ONLY ? user_ids : undefined,
 		},
 	});
 

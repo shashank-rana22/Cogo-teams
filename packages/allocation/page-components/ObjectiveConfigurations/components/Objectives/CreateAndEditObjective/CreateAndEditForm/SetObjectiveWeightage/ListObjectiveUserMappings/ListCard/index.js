@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import ObjectiveAccordian from '../ObjectiveAccordian';
@@ -10,7 +10,7 @@ const DEFAULT_WEIGHTAGE = 100;
 function ListCard(props) {
 	const { objectiveUserMappingData, control, formValues } = props;
 
-	const { user, role, objectives = [] } = objectiveUserMappingData || {};
+	const { user = {}, role = {}, objectives = [] } = objectiveUserMappingData || {};
 
 	const { generalConfiguration: { partner = {} } = {} } = formValues;
 
@@ -19,16 +19,16 @@ function ListCard(props) {
 			<div className={styles.card_header}>
 				<div className={styles.agent_detail}>
 					<p className={styles.agent}>
-						{role.name}
+						{role?.name}
 						:
 						{' '}
-						<strong>{user.name}</strong>
+						<strong>{user?.name}</strong>
 					</p>
 
 					<Pill size="md">
 						Entity:
 						{' '}
-						{partner.business_name}
+						{partner?.business_name}
 					</Pill>
 
 					{/* <Pill size="md">
@@ -37,6 +37,14 @@ function ListCard(props) {
 						{role.role_sub_function}
 					</Pill> */}
 				</div>
+
+				<Button
+					size="md"
+					type="button"
+					themeType="secondary"
+				>
+					Equally Distribute Weightage
+				</Button>
 			</div>
 
 			<ObjectiveAccordian

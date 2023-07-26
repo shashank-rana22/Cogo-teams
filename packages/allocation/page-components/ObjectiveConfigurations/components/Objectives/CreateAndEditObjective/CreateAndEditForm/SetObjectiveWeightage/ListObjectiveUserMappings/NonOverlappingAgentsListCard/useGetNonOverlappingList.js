@@ -11,10 +11,10 @@ const useGetNonOverlappingList = (props) => {
 	const { generalConfiguration: { roles = [], selectMode = '', user_ids = [] } = {} } = formValues;
 
 	const [params, setParams] = useState({
-		page               : 1,
-		role_ids           : roles.map((role) => role.id),
-		user_ids           : selectMode === SELECT_ONLY ? user_ids : undefined,
-		excluding_user_ids : selectMode === EXCLUDE_ONLY ? user_ids : undefined,
+		page            : 1,
+		role_ids        : roles.map((role) => role.id),
+		user_ids        : selectMode === SELECT_ONLY ? user_ids : undefined,
+		except_user_ids : selectMode === EXCLUDE_ONLY ? user_ids : undefined,
 	});
 
 	const [{ data, loading }] = useAllocationRequest({

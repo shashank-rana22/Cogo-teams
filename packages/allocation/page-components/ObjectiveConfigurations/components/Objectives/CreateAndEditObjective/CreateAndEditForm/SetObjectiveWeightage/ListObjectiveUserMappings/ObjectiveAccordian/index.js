@@ -9,7 +9,16 @@ import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../../configurations/
 import styles from './styles.module.css';
 
 function ObjectiveAccordian(props) {
-	const { currentObjective = false, formValues = {}, objective, user, role, control, defaultWeightage } = props;
+	const {
+		currentObjective = false,
+		formValues = {},
+		objective,
+		user,
+		role,
+		control,
+		defaultWeightage,
+		disabledEditWeightage = false,
+	} = props;
 
 	const { id, name, objective_type, status } = objective || {};
 
@@ -42,6 +51,7 @@ function ObjectiveAccordian(props) {
 							size="sm"
 							control={control}
 							value={defaultWeightage}
+							disabled={disabledEditWeightage}
 							suffix={(
 								<IcMTick
 									height={20}

@@ -99,7 +99,7 @@ const getServiceRequirementControls = (props) => {
 			disabled,
 		},
 		{
-			name        : 'inco_term',
+			name        : 'inco_terms',
 			label       : 'Incoterm',
 			placeholder : 'Select Incoterm',
 			type        : 'multiSelect',
@@ -138,7 +138,7 @@ const getServiceRequirementControls = (props) => {
 			disabled,
 		},
 		{
-			name        : 'cargo_weight',
+			name        : 'weight',
 			label       : 'Cargo Weight (in Kg)',
 			placeholder : 'Weight',
 			type        : 'number',
