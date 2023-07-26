@@ -154,6 +154,7 @@ function AsyncSelect(props) {
 		getSelectedOption,
 		microService = '',
 		onOptionsChange,
+		isSingleEntity,
 		...rest
 	} = props;
 
@@ -173,6 +174,11 @@ function AsyncSelect(props) {
 		valueKey     : rest.valueKey || defaultParams.valueKey,
 		microService : microService || defaultParams.microService,
 	});
+
+	const SINGLE_ENTITY = 1;
+
+	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'
+	&& getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
 
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
@@ -195,6 +201,7 @@ function AsyncSelect(props) {
 		<Element
 			{...rest}
 			{...getAsyncOptionsProps}
+			disabled={disabled}
 		/>
 	);
 }
