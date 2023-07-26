@@ -1,48 +1,12 @@
 import { Button, cl, Pill } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import useUpdateShipmentBookingConfirmationPreferences from
 	'../../../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
+import LABEL_VALUE_MAPPING from '../../../helpers/getPreferenceLabel';
 
 import styles from './styles.module.css';
-
-const LABEL_VALUE_MAPPING = (obj) => [
-	{
-		id    : 'supplier_name',
-		label : 'Supplier Name',
-		value : obj?.service_provider?.business_name,
-	},
-	{
-		id    : 'shipping_line',
-		label : 'Shipping Line',
-		value : obj?.reverted_shipping_line?.business_name || obj?.operator?.business_name
-				|| obj?.shipping_line?.business_name,
-	},
-	{
-		id    : 'source_of_rate',
-		label : 'Source of Rate',
-		value : obj?.source,
-	},
-	{
-		id    : 'buy_rate',
-		label : 'Buy Rate',
-		value : getFormattedPrice(
-			obj?.price,
-			obj?.buy_currency || obj?.currency,
-		),
-	},
-	{
-		id    : 'sailing_date',
-		label : 'Sailing Date',
-		value : formatDate({
-			date       : new Date(),
-			formatType : 'dd MMM yyyy',
-		}),
-	},
-];
 
 function BookingPreferenceCard({
 	item = {},
