@@ -64,14 +64,6 @@ jobs:
     with:
       platform: ${{ needs.start-runner.outputs.label }}
 
-  build:
-    name: Test
-    needs: [init, start-runner]
-    uses: ./.github/workflows/reusable-test-build.yml
-    secrets: inherit
-    with:
-      platform: ${{ needs.start-runner.outputs.label }}
-
   stop-runner:
     name: Stop self-hosted EC2 runner
 
@@ -79,7 +71,6 @@ jobs:
       - start-runner # required to get output from the start-runner job
       - init # required to wait when the main job is done
       - lint # required to wait when the main job is done
-      - build # required to wait when the main job is done
 
     runs-on: ubuntu-latest
 
