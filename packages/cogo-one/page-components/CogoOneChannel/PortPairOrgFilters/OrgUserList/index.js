@@ -103,7 +103,10 @@ function OrgUsersList({
 	if (!isEmpty(selectedAutoAssign)) {
 		return (
 			<div className={cl`${styles.container} ${!modalType || !selectedAutoAssign ? styles.empty_list : ''}`}>
-				<SelecetdUsers selectedAutoAssign={selectedAutoAssign} setSelectedAutoAssign={setSelectedAutoAssign} />
+				<SelecetdUsers
+					selectedAutoAssign={selectedAutoAssign}
+					setSelectedAutoAssign={setSelectedAutoAssign}
+				/>
 
 				<div className={styles.send_action}>
 					<Button

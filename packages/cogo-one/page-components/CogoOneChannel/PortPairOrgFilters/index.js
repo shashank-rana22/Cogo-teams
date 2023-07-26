@@ -159,9 +159,6 @@ function PortPairOrgFilters({
 	return (
 		<div className={styles.main_container} ref={divRef}>
 			<div className={styles.header}>
-				<div className={styles.title}>
-					Users
-				</div>
 				<Button
 					size="sm"
 					themeType="tertiary"

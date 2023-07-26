@@ -1,15 +1,10 @@
 .container {
 	position: relative;
-	width: 280px;
 	padding: 8px;
 	overflow-y: hidden;
 	border-top: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 	border-left: 1px solid #e0e0e0;
-
-	@media (max-width: 1280px) {
-		width: 250px;
-	}
 }
 
 .empty_list {

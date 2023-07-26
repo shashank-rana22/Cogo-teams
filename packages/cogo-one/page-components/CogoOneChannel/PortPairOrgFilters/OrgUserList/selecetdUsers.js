@@ -6,10 +6,15 @@ import UserAvatar from '../../../../common/UserAvatar';
 
 import styles from './styles.module.css';
 
-function SelecetdUsers({ selectedAutoAssign = {}, setSelectedAutoAssign = () => {} }) {
+const MIN_LENGTH = 1;
+
+function SelecetdUsers({
+	selectedAutoAssign = {},
+	setSelectedAutoAssign = () => {},
+}) {
 	const handleDelete = ({ eachUser }) => {
 		const { id } = eachUser || {};
-		if (id in selectedAutoAssign) {
+		if (id in selectedAutoAssign && Object.keys(selectedAutoAssign || {}).length > MIN_LENGTH) {
 			setSelectedAutoAssign((prev) => {
 				const arg = prev;
 				delete (arg[id]);
