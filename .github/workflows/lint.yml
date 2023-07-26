@@ -11,7 +11,7 @@ env:
 jobs:
   start-runner:
     name: Start self-hosted EC2 runner
-
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/tests')
     runs-on: ubuntu-latest
 
     environment: production

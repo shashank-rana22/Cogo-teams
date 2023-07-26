@@ -1,9 +1,8 @@
-name: Tests
+name: Build
 
-on: 
-  pull_request:
-    types: [review_requested]
-    branches: [main, pre-release]
+on:
+issue_comment:
+types: [created]
 
 env:
   AWS_REGION: ap-south-1
@@ -11,7 +10,7 @@ env:
 jobs:
   start-runner:
     name: Start self-hosted EC2 runner
-
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/tests')
     runs-on: ubuntu-latest
 
     environment: production
@@ -19,6 +18,9 @@ jobs:
     outputs:
       label: ${{ steps.start-ec2-runner.outputs.label }}
       ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
+    
+  
+
 
     steps:
       - name: Configure AWS credentials
