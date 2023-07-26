@@ -151,7 +151,7 @@ const navigationMappingSeller = {
 		isNew         : true,
 		showInNav     : true,
 	},
-
+	
 	saas_tools: {
 		key         : 'saas_tools',
 		title       : 'Tools',

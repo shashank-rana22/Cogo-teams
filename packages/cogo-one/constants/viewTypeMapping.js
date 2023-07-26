@@ -112,6 +112,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : true,
 			show_shipments_home_page    : false,
+			punch_in_out                : false,
 		},
 	},
 	sales_admin: {
@@ -147,6 +148,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : true,
 			show_shipments_home_page    : false,
+			punch_in_out                : false,
 		},
 	},
 	support: {
@@ -183,6 +185,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : false,
 			show_shipments_home_page    : false,
+			punch_in_out                : true,
 		},
 	},
 	support_admin: {
@@ -217,6 +220,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : false,
 			show_shipments_home_page    : false,
+			punch_in_out                : false,
 		},
 	},
 	supply: {
@@ -255,6 +259,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : true,
 			global_contacts             : false,
 			show_shipments_home_page    : false,
+			punch_in_out                : false,
 		},
 	},
 	supply_admin: {
@@ -292,6 +297,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : true,
 			global_contacts             : false,
 			show_shipments_home_page    : false,
+			punch_in_out                : false,
 		},
 	},
 	shipment_specialist: {
@@ -324,6 +330,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : false,
 			show_shipments_home_page    : false,
+			punch_in_out                : false,
 		},
 	},
 	cogoone_admin: {
@@ -358,6 +365,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : true,
 			show_shipments_home_page    : true,
+			punch_in_out                : false,
 		},
 	},
 };

@@ -9,10 +9,14 @@ import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
+import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
+import useGetAgentPreference from '../../hooks/useGetAgentPreference';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
+import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
 import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
@@ -21,6 +25,7 @@ import EmptyChatPage from './EmptyChatPage';
 import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
 import ProfileDetails from './ProfileDetails';
+import PunchInOut from './PunchInOut';
 import styles from './styles.module.css';
 
 function CogoOne() {
@@ -54,6 +59,7 @@ function CogoOne() {
 	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 	const [openKamContacts, setOpenKamContacts] = useState(false);
+	const [openInactiveModal, setOpenInactiveModal] = useState(false);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -65,8 +71,21 @@ function CogoOne() {
 
 	const { viewType, loading: workPrefernceLoading = false } = useAgentWorkPrefernce();
 
+	const {
+		fetchWorkStatus = () => {},
+		agentWorkStatus = {},
+	} = useGetAgentPreference();
+
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
+
+	const {
+		loading: statusLoading,
+		updateUserStatus = () => {},
+	} = useCreateUserInactiveStatus({
+		fetchworkPrefernce : fetchWorkStatus,
+		setOpenModal       : setOpenInactiveModal,
+	});
 
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 
@@ -87,6 +106,11 @@ function CogoOne() {
 		},
 	};
 	const { hasNoFireBaseRoom = false } = activeTab || {};
+
+	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
+	const orgId = activeTab === 'message'
+		? formattedMessageData?.organization_id
+		: activeTab?.data?.organization_id;
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -119,6 +143,12 @@ function CogoOne() {
 						suggestions={suggestions}
 						workPrefernceLoading={workPrefernceLoading}
 						setOpenKamContacts={setOpenKamContacts}
+						agentStatus={agentWorkStatus}
+						statusLoading={statusLoading}
+						updateUserStatus={updateUserStatus}
+						openInactiveModal={openInactiveModal}
+						setOpenInactiveModal={setOpenInactiveModal}
+						fetchworkPrefernce={fetchWorkStatus}
 					/>
 				</div>
 
@@ -164,6 +194,8 @@ function CogoOne() {
 										firestore={firestore}
 										userId={userId}
 										setActiveTab={setActiveTab}
+										formattedMessageData={formattedMessageData}
+										orgId={orgId}
 									/>
 									{hasNoFireBaseRoom && <div className={styles.overlay_div} />}
 								</div>
@@ -182,7 +214,15 @@ function CogoOne() {
 				openKamContacts={openKamContacts}
 				setOpenKamContacts={setOpenKamContacts}
 				setActiveTab={setActiveTab}
+				orgId={orgId}
 			/>
+
+			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out && (
+				<PunchInOut
+					fetchworkPrefernce={fetchWorkStatus}
+					agentStatus={agentWorkStatus}
+				/>
+			)}
 		</>
 	);
 }

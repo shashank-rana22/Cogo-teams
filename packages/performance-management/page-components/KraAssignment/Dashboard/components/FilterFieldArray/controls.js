@@ -4,7 +4,7 @@ const getControls = (watchTribeId) => {
 		type     : 'fieldArray',
 		controls : [
 			{
-				name        : 'role_ids',
+				name        : 'role_id',
 				type        : 'asyncSelect',
 				asyncKey    : 'list_roles',
 				label       : 'Roles',
