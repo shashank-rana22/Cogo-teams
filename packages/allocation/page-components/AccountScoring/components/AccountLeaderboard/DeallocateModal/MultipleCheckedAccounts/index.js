@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import WARMTH_ACCOUNTS_STATS from '../../../../constants/get-multiple-account-stats';
 
 import styles from './styles.module.css';
@@ -36,7 +38,11 @@ function MultipleCheckedAccounts({ modalDetailsArray = [] }) {
 								{' '}
 							</div>
 
-							<div className={styles.value}>{filteredList[key]?.length}</div>
+							<div className={styles.value}>
+								{filteredList[key]?.length
+							|| GLOBAL_CONSTANTS.zeroth_index}
+
+							</div>
 
 						</div>
 					);
