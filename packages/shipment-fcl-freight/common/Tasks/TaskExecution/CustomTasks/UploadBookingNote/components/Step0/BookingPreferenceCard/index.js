@@ -27,15 +27,13 @@ function BookingPreferenceCard({
 	const dataArray = Array.isArray(data) ? data : [data];
 	const { remarks, supplier_contract_no } = dataArray?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({
-		setStep,
-		source: 'upload_booking_note',
-		setSelectedServiceProvider,
-	});
+	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({ });
 
 	const handleProceed = async () => {
+		setSelectedServiceProvider((prev) => [...prev, item]);
 		if (selectedServiceProvider.length >= similarServiceIds.length - ONE) {
 			await apiTrigger([...selectedServiceProvider, item]);
+			setStep((prev) => prev + ONE);
 		}
 	};
 
