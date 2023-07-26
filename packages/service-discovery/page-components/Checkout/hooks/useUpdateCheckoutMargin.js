@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateCheckoutMargin = ({ getCheckout, setCheckoutState }) => {
+const useUpdateCheckoutMargin = ({ getCheckout = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_checkout_margin',
 		method : 'POST',
@@ -13,8 +13,6 @@ const useUpdateCheckoutMargin = ({ getCheckout, setCheckoutState }) => {
 			await trigger({ data: finalPayload });
 
 			await getCheckout();
-
-			setCheckoutState('preview_booking');
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');

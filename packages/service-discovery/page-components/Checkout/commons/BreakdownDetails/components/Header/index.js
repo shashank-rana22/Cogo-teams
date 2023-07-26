@@ -13,7 +13,7 @@ const HEADER_COMPONENTS = [
 	},
 	{
 		label     : 'Original Price',
-		key       : 'service_name',
+		key       : 'original_price',
 		flexBasis : '9%',
 	},
 	{
