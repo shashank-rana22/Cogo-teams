@@ -1,0 +1,34 @@
+.point_animation {
+	--border-pulse-color: #474747;
+
+	width: 12px;
+	height: 12px;
+	background: #474747;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	box-shadow: 0 0 2px #333c;
+	transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+	animation: border-pulse 2s infinite;
+
+	&.hide_animation {
+		animation: none;
+	}
+
+	animation-name: border-pulse;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes border-pulse {
+	0% {
+		box-shadow: 0 0 0 0 var(--border-pulse-color);
+	}
+
+	70% {
+		box-shadow: 0 0 0 10px #f000;
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 #f000;
+	}
+}
