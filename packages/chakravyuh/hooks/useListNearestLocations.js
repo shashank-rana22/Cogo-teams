@@ -1,7 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 
-const useListNearestLocations = (setLocationFilters, setHierarchy, activeId) => {
+const useListNearestLocations = ({
+	setLocationFilters,
+	setHierarchy, activeId, setActiveList,
+}) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'list_nearest_available_location',
 		method : 'GET',
@@ -12,6 +15,7 @@ const useListNearestLocations = (setLocationFilters, setHierarchy, activeId) => 
 			const res = await trigger({ params });
 			const data = res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index];
 			if (data && (data?.country_id || data?.id) !== activeId) {
+				setActiveList([]);
 				setHierarchy({ country_id: data?.country_id || data?.id });
 				setLocationFilters((prev) => ({
 					...prev,

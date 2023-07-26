@@ -1,12 +1,12 @@
 import React from 'react';
 
-function MapTooltip({ color = null, display_name = '', deviation = null, showDeviation = true }) {
+function MapTooltip({ color = null, display_name = '', accuracy = null }) {
 	return (
 		<div style={{ color: color || '#333' }}>
 			<h3>{display_name}</h3>
-			{showDeviation && (
+			{accuracy && (
 				<h4>
-					{`Deviation : ${deviation || 'No Rates'} ${deviation ? '%' : ''}`}
+					{`Accuracy : ${accuracy || 'No Rates'} ${accuracy ? '%' : ''}`}
 				</h4>
 			)}
 		</div>

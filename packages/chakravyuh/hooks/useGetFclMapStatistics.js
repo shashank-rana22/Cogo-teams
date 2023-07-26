@@ -1,9 +1,13 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { LOCATION_KEYS } from '../constants/map_constants';
 
+const START_PAGE = 1;
 const useGetFclMapStatistics = ({ locationFilters }) => {
+	const [page, setPage] = useState(START_PAGE);
+	const [activeList, setActiveList] = useState([]);
+
 	const [{ data, loading }, trigger] = useRequest({
 		url    : 'get_fcl_freight_map_view_statistics',
 		method : 'GET',
@@ -30,21 +34,19 @@ const useGetFclMapStatistics = ({ locationFilters }) => {
 		return acc;
 	}, {});
 
-	const dependency = Object.values(filters).map(({ id }) => id).join('_');
 	const accuracyMapping = (data?.list || []).reduce((acc, item) => {
-		Object.entries(item).forEach(([key, val]) => {
-			if (key.includes('destination')) {
-				acc[val] = item.accuracy;
-			}
-		});
+		acc[item.destination_id] = item?.accuracy;
 		return acc;
 	}, {});
-	useEffect(() => {
-		getStats({ filters });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dependency, getStats]);
 
-	return { data: accuracyMapping, loading };
+	const dependency = Object.values(filters).map(({ id }) => id).join('_');
+
+	useEffect(() => {
+		getStats({ filters, page });
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dependency, page, getStats]);
+
+	return { data, loading, page, setPage, activeList, setActiveList, accuracyMapping };
 };
 
 export default useGetFclMapStatistics;

@@ -293,6 +293,7 @@ const GLOBAL_CONSTANTS = {
 
 		ic_tree_multiple : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-branch.svg',
 		ic_tree_single   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic_branch_single.svg',
+		drop_down_red    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dropped-down.svg',
 
 	},
 

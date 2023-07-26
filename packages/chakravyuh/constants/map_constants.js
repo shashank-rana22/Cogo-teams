@@ -12,9 +12,9 @@ const MAX_LNG = 90;
 export const LOCATION_KEYS = ['origin', 'destination'];
 export const COLORS = [
 	{ weight: 0.5 },
-	{ fillColor: '#F7FAEF', color: '#849E4C', fillOpacity: 1, opacity: 0.8, min: 0, max: 40 },
-	{ fillColor: '#FEF3E9', color: '#F68B21', fillOpacity: 1, opacity: 0.8, min: 40, max: 60 },
-	{ fillColor: '#FDEBE9', color: '#EE3425', fillOpacity: 1, opacity: 0.8, min: 60, max: 100 },
+	{ fillColor: '#FDEBE9', color: '#EE3425', fillOpacity: 1, opacity: 0.8 },
+	{ fillColor: '#FEF3E9', color: '#F68B21', fillOpacity: 1, opacity: 0.8 },
+	{ fillColor: '#F7FAEF', color: '#849E4C', fillOpacity: 1, opacity: 0.8 },
 ];
 
 export const SORT_OPTIONS = [
@@ -33,7 +33,7 @@ export const PADDING_TOP = 10;
 export const ONE = 1;
 export const ITEMS = [
 	{ label: 'NA', spectrumStyle: { backgroundColor: '#f4f4f4', borderColor: '#828282' }, key: 'na' },
-	{ label: '0-40 %', spectrumStyle: { backgroundColor: '#F7FAEF', borderColor: '#849E4C' }, key: 'green' },
-	{ label: '40-60 %', spectrumStyle: { backgroundColor: '#FEF3E9', borderColor: '#F68B21' }, key: 'orange' },
-	{ label: '60-100 %', spectrumStyle: { backgroundColor: '#FDEBE9', borderColor: '#EE3425' }, key: 'red' },
+	{ label: '0-40 %', spectrumStyle: { backgroundColor: '#FDEBE9', borderColor: '#EE3425' }, key: 'green' },
+	{ label: '40-80 %', spectrumStyle: { backgroundColor: '#FEF3E9', borderColor: '#F68B21' }, key: 'orange' },
+	{ label: '80-100 %', spectrumStyle: { backgroundColor: '#F7FAEF', borderColor: '#849E4C' }, key: 'red' },
 ];
