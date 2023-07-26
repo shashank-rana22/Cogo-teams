@@ -1,4 +1,5 @@
 import { Pagination, Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -18,18 +19,20 @@ function Header({
 				{' '}
 				<span className="small">{formattedData?.not_seen_count}</span>
 			</p>
-			<div className={styles.row}>
-				<Button className={styles.mark_read} onClick={onMarkAllAsRead}>Mark all as read</Button>
-				<div>
-					<Pagination
-						type="table"
-						currentPage={formattedData?.page}
-						totalItems={formattedData?.total_count}
-						pageSize={formattedData?.page_limit}
-						onPageChange={onPageChange}
-					/>
+			{!isEmpty(formattedData) && (
+				<div className={styles.row}>
+					<Button className={styles.mark_read} onClick={onMarkAllAsRead}>Mark all as read</Button>
+					<div>
+						<Pagination
+							type="table"
+							currentPage={formattedData?.page}
+							totalItems={formattedData?.total_count}
+							pageSize={formattedData?.page_limit}
+							onPageChange={onPageChange}
+						/>
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 }

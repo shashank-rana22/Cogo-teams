@@ -29,6 +29,7 @@ function NotificationPage({
 						activeTab={activeTab}
 						onChange={(tab) => setActiveTabFunction(tab)}
 						className="horizontal two"
+						themeType="primary"
 					>
 						<TabPanel
 							name="notifications"
