@@ -9,6 +9,7 @@ import useSendBookingConfirmationEmail from '../../../../../hooks/useSendBooking
 import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
 
 import getControls from './getControls';
+import getShowElements from './getShouldShowField';
 import PreviewAndSubmit from './Preview';
 import styles from './styles.module.css';
 
@@ -39,10 +40,12 @@ function ConfirmFreightBooking({
 		successMessage: 'Request Submitted Successfully',
 	});
 
-	const { controls, showElements } = getControls({
+	const { controls } = getControls({
 		taskData: taskConfigData,
 		formValues,
 	});
+
+	const showElements = getShowElements({ controls, formValues });
 
 	const sendConfirmationMail = ({ preview = false, mailData }) => {
 		const payload = {
