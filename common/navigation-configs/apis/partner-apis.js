@@ -12666,6 +12666,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'list_lead_organizations',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'get_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
 	],
 	analytics_dashboard: [
 		{
