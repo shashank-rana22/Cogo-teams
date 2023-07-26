@@ -2,8 +2,8 @@ import { Placeholder, Input } from '@cogoport/components';
 import { IcMSearchdark, IcMArrowNext } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import UserAvatar from '../../../../../common/UserAvatar';
-import useListOrganizationUsers from '../../../../../hooks/useListOrganizationUsers';
+import UserAvatar from '../../../../../../common/UserAvatar';
+import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
 
 import styles from './styles.module.css';
 
@@ -14,13 +14,16 @@ function OrgUsersList({
 	setActiveTab = () => {},
 	setOpenKamContacts = () => {},
 	setOrgId = () => {},
+	endPoint = '',
+	filterKey = '',
+	activeOrg = '',
 }) {
 	const {
 		formattedOrgUsersList = [],
 		loading = false,
 		setSearch = () => {},
 		search = '',
-	} = useListOrganizationUsers({ organizationId: orgId });
+	} = useListOrganizationUsers({ organizationId: orgId, endPoint, filterKey });
 
 	const onCardClick = ({ item }) => {
 		const {
@@ -65,16 +68,19 @@ function OrgUsersList({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.input_container}>
-				<Input
-					placeholder="search by name..."
-					onChange={setSearch}
-					value={search}
-					className={styles.input_styles}
-					size="sm"
-					prefix={<IcMSearchdark />}
-				/>
-			</div>
+			{activeOrg === 'organization' ? (
+				<div className={styles.input_container}>
+					<Input
+						placeholder="search by name..."
+						onChange={setSearch}
+						value={search}
+						className={styles.input_styles}
+						size="sm"
+						prefix={<IcMSearchdark />}
+					/>
+				</div>
+			) : null}
+
 			<div className={styles.list_container}>
 				{!isEmpty(modifiedList) ? modifiedList?.map((eachUser) => {
 					const {
