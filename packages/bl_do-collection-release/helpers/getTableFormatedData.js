@@ -4,10 +4,21 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import shotNames from '../configs/short-disply-names.json';
 
-export default function getTableFormatedData(list) {
-	const tableData = [];
+const getTdsAmount = (data, item) => {
+	const billObject = (data || []).find((bill) => bill?.billNumber === (item.invoice_no || item.invoice_number));
 
-	(list || []).forEach((item) => {
+	return {
+		tdsAmount : billObject?.tdsAmount,
+		currency  : billObject?.billCurrency,
+	};
+};
+
+export default function getTableFormatedData({ list_of_invoices, data }) {
+	const TABLE_DATA = [];
+
+	(list_of_invoices || []).forEach((item) => {
+		const { currency, tdsAmount } = getTdsAmount(data, item);
+
 		const row = {
 			id         : item.id,
 			invoice_no : item.invoice_no || item.invoice_number,
@@ -27,11 +38,21 @@ export default function getTableFormatedData(list) {
 					maximumFractionDigits : 2,
 				},
 			}),
-			payment_status: item.payment_status || '',
+			payment_status : item.payment_status || '',
+			tdsAmount      : formatAmount({
+				amount  : tdsAmount || '',
+				currency,
+				options : {
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 2,
+				},
+			}),
+
 		};
 
-		tableData.push(row);
+		TABLE_DATA.push(row);
 	});
 
-	return tableData;
+	return TABLE_DATA;
 }
