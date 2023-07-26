@@ -290,9 +290,9 @@ export const MAIL_REPLY_TYPE = [
 export const PAGE_LIMIT = 50;
 
 export const FILTER_KEYS_MAPPING = {
-	requested  : { Statuses: 'reject_requested,resolve_requested' },
-	unresolved : { Status: 'unresolved' },
-	closed     : { Status: 'closed' },
+	requested  : { Statuses: 'reject_requested,resolve_requested,pending' },
+	unresolved : { Statuses: 'unresolved,escalated' },
+	closed     : { Statuses: 'closed,overdue' },
 };
 
 export const PRIORITY_MAPPING = {
