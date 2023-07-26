@@ -423,6 +423,7 @@ const GLOBAL_CONSTANTS = {
 		white_space_characters : /\s/g,
 	},
 	zeroth_index                 : 0,
+	milliseconds_in_one_day      : 86400000,
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
 	others                       : {
