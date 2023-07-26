@@ -8847,7 +8847,8 @@ const partner = {
 			access_type : 'private',
 		},
 	],
-	settlement: [
+	cogo_financials : [],
+	settlement      : [
 		{
 			api          : 'list_organizations',
 			access_type  : 'private',

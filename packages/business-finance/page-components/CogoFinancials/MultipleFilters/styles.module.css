@@ -1,0 +1,7 @@
+.filter {
+	height: 38px;
+	padding: 6px 8px 2px;
+	margin: 0 12px;
+	background-color: var(--color-primary-error-red-2);
+	border-radius: 8px;
+}

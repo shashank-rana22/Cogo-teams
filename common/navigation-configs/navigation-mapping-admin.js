@@ -914,7 +914,6 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
 			},
-
 			{
 				key           : 'business_finance-reports',
 				title         : 'Reports',
@@ -923,6 +922,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.reports,
+			},
+			{
+				key           : 'business_finance-cogo_financials',
+				title         : 'Cogo Financials',
+				href          : '/v2/business-finance/cogo-financials',
+				as            : '/v2/business-finance/cogo-financials',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_financials,
 			},
 		],
 		module_type: 'dashboards',
