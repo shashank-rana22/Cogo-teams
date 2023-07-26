@@ -5,14 +5,19 @@ import {
 	IcMDelete,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
 import { ACCEPT_FILE_MAPPING } from '../../../../../../constants';
 import useGetEmojiList from '../../../../../../hooks/useGetEmojis';
+import useSendChat from '../../../../../../hooks/useSendChat';
+import getFileAttributes from '../../../../../../utils/getFileAttributes';
 import EmojisBody from '../EmojisBody';
 import styles from '../styles.module.css';
 
 import SendActions from './SendActions';
+
+const LAST_VALUE = 1;
 
 const getPlaceHolder = ({ hasPermissionToEdit, canMessageOnBotSession }) => {
 	if (canMessageOnBotSession) {
@@ -25,32 +30,50 @@ const getPlaceHolder = ({ hasPermissionToEdit, canMessageOnBotSession }) => {
 };
 
 function Footer({
-	draftMessage = '',
-	sentQuickSuggestions = () => {},
-	messageLoading = false,
 	canMessageOnBotSession = false,
-	handleProgress = () => {},
-	openInstantMessages = () => {},
 	hasPermissionToEdit = false,
 	suggestions = [],
 	scrollToBottom = () => {},
-	setDraftMessages = () => {},
-	sendChatMessage = () => {},
-	setDraftUploadedFiles = () => {},
-	uploading = false,
-	uploadedFileName = '',
-	fileIcon = null,
-	finalUrl = '',
 	formattedData = {},
 	viewType = '',
+	firestore = {},
+	activeChatCollection = {},
+	setOpenModal = () => {},
+	sendCommunicationTemplate = () => {},
+	communicationLoading = false,
+	assignChat = () => {},
+	assignLoading = false,
+	// handleConvDivHeight = () => {},
 }) {
+	const [draftMessages, setDraftMessages] = useState({});
+	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
+	const [uploading, setUploading] = useState({});
+	// const [mailReciepients, setMailReciepients] = useState({ cc: [], bcc: [] });
+
 	const { id = '', channel_type = '' } = formattedData;
+
+	const finalUrl = draftUploadedFiles?.[id];
+	const draftMessage = draftMessages?.[id];
+
+	const { sendChatMessage, sendQuickSuggestions, messageLoading } = useSendChat({
+		firestore,
+		channelType: channel_type,
+		id,
+		draftMessages,
+		setDraftMessages,
+		activeChatCollection,
+		draftUploadedFiles,
+		setDraftUploadedFiles,
+		formattedData,
+		assignChat,
+		canMessageOnBotSession,
+	});
 
 	const {
 		emojisList = {},
 		setOnClicked = () => {},
 		onClicked = false,
-	} = useGetEmojiList({ formattedData });
+	} = useGetEmojiList();
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
@@ -58,6 +81,30 @@ function Footer({
 			sendChatMessage(scrollToBottom);
 		}
 	};
+
+	const handleProgress = (val) => {
+		setUploading((prev) => ({ ...prev, [id]: val }));
+	};
+
+	const openInstantMessages = () => {
+		setOpenModal({
+			type : 'instant_messages',
+			data : {
+				updateMessage: (val) => {
+					setDraftMessages((p) => ({ ...p, [id]: val }));
+					setOpenModal({ type: null, data: {} });
+				},
+				sendCommunicationTemplate,
+				communicationLoading,
+				channel_type,
+			},
+		});
+	};
+
+	const urlArray = decodeURI(finalUrl)?.split('/');
+	const fileName = urlArray?.[urlArray.length - LAST_VALUE] || '';
+
+	const { uploadedFileName, fileIcon } = getFileAttributes({ finalUrl, fileName });
 
 	return (
 		<>
@@ -108,11 +155,10 @@ function Footer({
 								<div
 									key={eachSuggestion}
 									className={styles.tag_div}
-									role="button"
-									tabIndex={0}
+									role="presentation"
 									onClick={() => {
 										if (hasPermissionToEdit && !messageLoading) {
-											sentQuickSuggestions(scrollToBottom, eachSuggestion);
+											sendQuickSuggestions({ scrollToBottom, val: eachSuggestion });
 										}
 									}}
 									style={{
@@ -127,7 +173,6 @@ function Footer({
 
 					</div>
 				)}
-
 				<Textarea
 					rows={5}
 					placeholder={getPlaceHolder({ hasPermissionToEdit, canMessageOnBotSession })}
@@ -138,7 +183,6 @@ function Footer({
 					style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'text' }}
 					onKeyDown={(e) => handleKeyPress(e)}
 				/>
-
 				<div className={styles.flex_space_between}>
 					<div className={styles.icon_tools}>
 						{hasPermissionToEdit && (
@@ -197,14 +241,13 @@ function Footer({
 						hasPermissionToEdit={hasPermissionToEdit}
 						openInstantMessages={openInstantMessages}
 						sendChatMessage={sendChatMessage}
-						messageLoading={messageLoading}
+						messageLoading={((canMessageOnBotSession && assignLoading) || messageLoading)}
 						scrollToBottom={scrollToBottom}
 						finalUrl={finalUrl}
 						draftMessage={draftMessage}
 						formattedData={formattedData}
 						viewType={viewType}
 					/>
-
 				</div>
 			</div>
 		</>

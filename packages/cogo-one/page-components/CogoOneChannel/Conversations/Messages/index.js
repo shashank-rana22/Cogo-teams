@@ -1,6 +1,6 @@
 import { Modal } from '@cogoport/components';
 import { collection } from 'firebase/firestore';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
@@ -9,18 +9,18 @@ import { getHasPermissionToEdit } from '../../../../helpers/conversationHelpers'
 import { snapshotCleaner, mountActiveRoomSnapShot } from '../../../../helpers/snapshotHelpers';
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useEscalateToSupplyRm from '../../../../hooks/useEscalateToSupplyRm';
-import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
 import useRequestAssignChat from '../../../../hooks/useRequestAssignChat';
-import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
-import useUpdateUserRoom from '../../../../hooks/useUpdateUserRoom';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import Header from './Header';
 import MessageConversations from './MessageConversations';
+import Footer from './MessageConversations/Footer';
 import styles from './styles.module.css';
+
+const TIMEOUT_FOR_SCROLL = 200;
 
 function Messages({
 	activeTab = {},
@@ -35,18 +35,14 @@ function Messages({
 	setModalType = () => {},
 }) {
 	const activeRoomSnapshotListener = useRef(null);
+	const conversationsDivRef = useRef(null);
 
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
-	const [draftMessages, setDraftMessages] = useState({});
-	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
-	const [uploading, setUploading] = useState({});
 
 	const { tagOptions = [] } = useListAssignedChatTags();
-
 	const { escalateToSupplyRm, supplierLoading } = useEscalateToSupplyRm();
 
 	const formattedData = getActiveCardDetails(activeTab?.data) || {};
-
 	const { hasNoFireBaseRoom = false } = activeTab || {};
 
 	const closeModal = () => {
@@ -92,31 +88,13 @@ function Messages({
 		);
 	}
 
-	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions, messageLoading } = useSendChat({
-		firestore,
-		channelType: channel_type,
-		id,
-		draftMessages,
-		setDraftMessages,
-		activeChatCollection,
-		draftUploadedFiles,
-		setDraftUploadedFiles,
-		formattedData,
-	});
-
 	const { assignChat = () => {}, loading: assignLoading } = useAssignChat({
-		messageFireBaseDoc,
 		firestore,
 		closeModal,
 		activeMessageCard: activeTab?.data,
 		formattedData,
 		canMessageOnBotSession,
 	});
-
-	const {
-		getNextData = () => {}, lastPage, firstLoadingMessages,
-		messagesData, loadingPrevMessages,
-	} = useGetMessages({ activeChatCollection, id, viewType, hasNoFireBaseRoom });
 
 	const { updateChat, loading } = useUpdateAssignedChat({
 		onClose           : closeModal,
@@ -125,14 +103,22 @@ function Messages({
 	});
 
 	const {
-		updateRoomLoading,
-		updateUserRoom,
-	} = useUpdateUserRoom();
-
-	const {
 		requestForAssignChat,
 		requestAssignLoading,
 	} = useRequestAssignChat();
+
+	const scrollToLastMessage = useCallback(() => {
+		setTimeout(() => {
+			conversationsDivRef.current?.scrollTo({
+				top   	  : conversationsDivRef.current.scrollHeight,
+				behavior : 'smooth',
+			});
+		}, TIMEOUT_FOR_SCROLL);
+	}, []);
+
+	const handleConvDivHeight = useCallback((val) => {
+		conversationsDivRef.current.style.height = val;
+	}, []);
 
 	const {
 		comp: ActiveModalComp = null,
@@ -142,21 +128,6 @@ function Messages({
 
 	const activeCardId = activeTab?.data?.id;
 	const activeChannelType = activeTab?.data?.channel_type;
-
-	const changeSessionAndMessage = (type = '') => {
-		const callbackFunc = type === 'quick_message' ? sentQuickSuggestions : sendChatMessage;
-
-		if (!canMessageOnBotSession) {
-			return callbackFunc;
-		}
-
-		return (scrollToBottom, val) => assignChat(
-			{
-				payload      : { agent_id: userId, is_allowed_to_chat: true },
-				callbackFunc : () => callbackFunc(scrollToBottom, val),
-			},
-		);
-	};
 
 	useEffect(() => {
 		mountActiveRoomSnapShot({
@@ -171,72 +142,78 @@ function Messages({
 		return () => {
 			snapshotCleaner({ ref: activeRoomSnapshotListener });
 		};
-	}, [activeCardId, activeChannelType, activeTab.data.channel_type, firestore, setActiveRoomLoading, setActiveTab]);
+	}, [activeCardId, activeChannelType, firestore, setActiveRoomLoading, setActiveTab]);
 
 	return (
 		<>
 			<div className={styles.container}>
-				<Header
-					setOpenModal={setOpenModal}
-					assignChat={assignChat}
-					formattedData={formattedData}
-					updateChat={updateChat}
-					loading={loading}
-					activeMessageCard={activeTab?.data}
-					closeModal={closeModal}
-					assignLoading={assignLoading}
-					activeAgentName={activeAgentName}
-					hasPermissionToEdit={hasPermissionToEdit}
-					filteredSpectators={filteredSpectators}
-					tagOptions={tagOptions}
-					support_agent_id={support_agent_id}
-					showBotMessages={showBotMessages}
-					userId={userId}
-					updateRoomLoading={updateRoomLoading}
-					updateUserRoom={updateUserRoom}
-					requestForAssignChat={requestForAssignChat}
-					requestAssignLoading={requestAssignLoading}
-					canMessageOnBotSession={canMessageOnBotSession}
-					viewType={viewType}
-					firestore={firestore}
-					escalateToSupplyRm={escalateToSupplyRm}
-					supplierLoading={supplierLoading}
-					hasNoFireBaseRoom={hasNoFireBaseRoom}
-				/>
-				<div className={styles.message_container} key={id}>
+				<div className={styles.header}>
+					<Header
+						setOpenModal={setOpenModal}
+						assignChat={assignChat}
+						formattedData={formattedData}
+						updateChat={updateChat}
+						loading={loading}
+						activeMessageCard={activeTab?.data}
+						closeModal={closeModal}
+						assignLoading={assignLoading}
+						activeAgentName={activeAgentName}
+						hasPermissionToEdit={hasPermissionToEdit}
+						filteredSpectators={filteredSpectators}
+						tagOptions={tagOptions}
+						support_agent_id={support_agent_id}
+						showBotMessages={showBotMessages}
+						userId={userId}
+						requestForAssignChat={requestForAssignChat}
+						requestAssignLoading={requestAssignLoading}
+						canMessageOnBotSession={canMessageOnBotSession}
+						viewType={viewType}
+						firestore={firestore}
+						escalateToSupplyRm={escalateToSupplyRm}
+						supplierLoading={supplierLoading}
+						hasNoFireBaseRoom={hasNoFireBaseRoom}
+					/>
+				</div>
+				<div className={styles.message_container}>
 					<MessageConversations
 						formattedData={formattedData}
-						messagesData={messagesData}
-						uploading={uploading}
-						draftMessage={draftMessages?.[id]}
-						draftUploadedFile={draftUploadedFiles?.[id]}
-						setDraftMessages={setDraftMessages}
-						setDraftUploadedFiles={setDraftUploadedFiles}
-						sendChatMessage={changeSessionAndMessage('chat_message')}
-						getNextData={getNextData}
-						firstLoadingMessages={firstLoadingMessages || newUserRoomLoading}
-						lastPage={lastPage}
-						setOpenModal={setOpenModal}
 						activeMessageCard={activeTab?.data}
 						suggestions={suggestions}
-						setUploading={setUploading}
-						sentQuickSuggestions={changeSessionAndMessage('quick_message')}
 						hasPermissionToEdit={hasPermissionToEdit}
-						loadingPrevMessages={loadingPrevMessages}
-						sendCommunicationTemplate={sendCommunicationTemplate}
-						communicationLoading={communicationLoading}
 						closeModal={closeModal}
-						messageLoading={canMessageOnBotSession ? (messageLoading || assignLoading) : messageLoading}
 						setRaiseTicketModal={setRaiseTicketModal}
 						canMessageOnBotSession={canMessageOnBotSession}
-						changeSessionAndMessage={changeSessionAndMessage}
 						viewType={viewType}
 						hasNoFireBaseRoom={hasNoFireBaseRoom}
 						setModalType={setModalType}
 						activeTab={activeTab}
+						activeChatCollection={activeChatCollection}
+						newUserRoomLoading={newUserRoomLoading}
+						firestore={firestore}
+						ref={conversationsDivRef}
+						scrollToLastMessage={scrollToLastMessage}
+					/>
+				</div>
+				<div className={styles.footer}>
+					<Footer
+						canMessageOnBotSession={canMessageOnBotSession}
+						hasPermissionToEdit={hasPermissionToEdit}
+						suggestions={suggestions}
+						formattedData={formattedData}
+						viewType={viewType}
+						firestore={firestore}
+						activeChatCollection={activeChatCollection}
+						setOpenModal={setOpenModal}
+						sendCommunicationTemplate={sendCommunicationTemplate}
+						communicationLoading={communicationLoading}
+						assignChat={assignChat}
+						assignLoading={assignLoading}
+						scrollToBottom={scrollToLastMessage}
+						handleConvDivHeight={handleConvDivHeight}
 					/>
 				</div>
 			</div>
+
 			{openModal?.type && ActiveModalComp && (
 				<Modal
 					size={modalSize}

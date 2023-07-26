@@ -1,7 +1,12 @@
 .container {
+	height: 100%;
 	padding: 10px 10px 20px;
 	overflow-y: scroll;
 	transition: height 0.3s;
+}
+
+.mail_container {
+	padding: 10px 0 20px;
 }
 
 .container::-webkit-scrollbar {
@@ -114,6 +119,7 @@
 	justify-content: space-between;
 	min-height: 30px;
 	padding: 5px 0;
+	overflow-x: auto;
 	border-bottom: 1px solid #fbd1a6;
 }
 

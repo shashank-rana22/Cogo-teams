@@ -2,18 +2,17 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
-import ReceiveDiv from '../../../../../../common/ReceiveDiv';
-import SentDiv from '../../../../../../common/SentDiv';
 import NewUserOutBound from '../NewUserOutBound';
 import TimeLine from '../TimeLine';
 
+import { ReceiveDivComponent, SentDivComponent } from './conversationDivMappings';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
 
 const CONVERSATION_TYPE_MAPPING = {
-	sent     : ReceiveDiv,
-	received : SentDiv,
+	sent     : ReceiveDivComponent,
+	received : SentDivComponent,
 	default  : TimeLine,
 };
 

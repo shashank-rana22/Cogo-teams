@@ -5,7 +5,7 @@
 }
 
 .message_container {
-	height: calc(100% - 104px);
+	height: 60%;
 	background: #f9f9f9;
 }
 
@@ -31,4 +31,13 @@
 			padding: 10px !important;
 		}
 	}
+}
+
+.header {
+	height: fit-content;
+	box-shadow: 0 4px 16px 0 #627fac33;
+}
+
+.footer {
+	height: 20%;
 }

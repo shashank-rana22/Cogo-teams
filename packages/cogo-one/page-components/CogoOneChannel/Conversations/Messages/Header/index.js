@@ -6,6 +6,7 @@ import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import HeaderName from '../../../../../common/HeaderName';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
 import useTransferChat from '../../../../../hooks/useTransferChat';
+import useUpdateUserRoom from '../../../../../hooks/useUpdateUserRoom';
 
 import Assignes from './Assignes';
 import TagsPopOver from './HeaderFuncs';
@@ -29,8 +30,6 @@ function Header({
 	support_agent_id = null,
 	showBotMessages = false,
 	userId = '',
-	updateRoomLoading = false,
-	updateUserRoom = () => {},
 	requestForAssignChat = () => {},
 	requestAssignLoading = false,
 	canMessageOnBotSession = false,
@@ -40,6 +39,11 @@ function Header({
 	supplierLoading = false,
 	hasNoFireBaseRoom = false,
 }) {
+	const {
+		updateRoomLoading,
+		updateUserRoom,
+	} = useUpdateUserRoom();
+
 	const { requestToJoinGroup, dissmissTransferRequest } = useTransferChat({ firestore, activeMessageCard });
 
 	const openAssignModal = () => {
@@ -101,7 +105,7 @@ function Header({
 	const isManager = managers_ids?.includes(userId);
 
 	return (
-		<div className={styles.outer_container}>
+		<>
 			<div className={styles.container}>
 				<div className={styles.flex_space_between}>
 					<div className={styles.flex}>
@@ -226,7 +230,7 @@ function Header({
 					</>
 				)}
 			</div>
-		</div>
+		</>
 	);
 }
 

@@ -21,12 +21,20 @@ const useSendChat = ({
 	setDraftUploadedFiles,
 	id,
 	formattedData,
+	canMessageOnBotSession,
+	assignChat,
 }) => {
 	const { user_name } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,
 	}));
 
-	const { sendMessage, loading } = useSendMessage({ channelType, activeChatCollection, formattedData });
+	const { sendMessage, loading } = useSendMessage({
+		channelType,
+		activeChatCollection,
+		formattedData,
+		assignChat,
+		canMessageOnBotSession,
+	});
 
 	let messageFireBaseDoc;
 
@@ -69,7 +77,7 @@ const useSendChat = ({
 		});
 	};
 
-	const sentQuickSuggestions = async (scrollToBottom, val) => {
+	const sendQuickSuggestions = async ({ scrollToBottom, val }) => {
 		await sendUserMessage({
 			formattedData,
 			channelType,
@@ -83,8 +91,7 @@ const useSendChat = ({
 
 	return {
 		sendChatMessage,
-		messageFireBaseDoc,
-		sentQuickSuggestions,
+		sendQuickSuggestions,
 		messageLoading: loading,
 	};
 };

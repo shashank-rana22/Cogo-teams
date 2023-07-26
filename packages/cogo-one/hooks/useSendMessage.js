@@ -11,7 +11,13 @@ const geo = getGeoConstants();
 
 const INCREASE_MESSAGE_COUNT_BY_ONE = 1;
 
-const useSendMessage = ({ channelType = '', activeChatCollection, formattedData }) => {
+const useSendMessage = ({
+	channelType = '',
+	activeChatCollection,
+	formattedData,
+	assignChat = () => {},
+	canMessageOnBotSession = false,
+}) => {
 	const {
 		user: { id },
 	} = useSelector(({ profile }) => profile);
@@ -48,6 +54,13 @@ const useSendMessage = ({ channelType = '', activeChatCollection, formattedData 
 		}
 
 		try {
+			if (canMessageOnBotSession) {
+				await assignChat({
+					payload: {
+						agent_id: id,
+					},
+				});
+			}
 			const res = await trigger({
 				data: {
 					type           : channelType,
