@@ -1,0 +1,43 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 8px 12px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.heading {
+	margin: 0;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 28px;
+	color: #000;
+	text-transform: capitalize;
+	letter-spacing: 0.02em;
+
+	&.small {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	@media (max-width: 1064px) {
+		font-size: 16px;
+	}
+}
+
+.row {
+	display: flex;
+	align-items: center;
+}
+
+.mark_head {
+	padding: 0;
+	margin-right: 20px;
+	font-size: 12px;
+	line-height: 16px;
+	color: #034afd;
+	letter-spacing: 0.02em;
+	cursor: pointer;
+	background: none;
+	border: none;
+}

@@ -26,7 +26,7 @@ importers:
       turbo: ^1.10.2
       turbo-darwin-64: ^1.10.3
     dependencies:
-      '@cogoport/maps': 1.0.3_mt7xt2bhqvqycrxffswha2krau
+      '@cogoport/maps': 1.0.3_cmckfm7yuriasd6lqsbyc4adfq
       '@sentry/nextjs': 7.60.0_next@13.1.6+react@18.2.0
       axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
       next: 13.1.6_fe3dnxkyax5wguqewcrbc4wcza
@@ -1602,15 +1602,19 @@ importers:
     specifiers:
       '@cogoport/components': ^1.0.432
       '@cogoport/icons-react': ^1.0.86
+      '@cogoport/request': workspace:^0.1.0
       '@cogoport/utils': ^1.2.10
       date-fns: ^2.29.3
       react: 18.2.0
       react-dom: 18.2.0
+      react-redux: ^8.0.5
     dependencies:
       '@cogoport/components': 1.0.432_33anfcebeh5c4mwpkkbioyhs2q
       '@cogoport/icons-react': 1.0.86_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/request': link:../../common/request
       '@cogoport/utils': 1.2.10
       date-fns: 2.30.0
+      react-redux: 8.1.1_biqbaboplfbrettd7655fr4n2y
     devDependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -4059,6 +4063,20 @@ packages:
 
   /@cogoport/icons/1.0.86:
     resolution: {integrity: sha512-FRPjFYghq+wAtdx5g6vRuai+bScXD7yKSSr8a5eYT3QzP+F573zWBhMaim28p2r6W/aJzz2tjQDMMrtCROJJeg==}
+    dev: false
+
+  /@cogoport/maps/1.0.3_cmckfm7yuriasd6lqsbyc4adfq:
+    resolution: {integrity: sha512-nWNhGesbEQNqBGy1KO9O85eU04zcVaIVvuHXcq7CKa+pij74yU3BKB4PTBvoSrbLHAgIctxe8KOQVzBVgTLl/w==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.86_biqbaboplfbrettd7655fr4n2y
+      leaflet: 1.9.4
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-leaflet: 4.2.1_p7e52lah55xmyywv7f3e7owrmy
     dev: false
 
   /@cogoport/maps/1.0.3_iiqcy6nd2qcbytr4g6g5nqqeii:
@@ -11663,6 +11681,37 @@ packages:
       '@babel/runtime': 7.22.6
       '@types/hoist-non-react-statics': 3.3.1
       '@types/react': 18.2.16
+      '@types/use-sync-external-store': 0.0.3
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-is: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  /react-redux/8.1.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-5W0QaKtEhj+3bC0Nj0NkqkhIv8gLADH/2kYFMTHxCVqQILiWzLv6MaLuV5wJU3BQEdHKzTfcvPN0WMS6SC1oyA==}
+    peerDependencies:
+      '@types/react': ^16.8 || ^17.0 || ^18.0
+      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+      react-native: '>=0.59'
+      redux: ^4 || ^5.0.0-beta.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+      redux:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.22.6
+      '@types/hoist-non-react-statics': 3.3.1
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
