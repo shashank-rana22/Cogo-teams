@@ -27,7 +27,7 @@ function UploadComplianceDocs({
 }) {
 	const { primary_service, servicesList } = useContext(ShipmentDetailContext);
 
-	const { docs, loading } = useGetSaasComplianceDocs({ primary_service, task });
+	const { docs, loading } = useGetSaasComplianceDocs({ primary_service, task, servicesList });
 
 	const { uploadedDocs: allUploadedDocs, docLoading, getDocs } = useGetListShipmentDocuments({
 		params: {

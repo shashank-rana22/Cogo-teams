@@ -1245,6 +1245,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.ff_cost_booking,
 			},
 			{
+				key           : 'coe-igm_desk',
+				title         : 'IGM Desk',
+				href          : '/v2/igm-desk',
+				as            : '/v2/igm-desk',
+				type          : 'link',
+				main_apis     : ['list_igm_desk_shipments'],
+				possible_apis : [...apis.igm_shipment, ...apis.igm_desk],
+			},
+			{
 				key       : 'coe-bl_do',
 				title     : 'Authority Desk',
 				href      : '/bl-do',
