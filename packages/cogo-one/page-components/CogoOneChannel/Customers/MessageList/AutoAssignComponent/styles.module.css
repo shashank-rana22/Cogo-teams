@@ -71,12 +71,8 @@
 	}
 }
 
-.action_label {
-	margin-left: 8px;
-	font-size: 12px;
-}
-
 .action_button {
 	display: flex;
 	padding: 0;
+	cursor: pointer;
 }

@@ -22,7 +22,6 @@ function Templates({
 	dialNumber = '',
 	setDialNumber = () => {},
 	viewType = '',
-	selectedAutoAssign = {},
 	userName = '',
 }) {
 	const [customizableData, setCustomizableData] = useState({});
@@ -86,7 +85,6 @@ function Templates({
 						setDialNumber={setDialNumber}
 						maskedMobileNumber={maskedMobileNumber}
 						userName={userName}
-						selectedAutoAssign={selectedAutoAssign}
 					/>
 					<div className={styles.container}>
 						<Input

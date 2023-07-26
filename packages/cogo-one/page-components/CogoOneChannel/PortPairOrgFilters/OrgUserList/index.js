@@ -28,6 +28,8 @@ function OrgUsersList({
 	modalType = '',
 	selectedAutoAssign = {},
 	setSelectedAutoAssign = () => {},
+	setSelectAll = () => {},
+	selectAll = false,
 }) {
 	const [pageLimit, setPageLimit] = useState(null);
 
@@ -35,6 +37,7 @@ function OrgUsersList({
 		formattedOrgUsersList = [],
 		loading = false,
 		handleScroll = () => {},
+		setListData,
 	} = useListOrgUsers({ organizationId: listServiceProviders, pageLimit });
 
 	const onCardClick = ({ item }) => {
@@ -82,6 +85,7 @@ function OrgUsersList({
 	const modifiedList = loading ? [...Array(LOADER_COUNT).fill({})] : formattedOrgUsersList;
 
 	const handleSelectAll = ({ event }) => {
+		setSelectAll(event.target.checked);
 		if (event.target.checked) {
 			setSelectedUsers(() => {
 				const ALL_USER_DATA = {};
@@ -119,16 +123,30 @@ function OrgUsersList({
 	return (
 		<div className={styles.port_pair_view}>
 			<div className={styles.all_user_select}>
-				<Checkbox disabled={isEmpty(modifiedList)} onChange={(event) => handleSelectAll({ event })} />
+				<Checkbox
+					checked={selectAll}
+					disabled={isEmpty(modifiedList)}
+					onChange={(event) => handleSelectAll({ event })}
+				/>
 				{' '}
 				Select All
 				<Select
 					value={pageLimit}
-					onChange={setPageLimit}
+					onChange={(val) => {
+						setPageLimit(val);
+						setListData({
+							list  : [],
+							total : 0,
+						});
+						setSelectAll(false);
+						setSelectedUsers({});
+					}}
+					disabled={isEmpty(modifiedList)}
 					size="sm"
 					placeholder="Select Books"
 					options={USER_SELECT_PAGINATION}
 					className={styles.selector}
+
 				/>
 			</div>
 			<div className={cl`${styles.container} ${!modalType || isEmpty(modifiedList) ? styles.empty_list : ''}`}>

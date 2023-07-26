@@ -33,7 +33,7 @@ function AutoAssignComponent({
 						setAutoAssignChats(false);
 					}}
 				>
-					Bulk Select
+					Select Chat
 				</Button>
 			) : (
 				<div className={cl`${styles.show_auto_assign} 
@@ -72,15 +72,13 @@ function AutoAssignComponent({
 									visible={popoverVisible}
 									onClickOutside={() => setPopoverVisible((prev) => !prev)}
 								>
-									<Button
-										size="sm"
-										themeType="secondary"
+									<div
 										className={styles.action_button}
 										onClick={() => setPopoverVisible((prev) => !prev)}
+										role="presentation"
 									>
 										<IcMListView height={15} width={15} />
-										<div className={styles.action_label}>Actions</div>
-									</Button>
+									</div>
 								</Popover>
 
 							</>

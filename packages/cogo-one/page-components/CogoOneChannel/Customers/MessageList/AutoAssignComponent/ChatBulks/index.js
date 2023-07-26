@@ -42,7 +42,7 @@ function ChatBulks({
 					}}
 					className={styles.popover_button}
 				>
-					Template Send
+					Send Template
 				</Button>
 			)}
 		</div>

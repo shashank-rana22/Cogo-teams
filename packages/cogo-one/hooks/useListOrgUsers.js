@@ -63,6 +63,7 @@ const useListOrgUsers = ({ organizationId = [], pageLimit }) => {
 	return {
 		formattedOrgUsersList: organizationId ? formatOrganizationUsers({ data: listData }) : [],
 		loading,
+		setListData,
 		handleScroll,
 	};
 };

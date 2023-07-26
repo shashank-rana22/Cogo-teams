@@ -28,6 +28,7 @@ function PortPairOrgFilters({
 		originDetails      : {},
 		destinationDetails : {},
 	});
+	const [selectAll, setSelectAll] = useState(false);
 
 	const { originDetails = {}, destinationDetails = {} } = portDetails;
 	const divRef = useRef(null);
@@ -125,6 +126,8 @@ function PortPairOrgFilters({
 			originDetails      : {},
 			destinationDetails : {},
 		}));
+		setSelectAll(false);
+		setSelectedUsers({});
 	};
 
 	const handleCancel = () => {
@@ -211,6 +214,8 @@ function PortPairOrgFilters({
 						modalType={modalType}
 						selectedAutoAssign={selectedAutoAssign}
 						setSelectedAutoAssign={setSelectedAutoAssign}
+						setSelectAll={setSelectAll}
+						selectAll={selectAll}
 					/>
 
 					{modalType ? (

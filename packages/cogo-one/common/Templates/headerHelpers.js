@@ -55,7 +55,6 @@ export function Header({
 	setDialNumber = () => {},
 	maskedMobileNumber = '',
 	userName = '',
-	selectedAutoAssign = {},
 }) {
 	const Component = HEADER_COMPONENT_MAPPING[type] || null;
 
@@ -68,9 +67,6 @@ export function Header({
 		new_user_outbound: {
 			type: 'showUserName',
 			userName,
-		},
-		bulk_communication: {
-			selectedAutoAssign,
 		},
 	};
 

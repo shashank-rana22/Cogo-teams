@@ -90,3 +90,10 @@
 .port_pair_template {
 	margin-top: 40px;
 }
+
+.empty_page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 6%;
+}

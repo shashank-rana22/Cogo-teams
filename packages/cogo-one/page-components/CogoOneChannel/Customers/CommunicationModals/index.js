@@ -98,7 +98,10 @@ function CommunicationModals({
 							{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.sp_contacts ? (
 								<div className={cl`${styles.action} ${styles.sp_contacts}`}>
 									<IcMAppAddAccount
-										onClick={() => setSendBulkTemplates((prevVal) => !prevVal)}
+										onClick={() => {
+											setSendBulkTemplates((prevVal) => !prevVal);
+											setIsChecked(false);
+										}}
 										height={25}
 										width={25}
 										fill="#432609"
