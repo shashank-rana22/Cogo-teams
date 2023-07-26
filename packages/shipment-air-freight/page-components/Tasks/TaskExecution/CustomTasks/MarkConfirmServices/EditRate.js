@@ -18,7 +18,7 @@ const EXPORT_INCOTERMS = ['ddp', 'dap', 'dat', 'cpt', 'cip', 'cif', 'cfr'];
 const START_INDEX_FOR_ORIGIN_LOCAL = 0;
 const START_INDEX_FOR_DESTINATION_LOCAL = 2;
 
-function CustomLayout({ localControls, controlForLocal, errors, task }) {
+function CustomLayout({ localControls = {}, controlForLocal = {}, errors = {}, task = {} }) {
 	return (
 		<Layout
 			fields={localControls}
@@ -81,6 +81,7 @@ function EditRate({
 		service_type: task?.service_type,
 		servicesList,
 		subsidiaryService,
+		shipment_data,
 	});
 
 	const requiredControls = requiredRawControls.map((ctrl) => ({
