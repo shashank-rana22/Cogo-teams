@@ -93,6 +93,7 @@ function EditRate({
 	const localRawControls = getLocalControls(
 		task?.service_type,
 		formattedRate,
+		shipment_data,
 	);
 
 	const defaultValues = getDefaultValues(requiredControls);
