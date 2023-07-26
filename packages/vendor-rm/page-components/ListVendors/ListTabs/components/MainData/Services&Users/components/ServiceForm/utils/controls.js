@@ -1,25 +1,18 @@
-import officeLocations from '../../../../../../../../../utils/office-locations.json';
-import categoryOptions from '../../../../../../../../utils/category-options';
-import subCategoryOptions from '../../../../../../../../utils/sub-category-options';
+import { startCase } from '@cogoport/utils';
 
-const getControls = ({ watchCategory = '', pocOptions }) => [
+import officeLocations from '../../../../../../../../../utils/office-locations.json';
+
+const getControls = ({ pocOptions }) => [
 	{
 		name        : 'category',
 		label       : 'Select Category',
-		type        : 'select',
+		type        : 'asyncSelect',
 		placeholder : 'Select a Category',
-		options     : categoryOptions,
+		asyncKey    : 'list_expense_category',
+		renderLabel : (item) => startCase(item.categoryName),
+		valueKey    : 'categoryName',
 		style       : { flexBasis: '46%', marginRight: '20px' },
 		rules       : { required: 'Category is required' },
-	},
-	{
-		name        : 'sub_category',
-		label       : 'Select Sub-category',
-		type        : 'select',
-		placeholder : 'Select a sub-category',
-		options     : subCategoryOptions[watchCategory],
-		style       : { flexBasis: '46%', marginRight: '20px' },
-		rules       : { required: 'Sub Category is required' },
 	},
 	{
 		name        : 'cogoport_office_id',
