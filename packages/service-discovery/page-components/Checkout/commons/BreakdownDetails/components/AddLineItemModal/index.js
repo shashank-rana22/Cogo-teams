@@ -12,6 +12,7 @@ function AddLineItemModal({
 	addLineItemData = {},
 	checkout_id = '',
 	getCheckout = () => {},
+	checkoutLoading = false,
 }) {
 	const ref = useRef({});
 
@@ -45,7 +46,6 @@ function AddLineItemModal({
 				<AddLineItem
 					CHARGE_CODE_DATA={CHARGE_CODE_DATA}
 					service_id={service_id}
-					loading={loading}
 					ref={ref}
 					checkout_id={checkout_id}
 				/>
@@ -54,10 +54,10 @@ function AddLineItemModal({
 			<Modal.Footer>
 				<Button
 					id="checkout_edit_quotation_add_line_item_btn"
-					disabled={loading}
+					loading={loading || checkoutLoading}
 					onClick={handleSubmitForm}
 				>
-					{!loading ? 'Add Line Item' : 'Saving...'}
+					{!loading && !checkoutLoading ? 'Add Line Item' : 'Saving...'}
 				</Button>
 			</Modal.Footer>
 		</Modal>

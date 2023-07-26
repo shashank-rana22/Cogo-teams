@@ -5,11 +5,8 @@ import styles from './styles.module.css';
 function ServiceBreakup({
 	item = {},
 	index = 0,
-	detail = {},
-	rate = {},
 	setRateDetails = () => {},
 	fclLocalEmpty = true,
-	shouldEditMargin = false,
 	disableForm = false,
 }) {
 	if (fclLocalEmpty) {
@@ -35,11 +32,8 @@ function ServiceBreakup({
 					setRateDetails={setRateDetails}
 					serviceIndex={index}
 					lineItemIndex={itemIndex}
-					rate={rate}
-					shouldEditMargin={shouldEditMargin && item?.service_type !== 'cargo_insurance'}
-					detail={detail}
-					service_type={item.service_type}
 					disableForm={disableForm}
+					item={item}
 				/>
 			))}
 		</div>

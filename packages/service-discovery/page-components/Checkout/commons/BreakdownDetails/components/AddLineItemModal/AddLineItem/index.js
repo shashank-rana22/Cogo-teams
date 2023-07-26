@@ -7,7 +7,7 @@ import getElementController from '../../../../forms/getElementController';
 import { getlineItemControls } from './getlineItemControls';
 import styles from './styles.module.css';
 
-function AddLineItem({ CHARGE_CODE_DATA, service_id, checkout_id }, ref) {
+function AddLineItem({ CHARGE_CODE_DATA = {}, service_id = '', checkout_id = '' }, ref) {
 	const [unitOptions, setUnitOptions] = useState([]);
 
 	const { control, watch, handleSubmit, formState:{ errors } } = useForm();

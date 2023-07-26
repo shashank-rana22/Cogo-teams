@@ -13,6 +13,7 @@ import EditLineItemModal from './components/EditLineItemModal';
 import Header from './components/Header';
 import LandingCost from './components/LandingCost';
 import ServiceBreakup from './components/ServiceBreakup';
+import renderServiceType from './renderServiceType';
 import styles from './styles.module.css';
 import useHandleBreakdownDetails from './useHandleBreakdownDetails';
 
@@ -30,11 +31,10 @@ function BreakdownDetails({
 	const {
 		rate,
 		detail,
-		primaryService,
 		conversions,
 		getCheckout,
-		shouldEditMargin,
 		checkout_id,
+		loading,
 	} = useContext(CheckoutContext);
 
 	const {
@@ -66,7 +66,7 @@ function BreakdownDetails({
 			) : null}
 
 			{rateDetails.map((item, index) => {
-				const { id = '', service_name = '' } = item || {};
+				const { id = '' } = item || {};
 
 				const fclLocalEmpty = !item?.line_items?.length
 				&& [
@@ -111,6 +111,8 @@ function BreakdownDetails({
 					setNoRatesPresent(true);
 				}
 
+				const service_details = detail?.services?.[item?.id];
+
 				return (
 					<Accordion
 						className={cl`${styles.container} ${styles[source]}`}
@@ -119,7 +121,9 @@ function BreakdownDetails({
 						title={(
 							<div className={styles.service_container}>
 								<div className={styles.service_details}>
-									<div className={styles.service_name}>{startCase(service_name)}</div>
+									<div className={styles.service_name}>
+										{renderServiceType(item, service_details)}
+									</div>
 
 									<ContainerDetails
 										primary_service={primary_service}
@@ -152,15 +156,8 @@ function BreakdownDetails({
 						<ServiceBreakup
 							item={item}
 							index={index}
-							conversions={conversions}
-							detail={detail}
-							primaryService={primaryService}
-							rate={rate}
 							setRateDetails={setRateDetails}
 							fclLocalEmpty={fclLocalEmpty}
-							service_name={service_name}
-							shouldEditMargin={shouldEditMargin}
-							getCheckout={getCheckout}
 							disableForm={disableForm}
 						/>
 
@@ -209,6 +206,7 @@ function BreakdownDetails({
 						setAddLineItemData={setAddLineItemData}
 						checkout_id={checkout_id}
 						getCheckout={getCheckout}
+						checkoutLoading={loading}
 					/>
 				) : null}
 
@@ -217,11 +215,10 @@ function BreakdownDetails({
 					<EditLineItemModal
 						editLineItemData={editLineItemData}
 						setEditLineItemData={setEditLineItemData}
-						setRateDetails={setRateDetails}
-						checkout_id={checkout_id}
 						rateDetails={rateDetails}
 						detail={detail}
 						getCheckout={getCheckout}
+						checkoutLoading={loading}
 					/>
 				) : null}
 
