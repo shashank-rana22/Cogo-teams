@@ -3,6 +3,8 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState } from 'react';
 
+const NUMBER_OF_MONTHS = 12;
+
 function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch }) {
 	const [shareOfferLetter, setShareOfferLetter] = useState(false);
 
@@ -21,7 +23,12 @@ function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterA
 		}
 
 		try {
-			const combinedObject = { ...joiningBonus, ...salaryDetails, init: ctc };
+			const combinedObject = {
+				...joiningBonus,
+				...salaryDetails,
+				init         : ctc,
+				init_monthly : ctc / NUMBER_OF_MONTHS,
+			};
 
 			const payload = {
 				employee_detail_id         : id,

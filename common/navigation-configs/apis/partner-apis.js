@@ -2709,6 +2709,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'list_organization_approvals',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	support_crm: [
 		{
@@ -6832,6 +6837,11 @@ const partner = {
 			api          : 'create_outbound_voice_call',
 			access_type  : 'private',
 			service_name : 'voice_call',
+		},
+		{
+			api          : 'get_ledger',
+			access_type  : 'private',
+			service_name : 'sage',
 		},
 	],
 	unified_dashboard: [
@@ -12650,6 +12660,16 @@ const partner = {
 			api          : 'list_cogoone_flash_rates_logs',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'list_lead_organizations',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'get_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
 		},
 	],
 	analytics_dashboard: [
