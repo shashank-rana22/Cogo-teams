@@ -128,6 +128,11 @@ const configs = () => {
 				func  : 'getApprovedByRecurring',
 				span  : 1.25,
 			},
+			{
+				label : '',
+				span  : 1,
+				func  : 'renderView',
+			},
 		],
 	};
 	return {

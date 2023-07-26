@@ -8,6 +8,7 @@ import SegmentedControl from '../../../commons/SegmentedControl';
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../commons/utils/formatDate';
 import List from '../../commons/List';
+import ViewRecurringSummery from '../../Expenses/CreateExpenseModal/ViewRecurringSummery';
 import useListExpense from '../hooks/useListExpense';
 import configs from '../utils/config';
 
@@ -177,6 +178,13 @@ function ShowMore({ vendorId }:Props) {
 				</div>
 			);
 		},
+		renderView: (itemData) => (
+			<div>
+				<ViewRecurringSummery
+					itemData={itemData}
+				/>
+			</div>
+		),
 	};
 
 	useEffect(() => {
