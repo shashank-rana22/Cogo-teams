@@ -3,6 +3,7 @@ import { upperCase } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import useGetServiceChargeCodes from '../../hooks/useGetServiceChargeCodes';
+import { calcWidth } from '../Layout/helpers/getTotalFields';
 
 import EditLineItems from './EditLineItems';
 import styles from './styles.module.css';
@@ -46,15 +47,17 @@ function EditServiceCharges(props) {
 		}));
 
 	const finalControls = (controls || []).map((item) => {
+		const newItem = { ...item, flex: calcWidth(item?.span) };
+
 		if (item?.name === 'code') {
 			return {
-				...item,
+				...newItem,
 				options,
 				onSearch: (val) => setQ(val),
 			};
 		}
 
-		return item;
+		return newItem;
 	});
 
 	const allOptions = useMemo(() => [...options, ...miscCharges], [miscCharges, options]);

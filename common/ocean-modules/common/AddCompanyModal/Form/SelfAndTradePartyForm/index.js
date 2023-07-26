@@ -1,4 +1,4 @@
-import { Loader } from '@cogoport/components';
+import { Loader, cl } from '@cogoport/components';
 import {
 	CreatableSelectController,
 	InputController,
@@ -27,8 +27,8 @@ const PINCODE_IN_ADDRESS_INDEX = 1;
 function SelfAndTradePartyForm({
 	companyType = '',
 	tradePartyType = '',
-	importer_exporter_id,
-	organization_id,
+	importer_exporter_id = '',
+	organization_id = '',
 }, ref) {
 	const {
 		data:{ list = [] } = {},
@@ -222,7 +222,7 @@ function SelfAndTradePartyForm({
 									{Error('email')}
 								</div>
 
-								<div className={styles.form_item_container}>
+								<div className={cl`${styles.form_item_container}  ${styles.mobile_number_controller}`}>
 									<label className={styles.form_label}>Mobile Number</label>
 									<MobileNumberController
 										size="sm"
@@ -234,8 +234,8 @@ function SelfAndTradePartyForm({
 							</div>
 
 							<div className={styles.row}>
-								<div className={styles.form_item_container}>
-									<label className={styles.form_label}>Alternate Mobile Number (optional)</label>
+								<div className={cl`${styles.form_item_container} ${styles.mobile_number_controller}`}>
+									<label className={styles.form_label}>Alternate Mobile Number (Optional)</label>
 									<MobileNumberController
 										size="sm"
 										control={control}

@@ -6,9 +6,6 @@ import Item from '../../../Layout/Item';
 
 import styles from './styles.module.css';
 
-const DEFAULT_SPAN = 12;
-const PERCENT_FACTOR = 100;
-const FLEX_OFFSET = 1;
 const INDEX_UPTO_REMOVE_ITEM = 1;
 
 function Child({
@@ -31,13 +28,11 @@ function Child({
 		<div className={styles.container}>
 			<div className={styles.item_container}>
 				{controls?.map((controlItem, i) => {
-					const { render, span } = controlItem || {};
-
-					const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR - FLEX_OFFSET;
+					const { render, flex = '16.6%' } = controlItem || {};
 
 					if (controlItem?.type === 'static') {
 						return (
-							<div style={{ width: `${flex}%` }} className={styles.static_container} key={keys[i]}>
+							<div style={{ width: flex }} className={styles.static_container} key={keys[i]}>
 								{render ? render(customValues) : customValues?.[controlItem?.name]}
 							</div>
 						);

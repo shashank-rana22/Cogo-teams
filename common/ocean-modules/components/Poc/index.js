@@ -112,6 +112,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '', pr
 								importer_exporter_id={importer_exporter_id}
 								shipment_data={shipment_data}
 								primary_service={primary_service}
+								stakeholdersTrigger={stakeholdersTrigger}
 							/>
 						)}
 

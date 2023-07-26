@@ -6,11 +6,13 @@ const MAX_SPAN = 12;
 const FLEX_OFFSET = 1;
 const PERCENT_FACTOR = 100;
 
+const FULL_WIDTH_CONTROL_TYPES = ['fieldArray', 'edit_service_charges'];
+
 function checkIfFieldArrayVisible(controls = []) {
 	return controls?.some?.(({ show = true } = {}) => show);
 }
 
-function calcWidth(span) {
+export function calcWidth(span) {
 	const validSpan = Math.min((span || DEFAULT_SPAN), MAX_SPAN);
 	return `${(validSpan / MAX_SPAN) * PERCENT_FACTOR - FLEX_OFFSET}%`;
 }
@@ -23,9 +25,11 @@ export default function getTotalFields({ fields = [], showElements = {} }) {
 
 	(fields || []).forEach((field) => {
 		const { type, name, span: fieldSpan = DEFAULT_SPAN, controls = [] } = field || {};
-		const { [name]: showItem = true } = showElements;
+		const isFullWidthControl = FULL_WIDTH_CONTROL_TYPES.includes(type);
 
-		if (type === 'fieldArray' && checkIfFieldArrayVisible(controls)) {
+		const { [name]: showItem = !isFullWidthControl } = showElements;
+
+		if (isFullWidthControl && checkIfFieldArrayVisible(controls)) {
 			if (!isEmpty(rowWiseFields)) {
 				TOTAL_FIELDS.push(rowWiseFields);
 			}
@@ -36,7 +40,7 @@ export default function getTotalFields({ fields = [], showElements = {} }) {
 			return;
 		}
 
-		if (!showItem || type === 'fieldArray') {
+		if (!showItem) {
 			return;
 		}
 

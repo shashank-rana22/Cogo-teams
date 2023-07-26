@@ -2,20 +2,19 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-const ACTIVE_STAKEHOLDER_MAPPING = {
-	consignee_shipper_booking_agent : 'consignee_shipper_id',
-	booking_agent                   : 'importer_exporter_id',
-};
+import filterServicesForKam from '../helpers/filterServicesForKam';
+
+const SERVICES_TO_BE_FILTERED_FOR = ['consignee_shipper_booking_agent', 'booking_agent'];
 
 function useGetServices({ shipment_data = {}, additional_methods = [], activeStakeholder = '' }) {
+	const [servicesData, setServicesData] = useState([]);
+
 	const [{ loading : servicesLoading }, trigger] = useRequest({
 		url    : 'fcl_freight/get_services',
 		method : 'GET',
 	}, { manual: true });
 
-	const [servicesData, setServicesData] = useState([]);
-
-	const { id = '' } = shipment_data;
+	const { id = '', end_to_end_shipment } = shipment_data || {};
 
 	const listServices = useCallback(
 		async () => {
@@ -27,20 +26,18 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 					},
 				});
 
-				if (activeStakeholder in ACTIVE_STAKEHOLDER_MAPPING) {
-					const servicesToShow = (res?.data?.summary || [])
-						.filter((service) => service?.importer_exporter?.id
-							=== shipment_data?.[ACTIVE_STAKEHOLDER_MAPPING[activeStakeholder]]);
+				const allServices = res.data?.summary || [];
 
-					setServicesData(servicesToShow);
+				if (!end_to_end_shipment?.is_possible || !SERVICES_TO_BE_FILTERED_FOR.includes(activeStakeholder)) {
+					setServicesData(allServices);
 				} else {
-					setServicesData(res?.data?.summary);
+					setServicesData(filterServicesForKam({ services: allServices, shipment_data }));
 				}
 			} catch (err) {
 				toastApiError(err);
 			}
 		},
-		[trigger, id, additional_methods, activeStakeholder, shipment_data],
+		[trigger, id, additional_methods, end_to_end_shipment?.is_possible, activeStakeholder, shipment_data],
 	);
 
 	useEffect(() => {

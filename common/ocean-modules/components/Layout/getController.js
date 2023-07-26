@@ -61,7 +61,7 @@ const getElementController = (type = 'text') => {
 			return RadioGroupController;
 
 		default:
-			return InputController;
+			return null;
 	}
 };
 

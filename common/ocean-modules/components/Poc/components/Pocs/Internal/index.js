@@ -9,14 +9,6 @@ import styles from './styles.module.css';
 function Internal({ data = [], setAddPoc = () => { }, loading = false, rolesPermission = {}, shipment_data = {} }) {
 	const internalData = getInternalPocData(data);
 	const canAddPoc = !!rolesPermission?.add_internal_poc;
-	const INDEX_0 = 0;
-
-	function PrintOriginDestination(key) {
-		return (
-			internalData[key][INDEX_0].trade_type === 'export'
-				? `origin ${startCase(key)}` : `destination ${startCase(key)}`
-		);
-	}
 
 	return (
 		<div>
@@ -41,7 +33,7 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false, rolesPerm
 						{Object.keys(internalData).map((key) => (
 							<div className={styles.service_container} key={key}>
 								<div className={styles.service_name}>
-									{key === 'fcl_freight_local_service' ? PrintOriginDestination(key) : startCase(key)}
+									{startCase(key)}
 								</div>
 								<div>
 									<ServiceIDGroup

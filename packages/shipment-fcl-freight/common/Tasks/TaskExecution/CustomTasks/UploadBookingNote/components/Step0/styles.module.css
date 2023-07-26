@@ -32,3 +32,11 @@
 		}
 	}
 }
+
+.tab_container {
+	:global {
+		.ui_tab_container {
+			padding: 0 !important;
+		}
+	}
+}

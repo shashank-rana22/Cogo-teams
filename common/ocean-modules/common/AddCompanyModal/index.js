@@ -21,6 +21,7 @@ function AddCompanyModal({
 	throughPoc = true,
 	shipment_data = {},
 	primary_service = {},
+	stakeholdersTrigger = () => {},
 }) {
 	const formRef = useRef(null);
 	const { trade_party_type = '', organization_id } = addCompany || {};
@@ -38,6 +39,7 @@ function AddCompanyModal({
 	const createRefetch = () => {
 		onClose();
 		tradePartnerTrigger();
+		stakeholdersTrigger();
 	};
 
 	const { apiTrigger:createTrigger, loading:createLoading } = useCreateShipmentTradePartner({

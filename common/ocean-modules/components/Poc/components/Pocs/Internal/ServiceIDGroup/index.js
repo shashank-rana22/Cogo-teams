@@ -9,7 +9,6 @@ const INDEX_0 = 0;
 
 function ServiceIDGroup({ data = [], setAddPoc = () => {}, rolesPermission = {}, shipment_type = '' }) {
 	const newData = data
-		.filter((item) => item.service_id !== null)
 		.map((item) => {
 			const { service_id, ...rest } = item;
 			return { service_id, ...rest };

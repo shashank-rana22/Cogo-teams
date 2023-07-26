@@ -6,6 +6,7 @@ import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotatio
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import checkLineItemsSum from './checkLineItemSum';
+import end2EndCheck from './end2EndCheck';
 import getStep3Controls from './getStep3Controls';
 
 const TRADE_MAPPING = {
@@ -28,12 +29,16 @@ const useGetStep3Data = ({
 	const SERVICE_IDS = [];
 	let trade_type;
 
+	const incoTerm = servicesList.find((serviceObj) => serviceObj.service_type === 'fcl_freight_service')?.inco_term;
+
 	(servicesList || []).forEach((serviceObj) => {
 		if ((serviceObj.service_type === 'fcl_freight_service'
 			|| serviceObj.service_type === 'fcl_freight_local_service')
 			&& task.service_type === 'fcl_freight_service') {
 			notMainService = true;
-			SERVICE_IDS.push(serviceObj.id);
+			if (end2EndCheck(serviceObj, shipment_data, incoTerm)) {
+				SERVICE_IDS.push(serviceObj.id);
+			}
 		}
 		if (serviceObj.id === task.service_id) {
 			trade_type = serviceObj?.trade_type;

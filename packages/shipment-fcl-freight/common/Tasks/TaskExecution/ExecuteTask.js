@@ -75,7 +75,7 @@ function ExecuteTask({
 			<MarkConfirmServices
 				task={task}
 				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
+				refetch={taskListRefetch}
 				primaryService={primary_service}
 				shipment_data={shipment_data}
 				servicesList={servicesList}
