@@ -20,6 +20,18 @@ const SALES_REASON_OPTIONS = [
 		value : 'shipment_parameters_changed',
 	},
 	{
+		label : 'Contracted Fleet Unavailable',
+		value : 'contracted_fleet_unavailable',
+	},
+	{
+		label : 'Truck Type Changed',
+		value : 'truck_type_changed',
+	},
+	{
+		label : 'Cargo Weight Increased / Decreased',
+		value : 'cargo_weight_changed',
+	},
+	{
 		label : 'I was just exploring',
 		value : 'i_was_just_exploring',
 	},
