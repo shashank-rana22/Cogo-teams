@@ -1,19 +1,25 @@
 import { Modal } from '@cogoport/components';
 import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCall } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
 
-import mobileNumberPads from '../../../configurations/number-pad';
+import mobileNumberPads from '../../../../../configurations/number-pad';
 
 import styles from './styles.module.css';
 
-function DialCallModal({ showDialModal, setShowDialModal = () => {} }) {
+const ELEMENTS_TO_BE_DELETED = 1;
+
+function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 	const dispatch = useDispatch();
+	const geo = getGeoConstants();
 
 	const [dialNumber, setDialNumber] = useState({
 		number       : '',
-		country_code : '+91',
+		country_code : geo.country.mobile_country_code,
 	});
 
 	const handleChange = (val) => {
@@ -23,10 +29,7 @@ function DialCallModal({ showDialModal, setShowDialModal = () => {} }) {
 	const handleDelete = () => {
 		setDialNumber({
 			...dialNumber,
-			number: (dialNumber?.number || '')?.substring(
-				0,
-				Number(dialNumber?.number?.length) - 1,
-			),
+			number: (dialNumber?.number || '')?.slice(GLOBAL_CONSTANTS.zeroth_index, -ELEMENTS_TO_BE_DELETED),
 		});
 	};
 
@@ -93,11 +96,7 @@ function DialCallModal({ showDialModal, setShowDialModal = () => {} }) {
 					className={styles.call_div}
 					onClick={handleClick}
 				>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/callButton-icon.svg"
-						alt="call button"
-						className={styles.call_icon}
-					/>
+					<IcMCall />
 				</div>
 			</Modal.Body>
 		</Modal>

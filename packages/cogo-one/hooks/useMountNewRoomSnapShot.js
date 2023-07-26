@@ -14,14 +14,14 @@ const useMountNewRoomSnapShot = ({ activeTab = {}, setActiveTab = () => {}, fire
 	const newRoomRef = useRef(null);
 
 	const { data } = activeTab || {};
-	const { user_id } = data || {};
+	const { mobile_no = '' } = data || {};
 
 	const mountNewRoom = useCallback(() => {
 		newRoomRef?.current?.();
 
 		const newUserRoomQuery = query(
 			collectionGroup(firestore, 'rooms'),
-			where('user_id', '==', user_id),
+			where('mobile_no', '==', mobile_no),
 			where('channel_type', '==', 'whatsapp'),
 			limit(DOCS_LIMIT),
 		);
@@ -50,7 +50,7 @@ const useMountNewRoomSnapShot = ({ activeTab = {}, setActiveTab = () => {}, fire
 		} catch (e) {
 			console.error('e', e);
 		}
-	}, [firestore, setActiveTab, user_id]);
+	}, [firestore, mobile_no, setActiveTab]);
 
 	useEffect(() => {
 		mountNewRoom();

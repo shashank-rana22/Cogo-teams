@@ -14,7 +14,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			service_provider                  : element?.service_provider,
 			service_provider_id               : element?.service_provider_id,
 			container_count,
-			active_booking                    : element?.ongoing_shipment,
+			active_booking                    : element?.ongoing_shipments,
 			allocation_ratio                  : undefined,
 			price                             : Number(validities?.total_price) / Number(container_count),
 			agent                             : element?.procured_by?.name,
