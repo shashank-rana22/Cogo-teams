@@ -1,0 +1,45 @@
+{
+    "initial_stage": {
+        "task_attributes":[
+            {
+                "task": "mark_vessel_departed",
+                "state": "containers_gated_in",
+                "status": "completed"
+            },
+            {
+                "task": "mark_igm_shipment_confirmed",
+                "state": "containers_gated_in",
+                "status": "pending"
+            }
+        ],
+        "state" : ["shipment_received", "confirmed_by_importer_exporter","in_progress"]
+    },
+    "awaiting_stage": {
+        "task_attributes":[
+            {
+                "task": ["upload_igm_document","upload_checklist"],
+                "state": "vessel_departed",
+                "status": "pending"
+                
+            },
+            {
+                "task": ["mark_igm_shipment_confirmed"],
+                "state": "containers_gated_in",
+                "status": "completed"
+            }
+        ],
+        "state" : ["shipment_received", "confirmed_by_importer_exporter","in_progress"]
+    },
+    "igm_filed": {
+        "task_attributes":[
+            {
+                "task": ["upload_igm_document","upload_checklist","mark_igm_shipment_confirmed"],
+                "status": "completed"
+            }
+        ],
+        "state" : ["shipment_received", "confirmed_by_importer_exporter","in_progress"]
+    },
+    "daily_report":  {
+        "state" : ["shipment_received", "confirmed_by_importer_exporter","in_progress"]
+    }
+}

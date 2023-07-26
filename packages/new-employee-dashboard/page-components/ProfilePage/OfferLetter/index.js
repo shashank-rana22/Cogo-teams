@@ -8,10 +8,12 @@ import StyledTable from '../../StyledTable';
 import getColumns from './getColumns';
 import styles from './styles.module.css';
 
-function OfferLetter({ offerLetter, offerLetterApiLoading }) {
+function OfferLetter({ offerLetter, offerLetterApiLoading, profileData }) {
 	const [viewCtcBreakupModal, setViewCtcBreakupModal] = useState(false);
 
-	const columns = getColumns({ setViewCtcBreakupModal, viewCtcBreakupModal });
+	const { is_offer_letter_applicable } = profileData?.detail || {};
+
+	const columns = getColumns({ setViewCtcBreakupModal, viewCtcBreakupModal, is_offer_letter_applicable });
 
 	if (offerLetterApiLoading) return <CommonLoader />;
 

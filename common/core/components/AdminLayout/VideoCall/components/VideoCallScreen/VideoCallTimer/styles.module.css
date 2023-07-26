@@ -1,0 +1,7 @@
+.stop_watch {
+	padding-left: 5px;
+
+	span {
+		padding-inline: 2px;
+	}
+}
