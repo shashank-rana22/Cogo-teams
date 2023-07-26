@@ -51,7 +51,7 @@ function ComparisonHeader({
 			</div>
 
 			<div className={styles.buttons_container}>
-				<Button
+				{/* <Button
 					onClick={() => {
 
 					}}
@@ -62,7 +62,7 @@ function ComparisonHeader({
 					style={{ padding: '20px 16px' }}
 				>
 					Share Quotation
-				</Button>
+				</Button> */}
 
 				<Button
 					type="button"

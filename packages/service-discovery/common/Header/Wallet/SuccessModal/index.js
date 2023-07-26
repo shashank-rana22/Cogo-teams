@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCopy } from '@cogoport/icons-react';
 import React from 'react';
 
-import copyToClipboard from '../copyToClipboard';
+import copyToClipboard from '../../../../helpers/copyToClipboard';
 
 import styles from './styles.module.css';
 

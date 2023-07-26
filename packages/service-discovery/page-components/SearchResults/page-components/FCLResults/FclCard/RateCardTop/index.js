@@ -65,6 +65,7 @@ function RateCardTop({
 
 	const renderCheckbox = () => {
 		if (isSelectedCard) return null;
+
 		return (
 			<Popover
 				placement="bottom"

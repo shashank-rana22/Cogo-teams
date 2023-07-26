@@ -10,6 +10,7 @@ import useGetMinPrice from '../useGetMinPrice';
 import { getFclPayload } from './configs';
 import List from './List';
 import styles from './styles.module.css';
+import getCombinedServiceDetails from './utils/getCombinedServiceDetails';
 import getServiceName from './utils/getServiceName';
 
 const INCOTERM_MAPPING = {
@@ -28,6 +29,8 @@ function AdditionalServices({ // used in search results and checkout
 	const { service_rates = [] } = rateCardData;
 
 	const { service_details = {}, service_type = '', trade_type = '', checkout_id = '' } = detail;
+
+	const finalServiceDetails = getCombinedServiceDetails(service_details, service_rates);
 
 	const [incoterm, setIncoterm] = useState(INCOTERM_MAPPING[trade_type]);
 
@@ -73,8 +76,8 @@ function AdditionalServices({ // used in search results and checkout
 
 	const serviceData = {};
 
-	Object.keys(service_rates).forEach((serviceId) => {
-		const serviceItem = service_details[serviceId];
+	Object.keys(finalServiceDetails).forEach((serviceId) => {
+		const serviceItem = finalServiceDetails[serviceId];
 
 		const serviceName = getServiceName(serviceItem);
 
@@ -136,7 +139,7 @@ function AdditionalServices({ // used in search results and checkout
 		let transportationData = null;
 
 		if (service.name.includes('transportation')) {
-			transportationData =				serviceData[`${service.trade_type}_ltl_freight`]
+			transportationData = serviceData[`${service.trade_type}_ltl_freight`]
 				|| serviceData[`${service.trade_type}_ftl_freight`]
 				|| serviceData[`${service.trade_type}_trailer_freight`];
 
@@ -149,7 +152,7 @@ function AdditionalServices({ // used in search results and checkout
 				? transportationData
 				: serviceData[service.name],
 			isSelected,
-			rateData: Object.values(service_rates).filter(
+			rateData: Object.values(finalServiceDetails).filter(
 				(serviceItem) => getServiceName(serviceItem) === service.name,
 			),
 		});

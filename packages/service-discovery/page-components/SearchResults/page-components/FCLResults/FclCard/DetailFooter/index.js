@@ -3,6 +3,7 @@ import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import Cancellation from '../../../../../Checkout/commons/Cancellation';
 import Detention from '../../../../common/Detention';
 import useUpdateDestinationDemurrageDays from '../../../../hooks/useUpdateDestinationDemurrageDays';
 
@@ -14,33 +15,13 @@ const detailsMapping = ['terms_and_condition', 'price_break_up', 'dnd_details', 
 
 const ADDITIONAL_DAYS_KEYS = ['destination_demurrage', 'origin_detention', 'origin_demurrage', 'destination_detention'];
 
-const detailsComponentMapping = {
-	terms_and_condition: {
-		key       : 'terms_and_condition',
-		label     : 'T&C',
-		Component : PriceBreakup,
-	},
-	price_break_up: {
-		key       : 'price_break_up',
-		label     : 'Price break up',
-		Component : PriceBreakup,
-	},
-	dnd_details: {
-		key       : 'dnd_details',
-		label     : 'D&D Fees',
-		Component : PriceBreakup,
-	},
-	other_details: {
-		key       : 'other_details',
-		label     : 'Other Details',
-		Component : PriceBreakup,
-	},
-};
+const BOLD_FONT_WEIGHT = 700;
+const MEDIUM_FONT_WEIGHT = 500;
 
 const ZERO = 0;
 
 function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
-	const [showDetails, setShowDetails] = useState('');
+	const [activeTab, setActiveTab] = useState('');
 
 	const { onSubmit = () => {} } = useUpdateDestinationDemurrageDays({
 		service_rates  : rateCardData?.service_rates,
@@ -83,6 +64,47 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 	};
 
 	const templateStyles = isCogoAssured ? styles.cogo_assured : {};
+
+	console.log('detail', detail);
+
+	const TABS_MAPPING = {
+		terms_and_condition: {
+			key          : 'terms_and_condition',
+			label        : 'T&C',
+			caseomponent : Cancellation,
+			props        : {
+				serviceType: 'fcl_freight',
+				detail,
+			},
+		},
+		price_break_up: {
+			key       : 'price_break_up',
+			label     : 'Price break up',
+			component : PriceBreakup,
+			props     : {
+				rateCardData,
+				detail,
+			},
+		},
+		dnd_details: {
+			key       : 'dnd_details',
+			label     : 'D&D Fees',
+			component : PriceBreakup,
+			props     : {
+				rateCardData,
+				detail,
+			},
+		},
+		other_details: {
+			key       : 'other_details',
+			label     : 'Other Details',
+			component : PriceBreakup,
+			props     : {
+				rateCardData,
+				detail,
+			},
+		},
+	};
 
 	return (
 		<>
@@ -135,29 +157,29 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 								role="presentation"
 								key={item}
 								className={styles.otherDetailsTag}
+								style={{ fontWeight: activeTab === item ? BOLD_FONT_WEIGHT : MEDIUM_FONT_WEIGHT }}
 								onClick={() => {
-									if (showDetails === '') {
-										setShowDetails(item);
-									} else {
-										setShowDetails('');
-									}
+									if (activeTab === item) {
+										setActiveTab('');
+									} else setActiveTab(item);
 								}}
 							>
-								{detailsComponentMapping[item].label}
+								{TABS_MAPPING[item].label}
 							</span>
 						))}
 					</div>
-					<div>
+					{/* <div>
 						CogoPoints 3000
-					</div>
+					</div> */}
 				</div>
 
 			</div>
-			{showDetails ? (
+			{activeTab ? (
 				<RateCardDetails
-					detailsComponentMapping={detailsComponentMapping}
+					TABS_MAPPING={TABS_MAPPING}
 					rateCardData={rateCardData}
-					showDetails={showDetails}
+					activeTab={activeTab}
+					setActiveTab={setActiveTab}
 					detail={detail}
 				/>
 			) : null}

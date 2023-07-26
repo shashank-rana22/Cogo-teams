@@ -13,6 +13,7 @@ const useSpotSearchService = ({ refetchSearch = () => {}, rateCardData = {}, che
 	const addService = async (values) => {
 		try {
 			await trigger({ data: values });
+			Toast.success('Service added successfully!');
 			refetchSearch({
 				screenObj: {
 					card_id : rateCardData.id,

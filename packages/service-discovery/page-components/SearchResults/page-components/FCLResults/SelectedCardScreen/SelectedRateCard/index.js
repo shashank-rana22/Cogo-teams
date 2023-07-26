@@ -48,8 +48,6 @@ function SelectedRateCard({
 		spot_search_detail: detail = {},
 	} = data || {};
 
-	const primary_service = detail?.service_type;
-
 	const { handleBook = () => {}, loading: createCheckoutLoading } = useCreateCheckout({
 		rateCardData,
 		spot_search_id: detail?.spot_search_id,
@@ -104,8 +102,7 @@ function SelectedRateCard({
 						<CargoInsurance
 							data={detail}
 							refetch={refetch}
-							primary_service={primary_service}
-							rate_card_id={rateCardData?.id}
+							rateCardData={rateCardData}
 						/>
 						<div className={styles.wrapper}>
 							<TotalLandedCost

@@ -1,11 +1,9 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
-function RateCardDetails({ detailsComponentMapping, rateCardData, showDetails, detail }) {
-	const [activeTab, setActiveTab] = useState(showDetails);
-
+function RateCardDetails({ TABS_MAPPING, activeTab, setActiveTab }) {
 	return (
 		<div className={styles.containerDetails}>
 
@@ -15,12 +13,12 @@ function RateCardDetails({ detailsComponentMapping, rateCardData, showDetails, d
 				fullWidth
 				className={styles.tabs_style}
 			>
-				{Object.values(detailsComponentMapping).map((tabItem) => {
-					const { key, label, Component } = tabItem;
+				{Object.values(TABS_MAPPING).map((tabItem) => {
+					const { key, label, component: ActiveComponent, props } = tabItem;
 
 					return (
 						<TabPanel key={key} name={key} title={label}>
-							<Component rateCardData={rateCardData} detail={detail} />
+							<ActiveComponent {...props} />
 						</TabPanel>
 					);
 				})}

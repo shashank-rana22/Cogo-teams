@@ -21,9 +21,7 @@ function FeedBackModal({
 }) {
 	const { control, formState:{ errors }, handleSubmit, reset } = useForm();
 
-	console.log('testing', requestService);
-
-	const controls = getControls(requestService?.service_type || data?.service_type);
+	const controls = getControls(requestService?.service_type || details?.service_type);
 
 	const { loading, onSubmitFeedback } = useRequestForRate({
 		onClose,
@@ -99,7 +97,7 @@ function FeedBackModal({
 							<li>
 								The Services Include:-
 								<ul>Origin Transportation</ul>
-								{data?.service_type === 'fcl_freight' ? (
+								{details?.service_type === 'fcl_freight' ? (
 									<ul>Origin Fcl Customs</ul>
 								) : (
 									<ul>Origin Air Customs</ul>

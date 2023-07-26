@@ -1,10 +1,12 @@
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcACarriageInsurancePaidTo, IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import DeleteServiceModal from '../DeleteServiceModal';
+import getCombinedServiceDetails from '../AdditionalServices/utils/getCombinedServiceDetails';
+import AccordianView from '../common/AccordianView';
+import DeleteServiceModal from '../common/DeleteServiceModal';
 
+import AccordianContent from './AccordianContent';
+import CargoInsuranceContainer from './CargoInsuranceContainer';
 import CargoInsuranceModal from './CargoInsuranceModal';
 import useDeleteCargoInsurance from './CargoInsuranceModal/hooks/useDeleteCargoInsurance';
 import styles from './styles.module.css';
@@ -16,10 +18,10 @@ const isCargoInsurancePresent = (services) => {
 	return isAlreadyPresent;
 };
 
-function CargoInsurance({ data = {}, refetch = () => {} }) {
+function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
-	const [isHovered, setIsHovered] = useState(false);
+	const [active, setActive] = useState('');
 
 	const primary_service = data?.search_type || data?.primary_service;
 
@@ -33,6 +35,8 @@ function CargoInsurance({ data = {}, refetch = () => {} }) {
 		user_id = '',
 	} = data || {};
 
+	const finalServiceDetails = getCombinedServiceDetails(service_details, rateCardData.service_rates);
+
 	const { loading, handleDelete } = useDeleteCargoInsurance({
 		service_details,
 		checkout_id,
@@ -41,11 +45,11 @@ function CargoInsurance({ data = {}, refetch = () => {} }) {
 		refetch,
 	});
 
-	const cargoInsuranceAlreadyTaken = isCargoInsurancePresent(service_details);
+	const cargoInsuranceAlreadyTaken = isCargoInsurancePresent(finalServiceDetails);
 
-	const [isSelected, setIsSelected] = useState(cargoInsuranceAlreadyTaken);
+	const [isSelected, setIsSelected] = useState(cargoInsuranceAlreadyTaken || {});
 
-	const primaryServiceDetails = Object.values(service_details || {}).find(
+	const primaryServiceDetails = Object.values(finalServiceDetails || {}).find(
 		(item) => item.service_type === primary_service,
 	);
 
@@ -55,68 +59,24 @@ function CargoInsurance({ data = {}, refetch = () => {} }) {
 
 	const onClickDelete = async () => { await handleDelete(); };
 
-	const handleMouseEnter = () => { setIsHovered(true); };
-
-	const handleMouseLeave = () => { setIsHovered(false); };
-
-	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
-
-	useEffect(() => {
-		setIsSelected(cargoInsuranceAlreadyTaken);
-	}, [cargoInsuranceAlreadyTaken]);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Other Services</div>
 
-			<div className={styles.wrapper}>
-				<div className={styles.left_section}>
-
-					<IcACarriageInsurancePaidTo
-						width={32}
-						height={32}
+			<AccordianView
+				itemKey="cargo_insurance"
+				active={active}
+				setActive={setActive}
+				isOpen={!!(isSelected && !isEmpty(isSelected))}
+				title={(
+					<CargoInsuranceContainer
+						cargoInsuranceDetails={isSelected}
+						setShowDeleteModal={setShowDeleteModal}
+						setShowModal={setShowModal}
 					/>
-
-					<span className={styles.label}>Cargo Insurance</span>
-				</div>
-
-				<div className={styles.right_section}>
-					{isEmpty(isSelected) ? (
-						<div className={styles.starting_at_price}>Starting at $0.25/km</div>
-					) : (
-						<strong className={styles.rate_found}>
-							{formatAmount({
-								currency : isSelected?.saas_rate?.currency,
-								amount   : isSelected?.saas_rate?.totalCharges,
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							})}
-						</strong>
-					)}
-
-					{!isEmpty(isSelected) ? (
-						<SelectedIcon
-							onMouseEnter={handleMouseEnter}
-							onMouseLeave={handleMouseLeave}
-							height={25}
-							width={25}
-							className={styles.tick_icon}
-							onClick={() => setShowDeleteModal(true)}
-						/>
-					) : (
-						<IcMPlus
-							height={22}
-							width={22}
-							className={styles.add_icon}
-							fill="black"
-							onClick={() => setShowModal(true)}
-						/>
-					)}
-				</div>
-			</div>
+				)}
+				content={<AccordianContent data={isSelected} />}
+			/>
 
 			{showModal && (
 				<CargoInsuranceModal
@@ -132,18 +92,17 @@ function CargoInsurance({ data = {}, refetch = () => {} }) {
 					addCargoInsurance={showModal}
 					setAddCargoInsurance={setShowModal}
 					setDone={setIsSelected}
-					service_details={service_details}
 					checkout_id={checkout_id}
 				/>
 			)}
 
 			{showDeleteModal ? (
 				<DeleteServiceModal
-					show={showDeleteModal}
-					setShow={setShowDeleteModal}
 					service_name="cargo_insurance"
+					show={showDeleteModal}
 					onClick={onClickDelete}
 					loading={loading}
+					setShow={setShowDeleteModal}
 				/>
 			) : null}
 		</div>
