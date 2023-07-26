@@ -26,17 +26,17 @@ function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiv
 			};
 		});
 
-		serviceWiseData.forEach((service) => {
-			const serviceValue = service.value;
+		serviceWiseData.forEach((item) => {
+			const serviceValue = item.service;
 
-			service.data.forEach((item, index) => {
-				setValue(`${serviceValue}${index}`, item.shipment_capacity);
+			item.data.forEach((subItem, index) => {
+				setValue(`${serviceValue}${index}`, subItem.shipment_capacity);
 			});
 		});
 	}, [data, setValue]);
 
 	return (
-		<div className={styles.container}>
+		<div key={loading} className={styles.container}>
 
 			<h4>
 				Set Active Shipment Capacity per Agent
@@ -57,7 +57,7 @@ function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiv
 							return (
 								<div key={item.id} className={styles.item}>
 									{slab_lower_limit}
-									{slab_upper_limit ? `-${slab_upper_limit} ` : ''}
+									{(slab_upper_limit && slab_upper_limit != 99999) ? `-${slab_upper_limit} ` : ''}
 									{' '}
 									{slab_unit}
 									s Exp.
@@ -81,7 +81,7 @@ function ShipmentCapacities({ agentExperienceSlabs = [], configId = '', setActiv
 						{[...Array(agentExperienceSlabs.length).keys()].map((key) => (
 
 							<div
-								key={key}
+								key={`${service.value}${key}`}
 								className={styles.capacity_input}
 							>
 								<InputController

@@ -41,6 +41,7 @@ const useCreateShipmentCapacities = ({ setActiveItem = () => {} }) => {
 			setActiveItem('total_shipment_capacity');
 			Toast.success('Shipment Capacities have been set successfully');
 		} catch (error) {
+			console.log('error', error);
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};

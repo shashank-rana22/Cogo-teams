@@ -19,11 +19,11 @@ const orgSubTypeOptions = {
 	],
 	channel_partner: [
 		{
-			value : 'overseas',
+			value : 'overseas_cp',
 			label : 'Overseas CP',
 		},
 		{
-			value : 'domestic',
+			value : 'domestic_cp',
 			label : 'Domestic CP',
 		},
 	],

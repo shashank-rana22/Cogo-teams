@@ -23,9 +23,14 @@ const getSlabs = ({ experience = 'default', isEditMode = false, data = {} }) => 
 	if (experience === 'default') return DEFAULT_SLABS;
 
 	if (isEditMode) {
-		return data.agent_experience_slabs?.map((item) => {
+		return data.agent_experience_slabs?.map((item, index) => {
 			const { slab_unit, slab_lower_limit, slab_upper_limit } = item;
-			return { slab_unit, slab_lower_limit, slab_upper_limit };
+
+			return {
+				slab_unit,
+				slab_lower_limit: index === 3 ? `${slab_lower_limit}+` : slab_lower_limit || '0',
+				slab_upper_limit,
+			};
 		});
 	}
 	return CUSTOM_DEFAULT_SLAB;
@@ -36,7 +41,7 @@ function SetConfiguration({ setActiveItem = () => {}, data = {} }) {
 
 	const [showForm, setShowForm] = useState(false);
 
-	const { mode = '', configId } = router.query;
+	const { mode = '', id:configId } = router.query;
 
 	const isEditMode = mode === 'edit';
 
@@ -148,20 +153,7 @@ function SetConfiguration({ setActiveItem = () => {}, data = {} }) {
 							</div>
 						)}
 
-						<div className={styles.btn_container}>
-
-							{experience === 'default' && (
-								<Button
-									size="md"
-									themeType="secondary"
-									className={styles.reset_btn}
-									loading={loading}
-									onClick={() => setValue('agent_experience_slabs', CUSTOM_DEFAULT_SLAB)}
-								>
-									Reset
-								</Button>
-							)}
-
+						{!isEditMode && (
 							<Button
 								size="md"
 								themeType="primary"
@@ -175,15 +167,14 @@ function SetConfiguration({ setActiveItem = () => {}, data = {} }) {
 							>
 								Save
 							</Button>
-
-						</div>
+						)}
 
 					</div>
 				</div>
 
 			</div>
 
-			{showForm && (
+			{(showForm || isEditMode) && (
 				<ShipmentCapacities
 					agentExperienceSlabs={agentExperienceSlabs}
 					configId={configId}

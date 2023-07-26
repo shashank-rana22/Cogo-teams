@@ -1,5 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import getExperienceSlabs from './getExperienceSlabs';
+
 const getServiceDetails = (str = '') => {
 	const SERVICE_OBJ = {};
 
@@ -22,7 +24,7 @@ const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '', isE
 		const lastCharacter = str.slice(-1);
 		str = str.slice(0, -1);
 
-		const slabDetails = agentExperienceSlabs[Number(lastCharacter)];
+		const slabDetails = agentExperienceSlabs[Number(lastCharacter)] || {};
 
 		const serviceObj = getServiceDetails(str) || {};
 
@@ -40,7 +42,10 @@ const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '', isE
 
 	const payload = {
 		shipments_capacity_details: shipmentCapacities,
-		...(isEditMode ? { id: configId } : { config_id: configId }),
+		...(isEditMode ? {
+			id                     : configId,
+			agent_experience_slabs : getExperienceSlabs(agentExperienceSlabs),
+		} : { config_id: configId }),
 	};
 
 	return payload;

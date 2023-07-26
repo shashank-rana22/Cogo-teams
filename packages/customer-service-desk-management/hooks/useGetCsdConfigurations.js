@@ -9,7 +9,7 @@ const useGetCsdConfigurations = (source = '') => {
 	const router = useRouter();
 	const configId = router?.query?.id;
 
-	const [params] = useState({});
+	const [params, setParams] = useState({});
 
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
@@ -45,7 +45,7 @@ const useGetCsdConfigurations = (source = '') => {
 
 	useEffect(() => {
 		fetchList();
-	}, [params, fetchList]);
+	}, []);
 
 	const { list = [], ...pageData } = data || {};
 
