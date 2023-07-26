@@ -3,6 +3,7 @@ import { Button } from '@cogoport/components';
 import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../../../constants/create-form-stepper-keys-mapping';
 
 import ListObjectiveUserMappings from './ListObjectiveUserMappings';
+import ModeWiseButtons from './ModeWiseButton';
 import styles from './styles.module.css';
 import useCreateObjective from './useCreateObjective';
 import useGetObjectiveUserMappings from './useGetObjectiveUserMappings';
@@ -15,62 +16,6 @@ function SetObjectiveWeightage(props) {
 	const { list, listLoading, getNextPage, paginationData } = useGetObjectiveUserMappings({ formValues });
 
 	const { control, createLoading, onCreate } = useCreateObjective({ formValues, setActiveTabDetails });
-
-	const MODE_BASIS_BUTTON_MAPPING = {
-		create: (
-			<>
-				<Button
-					size="lg"
-					type="button"
-					themeType="secondary"
-					style={{ marginRight: '12px' }}
-					onClick={() => onCreate({ distribute_equally: true })}
-					loading={createLoading}
-				>
-					Equally Distribute & Send For Verification
-				</Button>
-
-				<Button
-					size="lg"
-					type="button"
-					themeType="primary"
-					onClick={() => onCreate({ distribute_equally: false })}
-					loading={createLoading}
-				>
-					Create Objective & Send For Verification
-				</Button>
-			</>
-		),
-		edit: (
-			<>
-				<Button
-					size="lg"
-					type="button"
-					themeType="tertiary"
-					style={{ marginRight: '12px' }}
-				>
-					Equally Distribute
-				</Button>
-
-				<Button
-					size="lg"
-					type="button"
-					themeType="secondary"
-					style={{ marginRight: '12px' }}
-				>
-					Replace & Send For Verification
-				</Button>
-
-				<Button
-					size="lg"
-					type="button"
-					themeType="primary"
-				>
-					Duplicate & Send For Verification
-				</Button>
-			</>
-		),
-	};
 
 	return (
 		<div className={styles.container}>
@@ -113,7 +58,11 @@ function SetObjectiveWeightage(props) {
 				</Button>
 
 				<div className={styles.button_container}>
-					{MODE_BASIS_BUTTON_MAPPING[activeTabDetails.mode]}
+					<ModeWiseButtons
+						mode={activeTabDetails.mode}
+						onCreate={onCreate}
+						createLoading={createLoading}
+					/>
 				</div>
 			</div>
 		</div>

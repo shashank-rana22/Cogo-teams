@@ -1,9 +1,13 @@
 import { Tooltip } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import SELECT_AGENTS_KEYS_MAPPING from '../../../../../../constants/select-agents-keys-mapping';
+
 import styles from './styles.module.css';
 
 const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
+
+const { SELECT_ALL, EXCLUDE_ONLY } = SELECT_AGENTS_KEYS_MAPPING;
 
 const CARD_DATA_MAPPING = [
 	{
@@ -59,8 +63,11 @@ const CARD_DATA_MAPPING = [
 		name     : 'agents',
 		label    : 'Applicable On',
 		accessor : ({ selectMode, user_ids }) => {
-			if (selectMode === 'select_all') {
+			if (selectMode === SELECT_ALL) {
 				return 'All Agents';
+			}
+			if (selectMode === EXCLUDE_ONLY) {
+				return `All Except ${user_ids.length} Agents`;
 			}
 			return `${user_ids.length} Agents`;
 		},
