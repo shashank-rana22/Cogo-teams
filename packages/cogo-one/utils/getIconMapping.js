@@ -1,7 +1,9 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMSearchdark,
 	IcMDocument, IcMShip,
 	IcMTicket,
+	IcMProfile,
 } from '@cogoport/icons-react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
@@ -20,17 +22,13 @@ const ICON_MAPPING = [
 	{
 		name    : 'profile',
 		content : 'Profile',
-		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/profile.svg"
-			alt="profile"
-			style={{ width: '18px', heigh: '18px' }}
-		/>,
+		icon    : <IcMProfile width={18} height={18} />,
 	},
 	{
 		name    : 'organization',
 		content : 'Organization Details',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/organ-svg.svg"
+			src={GLOBAL_CONSTANTS.image_url.organization}
 			alt="organization"
 			style={{ width: '20px', heigh: '20px' }}
 		/>,
@@ -44,7 +42,7 @@ const ICON_MAPPING = [
 		name    : 'user_activity',
 		content : 'User Activity',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user-actrivity.svg"
+			src={GLOBAL_CONSTANTS.image_url.user_activity}
 			alt="activities"
 		/>,
 	},
@@ -52,7 +50,7 @@ const ICON_MAPPING = [
 		name    : 'reminder',
 		content : 'Reminder',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/alarm-timer.svg"
+			src={GLOBAL_CONSTANTS.image_url.clock}
 			alt="reminder"
 		/>,
 	},
@@ -60,7 +58,7 @@ const ICON_MAPPING = [
 		name    : 'notes',
 		content : 'Notes',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note.svg"
+			src={GLOBAL_CONSTANTS.image_url.note}
 			alt="notes"
 		/>,
 	},
@@ -68,7 +66,7 @@ const ICON_MAPPING = [
 		name    : 'quick_actions',
 		content : 'Quick Actions',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
+			src={GLOBAL_CONSTANTS.image_url.quick_actions}
 			alt="actions"
 		/>,
 	},
@@ -87,7 +85,7 @@ const ICON_MAPPING = [
 		name    : 'customer_insights',
 		content : 'Customer Insights',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg"
+			src={GLOBAL_CONSTANTS.image_url.customer_insights}
 			alt="insights"
 		/>,
 	},
@@ -100,7 +98,7 @@ const ICON_MAPPING = [
 		name    : 'help_desk',
 		content : 'Help Desk',
 		icon    : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg"
+			src={GLOBAL_CONSTANTS.image_url.help_desk}
 			alt="faq"
 			style={{ width: '25px', heigh: '25px' }}
 		/>,

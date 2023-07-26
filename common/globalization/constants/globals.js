@@ -293,6 +293,13 @@ const GLOBAL_CONSTANTS = {
 		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
 		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',
+		organization         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/organ-svg.svg',
+		user_activity        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user-actrivity.svg',
+		clock                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/alarm-timer.svg',
+		note                 : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note.svg',
+		quick_actions        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg',
+		customer_insights    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg',
+		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
 	},
 
 	video_call_ring_tone_url:
