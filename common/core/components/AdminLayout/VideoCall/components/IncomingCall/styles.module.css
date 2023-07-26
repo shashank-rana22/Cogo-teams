@@ -1,0 +1,120 @@
+.call_coming {
+	position: fixed;
+	top: 35px;
+	right: 35px;
+	z-index: 1000;
+	width: 23%;
+}
+
+.minimize_btn {
+	position: absolute;
+	top: 10px;
+}
+
+.minimize_icon {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.call_coming_body {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 10px 15px;
+	color: #fff;
+	background: #312d2d;
+	border-radius: 10px;
+}
+
+.call_coming_text {
+	padding: 5px;
+	font-size: 18px;
+	text-transform: capitalize;
+}
+
+.call_coming_btn {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 5px;
+}
+
+.minimize_call_icon {
+	width: 45px;
+	height: 45px;
+	padding: 7px;
+	margin: 4px;
+	border-radius: 50%;
+	fill: #fff;
+}
+
+.minimize_reject_icon {
+	background-color: #bf291e;
+}
+
+.minmize_accept_icon {
+	background-color: #849e4c;
+}
+
+.big_call_coming {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	height: 550px;
+	color: #fff;
+	background: #312d2d;
+	border-radius: 10px;
+}
+
+.avator {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.coming_call_text {
+	font-size: 18px;
+	text-align: center;
+}
+
+.agent_name {
+	font-size: 40px;
+	font-weight: 500;
+}
+
+.coming_call_options {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 40%;
+}
+
+.call_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 60px;
+	padding: 12px;
+	cursor: pointer;
+	border-radius: 50%;
+}
+
+.accept_call {
+	background-color: #849e4c;
+}
+
+.reject_call {
+	background-color: #bf291e;
+	rotate: 135deg;
+}
+
+.user_avatar {
+	border-radius: 50%;
+}

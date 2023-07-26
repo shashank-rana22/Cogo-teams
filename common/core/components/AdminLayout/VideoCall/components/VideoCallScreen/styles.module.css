@@ -1,0 +1,171 @@
+.minimize_video_call {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.hide_container {
+	display: none;
+}
+
+.container {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 9000;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	height: 100%;
+	padding: 44px;
+	background-color: #2e2828;
+	transform: translate(-50%, -50%);
+	animation-name: center-animation;
+	animation-duration: 0.5s;
+}
+
+@keyframes center-animation {
+	0% {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.hangup_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	background: #f44336;
+	border-radius: 50%;
+}
+
+.end_call_icon {
+	width: 28px;
+	height: 28px;
+	cursor: pointer;
+	fill: #fff;
+	transform: rotate(135deg);
+}
+
+.minimize_container {
+	position: fixed;
+	right: 5%;
+	bottom: 5%;
+	z-index: 9000;
+	display: flex;
+	align-items: center;
+	width: 350px;
+	padding: 18px 28px;
+	cursor: pointer;
+	background: rgb(122 121 121 / 20.6%);
+	border-radius: 48px;
+	animation-name: bottom-animation;
+	animation-duration: 0.5s;
+}
+
+@keyframes bottom-animation {
+	0% {
+		right: 8%;
+		bottom: 8%;
+	}
+
+	100% {
+		right: 5%;
+		bottom: 5%;
+	}
+}
+
+.minus_icon {
+	position: fixed;
+	top: 2%;
+	right: 2%;
+	z-index: 200;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	background-color: #6862627b;
+	border-radius: 5px;
+	fill: #fff;
+}
+
+.peer_video_stream {
+	width: 100%;
+	height: 100%;
+
+	video {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.avatar_screen {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.styled_avatar {
+	border-radius: 50% !important;
+}
+
+.header {
+	margin-bottom: 14px;
+	font-size: 40px;
+	font-weight: 500;
+	color: #fff;
+	text-align: center;
+}
+
+.call_screen {
+	width: 100%;
+	height: 100%;
+}
+
+.footer {
+	position: absolute;
+	bottom: 10%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 450px;
+	height: 80px;
+	padding: 22px;
+	margin-top: 22px;
+	color: #fff;
+	background: #55545442;
+	border-radius: 48px;
+}
+
+.call_text {
+	display: flex;
+	font-size: 18px;
+}
+
+.calling_options {
+	display: flex;
+	align-items: center;
+}
+
+.timer {
+	font-size: 20px;
+	font-weight: 600;
+	color: #fff;
+}

@@ -518,6 +518,10 @@ const apis = [
 		service_name : 'sage',
 	},
 	{
+		api         : 'put_air_coe_e_booking',
+		access_type : 'private',
+	},
+	{
 		api          : 'get_proforma_invoice',
 		access_type  : 'private',
 		service_name : 'sage',
@@ -1551,6 +1555,14 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api         : 'post_air_coe_e_booking',
+		access_type : 'private',
+	},
+	{
+		api         : 'put_air_coe_e_booking_cancel',
+		access_type : 'private',
+	},
+	{
 		api          : 'list_contracts',
 		access_type  : 'private',
 		service_name : 'contract',
@@ -1669,6 +1681,11 @@ const apis = [
 	},
 	{
 		api          : 'get_nomination_shipment_sell_quotations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'download_rail_domestic_container_details_as_csv',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

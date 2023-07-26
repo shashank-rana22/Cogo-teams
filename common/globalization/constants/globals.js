@@ -56,8 +56,8 @@ const GLOBAL_CONSTANTS = {
 		razer_pay_url: 'https://checkout.razorpay.com/v1/checkout.js',
 	},
 	sample_document_url: {
-		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com
-		/ab3309b85b52e198b4c2bb691a7fb609/new_employee_bulk_upload_sample_sheet.csv`,
+		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
+						a3072d28df04315514414abe46a8c2f0/new_employee_bulk_upload_sample_sheet.csv`,
 	},
 	flash_booking_charge_codes: [
 		'OTC',
@@ -259,6 +259,7 @@ const GLOBAL_CONSTANTS = {
 		over_due_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg',
 		due_in_svg          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg',
 		cogo_assured_svg    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg',
+		empty_data          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 		empty_data_image    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		awb_docs_images     : {
 			original_3:
@@ -294,6 +295,10 @@ const GLOBAL_CONSTANTS = {
 		ic_tree_single   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic_branch_single.svg',
 
 	},
+
+	video_call_ring_tone_url:
+	'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/microsoft_teams_audio_call_tone.mp3',
+
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 			+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
@@ -367,6 +372,7 @@ const GLOBAL_CONSTANTS = {
 			{ value: 'business_analyst', label: 'Business Analyst' },
 			{ value: 'product_analyst', label: 'Product Analyst' },
 			{ value: 'business_consultant', label: 'Business Consultant' },
+			{ value: 'key_accounts_manager', label: 'Key Accounts Manager' },
 		],
 		timezone_options: [
 			{
