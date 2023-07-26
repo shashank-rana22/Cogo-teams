@@ -96,6 +96,8 @@ function Payruns({ activeEntity = '' }) {
 				dropDownData={dropDownData}
 				loadingDropDown={loadingDropDown}
 				activePayrunTab={activePayrunTab}
+				paginationType="number"
+
 			/>
 		</div>
 	);
