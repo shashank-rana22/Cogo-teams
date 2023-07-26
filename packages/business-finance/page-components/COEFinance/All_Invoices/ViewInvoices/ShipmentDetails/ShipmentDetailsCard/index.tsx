@@ -153,8 +153,7 @@ function ShipmentDetailsCard({
 
 	const { data : shipmentDocData, refetchShipmentDocument } = useShipmentDocument(shipmentId);
 
-	const [advancedPaymentObj = {}] = (shipmentDocData?.list
-		?.filter((item) => JSON.parse(item?.data)?.invoice_number === billNumber
+	const [advancedPaymentObj = {}] = (shipmentDocData?.list?.filter((item) => item?.data?.invoice_number === billNumber
 		&& item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
 
 	const handleClickUndo = (id: number) => {
