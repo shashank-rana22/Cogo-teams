@@ -1,7 +1,7 @@
 import { Loader, Pagination } from '@cogoport/components';
 import React from 'react';
 
-import useScrollDirection from '../../../../../common/Header/useScrollDirection';
+// import useScrollDirection from '../../../../../common/Header/useScrollDirection';
 import FclCard from '../FclCard';
 
 import ComparisonHeader from './ComparisonHeader';
@@ -12,22 +12,28 @@ import styles from './styles.module.css';
 function HeaderTop({
 	detail = {},
 	filters = {},
-	setFilters = () => {}, total_count = '', showComparison = false, rateCardsForComparison = [], setScreen = () => {},
+	setFilters = () => {},
+	total_rates_count = 0,
+	comparisonRates = {},
+	setComparisonRates = () => {},
+	setScreen = () => {},
 }) {
-	const { scrollDirection } = useScrollDirection();
+	// const { scrollDirection } = useScrollDirection();
+	const showComparison = Object.keys(comparisonRates).length > 1;
 
 	return (
-		<div className={styles.header} style={{ top: scrollDirection === 'up' ? '115px' : '80px' }}>
+		<div className={styles.header}>
 			<Header
 				details={detail}
 				filters={filters}
 				setFilters={setFilters}
-				total_count={total_count}
+				total_rates_count={total_rates_count}
 			/>
 
 			{showComparison ? (
 				<ComparisonHeader
-					rateCardsForComparison={rateCardsForComparison}
+					comparisonRates={comparisonRates}
+					setComparisonRates={setComparisonRates}
 					setScreen={setScreen}
 				/>
 			) : null}
@@ -48,8 +54,10 @@ function RateCard({
 	rateCardData = {},
 	loading = false,
 	detail = {},
-	setSelectedCard = () => {},
-	setScreen = () => {}, setComparisonCheckbox = () => {}, comparisonCheckbox = '', refetchSearch = () => {},
+	setScreen = () => {},
+	setComparisonRates = () => {},
+	comparisonRates = {},
+	refetchSearch = () => {},
 }) {
 	if (loading) {
 		return null;
@@ -60,10 +68,9 @@ function RateCard({
 			key={rateCardData.id}
 			rateCardData={rateCardData}
 			detail={detail}
-			setSelectedCard={setSelectedCard}
 			setScreen={setScreen}
-			setComparisonCheckbox={setComparisonCheckbox}
-			comparisonCheckbox={comparisonCheckbox}
+			setComparisonRates={setComparisonRates}
+			comparisonRates={comparisonRates}
 			refetchSearch={refetchSearch}
 		/>
 	);
@@ -73,10 +80,8 @@ function ListRateCards({
 	rates = [], detail = {},
 	setSelectedCard = () => {},
 	setScreen = () => {},
-	setComparisonCheckbox = () => {},
-	showComparison = false,
-	rateCardsForComparison = [],
-	comparisonCheckbox = {},
+	setComparisonRates = () => {},
+	comparisonRates = {},
 	filters = {},
 	setFilters = () => {},
 	refetchSearch = () => {},
@@ -95,9 +100,9 @@ function ListRateCards({
 				detail={detail}
 				filters={filters}
 				setFilters={setFilters}
-				total_count={paginationProps?.total_count}
-				showComparison={showComparison}
-				rateCardsForComparison={rateCardsForComparison}
+				total_rates_count={detail?.rates_count}
+				comparisonRates={comparisonRates}
+				setComparisonRates={setComparisonRates}
 				setScreen={setScreen}
 			/>
 
@@ -117,8 +122,8 @@ function ListRateCards({
 					detail={detail}
 					setSelectedCard={setSelectedCard}
 					setScreen={setScreen}
-					setComparisonCheckbox={setComparisonCheckbox}
-					comparisonCheckbox={comparisonCheckbox}
+					setComparisonRates={setComparisonRates}
+					comparisonRates={comparisonRates}
 					refetchSearch={refetchSearch}
 				/>
 			))}

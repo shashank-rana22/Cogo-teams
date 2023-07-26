@@ -20,7 +20,6 @@ function Schedules({
 	const { schedules = [], loading } = useGetWeeklySchedules({
 		filters,
 		setSelectedWeek,
-		setFilters,
 	});
 
 	return (

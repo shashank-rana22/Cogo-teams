@@ -57,7 +57,7 @@ const useGetSpotSearch = () => {
 	}, [getSearch, filters]);
 
 	useEffect(() => {
-		setScreen(rate_card_id ? 'selectedCard' : 'listRateCard');
+		setScreen(rate_card_id ? 'selectedCardScreen' : 'listRateCard');
 	}, [rate_card_id]);
 
 	const refetch = async ({ screenObj = {} } = {}) => {

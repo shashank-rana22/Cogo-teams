@@ -4,7 +4,7 @@ import Filters from '../../Filters';
 
 import styles from './styles.module.css';
 
-function NoRatesFound({ data = {}, filters = {}, setFilters = () => {} }) {
+function NoRatesFound({ details = {}, filters = {}, setFilters = () => {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>
@@ -27,7 +27,7 @@ function NoRatesFound({ data = {}, filters = {}, setFilters = () => {} }) {
 
 			<div className={styles.right_section}>
 				<Filters
-					data={data}
+					data={details}
 					filters={filters}
 					setFilters={setFilters}
 				/>

@@ -1,17 +1,17 @@
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../common/EmptyState';
-import BookCheckout from '../../components/BookToCheckout';
 import Comparison from '../../components/Comparison';
 
 import ListRateCards from './ListRateCards';
-import SelectedRateCard from './SelectedRateCard';
+import SelectedCardScreen from './SelectedCardScreen';
+import BookCheckout from './SelectedCardScreen/BookToCheckout';
 
 const SCREEN_MAPPING = {
-	listRateCard : ListRateCards,
-	selectedCard : SelectedRateCard,
-	comparison   : Comparison,
-	bookCheckout : BookCheckout,
+	listRateCard       : ListRateCards,
+	selectedCardScreen : SelectedCardScreen,
+	comparison         : Comparison,
+	bookCheckout       : BookCheckout,
 };
 
 function FCLResults({
@@ -20,18 +20,15 @@ function FCLResults({
 	setSelectedCard = () => {},
 	selectedCard = {},
 	setScreen = () => {},
-	setComparisonCheckbox = () => {},
-	showComparison = false,
-	rateCardsForComparison = [],
-	comparisonCheckbox = [],
+	setComparisonRates = () => {},
+	comparisonRates = {},
 	filters = {},
 	setFilters = () => {},
+	headerProps = {},
+	setHeaderProps = () => {},
 	paginationProps,
 	loading,
-	setHeaderProps,
-	refetchSearch,
 	screen,
-	possible_subsidiary_services,
 }) {
 	const SCREEN_PROPS_MAPPING = {
 		listRateCard: {
@@ -40,34 +37,23 @@ function FCLResults({
 			setSelectedCard,
 			selectedCard,
 			setScreen,
-			setComparisonCheckbox,
-			showComparison,
-			rateCardsForComparison,
-			comparisonCheckbox,
+			setComparisonRates,
+			comparisonRates,
 			filters,
 			setFilters,
 			paginationProps,
 			loading,
 		},
-		selectedCard: {
-			rateCardData : selectedCard,
-			detail,
-			setSelectedCard,
-			setScreen,
-			setHeaderProps,
-			refetchSearch,
-			screen,
-			possible_subsidiary_services,
-			listLoading  : loading,
-		},
 		comparison: {
-			setScreen,
-			rateCardsForComparison,
-		},
-		bookCheckout: {
-			rateCardData: selectedCard,
 			detail,
-			setSelectedCard,
+			setScreen,
+			comparisonRates,
+			setComparisonRates,
+		},
+		selectedCardScreen: {
+			headerProps,
+			setHeaderProps,
+			screen,
 			setScreen,
 		},
 	};
@@ -77,7 +63,7 @@ function FCLResults({
 	if (!loading && isEmpty(rates)) {
 		return (
 			<EmptyState
-				data={detail}
+				details={detail}
 				filters={filters}
 				setFilters={setFilters}
 			/>

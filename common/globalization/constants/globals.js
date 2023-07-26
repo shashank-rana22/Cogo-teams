@@ -308,6 +308,7 @@ const GLOBAL_CONSTANTS = {
 		ip_empty_state_s2c_png       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ip_empty_icon_s2c',
 		kyc_pending_png:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg',
+		cogo_assured_banner: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_assured_banner',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'

@@ -1,4 +1,6 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcACarriageInsurancePaidTo, IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import DeleteServiceModal from '../DeleteServiceModal';
@@ -8,7 +10,7 @@ import useDeleteCargoInsurance from './CargoInsuranceModal/hooks/useDeleteCargoI
 import styles from './styles.module.css';
 
 const isCargoInsurancePresent = (services) => {
-	const isAlreadyPresent = Object.values(services || {}).some(
+	const isAlreadyPresent = Object.values(services || {}).find(
 		(item) => item.service_type === 'cargo_insurance',
 	);
 	return isAlreadyPresent;
@@ -39,9 +41,9 @@ function CargoInsurance({ data = {}, refetch = () => {} }) {
 		refetch,
 	});
 
-	const isCargoInsuranceAlreadyTaken = isCargoInsurancePresent(service_details);
+	const cargoInsuranceAlreadyTaken = isCargoInsurancePresent(service_details);
 
-	const [isSelected, setIsSelected] = useState(isCargoInsuranceAlreadyTaken);
+	const [isSelected, setIsSelected] = useState(cargoInsuranceAlreadyTaken);
 
 	const primaryServiceDetails = Object.values(service_details || {}).find(
 		(item) => item.service_type === primary_service,
@@ -60,8 +62,8 @@ function CargoInsurance({ data = {}, refetch = () => {} }) {
 	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
 
 	useEffect(() => {
-		setIsSelected(isCargoInsuranceAlreadyTaken);
-	}, [isCargoInsuranceAlreadyTaken]);
+		setIsSelected(cargoInsuranceAlreadyTaken);
+	}, [cargoInsuranceAlreadyTaken]);
 
 	return (
 		<div className={styles.container}>
@@ -79,9 +81,23 @@ function CargoInsurance({ data = {}, refetch = () => {} }) {
 				</div>
 
 				<div className={styles.right_section}>
-					<div className={styles.starting_at_price}>Starting at $0.25/km</div>
+					{isEmpty(isSelected) ? (
+						<div className={styles.starting_at_price}>Starting at $0.25/km</div>
+					) : (
+						<strong className={styles.rate_found}>
+							{formatAmount({
+								currency : isSelected?.saas_rate?.currency,
+								amount   : isSelected?.saas_rate?.totalCharges,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 0,
+								},
+							})}
+						</strong>
+					)}
 
-					{isSelected ? (
+					{!isEmpty(isSelected) ? (
 						<SelectedIcon
 							onMouseEnter={handleMouseEnter}
 							onMouseLeave={handleMouseLeave}

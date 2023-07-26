@@ -28,7 +28,7 @@ function Header({
 	activePage = '',
 	...rest
 }) {
-	const { scrollDirection } = useScrollDirection();
+	// const { scrollDirection } = useScrollDirection();
 
 	const headerRef = useRef(null);
 
@@ -52,9 +52,9 @@ function Header({
 	return (
 		<div ref={headerRef} className={cl`${styles.container} ${showAdditionalHeader ? styles.show : {}}`}>
 			<div className={styles.header_wrapper}>
-				{scrollDirection === 'up' && activePage !== 'checkout' ? (
-					<Back heading={rest.headerHeading} {...rest} />
-				) : null}
+				{/* {scrollDirection === 'up' && activePage !== 'checkout' ? ( */}
+				<Back heading={rest.headerHeading} {...rest} />
+				{/* ) : null} */}
 
 				<div className={styles.details_header}>
 					<div className={styles.search_details}>

@@ -8,8 +8,6 @@ import styles from './styles.module.css';
 function SelectedServices({ rateDetails = {}, details = {} }) {
 	const { service_rates = [] } = rateDetails || {};
 
-	console.log('rateDetails', rateDetails);
-
 	const { service_details = {}, service_type = '', trade_type = '' } = details || {};
 
 	const primaryServiceData = Object.values(service_details).find((service) => service.service_type === service_type);

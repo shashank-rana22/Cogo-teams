@@ -39,7 +39,7 @@ const detailsComponentMapping = {
 
 const ZERO = 0;
 
-function DetailFooter({ rateCardData, detail, refetchSearch }) {
+function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 	const [showDetails, setShowDetails] = useState('');
 
 	const { onSubmit = () => {} } = useUpdateDestinationDemurrageDays({
@@ -82,9 +82,11 @@ function DetailFooter({ rateCardData, detail, refetchSearch }) {
 		onSubmit(values);
 	};
 
+	const templateStyles = isCogoAssured ? styles.cogo_assured : {};
+
 	return (
 		<>
-			<div className={styles.container}>
+			<div className={`${styles.container} ${templateStyles}`}>
 				<div className={styles.dndDetails}>
 					<span className={styles.tag}>Origin</span>
 					DET.

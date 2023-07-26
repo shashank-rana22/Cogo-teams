@@ -5,30 +5,30 @@ import { useState } from 'react';
 import FeedBackModal from './FeedBackModal';
 import styles from './styles.module.css';
 
-function RequestRate({ data = {} }) {
+function RequestRate({ details = {} }) {
 	const [showFeedbackModal, setShowFeedBackModal] = useState(false);
 
 	const addedAdditionalService = [];
 
-	Object.keys(data?.service_details || {}).forEach((service) => {
+	Object.keys(details?.service_details || {}).forEach((service) => {
 		if (
 			!['fcl_freight', 'air_freight'].includes(
-				data?.service_details?.[service]?.service_type,
+				details?.service_details?.[service]?.service_type,
 			)
 		) {
 			addedAdditionalService.push(
-				`${data?.service_details?.[service]?.trade_type}_
-				${data?.service_details?.[service]?.service_type}`,
+				`${details?.service_details?.[service]?.trade_type}_
+				${details?.service_details?.[service]?.service_type}`,
 			);
 		}
 	});
 
 	let proceeedWithFeedback = !(
-		['fcl_freight', 'air_freight'].includes(data?.service_type)
-		&& data?.inco_term === 'exw'
+		['fcl_freight', 'air_freight'].includes(details?.service_type)
+		&& details?.inco_term === 'exw'
 	);
 
-	if (['fcl_freight', 'air_freight'].includes(data?.service_type)) {
+	if (['fcl_freight', 'air_freight'].includes(details?.service_type)) {
 		if (
 			(addedAdditionalService.includes('export_ftl_freight')
 				|| addedAdditionalService.includes('export_ltl_freight')
@@ -72,7 +72,7 @@ function RequestRate({ data = {} }) {
 				<FeedBackModal
 					onClose={onClose}
 					show={showFeedbackModal}
-					data={data}
+					details={details}
 					proceeedWithFeedback={proceeedWithFeedback}
 				/>
 			) : null}

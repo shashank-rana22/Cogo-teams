@@ -10,7 +10,7 @@ const useDeleteSubsidiaryService = ({
 	refetch = () => {},
 	setShow = () => {},
 }) => {
-	const url = checkout_id ? '/update_checkout_service' : '/remove_spot_search';
+	const url = checkout_id ? '/update_checkout_service' : '/remove_spot_search_service';
 	const idKey = checkout_id ? 'id' : 'spot_search_id';
 	const key = checkout_id ? 'subsidiary_services_attributes' : 'subsidiary_services';
 

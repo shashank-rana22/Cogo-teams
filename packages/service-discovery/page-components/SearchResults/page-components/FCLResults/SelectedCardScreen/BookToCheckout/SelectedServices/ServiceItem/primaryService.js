@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
-import getLocationInfo from '../../../../utils/locations-search';
+import getLocationInfo from '../../../../../../utils/locations-search';
 
 import styles from './styles.module.css';
 
@@ -35,10 +35,9 @@ function PrimaryService({ serviceItem = {}, rateDetails = {}, details = {}, serv
 			<div className={styles.icns_container}>
 				<div className={styles.shipping_line}>
 					<img
-						src={shipping_line.logo_url}
+						src={shipping_line?.logo_url}
 						alt="shipping-line-icon"
-						width={30}
-						height={30}
+						style={{ objectFit: 'cover', height: 20 }}
 					/>
 
 					<strong>{shipping_line.business_name}</strong>

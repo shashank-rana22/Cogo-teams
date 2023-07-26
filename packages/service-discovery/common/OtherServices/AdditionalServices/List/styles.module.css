@@ -1,0 +1,32 @@
+.service {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 60px;
+	background: #fff;
+	border: 1px dashed #f3eae7;
+	border-radius: 4px;
+
+	&.active {
+		background: #f3fafa;
+		border: 1px solid #eaf2f3;
+	}
+}
+
+.container {
+	margin-bottom: 16px;
+
+	:global {
+		.ui_accordion_header {
+			padding: 0;
+		}
+
+		.ui_accordion_title {
+			width: 100%;
+		}
+
+		.ui_accordion_icon {
+			display: none;
+		}
+	}
+}

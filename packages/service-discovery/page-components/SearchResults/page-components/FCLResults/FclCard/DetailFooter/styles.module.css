@@ -4,6 +4,10 @@
 	justify-content: space-between;
 	padding: 8px;
 	background-color: #f2f3fa;
+
+	&.cogo_assured {
+		background: #fef3e9;
+	}
 }
 
 .containerDetails {

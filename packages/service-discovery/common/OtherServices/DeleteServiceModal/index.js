@@ -26,7 +26,7 @@ function DeleteServiceModal({
 				<Button
 					type="button"
 					themeType="primary"
-					onClick={() => setShow(false)}
+					onClick={(event) => { event.stopPropagation(); setShow(false); }}
 					disabled={loading}
 				>
 					Cancel

@@ -12,18 +12,20 @@ import styles from './styles.module.css';
 function RateCardTopSection({
 	rateCardData = {},
 	detail = {},
-	setComparisonCheckbox = () => {},
-	comparisonCheckbox = {},
+	setComparisonRates = () => {},
+	comparisonRates = {},
 	isSelectedCard = false,
+	isCogoAssured = false,
 }) {
 	return (
 		<div className={styles.top}>
 			<RateCardTop
 				rateCardData={rateCardData}
 				detail={detail}
-				setComparisonCheckbox={setComparisonCheckbox}
-				comparisonCheckbox={comparisonCheckbox}
+				setComparisonRates={setComparisonRates}
+				comparisonRates={comparisonRates}
 				isSelectedCard={isSelectedCard}
+				isCogoAssured={isCogoAssured}
 			/>
 		</div>
 	);
@@ -34,9 +36,8 @@ function MiddleSection({
 	primaryServiceRates = [],
 	rateCardData = {},
 	scheduleData = {},
-	setSelectedCard = () => {},
-	setScreen = () => {},
 	isSelectedCard = false,
+	setScreen = () => {},
 }) {
 	return (
 		<div className={styles.middle}>
@@ -73,7 +74,6 @@ function MiddleSection({
 				<QuotationDetails
 					rateCardData={rateCardData}
 					detail={detail}
-					setSelectedCard={setSelectedCard}
 					isSelectedCard={isSelectedCard}
 					setScreen={setScreen}
 				/>
@@ -87,6 +87,7 @@ function BottomSection({
 	detail = {},
 	refetchSearch = () => {},
 	isSelectedCard = false,
+	isCogoAssured = false,
 }) {
 	if (isSelectedCard) {
 		return null;
@@ -94,7 +95,12 @@ function BottomSection({
 
 	return (
 		<div className={styles.bottom}>
-			<DetailFooter rateCardData={rateCardData} detail={detail} refetchSearch={refetchSearch} />
+			<DetailFooter
+				rateCardData={rateCardData}
+				detail={detail}
+				refetchSearch={refetchSearch}
+				isCogoAssured={isCogoAssured}
+			/>
 		</div>
 	);
 }
@@ -102,11 +108,10 @@ function BottomSection({
 function FclCard({
 	rateCardData = {},
 	detail = {},
-	setSelectedCard = () => {},
 	isSelectedCard = false,
 	setScreen = () => {},
-	setComparisonCheckbox = () => {},
-	comparisonCheckbox = {},
+	comparisonRates = () => {},
+	setComparisonRates = {},
 	refetchSearch = () => {},
 }) {
 	const { service_rates = {}, schedules = {} } = rateCardData;
@@ -138,6 +143,8 @@ function FclCard({
 		schedule_type,
 	};
 
+	const isCogoAssured = rateCardData.source === 'cogo_assured_rate';
+
 	return (
 		<div
 			className={styles.container}
@@ -146,9 +153,10 @@ function FclCard({
 			<RateCardTopSection
 				rateCardData={rateCardData}
 				detail={detail}
-				setComparisonCheckbox={setComparisonCheckbox}
-				comparisonCheckbox={comparisonCheckbox}
+				comparisonRates={comparisonRates}
+				setComparisonRates={setComparisonRates}
 				isSelectedCard={isSelectedCard}
+				isCogoAssured={isCogoAssured}
 			/>
 
 			<MiddleSection
@@ -156,7 +164,6 @@ function FclCard({
 				primaryServiceRates={primaryServiceRates}
 				rateCardData={rateCardData}
 				scheduleData={scheduleData}
-				setSelectedCard={setSelectedCard}
 				isSelectedCard={isSelectedCard}
 				setScreen={setScreen}
 			/>
@@ -166,6 +173,7 @@ function FclCard({
 				detail={detail}
 				refetchSearch={refetchSearch}
 				isSelectedCard={isSelectedCard}
+				isCogoAssured={isCogoAssured}
 			/>
 
 		</div>
