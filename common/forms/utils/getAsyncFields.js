@@ -681,6 +681,30 @@ function asyncListPromotions() {
 		},
 	};
 }
+function asyncListServiceLanes() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_service_lanes',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+		},
+	};
+}
+function asyncListVessels() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_vessels',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+		},
+	};
+}
 
 function asyncInsuranceCommoditiesList() {
 	return {
@@ -871,6 +895,8 @@ export {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncListServiceLanes,
+	asyncListVessels,
 	asyncListEmployees,
 	asyncListSquad,
 	asyncListSubChapters,

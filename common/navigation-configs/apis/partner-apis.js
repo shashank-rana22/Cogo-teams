@@ -5678,6 +5678,7 @@ const partner = {
 			service_name : 'communication',
 		},
 	],
+
 	shipment_approval: [
 		{
 			api          : 'list_shipments',

@@ -1,0 +1,31 @@
+.container {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	width: 85%;
+	padding-right: 68px;
+	padding-left: 24px;
+	margin: 16px 0;
+}
+
+.origin {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #4f4f4f;
+}
+
+.arrow {
+	position: absolute;
+	bottom: 0%;
+	left: 50%;
+}
+
+.destination {
+	position: absolute;
+	left: 55%;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #4f4f4f;
+}
