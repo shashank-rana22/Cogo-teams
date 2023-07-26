@@ -160,7 +160,8 @@ export default function getFormattedPayload({
 		const knockoffTask = (pendingTasks || []).filter(
 			(task) => task.task === 'knockoff_invoices',
 		);
-		if (knockoffTask.length) {
+
+		if (isEmpty(knockoffTask)) {
 			Toast.error('Task not found');
 			return false;
 		}
@@ -180,7 +181,7 @@ export default function getFormattedPayload({
 		const doTask = (pendingTasks || []).filter(
 			(task) => task.task === 'mark_do_released',
 		);
-		if (doTask.length) {
+		if (isEmpty(doTask)) {
 			Toast.error('Task not found');
 			return false;
 		}
@@ -201,13 +202,14 @@ export default function getFormattedPayload({
 			finalPayload[data.key] = pendingTasks?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 			if (finalPayload[data.key] === undefined) {
 				Toast.error('Task not found');
-				finalPayload = false;
+				finalPayload = {};
 			}
 		} else if (finalPayload && data?.key === 'data') {
 			finalPayload.data = fillData(data?.value, item, formValues);
-			if (finalPayload.data?.bl_detail?.id?.length) {
+
+			if (isEmpty(finalPayload.data?.bl_detail?.id)) {
 				Toast.error('BL ID not found');
-				finalPayload = false;
+				finalPayload = {};
 			}
 			if (
 				['collection_pending', 'collected', 'released', 'surrendered'].includes(
@@ -215,7 +217,8 @@ export default function getFormattedPayload({
 				)
 			) {
 				const res = getCurrentReleaseStatus(item, inner_tab, formValues);
-				finalPayload.status = res ? 'completed' : 'pending';
+
+				if (res) { finalPayload.status = 'completed'; } else finalPayload.status = 'pending';
 			}
 		}
 	});

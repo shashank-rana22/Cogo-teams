@@ -17,13 +17,13 @@ function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
-	const { state, trade_type, service_type } = serviceData || {};
+	const { state, trade_type, service_type, id } = serviceData || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 
 	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
 
-	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
+	const servicesData = (servicesList || []).filter((service) => service.id === id);
 
 	const openModal = (modalKey) => {
 		setShowModal(modalKey);
