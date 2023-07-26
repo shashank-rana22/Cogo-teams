@@ -10,6 +10,7 @@ import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
 function Shipments({ serviceData = {}, name = '', eventType = '' }) {
+	console.log('serviceData:', serviceData);
 	const eventTitle = getEventTitle({ name });
 
 	const {

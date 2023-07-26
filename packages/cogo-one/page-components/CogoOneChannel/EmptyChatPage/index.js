@@ -2,6 +2,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import React from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
+
+import ShipmentsHomePage from './ShipmentsHomePage';
 import styles from './styles.module.css';
 
 const MESSAGE_MAPPING = {
@@ -10,8 +13,14 @@ const MESSAGE_MAPPING = {
 	mail    : 'mail',
 };
 
-function EmptyChatPage({ activeTab = {} }) {
+function EmptyChatPage({ activeTab = {}, viewType = '' }) {
 	const displayMessage = MESSAGE_MAPPING[activeTab?.tab] || activeTab?.tab;
+
+	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
+
+	if (showShipments) {
+		return <ShipmentsHomePage />;
+	}
 
 	return (
 		<div className={styles.container}>

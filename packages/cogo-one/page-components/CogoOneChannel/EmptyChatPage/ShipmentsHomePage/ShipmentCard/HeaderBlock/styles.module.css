@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.icons_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 30%;
+
+	img {
+		cursor: pointer;
+	}
+}
+
+.shipper_details {
+	width: 68%;
+}
+
+.sid_id {
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.importer_exporter_styles {
+	width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	color: #000;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

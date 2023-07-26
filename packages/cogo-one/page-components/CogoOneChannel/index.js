@@ -125,7 +125,7 @@ function CogoOne() {
 				{isEmpty(activeTab?.data)
 					? (
 						<div className={styles.empty_page}>
-							<EmptyChatPage activeTab={activeTab} />
+							<EmptyChatPage activeTab={activeTab} viewType={viewType} />
 						</div>
 					) : (
 						<>

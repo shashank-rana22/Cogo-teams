@@ -1,0 +1,37 @@
+.container {
+	width: 280px;
+	height: fit-content;
+	background: #fff;
+	border: 1px solid #f3f3f3;
+	border-radius: 8px;
+}
+
+.main_block {
+	width: 100%;
+	padding: 10px 16px;
+}
+
+.footer_block {
+	display: flex;
+	align-items: center;
+	padding: 10px 16px;
+	background: #f3fafa;
+}
+
+.footer_right_block {
+	width: 100px;
+	overflow: hidden;
+	font-size: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.footer_left_block {
+	width: 145px;
+
+	:global {
+		.ui_pill_text {
+			color: #fff;
+		}
+	}
+}
