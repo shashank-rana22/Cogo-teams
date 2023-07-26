@@ -212,12 +212,13 @@ const getPayload = ({
 		expenseType,
 		branchName,
 		categoryName,
-		branchId  : addressData?.branchId,
-		kycStatus : kycStatus?.toUpperCase(),
-		pan       : vendorRegistrationNumber,
+		incidentSubType : categoryName,
+		branchId        : addressData?.branchId,
+		kycStatus       : kycStatus?.toUpperCase(),
+		pan             : vendorRegistrationNumber,
 		remarks,
-		documents : uploadedInvoice,
-		createdBy : profile?.user?.id,
+		documents       : uploadedInvoice,
+		createdBy       : profile?.user?.id,
 	};
 };
 

@@ -50,8 +50,7 @@
 }
 
 .view {
-	margin-right: 4px;
-	color: #0f0;
+	color: green;
 	text-decoration: underline;
 	background-color: transparent;
 }

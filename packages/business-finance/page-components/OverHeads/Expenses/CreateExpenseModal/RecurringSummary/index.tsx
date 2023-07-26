@@ -1,12 +1,10 @@
 /* eslint-disable react/jsx-indent */
-import { Placeholder, Stepper } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../commons/utils/formatDate';
-import useGetStakeholders from '../../hooks/useGetStakeholders';
 import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
@@ -57,7 +55,6 @@ function RecurringSummary({
 }: Props) {
 	const {
 		vendorName,
-		expenseCategory,
 		branch,
 		entityObject,
 		uploadedInvoice,
@@ -71,49 +68,10 @@ function RecurringSummary({
 		categoryName,
 	} = recurringData || {};
 
-	const { stakeholdersData, loading: stakeholderLoading } =		useGetStakeholders({
-		incidentType    : 'OVERHEAD_APPROVAL',
-		entityId        : entityObject?.id,
-		incidentSubType : expenseCategory,
-	});
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - 1];
-
-	const { level3, level2, level1 } = stakeholdersData || {};
-	const { stakeholder: stakeholder1 } = level3 || {};
-	const { stakeholder: stakeholder2 } = level2 || {};
-	const { stakeholder: stakeholder3 } = level1 || {};
-
-	const stakeHolderTimeLine = () => {
-		if (!isEmpty(level3)) {
-			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-				{ title: stakeholder3?.userName, key: stakeholder3?.userName },
-			];
-		}
-		if (!isEmpty(level2)) {
-			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-			];
-		}
-		return [{ title: stakeholder1?.userName, key: stakeholder1?.userName }];
-	};
-
-	useEffect(() => {
-		if (stakeholdersData) {
-			const { userEmail, userId, userName } = stakeholdersData || {};
-			setRecurringData((prev: object) => ({
-				...prev,
-				stakeholderEmail : userEmail,
-				stakeholderId    : userId,
-				stakeholderName  : userName,
-			}));
-		}
-	}, [stakeholdersData, setRecurringData]);
 
 	useEffect(() => {
 		if (!isEmpty(tradePartyData)) {
@@ -131,7 +89,7 @@ function RecurringSummary({
 		},
 		{
 			title : 'Expense Category',
-			value : categoryName,
+			value : startCase(categoryName),
 		},
 		{
 			title : 'Entity',
@@ -185,10 +143,6 @@ function RecurringSummary({
 	];
 	const summaryDataThird = [
 		{
-			title : 'Agreement Number',
-			value : agreementNumber || '-',
-		},
-		{
 			title : 'Duration',
 			value : (repeatEvery || '').replaceAll('_', ' ') || '-',
 		},
@@ -237,19 +191,6 @@ function RecurringSummary({
 			{renderSummaryData(summaryDataFirst)}
 			{renderSummaryData(summaryDataSecond)}
 			{renderSummaryData(summaryDataThird)}
-			<div>
-				<div className={styles.title}>To be Approved by</div>
-				<div className={styles.steeper}>
-					{stakeholderLoading ? (
-						<Placeholder height="20px" width="150px" />
-					) : (
-						<Stepper
-							setActive={() => {}}
-							items={stakeHolderTimeLine()}
-						/>
-					)}
-				</div>
-			</div>
 		</div>
 	);
 }

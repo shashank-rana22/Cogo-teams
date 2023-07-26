@@ -1,0 +1,23 @@
+.flex {
+	display: flex;
+	padding-left: 12px;
+}
+
+.form {
+	display: flex;
+}
+
+.container {
+	padding-top: 8px;
+	padding-left: 12px;
+}
+
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 10px;
+}
+
+.paddingbottom {
+	padding-bottom: 12px;
+}

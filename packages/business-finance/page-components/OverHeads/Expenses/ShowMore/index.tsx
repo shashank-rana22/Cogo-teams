@@ -4,7 +4,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
-import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../commons/utils/formatDate';
 import useListExpense from '../hooks/useListExpense';
 import useSendEmail from '../hooks/useSendEmail';
@@ -107,10 +106,8 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 											billNumber, grandTotal, paidAmount = 0, payableTds = 0,
 											dueDate, billDate, createdDate, status, approvedByName, updatedAt,
 											billDocumentUrl = '',
-											subCategory = '',
 											billCurrency = '',
 										} = bill || {};
-										const subCategoryFormatted = (subCategory || '').replaceAll('_', ' ');
 
 										return (
 											<div className={styles.data_div} key={bill as any}>
@@ -127,10 +124,6 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 
 														</a>
 													</div>
-												</div>
-												<div className={styles.section}>
-													<div>Sub category</div>
-													<div className={styles.element}>{showOverflowingNumber(subCategoryFormatted, 12)}</div>
 												</div>
 												<div className={styles.section}>
 													<div>Payable</div>

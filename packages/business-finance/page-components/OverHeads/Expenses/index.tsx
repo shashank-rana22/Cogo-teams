@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import { Popover, Button, Input, Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -19,6 +20,7 @@ import {
 
 import AddExpenseModal from './AddExpenseModal';
 import CreateExpenseModal from './CreateExpenseModal';
+import ViewRecurringSummery from './CreateExpenseModal/ViewRecurringSummery';
 import useListExpense from './hooks/useListExpense';
 import useListExpenseConfig from './hooks/useListExpenseConfig';
 import useSendEmail from './hooks/useSendEmail';
@@ -53,6 +55,7 @@ interface ItemDataInterface {
 	billCurrency?: string;
 	approvedByName?: string;
 	payableTds?: number;
+	categoryName?: string;
 }
 
 function ExpenseComponent() {
@@ -84,7 +87,7 @@ function ExpenseComponent() {
 		expenseFilters,
 		sort,
 	});
-	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig({ expenseFilters, sort });
+	const { getRecurringList, recurringListData, recurringListLoading } =		useListExpenseConfig({ expenseFilters, sort });
 	const { sendMail, loading: mailLoading } = useSendEmail();
 
 	useEffect(() => {
@@ -196,10 +199,10 @@ function ExpenseComponent() {
 			</Button>
 		),
 		renderCategory: (itemData: ItemDataInterface) => {
-			const { category = '' } = itemData || {};
+			const { categoryName = '', category = '' } = itemData || {};
 			return (
 				<div style={{ fontSize: '14px' }}>
-					{category.replaceAll('_', ' ')}
+					{startCase(categoryName || category)}
 				</div>
 			);
 		},
@@ -273,6 +276,29 @@ function ExpenseComponent() {
 					{/* <Tooltip content="Due on xth every month">
 						<div><IcMInfo /></div>
 					</Tooltip> */}
+				</div>
+			);
+		},
+		renderLedgerAmount: (itemData) => {
+			const {
+				ledgerMaxPayoutAllowed,
+				ledgerCurrency = '',
+				ledgerTotal,
+			} = itemData || {};
+			return (
+				<div className={styles.data_container}>
+					<div className={styles.recurring_amount_data}>
+						<div>
+							{formatAmount({
+								amount   : ledgerTotal || ledgerMaxPayoutAllowed,
+								currency : ledgerCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							}) || '-'}
+						</div>
+					</div>
 				</div>
 			);
 		},
@@ -380,7 +406,7 @@ function ExpenseComponent() {
 			if (proofCount === 1) {
 				return (
 					<a
-						href={proofDocuments[0]}
+						href={proofDocuments[GLOBAL_CONSTANTS.zeroth_index]}
 						target="_blank"
 						className={styles.proof}
 						rel="noreferrer"
@@ -488,6 +514,14 @@ function ExpenseComponent() {
 			});
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
+		renderView: (itemData) => (
+			<div>
+				<ViewRecurringSummery
+					itemData={itemData}
+					recurringState={recurringState}
+				/>
+			</div>
+		),
 	};
 
 	const showDropDown = (singleItem: { id?: string }) => {
@@ -549,6 +583,7 @@ function ExpenseComponent() {
 					}}
 					showPagination
 					renderDropdown={showDropDown}
+					showRibbon
 				/>
 			</div>
 

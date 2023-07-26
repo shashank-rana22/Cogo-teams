@@ -43,6 +43,10 @@
 	text-decoration: underline;
 }
 
+.approved {
+	margin-top: 12px;
+}
+
 .steeper {
 	:global {
 		.ui_stepper_step_wrapper,

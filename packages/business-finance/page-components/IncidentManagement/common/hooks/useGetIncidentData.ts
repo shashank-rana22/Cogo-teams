@@ -1,8 +1,8 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import { FilterProps } from '../interface';
@@ -66,29 +66,42 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 
 	const getIncidentData = async () => {
 		const { startDate, endDate } = date || {};
-
-		try {
-			await trigger({
-				params: {
-					...rest,
-					status          : activeTab.toUpperCase(),
-					isStatsRequired : true,
-					deadlineTag     : urgency === 'urgent' ? 'DELAYED' : undefined,
-					role            : isSettlementExecutive ? 'SETTLEMENT_EXECUTIVE' : undefined,
-					q               : query !== '' ? query : undefined,
-					type            : category,
-					pageIndex       : page,
-					pageSize        : pageLimit,
-					createdFrom     : startDate
-						? format(startDate, 'yyyy-MM-dd 00:00:00', {}, false)
-						: undefined,
-					createdTo: endDate
-						? format(endDate, 'yyyy-MM-dd 00:00:00', {}, false)
-						: undefined,
-				},
-			});
-		} catch (err) {
-			console.log(err);
+		if (activeTab !== 'controller') {
+			try {
+				await trigger({
+					params: {
+						...rest,
+						status          : activeTab.toUpperCase(),
+						isStatsRequired : true,
+						deadlineTag     : urgency === 'urgent' ? 'DELAYED' : undefined,
+						role            : isSettlementExecutive ? 'SETTLEMENT_EXECUTIVE' : undefined,
+						q               : query !== '' ? query : undefined,
+						type            : category,
+						pageIndex       : page,
+						pageSize        : pageLimit,
+						createdFrom     : startDate
+							? formatDate({
+								date       : startDate,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								formatType : 'date',
+								separator  : ' ',
+							})
+							: undefined,
+						createdTo: endDate
+							? formatDate({
+								date       : endDate,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								formatType : 'date',
+								separator  : ' ',
+							})
+							: undefined,
+					},
+				});
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	};
 

@@ -81,6 +81,10 @@ function AddExpenseModal({
 						isUploadConfirm={isUploadConfirm}
 						setIsUploadConfirm={setIsUploadConfirm}
 						setIsFormValidated={setIsFormValidated}
+						isTaxApplicable={
+							tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index]
+								?.is_tax_applicable
+						}
 					/>
 				) : (
 					<Summary

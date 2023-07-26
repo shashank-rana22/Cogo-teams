@@ -17,7 +17,7 @@ const useGetStakeholders = ({ incidentSubType, incidentType, entityId }) => {
 				await trigger({
 					params: {
 						entityId,
-						category: incidentSubType || undefined,
+						incidentSubType: incidentSubType || undefined,
 						incidentType,
 					},
 				});

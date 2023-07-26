@@ -4,7 +4,11 @@ import { useSelector } from '@cogoport/store';
 
 import { formatDate } from '../../../commons/utils/formatDate';
 
-const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) => {
+const useCreateExpenseConfig = ({
+	mailData,
+	setShowModal,
+	getRecurringList,
+}) => {
 	const {
 		expenseCategory,
 		stakeholderId,
@@ -25,14 +29,12 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 		categoryName,
 	} = mailData || {};
 
-	const { branchId, name:branchName } = JSON.parse(branch || '{}');
-	const { registration_number:registrationNumber } = vendorData || {};
-	const { id:cogoEntityId } = entityObject || {};
-	const { organization_trade_party_detail_id:tradePartyDetailId } = tradeParty || {};
+	const { branchId, name: branchName } = JSON.parse(branch || '{}');
+	const { registration_number: registrationNumber } = vendorData || {};
+	const { id: cogoEntityId } = entityObject || {};
+	const { organization_trade_party_detail_id: tradePartyDetailId } =		tradeParty || {};
 
-	const {
-		profile,
-	} = useSelector((state:any) => state);
+	const { profile } = useSelector((state: any) => state);
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -67,6 +69,7 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 					tradePartyDetailId,
 					categoryName,
 					branchName,
+					incidentSubType      : categoryName,
 				},
 			});
 		} catch (err) {

@@ -1,4 +1,5 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { startCase } from '@cogoport/utils';
 
 import { MONTH_OPTIONS } from '../constants/MONTH_OPTIONS';
 
@@ -50,10 +51,12 @@ export const nonRecurringExpenseDetails = ({
 	entityOptions,
 	handleVendorChange = () => {},
 	handleCategoryChange = () => {},
-}:Props) => {
+}: Props) => {
 	const geo = getGeoConstants();
-	const handleEntityChange = (e:number | string) => {
-		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[0];
+	const handleEntityChange = (e: number | string) => {
+		const entityData = entityList?.filter(
+			(entityItem) => entityItem.id === e,
+		)?.[0];
 		setFormData({
 			...formData,
 			entityObject: entityData,
@@ -132,8 +135,9 @@ export const nonRecurringExpenseDetails = ({
 				{
 					name        : 'registrationNumber',
 					label       : `${geo.others.pan_number.label.toUpperCase()}`,
-					type        : 'textarea',
+					type        : 'input',
 					value       : formData?.registrationNumber || null,
+					prefix      : null,
 					className   : styles.pan,
 					placeholder : `Autofilled ${geo.others.pan_number.label}`,
 					span        : 2.2,
@@ -148,6 +152,7 @@ export const nonRecurringExpenseDetails = ({
 					valueKey    : 'id',
 					span        : 2.2,
 					className   : styles.select,
+					renderLabel : (item) => startCase(item.categoryName),
 					onChange    : (e, obj) => handleCategoryChange(e, obj),
 				},
 				{

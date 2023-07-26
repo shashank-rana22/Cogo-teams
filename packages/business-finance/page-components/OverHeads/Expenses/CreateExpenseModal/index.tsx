@@ -10,12 +10,12 @@ import MailTemplate from './MailTemplate';
 import styles from './styles.module.css';
 
 interface Props {
-	setShowModal:any,
-	showModal?: boolean,
-	createExpenseType?: string,
-	getList?:(p:any)=>void,
-	getRecurringList?:(p:any)=>void,
-	setShowWarning?:(p:any)=>void,
+	setShowModal: any;
+	showModal?: boolean;
+	createExpenseType?: string;
+	getList?: (p: any) => void;
+	getRecurringList?: (p: any) => void;
+	setShowWarning?: (p: any) => void;
 }
 
 const getMonthOptions = (minMonth) => {
@@ -33,36 +33,44 @@ function CreateExpenseModal({
 	getList = () => {},
 	getRecurringList = () => {},
 	setShowWarning = () => {},
-}:Props) {
+}: Props) {
 	const [mailModal, setMailModal] = useState(false);
 	const [recurringData, setRecurringData] = useState({
 		repeatEvery: 'week',
 	});
-	const [timeline, setTimeline] = useState(['Expense Details', 'Upload Invoice', 'Final Confirmation']);
+	const [timeline, setTimeline] = useState([
+		'Expense Details',
+		'Upload Invoice',
+		'Final Confirmation',
+	]);
 	const [nonRecurringData, setNonRecurringData] = useState({
 		transactionDate     : new Date(),
-		periodOfTransaction : getMonthOptions(new Date())?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
+		periodOfTransaction : getMonthOptions(new Date())?.[
+			GLOBAL_CONSTANTS.zeroth_index
+		]?.value,
 	});
 	const [active, setActive] = useState('Expense Details');
 	const [isFormValidated, setIsFormValidated] = useState(false);
 
 	const handleClick = () => {
 		const current = timeline.indexOf(active);
-		if (current < timeline.length - 1) { setActive(timeline[current + 1]); }
+		if (current < timeline.length - 1) {
+			setActive(timeline[current + 1]);
+		}
 	};
 	const handleBack = () => {
 		const current = timeline.indexOf(active);
 		setActive(timeline[current - 1]);
 	};
 
-	let headerTitle:string;
+	let headerTitle: string;
 	if (createExpenseType === 'recurring') {
 		headerTitle = 'RECORD - Recurring';
 	} else if (createExpenseType === 'nonRecurring') {
 		headerTitle = ' - Non Recurring';
 	}
 
-	let mailData:object;
+	let mailData: object;
 
 	if (createExpenseType === 'recurring') {
 		mailData = recurringData;
@@ -74,7 +82,11 @@ function CreateExpenseModal({
 		if (createExpenseType === 'recurring') {
 			setTimeline(['Expense Details', 'Final Confirmation']);
 		} else {
-			setTimeline(['Expense Details', 'Upload Invoice', 'Final Confirmation']);
+			setTimeline([
+				'Expense Details',
+				'Upload Invoice',
+				'Final Confirmation',
+			]);
 		}
 	}, [createExpenseType]);
 
@@ -103,27 +115,35 @@ function CreateExpenseModal({
 						setIsFormValidated={setIsFormValidated}
 					/>
 				</div>
-
 			</Modal.Body>
 			<Modal.Footer>
 				{timeline.indexOf(active) !== 0 && (
-					<Button onClick={handleBack} style={{ marginRight: '10px' }} themeType="secondary">
+					<Button
+						onClick={handleBack}
+						style={{ marginRight: '10px' }}
+						themeType="secondary"
+					>
 						Back
 					</Button>
 				)}
-				{timeline.indexOf(active) !== timeline.length - 1
-					? (
-						<Button
-							onClick={handleClick}
-							disabled={!isFormValidated}
-						>
-							Save & Next
-						</Button>
-					) : <Button onClick={() => setMailModal(true)}>Request Email</Button>}
+				{timeline.indexOf(active) !== timeline.length - 1 ? (
+					<Button onClick={handleClick} disabled={!isFormValidated}>
+						Save & Next
+					</Button>
+				) : (
+					<Button onClick={() => setMailModal(true)}>
+						Request Email
+					</Button>
+				)}
 			</Modal.Footer>
 
-			{mailModal 	&& (
-				<Modal size="lg" show={mailModal} onClose={() => setMailModal(false)} placement="top">
+			{mailModal && (
+				<Modal
+					size="lg"
+					show={mailModal}
+					onClose={() => setMailModal(false)}
+					placement="top"
+				>
 					<Modal.Header title="Request Email Preview" />
 					<Modal.Body className={styles.modal_body}>
 						<MailTemplate

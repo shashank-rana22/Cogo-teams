@@ -14,7 +14,7 @@ import TotalColumn from './TotalColumn';
 
 const PERCENTAGE = 100;
 
-function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
+function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions, isTaxApplicable = true }) {
 	const { invoiceCurrency = '', lineItemsList:lineItemsListData = [] } = formData || {};
 	const { lineItemsList, loading } = useGetListItemTaxes({ formData });
 	const rest = { loading };
@@ -67,7 +67,7 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 			const tax = watch(`line_items.${index}.tax`);
 
 			if (tax) {
-				const taxPercent = JSON.parse(tax || '')?.taxPercent;
+				const taxPercent = JSON.parse(tax || '')?.taxPercent || 0;
 				if (beforeTax && +taxPercent >= 0) {
 					const amountAfterTax = beforeTax + (beforeTax * (taxPercent / PERCENTAGE));
 					setValue(`line_items.${index}.amount_after_tax`, +amountAfterTax);
@@ -128,6 +128,7 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 		control,
 		taxOptions,
 		formData,
+		isTaxApplicable,
 	}).filter((column) => column.id !== 'tds' || !hideTdsColumn);
 
 	return (

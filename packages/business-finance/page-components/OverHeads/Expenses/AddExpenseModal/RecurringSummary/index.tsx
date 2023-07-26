@@ -1,7 +1,6 @@
-import { Placeholder, Stepper } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
@@ -9,7 +8,6 @@ import { formatDate } from '../../../../commons/utils/formatDate';
 import { SummaryInterface } from '../../../commons/Interfaces';
 import { DURATION_MAPPING } from '../../../constants/DURATION_MAPPING';
 import { officeLocations } from '../../../utils/officeLocations';
-import useGetStakeholders from '../../hooks/useGetStakeholders';
 import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
@@ -68,54 +66,15 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 
 	const {
 		uploadedInvoice,
-		stakeholderName,
 		vendorID,
 		payableAmount,
 		invoiceCurrency: currency,
 	} = expenseData || {};
-	const { stakeholdersData, loading: stakeholdersLoading } = useGetStakeholders({
-		incidentType    : 'RECURRING_EXPENSE_APPROVAL',
-		incidentSubType : categoryName,
-		entityId        : entityObject?.id,
-	});
 
-	const { level3, level2, level1 } = stakeholdersData || {};
-	const { stakeholder: stakeholder1 } = level3 || {};
-	const { stakeholder: stakeholder2 } = level2 || {};
-	const { stakeholder: stakeholder3 } = level1 || {};
-
-	const stakeHolderTimeLine = () => {
-		if (!isEmpty(level3)) {
-			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-				{ title: stakeholder3?.userName, key: stakeholder3?.userName },
-			];
-		}
-		if (!isEmpty(level2)) {
-			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-			];
-		}
-		return [{ title: stakeholder1?.userName, key: stakeholder1?.userName }];
-	};
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - 1];
-
-	useEffect(() => {
-		if (stakeholdersData) {
-			const { userEmail, userId, userName } = stakeholdersData || {};
-			setExpenseData((prev: object) => ({
-				...prev,
-				stakeholderEmail : userEmail,
-				stakeholderId    : userId,
-				stakeholderName  : userName,
-			}));
-		}
-	}, [stakeholdersData, setExpenseData]);
 
 	useEffect(() => {
 		if (!isEmpty(tradePartyData)) {
@@ -148,7 +107,7 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		},
 		{
 			title : 'Expense Category',
-			value : categoryName,
+			value : startCase(categoryName),
 		},
 		{
 			title : 'Entity',
@@ -209,14 +168,6 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 			value : DURATION_MAPPING[repeatFrequency] || '-',
 		},
 		{
-			title : 'To be Approved by',
-			value : stakeholdersLoading ? (
-				<Placeholder height="20px" width="150px" />
-			) : (
-				startCase(stakeholderName || '') || '-'
-			),
-		},
-		{
 			title : 'Uploaded Documents',
 			value : (
 				<div>
@@ -259,19 +210,6 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 			{renderSummary(summaryDataFirst)}
 			{renderSummary(summaryDataSecond)}
 			{renderSummary(summaryDataThird)}
-			<div>
-				<div className={styles.title}>To be Approved by</div>
-				<div className={styles.steeper}>
-					{stakeholdersLoading ? (
-						<Placeholder height="20px" width="150px" />
-					) : (
-						<Stepper
-							setActive={() => {}}
-							items={stakeHolderTimeLine()}
-						/>
-					)}
-				</div>
-			</div>
 		</div>
 	);
 }

@@ -45,7 +45,13 @@
 	}
 }
 
+.approved {
+	margin-top: 12px;
+}
+
 .steeper {
+	margin-top: 16px;
+
 	:global {
 		.ui_stepper_step_wrapper,
 		.ui_stepper_text {

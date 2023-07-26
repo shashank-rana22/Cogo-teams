@@ -1,0 +1,24 @@
+.col {
+	display: flex;
+	flex: 0 0 var(--width);
+	flex-flow: row wrap;
+	max-width: 100%;
+	margin: 10px 5px;
+
+	:global(.ui_select_container) {
+		width: 100%;
+		max-height: 40px;
+	}
+}
+
+.error_message {
+	font-size: 0.75rem;
+	font-weight: 400;
+	color: #cb6464;
+	letter-spacing: 0.02em;
+}
+
+.flex {
+	display: flex;
+	flex-flow: row wrap;
+}

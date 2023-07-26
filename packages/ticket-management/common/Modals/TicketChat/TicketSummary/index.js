@@ -101,7 +101,7 @@ function TicketSummary({
 					<span className={styles.updated_at}>{startCase(source)}</span>
 				</div>
 				<div className={styles.ticket_data}>
-					{`${status === 'closed' ? 'Resolved on' : 'Created on'}`}
+					{status === 'closed' ? 'Resolved on' : 'Created on'}
 					<span className={styles.updated_at}>
 						{formatDate({
 							date       : status === 'closed' ? updatedAt : createdAt,

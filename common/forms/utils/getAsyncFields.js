@@ -435,6 +435,18 @@ function asyncAccMode() {
 	};
 }
 
+function asyncIncidentSubtypeList() {
+	return {
+		labelKey     : 'incidentSubtype',
+		valueKey     : 'incidentSubtype',
+		endpoint     : 'incident-management/incident/incident-sub-type',
+		initialCall  : true,
+		authkey      : 'get_incident_management_incident_incident_sub_type',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
 function asyncCodeMaster() {
 	return {
 		labelKey     : 'accountCode',
@@ -900,4 +912,5 @@ export {
 	asyncListShipmentPendingTasks,
 	asyncListShipments,
 	asyncListShipmentServices,
+	asyncIncidentSubtypeList,
 };
