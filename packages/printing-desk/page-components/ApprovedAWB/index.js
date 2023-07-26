@@ -57,9 +57,17 @@ function ApprovedAWB({
 								Are you sure you want to confirm the Handover?
 							</Modal.Body>
 							<Modal.Footer>
-								<Button themeType="secondary" onClick={() => setHandoverModal(false)}>Cancel</Button>
+								<Button
+									themeType="secondary"
+									disabled={updateLoading}
+									onClick={() => setHandoverModal(false)}
+								>
+									Cancel
+
+								</Button>
 								<Button
 									className={styles.confirm_button}
+									disabled={updateLoading}
 									onClick={() => updateShipment({ payload })}
 								>
 									Confirm
