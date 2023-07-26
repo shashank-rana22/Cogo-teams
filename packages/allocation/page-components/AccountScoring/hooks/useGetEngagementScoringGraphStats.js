@@ -1,9 +1,9 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 const INITAIL_SET_DURATION = 60;
-const MILISECONDS_IN_ONE_DAY = 86400000;
 
 const useGetEngagementScoringGraphStats = (props) => {
 	const { scoreTrendIds = {} } = props;
@@ -28,7 +28,7 @@ const useGetEngagementScoringGraphStats = (props) => {
 	useEffect(() => {
 		if (duration !== 'custom') {
 			setDateRange({
-				startDate : new Date(Date.now() - (duration * MILISECONDS_IN_ONE_DAY)),
+				startDate : new Date(Date.now() - (duration * GLOBAL_CONSTANTS.milliseconds_in_one_day)),
 				endDate   : new Date(),
 			});
 		}

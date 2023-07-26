@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 
 import controls from '../configurations/get-leaderboard-filters-controls';
+import getMutatedControls from '../utils/get-leaderboard-mutated-controls';
 
 import useGetAccountDistributionGraph from './useGetAccountDistributionGraph';
 import useGetEngagementScoringLeaderboard from './useGetEngagementScoringLeaderboard';
@@ -38,41 +39,7 @@ const useGetAccountLeaderboardData = () => {
 		organization, user_id: userId, date_range, service, warmth: accountWarmth, segment, duration, role_id,
 	} = watch();
 
-	const mutatedControls = controls.map((singleControl) => {
-		let newControl = { ...singleControl };
-
-		if (newControl.name === 'user_id' && service) {
-			newControl = {
-				...newControl,
-				disabled: false,
-			};
-		}
-
-		if (newControl.name === 'role_id' && service) {
-			newControl = {
-				...newControl,
-				disabled: false,
-			};
-		}
-
-		if (newControl.name === 'warmth' && bulkDeallocateFilter) {
-			newControl = {
-				...newControl,
-				options: [
-					{ label: 'Ice Cold', value: 'ice_cold' },
-					{ label: 'Cold', value: 'cold' }],
-			};
-		}
-
-		if (newControl.name === 'date_range' && duration === 'custom') {
-			newControl = {
-				...newControl,
-				disable: false,
-			};
-		}
-
-		return newControl;
-	});
+	const mutatedControls = getMutatedControls({ controls, service, bulkDeallocateFilter, duration });
 
 	useEffect(() => {
 		if (duration !== 'custom') {
