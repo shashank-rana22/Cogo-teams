@@ -24,6 +24,11 @@ const FTL_FIELD_SERVICE_OPS_APP_APIS = [
 		access_type  : 'private',
 		service_name : 'saas_traceability',
 	},
+	{
+		api          : 'create_shipment_field_service_ops_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default FTL_FIELD_SERVICE_OPS_APP_APIS;
