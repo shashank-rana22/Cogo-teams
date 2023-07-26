@@ -6,6 +6,7 @@ import React from 'react';
 import Content from './Content';
 
 const TASK_INDEX_SLICE_FOR_DOC_TYPE = -1;
+const IGM_DOCUMENTS = ['bill_of_lading', 'draft_bill_of_lading', 'house_bill_of_lading', 'draft_house_bill_of_lading'];
 
 const Card = ({
 	taskList = [],
@@ -15,8 +16,11 @@ const Card = ({
 	primary_service = {},
 	setShowDoc = () => {},
 	setShowApproved = () => {},
+	canEditDocuments = true,
+	showIgmDocs = false,
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
+	bl_details = [],
 }) => {
 	const handleView = (url) => {
 		window.open(url, '_blank');
@@ -28,9 +32,22 @@ const Card = ({
 		}
 	};
 
-	return (taskList || []).map((item, idx) => {
-		const docType =	item?.document_type
+	const IGM_TASK_LIST = [];
+
+	const getDocType = (item) => item?.document_type
 		|| item?.task?.split('upload_')?.slice(TASK_INDEX_SLICE_FOR_DOC_TYPE)[GLOBAL_CONSTANTS.zeroth_index];
+
+	(taskList || []).forEach((item) => {
+		const docType =	getDocType(item);
+		if (!IGM_TASK_LIST.includes(docType) && IGM_DOCUMENTS.includes(docType)) {
+			IGM_TASK_LIST.push(item);
+		}
+	});
+
+	const updatedTaskList = showIgmDocs ? IGM_TASK_LIST : taskList;
+
+	return (updatedTaskList || []).map((item, idx) => {
+		const docType =	getDocType(item);
 
 		let allUploadedDocs = (completedDocs || []).filter((doc) => doc.document_type === docType)
 			|| emailDocs.filter((doc) => doc?.entity_type === docType);
@@ -51,7 +68,7 @@ const Card = ({
 					receivedViaEmail={receivedViaEmail}
 					showUploadText={showUploadText}
 					idx={idx}
-					taskList={taskList}
+					taskList={updatedTaskList}
 					isChecked={isChecked}
 					shipment_data={shipment_data}
 					item={item}
@@ -61,8 +78,10 @@ const Card = ({
 					primary_service={primary_service}
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
+					canEditDocuments={canEditDocuments}
 					shipmentDocumentRefetch={shipmentDocumentRefetch}
 					activeStakeholder={activeStakeholder}
+					bl_details={bl_details}
 				/>
 			);
 		});

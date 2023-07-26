@@ -2,9 +2,9 @@ import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import CommunicationModal from '../../../../../common/CommunicationModal';
 import otherChannelsConfig from '../../../../../configurations/other-channels-config';
 import hideDetails from '../../../../../utils/hideDetails';
-import CommunicationModal from '../CommunicationModal';
 
 import styles from './styles.module.css';
 
@@ -31,6 +31,10 @@ function ConversationContainer({
 			...eachRoomConfig, has_existing_room: id_name && (id_name in user_channel_ids),
 		};
 	});
+
+	const closeModal = () => {
+		setModalType(null);
+	};
 
 	const onCardClick = ({ other_channel_type, has_existing_room = false, id_name }) => {
 		if (has_existing_room) {
@@ -125,7 +129,7 @@ function ConversationContainer({
 			{modalType && (
 				<CommunicationModal
 					modalType={modalType}
-					setModalType={setModalType}
+					closeModal={closeModal}
 					userData={userData}
 					activeCardData={activeCardData}
 					viewType={viewType}

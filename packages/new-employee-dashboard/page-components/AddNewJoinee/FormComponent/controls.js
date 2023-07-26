@@ -10,7 +10,6 @@ const controls = [
 			required: 'name is required',
 		},
 	},
-
 	{
 		name        : 'personal_email',
 		label       : 'Personal Email ID*',
@@ -24,7 +23,6 @@ const controls = [
 			},
 		},
 	},
-
 	{
 		name        : 'mobile_number',
 		label       : 'Contact Details*',
@@ -35,25 +33,22 @@ const controls = [
 			required: 'Mobile Number is required',
 		},
 	},
-
 	{
 		name        : 'employee_code',
 		type        : 'text',
 		label       : 'Employee ID',
 		placeholder : 'Employee Id',
 	},
-
 	{
 		name        : 'designation',
 		type        : 'select',
-		label       : 'Role*',
+		label       : 'Designation*',
 		placeholder : 'Role',
 		options     : GLOBAL_CONSTANTS.options.role_options,
 		rules       : {
 			required: 'Role is required',
 		},
 	},
-
 	{
 		name                  : 'date_of_joining',
 		label                 : 'Date of joining',
@@ -62,21 +57,33 @@ const controls = [
 		isPreviousDaysAllowed : true,
 		isClearable           : true,
 	},
-
+	{
+		name        : 'office_location_country',
+		type        : 'select',
+		label       : 'Reporting Country*',
+		placeholder : 'Select Location',
+		options     : [
+			{ value: 'india', label: 'India' },
+			{ value: 'vietnam', label: 'Vietnam' },
+		],
+		rules: {
+			required: 'Reporting Country is required',
+		},
+	},
 	{
 		name        : 'office_location',
 		type        : 'select',
-		label       : 'Location Details*',
+		label       : 'Reporting City*',
 		placeholder : 'Select Location',
 		options     : [
 			{ value: 'mumbai', label: 'Mumbai' },
 			{ value: 'gurgaon', label: 'Gurgaon' },
+			{ value: 'ho_chi_minh', label: 'Ho Chi Minh' },
 		],
 		rules: {
 			required: 'Location is required',
 		},
 	},
-
 	{
 		name        : 'cogoport_email',
 		label       : 'Cogoport Email ID',
@@ -89,7 +96,6 @@ const controls = [
 			},
 		},
 	},
-
 	{
 		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
@@ -108,7 +114,6 @@ const controls = [
 			page_limit: 100,
 		},
 	},
-
 	{
 		name        : 'reporting_manager_id',
 		type        : 'asyncSelect',
@@ -124,7 +129,6 @@ const controls = [
 			page_limit: 100,
 		},
 	},
-
 	{
 		name        : 'hr_id',
 		type        : 'asyncSelect',
@@ -142,7 +146,6 @@ const controls = [
 			page_limit: 100,
 		},
 	},
-
 	{
 		name        : 'hrbp_id',
 		type        : 'asyncSelect',

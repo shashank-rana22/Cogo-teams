@@ -1,0 +1,15 @@
+.main {
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 6px;
+}
+
+.padd {
+	margin-top: 20px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
+}

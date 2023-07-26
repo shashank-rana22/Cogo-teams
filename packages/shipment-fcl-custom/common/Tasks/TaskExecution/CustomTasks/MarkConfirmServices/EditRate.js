@@ -23,6 +23,7 @@ function EditRate({
 		onCancel,
 		task,
 		taskListRefetch : refetch,
+		formattedRate,
 	});
 
 	const subsidiaryService = (servicesList || []).find(

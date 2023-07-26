@@ -37,43 +37,50 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 	};
 
 	const mountSnapShot = () => {
+		snapshotCleaner();
+
+		if (!activeChatCollection) {
+			return;
+		}
+
 		setFirstLoadingMessages(true);
 		setFirstTimeLineLoading(true);
-		snapshotCleaner();
-		if (activeChatCollection) {
-			const chatCollectionQuery = query(
-				activeChatCollection,
-				...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_agent_types_query || []),
-				orderBy('created_at', 'desc'),
-				limit(PAGE_LIMIT),
-			);
-			firstMessages.current = onSnapshot(
-				chatCollectionQuery,
-				(querySnapshot) => {
-					const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length
+		const chatCollectionQuery = query(
+			activeChatCollection,
+			...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_agent_types_query || []),
+			orderBy('created_at', 'desc'),
+			limit(PAGE_LIMIT),
+		);
+		firstMessages.current = onSnapshot(
+			chatCollectionQuery,
+			(querySnapshot) => {
+				const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length
 						- LAST_INDEX_FROM_END]?.data()?.created_at;
-					const islastPage = querySnapshot.docs.length < PAGE_LIMIT;
-					let prevMessageData = {};
-					querySnapshot.forEach((mes) => {
-						const timeStamp = mes.data()?.created_at;
-						prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
-					});
+				const islastPage = querySnapshot.docs.length < PAGE_LIMIT;
+				let prevMessageData = {};
+				querySnapshot.forEach((mes) => {
+					const timeStamp = mes.data()?.created_at;
+					prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
+				});
 
-					getCogooneTimeline({
-						startDate : lastDocumentTimeStamp,
-						endDate   : Date.now(),
-						prevMessageData,
-						lastDocumentTimeStamp,
-						islastPage,
-					});
-					setFirstLoadingMessages(false);
-				},
-			);
-		}
+				getCogooneTimeline({
+					startDate : lastDocumentTimeStamp,
+					endDate   : Date.now(),
+					prevMessageData,
+					lastDocumentTimeStamp,
+					islastPage,
+				});
+				setFirstLoadingMessages(false);
+			},
+		);
 	};
 
 	const getNextData = async () => {
 		const prevTimeStamp = Number(messagesState?.[id]?.lastDocumentTimeStamp);
+
+		if (!activeChatCollection) {
+			return;
+		}
 
 		const chatCollectionQuery = query(
 			activeChatCollection,
