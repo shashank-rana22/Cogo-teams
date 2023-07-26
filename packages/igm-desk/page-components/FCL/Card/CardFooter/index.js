@@ -12,14 +12,6 @@ const getDocLabel = (label) => {
 };
 
 export default function CardFooter({ item = {} }) {
-	const FREE_DAYS = [];
-
-	Object.keys(item).forEach((key) => {
-		if (key.includes('free_days_')) {
-			FREE_DAYS.push({ key, value: item[key] });
-		}
-	});
-
 	return (
 		<section className={styles.card_footer}>
 			{!isEmpty(item?.documents) ? (
