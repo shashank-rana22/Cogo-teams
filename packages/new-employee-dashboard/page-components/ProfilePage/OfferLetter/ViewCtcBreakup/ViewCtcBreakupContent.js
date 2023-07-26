@@ -1,3 +1,4 @@
+import { RadioGroup } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -8,7 +9,12 @@ import styles from './styles.module.css';
 const TOFIXED_NUMBER = 2;
 const DEFAULT_VALUE = 0;
 
-function ViewCtcBreakupContent({ metadata }) {
+const OPTIONS = [
+	{ value: 'yes', label: 'Yes', disabled: true },
+	{ value: 'no', label: 'No', disabled: true },
+];
+
+function ViewCtcBreakupContent({ metadata, is_offer_letter_applicable }) {
 	const {
 		joining_bonus_yearly,
 		joining_bonus_monthly,
@@ -21,6 +27,8 @@ function ViewCtcBreakupContent({ metadata }) {
 		sign_on_bonus_monthly,
 		sign_on_bonus_yearly,
 	} = metadata || {};
+
+	const shareOfferLetter = (is_offer_letter_applicable) ? 'yes' : 'no';
 
 	const MAPPING = {
 		joining_bonus_monthly: {
@@ -56,6 +64,13 @@ function ViewCtcBreakupContent({ metadata }) {
 
 	return (
 		<div className={styles.table_container}>
+			<div className={styles.text_container}>
+				Share offer letter?
+				<RadioGroup
+					options={OPTIONS}
+					value={shareOfferLetter}
+				/>
+			</div>
 			<div className={styles.heading}>
 				<h4 style={{ width: '60%' }}>Components</h4>
 				<h4 style={{ width: '20%' }}>Annual Salary</h4>

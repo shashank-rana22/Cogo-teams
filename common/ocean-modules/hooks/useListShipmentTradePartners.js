@@ -12,6 +12,7 @@ const useListShipmentTradePartners = ({ shipment_id = '' }) => {
 		params : {
 			filters: {
 				shipment_id,
+				status: 'active',
 			},
 			add_service_objects_required : true,
 			page_limit                   : DEFAULT_PAGE_LIMIT,
