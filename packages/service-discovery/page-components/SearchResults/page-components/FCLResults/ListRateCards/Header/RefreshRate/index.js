@@ -1,7 +1,6 @@
 import { IcMRefresh } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
 
 function RefreshRate({ refetch = () => {} }) {
 	const { general: { query = {} } } = useSelector((state) => state);
@@ -19,10 +18,6 @@ function RefreshRate({ refetch = () => {} }) {
 		await trigger({ data: params });
 		refetch();
 	};
-
-	useEffect(() => {
-		refresh();
-	}, []);
 
 	return (
 		<IcMRefresh

@@ -8,7 +8,7 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 	const { general: { query = {} } } = useSelector((state) => state);
 	const { spot_search_id = '', rate_card_id } = query;
 
-	const [screen, setScreen] = useState(rate_card_id ? 'selectedCard' : 'listRateCard');
+	const [screen, setScreen] = useState(rate_card_id ? 'selectedCardScreen' : 'listRateCard');
 	const [selectedCard, setSelectedCard] = useState({});
 	const [filters, setFilters] = useState({
 		page             : 1,
