@@ -1,3 +1,4 @@
+import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -9,10 +10,27 @@ import showErrorsInToast from '../utils/showErrorsInToast';
 const ZERO_COUNT = 0;
 const INITIAL_PAGE = 1;
 
+const extractNavLinks = (obj) => {
+	const NAV_LINKS = [];
+
+	Object.values(obj).forEach((item) => {
+		if (item?.options) {
+			item?.options.forEach((option) => NAV_LINKS.push(option?.href));
+		}
+		NAV_LINKS.push(item.href);
+	});
+
+	return NAV_LINKS.filter((item) => item !== undefined);
+};
+
+const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
+
 function Notifications() {
-	const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
 	const { push } = useRouter();
+	const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
 	const [page, setPage] = useState(INITIAL_PAGE);
+
+	console.log({ NAVIGATION_LINKS });
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_communications',
@@ -28,13 +46,13 @@ function Notifications() {
 		scope,
 	}, { manual: false });
 
-	const [{ data: updateCommunications }] = useRequest({
+	const [, triggerBulkComm] = useRequest({
 		url    : '/bulk_update_communications',
 		method : 'POST',
 		scope,
 	}, { manual: false });
 
-	const [{ data: updateCommunication }] = useRequest({
+	const [, triggerComm] = useRequest({
 		url    : '/update_communication',
 		method : 'POST',
 		scope,
@@ -50,7 +68,7 @@ function Notifications() {
 
 	const updateAction = async (action) => {
 		try {
-			const updateRes = await updateCommunications.trigger({
+			const updateRes = await triggerBulkComm({
 				data: {
 					filters     : { type: 'platform_notification' },
 					action_name : action,
@@ -76,7 +94,7 @@ function Notifications() {
 			window.open(item.content.redirect_url, '_blank');
 		} else {
 			try {
-				const updateRes = await updateCommunication.trigger({
+				const updateRes = await triggerComm({
 					data: { id: item?.id, is_clicked: true },
 				});
 				if (updateRes.hasError) {

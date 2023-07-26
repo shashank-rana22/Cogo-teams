@@ -1603,6 +1603,7 @@ importers:
       '@cogoport/components': ^1.0.432
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.86
+      '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
@@ -1615,6 +1616,7 @@ importers:
       '@cogoport/components': 1.0.432_33anfcebeh5c4mwpkkbioyhs2q
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.86_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
