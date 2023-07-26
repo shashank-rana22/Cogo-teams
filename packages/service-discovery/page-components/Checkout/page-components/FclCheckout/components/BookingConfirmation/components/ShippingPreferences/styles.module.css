@@ -38,3 +38,52 @@
     margin-bottom: 4px;
     justify-content: space-between;
 }
+
+.partial_load {
+    display: flex;
+    margin-top: 28px;
+    align-items: center;
+    font-weight: 600;
+
+    :global {
+		.ui_chips_container {
+			flex-wrap: wrap;
+		}
+
+		.ui_chip_container svg {
+			display: none;
+		}
+
+		.ui_chip_container.ui_ps_themeType_primary {
+			padding: 14px 6px;
+			background-color: #fff;
+			border: 1px solid #ececec;
+			border-radius: 28px;
+
+			&:hover {
+				background-color: #fff;
+				border: 1px solid #ececec;
+			}
+		}
+
+		.ui_chip_container.ui_ps_themeType_secondary {
+			padding: 14px 6px;
+			font-weight: 600;
+			background-color: #fcdc00;
+			border: 1px solid #fcdc00;
+			border-radius: 28px;
+
+			&:hover {
+				background-color: #fcdc00;
+				border: 1px solid #fcdc00;
+			}
+		}
+
+		.ui_pill_container {
+			margin: unset;
+			margin-left: 8px;
+			cursor: pointer;
+			border-radius: 24px;
+		}
+	}
+}

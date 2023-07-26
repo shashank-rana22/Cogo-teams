@@ -1,3 +1,4 @@
+import { ChipsController } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../../../commons/forms/getElementController';
@@ -15,7 +16,12 @@ function ShippingPreferences({ formProps = {}, primaryService = {} }) {
 	const { shipping_preferences = {} } = primaryService;
 
 	useEffect(() => {
-		const { sailing_start_date = '', sailing_end_date = '', ...restValues } = shipping_preferences || {};
+		const {
+			sailing_start_date = '',
+			sailing_end_date = '',
+			agreed_for_partial_shipment = false,
+			...restValues
+		} = shipping_preferences || {};
 
 		Object.entries(restValues).forEach(([key, value]) => {
 			setValue(key, value);
@@ -24,6 +30,8 @@ function ShippingPreferences({ formProps = {}, primaryService = {} }) {
 		if (sailing_start_date) {
 			setValue('sailing_range', { startDate: new Date(sailing_start_date), endDate: new Date(sailing_end_date) });
 		}
+
+		setValue('agreed_for_partial_shipment', agreed_for_partial_shipment ? 'yes' : 'no');
 	}, [setValue, shipping_preferences]);
 
 	return (
@@ -91,6 +99,25 @@ function ShippingPreferences({ formProps = {}, primaryService = {} }) {
 						</div>
 					);
 				})}
+
+			</div>
+
+			<div className={styles.partial_load}>
+				In some rare occasion, we may break the shipment and
+				send via different ships, is that okay with you?
+
+				<ChipsController
+					style={{ marginLeft: '12px' }}
+					control={control}
+					name="agreed_for_partial_shipment"
+					type="chips"
+					options={[
+						{ value: 'no', label: 'No' },
+						{ value: 'yes', label: 'Yes' },
+					]}
+					size="lg"
+					enableMultiSelect={false}
+				/>
 			</div>
 		</div>
 	);

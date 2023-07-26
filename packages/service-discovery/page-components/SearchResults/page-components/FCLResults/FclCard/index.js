@@ -16,6 +16,9 @@ function RateCardTopSection({
 	comparisonRates = {},
 	isSelectedCard = false,
 	isCogoAssured = false,
+	infoBanner = {},
+	index = 0,
+	setInfoBanner = () => {},
 }) {
 	return (
 		<div className={styles.top}>
@@ -26,6 +29,9 @@ function RateCardTopSection({
 				comparisonRates={comparisonRates}
 				isSelectedCard={isSelectedCard}
 				isCogoAssured={isCogoAssured}
+				infoBanner={infoBanner}
+				index={index}
+				setInfoBanner={setInfoBanner}
 			/>
 		</div>
 	);
@@ -113,6 +119,9 @@ function FclCard({
 	comparisonRates = () => {},
 	setComparisonRates = {},
 	refetchSearch = () => {},
+	infoBanner = {},
+	index = 0,
+	setInfoBanner = () => {},
 }) {
 	const { service_rates = {}, schedules = {} } = rateCardData;
 	const primaryService = detail?.search_type;
@@ -157,6 +166,9 @@ function FclCard({
 				setComparisonRates={setComparisonRates}
 				isSelectedCard={isSelectedCard}
 				isCogoAssured={isCogoAssured}
+				infoBanner={infoBanner}
+				index={index}
+				setInfoBanner={setInfoBanner}
 			/>
 
 			<MiddleSection

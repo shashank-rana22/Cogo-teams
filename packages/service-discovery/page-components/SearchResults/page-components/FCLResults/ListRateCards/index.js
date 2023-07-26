@@ -9,6 +9,10 @@ import Header from './Header';
 import Schedules from './Schedules';
 import styles from './styles.module.css';
 
+const MAXIMUM_RATE_CARDS = 5;
+
+const ONE = 1;
+
 function HeaderTop({
 	detail = {},
 	filters = {},
@@ -19,7 +23,7 @@ function HeaderTop({
 	setScreen = () => {},
 }) {
 	// const { scrollDirection } = useScrollDirection();
-	const showComparison = Object.keys(comparisonRates).length > 1;
+	const showComparison = Object.keys(comparisonRates).length > ONE;
 
 	return (
 		<div className={styles.header}>
@@ -58,6 +62,9 @@ function RateCard({
 	setComparisonRates = () => {},
 	comparisonRates = {},
 	refetchSearch = () => {},
+	infoBanner = {},
+	index = 0,
+	setInfoBanner = () => {},
 }) {
 	if (loading) {
 		return null;
@@ -72,6 +79,9 @@ function RateCard({
 			setComparisonRates={setComparisonRates}
 			comparisonRates={comparisonRates}
 			refetchSearch={refetchSearch}
+			infoBanner={infoBanner}
+			index={index}
+			setInfoBanner={setInfoBanner}
 		/>
 	);
 }
@@ -89,6 +99,8 @@ function ListRateCards({
 	setSelectedWeek = () => {},
 	paginationProps = {},
 	loading = false,
+	infoBanner = {},
+	setInfoBanner = () => {},
 }) {
 	const PrimaryService = detail?.search_type;
 
@@ -119,7 +131,7 @@ function ListRateCards({
 
 			{loading ? <LoaderComponent /> : null}
 
-			{(rates || []).map((rateCardData) => (
+			{(rates || []).map((rateCardData, index) => (
 				<RateCard
 					key={rateCardData.id}
 					loading={loading}
@@ -130,10 +142,13 @@ function ListRateCards({
 					setComparisonRates={setComparisonRates}
 					comparisonRates={comparisonRates}
 					refetchSearch={refetchSearch}
+					infoBanner={infoBanner}
+					index={index}
+					setInfoBanner={setInfoBanner}
 				/>
 			))}
 
-			{rates.length > 5 ? (
+			{rates.length > MAXIMUM_RATE_CARDS ? (
 				<div className={styles.pagination}>
 					<Pagination
 						type="table"

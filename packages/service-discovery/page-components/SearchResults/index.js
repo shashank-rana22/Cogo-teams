@@ -19,6 +19,58 @@ function SearchResults() {
 	const [headerProps, setHeaderProps] = useState({});
 	const [comparisonRates, setComparisonRates] = useState([]);
 	const [selectedWeek, setSelectedWeek] = useState({});
+	const [infoBanner, setInfoBanner] = useState({
+		current      : 'edit_button',
+		totalBanners : 2,
+		buttonProps  : {
+			edit_button: {
+				buttons: [
+					{
+						label     : 'Close',
+						themeType : 'link',
+						type      : 'button',
+						name      : 'close',
+					},
+					{
+						label     : 'Next',
+						themeType : 'accent',
+						type      : 'button',
+						name      : 'next',
+						size      : 'sm',
+					},
+				],
+				heading : 'Filter your preferences',
+				content : `Want to add another container type? Or, 
+				want to update the current one?`,
+				subText         : 'Update it from here.',
+				sequence_number : 1,
+			},
+			comparision_button: {
+				buttons: [
+					{
+						label     : 'Close',
+						themeType : 'link',
+						type      : 'button',
+						name      : 'close',
+					},
+					{
+						label     : 'Prev',
+						themeType : 'accent',
+						type      : 'button',
+						name      : 'prev',
+						size      : 'sm',
+					},
+				],
+				heading: `Select to compare rates, or create a 
+				multiline quotation`,
+				content: `Select multiple rate cards to compare the 
+				rates between the shipping lines, & 
+				create a multi shipping line quotation.`,
+				subText         : '',
+				sequence_number : 2,
+			},
+		},
+	});
 
 	const {
 		refetchSearch = () => {},
@@ -65,9 +117,17 @@ function SearchResults() {
 				activePage="search_results"
 				currentScreen={screen}
 				setCurrentScreen={setScreen}
+				infoBanner={infoBanner}
+				setInfoBanner={setInfoBanner}
 			/>
 
-			<div style={showAdditionalHeader ? { opacity: 0.6, pointerEvents: 'none' } : null}>
+			<div
+				style={
+					showAdditionalHeader || infoBanner.current === 'edit_button'
+						? { opacity: 0.6, pointerEvents: 'none' }
+						: null
+				}
+			>
 				<FCLResults
 					rates={rates}
 					detail={detail}
@@ -86,6 +146,8 @@ function SearchResults() {
 					selectedWeek={selectedWeek}
 					setSelectedWeek={setSelectedWeek}
 					possible_subsidiary_services={possible_subsidiary_services}
+					infoBanner={infoBanner}
+					setInfoBanner={setInfoBanner}
 				/>
 			</div>
 		</div>
