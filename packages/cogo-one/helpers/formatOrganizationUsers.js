@@ -3,9 +3,8 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 const REMOVE_PLUS_SIGN = 1;
 
 function formatOrganizationUsers({ data, filterKey }) {
-	const { list = [] } = data || {};
 	const geo = getGeoConstants();
-	const getListData = filterKey === 'organization_id' ? list : data?.data;
+	const getListData = data?.[filterKey === 'organization_id' ? 'list' : 'data'] || [];
 
 	return getListData?.map((item) => {
 		const {

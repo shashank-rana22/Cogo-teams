@@ -1,18 +1,17 @@
 import { AsyncSelect } from '@cogoport/forms';
 import { useState } from 'react';
 
-import OrgUsersList from '../OrgUserList';
-
+import OrgUsersList from './OrgUserList';
 import styles from './styles.module.css';
 
 const ACTIVE_SERVICE_MAPPING = {
 	organization: {
-		asynKey   : 'organizations',
+		asyncKey  : 'organizations',
 		endPoint  : 'list_organization_users',
 		filterKey : 'organization_id',
 	},
 	lead_organization: {
-		asynKey   : 'list_lead_organizations',
+		asyncKey  : 'list_lead_organizations',
 		endPoint  : 'get_lead_organization_users',
 		filterKey : 'lead_organization_id',
 	},
@@ -22,7 +21,7 @@ function Organizations({ setActiveTab = () => {}, setOpenKamContacts = () => {},
 	const [orgId, setOrgId] = useState('');
 
 	const {
-		asynKey,
+		asyncKey,
 		endPoint,
 		filterKey,
 	} = ACTIVE_SERVICE_MAPPING[activeOrg];
@@ -30,7 +29,7 @@ function Organizations({ setActiveTab = () => {}, setOpenKamContacts = () => {},
 	return (
 		<>
 			<AsyncSelect
-				asyncKey={asynKey}
+				asyncKey={asyncKey}
 				initialCall
 				onChange={setOrgId}
 				value={orgId}

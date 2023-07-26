@@ -2,8 +2,8 @@ import { Placeholder, Input } from '@cogoport/components';
 import { IcMSearchdark, IcMArrowNext } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import UserAvatar from '../../../../../common/UserAvatar';
-import useListOrganizationUsers from '../../../../../hooks/useListOrganizationUsers';
+import UserAvatar from '../../../../../../common/UserAvatar';
+import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
 
 import styles from './styles.module.css';
 

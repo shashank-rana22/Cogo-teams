@@ -76,7 +76,6 @@ function asyncFieldsLeadOrganization() {
 			filters: {
 				status: 'active',
 			},
-			page_limit: 100,
 		},
 	};
 }

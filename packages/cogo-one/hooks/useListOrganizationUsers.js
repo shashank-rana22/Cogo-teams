@@ -6,7 +6,7 @@ import formatOrganizationUsers from '../helpers/formatOrganizationUsers';
 
 const getParams = ({ organizationId, query, filterKey }) => ({
 	filters: filterKey === 'organization_id'
-		? { [filterKey]: organizationId,	q: query || undefined } : undefined,
+		? { [filterKey]: organizationId, q: query || undefined } : undefined,
 	lead_organization_id : filterKey === 'lead_organization_id' ? organizationId : undefined,
 	page                 : 1,
 	page_limit           : 100,

@@ -29,22 +29,24 @@ function NewUserOutBound({ setModalType = () => {}, activeTab = {} }) {
 	};
 
 	const handleVoiceCall = () => {
-		if (mobile_no) {
-			dispatch(
-				setProfileState({
-					is_in_voice_call          : true,
-					voice_call_recipient_data : {
-						startTime           : new Date(),
-						orgId               : organization_id,
-						userId              : user_id,
-						mobile_number       : whatsapp_number_eformat,
-						mobile_country_code : countryCode,
-						userName            : user_name,
-						isUnkownUser        : !user_id,
-					},
-				}),
-			);
+		if (!mobile_no) {
+			return;
 		}
+
+		dispatch(
+			setProfileState({
+				is_in_voice_call          : true,
+				voice_call_recipient_data : {
+					startTime           : new Date(),
+					orgId               : organization_id,
+					userId              : user_id,
+					mobile_number       : whatsapp_number_eformat,
+					mobile_country_code : countryCode,
+					userName            : user_name,
+					isUnkownUser        : !user_id,
+				},
+			}),
+		);
 	};
 
 	const ACTIONS_MAPPING = [

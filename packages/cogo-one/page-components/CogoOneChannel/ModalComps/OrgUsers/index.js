@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Organizations from './Organizations';
 import styles from './styles.module.css';
 
-const TABS = [
+const TABS_MAPPING = [
 	{ name: 'organization', title: 'Organizations' },
 	{ name: 'lead_organization', title: 'Lead Organizations' },
 ];
@@ -34,7 +34,7 @@ function OrgUsers({
 					themeType="tertiary"
 					onChange={setActiveOrg}
 				>
-					{(TABS || []).map((item) => (
+					{(TABS_MAPPING || []).map((item) => (
 						<TabPanel key={item?.name} name={item?.name} title={item?.title} />
 					))}
 				</Tabs>
