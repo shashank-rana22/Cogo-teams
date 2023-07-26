@@ -80,7 +80,7 @@ function DefaultView() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
-	if (isEmpty(shipment_data) && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
+	if (isEmpty(shipment_data) && ![UNAUTHORIZED_STATUS_CODE, undefined, ''].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<h2 className={styles.error_heading}>Something Went Wrong!</h2>
