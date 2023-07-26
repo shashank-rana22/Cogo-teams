@@ -37,10 +37,12 @@ function Accuracy({ data = [] }) {
 						tickPadding    : 5,
 						legendOffset   : 36,
 						legendPosition : 'middle',
-						tickRotation   : -45,
+						tickRotation   : -60,
 						styles         : { transform: 'rotate(-45deg' },
-						format         : (val) => formatDate({ date: val, formatType: 'date' }),
-
+						format         : (val) => formatDate({
+							date       : val,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+						}),
 					}}
 					axisLeft={{
 						tickSize       : 5,

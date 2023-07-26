@@ -15,7 +15,7 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab, update
 		accessor : (item) => (
 			<div className={styles.name_and_email}>
 				<div className={styles.name}>{item?.employee_detail?.name || '-'}</div>
-				{item?.employee_detail?.personal_email || null}
+				{item?.employee_detail?.cogoport_email || item?.employee_detail?.personal_email || null}
 			</div>
 		),
 	},
@@ -49,12 +49,16 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab, update
 			const { metadata } = item || {};
 			const {
 				init = 0, joining_bonus_yearly = 0,
-				retention_bonus_yearly = 0, performance_linked_variable_yearly = 0, sign_on_bonus_yearly = 0,
+				retention_bonus_yearly = 0, performance_linked_variable_yearly = 0,
+				sign_on_bonus_yearly = 0, retention_bonus_twice_yearly = 0,
+				retention_bonus_thrice_yearly = 0,
 			} = metadata || {};
 
 			const variable_pay = (Number(joining_bonus_yearly)
 				+ Number(retention_bonus_yearly)
-				+ Number(performance_linked_variable_yearly) + Number(sign_on_bonus_yearly)) || VARIABLE_PAY_THRESHOLD;
+				+ Number(performance_linked_variable_yearly) + Number(sign_on_bonus_yearly)
+				+ Number(retention_bonus_twice_yearly) + Number(retention_bonus_thrice_yearly))
+				|| VARIABLE_PAY_THRESHOLD;
 
 			return (
 				<div>
@@ -92,7 +96,11 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab, update
 			<div className={styles.button_container}>
 				{activeTab === 'active' ? (
 					<>
-						<ActionPopover item={item} onFinalSubmit={onFinalSubmit} />
+						<ActionPopover
+							item={item}
+							onFinalSubmit={onFinalSubmit}
+							updateOfferLetterLoading={updateOfferLetterLoading}
+						/>
 
 						<Button
 							onClick={() => onFinalSubmit({ id: item?.id, status: 'approved' })}

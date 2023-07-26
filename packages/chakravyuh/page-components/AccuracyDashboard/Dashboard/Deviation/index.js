@@ -23,7 +23,7 @@ function Deviation({ data = [], loading = false }) {
 		deviation       : `(${range - BOTTOM_AXIS_UNIT} to ${range})%`,
 		participation   : BOTTOM_AXIS_UNIT,
 		countOfNegative : idx < SEPARATION_INDEX ? count : GLOBAL_CONSTANTS.zeroth_index,
-		countOfPositive : idx > SEPARATION_INDEX ? count : GLOBAL_CONSTANTS.zeroth_index,
+		countOfPositive : idx >= SEPARATION_INDEX ? count : GLOBAL_CONSTANTS.zeroth_index,
 	}));
 
 	const lineData = [{

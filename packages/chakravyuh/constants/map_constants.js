@@ -12,9 +12,9 @@ const MAX_LNG = 90;
 export const LOCATION_KEYS = ['origin', 'destination'];
 export const COLORS = [
 	{ weight: 0.5 },
-	{ fillColor: '#F7FAEF', color: '#849E4C', fillOpacity: 0.8, opacity: 0.8, min: 0, max: 40 },
-	{ fillColor: '#FEF3E9', color: '#F68B21', fillOpacity: 0.8, opacity: 0.8, min: 40, max: 60 },
-	{ fillColor: '#FDEBE9', color: '#EE3425', fillOpacity: 0.8, opacity: 0.8, min: 60, max: 100 },
+	{ fillColor: '#F7FAEF', color: '#849E4C', fillOpacity: 1, opacity: 0.8, min: 0, max: 40 },
+	{ fillColor: '#FEF3E9', color: '#F68B21', fillOpacity: 1, opacity: 0.8, min: 40, max: 60 },
+	{ fillColor: '#FDEBE9', color: '#EE3425', fillOpacity: 1, opacity: 0.8, min: 60, max: 100 },
 ];
 
 export const SORT_OPTIONS = [

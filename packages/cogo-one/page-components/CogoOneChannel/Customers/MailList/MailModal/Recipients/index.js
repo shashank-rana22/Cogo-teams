@@ -26,11 +26,10 @@ function Recipients({
 	handleChange = () => {},
 	handleDelete = () => {},
 	handleKeyPress = () => {},
-	handleError = () => {},
+	handleCancel = () => {},
 	handleEdit = () => {},
 	setEmailState = () => {},
 	showControl = '',
-	value = '',
 	errorValue = '',
 }) {
 	const [enabledRecipients, setEnabledRecipients] = useState({
@@ -67,11 +66,10 @@ function Recipients({
 								handleDelete={handleDelete}
 								showControl={showControl}
 								type={itm.value}
-								value={value}
 								errorValue={errorValue}
 								handleChange={handleChange}
 								handleKeyPress={handleKeyPress}
-								handleError={handleError}
+								handleCancel={handleCancel}
 								handleEdit={handleEdit}
 							/>
 						</div>

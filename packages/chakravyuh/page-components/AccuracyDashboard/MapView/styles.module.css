@@ -6,6 +6,16 @@
 	position: relative;
 	display: flex;
 	justify-content: flex-end;
+
+	:global {
+		.leaflet-bar {
+			transition: all 0.2s ease;
+
+			&:hover {
+				scale: 1.1 !important;
+			}
+		}
+	}
 }
 
 .map {

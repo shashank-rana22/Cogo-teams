@@ -2,6 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 
+// import useGetFclMapStatistics from '../../../hooks/useGetFclMapStatistics';
 import useGetSimplifiedGeometry from '../../../hooks/useGetSimplifiedGeometry';
 import { getLowestHierarchy, getParentHierarchy } from '../../../utils/hierarchy-utils';
 
@@ -16,6 +17,7 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 	const [isFull, setIsFull] = useState(false);
 	const [bounds, setBounds] = useState(null);
 	const [hierarchy, setHierarchy] = useState({});
+	const [activeId, setActiveId] = useState(null);
 	const [locationFilters, setLocationFilters] = useState({
 		origin      : { id: GLOBAL_CONSTANTS.country_ids.IN, type: 'country' },
 		destination : null,
@@ -23,6 +25,7 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 	const [activeList, setActiveList] = useState([]);
 
 	const { data, loading } = useGetSimplifiedGeometry({ type: 'country', setActiveList });
+	// const { data: deviationData, loading: deviationLoading } = useGetFclMapStatistics({ locationFilters });
 
 	const handleBackHierarchy = (e) => {
 		e.stopPropagation();
@@ -42,6 +45,7 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 			return acc;
 		}, {});
 		setHierarchy(newHierarchy);
+		setActiveId({ id: hierarchy[parent], state: 'clicked' });
 		setActiveList([]);
 	};
 
@@ -51,6 +55,8 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 				<Map
 					isFull={isFull}
 					data={data}
+					currentId={activeId}
+					setCurrentId={setActiveId}
 					loading={loading}
 					bounds={bounds}
 					setBounds={setBounds}
@@ -67,6 +73,7 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 				setIsFull={setIsFull}
 				isFull={isFull}
 				data={data}
+				setActiveId={setActiveId}
 				globalFilters={globalFilters}
 				setGlobalFilters={setGlobalFilters}
 				setView={setView}

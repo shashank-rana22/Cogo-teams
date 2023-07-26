@@ -56,6 +56,12 @@ const chakravyuh = {
 			feature      : 'pricing_accuracy_dashboard',
 			service_name : 'fcl_freight_rate',
 		},
+		{
+			api          : 'get_fcl_freight_map_view_statistics',
+			access_type  : 'private',
+			feature      : 'pricing_accuracy_dashboard',
+			service_name : 'fcl_freight_rate',
+		},
 	],
 };
 

@@ -35,7 +35,7 @@ interface Props {
 	chargeableWeight?:number;
 	setGenerate?:Function;
 	activeCategory?: string;
-	hawbDetails?: Array<string>;
+	hawbDetails?: Array<NestedObj>;
 	activeHawb?: NestedObj;
 	setHawbDetails?:Function;
 	setActiveHawb?: Function;

@@ -9,14 +9,19 @@
 	position: absolute;
 	top: 76px;
 	right: 10px;
-	z-index: 999;
+	z-index: 1001;
 	width: 30px !important;
 	height: 30px !important;
 	box-shadow: 0 0 8px #0402022e;
 	stroke: #040202;
+	transition: scale 0.2s ease;
 
 	svg {
 		margin-top: 2px;
+	}
+
+	&:hover {
+		scale: 1.2;
 	}
 }
 

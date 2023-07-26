@@ -23,7 +23,7 @@ const useListLocations = ({ region_id, type, setActiveList = () => {}, id }) => 
 		if (type && region_id) {
 			getData({
 				filters    : { type, region_id, id },
-				includes   : { id: true, name: true, type: true, loc: true, geometry: true },
+				includes   : { id: true, name: true, type: true, loc: true },
 				page_limit : 250,
 			});
 		}
