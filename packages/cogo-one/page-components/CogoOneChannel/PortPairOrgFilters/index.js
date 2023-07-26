@@ -2,7 +2,7 @@ import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMAppSearch, IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import Templates from '../../../common/Templates';
 import getControls from '../../../configurations/service-provider-controls';
@@ -13,7 +13,14 @@ import Form from './Form';
 import OrgUsersList from './OrgUserList';
 import styles from './styles.module.css';
 
-function PortPairOrgFilters({ setSendBulkTemplates = () => {}, setActiveTab = () => {} }) {
+function PortPairOrgFilters({
+	setSendBulkTemplates = () => {},
+	setActiveTab = () => {},
+	selectedAutoAssign = {},
+	setSelectedAutoAssign = () => {},
+	setAutoAssignChats = () => {},
+	sendBulkTemplates = false,
+}) {
 	const [listServiceProviders, setListServiceProviders] = useState([]);
 	const [selectedUsers, setSelectedUsers] = useState({});
 	const [modalType, setModalType] = useState('');
@@ -23,7 +30,7 @@ function PortPairOrgFilters({ setSendBulkTemplates = () => {}, setActiveTab = ()
 	});
 
 	const { originDetails = {}, destinationDetails = {} } = portDetails;
-
+	const divRef = useRef(null);
 	const {
 		control,
 		handleSubmit,
@@ -39,6 +46,8 @@ function PortPairOrgFilters({ setSendBulkTemplates = () => {}, setActiveTab = ()
 	});
 
 	const formValues = watch();
+
+	const selectedUsersList = isEmpty(selectedUsers) ? selectedAutoAssign : selectedUsers;
 
 	const {
 		service_type: serviceType,
@@ -56,15 +65,17 @@ function PortPairOrgFilters({ setSendBulkTemplates = () => {}, setActiveTab = ()
 	};
 
 	const { bulkCommunicationChat = () => {} } = useSendUsersBulkCommunication({
-		callbackfunc          : closeModal,
-		setSelectedAutoAssign : setSelectedUsers,
+		callbackfunc: closeModal,
+		setSelectedAutoAssign,
+		setSelectedUsers,
 		setModalType,
 		setSendBulkTemplates,
+		setAutoAssignChats,
 	});
 
 	const bulkCommunication = (args) => {
 		const { template_name, variables } = args;
-		bulkCommunicationChat({ selectedAutoAssign: selectedUsers, variables, template_name });
+		bulkCommunicationChat({ selectedAutoAssign: selectedUsersList, variables, template_name });
 	};
 
 	const data = {
@@ -116,16 +127,42 @@ function PortPairOrgFilters({ setSendBulkTemplates = () => {}, setActiveTab = ()
 		}));
 	};
 
+	const handleCancel = () => {
+		setSendBulkTemplates(false);
+		setSelectedAutoAssign({});
+		setAutoAssignChats(true);
+	};
+
+	useEffect(() => {
+		const handleOutsideClick = (event) => {
+			if (divRef.current && !divRef.current.contains(event.target)) {
+				setSendBulkTemplates(false);
+				setSelectedAutoAssign({});
+				setAutoAssignChats(true);
+			}
+		};
+
+		if (sendBulkTemplates) {
+			document.addEventListener('mousedown', handleOutsideClick);
+		} else {
+			document.removeEventListener('mousedown', handleOutsideClick);
+		}
+
+		return () => {
+			document.removeEventListener('mousedown', handleOutsideClick);
+		};
+	}, [sendBulkTemplates, setAutoAssignChats, setSelectedAutoAssign, setSendBulkTemplates]);
+
 	return (
-		<div className={styles.main_container}>
+		<div className={styles.main_container} ref={divRef}>
 			<div className={styles.header}>
 				<div className={styles.title}>
-					Organizaton Users
+					Users
 				</div>
 				<Button
 					size="sm"
 					themeType="tertiary"
-					onClick={() => setSendBulkTemplates(false)}
+					onClick={handleCancel}
 					type="button"
 				>
 					<IcMCross width={15} height={15} />
@@ -133,32 +170,34 @@ function PortPairOrgFilters({ setSendBulkTemplates = () => {}, setActiveTab = ()
 			</div>
 
 			<div className={styles.container}>
-				<div className={styles.form_container}>
-					<Form controls={controls} errors={errors} control={control} />
-					<div className={styles.user_actions}>
-						<Button
-							loading={serviceProvidersloading}
-							size="md"
-							themeType="primary"
-							onClick={handleSubmit(onSubmit)}
-							type="button"
-						>
-							<IcMAppSearch width={20} height={20} />
-						</Button>
-
-						<div className={cl`${styles.clear_filters} ${isEmpty(errors) ? styles.action : ''}`}>
+				{isEmpty(selectedAutoAssign) ? (
+					<div className={styles.form_container}>
+						<Form controls={controls} errors={errors} control={control} />
+						<div className={styles.user_actions}>
 							<Button
+								loading={serviceProvidersloading}
 								size="md"
-								themeType="secondary"
-								onClick={handleClear}
+								themeType="primary"
+								onClick={handleSubmit(onSubmit)}
 								type="button"
-								disabled={!isPortData}
 							>
-								clear
+								<IcMAppSearch width={20} height={20} />
 							</Button>
+
+							<div className={cl`${styles.clear_filters} ${isEmpty(errors) ? styles.action : ''}`}>
+								<Button
+									size="md"
+									themeType="secondary"
+									onClick={handleClear}
+									type="button"
+									disabled={!isPortData}
+								>
+									clear
+								</Button>
+							</div>
 						</div>
 					</div>
-				</div>
+				) : null}
 
 				<div className={styles.template_container}>
 					<OrgUsersList
@@ -170,10 +209,14 @@ function PortPairOrgFilters({ setSendBulkTemplates = () => {}, setActiveTab = ()
 						setSendBulkTemplates={setSendBulkTemplates}
 						setModalType={setModalType}
 						modalType={modalType}
+						selectedAutoAssign={selectedAutoAssign}
+						setSelectedAutoAssign={setSelectedAutoAssign}
 					/>
 
 					{modalType ? (
-						<div className={styles.template}>
+						<div className={cl`${styles.template} 
+						${isEmpty(selectedAutoAssign) ? styles.port_pair_template : ''}`}
+						>
 							<Templates
 								data={data}
 								selectedAutoAssign={selectedUsers}

@@ -23,9 +23,11 @@ const getPayload = ({ selectedAutoAssign = {}, variables = {}, template_name = '
 
 function useSendUsersBulkCommunication({
 	setSelectedAutoAssign = () => {},
-	setAutoAssignChats = () => {}, callbackfunc = () => {},
+	setAutoAssignChats = () => {},
+	callbackfunc = () => {},
 	setSendBulkTemplates = () => {},
 	setModalType = () => {},
+	setSelectedUsers = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/send_users_bulk_communication',
@@ -45,6 +47,7 @@ function useSendUsersBulkCommunication({
 			callbackfunc();
 			setSendBulkTemplates(false);
 			setModalType('');
+			setSelectedUsers({});
 		}
 	};
 	return {

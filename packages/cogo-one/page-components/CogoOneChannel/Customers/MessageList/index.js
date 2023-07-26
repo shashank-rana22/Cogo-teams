@@ -34,6 +34,7 @@ function MessageList(messageProps) {
 		autoAssignChats,
 		setAutoAssignChats = () => {},
 		workPrefernceLoading,
+		setSendBulkTemplates = () => {},
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
@@ -98,7 +99,9 @@ function MessageList(messageProps) {
 	const handleAutoAssignBack = () => {
 		setAutoAssignChats(true);
 		setSelectedAutoAssign({});
+		setSendBulkTemplates(false);
 	};
+
 	useEffect(() => {
 		setAutoAssignChats(true);
 		setSelectedAutoAssign({});
@@ -156,6 +159,7 @@ function MessageList(messageProps) {
 									setModalType={setModalType}
 									isBotSession={isBotSession}
 									viewType={viewType}
+									setSendBulkTemplates={setSendBulkTemplates}
 								/>
 							)}
 						<div

@@ -18,6 +18,7 @@ function AutoAssignComponent({
 	setModalType = () => {},
 	isBotSession = false,
 	viewType = '',
+	setSendBulkTemplates = () => {},
 }) {
 	const [popoverVisible, setPopoverVisible] = useState(false);
 	const count = Object.keys(selectedAutoAssign || {}).length || ZERO_COUNT;
@@ -65,6 +66,7 @@ function AutoAssignComponent({
 											isBotSession={isBotSession}
 											setPopoverVisible={setPopoverVisible}
 											viewType={viewType}
+											setSendBulkTemplates={setSendBulkTemplates}
 										/>
 									)}
 									visible={popoverVisible}

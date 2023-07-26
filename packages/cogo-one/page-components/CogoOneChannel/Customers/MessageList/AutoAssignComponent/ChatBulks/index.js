@@ -8,10 +8,10 @@ function ChatBulks({
 	selectedAutoAssign = {},
 	bulkAssignLoading = false,
 	bulkAssignChat = () => {},
-	setModalType = () => {},
 	isBotSession = false,
 	setPopoverVisible = () => {},
 	viewType = '',
+	setSendBulkTemplates = () => {},
 }) {
 	const bulkSendActions = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.bulk_assign_features;
 
@@ -37,11 +37,8 @@ function ChatBulks({
 					size="sm"
 					themeType="secondary"
 					onClick={() => {
-						setModalType({
-							type : 'bulk_communication',
-							data : {},
-						});
 						setPopoverVisible((prev) => !prev);
+						setSendBulkTemplates(true);
 					}}
 					className={styles.popover_button}
 				>

@@ -1,13 +1,20 @@
-import { Placeholder, Checkbox, Button, cl } from '@cogoport/components';
+import { Placeholder, Checkbox, Button, cl, Select } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import UserAvatar from '../../../../common/UserAvatar';
 import useListOrgUsers from '../../../../hooks/useListOrgUsers';
 
+import SelecetdUsers from './selecetdUsers';
 import styles from './styles.module.css';
 
 const LOADER_COUNT = 4;
+
+const USER_SELECT_PAGINATION = [
+	{ label: 'Page Limit 100', value: 100 },
+	{ label: 'Page Limit 150', value: 150 },
+	{ label: 'Page Limit 200', value: 200 },
+];
 
 function OrgUsersList({
 	setActiveTab = () => {},
@@ -18,11 +25,15 @@ function OrgUsersList({
 	selectedUsers = {},
 	setSendBulkTemplates = () => {},
 	modalType = '',
+	selectedAutoAssign = {},
+	setSelectedAutoAssign = () => {},
 }) {
 	const {
 		formattedOrgUsersList = [],
 		loading = false,
 		handleScroll = () => {},
+		pagination,
+		setPagination = () => {},
 	} = useListOrgUsers({ organizationId: listServiceProviders });
 
 	const onCardClick = ({ item }) => {
@@ -69,58 +80,111 @@ function OrgUsersList({
 
 	const modifiedList = loading ? [...Array(LOADER_COUNT).fill({})] : formattedOrgUsersList;
 
+	const handleSelectAll = ({ event }) => {
+		if (event.target.checked) {
+			setSelectedUsers(() => {
+				const ALL_USER_DATA = {};
+				modifiedList.forEach((user) => {
+					ALL_USER_DATA[user.user_id] = user;
+				});
+
+				return ALL_USER_DATA;
+			});
+		} else {
+			setSelectedUsers({});
+		}
+	};
+
+	if (!isEmpty(selectedAutoAssign)) {
+		return (
+			<div className={cl`${styles.container} ${!modalType || !selectedAutoAssign ? styles.empty_list : ''}`}>
+				<SelecetdUsers selectedAutoAssign={selectedAutoAssign} setSelectedAutoAssign={setSelectedAutoAssign} />
+
+				<div className={styles.send_action}>
+					<Button
+						size="md"
+						themeType="accent"
+						disabled={!selectedAutoAssign}
+						onClick={() => setModalType('bulk_communication')}
+						type="button"
+					>
+						Choose Template
+					</Button>
+				</div>
+			</div>
+		);
+	}
+
 	return (
-		<div className={cl`${styles.container} ${!modalType || isEmpty(modifiedList) ? styles.empty_list : ''}`}>
-			<div className={styles.list_container} onScroll={handleScroll}>
-				{!isEmpty(modifiedList) ? modifiedList?.map((eachUser) => {
-					const {
-						user_id,
-						userName,
-					} = eachUser || {};
+		<div className={styles.port_pair_view}>
+			<div className={styles.all_user_select}>
+				<Checkbox onChange={(event) => handleSelectAll({ event })} />
+				{' '}
+				Select All
+				<Select
+					value={pagination}
+					onChange={setPagination}
+					size="sm"
+					placeholder="Select Books"
+					options={USER_SELECT_PAGINATION}
+					className={styles.selector}
+				/>
+			</div>
+			<div className={cl`${styles.container} ${!modalType || isEmpty(modifiedList) ? styles.empty_list : ''}`}>
+				<div className={styles.list_container} onScroll={handleScroll}>
+					{!isEmpty(modifiedList) ? modifiedList?.map((eachUser) => {
+						const {
+							user_id,
+							userName,
+						} = eachUser || {};
 
-					if (loading) {
+						if (loading) {
+							return (
+								<Placeholder
+									key={user_id}
+									className={styles.placeholder_styles}
+								/>
+							);
+						}
+
 						return (
-							<Placeholder
-								key={user_id}
-								className={styles.placeholder_styles}
-							/>
-						);
-					}
-
-					return (
-						<div key={user_id} className={styles.each_container}>
-							<Checkbox onChange={() => handleCheckedChats({ eachUser, user_id })} />
-							<div
-								role="presentation"
-								className={styles.card_container}
-								onClick={() => {
-									onCardClick({ item: eachUser });
-								}}
-							>
-								<div className={styles.parent_flex}>
-									<UserAvatar type="whatsapp" />
-									<div className={styles.name}>{startCase(userName)}</div>
+							<div key={user_id} className={styles.each_container}>
+								<Checkbox
+									checked={Object.keys(selectedUsers || {}).includes(user_id)}
+									onChange={() => handleCheckedChats({ eachUser, user_id })}
+								/>
+								<div
+									role="presentation"
+									className={styles.card_container}
+									onClick={() => {
+										onCardClick({ item: eachUser });
+									}}
+								>
+									<div className={styles.parent_flex}>
+										<UserAvatar type="whatsapp" />
+										<div className={styles.name}>{startCase(userName)}</div>
+									</div>
+									<IcMArrowNext className={styles.arrow_icon} />
 								</div>
-								<IcMArrowNext className={styles.arrow_icon} />
 							</div>
-						</div>
 
-					);
-				}) : <div className={styles.no_data_found}>No Users Found</div>}
+						);
+					}) : <div className={styles.no_data_found}>No Users Found</div>}
+				</div>
+
+				<div className={styles.send_action}>
+					<Button
+						size="md"
+						themeType="accent"
+						disabled={isEmpty(selectedUsers)}
+						onClick={() => setModalType('bulk_communication')}
+						type="button"
+					>
+						Choose Template
+					</Button>
+				</div>
+
 			</div>
-
-			<div className={styles.send_action}>
-				<Button
-					size="md"
-					themeType="accent"
-					disabled={isEmpty(selectedUsers)}
-					onClick={() => setModalType('bulk_communication')}
-					type="button"
-				>
-					Choose Template
-				</Button>
-			</div>
-
 		</div>
 	);
 }

@@ -63,6 +63,8 @@ const useListOrgUsers = ({ organizationId = [] }) => {
 		formattedOrgUsersList: organizationId ? formatOrganizationUsers({ data: listData }) : [],
 		loading,
 		handleScroll,
+		pagination,
+		setPagination,
 	};
 };
 export default useListOrgUsers;

@@ -56,6 +56,8 @@ function CogoOne() {
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 	const [openKamContacts, setOpenKamContacts] = useState(false);
 	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
+	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
+	const [autoAssignChats, setAutoAssignChats] = useState(true);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -122,6 +124,10 @@ function CogoOne() {
 						workPrefernceLoading={workPrefernceLoading}
 						setOpenKamContacts={setOpenKamContacts}
 						setSendBulkTemplates={setSendBulkTemplates}
+						setSelectedAutoAssign={setSelectedAutoAssign}
+						selectedAutoAssign={selectedAutoAssign}
+						autoAssignChats={autoAssignChats}
+						setAutoAssignChats={setAutoAssignChats}
 					/>
 				</div>
 
@@ -129,6 +135,10 @@ function CogoOne() {
 					<PortPairOrgFilters
 						setSendBulkTemplates={setSendBulkTemplates}
 						setActiveTab={setActiveTab}
+						selectedAutoAssign={selectedAutoAssign}
+						setSelectedAutoAssign={setSelectedAutoAssign}
+						setAutoAssignChats={setAutoAssignChats}
+						sendBulkTemplates={sendBulkTemplates}
 					/>
 				) : null}
 

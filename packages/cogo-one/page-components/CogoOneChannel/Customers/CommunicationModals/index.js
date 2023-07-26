@@ -18,9 +18,6 @@ function CommunicationModals({
 	modalType = {},
 	userId = '',
 	viewType = '',
-	selectedAutoAssign = {},
-	setSelectedAutoAssign = () => {},
-	setAutoAssignChats = () => {},
 	setOpenKamContacts = () => {},
 	setSendBulkTemplates = () => {},
 }) {
@@ -118,9 +115,6 @@ function CommunicationModals({
 				setModalType={setModalType}
 				modalType={modalType}
 				viewType={viewType}
-				selectedAutoAssign={selectedAutoAssign}
-				setSelectedAutoAssign={setSelectedAutoAssign}
-				setAutoAssignChats={setAutoAssignChats}
 			/>
 
 			{!!buttonType && (
