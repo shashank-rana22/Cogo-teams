@@ -48,6 +48,7 @@ function Organizations({ setActiveTab = () => {}, setOpenKamContacts = () => {},
 					key={orgId}
 					endPoint={endPoint}
 					filterKey={filterKey}
+					activeOrg={activeOrg}
 				/>
 			</div>
 

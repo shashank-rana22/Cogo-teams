@@ -16,6 +16,7 @@ function OrgUsersList({
 	setOrgId = () => {},
 	endPoint = '',
 	filterKey = '',
+	activeOrg = '',
 }) {
 	const {
 		formattedOrgUsersList = [],
@@ -67,16 +68,19 @@ function OrgUsersList({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.input_container}>
-				<Input
-					placeholder="search by name..."
-					onChange={setSearch}
-					value={search}
-					className={styles.input_styles}
-					size="sm"
-					prefix={<IcMSearchdark />}
-				/>
-			</div>
+			{activeOrg === 'organization' ? (
+				<div className={styles.input_container}>
+					<Input
+						placeholder="search by name..."
+						onChange={setSearch}
+						value={search}
+						className={styles.input_styles}
+						size="sm"
+						prefix={<IcMSearchdark />}
+					/>
+				</div>
+			) : null}
+
 			<div className={styles.list_container}>
 				{!isEmpty(modifiedList) ? modifiedList?.map((eachUser) => {
 					const {
