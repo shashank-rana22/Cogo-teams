@@ -13,14 +13,14 @@ const getIcon = ({ className, size }) => L.divIcon({
 });
 
 const Point = React.forwardRef(({
-	position, showAnimation = false,
+	position, animate = false,
 	size = [DEFAULT_SIZE, DEFAULT_SIZE], children, ...rest
 }, ref) => (
 	<Marker
 		position={position}
 		icon={getIcon({
 			className: `${styles.point_animation}
-			${!showAnimation ? styles.hide_animation : ''}`,
+			${!animate ? styles.hide_animation : ''}`,
 			size,
 		})}
 		{...rest}

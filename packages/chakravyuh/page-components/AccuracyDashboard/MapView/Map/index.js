@@ -8,12 +8,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import CustomLegend from '../../../../common/Legend';
 import { BASE_LAYER, LAYOUT_WIDTH, TIME_LIMIT, MAX_BOUNDS, ITEMS, ONE } from '../../../../constants/map_constants';
 import useGetSimplifiedGeometry from '../../../../hooks/useGetSimplifiedGeometry';
-import useListLocations from '../../../../hooks/useListLocations';
 import { getChildHierarchy, getLowestHierarchy, HIERARCHY_MAPPING } from '../../../../utils/hierarchy-utils';
 
 import ActiveRegions from './ActiveRegions';
 import Point from './AnimatedPoint';
-import MapEvents from './MapEvents';
 import styles from './styles.module.css';
 import WorldGeometry from './WorldGeometry';
 
@@ -21,12 +19,22 @@ const CENTER_LNG = 20;
 const INITIAL_ZOOM = 2;
 
 function Map({
-	isFull = false, bounds = null, data = [], loading = false, setBounds = () => {},
-	locationFilters = { }, setActiveList = () => {}, currentId = null,
-	setLocationFilters = () => { }, hierarchy = {}, setHierarchy = () => {}, handleBackHierarchy = () => {},
+	isFull = false,
+	bounds = null,
+	data = [],
+	loading = false,
+	setBounds = () => {},
+	locationFilters = { },
+	currentId = null,
+	activeList = [],
+	accuracyMapping = {},
+	setActiveList = () => {},
+	setLocationFilters = () => { },
+	hierarchy = {},
+	setHierarchy = () => {},
+	handleBackHierarchy = () => {},
 }) {
 	const [map, setMap] = useState(null);
-	const [zoom, setZoom] = useState(GLOBAL_CONSTANTS.zeroth_index);
 	const activeRef = useRef(null);
 
 	const lowestHierarchy = getLowestHierarchy(hierarchy);
@@ -40,21 +48,18 @@ function Map({
 		country_id   : hierarchy?.country_id,
 		continent_id : hierarchy?.continent_id,
 		type,
-		setActiveList,
-	});
-
-	const { data: portsData = [], loading : portsLoading } = useListLocations({
-		type      : 'seaport',
-		id        : hierarchy?.port_id,
-		region_id : hierarchy?.region_id,
-		setActiveList,
 	});
 
 	const showRegions = !isEmpty(activeData) && HIERARCHY_MAPPING.region_id >= HIERARCHY_MAPPING[lowestHierarchy] - ONE;
-	const showPorts = HIERARCHY_MAPPING.port_id >= HIERARCHY_MAPPING[lowestHierarchy] - ONE;
-	const showLoading = loading || portsLoading || activeLoading;
+	const showPorts = HIERARCHY_MAPPING.port_id + ONE >= HIERARCHY_MAPPING[lowestHierarchy];
+
+	const showLoading = loading || activeLoading;
 	const originPosition = locationFilters?.origin?.latitude
 		? [locationFilters.origin.latitude, locationFilters.origin.longitude] : null;
+
+	const getFilteredData = (dataToProcess) => dataToProcess.filter(({ id }) => id !== originId
+				&& (activeList.some(({ destination_id }) => id === destination_id)
+				|| Object.values(hierarchy).some((val) => id === val)));
 
 	useEffect(() => {
 		const timeout = setTimeout(() => { if (map)map.invalidateSize(true); }, TIME_LIMIT);
@@ -111,53 +116,54 @@ function Map({
 			maxZoom={7}
 			zoomPosition="topright"
 		>
-			<MapEvents
-				setZoom={setZoom}
-			/>
 			<WorldGeometry
-				hierarchy={hierarchy}
 				map={map}
-				zoom={zoom}
-				data={data.filter(({ id }) => id !== originId)}
 				ref={activeRef}
-				setBounds={setBounds}
-				setHierarchy={setHierarchy}
-				setLocationFilters={setLocationFilters}
-				locationFilters={locationFilters}
 				currentId={currentId}
+				setBounds={setBounds}
+				hierarchy={hierarchy}
+				setHierarchy={setHierarchy}
+				data={getFilteredData(data)}
+				setActiveList={setActiveList}
+				accuracyMapping={accuracyMapping}
+				setLocationFilters={setLocationFilters}
 			/>
 			<ActiveRegions
-				showRegions={showRegions}
-				activeData={activeData.filter(({ id }) => id !== originId)}
-				setBounds={setBounds}
-				setLocationFilters={setLocationFilters}
-				map={map}
 				ref={activeRef}
+				setBounds={setBounds}
 				currentId={currentId}
 				hierarchy={hierarchy}
+				showRegions={showRegions}
 				setHierarchy={setHierarchy}
+				setActiveList={setActiveList}
+				accuracyMapping={accuracyMapping}
+				setLocationFilters={setLocationFilters}
+				activeData={getFilteredData(activeData)}
 			/>
 			{showPorts
-			&& portsData.map((item) => {
-				const position = (JSON.parse(item?.loc || item?.geometry)?.coordinates || []).reverse();
+			&& activeList.map((item) => {
+				const position = [item.destination_latitude, item.destination_longitude];
 				return (
 					<Point
-						key={item.id}
+						key={item.destination_id}
 						position={position}
-						ref={currentId === item.id ? activeRef : null}
+						ref={currentId === item.destination_id ? activeRef : null}
 						eventHandlers={{
 							click: (e) => {
 								L.DomEvent.stopPropagation(e);
 								const markerBounds = new L.LatLngBounds([position]);
-
-								setLocationFilters((prev) => ({
-									...prev,
-									destination: {
-										id: item.id, name: item?.name || item?.display_name, type: item?.type,
-									},
-								}));
-								setHierarchy((prev) => ({ ...prev, port_id: item.id }));
 								setBounds(markerBounds);
+
+								if (!hierarchy?.port_id) {
+									setLocationFilters((prev) => ({
+										...prev,
+										destination: {
+											id: item.destination_id, name: item?.name, type: item.destination_type,
+										},
+									}));
+									setHierarchy((prev) => ({ ...prev, port_id: item.destination_id }));
+									setActiveList([]);
+								}
 							},
 						}}
 					>
@@ -165,7 +171,7 @@ function Map({
 							direction="top"
 							sticky
 						>
-							{item?.name}
+							{item?.destination_name}
 						</Tooltip>
 					</Point>
 				);

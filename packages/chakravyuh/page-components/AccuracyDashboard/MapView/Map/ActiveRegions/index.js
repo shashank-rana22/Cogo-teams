@@ -1,73 +1,74 @@
-import { GeoJSON } from '@cogoport/maps';
+import { FeatureGroup, GeoJSON, L } from '@cogoport/maps';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import MapTooltip from '../../../../../common/MapTooltip';
-import { COLORS, ONE } from '../../../../../constants/map_constants';
+import { getPolygonStyleProps } from '../../../../../utils/map-utils';
 
-const TOTAL_IDX = 4;
+const ActiveRegions = React.forwardRef(({
+	showRegions = () => {},
+	activeData = [],
+	setBounds = () => {},
+	accuracyMapping = {},
+	setActiveList = () => {},
+	setLocationFilters = () => {},
+	hierarchy = {},
+	setHierarchy = () => {},
+	currentId = null,
+}, ref) => {
+	const onEachFeature = (feature, layer, code, id) => {
+		const styleProps = getPolygonStyleProps(accuracyMapping[id]);
 
-function getRandomWholeNumber(x, y) {
-	const min = Math.ceil(x);
-	const max = Math.floor(y);
-	return Math.floor(Math.random() * (max - min + ONE)) + min;
-}
-
-const ActiveRegions = ({ showRegions, activeData, setBounds, setLocationFilters, map, setHierarchy }) => {
-	const onEachFeature = (feature, layer, code) => {
-		const IDX = Math.floor(Math.random() * TOTAL_IDX);
+		const disableRegion = hierarchy?.region_id && id !== hierarchy?.region_id;
+		const disableProps = disableRegion ? { fillOpacity: 0 } : {};
 
 		layer?.setStyle({
 			weight      : 1,
 			fillOpacity : 0.7,
 			opacity     : 0,
 			fillColor   : '#f4f4f4',
-			...COLORS[IDX],
+			...styleProps,
+			...disableProps,
 		});
 
 		layer.bindTooltip(
 			ReactDOMServer.renderToString(
 				<MapTooltip
 					display_name={code}
-					color={COLORS[IDX]?.color}
-					deviation={getRandomWholeNumber(COLORS[IDX]?.min, COLORS[IDX]?.max)}
+					color={styleProps?.color}
+					accuracy={accuracyMapping[id]}
 				/>,
 			),
 			{ sticky: true, direction: 'top' },
 		);
 	};
 
-	return (showRegions && activeData.map(({ id, geometry, name, ...rest }) => (
-		<GeoJSON
-			key={id}
-			data={JSON.parse(geometry)}
-			onEachFeature={(feature, layer) => onEachFeature(feature, layer, name)}
-			eventHandlers={{
-				add: (e) => {
-					if (!map) return;
-					const curBounds = e.target.getBounds();
-					setBounds((prevBounds) => {
-						if (!prevBounds) {
-							return curBounds;
-						}
-						const newBounds = prevBounds.extend(curBounds);
-						return newBounds;
-					});
-				},
-				click: (e) => {
-					setLocationFilters((prev) => ({
-						...prev,
-						destination: {
-							id, name, ...rest,
+	return (
+		<FeatureGroup key={hierarchy?.region_id}>
+			{showRegions && activeData.map(({ id, geometry, name, type, ...rest }) => (
+				<GeoJSON
+					key={id}
+					ref={currentId === id ? ref : null}
+					data={JSON.parse(geometry)}
+					onEachFeature={(feature, layer) => onEachFeature(feature, layer, name, id)}
+					eventHandlers={{
+						click: (e) => {
+							L.DomEvent.stopPropagation(e);
+							setLocationFilters((prev) => ({
+								...prev,
+								destination: {
+									id, name, type: type || 'region', ...rest,
+								},
+							}));
+							setHierarchy((prev) => ({ ...prev, [`${type}_id`]: id }));
+							setActiveList([]);
+							setBounds(e.target.getBounds());
 						},
-					}));
-					setHierarchy((prev) => ({ ...prev, [`${rest?.type}_id`]: id }));
-					setBounds(e.target.getBounds());
-				},
-			}}
-		/>
-	))
+					}}
+				/>
+			))}
+		</FeatureGroup>
 	);
-};
+});
 
 export default ActiveRegions;

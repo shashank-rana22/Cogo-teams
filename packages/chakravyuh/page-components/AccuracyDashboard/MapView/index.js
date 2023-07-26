@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 
-// import useGetFclMapStatistics from '../../../hooks/useGetFclMapStatistics';
+import useGetFclMapStatistics from '../../../hooks/useGetFclMapStatistics';
 import useGetSimplifiedGeometry from '../../../hooks/useGetSimplifiedGeometry';
 import { getLowestHierarchy, getParentHierarchy } from '../../../utils/hierarchy-utils';
 
@@ -22,10 +22,19 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 		origin      : { id: GLOBAL_CONSTANTS.country_ids.IN, type: 'country' },
 		destination : null,
 	});
-	const [activeList, setActiveList] = useState([]);
 
-	const { data, loading } = useGetSimplifiedGeometry({ type: 'country', setActiveList });
-	// const { data: deviationData, loading: deviationLoading } = useGetFclMapStatistics({ locationFilters });
+	const {
+		page,
+		setPage,
+		activeList,
+		setActiveList,
+		accuracyMapping,
+		data: mapStatisticsData,
+		loading: accuracyLoading,
+	} = useGetFclMapStatistics({
+		locationFilters,
+	});
+	const { data, loading } = useGetSimplifiedGeometry({ type: 'country' });
 
 	const handleBackHierarchy = (e) => {
 		e.stopPropagation();
@@ -44,46 +53,52 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 			}
 			return acc;
 		}, {});
-		setHierarchy(newHierarchy);
-		setActiveId({ id: hierarchy[parent], state: 'clicked' });
 		setActiveList([]);
+		setActiveId(hierarchy[parent]);
+		setHierarchy(newHierarchy);
 	};
 
 	return (
 		<div className={styles.container}>
 			<div className={`${styles.map}`}>
 				<Map
-					isFull={isFull}
 					data={data}
-					currentId={activeId}
-					setCurrentId={setActiveId}
-					loading={loading}
+					isFull={isFull}
 					bounds={bounds}
+					loading={loading}
+					currentId={activeId}
 					setBounds={setBounds}
+					hierarchy={hierarchy}
+					activeList={activeList}
+					setCurrentId={setActiveId}
+					setHierarchy={setHierarchy}
+					setActiveList={setActiveList}
+					accuracyMapping={accuracyMapping}
 					locationFilters={locationFilters}
 					setLocationFilters={setLocationFilters}
-					activeList={activeList}
-					setActiveList={setActiveList}
-					hierarchy={hierarchy}
-					setHierarchy={setHierarchy}
 					handleBackHierarchy={handleBackHierarchy}
+					accuracyList={mapStatisticsData?.list || []}
 				/>
 			</div>
 			<SidePanel
-				setIsFull={setIsFull}
-				isFull={isFull}
+				page={page}
 				data={data}
-				setActiveId={setActiveId}
-				globalFilters={globalFilters}
-				setGlobalFilters={setGlobalFilters}
+				isFull={isFull}
+				setPage={setPage}
 				setView={setView}
 				backView={backView}
-				locationFilters={locationFilters}
-				setLocationFilters={setLocationFilters}
-				activeList={activeList}
-				setActiveList={setActiveList}
 				hierarchy={hierarchy}
+				setIsFull={setIsFull}
+				activeList={activeList}
+				setActiveId={setActiveId}
 				setHierarchy={setHierarchy}
+				setActiveList={setActiveList}
+				globalFilters={globalFilters}
+				locationFilters={locationFilters}
+				accuracyLoading={accuracyLoading}
+				setGlobalFilters={setGlobalFilters}
+				mapStatisticsData={mapStatisticsData}
+				setLocationFilters={setLocationFilters}
 				handleBackHierarchy={handleBackHierarchy}
 			/>
 		</div>

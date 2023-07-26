@@ -1,29 +1,27 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { countriesHash } from '@cogoport/globalization/utils/getCountriesHash';
 import { FeatureGroup, GeoJSON, useMapEvents, L } from '@cogoport/maps';
 import { isEmpty } from '@cogoport/utils';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import MapTooltip from '../../../../../common/MapTooltip';
-import {
-	COLORS,
-	PADDING_TOP,
-	LAYOUT_WIDTH,
-	ONE,
-} from '../../../../../constants/map_constants';
 import useListNearestLocations from '../../../../../hooks/useListNearestLocations';
-import isPointInsideRegion from '../../../../../utils/isPointInsideRegion';
+import { getPolygonStyleProps, isPointInsideRegion } from '../../../../../utils/map-utils';
 
 const TIME_LIMIT = 200;
 
-const DUMMY_DATA = { ...countriesHash };
+const ZOOM_LEVEL = 3;
 
-function WorldGeometry({
-	setBounds = () => {}, hierarchy = {},
-	setHierarchy = () => {}, map = null, data = [],
+const WorldGeometry = React.forwardRef(({
+	hierarchy = {},
+	map = null,
+	currentId = null,
+	accuracyMapping = {},
+	setHierarchy = () => {},
+	data = [],
+	setActiveList = () => {},
 	setLocationFilters = () => {},
-}) {
+	setBounds = () => {},
+}, ref) => {
 	const timerRef = useRef(null);
 	const activeCountryRef = useRef(null);
 
@@ -31,36 +29,43 @@ function WorldGeometry({
 		: data.filter(({ id }) => Object.values(hierarchy).includes(id));
 	const activeId = hierarchy?.country_id;
 
-	const { getNearestLocations } = useListNearestLocations(setLocationFilters, setHierarchy, activeId);
+	const { getNearestLocations } = useListNearestLocations({
+		setLocationFilters,
+		setHierarchy,
+		setActiveList,
+		activeId,
+	});
 
-	const onEachFeature = (feature, layer, id) => {
-		const IDX = Number((DUMMY_DATA[id].mobile_country_code || '0').slice(-ONE)) % COLORS.length
-		|| GLOBAL_CONSTANTS.zeroth_index;
-		DUMMY_DATA[id].deviation = COLORS[IDX].min + Math.floor(Math.random() * (COLORS[IDX].max - COLORS[IDX].min));
+	const onEachFeature = (feature, layer, id, name) => {
+		const styleProps = getPolygonStyleProps(accuracyMapping[id]);
 
+		const activeProps = activeId === id ? { fillOpacity: 0, fillColor: 'transparent' } : {};
 		layer?.setStyle({
 			weight      : 1,
 			fillOpacity : 0,
 			opacity     : 0.7,
-			...COLORS[IDX],
+			...styleProps,
+			...activeProps,
 		});
 
 		layer.bindTooltip(
 			ReactDOMServer.renderToString(
 				<MapTooltip
-					display_name={DUMMY_DATA[id].name}
-					color={COLORS[IDX]?.color}
-					deviation={DUMMY_DATA[id]?.deviation}
+					display_name={name}
+					color={styleProps.color}
+					accuracy={accuracyMapping[id]}
 				/>,
 			),
 			{ sticky: true, direction: 'top' },
 		);
 	};
 
-	const handleClick = (e) => {
+	const handleMapClick = (e) => {
 		L.DomEvent.stopPropagation(e);
 		const latitude = e.latlng.lat;
 		const longitude = e.latlng.lng;
+
+		map.setView(e.latlng, ZOOM_LEVEL);
 
 		if (!!activeId && !!activeCountryRef.current && !isPointInsideRegion(
 			e.latlng,
@@ -75,7 +80,7 @@ function WorldGeometry({
 			clearTimeout(timerRef.current);
 
 			timerRef.current = setTimeout(() => {
-				handleClick(e);
+				handleMapClick(e);
 			}, TIME_LIMIT);
 		},
 		dblclick() {
@@ -84,48 +89,35 @@ function WorldGeometry({
 	});
 
 	return (
-		<FeatureGroup
-			eventHandlers={{
-				add: (e) => {
-					if (!map) return;
-					map.fitBounds(e.target.getBounds(), { paddingTopLeft: [LAYOUT_WIDTH, PADDING_TOP] });
-				},
-			}}
-		>
-			{filteredData.map((item) => (
-				<GeoJSON
-					key={item.id}
-					ref={item.id === activeId ? activeCountryRef : null}
-					data={JSON.parse(item.geometry)}
-					onEachFeature={(feature, layer) => onEachFeature(feature, layer, item.id)}
-					eventHandlers={{
-						add: (e) => {
-							if (!map) return;
-							const curBounds = e.target.getBounds();
-							setBounds((prevBounds) => {
-								if (!prevBounds) {
-									return curBounds;
-								}
-								const newBounds = prevBounds.extend(curBounds);
-								return newBounds;
-							});
-						},
-						click: (e) => {
-							setLocationFilters((prev) => ({
-								...prev,
-								destination: {
-									id   : item.id,
-									type : 'country',
-								},
-							}));
-							setHierarchy({ country_id: item.id });
-							setBounds(e.target.getBounds());
-						},
-					}}
-				/>
-			))}
+		<FeatureGroup>
+			{filteredData.map((item) => {
+				const currentRef = item.id === currentId ? ref : null;
+				return (
+					<GeoJSON
+						key={item.id}
+						ref={item.id === activeId ? activeCountryRef : currentRef}
+						data={JSON.parse(item.geometry)}
+						onEachFeature={(feature, layer) => onEachFeature(feature, layer, item.id, item.name)}
+						eventHandlers={{
+							click: (e) => {
+								L.DomEvent.stopPropagation(e);
+								setLocationFilters((prev) => ({
+									...prev,
+									destination: {
+										id   : item.id,
+										type : 'country',
+									},
+								}));
+								setHierarchy({ country_id: item.id });
+								setActiveList([]);
+								setBounds(e.target.getBounds());
+							},
+						}}
+					/>
+				);
+			})}
 		</FeatureGroup>
 	);
-}
+});
 
 export default WorldGeometry;
