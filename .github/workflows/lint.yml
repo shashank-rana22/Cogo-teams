@@ -51,7 +51,7 @@ jobs:
   lint:
     name: Test
     needs: [init, start-runner]
-    uses: ./.github/workflows/reusable-test-lint.yml
+    uses: ./.github/workflows/comment-test-lint.yml
     secrets: inherit
     with:
       platform: ${{ needs.start-runner.outputs.label }}

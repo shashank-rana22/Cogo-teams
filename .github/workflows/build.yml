@@ -53,7 +53,7 @@ jobs:
   build:
     name: Test
     needs: [init, start-runner]
-    uses: ./.github/workflows/reusable-test-build.yml
+    uses: ./.github/workflows/comment-test-build.yml
     secrets: inherit
     with:
       platform: ${{ needs.start-runner.outputs.label }}
