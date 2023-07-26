@@ -35,3 +35,22 @@
 		}
 	}
 }
+
+.service_provider_details {
+	display: flex;
+	align-items: center;
+}
+
+.service_provider_name {
+	width: calc(100% - 100px);
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.logo_styles {
+	margin-right: 10px;
+}
