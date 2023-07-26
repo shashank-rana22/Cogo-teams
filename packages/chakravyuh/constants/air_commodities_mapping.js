@@ -23,7 +23,7 @@ export const AIR_COMMODITIES = [
 
 export const MODE_OPTIONS = [
 	{
-		value : 'manual',
+		value : 'supply_rates',
 		label : 'Supply Rates',
 	},
 	{
@@ -35,7 +35,7 @@ export const MODE_OPTIONS = [
 		label : 'Extended Rates',
 	},
 	{
-		value : 'cluster_rate_extension',
+		value : 'cluster_extension',
 		label : 'Cluster Rate Extension',
 	},
 ];

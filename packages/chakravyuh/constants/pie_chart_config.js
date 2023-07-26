@@ -1,5 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import { snakeCaseToTitleCase } from '../utils/snakeCaseToTitleCase';
+
+const FIRST = 1;
+
 export const CUSTOM_THEME = {
 	legends: {
 		text: {
@@ -15,88 +19,74 @@ export const CUSTOM_THEME = {
 	},
 };
 
-const CUMSTOM_DATA = [
-	{
-		key          : 'manual',
-		id           : 'Supply Rates',
-		label        : 'Supply Rates',
-		value        : 1211,
-		color        : '#63BEC8',
-		cancellation : 90,
-	},
-	{
-		key          : 'predicted',
-		id           : 'Predicted Rate',
-		label        : 'Predicted Rate',
-		value        : 1500,
-		color        : '#F9AE64',
-		cancellation : 70,
-	},
-	{
-		key          : 'rate_extension',
-		id           : 'Extended Rates',
-		label        : 'Extended Rates',
-		value        : 1312,
-		color        : '#9BA0CB',
-		cancellation : 65,
-	},
-	{
-		key          : 'cluster_rate_extension',
-		id           : 'Cluster Rate Extension',
-		label        : 'Cluster Rate Extension',
-		value        : 1312,
-		color        : '#58D3FE',
-		cancellation : 65,
-	},
-];
-
 const EXPLORED_VIEW_DATA = [
 	{
-		key          : 'confirmed_booking',
+		key          : 'shipment_confirmed_by_service_provider_count',
 		id           : 'Confirmed Booking',
 		label        : 'Confirmed Booking',
-		value        : 1211,
-		cancellation : 90,
+		cancellation : 'shipment_confirmed_by_service_provider_percentage',
 	},
 	{
-		key          : 'cancelled_booking',
+		key          : 'shipment_cancelled_count',
 		id           : 'Cancelled Booking',
 		label        : 'Cancelled Booking',
-		value        : 1500,
-		cancellation : 70,
+		cancellation : 'shipment_cancelled_percentage',
 	},
 	{
-		key          : 'in_progress_booking',
+		key          : 'shipment_in_progress_count',
 		id           : 'In Progress Booking',
 		label        : 'In Progress Booking',
-		value        : 1312,
-		cancellation : 65,
+		cancellation : 'shipment_in_progress_percentage',
 	},
 	{
-		key          : 'completed_booking',
+		key          : 'shipment_completed_count',
 		id           : 'Completed Booking',
 		label        : 'Completed Booking',
-		value        : 1312,
-		cancellation : 65,
+		cancellation : 'shipment_completed_percentage',
 	},
 ];
 
 const ColorMappings = {
-	manual                 : ['#63BEC8', '#BCCFD2', '#3D747A', '#7EB2B8'],
-	predicted              : ['#F9AE64', '#FDD3AD', '#F9AE64', '#F58B33'],
-	rate_extension         : ['#9BA0CB', '#C2C6E3', '#686E9F', '#A59CBE'],
-	cluster_rate_extension : ['#58D3FE', '#9CEBFE', '#87CEEB', '#ADD8E6'],
+	supply_rates      : ['#63BEC8', '#BCCFD2', '#3D747A', '#7EB2B8'],
+	predicted         : ['#F9AE64', '#FDD3AD', '#F9AE64', '#F58B33'],
+	rate_extension    : ['#9BA0CB', '#C2C6E3', '#686E9F', '#A59CBE'],
+	cluster_extension : ['#58D3FE', '#9CEBFE', '#87CEEB', '#ADD8E6'],
 };
 
-export const usePieChartConfigs = (type) => {
+export const usePieChartConfigs = (type, data) => {
+	const pieChartData = Object.entries(data).flatMap((obj) => {
+		const objKey = obj[GLOBAL_CONSTANTS.zeroth_index];
+		const objLabel = snakeCaseToTitleCase(objKey);
+		if (objKey === 'total_rates') return [];
+		return {
+			key          : objKey,
+			id           : objLabel,
+			label        : objLabel,
+			value        : obj[FIRST].value,
+			cancellation : obj[FIRST].shipment_cancelled_percentage,
+		};
+	});
+
 	if (!type) {
 		return {
-			customData : CUMSTOM_DATA,
-			pieColors  : Object.values(ColorMappings).map((color) => color[GLOBAL_CONSTANTS.zeroth_index]),
+			pieChartData,
+			pieColors: Object.keys(data).flatMap((key) => {
+				if (key !== 'total_rates') return ColorMappings[key][GLOBAL_CONSTANTS.zeroth_index];
+				return [];
+			}),
 		};
 	}
 	return {
-		customData : EXPLORED_VIEW_DATA,
-		pieColors  : ColorMappings[type],
+		pieChartData: [...Object.entries(data).flatMap((obj) => {
+			if (obj[GLOBAL_CONSTANTS.zeroth_index] === type) {
+				return EXPLORED_VIEW_DATA.map((entry) => ({
+					...entry,
+					value        : obj[FIRST][entry.key],
+					cancellation : obj[FIRST][entry.cancellation],
+				}));
+			}
+			return [];
+		})],
+		pieColors: ColorMappings[type],
 	};
 };

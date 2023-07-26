@@ -7,11 +7,10 @@ import styles from './styles.module.css';
 
 function Heading({
 	backView = false, setView = () => {}, heading = '', showFilters = true, showFilterText = true, globalFilters = {},
-	setGlobalFilters = () => {},
+	setGlobalFilters = () => {}, modeOptions = [],
 }) {
 	return (
 		<div className={styles.heading_container}>
-
 			<h1 className={styles.heading}>
 				{backView && (
 					<IcMArrowBack
@@ -20,13 +19,13 @@ function Heading({
 					/>
 				)}
 				{heading}
-
 			</h1>
 			{showFilters && (
 				<FilterButton
 					showText={showFilterText}
 					globalFilters={globalFilters}
 					setGlobalFilters={setGlobalFilters}
+					modeOptions={modeOptions}
 				/>
 			)}
 		</div>

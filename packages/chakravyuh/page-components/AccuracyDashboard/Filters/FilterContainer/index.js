@@ -9,7 +9,7 @@ import mutateFields from '../../../../utils/mutate-fields';
 
 import styles from './styles.module.css';
 
-function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, showText = true }) {
+function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, showText = true, modeOptions = [] }) {
 	const { service_type = 'fcl', rate_type = null } = globalFilters;
 	const {
 		control,
@@ -21,7 +21,7 @@ function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, show
 
 	const controls = service_type === 'fcl' ? fclControls : airControls;
 	const containerType = watch('container_type');
-	const { newFields } = mutateFields({ controls, containerType, setGlobalFilters });
+	const { newFields } = mutateFields({ controls, containerType, setGlobalFilters, modeOptions });
 
 	useEffect(() => {
 		setValue('commodity', []);
