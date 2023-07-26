@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 const OPTIONS = [
 	{
 		key              : 'view_details',
-		heading          : 'Rate DrillDown',
+		heading          : 'Rate Life Cycle',
 		highlight_key    : 'spot_search_to_checkout_count',
 		highlight_suffix : '% Dropoffs',
 		highlight_info   : 'From Search to Checkout',

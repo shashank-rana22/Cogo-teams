@@ -20,21 +20,31 @@ const useGetFclMapStatistics = ({ locationFilters }) => {
 		[trigger],
 	);
 
-	useEffect(() => {
-		const filters = LOCATION_KEYS.reduce((acc, key) => {
-			if (locationFilters[key]) {
-				acc[key] = {
-					id   : locationFilters[key].id,
-					type : locationFilters[key].type,
-				};
+	const filters = LOCATION_KEYS.reduce((acc, key) => {
+		if (locationFilters[key]?.id) {
+			acc[key] = {
+				id   : locationFilters[key].id,
+				type : locationFilters[key].type === 'seaport' ? 'port' : locationFilters[key].type,
+			};
+		}
+		return acc;
+	}, {});
+
+	const dependency = Object.values(filters).map(({ id }) => id).join('_');
+	const accuracyMapping = (data?.list || []).reduce((acc, item) => {
+		Object.entries(item).forEach(([key, val]) => {
+			if (key.includes('destination')) {
+				acc[val] = item.accuracy;
 			}
-			return acc;
-		}, {});
-
+		});
+		return acc;
+	}, {});
+	useEffect(() => {
 		getStats({ filters });
-	}, [locationFilters, getStats]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dependency, getStats]);
 
-	return { data, loading };
+	return { data: accuracyMapping, loading };
 };
 
 export default useGetFclMapStatistics;

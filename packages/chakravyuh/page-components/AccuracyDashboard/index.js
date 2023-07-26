@@ -15,7 +15,7 @@ const VIEW_MAPPING = {
 	},
 	drilldown: {
 		Component : DrillDownView,
-		heading   : 'Rates DrillDown',
+		heading   : 'Rates Life Cycle',
 		backView  : 'dashboard',
 	},
 	map_view: {
