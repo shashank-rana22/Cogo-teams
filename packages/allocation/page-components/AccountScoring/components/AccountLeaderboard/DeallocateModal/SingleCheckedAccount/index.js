@@ -1,6 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 import SINGLE_ACCOUNT_STATS from '../../../../constants/get-single-account-stats';
 

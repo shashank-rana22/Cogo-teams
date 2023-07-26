@@ -1,5 +1,3 @@
-import React from 'react';
-
 import WARMTH_ACCOUNTS_STATS from '../../../../constants/get-multiple-account-stats';
 
 import styles from './styles.module.css';
@@ -22,7 +20,7 @@ function MultipleCheckedAccounts({ modalDetailsArray = [] }) {
 		<div className={styles.container}>
 			You are about to de-allocate
 			{' '}
-			{modalDetailsArray.length}
+			{modalDetailsArray?.length}
 			{' '}
 			Users.
 			Please verify from the list below before de-allocation
@@ -38,7 +36,7 @@ function MultipleCheckedAccounts({ modalDetailsArray = [] }) {
 								{' '}
 							</div>
 
-							<div className={styles.value}>{filteredList[key].length}</div>
+							<div className={styles.value}>{filteredList[key]?.length}</div>
 
 						</div>
 					);

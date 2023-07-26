@@ -11,7 +11,7 @@ const useBulkDeallocation = ({
 	setModalDetailsArray = () => {},
 	refetch = () => {},
 }) => {
-	const isSingleSelected = modalDetailsArray.length === DEFAULT_CHECKED_ACCOUNT;
+	const isSingleSelected = modalDetailsArray?.length === DEFAULT_CHECKED_ACCOUNT;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/engagement_scoring_account_bulk_deallocation',
@@ -32,7 +32,7 @@ const useBulkDeallocation = ({
 
 			Toast.success(isSingleSelected
 				? `${modalDetailsArray[GLOBAL_CONSTANTS.zeroth_index].business_name} was successfully de-allocated`
-				: `${modalDetailsArray.length} Users were successfully de-allocated `);
+				: `${modalDetailsArray?.length} Users were successfully de-allocated `);
 		} catch (error) {
 			Toast.error(error.message);
 		}

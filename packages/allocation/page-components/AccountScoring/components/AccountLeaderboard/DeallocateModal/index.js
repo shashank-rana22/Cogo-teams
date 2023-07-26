@@ -1,5 +1,4 @@
 import { Button, Modal } from '@cogoport/components';
-import React from 'react';
 
 import useBulkDeallocation from '../../../hooks/useBulkDeallocation';
 
