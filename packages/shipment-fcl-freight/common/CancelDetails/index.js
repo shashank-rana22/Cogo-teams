@@ -16,18 +16,10 @@ export default function CancelDetails() {
 			<div>
 				<h2>This shipment has been cancelled.</h2>
 
-				<h3>
-					Reason:
-					{' '}
-					{startCase(cancellation_reason)}
-				</h3>
+				<h3>{`Reason: ${startCase(cancellation_reason)}`}</h3>
 
 				{cancellation_subreason ? (
-					<p>
-						Remarks:
-						{' '}
-						{cancellation_subreason}
-					</p>
+					<p>{`Remarks: ${cancellation_subreason}`}</p>
 				) : null}
 			</div>
 		</div>
