@@ -292,7 +292,6 @@ const GLOBAL_CONSTANTS = {
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
 		clock_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
 		sad_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
-		// girl_avatar          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/girl_avatar.svg',
 
 	},
 	pdf_url: {

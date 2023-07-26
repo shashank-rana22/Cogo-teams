@@ -2,13 +2,11 @@ export const AGENT_WISE_FEEDACK_MAPPING = [
 	{
 		label   : 'No. of Bookings',
 		name    : 'no_of_bookings',
-		count   : 'total_count',
 		hasIcon : false,
 	},
 	{
 		label   : 'Customer Satisfaction Score',
 		name    : 'customer_satisfaction_score',
-		count   : 'customer_satisfaction_score',
 		hasIcon : true,
 	},
 
