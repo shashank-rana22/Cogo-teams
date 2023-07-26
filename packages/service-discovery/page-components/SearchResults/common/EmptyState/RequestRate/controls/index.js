@@ -9,6 +9,7 @@ import haulageFeedbackControls from './haulage-feedback-controls';
 import lclCustomsFeedbackControls from './lcl-customs-feedback-controls';
 import lclFeedbackControls from './lcl-feedback-controls';
 import ltlFeedbackControls from './ltl-feedback-controls';
+import subsidiaryFeedbackControls from './subsidiary-feedback-controls';
 import trailerFeedbackControls from './trailer-feedback-controls';
 
 const CONTROLS_MAPPING = {
@@ -24,6 +25,7 @@ const CONTROLS_MAPPING = {
 	air_customs       : airCustomsFeedbackControls,
 	fcl_cfs           : fclCfsFeedbackControls,
 	fcl_freight_local : fclLocalFeedbackControls,
+	subsidiary        : subsidiaryFeedbackControls,
 };
 
 const getControls = (service) => CONTROLS_MAPPING[service] || [];

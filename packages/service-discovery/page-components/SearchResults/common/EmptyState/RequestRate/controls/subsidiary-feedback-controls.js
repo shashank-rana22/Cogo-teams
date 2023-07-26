@@ -1,18 +1,18 @@
 import CURRENCY_CODE_OPTIONS from './currency-options';
 
-const fclLocalFeedbackControls = [
+const subsidiaryFeedbackControls = [
 	{
 		name    : 'preferred_freight_rate_currency',
 		label   : 'Currency',
 		type    : 'select',
 		options : CURRENCY_CODE_OPTIONS,
-		span    : 6,
+		span    : 4,
 	},
 	{
 		name  : 'preferred_freight_rate',
 		label : 'Indicative Rate',
 		type  : 'number',
-		span  : 6,
+		span  : 4,
 	},
 	{
 		name  : 'remarks',
@@ -24,4 +24,4 @@ const fclLocalFeedbackControls = [
 			'Please add commodity details and other specific requirements here...',
 	},
 ];
-export default fclLocalFeedbackControls;
+export default subsidiaryFeedbackControls;

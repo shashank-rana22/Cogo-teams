@@ -10,7 +10,15 @@ import styles from './styles.module.css';
 const INITIAL_VALUE = 0;
 const DEFAULT_VALUE = 0;
 
-function List({ list = [], loading = false, type = 'seller', onClickAdd = () => {}, SERVICES_CANNOT_BE_REMOVED = [] }) {
+function List({
+	list = [],
+	details = {},
+	rateCardData = {},
+	loading = false,
+	type = 'seller',
+	onClickAdd = () => {},
+	SERVICES_CANNOT_BE_REMOVED = [],
+}) {
 	const [isOpen, setIsOpen] = useState({});
 
 	let currency = '';
@@ -54,7 +62,13 @@ function List({ list = [], loading = false, type = 'seller', onClickAdd = () => 
 								SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
 							/>
 						)}
-						content={<ItemContent serviceItem={serviceItem} />}
+						content={(
+							<ItemContent
+								serviceItem={serviceItem}
+								details={details}
+								rateCardData={rateCardData}
+							/>
+						)}
 					/>
 				))}
 			</div>

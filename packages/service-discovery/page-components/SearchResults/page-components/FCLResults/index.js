@@ -63,7 +63,7 @@ function FCLResults({
 	if (!loading && isEmpty(rates)) {
 		return (
 			<EmptyState
-				data={detail}
+				details={detail}
 				filters={filters}
 				setFilters={setFilters}
 			/>

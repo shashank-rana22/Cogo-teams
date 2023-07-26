@@ -195,6 +195,8 @@ function AdditionalServices({ // used in search results and checkout
 						loading={loading}
 						type="seller"
 						onClickAdd={handleAddServices}
+						details={detail}
+						rateCardData={rateCardData}
 						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
 					/>
 				)}
@@ -205,6 +207,8 @@ function AdditionalServices({ // used in search results and checkout
 						loading={loading}
 						type="buyer"
 						onClickAdd={handleAddServices}
+						details={detail}
+						rateCardData={rateCardData}
 						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
 					/>
 				)}

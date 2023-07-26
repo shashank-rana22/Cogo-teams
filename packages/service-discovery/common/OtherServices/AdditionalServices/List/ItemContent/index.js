@@ -1,7 +1,9 @@
 import { Table, Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
+
+import FeedBackModal from '../../../../../page-components/SearchResults/common/EmptyState/RequestRate/FeedBackModal';
 
 import styles from './styles.module.css';
 
@@ -76,7 +78,15 @@ const getPriceBreakUpColumn = [
 	},
 ];
 
-function ItemContent({ serviceItem = {} }) {
+function ItemContent({ serviceItem = {}, details = {}, rateCardData = {} }) {
+	const [showRequestRateModal, setShowRequestRateModal] = useState(false);
+	const [requestService, setRequestService] = useState({
+		service_id    : undefined,
+		service_type  : undefined,
+		selected_card : undefined,
+		service_data  : undefined,
+	});
+
 	const { rateData = [], data } = serviceItem;
 
 	const renderRateItem = (service) => {
@@ -89,6 +99,16 @@ function ItemContent({ serviceItem = {} }) {
 			total_price_discounted = 0,
 			is_rate_available = false,
 		} = service;
+
+		const handleRateFeedback = () => {
+			setShowRequestRateModal(true);
+			setRequestService({
+				service_id    : service.id,
+				service_type  : service?.service_type,
+				selected_card : rateCardData?.id || null,
+				service_data  : service,
+			});
+		};
 
 		return (
 			<div className={styles.rate_item}>
@@ -121,6 +141,7 @@ function ItemContent({ serviceItem = {} }) {
 								size="sm"
 								themeType="accent"
 								className={styles.request_rate_button}
+								onClick={handleRateFeedback}
 							>
 								Request Rate
 							</Button>
@@ -137,14 +158,24 @@ function ItemContent({ serviceItem = {} }) {
 					) : null}
 				</div>
 
+				{showRequestRateModal ? (
+					<FeedBackModal
+						onClose={() => setShowRequestRateModal(false)}
+						show={showRequestRateModal}
+						details={details}
+						data={rateCardData}
+						requestService={requestService}
+					/>
+				) : null}
+
 			</div>
 		);
 	};
 	return (
 		<div className={styles.container}>
 			{rateData.map((rateItem) => {
-				console.log('rateItem');
 				const { dependent_service_id = '', id = '' } = rateItem;
+
 				const details = data.find(
 					(dataItem) => (dataItem.dependent_service_id === dependent_service_id || dataItem.id === id),
 				);
