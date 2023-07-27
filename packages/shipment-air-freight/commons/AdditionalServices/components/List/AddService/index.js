@@ -12,10 +12,9 @@ import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
 function AddService({
-	shipmentType = '',
-	shipmentId: shipment_id = '',
-	services = [],
-	isSeller = false,
+	shipmentId: shipment_id,
+	services,
+	isSeller,
 	refetch = () => {},
 	closeModal = () => {},
 }) {
@@ -67,7 +66,6 @@ function AddService({
 				<div className={styles.container}>
 					{!showAddRate && !showPrice ? (
 						<ChooseService
-							shipmentType={shipmentType}
 							setAddRate={setAddRate}
 							isSeller={isSeller}
 							list={finalList}

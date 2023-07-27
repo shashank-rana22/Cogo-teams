@@ -11,17 +11,16 @@ import styles from './styles.module.css';
 import tableFields from './tableFields';
 
 function ChooseService({
-	shipmentType = '',
 	setAddRate = () => {},
-	isSeller = false,
+	isSeller,
 	list = [],
-	loading = false,
+	loading,
 	setFilters = () => {},
-	filters = {},
+	filters,
 	setShowPrice = () => { },
 	refetch = () => { },
 	closeModal = () => {},
-	serviceCountTotal = 0,
+	serviceCountTotal,
 }) {
 	const tagDisplay = (item) => (
 		<div>
@@ -35,7 +34,6 @@ function ChooseService({
 
 	const priceRequest = (item) => (
 		<Price
-			shipmentType={shipmentType}
 			item={item}
 			setAddRate={setAddRate}
 			isSeller={isSeller}

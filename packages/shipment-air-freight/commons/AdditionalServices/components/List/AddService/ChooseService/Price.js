@@ -6,13 +6,11 @@ import useCreateShipmentAdditionalService from '../../../../../../hooks/useCreat
 import styles from './styles.module.css';
 
 function Price({
-	shipmentType,
 	item,
 	isSeller,
 	setAddRate,
 	refetch = () => {},
 	closeModal = () => {},
-	setShowPrice,
 }) {
 	const afterRequestRate = () => {
 		closeModal();
@@ -70,16 +68,6 @@ function Price({
 				disabled={loading}
 			>
 				{isSeller ? 'Add Rate' : 'Request Rate'}
-			</Button>
-			<Button
-				themeType="secondary"
-				onClick={async (e) => {
-					e.stopPropagation();
-					setShowPrice({ item });
-				}}
-				disabled={shipmentType === 'air_freight'}
-			>
-				View Rates
 			</Button>
 		</div>
 	);

@@ -23,10 +23,10 @@ const EMPTY_TRADE_PARTY_LENGTH = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
 
-const STATE = ['init', 'awaiting_service_provider_confirmation'];
+const PURCHASE_INVOICE_SHIPMENT_STATES = ['init', 'awaiting_service_provider_confirmation'];
 
-const SHIPMENT_TYPES = ['air_freight', 'ftl_freight'];
-const SHOW_MODAL = ['purchase', 'charge_code'];
+const INVOICE_SHIPMENT_TYPES = ['air_freight', 'ftl_freight'];
+const ADD_SERVICE_MODALS = ['purchase', 'charge_code'];
 
 const STAKE_HOLDER_TYPES = [
 	'superadmin',
@@ -59,7 +59,7 @@ function CollectionPartyDetails({
 	const geo = getGeoConstants();
 
 	const serviceProviderConfirmation = (collectionParty.service_charges || []).find(
-		(item) => STATE.includes(item?.detail?.state),
+		(item) => PURCHASE_INVOICE_SHIPMENT_STATES.includes(item?.detail?.state),
 	);
 
 	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
@@ -162,7 +162,7 @@ function CollectionPartyDetails({
 							) : null}
 						</div>
 						) : null}
-					{SHIPMENT_TYPES.includes(shipment_type) && (
+					{INVOICE_SHIPMENT_TYPES.includes(shipment_type) && (
 						<div className={styles.not_added}>
 							<Button
 								size="md"
@@ -227,7 +227,7 @@ function CollectionPartyDetails({
 					</Modal>
 				) : null}
 
-				{SHOW_MODAL.includes(showModal)
+				{ADD_SERVICE_MODALS.includes(showModal)
 				&& (
 					<AddService
 						shipmentType={shipment_type}
