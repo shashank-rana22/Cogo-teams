@@ -26,9 +26,9 @@ function useListDunningCycles({ globalFilters, setGlobalFilters, sort, setDropdo
 		setGlobalFilters((prev) => ({ ...prev, page: 1 })); // reset page to 1 on search
 	}, [search, debounceQuery, setGlobalFilters]);
 
-	const getDunningCycle = useCallback((() => {
+	const getDunningCycle = useCallback((async () => {
 		try {
-			trigger({
+			await trigger({
 				params: {
 					query            : query || undefined,
 					pageIndex        : page,
@@ -38,17 +38,17 @@ function useListDunningCycles({ globalFilters, setGlobalFilters, sort, setDropdo
 					frequency        : frequency || undefined,
 				},
 			});
+			setDropdown(null); // closing opened dropdown on list refetch
 		} catch (err) {
 			console.error(err);
 		}
-	}), [dunningCycleType, page, query, trigger, frequency, sortBy, sortType]);
+	}), [dunningCycleType, page, query, trigger, frequency, sortBy, sortType, setDropdown]);
 
 	useEffect(() => {
 		getDunningCycle();
-		setDropdown(null); // closing opened dropdown on list refetch
 	}, [query, page,
 		dunningCycleType, getDunningCycle,
-		sortType, sortBy, setDropdown,
+		sortType, sortBy,
 	]);
 
 	return {

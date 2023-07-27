@@ -102,7 +102,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					name        : 'serviceType',
 					placeholder : 'All(default)',
 					type        : 'multiSelect',
-					prefix      : () => {},
+					prefix      : () => null,
 					disabled    : true,
 					options     : SERVICE_OPTIONS,
 					style       : { width: '288px' },
