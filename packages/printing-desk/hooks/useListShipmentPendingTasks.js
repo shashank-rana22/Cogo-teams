@@ -43,6 +43,11 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 				handedOverForTd      : false,
 
 			},
+			final_awb: {
+				assignedStakeholder : 'service_ops2_docs',
+				status              : 'pending',
+				task                : ['upload_airway_bill'],
+			},
 			handed_over: {
 				...PAYLOAD_ITEM,
 				handedOverForTd: true,
@@ -59,6 +64,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 					...payload[activeTab],
 					stakeholderId : relevantToMe ? userData.user.id : undefined,
 					pageIndex     : page,
+					pageSize      : 10,
 				},
 			});
 		} catch (err) {

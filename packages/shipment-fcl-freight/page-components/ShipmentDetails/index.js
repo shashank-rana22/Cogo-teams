@@ -25,6 +25,8 @@ const SHIPMENT_ADDITIONAL_METHODS = ['main_service',
 	'rollover_shipments',
 ];
 
+// console.log('deployed')
+
 function ShipmentDetails() {
 	const { get } = useGetShipment({ additional_methods: SHIPMENT_ADDITIONAL_METHODS });
 
