@@ -12,10 +12,11 @@ const getFormatedNotPreferenceData = ({ ratesDataNotPrefered, singleServiceData 
 		};
 		const rowData = {
 			service_provider         : element?.service_provider,
-			air_line                 : data?.airline?.business_name,
-			shipping_line            :	data?.shipping_line?.business_name,
+			air_line                 : element?.airline?.business_name,
+			shipping_line            : element?.shipping_line?.business_name,
 			total_price              : validities?.total_price || DEFAULT_VALUE,
 			currency                 : validities?.currency || '',
+			agent                    : element?.procured_by?.name,
 			fulfillment_ratio_2      : element?.fulfillment_data?.day_2 || data?.day_2,
 			fulfillment_ratio_7      : element?.fulfillment_data?.day_7 || data?.day_7,
 			fulfillment_ratio_15     : element?.fulfillment_data?.day_15 || data?.day_15,
