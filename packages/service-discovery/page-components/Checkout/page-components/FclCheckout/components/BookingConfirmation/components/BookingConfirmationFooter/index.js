@@ -115,6 +115,8 @@ function BookingConfirmationFooter({
 		isChannelPartner = false,
 	} = useContext(CheckoutContext);
 
+	const timerRef = useRef(null);
+
 	const { paylater_eligibility = false } = activated_on_paylater || {};
 
 	const domesticService = domesticServices.includes(detail?.primary_service);
@@ -127,15 +129,13 @@ function BookingConfirmationFooter({
 				&& primaryService.bl_type,
 		);
 
-	const disableCondition =		(typeof invoice?.selected_credit_days === 'undefined'
+	const disableCondition = (typeof invoice?.selected_credit_days === 'undefined'
 			&& !isChannelPartner
 			&& !shipment_id
 			&& !domesticService)
 		|| (detail?.credit_details?.is_any_invoice_on_credit
 			&& !detail?.credit_terms_amd_condition?.is_tnc_accepted
 			&& detail?.credit_details?.credit_source === 'pre_approved_clean_credit');
-
-	const timerRef = useRef(null);
 
 	const {
 		handleSubmit,

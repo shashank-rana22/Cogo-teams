@@ -185,7 +185,7 @@ const useHandleBookingConfirmationFooter = ({
 	return {
 		handleSubmit,
 		onClickSubmitOtp,
-		submitButtonLoading: updateLoading || bookCheckoutLoading || loading || sendOtpLoading,
+		submitButtonLoading: updateLoading || bookCheckoutLoading || loading || sendOtpLoading || whatsappLoading,
 		verifyOtpLoading,
 		checkout_approvals,
 		hasExpired,
