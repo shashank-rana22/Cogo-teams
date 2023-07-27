@@ -5678,6 +5678,7 @@ const partner = {
 			service_name : 'communication',
 		},
 	],
+
 	shipment_approval: [
 		{
 			api          : 'list_shipments',
@@ -6837,6 +6838,11 @@ const partner = {
 			api          : 'create_outbound_voice_call',
 			access_type  : 'private',
 			service_name : 'voice_call',
+		},
+		{
+			api          : 'get_ledger',
+			access_type  : 'private',
+			service_name : 'sage',
 		},
 	],
 	unified_dashboard: [
@@ -12665,6 +12671,16 @@ const partner = {
 			api          : 'get_lead_organization_users',
 			access_type  : 'private',
 			service_name : 'lead',
+		},
+		{
+			api          : 'list_assigned_chats',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_agent_work_preference',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 	analytics_dashboard: [

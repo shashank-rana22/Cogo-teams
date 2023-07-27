@@ -19,7 +19,7 @@ function FilterLocation({ filters, hookSetters }) {
 	}));
 	let heading = service === 'air_freight' ? 'airport' : 'port';
 	if (!service) {
-		heading = 'Port or Airport';
+		heading = 'Location';
 	}
 	const name = service ? heading : 'location';
 	const handleChange = (value) => {
