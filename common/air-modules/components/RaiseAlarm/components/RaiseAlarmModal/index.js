@@ -131,7 +131,7 @@ function RaiseAlarmModal({
 						<div
 							role="presentation"
 							className={styles.box}
-							onClick={() => setShowBox(!showBox)}
+							onClick={() => setShowBox((prev) => !prev)}
 						>
 							{!isEmpty(selectedInvoice) && !isEmpty(checkedProforma) ? (
 								<div>
@@ -139,7 +139,7 @@ function RaiseAlarmModal({
 										|| selectedInvoice?.proforma_invoice_no}
 								</div>
 							) : (
-								<div style={{ fontSize: '14px', color: '#CBCFF5' }}>
+								<div className={styles.purchase_invoice_heading}>
 									Select Purchase Invoice
 								</div>
 							)}

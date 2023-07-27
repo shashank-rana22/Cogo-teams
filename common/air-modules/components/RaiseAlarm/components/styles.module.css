@@ -6,12 +6,12 @@
 
 .button_text {
 	margin: 0 0 0 8px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 500;
-	color: #cb6464;
+	color: var(--color-primary-error-red-3);
 
 	@media (max-width: 768px) {
-		font-size: 12px;
+		font-size: var(--font-size-md);
 	}
 }
 

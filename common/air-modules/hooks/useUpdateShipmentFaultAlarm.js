@@ -3,6 +3,8 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
+import toastApiError from '../utils/toastApiError';
+
 const useUpdateShipmentFaultAlarm = ({
 	setResolve = () => {},
 	reload,
@@ -33,7 +35,7 @@ const useUpdateShipmentFaultAlarm = ({
 			Toast.success('Alarm Snoozed');
 			setReload(!reload);
 		} catch (err) {
-			Toast.error(err?.data?.alarm);
+			toastApiError(err?.data?.alarm);
 		}
 	};
 

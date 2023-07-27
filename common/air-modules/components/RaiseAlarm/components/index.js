@@ -10,7 +10,7 @@ function RaiseAlarm({
 	setAlarmId = () => {},
 	loading = false,
 }) {
-	const [show, setShow] = useState(false);
+	const [showRaiseAlarmModal, setShowRaiseAlarmModal] = useState(false);
 
 	if (loading) {
 		<Placeholder
@@ -25,19 +25,19 @@ function RaiseAlarm({
 			<Button
 				themeType="secondary"
 				style={{ marginRight: '65px' }}
-				onClick={() => setShow(true)}
+				onClick={() => setShowRaiseAlarmModal(true)}
 			>
 				<IcCError width={20} height={20} />
 				<span className={styles.button_text}>Raise Alarm</span>
 			</Button>
 
-			{show && (
+			{showRaiseAlarmModal && (
 				<Modal
 					className={styles.styled_modal}
-					show={show}
-					onClose={() => setShow(false)}
+					show={showRaiseAlarmModal}
+					onClose={() => setShowRaiseAlarmModal(false)}
 				>
-					<RaiseAlarmModal setShow={setShow} alarmId={alarmId} setAlarmId={setAlarmId} />
+					<RaiseAlarmModal setShow={setShowRaiseAlarmModal} alarmId={alarmId} setAlarmId={setAlarmId} />
 				</Modal>
 			)}
 		</div>

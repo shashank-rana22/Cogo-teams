@@ -17,7 +17,7 @@ function ViewSelect({ value = '', setValue = () => {} }) {
 			<RadioGroup
 				options={OPTIONS}
 				value={value}
-				onChange={(item) => setValue(item)}
+				onChange={setValue}
 			/>
 		</div>
 	);

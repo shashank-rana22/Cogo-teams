@@ -4,17 +4,17 @@
 	justify-content: space-around;
 	width: 100%;
 	padding: 18px;
-	background-color: #fff;
-	box-shadow: linear-gradient(0deg, #fff, #fff);
+	background-color: var(--color-secondary-5);
+	box-shadow: linear-gradient(0deg, var(--color-secondary-5), var(--color-secondary-5));
 
 	:hover {
 		cursor: pointer;
-		background-color: #f6f5fe;
+		background-color: var(--color-secondary-4);
 	}
 }
 
 .view_invoices {
-	color: #5936f0;
+	color: var(--color-primary-error-red-2);
 	text-decoration: underline;
 	cursor: pointer;
 }
@@ -23,9 +23,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	width: 440px;
-	height: 63px;
-	background-color: #fff;
+	width: 30%;
+	height: 8%;
+	background-color: var(--color-secondary-5);
 }
 
 .flex_column {

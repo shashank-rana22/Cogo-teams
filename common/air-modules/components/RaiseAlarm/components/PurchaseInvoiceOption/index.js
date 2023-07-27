@@ -12,7 +12,7 @@ const PurchaseInvoices = ({
 	checkedProforma = '',
 	setShowBox = () => {},
 }) => {
-	const [show, setShow] = useState(false);
+	const [showPurchaseInvoicePopover, setShowPurchaseInvoicePopover] = useState(false);
 
 	const handleLineItemSelect = (item) => {
 		if (isEmpty(checkedLineItem)) {
@@ -33,28 +33,28 @@ const PurchaseInvoices = ({
 		}
 	};
 
-	const content = (element) => {
+	const content = (lineItem) => {
 		const isChecked = checkedLineItem?.map((item) => item?.name);
 		return (
 			<div className={styles.content}>
 				<Checkbox
-					checked={(isChecked || []).includes(element?.name)}
-					onChange={() => handleLineItemSelect(element)}
+					checked={(isChecked || []).includes(lineItem?.name)}
+					onChange={() => handleLineItemSelect(lineItem)}
 				/>
-				<div>{element?.name}</div>
-				<div>{element?.currency}</div>
-				<div>{element?.price}</div>
-				<div>{element?.quantity}</div>
-				<div>{element?.tax_percent}</div>
-				<div>{element?.tax_price}</div>
-				<div>{element?.total_tax_price}</div>
+				<div>{lineItem?.name}</div>
+				<div>{lineItem?.currency}</div>
+				<div>{lineItem?.price}</div>
+				<div>{lineItem?.quantity}</div>
+				<div>{lineItem?.tax_percent}</div>
+				<div>{lineItem?.tax_price}</div>
+				<div>{lineItem?.total_tax_price}</div>
 			</div>
 		);
 	};
 
-	const contentInvoice = (elem) => (
+	const contentInvoice = (lineItems) => (
 		<div>
-			{elem?.map((elemen) => <div key={elem.id}>{content(elemen)}</div>)}
+			{lineItems?.map((lineItem) => <div key={lineItems.id}>{content(lineItem)}</div>)}
 		</div>
 	);
 
@@ -70,12 +70,12 @@ const PurchaseInvoices = ({
 				</div>
 
 				<Popover
-					show={show && ele?.id === checkedProforma}
-					visible={show && ele?.id === checkedProforma}
+					show={showPurchaseInvoicePopover && ele?.id === checkedProforma}
+					visible={showPurchaseInvoicePopover && ele?.id === checkedProforma}
 					placement="bottom"
 					content={contentInvoice(ele?.line_items)}
 					onClickOutside={() => {
-						setShow(false);
+						setShowPurchaseInvoicePopover(false);
 						setShowBox(false);
 					}}
 					interactive
@@ -85,7 +85,7 @@ const PurchaseInvoices = ({
 						role="presentation"
 						onClick={() => {
 							setCheckedProforma(ele?.id);
-							setShow(true);
+							setShowPurchaseInvoicePopover(true);
 						}}
 					>
 						{ele?.invoice_type === 'purchase_invoice'

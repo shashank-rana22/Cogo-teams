@@ -25,7 +25,7 @@ const CRITICALITY_MAPPING = {
 function RaiseAlarmCard({ data = {}, reload = false, setReload = () => {} }) {
 	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
-	const [show, setShow] = useState(false);
+	const [showAlarmCard, setShowAlarmCard] = useState(false);
 	const [resolve, setResolve] = useState(false);
 
 	const {
@@ -91,7 +91,7 @@ function RaiseAlarmCard({ data = {}, reload = false, setReload = () => {} }) {
 				<div
 					role="presentation"
 					className={styles.details}
-					onClick={() => setShow(true)}
+					onClick={() => setShowAlarmCard(true)}
 				>
 					View Details
 				</div>
@@ -135,11 +135,11 @@ function RaiseAlarmCard({ data = {}, reload = false, setReload = () => {} }) {
 				</Modal>
 			)}
 
-			{show && (
+			{showAlarmCard && (
 				<Modal
 					className={styles.styled_modal}
-					show={show}
-					onClose={() => setShow(false)}
+					show={showAlarmCard}
+					onClose={() => setShowAlarmCard(false)}
 				>
 					<ModalContent content={data} />
 				</Modal>

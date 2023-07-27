@@ -2,16 +2,17 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	padding: 10px;
 }
 
 .field {
 	display: flex;
-	align-items: center;
+	align-items: top;
 	margin-bottom: 10px;
 }
 
 .bold {
-	width: 200px;
+	width: 20%;
 	margin-left: 4px;
 	font-weight: bold;
 }

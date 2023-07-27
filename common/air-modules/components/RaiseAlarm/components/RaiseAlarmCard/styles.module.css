@@ -3,16 +3,16 @@
 	width: 100%;
 	padding: 16px;
 	margin-bottom: 16px;
-	background: #fef6df;
+	background: var(--color-primary-yellow-5);
 	border-radius: 4px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 }
 
 .button_text {
 	margin-left: 8px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 500;
-	color: #cb6464;
+	color: var(--color-primary-error-red-3);
 	text-transform: capitalize;
 }
 
@@ -35,9 +35,9 @@
 
 .text {
 	display: flex;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
-	color: #cb6464;
+	color: var(--color-primary-error-red-3);
 }
 
 .small {
@@ -49,9 +49,9 @@
 	max-width: 152px;
 	margin-left: 3px;
 	overflow: hidden;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 700;
-	color: #cb6464;
+	color: var(--color-primary-error-red-3);
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
@@ -66,16 +66,16 @@
 .snooze {
 	width: 40px;
 	padding: 8px;
-	background: #cb6464;
+	background: var(--color-primary-error-red-3);
 	border: none;
-	border-radius: "4px";
+	border-radius: 4px;
 }
 
 .close {
 	padding: 8px;
-	background: #fff;
-	border: 1px solid #cb6464;
-	border-radius: "4px";
+	background: var(--color-secondary-5);
+	border: 1px solid var(--color-primary-error-red-3);
+	border-radius: 4px;
 }
 
 .bold {
@@ -85,15 +85,15 @@
 
 .details {
 	width: fit-content;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
-	color: #cb6464;
+	color: var(--color-primary-error-red-3);
 	text-decoration: underline;
 	cursor: pointer;
 }
 
 .details:hover {
-	background-color: yellow;
+	background-color: var(--color-primary-yellow-3);
 }
 
 .content {
@@ -104,7 +104,7 @@
 
 .resolve_text {
 	margin: 0;
-	color: #cb6464;
+	color: var(--color-primary-error-red-3);
 }
 
 .styled_modal {

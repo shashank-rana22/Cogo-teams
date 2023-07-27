@@ -13,7 +13,7 @@ const useListShipmentCollectionParty = (allParams, formValues) => {
 				...params,
 			},
 			pagination_data_required : false,
-			page_limit               : 1000,
+			page_limit               : 10,
 		},
 	}, { manual: true });
 
