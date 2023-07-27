@@ -1,3 +1,13 @@
 .container {
 	margin: 25px 0;
 }
+
+.disabled {
+	cursor: progress;
+
+	:global {
+		.ui_tabs_tabpanel {
+			pointer-events: none;
+		}
+	}
+}

@@ -8,6 +8,7 @@ function Notification({
 	item = {},
 	handleNotificationClick = () => {},
 	setShow = () => {},
+	setDisabled = () => {},
 }) {
 	const getStatus = () => {
 		if (item?.is_clicked) {
@@ -24,6 +25,7 @@ function Notification({
 			className={styles.container}
 			onClick={() => {
 				handleNotificationClick(item);
+				setDisabled(true);
 				setShow(false);
 			}}
 			onKeyDown={(e) => {

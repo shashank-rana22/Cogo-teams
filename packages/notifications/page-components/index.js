@@ -71,6 +71,7 @@ function Notifications() {
 	const { push } = useRouter();
 	const { general } = useSelector((state) => state);
 	const [page, setPage] = useState(INITIAL_PAGE);
+	const [disabled, setDisabled] = useState(false);
 
 	const { scope, query: { partner_id } = {} } = general;
 
@@ -172,6 +173,8 @@ function Notifications() {
 			onPageChange={setPage}
 			onMarkAllAsRead={onMarkAllAsRead}
 			handleNotificationClick={handleNotificationClick}
+			disabled={disabled}
+			setDisabled={setDisabled}
 		/>
 	);
 }

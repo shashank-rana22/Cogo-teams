@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Placeholder } from '@cogoport/components';
+import { Tabs, TabPanel, Placeholder, cl } from '@cogoport/components';
 import React from 'react';
 
 import Notification from '../Notification';
@@ -14,6 +14,8 @@ function NotificationPage({
 	formattedData = {},
 	handleNotificationClick = () => {},
 	onMarkAllAsRead = () => {},
+	disabled = false,
+	setDisabled = () => {},
 }) {
 	const {
 		activeTab,
@@ -30,13 +32,14 @@ function NotificationPage({
 					<Tabs
 						activeTab={activeTab}
 						onChange={(tab) => setActiveTabFunction(tab)}
-						className="horizontal two"
+						className={cl`${styles.tabs} ${disabled ? styles.disabled : ''}`}
 						themeType="primary"
+						disabled={disabled}
 					>
 						<TabPanel
 							name="notifications"
 							title="Notifications"
-							className="horizontal one"
+							className={styles.tab_panel}
 						>
 							<Header
 								onMarkAllAsRead={onMarkAllAsRead}
@@ -47,9 +50,9 @@ function NotificationPage({
 							{!loading ? (formattedData?.list || []).map((item) => (
 								<Notification
 									key={item}
-									className="small"
 									item={item}
 									handleNotificationClick={handleNotificationClick}
+									setDisabled={setDisabled}
 								/>
 							)) : (
 								[...Array(LOADER_COUNT).keys()].map((item) => (
@@ -57,7 +60,7 @@ function NotificationPage({
 								))
 							)}
 						</TabPanel>
-						<TabPanel name="mails" title="Mails" className="horizontal one">
+						<TabPanel name="mails" title="Mails" className={styles.tab_panel}>
 							<Header
 								onMarkAllAsRead={onMarkAllAsRead}
 								formattedData={formattedmailData}
@@ -67,9 +70,9 @@ function NotificationPage({
 							{!loading ? (formattedmailData?.list || []).map((item) => (
 								<Notification
 									key={item}
-									className="small"
 									item={item}
 									handleNotificationClick={handleNotificationClick}
+									setDisabled={setDisabled}
 								/>
 							)) : (
 								[...Array(LOADER_COUNT).keys()].map((item) => (
