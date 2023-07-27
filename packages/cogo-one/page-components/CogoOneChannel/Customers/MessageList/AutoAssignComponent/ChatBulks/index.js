@@ -14,8 +14,8 @@ function ChatBulks({
 	setSendBulkTemplates = () => {},
 }) {
 	const bulkSendActions = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.bulk_assign_features;
-
 	const isAutoAssign = isBotSession && bulkSendActions.includes('bulk_auto_assign');
+
 	return (
 		<div>
 			{isAutoAssign ? (
