@@ -59,6 +59,42 @@ const ENTITY_FEATURE_MAPPING = {
 			tax_number: 'Search By Business Name/VAT Number',
 		},
 	},
+	601: {
+		labels: {
+			irn_label                 : 'E-invoice',
+			tax_label                 : 'TIN Number',
+			sage_label                : null,
+			search_options_label_pan  : 'Business Name/TIN Number',
+			search_options_label_sage : null,
+		},
+		placeholder: {
+			tax_number: 'Search By Business Name/TIN Number',
+		},
+	},
+	701: {
+		labels: {
+			irn_label                 : 'E-invoice',
+			tax_label                 : 'NIB Number',
+			sage_label                : null,
+			search_options_label_pan  : 'Business Name/NIB Number',
+			search_options_label_sage : null,
+		},
+		placeholder: {
+			tax_number: 'Search By Business Name/NIB Number',
+		},
+	},
+	801: {
+		labels: {
+			irn_label                 : 'E-invoice',
+			tax_label                 : 'USCC Number',
+			sage_label                : null,
+			search_options_label_pan  : 'Business Name/USCC Number',
+			search_options_label_sage : null,
+		},
+		placeholder: {
+			tax_number: 'Search By Business Name/USCC Number',
+		},
+	},
 };
 
 export default ENTITY_FEATURE_MAPPING;
