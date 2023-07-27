@@ -2,17 +2,19 @@ import { cl } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import React from 'react';
 
+import { formatRouteData } from '../../../../../../utils/routeDataHelpers';
+
 import styles from './styles.module.css';
 
-function PortDetails({ portName = {}, portCountry = {} }) {
+function PortDetails({ details = {} }) {
 	return (
 		<div className={styles.port_details}>
 			<div className={styles.port_name}>
-				{portName?.name || portName?.display_name}
+				{details?.name}
 			</div>
 
 			<div className={cl`${styles.port_name} ${styles.country_name}`}>
-				{portCountry?.name || portCountry?.display_name}
+				{details?.country}
 			</div>
 		</div>
 	);
@@ -20,22 +22,18 @@ function PortDetails({ portName = {}, portCountry = {} }) {
 
 function ShippingRoute({ shipmentItem = {} }) {
 	const {
-		origin_port,
-		origin_country,
-		destination_port,
-		destination_country,
-	} = shipmentItem || {};
+		originDetails = {},
+		destinationDetails = {},
+	} = formatRouteData({ item: shipmentItem });
 
 	return (
 		<div className={styles.port_container}>
 			<PortDetails
-				portName={origin_port}
-				portCountry={origin_country}
+				details={originDetails}
 			/>
 			<IcMPortArrow height={20} width={20} />
 			<PortDetails
-				portName={destination_port}
-				portCountry={destination_country}
+				details={destinationDetails}
 			/>
 		</div>
 	);

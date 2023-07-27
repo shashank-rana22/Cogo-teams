@@ -1,4 +1,5 @@
 import { Pill, Avatar } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -13,8 +14,12 @@ function ShipmentCard({
 	showPocDetails = {},
 	setShowPocDetails = () => {},
 }) {
-	const { service_provider = {} } = shipmentItem;
-	const { bussiness_name = '', short_name = '' } = service_provider;
+	const {
+		shipment_type = '',
+		shipping_line = {},
+		net_total = 0,
+		net_total_price_currency = '',
+	} = shipmentItem;
 
 	if (!isEmpty(showPocDetails) && showPocDetails?.sid === shipmentItem.sid) {
 		return (
@@ -33,20 +38,32 @@ function ShipmentCard({
 				<HeaderBlock shipmentItem={shipmentItem} setShowPocDetails={setShowPocDetails} />
 
 				<div className={styles.service_provider_details}>
-					<Avatar size={50} personName={bussiness_name || short_name} />
+					<Avatar
+						size={50}
+						personName={shipping_line?.business_name}
+					/>
 
 					<div className={styles.service_provider_name}>
-						{bussiness_name || short_name}
+						{shipping_line?.business_name}
 					</div>
 				</div>
 
 				<ShippingRoute shipmentItem={shipmentItem} />
 
-				<CargoDetails detail={shipmentItem} service="shipment_type" />
+				<CargoDetails detail={shipmentItem} service={shipment_type} />
 
 				<div className={styles.price_details}>
 					<div className={styles.amount}>
-						INR 67,000
+						{formatAmount({
+							amount   : net_total,
+							currency : net_total_price_currency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+								minimumFractionDigits : 2,
+							},
+						})}
 					</div>
 					<Pill size="md" color="#BBFCBD">
 						Pay Later

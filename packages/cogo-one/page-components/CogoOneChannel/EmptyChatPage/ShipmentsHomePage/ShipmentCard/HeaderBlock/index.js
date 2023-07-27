@@ -28,13 +28,13 @@ const BUTTON_OPTIONS = [
 ];
 
 function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
-	const { sid = '', importer_exporter = {} } = shipmentItem || {};
+	const { serial_id = '', importer_exporter = {} } = shipmentItem || {};
 	const { business_name = '', short_name = '' } = importer_exporter || {};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.shipper_details}>
-				<div className={styles.sid_id}>{`SID: ${sid}`}</div>
+				<div className={styles.sid_id}>{`SID: ${serial_id}`}</div>
 
 				<div className={styles.importer_exporter_styles}>
 					{business_name || short_name}

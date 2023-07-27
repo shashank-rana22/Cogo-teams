@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import useListShipments from '../../../../hooks/useListShipments';
 
-import { DUMMY_DATA } from './dummyData'; // need to remove
+// import { DUMMY_DATA } from './dummyData'; // need to remove
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 
@@ -12,15 +12,10 @@ function ShipmentsHomePage() {
 	const {
 		listLoading,
 		shipmentsData,
-		getShipmentsList,
 	} = useListShipments();
+	console.log('listLoading:', listLoading);
 
-	useEffect(() => {
-		getShipmentsList();
-	}, [getShipmentsList]);
-
-	console.log('listLoading:', listLoading, shipmentsData);
-
+	const { list = [] } = shipmentsData || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_title}>
@@ -28,7 +23,7 @@ function ShipmentsHomePage() {
 			</div>
 
 			<div className={styles.shipments_cards_container}>
-				{DUMMY_DATA.map(
+				{(list || []).map(
 					(shipmentItem) => (
 						<ShipmentCard
 							key={shipmentItem?.sid}

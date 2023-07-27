@@ -1,6 +1,5 @@
 import { useRequest } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 const getParams = () => ({
 	filters: {
@@ -9,11 +8,10 @@ const getParams = () => ({
 	get_shipment_quotation_data : true,
 	// milestone_data_required     : true,
 	page                        : 1,
+	page_limit                  : 6,
 });
 
 function useListShipments() {
-	// const { profileId } = useSelector(({ profile }) => ({ profileId: profile.user.id }));
-
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipments',
 		method : 'get',
@@ -31,6 +29,10 @@ function useListShipments() {
 		},
 		[trigger],
 	);
+
+	useEffect(() => {
+		getShipmentsList();
+	}, [getShipmentsList]);
 
 	return {
 		listLoading   : loading,
