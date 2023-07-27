@@ -91,7 +91,7 @@ function OrgUsersList({
 		}, {}),
 	);
 
-	const finalList = loading ? [...Array(LOADER_COUNT).fill({})] : userList;
+	const finalList = loading ? [...Array(LOADER_COUNT).keys()] : userList;
 
 	const handleSelectAll = ({ event }) => {
 		setSelectAll(event.target.checked);
@@ -173,7 +173,7 @@ function OrgUsersList({
 						if (loading) {
 							return (
 								<Placeholder
-									key={user_id}
+									key={eachUser}
 									className={styles.placeholder_styles}
 								/>
 							);
