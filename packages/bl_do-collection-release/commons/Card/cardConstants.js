@@ -10,13 +10,8 @@ export const SUCCESS_MSG = {
 export const TASK_FILTER = {
 	knockoff_pending: {
 		bl: {
-			import: [
-				'generate_do_noc_certificate',
-				'generate_do_certificate',
-				'upload_security_dd',
-				'knockoff_invoices',
-			],
-			export: 'knockoff_invoices',
+			import : 'knockoff_bl_invoices',
+			export : 'knockoff_invoices',
 		},
 		do: {
 			import: [
@@ -25,30 +20,43 @@ export const TASK_FILTER = {
 				'upload_security_dd',
 				'knockoff_invoices',
 			],
-			export: 'knockoff_do_invoices',
+			export: [
+				'generate_do_noc_certificate',
+				'generate_do_certificate',
+				'knockoff_do_invoices',
+			],
 		},
 	},
-	collection_pending : 'update_collection_details',
-	under_collection   : {
+	collection_pending: {
 		bl: {
-			import: ['upload_endorsed_bill_of_lading', 'upload_delivery_order', 'generate_do_noc_certificat',
-				'generate_do_certificate', 'upload_security_dd'],
-			export: 'upload_bill_of_lading',
+			import : 'update_do_collection_details',
+			export : 'update_collection_details',
+		},
+		do: {
+			import : 'update_collection_details',
+			export : 'update_bl_collection_details',
+		},
+	},
+	under_collection: {
+		bl: {
+			import : 'upload_bill_of_lading',
+			export : 'upload_bill_of_lading',
 		},
 		do: {
 			import: ['upload_endorsed_bill_of_lading', 'upload_delivery_order', 'generate_do_noc_certificat',
 				'generate_do_certificate', 'upload_security_dd'],
-			export: 'upload_bill_of_lading',
+			export: ['upload_endorsed_bill_of_lading', 'upload_delivery_order', 'generate_do_noc_certificat',
+				'generate_do_certificate', 'upload_security_dd'],
 		},
 	},
 	collected: {
 		bl: {
-			import : ['mark_do_released', 'upload_delivery_order'],
+			import : ['mark_bl_released'],
 			export : 'mark_bl_released',
 		},
 		do: {
 			import : ['mark_do_released', 'upload_delivery_order'],
-			export : 'mark_bl_released',
+			export : ['mark_do_released', 'upload_delivery_order'],
 		},
 	},
 	released    : 'mark_bl_delivered',
