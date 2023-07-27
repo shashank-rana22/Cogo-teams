@@ -42,6 +42,7 @@ function BreakdownDetails({
 		setAddLineItemData,
 		editLineItemData,
 		setEditLineItemData,
+		applyRateDetails = () => {},
 	} = useHandleBreakdownDetails({ rate, setRateDetails, setNoRatesPresent });
 
 	let total = 0;
@@ -59,8 +60,9 @@ function BreakdownDetails({
 						type="button"
 						themeType="secondary"
 						size="xl"
+						onClick={applyRateDetails}
 					>
-						Skip
+						Reset
 					</Button>
 				</div>
 			) : null}

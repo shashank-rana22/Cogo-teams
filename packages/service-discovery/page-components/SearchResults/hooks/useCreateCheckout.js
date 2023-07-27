@@ -67,7 +67,7 @@ const useCreateCheckout = ({
 				router.push(partnerHref, partnerAs);
 			}
 		} catch (e) {
-			Toast.error(e?.response?.message);
+			Toast.error(e?.response?.data);
 		}
 	};
 

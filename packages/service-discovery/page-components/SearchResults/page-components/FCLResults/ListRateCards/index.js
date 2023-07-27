@@ -1,4 +1,4 @@
-import { Loader, Pagination } from '@cogoport/components';
+import { Loader, Pagination, cl } from '@cogoport/components';
 import React from 'react';
 
 // import useScrollDirection from '../../../../../common/Header/useScrollDirection';
@@ -110,8 +110,12 @@ function ListRateCards({
 		return null;
 	}
 
+	const { current = '' } = infoBanner;
+
+	const show_dim_bg = current === 'comparision_button' && rates.length;
+
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${show_dim_bg && styles.dim_bg}`}>
 			<HeaderTop
 				detail={detail}
 				filters={filters}

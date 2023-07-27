@@ -124,7 +124,7 @@ function SearchResults() {
 			<div
 				style={
 					showAdditionalHeader || infoBanner.current === 'edit_button'
-						? { opacity: 0.6, pointerEvents: 'none' }
+						? { opacity: 0.6, pointerEvents: 'none', background: '#000' }
 						: null
 				}
 			>
