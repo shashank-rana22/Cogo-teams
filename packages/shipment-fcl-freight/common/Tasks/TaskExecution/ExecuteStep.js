@@ -21,6 +21,7 @@ function ExecuteStep({
 	selectedMail = [],
 	serviceIdMapping = [],
 }) {
+	console.log('11');
 	const { options, allCommodity } = useGetCommodityOptions({ task });
 
 	const {
