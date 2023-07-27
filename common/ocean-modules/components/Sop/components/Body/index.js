@@ -30,7 +30,7 @@ function Body({
 	return loading
 		? (
 			<div className={styles.loading_wrapper}>
-				<ThreeDotLoader message="Loading SOPs" fontSize={16} width={30} />
+				<ThreeDotLoader message="Loading SOPs" fontSize={16} size={30} />
 			</div>
 		)
 		: (

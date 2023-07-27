@@ -91,7 +91,7 @@ export default function AccordionContent({
 		if (taskLoading) {
 			return (
 				<div className={styles.loading_container}>
-					<ThreeDotLoader message="Loading Tasks" fontSize={16} width={30} />
+					<ThreeDotLoader message="Loading Tasks" fontSize={16} size={30} />
 				</div>
 			);
 		}

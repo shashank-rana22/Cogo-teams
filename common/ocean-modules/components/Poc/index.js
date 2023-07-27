@@ -46,7 +46,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 			{loading
 				? (
 					<div className={styles.loader_wrapper}>
-						<ThreeDotLoader message="Loading POCs" fontSize={16} width={30} />
+						<ThreeDotLoader message="Loading POCs" fontSize={16} size={30} />
 					</div>
 				)
 				: (

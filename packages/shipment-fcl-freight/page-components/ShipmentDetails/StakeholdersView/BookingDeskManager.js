@@ -65,7 +65,7 @@ function BookingDeskManager({ get = {}, activeStakeholder = '' }) {
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
 			<div className={styles.loading_wrapper}>
-				<ThreeDotLoader message="Loading Shipment Data" fontSize={18} width={45} />
+				<ThreeDotLoader message="Loading Shipment Data" fontSize={18} size={45} />
 			</div>
 		);
 	}
@@ -94,9 +94,12 @@ function BookingDeskManager({ get = {}, activeStakeholder = '' }) {
 	if (getShipmentStatusCode === UNAUTHORIZED_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
-				<div className={styles.page}>
+				<div className={styles.permission_message}>
 					You don&apos;t have permission to visit this page.
-					Please contact at +91 7208083747
+					<br />
+					Please contact at
+					{' '}
+					<a href="tel:+91 7208083747">+91 7208083747</a>
 				</div>
 			</div>
 		);
