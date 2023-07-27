@@ -1443,7 +1443,6 @@ importers:
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
-      uuid: ^9.0.0
     dependencies:
       '@cogoport/components': 1.0.427_4hpwt3xjfbus5pvesg2at6445e
       '@cogoport/icons-react': 1.0.79_biqbaboplfbrettd7655fr4n2y
@@ -1453,7 +1452,6 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       react: 18.2.0
-      uuid: 9.0.0
 
   packages/liability-dashboard:
     specifiers:
