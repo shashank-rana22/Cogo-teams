@@ -1,0 +1,9 @@
+.updated_on {
+	display: flex;
+	align-items: center;
+	padding-right: 48px;
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--black-60, #828282);
+	text-align: right;
+}

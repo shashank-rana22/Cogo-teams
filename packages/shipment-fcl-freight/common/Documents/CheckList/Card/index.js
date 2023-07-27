@@ -6,7 +6,8 @@ import React from 'react';
 import Content from './Content';
 
 const TASK_INDEX_SLICE_FOR_DOC_TYPE = -1;
-const IGM_DOCUMENTS = ['bill_of_lading', 'draft_bill_of_lading', 'house_bill_of_lading', 'draft_house_bill_of_lading'];
+const IGM_DOCUMENTS = ['bill_of_lading',
+	'draft_bill_of_lading', 'house_bill_of_lading', 'draft_house_bill_of_lading', 'igm_document'];
 
 const Card = ({
 	taskList = [],
