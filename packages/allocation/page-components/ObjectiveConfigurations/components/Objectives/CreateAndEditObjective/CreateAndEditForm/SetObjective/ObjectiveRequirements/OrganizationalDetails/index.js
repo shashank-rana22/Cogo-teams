@@ -10,8 +10,8 @@ function OrganizationalDetails(props) {
 	const { control, watch, setValue, disabled } = props;
 
 	const watchCountries = watch('country');
-	const watchStates = watch('states');
-	const watchCities = watch('cities');
+	const watchStates = watch('state');
+	const watchCities = watch('city');
 
 	const controls = getOrganizationalDetailsControls(
 		{ watchCountries, watchStates, watchCities, disabled },
@@ -19,14 +19,14 @@ function OrganizationalDetails(props) {
 
 	useEffect(() => {
 		const subscription = watch((value, { name: controlName }) => {
-			if (controlName === 'cities') {
-				setValue('pincodes', []);
+			if (controlName === 'city') {
+				setValue('pincode', []);
 			}
-			if (controlName === 'states') {
-				setValue('cities', []);
+			if (controlName === 'state') {
+				setValue('city', []);
 			}
 			if (controlName === 'country') {
-				setValue('states', []);
+				setValue('state', []);
 			}
 		});
 

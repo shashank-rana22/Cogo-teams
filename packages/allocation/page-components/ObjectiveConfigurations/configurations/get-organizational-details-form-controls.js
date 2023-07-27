@@ -34,7 +34,7 @@ const getOrganizationalDetailsControls = (props) => {
 			disabled,
 		},
 		{
-			name        : 'states',
+			name        : 'state',
 			label       : 'Select State',
 			placeholder : 'State',
 			type        : 'asyncSelect',
@@ -63,7 +63,7 @@ const getOrganizationalDetailsControls = (props) => {
 			renderLabel    : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
-			name        : 'cities',
+			name        : 'city',
 			label       : 'Select City',
 			placeholder : 'City',
 			type        : 'asyncSelect',
@@ -92,7 +92,7 @@ const getOrganizationalDetailsControls = (props) => {
 			renderLabel    : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
-			name        : 'pincodes',
+			name        : 'pincode',
 			label       : 'Select Pincode',
 			placeholder : 'Pincode',
 			type        : 'asyncSelect',

@@ -27,7 +27,7 @@ const getCreateObjectivePayload = (props) => {
 		stats_details,
 	} = objectiveRequirements || {};
 
-	const { country, states, cities, pincodes, segments } = organization_details || {};
+	const { country, state, city, pincode, segments } = organization_details || {};
 
 	const { date_range = {}, ...restStatsDetails } = stats_details || {};
 
@@ -85,9 +85,9 @@ const getCreateObjectivePayload = (props) => {
 		})),
 		organization_details: {
 			country_ids : country?.map((item) => item.id),
-			state_ids   : states?.map((item) => item.id),
-			city_ids    : cities?.map((item) => item.id),
-			pincode_ids : pincodes?.map((item) => item.id),
+			state_ids   : state?.map((item) => item.id),
+			city_ids    : city?.map((item) => item.id),
+			pincode_ids : pincode?.map((item) => item.id),
 			segments,
 		},
 		stats_details: {

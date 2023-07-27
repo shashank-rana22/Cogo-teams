@@ -13,15 +13,15 @@ const CARD_DATA_MAPPING = [
 		label : 'Country',
 	},
 	{
-		key   : 'states',
+		key   : 'state',
 		label : 'State',
 	},
 	{
-		key   : 'cities',
+		key   : 'city',
 		label : 'City',
 	},
 	{
-		key   : 'pincodes',
+		key   : 'pincode',
 		label : 'Pincode',
 	},
 	{

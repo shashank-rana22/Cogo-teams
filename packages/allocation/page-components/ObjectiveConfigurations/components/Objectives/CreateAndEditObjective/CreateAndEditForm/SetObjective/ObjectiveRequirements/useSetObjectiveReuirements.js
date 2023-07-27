@@ -19,9 +19,9 @@ const useSetObjectiveRequirements = (props) => {
 
 	const {
 		country: filledCountries,
-		states: filledStates,
-		cities: filledCities,
-		pincodes: filledPincodes,
+		state: filledStates,
+		city: filledCities,
+		pincode: filledPincodes,
 		segments: filledSegments,
 	} = organization_details || {};
 
@@ -37,9 +37,9 @@ const useSetObjectiveRequirements = (props) => {
 				),
 			) : [{}],
 			country  : getAttachedIdData({ values: filledCountries }),
-			states   : getAttachedIdData({ values: filledStates }),
-			cities   : getAttachedIdData({ values: filledCities }),
-			pincodes : getAttachedIdData({ values: filledPincodes }),
+			state    : getAttachedIdData({ values: filledStates }),
+			city     : getAttachedIdData({ values: filledCities }),
+			pincode  : getAttachedIdData({ values: filledPincodes }),
 			segments : filledSegments,
 			...(stats_details || {}),
 
@@ -63,9 +63,9 @@ const useSetObjectiveRequirements = (props) => {
 			truck_type           : [],
 		}]);
 		setValue('country', []);
-		setValue('states', []);
-		setValue('cities', []);
-		setValue('pincodes', []);
+		setValue('state', []);
+		setValue('city', []);
+		setValue('pincode', []);
 		setValue('segments', []);
 		setValue('date_range', {});
 		setValue('shipment_count', '');
@@ -76,9 +76,9 @@ const useSetObjectiveRequirements = (props) => {
 	const onSubmit = (values) => {
 		const {
 			country,
-			states,
-			cities,
-			pincodes,
+			state,
+			city,
+			pincode,
 			segments,
 			date_range,
 			shipment_count,
@@ -94,7 +94,7 @@ const useSetObjectiveRequirements = (props) => {
 				organization_details: {
 					...getSeparatedIdData({
 						values: {
-							country, states, cities, pincodes,
+							country, state, city, pincode,
 						},
 					}),
 					segments,
