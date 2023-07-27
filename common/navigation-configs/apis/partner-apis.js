@@ -13010,7 +13010,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'delete_payments_dunning_delete_dunning_cycle',
+			api         : 'delete_payments_dunning_dunning_cycle',
 			access_type : 'private',
 		},
 		{
@@ -13063,6 +13063,10 @@ const partner = {
 		},
 		{
 			api         : 'get_payments_dunning_card_data',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_payments_dunning_status',
 			access_type : 'private',
 		},
 	],

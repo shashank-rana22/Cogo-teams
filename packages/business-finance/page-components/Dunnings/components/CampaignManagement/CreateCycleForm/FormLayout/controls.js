@@ -98,14 +98,15 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			span    : 12,
 			groupBy : [
 				{
-					label    : 'Service Type',
-					name     : 'serviceType',
-					type     : 'multiSelect',
-					prefix   : () => {},
-					disabled : isEditMode,
-					options  : SERVICE_OPTIONS,
-					style    : { width: '288px' },
-					span     : 4,
+					label       : 'Service Type',
+					name        : 'serviceType',
+					placeholder : 'All(default)',
+					type        : 'multiSelect',
+					prefix      : () => null,
+					disabled    : true,
+					options     : SERVICE_OPTIONS,
+					style       : { width: '288px' },
+					span        : 4,
 				},
 				{
 					name        : 'creditController',
@@ -191,7 +192,15 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			type     : 'radioGroup',
 			value    : formData?.triggerType || 'ONE_TIME',
 			onChange : (value) => {
-				setFormData((prev) => ({ ...prev, triggerType: value }));
+				if (value === 'PERIODIC') {
+					setFormData((prev) => ({
+						...prev,
+						triggerType : value,
+						frequency   : 'DAILY',
+					}));
+				} else {
+					setFormData((prev) => ({ ...prev, triggerType: value }));
+				}
 			},
 			radioOptions: [
 				{ name: 'ONE_TIME', value: 'ONE_TIME', label: 'One Time' },

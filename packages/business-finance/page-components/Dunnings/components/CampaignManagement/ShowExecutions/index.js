@@ -1,5 +1,6 @@
 import { Carousel, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import useListDunningExecution from '../hooks/useListDunningExecution';
@@ -35,11 +36,12 @@ function ShowExecutions({ rowId = '', dropdown = '' }) {
 				{Array(SINGLE_SLIDE_LIMIT).fill('').map((i, position) => {
 					const elementPosition = (index * SINGLE_SLIDE_LIMIT) + position;
 					const { scheduleRule, status } = list?.[elementPosition] || {};
-					const { scheduleTime, scheduleTimeZone, week } = scheduleRule || {};
+					const { scheduleTime, scheduleTimeZone, week, dunningExecutionFrequency = '' } = scheduleRule || {};
 					const dateText = list?.[elementPosition]
 						?.scheduledAt?.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
 					const timeText = `${scheduleTime} ${scheduleTimeZone}`;
-					const weekDay = week ? `${week?.slice(WEEK_SLICE_FROM, WEEK_SLICE_TILL)} | ` : '';
+					const executionDay = week ? week?.slice(WEEK_SLICE_FROM, WEEK_SLICE_TILL)
+						: dunningExecutionFrequency?.replaceAll('_', ' ');
 
 					return (
 						<div
@@ -64,7 +66,10 @@ function ShowExecutions({ rowId = '', dropdown = '' }) {
 											{dateText || ''}
 										</div>
 										<div style={{ fontSize: '10px' }}>
-											{`${weekDay} ${timeText}`}
+											{executionDay
+												? `${startCase(executionDay.toLowerCase())} | `
+												: null}
+											{timeText}
 										</div>
 									</button>
 								) : null}
