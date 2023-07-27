@@ -23,7 +23,17 @@ function AgentInfo({
 			<div className={styles.agent_name}>{startCase(name)}</div>
 			<div className={styles.sub_label}>{email}</div>
 			<Avatar personName={name} size="140px" className={styles.user_icon} />
-			<div className={styles.text}>Time Clocked In Today</div>
+			<div className={styles.text}>
+				Time Clocked In
+				<span>
+					{formatDate({
+						date       : punchedTime,
+						formatType : 'date',
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+					})}
+				</span>
+
+			</div>
 			{status === 'punched_out'
 				? <Button size="md" onClick={handlePunchIn} disabled={loading}>Start Shift</Button>
 				: (
@@ -31,8 +41,7 @@ function AgentInfo({
 						<div className={styles.time}>
 							{formatDate({
 								date       : punchedTime,
-								formatType : 'dateTime',
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+								formatType : 'time',
 								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 							})}
 
