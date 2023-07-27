@@ -19,12 +19,6 @@ const BUTTON_OPTIONS = [
 			Toast.info('viewing Documents');
 		},
 	},
-	{
-		children : 'Re-Assign Agent',
-		onClick  : () => {
-			Toast.info('Re assigning agent');
-		},
-	},
 ];
 
 function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {

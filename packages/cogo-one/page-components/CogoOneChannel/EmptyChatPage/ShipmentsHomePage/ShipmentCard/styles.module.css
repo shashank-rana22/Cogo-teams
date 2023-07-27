@@ -40,17 +40,6 @@
 .service_provider_details {
 	display: flex;
 	align-items: center;
-
-	:global {
-		.ui_avatar_container {
-			border-radius: 50% !important;
-		}
-
-		.ui_avatar_text {
-			color: #000;
-			background: #cfeaed;
-		}
-	}
 }
 
 .service_provider_name {
@@ -78,4 +67,19 @@
 	margin-right: 4px;
 	font-size: 15px;
 	font-weight: 600;
+}
+
+.shipment_type_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 4px;
+	font-weight: 600;
+
+	svg {
+		width: 36px;
+		height: 36px;
+		margin-right: 6px;
+		fill: #f9ae64;
+	}
 }

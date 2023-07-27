@@ -1,6 +1,8 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React from 'react';
 
+import useListShipmentStakeholders from '../../../../../../hooks/useListShipmentStakeholders';
+
 import PocUser from './PocUser';
 import styles from './styles.module.css';
 
@@ -10,7 +12,9 @@ function PocContainer({
 	setShowPocDetails = () => {},
 	showPocDetails = {},
 }) {
-	console.log('showPocDetails:', showPocDetails);
+	const { id } = showPocDetails;
+	const { stakeHoldersData } = useListShipmentStakeholders({ shipmentId: id });
+	console.log('stakeHoldersData:', stakeHoldersData);
 
 	return (
 		<div className={styles.container}>

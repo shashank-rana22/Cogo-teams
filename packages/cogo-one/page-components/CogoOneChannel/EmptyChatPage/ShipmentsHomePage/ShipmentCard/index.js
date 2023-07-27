@@ -1,10 +1,11 @@
-import { Pill, Avatar } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import CargoDetails from './CargoDetails';
 import HeaderBlock from './HeaderBlock';
+import { iconMapping } from './iconsMapping';
 import PocContainer from './PocContainer';
 import ShippingRoute from './ShippingRoute';
 import styles from './styles.module.css';
@@ -16,12 +17,11 @@ function ShipmentCard({
 }) {
 	const {
 		shipment_type = '',
-		shipping_line = {},
 		net_total = 0,
 		net_total_price_currency = '',
 	} = shipmentItem;
 
-	if (!isEmpty(showPocDetails) && showPocDetails?.sid === shipmentItem.sid) {
+	if (!isEmpty(showPocDetails) && showPocDetails?.serial_id === shipmentItem.serial_id) {
 		return (
 			<div className={styles.container}>
 				<PocContainer
@@ -36,17 +36,6 @@ function ShipmentCard({
 		<div className={styles.container}>
 			<div className={styles.main_block}>
 				<HeaderBlock shipmentItem={shipmentItem} setShowPocDetails={setShowPocDetails} />
-
-				<div className={styles.service_provider_details}>
-					<Avatar
-						size={40}
-						personName={shipping_line?.business_name}
-					/>
-
-					<div className={styles.service_provider_name}>
-						{shipping_line?.business_name}
-					</div>
-				</div>
 
 				<ShippingRoute shipmentItem={shipmentItem} />
 
@@ -81,6 +70,10 @@ function ShipmentCard({
 				<div className={styles.footer_right_block}>
 					Next: Booking Confirmation
 				</div>
+			</div>
+			<div className={styles.shipment_type_container}>
+				{iconMapping?.[shipment_type]}
+				{startCase(shipment_type)}
 			</div>
 		</div>
 	);
