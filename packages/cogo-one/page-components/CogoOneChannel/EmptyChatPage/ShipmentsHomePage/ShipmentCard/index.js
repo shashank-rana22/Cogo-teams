@@ -1,30 +1,39 @@
-import { Pill } from '@cogoport/components';
-import { Image } from '@cogoport/next';
+import { Pill, Avatar } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import CargoDetails from '../../../../../common/MessageBody/UserActivityMessages/Shipments/CargoDetails';
-
+import CargoDetails from './CargoDetails';
 import HeaderBlock from './HeaderBlock';
+import PocContainer from './PocContainer';
 import ShippingRoute from './ShippingRoute';
 import styles from './styles.module.css';
 
-function ShipmentCard({ shipmentItem = {} }) {
+function ShipmentCard({
+	shipmentItem = {},
+	showPocDetails = {},
+	setShowPocDetails = () => {},
+}) {
 	const { service_provider = {} } = shipmentItem;
 	const { bussiness_name = '', short_name = '' } = service_provider;
+
+	if (!isEmpty(showPocDetails) && showPocDetails?.sid === shipmentItem.sid) {
+		return (
+			<div className={styles.container}>
+				<PocContainer
+					showPocDetails={showPocDetails}
+					setShowPocDetails={setShowPocDetails}
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_block}>
-				<HeaderBlock shipmentItem={shipmentItem} />
+				<HeaderBlock shipmentItem={shipmentItem} setShowPocDetails={setShowPocDetails} />
 
 				<div className={styles.service_provider_details}>
-					<Image
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/logo.svg"
-						height={50}
-						width={50}
-						alt="shipping"
-						className={styles.logo_styles}
-					/>
+					<Avatar size={50} personName={bussiness_name || short_name} />
 
 					<div className={styles.service_provider_name}>
 						{bussiness_name || short_name}
@@ -34,6 +43,15 @@ function ShipmentCard({ shipmentItem = {} }) {
 				<ShippingRoute shipmentItem={shipmentItem} />
 
 				<CargoDetails detail={shipmentItem} service="shipment_type" />
+
+				<div className={styles.price_details}>
+					<div className={styles.amount}>
+						INR 67,000
+					</div>
+					<Pill size="md" color="#BBFCBD">
+						Pay Later
+					</Pill>
+				</div>
 			</div>
 
 			<div className={styles.footer_block}>

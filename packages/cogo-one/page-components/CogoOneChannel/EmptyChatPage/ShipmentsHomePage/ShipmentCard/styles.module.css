@@ -1,7 +1,7 @@
 .container {
 	width: 280px;
-	height: fit-content;
-	margin: 0 10px;
+	height: 310px;
+	margin: 4px 10px;
 	background: #fff;
 	border: 1px solid #f3f3f3;
 	border-radius: 8px;
@@ -40,10 +40,22 @@
 .service_provider_details {
 	display: flex;
 	align-items: center;
+
+	:global {
+		.ui_avatar_container {
+			border-radius: 50% !important;
+		}
+
+		.ui_avatar_text {
+			color: #000;
+			background: #cfeaed;
+		}
+	}
 }
 
 .service_provider_name {
 	width: calc(100% - 100px);
+	margin-left: 4px;
 	overflow: hidden;
 	font-size: 14px;
 	font-weight: 600;
@@ -54,4 +66,16 @@
 
 .logo_styles {
 	margin-right: 10px;
+}
+
+.price_details {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.amount {
+	margin-right: 4px;
+	font-size: 15px;
+	font-weight: 600;
 }

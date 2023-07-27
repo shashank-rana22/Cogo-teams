@@ -1,3 +1,4 @@
+import { Popover, ButtonGroup, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
@@ -5,7 +6,28 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function HeaderBlock({ shipmentItem = {} }) {
+const BUTTON_OPTIONS = [
+	{
+		children : 'View Shipments',
+		onClick  : () => {
+			Toast.info('viewing Shipments');
+		},
+	},
+	{
+		children : 'View Documents',
+		onClick  : () => {
+			Toast.info('viewing Documents');
+		},
+	},
+	{
+		children : 'Re-Assign Agent',
+		onClick  : () => {
+			Toast.info('Re assigning agent');
+		},
+	},
+];
+
+function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
 	const { sid = '', importer_exporter = {} } = shipmentItem || {};
 	const { business_name = '', short_name = '' } = importer_exporter || {};
 
@@ -25,13 +47,26 @@ function HeaderBlock({ shipmentItem = {} }) {
 					height={25}
 					width={25}
 					alt="message"
+					onClick={() => setShowPocDetails(shipmentItem)}
 				/>
 
-				<IcMOverflowDot
-					height="20px"
-					width="20px"
-					cursor="pointer"
-				/>
+				<Popover
+					placement="bottom-end"
+					caret={false}
+					render={(
+						<ButtonGroup
+							size="sm"
+							options={BUTTON_OPTIONS}
+							direction="vertical"
+						/>
+					)}
+				>
+					<IcMOverflowDot
+						height="20px"
+						width="20px"
+						cursor="pointer"
+					/>
+				</Popover>
 			</div>
 
 		</div>
