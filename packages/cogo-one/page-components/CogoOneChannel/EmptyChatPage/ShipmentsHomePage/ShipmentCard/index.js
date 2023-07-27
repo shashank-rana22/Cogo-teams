@@ -2,6 +2,8 @@ import { Pill } from '@cogoport/components';
 import { Image } from '@cogoport/next';
 import React from 'react';
 
+import CargoDetails from '../../../../../common/MessageBody/UserActivityMessages/Shipments/CargoDetails';
+
 import HeaderBlock from './HeaderBlock';
 import ShippingRoute from './ShippingRoute';
 import styles from './styles.module.css';
@@ -30,6 +32,8 @@ function ShipmentCard({ shipmentItem = {} }) {
 				</div>
 
 				<ShippingRoute shipmentItem={shipmentItem} />
+
+				<CargoDetails detail={shipmentItem} service="shipment_type" />
 			</div>
 
 			<div className={styles.footer_block}>

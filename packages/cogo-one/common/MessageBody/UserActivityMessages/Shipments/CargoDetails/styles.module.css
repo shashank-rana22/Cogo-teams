@@ -1,7 +1,12 @@
 .shipment_details {
 	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
+	flex-direction: column;
+	height: 50px;
+	overflow-x: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .chips {
