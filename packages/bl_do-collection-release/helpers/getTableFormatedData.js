@@ -28,7 +28,7 @@ export default function getTableFormatedData({ list_of_invoices, data }) {
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
 			}),
-			service_name      : (item.service_name || []).map((ele) => shotNames[ele]).join(', '),
+			service_name      : (item.services || []).map((ele) => shotNames[ele?.service_type]).join(', '),
 			inr_invoice_total : formatAmount({
 				amount   : item.inr_invoice_total || '',
 				currency : 'inr',
