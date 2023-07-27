@@ -1,6 +1,7 @@
 import { Select, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
@@ -62,6 +63,14 @@ function CogoFinancials() {
 						style={{ width: '320px' }}
 					/>
 				</div>
+
+			</div>
+			<div className={styles.financially_closed_container}>
+				<div className={styles.financial_header}>
+					<div>Financially Closed Shipments</div>
+					<div className={styles.info}><IcMInfo /></div>
+				</div>
+				<hr className={styles.bottom_line} />
 			</div>
 		</div>
 	);

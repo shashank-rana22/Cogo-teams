@@ -2,3 +2,28 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.financially_closed_container {
+	width: 40%;
+	padding: 28px;
+	background: #fff;
+}
+
+.financial_header {
+	display: flex;
+	align-items: center;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+}
+
+.bottom_line {
+	float: left;
+	width: 20%;
+	margin: 0;
+	border-bottom: 2px solid var(--color-primary-error-red-2);
+}
+
+.info {
+	margin: 4px 0 0 8px;
+	cursor: pointer;
+}
