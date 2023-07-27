@@ -6,7 +6,7 @@ import getViewType from '../helpers/getViewType';
 
 const PERSONA_KEYS_MAPPING = ['sales', 'supply', 'support', 'shipment_specialist'];
 
-const DEFAULT_VIEW_TYPE = 'support';
+const DEFAULT_VIEW_TYPE = 'sales';
 
 const SALES_VIEW_AGENT_TYPES = ['sales', 'business_consultant'];
 
