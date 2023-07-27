@@ -49,7 +49,7 @@ const ENTITY_FEATURE_MAPPING = {
 	},
 	501: {
 		labels: {
-			irn_label                 : 'E-invoice',
+			irn_label                 : 'E-Invoice',
 			tax_label                 : 'VAT Number',
 			sage_label                : null,
 			search_options_label_pan  : 'Business Name/VAT Number',
