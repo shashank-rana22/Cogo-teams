@@ -15,6 +15,8 @@ import {
 } from './credit-note-config';
 import styles from './style.module.css';
 
+const MAX_LEN = 40;
+
 function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
 	const [CNCategoryValues, setCNCategoryValues] = useState({
@@ -307,7 +309,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 						<div className={styles.document_flex}>
 							<div className={styles.document}>Remarks -</div>
-							{remark?.length > 40 ? (
+							{remark?.length > MAX_LEN ? (
 								<Tooltip
 									className={styles.tooltip}
 									interactive

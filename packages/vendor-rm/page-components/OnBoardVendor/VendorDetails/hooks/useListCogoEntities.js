@@ -19,7 +19,7 @@ const useListCogoEntities = ({ cogoEntityId }) => {
 					},
 				});
 			} catch (err) {
-				console.log('error-', err);
+				console.error('error-', err);
 			}
 		};
 		api();

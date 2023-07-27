@@ -37,6 +37,8 @@ interface RowData {
 	};
 }
 
+const DEFAULT_MAX_LENGTH = 40;
+
 function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, isEditable = true }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -100,7 +102,7 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 
 					<div className={styles.document_flex}>
 						<div className={styles.document}>Remarks -</div>
-						{remarkData?.length > 40 ? (
+						{remarkData?.length > DEFAULT_MAX_LENGTH ? (
 							<Tooltip
 								className={styles.tooltip}
 								interactive

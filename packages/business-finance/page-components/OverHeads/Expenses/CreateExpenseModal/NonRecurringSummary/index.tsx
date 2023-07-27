@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-indent */
 import { Placeholder, Stepper, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -17,9 +16,17 @@ interface Entity {
 	id?: string;
 }
 
-interface Summary {
-	title?: string;
-	value?: any;
+function RenderSummaryData({ summary }) {
+	return (
+		<div style={{ display: 'flex' }}>
+			{summary?.map((item) => (
+				<div key={item.title} className={styles.section}>
+					<div className={styles.title}>{item.title}</div>
+					<div className={styles.value}>{item.value}</div>
+				</div>
+			))}
+		</div>
+	);
 }
 
 interface Data {
@@ -48,6 +55,10 @@ interface Props {
 
 const MAX_LENGTH = 18;
 
+const LEVEL_ONE = 1;
+const LEVEL_TWO = 2;
+const LEVEL_THREE = 3;
+
 function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () => {} }: Props) {
 	const {
 		periodOfTransaction,
@@ -74,21 +85,38 @@ function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () =
 	const { stakeholder: stakeholder2 } = level2 || {};
 	const { stakeholder: stakeholder3 } = level1 || {};
 
+	const stakeHoldersMapping = [
+		{
+			title : stakeholder1?.userName,
+			key   : stakeholder1?.userName,
+			level : LEVEL_ONE,
+		},
+		{
+			title : stakeholder2?.userName,
+			key   : stakeholder2?.userName,
+			level : LEVEL_TWO,
+		},
+		{
+			title : stakeholder3?.userName,
+			key   : stakeholder3?.userName,
+			level : LEVEL_THREE,
+		},
+	];
+
 	const stakeHolderTimeLine = () => {
 		if (!isEmpty(level3)) {
-			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-				{ title: stakeholder3?.userName, key: stakeholder3?.userName },
-			];
+			return stakeHoldersMapping.filter(
+				(holder) => holder.level <= LEVEL_THREE,
+			);
 		}
 		if (!isEmpty(level2)) {
-			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-			];
+			return stakeHoldersMapping.filter(
+				(holder) => holder.level <= LEVEL_TWO,
+			);
 		}
-		return [{ title: stakeholder1?.userName, key: stakeholder1?.userName }];
+		return stakeHoldersMapping.filter(
+			(holder) => holder.level <= LEVEL_ONE,
+		);
 	};
 
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
@@ -180,7 +208,7 @@ function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () =
 			value : (
 				<div>
 					{periodOfTransaction ? startCase(periodOfTransaction) : '-'}
-{' '}
+					{' '}
 				</div>
 			),
 		},
@@ -226,25 +254,20 @@ function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () =
 		},
 	];
 
-	const renderSummaryData = (summary: Summary[]) => (
-		<div style={{ display: 'flex' }}>
-			{summary?.map((item: Summary) => (
-				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item.title}</div>
-					<div className={styles.value}>{item.value}</div>
-				</div>
-			))}
-		</div>
-	);
+	const summeryMapping = [
+		{ key: '1', val: summaryDataFirst },
+		{ key: '2', val: summaryDataSecond },
+		{ key: '3', val: summaryDataThird },
+		{ key: '4', val: uploadedData },
+	];
 
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>
 			<div className={styles.header} />
-			{renderSummaryData(summaryDataFirst)}
-			{renderSummaryData(summaryDataSecond)}
-			{renderSummaryData(summaryDataThird)}
-			{renderSummaryData(uploadedData)}
+			{summeryMapping.map(({ key, val }) => (
+				<RenderSummaryData key={key} summary={val} />
+			))}
 			<div className={styles.textarea}>
 				<Textarea
 					value={nonRecurringData?.remarks}

@@ -29,6 +29,8 @@ import {
 } from './utils/config';
 import WarningModal from './WarningModal';
 
+const DEFAULT_COUNT = 1;
+
 interface ItemDataInterface {
 	expensePeriod?: string;
 	recurringAmount?: number | string;
@@ -53,6 +55,8 @@ interface ItemDataInterface {
 	approvedByName?: string;
 	payableTds?: number;
 }
+
+const MIN_AMOUNT = 0;
 
 function ExpenseComponent() {
 	const [recurringState, setRecurringState] = useState('recurring');
@@ -83,7 +87,7 @@ function ExpenseComponent() {
 		expenseFilters,
 		sort,
 	});
-	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig({ expenseFilters, sort });
+	const { getRecurringList, recurringListData, recurringListLoading } =		useListExpenseConfig({ expenseFilters, sort });
 	const { sendMail, loading: mailLoading } = useSendEmail();
 
 	useEffect(() => {
@@ -156,9 +160,7 @@ function ExpenseComponent() {
 				<div className={styles.input_container}>
 					<Input
 						size="md"
-						placeholder={`Search by Vendor Name/${
-							geo.others.identification_number.label
-						}/Organization ID/Sage ID`}
+						placeholder={`Search by Vendor Name/${geo.others.identification_number.label}/Organization ID/Sage ID`}
 						suffix={<IcMSearchlight />}
 						value={expenseFilters.searchValue}
 						onChange={(e: any) => handleChange(e)}
@@ -292,7 +294,11 @@ function ExpenseComponent() {
 				},
 			});
 			return (
-				<div>{grandTotal >= 0 && paidAmount >= 0 ? amount : '-'}</div>
+				<div>
+					{grandTotal >= MIN_AMOUNT && paidAmount >= MIN_AMOUNT
+						? amount
+						: '-'}
+				</div>
 			);
 		},
 		getInvoiceDates: (itemData: ItemDataInterface) => {
@@ -538,7 +544,7 @@ function ExpenseComponent() {
 					functions={functions}
 					sort={sort}
 					setSort={setSort}
-					page={expenseFilters.pageIndex || 1}
+					page={expenseFilters.pageIndex || DEFAULT_COUNT}
 					pageSize={expenseFilters.pageSize}
 					handlePageChange={(pageValue: number) => {
 						setExpenseFilters((p) => ({

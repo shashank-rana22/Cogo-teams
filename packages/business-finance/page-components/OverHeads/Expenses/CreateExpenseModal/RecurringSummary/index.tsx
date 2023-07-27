@@ -50,6 +50,22 @@ interface Props {
 }
 
 const MAX_LENGTH = 18;
+const LEVEL_ONE = 1;
+const LEVEL_TWO = 2;
+const LEVEL_THREE = 3;
+
+function RenderSummaryData(summary) {
+	return (
+		<div style={{ display: 'flex' }}>
+			{summary?.map((item: Summary) => (
+				<div key={item.title} className={styles.section}>
+					<div className={styles.title}>{item.title}</div>
+					<div className={styles.value}>{item.value}</div>
+				</div>
+			))}
+		</div>
+	);
+}
 
 function RecurringSummary({
 	recurringData = {},
@@ -86,21 +102,38 @@ function RecurringSummary({
 	const { stakeholder: stakeholder2 } = level2 || {};
 	const { stakeholder: stakeholder3 } = level1 || {};
 
+	const stakeHoldersMapping = [
+		{
+			title : stakeholder1?.userName,
+			key   : stakeholder1?.userName,
+			level : LEVEL_ONE,
+		},
+		{
+			title : stakeholder2?.userName,
+			key   : stakeholder2?.userName,
+			level : LEVEL_TWO,
+		},
+		{
+			title : stakeholder3?.userName,
+			key   : stakeholder3?.userName,
+			level : LEVEL_THREE,
+		},
+	];
+
 	const stakeHolderTimeLine = () => {
 		if (!isEmpty(level3)) {
-			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-				{ title: stakeholder3?.userName, key: stakeholder3?.userName },
-			];
+			return stakeHoldersMapping.filter(
+				(holder) => holder.level <= LEVEL_THREE,
+			);
 		}
 		if (!isEmpty(level2)) {
-			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-			];
+			return stakeHoldersMapping.filter(
+				(holder) => holder.level <= LEVEL_TWO,
+			);
 		}
-		return [{ title: stakeholder1?.userName, key: stakeholder1?.userName }];
+		return stakeHoldersMapping.filter(
+			(holder) => holder.level <= LEVEL_ONE,
+		);
 	};
 
 	useEffect(() => {
@@ -127,7 +160,9 @@ function RecurringSummary({
 	const summaryDataFirst = [
 		{
 			title : 'Vendor Name',
-			value : vendorName ? showOverflowingNumber(vendorName, MAX_LENGTH) : '-',
+			value : vendorName
+				? showOverflowingNumber(vendorName, MAX_LENGTH)
+				: '-',
 		},
 		{
 			title : 'Expense Category',
@@ -200,11 +235,6 @@ function RecurringSummary({
 					{uploadedInvoice ? (
 						<a
 							href={uploadedInvoice}
-							style={{
-								color          : 'blue',
-								textDecoration : 'underline',
-								fontSize       : '16px',
-							}}
 							className={styles.upload_invoice}
 							target="_blank"
 							rel="noreferrer"
@@ -219,24 +249,19 @@ function RecurringSummary({
 		},
 	];
 
-	const renderSummaryData = (summary: Summary[]) => (
-		<div style={{ display: 'flex' }}>
-			{summary?.map((item: Summary) => (
-				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item.title}</div>
-					<div className={styles.value}>{item.value}</div>
-				</div>
-			))}
-		</div>
-	);
+	const summeryMapping = [
+		{ key: '1', val: summaryDataFirst },
+		{ key: '2', val: summaryDataSecond },
+		{ key: '3', val: summaryDataThird },
+	];
 
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>
 			<div className={styles.header} />
-			{renderSummaryData(summaryDataFirst)}
-			{renderSummaryData(summaryDataSecond)}
-			{renderSummaryData(summaryDataThird)}
+			{summeryMapping.map(({ key, val }) => (
+				<RenderSummaryData key={key} summary={val} />
+			))}
 			<div>
 				<div className={styles.title}>To be Approved by</div>
 				<div className={styles.steeper}>

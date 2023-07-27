@@ -51,6 +51,23 @@ interface Props {
 	rowData?: SummaryInterface;
 }
 
+const LEVEL_ONE = 1;
+const LEVEL_TWO = 2;
+const LEVEL_THREE = 3;
+
+function RenderSummary({ summary }) {
+	return (
+		<div style={{ display: 'flex' }}>
+			{summary?.map((item: SummaryElemet) => (
+				<div key={item.title} className={styles.section}>
+					<div className={styles.title}>{item.title}</div>
+					<div className={styles.value}>{item.value}</div>
+				</div>
+			))}
+		</div>
+	);
+}
+
 function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	const { entityObject, branch } = expenseData || {};
 	const { entity_code: entityCode } = entityObject || {};
@@ -73,7 +90,7 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		payableAmount,
 		invoiceCurrency: currency,
 	} = expenseData || {};
-	const { stakeholdersData, loading: stakeholdersLoading } = useGetStakeholders({
+	const { stakeholdersData, loading: stakeholdersLoading } =		useGetStakeholders({
 		incidentType    : 'RECURRING_EXPENSE_APPROVAL',
 		incidentSubType : categoryName,
 		entityId        : entityObject?.id,
@@ -83,22 +100,38 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	const { stakeholder: stakeholder1 } = level3 || {};
 	const { stakeholder: stakeholder2 } = level2 || {};
 	const { stakeholder: stakeholder3 } = level1 || {};
+	const stakeHoldersMapping = [
+		{
+			title : stakeholder1?.userName,
+			key   : stakeholder1?.userName,
+			level : LEVEL_ONE,
+		},
+		{
+			title : stakeholder2?.userName,
+			key   : stakeholder2?.userName,
+			level : LEVEL_TWO,
+		},
+		{
+			title : stakeholder3?.userName,
+			key   : stakeholder3?.userName,
+			level : LEVEL_THREE,
+		},
+	];
 
 	const stakeHolderTimeLine = () => {
 		if (!isEmpty(level3)) {
-			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-				{ title: stakeholder3?.userName, key: stakeholder3?.userName },
-			];
+			return stakeHoldersMapping.filter(
+				(holder) => holder.level <= LEVEL_THREE,
+			);
 		}
 		if (!isEmpty(level2)) {
-			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-			];
+			return stakeHoldersMapping.filter(
+				(holder) => holder.level <= LEVEL_TWO,
+			);
 		}
-		return [{ title: stakeholder1?.userName, key: stakeholder1?.userName }];
+		return stakeHoldersMapping.filter(
+			(holder) => holder.level <= LEVEL_ONE,
+		);
 	};
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
@@ -134,7 +167,9 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 			if (!isEmpty(branchData)) {
 				setExpenseData((p: object) => ({
 					...p,
-					branch: JSON.parse(branchData[GLOBAL_CONSTANTS.zeroth_index]?.value || '{}'),
+					branch: JSON.parse(
+						branchData[GLOBAL_CONSTANTS.zeroth_index]?.value || '{}',
+					),
 				}));
 			}
 		}
@@ -240,24 +275,19 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		},
 	];
 
-	const renderSummary = (summary: SummaryElemet[]) => (
-		<div style={{ display: 'flex' }}>
-			{summary?.map((item: SummaryElemet) => (
-				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item.title}</div>
-					<div className={styles.value}>{item.value}</div>
-				</div>
-			))}
-		</div>
-	);
+	const summeryMapping = [
+		{ key: '1', val: summaryDataFirst },
+		{ key: '2', val: summaryDataSecond },
+		{ key: '3', val: summaryDataThird },
+	];
 
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>
 			<div className={styles.header} />
-			{renderSummary(summaryDataFirst)}
-			{renderSummary(summaryDataSecond)}
-			{renderSummary(summaryDataThird)}
+			{summeryMapping.map(({ key, val }) => (
+				<RenderSummary key={key} summary={val} />
+			))}
 			<div>
 				<div className={styles.title}>To be Approved by</div>
 				<div className={styles.steeper}>

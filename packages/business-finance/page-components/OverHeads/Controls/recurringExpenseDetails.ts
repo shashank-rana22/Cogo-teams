@@ -1,36 +1,37 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 
 import styles from './styles.module.css';
 
 interface FormDataInterface {
-	registrationNumber?: string,
-	entityObject?:{ id?:string },
-	periodOfTransaction?:string,
-	vendorName?:string,
-	expenseCategory?:string,
+	registrationNumber?: string;
+	entityObject?: { id?: string };
+	periodOfTransaction?: string;
+	vendorName?: string;
+	expenseCategory?: string;
 }
 
 interface EntityInt {
-	id?:string | number,
-	entity_code?:string,
-	business_name?:string
+	id?: string | number;
+	entity_code?: string;
+	business_name?: string;
 }
 
 interface Props {
-	formData: FormDataInterface,
-	setFormData: (obj:any)=>void,
-	categoryOptions: object[],
-	subCategoryOptions:object[],
-	setCategoryOptions: (obj:any)=>void,
-	setSubCategoryOptions:(obj:any)=>void,
-	branchOptions: object,
-	setBranchOptions: (obj:any)=>void,
-	entityList: EntityInt[],
-	entityOptions: object[],
-	setEntityOptions: (obj:any)=>void,
-	handleVendorChange:(obj:any)=>void,
-	handleCategoryChange:(obj:any, val:object)=>void,
+	formData: FormDataInterface;
+	setFormData: (obj: any) => void;
+	categoryOptions: object[];
+	subCategoryOptions: object[];
+	setCategoryOptions: (obj: any) => void;
+	setSubCategoryOptions: (obj: any) => void;
+	branchOptions: object;
+	setBranchOptions: (obj: any) => void;
+	entityList: EntityInt[];
+	entityOptions: object[];
+	setEntityOptions: (obj: any) => void;
+	handleVendorChange: (obj: any) => void;
+	handleCategoryChange: (obj: any, val: object) => void;
 }
 
 export const recurringExpenseDetails = ({
@@ -41,10 +42,12 @@ export const recurringExpenseDetails = ({
 	entityOptions,
 	handleVendorChange = () => {},
 	handleCategoryChange = () => {},
-}:Props) => {
+}: Props) => {
 	const geo = getGeoConstants();
-	const handleEntityChange = (e:string | number) => {
-		const entityData = (entityList || []).filter((entityItem) => entityItem.id === e)?.[0];
+	const handleEntityChange = (e: string | number) => {
+		const entityData = (entityList || []).filter(
+			(entityItem) => entityItem.id === e,
+		)?.[GLOBAL_CONSTANTS.zeroth_index];
 		setFormData({
 			...formData,
 			entityObject: entityData,
@@ -62,7 +65,7 @@ export const recurringExpenseDetails = ({
 					asyncKey       : 'list_vendors',
 					params         : { filters: { kyc_status: 'verified' } },
 					value          : formData?.vendorName,
-					onChange       : (item:any, obj:object) => handleVendorChange(obj),
+					onChange       : (item: any, obj: object) => handleVendorChange(obj),
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Vendor name',
@@ -106,7 +109,7 @@ export const recurringExpenseDetails = ({
 					span           : 2.2,
 					options        : entityOptions,
 					value          : formData?.entityObject?.id,
-					onChange       : (e:any) => handleEntityChange(e),
+					onChange       : (e: any) => handleEntityChange(e),
 					style          : { width: '164px' },
 				},
 				{
@@ -115,16 +118,20 @@ export const recurringExpenseDetails = ({
 					type               : 'input',
 					prefix             : null,
 					onlyNumbersAllowed : true,
-					style              : { borderRadius: '4px', width: '164px', height: '40px', padding: '7px' },
-					span               : 2.2,
-					size               : 'md',
+					style              : {
+						borderRadius : '4px',
+						width        : '164px',
+						height       : '40px',
+						padding      : '7px',
+					},
+					span : 2.2,
+					size : 'md',
 				},
 			],
 		},
 		{
 			span    : 12,
 			groupBy : [
-
 				{
 					name    : 'currency',
 					label   : 'Currency',
@@ -181,7 +188,6 @@ export const recurringExpenseDetails = ({
 		{
 			span    : 12,
 			groupBy : [
-
 				{
 					name      : 'agreementNumber',
 					label     : 'Agreement Number',
@@ -208,9 +214,12 @@ export const recurringExpenseDetails = ({
 			multiple      : true,
 			draggable     : true,
 			loading       : true,
-			dropareaProps : { heading: 'Upload your file here', subHeading: 'supports - jpeg, pdf, docx' },
-			style         : { width: '410px' },
-			span          : 12,
+			dropareaProps : {
+				heading    : 'Upload your file here',
+				subHeading : 'supports - jpeg, pdf, docx',
+			},
+			style : { width: '410px' },
+			span  : 12,
 		},
 	];
 };

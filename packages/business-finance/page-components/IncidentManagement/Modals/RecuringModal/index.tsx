@@ -22,6 +22,19 @@ export const DURATION_MAPPING = {
 
 const FIRST_INDEX = 1;
 
+function RenderSummary({ summary }) {
+	return (
+		<div style={{ display: 'flex' }}>
+			{summary?.map((item) => (
+				<div key={item.title} className={styles.section}>
+					<div className={styles.title}>{item.title}</div>
+					<div className={styles.value}>{item.value}</div>
+				</div>
+			))}
+		</div>
+	);
+}
+
 function RecuringModal({ id, refetch, row, isEditable = true }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -163,16 +176,12 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 		},
 	];
 
-	const renderSummary = (summary) => (
-		<div style={{ display: 'flex' }}>
-			{summary?.map((item) => (
-				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item.title}</div>
-					<div className={styles.value}>{item.value}</div>
-				</div>
-			))}
-		</div>
-	);
+	const summeryMapping = [
+		{ key: '1', val: summaryDataFirst },
+		{ key: '2', val: summaryDataSecond },
+		{ key: '3', val: summaryDataThird },
+		{ key: '4', val: summaryDataFourth },
+	];
 
 	return (
 		<div>
@@ -191,10 +200,9 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 				/>
 				<Modal.Body>
 					{!isEditable && <ApproveAndReject row={row} />}
-					{renderSummary(summaryDataFirst)}
-					{renderSummary(summaryDataSecond)}
-					{renderSummary(summaryDataThird)}
-					{renderSummary(summaryDataFourth)}
+					{summeryMapping.map(({ key, val }) => (
+						<RenderSummary key={key} summary={val} />
+					))}
 					<div>
 						<div className={styles.title}>Remarks:</div>
 						<div className={styles.remarkval}>{remarkData}</div>

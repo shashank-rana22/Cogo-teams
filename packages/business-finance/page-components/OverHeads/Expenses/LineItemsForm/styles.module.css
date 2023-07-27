@@ -117,3 +117,15 @@
 		}
 	}
 }
+
+.widthselect {
+	width: 80px !important;
+}
+
+.inputwidth {
+	width: 70px !important;
+}
+
+.tdswidth {
+	width: 75px !important;
+}
