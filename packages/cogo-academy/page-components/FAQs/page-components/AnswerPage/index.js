@@ -12,6 +12,9 @@ import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
 import useCreateFeedback from './useCreateFeedback';
 
+const INDEX = 0;
+const NULL_VALUE = 0;
+const EMPTY_VALUE = 1;
 function AnswerPage() {
 	const {
 		general,
@@ -90,10 +93,10 @@ function AnswerPage() {
 
 			</div>
 
-			<div className={styles.answer}>Answer:</div>
+			<div className={styles.answer}>Answer :</div>
 
 			<div className={styles.heading_container}>
-				<div dangerouslySetInnerHTML={{ __html: answerData?.answers[0]?.answer }} />
+				<div dangerouslySetInnerHTML={{ __html: answerData?.answers[INDEX]?.answer }} />
 			</div>
 
 			<div className={styles.answer}>Tags</div>
@@ -106,7 +109,9 @@ function AnswerPage() {
 						size="sm"
 						color="white"
 					>
-						{startCase(item.display_name)}
+						<div className={styles.pills_text}>
+							{startCase(item.display_name)}
+						</div>
 					</Pill>
 				))}
 			</div>
@@ -117,15 +122,15 @@ function AnswerPage() {
 					role="presentation"
 					className={styles.like_container}
 					onClick={() => {
-						onClickLikeButton({ _id: answerData?.answers[0]?.id });
+						onClickLikeButton({ _id: answerData?.answers[INDEX]?.id });
 					}}
 				>
-					{answerData?.answers[0]?.upvote_count >= 0 ? (
+					{answerData?.answers[INDEX]?.upvote_count >= NULL_VALUE ? (
 						<Badge
 							placement="left"
 							color="green"
 							size="md"
-							text={answerData?.answers?.[0]?.upvote_count || 0}
+							text={answerData?.answers?.[INDEX]?.upvote_count || NULL_VALUE}
 						>
 							<IcCLike fill={isLiked === 'liked' ? 'black' : '#f8f5ec'} />
 						</Badge>
@@ -192,11 +197,11 @@ function AnswerPage() {
 			</div>
 
 			<div className={styles.liked_wrapper}>
-				{answerData?.answers[0]?.upvote_count > 0 ? (
+				{answerData?.answers[NULL_VALUE]?.upvote_count > NULL_VALUE ? (
 					<span className={styles.sidetext}>
-						{answerData?.answers[0]?.upvote_count}
+						{answerData?.answers[INDEX]?.upvote_count}
 						{' '}
-						{answerData?.answers[0]?.upvote_count === 1 ? 'person' : 'people'}
+						{answerData?.answers[INDEX]?.upvote_count === EMPTY_VALUE ? 'person' : 'people'}
 						{' '}
 						found it useful.
 					</span>

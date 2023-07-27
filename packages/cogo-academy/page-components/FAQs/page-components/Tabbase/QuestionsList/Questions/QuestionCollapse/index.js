@@ -12,12 +12,16 @@ function QuestionsCollapse({ questions }) {
 				<div style={{ display: 'flex' }}>
 					<div>Q.</div>
 					{' '}
-					<div style={{ flexWrap: 'wrap' }}>{questions.question_abstract}</div>
+					<div className={styles.questions_list}>{questions.question_abstract}</div>
 
 				</div>
 				{' '}
 
-				<IcMArrowRight style={{ alignItems: 'center', marginTop: '22px' }} width={16} height={16} />
+				<IcMArrowRight
+					style={{ alignItems: 'center', marginTop: '22px' }}
+					width={16}
+					height={16}
+				/>
 			</div>
 
 			<div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -36,7 +40,9 @@ function QuestionsCollapse({ questions }) {
 						size="sm"
 						color="white"
 					>
-						{startCase(item.display_name)}
+						<div className={styles.pill_text}>
+							{startCase(item.display_name)}
+						</div>
 					</Pill>
 				))}
 			</div>

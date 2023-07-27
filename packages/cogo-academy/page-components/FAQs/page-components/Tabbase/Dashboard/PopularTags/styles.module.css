@@ -42,5 +42,14 @@
 			background: #fdebe8;
 			border: 1px solid var(--color-tertiary-blue-3);
 		}
+
+		@media (max-width: 768px) {
+			.ui_chip_container.ui_ps_size_sm {
+				height: 12px;
+				padding: 10px;
+				font-size: 12px;
+				font-weight: 600;
+			}
+		}
 	}
 }

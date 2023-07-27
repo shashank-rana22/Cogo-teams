@@ -6,6 +6,7 @@
 	display: flex;
 	justify-content: space-between;
 	margin: 0.5% 0;
+	margin-bottom: 12px;
 	font-size: 20px;
 	font-weight: 600;
 	line-height: 30px;
@@ -45,4 +46,14 @@
 	background: white;
 	border: 1px solid #ffe4af;
 	border-radius: 16px;
+}
+
+.questions_list {
+	flex-wrap: wrap;
+}
+
+.pill_text {
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
 }
