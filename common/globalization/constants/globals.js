@@ -431,6 +431,7 @@ const GLOBAL_CONSTANTS = {
 	others                       : {
 		old_shipment_serial_id  : 120347,
 		cogopoint_default_value : 0,
+		fcl_import_new_process_date: '2023-07-17T00:00:00',
 
 	},
 	shipment_types: [
