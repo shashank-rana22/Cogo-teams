@@ -14,75 +14,79 @@ function NotificationPage({
 	formattedData = {},
 	handleNotificationClick = () => {},
 	onMarkAllAsRead = () => {},
+	loading = false,
 	disabled = false,
 	setDisabled = () => {},
 }) {
 	const {
 		activeTab,
-		loading,
 		setPagination,
 		formattedmailData,
 		setActiveTabFunction,
 	} = useNotificationHooks();
 
+	const DISABLED_STYLES = {
+		cursor        : 'progress',
+		pointerEvents : 'none',
+	};
+
 	return (
 		<div>
-			{!loading ? (
-				<div className={styles.container}>
-					<Tabs
-						activeTab={activeTab}
-						onChange={(tab) => setActiveTabFunction(tab)}
-						className={cl`${styles.tabs} ${disabled ? styles.disabled : ''}`}
-						themeType="primary"
-						disabled={disabled}
+			<div className={styles.container}>
+				<Tabs
+					activeTab={activeTab}
+					onChange={(tab) => setActiveTabFunction(tab)}
+					className={cl`${styles.tabs} ${disabled ? styles.disabled : ''}`}
+					themeType="primary"
+					style={disabled ? DISABLED_STYLES : {}}
+					disabled={disabled}
+				>
+					<TabPanel
+						name="notifications"
+						title="Notifications"
+						className={styles.tab_panel}
 					>
-						<TabPanel
-							name="notifications"
-							title="Notifications"
-							className={styles.tab_panel}
-						>
-							<Header
-								onMarkAllAsRead={onMarkAllAsRead}
-								formattedData={formattedData}
-								onPageChange={onPageChange}
-								activeTab={activeTab}
+						<Header
+							onMarkAllAsRead={onMarkAllAsRead}
+							formattedData={formattedData}
+							onPageChange={onPageChange}
+							activeTab={activeTab}
+						/>
+						{!loading ? (formattedData?.list || []).map((item) => (
+							<Notification
+								key={item}
+								item={item}
+								handleNotificationClick={handleNotificationClick}
+								setDisabled={setDisabled}
 							/>
-							{!loading ? (formattedData?.list || []).map((item) => (
-								<Notification
-									key={item}
-									item={item}
-									handleNotificationClick={handleNotificationClick}
-									setDisabled={setDisabled}
-								/>
-							)) : (
-								[...Array(LOADER_COUNT).keys()].map((item) => (
-									<Placeholder key={item} height="50px" width="100%" margin="0px 0px 20px 0px" />
-								))
-							)}
-						</TabPanel>
-						<TabPanel name="mails" title="Mails" className={styles.tab_panel}>
-							<Header
-								onMarkAllAsRead={onMarkAllAsRead}
-								formattedData={formattedmailData}
-								onPageChange={setPagination}
-								activeTab={activeTab}
+						)) : (
+							[...Array(LOADER_COUNT).keys()].map((item) => (
+								<Placeholder key={item} height="50px" width="100%" margin="0px 0px 20px 0px" />
+							))
+						)}
+					</TabPanel>
+					<TabPanel name="mails" title="Mails" className={styles.tab_panel}>
+						<Header
+							onMarkAllAsRead={onMarkAllAsRead}
+							formattedData={formattedmailData}
+							onPageChange={setPagination}
+							activeTab={activeTab}
+						/>
+						{!loading ? (formattedmailData?.list || []).map((item) => (
+							<Notification
+								key={item}
+								item={item}
+								handleNotificationClick={handleNotificationClick}
+								setDisabled={setDisabled}
 							/>
-							{!loading ? (formattedmailData?.list || []).map((item) => (
-								<Notification
-									key={item}
-									item={item}
-									handleNotificationClick={handleNotificationClick}
-									setDisabled={setDisabled}
-								/>
-							)) : (
-								[...Array(LOADER_COUNT).keys()].map((item) => (
-									<Placeholder key={item} height="50px" width="100%" margin="0px 0px 20px 0px" />
-								))
-							)}
-						</TabPanel>
-					</Tabs>
-				</div>
-			) : null}
+						)) : (
+							[...Array(LOADER_COUNT).keys()].map((item) => (
+								<Placeholder key={item} height="50px" width="100%" margin="0px 0px 20px 0px" />
+							))
+						)}
+					</TabPanel>
+				</Tabs>
+			</div>
 		</div>
 	);
 }

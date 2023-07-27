@@ -165,6 +165,8 @@ function Notifications() {
 			trigger();
 		} catch (err) {
 			showErrorsInToast(err.data);
+		} finally {
+			setDisabled(false);
 		}
 	};
 	return (
@@ -173,6 +175,7 @@ function Notifications() {
 			onPageChange={setPage}
 			onMarkAllAsRead={onMarkAllAsRead}
 			handleNotificationClick={handleNotificationClick}
+			loading={loading}
 			disabled={disabled}
 			setDisabled={setDisabled}
 		/>
