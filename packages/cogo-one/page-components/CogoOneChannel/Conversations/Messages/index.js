@@ -57,7 +57,7 @@ function Messages({
 	let activeChatCollection;
 
 	const {
-		id = '', channel_type = '', support_agent_id = '', spectators_data = [], session_type = '',
+		id = '', channel_type = '', support_agent_id : supportAgentId = '', spectators_data = [], session_type = '',
 	} = formattedData || {};
 
 	const {
@@ -79,11 +79,11 @@ function Messages({
 	});
 
 	const filteredSpectators = (spectators_data || []).filter(
-		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,
+		({ agent_id: spectatorId }) => spectatorId !== supportAgentId,
 	);
 
 	const activeAgentName = (spectators_data || []).find(
-		(val) => val.agent_id === support_agent_id,
+		(val) => val.agent_id === supportAgentId,
 	)?.agent_name;
 
 	if (channel_type && id) {
@@ -192,7 +192,7 @@ function Messages({
 					hasPermissionToEdit={hasPermissionToEdit}
 					filteredSpectators={filteredSpectators}
 					tagOptions={tagOptions}
-					support_agent_id={support_agent_id}
+					supportAgentId={supportAgentId}
 					showBotMessages={showBotMessages}
 					userId={userId}
 					updateRoomLoading={updateRoomLoading}
