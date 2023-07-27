@@ -21,6 +21,7 @@ function MessageConversations({
 	activeChatCollection = {},
 	newUserRoomLoading = false,
 	scrollToLastMessage = () => {},
+	setMailActions = () => {},
 }, ref) {
 	const { id = '', channel_type = '' } = activeMessageCard || {};
 
@@ -70,6 +71,7 @@ function MessageConversations({
 					hasNoFireBaseRoom={hasNoFireBaseRoom}
 					setModalType={setModalType}
 					activeTab={activeTab}
+					setMailActions={setMailActions}
 				/>
 			) }
 		</div>

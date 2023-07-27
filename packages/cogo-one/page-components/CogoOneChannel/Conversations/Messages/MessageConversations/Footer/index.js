@@ -1,17 +1,21 @@
-import { cl, Popover, Textarea } from '@cogoport/components';
+/* eslint-disable max-lines-per-function */
+import { cl, Popover, Textarea, Input } from '@cogoport/components';
 import {
 	IcMHappy,
 	IcMAttach,
 	IcMDelete,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
+import MailRecipientType from '../../../../../../common/MailRecipientType';
 import { ACCEPT_FILE_MAPPING } from '../../../../../../constants';
+import getMailReciepientMapping from '../../../../../../helpers/getMailReciepientMapping';
 import useGetEmojiList from '../../../../../../hooks/useGetEmojis';
 import useSendChat from '../../../../../../hooks/useSendChat';
 import getFileAttributes from '../../../../../../utils/getFileAttributes';
+import mailFunction from '../../../../../../utils/mailFunctions';
 import EmojisBody from '../EmojisBody';
 import styles from '../styles.module.css';
 
@@ -43,12 +47,15 @@ function Footer({
 	communicationLoading = false,
 	assignChat = () => {},
 	assignLoading = false,
-	// handleConvDivHeight = () => {},
+	mailActions = {},
 }) {
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-	// const [mailReciepients, setMailReciepients] = useState({ cc: [], bcc: [] });
+	const [emailState, setEmailState] = useState({});
+
+	const [showControl, setShowControl] = useState('');
+	const [errorValue, setErrorValue] = useState('');
 
 	const { id = '', channel_type = '' } = formattedData;
 
@@ -106,8 +113,72 @@ function Footer({
 
 	const { uploadedFileName, fileIcon } = getFileAttributes({ finalUrl, fileName });
 
+	const emailReceipientProps = mailFunction({
+		setErrorValue,
+		emailState,
+		setShowControl,
+		showControl,
+		setEmailState,
+	});
+
+	const isEmail = channel_type === 'email';
+
+	useEffect(() => {
+		const { data, actionType = '' } = mailActions || {};
+
+		const { from = '', subject = '' } = data || {};
+
+		setEmailState(actionType === 'reply'
+			? {
+				toUserEmail : [from],
+				subject     : subject ? `RE: ${subject}` : '',
+			} : {
+				toUserEmail : [],
+				subject     : subject ? `FWD: ${subject}` : '',
+			});
+		setShowControl('');
+	}, [mailActions]);
+
+	const mailRecipientMapping = getMailReciepientMapping({ mailActions });
+
 	return (
 		<>
+			{isEmail && (
+				<div className={styles.parent_reciepients} key={mailActions?.type}>
+					{mailRecipientMapping.map((eachItem) => {
+						const { label = '', value = '', isDisabled } = eachItem || {};
+
+						return (
+							<div key={value} className={styles.child_flex}>
+								<div className={styles.label}>
+									{label}
+									:
+								</div>
+								<MailRecipientType
+									{...emailReceipientProps}
+									emailRecipientType={emailState?.[eachItem.value]}
+									type={eachItem.value}
+									errorValue={errorValue}
+									showControl={showControl}
+									isDisabled={isDisabled}
+									key={mailActions?.type}
+								/>
+							</div>
+						);
+					})}
+					<div className={styles.child_flex}>
+						<div className={styles.label}>
+							Sub:
+						</div>
+						<Input
+							value={emailState?.subject}
+							onChange={(e) => setEmailState((p) => ({ ...p, subject: e }))}
+							size="xs"
+							className={styles.styled_input}
+						/>
+					</div>
+				</div>
+			)}
 			<div
 				className={cl`${styles.nofile_container}
 				${((finalUrl) || uploading?.[id]) ? styles.upload_file_container : ''}`}
@@ -145,7 +216,7 @@ function Footer({
 					hasPermissionToEdit ? '' : styles.opacity
 				}`}
 			>
-				{!isEmpty(suggestions) && (
+				{!isEmail && !isEmpty(suggestions) && (
 					<div className={styles.suggestions_div}>
 						<div className={styles.flex}>
 							<div className={styles.suggestions_text}>

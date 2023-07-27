@@ -38,6 +38,7 @@ function Messages({
 	const conversationsDivRef = useRef(null);
 
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
+	const [mailActions, setMailActions] = useState({ actionType: '', data: {} });
 
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const { escalateToSupplyRm, supplierLoading } = useEscalateToSupplyRm();
@@ -116,10 +117,6 @@ function Messages({
 		}, TIMEOUT_FOR_SCROLL);
 	}, []);
 
-	const handleConvDivHeight = useCallback((val) => {
-		conversationsDivRef.current.style.height = val;
-	}, []);
-
 	const {
 		comp: ActiveModalComp = null,
 		title: { img = null, name = null } = {},
@@ -192,6 +189,7 @@ function Messages({
 						firestore={firestore}
 						ref={conversationsDivRef}
 						scrollToLastMessage={scrollToLastMessage}
+						setMailActions={setMailActions}
 					/>
 				</div>
 				<div className={styles.footer}>
@@ -209,7 +207,7 @@ function Messages({
 						assignChat={assignChat}
 						assignLoading={assignLoading}
 						scrollToBottom={scrollToLastMessage}
-						handleConvDivHeight={handleConvDivHeight}
+						mailActions={mailActions}
 					/>
 				</div>
 			</div>

@@ -1,7 +1,14 @@
 import { Button, Pill } from '@cogoport/components';
 import { IcMReply, IcMForward } from '@cogoport/icons-react';
 
+import useGetMailContent from '../../hooks/useGetMailContent';
+
 import styles from './styles.module.css';
+
+const BUTTON_MAPPING = [
+	{ buttonName: 'Reply', icon: IcMReply, key: 'reply' },
+	{ buttonName: 'Forward', icon: IcMForward, key: 'forward' },
+];
 
 function MailsFlex({ mailsArray = [] }) {
 	return (
@@ -19,23 +26,21 @@ function MailsFlex({ mailsArray = [] }) {
 		</div>
 	);
 }
-const BUTTON_MAPPING = [
-	{ buttonName: 'Reply', icon: IcMReply },
-	{ buttonName: 'Forward', icon: IcMForward },
-];
 
-function MailBody({ formattedData = {}, eachMessage = {} }) {
+function MailBody({ formattedData = {}, eachMessage = {}, setMailActions = () => {} }) {
 	const { response, send_by = '', conversation_type = '' } = eachMessage || {};
 	const { user_name = '' } = formattedData || {};
 
 	const {
-		cc = ['malothu.lachiramnaik@cogoport.com'],
-		bcc = ['sanmit.vartak@cogoport.com'],
-		from = 'danampallyrahul1729@gmail.com',
-		to = ['sanmit.vartak@cogoport.com', 'malothu.lachiramnaik@cogoport.com'],
-		message = '',
-		subject = 'sujec',
+		cc = [],
+		bcc = [],
+		from = '',
+		to = [],
+		subject = '',
+		message_id = '',
 	} = response || {};
+
+	const { getEmailBody, message:bodyMessage = '', loading = false } = useGetMailContent({ messageId: message_id });
 
 	const DATA_MAPPING = {
 		sent: {
@@ -75,12 +80,22 @@ function MailBody({ formattedData = {}, eachMessage = {} }) {
 				);
 			})}
 			<div className={styles.subject}>{subject}</div>
-			<div className={styles.body} dangerouslySetInnerHTML={{ __html: message }} />
+			{!bodyMessage ? (
+				<div onClick={getEmailBody} role="presentation" style={{ cursor: loading ? 'not-allowed' : 'pointer' }}>
+					...
+				</div>
+			) : <div className={styles.body} dangerouslySetInnerHTML={{ __html: bodyMessage }} />}
 			<div className={styles.buttons_flex}>
 				{BUTTON_MAPPING.map((eachButton) => {
-					const { buttonName, icon:Icon } = eachButton || {};
+					const { buttonName, icon:Icon, key } = eachButton || {};
 					return (
-						<Button key={buttonName} themeType="secondary" size="sm" className={styles.styled_button}>
+						<Button
+							key={key}
+							themeType="secondary"
+							size="sm"
+							className={styles.styled_button}
+							onClick={() => setMailActions({ actionType: key, data: response })}
+						>
 							<Icon className={styles.icon} />
 							<div className={styles.button_text}>{buttonName}</div>
 						</Button>

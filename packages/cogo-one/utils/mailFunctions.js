@@ -10,7 +10,7 @@ function mailFunction({
 	setErrorValue = () => {},
 	emailState = {},
 	setShowControl = () => {},
-	showControl,
+	showControl = '',
 	setAttachments = () => {},
 	setEmailState = () => {},
 	setButtonType = () => {},
@@ -61,7 +61,12 @@ function mailFunction({
 	};
 
 	const handleEdit = ({ type, setNewEmailInput }) => {
-		setShowControl(type);
+		setShowControl((p) => {
+			if (p === type) {
+				return null;
+			}
+			return type;
+		});
 		setErrorValue(null);
 		setNewEmailInput('');
 	};

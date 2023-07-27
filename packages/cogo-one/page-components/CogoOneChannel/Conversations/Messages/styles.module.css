@@ -1,11 +1,12 @@
 .container {
+	position: relative;
 	height: 100%;
-	background: #fff;
+	background: #f9f9f9;
 	border-radius: 8px;
 }
 
 .message_container {
-	height: 60%;
+	height: 70%;
 	background: #f9f9f9;
 }
 
@@ -35,9 +36,14 @@
 
 .header {
 	height: fit-content;
-	box-shadow: 0 4px 16px 0 #627fac33;
+	background: #fff;
+	box-shadow: 0 4px 16px 0 #6e8dbc33;
 }
 
 .footer {
-	height: 20%;
+	position: absolute;
+	bottom: 0;
+	z-index: 100;
+	width: 100%;
+	box-shadow: 0 -4px 3px rgb(255 187 187 / 20%);
 }
