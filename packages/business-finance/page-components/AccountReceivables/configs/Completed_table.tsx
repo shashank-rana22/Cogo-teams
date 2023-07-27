@@ -394,7 +394,7 @@ const completedColumn = ({
 						)
 							: (
 								<div className={styles.style_text}>
-									{getByKey(row, 'invoiceStatus')}
+									{startCase(getByKey(row, 'invoiceStatus') as string)}
 								</div>
 							)}
 					</div>
