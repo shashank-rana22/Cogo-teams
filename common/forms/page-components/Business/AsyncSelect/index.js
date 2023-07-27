@@ -199,9 +199,10 @@ function AsyncSelect(props) {
 
 	return (
 		<Element
-			{...rest}
-			{...getAsyncOptionsProps}
 			disabled={disabled}
+			{...getAsyncOptionsProps}
+			{...rest}
+
 		/>
 	);
 }
