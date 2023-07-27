@@ -67,7 +67,6 @@ function AgentStatus({
 						Start Shift
 					</Button>
 				) : (
-
 					<Toggle
 						name="online"
 						size="md"
