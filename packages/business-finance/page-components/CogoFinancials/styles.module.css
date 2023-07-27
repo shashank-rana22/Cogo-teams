@@ -2,3 +2,21 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.card_container {
+	width: 100%;
+}
+
+.top_card {
+	display: flex;
+	justify-content: space-between;
+	height: 432px;
+	margin: 28px 0;
+}
+
+.left_shipments_section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 49%;
+}

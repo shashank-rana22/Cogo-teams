@@ -1,6 +1,6 @@
 .financially_closed_container {
-	width: 40%;
-	padding: 28px;
+	height: 100%;
+	padding: 2%;
 	background: #fff;
 }
 
@@ -25,7 +25,7 @@
 
 .responsive_graph_circular {
 	width: 50%;
-	height: 300px;
+	height: 90%;
 
 	& > div:first-of-type {
 		width: 80% !important;
@@ -54,4 +54,18 @@
 .graph_label {
 	font-size: var(--font-size-md);
 	color: #747474;
+}
+
+.chart_data_combine {
+	display: flex;
+	align-items: center;
+	height: 80%;
+	margin: 20px;
+}
+
+.graph_row {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin: 20px 0;
 }

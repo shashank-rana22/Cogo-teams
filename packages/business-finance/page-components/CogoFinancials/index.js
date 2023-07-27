@@ -66,7 +66,30 @@ function CogoFinancials() {
 				</div>
 
 			</div>
-			<ClosedShipmentCard />
+
+			<div className={styles.card_container}>
+				<div
+					className={styles.top_card}
+				>
+					<div
+						className={styles.left_shipments_section}
+					>
+						<div style={{ border: '2px solid', height: '48%' }}>empty</div>
+						<div style={{ height: '48%' }}>
+							<ClosedShipmentCard
+								isDeviationVisible={false}
+								type="Operationally"
+							/>
+
+						</div>
+					</div>
+					<div style={{ width: '49%' }}>
+						<ClosedShipmentCard
+							type="Financially"
+						/>
+					</div>
+				</div>
+			</div>
 			<ReceivablesOutstandings />
 		</div>
 	);

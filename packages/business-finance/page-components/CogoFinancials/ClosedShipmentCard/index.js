@@ -4,37 +4,42 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const data = [
-	{
-		id   : 'Cost',
-		data : [
-			{
-				x : 'Estimated Cost',
-				y : 80,
-			},
-			{
-				x : 'Actual Cost',
-				y : 20,
-			},
-		],
-	},
-	{
-		id   : 'Revenue',
-		data : [
-			{
-				x : 'Estimated Revenue',
-				y : 60,
-			},
-			{
-				x : 'Actual Revenue',
-				y : 40,
-			},
-		],
-	},
+const LABEL_MAPPING = {
+	Financially   : 'Actual',
+	Operationally : 'Operational',
+};
 
-];
+function ClosedShipmentCard({ isDeviationVisible = true, type = 'Financially' }) {
+	const data = [
+		{
+			id   : 'Cost',
+			data : [
+				{
+					x : 'Estimated Cost',
+					y : 80,
+				},
+				{
+					x : `${LABEL_MAPPING[type]} Cost`,
+					y : 20,
+				},
+			],
+		},
+		{
+			id   : 'Revenue',
+			data : [
+				{
+					x : 'Estimated Revenue',
+					y : 60,
+				},
+				{
+					x : `${LABEL_MAPPING[type]} Revenue`,
+					y : 40,
+				},
+			],
+		},
 
-function ClosedShipmentCard() {
+	];
+
 	const graphData = [
 		{
 			rowId    : 'first_row',
@@ -46,28 +51,40 @@ function ClosedShipmentCard() {
 		{
 			rowId    : 'second_row',
 			children : [
-				{ label: 'Actual Revenue', value: 'Curr XXXXX', color: '#6fa5ab' },
-				{ label: 'Actual Cost', value: 'Curr XXXXX', color: '#ee3425' },
+				{ label: `${LABEL_MAPPING[type]} Revenue`, value: 'Curr XXXXX', color: '#6fa5ab' },
+				{ label: `${LABEL_MAPPING[type]} Cost`, value: 'Curr XXXXX', color: '#ee3425' },
 			],
 		},
-		{
-			rowId    : 'third_row',
-			children : [
-				{ label: 'Deviation', value: 'Curr XXXXX', color: 'null' },
-				{ label: 'Deviation', value: 'Curr XXXXX', color: 'null' },
-			],
-		},
+
 	];
+
+	const updateGraphData = isDeviationVisible
+		? [...graphData,
+			{
+				rowId    : 'third_row',
+				children : [
+					{ label: 'Deviation', value: 'Curr XXXXX', color: 'null' },
+					{ label: 'Deviation', value: 'Curr XXXXX', color: 'null' },
+				],
+			},
+		]
+		: graphData;
 
 	return (
 		<div className={styles.financially_closed_container}>
 			<div className={styles.financial_header}>
-				<div>Financially Closed Shipments</div>
+				<div>
+					{type}
+					{' '}
+					Closed Shipments
+				</div>
 				<div className={styles.info}><IcMInfo /></div>
 			</div>
 			<hr className={styles.bottom_line} />
 
-			<div style={{ margin: '20px', display: 'flex', alignItems: 'center' }}>
+			<div
+				className={styles.chart_data_combine}
+			>
 				<div
 					className={styles.responsive_graph_circular}
 				>
@@ -88,16 +105,10 @@ function ClosedShipmentCard() {
 
 				</div>
 				<div className={styles.show_graph_data}>
-					{graphData.map((item) => (
-
+					{updateGraphData.map((item) => (
 						<div
 							key={item?.id}
-							style={{
-								display        : 'flex',
-								justifyContent : 'space-between',
-								margin         : '20px 0px',
-								width          : '100%',
-							}}
+							className={styles.graph_row}
 						>
 							{(item.children || []).map((child) => (
 								<div key={child.label}>
@@ -113,13 +124,10 @@ function ClosedShipmentCard() {
 									</div>
 								</div>
 							))}
-
 						</div>
 					))}
-
 				</div>
 			</div>
-
 		</div>
 	);
 }
