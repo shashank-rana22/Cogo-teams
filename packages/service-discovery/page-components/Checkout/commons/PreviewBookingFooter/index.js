@@ -2,8 +2,9 @@ import { Button, Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useContext } from 'react';
 
+import { CheckoutContext } from '../../context';
 import handleTimer from '../../utils/handleTimer';
 
 import styles from './styles.module.css';
@@ -11,7 +12,6 @@ import styles from './styles.module.css';
 const SECOND_TO_MILLISECOND = 1000;
 
 function PreviewBookingFooter({
-	detail = {},
 	updateCheckout = () => {},
 	updateLoading = false,
 	isVeryRisky = false,
@@ -19,6 +19,8 @@ function PreviewBookingFooter({
 	cargoDetails = {},
 	additionalRemark = '',
 }) {
+	const { detail = {} } = useContext(CheckoutContext);
+
 	const timerRef = useRef(null);
 
 	const {
@@ -80,6 +82,10 @@ function PreviewBookingFooter({
 		}
 	};
 
+	const disableButton = isVeryRisky || !agreeTandC
+		|| (detail?.importer_exporter?.kyc_status !== 'verified'
+			&& !detail?.importer_exporter?.skippable_checks?.includes('kyc'));
+
 	const MAPPING = [
 		{
 			label     : 'Save For Later',
@@ -93,7 +99,7 @@ function PreviewBookingFooter({
 			themeType : 'primary',
 			size      : 'lg',
 			loading   : updateLoading || updateCheckoutServiceLoading,
-			disabled  : isVeryRisky || !agreeTandC,
+			disabled  : isVeryRisky || !agreeTandC || disableButton,
 			style     : { marginLeft: '16px' },
 			key       : 'place_booking',
 			onClick   : handleNextButton,

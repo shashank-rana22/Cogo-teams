@@ -41,6 +41,7 @@ function AdditionalServices({
 			type="form"
 			isOpen={servicesLength < MAX_SERVICES_LENGTH}
 			title="Looking for additional services?"
+			animate
 		>
 			<AdditionalServicesComponent
 				detail={finalDetails}

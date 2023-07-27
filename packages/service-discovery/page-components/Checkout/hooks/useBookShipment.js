@@ -3,7 +3,11 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useBookShipment = ({ checkout_id }) => {
+const useBookShipment = ({
+	checkout_id = '',
+	rfq_id = '',
+	checkout_type = '',
+}) => {
 	const {
 		general: { query = {} },
 	} = useSelector((reduxState) => reduxState);
@@ -17,10 +21,16 @@ const useBookShipment = ({ checkout_id }) => {
 
 	const bookShipment = async () => {
 		const params = {
-			id: checkout_id,
+			id                   : checkout_id,
+			existing_shipment_id : shipment_id,
 		};
 
 		try {
+			if (checkout_type === 'rfq') {
+				const newHref = `${window.location.origin}/${partner_id}/rfq/${rfq_id}/overview`;
+				window.location.href = newHref;
+				return;
+			}
 			const res = await trigger({ data: params });
 
 			Toast.success('Shipment booked successflly');

@@ -62,6 +62,7 @@ function ConvenienceDetails({
 	return (
 		<Accordion
 			className={cl`${styles.container} ${styles[source]}`}
+			animate
 			title={(
 				<ServiceChargesTitle
 					convenienceFeeDisplay={convenienceFeeDisplay}

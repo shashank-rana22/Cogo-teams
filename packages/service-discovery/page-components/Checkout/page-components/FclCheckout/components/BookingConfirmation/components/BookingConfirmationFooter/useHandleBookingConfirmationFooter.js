@@ -6,12 +6,14 @@ import { useState } from 'react';
 
 import useBookShipment from '../../../../../../hooks/useBookShipment';
 import useControlBookingApproval from '../../../../../../hooks/useControlBookingApproval';
+import useSendWhatsappBooking from '../../../../../../hooks/useSendWhatsappBooking';
 
 const useHandleBookingConfirmationFooter = ({
 	detail = {},
 	formProps = {},
 	checkoutMethod = '',
 	bookingConfirmationMode = '',
+	checkout_type = '',
 }) => {
 	const {
 		partner_id,
@@ -67,8 +69,12 @@ const useHandleBookingConfirmationFooter = ({
 		importer_exporter,
 	});
 
+	const { sendWhatsappBooking, whatsappLoading } = useSendWhatsappBooking();
+
 	const { bookShipment, loading: bookCheckoutLoading } = useBookShipment({
 		checkout_id: id,
+		rfq_id,
+		checkout_type,
 	});
 
 	const submitForOtpVerification = async () => {
@@ -164,6 +170,12 @@ const useHandleBookingConfirmationFooter = ({
 			controlBookingApproval();
 			return;
 		}
+		const whatsappNumberEformat = detail?.importer_exporter_poc?.whatsapp_number_eformat;
+
+		if (checkoutMethod === 'whatsapp') {
+			sendWhatsappBooking(whatsappNumberEformat);
+			return;
+		}
 
 		bookShipment();
 	};
@@ -183,6 +195,7 @@ const useHandleBookingConfirmationFooter = ({
 		otpValue,
 		submitForOtpVerification,
 		validity_end,
+		whatsappLoading,
 	};
 };
 

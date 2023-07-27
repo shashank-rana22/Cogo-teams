@@ -48,10 +48,9 @@ const formatServices = ({ savedServicesInvoiceTo, invoicingPartyServices }) => {
 	});
 };
 
-const useInvoicingParties = ({ detail = {} }) => {
-	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =		useState(false);
+const useInvoicingParties = ({ detail = {}, setInvoicingParties = () => {}, invoicingParties = [] }) => {
+	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =	useState(false);
 
-	const [invoicingParties, setInvoicingParties] = useState([]);
 	const [editInvoice, setEditInvoice] = useState({});
 	const [editInvoiceDetails, setEditInvoiceDetails] = useState({});
 

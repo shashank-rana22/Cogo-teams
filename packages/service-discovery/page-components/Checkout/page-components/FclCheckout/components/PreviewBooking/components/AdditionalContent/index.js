@@ -18,8 +18,6 @@ function AdditionalContent({
 	onChange = () => {},
 	cargoDetails = {},
 	setCargoDetails = () => {},
-	setIsVeryRisky = () => {},
-	isVeryRisky = false,
 	agreeTandC = false,
 	setAgreeTandC = () => {},
 	additionalRemark = '',
@@ -30,8 +28,6 @@ function AdditionalContent({
 		primaryService,
 		getCheckout,
 		isChannelPartner,
-		showSendTncEmail,
-		showOverallCreditRisk,
 		kycShowCondition,
 		tncPresent,
 		updateCheckout,
@@ -60,13 +56,11 @@ function AdditionalContent({
 				updateCheckout={updateCheckout}
 				updateLoading={updateLoading}
 				tncPresent={tncPresent}
-				showSendTncEmail={showSendTncEmail}
-				showOverallCreditRisk={showOverallCreditRisk}
 				kycShowCondition={kycShowCondition}
-				setIsVeryRisky={setIsVeryRisky}
 				orgData={orgData}
 				getCheckout={getCheckout}
 				loading={loading}
+				source="locked"
 			/>
 
 			<div className={styles.additional_remark}>
@@ -111,7 +105,6 @@ function AdditionalContent({
 				detail={detail}
 				updateCheckout={updateCheckout}
 				updateLoading={updateLoading}
-				isVeryRisky={isVeryRisky}
 				agreeTandC={agreeTandC}
 				cargoDetails={cargoDetails}
 				additionalRemark={additionalRemark}

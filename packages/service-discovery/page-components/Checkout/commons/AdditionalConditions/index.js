@@ -6,16 +6,17 @@ import styles from './styles.module.css';
 
 function AdditionalConditions({
 	detail = {},
-	updateCheckout,
-	updateLoading,
-	tncPresent,
-	showSendTncEmail,
-	showOverallCreditRisk,
-	kycShowCondition,
-	setIsVeryRisky,
-	orgData,
-	getCheckout,
-	loading,
+	updateCheckout = () => {},
+	updateLoading = () => {},
+	tncPresent = false,
+	showSendTncEmail = false,
+	showOverallCreditRisk = false,
+	kycShowCondition = false,
+	setIsVeryRisky = () => {},
+	orgData = {},
+	getCheckout = () => {},
+	loading = false,
+	source = 'locked',
 }) {
 	const { importer_exporter_id } = detail;
 
@@ -24,6 +25,7 @@ function AdditionalConditions({
 			key       : 'additional_tnc',
 			component : AdditionalTnc,
 			condition : !tncPresent,
+			show      : ['locked'],
 			props     : {
 				detail,
 				updateLoading,
@@ -34,6 +36,7 @@ function AdditionalConditions({
 			key       : 'overall_risk',
 			component : OverallRisk,
 			condition : showOverallCreditRisk,
+			show      : ['booking_confirmation'],
 			props     : {
 				detail,
 				setIsVeryRisky,
@@ -43,6 +46,7 @@ function AdditionalConditions({
 			key       : 'kyc',
 			component : KycMessage,
 			condition : kycShowCondition,
+			show      : ['locked'],
 			props     : {
 				detail,
 				status       : orgData.data?.kyc_status,
@@ -56,6 +60,7 @@ function AdditionalConditions({
 			component : CreditApprovalCard,
 			condition : showSendTncEmail,
 			style     : { flexBasis: '100%' },
+			show      : ['booking_confirmation'],
 			props     : {
 				detail,
 				updateLoading,
@@ -75,9 +80,10 @@ function AdditionalConditions({
 					props: activeComponentProps,
 					condition,
 					style = {},
+					show = [],
 				} = item;
 
-				if (!condition) {
+				if (!condition || !show.includes(source)) {
 					return null;
 				}
 
