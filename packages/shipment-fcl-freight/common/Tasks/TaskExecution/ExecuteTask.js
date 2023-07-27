@@ -1,6 +1,7 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
+import useGetOrganization from '../../../hooks/useGetOrganization';
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import useTaskRpa from '../../../hooks/useTaskRpa';
 
@@ -15,9 +16,11 @@ import {
 	UploadDraftBL,
 	AmendDraftBl,
 	UploadSI,
+	MarkIgmShipmentConfirm,
 	UploadComplianceDocs,
 } from './CustomTasks';
 import CargoInsurance from './CustomTasks/CargoInsurance';
+import ConfirmFreightBooking from './CustomTasks/ConfirmFreightBooking';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -25,6 +28,7 @@ const EXCLUDE_SERVICES = [
 	'fcl_freight_service',
 ];
 
+const INCLUDED_ORG = ['nvocc', 'freight_forwarder'];
 const REDUCE_LENGTH_BY = 1;
 
 function ExecuteTask({
@@ -35,10 +39,12 @@ function ExecuteTask({
 	setSelectedMail = () => {},
 	tasksList = [],
 }) {
+	const { servicesList, shipment_data, primary_service, stakeholderConfig } = useContext(ShipmentDetailContext);
+
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
-	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const showIgmTasks = !!stakeholderConfig?.tasks?.show_igm_tasks;
 
 	const {
 		steps = [],
@@ -46,6 +52,11 @@ function ExecuteTask({
 		setCurrentStep = () => {},
 		serviceIdMapping = [],
 	} = useTaskExecution({ task, taskConfigData });
+
+	const { orgData } = useGetOrganization({
+		primary_service,
+		task,
+	});
 
 	const stepConfigValue = steps.length
 		? steps[currentStep] || steps[steps.length - REDUCE_LENGTH_BY]
@@ -196,6 +207,33 @@ function ExecuteTask({
 
 	if (task?.task === 'generate_cargo_insurance') {
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+	}
+
+	if (task.task === 'mark_confirmed'
+	&& !orgData?.data?.category_types?.includes('shipping_line')
+	&& orgData?.data?.category_types?.some((value) => INCLUDED_ORG.includes(value))
+        && primary_service?.trade_type === 'export'
+	) {
+		return (
+			<ConfirmFreightBooking
+				task={task}
+				onCancel={onCancel}
+				services={servicesList}
+				taskListRefetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (showIgmTasks && task?.task === 'mark_igm_shipment_confirmed') {
+		return (
+			<MarkIgmShipmentConfirm
+				task={task}
+				taskConfigData={taskConfigData}
+				onCancel={onCancel}
+				taskListRefetch={taskListRefetch}
+				tasksList={tasksList}
+			/>
+		);
 	}
 
 	return (

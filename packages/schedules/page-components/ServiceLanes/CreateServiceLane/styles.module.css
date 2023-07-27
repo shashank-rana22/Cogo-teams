@@ -1,0 +1,65 @@
+.heading_container {
+	padding: 8px;
+	padding-left: 10px;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 1000;
+	line-height: 16px;
+	color: #333;
+	letter-spacing: 0.01em;
+}
+
+.buttons {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 40px;
+}
+
+.clear {
+	margin-right: 10px;
+}
+
+.inputGroup {
+	padding: 8px;
+	margin: 10px;
+	border-radius: 8px;
+	box-shadow: 0 0 8px #627fac33;
+}
+
+.columnSpan4 {
+	flex-basis: 33.3%;
+	max-width: 100%;
+	padding: 6px;
+}
+
+.label {
+	display: block;
+	margin: 10px;
+}
+
+.shadow {
+	box-shadow: 0 0 8px #627fac33;
+}
+
+.customWidth {
+	width: 300px;
+	margin-right: 200px;
+}
+
+.second_inputGroup {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 8px;
+	margin: 2px;
+	margin-top: 30px;
+	margin-bottom: 16px;
+	border-radius: 8px;
+	box-shadow: 0 0 8px #627fac33;
+}
+
+.footer_shadow {
+	padding: 16px;
+	margin: -16px;
+	margin-top: 10px;
+	box-shadow: 0 0 8px #627fac33;
+}

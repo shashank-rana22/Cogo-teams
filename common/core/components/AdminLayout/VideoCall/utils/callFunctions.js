@@ -1,0 +1,80 @@
+import { addDoc, collection, doc, setDoc, updateDoc } from 'firebase/firestore';
+
+import { FIRESTORE_PATH } from '../configurations/firebase-config';
+
+export const stopStream = ({ streamType, currentStream }) => {
+	if (!currentStream || !currentStream[streamType]) {
+		return;
+	}
+
+	const tracks = currentStream[streamType]?.getTracks();
+
+	tracks.forEach((track) => {
+		track.stop();
+	});
+};
+
+export const callUpdate = ({ data, firestore, callingRoomId }) => {
+	if (!callingRoomId) {
+		return;
+	}
+
+	try {
+		const videCallRoomDoc = doc(
+			firestore,
+			FIRESTORE_PATH.video_calls,
+			callingRoomId,
+		);
+
+		updateDoc(videCallRoomDoc, {
+			...data,
+			updated_at: Date.now(),
+		});
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const saveCallData = async ({ data, callBackFunc, firestore }) => {
+	const videoCallRoomCollection = collection(
+		firestore,
+		`${FIRESTORE_PATH.video_calls}`,
+	);
+
+	try {
+		const dataToSave = {
+			...data,
+			updated_at : Date.now(),
+			created_at : Date.now(),
+		};
+		const docData = await addDoc(videoCallRoomCollection, dataToSave);
+		callBackFunc(docData.id);
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const saveWebrtcToken = ({ data, callingRoomId, tokenId, firestore }) => {
+	if (!callingRoomId) {
+		return;
+	}
+
+	const webrtcTokenRoomDoc = doc(
+		firestore,
+		`${FIRESTORE_PATH.video_calls}/${callingRoomId}/${FIRESTORE_PATH.webrtc_token}`,
+		tokenId,
+	);
+
+	try {
+		setDoc(
+			webrtcTokenRoomDoc,
+			{
+				...data,
+				updated_at: Date.now(),
+			},
+			{ merge: true },
+		);
+	} catch (error) {
+		console.error(error);
+	}
+};

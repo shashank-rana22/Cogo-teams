@@ -32,7 +32,7 @@ function RatesCard({
 						{(renderedCards || [])?.map((item) => (
 							<Card
 								data={item}
-								key={item}
+								key={item?.id}
 								prefrences={prefrences}
 								setPrefrences={setPrefrences}
 								singleServiceData={singleServiceData}

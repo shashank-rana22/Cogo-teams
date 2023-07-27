@@ -21,6 +21,7 @@ const EMPLOYEE_DETAILS_MAPPING = [
 	'date_of_joining',
 	'office_location',
 	'cogoport_email',
+	'office_location_country',
 ];
 
 const HR_DETAILS_MAPPING = ['hr_id', 'reporting_manager_id', 'hiring_manager_id', 'hrbp_id'];

@@ -13,6 +13,11 @@ const partner = {
 	],
 	prm: [
 		{
+			api          : 'list_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'create_user_contact_request',
 			access_type  : 'private',
 			service_name : 'user',
@@ -1067,6 +1072,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'list_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'create_user_contact_request',
 			access_type  : 'private',
 			service_name : 'user',
@@ -1944,6 +1954,11 @@ const partner = {
 	],
 	supply_crm: [
 		{
+			api          : 'list_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			feature      : 'supply_crm',
 			api          : 'list_organization_service_expertises',
 			access_type  : 'private',
@@ -2693,6 +2708,11 @@ const partner = {
 			api          : 'send_channel_partner_user_welcome_email',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'list_organization_approvals',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	support_crm: [
@@ -5658,6 +5678,7 @@ const partner = {
 			service_name : 'communication',
 		},
 	],
+
 	shipment_approval: [
 		{
 			api          : 'list_shipments',
@@ -6817,6 +6838,11 @@ const partner = {
 			api          : 'create_outbound_voice_call',
 			access_type  : 'private',
 			service_name : 'voice_call',
+		},
+		{
+			api          : 'get_ledger',
+			access_type  : 'private',
+			service_name : 'sage',
 		},
 	],
 	unified_dashboard: [
@@ -12255,14 +12281,12 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'create_shipment_document',
-			access_type  : 'private',
-			service_name : 'shipment',
+			api         : 'post_air_coe_documents',
+			access_type : 'private',
 		},
 		{
-			api          : 'update_shipment_document',
-			access_type  : 'private',
-			service_name : 'shipment',
+			api         : 'put_air_coe_documents',
+			access_type : 'private',
 		},
 		{
 			api          : 'list_rate_charge_codes',
@@ -12630,6 +12654,31 @@ const partner = {
 		},
 		{
 			api          : 'get_omnichannel_agent_types',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_cogoone_flash_rates_logs',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_lead_organizations',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'get_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'list_assigned_chats',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_agent_work_preference',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

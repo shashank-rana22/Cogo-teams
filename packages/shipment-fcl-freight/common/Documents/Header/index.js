@@ -1,7 +1,8 @@
 import { Toggle, Input, Select, Tabs, TabPanel } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMSearchlight, IcMUpload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import GenericUpload from './GenericUpload';
 import styles from './styles.module.css';
@@ -9,7 +10,6 @@ import styles from './styles.module.css';
 function Header({
 	activeToggle = false,
 	setActiveToggle = () => {},
-	shipment_data = {},
 	data = {},
 	filters = {},
 	setFilters = () => {},
@@ -17,23 +17,26 @@ function Header({
 	searchValue = '',
 	activeWallet = '',
 	setActiveWallet = () => {},
-	activeStakeholder,
 	refetch = () => {},
 }) {
+	const { shipment_data: shipmentData, activeStakeholder, stakeholderConfig } = useContext(ShipmentDetailContext);
+
 	const [showModal, setShowModal] = useState(false);
 	const SourceOptions = Array.isArray(data)
 		? (data || [])?.map((e) => ({ label: e?.business_name, value: e?.id }))
 		: [];
 
-	const serviceOptions = shipment_data?.services?.map((service) => ({ label: startCase(service), value: service }));
+	const serviceOptions = shipmentData?.services?.map((service) => ({ label: startCase(service), value: service }));
 
 	const handleGenericUpload = () => {
 		setShowModal(true);
 	};
 
+	const can_edit_documents = !!stakeholderConfig?.documents?.can_edit_documents;
+
 	return (
-		<div className={styles.heading}>
-			<div className={styles.sub_heading}>
+		<header className={styles.heading}>
+			<section className={styles.sub_heading}>
 
 				{!activeToggle ? (
 					<div className={styles.sub_heading}>
@@ -69,7 +72,8 @@ function Header({
 
 					</div>
 				) : null}
-				{activeToggle ? (
+
+				{activeToggle && can_edit_documents ? (
 					<Tabs
 						activeTab={activeWallet}
 						onChange={setActiveWallet}
@@ -81,42 +85,44 @@ function Header({
 						<TabPanel name="organization_documents" title="Organization Documents" />
 					</Tabs>
 				) : null}
-			</div>
+			</section>
 
-			{showModal ? (
+			{showModal && can_edit_documents ? (
 				<GenericUpload
 					showModal={showModal}
 					setShowModal={setShowModal}
 					data={data}
-					shipment_data={shipment_data}
+					shipment_data={shipmentData}
 					activeStakeholder={activeStakeholder}
 					refetch={refetch}
 				/>
 			) : null }
 
-			<div className={styles.sub_heading}>
-				<div
-					className={styles.generic_upload}
-					role="button"
-					tabIndex={0}
-					onClick={() => handleGenericUpload()}
-				>
-					<IcMUpload />
-					<div className={styles.upload}>Upload</div>
+			{can_edit_documents ? (
+				<div className={styles.sub_heading}>
+					<div
+						className={styles.generic_upload}
+						role="button"
+						tabIndex={0}
+						onClick={() => handleGenericUpload()}
+					>
+						<IcMUpload />
+						<span className={styles.upload}>Upload</span>
+					</div>
+
+					<Toggle
+						name="myTransilates"
+						size="md"
+						offLabel="Check List"
+						onLabel="Wallet"
+						value={activeToggle}
+						className={styles.custom_toggle}
+						onChange={() => setActiveToggle((prev) => !prev)}
+					/>
 				</div>
+			) : null}
 
-				<Toggle
-					name="myTransilates"
-					size="md"
-					offLabel="Check List"
-					onLabel="Wallet"
-					value={activeToggle}
-					className={styles.custom_toggle}
-					onChange={() => setActiveToggle((p) => !p)}
-				/>
-			</div>
-
-		</div>
+		</header>
 	);
 }
 
