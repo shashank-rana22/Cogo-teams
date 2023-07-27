@@ -9,7 +9,8 @@ function useListTasksHelper() {
 		isGettingShipment, activeStakeholder, stakeholderConfig,
 	} = useContext(ShipmentDetailContext);
 
-	const showOtherTasks = !!stakeholderConfig.tasks.show_others_tasks;
+	const showOtherTasks = !!stakeholderConfig?.tasks?.show_others_tasks;
+
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
 	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);
 	const [showMyTasks, setShowMyTasks] = useState(showOtherTasks);
