@@ -9,19 +9,19 @@ import { ExceptionListProps } from '../Interfaces';
 import styles from './styles.module.css';
 
 function ExceptionList({
-	id,
-	className,
-	columns,
-	data,
-	setExceptionFilter,
-	exceptionFilter,
-	subTabsValue,
-	searchValue,
-	showCycleExceptions,
-	setShowCycleExceptions,
-	setSearchValue,
-	cycleListId,
-	getMasterList,
+	id = '',
+	className = '',
+	columns = [{}],
+	data = [{}],
+	setExceptionFilter = null,
+	exceptionFilter = {},
+	subTabsValue = '',
+	searchValue = '',
+	showCycleExceptions = true,
+	setShowCycleExceptions = null,
+	setSearchValue = null,
+	cycleListId = '',
+	getMasterList = null,
 	entityId = '',
 	...rest
 }:ExceptionListProps) {
@@ -43,7 +43,7 @@ function ExceptionList({
 			/>
 			<Table
 				columns={columns}
-				data={data || [{}]}
+				data={data}
 				id={id}
 				className={className}
 				{...rest}
