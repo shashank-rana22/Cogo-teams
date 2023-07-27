@@ -6,12 +6,9 @@ const getCollectionPartyParams = ({ profile_data = {}, servicesData = [], shipme
 	const geo = getGeoConstants();
 
 	const primary_service = servicesData?.find((i) => i.main_service_id === null);
-	console.log({ primary_service, servicesData, shipmentData });
 
 	const isNewShipment = shipmentData?.created_at && new Date(shipmentData?.created_at)
 		>= new Date(GLOBAL_CONSTANTS.others.fcl_import_new_process_date);
-
-	console.log({ isNewShipment });
 
 	const isFcl = primary_service?.service_type === 'fcl_freight_service';
 
@@ -25,7 +22,7 @@ const getCollectionPartyParams = ({ profile_data = {}, servicesData = [], shipme
 		}
 
 		if (user_role_ids.some((i) => geo.uuid.service_ops2_role_id.includes(i))) {
-			return { service_ops2_id: profile_data?.id };
+			return { service_ops2_id: profile_data?.user?.id };
 		}
 	}
 
