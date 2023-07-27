@@ -15,6 +15,7 @@ import useCreateFeedback from './useCreateFeedback';
 const INDEX = 0;
 const NULL_VALUE = 0;
 const EMPTY_VALUE = 1;
+
 function AnswerPage() {
 	const {
 		general,
