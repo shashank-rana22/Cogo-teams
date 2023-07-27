@@ -110,8 +110,6 @@ function Service(props) {
 						return null;
 					}
 
-					console.log('error :: ', errors?.[name]?.[index]?.[controlName]);
-
 					return (
 						<div key={`${name}.${index}.${controlName}`} className={styles.element_container}>
 							<div className={styles.element_heading_container}>
