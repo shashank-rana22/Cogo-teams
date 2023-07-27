@@ -17,6 +17,7 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 		handleSubmit,
 		resetForm,
 		onSubmit,
+		errors,
 	} = useSetObjectiveRequirements({ formValues, setFormValues, setActiveStep, generalConfigFormState });
 
 	const divRef = useRef({});
@@ -42,6 +43,7 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 					formValues={formValues}
 					setFormValues={setFormValues}
 					disabled={disabled}
+					errors={errors}
 				/>
 
 				<OrganizationalDetails

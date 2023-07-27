@@ -1,5 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 import RenderListLocationOption from '../../../common/RenderListLocationOption';
 import getAllTruckTypeOptions from '../helpers/get-all-truck-type-options';
@@ -9,7 +10,15 @@ import getServiceTypeOptions from '../helpers/get-service-type-options';
 import getShipmentModeOptions from '../helpers/get-shipment-mode-options';
 
 const getServiceRequirementControls = (props) => {
-	const { watchShipmentMode, watchServiceType, watchTradeType, lifecycleStage, disabled } = props;
+	const {
+		watchShipmentMode,
+		watchServiceType,
+		watchTradeType,
+		watchOriginLocation,
+		watchDestinationLocation,
+		lifecycleStage,
+		disabled,
+	} = props;
 
 	const geo = getGeoConstants();
 
@@ -74,7 +83,10 @@ const getServiceRequirementControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			setFilterValue: ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+			setFilterValue : ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+			rules          : {
+				required: isEmpty(watchDestinationLocation) ? false : 'Required',
+			},
 			disabled,
 		},
 		{
@@ -95,7 +107,10 @@ const getServiceRequirementControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			setFilterValue: ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+			setFilterValue : ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+			rules          : {
+				required: isEmpty(watchOriginLocation) ? false : 'Required',
+			},
 			disabled,
 		},
 		{

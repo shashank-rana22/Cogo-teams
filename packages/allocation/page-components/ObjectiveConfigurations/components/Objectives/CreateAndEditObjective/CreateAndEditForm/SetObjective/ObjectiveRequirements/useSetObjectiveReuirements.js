@@ -25,7 +25,7 @@ const useSetObjectiveRequirements = (props) => {
 		segments: filledSegments,
 	} = organization_details || {};
 
-	const { control, watch, setValue, handleSubmit } = useForm({
+	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm({
 		defaultValues: {
 			service_requirements: serviceRequirements ? serviceRequirements.map(
 				(requirement) => (
@@ -42,7 +42,6 @@ const useSetObjectiveRequirements = (props) => {
 			pincode  : getAttachedIdData({ values: filledPincodes }),
 			segments : filledSegments,
 			...(stats_details || {}),
-
 		},
 	});
 
@@ -117,7 +116,7 @@ const useSetObjectiveRequirements = (props) => {
 	};
 
 	return {
-		control, watch, setValue, handleSubmit, resetForm, onSubmit,
+		control, watch, setValue, handleSubmit, resetForm, onSubmit, errors,
 	};
 };
 

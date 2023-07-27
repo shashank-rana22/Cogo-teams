@@ -24,22 +24,27 @@ function Service(props) {
 		serviceRequirementOperator,
 		lifecycleStage,
 		disabled,
+		errors,
 	} = props;
 
 	const watchShipmentMode = watch(`${name}.${index}.shipment_mode`);
 	const watchServiceType = watch(`${name}.${index}.service_type`);
 	const watchTradeType = watch(`${name}.${index}.trade_type`);
+	const watchOriginLocation = watch(`${name}.${index}.origin_location`);
+	const watchDestinationLocation = watch(`${name}.${index}.destination_location`);
 
 	const controls = getServiceRequirementControls({
 		watchShipmentMode,
 		watchServiceType,
 		watchTradeType,
+		watchOriginLocation,
+		watchDestinationLocation,
 		lifecycleStage,
 		disabled,
 	});
 
 	useEffect(() => {
-		const subscription = watch((value, { name: controlName }) => {
+		const subscription = watch((_, { name: controlName }) => {
 			if (controlName === `${name}.${index}.trade_type`) {
 				setValue(`${name}.${index}.inco_terms`, []);
 			}
@@ -105,15 +110,22 @@ function Service(props) {
 						return null;
 					}
 
+					console.log('error :: ', errors?.[name]?.[index]?.[controlName]);
+
 					return (
 						<div key={`${name}.${index}.${controlName}`} className={styles.element_container}>
-							<p>{label}</p>
+							<div className={styles.element_heading_container}>
+								<p>{label}</p>
+
+								<p className={styles.error}>{errors?.[name]?.[index]?.[controlName]?.message}</p>
+							</div>
 
 							<Element
 								{...restControlItem}
 								control={control}
 								name={`${name}.${index}.${controlName}`}
 							/>
+
 						</div>
 					);
 				})}

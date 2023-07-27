@@ -18,6 +18,7 @@ function ServiceRequirements(props) {
 		formValues,
 		setFormValues,
 		disabled,
+		errors,
 	} = props;
 
 	const [showAddAnotherConditionModal, setShowAnotherConditionModal] = useState(false);
@@ -38,6 +39,7 @@ function ServiceRequirements(props) {
 					serviceRequirementOperator={formValues.objectiveRequirements?.service_requirement_operator}
 					lifecycleStage={formValues.generalConfiguration?.lifecycle_stage}
 					disabled={disabled}
+					errors={errors}
 				/>
 			))}
 

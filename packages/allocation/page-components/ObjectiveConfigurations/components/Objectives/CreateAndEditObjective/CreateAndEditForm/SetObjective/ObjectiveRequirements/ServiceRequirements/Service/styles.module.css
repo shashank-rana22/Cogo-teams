@@ -41,3 +41,14 @@
 		max-width: 100%;
 	}
 }
+
+.element_heading_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.error {
+	font-size: 12px;
+	color: red;
+}
