@@ -25,11 +25,6 @@ function NotificationPage({
 		setActiveTabFunction,
 	} = useNotificationHooks();
 
-	const DISABLED_STYLES = {
-		cursor        : 'progress',
-		pointerEvents : 'none',
-	};
-
 	return (
 		<div>
 			<div className={styles.container}>
@@ -38,7 +33,7 @@ function NotificationPage({
 					onChange={(tab) => setActiveTabFunction(tab)}
 					className={cl`${styles.tabs} ${disabled ? styles.disabled : ''}`}
 					themeType="primary"
-					style={disabled ? DISABLED_STYLES : {}}
+					style={{ cursor: disabled ? 'progress' : 'pointer' }}
 					disabled={disabled}
 				>
 					<TabPanel
@@ -51,12 +46,14 @@ function NotificationPage({
 							formattedData={formattedData}
 							onPageChange={onPageChange}
 							activeTab={activeTab}
+							disabled={disabled}
 						/>
 						{!loading ? (formattedData?.list || []).map((item) => (
 							<Notification
 								key={item}
 								item={item}
 								handleNotificationClick={handleNotificationClick}
+								disabled={disabled}
 								setDisabled={setDisabled}
 							/>
 						)) : (
@@ -71,12 +68,14 @@ function NotificationPage({
 							formattedData={formattedmailData}
 							onPageChange={setPagination}
 							activeTab={activeTab}
+							disabled={disabled}
 						/>
 						{!loading ? (formattedmailData?.list || []).map((item) => (
 							<Notification
 								key={item}
 								item={item}
 								handleNotificationClick={handleNotificationClick}
+								disabled={disabled}
 								setDisabled={setDisabled}
 							/>
 						)) : (

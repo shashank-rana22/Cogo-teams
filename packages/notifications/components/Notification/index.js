@@ -8,6 +8,7 @@ function Notification({
 	item = {},
 	handleNotificationClick = () => {},
 	setShow = () => {},
+	disabled = false,
 	setDisabled = () => {},
 }) {
 	const getStatus = () => {
@@ -33,6 +34,7 @@ function Notification({
 					handleNotificationClick(item);
 				}
 			}}
+			style={{ pointerEvents: disabled ? 'none' : 'auto' }}
 		>
 			<div className={styles.space_between}>
 				<div style={{ width: '95%' }}>

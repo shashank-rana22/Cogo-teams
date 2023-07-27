@@ -137,7 +137,7 @@ function Notifications() {
 
 	const handleNotificationClick = async (item) => {
 		if (item.is_rpa && item.content.redirect_url) {
-			window.open(item.content.redirect_url, '_blank');
+			notificationRedirect({ link: item.content.redirect_url, push, partner_id });
 
 			return;
 		}

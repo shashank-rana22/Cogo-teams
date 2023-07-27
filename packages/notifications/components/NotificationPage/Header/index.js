@@ -12,6 +12,7 @@ function Header({
 	formattedData = {},
 	onPageChange = () => {},
 	activeTab,
+	disabled,
 }) {
 	return (
 		<div className={styles.container}>
@@ -22,7 +23,14 @@ function Header({
 			</p>
 			{!isEmpty(formattedData) && (
 				<div className={styles.row}>
-					<Button className={styles.mark_read} onClick={onMarkAllAsRead}>Mark all as read</Button>
+					<Button
+						className={styles.mark_read}
+						disabled={disabled}
+						onClick={onMarkAllAsRead}
+					>
+						Mark all as read
+
+					</Button>
 					<div>
 						<Pagination
 							type="table"
