@@ -5,6 +5,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const MIN_NOT_SEEN_COUNT = 1;
+const EMPTY_PAGE = 0;
 
 function Header({
 	onMarkAllAsRead = () => {},
@@ -25,9 +26,9 @@ function Header({
 					<div>
 						<Pagination
 							type="table"
-							currentPage={formattedData?.page}
-							totalItems={formattedData?.total_count}
-							pageSize={formattedData?.page_limit}
+							currentPage={formattedData?.page || EMPTY_PAGE}
+							totalItems={formattedData?.total_count || EMPTY_PAGE}
+							pageSize={formattedData?.page_limit || EMPTY_PAGE}
 							onPageChange={onPageChange}
 						/>
 					</div>
