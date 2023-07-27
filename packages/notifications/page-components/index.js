@@ -14,23 +14,65 @@ const extractNavLinks = (obj) => {
 	const NAV_LINKS = [];
 
 	Object.values(obj).forEach((item) => {
+		NAV_LINKS.push(item.href);
+
 		if (item?.options) {
 			item?.options.forEach((option) => NAV_LINKS.push(option?.href));
 		}
-		NAV_LINKS.push(item.href);
 	});
 
-	return NAV_LINKS.filter((item) => item !== undefined);
+	return NAV_LINKS.filter((item) => item);
 };
 
 const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
 
+const notificationRedirect = ({ link, push, partner_id }) => {
+	let isVersionTwo = false;
+	let redirectLink = null;
+
+	const splittedLink = link.split('/');
+
+	NAVIGATION_LINKS.forEach((href) => {
+		if (redirectLink) return;
+
+		isVersionTwo = href.includes('/v2/');
+
+		let tempHref = href;
+		if (isVersionTwo) {
+			tempHref = tempHref.replace('/v2/', '/');
+		}
+
+		const splittedHref = tempHref.split('/');
+
+		const isLinkMatched = splittedHref.every((hrefItem, index) => {
+			if (hrefItem.startsWith('[')) return true;
+
+			return hrefItem === splittedLink[index];
+		});
+
+		if (!isLinkMatched) return;
+
+		redirectLink = link;
+	});
+
+	if (!redirectLink) {
+		window.location.href = `https://admin.cogoport.com/${partner_id}${link}`;
+		return;
+	}
+
+	if (isVersionTwo) {
+		push(redirectLink);
+	} else {
+		window.location.href = `https://admin.cogoport.com/${partner_id}${redirectLink}`;
+	}
+};
+
 function Notifications() {
 	const { push } = useRouter();
-	const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
+	const { general } = useSelector((state) => state);
 	const [page, setPage] = useState(INITIAL_PAGE);
 
-	console.log({ NAVIGATION_LINKS });
+	const { scope, query: { partner_id } = {} } = general;
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_communications',
@@ -68,17 +110,20 @@ function Notifications() {
 
 	const updateAction = async (action) => {
 		try {
+			const payload = {
+				filters     : { type: 'platform_notification' },
+				action_name : action,
+			};
+
 			const updateRes = await triggerBulkComm({
-				data: {
-					filters     : { type: 'platform_notification' },
-					action_name : action,
-				},
+				data: payload,
 			});
+
 			if (updateRes.hasError) {
 				showErrorsInToast(updateRes.messages);
-			} else {
-				trigger();
+				return;
 			}
+
 			trigger();
 		} catch (err) {
 			showErrorsInToast(err.data);
@@ -92,21 +137,33 @@ function Notifications() {
 	const handleNotificationClick = async (item) => {
 		if (item.is_rpa && item.content.redirect_url) {
 			window.open(item.content.redirect_url, '_blank');
-		} else {
-			try {
-				const updateRes = await triggerComm({
-					data: { id: item?.id, is_clicked: true },
-				});
-				if (updateRes.hasError) {
-					showErrorsInToast(updateRes.messages);
-				} else if (item?.content?.link) {
-					push(item?.content?.link);
-				} else {
-					trigger();
-				}
-			} catch (err) {
-				showErrorsInToast(err.data);
+
+			return;
+		}
+
+		try {
+			const payload = {
+				id         : item?.id,
+				is_clicked : true,
+			};
+
+			const updateRes = await triggerComm({
+				data: payload,
+			});
+
+			if (updateRes.hasError) {
+				showErrorsInToast(updateRes.messages);
+				return;
 			}
+
+			if (item?.content?.link) {
+				notificationRedirect({ link: item?.content?.link, push, partner_id });
+				return;
+			}
+
+			trigger();
+		} catch (err) {
+			showErrorsInToast(err.data);
 		}
 	};
 	return (
