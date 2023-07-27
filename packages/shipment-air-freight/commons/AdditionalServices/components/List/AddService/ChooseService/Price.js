@@ -6,6 +6,7 @@ import useCreateShipmentAdditionalService from '../../../../../../hooks/useCreat
 import styles from './styles.module.css';
 
 function Price({
+	shipmentType,
 	item,
 	isSeller,
 	setAddRate,
@@ -76,6 +77,7 @@ function Price({
 					e.stopPropagation();
 					setShowPrice({ item });
 				}}
+				disabled={shipmentType === 'air_freight'}
 			>
 				View Rates
 			</Button>

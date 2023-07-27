@@ -230,6 +230,7 @@ function CollectionPartyDetails({
 				{SHOW_MODAL.includes(showModal)
 				&& (
 					<AddService
+						shipmentType={shipment_type}
 						shipmentId={shipment_data?.id}
 						services={SERVICES_LIST}
 						refetch={refetch}
