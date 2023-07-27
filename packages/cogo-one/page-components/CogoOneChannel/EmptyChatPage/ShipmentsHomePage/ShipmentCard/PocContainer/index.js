@@ -27,7 +27,7 @@ function PocContainer({
 				Initiate Conversation
 			</div>
 
-			<div>
+			<div className={styles.poc_users_container}>
 				{POCS.map(
 					(userDetails) => (
 						<PocUser
@@ -36,9 +36,7 @@ function PocContainer({
 						/>
 					),
 				)}
-
 			</div>
-
 		</div>
 	);
 }

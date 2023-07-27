@@ -329,7 +329,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			agent_type_filter           : false,
 			flash_revert_logs           : false,
 			global_contacts             : false,
-			show_shipments_home_page    : false,
+			show_shipments_home_page    : true,
 			punch_in_out                : false,
 		},
 	},

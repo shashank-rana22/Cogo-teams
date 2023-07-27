@@ -7,7 +7,10 @@ import styles from './styles.module.css';
 function PocUser() {
 	return (
 		<div className={styles.container}>
-			PocUser
+			<div>
+				<div>PocUser</div>
+				<div>Organization</div>
+			</div>
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.message_reply}
 				height={25}
