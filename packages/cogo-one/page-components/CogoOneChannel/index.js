@@ -91,6 +91,13 @@ function CogoOne() {
 		},
 	};
 
+	const commonProps = {
+		setSendBulkTemplates,
+		setActiveTab,
+		selectedAutoAssign,
+		setAutoAssignChats,
+	};
+
 	const { hasNoFireBaseRoom = false } = activeTab || {};
 
 	useEffect(() => {
@@ -114,7 +121,6 @@ function CogoOne() {
 					<Customers
 						viewType={viewType}
 						activeTab={activeTab}
-						setActiveTab={setActiveTab}
 						userId={userId}
 						setModalType={setModalType}
 						modalType={modalType}
@@ -124,22 +130,17 @@ function CogoOne() {
 						suggestions={suggestions}
 						workPrefernceLoading={workPrefernceLoading}
 						setOpenKamContacts={setOpenKamContacts}
-						setSendBulkTemplates={setSendBulkTemplates}
 						setSelectedAutoAssign={setSelectedAutoAssign}
-						selectedAutoAssign={selectedAutoAssign}
 						autoAssignChats={autoAssignChats}
-						setAutoAssignChats={setAutoAssignChats}
+						{...commonProps}
 					/>
 				</div>
 
 				{sendBulkTemplates ? (
 					<PortPairOrgFilters
-						setSendBulkTemplates={setSendBulkTemplates}
-						setActiveTab={setActiveTab}
-						selectedAutoAssign={selectedAutoAssign}
 						setSelectedAutoAssign={setSelectedAutoAssign}
-						setAutoAssignChats={setAutoAssignChats}
 						sendBulkTemplates={sendBulkTemplates}
+						{...commonProps}
 					/>
 				) : null}
 
