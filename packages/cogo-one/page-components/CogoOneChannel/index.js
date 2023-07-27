@@ -73,9 +73,10 @@ function CogoOne() {
 	const {
 		fetchWorkStatus = () => {},
 		agentWorkStatus = {},
+		preferenceLoading = false,
 	} = useGetAgentPreference();
 
-	const { data = {}, agentTimeline = () => {}, dateLoading = false } = useGetAgentTimeline();
+	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline();
 
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
@@ -212,8 +213,10 @@ function CogoOne() {
 					fetchworkPrefernce={fetchWorkStatus}
 					agentStatus={agentWorkStatus}
 					data={data}
-					dateLoading={dateLoading}
 					agentTimeline={agentTimeline}
+					preferenceLoading={preferenceLoading}
+					timelineLoading={timelineLoading}
+
 				/>
 			)}
 		</>

@@ -21,8 +21,8 @@ function useCreateUserInactiveStatus({
 			});
 			setOpenModal(false);
 			Toast.success('succesfully updated your status');
-			fetchworkPrefernce();
 			agentTimeline();
+			fetchworkPrefernce();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

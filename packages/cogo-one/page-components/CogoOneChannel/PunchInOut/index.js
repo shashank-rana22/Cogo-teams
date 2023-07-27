@@ -14,8 +14,9 @@ function PunchInOut({
 	fetchworkPrefernce = () => {},
 	agentStatus = {},
 	data = {},
-	dateLoading = false,
 	agentTimeline = () => {},
+	timelineLoading = false,
+	preferenceLoading = false,
 }) {
 	const [showDetails, setShowDetails] = useState(false);
 
@@ -65,12 +66,14 @@ function PunchInOut({
 						<Image src={GLOBAL_CONSTANTS.image_url.clock_icon} alt="clock" width={18} height={18} />
 						<div className={styles.shift_time}>
 
-							{dateLoading ? <Placeholder width="55px" height="18px" /> : formatDate({
-								date       : lastBreakTime,
-								formatType : 'dateTime',
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
-								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							})}
+							{(timelineLoading || preferenceLoading)
+								? <Placeholder width="55px" height="18px" />
+								: formatDate({
+									date       : lastBreakTime,
+									formatType : 'dateTime',
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								})}
 						</div>
 					</>
 				)}

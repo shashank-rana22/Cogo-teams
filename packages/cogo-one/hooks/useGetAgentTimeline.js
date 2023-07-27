@@ -35,7 +35,7 @@ const useGetAgentTimeline = () => {
 
 	return {
 		data,
-		dateLoading: loading,
+		timelineLoading: loading,
 		agentTimeline,
 	};
 };
