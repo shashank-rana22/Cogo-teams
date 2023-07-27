@@ -1,4 +1,5 @@
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
 const getPreferenceLabel = (obj) => [
@@ -31,7 +32,8 @@ const getPreferenceLabel = (obj) => [
 		label : 'Sailing Date',
 		value : formatDate({
 			date       : new Date(),
-			formatType : 'dd MMM yyyy',
+			formatType : 'date',
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 		}),
 	},
 ];
