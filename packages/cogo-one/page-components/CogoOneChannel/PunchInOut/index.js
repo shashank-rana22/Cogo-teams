@@ -10,6 +10,8 @@ import useUpdateAgentWorkPreferences from '../../../hooks/UseUpdateAgentWorkPref
 import ShowMoreStats from './ShowMoreStats';
 import styles from './styles.module.css';
 
+const MIN_FEEDBACK_SCORE = 0;
+
 function PunchInOut({
 	fetchworkPrefernce = () => {},
 	agentStatus = {},
@@ -57,7 +59,7 @@ function PunchInOut({
 				onClick={() => setShowDetails((prev) => !prev)}
 			>
 				<Image src={GLOBAL_CONSTANTS.image_url.sad_icon} alt="sad-emoji" width={18} height={18} />
-				<div className={styles.break_time}>0</div>
+				<div className={styles.break_time}>{MIN_FEEDBACK_SCORE}</div>
 				<IcMDown className={styles.down_icon} />
 				{status === 'punched_out' ? (
 					<Button size="xs" onClick={handlePunchIn} disabled={loading}>Start Shift</Button>

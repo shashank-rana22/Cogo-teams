@@ -31,6 +31,8 @@ function InactiveModal({
 		comment : '',
 	});
 
+	const { reason = '', comment = '' } = offlineReason || {};
+
 	const customEndTime = date.setHours(
 		ofTime.getHours(),
 		ofTime.getMinutes(),
@@ -94,22 +96,20 @@ function InactiveModal({
 		const data = {
 			status         : 'break',
 			validity_start : formatDate({
-				date: validity_start,
-				dateFormat:
-							GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				date       : validity_start,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 				timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
 				formatType : 'dateTime',
 				separator  : ' ',
 			}),
 			validity_end: formatDate({
-				date: validity_end,
-				dateFormat:
-							GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				date       : validity_end,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 				timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
 				formatType : 'dateTime',
 				separator  : ' ',
 			}),
-			reason: offlineReason.reason === 'others' ? offlineReason.comment : offlineReason.reason,
+			reason: reason === 'others' ? comment : reason,
 		};
 
 		updateUserStatus(data);
@@ -124,18 +124,17 @@ function InactiveModal({
 					Select offline reason
 				</div>
 				<Select
-					value={offlineReason.reason}
+					value={reason}
 					onChange={(val) => setOfflineReason((prev) => ({ ...prev, reason: val }))}
 					placeholder="Select reason"
 					options={OFFLINE_REASONS_OPTIONS}
 					isClearable
 				/>
-				{offlineReason.reason === 'others' && (
+				{reason === 'others' && (
 					<Textarea
-						name="a4"
 						size="sm"
 						placeholder="Enter the specific reason"
-						value={offlineReason.comment}
+						value={comment}
 						onChange={(val) => setOfflineReason((prev) => ({ ...prev, comment: val }))}
 					/>
 				)}

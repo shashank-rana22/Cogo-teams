@@ -11,7 +11,7 @@ const getParams = ({ userId }) => ({
 
 const useGetAgentTimeline = () => {
 	const { userId } = useSelector(({ profile }) => ({
-		userId: profile?.user?.id,
+		userId: profile.user.id,
 	}));
 
 	const [{ loading, data }, trigger] = useRequest({

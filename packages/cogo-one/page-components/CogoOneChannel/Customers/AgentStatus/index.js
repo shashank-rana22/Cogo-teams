@@ -16,7 +16,7 @@ function AgentStatus({
 	const [openInactiveModal, setOpenInactiveModal] = useState(false);
 
 	const {
-		loading: statusLoading,
+		loading: statusLoading = false,
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({
 		fetchworkPrefernce,
@@ -25,6 +25,7 @@ function AgentStatus({
 	});
 
 	const isAgentActive = status === 'active';
+
 	const onChangeToggle = () => {
 		if (isAgentActive) {
 			setOpenInactiveModal(true);
