@@ -10,7 +10,7 @@ interface CancelModal {
 	itemData?: Item;
 	showCancellationModal?: boolean;
 	setShowCancellationModal?: Function;
-	IRNLabel?: string;
+	irnLabel?: string;
 	refetch?: Function;
 }
 
@@ -18,7 +18,7 @@ function CancellationModal({
 	itemData,
 	showCancellationModal,
 	setShowCancellationModal,
-	IRNLabel,
+	irnLabel,
 	refetch,
 }: CancelModal) {
 	const { entityCode } = itemData || {};
@@ -46,7 +46,7 @@ function CancellationModal({
 					itemData={itemData}
 					showCancellationModal={showCancellationModal}
 					setShowCancellationModal={setShowCancellationModal}
-					IRNLabel={IRNLabel}
+					irnLabel={irnLabel}
 					refetch={refetch}
 					entityCode={entityCode}
 				/>
