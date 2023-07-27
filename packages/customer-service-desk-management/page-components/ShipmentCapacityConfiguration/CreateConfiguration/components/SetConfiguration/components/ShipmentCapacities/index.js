@@ -127,6 +127,14 @@ function ShipmentCapacities(props) {
 					<div className={styles.trigger}>
 						<Select
 							name={`${service.value}trigger`}
+							options={[
+								{
+									label : 'Mark shipment as complete',
+									value : 'trigger',
+								},
+							]}
+							value="trigger"
+							disabled
 						/>
 					</div>
 

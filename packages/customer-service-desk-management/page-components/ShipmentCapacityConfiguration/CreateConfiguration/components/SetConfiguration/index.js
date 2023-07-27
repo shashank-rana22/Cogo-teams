@@ -169,7 +169,7 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 
 						))}
 
-						{fields.length >= MAX_SLAB_LENGTH ? <div>Cannot Add More Slabs</div> : (
+						{!showForm && (fields.length >= MAX_SLAB_LENGTH ? <div>Cannot Add More Slabs</div> : (
 							<div
 								role="presentation"
 								className={styles.add_item_container}
@@ -178,7 +178,7 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 								<IcMPlusInCircle height={16} width={16} className={styles.add_icon} />
 								<div>Add Another Slab</div>
 							</div>
-						)}
+						))}
 
 						<Button
 							size="md"

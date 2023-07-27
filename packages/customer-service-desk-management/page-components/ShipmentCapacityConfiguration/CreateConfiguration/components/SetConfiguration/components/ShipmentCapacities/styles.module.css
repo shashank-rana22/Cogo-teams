@@ -26,6 +26,7 @@
 
 .label, .trigger{
     flex-basis: 16%;
+    max-width: 16%;
     font-weight: 600;
     color: #4f4f4f;
 }
