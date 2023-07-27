@@ -18,11 +18,7 @@ const OFFSET = 1;
 const MAX_SLAB_INDEX = 3;
 const MAX_SLAB_LENGTH = 4;
 
-const CUSTOM_DEFAULT_SLAB = [{ slab_unit: 'month', slab_lower_limit: '0', slab_upper_limit: '' }];
-
-const getSlabs = ({ experience = 'default', isEditMode = false, data = {} }) => {
-	if (experience === 'default') return DEFAULT_SLABS;
-
+const getSlabs = ({ isEditMode = false, data = {} }) => {
 	if (isEditMode || !isEmpty(data.agent_experience_slabs)) {
 		return data.agent_experience_slabs?.map((item, index) => {
 			const { slab_unit, slab_lower_limit, slab_upper_limit } = item;
@@ -34,17 +30,17 @@ const getSlabs = ({ experience = 'default', isEditMode = false, data = {} }) => 
 			};
 		});
 	}
-	return CUSTOM_DEFAULT_SLAB;
+	return DEFAULT_SLABS;
 };
 
 function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = false, fetchList = () => {} }) {
 	const router = useRouter();
 
-	const { mode = '', id:configId } = router.query;
+	const { mode = '', id:configId, stage } = router.query;
 
 	const isEditMode = mode === 'edit';
 
-	const [showForm, setShowForm] = useState(isEditMode);
+	const [showForm, setShowForm] = useState(isEditMode || stage);
 
 	const agentExpSlabs = data?.agent_experience_slabs || [];
 
@@ -104,6 +100,10 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 	useEffect(() => {
 		setValue('agent_experience_slabs', getSlabs({ experience, isEditMode, data }));
 	}, [data, experience, isEditMode, setValue]);
+
+	useEffect(() => {
+		if (stage) fetchList();
+	}, [fetchList, stage]);
 
 	return (
 		<>
@@ -202,7 +202,6 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 					setActiveItem={setActiveItem}
 					data={data}
 					routeLoading={routeLoading}
-					trigger={trigger}
 				/>
 			)}
 

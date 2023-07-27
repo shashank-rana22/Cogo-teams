@@ -1,5 +1,6 @@
 import { Button, Accordion } from '@cogoport/components';
 import { useForm, RadioGroupController } from '@cogoport/forms';
+import { useRouter } from '@cogoport/next';
 import React, { useEffect } from 'react';
 
 import getElementController from '../../../../../configurations/getElementController';
@@ -26,7 +27,12 @@ function SelectUsers({
 	loading = false,
 	data = {},
 	routeLoading = false,
+	fetchList = () => {},
 }) {
+	const router = useRouter();
+
+	const { id } = router.query;
+
 	const { control, formState:{ errors }, handleSubmit, watch, setValue = () => {} } = useForm();
 	const {
 		cogo_entity_id, config_type,
@@ -50,6 +56,10 @@ function SelectUsers({
 		setValue('agent_id', agent_id);
 		setValue('booking_source', booking_source);
 	}, [agent_id, booking_source, cogo_entity_id, config_type, organization_ids, organization_type, segment, setValue]);
+
+	useEffect(() => {
+		if (id) fetchList();
+	}, [fetchList, id]);
 
 	return (
 		<div className={styles.container}>

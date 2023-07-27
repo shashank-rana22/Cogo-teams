@@ -40,7 +40,7 @@ const getOrganizations = (organizations = []) => (
 			>
 				<Pill
 					className={styles.org_pill}
-					size="md"
+					size="sm"
 					color="#F3FAFA"
 				>
 					{organizations[GLOBAL_CONSTANTS.zeroth_index].business_name}
@@ -54,7 +54,7 @@ const getOrganizations = (organizations = []) => (
 				content={(organizations.map((org, index) => ((index >= 1) ? (
 					<Pill
 						key={org.id}
-						size="md"
+						size="sm"
 						color="#F3FAFA"
 					>
 						{org.business_name}
@@ -65,7 +65,7 @@ const getOrganizations = (organizations = []) => (
 			>
 				<Pill
 					className={styles.org_pill}
-					size="md"
+					size="sm"
 					color="#F3FAFA"
 				>
 					+
@@ -85,7 +85,7 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 
 	const {
 		cogo_entity, organization = [], organization_type, id, booking_source = '',
-		segment, status = 'draft', activated_at, config_type, shipment_capacities,
+		segment, status = 'draft', activated_at, config_type, shipment_capacities = [], user = {},
 	} = data;
 
 	const [BookingSource] = (booking_source || '').split('_');
@@ -94,6 +94,9 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 
 	const handleEditClick = () => router.push(`/customer-service-desk-management/create-config?
 												id=${id}&mode=edit`);
+
+	const handleEditCapacity = () => router.push(`/customer-service-desk-management/edit-capacity?
+												id=${id}`);
 
 	return (
 		<div style={{ marginBottom: '20px' }}>
@@ -111,6 +114,10 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 					<div className={styles.item}>
 						<p className={styles.title}>Organization Sub-Type</p>
 						<p className={styles.content}>{startCase(segment) || '-'}</p>
+					</div>
+					<div className={styles.item}>
+						<p className={styles.title}>Agent Name</p>
+						<p className={styles.content}>{user?.name || '-'}</p>
 					</div>
 					<div className={styles.item}>
 						<p className={styles.title}>Organizations</p>
@@ -146,7 +153,7 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 									<>
 										<Button
 											themeType="primary"
-											className={styles.btn}
+											className={styles.button}
 											onClick={handleEditClick}
 										>
 											<IcMEdit className={styles.icon} />
@@ -156,7 +163,7 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 										{!isEmpty(shipment_capacities) && (
 											<Button
 												themeType="secondary"
-												className={styles.btn}
+												className={styles.button}
 												type="button"
 												onClick={() => setShowModal(true)}
 											>
@@ -168,14 +175,24 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 								)}
 
 								{status === 'active' && (
-									<Button
-										themeType="secondary"
-										className={styles.btn}
-										type="button"
-										onClick={() => setShowModal(true)}
-									>
-										Deactivate
-									</Button>
+									<>
+
+										<Button
+											themeType="primary"
+											className={styles.btn}
+											onClick={handleEditCapacity}
+										>
+											Edit Capacity
+										</Button>
+										<Button
+											themeType="secondary"
+											className={styles.btn}
+											type="button"
+											onClick={() => setShowModal(true)}
+										>
+											Deactivate
+										</Button>
+									</>
 								)}
 
 							</div>
@@ -200,24 +217,26 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 				</div>
 			)}
 
-			<div
-				className={styles.accordion_container}
-				onClick={() => setShowDetails((prev) => !prev)}
-				role="presentation"
-			>
-				<div>
-					View
-					{' '}
-					{showDetails ? 'Less' : 'Service wise Capacity Details'}
+			{!isEmpty(shipment_capacities) && (
+				<div
+					className={styles.accordion_container}
+					onClick={() => setShowDetails((prev) => !prev)}
+					role="presentation"
+				>
+					<div>
+						View
+						{' '}
+						{showDetails ? 'Less' : 'Service wise Capacity Details'}
+					</div>
+					<IcMArrowDown
+						style={{
+							marginLeft : '6px',
+							transform  : showDetails ? 'rotate(180deg)' : 'none',
+							transition : 'transform 0.2s ease',
+						}}
+					/>
 				</div>
-				<IcMArrowDown
-					style={{
-						marginLeft : '6px',
-						transform  : showDetails ? 'rotate(180deg)' : 'none',
-						transition : 'transform 0.2s ease',
-					}}
-				/>
-			</div>
+			)}
 
 			{showModal && <DeactivateModal showModal={showModal} setShowModal={setShowModal} id={id} status={status} />}
 

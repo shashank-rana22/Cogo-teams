@@ -2,9 +2,10 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
-const apiMapping = ({ mode = '' }) => {
-	if (mode === 'edit') {
+const apiMapping = ({ isEditMode = false, id }) => {
+	if (isEditMode || !isEmpty(id)) {
 		return {
 			url     : 'update_csd_config',
 			authkey : 'post_allocation_update_csd_config',
@@ -23,7 +24,7 @@ const useCreateCsdConfig = ({ setActiveItem = () => {} }) => {
 
 	const isEditMode = mode === 'edit';
 
-	const { url = '', authkey = '' } = apiMapping({ mode });
+	const { url = '', authkey = '' } = apiMapping({ isEditMode, id });
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url,
@@ -36,13 +37,7 @@ const useCreateCsdConfig = ({ setActiveItem = () => {} }) => {
 			const res = await trigger({
 				data: {
 					id,
-					cogo_entity_id    : values.cogo_entity_id,
-					booking_source    : values.booking_source,
-					agent_id          : values.agent_id,
-					config_type       : values.config_type,
-					segment           : values.segment,
-					organization_ids  : values.organization_ids,
-					organization_type : values.organization_type,
+					...values,
 				},
 			});
 
@@ -52,7 +47,7 @@ const useCreateCsdConfig = ({ setActiveItem = () => {} }) => {
 
 			setActiveItem('set_configuration');
 
-			Toast.success(`${isEditMode ? 'Updated' : 'Created'} Created Successfully!`);
+			Toast.success(`${(isEditMode || !isEmpty(id)) ? 'Updated' : 'Created'} Successfully!`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

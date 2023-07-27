@@ -1,8 +1,6 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
-import getExperienceSlabs from './getExperienceSlabs';
-
-const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '', isEditMode = false }) => {
+const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '', isEditMode = false, stage }) => {
 	const shipmentCapacities = Object.keys(values)?.reduce((acc, curr) => {
 		const [index, service_type, service_duration_type] = curr.split('-');
 
@@ -28,7 +26,7 @@ const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '', isE
 
 	const payload = {
 		shipments_capacity_details: shipmentCapacities,
-		...(isEditMode ? {
+		...((isEditMode || !isEmpty(stage)) ? {
 			id: configId,
 		} : { config_id: configId }),
 	};

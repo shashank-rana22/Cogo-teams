@@ -93,7 +93,7 @@ const getControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
 			},
 			{
 				value : 'app_platform',
-				label : 'APP',
+				label : 'APP/CP',
 			},
 		],
 	},

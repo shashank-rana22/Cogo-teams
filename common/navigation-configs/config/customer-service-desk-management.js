@@ -7,6 +7,10 @@ const customerServiceDeskManagement = {
 		navigation : 'customer_service_desk_management',
 		isMainNav  : false,
 	},
+	'/[partner_id]/customer-service-desk-management/edit-capacity': {
+		navigation : 'customer_service_desk_management',
+		isMainNav  : false,
+	},
 	// '/[partner_id]/new-employee-dashboard/add': {
 	// 	navigation: 'new_employee_dashboard',
 	// },

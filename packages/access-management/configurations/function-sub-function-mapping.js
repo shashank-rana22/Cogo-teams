@@ -23,7 +23,7 @@ const functionSubFunctionMapping = {
 		{ label: 'Post Shipment', value: 'post_shipment' },
 		{ label: 'FinOps', value: 'finops' },
 		{ label: 'Enterprise Customer Operations', value: 'enterprise_customer_operations' },
-		{ label: 'SME - Customer Operations', value: 'sme_customer_operations' },
+		{ label: 'Mid Size - Customer Operations', value: 'mid_size_customer_operations' },
 		{ label: 'CP - Customer Operations', value: 'cp_customer_operations' },
 		{ label: 'ES - Customer Operations', value: 'es_customer_operations' },
 	],

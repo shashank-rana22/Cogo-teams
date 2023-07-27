@@ -13,10 +13,6 @@ const orgSubTypeOptions = {
 			label : 'Enterprise',
 		},
 		{
-			value : 'sme',
-			label : 'SME',
-		},
-		{
 			value : 'not_defined',
 			label : 'Unknown',
 		},

@@ -108,9 +108,16 @@
     margin-right: 4px;
 }
 
-.btn {
+.button, .btn {
     margin-bottom: 4px;
-    width: 110px;
+}
+
+.button {
+    width: 90px;
+}
+
+.btn {
+    width: 120px;
 }
 
 .orgs {
