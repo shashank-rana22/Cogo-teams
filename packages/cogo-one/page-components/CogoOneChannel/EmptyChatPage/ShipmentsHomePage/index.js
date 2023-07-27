@@ -19,7 +19,7 @@ function ShipmentsHomePage() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_title}>
-				All Shipments
+				Bookings
 			</div>
 
 			<div className={styles.shipments_cards_container}>
