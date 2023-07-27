@@ -13,6 +13,7 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
+import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
@@ -73,6 +74,8 @@ function CogoOne() {
 		fetchWorkStatus = () => {},
 		agentWorkStatus = {},
 	} = useGetAgentPreference();
+
+	const { data = {}, agentTimeline = () => {}, dateLoading = false } = useGetAgentTimeline();
 
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
@@ -135,6 +138,7 @@ function CogoOne() {
 						setOpenKamContacts={setOpenKamContacts}
 						agentStatus={agentWorkStatus}
 						fetchworkPrefernce={fetchWorkStatus}
+						agentTimeline={agentTimeline}
 					/>
 				</div>
 
@@ -207,6 +211,9 @@ function CogoOne() {
 				<PunchInOut
 					fetchworkPrefernce={fetchWorkStatus}
 					agentStatus={agentWorkStatus}
+					data={data}
+					dateLoading={dateLoading}
+					agentTimeline={agentTimeline}
 				/>
 			)}
 		</>

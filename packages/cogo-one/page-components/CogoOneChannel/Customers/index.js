@@ -34,6 +34,7 @@ function Customers({
 	setOpenKamContacts = () => {},
 	agentStatus = {},
 	fetchworkPrefernce = () => {},
+	agentTimeline = () => {},
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
 
@@ -91,6 +92,7 @@ function Customers({
 						<AgentStatus
 							agentStatus={agentStatus}
 							fetchworkPrefernce={fetchworkPrefernce}
+							agentTimeline={agentTimeline}
 						/>
 					</div>
 				)}
