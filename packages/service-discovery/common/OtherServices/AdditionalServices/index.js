@@ -18,6 +18,8 @@ const INCOTERM_MAPPING = {
 	import : 'exw',
 };
 
+const TRANSPORTATION_SERVICES = ['ftl_freight', 'ltl_freight', 'trailer_freight'];
+
 const singleLocationServices = ['fcl_freight_local'];
 
 function AdditionalServices({ // used in search results and checkout
@@ -31,6 +33,8 @@ function AdditionalServices({ // used in search results and checkout
 	const { service_details = {}, service_type = '', trade_type = '', checkout_id = '' } = detail;
 
 	const finalServiceDetails = getCombinedServiceDetails(service_details, service_rates);
+
+	console.log('finalServiceDetails', finalServiceDetails);
 
 	const [incoterm, setIncoterm] = useState(INCOTERM_MAPPING[trade_type]);
 
@@ -153,10 +157,17 @@ function AdditionalServices({ // used in search results and checkout
 				: serviceData[service.name],
 			isSelected,
 			rateData: Object.values(finalServiceDetails).filter(
-				(serviceItem) => getServiceName(serviceItem) === service.name,
+				(serviceItem) => {
+					if (TRANSPORTATION_SERVICES.includes(serviceItem.service_type)) {
+						return service.name === `${serviceItem.trade_type}_transportation`;
+					}
+					return getServiceName(serviceItem) === service.name;
+				},
 			),
 		});
 	});
+
+	console.log('allServices', allServices);
 
 	const filteredAllServices = allServices.filter((service_item) => service_item.inco_terms.includes(incoterm));
 

@@ -17,8 +17,9 @@ function Schedules({
 	setSelectedWeek = () => {},
 	setFilters = () => {},
 	setComparisonRates = () => {},
+	loading = false,
 }) {
-	const { schedules = [], loading } = useGetWeeklySchedules({
+	const { schedules = [], loading: weeklySchedulesLoading } = useGetWeeklySchedules({
 		filters,
 		setSelectedWeek,
 	});
@@ -27,7 +28,7 @@ function Schedules({
 		<div className={styles.container}>
 			<span className={styles.heading}>Available Schedules for your search</span>
 
-			{loading && isEmpty(schedules) ? (
+			{weeklySchedulesLoading && isEmpty(schedules) ? (
 				<div className={styles.loading}>
 					{[...Array(LOADING_ARRAY_LENGTH)].map((_) => (
 						<Placeholder
@@ -59,6 +60,7 @@ function Schedules({
 							paginationProps={paginationProps}
 							setFilters={setFilters}
 							selectedWeek={selectedWeek}
+							loading={loading}
 						/>
 					</div>
 				</div>

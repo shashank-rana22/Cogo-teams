@@ -134,6 +134,7 @@ function ListRateCards({
 				setComparisonRates={setComparisonRates}
 				setSelectedWeek={setSelectedWeek}
 				selectedWeek={selectedWeek}
+				loading={loading}
 			/>
 
 			{loading ? <LoaderComponent /> : null}
@@ -155,7 +156,7 @@ function ListRateCards({
 				/>
 			))}
 
-			{rates.length > MAXIMUM_RATE_CARDS ? (
+			{rates.length > MAXIMUM_RATE_CARDS && !loading ? (
 				<div className={styles.pagination}>
 					<Pagination
 						type="table"
