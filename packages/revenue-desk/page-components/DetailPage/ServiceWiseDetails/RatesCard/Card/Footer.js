@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Pill, Popover, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';

@@ -517,8 +517,13 @@ export default {
 			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
 		},
 
+		identification_number: {
+			label   : 'VAT',
+			pattern : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		},
+
 		pan_number: {
-			label   : 'tax',
+			label   : 'PAN',
 			pattern : undefined,
 		},
 

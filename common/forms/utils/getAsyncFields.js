@@ -747,17 +747,6 @@ function asyncListOrganizationStakeholders() {
 	};
 }
 
-function asyncListExpenseCategories() {
-	return {
-		labelKey     : 'categoryName',
-		valueKey     : 'id',
-		endpoint     : 'purchase/expense/expense-category',
-		microService : 'business_finance',
-		initialCall  : true,
-		searchByq    : true,
-		params       : { pageSize: 10000 },
-	};
-}
 function asyncListShipmentPendingTasks() {
 	return {
 		labelKey    : 'document_type',
@@ -806,6 +795,18 @@ function asyncListAllManagers() {
 			},
 			page_limit: 20,
 		},
+	};
+}
+
+function asyncListExpenseCategories() {
+	return {
+		labelKey     : 'categoryName',
+		valueKey     : 'id',
+		endpoint     : 'purchase/expense/expense-category',
+		microService : 'business_finance',
+		initialCall  : true,
+		searchByq    : true,
+		params       : { pageSize: 10000 },
 	};
 }
 

@@ -46,8 +46,8 @@ const configs = () => {
 				func  : 'renderName',
 			},
 			{
-				label : geo.others.pan_number.label.toUpperCase(),
-				key   : geo.others.pan_number.label,
+				label : geo.others.identification_number.label,
+				key   : 'pan',
 				span  : 1,
 
 			},

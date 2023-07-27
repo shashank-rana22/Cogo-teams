@@ -87,7 +87,6 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 
 	useEffect(() => {
 		if (branchId) {
-			// eslint-disable-next-line max-len
 			const branchData = officeLocations?.filter(
 				(location: any) => JSON.parse(location?.value)?.branchId === branchId,
 			);

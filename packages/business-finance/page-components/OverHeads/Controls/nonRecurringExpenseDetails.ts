@@ -134,12 +134,12 @@ export const nonRecurringExpenseDetails = ({
 			groupBy : [
 				{
 					name        : 'registrationNumber',
-					label       : `${geo.others.pan_number.label.toUpperCase()}`,
-					type        : 'input',
+					label       : `${geo.others.identification_number.label}`,
+					type        : 'textarea',
 					value       : formData?.registrationNumber || null,
 					prefix      : null,
 					className   : styles.pan,
-					placeholder : `Autofilled ${geo.others.pan_number.label}`,
+					placeholder : `Autofilled ${geo.others.identification_number.label}`,
 					span        : 2.2,
 				},
 				{

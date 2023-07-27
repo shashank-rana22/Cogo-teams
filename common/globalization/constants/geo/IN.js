@@ -640,13 +640,18 @@ export default {
 			max_length : 15,
 		},
 
+		identification_number: {
+			label   : 'PAN Number',
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
+		},
+
 		banking_code: {
 			financial_system_code : 'ifsc',
 			pattern               : /^[A-Za-z]{4}\d{7}$/,
 		},
 
 		pan_number: {
-			label   : 'pan',
+			label   : 'PAN',
 			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
 		},
 
