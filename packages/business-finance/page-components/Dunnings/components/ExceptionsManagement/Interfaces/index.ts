@@ -20,6 +20,7 @@ export interface ExceptionListProps {
 	showCycleExceptions?: boolean;
 	setShowCycleExceptions?: React.Dispatch<React.SetStateAction<boolean>>;
 	getMasterList?: Function;
+	entityId?: string;
 }
 
 export interface FilterProps {
