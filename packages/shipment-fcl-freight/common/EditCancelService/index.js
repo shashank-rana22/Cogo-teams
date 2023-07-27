@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -12,23 +12,16 @@ import styles from './styles.module.css';
 import getCanCancelService from './utils/getCanCancelService';
 import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
+import { getSideEffectsServices } from './utils/getSideEffectsServices';
 
 function EditCancelService({ serviceData = {} }) {
+	const user_data = useSelector((({ profile }) => profile?.user));
+	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
+
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
 	const { state, trade_type, service_type } = serviceData || {};
-
-	const user_data = useSelector((({ profile }) => profile?.user));
-
-	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
-
-	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
-
-	const openModal = (modalKey) => {
-		setShowModal(modalKey);
-		setShowPopover(false);
-	};
 
 	const actionButtons = [
 		{
@@ -48,18 +41,24 @@ function EditCancelService({ serviceData = {} }) {
 		},
 	];
 
+	const servicesData = getSideEffectsServices({ servicesList, service_type, trade_type });
+
+	const openModal = (modalKey) => {
+		setShowModal(modalKey);
+		setShowPopover(false);
+	};
+
 	if (!actionButtons.some((actionButton) => actionButton.show)) { return null; }
 
 	const content = actionButtons.map(({ label, value, show }) => (show ? (
-		<div
+		<Button
 			key={value}
-			role="button"
-			tabIndex={0}
+			themeType="link"
 			className={styles.action_button}
 			onClick={() => openModal(value)}
 		>
 			{label}
-		</div>
+		</Button>
 	) : null));
 
 	return (

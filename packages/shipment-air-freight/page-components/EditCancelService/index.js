@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -12,51 +12,53 @@ import styles from './styles.module.css';
 import getCanCancelService from './utils/getCanCancelService';
 import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
-
-const ACTION_BUTTONS = [
-	{ label: 'Edit', value: 'supplier_reallocation' },
-	{ label: 'Edit Params', value: 'edit_params' },
-	{ label: 'Cancel', value: 'cancel' },
-];
-
-const ZEROTH_INDEX = 0;
-const FIRST_INDEX = 1;
-const SECOND_INDEX = 2;
+import { getSideEffectsServices } from './utils/getSideEffectsServices';
 
 function EditCancelService({ serviceData = {} }) {
+	const user_data = useSelector((({ profile }) => profile?.user));
+	const { shipment_data, servicesList, stakeholderConfig } = useContext(ShipmentDetailContext);
+
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
 	const { state, trade_type, service_type } = serviceData || {};
 
-	const user_data = useSelector((({ profile }) => profile?.user));
-	const { shipment_data, servicesList, stakeholderConfig } = useContext(ShipmentDetailContext);
+	const actionButtons = [
+		{
+			label : 'Edit',
+			value : 'supplier_reallocation',
+			show  : getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig }),
+		},
+		{
+			label : 'Edit Params',
+			value : 'edit_params',
+			show  : getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig }),
+		},
+		{
+			label : 'Cancel',
+			value : 'cancel',
+			show  : getCanCancelService({ state, stakeholderConfig }),
+		},
+	];
 
-	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
+	const servicesData = getSideEffectsServices({ servicesList, service_type, trade_type });
 
 	const openModal = (modalKey) => {
 		setShowModal(modalKey);
 		setShowPopover(false);
 	};
 
-	ACTION_BUTTONS[ZEROTH_INDEX].show = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
-	ACTION_BUTTONS[FIRST_INDEX].show = getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig });
-	ACTION_BUTTONS[SECOND_INDEX].show = getCanCancelService({ state, stakeholderConfig });
+	if (!actionButtons.some((actionButton) => actionButton.show)) { return null; }
 
-	if (!ACTION_BUTTONS.some((actionButton) => actionButton.show)) {
-		return null;
-	}
-
-	const content = ACTION_BUTTONS.map(({ label, value, show }) => (show ? (
-		<div
+	const content = actionButtons.map(({ label, value, show }) => (show ? (
+		<Button
 			key={value}
-			role="button"
-			tabIndex={0}
+			themeType="link"
 			className={styles.action_button}
 			onClick={() => openModal(value)}
 		>
 			{label}
-		</div>
+		</Button>
 	) : null));
 
 	return (
