@@ -14,6 +14,12 @@ const CONSTANT_POINT_TWO = 0.2;
 const TICK_SIZE = 5;
 
 function Accuracy({ data = [] }) {
+	const ColorMappings = {
+		predicted         : ['#F9AE64'],
+		supply_rates      : ['#63BEC8'],
+		rate_extension    : ['#9BA0CB'],
+		cluster_extension : ['#f37166'],
+	};
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Accuracy with Time</h3>
@@ -58,7 +64,7 @@ function Accuracy({ data = [] }) {
 					gridYValues={[GLOBAL_CONSTANTS.zeroth_index]}
 					gridXValues={[GLOBAL_CONSTANTS.zeroth_index]}
 					theme={CUSTOM_THEME}
-					colors={['#58D3FE', '#9BA0CB', '#F9AE64', '#63BEC8']}
+					colors={data.map(({ id }) => ColorMappings[id])}
 					pointSize={6}
 					pointColor={{ from: 'color', modifiers: [['brighter', CONSTANT_POINT_TWO]] }}
 					pointBorderWidth={2}
