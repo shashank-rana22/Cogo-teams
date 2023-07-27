@@ -1,32 +1,32 @@
 .heading {
-    font-weight: 700;
+	font-weight: 700;
 }
 
 .content {
-    font-weight: 400;
-    font-size: 12px;
-    margin: 10px 0px;
+	margin: 10px 0;
+	font-size: 12px;
+	font-weight: 400;
 }
 
 .footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
 }
 
 .button_container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .count {
-    font-weight: 600;
-    margin-left: 6px;
+	margin-left: 6px;
+	font-weight: 600;
 }
 
 .flex {
-    display: flex;
-    font-size: 12px;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	font-size: 12px;
 }

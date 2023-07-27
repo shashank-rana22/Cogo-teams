@@ -7,10 +7,10 @@
 }
 
 .service_name {
-	flex-basis: 36%;
-	font-weight: 600;
 	display: flex;
+	flex-basis: 36%;
 	align-items: center;
+	font-weight: 600;
 }
 
 .currency {

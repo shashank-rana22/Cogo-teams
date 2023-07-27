@@ -1,8 +1,8 @@
 .wrapper {
-	background: #ffffff;
 	box-sizing: border-box;
-	margin-top: 32px;
 	width: 100%;
+	margin-top: 32px;
+	background: #fff;
 }
 
 .header_text {
@@ -15,7 +15,7 @@
 	max-width: 500px;
 
 	&.uploaded {
-		border-radius: 4px;
 		padding: 6px;
+		border-radius: 4px;
 	}
 }
