@@ -120,7 +120,7 @@ function CogoOne() {
 	const { hasNoFireBaseRoom = false } = activeTab || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
-	const orgId = activeTab === 'message'
+	const orgId = activeTab?.tab === 'message'
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
 
