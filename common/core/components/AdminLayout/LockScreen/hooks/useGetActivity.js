@@ -68,7 +68,12 @@ function useGetActivity({
 			mountActivityTracker({ FUNC_MAPPING });
 
 			activityTrackerSnapShotRef.current = onSnapshot(roomDoc, (roomDocData) => {
-				const { last_activity_timestamp = Date.now() } = roomDocData?.data() || {};
+				const { last_activity_timestamp = Date.now(), last_activity = '' } = roomDocData?.data() || {};
+
+				if (last_activity === 'locked_screen') {
+					setShowModal(true);
+					return;
+				}
 
 				const differenceFromLastActivity = Date.now() - last_activity_timestamp;
 
