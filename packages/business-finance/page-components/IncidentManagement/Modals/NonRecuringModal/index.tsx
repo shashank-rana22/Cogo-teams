@@ -8,6 +8,7 @@ import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 import StakeHolderTimeline from '../../StakeHolderTimeline';
 import StyledTable from '../../StyledTable';
+import stakeHolderTimeLineData from '../../utils/formatStakeHolderData';
 import mappingNonRecurring from '../../utils/mappingNonRecurring';
 import { toTitleCase } from '../../utils/titleCase';
 
@@ -37,79 +38,6 @@ function NonRecuringModal({
 		documents,
 		expenseType,
 	} = overheadConfirmationRequest || {};
-
-	const { stakeholder: stakeholder3, status: status3 } = level3 || {};
-	const { stakeholder: stakeholder2, status: status2 } = level2 || {};
-	const { stakeholder: stakeholder1, status: status1 } = level1 || {};
-
-	const stakeHolderTimeLine = () => {
-		if (!isEmpty(level3)) {
-			return [
-				{
-					...(stakeholder1
-						? {
-							email   : stakeholder1?.userEmail,
-							name    : stakeholder1?.userName,
-							remarks : level1?.remarks,
-							status  : status1,
-						}
-						: {}),
-				},
-				{
-					...(stakeholder2
-						? {
-							email   : stakeholder2?.userEmail,
-							name    : stakeholder2?.userName,
-							remarks : level2?.remarks,
-							status  : status2,
-						}
-						: {}),
-				},
-				{
-					...(stakeholder3
-						? {
-							email   : stakeholder3?.userEmail,
-							name    : stakeholder3?.userName,
-							remarks : level3?.remarks,
-							status  : status3,
-						}
-						: {}),
-				},
-			];
-		}
-		if (!isEmpty(level2)) {
-			return [
-				{
-					...(stakeholder1
-						? {
-							email   : stakeholder1?.userEmail,
-							name    : stakeholder1?.userName,
-							remarks : level1?.remarks,
-							status  : status1,
-						}
-						: {}),
-				},
-				{
-					...(stakeholder2
-						? {
-							email   : stakeholder2?.userEmail,
-							name    : stakeholder2?.userName,
-							remarks : level2?.remarks,
-							status  : status2,
-						}
-						: {}),
-				},
-			];
-		}
-		return [
-			{
-				email   : stakeholder1?.userEmail,
-				name    : stakeholder1?.userName,
-				remarks : level1?.remarks,
-				status  : status1,
-			},
-		];
-	};
 
 	const { useOnAction: onAction, loading } = usePostExpense({
 		refetch,
@@ -225,7 +153,7 @@ function NonRecuringModal({
 							/>
 						</>
 					)}
-					<StakeHolderTimeline timeline={stakeHolderTimeLine()} />
+					<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
 				</Modal.Body>
 				{isEditable && (
 					<Modal.Footer>
