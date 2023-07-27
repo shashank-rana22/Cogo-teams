@@ -39,7 +39,7 @@ function ShipmentCard({
 
 				<div className={styles.service_provider_details}>
 					<Avatar
-						size={50}
+						size={40}
 						personName={shipping_line?.business_name}
 					/>
 					<div className={styles.service_provider_name}>

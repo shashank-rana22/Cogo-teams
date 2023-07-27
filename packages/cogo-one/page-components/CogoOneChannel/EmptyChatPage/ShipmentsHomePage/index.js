@@ -26,7 +26,7 @@ function ShipmentsHomePage() {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.header_title}>
-					All Shipments
+					Bookings
 				</div>
 				<div>
 					<Pagination
