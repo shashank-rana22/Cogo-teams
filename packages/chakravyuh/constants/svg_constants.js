@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 const PATH_STYLE = {
-	stroke           : '#e3aa0b',
+	stroke           : '#7EAEB4',
 	strokeOpacity    : '1',
 	strokeWidth      : '4',
 	strokeDasharray  : 'none',

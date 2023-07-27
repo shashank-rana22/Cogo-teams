@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-// import { DUMMY_DATA } from '../../../constants/drilldown_config';
 import useGetDrillDownStats from '../../../hooks/useGetDrillDownStats';
 import { formatBigNumbers } from '../../../utils/formatBigNumbers';
 import SupplyRates from '../RatesList';
@@ -25,7 +24,10 @@ function DrillDown({ globalFilters = {} }) {
 		setActiveParent(val);
 	};
 
-	const { drillDownCards, totalSearches } = useGetDrillDownStats();
+	const { drillDownCards = [], totalSearches } = useGetDrillDownStats({
+		globalFilters,
+		flag: !activeParent,
+	});
 
 	return (
 		<div className={styles.container}>
@@ -61,7 +63,7 @@ function DrillDown({ globalFilters = {} }) {
 					</Button>
 				)}
 
-				{drillDownCards?.map((row, rowIdx) => {
+				{drillDownCards.map((row, rowIdx) => {
 					const isActive = activeParent === row[GLOBAL_CONSTANTS.zeroth_index].action_type;
 
 					return (!activeParent || isActive) && (

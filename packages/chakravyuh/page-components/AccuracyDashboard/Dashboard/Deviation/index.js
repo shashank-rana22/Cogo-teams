@@ -119,7 +119,6 @@ function Deviation({ data = [], loading = false }) {
 					]}
 					borderColor={{
 						from: 'colors',
-
 					}}
 					tooltip={CustomTooltip}
 				/>
@@ -131,7 +130,7 @@ function Deviation({ data = [], loading = false }) {
 					axisLeft={null}
 					axisBottom={null}
 					endLabel={false}
-					colors={['#CFBC93']}
+					colors={['#A69676']}
 					colorBy="index"
 					enableGridX={false}
 					enableGridY={false}

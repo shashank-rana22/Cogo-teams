@@ -1,8 +1,7 @@
 import { useRequest } from '@cogoport/request';
-import { subtractDays } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-import { LOCATION_KEYS } from '../constants/map_constants';
+import getFormattedPayload from '../utils/getFormattedPayload';
 
 const useGetFclFreightDistribution = ({ filters }) => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -22,19 +21,7 @@ const useGetFclFreightDistribution = ({ filters }) => {
 	);
 
 	useEffect(() => () => {
-		const {
-			origin, destination,
-			origin_type, destination_type, is_origin_icd, date_diff, is_destination_icd, ...params
-		} = filters;
-
-		const endDate = new Date();
-		params.startDate = subtractDays(endDate, date_diff);
-
-		LOCATION_KEYS.forEach((key) => {
-			if (filters[key]) {
-				params[`${key}_${filters[`${key}_type`]}_id`] = filters[key];
-			}
-		});
+		const { params } = getFormattedPayload(filters);
 
 		getStats(params);
 	}, [filters, getStats]);
