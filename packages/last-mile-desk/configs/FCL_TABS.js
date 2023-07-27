@@ -18,6 +18,22 @@ const FCL_TABS = [
 ];
 
 export const TABWISE_FILTERS = {
+	confirmed_by_service_provider: {
+		service_state : 'confirmed_by_service_provider',
+		state         : [
+			'in_progress',
+			'confirmed_by_importer_exporter',
+			'shipment_received',
+		],
+	},
+	container_gated_in: {
+		service_state : 'containers_gated_in',
+		state         : [
+			'in_progress',
+			'confirmed_by_importer_exporter',
+			'shipment_received',
+		],
+	},
 	vessel_departed: {
 		service_state : 'vessel_departed',
 		state         : [
