@@ -100,7 +100,8 @@
     "@cogoport/ftl-admin":"workspace:1.0.0",
     "@cogoport/schedules": "workspace:^0.1.0",
     "@cogoport/airline-booking-plugin":"workspace:1.0.0",
-    "@cogoport/booking-desk-surface": "workspace:1.0.0"
+    "@cogoport/booking-desk-surface": "workspace:1.0.0",
+    "@cogoport/warehouse-management": "workspace:1.0.0"
   },
   "browserslist": [
     "defaults"

@@ -2476,6 +2476,15 @@ const navigationMappingAdmin = {
 		as            : '/v2/ftl-admin',
 		possible_apis : apis.ftl_admin,
 	},
+	warehouse_management: {
+		key           : 'warehouse_management',
+		title         : 'Warehouse Management',
+		type          : 'link',
+		module_type   : 'dashboards',
+		href          : '/v2/warehouse-management',
+		as            : '/v2/warehouse-management',
+		possible_apis : apis.warehouse_management,
+	},
 };
 
 export default navigationMappingAdmin;
