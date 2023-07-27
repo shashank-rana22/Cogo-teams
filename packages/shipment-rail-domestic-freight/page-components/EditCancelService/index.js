@@ -74,7 +74,6 @@ function EditCancelService({ serviceData = {} }) {
 				className={styles.action_button}
 				onClick={() => openModal(value)}
 				themeType="tertiary"
-				size="md"
 			>
 				{label}
 			</Button>

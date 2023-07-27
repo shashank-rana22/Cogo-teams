@@ -46,7 +46,7 @@ function EditCancelService({ serviceData = {} }) {
 	const content = actionButtons.map(({ label, value, show }) => (show ? (
 		<Button
 			key={value}
-			themeType="link"
+			themeType="tertiary"
 			className={styles.action_button}
 			onClick={() => openModal(value)}
 		>
