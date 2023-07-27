@@ -47,10 +47,10 @@ const EXPLORED_VIEW_DATA = [
 ];
 
 const ColorMappings = {
-	supply_rates      : ['#63BEC8', '#BCCFD2', '#3D747A', '#7EB2B8'],
-	predicted         : ['#F9AE64', '#FDD3AD', '#F9AE64', '#F58B33'],
-	rate_extension    : ['#9BA0CB', '#C2C6E3', '#686E9F', '#A59CBE'],
-	cluster_extension : ['#58D3FE', '#9CEBFE', '#87CEEB', '#ADD8E6'],
+	predicted         : ['#F9AE64', '#FCD7B2', '#FBC28B', '#E09D5A'],
+	supply_rates      : ['#63BEC8', '#B1DFE4', '#8ACED6', '#59ABB4'],
+	rate_extension    : ['#9BA0CB', '#CDD0E5', '#B4B8D8', '#8C90B7'],
+	cluster_extension : ['#f37166', '#F9B8B3', '#F5867D', '#CF6057'],
 };
 
 export const usePieChartConfigs = (type, data) => {
