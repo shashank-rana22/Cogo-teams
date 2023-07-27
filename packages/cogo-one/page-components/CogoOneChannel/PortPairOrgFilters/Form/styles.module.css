@@ -34,7 +34,7 @@
 .error_text {
 	display: flex;
 	justify-content: flex-start;
-	height: 10px;
+	height: 4px;
 	margin-top: 2px;
 	font-size: 10px;
 	color: #ee3425;
@@ -42,5 +42,5 @@
 }
 
 .action {
-	margin-top: 16px;
+	margin-top: 10px;
 }

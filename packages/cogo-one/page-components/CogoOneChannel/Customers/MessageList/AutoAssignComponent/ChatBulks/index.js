@@ -15,24 +15,24 @@ function ChatBulks({
 }) {
 	const bulkSendActions = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.bulk_assign_features;
 
+	const isAutoAssign = isBotSession && bulkSendActions.includes('bulk_auto_assign');
 	return (
 		<div>
-			{
-				isBotSession && bulkSendActions.includes('bulk_auto_assign') && (
-					<Button
-						size="sm"
-						themeType="secondary"
-						loading={bulkAssignLoading}
-						className={styles.popover_button}
-						onClick={() => {
-							bulkAssignChat({ selectedAutoAssign });
-						}}
-					>
-						Auto Assign
-					</Button>
-				)
-			}
-			{bulkSendActions.includes('bulk_send_templates') && (
+			{isAutoAssign ? (
+				<Button
+					size="sm"
+					themeType="secondary"
+					loading={bulkAssignLoading}
+					className={styles.popover_button}
+					onClick={() => {
+						bulkAssignChat({ selectedAutoAssign });
+					}}
+				>
+					Auto Assign
+				</Button>
+			) : null}
+
+			{bulkSendActions.includes('bulk_send_templates') ? (
 				<Button
 					size="sm"
 					themeType="secondary"
@@ -44,7 +44,7 @@ function ChatBulks({
 				>
 					Send Template
 				</Button>
-			)}
+			) : null}
 		</div>
 	);
 }

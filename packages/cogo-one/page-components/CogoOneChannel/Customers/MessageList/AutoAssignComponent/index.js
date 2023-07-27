@@ -21,7 +21,8 @@ function AutoAssignComponent({
 	setSendBulkTemplates = () => {},
 }) {
 	const [popoverVisible, setPopoverVisible] = useState(false);
-	const count = Object.keys(selectedAutoAssign || {}).length || ZERO_COUNT;
+
+	const selectedUserCount = Object.keys(selectedAutoAssign || {}).length || ZERO_COUNT;
 
 	return (
 		<div className={cl`${styles.auto_assign_container} ${!autoAssignChats ? styles.auto_assign_background : ''}`}>
@@ -50,7 +51,7 @@ function AutoAssignComponent({
 							<>
 								<div className={styles.selected_count}>
 									<span>
-										{count}
+										{selectedUserCount}
 									</span>
 									Selected
 								</div>

@@ -84,14 +84,21 @@ function OrgUsersList({
 		}
 	};
 
-	const modifiedList = loading ? [...Array(LOADER_COUNT).fill({})] : formattedOrgUsersList;
+	const userList = Object.values(
+		formattedOrgUsersList.reduce((acc, obj) => {
+			acc[obj.user_id] = obj;
+			return acc;
+		}, {}),
+	);
+
+	const finalList = loading ? [...Array(LOADER_COUNT).fill({})] : userList;
 
 	const handleSelectAll = ({ event }) => {
 		setSelectAll(event.target.checked);
 		if (event.target.checked) {
 			setSelectedUsers(() => {
 				const ALL_USER_DATA = {};
-				modifiedList.forEach((user) => {
+				finalList.forEach((user) => {
 					ALL_USER_DATA[user.user_id] = user;
 				});
 
@@ -130,7 +137,7 @@ function OrgUsersList({
 			<div className={styles.all_user_select}>
 				<Checkbox
 					checked={selectAll}
-					disabled={isEmpty(modifiedList)}
+					disabled={isEmpty(finalList)}
 					onChange={(event) => handleSelectAll({ event })}
 				/>
 				Select All
@@ -147,7 +154,7 @@ function OrgUsersList({
 							setSelectAll(false);
 							setSelectedUsers({});
 						}}
-						disabled={isEmpty(modifiedList)}
+						disabled={isEmpty(finalList)}
 						size="sm"
 						options={USER_SELECT_PAGINATION}
 						className={styles.selector}
@@ -155,9 +162,9 @@ function OrgUsersList({
 				</div>
 
 			</div>
-			<div className={cl`${styles.container} ${!modalType || isEmpty(modifiedList) ? styles.empty_list : ''}`}>
+			<div className={cl`${styles.container} ${!modalType || isEmpty(finalList) ? styles.empty_list : ''}`}>
 				<div className={styles.list_container} onScroll={handleScroll}>
-					{!isEmpty(modifiedList) ? modifiedList?.map((eachUser) => {
+					{!isEmpty(finalList) ? (finalList || []).map((eachUser) => {
 						const {
 							user_id,
 							userName,

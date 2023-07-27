@@ -13,7 +13,7 @@ const getParams = ({ organizationId, page, pageLimit }) => ({
 	page_limit : pageLimit || undefined,
 });
 
-const useListOrgUsers = ({ organizationId = [], pageLimit }) => {
+const useListOrgUsers = ({ organizationId = [], pageLimit = 10 }) => {
 	const [pagination, setPagination] = useState(FIRST_PAGE);
 	const [listData, setListData] = useState({
 		list  : [],

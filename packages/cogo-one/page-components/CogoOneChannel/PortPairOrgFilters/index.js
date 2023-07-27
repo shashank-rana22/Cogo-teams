@@ -13,6 +13,12 @@ import Form from './Form';
 import OrgUsersList from './OrgUserList';
 import styles from './styles.module.css';
 
+const getDefaultValues = ({ originDetails = {}, destinationDetails }) => ({
+	service_type        : 'fcl_freight',
+	origin_port_id      : originDetails?.id,
+	destination_port_id : destinationDetails?.id,
+});
+
 function PortPairOrgFilters({
 	setSendBulkTemplates = () => {},
 	setActiveTab = () => {},
@@ -21,6 +27,8 @@ function PortPairOrgFilters({
 	setAutoAssignChats = () => {},
 	sendBulkTemplates = false,
 }) {
+	const componentRef = useRef(null);
+
 	const [listServiceProviders, setListServiceProviders] = useState([]);
 	const [selectedUsers, setSelectedUsers] = useState({});
 	const [modalType, setModalType] = useState('');
@@ -31,7 +39,7 @@ function PortPairOrgFilters({
 	const [selectAll, setSelectAll] = useState(false);
 
 	const { originDetails = {}, destinationDetails = {} } = portDetails;
-	const divRef = useRef(null);
+
 	const {
 		control,
 		handleSubmit,
@@ -39,11 +47,7 @@ function PortPairOrgFilters({
 		watch,
 		reset,
 	} = useForm({
-		defaultValues: {
-			service_type        : 'fcl_freight',
-			origin_port_id      : originDetails?.id,
-			destination_port_id : destinationDetails?.id,
-		},
+		defaultValues: getDefaultValues({ originDetails, destinationDetails }),
 	});
 
 	const formValues = watch();
@@ -61,12 +65,7 @@ function PortPairOrgFilters({
 		getServiceProviders = () => {},
 	} = useGetAvailableServiceProviders({ setListServiceProviders });
 
-	const closeModal = () => {
-		setModalType('');
-	};
-
 	const { bulkCommunicationChat = () => {} } = useSendUsersBulkCommunication({
-		callbackfunc: closeModal,
 		setSelectedAutoAssign,
 		setSelectedUsers,
 		setModalType,
@@ -138,7 +137,7 @@ function PortPairOrgFilters({
 
 	useEffect(() => {
 		const handleOutsideClick = (event) => {
-			if (divRef.current && !divRef.current.contains(event.target)) {
+			if (componentRef.current && !componentRef.current.contains(event.target)) {
 				setSendBulkTemplates(false);
 				setSelectedAutoAssign({});
 				setAutoAssignChats(true);
@@ -157,7 +156,7 @@ function PortPairOrgFilters({
 	}, [sendBulkTemplates, setAutoAssignChats, setSelectedAutoAssign, setSendBulkTemplates]);
 
 	return (
-		<div className={styles.main_container} ref={divRef}>
+		<div className={styles.main_container} ref={componentRef}>
 			<div className={styles.header}>
 				<div className={styles.title}>
 					Send Messages
@@ -182,7 +181,7 @@ function PortPairOrgFilters({
 								size="md"
 								themeType="primary"
 								onClick={handleSubmit(onSubmit)}
-								type="button"
+								type="submit"
 							>
 								<IcMAppSearch width={20} height={20} />
 							</Button>

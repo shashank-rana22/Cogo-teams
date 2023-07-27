@@ -24,7 +24,6 @@ const getPayload = ({ selectedAutoAssign = {}, variables = {}, template_name = '
 function useSendUsersBulkCommunication({
 	setSelectedAutoAssign = () => {},
 	setAutoAssignChats = () => {},
-	callbackfunc = () => {},
 	setSendBulkTemplates = () => {},
 	setModalType = () => {},
 	setSelectedUsers = () => {},
@@ -44,7 +43,6 @@ function useSendUsersBulkCommunication({
 		} finally {
 			setSelectedAutoAssign({});
 			setAutoAssignChats(true);
-			callbackfunc();
 			setSendBulkTemplates(false);
 			setModalType('');
 			setSelectedUsers({});

@@ -1,13 +1,14 @@
-export const ORIGIN_LABEL_MAPPING = {
-	fcl_freight : 'Origin Port',
-	lcl_freight : 'Origin Port',
-	air_freight : 'Origin',
-};
-
-export const DESTINATION_LABEL_MAPPING = {
-	fcl_freight : 'Destination Port',
-	lcl_freight : 'Destination Port',
-	air_freight : 'Destination',
+export const PORT_PAIR_LABEL_MAPPING = {
+	origin: {
+		fcl_freight : 'Origin Port',
+		lcl_freight : 'Origin Port',
+		air_freight : 'Origin',
+	},
+	destination: {
+		fcl_freight : 'Destination Port',
+		lcl_freight : 'Destination Port',
+		air_freight : 'Destination',
+	},
 };
 
 export const ROUTE_MAPPING = {
@@ -46,7 +47,7 @@ const getControls = ({
 			],
 		},
 		{
-			label       : ORIGIN_LABEL_MAPPING[serviceType],
+			label       : PORT_PAIR_LABEL_MAPPING.origin[serviceType],
 			name        : 'origin_port_id',
 			placeholder : 'Select Origin Port',
 			controlType : 'asyncSelect',
@@ -64,7 +65,7 @@ const getControls = ({
 			params      : { filters: { type: [ROUTE_MAPPING[serviceType]] } },
 		},
 		{
-			label       : DESTINATION_LABEL_MAPPING[serviceType],
+			label       : PORT_PAIR_LABEL_MAPPING.destination[serviceType],
 			name        : 'destination_port_id',
 			placeholder : 'Select Destination Port',
 			controlType : 'asyncSelect',

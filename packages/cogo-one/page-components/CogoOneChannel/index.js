@@ -90,6 +90,7 @@ function CogoOne() {
 			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
 	};
+
 	const { hasNoFireBaseRoom = false } = activeTab || {};
 
 	useEffect(() => {
