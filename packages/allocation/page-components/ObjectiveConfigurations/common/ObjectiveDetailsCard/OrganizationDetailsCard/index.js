@@ -9,7 +9,7 @@ const MIN_LENGTH = 2;
 
 const CARD_DATA_MAPPING = [
 	{
-		key   : 'countries',
+		key   : 'country',
 		label : 'Country',
 	},
 	{

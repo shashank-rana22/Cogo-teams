@@ -18,12 +18,12 @@ const getListColumnMapping = (props) => {
 			key      : 'status',
 			flex     : 1,
 			Header   : <div className={styles.top_heading}>STATUS</div>,
-			accessor : ({ status }) => (status ? (
+			accessor : ({ lead_objective_status }) => (lead_objective_status ? (
 				<Pill
 					size="md"
-					color={OBJECTIVE_STATUS_COLOR_MAPPING[status]}
+					color={OBJECTIVE_STATUS_COLOR_MAPPING[lead_objective_status]}
 				>
-					{startCase(status)}
+					{startCase(lead_objective_status)}
 				</Pill>
 			) : '___'),
 		},

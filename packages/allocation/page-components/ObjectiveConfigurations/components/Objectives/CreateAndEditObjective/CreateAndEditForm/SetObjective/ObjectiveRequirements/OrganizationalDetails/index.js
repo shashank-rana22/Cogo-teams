@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function OrganizationalDetails(props) {
 	const { control, watch, setValue, disabled } = props;
 
-	const watchCountries = watch('countries');
+	const watchCountries = watch('country');
 	const watchStates = watch('states');
 	const watchCities = watch('cities');
 
@@ -25,7 +25,7 @@ function OrganizationalDetails(props) {
 			if (controlName === 'states') {
 				setValue('cities', []);
 			}
-			if (controlName === 'countries') {
+			if (controlName === 'country') {
 				setValue('states', []);
 			}
 		});

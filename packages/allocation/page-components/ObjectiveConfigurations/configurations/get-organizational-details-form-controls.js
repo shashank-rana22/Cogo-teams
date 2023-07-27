@@ -9,7 +9,7 @@ const getOrganizationalDetailsControls = (props) => {
 
 	const controls = [
 		{
-			name        : 'countries',
+			name        : 'country',
 			label       : 'Select Country',
 			placeholder : 'Country',
 			type        : 'asyncSelect',

@@ -18,7 +18,7 @@ const useSetObjectiveRequirements = (props) => {
 	} = formValues;
 
 	const {
-		countries: filledCountries,
+		country: filledCountries,
 		states: filledStates,
 		cities: filledCities,
 		pincodes: filledPincodes,
@@ -36,11 +36,11 @@ const useSetObjectiveRequirements = (props) => {
 					}
 				),
 			) : [{}],
-			countries : getAttachedIdData({ values: filledCountries }),
-			states    : getAttachedIdData({ values: filledStates }),
-			cities    : getAttachedIdData({ values: filledCities }),
-			pincodes  : getAttachedIdData({ values: filledPincodes }),
-			segments  : filledSegments,
+			country  : getAttachedIdData({ values: filledCountries }),
+			states   : getAttachedIdData({ values: filledStates }),
+			cities   : getAttachedIdData({ values: filledCities }),
+			pincodes : getAttachedIdData({ values: filledPincodes }),
+			segments : filledSegments,
 			...(stats_details || {}),
 
 		},
@@ -62,7 +62,7 @@ const useSetObjectiveRequirements = (props) => {
 			container_type       : [],
 			truck_type           : [],
 		}]);
-		setValue('countries', []);
+		setValue('country', []);
 		setValue('states', []);
 		setValue('cities', []);
 		setValue('pincodes', []);
@@ -75,7 +75,7 @@ const useSetObjectiveRequirements = (props) => {
 
 	const onSubmit = (values) => {
 		const {
-			countries,
+			country,
 			states,
 			cities,
 			pincodes,
@@ -94,7 +94,7 @@ const useSetObjectiveRequirements = (props) => {
 				organization_details: {
 					...getSeparatedIdData({
 						values: {
-							countries, states, cities, pincodes,
+							country, states, cities, pincodes,
 						},
 					}),
 					segments,
