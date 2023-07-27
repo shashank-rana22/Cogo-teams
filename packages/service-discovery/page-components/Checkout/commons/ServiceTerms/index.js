@@ -81,6 +81,7 @@ function ServiceTerms({
 
 	return (
 		<Accordion
+			animate
 			type="text"
 			title={(
 				<AccordionTitle

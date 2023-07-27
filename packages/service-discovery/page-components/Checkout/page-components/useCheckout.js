@@ -34,6 +34,7 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 		currency_conversions: conversions,
 		invoice,
 		possible_subsidiary_services = [],
+		activated_on_paylater = {},
 	} = data;
 
 	const {
@@ -122,6 +123,8 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 			setHeaderProps,
 			possible_subsidiary_services,
 			checkoutType,
+			activated_on_paylater,
+			checkout_type,
 		}),
 		[
 			primaryService,
@@ -147,6 +150,8 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 			headerProps,
 			possible_subsidiary_services,
 			checkoutType,
+			activated_on_paylater,
+			checkout_type,
 		],
 	);
 

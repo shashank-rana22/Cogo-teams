@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import AddExecutive from './components/AddExecutive';
 import ChangeExecutive from './components/ChangeExecutive';
+import styles from './styles.module.css';
 
 const MOBILE_MAX_WIDTH = 768;
 
@@ -40,6 +41,7 @@ function ChangeOpsExecutive({
 			style={{ width: !isMobile ? '500px' : 'unset' }}
 			closeOnOuterClick={false}
 			onClose={onClose}
+			className={styles.modal}
 		>
 			<Modal.Header title="CHANGE OPERATIONS EXECUTIVE" />
 

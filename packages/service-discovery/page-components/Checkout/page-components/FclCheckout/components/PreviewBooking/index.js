@@ -29,7 +29,6 @@ function PreviewBooking() {
 		cargo_value,
 	}));
 
-	const [isVeryRisky, setIsVeryRisky] = useState(false);
 	const [agreeTandC, setAgreeTandC] = useState(false);
 
 	return (
@@ -47,8 +46,6 @@ function PreviewBooking() {
 				onChange={setAdditionalRemark}
 				cargoDetails={cargoDetails}
 				setCargoDetails={setCargoDetails}
-				setIsVeryRisky={setIsVeryRisky}
-				isVeryRisky={isVeryRisky}
 				agreeTandC={agreeTandC}
 				setAgreeTandC={setAgreeTandC}
 				additionalRemark={additionalRemark}

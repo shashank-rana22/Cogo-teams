@@ -42,7 +42,7 @@ function BreakdownDetails({
 		setAddLineItemData,
 		editLineItemData,
 		setEditLineItemData,
-		applyRateDetails = () => {},
+		resetMargins = () => {},
 	} = useHandleBreakdownDetails({ rate, setRateDetails, setNoRatesPresent });
 
 	let total = 0;
@@ -60,7 +60,7 @@ function BreakdownDetails({
 						type="button"
 						themeType="secondary"
 						size="xl"
-						onClick={applyRateDetails}
+						onClick={resetMargins}
 					>
 						Reset
 					</Button>
@@ -120,6 +120,7 @@ function BreakdownDetails({
 						className={cl`${styles.container} ${styles[source]}`}
 						key={id}
 						isOpen={!index}
+						animate
 						title={(
 							<div className={styles.service_container}>
 								<div className={styles.service_details}>

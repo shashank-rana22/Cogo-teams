@@ -1,7 +1,7 @@
 import { Accordion, Pill } from '@cogoport/components';
 import { IcMError } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -50,16 +50,13 @@ function OverallRisk({ detail = {}, setIsVeryRisky = () => {} }) {
 		);
 	}, [overall_credit_risk, is_any_invoice_on_credit, setIsVeryRisky]);
 
-	// if (isEmpty(data)) {
-	// 	return null;
-	// }
-
 	const { background, color } = OVERALL_RISK_COLOUR_MAPPING[overall_credit_risk];
 
 	return (
 		<div className={styles.container}>
 			<Accordion
 				type="form"
+				animate
 				isOpen
 				title={(
 					<div className={styles.header}>

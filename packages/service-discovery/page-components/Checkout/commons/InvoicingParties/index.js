@@ -7,11 +7,13 @@ import useUpdateCheckoutInvoice from './hooks/useUpdateCheckoutInvoice';
 import styles from './styles.module.css';
 import useInvoicingParties from './useInvoicingParties';
 
-function InvoicingParties() {
+function InvoicingParties({
+	invoicingParties = [],
+	setInvoicingParties = () => {},
+}) {
 	const {
 		rate,
 		detail = {},
-		invoice = {},
 	} = useContext(CheckoutContext);
 
 	const { services = {} } = detail;
@@ -19,7 +21,6 @@ function InvoicingParties() {
 	const selectedServices = Object.values(services);
 
 	const {
-		invoicingParties,
 		showAddInvoicingPartyModal,
 		setShowAddInvoicingPartyModal,
 		PAYMENT_MODES,
@@ -33,7 +34,7 @@ function InvoicingParties() {
 		allServices,
 		paymentModeValuesObj,
 		paymentModesLoading = false,
-	} = useInvoicingParties({ detail, invoice });
+	} = useInvoicingParties({ detail, setInvoicingParties, invoicingParties });
 
 	const {
 		updateCheckoutInvoice,

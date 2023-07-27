@@ -1,12 +1,15 @@
 import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useContext } from 'react';
 
 import OTPLayout from '../../../../../../commons/WhatsappNoVerificationModal/WhatsappVerification/OTPLayout';
+import { CheckoutContext } from '../../../../../../context';
 import handleTimer from '../../../../../../utils/handleTimer';
 
+import domesticServices from './domestic-services.json';
 import styles from './styles.module.css';
 import useHandleBookingConfirmationFooter from './useHandleBookingConfirmationFooter';
 
@@ -41,6 +44,10 @@ const getButtonLabel = ({
 		return 'Send OTP For Approval';
 	}
 
+	if (bookingConfirmationMode === 'whatsapp') {
+		return 'Get Confirmation on Whatsapp';
+	}
+
 	return 'Place Booking';
 };
 
@@ -52,13 +59,27 @@ const getDisabledCondition = ({
 	bookingConfirmationMode = '',
 	detail = {},
 }) => {
-	const { booking_proof } = detail;
+	const {
+		booking_proof,
+		importer_exporter_poc = {},
+		importer_exporter_poc_id,
+	} = detail;
+
+	const { whatsapp_number_eformat = '', whatsapp_verified = '' } =		importer_exporter_poc;
 
 	if (checkoutMethod === 'controlled_checkout') {
 		return (
 			['pending_approval', 'rejected'].includes(booking_status)
 			|| !manager_approval_proof
 			|| !isControlBookingDetailsFilled
+		);
+	}
+
+	if (bookingConfirmationMode === 'whatsapp') {
+		return (
+			!whatsapp_number_eformat
+			|| !whatsapp_verified
+			|| !importer_exporter_poc_id
 		);
 	}
 
@@ -76,8 +97,45 @@ function BookingConfirmationFooter({
 	formProps = {},
 	getCheckout = () => {},
 	bookingConfirmationMode = '',
+	invoicingParties = [],
+	isVeryRisky = false,
 }) {
+	const {
+		query: { shipment_id },
+	} = useSelector(({ general }) => ({
+		query: general?.query,
+	}));
+
+	const {
+		primaryService = {},
+		activated_on_paylater = {},
+		primary_service = '',
+		checkout_type = '',
+		invoice = {},
+		isChannelPartner = false,
+	} = useContext(CheckoutContext);
+
 	const timerRef = useRef(null);
+
+	const { paylater_eligibility = false } = activated_on_paylater || {};
+
+	const domesticService = domesticServices.includes(detail?.primary_service);
+
+	const disableConditionForFcl = primary_service === 'fcl_freight'
+		&& paylater_eligibility
+		&& isEmpty(
+			primaryService.bl_category
+				&& primaryService.bl_delivery_mode
+				&& primaryService.bl_type,
+		);
+
+	const disableCondition = (typeof invoice?.selected_credit_days === 'undefined'
+			&& !isChannelPartner
+			&& !shipment_id
+			&& !domesticService)
+		|| (detail?.credit_details?.is_any_invoice_on_credit
+			&& !detail?.credit_terms_amd_condition?.is_tnc_accepted
+			&& detail?.credit_details?.credit_source === 'pre_approved_clean_credit');
 
 	const {
 		handleSubmit,
@@ -98,6 +156,7 @@ function BookingConfirmationFooter({
 		checkoutMethod,
 		getCheckout,
 		bookingConfirmationMode,
+		checkout_type,
 	});
 
 	useEffect(() => {
@@ -157,14 +216,20 @@ function BookingConfirmationFooter({
 						size="lg"
 						onClick={handleSubmit}
 						loading={submitButtonLoading}
-						disabled={getDisabledCondition({
-							checkoutMethod,
-							booking_status,
-							manager_approval_proof,
-							isControlBookingDetailsFilled,
-							bookingConfirmationMode,
-							detail,
-						})}
+						disabled={
+							disableConditionForFcl
+							|| disableCondition
+							|| isVeryRisky
+							|| isEmpty(invoicingParties)
+							|| getDisabledCondition({
+								checkoutMethod,
+								booking_status,
+								manager_approval_proof,
+								isControlBookingDetailsFilled,
+								bookingConfirmationMode,
+								detail,
+							})
+						}
 					>
 						{getButtonLabel({
 							checkoutMethod,

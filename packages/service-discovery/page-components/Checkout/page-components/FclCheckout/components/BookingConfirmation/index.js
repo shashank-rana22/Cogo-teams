@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 
+import AdditionalConditions from '../../../../commons/AdditionalConditions';
 import ControlledBooking from '../../../../commons/ControlledBooking';
 import InvoicingParties from '../../../../commons/InvoicingParties';
 import { CheckoutContext } from '../../../../context';
@@ -12,10 +13,15 @@ import useHandleBookingConfirmation from './useHandleBookingConfirmation';
 
 function BookingConfirmation() {
 	const {
-		detail = {},
-		checkoutMethod,
-		getCheckout,
+		detail,
 		primaryService,
+		getCheckout,
+		showSendTncEmail,
+		showOverallCreditRisk,
+		updateCheckout,
+		updateLoading,
+		loading,
+		checkoutMethod,
 	} = useContext(CheckoutContext);
 
 	const {
@@ -27,7 +33,13 @@ function BookingConfirmation() {
 		controlledBookingServices,
 		bookingConfirmationMode = '',
 		setBookingConfirmationMode = () => {},
+		invoicingParties = [],
+		setInvoicingParties = () => {},
+		isVeryRisky = false,
+		setIsVeryRisky = () => {},
 	} = useHandleBookingConfirmation();
+
+	const { is_any_invoice_on_credit = false } = detail?.credit_details || {};
 
 	return (
 		<div className={styles.container}>
@@ -42,7 +54,19 @@ function BookingConfirmation() {
 				/>
 			) : null}
 
-			<InvoicingParties />
+			<InvoicingParties invoicingParties={invoicingParties} setInvoicingParties={setInvoicingParties} />
+
+			<AdditionalConditions
+				detail={detail}
+				updateCheckout={updateCheckout}
+				updateLoading={updateLoading}
+				showSendTncEmail={showSendTncEmail}
+				showOverallCreditRisk={showOverallCreditRisk}
+				setIsVeryRisky={setIsVeryRisky}
+				getCheckout={getCheckout}
+				loading={loading}
+				source="booking_confirmation"
+			/>
 
 			<ShippingPreferences
 				formProps={formProps}
@@ -61,6 +85,8 @@ function BookingConfirmation() {
 				isControlBookingDetailsFilled={isControlBookingDetailsFilled}
 				formProps={formProps}
 				bookingConfirmationMode={bookingConfirmationMode}
+				invoicingParties={invoicingParties}
+				isVeryRisky={isVeryRisky && is_any_invoice_on_credit}
 			/>
 		</div>
 	);
