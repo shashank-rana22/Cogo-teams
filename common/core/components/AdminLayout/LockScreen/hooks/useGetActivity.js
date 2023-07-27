@@ -51,13 +51,13 @@ function useGetActivity({
 	const mountActivityTrackerSnapShotRef = useCallback(async () => {
 		const { timeoutValue, isLockedBool } = await getTimeoutConstant(firestore);
 
-		if (!isLockedBool || !isRolePresent || inCall) {
-			return;
-		}
-
 		activityTrackerSnapShotRef?.current?.();
 		clearTimeout(activitytimeoutRef?.current);
 		clearTimeout(trackerRef?.current);
+
+		if (!isLockedBool || !isRolePresent || inCall) {
+			return;
+		}
 
 		const roomDoc = doc(
 			firestore,
