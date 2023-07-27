@@ -50,8 +50,6 @@ function CollectionPartyDetails({
 	const [open, setOpen] = useState(false);
 	const [step, setStep] = useState(DEFAULT_STEP);
 
-	const closeModal = () => setShowModal(false);
-
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
 	);
@@ -236,7 +234,7 @@ function CollectionPartyDetails({
 						refetch={refetch}
 						source={showModal}
 						setShowChargeCodes={setShowModal}
-						closeModal={closeModal}
+						closeModal={setShowModal}
 					/>
 				)}
 
