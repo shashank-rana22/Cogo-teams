@@ -1,4 +1,6 @@
+import { cl } from '@cogoport/components';
 import { InputController, SelectController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
@@ -28,7 +30,7 @@ const lineItemColumns = ({
 			Header   : 'Item',
 			id       : 'itemName',
 			accessor : (row: any, index: number) => (
-				<div style={{ width: '80px' }}>
+				<div className={styles.widthselect}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -44,7 +46,7 @@ const lineItemColumns = ({
 			Header   : 'Amount before tax',
 			id       : 'amount_before_tax',
 			accessor : (row: any, index: number) => (
-				<div style={{ width: '80px' }}>
+				<div className={styles.widthselect}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -61,7 +63,7 @@ const lineItemColumns = ({
 			Header   : 'Tax',
 			id       : 'tax',
 			accessor : (row: any, index: number) => (
-				<div style={{ width: '80px' }} className={styles.select}>
+				<div className={cl`${styles.select} ${styles.widthselect}`}>
 					<SelectController
 						key={row?.id}
 						control={control}
@@ -78,7 +80,7 @@ const lineItemColumns = ({
 			Header   : 'Amount after tax',
 			id       : 'amount_after_tax',
 			accessor : (row: any, index: number) => (
-				<div style={{ width: '70px' }}>
+				<div className={styles.inputwidth}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -94,7 +96,7 @@ const lineItemColumns = ({
 			Header   : 'TDS',
 			id       : 'tds',
 			accessor : (row: any, index: number) => (
-				<div style={{ width: '75px' }} className={styles.select}>
+				<div className={cl`${styles.select} ${styles.tdswidth}`}>
 					<SelectController
 						key={row?.id}
 						control={control}
@@ -111,7 +113,7 @@ const lineItemColumns = ({
 			Header   : 'Payable Amount',
 			id       : 'payable_amount',
 			accessor : (row: any, index: number) => (
-				<div style={{ width: '70px' }}>
+				<div className={styles.inputwidth}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -128,7 +130,7 @@ const lineItemColumns = ({
 			id       : 'delete',
 			accessor : (row: any, index: number) => (
 				<div>
-					{index !== 0 && (
+					{index !== GLOBAL_CONSTANTS.zeroth_index && (
 						<IcMDelete
 							key={row?.id}
 							color="#ED3726"

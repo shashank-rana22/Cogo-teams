@@ -14,6 +14,8 @@ import { toTitleCase } from '../../utils/titleCase';
 import { OVER_HEAD_CONFIGS } from './overheadsConfig';
 import styles from './style.module.css';
 
+const DEFAULT_MAX_LENGTH = 40;
+
 function NonRecuringModal({
 	id = '',
 	refetch = () => {},
@@ -156,7 +158,7 @@ function NonRecuringModal({
 
 					<div className={styles.document_flex}>
 						<div className={styles.document}>Remarks -</div>
-						{remarkData?.length > 40 ? (
+						{remarkData?.length > DEFAULT_MAX_LENGTH ? (
 							<Tooltip
 								className={styles.tooltip}
 								interactive

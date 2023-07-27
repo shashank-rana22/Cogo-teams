@@ -49,6 +49,19 @@ interface Props {
 
 const MAX_LENGTH = 18;
 
+function RenderSummaryData(summary) {
+	return (
+		<div style={{ display: 'flex' }}>
+			{summary?.map((item: Summary) => (
+				<div key={item.title} className={styles.section}>
+					<div className={styles.title}>{item.title}</div>
+					<div className={styles.value}>{item.value}</div>
+				</div>
+			))}
+		</div>
+	);
+}
+
 function RecurringSummary({
 	recurringData = {},
 	setRecurringData = () => {},
@@ -85,7 +98,9 @@ function RecurringSummary({
 	const summaryDataFirst = [
 		{
 			title : 'Vendor Name',
-			value : vendorName ? showOverflowingNumber(vendorName, MAX_LENGTH) : '-',
+			value : vendorName
+				? showOverflowingNumber(vendorName, MAX_LENGTH)
+				: '-',
 		},
 		{
 			title : 'Expense Category',
@@ -154,11 +169,6 @@ function RecurringSummary({
 					{uploadedInvoice ? (
 						<a
 							href={uploadedInvoice}
-							style={{
-								color          : 'blue',
-								textDecoration : 'underline',
-								fontSize       : '16px',
-							}}
 							className={styles.upload_invoice}
 							target="_blank"
 							rel="noreferrer"
@@ -173,24 +183,19 @@ function RecurringSummary({
 		},
 	];
 
-	const renderSummaryData = (summary: Summary[]) => (
-		<div style={{ display: 'flex' }}>
-			{summary?.map((item: Summary) => (
-				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item.title}</div>
-					<div className={styles.value}>{item.value}</div>
-				</div>
-			))}
-		</div>
-	);
+	const summeryMapping = [
+		{ key: '1', val: summaryDataFirst },
+		{ key: '2', val: summaryDataSecond },
+		{ key: '3', val: summaryDataThird },
+	];
 
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>
 			<div className={styles.header} />
-			{renderSummaryData(summaryDataFirst)}
-			{renderSummaryData(summaryDataSecond)}
-			{renderSummaryData(summaryDataThird)}
+			{summeryMapping.map(({ key, val }) => (
+				<RenderSummaryData key={key} summary={val} />
+			))}
 		</div>
 	);
 }

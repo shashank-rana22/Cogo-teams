@@ -49,6 +49,19 @@ interface Props {
 	rowData?: SummaryInterface;
 }
 
+function RenderSummary({ summary }) {
+	return (
+		<div style={{ display: 'flex' }}>
+			{summary?.map((item: SummaryElemet) => (
+				<div key={item.title} className={styles.section}>
+					<div className={styles.title}>{item.title}</div>
+					<div className={styles.value}>{item.value}</div>
+				</div>
+			))}
+		</div>
+	);
+}
+
 function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	const { entityObject, branch } = expenseData || {};
 	const { entity_code: entityCode } = entityObject || {};
@@ -93,7 +106,9 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 			if (!isEmpty(branchData)) {
 				setExpenseData((p: object) => ({
 					...p,
-					branch: JSON.parse(branchData[GLOBAL_CONSTANTS.zeroth_index]?.value || '{}'),
+					branch: JSON.parse(
+						branchData[GLOBAL_CONSTANTS.zeroth_index]?.value || '{}',
+					),
 				}));
 			}
 		}
@@ -191,24 +206,20 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		},
 	];
 
-	const renderSummary = (summary: SummaryElemet[]) => (
-		<div style={{ display: 'flex' }}>
-			{summary?.map((item: SummaryElemet) => (
-				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item.title}</div>
-					<div className={styles.value}>{item.value}</div>
-				</div>
-			))}
-		</div>
-	);
+	const summeryMapping = [
+		{ key: '1', val: summaryDataFirst },
+		{ key: '2', val: summaryDataSecond },
+		{ key: '3', val: summaryDataThird },
+	];
 
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>
 			<div className={styles.header} />
-			{renderSummary(summaryDataFirst)}
-			{renderSummary(summaryDataSecond)}
-			{renderSummary(summaryDataThird)}
+			{summeryMapping.map(({ key, val }) => (
+				<RenderSummary key={key} summary={val} />
+			))}
+
 		</div>
 	);
 }

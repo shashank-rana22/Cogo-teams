@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-indent */
 import { Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -15,9 +14,17 @@ interface Entity {
 	id?: string;
 }
 
-interface Summary {
-	title?: string;
-	value?: any;
+function RenderSummaryData({ summary }) {
+	return (
+		<div style={{ display: 'flex' }}>
+			{summary?.map((item) => (
+				<div key={item.title} className={styles.section}>
+					<div className={styles.title}>{item.title}</div>
+					<div className={styles.value}>{item.value}</div>
+				</div>
+			))}
+		</div>
+	);
 }
 
 interface Data {
@@ -142,7 +149,7 @@ function NonRecurringSummary({
 			value : (
 				<div>
 					{periodOfTransaction ? startCase(periodOfTransaction) : '-'}
-{' '}
+					{' '}
 				</div>
 			),
 		},
@@ -177,24 +184,19 @@ function NonRecurringSummary({
 		},
 	];
 
-	const renderSummaryData = (summary: Summary[]) => (
-		<div style={{ display: 'flex' }}>
-			{summary?.map((item: Summary) => (
-				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item.title}</div>
-					<div className={styles.value}>{item.value}</div>
-				</div>
-			))}
-		</div>
-	);
+	const summeryMapping = [
+		{ key: '1', val: summaryDataFirst },
+		{ key: '2', val: summaryDataSecond },
+		{ key: '3', val: summaryDataThird },
+	];
 
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>
 			<div className={styles.header} />
-			{renderSummaryData(summaryDataFirst)}
-			{renderSummaryData(summaryDataSecond)}
-			{renderSummaryData(summaryDataThird)}
+			{summeryMapping.map(({ key, val }) => (
+				<RenderSummaryData key={key} summary={val} />
+			))}
 			<div className={styles.textarea}>
 				<Textarea
 					value={nonRecurringData?.remarks}

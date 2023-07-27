@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';

@@ -1,3 +1,5 @@
+const DEFAULT_UNIT = 1;
+
 export const OVER_HEAD_CONFIGS = [
 	{
 		Header   : 'Name',
@@ -8,7 +10,7 @@ export const OVER_HEAD_CONFIGS = [
 		Header   : 'Unit',
 		accessor : 'unit',
 		id       : 'unit',
-		Cell     : () => 1,
+		Cell     : () => DEFAULT_UNIT,
 	},
 	{
 		Header   : 'Currency',

@@ -1,4 +1,5 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 import { MONTH_OPTIONS } from '../constants/MONTH_OPTIONS';
@@ -53,10 +54,8 @@ export const nonRecurringExpenseDetails = ({
 	handleCategoryChange = () => {},
 }: Props) => {
 	const geo = getGeoConstants();
-	const handleEntityChange = (e: number | string) => {
-		const entityData = entityList?.filter(
-			(entityItem) => entityItem.id === e,
-		)?.[0];
+	const handleEntityChange = (e:number | string) => {
+		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[GLOBAL_CONSTANTS.zeroth_index];
 		setFormData({
 			...formData,
 			entityObject: entityData,
@@ -134,7 +133,7 @@ export const nonRecurringExpenseDetails = ({
 			groupBy : [
 				{
 					name        : 'registrationNumber',
-					label       : `${geo.others.identification_number.label}`,
+					label       : geo.others.identification_number.label,
 					type        : 'textarea',
 					value       : formData?.registrationNumber || null,
 					prefix      : null,

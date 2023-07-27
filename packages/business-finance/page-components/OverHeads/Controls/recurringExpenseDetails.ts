@@ -1,4 +1,5 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { startCase } from '@cogoport/utils';
 
@@ -47,7 +48,7 @@ export const recurringExpenseDetails = ({
 	const handleEntityChange = (e: string | number) => {
 		const entityData = (entityList || []).filter(
 			(entityItem) => entityItem.id === e,
-		)?.[0];
+		)?.[GLOBAL_CONSTANTS.zeroth_index];
 		setFormData({
 			...formData,
 			entityObject: entityData,
