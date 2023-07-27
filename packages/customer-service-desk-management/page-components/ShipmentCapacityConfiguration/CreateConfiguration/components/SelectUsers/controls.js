@@ -1,4 +1,4 @@
-const getControls = ({ cogoEntityId = '', reportingManagerIds = [] }) => ([
+const getControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
 	{
 		name        : 'cogo_entity_id',
 		label       : 'Select Cogo Entity',
@@ -41,10 +41,9 @@ const getControls = ({ cogoEntityId = '', reportingManagerIds = [] }) => ([
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'reporting_managers',
+		name        : 'agent_id',
 		label       : 'Select Teams by Reporting Manager',
 		type        : 'async-select',
-		multiple    : true,
 		placeholder : 'Select Organization',
 		initialCall : true,
 		asyncKey    : 'partner_users',
@@ -67,7 +66,7 @@ const getControls = ({ cogoEntityId = '', reportingManagerIds = [] }) => ([
 		asyncKey    : 'organizations',
 		params      : {
 			filters: {
-				sales_agent_rm_ids : reportingManagerIds,
+				sales_agent_rm_ids : [reportingManagerIds],
 				status             : 'active',
 				account_type       : 'importer_exporter',
 				kyc_status         : 'verified',
@@ -81,7 +80,7 @@ const getControls = ({ cogoEntityId = '', reportingManagerIds = [] }) => ([
 	{
 		name    : 'booking_source',
 		label   : 'Booking Platform',
-		type    : 'multi-select',
+		type    : 'select',
 		options : [
 			{
 				value : 'admin_platform',

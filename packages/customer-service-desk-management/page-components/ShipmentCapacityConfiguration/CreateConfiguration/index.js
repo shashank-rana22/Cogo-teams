@@ -13,7 +13,7 @@ import TotalShipmentCapacity from './components/TotalShipmentCapacity';
 import styles from './styles.module.css';
 
 const STEPPER_ITEMS = [
-	{ title: 'Select Users', key: 'select_users' },
+	{ title: 'Select Organization Pool', key: 'select_users' },
 	{ title: 'Set Configuration', key: 'set_configuration' },
 	{ title: 'Total Shipment Capacity', key: 'total_shipment_capacity' },
 ];

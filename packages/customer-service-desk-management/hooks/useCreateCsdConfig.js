@@ -37,8 +37,8 @@ const useCreateCsdConfig = ({ setActiveItem = () => {} }) => {
 				data: {
 					id,
 					cogo_entity_id    : values.cogo_entity_id,
-					booking_source    : 'admin_platform',
-					agent_id          : '6fd98605-9d5d-479d-9fac-cf905d292b88',
+					booking_source    : values.booking_source,
+					agent_id          : values.agent_id,
 					config_type       : values.config_type,
 					segment           : values.segment,
 					organization_ids  : values.organization_ids,

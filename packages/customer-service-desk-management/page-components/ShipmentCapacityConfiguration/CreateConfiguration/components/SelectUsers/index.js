@@ -28,11 +28,14 @@ function SelectUsers({
 	routeLoading = false,
 }) {
 	const { control, formState:{ errors }, handleSubmit, watch, setValue = () => {} } = useForm();
-	const { cogo_entity_id, config_type, organization_type, segment, organization_ids } = data;
+	const {
+		cogo_entity_id, config_type,
+		organization_type, segment, organization_ids, agent_id, booking_source,
+	} = data;
 
 	const orgType = watch('organization_type');
 	const cogoEntityId = watch('cogo_entity_id');
-	const reportingManagerIds = watch('reporting_managers');
+	const reportingManagerIds = watch('agent_id');
 
 	useEffect(() => {
 		setValue('segment', undefined);
@@ -44,7 +47,9 @@ function SelectUsers({
 		setValue('organization_ids', organization_ids);
 		setValue('organization_type', organization_type);
 		setValue('segment', segment);
-	}, [cogo_entity_id, config_type, organization_ids, organization_type, segment, setValue]);
+		setValue('agent_id', agent_id);
+		setValue('booking_source', booking_source);
+	}, [agent_id, booking_source, cogo_entity_id, config_type, organization_ids, organization_type, segment, setValue]);
 
 	return (
 		<div className={styles.container}>

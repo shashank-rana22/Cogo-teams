@@ -1,13 +1,19 @@
-import { Popover } from '@cogoport/components';
+import { Popover, cl } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
-import { useState } from 'react';
 
-// import controls from './controls';
-// import FilterContent from './FilterContent';
+import FilterContent from './FilterContent';
 import styles from './styles.module.css';
+import useFilterPopover from './useFilterPopover';
 
 function Filter() {
-	const [openFilter, setOpenFilter] = useState(false);
+	const {
+		showFilter,
+		setShowFilter,
+		control,
+		handleSubmit,
+		onSubmit,
+		onClickReset,
+	} = useFilterPopover({});
 
 	return (
 		<Popover
@@ -16,24 +22,23 @@ function Filter() {
 			animation="perspective"
 			caret={false}
 			placement="bottom"
-			// content={(
-			// 	<FilterContent
-			// 		controls={finalControls}
-			// 		fields={fields}
-			// 		reset={reset}
-			// 		applyFilters={applyFilters}
-			// 		setFilters={setFilters}
-			// 		setOpen={setOpenFilter}
-			// 	/>
-			// )}
-			visible={openFilter}
-			onClickOutside={() => setOpenFilter(false)}
+			render={(
+				<FilterContent
+					onClickReset={onClickReset}
+					control={control}
+					handleSubmit={handleSubmit}
+					onSubmit={onSubmit}
+
+				/>
+			)}
+			visible={showFilter}
+			onClickOutside={() => setShowFilter(false)}
 		>
 			<div
-				className={`${styles.filter_container} ${openFilter ? styles.active : ''}`}
+				className={cl`${styles.filter_container} ${showFilter ? styles.active : ''}`}
 				aria-hidden="true"
 				onClick={() => {
-					setOpenFilter((prev) => !prev);
+					setShowFilter((prev) => !prev);
 				}}
 			>
 				<IcMFilter width={16} height={16} className={styles.filter_icon} />
