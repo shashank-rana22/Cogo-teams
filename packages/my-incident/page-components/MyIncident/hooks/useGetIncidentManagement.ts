@@ -24,7 +24,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 		{
 			url     : '/incident-management/incident/list-my-incident',
 			method  : 'get',
-			authKey : 'get_incident_management_incident_list',
+			authKey : 'get_incident_management_incident_list_my_incident',
 		},
 		{ manual: true, autoCancel: false },
 	);

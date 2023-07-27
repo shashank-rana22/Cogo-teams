@@ -38,7 +38,7 @@ const tabsKeyComponentMapping = {
 function IncidentManagement() {
 	const { query, push } = useRouter();
 	const [activeTab, setActiveTab] = useState<string>(
-		query.view || tabs[GLOBAL_CONSTANTS.zeroth_index].key,
+		query.activeTab || tabs[GLOBAL_CONSTANTS.zeroth_index].key,
 	);
 	const {
 		incidentData,

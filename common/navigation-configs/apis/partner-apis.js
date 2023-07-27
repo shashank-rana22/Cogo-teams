@@ -8256,7 +8256,7 @@ const partner = {
 			module      : 'Expenses',
 		},
 		{
-			api         : 'get_purchase_expense_by_id',
+			api         : 'get_incident_management_incident_get_incident_approval_management',
 			access_type : 'private',
 			module      : 'Expenses',
 		},
@@ -8264,6 +8264,12 @@ const partner = {
 	my_incident: [
 		{
 			api         : 'get_incident_management_incident_list',
+			access_type : 'private',
+			module      : 'myIncident',
+			feature     : 'myIncident',
+		},
+		{
+			api         : 'get_incident_management_incident_list_my_incident',
 			access_type : 'private',
 			module      : 'myIncident',
 			feature     : 'myIncident',
@@ -8770,6 +8776,14 @@ const partner = {
 		},
 		{
 			api         : 'put_incident_management_incident_approval',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_purchase_expense_expense_configuration_by_id',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_incident_management_incident_send_overhead_mail',
 			access_type : 'private',
 		},
 	],
