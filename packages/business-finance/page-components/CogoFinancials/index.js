@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
 import MultipleFilters from './MultipleFilters';
+import ReceivablesOutstandings from './ReceivablesOutstandings';
 import styles from './styles.module.css';
 
 const TIME_RANGE_OPTIONS = [
@@ -178,6 +179,7 @@ function CogoFinancials() {
 				</div>
 
 			</div>
+			<ReceivablesOutstandings />
 		</div>
 	);
 }
