@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
+import { upperCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
 import getElementController from '../getController';
@@ -47,8 +48,8 @@ function Child({
 	return (
 		<div className={styles.fieldarray} key={field.id}>
 			<h3 className={styles.heading}>
-				{name.toUpperCase().replace('_', ' ')}
-				&nbsp;
+				{upperCase(name)}
+				{' '}
 				{index + INDEX_INCR_BY}
 			</h3>
 
