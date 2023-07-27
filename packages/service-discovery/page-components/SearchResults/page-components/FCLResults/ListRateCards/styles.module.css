@@ -26,3 +26,9 @@
 	float: right;
 	margin: 12px 32px 40px 0;
 }
+
+
+.dim_bg {
+	pointer-events: none;
+	background-color: rgb(255,255,255,0.5);
+}

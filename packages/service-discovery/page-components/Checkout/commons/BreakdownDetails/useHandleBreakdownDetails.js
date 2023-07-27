@@ -1,5 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const DEFAULT_VALUE = 0;
 
@@ -7,9 +7,7 @@ const useHandleBreakdownDetails = ({ rate, setRateDetails, setNoRatesPresent = (
 	const [addLineItemData, setAddLineItemData] = useState({});
 	const [editLineItemData, setEditLineItemData] = useState({});
 
-	useEffect(() => {
-		setNoRatesPresent(false);
-
+	const applyRateDetails = useCallback(() => {
 		setRateDetails((prev) => Object.entries(rate?.services || {}).map(([key, serviceData = {}]) => {
 			const { line_items = [] } = serviceData;
 
@@ -72,13 +70,20 @@ const useHandleBreakdownDetails = ({ rate, setRateDetails, setNoRatesPresent = (
 				line_items : updateLineItems,
 			};
 		}));
-	}, [rate?.services, setNoRatesPresent, setRateDetails]);
+	}, [rate?.services, setRateDetails]);
+
+	useEffect(() => {
+		setNoRatesPresent(false);
+
+		applyRateDetails();
+	}, [applyRateDetails, setNoRatesPresent]);
 
 	return {
 		addLineItemData,
 		setAddLineItemData,
 		editLineItemData,
 		setEditLineItemData,
+		applyRateDetails,
 	};
 };
 
