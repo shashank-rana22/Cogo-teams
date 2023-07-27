@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import Notification from '../Notification';
@@ -6,6 +6,8 @@ import Notification from '../Notification';
 import Header from './Header';
 import useNotificationHooks from './hooks/useNotificationHooks';
 import styles from './styles.module.css';
+
+const LOADER_COUNT = 5;
 
 function NotificationPage({
 	onPageChange = () => {},
@@ -42,14 +44,18 @@ function NotificationPage({
 								onPageChange={onPageChange}
 								activeTab={activeTab}
 							/>
-							{(formattedData?.list || []).map((item) => (
+							{!loading ? (formattedData?.list || []).map((item) => (
 								<Notification
 									key={item}
 									className="small"
 									item={item}
 									handleNotificationClick={handleNotificationClick}
 								/>
-							))}
+							)) : (
+								[...Array(LOADER_COUNT).keys()].map((item) => (
+									<Placeholder key={item} height="50px" width="100%" margin="0px 0px 20px 0px" />
+								))
+							)}
 						</TabPanel>
 						<TabPanel name="mails" title="Mails" className="horizontal one">
 							<Header
@@ -58,14 +64,18 @@ function NotificationPage({
 								onPageChange={setPagination}
 								activeTab={activeTab}
 							/>
-							{(formattedmailData?.list || []).map((item) => (
+							{!loading ? (formattedmailData?.list || []).map((item) => (
 								<Notification
 									key={item}
 									className="small"
 									item={item}
 									handleNotificationClick={handleNotificationClick}
 								/>
-							))}
+							)) : (
+								[...Array(LOADER_COUNT).keys()].map((item) => (
+									<Placeholder key={item} height="50px" width="100%" margin="0px 0px 20px 0px" />
+								))
+							)}
 						</TabPanel>
 					</Tabs>
 				</div>
