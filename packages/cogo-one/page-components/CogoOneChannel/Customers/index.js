@@ -32,6 +32,12 @@ function Customers({
 	viewType = '',
 	workPrefernceLoading = false,
 	setOpenKamContacts = () => {},
+	agentStatus = {},
+	statusLoading = false,
+	updateUserStatus = () => {},
+	openInactiveModal = false,
+	setOpenInactiveModal = () => {},
+	fetchworkPrefernce = () => {},
 	setSendBulkTemplates = () => {},
 	setSelectedAutoAssign = () => {},
 	selectedAutoAssign = {},
@@ -97,7 +103,14 @@ function Customers({
 
 				{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_self_status && (
 					<div className={styles.styled_toggle}>
-						<AgentStatus />
+						<AgentStatus
+							agentStatus={agentStatus}
+							statusLoading={statusLoading}
+							updateUserStatus={updateUserStatus}
+							openInactiveModal={openInactiveModal}
+							setOpenInactiveModal={setOpenInactiveModal}
+							fetchworkPrefernce={fetchworkPrefernce}
+						/>
 					</div>
 				)}
 

@@ -113,6 +113,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : true,
 			sp_contacts                 : false,
+			punch_in_out                : false,
 		},
 	},
 	sales_admin: {
@@ -149,6 +150,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : true,
 			sp_contacts                 : false,
+			punch_in_out                : false,
 		},
 	},
 	support: {
@@ -186,6 +188,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : false,
 			sp_contacts                 : false,
+			punch_in_out                : true,
 		},
 	},
 	support_admin: {
@@ -221,6 +224,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : false,
 			sp_contacts                 : false,
+			punch_in_out                : false,
 		},
 	},
 	supply: {
@@ -260,6 +264,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : true,
 			global_contacts             : false,
 			sp_contacts                 : true,
+			punch_in_out                : false,
 		},
 	},
 	supply_admin: {
@@ -298,6 +303,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : true,
 			global_contacts             : false,
 			sp_contacts                 : true,
+			punch_in_out                : false,
 		},
 	},
 	shipment_specialist: {
@@ -331,6 +337,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : false,
 			sp_contacts                 : false,
+			punch_in_out                : false,
 		},
 	},
 	cogoone_admin: {
@@ -366,6 +373,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			flash_revert_logs           : false,
 			global_contacts             : true,
 			sp_contacts                 : true,
+			punch_in_out                : false,
 		},
 	},
 };
