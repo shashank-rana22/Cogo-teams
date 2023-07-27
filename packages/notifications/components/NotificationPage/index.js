@@ -25,6 +25,11 @@ function NotificationPage({
 		setActiveTabFunction,
 	} = useNotificationHooks();
 
+	const DISABLED_STYLES = {
+		pointerEvents : 'none',
+		cursor        : 'progress',
+	};
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -33,8 +38,7 @@ function NotificationPage({
 					onChange={(tab) => setActiveTabFunction(tab)}
 					className={cl`${styles.tabs} ${disabled ? styles.disabled : ''}`}
 					themeType="primary"
-					style={{ cursor: disabled ? 'progress' : 'pointer' }}
-					disabled={disabled}
+					style={disabled ? DISABLED_STYLES : {}}
 				>
 					<TabPanel
 						name="notifications"

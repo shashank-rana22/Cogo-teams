@@ -25,7 +25,7 @@ function Header({
 				<div className={styles.row}>
 					<Button
 						className={styles.mark_read}
-						disabled={disabled}
+						style={disabled ? { pointerEvents: 'none' } : {}}
 						onClick={onMarkAllAsRead}
 					>
 						Mark all as read
