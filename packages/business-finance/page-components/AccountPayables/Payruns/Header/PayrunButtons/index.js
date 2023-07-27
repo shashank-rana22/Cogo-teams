@@ -107,6 +107,8 @@ function PayrunButtons({
 			</div>
 		);
 	}
+
+	return null;
 }
 
 export default PayrunButtons;
