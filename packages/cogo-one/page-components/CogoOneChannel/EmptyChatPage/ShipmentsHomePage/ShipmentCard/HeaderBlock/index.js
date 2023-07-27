@@ -23,7 +23,7 @@ const BUTTON_OPTIONS = [
 
 function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
 	const { serial_id = '', importer_exporter = {} } = shipmentItem || {};
-	const { business_name = '', short_name = '' } = importer_exporter || {};
+	const { business_name = '' } = importer_exporter || {};
 
 	return (
 		<div className={styles.container}>
@@ -31,7 +31,7 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
 				<div className={styles.sid_id}>{`SID: ${serial_id}`}</div>
 
 				<div className={styles.importer_exporter_styles}>
-					{business_name || short_name}
+					{business_name || '-'}
 				</div>
 			</div>
 
@@ -56,8 +56,8 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
 					)}
 				>
 					<IcMOverflowDot
-						height="20px"
-						width="20px"
+						height="18px"
+						width="18px"
 						cursor="pointer"
 					/>
 				</Popover>
