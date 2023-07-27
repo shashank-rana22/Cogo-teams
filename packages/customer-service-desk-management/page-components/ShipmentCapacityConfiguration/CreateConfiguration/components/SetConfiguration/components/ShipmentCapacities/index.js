@@ -3,31 +3,38 @@ import {
 	InputController,
 	useForm,
 } from '@cogoport/forms';
-import React, { useEffect } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useEffect, useCallback } from 'react';
 
 import services from '../../../../../../../configurations/service-options';
 import useCreateShipmentCapacities from '../../../../../../../hooks/useCreateShipmentCapacities';
 
 import styles from './styles.module.css';
 
-function ShipmentCapacities({
-	agentExperienceSlabs = [], configId = '',
-	setActiveItem = () => {}, data = {}, routeLoading = false,
-	trigger = () => {},
-}) {
+function ShipmentCapacities(props) {
+	const {
+		agentExperienceSlabs = [], configId = '',
+		setActiveItem = () => {}, data = {}, routeLoading = false,
+	} = props;
+
 	const { loading, createShipmentCapacities } = useCreateShipmentCapacities({ setActiveItem });
 
 	const { control, formState: { errors }, handleSubmit, setValue, getValues } = useForm();
 
-	const handleReset = () => {
+	const handleReset = useCallback(() => {
 		const registeredFieldNames = Object.keys(getValues());
 
 		registeredFieldNames.forEach((fieldName) => {
 			setValue(fieldName, '');
 		});
-	};
+	}, [getValues, setValue]);
 
 	useEffect(() => {
+		if (isEmpty(data.shipment_capacities)) {
+			handleReset();
+			return;
+		}
+
 		const serviceWiseData = services?.map((service) => {
 			const filteredData = data.shipment_capacities?.filter((item) => ((item.service_transit_type
 				? `${item.service_type}-${item.service_transit_type}` : item.service_type) === service.value)) || [];
@@ -45,10 +52,10 @@ function ShipmentCapacities({
 				setValue(`${index}-${serviceValue}`, subItem.shipment_capacity);
 			});
 		});
-	}, [data, setValue]);
+	}, [data, handleReset, setValue]);
 
 	return (
-		<div key={loading} className={styles.container}>
+		<div key={loading} className={styles.container} id="shipment-capacities">
 
 			<h4>
 				Set Active Shipment Capacity per Agent

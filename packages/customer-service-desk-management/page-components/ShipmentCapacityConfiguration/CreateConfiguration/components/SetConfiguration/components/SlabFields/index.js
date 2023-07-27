@@ -19,7 +19,11 @@ const RULES = {
 	required: 'Required',
 };
 
-function SlabFields({ field = {}, index = 0, errors = {}, control = () => {}, experience = 'default' }) {
+function SlabFields({
+	field = {}, index = 0, errors = {},
+	control = () => {}, experience = 'default', showForm = false,
+	slabsLength = 0,
+}) {
 	return (
 		<>
 			<div
@@ -36,7 +40,7 @@ function SlabFields({ field = {}, index = 0, errors = {}, control = () => {}, ex
 						control={control}
 						options={SLAB_UNIT_OPTIONS}
 						name={`agent_experience_slabs.${index}.slab_unit`}
-						disabled={checkForDisabled({ experience, controlName: 'slab_unit', index })}
+						disabled={checkForDisabled({ experience, controlName: 'slab_unit', index, showForm })}
 					/>
 					{errors?.agent_experience_slabs?.[index]?.slab_unit?.message
                     && (
@@ -61,7 +65,7 @@ function SlabFields({ field = {}, index = 0, errors = {}, control = () => {}, ex
 						control={control}
 						rules={RULES}
 						name={`agent_experience_slabs.${index}.slab_lower_limit`}
-						disabled={checkForDisabled({ experience, controlName: 'slab_lower_limit', index })}
+						disabled={checkForDisabled({ experience, controlName: 'slab_lower_limit', index, showForm })}
 					/>
 					{errors?.agent_experience_slabs?.[index]?.slab_lower_limit?.message
 						&& (
@@ -90,7 +94,13 @@ function SlabFields({ field = {}, index = 0, errors = {}, control = () => {}, ex
 								control={control}
 								rules={RULES}
 								name={`agent_experience_slabs.${index}.slab_upper_limit`}
-								disabled={checkForDisabled({ experience, controlName: 'slab_upper_limit', index })}
+								disabled={checkForDisabled({
+									experience,
+									controlName: 'slab_upper_limit',
+									index,
+									showForm,
+									slabsLength,
+								})}
 							/>
 							{errors?.agent_experience_slabs?.[index]?.slab_upper_limit?.message
 						&& (

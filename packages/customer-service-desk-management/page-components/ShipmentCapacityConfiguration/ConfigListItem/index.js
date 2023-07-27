@@ -3,10 +3,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowDown, IcMOverflowDot, IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import CapacityDetailsTable from '../CapacityDetailsTable';
+import DeactivateModal from '../DeactivateModal';
 
 import styles from './styles.module.css';
 
@@ -27,20 +28,20 @@ const activationStatus = ({ status, activated_at = '' }) => {
 	};
 };
 
-function ConfigListItem({ data = {}, setShowModal = () => {} }) {
+function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} }) {
 	const router = useRouter();
 
 	const [showDetails, setShowDetails] = useState(false);
 
 	const {
-		cogo_entity, organization = [], organization_type,
-		segment, status = 'draft', activated_at, config_type,
+		cogo_entity, organization = [], organization_type, id,
+		segment, status = 'draft', activated_at, config_type, shipment_capacities,
 	} = data;
 
 	const { title, content } = activationStatus({ status, activated_at });
 
 	const handleEditClick = () => router.push(`/customer-service-desk-management/create-config?
-												id=${data.id}&mode=edit`);
+												id=${id}&mode=edit`);
 
 	return (
 		<div style={{ marginBottom: '20px' }}>
@@ -87,23 +88,41 @@ function ConfigListItem({ data = {}, setShowModal = () => {} }) {
 						content={(
 							<div className={styles.options}>
 
-								<Button
-									themeType="primary"
-									className={styles.btn}
-									onClick={handleEditClick}
-								>
-									<IcMEdit />
-									<div>Edit</div>
-								</Button>
+								{status === 'draft' && (
+									<>
+										<Button
+											themeType="primary"
+											className={styles.btn}
+											onClick={handleEditClick}
+										>
+											<IcMEdit className={styles.icon} />
+											<div>Edit</div>
+										</Button>
 
-								<Button
-									themeType="secondary"
-									className={styles.btn}
-									type="button"
-									onClick={() => setShowModal(true)}
-								>
-									<div>Deactive Config.</div>
-								</Button>
+										{!isEmpty(shipment_capacities) && (
+											<Button
+												themeType="secondary"
+												className={styles.btn}
+												type="button"
+												onClick={() => setShowModal(true)}
+											>
+												Activate
+											</Button>
+										)}
+
+									</>
+								)}
+
+								{status === 'active' && (
+									<Button
+										themeType="secondary"
+										className={styles.btn}
+										type="button"
+										onClick={() => setShowModal(true)}
+									>
+										Deactivate
+									</Button>
+								)}
 
 							</div>
 						)}
@@ -145,6 +164,8 @@ function ConfigListItem({ data = {}, setShowModal = () => {} }) {
 					}}
 				/>
 			</div>
+
+			{showModal && <DeactivateModal showModal={showModal} setShowModal={setShowModal} id={id} status={status} />}
 
 		</div>
 

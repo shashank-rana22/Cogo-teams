@@ -6,17 +6,17 @@ const DEFAULT_SLABS = [
 	},
 	{
 		slab_unit        : 'month',
-		slab_lower_limit : '4',
+		slab_lower_limit : '3',
 		slab_upper_limit : '6',
 	},
 	{
 		slab_unit        : 'month',
-		slab_lower_limit : '7',
+		slab_lower_limit : '6',
 		slab_upper_limit : '9',
 	},
 	{
 		slab_unit        : 'month',
-		slab_lower_limit : '10+',
+		slab_lower_limit : '9+',
 	},
 ];
 

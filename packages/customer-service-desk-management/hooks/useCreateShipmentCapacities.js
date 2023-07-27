@@ -35,7 +35,6 @@ const useCreateShipmentCapacities = ({ setActiveItem = () => {} }) => {
 
 	const createShipmentCapacities = async ({ values = {}, agentExperienceSlabs = [], configId = '' }) => {
 		try {
-			console.log('try');
 			await trigger({
 				data: getPayload({ values, agentExperienceSlabs, configId, isEditMode }),
 			});

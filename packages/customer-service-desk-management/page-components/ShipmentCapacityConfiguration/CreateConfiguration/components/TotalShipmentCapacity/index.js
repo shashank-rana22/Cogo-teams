@@ -14,7 +14,7 @@ function TotalShipmentCapacity({ routeLoading = false }) {
 
 	const [showModal, setShowModal] = useState(false);
 
-	const { list = [], loading: capacityDataLoading } = useGetCsdConfigurations({ source: 'capacity_page' });
+	const { list = [], loading: capacityDataLoading } = useGetCsdConfigurations();
 
 	const { loading, updateCsdConfig } = useUpdateCsdConfig({ setShowModal });
 

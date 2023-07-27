@@ -1,9 +1,16 @@
 import { Button, Modal } from '@cogoport/components';
 
+import useUpdateCsdConfig from '../../../hooks/useUpdateCsdConfig';
+
 import styles from './styles.module.css';
 
-function DeactivateModal({ showModal = false, setShowModal = () => {} }) {
-	// const { loading, updateCsdConfig } = useUpdateCsdConfig({ setShowModal });
+const STATUS_MAPPING = {
+	active : 'inactive',
+	draft  : 'active',
+};
+
+function DeactivateModal({ showModal = false, setShowModal = () => {}, id, status = 'draft' }) {
+	const { loading, updateCsdConfig } = useUpdateCsdConfig({ setShowModal });
 
 	return (
 		<Modal
@@ -31,6 +38,8 @@ function DeactivateModal({ showModal = false, setShowModal = () => {} }) {
 					<Button
 						type="button"
 						style={{ marginLeft: '12px' }}
+						loading={loading}
+						onClick={() => updateCsdConfig({ status: STATUS_MAPPING[status], id })}
 					>
 						Deactivate
 					</Button>

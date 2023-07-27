@@ -23,7 +23,7 @@ const CUSTOM_DEFAULT_SLAB = [{ slab_unit: 'month', slab_lower_limit: '0', slab_u
 const getSlabs = ({ experience = 'default', isEditMode = false, data = {} }) => {
 	if (experience === 'default') return DEFAULT_SLABS;
 
-	if (isEditMode && !isEmpty(data.agent_experience_slabs)) {
+	if (isEditMode || !isEmpty(data.agent_experience_slabs)) {
 		return data.agent_experience_slabs?.map((item, index) => {
 			const { slab_unit, slab_lower_limit, slab_upper_limit } = item;
 
@@ -37,16 +37,22 @@ const getSlabs = ({ experience = 'default', isEditMode = false, data = {} }) => 
 	return CUSTOM_DEFAULT_SLAB;
 };
 
-function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = false }) {
+function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = false, fetchList = () => {} }) {
 	const router = useRouter();
-
-	const [showForm, setShowForm] = useState(false);
 
 	const { mode = '', id:configId } = router.query;
 
 	const isEditMode = mode === 'edit';
 
-	const { loading, createAgentExperienceSlabs } = useCreateAgentExperienceSlabs({ isEditMode });
+	const [showForm, setShowForm] = useState(isEditMode);
+
+	const agentExpSlabs = data?.agent_experience_slabs || [];
+
+	const { loading, createAgentExperienceSlabs } = useCreateAgentExperienceSlabs({
+		isEditMode,
+		fetchList,
+		agentExpSlabs,
+	});
 
 	const { control, formState: { errors }, handleSubmit, watch, setValue, trigger } = useForm({
 		defaultValues: {
@@ -65,10 +71,10 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 
 	const experience = watch('experience');
 
-	const handleClick = async () => {
+	const handleAdd = async () => {
 		const { slab_upper_limit } = agentExperienceSlabs[agentExperienceSlabs.length - OFFSET];
 
-		let slabUpperLimit = Number(slab_upper_limit) + OFFSET;
+		let slabUpperLimit = Number(slab_upper_limit);
 
 		if (fields.length === MAX_SLAB_INDEX) {
 			slabUpperLimit = `${slabUpperLimit}+`;
@@ -78,6 +84,22 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 			append({ slab_unit: defaultSlabUnit, slab_lower_limit: slabUpperLimit });
 		}
 	};
+
+	const onSubmit = async (values) => {
+		if (!showForm) {
+			createAgentExperienceSlabs({
+				values,
+				configId,
+				setShowForm,
+			});
+		} else setShowForm(false);
+	};
+
+	useEffect(() => {
+		if (showForm) {
+			window.scrollTo({ top: document.getElementById('shipment-capacities').offsetTop, behavior: 'smooth' });
+		}
+	}, [showForm]);
 
 	useEffect(() => {
 		setValue('agent_experience_slabs', getSlabs({ experience, isEditMode, data }));
@@ -103,14 +125,16 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 							rules={{ required: 'This is required' }}
 							options={[
 								{
-									name  : 'default',
-									value : 'default',
-									label : 'Default Experience Slabs',
+									name     : 'default',
+									value    : 'default',
+									label    : 'Default Experience Slabs',
+									disabled : showForm,
 								},
 								{
-									name  : 'custom',
-									value : 'custom',
-									label : 'Custom Experience Slabs (4 Slabs Maximum)',
+									name     : 'custom',
+									value    : 'custom',
+									label    : 'Custom Experience Slabs (4 Slabs Maximum)',
+									disabled : showForm,
 								},
 							]}
 						/>
@@ -125,11 +149,13 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 										errors={errors}
 										control={control}
 										experience={experience}
+										showForm={showForm}
+										slabsLength={agentExperienceSlabs.length}
 									/>
 
 								</div>
 
-								{index > GLOBAL_CONSTANTS.zeroth_index && experience !== 'default' && (
+								{!showForm && index > GLOBAL_CONSTANTS.zeroth_index && experience !== 'default' && (
 									<div
 										role="presentation"
 										className={styles.delete_icon}
@@ -147,35 +173,29 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 							<div
 								role="presentation"
 								className={styles.add_item_container}
-								onClick={handleClick}
+								onClick={handleAdd}
 							>
 								<IcMPlusInCircle height={16} width={16} className={styles.add_icon} />
 								<div>Add Another Slab</div>
 							</div>
 						)}
 
-						{!isEditMode && (
-							<Button
-								size="md"
-								themeType="primary"
-								className={styles.btn}
-								loading={loading || routeLoading}
-								onClick={handleSubmit((values) => createAgentExperienceSlabs({
-									values,
-									configId,
-									setShowForm,
-								}))}
-							>
-								Save
-							</Button>
-						)}
+						<Button
+							size="md"
+							themeType="primary"
+							className={styles.btn}
+							loading={loading || routeLoading}
+							onClick={handleSubmit(onSubmit)}
+						>
+							{showForm ? 'Edit' : 'Save'}
+						</Button>
 
 					</div>
 				</div>
 
 			</div>
 
-			{(showForm || isEditMode) && (
+			{showForm && (
 				<ShipmentCapacities
 					agentExperienceSlabs={agentExperienceSlabs}
 					configId={configId}

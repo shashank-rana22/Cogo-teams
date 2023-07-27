@@ -24,14 +24,16 @@ const useGetCsdConfigurations = (source = '') => {
 	const fetchList = useCallback(() => {
 		try {
 			trigger({
-				...(source === 'capacity_page' ? {
-					filters: {
-						id: configId,
-					},
-				} : {
+				...(source === 'list' ? {
 					params: {
 						...params,
 						page,
+						filters: {
+							id: configId,
+						},
+					},
+				} : {
+					params: {
 						filters: {
 							id: configId,
 						},
@@ -50,7 +52,7 @@ const useGetCsdConfigurations = (source = '') => {
 				fetchList();
 			}
 		} else fetchList();
-	}, []);
+	}, [configId, fetchList, mode, source]);
 
 	const { list = [], ...pageData } = data || {};
 

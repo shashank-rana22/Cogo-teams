@@ -103,3 +103,12 @@
 .status {
     width: 10%;
 }
+
+.icon {
+    margin-right: 4px;
+}
+
+.btn {
+    margin-bottom: 4px;
+    width: 110px;
+}

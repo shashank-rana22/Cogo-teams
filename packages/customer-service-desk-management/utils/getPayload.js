@@ -29,8 +29,7 @@ const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '', isE
 	const payload = {
 		shipments_capacity_details: shipmentCapacities,
 		...(isEditMode ? {
-			id                     : configId,
-			agent_experience_slabs : getExperienceSlabs(agentExperienceSlabs),
+			id: configId,
 		} : { config_id: configId }),
 	};
 

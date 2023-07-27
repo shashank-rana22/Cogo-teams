@@ -3,6 +3,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 
+const MESSAGE_MAPPING = {
+	active   : 'Activated',
+	draft    : 'Saved',
+	inactive : 'Deactivated',
+};
+
 const useUpdateCsdConfig = ({ setShowModal = () => {} }) => {
 	const router = useRouter();
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -21,7 +27,7 @@ const useUpdateCsdConfig = ({ setShowModal = () => {} }) => {
 			});
 
 			router.push('/customer-service-desk-management');
-			Toast.success(`${status === 'active' ? 'Actived' : 'Saved'} Successfully!`);
+			Toast.success(`${MESSAGE_MAPPING[status]} Successfully!`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

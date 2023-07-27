@@ -25,7 +25,7 @@ function CreateCofiguration() {
 	const [routeLoading, setRouteLoading] = useState(false);
 
 	const { loading, createCsdConfig } = useCreateCsdConfig({ setActiveItem });
-	const { list = [] } = useGetCsdConfigurations('create');
+	const { list = [], fetchList } = useGetCsdConfigurations('create');
 
 	const data = list[GLOBAL_CONSTANTS.zeroth_index] || {};
 
@@ -38,6 +38,7 @@ function CreateCofiguration() {
 				createCsdConfig,
 				data,
 				routeLoading,
+				fetchList,
 			},
 		},
 		set_configuration: {
@@ -46,6 +47,7 @@ function CreateCofiguration() {
 				setActiveItem,
 				data,
 				routeLoading,
+				fetchList,
 			},
 		},
 		total_shipment_capacity: {
@@ -53,6 +55,7 @@ function CreateCofiguration() {
 			props     : {
 				setActiveItem,
 				routeLoading,
+				fetchList,
 			},
 		},
 	};

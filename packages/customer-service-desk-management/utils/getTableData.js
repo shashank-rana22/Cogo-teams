@@ -1,5 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 import services from '../configurations/service-options';
 
 const DEFAULT_VALUE = 0;
@@ -18,7 +16,7 @@ const getTableData = ({ data = {} }) => {
 	const rowData = serviceWiseData?.map((serviceDetails) => {
 		const SERVICE_OBJ = {};
 		SERVICE_OBJ.service = serviceDetails.service || '';
-		SERVICE_OBJ.trigger = 'Mark as complete';
+		SERVICE_OBJ.trigger = 'Mark shipment as complete';
 		serviceDetails.data.forEach((item, slabIndex) => {
 			SERVICE_OBJ[`slab_${slabIndex}_capacity`] = item.shipment_capacity || DEFAULT_VALUE;
 			SERVICE_OBJ[`slab_${slabIndex}_NEQ`] = item.normalized_capacity || DEFAULT_VALUE;
@@ -26,12 +24,6 @@ const getTableData = ({ data = {} }) => {
 
 		return SERVICE_OBJ;
 	});
-
-	// const slabData = serviceWiseData?.[GLOBAL_CONSTANTS.zeroth_index]?.data?.map((item) => ({
-	// 	slab_lower_limit : item.slab_lower_limit,
-	// 	slab_upper_limit : item.slab_upper_limit,
-	// 	slab_unit        : item.slab_unit,
-	// }));
 
 	const finalData = [
 		{

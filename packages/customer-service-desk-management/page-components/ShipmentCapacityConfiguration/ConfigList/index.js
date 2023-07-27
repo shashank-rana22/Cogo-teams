@@ -5,7 +5,6 @@ import { useState } from 'react';
 import EmptyState from '../../EmptyState';
 import LoadingState from '../../LoadingState';
 import ConfigListItem from '../ConfigListItem';
-import DeactivateModal from '../DeactivateModal';
 
 import styles from './styles.module.css';
 
@@ -42,12 +41,10 @@ function ConfigList({ list = [], loading = false, pageData = {}, page = 1, setPa
 						totalItems={pageData?.total_count || DEFAULT_TOTAL_COUNT}
 						currentPage={page || DEFAULT_PAGE}
 						pageSize={pageData?.page_limit}
-						onPageChange={setPage}
+						onPageChange={(val) => setPage(val)}
 					/>
 				</div>
 			) : null}
-
-			{showModal && <DeactivateModal showModal={showModal} setShowModal={setShowModal} />}
 
 		</>
 

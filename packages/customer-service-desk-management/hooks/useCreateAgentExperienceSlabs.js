@@ -1,11 +1,12 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getExperienceSlabs from '../utils/getExperienceSlabs';
 
-const apiMapping = ({ isEditMode = false }) => {
-	if (isEditMode) {
+const apiMapping = ({ isEditMode = false, agentExpSlabs = [] }) => {
+	if (isEditMode || !isEmpty(agentExpSlabs)) {
 		return {
 			url     : 'update_csd_config',
 			authkey : 'post_allocation_update_csd_config',
@@ -17,8 +18,8 @@ const apiMapping = ({ isEditMode = false }) => {
 	};
 };
 
-const useCreateAgentExperienceSlabs = ({ isEditMode = false }) => {
-	const { url = '', authkey = '' } = apiMapping({ isEditMode });
+const useCreateAgentExperienceSlabs = ({ isEditMode = false, fetchList = () => {}, agentExpSlabs = [] }) => {
+	const { url = '', authkey = '' } = apiMapping({ isEditMode, agentExpSlabs });
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url,
@@ -30,10 +31,13 @@ const useCreateAgentExperienceSlabs = ({ isEditMode = false }) => {
 		try {
 			await trigger({
 				data: {
-					...(isEditMode ? { id: configId } : { config_id: configId }),
+					...((isEditMode || !isEmpty(agentExpSlabs)) ? { id: configId } : { config_id: configId }),
 					agent_experience_slabs: getExperienceSlabs(values.agent_experience_slabs),
 				},
 			});
+
+			fetchList();
+
 			setShowForm(true);
 			Toast.success('Experience set successfully!');
 		} catch (error) {
