@@ -1,7 +1,23 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 const CHECK_ONE_OR_MORE_ELEMENTS = 1;
+const NULL_SUBJECT_LENGTH = 0;
+const MAXIMUM_ALLOWED_SUBJECT_LENGTH = 250;
+const REPLY_EMAIL_SUBJECT_PREFIX = 'RE';
+const FORWARD_EMAIL_SUBJECT_PREFIX = 'FW';
+
+function getSubject({ subject = '', val = '' }) {
+	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
+
+	const emailPrefix = val === 'forward'
+		? FORWARD_EMAIL_SUBJECT_PREFIX
+		: REPLY_EMAIL_SUBJECT_PREFIX;
+
+	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
+		? subject : `${emailPrefix}: ${formatedSubject}`;
+}
 
 const getReplyMails = ({
 	filteredRecipientData = [],
@@ -83,12 +99,13 @@ const getRecipientData = ({
 				filteredBccData,
 			});
 		}
+		const newSubject = getSubject({ subject, val });
 
 		setEmailState(
 			(prev) => ({
 				...prev,
-				subject,
 				body          : '',
+				subject       : newSubject || subject,
 				toUserEmail   : mailData?.toUserEmail || [],
 				ccrecipients  : mailData?.ccrecipients || [],
 				bccrecipients : mailData?.bccrecipients || [],

@@ -423,6 +423,7 @@ const GLOBAL_CONSTANTS = {
 		four_characters_pin    : /^.{4}$/,
 		amount_seperator       : /\D/g,
 		white_space_characters : /\s/g,
+		email_subject_prefix   : /^(re|fwd|fw):\s*/i,
 	},
 	zeroth_index                 : 0,
 	milliseconds_in_one_day      : 86400000,
