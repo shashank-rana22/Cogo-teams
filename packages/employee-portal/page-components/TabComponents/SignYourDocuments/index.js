@@ -16,8 +16,6 @@ function SignYourDocuments({ setInformationPage, data }) {
 		{ getEmployeeDetails: getDocRefetch, document_type: 'signed_document' },
 	);
 
-	console.log('shivam :: 123123123123123123123123');
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
