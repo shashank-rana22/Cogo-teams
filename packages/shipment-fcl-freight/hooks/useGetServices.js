@@ -4,7 +4,7 @@ import { useEffect, useCallback, useState } from 'react';
 
 function useGetServices({ shipment_data = {}, additional_methods = [] }) {
 	const [servicesData, setServicesData] = useState([]);
-	const [bookingReqData, setBookingReqData] = useState([]);
+	const [bookingReqData, setBookingReqData] = useState({});
 
 	const [{ loading : servicesLoading }, trigger] = useRequest({
 		url    : 'fcl_freight/get_services',
