@@ -91,7 +91,6 @@
 	font-size: 13px;
 	color: #4f4f4f;
 	text-overflow: ellipsis;
-	word-break: break-all;
 	white-space: nowrap;
 }
 
