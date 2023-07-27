@@ -5,15 +5,17 @@ import { isEmpty, startCase } from '@cogoport/utils';
 const CHECK_ONE_OR_MORE_ELEMENTS = 1;
 const NULL_SUBJECT_LENGTH = 0;
 const MAXIMUM_ALLOWED_SUBJECT_LENGTH = 250;
-const REPLY_EMAIL_SUBJECT_PREFIX = 'RE';
-const FORWARD_EMAIL_SUBJECT_PREFIX = 'FW';
+
+const EMAIL_SUBJECT_PREFIX_MAPPING = {
+	reply     : 'RE',
+	reply_all : 'RE',
+	forward   : 'FW',
+};
 
 function getSubject({ subject = '', val = '' }) {
 	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
 
-	const emailPrefix = val === 'forward'
-		? FORWARD_EMAIL_SUBJECT_PREFIX
-		: REPLY_EMAIL_SUBJECT_PREFIX;
+	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[val];
 
 	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
 		? subject : `${emailPrefix}: ${formatedSubject}`;
