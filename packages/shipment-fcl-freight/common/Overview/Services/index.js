@@ -33,7 +33,10 @@ function Services() {
 	});
 
 	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
-	const isSuperadmin = ['admin', 'superadmin'].includes(activeStakeholder);
+
+	const isOtherServiceOperations = ['booking_desk_manager', 'booking_desk', 'costbooking_ops',
+		'costbooking_manager', 'document_desk', 'document_desk_manager',
+		'lastmile_ops_manager', 'lastmile_ops'].includes(activeStakeholder);
 
 	const heading = (serviceCategory) => (
 		<div className={styles.header}>{ startCase(serviceCategory)}</div>
@@ -45,10 +48,9 @@ function Services() {
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<>
-							{!isKam && !isEmpty(serviceObj[serviceCategory])
-								? heading(serviceCategory) : null}
+							{!isKam && !isOtherServiceOperations ? heading(serviceCategory) : null}
 
-							{isKam
+							{(isKam || isOtherServiceOperations)
 							&& showTradeHeading[`${serviceCategory.split('Services')[GLOBAL_CONSTANTS.zeroth_index]}`]
 								? heading(serviceCategory) : null}
 
@@ -61,8 +63,8 @@ function Services() {
 								))}
 							</div>
 
-							{ isKam || isSuperadmin
-								? (
+							{ isOtherServiceOperations ? null
+								: (
 									<div className={styles.upselling}>
 										{(upsellServices[serviceCategory]).map((service) => (
 											<AddNewService
@@ -79,7 +81,8 @@ function Services() {
 											/>
 										))}
 									</div>
-								) : null}
+								)}
+
 						</>
 					))}
 				</div>
