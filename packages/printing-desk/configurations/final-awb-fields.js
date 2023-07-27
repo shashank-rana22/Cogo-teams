@@ -1,17 +1,5 @@
-function formatDate(date) {
-	if (date) {
-		return new Date(date).toLocaleDateString('en-GB', {
-			day   : 'numeric',
-			month : 'short',
-			year  : 'numeric',
-		});
-	}
-	return new Date().toLocaleDateString('en-GB', {
-		day   : 'numeric',
-		month : 'short',
-		year  : 'numeric',
-	});
-}
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 export const FinalAwbFields = {
 	fields: [
@@ -47,7 +35,12 @@ export const FinalAwbFields = {
 			span   : 1,
 			render : (item) => (
 				<div style={{ textTransform: 'uppercase' }}>
-					{formatDate(item.deadline)}
+					{formatDate({
+						date       : item?.deadline,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+
+					})}
 				</div>
 			),
 		},

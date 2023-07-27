@@ -77,7 +77,7 @@ function UploadModal({
 					<Modal.Body>
 						<Layout fields={controls} errors={errors} control={control} />
 						<Button
-							style={{ margin: '20px 0 0 auto' }}
+							style={{ marginTop: '20px' }}
 							onClick={handleSubmit(onSubmit)}
 							disabled={loading || updateLoading}
 							themeType="accent"
