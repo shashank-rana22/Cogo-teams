@@ -11,7 +11,8 @@ const useGetMinPrice = () => {
 		try {
 			await trigger({
 				params: {
-					service_attributes: [
+					currency           : 'USD',
+					service_attributes : [
 						{
 							filters: {
 								// id: '1c09df70-f14b-4921-86c7-741cdb58abd7',

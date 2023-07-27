@@ -166,11 +166,13 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 						))}
 					</div>
 
-					<div className={styles.cogo_points}>
-						CogoPoints
-						<IcCCogoCoin className={styles.cogo_points_logo} width={16} height={16} />
-						{rateCardData?.earnable_cogopoints}
-					</div>
+					{rateCardData?.earnable_cogopoints ? (
+						<div className={styles.cogo_points}>
+							CogoPoints
+							<IcCCogoCoin className={styles.cogo_points_logo} width={16} height={16} />
+							{rateCardData?.earnable_cogopoints}
+						</div>
+					) : null}
 				</div>
 
 			</div>

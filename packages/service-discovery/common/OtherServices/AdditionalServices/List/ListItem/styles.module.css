@@ -1,7 +1,4 @@
 .service {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 	height: 60px;
 	background: #fff;
 	border: 1px dashed #f3eae7;
@@ -16,6 +13,7 @@
 .service_div {
 	display: flex;
 	align-items: center;
+	float: left;
 	height: 60px;
 	border-radius: 4px;
 }
@@ -31,8 +29,9 @@
 .icn_container {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	float: right;
 	min-width: max-content;
+	height: 100%;
 }
 
 .tick_icon {

@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -50,8 +52,10 @@ const useCreateContract = ({
 				setContractData({ ...values, ...res?.data, search_type });
 			}
 			return true;
-		} catch (e) {
-			// Toast.error(e?.error?.message);
+		} catch (error) {
+			if (error?.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 			return false;
 		}
 	};

@@ -5,18 +5,18 @@ import styles from './styles.module.css';
 
 const FEATURES_MAPPING = [
 	{
-		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/guarenteed_booking',
+		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_213.svg',
 		label : '30 Day Price Lock In',
 		text  : 'Free of Market Fluctuation',
 	},
 	{
-		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/guarenteed_booking',
-		label : '30 Day Price Lock In',
-		text  : 'Free of Market Fluctuation',
+		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/calender',
+		label : 'Ease of Consumption',
+		text  : 'With Shipment Plan',
 	}, {
 		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/guarenteed_booking',
-		label : '30 Day Price Lock In',
-		text  : 'Free of Market Fluctuation',
+		label : 'Guaranteed Booking',
+		text  : 'Planned Procurement',
 	},
 ];
 

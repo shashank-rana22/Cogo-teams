@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { addDays } from '@cogoport/utils';
+import React, { useEffect } from 'react';
 
 import LocationDetails from '../../../../../common/LocationDetails';
 import getElementController from '../../../../../configs/getElementController';
@@ -41,12 +41,6 @@ function RequestContract({
 		search_type,
 	});
 
-	const startDate = watch('validity_start');
-
-	useEffect(() => {
-		setValue('validity_end', '');
-	}, [setValue, startDate]);
-
 	const onSubmit = async (val) => {
 		const done = await createContract(val);
 
@@ -54,6 +48,12 @@ function RequestContract({
 			setScreen('submitted');
 		}
 	};
+
+	const startDate = watch('validity_start');
+
+	useEffect(() => {
+		setValue('validity_end', null);
+	}, [setValue, startDate]);
 
 	return (
 		<div className={styles.container}>
@@ -76,9 +76,11 @@ function RequestContract({
 			<div className={styles.form}>
 				<div className={styles.form_items_container}>
 					{controls.map((controlItem) => {
-						const { name, label, type, span } = controlItem;
+						let newControl = { ...controlItem };
 
-						if (!controlItem.showIn.includes(search_type)) {
+						const { name, label, type, span } = newControl;
+
+						if (!newControl.showIn.includes(search_type)) {
 							return null;
 						}
 
@@ -86,12 +88,19 @@ function RequestContract({
 						if (!Element) return null;
 
 						const errorOriginal = getErrorMessage({
-							error : errors?.[controlItem.name],
-							rules : controlItem?.rules,
-							label : controlItem?.label,
+							error : errors?.[newControl.name],
+							rules : newControl?.rules,
+							label : newControl?.label,
 						});
 
 						const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENTAGE_FACTOR - FLEX_OFFSET;
+
+						const maxDate = addDays(startDate, 30);
+						const minDate = startDate;
+
+						if (name === 'validity_end') {
+							newControl = { ...newControl, maxDate, minDate };
+						}
 
 						return (
 							<div key={`${name}_${label}`} className={styles.form_item} style={{ width: `${flex}%` }}>
@@ -99,14 +108,14 @@ function RequestContract({
 									<div className={styles.label}>
 										{label || ''}
 
-										{controlItem?.rules?.required ? (
+										{newControl?.rules?.required ? (
 											<span className={styles.required_mark}>*</span>
 										) : null}
 									</div>
 								) : null}
 
 								<Element
-									{...controlItem}
+									{...newControl}
 									name={name}
 									label={label}
 									control={control}

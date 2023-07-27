@@ -1,9 +1,13 @@
 import { Modal } from '@cogoport/components';
+import { IcMCross } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import LandingPage from './LandingPage';
 import RequestContract from './RequestContract';
+import styles from './styles.module.css';
 import Submitted from './SubmittedPage';
+
+const SCREENS_TO_SHOW_CROSS_IN = ['landing', 'request_contract'];
 
 function Contract({
 	data = {},
@@ -47,7 +51,18 @@ function Contract({
 
 	return (
 		<Modal size="lg" show={show} onClose={onClose} placement="top">
-			<ActiveComponent {...props} />
+			<div className={styles.container}>
+				{SCREENS_TO_SHOW_CROSS_IN.includes(screen) ? (
+					<IcMCross
+						className={styles.cross_icn}
+						width={20}
+						height={20}
+						onClick={() => setShow(false)}
+					/>
+				) : null}
+
+				<ActiveComponent {...props} />
+			</div>
 		</Modal>
 	);
 }
