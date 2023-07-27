@@ -52,7 +52,10 @@ function Day1({ setInformationPage }) {
 			</div>
 
 			<div className={styles.rich_text}>
-				<div dangerouslySetInnerHTML={{ __html: data?.list?.[DEFAULT_INDEX]?.html_template || 'Day 1!' }} />
+				<div
+					className={styles.day1_text}
+					dangerouslySetInnerHTML={{ __html: data?.list?.[DEFAULT_INDEX]?.html_template || 'Day 1!' }}
+				/>
 
 			</div>
 		</div>

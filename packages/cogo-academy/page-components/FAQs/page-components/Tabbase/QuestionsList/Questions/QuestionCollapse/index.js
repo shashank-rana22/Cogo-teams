@@ -41,7 +41,7 @@ function QuestionsCollapse({ questions }) {
 						color="white"
 					>
 						<div className={styles.pill_text}>
-							{startCase(item.display_name)}
+							{startCase(item?.display_name)}
 						</div>
 					</Pill>
 				))}
