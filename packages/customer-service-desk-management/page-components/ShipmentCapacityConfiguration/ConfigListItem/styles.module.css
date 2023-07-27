@@ -112,3 +112,26 @@
     margin-bottom: 4px;
     width: 110px;
 }
+
+.orgs {
+	display: flex;
+	flex-wrap: wrap;
+
+    :global{
+        .ui_pill_container {
+            margin: 4px;
+            margin-left: 0px;
+        }
+    }
+}
+
+.org_pill {
+	max-width: 120px;
+	height: 25px;
+}
+
+.org_pill div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

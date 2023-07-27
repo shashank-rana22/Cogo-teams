@@ -28,6 +28,56 @@ const activationStatus = ({ status, activated_at = '' }) => {
 	};
 };
 
+const getOrganizations = (organizations = []) => (
+	<section className={styles.orgs}>
+
+		{!isEmpty(organizations) ? (
+			<Tooltip
+				maxWidth={400}
+				content={startCase(organizations[GLOBAL_CONSTANTS.zeroth_index].business_name)}
+				placement="top"
+				key={organizations[GLOBAL_CONSTANTS.zeroth_index].id}
+			>
+				<Pill
+					className={styles.org_pill}
+					size="md"
+					color="#F3FAFA"
+				>
+					{organizations[GLOBAL_CONSTANTS.zeroth_index].business_name}
+				</Pill>
+			</Tooltip>
+		) : '-'}
+
+		{organizations.length > 1 && (
+			<Tooltip
+				maxWidth={400}
+				content={(organizations.map((org, index) => ((index >= 1) ? (
+					<Pill
+						key={org.id}
+						size="md"
+						color="#F3FAFA"
+					>
+						{org.business_name}
+					</Pill>
+				) : null)))}
+				placement="top"
+				interactive
+			>
+				<Pill
+					className={styles.org_pill}
+					size="md"
+					color="#F3FAFA"
+				>
+					+
+					{organizations.length - 1}
+					{' '}
+					More
+				</Pill>
+			</Tooltip>
+		)}
+	</section>
+);
+
 function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} }) {
 	const router = useRouter();
 
@@ -64,7 +114,7 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 					</div>
 					<div className={styles.item}>
 						<p className={styles.title}>Organizations</p>
-						<p className={styles.content}>-</p>
+						{getOrganizations(organization)}
 					</div>
 					<div className={styles.item}>
 						<p className={styles.title}>Booking Source</p>
