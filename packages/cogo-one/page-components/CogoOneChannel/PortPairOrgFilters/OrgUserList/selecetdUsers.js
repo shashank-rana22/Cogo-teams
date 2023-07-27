@@ -34,13 +34,14 @@ function SelecetdUsers({
 						key={user_id}
 						className={cl`${styles.each_container} ${styles.card_container}`}
 					>
-						<div className={styles.parent_flex}>
+						<div className={styles.all_user_select}>
 							<UserAvatar type="whatsapp" />
 							<div className={styles.name}>{startCase(user_name?.toLowerCase()) || 'Users'}</div>
 						</div>
 						<IcMCross
 							onClick={() => handleDelete({ eachUser })}
-							className={styles.cross_icon}
+							width={18}
+							height={18}
 						/>
 					</div>
 				);

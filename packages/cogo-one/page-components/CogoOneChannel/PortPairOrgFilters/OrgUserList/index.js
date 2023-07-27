@@ -192,7 +192,7 @@ function OrgUsersList({
 										onCardClick({ item: eachUser });
 									}}
 								>
-									<div className={styles.parent_flex}>
+									<div className={styles.all_user_select}>
 										<UserAvatar type="whatsapp" />
 										<div className={styles.name}>{startCase(userName)}</div>
 									</div>
