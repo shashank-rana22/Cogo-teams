@@ -1,5 +1,5 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestAir } from '@cogoport/request';
 
 const useUpdateShipmentDocument = () => {
@@ -19,7 +19,7 @@ const useUpdateShipmentDocument = () => {
 			listAPI({});
 			Toast.success('Document Approved Successfully');
 		} catch (err) {
-			Toast.error(err?.response?.data?.base?.[GLOBAL_CONSTANTS.zeroth_index] || 'Something went wrong');
+			toastApiError(err);
 		}
 	};
 

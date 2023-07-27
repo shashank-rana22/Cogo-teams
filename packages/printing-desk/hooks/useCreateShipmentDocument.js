@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 
@@ -18,7 +19,7 @@ const useCreateShipmentDocument = () => {
 			listAPI({ filters: {} });
 			Toast.success('Document Created Successfully');
 		} catch (err) {
-			Toast.error(err?.message || 'Failed to Upload');
+			toastApiError(err);
 		}
 	};
 

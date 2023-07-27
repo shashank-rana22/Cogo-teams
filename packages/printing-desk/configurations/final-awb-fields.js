@@ -53,7 +53,7 @@ export const FinalAwbFields = {
 		},
 		{
 			key   : 'upload',
-			label : '',
+			label : 'Action',
 			span  : 1,
 			func  : 'handleUpload',
 		},
