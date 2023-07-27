@@ -24,7 +24,7 @@ function ExceptionsManagement() {
 	const [exceptionFilter, setExceptionFilter] = useState({});
 	const [showCycleExceptions, setShowCycleExceptions] = useState(false);
 	const [subTabsValue, setSubTabsValue] = useState('masterExceptionList');
-	const [cycleListId, setCycleListId] = useState();
+	const [cycleListId, setCycleListId] = useState('');
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 	const [masterCount, setMasterCount] = useState(0);
 	const [cyclewiseCount, setCyclewiseCount] = useState(0);
@@ -44,7 +44,7 @@ function ExceptionsManagement() {
 		getMasterList,
 	} = useMasterException({ exceptionFilter, subTabsValue, setShowConfirmationModal, setExceptionFilter });
 
-	const [masterListId, setMasterListId] = useState();
+	const [masterListId, setMasterListId] = useState(null);
 
 	const CYCLE_WISE_COLUMN = cycleWiseExceptionTable({
 		sort,
