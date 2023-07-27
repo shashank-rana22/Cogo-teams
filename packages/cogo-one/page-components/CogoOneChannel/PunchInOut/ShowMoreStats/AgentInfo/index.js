@@ -1,4 +1,6 @@
 import { Avatar, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -26,7 +28,15 @@ function AgentInfo({
 				? <Button size="md" onClick={handlePunchIn} disabled={loading}>Start Shift</Button>
 				: (
 					<div className={styles.start_time}>
-						<div className={styles.time}>{punchedTime}</div>
+						<div className={styles.time}>
+							{formatDate({
+								date       : punchedTime,
+								formatType : 'dateTime',
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							})}
+
+						</div>
 						<Button
 							size="md"
 							themeType="accent"

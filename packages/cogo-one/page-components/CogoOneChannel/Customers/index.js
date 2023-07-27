@@ -33,10 +33,6 @@ function Customers({
 	workPrefernceLoading = false,
 	setOpenKamContacts = () => {},
 	agentStatus = {},
-	statusLoading = false,
-	updateUserStatus = () => {},
-	openInactiveModal = false,
-	setOpenInactiveModal = () => {},
 	fetchworkPrefernce = () => {},
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
@@ -94,10 +90,6 @@ function Customers({
 					<div className={styles.styled_toggle}>
 						<AgentStatus
 							agentStatus={agentStatus}
-							statusLoading={statusLoading}
-							updateUserStatus={updateUserStatus}
-							openInactiveModal={openInactiveModal}
-							setOpenInactiveModal={setOpenInactiveModal}
 							fetchworkPrefernce={fetchworkPrefernce}
 						/>
 					</div>

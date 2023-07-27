@@ -1,16 +1,24 @@
 import { Toggle } from '@cogoport/components';
+import { useState } from 'react';
 
+import useCreateUserInactiveStatus from '../../../../hooks/useCreateUserInactiveStatus';
 import InactiveModal from '../InactiveModal';
 
 function AgentStatus({
 	agentStatus = {},
-	setOpenInactiveModal = () => {},
-	openInactiveModal = false,
-	updateUserStatus = () => {},
-	statusLoading = false,
 	fetchworkPrefernce = () => {},
 }) {
 	const { status = '' } = agentStatus || {};
+
+	const [openInactiveModal, setOpenInactiveModal] = useState(false);
+
+	const {
+		loading: statusLoading,
+		updateUserStatus = () => {},
+	} = useCreateUserInactiveStatus({
+		fetchworkPrefernce,
+		setOpenModal: setOpenInactiveModal,
+	});
 
 	const isAgentActive = status === 'active';
 

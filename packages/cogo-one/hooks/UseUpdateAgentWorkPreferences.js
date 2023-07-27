@@ -1,17 +1,29 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const currentDateTime = new Date();
-
 const getPayload = ({ type }) => ({
 	status         : type,
-	validity_start : type === 'punched_in' ? currentDateTime : undefined,
-	validity_end   : type === 'punched_out' ? currentDateTime : undefined,
+	validity_start : type === 'punched_in' ? formatDate({
+		date       : new Date(),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
+		formatType : 'dateTime',
+		separator  : ' ',
+	}) : undefined,
+	validity_end: type === 'punched_out' ? formatDate({
+		date       : new Date(),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
+		formatType : 'dateTime',
+		separator  : ' ',
+	}) : undefined,
 });
 
-function useUpdateAgentWorkPreferences({ fetchworkPrefernce = () => {} }) {
+function useUpdateAgentWorkPreferences({ fetchworkPrefernce = () => {}, agentTimeline = () => {} }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/update_agent_work_preference',
 		method : 'post',
@@ -22,11 +34,12 @@ function useUpdateAgentWorkPreferences({ fetchworkPrefernce = () => {} }) {
 			await trigger({
 				data: getPayload({ type }),
 			});
+			agentTimeline();
 			fetchworkPrefernce();
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
 		}
-	}, [trigger, fetchworkPrefernce]);
+	}, [trigger, fetchworkPrefernce, agentTimeline]);
 
 	return {
 		updateWorkPreference,

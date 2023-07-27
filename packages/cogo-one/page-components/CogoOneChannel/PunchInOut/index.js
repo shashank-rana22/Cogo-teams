@@ -5,26 +5,27 @@ import { IcMDown, IcMArrowDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
+import useGetAgentTimeline from '../../../hooks/useGetAgentTimeline';
 import useUpdateAgentWorkPreferences from '../../../hooks/UseUpdateAgentWorkPreferences';
 
 import ShowMoreStats from './ShowMoreStats';
 import styles from './styles.module.css';
-
-const punchedTime = formatDate({
-	date       : new Date(),
-	formatType : 'time',
-	dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-});
 
 function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const { status = '' } = agentStatus || {};
 
+	const { data = {}, agentTimeline = () => {} } = useGetAgentTimeline();
+
+	const { list = [] } = data || {};
+
+	const lastBreakTime = list?.[GLOBAL_CONSTANTS.zeroth_index]?.break_started_at;
+
 	const {
 		updateWorkPreference = () => {},
 		loading = false,
-	} = useUpdateAgentWorkPreferences({ fetchworkPrefernce });
+	} = useUpdateAgentWorkPreferences({ fetchworkPrefernce, agentTimeline });
 
 	const handlePunchIn = () => {
 		updateWorkPreference({ type: 'punched_in' });
@@ -39,7 +40,7 @@ function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
 						showDetails={showDetails}
 						updateWorkPreference={updateWorkPreference}
 						loading={loading}
-						punchedTime={punchedTime}
+						punchedTime={lastBreakTime}
 						status={status}
 						handlePunchIn={handlePunchIn}
 					/>
@@ -60,7 +61,12 @@ function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
 					<>
 						<Image src={GLOBAL_CONSTANTS.image_url.clock_icon} alt="clock" width={18} height={18} />
 						<div className={styles.shift_time}>
-							{punchedTime}
+							{formatDate({
+								date       : lastBreakTime,
+								formatType : 'dateTime',
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							})}
 						</div>
 					</>
 				)}
