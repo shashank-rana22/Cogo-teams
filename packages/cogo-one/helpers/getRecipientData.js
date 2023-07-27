@@ -3,10 +3,14 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 const CHECK_ONE_OR_MORE_ELEMENTS = 1;
+const NULL_SUBJECT_LENGTH = 0;
 const MAXIMUM_ALLOWED_SUBJECT_LENGTH = 250;
 
-function removeEmailPrefix({ subject }) {
-	return subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
+function getSubject({ subject = '', val = '' }) {
+	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
+
+	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
+		? subject : `${val === 'forward' ? 'FW' : 'RE'}: ${formatedSubject}`;
 }
 
 const getReplyMails = ({
@@ -15,13 +19,7 @@ const getReplyMails = ({
 	activeMailAddress = '',
 	filteredCcData = [],
 	filteredBccData = [],
-	formatedSubject = '',
-	subject = '',
 }) => {
-	const newSubject = (
-		formatedSubject.length > MAXIMUM_ALLOWED_SUBJECT_LENGTH
-	) ? subject.trim() : `RE: ${formatedSubject}`;
-
 	if (
 		activeMailAddress.toLowerCase() !== senderAddress.toLowerCase()
 		|| filteredRecipientData.length !== CHECK_ONE_OR_MORE_ELEMENTS
@@ -30,10 +28,10 @@ const getReplyMails = ({
 			&& isEmpty(filteredBccData)
 		) || isEmpty(filteredRecipientData)
 	) {
-		return { toUserEmail: [senderAddress], subject: newSubject };
+		return { toUserEmail: [senderAddress] };
 	}
 
-	return { toUserEmail: filteredRecipientData, subject: newSubject };
+	return { toUserEmail: filteredRecipientData };
 };
 
 const getReplyAllMails = ({
@@ -42,14 +40,8 @@ const getReplyAllMails = ({
 	activeMailAddress = '',
 	filteredCcData = [],
 	filteredBccData = [],
-	formatedSubject = '',
-	subject = '',
 }) => {
 	let toUserEmail = filteredRecipientData;
-
-	const newSubject = (
-		formatedSubject.length > MAXIMUM_ALLOWED_SUBJECT_LENGTH
-	) ? subject.trim() : `RE: ${formatedSubject}`;
 
 	if (senderAddress.toLowerCase() !== activeMailAddress.toLowerCase()) {
 		toUserEmail = [senderAddress, ...toUserEmail];
@@ -59,7 +51,6 @@ const getReplyAllMails = ({
 		toUserEmail,
 		ccrecipients  : filteredCcData,
 		bccrecipients : filteredBccData,
-		subject       : newSubject,
 	};
 };
 
@@ -74,12 +65,9 @@ const getRecipientData = ({
 	subject = '',
 	isDraft = false,
 }) => {
-	let newSubject = '';
-
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
-	const formatedSubject = removeEmailPrefix({ subject });
 
 	const handleClick = (val) => {
 		if (isDraft) {
@@ -95,8 +83,6 @@ const getRecipientData = ({
 				filteredRecipientData,
 				senderAddress,
 				activeMailAddress,
-				formatedSubject,
-				subject,
 			});
 		} else if (val === 'reply_all') {
 			mailData = getReplyAllMails({
@@ -105,20 +91,15 @@ const getRecipientData = ({
 				activeMailAddress,
 				filteredCcData,
 				filteredBccData,
-				formatedSubject,
-				subject,
 			});
-		} else if (val === 'forward') {
-			newSubject = (
-				formatedSubject.length > MAXIMUM_ALLOWED_SUBJECT_LENGTH
-			) ? subject.trim() : `FW: ${formatedSubject}`;
 		}
+		const newSubject = getSubject({ subject, val });
 
 		setEmailState(
 			(prev) => ({
 				...prev,
 				body          : '',
-				subject       : mailData?.subject || newSubject || subject,
+				subject       : newSubject || subject,
 				toUserEmail   : mailData?.toUserEmail || [],
 				ccrecipients  : mailData?.ccrecipients || [],
 				bccrecipients : mailData?.bccrecipients || [],
