@@ -2,6 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { AddCompanyModal } from '@cogoport/ocean-modules';
 import { useContext } from 'react';
 
+import useGetOrganization from '../../../hooks/useGetOrganization';
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import useListShipmentTradePartners from '../../../hooks/useListShipmentTradePartners';
 import useTaskRpa from '../../../hooks/useTaskRpa';
@@ -17,9 +18,11 @@ import {
 	UploadDraftBL,
 	AmendDraftBl,
 	UploadSI,
+	MarkIgmShipmentConfirm,
 	UploadComplianceDocs,
 } from './CustomTasks';
 import CargoInsurance from './CustomTasks/CargoInsurance';
+import ConfirmFreightBooking from './CustomTasks/ConfirmFreightBooking';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -33,6 +36,7 @@ const TRADE_PARTY_TYPE = {
 	add_shipper_details   : { trade_party_type: 'shipper' },
 };
 
+const INCLUDED_ORG = ['nvocc', 'freight_forwarder'];
 const REDUCE_LENGTH_BY = 1;
 const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
 
@@ -46,10 +50,13 @@ function ExecuteTask({
 	setSelectedMail = () => {},
 	tasksList = [],
 }) {
+	const { servicesList, shipment_data, primary_service, stakeholderConfig } = useContext(ShipmentDetailContext);
+
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
-	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 	const { data } = useListShipmentTradePartners({ shipment_id: shipment_data?.id });
+
+	const showIgmTasks = !!stakeholderConfig?.tasks?.show_igm_tasks;
 
 	const {
 		steps = [],
@@ -57,6 +64,11 @@ function ExecuteTask({
 		setCurrentStep = () => {},
 		serviceIdMapping = [],
 	} = useTaskExecution({ task, taskConfigData });
+
+	const { orgData } = useGetOrganization({
+		primary_service,
+		task,
+	});
 
 	const stepConfigValue = steps.length
 		? steps[currentStep] || steps[steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT]
@@ -220,6 +232,33 @@ function ExecuteTask({
 
 	if (task?.task === 'generate_cargo_insurance' && SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)) {
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+	}
+
+	if (task.task === 'mark_confirmed'
+	&& !orgData?.data?.category_types?.includes('shipping_line')
+	&& orgData?.data?.category_types?.some((value) => INCLUDED_ORG.includes(value))
+        && primary_service?.trade_type === 'export'
+	) {
+		return (
+			<ConfirmFreightBooking
+				task={task}
+				onCancel={onCancel}
+				services={servicesList}
+				taskListRefetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (showIgmTasks && task?.task === 'mark_igm_shipment_confirmed') {
+		return (
+			<MarkIgmShipmentConfirm
+				task={task}
+				taskConfigData={taskConfigData}
+				onCancel={onCancel}
+				taskListRefetch={taskListRefetch}
+				tasksList={tasksList}
+			/>
+		);
 	}
 
 	return (

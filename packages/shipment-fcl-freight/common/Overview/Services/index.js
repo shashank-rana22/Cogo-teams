@@ -12,6 +12,15 @@ import Loader from './Loader';
 import ServiceDetails from './ServiceDetails';
 import styles from './styles.module.css';
 
+function Heading({ serviceCategory = '', canUpsell = false }) {
+	if (!canUpsell && serviceCategory === 'originServices') return null;
+	return (
+		<div className={styles.header}>
+			{startCase(serviceCategory)}
+		</div>
+	);
+}
+
 function Services() {
 	const {
 		shipment_data,
@@ -20,6 +29,7 @@ function Services() {
 		servicesList,
 		servicesLoading,
 		activeStakeholder,
+		stakeholderConfig,
 	} = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
@@ -34,13 +44,11 @@ function Services() {
 
 	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
 
+	const canUpsell = !!stakeholderConfig?.overview?.can_upsell;
+
 	const isOtherServiceOperations = ['booking_desk_manager', 'booking_desk', 'costbooking_ops',
 		'costbooking_manager', 'document_desk', 'document_desk_manager',
 		'lastmile_ops_manager', 'lastmile_ops'].includes(activeStakeholder);
-
-	const heading = (serviceCategory) => (
-		<div className={styles.header}>{ startCase(serviceCategory)}</div>
-	);
 
 	return !servicesLoading && !isGettingShipment
 		? (
@@ -48,11 +56,11 @@ function Services() {
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<>
-							{!isKam && !isOtherServiceOperations ? heading(serviceCategory) : null}
+							{!isKam ? <Heading serviceCategory={serviceCategory} canUpsell={canUpsell} /> : null}
 
 							{(isKam || isOtherServiceOperations)
 							&& showTradeHeading[`${serviceCategory.split('Services')[GLOBAL_CONSTANTS.zeroth_index]}`]
-								? heading(serviceCategory) : null}
+								? <Heading serviceCategory={serviceCategory} canUpsell={canUpsell} /> : null}
 
 							<div className={styles.trade_services}>
 								{(Object.keys(serviceObj[serviceCategory])).map((service) => (

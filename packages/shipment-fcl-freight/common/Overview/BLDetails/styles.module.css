@@ -34,6 +34,10 @@
 	}
 }
 
+.bl_count {
+	margin-left: 8px;
+}
+
 .bl_count_container {
 	display: flex;
 	align-items: center;

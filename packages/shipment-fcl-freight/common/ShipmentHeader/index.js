@@ -1,6 +1,6 @@
-import { Button, Popover, Tooltip } from '@cogoport/components';
+import { Popover, Tooltip, Toast, cl, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMOverflowDot } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMCopy } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useContext, useState } from 'react';
 
@@ -13,10 +13,42 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 import getCanCancelShipment from './utils/getCanCancelShipment';
 
+const STYLE_ICON = {
+	height : 25,
+	width  : 25,
+};
+
+const handleCopy = (val) => {
+	navigator.clipboard
+		.writeText(val)
+		.then(Toast.info('Copied Successfully !!', { autoClose: 1000 }));
+};
+
+function CfsDetails({ showPocDetails = true, primary_service = {} }) {
+	return (
+		<div className={styles.heading}>
+			<span>CFS Address:</span>
+			<div className={styles.cfs_details}>
+				{primary_service?.cfs_address ?? 'NA'}
+			</div>
+			{showPocDetails && primary_service?.cfs_address ? (
+				<IcMCopy
+					onClick={() => handleCopy(primary_service?.cfs_address)}
+					style={STYLE_ICON}
+				/>
+			) : null }
+		</div>
+	);
+}
+
 function ShipmentHeader() {
 	const user_data = useSelector((({ profile }) => profile?.user));
 
-	const { shipment_data, primary_service, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data, primary_service,
+		isGettingShipment,
+		activeStakeholder, stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
 
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
@@ -27,16 +59,22 @@ function ShipmentHeader() {
 		return <Loader />;
 	}
 
+	const showPoNumber = !!stakeholderConfig?.shipment_header?.show_po_number;
+	const showCfsDetails = !!stakeholderConfig?.shipment_header?.show_poc_details;
+
 	const showCancelShipmentIcon = getCanCancelShipment({
 		shipment_data,
 		primary_service,
 		user_data,
 		activeStakeholder,
+		stakeholderConfig,
 	});
 
+	const showPocDetails = !!stakeholderConfig?.shipment_header?.show_poc_details;
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.customer}>
+		<header className={cl`${styles.container} ${!showPocDetails ? styles.igm_desk : ''}`}>
+			<div className={cl`${styles.customer} ${!showPocDetails ? styles.igm_desk : ''}`}>
 				<Tooltip
 					theme="light"
 					placement="bottom"
@@ -51,36 +89,43 @@ function ShipmentHeader() {
 					)}
 				>
 					<div className={styles.business_name}>
-
 						{activeStakeholder !== 'consignee_shipper_booking_agent'
 							? importer_exporter?.business_name
 							: consignee_shipper?.business_name}
 					</div>
 				</Tooltip>
 
-				{po_number ? (
-					<div className={styles.po_number}>
-						PO Number:
-						{' '}
-						{po_number}
+				{showPoNumber ? (
+					<div>
+						{po_number ? (
+							<span className={styles.po_number}>
+								PO Number:
+								{' '}
+								{po_number}
+							</span>
+						) : (
+							<Button
+								className={styles.button}
+								themeType="linkUi"
+								onClick={() => setShowModal('add_po_number')}
+							>
+								Add PO Number
+							</Button>
+						)}
 					</div>
-				) : (
-					<Button
-						className={styles.button}
-						themeType="link"
-						tabIndex={0}
-						onClick={() => setShowModal('add_po_number')}
-					>
-						Add PO Number
-					</Button>
-				)}
+				) : null }
 			</div>
 
 			<div className={styles.port_details}>
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
 
-			<CargoDetails primary_service={primary_service} />
+			{showCfsDetails ? <CargoDetails primary_service={primary_service} /> : (
+				<CfsDetails
+					primary_service={primary_service}
+					showPocDetails={showPocDetails}
+				/>
+			)}
 
 			{showCancelShipmentIcon
 				? (
@@ -112,7 +157,7 @@ function ShipmentHeader() {
 			{showModal === 'cancel_shipment' ? (
 				<CancelShipment setShow={setShowModal} />
 			) : null}
-		</div>
+		</header>
 	);
 }
 

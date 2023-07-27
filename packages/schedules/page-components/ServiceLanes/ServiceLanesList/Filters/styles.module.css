@@ -1,0 +1,24 @@
+.outer_box {
+	display: flex;
+	justify-content: space-between;
+	padding: 16px 0;
+}
+
+.search {
+	width: 236px;
+	padding-left: 12px;
+}
+
+.filter_search {
+	display: flex;
+
+	:global {
+		.ui_button_container {
+			height: 40px;
+		}
+	}
+}
+
+.filter_select {
+	width: 260px;
+}

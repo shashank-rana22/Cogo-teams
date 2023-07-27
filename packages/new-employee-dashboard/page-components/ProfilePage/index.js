@@ -10,14 +10,16 @@ import Header from './Header';
 import CtcBreakupModal from './Header/CtcBreakupModal';
 import OfferLetter from './OfferLetter';
 import ProfileDetails from './ProfileDetails';
+import ReleaseDocuments from './ReleaseDocuments';
 import SignedDocuments from './SignedDocuments';
 import styles from './styles.module.css';
 
 const TABS_MAPPING = {
-	profile_info     : ProfileDetails,
-	additional_info  : AdditionalDetails,
-	offer_letter     : OfferLetter,
-	Signed_documents : SignedDocuments,
+	profile_info      : ProfileDetails,
+	additional_info   : AdditionalDetails,
+	offer_letter      : OfferLetter,
+	Release_Documents : ReleaseDocuments,
+	Signed_documents  : SignedDocuments,
 
 };
 
@@ -35,6 +37,8 @@ function ProfilePage() {
 		getEmployeeDetails,
 		getEmployeeDetailsLoading,
 		error = false,
+		shareOfferLetter = '',
+		setShareOfferLetter = () => {},
 		setError = () => {},
 	} = useProfileDetails();
 
@@ -93,6 +97,9 @@ function ProfilePage() {
 					offerLetterApiRefetch={offerLetterApiRefetch}
 					error={error}
 					setError={setError}
+					shareOfferLetter={shareOfferLetter}
+					setShareOfferLetter={setShareOfferLetter}
+
 				/>
 			)}
 		</div>

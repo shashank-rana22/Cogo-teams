@@ -1,0 +1,23 @@
+.top_bar {
+	display: flex;
+}
+
+.port_pair {
+	display: flex;
+	align-items: center;
+	padding-left: 16px;
+	font-weight: 600;
+}
+
+.table {
+	background-color: #fff;
+}
+
+.th {
+	text-align: center;
+}
+
+.pagination {
+	display: flex;
+	justify-content: right;
+}

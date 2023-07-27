@@ -23,6 +23,8 @@ import faq from './faq-apis';
 import feedback from './feedback-apis';
 import ff_cost_booking from './ff-cost-booking-apis';
 import HRMS from './hrms-apis';
+import igm_desk from './igm-desk-apis';
+import igm_shipment from './igm-shipment-apis';
 import ingestion from './ingestion-apis';
 import cargo_insurance from './insurance-apis';
 import kam_desk from './kam-desk-apis';
@@ -46,6 +48,7 @@ import saas from './saas';
 import saas_subscription from './saas-subscription';
 import saas_tools from './saas-tools';
 import sales_invoice from './sales-invoice-apis';
+import schedules from './schedules-apis';
 import search from './search-apis';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
@@ -60,6 +63,11 @@ const apis = {
 		module: 'search',
 	})),
 	shipment: shipment.map((api) => ({
+		module  : 'shipment',
+		feature : 'shipment',
+		...api,
+	})),
+	igm_shipment: igm_shipment.map((api) => ({
 		module  : 'shipment',
 		feature : 'shipment',
 		...api,
@@ -151,6 +159,8 @@ const apis = {
 	...saas_subscription,
 	...chakravyuh,
 	risk_management,
+	...schedules,
+	igm_desk,
 };
 
 export default apis;

@@ -27,10 +27,10 @@ function TaskDetails({
 		});
 	});
 
-	const taskName = getTaskDisplayName({ shipment_data, task, REQUIRED_SERVICE_ARR });
+	const taskName = getTaskDisplayName({ shipment_data, task, REQUIRED_SERVICE_ARR, servicesList });
 
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 			<div className={styles.task_and_icon}>
 				<div className={styles.icon}>
 					{task?.status === 'completed' ? (
@@ -47,7 +47,7 @@ function TaskDetails({
 
 			<div className={styles.details_container}>
 				<div className={styles.details}>
-					<div className={styles.task_name}>{taskName}</div>
+					<span className={styles.task_name}>{taskName}</span>
 
 					<div className={styles.task_date_details}>
 						<Tooltip
@@ -80,7 +80,9 @@ function TaskDetails({
 								<div className={styles.deadline}>
 									<IcMTimer />
 
-										&nbsp;Deadline: &nbsp;
+									{' '}
+									Deadline:
+									{' '}
 									{formatDeadlineDate(new Date(task?.deadline))}
 								</div>
 							)}
@@ -90,7 +92,7 @@ function TaskDetails({
 						{task?.due_in ? (
 							<div className={styles.completed}>
 								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg"
+									src={GLOBAL_CONSTANTS.image_url.due_in_svg}
 									alt="due-in"
 								/>
 								{`( Due In: ${task.due_in} )`}
@@ -100,7 +102,7 @@ function TaskDetails({
 						{task?.over_due ? (
 							<div className={styles.completed}>
 								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg"
+									src={GLOBAL_CONSTANTS.image_url.over_due_svg}
 									alt="over-due"
 								/>
 								{`( Due In: ${task.over_due} )`}
@@ -115,7 +117,7 @@ function TaskDetails({
 					</div>
 				) : null}
 			</div>
-		</div>
+		</section>
 	);
 }
 

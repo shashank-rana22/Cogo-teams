@@ -23,6 +23,7 @@ import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
 import groundOps from './config/ground-ops';
+import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
@@ -44,6 +45,7 @@ import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
+import schedules from './config/schedules';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -129,6 +131,8 @@ const routeConfig = {
 	...managerDashboard,
 	...printingDesk,
 	...ftlAdmin,
+	...schedules,
+	...igmDesk,
 	...airlinePluginBooking,
 	...bookingDeskSurface,
 };

@@ -31,10 +31,10 @@ function useHandleSubmit({
 	onCancel = () => {},
 	refetch = () => {},
 	currentStep = 0,
-	isLastStep = 0,
+	isLastStep = false,
 	getApisData,
 }) {
-	const [isLoading, setIsLoading] = useState();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const {
 		shipment_data,

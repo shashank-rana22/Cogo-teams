@@ -1,3 +1,5 @@
+import CURRENCY_CODE from '@cogoport/globalization/constants/currencyCode';
+
 import sort from '../helpers/sortTabel';
 
 // eslint-disable-next-line import/no-unresolved
@@ -16,7 +18,8 @@ const OPTIONS_ALL = [];
 		});
 	}
 });
-const prefferdCurrencies = ['INR', 'USD', 'GBP', 'EUR'];
+const prefferdCurrencies = Object.keys(CURRENCY_CODE);
+
 const prefferedOptons = OPTIONS_ALL.filter((option) => prefferdCurrencies.includes(option.key));
 const restOptionsList = OPTIONS_ALL.filter((option) => !prefferdCurrencies.includes(option.key));
 const restOptions = sort(restOptionsList, { key: 'label' });

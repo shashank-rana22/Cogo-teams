@@ -1,5 +1,6 @@
 import { Button, Stepper, RadioGroup, Toast, Toggle, Badge } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -21,11 +22,71 @@ const options = [
 	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
+const DECIMAL_PLACE = 2;
+interface NestedObj {
+	[key: string]: string | number ;
+}
+
+interface FieldType {
+	basic?: Array<object>;
+	handling?: Array<object>;
+	hawb_controls?: Array<object>;
+	package?: Array<object>;
+}
+
+interface Props {
+	back: boolean;
+	setBack?:Function;
+	setEdit?:Function;
+	edit?: boolean | string;
+	activeCategory?: string;
+	hawbDetails?: Array<NestedObj>;
+	setHawbDetails?: Function;
+	setActiveHawb?: Function;
+	setActiveKey?: (key: string) => void;
+	activeHawb?: { [key: string]: boolean | string };
+	packingData?:{ [key: string]: Array<string> | Array<URL> };
+	fields?:FieldType;
+	control?:object;
+	errors?:object;
+	setValue?:Function;
+	item?: NestedObj;
+	setGenerate?:Function;
+	handleSubmit?: Function;
+	category?: string;
+	activeKey?: string;
+	taskItem?: NestedObj;
+	formValues?: { [key: string]: Array<NestedObj> };
+	setCustomHawbNumber?: Function;
+	cogoSeriesNumber?: Array<number>
+}
+
 function FormContainer({
-	back, setBack, edit, setEdit, packingData, fields, control, errors, setValue, item,
-	setGenerate, handleSubmit, category, activeCategory, hawbDetails, setHawbDetails, activeHawb,
-	setActiveHawb, activeKey, setActiveKey, taskItem, formValues, setCustomHawbNumber, cogoSeriesNumber,
-}) {
+	back = false,
+	setBack = () => {},
+	edit = false,
+	setEdit = () => {},
+	packingData = {},
+	fields = {},
+	control = {},
+	errors = {},
+	setValue = () => {},
+	item = {},
+	setGenerate = () => {},
+	handleSubmit = () => {},
+	category = '',
+	activeCategory = '',
+	hawbDetails = [],
+	setHawbDetails = () => {},
+	activeHawb = {},
+	setActiveHawb = () => {},
+	activeKey = '',
+	setActiveKey = () => {},
+	taskItem = {},
+	formValues = {},
+	setCustomHawbNumber = () => {},
+	cogoSeriesNumber = [],
+}:Props) {
 	const [value, onChange] = useState('manual');
 	const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -58,6 +119,9 @@ function FormContainer({
 			state               : 'document_rejected',
 			id                  : taskItem?.id,
 			performed_by_org_id : taskItem?.serviceProviderId,
+			shipment_id         : taskItem?.shipmentId,
+			service_id          : taskItem?.serviceId,
+			document_type       : 'draft_house_airway_bill',
 		};
 		if (edit) {
 			if (activeHawb.isNew === false) {
@@ -96,9 +160,12 @@ function FormContainer({
 		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
 			let price:number = 0;
 			if (charge.chargeType === 'chargeable_wt') {
-				price = Number((formValues.chargeableWeight * charge.chargeUnit).toFixed(2));
+				price = Number(
+					(Number(charge.chargeUnit) * Number(formValues.chargeableWeight))
+						.toFixed(DECIMAL_PLACE),
+				);
 			} else if (charge.chargeType === 'gross_wt') {
-				price = Number((formValues.weight * charge.chargeUnit).toFixed(2));
+				price = Number((Number(formValues.weight) * Number(charge.chargeUnit)).toFixed(DECIMAL_PLACE));
 			}
 			return { ...charge, price };
 		});
@@ -138,7 +205,7 @@ function FormContainer({
 								setHawbDetails((prev) => ([...prev, {
 									id: uuid(),
 									documentNo:
-									cogoSeriesNumber.length >= 1
+									!isEmpty(cogoSeriesNumber)
 										? `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`
 										: `COGO-${taskItem.serialId}${
 											(hawbDetails.length + 1).toString().padStart(2, '0')}`,

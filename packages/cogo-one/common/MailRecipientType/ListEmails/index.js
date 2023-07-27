@@ -9,6 +9,7 @@ function ListEmails({
 	emailSuggestions = [],
 	type = '',
 	handleKeyPress = () => {},
+	setNewEmailInput = () => {},
 }) {
 	return (
 		<div className={styles.list_container}>
@@ -21,7 +22,7 @@ function ListEmails({
 						className={styles.email_container}
 						key={itm}
 						role="presentation"
-						onClick={() => handleKeyPress({ type, email: itm })}
+						onClick={() => handleKeyPress({ type, email: itm, setNewEmailInput })}
 					>
 						{itm}
 					</div>
