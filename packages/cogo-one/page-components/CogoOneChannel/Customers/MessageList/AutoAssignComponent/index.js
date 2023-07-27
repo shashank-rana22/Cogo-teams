@@ -1,20 +1,29 @@
-import { Button, cl } from '@cogoport/components';
-import {
-	IcMArrowBack,
-} from '@cogoport/icons-react';
+import { Button, cl, Popover } from '@cogoport/components';
+import { IcMListView, IcMArrowBack } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
+import ChatBulks from './ChatBulks';
 import styles from './styles.module.css';
+
+const ZERO_COUNT = 0;
 
 function AutoAssignComponent({
 	autoAssignChats = true,
 	setAutoAssignChats = () => {},
-	handleAutoAssignBack,
-	selectedAutoAssign,
-	bulkAssignLoading,
-	bulkAssignChat,
+	handleAutoAssignBack = () => {},
+	selectedAutoAssign = {},
+	bulkAssignLoading = false,
+	bulkAssignChat = () => {},
+	setModalType = () => {},
+	isBotSession = false,
+	viewType = '',
+	setSendBulkTemplates = () => {},
 }) {
-	const count = Object.keys(selectedAutoAssign || {}).length || 0;
+	const [popoverVisible, setPopoverVisible] = useState(false);
+
+	const selectedUserCount = Object.keys(selectedAutoAssign || {}).length || ZERO_COUNT;
+
 	return (
 		<div className={cl`${styles.auto_assign_container} ${!autoAssignChats ? styles.auto_assign_background : ''}`}>
 			{ autoAssignChats ? (
@@ -25,35 +34,53 @@ function AutoAssignComponent({
 						setAutoAssignChats(false);
 					}}
 				>
-					Auto Assign Chats
+					Select Chat
 				</Button>
 			) : (
-				<div className={styles.show_auto_assign}>
+				<div className={cl`${styles.show_auto_assign} 
+				${isEmpty(selectedAutoAssign) ? styles.select_chat_background : ''}`}
+				>
 					<div className={styles.icon_container}>
 						<IcMArrowBack
 							onClick={handleAutoAssignBack}
 						/>
 					</div>
 					{isEmpty(selectedAutoAssign)
-						? <div className={styles.select_chats}>Select the Chats to be Auto Assigned</div>
+						? <div className={styles.select_chats}>Select Chat</div>
 						: (
 							<>
 								<div className={styles.selected_count}>
 									<span>
-										{count}
+										{selectedUserCount}
 									</span>
 									Selected
 								</div>
-								<Button
-									size="sm"
-									themeType="primary"
-									loading={bulkAssignLoading}
-									onClick={() => {
-										bulkAssignChat({ selectedAutoAssign });
-									}}
+								<Popover
+									placement="right"
+									trigger="click"
+									render={(
+										<ChatBulks
+											bulkAssignLoading={bulkAssignLoading}
+											bulkAssignChat={bulkAssignChat}
+											selectedAutoAssign={selectedAutoAssign}
+											setModalType={setModalType}
+											isBotSession={isBotSession}
+											setPopoverVisible={setPopoverVisible}
+											viewType={viewType}
+											setSendBulkTemplates={setSendBulkTemplates}
+										/>
+									)}
+									visible={popoverVisible}
+									onClickOutside={() => setPopoverVisible((prev) => !prev)}
 								>
-									Auto Assign
-								</Button>
+									<div
+										className={styles.action_button}
+										onClick={() => setPopoverVisible((prev) => !prev)}
+										role="presentation"
+									>
+										<IcMListView height={15} width={15} />
+									</div>
+								</Popover>
 
 							</>
 						)}
