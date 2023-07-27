@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 
 const getListColumnMapping = (props) => {
-	const { setActiveTabDetails } = props;
+	const { setActiveTabDetails, setShowActionModal } = props;
 
 	const LIST_COLUMN_MAPPING = [
 		{
@@ -137,9 +137,21 @@ const getListColumnMapping = (props) => {
 			key      : 'activation',
 			flex     : 1,
 			Header   : <div />,
-			accessor : () => (
-				<Button type="button" themeType="secondary">
-					<strong>Set Activation</strong>
+			accessor : ({ id, lead_objective_status }) => (
+				<Button
+					type="button"
+					themeType="secondary"
+					disabled={lead_objective_status === 'verification_pending'}
+					onClick={() => setShowActionModal({
+						mode: ['verification_pending', 'verified'].includes(lead_objective_status)
+							? 'activation' : 'deactivation',
+						objectiveId: id,
+					})}
+				>
+					<strong>
+						{['verification_pending', 'verified'].includes(lead_objective_status)
+							? 'Set Activation' : 'Deactivate'}
+					</strong>
 				</Button>
 			),
 		},

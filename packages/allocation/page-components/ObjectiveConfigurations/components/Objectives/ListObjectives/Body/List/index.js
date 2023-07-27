@@ -1,9 +1,10 @@
-import { Collapse, Pagination } from '@cogoport/components';
+import { Collapse, Pagination, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useMemo } from 'react';
 
 import EmptyState from '../../../../../../../common/EmptyState';
 
+import ACTION_COMPONENT_MAPPING from './get-action-component-mapping';
 import ListCard from './ListCard';
 import getListColumnMapping from './ListCard/get-list-column-mapping';
 import ListChildCard from './ListChildCard';
@@ -18,7 +19,9 @@ function List(props) {
 
 	const [activeObjectiveId, setActiveObjectiveId] = useState(null);
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveTabDetails });
+	const [showActionModal, setShowActionModal] = useState({});
+
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveTabDetails, setShowActionModal });
 
 	const objectiveList = useMemo(() => (list || []).map((item) => ({
 		key      : item.id,
@@ -63,6 +66,20 @@ function List(props) {
 					onPageChange={getNextPage}
 				/>
 			</div>
+
+			{!isEmpty(showActionModal) && (
+				<Modal
+					size="sm"
+					show={!isEmpty(showActionModal)}
+					onClose={() => setShowActionModal({})}
+					closeOnOuterClick
+					showCloseIcon
+					animate
+				>
+					{ACTION_COMPONENT_MAPPING[showActionModal.mode]
+						?.render({ objectiveId: showActionModal.objectiveId, setShowActionModal })}
+				</Modal>
+			)}
 		</>
 	);
 }
