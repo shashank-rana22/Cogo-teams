@@ -112,6 +112,11 @@ const apis = [
 		feature      : 'vendor',
 		service_name : 'vendor',
 	},
+	{
+		api         : 'get_purchase_expense_expense_category',
+		access_type : 'private',
+		feature     : 'vendor',
+	},
 ];
 
 export default apis;

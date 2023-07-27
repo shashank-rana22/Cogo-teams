@@ -8240,6 +8240,26 @@ const partner = {
 			module       : 'Expenses',
 			service_name : 'vendor',
 		},
+		{
+			api         : 'get_purchase_expense_expense_category',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_configuration_by_id',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_by_id',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_by_id',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
 	],
 	my_incident: [
 		{
@@ -8730,6 +8750,26 @@ const partner = {
 		},
 		{
 			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_incident_management_incident_incident_sub_type',
+			access_type : 'private',
+		},
+		{
+			api         : 'patch_incident_management_incident_by_id',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_incident_management_incident_approval',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_incident_management_incident_approval_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_incident_management_incident_approval',
 			access_type : 'private',
 		},
 	],

@@ -6,7 +6,7 @@ const useGetStakeholders = ({ incidentSubType, incidentType, entityId }) => {
 		{
 			url     : '/incident-management/incident/get-incident-approval-management',
 			method  : 'get',
-			authKey : 'get_purchase_expense_stakeholder',
+			authKey : 'get_incident_management_incident_get_incident_approval_management',
 		},
 		{ manual: true },
 	);

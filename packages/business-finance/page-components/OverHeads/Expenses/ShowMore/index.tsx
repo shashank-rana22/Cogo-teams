@@ -10,31 +10,7 @@ import useSendEmail from '../hooks/useSendEmail';
 
 import styles from './styles.module.css';
 
-interface BillInterface {
-	billNumber?: string | number;
-	paidTds?: number;
-	grandTotal?: number;
-	paidAmount?: number;
-	dueDate?: Date;
-	billDate?: Date;
-	subCategory?: string;
-	createdDate?: Date;
-	status?: string;
-	updatedAt?: any;
-	payableTds?: any;
-	billDocumentUrl?: string;
-	approvedByName?: string;
-	approvedByUser?: { id?: string | number };
-	billCurrency?: string;
-}
-
-interface Props {
-	id?: number | string;
-	showExpenseModal?: boolean;
-	incidentId?: string;
-}
-
-function ShowMore({ id, showExpenseModal, incidentId }: Props) {
+function ShowMore({ id, showExpenseModal, incidentId }) {
 	const [moreData, setMoreData] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const { getList, listData, listLoading } = useListExpense({
@@ -149,7 +125,7 @@ function ShowMore({ id, showExpenseModal, incidentId }: Props) {
 					<div className={styles.list_container}>
 						{billList?.length > 0 ? (
 							<div>
-								{billList?.map((bill: BillInterface) => {
+								{billList?.map((bill) => {
 									const {
 										billNumber,
 										grandTotal,
