@@ -1,11 +1,11 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
 import { useSelector } from '@cogoport/store';
+import { useEffect, useCallback } from 'react';
 
 import getCollectionPartyParams from '../helpers/getCollectionPartyParams';
 import toastApiError from '../utils/toastApiError';
 
-function useGetCollectionParty({ shipmentData, servicesData }) {
+function useGetCollectionParty({ shipmentData = {}, servicesData = [], shipment_id = '' }) {
 	const profile_data = useSelector(({ profile }) => (profile));
 
 	const stakeholder_based_params = getCollectionPartyParams({ profile_data, servicesData, shipmentData });
@@ -15,7 +15,7 @@ function useGetCollectionParty({ shipmentData, servicesData }) {
 		method : 'GET',
 		params : {
 			filters: {
-				shipment_id:shipmentData?.id,
+				shipment_id,
 			},
 			page       : 1,
 			page_limit : 100,

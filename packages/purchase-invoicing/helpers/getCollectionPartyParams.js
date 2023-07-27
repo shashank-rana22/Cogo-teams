@@ -2,15 +2,16 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
 
-const getCollectionPartyParams = ({ primary_service={}, servicesData = [],shipmentData={} }) => {
-    console.log({primary_service,servicesData,shipmentData})
-
-    const geo = getGeoConstants();
+const getCollectionPartyParams = ({ profile_data = {}, servicesData = [], shipmentData = {} }) => {
+	const geo = getGeoConstants();
 
 	const primary_service = servicesData?.find((i) => i.main_service_id === null);
+	console.log({ primary_service, servicesData, shipmentData });
 
-    const isNewShipment =shipment_data?.created_at && new Date(shipment_data?.created_at) >=
-		new Date(GLOBAL_CONSTANTS.others.fcl_import_new_process_date);
+	const isNewShipment = shipmentData?.created_at && new Date(shipmentData?.created_at)
+		>= new Date(GLOBAL_CONSTANTS.others.fcl_import_new_process_date);
+
+	console.log({ isNewShipment });
 
 	const isFcl = primary_service?.service_type === 'fcl_freight_service';
 
