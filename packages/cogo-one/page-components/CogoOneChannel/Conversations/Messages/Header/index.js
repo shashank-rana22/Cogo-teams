@@ -1,13 +1,16 @@
+/* eslint-disable max-lines-per-function */
+
 import { Button, cl } from '@cogoport/components';
-import { IcMProfile, IcMRefresh, IcCFcrossInCircle, IcCFtick, IcMCallmonitor } from '@cogoport/icons-react';
-import { useDispatch } from '@cogoport/store';
-import { setProfileState } from '@cogoport/store/reducers/profile';
+import { IcMProfile, IcMRefresh, IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
+// import { useDispatch, useSelector } from '@cogoport/store';
+// import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import HeaderName from '../../../../../common/HeaderName';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
+// import useCreateVideoCallTimeline from '../../../../../hooks/useCreateVideoCallTimeline';
 import useTransferChat from '../../../../../hooks/useTransferChat';
 
 import Assignes from './Assignes';
@@ -15,6 +18,7 @@ import TagsPopOver from './HeaderFuncs';
 import RightButton from './RightButton';
 import ShowContent from './ShowContent';
 import styles from './styles.module.css';
+import VideoCalling from './VideoCalling';
 
 function Header({
 	setOpenModal = () => {},
@@ -45,7 +49,9 @@ function Header({
 	supplierLoading = false,
 	hasNoFireBaseRoom = false,
 }) {
-	const dispatch = useDispatch();
+	// const { inVideoCall } = useSelector(({ profile }) => ({ inVideoCall: profile?.is_in_video_call || false }));
+	// const dispatch = useDispatch();
+
 	const [isVisible, setIsVisible] = useState(false);
 
 	const { requestToJoinGroup, dissmissTransferRequest } = useTransferChat({ firestore, activeMessageCard });
@@ -62,9 +68,7 @@ function Header({
 			},
 		});
 	};
-
 	const { chat_tags = [] } = activeMessageCard || {};
-
 	const {
 		mobile_no = '',
 		channel_type,
@@ -72,12 +76,15 @@ function Header({
 		group_members = [],
 		organization_id = '',
 		user_id,
-		user_name,
+		// lead_user_id,
+		// user_name,
 		user_type = '',
 		account_type = '',
 		managers_ids = [],
 		id,
 	} = formattedData || {};
+	// console.log('formattedData:', formattedData);
+	// const { createVideoCallTimeline, videoCallId } = useCreateVideoCallTimeline();
 
 	const handleEsclateClick = () => {
 		escalateToSupplyRm({
@@ -95,24 +102,27 @@ function Header({
 			updateUserRoom(mobile_no);
 		}
 	};
+	// const mountVideoCall = useCallback(() => {
+	// 	if (!inVideoCall) {
+	// 		dispatch(
+	// 			setProfileState({
+	// 				video_call_recipient_data: {
+	// 					user_id,
+	// 					user_name,
+	// 				},
+	// 				is_in_video_call : true,
+	// 				video_call_id    : videoCallId,
+	// 			}),
+	// 		);
+	// 	}
 
-	const mountVideoCall = useCallback(() => {
-		dispatch(
-			setProfileState({
-				video_call_recipient_data: {
-					user_id,
-					user_name,
-				},
-				is_in_video_call: true,
-			}),
-		);
-	}, [dispatch, user_id, user_name]);
-
+	// 	createVideoCallTimeline({ userCallId: user_id, leadUserId: lead_user_id });
+	// 	// createVideoCallTimeline({data: {}});
+	// }, [createVideoCallTimeline, dispatch, inVideoCall, lead_user_id, user_id, user_name, videoCallId]);
 	const { agent_id = '', agent_name = '' } = has_requested_by || {};
 
 	const hasAccessToApprove = (support_agent_id === userId
 		|| VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit);
-
 	const hasRequests = !!agent_id;
 
 	const isGroupFormed = !isEmpty(group_members);
@@ -200,10 +210,10 @@ function Header({
 					<HeaderName formattedData={formattedData} />
 					<div className={styles.button_flex}>
 						{user_type === 'cp' ? (
-							<div role="presentation" className={styles.video_call_btn} onClick={mountVideoCall}>
-								<IcMCallmonitor />
-							</div>
-
+							// <div role="presentation" className={styles.video_call_btn} onClick={mountVideoCall}>
+							// 	<IcMCallmonitor />
+							// </div>
+							<VideoCalling formattedData={formattedData} />
 						) : null}
 
 						{account_type === 'service_provider' && (

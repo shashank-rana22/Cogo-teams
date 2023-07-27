@@ -13,6 +13,10 @@ import { useSetInACall } from './useSetInACall';
 const NOT_CALLING_CALL_STATUS = ['rejected', 'end_call', 'miss_call', 'technical_error', 'accepted'];
 const STOP_CALL_STATUS = ['rejected', 'end_call', 'technical_error'];
 
+// missed = ['miss_call'];
+// answered = ['accepted'];
+// not_connected = ['rejected', 'technical_error'];
+
 function useComingCall({
 	firestore,
 	setCallDetails,
@@ -95,7 +99,7 @@ function useComingCall({
 					firestore,
 					callingRoomId,
 				});
-				handleCallEnd();
+				handleCallEnd({ callActivity: 'accepted', description: 'peer js technical error' });
 			});
 		} catch (error) {
 			console.error('user stream is not working', error);
@@ -108,7 +112,7 @@ function useComingCall({
 				callingRoomId,
 				firestore,
 			});
-			handleCallEnd();
+			handleCallEnd({ callActivity: 'missed', description: 'peer video audio is not working' });
 		}
 	}, [setStreams, peerRef, webrtcToken.userToken, callingRoomId, webrtcTokenRoomId, firestore, handleCallEnd]);
 
@@ -174,7 +178,11 @@ function useComingCall({
 			&& STOP_CALL_STATUS.includes(room_data?.call_status)
 			&& callingRoomId
 		) {
-			handleCallEnd();
+			if (room_data?.call_status === 'rejected') {
+				handleCallEnd({ callActivity: 'not_connected', description: 'call is not connected' });
+			} else {
+				handleCallEnd({ callActivity: 'answered' });
+			}
 		}
 
 		if (NOT_CALLING_CALL_STATUS.includes(room_data?.call_status)) {

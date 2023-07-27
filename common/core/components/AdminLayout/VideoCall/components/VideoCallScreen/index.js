@@ -135,6 +135,7 @@ function VideoCallScreen({
 							setToggleState={setToggleState}
 							toggleMic={toggleMic}
 							callingRoomDetails={callingRoomDetails}
+							time={time}
 						/>
 					</div>
 				</div>

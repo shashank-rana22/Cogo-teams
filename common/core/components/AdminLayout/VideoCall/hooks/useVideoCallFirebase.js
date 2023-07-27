@@ -17,6 +17,8 @@ function useVideoCallFirebase({
 	callDetails,
 	setStreams,
 	peerRef,
+	videoCallId,
+	updateVideoCallTimeline = () => {},
 }) {
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
@@ -30,9 +32,9 @@ function useVideoCallFirebase({
 
 	const { id: userId, name: userName } = user_data || {};
 
-	const handleCallEnd = useCallback(() => {
-		saveInACallStatus(false);
-		setCallComing(false);
+	const handleCallEnd = useCallback(async ({ callActivity, time = 0, description = '' }) => {
+		await saveInACallStatus(false);
+		await setCallComing(false);
 
 		const localPeerRef = peerRef;
 		if (localPeerRef.current) {
@@ -40,7 +42,7 @@ function useVideoCallFirebase({
 		}
 		localPeerRef.current = null;
 
-		setCallDetails({
+		await setCallDetails({
 			myDetails          : {},
 			peerDetails        : {},
 			callingRoomDetails : {},
@@ -49,26 +51,30 @@ function useVideoCallFirebase({
 			callingType        : '',
 		});
 
-		setWebrtcToken({
+		await setWebrtcToken({
 			userToken : {},
 			peerToken : {},
 		});
 
-		setToggleState({
+		await setToggleState({
 			isMicActive         : true,
 			isVideoActive       : true,
 			isScreenShareActive : false,
 			isMinimize          : false,
 		});
 
-		setStreams((prev) => {
+		await setStreams((prev) => {
 			stopStream({ streamType: 'userStream', currentStream: prev });
 			return {
 				userStream : null,
 				peerStream : null,
 			};
 		});
-	}, [saveInACallStatus, setCallComing, peerRef, setCallDetails, setWebrtcToken, setToggleState, setStreams]);
+		updateVideoCallTimeline({ callActivity, time, description, videoCallId });
+	}, [saveInACallStatus,
+		setCallComing,
+		peerRef,
+		setCallDetails, setWebrtcToken, setToggleState, setStreams, updateVideoCallTimeline, videoCallId]);
 
 	const callingToMediaStream = useCallback(async (peerDetails) => {
 		try {
@@ -124,7 +130,6 @@ function useVideoCallFirebase({
 			});
 
 			peer.on('error', () => {
-				handleCallEnd();
 				callUpdate({
 					data: {
 						call_status   : 'technical_error',
@@ -133,6 +138,7 @@ function useVideoCallFirebase({
 					callingRoomId,
 					firestore,
 				});
+				handleCallEnd({ callActivity: 'accepted' });
 			});
 		} catch (err) {
 			console.error('my user stream error', err);
@@ -144,7 +150,7 @@ function useVideoCallFirebase({
 				callingRoomId,
 				firestore,
 			});
-			handleCallEnd();
+			handleCallEnd({ callActivity: 'missed' });
 		}
 	}, [callingRoomId, handleCallEnd, firestore,
 		peerRef, saveInACallStatus, setCallDetails, setStreams, userId, userName]);

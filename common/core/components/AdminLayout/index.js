@@ -43,7 +43,7 @@ function AdminLayout({
 		user: { id: user_id = '' },
 		partner: partnerData,
 		is_in_voice_call: inCall = false, voice_call_recipient_data = {},
-		is_in_video_call: inVideoCall = false, video_call_recipient_data = {},
+		is_in_video_call: inVideoCall = false, video_call_recipient_data = {}, video_call_id: videoCallId = '',
 	} = user_data;
 
 	const {
@@ -111,6 +111,7 @@ function AdminLayout({
 			<VideoCall
 				videoCallRecipientData={video_call_recipient_data}
 				inVideoCall={inVideoCall}
+				videoCallId={videoCallId}
 			/>
 			<AnnouncementModal data={announcements} />
 

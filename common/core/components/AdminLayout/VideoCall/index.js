@@ -8,12 +8,14 @@ import VideoCallScreen from './components/VideoCallScreen';
 import { FIREBASE_CONFIG } from './configurations/firebase-config';
 import { CALL_RING_TIME_LIMIT } from './constants';
 import useComingCall from './hooks/useComingCall';
+import useUpdateVideoCallTimeline from './hooks/useUpdateVideoCallTimeline';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
 import { callUpdate } from './utils/callFunctions';
 
 function VideoCall({
 	videoCallRecipientData = {},
 	inVideoCall = false,
+	videoCallId = '',
 }) {
 	const streamRef = useRef(null);
 	const peerRef = useRef(null);
@@ -45,6 +47,8 @@ function VideoCall({
 	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
 
+	const { updateVideoCallTimeline = () => {} } = useUpdateVideoCallTimeline();
+
 	const { handleOutgoingCall, handleCallEnd } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
@@ -54,6 +58,8 @@ function VideoCall({
 		callDetails,
 		setStreams,
 		peerRef,
+		videoCallId,
+		updateVideoCallTimeline,
 	});
 
 	const { rejectCall, answerCall } = useComingCall({
@@ -76,7 +82,7 @@ function VideoCall({
 				firestore,
 				callingRoomId : callDetails?.callingRoomId,
 			});
-			handleCallEnd();
+			handleCallEnd({ callActivity: 'missed' });
 		}
 	}, [callDetails?.callingRoomId, callDetails?.callingRoomDetails?.call_status, handleCallEnd, firestore]);
 
