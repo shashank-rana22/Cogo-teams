@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -12,46 +12,51 @@ import styles from './styles.module.css';
 import getCanCancelService from './utils/getCanCancelService';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
-const actionButtons = [
-	{ label: 'Edit', value: 'supplier_reallocation' },
-	{ label: 'Edit Params', value: 'edit_params' },
-	{ label: 'Cancel', value: 'cancel' },
-];
-
 function EditCancelService({ serviceData = {} }) {
+	const user_data = useSelector((({ profile }) => profile?.user));
+	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
+
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
 	const { state, trade_type, service_type } = serviceData || {};
 
-	const user_data = useSelector((({ profile }) => profile?.user));
-	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
+	const actionButtons = [
+		{
+			label : 'Edit',
+			value : 'supplier_reallocation',
+			show  : getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder }),
+		},
+		{
+			label : 'Edit Params',
+			value : 'edit_params',
+			show  : true,
+		},
+		{
+			label : 'Cancel',
+			value : 'cancel',
+			show  : getCanCancelService({ state, activeStakeholder }),
+		},
+	];
 
-	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
+	const servicesData = (servicesList || []).filter(
+		(item) => item?.service_type === service_type && item?.trade_type === trade_type,
+	);
 
 	const openModal = (modalKey) => {
 		setShowModal(modalKey);
 		setShowPopover(false);
 	};
 
-	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	actionButtons[1].show = true;
-	actionButtons[2].show = getCanCancelService({ state, activeStakeholder });
-
-	if (!actionButtons.some((actionButton) => actionButton.show)) {
-		return null;
-	}
-
 	const content = actionButtons.map(({ label, value, show }) => (show ? (
-		<div
+		<Button
 			key={value}
-			role="button"
-			tabIndex={0}
+			themeType="link"
 			className={styles.action_button}
 			onClick={() => openModal(value)}
 		>
 			{label}
-		</div>
+		</Button>
 	) : null));
 
 	return (
