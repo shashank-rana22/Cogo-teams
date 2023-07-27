@@ -7,6 +7,7 @@ import { useState, useEffect, useCallback } from 'react';
 import CONSTANTS from '../constants/constants';
 
 const { START_PAGE } = CONSTANTS;
+const AVAILABLE_RESERVED = 'available_reserved';
 
 const useGetClearanceDateReport = ({ activeTab }) => {
 	const [page, setPage] = useState(START_PAGE);
@@ -49,10 +50,10 @@ const useGetClearanceDateReport = ({ activeTab }) => {
 				await trigger({
 					params: {
 						...rest,
-						q: query,
+						q      : query,
 						bookingDate,
 						customClearanceDate,
-
+						status : AVAILABLE_RESERVED,
 						page,
 					},
 				});
