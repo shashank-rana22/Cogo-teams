@@ -8,6 +8,8 @@ const PERSONA_KEYS_MAPPING = ['sales', 'supply', 'support', 'shipment_specialist
 
 const DEFAULT_VIEW_TYPE = 'support';
 
+const SALES_VIEW_AGENT_TYPES = ['sales', 'business_consultant'];
+
 const getViewTypeFromWorkPreferences = ({ viewTypeFromRoleIds, agentType }) => {
 	if (viewTypeFromRoleIds === 'cogoone_admin') {
 		return viewTypeFromRoleIds;
@@ -19,6 +21,10 @@ const getViewTypeFromWorkPreferences = ({ viewTypeFromRoleIds, agentType }) => {
 
 	if (agentType.includes('admin')) {
 		return agentType;
+	}
+
+	if (SALES_VIEW_AGENT_TYPES.includes(agentType)) {
+		return 'sales';
 	}
 
 	return PERSONA_KEYS_MAPPING.find((eachPersona) => agentType.includes(eachPersona)) || '';
