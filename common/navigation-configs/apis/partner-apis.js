@@ -12643,6 +12643,11 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'send_users_bulk_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'send_shipment_document_notification',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -12656,6 +12661,11 @@ const partner = {
 			api          : 'get_omnichannel_agent_types',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'get_available_service_providers',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'list_cogoone_flash_rates_logs',
