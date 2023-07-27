@@ -9,7 +9,7 @@ const controls = [
 		maxLength   : 150,
 		placeholder : 'Remarks',
 		rows        : 3,
-		style       : { height: '120px', border: '1px solid #BDBDBD', borderRadius: 4 },
+		style       : { maxHeight: '120px', border: '1px solid #BDBDBD', borderRadius: 4 },
 
 	},
 	{

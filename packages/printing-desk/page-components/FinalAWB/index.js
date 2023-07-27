@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { ButtonIcon } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -17,7 +17,7 @@ function FinalAwb({
 	listAPI = () => {},
 }) {
 	const { fields } = FinalAwbFields;
-	const [showUpload, setShowUpload] = useState(null);
+	const [showUpload, setShowUpload] = useState({});
 
 	const functions = {
 		handleUpload: (singleItem) => {
@@ -25,13 +25,12 @@ function FinalAwb({
 			item.documentType = 'airway_bill';
 			item.type = 'FinalAwb';
 			return (
-				<Button
-					themeType="linkUi"
-					style={{ fontSize: 12 }}
+				<ButtonIcon
+					size="s"
+					icon={<IcMUpload fill="#8B8B8B" />}
+					themeType="primary"
 					onClick={() => { setShowUpload(item); setEdit(false); }}
-				>
-					<IcMUpload fill="#8B8B8B" />
-				</Button>
+				/>
 			);
 		},
 	};

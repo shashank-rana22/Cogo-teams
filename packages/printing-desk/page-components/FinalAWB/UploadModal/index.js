@@ -1,6 +1,7 @@
 import Layout from '@cogoport/air-modules/components/Layout';
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import controls from '../../../configurations/upload-final-awb-controls';
@@ -61,14 +62,14 @@ function UploadModal({
 		} else {
 			createDocument(payload, listAPI);
 		}
-		setShowUpload(null);
+		setShowUpload({});
 	};
 	return (
 		<div>
 			{showUpload && (
 				<Modal
-					show={!!showUpload}
-					onClose={() => { setShowUpload(null); }}
+					show={!isEmpty(showUpload)}
+					onClose={() => { setShowUpload({}); }}
 					scroll={false}
 					size="md"
 				>
