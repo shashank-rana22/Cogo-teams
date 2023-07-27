@@ -1,5 +1,7 @@
 import { useAllocationRequest } from '@cogoport/request';
 
+import formatObjectiveDataForCard from '../helpers/format-objective-data-for-card';
+
 const useGetObjectiveDetails = (props) => {
 	const { activeObjectiveId } = props;
 
@@ -10,8 +12,10 @@ const useGetObjectiveDetails = (props) => {
 		params  : { objective_id: activeObjectiveId },
 	}, { manual: false });
 
+	const objectiveData = formatObjectiveDataForCard({ objectiveData: data?.data });
+
 	return {
-		data: data?.data,
+		data: objectiveData,
 		loading,
 	};
 };

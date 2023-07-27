@@ -54,15 +54,15 @@ const CARD_DATA_MAPPING = [
 					</div>
 
 					<div className={styles.key_value_container}>
-						{container_count && <Pill>{container_count}</Pill>}
-						{weight && (
+						{!isEmpty(container_count) && <Pill>{container_count}</Pill>}
+						{!isEmpty(weight) && (
 							<Pill>
 								{weight}
 								{' '}
 								Kg
 							</Pill>
 						)}
-						{volume && (
+						{!isEmpty(volume) && (
 							<Pill>
 								{volume}
 								{' '}
