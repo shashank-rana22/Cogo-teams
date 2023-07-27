@@ -223,23 +223,37 @@ function ShipmentDetailsCard({
 		setShowLineItem(true);
 		setItemCheck(true);
 	};
-
-	const stringifyRemarksVal = JSON.stringify(remarksVal);
+	const collectionPartyRejectionList = collectionPartyRejectCheckboxList(
+		organizationName,
+		beneficiaryName,
+		bankName,
+		accountNumber,
+		ifscCode,
+		registrationNumber,
+		taxNumber,
+	);
+	const billingPartyRejectionList = billingPartyRejectCheckboxList(
+		entityCode,
+		organizationNameBuyer,
+		address,
+		registrationNumberBuyer,
+		taxNumberBuyer,
+	);
 
 	useEffect(() => {
-		setRemarksVal({
-			...JSON.parse(stringifyRemarksVal),
+		setRemarksVal((prev) => ({
+			...prev,
 			collectionPartyRemark:
-			[...checkedValue.collectionPartyRemark, JSON.parse(stringifyRemarksVal).collectionPartyRemark[
-				JSON.parse(stringifyRemarksVal).collectionPartyRemark.length - 1]],
+			[...checkedValue.collectionPartyRemark, prev.collectionPartyRemark[
+				prev.collectionPartyRemark.length - 1]],
 			billingPartyRemark:
-			[...checkedValue.billingPartyRemark, JSON.parse(stringifyRemarksVal).billingPartyRemark[
-				JSON.parse(stringifyRemarksVal).billingPartyRemark.length - 1]],
+			[...checkedValue.billingPartyRemark, prev.billingPartyRemark[
+				prev.billingPartyRemark.length - 1]],
 			invoiceDetailsRemark:
-			[...checkedValue.invoiceDetailsRemark, JSON.parse(stringifyRemarksVal).invoiceDetailsRemark[
-				JSON.parse(stringifyRemarksVal).invoiceDetailsRemark.length - 1]],
-		});
-	}, [checkedValue, stringifyRemarksVal, setRemarksVal]);
+			[...checkedValue.invoiceDetailsRemark, prev.invoiceDetailsRemark[
+				prev.invoiceDetailsRemark.length - 1]],
+		}));
+	}, [checkedValue, setRemarksVal]);
 
 	return (
 		<div>
@@ -321,15 +335,7 @@ function ShipmentDetailsCard({
 												<div>
 													<div className={styles.flex_center}>
 														<CheckboxGroup
-															options={collectionPartyRejectCheckboxList(
-																organizationName,
-																bankName,
-																accountNumber,
-																ifscCode,
-																registrationNumber,
-																taxNumber,
-																beneficiaryName,
-															)}
+															options={collectionPartyRejectionList}
 															onChange={(val) => {
 																setCheckedValue(
 																	{ ...checkedValue, collectionPartyRemark: val },
@@ -359,13 +365,7 @@ function ShipmentDetailsCard({
 												<div>
 													<div className={styles.flex_center}>
 														<CheckboxGroup
-															options={billingPartyRejectCheckboxList(
-																entityCode,
-																organizationNameBuyer,
-																address,
-																registrationNumberBuyer,
-																taxNumberBuyer,
-															)}
+															options={billingPartyRejectionList}
 															onChange={(val) => {
 																setCheckedValue(
 																	{ ...checkedValue, billingPartyRemark: val },
@@ -499,15 +499,7 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 
 										<div className={styles.billing_party_container}>
-											{collectionPartyRejectCheckboxList(
-												organizationName,
-												beneficiaryName,
-												bankName,
-												accountNumber,
-												ifscCode,
-												registrationNumber,
-												taxNumber,
-											).map((item) => (
+											{collectionPartyRejectionList.map((item) => (
 												<div key={item.label} className={styles.margin_bottom}>
 													{item.label}
 												</div>
@@ -584,13 +576,7 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 
 										<div className={styles.billing_party_container}>
-											{billingPartyRejectCheckboxList(
-												entityCode,
-												organizationNameBuyer,
-												address,
-												registrationNumberBuyer,
-												taxNumberBuyer,
-											).map((item) => (
+											{billingPartyRejectionList.map((item) => (
 												<div key={item.label} className={styles.margin_bottom}>
 													{item.label}
 												</div>
