@@ -42,9 +42,8 @@ function ShipmentCard({
 						size={50}
 						personName={shipping_line?.business_name}
 					/>
-
 					<div className={styles.service_provider_name}>
-						{shipping_line?.business_name}
+						{shipping_line?.business_name || 'No Data'}
 					</div>
 				</div>
 

@@ -1,17 +1,21 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-const getParams = () => ({
+const FIRST_PAGE = 1;
+
+const getParams = ({ pagination }) => ({
 	filters: {
 		state: ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
 	},
 	get_shipment_quotation_data : true,
 	// milestone_data_required     : true,
-	page                        : 1,
+	page                        : pagination,
 	page_limit                  : 6,
 });
 
 function useListShipments() {
+	const [pagination, setPagination] = useState(FIRST_PAGE);
+
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipments',
 		method : 'get',
@@ -21,13 +25,13 @@ function useListShipments() {
 		async () => {
 			try {
 				await trigger({
-					params: getParams(),
+					params: getParams({ pagination }),
 				});
 			} catch (e) {
 				console.error('e:', e);
 			}
 		},
-		[trigger],
+		[pagination, trigger],
 	);
 
 	useEffect(() => {
@@ -38,6 +42,7 @@ function useListShipments() {
 		listLoading   : loading,
 		shipmentsData : data,
 		getShipmentsList,
+		setPagination,
 	};
 }
 

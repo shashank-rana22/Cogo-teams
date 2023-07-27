@@ -1,5 +1,6 @@
 .container {
-	width: 280px;
+	position: relative;
+	width: 30%;
 	height: 310px;
 	margin: 4px 10px;
 	background: #fff;
