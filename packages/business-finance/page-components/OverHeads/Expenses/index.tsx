@@ -524,15 +524,15 @@ function ExpenseComponent() {
 		),
 	};
 
-	const showDropDown = (singleItem: { id?: string }) => {
-		const { id } = singleItem || {};
+	const showDropDown = (singleItem: { id?: string, incidentId?:string }) => {
+		const { id, incidentId } = singleItem || {};
 
 		if (recurringState === 'recurring') {
 			return (
 				<ShowMore
 					id={id}
-					recurringState={recurringState}
 					showExpenseModal={showExpenseModal}
+					incidentId={incidentId}
 				/>
 			);
 		}
