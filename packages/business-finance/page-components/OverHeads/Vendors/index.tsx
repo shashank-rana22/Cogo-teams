@@ -4,7 +4,6 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMCrossInCircle, IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
@@ -93,7 +92,7 @@ function VenderComponent() {
 				<Input
 					size="sm"
 					placeholder={
-						`Search by Vendor Name/${startCase(geo.others.pan_number.label)}/Organization ID/Sage ID`
+						`Search by Vendor Name/${geo.others.identification_number.label}/Organization ID/Sage ID`
 					}
 					suffix={<IcMSearchlight />}
 					value={filters.searchValue}

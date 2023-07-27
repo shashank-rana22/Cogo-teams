@@ -3,7 +3,6 @@ import { Popover, Button, Input, Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import { ListDataProps } from '../../AccountPayables/commons/Interfaces';
@@ -157,9 +156,9 @@ function ExpenseComponent() {
 				<div className={styles.input_container}>
 					<Input
 						size="md"
-						placeholder={`Search by Vendor Name/${startCase(
-							geo.others.pan_number.label,
-						)}/Organization ID/Sage ID`}
+						placeholder={`Search by Vendor Name/${
+							geo.others.identification_number.label
+						}/Organization ID/Sage ID`}
 						suffix={<IcMSearchlight />}
 						value={expenseFilters.searchValue}
 						onChange={(e: any) => handleChange(e)}
