@@ -1,6 +1,5 @@
 import {
 	CreatableSelectController,
-	AsyncSelectController,
 	ChipsController,
 	DatepickerController,
 	DateRangePickerController,
@@ -14,6 +13,8 @@ import {
 	CheckboxController,
 	InputNumberController,
 } from '@cogoport/forms';
+
+import AsyncSelectController from './components/Controlled/AsyncSelectController';
 
 const controlTypeControllerMapping = {
 	text               : InputController,
