@@ -29,7 +29,7 @@ interface InvoiceFilterProps {
 	invoiceDate?: InvoiceDate,
 	orgId?: string,
 	migrated?: string,
-	status?: string,
+	status?: string[],
 	invoiceStatus?: string,
 	services?: string[],
 	currency?: string
