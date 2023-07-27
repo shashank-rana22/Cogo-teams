@@ -31,8 +31,9 @@ export default function getBlDoPayload({ stateProps = {} }) {
 			? [document_status] : commonFilters[`${activeTab}_status`],
 		...(ready_to_collect ? ready_to_collect_filters : {}),
 		...(ready_to_release ? ready_to_release_filter : all_status_filter),
-		trade_type : trade_type.length ? trade_type : undefined,
-		q          : q.length ? q : undefined,
+		trade_type: trade_type.length ? trade_type : undefined,
+
+		q: q.length ? q : undefined,
 	};
 
 	const Formatedpayload = {
