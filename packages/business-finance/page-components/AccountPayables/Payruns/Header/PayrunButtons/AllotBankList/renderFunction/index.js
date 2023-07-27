@@ -3,13 +3,12 @@ import React from 'react';
 import AmountWithDetails from './AmountWithDetails';
 import BankDetails from './BankDetails';
 import FormatedAmount from './FormatedAmount';
-import FormatedBalance from './FormatedBalance';
 import IconPopover from './IconPopover';
 import ModifiedCurrency from './ModifiedCurrency';
 import RequestAmount from './RequestAmount';
 import SelectRadio from './SelectRadio';
 
-const RenderFunction = (
+const renderFunction = (
 	{
 		selectedPayrun,
 		selectedBankId,
@@ -48,11 +47,8 @@ const RenderFunction = (
 		renderPopoverIcon: (itemData) => (
 			<IconPopover itemData={itemData} />
 		),
-		renderAmount: (itemData) => (
-			<FormatedAmount itemData={itemData} selectedPayrun={selectedPayrun} checkedRow={checkedRow} />
-		),
-		renderBalanceAmount: (itemData) => (
-			<FormatedBalance itemData={itemData} selectedPayrun={selectedPayrun} checkedRow={checkedRow} />
+		renderAmount: (itemData, field) => (
+			<FormatedAmount itemData={itemData} selectedPayrun={selectedPayrun} checkedRow={checkedRow} field={field} />
 		),
 	};
 	return {
@@ -60,4 +56,4 @@ const RenderFunction = (
 	};
 };
 
-export default RenderFunction;
+export default renderFunction;

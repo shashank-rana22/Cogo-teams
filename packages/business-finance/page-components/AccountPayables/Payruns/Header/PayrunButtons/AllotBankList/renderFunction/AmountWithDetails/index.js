@@ -1,15 +1,13 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const FUND_ALLOTMENT_TIMELINE_DEFAULT_LENGTH = 0;
 function AmountWithDetails({ itemData = {}, selectedPayrun = {}, checkedRow = {} }) {
 	const { fundAllotmentTimeline, balance, currency, allocatedAmount } = itemData;
 	const { totalValue } = selectedPayrun || checkedRow;
-
-	const fundAllotmentTimelineLength = fundAllotmentTimeline?.length;
 
 	return (
 		<div className={styles.container}>
@@ -26,7 +24,7 @@ function AmountWithDetails({ itemData = {}, selectedPayrun = {}, checkedRow = {}
 					})}
 				</div>
 			</div>
-			{fundAllotmentTimelineLength > FUND_ALLOTMENT_TIMELINE_DEFAULT_LENGTH && (
+			{!isEmpty(fundAllotmentTimeline) && (
 				<div className={styles.details_text}>
 					Updated By :
 					{' '}

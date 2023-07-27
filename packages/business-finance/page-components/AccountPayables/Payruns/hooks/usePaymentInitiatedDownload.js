@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
+import { openDownloadLink } from '../utils';
+
 const usePaymentInitiatedDownload = () => {
 	const [{ data: downloadData, loading }, trigger] = useRequestBf({
 		url     : '/purchase/payrun/download',
@@ -22,7 +24,7 @@ const usePaymentInitiatedDownload = () => {
 			const { data = {} } = res || {};
 			const downloadFile = `${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}`
              + `/purchase/download/document?id=${data.urlId}`;
-			if (data.urlId) window.open(downloadFile);
+			if (data.urlId) openDownloadLink(downloadFile);
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Failed to Download');
 		}

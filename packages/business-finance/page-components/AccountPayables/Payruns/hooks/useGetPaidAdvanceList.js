@@ -7,7 +7,7 @@ import { dateFormatter } from '../helpers';
 const useGetPaidAdvanceList = ({ activePayrunTab, query, globalFilters }) => {
 	const { pageIndex, pageSize, selectDate, cogoBankId } = globalFilters || {};
 
-	const [{ data:paidAdvanceListData, loading:paidAdvanceListLoading }, paidAdvanceListTrigger] = useRequestBf({
+	const [{ data: paidAdvanceListData, loading: paidAdvanceListLoading }, paidAdvanceListTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill/list-paid-advance-doc',
 		method  : 'get',
 		authKey : 'get_purchase_payrun_bill_list_paid_advance_doc',

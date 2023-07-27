@@ -5,8 +5,11 @@ import useGetPaidBillReport from '../../../hooks/useGetPaidBillReport';
 
 const NEXT_MONTH_INDEX = 1;
 function SendReportModal({
-	showReport = false, setShowReport = () => {}, globalFilters = {},
-	activePayrunTab = '', itemData = {},
+	showReport = false,
+	setShowReport = () => {},
+	globalFilters = {},
+	activePayrunTab = '',
+	itemData = {},
 }) {
 	const [newdate, setNewDate] = useState(false);
 	const {
@@ -21,6 +24,19 @@ function SendReportModal({
 		activePayrunTab,
 	});
 
+	const handleDateChange = (dat) => {
+		const { startDate, endDate } = dat;
+		const startingDate = new Date(startDate);
+		if (
+			new Date(endDate) > startingDate.setMonth(startingDate.getMonth() + NEXT_MONTH_INDEX)
+		) {
+			Toast.error('Please select a range less then a month');
+			setNewDate('Invalid_Range');
+		} else {
+			setNewDate(dat);
+		}
+	};
+
 	return (
 		<div>
 			<Modal size="sm" show={showReport} onClose={() => setShowReport(false)} placement="top">
@@ -32,18 +48,7 @@ function SendReportModal({
 						value={newdate}
 						placeholder="Select Date Range"
 						isPreviousDaysAllowed
-						onChange={(dat) => {
-							const { startDate, endDate } = dat;
-							const startingDate = new Date(startDate);
-							if (
-								new Date(endDate) > startingDate.setMonth(startingDate.getMonth() + NEXT_MONTH_INDEX)
-							) {
-								Toast.error('Please select a range less then a month');
-								setNewDate('Invalid_Range');
-							} else {
-								setNewDate(dat);
-							}
-						}}
+						onChange={handleDateChange}
 					/>
 				</Modal.Body>
 				<Modal.Footer>

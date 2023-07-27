@@ -1,4 +1,4 @@
-export const initiatedListViewConfig = {
+export const INITIATED_LIST_VIEW_CONFIG = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {

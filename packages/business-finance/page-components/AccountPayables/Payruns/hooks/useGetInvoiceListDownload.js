@@ -10,7 +10,7 @@ const useGetInvoiceListDownload = ({ globalFilters = {}, overseasData = '', size
 		authKey : 'get_purchase_payrun_bill_list_view_download',
 	}, { manual: true });
 
-	const [{ data:advanceDownloadData, loading:advanceLoading }, advanceDownloadTrigger] = useRequestBf({
+	const [{ data: advanceDownloadData, loading: advanceLoading }, advanceDownloadTrigger] = useRequestBf({
 		url     : '/purchase/payrun/advance-doc-list-view-download',
 		method  : 'get',
 		authKey : 'get_purchase_payrun_advance_doc_list_view_download',

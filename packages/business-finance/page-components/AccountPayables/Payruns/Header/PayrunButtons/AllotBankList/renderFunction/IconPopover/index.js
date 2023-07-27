@@ -16,7 +16,6 @@ function IconPopover({ itemData = {} }) {
 					<RemarkContent
 						fundAllotmentTimeline={fundAllotmentTimeline}
 						currency={currency}
-						key={currency}
 					/>
 				)}
 			>

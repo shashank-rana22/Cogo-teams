@@ -1,4 +1,4 @@
-export const payrunPaidConfig = {
+export const PAYRUN_PAID_NORMAL_CONFIG = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {

@@ -7,19 +7,23 @@ import GetSearchCrossIcon from '../GetSearchCrossIcon';
 
 import styles from './styles.module.css';
 
+const SEARCH_PLACEHOLDER_MAPPING = {
+	PAID           : 'Search by Invoice/SID/Supplier/UTR/BRN',
+	UPLOAD_HISTORY : 'Search by File Name',
+	isInvoiceView  : 'Search by Invoice/SID/Payrun/Supplier',
+	selectedPayrun : 'Search by Invoice Number/SID',
+	default        : 'Search by PayRun Name',
+};
+
 function SearchFilter({
-	globalFilters = {}, setGlobalFilters = () => {},
-	activePayrunTab = '', isInvoiceView = false, selectedPayrun = null, setIsInvoiceView = () => {},
+	globalFilters = {},
+	setGlobalFilters = () => {},
+	activePayrunTab = '',
+	isInvoiceView = false,
+	selectedPayrun = null,
+	setIsInvoiceView = () => {},
 }) {
 	const { search } = globalFilters;
-
-	const SEARCH_PLACEHOLDER_MAPPING = {
-		PAID           : 'Search by Invoice/SID/Supplier/UTR/BRN',
-		UPLOAD_HISTORY : 'Search by File Name',
-		isInvoiceView  : 'Search by Invoice/SID/Payrun/Supplier',
-		selectedPayrun : 'Search by Invoice Number/SID',
-		default        : 'Search by PayRun Name',
-	};
 
 	const searchType = SEARCH_PLACEHOLDER_MAPPING[activePayrunTab]
 		|| (isInvoiceView && SEARCH_PLACEHOLDER_MAPPING.isInvoiceView)
@@ -51,7 +55,7 @@ function SearchFilter({
 								<Toggle
 									name="isInvoiceView"
 									value={isInvoiceView}
-									onChange={() => setIsInvoiceView(!isInvoiceView)}
+									onChange={() => setIsInvoiceView((prev) => (!prev))}
 									showOnOff
 									size="md"
 									onLabel="Invoices"

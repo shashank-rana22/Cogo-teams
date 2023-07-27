@@ -1,4 +1,4 @@
-export const advencePayrunPaidConfig = {
+export const ADVANCE_PAYMENT_PAYRUN_PAID_CONFIG = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {

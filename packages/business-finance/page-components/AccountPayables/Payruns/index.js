@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import List from '../../commons/List/index.tsx';
 
-import DropDownItem from './DropDownItem';
+import RenderPaidAccordian from './DropDownItem/RenderPaidAccordian';
 import Header from './Header';
 import useFilterData from './hooks/useFilterData';
-import InvoiceCard from './InvoiceCard/index';
-import RenderFunctions from './renderFunction/index';
+import InvoiceCard from './InvoiceCard';
+import renderFunctions from './renderFunction';
 import styles from './styles.module.css';
 
 function Payruns({ activeEntity = '' }) {
@@ -31,7 +31,7 @@ function Payruns({ activeEntity = '' }) {
 		setCheckedRow,
 	});
 
-	const { functions } = RenderFunctions(
+	const { functions } = renderFunctions(
 		{
 			overseasData,
 			viewId,
@@ -47,21 +47,6 @@ function Payruns({ activeEntity = '' }) {
 			setSelectedIds,
 		},
 	);
-
-	const renderPaidDropDownAccordian = (singleitem) => {
-		if (viewId === singleitem?.objectId) {
-			return (
-				<div>
-					<DropDownItem
-						data={dropDownData}
-						loadingDropDown={loadingDropDown}
-						key={viewId}
-					/>
-				</div>
-			);
-		}
-		return null;
-	};
 
 	return (
 
@@ -113,7 +98,14 @@ function Payruns({ activeEntity = '' }) {
 				loadingDropDown={loadingDropDown}
 				activePayrunTab={activePayrunTab}
 				paginationType="number"
-				renderDropDown={renderPaidDropDownAccordian}
+				renderDropDown={(singleitem) => (
+					<RenderPaidAccordian
+						dropDownData={dropDownData}
+						loadingDropDown={loadingDropDown}
+						viewId={viewId}
+						singleitem={singleitem}
+					/>
+				)}
 			/>
 		</div>
 	);

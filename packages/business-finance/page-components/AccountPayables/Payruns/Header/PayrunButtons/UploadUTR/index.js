@@ -1,9 +1,9 @@
 import { Button, Modal, Toggle } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { ADVANCE_SAMPLE_LINK, SAMPLE_LINK } from '../../../constants';
 import useUploadBulkUtr from '../../../hooks/useUploadBulkUTR';
 
 import styles from './styles.module.css';
@@ -16,6 +16,7 @@ function UploadUTR({
 }) {
 	const [advancePayment, setAdvancePayment] = useState(false);
 	const [fileValue, setFileValue] = useState(null);
+
 	const { upload, loading } = useUploadBulkUtr({
 		setFileValue,
 		activeEntity,
@@ -24,7 +25,8 @@ function UploadUTR({
 		setShowUploadUTR,
 	});
 
-	const SAMPLE_FILE = advancePayment ? ADVANCE_SAMPLE_LINK : SAMPLE_LINK;
+	const SAMPLE_FILE = advancePayment ? GLOBAL_CONSTANTS.upload_utr_sample_file.advance_payment
+		: GLOBAL_CONSTANTS.upload_utr_sample_file.normal_payment;
 
 	return (
 		<div>

@@ -11,22 +11,36 @@ import styles from './styles.module.css';
 import UploadUTR from './UploadUTR';
 
 function PayrunButtons({
-	activePayrunTab = '', isInvoiceView = false, overseasData = '', globalFilters = {},
-	selectedPayrun = null, setSelectedPayrun = () => {}, checkedRow = null, setCheckedRow = () => {},
-	itemData = {}, activeEntity = '', refetch = () => {}, selectedIds = [], setSelectedIds = () => {},
+	activePayrunTab = '',
+	isInvoiceView = false,
+	overseasData = '',
+	globalFilters = {},
+	selectedPayrun = null,
+	setSelectedPayrun = () => {},
+	checkedRow = null,
+	setCheckedRow = () => {},
+	itemData = {},
+	activeEntity = '',
+	refetch = () => {},
+	selectedIds = [],
+	setSelectedIds = () => {},
 }) {
 	const { allotEntityBank, allotEntityLoading, getEntityBank } = useGetAllotEntityBank({
 		selectedPayrun, checkedRow,
 	});
+
 	const { downloadInvoice, loading } = useGetInvoiceListDownload({
 		overseasData,
 		activePayrunTab,
 		globalFilters,
 		size: itemData?.totalRecords,
 	});
+
 	const [showAllotBank, setShowAllotBank] = useState(false);
 	const [showUploadUTR, setShowUploadUTR] = useState(false);
+
 	const allotBankDisabledCondition = isEmpty(selectedPayrun) && isEmpty(checkedRow);
+
 	if (activePayrunTab === 'AUDITED' && !isInvoiceView) {
 		return (
 			<div>

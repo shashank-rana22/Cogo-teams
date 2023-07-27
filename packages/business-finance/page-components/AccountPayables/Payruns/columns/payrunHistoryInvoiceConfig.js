@@ -1,4 +1,4 @@
-export const payrunHistoryInvoiceConfig = {
+export const PAYRUN_HISTORY_INVOICE_CONFIG = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {

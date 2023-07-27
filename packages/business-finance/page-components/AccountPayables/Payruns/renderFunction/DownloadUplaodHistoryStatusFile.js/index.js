@@ -2,6 +2,8 @@ import { IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import { openDownloadLink } from '../../utils';
+
 import styles from './styles.module.css';
 
 const STATUS_COLOR_MAPPING = {
@@ -13,6 +15,8 @@ const STATUS_COLOR_MAPPING = {
 function DownloadUploadHistoryStatusFile({ itemData = {} }) {
 	const { status, statusId } = itemData;
 	const displayStatus = status === 'processing' ? 'In Process' : status;
+	const downloadFile = `${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}`
+	+ `/purchase/download/document?id=${statusId}`;
 
 	return (
 		<div className={styles.container}>
@@ -22,11 +26,7 @@ function DownloadUploadHistoryStatusFile({ itemData = {} }) {
 			{itemData?.status === 'error' ? (
 				<div className={styles.button}>
 					<IcMDownload
-						onClick={() => {
-							const downloadFile = `${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}`
-                            + `/purchase/download/document?id=${statusId}`;
-							window.open(downloadFile);
-						}}
+						onClick={() => openDownloadLink(downloadFile)}
 						width={20}
 						height={20}
 						color="#F68B21"

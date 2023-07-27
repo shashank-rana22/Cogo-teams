@@ -1,4 +1,4 @@
-export const PAYRUNS_BANK_DATE_FILTERS = (bankOptions = [], overseasData = '') => {
+export const payrunBankDateFilters = (bankOptions = [], overseasData = '') => {
 	if (overseasData === 'ADVANCE_PAYMENT') {
 		return [
 			{

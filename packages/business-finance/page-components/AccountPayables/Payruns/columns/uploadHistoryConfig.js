@@ -1,4 +1,4 @@
-export const uploadHistoryConfig = {
+export const UPLOAD_HISTORY_CONFIG = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {

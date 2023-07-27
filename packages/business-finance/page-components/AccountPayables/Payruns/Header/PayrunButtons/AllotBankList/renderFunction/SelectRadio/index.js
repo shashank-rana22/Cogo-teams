@@ -4,21 +4,21 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function SelectRadio({
-	itemData = {}, selectedBankId = null, checkedRow = null,
-	selectedPayrun = {}, setSelectedBankId = () => {},
+	itemData = {},
+	selectedBankId = null,
+	checkedRow = {},
+	selectedPayrun = {},
+	setSelectedBankId = () => {},
 }) {
 	const { balance, bankId } = itemData;
-	const { totalValue } = selectedPayrun || checkedRow || {};
+	const { totalValue } = selectedPayrun || checkedRow;
+
 	const handleRadioChange = () => {
-		if (selectedBankId) {
-			setSelectedBankId('');
-			if (balance >= totalValue) {
-				setSelectedBankId(bankId);
-			}
-		} else if (balance >= totalValue) {
-			setSelectedBankId(bankId);
+		if (balance >= totalValue) {
+			setSelectedBankId((prevSelectedBankId) => (prevSelectedBankId === bankId ? '' : bankId));
 		}
 	};
+
 	return (
 		<div className={styles.radio_box}>
 			{balance < totalValue ? (

@@ -1,4 +1,4 @@
-export const initiatedConfig = {
+export const PAYRUN_AUDITED_PAYMENT_READY = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {

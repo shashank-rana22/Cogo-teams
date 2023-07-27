@@ -1,4 +1,4 @@
-export const advPaymentPayrunHistoryConfig = {
+export const ADVANCE_PAYMENT_PAYRUN_HISTORY_CONFIG = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {

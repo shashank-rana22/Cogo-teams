@@ -3,14 +3,14 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function FormatedAmount({ itemData = {}, selectedPayrun = null, checkedRow = null }) {
-	const { balance, currency, utilizedAmount } = itemData;
+function FormatedAmount({ itemData = {}, selectedPayrun = null, checkedRow = null, field = {} }) {
+	const { balance, currency } = itemData;
 	const { totalValue } = selectedPayrun || checkedRow || {};
 
 	return (
 		<div className={balance < totalValue ? styles.text : undefined}>
 			{formatAmount({
-				amount  : utilizedAmount,
+				amount  : itemData[field.key],
 				currency,
 				options : {
 					style                 : 'currency',

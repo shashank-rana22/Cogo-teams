@@ -5,7 +5,7 @@ import List from '../../../../../commons/List/index.tsx';
 import useInitiatePaymentAllotBank from '../../../hooks/useInitiatePaymentAllotBank';
 
 import { ALLOT_BANK_CONFIG } from './allotBankConfig';
-import RenderFunction from './renderFunction/index';
+import renderFunction from './renderFunction';
 import styles from './styles.module.css';
 
 function AllotBankList({
@@ -25,7 +25,7 @@ function AllotBankList({
 		setSelectedIds,
 	});
 
-	const { functions } = RenderFunction(
+	const { functions } = renderFunction(
 		{
 			selectedPayrun,
 			selectedBankId,

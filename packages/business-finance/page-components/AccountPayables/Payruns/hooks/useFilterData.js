@@ -2,15 +2,15 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { advencePayrunPaidConfig } from '../columns/advancePaidPayrunConfig';
-import { advPaymentPayrunHistoryConfig } from '../columns/advPaymentPayrunHistoryConfig';
-import { initiatedConfig } from '../columns/initiatedConfig';
-import { initiatedListViewConfig } from '../columns/initiatedListViewConfig';
+import { ADVANCE_PAYMENT_PAYRUN_PAID_CONFIG } from '../columns/advancePaidPayrunConfig';
+import { ADVANCE_PAYMENT_PAYRUN_HISTORY_CONFIG } from '../columns/advPaymentPayrunHistoryConfig';
+import { PAYRUN_AUDITED_PAYMENT_READY } from '../columns/initiatedConfig';
+import { INITIATED_LIST_VIEW_CONFIG } from '../columns/initiatedListViewConfig';
 import { PAYMENT_INITIATED_PAYRUN } from '../columns/paymentInitiatedPayrunConfig';
-import { payrunHistoryConfig } from '../columns/payrunHistoryConfig';
-import { payrunHistoryInvoiceConfig } from '../columns/payrunHistoryInvoiceConfig';
-import { payrunPaidConfig } from '../columns/payrunPaidConfig';
-import { uploadHistoryConfig } from '../columns/uploadHistoryConfig';
+import { PAYRUN_HISTORY_CONFIG } from '../columns/payrunHistoryConfig';
+import { PAYRUN_HISTORY_INVOICE_CONFIG } from '../columns/payrunHistoryInvoiceConfig';
+import { PAYRUN_PAID_NORMAL_CONFIG } from '../columns/payrunPaidConfig';
+import { UPLOAD_HISTORY_CONFIG } from '../columns/uploadHistoryConfig';
 import { VIEW_INVOICE_NORMAL_CONFIG } from '../columns/viewInvoiceForSelected';
 import { ADVANCE_PAYMENT_VIEW_INVOICE } from '../columns/viewInvoiceForSelectedAdvance';
 import { VIEW_INVOICE_ADVANCE_PAYMENT_READY_CONFIG } from '../columns/viewInvoiceForSelectedAdvancePaymentReady';
@@ -26,9 +26,14 @@ import useGetUploadHistoryList from './useGetUploadHistoryList';
 import useGetViewInvoices from './useGetViewInvoices';
 
 const PAYRUN_INNER_TAB_NAME = ['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'];
+
 const useFilterData = ({
-	isInvoiceView, activePayrunTab, overseasData,
-	setOverseasData, setViewId, setCheckedRow,
+	isInvoiceView,
+	activePayrunTab,
+	overseasData,
+	setOverseasData,
+	setViewId,
+	setCheckedRow,
 }) => {
 	const [globalFilters, setGlobalFilters] = useState({
 		search    : undefined,
@@ -40,7 +45,7 @@ const useFilterData = ({
 	const [apiData, setApiData] = useState({
 		listData    : {},
 		dataLoading : false,
-		listConfig  : initiatedConfig,
+		listConfig  : PAYRUN_AUDITED_PAYMENT_READY,
 	});
 	const [refetch, setRefetch] = useState(() => () => {});
 
@@ -136,23 +141,23 @@ const useFilterData = ({
 		if (activePayrunTab === 'PAYMENT_INITIATED' && !isInvoiceView) {
 			filteredConfig = PAYMENT_INITIATED_PAYRUN;
 		} else if (activePayrunTab === 'COMPLETED' && !isInvoiceView) {
-			filteredConfig = payrunHistoryConfig;
+			filteredConfig = PAYRUN_HISTORY_CONFIG;
 		} else {
-			filteredConfig = initiatedConfig;
+			filteredConfig = PAYRUN_AUDITED_PAYMENT_READY;
 		}
 		if ((PAYRUN_INNER_TAB_NAME).includes(activePayrunTab)) {
 			if (overseasData === 'ADVANCE_PAYMENT' && isInvoiceView) {
 				setApiData({
 					listData    : advancePaymentInvoiceList,
 					dataLoading : advancePaymentInvoiceLoading,
-					listConfig  : advPaymentPayrunHistoryConfig,
+					listConfig  : ADVANCE_PAYMENT_PAYRUN_HISTORY_CONFIG,
 				});
 			} else if ((overseasData === 'NORMAL' || overseasData === 'OVERSEAS') && isInvoiceView) {
 				setApiData({
 					listData    : billListViewData,
 					dataLoading : billListViewLoading,
-					listConfig  : activePayrunTab === 'COMPLETED' ? payrunHistoryInvoiceConfig
-						: initiatedListViewConfig,
+					listConfig  : activePayrunTab === 'COMPLETED' ? PAYRUN_HISTORY_INVOICE_CONFIG
+						: INITIATED_LIST_VIEW_CONFIG,
 				});
 			} else if ((!isInvoiceView && !isEmpty(selectedPayrun) && overseasData !== 'ADVANCE_PAYMENT')) {
 				setApiData({
@@ -180,20 +185,20 @@ const useFilterData = ({
 				setApiData({
 					listData    : paidDataList,
 					dataLoading : paidDataLoading,
-					listConfig  : payrunPaidConfig,
+					listConfig  : PAYRUN_PAID_NORMAL_CONFIG,
 				});
 			} else if (overseasData === 'ADVANCE_PAYMENT') {
 				setApiData({
 					listData    : paidAdvanceListData,
 					dataLoading : paidAdvanceListLoading,
-					listConfig  : advencePayrunPaidConfig,
+					listConfig  : ADVANCE_PAYMENT_PAYRUN_PAID_CONFIG,
 				});
 			}
 		} else if (activePayrunTab === 'UPLOAD_HISTORY') {
 			setApiData({
 				listData    : uploadHistoryDataList,
 				dataLoading : uploadHistoryListLoading,
-				listConfig  : uploadHistoryConfig,
+				listConfig  : UPLOAD_HISTORY_CONFIG,
 			});
 		}
 	}, [activePayrunTab, advancePaymentInvoiceList, advancePaymentInvoiceLoading, billListViewData, billListViewLoading,

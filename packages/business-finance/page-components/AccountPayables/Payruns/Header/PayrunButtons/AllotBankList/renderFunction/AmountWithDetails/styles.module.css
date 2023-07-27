@@ -5,7 +5,7 @@
 .amount_container {
 	display: flex;
 	align-items: center;
-	min-width: 100px;
+	min-width: 124px;
 }
 
 .details_text {
