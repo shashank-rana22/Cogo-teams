@@ -28,6 +28,8 @@ function ItemContent({ serviceItem = {}, details = {}, rateCardData = {} }) {
 			total_price_currency = '',
 			total_price_discounted = 0,
 			is_rate_available = false,
+			truck_type,
+			cargo_handling_type,
 		} = service;
 
 		const handleRateFeedback = () => {
@@ -40,13 +42,37 @@ function ItemContent({ serviceItem = {}, details = {}, rateCardData = {} }) {
 			});
 		};
 
+		const renderPill = () => {
+			const commonDetails = `${['20', '40'].includes(container_size) ? `${container_size}ft.`
+				: container_size} ${startCase(container_type)} ${startCase(commodity)}`;
+
+			const PILL_DATA = {
+				transportation    : startCase(truck_type),
+				fcl_customs       : commonDetails,
+				fcl_cfs           : commonDetails,
+				fcl_freight_local : commonDetails,
+				fcl_freight       : commonDetails,
+			};
+
+			return (
+				<div className={styles.pills_container}>
+					<span className={styles.pill}>
+						{PILL_DATA[serviceItem.service_type]}
+					</span>
+
+					{cargo_handling_type ? (
+						<span className={styles.pill}>
+							{startCase(cargo_handling_type)}
+						</span>
+					) : null}
+				</div>
+			);
+		};
+
 		return (
 			<div className={styles.rate_item}>
 				<div className={styles.header}>
-					<span className={styles.pill}>
-						{`${['20', '40'].includes(container_size) ? `${container_size}ft.`
-							: container_size} ${startCase(container_type)} ${startCase(commodity)}`}
-					</span>
+					{renderPill()}
 
 					{total_price_discounted || is_rate_available ? (
 						<div className={styles.total_price}>

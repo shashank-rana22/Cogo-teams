@@ -1,51 +1,51 @@
 .container {
-    margin: 40px 0px;
+	margin: 40px 0;
 
-    :global {
-        .ui_multiselectt_options_container {
-            z-index: 3;
-        }
+	:global {
+		.ui_multiselectt_options_container {
+			z-index: 3;
+		}
 
-        .react-datepicker__aria-live {
-            display: none;
-        }
-    }
+		.react-datepicker__aria-live {
+			display: none;
+		}
+	}
 }
 
 .header {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 6px;
+	margin-bottom: 6px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .flex {
-    display: flex;
-    gap: 20px;
+	display: flex;
+	gap: 20px;
 }
 
 .text {
-    color: #4F4F4F;
+	color: #4f4f4f;
 }
 
 .form_container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
 }
 
 .label {
-    font-weight: 500;
-    margin-bottom: 4px;
-    justify-content: space-between;
+	justify-content: space-between;
+	margin-bottom: 4px;
+	font-weight: 500;
 }
 
 .partial_load {
-    display: flex;
-    margin-top: 28px;
-    align-items: center;
-    font-weight: 600;
+	display: flex;
+	align-items: center;
+	margin-top: 28px;
+	font-weight: 600;
 
-    :global {
+	:global {
 		.ui_chips_container {
 			flex-wrap: wrap;
 		}

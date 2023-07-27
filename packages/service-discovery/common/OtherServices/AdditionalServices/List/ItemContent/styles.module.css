@@ -16,6 +16,11 @@
 	justify-content: space-between;
 }
 
+.pills_container {
+	display: flex;
+	gap: 8px;
+}
+
 .pill {
 	width: max-content;
 	padding: 4px 12px;

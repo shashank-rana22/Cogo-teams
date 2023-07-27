@@ -3,12 +3,12 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
+	height: 232px;
 	padding: 20px;
 	margin: 8px 0 20px;
 	background-color: #fbfbff;
 	border: 1px solid #f7f7fd;
 	border-radius: 8px;
-	height: 232px;
 }
 
 .loading_text {

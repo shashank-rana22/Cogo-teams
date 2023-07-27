@@ -1,24 +1,24 @@
 .container {
-	background-color: #ffffff;
-	border: 1px solid #e0e0e0;
-	margin: 40px 0px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	margin: 40px 0;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
 
-    :global {
-        .ui_radiogroup_container {
-            padding: unset;
-            padding-top: 8px;
-        }
+	:global {
+		.ui_radiogroup_container {
+			padding: unset;
+			padding-top: 8px;
+		}
 
-        .ui_radio_container {
-            padding-left: unset;
-            padding-bottom: unset;
-        }
-    }
+		.ui_radio_container {
+			padding-bottom: unset;
+			padding-left: unset;
+		}
+	}
 }
 
 .title {
