@@ -35,23 +35,20 @@ function AgentStatus({
 	};
 
 	const handlePunchIn = () => {
+		const todayDateTime = formatDate({
+			date       : new Date(),
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
+			formatType : 'dateTime',
+			separator  : ' ',
+		});
+
 		const data = {
 			status         : 'punched_in',
-			validity_start : formatDate({
-				date       : new Date(),
-				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-				timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
-				formatType : 'dateTime',
-				separator  : ' ',
-			}),
-			validity_end: formatDate({
-				date       : new Date(),
-				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-				timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
-				formatType : 'dateTime',
-				separator  : ' ',
-			}),
+			validity_start : todayDateTime,
+			validity_end   : todayDateTime,
 		};
+
 		updateUserStatus(data);
 	};
 

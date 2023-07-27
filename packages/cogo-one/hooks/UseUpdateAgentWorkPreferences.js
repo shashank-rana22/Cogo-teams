@@ -5,23 +5,21 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const getPayload = ({ type }) => ({
-	status         : type,
-	validity_start : type === 'punched_in' ? formatDate({
+const getPayload = ({ type }) => {
+	const todayDateTime = formatDate({
 		date       : new Date(),
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
 		formatType : 'dateTime',
 		separator  : ' ',
-	}) : undefined,
-	validity_end: type === 'punched_out' ? formatDate({
-		date       : new Date(),
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
-		formatType : 'dateTime',
-		separator  : ' ',
-	}) : undefined,
-});
+	});
+
+	return {
+		status         : type,
+		validity_start : type === 'punched_in' ? todayDateTime : undefined,
+		validity_end   : type === 'punched_out' ? todayDateTime : undefined,
+	};
+};
 
 function useUpdateAgentWorkPreferences({ fetchworkPrefernce = () => {}, agentTimeline = () => {} }) {
 	const [{ data, loading }, trigger] = useRequest({

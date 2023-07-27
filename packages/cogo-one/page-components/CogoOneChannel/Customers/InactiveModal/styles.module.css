@@ -13,6 +13,11 @@
 	}
 }
 
+.error_text {
+	font-size: 10px;
+	color: #ee3425;
+}
+
 .actions {
 	display: flex;
 	align-items: center;

@@ -58,7 +58,7 @@ function InactiveModal({
 		setOfTime(new Date());
 	}, [offlineStatus]);
 
-	const emptyStateCheck = isEmpty(offlineStatus);
+	const emptyStateCheck = isEmpty(offlineStatus) || !reason;
 	const customEmptyCheck = date === '';
 
 	const checks = offlineStatus !== 'custom' ? emptyStateCheck : customEmptyCheck;
@@ -121,7 +121,7 @@ function InactiveModal({
 
 			<div className={styles.duration_section}>
 				<div className={styles.time_title}>
-					Select offline reason
+					Select offline reason *
 				</div>
 				<Select
 					value={reason}
@@ -131,16 +131,19 @@ function InactiveModal({
 					isClearable
 				/>
 				{reason === 'others' && (
-					<Textarea
-						size="sm"
-						placeholder="Enter the specific reason"
-						value={comment}
-						onChange={(val) => setOfflineReason((prev) => ({ ...prev, comment: val }))}
-					/>
+					<>
+						<Textarea
+							size="sm"
+							placeholder="Enter the specific reason"
+							value={comment}
+							onChange={(val) => setOfflineReason((prev) => ({ ...prev, comment: val }))}
+						/>
+						{!comment && <div className={styles.error_text}>required*</div>}
+					</>
 				)}
 
 				<div className={styles.time_title}>
-					Set offline status till
+					Set offline status till *
 				</div>
 
 				<Select
