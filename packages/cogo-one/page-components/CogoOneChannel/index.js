@@ -24,6 +24,7 @@ import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
 import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
+import PortPairOrgFilters from './PortPairOrgFilters';
 import ProfileDetails from './ProfileDetails';
 import PunchInOut from './PunchInOut';
 import styles from './styles.module.css';
@@ -60,6 +61,9 @@ function CogoOne() {
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 	const [openKamContacts, setOpenKamContacts] = useState(false);
 	const [openInactiveModal, setOpenInactiveModal] = useState(false);
+	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
+	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
+	const [autoAssignChats, setAutoAssignChats] = useState(true);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -105,6 +109,14 @@ function CogoOne() {
 			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
 	};
+
+	const commonProps = {
+		setSendBulkTemplates,
+		setActiveTab,
+		selectedAutoAssign,
+		setAutoAssignChats,
+	};
+
 	const { hasNoFireBaseRoom = false } = activeTab || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
@@ -133,7 +145,6 @@ function CogoOne() {
 					<Customers
 						viewType={viewType}
 						activeTab={activeTab}
-						setActiveTab={setActiveTab}
 						userId={userId}
 						setModalType={setModalType}
 						modalType={modalType}
@@ -149,8 +160,19 @@ function CogoOne() {
 						openInactiveModal={openInactiveModal}
 						setOpenInactiveModal={setOpenInactiveModal}
 						fetchworkPrefernce={fetchWorkStatus}
+						setSelectedAutoAssign={setSelectedAutoAssign}
+						autoAssignChats={autoAssignChats}
+						{...commonProps}
 					/>
 				</div>
+
+				{sendBulkTemplates ? (
+					<PortPairOrgFilters
+						setSelectedAutoAssign={setSelectedAutoAssign}
+						sendBulkTemplates={sendBulkTemplates}
+						{...commonProps}
+					/>
+				) : null}
 
 				{isEmpty(activeTab?.data)
 					? (
