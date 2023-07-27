@@ -74,3 +74,13 @@
 .tabs_style {
 	padding-bottom: 8px;
 }
+
+.cogo_points {
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
+}
+
+.cogo_points_logo {
+	margin: 0 4px;
+}

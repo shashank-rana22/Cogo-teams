@@ -8,7 +8,7 @@ import LineItems from '../../../common/LineItems';
 
 import styles from './styles.module.css';
 
-function ItemContent({ serviceItem = {}, details = {}, rateCardData = {} }) {
+function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 	const [showRequestRateModal, setShowRequestRateModal] = useState(false);
 	const [requestService, setRequestService] = useState({
 		service_id    : undefined,
@@ -29,7 +29,7 @@ function ItemContent({ serviceItem = {}, details = {}, rateCardData = {} }) {
 			total_price_discounted = 0,
 			is_rate_available = false,
 			truck_type,
-			cargo_handling_type,
+			// cargo_handling_type,
 		} = service;
 
 		const handleRateFeedback = () => {
@@ -60,11 +60,52 @@ function ItemContent({ serviceItem = {}, details = {}, rateCardData = {} }) {
 						{PILL_DATA[serviceItem.service_type]}
 					</span>
 
-					{cargo_handling_type ? (
+					{/* {cargo_handling_type ? (
 						<span className={styles.pill}>
 							{startCase(cargo_handling_type)}
 						</span>
-					) : null}
+					) : null} */}
+				</div>
+			);
+		};
+
+		const renderRate = () => {
+			const conditionToRequestRate = !(total_price_discounted || is_rate_available);
+
+			if (conditionToRequestRate) {
+				if (serviceItem.service_type === 'fcl_freight_local') {
+					return 'At Actuals';
+				}
+				return (
+					<div className={styles.no_rates_found}>
+						<strong>No Rates Found</strong>
+
+						<Button
+							size="sm"
+							themeType="accent"
+							className={styles.request_rate_button}
+							onClick={handleRateFeedback}
+						>
+							Request Rate
+						</Button>
+					</div>
+				);
+			}
+
+			return (
+				<div className={styles.total_price}>
+					Total:
+					<div style={{ fontWeight: 600, fontSize: 16, marginLeft: 8 }}>
+						{formatAmount({
+							amount   : total_price_discounted,
+							currency : total_price_currency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'symbol',
+								maximumFractionDigits : 0,
+							},
+						})}
+					</div>
 				</div>
 			);
 		};
@@ -74,35 +115,7 @@ function ItemContent({ serviceItem = {}, details = {}, rateCardData = {} }) {
 				<div className={styles.header}>
 					{renderPill()}
 
-					{total_price_discounted || is_rate_available ? (
-						<div className={styles.total_price}>
-							Total:
-							<div style={{ fontWeight: 600, fontSize: 16, marginLeft: 8 }}>
-								{formatAmount({
-									amount   : total_price_discounted,
-									currency : total_price_currency,
-									options  : {
-										style                 : 'currency',
-										currencyDisplay       : 'symbol',
-										maximumFractionDigits : 0,
-									},
-								})}
-							</div>
-						</div>
-					) : (
-						<div className={styles.no_rates_found}>
-							<strong>No Rates Found</strong>
-
-							<Button
-								size="sm"
-								themeType="accent"
-								className={styles.request_rate_button}
-								onClick={handleRateFeedback}
-							>
-								Request Rate
-							</Button>
-						</div>
-					)}
+					{renderRate()}
 				</div>
 
 				<LineItems line_items={line_items} />
@@ -111,7 +124,7 @@ function ItemContent({ serviceItem = {}, details = {}, rateCardData = {} }) {
 					<FeedBackModal
 						onClose={() => setShowRequestRateModal(false)}
 						show={showRequestRateModal}
-						details={details}
+						details={detail}
 						data={rateCardData}
 						requestService={requestService}
 					/>
@@ -120,6 +133,7 @@ function ItemContent({ serviceItem = {}, details = {}, rateCardData = {} }) {
 			</div>
 		);
 	};
+
 	return (
 		<div className={styles.container}>
 			{rateData.map((rateItem) => renderRateItem(rateItem))}

@@ -13,11 +13,10 @@ const DEFAULT_VALUE = 0;
 
 function List({
 	list = [],
-	details = {},
+	detail = {},
 	rateCardData = {},
-	loading = false,
 	type = 'seller',
-	onClickAdd = () => {},
+	setHeaderProps = () => {},
 	refetch = () => {},
 	SERVICES_CANNOT_BE_REMOVED = [],
 }) {
@@ -59,8 +58,9 @@ function List({
 						title={(
 							<ListItem
 								serviceItem={serviceItem}
-								loading={loading}
-								onClickAdd={onClickAdd}
+								detail={detail}
+								rateCardData={rateCardData}
+								setHeaderProps={setHeaderProps}
 								refetch={refetch}
 								SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
 							/>
@@ -68,7 +68,7 @@ function List({
 						content={(
 							<ItemContent
 								serviceItem={serviceItem}
-								details={details}
+								detail={detail}
 								rateCardData={rateCardData}
 							/>
 						)}

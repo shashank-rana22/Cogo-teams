@@ -6,11 +6,11 @@
 
 	:global {
 		.ui_popover_container {
-			background-color: #fef199;
-			box-shadow: 0px 0px 9px 0px #F2F3FAB2;
 			max-width: 300px !important;
 			pointer-events: auto;
-			opacity: 1;  
+			background-color: #fef199;
+			box-shadow: 0 0 9px 0 #f2f3fab2;
+			opacity: 1;
 		}
 
 		.tippy-arrow::before {

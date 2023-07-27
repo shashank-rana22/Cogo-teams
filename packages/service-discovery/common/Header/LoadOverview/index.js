@@ -17,6 +17,7 @@ function LoadOverview({
 	loading = false,
 	isAllowedToEdit = true,
 	infoBanner = {},
+	showSmall = false,
 	setInfoBanner = () => {},
 }) {
 	const [showModal, setShowModal] = useState(false);
@@ -38,7 +39,7 @@ function LoadOverview({
 		isFirst = false,
 		margin = 0,
 	) => (
-		<div className={styles.container} style={{ margin }}>
+		<div className={styles.container} style={{ margin, scale: showSmall ? '0.8' : '1' }}>
 			<div className={styles.load_item}>
 				<span className={styles.text}>
 					{`${loadItem.containers_count} X ${

@@ -4,10 +4,8 @@ import React, { useState } from 'react';
 
 import { serviceMappings } from '../../../configs/AdditionalServicesConfig';
 import Incoterms from '../../../configs/incoterms.json';
-import useSpotSearchService from '../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 import useGetMinPrice from '../useGetMinPrice';
 
-import { getFclPayload } from './configs';
 import List from './List';
 import styles from './styles.module.css';
 import getCombinedServiceDetails from './utils/getCombinedServiceDetails';
@@ -30,45 +28,15 @@ function AdditionalServices({ // used in search results and checkout
 }) {
 	const { service_rates = [] } = rateCardData;
 
-	const { service_details = {}, service_type = '', trade_type = '', checkout_id = '' } = detail;
+	const { service_details = {}, service_type = '', trade_type = '' } = detail;
 
 	const finalServiceDetails = getCombinedServiceDetails(service_details, service_rates);
-
-	console.log('finalServiceDetails', finalServiceDetails);
 
 	const [incoterm, setIncoterm] = useState(INCOTERM_MAPPING[trade_type]);
 
 	const primaryService = service_type;
 
-	const { addService = () => {}, loading } = useSpotSearchService({
-		refetchSearch,
-		rateCardData,
-		checkout_id,
-	});
-
 	const { minPrice = {}, loading: minPriceLoading } = useGetMinPrice({ detail });
-
-	const handleAddServices = async (serviceItem) => {
-		if (!serviceItem.controls.length) {
-			const payload = getFclPayload({
-				rateCardData,
-				detail,
-				additionalFormInfo : {},
-				service_name       : serviceItem.name,
-			});
-			await addService(payload);
-			return;
-		}
-
-		setHeaderProps({
-			key     : 'additional_services_details',
-			rateCardData,
-			setHeaderProps,
-			service : serviceItem,
-			refetchSearch,
-			detail,
-		});
-	};
 
 	const isSingleLocationService = singleLocationServices.includes(service_type);
 
@@ -167,8 +135,6 @@ function AdditionalServices({ // used in search results and checkout
 		});
 	});
 
-	console.log('allServices', allServices);
-
 	const filteredAllServices = allServices.filter((service_item) => service_item.inco_terms.includes(incoterm));
 
 	const shipperSideServices = [];
@@ -206,11 +172,10 @@ function AdditionalServices({ // used in search results and checkout
 				{isEmpty(shipperSideServices) ? null : (
 					<List
 						list={shipperSideServices}
-						loading={loading}
 						type="seller"
-						onClickAdd={handleAddServices}
-						details={detail}
+						detail={detail}
 						rateCardData={rateCardData}
+						setHeaderProps={setHeaderProps}
 						refetch={refetchSearch}
 						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
 					/>
@@ -219,11 +184,10 @@ function AdditionalServices({ // used in search results and checkout
 				{isEmpty(consigneeSideServices) ? null : (
 					<List
 						list={consigneeSideServices}
-						loading={loading}
 						type="buyer"
-						onClickAdd={handleAddServices}
-						details={detail}
+						detail={detail}
 						rateCardData={rateCardData}
+						setHeaderProps={setHeaderProps}
 						refetch={refetchSearch}
 						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
 					/>

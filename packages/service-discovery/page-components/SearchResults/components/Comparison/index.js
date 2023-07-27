@@ -207,9 +207,7 @@ function Comparison({
 		};
 	});
 
-	const handleBack = () => {
-		setScreen('listRateCard');
-	};
+	const handleBack = () => setScreen('listRateCard');
 
 	return (
 		<div className={styles.container}>

@@ -1,11 +1,13 @@
-import { Toast } from '@cogoport/components';
+import { Toast, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useSpotSearchService from '../../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 import DeleteServiceModal from '../../../common/DeleteServiceModal';
+import { getFclPayload } from '../../configs';
 import useDeleteAdditionalService from '../../hooks/useDeleteAdditionalService';
 import ICONS_MAPPING from '../../icons-mapping';
 
@@ -15,13 +17,20 @@ const INITIAL_REDUCE_VALUE = 0;
 
 function ListItem({
 	serviceItem = {},
-	loading,
-	onClickAdd = () => {},
+	detail = {},
+	rateCardData = {},
+	setHeaderProps = () => {},
 	refetch = () => {},
 	SERVICES_CANNOT_BE_REMOVED = [],
 }) {
 	const [isHovered, setIsHovered] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+	const { addService = () => {}, loading } = useSpotSearchService({
+		refetchSearch : refetch,
+		rateCardData,
+		checkout_id   : detail?.checkout_id,
+	});
 
 	const { isSelected = false, name = '', service_type = '', title = '' } = serviceItem;
 
@@ -32,6 +41,7 @@ function ListItem({
 
 	const handleMouseEnter = () => { setIsHovered(true); };
 	const handleMouseLeave = () => { setIsHovered(false); };
+
 	const handleDelete = (event) => {
 		event.stopPropagation();
 		event.preventDefault();
@@ -43,12 +53,37 @@ function ListItem({
 		setShowDeleteModal(true);
 	};
 
+	const handleAddServices = async (service) => {
+		if (!service.controls.length) {
+			const payload = getFclPayload({
+				rateCardData,
+				detail,
+				additionalFormInfo : {},
+				service_name       : service.name,
+			});
+			await addService(payload);
+			return;
+		}
+
+		setHeaderProps({
+			key           : 'additional_services_details',
+			rateCardData,
+			setHeaderProps,
+			service       : serviceItem,
+			refetchSearch : refetch,
+			detail,
+		});
+	};
+
 	const renderRate = () => {
 		if (!isSelected) return null;
 
 		const { rateData = [] } = serviceItem;
 
 		if (!rateData || isEmpty(rateData) || !rateData[GLOBAL_CONSTANTS.zeroth_index]?.total_price_discounted) {
+			if (serviceItem.service_type === 'fcl_freight_local') {
+				return 'At Actuals';
+			}
 			return 'No Rates';
 		}
 
@@ -71,7 +106,37 @@ function ListItem({
 		});
 	};
 
-	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
+	const renderIcon = () => {
+		const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
+
+		if (loading) {
+			return <Loader style={{ marginRight: 24 }} themeType="primary" />;
+		}
+
+		if (isSelected) {
+			return (
+				<SelectedIcon
+					onMouseEnter={handleMouseEnter}
+					onMouseLeave={handleMouseLeave}
+					height={25}
+					width={25}
+					className={styles.tick_icon}
+					onClick={handleDelete}
+				/>
+			);
+		}
+
+		return (
+			<IcMPlus
+				disabled={loading}
+				height={22}
+				width={22}
+				className={styles.add_icon}
+				fill="black"
+				onClick={() => handleAddServices(serviceItem)}
+			/>
+		);
+	};
 
 	return (
 		<div
@@ -89,27 +154,7 @@ function ListItem({
 			<div className={styles.icn_container}>
 				<strong className={styles.rate}>{renderRate()}</strong>
 
-				{isSelected ? (
-					<SelectedIcon
-						onMouseEnter={handleMouseEnter}
-						onMouseLeave={handleMouseLeave}
-						height={25}
-						width={25}
-						className={styles.tick_icon}
-						onClick={handleDelete}
-					/>
-				) : (
-					<IcMPlus
-						disabled={loading}
-						height={22}
-						width={22}
-						className={styles.add_icon}
-						fill="black"
-						onClick={() => {
-							onClickAdd(serviceItem);
-						}}
-					/>
-				)}
+				{renderIcon()}
 			</div>
 
 			{showDeleteModal ? (

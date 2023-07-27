@@ -1,4 +1,4 @@
-import { Loader } from '@cogoport/components';
+import { Loader, cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -6,14 +6,7 @@ import Header from '../../common/Header';
 
 import useGetSpotSearch from './hooks/useGetSpotSearch';
 import FCLResults from './page-components/FCLResults';
-// import ListRateCards from './components/FCLResults/ListRateCards';
 import styles from './styles.module.css';
-
-// const SERVICE_MAPPING = {
-// 	fcl_freight: ListRateCards,
-// };
-
-// Listratecards ki mapping krdo not card
 
 function SearchResults() {
 	const [headerProps, setHeaderProps] = useState({});
@@ -107,7 +100,7 @@ function SearchResults() {
 	}
 
 	return (
-		<div className={`${styles.container} ${showAdditionalHeader ? styles.backdrop : {}}`}>
+		<div className={cl`${styles.container} ${showAdditionalHeader ? styles.backdrop : {}}`}>
 			<Header
 				data={detail}
 				showAdditionalHeader={showAdditionalHeader}

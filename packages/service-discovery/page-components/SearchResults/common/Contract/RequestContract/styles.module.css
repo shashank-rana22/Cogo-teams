@@ -1,0 +1,87 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	padding: 25px;
+}
+
+.text_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.heading {
+	margin-bottom: 8px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #000;
+}
+
+.supporting_heading {
+	font-size: 14px;
+	font-weight: 500;
+	color: #000;
+}
+
+.details_container {
+	display: flex;
+	align-items: center;
+	margin-top: 12px;
+}
+
+.load_details {
+	margin-left: 26px;
+}
+
+.form {
+	width: 100%;
+	padding: 25px;
+	background: #fbfbff;
+	border: 1px solid #eaebf4;
+}
+
+.form_items_container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	margin-bottom: 60px;
+}
+
+.form_item {
+	margin-right: 8px;
+	margin-bottom: 26px;
+
+	:global {
+		.react-datepicker__aria-live {
+			display: none;
+		}
+	}
+}
+
+.label {
+	display: flex;
+	margin-bottom: 6px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #000;
+}
+
+.required_mark {
+	margin-left: 4px;
+	color: #e74c3c;
+}
+
+.error_message {
+	margin-top: 8px;
+	font-size: 12px;
+	color: #e42525;
+}
+
+.buttons_container {
+	display: flex;
+	float: right;
+}

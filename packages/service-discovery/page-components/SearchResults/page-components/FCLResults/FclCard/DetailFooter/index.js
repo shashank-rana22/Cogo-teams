@@ -1,9 +1,8 @@
 import { Popover } from '@cogoport/components';
-import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcCCogoCoin, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import Cancellation from '../../../../../Checkout/commons/Cancellation';
 import Detention from '../../../../common/Detention';
 import useUpdateDestinationDemurrageDays from '../../../../hooks/useUpdateDestinationDemurrageDays';
 
@@ -63,17 +62,15 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 		onSubmit(values);
 	};
 
-	const templateStyles = isCogoAssured ? styles.cogo_assured : {};
-
-	console.log('detail', detail);
+	const templateStyles = isCogoAssured ? 'cogo_assured' : {};
 
 	const TABS_MAPPING = {
 		terms_and_condition: {
-			key          : 'terms_and_condition',
-			label        : 'T&C',
-			caseomponent : Cancellation,
-			props        : {
-				serviceType: 'fcl_freight',
+			key       : 'terms_and_condition',
+			label     : 'T&C',
+			component : PriceBreakup,
+			props     : {
+				rateCardData,
 				detail,
 			},
 		},
@@ -108,7 +105,7 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 
 	return (
 		<>
-			<div className={`${styles.container} ${templateStyles}`}>
+			<div className={`${styles.container} ${styles[templateStyles]}`}>
 				<div className={styles.dndDetails}>
 					<span className={styles.tag}>Origin</span>
 					DET.
@@ -168,9 +165,12 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 							</span>
 						))}
 					</div>
-					{/* <div>
-						CogoPoints 3000
-					</div> */}
+
+					<div className={styles.cogo_points}>
+						CogoPoints
+						<IcCCogoCoin className={styles.cogo_points_logo} width={16} height={16} />
+						{rateCardData?.earnable_cogopoints}
+					</div>
 				</div>
 
 			</div>

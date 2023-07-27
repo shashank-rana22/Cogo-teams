@@ -13,6 +13,7 @@ function LocationDetails({
 	platformTheme = 'light',
 	activePage = 'search_results',
 	loading = false,
+	showSmall = false,
 }) {
 	let finalData = data;
 
@@ -66,7 +67,7 @@ function LocationDetails({
 	if (loading) { return (<Loading />); }
 
 	return (
-		<div className={styledTheme.container}>
+		<div className={styledTheme.container} style={{ scale: showSmall ? '0.7' : '1' }}>
 
 			{renderLocationItem(origin)}
 
