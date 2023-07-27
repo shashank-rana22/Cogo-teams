@@ -8,10 +8,11 @@ import { useEffect, useState } from 'react';
 import { FilterProps } from '../interface';
 
 interface Tab {
-	activeTab?:string
+	activeTab?: string;
+	incidentId?: string;
 }
-const useGetIncidentData = ({ activeTab }:Tab) => {
-	const { user_profile:userProfile } = useSelector(({ profile }) => ({
+const useGetIncidentData = ({ activeTab, incidentId }: Tab) => {
+	const { user_profile: userProfile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
 
@@ -25,15 +26,9 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 		activeTab,
 		searchQuery : '',
 	});
-	const {
-		search, category, date, page, urgency, pageLimit,
-		...rest
-	} = filters || {};
+	const { search, category, date, page, urgency, pageLimit, ...rest } =		filters || {};
 
-	const [
-		{ data, loading },
-		trigger,
-	] = useRequestBf(
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/incident-management/incident/list',
 			method  : 'get',
@@ -61,7 +56,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 
 	useEffect(() => {
 		clearFilters();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
 	const getIncidentData = async () => {
@@ -73,26 +68,42 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 						...rest,
 						status          : activeTab.toUpperCase(),
 						isStatsRequired : true,
-						deadlineTag     : urgency === 'urgent' ? 'DELAYED' : undefined,
-						role            : isSettlementExecutive ? 'SETTLEMENT_EXECUTIVE' : undefined,
-						q               : query !== '' ? query : undefined,
-						type            : category,
-						pageIndex       : page,
-						pageSize        : pageLimit,
-						createdFrom     : startDate
+						deadlineTag:
+							urgency === 'urgent' ? 'DELAYED' : undefined,
+						role: isSettlementExecutive
+							? 'SETTLEMENT_EXECUTIVE'
+							: undefined,
+						q           : query !== '' ? query : undefined,
+						type        : category,
+						pageIndex   : page,
+						pageSize    : pageLimit,
+						id          : incidentId,
+						createdFrom : startDate
 							? formatDate({
-								date       : startDate,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								date: startDate,
+								dateFormat:
+										GLOBAL_CONSTANTS.formats.date[
+											'yyyy-MM-dd'
+										],
+								timeFormat:
+										GLOBAL_CONSTANTS.formats.time[
+											'hh:mm aaa'
+										],
 								formatType : 'date',
 								separator  : ' ',
 							})
 							: undefined,
 						createdTo: endDate
 							? formatDate({
-								date       : endDate,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								date: endDate,
+								dateFormat:
+										GLOBAL_CONSTANTS.formats.date[
+											'yyyy-MM-dd'
+										],
+								timeFormat:
+										GLOBAL_CONSTANTS.formats.time[
+											'hh:mm aaa'
+										],
 								formatType : 'date',
 								separator  : ' ',
 							})
@@ -107,8 +118,8 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 
 	useEffect(() => {
 		getIncidentData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), category, date, query, page, urgency, activeTab]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(rest), category, date, query, page, urgency, incidentId, activeTab]);
 
 	useEffect(() => {
 		setFilters((prev) => ({
