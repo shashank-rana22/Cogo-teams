@@ -3,7 +3,7 @@ import { IcMUpload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../common/CardList';
-import { FinalAwbFields } from '../../configurations/final-awb-fields';
+import { finalAwbFields } from '../../configurations/final-awb-fields';
 
 import UploadModal from './UploadModal';
 
@@ -16,7 +16,7 @@ function FinalAwb({
 	setEdit = () => {},
 	listAPI = () => {},
 }) {
-	const { fields } = FinalAwbFields;
+	const { fields } = finalAwbFields;
 	const [showUpload, setShowUpload] = useState({});
 
 	const functions = {

@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMUpload } from '@cogoport/icons-react';
 
 const controls = [
@@ -18,7 +19,7 @@ const controls = [
 		type       : 'file',
 		drag       : true,
 		span       : 8,
-		maxSize    : '10485760',
+		maxSize    : GLOBAL_CONSTANTS.options.upload_file_size['1MB'],
 		uploadType : 'aws',
 		height     : '88',
 		uploadIcon : <IcMUpload height={40} width={40} />,
