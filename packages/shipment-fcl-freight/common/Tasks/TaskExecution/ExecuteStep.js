@@ -1,8 +1,9 @@
 import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
+import { isEmpty } from '@cogoport/utils';
 import { useRef } from 'react';
 
-import ConfirmFreightBooking from './CustomTasks/ConfirmFreightBooking';
+import BookingPreferenceCard from './CustomTasks/UploadBookingNote/components/Step0/BookingPreferenceCard';
 import EditBookingParams from './EditBookingParams';
 import { getCanShipmentRollover } from './helpers/getCanShipmentRollover';
 import useHandleSubmit from './helpers/useHandleSubmit';
@@ -44,6 +45,10 @@ function ExecuteStep({
 		&& taskName === 'mark_confirmed'
 	);
 
+	const { list_shipment_booking_confirmation_preferences: list = [] } = getApisData;
+
+	const selectedPriority = list?.find((item) => item?.priority === item?.selected_priority);
+
 	const isShipmentRolloverable = getCanShipmentRollover(getApisData);
 
 	const { loading: isLoading, setIsLoading, onSubmit } = useHandleSubmit({
@@ -75,8 +80,8 @@ function ExecuteStep({
 
 	return (
 		<div className={styles.container}>
-			{showBookingPreference ? (
-				<ConfirmFreightBooking getApisData={getApisData} />
+			{showBookingPreference && !isEmpty(selectedPriority) ? (
+				<BookingPreferenceCard item={selectedPriority} isProceedEnabled={false} />
 			) : null }
 
 			<div className={styles.form}>

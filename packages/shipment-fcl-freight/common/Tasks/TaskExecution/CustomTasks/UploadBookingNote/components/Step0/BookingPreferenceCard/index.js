@@ -27,7 +27,7 @@ function BookingPreferenceCard({
 	const dataArray = Array.isArray(data) ? data : [data];
 	const { remarks, supplier_contract_no } = dataArray?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({ });
+	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ });
 
 	const handleProceed = async () => {
 		setSelectedServiceProvider((prev) => [...prev, item]);
@@ -97,7 +97,6 @@ function BookingPreferenceCard({
 						onClick={handleProceed}
 						disabled={(selectedServiceProvider || [])
 							.find((service) => item.service_id === service.service_id)}
-						loading={loading}
 					>
 						<b>
 							{selectedServiceProvider.length === (similarServiceIds.length - ONE) ? 'Proceed' : 'Save'}
