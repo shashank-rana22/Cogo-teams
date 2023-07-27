@@ -34,9 +34,11 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 	const [showDetails, setShowDetails] = useState(false);
 
 	const {
-		cogo_entity, organization = [], organization_type, id,
+		cogo_entity, organization = [], organization_type, id, booking_source = '',
 		segment, status = 'draft', activated_at, config_type, shipment_capacities,
 	} = data;
+
+	const [BookingSource] = (booking_source || '').split('_');
 
 	const { title, content } = activationStatus({ status, activated_at });
 
@@ -58,15 +60,17 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 					</div>
 					<div className={styles.item}>
 						<p className={styles.title}>Organization Sub-Type</p>
-						<p className={styles.content}>{startCase(segment)}</p>
+						<p className={styles.content}>{startCase(segment) || '-'}</p>
 					</div>
 					<div className={styles.item}>
-						<p className={styles.title}>Activation Date</p>
-						<p className={styles.content}>24 May 2023</p>
+						<p className={styles.title}>Organizations</p>
+						<p className={styles.content}>-</p>
 					</div>
 					<div className={styles.item}>
 						<p className={styles.title}>Booking Source</p>
-						<p className={styles.content}>24 May 2023</p>
+						<p className={styles.content}>
+							{startCase(BookingSource) || '-'}
+						</p>
 					</div>
 
 					<div className={styles.item}>

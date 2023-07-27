@@ -4,6 +4,7 @@ const getControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
 		label       : 'Select Cogo Entity',
 		type        : 'async-select',
 		placeholder : 'Select Cogo Entity',
+		showAstrick : true,
 		initialCall : true,
 		asyncKey    : 'partners',
 		params      : {

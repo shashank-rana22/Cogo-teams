@@ -16,6 +16,10 @@ const orgSubTypeOptions = {
 			value : 'sme',
 			label : 'SME',
 		},
+		{
+			value : 'not_defined',
+			label : 'Unknown',
+		},
 	],
 	channel_partner: [
 		{
@@ -25,6 +29,10 @@ const orgSubTypeOptions = {
 		{
 			value : 'domestic_cp',
 			label : 'Domestic CP',
+		},
+		{
+			value : 'not_defined',
+			label : 'Unknown',
 		},
 	],
 };

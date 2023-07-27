@@ -2426,7 +2426,7 @@ const navigationMappingAdmin = {
 	},
 	customer_service_desk_management: {
 		key           : 'customer_service_desk_management',
-		title         : 'Customer Service Desk Management',
+		title         : 'Customer Service Desk',
 		isSubNavs     : false,
 		module_type   : 'dashboards',
 		href          : '/v2/customer-service-desk-management',
