@@ -5,6 +5,7 @@ function ModeWiseButtons(props) {
 		mode,
 		onCreate = () => {},
 		createLoading = false,
+		createDisabled = true,
 	} = props;
 
 	const MODE_BASIS_BUTTON_MAPPING = {
@@ -27,6 +28,7 @@ function ModeWiseButtons(props) {
 					themeType="primary"
 					onClick={() => onCreate({ distribute_equally: false })}
 					loading={createLoading}
+					disabled={createDisabled}
 				>
 					Create Objective & Send For Verification
 				</Button>

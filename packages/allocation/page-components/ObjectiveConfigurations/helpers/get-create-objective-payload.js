@@ -37,6 +37,14 @@ const getCreateObjectivePayload = (props) => {
 		Object.entries(weightageData).forEach(([controlName, weightage]) => {
 			const [objectiveId, userId, roleId] = controlName.split('_');
 
+			if (isEmpty(weightage)) {
+				throw new Error('Weightage for all objective not set. Please resolve all conflicts first.');
+			}
+
+			if (userId === 'undefined') {
+				return;
+			}
+
 			USER_OBJECTIVE_WEIGHTAGE_MAPPING[userId] = {
 				...(USER_OBJECTIVE_WEIGHTAGE_MAPPING[userId] || {}),
 				user_id                   : userId,

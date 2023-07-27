@@ -2,19 +2,17 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
 
 import TAB_PANNEL_KEYS from '../../../../../constants/tab-pannel-keys-mapping';
 import getCreateObjectivePayload from '../../../../../helpers/get-create-objective-payload';
+import validateTotalWeightage from '../../../../../helpers/validate-total-weightage';
 
 const { OBJECTIVES } = TAB_PANNEL_KEYS;
 
 const useCreateObjective = (props) => {
 	const { formValues, setActiveTabDetails } = props;
 
-	const [weightageData, setWeightageData] = useState({});
-
-	const { control, watch, setValue } = useForm();
+	const { control, setValue, getValues } = useForm();
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/objective_attributes',
@@ -24,7 +22,17 @@ const useCreateObjective = (props) => {
 
 	const onCreate = async ({ distribute_equally }) => {
 		try {
-			const payload = getCreateObjectivePayload({ data: formValues, weightageData, distribute_equally });
+			const payload = getCreateObjectivePayload(
+				{ data: formValues, weightageData: getValues(), distribute_equally },
+			);
+
+			const { objective_weightages } = payload;
+
+			const isValidWeightages = validateTotalWeightage({ objective_weightages });
+
+			if (!isValidWeightages) {
+				throw new Error('Weightage sum should be 100 for all users');
+			}
 
 			await trigger({ data: payload });
 
@@ -33,19 +41,11 @@ const useCreateObjective = (props) => {
 			setActiveTabDetails({ tab: OBJECTIVES, mode: 'list' });
 		} catch (err) {
 			Toast.error(
-				getApiErrorString(err?.response?.data)
+				getApiErrorString(err?.response?.data) || err?.message
 					|| 'Unable to Create Objective!!',
 			);
 		}
 	};
-
-	useEffect(() => {
-		const subscription = watch((value) => {
-			setWeightageData(value);
-		});
-
-		return () => subscription.unsubscribe();
-	}, [watch, setWeightageData]);
 
 	return {
 		control,

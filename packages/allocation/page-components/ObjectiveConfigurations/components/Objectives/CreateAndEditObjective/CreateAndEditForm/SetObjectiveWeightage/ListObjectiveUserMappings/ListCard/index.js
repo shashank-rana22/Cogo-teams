@@ -24,7 +24,7 @@ function ListCard(props) {
 		if (isEmpty(objectives)) return;
 
 		const objectivesCount = objectives.length + CURRENT_OBJECTIVE_COUNT;
-		const equalWeight = (DEFAULT_WEIGHTAGE / objectivesCount).toFixed(DECIMAL_COUNT);
+		const equalWeight = parseFloat((DEFAULT_WEIGHTAGE / objectivesCount).toFixed(DECIMAL_COUNT));
 		let lastWeightage = 100.00;
 
 		objectives.forEach((item) => {
@@ -35,7 +35,7 @@ function ListCard(props) {
 			lastWeightage -= equalWeight;
 		});
 
-		setValue(`undefined_${user?.id}_${role?.id}_weightage`, lastWeightage.toFixed(DECIMAL_COUNT));
+		setValue(`undefined_${user?.id}_${role?.id}_weightage`, parseFloat(lastWeightage.toFixed(DECIMAL_COUNT)));
 	};
 
 	return (
@@ -79,7 +79,7 @@ function ListCard(props) {
 				user={user}
 				role={role}
 				control={control}
-				defaultWeightage={isEmpty(objectives) && DEFAULT_WEIGHTAGE}
+				defaultWeightage={isEmpty(objectives) ? DEFAULT_WEIGHTAGE : undefined}
 			/>
 
 			{objectives.map((item) => (
