@@ -21,7 +21,7 @@ const useGetFclFreightRateStats = ({ filters }) => {
 	);
 
 	useEffect(() => () => {
-		const { params } = getFormattedPayload(filters);
+		const params = getFormattedPayload(filters);
 		getStats(params);
 	}, [filters, getStats]);
 

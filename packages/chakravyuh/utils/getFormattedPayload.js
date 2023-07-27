@@ -2,21 +2,21 @@ import { subtractDays } from '@cogoport/utils';
 
 import { LOCATION_KEYS } from '../constants/map_constants';
 
-const getFormattedPayload = (filters) => {
+const getFormattedPayload = (globalFilters) => {
 	const {
 		origin, destination,
-		origin_type, destination_type, is_origin_icd, date_diff, is_destination_icd, ...params
-	} = filters;
+		origin_type, destination_type, is_origin_icd, date_diff, is_destination_icd, ...filters
+	} = globalFilters;
 
 	const endDate = new Date();
-	params.startDate = subtractDays(endDate, date_diff);
+	filters.startDate = subtractDays(endDate, date_diff);
 
 	LOCATION_KEYS.forEach((key) => {
-		if (filters[key]) {
-			params[`${key}_${filters[`${key}_type`]}_id`] = filters[key];
+		if (globalFilters[key]) {
+			filters[`${key}_${globalFilters[`${key}_type`]}_id`] = globalFilters[key];
 		}
 	});
-	return { params };
+	return { filters };
 };
 
 export default getFormattedPayload;

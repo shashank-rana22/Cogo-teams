@@ -141,8 +141,8 @@ const COMMON_END_COLUMNS = [
 		),
 	},
 ];
-function useSupplyRatesListTable(CLASS_TYPE) {
-	if (CLASS_TYPE === 'fcl') {
+function getListConfig(rate_type) {
+	if (rate_type === 'fcl') {
 		return {
 			columns: [
 				...COMMON_START_COLUMNS,
@@ -160,4 +160,4 @@ function useSupplyRatesListTable(CLASS_TYPE) {
 	};
 }
 
-export default useSupplyRatesListTable;
+export default getListConfig;

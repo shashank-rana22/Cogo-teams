@@ -12,7 +12,7 @@ const useGetDrillDownStats = ({ globalFilters = {}, flag = true }) => {
 
 	const getDrillDownStats = useCallback(async (params) => {
 		try {
-			trigger(params);
+			trigger({ params });
 		} catch (e) {
 			// console.error(e);
 		}
@@ -20,7 +20,7 @@ const useGetDrillDownStats = ({ globalFilters = {}, flag = true }) => {
 
 	useEffect(() => {
 		if (flag) {
-			const { params } = getFormattedPayload(globalFilters);
+			const params = getFormattedPayload(globalFilters);
 			getDrillDownStats(params);
 		}
 	}, [globalFilters, flag, getDrillDownStats]);
