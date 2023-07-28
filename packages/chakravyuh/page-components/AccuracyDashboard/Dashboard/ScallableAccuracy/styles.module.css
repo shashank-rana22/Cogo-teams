@@ -1,0 +1,15 @@
+.container {
+	position: relative;
+	height: 314px;
+	padding: 12px 0;
+	margin-bottom: 16px;
+}
+
+.hide_logo {
+	position: absolute;
+	bottom: 8px;
+	left: 4px;
+	width: 52px;
+	height: 24px;
+	background-color: #fff;
+}
