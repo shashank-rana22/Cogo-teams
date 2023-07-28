@@ -178,6 +178,30 @@ const GLOBAL_CONSTANTS = {
 
 	months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
 
+	office_locations: [
+		'gurgaon',
+		'mumbai',
+		'delhi',
+		'coimbatore',
+		'bangalore',
+		'chennai',
+		'kolkata',
+		'noida',
+		'ambala',
+		'haldia',
+		'ludhiana',
+		'kochi',
+		'hyderabad',
+		'pune',
+		'jaipur',
+		'raipur',
+		'ahmedabad',
+		'vadodara',
+		'rudrapur',
+		'bagdogra',
+		'ho chi minh',
+	],
+
 	image_url: {
 		general_icon              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg',
 		eclamation_svg            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg',

@@ -1,4 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
+
+const REPORTING_CITY_OPTIONS = GLOBAL_CONSTANTS.office_locations.map((location) => (
+	{ label: startCase(location), value: location }));
 
 const controls = [
 	{
@@ -75,12 +79,8 @@ const controls = [
 		type        : 'select',
 		label       : 'Reporting City*',
 		placeholder : 'Select Location',
-		options     : [
-			{ value: 'mumbai', label: 'Mumbai' },
-			{ value: 'gurgaon', label: 'Gurgaon' },
-			{ value: 'ho_chi_minh', label: 'Ho Chi Minh' },
-		],
-		rules: {
+		options     : REPORTING_CITY_OPTIONS,
+		rules       : {
 			required: 'Location is required',
 		},
 	},
