@@ -39,6 +39,28 @@ export default {
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
+	office_locations: [
+		'gurgaon',
+		'mumbai',
+		'delhi',
+		'coimbatore',
+		'bangalore',
+		'chennai',
+		'kolkata',
+		'noida',
+		'ambala',
+		'haldia',
+		'ludhiana',
+		'kochi',
+		'hyderabad',
+		'pune',
+		'jaipur',
+		'raipur',
+		'ahmedabad',
+		'vadodara',
+		'rudrapur',
+		'bagdogra',
+	],
 	uuid: {
 		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
 		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
@@ -227,7 +249,8 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
-		igm_desk: '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
 	},
 	options: {
 		registration_types: [

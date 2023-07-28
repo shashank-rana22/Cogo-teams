@@ -11,6 +11,7 @@ function Wallet({
 	activeWallet = '',
 	searchDocsVal,
 	handleDocClick = () => {},
+	orgDocService = '',
 }) {
 	const handleView = (e, image_url) => {
 		e.stopPropagation();
@@ -26,8 +27,7 @@ function Wallet({
 
 	return (
 		<div className={styles.container}>
-			{
-			activeWallet === 'trade_documents'
+			{activeWallet === 'trade_documents'
 				? 	(
 					<TradeDocuments
 						forModal={forModal}
@@ -35,11 +35,8 @@ function Wallet({
 						handleSave={handleSave}
 						searchDocsVal={searchDocsVal}
 						handleDocClick={handleDocClick}
-
 					/>
-				)
-
-				: 	(
+				) : (
 					<OrganizationDocuments
 						forModal={forModal}
 						handleView={handleView}
@@ -47,10 +44,9 @@ function Wallet({
 						showWalletDocs={showWalletDocs}
 						searchDocsVal={searchDocsVal}
 						handleDocClick={handleDocClick}
+						orgDocService={orgDocService}
 					/>
-				)
-
-		}
+				)}
 		</div>
 	);
 }
