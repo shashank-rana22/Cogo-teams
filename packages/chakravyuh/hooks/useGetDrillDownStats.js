@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 import getFormattedPayload from '../utils/getFormattedPayload';
 
-const useGetDrillDownStats = ({ globalFilters = {}, flag = true }) => {
+const useGetDrillDownStats = ({ globalFilters = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'get_fcl_freight_rate_lifecycle',
 		method : 'GET',
@@ -19,11 +19,9 @@ const useGetDrillDownStats = ({ globalFilters = {}, flag = true }) => {
 	}, [trigger]);
 
 	useEffect(() => {
-		if (flag) {
-			const params = getFormattedPayload(globalFilters);
-			getDrillDownStats(params);
-		}
-	}, [globalFilters, flag, getDrillDownStats]);
+		const params = getFormattedPayload(globalFilters);
+		getDrillDownStats(params);
+	}, [globalFilters, getDrillDownStats]);
 
 	return {
 		drillDownCards : data?.cards || [],

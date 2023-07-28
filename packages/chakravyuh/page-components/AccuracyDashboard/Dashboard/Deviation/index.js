@@ -35,6 +35,10 @@ function Deviation({ data = [], loading = false }) {
 		})),
 	}];
 
+	const isEmptyData = !loading && (!data || (Array.isArray(data)
+						&& (data.reduce((total, item) => total + item.count, GLOBAL_CONSTANTS.zeroth_index)
+						=== GLOBAL_CONSTANTS.zeroth_index)));
+
 	useEffect(() => {
 		const updateData = () => {
 			const randomArray = Array.from(
@@ -159,7 +163,7 @@ function Deviation({ data = [], loading = false }) {
 					)
 					: (
 						<NoDataState
-							visible={!(loading || loadingData.length > GLOBAL_CONSTANTS.zeroth_index)}
+							visible={isEmptyData}
 							flow="column"
 						/>
 					)

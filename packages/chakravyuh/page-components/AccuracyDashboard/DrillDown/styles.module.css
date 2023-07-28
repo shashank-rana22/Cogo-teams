@@ -5,7 +5,7 @@
 .main_card {
 	position: absolute;
 	top: 303px !important;
-	left: 360px !important;
+	left: 320px !important;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -16,6 +16,7 @@
 
 .source_card {
 	position: absolute;
+	left: 36px;
 	z-index: 2;
 	display: flex;
 	align-items: center;
@@ -40,31 +41,33 @@
 	border-radius: 8px;
 	transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 
-	.source_card:nth-child(3) {
+	.source_card:nth-child(1) {
 		top: 295px;
-		left: 45px;
 	}
 
-	.source_card:nth-child(4) {
+	.source_card:nth-child(2) {
 		top: 170px;
-		left: 45px;
 	}
 
-	.source_card:nth-child(5) {
+	.source_card:nth-child(3) {
 		top: 420px;
-		left: 45px;
 	}
 
 	&.minimize {
 		height: 200px;
 		min-height: 200px;
 	}
+
+	&.empty_state {
+		height: calc(100vh - 200px);
+		min-height: 500px;
+	}
 }
 
 .tree_branch {
 	position: absolute;
 	top: 80px;
-	left: 640px;
+	left: 565px;
 	display: flex;
 	transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 
@@ -105,9 +108,9 @@
 .tree_icon {
 	position: absolute;
 	top: -60px;
-	left: 225px;
+	left: 155px;
 	overflow: hidden;
-	transform: scale(1.2, 1.3);
+	transform: scale(1.1, 1.3);
 }
 
 .show_btn {
@@ -125,4 +128,20 @@
 	overflow: hidden;
 	border-radius: 12px;
 	box-shadow: 0 0 8px #e0e0e0;
+}
+
+.card_placeholder {
+	width: 124px;
+	height: 100px;
+	padding: 12px 12px 8px;
+	margin-right: 40px;
+	opacity: 1;
+
+	&.long_card {
+		width: 180px;
+	}
+
+	div {
+		opacity: 0.9;
+	}
 }

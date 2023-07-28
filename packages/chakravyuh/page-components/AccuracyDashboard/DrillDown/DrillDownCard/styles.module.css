@@ -119,6 +119,7 @@
 }
 
 .drop_off_text {
+	min-width: 42px;
 	color: #bf291e;
 }
 

@@ -12,13 +12,19 @@ const KEY_TO_SEND = {
 
 const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 	const [page, setPage] = useState(START_PAGE);
+	const [data, setData] = useState(null);
 
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data:rateData, loading:rateLoading }, trigger] = useRequest({
 		url    : 'list_fcl_freight_rate_statistics',
 		method : 'GET',
 	}, { manual: true });
 
-	const getData = useCallback(
+	const [{ daat:rateRequestData, loading:rateRequestLoading }, rateRequestTrigger] = useRequest({
+		url    : 'list_fcl_freight_rate_request_statistics',
+		method : 'GET',
+	}, { manual: true });
+
+	const getRatesData = useCallback(
 		async (params) => {
 			try {
 				await trigger({ params });
@@ -29,12 +35,35 @@ const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 		[trigger],
 	);
 
+	const getRateRequestsData = useCallback(
+		async (params) => {
+			try {
+				await rateRequestTrigger({ params });
+			} catch (err) {
+				// console.error(err);
+			}
+		},
+		[rateRequestTrigger],
+	);
+
 	useEffect(() => {
 		const params = getFormattedPayload(filters);
 		const extraFilters = KEY_TO_SEND[activeParent] ? { [KEY_TO_SEND[activeParent]]: true } : {};
-		getData({ ...params, ...extraFilters, page });
-	}, [getData, filters, page, activeParent]);
+		if (activeParent === 'missing_rates') {
+			getRateRequestsData({ ...params, page });
+		} else {
+			getRatesData({ ...params, ...extraFilters, page });
+		}
+	}, [filters, page, activeParent, getRateRequestsData, getRatesData]);
 
-	return { data, loading, page, setPage };
+	useEffect(() => {
+		if (activeParent === 'missing_rates') {
+			setData(rateRequestData);
+		} else {
+			setData(rateData);
+		}
+	}, [activeParent, rateData, rateRequestData]);
+
+	return { data, loading: rateLoading || rateRequestLoading, page, setPage };
 };
 export default useListFclFreightRateStatistics;
