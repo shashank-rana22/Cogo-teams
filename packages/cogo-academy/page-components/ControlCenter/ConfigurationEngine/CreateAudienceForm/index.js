@@ -47,9 +47,13 @@ function CreateAudienceForm(props) {
 	});
 
 	const renderFields = () => (Object.keys(controls) || []).map((controlItem) => {
-		const { name = '', label = '', type = 'text' } = controls[controlItem] || {};
+		const { name = '', label = '', type = '' } = controls[controlItem] || {};
+
+		if (!type) return null;
 
 		const DynamicController = getElementController(type);
+
+		if (!DynamicController) return null;
 
 		if (showElements[name]) {
 			return (
