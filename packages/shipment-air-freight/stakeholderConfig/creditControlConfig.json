@@ -1,5 +1,5 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview","purchase", "tasks", "documents", "emails", "tracking"],  
+    "features" : ["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview","purchase", "tasks", "documents", "emails", "tracking"],  
     "shipment_info":{},
     "timeline": {
         "can_edit": true,
@@ -12,7 +12,7 @@
     "tasks":{
         "tab_title":"Timeline and Tasks",
         "show_booking_req":true,
-        "checked_show_my_tasks":true,
+        "checked_show_my_tasks":false,
         "is_task_assigned":false
     },
     "documents":{
@@ -23,7 +23,7 @@
         "tab_title":"Emails"
     },
     "cancel_shipment": {
-        "can_cancel": false,
+        "can_cancel": true,
         "list_reasons": {
             "stakeholder_type": ["admin"]
         },
@@ -51,9 +51,13 @@
         "tab_title": "Tracking"
     },
     "pocs":{
-        "trade_parties":["collection_party"],
-        "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
-        "can_edit":["notifying_party","collection_party"],
+        "trade_parties":["self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
+        "can_edit":["notifying_party","invoicing_party","self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
+        "add_internal_poc":true,
+        "add_external_import_poc":true,
+        "add_external_export_poc":true,
+        "edit_internal_poc":[],
         "can_add_service_provider_poc":true
     }
 }

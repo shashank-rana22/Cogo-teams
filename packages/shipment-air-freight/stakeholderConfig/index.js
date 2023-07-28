@@ -2,6 +2,7 @@ import adminConfig from './admin.json';
 import bookingAgent from './bookingAgent.json';
 import bookingDeskConfig from './bookingDesk.json';
 import bookingDeskManagerConfig from './bookingDeskManager.json';
+import creditControlConfig from './creditControlConfig.json';
 import documentDeskConfig from './documentDesk.json';
 import documentDeskManagerConfig from './documentDeskManager.json';
 import prodProcessOwnerConfig from './prodProcessOwner.json';
@@ -17,7 +18,7 @@ const CONFIG_MAPPING = {
 	document_desk_manager : documentDeskManagerConfig,
 	prod_process_owner    : prodProcessOwnerConfig,
 	coe_head              : adminConfig,
-	credit_control        : adminConfig,
+	credit_control        : creditControlConfig,
 };
 
 const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || {};
