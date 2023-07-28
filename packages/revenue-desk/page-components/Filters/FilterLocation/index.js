@@ -19,7 +19,7 @@ const LOCATION_MAPPING = {
 };
 
 const IMG_SRC = 'https://cogoport-production.sgp1.digitaloceanspaces.com'
-				+ '/314e2cdf282b4b8b6e4dd28283865a1d/radio-button-on.svg';
+    + '/314e2cdf282b4b8b6e4dd28283865a1d/radio-button-on.svg';
 
 function FilterLocation({ filters, setFilters }) {
 	const filterOption = {
@@ -36,13 +36,22 @@ function FilterLocation({ filters, setFilters }) {
 		fcl_cfs         : ['seaport'],
 	};
 
-	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: filterOption[filters?.service] } },
-	}));
+	const locationOptions = useGetAsyncOptions(
+		merge(asyncFieldsLocations(), {
+			params: { filters: { type: filterOption[filters?.service] } },
+		}),
+	);
 
-	let origin_location_name = `origin_${LOCATION_MAPPING[filters?.service]}_id`;
-	let destination_location_name = `destination_${LOCATION_MAPPING[filters?.service]}_id`;
-	if (filters?.service === 'air_customs' || filters?.service === 'fcl_customs') {
+	let origin_location_name = `origin_${
+		LOCATION_MAPPING[filters?.service]
+	}_id`;
+	let destination_location_name = `destination_${
+		LOCATION_MAPPING[filters?.service]
+	}_id`;
+	if (
+		filters?.service === 'air_customs'
+        || filters?.service === 'fcl_customs'
+	) {
 		origin_location_name = `${LOCATION_MAPPING[filters?.service]}_id`;
 		destination_location_name = `${LOCATION_MAPPING[filters?.service]}_id`;
 	}
@@ -93,12 +102,7 @@ function FilterLocation({ filters, setFilters }) {
 		<div style={{ display: 'flex' }}>
 			<div className={styles.icon_container}>
 				<div>
-					<img
-						src={IMG_SRC}
-						alt="img"
-						height="20px"
-						width="20px"
-					/>
+					<img src={IMG_SRC} alt="img" height="20px" width="20px" />
 				</div>
 				{locationData?.destination_placeholder && (
 					<div>
@@ -137,7 +141,6 @@ function FilterLocation({ filters, setFilters }) {
 					</div>
 				)}
 			</div>
-
 		</div>
 	);
 }
