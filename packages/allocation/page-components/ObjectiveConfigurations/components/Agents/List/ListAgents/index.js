@@ -7,125 +7,8 @@ import LoadingState from '../../../../common/LoadingState';
 import ListCard from './ListCard';
 import styles from './styles.module.css';
 
-// const list = [
-// 	{
-// 		id   : 1,
-// 		role : {
-// 			name              : 'IE Owner SME Demand',
-// 			role_sub_function : 'SME',
-// 			id                : 2,
-// 		},
-// 		user: {
-// 			id   : 1,
-// 			name : 'Mohit Nagar',
-// 		},
-// 		partner: {
-// 			id            : 1,
-// 			business_name : 'COGO Freight PVT LTD',
-// 		},
-// 		objectives: [
-// 			{
-// 				id             : 1,
-// 				status         : 'verification_pending',
-// 				name           : 'Objective 1',
-// 				objective_type : 'comapny',
-// 				channels       : ['SME', 'CP'],
-// 				updated_at     : new Date(),
-// 				activate_at    : new Date(),
-// 				weightage      : 50,
-// 			},
-// 			{
-// 				id             : 2,
-// 				status         : 'verified',
-// 				name           : 'Objective 2',
-// 				objective_type : 'team',
-// 				channels       : ['CP'],
-// 				updated_at     : new Date(),
-// 				activate_at    : null,
-// 				weightage      : 50,
-// 			},
-// 		],
-// 	},
-// 	{
-// 		id   : 2,
-// 		role : {
-// 			name              : 'KAM SME Demand',
-// 			role_sub_function : 'SME',
-// 			id                : 1,
-// 		},
-// 		user: {
-// 			id   : 1,
-// 			name : 'Mohit Nagar',
-// 		},
-// 		partner: {
-// 			id            : 2,
-// 			business_name : 'COGO Freight PVT LTD',
-// 		},
-// 		objectives: [
-// 			{
-// 				id             : 1,
-// 				status         : 'verification_pending',
-// 				name           : 'Objective 1',
-// 				objective_type : 'comapny',
-// 				channels       : ['SME', 'CP'],
-// 				updated_at     : new Date(),
-// 				activate_at    : new Date(),
-// 				weightage      : 40,
-// 			},
-// 			{
-// 				id             : 2,
-// 				status         : 'verified',
-// 				name           : 'Objective 2',
-// 				objective_type : 'team',
-// 				channels       : ['CP'],
-// 				updated_at     : new Date(),
-// 				activate_at    : null,
-// 				weightage      : 20,
-// 			},
-// 			{
-// 				id             : 4,
-// 				status         : 'live',
-// 				name           : 'Objective 4',
-// 				objective_type : 'team',
-// 				channels       : ['CP', 'SME'],
-// 				updated_at     : new Date(),
-// 				activate_at    : new Date(),
-// 				weightage      : 40,
-// 			},
-// 		],
-// 	},
-// 	{
-// 		id   : 2,
-// 		role : {
-// 			name              : 'KAM SME Enterprise',
-// 			role_sub_function : 'Enterprise',
-// 			id                : 3,
-// 		},
-// 		user: {
-// 			id   : 1,
-// 			name : 'Parth Sharma',
-// 		},
-// 		partner: {
-// 			id            : 2,
-// 			business_name : 'COGO Freight PVT LTD',
-// 		},
-// 		objectives: [
-// 			{
-// 				id             : 2,
-// 				status         : 'verified',
-// 				name           : 'Objective 2',
-// 				objective_type : 'team',
-// 				channels       : ['CP'],
-// 				updated_at     : new Date(),
-// 				activate_at    : null,
-// 				weightage      : 100,
-// 			},
-// 		],
-// 	},
-// ];
-
 function ListAgents(props) {
-	const { setActiveMode, list, loading, refetch, paginationData, getNextPage } = props;
+	const { setActiveMode, list, loading, refetch, paginationData, getNextPage, setRefCallback } = props;
 
 	const { page, page_limit, total_count } = paginationData;
 
@@ -150,6 +33,7 @@ function ListAgents(props) {
 					item={item}
 					setActiveMode={setActiveMode}
 					refetch={refetch}
+					setRefCallback={setRefCallback}
 				/>
 			))}
 

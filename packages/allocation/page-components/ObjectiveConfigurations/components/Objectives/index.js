@@ -20,7 +20,13 @@ function Objectives() {
 
 	if (!Component) return null;
 
-	return <Component key={activeMode} activeMode={activeMode} setActiveMode={setActiveMode} />;
+	return (
+		<Component
+			key={activeMode}
+			activeMode={activeMode}
+			setActiveMode={setActiveMode}
+		/>
+	);
 }
 
 export default Objectives;

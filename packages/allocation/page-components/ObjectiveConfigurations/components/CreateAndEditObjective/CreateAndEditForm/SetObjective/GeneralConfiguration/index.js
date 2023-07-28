@@ -30,13 +30,7 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 		controls,
 		onSave,
 		onReset,
-	} = useSetGeneralConfiguration({
-		formValues,
-		setFormValues,
-		onSaveCallback,
-		onResetCallback,
-		disabled,
-	});
+	} = useSetGeneralConfiguration({ formValues, setFormValues, onSaveCallback, onResetCallback, disabled });
 
 	return (
 		<div ref={ref} className={styles.container}>
@@ -83,7 +77,6 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 								}
 								return setShowEditAgentsModal(true);
 							}}
-							// onClick={() => setShowEditAgentsModal(true)}
 							disabled={disabled}
 						>
 							<IcMEdit style={{ marginRight: '4px' }} />

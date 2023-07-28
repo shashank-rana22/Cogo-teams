@@ -14,7 +14,7 @@ const useSetObjectiveRequirements = (props) => {
 			stats_details,
 			organization_details,
 			service_requirements: serviceRequirements,
-		},
+		} = {},
 	} = formValues;
 
 	const {

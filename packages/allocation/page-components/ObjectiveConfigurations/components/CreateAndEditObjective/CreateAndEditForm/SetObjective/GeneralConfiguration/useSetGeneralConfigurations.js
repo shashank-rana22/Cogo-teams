@@ -18,7 +18,7 @@ const useSetGeneralConfiguration = (props) => {
 			channels,
 			roles: agentRoles,
 			lifecycle_stage,
-		},
+		} = {},
 	} = formValues;
 
 	const [showEditAgentsModal, setShowEditAgentsModal] = useState(false);

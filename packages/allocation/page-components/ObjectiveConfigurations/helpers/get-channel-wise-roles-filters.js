@@ -1,10 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-const CHANNEL_WISE_ROLES_SUB_FUNCTIONS_FILTER_MAPPING = {
-	sme        : ['customer_success'],
-	enterprise : ['strategic_sales', 'customer_operations'],
-	cp         : ['cp_sales', 'cp_portfolio'],
-};
+import CHANNEL_WISE_ROLES_SUB_FUNCTIONS_FILTER_MAPPING from '../constants/channel-wise-role-sub-function-mapping';
 
 const getChannelWiseRolesFilters = ({ channels }) => {
 	if (isEmpty(channels)) return undefined;

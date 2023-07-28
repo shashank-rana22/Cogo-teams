@@ -8,7 +8,7 @@ import useEditWeightage from './useEditWeightage';
 const { CREATE } = ACTIVE_MODE_KEYS_MAPPING;
 
 function ListCard(props) {
-	const { item, refetch, setActiveMode } = props;
+	const { item, refetch, setActiveMode, setRefCallback } = props;
 
 	const { objectives = [], user = {}, role = {}, partner = {} } = item;
 
@@ -46,7 +46,10 @@ function ListCard(props) {
 			<div
 				className={styles.create_new}
 				role="presentation"
-				onClick={() => setActiveMode(CREATE)}
+				onClick={() => {
+					setActiveMode(CREATE);
+					setRefCallback({ role, user, partner });
+				}}
 			>
 				+ Create New Objective For Agent
 			</div>
