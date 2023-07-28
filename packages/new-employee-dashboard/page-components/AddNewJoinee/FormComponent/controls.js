@@ -1,7 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
-const REPORTING_CITY_OPTIONS = GLOBAL_CONSTANTS.office_locations.map((location) => (
+const REPORTING_CITY_OPTIONS = [...GLOBAL_CONSTANTS.office_locations.india,
+	...GLOBAL_CONSTANTS.office_locations.vietnam].map((location) => (
 	{ label: startCase(location), value: location }));
 
 const controls = [
