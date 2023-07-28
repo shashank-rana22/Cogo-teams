@@ -49,14 +49,14 @@ function ModeWiseButtons(props) {
 					Equally Distribute
 				</Button> */}
 
-				<Button
+				{/* <Button
 					size="lg"
 					type="button"
 					themeType="secondary"
 					style={{ marginRight: '12px' }}
 				>
 					Replace & Send For Verification
-				</Button>
+				</Button> */}
 
 				<Button
 					size="lg"
