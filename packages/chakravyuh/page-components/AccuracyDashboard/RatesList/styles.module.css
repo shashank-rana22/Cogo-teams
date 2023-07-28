@@ -93,6 +93,7 @@
 		font-size: 20px;
 		font-weight: 600;
 		color: #ee3425;
+		text-align: center;
 	}
 
 	.trigger_button {
@@ -122,10 +123,11 @@
 
 .pagination_container {
 	display: flex;
+	gap: 8px;
 	align-items: center;
 	justify-content: flex-end;
 	height: 44px;
-	padding-right: 8px;
+	padding: 24px;
 	margin: 0;
 	background-color: #fff;
 	border: 1px solid #f8f5ec;
