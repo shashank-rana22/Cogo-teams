@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
 import ClosedShipmentCard from './ClosedShipmentCard/index';
+import ServiceWiseStats from './Common/ServicewiseStats';
 import StatsCard from './Common/StatsCard';
 import MultipleFilters from './MultipleFilters';
 import ReceivablesOutstandings from './ReceivablesOutstandings';
@@ -93,6 +94,8 @@ function CogoFinancials() {
 				</div>
 			</div>
 			<ReceivablesOutstandings />
+
+			<ServiceWiseStats />
 		</div>
 	);
 }
