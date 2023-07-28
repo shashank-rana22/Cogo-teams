@@ -29,7 +29,7 @@ const useMasterException = ({
 }:Props) => {
 	const profile: Profile = useSelector((state) => state);
 	const [searchValue, setSearchValue] = useState('');
-	const { category = '', creditDays = 0, cycleStatus = '', pageIndex, entities } = exceptionFilter || {};
+	const { category = '', cycleStatus = '', pageIndex, entities } = exceptionFilter || {};
 	const { profile: { user } } = profile || {};
 	const PROFILE_ID = user?.id;
 
@@ -75,7 +75,6 @@ const useMasterException = ({
 				await trigger({
 					params: {
 						segmentation : category || undefined,
-						creditDays   : creditDays ? parseInt(creditDays, 10) : undefined,
 						query        : query || undefined,
 						pageIndex,
 						sortBy       : sort?.sortBy || undefined,
@@ -87,7 +86,7 @@ const useMasterException = ({
 				console.error(error);
 			}
 		})();
-	}, [category, creditDays, query, sort?.sortBy, pageIndex, sort?.sortType, trigger, entities]);
+	}, [category, query, sort?.sortBy, pageIndex, sort?.sortType, trigger, entities]);
 
 	const getCycleWiseList = useCallback(() => {
 		(async () => {
