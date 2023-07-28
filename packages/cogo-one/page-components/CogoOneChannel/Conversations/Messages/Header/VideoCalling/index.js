@@ -7,11 +7,10 @@ import useCreateVideoCallTimeline from '../../../../../../hooks/useCreateVideoCa
 import styles from './styles.module.css';
 
 function VideoCalling({ formattedData = {} }) {
-	const { inVideoCall, video_call_id } = useSelector(({ profile }) => ({
+	const { inVideoCall } = useSelector(({ profile }) => ({
 		inVideoCall   : profile?.is_in_video_call || false,
 		video_call_id : profile?.video_call_id,
 	}));
-	console.log('video_call_id:', video_call_id);
 
 	const { createVideoCallTimeline } = useCreateVideoCallTimeline({ formattedData });
 	const {

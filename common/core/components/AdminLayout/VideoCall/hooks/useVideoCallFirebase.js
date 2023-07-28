@@ -141,7 +141,7 @@ function useVideoCallFirebase({
 					callingRoomId,
 					firestore,
 				});
-				handleCallEnd({ callActivity: 'answered' });
+				handleCallEnd({ callActivity: 'answered', description: 'peer js technical error' });
 			});
 		} catch (err) {
 			console.error('my user stream error', err);
@@ -153,7 +153,7 @@ function useVideoCallFirebase({
 				callingRoomId,
 				firestore,
 			});
-			handleCallEnd({ callActivity: 'missed' });
+			handleCallEnd({ callActivity: 'missed', description: 'peer video audio is not working' });
 		}
 	}, [saveInACallStatus, setStreams, peerRef, userName,
 		userId, firestore, setCallDetails, callingRoomId, handleCallEnd]);

@@ -13,10 +13,6 @@ import { useSetInACall } from './useSetInACall';
 const NOT_CALLING_CALL_STATUS = ['rejected', 'end_call', 'miss_call', 'technical_error', 'accepted'];
 const STOP_CALL_STATUS = ['rejected', 'end_call', 'technical_error'];
 
-// missed = ['miss_call'];
-// answered = ['accepted'];
-// not_connected = ['rejected', 'technical_error'];
-
 function useComingCall({
 	firestore,
 	setCallDetails,
@@ -179,7 +175,7 @@ function useComingCall({
 			&& callingRoomId
 		) {
 			if (room_data?.call_status === 'rejected') {
-				handleCallEnd({ callActivity: 'not_connected', description: 'call is not connected' });
+				handleCallEnd({ callActivity: 'not_connected', description: 'user rejected the call' });
 			} else {
 				handleCallEnd({ callActivity: 'answered' });
 			}

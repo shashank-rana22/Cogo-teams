@@ -81,7 +81,7 @@ function VideoCall({
 				firestore,
 				callingRoomId : callDetails?.callingRoomId,
 			});
-			handleCallEnd({ callActivity: 'missed' });
+			handleCallEnd({ callActivity: 'missed', description: 'user does not pick up the call' });
 		}
 	}, [callDetails?.callingRoomId, callDetails?.callingRoomDetails?.call_status, handleCallEnd, firestore]);
 

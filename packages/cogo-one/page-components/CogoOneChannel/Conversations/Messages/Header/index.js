@@ -71,6 +71,7 @@ function Header({
 		user_type = '',
 		account_type = '',
 		managers_ids = [],
+		support_agent_id: chatAssignTo = '',
 		id,
 	} = formattedData || {};
 
@@ -181,7 +182,7 @@ function Header({
 				<div className={styles.flex_space_between}>
 					<HeaderName formattedData={formattedData} />
 					<div className={styles.button_flex}>
-						{user_type === 'cp' ? (
+						{(user_type === 'cp' && chatAssignTo) ? (
 							<VideoCalling formattedData={formattedData} />
 						) : null}
 

@@ -7,3 +7,7 @@
 	display: flex;
 	align-items: center;
 }
+
+.video_call_icon {
+	margin-right: 3px;
+}

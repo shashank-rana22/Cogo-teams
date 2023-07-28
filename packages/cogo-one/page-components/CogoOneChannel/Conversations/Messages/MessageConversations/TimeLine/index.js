@@ -1,4 +1,6 @@
-import { format } from '@cogoport/utils';
+// import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
 
 import getVoiceCallStatement from '../../../../../../utils/getVoiceCallStatement';
@@ -10,21 +12,23 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 		conversation_type = '',
 		agent_data = {},
 		performed_by_data = {},
-		created_at,
+		created_at = '',
 		conversation_started_at,
 		user_data,
 		status = '',
 		channel = '',
 	} = eachMessage;
+
 	const { name : presentAgent } = agent_data || {};
 	const { name : previousAgent } = performed_by_data || {};
 	const { name: voiceCallUserName = '' } = user_data || {};
 	const timelineText = getVoiceCallStatement({
 		type            : conversation_type,
 		present         : presentAgent,
-		previous        : channel === 'voice_call' ? voiceCallUserName : previousAgent,
+		previous        : ['voice_call', 'video_call'].includes(channel) ? voiceCallUserName : previousAgent,
 		startAt         : conversation_started_at,
 		voiceCallStatus : status,
+		channel,
 	});
 
 	return (
@@ -36,7 +40,13 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 						{timelineText}
 					</div>
 					<div className={styles.timeline_container}>
-						{format(new Date(created_at), 'dd MMM YYYY, HH:mm')}
+						{formatDate({
+							date       : new Date(created_at),
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+							formatType : 'dateTime',
+							separator  : ', ',
+						})}
 					</div>
 				</div>
 			</div>
