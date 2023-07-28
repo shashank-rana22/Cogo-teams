@@ -11,7 +11,7 @@ import useGetObjectiveUserMappings from './useGetObjectiveUserMappings';
 const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
 function SetObjectiveWeightage(props) {
-	const { activeTabDetails, setActiveTabDetails, setActiveStep, formValues } = props;
+	const { activeMode, setActiveMode, setActiveStep, formValues } = props;
 
 	const { list, listLoading, getNextPage, paginationData } = useGetObjectiveUserMappings({ formValues });
 
@@ -20,7 +20,7 @@ function SetObjectiveWeightage(props) {
 		setValue,
 		createLoading,
 		onCreate,
-	} = useCreateObjective({ formValues, setActiveTabDetails });
+	} = useCreateObjective({ formValues, setActiveMode });
 
 	const { page, total } = paginationData || {};
 
@@ -69,7 +69,7 @@ function SetObjectiveWeightage(props) {
 
 				<div className={styles.button_container}>
 					<ModeWiseButtons
-						mode={activeTabDetails.mode}
+						activeMode={activeMode}
 						onCreate={onCreate}
 						createLoading={createLoading}
 						createDisabled={createDisabled}

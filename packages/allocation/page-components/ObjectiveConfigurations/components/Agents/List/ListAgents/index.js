@@ -1,8 +1,8 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../../../common/EmptyState';
-import LoadingState from '../../../common/LoadingState';
+import EmptyState from '../../../../../../common/EmptyState';
+import LoadingState from '../../../../common/LoadingState';
 
 import ListCard from './ListCard';
 import styles from './styles.module.css';
@@ -125,7 +125,7 @@ import styles from './styles.module.css';
 // ];
 
 function ListAgents(props) {
-	const { setActiveTabDetails, list, loading, refetch, paginationData, getNextPage } = props;
+	const { setActiveMode, list, loading, refetch, paginationData, getNextPage } = props;
 
 	const { page, page_limit, total_count } = paginationData;
 
@@ -148,7 +148,7 @@ function ListAgents(props) {
 				<ListCard
 					key={item.id}
 					item={item}
-					setActiveTabDetails={setActiveTabDetails}
+					setActiveMode={setActiveMode}
 					refetch={refetch}
 				/>
 			))}

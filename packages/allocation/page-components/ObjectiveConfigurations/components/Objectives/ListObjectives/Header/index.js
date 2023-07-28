@@ -1,11 +1,15 @@
 import { Button, Toggle } from '@cogoport/components';
 
+import ACTIVE_MODE_KEYS_MAPPING from '../../../../constants/active-mode-keys-mapping';
+
 import styles from './styles.module.css';
+
+const { CREATE } = ACTIVE_MODE_KEYS_MAPPING;
 
 function Header(props) {
 	const {
 		setToggleValue,
-		setActiveTabDetails,
+		setActiveMode,
 	} = props;
 
 	return (
@@ -22,7 +26,7 @@ function Header(props) {
 			<Button
 				type="button"
 				themeType="primary"
-				onClick={() => setActiveTabDetails((pv) => ({ ...pv, mode: 'create' }))}
+				onClick={() => setActiveMode(CREATE)}
 			>
 				+ Create New Objective
 			</Button>

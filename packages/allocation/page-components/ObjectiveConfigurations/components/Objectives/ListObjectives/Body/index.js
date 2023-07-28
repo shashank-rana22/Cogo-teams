@@ -1,6 +1,5 @@
 import List from './List';
 import ObjectiveFilters from './ObjectiveFilters';
-// import styles from './styles.module.css';
 
 function Body(props) {
 	const {
@@ -9,7 +8,7 @@ function Body(props) {
 		list,
 		paginationData,
 		getNextPage,
-		setActiveTabDetails,
+		setActiveMode,
 	} = props;
 
 	return (
@@ -19,7 +18,7 @@ function Body(props) {
 			/>
 
 			<List
-				setActiveTabDetails={setActiveTabDetails}
+				setActiveMode={setActiveMode}
 				loading={loading}
 				list={list}
 				paginationData={paginationData}

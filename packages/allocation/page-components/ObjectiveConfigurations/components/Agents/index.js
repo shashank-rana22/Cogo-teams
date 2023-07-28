@@ -1,27 +1,25 @@
-import Header from './Header';
-import ListAgents from './ListAgents';
-import styles from './styles.module.css';
-import useGetObjectiveAgentsMapping from './useGetObjectiveAgentsMapping';
+import { useState } from 'react';
 
-function Agents(props) {
-	const { setActiveTabDetails } = props;
+import ACTIVE_MODE_KEYS_MAPPING from '../../constants/active-mode-keys-mapping';
+import CreateAndEditObjective from '../CreateAndEditObjective';
 
-	const { list, loading, refetch, paginationData, getNextPage, setParams } = useGetObjectiveAgentsMapping();
+import List from './List';
 
-	return (
-		<section className={styles.container}>
-			<Header setParams={setParams} />
+const { LIST, CREATE } = ACTIVE_MODE_KEYS_MAPPING;
 
-			<ListAgents
-				setActiveTabDetails={setActiveTabDetails}
-				list={list}
-				loading={loading}
-				refetch={refetch}
-				paginationData={paginationData}
-				getNextPage={getNextPage}
-			/>
-		</section>
-	);
+const COMPONENT_MAPPING = {
+	[LIST]   : List,
+	[CREATE] : CreateAndEditObjective,
+};
+
+function Agents() {
+	const [activeMode, setActiveMode] = useState(LIST);
+
+	const Component = COMPONENT_MAPPING[activeMode];
+
+	if (!Component) return null;
+
+	return <Component key={activeMode} activeMode={activeMode} setActiveMode={setActiveMode} />;
 }
 
 export default Agents;

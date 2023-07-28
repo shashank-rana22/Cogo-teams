@@ -2,7 +2,7 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import getAgentsFilterControls from '../../../configurations/get-agents-filters-controls';
+import getAgentsFilterControls from '../../../../configurations/get-agents-filters-controls';
 
 const MIN_LENGTH = 0;
 

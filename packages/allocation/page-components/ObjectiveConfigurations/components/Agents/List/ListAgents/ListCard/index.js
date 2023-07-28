@@ -1,14 +1,14 @@
-import TAB_PANNEL_KEYS from '../../../../constants/tab-pannel-keys-mapping';
+import ACTIVE_MODE_KEYS_MAPPING from '../../../../../constants/active-mode-keys-mapping';
 
 import Header from './Header';
 import Objectives from './Objectives';
 import styles from './styles.module.css';
 import useEditWeightage from './useEditWeightage';
 
-const { OBJECTIVES } = TAB_PANNEL_KEYS;
+const { CREATE } = ACTIVE_MODE_KEYS_MAPPING;
 
 function ListCard(props) {
-	const { item, refetch, setActiveTabDetails } = props;
+	const { item, refetch, setActiveMode } = props;
 
 	const { objectives = [], user = {}, role = {}, partner = {} } = item;
 
@@ -46,12 +46,7 @@ function ListCard(props) {
 			<div
 				className={styles.create_new}
 				role="presentation"
-				onClick={() => setActiveTabDetails((pv) => ({
-					...pv,
-					tab  : OBJECTIVES,
-					mode : 'create',
-					id   : undefined,
-				}))}
+				onClick={() => setActiveMode(CREATE)}
 			>
 				+ Create New Objective For Agent
 			</div>

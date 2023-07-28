@@ -5,13 +5,16 @@ import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../configurations/objective-status-color-mapping';
+import ACTIVE_MODE_KEYS_MAPPING from '../../../../../../constants/active-mode-keys-mapping';
 
 import styles from './styles.module.css';
 
 const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 
+const { EDIT } = ACTIVE_MODE_KEYS_MAPPING;
+
 const getListColumnMapping = (props) => {
-	const { setActiveTabDetails, setShowActionModal } = props;
+	const { setActiveMode, setShowActionModal } = props;
 
 	const LIST_COLUMN_MAPPING = [
 		{
@@ -122,11 +125,11 @@ const getListColumnMapping = (props) => {
 			key      : 'edit',
 			flex     : 0.75,
 			Header   : <div />,
-			accessor : ({ id }) => (
+			accessor : () => (
 				<Button
 					themeType="tertiary"
 					type="button"
-					onClick={() => setActiveTabDetails((pv) => ({ ...pv, mode: 'edit', id }))}
+					onClick={() => setActiveMode(EDIT)}
 				>
 					<IcMEdit style={{ marginRight: '4px' }} />
 					<strong>Edit</strong>

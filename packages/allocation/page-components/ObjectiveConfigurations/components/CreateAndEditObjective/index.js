@@ -2,18 +2,18 @@ import CreateAndEditForm from './CreateAndEditForm';
 import Header from './Header';
 
 function CreateAndEditObjective(props) {
-	const { activeTabDetails, setActiveTabDetails } = props;
+	const { activeMode, setActiveMode } = props;
 
 	return (
 		<>
 			<Header
-				activeTabDetails={activeTabDetails}
-				setActiveTabDetails={setActiveTabDetails}
+				activeMode={activeMode}
+				setActiveMode={setActiveMode}
 			/>
 
 			<CreateAndEditForm
-				activeTabDetails={activeTabDetails}
-				setActiveTabDetails={setActiveTabDetails}
+				activeMode={activeMode}
+				setActiveMode={setActiveMode}
 			/>
 		</>
 	);

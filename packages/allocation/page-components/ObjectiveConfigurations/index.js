@@ -22,7 +22,7 @@ const TAB_PANEL_MAPPING = {
 };
 
 function ObjectiveConfigurations() {
-	const [activeTabDetails, setActiveTabDetails] = useState({ tab: OBJECTIVES, mode: 'list' });
+	const [activeTab, setActiveTab] = useState(OBJECTIVES);
 
 	return (
 		<section className={styles.container}>
@@ -32,11 +32,8 @@ function ObjectiveConfigurations() {
 
 			<section className={styles.tabs}>
 				<Tabs
-					activeTab={activeTabDetails.tab}
-					onChange={(tab) => setActiveTabDetails((pv) => ({
-						...pv,
-						tab,
-					}))}
+					activeTab={activeTab}
+					onChange={setActiveTab}
 					fullWidth
 					themeType="secondary"
 				>
@@ -47,10 +44,7 @@ function ObjectiveConfigurations() {
 
 						return (
 							<TabPanel key={name} name={name} title={title}>
-								<Component
-									activeTabDetails={activeTabDetails}
-									setActiveTabDetails={setActiveTabDetails}
-								/>
+								<Component />
 							</TabPanel>
 						);
 					})}

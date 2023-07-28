@@ -1,15 +1,19 @@
 import { Button } from '@cogoport/components';
 
+import ACTIVE_MODE_KEYS_MAPPING from '../../../../../constants/active-mode-keys-mapping';
+
+const { CREATE, EDIT } = ACTIVE_MODE_KEYS_MAPPING;
+
 function ModeWiseButtons(props) {
 	const {
-		mode,
+		activeMode,
 		onCreate = () => {},
 		createLoading = false,
 		createDisabled = true,
 	} = props;
 
 	const MODE_BASIS_BUTTON_MAPPING = {
-		create: (
+		[CREATE]: (
 			<>
 				<Button
 					size="lg"
@@ -34,7 +38,7 @@ function ModeWiseButtons(props) {
 				</Button>
 			</>
 		),
-		edit: (
+		[EDIT]: (
 			<>
 				<Button
 					size="lg"
@@ -65,7 +69,7 @@ function ModeWiseButtons(props) {
 		),
 	};
 
-	return MODE_BASIS_BUTTON_MAPPING[mode] || null;
+	return MODE_BASIS_BUTTON_MAPPING[activeMode] || null;
 }
 
 export default ModeWiseButtons;
