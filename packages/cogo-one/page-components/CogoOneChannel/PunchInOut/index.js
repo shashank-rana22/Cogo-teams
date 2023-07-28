@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDown, IcMArrowDown } from '@cogoport/icons-react';
@@ -10,21 +10,28 @@ import useUpdateAgentWorkPreferences from '../../../hooks/UseUpdateAgentWorkPref
 import ShowMoreStats from './ShowMoreStats';
 import styles from './styles.module.css';
 
-const punchedTime = formatDate({
-	date       : new Date(),
-	formatType : 'time',
-	dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-});
+const MIN_FEEDBACK_SCORE = 0;
 
-function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
+function PunchInOut({
+	fetchworkPrefernce = () => {},
+	agentStatus = {},
+	data = {},
+	agentTimeline = () => {},
+	timelineLoading = false,
+	preferenceLoading = false,
+}) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const { status = '' } = agentStatus || {};
 
+	const { list = [] } = data || {};
+
+	const lastBreakTime = list?.[GLOBAL_CONSTANTS.zeroth_index]?.break_started_at;
+
 	const {
 		updateWorkPreference = () => {},
 		loading = false,
-	} = useUpdateAgentWorkPreferences({ fetchworkPrefernce });
+	} = useUpdateAgentWorkPreferences({ fetchworkPrefernce, agentTimeline });
 
 	const handlePunchIn = () => {
 		updateWorkPreference({ type: 'punched_in' });
@@ -39,7 +46,7 @@ function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
 						showDetails={showDetails}
 						updateWorkPreference={updateWorkPreference}
 						loading={loading}
-						punchedTime={punchedTime}
+						punchedTime={lastBreakTime}
 						status={status}
 						handlePunchIn={handlePunchIn}
 					/>
@@ -52,7 +59,7 @@ function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
 				onClick={() => setShowDetails((prev) => !prev)}
 			>
 				<Image src={GLOBAL_CONSTANTS.image_url.sad_icon} alt="sad-emoji" width={18} height={18} />
-				<div className={styles.break_time}>2</div>
+				<div className={styles.break_time}>{MIN_FEEDBACK_SCORE}</div>
 				<IcMDown className={styles.down_icon} />
 				{status === 'punched_out' ? (
 					<Button size="xs" onClick={handlePunchIn} disabled={loading}>Start Shift</Button>
@@ -60,7 +67,15 @@ function PunchInOut({ fetchworkPrefernce = () => {}, agentStatus = {} }) {
 					<>
 						<Image src={GLOBAL_CONSTANTS.image_url.clock_icon} alt="clock" width={18} height={18} />
 						<div className={styles.shift_time}>
-							{punchedTime}
+
+							{(timelineLoading || preferenceLoading)
+								? <Placeholder width="55px" height="18px" />
+								: formatDate({
+									date       : lastBreakTime,
+									formatType : 'dateTime',
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								})}
 						</div>
 					</>
 				)}
