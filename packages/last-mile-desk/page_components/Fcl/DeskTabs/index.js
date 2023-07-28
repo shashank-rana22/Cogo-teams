@@ -8,20 +8,24 @@ import LastMileDeskContext from '../../../context/LastMileDeskContext';
 
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 1;
+const THIRD_INDEX = 3;
 function DeskTabs() {
 	const { activeTab, setActiveTab, filters, setFilters } = useContext(LastMileDeskContext);
 
 	const tabs = FCL_TABS.map((k) => {
-		const splitValue = k.split('_', 3);
+		const splitValue = k.split('_', THIRD_INDEX);
+		const formattedWords = splitValue.map((word, index) => (
+			<div key={word}>
+				{startCase(word)}
+				{index === FIRST_INDEX && <br />}
+				{index < splitValue.length - FIRST_INDEX && ' '}
+			</div>
+		));
 		return {
 			title:
 	<div className={styles.title}>
-		{startCase(splitValue[0]) }
-		{' '}
-		{startCase(splitValue[1]) }
-		<br />
-		{' '}
-		{startCase(splitValue[2]) }
+		{formattedWords}
 	</div>,
 			name: k,
 		};

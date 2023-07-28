@@ -5,9 +5,7 @@ import styles from './styles.module.css';
 
 function ShipmentLoader() {
 	return (
-		<div>
-			<Placeholder className={styles.loader} />
-		</div>
+		<Placeholder className={styles.loader} />
 	);
 }
 

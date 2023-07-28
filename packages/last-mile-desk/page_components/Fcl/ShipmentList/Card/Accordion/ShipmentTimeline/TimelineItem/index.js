@@ -6,7 +6,27 @@ import {
 	display_milestone, completed, ellipsis, tooltip_content, label, value, completed_line, date_style,
 } from './styles.module.css';
 
-function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
+const DATE_FORMAT = 'dd MMM yyyy';
+
+function TooltipContent({ milestone = '', displayCompletedDate = '' }) {
+	return (
+		<div className={tooltip_content}>
+			<div className={label}>Milestone</div>
+			<div className={value}>{milestone}</div>
+
+			{displayCompletedDate ? (
+				<>
+					<div className={label}>Completed On</div>
+					<div className={value}>
+						{displayCompletedDate !== null && format(displayCompletedDate, DATE_FORMAT)}
+					</div>
+				</>
+			) : null}
+		</div>
+	);
+}
+
+function TimelineItem({ item = {}, isLast = false, consecutivelyCompleted = false }) {
 	const { milestone, completed_on } = item || {};
 
 	const displayCompletedDate = completed_on;
@@ -17,25 +37,18 @@ function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
 	const circleClass = `${circle} ${big} ${isCompleted ? completed : ''}`;
 	const connectingLineClass = `${connecting_line} ${isCompleted ? completed_line : ''}`;
 
-	const tooltipContent = (
-		<div className={tooltip_content}>
-			<div className={label}>Milestone</div>
-			<div className={value}>{milestone}</div>
-
-			{displayCompletedDate ? (
-				<>
-					<div className={label}>Completed On</div>
-					<div className={value}>
-						{displayCompletedDate !== null
-						&& format(displayCompletedDate, 'dd MMM yyyy')}
-					</div>
-				</>
-			) : null}
-		</div>
-	);
 	return (
 		<div className={container}>
-			<Tooltip content={tooltipContent} placement="top" interactive>
+			<Tooltip
+				content={(
+					<TooltipContent
+						milestone={milestone}
+						displayCompletedDate={displayCompletedDate}
+					/>
+				)}
+				placement="top"
+				interactive
+			>
 				<div className={circleClass} />
 			</Tooltip>
 
@@ -44,7 +57,7 @@ function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
 			<div className={display_milestone}>
 				<div className={ellipsis}>{milestone}</div>
 				{displayCompletedDate !== null
-					&& <div className={date_style}>{format(displayCompletedDate, 'dd MMM yyyy')}</div>}
+					&& <div className={date_style}>{format(displayCompletedDate, DATE_FORMAT)}</div>}
 			</div>
 		</div>
 	);
