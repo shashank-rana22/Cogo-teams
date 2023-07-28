@@ -25,6 +25,8 @@
 }
 
 .poc_users_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	height: 80%;
-	overflow-y: auto;
 }

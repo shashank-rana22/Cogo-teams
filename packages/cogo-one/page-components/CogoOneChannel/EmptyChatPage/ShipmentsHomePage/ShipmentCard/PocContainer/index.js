@@ -1,4 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import React from 'react';
 
 import useListShipmentStakeholders from '../../../../../../hooks/useListShipmentStakeholders';
@@ -6,15 +8,12 @@ import useListShipmentStakeholders from '../../../../../../hooks/useListShipment
 import PocUser from './PocUser';
 import styles from './styles.module.css';
 
-const POCS = [{}, {}, {}, {}];
-
 function PocContainer({
 	setShowPocDetails = () => {},
 	showPocDetails = {},
 }) {
 	const { id } = showPocDetails;
-	const { stakeHoldersData } = useListShipmentStakeholders({ shipmentId: id });
-	console.log('stakeHoldersData:', stakeHoldersData);
+	const { stakeHoldersData, loading } = useListShipmentStakeholders({ shipmentId: id });
 
 	return (
 		<div className={styles.container}>
@@ -32,14 +31,15 @@ function PocContainer({
 			</div>
 
 			<div className={styles.poc_users_container}>
-				{POCS.map(
-					(userDetails) => (
-						<PocUser
-							userDetails={userDetails}
-							key={userDetails?.id}
+				{loading
+					? (
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.spinner_loader}
+							height={50}
+							width={50}
 						/>
-					),
-				)}
+					)
+					: <PocUser stakeHoldersData={stakeHoldersData} />}
 			</div>
 		</div>
 	);

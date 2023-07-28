@@ -17,11 +17,13 @@ function ShipmentCard({
 }) {
 	const {
 		shipment_type = '',
+		serial_id = '',
 		net_total = 0,
 		net_total_price_currency = '',
+		payment_term : paymentTerm = '',
 	} = shipmentItem;
 
-	if (!isEmpty(showPocDetails) && showPocDetails?.serial_id === shipmentItem.serial_id) {
+	if (!isEmpty(showPocDetails) && showPocDetails?.serial_id === serial_id) {
 		return (
 			<div className={styles.container}>
 				<PocContainer
@@ -35,11 +37,19 @@ function ShipmentCard({
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_block}>
-				<HeaderBlock shipmentItem={shipmentItem} setShowPocDetails={setShowPocDetails} />
+				<HeaderBlock
+					shipmentItem={shipmentItem}
+					setShowPocDetails={setShowPocDetails}
+				/>
 
-				<ShippingRoute shipmentItem={shipmentItem} />
+				<ShippingRoute
+					shipmentItem={shipmentItem}
+				/>
 
-				<CargoDetails detail={shipmentItem} service={shipment_type} />
+				<CargoDetails
+					detail={shipmentItem}
+					service={shipment_type}
+				/>
 
 				<div className={styles.price_details}>
 					<div className={styles.amount}>
@@ -54,9 +64,12 @@ function ShipmentCard({
 							},
 						})}
 					</div>
-					<Pill size="md" color="#BBFCBD">
-						Pay Later
-					</Pill>
+
+					{paymentTerm ? (
+						<Pill size="md" color="#BBFCBD">
+							{paymentTerm }
+						</Pill>
+					) : null}
 				</div>
 			</div>
 
@@ -71,8 +84,10 @@ function ShipmentCard({
 					Next: Booking Confirmation
 				</div>
 			</div>
+
 			<div className={styles.shipment_type_container}>
 				{iconMapping?.[shipment_type]}
+
 				{startCase(shipment_type)}
 			</div>
 		</div>

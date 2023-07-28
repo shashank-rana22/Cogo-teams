@@ -1,7 +1,7 @@
 .container {
 	width: 100%;
 	height: 100%;
-	padding: 16px 30px;
+	padding: 10px;
 	background: #fcfcfc;
 	border-radius: 8px;
 }
@@ -15,7 +15,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
-	height: calc(100% - 40px);
+	height: calc(100% - 70px);
 	margin-top: 10px;
 	overflow-y: auto;
 
@@ -29,4 +29,19 @@
 	align-items: center;
 	justify-content: space-between;
 	margin: 0 18px 6px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-start;
+	margin-left: 8px;
+}
+
+.filter_container {
+	display: flex;
+}
+
+.bishal_search_icon {
+	width: 20px;
+	height: 20px;
 }

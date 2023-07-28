@@ -1,11 +1,13 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const FIRST_PAGE = 1;
+const DEFAULT_PAGE = 1;
 
-const getParams = ({ pagination }) => ({
+const getParams = ({ pagination, serialId }) => ({
 	filters: {
-		state: ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
+		state     : ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
+		serial_id : serialId,
 	},
 	get_shipment_quotation_data : true,
 	// milestone_data_required     : true,
@@ -14,7 +16,12 @@ const getParams = ({ pagination }) => ({
 });
 
 function useListShipments() {
-	const [pagination, setPagination] = useState(FIRST_PAGE);
+	const [params, setParams] = useState({
+		query      : '',
+		pagination : DEFAULT_PAGE,
+	});
+
+	const { query: searchQuery, debounceQuery } = useDebounceQuery();
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipments',
@@ -22,27 +29,35 @@ function useListShipments() {
 	}, { manual: true });
 
 	const getShipmentsList = useCallback(
-		async () => {
+		async ({ pagination, serialId }) => {
 			try {
 				await trigger({
-					params: getParams({ pagination }),
+					params: getParams({ pagination, serialId }),
 				});
 			} catch (e) {
 				console.error('e:', e);
 			}
 		},
-		[pagination, trigger],
+		[trigger],
 	);
 
+	const handlePageChange = (val) => setParams((prev) => ({ ...prev, pagination: val }));
+
 	useEffect(() => {
-		getShipmentsList();
-	}, [getShipmentsList]);
+		getShipmentsList({ pagination: params?.pagination, serialId: searchQuery });
+	}, [getShipmentsList, params?.pagination, searchQuery]);
+
+	useEffect(() => {
+		debounceQuery(params?.query || '');
+	}, [debounceQuery, params?.query]);
 
 	return {
 		listLoading   : loading,
 		shipmentsData : data,
 		getShipmentsList,
-		setPagination,
+		params,
+		setParams,
+		handlePageChange,
 	};
 }
 

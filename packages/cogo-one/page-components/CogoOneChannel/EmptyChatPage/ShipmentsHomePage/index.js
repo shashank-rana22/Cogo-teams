@@ -1,15 +1,16 @@
-import { Pagination } from '@cogoport/components';
+import { Pagination, Input } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useListShipments from '../../../../hooks/useListShipments';
 
 import LoadingState from './LoadingState';
-// import { DUMMY_DATA } from './dummyData'; // need to remove
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 
-const PAGE_COUNT = 0;
+const DEFAULT_PAGE = 1;
 const PAGE_LIMIT = 6;
+const DEFAULT_SHIPMENTS_COUNT = 0;
 
 function ShipmentsHomePage() {
 	const [showPocDetails, setShowPocDetails] = useState({});
@@ -17,10 +18,17 @@ function ShipmentsHomePage() {
 	const {
 		listLoading,
 		shipmentsData,
-		setPagination = () => {},
+		setParams,
+		params,
+		handlePageChange = () => {},
 	} = useListShipments();
 
-	const { list = [], page, page_limit, total_count } = shipmentsData || {};
+	const {
+		list = [],
+		page = DEFAULT_PAGE,
+		page_limit = PAGE_LIMIT,
+		total_count = DEFAULT_SHIPMENTS_COUNT,
+	} = shipmentsData || {};
 
 	return (
 		<div className={styles.container}>
@@ -28,32 +36,43 @@ function ShipmentsHomePage() {
 				<div className={styles.header_title}>
 					Bookings
 				</div>
-				<div>
-					<Pagination
-						type="number"
-						disabled={listLoading}
-						currentPage={page || PAGE_COUNT}
-						totalItems={total_count || PAGE_COUNT}
-						pageSize={page_limit || PAGE_LIMIT}
-						onPageChange={setPagination}
+				<div className={styles.filter_container}>
+					<Input
+						size="sm"
+						value={params?.value}
+						onChange={(val) => setParams((prev) => ({ ...prev, query: val }))}
+						prefix={<IcMSearchlight className={styles.bishal_search_icon} />}
+						placeholder="Search SID..."
 					/>
 				</div>
 			</div>
-			{listLoading ? <LoadingState /> : (
-				<div className={styles.shipments_cards_container}>
-					{(list || []).map(
-						(shipmentItem) => (
-							<ShipmentCard
-								key={shipmentItem?.sid}
-								shipmentItem={shipmentItem}
-								showPocDetails={showPocDetails}
-								setShowPocDetails={setShowPocDetails}
-							/>
-						),
-					)}
-				</div>
-			)}
 
+			{listLoading
+				? <LoadingState />
+				: (
+					<div className={styles.shipments_cards_container}>
+						{(list || []).map(
+							(shipmentItem) => (
+								<ShipmentCard
+									key={shipmentItem?.sid}
+									shipmentItem={shipmentItem}
+									showPocDetails={showPocDetails}
+									setShowPocDetails={setShowPocDetails}
+								/>
+							),
+						)}
+					</div>
+				)}
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="number"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					disabled={listLoading}
+					onPageChange={handlePageChange}
+				/>
+			</div>
 		</div>
 	);
 }
