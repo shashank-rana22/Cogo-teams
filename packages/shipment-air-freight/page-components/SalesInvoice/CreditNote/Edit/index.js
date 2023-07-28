@@ -16,11 +16,11 @@ import Form from './Form';
 import styles from './styles.module.css';
 
 function Edit({
-	setOpen = () => { },
-	CN_STATUS_MAPPING,
+	setOpen = () => {},
+	CN_STATUS_MAPPING = {},
 	prevData = {},
 	item = {},
-	cnRefetch = () => { },
+	cnRefetch = () => {},
 	invoiceData = {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);

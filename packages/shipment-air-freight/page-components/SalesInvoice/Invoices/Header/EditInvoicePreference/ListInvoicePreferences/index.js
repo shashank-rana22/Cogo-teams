@@ -5,7 +5,7 @@ import InvoiceItem from './Item';
 function ListInvoicePreferences({
 	shipmentData = {},
 	invoicingParties = [],
-	raw_invoicing_parties,
+	raw_invoicing_parties = [],
 	...rest
 }) {
 	const [openedService, setOpenedService] = useState(null);

@@ -1,10 +1,9 @@
-import { RadioGroup, Pill, Tooltip } from '@cogoport/components';
+import { RadioGroup, Pill, Tooltip, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
 
 import styles from './styles.module.css';
-
-const ADDRESS_IMG_SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/address-icon.svg';
 
 const DISABLED_VERIFICATION_STATUS = ['rejected', 'pending'];
 
@@ -39,7 +38,7 @@ function InvoicingPartyItem({
 					<div className={styles.address_align}>
 						<div className={styles.icon_wrapper}>
 							<img
-								src={ADDRESS_IMG_SRC}
+								src={GLOBAL_CONSTANTS.image_url.address_icon}
 								alt="address icon"
 								width="20"
 								height="20"
@@ -113,14 +112,13 @@ function InvoicingPartyItem({
 				multiple
 			/>
 
-			<div
+			<Button
 				className={styles.add_address}
 				onClick={() => onClickAddAddress()}
-				role="button"
-				tabIndex={0}
+				themeType="tertiary"
 			>
 				+ Add Address
-			</div>
+			</Button>
 		</div>
 	);
 }

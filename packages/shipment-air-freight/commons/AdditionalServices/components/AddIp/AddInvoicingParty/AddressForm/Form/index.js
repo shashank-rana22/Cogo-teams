@@ -47,9 +47,9 @@ function FormElement({
 }
 
 function Form({
-	control,
-	errors,
-	showComponent,
+	control = {},
+	errors = {},
+	showComponent = '',
 }) {
 	const { formControls, pocControls } = controls({ showComponent, mobileCountryCodeOptions });
 

@@ -13,6 +13,29 @@ import styles from './styles.module.css';
 const MAIN_SERVICES = 'air_freight_service';
 const ZERO_TAX_TOTAL = 0;
 
+const Content = ({ service = {}, invoiceAmount = '' }) => {
+	<div className={styles.service_details}>
+		<div>
+			<b>Invoice Currency: </b>
+			<span>{service?.currency}</span>
+		</div>
+
+		{service?.detail?.commodity && (
+			<div>
+				<b>Commodity: </b>
+				<span>{startCase(service?.detail?.commodity)}</span>
+			</div>
+		)}
+
+		{invoiceAmount && (
+			<div>
+				<b>Invoice Amount: </b>
+				<span>{invoiceAmount}</span>
+			</div>
+		)}
+	</div>;
+};
+
 function SelectService({
 	invoice = {},
 	handleServiceChange = () => {},
@@ -51,29 +74,6 @@ function SelectService({
 				},
 			});
 
-			const content = (
-				<div className={styles.service_details}>
-					<div>
-						<b>Invoice Currency: </b>
-						<span>{service?.currency}</span>
-					</div>
-
-					{service?.detail?.commodity && (
-						<div>
-							<b>Commodity: </b>
-							<span>{startCase(service?.detail?.commodity)}</span>
-						</div>
-					)}
-
-					{invoiceAmount && (
-						<div>
-							<b>Invoice Amount: </b>
-							<span>{invoiceAmount}</span>
-						</div>
-					)}
-				</div>
-			);
-
 			const id_with_igst = service?.serviceKey;
 
 			const serviceName = service?.service_name || service?.service_type;
@@ -85,7 +85,11 @@ function SelectService({
 
 			const servicesToPush = {
 				label: (
-					<Tooltip content={content} placement="bottom" theme="light">
+					<Tooltip
+						content={<Content service={service} invoiceAmount={invoiceAmount} />}
+						placement="bottom"
+						theme="light"
+					>
 						<div className={styles.service_name}>
 							{serviceType}
 						</div>

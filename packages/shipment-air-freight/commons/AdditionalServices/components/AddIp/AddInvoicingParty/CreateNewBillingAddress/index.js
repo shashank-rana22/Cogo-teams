@@ -12,7 +12,7 @@ function CreateNewBillingAddress({
 	setShowComponent = () => {},
 	organizationDetails = {},
 	refetch = () => {},
-	invoiceToTradePartyDetails,
+	invoiceToTradePartyDetails = {},
 }) {
 	const [isAddressRegisteredUnderGst, setIsAddressRegisteredUnderGst] = useState(false);
 	const [gstNumber, setGstNumber] = useState('');

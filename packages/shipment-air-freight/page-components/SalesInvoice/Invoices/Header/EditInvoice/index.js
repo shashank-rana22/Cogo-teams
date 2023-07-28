@@ -11,11 +11,10 @@ import Info from './Info';
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();
-const INITIAL_STATE = 0;
 
 function EditInvoice({
 	show = 'false',
-	onClose,
+	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 	shipment_data = {},
@@ -45,8 +44,8 @@ function EditInvoice({
 		info: <Info />,
 	});
 
-	const disabledProps = controls?.[INITIAL_STATE]?.service_name === 'air_freight_service' && !isAdminSuperAdmin
-	&& shipment_data?.serial_id > GLOBAL_CONSTANTS.serial_check_id;
+	const disabledProps = controls?.[GLOBAL_CONSTANTS.zeroth_index]?.service_name === 'air_freight_service'
+	&& !isAdminSuperAdmin && shipment_data?.serial_id > GLOBAL_CONSTANTS.serial_check_id;
 
 	const formValues = watch();
 

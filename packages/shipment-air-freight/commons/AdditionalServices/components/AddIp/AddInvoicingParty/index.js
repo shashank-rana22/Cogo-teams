@@ -17,7 +17,7 @@ const BOOKING_OPTIONS = [
 
 function AddInvoicingParty({
 	organizationDetails = {},
-	primary_service,
+	primary_service = '',
 	updateInvoicingParty = () => {},
 }) {
 	const [activeComponentKey, setActiveComponentKey] = useState(BOOKING_OPTIONS[GLOBAL_CONSTANTS.zeroth_index].value);
@@ -35,7 +35,6 @@ function AddInvoicingParty({
 				primary_service={primary_service}
 				updateInvoicingParty={updateInvoicingParty}
 				bookingType={activeComponentKey}
-				key={activeComponentKey}
 			/>
 		</div>
 	);

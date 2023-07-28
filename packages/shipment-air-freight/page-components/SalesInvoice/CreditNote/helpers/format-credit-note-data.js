@@ -1,4 +1,4 @@
-const INITIAL_STATE = 0;
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const formatCreditNoteData = ({
 	data = {},
@@ -29,7 +29,7 @@ const formatCreditNoteData = ({
 			(data[key] || []).forEach((line_item) => {
 				if (line_item?.is_checked === true || isEdit) {
 					const serviceDetails = invoice?.services
-						?.filter((item) => (item?.id || item?.service_id) === key)?.[INITIAL_STATE];
+						?.filter((item) => (item?.id || item?.service_id) === key)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 					const initialData = INITIAL_LINE_ITEMS
 						?.filter((li) => li?.code === line_item?.code)

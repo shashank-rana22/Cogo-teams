@@ -35,9 +35,9 @@ function Review({
 				<form className={styles.form}>
 					<Checkbox
 						checked={value}
-						onChange={() => setValue(!value)}
+						onChange={() => setValue((prev) => !prev)}
 					/>
-					<div role="button" tabIndex={0} onClick={() => setValue(!value)}>
+					<div role="button" tabIndex={0} onClick={() => setValue((prev) => !prev)}>
 						I have verified the Credit Note and ensured that all the services taken
 						& charges incurred during the shipment have been billed to the customer
 					</div>

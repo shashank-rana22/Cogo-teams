@@ -1,4 +1,4 @@
-import { Loader, Button, Tooltip, cl } from '@cogoport/components';
+import { Loader, Button, Tooltip, cl, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
@@ -59,105 +59,96 @@ function Item({
 		);
 	}
 
-	const title = (
-		<>
-			<section className={styles.billing_party} ref={billingPartyHeightRef}>
-				<h5>{item?.billing_address?.name}</h5>
-
-				<Tooltip
-					theme="light"
-					placement="bottom"
-					content={(
-						<div className={styles.billing_address}>
-							{item?.billing_address?.address}
-						</div>
-					)}
-				>
-					<span className={styles.gst_number}>
-						GST Number:&nbsp;
-						<span>{item?.billing_address?.tax_number}</span>
-					</span>
-				</Tooltip>
-			</section>
-
-			<section className={styles.details}>
-				<div className={styles.number}>
-					<span
-						onClick={!isEmpty(bfInvoice) ? handleDownload : null}
-						className={item?.status === 'approved' ? styles.approved : undefined}
-					>
-						{item?.cn_number}
-					</span>
-
-					<span>{item?.live_invoice_number}</span>
-				</div>
-
-				<div className={styles.invoice_value}>
-					Invoice Value - &nbsp;
-					<span>
-						{formatAmount({
-							amount   : item?.invoice_value,
-							currency : item?.currency,
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-								maximumFractionDigits : 2,
-							},
-						})}
-					</span>
-				</div>
-
-				<div className={styles.invoice_status_and_action}>
-					<div className={styles.status}>
-						<div className={cl`${styles[CN_STATUS_MAPPING[itemStatus]]} ${styles.status_text}`}>
-							{startCase(CN_STATUS_MAPPING[itemStatus])}
-						</div>
-
-						{itemStatus === 'rejected' ? (
-							<IcCError width={16} height={16} />
-						) : null}
-					</div>
-
-					{itemStatus === 'pending' ? (
-						<Button
-							size="sm"
-							onClick={() => setOpen('review')}
-						>
-							Review
-						</Button>
-					) : null}
-				</div>
-
-				{itemStatus === 'pending' ? (
-					<div
-						onClick={() => setOpen('edit')}
-						role="button"
-						tabIndex={0}
-						className={styles.actions}
-					>
-						<IcMEdit />
-					</div>
-				) : null}
-
-			</section>
-
-			<section
-				className={styles.rotate_icon}
-				onClick={() => setOpen(open !== 'line_items' ? 'line_items' : false)}
-				tabIndex={0}
-				role="button"
-				style={{ height: `${billingPartyHeightRef.current?.offsetHeight}px` }}
-			>
-				<IcMArrowRotateDown className={open ? styles.rotate : null} />
-			</section>
-		</>
-	);
-
 	return (
 		<>
 			<main className={styles.main}>
 				<div className={styles.header}>
-					{title}
+					<section className={styles.billing_party} ref={billingPartyHeightRef}>
+						<h5>{item?.billing_address?.name}</h5>
+
+						<Tooltip
+							theme="light"
+							placement="bottom"
+							content={(
+								<div className={styles.billing_address}>
+									{item?.billing_address?.address}
+								</div>
+							)}
+						>
+							<span className={styles.gst_number}>
+								GST Number:
+								{' '}
+								<span>{item?.billing_address?.tax_number}</span>
+							</span>
+						</Tooltip>
+					</section>
+
+					<section className={styles.details}>
+						<div className={styles.number}>
+							<span
+								onClick={!isEmpty(bfInvoice) ? handleDownload : null}
+								className={item?.status === 'approved' ? styles.approved : undefined}
+							>
+								{item?.cn_number}
+							</span>
+
+							<span>{item?.live_invoice_number}</span>
+						</div>
+
+						<div className={styles.invoice_value}>
+							Invoice Value -
+							{' '}
+							<span>
+								{formatAmount({
+									amount   : item?.invoice_value,
+									currency : item?.currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
+							</span>
+						</div>
+
+						<div className={styles.invoice_status_and_action}>
+							<div className={styles.status}>
+								<div className={cl`${styles[CN_STATUS_MAPPING[itemStatus]]} ${styles.status_text}`}>
+									{startCase(CN_STATUS_MAPPING[itemStatus])}
+								</div>
+
+								{itemStatus === 'rejected' && (
+									<IcCError width={16} height={16} />
+								)}
+							</div>
+
+							{itemStatus === 'pending' && (
+								<>
+									<Button
+										size="sm"
+										onClick={() => setOpen('review')}
+									>
+										Review
+									</Button>
+									<ButtonIcon
+										onClick={() => setOpen('edit')}
+										className={styles.actions}
+									>
+										<IcMEdit />
+									</ButtonIcon>
+								</>
+							)}
+						</div>
+
+					</section>
+
+					<ButtonIcon
+						className={styles.rotate_icon}
+						onClick={() => setOpen(open !== 'line_items' ? 'line_items' : false)}
+						style={{ height: `${billingPartyHeightRef.current?.offsetHeight}px` }}
+					>
+						<IcMArrowRotateDown className={open ? styles.rotate : null} />
+					</ButtonIcon>
 				</div>
 
 				{open === 'line_items' ? (

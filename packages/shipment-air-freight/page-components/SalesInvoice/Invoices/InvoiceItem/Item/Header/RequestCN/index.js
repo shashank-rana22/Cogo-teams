@@ -9,11 +9,11 @@ import PartialCN from './PartialCN';
 import styles from './styles.module.css';
 
 function RequestCN({
-	askNullify,
+	askNullify = false,
 	setAskNullify = () => {},
-	invoice,
+	invoice = {},
 	refetchCN = () => {},
-	invoiceData,
+	invoiceData = {},
 	bfInvoiceRefetch = () => {},
 }) {
 	const [isRequestCN, setIsRequestCN] = useState(false);
