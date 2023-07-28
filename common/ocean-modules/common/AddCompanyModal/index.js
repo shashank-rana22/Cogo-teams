@@ -26,11 +26,12 @@ function AddCompanyModal({
 }) {
 	const formRef = useRef(null);
 	const { trade_party_type = '', organization_id } = addCompany || {};
+	const { trade_type } = primary_service || {};
 
 	const [role, setRole] = useState(trade_party_type);
 	const [companyType, setCompanyType] = useState('trade_partner');
 
-	const options = tradePartyTypeMapping(role);
+	const options = tradePartyTypeMapping(role, trade_type);
 	const tradePartyOptions = convertObjectMappingToArray(TRADE_PARTY_MAPPING);
 
 	const onClose = () => {
