@@ -34,6 +34,7 @@ function useListShipments() {
 				await trigger({
 					params: getParams({ pagination, serialId }),
 				});
+				setParams((prev) => ({ ...prev, pagination }));
 			} catch (e) {
 				console.error('e:', e);
 			}
@@ -41,11 +42,19 @@ function useListShipments() {
 		[trigger],
 	);
 
-	const handlePageChange = (val) => setParams((prev) => ({ ...prev, pagination: val }));
+	const handlePageChange = (val) => {
+		getShipmentsList({
+			pagination : val,
+			serialId   : searchQuery,
+		});
+	};
 
 	useEffect(() => {
-		getShipmentsList({ pagination: params?.pagination, serialId: searchQuery });
-	}, [getShipmentsList, params?.pagination, searchQuery]);
+		getShipmentsList({
+			pagination : DEFAULT_PAGE,
+			serialId   : searchQuery,
+		});
+	}, [getShipmentsList, searchQuery]);
 
 	useEffect(() => {
 		debounceQuery(params?.query || '');

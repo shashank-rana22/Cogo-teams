@@ -39,3 +39,23 @@
 		display: none;
 	}
 }
+
+.whatsapp_icon {
+	width: 26px;
+	height: 26px;
+	cursor: pointer;
+}
+
+.call_icon_styles {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	fill: #705e00;
+}
+
+.email_icon_styles {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	fill: #2f4d4f;
+}

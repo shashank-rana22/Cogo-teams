@@ -14,6 +14,7 @@ function ShipmentCard({
 	shipmentItem = {},
 	showPocDetails = {},
 	setShowPocDetails = () => {},
+	setActiveTab = () => {},
 }) {
 	const {
 		shipment_type = '',
@@ -29,6 +30,7 @@ function ShipmentCard({
 				<PocContainer
 					showPocDetails={showPocDetails}
 					setShowPocDetails={setShowPocDetails}
+					setActiveTab={setActiveTab}
 				/>
 			</div>
 		);

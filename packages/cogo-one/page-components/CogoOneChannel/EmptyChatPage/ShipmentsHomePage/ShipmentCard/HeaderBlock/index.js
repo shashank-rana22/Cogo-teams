@@ -1,28 +1,33 @@
-import { Popover, ButtonGroup, Toast } from '@cogoport/components';
+import { Popover, ButtonGroup } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const BUTTON_OPTIONS = [
+const getButtonOptions = ({ partnerId, shipmentId }) => [
 	{
 		children : 'View Shipments',
 		onClick  : () => {
-			Toast.info('viewing Shipments');
+			const redirectUrl = `${window.location.origin}/v2/${partnerId}/shipments/${shipmentId}`;
+			window.open(redirectUrl, '_blank');
 		},
 	},
 	{
 		children : 'View Documents',
 		onClick  : () => {
-			Toast.info('viewing Documents');
+			const redirectUrl = `${window.location.origin}/v2/${partnerId}/shipments/${shipmentId}?tab=documents`;
+			window.open(redirectUrl, '_blank');
 		},
 	},
 ];
 
 function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
-	const { serial_id = '', importer_exporter = {} } = shipmentItem || {};
+	const { partnerId = '' } = useSelector(({ profile }) => ({ partnerId: profile.partner.id }));
+
+	const { serial_id = '', importer_exporter = {}, id: shipmentId = '' } = shipmentItem || {};
 	const { business_name = '' } = importer_exporter || {};
 
 	return (
@@ -50,7 +55,7 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
 					render={(
 						<ButtonGroup
 							size="sm"
-							options={BUTTON_OPTIONS}
+							options={getButtonOptions({ shipmentId, partnerId })}
 							direction="vertical"
 						/>
 					)}

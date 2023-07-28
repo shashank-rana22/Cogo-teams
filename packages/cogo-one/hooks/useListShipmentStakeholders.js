@@ -3,9 +3,7 @@ import { useCallback, useEffect } from 'react';
 
 const getParams = ({ shipmentId }) => ({
 	filters: {
-		shipment_id      : shipmentId,
-		stakeholder_type : ['service_ops1', 'service_ops2'],
-		// stakeholder_type : 'service_ops1',
+		shipment_id: shipmentId,
 	},
 	format_by_stakeholder_type_required : true,
 	page_limit                          : 1000,

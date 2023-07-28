@@ -8,11 +8,11 @@ import LoadingState from './LoadingState';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 
-const DEFAULT_PAGE = 1;
+const DEFAULT_PAGE = 0;
 const PAGE_LIMIT = 6;
 const DEFAULT_SHIPMENTS_COUNT = 0;
 
-function ShipmentsHomePage() {
+function ShipmentsHomePage({ setActiveTab = () => {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
 
 	const {
@@ -43,6 +43,7 @@ function ShipmentsHomePage() {
 						onChange={(val) => setParams((prev) => ({ ...prev, query: val }))}
 						prefix={<IcMSearchlight className={styles.bishal_search_icon} />}
 						placeholder="Search SID..."
+						type="number"
 					/>
 				</div>
 			</div>
@@ -54,6 +55,7 @@ function ShipmentsHomePage() {
 						{(list || []).map(
 							(shipmentItem) => (
 								<ShipmentCard
+									setActiveTab={setActiveTab}
 									key={shipmentItem?.sid}
 									shipmentItem={shipmentItem}
 									showPocDetails={showPocDetails}
@@ -63,6 +65,7 @@ function ShipmentsHomePage() {
 						)}
 					</div>
 				)}
+
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="number"

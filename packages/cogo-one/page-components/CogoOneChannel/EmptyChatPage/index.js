@@ -13,13 +13,17 @@ const MESSAGE_MAPPING = {
 	mail    : 'mail',
 };
 
-function EmptyChatPage({ activeTab = {}, viewType = '' }) {
+function EmptyChatPage({
+	activeTab = {},
+	viewType = '',
+	setActiveTab = () => {},
+}) {
 	const displayMessage = MESSAGE_MAPPING[activeTab?.tab] || activeTab?.tab;
 
 	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
 
 	if (showShipments) {
-		return <ShipmentsHomePage />;
+		return <ShipmentsHomePage setActiveTab={setActiveTab} />;
 	}
 
 	return (
