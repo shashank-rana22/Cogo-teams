@@ -2,7 +2,7 @@ import { Collapse, Pagination, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useMemo } from 'react';
 
-import EmptyState from '../../../../../../../common/EmptyState';
+import EmptyState from '../../../../../../common/EmptyState';
 
 import ACTION_COMPONENT_MAPPING from './get-action-component-mapping';
 import ListCard from './ListCard';

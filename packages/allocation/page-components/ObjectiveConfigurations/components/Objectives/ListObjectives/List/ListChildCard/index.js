@@ -1,9 +1,9 @@
 import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../../../../../../common/EmptyState';
-import ObjectiveDetailsCard from '../../../../../../common/ObjectiveDetailsCard';
-import useGetObjectiveDetails from '../../../../../../hooks/useGetObjectiveDetails';
+import EmptyState from '../../../../../../../common/EmptyState';
+import ObjectiveDetailsCard from '../../../../../common/ObjectiveDetailsCard';
+import useGetObjectiveDetails from '../../../../../hooks/useGetObjectiveDetails';
 
 import styles from './styles.module.css';
 

@@ -1,7 +1,8 @@
-import { Button, Input, Badge } from '@cogoport/components';
+import { Button, Badge } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 
 import Filters from '../../../../../../../common/Filters';
+import SearchInput from '../../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
@@ -9,7 +10,12 @@ import useFilterContent from './useFilterContent';
 const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
 
 function ObjectiveFilters(props) {
-	const { setParams } = props;
+	const {
+		setParams,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
+	} = props;
 
 	const {
 		controls,
@@ -24,7 +30,13 @@ function ObjectiveFilters(props) {
 	return (
 		<div className={styles.filter_container}>
 			<div className={styles.search_container}>
-				<Input size="sm" placeholder="Search by Objective Name" />
+				<SearchInput
+					size="sm"
+					placeholder="Seach by Objective Name"
+					debounceQuery={debounceQuery}
+					value={searchValue}
+					setGlobalSearch={setSearchValue}
+				/>
 			</div>
 
 			<Filters

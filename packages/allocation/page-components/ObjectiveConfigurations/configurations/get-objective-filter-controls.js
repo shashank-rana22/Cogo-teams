@@ -18,7 +18,7 @@ const getObjectiveFilterControls = () => {
 			],
 		},
 		{
-			name     : 'status',
+			name     : 'lead_objective_status',
 			type     : 'chips',
 			label    : 'Status',
 			multiple : true,

@@ -1,14 +1,20 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useGetListObjectives = () => {
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+
 	const [toggleValue, setToggleValue] = useState('active');
+
+	const [searchValue, setSearchValue] = useState('');
 
 	const [params, setParams] = useState({
 		page       : 1,
 		page_limit : 10,
 		filters    : {
-			excluding_status: 'inactive',
+			status : toggleValue || undefined,
+			q      : searchQuery || undefined,
 		},
 	});
 
@@ -33,11 +39,11 @@ const useGetListObjectives = () => {
 			...previousParams,
 			filters: {
 				...(previousParams.filters || {}),
-				excluding_status: toggleValue === 'active'
-					? 'inactive' : ['live', 'verified', 'verification_pending', 'rejected'],
+				status : toggleValue || undefined,
+				q      : searchQuery || undefined,
 			},
 		}));
-	}, [toggleValue]);
+	}, [toggleValue, searchQuery]);
 
 	return {
 		setParams,
@@ -46,6 +52,9 @@ const useGetListObjectives = () => {
 		paginationData,
 		getNextPage,
 		setToggleValue,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 	};
 };
 
