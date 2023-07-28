@@ -1,10 +1,18 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useGetObjectiveAgentsMapping = () => {
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+
+	const [searchValue, setSearchValue] = useState('');
+
 	const [params, setParams] = useState({
 		page     : 1,
 		role_ids : [],
+		filters  : {
+			q: searchQuery || undefined,
+		},
 	});
 
 	const [{ data, loading }, refetch] = useAllocationRequest({
@@ -23,6 +31,16 @@ const useGetObjectiveAgentsMapping = () => {
 		}));
 	};
 
+	useEffect(() => {
+		setParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				...(previousParams.filters || {}),
+				q: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
+
 	return {
 		list,
 		loading,
@@ -30,6 +48,9 @@ const useGetObjectiveAgentsMapping = () => {
 		paginationData,
 		getNextPage,
 		setParams,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 	};
 };
 
