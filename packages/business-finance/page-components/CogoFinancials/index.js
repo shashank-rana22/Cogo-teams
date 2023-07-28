@@ -1,4 +1,4 @@
-import { Button, Select, Toggle } from '@cogoport/components';
+import { Select, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
+import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
 import ServiceWiseStats from './Common/ServicewiseStats';
 import StatsCard from './Common/StatsCard';
@@ -38,7 +39,6 @@ function CogoFinancials() {
 	const [timeRange, setTimeRange] = useState('1D');
 	const [entity, setEntity] = useState(DEFAULT_ENTITY);
 	const [activeShipmentCard, setActiveShipmentCard] = useState('');
-	console.log({ activeShipmentCard });
 
 	return (
 		<div>
@@ -69,15 +69,13 @@ function CogoFinancials() {
 						style={{ width: '320px' }}
 					/>
 				</div>
-
 			</div>
 
-			<div className={styles.active_shipment_card}>
-				<div style={{ height: '300px', border: '2px solid' }}>
-					<Button onClick={() => setActiveShipmentCard('')}>Back</Button>
-					<h2>Main Data</h2>
-				</div>
-			</div>
+			{!isEmpty(activeShipmentCard) && (
+				<ActiveShipmentCard
+					setActiveShipmentCard={setActiveShipmentCard}
+				/>
+			)}
 
 			{isEmpty(activeShipmentCard) && (
 				<div
