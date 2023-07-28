@@ -24,6 +24,7 @@
 
 .search {
 	width: 180px;
+	margin-right: 8px;
 
 	@media (max-width: 576px) {
 		flex-basis: 50%;
@@ -46,4 +47,11 @@
 .overview_header {
 	font-size: 20px;
 	font-weight: bold;
+}
+
+.download_container {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	margin-left: 5px;
 }

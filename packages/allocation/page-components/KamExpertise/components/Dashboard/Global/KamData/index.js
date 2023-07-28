@@ -16,15 +16,13 @@ const TWO = 2;
 const THREE = 3;
 const FOUR = 4;
 
-function KamData(props) {
-	const { date_params = {} } = props;
-
+function KamData() {
 	const {
 		loading = false,
 		dashboardData,
 		kamLevel,
 		setKamLevel,
-	} = useGetKamExpertiseDashboard(date_params);
+	} = useGetKamExpertiseDashboard();
 
 	const {
 		setOverviewParams = () => {},
@@ -40,13 +38,18 @@ function KamData(props) {
 		setSearchKAM = () => {},
 		badgeName = '',
 		setBadgeName = () => {},
+		conditionName = '',
+		setConditionName = () => {},
+		roleName = '',
+		setRoleName = () => {},
+		managerName = '',
+		setManagerName = () => {},
 		debounceQuery,
 		paginationData,
 		getNextPage,
 	} = useGetKamExpertiseStatsList();
 
 	const { list } = dashboardData || {};
-
 	if (loading) {
 		return (
 			<div className={styles.cards}>
@@ -77,11 +80,10 @@ function KamData(props) {
 				{
 					list.map((listData, index_lvl) => (
 						<KamLevelScoreCard
-							key={listData}
+							key={listData.id}
 							index_lvl={index_lvl}
 							listData={listData}
 							setKamLevel={setKamLevel}
-							date_params={date_params}
 							setListParams={setListParams}
 							setOverviewParams={setOverviewParams}
 						/>
@@ -118,6 +120,12 @@ function KamData(props) {
 							debounceQuery={debounceQuery}
 							badgeName={badgeName}
 							setBadgeName={setBadgeName}
+							conditionName={conditionName}
+							setConditionName={setConditionName}
+							roleName={roleName}
+							setRoleName={setRoleName}
+							managerName={managerName}
+							setManagerName={setManagerName}
 						/>
 
 						<LeaderboardList

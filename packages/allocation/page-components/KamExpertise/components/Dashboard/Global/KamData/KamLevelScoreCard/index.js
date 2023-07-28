@@ -4,7 +4,7 @@ import { IcMArrowNext } from '@cogoport/icons-react';
 import CardContent from './CardContent';
 import styles from './styles.module.css';
 
-const ONE = 1;
+const INDEX_LENGTH_NOMRALIZATION = 1;
 
 function KamLevelScoreCard(props) {
 	const {
@@ -12,22 +12,17 @@ function KamLevelScoreCard(props) {
 		listData,
 		setKamLevel,
 		loading = false,
-		date_params,
 		setListParams,
 		setOverviewParams,
 	} = props;
 
-	const { start_date, end_date } = date_params || {};
-
 	const onKamChange = () => {
-		setKamLevel(index_lvl + ONE);
+		setKamLevel(index_lvl + INDEX_LENGTH_NOMRALIZATION);
 
 		setOverviewParams((pv) => ({
 			...pv,
-			kam_expertise_level : index_lvl + ONE,
+			kam_expertise_level : index_lvl + INDEX_LENGTH_NOMRALIZATION,
 			filters             : {
-				created_at_greater_than : start_date,
-				created_at_less_than    : end_date,
 			},
 		}));
 
@@ -35,9 +30,7 @@ function KamLevelScoreCard(props) {
 			...pv,
 			filters: {
 				...pv.filters,
-				created_at_greater_than : start_date,
-				created_at_less_than    : end_date,
-				kam_expertise_level     : index_lvl + ONE,
+				kam_expertise_level: index_lvl + INDEX_LENGTH_NOMRALIZATION,
 			},
 		}));
 	};
@@ -73,7 +66,7 @@ function KamLevelScoreCard(props) {
 					<div className={styles.kam_level}>
 						KAM
 						{' '}
-						{index_lvl + ONE}
+						{index_lvl + INDEX_LENGTH_NOMRALIZATION}
 					</div>
 
 					<IcMArrowNext width={28} height={28} style={{ color: 'red' }} />
