@@ -13,7 +13,6 @@ const injectValues = ({
 	shipment_data,
 	stepConfig,
 	setCommodityUnit = () => {},
-	primary_service,
 }) => {
 	const controls = populatedControls || [];
 
@@ -131,11 +130,6 @@ const injectValues = ({
 		task?.task === 'mark_confirmed'
 	) {
 		(controls || []).forEach((ctrl, index) => {
-			if (ctrl?.name === 'bl_category') {
-				controls[index].disabled = !!primary_service?.bl_category;
-				controls[index].value = primary_service?.bl_category || 'hbl';
-			}
-
 			if (ctrl?.name === 'commodity_category') {
 				if (shipment_data?.commodity_category) {
 					controls[index].value = shipment_data?.commodity_category;
@@ -147,11 +141,6 @@ const injectValues = ({
 				controls[index].onChange = (val, obj) => {
 					setCommodityUnit(obj);
 				};
-			}
-
-			if (ctrl?.name === 'bl_type') {
-				controls[index].disabled = !!primary_service?.bl_type;
-				controls[index].value = primary_service?.bl_type;
 			}
 
 			if (
