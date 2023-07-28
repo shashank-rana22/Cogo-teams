@@ -27,7 +27,7 @@ const ELEMENT_MAPPING = {
 	SingleDateRange        : DatepickerController,
 	fileUpload             : UploadController,
 	email                  : InputController,
-	// asyncSelect            : AsyncSelectController,
+	asyncSelect            : AsyncSelectController,
 
 };
 

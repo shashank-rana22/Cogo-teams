@@ -1,7 +1,12 @@
-import { Accordion, Pill } from '@cogoport/components';
+import { Accordion, Pill, Button, Modal } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import BankDetails from './BankDetails';
+import EditBankDetails from './EditBankDetails';
+import EditEducationalQualifications from './EditEducationalQualifications';
+import EditEmployementHistory from './EditEmploymentHistory';
+import EditResume from './EditResume';
 import EducationalQualifications from './EducationalQualifications';
 import EmploymentHistory from './EmploymentHistory';
 import Resume from './Resume';
@@ -24,6 +29,7 @@ function RenderPills({ isCompleted = false, name = '', bankDetails }) {
 function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetails }) {
 	const { progress_stats = {}, bank_details:bankDetails } = profileData || {};
 	const { additional_info_added = {} } = progress_stats;
+	const [show, setShow] = useState(false);
 
 	const {
 		bank_details = false,
@@ -37,27 +43,31 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 			name        : 'employment_history',
 			content     : EmploymentHistory,
 			isCompleted : employment_history,
+			component   : EditEmployementHistory,
 		},
 		{
 			name        : 'educational_qualifications',
 			content     : EducationalQualifications,
 			isCompleted : educational_qualification,
+			component   : EditEducationalQualifications,
 		},
 		{
 			name        : 'resume',
 			content     : Resume,
 			isCompleted : resume,
+			component   : EditResume,
 		},
 		{
 			name        : 'bank_details',
 			content     : BankDetails,
 			isCompleted : bank_details,
+			component   : EditBankDetails,
 		}];
 
 	return (
 		<div className={styles.container}>
 			{(COMPONENT_MAPPING || []).map((item) => {
-				const { content: Component, isCompleted, name } = item;
+				const { content: Component, isCompleted, name, component: ModalComponent } = item;
 
 				return (
 					<div
@@ -71,6 +81,24 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 								<div className={styles.status}>
 									<div className={styles.accordion_title}>{startCase(name)}</div>
 									<RenderPills name={name} isCompleted={isCompleted} bankDetails={bankDetails} />
+									<Button themeType="secondary" onClick={() => { setShow(name); }}> Edit </Button>
+									{show === name ? (
+										<Modal
+											size="xl"
+											show={show}
+											onClose={() => setShow(false)}
+											placement="top"
+											closeOnOuterClick
+										>
+											<Modal.Header title={name} />
+											<Modal.Body>
+												<ModalComponent
+													data={profileData}
+													getEmployeeDetails={getEmployeeDetails}
+												/>
+											</Modal.Body>
+										</Modal>
+									) : null}
 								</div>
 							)}
 						>
