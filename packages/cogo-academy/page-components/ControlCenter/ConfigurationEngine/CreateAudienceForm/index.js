@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { SelectController, InputController } from '@cogoport/forms';
+import { SelectController, InputController, AsyncSelectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
 import useListCogoEntity from '../hooks/useListCogoEntities';
@@ -7,6 +7,22 @@ import useListCogoEntity from '../hooks/useListCogoEntities';
 import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import useGetAudienceOptions from './useGetAudienceOptions';
+
+const getElementController = (type = 'text') => {
+	switch (type) {
+		case 'text':
+			return InputController;
+
+		case 'select':
+			return SelectController;
+
+		case 'asyncSelect':
+			return AsyncSelectController;
+
+		default:
+			return null;
+	}
+};
 
 function CreateAudienceForm(props) {
 	const {
@@ -47,9 +63,9 @@ function CreateAudienceForm(props) {
 	});
 
 	const renderFields = () => (Object.keys(controls) || []).map((controlItem) => {
-		const { name = '', label = '' } = controls[controlItem] || {};
+		const { name = '', label = '', type = '' } = controls[controlItem] || {};
 
-		const DynamicController = name === 'name' ? InputController : SelectController;
+		const DynamicController = getElementController(type);
 
 		if (showElements[name]) {
 			return (
