@@ -3,8 +3,6 @@ import Header from './Header';
 import useGetListObjectives from './useGetListObjectives';
 
 function ListObjectives(props) {
-	const { ...restProps } = props;
-
 	const {
 		setParams,
 		loading,
@@ -18,7 +16,7 @@ function ListObjectives(props) {
 		<>
 			<Header
 				setToggleValue={setToggleValue}
-				{...restProps}
+				{...props}
 			/>
 
 			<Body
@@ -27,7 +25,7 @@ function ListObjectives(props) {
 				list={list}
 				paginationData={paginationData}
 				getNextPage={getNextPage}
-				{...restProps}
+				{...props}
 			/>
 		</>
 	);

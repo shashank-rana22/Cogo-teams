@@ -44,7 +44,7 @@ function ObjectiveConfigurations() {
 
 						return (
 							<TabPanel key={name} name={name} title={title}>
-								<Component />
+								<Component key={name} />
 							</TabPanel>
 						);
 					})}
