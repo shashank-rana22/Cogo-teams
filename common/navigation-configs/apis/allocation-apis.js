@@ -332,7 +332,40 @@ const allocation = {
 			feature      : 'kam_expertise',
 			service_name : 'allocation',
 		},
-
+		{
+			api          : 'get_allocation_objectives',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_objective_details',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_objective',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_objective_stats',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	crm_feedback_dashboard: [
 		{

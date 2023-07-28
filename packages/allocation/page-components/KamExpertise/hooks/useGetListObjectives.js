@@ -3,15 +3,15 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-const INITIAL_PAGE_NUMBER = 1;
+// const INITIAL_PAGE_NUMBER = 1;
 
 function useGetListObjectives() {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [page, setPage] = useState(INITIAL_PAGE_NUMBER);
+	// const [page, setPage] = useState(INITIAL_PAGE_NUMBER);
 
 	const [params, setParams] = useState({
-		page,
+		page      : 1,
 		sort_type : 'asc',
 		filters   : {
 			status : 'inactive',
@@ -24,7 +24,7 @@ function useGetListObjectives() {
 		method  : 'get',
 		authkey : 'get_allocation_objectives',
 		params  : {
-			page,
+			page      : 1,
 			sort_type : 'asc',
 			filters   : {
 				status : 'inactive',
@@ -51,14 +51,14 @@ function useGetListObjectives() {
 
 	useEffect(() => {
 		refetchListObjectives();
-	}, [params, page, query, refetchListObjectives]);
+	}, [params, query, refetchListObjectives]);
 
 	return {
 		loading,
 		data,
 		refetchListObjectives,
-		page,
-		setPage,
+		// page,
+		// setPage,
 		params,
 		setParams,
 		debounceQuery,

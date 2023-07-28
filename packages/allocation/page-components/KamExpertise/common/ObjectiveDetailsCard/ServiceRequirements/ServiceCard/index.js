@@ -1,5 +1,4 @@
 import { Pill } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import getDisplayDetails from '../../../../utils/get-display-details';
@@ -21,8 +20,8 @@ function ServiceCard(props) {
 		service_type = '',
 		trade_type = '',
 		inco_terms = [],
-		origin_location = [],
-		destination_location = [],
+		origin_location = {},
+		destination_location = {},
 	} = item;
 
 	const displayDetails = getDisplayDetails({ shipment_mode, details: item });
@@ -50,9 +49,6 @@ function ServiceCard(props) {
 			</div>
 
 			<div className={styles.key_value_container}>
-				{/* <div className={styles.label}>
-					Shipment Mode:
-				</div> */}
 				<div className={styles.sub_title}>
 					{startCase(shipment_mode) || '--'}
 					,
@@ -96,7 +92,7 @@ function ServiceCard(props) {
 							Origin(s):
 						</div>
 						<Pill>
-							{origin_location[GLOBAL_CONSTANTS.zeroth_index]?.name}
+							{origin_location?.name}
 						</Pill>
 					</div>
 					<div className={styles.origin_dest}>
@@ -104,13 +100,11 @@ function ServiceCard(props) {
 							Destination(s):
 						</div>
 						<Pill>
-							{destination_location[GLOBAL_CONSTANTS.zeroth_index]?.name}
+							{destination_location?.name}
 						</Pill>
 					</div>
 				</div>
 			) : null}
-			{/* {!isEmpty(destination_location) ? (
-			) : null} */}
 		</div>
 	);
 }

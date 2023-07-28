@@ -1,7 +1,8 @@
+import useGetListObjectives from '../../../../hooks/useGetListObjectives';
+
 import Body from './Body';
 import Header from './Header';
 import styles from './styles.module.css';
-import useGetListObjectives from './useGetListObjectives';
 
 function ListObjectives(props) {
 	const { ...rest } = props;
@@ -12,8 +13,8 @@ function ListObjectives(props) {
 		refetchListObjectives = () => { },
 		params = {},
 		setParams = () => { },
-		page,
-		setPage = () => { },
+		// page,
+		// setPage = () => { },
 		debounceQuery,
 	} = useGetListObjectives();
 
@@ -36,8 +37,8 @@ function ListObjectives(props) {
 				refetchListObjectives={refetchListObjectives}
 				params={params}
 				setParams={setParams}
-				page={page}
-				setPage={setPage}
+				// page={page}
+				// setPage={setPage}
 				debounceQuery={debounceQuery}
 			/>
 		</>
