@@ -50,7 +50,12 @@ const controls = [
 		placeholder : 'Service Provider',
 		multiple    : true,
 		params      : {
-			filters: { service_type: 'air_freight' },
+			filters: {
+				service_type : 'air_freight',
+				account_type : 'service_provider',
+				status       : 'active',
+				kyc_status   : 'verified',
+			},
 		},
 	},
 	{

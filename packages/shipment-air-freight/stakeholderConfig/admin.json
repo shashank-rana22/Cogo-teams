@@ -2,7 +2,8 @@
     "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview","purchase", "tasks", "documents", "emails", "tracking"],  
     "shipment_info":{},
     "timeline": {
-        "can_edit": true
+        "can_edit": true,
+        "editable_fields": ["schedule_arrival", "schedule_departure", "cargo_handed_over_at_origin_at"]
     },
     "default_tab":"tasks",
     "overview":{

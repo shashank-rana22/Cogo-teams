@@ -44,6 +44,8 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 						origin_main_port_id      : shipmentData?.origin_main_port_id || undefined,
 						service_id               : singleServiceData?.id,
 						truck_type               : singleServiceData?.truck_type,
+						transport_modes          : singleServiceData?.service_type === 'haulage_freight_service'
+										&& singleServiceData?.shipment_type === 'fcl_freight' ? ['rail'] : undefined,
 					},
 					shipment_id        : singleServiceData?.shipment_id,
 					service_type       : singleServiceData?.service_type,

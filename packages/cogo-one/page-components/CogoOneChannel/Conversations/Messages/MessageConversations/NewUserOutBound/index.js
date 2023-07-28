@@ -14,6 +14,7 @@ function NewUserOutBound({ setModalType = () => {}, activeTab = {} }) {
 		whatsapp_number_eformat,
 		user_id,
 		organization_id,
+		mobile_no,
 	} = data || {};
 
 	const onTemplateClick = () => {
@@ -28,6 +29,10 @@ function NewUserOutBound({ setModalType = () => {}, activeTab = {} }) {
 	};
 
 	const handleVoiceCall = () => {
+		if (!mobile_no) {
+			return;
+		}
+
 		dispatch(
 			setProfileState({
 				is_in_voice_call          : true,
@@ -62,6 +67,7 @@ function NewUserOutBound({ setModalType = () => {}, activeTab = {} }) {
 							key={name}
 							size="md"
 							themeType="secondary"
+							disabled={!mobile_no}
 							className={styles.each_pill}
 							onClick={onClick}
 						>

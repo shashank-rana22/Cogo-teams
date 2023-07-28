@@ -40,7 +40,8 @@ function Content({
 	handleView = () => {},
 	primary_service = {},
 	receivedViaEmail = false,
-	showUploadText = '',
+	showUploadText = false,
+	canEditDocuments = true,
 	setShowDoc = () => {},
 	setShowApproved = () => {},
 	docType = '',
@@ -60,7 +61,7 @@ function Content({
 	const { document_type, state } = uploadedItem;
 
 	const getUploadButton = () => {
-		if (showUploadText.length) {
+		if (showUploadText.length && canEditDocuments) {
 			return (
 				<Button
 					themeType="link"
