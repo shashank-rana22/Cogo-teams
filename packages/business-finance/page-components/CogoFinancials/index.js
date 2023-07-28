@@ -8,6 +8,7 @@ import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
 import ClosedShipmentCard from './ClosedShipmentCard/index';
 import ServiceWiseStats from './Common/ServicewiseStats';
+import SingleGraphCard from './Common/SingleGraphCard';
 import StatsCard from './Common/StatsCard';
 import MultipleFilters from './MultipleFilters';
 import ReceivablesOutstandings from './ReceivablesOutstandings';
@@ -19,6 +20,17 @@ const TIME_RANGE_OPTIONS = [
 	{ label: '1M', value: '1M' },
 	{ label: '6M', value: '6M' },
 	{ label: '1Y', value: '1Y' },
+];
+
+const mappingCards = [
+	{ label: 'Estimated Revenue', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
+	{ label: 'Estimated Cost', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
+];
+
+const mapping = [
+	{ label: 'AR', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
+	{ label: 'Bank', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
+	{ label: 'Deviation', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
 ];
 
 const geo = getGeoConstants();
@@ -38,7 +50,6 @@ function CogoFinancials() {
 	const [timeRange, setTimeRange] = useState('1D');
 	const [entity, setEntity] = useState(DEFAULT_ENTITY);
 	const [activeShipmentCard, setActiveShipmentCard] = useState('');
-	console.log({ activeShipmentCard });
 
 	return (
 		<div>
@@ -90,6 +101,7 @@ function CogoFinancials() {
 							heading="Ongoing Shipments"
 							cardId="ongoing"
 							setActiveShipmentCard={setActiveShipmentCard}
+							mappingCards={mappingCards}
 						/>
 						<ClosedShipmentCard
 							isDeviationVisible={false}
@@ -115,6 +127,7 @@ function CogoFinancials() {
 								heading="Ongoing Shipments"
 								cardId="ongoing"
 								setActiveShipmentCard={setActiveShipmentCard}
+								mappingCards={mappingCards}
 							/>
 						</div>
 					)}
@@ -148,18 +161,24 @@ function CogoFinancials() {
 				<div className={styles.ongoing}>
 					<StatsCard
 						heading="Total Collected"
+						mappingCards={mapping}
 						showPill
 					/>
 				</div>
 				<div className={styles.card}>
 					<StatsCard
 						heading="Total Paid"
+						mappingCards={mapping}
 						showPill
 					/>
 				</div>
 			</div>
 			<ReceivablesOutstandings />
-
+			<div className={styles.graphs}>
+				<SingleGraphCard heading="Operational Profitability" />
+				<SingleGraphCard heading="Revenue" />
+				<SingleGraphCard heading="Revenue" />
+			</div>
 			<ServiceWiseStats />
 		</div>
 	);

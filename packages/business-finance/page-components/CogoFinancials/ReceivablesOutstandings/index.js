@@ -2,6 +2,8 @@ import React from 'react';
 
 import MyResponsiveBar from '../Common/ResponsiveBar';
 
+import styles from './styles.module.css';
+
 function ReceivablesOutstandings() {
 	const data = [
 		{
@@ -41,74 +43,9 @@ function ReceivablesOutstandings() {
 		},
 	];
 
-	const NEW_DATA = [
-		{
-			name    : 'surface',
-			surface : 24,
-		},
-		{
-			name    : 'air',
-			surface : 190,
-		},
-		{
-			name    : 'surfaces',
-			surface : 99,
-		},
-		{
-			name : 'airs',
-			air  : -5,
-		},
-		{
-			name    : 'surfacess',
-			surface : 99,
-		},
-		{
-			name : 'airss',
-			air  : -5,
-		},
-		{
-			name    : 'surfacesss',
-			surface : 99,
-		},
-		{
-			name : 'airsss',
-			air  : -5,
-		},
-		{
-			name    : 'surfacessss',
-			surface : 99,
-		},
-		{
-			name : 'airssss',
-			air  : -5,
-		},
-	];
-
 	return (
-		<div>
+		<div className={styles.container}>
 			<MyResponsiveBar data={data} />
-			<MyResponsiveBar
-				data={NEW_DATA}
-				keys={['surface', 'air']}
-				legendX=""
-				legendY=""
-				width="45%"
-				colors={['#88CAD1']}
-				height="274px"
-				indexBy="name"
-				enableGridY
-				legends={false}
-				margin={{ top: 50, right: 30, bottom: 50, left: 60 }}
-				axisLeft={{
-					tickSize       : 0,
-					tickPadding    : 0,
-					tickRotation   : 0,
-					legend         : 'Percentage',
-					legendPosition : 'middle',
-					legendOffset   : -40,
-					ariaHidden     : true,
-				}}
-			/>
 		</div>
 	);
 }
