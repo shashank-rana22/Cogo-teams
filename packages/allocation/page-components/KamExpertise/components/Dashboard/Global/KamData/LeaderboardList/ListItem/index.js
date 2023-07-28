@@ -1,11 +1,16 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMStarfull } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
-import BADGE_STARS_CLASSNAME_MAPPING from '../../../../../constants/badge-stars-mapping';
+import BADGE_STARS_CLASSNAME_MAPPING from '../../../../../../constants/badge-stars-mapping';
 
 import styles from './styles.module.css';
+
+const ONE = 1;
+const TWO = 2;
+const THREE = 3;
 
 function ListItem(props) {
 	const { data, index } = props;
@@ -34,7 +39,7 @@ function ListItem(props) {
 			<div className={styles.card_description}>
 				<div className={styles.card_description_left}>
 					<div className={styles.index}>
-						{index + 1}
+						{index + ONE}
 					</div>
 
 					<div>
@@ -52,7 +57,7 @@ function ListItem(props) {
 
 				<div className={styles.badge_container}>
 					<div className={styles.badges}>
-						{badge_details?.slice(0, 3).map((value) => {
+						{badge_details?.slice(GLOBAL_CONSTANTS.zeroth_index, THREE).map((value) => {
 							const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[value?.medal]?.upper_limit;
 
 							return (
@@ -64,7 +69,7 @@ function ListItem(props) {
 										<img src={value?.image_url} alt="badge" />
 
 										<div className={styles.star}>
-											{[1, 2, 3].map((it) => (
+											{[ONE, TWO, THREE].map((it) => (
 												<div key={it}>
 													<IcMStarfull
 														width={10}
@@ -80,7 +85,7 @@ function ListItem(props) {
 					</div>
 
 					<span className={styles.link}>
-						{badge_details?.length > 3
+						{badge_details?.length > THREE
 						&& (
 							<span
 								role="presentation"

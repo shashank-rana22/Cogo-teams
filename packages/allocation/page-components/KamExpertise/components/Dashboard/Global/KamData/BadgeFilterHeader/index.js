@@ -1,6 +1,6 @@
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 
-import SearchInput from '../../../../../../common/SearchInput';
+import SearchInput from '../../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 

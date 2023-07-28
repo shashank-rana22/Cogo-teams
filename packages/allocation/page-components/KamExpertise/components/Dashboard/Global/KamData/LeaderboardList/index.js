@@ -2,7 +2,7 @@ import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyState from '../../../../../../common/EmptyState';
+import EmptyState from '../../../../../../../common/EmptyState';
 
 import ListItem from './ListItem';
 import LeaderboardLoading from './ListItem/loadingState';

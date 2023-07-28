@@ -1,9 +1,12 @@
 import { Card, Placeholder, Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import ICON_MAPPING from '../../../../../constants/icon-mapping';
+import ICON_MAPPING from '../../../../../../constants/icon-mapping';
 
 import styles from './styles.module.css';
+
+const ONE = 1;
+const TWO = 2;
 
 function OverviewCard(props) {
 	const { data = {}, overviewLoading = false } = props;
@@ -25,7 +28,7 @@ function OverviewCard(props) {
 				/>
 
 				<Card.Description className={styles.content}>
-					{[1, 2].map((item) => (
+					{[ONE, TWO].map((item) => (
 						<div key={item} className={styles.display_flex_loading}>
 							<Placeholder width="100px" />
 

@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
 
-import useGetKamExpertiseCurrentConfig from '../../../hooks/useGetKamExpertiseCurrentConfig';
+import useGetKamExpertiseCurrentConfig from '../../../../hooks/useGetKamExpertiseCurrentConfig';
 
 import styles from './styles.module.css';
 
@@ -12,9 +12,10 @@ function Header() {
 
 	const { list = [], configCardLoading : loading = false } = useGetKamExpertiseCurrentConfig({ type: 'live' });
 
-	const liveVersionList = list?.[0] || {};
+	const liveVersionList = list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { version_number = '', audit_data = {} } = liveVersionList;
+
 	const { updated_at = '', name = '' } = audit_data;
 
 	return (

@@ -1,9 +1,14 @@
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../../../../common/EmptyState';
+import EmptyState from '../../../../../../../common/EmptyState';
 
 import OverviewCard from './OverviewCard';
 import styles from './styles.module.css';
+
+const ONE = 1;
+const TWO = 2;
+const THREE = 3;
+const FOUR = 4;
 
 function KamOverview(props) {
 	const {
@@ -14,7 +19,7 @@ function KamOverview(props) {
 	if (overviewLoading) {
 		return (
 			<div className={styles.cards}>
-				{[1, 2, 3, 4].map((item) => (
+				{[ONE, TWO, THREE, FOUR].map((item) => (
 					<OverviewCard
 						key={item}
 						overviewLoading={overviewLoading}

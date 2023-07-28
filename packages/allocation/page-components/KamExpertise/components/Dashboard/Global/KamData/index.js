@@ -1,15 +1,20 @@
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../../../common/EmptyState';
-import useGetKamExpertiseDashboard from '../../../hooks/useGetKamExpertiseDashboard';
-import useGetKamExpertiseLevelOverview from '../../../hooks/useGetKamExpertiseLevelOverview';
-import useGetKamExpertiseStatsList from '../../../hooks/useGetKamExpertiseStatsList';
+import EmptyState from '../../../../../../common/EmptyState';
+import useGetKamExpertiseDashboard from '../../../../hooks/useGetKamExpertiseDashboard';
+import useGetKamExpertiseLevelOverview from '../../../../hooks/useGetKamExpertiseLevelOverview';
+import useGetKamExpertiseStatsList from '../../../../hooks/useGetKamExpertiseStatsList';
 
 import BadgeFilterHeader from './BadgeFilterHeader';
 import KamLevelScoreCard from './KamLevelScoreCard';
 import KamOverview from './KamOverview';
 import LeaderboardList from './LeaderboardList';
 import styles from './styles.module.css';
+
+const ONE = 1;
+const TWO = 2;
+const THREE = 3;
+const FOUR = 4;
 
 function KamData(props) {
 	const { date_params = {} } = props;
@@ -45,7 +50,7 @@ function KamData(props) {
 	if (loading) {
 		return (
 			<div className={styles.cards}>
-				{[1, 2, 3, 4].map((item) => (
+				{[ONE, TWO, THREE, FOUR].map((item) => (
 					<KamLevelScoreCard key={item} loading={loading} />
 				))}
 			</div>
@@ -72,6 +77,7 @@ function KamData(props) {
 				{
 					list.map((listData, index_lvl) => (
 						<KamLevelScoreCard
+							key={listData}
 							index_lvl={index_lvl}
 							listData={listData}
 							setKamLevel={setKamLevel}

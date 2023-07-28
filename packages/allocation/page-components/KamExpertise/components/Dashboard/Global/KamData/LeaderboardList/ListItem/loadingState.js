@@ -3,6 +3,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const FOUR = 4;
+
 function LeaderboardLoading({ leaderboardList = [] }) {
 	return (
 		<div>
@@ -31,8 +33,8 @@ function LeaderboardLoading({ leaderboardList = [] }) {
 						</div>
 
 						<div className={styles.card_description_right}>
-							{Array(4).fill('').map(() => (
-								<div>
+							{Array(FOUR).fill('').map((item) => (
+								<div key={item}>
 									<div style={{ paddingBottom: '8px' }}>
 										<Placeholder
 											width="100px"

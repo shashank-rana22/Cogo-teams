@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -11,7 +12,7 @@ function CardContent({ listData, value }) {
 		average_score : percentage_score_change,
 	};
 
-	const percentage_change = PERCENTAGE_CHANGE[value] || 0;
+	const percentage_change = PERCENTAGE_CHANGE[value] || GLOBAL_CONSTANTS.zeroth_index;
 
 	return (
 		<div className={styles.container}>
@@ -23,14 +24,14 @@ function CardContent({ listData, value }) {
 				</span>
 
 				<div style={{ display: 'flex' }}>
-					{ percentage_change !== 0 ? (
+					{ percentage_change !== GLOBAL_CONSTANTS.zeroth_index ? (
 						<IcMArrowBack
 							width={20}
 							height={20}
 							style={{
-								color: percentage_change > 0
+								color: percentage_change > GLOBAL_CONSTANTS.zeroth_index
 									? '#34C759' : '#ED3726',
-								transform: percentage_change > 0
+								transform: percentage_change > GLOBAL_CONSTANTS.zeroth_index
 									? 'rotate(135deg)' : 'rotate(-45deg)',
 							}}
 						/>
