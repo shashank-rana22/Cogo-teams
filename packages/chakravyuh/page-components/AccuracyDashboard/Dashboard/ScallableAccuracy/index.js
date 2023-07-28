@@ -2,6 +2,7 @@ import * as am5 from '@amcharts/amcharts5';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
@@ -10,6 +11,7 @@ import { section_container } from '../styles.module.css';
 import styles from './styles.module.css';
 
 const STROKE_WIDTH = 2;
+const INCREMENT = 1;
 
 function ScallableAccuracy({ accuracy = [] }) {
 	const FINAL_DATA = [];
@@ -73,17 +75,33 @@ function ScallableAccuracy({ accuracy = [] }) {
 					valueYField       : field,
 					valueXField       : 'date',
 					tension           : 0.5,
-					tooltip           : am5.Tooltip.new(root, {}),
-					minBulletDistance : 10,
+					minBulletDistance : 0,
+					tooltip           : am5.Tooltip.new(root, {
+						animationDuration: 0,
+					}),
 				}),
 			);
 
-			series.bullets.push(() => am5.Bullet.new(root, {
-				sprite: am5.Circle.new(root, {
-					radius : 3,
-					fill   : series.get('fill'),
-				}),
-			}));
+			series.bullets.push(() => {
+				const circle = am5.Circle.new(root, {
+					interactive : true,
+					radius      : 0,
+					fill        : series.get('fill'),
+				});
+
+				circle.states.create('default', {
+					opacity : 0,
+					radius  : 0,
+				});
+
+				circle.states.create('hover', {
+					opacity : 1,
+					radius  : 6,
+				});
+				return am5.Bullet.new(root, {
+					sprite: circle,
+				});
+			});
 
 			series.strokes.template.set('strokeWidth', STROKE_WIDTH);
 
@@ -107,6 +125,26 @@ function ScallableAccuracy({ accuracy = [] }) {
 		yAxis.set('tooltip', am5.Tooltip.new(root, {
 			themeTags: ['axis'],
 		}));
+
+		let previousBulletSprites = [];
+
+		const cursor = chart.get('cursor');
+		function cursorMoved() {
+			for (let i = 0; i < previousBulletSprites.length; i += INCREMENT) {
+				previousBulletSprites[i].unhover();
+			}
+			previousBulletSprites = [];
+			chart.series.each((series) => {
+				const { dataItem } = series.get('tooltip');
+				if (dataItem?.bullets?.[GLOBAL_CONSTANTS.zeroth_index]) {
+					const bulletSprite = dataItem.bullets[GLOBAL_CONSTANTS.zeroth_index].get('sprite');
+					bulletSprite.hover();
+					previousBulletSprites.push(bulletSprite);
+				}
+			});
+		}
+
+		cursor.events.on('cursormoved', cursorMoved);
 
 		return () => {
 			if (root) {
