@@ -1,4 +1,4 @@
-import { Select, Toggle } from '@cogoport/components';
+import { Button, Select, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
@@ -72,30 +72,39 @@ function CogoFinancials() {
 
 			</div>
 
-			<div
-				className={styles.top_card}
-			>
+			<div className={styles.active_shipment_card}>
+				<div style={{ height: '300px', border: '2px solid' }}>
+					<Button onClick={() => setActiveShipmentCard('')}>Back</Button>
+					<h2>Main Data</h2>
+				</div>
+			</div>
+
+			{isEmpty(activeShipmentCard) && (
 				<div
-					className={styles.left_shipments_section}
+					className={styles.top_card}
 				>
-					<StatsCard
-						heading="Ongoing Shipments"
-						cardId="ongoing"
-						setActiveShipmentCard={setActiveShipmentCard}
-					/>
+					<div
+						className={styles.left_shipments_section}
+					>
+						<StatsCard
+							heading="Ongoing Shipments"
+							cardId="ongoing"
+							setActiveShipmentCard={setActiveShipmentCard}
+						/>
+						<ClosedShipmentCard
+							isDeviationVisible={false}
+							type="Operationally"
+							cardId="operational"
+							setActiveShipmentCard={setActiveShipmentCard}
+						/>
+					</div>
 					<ClosedShipmentCard
-						isDeviationVisible={false}
-						type="Operationally"
-						cardId="operational"
+						type="Financially"
+						cardId="financial"
 						setActiveShipmentCard={setActiveShipmentCard}
 					/>
 				</div>
-				<ClosedShipmentCard
-					type="Financially"
-					cardId="financial"
-					setActiveShipmentCard={setActiveShipmentCard}
-				/>
-			</div>
+			)}
 
 			{!isEmpty(activeShipmentCard) && (
 				<div className={styles.remaining_shipment_cards}>
@@ -123,7 +132,7 @@ function CogoFinancials() {
 					)}
 
 					{activeShipmentCard !== 'financial' && (
-						<div className={styles.remaining_shipment_cards}>
+						<div className={styles.single_additional}>
 							<ClosedShipmentCard
 								type="Financially"
 								cardId="financial"
@@ -137,10 +146,16 @@ function CogoFinancials() {
 
 			<div className={styles.totalStats}>
 				<div className={styles.ongoing}>
-					<StatsCard heading="Ongoing Shipments" />
+					<StatsCard
+						heading="Total Collected"
+						showPill
+					/>
 				</div>
 				<div className={styles.card}>
-					<StatsCard heading="Ongoing Shipments" />
+					<StatsCard
+						heading="Total Paid"
+						showPill
+					/>
 				</div>
 			</div>
 			<ReceivablesOutstandings />
