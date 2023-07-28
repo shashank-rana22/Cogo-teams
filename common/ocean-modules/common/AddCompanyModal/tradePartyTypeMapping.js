@@ -1,10 +1,11 @@
-const tradePartyTypeMapping = (trade_party_type = '') => {
+const SAME_AS_BOOKING_PARTY_OBJ = {
+	value : 'same_as_booking_party',
+	label : 'Same as Booking Party',
+};
+
+const tradePartyTypeMapping = (trade_party_type = '', trade_type = '') => {
 	const MAPPING = {
 		shipper: [
-			{
-				value : 'same_as_booking_party',
-				label : 'Same as Booking Party',
-			},
 			{
 				value : 'trade_partner',
 				label : 'Select Trade Partner',
@@ -45,6 +46,12 @@ const tradePartyTypeMapping = (trade_party_type = '') => {
 			},
 		],
 	};
+
+	if (trade_type === 'export') {
+		MAPPING.shipper.unshift(SAME_AS_BOOKING_PARTY_OBJ);
+	} else if (trade_type === 'import') {
+		MAPPING.consignee.unshift(SAME_AS_BOOKING_PARTY_OBJ);
+	}
 
 	return MAPPING[trade_party_type] || MAPPING.default;
 };
