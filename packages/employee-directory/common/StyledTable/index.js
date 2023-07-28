@@ -7,7 +7,7 @@ import EmptyState from '../EmptyState';
 import styles from './styles.module.css';
 
 function StyledTable({
-	columns = [], data = [], loading = false, emptyText = '', onRowClick = () => {},
+	columns = [], data = [], loading = false, emptyText = 'No Data Found', onRowClick = () => {},
 	className = '',
 }) {
 	if (isEmpty(data) && !loading) {

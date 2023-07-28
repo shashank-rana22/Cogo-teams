@@ -457,7 +457,7 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 	],
-	employee_directory: [
+	employee_directory_hrms: [
 		{
 			api          : 'list_all_squads',
 			access_type  : 'private',
@@ -485,6 +485,16 @@ const HRMS = {
 		},
 		{
 			api          : 'list_all_managers',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_stats',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_detail',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},

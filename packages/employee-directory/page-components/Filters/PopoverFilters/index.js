@@ -1,18 +1,21 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import { CONTROLS, CONTROL_MAPPING } from '../../utils/filterControls';
+import { CONTROLS, CONTROL_MAPPING, getControls } from '../../utils/filterControls';
 
 import styles from './styles.module.css';
 
-function PopoverFilters({ setFilters, setOpenFilterPopover }) {
-	const { control, handleSubmit, reset } = useForm();
+function PopoverFilters({
+	setFilters = () => {}, setOpenFilterPopover = () => {}, filters = {}, control = '',
+	handleSubmit = () => {},
+	reset = () => {},
+	setemployeeFilters = () => {},
+}) {
+	const { employee_status } = filters;
 
 	const onSubmit = (values) => {
-		// const data = getValues();
 		const FORM_VALUES = {};
 
 		CONTROLS.forEach((val) => {
@@ -21,20 +24,27 @@ function PopoverFilters({ setFilters, setOpenFilterPopover }) {
 			}
 		});
 
-		setFilters((prev) => ({ ...prev, ...FORM_VALUES }));
+		// setFilters((prev) => ({ ...prev, ...FORM_VALUES }));
+
+		setFilters((prev) => ({ ...prev, page: 1 }));
+		setemployeeFilters(FORM_VALUES);
 		setOpenFilterPopover(false);
 	};
 
 	const onReset = () => {
 		reset();
 		setFilters((prev) => ({
-			sort_by   : prev.sort_by,
-			sort_type : prev.sort_type,
-			activeTab : prev.activeTab,
-			page      : prev.page,
+			...prev,
+			page: 1,
 		}));
+		setemployeeFilters({});
 		setOpenFilterPopover(false);
 	};
+
+	const filterControls = useMemo(
+		() => getControls(employee_status),
+		[employee_status],
+	);
 
 	return (
 		<div>
@@ -51,7 +61,7 @@ function PopoverFilters({ setFilters, setOpenFilterPopover }) {
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.filter_container}>
-					{CONTROLS.map((val) => {
+					{filterControls.map((val) => {
 						const Element = CONTROL_MAPPING[val.controlType];
 						return (
 							<div key={val.name} className={styles.controller_item}>
@@ -65,7 +75,7 @@ function PopoverFilters({ setFilters, setOpenFilterPopover }) {
 				<div className={styles.btn_container}>
 					<Button
 						size="md"
-						onClick={onReset}
+						onClick={() => setOpenFilterPopover(false)}
 						className={styles.reset_btn}
 						themeType="secondary"
 					>

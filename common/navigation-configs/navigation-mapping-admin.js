@@ -1097,7 +1097,7 @@ const navigationMappingAdmin = {
 		as            : '/v2/employee-directory',
 		type          : 'link',
 		icon          : IcMDashboard,
-		possible_apis : apis.employee_directory,
+		possible_apis : apis.employee_directory_hrms,
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},

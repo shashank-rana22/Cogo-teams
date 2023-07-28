@@ -1,7 +1,20 @@
-import { Checkbox } from '@cogoport/components';
+import { Checkbox, Pill } from '@cogoport/components';
+import { getByKey, startCase } from '@cogoport/utils';
 import React from 'react';
 
+import { EMPLOYEE_STATUS } from '../../page-components/utils/constants';
+
 import styles from './styles.module.css';
+
+const getStatus = (employeeStatus) => {
+	if (employeeStatus === null) {
+		return '-';
+	}
+
+	const pillData = EMPLOYEE_STATUS[employeeStatus];
+
+	return <Pill {...pillData} size="md">{pillData.label}</Pill>;
+};
 
 const useGetColumns = ({
 	bulkEdit, handleAllSelect, handleSelectId, selectedIds,
@@ -10,12 +23,8 @@ const useGetColumns = ({
 	const columns = [
 		{
 			Header   : 'Employee Name',
-			accessor : (item) => (
-				<div>
-					{item?.employee_name}
-				</div>
-			),
-			id: 'employee_name',
+			accessor : (item) => item.name || '-',
+			id       : 'name',
 		},
 		{
 			Header   : 'COGO ID',
@@ -25,70 +34,55 @@ const useGetColumns = ({
 					onClick={() => handleEmployeeId(item)}
 					aria-hidden
 				>
-					{item?.cogo_id}
+					{item.employee_code || '-'}
 				</div>
 			),
 			id: 'cogo_id',
 		},
 		{
 			Header   : 'Designation',
-			accessor : (item) => (
-				<div>
-					{item?.designation}
-				</div>
-			),
-			id: 'designation',
+			accessor : (item) => item.designation || '-',
+			id       : 'designation',
 		},
 		{
 			Header   : 'Contact No',
-			accessor : (item) => (
-				<div>
-					{item?.contact_no}
-				</div>
-			),
-			id: 'contact_no',
+			accessor : (item) => item.mobile_number || '-',
+			id       : 'contact_no',
 		},
 		{
 			Header   : 'Email Id',
-			accessor : (item) => (
-				<div>
-					{item?.email_id}
-				</div>
-			),
-			id: 'email_id',
+			accessor : (item) => item.cogoport_email || '-',
+			id       : 'email_id',
 		},
 		{
 			Header   : 'Chapter',
-			accessor : (item) => (
-				<div>
-					{item?.chapter}
-				</div>
-			),
-			id: 'chapter',
+			accessor : (item) => item.chapter_name || '-',
+			id       : 'chapter',
 		},
 		{
 			Header   : 'Location',
-			accessor : (item) => (
-				<div>
-					{item?.location}
-				</div>
-			),
-			id: 'location',
+			accessor : (item) => startCase(item.office_location) || '-',
+			id       : 'location',
 		},
 		{
 			Header   : 'Reporting Manager',
-			accessor : (item) => (
-				<div>
-					{item?.reporting_manager}
-				</div>
-			),
-			id: 'reporting_manager',
+			accessor : (item) => getByKey(item, 'reporting_manager.name') || '-',
+			id       : 'reporting_manager',
 		},
 		{
 			Header   : 'Status',
 			accessor : (item) => (
 				<div>
-					{item?.status}
+					{item.status === 'inactive' ? (
+						<Pill
+							key="Inactive"
+							prefix=""
+							size="md"
+							color="red"
+						>
+							Inactive
+						</Pill>
+					) : getStatus(item.employee_status) }
 				</div>
 			),
 			id: 'status',

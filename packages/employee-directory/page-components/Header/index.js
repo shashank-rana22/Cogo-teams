@@ -6,17 +6,33 @@ import { EMPLOYEE_STATUS_TABS } from '../utils/constants';
 
 import styles from './styles.module.css';
 
-function Header({ activeTab = 'regular', setActiveTab = () => {} }) {
+function Header({
+	activeTab = 'confirmed', setFilters = () => {}, data = {},
+	setSearchText = '',
+	setSortType = '',
+	totalEmployeeCount = 0,
+}) {
+	const handleTabChange = (e) => {
+		setFilters({ page: 1, employee_status: e });
+		setSearchText('');
+		setSortType('');
+	};
+
 	return (
 		<div className={styles.container}>
 			<Tabs
 				tabIcon={<IcMProfile />}
 				activeTab={activeTab}
 				themeType="primary"
-				onChange={(e) => setActiveTab((prev) => ({ ...prev, activeTab: e }))}
+				onChange={(e) => handleTabChange(e)}
 			>
 				{EMPLOYEE_STATUS_TABS.map((val) => (
-					<TabPanel key={val.value} name={val.value} title={val.label} badge={3} />
+					<TabPanel
+						key={val.value}
+						name={val.value}
+						title={val.label}
+						badge={data[val.value] || totalEmployeeCount}
+					/>
 				))}
 			</Tabs>
 			<Button size="md" themeType="accent">

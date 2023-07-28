@@ -7,9 +7,11 @@ import StyledTable from '../../common/StyledTable';
 import styles from './styles.module.css';
 
 function EmployeeList({
-	selectedIds = [], columns = [], randomDataArray = [], setSelectedIds = () => {},
-	setFilters = () => {},
+	selectedIds = [], columns = [], data = [], setSelectedIds = () => {},
+	setFilters = () => {}, loading = true,
 }) {
+	const { list = [], page = 1, total_count } = data || {};
+
 	const handlePagination = (val) => {
 		setFilters((prev) => ({
 			...prev,
@@ -23,17 +25,20 @@ function EmployeeList({
 			<StyledTable
 				className={!isEmpty(selectedIds) ? 'height_500' : 'height_100'}
 				columns={columns}
-				data={randomDataArray}
+				data={list}
+				loading={loading}
 			/>
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={1}
-					totalItems={1000}
-					pageSize={5}
-					onPageChange={handlePagination}
-				/>
-			</div>
+			{!isEmpty(list) && (
+				<div className={styles.pagination_container}>
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={10}
+						onPageChange={handlePagination}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

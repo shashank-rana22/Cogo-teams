@@ -1,4 +1,5 @@
 import { Input, Select, Popover, Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { IcMAppSearch, IcMDoubleFilter, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -14,10 +15,17 @@ const LAST_ELEMENT = 1;
 function Filters({
 	setBlukActions = () => {}, setSelectedIds = () => {},
 	debounceQuery = () => {}, setFilters = () => {},
+	filters = {}, totalEmployeeCount = 0,
+	searchText = '',
+	setSearchText = () => {},
+	sortType = '',
+	setSortType = () => {},
+	setemployeeFilters = () => {},
+	employeeFilters = {},
 }) {
-	const [searchText, setSearchText] = useState('');
-	const [sortType, setSortType] = useState('');
 	const [openFilterPopover, setOpenFilterPopover] = useState(false);
+
+	const { control, handleSubmit, reset } = useForm();
 
 	const handleSearch = (e) => {
 		setSearchText(e);
@@ -50,7 +58,7 @@ function Filters({
 				<div className={styles.total_employees}>
 					Total No. of Employees :
 					{' '}
-					<span className={styles.employee_no}>812</span>
+					<span className={styles.employee_no}>{totalEmployeeCount}</span>
 				</div>
 
 				<Input
@@ -76,11 +84,20 @@ function Filters({
 				<Popover
 					placement="bottom"
 					visible={openFilterPopover}
+					onClickOutside={() => setOpenFilterPopover(false)}
+					interactive
 					render={(
-						<PopoverFilters
-							setFilters={setFilters}
-							setOpenFilterPopover={setOpenFilterPopover}
-						/>
+						openFilterPopover && (
+							<PopoverFilters
+								setFilters={setFilters}
+								setOpenFilterPopover={setOpenFilterPopover}
+								filters={filters}
+								control={control}
+								handleSubmit={handleSubmit}
+								reset={reset}
+								setemployeeFilters={setemployeeFilters}
+							/>
+						)
 					)}
 				>
 					<Button
@@ -95,6 +112,7 @@ function Filters({
 							</span>
 							<IcMDoubleFilter />
 						</div>
+						{!isEmpty(employeeFilters) && <div className={styles.filter_dot} />}
 					</Button>
 				</Popover>
 

@@ -63,5 +63,16 @@
 }
 
 .filters {
+	position: relative;
 	margin-right: 20px;
+}
+
+.filter_dot {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	width: 6px;
+	height: 6px;
+	background-color: #ee3425;
+	border-radius: 50%;
 }

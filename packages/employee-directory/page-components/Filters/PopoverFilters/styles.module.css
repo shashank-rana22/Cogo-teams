@@ -26,8 +26,7 @@
 }
 
 .controller_item {
-	flex-basis: 50%;
-	flex-grow: 0;
+	width: 50%;
 	padding: 8px;
 }
 

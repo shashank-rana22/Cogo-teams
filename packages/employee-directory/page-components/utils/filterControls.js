@@ -1,32 +1,44 @@
-import { SelectController, AsyncSelectController } from '@cogoport/forms';
+import { SelectController, AsyncSelectController, DatepickerController, InputController } from '@cogoport/forms';
 
 export const CONTROLS = [
 	{
-		name        : 'cogo_id',
+		name        : 'employee_code',
 		label       : 'Select COGO ID',
 		controlType : 'asyncSelect',
 		placeholder : 'Search ID',
 		asyncKey    : 'list_employee_details',
 		params      : {
-			filters    : { status: 'active' },
-			page_limit : 100,
+			filters                       : { status: 'active' },
+			page_limit                    : 100,
+			required_keys                 : ['employee_code'],
+			service_objects_data_required : false,
+			mappings_data_required        : true,
 		},
-		initialCall: true,
+		isClearable : true,
+		labelKey    : 'employee_code',
+		valueKey    : 'employee_code',
+		initialCall : true,
 	},
 	{
 		name        : 'designation',
 		label       : 'Select Designation',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Designation',
-		asyncKey    : 'list_operators',
+		asyncKey    : 'list_employee_details',
 		params      : {
-			filters    : { status: 'active' },
-			page_limit : 100,
+			filters                       : { status: 'active' },
+			page_limit                    : 100,
+			required_keys                 : ['designation'],
+			service_objects_data_required : false,
+			mappings_data_required        : true,
 		},
-		initialCall: true,
+		isClearable : true,
+		labelKey    : 'designation',
+		valueKey    : 'designation',
+		initialCall : true,
 	},
 	{
-		name        : 'tribe',
+		name        : 'tribe_id',
 		label       : 'Select Tribe',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Tribe',
@@ -35,10 +47,11 @@ export const CONTROLS = [
 			filters    : { status: 'active' },
 			page_limit : 100,
 		},
-		initialCall: true,
+		isClearable : true,
+		initialCall : true,
 	},
 	{
-		name        : 'squad',
+		name        : 'squad_id',
 		label       : 'Select Squad',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Squad',
@@ -47,10 +60,11 @@ export const CONTROLS = [
 			filters    : { status: 'active' },
 			page_limit : 100,
 		},
-		initialCall: true,
+		isClearable : true,
+		initialCall : true,
 	},
 	{
-		name        : 'reporting_manager',
+		name        : 'reporting_manager_id',
 		label       : 'Select Reporting Manager',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Reporting Manager',
@@ -59,22 +73,29 @@ export const CONTROLS = [
 			filters    : { status: 'active' },
 			page_limit : 100,
 		},
-		initialCall: true,
+		isClearable : true,
+		initialCall : true,
 	},
 	{
-		name        : 'location',
+		name        : 'office_location',
 		label       : 'Select Location',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Location',
-		asyncKey    : 'list_operators',
+		asyncKey    : 'list_employee_details',
 		params      : {
-			filters    : { status: 'active' },
-			page_limit : 100,
+			filters                       : { status: 'active' },
+			page_limit                    : 100,
+			required_keys                 : ['office_location'],
+			service_objects_data_required : false,
+			mappings_data_required        : true,
 		},
-		initialCall: true,
+		labelKey    : 'office_location',
+		valueKey    : 'office_location',
+		initialCall : true,
+		isClearable : true,
 	},
 	{
-		name        : 'chapter',
+		name        : 'chapter_id',
 		label       : 'Select Chapter',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Chapter',
@@ -83,10 +104,11 @@ export const CONTROLS = [
 			filters    : { status: 'active' },
 			page_limit : 100,
 		},
-		initialCall: true,
+		isClearable : true,
+		initialCall : true,
 	},
 	{
-		name        : 'sub-chapter',
+		name        : 'sub_chapter_id',
 		label       : 'Select Sub-Chapter',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Sub-Chapter',
@@ -95,9 +117,13 @@ export const CONTROLS = [
 			filters    : { status: 'active' },
 			page_limit : 100,
 		},
-		initialCall: true,
+		isClearable : true,
+		initialCall : true,
 	},
-	{
+];
+
+export const getControls = (type) => {
+	const STATUS_FILTER = {
 		name        : 'status',
 		label       : 'Select Status',
 		controlType : 'select',
@@ -115,15 +141,16 @@ export const CONTROLS = [
 				label : 'Notice Period',
 				value : 'notice_period',
 			},
-			{
-				label : 'Inactive',
-				value : 'inactive',
-			},
 		],
-	},
-];
+		isClearable: true,
+	};
+
+	return type === 'all_employees' ? [...CONTROLS, STATUS_FILTER] : CONTROLS;
+};
 
 export const CONTROL_MAPPING = {
 	select      : SelectController,
 	asyncSelect : AsyncSelectController,
+	date        : DatepickerController,
+	text        : InputController,
 };
