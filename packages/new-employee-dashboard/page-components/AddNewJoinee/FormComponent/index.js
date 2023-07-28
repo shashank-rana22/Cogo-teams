@@ -53,8 +53,6 @@ const RenderFields = ({ show, control, errors }) => (Object.keys(controls) || []
 	}
 	const DynamicController = getElementController(type);
 
-	console.log();
-
 	return (
 		<div key={name} className={styles.single_field}>
 			<div className={styles.label}>{label}</div>
