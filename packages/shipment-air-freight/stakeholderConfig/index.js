@@ -6,7 +6,6 @@ import costBookingManagerConfig from './costBookingManagerConfig.json';
 import documentDeskConfig from './documentDesk.json';
 import documentDeskManagerConfig from './documentDeskManager.json';
 import prodProcessOwnerConfig from './prodProcessOwner.json';
-import so1So2OpsConfig from './so1So2OpsConfig.json';
 import superadminConfig from './superadmin.json';
 
 const CONFIG_MAPPING = {
@@ -21,7 +20,7 @@ const CONFIG_MAPPING = {
 	coe_head              : adminConfig,
 	credit_control        : adminConfig,
 	cost_booking_manager  : costBookingManagerConfig,
-	so1_so2_ops           : so1So2OpsConfig,
+	so1_so2_ops           : documentDeskConfig,
 };
 
 const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || {};
