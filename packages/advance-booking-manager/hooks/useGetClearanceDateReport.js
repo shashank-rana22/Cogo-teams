@@ -7,6 +7,7 @@ import { useState, useEffect, useCallback } from 'react';
 import CONSTANTS from '../constants/constants';
 
 const { START_PAGE } = CONSTANTS;
+const AVAILABLE_RESERVED = 'available_reserved';
 
 const useGetClearanceDateReport = ({ activeTab }) => {
 	const [page, setPage] = useState(START_PAGE);
@@ -51,7 +52,7 @@ const useGetClearanceDateReport = ({ activeTab }) => {
 						q                   : query,
 						bookingDate         : alteredBookingDate,
 						customClearanceDate : alteredCustomClearanceDate,
-
+						status              : AVAILABLE_RESERVED,
 						page,
 					},
 				});

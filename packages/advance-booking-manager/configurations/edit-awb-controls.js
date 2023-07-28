@@ -72,7 +72,7 @@ const awbControls = ({ commodity, booking_date }) => [
 		span        : 6,
 		params      : {
 			filters: {
-				type: ['airport', 'country'],
+				type: ['airport'],
 			},
 		},
 		isClearable: true,

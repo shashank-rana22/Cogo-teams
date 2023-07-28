@@ -44,7 +44,7 @@ const getColumns = ({ selectObject, setSelectObject, OBJECT_OF_IDS, loading, all
 		Header   : 'ROLE',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.role) || '-'}
+				{startCase(item?.role_name) || '-'}
 			</div>
 		),
 	},

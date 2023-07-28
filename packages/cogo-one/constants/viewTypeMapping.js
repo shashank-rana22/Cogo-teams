@@ -96,6 +96,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query  : [where('agent_type', 'in', ['sales', 'bot'])],
 		show_relevant_templates      : ['quick_reply'],
 		mails_to_be_shown            : [],
+		bulk_assign_features         : [],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -111,6 +112,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			agent_type_filter           : false,
 			flash_revert_logs           : false,
 			global_contacts             : true,
+			sp_contacts                 : false,
+			punch_in_out                : false,
 		},
 	},
 	sales_admin: {
@@ -130,6 +133,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		show_relevant_templates      : ['quick_reply'],
 		mails_to_be_shown            : [],
+		bulk_assign_features         : [],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -145,6 +149,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			agent_type_filter           : false,
 			flash_revert_logs           : false,
 			global_contacts             : true,
+			sp_contacts                 : false,
+			punch_in_out                : false,
 		},
 	},
 	support: {
@@ -165,6 +171,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons : getKamButtons,
 		show_relevant_templates      : ['quick_reply'],
 		mails_to_be_shown            : [],
+		bulk_assign_features         : [],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -180,6 +187,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			agent_type_filter           : false,
 			flash_revert_logs           : false,
 			global_contacts             : false,
+			sp_contacts                 : false,
+			punch_in_out                : true,
 		},
 	},
 	support_admin: {
@@ -198,6 +207,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		show_relevant_templates      : ['quick_reply'],
 		mails_to_be_shown            : [],
+		bulk_assign_features         : [],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -213,6 +223,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			agent_type_filter           : false,
 			flash_revert_logs           : false,
 			global_contacts             : false,
+			sp_contacts                 : false,
+			punch_in_out                : false,
 		},
 	},
 	supply: {
@@ -235,6 +247,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		default_side_nav             : 'flash_shipment_bookings',
 		show_relevant_templates      : ['supply'],
 		mails_to_be_shown            : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
+		bulk_assign_features         : ['bulk_send_templates'],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -250,6 +263,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			agent_type_filter           : false,
 			flash_revert_logs           : true,
 			global_contacts             : false,
+			sp_contacts                 : true,
+			punch_in_out                : false,
 		},
 	},
 	supply_admin: {
@@ -271,6 +286,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		default_side_nav             : 'flash_shipment_bookings',
 		show_relevant_templates      : ['supply'],
 		mails_to_be_shown            : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
+		bulk_assign_features         : ['bulk_send_templates'],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -286,6 +302,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			agent_type_filter           : false,
 			flash_revert_logs           : true,
 			global_contacts             : false,
+			sp_contacts                 : true,
+			punch_in_out                : false,
 		},
 	},
 	shipment_specialist: {
@@ -301,6 +319,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query : [where('agent_type', 'in', ['shipment', 'bot'])],
 		show_relevant_templates     : ['quick_reply'],
 		mails_to_be_shown           : [],
+		bulk_assign_features        : [],
 		permissions                 : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -317,6 +336,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			agent_type_filter           : false,
 			flash_revert_logs           : false,
 			global_contacts             : false,
+			sp_contacts                 : false,
+			punch_in_out                : false,
 		},
 	},
 	cogoone_admin: {
@@ -335,6 +356,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		default_side_nav             : 'profile',
 		show_relevant_templates      : ['quick_reply', 'supply'],
 		mails_to_be_shown            : [],
+		bulk_assign_features         : ['bulk_auto_assign', 'bulk_send_templates'],
 		permissions                  : {
 			auto_assign                 : true,
 			bot_message_toggle          : true,
@@ -350,6 +372,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			agent_type_filter           : true,
 			flash_revert_logs           : false,
 			global_contacts             : true,
+			sp_contacts                 : true,
+			punch_in_out                : false,
 		},
 	},
 };

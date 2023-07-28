@@ -66,7 +66,7 @@ function Header({
 							<span>Show only my tasks</span>
 							<Toggle
 								checked={showMyTasks}
-								onChange={(val) => setShowMyTasks(!val)}
+								onChange={() => setShowMyTasks(!showMyTasks)}
 							/>
 						</div>
 					) : null }
@@ -80,7 +80,7 @@ function Header({
 						<Button
 							size="sm"
 							themeType="linkUi"
-							onClick={(prev) => setShowBookingReq(!prev)}
+							onClick={() => setShowBookingReq(!showBookingReq)}
 						>
 							<span className={styles.booking_req_button_text}>View</span>
 						</Button>
