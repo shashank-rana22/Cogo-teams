@@ -11,6 +11,22 @@ const KEY_INCREMENTOR = 1;
 const ONLY_ONE_ITEM = 1;
 const ROUND_VALUE = 2;
 
+const formatDoc = (item) => {
+	if (isEmpty(item)) {
+		return null;
+	}
+	return (
+		<div
+			role="button"
+			tabIndex={0}
+			className={styles.view_button}
+			onClick={() => window.open(item[GLOBAL_CONSTANTS?.zeroth_index]?.document_url, '_blank')}
+		>
+			View Document
+		</div>
+	);
+};
+
 export const renderValue = (label, detail, primary_service) => {
 	const { packages = [] } = detail || {};
 
@@ -40,7 +56,7 @@ export const renderValue = (label, detail, primary_service) => {
 	const formatCertificate = (certificates) => (
 		<div className={styles.certificate_container}>
 			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer" key={`${key + KEY_INCREMENTOR}`}>
+				<a href={item} target="_blank" rel="noreferrer" key={item}>
 					`Click to view certificate
 					{' '}
 					$
@@ -231,6 +247,18 @@ export const renderValue = (label, detail, primary_service) => {
 		case 'remarks':
 			return primary_service?.booking_preferences?.
 				[GLOBAL_CONSTANTS.zeroth_index].remarks || 'NA';
+		case 'pre_alert_shared_at':
+			return format(
+				detail?.pre_alert_shared_at,
+				GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+			);
+		case 'documents':
+			return formatDoc(detail?.documents || []);
+		case 'departed_from_port_to_icd_at':
+			return format(
+				detail?.departed_from_port_to_icd_at,
+				GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+			);
 		default:
 			return detail[label] || null;
 	}
