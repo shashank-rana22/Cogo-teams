@@ -47,7 +47,7 @@
 	}
 
 	&:last-of-type {
-		margin-right: 24px;
+		margin-right: 12px;
 	}
 }
 
@@ -114,6 +114,7 @@
 }
 
 .drop_off_text {
+	min-width: 42px;
 	color: #bf291e;
 }
 

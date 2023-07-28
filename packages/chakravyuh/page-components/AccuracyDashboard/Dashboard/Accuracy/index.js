@@ -22,6 +22,12 @@ function Accuracy({ data = [], loading = true }) {
 		rate_extension    : ['#9BA0CB'],
 		cluster_extension : ['#f37166'],
 	};
+	const isEmptyData = !data
+						|| (Array.isArray(data) && data.length === GLOBAL_CONSTANTS.zeroth_index)
+						|| (Object.values(data).reduce(
+							(total, item) => total + (item?.data?.length || GLOBAL_CONSTANTS.zeroth_index),
+							GLOBAL_CONSTANTS.zeroth_index,
+						) === GLOBAL_CONSTANTS.zeroth_index);
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Accuracy with Time</h3>
@@ -105,7 +111,7 @@ function Accuracy({ data = [], loading = true }) {
 							tooltip={CustomTooltip}
 						/>
 					)
-					:	(
+					: (
 						<div className={styles.loading}>
 							<div className={styles.legends}>
 								{
@@ -117,12 +123,7 @@ function Accuracy({ data = [], loading = true }) {
 							<Placeholder height="180px" />
 						</div>
 					)}
-				{
-				!data || (data.length === GLOBAL_CONSTANTS.zeroth_index
-				&& (
-					<NoDataState flow="column" visible={!loading} />
-				))
-				}
+				{isEmptyData && <NoDataState flow="column" visible={!loading} />}
 			</div>
 		</div>
 	);

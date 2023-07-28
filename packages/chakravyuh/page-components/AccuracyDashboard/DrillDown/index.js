@@ -1,9 +1,10 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import NoDataState from '../../../common/NoDataState';
 import useGetDrillDownStats from '../../../hooks/useGetDrillDownStats';
 import { formatBigNumbers } from '../../../utils/formatBigNumbers';
 import SupplyRates from '../RatesList';
@@ -15,8 +16,11 @@ import styles from './styles.module.css';
 const RATE_MODES = ['supply', 'predicted', 'extended'];
 const DEFAULT_DELAY = 1.8;
 const FACTOR = 1;
+const MAXIMUM_CARDS = 4;
+const THREE = 3;
+const EmptyStateData = [MAXIMUM_CARDS, THREE, THREE, FACTOR];
 
-function DrillDown({ globalFilters = {}, loading = false }) {
+function DrillDown({ globalFilters = {} }) {
 	const { mode } = globalFilters;
 	const rateModes = mode ? [mode] : RATE_MODES;
 	const [activeParent, setActiveParent] = useState(null);
@@ -25,10 +29,19 @@ function DrillDown({ globalFilters = {}, loading = false }) {
 		setActiveParent(val);
 	};
 
-	const { drillDownCards = [], totalSearches } = useGetDrillDownStats({
+	const { drillDownCards = [], totalSearches, loading } = useGetDrillDownStats({
 		globalFilters,
-		flag: !activeParent,
 	});
+
+	const emptyData = !drillDownCards || drillDownCards.length === GLOBAL_CONSTANTS.zeroth_index;
+
+	if (!loading && emptyData) {
+		return (
+			<div className={cl`${styles.main_container} ${styles.empty_state}`}>
+				<NoDataState flow="column" />
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -36,6 +49,11 @@ function DrillDown({ globalFilters = {}, loading = false }) {
 
 				{!activeParent ? (
 					<>
+						{rateModes.map((type) => (
+							<div className={styles.source_card} key={type}>
+								{startCase(type)}
+							</div>
+						))}
 						<img
 							src={!mode
 								? GLOBAL_CONSTANTS.image_url.ic_tree_multiple
@@ -44,11 +62,7 @@ function DrillDown({ globalFilters = {}, loading = false }) {
 							className={styles.tree_icon}
 						/>
 						{!loading && <BranchAnimation mode={mode} />}
-						{rateModes.map((type) => (
-							<div className={styles.source_card} key={type}>
-								{startCase(type)}
-							</div>
-						))}
+
 						<div className={cl`${styles.source_card} ${styles.main_card}`}>
 							<h4>{formatBigNumbers(totalSearches)}</h4>
 							<span>Searches</span>
@@ -65,7 +79,7 @@ function DrillDown({ globalFilters = {}, loading = false }) {
 					</Button>
 				)}
 
-				{drillDownCards.map((row, rowIdx) => {
+				{!loading && drillDownCards.map((row, rowIdx) => {
 					const isActive = activeParent === row[GLOBAL_CONSTANTS.zeroth_index].action_type;
 
 					return (!activeParent || isActive) && (
@@ -92,6 +106,24 @@ function DrillDown({ globalFilters = {}, loading = false }) {
 						</div>
 					);
 				})}
+				{
+					(loading) && EmptyStateData.map((item, rowIdx) => (
+						<div
+							className={cl`${styles.tree_branch} ${styles[`branch_${rowIdx}`]}`}
+							key={item}
+						>
+							{[...new Array(item).keys()].map((key) => (
+								<div
+									key={key}
+									className={cl`${styles.card_placeholder}
+									${key === GLOBAL_CONSTANTS.zeroth_index && styles.long_card}`}
+								>
+									<Placeholder height="100%" width="100%" />
+								</div>
+							))}
+						</div>
+					))
+				}
 			</div>
 			{activeParent
 			&& (
