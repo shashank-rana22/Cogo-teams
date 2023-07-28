@@ -25,7 +25,7 @@ const createQuestionControls = ({ watchFunctions, countryOptions }) => {
 	const controls = [
 		{
 			name        : 'name',
-			type        : 'text',
+			type        : 'input',
 			label       : 'Audience Name',
 			placeholder : 'Enter name of the user group',
 			rules       : {
@@ -38,7 +38,7 @@ const createQuestionControls = ({ watchFunctions, countryOptions }) => {
 			labelKey    : 'business_name',
 			valueKey    : 'id',
 			placeholder : 'Select Cogo Entity',
-			type        : 'asyncSelect',
+			type        : 'async-select',
 			params      : {
 				filters: {
 					status       : 'active',
