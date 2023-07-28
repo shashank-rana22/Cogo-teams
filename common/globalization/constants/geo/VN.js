@@ -541,6 +541,11 @@ export default {
 				template_default_language   : 'vietnamese',
 				supply_sender_mobile_number : '918069195980',
 			},
+			bookings: {
+				invoicing: {
+					is_invoice_mergeable: true,
+				},
+			},
 		},
 	},
 };
