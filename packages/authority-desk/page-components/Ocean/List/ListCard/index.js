@@ -33,7 +33,9 @@ function ListCard({
 				</div>
 
 				<div className={styles.status}>
-					&nbsp; Status: &nbsp;
+					{' '}
+					Status:
+					{' '}
 					{startCase(freight_service?.state)}
 				</div>
 
@@ -48,7 +50,7 @@ function ListCard({
 
 			</div>
 
-			<ShipmentExtraDetails item={item} />
+			<ShipmentExtraDetails item={item} tabsState={tabsState} />
 			<Footer item={item} role={role} tabsState={tabsState} refetch={refetch} />
 
 			{showDetails ? (
@@ -63,9 +65,9 @@ function ListCard({
 					role="presentation"
 					onClick={() => setShowDetails(!showDetails)}
 				>
-						&nbsp;
+					{' '}
 					{showDetails ? 'View Less' : 'View More'}
-						&nbsp;
+					{' '}
 				</span>
 			</div>
 		</div>

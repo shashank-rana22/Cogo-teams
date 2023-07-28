@@ -29,12 +29,12 @@ const getValidDocuments = (activeTab) => {
 	];
 };
 
-function ReleaseCard({ data = {}, bucket, refetch = () => {}, setShowModal = () => {}, activeTab = '' }) {
+function ReleaseCard({ data = {}, bucket = '', refetch = () => {}, setShowModal = () => {}, activeTab = '' }) {
 	const [open, setOpen] = useState(false);
 	const [hold, setHold] = useState(false);
 	const [surrender, setSurrender] = useState(false);
 
-	const docDetails = isEmpty(data?.bill_of_ladings) ? data?.delivery_orders : data?.bill_of_ladings;
+	const docDetails = activeTab === 'do' ? data?.delivery_orders : data?.bill_of_ladings;
 
 	const blsAvailable = (docDetails || [])?.filter(
 		(item) => !isEmpty(item?.bl_document_id || item?.do_document_id)
