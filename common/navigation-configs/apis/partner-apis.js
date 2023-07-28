@@ -12705,6 +12705,11 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'send_users_bulk_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'send_shipment_document_notification',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -12718,6 +12723,11 @@ const partner = {
 			api          : 'get_omnichannel_agent_types',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'get_available_service_providers',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'list_cogoone_flash_rates_logs',
@@ -13072,7 +13082,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'delete_payments_dunning_delete_dunning_cycle',
+			api         : 'delete_payments_dunning_dunning_cycle',
 			access_type : 'private',
 		},
 		{
@@ -13127,6 +13137,10 @@ const partner = {
 			api         : 'get_payments_dunning_card_data',
 			access_type : 'private',
 		},
+		{
+			api         : 'put_payments_dunning_status',
+			access_type : 'private',
+		},
 	],
 	ftl_admin: [
 		{
@@ -13161,6 +13175,14 @@ const partner = {
 		},
 	],
 	printing_desk: [
+		{
+			api         : 'post_air_coe_documents',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_documents',
+			access_type : 'private',
+		},
 		{
 			api         : 'get_air_coe_pending_tasks_list',
 			access_type : 'private',

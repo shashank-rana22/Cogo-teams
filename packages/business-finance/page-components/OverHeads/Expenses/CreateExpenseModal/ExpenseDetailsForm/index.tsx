@@ -199,20 +199,28 @@ function ExpenseDetailsForm({
 	}
 
 	const handleVendorChange = (obj: VendorObject) => {
+		const {
+			services,
+			business_name: BUSINESS_NAME,
+			registration_number: REGISTRATION_NUMBER,
+			id: VENDOR_ID,
+			serial_id: SERIAL_ID,
+		} = obj || {};
+
 		setCategoryOptions(
-			obj?.services?.map((service) => ({
+			services?.map((service) => ({
 				label : startCase(service?.category)?.replaceAll('_', ' '),
 				value : service?.category,
 			})),
 		);
 		setSubCategoryOptions(
-			obj?.services?.map((service) => ({
+			services?.map((service) => ({
 				label : startCase(service?.sub_category)?.replaceAll('_', ' '),
 				value : service?.sub_category,
 			})),
 		);
 
-		const branchIds = (obj?.services || []).map(
+		const branchIds = (services || []).map(
 			(service) => service?.cogoport_office_id,
 		);
 
@@ -233,10 +241,10 @@ function ExpenseDetailsForm({
 
 		setFormData((prev: object) => ({
 			...prev,
-			vendorName         : obj?.business_name,
-			registrationNumber : obj?.registration_number,
-			vendorID           : obj?.id,
-			vendorSerialId     : obj?.serial_id,
+			vendorName         : BUSINESS_NAME,
+			registrationNumber : REGISTRATION_NUMBER,
+			vendorID           : VENDOR_ID,
+			vendorSerialId     : SERIAL_ID,
 			vendorData         : obj,
 		}));
 	};

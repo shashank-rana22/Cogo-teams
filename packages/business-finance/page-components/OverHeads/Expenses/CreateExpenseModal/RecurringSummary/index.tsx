@@ -49,7 +49,7 @@ interface Props {
 
 const MAX_LENGTH = 18;
 
-function RenderSummaryData(summary) {
+function RenderSummaryData({ summary = [] }) {
 	return (
 		<div style={{ display: 'flex' }}>
 			{summary?.map((item: Summary) => (
