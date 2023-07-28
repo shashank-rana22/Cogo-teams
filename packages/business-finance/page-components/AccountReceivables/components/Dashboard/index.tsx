@@ -1,5 +1,4 @@
 import { Select } from '@cogoport/components';
-import { getEntityId } from '@cogoport/globalization/utils/getEntityId';
 
 import SegmentedControl from '../../../commons/SegmentedControl';
 import { SERVICE_PROVIDER, SHIPMENT_TYPE_OPTIONS } from '../../constants';
@@ -24,9 +23,6 @@ function Dashboard({ entityCode }) {
 		salesFunnelMonth,
 		setSalesFunnelMonth,
 	} = useReceivablesDashboard(entityCode);
-
-	const entityId = getEntityId(entityCode);
-	console.log('entityIdentityId', entityId);
 
 	const {
 		outstandingAgeData = [],
