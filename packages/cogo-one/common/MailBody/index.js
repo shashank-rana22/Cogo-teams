@@ -32,12 +32,13 @@ function MailBody({ formattedData = {}, eachMessage = {}, setMailActions = () =>
 	const { user_name = '' } = formattedData || {};
 
 	const {
-		cc = [],
-		bcc = [],
-		from = '',
+		cc_mails = [],
+		bcc_mails = [],
+		sender = '',
 		to = [],
 		subject = '',
 		message_id = '',
+		body = '',
 	} = response || {};
 
 	const { getEmailBody, message:bodyMessage = '', loading = false } = useGetMailContent({ messageId: message_id });
@@ -46,7 +47,7 @@ function MailBody({ formattedData = {}, eachMessage = {}, setMailActions = () =>
 		sent: {
 			name           : user_name,
 			subscript      : 'From',
-			subscriptArray : from,
+			subscriptArray : sender,
 		},
 		received: {
 			name           : send_by || 'agent',
@@ -60,8 +61,8 @@ function MailBody({ formattedData = {}, eachMessage = {}, setMailActions = () =>
 	const iterableSubscriptArray = [subscriptArray].flat();
 	const MAIL_ARRAY_MAPPING = [
 		{ text: subscript, mailsArray: iterableSubscriptArray },
-		{ text: 'Cc', mailsArray: cc },
-		{ text: 'Bcc', mailsArray: bcc },
+		{ text: 'Cc', mailsArray: cc_mails },
+		{ text: 'Bcc', mailsArray: bcc_mails },
 	];
 
 	return (
@@ -82,6 +83,7 @@ function MailBody({ formattedData = {}, eachMessage = {}, setMailActions = () =>
 			<div className={styles.subject}>{subject}</div>
 			{!bodyMessage ? (
 				<div onClick={getEmailBody} role="presentation" style={{ cursor: loading ? 'not-allowed' : 'pointer' }}>
+					<div className={styles.body} dangerouslySetInnerHTML={{ __html: body }} />
 					...
 				</div>
 			) : <div className={styles.body} dangerouslySetInnerHTML={{ __html: bodyMessage }} />}
@@ -94,7 +96,7 @@ function MailBody({ formattedData = {}, eachMessage = {}, setMailActions = () =>
 							themeType="secondary"
 							size="sm"
 							className={styles.styled_button}
-							onClick={() => setMailActions({ actionType: key, data: response })}
+							onClick={() => setMailActions({ actionType: key, data: eachMessage })}
 						>
 							<Icon className={styles.icon} />
 							<div className={styles.button_text}>{buttonName}</div>

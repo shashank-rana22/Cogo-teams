@@ -17,6 +17,7 @@ const DISABLE_TYPE_MAPPING = {
 	toUserEmail: {
 		reply   : true,
 		forward : false,
+		default : true,
 	},
 };
 
@@ -24,7 +25,11 @@ const getMailReciepientMapping = ({ mailActions = {} }) => {
 	const { actionType = '' } = mailActions || {};
 
 	return MAIL_RECIEPIENTS_MAPPING.map((eachItem) => (
-		{ ...eachItem, isDisabled: DISABLE_TYPE_MAPPING[eachItem?.value]?.[actionType] }
+		{
+			...eachItem,
+			isDisabled: (DISABLE_TYPE_MAPPING[eachItem?.value]?.[actionType]
+			|| DISABLE_TYPE_MAPPING[eachItem?.value]?.default),
+		}
 	));
 };
 

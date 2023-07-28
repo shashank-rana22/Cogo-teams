@@ -14,6 +14,7 @@ import { ACCEPT_FILE_MAPPING } from '../../../../../../constants';
 import getMailReciepientMapping from '../../../../../../helpers/getMailReciepientMapping';
 import useGetEmojiList from '../../../../../../hooks/useGetEmojis';
 import useSendChat from '../../../../../../hooks/useSendChat';
+import useSendOmnichannelMail from '../../../../../../hooks/useSendOmnichannelMail';
 import getFileAttributes from '../../../../../../utils/getFileAttributes';
 import mailFunction from '../../../../../../utils/mailFunctions';
 import EmojisBody from '../EmojisBody';
@@ -52,7 +53,12 @@ function Footer({
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-	const [emailState, setEmailState] = useState({});
+	const [emailState, setEmailState] = useState({
+		toUserEmail   : [],
+		subject       : '',
+		ccrecipients  : [],
+		bccrecipients : [],
+	});
 
 	const [showControl, setShowControl] = useState('');
 	const [errorValue, setErrorValue] = useState('');
@@ -74,6 +80,22 @@ function Footer({
 		formattedData,
 		assignChat,
 		canMessageOnBotSession,
+	});
+
+	const {
+		// mailLoading = false,
+		sendMail = () => {},
+	} = useSendOmnichannelMail({
+		scrollToBottom,
+		formattedData,
+		emailState,
+		draftUploadedFiles,
+		draftMessage,
+		finalUrl,
+		setDraftMessages,
+		setDraftUploadedFiles,
+		mailActions,
+		id,
 	});
 
 	const {
@@ -125,12 +147,12 @@ function Footer({
 
 	useEffect(() => {
 		const { data, actionType = '' } = mailActions || {};
-
-		const { from = '', subject = '' } = data || {};
+		const { response } = data || {};
+		const { sender = '', subject = '' } = response || {};
 
 		setEmailState(actionType === 'reply'
 			? {
-				toUserEmail : [from],
+				toUserEmail : [sender],
 				subject     : subject ? `RE: ${subject}` : '',
 			} : {
 				toUserEmail : [],
@@ -311,7 +333,7 @@ function Footer({
 					<SendActions
 						hasPermissionToEdit={hasPermissionToEdit}
 						openInstantMessages={openInstantMessages}
-						sendChatMessage={sendChatMessage}
+						sendChatMessage={sendMail}
 						messageLoading={((canMessageOnBotSession && assignLoading) || messageLoading)}
 						scrollToBottom={scrollToBottom}
 						finalUrl={finalUrl}
