@@ -7,7 +7,7 @@ import useGetDefaultFormValues from './useGetDefaultFormValues';
 const CreateAndEditObjective = forwardRef((props, ref) => {
 	const { activeMode, setActiveMode } = props;
 
-	const flushRef = () => {
+	const flushRefCallback = () => {
 		const tempRef = ref;
 		tempRef.current.container = {};
 	};
@@ -19,7 +19,7 @@ const CreateAndEditObjective = forwardRef((props, ref) => {
 			<Header
 				activeMode={activeMode}
 				setActiveMode={setActiveMode}
-				flushRef={flushRef}
+				flushRefCallback={flushRefCallback}
 			/>
 
 			<CreateAndEditForm
@@ -27,6 +27,7 @@ const CreateAndEditObjective = forwardRef((props, ref) => {
 				activeMode={activeMode}
 				setActiveMode={setActiveMode}
 				defaultFormValues={defaultFormValues}
+				flushRefCallback={flushRefCallback}
 			/>
 		</>
 	);

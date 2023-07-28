@@ -40,14 +40,14 @@ function ModeWiseButtons(props) {
 		),
 		[EDIT]: (
 			<>
-				<Button
+				{/* <Button
 					size="lg"
 					type="button"
 					themeType="tertiary"
 					style={{ marginRight: '12px' }}
 				>
 					Equally Distribute
-				</Button>
+				</Button> */}
 
 				<Button
 					size="lg"
@@ -62,6 +62,9 @@ function ModeWiseButtons(props) {
 					size="lg"
 					type="button"
 					themeType="primary"
+					loading={createLoading}
+					disabled={createDisabled}
+					onClick={() => onCreate({ distribute_equally: false })}
 				>
 					Duplicate & Send For Verification
 				</Button>

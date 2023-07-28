@@ -11,7 +11,7 @@ import useGetObjectiveUserMappings from './useGetObjectiveUserMappings';
 const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
 function SetObjectiveWeightage(props) {
-	const { activeMode, setActiveMode, setActiveStep, formValues } = props;
+	const { activeMode, setActiveMode, setActiveStep, formValues, flushRefCallback } = props;
 
 	const { list, listLoading, getNextPage, paginationData } = useGetObjectiveUserMappings({ formValues });
 
@@ -20,7 +20,7 @@ function SetObjectiveWeightage(props) {
 		setValue,
 		createLoading,
 		onCreate,
-	} = useCreateObjective({ formValues, setActiveMode });
+	} = useCreateObjective({ formValues, setActiveMode, flushRefCallback });
 
 	const { page, total } = paginationData || {};
 
@@ -38,13 +38,6 @@ function SetObjectiveWeightage(props) {
 						The sum of weightage per User must total to 100.
 					</p>
 				</div>
-
-				{/* <Button
-					type="button"
-					themeType="secondary"
-				>
-					Group Users by Objective
-				</Button> */}
 			</div>
 
 			<ListObjectiveUserMappings

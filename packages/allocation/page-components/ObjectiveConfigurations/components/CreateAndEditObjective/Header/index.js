@@ -20,7 +20,7 @@ const HEADING_MAPPING = {
 };
 
 function Header(props) {
-	const { activeMode, setActiveMode, flushRef } = props;
+	const { activeMode, setActiveMode, flushRefCallback } = props;
 
 	const { heading, subheading } = HEADING_MAPPING[activeMode];
 
@@ -36,7 +36,7 @@ function Header(props) {
 				themeType="primary"
 				onClick={() => {
 					setActiveMode(LIST);
-					flushRef();
+					flushRefCallback();
 				}}
 			>
 				Existing Objectives

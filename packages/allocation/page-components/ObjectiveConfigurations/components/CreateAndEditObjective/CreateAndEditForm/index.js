@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 const { SET_OBJECTIVE, REVIEW_OBJECTIVE, SET_OBJECTIVE_WEIGHTAGE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
 function CreateAndEditForm(props) {
-	const { activeMode, setActiveMode, defaultFormValues } = props;
+	const { activeMode, setActiveMode, defaultFormValues, flushRefCallback } = props;
 
 	const [activeStep, setActiveStep] = useState(SET_OBJECTIVE);
 
@@ -33,6 +33,7 @@ function CreateAndEditForm(props) {
 			setActiveMode={setActiveMode}
 			formValues={formValues}
 			setActiveStep={setActiveStep}
+			flushRefCallback={flushRefCallback}
 		/>,
 	};
 

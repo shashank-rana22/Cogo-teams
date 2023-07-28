@@ -10,7 +10,7 @@ import validateTotalWeightage from '../../../../helpers/validate-total-weightage
 const { LIST } = ACTIVE_MODE_KEYS_MAPPING;
 
 const useCreateObjective = (props) => {
-	const { formValues, setActiveMode } = props;
+	const { formValues, setActiveMode, flushRefCallback } = props;
 
 	const { control, setValue, getValues } = useForm();
 
@@ -39,6 +39,8 @@ const useCreateObjective = (props) => {
 			Toast.success('Objective has been created and sent for verification. Please check after some time');
 
 			setActiveMode(LIST);
+
+			flushRefCallback();
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err?.response?.data) || err?.message
