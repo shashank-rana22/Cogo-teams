@@ -3,24 +3,14 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-import ENRICHMENT_API_MAPPING from '../../../constants/enrichment-api-mapping';
-import getColumnConfiguration from '../configurations/get-columns-configuration';
 import getEnrichmentColumnsData from '../configurations/get-enrichment-columns-data';
 
-import useFeedbackResponseSubmission from './useFeedbackResponseSubmission';
-
-const useEnrichmentDashboard = ({
-	primaryTab = 'manual_enrichment',
-	secondaryTab = 'active',
-	refetchStats = () => {},
-}) => {
+const useEnrichmentDashboard = ({ secondaryTab = 'active' }) => {
 	const router = useRouter();
 
 	const { profile } = useSelector((state) => state || {});
-
-	const { onEnrichmentClick = () => {}, loadingComplete = false } = useFeedbackResponseSubmission({ refetchStats });
 
 	const geo = getGeoConstants();
 
@@ -35,25 +25,14 @@ const useEnrichmentDashboard = ({
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');
+	const [actionModal, setActionModal] = useState({
+		show        : false,
+		requestData : {},
+	});
 
 	const [selectedRowId, setSelectedRowId] = useState('');
 
-	const allowedToSeeAgentsData = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId)
-    && primaryTab === 'manual_enrichment';
-
-	const filtersMapping = useMemo(
-		() => ({
-			manual_enrichment: {
-				status  : secondaryTab,
-				user_id : selected_agent_id || undefined,
-			},
-			file_management: {
-				user_id,
-
-			},
-		}),
-		[secondaryTab, selected_agent_id, user_id],
-	);
+	const allowedToSeeAgentsData = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId);
 
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
@@ -64,19 +43,18 @@ const useEnrichmentDashboard = ({
 			user_data_required: true,
 		}),
 		filters: {
-			...filtersMapping[primaryTab],
-			q: searchQuery || undefined,
+			status  : secondaryTab,
+			user_id : selected_agent_id || undefined,
+			q       : searchQuery || undefined,
 			partner_id,
 		},
 	});
 
-	const { api: apiName, authkey } = ENRICHMENT_API_MAPPING[primaryTab];
-
 	const [{ loading, data }, refetch] = useAllocationRequest(
 		{
-			url    : `/${apiName}`,
-			method : 'get',
-			authkey,
+			url     : '/feedback_requests',
+			method  : 'get',
+			authkey : 'get_allocation_feedback_requests',
 			params,
 		},
 		{ manual: false },
@@ -100,13 +78,14 @@ const useEnrichmentDashboard = ({
 			...previousParams,
 			user_data_required : allowedToSeeAgentsData ? true : undefined,
 			filters            : {
-				...filtersMapping[primaryTab],
-				q: searchQuery || undefined,
+				status  : secondaryTab,
+				user_id : selected_agent_id || undefined,
+				q       : searchQuery || undefined,
 				partner_id,
 
 			},
 		}));
-	}, [allowedToSeeAgentsData, filtersMapping, partner_id, primaryTab, searchQuery, selected_agent_id, user_id]);
+	}, [allowedToSeeAgentsData, partner_id, searchQuery, secondaryTab, selected_agent_id, user_id]);
 
 	const handleEditDetails = (feedback_request_id, action) => {
 		router.push(`/enrichment/${feedback_request_id}?action_type=${action}`);
@@ -116,20 +95,16 @@ const useEnrichmentDashboard = ({
 		handleEditDetails,
 		selectedRowId,
 		setSelectedRowId,
-		onEnrichmentClick,
 		refetch,
-		loadingComplete,
 		secondaryTab,
 		user_id,
+		actionModal,
+		setActionModal,
 	});
-
-	const allowedColumns = getColumnConfiguration({ primaryTab });
-
-	const filteredColumns = columns.filter((listItem) => allowedColumns?.includes(listItem.id));
 
 	return {
 		refetch,
-		columns: filteredColumns,
+		columns,
 		list,
 		paginationData,
 		loading,
@@ -139,6 +114,8 @@ const useEnrichmentDashboard = ({
 		searchValue,
 		setSearchValue,
 		authRoleId,
+		actionModal,
+		setActionModal,
 	};
 };
 

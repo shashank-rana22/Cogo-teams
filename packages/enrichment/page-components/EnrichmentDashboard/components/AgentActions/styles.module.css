@@ -1,0 +1,27 @@
+.cancel_cta {
+	margin-right: 12px;
+}
+
+.container {
+    display: flex;
+	flex-direction: column;
+	padding: 24px;
+	background: #FDFBF6;
+}
+
+.flex_container {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.value {
+    width: 70%;
+    font-weight: 600;
+	color: #333;
+}
+
+.label {
+    font-size: 12px;
+    width: 30%;
+	color: #828282;
+}

@@ -1,25 +1,21 @@
-import { TabPanel, Tabs } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-import ScopeSelect from '@cogoport/scope-select';
-import { startCase } from '@cogoport/utils';
+import { Modal } from '@cogoport/components';
 import { useState } from 'react';
 
+import AgentActions from './components/AgentActions';
+import Header from './components/Header';
+import MainComponent from './components/MainComponent';
 import useEnrichmentDashboard from './hooks/useEnrichmentDashboard';
 import useEnrichmentStats from './hooks/useEnrichmentStats';
 import styles from './styles.module.css';
-import PRIMARY_TABS_MAPPING from './utils/primary-tabs-mapping';
 
 function EnrichmentDashboard() {
-	const [primaryTab, setPrimaryTab] = useState('manual_enrichment');
-
 	const [secondaryTab, setSecondaryTab] = useState('active');
 
-	const geo = getGeoConstants();
-
-	const allowedTabs = geo.navigations.enrichment.tabs;
-	const tabOptions = Object.values(PRIMARY_TABS_MAPPING);
-
-	const { stats = {}, loading: loadingStats = false, refetchStats = () => {} } = useEnrichmentStats();
+	const {
+		stats = {},
+		loading: loadingStats = false,
+		refetchStats = () => {},
+	} = useEnrichmentStats();
 
 	const {
 		refetch,
@@ -33,59 +29,68 @@ function EnrichmentDashboard() {
 		searchValue,
 		setSearchValue,
 		authRoleId,
-	} = useEnrichmentDashboard({ primaryTab, secondaryTab, setSecondaryTab, refetchStats });
+		actionModal = {},
+		setActionModal = () => {},
+	} = useEnrichmentDashboard({ secondaryTab, refetchStats });
 
 	return (
 		<div>
+			<div className={styles.header}>
+				<div className={styles.title}>Enrichment Dashboard</div>
 
-			<div className={styles.scope_select}>
-				<ScopeSelect size="md" />
+				<Header
+					refetch={refetch}
+					refetchStats={refetchStats}
+					debounceQuery={debounceQuery}
+					searchValue={searchValue}
+					setSearchValue={setSearchValue}
+					setParams={setParams}
+					primaryTab="manual_enrichment"
+					authRoleId={authRoleId}
+				/>
+
 			</div>
 
 			<div>
-				<Tabs
-					activeTab={primaryTab}
-					onChange={setPrimaryTab}
-					themeType="secondary"
-					className={styles.tabs}
-				>
-					{(tabOptions || []).map((option) => {
-						const { key = '', containerComponent: ContainerComponent = null } = option;
-
-						if ((!ContainerComponent) || !allowedTabs.includes(key)) return null;
-
-						return (
-							<TabPanel
-								name={key}
-								key={key}
-								title={startCase(key)}
-							>
-								<ContainerComponent
-									key={key}
-									refetch={refetch}
-									list={list}
-									paginationData={paginationData}
-									loading={loading}
-									setParams={setParams}
-									getNextPage={getNextPage}
-									columns={columns}
-									primaryTab={primaryTab}
-									debounceQuery={debounceQuery}
-									searchValue={searchValue}
-									setSearchValue={setSearchValue}
-									secondaryTab={secondaryTab}
-									setSecondaryTab={setSecondaryTab}
-									authRoleId={authRoleId}
-									stats={stats}
-									loadingStats={loadingStats}
-									refetchStats={refetchStats}
-								/>
-							</TabPanel>
-						);
-					})}
-
-				</Tabs>
+				<MainComponent
+					refetch={refetch}
+					list={list}
+					paginationData={paginationData}
+					loading={loading}
+					setParams={setParams}
+					getNextPage={getNextPage}
+					columns={columns}
+					primaryTab="manual_enrichment"
+					debounceQuery={debounceQuery}
+					searchValue={searchValue}
+					setSearchValue={setSearchValue}
+					secondaryTab={secondaryTab}
+					setSecondaryTab={setSecondaryTab}
+					authRoleId={authRoleId}
+					stats={stats}
+					loadingStats={loadingStats}
+					refetchStats={refetchStats}
+				/>
 			</div>
+
+			{actionModal.show && (
+				<Modal
+					size="md"
+					placement="top"
+					show={actionModal.show}
+					onClose={() => setActionModal(() => ({
+						show: false,
+					}))}
+				>
+					<AgentActions
+						actionModal={actionModal}
+						setActionModal={setActionModal}
+						refetch={refetch}
+						loading={loading}
+						refetchStats={refetchStats}
+					/>
+				</Modal>
+			)}
 
 		</div>
 	);

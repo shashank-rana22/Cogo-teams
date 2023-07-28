@@ -9,7 +9,11 @@ const getSecondaryTabOptions = () => ({
 	},
 	success: {
 		key   : 'success',
-		title : 'completed',
+		title : 'Success',
+	},
+	failed: {
+		key   : 'failed',
+		title : 'Failed',
 	},
 
 });

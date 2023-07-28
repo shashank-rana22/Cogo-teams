@@ -9,8 +9,8 @@ function EmptyState() {
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.empty_state}
 				alt="exmpty-state"
-				width={240}
-				height={180}
+				width={400}
+				height={280}
 			/>
 			<div className={styles.text}>No Data Found</div>
 		</div>

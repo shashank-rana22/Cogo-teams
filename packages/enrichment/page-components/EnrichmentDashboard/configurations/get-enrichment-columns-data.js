@@ -1,22 +1,27 @@
-import { Button, ButtonIcon, Pill, Popover } from '@cogoport/components';
+import { ButtonIcon, Pill, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils/';
 
-import UPLOAD_DOCUMENT_STATUS_MAPPING from '../../../constants/upload-document-status-mapping';
-import ActionContent from '../components/ManualEnrichment/components/ActionContent';
+import ActionContent from '../components/MainComponent/ActionContent';
 import styles from '../styles.module.css';
+
+const UPLOAD_DOCUMENT_STATUS_MAPPING = {
+	success    : 'green',
+	inactive   : 'orange',
+	processing : 'yellow',
+	processed  : 'blue',
+	failed     : 'red',
+};
 
 const getEnrichmentColumnsData = ({
 	handleEditDetails = () => {},
 	setSelectedRowId = () => {},
 	selectedRowId = '',
-	onEnrichmentClick = () => {},
-	refetch = () => {},
-	loadingComplete = false,
 	secondaryTab = 'active',
 	user_id = '',
+	setActionModal = () => {},
 }) => [
 	{
 		id       : 'id',
@@ -27,18 +32,6 @@ const getEnrichmentColumnsData = ({
 					#
 					{lead_organization?.serial_id || organization?.serial_id}
 					{' '}
-				</Pill>
-			</section>
-		),
-	},
-	{
-		id       : 'file_id',
-		Header   : 'SERIAL ID',
-		accessor : ({ serial_id }) => (
-			<section>
-				<Pill>
-					#
-					{serial_id || '-'}
 				</Pill>
 			</section>
 		),
@@ -67,38 +60,6 @@ const getEnrichmentColumnsData = ({
 		),
 	},
 	{
-		id       : 'submission_date',
-		Header   : ' SUBMISSION DATE',
-		accessor : () => <section>-</section>,
-	},
-	{
-		id       : 'file_name',
-		Header   : 'FILE NAME',
-		accessor : ({ file_name }) => (
-			<section>{startCase(file_name) || '-'}</section>
-		),
-	},
-	{
-		id       : 'upload_date',
-		Header   : 'UPLOAD DATE',
-		accessor : ({ created_at }) => (
-			<section>
-				{created_at
-					? formatDate({
-						date       : created_at,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					}) : '-'}
-
-			</section>
-		),
-	},
-	{
-		id       : 'organizations',
-		Header   : 'ORGANIZATIONS',
-		accessor : ({ organizations }) => <section>{organizations || '-'}</section>,
-	},
-	{
 		id       : 'requested_agent',
 		Header   : 'Agent',
 		accessor : ({ assigned_user = {} }) => (
@@ -111,45 +72,6 @@ const getEnrichmentColumnsData = ({
 			</section>
 		),
 
-	},
-	{
-		id       : 'num_pocs',
-		Header   : 'POCS COUNT',
-		accessor : ({ num_pocs }) => <section>{num_pocs || '-'}</section>,
-	},
-	{
-		id       : 'sheet_url',
-		Header   : 'SHEET URL',
-		accessor : ({ sheet_url }) => (
-			<section>
-				<Button
-					themeType="secondary"
-					size="md"
-					type="button"
-					disabled={sheet_url === null}
-					onClick={() => window.open(sheet_url, '_blank')}
-				>
-					Download
-				</Button>
-			</section>
-		),
-	},
-	{
-		id       : 'error_sheet_url',
-		Header   : 'ERROR SHEET URL',
-		accessor : ({ error_sheet_url }) => (
-			<section>
-				<Button
-					themeType="secondary"
-					size="md"
-					type="button"
-					disabled={!error_sheet_url}
-					onClick={() => window.open(error_sheet_url, '_blank')}
-				>
-					Download
-				</Button>
-			</section>
-		),
 	},
 	{
 		id       : 'created_at',
@@ -187,13 +109,27 @@ const getEnrichmentColumnsData = ({
 		id       : 'action',
 		Header   : <div className={styles.action_header}>Action</div>,
 		accessor : (item) => {
-			const { id, assigned_user = {} } = item;
+			const { id, assigned_user = {}, lead_organization, organization } = item;
+
+			const business_name = lead_organization?.business_name || organization?.business_name;
+			const serial_id = lead_organization?.serial_id || organization?.serial_id;
 
 			const onClickCta = (workflow) => {
 				if (['add', 'edit', 'view'].includes(workflow)) {
 					handleEditDetails(id, workflow);
 				} else {
-					onEnrichmentClick({ id, workflow, refetch });
+					setActionModal(() => ({
+						show        : true,
+						requestData : {
+							id,
+							workflow,
+							business_name,
+							serial_id,
+						},
+
+					}));
+
+					setSelectedRowId(null);
 				}
 			};
 
@@ -206,7 +142,6 @@ const getEnrichmentColumnsData = ({
 						<ActionContent
 							onClickCta={onClickCta}
 							secondaryTab={secondaryTab}
-							loadingComplete={loadingComplete}
 						/>
 					)}
 					onClickOutside={() => setSelectedRowId(null)}
