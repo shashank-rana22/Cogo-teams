@@ -1,6 +1,5 @@
 import { Popover } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -40,8 +39,8 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 
 	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
-	const sageAllowed = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('post_to_sage');
-	const cancelSupported = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
+	const sageAllowed = ENTITY_FEATURE_MAPPING[entityCode]?.feature_supported?.includes('post_to_sage');
+	const cancelSupported = ENTITY_FEATURE_MAPPING?.[entityCode]
 		?.feature_supported?.includes('cancel_e_invoice');
 
 	const cancelApproved = (cancelSupported && invoiceAdditionals?.reqCancelReason)

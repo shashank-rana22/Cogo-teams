@@ -103,7 +103,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const { labels } = ENTITY_FEATURE_MAPPING[entityCode] || {};
 	const { irn_label:irnLabel } = labels || {};
 
-	const UPLOAD_INVOICE_PERMISSION = GLOBAL_CONSTANTS.cogoport_entities[entityCode]
+	const UPLOAD_INVOICE_PERMISSION = ENTITY_FEATURE_MAPPING[entityCode]
 		?.feature_supported.includes('upload_invoice');
 
 	const handleFinalpost = () => {

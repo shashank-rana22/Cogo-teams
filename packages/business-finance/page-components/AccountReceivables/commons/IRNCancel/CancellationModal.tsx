@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 
 import CancelEinvoice from './CancellationMapping/CancelEinvoice';
 import CancelIrn from './CancellationMapping/CancelIrn';
@@ -23,9 +23,9 @@ function CancellationModal({
 }: CancelModal) {
 	const { entityCode } = itemData || {};
 
-	const CANCEL_IRN = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('cancel_irn');
+	const CANCEL_IRN = ENTITY_FEATURE_MAPPING[entityCode]?.feature_supported?.includes('cancel_irn');
 
-	const CANCEL_EINVOICE =	 GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
+	const CANCEL_EINVOICE =	 ENTITY_FEATURE_MAPPING[entityCode]
 		?.feature_supported?.includes('cancel_e_invoice');
 
 	return (
