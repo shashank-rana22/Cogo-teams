@@ -47,12 +47,11 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 					/>
 				</div>
 			</div>
-
-			{listLoading
-				? <LoadingState />
-				: (
-					<div className={styles.shipments_cards_container}>
-						{(list || []).map(
+			<div className={styles.shipments_cards_container}>
+				{listLoading
+					? <LoadingState />
+					: (
+						(list || []).map(
 							(shipmentItem) => (
 								<ShipmentCard
 									setActiveTab={setActiveTab}
@@ -62,9 +61,9 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 									setShowPocDetails={setShowPocDetails}
 								/>
 							),
-						)}
-					</div>
-				)}
+						)
+					)}
+			</div>
 
 			<div className={styles.pagination_container}>
 				<Pagination

@@ -23,7 +23,11 @@ function EmptyChatPage({
 	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
 
 	if (showShipments) {
-		return <ShipmentsHomePage setActiveTab={setActiveTab} />;
+		return (
+			<ShipmentsHomePage
+				setActiveTab={setActiveTab}
+			/>
+		);
 	}
 
 	return (
