@@ -16,7 +16,7 @@ function useStepExecution({
 
 	options,
 }) {
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [commodityUnit, setCommodityUnit] = useState({});
 	const populatedControls = populateControls(stepConfig.controls);
 
@@ -28,7 +28,6 @@ function useStepExecution({
 		shipment_data,
 		stepConfig,
 		setCommodityUnit,
-		primary_service,
 	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);
