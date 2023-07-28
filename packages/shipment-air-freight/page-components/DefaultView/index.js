@@ -7,6 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback, useEffect } from 'react';
 
+import AddService from '../../commons/AdditionalServices/components/List/AddService';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -67,6 +68,7 @@ function DefaultView() {
 		purchase: {
 			shipmentData : shipment_data,
 			servicesData : servicesList,
+			AddService,
 		},
 		tracking: {
 			shipmentData: shipment_data,
