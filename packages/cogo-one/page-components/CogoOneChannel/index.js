@@ -12,8 +12,8 @@ import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
-import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
+import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
@@ -60,7 +60,6 @@ function CogoOne() {
 	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 	const [openKamContacts, setOpenKamContacts] = useState(false);
-	const [openInactiveModal, setOpenInactiveModal] = useState(false);
 	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
@@ -78,18 +77,13 @@ function CogoOne() {
 	const {
 		fetchWorkStatus = () => {},
 		agentWorkStatus = {},
+		preferenceLoading = false,
 	} = useGetAgentPreference();
+
+	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline();
 
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
-
-	const {
-		loading: statusLoading,
-		updateUserStatus = () => {},
-	} = useCreateUserInactiveStatus({
-		fetchworkPrefernce : fetchWorkStatus,
-		setOpenModal       : setOpenInactiveModal,
-	});
 
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 
@@ -155,11 +149,8 @@ function CogoOne() {
 						workPrefernceLoading={workPrefernceLoading}
 						setOpenKamContacts={setOpenKamContacts}
 						agentStatus={agentWorkStatus}
-						statusLoading={statusLoading}
-						updateUserStatus={updateUserStatus}
-						openInactiveModal={openInactiveModal}
-						setOpenInactiveModal={setOpenInactiveModal}
 						fetchworkPrefernce={fetchWorkStatus}
+						agentTimeline={agentTimeline}
 						setSelectedAutoAssign={setSelectedAutoAssign}
 						autoAssignChats={autoAssignChats}
 						{...commonProps}
@@ -243,6 +234,11 @@ function CogoOne() {
 				<PunchInOut
 					fetchworkPrefernce={fetchWorkStatus}
 					agentStatus={agentWorkStatus}
+					data={data}
+					agentTimeline={agentTimeline}
+					preferenceLoading={preferenceLoading}
+					timelineLoading={timelineLoading}
+
 				/>
 			)}
 		</>
