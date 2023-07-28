@@ -54,7 +54,7 @@ const LEVEL_ONE = 1;
 const LEVEL_TWO = 2;
 const LEVEL_THREE = 3;
 
-function RenderSummaryData(summary) {
+function RenderSummaryData({ summary = [] }) {
 	return (
 		<div style={{ display: 'flex' }}>
 			{summary?.map((item: Summary) => (
