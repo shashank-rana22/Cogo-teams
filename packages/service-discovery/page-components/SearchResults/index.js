@@ -1,4 +1,4 @@
-import { Loader, cl, cl } from '@cogoport/components';
+import { Loader, cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
