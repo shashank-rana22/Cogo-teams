@@ -14,8 +14,6 @@ const CreateAndEditObjective = forwardRef((props, ref) => {
 
 	const { defaultFormValues, loading } = useGetDefaultFormValues({ ref });
 
-	console.log('defaultFormValues :: ', defaultFormValues);
-
 	return (
 		<>
 			<Header

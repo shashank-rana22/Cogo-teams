@@ -10,8 +10,6 @@ const useGetDefaultFormValues = (props) => {
 
 	const { current: { container } = {} } = ref || {};
 
-	console.log('container :: ', container);
-
 	const { objectiveId = '', role = {}, user = {}, partner = {} } = container || {};
 
 	const [{ data, loading }, trigger] = useAllocationRequest({
