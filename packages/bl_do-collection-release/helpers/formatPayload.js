@@ -2,24 +2,11 @@ import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-const RETURN_BL_ID_KEYS = [];
-
 const evaluateDate = (val) => {
 	if (val === 'now') {
 		return new Date();
 	}
 	return null;
-};
-
-const formatForBLIds = (item, customVal) => {
-	const bl_ids = item?.bl_ids;
-
-	(Object.keys(bl_ids) || []).forEach((id_key) => {
-		if (bl_ids[id_key] === customVal) {
-			RETURN_BL_ID_KEYS.push(id_key);
-		}
-	});
-	return RETURN_BL_ID_KEYS;
 };
 
 const evaluateTernary = (val, item, formValues) => {
@@ -62,12 +49,7 @@ const fillData = (value, item, formValues) => {
 		} else if (source === 'formValue') {
 			newValue = formValues?.[valKey] ?? null;
 		} else if (source === 'item') {
-			const [customKey, customVal] = (valKey || '').split(':');
-			if (customKey === 'bl_ids') {
-				newValue = formatForBLIds(item, customVal);
-			} else {
-				newValue = item?.[valKey];
-			}
+			newValue = item?.[valKey];
 		}
 	}
 	return newValue;
