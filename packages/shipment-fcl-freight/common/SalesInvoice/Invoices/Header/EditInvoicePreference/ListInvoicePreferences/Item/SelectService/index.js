@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 
 const MAIN_SERVICES = 'fcl_freight_service';
 
+const TAX_TOTAL_CUTOFF_VALUE = 0;
+
 function SelectService({
 	invoice = {},
 	handleServiceChange = () => {},
@@ -32,12 +34,17 @@ function SelectService({
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
 			const trade_type = MAIN_SERVICES !== service?.service_type ? service?.trade_type : null;
 
-			const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
+			let tradeType = '';
+			if (trade_type === 'export') {
+				tradeType = 'Origin';
+			} else if (trade_type === 'import') {
+				tradeType = 'Destination';
+			}
 
 			const isBas = (service?.line_items || []).some((lineItem) => lineItem?.code === 'BAS');
 
 			const invoiceAmount = formatAmount({
-				amount   : service?.service_total_discounted || 0,
+				amount   : service?.service_total_discounted,
 				currency : service?.service_total_currency,
 				options  : {
 					style           : 'currency',
@@ -93,7 +100,7 @@ function SelectService({
 						</div>
 					</Tooltip>
 				),
-				isTaxable : service?.tax_total > 0,
+				isTaxable : service?.tax_total > TAX_TOTAL_CUTOFF_VALUE,
 				value     : id_with_igst,
 				...service,
 			};
@@ -140,11 +147,13 @@ function SelectService({
 				setInvoiceCurrency={setInvoiceCurrency}
 			/>
 
-			<CheckboxGroup
-				options={options}
-				onChange={handleChange}
-				value={value}
-			/>
+			<div className={styles.checkbox_container}>
+				<CheckboxGroup
+					options={options}
+					onChange={handleChange}
+					value={value}
+				/>
+			</div>
 
 			<div className={styles.row}>
 				<Button
