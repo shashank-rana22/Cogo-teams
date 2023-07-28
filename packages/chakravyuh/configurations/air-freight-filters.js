@@ -10,7 +10,6 @@ const controls = [
 		options   : MODE_OPTIONS,
 		span      : 12,
 		className : 'filter-row-flex md',
-		rules     : { required: true },
 	},
 	{
 		name    : 'weight_slab_in_kg',
@@ -44,7 +43,6 @@ const controls = [
 		],
 		span      : 12,
 		className : 'filter-row-flex md',
-		rules     : { required: true },
 	},
 	{
 		name      : 'commodity_type',
@@ -53,7 +51,6 @@ const controls = [
 		options   : AIR_COMMODITIES,
 		span      : 12,
 		className : 'filter-row-flex md',
-		rules     : { required: true },
 	},
 	{
 		name     : 'airline',
@@ -69,7 +66,6 @@ const controls = [
 		initialCall : false,
 		span        : 6.2,
 		className   : 'shipping-line-select',
-		rules       : { required: true },
 		placeholder : 'Type here...',
 		prefix      : null,
 		size        : 'md',
@@ -80,7 +76,6 @@ const controls = [
 		type           : 'date_picker',
 		span           : 5.8,
 		className      : 'filter-row-flex md',
-		rules          : { required: true },
 		placeholder    : 'DD/MM/YYYY',
 		showTimeSelect : false,
 		prefix         : <IcMCalendar />,

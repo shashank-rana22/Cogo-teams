@@ -12,9 +12,9 @@ const MAX_LNG = 90;
 export const LOCATION_KEYS = ['origin', 'destination'];
 export const COLORS = [
 	{ weight: 0.5 },
-	{ fillColor: '#FDEBE9', color: '#EE3425', fillOpacity: 1, opacity: 0.8 },
-	{ fillColor: '#FEF3E9', color: '#F68B21', fillOpacity: 1, opacity: 0.8 },
-	{ fillColor: '#F7FAEF', color: '#849E4C', fillOpacity: 1, opacity: 0.8 },
+	{ fillColor: '#FDEBE9', color: '#EE3425', fillOpacity: 1, opacity: 0.8, accuracy: 'worse' },
+	{ fillColor: '#FEF3E9', color: '#F68B21', fillOpacity: 1, opacity: 0.8, accuracy: 'bad' },
+	{ fillColor: '#F7FAEF', color: '#849E4C', fillOpacity: 1, opacity: 0.8, accuracy: 'good' },
 ];
 
 export const SORT_OPTIONS = [
@@ -30,7 +30,7 @@ export const MAX_BOUNDS = [
 export const LAYOUT_WIDTH = 408;
 export const TIME_LIMIT = 200;
 export const PADDING_TOP = 10;
-export const ONE = 1;
+export const SECOND_IDX = 1;
 export const ITEMS = [
 	{ label: 'NA', spectrumStyle: { backgroundColor: '#f4f4f4', borderColor: '#828282' }, key: 'na' },
 	{ label: '0-40 %', spectrumStyle: { backgroundColor: '#FDEBE9', borderColor: '#EE3425' }, key: 'green' },

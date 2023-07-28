@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function Heading({
 	backView = false, setView = () => {}, heading = '', showFilters = true, showFilterText = true, globalFilters = {},
-	setGlobalFilters = () => {}, modeOptions = [],
+	setGlobalFilters = () => {},
 }) {
 	return (
 		<div className={styles.heading_container}>
@@ -25,7 +25,6 @@ function Heading({
 					showText={showFilterText}
 					globalFilters={globalFilters}
 					setGlobalFilters={setGlobalFilters}
-					modeOptions={modeOptions}
 				/>
 			)}
 		</div>

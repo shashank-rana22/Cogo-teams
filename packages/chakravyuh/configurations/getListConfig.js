@@ -1,16 +1,16 @@
-import { Button } from '@cogoport/components';
 import { IcMAir, IcMShip } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import styles from '../page-components/AccuracyDashboard/RatesList/styles.module.css';
 
 const COMMON_START_COLUMNS = [
 	{
 		Header   : 'ORIGIN',
-		accessor : ({ origin }) => {
-			const { code = '', name = '' } = origin;
+		accessor : ({ origin_port = {} }) => {
+			const { port_code = '', name = '' } = origin_port;
 			return (
 				<div className={styles.row_port_cell}>
-					<div className={styles.row_port_code}>{code}</div>
+					<div className={styles.row_port_code}>{port_code}</div>
 					<div className={styles.row_port_name}>{name}</div>
 				</div>
 			);
@@ -18,39 +18,39 @@ const COMMON_START_COLUMNS = [
 	},
 	{
 		Header   : 'DESTINATION',
-		accessor : ({ destiantion }) => {
-			const { code = '', name = '' } = destiantion;
+		accessor : ({ destination_port = {} }) => {
+			const { port_code = '', name = '' } = destination_port;
 			return (
 				<div className={styles.row_port_cell}>
-					<div className={styles.row_port_code}>{code}</div>
+					<div className={styles.row_port_code}>{port_code}</div>
 					<div className={styles.row_port_name}>{name}</div>
 				</div>
 			);
 		},
 	},
-	{
-		Header   : 'CLUSTER',
-		accessor : ({ cluster }) => {
-			const { mf = '', name = '' } = cluster;
-			return (
-				<div className={styles.row_default_cell}>
-					<div>{name}</div>
-					<div className={styles.row_cell_subtitle}>{mf}</div>
-				</div>
-			);
-		},
-	},
+	// {
+	// 	Header   : 'CLUSTER',
+	// 	accessor : ({ cluster }) => {
+	// 		const { mf = '', name = '' } = cluster;
+	// 		return (
+	// 			<div className={styles.row_default_cell}>
+	// 				<div>{name}</div>
+	// 				<div className={styles.row_cell_subtitle}>{mf}</div>
+	// 			</div>
+	// 		);
+	// 	},
+	// },
 ];
 
 const SEA_COLUMNS = [
 	{
 		Header   : 'SHIPPING LINE',
-		accessor : ({ shipping_line }) => {
-			const { name = '' } = shipping_line;
+		accessor : ({ shipping_line = {} }) => {
+			const { business_name = '' } = shipping_line;
 			return (
 				<div className={styles.row_shipping_cell}>
 					<IcMShip className={styles.ship_icon} />
-					{name}
+					{business_name}
 				</div>
 			);
 		},
@@ -59,21 +59,18 @@ const SEA_COLUMNS = [
 		Header   : 'COMMODITY',
 		accessor : ({ commodity = '' }) => (
 			<div className={styles.row_commodity_cell}>
-				<div>{commodity}</div>
+				<div>{startCase(commodity)}</div>
 			</div>
 		),
 	},
 	{
 		Header   : 'CONTAINER DETAIL',
-		accessor : ({ container_details = '' }) => {
-			const { type = '', cap = '' } = container_details;
-			return (
-				<div className={styles.row_default_cell}>
-					<div>{type}</div>
-					<div className={styles.row_cell_subtitle}>{cap}</div>
-				</div>
-			);
-		},
+		accessor : ({ container_size = '', container_type = '' }) => (
+			<div className={styles.row_default_cell}>
+				<div className={styles.row_cell_subtitle}>{startCase(container_type)}</div>
+				<div>{container_size}</div>
+			</div>
+		),
 	},
 ];
 
@@ -113,7 +110,7 @@ const COMMON_END_COLUMNS = [
 		Header   : 'RATE TYPE',
 		accessor : ({ rate_type = '' }) => (
 			<div className={styles.row_commodity_cell}>
-				<div className={styles.chip}>{rate_type}</div>
+				<div className={styles.chip}>{startCase(rate_type)}</div>
 			</div>
 		),
 	},
@@ -121,22 +118,7 @@ const COMMON_END_COLUMNS = [
 		Header   : 'DEVIATION',
 		accessor : ({ deviation = '' }) => (
 			<div className={styles.row_commodity_cell}>
-				<div className={styles.percent}>{deviation}</div>
-			</div>
-		),
-	},
-	{
-		Header   : 'ACTION',
-		accessor : () => (
-			<div className={styles.row_commodity_cell}>
-				<Button
-					onClick={(e) => e.stopPropagation()}
-					themeType="secondary"
-					className={styles.trigger_button}
-				>
-					<p>Trigger</p>
-					<p className={styles.arrow_right}>&gt;</p>
-				</Button>
+				<div className={styles.percent}>{`${deviation}%` }</div>
 			</div>
 		),
 	},

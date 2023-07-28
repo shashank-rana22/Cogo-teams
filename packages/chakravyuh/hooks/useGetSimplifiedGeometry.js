@@ -15,7 +15,7 @@ const useGetSimplifiedGeometry = ({
 
 	const getData = useCallback(async (zoom) => {
 		try {
-			trigger({
+			await trigger({
 				params: {
 					zoom,
 					filters: {

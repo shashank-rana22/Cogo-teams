@@ -20,15 +20,19 @@ export const SELECT_ICON_MAPPING = {
 
 export const TIME_RANGE_OPTIONS = [
 	{
-		label     : '1m',
+		label     : '1W',
+		date_diff : 7,
+	},
+	{
+		label     : '1M',
 		date_diff : 30,
 	},
 	{
-		label     : '3m',
+		label     : '3M',
 		date_diff : 90,
 	},
 	{
-		label     : '6m',
+		label     : '6M',
 		date_diff : 180,
 	},
 	{

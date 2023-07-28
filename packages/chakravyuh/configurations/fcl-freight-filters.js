@@ -11,7 +11,6 @@ const controls = [
 		options   : MODE_OPTIONS,
 		span      : 12,
 		className : 'filter-row-flex md',
-		rules     : { required: true },
 	},
 	{
 		name      : 'container_size',
@@ -20,7 +19,6 @@ const controls = [
 		options   : containerSize,
 		span      : 12,
 		className : 'filter-row-flex md',
-		rules     : { required: true },
 	},
 	{
 		name      : 'container_type',
@@ -29,7 +27,6 @@ const controls = [
 		options   : containerTypes,
 		span      : 12,
 		className : 'filter-row-flex md',
-		rules     : { required: true },
 	},
 	{
 		name        : 'commodity',
@@ -37,7 +34,6 @@ const controls = [
 		type        : 'multi-select',
 		span        : 12,
 		className   : 'filter-row-flex md',
-		rules       : { required: true },
 		placeholder : 'Type here...',
 		size        : 'md',
 	},
@@ -55,7 +51,6 @@ const controls = [
 		initialCall : false,
 		span        : 6.2,
 		className   : 'shipping-line-select',
-		rules       : { required: true },
 		placeholder : 'Type here...',
 		prefix      : null,
 		size        : 'md',
@@ -66,7 +61,6 @@ const controls = [
 		type           : 'date_picker',
 		span           : 5.8,
 		className      : 'filter-row-flex md',
-		rules          : { required: true },
 		placeholder    : 'DD/MM/YYYY',
 		showTimeSelect : false,
 	},

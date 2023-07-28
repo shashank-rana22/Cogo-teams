@@ -20,7 +20,7 @@ const useGetFclFreightRateStats = ({ filters }) => {
 		[trigger],
 	);
 
-	useEffect(() => () => {
+	useEffect(() => {
 		const params = getFormattedPayload(filters);
 		getStats(params);
 	}, [filters, getStats]);

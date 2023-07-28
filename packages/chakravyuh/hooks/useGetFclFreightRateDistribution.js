@@ -9,6 +9,8 @@ const useGetFclFreightDistribution = ({ filters }) => {
 		method : 'GET',
 	}, { manual: true });
 
+	const { mode, ...rest } = filters;
+
 	const getStats = useCallback(
 		async (params) => {
 			try {
@@ -20,11 +22,11 @@ const useGetFclFreightDistribution = ({ filters }) => {
 		[trigger],
 	);
 
-	useEffect(() => () => {
-		const params = getFormattedPayload(filters);
-
+	useEffect(() => {
+		const params = getFormattedPayload(rest);
 		getStats(params);
-	}, [filters, getStats]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [(JSON.stringify(rest)), getStats]);
 
 	return { data, loading };
 };

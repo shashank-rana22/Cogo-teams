@@ -4,8 +4,13 @@ import { useEffect, useCallback, useState } from 'react';
 import getFormattedPayload from '../utils/getFormattedPayload';
 
 const START_PAGE = 1;
+const KEY_TO_SEND = {
+	checkout       : 'checkout_count',
+	disliked_rates : 'dislikes_count',
+	stale_rates    : 'stale_rate',
+};
 
-const useListFclFreightRateStatistics = ({ filters }) => {
+const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 	const [page, setPage] = useState(START_PAGE);
 
 	const [{ data, loading }, trigger] = useRequest({
@@ -26,8 +31,9 @@ const useListFclFreightRateStatistics = ({ filters }) => {
 
 	useEffect(() => {
 		const params = getFormattedPayload(filters);
-		getData({ ...params, page });
-	}, [getData, filters, page]);
+		const extraFilters = KEY_TO_SEND[activeParent] ? { [KEY_TO_SEND[activeParent]]: true } : {};
+		getData({ ...params, ...extraFilters, page });
+	}, [getData, filters, page, activeParent]);
 
 	return { data, loading, page, setPage };
 };

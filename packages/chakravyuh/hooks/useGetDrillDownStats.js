@@ -12,7 +12,7 @@ const useGetDrillDownStats = ({ globalFilters = {}, flag = true }) => {
 
 	const getDrillDownStats = useCallback(async (params) => {
 		try {
-			trigger({ params });
+			await trigger({ params });
 		} catch (e) {
 			// console.error(e);
 		}
