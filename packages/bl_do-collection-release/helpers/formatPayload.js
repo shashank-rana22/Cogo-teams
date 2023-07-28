@@ -159,12 +159,12 @@ export default function getFormattedPayload({
 
 	if (inner_tab === 'knockoff_pending') {
 		const knockoffTask = (pendingTasks || []).filter(
-			(task) => task.task === 'knockoff_invoices',
+			(task) => task.task === 'knockoff_do_invoices',
 		);
 
 		if (isEmpty(knockoffTask)) {
 			Toast.error('Task not found');
-			return false;
+			return {};
 		}
 		finalPayload = {
 			id   : knockoffTask?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
@@ -184,7 +184,7 @@ export default function getFormattedPayload({
 		);
 		if (isEmpty(doTask)) {
 			Toast.error('Task not found');
-			return false;
+			return {};
 		}
 		finalPayload = {
 			id   : doTask?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
@@ -207,6 +207,7 @@ export default function getFormattedPayload({
 			}
 		} else if (finalPayload && data?.key === 'data') {
 			finalPayload.data = fillData(data?.value, item, formValues);
+
 			if (active_tab === 'bl'
 				? isEmpty(finalPayload.data?.bl_detail?.id)
 				: isEmpty(finalPayload.data?.do_detail?.id)
@@ -226,8 +227,6 @@ export default function getFormattedPayload({
 			}
 		}
 	});
-
-	finalPayload = {};
 
 	return finalPayload;
 }
