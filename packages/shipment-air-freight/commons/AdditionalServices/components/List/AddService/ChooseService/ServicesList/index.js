@@ -5,16 +5,23 @@ import Header from './CardHeader';
 import CardItem from './Carditem';
 import styles from './styles.module.css';
 
-function List({ fields, data = [] }) {
+function List({ fields = [], data = [] }) {
 	return (
 		<div className={styles.container}>
 			<Header fields={fields} />
 
 			<div className={styles.card_list}>
 				{data.length ? (
-					(data || []).map((item) => (
-						<CardItem key={item?.code} item={item} fields={fields} />
-					))
+					(data || []).map((item) => {
+						const { code = '', name = '', units = [] } = item;
+						return (
+							<CardItem
+								key={code + name + JSON.stringify(units)}
+								item={item}
+								fields={fields}
+							/>
+						);
+					})
 				) : (
 					<EmptyState />
 				)}

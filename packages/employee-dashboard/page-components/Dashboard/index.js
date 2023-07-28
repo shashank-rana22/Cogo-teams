@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 
 function EmployeeDashboard() {
 	const [ratingCycle, setRatingCycle] = useState('');
+	const [yearlyRatingCycle, setYearlyRatingCycle] = useState('2023');
 
 	const { ratingOptions, loading : ratingLoading } = useGetRatingCycle(setRatingCycle);
 	const { data, loading, refetch, openRatingForm, setOpenRatingForm } = useGetEmployeeDetails(ratingCycle);
@@ -37,6 +38,8 @@ function EmployeeDashboard() {
 						refetch={refetch}
 						openRatingForm={openRatingForm}
 						setOpenRatingForm={setOpenRatingForm}
+						yearlyRatingCycle={yearlyRatingCycle}
+						setYearlyRatingCycle={setYearlyRatingCycle}
 					/>
 				</div>
 			</div>
