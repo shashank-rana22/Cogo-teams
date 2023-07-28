@@ -70,7 +70,9 @@ function useVideoCallFirebase({
 			};
 		});
 
-		await updateVideoCallTimeline({ callActivity, duration, description, videoCallId });
+		if (videoCallId) {
+			await updateVideoCallTimeline({ callActivity, duration, description, videoCallId });
+		}
 
 		saveInACallStatus(false);
 	}, [saveInACallStatus,
