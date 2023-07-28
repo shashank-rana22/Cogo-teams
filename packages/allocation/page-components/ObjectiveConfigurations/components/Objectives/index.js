@@ -1,4 +1,5 @@
-import CreateAndEditObjective from './CreateAndEditObjective';
+import CreateAndEditObjective from '../CreateAndEditObjective';
+
 import ListObjectives from './ListObjectives';
 
 const COMPONENT_MAPPING = {
@@ -14,7 +15,7 @@ function Objectives(props) {
 
 	if (!Component) return null;
 
-	return <Component activeTabDetails={activeTabDetails} {...rest} />;
+	return <Component key={activeTabDetails.mode} activeTabDetails={activeTabDetails} {...rest} />;
 }
 
 export default Objectives;
