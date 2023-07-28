@@ -21,8 +21,8 @@ const useEditAwbNumber = ({
 	setQfilter = () => {},
 	setShowConfirm = () => {},
 	page = 1,
-	changedStatus,
-	status,
+	changedStatus = '',
+	status = '',
 }) => {
 	const { id = '' } = item;
 	const [{ loading }, trigger] = useRequest({

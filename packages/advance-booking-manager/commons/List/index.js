@@ -37,7 +37,7 @@ function List({
 	}, [loading, setPage]);
 
 	const render = () => {
-		if (loading || (finalList || []).length) {
+		if (loading || finalList.length) {
 			return (finalList || []).map((singleitem) => (
 				<ListItem
 					key={singleitem.id}

@@ -30,28 +30,27 @@ const useGetClearanceDateReport = ({ activeTab }) => {
 			date       : singleItem,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 			formatType : 'date',
-		}) || undefined);
+		}));
 
 	const handleBookingDate = (singleItem) => (
 		formatDate({
 			date       : singleItem,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 			formatType : 'date',
-		}) || undefined);
+		}));
 
 	const clearanceDateReport = useCallback(() => {
 		(async () => {
-			// eslint-disable-next-line prefer-const
-			let { bookingDate, customClearanceDate, ...rest } = filters || {};
-			bookingDate = handleBookingDate(bookingDate);
-			customClearanceDate = handleCustomClearanceDate(customClearanceDate);
+			const { bookingDate, customClearanceDate, ...rest } = filters || {};
+			const alteredBookingDate = handleBookingDate(bookingDate);
+			const alteredCustomClearanceDate = handleCustomClearanceDate(customClearanceDate);
 			try {
 				await trigger({
 					params: {
 						...rest,
-						q: query,
-						bookingDate,
-						customClearanceDate,
+						q                   : query,
+						bookingDate         : alteredBookingDate,
+						customClearanceDate : alteredCustomClearanceDate,
 
 						page,
 					},

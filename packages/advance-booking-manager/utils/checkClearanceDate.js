@@ -1,4 +1,4 @@
-const checkClearanceDate = ({ value, booking_date }) => {
+const checkClearanceDate = ({ value = '', booking_date = '' }) => {
 	if (value > booking_date) {
 		return 'Custom Clearance Date cannot be greater than booking date';
 	}

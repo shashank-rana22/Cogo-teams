@@ -6,7 +6,7 @@ import CONSTANTS from '../constants/constants';
 
 const { START_PAGE } = CONSTANTS;
 
-const useGetInventoryStock = ({ activeTab, filterData }) => {
+const useGetInventoryStock = ({ activeTab = '', filterData = {} }) => {
 	const [page, setPage] = useState(START_PAGE);
 	const [finalList, setFinalList] = useState([]);
 

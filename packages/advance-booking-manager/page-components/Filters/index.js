@@ -55,21 +55,12 @@ function Filters({ filters = {}, setFilters = () => {}, activeTab = '' }) {
 							<IcMCrossInCircle width={18} height={18} fill="#333" />
 						</Button>
 					</div>
-					{
-						activeTab === 'clearance_date_confirmation' ? (
-							<Layout
-								control={control}
-								fields={clearance_date_report_controls}
-								errors={errors}
-							/>
-						) : (
-							<Layout
-								control={control}
-								fields={controls}
-								errors={errors}
-							/>
-						)
-					}
+
+					<Layout
+						control={control}
+						fields={activeTab === 'clearance_date_confirmation' ? clearance_date_report_controls : controls}
+						errors={errors}
+					/>
 
 					<div className={styles.styled_button}>
 						<Button

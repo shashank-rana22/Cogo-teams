@@ -43,10 +43,7 @@ export const functions = {
 			`(${originAirportCode}) ${originAirport}`
 		);
 	},
-	handleDestLocation    : (singleItem) => singleItem?.destinationAirport,
-	handleAgent           : (singleItem) => singleItem?.procuredByName,
-	handleServiceProvider : (singleItem) => singleItem?.serviceProviderName,
-	handleDate            : (singleItem) => {
+	handleDate: (singleItem) => {
 		const { procuredDate } = singleItem || {};
 		return (
 			<div className={styles.overflow_text}>
@@ -70,11 +67,7 @@ export const functions = {
 			</div>
 		);
 	},
-	handleTotalStock          : (singleItem) => singleItem?.totalStock,
-	handleUsedStock           : (singleItem) => singleItem?.usedStock,
-	handleUnusedStock         : (singleItem) => singleItem?.unusedStock,
-	handleCancelledStock      : (singleItem) => singleItem?.cancelledStock,
-	handleCustomClearanceDate : (singleItem) => {
+	handleCustomClearanceDate: (singleItem) => {
 		const { customClearanceDate } = singleItem || {};
 		return (
 			<div className={styles.overflow_text}>
@@ -98,7 +91,4 @@ export const functions = {
 			</div>
 		);
 	},
-	handleAwbNumber : (singleItem) => singleItem?.awbNumber,
-	handleIataCode  : (singleItem) => singleItem?.iataCode,
-	handleAwbType   : (singleItem) => singleItem?.awbType,
 };

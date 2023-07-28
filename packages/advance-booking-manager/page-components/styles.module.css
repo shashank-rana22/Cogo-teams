@@ -58,5 +58,5 @@
 	width: 100px;
 	height: 4px;
 	content: "";
-	background: #ed3726;
+	background: var(--color-primary-error-red-2);
 }
