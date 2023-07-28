@@ -3,6 +3,7 @@
 	width: 30%;
 	height: 300px;
 	margin: 4px 10px;
+	cursor: pointer;
 	background: #fff;
 	border: 1px solid #e7e7e7;
 	border-radius: 8px;
@@ -33,7 +34,8 @@
 
 	:global {
 		.ui_pill_text {
-			color: #fff;
+			font-weight: 600;
+			color: #6fa5ab;
 		}
 	}
 }
@@ -62,6 +64,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	height: 22px;
 }
 
 .amount {
@@ -74,12 +77,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-top: 10px;
+	height: 48px;
 	font-weight: 600;
 
 	svg {
-		width: 32px;
-		height: 32px;
+		width: 28px;
+		height: 28px;
 		margin-right: 6px;
 		fill: #f9ae64;
 	}

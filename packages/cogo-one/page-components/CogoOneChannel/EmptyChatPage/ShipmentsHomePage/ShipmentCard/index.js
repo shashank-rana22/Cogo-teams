@@ -10,6 +10,36 @@ import PocContainer from './PocContainer';
 import ShippingRoute from './ShippingRoute';
 import styles from './styles.module.css';
 
+const handleShipmentClick = ({
+	importerExporterPoc = {},
+	setActiveTab = () => {},
+}) => {
+	const {
+		id: userId = '',
+		name = '',
+		email = '',
+		mobile_country_code: mobileCountryCode = '',
+		mobile_number = '',
+	} = importerExporterPoc || {};
+
+	const countryCode = mobileCountryCode.replace('+', '');
+
+	setActiveTab((prev) => ({
+		...prev,
+		hasNoFireBaseRoom : true,
+		data              : {
+			user_id                 : userId,
+			user_name               : name,
+			whatsapp_number_eformat : `+${countryCode}${mobile_number}`,
+			email,
+			channel_type            : 'whatsapp',
+			countryCode,
+			mobile_no               : `${countryCode}${mobile_number}`,
+		},
+		tab: 'message',
+	}));
+};
+
 function ShipmentCard({
 	shipmentItem = {},
 	showPocDetails = {},
@@ -21,6 +51,7 @@ function ShipmentCard({
 		serial_id = '',
 		net_total = 0,
 		net_total_price_currency = '',
+		importer_exporter_poc: importerExporterPoc = {},
 		payment_term : paymentTerm = '',
 	} = shipmentItem;
 
@@ -37,7 +68,11 @@ function ShipmentCard({
 	}
 
 	return (
-		<div className={styles.container}>
+		<div
+			role="presentation"
+			className={styles.container}
+			onClick={() => handleShipmentClick({ importerExporterPoc, setActiveTab })}
+		>
 			<div className={styles.main_block}>
 				<HeaderBlock
 					shipmentItem={shipmentItem}
@@ -77,7 +112,7 @@ function ShipmentCard({
 
 			<div className={styles.footer_block}>
 				<div className={styles.footer_left_block}>
-					<Pill size="md" color="#4BAE4F">
+					<Pill size="md" color="#CFEAED">
 						Booking Placed
 					</Pill>
 				</div>

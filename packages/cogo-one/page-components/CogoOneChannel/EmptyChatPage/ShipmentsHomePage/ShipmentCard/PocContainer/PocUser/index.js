@@ -1,36 +1,12 @@
 import { cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { IcCWhatsapp, IcMEmail, IcMCall } from '@cogoport/icons-react';
+import { IcMEmail, IcMCall } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
-
-const handleWhatsappClick = ({
-	userId = '',
-	name = '',
-	email = '',
-	countryCode = '',
-	mobileNumber = '',
-	setActiveTab = () => {},
-}) => {
-	setActiveTab((prev) => ({
-		...prev,
-		hasNoFireBaseRoom : true,
-		data              : {
-			user_id                 : userId,
-			user_name               : name,
-			whatsapp_number_eformat : `+${countryCode}${mobileNumber}`,
-			email,
-			channel_type            : 'whatsapp',
-			countryCode,
-			mobile_no               : `${countryCode}${mobileNumber}`,
-		},
-		activeTab: 'message',
-	}));
-};
 
 const handleVoiceCall = ({ mobileNumber, userId, name, countryCode, dispatch }) => {
 	if (!mobileNumber) {
@@ -55,7 +31,6 @@ const handleVoiceCall = ({ mobileNumber, userId, name, countryCode, dispatch }) 
 
 function PocUser({
 	stakeHoldersData = [],
-	setActiveTab = () => {},
 	setModalData = () => {},
 }) {
 	const dispatch = useDispatch();
@@ -75,7 +50,6 @@ function PocUser({
 					const {
 						name = '',
 						id: userId = '',
-						email = '',
 						mobile_country_code = '',
 						mobile_number: mobileNumber = '',
 					} = user || {};
@@ -94,38 +68,28 @@ function PocUser({
 								</div>
 							</div>
 
-							<IcCWhatsapp
-								className={styles.whatsapp_icon}
-								onClick={() => handleWhatsappClick({
-									userId,
-									name,
-									email,
-									countryCode,
-									mobileNumber,
-									setActiveTab,
-								})}
-							/>
+							<div>
+								{hasVoiceCallAccess && (
+									<IcMCall
+										className={styles.call_icon_styles}
+										onClick={() => handleVoiceCall({
+											mobileNumber,
+											userId,
+											name,
+											countryCode,
+											dispatch,
+										})}
+									/>
+								)}
 
-							{hasVoiceCallAccess && (
-								<IcMCall
-									className={styles.call_icon_styles}
-									onClick={() => handleVoiceCall({
-										mobileNumber,
-										userId,
-										name,
-										countryCode,
-										dispatch,
+								<IcMEmail
+									className={styles.email_icon_styles}
+									onClick={() => setModalData({
+										modalType : 'email',
+										userData  : user,
 									})}
 								/>
-							)}
-
-							<IcMEmail
-								className={styles.email_icon_styles}
-								onClick={() => setModalData({
-									modalType : 'email',
-									userData  : user,
-								})}
-							/>
+							</div>
 						</div>
 					);
 				},

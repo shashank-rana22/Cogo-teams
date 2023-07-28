@@ -117,10 +117,10 @@
 	margin-bottom: 5px;
 }
 
-.arrow_back {
-	width: 22px;
-	height: 22px;
-	margin-right: 4px;
+.home_button {
+	width: 20px;
+	height: 20px;
+	margin: 0 4px 2px 0;
 	cursor: pointer;
 	fill: #4f4f4f;
 }

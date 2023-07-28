@@ -1,39 +1,30 @@
-import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-const LOADING_STATE_CARD_COUNT = 6;
-
 function LoadingState() {
-	return ([...Array(LOADING_STATE_CARD_COUNT).keys()].map(
-		(item) => (
-			<div key={item} className={styles.container}>
-				<div className={styles.apply_all}>
-					<Placeholder height="30px" width="160px" margin="0px 10px 0px 0px" />
-					<Placeholder height="30px" width="60px" />
+	return (
+		<div className={styles.wrap}>
+			<div className={styles.animation_loader}>
+				<div className={styles.ship}>
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.cargo_ship_vector}
+						height={180}
+						width={300}
+					/>
 				</div>
-				<div className={styles.apply_all}>
-					<Placeholder type="circle" radius="60px" margin="4px 0px 0px 0px" />
-					<Placeholder height="20px" width="150px" margin="4px 0px 0px 0px" />
-				</div>
-				<div className={styles.apply_all}>
-					<Placeholder height="30px" width="110px" margin="10px 10px 0px 0px" />
-					<Placeholder height="30px" width="110px" margin="10px 0px 0px 0px" />
-				</div>
-				<div className={styles.apply_all}>
-					<Placeholder height="30px" margin="4px 10px 0px 10px" />
 
-				</div>
-				<div className={styles.net_value}>
-					<Placeholder height="30px" width="140px" margin="4px 10px 0px 0px" />
-				</div>
-				<div className={styles.net_value}>
-					<Placeholder height="20px" margin="4px 10px 0px 10px" />
-				</div>
+				<div className={styles.line} />
+				<div className={styles.line1} />
+				<div className={styles.line2} />
+				<div className={styles.line3} />
+				<div className={styles.line4} />
+				<div className={styles.line5} />
+				<div className={styles.line6} />
+				<div className={styles.line7} />
 			</div>
-		),
-	)
-
+		</div>
 	);
 }
 

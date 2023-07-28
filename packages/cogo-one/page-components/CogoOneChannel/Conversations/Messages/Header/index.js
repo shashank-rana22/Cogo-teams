@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import {
 	IcMProfile,
 	IcMRefresh,
-	IcMArrowBack,
+	IcMHome,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -91,8 +91,8 @@ function Header({
 			<div className={styles.container}>
 				<div className={styles.flex_space_between}>
 					<div className={styles.flex}>
-						<IcMArrowBack
-							className={styles.arrow_back}
+						<IcMHome
+							className={styles.home_button}
 							onClick={() => setActiveTab((prev) => ({ ...prev, data: {} }))}
 						/>
 						<TagsPopOver

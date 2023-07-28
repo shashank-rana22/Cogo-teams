@@ -1,22 +1,149 @@
-.container {
-	width: 30%;
-	height: 300px;
-	padding: 6px;
-	margin: 4px 10px;
-	background: #fff;
-	border: 1px solid #f3f3f3;
-	border-radius: 8px;
-}
-
-.apply_all {
+.wrap {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: space-evenly;
-	margin-top: 10px;
+	width: 100%;
+	height: 100%;
 }
 
-.net_value {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 10px;
+.animation_loader {
+	position: relative;
+	right: 80px;
+	padding: 16% 0;
+	margin: 0 auto;
+}
+
+.ship {
+	position: relative;
+	top: 4px;
+	animation: ship-animation 10s infinite ease;
+}
+
+.line {
+	position: relative;
+	bottom: 25px;
+	left: 328px;
+	width: 35px;
+	height: 2px;
+	background-color: #215486;
+	animation: move-toggle 1s infinite ease;
+}
+
+.line1 {
+	position: relative;
+	bottom: 27px;
+	left: 320px;
+	width: 35px;
+	height: 2px;
+	background-color: #215486;
+	animation: line-animation 5s infinite linear;
+}
+
+.line2 {
+	position: relative;
+	bottom: 29px;
+	left: 320px;
+	width: 35px;
+	height: 2px;
+	margin-left: 5px;
+	background-color: #215486;
+	animation: line-animation 5s infinite linear;
+	animation-delay: 0.5s;
+}
+
+.line3 {
+	position: relative;
+	bottom: 31px;
+	left: 320px;
+	width: 35px;
+	height: 2px;
+	margin-left: 5px;
+	background-color: #215486;
+	animation: line-animation 5s infinite linear;
+	animation-delay: 1.2s;
+}
+
+.line4 {
+	position: relative;
+	bottom: 33px;
+	left: 320px;
+	width: 35px;
+	height: 2px;
+	margin-left: 5px;
+	background-color: #215486;
+	animation: line-animation 5s infinite linear;
+	animation-delay: 1.5s;
+}
+
+.line5 {
+	position: relative;
+	bottom: 35px;
+	left: 320px;
+	width: 35px;
+	height: 2px;
+	margin-left: 5px;
+	background-color: #215486;
+	animation: line-animation 5s infinite linear;
+	animation-delay: 2s;
+}
+
+.line6 {
+	position: relative;
+	bottom: 37px;
+	left: 320px;
+	width: 35px;
+	height: 2px;
+	margin-left: 5px;
+	background-color: #215486;
+	animation: line-animation 5s infinite linear;
+	animation-delay: 2.2s;
+}
+
+.line7 {
+	position: relative;
+	bottom: 39px;
+	left: 300px;
+	width: 35px;
+	height: 2px;
+	margin-left: 5px;
+	background-color: #215486;
+	animation: move-left7 5s infinite linear;
+	animation-delay: 3s;
+}
+
+@keyframes ship-animation {
+	0% {
+		left: 100px;
+	}
+
+	50% {
+		left: 110px;
+	}
+
+	100% {
+		left: 100px;
+	}
+}
+@keyframes line-animation {
+	0% {
+		left: 320px;
+	}
+
+	100% {
+		left: 0;
+		width: 0;
+	}
+}
+@keyframes move-toggle {
+	0% {
+		left: 328px;
+	}
+
+	50% {
+		left: 326px;
+	}
+
+	100% {
+		left: 328px;
+	}
 }

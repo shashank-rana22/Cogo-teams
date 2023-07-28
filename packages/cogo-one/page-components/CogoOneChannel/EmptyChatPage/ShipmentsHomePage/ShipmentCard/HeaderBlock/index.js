@@ -10,14 +10,16 @@ import styles from './styles.module.css';
 const getButtonOptions = ({ partnerId, shipmentId }) => [
 	{
 		children : 'View Shipments',
-		onClick  : () => {
+		onClick  : (e) => {
+			e.stopPropagation();
 			const redirectUrl = `${window.location.origin}/v2/${partnerId}/shipments/${shipmentId}`;
 			window.open(redirectUrl, '_blank');
 		},
 	},
 	{
 		children : 'View Documents',
-		onClick  : () => {
+		onClick  : (e) => {
+			e.stopPropagation();
 			const redirectUrl = `${window.location.origin}/v2/${partnerId}/shipments/${shipmentId}?tab=documents`;
 			window.open(redirectUrl, '_blank');
 		},
@@ -46,7 +48,10 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
 					height={25}
 					width={25}
 					alt="message"
-					onClick={() => setShowPocDetails(shipmentItem)}
+					onClick={(e) => {
+						e.stopPropagation();
+						setShowPocDetails(shipmentItem);
+					}}
 				/>
 
 				<Popover
@@ -64,10 +69,10 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
 						height="18px"
 						width="18px"
 						cursor="pointer"
+						onClick={(e) => e.stopPropagation()}
 					/>
 				</Popover>
 			</div>
-
 		</div>
 	);
 }
