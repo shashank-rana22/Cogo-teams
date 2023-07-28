@@ -75,8 +75,9 @@ const fillData = (value, item, formValues) => {
 
 const getCurrentReleaseStatus = (item, inner_tab, formValues, active_tab) => {
 	const docs = active_tab === 'bl'
-		? item?.export_bl_details
-		: item?.import_bl_details;
+		? item?.bill_of_ladings
+		: item?.delivery_orders;
+
 	const selectedDocsLength = formValues?.ids?.length;
 
 	if (inner_tab === 'collection_pending') {
