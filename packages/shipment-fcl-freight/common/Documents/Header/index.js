@@ -72,6 +72,7 @@ function Header({
 
 					</div>
 				) : null}
+
 				{activeToggle && can_edit_documents ? (
 					<Tabs
 						activeTab={activeWallet}
