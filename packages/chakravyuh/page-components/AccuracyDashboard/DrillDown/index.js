@@ -1,5 +1,6 @@
 import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -11,13 +12,13 @@ import BranchAnimation from './BranchAnimation';
 import DrillDownCard from './DrillDownCard';
 import styles from './styles.module.css';
 
-const RATE_TYPES = ['supply', 'predicted', 'extended'];
+const RATE_MODES = ['supply', 'predicted', 'extended'];
 const DEFAULT_DELAY = 1.8;
 const FACTOR = 1;
 
-function DrillDown({ globalFilters = {} }) {
-	const { rate_type } = globalFilters;
-	const rateSources = rate_type ? [rate_type] : RATE_TYPES;
+function DrillDown({ globalFilters = {}, loading = false }) {
+	const { mode } = globalFilters;
+	const rateModes = mode ? [mode] : RATE_MODES;
 	const [activeParent, setActiveParent] = useState(null);
 
 	const handleClick = (val) => {
@@ -36,14 +37,14 @@ function DrillDown({ globalFilters = {} }) {
 				{!activeParent ? (
 					<>
 						<img
-							src={!rate_type
+							src={!mode
 								? GLOBAL_CONSTANTS.image_url.ic_tree_multiple
 								: GLOBAL_CONSTANTS.image_url.ic_tree_single}
 							alt="branches"
 							className={styles.tree_icon}
 						/>
-						<BranchAnimation rate_type={rate_type} />
-						{rateSources.map((type) => (
+						{!loading && <BranchAnimation mode={mode} />}
+						{rateModes.map((type) => (
 							<div className={styles.source_card} key={type}>
 								{startCase(type)}
 							</div>
@@ -60,6 +61,7 @@ function DrillDown({ globalFilters = {} }) {
 						onClick={() => setActiveParent(null)}
 					>
 						Show All
+						<IcMArrowDown />
 					</Button>
 				)}
 
@@ -84,6 +86,7 @@ function DrillDown({ globalFilters = {} }) {
 									isAtTop={isActive}
 									parentAction={row[colIdx - FACTOR]?.action_type || 'search'}
 									parent={row[GLOBAL_CONSTANTS.zeroth_index].action_type}
+									parentCount={row[GLOBAL_CONSTANTS.zeroth_index].rates_count}
 								/>
 							))}
 						</div>
@@ -91,7 +94,13 @@ function DrillDown({ globalFilters = {} }) {
 				})}
 			</div>
 			{activeParent
-			&& <SupplyRates />}
+			&& (
+				<SupplyRates
+					globalFilters={globalFilters}
+					activeParent={activeParent}
+					className={styles.list}
+				/>
+			)}
 		</div>
 	);
 }

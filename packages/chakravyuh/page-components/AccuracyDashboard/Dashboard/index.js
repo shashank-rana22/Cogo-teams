@@ -1,6 +1,6 @@
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import useGetFclFreightDistribution from '../../../hooks/useGetFclFreightRateDistribution';
 import useGetFclFreightRateStats from '../../../hooks/useGetFclFreightRateStats';
 import SupplyRates from '../RatesList';
 
@@ -12,12 +12,12 @@ import Views from './Views';
 
 function DashboardView(props) {
 	const { setView = () => {}, globalFilters = {} } = props;
-	const { rate_type } = globalFilters;
+	const { mode } = globalFilters;
 
 	const {
 		data, loading,
 	} = useGetFclFreightRateStats({ filters: globalFilters });
-	const { data: distribution } = useGetFclFreightDistribution({ filters: globalFilters });
+
 	const { accuracy = [], deviation = [], ...rest } = data || {};
 	return (
 		<>
@@ -28,10 +28,10 @@ function DashboardView(props) {
 				</div>
 				<div className={styles.side_container}>
 					<Views setView={setView} data={rest} loading={loading} />
-					<Distribution {...props} data={distribution} />
+					<Distribution {...props} />
 				</div>
 			</div>
-			{rate_type && <SupplyRates heading="Supply Rates" {...props} />}
+			{mode && <SupplyRates heading={`${startCase(mode)} ${mode.includes('rate') ? '' : 'Rates'}`} {...props} />}
 		</>
 	);
 }

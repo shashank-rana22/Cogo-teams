@@ -40,6 +40,11 @@
 		font-weight: 500;
 		color: #221f20;
 	}
+
+	&.loading {
+		top: 34px;
+		left: 20px;
+	}
 }
 
 .pie_chart_right_container {

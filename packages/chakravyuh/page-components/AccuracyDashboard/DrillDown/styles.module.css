@@ -10,8 +10,8 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	box-shadow: 0 0 4px rgb(44 62 80 / 20%);
-	animation: pulse var(--animation-duration) 900ms infinite;
+	box-shadow: 0 0 8px #e0e0e0;
+	animation: pulse var(--animation-duration) 500ms infinite;
 }
 
 .source_card {
@@ -26,7 +26,7 @@
 	background-color: #fff;
 	border: 1px solid #6fa5ab6c;
 	border-radius: 8px;
-	box-shadow: 0 0 6px #0a9396;
+	box-shadow: 0 0 4px #0a9396;
 }
 
 .main_container {
@@ -93,7 +93,7 @@
 		box-shadow: 0 0 6px rgb(44 62 80 / 20%);
 	}
 
-	10% {
+	50% {
 		box-shadow: 0 0 50px #0a9396;
 	}
 
@@ -114,4 +114,15 @@
 	position: absolute;
 	top: 150px;
 	left: 32px;
+
+	svg {
+		margin-left: 6px;
+	}
+}
+
+.list {
+	margin-top: 16px;
+	overflow: hidden;
+	border-radius: 12px;
+	box-shadow: 0 0 8px #e0e0e0;
 }

@@ -1,32 +1,33 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
-import { Button, cl } from '@cogoport/components';
+import { Button, Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React, { useEffect } from 'react';
 
 import { CUSTOM_THEME, usePieChartConfigs } from '../../../../constants/pie_chart_config';
+import useGetFclFreightDistribution from '../../../../hooks/useGetFclFreightRateDistribution';
+import { formatBigNumbers } from '../../../../utils/formatBigNumbers';
 import { section_header, section_container } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
-function Distribution({ globalFilters = {}, setGlobalFilters = () => {}, data = [], setModeOptions = () => {} }) {
-	const { rate_type = null } = globalFilters;
-	const { pieChartData, pieColors } = usePieChartConfigs(rate_type, data);
+const LOADING_COUNT = 5;
+function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
+	const { mode = null } = globalFilters;
+	const {
+		data = {},
+		loading = false,
+	} = useGetFclFreightDistribution({ filters: globalFilters });
+
+	const { pieChartData, pieColors } = usePieChartConfigs(mode, data);
 
 	const handlePieClick = (event) => {
-		if (!rate_type) {
-			setGlobalFilters((prev) => ({ ...prev, rate_type: event?.data?.key }));
+		if (!mode) {
+			setGlobalFilters((prev) => ({ ...prev, mode: event?.data?.key }));
 		}
 	};
 
 	const defaultView = () => {
-		setGlobalFilters((prev) => ({ ...prev, rate_type: null }));
+		setGlobalFilters((prev) => ({ ...prev, mode: null }));
 	};
-
-	useEffect(() => {
-		if (data && Object.keys(data).length > GLOBAL_CONSTANTS.zeroth_index) {
-			setModeOptions(Object.keys(data).filter((item) => item !== 'total_rates'));
-		}
-	}, [data, setModeOptions]);
 
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
@@ -76,12 +77,17 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {}, data = 
 						theme={CUSTOM_THEME}
 					/>
 				</div>
-				<div className={styles.pie_chart_middle_container}>
-					<p className={styles.pie_center_text}>Total Rates</p>
-					<p className={styles.pie_center_count}>
-						{data?.total_rates}
-					</p>
-					{ rate_type
+				{loading ? (
+					<div className={cl`${styles.pie_chart_middle_container} ${styles.loading}`}>
+						<Placeholder type="circle" radius="170px" />
+					</div>
+				) : (
+					<div className={styles.pie_chart_middle_container}>
+						<p className={styles.pie_center_text}>Total Rates</p>
+						<p className={styles.pie_center_count}>
+							{formatBigNumbers(data?.total_rates || GLOBAL_CONSTANTS.zeroth_index)}
+						</p>
+						{ mode
 					&& (
 						<Button
 							themeType="linkUi"
@@ -93,9 +99,15 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {}, data = 
 							Go Back
 						</Button>
 					)}
-				</div>
-				<div className={styles.pie_chart_right_container}>
-					{
+					</div>
+				)}
+				{loading ? (
+					<div className={cl`${styles.pie_chart_right_container} ${styles.loading}`}>
+						{[...new Array(LOADING_COUNT).keys()].map((i) => <Placeholder key={i} height="16px" />)}
+					</div>
+				) : (
+					<div className={styles.pie_chart_right_container}>
+						{
 						pieChartData.map(({ key, label, value, cancellation }, index) => (
 							<div className={styles.legend_box} key={key}>
 								<div className={styles.legend_row}>
@@ -105,11 +117,11 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {}, data = 
 									/>
 									<div className={styles.legend_text_row}>
 										<p className={styles.legend_name}>{label}</p>
-										{ !rate_type
-										&& <p className={styles.legend_rate}>{`(${value} Rates)`}</p>}
+										{ !mode
+										&& <p className={styles.legend_rate}>{`(${formatBigNumbers(value)} Rates)`}</p>}
 									</div>
 								</div>
-								{ !rate_type
+								{ !mode
 									? (
 										<p className={styles.legend_percentage}>
 											{`${cancellation} % Cancellation`}
@@ -117,13 +129,14 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {}, data = 
 									)
 									: (
 										<p className={styles.legend_percentage_dark}>
-											{`${value} Rates (${cancellation}%)`}
+											{`${formatBigNumbers(value)} Rates (${cancellation}%)`}
 										</p>
 									)}
 							</div>
 						))
 					}
-				</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

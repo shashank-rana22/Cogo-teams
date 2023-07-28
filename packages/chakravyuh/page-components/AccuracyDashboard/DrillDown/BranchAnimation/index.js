@@ -3,13 +3,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import anime from 'animejs/lib/anime.es';
 import { useRef, useEffect } from 'react';
 
-// import { ONE } from '../../../../constants/map_constants';
+import { SECOND_IDX } from '../../../../constants/map_constants';
 import { ANIMATION_CONFIG, MAPPING, LAST_INDEX, FACTOR } from '../../../../constants/svg_constants';
 import styles from '../styles.module.css';
 
-const ONE = 1;
-
-function BranchAnimation({ rate_type = null }) {
+function BranchAnimation({ mode = null }) {
 	const svgRef = useRef(null);
 
 	useEffect(() => {
@@ -51,8 +49,8 @@ function BranchAnimation({ rate_type = null }) {
 			{ANIMATION_CONFIG.map(({ parentProps, children }) => (
 				<g {...parentProps} key={parentProps.id}>
 					{children.map(({ gProps, pathProps }) => {
-						const showPath = !rate_type || !pathProps.id.includes('left')
-						|| pathProps.id.slice(-ONE) === '2';
+						const showPath = !mode || !pathProps.id.includes('left')
+						|| pathProps.id.slice(-SECOND_IDX) === '2';
 
 						return showPath && (
 							<g key={gProps.id} {...gProps}>
