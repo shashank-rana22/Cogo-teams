@@ -4,6 +4,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const NO_OF_HORIZONTAL_LINE = 5;
+
 function EmptyStateAgentActivity() {
 	return (
 		<div className={styles.empty_state}>
@@ -16,12 +18,10 @@ function EmptyStateAgentActivity() {
 					height={100}
 				/>
 			</div>
-			<div className={styles.horizontal_line} />
-			<div className={styles.horizontal_line} />
-			<div className={styles.horizontal_line} />
-			<div className={styles.horizontal_line} />
-			<div className={styles.horizontal_line} />
+			{[...Array(NO_OF_HORIZONTAL_LINE).keys()].map((key) => (
+				<div className={styles.horizontal_line} key={key} />
 
+			))}
 		</div>
 	);
 }

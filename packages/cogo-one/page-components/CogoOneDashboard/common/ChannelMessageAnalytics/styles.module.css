@@ -21,18 +21,6 @@
 	padding: 5px;
 }
 
-.socoal_icons_and_data {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding-top: 22px;
-}
-
-.name {
-	display: flex;
-	align-items: center;
-}
-
 .channel_name {
 	padding-left: 10px;
 	color: #475569;
@@ -45,18 +33,32 @@
 	transition: 0.4s;
 }
 
+.socoal_icons_and_data {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 22px;
+
+	&:hover {
+		.channel_name {
+			font-size: 16px;
+			color: #000;
+			transition: 0.4s;
+		}
+
+		.customer_nos {
+			font-size: 16px;
+			color: #000;
+			transition: 0.4s;
+		}
+	}
+}
+
+.name {
+	display: flex;
+	align-items: center;
+}
+
 .placeholder {
 	border-radius: 5px;
-}
-
-.socoal_icons_and_data:hover .channel_name {
-	font-size: 16px;
-	color: black;
-	transition: 0.4s;
-}
-
-.socoal_icons_and_data:hover .customer_nos {
-	font-size: 16px;
-	color: black;
-	transition: 0.4s;
 }

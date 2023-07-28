@@ -10,7 +10,7 @@ function CallTypeStats({ channel = [], loading = false, formatData = {} }) {
 				const { key, icon, call_type, static_data } = stat || {};
 
 				return (
-					<div className={styles.socoal_icons_and_data} key={key}>
+					<div className={styles.social_icons_and_data} key={key}>
 						<div className={styles.social_icons_and_its_name}>
 							{icon}
 							<div className={styles.social_name}>{call_type}</div>

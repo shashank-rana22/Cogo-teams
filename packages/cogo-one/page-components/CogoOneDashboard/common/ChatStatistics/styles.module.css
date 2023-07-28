@@ -10,11 +10,11 @@
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 
 	&:nth-child(3) {
-		margin-bottom: 0 !important;
+		margin-bottom: 0;
 	}
 
 	&:nth-child(4) {
-		margin-bottom: 0 !important;
+		margin-bottom: 0;
 	}
 }
 

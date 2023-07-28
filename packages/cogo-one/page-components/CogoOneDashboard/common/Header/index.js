@@ -25,7 +25,7 @@ function Header({ timeline = '', setTimeline = () => {}, setSelectedDate = () =>
 		<div className={styles.container}>
 			<div className={styles.heading}>
 				{agentId && (
-					<IcMArrowBack className={styles.back_icon} onClick={() => back()} />
+					<IcMArrowBack className={styles.back_icon} onClick={back} />
 				)}
 				<div><Image src={GLOBAL_CONSTANTS.image_url.cogo_one_logo} alt="CogoOne" width={30} height={30} /></div>
 				<div className={styles.heading_name}>ogoOne Dashboard</div>

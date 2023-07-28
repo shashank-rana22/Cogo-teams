@@ -1,11 +1,8 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import {
-	useEffect,
-	useRef,
-} from 'react';
+import { useEffect, useRef } from 'react';
 
-import checkForActiveItem from '../../../utils/calendarEntity';
+import checkForActiveItem from '../../../utils/checkForActiveItem';
 
 import styles from './styles.module.css';
 
@@ -46,7 +43,7 @@ export function CalendarEntity({
 
 	const isWeek = timeline === 'week';
 
-	const handleClick = (item) => {
+	const handleClick = ({ item }) => {
 		const { date, endDate } = item || {};
 		setSelectedItem(item?.date);
 		setSelectedDate({
@@ -67,7 +64,7 @@ export function CalendarEntity({
 
 	return (
 		<div className={cl`${styles.calendar} ${isWeek ? styles.week_calendar : ''}`}>
-			{calendarData?.map((item, index) => {
+			{(calendarData || []).map((item, index) => {
 				const { label, subLabel, key, date, endDate } = item || {};
 				const isDateEqual = checkForActiveItem({ date, endDate, timeline, selectedItem });
 
@@ -76,7 +73,7 @@ export function CalendarEntity({
 						key={key}
 						className={cl`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
 						ref={index === Number(calendarData.length - MIN_CALENDAR_DATA_LENGTH) ? middleRef : null}
-						onClick={() => handleClick(item)}
+						onClick={() => handleClick({ item })}
 						role="presentation"
 					>
 						<div className={styles.label}>

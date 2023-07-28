@@ -47,6 +47,10 @@ function CogoOneDashboard() {
 		setSelectedDate,
 	};
 
+	if (!selectedItem) {
+		return null;
+	}
+
 	return (
 		<div>
 			{selectedItem && (

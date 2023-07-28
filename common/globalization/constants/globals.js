@@ -291,9 +291,6 @@ const GLOBAL_CONSTANTS = {
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
 		increasing_arrow     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg',
-		happy_emoji          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/happy_user.svg',
-		neutral_user_emoji   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/neutral_user.svg',
-		angry_emoji          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/angry_user.svg',
 		agent_avatar_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 
 	},
@@ -520,6 +517,8 @@ const GLOBAL_CONSTANTS = {
 		import_rates : 'Import.rates@cogoport.com',
 		export_rates : 'Export.rates@cogoport.com',
 	},
+
+	days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
 };
 
 export default GLOBAL_CONSTANTS;

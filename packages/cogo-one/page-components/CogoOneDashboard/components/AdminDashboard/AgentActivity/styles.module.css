@@ -63,11 +63,9 @@
 
 .agents_nos::after {
 	position: absolute;
-	bottom: -2px;
 	left: 3px;
 	width: 90%;
 	height: 1px;
-	content: "";
 	background-color: #000;
 	transition: transform 0.25s ease-out;
 	transform: scaleX(0);
@@ -93,20 +91,12 @@
 	background: #fbf7f1;
 }
 
-.list_div {
-	display: flex;
-	flex-wrap: wrap;
-	overflow-y: scroll;
-	background: #fbf7f1;
-}
-
 .profile_box {
 	position: relative;
 	display: flex;
 	width: 29%;
 	padding: 5px;
-	margin-top: 10px;
-	margin-right: 10px;
+	margin: 10px 10px 0 0;
 	cursor: pointer;
 	background: #fff;
 	border-radius: 6px;

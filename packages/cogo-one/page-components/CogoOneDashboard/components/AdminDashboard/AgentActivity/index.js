@@ -1,5 +1,4 @@
 import { cl, Pagination } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { STATUS_WISE_AGENTS_MAPPING } from '../../../constants';
@@ -51,7 +50,7 @@ function AgentActivity({ activeTab = '', setActiveTab = () => {} }) {
 				})}
 			</div>
 
-			<div className={cl`${isEmpty(list) ? styles.main_container_lowerpart : styles.list_div}`}>
+			<div className={styles.main_container_lowerpart}>
 				{loading ? <LoaderAgentActivity /> : (
 					<MyAgents
 						list={list}

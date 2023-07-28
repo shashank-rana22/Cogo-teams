@@ -12,33 +12,33 @@ import Header from './Header';
 import LineChartLoader from './LoaderLineChart';
 import styles from './styles.module.css';
 
+function CustomToolTip({ point = {}, timeline = '' }) {
+	return (
+		<div className={styles.tooltip_box}>
+			<div className={styles.tooltip_text}>
+				<div className={styles.column}>
+					<div>Customers</div>
+					<div>{LABLE_TYPE[timeline].label}</div>
+				</div>
+				<div className={cl`${styles.column} ${styles.column_center} `}>
+					<div>:</div>
+					<div>:</div>
+				</div>
+				<div className={styles.column}>
+					<div>{point.data.y || GLOBAL_CONSTANTS.zeroth_index}</div>
+					<div>{point.data.x || GLOBAL_CONSTANTS.zeroth_index}</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
 function LineChart({
 	graph = {},
 	timeline = '',
 	loading = false,
 }) {
 	const data = chartData({ graph, timeline }) || [];
-
-	function CustomToolTip({ point = {} }) {
-		return (
-			<div className={styles.tooltip_box}>
-				<div className={styles.tooltip_text}>
-					<div className={styles.column}>
-						<div>Customers</div>
-						<div>{LABLE_TYPE[timeline].label}</div>
-					</div>
-					<div className={cl`${styles.column} ${styles.column_center} `}>
-						<div>:</div>
-						<div>:</div>
-					</div>
-					<div className={styles.column}>
-						<div>{point.data.y || GLOBAL_CONSTANTS.zeroth_index}</div>
-						<div>{point.data.x || GLOBAL_CONSTANTS.zeroth_index}</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
 
 	if (loading) {
 		return <LineChartLoader />;
@@ -92,7 +92,7 @@ function LineChart({
 						pointBorderColor={{ from: 'serieColor' }}
 						pointLabelYOffset={-12}
 						useMesh
-						tooltip={({ point }) => <CustomToolTip point={point} />}
+						tooltip={({ point }) => <CustomToolTip point={point} timeline={timeline} />}
 					/>
 				</div>
 			)}

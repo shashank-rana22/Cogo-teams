@@ -76,7 +76,7 @@
 	padding: 5px;
 }
 
-.socoal_icons_and_data {
+.social_icons_and_data {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -104,13 +104,13 @@
 	border-radius: 5px;
 }
 
-.socoal_icons_and_data:hover .social_name {
+.social_icons_and_data:hover .social_name {
 	font-size: 16px;
 	color: black;
 	transition: 0.4s;
 }
 
-.socoal_icons_and_data:hover .customer_nos {
+.social_icons_and_data:hover .customer_nos {
 	font-size: 16px;
 	color: black;
 	transition: 0.4s;

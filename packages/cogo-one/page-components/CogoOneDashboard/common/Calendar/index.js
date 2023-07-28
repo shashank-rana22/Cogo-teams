@@ -3,7 +3,7 @@ import { IcMArrowDoubleLeft, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { FORMAT_TYPE } from '../../constants';
-import useRenderCalender from '../../utils/renderCalender';
+import useRenderCalender from '../../hooks/useRenderCalender';
 
 import { CalendarEntity } from './Entity';
 import styles from './styles.module.css';
@@ -49,11 +49,11 @@ function Calendar(props) {
 		}
 	};
 
-	const loadData = useCallback(({ func }) => {
+	const loadData = useCallback(({ timelineFunction = () => {} }) => {
 		const NEW_DATA = [];
 
 		for (let i = 0; i < pagination * MIN_NO_OF_DAYS; i += DAY_NUMBER) {
-			NEW_DATA.push(func(i));
+			NEW_DATA.push(timelineFunction(i));
 		}
 
 		const formatSubLabel = (item) => formatDate({
@@ -92,10 +92,10 @@ function Calendar(props) {
 	const doPagination = useCallback(() => {
 		setCalendarData([]);
 		if (timeline === 'day') {
-			loadData({ func: calcDate });
+			loadData({ timelineFunction: calcDate });
 		} else if (timeline === 'month') {
-			loadData({ func: calcMonth });
-		} else loadData({ func: calcWeek });
+			loadData({ timelineFunction: calcMonth });
+		} else loadData({ timelineFunction: calcWeek });
 	}, [setCalendarData, timeline, loadData, calcDate, calcMonth, calcWeek]);
 
 	useEffect(() => {
@@ -110,9 +110,9 @@ function Calendar(props) {
 
 	return (
 		<div className={styles.calendar}>
-			<button className={styles.nav_btn} disabled>
+			<div className={styles.nav_btn}>
 				<IcMArrowDoubleRight />
-			</button>
+			</div>
 			<div
 				ref={calendarRef}
 				onScroll={handleScroll}
@@ -129,9 +129,9 @@ function Calendar(props) {
 					setSelectedDate={setSelectedDate}
 				/>
 			</div>
-			<button disabled className={styles.nav_btn}>
+			<div className={styles.nav_btn}>
 				<IcMArrowDoubleLeft />
-			</button>
+			</div>
 		</div>
 	);
 }

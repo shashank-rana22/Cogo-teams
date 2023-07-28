@@ -1,14 +1,14 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import { ESCALATION_ACTIVITY } from '../../../../constants';
-
 import styles from './styles.module.css';
+
+const NO_OF_PLACHOLDER_ROW = 7;
 
 function LoaderEscalation() {
 	return (
 		<>
-			{ESCALATION_ACTIVITY.map((val) => (
+			{[...Array(NO_OF_PLACHOLDER_ROW).keys()].map((val) => (
 				<div key={val.id} className={styles.loader_box}>
 					<div className={styles.left_loader}>
 						<Placeholder

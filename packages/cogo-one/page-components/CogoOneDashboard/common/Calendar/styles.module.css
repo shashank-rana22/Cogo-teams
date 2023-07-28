@@ -7,10 +7,10 @@
 .calendar_entity {
 	width: calc(100% - 33px);
 	overflow: scroll;
-}
 
-.calendar_entity::-webkit-scrollbar {
-	display: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .nav_btn {
@@ -24,8 +24,4 @@
 	background: none;
 	border: none;
 	outline: none;
-}
-
-.inactive {
-	cursor: not-allowed;
 }

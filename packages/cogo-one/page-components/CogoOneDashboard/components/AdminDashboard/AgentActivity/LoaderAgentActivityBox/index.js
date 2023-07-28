@@ -1,15 +1,15 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import { AGENT_ACTIVITY } from '../../../../constants';
-
 import styles from './styles.module.css';
+
+const NO_OF_PLACHOLDER_ROW = 2;
 
 function LoaderAgentActivity() {
 	return (
 		<div className={styles.main_box}>
-			{AGENT_ACTIVITY.map((val) => (
-				<div key={val.id} className={styles.loader_box}>
+			{[...Array(NO_OF_PLACHOLDER_ROW).keys()].map((val) => (
+				<div key={val} className={styles.loader_box}>
 					<Placeholder
 						width="270px"
 						height="55px"

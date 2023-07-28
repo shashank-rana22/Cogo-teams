@@ -1,20 +1,20 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
+import { IcMVeryHappy, IcMAverage, IcMVerySad } from '@cogoport/icons-react';
 
 export const SATIFICATION_IMAGE_MAPPING = [
 	{
 		key   : 'happy_customers',
 		label : 'Happy Customers',
-		icon  : <Image src={GLOBAL_CONSTANTS.image_url.happy_emoji} alt="very-happy" width={25} height={25} />,
+		icon  : <IcMVeryHappy width={25} height={25} fill="#ABCD62" />,
 	}, {
 		key   : 'neutral_customers',
 		label : 'Neutral Customers',
-		icon  : <Image src={GLOBAL_CONSTANTS.image_url.neutral_user_emoji} alt="happy" width={25} height={25} />,
+		icon  : <IcMAverage fill="#FCDC00" width={25} height={25} />,
 
 	}, {
 		key   : 'sad_customers',
 		label : 'Sad Customers',
-		icon  : <Image src={GLOBAL_CONSTANTS.image_url.angry_emoji} alt="sad" width={25} height={25} />,
+		icon  : <IcMVerySad fill="#EE3425" width={25} height={25} />,
 
 	},
 ];
@@ -75,57 +75,6 @@ export const STATUS_WISE_AGENTS_MAPPING = [
 	{
 		label : 'On Break Agents',
 		name  : 'break',
-	},
-];
-
-export const ESCALATION_ACTIVITY = [
-	{
-		id: 'eas1',
-	},
-	{
-		id: 'eas2',
-	},
-	{
-		id: 'eas3',
-	},
-	{
-		id: 'eas4',
-	},
-	{
-		id: 'eas5',
-	},
-	{
-		id: 'eas6',
-	},
-	{
-		id: 'eas7',
-	},
-];
-
-export const PERFORMANCE_ACTIVITY = [
-	{
-		id: 'pas1',
-	},
-	{
-		id: 'pas2',
-	},
-	{
-		id: 'pas3',
-	},
-	{
-		id: 'pas4',
-	},
-	{
-		id: 'pas5',
-	},
-];
-
-export const AGENT_ACTIVITY = [
-	{
-		id: 'aas1',
-	},
-	{
-		id: 'aas2',
 	},
 ];
 

@@ -9,7 +9,7 @@ const useListOmniChannelAgentRanking = () => {
 
 	const listAgentRanking = useCallback(() => {
 		try {
-			trigger({});
+			trigger();
 		} catch (error) {
 			console.error(error);
 		}

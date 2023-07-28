@@ -13,8 +13,6 @@ const FORMAT_TYPE = {
 	},
 };
 
-const DAYS_OF_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
 const chartData = ({ graph = {}, timeline }) => {
 	function getDateValue(date) {
 		return format(date, FORMAT_TYPE[timeline]?.label);
@@ -22,7 +20,7 @@ const chartData = ({ graph = {}, timeline }) => {
 
 	const X_AXIS_LABEL_MAPPING = ({ start, end, index }) => ({
 		day   : `${getDateValue(start)}-${getDateValue(end)}`,
-		week  : DAYS_OF_WEEK[index],
+		week  : GLOBAL_CONSTANTS.days[index],
 		month : `${getDateValue(start)}-${getDateValue(end)}`,
 	});
 

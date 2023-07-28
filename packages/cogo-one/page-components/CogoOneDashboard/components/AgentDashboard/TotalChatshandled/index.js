@@ -15,7 +15,7 @@ function TotalChatsHandled({ loading = true, totalCustomers = '' }) {
 			<div className={styles.left_total_chats_container}>
 				<div className={styles.heading}>
 					Total no. of chats handled
-					<b>{ view === 'agent' && `by ${agentName}`}</b>
+					<div className={styles.name}>{ view === 'agent' && `by ${agentName}`}</div>
 				</div>
 				{loading
 					? <Placeholder height="30px" width="50px" className={styles.time_placeholder} />

@@ -18,6 +18,10 @@ function ChatStatistics({ isAdminView = false }) {
 			{CHAT_STATS_DATA.map((item) => {
 				const { label = '', isAgent, key } = item;
 
+				if (!isAdminView && !isAgent) {
+					return null;
+				}
+
 				return (
 					(isAdminView || isAgent) && (
 						<div

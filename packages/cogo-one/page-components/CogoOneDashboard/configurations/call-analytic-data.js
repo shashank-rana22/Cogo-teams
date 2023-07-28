@@ -1,5 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
+import { IcMIncomingcall, IcMMissedcall, IcMOutgoing } from '@cogoport/icons-react';
 
 export const CALL_ANALYTICS = [
 	{
@@ -18,34 +17,30 @@ export const CALL_ANALYTICS = [
 export const ANALYTICS_STATS = [
 	{
 		key  : 'incoming_answered',
-		icon : <Image
-			src={GLOBAL_CONSTANTS.image_url.incoming_green_svg}
-			alt="incoming"
-			width={16}
-			height={16}
+		icon : <IcMIncomingcall
+			fill="#abcd62"
+			width={18}
+			height={18}
 		/>,
 		call_type   : 'Incoming Calls',
 		static_data : 'Calls',
 	},
 	{
 		key  : 'outgoing_answered',
-		icon : <Image
-			src={GLOBAL_CONSTANTS.image_url.outgoing_orange_svg}
-			alt="outgoing"
+		icon : <IcMOutgoing
+			fill="#f68b21"
 			width={16}
 			height={16}
 		/>,
-
 		call_type   : 'Outgoing Calls',
 		static_data : 'Calls',
 	},
 	{
 		key  : 'missed_calls',
-		icon : <Image
-			src={GLOBAL_CONSTANTS.image_url.missed_call_red_svg}
-			alt="missed"
-			width={16}
-			height={16}
+		icon : <IcMMissedcall
+			fill="#ee3425"
+			width={20}
+			height={20}
 		/>,
 		call_type   : 'Missed Calls',
 		static_data : 'Calls',
