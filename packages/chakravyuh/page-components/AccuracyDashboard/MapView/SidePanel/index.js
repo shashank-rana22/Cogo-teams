@@ -1,7 +1,6 @@
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import { Select, cl, Loader } from '@cogoport/components';
 import { countriesHash } from '@cogoport/globalization/utils/getCountriesHash';
-import { IcMArrowLeft, IcMDescendingSort, IcMPortArrow } from '@cogoport/icons-react';
+import { IcMArrowLeft, IcMDescendingSort } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useCallback, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -9,8 +8,8 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Heading from '../../../../common/Heading';
 import { SORT_OPTIONS } from '../../../../constants/map_constants';
 
-import EmptyState from './EmptyState';
 import GeoCoder from './GeoCoder';
+import List from './List';
 import styles from './styles.module.css';
 
 const SCOPE_MAPPING = {
@@ -22,36 +21,6 @@ const SCOPE_MAPPING = {
 const TIMEOUT_TIME = 1000;
 const SCROLLING_LIMIT = 30;
 const START_PAGE = 1;
-
-function Render({ loading = false, finalList = [], setActiveId = () => {}, originName = '' }) {
-	if (loading || finalList.length) {
-		return finalList.map(({ total_rates = 0, destination_id, destination_name, accuracy = 0 }) => (
-			<button
-				onMouseOver={() => setActiveId(destination_id)}
-				onMouseOut={() => setActiveId(null)}
-				key={destination_id}
-				className={styles.card}
-			>
-				<div className={styles.left}>
-					<div>
-						<h4>{originName}</h4>
-						<IcMPortArrow />
-						<p>{destination_name}</p>
-					</div>
-					<p className={styles.total_rates}>{`${total_rates} Rates`}</p>
-				</div>
-				<div className={styles.right}>
-					<p>Accuracy</p>
-					<h4>
-						{accuracy}
-						%
-					</h4>
-				</div>
-			</button>
-		));
-	}
-	return <EmptyState emptyText="There are no rates to show for selected filters" />;
-}
 
 function SidePanel({
 	setView = () => {},
@@ -107,6 +76,7 @@ function SidePanel({
 						locationFilters={locationFilters}
 						setLocationFilters={setLocationFilters}
 						setHierarchy={setHierarchy}
+						setActiveList={setActiveList}
 					/>
 					<div className={styles.horizontal_line} />
 				</div>
@@ -129,7 +99,7 @@ function SidePanel({
 						initialLoad={false}
 						loadMore={loadMore}
 						hasMore={hasMore}
-						loader={!accuracyLoading ? (
+						loader={accuracyLoading ? (
 							<div className={styles.loading_style}>
 								<Loader />
 							</div>
@@ -137,7 +107,7 @@ function SidePanel({
 						useWindow={false}
 						threshold={600}
 					>
-						<Render
+						<List
 							setActiveId={setActiveId}
 							loading={accuracyLoading}
 							finalList={activeList}

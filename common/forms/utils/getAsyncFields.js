@@ -681,6 +681,30 @@ function asyncListPromotions() {
 		},
 	};
 }
+function asyncListServiceLanes() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_service_lanes',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+		},
+	};
+}
+function asyncListVessels() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_vessels',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+		},
+	};
+}
 
 function asyncInsuranceCommoditiesList() {
 	return {
@@ -758,66 +782,6 @@ function asyncFieldsLocationsMapping() {
 	};
 }
 
-function asyncListEmployeeDetails() {
-	return {
-		labelKey    : 'name',
-		valueKey    : 'id',
-		endpoint    : 'list_employee_details',
-		initialCall : true,
-		params      : {
-			filters: {
-				status: 'active',
-			},
-			page_limit: 20,
-		},
-	};
-}
-
-function asyncListAllSquads() {
-	return {
-		labelKey    : 'squad_name',
-		valueKey    : 'id',
-		endpoint    : 'list_all_squads',
-		initialCall : true,
-		params      : {
-			filters: {
-				status: 'active',
-			},
-			page_limit: 20,
-		},
-	};
-}
-
-function asyncListAllTribes() {
-	return {
-		labelKey    : 'tribe_name',
-		valueKey    : 'id',
-		endpoint    : 'list_all_tribes',
-		initialCall : true,
-		params      : {
-			filters: {
-				status: 'active',
-			},
-			page_limit: 20,
-		},
-	};
-}
-
-function asyncListAllChapters() {
-	return {
-		labelKey    : 'chapter_name',
-		valueKey    : 'id',
-		endpoint    : 'list_all_chapters',
-		initialCall : true,
-		params      : {
-			filters: {
-				status: 'active',
-			},
-			page_limit: 20,
-		},
-	};
-}
-
 function asyncListAllManagers() {
 	return {
 		labelKey    : 'name',
@@ -882,6 +846,8 @@ export {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncListServiceLanes,
+	asyncListVessels,
 	asyncListEmployees,
 	asyncListSquad,
 	asyncListSubChapters,
@@ -891,10 +857,6 @@ export {
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
-	asyncListEmployeeDetails,
-	asyncListAllSquads,
-	asyncListAllTribes,
-	asyncListAllChapters,
 	asyncListAllManagers,
 	asyncListShipmentPendingTasks,
 	asyncListShipments,

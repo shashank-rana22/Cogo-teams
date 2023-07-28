@@ -47,7 +47,12 @@
 	}
 
 	&:last-of-type {
-		margin-right: 12px;
+		margin-right: 24px;
+
+		&.missing_rates {
+			min-width: 180px;
+			margin-left: 35px !important;
+		}
 	}
 }
 

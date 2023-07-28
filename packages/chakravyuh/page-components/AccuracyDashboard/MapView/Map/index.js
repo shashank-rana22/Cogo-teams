@@ -1,9 +1,10 @@
 import { ButtonIcon, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { CogoMaps, L, Tooltip } from '@cogoport/maps';
+import { CogoMaps, GeoJSON, L, Tooltip } from '@cogoport/maps';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useRef } from 'react';
+import ReactDOMServer from 'react-dom/server';
 
 import CustomLegend from '../../../../common/Legend';
 import MapTooltip from '../../../../common/MapTooltip';
@@ -62,6 +63,8 @@ function Map({
 	const showLoading = loading || activeLoading;
 	const originPosition = locationFilters?.origin?.latitude
 		? [locationFilters.origin.latitude, locationFilters.origin.longitude] : null;
+	const originLocation = [...data, ...activeData]
+		.filter(({ id }) => id === locationFilters.origin.id)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const getFilteredData = (dataToProcess) => dataToProcess.filter(({ id }) => id !== originId
 				&& (activeList.some(({ destination_id }) => id === destination_id)
@@ -211,6 +214,30 @@ function Map({
 
 			{originPosition && <Point position={originPosition} animate />}
 			{showLoading && <Loader className={styles.loader} />}
+			{!isEmpty(originLocation)
+				&& (
+					<GeoJSON
+						key={originLocation?.id}
+						data={JSON.parse(originLocation.geometry)}
+						onEachFeature={(feature, layer) => {
+							layer?.setStyle({
+								weight      : 1.5,
+								fillOpacity : 0,
+								opacity     : 0.7,
+								color       : '#424242',
+							});
+
+							layer.bindTooltip(
+								ReactDOMServer.renderToString(
+									<MapTooltip
+										display_name={originLocation?.name}
+									/>,
+								),
+								{ sticky: true, direction: 'top' },
+							);
+						}}
+					/>
+				)}
 
 		</CogoMaps>
 	);

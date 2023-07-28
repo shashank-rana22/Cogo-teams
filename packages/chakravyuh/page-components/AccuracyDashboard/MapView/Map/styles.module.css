@@ -56,3 +56,15 @@
 	right: 30vw;
 	z-index: 999;
 }
+
+.worse {
+	background: #ee3425;
+}
+
+.bad {
+	background: #f68b21;
+}
+
+.good {
+	background: #849e4c;
+}

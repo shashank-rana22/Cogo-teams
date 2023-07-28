@@ -16,6 +16,8 @@ const ActiveRegions = React.forwardRef(({
 	setHierarchy = () => {},
 	currentId = null,
 }, ref) => {
+	const activeId = hierarchy?.region_id;
+
 	const onEachFeature = (feature, layer, code, id) => {
 		const styleProps = getPolygonStyleProps(accuracyMapping[id]);
 
@@ -45,28 +47,33 @@ const ActiveRegions = React.forwardRef(({
 
 	return (
 		<FeatureGroup key={hierarchy?.region_id}>
-			{showRegions && activeData.map(({ id, geometry, name, type, ...rest }) => (
-				<GeoJSON
-					key={id}
-					ref={currentId === id ? ref : null}
-					data={JSON.parse(geometry)}
-					onEachFeature={(feature, layer) => onEachFeature(feature, layer, name, id)}
-					eventHandlers={{
-						click: (e) => {
-							L.DomEvent.stopPropagation(e);
-							setLocationFilters((prev) => ({
-								...prev,
-								destination: {
-									id, name, type: type || 'region', ...rest,
-								},
-							}));
-							setHierarchy((prev) => ({ ...prev, [`${type}_id`]: id }));
-							setActiveList([]);
-							setBounds(e.target.getBounds());
-						},
-					}}
-				/>
-			))}
+			{showRegions && activeData.map(({ id, geometry, name, type, ...rest }) => {
+				const isActive = activeId === id;
+				return (
+					<GeoJSON
+						key={id}
+						ref={currentId === id ? ref : null}
+						data={JSON.parse(geometry)}
+						onEachFeature={(feature, layer) => onEachFeature(feature, layer, name, id)}
+						eventHandlers={{
+							click: (e) => {
+								L.DomEvent.stopPropagation(e);
+								if (!isActive) {
+									setLocationFilters((prev) => ({
+										...prev,
+										destination: {
+											id, name, type: type || 'region', ...rest,
+										},
+									}));
+									setHierarchy((prev) => ({ ...prev, [`${type}_id`]: id }));
+									setActiveList([]);
+								}
+								setBounds(e.target.getBounds());
+							},
+						}}
+					/>
+				);
+			})}
 		</FeatureGroup>
 	);
 });
