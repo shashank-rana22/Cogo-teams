@@ -12,7 +12,7 @@
 				{
 					"name": "ids",
 					"type": "checkbox_group",
-					"label": "Select BLs to collect",
+					"label": "Select DOs to collect",
 					"options": [],
 					"multiple": true
 				},
@@ -114,7 +114,7 @@
 			{
 				"key": "data",
 				"value": {
-					"bl_detail": {
+					"do_detail": {
 						"collection_mode": "formValue,collection_mode",
 						"collection_movement_details": [{
 							"collection_address": "formValue,collection_address",
@@ -217,12 +217,12 @@
 		"static_data_to_send": [
 			{
 				"key": "id",
-				"value": "mark_bl_released"
+				"value": "mark_do_released"
 			},
 			{
 				"key": "data",
 				"value": {
-					"bl_detail": {
+					"do_detail": {
 						"delivery_mode": "formValue,delivery_mode",
 						"delivery_movement_details": [{
 							"name": "formValue,name",
@@ -238,7 +238,7 @@
 	},
 	"released": {
 		"steps": [
-			"Mark BL as Delivered"
+			"Mark DO as Delivered"
 		],
 		"initial_step": {
 			"action_text": "FINISH",
@@ -252,8 +252,8 @@
 					"multiple": true
 				},
 				{
-					"name": "mark_bl_as_delivered",
-					"label": "Mark BL as Delivered",
+					"name": "mark_do_as_delivered",
+					"label": "Mark DO as Delivered",
 					"type": "datepicker",
 					"rules": {
 						"required": "Date is Required"
@@ -264,12 +264,12 @@
 		"static_data_to_send": [
 			{
 				"key": "id",
-				"value": "mark_bl_delivered"
+				"value": "mark_do_delivered"
 			},
 			{
 				"key": "data",
 				"value": {
-					"bl_detail": {
+					"do_detail": {
 						"status": "static,delivered",
 						"id": "formValue,ids"
 					}
@@ -412,12 +412,12 @@
 		"static_data_to_send": [
 			{
 				"key": "id",
-				"value": "mark_bl_surrendered"
+				"value": "mark_do_surrendered"
 			},
 			{
 				"key": "data",
 				"value": {
-					"bl_detail": {
+					"do_detail": {
 						"surrender_mode": "formValue,surrender_mode",
 						"delivery_movement_details": [{
 							"tracking_id": "formValue,tracking_id",

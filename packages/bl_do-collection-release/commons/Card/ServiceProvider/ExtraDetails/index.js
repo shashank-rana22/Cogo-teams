@@ -31,7 +31,14 @@ const handleCopy = async (val) => {
 };
 
 export default function ExtraDetails({ stateProps = {}, item = {} }) {
-	const { bill_of_ladings = [] } = item;
+	const { bill_of_ladings = [], delivery_orders = [] } = item;
+
+	let docs = bill_of_ladings;
+
+	if (stateProps.activeTab === 'do') {
+		docs = delivery_orders;
+	}
+
 	let renderElem = '';
 
 	switch (stateProps.inner_tab) {
@@ -59,7 +66,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 			break;
 		}
 		case 'under_collection': {
-			bill_of_ladings?.forEach((itemData) => {
+			docs?.forEach((itemData) => {
 				const { collection_details, collection_mode = '-' } = itemData || {};
 				const { name = '-', tracking_id = '-' } = collection_details || {};
 				renderElem = (
@@ -93,12 +100,12 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 		case 'released': {
 			let showModeOfDelivery = false;
 			let status = '';
-			bill_of_ladings?.forEach((itemData) => {
+			docs?.forEach((itemData) => {
 				const { delivery_movement_details = [] } = itemData || {};
 				const { tracking_id = '' } = delivery_movement_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 				if (
 					(itemData?.status || []).includes('delivered')
-				|| item?.trade_type === 'import'
+				|| stateProps?.activeTab === 'do'
 				) {
 					status = 'delivered';
 					showModeOfDelivery = true;
@@ -146,7 +153,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 			break;
 		}
 		case 'surrendered': {
-			bill_of_ladings?.forEach((itemData) => {
+			docs?.forEach((itemData) => {
 				const { delivery_movement_details = [] } = itemData || {};
 				const { tracking_id = '' } = delivery_movement_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 				const isSurrendered = (itemData?.status || []).includes('surrendered');

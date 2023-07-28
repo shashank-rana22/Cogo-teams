@@ -73,8 +73,8 @@ const fillData = (value, item, formValues) => {
 	return newValue;
 };
 
-const getCurrentReleaseStatus = (item, inner_tab, formValues) => {
-	const docs = item?.trade_type === 'export'
+const getCurrentReleaseStatus = (item, inner_tab, formValues, active_tab) => {
+	const docs = active_tab === 'bl'
 		? item?.export_bl_details
 		: item?.import_bl_details;
 	const selectedDocsLength = formValues?.ids?.length;
@@ -177,7 +177,7 @@ export default function getFormattedPayload({
 		return finalPayload;
 	}
 
-	if (inner_tab === 'collected' && item?.trade_type === 'import') {
+	if (inner_tab === 'collected' && active_tab === 'do') {
 		const doTask = (pendingTasks || []).filter(
 			(task) => task.task === 'mark_do_released',
 		);
@@ -207,10 +207,16 @@ export default function getFormattedPayload({
 		} else if (finalPayload && data?.key === 'data') {
 			finalPayload.data = fillData(data?.value, item, formValues);
 
-			if (isEmpty(finalPayload.data?.bl_detail?.id)) {
-				Toast.error('BL ID not found');
+			console.log(finalPayload, 'finalPayload');
+
+			if (active_tab === 'bl'
+				? isEmpty(finalPayload.data?.bl_detail?.id)
+				: isEmpty(finalPayload.data?.do_detail?.id)
+			) {
+				Toast.error(`${active_tab === 'bl' ? 'BL' : 'DO'} ID not found`);
 				finalPayload = {};
 			}
+
 			if (
 				['collection_pending', 'collected', 'released', 'surrendered'].includes(
 					inner_tab,
@@ -222,6 +228,9 @@ export default function getFormattedPayload({
 			}
 		}
 	});
+
+	console.log(finalPayload);
+	finalPayload = {};
 
 	return finalPayload;
 }

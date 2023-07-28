@@ -90,13 +90,13 @@ export default function Card({
 			listTasks();
 		} else if (
 			stateProps.inner_tab === 'collected'
-			&& item?.trade_type === 'import'
+			&& stateProps?.activeTab === 'do'
 			&& isEmpty(item?.do_documents)
 		) {
 			Toast.error('DO document has not been uploaded');
 		} else if (
 			stateProps.inner_tab === 'collected'
-			&& item?.trade_type === 'import'
+			&& stateProps?.activeTab === 'do'
 			&& !isEmpty(item?.do_documents)
 		) {
 			setConfirmationModal({
@@ -127,7 +127,7 @@ export default function Card({
 			pendingTasks : list,
 		});
 
-		if (payload) {
+		if (!isEmpty(payload)) {
 			updateTask(payload);
 		}
 	};
@@ -138,7 +138,7 @@ export default function Card({
 
 	let cardClassName = !showAccordion ? 'no-accordion' : '';
 	cardClassName
-		+= isCriticalVisible && isCardCritical({ item }) ? ' card-critical' : '';
+		+= isCriticalVisible && isCardCritical({ item, activeTab: stateProps?.activeTab }) ? ' card-critical' : '';
 
 	if (stateProps.inner_tab === 'knockoff_awaiting') {
 		actionButton.show = false;
