@@ -14,7 +14,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['compliance', 'post_to_sage', 'dunning'],
+		feature_supported   : ['compliance', 'post_to_sage'],
 		labels              : {
 			irn_label: 'IRN',
 		},
@@ -40,7 +40,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance', 'dunning'],
+		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance'],
 		labels              : {
 			irn_label: 'IRN',
 		},

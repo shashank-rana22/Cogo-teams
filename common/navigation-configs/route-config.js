@@ -36,6 +36,7 @@ import managerDashboard from './config/manager-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
+import notifications from './config/notifications';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
 import referral from './config/referral';
@@ -135,6 +136,7 @@ const routeConfig = {
 	...igmDesk,
 	...airlinePluginBooking,
 	...bookingDeskSurface,
+	...notifications,
 };
 
 export default routeConfig;
