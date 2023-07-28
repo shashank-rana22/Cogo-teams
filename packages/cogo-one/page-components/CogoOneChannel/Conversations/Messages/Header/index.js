@@ -44,6 +44,7 @@ function Header({
 	viewType = '',
 	firestore = {},
 	escalateToSupplyRm = () => {},
+	setActiveTab = () => {},
 	supplierLoading = false,
 	hasNoFireBaseRoom = false,
 }) {
@@ -91,8 +92,8 @@ function Header({
 				<div className={styles.flex_space_between}>
 					<div className={styles.flex}>
 						<IcMArrowBack
-							height={30}
-							width={30}
+							className={styles.arrow_back}
+							onClick={() => setActiveTab((prev) => ({ ...prev, data: {} }))}
 						/>
 						<TagsPopOver
 							prevtags={chat_tags}

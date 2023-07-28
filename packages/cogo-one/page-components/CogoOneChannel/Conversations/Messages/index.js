@@ -1,9 +1,7 @@
-import { Modal } from '@cogoport/components';
 import { collection } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
-import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import { getHasPermissionToEdit } from '../../../../helpers/conversationHelpers';
 import { snapshotCleaner, mountActiveRoomSnapShot } from '../../../../helpers/snapshotHelpers';
@@ -20,6 +18,7 @@ import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import Header from './Header';
 import MessageConversations from './MessageConversations';
+import MessageModals from './MessageModals';
 import styles from './styles.module.css';
 
 function Messages({
@@ -135,12 +134,6 @@ function Messages({
 		requestAssignLoading,
 	} = useRequestAssignChat();
 
-	const {
-		comp: ActiveModalComp = null,
-		title: { img = null, name = null } = {},
-		modalSize = 'md',
-	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
-
 	const activeCardId = activeTab?.data?.id;
 	const activeChannelType = activeTab?.data?.channel_type;
 
@@ -175,101 +168,80 @@ function Messages({
 	}, [activeCardId, activeChannelType, activeTab.data.channel_type, firestore, setActiveRoomLoading, setActiveTab]);
 
 	return (
-		<>
-			<div className={styles.container}>
-				<Header
-					setOpenModal={setOpenModal}
-					setheaderTags={setheaderTags}
-					headertags={headertags}
-					assignChat={assignChat}
+		<div className={styles.container}>
+			<Header
+				setOpenModal={setOpenModal}
+				setheaderTags={setheaderTags}
+				headertags={headertags}
+				assignChat={assignChat}
+				formattedData={formattedData}
+				updateChat={updateChat}
+				loading={loading}
+				activeMessageCard={activeTab?.data}
+				closeModal={closeModal}
+				assignLoading={assignLoading}
+				activeAgentName={activeAgentName}
+				hasPermissionToEdit={hasPermissionToEdit}
+				filteredSpectators={filteredSpectators}
+				tagOptions={tagOptions}
+				supportAgentId={supportAgentId}
+				showBotMessages={showBotMessages}
+				userId={userId}
+				updateRoomLoading={updateRoomLoading}
+				updateUserRoom={updateUserRoom}
+				requestForAssignChat={requestForAssignChat}
+				requestAssignLoading={requestAssignLoading}
+				canMessageOnBotSession={canMessageOnBotSession}
+				viewType={viewType}
+				firestore={firestore}
+				escalateToSupplyRm={escalateToSupplyRm}
+				supplierLoading={supplierLoading}
+				hasNoFireBaseRoom={hasNoFireBaseRoom}
+				setActiveTab={setActiveTab}
+			/>
+			<div className={styles.message_container} key={id}>
+				<MessageConversations
 					formattedData={formattedData}
-					updateChat={updateChat}
-					loading={loading}
+					messagesData={messagesData}
+					uploading={uploading}
+					draftMessage={draftMessages?.[id]}
+					draftUploadedFile={draftUploadedFiles?.[id]}
+					setDraftMessages={setDraftMessages}
+					setDraftUploadedFiles={setDraftUploadedFiles}
+					sendChatMessage={changeSessionAndMessage('chat_message')}
+					getNextData={getNextData}
+					firstLoadingMessages={firstLoadingMessages || newUserRoomLoading}
+					lastPage={lastPage}
+					setOpenModal={setOpenModal}
 					activeMessageCard={activeTab?.data}
-					closeModal={closeModal}
-					assignLoading={assignLoading}
-					activeAgentName={activeAgentName}
+					suggestions={suggestions}
+					setUploading={setUploading}
+					sentQuickSuggestions={changeSessionAndMessage('quick_message')}
 					hasPermissionToEdit={hasPermissionToEdit}
-					filteredSpectators={filteredSpectators}
-					tagOptions={tagOptions}
-					supportAgentId={supportAgentId}
-					showBotMessages={showBotMessages}
-					userId={userId}
-					updateRoomLoading={updateRoomLoading}
-					updateUserRoom={updateUserRoom}
-					requestForAssignChat={requestForAssignChat}
-					requestAssignLoading={requestAssignLoading}
+					loadingPrevMessages={loadingPrevMessages}
+					sendCommunicationTemplate={sendCommunicationTemplate}
+					communicationLoading={communicationLoading}
+					closeModal={closeModal}
+					messageLoading={canMessageOnBotSession ? (messageLoading || assignLoading) : messageLoading}
+					setRaiseTicketModal={setRaiseTicketModal}
 					canMessageOnBotSession={canMessageOnBotSession}
+					changeSessionAndMessage={changeSessionAndMessage}
 					viewType={viewType}
-					firestore={firestore}
-					escalateToSupplyRm={escalateToSupplyRm}
-					supplierLoading={supplierLoading}
 					hasNoFireBaseRoom={hasNoFireBaseRoom}
+					setModalType={setModalType}
+					activeTab={activeTab}
 				/>
-				<div className={styles.message_container} key={id}>
-					<MessageConversations
-						formattedData={formattedData}
-						messagesData={messagesData}
-						uploading={uploading}
-						draftMessage={draftMessages?.[id]}
-						draftUploadedFile={draftUploadedFiles?.[id]}
-						setDraftMessages={setDraftMessages}
-						setDraftUploadedFiles={setDraftUploadedFiles}
-						sendChatMessage={changeSessionAndMessage('chat_message')}
-						getNextData={getNextData}
-						firstLoadingMessages={firstLoadingMessages || newUserRoomLoading}
-						lastPage={lastPage}
-						setOpenModal={setOpenModal}
-						activeMessageCard={activeTab?.data}
-						suggestions={suggestions}
-						setUploading={setUploading}
-						sentQuickSuggestions={changeSessionAndMessage('quick_message')}
-						hasPermissionToEdit={hasPermissionToEdit}
-						loadingPrevMessages={loadingPrevMessages}
-						sendCommunicationTemplate={sendCommunicationTemplate}
-						communicationLoading={communicationLoading}
-						closeModal={closeModal}
-						messageLoading={canMessageOnBotSession ? (messageLoading || assignLoading) : messageLoading}
-						setRaiseTicketModal={setRaiseTicketModal}
-						canMessageOnBotSession={canMessageOnBotSession}
-						changeSessionAndMessage={changeSessionAndMessage}
-						viewType={viewType}
-						hasNoFireBaseRoom={hasNoFireBaseRoom}
-						setModalType={setModalType}
-						activeTab={activeTab}
-					/>
-				</div>
 			</div>
-			{openModal?.type && ActiveModalComp && (
-				<Modal
-					size={modalSize}
-					show
-					onClose={closeModal}
-					placement="center"
-					className={styles.styled_ui_modal_container}
-				>
-					{name && (
-						<Modal.Header
-							title={(
-								<div className={styles.modal_header_title}>
-									{img && <img src={img} alt="logo" />}
-									<div className={styles.modal_title}>
-										{name}
-									</div>
-								</div>
-							)}
-						/>
-					)}
-					<ActiveModalComp
-						data={openModal?.data || {}}
-						activeMessageCard={activeTab?.data}
-						assignLoading={assignLoading}
-						loading={loading}
-						viewType={viewType}
-					/>
-				</Modal>
-			)}
-		</>
+
+			<MessageModals
+				openModal={openModal}
+				closeModal={closeModal}
+				activeTab={activeTab}
+				loading={loading}
+				assignLoading={assignLoading}
+				viewType={viewType}
+			/>
+		</div>
 	);
 }
 
