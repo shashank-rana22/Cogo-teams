@@ -11,7 +11,7 @@ const COMPONENT_MAPPING = {
 };
 
 function FclCheckout({ state = 'draft', setIsShipmentCreated = () => {} }) {
-	const ActiveComponent = COMPONENT_MAPPING.locked;
+	const ActiveComponent = COMPONENT_MAPPING[state];
 
 	return (
 		<div className={styles.container}>
