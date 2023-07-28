@@ -134,7 +134,7 @@ export const nonRecurringExpenseDetails = ({
 				{
 					name        : 'registrationNumber',
 					label       : geo.others.identification_number.label,
-					type        : 'textarea',
+					type        : 'input',
 					value       : formData?.registrationNumber || null,
 					prefix      : null,
 					className   : styles.pan,

@@ -77,7 +77,7 @@ export const recurringExpenseDetails = ({
 				{
 					name        : 'registrationNumber',
 					label       : `${geo.others.identification_number.label.toUpperCase()}`,
-					type        : 'textarea',
+					type        : 'input',
 					value       : formData.registrationNumber || null,
 					className   : styles.pan_area,
 					placeholder : `Autofilled ${geo.others.identification_number.label}`,
