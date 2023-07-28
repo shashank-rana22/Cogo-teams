@@ -40,6 +40,7 @@ function Filter({
 					...prev,
 					[name]                   : value,
 					[pageKey || 'pageIndex'] : 1,
+					page                     : 1,
 				}));
 			},
 			name,
