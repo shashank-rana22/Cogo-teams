@@ -103,7 +103,7 @@ function NonRecuringModal({
 
 					<div className={styles.document_flex}>
 						<div className={styles.document}>Document -</div>
-						{documents?.map((url: any) => (url !== '' ? (
+						{(documents || []).map((url: any) => (url !== '' ? (
 							<a
 								href={url}
 								target="_blank"

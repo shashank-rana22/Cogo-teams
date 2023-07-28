@@ -243,7 +243,7 @@ function ShowMore({ vendorId }:Props) {
 									background="#FFFAEB"
 								/>
 							</div>
-							{(listData && !isEmpty(listData?.list?.length)) ? (
+							{(listData && !isEmpty(listData?.list)) ? (
 								<List
 									config={EXPENSE_CONFIG}
 									itemData={listData}

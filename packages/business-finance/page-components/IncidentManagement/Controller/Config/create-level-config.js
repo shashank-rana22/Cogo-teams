@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-export const controls = ({ incidentType, setValue = () => {} }) => [
+export const controls = ({ incidentType = '', setValue = () => {} }) => [
 	{
 		name        : 'incidentType',
 		label       : 'Incident Type',

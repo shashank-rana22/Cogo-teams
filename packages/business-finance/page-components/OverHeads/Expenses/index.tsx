@@ -3,6 +3,7 @@ import { Popover, Button, Input, Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
@@ -11,7 +12,6 @@ import { ListDataProps } from '../../AccountPayables/commons/Interfaces';
 import Filter from '../../commons/Filters';
 import SegmentedControl from '../../commons/SegmentedControl';
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
-import { formatDate } from '../../commons/utils/formatDate';
 import List from '../commons/List';
 import {
 	nonRecurringFilters,
@@ -230,23 +230,26 @@ function ExpenseComponent() {
 					<div className={styles.data_container}>
 						<div>
 							<div>
-								{formatDate(
-									startDate,
-									'dd MMM yyyy',
-									{},
-									false,
-								)}
-								{' '}
+								{formatDate({
+									date       : startDate,
+									formatType : 'date',
+									dateFormat:
+										GLOBAL_CONSTANTS.formats.date[
+											'dd MMM yyyy'
+										],
+								})}
 								-
 							</div>
 							<div style={{ display: 'flex' }}>
 								<div>
-									{formatDate(
-										endDate,
-										'dd MMM yyyy',
-										{},
-										false,
-									)}
+									{formatDate({
+										date       : endDate,
+										formatType : 'date',
+										dateFormat:
+											GLOBAL_CONSTANTS.formats.date[
+												'dd MMM yyyy'
+											],
+									})}
 								</div>
 								<Tooltip content={`Duration: ${difference} `}>
 									<div style={{ margin: '0px 4px' }}>
@@ -338,22 +341,38 @@ function ExpenseComponent() {
 							<div>
 								Due Date:
 								{' '}
-								{formatDate(dueDate, 'dd MMM yyyy', {}, false)}
+								{formatDate({
+									date       : dueDate,
+									formatType : 'date',
+									dateFormat:
+											GLOBAL_CONSTANTS.formats.date[
+												'dd MMM yyyy'
+											],
+								})}
 							</div>
 							<div>
 								Invoice Date:
 								{' '}
-								{formatDate(billDate, 'dd MMM yyyy', {}, false)}
+								{formatDate({
+									date       : billDate,
+									formatType : 'date',
+									dateFormat:
+											GLOBAL_CONSTANTS.formats.date[
+												'dd MMM yyyy'
+											],
+								})}
 							</div>
 							<div>
 								Upload Date:
 								{' '}
-								{formatDate(
-									createdDate,
-									'dd MMM yyyy',
-									{},
-									false,
-								)}
+								{formatDate({
+									date       : createdDate,
+									formatType : 'date',
+									dateFormat:
+											GLOBAL_CONSTANTS.formats.date[
+												'dd MMM yyyy'
+											],
+								})}
 							</div>
 						</div>
 					)}
@@ -368,12 +387,15 @@ function ExpenseComponent() {
 						<div style={{ fontSize: '12px' }}>
 							<div>{approvedByName}</div>
 							<div>
-								{formatDate(
-									updatedAt,
-									'dd MMM yyyy',
-									{},
-									false,
-								) || '-'}
+								{formatDate({
+									date       : updatedAt,
+									formatType : 'date',
+									dateFormat:
+											GLOBAL_CONSTANTS.formats.date[
+												'dd MMM yyyy'
+											],
+								})}
+
 							</div>
 						</div>
 					) : (
@@ -530,7 +552,7 @@ function ExpenseComponent() {
 		),
 	};
 
-	const showDropDown = (singleItem: { id?: string, incidentId?:string }) => {
+	const showDropDown = (singleItem: { id?: string; incidentId?: string }) => {
 		const { id, incidentId } = singleItem || {};
 
 		if (recurringState === 'recurring') {

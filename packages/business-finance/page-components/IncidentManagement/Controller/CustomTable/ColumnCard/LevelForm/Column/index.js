@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const HUNDERED_PERCENT = 1000;
+const HUNDRED_PERCENT = 100;
 const DEFAULT_SPAN = 1;
 const TOTAL_SPAN = 12;
 const DEFAULT_VAL = 1;
@@ -29,18 +29,14 @@ function Column({
 
 	useEffect(() => {
 		const { level1 = {}, level2 = {}, level3 = {} } = item;
-		const { stakeholder: stakeholderLevel1 = {} } = level1 || {};
-		const { stakeholder: stakeholderLevel2 = {} } = level2 || {};
-		const { stakeholder: stakeholderLevel3 = {} } = level3 || {};
-		if (!isEmpty(stakeholderLevel3)) {
-			setValue('approvalLevelConditions.2.stakeholder', stakeholderLevel3);
-		}
-		if (!isEmpty(stakeholderLevel2)) {
-			setValue('approvalLevelConditions.1.stakeholder', stakeholderLevel2);
-		}
-		if (!isEmpty(stakeholderLevel1)) {
-			setValue('approvalLevelConditions.0.stakeholder', stakeholderLevel1);
-		}
+		const levels = [level1, level2, level3];
+
+		(levels || []).forEach((lvl, idx) => {
+			const { stakeholder = {} } = lvl || {};
+			if (!isEmpty(stakeholder)) {
+				setValue(`approvalLevelConditions.${idx + DEFAULT_VAL}.stakeholder`, stakeholder);
+			}
+		});
 	}, [item, setValue]);
 
 	const DATA = {
@@ -117,7 +113,7 @@ function Column({
 					key={field.key}
 					style={{
 						'--span' : field.span || DEFAULT_SPAN,
-						width    : `${((field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN))}px`,
+						width    : `${((field.span || DEFAULT_SPAN) * (HUNDRED_PERCENT / TOTAL_SPAN))}px`,
 					}}
 					className={styles.col}
 				>

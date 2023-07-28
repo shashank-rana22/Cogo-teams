@@ -17,7 +17,7 @@ const TOTAL_SPAN = 12;
 const DEFAULT_VALUE = 1;
 
 function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch = () => { } }) {
-	const [show, setShow] = useState(null);
+	const [show, setShow] = useState(false);
 	const { fields = [] } = config;
 	const {
 		id = '',

@@ -74,7 +74,6 @@ const controls = [
 	{
 		name        : 'level',
 		type        : 'select',
-		asyncKey    : 'list_cogo_entity',
 		isClearable : true,
 		options     : [
 			{ label: 'Level 1', value: 1 },

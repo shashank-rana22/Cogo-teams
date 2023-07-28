@@ -34,7 +34,7 @@ function ViewRecurringSummery({ itemData = {}, recurringState = '' }) {
 					<Modal.Footer>
 						<Button
 							style={{ marginRight: '10px' }}
-							onClick={() => setShowModal(null)}
+							onClick={() => setShowModal(false)}
 							themeType="secondary"
 						>
 							Back
