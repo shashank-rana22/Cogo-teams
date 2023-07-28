@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Form from './Form';
 import styles from './styles.module.css';
 
-const blLabelMapping = {
+const BL_LABEL_MAPPING = {
 	house_bill_of_lading       : 'HBL',
 	bill_of_lading             : 'MBL',
 	draft_house_bill_of_lading : 'HBL',
@@ -14,8 +14,10 @@ const blLabelMapping = {
 	do_noc_certificate         : 'DO NOC',
 };
 
-const getValidDocuments = (trade_type) => {
-	if (trade_type === 'import') {
+const RELEASED_BL_DATA = [];
+
+const getValidDocuments = (activeTab) => {
+	if (activeTab === 'do') {
 		return ['delivery_order', 'do_noc_certificate'];
 	}
 
@@ -34,13 +36,12 @@ function ReleaseCard({ data = {}, bucket, refetch = () => {}, setShowModal = () 
 
 	const docDetails = isEmpty(data?.bill_of_ladings) ? data?.delivery_orders : data?.bill_of_ladings;
 
-	const releasedBLData = [];
 	const blsAvailable = (docDetails || [])?.filter(
 		(item) => !isEmpty(item?.bl_document_id || item?.do_document_id)
 			&& !['surrendered', 'surrender_pending'].includes(item?.status),
 	);
 
-	const validDocuments = getValidDocuments(data?.trade_type);
+	const validDocuments = getValidDocuments(activeTab);
 
 	blsAvailable?.forEach((item) => {
 		if (
@@ -48,9 +49,9 @@ function ReleaseCard({ data = {}, bucket, refetch = () => {}, setShowModal = () 
 				item?.bl_document_type || item?.do_document_type,
 			)
 		) {
-			releasedBLData.push({
+			RELEASED_BL_DATA.push({
 				label: `${
-					blLabelMapping[
+					BL_LABEL_MAPPING[
 						item?.bl_document_type || item?.do_document_type
 					]
 				}${item?.bl_number || item?.do_number}`,
@@ -103,7 +104,7 @@ function ReleaseCard({ data = {}, bucket, refetch = () => {}, setShowModal = () 
 			{open ? (
 				<Form
 					handleClose={handleClose}
-					blData={releasedBLData}
+					blData={RELEASED_BL_DATA}
 					hold={hold}
 					surrender={surrender}
 					bucket={bucket}
