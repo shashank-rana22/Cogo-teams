@@ -10,7 +10,8 @@ const GLOBAL_CONSTANTS = {
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 	},
 	country_ids: {
-		IN: '541d1232-58ce-4d64-83d6-556a42209eb7',
+		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
+		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
 	},
 
 	platform_supported_country_codes: ['IN', 'VN'],
@@ -305,6 +306,7 @@ const GLOBAL_CONSTANTS = {
 		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
 		clock_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
 		sad_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
+		sign_up_failed       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
 	},
 
 	video_call_ring_tone_url:
@@ -433,8 +435,9 @@ const GLOBAL_CONSTANTS = {
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
 	others                       : {
-		old_shipment_serial_id  : 120347,
-		cogopoint_default_value : 0,
+		old_shipment_serial_id      : 120347,
+		cogopoint_default_value     : 0,
+		fcl_import_new_process_date : '2023-07-27T00:00:00',
 
 	},
 	shipment_types: [
