@@ -65,7 +65,7 @@ function Form({
 		const payload = {
 			ids  : formData?.ids,
 			data : {
-				[trade_type === 'export' ? 'bl_remarks' : 'remarks']: {
+				[activeTab === 'bl' ? 'bl_remarks' : 'remarks']: {
 					comment: formData?.remarks,
 					status,
 				},

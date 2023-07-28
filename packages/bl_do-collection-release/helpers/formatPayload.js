@@ -207,9 +207,6 @@ export default function getFormattedPayload({
 			}
 		} else if (finalPayload && data?.key === 'data') {
 			finalPayload.data = fillData(data?.value, item, formValues);
-
-			console.log(finalPayload, 'finalPayload');
-
 			if (active_tab === 'bl'
 				? isEmpty(finalPayload.data?.bl_detail?.id)
 				: isEmpty(finalPayload.data?.do_detail?.id)
@@ -230,7 +227,6 @@ export default function getFormattedPayload({
 		}
 	});
 
-	console.log(finalPayload);
 	finalPayload = {};
 
 	return finalPayload;

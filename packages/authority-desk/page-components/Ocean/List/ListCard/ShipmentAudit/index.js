@@ -63,9 +63,10 @@ function ShipmentAudit({
 	const headerTitle = () => (
 		<div className={styles.modal_title}>
 			<div className={styles.audits}>
-				Audits &nbsp;
+				Audits
+				{' '}
 				{'>'}
-&nbsp;
+				{' '}
 			</div>
 			<ClickableDiv
 				className={styles.bucket_title}
@@ -96,7 +97,9 @@ function ShipmentAudit({
 							</div>
 
 							<div className={styles.status}>
-					&nbsp; Status: &nbsp;
+								{' '}
+								Status:
+								{' '}
 								{startCase(freight_service?.state)}
 							</div>
 
@@ -110,7 +113,7 @@ function ShipmentAudit({
 						</div>
 
 						<div className={styles.bl_details}>
-							<BlDetails item={item} />
+							<BlDetails item={item} activeTab={activeTab} />
 						</div>
 					</div>
 
