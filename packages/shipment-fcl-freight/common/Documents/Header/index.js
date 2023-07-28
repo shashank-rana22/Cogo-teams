@@ -33,7 +33,6 @@ function Header({
 	const org_doc_services_options	= serviceOptions?.filter(
 		(ser) => ['fcl_customs_service', 'lcl_customs_service'].includes(ser?.value),
 	);
-	console.log(org_doc_services_options, 'org_doc_services_options');
 
 	const handleGenericUpload = () => {
 		setShowModal(true);
