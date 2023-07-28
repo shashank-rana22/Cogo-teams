@@ -28,6 +28,7 @@ const ELEMENT_MAPPING = {
 	fileUpload             : UploadController,
 	email                  : InputController,
 	asyncSelect            : AsyncSelectController,
+	password               : InputController,
 
 };
 
