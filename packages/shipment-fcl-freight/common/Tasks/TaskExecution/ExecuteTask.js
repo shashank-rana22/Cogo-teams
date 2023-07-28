@@ -234,7 +234,7 @@ function ExecuteTask({
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
-	if (task.task === 'mark_confirmed'
+	if (task.task === 'mark_confirmed' && task.service_type === 'fcl_freight_service'
 	&& !orgData?.data?.category_types?.includes('shipping_line')
 	&& orgData?.data?.category_types?.some((value) => INCLUDED_ORG.includes(value))
         && primary_service?.trade_type === 'export'

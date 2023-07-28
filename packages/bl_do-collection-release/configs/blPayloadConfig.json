@@ -176,7 +176,7 @@
       "common": {
         "filters": {
           "state": ["confirmed_by_importer_exporter", "in_progress", "shipment_received"],
-          "task_attributes": [{"task": ["upload_bill_of_lading", "generate_do_noc_certificate"], "status": "completed"}]
+          "task_attributes": [{"task": ["upload_bill_of_lading"], "status": "completed"}]
         },
         "all_status_filter":{"bl_status": ["uploaded", "approved", "eligible", "ineligible", "requested", "release_pending"]},
         "ready_to_release_filter":{"bl_status": ["release_pending"]},

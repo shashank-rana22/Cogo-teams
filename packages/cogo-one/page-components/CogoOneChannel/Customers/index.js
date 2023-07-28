@@ -33,11 +33,8 @@ function Customers({
 	workPrefernceLoading = false,
 	setOpenKamContacts = () => {},
 	agentStatus = {},
-	statusLoading = false,
-	updateUserStatus = () => {},
-	openInactiveModal = false,
-	setOpenInactiveModal = () => {},
 	fetchworkPrefernce = () => {},
+	agentTimeline = () => {},
 	setSendBulkTemplates = () => {},
 	setSelectedAutoAssign = () => {},
 	selectedAutoAssign = {},
@@ -105,11 +102,8 @@ function Customers({
 					<div className={styles.styled_toggle}>
 						<AgentStatus
 							agentStatus={agentStatus}
-							statusLoading={statusLoading}
-							updateUserStatus={updateUserStatus}
-							openInactiveModal={openInactiveModal}
-							setOpenInactiveModal={setOpenInactiveModal}
 							fetchworkPrefernce={fetchworkPrefernce}
+							agentTimeline={agentTimeline}
 						/>
 					</div>
 				)}
