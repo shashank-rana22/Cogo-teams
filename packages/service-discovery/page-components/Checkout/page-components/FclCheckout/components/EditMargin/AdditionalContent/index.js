@@ -11,7 +11,6 @@ import styles from './styles.module.css';
 
 function AdditionalContent({
 	rateDetails = [],
-	additionalRemark = '',
 	convenienceDetails = {},
 	convenience_line_item = {},
 	noRatesPresent = false,
@@ -62,7 +61,6 @@ function AdditionalContent({
 
 			<ShareQuotation
 				rateDetails={rateDetails}
-				additionalRemark={additionalRemark}
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}
 				noRatesPresent={noRatesPresent}

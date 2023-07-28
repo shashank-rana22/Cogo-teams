@@ -2,7 +2,7 @@
 	display: flex;
 	gap: 40px;
 	align-items: center;
-	margin: 80px 0 20px;
+	margin: 76px 0 20px;
 }
 
 .item_container {
@@ -30,4 +30,16 @@
 .control_item {
 	width: 60%;
 	margin-left: 24px;
+
+	&.cargo_value_currency {
+		width: 72%;
+	}
+}
+
+.flex {
+	display: flex;
+}
+
+.superscipt {
+	color: #ee3425;
 }

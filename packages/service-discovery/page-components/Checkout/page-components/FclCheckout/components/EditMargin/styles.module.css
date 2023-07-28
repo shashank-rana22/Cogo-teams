@@ -1,13 +1,3 @@
-.additional_remark {
-	margin: 16px;
-
-	:global {
-		.ui_input_control {
-			font-size: 14px !important;
-		}
-	}
-}
-
 .sub_heading {
 	margin-bottom: 6px;
 	font-weight: 600;

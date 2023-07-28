@@ -5,17 +5,18 @@
 	padding: 8px 16px;
 	margin-right: 20px;
 	cursor: pointer;
-	background: #fffffc;
-	border: 1px solid #fff;
+	background-color: #fff;
+	border: 1px solid #faf4c6;
 	border-radius: 8px;
+	box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
 	transition: 0.5s;
 
 	&:hover {
 		transform: scale(1.06);
 	}
 
-	&.selected {
-		background: #fffbdb;
+	&.active {
+		background: #faf4c6;
 		border: 1px solid #ffef81;
 		border-radius: 8px;
 	}

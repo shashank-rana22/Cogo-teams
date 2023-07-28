@@ -11,7 +11,6 @@ const ONE = 1;
 
 const useHandleShareQuotation = ({
 	rateDetails = [],
-	additionalRemark = '',
 	convenienceDetails = {},
 	convenience_line_item = {},
 	noRatesPresent = false,
@@ -112,7 +111,6 @@ const useHandleShareQuotation = ({
 			checkout_id,
 			margins                                 : FINAL_MARGINS,
 			is_applicable_for_approval_confirmation : false,
-			margin_approval_request_remarks         : additionalRemark ? [additionalRemark] : undefined,
 		};
 
 		await updateCheckoutMargin({ finalPayload });
@@ -128,8 +126,9 @@ const useHandleShareQuotation = ({
 
 	const updateState = () => {
 		updateCheckout({
-			values     : { state: 'locked', id: checkout_id, is_locked: true },
-			stateValue : 'preview_booking',
+			values      : { state: 'locked', id: checkout_id, is_locked: true },
+			stateValue  : 'preview_booking',
+			scrollToTop : true,
 		});
 	};
 

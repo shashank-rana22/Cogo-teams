@@ -11,7 +11,7 @@ import ShippingPreferences from './components/ShippingPreferences';
 import styles from './styles.module.css';
 import useHandleBookingConfirmation from './useHandleBookingConfirmation';
 
-function BookingConfirmation() {
+function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 	const {
 		detail,
 		primaryService,
@@ -22,6 +22,7 @@ function BookingConfirmation() {
 		updateLoading,
 		loading,
 		checkoutMethod,
+		earnable_cogopoints = {},
 	} = useContext(CheckoutContext);
 
 	const {
@@ -87,6 +88,8 @@ function BookingConfirmation() {
 				bookingConfirmationMode={bookingConfirmationMode}
 				invoicingParties={invoicingParties}
 				isVeryRisky={isVeryRisky && is_any_invoice_on_credit}
+				setIsShipmentCreated={setIsShipmentCreated}
+				earnable_cogopoints={earnable_cogopoints}
 			/>
 		</div>
 	);

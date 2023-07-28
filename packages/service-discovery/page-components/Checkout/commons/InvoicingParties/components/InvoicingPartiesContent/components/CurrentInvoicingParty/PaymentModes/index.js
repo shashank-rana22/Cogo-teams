@@ -46,6 +46,10 @@ function PaymentModes({
 
 		const valueToShow = paymentModeValues[name] || '';
 
+		if (!editMode && DOCUMENT_HANDLING_FIELDS.includes(label) && !valueToShow) {
+			return null;
+		}
+
 		return (
 			<div style={style} className={styles.container} key={label}>
 				<div className={styles.label}>{label}</div>

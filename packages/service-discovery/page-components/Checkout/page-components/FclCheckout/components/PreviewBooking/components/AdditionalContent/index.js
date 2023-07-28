@@ -1,4 +1,3 @@
-import { Input } from '@cogoport/components';
 import { useContext } from 'react';
 
 import AdditionalConditions from '../../../../../../commons/AdditionalConditions';
@@ -14,13 +13,10 @@ import { CheckoutContext } from '../../../../../../context';
 import styles from './styles.module.css';
 
 function AdditionalContent({
-	value = '',
-	onChange = () => {},
 	cargoDetails = {},
 	setCargoDetails = () => {},
 	agreeTandC = false,
 	setAgreeTandC = () => {},
-	additionalRemark = '',
 }) {
 	const {
 		rate,
@@ -41,6 +37,7 @@ function AdditionalContent({
 	return (
 		<div className={styles.container}>
 			<CargoDetails
+				detail={detail}
 				cargoDetails={cargoDetails}
 				setCargoDetails={setCargoDetails}
 			/>
@@ -62,16 +59,6 @@ function AdditionalContent({
 				loading={loading}
 				source="locked"
 			/>
-
-			<div className={styles.additional_remark}>
-				<div className={styles.sub_heading}>Additional Remark</div>
-
-				<Input
-					value={value}
-					onChange={onChange}
-					placeholder="Additional Remark that KAM can write if he wants to based on customers input....."
-				/>
-			</div>
 
 			<div className={styles.sub_heading}>Cancellation Policy</div>
 
@@ -107,7 +94,6 @@ function AdditionalContent({
 				updateLoading={updateLoading}
 				agreeTandC={agreeTandC}
 				cargoDetails={cargoDetails}
-				additionalRemark={additionalRemark}
 			/>
 		</div>
 	);

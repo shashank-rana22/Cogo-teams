@@ -14,6 +14,7 @@ const useHandleBookingConfirmationFooter = ({
 	checkoutMethod = '',
 	bookingConfirmationMode = '',
 	checkout_type = '',
+	setIsShipmentCreated = () => {},
 }) => {
 	const {
 		partner_id,
@@ -75,6 +76,7 @@ const useHandleBookingConfirmationFooter = ({
 		checkout_id: id,
 		rfq_id,
 		checkout_type,
+		setIsShipmentCreated,
 	});
 
 	const submitForOtpVerification = async () => {
@@ -100,6 +102,8 @@ const useHandleBookingConfirmationFooter = ({
 			if (checkoutMethod === 'controlled_checkout') {
 				controlBookingApproval();
 			} else {
+				setIsShipmentCreated(true);
+
 				const newHref = `${window.location.origin}/${partner_id}/shipments/${
 					shipment_id || res.data.shipment_id
 				}`;

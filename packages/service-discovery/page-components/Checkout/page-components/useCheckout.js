@@ -23,6 +23,7 @@ const MAPPING = {
 
 const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_type = '' }) => {
 	const [headerProps, setHeaderProps] = useState({});
+	const [isShipmentCreated, setIsShipmentCreated] = useState(false);
 
 	const { checkout_id = '', shipment_id = '', checkoutType = '' } = query;
 
@@ -35,6 +36,7 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 		invoice,
 		possible_subsidiary_services = [],
 		activated_on_paylater = {},
+		earnable_cogopoints = {},
 	} = data;
 
 	const {
@@ -125,6 +127,7 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 			checkoutType,
 			activated_on_paylater,
 			checkout_type,
+			earnable_cogopoints,
 		}),
 		[
 			primaryService,
@@ -152,6 +155,7 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 			checkoutType,
 			activated_on_paylater,
 			checkout_type,
+			earnable_cogopoints,
 		],
 	);
 
@@ -178,6 +182,8 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 		headerProps,
 		search_id,
 		importer_exporter_id,
+		isShipmentCreated,
+		setIsShipmentCreated,
 	};
 };
 

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function AdditionalTnc({ detail, updateCheckout = () => {}, updateLoading }) {
+function AdditionalTnc({ detail = {}, updateCheckout = () => {}, updateLoading = false }) {
 	const [value, setValue] = useState(
 		'Rates are per actuals from Shipping Lines, they might be subject to change before shipment confirmation',
 	);

@@ -1,0 +1,16 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	margin-right: 20px;
+	text-align: start;
+}
+
+.text {
+	margin-top: 2px;
+	font-size: 10px;
+}
+
+.amount {
+	font-size: 12px;
+	font-weight: 600;
+}

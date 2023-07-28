@@ -30,9 +30,9 @@ function Schedules({
 
 			{weeklySchedulesLoading && isEmpty(schedules) ? (
 				<div className={styles.loading}>
-					{[...Array(LOADING_ARRAY_LENGTH)].map((_) => (
+					{[...Array(LOADING_ARRAY_LENGTH).keys()].map((item) => (
 						<Placeholder
-							key={_}
+							key={item}
 							height="66px"
 							width="136px"
 							margin="0px 20px 0px 0px"
@@ -61,6 +61,7 @@ function Schedules({
 							setFilters={setFilters}
 							selectedWeek={selectedWeek}
 							loading={loading}
+							schedules={schedules}
 						/>
 					</div>
 				</div>

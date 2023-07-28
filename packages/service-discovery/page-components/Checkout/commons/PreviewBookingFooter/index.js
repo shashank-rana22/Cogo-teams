@@ -17,7 +17,6 @@ function PreviewBookingFooter({
 	isVeryRisky = false,
 	agreeTandC = false,
 	cargoDetails = {},
-	additionalRemark = '',
 }) {
 	const { detail = {} } = useContext(CheckoutContext);
 
@@ -45,6 +44,18 @@ function PreviewBookingFooter({
 			(item) => item.service_type === primary_service,
 		);
 
+		const {
+			cargo_readiness_date = '',
+			cargo_value = '',
+			cargo_value_currency = '',
+			commodity_category = '',
+		} = cargoDetails || {};
+
+		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency || !commodity_category) {
+			Toast.error('Please select cargo details');
+			return;
+		}
+
 		try {
 			await triggerUpdateCheckoutService({
 				data: {
@@ -52,15 +63,13 @@ function PreviewBookingFooter({
 					update_rates                    : false,
 					service                         : primary_service,
 					fcl_freight_services_attributes : primaryServicesArray.map(
-						({ id: service_id }) => {
-							const { cargo_readiness_date = '', cargo_value = '' } = cargoDetails || {};
-
-							return {
-								id                   : service_id,
-								cargo_readiness_date : cargo_readiness_date || undefined,
-								cargo_value          : Number(cargo_value) || undefined,
-							};
-						},
+						({ id: service_id }) => ({
+							id                   : service_id,
+							cargo_readiness_date : cargo_readiness_date || undefined,
+							cargo_value          : Number(cargo_value) || undefined,
+							cargo_value_currency : cargo_value_currency || undefined,
+							commodity_category   : commodity_category || commodity_category,
+						}),
 					),
 				},
 			});
@@ -68,11 +77,9 @@ function PreviewBookingFooter({
 			updateCheckout({
 				values: {
 					id,
-					state                           : 'booking_confirmation',
-					margin_approval_request_remarks : additionalRemark
-						? [additionalRemark]
-						: undefined,
+					state: 'booking_confirmation',
 				},
+				scrollToTop: true,
 			});
 		} catch (error) {
 			const { config = {} } = error.response;

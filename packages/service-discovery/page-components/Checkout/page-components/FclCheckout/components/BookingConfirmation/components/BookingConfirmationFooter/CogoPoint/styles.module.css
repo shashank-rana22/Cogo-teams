@@ -1,0 +1,26 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.points {
+	margin-left: 6px;
+	font-size: 14px;
+	font-weight: 700;
+	color: #f4b747;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	margin-left: 5px;
+	font-size: 10px;
+	color: #feebad;
+}
+
+.cogo_icon {
+	position: relative;
+	width: 16px;
+	height: 16px;
+}

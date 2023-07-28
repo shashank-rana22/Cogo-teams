@@ -61,6 +61,7 @@ function BookingProof({
 					uploadIcon={<IcMCloudUpload style={{ height: 30, width: 30 }} />}
 					accept={`image/*,.pdf,.eml,.doc,.docx,application/msword,application/vn
 					d.openxmlformats-officedocument.wordprocessingml.document`}
+					dropareaProps={{ heading: 'Upload Document', subHeading: 'image, pdf, docx, csv' }}
 					uploadType="aws"
 					height={50}
 					disabled={updateLoading}

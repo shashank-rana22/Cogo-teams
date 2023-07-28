@@ -1,6 +1,5 @@
-import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import BreakdownDetails from '../../../../commons/BreakdownDetails';
 import { CheckoutContext } from '../../../../context';
@@ -20,7 +19,6 @@ function EditMargin() {
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[GLOBAL_CONSTANTS.zeroth_index];
 
 	const [rateDetails, setRateDetails] = useState([]);
-	const [additionalRemark, setAdditionalRemark] = useState('');
 	const [convenienceDetails, setConvenienceDetails] = useState(() => ({
 		convenience_rate: {
 			price    : convenience_line_item?.price,
@@ -35,12 +33,6 @@ function EditMargin() {
 		detail,
 		checkout_id,
 	});
-
-	const { margin_approval_request_remarks = [] } = detail;
-
-	useEffect(() => {
-		setAdditionalRemark(margin_approval_request_remarks[GLOBAL_CONSTANTS.zeroth_index]);
-	}, [margin_approval_request_remarks]);
 
 	return (
 		<div>
@@ -61,18 +53,7 @@ function EditMargin() {
 				</div>
 			) : null}
 
-			<div className={styles.additional_remark}>
-				<div className={styles.sub_heading}>Additional Remark</div>
-
-				<Input
-					value={additionalRemark}
-					onChange={setAdditionalRemark}
-					placeholder="Additional Remark that KAM can write if he wants to based on customers input....."
-				/>
-			</div>
-
 			<AdditionalContent
-				additionalRemark={additionalRemark}
 				rateDetails={rateDetails}
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}

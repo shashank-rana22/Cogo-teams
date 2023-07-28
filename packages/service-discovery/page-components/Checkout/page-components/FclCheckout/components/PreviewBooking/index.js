@@ -9,24 +9,24 @@ import styles from './styles.module.css';
 
 function PreviewBooking() {
 	const {
-		detail = {},
 		primaryService,
 		rate,
 	} = useContext(CheckoutContext);
 
-	const { margin_approval_request_remarks = [] } = detail;
-
-	const { hs_code, cargo_readiness_date = '', cargo_value } = primaryService;
+	const {
+		commodity_category = '',
+		cargo_readiness_date = '',
+		cargo_value,
+		cargo_value_currency = '',
+	} = primaryService;
 
 	const [showBreakup, setShowBreakup] = useState(false);
-	const [additionalRemark, setAdditionalRemark] = useState(
-		() => margin_approval_request_remarks[GLOBAL_CONSTANTS.zeroth_index] || '',
-	);
 
 	const [cargoDetails, setCargoDetails] = useState(() => ({
-		hs_code,
-		cargo_readiness_date: cargo_readiness_date ? new Date(cargo_readiness_date) : undefined,
+		commodity_category,
+		cargo_readiness_date : cargo_readiness_date ? new Date(cargo_readiness_date) : undefined,
 		cargo_value,
+		cargo_value_currency : cargo_value_currency || GLOBAL_CONSTANTS.currency_code.USD,
 	}));
 
 	const [agreeTandC, setAgreeTandC] = useState(false);
@@ -42,13 +42,10 @@ function PreviewBooking() {
 			/>
 
 			<AdditionalContent
-				value={additionalRemark}
-				onChange={setAdditionalRemark}
 				cargoDetails={cargoDetails}
 				setCargoDetails={setCargoDetails}
 				agreeTandC={agreeTandC}
 				setAgreeTandC={setAgreeTandC}
-				additionalRemark={additionalRemark}
 			/>
 		</div>
 	);

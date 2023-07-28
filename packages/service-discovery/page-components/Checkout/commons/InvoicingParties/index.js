@@ -43,7 +43,10 @@ function InvoicingParties({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>Invoicing Preferences</div>
+			<div className={styles.heading}>
+				Invoicing Preferences
+				<sup className={styles.superscipt}>*</sup>
+			</div>
 
 			<InvoicingPartiesContent
 				invoicingParties={invoicingParties}

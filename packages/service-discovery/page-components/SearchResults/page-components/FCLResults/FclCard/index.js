@@ -19,6 +19,7 @@ function RateCardTopSection({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
+	isGuideViewed = false,
 }) {
 	return (
 		<div className={styles.top}>
@@ -32,6 +33,7 @@ function RateCardTopSection({
 				infoBanner={infoBanner}
 				index={index}
 				setInfoBanner={setInfoBanner}
+				isGuideViewed={isGuideViewed}
 			/>
 		</div>
 	);
@@ -122,6 +124,7 @@ function FclCard({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
+	isGuideViewed = false,
 }) {
 	const { service_rates = {}, schedules = {} } = rateCardData;
 	const primaryService = detail?.search_type;
@@ -169,6 +172,7 @@ function FclCard({
 				infoBanner={infoBanner}
 				index={index}
 				setInfoBanner={setInfoBanner}
+				isGuideViewed={isGuideViewed}
 			/>
 
 			<MiddleSection

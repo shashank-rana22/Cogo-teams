@@ -7,6 +7,7 @@ const useBookShipment = ({
 	checkout_id = '',
 	rfq_id = '',
 	checkout_type = '',
+	setIsShipmentCreated = () => {},
 }) => {
 	const {
 		general: { query = {} },
@@ -32,6 +33,8 @@ const useBookShipment = ({
 				return;
 			}
 			const res = await trigger({ data: params });
+
+			setIsShipmentCreated(true);
 
 			Toast.success('Shipment booked successflly');
 

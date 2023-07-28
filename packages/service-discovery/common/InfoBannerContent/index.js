@@ -1,8 +1,13 @@
 import { Button } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 
 import styles from './styles.module.css';
 
 function InfoBannerContent({ popoverComponentData = {}, totalBanners = 1, setInfoBanner = () => {} }) {
+	const { user:{ id } } = useSelector(({ profile }) => ({
+		user: profile.user,
+	}));
+
 	const {
 		sequence_number = 1,
 		heading = '',
@@ -12,6 +17,10 @@ function InfoBannerContent({ popoverComponentData = {}, totalBanners = 1, setInf
 	} = popoverComponentData;
 
 	const onButtonClick = ({ name }) => {
+		if (name === 'close' && totalBanners === sequence_number) {
+			localStorage.setItem(`guide_completed_for_${id}`, true);
+		}
+
 		if (name === 'close') {
 			setInfoBanner((prev) => ({ ...prev, current: '' }));
 			return;
