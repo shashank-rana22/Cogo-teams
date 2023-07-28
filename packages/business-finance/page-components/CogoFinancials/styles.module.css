@@ -46,3 +46,8 @@
 	width: 49%;
 	background: #fff;
 }
+
+.graphs {
+	display: flex;
+	overflow: scroll;
+}
