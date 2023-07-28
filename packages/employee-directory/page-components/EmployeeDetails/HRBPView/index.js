@@ -20,7 +20,7 @@ const getViewData = (data, val) => {
 		return <Pill {...statusData}>{statusData.label}</Pill>;
 	}
 
-	if (val === 'date_of_joining') {
+	if (['date_of_joining', 'resignation_date'].includes(val)) {
 		return formatDate({
 			date       : data[val],
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MM yyyy'],

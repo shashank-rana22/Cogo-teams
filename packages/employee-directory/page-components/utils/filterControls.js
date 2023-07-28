@@ -6,7 +6,7 @@ export const CONTROLS = [
 		label       : 'Select COGO ID',
 		controlType : 'asyncSelect',
 		placeholder : 'Search ID',
-		asyncKey    : 'list_employee_details',
+		asyncKey    : 'list_employees',
 		params      : {
 			filters                       : { status: 'active' },
 			page_limit                    : 100,
@@ -24,7 +24,7 @@ export const CONTROLS = [
 		label       : 'Select Designation',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Designation',
-		asyncKey    : 'list_employee_details',
+		asyncKey    : 'list_employees',
 		params      : {
 			filters                       : { status: 'active' },
 			page_limit                    : 100,
@@ -42,7 +42,7 @@ export const CONTROLS = [
 		label       : 'Select Tribe',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Tribe',
-		asyncKey    : 'list_all_tribes',
+		asyncKey    : 'list_tribes',
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
@@ -55,7 +55,7 @@ export const CONTROLS = [
 		label       : 'Select Squad',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Squad',
-		asyncKey    : 'list_all_squads',
+		asyncKey    : 'list_squads',
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
@@ -81,7 +81,7 @@ export const CONTROLS = [
 		label       : 'Select Location',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Location',
-		asyncKey    : 'list_employee_details',
+		asyncKey    : 'list_employees',
 		params      : {
 			filters                       : { status: 'active' },
 			page_limit                    : 100,
@@ -99,7 +99,7 @@ export const CONTROLS = [
 		label       : 'Select Chapter',
 		controlType : 'asyncSelect',
 		placeholder : 'Search Chapter',
-		asyncKey    : 'list_all_chapters',
+		asyncKey    : 'list_chapters',
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,

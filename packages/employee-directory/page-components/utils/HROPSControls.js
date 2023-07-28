@@ -33,7 +33,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			label       : 'Select Designation',
 			controlType : 'asyncSelect',
 			placeholder : 'Search Designation',
-			asyncKey    : 'list_employee_details',
+			asyncKey    : 'list_employees',
 			params      : {
 				filters                       : { status: 'active' },
 				page_limit                    : 100,
@@ -54,7 +54,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			label       : 'Select Department',
 			controlType : 'asyncSelect',
 			placeholder : 'Search Department',
-			asyncKey    : 'list_employee_details',
+			asyncKey    : 'list_employees',
 			params      : {
 				filters                       : { status: 'active' },
 				page_limit                    : 100,
@@ -91,7 +91,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			label       : 'Select Reporting Office',
 			controlType : 'asyncSelect',
 			placeholder : 'Select Reporting Office',
-			asyncKey    : 'list_employee_details',
+			asyncKey    : 'list_employees',
 			params      : {
 				filters                       : { status: 'active' },
 				page_limit                    : 100,
@@ -129,7 +129,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			label       : 'Select Squad',
 			controlType : 'asyncSelect',
 			placeholder : 'Select Squad',
-			asyncKey    : 'list_all_squads',
+			asyncKey    : 'list_squads',
 			params      : {
 				filters    : { status: 'active' },
 				page_limit : 100,
@@ -145,7 +145,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			label       : 'Select Tribe',
 			controlType : 'asyncSelect',
 			placeholder : 'Select Tribe',
-			asyncKey    : 'list_all_tribes',
+			asyncKey    : 'list_tribes',
 			params      : {
 				filters    : { status: 'active' },
 				page_limit : 100,
@@ -161,7 +161,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			label       : 'Select Chapter',
 			controlType : 'asyncSelect',
 			placeholder : 'Select Chapter',
-			asyncKey    : 'list_all_chapters',
+			asyncKey    : 'list_chapters',
 			params      : {
 				filters    : { status: 'active' },
 				page_limit : 100,

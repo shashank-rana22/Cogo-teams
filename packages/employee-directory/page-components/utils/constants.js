@@ -42,8 +42,9 @@ export const SORT_OPTIONS = [
 
 export const HRBP_VIEW_DATA = [
 	{
-		label : 'Employee Name',
-		value : 'name',
+		label     : 'Employee Name',
+		value     : 'name',
+		startCase : true,
 	},
 	{
 		label : 'COGO-ID',
@@ -54,44 +55,54 @@ export const HRBP_VIEW_DATA = [
 		value : 'cogoport_email',
 	},
 	{
-		label : 'Designation',
-		value : 'designation',
+		label     : 'Designation',
+		value     : 'designation',
+		startCase : true,
 	},
 	{
-		label : 'Department',
-		value : 'department',
+		label     : 'Department',
+		value     : 'department',
+		startCase : true,
 	},
 	{
-		label : 'Reporting Manager',
-		value : 'reporting_manager.name',
+		label     : 'Reporting Manager',
+		value     : 'reporting_manager.name',
+		startCase : true,
 	},
 	{
-		label : 'Reporting Location',
-		value : 'office_location',
+		label     : 'Reporting Location',
+		value     : 'office_location',
+		startCase : true,
 	},
 	{
-		label : 'Payroll Country',
-		value : 'payroll_country',
+		label     : 'Payroll Country',
+		value     : 'payroll_country',
+		startCase : true,
 	},
 	{
-		label : 'Status',
-		value : 'status',
+		label     : 'Status',
+		value     : 'status',
+		startCase : true,
 	},
 	{
-		label : 'Squad',
-		value : 'squad_name',
+		label     : 'Squad',
+		value     : 'squad_name',
+		startCase : true,
 	},
 	{
-		label : 'Tribe',
-		value : 'tribe_name',
+		label     : 'Tribe',
+		value     : 'tribe_name',
+		startCase : true,
 	},
 	{
-		label : 'Chapter',
-		value : 'chapter_name',
+		label     : 'Chapter',
+		value     : 'chapter_name',
+		startCase : true,
 	},
 	{
-		label : 'HRBP',
-		value : 'hrbp.name',
+		label     : 'HRBP',
+		value     : 'hrbp.name',
+		startCase : true,
 	},
 	{
 		label : 'LI',
