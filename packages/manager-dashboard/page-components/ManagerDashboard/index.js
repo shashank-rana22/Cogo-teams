@@ -19,6 +19,8 @@ import getColumns from './getColumns';
 import styles from './styles.module.css';
 import useGetRatingColumns from './useGetRatingColumns';
 
+const ROUND_OFF_DIGITS = 100;
+
 function ManagerDashboard() {
 	const [employeeId, setEmployeeId] = useState('');
 	const [openKraModal, setOpenKraModal] = useState(false);
@@ -37,7 +39,7 @@ function ManagerDashboard() {
 		loading, isReportingManager,
 	} = useGetRatingReviewDetails({ level, ratingCycle, setSortedData });
 
-	const { list = [] } = data || {};
+	const { list = [], mean_rating } = data || {};
 
 	const { data : ratingData, loading : ratingLoading } = useGetRatingDetails(ratingCycle);
 
@@ -139,14 +141,23 @@ function ManagerDashboard() {
 						)}
 					</div>
 				)}
+
 				{!isEmpty(ratingCycle) && (
-					<div className={styles.flexitem_2}>
-						<StyledTable
-							columns={ratingColumns}
-							data={ratingData}
-							emptyText="No Data Found"
-							loading={ratingLoading}
-						/>
+					<div className={styles.right_table}>
+						<div className={styles.flexitem_2}>
+							<StyledTable
+								columns={ratingColumns}
+								data={ratingData}
+								emptyText="No Data Found"
+								loading={ratingLoading}
+							/>
+						</div>
+
+						<div className={styles.mean_value_wrapper}>
+							Organization Rating:
+							{' '}
+							{Math.round(mean_rating * ROUND_OFF_DIGITS) / ROUND_OFF_DIGITS}
+						</div>
 					</div>
 				)}
 			</div>

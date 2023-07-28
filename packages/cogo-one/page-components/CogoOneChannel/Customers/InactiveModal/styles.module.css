@@ -3,8 +3,19 @@
 	font-size: 12px;
 }
 
-.duration_div {
+.duration_section {
 	margin: 10px 20px;
+
+	:global {
+		.ui_text_area_container {
+			margin-top: 8px;
+		}
+	}
+}
+
+.error_text {
+	font-size: 10px;
+	color: #ee3425;
 }
 
 .actions {

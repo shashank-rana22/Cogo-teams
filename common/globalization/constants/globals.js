@@ -46,6 +46,7 @@ const GLOBAL_CONSTANTS = {
 			'hh:mm aaa' : 'hh:mm aaa',
 			'HH:mm'     : 'HH:mm',
 			'hh:mm:ss'  : 'hh:mm:ss',
+			'HH:mm:ss'  : 'HH:mm:ss',
 			hh          : 'hh',
 			HH          : 'HH',
 			mm          : 'mm',
@@ -300,6 +301,8 @@ const GLOBAL_CONSTANTS = {
 		quick_actions        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg',
 		customer_insights    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg',
 		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
+		clock_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
+		sad_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
 	},
 
 	video_call_ring_tone_url:
@@ -421,8 +424,10 @@ const GLOBAL_CONSTANTS = {
 		four_characters_pin    : /^.{4}$/,
 		amount_seperator       : /\D/g,
 		white_space_characters : /\s/g,
+		email_subject_prefix   : /^(re|fwd|fw):\s*/i,
 	},
 	zeroth_index                 : 0,
+	milliseconds_in_one_day      : 86400000,
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
 	others                       : {

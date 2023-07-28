@@ -1,0 +1,114 @@
+.route_port {
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+}
+
+.left,
+.right {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 40%;
+	height: 120px;
+	padding: 8px;
+}
+
+.left {
+	justify-content: right;
+}
+
+.middle {
+	position: relative;
+}
+
+.circle {
+	position: absolute;
+	top: calc(50% - 8px);
+	left: calc(50% + 12px);
+	width: 16px;
+	height: 16px;
+	background-color: #acdadf;
+	border-radius: 50%;
+}
+
+.hr_line_up {
+	position: absolute;
+	left: 20px;
+	height: 128px;
+	margin-top: -60px;
+	border-right: 2px solid #acdadf;
+}
+
+.eta_etd {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.eta,
+.etd {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #828282;
+}
+
+.port_name {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+	cursor: pointer;
+}
+
+.port_terminal {
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.diff_in_days {
+	position: absolute;
+	top: calc(100% - 12px);
+	font-size: 14px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.vertical_dots {
+	margin-left: 10px;
+
+	.vertical_dots {
+		margin-left: 10px;
+	}
+
+	.popover_content {
+		:global {
+			.tippy-content {
+				padding: 0 !important;
+			}
+		}
+	}
+
+	.port_input {
+		display: flex;
+		align-items: center;
+		width: 200px;
+		cursor: pointer;
+	}
+
+	.days {
+		width: 160px;
+		padding: 2px;
+		margin-right: -100px;
+	}
+
+	.delete_icon {
+		width: 20px;
+		height: 20px;
+		margin: 40px;
+	}
+}

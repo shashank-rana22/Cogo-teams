@@ -322,3 +322,18 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
+
+export const OFFLINE_REASONS_OPTIONS = [
+	{
+		label : 'Lunch Break',
+		value : 'lunch_break',
+	},
+	{
+		label : 'Snack Break',
+		value : 'snack_break',
+	},
+	{
+		label : 'Others',
+		value : 'others',
+	},
+];

@@ -25,7 +25,7 @@ const useSubmitOtp = ({ agentId, firestore, setShowModal }) => {
 	const [otpNumber, setOtpNumber] = useState('');
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/verify_omnichannel_lock_screen_otp',
+		url    : 'communication/verify_omnichannel_lock_screen_otp',
 		method : 'post',
 	}, { manual: true });
 
