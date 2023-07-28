@@ -8,7 +8,9 @@ import controls from '../../../configurations/upload-final-awb-controls';
 import useCreateShipmentDocument from '../../../hooks/useCreateShipmentDocument';
 import useUpdateShipmentDocument from '../../../hooks/useUpdateDocument';
 
-const formatPAyload = (showUpload, fileName, finalUrl, edit) => {
+const ZERO = 0;
+
+const formatPAyload = (showUpload, fileName, finalUrl, edit, hawbCount) => {
 	const {
 		shipmentId, serviceProviderId, documentType, documentId, serviceId, type, awbNumber, blDetailId,
 	} = showUpload || {};
@@ -24,6 +26,7 @@ const formatPAyload = (showUpload, fileName, finalUrl, edit) => {
 			pending_task_id     : edit === 'edit' ? undefined : (showUpload?.id || showUpload?.taskId),
 			state               : type === 'FinalAwb' ? undefined : 'document_accepted',
 			document_url        : finalUrl,
+			hawbCount,
 			data                : {
 
 				status          : 'uploaded',
@@ -67,8 +70,9 @@ function UploadModal({
 
 	const onSubmit = (formValues) => {
 		const { fileName, finalUrl } = formValues?.document || {};
+		const hawbCount = formValues?.hawbCount || ZERO;
 
-		const payload = formatPAyload(showUpload, fileName, finalUrl, edit);
+		const payload = formatPAyload(showUpload, fileName, finalUrl, edit, hawbCount);
 
 		if (edit) {
 			updateDocument(payload, listAPI);
