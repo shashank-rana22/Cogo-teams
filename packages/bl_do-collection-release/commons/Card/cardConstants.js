@@ -73,8 +73,10 @@ export const ASSIGNED_STAKEHOLDER_MAPPING = {
 };
 
 export const STAKEHOLDER_MAPPING = {
-	service_ops2    : 'Document Desk:',
-	booking_agent   : 'KAM:',
-	release_desk    : 'Release Desk:',
-	collection_desk : 'Collection Desk:',
+	service_ops2              : 'Document Desk:',
+	booking_agent             : 'KAM:',
+	release_desk              : 'Release Desk:',
+	collection_desk           : 'Collection Desk:',
+	origin_booking_agent      : 'OKAM:',
+	destination_booking_agent : 'DKAM:',
 };
