@@ -50,7 +50,7 @@ const useGetRDShipmentList = () => {
 			origin_airport_id               : filters?.origin_airport_id || undefined,
 			destination_airport_id          : filters?.destination_airport_id || undefined,
 			port_id                         : filters?.port_id || undefined,
-			airpot_id                       : filters?.airpot_id || undefined,
+			airport_id                      : filters?.airport_id || undefined,
 			trade_type                      : filters?.trade_type || undefined,
 			state                           : shipmentStatusMapping[filters?.state] || undefined,
 			source                          : filters?.source || undefined,
@@ -64,8 +64,9 @@ const useGetRDShipmentList = () => {
 			sort_type                       : filters?.sort_by.split('_').pop() || undefined,
 			sort_by                         : filters?.sort_by.split('_').slice(VALUE_ZERO, VALUE_TWO).join('_')
 												|| undefined,
-			cargo_readiness_greater_than : filters?.cargo_readiness_date?.startDate || undefined,
-			cargo_readiness_less_than    : filters?.cargo_readiness_date?.endDate || undefined,
+			cargo_readiness_greater_than     : filters?.cargo_readiness_date?.startDate || undefined,
+			cargo_readiness_less_than        : filters?.cargo_readiness_date?.endDate || undefined,
+			primary_service_reverts_recieved : filters?.reverts_recieved ? true : undefined,
 		};
 		try {
 			const resp = await trigger({

@@ -36,13 +36,16 @@ function RenderData({
 				<div className={styles.final_rating_heading}>
 					Final Comment and Rating :
 				</div>
-				<RatingComponent
-					type="star"
-					value={final_rating}
-					totalStars={final_rating}
-					disabled
-					size="xl"
-				/>
+
+				<div style={{ paddingLeft: 14 }}>
+					<RatingComponent
+						type="star"
+						value={final_rating}
+						totalStars={5}
+						disabled
+						size="xl"
+					/>
+				</div>
 			</div>
 
 			<div className={styles.final_comment_rating}>

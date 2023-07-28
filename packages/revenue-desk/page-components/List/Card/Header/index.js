@@ -31,7 +31,7 @@ function Header({ data, filters }) {
 					</Pill>
 				</div>
 				<div className={styles.pills_container}>
-					{data?.trade_type && (
+					{(data?.trade_type || data?.inco_term) && (
 						<Pill size="md" color="#F2F3FA">
 							<div style={{ color: '#7278AD' }}>
 								{startCase(data?.trade_type) || startCase(incoTermMapping[data?.inco_term])}

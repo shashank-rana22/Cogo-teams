@@ -1,14 +1,17 @@
 import { Select } from '@cogoport/components';
-import { IcMArrowNext } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import StyledTable from '../../../common/StyledTable';
 
 import ModificationHistory from './ModificationHistory';
-import Data from './RenderData';
+import RenderData from './RenderData';
 import SelfRatingForm from './SelfRatingForm';
 import styles from './styles.module.css';
 import useGetColumns from './useGetColumns';
+
+const YEARLY_RATING_CYCLE_OPTIONS = [{
+	label: '2023', value: '2023',
+}];
 
 function EmployeePerformance({
 	data,
@@ -20,6 +23,8 @@ function EmployeePerformance({
 	refetch,
 	openRatingForm,
 	setOpenRatingForm,
+	yearlyRatingCycle,
+	setYearlyRatingCycle,
 }) {
 	const [openHistory, setOpenHistory] = useState(false);
 	const columns = useGetColumns();
@@ -36,35 +41,31 @@ function EmployeePerformance({
 		setOpenHistory(false);
 	};
 
-	const renderLabel = (item) => {
-		const { label } = item;
-		const splitItem = label?.split('-');
-		const [firstItem, secondItem] = splitItem || [];
-		return (
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-				{firstItem}
-				<IcMArrowNext style={{ margin: '0 8px' }} />
-				{secondItem}
-			</div>
-		);
-	};
-
 	return (
 		<>
 			<div className={styles.flex}>
 				{!ratingLoading && (
 					<Select
+						className={styles.yearly_rating_cycle_select}
+						options={YEARLY_RATING_CYCLE_OPTIONS}
+						value={yearlyRatingCycle}
+						onChange={(e) => setYearlyRatingCycle(e)}
+						size="md"
+					/>
+				)}
+
+				{!ratingLoading && (
+					<Select
 						className={styles.rating_cycle_select}
 						options={ratingOptions}
 						value={ratingCycle}
-						renderLabel={(item) => renderLabel(item)}
 						onChange={(e) => setRatingCycle(e)}
 						size="md"
 					/>
 				)}
 			</div>
 
-			<Data
+			<RenderData
 				loading={loading || ratingLoading}
 				is_rating_published={is_rating_published}
 				current_month_feedback_given={current_month_feedback_given}

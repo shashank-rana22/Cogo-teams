@@ -9,6 +9,8 @@ import CargoDetails from '../../../../commons/CargoDetails';
 import formatDeadlineDate from './formatDeadlineDate';
 import styles from './styles.module.css';
 
+const REMOVE_LINE_ITEM_NAME = 1;
+
 function TaskDetails({
 	task = {},
 	isTaskOpen = false,
@@ -25,7 +27,9 @@ function TaskDetails({
 	let taskName = startCase(task?.label || task?.task);
 
 	if (task?.service_type === 'subsidiary_service') {
-		taskName = `Mark ( ${REQUIRED_SERVICE_ARRAY?.[GLOBAL_CONSTANTS.zeroth_index]?.service_name} ) ${
+		taskName = `Mark ${
+			task?.subsidiary_service_name.split(' ')[GLOBAL_CONSTANTS.zeroth_index]
+		} (${task?.subsidiary_service_name.split(' ').slice(REMOVE_LINE_ITEM_NAME).join(' ')}) ${
 			task?.task === 'mark_completed' ? 'Completed' : 'Confirm'
 		}` || 	startCase(task?.label) || startCase(task?.task);
 	}
@@ -74,7 +78,7 @@ function TaskDetails({
 									<div className={styles.deadline}>
 										<IcMTimer />
 
-										&nbsp;Deadline: &nbsp;
+										<span className={styles.deadline_text}>Deadline:</span>
 										{formatDeadlineDate(new Date(task?.deadline))}
 									</div>
 								</div>
@@ -102,7 +106,7 @@ function TaskDetails({
 						{task?.due_in ? (
 							<div className={styles.completed}>
 								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg"
+									src={GLOBAL_CONSTANTS.image_url.due_in_svg}
 									alt="due-in"
 								/>
 								{`( Due In: ${task.due_in} )`}
@@ -112,7 +116,7 @@ function TaskDetails({
 						{task?.over_due ? (
 							<div className={styles.completed}>
 								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg"
+									src={GLOBAL_CONSTANTS.image_url.over_due_svg}
 									alt="over-due"
 								/>
 								{`( Due In: ${task.over_due} )`}

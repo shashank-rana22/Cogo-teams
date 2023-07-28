@@ -22,6 +22,7 @@ function ExecuteTask({
 	primary_service = {},
 	getShipment = () => {},
 	getShipmentTimeline = () => {},
+	servicesLoading = false,
 
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
@@ -80,7 +81,7 @@ function ExecuteTask({
 
 	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - DEFAULT_STEP_VALUE] : {};
 
-	if (loading) {
+	if (loading || servicesLoading) {
 		return <div><LoadingState /></div>;
 	}
 
