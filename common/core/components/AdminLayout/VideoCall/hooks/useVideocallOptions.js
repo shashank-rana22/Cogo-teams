@@ -14,13 +14,13 @@ function useVideocallOptions({
 	const { callingRoomDetails } = callDetails;
 	const { call_status: callStatus } = callingRoomDetails;
 
-	const stopCall = useCallback(({ e, clickType, time = 0 }) => {
+	const stopCall = useCallback(({ e, clickType, duration = 0 }) => {
 		if (clickType === 'mini_screen') {
 			e.stopPropagation();
 		}
 
 		if (callStatus === 'accepted') {
-			handleCallEnd({ callActivity: 'accepted', time });
+			handleCallEnd({ callActivity: 'answered', duration });
 		} else {
 			handleCallEnd({ callActivity: 'missed' });
 		}

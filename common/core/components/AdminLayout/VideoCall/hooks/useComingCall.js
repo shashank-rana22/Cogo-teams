@@ -99,7 +99,7 @@ function useComingCall({
 					firestore,
 					callingRoomId,
 				});
-				handleCallEnd({ callActivity: 'accepted', description: 'peer js technical error' });
+				handleCallEnd({ callActivity: 'answered', description: 'peer js technical error' });
 			});
 		} catch (error) {
 			console.error('user stream is not working', error);

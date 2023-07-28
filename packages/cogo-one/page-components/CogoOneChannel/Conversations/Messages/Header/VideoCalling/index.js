@@ -1,6 +1,5 @@
 import { IcMCallmonitor } from '@cogoport/icons-react';
-import { useDispatch, useSelector } from '@cogoport/store';
-import { setProfileState } from '@cogoport/store/reducers/profile';
+import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
 import useCreateVideoCallTimeline from '../../../../../../hooks/useCreateVideoCallTimeline';
@@ -8,33 +7,23 @@ import useCreateVideoCallTimeline from '../../../../../../hooks/useCreateVideoCa
 import styles from './styles.module.css';
 
 function VideoCalling({ formattedData = {} }) {
-	const { inVideoCall } = useSelector(({ profile }) => ({ inVideoCall: profile?.is_in_video_call || false }));
-	const dispatch = useDispatch();
+	const { inVideoCall, video_call_id } = useSelector(({ profile }) => ({
+		inVideoCall   : profile?.is_in_video_call || false,
+		video_call_id : profile?.video_call_id,
+	}));
+	console.log('video_call_id:', video_call_id);
 
-	const { createVideoCallTimeline, videoCallId } = useCreateVideoCallTimeline();
+	const { createVideoCallTimeline } = useCreateVideoCallTimeline({ formattedData });
 	const {
 		user_id,
 		lead_user_id,
-		user_name,
 	} = formattedData || {};
 
-	const mountVideoCall = useCallback(() => {
+	const mountVideoCall = useCallback(async () => {
 		if (!inVideoCall) {
-			dispatch(
-				setProfileState({
-					video_call_recipient_data: {
-						user_id,
-						user_name,
-					},
-					is_in_video_call : true,
-					video_call_id    : videoCallId,
-				}),
-			);
+			await createVideoCallTimeline({ userCallId: user_id, leadUserId: lead_user_id });
 		}
-
-		createVideoCallTimeline({ userCallId: user_id, leadUserId: lead_user_id });
-		// createVideoCallTimeline({data: {}});
-	}, [createVideoCallTimeline, dispatch, inVideoCall, lead_user_id, user_id, user_name, videoCallId]);
+	}, [createVideoCallTimeline, inVideoCall, lead_user_id, user_id]);
 
 	return (
 		<div role="presentation" className={styles.video_call_btn} onClick={mountVideoCall}>

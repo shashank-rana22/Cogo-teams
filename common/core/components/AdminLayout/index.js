@@ -45,6 +45,7 @@ function AdminLayout({
 		is_in_voice_call: inCall = false, voice_call_recipient_data = {},
 		is_in_video_call: inVideoCall = false, video_call_recipient_data = {}, video_call_id: videoCallId = '',
 	} = user_data;
+	// console.log('videoCallId:', videoCallId);
 
 	const {
 		id: partner_id = '',

@@ -32,9 +32,8 @@ function useVideoCallFirebase({
 
 	const { id: userId, name: userName } = user_data || {};
 
-	const handleCallEnd = useCallback(async ({ callActivity, time = 0, description = '' }) => {
-		await saveInACallStatus(false);
-		await setCallComing(false);
+	const handleCallEnd = useCallback(async ({ callActivity, duration = 0, description = '' }) => {
+		setCallComing(false);
 
 		const localPeerRef = peerRef;
 		if (localPeerRef.current) {
@@ -42,7 +41,7 @@ function useVideoCallFirebase({
 		}
 		localPeerRef.current = null;
 
-		await setCallDetails({
+		setCallDetails({
 			myDetails          : {},
 			peerDetails        : {},
 			callingRoomDetails : {},
@@ -51,32 +50,35 @@ function useVideoCallFirebase({
 			callingType        : '',
 		});
 
-		await setWebrtcToken({
+		setWebrtcToken({
 			userToken : {},
 			peerToken : {},
 		});
 
-		await setToggleState({
+		setToggleState({
 			isMicActive         : true,
 			isVideoActive       : true,
 			isScreenShareActive : false,
 			isMinimize          : false,
 		});
 
-		await setStreams((prev) => {
+		setStreams((prev) => {
 			stopStream({ streamType: 'userStream', currentStream: prev });
 			return {
 				userStream : null,
 				peerStream : null,
 			};
 		});
-		updateVideoCallTimeline({ callActivity, time, description, videoCallId });
+
+		await updateVideoCallTimeline({ callActivity, duration, description, videoCallId });
+
+		saveInACallStatus(false);
 	}, [saveInACallStatus,
 		setCallComing,
 		peerRef,
 		setCallDetails, setWebrtcToken, setToggleState, setStreams, updateVideoCallTimeline, videoCallId]);
 
-	const callingToMediaStream = useCallback(async (peerDetails) => {
+	const callingToMediaStream = useCallback(async ({ peerDetails, videoCallIdFirebase }) => {
 		try {
 			const myStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
 
@@ -108,6 +110,7 @@ function useVideoCallFirebase({
 						peer_details         : peerDetails,
 						peer_id              : peerDetails?.user_id,
 						webrtc_token_room_id : userId,
+						video_call_id        : videoCallIdFirebase,
 					},
 					callBackFunc: (getCallingRoomId) => {
 						saveWebrtcToken({
@@ -138,7 +141,7 @@ function useVideoCallFirebase({
 					callingRoomId,
 					firestore,
 				});
-				handleCallEnd({ callActivity: 'accepted' });
+				handleCallEnd({ callActivity: 'answered' });
 			});
 		} catch (err) {
 			console.error('my user stream error', err);
@@ -152,11 +155,11 @@ function useVideoCallFirebase({
 			});
 			handleCallEnd({ callActivity: 'missed' });
 		}
-	}, [callingRoomId, handleCallEnd, firestore,
-		peerRef, saveInACallStatus, setCallDetails, setStreams, userId, userName]);
+	}, [saveInACallStatus, setStreams, peerRef, userName,
+		userId, firestore, setCallDetails, callingRoomId, handleCallEnd]);
 
 	const handleOutgoingCall = useCallback(
-		(peerDetails = {}) => {
+		({ peerDetails = {}, videoCallIdFirebase }) => {
 			if (!peerDetails?.user_id) {
 				return;
 			}
@@ -175,7 +178,7 @@ function useVideoCallFirebase({
 				webrtcTokenRoomId : userId,
 				callingType       : 'outgoing',
 			}));
-			callingToMediaStream(peerDetails);
+			callingToMediaStream({ peerDetails, videoCallIdFirebase });
 		},
 		[setCallDetails, callingToMediaStream, userName, userId],
 	);

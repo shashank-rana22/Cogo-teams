@@ -95,7 +95,7 @@ function VideoCallOptions({
 
 			<div
 				role="presentation"
-				onClick={(e) => stopCall({ e, clickType: type, time })}
+				onClick={(e) => stopCall({ e, clickType: type, duration: time })}
 				className={styles.hangup_icon}
 			>
 				<IcMCall className={styles.end_call_icon} />

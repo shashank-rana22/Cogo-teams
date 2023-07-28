@@ -46,8 +46,7 @@ function VideoCall({
 
 	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
-
-	const { updateVideoCallTimeline = () => {} } = useUpdateVideoCallTimeline();
+	const { updateVideoCallTimeline = () => {} } = useUpdateVideoCallTimeline({ callDetails });
 
 	const { handleOutgoingCall, handleCallEnd } = useVideoCallFirebase({
 		firestore,
@@ -89,14 +88,14 @@ function VideoCall({
 	useEffect(
 		() => {
 			if (inVideoCall && videoCallRecipientData?.user_id) {
-				handleOutgoingCall(videoCallRecipientData);
+				handleOutgoingCall({ peerDetails: videoCallRecipientData, videoCallIdFirebase: videoCallId });
 			}
 
 			const timeoutMissCallId = setTimeout(missCallHandle, CALL_RING_TIME_LIMIT);
 
 			return () => clearTimeout(timeoutMissCallId);
 		},
-		[inVideoCall, videoCallRecipientData, handleOutgoingCall, missCallHandle],
+		[inVideoCall, videoCallRecipientData, handleOutgoingCall, missCallHandle, videoCallId],
 	);
 
 	useEffect(() => {
