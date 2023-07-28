@@ -96,7 +96,7 @@ const getCreateObjectivePayload = (props) => {
 			...restStatsDetails,
 		},
 		distribute_equally,
-		objective_weightages: getUserObjectiveWeightage(),
+		objective_weightages: distribute_equally ? [] : getUserObjectiveWeightage(),
 	};
 
 	return payload;

@@ -14,7 +14,7 @@ const useGetObjectiveUserMappings = (props) => {
 		page    : 1,
 		filters : {
 			role_ids        : roles.map((role) => role.id),
-			user_ids        : selectMode === SELECT_ONLY ? user_ids : undefined,
+			user_id         : selectMode === SELECT_ONLY ? user_ids : undefined,
 			except_user_ids : selectMode === EXCLUDE_ONLY ? user_ids : undefined,
 		},
 	});
@@ -43,58 +43,3 @@ const useGetObjectiveUserMappings = (props) => {
 	};
 };
 export default useGetObjectiveUserMappings;
-
-// const list = [
-// 	{
-// 		user: {
-// 			id               : 1,
-// 			name             : 'Deeshant Rathi',
-// 			role_sub_funtion : [],
-// 		},
-// 		role: {
-// 			id   : '23',
-// 			name : 'KAM',
-// 		},
-// 		partner: {
-// 			business_name : 'COGO INDIA',
-// 			id            : '2',
-// 		},
-// 		objectives: [
-// 			{
-// 				id             : '3',
-// 				name           : 'Test 1',
-// 				objective_type : 'company',
-// 				status         : 'verified',
-// 			},
-// 			{
-// 				id             : '4',
-// 				name           : 'Test 2',
-// 				objective_type : 'team',
-// 				status         : 'verified',
-// 			},
-// 		],
-// 	},
-// 	{
-// 		user: {
-// 			id               : 6,
-// 			name             : 'Parth Rathi',
-// 			role_sub_funtion : [],
-// 		},
-// 		role: {
-// 			id   : '23',
-// 			name : 'KAM',
-// 		},
-// 		partner: {
-// 			business_name : 'COGO Vietnam',
-// 			id            : '7',
-// 		},
-// 		objectives: [
-// 			// {
-// 			// 	id             : '3',
-// 			// 	name           : 'Test 1',
-// 			// 	objective_type : 'company',
-// 			// 	status         : 'verified',
-// 			// },
-// 		],
-// 	},
-// ];

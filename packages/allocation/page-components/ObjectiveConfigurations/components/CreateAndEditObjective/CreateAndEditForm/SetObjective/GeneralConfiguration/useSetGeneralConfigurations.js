@@ -54,7 +54,6 @@ const useSetGeneralConfiguration = (props) => {
 				},
 				roles: getSeparatedIdData({ values: watchRoles }),
 			},
-			objectiveRequirements: {},
 		}));
 
 		if (typeof onSaveCallback === 'function') onSaveCallback();
