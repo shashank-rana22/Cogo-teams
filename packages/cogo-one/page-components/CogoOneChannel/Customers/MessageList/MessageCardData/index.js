@@ -40,7 +40,7 @@ function MessageCardData({
 		chat_tags = [],
 		chat_status = '',
 		id = '',
-		channel_type = '',
+		channel_type: channelType = '',
 		new_message_sent_at = '',
 		pinnedTime = {},
 		last_message = '',
@@ -69,8 +69,8 @@ function MessageCardData({
 		e.stopPropagation();
 
 		updatePin({
-			pinnedID    : id,
-			channelType : channel_type,
+			pinnedID: id,
+			channelType,
 			type,
 			firestore,
 			userId,
@@ -85,6 +85,7 @@ function MessageCardData({
 			{!autoAssignChats && (
 				<Checkbox
 					onChange={() => handleCheckedChats(item, id)}
+					disabled={channelType !== 'whatsapp'}
 				/>
 			)}
 
@@ -102,7 +103,7 @@ function MessageCardData({
 					<div className={styles.user_information}>
 						<div className={styles.avatar_container}>
 							<UserAvatar
-								type={channel_type}
+								type={channelType}
 								event={last_message_document?.source}
 							/>
 							<div className={styles.user_details}>
