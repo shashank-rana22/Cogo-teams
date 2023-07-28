@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
@@ -38,6 +39,10 @@ interface InvoiceFilterProps {
 const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
+	const { userData } = useSelector(({ profile }) => ({
+		userData: profile?.user || {},
+	}));
+
 	const [invoiceFilters, setinvoiceFilters] = useState<InvoiceFilterProps>({
 		page      : 1,
 		pageLimit : 10,
@@ -49,10 +54,6 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 		sortType : 'desc',
 		sortBy   : 'invoiceDate',
 	});
-
-	const { userData } = useSelector(({ profile }) => ({
-		userData: profile?.user || {},
-	}));
 
 	const [
 		{ data: listData, loading: listLoading },
@@ -80,11 +81,21 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 		services, search, dueDate, invoiceDate, orgId, currency,
 	} = invoiceFilters || {};
 
-	const dueDateStart = dueDate && format(dueDate?.startDate, 'yyyy-MM-dd', {}, false);
-	const dueDateEnd = dueDate && format(dueDate?.endDate, 'yyyy-MM-dd', {}, false);
+	const dueDateStart = dueDate && format(dueDate?.startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'], {}, false);
+	const dueDateEnd = dueDate && format(dueDate?.endDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'], {}, false);
 
-	const invoiceDateStart = invoiceDate && format(invoiceDate?.startDate, 'yyyy-MM-dd', {}, false);
-	const invoiceDateEnd = invoiceDate && format(invoiceDate?.endDate, 'yyyy-MM-dd', {}, false);
+	const invoiceDateStart = invoiceDate && format(
+		invoiceDate?.startDate,
+		GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		{},
+		false,
+	);
+	const invoiceDateEnd = invoiceDate && format(
+		invoiceDate?.endDate,
+		GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		{},
+		false,
+	);
 
 	useEffect(() => {
 		debounceQuery(search);
