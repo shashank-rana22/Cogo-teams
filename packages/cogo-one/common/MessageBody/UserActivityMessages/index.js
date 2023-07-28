@@ -7,7 +7,7 @@ import { getEventTitle } from '../../../utils/getEventTitle';
 import EmailClicked from './EmailClicked';
 import LoginFailed from './LoginFailed';
 import Shipments from './Shipments';
-import SinupEvents from './SinupEvents';
+import SignUpEvents from './SignUpEvents';
 import styles from './styles.module.css';
 
 function Default({ name = '', scope = '' }) {
@@ -28,7 +28,7 @@ const COMPONENT_MAPPING = {
 	communication : EmailClicked,
 	default       : Default,
 	spot_search   : Shipments,
-	lead_user     : SinupEvents,
+	lead_user     : SignUpEvents,
 };
 
 const IMAGE_URL_MAPPING = {

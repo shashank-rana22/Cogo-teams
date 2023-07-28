@@ -2,7 +2,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function SinupEvents({ data = {}, scope = '' }) {
+function SignUpEvents({ data = {}, scope = '' }) {
 	return (
 		<>
 			<div className={styles.title}>
@@ -22,4 +22,4 @@ function SinupEvents({ data = {}, scope = '' }) {
 	);
 }
 
-export default SinupEvents;
+export default SignUpEvents;
