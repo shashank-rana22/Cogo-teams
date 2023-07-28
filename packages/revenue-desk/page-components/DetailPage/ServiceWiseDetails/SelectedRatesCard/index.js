@@ -44,7 +44,7 @@ function SelectedRatesCard({
 							data={singleItem?.data}
 							rate_key="selected_rate"
 							fromkey={singleItem?.key}
-							serviceData={serviceData}
+							singleServiceData={serviceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}
 							priority_no={index + INCREMENT_BY_ONE}

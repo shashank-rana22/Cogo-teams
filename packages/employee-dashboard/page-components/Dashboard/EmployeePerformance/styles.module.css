@@ -1,6 +1,5 @@
 .flex {
 	display: flex;
-	justify-content: space-between;
 
 	@media (max-width: 768px) {
 		flex-wrap: wrap;
@@ -155,7 +154,8 @@
 }
 
 .rating_cycle_select {
-	width: 300px;
+	width: 200px;
+	margin-left: 20px;
 
 	@media (max-width: 768px) {
 		width: 100%;
@@ -194,4 +194,8 @@
 
 .open_form_btn {
 	margin-top: 12px;
+}
+
+.yearly_rating_cycle_select {
+	width: 160px;
 }

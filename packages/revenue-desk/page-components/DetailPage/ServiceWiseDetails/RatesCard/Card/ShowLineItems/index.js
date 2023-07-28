@@ -1,9 +1,10 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const columns = ['code', 'currency', 'price', 'unit'];
+const columns = ['code', 'price', 'unit'];
 
 function ShowLineItems({
 	serviceType = '',
@@ -22,7 +23,7 @@ function ShowLineItems({
 		HEADINGS.destination_local_line_items = destinationLocalLineItems;
 	}
 	return Object.keys(HEADINGS).map((key) => (
-		<>
+		<div key={key} className={styles.container}>
 			<div className={styles.heading_text}>{startCase(key)}</div>
 			<div style={{ display: 'flex' }}>
 				{columns.map((item) => (
@@ -36,7 +37,15 @@ function ShowLineItems({
 							{
 								columns.map((col) => (
 									<p key={col} className={styles.valueText}>
-										{(col === 'price') ? lineItem?.[col] : startCase(lineItem?.[col])}
+										{(col === 'price') ? formatAmount({
+											amount   : lineItem?.[col],
+											currency : lineItem?.currency,
+											options  : {
+												style                 : 'currency',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : 2,
+											},
+										}) : startCase(lineItem?.[col])}
 									</p>
 								))
 							}
@@ -44,7 +53,7 @@ function ShowLineItems({
 					))
 				}
 			</div>
-		</>
+		</div>
 	));
 }
 export default ShowLineItems;

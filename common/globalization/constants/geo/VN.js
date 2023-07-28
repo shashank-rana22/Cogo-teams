@@ -136,6 +136,7 @@ export default {
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
 		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
+		ff_cost_booking_manager   : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		credit_controller_id      : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		vietnam_business_heads    : [
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal
@@ -160,6 +161,7 @@ export default {
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
 			'582391da-3d9b-423f-a5af-df1da84b1c5a',
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
+			'30e7e3e4-5d6d-456d-af50-56896d4ea6aa', // Air S01
 		],
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
