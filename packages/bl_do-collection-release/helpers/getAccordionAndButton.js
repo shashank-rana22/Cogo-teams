@@ -94,10 +94,10 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 				actionButton.class = 'awaiting';
 			}
 			if (bldoDoc.some((doc) => doc.status === 'release_pending')) {
-				if (item?.trade_type !== 'import') {
+				if (stateProps?.activeTab === 'bl') {
 					showAccordion = true;
 				}
-				if (item?.trade_type === 'import') {
+				if (stateProps?.activeTab === 'do') {
 					showDeliveryOrderTask = true;
 				}
 				actionButton.disabled = false;
@@ -110,7 +110,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 		}
 		case 'released': {
 			if (
-				item?.trade_type === 'import'
+				stateProps?.activeTab === 'do'
 				|| (item?.status || []).includes('delivered')
 			) {
 				showAccordion = false;
