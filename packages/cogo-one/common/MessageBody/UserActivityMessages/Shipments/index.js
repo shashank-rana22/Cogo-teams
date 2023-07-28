@@ -49,6 +49,12 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 		checkout    : primaryService?.serial_id,
 	};
 
+	const SERIAL_ID_LABEL = {
+		checkout    : 'Checkout Id',
+		shipment    : 'SID',
+		spot_search : 'Spot Search Id',
+	};
+
 	const lineType = SHIPPING_LINE_MAPPING[eventType];
 	const shippingLineMapping = SHIPPING_LINE[lineType] || '';
 	const matchShippingLine = SERVICE_DETAILS[eventType] || {};
@@ -106,7 +112,9 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 
 				{SID_MAPPING[eventType] ? (
 					<div className={styles.serial_id}>
-						SID :
+						{SERIAL_ID_LABEL[eventType]}
+						{' '}
+						:
 						<div className={styles.id_number}>{SID_MAPPING[eventType]}</div>
 					</div>
 				) : null}
