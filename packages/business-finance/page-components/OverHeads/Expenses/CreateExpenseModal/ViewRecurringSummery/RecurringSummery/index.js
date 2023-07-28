@@ -153,19 +153,20 @@ function RecurringSummery({
 			{renderSummaryData(summaryDataFirst)}
 			{renderSummaryData(summaryDataSecond)}
 			{renderSummaryData(summaryDataThird)}
-			<div>
-				<div className={styles.title}>To be Approved by</div>
-				{isEmpty(level1) ? (
-					<div className={styles.value}>No Stakeholders Present</div>
-				) : (
+
+			{isEmpty(level1 || level2 || level3) ? (
+				null
+			) : (
+				<div>
+					<div className={styles.title}>To be Approved by</div>
 					<div className={styles.steeper}>
 						<StakeHolderTimeline
 							timeline={stakeHolderTimeLineData({ level1, level2, level3 })}
 							currentLevel={currentLevel}
 						/>
 					</div>
-				)}
-			</div>
+				</div>
+			)}
 		</div>
 	);
 }

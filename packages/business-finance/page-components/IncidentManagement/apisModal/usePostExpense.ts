@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 
 const usePostExpense = ({
 	refetch = () => {},
-	setShowModal = () => {},
+	setShowModal,
 	id = null,
 	remark = '',
 }) => {
