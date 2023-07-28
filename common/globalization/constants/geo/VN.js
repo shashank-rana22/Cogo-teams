@@ -170,7 +170,8 @@ export default {
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 			'123951fe-78aa-4ad1-b2da-fa6191e3a876', // SO2
 		],
-		service_ops3_role_ids: [
+		so1_so2_ops_role_id   : 'd974d323-b777-47a8-b14a-64df2e59df84',
+		service_ops3_role_ids : [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
 			'7000ed27-f649-4e00-9c20-8c20c9eccf78', // Prod_COE_Finance_Head
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
