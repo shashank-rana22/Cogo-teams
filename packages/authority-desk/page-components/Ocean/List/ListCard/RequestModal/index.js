@@ -32,7 +32,7 @@ function RequestModal({ closeModal = () => {}, data = {}, refetch = () => {}, ta
 		const payload = {
 			ids  : formData?.ids,
 			data : {
-				[trade_type === 'export' ? 'bl_remarks' : 'remarks']:
+				[tabsState.activeTab === 'bl' ? 'bl_remarks' : 'remarks']:
 					{ comment: formData?.remarks, status: 'requested' },
 				status: 'requested',
 			},
@@ -46,7 +46,7 @@ function RequestModal({ closeModal = () => {}, data = {}, refetch = () => {}, ta
 
 			<Modal.Body>
 				<div className={styles.form}>
-					{blOptions.length === 0 ? (
+					{blOptions.length ? (
 						<div className={styles.no_data_warning}>
 							No document has been uploaded!
 						</div>

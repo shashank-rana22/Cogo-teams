@@ -2,7 +2,8 @@ import { Button, Tabs, TabPanel, Table, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
-import taskConfigs from '../../../configs/taskConfigs.json';
+import blTaskConfigs from '../../../configs/blTaskConfigs.json';
+import doTaskConfigs from '../../../configs/doTaskConfigs.json';
 import getMutatedControls from '../../../helpers/getMutatedControls';
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
 import useGetBill from '../../../hooks/useGetBill';
@@ -36,9 +37,15 @@ export default function AccordionContent({
 
 	const formRef = useRef(null);
 
-	const taskConfig = taskConfigs?.[stateProps.inner_tab];
+	const { activeTab } = stateProps;
+
+	const taskConfig = activeTab === 'bl'
+		? blTaskConfigs?.[stateProps.inner_tab]
+		: doTaskConfigs?.[stateProps.inner_tab];
+
 	const currentConfig = taskConfig?.[currentStep?.text];
 	const controls = currentConfig?.controls;
+
 	const usingDefaultPendingTasks = stateProps.inner_tab === 'under_collection' || showDeliveryOrderTask;
 
 	let actionButton = currentConfig?.action_text;
@@ -82,7 +89,7 @@ export default function AccordionContent({
 
 	const filteredTask = tasks.filter((e) => e.task === 'upload_delivery_order');
 
-	const taskToSend = stateProps.inner_tab === 'collected' && item?.trade_type === 'import'
+	const taskToSend = stateProps.inner_tab === 'collected' && stateProps?.activeTab === 'do'
 		? filteredTask
 		: tasks;
 
