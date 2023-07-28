@@ -1,13 +1,13 @@
-import { useRequestBf } from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const MODE = 'OCEAN';
 
 function useGetCommodityOptions({ task }) {
-	const [{ loading, data }, trigger] = useRequestBf({
-		url     : '/saas/hs-code/list-commodities',
-		method  : 'get',
-		authKey : 'get_saas_hs_code_list_commodities',
+	const [{ loading, data }, trigger] = useRequest({
+		url    : 'https://api.stage.cogoport.io/saas/hs-code/list-commodities',
+		method : 'get',
+		// authKey : 'get_saas_hs_code_list_commodities',
 	}, { manual: true, autoCancel: false });
 
 	useEffect(() => {
