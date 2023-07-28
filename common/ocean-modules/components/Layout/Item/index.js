@@ -18,6 +18,9 @@ function Item(props) {
 		formValues = {},
 		source = '',
 		flex = '49%',
+		disabled = false,
+		options = [],
+		value,
 	} = props || {};
 
 	const errorOriginal = getErrorMessage({
@@ -37,6 +40,11 @@ function Item(props) {
 		element.style.display = 'none';
 	}
 
+	const pillOptions = options || [];
+	if (type === 'pills' && disabled && value) {
+		pillOptions.forEach((i, idx) => { pillOptions[idx].disabled = true; });
+	}
+
 	return (
 		<div className={cl`${styles.element} ${className}`} style={{ width: flex }}>
 
@@ -46,6 +54,7 @@ function Item(props) {
 				<Element
 					size={type === 'pills' ? 'md' : 'sm'} // need to put in config
 					{...newProps}
+					{...(type === 'pills' ? { options: pillOptions } : {})}
 					control={control}
 				/>
 			) : null}
