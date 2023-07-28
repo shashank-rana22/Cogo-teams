@@ -26,6 +26,10 @@ function Footer({ data }) {
 			value : startCase(data?.source),
 		},
 		{
+			key   : 'Shipping Line',
+			value : data?.shipping_line?.business_name,
+		},
+		{
 			key   : 'Preferred Shipping Line',
 			value : data?.preferred_shipping_line?.business_name,
 		},

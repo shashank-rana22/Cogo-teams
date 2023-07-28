@@ -7,9 +7,9 @@
   "sideEffects": false,
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
-    "@cogoport/components": "^1.0.431",
+    "@cogoport/components": "^1.0.432",
     "@cogoport/forms": "workspace:0.1.0",
-    "@cogoport/icons-react": "^1.0.68",
+    "@cogoport/icons-react": "^1.0.86",
     "@cogoport/next": "workspace:0.1.0",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",

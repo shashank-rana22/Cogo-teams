@@ -33,7 +33,8 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 						maximumFractionDigits : 2,
 					},
 				}),
-				source: startCase(source),
+				source : source === 'cogo_assured_rate' ? 'Cogo Assured' : startCase(source),
+				key    : service_id,
 				details:
 	<Popover
 		placement="top"
@@ -51,7 +52,7 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 			role="button"
 			tabIndex={0}
 		>
-			view more
+			view
 		</div>
 	</Popover>,
 			}),
