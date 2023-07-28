@@ -35,7 +35,7 @@ const useUpdateShipmentFaultAlarm = ({
 			Toast.success('Alarm Snoozed');
 			setReload(!reload);
 		} catch (err) {
-			toastApiError(err?.data?.alarm);
+			toastApiError(err);
 		}
 	};
 
@@ -53,7 +53,7 @@ const useUpdateShipmentFaultAlarm = ({
 			setResolve(false);
 			setReload(!reload);
 		} catch (err) {
-			Toast.error(err?.data?.alarm);
+			toastApiError(err?.data?.alarm);
 		}
 	};
 

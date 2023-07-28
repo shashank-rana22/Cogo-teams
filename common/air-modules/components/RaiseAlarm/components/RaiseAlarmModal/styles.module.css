@@ -26,9 +26,9 @@
 }
 
 .show_invoice {
-	margin-top: 32px;
+	padding: 10px;
+	font-size: var(--font-size-md);
 	font-weight: bold;
-	color: var(--color-primary-error-red-1);
 }
 
 .box {
@@ -36,17 +36,17 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 70%;
-	height: 4%;
+	height: 10%;
 	padding: 0 5px;
-	margin-top: 10px;
+	margin: 5px 0 0 10px;
 	background-color: var(--color-secondary-5);
 	border: 1px solid var(--color-tertiary-lavendar-4);
 	border-radius: 4px;
+}
 
-	:hover {
-		cursor: pointer;
-		border: 1px solid var(--color-primary-error-red-2);
-	}
+.box:hover {
+	cursor: pointer;
+	border: 1px solid var(--color-secondary-2);
 }
 
 .invoice_container {

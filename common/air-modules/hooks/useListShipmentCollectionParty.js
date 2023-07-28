@@ -30,7 +30,7 @@ const useListShipmentCollectionParty = (allParams, formValues) => {
 			apiTrigger();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [formValues]);
+	}, [formValues?.fraud_reason]);
 
 	return {
 		list: { data },
