@@ -1,8 +1,10 @@
+import { forwardRef } from 'react';
+
 import Body from './Body';
 import Header from './Header';
 import useGetListObjectives from './useGetListObjectives';
 
-function ListObjectives(props) {
+const ListObjectives = forwardRef((props, ref) => {
 	const {
 		setParams,
 		loading,
@@ -11,6 +13,11 @@ function ListObjectives(props) {
 		getNextPage,
 		setToggleValue,
 	} = useGetListObjectives();
+
+	const setRefCallback = (value) => {
+		const tempRef = ref;
+		tempRef.current.container = value;
+	};
 
 	return (
 		<>
@@ -25,10 +32,11 @@ function ListObjectives(props) {
 				list={list}
 				paginationData={paginationData}
 				getNextPage={getNextPage}
+				setRefCallback={setRefCallback}
 				{...props}
 			/>
 		</>
 	);
-}
+});
 
 export default ListObjectives;

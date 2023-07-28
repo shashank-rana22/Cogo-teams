@@ -13,7 +13,7 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { setActiveMode, loading, list, paginationData, getNextPage } = props;
+	const { setActiveMode, loading, list, paginationData, getNextPage, setRefCallback } = props;
 
 	const { page, total_count, page_limit } = paginationData || {};
 
@@ -21,7 +21,7 @@ function List(props) {
 
 	const [showActionModal, setShowActionModal] = useState({});
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveMode, setShowActionModal });
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveMode, setShowActionModal, setRefCallback });
 
 	const objectiveList = useMemo(() => (list || []).map((item) => ({
 		key      : item.id,

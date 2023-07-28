@@ -14,7 +14,7 @@ const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 const { EDIT } = ACTIVE_MODE_KEYS_MAPPING;
 
 const getListColumnMapping = (props) => {
-	const { setActiveMode, setShowActionModal } = props;
+	const { setActiveMode, setShowActionModal, setRefCallback } = props;
 
 	const LIST_COLUMN_MAPPING = [
 		{
@@ -125,11 +125,14 @@ const getListColumnMapping = (props) => {
 			key      : 'edit',
 			flex     : 0.75,
 			Header   : <div />,
-			accessor : () => (
+			accessor : ({ id }) => (
 				<Button
 					themeType="tertiary"
 					type="button"
-					onClick={() => setActiveMode(EDIT)}
+					onClick={() => {
+						setActiveMode(EDIT);
+						setRefCallback({ objectiveId: id });
+					}}
 				>
 					<IcMEdit style={{ marginRight: '4px' }} />
 					<strong>Edit</strong>

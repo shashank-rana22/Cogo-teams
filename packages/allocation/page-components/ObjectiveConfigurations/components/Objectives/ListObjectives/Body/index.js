@@ -9,6 +9,7 @@ function Body(props) {
 		paginationData,
 		getNextPage,
 		setActiveMode,
+		setRefCallback,
 	} = props;
 
 	return (
@@ -23,6 +24,7 @@ function Body(props) {
 				list={list}
 				paginationData={paginationData}
 				getNextPage={getNextPage}
+				setRefCallback={setRefCallback}
 			/>
 		</>
 	);

@@ -20,7 +20,7 @@ const HEADING_MAPPING = {
 };
 
 function Header(props) {
-	const { activeMode, setActiveMode } = props;
+	const { activeMode, setActiveMode, flushRef } = props;
 
 	const { heading, subheading } = HEADING_MAPPING[activeMode];
 
@@ -34,7 +34,10 @@ function Header(props) {
 			<Button
 				type="button"
 				themeType="primary"
-				onClick={() => setActiveMode(LIST)}
+				onClick={() => {
+					setActiveMode(LIST);
+					flushRef();
+				}}
 			>
 				Existing Objectives
 			</Button>
