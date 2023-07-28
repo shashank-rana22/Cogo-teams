@@ -26,8 +26,8 @@ function ChatStatistics({ isAdminView = false }) {
 					(isAdminView || isAgent) && (
 						<div
 							key={key}
-							className={cl`${styles.chatstatistics_box} 
-							${isAdminView ? '' : styles.chatstatistics_box_agent}`}
+							className={cl`${styles.chatstatistics_box}
+							${isAdminView ? styles.agent_view : ''}`}
 						>
 							<div className={styles.chatstatistics_type}>{label}</div>
 							{loading

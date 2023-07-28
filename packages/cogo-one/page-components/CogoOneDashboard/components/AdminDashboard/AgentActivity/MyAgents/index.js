@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
+import { Image, useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import { CALL_STATUS_MAPPING } from '../../../../constants';
@@ -13,7 +13,18 @@ const TAB_MAPPING = {
 	break    : styles.break,
 };
 
-function MyAgents({ list = [], redirectToAgentView = () => {}, activeTab = '' }) {
+function MyAgents({ list = [], activeTab = '' }) {
+	const { push } = useRouter();
+
+	const redirectToAgentView = ({ agentId = '', name = '' }) => {
+		// if (!agentId) return;
+
+		push(
+			`/cogo-one/dashboard/[id]?view=agent&agentName=${name}`,
+			`/cogo-one/dashboard/${agentId}?view=agent&agentName=${name}`,
+		);
+	};
+
 	if (isEmpty(list)) {
 		return <EmptyStateAgentActivity />;
 	}

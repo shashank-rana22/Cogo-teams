@@ -1,9 +1,8 @@
 .intent_served_box {
 	display: flex;
 	flex-direction: column;
-	width: 52%;
-	height: 280px;
-	padding: 13px;
+	width: 48%;
+	padding: 12px;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
@@ -23,8 +22,7 @@
 }
 
 .served_intent_numbers {
-	position: relative;
-	display: inline-block;
+	font-size: 32px;
 }
 
 .served_intent_numbers::after {

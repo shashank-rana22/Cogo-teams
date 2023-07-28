@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMVeryHappy, IcMAverage, IcMVerySad } from '@cogoport/icons-react';
+import { startOfDay, startOfWeek, startOfMonth } from '@cogoport/utils';
 
 export const SATIFICATION_IMAGE_MAPPING = [
 	{
@@ -28,7 +29,7 @@ export const CHAT_STATS_DATA = [
 	{
 		label   : 'No. of chats closed',
 		key     : 'close_conversation',
-		isAgent : false,
+		isAgent : true,
 	},
 	{
 		label   : 'No. of chats active',
@@ -37,7 +38,7 @@ export const CHAT_STATS_DATA = [
 	}, {
 		label   : 'No. of warning chats',
 		key     : 'warning',
-		isAgent : false,
+		isAgent : true,
 	}, {
 		label   : 'No. of escalated chat',
 		key     : 'escalated',
@@ -45,21 +46,17 @@ export const CHAT_STATS_DATA = [
 	},
 ];
 
-export const INTENT_SERVED_DATA = [
+export const MY_STATS_DATA = [
 	{
-		key   : 'normal_conversation',
-		label : 'Normal conversation',
+		key   : 'no_of_booking',
+		label : 'No. of Booking',
 	}, {
-		key   : 'shipment_booking',
-		label : 'Shipment Booking',
+		key   : 'calls_made',
+		label : 'Calls Made',
 
 	}, {
-		key   : 'trade_enquiry',
-		label : 'Shipment booking',
-	},
-	{
-		key   : 'invoice',
-		label : 'Invoice',
+		key   : 'chat_assigned',
+		label : 'Chat Assigned',
 	},
 ];
 
@@ -110,3 +107,10 @@ export const FILTER_TAB_OPTIONS = [
 	{ label: 'Week', name: 'week' },
 	{ label: 'Month', name: 'month' },
 ];
+
+export const DATE_FILTER_MAPPING = {
+	day   : startOfDay,
+	week  : startOfWeek,
+	month : startOfMonth,
+
+};
