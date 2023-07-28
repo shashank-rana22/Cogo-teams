@@ -30,8 +30,6 @@ function Details({ serviceData = [] }) {
 		};
 	});
 
-	console.log('SERVICE_INITIAL_KEYS', SERVICE_INITIAL_KEYS);
-
 	const [multiServiceType, setMultiServiceType] =	useState(
 		Object.keys(SERVICE_INITIAL_KEYS)?.[GLOBAL_CONSTANTS.zeroth_index],
 	);
