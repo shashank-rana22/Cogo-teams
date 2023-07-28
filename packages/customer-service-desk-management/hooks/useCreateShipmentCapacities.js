@@ -19,7 +19,7 @@ const apiMapping = ({ mode = '', stage }) => {
 	};
 };
 
-const useCreateShipmentCapacities = ({ setActiveItem = () => {} }) => {
+const useCreateShipmentCapacities = ({ setActiveItem = () => {}, source = '' }) => {
 	const router = useRouter();
 
 	const { mode = '', stage } = router.query;
@@ -37,7 +37,7 @@ const useCreateShipmentCapacities = ({ setActiveItem = () => {} }) => {
 	const createShipmentCapacities = async ({ values = {}, agentExperienceSlabs = [], configId = '' }) => {
 		try {
 			await trigger({
-				data: getPayload({ values, agentExperienceSlabs, configId, isEditMode, stage }),
+				data: getPayload({ values, agentExperienceSlabs, configId, isEditMode, stage, source }),
 			});
 
 			let href = `/customer-service-desk-management/create-config?id=${configId}&stage=shipmentCapacity`;
@@ -46,7 +46,7 @@ const useCreateShipmentCapacities = ({ setActiveItem = () => {} }) => {
 				href += '&mode=edit';
 			}
 
-			await router.push(href);
+			await router.push(source ? '/customer-service-desk-management' : href);
 
 			setActiveItem('total_shipment_capacity');
 			Toast.success('Shipment Capacities have been set successfully');

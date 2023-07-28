@@ -4,7 +4,10 @@ import { isEmpty } from '@cogoport/utils';
 const OFFSET = -1;
 const SLAB_UPPER_LIMIT_MAX = 99999;
 
-const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '', isEditMode = false, stage }) => {
+const getPayload = ({
+	values = {}, agentExperienceSlabs = [],
+	configId = '', isEditMode = false, stage, source = '',
+}) => {
 	const shipmentCapacities = Object.keys(values)?.reduce((acc, curr) => {
 		const [index, service_type, service_duration_type] = curr.split('-');
 
@@ -13,7 +16,7 @@ const getPayload = ({ values = {}, agentExperienceSlabs = [], configId = '', isE
 		}
 
 		const slabDetails = agentExperienceSlabs[Number(index)] || {};
-		const slabLowerLimit = Number(index === '3'
+		const slabLowerLimit = Number((index === '3' && !source)
 			? slabDetails.slab_lower_limit?.slice(GLOBAL_CONSTANTS.zeroth_index, OFFSET)
 			: slabDetails.slab_lower_limit);
 

@@ -18,7 +18,7 @@ function TotalShipmentCapacity({ routeLoading = false }) {
 
 	const { loading, updateCsdConfig } = useUpdateCsdConfig({ setShowModal });
 
-	const configId = router?.query?.id;
+	const configId = router.query?.id;
 
 	return (
 		<div className={styles.container}>

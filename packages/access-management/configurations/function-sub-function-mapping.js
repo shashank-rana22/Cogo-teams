@@ -25,7 +25,6 @@ const functionSubFunctionMapping = {
 		{ label: 'Enterprise Customer Operations', value: 'enterprise_customer_operations' },
 		{ label: 'Mid Size - Customer Operations', value: 'mid_size_customer_operations' },
 		{ label: 'CP - Customer Operations', value: 'cp_customer_operations' },
-		{ label: 'ES - Customer Operations', value: 'es_customer_operations' },
 	],
 	finance  : [],
 	training : [

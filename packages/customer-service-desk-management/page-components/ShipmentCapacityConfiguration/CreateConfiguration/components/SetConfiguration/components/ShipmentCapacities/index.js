@@ -13,6 +13,16 @@ import styles from './styles.module.css';
 
 const SLAB_UPPER_LIMIT_MAX = 99999;
 
+const getUpperLimit = (slab_upper_limit, source) => {
+	let result = '';
+
+	if (slab_upper_limit && slab_upper_limit !== SLAB_UPPER_LIMIT_MAX) {
+		result = `-${slab_upper_limit} `;
+	} else if (source) result = '+';
+
+	return result;
+};
+
 function ShipmentCapacities(props) {
 	const {
 		agentExperienceSlabs = [], configId = '',
@@ -29,7 +39,7 @@ function ShipmentCapacities(props) {
 		handleReset = () => {},
 		createShipmentLoading = false,
 		createShipmentCapacities = () => {},
-	} = useShipmentCapacities({ data, setActiveItem });
+	} = useShipmentCapacities({ data, setActiveItem, source });
 
 	return (
 		<div className={styles.container} id="shipment-capacities">
@@ -71,9 +81,7 @@ function ShipmentCapacities(props) {
 									return (
 										<div key={item.id} className={styles.item}>
 											{slab_lower_limit}
-											{(slab_upper_limit
-												&& slab_upper_limit
-												!== SLAB_UPPER_LIMIT_MAX) ? `-${slab_upper_limit} ` : ''}
+											{getUpperLimit(slab_upper_limit, source)}
 											{' '}
 											{slab_unit}
 											s Exp.
