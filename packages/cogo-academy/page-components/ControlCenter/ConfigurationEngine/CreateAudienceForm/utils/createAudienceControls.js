@@ -21,11 +21,11 @@ const PERSONA_OPTIONS = [
 	{ label: 'All', value: 'all' },
 ];
 
-const createQuestionControls = ({ watchFunctions, entity_options, countryOptions }) => {
+const createQuestionControls = ({ watchFunctions, countryOptions }) => {
 	const controls = [
 		{
 			name        : 'name',
-			type        : 'text',
+			type        : 'input',
 			label       : 'Audience Name',
 			placeholder : 'Enter name of the user group',
 			rules       : {
@@ -34,10 +34,23 @@ const createQuestionControls = ({ watchFunctions, entity_options, countryOptions
 		},
 		{
 			name        : 'cogo_entity_id',
-			type        : 'select',
 			label       : 'Cogo Entity',
-			options     : entity_options,
+			labelKey    : 'business_name',
+			valueKey    : 'id',
 			placeholder : 'Select Cogo Entity',
+			type        : 'async-select',
+			params      : {
+				filters: {
+					status       : 'active',
+					entity_types : ['cogoport'],
+				},
+			},
+			asyncKey    : 'partners',
+			initialCall : true,
+			isClearable : true,
+			rules       : {
+				required: true,
+			},
 		},
 
 		{
