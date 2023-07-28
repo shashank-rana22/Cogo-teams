@@ -4,9 +4,10 @@ const STATUS_MAPPING = {
 	collected   : 'release_pending',
 };
 
-const BL_OPTIONS = [];
-const MUTATED_CONTROLS = [];
 const getMutatedControls = ({ item, stateProps, controls = [] }) => {
+	const BL_OPTIONS = [];
+	const MUTATED_CONTROLS = [];
+
 	const { bill_of_ladings, delivery_orders } = item || {};
 
 	let docs;

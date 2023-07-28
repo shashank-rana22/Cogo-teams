@@ -60,7 +60,7 @@ export default function AccordionContent({
 		manualFinal = true;
 	}
 
-	const { mutatedControls } = getMutatedControls({ item, stateProps, controls });
+	const { MUTATED_CONTROLS } = getMutatedControls({ item, stateProps, controls });
 
 	const list_of_invoices = item?.invoice_data || [];
 	const accordionOpen = (activeAccordionTab === 'invoice' && !showTask);
@@ -137,7 +137,7 @@ export default function AccordionContent({
 								<CustomTasks
 									ref={formRef}
 									setMyForm={setMyForm}
-									controls={mutatedControls}
+									controls={MUTATED_CONTROLS}
 									handleNextAction={handleNextAction}
 								/>
 							</div>
