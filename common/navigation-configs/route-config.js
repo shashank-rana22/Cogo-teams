@@ -37,6 +37,7 @@ import managerDashboard from './config/manager-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
+import notifications from './config/notifications';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
 import referral from './config/referral';
@@ -46,6 +47,7 @@ import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
+import schedules from './config/schedules';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -131,10 +133,12 @@ const routeConfig = {
 	...managerDashboard,
 	...printingDesk,
 	...ftlAdmin,
+	...schedules,
 	...igmDesk,
 	...airlinePluginBooking,
 	...bookingDeskSurface,
 	...ftlFieldSreviceOps,
+	...notifications,
 };
 
 export default routeConfig;

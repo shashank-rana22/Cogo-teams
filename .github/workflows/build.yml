@@ -1,0 +1,88 @@
+name: Build
+
+on:
+  issue_comment:
+    types: [created]
+
+env:
+  AWS_REGION: ap-south-1
+
+jobs:
+  start-runner:
+    name: Start self-hosted EC2 runner
+    if: github.event.issue.pull_request && (contains(github.event.comment.body, '/build') || contains(github.event.comment.body, '/checks'))
+    runs-on: ubuntu-latest
+
+    environment: production
+
+    outputs:
+      label: ${{ steps.start-ec2-runner.outputs.label }}
+      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
+    
+  
+
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.PROD_ECS_DEPLOY_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.PROD_ECS_DEPLOY_AWS_SECRET_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Start EC2 runner
+        id: start-ec2-runner
+        uses: maytan-cogo/ec2-github-runner@v2.0.0
+        with:
+          mode: start
+          github-token: ${{ secrets.COGOPORT_DEV_ADMIN_TOKEN }}
+          ec2-image-id: ami-09c621c3a55ee32d8
+          ec2-instance-type: t4g.xlarge
+          subnet-id: subnet-09da324b7914394f1
+          security-group-id: sg-0a476b8f086d3abd1
+
+  init:
+    name: Init
+    if: ${{ github.triggering_actor != 'dependabot[bot]' }}
+    needs: start-runner
+    uses: ./.github/workflows/reusable-run-setup.yml
+    secrets: inherit
+    with:
+      platform: ${{ needs.start-runner.outputs.label }}
+  
+  build:
+    name: Test
+    needs: [init, start-runner]
+    uses: ./.github/workflows/comment-test-build.yml
+    secrets: inherit
+    with:
+      platform: ${{ needs.start-runner.outputs.label }}
+
+  stop-runner:
+    name: Stop self-hosted EC2 runner
+
+    needs:
+      - start-runner # required to get output from the start-runner job
+      - init # required to wait when the main job is done
+      - build # required to wait when the main job is done
+
+    runs-on: ubuntu-latest
+
+    if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.PROD_ECS_DEPLOY_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.PROD_ECS_DEPLOY_AWS_SECRET_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Stop EC2 runner
+        uses: maytan-cogo/ec2-github-runner@v2.0.0
+        with:
+          mode: stop
+          github-token: ${{ secrets.COGOPORT_DEV_ADMIN_TOKEN }}
+          label: ${{ needs.start-runner.outputs.label }}
+          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+    

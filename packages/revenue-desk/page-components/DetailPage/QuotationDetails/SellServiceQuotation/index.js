@@ -33,10 +33,11 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 					maximumFractionDigits : 2,
 				},
 			}),
-			source               : startCase(source),
+			source               : source === 'cogo_assured_rate' ? 'Cogo Assured' : startCase(source),
 			service_id,
 			currency,
 			total_price_discount : total_price_discounted,
+			key                  : service_id,
 			details:
 	<Popover
 		placement="top"
@@ -54,7 +55,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 			role="button"
 			tabIndex={0}
 		>
-			view more
+			view
 		</div>
 	</Popover>,
 		}));
@@ -75,6 +76,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 			source               : startCase(source),
 			service_id,
 			currency,
+			key                  : service_id,
 			total_price_discount : total_price_discounted,
 			details:
 	<Popover
@@ -93,7 +95,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 			role="button"
 			tabIndex={0}
 		>
-			view more
+			view
 		</div>
 	</Popover>,
 		}));
