@@ -7,6 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback, useEffect } from 'react';
 
+import AddService from '../../commons/AdditionalServices/components/List/AddService';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -67,6 +68,7 @@ function DefaultView() {
 		purchase: {
 			shipmentData : shipment_data,
 			servicesData : servicesList,
+			AddService,
 		},
 		tracking: {
 			shipmentData: shipment_data,
@@ -80,7 +82,7 @@ function DefaultView() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
-	if (isEmpty(shipment_data) && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
+	if (isEmpty(shipment_data) && ![UNAUTHORIZED_STATUS_CODE, undefined, ''].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<h2 className={styles.error_heading}>Something Went Wrong!</h2>

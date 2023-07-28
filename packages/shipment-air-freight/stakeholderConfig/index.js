@@ -17,6 +17,7 @@ const CONFIG_MAPPING = {
 	document_desk_manager : documentDeskManagerConfig,
 	prod_process_owner    : prodProcessOwnerConfig,
 	coe_head              : adminConfig,
+	credit_control        : adminConfig,
 };
 
 const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || {};

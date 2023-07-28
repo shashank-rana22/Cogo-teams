@@ -1,0 +1,14 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 136px;
+	margin-bottom: 16px;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.details {
+	display: flex;
+}

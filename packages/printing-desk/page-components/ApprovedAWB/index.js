@@ -9,6 +9,8 @@ import commonFunctions from '../../utils/commonFunctions';
 import GenerateManifestDoc from '../GenerateManifestDoc';
 import HAWBList from '../HawbList';
 
+import styles from './styles.module.css';
+
 function ApprovedAWB({
 	data = {},
 	loading = false,
@@ -20,6 +22,7 @@ function ApprovedAWB({
 	listAPI = () => {},
 }) {
 	const [triggerManifest, setTriggerManifest] = useState('');
+	const [handoverModal, setHandoverModal] = useState(false);
 	const { fields } = approvedAWBFields;
 
 	const { loading: updateLoading, updateShipment } = useUpdateShipmentDocument({ listAPI });
@@ -36,13 +39,43 @@ function ApprovedAWB({
 				documentUrl,
 			};
 			return (
-				<Button
-					themeType="secondary"
-					onClick={() => { updateShipment({ payload }); }}
-					disabled={updateLoading}
-				>
-					Handover
-				</Button>
+				<>
+					<Button
+						themeType="secondary"
+						onClick={() => setHandoverModal(true)}
+						disabled={updateLoading}
+					>
+						Handover
+					</Button>
+					{handoverModal && (
+						<Modal
+							show={handoverModal}
+							onClose={() => { setHandoverModal(false); }}
+						>
+							<Modal.Header title="Confirm Handover?" />
+							<Modal.Body className={styles.modal_body}>
+								Are you sure you want to confirm the Handover?
+							</Modal.Body>
+							<Modal.Footer>
+								<Button
+									themeType="secondary"
+									disabled={updateLoading}
+									onClick={() => setHandoverModal(false)}
+								>
+									Cancel
+
+								</Button>
+								<Button
+									className={styles.confirm_button}
+									disabled={updateLoading}
+									onClick={() => updateShipment({ payload })}
+								>
+									Confirm
+								</Button>
+							</Modal.Footer>
+						</Modal>
+					)}
+				</>
 			);
 		},
 	};

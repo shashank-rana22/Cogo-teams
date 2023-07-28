@@ -13,7 +13,7 @@ const useGetRatingCycle = (setRatingCycle) => {
 
 	const formattedDate = (item) => formatDate({
 		date       : item,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 		formatType : 'date',
 	});
 
