@@ -1,4 +1,4 @@
-import { Loader, cl } from '@cogoport/components';
+import { Loader, cl, cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -7,14 +7,7 @@ import Header from '../../common/Header';
 
 import useGetSpotSearch from './hooks/useGetSpotSearch';
 import FCLResults from './page-components/FCLResults';
-// import ListRateCards from './components/FCLResults/ListRateCards';
 import styles from './styles.module.css';
-
-// const SERVICE_MAPPING = {
-// 	fcl_freight: ListRateCards,
-// };
-
-// Listratecards ki mapping krdo not card
 
 function SearchResults() {
 	const { user:{ id } } = useSelector(({ profile }) => ({

@@ -1,11 +1,12 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useCreateContract = ({
-	data = {},
-	setPriceLocked = () => {},
+	rateData = {},
 	setContractData = () => {},
-	setShowContract = () => {},
+	setShow = () => {},
 	search_type = '',
 }) => {
 	const { query } = useSelector(({ general }) => ({
@@ -31,7 +32,7 @@ const useCreateContract = ({
 				...values,
 				status                      : 'pending_approval',
 				id                          : query?.spot_search_id,
-				selected_card               : data?.card,
+				selected_card               : rateData?.id,
 				preferred_shipping_line_ids : preferred_shipping_line_ids || undefined,
 				exclude_shipping_line_ids   : exclude_shipping_line_ids || undefined,
 				max_containers_count:
@@ -44,13 +45,18 @@ const useCreateContract = ({
 					search_type === 'air_freight' ? Number(max_weight) : undefined,
 			};
 			const res = await trigger({ data: body });
-			setShowContract(false);
-			setPriceLocked(true);
+
+			setShow(false);
+
 			if (res?.data) {
 				setContractData({ ...values, ...res?.data, search_type });
 			}
-		} catch (e) {
-			// Toast.error(e?.error?.message);
+			return true;
+		} catch (error) {
+			if (error?.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
+			return false;
 		}
 	};
 	return {

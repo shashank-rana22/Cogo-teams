@@ -6,13 +6,13 @@ const trailerFeedbackControls = [
 		label   : 'Currency',
 		type    : 'select',
 		options : CURRENCY_CODE_OPTIONS,
-		span    : 4,
+		span    : 6,
 	},
 	{
 		name  : 'preferred_freight_rate',
 		label : 'Indicative Rate',
 		type  : 'number',
-		span  : 4,
+		span  : 6,
 	},
 	{
 		name  : 'remarks',

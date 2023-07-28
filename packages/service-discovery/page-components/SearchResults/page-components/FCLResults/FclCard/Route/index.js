@@ -6,6 +6,7 @@ import getLocationInfo from '../../../../utils/locations-search';
 import styles from './styles.module.css';
 
 function DottedLineWithTag({ scheduleData = {} }) {
+	const { transit_time, transit_time_unit, schedule_type } = scheduleData;
 	return (
 		<div style={{
 			color         : '#000',
@@ -16,11 +17,14 @@ function DottedLineWithTag({ scheduleData = {} }) {
 			alignItems    : 'center',
 			marginLeft    : 4,
 			marginRight   : 4,
-			marginTop     : -24,
 		}}
 		>
-			<span style={{ padding: 4, background: '#F7FAEF' }}>4 days</span>
-			{startCase(scheduleData.schedule_type)}
+			{transit_time ? (
+				<span style={{ padding: 4, background: '#F7FAEF' }}>
+					{`${transit_time} ${transit_time_unit}`}
+				</span>
+			) : null}
+			{startCase(schedule_type)}
 			-shipment
 		</div>
 	);

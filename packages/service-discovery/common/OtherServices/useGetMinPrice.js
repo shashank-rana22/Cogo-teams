@@ -1,26 +1,47 @@
-import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetMinPrice = ({ detail = {} }) => {
-	const { destination_port_id, origin_port_id } = detail;
-
+const useGetMinPrice = () => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
 		url    : 'get_freight_rate_min_price',
-		// params : {},
 	}, { manual: true });
 
 	const getMinPrice = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
-					service_type : 'fcl_freight',
-					filters      : {
-						origin_port_id,
-						destination_port_id,
-					},
+					currency           : 'USD',
+					service_attributes : [
+						{
+							filters: {
+								// id: '1c09df70-f14b-4921-86c7-741cdb58abd7',
+							},
+							id           : '1234567',
+							service_type : 'haulage_freight',
+						},
+						{
+							filters: {
+								// id: '1c09df70-f14b-4921-86c7-741cdb58abd7',
+							},
+							id           : '09876',
+							service_type : 'fcl_freight',
+						},
+						{
+							filters: {
+								// id: '1c09df70-f14b-4921-86c7-741cdb58abd7',
+							},
+							id           : '4567',
+							service_type : 'fcl_customs',
+						},
+						{
+							filters: {
+								// id: '1c09df70-f14b-4921-86c7-741cdb58abd7',
+							},
+							id           : 'esdrftg',
+							service_type : 'fcl_cfs',
+						},
+					],
 				},
 			});
 		} catch (err) {

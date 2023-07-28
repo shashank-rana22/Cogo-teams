@@ -126,10 +126,16 @@ function FclCard({
 	setInfoBanner = () => {},
 	isGuideViewed = false,
 }) {
-	const { service_rates = {}, schedules = {} } = rateCardData;
+	const { service_rates = {}, schedules = {}, transit_time_unit, transit_time } = rateCardData;
 	const primaryService = detail?.search_type;
 
-	const { arrival, departure, validity_start, validity_end, transit_time, schedule_type } = schedules;
+	const {
+		arrival,
+		departure,
+		validity_start,
+		validity_end,
+		schedule_type,
+	} = schedules;
 
 	const serviceRateswithId = Object.keys(service_rates).map((service_id) => {
 		const service = service_rates[service_id];
@@ -152,6 +158,7 @@ function FclCard({
 			formatType : 'date',
 		}),
 		transit_time,
+		transit_time_unit,
 		schedule_type,
 	};
 

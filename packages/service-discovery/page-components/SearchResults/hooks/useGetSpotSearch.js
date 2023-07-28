@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 	const { general: { query = {} } } = useSelector((state) => state);
-	const { spot_search_id = '', rate_card_id } = query;
+	const { spot_search_id = '', rate_card_id, checkout_id } = query;
 
 	const [screen, setScreen] = useState(rate_card_id ? 'selectedCardScreen' : 'listRateCard');
 	const [selectedCard, setSelectedCard] = useState({});
@@ -53,12 +53,15 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 	}, [filters, setComparisonRates, spot_search_id, trigger]);
 
 	useEffect(() => {
+		if (screen === 'comparison') return;
 		getSearch();
 	}, [getSearch, filters, screen]);
 
 	useEffect(() => {
+		if (checkout_id) return;
+
 		setScreen(rate_card_id ? 'selectedCardScreen' : 'listRateCard');
-	}, [rate_card_id]);
+	}, [rate_card_id, checkout_id]);
 
 	return {
 		refetchSearch: getSearch,

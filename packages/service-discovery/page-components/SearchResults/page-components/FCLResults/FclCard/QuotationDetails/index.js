@@ -3,7 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import CreateContract from '../../../../common/CreateContract';
+import Contract from '../../../../common/Contract';
 
 import styles from './styles.module.css';
 
@@ -60,11 +60,11 @@ function QuotationDetails({
 			</Button>
 
 			{showContract ? (
-				<CreateContract
+				<Contract
 					data={rateCardData}
-					details={detail}
-					setShowContract={setShowContract}
-					showContract={showContract}
+					detail={detail}
+					setShow={setShowContract}
+					show={showContract}
 				/>
 			) : null}
 

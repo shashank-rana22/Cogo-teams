@@ -1,7 +1,4 @@
 .service {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 	height: 60px;
 	background: #fff;
 	border: 1px dashed #f3eae7;
@@ -16,7 +13,7 @@
 .service_div {
 	display: flex;
 	align-items: center;
-	width: 90%;
+	float: left;
 	height: 60px;
 	border-radius: 4px;
 }
@@ -32,13 +29,20 @@
 .icn_container {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
-	min-width: 10%;
+	float: right;
+	min-width: max-content;
+	height: 100%;
+}
+
+.tick_icon {
+	margin-right: 25px;
+	color: #ee3425;
+	cursor: pointer;
 }
 
 .rate {
 	min-width: max-content;
-	margin-right: 16px;
+	margin-right: 8px;
 }
 
 .cost_label {
@@ -56,10 +60,4 @@
 	background: #fff;
 	border: 1.5px solid #221f20;
 	border-radius: 50%;
-}
-
-.tick_icon {
-	margin-right: 25px;
-	color: #ee3425;
-	cursor: pointer;
 }
