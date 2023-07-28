@@ -1,9 +1,12 @@
-.filter_container {
-	:global {
-		.ui_select_container {
-			width: 220px;
-		}
-	}
+.fields_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.item {
+	flex-basis: 48%;
 }
 
 .title {

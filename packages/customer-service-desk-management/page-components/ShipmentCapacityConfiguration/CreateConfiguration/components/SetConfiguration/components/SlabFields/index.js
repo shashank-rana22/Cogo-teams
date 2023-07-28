@@ -4,6 +4,8 @@ import checkForDisabled from '../../../../../../../utils/checkForDisabled';
 
 import styles from './styles.module.css';
 
+const MAX_SLAB_INDEX = 3;
+
 const SLAB_UNIT_OPTIONS = [
 	{
 		value : 'month',
@@ -76,7 +78,7 @@ function SlabFields({
 				</div>
 			</div>
 
-			{index < 3 && (
+			{index < MAX_SLAB_INDEX && (
 				<>
 					<div className={styles.hyphen}>-</div>
 

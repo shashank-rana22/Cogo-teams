@@ -8,17 +8,11 @@
 	}
 }
 
-.experience_details {
-	h4 {
-		color: #4f4f4f;
-	}
-}
-
-.element_container{
+.element_container {
 	display: flex;
 }
 
-.slab_unit{
+.slab_unit {
 	margin-right: 60px;
 	margin-bottom: 30px;
 }
@@ -44,10 +38,10 @@
 }
 
 .add_item_container {
-	cursor: pointer;
-	font-size: 12px;
 	display: flex;
 	align-items: center;
+	font-size: 12px;
+	cursor: pointer;
 }
 
 .add_icon {
@@ -55,17 +49,21 @@
 }
 
 .experience_details {
+	padding: 20px 30px;
 	background: #fff;
 	border-radius: 6px;
-	padding: 20px 30px;
 
-	:global{
-		.ui_radiogroup_container{
+	h4 {
+		color: #4f4f4f;
+	}
+
+	:global {
+		.ui_radiogroup_container {
 			padding: unset;
 			margin-bottom: 40px;
 		}
 
-		.ui_radio_container{
+		.ui_radio_container {
 			padding: unset;
 			margin-right: 30px;
 		}
@@ -86,19 +84,18 @@
 
 .inner_container {
 	display: flex;
-	align-items: center;
 	flex-grow: 1;
-
+	align-items: center;
 }
 
 .delete_icon {
-	cursor: pointer;
 	margin-left: 20px;
+	cursor: pointer;
 }
 
 .btn_container {
 	display: flex;
-	justify-content: flex-end;
 	align-items: center;
+	justify-content: flex-end;
 	margin-top: 30px;
 }

@@ -6,34 +6,32 @@ import controls from './controls';
 import styles from './styles.module.css';
 
 function FilterContent({
-	control,
-	handleSubmit,
-	onSubmit,
-	onClickReset,
-	activeTab,
+	control = () => {},
+	handleSubmit = () => {},
+	onSubmit = () => {},
+	onClickReset = () => {},
 }) {
 	return (
-		<form className={styles.filter_container} onSubmit={handleSubmit(onSubmit)}>
-			{controls.map((item) => {
-				const { label, type, name } = item || {};
+		<form onSubmit={handleSubmit(onSubmit)}>
 
-				if (name === 'current_status' && activeTab === 'question_set') {
-					return null;
-				}
+			<div className={styles.fields_container}>
+				{controls.map((item) => {
+					const { label, type, name } = item || {};
 
-				const Element = getElementController(type);
+					const Element = getElementController(type);
 
-				return (
-					<div key={name}>
-						<div className={styles.title}>{label}</div>
+					return (
+						<div key={name} className={styles.item}>
+							<div className={styles.title}>{label}</div>
 
-						<Element
-							control={control}
-							{...item}
-						/>
-					</div>
-				);
-			})}
+							<Element
+								control={control}
+								{...item}
+							/>
+						</div>
+					);
+				})}
+			</div>
 
 			<div className={styles.button_container}>
 				<Button

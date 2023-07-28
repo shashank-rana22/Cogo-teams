@@ -19,12 +19,12 @@ function HomePage() {
 				>
 					<TabPanel
 						name="shipment_capacity_configuration"
-						title="CSD Active Shipment Capacity Configuration"
+						title="CCS Active Shipment Capacity Configuration"
 					>
 						<ShipmentCapacityCofiguration />
 					</TabPanel>
 
-					<TabPanel name="csd_dashboard" title="CSD Dashboard" />
+					<TabPanel name="ccs_dashboard" title="CCS Dashboard" />
 
 				</Tabs>
 			</div>

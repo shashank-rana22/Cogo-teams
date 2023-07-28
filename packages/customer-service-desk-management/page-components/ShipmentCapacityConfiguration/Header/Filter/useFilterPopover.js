@@ -7,16 +7,16 @@ const useFilterPopover = ({ setFilters = () => {} }) => {
 	const { control, handleSubmit, reset } = useForm();
 
 	const onSubmit = (values) => {
-		let filterApplied = false;
+		// let filterApplied = false;
 
-		Object.keys(values).forEach((key) => {
-			if (values[key]?.length > 0) filterApplied = true;
-		});
+		// Object.keys(values).forEach((key) => {
+		// 	if (values[key]?.length > 0) filterApplied = true;
+		// });
 
-		if (!filterApplied) {
-			setShowFilter(false);
-			return;
-		}
+		// if (!filterApplied) {
+		// 	setShowFilter(false);
+		// 	return;
+		// }
 
 		setFilters({ ...values });
 

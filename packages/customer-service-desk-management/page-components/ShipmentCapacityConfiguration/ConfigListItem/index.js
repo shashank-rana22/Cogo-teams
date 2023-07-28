@@ -11,6 +11,8 @@ import DeactivateModal from '../DeactivateModal';
 
 import styles from './styles.module.css';
 
+const OFFSET = 1;
+
 const activationStatus = ({ status, activated_at = '' }) => {
 	if (status === 'active') {
 		return {
@@ -48,10 +50,10 @@ const getOrganizations = (organizations = []) => (
 			</Tooltip>
 		) : '-'}
 
-		{organizations.length > 1 && (
+		{organizations.length > OFFSET && (
 			<Tooltip
 				maxWidth={400}
-				content={(organizations.map((org, index) => ((index >= 1) ? (
+				content={(organizations.map((org, index) => ((index >= OFFSET) ? (
 					<Pill
 						key={org.id}
 						size="sm"
@@ -69,7 +71,7 @@ const getOrganizations = (organizations = []) => (
 					color="#F3FAFA"
 				>
 					+
-					{organizations.length - 1}
+					{organizations.length - OFFSET}
 					{' '}
 					More
 				</Pill>
@@ -96,11 +98,11 @@ function ConfigListItem({ data = {}, showModal = false, setShowModal = () => {} 
 												id=${id}&mode=edit`);
 
 	const handleEditCapacity = () => router.push(`/customer-service-desk-management/edit-capacity?
-												id=${id}`);
+												id=${id}&mode=edit`);
 
 	return (
 		<div style={{ marginBottom: '20px' }}>
-			<div className={styles.container}>
+			<div className={styles.container} style={isEmpty(shipment_capacities) ? { borderRadius: '6px' } : {}}>
 
 				<div className={styles.details_container}>
 					<div className={styles.item}>

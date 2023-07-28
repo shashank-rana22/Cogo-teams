@@ -12,11 +12,16 @@ function EditShipmentCapacity() {
 		agent_experience_slabs : agentExperienceSlabs = [], id:configId,
 	} = data;
 
+	const defaultSlabUnit = agentExperienceSlabs?.[GLOBAL_CONSTANTS.zeroth_index]?.slab_unit;
+
 	return (
 		<ShipmentCapacities
 			agentExperienceSlabs={agentExperienceSlabs}
 			configId={configId}
 			data={data}
+			source="edit_capacity"
+			defaultSlabUnit={defaultSlabUnit}
+			loading={loading}
 		/>
 	);
 }

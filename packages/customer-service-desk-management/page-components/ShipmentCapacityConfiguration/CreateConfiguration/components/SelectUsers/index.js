@@ -1,6 +1,7 @@
 import { Button, Accordion } from '@cogoport/components';
 import { useForm, RadioGroupController } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import getElementController from '../../../../../configurations/getElementController';
@@ -24,45 +25,51 @@ const ACCORD_CONTENT = [{
 
 function SelectUsers({
 	createCsdConfig = () => {},
-	loading = false,
 	data = {},
 	routeLoading = false,
 	fetchList = () => {},
+	createCsdLoading = false,
 }) {
 	const router = useRouter();
 
 	const { id } = router.query;
 
 	const { control, formState:{ errors }, handleSubmit, watch, setValue = () => {} } = useForm();
-	const {
-		cogo_entity_id, config_type,
-		organization_type, segment, organization_ids, agent_id, booking_source,
-	} = data;
 
-	const orgType = watch('organization_type');
-	const cogoEntityId = watch('cogo_entity_id');
-	const reportingManagerIds = watch('agent_id');
+	const [orgType, cogoEntityId, reportingManagerIds, orgSubType] = watch(['organization_type',
+		'cogo_entity_id', 'agent_id', 'segment']);
 
 	useEffect(() => {
-		setValue('segment', undefined);
-	}, [orgType, setValue]);
+		if (!isEmpty(data)) {
+			const {
+				agent_id, booking_source, cogo_entity_id,
+				config_type, organization_ids, organization_type, segment,
+			} = data || {};
 
-	useEffect(() => {
-		setValue('cogo_entity_id', cogo_entity_id);
-		setValue('config_type', config_type);
-		setValue('organization_ids', organization_ids);
-		setValue('organization_type', organization_type);
-		setValue('segment', segment);
-		setValue('agent_id', agent_id);
-		setValue('booking_source', booking_source);
-	}, [agent_id, booking_source, cogo_entity_id, config_type, organization_ids, organization_type, segment, setValue]);
+			setValue('cogo_entity_id', cogo_entity_id);
+			setValue('config_type', config_type);
+			setValue('organization_ids', organization_ids);
+			setValue('organization_type', organization_type);
+			setValue('segment', segment);
+			setValue('agent_id', agent_id);
+			setValue('booking_source', booking_source);
+		}
+	}, [data, setValue]);
 
 	useEffect(() => {
 		if (id) fetchList();
 	}, [fetchList, id]);
 
+	useEffect(() => {
+		if (orgSubType) {
+			const isValuePresent = orgSubTypeOptions[orgType].some((obj) => obj.value === orgSubType);
+			if (!isValuePresent) setValue('segment', undefined);
+		}
+	}, [orgSubType, orgType, setValue]);
+
 	return (
 		<div className={styles.container}>
+
 			<div className={styles.form_container}>
 				{getControls({ cogoEntityId, reportingManagerIds })?.map((controlItem) => {
 					const { type, label, name, showAstrick } = controlItem || {};
@@ -133,11 +140,12 @@ function SelectUsers({
 				size="md"
 				themeType="primary"
 				className={styles.btn}
-				loading={loading || routeLoading}
+				loading={createCsdLoading || routeLoading}
 				onClick={handleSubmit((values) => createCsdConfig({ values }))}
 			>
 				Save & Proceed
 			</Button>
+
 		</div>
 
 	);

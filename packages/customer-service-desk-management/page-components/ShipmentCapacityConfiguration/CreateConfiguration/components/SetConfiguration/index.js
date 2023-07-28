@@ -1,39 +1,22 @@
 import { Button } from '@cogoport/components';
-import { RadioGroupController, useForm, useFieldArray } from '@cogoport/forms';
+import { RadioGroupController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
-import DEFAULT_SLABS from '../../../../../configurations/defaultExperienceSlabs';
-import useCreateAgentExperienceSlabs from '../../../../../hooks/useCreateAgentExperienceSlabs';
-import { validateSlabs } from '../../../../../utils/validateSlabs';
+import useAgentExpSlabs from '../../../../../hooks/useAgentExpSlabs';
 
 import ShipmentCapacities from './components/ShipmentCapacities';
 import SlabFields from './components/SlabFields';
 import styles from './styles.module.css';
 
-const OFFSET = 1;
-const MAX_SLAB_INDEX = 3;
 const MAX_SLAB_LENGTH = 4;
 
-const getSlabs = ({ isEditMode = false, data = {} }) => {
-	if (isEditMode || !isEmpty(data.agent_experience_slabs)) {
-		return data.agent_experience_slabs?.map((item, index) => {
-			const { slab_unit, slab_lower_limit, slab_upper_limit } = item;
-
-			return {
-				slab_unit,
-				slab_lower_limit: index === 3 ? `${slab_lower_limit}+` : slab_lower_limit || '0',
-				slab_upper_limit,
-			};
-		});
-	}
-	return DEFAULT_SLABS;
-};
-
-function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = false, fetchList = () => {} }) {
+function SetConfiguration({
+	setActiveItem = () => {}, data = {},
+	routeLoading = false, fetchList = () => {}, loading = false,
+}) {
 	const router = useRouter();
 
 	const { mode = '', id:configId, stage } = router.query;
@@ -42,68 +25,28 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 
 	const [showForm, setShowForm] = useState(isEditMode || stage);
 
-	const agentExpSlabs = data?.agent_experience_slabs || [];
-
-	const { loading, createAgentExperienceSlabs } = useCreateAgentExperienceSlabs({
-		isEditMode,
-		fetchList,
-		agentExpSlabs,
-	});
-
-	const { control, formState: { errors }, handleSubmit, watch, setValue, trigger } = useForm({
-		defaultValues: {
-			experience: isEditMode ? 'custom' : 'default',
-		},
-	});
-
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name: 'agent_experience_slabs',
-	});
-
-	const agentExperienceSlabs = watch('agent_experience_slabs');
-
-	const defaultSlabUnit = agentExperienceSlabs?.[GLOBAL_CONSTANTS.zeroth_index]?.slab_unit;
-
-	const experience = watch('experience');
-
-	const handleAdd = async () => {
-		const { slab_upper_limit } = agentExperienceSlabs[agentExperienceSlabs.length - OFFSET];
-
-		let slabUpperLimit = Number(slab_upper_limit);
-
-		if (fields.length === MAX_SLAB_INDEX) {
-			slabUpperLimit = `${slabUpperLimit}+`;
-		}
-
-		if (validateSlabs({ experienceSlabs: agentExperienceSlabs })) {
-			append({ slab_unit: defaultSlabUnit, slab_lower_limit: slabUpperLimit });
-		}
-	};
-
-	const onSubmit = async (values) => {
-		if (!showForm) {
-			createAgentExperienceSlabs({
-				values,
-				configId,
-				setShowForm,
-			});
-		} else setShowForm(false);
-	};
+	const {
+		handleSubmit = () => {},
+		errors = {},
+		onSubmit = () => {},
+		handleAdd = () => {},
+		remove = () => {},
+		createSlabsLoading = false,
+		control = {},
+		fields = [],
+		experience = 'default',
+		agentExperienceSlabs = [],
+		defaultSlabUnit = 'month',
+	} = useAgentExpSlabs({ data, fetchList, showForm, setShowForm, isEditMode, stage, configId });
 
 	useEffect(() => {
 		if (showForm) {
-			window.scrollTo({ top: document.getElementById('shipment-capacities').offsetTop, behavior: 'smooth' });
+			const shipmentCapacitiesElement = document.getElementById('shipment-capacities');
+			if (shipmentCapacitiesElement) {
+				window.scrollTo({ top: shipmentCapacitiesElement.offsetTop, behavior: 'smooth' });
+			}
 		}
 	}, [showForm]);
-
-	useEffect(() => {
-		setValue('agent_experience_slabs', getSlabs({ experience, isEditMode, data }));
-	}, [data, experience, isEditMode, setValue]);
-
-	useEffect(() => {
-		if (stage) fetchList();
-	}, [fetchList, stage]);
 
 	return (
 		<>
@@ -184,7 +127,7 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 							size="md"
 							themeType="primary"
 							className={styles.btn}
-							loading={loading || routeLoading}
+							loading={createSlabsLoading || routeLoading}
 							onClick={handleSubmit(onSubmit)}
 						>
 							{showForm ? 'Edit' : 'Save'}
@@ -202,6 +145,8 @@ function SetConfiguration({ setActiveItem = () => {}, data = {}, routeLoading = 
 					setActiveItem={setActiveItem}
 					data={data}
 					routeLoading={routeLoading}
+					loading={loading}
+					defaultSlabUnit={defaultSlabUnit}
 				/>
 			)}
 

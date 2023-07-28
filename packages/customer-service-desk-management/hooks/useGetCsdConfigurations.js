@@ -10,7 +10,7 @@ const useGetCsdConfigurations = (source = '') => {
 	const configId = router?.query?.id;
 	const mode = router?.query?.mode;
 
-	const [params, setParams] = useState({});
+	const [filters, setFilters] = useState({});
 
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
@@ -18,7 +18,6 @@ const useGetCsdConfigurations = (source = '') => {
 		url     : 'csd_configurations',
 		method  : 'GET',
 		authkey : 'get_allocation_csd_configurations',
-		params,
 	}, { manual: true });
 
 	const fetchList = useCallback(() => {
@@ -26,10 +25,9 @@ const useGetCsdConfigurations = (source = '') => {
 			trigger({
 				...(source === 'list' ? {
 					params: {
-						...params,
 						page,
 						filters: {
-							id: configId,
+							...filters,
 						},
 					},
 				} : {
@@ -44,7 +42,7 @@ const useGetCsdConfigurations = (source = '') => {
 		} catch (error) {
 			Toast.error(error?.message || 'Something went wrong');
 		}
-	}, [trigger, source, params, page, configId]);
+	}, [trigger, source, filters, page, configId]);
 
 	useEffect(() => {
 		if (source === 'create') {
@@ -63,6 +61,8 @@ const useGetCsdConfigurations = (source = '') => {
 		pageData,
 		page,
 		setPage,
+		filters,
+		setFilters,
 	};
 };
 

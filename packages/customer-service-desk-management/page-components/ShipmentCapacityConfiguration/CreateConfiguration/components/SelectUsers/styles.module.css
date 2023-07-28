@@ -37,15 +37,14 @@
 }
 
 .config_container {
-
-	:global{
-		.ui_radiogroup_container{
+	:global {
+		.ui_radiogroup_container {
 			padding: unset;
 			margin-top: 16px;
 			margin-bottom: 6px;
 		}
 
-		.ui_radio_container{
+		.ui_radio_container {
 			padding: unset;
 			margin-right: 30px;
 		}
@@ -55,22 +54,19 @@
 .accordion {
 	width: 50%;
 	margin-top: 40px;
-	color: #4F4F4F;
+	color: #4f4f4f;
 }
 
 .accord_item {
-	border-radius: 4px;
+	padding: 8px 12px;
 	background-color: #fff;
+	border-radius: 4px;
 }
 
 .title {
 	font-weight: 600;
 }
 
-.accord_item {
-	padding: 8px 12px;
-}
-
-.accord_item:not(:last-child){
+.accord_item:not(:last-child) {
 	margin-bottom: 20px;
 }

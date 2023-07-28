@@ -24,8 +24,8 @@ function CreateCofiguration() {
 	const [activeItem, setActiveItem] = useState('select_users');
 	const [routeLoading, setRouteLoading] = useState(false);
 
-	const { loading, createCsdConfig } = useCreateCsdConfig({ setActiveItem });
-	const { list = [], fetchList } = useGetCsdConfigurations('create');
+	const { loading: createCsdLoading, createCsdConfig } = useCreateCsdConfig({ setActiveItem });
+	const { list = [], fetchList, loading } = useGetCsdConfigurations('create');
 
 	const data = list[GLOBAL_CONSTANTS.zeroth_index] || {};
 
@@ -34,11 +34,11 @@ function CreateCofiguration() {
 			component : SelectUsers,
 			props     : {
 				setActiveItem,
-				loading,
 				createCsdConfig,
 				data,
 				routeLoading,
 				fetchList,
+				createCsdLoading,
 			},
 		},
 		set_configuration: {
@@ -48,6 +48,7 @@ function CreateCofiguration() {
 				data,
 				routeLoading,
 				fetchList,
+				loading,
 			},
 		},
 		total_shipment_capacity: {

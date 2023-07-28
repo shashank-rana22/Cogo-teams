@@ -5,7 +5,7 @@ import Filter from './Filter';
 import SortComponent from './Sort';
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ filters = {}, setFilters = () => {} }) {
 	const router = useRouter();
 
 	const handleClick = () => {
@@ -20,7 +20,7 @@ function Header() {
 			<h3>Existing Configurations</h3>
 
 			<div className={styles.inner_container}>
-				<Filter />
+				<Filter filters={filters} setFilters={setFilters} />
 				<SortComponent />
 				<Button
 					size="md"

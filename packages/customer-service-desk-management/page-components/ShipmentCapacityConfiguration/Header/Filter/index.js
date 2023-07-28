@@ -1,11 +1,12 @@
 import { Popover, cl } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 import useFilterPopover from './useFilterPopover';
 
-function Filter() {
+function Filter({ filters = {}, setFilters = () => {} }) {
 	const {
 		showFilter,
 		setShowFilter,
@@ -13,7 +14,7 @@ function Filter() {
 		handleSubmit,
 		onSubmit,
 		onClickReset,
-	} = useFilterPopover({});
+	} = useFilterPopover({ setFilters });
 
 	return (
 		<Popover
@@ -45,7 +46,7 @@ function Filter() {
 
 				<div>Filter</div>
 
-				{/* {filtersApplied && <div className={styles.filter_dot} />} */}
+				{!isEmpty(filters) && <div className={styles.filter_dot} />}
 			</div>
 		</Popover>
 	);
