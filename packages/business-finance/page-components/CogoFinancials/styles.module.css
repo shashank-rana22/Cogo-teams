@@ -6,6 +6,7 @@
 .top_card {
 	display: flex;
 	justify-content: space-between;
+	margin: 24px 0;
 }
 
 .left_shipments_section {
@@ -33,4 +34,15 @@
 .ongoing {
 	width: 50%;
 	margin-right: 26px;
+}
+
+.remaining_shipment_cards {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.single_additional {
+	width: 49%;
+	background: #fff;
 }

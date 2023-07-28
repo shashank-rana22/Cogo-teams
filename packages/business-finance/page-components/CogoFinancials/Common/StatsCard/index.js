@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function StatsCard({ heading = '' }) {
+function StatsCard({ heading = '', cardId = '', setActiveShipmentCard = () => {} }) {
 	const mappingCards = [
 		{ label: 'Estimated Revenue', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
 		{ label: 'Estimated Cost', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
@@ -25,7 +25,11 @@ function StatsCard({ heading = '' }) {
 					Not Matching
 				</div>
 			</div>
-			<div className={styles.statscontainer}>
+			<div
+				className={styles.statscontainer}
+				onClick={() => setActiveShipmentCard(cardId)}
+				role="presentation"
+			>
 				{mappingCards.map((item) => (
 					<div className={styles.stats} key={item.label}>
 						<div className={styles.stathead}>

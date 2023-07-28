@@ -1,6 +1,7 @@
 import { Select, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
@@ -35,6 +36,8 @@ function CogoFinancials() {
 	const [isPreTax, setIsPreTax] = useState(true);
 	const [timeRange, setTimeRange] = useState('1D');
 	const [entity, setEntity] = useState(DEFAULT_ENTITY);
+	const [activeShipmentCard, setActiveShipmentCard] = useState('');
+	console.log({ activeShipmentCard });
 
 	return (
 		<div>
@@ -74,22 +77,69 @@ function CogoFinancials() {
 				<div
 					className={styles.left_shipments_section}
 				>
-					<StatsCard heading="OnGoing Shipments" />
+					<StatsCard
+						heading="Ongoing Shipments"
+						cardId="ongoing"
+						setActiveShipmentCard={setActiveShipmentCard}
+					/>
 					<ClosedShipmentCard
 						isDeviationVisible={false}
 						type="Operationally"
+						cardId="operational"
+						setActiveShipmentCard={setActiveShipmentCard}
 					/>
 				</div>
 				<ClosedShipmentCard
 					type="Financially"
+					cardId="financial"
+					setActiveShipmentCard={setActiveShipmentCard}
 				/>
 			</div>
+
+			{!isEmpty(activeShipmentCard) && (
+				<div className={styles.remaining_shipment_cards}>
+
+					{activeShipmentCard !== 'ongoing' && (
+						<div className={styles.single_additional}>
+							<StatsCard
+								heading="Ongoing Shipments"
+								cardId="ongoing"
+								setActiveShipmentCard={setActiveShipmentCard}
+							/>
+						</div>
+					)}
+
+					{activeShipmentCard !== 'operational' && (
+						<div className={styles.single_additional}>
+							<ClosedShipmentCard
+								isDeviationVisible={false}
+								type="Operationally"
+								cardId="operational"
+								setActiveShipmentCard={setActiveShipmentCard}
+								isAdditonalView
+							/>
+						</div>
+					)}
+
+					{activeShipmentCard !== 'financial' && (
+						<div className={styles.remaining_shipment_cards}>
+							<ClosedShipmentCard
+								type="Financially"
+								cardId="financial"
+								setActiveShipmentCard={setActiveShipmentCard}
+								isAdditonalView
+							/>
+						</div>
+					)}
+				</div>
+			)}
+
 			<div className={styles.totalStats}>
 				<div className={styles.ongoing}>
-					<StatsCard heading="OnGoing Shipments" />
+					<StatsCard heading="Ongoing Shipments" />
 				</div>
 				<div className={styles.card}>
-					<StatsCard heading="OnGoing Shipments" />
+					<StatsCard heading="Ongoing Shipments" />
 				</div>
 			</div>
 			<ReceivablesOutstandings />

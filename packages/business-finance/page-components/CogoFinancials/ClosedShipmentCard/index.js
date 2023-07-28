@@ -9,7 +9,11 @@ const LABEL_MAPPING = {
 	Operationally : 'Operational',
 };
 
-function ClosedShipmentCard({ isDeviationVisible = true, type = 'Financially' }) {
+function ClosedShipmentCard({
+	isDeviationVisible = true, type = 'Financially',
+	cardId = '', setActiveShipmentCard = () => {},
+	isAdditonalView = false,
+}) {
 	const data = [
 		{
 			id   : 'Cost',
@@ -74,18 +78,21 @@ function ClosedShipmentCard({ isDeviationVisible = true, type = 'Financially' })
 		<div className={styles.financially_closed_container}>
 			<div className={styles.financial_header}>
 				<div>
-					{type}
+					{`${type} `}
 					Closed Shipments
 				</div>
 				<div className={styles.info}><IcMInfo /></div>
 			</div>
-			<hr className={styles.bottom_line} />
+			<div className={styles.bottom_line} />
 
 			<div
 				className={styles.chart_data_combine}
+				role="presentation"
+				onClick={() => setActiveShipmentCard(cardId)}
 			>
 				<div
 					className={styles.responsive_graph_circular}
+					style={{ height: isAdditonalView ? '200px' : null }}
 				>
 					<ResponsiveRadialBar
 						data={data}
