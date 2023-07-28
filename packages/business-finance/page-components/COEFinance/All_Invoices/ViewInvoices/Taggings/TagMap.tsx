@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 import { TagCard } from './TagCard';
 
 function TagMap({
-	billId,
-	value, setValue, setRemarksVal, status,
+	billId = '',
+	value = { remark: '' }, setValue = () => {}, setRemarksVal = () => {}, status = '',
 }: {
 	billId: string, status?: string, value?: { approve?: string, reject?: string, undo?: string, remark: string, },
 	setValue: React.Dispatch<React.SetStateAction<{
@@ -19,10 +19,10 @@ function TagMap({
 		undo: string;
 		remark:string
 	}>>, setRemarksVal: React.Dispatch<React.SetStateAction<{
-		collectionPartyRemark: string;
-		billingPartyRemark: string;
-		invoiceDetailsRemark: string;
-		taggingRemark: string;
+		collectionPartyRemark: string[];
+		billingPartyRemark: string[];
+		invoiceDetailsRemark: string[];
+		taggingRemark: string[];
 	}>>
 }) {
 	const [approve, setApprove] = useState(false);
@@ -41,12 +41,12 @@ function TagMap({
 	};
 	const handleSubmitReject = (label: string) => {
 		setValue((prev) => ({ ...prev, reject: label, undo: 'undo' }));
-		setRemarksVal((prev) => ({ ...prev, taggingRemark: value?.remark }));
+		setRemarksVal((prev) => ({ ...prev, taggingRemark: [value?.remark] }));
 		setApprove(false);
 	};
 	const handleClickUndo = () => {
 		setValue((prev) => ({ ...prev, reject: '', approve: '' }));
-		setRemarksVal((prev) => ({ ...prev, taggingRemark: '' }));
+		setRemarksVal((prev) => ({ ...prev, taggingRemark: [''] }));
 	};
 
 	return (
@@ -60,7 +60,7 @@ function TagMap({
 							? (
 								mappingsData?.merge || mappingsData?.split || []
 							).map((item) => (
-								<div className={`${styles.flex} ${styles.bordernone} ${styles.wrapper}`}>
+								<div key={item?.id} className={`${styles.flex} ${styles.bordernone} ${styles.wrapper}`}>
 									<TagCard
 										item={item}
 										classname={classname}
