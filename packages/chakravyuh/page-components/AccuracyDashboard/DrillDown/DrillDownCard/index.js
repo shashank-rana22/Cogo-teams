@@ -7,15 +7,16 @@ import { formatBigNumbers } from '../../../../utils/formatBigNumbers';
 
 import styles from './styles.module.css';
 
-const CONSTANT_HUNDRED = 100;
-const CONSTANT_TWENTY = 20;
+const NORMALISED_PERCENTAGE = 90;
 
 function DrillDownCard({
 	data = {}, cardIndex = 1, delay = 2, handleClick = () => {}, animate = false,
-	isAtTop = false, parentAction = 'Search', parent = null,
+	isAtTop = false, parentAction = 'Search', parent = null, parentCount = 0,
 }) {
 	const isMainCard = !cardIndex;
 	const action_text = parentAction.split('_').join(' ');
+	const indicatorHeight = !cardIndex
+		? NORMALISED_PERCENTAGE : (data.rates_count / parentCount) * NORMALISED_PERCENTAGE;
 
 	return (
 		<div
@@ -23,14 +24,12 @@ function DrillDownCard({
 			className={cl`${styles.container} ${(isAtTop || isMainCard) ? styles.main_card : styles.secondary_card}
 			${isAtTop ? styles.custom_card : ''} ${styles[parent]} ${animate ? styles.animate : ''}`}
 		>
-			{
-				isAtTop && (
-					<div
-						style={{ height: `${CONSTANT_HUNDRED - cardIndex * CONSTANT_TWENTY}px` }}
-						className={cl`${styles.indicator} ${styles[parent]}`}
-					/>
-				)
-			}
+
+			<div
+				style={{ height: isAtTop ? `${indicatorHeight}px` : '0px' }}
+				className={cl`${styles.indicator} ${styles[parent]}`}
+			/>
+
 			<div className={styles.flex_between}>
 				<p className={styles.card_name}>{startCase(data?.action_type)}</p>
 				{(isAtTop || isMainCard) && (

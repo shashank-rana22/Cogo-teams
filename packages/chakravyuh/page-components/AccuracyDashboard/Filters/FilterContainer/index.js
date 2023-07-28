@@ -9,34 +9,44 @@ import mutateFields from '../../../../utils/mutate-fields';
 
 import styles from './styles.module.css';
 
-function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, showText = true, modeOptions = [] }) {
-	const { service_type = 'fcl', rate_type = null } = globalFilters;
+function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, showText = true }) {
+	const { service_type = 'fcl', mode = null } = globalFilters;
 	const {
 		control,
 		formState: { errors },
 		reset,
 		watch,
 		setValue,
+		handleSubmit,
 	} = useForm();
 
 	const controls = service_type === 'fcl' ? fclControls : airControls;
-	const containerType = watch('container_type');
-	const { newFields } = mutateFields({ controls, containerType, setGlobalFilters, modeOptions });
+	const values = watch();
+
+	const { newFields } = mutateFields({
+		controls,
+		containerType: values?.container_type,
+		setGlobalFilters,
+	});
 
 	useEffect(() => {
 		setValue('commodity', []);
-	}, [containerType, setValue]);
+	}, [values?.container_type, setValue]);
 
 	useEffect(() => {
 		setValue(
 			'mode',
-			rate_type,
+			mode,
 		);
-	}, [rate_type, setValue]);
+	}, [mode, setValue]);
 
-	const resetPopover = () => {
-		setGlobalFilters((prev) => ({ ...prev, rate_type: undefined }));
+	const onReset = () => {
+		setGlobalFilters((prev) => ({ ...prev, mode: undefined }));
 		reset();
+	};
+
+	const onSumbit = () => {
+		setGlobalFilters((prev) => ({ ...prev, ...values }));
 	};
 
 	return (
@@ -44,8 +54,8 @@ function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, show
 			<div className={styles.header_row}>
 				<span className={styles.title}>Filters</span>
 				<div className={styles.filter_action_buttons}>
-					<Button themeType="secondary" onClick={resetPopover}>Reset</Button>
-					<Button themeType="accent">Apply</Button>
+					<Button themeType="secondary" onClick={onReset}>Reset</Button>
+					<Button themeType="accent" onClick={handleSubmit(onSumbit)}>Apply</Button>
 				</div>
 			</div>
 			<Layout

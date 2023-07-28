@@ -44,9 +44,6 @@
 	&.custom_card {
 		width: 200px;
 		border: 1px solid #e0e0e0;
-		border-left: none;
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
 	}
 
 	&:last-of-type {
@@ -66,9 +63,11 @@
 
 .indicator {
 	position: absolute;
-	bottom: -1px;
-	left: -3px;
+	bottom: 1px;
+	left: -1px;
 	width: 3px;
+	height: 0;
+	border-radius: 0 0 0 16px;
 
 	&.checkout {
 		background-color: #001219;
@@ -85,6 +84,8 @@
 	&.stale_rates {
 		background-color: #9b2226;
 	}
+
+	transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
 }
 
 .rate_amount {

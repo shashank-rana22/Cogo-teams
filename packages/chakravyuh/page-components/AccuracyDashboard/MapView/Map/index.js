@@ -6,9 +6,14 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useRef } from 'react';
 
 import CustomLegend from '../../../../common/Legend';
-import { BASE_LAYER, LAYOUT_WIDTH, TIME_LIMIT, MAX_BOUNDS, ITEMS, ONE } from '../../../../constants/map_constants';
+import MapTooltip from '../../../../common/MapTooltip';
+import {
+	BASE_LAYER, LAYOUT_WIDTH, TIME_LIMIT,
+	MAX_BOUNDS, ITEMS, SECOND_IDX,
+} from '../../../../constants/map_constants';
 import useGetSimplifiedGeometry from '../../../../hooks/useGetSimplifiedGeometry';
 import { getChildHierarchy, getLowestHierarchy, HIERARCHY_MAPPING } from '../../../../utils/hierarchy-utils';
+import { getPolygonStyleProps } from '../../../../utils/map-utils';
 
 import ActiveRegions from './ActiveRegions';
 import Point from './AnimatedPoint';
@@ -19,19 +24,19 @@ const CENTER_LNG = 20;
 const INITIAL_ZOOM = 2;
 
 function Map({
-	isFull = false,
-	bounds = null,
 	data = [],
+	bounds = null,
+	hierarchy = {},
+	isFull = false,
 	loading = false,
+	activeList = [],
+	currentId = null,
+	accuracyMapping = {},
 	setBounds = () => {},
 	locationFilters = { },
-	currentId = null,
-	activeList = [],
-	accuracyMapping = {},
-	setActiveList = () => {},
-	setLocationFilters = () => { },
-	hierarchy = {},
 	setHierarchy = () => {},
+	setActiveList = () => {},
+	setLocationFilters = () => {},
 	handleBackHierarchy = () => {},
 }) {
 	const [map, setMap] = useState(null);
@@ -50,8 +55,9 @@ function Map({
 		type,
 	});
 
-	const showRegions = !isEmpty(activeData) && HIERARCHY_MAPPING.region_id >= HIERARCHY_MAPPING[lowestHierarchy] - ONE;
-	const showPorts = HIERARCHY_MAPPING.port_id + ONE >= HIERARCHY_MAPPING[lowestHierarchy];
+	const showRegions = !isEmpty(activeData)
+							&& HIERARCHY_MAPPING.region_id >= HIERARCHY_MAPPING[lowestHierarchy] - SECOND_IDX;
+	const showPorts = HIERARCHY_MAPPING.port_id + SECOND_IDX >= HIERARCHY_MAPPING[lowestHierarchy];
 
 	const showLoading = loading || activeLoading;
 	const originPosition = locationFilters?.origin?.latitude
@@ -86,10 +92,15 @@ function Map({
 
 	useEffect(() => {
 		const cachedRef = activeRef?.current;
+		const paddingTopLeft = isFull ? GLOBAL_CONSTANTS.zeroth_index : LAYOUT_WIDTH;
+		const paddingOptions = { paddingTopLeft: [paddingTopLeft, GLOBAL_CONSTANTS.zeroth_index] };
+
 		if (map && cachedRef) {
 			if (cachedRef instanceof L.GeoJSON) {
 				const features = cachedRef.getLayers();
-				features[GLOBAL_CONSTANTS.zeroth_index]?.openTooltip();
+				const firstFeature = features[GLOBAL_CONSTANTS.zeroth_index];
+				firstFeature.openTooltip();
+				map.flyToBounds(firstFeature.getBounds(), { ...paddingOptions, duration: 0.5 });
 			} else {
 				cachedRef.openTooltip();
 			}
@@ -104,7 +115,7 @@ function Map({
 				}
 			}
 		};
-	}, [activeRef, setBounds, currentId, map]);
+	}, [activeRef, isFull, setBounds, currentId, map]);
 
 	return (
 		<CogoMaps
@@ -143,11 +154,13 @@ function Map({
 			{showPorts
 			&& activeList.map((item) => {
 				const position = [item.destination_latitude, item.destination_longitude];
+				const { color, accuracy } = getPolygonStyleProps(accuracyMapping[item.destination_id]);
 				return (
 					<Point
 						key={item.destination_id}
 						position={position}
 						ref={currentId === item.destination_id ? activeRef : null}
+						className={styles[accuracy]}
 						eventHandlers={{
 							click: (e) => {
 								L.DomEvent.stopPropagation(e);
@@ -171,7 +184,11 @@ function Map({
 							direction="top"
 							sticky
 						>
-							{item?.destination_name}
+							<MapTooltip
+								display_name={item.destination_name}
+								color={color}
+								accuracy={accuracyMapping[item.destination_id]}
+							/>
 						</Tooltip>
 					</Point>
 				);
