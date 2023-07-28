@@ -2,6 +2,7 @@
 	--positive-stroke-color: #cfbc93;
 	--negative-stroke-color: #888fd1;
 
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
