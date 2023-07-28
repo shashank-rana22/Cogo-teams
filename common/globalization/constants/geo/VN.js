@@ -137,7 +137,7 @@ export default {
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
 		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
-		ff_cost_booking_manager   : '8cc096a8-e279-425c-ba95-3970614c3d8e',
+		ff_cost_booking_executive : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		credit_controller_id      : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		vietnam_business_heads    : [
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal

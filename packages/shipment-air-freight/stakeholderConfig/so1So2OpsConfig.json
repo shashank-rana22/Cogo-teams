@@ -1,5 +1,56 @@
 {
-    "pocs":{
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview","purchase", "tasks", "documents", "emails", "tracking"],  
+    "shipment_info":{},
+    "timeline": {
+        "can_edit": true,
+        "editable_fields": ["schedule_arrival", "schedule_departure", "cargo_handed_over_at_origin_at"]
+    },
+    "default_tab":"tasks",
+    "overview":{
+        "tab_title":"Overview"
+    },
+    "tasks":{
+        "tab_title":"Timeline and Tasks",
+        "show_booking_req":true,
+        "checked_show_my_tasks":true,
+        "is_task_assigned":true
+    },
+    "documents":{
+        "tab_title":"Documents",
+        "default_wallet":"trade_documents"
+    },
+    "emails":{
+        "tab_title":"Emails"
+    },
+    "cancel_shipment": {
+        "can_cancel": false,
+        "list_reasons": {
+            "stakeholder_type": ["admin"]
+        },
+        "role": "sales"
+    },
+    "purchase":{
+        "tab_title": "Purchase Invoice"
+    },
+    "edit_supplier": false,
+    "cancel_service": false,
+    "edit_params": {
+        "can_edit": false
+    },
+    "additional_services": {
+        "action_buttons": {
+            "reallocate": false,
+            "review_comments": false
+        },
+        "add_rate": {
+            "status::amendment_requested_by_importer_exporter": false,
+            "status::cancelled_by_supplier": false
+        }
+    },
+    "tracking": {
+        "tab_title": "Tracking"
+    },
+    "pocs": {
         "trade_parties":["collection_party"],
         "can_view":["notifying_party","pocs","invoicing_party","service_provider","collection_party"],
         "can_edit":["collection_party","notifying_party"],

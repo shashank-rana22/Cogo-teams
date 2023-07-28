@@ -30,7 +30,7 @@
     "tracking": {
         "tab_title": "Tracking"
     },
-    "pocs":{
+    "pocs": {
         "trade_parties":["self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
         "can_edit":["notifying_party","invoicing_party","self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],

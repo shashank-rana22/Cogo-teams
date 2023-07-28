@@ -50,7 +50,7 @@
     "tracking": {
         "tab_title": "Tracking"
     },
-    "pocs":{
+    "pocs": {
         "trade_parties":["collection_party"],
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
         "can_edit":["notifying_party","collection_party"],
