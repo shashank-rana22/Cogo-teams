@@ -27,7 +27,7 @@
 	:global {
 		.ui_accordion_content {
 			width: 100%;
-			padding: 0 40px;
+			padding: 0 40px !important;
 			background-color: #f3fafa;
 		}
 
@@ -70,7 +70,6 @@
 
 .right_container {
 	width: 50%;
-	margin-bottom: 12px;
 }
 
 .left_container {

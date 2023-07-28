@@ -14,8 +14,8 @@ import styles from './styles.module.css';
 const commonControls = ['origin_cargo_handling_type', 'destination_cargo_handling_type'];
 
 function AdditionalServicesForm({
-	rateCardData,
-	detail,
+	rateCardData = {},
+	detail = {},
 	setHeaderProps = () => {},
 	service = '',
 	refetchSearch = () => {},
@@ -33,37 +33,23 @@ function AdditionalServicesForm({
 		formState: { errors },
 	} = useForm();
 
-	const valueAlreadyExist = {};
-
-	commonControls.forEach((item) => {
-		valueAlreadyExist[item] = false;
-	});
-
-	const formValues = watch();
-
-	const controlFields = {};
-
-	service.controls.forEach((item) => {
-		controlFields[item.name] = item;
-	});
-
-	const watchMap = {};
+	const WATCH_MAP = {};
 
 	service.controls.forEach((singleControl) => {
 		const condition = { ...(singleControl.condition || {}) };
 		delete condition.services;
 		Object.keys(condition).forEach((conditionRule) => {
-			if (!watchMap[conditionRule]) {
-				watchMap[conditionRule] = watch(conditionRule);
+			if (!WATCH_MAP[conditionRule]) {
+				WATCH_MAP[conditionRule] = watch(conditionRule) || findKey(detail, conditionRule);
 			}
 		});
 	});
 
-	const onSubmit = async () => {
+	const onSubmit = async (values) => {
 		const payload = getFclPayload({
 			rateCardData,
 			detail,
-			additionalFormInfo : formValues,
+			additionalFormInfo : values,
 			service_name       : service.name,
 		});
 		await addService(payload);
@@ -85,17 +71,17 @@ function AdditionalServicesForm({
 				{service.controls.map((controlItem) => {
 					let newControl = { ...controlItem };
 
-					const { condition = {} } = newControl;
+					const { condition = {}, name = '' } = newControl;
 
 					const Element = getElementController(newControl.type);
 
 					let flag = true;
 
 					Object.keys(condition).forEach((condItem) => {
-						if (watchMap?.[condItem] !== undefined) {
+						if (WATCH_MAP?.[condItem] !== undefined) {
 							if (
 								!condition?.[condItem].includes(
-									watchMap?.[condItem],
+									WATCH_MAP?.[condItem],
 								)
 							) {
 								flag = false;
@@ -117,13 +103,17 @@ function AdditionalServicesForm({
 
 					return (
 						<div key={newControl.name} className={styles.control_style}>
-
 							<div className={styles.label}>
 								{ newControl.label}
 							</div>
 
 							<Element {...newControl} control={control} value={value} />
 
+							{errors[name] && (
+								<div className={styles.error_message}>
+									{errors[name]?.message}
+								</div>
+							)}
 						</div>
 					);
 				})}
