@@ -10,7 +10,8 @@ const GLOBAL_CONSTANTS = {
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 	},
 	country_ids: {
-		IN: '541d1232-58ce-4d64-83d6-556a42209eb7',
+		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
+		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
 	},
 
 	platform_supported_country_codes: ['IN', 'VN'],
