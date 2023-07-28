@@ -1,0 +1,65 @@
+.list_card {
+	display: flex;
+	padding: 12px;
+	background-color: #fff;
+}
+
+.card_column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	:global {
+		.ui_pill_container {
+			margin-left: 0;
+		}
+	}
+}
+
+.top_heading {
+	font-weight: 600;
+	line-height: 150%;
+}
+
+.sub_heading {
+	font-size: 12px;
+	color: #828282;
+}
+
+.roles {
+	max-width: 250px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.business_name {
+	text-align: center;
+}
+
+.created_at {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.icon_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-left: 8px;
+	cursor: pointer;
+}
+
+.action_buttons {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+	justify-content: flex-start;
+}
+
+.action_button {
+	margin-right: 8px;
+}

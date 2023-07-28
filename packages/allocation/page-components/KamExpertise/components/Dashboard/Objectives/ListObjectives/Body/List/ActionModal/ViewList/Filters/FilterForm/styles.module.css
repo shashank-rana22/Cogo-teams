@@ -1,0 +1,24 @@
+.controller {
+	width: 250px;
+}
+
+.label {
+	margin: 24px 0 4px;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	color: #221f20;
+}
+
+.error_message {
+	margin-left: 4px;
+	font-size: 8px;
+	color: red;
+}
+
+.button_container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	margin-top: 20px;
+}

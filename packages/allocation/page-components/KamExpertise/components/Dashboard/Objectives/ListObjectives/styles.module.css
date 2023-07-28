@@ -1,0 +1,30 @@
+.container {
+	display: flex;
+	flex-direction: column;
+
+	@media (max-width: 576px) {
+		padding-top: 50px;
+	}
+}
+
+.heading_container {
+	position: relative;
+	display: inline-block;
+	width: fit-content;
+	margin-top: 12px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+
+	@media (min-width: 768px) {
+		font-size: 24px;
+	}
+}
+
+.tabs {
+	margin: 16px 0;
+
+	@media (max-width: 768px) {
+		overflow-x: scroll;
+	}
+}
