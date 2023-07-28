@@ -1,7 +1,7 @@
 import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import OverviewManageServices from '../../commons/OverviewManageServices';
+import ManageServices from '../../commons/ManageServices';
 import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
 import useListSageSalesInvoices from '../../hooks/useListSageSalesInvoices';
 
@@ -24,7 +24,7 @@ function SalesInvoice() {
 
 	return (
 		<main className={styles.container}>
-			<OverviewManageServices isOpen={false} />
+			<ManageServices />
 
 			{(!loading && !isEmpty(invoiceData)) && (
 				<Invoices

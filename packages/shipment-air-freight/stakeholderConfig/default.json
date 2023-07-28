@@ -1,6 +1,5 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "overview", "tasks", "documents", "tracking"],  
-    "shipment_info":{},
+    "features":["shipment_header", "timeline", "poc", "sop", "chat", "overview", "tasks", "documents", "tracking"],  
     "timeline": {
         "can_edit": false
     },
@@ -13,6 +12,10 @@
     },
     "documents":{
         "tab_title":"Documents"
+    },
+    "cancel_shipment": {
+        "can_cancel": false,
+        "role": "sales"
     },
     "edit_params": {
         "can_edit": false

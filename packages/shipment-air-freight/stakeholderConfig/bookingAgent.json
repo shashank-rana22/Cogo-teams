@@ -1,6 +1,5 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails", "tracking"],  
-    "shipment_info":{},
+    "features":["shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "sales", "documents", "emails", "tracking"],  
     "timeline": {
         "can_edit": false
     },
@@ -10,6 +9,9 @@
     },
     "tasks":{
         "tab_title":"Timeline and Tasks"
+    },
+    "sales":{
+        "tab_title":"Live Invoices"
     },
     "documents":{
         "tab_title":"Documents"
@@ -22,9 +24,7 @@
     },
     "cancel_shipment": {
         "can_cancel": true,
-        "list_reasons": {
-            "stakeholder_type": ["booking_agent"]
-        }
+        "role": "sales"
     },
     "tracking": {
         "tab_title": "Tracking"

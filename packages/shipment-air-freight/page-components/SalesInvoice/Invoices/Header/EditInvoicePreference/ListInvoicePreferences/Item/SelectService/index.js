@@ -33,7 +33,12 @@ function SelectService({
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
 			const trade_type = MAIN_SERVICES !== service?.service_type ? service?.trade_type : null;
 
-			const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
+			let tradeType = '';
+			if (trade_type === 'export') {
+				tradeType = 'Origin';
+			} else if (trade_type === 'import') {
+				tradeType = 'Destination';
+			}
 
 			const isBas = (service?.line_items || []).some((lineItem) => lineItem?.code === 'BAS');
 
@@ -50,30 +55,22 @@ function SelectService({
 				<div className={styles.service_details}>
 					<div>
 						<b>Invoice Currency: </b>
-						&nbsp;
 						<span>{service?.currency}</span>
 					</div>
 
-					{service?.detail?.container_size ? (
-						<div>
-							<b>Container Size: </b>
-							<span>{`${startCase(service?.detail?.container_size)} FT`}</span>
-						</div>
-					) : null}
-
-					{service?.detail?.commodity ? (
+					{service?.detail?.commodity && (
 						<div>
 							<b>Commodity: </b>
 							<span>{startCase(service?.detail?.commodity)}</span>
 						</div>
-					) : null}
+					)}
 
-					{invoiceAmount ? (
+					{invoiceAmount && (
 						<div>
 							<b>Invoice Amount: </b>
 							<span>{invoiceAmount}</span>
 						</div>
-					) : null}
+					)}
 				</div>
 			);
 

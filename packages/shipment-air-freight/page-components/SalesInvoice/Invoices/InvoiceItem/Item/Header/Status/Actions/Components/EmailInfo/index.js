@@ -31,14 +31,10 @@ function EmailInfo({
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
-											UTR Number:
-											&nbsp;
-											{invoice?.sales_utr?.utr_number || ''}
+											{`UTR Number:	${invoice?.sales_utr?.utr_number || ''}`}
 										</div>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
-											Status:
-											&nbsp;
-											{invoice?.sales_utr?.status || ''}
+											{`Status:	${invoice?.sales_utr?.status || ''}`}
 										</div>
 									</div>
 								</div>

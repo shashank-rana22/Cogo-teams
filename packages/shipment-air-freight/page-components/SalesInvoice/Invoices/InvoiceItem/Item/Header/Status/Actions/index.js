@@ -17,6 +17,7 @@ const ReviewServices = dynamic(() => import('./ReviewServices'), { ssr: false })
 const AmendmentReasons = dynamic(() => import('./AmendmentReasons'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
 const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
+const ExchangeRateModal = dynamic(() => import('./ExchangeRateModal'), { ssr: false });
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 
@@ -30,6 +31,7 @@ function Actions({
 	isIRNGenerated = false,
 }) {
 	const [isEditInvoice, setIsEditInvoice] = useState(false);
+	const [showExchangeRate, setExchangeRate] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
@@ -67,13 +69,13 @@ function Actions({
 			<div className={styles.main_container}>
 				<div className={styles.actions_wrap}>
 					<div className={styles.statuses}>
-						{invoice.status ? (
+						{invoice.status && (
 							<div className={styles.info_container}>
 								{startCase(invoice.status)}
 							</div>
-						) : null}
+						)}
 
-						{!INVOICE_STATUS.includes(invoice.status) ? (
+						{!INVOICE_STATUS.includes(invoice.status) && (
 							<Button
 								size="sm"
 								onClick={() => setShowReview(true)}
@@ -82,16 +84,16 @@ function Actions({
 							>
 								Mark as Reviewed
 							</Button>
-						) : null}
+						)}
 
-						{invoice?.status === 'reviewed' ? (
+						{invoice?.status === 'reviewed' && (
 							<Button size="sm" onClick={() => setShowOTPModal(true)}>
 								Send OTP for Approval
 							</Button>
-						) : null}
+						)}
 					</div>
 
-					{invoice?.status === 'amendment_requested' ? (
+					{invoice?.status === 'amendment_requested' && (
 						<Tooltip
 							placement="bottom"
 							theme="light"
@@ -101,7 +103,7 @@ function Actions({
 								<IcCError width={17} height={17} />
 							</div>
 						</Tooltip>
-					) : null}
+					)}
 				</div>
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 					<EmailInfo invoice={invoice} setSendEmail={setSendEmail} />
@@ -114,6 +116,7 @@ function Actions({
 						setShowAddRemarks={setShowAddRemarks}
 						setShowChangePaymentMode={setShowChangePaymentMode}
 						setIsEditInvoice={setIsEditInvoice}
+						setExchangeRate={setExchangeRate}
 					/>
 				</div>
 			</div>
@@ -171,6 +174,15 @@ function Actions({
 					setShow={setSendEmail}
 					invoice={invoice}
 					refetch={refetch}
+				/>
+			) : null}
+
+			{showExchangeRate ? (
+				<ExchangeRateModal
+					setShowModal={setExchangeRate}
+					showExchangeRate={showExchangeRate}
+					setExchangeRate={setExchangeRate}
+					invoice={invoice}
 				/>
 			) : null}
 

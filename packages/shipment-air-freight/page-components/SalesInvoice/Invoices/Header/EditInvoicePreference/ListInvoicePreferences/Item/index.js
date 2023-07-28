@@ -11,7 +11,7 @@ import SelectService from './SelectService';
 import styles from './styles.module.css';
 
 const MAIN_SERVICES = 'air_freight_service';
-const ACTION_STATE = ['reviewed', 'approved', 'revoked'];
+const ACTION_STATE = ['reviewed', 'approved', 'revoked', 'finance_rejected'];
 
 function Item({
 	invoice = {},
@@ -35,7 +35,7 @@ function Item({
 	const open = openedService && openedService?.id === id;
 
 	const handleServiceToggle = () => {
-		setOpenedService(open ? null : invoice);
+		setOpenedService(open ? undefined : invoice);
 	};
 
 	const onServiceChange = (currentInvoice, value) => {
@@ -52,35 +52,44 @@ function Item({
 			? service?.trade_type
 			: null;
 
-		const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
+		let tradeType = '';
+		if (trade_type === 'export') {
+			tradeType = 'Origin';
+		} else if (trade_type === 'import') {
+			tradeType = 'Destination';
+		}
+
 		const isBas = (service?.line_items || []).some(
 			(lineItem) => lineItem?.code === 'BAS',
 		);
 
-		return service?.service_type ? (
+		const serviceCode = service?.charge_code;
+
+		return service?.service_type && (
 			<div className={styles.service_name}>
 				{`${tradeType} ${startCase(service?.service_type)} ${
 					service?.is_igst ? '(IGST INVOICE)' : ''
-				} ${isBas && !service?.is_igst ? '(BAS)' : ''}`}
+				} ${isBas && !service?.is_igst ? '(BAS)' : ''}
+				${serviceCode ? `(${serviceCode})` : ''}`}
 			</div>
-		) : null;
+		);
 	});
 
 	const noActionState = ACTION_STATE.includes(status);
 
 	return (
 		<div className={styles.container}>
-			{invoice_source === 'pass_through' ? (
+			{invoice_source === 'pass_through' && (
 				<div className={styles.invoice_source}>
 					Source -
 					{startCase(invoice_source)}
 				</div>
-			) : null}
+			)}
 
 			<div
 				className={cl`${styles.header_container} ${open ? styles.open : ''}`}
 				style={{ cursor: noActionState ? 'default' : '' }}
-				onClick={!noActionState ? () => handleServiceToggle() : null}
+				onClick={!noActionState ? () => handleServiceToggle() : undefined}
 			>
 				<div className={styles.info_div}>
 					<div className={styles.details}>
@@ -110,20 +119,21 @@ function Item({
 					</div>
 
 					<div className={styles.billing_info}>
-						GST Number:&nbsp;
+						GST Number:
+						{' '}
 						{billing_address?.tax_number}
 					</div>
 
 					<div className={styles.billing_info}>
 						Invoice Currency:
-						&nbsp;
+						{' '}
 						{invoice_currency}
 					</div>
 
-					{invoicing_party_total_discounted ? (
+					{invoicing_party_total_discounted && (
 						<div className={styles.overall_amount}>
 							Invoice Amount:
-							&nbsp;
+							{' '}
 							{formatAmount({
 								amount   : invoicing_party_total_discounted,
 								currency : invoice_total_currency,
@@ -133,7 +143,7 @@ function Item({
 								},
 							})}
 						</div>
-					) : null}
+					)}
 
 					<div
 						className={styles.flex}
@@ -149,7 +159,7 @@ function Item({
 				) : null}
 			</div>
 
-			{open ? (
+			{open && (
 				<SelectService
 					shipment_type={shipment_type}
 					handleServiceChange={onServiceChange}
@@ -157,7 +167,7 @@ function Item({
 					onClose={handleServiceToggle}
 					allTakenServices={allTakenServices}
 				/>
-			) : null}
+			)}
 		</div>
 	);
 }

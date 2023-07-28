@@ -18,8 +18,8 @@ import styles from './styles.module.css';
 const TAB_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
 	tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
-	purchase  : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
 	sales  	  : dynamic(() => import('../SalesInvoice'), { ssr: false }),
+	purchase  : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
 	tracking  : dynamic(() => import('@cogoport/air-modules/components/Tracking'), { ssr: false }),
@@ -48,10 +48,9 @@ function DefaultView() {
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
 	const conditionMapping = {
-		shipment_info       : !!features.includes('shipment_info'),
 		shipment_header     : !!features.includes('shipment_header'),
+		sales              	: !!features.includes('sales'),
 		purchase            : !!features.includes('purchase'),
-		sales           				: !!features.includes('sales'),
 		poc_sop             : !!(features.includes('poc') || features.includes('sop')),
 		chat                : !!features.includes('chat'),
 		cancelDetails       : !!(features.includes('cancel_details') && shipment_data.state === 'cancelled'),

@@ -12,14 +12,14 @@ import styles from './styles.module.css';
 const POC_DETAILS_DEFAULT_VALUES = [{ name: '', email: '', mobile_country_code: '', mobile_number: '' }];
 
 function AddressForm({
-	registrationNumber,
+	registrationNumber = '',
 	companyDetails = {},
 	setCurrentStep = () => {},
 	showComponent = '',
 	onSubmit = () => {},
-	gstNumber,
+	gstNumber = '',
 	setGstNumber = () => {},
-	isAddressRegisteredUnderGst,
+	isAddressRegisteredUnderGst = false,
 	setShowComponent = () => {},
 	setIsAddressRegisteredUnderGst = () => {},
 	source = '',
@@ -72,7 +72,7 @@ function AddressForm({
 				<span className={styles.text}>
 					Addresses not registered under GST will be added in
 					&quot;Other Addresses&quot; for the organization and
-					<b>will not be available for GST Invoicing</b>
+					<b> will not be available for GST Invoicing</b>
 					.
 				</span>
 			)}

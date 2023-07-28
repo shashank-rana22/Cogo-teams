@@ -5,17 +5,13 @@ import Services from '../Services';
 
 import styles from './styles.module.css';
 
-function OverviewManageServices() {
-	const getTitle = (
-		<div className={styles.title}>Manage Services</div>
-	);
-
+function ManageServices() {
 	return (
-		<Accordion title={getTitle} isOpen>
+		<Accordion title={<div className={styles.title}>Manage Services</div>} isOpen>
 			<Services />
 
 			<AdditionalServiceList />
 		</Accordion>
 	);
 }
-export default OverviewManageServices;
+export default ManageServices;

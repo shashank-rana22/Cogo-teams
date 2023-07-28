@@ -28,11 +28,7 @@ function Status({
 	setAskNullify = () => {},
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
-	const isAuthorizedForCN = [
-		GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
-		GLOBAL_CONSTANTS.uuid.sachin_mehra_user_id,
-		GLOBAL_CONSTANTS.uuid.manoj_mahapatra_user_id].includes(user_data?.user?.id);
+	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id;
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -63,19 +59,21 @@ function Status({
 		});
 	};
 
-	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
+	const showRequestCN = showCN
+	&& !invoice.is_revoked
+	&& !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized);
 
 	return (
 		<div className={styles.invoice_container}>
 			{invoice.status
-					&& RESTRICT_REVOKED_STATUS.includes(invoice.status) ? (
+					&& RESTRICT_REVOKED_STATUS.includes(invoice.status) && (
 						<div className={styles.invoice_status}>
 							{startCase(invoice.status)}
 						</div>
-				) : null}
+			)}
 
-			{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
+			{!invoice.is_revoked && invoice.status !== 'finance_rejected' && (
 				<Actions
 					invoice={invoice}
 					refetch={refetchAferApiCall}
@@ -84,10 +82,10 @@ function Status({
 					isIRNGenerated={isIRNGenerated}
 					bfInvoice={bfInvoice}
 				/>
-			) : null}
+			)}
 
 			{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id && (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
@@ -95,9 +93,9 @@ function Status({
 						>
 							Request Amendment
 						</Button>
-				) : null}
+			)}
 
-			{showRequestCN && isAuthorizedForCN ? (
+			{showRequestCN && (
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"
@@ -105,11 +103,11 @@ function Status({
 				>
 					Request CN
 				</Button>
-			) : null}
+			)}
 
-			{invoice?.is_revoked && invoice?.status !== 'revoked' ? (
+			{invoice?.is_revoked && invoice?.status !== 'revoked' && (
 				<div className={styles.info_container}>Requested for Revoke</div>
-			) : null}
+			)}
 		</div>
 	);
 }

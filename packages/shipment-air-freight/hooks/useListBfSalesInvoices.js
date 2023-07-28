@@ -1,6 +1,6 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useRequest } from '@cogoport/request';
+import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback, useContext } from 'react';
 
 const useListBfSalesInvoices = () => {
@@ -9,12 +9,13 @@ const useListBfSalesInvoices = () => {
 	const [
 		{ loading: apiLoading, data },
 		trigger,
-	] = useRequest(
+	] = useRequestBf(
 		{
-			url    : '/sales/invoice/shipment/list',
-			method : 'GET',
+			url     : '/sales/invoice/shipment/list',
+			method  : 'GET',
+			authKey : 'get_sales_invoice_shipment_list',
 		},
-		{ autoCancel: false },
+		{ manual: true },
 	);
 
 	const listApi = useCallback(async () => {

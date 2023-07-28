@@ -12,13 +12,13 @@ const useUpdateInvoiceCombination = ({
 	refetch = () => {},
 	successMessage = 'Invoice Preference edited!',
 	servicesList,
-	selectedParties,
-	INITIAL_SERVICE_INVOICE_ID,
+	selectedParties = [],
+	initial_service_invoice_id = {},
 	allServiceLineitemsCount,
 	importer_exporter_id,
 	updateExportInvoices,
 }) => {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
 	const endPoint = updateExportInvoices ? '/update_shipment_export_invoice_combination'
 		: '/update_shipment_invoice_combination';
@@ -48,13 +48,13 @@ const useUpdateInvoiceCombination = ({
 			const FINAL_PARTIES = [];
 
 			filteredParties.forEach((party) => {
-				const PARTY_SERVICES = party?.services?.map((item) => {
+				const PARTY_SERVICES = (party?.services || []).map((item) => {
 					const { display_name, trade_type, serviceKey, is_igst, ...rest } = item;
 
 					return ({
 						...rest,
 						invoice_combination_id: updateExportInvoices
-							? INITIAL_SERVICE_INVOICE_ID[item?.serviceKey] || undefined
+							? initial_service_invoice_id[serviceKey] || undefined
 							: undefined,
 					});
 				});
@@ -68,8 +68,8 @@ const useUpdateInvoiceCombination = ({
 					!POST_REVIEWED_INVOICES.includes(partyDetails?.status)
 					&& partyDetails?.services?.length
 				) {
-					if (typeof partyDetails.id === 'number') {
-						delete partyDetails.id;
+					if (typeof partyDetails?.id === 'number') {
+						delete partyDetails?.id;
 					}
 					FINAL_PARTIES.push(partyDetails);
 				}

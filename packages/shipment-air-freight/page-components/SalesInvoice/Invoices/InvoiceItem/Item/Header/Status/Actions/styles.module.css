@@ -45,15 +45,11 @@
 
 .text {
 	width: 130px;
+	padding: 5px 0 !important;
 	font-size: var(--font-size-sm);
-	line-height: 16px;
 	color: var(--color-secondary-greyscale-3);
 	text-align: center;
 	cursor: pointer;
-
-	&:hover {
-		color: #5936f0;
-	}
 }
 
 .statuses {

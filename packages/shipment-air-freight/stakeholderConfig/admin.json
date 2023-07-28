@@ -1,6 +1,5 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview","purchase", "tasks", "documents", "emails", "tracking"],  
-    "shipment_info":{},
+    "features":["shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "sales", "purchase", "tasks", "documents", "emails", "tracking"],
     "timeline": {
         "can_edit": true
     },
@@ -23,13 +22,13 @@
     },
     "cancel_shipment": {
         "can_cancel": true,
-        "list_reasons": {
-            "stakeholder_type": ["admin"]
-        },
         "role": "sales"
     },
+    "sales":{
+        "tab_title":"Sales Live Invoices"
+    },
     "purchase":{
-        "tab_title": "Purchase Invoice"
+        "tab_title": "Purchase Live Invoices"
     },
     "edit_supplier": false,
     "cancel_service": false,

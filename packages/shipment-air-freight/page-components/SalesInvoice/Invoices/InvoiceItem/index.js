@@ -1,9 +1,9 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { isEmpty } from '@cogoport/utils';
 
 import Item from './Item';
 import styles from './styles.module.css';
 
-const DEFAULT_AMOUNT = 0;
 function InvoiceItem({
 	item = {},
 	total = {},
@@ -17,7 +17,7 @@ function InvoiceItem({
 	refetchCN = () => {},
 }) {
 	const outStanding = formatAmount({
-		amount   : org_outstanding?.total_outstanding_amount || DEFAULT_AMOUNT,
+		amount   : org_outstanding?.total_outstanding_amount,
 		currency : org_outstanding?.currency,
 		options  : {
 			style                 : 'currency',
@@ -35,7 +35,7 @@ function InvoiceItem({
 				</div>
 
 				<div className={styles.invoice_value_container} style={org_outstanding}>
-					<div className={styles.invoice_value_title}>Invoice Value -</div>
+					<div className={styles.invoice_value_title}>Total Invoice Value -</div>
 					<div className={styles.invoice_value}>
 						{formatAmount({
 							amount   : total?.total_price_discounted,
@@ -49,12 +49,12 @@ function InvoiceItem({
 					</div>
 				</div>
 
-				{org_outstanding ? (
+				{!isEmpty(org_outstanding) && (
 					<div className={styles.invoice_value_container}>
 						<div className={styles.invoice_value_title}>Total Outstanding -</div>
 						<div className={styles.invoice_value}>{outStanding}</div>
 					</div>
-				) : null}
+				)}
 			</div>
 
 			<div className={styles.invoice_list_wrapper}>

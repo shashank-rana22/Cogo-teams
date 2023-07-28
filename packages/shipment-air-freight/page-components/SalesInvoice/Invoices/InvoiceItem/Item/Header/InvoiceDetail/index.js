@@ -12,6 +12,11 @@ const API_SUCCESS_MESSAGE = {
 	approved : 'Invoice approved!,',
 };
 
+const INVOICE_STATUS_LABEL = {
+	POSTED        : 'E-INVOICE GENERATED',
+	IRN_GENERATED : 'E-INVOICE GENERATED',
+};
+
 const CREDIT_SOURCE_FIRST = 0;
 
 const SLICE_CREDIT_UPTO = -2;
@@ -35,6 +40,20 @@ function InvoiceDetail({
 		(item) => item?.proformaNumber === live_invoice_number,
 	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
+	const {
+		einvoiceNumber,
+		invoiceNumber,
+		proformaNumber,
+		einvoicePdfUrl,
+		invoicePdfUrl,
+		proformaPdfUrl,
+		invoiceRejectionReason,
+	} = bfInvoice || {};
+
+	const invoiceUrl = einvoicePdfUrl || invoicePdfUrl || proformaPdfUrl;
+
+	let invoiceNo = invoiceNumber || proformaNumber || live_invoice_number;
+
 	const handleDownload = (invoiceLink) => {
 		window.open(invoiceLink);
 	};
@@ -52,6 +71,11 @@ function InvoiceDetail({
 		invoiceStatus = 'IRN GENERATED';
 	}
 
+	if (einvoicePdfUrl) {
+		invoiceStatus = INVOICE_STATUS_LABEL[invoiceStatus];
+		invoiceNo = einvoiceNumber;
+	}
+
 	const handleClick = (type) => {
 		updateInvoiceStatus({
 			payload: {
@@ -67,20 +91,15 @@ function InvoiceDetail({
 	return (
 		<div className={styles.invoice_info}>
 			<div className={styles.so_container}>
-				<div
+				<Button
 					className={cl`${styles.so_number} ${!isEmpty(bfInvoice) ? styles.active : ''}`}
-					role="button"
-					tabIndex={0}
+					themeType="linkUi"
 					onClick={() => (!isEmpty(bfInvoice)
-						? handleDownload(
-							bfInvoice?.invoicePdfUrl || bfInvoice?.proformaPdfUrl,
-						)
-						: null)}
+						&& handleDownload(invoiceUrl)
+					)}
 				>
-					{bfInvoice?.invoiceNumber
-								|| bfInvoice?.proformaNumber
-								|| live_invoice_number}
-				</div>
+					{invoiceNo}
+				</Button>
 
 				<div className={styles.status_container}>
 					{invoiceStatus === 'FINANCE_REJECTED' ? (
@@ -88,7 +107,7 @@ function InvoiceDetail({
 							theme="light"
 							placement="bottom"
 							content={
-								<div>{bfInvoice?.invoiceRejectionReason || '-'}</div>
+								<div>{invoiceRejectionReason || '-'}</div>
 									}
 						>
 							<div className={styles.status_style}>{startCase(invoiceStatus)}</div>
@@ -98,13 +117,13 @@ function InvoiceDetail({
 					)}
 				</div>
 
-				{showIrnTriggerForOldShipments ? (
+				{showIrnTriggerForOldShipments && (
 					<Button
 						onClick={() => handleClick('approved')}
 					>
 						Generate IRN Invoice
 					</Button>
-				) : null}
+				)}
 			</div>
 			<div className={styles.invoice_value_container}>
 				<div className={styles.invoice_value_title}>Invoice Value -</div>

@@ -1,11 +1,6 @@
-import { ShipmentDetailContext } from '@cogoport/context';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { useSelector } from '@cogoport/store';
-import { useContext } from 'react';
 
 import EditInvoicePreference from './EditInvoicePreference';
-import ExchangeRate from './ExchangeRate';
 import styles from './styles.module.css';
 
 function Header({
@@ -21,10 +16,6 @@ function Header({
 		invoicing_parties,
 		reviewed_invoices,
 	} = invoiceData;
-	const user_data = useSelector(({ profile }) => profile || {});
-	const { shipment_data } = useContext(ShipmentDetailContext) || {};
-
-	const showExchangeRate = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const refetch = () => {
 		bfInvoiceRefetch();
@@ -50,28 +41,13 @@ function Header({
 			</div>
 
 			<div className={styles.edit_invoice}>
-				{!isCustomer ? (
+				{!isCustomer && (
 					<div className={styles.reviwed_stats}>
-						{reviewed_invoices}
-						&nbsp;
-						of
-						&nbsp;
-						{invoicing_parties?.length}
-						&nbsp;
-						reviewed
+						{`${reviewed_invoices} of ${invoicing_parties?.length} reviewed`}
 					</div>
-				) : null}
+				)}
 
 				<div className={styles.button_div}>
-					{showExchangeRate ? (
-						<ExchangeRate
-							shipment_id={shipment_data.id}
-							refetch={refetch}
-							invoiceData={invoiceData}
-							disableAction={disableAction}
-						/>
-					) : null}
-
 					<EditInvoicePreference
 						invoicing_parties={invoicing_parties}
 						disableAction={disableAction}

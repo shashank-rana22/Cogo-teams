@@ -1,7 +1,7 @@
-import { cl } from '@cogoport/components';
+import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
-import { startCase, upperCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
@@ -11,8 +11,6 @@ import InvoicingPartyDetail from './InvoicingPartyDetail';
 import RequestCN from './RequestCN';
 import Status from './Status';
 import styles from './styles.module.css';
-
-const UPPER_CASE_EXCHANGE_RATE_STATE = ['eta', 'etd'];
 
 function Header({
 	children = null,
@@ -48,24 +46,25 @@ function Header({
 	return (
 		<div className={styles.container}>
 			<div>
-				{invoice?.source === 'pass_through' ? (
+				{invoice?.source === 'pass_through' && (
 					<div className={styles.invoice_source}>
 						Source -
-						&nbsp;
+						{' '}
 						{startCase(invoice?.source)}
 					</div>
-				) : null}
+				)}
 
-				{invoice?.exchange_rate_state ? (
+				{invoice?.exchange_rate_state && (
 					<div className={styles.invoice_source}>
-						{`Applicable State - ${UPPER_CASE_EXCHANGE_RATE_STATE.includes(invoice?.exchange_rate_state)
-							? upperCase(invoice?.exchange_rate_state) : startCase(invoice?.exchange_rate_state)}`}
+						Applicable State -
+						{' '}
+						{startCase(invoice?.exchange_rate_state)}
 					</div>
-				) : null}
+				)}
 			</div>
 
 			<div className={cl`${styles.flex_row} ${open ? styles.open : ''}`}>
-				<InvoicingPartyDetail invoice={invoice} invoicesList={invoicesList} />
+				<InvoicingPartyDetail invoice={invoice} />
 
 				<InvoiceDetail
 					updateInvoiceStatus={updateInvoiceStatus}
@@ -83,18 +82,17 @@ function Header({
 					setAskNullify={setAskNullify}
 				/>
 
-				<div
+				<Button
 					className={styles.icon_wrapper}
-					role="button"
-					tabIndex={0}
-					onClick={() => setOpen(!open)}
+					themeType="tertiary"
+					onClick={() => setOpen((prev) => !prev)}
 					style={{ height: `${invoicePartyDetailsRef.current?.offsetHeight}px` }}
 				>
 					{open ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-				</div>
+				</Button>
 			</div>
 
-			{open ? <div>{children}</div> : null}
+			{open && <div>{children}</div>}
 
 			<RequestCN
 				askNullify={askNullify}

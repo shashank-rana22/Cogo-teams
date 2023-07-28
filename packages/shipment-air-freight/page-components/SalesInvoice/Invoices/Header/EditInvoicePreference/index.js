@@ -64,7 +64,7 @@ function EditInvoicePreference({
 				Edit Invoice Preference
 			</Button>
 
-			{show ? (
+			{show && (
 				<Modal
 					show
 					size="lg"
@@ -74,14 +74,13 @@ function EditInvoicePreference({
 					<Modal.Header title="EDIT INVOICING PREFERENCE" />
 
 					<Modal.Body className={styles.form}>
-						<div
+						<Button
 							className={styles.full_width_btn}
+							themeType="secondary"
 							onClick={() => setAddInvoicingParty(true)}
-							tabIndex={0}
-							role="button"
 						>
 							+ Add Invoicing Party
-						</div>
+						</Button>
 
 						<ListInvoicePreferences
 							shipmentData={shipment_data}
@@ -110,7 +109,7 @@ function EditInvoicePreference({
 						</Button>
 					</Modal.Footer>
 
-					{addInvoicingParty ? (
+					{addInvoicingParty && (
 						<Modal
 							size="xl"
 							themeType="secondary"
@@ -134,9 +133,9 @@ function EditInvoicePreference({
 								</div>
 							</Modal.Body>
 						</Modal>
-					) : null}
+					)}
 				</Modal>
-			) : null}
+			)}
 		</>
 	);
 }
