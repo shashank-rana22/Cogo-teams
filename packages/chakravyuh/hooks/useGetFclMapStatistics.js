@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 import { LOCATION_KEYS } from '../constants/map_constants';
@@ -42,9 +43,23 @@ const useGetFclMapStatistics = ({ locationFilters }) => {
 	const dependency = Object.values(filters).map(({ id }) => id).join('_');
 
 	useEffect(() => {
-		getStats({ filters, page });
+		setPage(START_PAGE);
+		getStats({ filters, page: 1 });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dependency, page, getStats]);
+	}, [dependency, getStats]);
+
+	useEffect(() => {
+		if (page > START_PAGE) {
+			getStats({ filters, page });
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [page, getStats]);
+
+	useEffect(() => {
+		if (page === START_PAGE && isEmpty(data?.list)) {
+			setActiveList([]);
+		}
+	}, [data, page]);
 
 	return { data, loading, page, setPage, activeList, setActiveList, accuracyMapping };
 };

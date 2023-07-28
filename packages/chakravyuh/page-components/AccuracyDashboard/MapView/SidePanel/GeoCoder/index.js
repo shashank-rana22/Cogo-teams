@@ -9,9 +9,15 @@ import { getHigherHierarchy } from '../../../../../utils/hierarchy-utils';
 
 import styles from './styles.module.css';
 
-function GeoCoder({ locationFilters = {}, setLocationFilters = () => {}, setHierarchy = () => {} }) {
+function GeoCoder({
+	locationFilters = {},
+	setHierarchy = () => {},
+	setActiveList = () => {},
+	setLocationFilters = () => {},
+}) {
 	const handleChange = (key, val, obj) => {
 		setLocationFilters((prev) => ({ ...prev, [key]: { id: val, ...obj } }));
+		setActiveList([]);
 		if (key === 'destination') {
 			if (!val) {
 				setHierarchy({});
