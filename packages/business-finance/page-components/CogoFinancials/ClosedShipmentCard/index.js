@@ -75,7 +75,6 @@ function ClosedShipmentCard({ isDeviationVisible = true, type = 'Financially' })
 			<div className={styles.financial_header}>
 				<div>
 					{type}
-					{' '}
 					Closed Shipments
 				</div>
 				<div className={styles.info}><IcMInfo /></div>

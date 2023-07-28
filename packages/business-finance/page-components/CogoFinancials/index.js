@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
 import ClosedShipmentCard from './ClosedShipmentCard/index';
+import StatsCard from './Common/StatsCard';
 import MultipleFilters from './MultipleFilters';
 import ReceivablesOutstandings from './ReceivablesOutstandings';
 import styles from './styles.module.css';
@@ -67,27 +68,28 @@ function CogoFinancials() {
 
 			</div>
 
-			<div className={styles.card_container}>
+			<div
+				className={styles.top_card}
+			>
 				<div
-					className={styles.top_card}
+					className={styles.left_shipments_section}
 				>
-					<div
-						className={styles.left_shipments_section}
-					>
-						<div style={{ border: '2px solid', height: '48%' }}>empty</div>
-						<div style={{ height: '48%' }}>
-							<ClosedShipmentCard
-								isDeviationVisible={false}
-								type="Operationally"
-							/>
-
-						</div>
-					</div>
-					<div style={{ width: '49%' }}>
-						<ClosedShipmentCard
-							type="Financially"
-						/>
-					</div>
+					<StatsCard heading="OnGoing Shipments" />
+					<ClosedShipmentCard
+						isDeviationVisible={false}
+						type="Operationally"
+					/>
+				</div>
+				<ClosedShipmentCard
+					type="Financially"
+				/>
+			</div>
+			<div className={styles.totalStats}>
+				<div className={styles.ongoing}>
+					<StatsCard heading="OnGoing Shipments" />
+				</div>
+				<div className={styles.card}>
+					<StatsCard heading="OnGoing Shipments" />
 				</div>
 			</div>
 			<ReceivablesOutstandings />
