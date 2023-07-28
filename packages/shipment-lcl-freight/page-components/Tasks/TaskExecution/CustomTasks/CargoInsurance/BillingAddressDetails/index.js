@@ -68,8 +68,8 @@ function BillingAddressDetails({
 						<div
 							className={styles.align_div}
 							role="presentation"
-							onClick={(prev) => {
-								setshowFilters(!prev);
+							onClick={() => {
+								setshowFilters(!showFilters);
 							}}
 						>
 							<IcMPlus />

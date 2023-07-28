@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useDebounceQuery, useForm } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -30,7 +31,7 @@ function CargoInsurance({
 	const [commodity, setCommodity] = useState('');
 	const [currentCargoInsurance, setCurrentCargoInsurance] = useState('');
 
-	const { trade_type, origin_country_id, destination_country_id } = primary_service || {};
+	const { origin_country_id, destination_country_id } = primary_service || {};
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -46,21 +47,21 @@ function CargoInsurance({
 		premiumRate,
 	} = useGetInsuranceRate();
 
+	const trade_type = getTradeTypeByIncoTerm(data?.inco_term);
 	const cargoInsuranceCountryId =	trade_type === 'export' ? destination_country_id : origin_country_id;
 
 	const { isEligible, loading: apiLoading } =	useGetInsuranceCountrySupported({
 		country_id: cargoInsuranceCountryId,
 	});
 
-	const { handleAddCargoInsurance, cargoLoading } = useCreateSpotSearch({
-		shipmentData : data,
-		rateData     : premiumData,
-		commodity,
-		transitMode  : 'SEA',
-		origin_country_id,
-		destination_country_id,
-		trade_type,
-		refetch      : refetchAfterApiCall,
+	const { onAddService, loading: cargoLoading } = useCreateSpotSearch({
+		shipment_data : data,
+		primary_service,
+		service       : {
+			service_type: 'cargo_insurance_service',
+			trade_type,
+		},
+		refetch: refetchAfterApiCall,
 	});
 
 	const { list = [] } = useGetInsuranceListCommodities();
@@ -75,6 +76,19 @@ function CargoInsurance({
 
 	const formValues = watch();
 	const controls = getControls();
+
+	const handleClick = () => {
+		const payload = {
+			rateData    : premiumData,
+			commodity,
+			transitMode : 'SEA',
+			origin_country_id,
+			destination_country_id,
+			trade_type,
+			...formValues,
+		};
+		onAddService(payload);
+	};
 
 	useEffect(() => {
 		if (!isEmpty(formValues?.cargo_value) && !isEmpty(formValues?.cargo_insurance_commodity)) {
@@ -156,7 +170,7 @@ function CargoInsurance({
 				</Button>
 
 				<Button
-					onClick={handleSubmit(handleAddCargoInsurance)}
+					onClick={handleSubmit(handleClick)}
 					loading={cargoLoading}
 					disabled={cargoLoading || isEmpty(premiumData)}
 					className={styles.btn_div}

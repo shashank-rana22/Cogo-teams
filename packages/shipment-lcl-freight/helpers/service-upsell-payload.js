@@ -1,17 +1,19 @@
 import { HAZ_CLASSES } from '@cogoport/globalization/constants/commodities';
 
 const TYPE_NUMBER_FIELDS = ['length', 'width', 'height', 'packages_count', 'package_weight', 'trucks_count'];
+const DEFAULT_PACKAGE_COUNT = 1;
+const DEFAULT_BL_COUNT = 1;
 
 const formattedAsNumberData = (values) => {
-	const formattedValues = {};
+	const FORMATTED_VALUES = {};
 	Object.entries(values).forEach(([key, val]) => {
 		if (TYPE_NUMBER_FIELDS.includes(key) && typeof val === 'string') {
-			formattedValues[key] = parseInt(val, 10);
+			FORMATTED_VALUES[key] = parseInt(val, 10);
 		} else {
-			formattedValues[key] = val;
+			FORMATTED_VALUES[key] = val;
 		}
 	});
-	return formattedValues;
+	return FORMATTED_VALUES;
 };
 
 const formatDataForSingleService = ({ rawParams = {} }) => {
@@ -36,8 +38,8 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 	};
 
 	const common2 = {
-		bls_count      : Number(bls_count || 1),
-		packages_count : Number(packages_count || 1),
+		bls_count      : Number(bls_count || DEFAULT_BL_COUNT),
+		packages_count : Number(packages_count || DEFAULT_PACKAGE_COUNT),
 	};
 
 	if (search_type === 'lcl_customs') {
@@ -106,6 +108,26 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 			...common,
 			...common2,
 		}];
+	}
+
+	if (search_type === 'cargo_insurance') {
+		return [
+			{
+				cargo_insurance_commodity_description : formValues?.cargo_insurance_commodity_description,
+				cargo_insurance_commodity_id          : formValues?.cargo_insurance_commodity,
+				cargo_value                           : formValues?.cargo_value,
+				cargo_value_currency                  : formValues?.cargo_value_currency,
+				destination_country_id,
+				origin_country_id,
+				risk_coverage                         : 'all_risk',
+				commodity                             : formValues?.commodity,
+				status                                : 'active',
+				transit_mode                          : `${formValues?.transitMode}`.toLowerCase(),
+				trade_type,
+				saas_rate                             : formValues?.rateData,
+
+			},
+		];
 	}
 
 	return null;
