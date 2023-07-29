@@ -91,7 +91,7 @@ const useUpdateSIDetails = ({
 				data: formattedData,
 			});
 
-			Toast.success('Task Completed successfully');
+			Toast.success('Task Completed Successfully');
 			onCancel();
 			taskListRefetch();
 		} catch (err) {

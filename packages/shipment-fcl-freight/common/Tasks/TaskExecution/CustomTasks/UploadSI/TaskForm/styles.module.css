@@ -3,7 +3,7 @@
 	justify-content: flex-end;
 	margin: 20px 0;
 
-	& > button:first-child {
+	& > button:not(last-child) {
 		margin-right: 12px;
 	}
 }
