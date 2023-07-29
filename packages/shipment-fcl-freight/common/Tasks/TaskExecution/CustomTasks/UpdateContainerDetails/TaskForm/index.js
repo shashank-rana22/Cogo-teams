@@ -45,7 +45,7 @@ function TaskForm({
 						size="sm"
 						value={details}
 						onChange={(e) => setDetails(e)}
-						placeholder="Copy and paste from excel (container number and date)"
+						placeholder="Copy and Paste from excel (container number and date)"
 					/>
 				</div>
 
@@ -85,7 +85,7 @@ function TaskForm({
 				/>
 			</div>
 
-			<div className={styles.button_wrap}>
+			<form className={styles.button_wrap}>
 				<Button themeType="secondary" onClick={onCancel} disabled={loading}>
 					Cancel
 				</Button>
@@ -93,7 +93,7 @@ function TaskForm({
 				<Button disabled={loading} onClick={handleSubmit(onSubmit)}>
 					Submit
 				</Button>
-			</div>
+			</form>
 		</TaskContainer>
 	);
 }
