@@ -1,6 +1,5 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview","purchase", "tasks", "documents", "emails", "tracking"],  
-    "shipment_info":{},
+    "features":["shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview","purchase", "tasks", "documents", "emails", "tracking"],  
     "timeline": {
         "can_edit": true,
         "editable_fields": ["schedule_arrival", "schedule_departure", "cargo_handed_over_at_origin_at"]
@@ -24,13 +23,10 @@
     },
     "cancel_shipment": {
         "can_cancel": false,
-        "list_reasons": {
-            "stakeholder_type": ["admin"]
-        },
         "role": "sales"
     },
     "purchase":{
-        "tab_title": "Purchase Invoice"
+        "tab_title": "Live Invoices"
     },
     "edit_supplier": false,
     "cancel_service": false,

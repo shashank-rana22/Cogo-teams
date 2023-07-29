@@ -250,6 +250,7 @@ const GLOBAL_CONSTANTS = {
 		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
 		cogo_one_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
 		cogo_one_loader    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif',
+		address_icon       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/address-icon.svg',
 		bluetide_hbl_logo:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/6f67ac5379afb6694a75e573407899f2/bluetidelogo.png',
 		cogoport_admin_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
@@ -413,6 +414,7 @@ const GLOBAL_CONSTANTS = {
 		empty_spaces_before_tab_character : / +(?=\t)/g,
 		mime                              : /:(.*?);/m,
 		double_curly_braces_pattern       : /\{\{([^{}]+)\}\}/g,
+		number_pattern                    : /[^0-9]/g,
 		occurrences_of_paragraphs_tag     : /<p>\s+(<[/]p>)/g,
 		enclosed_within_forward_slashes   : /<p>(<[/]p>)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,

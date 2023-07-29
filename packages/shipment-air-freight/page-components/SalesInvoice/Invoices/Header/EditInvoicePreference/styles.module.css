@@ -1,0 +1,19 @@
+.form {
+	min-height: calc(60vh);
+	padding: 12px;
+}
+
+.modal_footer {
+	button:not(:last-of-type) {
+		margin-right: 16px;
+	}
+}
+
+.full_width_btn {
+	width: 100%;
+	margin-bottom: 20px;
+	font-weight: 600;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 4px;
+}

@@ -1,15 +1,13 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 
-const MAX_PAGE_LIMIT = 8;
+const DEFAULT_PAGE_LIMIT = 10;
 
 export default function useListShipmentAdditionalServices({ shipment_data = {}, pageLimit, filters = {} }) {
-	const [apiData, setApiData] = useState({});
-
 	const { importer_exporter_id = '', id:shipment_id = '' } = shipment_data || {};
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_shipment_additional_services',
 		params : {
 			performed_by_org_id : importer_exporter_id,
@@ -17,18 +15,14 @@ export default function useListShipmentAdditionalServices({ shipment_data = {}, 
 				shipment_id,
 				...filters,
 			},
-			page_limit: pageLimit || MAX_PAGE_LIMIT,
+			page_limit: pageLimit || DEFAULT_PAGE_LIMIT,
 		},
 	}, { manual: true });
 
-	const getAdditionalServiceListApi = useCallback(async () => {
+	const getAdditionalServiceListApi = useCallback(() => {
 		try {
-			const res = await trigger();
-
-			setApiData(res.data || {});
+			trigger();
 		} catch (err) {
-			setApiData({});
-
 			toastApiError(err);
 		}
 	}, [trigger]);
@@ -39,8 +33,8 @@ export default function useListShipmentAdditionalServices({ shipment_data = {}, 
 
 	return {
 		loading,
-		list       : apiData?.list || [],
+		list       : data?.list || [],
 		refetch    : getAdditionalServiceListApi,
-		totalCount : apiData?.total_count,
+		totalCount : data?.total_count,
 	};
 }

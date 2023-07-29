@@ -3,6 +3,7 @@ import bookingAgent from './bookingAgent.json';
 import bookingDeskConfig from './bookingDesk.json';
 import bookingDeskManagerConfig from './bookingDeskManager.json';
 import costBookingManagerConfig from './costBookingManagerConfig.json';
+import defaultConfig from './default.json';
 import documentDeskConfig from './documentDesk.json';
 import documentDeskManagerConfig from './documentDeskManager.json';
 import prodProcessOwnerConfig from './prodProcessOwner.json';
@@ -23,6 +24,6 @@ const CONFIG_MAPPING = {
 	so1_so2_ops           : documentDeskConfig,
 };
 
-const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || {};
+const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || { defaultConfig };
 
 export default stakeholderConfig;
