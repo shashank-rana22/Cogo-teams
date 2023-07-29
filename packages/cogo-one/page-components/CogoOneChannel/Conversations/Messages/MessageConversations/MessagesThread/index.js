@@ -28,6 +28,7 @@ function MessagesThread({
 	hasNoFireBaseRoom = false,
 	setModalType = () => {},
 	activeTab = {},
+	viewType = '',
 }) {
 	const { channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
 	const unreadIndex = new_user_message_count > messagesData.length
@@ -76,6 +77,7 @@ function MessagesThread({
 						user_name={user_name}
 						setRaiseTicketModal={setRaiseTicketModal}
 						formattedData={formattedData}
+						viewType={viewType}
 					/>
 				);
 			})}
