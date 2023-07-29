@@ -1,0 +1,8 @@
+.container {
+	margin-left: 10px;
+}
+
+.trucks_count {
+	display: flex;
+	flex-direction: row;
+}

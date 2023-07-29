@@ -1,0 +1,93 @@
+.container {
+	margin: 12px 0;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 1px 6px #a9bcdaa6;
+
+	&:hover {
+		box-shadow: 0 0 4px #00000040;
+	}
+}
+
+.modal_upper_container {
+	margin-inline: 18px;
+}
+
+.invoice_values {
+	display: flex;
+	justify-content: space-between;
+	margin-right: 15px;
+	font-weight: 600;
+}
+
+.modal_bottom_container {
+	padding: 22px;
+	margin: 30px 30px 23px 20px;
+	background-color: #fffaee;
+}
+
+.body_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 4px 16px;
+}
+
+.divider {
+	align-self: stretch;
+	width: 1px;
+	margin: 0 16px;
+	background: var(--color-secondary-greyscale-5);
+}
+
+.details_container {
+	display: flex;
+	align-items: center;
+	width: 17%;
+}
+
+.icon_container {
+	display: flex;
+	justify-content: center;
+	width: 8%;
+}
+
+.location_container {
+	width: 35%;
+}
+
+.truck_details {
+	display: flex;
+	align-items: center;
+	width: 18%;
+}
+
+.update_sell_quotation {
+	display: flex;
+	width: 21%;
+}
+
+.header {
+	:global {
+		.customize_trade_type {
+			margin-top: 0;
+			margin-left: 0;
+			line-height: 1.8;
+			border-top-right-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+
+		.customize_source {
+			margin-top: 0;
+			margin-right: 0;
+			line-height: 1.8;
+			border-top-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		.ui_pill_text {
+			font-size: var(--font-size-sm);
+		}
+	}
+}
