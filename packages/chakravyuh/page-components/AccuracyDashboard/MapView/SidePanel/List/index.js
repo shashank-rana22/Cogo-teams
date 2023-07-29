@@ -1,4 +1,5 @@
-import { Loader } from '@cogoport/components';
+import { Loader, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -25,19 +26,20 @@ function List({ loading = false, finalList = [], setActiveId = () => {}, originN
 				className={styles.card}
 			>
 				<div className={styles.left}>
-					<div>
-						<h4>{originName}</h4>
-						<IcMPortArrow />
-						<p>{destination_name}</p>
+					<div className={styles.locations_container}>
+						<Tooltip content={originName}>
+							{originName}
+						</Tooltip>
+						<IcMPortArrow className={styles.anchor_icon} />
+						<Tooltip content={destination_name}>
+							{destination_name}
+						</Tooltip>
 					</div>
-					<p className={styles.total_rates}>{`${total_rates} Rates`}</p>
+					<p>{`${total_rates} Rates`}</p>
 				</div>
 				<div className={styles.right}>
 					<p>Accuracy</p>
-					<h4>
-						{accuracy}
-						%
-					</h4>
+					<h4>{`${Number(accuracy).toFixed(GLOBAL_CONSTANTS.zeroth_index)}%`}</h4>
 				</div>
 			</button>
 		));

@@ -24,8 +24,10 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 	});
 
 	const {
+		sort,
 		page,
 		setPage,
+		setSort,
 		activeList,
 		setActiveList,
 		accuracyMapping,
@@ -83,7 +85,9 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 			<SidePanel
 				page={page}
 				data={data}
+				sort={sort}
 				isFull={isFull}
+				setSort={setSort}
 				setPage={setPage}
 				setView={setView}
 				backView={backView}

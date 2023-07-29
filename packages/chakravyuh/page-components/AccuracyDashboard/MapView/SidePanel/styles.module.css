@@ -123,6 +123,7 @@
 .card {
 	display: flex;
 	gap: 8px;
+	align-items: center;
 	width: 100%;
 	padding: 18px;
 	margin: 16px 0;
@@ -135,29 +136,59 @@
 		border: 1px solid #edd7a9;
 		box-shadow: 0 0 8px #627fac33;
 	}
-}
 
-.right {
-	width: 80px;
-}
+	.right {
+		width: 80px;
+		margin: 0;
+		font-size: 14px;
+		color: #000;
 
-.left {
-	flex: 1;
+		>p {
+			margin: 0 0 8px;
+		}
 
-	> div {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		h4 {
+			margin: 0;
+			font-size: 24px;
+			color: #ee3425;
+		}
+	}
+
+	.left {
+		width: calc(100% - 80px);
+		border-right: 1px dotted #f2e3c3;
+
+		>p {
+			margin: 12px 0 0;
+			font-size: 14px;
+			color: #4f4f4f;
+			text-align: start;
+		}
+
+		.locations_container {
+			display: flex;
+			align-items: flex-start;
+
+			>div {
+				max-width: 50%;
+				overflow: hidden;
+				font-size: 18px;
+				font-weight: 500;
+				color: #221f20;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+
+			.anchor_icon {
+				width: 18px;
+				height: 18px;
+				margin: 1px 16px 0;
+			}
+		}
 	}
 }
 
 .has_more {
 	margin: 24px 0 12px;
 	text-align: center;
-}
-
-.total_rates {
-	margin: 4px 12px;
-	font-size: 12px;
-	text-align: start;
 }

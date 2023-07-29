@@ -1,6 +1,8 @@
 import { Pagination, Placeholder, Table, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
+import NoDataState from '../../../common/NoDataState';
 import getListConfig from '../../../configurations/getListConfig';
 import useListFclFreightRateStatistics from '../../../hooks/useListFclFreightRateStatistics';
 
@@ -20,24 +22,39 @@ function SupplyRates({
 		...rest,
 	}));
 
+	const isEmptyData = !loading && (!list || (list.length === GLOBAL_CONSTANTS.zeroth_index));
+
 	return (
 		<div className={cl`${styles.main_container} ${className}`}>
 			{heading && <p className={styles.main_title}>{heading}</p>}
-			<Table
-				columns={loading ? loadingColumns : columns}
-				data={loading ? [...new Array(LOADING_ROWS).keys()] : list}
-				className={styles.table_container}
-			/>
-			<div className={styles.end_date_container} id="rnp_role">
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={pageSize}
-					className={styles.pagination_container}
-					onPageChange={(val) => setPage(val)}
-				/>
-			</div>
+			{
+				isEmptyData
+					? (
+						<div className={styles.empty_table_state_container}>
+							<NoDataState />
+						</div>
+					)
+					: (
+						<>
+							<Table
+								columns={loading ? loadingColumns : columns}
+								data={loading ? [...new Array(LOADING_ROWS).keys()] : list}
+								className={styles.table_container}
+							/>
+							<div className={styles.end_date_container} id="rnp_role">
+								<Pagination
+									type="table"
+									currentPage={page}
+									totalItems={total_count}
+									pageSize={pageSize}
+									className={styles.pagination_container}
+									onPageChange={(val) => setPage(val)}
+								/>
+							</div>
+						</>
+					)
+			}
+
 		</div>
 	);
 }

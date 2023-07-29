@@ -1,0 +1,26 @@
+.sort_container {
+	position: relative;
+	width: 18px;
+	height: 24px;
+	margin: 2px 0 0 auto;
+	cursor: pointer;
+	transition: all 200ms ease-in-out;
+
+	&:hover {
+		transform: scale(1.1);
+	}
+
+	svg {
+		position: absolute;
+		top: 4px;
+		left: 2px;
+	}
+
+	.sort_icon_base {
+		color: lightgrey;
+	}
+
+	.sort_rotate {
+		transform: rotate(180deg);
+	}
+}
