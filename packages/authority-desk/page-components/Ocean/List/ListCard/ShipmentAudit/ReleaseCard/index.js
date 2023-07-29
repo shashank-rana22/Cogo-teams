@@ -1,11 +1,11 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Form from './Form';
 import styles from './styles.module.css';
 
-const blLabelMapping = {
+const BL_LABEL_MAPPING = {
 	house_bill_of_lading       : 'HBL',
 	bill_of_lading             : 'MBL',
 	draft_house_bill_of_lading : 'HBL',
@@ -27,14 +27,15 @@ const getValidDocuments = (trade_type) => {
 	];
 };
 
-function ReleaseCard({ data = {}, bucket, refetch = () => {}, setShowModal = () => {}, activeTab = '' }) {
+const RELEASED_BL_DATA = [];
+
+function ReleaseCard({ data = {}, bucket = '', refetch = () => {}, setShowModal = () => {}, activeTab = '' }) {
 	const [open, setOpen] = useState(false);
 	const [hold, setHold] = useState(false);
 	const [surrender, setSurrender] = useState(false);
 
 	const docDetails = isEmpty(data?.bill_of_ladings) ? data?.delivery_orders : data?.bill_of_ladings;
 
-	const releasedBLData = [];
 	const blsAvailable = (docDetails || [])?.filter(
 		(item) => !isEmpty(item?.bl_document_id || item?.do_document_id)
 			&& !['surrendered', 'surrender_pending'].includes(item?.status),
@@ -48,9 +49,9 @@ function ReleaseCard({ data = {}, bucket, refetch = () => {}, setShowModal = () 
 				item?.bl_document_type || item?.do_document_type,
 			)
 		) {
-			releasedBLData.push({
+			RELEASED_BL_DATA.push({
 				label: `${
-					blLabelMapping[
+					BL_LABEL_MAPPING[
 						item?.bl_document_type || item?.do_document_type
 					]
 				}${item?.bl_number || item?.do_number}`,
@@ -82,11 +83,11 @@ function ReleaseCard({ data = {}, bucket, refetch = () => {}, setShowModal = () 
 		<div className={styles.container}>
 			<div className={styles.bttn_wrap}>
 				{['eligible', 'requested'].includes(bucket) ? (
-					<Button onClick={handleClick}>Hold</Button>
+					<Button themeType="accent" onClick={handleClick}>Hold</Button>
 				) : null}
 
 				{bucket !== 'released' ? (
-					<Button onClick={() => setOpen(true)}>
+					<Button themeType="accent" onClick={() => setOpen(true)}>
 						{bucket === 'approved'
 							? 'Approve for Release'
 							: 'Approve'}
@@ -103,7 +104,7 @@ function ReleaseCard({ data = {}, bucket, refetch = () => {}, setShowModal = () 
 			{open ? (
 				<Form
 					handleClose={handleClose}
-					blData={releasedBLData}
+					blData={RELEASED_BL_DATA}
 					hold={hold}
 					surrender={surrender}
 					bucket={bucket}

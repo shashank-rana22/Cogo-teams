@@ -1,6 +1,7 @@
 import { Loader } from '@cogoport/components';
+import ShipmentDetailContext from '@cogoport/context/page-components/ShipmentDetailContext';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import useListStakeholders from '../../hooks/useListShipmentStakeholders';
 import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartners';
@@ -13,18 +14,19 @@ import NotifyingParty from './components/NotifyingParty';
 import Pocs from './components/Pocs';
 import ServiceProvider from './components/ServiceProvider';
 import TradeParties from './components/TradeParties';
-import roleBasedView from './config/role_base_view.json';
 import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
-function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) {
+function Poc({ shipment_data = {}, servicesList = [] }) {
 	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
+
+	const { stakeholderConfig } = useContext(ShipmentDetailContext);
 
 	const [addCompany, setAddCompany] = useState(null);
 	const [addPoc, setAddPoc] = useState(null);
 
-	const rolesPermission = roleBasedView[activeStakeholder] || {};
-	const rolesViewPermission = rolesPermission.can_view || [];
+	const rolesPermission = stakeholderConfig?.pocs || {};
+	const rolesViewPermission = rolesPermission?.can_view || [];
 
 	const {
 		data,
