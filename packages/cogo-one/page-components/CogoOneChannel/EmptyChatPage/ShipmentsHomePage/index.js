@@ -1,5 +1,8 @@
 import { Pagination, Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useListShipments from '../../../../hooks/useListShipments';
@@ -12,6 +15,37 @@ const DEFAULT_PAGE = 1;
 const PAGE_LIMIT = 6;
 const DEFAULT_SHIPMENTS_COUNT = 1;
 
+function ListShipmentCards({
+	list = [],
+	setActiveTab = () => {},
+	showPocDetails = {},
+	setShowPocDetails = () => {},
+}) {
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.empty_shipments}>
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.empty_list}
+					height={400}
+					width={400}
+					className={styles.empty_shipments_image}
+				/>
+			</div>
+		);
+	}
+
+	return (list || []).map(
+		(shipmentItem) => (
+			<ShipmentCard
+				setActiveTab={setActiveTab}
+				key={shipmentItem?.sid}
+				shipmentItem={shipmentItem}
+				showPocDetails={showPocDetails}
+				setShowPocDetails={setShowPocDetails}
+			/>
+		),
+	);
+}
 function ShipmentsHomePage({ setActiveTab = () => {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
 
@@ -44,7 +78,6 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 						prefix={<IcMSearchlight className={styles.bishal_search_icon} />}
 						placeholder="Search SID..."
 						type="number"
-						disabled={listLoading}
 					/>
 				</div>
 			</div>
@@ -52,29 +85,26 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 				{listLoading
 					? <LoadingState />
 					: (
-						(list || []).map(
-							(shipmentItem) => (
-								<ShipmentCard
-									setActiveTab={setActiveTab}
-									key={shipmentItem?.sid}
-									shipmentItem={shipmentItem}
-									showPocDetails={showPocDetails}
-									setShowPocDetails={setShowPocDetails}
-								/>
-							),
-						)
+						<ListShipmentCards
+							list={list}
+							setActiveTab={setActiveTab}
+							showPocDetails={showPocDetails}
+							setShowPocDetails={setShowPocDetails}
+						/>
 					)}
 			</div>
 
 			<div className={styles.pagination_container}>
-				<Pagination
-					type="number"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={page_limit}
-					disabled={listLoading}
-					onPageChange={handlePageChange}
-				/>
+				{!isEmpty(list) && (
+					<Pagination
+						type="number"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={page_limit}
+						disabled={listLoading}
+						onPageChange={handlePageChange}
+					/>
+				)}
 			</div>
 		</div>
 	);
