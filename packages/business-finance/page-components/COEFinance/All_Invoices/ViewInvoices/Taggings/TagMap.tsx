@@ -1,4 +1,4 @@
-import { Button, Placeholder, Modal, Textarea } from '@cogoport/components';
+import { Button, Placeholder, Modal, Textarea, cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -53,14 +53,17 @@ function TagMap({
 		<>
 			<div className={styles.border}>
 				{!loading ? (
-					<div className={`${styles.flex} 
+					<div className={cl`${styles.flex} 
 					${styles.column} ${classname === 'merge' ? styles.merge : ''}`}
 					>
 						{!isEmpty(mappingsData)
 							? (
 								mappingsData?.merge || mappingsData?.split || []
 							).map((item) => (
-								<div key={item?.id} className={`${styles.flex} ${styles.bordernone} ${styles.wrapper}`}>
+								<div
+									key={item?.id}
+									className={cl`${styles.flex} ${styles.bordernone} ${styles.wrapper}`}
+								>
 									<TagCard
 										item={item}
 										classname={classname}
@@ -150,7 +153,7 @@ function TagMap({
 							<Button
 								size="md"
 								style={{ marginRight: '8px' }}
-								disabled={!(value?.remark?.length > 0)}
+								disabled={!(isEmpty(value?.remark))}
 								onClick={() => handleSubmitReject('reject')}
 							>
 								Yes

@@ -26,7 +26,20 @@ interface Props {
 
 const MAX_LEN_FOR_INVOICE_TEXT = 11;
 const MAX_LEN_FOR_SID_TEXT = 10;
-function FieldPair({ itemData, field }:Props) {
+function FieldPair({
+	itemData = {
+		billType        : '',
+		billDocumentUrl : '',
+		serviceType     : '',
+		billNumber      : '',
+		isProforma      : false,
+		jobNumber       : '',
+	}, field = {
+		topKey    : {},
+		bottomKey : {},
+		label     : '',
+	},
+}:Props) {
 	const {	billType = '', billNumber = '', isProforma, billDocumentUrl, jobNumber = '', serviceType } = itemData;
 
 	return (
