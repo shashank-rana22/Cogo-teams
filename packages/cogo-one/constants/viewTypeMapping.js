@@ -362,7 +362,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		default_side_nav             : 'profile',
 		show_relevant_templates      : ['quick_reply', 'supply'],
-		mails_to_be_shown            : ['sandeep.nalabolu@cogoport.com'], // remove
+		mails_to_be_shown            : [],
 		bulk_assign_features         : ['bulk_auto_assign', 'bulk_send_templates'],
 		permissions                  : {
 			auto_assign                 : true,
@@ -379,7 +379,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			agent_type_filter           : true,
 			flash_revert_logs           : false,
 			global_contacts             : true,
-			show_shipments_home_page    : true, // remove
+			show_shipments_home_page    : false,
 			sp_contacts                 : true,
 			punch_in_out                : false,
 		},
