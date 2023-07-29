@@ -45,7 +45,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 	const truncate = (input) => (input?.length
 		> TRESHOLD_LENGTH_TO_TRUNCATE ? `${input.substring(TRIM_START, TRIM_END)}..` : input);
 
-	if (!searchState && (isEmpty(tagId.length))) {
+	if (!searchState && (!isEmpty(tagId.length))) {
 		return (
 			<div className={styles.grid_container} style={{ display: 'flex' }}>
 				<div
