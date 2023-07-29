@@ -59,6 +59,30 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
-
+	{
+		api          : 'get_organization_due_diligence',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_due_diligence',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_due_diligence_status',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_organization_due_diligence_status',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_service_expertise_manager_status',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 ];
 export default apis;

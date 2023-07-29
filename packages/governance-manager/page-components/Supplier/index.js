@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 import { items } from './utils/supplier-utils';
 
 function Supplier() {
-	const [status, setStatus] = useState('need_analysis');
+	const [status, setStatus] = useState('supplier_approval');
 	const { query } = useRouter();
 	const { id } = query;
 	const { data: supplierData, getOrganizationService } = useGetOrganizationService({ id, setStatus });

@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetOrganizationService = ({ id, setStatus }) => {
+const useGetOrganizationService = ({ id }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_organization_services',
@@ -29,7 +29,7 @@ const useGetOrganizationService = ({ id, setStatus }) => {
 	}, []);
 
 	useEffect(() => {
-		if (data) { setStatus(data?.list[GLOBAL_CONSTANTS.zeroth_index]?.stage_of_approval); }
+		// if (data) { setStatus(data?.list[GLOBAL_CONSTANTS.zeroth_index]?.stage_of_approval); }
 	}, [data]);
 	return {
 		data       : data?.list[GLOBAL_CONSTANTS.zeroth_index],
