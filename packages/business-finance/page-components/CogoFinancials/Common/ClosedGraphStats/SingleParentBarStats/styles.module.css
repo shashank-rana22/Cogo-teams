@@ -3,17 +3,17 @@
 	background-color: #fff;
 }
 
+.graphs {
+	display: flex;
+	margin: 16px 32px;
+	overflow: scroll;
+}
+
 .header_combine {
 	display: flex;
 	justify-content: space-between;
 	width: 90%;
 	margin: 20px 0;
-}
-
-.graphs {
-	display: flex;
-	width: 69%;
-	overflow: scroll;
 }
 
 .graph_label {

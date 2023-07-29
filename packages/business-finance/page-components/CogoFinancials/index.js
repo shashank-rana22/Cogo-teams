@@ -49,11 +49,23 @@ function CogoFinancials() {
 	const [timeRange, setTimeRange] = useState('1D');
 	const [entity, setEntity] = useState(DEFAULT_ENTITY);
 	const [activeShipmentCard, setActiveShipmentCard] = useState('');
+	const [showShipmentList, setShowShipmentList] = useState(false);
+
+	const handleClick = () => {
+		setShowShipmentList(false);
+		setActiveShipmentCard('');
+	};
 
 	return (
 		<div>
 			<div className={styles.header}>
-				<div><h2>COGO Financials</h2></div>
+				<div
+					role="presentation"
+					onClick={handleClick}
+				>
+					<h2 className={styles.main_heading}>COGO Financials</h2>
+
+				</div>
 				<div style={{ display: 'flex' }}>
 					<Toggle
 						name="taxType"
@@ -112,10 +124,11 @@ function CogoFinancials() {
 					<ActiveShipmentCard
 						setActiveShipmentCard={setActiveShipmentCard}
 						activeShipmentCard={activeShipmentCard}
+						setShowShipmentList={setShowShipmentList}
 					/>
 					<div className={styles.remaining_shipment_cards}>
 
-						{activeShipmentCard !== 'ongoing' && (
+						{activeShipmentCard !== 'ongoing' && !showShipmentList && (
 							<div className={styles.single_additional}>
 								<StatsCard
 									heading="Ongoing Shipments"
@@ -126,7 +139,7 @@ function CogoFinancials() {
 							</div>
 						)}
 
-						{activeShipmentCard !== 'operational' && (
+						{activeShipmentCard !== 'operational' && !showShipmentList && (
 							<div className={styles.single_additional}>
 								<ClosedShipmentCard
 									isDeviationVisible={false}
@@ -138,7 +151,7 @@ function CogoFinancials() {
 							</div>
 						)}
 
-						{activeShipmentCard !== 'financial' && (
+						{activeShipmentCard !== 'financial' && !showShipmentList && (
 							<div className={styles.single_additional}>
 								<ClosedShipmentCard
 									type="Financially"
@@ -152,23 +165,33 @@ function CogoFinancials() {
 				</div>
 			)}
 
-			<div className={styles.totalStats}>
-				<div className={styles.ongoing}>
-					<StatsCard
-						heading="Total Collected"
-						mappingCards={mapping}
-						showPill
-					/>
+			{!showShipmentList ?	(
+				<div>
+					<div className={styles.totalStats}>
+						<div className={styles.ongoing}>
+							<StatsCard
+								heading="Total Collected"
+								mappingCards={mapping}
+								showPill
+							/>
+						</div>
+						<div className={styles.card}>
+							<StatsCard
+								heading="Total Paid"
+								mappingCards={mapping}
+								showPill
+							/>
+						</div>
+					</div>
+					<ReceivablesOutstandings />
 				</div>
-				<div className={styles.card}>
-					<StatsCard
-						heading="Total Paid"
-						mappingCards={mapping}
-						showPill
-					/>
-				</div>
-			</div>
-			<ReceivablesOutstandings />
+			)
+				: (
+					<div>
+						<h1>list will come here...</h1>
+					</div>
+				)}
+
 		</div>
 	);
 }

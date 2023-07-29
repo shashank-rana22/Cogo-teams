@@ -47,8 +47,8 @@
 .statscontainer {
 	display: flex;
 	flex-direction: column;
-	min-width: 200px;
-	margin-top: 12px;
+	min-width: 236px;
+	margin: 12px 0;
 }
 
 .margin {

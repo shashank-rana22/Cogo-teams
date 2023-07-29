@@ -16,6 +16,8 @@ function MyResponsiveBar({
 	legendY = 'Amount',
 	indexBy = 'Duration',
 	enableGridY = false,
+	enableGridX = false,
+	onClick = () => {},
 	legends = true,
 	margin = { top: 50, right: 130, bottom: 50, left: 60 },
 	axisLeft = {
@@ -42,6 +44,7 @@ function MyResponsiveBar({
 				colors={colors}
 				axisTop={null}
 				axisRight={null}
+				onClick={onClick}
 				theme={{
 					textColor : 'String',
 					axis      : {
@@ -93,8 +96,8 @@ function MyResponsiveBar({
 						],
 					},
 				] : []}
-				enableGridX={false}
 				enableGridY={enableGridY}
+				enableGridX={enableGridX}
 				role="application"
 				ariaLabel="bar chart"
 			/>

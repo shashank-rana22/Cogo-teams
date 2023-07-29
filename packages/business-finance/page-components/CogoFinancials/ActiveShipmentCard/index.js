@@ -5,7 +5,10 @@ import ParentServicewiseStats from '../Common/ParentServicewiseStats';
 
 import styles from './styles.module.css';
 
-function ActiveShipmentCard({ setActiveShipmentCard = () => {}, activeShipmentCard = '' }) {
+function ActiveShipmentCard({
+	setActiveShipmentCard = () => {}, activeShipmentCard = '',
+	setShowShipmentList = () => {},
+}) {
 	return (
 		<div className={styles.active_shipment_card}>
 			{activeShipmentCard === 'ongoing' && (
@@ -17,6 +20,7 @@ function ActiveShipmentCard({ setActiveShipmentCard = () => {}, activeShipmentCa
 				<ClosedGraphStats
 					title="Operationally Closed"
 					setActiveShipmentCard={setActiveShipmentCard}
+					setShowShipmentList={setShowShipmentList}
 				/>
 			)}
 
@@ -24,6 +28,7 @@ function ActiveShipmentCard({ setActiveShipmentCard = () => {}, activeShipmentCa
 				<ClosedGraphStats
 					title="Financially Closed"
 					setActiveShipmentCard={setActiveShipmentCard}
+					setShowShipmentList={setShowShipmentList}
 				/>
 			)}
 		</div>

@@ -1,6 +1,7 @@
 import { Select } from '@cogoport/components';
-import { IcMArrowBack, IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
+
+import RenderCardHeader from '../RenderCardHeader';
 
 import StatCard from './statCard';
 import styles from './styles.module.css';
@@ -13,24 +14,19 @@ function ServiceWiseStats({ heading = 'Ongoing Shipments', activeService = '', s
 	];
 
 	const services = ['FCL Customs', 'FCL Freight', 'FCL Freight Locals',
-		'LCL', 'FCL Customs', 'FCL Freight', 'FCL Freight Locals',
-		'FCL Customs', 'FCL Freight', 'FCL Freight Locals', 'Others'];
+		'LCL', 'Others'];
 	return (
 		<div className={styles.container}>
 			<div className={styles.justifiy}>
 				<div>
 					<div>
-						<div className={styles.header}>
-							<IcMArrowBack
-								onClick={() => setActiveService('')}
-								style={{ cursor: 'pointer', marginRight: '8px' }}
-							/>
-							<div>
-								{`${heading}: ${activeService}`}
-							</div>
-							<div className={styles.info}><IcMInfo /></div>
-						</div>
-						<div className={styles.bottom_line} />
+						<RenderCardHeader
+							title={`${heading}: ${activeService}`}
+							showInfo
+							showBack
+							onBack={() => setActiveService('')}
+						/>
+
 					</div>
 
 				</div>
