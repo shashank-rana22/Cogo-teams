@@ -13,6 +13,7 @@ import getStakeholderConfig from '../stakeholderConfig';
 import DefaultView from './DefaultView';
 import styles from './styles.module.css';
 
+const UNAUTHORIZED_STATUS_CODE = 403;
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const SHIPMENT_ADDITIONAL_METHODS = ['main_service', 'documents'];
 
@@ -54,7 +55,7 @@ function FclCustoms() {
 		);
 	}
 
-	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
+	if (!shipment_data && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -74,12 +75,15 @@ function FclCustoms() {
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+	if (getShipmentStatusCode === UNAUTHORIZED_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
-				<div className={styles.page}>
+				<div className={styles.permission_message}>
 					You don&apos;t have permission to visit this page.
-					Please contact at +91 7208083747
+					<br />
+					Please contact at
+					{' '}
+					<a href="tel:+91 7208083747">+91 7208083747</a>
 				</div>
 			</div>
 		);

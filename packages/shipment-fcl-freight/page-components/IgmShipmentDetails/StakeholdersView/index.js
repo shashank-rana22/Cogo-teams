@@ -75,9 +75,12 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 	if (getShipmentStatusCode === FORBIDDEN_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<section className={styles.shipment_not_found}>
-				<div className={styles.page}>
+				<div className={styles.permission_message}>
 					You don&apos;t have permission to visit this page.
-					Please contact at +91 7208083747
+					<br />
+					Please contact at
+					{' '}
+					<a href="tel:+91 7208083747">+91 7208083747</a>
 				</div>
 			</section>
 		);

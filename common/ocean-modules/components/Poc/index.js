@@ -1,8 +1,8 @@
-import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AddCompanyModal from '../../common/AddCompanyModal';
+import ThreeDotLoader from '../../common/ThreeDotLoader';
 import useListStakeholders from '../../hooks/useListShipmentStakeholders';
 import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartners';
 
@@ -51,8 +51,8 @@ function Poc({
 		<div>
 			{loading
 				? (
-					<div className={styles.loader}>
-						<Loader />
+					<div className={styles.loader_wrapper}>
+						<ThreeDotLoader message="Loading POCs" fontSize={16} size={30} />
 					</div>
 				)
 				: (
