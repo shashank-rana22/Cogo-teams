@@ -1,8 +1,8 @@
-import { Pill, Placeholder, Toast } from '@cogoport/components';
+import { Placeholder, Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
-import { isEmpty, snakeCase } from '@cogoport/utils';
+// import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
@@ -13,6 +13,7 @@ import useGroupChat from '../../../../hooks/useGroupChat';
 import useListPartnerUsers from '../../../../hooks/useListPartnerUsers';
 
 import AddGroupMember from './AddGroupMember';
+import ContactVerification from './ContactVerification';
 import ConversationContainer from './ConversationContainer';
 import ExecutiveSummary from './ExecutiveSummary';
 import GroupMembers from './GroupMembers';
@@ -43,6 +44,8 @@ function AgentDetails({
 	viewType = '',
 	setActiveTab = () => {},
 }) {
+	// const router = useRouter();
+
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
 		name         : '',
@@ -117,22 +120,6 @@ function AgentDetails({
 
 	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
 
-	const { mobile_verified, whatsapp_verified } = userData || {};
-
-	const VERIFICATION_STATUS = [
-		{
-			label      : mobile_verified ? 'Verified' : 'Not Verified',
-			color      : mobile_verified ? 'green' : '#f8aea8',
-			size       : 'sm',
-			prefixIcon : <IcMCall />,
-		},
-		{
-			label      : whatsapp_verified ? 'Verified' : 'Not Verified',
-			color      : whatsapp_verified ? 'green' : '#f8aea8',
-			size       : 'sm',
-			prefixIcon : <IcCWhatsapp />,
-		},
-	];
 	const handleSubmit = async () => {
 		if (!isEmpty(profileValue?.name) && !isEmpty(profileValue?.number)) {
 			await leadUserProfile({ profileValue });
@@ -186,36 +173,26 @@ function AgentDetails({
 					</div>
 				)}
 			</div>
-			<Profile loading={loading} name={name} userEmail={userEmail} />
-			{(leadUserId || userId) && (
-				<div className={styles.verification_pills}>
-					{VERIFICATION_STATUS.map((item, index) => {
-						const itemKey = `${snakeCase(item.label)}_${index}`;
-						return (
-							<div key={itemKey}>
-								{loading ? (
-									<Placeholder
-										height="20px"
-										width="120px"
-										margin="10px 0px 10px 0px"
-									/>
-								) : (
-									<Pill
-										key={item.label}
-										prefix={item.prefixIcon}
-										size="md"
-										color={item.color}
-									>
-										<div className={styles.pill_name}>
-											{item.label}
-										</div>
-									</Pill>
-								)}
-							</div>
-						);
-					})}
+			{activeTab === 'message' && (
+				<div
+					role="presentation"
+					className={styles.copy_link}
+					onClick={() => {
+						// console.log(`/create-importer-exporter?email=${userEmail}&mobile=${mobile_number}`);
+						// router.push(
+						// 	`/create-importer-exporter?email=${userEmail}&mobile=${mobile_number}`,
+						// 	`/create-importer-exporter?email=${userEmail}&mobile=${mobile_number}`,
+						// );
+					}}
+				>
+					Onboard
 				</div>
-			)}
+			) }
+
+			<Profile loading={loading} name={name} userEmail={userEmail} />
+
+			<ContactVerification leadUserId={leadUserId} userId={userId} loading={loading} userData={userData} />
+
 			{loading ? (
 				<Placeholder
 					height="50px"
