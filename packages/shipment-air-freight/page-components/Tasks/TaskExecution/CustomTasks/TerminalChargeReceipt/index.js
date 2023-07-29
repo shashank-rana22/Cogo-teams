@@ -19,15 +19,16 @@ function TerminalChargeReceipt({ shipmentData = {}, task = {}, refetch = () => {
 
 	const { servicesList } = useListShipmentServices({ defaultFilters: { shipment_id: shipmentData?.id } });
 
-	const mainServicesData = 
-    (servicesList || []).filter((item) => 
-    item?.service_type === 'air_freight_service')[GLOBAL_CONSTANTS.zeroth_index];
+	const mainServicesData = (servicesList || []).filter((item) => item?.service_type
+	=== 'air_freight_service')[GLOBAL_CONSTANTS.zeroth_index];
 
 	useEffect(() => {
 		if (terminalChargeState === 'fetching_data') {
 			const timeoutId = setTimeout(getCSROCRData, TIME_TO_FETCH_CSR_DATA);
 			return () => clearTimeout(timeoutId);
 		}
+		return null;
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [terminalChargeState]);
 
 	return (
@@ -41,7 +42,7 @@ function TerminalChargeReceipt({ shipmentData = {}, task = {}, refetch = () => {
 						sheetData={sheetData}
 					/>
 				)
-            	: null}
+				: null}
 			{terminalChargeState === 'fetching_data' ? <div> Wait for 15 seconds to fetch the data</div> : null}
 			{terminalChargeState === 'data_fetched' ? (
 				<TerminalChargeRate

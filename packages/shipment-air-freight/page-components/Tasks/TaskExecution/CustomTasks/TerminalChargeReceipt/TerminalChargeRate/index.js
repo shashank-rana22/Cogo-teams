@@ -18,14 +18,16 @@ function TerminalChargeRate({
 	const controls = getTerminalChargeRateControl({ setEntityData });
 	const { formState:{ errors }, control, handleSubmit } = useForm();
 
-	const { createShipmentAirFreightConsolidatedInvoice, loading, updateLoading } =
-    useCreateShipmentAirFreightConsolidatedInvoice({
-    	sheetData,
-    	mainServicesData,
-    	entityData,
-    	refetch,
-    	onCancel,
-    	task_id,
+	const {
+		createShipmentAirFreightConsolidatedInvoice,
+		loading, updateLoading,
+	} = useCreateShipmentAirFreightConsolidatedInvoice({
+		sheetData,
+		mainServicesData,
+		entityData,
+		refetch,
+		onCancel,
+		task_id,
 	});
 
 	const handleCreateProforma = (values) => {

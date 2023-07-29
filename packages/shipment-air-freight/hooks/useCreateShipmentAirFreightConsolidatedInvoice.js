@@ -14,9 +14,10 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const { apiTrigger = () => {},loading:updateLoading=false } = 
-	useUpdateShipmentPendingTask({
-		refetch,onCancel});
+	const {
+		apiTrigger = () => {},
+		loading:updateLoading = false,
+	} = 		useUpdateShipmentPendingTask({ refetch, onCancel });
 
 	const createShipmentAirFreightConsolidatedInvoice = async (values) => {
 		const additionalServicePayload = getPayload({
@@ -39,8 +40,8 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 	return {
 		loading,
 		createShipmentAirFreightConsolidatedInvoice,
-		updateLoading
-		
+		updateLoading,
+
 	};
 };
 export default useCreateShipmentAirFreightConsolidatedInvoice;
