@@ -126,9 +126,7 @@ const injectValues = ({
 				controls[index].rules.max = containersCount;
 			}
 		});
-	} else if (
-		task?.task === 'mark_confirmed'
-	) {
+	} else if (task?.task === 'mark_confirmed') {
 		(controls || []).forEach((ctrl, index) => {
 			if (ctrl?.name === 'commodity_category') {
 				if (shipment_data?.commodity_category) {
@@ -141,14 +139,6 @@ const injectValues = ({
 				controls[index].onChange = (val, obj) => {
 					setCommodityUnit(obj);
 				};
-			}
-
-			if (
-				shipment_data?.bl_category === 'mbl'
-				&& ctrl?.name === 'payment_term'
-			) {
-				controls[index].disabled = true;
-				controls[index].value = ctrl?.value;
 			}
 		});
 	}
