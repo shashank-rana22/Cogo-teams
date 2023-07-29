@@ -29,12 +29,11 @@ function Column({
 
 	useEffect(() => {
 		const { level1 = {}, level2 = {}, level3 = {} } = item;
-		const levels = [level1, level2, level3];
-
-		(levels || []).forEach((lvl, idx) => {
+		const LEVELS = [level1, level2, level3];
+		(LEVELS || []).forEach((lvl, idx) => {
 			const { stakeholder = {} } = lvl || {};
 			if (!isEmpty(stakeholder)) {
-				setValue(`approvalLevelConditions.${idx + DEFAULT_VAL}.stakeholder`, stakeholder);
+				setValue(`approvalLevelConditions.${idx}.stakeholder`, stakeholder);
 			}
 		});
 	}, [item, setValue]);
