@@ -10,8 +10,16 @@ const AGENT_TYPE_MAPPING = {
 const getPayload = ({ formattedData, payload }) => {
 	const {
 		user_id, lead_user_id,
-		organization_id, mobile_no, sender = null, cogo_entity_id, channel_type, id, account_type = '',
+		organization_id,
+		mobile_no,
+		sender = null,
+		cogo_entity_id,
+		channel_type, id,
+		account_type = '',
+		lead_user_details = {},
 	} = formattedData || {};
+
+	const { lead_organization_id = '' } = lead_user_details || {};
 
 	return {
 		channel                 : channel_type,
@@ -23,6 +31,7 @@ const getPayload = ({ formattedData, payload }) => {
 		sender,
 		cogo_entity_id          : cogo_entity_id || undefined,
 		agent_type              : AGENT_TYPE_MAPPING[account_type] || AGENT_TYPE_MAPPING.importer_exporter,
+		lead_organization_id,
 		...payload,
 	};
 };

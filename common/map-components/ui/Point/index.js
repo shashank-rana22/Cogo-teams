@@ -1,16 +1,21 @@
-import { Marker, Tooltip, L } from '@cogoport/maps';
+/* eslint-disable max-len */
+import { Marker, L, Tooltip } from '@cogoport/maps';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-export const getIcon = ({ className, size = [12, 12] }) => L.divIcon({
+const ZERO = 0;
+const FIFTEEN = 15;
+const TWELVE = 12;
+
+export const getIcon = ({ className, size = [TWELVE, TWELVE] }) => L.divIcon({
 	className,
 	iconSize    : L.point(...size),
-	popupAnchor : [0, -15],
+	popupAnchor : [ZERO, -FIFTEEN],
 });
 
 const Point = React.forwardRef(({
-	position, tooltipText = '', tooltipProps = {}, isActive = false, service_name = 'default', size = [12, 12], ...rest
+	position, tooltipText = '', isActive = false, service_name = 'default', size = [TWELVE, TWELVE], index, points, tooltipRefArray, isTooltipVisible, ...rest
 }, ref) => (
 	<Marker
 		position={position}
@@ -23,11 +28,12 @@ const Point = React.forwardRef(({
 		ref={ref}
 	>
 		{tooltipText && (
-			<Tooltip {...tooltipProps}>
+			<Tooltip>
 				{tooltipText}
 			</Tooltip>
 		)}
 	</Marker>
+
 ));
 
 export default Point;

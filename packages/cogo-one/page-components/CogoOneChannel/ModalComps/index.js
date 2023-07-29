@@ -13,6 +13,7 @@ function ModalComp({
 	setOpenKamContacts = () => {},
 	openKamContacts = false,
 	setActiveTab = () => {},
+	orgId = '',
 }) {
 	return (
 		<>
@@ -23,6 +24,7 @@ function ModalComp({
 					setRaiseTicketModal={setRaiseTicketModal}
 					raiseTicketModal={raiseTicketModal}
 					refetchTickets={refetchTickets}
+					orgId={orgId}
 				/>
 			)}
 
