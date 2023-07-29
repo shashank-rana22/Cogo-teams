@@ -1,6 +1,7 @@
 import { Loader } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { upperCase } from '@cogoport/utils';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useContext } from 'react';
 
 import useGetServiceChargeCodes from '../../hooks/useGetServiceChargeCodes';
 
@@ -8,9 +9,13 @@ import EditLineItems from './EditLineItems';
 import styles from './styles.module.css';
 
 function EditServiceCharges(props) {
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
+	const shipment_id = shipment_data?.id;
+
 	const {
 		controls, service_name = '', customValues = {},
-		shipment_id = '', onOptionsChange = () => {}, value,
+		onOptionsChange = () => {}, value,
 	} = props || {};
 
 	const [q, setQ] = useState('');
@@ -63,7 +68,8 @@ function EditServiceCharges(props) {
 		if (allOptions.length && onOptionsChange) {
 			onOptionsChange({ [service_name]: allOptions });
 		}
-	}, [allOptions, onOptionsChange, service_name]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [onOptionsChange, service_name]);
 
 	if (loading) {
 		return (

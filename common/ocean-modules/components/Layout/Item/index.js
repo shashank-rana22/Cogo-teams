@@ -68,11 +68,14 @@ function Item(props) {
 
 			{label && source !== 'edit_line_items' ? (<h4 className={styles.label}>{label}</h4>) : null}
 
-			<Element
-				size={type === 'pills' ? 'md' : 'sm'} // need to put in config
-				{...newProps}
-				control={control}
-			/>
+			{Element
+				? (
+					<Element
+						size={type === 'pills' ? 'md' : 'sm'} // need to put in config
+						{...newProps}
+						control={control}
+					/>
+				) : null}
 
 			<p className={styles.errors}>{errorOriginal}</p>
 		</div>
