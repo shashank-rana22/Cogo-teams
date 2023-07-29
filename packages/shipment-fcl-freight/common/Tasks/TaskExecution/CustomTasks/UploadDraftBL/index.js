@@ -186,7 +186,7 @@ function UploadDraftBL({
 											{i + INCREMENT_VALUE}
 										</div>
 										<HBLCreate
-											hblList={hblList?.list?.[i]}
+											initHblDataObj={hblList?.list?.[i]}
 											completed={tradeDocList?.list?.[i]}
 											hblData={hblData[i] || tradeDocList?.list?.[i]?.data}
 											onSave={(v) => handleSaveHBL(i, v)}
