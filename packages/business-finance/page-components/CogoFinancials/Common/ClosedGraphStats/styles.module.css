@@ -1,0 +1,11 @@
+.container {
+	padding: 0 36px;
+	margin-top: 12px;
+	background-color: #fff;
+}
+
+.graphs {
+	display: flex;
+	width: 69%;
+	overflow: scroll;
+}

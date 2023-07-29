@@ -5,11 +5,17 @@ import styles from './styles.module.css';
 
 const DEFAULT_INDEX = 1;
 
-function StatCard({ mappingCards = [], service = '', isMain = false }) {
+function StatCard({
+	mappingCards = [], service = '', isMain = false,
+	setActiveService = () => {},
+}) {
 	return (
 		<div
+			key={service}
 			className={cl`${styles.statscontainer} ${!isMain && styles.border}`}
 			style={{ cursor: !isMain ? 'pointer' : null }}
+			role="presentation"
+			onClick={() => setActiveService(service)}
 		>
 			{isMain ? null : (
 				<div className={styles.service}>

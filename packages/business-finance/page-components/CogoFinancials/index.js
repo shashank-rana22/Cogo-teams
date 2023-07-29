@@ -8,8 +8,6 @@ import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
 import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
-import ServiceWiseStats from './Common/ServicewiseStats';
-import SingleGraphCard from './Common/SingleGraphCard';
 import StatsCard from './Common/StatsCard';
 import MultipleFilters from './MultipleFilters';
 import ReceivablesOutstandings from './ReceivablesOutstandings';
@@ -83,13 +81,7 @@ function CogoFinancials() {
 				</div>
 			</div>
 
-			{!isEmpty(activeShipmentCard) && (
-				<ActiveShipmentCard
-					setActiveShipmentCard={setActiveShipmentCard}
-				/>
-			)}
-
-			{isEmpty(activeShipmentCard) && (
+			{isEmpty(activeShipmentCard) ? (
 				<div
 					className={styles.top_card}
 				>
@@ -115,44 +107,48 @@ function CogoFinancials() {
 						setActiveShipmentCard={setActiveShipmentCard}
 					/>
 				</div>
-			)}
+			) : (
+				<div>
+					<ActiveShipmentCard
+						setActiveShipmentCard={setActiveShipmentCard}
+						activeShipmentCard={activeShipmentCard}
+					/>
+					<div className={styles.remaining_shipment_cards}>
 
-			{!isEmpty(activeShipmentCard) && (
-				<div className={styles.remaining_shipment_cards}>
+						{activeShipmentCard !== 'ongoing' && (
+							<div className={styles.single_additional}>
+								<StatsCard
+									heading="Ongoing Shipments"
+									cardId="ongoing"
+									setActiveShipmentCard={setActiveShipmentCard}
+									mappingCards={mappingCards}
+								/>
+							</div>
+						)}
 
-					{activeShipmentCard !== 'ongoing' && (
-						<div className={styles.single_additional}>
-							<StatsCard
-								heading="Ongoing Shipments"
-								cardId="ongoing"
-								setActiveShipmentCard={setActiveShipmentCard}
-								mappingCards={mappingCards}
-							/>
-						</div>
-					)}
+						{activeShipmentCard !== 'operational' && (
+							<div className={styles.single_additional}>
+								<ClosedShipmentCard
+									isDeviationVisible={false}
+									type="Operationally"
+									cardId="operational"
+									setActiveShipmentCard={setActiveShipmentCard}
+									isAdditonalView
+								/>
+							</div>
+						)}
 
-					{activeShipmentCard !== 'operational' && (
-						<div className={styles.single_additional}>
-							<ClosedShipmentCard
-								isDeviationVisible={false}
-								type="Operationally"
-								cardId="operational"
-								setActiveShipmentCard={setActiveShipmentCard}
-								isAdditonalView
-							/>
-						</div>
-					)}
-
-					{activeShipmentCard !== 'financial' && (
-						<div className={styles.single_additional}>
-							<ClosedShipmentCard
-								type="Financially"
-								cardId="financial"
-								setActiveShipmentCard={setActiveShipmentCard}
-								isAdditonalView
-							/>
-						</div>
-					)}
+						{activeShipmentCard !== 'financial' && (
+							<div className={styles.single_additional}>
+								<ClosedShipmentCard
+									type="Financially"
+									cardId="financial"
+									setActiveShipmentCard={setActiveShipmentCard}
+									isAdditonalView
+								/>
+							</div>
+						)}
+					</div>
 				</div>
 			)}
 
@@ -173,12 +169,6 @@ function CogoFinancials() {
 				</div>
 			</div>
 			<ReceivablesOutstandings />
-			<div className={styles.graphs}>
-				<SingleGraphCard heading="Operational Profitability" />
-				<SingleGraphCard heading="Revenue" />
-				<SingleGraphCard heading="Revenue" />
-			</div>
-			<ServiceWiseStats />
 		</div>
 	);
 }

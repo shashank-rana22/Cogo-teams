@@ -1,7 +1,7 @@
 .container {
-	width: max-content;
-	padding: 26px;
-	margin: 12px 0 0 12px;
+	width: 30%;
+	padding: 12px;
+	margin-left: 12px;
 	background-color: #fff;
 	border: 1px solid #cfcfcf;
 	border-radius: 6px;

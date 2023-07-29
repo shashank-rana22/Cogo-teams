@@ -1,28 +1,7 @@
 .financially_closed_container {
 	width: 100%;
-
-	/* height: 100%; */
 	padding: 2%;
 	background: #fff;
-}
-
-.financial_header {
-	display: flex;
-	align-items: center;
-	font-size: var(--font-size-xl);
-	font-weight: 600;
-}
-
-.bottom_line {
-	float: left;
-	width: 20%;
-	margin: 0;
-	border-bottom: 2px solid var(--color-primary-error-red-2);
-}
-
-.info {
-	margin: 4px 0 0 8px;
-	cursor: pointer;
 }
 
 .responsive_graph_circular {
@@ -31,12 +10,13 @@
 
 	& > div:first-of-type {
 		width: 80% !important;
+		margin: auto;
 	}
 }
 
 .show_graph_data {
 	width: 60%;
-	padding: 20px;
+	padding: 20px 0;
 }
 
 .label_circle {
@@ -61,8 +41,8 @@
 .chart_data_combine {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	height: 80%;
-	margin: 20px;
 	cursor: pointer;
 }
 
@@ -71,4 +51,8 @@
 	justify-content: space-between;
 	width: 100%;
 	margin: 20px 0;
+}
+
+.additional_margin {
+	margin-top: 24px;
 }

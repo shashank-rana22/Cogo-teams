@@ -1,6 +1,6 @@
-import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
+import RenderCardHeader from '../RenderCardHeader';
 import MyResponsiveBar from '../ResponsiveBar';
 
 import styles from './styles.module.css';
@@ -23,55 +23,23 @@ function SingleGraphCard({ heading = '' }) {
 			name : 'airs',
 			air  : -5,
 		},
-		{
-			name    : 'surfacess',
-			surface : 99,
-		},
-		{
-			name : 'airss',
-			air  : -5,
-		},
-		{
-			name    : 'surfacesss',
-			surface : 99,
-		},
-		{
-			name : 'airsss',
-			air  : -5,
-		},
-		{
-			name    : 'surfacessss',
-			surface : 99,
-		},
-		{
-			name : 'airssss',
-			air  : -5,
-		},
+
 	];
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.flexhead}>
-				<div>
-					<div className={styles.header}>
-						<div>
-							{heading}
-						</div>
-						<div className={styles.info}>
-							<IcMInfo />
-						</div>
-					</div>
-					<div className={styles.bottom_line} />
-				</div>
+				<RenderCardHeader title={heading} />
 			</div>
+
 			<MyResponsiveBar
 				data={NEW_DATA}
 				keys={['surface', 'air']}
 				legendX=""
 				legendY=""
-				width="750px"
+				width="300px"
+				height="300px"
 				colors={['#88CAD1']}
-				height="274px"
 				indexBy="name"
 				enableGridY
 				legends={false}

@@ -1,6 +1,8 @@
 import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar';
-import { IcMInfo } from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
 import React from 'react';
+
+import RenderCardHeader from '../Common/RenderCardHeader';
 
 import styles from './styles.module.css';
 
@@ -13,6 +15,8 @@ function ClosedShipmentCard({
 	isDeviationVisible = true, type = 'Financially',
 	cardId = '', setActiveShipmentCard = () => {},
 	isAdditonalView = false,
+	showHeading = true,
+	wrapElement = false,
 }) {
 	const data = [
 		{
@@ -76,19 +80,20 @@ function ClosedShipmentCard({
 
 	return (
 		<div className={styles.financially_closed_container}>
-			<div className={styles.financial_header}>
-				<div>
-					{`${type} `}
-					Closed Shipments
-				</div>
-				<div className={styles.info}><IcMInfo /></div>
-			</div>
+			{showHeading && (
+				<RenderCardHeader
+					title={`${type} Closed Shipments`}
+					showInfo
+				/>
+			)}
+
 			<div className={styles.bottom_line} />
 
 			<div
-				className={styles.chart_data_combine}
+				className={cl`${styles.chart_data_combine} ${!isDeviationVisible ? styles.additional_margin : null}`}
 				role="presentation"
 				onClick={() => setActiveShipmentCard(cardId)}
+				style={{ flexWrap: wrapElement ? 'wrap' : 'nowrap' }}
 			>
 				<div
 					className={styles.responsive_graph_circular}

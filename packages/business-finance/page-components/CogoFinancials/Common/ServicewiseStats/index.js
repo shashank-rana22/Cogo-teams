@@ -1,11 +1,11 @@
 import { Select } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
 import StatCard from './statCard';
 import styles from './styles.module.css';
 
-function ServiceWiseStats({ heading = 'Ongoing Shipments: Ocean ' }) {
+function ServiceWiseStats({ heading = 'Ongoing Shipments', activeService = '', setActiveService = () => {} }) {
 	const mappingCards = [
 		{ label: 'Estimated Revenue', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
 		{ label: 'Estimated Cost', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
@@ -21,8 +21,12 @@ function ServiceWiseStats({ heading = 'Ongoing Shipments: Ocean ' }) {
 				<div>
 					<div>
 						<div className={styles.header}>
+							<IcMArrowBack
+								onClick={() => setActiveService('')}
+								style={{ cursor: 'pointer', marginRight: '8px' }}
+							/>
 							<div>
-								{heading}
+								{`${heading}: ${activeService}`}
 							</div>
 							<div className={styles.info}><IcMInfo /></div>
 						</div>
