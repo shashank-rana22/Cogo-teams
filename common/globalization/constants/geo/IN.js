@@ -39,6 +39,28 @@ export default {
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
+	office_locations: [
+		'gurgaon',
+		'mumbai',
+		'delhi',
+		'coimbatore',
+		'bangalore',
+		'chennai',
+		'kolkata',
+		'noida',
+		'ambala',
+		'haldia',
+		'ludhiana',
+		'kochi',
+		'hyderabad',
+		'pune',
+		'jaipur',
+		'raipur',
+		'ahmedabad',
+		'vadodara',
+		'rudrapur',
+		'bagdogra',
+	],
 	uuid: {
 		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
 		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
@@ -130,6 +152,7 @@ export default {
 		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		finops_manager            : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
+		ff_cost_booking_manager   : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		service_ops2_role_id      : [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
@@ -158,6 +181,7 @@ export default {
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
+			'30e7e3e4-5d6d-456d-af50-56896d4ea6aa', // Air S01
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -225,7 +249,8 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
-		igm_desk: '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
 	},
 	options: {
 		registration_types: [
