@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 import TicketsSection from './TicketsSection';
 
 function FilterTicketsSection({
-	type = '', setRefreshList =	() => {}, refreshList = {}, spectatorType = '',
-	setSpectatorType =	() => {}, date = {},
+	type = '', setRefreshList = () => {}, refreshList = {}, spectatorType = '',
+	setSpectatorType = () => {}, date = {},
 }) {
 	const { query: { ticket_id } } = useRouter();
 
