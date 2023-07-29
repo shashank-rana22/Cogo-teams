@@ -46,7 +46,7 @@ const EXPLORED_VIEW_DATA = [
 	},
 ];
 
-const ColorMappings = {
+export const COLOR_MAPPINGS = {
 	predicted         : ['#F9AE64', '#FCD7B2', '#FBC28B', '#E09D5A'],
 	supply_rates      : ['#63BEC8', '#B1DFE4', '#8ACED6', '#59ABB4'],
 	rate_extension    : ['#9BA0CB', '#CDD0E5', '#B4B8D8', '#8C90B7'],
@@ -71,7 +71,7 @@ export const usePieChartConfigs = (type, data) => {
 		return {
 			pieChartData,
 			pieColors: Object.keys(data).flatMap((key) => {
-				if (key !== 'total_rates') return ColorMappings[key][GLOBAL_CONSTANTS.zeroth_index];
+				if (key !== 'total_rates') return COLOR_MAPPINGS[key][GLOBAL_CONSTANTS.zeroth_index];
 				return [];
 			}),
 		};
@@ -87,6 +87,6 @@ export const usePieChartConfigs = (type, data) => {
 			}
 			return [];
 		})],
-		pieColors: ColorMappings[type],
+		pieColors: COLOR_MAPPINGS[type],
 	};
 };

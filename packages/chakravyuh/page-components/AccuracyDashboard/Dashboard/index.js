@@ -23,7 +23,7 @@ function DashboardView(props) {
 		<>
 			<div className={styles.main_container}>
 				<div className={styles.graph_container}>
-					<ScallableAccuracy accuracy={accuracy} loading={loading} />
+					<ScallableAccuracy accuracy={accuracy} loading={loading} mode={mode} />
 					<Deviation data={deviation} loading={loading} />
 				</div>
 				<div className={styles.side_container}>

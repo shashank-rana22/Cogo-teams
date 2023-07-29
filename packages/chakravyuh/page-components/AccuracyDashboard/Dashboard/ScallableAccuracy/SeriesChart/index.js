@@ -55,7 +55,7 @@ function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
 					xAxis,
 					yAxis,
 					valueYField       : field,
-					valueXField       : 'date',
+					valueXField       : 'day',
 					tension           : 0.5,
 					minBulletDistance : 0,
 					tooltip           : am5.Tooltip.new(root, {
@@ -88,12 +88,35 @@ function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
 			series.strokes.template.set('strokeWidth', STROKE_WIDTH);
 
 			series.get('tooltip').label.set('text', '\t\t\t\t{name}\n\n\t({valueX.formatDate()}) [bold]{valueY}');
-			series.data.setAll(data);
+			series.data.processor = am5.DataProcessor.new(root, {
+				numericFields: [
+					'day',
+					'supply_rates',
+					'rate_extension',
+					'predicted',
+					'cluster_extension',
+				],
+			});
+
+			if (typeof data !== 'string') {
+				series.data.setAll(data);
+			}
 		}
 
 		seriesIds.forEach((id) => {
 			createSeries(startCase(id), id);
 		});
+
+		function dataLoaded(result) {
+			const resp = am5.JSONParser.parse(result.response);
+			result.target.series.each((series) => {
+				series.data.setAll(resp);
+			});
+		}
+
+		if (typeof data === 'string') {
+			am5.net.load(data, chart).then(dataLoaded);
+		}
 
 		chart.set('cursor', am5xy.XYCursor.new(root, {
 			behavior: 'zoomXY',
