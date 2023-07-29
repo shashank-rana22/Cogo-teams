@@ -1,14 +1,15 @@
 import { Popover, Tooltip, cl, Button, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot, IcMInfo } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
-const Content = ({
+function Content({
 	commonActions = false,
-	editInvoicesVisiblity = false,
+	editInvoicesVisibility = false,
 	handleClick = () => {},
 	setIsChangeCurrency = () => {},
 	setShowAddRemarks = () => {},
@@ -16,78 +17,74 @@ const Content = ({
 	setIsEditInvoice = () => {},
 	setExchangeRate = () => {},
 	invoice = {},
-}) => {
-	<div className={styles.dialog_box}>
-		{commonActions && (
-			<>
-				<div>
-					{editInvoicesVisiblity ? (
-						<div>
-							<Button
-								themeType="tertiary"
-								className={styles.text}
-								onClick={() => handleClick(setIsEditInvoice)}
-							>
-								Edit Invoice
-							</Button>
-							<div className={styles.line} />
+}) {
+	return (
+		<div className={styles.dialog_box}>
+			{commonActions && (
+				<>
+					<>
+						{editInvoicesVisibility ? (
+							<div>
+								<Button
+									themeType="tertiary"
+									onClick={() => handleClick(setIsEditInvoice)}
+								>
+									Edit Invoice
+								</Button>
+								<div className={styles.line} />
 
-						</div>
-					) : null}
-					<Button
-						themeType="tertiary"
-						className={styles.text}
-						onClick={() => handleClick(setIsChangeCurrency)}
-					>
-						Change Currency
-					</Button>
-					<div className={styles.line} />
-				</div>
-
-				<Button
-					themeType="tertiary"
-					className={styles.text}
-					onClick={() => handleClick(setShowAddRemarks)}
-				>
-					Add Remarks
-				</Button>
-
-				{invoice?.billing_address?.trade_party_type === 'self' && (
-					<div>
-						<div className={styles.line} />
+							</div>
+						) : null}
 						<Button
 							themeType="tertiary"
-							className={styles.text}
-							onClick={() => handleClick(setShowChangePaymentMode)}
+							onClick={() => handleClick(setIsChangeCurrency)}
 						>
-							Change Payment Mode
+							Change Currency
 						</Button>
-					</div>
-				)}
-			</>
-		)}
+						<div className={styles.line} />
+					</>
+					<Button
+						themeType="tertiary"
+						onClick={() => handleClick(setShowAddRemarks)}
+					>
+						Add Remarks
+					</Button>
 
-		{(invoice.exchange_rate_document || []).map((url) => (
-			<div key={url}>
-				{commonActions && <div className={styles.line} />}
-				<Button
-					themeType="tertiary"
-					className={styles.text}
-					onClick={() => window.open(url, '_blank')}
-				>
-					Exchange Rate Document
-				</Button>
-				<Button
-					themeType="tertiary"
-					className={styles.text}
-					onClick={() => handleClick(setExchangeRate)}
-				>
-					Exchange Rate Sheet
-				</Button>
-			</div>
-		))}
-	</div>;
-};
+					{invoice?.billing_address?.trade_party_type === 'self' && (
+						<div>
+							<div className={styles.line} />
+							<Button
+								themeType="tertiary"
+								onClick={() => handleClick(setShowChangePaymentMode)}
+							>
+								Change Payment Mode
+							</Button>
+						</div>
+					)}
+				</>
+			)}
+
+			{(invoice.exchange_rate_document || []).map((url) => (
+				<div key={url}>
+					{commonActions && <div className={styles.line} />}
+					<Button
+						themeType="tertiary"
+						onClick={() => window.open(url, '_blank')}
+					>
+						Exchange Rate Document
+					</Button>
+					<div className={styles.line} />
+					<Button
+						themeType="tertiary"
+						onClick={() => handleClick(setExchangeRate)}
+					>
+						Exchange Rate Sheet
+					</Button>
+				</div>
+			))}
+		</div>
+	);
+}
 
 function KebabContent({
 	invoice = {},
@@ -100,6 +97,9 @@ function KebabContent({
 	setIsEditInvoice = () => {},
 	setExchangeRate = () => {},
 }) {
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
+	const isAuthorizedUser = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id;
+
 	const [show, setShow] = useState(false);
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
@@ -127,8 +127,6 @@ function KebabContent({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
-	const editInvoicesVisiblity = shipment_data?.is_cogo_assured !== true;
-
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 			{(!disableAction || invoice.exchange_rate_document?.length)
@@ -140,7 +138,7 @@ function KebabContent({
 							content={(
 								<Content
 									commonActions={commonActions}
-									editInvoicesVisiblity={editInvoicesVisiblity}
+									editInvoicesVisibility={!shipment_data?.is_cogo_assured && isAuthorizedUser}
 									handleClick={handleClick}
 									setIsChangeCurrency={setIsChangeCurrency}
 									setShowAddRemarks={setShowAddRemarks}
@@ -156,9 +154,8 @@ function KebabContent({
 							<ButtonIcon
 								className={styles.icon_more_wrapper}
 								onClick={() => setShow((prev) => !prev)}
-							>
-								<IcMOverflowDot />
-							</ButtonIcon>
+								icon={<IcMOverflowDot />}
+							/>
 						</Popover>
 				)
 				: (

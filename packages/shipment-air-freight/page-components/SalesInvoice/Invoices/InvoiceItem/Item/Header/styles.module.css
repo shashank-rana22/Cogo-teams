@@ -158,7 +158,6 @@
 	width: 7%;
 	padding: 10px 24px;
 	cursor: pointer;
-	border-left: 1px solid var(--color-accent-orange-2);
 
 	@media (max-width: 768px) {
 		justify-content: flex-end;
@@ -198,6 +197,7 @@
 
 .invoice_container {
 	width: 26%;
+	border-right: 1px solid var(--color-accent-orange-2);
 
 	@media (max-width: 768px) {
 		display: none;

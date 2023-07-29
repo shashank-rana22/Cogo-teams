@@ -81,7 +81,7 @@
 	padding-left: 22px;
 	margin-left: 22px;
 	cursor: pointer;
-	border-left: 1px solid var(--color-accent-orange-2);
+	border-left: 1px solid var(--color-accent-orange-2) !important;
 }
 
 .invoice_status_and_action {

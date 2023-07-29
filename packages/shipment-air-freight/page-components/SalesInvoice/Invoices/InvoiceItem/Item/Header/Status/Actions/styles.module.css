@@ -38,18 +38,12 @@
 	align-items: center;
 	min-width: 64px;
 
-	@media (max-width: 768px) {
-		display: none;
+	:global {
+		.ui_button_container {
+			font-size: var(--font-size-sm);
+			color: var(--color-secondary-greyscale-3);
+		}
 	}
-}
-
-.text {
-	width: 130px;
-	padding: 5px 0 !important;
-	font-size: var(--font-size-sm);
-	color: var(--color-secondary-greyscale-3);
-	text-align: center;
-	cursor: pointer;
 }
 
 .statuses {

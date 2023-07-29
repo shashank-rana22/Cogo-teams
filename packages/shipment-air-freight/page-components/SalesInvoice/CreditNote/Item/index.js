@@ -133,9 +133,8 @@ function Item({
 									<ButtonIcon
 										onClick={() => setOpen('edit')}
 										className={styles.actions}
-									>
-										<IcMEdit />
-									</ButtonIcon>
+										icon={<IcMEdit />}
+									/>
 								</>
 							)}
 						</div>
@@ -146,9 +145,8 @@ function Item({
 						className={styles.rotate_icon}
 						onClick={() => setOpen(open !== 'line_items' ? 'line_items' : false)}
 						style={{ height: `${billingPartyHeightRef.current?.offsetHeight}px` }}
-					>
-						<IcMArrowRotateDown className={open ? styles.rotate : null} />
-					</ButtonIcon>
+						icon={<IcMArrowRotateDown className={open ? styles.rotate : null} />}
+					/>
 				</div>
 
 				{open === 'line_items' ? (
