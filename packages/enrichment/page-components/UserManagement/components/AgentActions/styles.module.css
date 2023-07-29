@@ -3,13 +3,13 @@
 }
 
 .name {
-	color: #888fd1;
 	font-size: 16px;
-	font-weight: 600px;
+	font-weight: 600;
+	color: #888fd1;
 }
 
 .email {
-	color: #888fd1;
 	font-size: 16px;
-	font-weight: 600px;
+	font-weight: 600;
+	color: #888fd1;
 }

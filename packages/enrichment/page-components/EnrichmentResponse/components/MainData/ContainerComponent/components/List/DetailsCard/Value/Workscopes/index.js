@@ -1,4 +1,5 @@
 import { Tooltip, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -21,7 +22,7 @@ function Workscopes({ work_scopes = [] }) {
 		<Tooltip content={renderToolTip} placement="bottom">
 			<div className={styles.overflow_flex}>
 				<div className={styles.item_value}>
-					{startCase(work_scopes?.[ARRAY_LENGTH] || '___')}
+					{startCase(work_scopes?.[GLOBAL_CONSTANTS.zeroth_index] || '___')}
 				</div>
 				<div>
 					{totalWorkScopes > ARRAY_LENGTH && (

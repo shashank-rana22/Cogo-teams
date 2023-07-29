@@ -1,7 +1,7 @@
-import { Pagination } from '@cogoport/components';
+import { Pagination, Modal } from '@cogoport/components';
 import { useState } from 'react';
 
-import CreateResponse from './components/CreateResponse';
+import DetailsForm from './components/DetailsForm';
 import Header from './components/Header';
 import List from './components/List';
 import styles from './styles.module.css';
@@ -15,7 +15,7 @@ function ContainerComponent({
 	paginationData = {},
 	getNextPage = () => {},
 }) {
-	const [showForm, setShowForm] = useState(false);
+	const [detailsForm, setDetailsForm] = useState({});
 
 	const { page, page_limit, total_count } = paginationData || {};
 
@@ -26,13 +26,14 @@ function ContainerComponent({
 				<Header
 					activeTab={activeTab}
 					actionType={actionType}
-					setShowForm={setShowForm}
+					setDetailsForm={setDetailsForm}
 					loadingResponses={loadingResponses}
 				/>
 
 				<List
 					list={list}
 					activeTab={activeTab}
+					setDetailsForm={setDetailsForm}
 					loadingResponses={loadingResponses}
 				/>
 
@@ -46,12 +47,23 @@ function ContainerComponent({
 					/>
 				</div>
 
-				<CreateResponse
-					showForm={showForm}
-					activeTab={activeTab}
-					setShowForm={setShowForm}
-					refetchResponses={refetchResponses}
-				/>
+				{detailsForm?.show && (
+					<Modal
+						size="md"
+						show={detailsForm?.show}
+						placement="center"
+						onClose={() => setDetailsForm({})}
+					>
+						{activeTab && (
+							<DetailsForm
+								detailsForm={detailsForm}
+								setDetailsForm={setDetailsForm}
+								activeTab={activeTab}
+								refetchResponses={refetchResponses}
+							/>
+						)}
+					</Modal>
+				)}
 
 			</div>
 		</div>

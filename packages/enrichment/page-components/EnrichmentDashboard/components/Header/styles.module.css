@@ -10,8 +10,8 @@
 
 .search_container {
 	display: flex;
-	margin-left: 8px;
 	margin-right: 8px;
+	margin-left: 8px;
 
 	:global(.ui_input_container) {
 		width: 300px;

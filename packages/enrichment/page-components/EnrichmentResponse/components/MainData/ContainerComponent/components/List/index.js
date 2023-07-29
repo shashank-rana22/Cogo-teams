@@ -2,16 +2,17 @@ import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../../../common/EmptyState';
 import LoadingState from '../../../../../../../common/LoadingState';
-import getResponseKeysMapping from '../../../../../configurations/response-keys-mapping';
-import getFilteredData from '../../../../../utils/get-filtered-data';
 
 import DetailsCard from './DetailsCard';
 import styles from './styles.module.css';
 
-function List({ list = [], activeTab = '', loadingResponses = false }) {
-	const LABEL_KEYS = getResponseKeysMapping({ activeTab });
-
-	const data = getFilteredData({ list, activeTab, LABEL_KEYS }) || [];
+function List(props) {
+	const {
+		list = [],
+		activeTab = '',
+		loadingResponses = false,
+		setDetailsForm = () => {},
+	} = props;
 
 	if (loadingResponses) {
 		return (
@@ -22,7 +23,7 @@ function List({ list = [], activeTab = '', loadingResponses = false }) {
 		);
 	}
 
-	if (isEmpty(data)) {
+	if (isEmpty(list)) {
 		return (
 			<div className={styles.main}>
 				<EmptyState />
@@ -33,8 +34,13 @@ function List({ list = [], activeTab = '', loadingResponses = false }) {
 
 	return (
 		<div className={styles.main}>
-			{data.map((response) => (
-				<DetailsCard key={response} response={response} />
+			{list.map((response) => (
+				<DetailsCard
+					activeTab={activeTab}
+					key={response}
+					response={response}
+					setDetailsForm={setDetailsForm}
+				/>
 			))}
 
 		</div>

@@ -1,30 +1,59 @@
+import { Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import Workscopes from '../Workscopes';
+import { getResponseKeysMapping } from '../../../../../../configurations/response-keys-mapping';
 
 import styles from './styles.module.css';
+import Value from './Value';
 
-function DetailsCard({ response = {} }) {
+function DetailsCard(props) {
+	const {
+		activeTab = '',
+		response = {},
+		setDetailsForm = () => {},
+	} = props;
+
+	const LABEL_KEYS = getResponseKeysMapping({ activeTab });
+
 	return (
 		<div key={response} className={styles.content}>
 
 			<div className={styles.box_info}>
 
-				{Object.keys(response).map((responseKey) => (
+				{LABEL_KEYS.map((labelKey) => (
 
-					<div key={responseKey} className={styles.label_value_container}>
+					<div key={labelKey} className={styles.label_value_container}>
 						<div className={styles.top}>
-							{startCase(responseKey)}
+							{startCase(labelKey)}
 						</div>
 
 						<div className={styles.bottom}>
-							{(responseKey === 'work_scopes' && response?.[responseKey])
-								? <Workscopes work_scopes={response?.[responseKey]} />
-								: response?.[responseKey] }
+							<Value response={response} labelKey={labelKey} />
 						</div>
+
 					</div>
 
 				))}
+
+				<div className={styles.edit_action}>
+					<div className={styles.top}>Action</div>
+					<div className={styles.bottom}>
+						<Button
+							size="sm"
+							themeType="secondary"
+							type="button"
+							onClick={() => setDetailsForm({
+								show        : true,
+								type        : 'edit',
+								initialData : response,
+							})}
+						>
+							Edit
+						</Button>
+
+					</div>
+
+				</div>
 
 			</div>
 

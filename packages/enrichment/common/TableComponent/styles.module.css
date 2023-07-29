@@ -4,9 +4,9 @@
 }
 
 .filters {
-	margin-top: 8px;
 	display: flex;
 	justify-content: flex-end;
+	margin-top: 8px;
 }
 
 .table {

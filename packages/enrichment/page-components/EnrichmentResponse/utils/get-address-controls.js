@@ -1,39 +1,13 @@
-import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
-
 const getAddressControls = ({ responseData = {} }) => {
-	const { country_id, region_id } = responseData;
-
-	const taxLabel = getCountrySpecificData({
-		country_id,
-		accessorType  : 'registration_number',
-		accessor      : 'label',
-		isDefaultData : true,
-	});
-
-	const taxPattern = getCountrySpecificData({
-		country_id,
-		accessorType  : 'registration_number',
-		accessor      : 'pattern',
-		isDefaultData : false,
-	});
+	const { country = {}, state = {}, city = {} } = responseData;
 
 	const controls = [
+
 		{
-			name        : 'address',
-			label       : 'Full Address',
-			placeholder : 'Type here...',
-			type        : 'text',
-			isClearable : true,
-			rules       : {
-				required: false,
-			},
-		},
-		{
-			name     : 'country',
+			name     : 'country_id',
 			label    : 'Country',
 			labelKey : 'display_name',
 			type     : 'asyncSelect',
-			valueKey : 'name',
 			asyncKey : 'list_locations',
 			params   : {
 				filters: { type: ['country'] },
@@ -42,13 +16,12 @@ const getAddressControls = ({ responseData = {} }) => {
 			rules       : { required: false },
 		},
 		{
-			name        : 'state',
+			name        : 'state_id',
 			label       : 'State',
 			labelKey    : 'display_name',
-			valueKey    : 'name',
 			placeholder : 'Select State...',
 			type        : 'asyncSelect',
-			params      : { filters: { type: ['region'], country_id } },
+			params      : { filters: { type: ['region'], country_id: country?.id } },
 			asyncKey    : 'list_locations',
 			isClearable : true,
 			rules       : {
@@ -57,16 +30,15 @@ const getAddressControls = ({ responseData = {} }) => {
 		},
 
 		{
-			name        : 'city',
+			name        : 'city_id',
 			label       : 'City',
 			type        : 'asyncSelect',
 			labelKey    : 'display_name',
-			valueKey    : 'name',
 			asyncKey    : 'list_locations',
 			placeholder : 'Select City',
 			params      : {
 				filters: {
-					type: ['city'], country_id, region_id,
+					type: ['city'], country_id: country?.id, region_id: state?.id,
 				},
 			},
 			multiple    : false,
@@ -85,25 +57,37 @@ const getAddressControls = ({ responseData = {} }) => {
 			asyncKey    : 'list_locations',
 			initialCall : false,
 			placeholder : 'Select Pincode',
-			params      : { filters: { type: ['pincode'], country_id, region_id } },
-			rules       : {
+			params      : {
+				filters: {
+					type       : ['pincode'],
+					country_id : country?.id,
+					region_id  : state?.id,
+					city_id    : city?.id,
+				},
+			},
+			rules: {
 				required: false,
 			},
 			show: true,
 		},
 
 		{
-			name        : 'tax_number',
-			label       : taxLabel,
+			name        : 'address',
+			label       : 'Address',
 			type        : 'text',
-			placeholder : `Enter ${taxLabel}`,
 			isClearable : true,
 			rules       : {
-				required : false,
-				pattern  : {
-					value   : taxPattern,
-					message : `Please enter a valid ${taxLabel}`,
-				},
+				required: false,
+			},
+		},
+
+		{
+			name        : 'tax_number',
+			label       : 'VAT or GST',
+			type        : 'text',
+			isClearable : true,
+			rules       : {
+				required: false,
 			},
 		},
 
