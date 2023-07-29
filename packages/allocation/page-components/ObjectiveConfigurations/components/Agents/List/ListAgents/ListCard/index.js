@@ -19,6 +19,7 @@ function ListCard(props) {
 		onSaveChanges,
 		onDistributeEqually,
 		onDiscardChanges,
+		loading,
 	} = useEditWeightage({ objectives, user, role, refetch });
 
 	const { control, handleSubmit } = formProps;
@@ -35,6 +36,7 @@ function ListCard(props) {
 				onSaveChanges={onSaveChanges}
 				onDistributeEqually={onDistributeEqually}
 				onDiscardChanges={onDiscardChanges}
+				loading={loading}
 			/>
 
 			<Objectives

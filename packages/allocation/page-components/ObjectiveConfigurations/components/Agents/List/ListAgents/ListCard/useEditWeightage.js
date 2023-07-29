@@ -66,11 +66,11 @@ const useEditWeightage = (props) => {
 		const equalWeight = parseFloat((DEFAULT_WEIGHTAGE / objectivesCount).toFixed(DECIMAL_COUNT));
 		let lastWeightage = 100.00;
 
-		objectives.forEach((objective, index) => {
+		objectives.forEach((item, index) => {
 			if (index === objectivesCount - INDEX_LENGTH_NORMALIZATION) {
-				setValue(`${objective.id}_weightage`, parseFloat((lastWeightage).toFixed(DECIMAL_COUNT)));
+				setValue(`${item.objective_id}_weightage`, parseFloat((lastWeightage).toFixed(DECIMAL_COUNT)));
 			} else {
-				setValue(`${objective.id}_weightage`, equalWeight);
+				setValue(`${item.objective_id}_weightage`, equalWeight);
 				lastWeightage -= equalWeight;
 			}
 		});

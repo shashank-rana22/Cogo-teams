@@ -15,6 +15,7 @@ function Header(props) {
 		onSaveChanges,
 		onDistributeEqually,
 		onDiscardChanges,
+		loading,
 	} = props;
 
 	const BUTTON_MAPPING_BASIS_MODE = {
@@ -33,6 +34,7 @@ function Header(props) {
 					type="button"
 					themeType="link"
 					onClick={onDistributeEqually}
+					disabled={loading}
 				>
 					Distribute Equally
 				</Button>
@@ -41,6 +43,7 @@ function Header(props) {
 					type="button"
 					themeType="secondary"
 					onClick={onDiscardChanges}
+					disabled={loading}
 				>
 					Discard Changes
 				</Button>
@@ -49,6 +52,7 @@ function Header(props) {
 					type="button"
 					themeType="accent"
 					onClick={handleSubmit(onSaveChanges)}
+					loading={loading}
 				>
 					<IcMTick style={{ marginRight: '4px' }} />
 					Save Changes
