@@ -18,25 +18,25 @@ const handleShipmentClick = ({
 		id: userId = '',
 		name = '',
 		email = '',
-		mobile_country_code: mobileCountryCode = '',
+		mobile_country_code = '',
 		mobile_number = '',
 	} = importerExporterPoc || {};
 
-	const countryCode = mobileCountryCode.replace('+', '');
+	const chatData = {
+		user_id                 : userId,
+		user_name               : name,
+		whatsapp_number_eformat : mobile_number,
+		email,
+		channel_type            : 'whatsapp',
+		countryCode             : mobile_country_code,
+		mobile_no               : `${mobile_country_code.replace('+', '')}${mobile_number}`,
+	};
 
 	setActiveTab((prev) => ({
 		...prev,
 		hasNoFireBaseRoom : true,
-		data              : {
-			user_id                 : userId,
-			user_name               : name,
-			whatsapp_number_eformat : `+${countryCode}${mobile_number}`,
-			email,
-			channel_type            : 'whatsapp',
-			countryCode,
-			mobile_no               : `${countryCode}${mobile_number}`,
-		},
-		tab: 'message',
+		data              : chatData,
+		tab               : 'message',
 	}));
 };
 

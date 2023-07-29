@@ -46,6 +46,7 @@ function ListShipmentCards({
 		),
 	);
 }
+
 function ShipmentsHomePage({ setActiveTab = () => {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
 
