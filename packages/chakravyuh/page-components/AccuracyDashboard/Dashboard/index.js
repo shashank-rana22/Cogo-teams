@@ -4,9 +4,9 @@ import React from 'react';
 import useGetFclFreightRateStats from '../../../hooks/useGetFclFreightRateStats';
 import SupplyRates from '../RatesList';
 
-import Accuracy from './Accuracy';
 import Deviation from './Deviation';
 import Distribution from './Distribution';
+import ScallableAccuracy from './ScallableAccuracy';
 import styles from './styles.module.css';
 import Views from './Views';
 
@@ -23,7 +23,7 @@ function DashboardView(props) {
 		<>
 			<div className={styles.main_container}>
 				<div className={styles.graph_container}>
-					<Accuracy data={accuracy} loading={loading} />
+					<ScallableAccuracy accuracy={accuracy} loading={loading} mode={mode} />
 					<Deviation data={deviation} loading={loading} />
 				</div>
 				<div className={styles.side_container}>

@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { SECOND_IDX } from '../constants/map_constants';
 
-const DECIMALS = 2;
+const DECIMALS = 1;
 const UNIT_MAPPING = {
 	B : 1000000000,
 	M : 1000000,
