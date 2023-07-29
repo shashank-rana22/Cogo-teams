@@ -14,7 +14,7 @@ const TAB_CONFIG = {
 };
 
 function FTL_EDIT_SHIPMENT() {
-	const [activeTab, setActiveTab] = useState(TAB_CONFIG.SID_BEFIRE_DEPARTURE);
+	const [activeTab, setActiveTab] = useState(TAB_CONFIG.SID_BEFORE_DEPARTURE);
 
 	return (
 		<div style={{ margin: '0 20px 20px' }}>
