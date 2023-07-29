@@ -503,6 +503,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'update_bulk_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

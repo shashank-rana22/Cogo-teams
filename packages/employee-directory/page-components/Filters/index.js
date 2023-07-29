@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 const LAST_ELEMENT = 1;
 
 function Filters({
-	setBlukActions = () => {}, setSelectedIds = () => {},
+	setBulkActions = () => {}, setSelectedIds = () => {},
 	debounceQuery = () => {}, setFilters = () => {},
 	filters = {}, totalEmployeeCount = 0,
 	searchText = '',
@@ -120,7 +120,7 @@ function Filters({
 					placement="bottom"
 					render={(
 						<BulkAction
-							setBlukActions={setBlukActions}
+							setBulkActions={setBulkActions}
 							setSelectedIds={setSelectedIds}
 						/>
 					)}

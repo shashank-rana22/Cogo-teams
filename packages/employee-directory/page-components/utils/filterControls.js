@@ -18,6 +18,7 @@ export const CONTROLS = [
 		labelKey    : 'employee_code',
 		valueKey    : 'employee_code',
 		initialCall : true,
+		multiple    : true,
 	},
 	{
 		name        : 'designation',
@@ -36,6 +37,7 @@ export const CONTROLS = [
 		labelKey    : 'designation',
 		valueKey    : 'designation',
 		initialCall : true,
+		multiple    : true,
 	},
 	{
 		name        : 'tribe_id',
@@ -49,6 +51,7 @@ export const CONTROLS = [
 		},
 		isClearable : true,
 		initialCall : true,
+		multiple    : true,
 	},
 	{
 		name        : 'squad_id',
@@ -62,6 +65,7 @@ export const CONTROLS = [
 		},
 		isClearable : true,
 		initialCall : true,
+		multiple    : true,
 	},
 	{
 		name        : 'reporting_manager_id',
@@ -75,6 +79,7 @@ export const CONTROLS = [
 		},
 		isClearable : true,
 		initialCall : true,
+		multiple    : true,
 	},
 	{
 		name        : 'office_location',
@@ -93,6 +98,7 @@ export const CONTROLS = [
 		valueKey    : 'office_location',
 		initialCall : true,
 		isClearable : true,
+		multiple    : true,
 	},
 	{
 		name        : 'chapter_id',
@@ -106,6 +112,7 @@ export const CONTROLS = [
 		},
 		isClearable : true,
 		initialCall : true,
+		multiple    : true,
 	},
 	{
 		name        : 'sub_chapter_id',
@@ -119,19 +126,20 @@ export const CONTROLS = [
 		},
 		isClearable : true,
 		initialCall : true,
+		multiple    : true,
 	},
 ];
 
 export const getControls = (type) => {
 	const STATUS_FILTER = {
-		name        : 'status',
+		name        : 'employee_status',
 		label       : 'Select Status',
 		controlType : 'select',
 		placeholder : 'Search Status',
 		options     : [
 			{
 				label : 'Regular',
-				value : 'regular',
+				value : 'confirmed',
 			},
 			{
 				label : 'Probation',
@@ -139,10 +147,11 @@ export const getControls = (type) => {
 			},
 			{
 				label : 'Notice Period',
-				value : 'notice_period',
+				value : 'separated',
 			},
 		],
-		isClearable: true,
+		isClearable : true,
+		multiple    : true,
 	};
 
 	return type === 'all_employees' ? [...CONTROLS, STATUS_FILTER] : CONTROLS;

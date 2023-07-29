@@ -13,7 +13,7 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function EmployeeDirectory() {
-	const [bulkActions, setBlukActions] = useState({});
+	const [bulkActions, setBulkActions] = useState({});
 	const [selectedIds, setSelectedIds] = useState([]);
 	const [openEmployeeDetails, setOpenEmployeeDetails] = useState(false);
 	const [employeeDetails, setEmployeeDetails] = useState({});
@@ -81,7 +81,7 @@ function EmployeeDirectory() {
 				/>
 				<Filters
 					setFilters={setFilters}
-					setBlukActions={setBlukActions}
+					setBulkActions={setBulkActions}
 					setSelectedIds={setSelectedIds}
 					debounceQuery={debounceQuery}
 					filters={filters}
@@ -102,7 +102,13 @@ function EmployeeDirectory() {
 					loading={detailsLoading}
 				/>
 			</div>
-			{!isEmpty(selectedIds) && <FixedCard selectedIds={selectedIds} />}
+			{!isEmpty(selectedIds) && (
+				<FixedCard
+					selectedIds={selectedIds}
+					refetch={refetch}
+					setBulkActions={setBulkActions}
+				/>
+			)}
 			{openEmployeeDetails && (
 				<EmployeeDetails
 					employeeDetails={employeeDetails}

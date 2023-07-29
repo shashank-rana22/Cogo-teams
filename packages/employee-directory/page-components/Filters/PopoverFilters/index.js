@@ -3,7 +3,7 @@ import { IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
-import { CONTROLS, CONTROL_MAPPING, getControls } from '../../utils/filterControls';
+import { CONTROL_MAPPING, getControls } from '../../utils/filterControls';
 
 import styles from './styles.module.css';
 
@@ -15,16 +15,19 @@ function PopoverFilters({
 }) {
 	const { employee_status } = filters;
 
+	const filterControls = useMemo(
+		() => getControls(employee_status),
+		[employee_status],
+	);
+
 	const onSubmit = (values) => {
 		const FORM_VALUES = {};
 
-		CONTROLS.forEach((val) => {
+		filterControls.forEach((val) => {
 			if (!isEmpty(values?.[val?.name])) {
 				FORM_VALUES[val.name] = values?.[val?.name];
 			}
 		});
-
-		// setFilters((prev) => ({ ...prev, ...FORM_VALUES }));
 
 		setFilters((prev) => ({ ...prev, page: 1 }));
 		setemployeeFilters(FORM_VALUES);
@@ -40,11 +43,6 @@ function PopoverFilters({
 		setemployeeFilters({});
 		setOpenFilterPopover(false);
 	};
-
-	const filterControls = useMemo(
-		() => getControls(employee_status),
-		[employee_status],
-	);
 
 	return (
 		<div>

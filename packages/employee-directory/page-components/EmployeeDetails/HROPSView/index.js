@@ -10,6 +10,8 @@ import getHROPSControls from '../../utils/HROPSControls';
 import styles from './styles.module.css';
 
 function HROPSView({ show = false, onClose = () => {}, employeeDetails = {}, refetch = () => {} }) {
+	console.log('employeeDetails', employeeDetails);
+
 	const [isEdit, setIsEdit] = useState(false);
 
 	const { control, handleSubmit, formState : { errors }, watch, setValue } = useForm();

@@ -1,7 +1,7 @@
 import { Checkbox } from '@cogoport/components';
 import React from 'react';
 
-function BulkAction({ setBlukActions = () => {}, setSelectedIds = () => {} }) {
+function BulkAction({ setBulkActions = () => {}, setSelectedIds = () => {} }) {
 	const handleBulkEdit = (e) => {
 		const { checked } = e.target;
 
@@ -9,7 +9,7 @@ function BulkAction({ setBlukActions = () => {}, setSelectedIds = () => {} }) {
 			setSelectedIds([]);
 		}
 
-		setBlukActions((prev) => ({ ...prev, bulkEdit: e.target.checked }));
+		setBulkActions((prev) => ({ ...prev, bulkEdit: e.target.checked }));
 	};
 
 	return (
