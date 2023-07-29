@@ -30,7 +30,7 @@ interface InvoiceFilterProps {
 	invoiceDate?: InvoiceDate,
 	orgId?: string,
 	migrated?: string,
-	status?: string[],
+	paymentStatusList?: string[],
 	invoiceStatus?: string,
 	services?: string[],
 	currency?: string
@@ -44,11 +44,13 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 	}));
 
 	const [invoiceFilters, setinvoiceFilters] = useState<InvoiceFilterProps>({
-		page      : 1,
-		pageLimit : 10,
-		orgId     : organizationId,
-		status    : ['unpaid'],
+		page              : 1,
+		pageLimit         : 10,
+		orgId             : organizationId,
+		paymentStatusList : ['unpaid'],
 	});
+
+	console.log('invoiceFilters', invoiceFilters);
 
 	const [sort, setSort] = useState({
 		sortType : 'desc',
@@ -77,7 +79,7 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 	);
 
 	const {
-		page, pageLimit, migrated, status, invoiceStatus,
+		page, pageLimit, migrated, paymentStatusList, invoiceStatus,
 		services, search, dueDate, invoiceDate, orgId, currency,
 	} = invoiceFilters || {};
 
@@ -107,21 +109,21 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 				params: {
 					page,
 					pageLimit,
-					migrated      : migrated || undefined,
-					status        : status || undefined,
-					invoiceStatus : invoiceStatus || undefined,
-					services      : services || undefined,
-					query         : query !== '' ? query : undefined,
-					role          : userData.id,
-					orgId         : orgId || undefined,
+					migrated          : migrated || undefined,
+					paymentStatusList : paymentStatusList || undefined,
+					invoiceStatus     : invoiceStatus || undefined,
+					services          : services || undefined,
+					query             : query !== '' ? query : undefined,
+					role              : userData.id,
+					orgId             : orgId || undefined,
 					dueDateStart,
 					dueDateEnd,
 					invoiceDateStart,
 					invoiceDateEnd,
-					cogoEntity    : entityCode || undefined,
-					currency      : currency || undefined,
-					sortBy        : sort.sortBy || undefined,
-					sortType      : sort.sortType || undefined,
+					cogoEntity        : entityCode || undefined,
+					currency          : currency || undefined,
+					sortBy            : sort.sortBy || undefined,
+					sortType          : sort.sortType || undefined,
 				},
 
 			});
@@ -132,7 +134,7 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 		} catch (e) {
 			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed'); }
 		}
-	}, [listApi, page, pageLimit, migrated, status, invoiceStatus, services,
+	}, [listApi, page, pageLimit, migrated, paymentStatusList, invoiceStatus, services,
 		query, userData.id, orgId, dueDateStart, dueDateEnd, invoiceDateStart,
 		invoiceDateEnd, entityCode, currency, sort.sortBy, sort.sortType]);
 
@@ -142,17 +144,17 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 				params: {
 					page,
 					pageLimit,
-					migrated      : migrated || undefined,
-					status        : status || undefined,
-					invoiceStatus : invoiceStatus || undefined,
-					services      : services || undefined,
+					migrated          : migrated || undefined,
+					paymentStatusList : paymentStatusList || undefined,
+					invoiceStatus     : invoiceStatus || undefined,
+					services          : services || undefined,
 					orgId,
 					dueDateStart,
 					dueDateEnd,
 					invoiceDateStart,
 					invoiceDateEnd,
-					query         : query !== '' ? query : undefined,
-					performedBy   : userData.id,
+					query             : query !== '' ? query : undefined,
+					performedBy       : userData.id,
 				},
 			});
 			Toast.success('Report Sent Successfully');
@@ -168,15 +170,15 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 	const clearInvoiceFilters = () => {
 		setinvoiceFilters((prev) => ({
 			...prev,
-			page          : 1,
-			invoiceStatus : undefined,
-			search        : undefined,
-			status        : undefined,
-			services      : undefined,
-			migrated      : undefined,
-			invoiceDate   : undefined,
-			dueDate       : undefined,
-			currency      : undefined,
+			page              : 1,
+			invoiceStatus     : undefined,
+			search            : undefined,
+			paymentStatusList : undefined,
+			services          : undefined,
+			migrated          : undefined,
+			invoiceDate       : undefined,
+			dueDate           : undefined,
+			currency          : undefined,
 		}));
 	};
 

@@ -17,7 +17,7 @@ export const INVOICE_FILTER = () => [
 		],
 	},
 	{
-		name        : 'status',
+		name        : 'paymentStatusList',
 		placeholder : 'Payment',
 		size        : 'sm',
 		isClearable : true,
