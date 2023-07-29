@@ -13,7 +13,7 @@ import BulkUpload from '../BulkUpload';
 import controls from './controls';
 import styles from './styles.module.css';
 
-const DEFAULT_YEAR_MONTH_DATE = 0;
+const DEFAULT_HOUR_MINUTE_SECOND = 0;
 
 const PERSONAL_DETAILS_MAPPING = ['name', 'personal_email', 'mobile_number'];
 
@@ -116,9 +116,9 @@ function FormComponent({ setActivePage = () => {} }) {
 					doj?.getFullYear(),
 					doj?.getMonth(),
 					doj?.getDate(),
-					DEFAULT_YEAR_MONTH_DATE,
-					DEFAULT_YEAR_MONTH_DATE,
-					DEFAULT_YEAR_MONTH_DATE,
+					DEFAULT_HOUR_MINUTE_SECOND,
+					DEFAULT_HOUR_MINUTE_SECOND,
+					DEFAULT_HOUR_MINUTE_SECOND,
 				),
 			) || undefined;
 
