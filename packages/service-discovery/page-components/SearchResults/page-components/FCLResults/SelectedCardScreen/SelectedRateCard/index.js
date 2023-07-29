@@ -59,11 +59,12 @@ function SelectedRateCard({
 		);
 	}
 
+	const { source = '' } = rateCardData;
+
 	return (
 		<div className={styles.parent}>
 			<div className={styles.container}>
 				<div className={styles.heading}>
-
 					<span className={styles.line}>
 						Selected:
 						<span style={{ fontWeight: 'bold', marginLeft: 8 }}>
@@ -84,8 +85,13 @@ function SelectedRateCard({
 					setScreen={setScreen}
 				/>
 
-				<div className={styles.services}>
+				{source === 'cogo_assured_rate' ? (
+					<div className={styles.cogo_assured_text}>
+						you will not be able to edit margin for the selected rate card
+					</div>
+				) : null}
 
+				<div className={styles.services}>
 					<div className={styles.service_bundling}>
 						<Bundles />
 					</div>

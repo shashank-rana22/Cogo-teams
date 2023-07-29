@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCWaitForTimeSlots, IcMArrowRotateRight } from '@cogoport/icons-react';
+import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useRef, useContext } from 'react';
@@ -142,8 +142,6 @@ function BookingConfirmationFooter({
 			&& !detail?.credit_terms_amd_condition?.is_tnc_accepted
 			&& detail?.credit_details?.credit_source === 'pre_approved_clean_credit');
 
-	console.log('rate', rate);
-
 	const {
 		handleSubmit,
 		onClickSubmitOtp,
@@ -240,8 +238,7 @@ function BookingConfirmationFooter({
 							})
 						}
 					>
-						<div className={styles.flex}>
-							<TotalCost rate={rate} />
+						<div className={styles.flex_column}>
 							<div className={styles.button}>
 								{getButtonLabel({
 									checkoutMethod,
@@ -249,10 +246,12 @@ function BookingConfirmationFooter({
 									bookingConfirmationMode,
 								})}
 
-								<CogoPoint cogopoint={earnable_cogopoints} />
+								<TotalCost rate={rate} />
+
+								<IcMArrowDoubleRight width={14} height={14} />
 							</div>
 
-							<IcMArrowRotateRight />
+							<CogoPoint cogopoint={earnable_cogopoints} />
 						</div>
 					</Button>
 				) : null}

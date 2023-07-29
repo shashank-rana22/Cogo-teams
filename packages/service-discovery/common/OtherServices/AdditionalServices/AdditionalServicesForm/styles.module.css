@@ -36,7 +36,7 @@
 }
 
 .error_message {
-	color: #ee3425;
-	font-size: 12px;
 	margin-bottom: -20px;
+	font-size: 12px;
+	color: #ee3425;
 }

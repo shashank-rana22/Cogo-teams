@@ -24,7 +24,7 @@
 	display: flex;
 	flex-wrap: wrap; /* Wrap items for smaller screens */
 	justify-content: space-between;
-	padding: 0 20px;
+	padding: 20px;
 }
 
 .service_bundling {
@@ -98,4 +98,11 @@
 	background: #fff;
 	border: 1.5px solid #221f20;
 	border-radius: 50%;
+}
+
+.cogo_assured_text {
+	margin: 0 20px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #f00;
 }

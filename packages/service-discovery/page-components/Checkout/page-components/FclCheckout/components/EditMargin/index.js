@@ -24,6 +24,7 @@ function EditMargin() {
 			price    : convenience_line_item?.price,
 			currency : convenience_line_item?.currency,
 			unit     : convenience_line_item?.unit,
+			quantity : convenience_line_item?.quantity,
 		},
 	}));
 	const [noRatesPresent, setNoRatesPresent] = useState(false);

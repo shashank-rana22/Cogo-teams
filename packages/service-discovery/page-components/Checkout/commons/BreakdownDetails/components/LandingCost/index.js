@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 
 function LandingCost({
 	convenienceDetails = {},
-	convenience_line_item = {},
 	conversions = {},
 	rate = {},
 	total = 0,
@@ -19,9 +18,7 @@ function LandingCost({
 
 	const { convenience_rate } = convenienceDetails;
 
-	const { price = 0, currency = '' } = convenience_rate;
-
-	const { quantity = 1 } = convenience_line_item;
+	const { price = 0, currency = '', quantity = 1 } = convenience_rate;
 
 	const finalConvenienceFee = convertCurrencyValue(
 		price * quantity,

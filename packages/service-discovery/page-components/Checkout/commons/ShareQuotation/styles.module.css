@@ -33,7 +33,20 @@
 	margin-left: 44px;
 }
 
+.flex {
+	display: flex;
+	align-items: center;
+}
+
 .button_container {
 	display: flex;
 	align-items: center;
+
+	:global {
+		.ui_button_container {
+			height: fit-content;
+			min-height: 40px;
+			padding: 8px 8px 8px 18px;
+		}
+	}
 }

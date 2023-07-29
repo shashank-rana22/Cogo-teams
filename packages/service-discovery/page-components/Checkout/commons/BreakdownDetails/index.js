@@ -35,6 +35,7 @@ function BreakdownDetails({
 		getCheckout,
 		checkout_id,
 		loading,
+		shouldEditMargin = true,
 	} = useContext(CheckoutContext);
 
 	const {
@@ -230,11 +231,20 @@ function BreakdownDetails({
 				convenienceDetails={convenienceDetails}
 				setConvenienceDetails={setConvenienceDetails}
 				rate={rate}
-				disableForm={disableForm}
+				disableControl={detail?.source === 'contract' || source === 'preview_booking'}
+				shouldEditConvenienceFee={
+					source !== 'preview_booking'
+					&& shouldEditMargin
+					&& detail?.source !== 'contract'
+}
 				conversions={conversions}
 				detail={detail}
 				getCheckout={getCheckout}
 				source={source}
+				convenienceRateOptions={
+					detail?.convenience_rate_configurations
+						?.convenience_rate_options
+				}
 			/>
 
 			<LandingCost
@@ -242,7 +252,6 @@ function BreakdownDetails({
 				convenienceDetails={convenienceDetails}
 				conversions={conversions}
 				rate={rate}
-				convenience_line_item={convenience_line_item}
 			/>
 		</div>
 	);

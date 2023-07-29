@@ -47,6 +47,10 @@
 
 .button {
 	display: flex;
+	align-items: center;
+}
+
+.flex_column {
+	display: flex;
 	flex-direction: column;
-	margin-right: 4px;
 }

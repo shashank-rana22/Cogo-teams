@@ -1,6 +1,6 @@
 import { Button, Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
+import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { useRef, useEffect, useContext } from 'react';
 
@@ -8,8 +8,21 @@ import { CheckoutContext } from '../../context';
 import handleTimer from '../../utils/handleTimer';
 
 import styles from './styles.module.css';
+import TotalCost from './TotalCost';
 
 const SECOND_TO_MILLISECOND = 1000;
+
+function SubmitButton({ rate = {} }) {
+	return (
+		<div className={styles.flex}>
+			Select Invoicing Parties
+
+			<TotalCost rate={rate} />
+
+			<IcMArrowDoubleRight width={14} height={14} />
+		</div>
+	);
+}
 
 function PreviewBookingFooter({
 	updateCheckout = () => {},
@@ -18,7 +31,7 @@ function PreviewBookingFooter({
 	agreeTandC = false,
 	cargoDetails = {},
 }) {
-	const { detail = {} } = useContext(CheckoutContext);
+	const { detail = {}, rate } = useContext(CheckoutContext);
 
 	const timerRef = useRef(null);
 
@@ -102,8 +115,8 @@ function PreviewBookingFooter({
 			disabled  : updateLoading || updateCheckoutServiceLoading,
 		},
 		{
-			label     : 'Select Invoicing Parties',
-			themeType : 'primary',
+			label     : <SubmitButton rate={rate} />,
+			themeType : 'accent',
 			size      : 'lg',
 			loading   : updateLoading || updateCheckoutServiceLoading,
 			disabled  : isVeryRisky || !agreeTandC || disableButton,

@@ -113,7 +113,7 @@ function ExchangeRate({ conversions, rate, detail, getCheckout }) {
 			) : null}
 
 			<div className={styles.applicable_stage}>
-				<div>Locked at</div>
+				<div style={{ marginRight: '12px' }}>Locked at</div>
 
 				<StyledSelect
 					defaultValue={value}
