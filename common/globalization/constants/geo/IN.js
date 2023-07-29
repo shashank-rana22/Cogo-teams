@@ -152,7 +152,7 @@ export default {
 		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		finops_manager            : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
-		ff_cost_booking_manager   : '8cc096a8-e279-425c-ba95-3970614c3d8e',
+		ff_cost_booking_executive : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		service_ops2_role_id      : [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
@@ -189,6 +189,7 @@ export default {
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
 		],
+		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		sales_role                       : [

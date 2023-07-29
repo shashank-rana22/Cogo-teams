@@ -1,9 +1,13 @@
 import { Loader, Pagination, Tabs, TabPanel } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../commons/EmptyState';
 
 import ListCard from './ListCard';
 import styles from './styles.module.css';
+
+const PAGE_LIMIT = 10;
+const FALLBACK_VALUE = 0;
 
 export default function List({
 	data = {},
@@ -20,23 +24,10 @@ export default function List({
 
 	const { count_stats, total_count } = data;
 
-	const renderPagination = (
-		<Pagination
-			type="table"
-			totalItems={total_count}
-			pageSize={10}
-			currentPage={filters.page}
-			onPageChange={(val) => setFilters({
-				...filters,
-				page: val,
-			})}
-		/>
-	);
-
 	if (loading) {
 		return 	(
 			<div className={styles.loader}>
-				Loading Documents Data....
+				Loading Documents....
 				<Loader themeType="primary" className={styles.loader_icon} />
 			</div>
 		);
@@ -61,9 +52,10 @@ export default function List({
 							const { name, title } = tab;
 							return (
 								<TabPanel
+									key={name}
 									name={name}
 									title={title}
-									badge={count_stats[name] || 0}
+									badge={count_stats[name] || FALLBACK_VALUE}
 								/>
 							);
 						})}
@@ -71,7 +63,7 @@ export default function List({
 				</div>
 			) : null}
 
-			{data?.list?.length === 0
+			{isEmpty(data?.list)
 				? <EmptyState />
 				: (
 					<>
@@ -87,7 +79,19 @@ export default function List({
 							/>
 						))}
 
-						{renderPagination}
+						{total_count > PAGE_LIMIT
+							? (
+								<Pagination
+									type="table"
+									totalItems={total_count}
+									pageSize={10}
+									currentPage={filters.page}
+									onPageChange={(val) => setFilters({
+										...filters,
+										page: val,
+									})}
+								/>
+							) : null}
 					</>
 				)}
 		</div>
