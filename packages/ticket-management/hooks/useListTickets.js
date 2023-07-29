@@ -17,6 +17,7 @@ const WINDOW_VIEW = 20;
 
 const useListTickets = ({
 	searchParams,
+	spectatorType,
 	status,
 	label,
 	refreshList,
@@ -24,7 +25,9 @@ const useListTickets = ({
 	isUpdated,
 	setIsUpdated,
 }) => {
-	const { agent, category, spectatorType } = searchParams || {};
+	const { agent, category } = searchParams || {};
+	const { profile } = useSelector((state) => state);
+
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
 
@@ -35,8 +38,6 @@ const useListTickets = ({
 		method  : 'get',
 		authkey : 'get_tickets_list',
 	}, { manual: true });
-
-	const { profile } = useSelector((state) => state);
 
 	const getPayload = useCallback((pageIndex) => {
 		const payload = {

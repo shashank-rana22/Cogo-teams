@@ -6,8 +6,8 @@ import useGetTicketStats from '../../../hooks/useGetTicketStats';
 
 import styles from './styles.module.css';
 
-function StatsSection() {
-	const { statsData, loading } = useGetTicketStats();
+function StatsSection({ spectatorType = '' }) {
+	const { statsData, loading } = useGetTicketStats({ spectatorType });
 
 	return (
 		<div className={styles.stats_section_container}>
