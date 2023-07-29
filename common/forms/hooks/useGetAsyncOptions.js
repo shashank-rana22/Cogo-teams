@@ -10,11 +10,9 @@ function useGetAsyncOptions({
 	initialCall = false,
 	valueKey = '',
 	labelKey = '',
-	filterKey = '',
 	params = {},
 	onOptionsChange = () => {},
 	getModifiedOptions,
-	setFilterValue,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -67,25 +65,17 @@ function useGetAsyncOptions({
 				if (singleHydratedValue) {
 					unorderedHydratedValue.push(singleHydratedValue);
 				} else {
-					let filterValue = v;
-					if (typeof (setFilterValue) === 'function' && !isEmpty(filterValue)) {
-						filterValue = setFilterValue({ value: filterValue });
-					}
-					TO_BE_FETCHED.push(filterValue);
+					TO_BE_FETCHED.push(v);
 				}
 			});
-			let unhydratedOptions;
+			let res;
 			if (TO_BE_FETCHED.length) {
-				const res = await triggerSingle({
-					params: merge(params, { filters: { [filterKey || valueKey]: TO_BE_FETCHED } }),
+				res = await triggerSingle({
+					params: merge(params, { filters: { [valueKey]: TO_BE_FETCHED } }),
 				});
-				unhydratedOptions = res?.data?.list;
-				if (typeof getModifiedOptions === 'function' && !isEmpty(unhydratedOptions)) {
-					unhydratedOptions = getModifiedOptions({ options: unhydratedOptions });
-				}
-				storeoptions.push(...unhydratedOptions || []);
+				storeoptions.push(...res?.data?.list || []);
 			}
-			unorderedHydratedValue = unorderedHydratedValue.concat(unhydratedOptions || []);
+			unorderedHydratedValue = unorderedHydratedValue.concat(res?.data?.list || []);
 
 			const hydratedValue = value.map((v) => {
 				const singleHydratedValue = unorderedHydratedValue.find((uv) => uv?.[valueKey] === v);
@@ -100,18 +90,10 @@ function useGetAsyncOptions({
 		if (!isEmpty(checkOptionsExist)) return checkOptionsExist[GLOBAL_CONSTANTS.zeroth_index];
 
 		try {
-			let filterValue = value;
-			if (typeof (setFilterValue) === 'function' && !isEmpty(filterValue)) {
-				filterValue = setFilterValue({ value: filterValue });
-			}
 			const res = await triggerSingle({
-				params: merge(params, { filters: { [filterKey || valueKey]: filterValue } }),
+				params: merge(params, { filters: { [valueKey]: value } }),
 			});
-			let unhydratedOptions = res?.data?.list;
-			if (typeof getModifiedOptions === 'function' && !isEmpty(unhydratedOptions)) {
-				unhydratedOptions = getModifiedOptions({ options: unhydratedOptions });
-			}
-			return unhydratedOptions?.[GLOBAL_CONSTANTS.zeroth_index] || null;
+			return res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 		} catch (err) {
 			// console.log(err);
 			return {};
