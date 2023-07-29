@@ -87,7 +87,7 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 		{
 			name      : 'overview',
 			title     : 'Overview',
-			component : <Overview shipmentData={shipment_data} />,
+			component : <Overview shipmentData={shipment_data} stakeholderConfig={stakeholderConfig} />,
 		},
 		{
 			name      : 'timeline_and_tasks',

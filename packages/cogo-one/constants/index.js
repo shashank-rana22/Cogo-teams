@@ -63,6 +63,12 @@ export const SOURCE_ICON_MAPPING = {
 		width={20}
 		height={20}
 	/>,
+	lead_user: <Image
+		src={GLOBAL_CONSTANTS.image_url.sign_up_failed}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
 };
 
 export const TAGS_COLORS = ['#FEF3E9', '#F3FAFA'];
@@ -322,3 +328,18 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
+
+export const OFFLINE_REASONS_OPTIONS = [
+	{
+		label : 'Lunch Break',
+		value : 'lunch_break',
+	},
+	{
+		label : 'Snack Break',
+		value : 'snack_break',
+	},
+	{
+		label : 'Others',
+		value : 'others',
+	},
+];

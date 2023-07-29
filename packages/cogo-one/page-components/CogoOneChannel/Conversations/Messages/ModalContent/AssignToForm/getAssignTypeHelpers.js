@@ -48,6 +48,7 @@ function AssignUsers({
 							common_agent_type : getCommonAgentType({ viewType }) || undefined,
 							agent_type        : watchAgentType || undefined,
 						},
+						sort_by: 'agent_type',
 					}}
 					className={errors?.assign_user ? styles.error_class : ''}
 					renderLabel={(item) => (

@@ -1,16 +1,20 @@
-import { Modal } from '@cogoport/components';
-import { AsyncSelect } from '@cogoport/forms';
+import { Modal, Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
-import OrgUsersList from './OrgUserList';
+import Organizations from './Organizations';
 import styles from './styles.module.css';
+
+const TABS_MAPPING = [
+	{ name: 'organization', title: 'Organizations' },
+	{ name: 'lead_organization', title: 'Lead Organizations' },
+];
 
 function OrgUsers({
 	openKamContacts = false,
 	setOpenKamContacts = () => {},
 	setActiveTab = () => {},
 }) {
-	const [orgId, setOrgId] = useState('');
+	const [activeOrg, setActiveOrg] = useState('organization');
 
 	return (
 		<Modal
@@ -25,24 +29,21 @@ function OrgUsers({
 				title="Organizaton Users"
 			/>
 			<Modal.Body className={styles.body_styles}>
-				<AsyncSelect
-					asyncKey="organizations"
-					initialCall
-					onChange={setOrgId}
-					value={orgId}
-					placeholder="Search by serial id / business name"
-					size="md"
-					isClearable
+				<Tabs
+					activeTab={activeOrg}
+					themeType="tertiary"
+					onChange={setActiveOrg}
+				>
+					{(TABS_MAPPING || []).map((item) => (
+						<TabPanel key={item?.name} name={item?.name} title={item?.title} />
+					))}
+				</Tabs>
+				<Organizations
+					setActiveTab={setActiveTab}
+					setOpenKamContacts={setOpenKamContacts}
+					activeOrg={activeOrg}
+					key={activeOrg}
 				/>
-				<div className={styles.org_users_styles}>
-					<OrgUsersList
-						orgId={orgId}
-						setActiveTab={setActiveTab}
-						setOpenKamContacts={setOpenKamContacts}
-						setOrgId={setOrgId}
-						key={orgId}
-					/>
-				</div>
 			</Modal.Body>
 		</Modal>
 	);

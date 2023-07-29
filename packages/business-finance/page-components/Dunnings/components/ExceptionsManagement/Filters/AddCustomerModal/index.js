@@ -8,10 +8,17 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-const TRADE_PARTY_PARAMS = {
-	filters: { status: 'active', account_type: 'importer_exporter' },
+const getTradePartyParams = ({ entity, showEntityFilter, entityId }) => ({
+	filters: {
+		status         : 'active',
+		account_type   : 'importer_exporter',
+		cogo_entity_id : showEntityFilter
+			? GLOBAL_CONSTANTS.cogoport_entities[Number(entity || '')]?.id
+			: entityId,
+	},
 
-};
+});
+
 const SAMPLE_PDF_URL = GLOBAL_CONSTANTS.pdf_url.exception_customer_sample_url;
 
 function AddCustomerModal({
@@ -24,6 +31,7 @@ function AddCustomerModal({
 	uploadListLoading = false,
 	reset = () => {},
 	showEntityFilter = true,
+	entityId = '',
 }) {
 	const [fileValue, setFileValue] = useState('');
 
@@ -47,17 +55,18 @@ function AddCustomerModal({
 	};
 
 	const isSubmitDisable = showEntityFilter
-		? (isEmpty(excludedNums) || !fileValue || isEmpty(entity) || uploadListLoading)
-		: (isEmpty(excludedNums) || !fileValue || uploadListLoading);
+		? ((isEmpty(excludedNums) && !fileValue) || isEmpty(entity) || uploadListLoading)
+		: ((isEmpty(excludedNums) && !fileValue) || uploadListLoading);
 
 	return (
 		<Modal
 			size="md"
 			show={show}
 			onClose={handleClose}
+			placement="top"
 		>
 			<Modal.Header title="Add To List - Upload List" />
-			<Modal.Body>
+			<Modal.Body style={{ overflow: 'visible' }}>
 				<div className={styles.body_container}>
 					{showEntityFilter && (
 						<div>
@@ -104,7 +113,7 @@ function AddCustomerModal({
 						isClearable
 						initialCall
 						style={{ width: '50%' }}
-						params={TRADE_PARTY_PARAMS}
+						params={getTradePartyParams({ entity, showEntityFilter, entityId })}
 					/>
 				</div>
 			</Modal.Body>

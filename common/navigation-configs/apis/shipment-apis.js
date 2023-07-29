@@ -1684,6 +1684,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'send_booking_confirmation_mail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'download_rail_domestic_container_details_as_csv',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
