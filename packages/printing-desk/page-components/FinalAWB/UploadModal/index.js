@@ -10,7 +10,7 @@ import useUpdateShipmentDocument from '../../../hooks/useUpdateDocument';
 
 const ZERO = 0;
 
-const formatPAyload = (showUpload, fileName, finalUrl, edit, hawbCount) => {
+const formatPAyload = (showUpload, fileName, finalUrl, edit, numberOfHawb) => {
 	const {
 		shipmentId, serviceProviderId, documentType, documentId, serviceId, type, awbNumber, blDetailId,
 	} = showUpload || {};
@@ -26,7 +26,7 @@ const formatPAyload = (showUpload, fileName, finalUrl, edit, hawbCount) => {
 			pending_task_id     : edit === 'edit' ? undefined : (showUpload?.id || showUpload?.taskId),
 			state               : type === 'FinalAwb' ? undefined : 'document_accepted',
 			document_url        : finalUrl,
-			hawbCount,
+			numberOfHawb,
 			data                : {
 
 				status          : 'uploaded',
@@ -70,9 +70,9 @@ function UploadModal({
 
 	const onSubmit = (formValues) => {
 		const { fileName, finalUrl } = formValues?.document || {};
-		const hawbCount = formValues?.hawbCount || ZERO;
+		const numberOfHawb = formValues?.numberOfHawb || ZERO;
 
-		const payload = formatPAyload(showUpload, fileName, finalUrl, edit, hawbCount);
+		const payload = formatPAyload(showUpload, fileName, finalUrl, edit, numberOfHawb);
 
 		if (edit) {
 			updateDocument(payload, listAPI);
