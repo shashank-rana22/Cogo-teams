@@ -79,7 +79,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo, setRefreshList }) 
 			}));
 			setShowRaiseTicket(false);
 		} catch (error) {
-			console.error(error?.response?.data);
+			Toast.error(error?.response?.data);
 		}
 	};
 
