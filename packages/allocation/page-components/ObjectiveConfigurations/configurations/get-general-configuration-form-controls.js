@@ -107,7 +107,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			asyncKey    : 'partner_roles',
 			valueKey    : 'value',
 			filterKey   : 'id',
-			initialCall : false,
+			initialCall : true,
 			params      : {
 				permissions_data_required : false,
 				filters                   : {
