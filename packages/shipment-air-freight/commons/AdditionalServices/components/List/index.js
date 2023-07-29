@@ -14,6 +14,7 @@ import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
+import ConfirmTerminalChargeModal from './TerminalChargeModal';
 
 const LESS_PAGE_LIMIT = 8;
 const MORE_PAGE_LIMIT = 100;
@@ -26,6 +27,7 @@ function List({ isSeller = false }) {
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(LESS_PAGE_LIMIT);
+	const [terminalChargeModal, setTerminalChargeModal] = useState(false);
 
 	const { list: additionalServiceList, refetch, loading, totalCount } = useListShipmentAdditionalServices({
 		shipment_data,
@@ -112,8 +114,14 @@ function List({ isSeller = false }) {
 					<Info />
 				</div>
 			) : null}
-
+			
 			<div className={styles.not_added}>
+				<Button
+					onClick={() => setTerminalChargeModal(true)}
+				>
+					<div className={styles.add_icon}>+</div>
+					Add Terminal Charge
+				</Button>
 				<Button
 					onClick={() => setShowModal('charge_code')}
 					disabled={shipment_data?.is_job_closed}
@@ -154,6 +162,12 @@ function List({ isSeller = false }) {
 					closeModal={closeModal}
 				/>
 			)}
+			{terminalChargeModal ?
+				<ConfirmTerminalChargeModal 
+				terminalChargeModal={terminalChargeModal}
+				setTerminalChargeModal={setTerminalChargeModal}
+				shipment_id={shipment_data?.id} />:null
+			}
 
 		</div>
 	);

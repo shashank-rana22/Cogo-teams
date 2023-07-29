@@ -91,6 +91,17 @@ function TaskView() {
 				);
 			}
 		}
+		// if (
+		// 	element?.task === 'upload_terminal_handling_charge_receipt'
+		// 	&& tradeType === 'export'
+		// ) {
+
+		// 	// element.disabled = (tasksList || []).some(
+		// 	// 	(task) => !(task?.task === 'update_airway_bill_number'
+		// 	// 			&& task?.status === 'completed'
+		// 	// 			),
+		// 	// );
+		// }
 
 		return element;
 	});

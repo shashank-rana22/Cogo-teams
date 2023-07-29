@@ -12,9 +12,9 @@ import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
 function AddService({
-	shipmentId: shipment_id,
-	services,
-	isSeller,
+	shipmentId: shipment_id = '',
+	services = '',
+	isSeller = '',
 	refetch = () => {},
 	closeModal = () => {},
 }) {
@@ -27,13 +27,15 @@ function AddService({
 
 	const { list, loading } = useListServiceChargeCodes({ defaultFilters: { shipment_id } });
 
-	let finalList = (list || []).map((item) => ({
-		...item,
-		shipment_id,
-		services,
-		isSeller,
-		name: `${item?.code} ${startCase(item?.name)}`,
-	}));
+	let finalList = (list || [])
+		.filter((charge) => charge.code !== 'THC')
+		.map((item) => ({
+			...item,
+			shipment_id,
+			services,
+			isSeller,
+			name: `${item?.code} ${startCase(item?.name)}`,
+		}));
 
 	if (filters.name) {
 		finalList = finalList.filter((item) => item.name.toLowerCase().includes(filters.name.toLowerCase()));
