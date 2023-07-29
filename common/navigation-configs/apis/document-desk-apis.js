@@ -544,5 +544,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'get_container_timeline',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
 ];
 export default apis;

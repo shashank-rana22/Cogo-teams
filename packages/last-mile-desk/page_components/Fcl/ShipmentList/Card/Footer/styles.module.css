@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	font-size: var(--font-size-md);
+	background: var(--color-primary-error-red-5);
+}
+
+.details {
+	display: flex;
+	justify-content: space-between;
+	width: 60%;
+	margin: 8px;
+}
+
+.text {
+	font-size: var(--font-size-md);
+}
+
+.deadline {
+	display: flex;
+	justify-content: flex-end;
+	margin: 12px;
+}

@@ -29,4 +29,6 @@ export const containerIncludingTasks = [
 	'mark_containers_destuffed_at',
 	'mark_container_arrived_at_destination_icd',
 	'mark_container_departed_from_port_to_icd',
+	'mark_container_offloaded_at',
+	'mark_container_rail_out_at',
 ];

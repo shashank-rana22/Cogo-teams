@@ -1,6 +1,13 @@
+.content_body {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .sub_container {
 	display: flex;
 	align-items: center;
+	width: 95%;
 	padding: 0 10px 10px;
 }
 
@@ -39,4 +46,13 @@
 	width: 1px;
 	margin: 0 20px;
 	background: var(--color-secondary-greyscale-5);
+}
+
+.details {
+	width: 120px;
+	margin: 24px;
+}
+
+.text {
+	color: #f68b21;
 }

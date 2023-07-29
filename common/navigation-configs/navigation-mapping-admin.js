@@ -1372,7 +1372,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'coe-last_mile',
-				title         : 'Last Mile Desk',
+				title         : 'Tracking Desk',
 				href          : '/v2/last-mile',
 				as            : '/v2/last-mile',
 				type          : 'link',
