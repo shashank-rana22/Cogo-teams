@@ -1229,6 +1229,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_lead_organization_stakeholders',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'list_organization_stakeholders',
 			access_type  : 'private',
 			service_name : 'organization',
