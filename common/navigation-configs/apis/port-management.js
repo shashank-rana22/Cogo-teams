@@ -74,11 +74,6 @@ const pms = [
 		service_name : 'fcl_customs_rate',
 	},
 	{
-		api          : 'create_haulage_freight_rate_sheet',
-		access_type  : 'private',
-		service_name : 'haulage_freight_rate',
-	},
-	{
 		api          : 'list_rate_sheets',
 		access_type  : 'private',
 		service_name : 'rate_sheet',
@@ -94,11 +89,6 @@ const pms = [
 		service_name : 'fcl_customs_rate',
 	},
 	{
-		api          : 'list_haulage_freight_rate_sheets',
-		access_type  : 'private',
-		service_name : 'haulage_freight_rate',
-	},
-	{
 		api          : 'update_rate_sheet',
 		access_type  : 'private',
 		service_name : 'rate_sheet',
@@ -112,11 +102,6 @@ const pms = [
 		api          : 'update_fcl_customs_rate_sheet',
 		access_type  : 'private',
 		service_name : 'fcl_customs_rate',
-	},
-	{
-		api          : 'update_haulage_freight_rate_sheet',
-		access_type  : 'private',
-		service_name : 'haulage_freight_rate',
 	},
 ];
 export default pms;
