@@ -1,7 +1,7 @@
 import { Toggle, Input, Select, Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMSearchlight, IcMUpload } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
 import GenericUpload from './GenericUpload';
@@ -18,6 +18,8 @@ function Header({
 	activeWallet = '',
 	setActiveWallet = () => {},
 	refetch = () => {},
+	setOrgDocService = () => {},
+	orgDocService = '',
 }) {
 	const { shipment_data: shipmentData, activeStakeholder, stakeholderConfig } = useContext(ShipmentDetailContext);
 
@@ -27,6 +29,10 @@ function Header({
 		: [];
 
 	const serviceOptions = shipmentData?.services?.map((service) => ({ label: startCase(service), value: service }));
+
+	const org_doc_services_options	= serviceOptions?.filter(
+		(ser) => ['fcl_customs_service', 'lcl_customs_service'].includes(ser?.value),
+	);
 
 	const handleGenericUpload = () => {
 		setShowModal(true);
@@ -85,6 +91,22 @@ function Header({
 						<TabPanel name="organization_documents" title="Organization Documents" />
 					</Tabs>
 				) : null}
+
+				{activeWallet === 'organization_documents'
+				&& activeToggle
+				&& !isEmpty(org_doc_services_options) ? (
+					<div>
+						<Select
+							size="sm"
+							placeholder="Select Service"
+							style={{ padding: '6px', marginRight: '6px', width: '200px' }}
+							value={orgDocService}
+							options={org_doc_services_options || []}
+							onChange={setOrgDocService}
+							isClearable
+						/>
+					</div>
+					) : null}
 			</section>
 
 			{showModal && can_edit_documents ? (
