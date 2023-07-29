@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 const SHOW_LOG_STATUS_ICON_MAPPING = {
 	answered      : { icon: IcMVideoCall, fill: '#b0cc64' },
 	not_connected : { icon: IcMVideoCallMute, fill: '#e0e0e0' },
-	missed        : { icon: IcMVideoCall, fill: '#f37166' },
+	missed        : { icon: IcMVideoCallMute, fill: '#f37166' },
 };
 
 const getVoiceCallStatus = ({ type, status, present, previous, channel = '' }) => {
