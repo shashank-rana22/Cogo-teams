@@ -8,7 +8,10 @@ import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
 import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
+import ColumnCard from './Common/CustumTable/ColumnCard';
+import Header from './Common/CustumTable/Header';
 import StatsCard from './Common/StatsCard';
+import { CUSTOMERS_CONFIG } from './Configuration/customers';
 import MultipleFilters from './MultipleFilters';
 import ReceivablesOutstandings from './ReceivablesOutstandings';
 import styles from './styles.module.css';
@@ -187,8 +190,15 @@ function CogoFinancials() {
 				</div>
 			)
 				: (
-					<div>
-						<h1>list will come here...</h1>
+					<div className={styles.table}>
+						<Header config={CUSTOMERS_CONFIG} />
+						{[{}, {}, {}, {}, {}].map((item) => (
+							<ColumnCard
+								config={CUSTOMERS_CONFIG}
+								key={item?.id}
+								item={item}
+							/>
+						))}
 					</div>
 				)}
 
