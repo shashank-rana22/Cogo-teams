@@ -24,9 +24,10 @@ function RenderPills({ name = '', isCompleted = false, isDocsApproved }) {
 }
 
 function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeDetailsLoading }) {
+	const { progress_stats = {}, documents } = profileData || {};
+
 	const [show, setShow] = useState('');
 
-	const { progress_stats = {}, documents } = profileData || {};
 	const {
 		personal_details = {},
 	} = progress_stats;
@@ -78,9 +79,9 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 										isCompleted={isCompleted}
 									/>
 									<Button
-										className={styles.StyledButton}
+										className={styles.styled_button}
 										themeType="secondary"
-										onClick={() => { setShow(name); }}
+										onClick={() => setShow(name)}
 									>
 										<IcMEdit style={{ marginRight: '8px' }} />
 										Edit

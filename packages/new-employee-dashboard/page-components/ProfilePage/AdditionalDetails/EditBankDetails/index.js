@@ -1,5 +1,6 @@
 import { Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
@@ -8,7 +9,6 @@ import useCreateEmployeeBankDetails from '../../../hooks/useCreateEmployeeBankDe
 import controls from './controls';
 import styles from './styles.module.css';
 
-const DEFAULT_INDEX = 0;
 const CONTROL_TYPE_FILE_UPLOAD = 'fileUpload';
 
 const BANK_DETAILS_MAPPING = [
@@ -45,9 +45,9 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 	useEffect(() => {
 		(BANK_DETAILS_MAPPING || []).forEach((element) => {
 			if (element === 'account_number_confirmation') {
-				setValue(element, bank_details?.[DEFAULT_INDEX]?.account_number);
+				setValue(element, bank_details?.[GLOBAL_CONSTANTS.zeroth_index]?.account_number);
 			} else {
-				setValue(element, bank_details?.[DEFAULT_INDEX]?.[element]);
+				setValue(element, bank_details?.[GLOBAL_CONSTANTS.zeroth_index]?.[element]);
 			}
 		});
 	}, [bank_details, setValue]);

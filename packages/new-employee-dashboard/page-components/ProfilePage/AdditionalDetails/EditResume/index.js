@@ -45,7 +45,9 @@ function Resume({ getEmployeeDetails, data: info }) {
 			<div className={styles.container}>
 				{controls?.map((controlItem) => {
 					const { type, label, name: controlName } = controlItem || {};
+					if (!type) { return null; }
 					const Element = getElementController(type);
+					if (!Element) { return null; }
 
 					return (
 						<div key={controlName} className={styles.control_container}>

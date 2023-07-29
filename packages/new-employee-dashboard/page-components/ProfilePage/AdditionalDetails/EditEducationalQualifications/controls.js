@@ -1,14 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const EDUCATION_LEVEL_OPTIONS = [
-	{ label: '10th', value: '10th' },
-	{ label: '12th', value: '12th' },
-	{ label: 'Diploma', value: 'Diploma' },
-	{ label: 'Graduate degree', value: 'graduate_degree' },
-	{ label: 'Post Graduates degree', value: 'post_graduates_degree' },
-	{ label: 'Doctorate degree', value: 'doctorate_degree' },
-];
-
 const getControls = () => [{
 	name     : 'education_qualifications',
 	type     : 'fieldArray',
@@ -17,7 +8,7 @@ const getControls = () => [{
 			name        : 'education_level',
 			label       : 'Education Level*',
 			type        : 'createselect',
-			options     : EDUCATION_LEVEL_OPTIONS,
+			options     : GLOBAL_CONSTANTS.EDUCATION_LEVEL_OPTIONS,
 			placeholder : 'Degree',
 			rules       : { required: 'This is required' },
 		},

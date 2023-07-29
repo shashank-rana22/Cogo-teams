@@ -19,6 +19,17 @@ const HONORIFICS_OPTIONS = [
 	},
 ];
 
+const GENDER_OPTIONS = [
+	{
+		label : 'Male',
+		value : 'male',
+	},
+	{
+		label : 'Female',
+		value : 'female',
+	},
+];
+
 const RELATION_TYPE_OPTIONS = [
 	{
 		label : 'Father',
@@ -71,10 +82,7 @@ const controls = () => [
 		type        : 'select',
 		placeholder : 'Select Gender',
 		rules       : { required: 'This is required' },
-		options     : [
-			{ label: 'Male', value: 'male' },
-			{ label: 'Female', value: 'female' },
-		],
+		options     : GENDER_OPTIONS,
 	},
 	{
 		name        : 'employee_code',

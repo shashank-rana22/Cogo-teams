@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -9,8 +10,6 @@ import AddressDetails from '../AddressDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
-
-const EMERGENCY_CONTACT_NUMBER_INDEX = 0;
 
 const CONTROL_SELECT_TYPE = 'fileUpload';
 const DEFAULT_MOBILE_CODE = '+91';
@@ -144,9 +143,9 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 			emergency_contact_details: {
 				mobile_number: {
 					number: content?.detail?.emergency_contact_details?.
-						[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_number,
+						[GLOBAL_CONSTANTS.zeroth_index]?.mobile_number,
 					country_code: content?.detail?.emergency_contact_details?.
-						[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_country_code || DEFAULT_MOBILE_CODE,
+						[GLOBAL_CONSTANTS.zeroth_index]?.mobile_country_code || DEFAULT_MOBILE_CODE,
 				},
 			},
 		};
@@ -177,8 +176,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [content?.detail, setValue]);
+	}, [content?.detail, controlsvalue, setValue]);
 
 	return (
 		<div className={styles.whole_container}>

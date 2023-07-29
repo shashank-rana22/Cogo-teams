@@ -83,9 +83,9 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 									<div className={styles.accordion_title}>{startCase(name)}</div>
 									<RenderPills name={name} isCompleted={isCompleted} bankDetails={bankDetails} />
 									<Button
-										className={styles.StyledButton}
+										className={styles.styled_button}
 										themeType="secondary"
-										onClick={() => { setShow(name); }}
+										onClick={() => setShow(name)}
 									>
 										<IcMEdit style={{ marginRight: '8px' }} />
 										Edit

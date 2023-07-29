@@ -122,7 +122,9 @@ function AddressDetails({
 					<div className={styles.container}>
 						{permanentcontrols?.map((controlItem) => {
 							const { type, label, name: controlName } = controlItem || {};
+							if (!type) { return null; }
 							const Element = getElementController(type);
+							if (!Element) { return null; }
 
 							return (
 								<div key={controlName} className={styles.control_container}>
@@ -157,7 +159,9 @@ function AddressDetails({
 					<div className={styles.container}>
 						{controlsvalue?.map((controlItem) => {
 							const { type, label, name: controlName } = controlItem || {};
+							if (!type) { return null; }
 							const Element = getElementController(type);
+							if (!Element) { return null; }
 
 							return (
 								<div key={controlName} className={styles.control_container}>
