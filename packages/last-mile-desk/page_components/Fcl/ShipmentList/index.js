@@ -6,7 +6,7 @@ import Card from './Card';
 import ListPagination from './ListPagination';
 import styles from './styles.module.css';
 
-function ShipmentList({ loading, data = {} }) {
+function ShipmentList({ loading = false, data = {} }) {
 	const { list = [] } = data || {};
 
 	function Pagination() {
@@ -22,7 +22,7 @@ function ShipmentList({ loading, data = {} }) {
 			{!loading && isEmpty(list)
 				? <EmptyState />
 				: (
-					<div>
+					<div className={styles.container}>
 						<Pagination />
 
 						{(list || []).map((item) => <Card item={item} key={item?.id} />)}
