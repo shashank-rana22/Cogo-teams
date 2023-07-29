@@ -32,6 +32,7 @@ function SidePanel({
 	locationFilters = {},
 	setLocationFilters = () => {},
 	activeList = [],
+	globalFilters = {},
 	setActiveId = () => {},
 	page = 1,
 	setPage = () => {},
@@ -46,6 +47,7 @@ function SidePanel({
 
 	const { list = [], total_count = 0 } = mapStatisticsData;
 	const hasMore = page < Math.ceil(total_count / SCROLLING_LIMIT);
+	const { service_type } = globalFilters;
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
@@ -77,6 +79,7 @@ function SidePanel({
 						setLocationFilters={setLocationFilters}
 						setHierarchy={setHierarchy}
 						setActiveList={setActiveList}
+						service_type={service_type}
 					/>
 					<div className={styles.horizontal_line} />
 				</div>

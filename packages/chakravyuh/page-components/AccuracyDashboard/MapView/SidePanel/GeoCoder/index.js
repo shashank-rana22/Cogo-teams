@@ -5,6 +5,7 @@ import { IcALocationwhite, IcCSwitch, IcMOrigin } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import { getLocationParams } from '../../../../../configurations/global-filters';
 import { getHigherHierarchy } from '../../../../../utils/hierarchy-utils';
 
 import styles from './styles.module.css';
@@ -14,6 +15,7 @@ function GeoCoder({
 	setHierarchy = () => {},
 	setActiveList = () => {},
 	setLocationFilters = () => {},
+	service_type = 'fcl',
 }) {
 	const handleChange = (key, val, obj) => {
 		setLocationFilters((prev) => ({ ...prev, [key]: { id: val, ...obj } }));
@@ -74,7 +76,7 @@ function GeoCoder({
 						onChange={(val, obj) => handleChange(key, val, obj)}
 						onOptionsChange={(options) => handleOptionsChange(key, options)}
 						isClearable={!!idx}
-						params={{ filters: { type: ['seaport', 'country', 'region'] } }}
+						params={getLocationParams(service_type)}
 					/>
 				))}
 			</div>

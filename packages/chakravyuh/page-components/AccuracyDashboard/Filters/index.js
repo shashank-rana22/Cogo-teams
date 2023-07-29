@@ -1,8 +1,12 @@
 import { Select, cl } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-import { IcMSearchlight, IcMPortArrow } from '@cogoport/icons-react';
+import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import {
+	LOCATIONS_PROPS, MAIN_PORT_PROPS, TYPE_MAPPING,
+	getLocationParams,
+} from '../../../configurations/global-filters';
 import {
 	SELECT_ICON_MAPPING,
 	SERVICE_TYPE_OPTIONS,
@@ -12,38 +16,24 @@ import { LOCATION_KEYS } from '../../../constants/map_constants';
 
 import styles from './styles.module.css';
 
-const LOCATIONS_PROPS = {
-	asyncKey    : 'list_locations',
-	initialCall : false,
-	placeholder : 'Port / Country',
-	prefix      : <IcMSearchlight className={styles.search_icon} />,
-	size        : 'sm',
-	isClearable : true,
-};
-const MAIN_PORT_PROPS = {
-	asyncKey    : 'list_locations_mapping',
-	initialCall : true,
-	placeholder : 'Main port',
-	size        : 'sm',
-	isClearable : true,
-};
-const TYPE_MAPPING = { seaport: 'port', airport: 'airport' };
-
 function Filters(props) {
 	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
 	const { service_type } = globalFilters;
 
-	const params = {
-		filters: {
-			type: [
-				`${service_type === 'fcl' ? 'seaport' : 'airport'}`,
-				'country',
-			],
-		},
-	};
-
 	const changePrimaryFilters = (key, value) => {
 		setGlobalFilters((prev) => ({ ...prev, [key]: value || undefined }));
+	};
+
+	const handleChange = (key, value, obj) => {
+		changePrimaryFilters(key, value);
+		setGlobalFilters((prev) => ({
+			...prev,
+			[`${key}_type`]         : TYPE_MAPPING[obj?.type] || obj?.type,
+			[`is_${key}_icd`]       : !!obj?.is_icd,
+			[`${key}_country_id`]   : obj?.country_id,
+			[`${key}_region_id`]    : obj?.region_id,
+			[`${key}_continent_id`] : obj?.continent_id,
+		}));
 	};
 
 	return (
@@ -70,17 +60,10 @@ function Filters(props) {
 							>
 								<p className={styles.title_label}>{startCase(key)}</p>
 								<AsyncSelect
-									onChange={(value, obj) => {
-										changePrimaryFilters(key, value);
-										setGlobalFilters((prev) => ({
-											...prev,
-											[`${key}_type`]   : TYPE_MAPPING[obj?.type] || obj?.type,
-											[`is_${key}_icd`] : !!obj?.is_icd,
-										}));
-									}}
+									onChange={(value, obj) => handleChange(key, value, obj)}
 									value={globalFilters[key]}
 									className={styles.location_select}
-									params={params}
+									params={getLocationParams(service_type)}
 									{...LOCATIONS_PROPS}
 								/>
 							</div>

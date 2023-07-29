@@ -28,8 +28,11 @@ const useGetFclMapStatistics = ({ locationFilters }) => {
 	const filters = LOCATION_KEYS.reduce((acc, key) => {
 		if (locationFilters[key]?.id) {
 			acc[key] = {
-				id   : locationFilters[key].id,
-				type : locationFilters[key].type === 'seaport' ? 'port' : locationFilters[key].type,
+				id           : locationFilters[key].id,
+				type         : locationFilters[key].type === 'seaport' ? 'port' : locationFilters[key].type,
+				country_id   : locationFilters[key]?.country_id,
+				region_id    : locationFilters[key]?.region_id,
+				continent_id : locationFilters[key]?.continent_id,
 			};
 		}
 		return acc;

@@ -60,7 +60,7 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 
 	return (
 		<div className={styles.container}>
-			<div className={`${styles.map}`}>
+			<div className={styles.map}>
 				<Map
 					data={data}
 					isFull={isFull}
