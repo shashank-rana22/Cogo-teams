@@ -3,7 +3,8 @@
         "common": {
           "filters": {
             "state": ["confirmed_by_importer_exporter", "in_progress", "shipment_received"],
-            "is_knocked_off": false
+            "is_knocked_off": false,
+            "knockoff_awaiting": true
           },
           "additional_methods": ["pagination", "seller"]
         },
