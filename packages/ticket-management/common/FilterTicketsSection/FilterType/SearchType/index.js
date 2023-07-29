@@ -5,9 +5,9 @@ import { SPECTATOR_TYPE_OPTIONS } from '../../../../constants';
 
 import styles from './styles.module.css';
 
-function SearchType(props) {
-	const { searchParams, setSearchParams, isAdmin, spectatorType, setSpectatorType } = props;
-
+function SearchType({
+	searchParams = {}, setSearchParams = () => {}, isAdmin = false, spectatorType = '', setSpectatorType = () => {},
+}) {
 	return (
 		<div className={styles.search_container}>
 			<Input

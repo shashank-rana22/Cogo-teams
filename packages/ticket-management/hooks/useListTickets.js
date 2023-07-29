@@ -53,9 +53,9 @@ const useListTickets = ({
 	const { startDate, endDate } = date || {};
 	const { agent, category } = searchParams || {};
 
-	const { profile : { user } } = useSelector((state) => state);
+	const { profile = {} } = useSelector((state) => state);
 
-	const performerId = user?.id;
+	const performerId = profile?.user?.id;
 
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
