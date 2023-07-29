@@ -24,3 +24,9 @@
 	flex-basis: 80%;
 	align-items: center;
 }
+
+.StyledButton {
+	height: 30px !important;
+	padding: 10px !important;
+	margin-left: 10px;
+}

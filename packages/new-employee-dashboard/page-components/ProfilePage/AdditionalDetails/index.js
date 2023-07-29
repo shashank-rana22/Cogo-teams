@@ -1,4 +1,5 @@
 import { Accordion, Pill, Button, Modal } from '@cogoport/components';
+import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -81,7 +82,14 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 								<div className={styles.status}>
 									<div className={styles.accordion_title}>{startCase(name)}</div>
 									<RenderPills name={name} isCompleted={isCompleted} bankDetails={bankDetails} />
-									<Button themeType="secondary" onClick={() => { setShow(name); }}> Edit </Button>
+									<Button
+										className={styles.StyledButton}
+										themeType="secondary"
+										onClick={() => { setShow(name); }}
+									>
+										<IcMEdit style={{ marginRight: '8px' }} />
+										Edit
+									</Button>
 									{show === name ? (
 										<Modal
 											size="xl"

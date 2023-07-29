@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 import useUpdateEmployeeDetails from '../../../hooks/useUpdateEmployeeDetailsAdmin';
+import AddressDetails from '../AddressDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -96,7 +97,7 @@ const RenderComponents = ({ controlsvalue, control, errors }) => SECTION_MAPPING
 ));
 
 function PersonalDetails({ data: content, getEmployeeDetails }) {
-	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
+	const { handleSubmit, control, formState: { errors }, setValue, watch, getValues } = useForm();
 
 	const controlsvalue = controls({ content });
 
@@ -106,7 +107,32 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails, SOURCE, status });
 
 	const onSubmit = (values) => {
-		updateEmployeeDetails({ data: values, formType: PERSONAL_INFO });
+		const {
+			permanent_city, permanent_state,
+			permanent_country, permanent_pincode, permanent_address, current_address,
+			current_city, current_state, current_country, current_pincode, ...rest
+		} = values || {};
+
+		const permanent_final_address = {
+			city    : permanent_city,
+			state   : permanent_state,
+			country : permanent_country,
+			pincode : permanent_pincode,
+			address : permanent_address,
+		};
+		const current_final_address = {
+			city    : current_city,
+			state   : current_state,
+			country : current_country,
+			pincode : current_pincode,
+			address : current_address,
+		};
+		const final_params = {
+			...rest,
+			permanent_address : permanent_final_address,
+			present_address   : current_final_address,
+		};
+		updateEmployeeDetails({ data: final_params, formType: PERSONAL_INFO });
 	};
 
 	useEffect(() => {
@@ -157,10 +183,19 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.introductory_text}>
-				<div>Please update your details here !</div>
+				<div> Edit Employee details here !</div>
 			</div>
 			<div className={styles.container}>
 				<RenderComponents controlsvalue={controlsvalue} control={control} errors={errors} />
+				<AddressDetails
+					data={content}
+					getEmployeeDetails={getEmployeeDetails}
+					control={control}
+					errors={errors}
+					setValue={setValue}
+					watch={watch}
+					getValues={getValues}
+				/>
 			</div>
 			<div className={styles.button}>
 				<Button

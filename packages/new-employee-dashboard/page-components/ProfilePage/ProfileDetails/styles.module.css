@@ -28,3 +28,9 @@
 .styled_radio_group_container {
 	margin-left: 10px;
 }
+
+.StyledButton {
+	height: 30px !important;
+	padding: 10px !important;
+	margin-left: 10px;
+}

@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
-// import useCreateEmployeeDocument from '../../../../hooks/useCreateEmployeeDocument';
+import useCreateEmployeeDocument from '../../../hooks/useCreateEmployeeDocument';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -45,17 +45,15 @@ const MAPPING = {
 	active   : 'Waiting for Approval',
 };
 
-function EditIdentificationDocuments({ profileData: info, getEmployeeDetails }) {
+function EditIdentificationDocuments({ data: info, getEmployeeDetails }) {
 	const { documents = [] } = info || {};
 
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
-	// const { loading, createEmployeeDocument } = useCreateEmployeeDocument({ documents, getEmployeeDetails });
+	const { loading, createEmployeeDocument } = useCreateEmployeeDocument({ documents, getEmployeeDetails });
 
-	// const id = info?.detail?.id;
-
+	const id = info?.detail?.id;
 	const component = getDocType({ documents });
-	console.log(getEmployeeDetails);
 
 	const { aadhaar_card, pan_card, driving_license, passport } = component || {};
 
@@ -100,10 +98,9 @@ function EditIdentificationDocuments({ profileData: info, getEmployeeDetails }) 
 			};
 		});
 
-		// const newDoc = doc.filter((i) => i !== null);
+		const newDoc = doc.filter((i) => i !== null);
 
-		// createEmployeeDocument({ data: values, id, newDoc });
-		console.log(doc);
+		createEmployeeDocument({ data: values, id, newDoc });
 	};
 
 	return (
@@ -161,7 +158,7 @@ function EditIdentificationDocuments({ profileData: info, getEmployeeDetails }) 
 						size="md"
 						type="button"
 						onClick={handleSubmit(onSubmit)}
-						// loading={loading}
+						loading={loading}
 					>
 						Save
 					</Button>

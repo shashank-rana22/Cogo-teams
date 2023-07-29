@@ -1,10 +1,11 @@
 import { Accordion, Pill, Button, Modal } from '@cogoport/components';
+import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EditIdentificationDocuments from './EditIdentificationDocuments';
+import PersonalDetails from './EditPersonalInformation';
 import IdentificationDocuments from './IdentificationDocuments';
-import PersonalDetails from './PersonalDetails';
 import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
 
@@ -23,7 +24,7 @@ function RenderPills({ name = '', isCompleted = false, isDocsApproved }) {
 }
 
 function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeDetailsLoading }) {
-	const [show, setShow] = useState(false);
+	const [show, setShow] = useState('');
 
 	const { progress_stats = {}, documents } = profileData || {};
 	const {
@@ -76,12 +77,19 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 										name={name}
 										isCompleted={isCompleted}
 									/>
-									<Button themeType="secondary" onClick={() => { setShow(name); }}> Edit </Button>
+									<Button
+										className={styles.StyledButton}
+										themeType="secondary"
+										onClick={() => { setShow(name); }}
+									>
+										<IcMEdit style={{ marginRight: '8px' }} />
+										Edit
+									</Button>
 									{show === name ? (
 										<Modal
 											size="xl"
 											show={show}
-											onClose={() => setShow(false)}
+											onClose={() => setShow('')}
 											placement="top"
 											closeOnOuterClick
 										>
