@@ -1,13 +1,21 @@
 .title {
-	height: 24px;
-
-	:global {
-		.ui_tabs_list_title {
-			padding: 8px 0;
-		}
-	}
+	height: 20px;
+	text-align: center;
 }
 
 .container {
-	width: 80px;
+	:global {
+		.ui_tab_container {
+			padding: 12px 27px 4px;
+		}
+	}
+
+	@media (max-width: 1260px) {
+		:global {
+			.ui_tab_container {
+				width: 142px;
+				padding: 12px 27px;
+			}
+		}
+	}
 }

@@ -1,4 +1,5 @@
-import { IcMFfcl, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
+import { IcMFfcl } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
 import LastMileDeskContext from '../../../../../context/LastMileDeskContext';
@@ -59,8 +60,7 @@ function Body({ item = {}, open, setOpen, handleCardClick = () => {} }) {
 				</div>
 
 				<div className={styles.details}>
-					<div className={styles.text}>Details</div>
-					{open ? <IcMArrowUp onClick={handleClick} /> : <IcMArrowDown onClick={handleClick} />}
+					<Button themeType="secondary" onClick={handleClick}>{open ? 'View Less' : 'View More'}</Button>
 				</div>
 			</div>
 
