@@ -345,9 +345,9 @@ function ExpenseComponent() {
 									date       : dueDate,
 									formatType : 'date',
 									dateFormat:
-											GLOBAL_CONSTANTS.formats.date[
-												'dd MMM yyyy'
-											],
+										GLOBAL_CONSTANTS.formats.date[
+											'dd MMM yyyy'
+										],
 								})}
 							</div>
 							<div>
@@ -357,9 +357,9 @@ function ExpenseComponent() {
 									date       : billDate,
 									formatType : 'date',
 									dateFormat:
-											GLOBAL_CONSTANTS.formats.date[
-												'dd MMM yyyy'
-											],
+										GLOBAL_CONSTANTS.formats.date[
+											'dd MMM yyyy'
+										],
 								})}
 							</div>
 							<div>
@@ -369,9 +369,9 @@ function ExpenseComponent() {
 									date       : createdDate,
 									formatType : 'date',
 									dateFormat:
-											GLOBAL_CONSTANTS.formats.date[
-												'dd MMM yyyy'
-											],
+										GLOBAL_CONSTANTS.formats.date[
+											'dd MMM yyyy'
+										],
 								})}
 							</div>
 						</div>
@@ -391,11 +391,10 @@ function ExpenseComponent() {
 									date       : updatedAt,
 									formatType : 'date',
 									dateFormat:
-											GLOBAL_CONSTANTS.formats.date[
-												'dd MMM yyyy'
-											],
+										GLOBAL_CONSTANTS.formats.date[
+											'dd MMM yyyy'
+										],
 								})}
-
 							</div>
 						</div>
 					) : (
@@ -480,7 +479,14 @@ function ExpenseComponent() {
 			return (
 				<div>
 					{createdAt
-						? formatDate(createdAt, 'dd MMM yyyy', {}, false)
+						? formatDate({
+							date       : createdAt,
+							formatType : 'date',
+							dateFormat:
+									GLOBAL_CONSTANTS.formats.date[
+										'dd MMM yyyy'
+									],
+						})
 						: '-'}
 				</div>
 			);

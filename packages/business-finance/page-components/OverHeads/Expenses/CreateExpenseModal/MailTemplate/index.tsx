@@ -15,6 +15,7 @@ interface Data {
 	expenseCategory?: string;
 	stakeholderEmail?: string;
 	categoryName?: string;
+	kycStatus?: string;
 }
 
 interface Props {

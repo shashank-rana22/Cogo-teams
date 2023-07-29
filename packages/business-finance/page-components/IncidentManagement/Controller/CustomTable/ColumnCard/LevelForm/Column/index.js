@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const HUNDRED_PERCENT = 100;
+const HUNDRED_PERCENT = 1000;
 const DEFAULT_SPAN = 1;
 const TOTAL_SPAN = 12;
 const DEFAULT_VAL = 1;
