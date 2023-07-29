@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 const formatObjectiveDataForCard = ({ objectiveData }) => {
 	const {
 		stats_details: statsDetails,
@@ -23,7 +25,13 @@ const formatObjectiveDataForCard = ({ objectiveData }) => {
 			shipment_count,
 		},
 		organization_details: {
-			country, state, city, pincode, segments,
+			country,
+			state,
+			city,
+			segments,
+			pincode: !isEmpty(pincode)
+				? pincode.map((item) => ({ id: item?.id, name: item?.postal_code }))
+				: undefined,
 		},
 		service_requirements: setviceDetails,
 	};

@@ -36,15 +36,21 @@ const getFormValuesFromData = ({ data }) => {
 			service_requirement_operator,
 			stats_details: {
 				date_range: {
-					startDate : start_date,
-					endDate   : end_date,
+					startDate : new Date(start_date),
+					endDate   : new Date(end_date),
 				},
 				quotation_count,
 				search_count,
 				shipment_count,
 			},
 			organization_details: {
-				country, state, city, pincode, segments,
+				country,
+				state,
+				city,
+				segments,
+				pincode: !isEmpty(pincode)
+					? pincode.map((item) => ({ id: item?.id, name: item?.postal_code }))
+					: undefined,
 			},
 			service_requirements: setviceDetails,
 		},
