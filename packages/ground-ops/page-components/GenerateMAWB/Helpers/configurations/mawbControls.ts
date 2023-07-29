@@ -1,12 +1,13 @@
 import currencies from '../currencies';
 
 const UNITS = {
-	per_shipment   : 'Per Shipment',
 	per_kg         : 'Per Kg',
+	per_kg_gross   : 'Per Kg Gross',
+	per_shipment   : 'Per Shipment',
 	per_awb        : 'Per Awb',
-	per_kg_per_day : 'Per Kg Per Day',
 	per_document   : 'Per Document',
 	per_package    : 'Per Package',
+	per_kg_per_day : 'Per Kg Per Day',
 };
 
 const convertObjectMappingToArray = (obj) => Object.keys(obj).map((item) => ({

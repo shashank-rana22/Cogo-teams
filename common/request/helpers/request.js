@@ -75,10 +75,7 @@ request.interceptors.request.use((oldConfig) => {
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope           : 'partner',
-			authorization                : `Bearer: ${token}`,
-			authorizationparameters,
-			'ngrok-skip-browser-warning' : '*',
+			authorizationscope: 'partner', authorization: `Bearer: ${token}`, authorizationparameters,
 		},
 	};
 });

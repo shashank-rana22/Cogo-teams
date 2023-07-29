@@ -178,7 +178,7 @@ function FormContainer({
 
 	useEffect(() => {
 		const { line_items: lineItems } = data?.surcharge || {};
-		if (lineItems) {
+		if (lineItems && !edit) {
 			const carrierChargesData = (lineItems || []).map((lineItem) => (
 				{
 					code       : lineItem?.code,
