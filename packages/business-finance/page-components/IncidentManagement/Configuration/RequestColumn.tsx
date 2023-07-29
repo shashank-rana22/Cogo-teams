@@ -181,8 +181,7 @@ export const requestColumn = ({
 						date: createdAt,
 						dateFormat:
 							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-						formatType : 'date',
+						formatType: 'date',
 					})}
 					<div>
 						{formatDate({

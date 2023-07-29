@@ -3,10 +3,10 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const usePostExpense = ({
-	refetch,
+	refetch = () => {},
 	setShowModal,
-	id,
-	remark,
+	id = null,
+	remark = '',
 }) => {
 	const { user_id: userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,

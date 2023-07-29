@@ -25,7 +25,7 @@ export const DURATION_MAPPING = {
 
 const FIRST_INDEX = 1;
 
-function RenderSummary({ summary }) {
+function RenderSummary({ summary = [] }) {
 	return (
 		<div style={{ display: 'flex' }}>
 			{summary?.map((item) => (
@@ -166,7 +166,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 			title : 'Uploaded Documents',
 			value : (
 				<div className={styles.document_flex}>
-					{proofDocuments?.map((url, index) => (url !== '' ? (
+					{(proofDocuments || []).map((url, index) => (url !== '' ? (
 						<a
 							href={url}
 							target="_blank"

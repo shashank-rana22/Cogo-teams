@@ -1,10 +1,12 @@
 /* eslint-disable max-len */
 import { Button, Placeholder, Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
-import { formatDate } from '../../../commons/utils/formatDate';
 import useListExpense from '../hooks/useListExpense';
 import useSendEmail from '../hooks/useSendEmail';
 
@@ -69,61 +71,26 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 			>
 				{listLoading ? (
 					<div>
-						<div style={{ display: 'flex' }}>
-							<Placeholder
-								height="50px"
-								width="32%"
-								margin="8px"
-							/>
-							<Placeholder
-								height="50px"
-								width="32%"
-								margin="8px"
-							/>
-							<Placeholder
-								height="50px"
-								width="32%"
-								margin="8px"
-							/>
-						</div>
-						<div style={{ display: 'flex' }}>
-							<Placeholder
-								height="50px"
-								width="32%"
-								margin="8px"
-							/>
-							<Placeholder
-								height="50px"
-								width="32%"
-								margin="8px"
-							/>
-							<Placeholder
-								height="50px"
-								width="32%"
-								margin="8px"
-							/>
-						</div>
-						<div style={{ display: 'flex' }}>
-							<Placeholder
-								height="50px"
-								width="32%"
-								margin="8px"
-							/>
-							<Placeholder
-								height="50px"
-								width="32%"
-								margin="8px"
-							/>
-							<Placeholder
-								height="50px"
-								width="32%"
-								margin="8px"
-							/>
-						</div>
+						{Array(3)
+							.fill(null)
+							.map((valu) => (
+								<div style={{ display: 'flex' }} key={valu}>
+									{Array(3)
+										.fill(null)
+										.map((val) => (
+											<Placeholder
+												key={val}
+												height="50px"
+												width="32%"
+												margin="8px"
+											/>
+										))}
+								</div>
+							))}
 					</div>
 				) : (
 					<div className={styles.list_container}>
-						{billList?.length > 0 ? (
+						{!isEmpty(billList) ? (
 							<div>
 								{billList?.map((bill) => {
 									const {
@@ -209,36 +176,43 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 											<div className={styles.section}>
 												<div>Due Date</div>
 												<div className={styles.element}>
-													{formatDate(
-														dueDate,
-														'dd MMM yyyy',
-														{},
-														false,
-													) || '-'}
+													{formatDate({
+														date       : dueDate,
+														formatType : 'date',
+														dateFormat:
+															GLOBAL_CONSTANTS
+																.formats.date[
+																	'dd MMM yyyy'
+																],
+													})}
 												</div>
 											</div>
 											<div className={styles.section}>
 												<div>Invoice Date</div>
 												<div className={styles.element}>
-													{' '}
-													{formatDate(
-														billDate,
-														'dd MMM yyyy',
-														{},
-														false,
-													) || '-'}
+													{formatDate({
+														date       : billDate,
+														formatType : 'date',
+														dateFormat:
+															GLOBAL_CONSTANTS
+																.formats.date[
+																	'dd MMM yyyy'
+																],
+													})}
 												</div>
 											</div>
 											<div className={styles.section}>
 												<div>Upload Date</div>
 												<div className={styles.element}>
-													{' '}
-													{formatDate(
-														createdDate,
-														'dd MMM yyyy',
-														{},
-														false,
-													) || '-'}
+													{formatDate({
+														date       : createdDate,
+														formatType : 'date',
+														dateFormat:
+															GLOBAL_CONSTANTS
+																.formats.date[
+																	'dd MMM yyyy'
+																],
+													})}
 												</div>
 											</div>
 											<div className={styles.section}>
@@ -261,10 +235,17 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 																</div>
 																<div>
 																	{formatDate(
-																		updatedAt,
-																		'dd MMM yyyy',
-																		{},
-																		false,
+																		{
+																			date: updatedAt,
+																			formatType:
+																				'date',
+																			dateFormat:
+																				GLOBAL_CONSTANTS
+																					.formats
+																					.date[
+																						'dd MMM yyyy'
+																					],
+																		},
 																	)}
 																</div>
 															</div>

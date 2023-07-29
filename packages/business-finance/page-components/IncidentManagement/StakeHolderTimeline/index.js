@@ -9,7 +9,7 @@ function StakeHolderTimeline({ timeline = [] }) {
 	const stakeHolders = timeline?.filter((item) => !isEmpty(item));
 	return (
 		<div className={styles.container}>
-			{stakeHolders.map((item, index) => (
+			{(stakeHolders || []).map((item, index) => (
 				<div className={styles.section} key={item.key}>
 					<div className={styles.inner_div}>
 						<div className={styles.circle}>{index + FIRST}</div>

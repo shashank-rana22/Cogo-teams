@@ -2,6 +2,7 @@ import { startCase } from '@cogoport/utils';
 
 import officeLocations from '../../../../../../../../../utils/office-locations.json';
 import workScopes from '../../../../../../../../../utils/work-scopes.json';
+import { EXCLUDE_CATEGORIES } from '../../../../../../../constants';
 
 const controls = [
 	{
@@ -48,15 +49,17 @@ const controls = [
 		showIn      : ['editPOC'],
 	},
 	{
-		name        : 'category',
-		label       : 'Category',
-		type        : 'asyncSelect',
-		placeholder : 'Select Category',
-		asyncKey    : 'list_expense_category',
-		renderLabel : (item) => startCase(item.categoryName),
-		valueKey    : 'categoryName',
-		style       : { flexBasis: '42%' },
-		rules       : { required: 'Category is required' },
+		name               : 'category',
+		label              : 'Category',
+		type               : 'asyncSelect',
+		placeholder        : 'Select Category',
+		asyncKey           : 'list_expense_category',
+		renderLabel        : (item) => startCase(item.categoryName),
+		// eslint-disable-next-line max-len
+		getModifiedOptions : ({ options }) => (options?.filter(({ categoryName = '' }) => (!EXCLUDE_CATEGORIES.includes(categoryName)))),
+		valueKey           : 'categoryName',
+		style              : { flexBasis: '42%' },
+		rules              : { required: 'Category is required' },
 
 	},
 	{
