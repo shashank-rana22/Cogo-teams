@@ -1,12 +1,11 @@
-import { Tabs, TabPanel, Button } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMRefresh } from '@cogoport/icons-react';
-import { ThreeDotLoader, Tracking } from '@cogoport/ocean-modules';
+import { Tracking } from '@cogoport/ocean-modules';
+import ShipmentBeforeLoad from '@cogoport/ocean-modules/components/ShipmentBeforeLoad';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
-import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
@@ -24,12 +23,9 @@ import config from '../../../stakeholderConfig';
 import styles from './styles.module.css';
 
 const SERVICES_ADDITIONAL_MTDS = ['stakeholder', 'service_objects'];
-const UNAUTHORIZED_STATUS_CODE = 403;
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
-	const router = useRouter();
-
 	const [activeTab, setActiveTab] = useState('overview');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
@@ -54,111 +50,70 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
-	useEffect(() => {
-		router.prefetch(router.asPath);
-	}, [router]);
-
-	if (isGettingShipment || getShipmentStatusCode === undefined) {
-		return (
-			<div className={styles.loading_wrapper}>
-				<ThreeDotLoader message="Loading Shipment Data" fontSize={18} size={45} />
-			</div>
-		);
-	}
-
-	if (!shipment_data && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
-		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.section}>
-					<h2 className={styles.error}>Something Went Wrong!</h2>
-
-					<div className={styles.page}>We are looking into it.</div>
-
-					<Button
-						onClick={() => router.reload()}
-						className={styles.refresh}
-					>
-						<IcMRefresh />
-						{' '}
-						Refresh
-					</Button>
-				</div>
-			</div>
-		);
-	}
-
-	if (getShipmentStatusCode === UNAUTHORIZED_STATUS_CODE && getShipmentStatusCode !== undefined) {
-		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.permission_message}>
-					You don&apos;t have permission to visit this page.
-					<br />
-					Please contact at
-					{' '}
-					<a href="tel:+91 7208083747">+91 7208083747</a>
-				</div>
-			</div>
-		);
-	}
-
 	return (
-		<ShipmentDetailContext.Provider value={contextValues}>
-			<div>
-				<div className={styles.top_header}>
-					<ShipmentInfo />
+		<ShipmentBeforeLoad
+			isGettingShipment={isGettingShipment}
+			getShipmentStatusCode={getShipmentStatusCode}
+			shipment_data={shipment_data}
+		>
+			<ShipmentDetailContext.Provider value={contextValues}>
+				<div>
+					<div className={styles.top_header}>
+						<ShipmentInfo />
 
-					<RolloveDetails />
+						<RolloveDetails />
 
-					<ShipmentChat />
+						<ShipmentChat />
+					</div>
+
+					<div className={styles.header}>
+						<ShipmentHeader />
+
+						<PocSop />
+					</div>
+
+					<Timeline />
+
+					<div className={styles.container}>
+						<Tabs
+							activeTab={activeTab}
+							fullWidth
+							themeType="secondary"
+							onChange={setActiveTab}
+						>
+							<TabPanel name="overview" title="Overview">
+								<Overview shipmentData={shipment_data} />
+							</TabPanel>
+
+							<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
+								<Tasks />
+							</TabPanel>
+
+							<TabPanel name="documents" title="Documents">
+								<Documents />
+							</TabPanel>
+
+							<TabPanel name="emails" title="Emails">
+								<ShipmentMails
+									source="cogo_rpa"
+									filters={{ q: shipment_data?.serial_id }}
+									pre_subject_text={shipment_data?.serial_id}
+								/>
+							</TabPanel>
+
+							<TabPanel name="tracking" title="Tracking">
+								<Tracking shipmentData={shipment_data} />
+							</TabPanel>
+
+						</Tabs>
+					</div>
+
+					{!isEmpty(rollover_containers) ? (
+						<RolloverRequestedModal rollover_containers={rollover_containers} />
+					) : null}
 				</div>
-
-				<div className={styles.header}>
-					<ShipmentHeader />
-
-					<PocSop />
-				</div>
-
-				<Timeline />
-
-				<div className={styles.container}>
-					<Tabs
-						activeTab={activeTab}
-						fullWidth
-						themeType="secondary"
-						onChange={setActiveTab}
-					>
-						<TabPanel name="overview" title="Overview">
-							<Overview shipmentData={shipment_data} />
-						</TabPanel>
-
-						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-							<Tasks />
-						</TabPanel>
-
-						<TabPanel name="documents" title="Documents">
-							<Documents />
-						</TabPanel>
-
-						<TabPanel name="emails" title="Emails">
-							<ShipmentMails
-								source="cogo_rpa"
-								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={shipment_data?.serial_id}
-							/>
-						</TabPanel>
-
-						<TabPanel name="tracking" title="Tracking">
-							<Tracking shipmentData={shipment_data} />
-						</TabPanel>
-
-					</Tabs>
-				</div>
-
-				{!isEmpty(rollover_containers) ? (
-					<RolloverRequestedModal rollover_containers={rollover_containers} />
-				) : null}
-			</div>
-		</ShipmentDetailContext.Provider>
+			</ShipmentDetailContext.Provider>
+		</ShipmentBeforeLoad>
 	);
 }
 
