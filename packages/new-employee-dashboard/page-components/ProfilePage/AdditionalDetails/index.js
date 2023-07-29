@@ -99,12 +99,14 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 											closeOnOuterClick
 										>
 											<Modal.Header title={name} />
-											<Modal.Body>
-												<ModalComponent
-													data={profileData}
-													getEmployeeDetails={getEmployeeDetails}
-												/>
-											</Modal.Body>
+											<div className={styles.styled_body}>
+												<Modal.Body>
+													<ModalComponent
+														data={profileData}
+														getEmployeeDetails={getEmployeeDetails}
+													/>
+												</Modal.Body>
+											</div>
 										</Modal>
 									) : null}
 								</div>

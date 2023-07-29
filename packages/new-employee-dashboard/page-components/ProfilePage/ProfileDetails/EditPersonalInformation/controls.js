@@ -125,7 +125,13 @@ const controls = () => [
 		label       : 'Personal Email Id*',
 		type        : 'email',
 		placeholder : 'Email',
-		rules       : { required: 'This is required' },
+		rules       :	{
+			required : 'This is required',
+			pattern  : {
+				value   : GLOBAL_CONSTANTS.regex_patterns.email,
+				message : 'Email is invalid',
+			},
+		},
 	},
 	{
 		name        : 'emergency_contact_details',
@@ -143,10 +149,16 @@ const controls = () => [
 		rules   : { required: 'This is required' },
 	},
 	{
-		name        : 'cogoport_email',
-		label       : 'Cogoport Email',
-		type        : 'email',
-		placeholder : 'Cogoport Email Id',
+		name  : 'cogoport_email',
+		label : 'Cogoport Email',
+		type  : 'email',
+		rules :	{
+			pattern: {
+				value   : GLOBAL_CONSTANTS.regex_patterns.email,
+				message : 'Cogoport Email is invalid',
+			},
+		},
+		placeholder: 'Cogoport Email Id',
 	},
 	{
 		name        : 'hiring_manager',
