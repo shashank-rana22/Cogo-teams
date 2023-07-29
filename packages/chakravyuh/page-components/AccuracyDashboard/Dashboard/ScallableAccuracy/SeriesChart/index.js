@@ -1,5 +1,6 @@
 import * as am5 from '@amcharts/amcharts5';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
+import am5themes_Responsive from '@amcharts/amcharts5/themes/Responsive';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
@@ -13,7 +14,7 @@ function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
 		const root = am5.Root.new('chartdiv');
 
 		root.setThemes([
-			am5themes_Animated.new(root),
+			am5themes_Animated.new(root), am5themes_Responsive.new(root),
 		]);
 
 		const chart = root.container.children.push(

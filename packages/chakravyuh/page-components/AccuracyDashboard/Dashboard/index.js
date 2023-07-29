@@ -1,5 +1,6 @@
+import { cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import useGetFclFreightRateStats from '../../../hooks/useGetFclFreightRateStats';
 import SupplyRates from '../RatesList';
@@ -11,6 +12,7 @@ import styles from './styles.module.css';
 import Views from './Views';
 
 function DashboardView(props) {
+	const [isHighlighted, setIsHighlighted] = useState(false);
 	const { setView = () => {}, globalFilters = {} } = props;
 	const { mode } = globalFilters;
 
@@ -22,11 +24,17 @@ function DashboardView(props) {
 	return (
 		<>
 			<div className={styles.main_container}>
-				<div className={styles.graph_container}>
-					<ScallableAccuracy accuracy={accuracy} loading={loading} mode={mode} />
+				<div className={cl`${styles.graph_container} ${isHighlighted ? styles.highlight : ''}`}>
+					<ScallableAccuracy
+						accuracy={accuracy}
+						loading={loading}
+						mode={mode}
+						isHighlighted={isHighlighted}
+						setIsHighlighted={setIsHighlighted}
+					/>
 					<Deviation data={deviation} loading={loading} />
 				</div>
-				<div className={styles.side_container}>
+				<div className={cl`${styles.side_container} ${isHighlighted ? styles.minimise : ''}`}>
 					<Views setView={setView} data={rest} loading={loading} />
 					<Distribution {...props} />
 				</div>
