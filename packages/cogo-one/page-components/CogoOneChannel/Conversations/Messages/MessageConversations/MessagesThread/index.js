@@ -28,6 +28,7 @@ function MessagesThread({
 	setModalType = () => {},
 	activeTab = {},
 	setMailActions = () => {},
+	mailActions = {},
 }) {
 	const { channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
 	const unreadIndex = new_user_message_count > messagesData.length
@@ -77,6 +78,7 @@ function MessagesThread({
 						setRaiseTicketModal={setRaiseTicketModal}
 						formattedData={formattedData}
 						setMailActions={setMailActions}
+						mailActions={mailActions}
 					/>
 				);
 			})}

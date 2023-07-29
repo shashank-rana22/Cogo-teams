@@ -5,3 +5,38 @@
 .promotional_rate {
 	margin-top: 3px;
 }
+
+.icon_tools {
+	display: flex;
+	align-items: center;
+	height: fit-content;
+
+	:global {
+		.file_uploader {
+			height: fit-content !important;
+		}
+
+		.ui_upload_droparea_container {
+			min-height: 0 !important;
+			padding: unset !important;
+			margin-bottom: unset;
+			border: unset;
+		}
+
+		.ui_upload_droparea_heading {
+			display: none;
+		}
+
+		.ui_upload_droparea_subheading {
+			display: none;
+		}
+
+		.ui_upload_filesuccess_container {
+			display: none;
+		}
+	}
+}
+
+.upload_icon {
+	fill: #000;
+}

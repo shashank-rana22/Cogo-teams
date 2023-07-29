@@ -19,7 +19,6 @@ function MailRecipientType({
 	handleKeyPress = () => {},
 	handleCancel = () => {},
 	handleEdit = () => {},
-	isDisabled = false,
 }) {
 	const [newEmailInput, setNewEmailInput] = useState('');
 
@@ -42,7 +41,6 @@ function MailRecipientType({
 						email={data}
 						handleDelete={handleDelete}
 						type={type}
-						isDisabled={isDisabled}
 					/>
 				),
 			)}
@@ -97,15 +95,13 @@ function MailRecipientType({
 				</Popover>
 			)}
 
-			{!isDisabled && (
-				<div
-					className={styles.add_icon}
-					onClick={() => handleEdit({ type, setNewEmailInput })}
-					role="presentation"
-				>
-					+
-				</div>
-			)}
+			<div
+				className={styles.add_icon}
+				onClick={() => handleEdit({ type, setNewEmailInput })}
+				role="presentation"
+			>
+				+
+			</div>
 		</div>
 	);
 }

@@ -126,6 +126,8 @@ function Messages({
 	const activeCardId = activeTab?.data?.id;
 	const activeChannelType = activeTab?.data?.channel_type;
 
+	const { actionType = '' } = mailActions || {};
+
 	useEffect(() => {
 		mountActiveRoomSnapShot({
 			activeRoomSnapshotListener,
@@ -135,6 +137,8 @@ function Messages({
 			activeChannelType,
 			setActiveTab,
 		});
+
+		setMailActions({ actionType: '', data: {} });
 
 		return () => {
 			snapshotCleaner({ ref: activeRoomSnapshotListener });
@@ -171,7 +175,10 @@ function Messages({
 						hasNoFireBaseRoom={hasNoFireBaseRoom}
 					/>
 				</div>
-				<div className={styles.message_container}>
+				<div
+					className={styles.message_container}
+					style={{ height: (channel_type === 'email' && !actionType) ? '86%' : '66%' }}
+				>
 					<MessageConversations
 						formattedData={formattedData}
 						activeMessageCard={activeTab?.data}
@@ -190,25 +197,29 @@ function Messages({
 						ref={conversationsDivRef}
 						scrollToLastMessage={scrollToLastMessage}
 						setMailActions={setMailActions}
+						mailActions={mailActions}
 					/>
 				</div>
 				<div className={styles.footer}>
-					<Footer
-						canMessageOnBotSession={canMessageOnBotSession}
-						hasPermissionToEdit={hasPermissionToEdit}
-						suggestions={suggestions}
-						formattedData={formattedData}
-						viewType={viewType}
-						firestore={firestore}
-						activeChatCollection={activeChatCollection}
-						setOpenModal={setOpenModal}
-						sendCommunicationTemplate={sendCommunicationTemplate}
-						communicationLoading={communicationLoading}
-						assignChat={assignChat}
-						assignLoading={assignLoading}
-						scrollToBottom={scrollToLastMessage}
-						mailActions={mailActions}
-					/>
+					{(channel_type !== 'email' || actionType) && (
+						<Footer
+							canMessageOnBotSession={canMessageOnBotSession}
+							hasPermissionToEdit={hasPermissionToEdit}
+							suggestions={suggestions}
+							formattedData={formattedData}
+							viewType={viewType}
+							firestore={firestore}
+							activeChatCollection={activeChatCollection}
+							setOpenModal={setOpenModal}
+							sendCommunicationTemplate={sendCommunicationTemplate}
+							communicationLoading={communicationLoading}
+							assignChat={assignChat}
+							assignLoading={assignLoading}
+							scrollToBottom={scrollToLastMessage}
+							mailActions={mailActions}
+							setMailActions={setMailActions}
+						/>
+					)}
 				</div>
 			</div>
 

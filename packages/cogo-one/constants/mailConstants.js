@@ -1,3 +1,5 @@
+import { IcMReply, IcMForward } from '@cogoport/icons-react';
+
 export const MAIL_FOLDER_OPTIONS = {
 	inbox : 'Inbox',
 	draft : 'Drafts',
@@ -30,3 +32,8 @@ export const DEFAULT_EMAIL_STATE = {
 	ccrecipients  : [],
 	bccrecipients : [],
 };
+
+export const BUTTON_MAPPING = [
+	{ buttonName: 'Reply', icon: IcMReply, key: 'reply' },
+	{ buttonName: 'Forward', icon: IcMForward, key: 'forward' },
+];

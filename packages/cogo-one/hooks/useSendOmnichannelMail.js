@@ -3,18 +3,20 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 const ENDPOINT_MAPPING = {
-	forward : 'cogolens/forward_mail',
-	reply   : 'cogolens/reply_mail',
+	forward : '/cogolens/forward_mail',
+	reply   : '/cogolens/reply_mail',
 };
 const getCommunicationPayload = ({
 	userId,
 	formattedData,
 	draftMessage,
-	finalUrl,
+	uploadedFiles,
 	emailState,
 	mailActions,
+	name,
 }) => {
 	const { actionType = '', data = {} } = mailActions || {};
 
@@ -29,14 +31,14 @@ const getCommunicationPayload = ({
 	const { ccrecipients = [], bccrecipients = [], subject = '', toUserEmail = [] } = emailState || {};
 
 	const payload = {
-		sender      : 'sandeep@nalabolu@cogoport.com',
+		sender      : 'sandeep.nalabolu@cogoport.com',
 		toUserEmail,
 		ccrecipients,
 		bccrecipients,
 		subject,
 		content     : draftMessage,
 		msgId       : message_id,
-		attachments : [finalUrl],
+		attachments : !isEmpty(uploadedFiles) ? uploadedFiles : undefined,
 		userId,
 
 	};
@@ -49,13 +51,18 @@ const getCommunicationPayload = ({
 		message_metadata : {
 			endpoint            : ENDPOINT_MAPPING[actionType] || ENDPOINT_MAPPING.send_mail,
 			body                : payload,
-			send_to_omnichannel : false,
+			send_to_omnichannel : true,
 			conversation_id,
+			send_by             : name,
+			sender_user_id      : userId,
 		},
-		sender_user_id : userId,
-		service        : 'user',
-		service_id     : userId,
-		sender         : payload?.sender,
+		sender_user_id  : userId,
+		service         : 'user',
+		service_id      : userId,
+		sender          : payload?.sender,
+		cc_emails       : !isEmpty(ccrecipients) ? ccrecipients : undefined,
+		bcc_emails      : !isEmpty(bccrecipients) ? ccrecipients : undefined,
+		attachment_urls : !isEmpty(uploadedFiles) ? uploadedFiles : undefined,
 	};
 };
 
@@ -64,14 +71,12 @@ const useSendOmnichannelMail = ({
 	formattedData = {},
 	emailState = {},
 	draftMessage = '',
-	finalUrl = '',
-	setDraftMessages,
-	setDraftUploadedFiles,
-	id:roomId,
+	uploadedFiles = [],
 	mailActions = {},
+	resetEmailStates = () => {},
 }) => {
 	const {
-		user: { id },
+		user: { id, name = '' },
 	} = useSelector(({ profile }) => profile);
 
 	const [{ loading }, trigger] = useRequest(
@@ -82,34 +87,24 @@ const useSendOmnichannelMail = ({
 		{ manual: true, autoCancel: false },
 	);
 
-	const sendMail = async ({ type = '' }) => {
+	const sendMail = async () => {
 		try {
 			await trigger({
 				data: getCommunicationPayload({
 					userId: id,
-					type,
 					formattedData,
 					draftMessage,
-					finalUrl,
+					uploadedFiles,
 					emailState,
 					mailActions,
+					name,
 				}),
 			});
-			console.log('rahul', getCommunicationPayload({
-				userId: id,
-				type,
-				formattedData,
-				draftMessage,
-				finalUrl,
-				emailState,
-				mailActions,
-			}));
 
 			scrollToBottom();
-
-			setDraftUploadedFiles((prev) => ({ ...prev, [roomId]: undefined }));
-			setDraftMessages((prev) => ({ ...prev, [roomId]: undefined }));
+			resetEmailStates();
 		} catch (error) {
+			console.log('error', error);
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};

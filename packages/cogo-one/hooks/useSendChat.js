@@ -4,12 +4,8 @@ import { doc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import sendUserMessage from '../helpers/sendUserMessage';
-import getFileAttributes from '../utils/getFileAttributes';
 
 import useSendMessage from './useSendMessage';
-
-const DEFAULT_URL_ARRAY_LENGTH = 0;
-const LAST_ELEMENT_IN_A_ARRAY = 1;
 
 const useSendChat = ({
 	setDraftMessages,
@@ -17,12 +13,14 @@ const useSendChat = ({
 	draftMessages,
 	firestore,
 	channelType,
-	draftUploadedFiles,
+	uploadedFile = {},
 	setDraftUploadedFiles,
 	id,
 	formattedData,
 	canMessageOnBotSession,
 	assignChat,
+	scrollToBottom,
+	hasUploadedFiles,
 }) => {
 	const { user_name } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,
@@ -45,27 +43,21 @@ const useSendChat = ({
 		);
 	}
 
-	const sendChatMessage = async (scrollToBottom) => {
+	const sendChatMessage = async () => {
 		const newMessage = draftMessages?.[id]?.trim() || '';
 
-		const urlArray = decodeURI(draftUploadedFiles?.[id])?.split('/');
-
-		const fileName = urlArray[(urlArray?.length || DEFAULT_URL_ARRAY_LENGTH) - LAST_ELEMENT_IN_A_ARRAY] || '';
-
-		const { finalUrl = '', fileType = '' } = getFileAttributes({
-			finalUrl: draftUploadedFiles?.[id], fileName,
-		});
+		const { fileName, fileUrl, type } = uploadedFile;
 
 		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
 		setDraftUploadedFiles((prev) => ({ ...prev, [id]: undefined }));
 
-		if (isEmpty(newMessage?.trim()) && !finalUrl) {
+		if (isEmpty(newMessage?.trim()) && !hasUploadedFiles) {
 			return;
 		}
 
 		await sendUserMessage({
-			fileType,
-			finalUrl,
+			fileType : type,
+			finalUrl : fileUrl,
 			fileName,
 			formattedData,
 			channelType,
@@ -77,7 +69,7 @@ const useSendChat = ({
 		});
 	};
 
-	const sendQuickSuggestions = async ({ scrollToBottom, val }) => {
+	const sendQuickSuggestions = async ({ val }) => {
 		await sendUserMessage({
 			formattedData,
 			channelType,

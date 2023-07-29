@@ -8,7 +8,6 @@ function EmailCustomTag({
 	email = '',
 	handleDelete = () => {},
 	type = '',
-	isDisabled = false,
 }) {
 	const {
 		bgColor = '#FEF199',
@@ -19,20 +18,18 @@ function EmailCustomTag({
 		<div className={styles.email_tag_container}>
 			<div
 				className={styles.input_container}
-				style={{ background: bgColor, borderRadius: isDisabled ? '4px' : '6px 0 0 6px' }}
+				style={{ background: bgColor }}
 			>
 				{email}
 			</div>
-			{!isDisabled && (
-				<div
-					className={styles.cross_icon}
-					style={{ background: subDivBgColor }}
-				>
-					<IcMCross
-						onClick={() => handleDelete({ val: email, emailType: type })}
-					/>
-				</div>
-			)}
+			<div
+				className={styles.cross_icon}
+				style={{ background: subDivBgColor }}
+			>
+				<IcMCross
+					onClick={() => handleDelete({ val: email, emailType: type })}
+				/>
+			</div>
 		</div>
 	);
 }

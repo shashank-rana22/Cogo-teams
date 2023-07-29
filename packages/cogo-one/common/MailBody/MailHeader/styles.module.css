@@ -1,0 +1,67 @@
+.header_flex {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+.avatar {
+	width: 36px !important;
+	height: 36px !important;
+	margin-right: 4px;
+	border-radius: 50% !important;
+
+	:global {
+		.ui_avatar_text {
+			color: #d6b300;
+			background-color: #fef199;
+		}
+	}
+}
+
+.left_container {
+	display: flex;
+	width: fit-content;
+}
+
+.receipients {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.each_receipient {
+	margin: 0 4px;
+	font-size: 12px;
+	color: #424242;
+}
+
+.sender_name {
+	font-size: 14px;
+	color: #424242;
+}
+
+.label {
+	font-size: 12px;
+	color: #424242;
+}
+
+.time_stamp {
+	font-size: 12px;
+	color: #424242;
+}
+
+.icon_styles {
+	width: 16px;
+	height: 16px;
+	margin-left: 15px;
+	color: #424242;
+	cursor: pointer;
+}
+
+.icon_flex {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 4px;
+}

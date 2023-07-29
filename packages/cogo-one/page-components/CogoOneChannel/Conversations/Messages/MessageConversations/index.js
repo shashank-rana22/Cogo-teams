@@ -22,6 +22,7 @@ function MessageConversations({
 	newUserRoomLoading = false,
 	scrollToLastMessage = () => {},
 	setMailActions = () => {},
+	mailActions = {},
 }, ref) {
 	const { id = '', channel_type = '' } = activeMessageCard || {};
 
@@ -72,6 +73,7 @@ function MessageConversations({
 					setModalType={setModalType}
 					activeTab={activeTab}
 					setMailActions={setMailActions}
+					mailActions={mailActions}
 				/>
 			) }
 		</div>

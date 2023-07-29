@@ -1,0 +1,23 @@
+.files_container {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	margin-right: 5px;
+	font-size: 15px;
+	cursor: pointer;
+	border: 1px solid #4f4f4f;
+	border-radius: 4px;
+}
+
+.delete_icon {
+	width: 22px;
+	height: 22px;
+	cursor: pointer;
+	fill: #828282;
+}
+
+.file_name {
+	margin: 0 4px;
+	font-size: 15px;
+	color: #4f4f4f;
+}
