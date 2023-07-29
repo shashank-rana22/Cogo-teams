@@ -1199,9 +1199,19 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_lead_communication_log_info',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'get_organizations_communication_log_stats',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_lead_communication_log_stats',
+			access_type  : 'private',
+			service_name : 'lead',
 		},
 		{
 			api          : 'get_organizations_segmentation_stats',
