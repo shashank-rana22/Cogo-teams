@@ -12,7 +12,7 @@ const getButtonOptions = ({ partnerId, shipmentId }) => [
 		children : 'View Shipments',
 		onClick  : (e) => {
 			e.stopPropagation();
-			const redirectUrl = `${window.location.origin}/v2/${partnerId}/shipments/${shipmentId}`;
+			const redirectUrl = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
 			window.open(redirectUrl, '_blank');
 		},
 	},
@@ -20,7 +20,7 @@ const getButtonOptions = ({ partnerId, shipmentId }) => [
 		children : 'View Documents',
 		onClick  : (e) => {
 			e.stopPropagation();
-			const redirectUrl = `${window.location.origin}/v2/${partnerId}/shipments/${shipmentId}?tab=documents`;
+			const redirectUrl = `${window.location.origin}/${partnerId}/shipments/${shipmentId}?tab=documents`;
 			window.open(redirectUrl, '_blank');
 		},
 	},
