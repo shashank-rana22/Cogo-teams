@@ -1,0 +1,55 @@
+.column {
+	padding: 16px;
+	margin: 12px 4px;
+	box-shadow: 0 0 4px rgb(44 62 80 / 20%);
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.status {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.icon {
+	cursor: pointer;
+}
+
+.date {
+	flex: 0.7;
+	width: calc(0.7*(100 / 12));
+	margin-left: 12px;
+}
+
+.alloted {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.utilized {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.prcessing {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.settled {
+	flex: 0.9;
+	width: calc(0.9*(100 / 12));
+}
+
+.flush {
+	flex: 0.9;
+	width: calc(0.9*(100 / 12));
+}
+
+.accord {
+	flex: 0.2;
+	width: calc(0.2*(100 / 12));
+}

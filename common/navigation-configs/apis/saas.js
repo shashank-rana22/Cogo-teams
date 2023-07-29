@@ -101,7 +101,7 @@ const saas = {
 			service_name : 'saas_subscriptions_v2',
 		},
 		{
-			api          : 'get_shipping_line_for_container_no',
+			api          : 'get_shipping_line_for_search_value',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},

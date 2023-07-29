@@ -1,6 +1,7 @@
 .container {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
+	width: 65%;
 
 	@media (max-width: 768px) {
 		display: flex;
@@ -86,4 +87,8 @@
 	margin-right: 10px;
 	font-size: 12px;
 	color: #dca606;
+}
+
+.deadline_text {
+	margin: 0 4px;
 }

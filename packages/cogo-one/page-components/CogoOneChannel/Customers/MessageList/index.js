@@ -16,6 +16,8 @@ import Header from './Header';
 import MessageCardData from './MessageCardData';
 import styles from './styles.module.css';
 
+const BOT_MESSAGES_BULK_ACTIONS = ['bulk_auto_assign'];
+
 function MessageList(messageProps) {
 	const {
 		setActiveTab,
@@ -26,14 +28,20 @@ function MessageList(messageProps) {
 		viewType = '',
 		isBotSession,
 		setIsBotSession,
+		setModalType = () => {},
+		selectedAutoAssign = {},
+		setSelectedAutoAssign = () => {},
+		autoAssignChats,
+		setAutoAssignChats = () => {},
+		workPrefernceLoading,
+		setSendBulkTemplates = () => {},
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
-	const [autoAssignChats, setAutoAssignChats] = useState(true);
-	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [carouselState, setCarouselState] = useState('hide');
 	const [searchValue, setSearchValue] = useState('');
-	const [activeSubTab, setActiveSubTab] = useState('all');
+
+	const { subTab } = activeTab || {};
 
 	const {
 		chatsData,
@@ -49,9 +57,14 @@ function MessageList(messageProps) {
 		searchValue,
 		viewType,
 		setActiveTab,
-		activeSubTab,
+		activeSubTab: subTab,
 		setCarouselState,
+		workPrefernceLoading,
 	});
+
+	const setActiveSubTab = (val) => {
+		setActiveTab((prev) => ({ ...prev, subTab: val, data: {} }));
+	};
 
 	const {
 		bulkAssignChat = () => {},
@@ -86,11 +99,13 @@ function MessageList(messageProps) {
 	const handleAutoAssignBack = () => {
 		setAutoAssignChats(true);
 		setSelectedAutoAssign({});
+		setSendBulkTemplates(false);
 	};
 
 	useEffect(() => {
-		handleAutoAssignBack();
-	}, [isBotSession, appliedFilters]);
+		setAutoAssignChats(true);
+		setSelectedAutoAssign({});
+	}, [isBotSession, appliedFilters, setSelectedAutoAssign, setAutoAssignChats]);
 
 	return (
 		<>
@@ -106,7 +121,7 @@ function MessageList(messageProps) {
 			/>
 
 			<Header
-				activeSubTab={activeSubTab}
+				activeSubTab={subTab}
 				setActiveSubTab={setActiveSubTab}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
@@ -130,8 +145,9 @@ function MessageList(messageProps) {
 					</div>
 				) : (
 					<>
-						{isBotSession
-							&& VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.bulk_auto_assign
+						{!isEmpty(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.bulk_assign_features?.filter(
+							(itm) => (BOT_MESSAGES_BULK_ACTIONS.includes(itm) ? isBotSession : true),
+						))
 							&& (
 								<AutoAssignComponent
 									autoAssignChats={autoAssignChats}
@@ -140,6 +156,10 @@ function MessageList(messageProps) {
 									selectedAutoAssign={selectedAutoAssign}
 									bulkAssignLoading={bulkAssignLoading}
 									bulkAssignChat={bulkAssignChat}
+									setModalType={setModalType}
+									isBotSession={isBotSession}
+									viewType={viewType}
+									setSendBulkTemplates={setSendBulkTemplates}
 								/>
 							)}
 						<div

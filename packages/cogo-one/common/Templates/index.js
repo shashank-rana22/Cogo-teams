@@ -1,6 +1,5 @@
 import { Input, Button } from '@cogoport/components';
-import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
-import { IcMSearchlight, IcCSendWhatsapp } from '@cogoport/icons-react';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -9,8 +8,11 @@ import useListTemplate from '../../hooks/useListTemplates';
 import hideDetails from '../../utils/hideDetails';
 
 import CreateTemplateForm from './CreateTemplateForm';
+import { Header } from './headerHelpers';
 import styles from './styles.module.css';
 import { Preview, Loader, ListItem } from './templatesHelpers';
+
+const DEFAULT_OPTIONS = ['whatsapp_new_message_modal', 'bulk_communication'];
 
 function Templates({
 	openCreateReply = false,
@@ -20,9 +22,13 @@ function Templates({
 	dialNumber = '',
 	setDialNumber = () => {},
 	viewType = '',
+	userName = '',
 }) {
 	const [customizableData, setCustomizableData] = useState({});
-	const [activeCard, setActiveCard] = useState({ show: type === 'whatsapp_new_message_modal', data: {} });
+	const [activeCard, setActiveCard] = useState({
+		show : DEFAULT_OPTIONS.includes(type),
+		data : {},
+	});
 
 	const {
 		sendCommunicationTemplate = () => {},
@@ -35,8 +41,7 @@ function Templates({
 		(key) => (key in customizableData) && customizableData[key],
 	);
 
-	const isDefaultOpen = type === 'whatsapp_new_message_modal';
-	const maskMobileNumber = type === 'voice_call_component';
+	const isDefaultOpen = DEFAULT_OPTIONS.includes(type);
 
 	const maskedMobileNumber = `${dialNumber?.country_code}
 	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
@@ -61,11 +66,6 @@ function Templates({
 		});
 	};
 
-	const onCreateClick = () => {
-		setOpenCreateReply(true);
-		setActiveCard({ show: false, data: {} });
-	};
-
 	const handleTemplateSelect = (val) => {
 		if (val?.third_party_template_status !== 'approved' || openCreateReply) {
 			return;
@@ -79,39 +79,20 @@ function Templates({
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>
 				<div>
-					{isDefaultOpen && (
-						<>
-							<div className={styles.wrap_heading}>
-								<div>Enter mobile number</div>
-							</div>
-							<div className={styles.wrap_mobile_number}>
-								<SelectMobileNumber
-									value={dialNumber}
-									onChange={(val) => setDialNumber(val)}
-									inputType="number"
-									placeholder="Enter number"
-								/>
-							</div>
-							<div className={styles.template_heading}>
-								<div>Select a template</div>
-							</div>
-						</>
-					)}
-					{
-						maskMobileNumber && (
-							<div className={styles.flex_div}>
-								<div className={styles.mobile_number}>To</div>
-								<IcCSendWhatsapp className={styles.whatsapp_icon} />
-								<div className={styles.mobile_number}>{maskedMobileNumber}</div>
-							</div>
-						)
-					}
+					<Header
+						type={type}
+						dialNumber={dialNumber}
+						setDialNumber={setDialNumber}
+						maskedMobileNumber={maskedMobileNumber}
+						userName={userName}
+					/>
 					<div className={styles.container}>
 						<Input
 							value={qfilter}
 							onChange={(e) => setQfilter(e)}
 							placeholder="Search saved template here..."
 							prefix={<IcMSearchlight />}
+							className={styles.search_input}
 						/>
 						<div
 							className={styles.message_container}
@@ -140,16 +121,6 @@ function Templates({
 							)}
 						</div>
 					</div>
-				</div>
-				<div className={styles.footer}>
-					<Button
-						themeType="accent"
-						size="md"
-						disabled={openCreateReply}
-						onClick={onCreateClick}
-					>
-						+ Create Template
-					</Button>
 				</div>
 			</div>
 			{openCreateReply && !activeCard?.show && (

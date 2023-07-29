@@ -1,0 +1,16 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 8px;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+}
+
+.green_style {
+	color: var(--color-tertiary-success-green-1);
+}
+
+.red_style {
+	color: var(--color-primary-error-red-1);
+}

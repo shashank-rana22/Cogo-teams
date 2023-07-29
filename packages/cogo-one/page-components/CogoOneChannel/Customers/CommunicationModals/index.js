@@ -1,14 +1,15 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMPlus } from '@cogoport/icons-react';
+import { IcMPlus, IcMAppPoc, IcMAppAddAccount } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useReplyMail from '../../../../hooks/useReplyMail';
-import DialCallModal from '../../DialCallModal';
 import MailModal from '../MailList/MailModal';
 import NewWhatsappMessage from '../NewWhatsappMessage';
 
+import DialCallModal from './DialCallModal';
 import styles from './styles.module.css';
 
 function CommunicationModals({
@@ -17,6 +18,8 @@ function CommunicationModals({
 	modalType = {},
 	userId = '',
 	viewType = '',
+	setOpenKamContacts = () => {},
+	setSendBulkTemplates = () => {},
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
@@ -81,12 +84,37 @@ function CommunicationModals({
 									width={60}
 								/>
 							</div>
+							{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.global_contacts && (
+								<div className={cl`${styles.action} ${styles.contacts_icon}`}>
+									<IcMAppPoc
+										onClick={() => setOpenKamContacts(true)}
+										height={25}
+										width={25}
+										fill="#432609"
+									/>
+								</div>
+							)}
+
+							{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.sp_contacts ? (
+								<div className={cl`${styles.action} ${styles.sp_contacts}`}>
+									<IcMAppAddAccount
+										onClick={() => {
+											setSendBulkTemplates((prevVal) => !prevVal);
+											setIsChecked(false);
+										}}
+										height={25}
+										width={25}
+										fill="#432609"
+									/>
+								</div>
+							) : null}
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<NewWhatsappMessage
+				key={modalType?.type}
 				setModalType={setModalType}
 				modalType={modalType}
 				viewType={viewType}

@@ -100,7 +100,9 @@ function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
-	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
+	const servicesData = (servicesList || []).filter(
+		(item) => item?.service_type === service_type && item?.trade_type === trade_type,
+	);
 
 	const openModal = (modalKey) => {
 		setShowModal(modalKey);

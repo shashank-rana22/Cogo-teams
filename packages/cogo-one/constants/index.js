@@ -7,6 +7,7 @@ import {
 	IcMFftl,
 	IcMFltl, IcCTelegram, IcCZalo,
 } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 
 export const SOURCE_ICON_MAPPING = {
 	whatsapp  : <IcCWhatsapp width={25} height={25} />,
@@ -32,7 +33,42 @@ export const SOURCE_ICON_MAPPING = {
 		width="30px"
 		height="30px"
 	/>,
-
+	user: <Image
+		src={GLOBAL_CONSTANTS.image_url.login_failed}
+		alt="status-icon"
+		width={18}
+		height={18}
+	/>,
+	checkout: <Image
+		src={GLOBAL_CONSTANTS.image_url.checkout_failed}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
+	communication: <Image
+		src={GLOBAL_CONSTANTS.image_url.email_clicked}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
+	shipment: <Image
+		src={GLOBAL_CONSTANTS.image_url.abandon_shipmemts}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
+	spot_search: <Image
+		src={GLOBAL_CONSTANTS.image_url.checkout_failed}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
+	lead_user: <Image
+		src={GLOBAL_CONSTANTS.image_url.sign_up_failed}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
 };
 
 export const TAGS_COLORS = ['#FEF3E9', '#F3FAFA'];
@@ -110,11 +146,9 @@ export const PLATFORM_MAPPING = {
 	public_app     : 'App Platform',
 };
 
-// eslint-disable-next-line max-len
-export const URL_MATCH_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
-
-export const ENDS_WITH_STAR_SPACE = /\* /;
-export const ENDS_WITH_STAR_CHAR = /\*[^0-9a-zA-Z]/;
+export const URL_MATCH_REGEX = GLOBAL_CONSTANTS.regex_patterns.url_match_regex;
+export const ENDS_WITH_STAR_SPACE = GLOBAL_CONSTANTS.regex_patterns.ends_with_star_space;
+export const ENDS_WITH_STAR_CHAR = GLOBAL_CONSTANTS.regex_patterns.ends_with_star_char;
 
 export const DEFAULT_PILLS_ITEMS = [
 	{
@@ -279,7 +313,7 @@ export const ICON_MAPPING = {
 	missed   : GLOBAL_CONSTANTS.image_url.missed_call_red_svg,
 };
 
-export const STRING_TO_ARRAY_REGEX = /'/g;
+export const STRING_TO_ARRAY_REGEX = GLOBAL_CONSTANTS.regex_patterns.string_to_array;
 
 export const API_MAPPING = {
 	whatsapp      : '/create_communication',
@@ -294,3 +328,18 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
+
+export const OFFLINE_REASONS_OPTIONS = [
+	{
+		label : 'Lunch Break',
+		value : 'lunch_break',
+	},
+	{
+		label : 'Snack Break',
+		value : 'snack_break',
+	},
+	{
+		label : 'Others',
+		value : 'others',
+	},
+];

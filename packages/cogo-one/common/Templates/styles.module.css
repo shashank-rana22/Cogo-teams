@@ -3,7 +3,7 @@
 }
 
 .message_container {
-	height: 300px;
+	height: 350px;
 	padding-top: 20px;
 	overflow-y: scroll;
 }
@@ -231,4 +231,8 @@
 .user_value {
 	display: flex;
 	flex-direction: column;
+}
+
+.search_input {
+	margin-bottom: 14px;
 }

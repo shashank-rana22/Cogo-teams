@@ -1,0 +1,26 @@
+.label {
+	margin-bottom: 8px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.field {
+	padding-block: 10px;
+	border-bottom: 1px solid #e0e0e0;
+
+	&:last-child {
+		border-bottom: 0;
+	}
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
+.error {
+	margin-top: 4px;
+	font-size: 12px;
+	color: #f33;
+}

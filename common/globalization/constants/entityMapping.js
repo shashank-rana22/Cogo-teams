@@ -70,7 +70,8 @@ const ENTITY_MAPPING = {
 			'freight_sales_invoice_restricted_enitity',
 			'cancel_e_invoice',
 			'upload_invoice',
-			'is_revoked'],
+			'dunning',
+		],
 		labels: {
 			irn_label: 'E-invoice',
 		},
