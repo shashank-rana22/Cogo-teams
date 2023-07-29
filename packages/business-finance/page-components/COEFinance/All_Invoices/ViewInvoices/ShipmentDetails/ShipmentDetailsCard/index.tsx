@@ -44,6 +44,7 @@ const PERCENTAGE_FACTOR = 100;
 const MAX_DECIMAL_PLACES = 2;
 const DEFAULT_GRAND_TOTAL = 1;
 const MIN_AMOUNT = 0;
+const CHECK_REMARK_LENGTH = 1;
 
 function ShipmentDetailsCard({
 	data = {},
@@ -245,13 +246,13 @@ function ShipmentDetailsCard({
 			...prev,
 			collectionPartyRemark:
 			[...checkedValue.collectionPartyRemark, prev.collectionPartyRemark[
-				prev.collectionPartyRemark.length - 1]],
+				prev.collectionPartyRemark.length - CHECK_REMARK_LENGTH]],
 			billingPartyRemark:
 			[...checkedValue.billingPartyRemark, prev.billingPartyRemark[
-				prev.billingPartyRemark.length - 1]],
+				prev.billingPartyRemark.length - CHECK_REMARK_LENGTH]],
 			invoiceDetailsRemark:
 			[...checkedValue.invoiceDetailsRemark, prev.invoiceDetailsRemark[
-				prev.invoiceDetailsRemark.length - 1]],
+				prev.invoiceDetailsRemark.length - CHECK_REMARK_LENGTH]],
 		}));
 	}, [checkedValue, setRemarksVal]);
 
@@ -351,7 +352,7 @@ function ShipmentDetailsCard({
 														placeholder="Remarks Here ..."
 														style={{ width: '700', height: '100px' }}
 														value={remarksVal.collectionPartyRemark[remarksVal
-															.collectionPartyRemark.length - 1]}
+															.collectionPartyRemark.length - CHECK_REMARK_LENGTH]}
 														onChange={(value) => setRemarksVal({
 															...remarksVal,
 															collectionPartyRemark: [
@@ -380,7 +381,7 @@ function ShipmentDetailsCard({
 														size="md"
 														placeholder="Remarks Here ..."
 														value={remarksVal.billingPartyRemark[remarksVal
-															.billingPartyRemark.length - 1]}
+															.billingPartyRemark.length - CHECK_REMARK_LENGTH]}
 														onChange={(value) => setRemarksVal({
 															...remarksVal,
 															billingPartyRemark: [
@@ -415,7 +416,7 @@ function ShipmentDetailsCard({
 														size="md"
 														placeholder="Remarks Here ..."
 														value={remarksVal.invoiceDetailsRemark[remarksVal
-															.invoiceDetailsRemark.length - 1]}
+															.invoiceDetailsRemark.length - CHECK_REMARK_LENGTH]}
 														onChange={(value) => setRemarksVal({
 															...remarksVal,
 															invoiceDetailsRemark: [
@@ -499,7 +500,7 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 
 										<div className={styles.billing_party_container}>
-											{collectionPartyRejectionList.map((item) => (
+											{collectionPartyRejectionList?.map((item) => (
 												<div key={item.label} className={styles.margin_bottom}>
 													{item.label}
 												</div>
@@ -576,7 +577,7 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 
 										<div className={styles.billing_party_container}>
-											{billingPartyRejectionList.map((item) => (
+											{billingPartyRejectionList?.map((item) => (
 												<div key={item.label} className={styles.margin_bottom}>
 													{item.label}
 												</div>

@@ -26,6 +26,7 @@ interface Props {
 
 const MAX_LEN_FOR_INVOICE_TEXT = 11;
 const MAX_LEN_FOR_SID_TEXT = 10;
+const BILLNUMBER_LENGTH = 0;
 function FieldPair({
 	itemData = {
 		billType        : '',
@@ -54,7 +55,7 @@ function FieldPair({
 								content={billNumber}
 							>
 								<text onClick={() => window.open(billDocumentUrl, '_blank')}>
-									{`${billNumber.substring(0, MAX_LEN_FOR_INVOICE_TEXT)}...`}
+									{`${billNumber.substring(BILLNUMBER_LENGTH, MAX_LEN_FOR_INVOICE_TEXT)}...`}
 								</text>
 							</Tooltip>
 						) : (
