@@ -13,6 +13,7 @@ function Day1({ setInformationPage }) {
 		url    : '/list_company_documents',
 	}, { manual: true });
 
+	const day = data?.list?.[GLOBAL_CONSTANTS.zeroth_index]?.html_template;
 	const fetch = useCallback(
 		async () => {
 			try {
@@ -53,10 +54,7 @@ function Day1({ setInformationPage }) {
 			<div className={styles.rich_text}>
 				<div
 					className={styles.day1_text}
-					dangerouslySetInnerHTML={{
-						__html:
-						data?.list?.[GLOBAL_CONSTANTS.zeroth_index]?.html_template || 'Day 1!',
-					}}
+					dangerouslySetInnerHTML={{ __html: day || 'Day 1!' }}
 				/>
 
 			</div>
