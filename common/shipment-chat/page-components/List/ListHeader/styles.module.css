@@ -1,16 +1,13 @@
-.container {
+.tabs_container {
 	display: flex;
 	align-items: center;
-	width: 100%;
 	padding: 8px 0 0 20px;
-}
-
-.tabs_container {
 	margin-right: 20px;
 
 	:global {
 		.ui_tab_list_container {
 			padding: 4px;
+			margin: 8px 0;
 			background-color: #fff;
 			border-bottom: none;
 			border-radius: 6px;

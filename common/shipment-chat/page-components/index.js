@@ -1,4 +1,5 @@
 import { Modal } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
@@ -15,22 +16,22 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 
 	const { msgSeen } = useSeen();
 
-	const messageContentArr = [];
+	const MESSAGE_CONTENT_ARR = [];
 	Object.keys(msgSeen || {}).forEach((key) => {
 		const newObj = {
 			...msgSeen[key],
 			mainKey: key,
 		};
-		messageContentArr.push(newObj);
+		MESSAGE_CONTENT_ARR.push(newObj);
 	});
 
 	let totalCount = [];
-	messageContentArr?.map((count) => totalCount.push(count[user_id]));
+	MESSAGE_CONTENT_ARR?.map((count) => totalCount.push(count[user_id]));
 
 	totalCount = totalCount?.filter((item) => item !== undefined);
 
-	const inititalValue = 0;
-	const count = totalCount?.reduce((a, b) => a + b, inititalValue);
+	const INITIAL_VALUE = 0;
+	const count = totalCount?.reduce((a, b) => a + b, INITIAL_VALUE);
 
 	useEffect(() => {
 		setMessagesCount((pv) => ({ ...pv, shipment_chat: count }));
@@ -44,7 +45,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 				tabIndex={0}
 				onClick={() => setShow(true)}
 			>
-				{count > 0 && !show ? <div className={styles.circle}>{count}</div> : null}
+				{count > GLOBAL_CONSTANTS.zeroth_index && !show ? <div className={styles.circle}>{count}</div> : null}
 				<div className={styles.icon}>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipment-chat-icon.svg"
@@ -62,14 +63,12 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 					closable={!seenLoading}
 					className={styles.modal_styles}
 				>
-					<Modal.Body>
-						<List
-							setShow={setShow}
-							messageContentArr={messageContentArr}
-							user_id={user_id}
-							setSeenLoading={setSeenLoading}
-						/>
-					</Modal.Body>
+					<List
+						setShow={setShow}
+						messageContentArr={MESSAGE_CONTENT_ARR}
+						user_id={user_id}
+						setSeenLoading={setSeenLoading}
+					/>
 				</Modal>
 
 			) : null}

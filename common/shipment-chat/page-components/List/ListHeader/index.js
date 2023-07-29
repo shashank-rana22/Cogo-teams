@@ -14,15 +14,11 @@ function ListHeader({
 }) {
 	return (
 		<div>
-			<div className={styles.container}>
-
-				<div className={styles.tabs_container}>
-					<Tabs activeTab={status} onChange={setStatus}>
-						<TabPanel name="active" title="Active" />
-						<TabPanel name="inactive" title="Inactive" />
-					</Tabs>
-				</div>
-
+			<div className={styles.tabs_container}>
+				<Tabs activeTab={status} onChange={setStatus}>
+					<TabPanel name="active" title="Active" />
+					<TabPanel name="inactive" title="Inactive" />
+				</Tabs>
 			</div>
 
 			<div className={styles.search}>
