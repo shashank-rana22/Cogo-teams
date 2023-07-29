@@ -7,7 +7,7 @@ import useGetTicketStats from '../../../hooks/useGetTicketStats';
 import styles from './styles.module.css';
 
 function StatsSection({ spectatorType = '' }) {
-	const { statsData, loading } = useGetTicketStats({ spectatorType });
+	const { statsData, statsLoading } = useGetTicketStats({ spectatorType });
 
 	return (
 		<div className={styles.stats_section_container}>
@@ -22,7 +22,7 @@ function StatsSection({ spectatorType = '' }) {
 						count={statsData?.[formattedKey]}
 						icon={icon}
 						key={label}
-						statsLoading={loading}
+						statsLoading={statsLoading}
 					/>
 				);
 			})}
