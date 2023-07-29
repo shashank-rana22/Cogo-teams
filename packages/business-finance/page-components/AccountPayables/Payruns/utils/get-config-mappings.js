@@ -90,8 +90,10 @@ const useGetConfigMapping = ({
 		INITIATED: getCommonConfig(
 			PAYRUN_AUDITED_PAYMENT_READY,
 			VIEW_INVOICE_NORMAL_CONFIG,
+			viewInvoiceDataList,
+			viewInvoiceDataLoading,
+			getViewInvoice,
 			INITIATED_LIST_VIEW_CONFIG,
-
 		),
 		AUDITED: {
 			NORMAL: getCommonConfig(
