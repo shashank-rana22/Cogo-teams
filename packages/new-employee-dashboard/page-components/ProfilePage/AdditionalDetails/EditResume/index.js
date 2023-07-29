@@ -39,7 +39,7 @@ function Resume({ getEmployeeDetails, data: info }) {
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.introductory_text}>
-				Please upload your resume here !
+				Please update Employee resume here !
 			</div>
 
 			<div className={styles.container}>
