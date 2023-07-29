@@ -6,6 +6,7 @@ import { LOCATION_KEYS } from '../constants/map_constants';
 
 const START_PAGE = 1;
 const useGetFclMapStatistics = ({ locationFilters }) => {
+	const [sort, setSort] = useState({ sort_by: 'accuracy', sort_type: 'asc' });
 	const [page, setPage] = useState(START_PAGE);
 	const [activeList, setActiveList] = useState([]);
 
@@ -44,13 +45,13 @@ const useGetFclMapStatistics = ({ locationFilters }) => {
 
 	useEffect(() => {
 		setPage(START_PAGE);
-		getStats({ filters, page: 1 });
+		getStats({ filters, sort, page: 1 });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dependency, getStats]);
+	}, [dependency, sort, getStats]);
 
 	useEffect(() => {
 		if (page > START_PAGE) {
-			getStats({ filters, page });
+			getStats({ filters, sort, page });
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [page, getStats]);
@@ -61,7 +62,9 @@ const useGetFclMapStatistics = ({ locationFilters }) => {
 		}
 	}, [data, page]);
 
-	return { data, loading, page, setPage, activeList, setActiveList, accuracyMapping };
+	return {
+		data, loading, page, setPage, activeList, setActiveList, accuracyMapping, sort, setSort,
+	};
 };
 
 export default useGetFclMapStatistics;

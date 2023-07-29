@@ -18,7 +18,6 @@ export const COLORS = [
 ];
 
 export const SORT_OPTIONS = [
-	{ label: 'Deviation', value: 'deviation' },
 	{ label: 'Accuracy', value: 'accuracy' },
 	{ label: 'Count', value: 'count' },
 ];

@@ -1,11 +1,12 @@
 import { Select, cl, Loader } from '@cogoport/components';
 import { countriesHash } from '@cogoport/globalization/utils/getCountriesHash';
-import { IcMArrowLeft, IcMDescendingSort } from '@cogoport/icons-react';
+import { IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useCallback, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import Heading from '../../../../common/Heading';
+import SortButton from '../../../../common/SortButton';
 import { SORT_OPTIONS } from '../../../../constants/map_constants';
 
 import GeoCoder from './GeoCoder';
@@ -37,8 +38,10 @@ function SidePanel({
 	setPage = () => {},
 	accuracyLoading = false,
 	setActiveList = () => {},
-
+	setSort = () => {},
+	sort = 'accuracy',
 }) {
+	const { sort_by, sort_type } = sort;
 	const originName = locationFilters.origin?.name || countriesHash?.[locationFilters?.origin?.id]?.name;
 	const destinationType = locationFilters?.destination?.type || '';
 	const destination = destinationType.includes('port')
@@ -86,12 +89,17 @@ function SidePanel({
 							{`${startCase(originName)} to 
 							${startCase(destination || 'Countries')}`}
 						</h4>
+						<SortButton
+							type={sort_type}
+							onChange={(val) => setSort(((prev) => ({ ...prev, sort_type: val })))}
+						/>
 						<Select
 							size="sm"
 							placeholder="sort by"
-							prefix={<IcMDescendingSort />}
 							options={SORT_OPTIONS}
-							style={{ width: '160px' }}
+							style={{ width: '140px' }}
+							value={sort_by}
+							onChange={(val) => setSort({ sort_by: val, sort_type: 'asc' })}
 						/>
 					</div>
 					<InfiniteScroll
