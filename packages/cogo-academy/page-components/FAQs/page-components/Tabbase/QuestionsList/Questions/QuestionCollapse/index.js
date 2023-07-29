@@ -28,7 +28,7 @@ function QuestionsCollapse({ questions }) {
 					size="sm"
 					color="#fff"
 				>
-					<b>{questions.view_count}</b>
+					<strong>{questions.view_count}</strong>
 				</Pill>
 
 				{(questions?.faq_tags || []).map((item) => (
@@ -36,7 +36,7 @@ function QuestionsCollapse({ questions }) {
 						className={styles.questions_tag}
 						key={item.display_name}
 						size="sm"
-						color="white"
+						color="#fff"
 					>
 						<div className={styles.pill_text}>
 							{startCase(item?.display_name)}
