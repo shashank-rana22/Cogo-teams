@@ -18,17 +18,15 @@ function QuestionsCollapse({ questions }) {
 				{' '}
 
 				<IcMArrowRight
-					style={{ alignItems: 'center', marginTop: '22px' }}
-					width={16}
-					height={16}
+					className={styles.styledArrowRight}
 				/>
 			</div>
 
-			<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+			<div className={styles.styled_pill_container}>
 				<Pill
 					prefix={<IcMEyeopen />}
 					size="sm"
-					color="white"
+					color="#fff"
 				>
 					<b>{questions.view_count}</b>
 				</Pill>

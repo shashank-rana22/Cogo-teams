@@ -11,7 +11,7 @@ import QuestionsList from '../../../QuestionsList';
 import styles from './styles.module.css';
 
 const ALL_TOPICS = 'All Topics';
-const LENGTH = 30;
+const TRESHOLD_LENGTH_TO_TRUNCATE = 30;
 const TRIM_START = 0;
 const TRIM_END = 28;
 
@@ -42,9 +42,10 @@ function TopicList({ searchState = '', tagId = [] }) {
 		return (<EmptyQuestionListState />);
 	}
 
-	const truncate = (input) => (input?.length > LENGTH ? `${input.substring(TRIM_START, TRIM_END)}..` : input);
+	const truncate = (input) => (input?.length
+		> TRESHOLD_LENGTH_TO_TRUNCATE ? `${input.substring(TRIM_START, TRIM_END)}..` : input);
 
-	if (!searchState && (tagId.length === TRIM_START)) {
+	if (!searchState && (isEmpty(tagId.length))) {
 		return (
 			<div className={styles.grid_container} style={{ display: 'flex' }}>
 				<div

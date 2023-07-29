@@ -1,12 +1,11 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 import styles from './styles.module.css';
-
-const DEFAULT_INDEX = 0;
 
 function Day1({ setInformationPage }) {
 	const [{ data }, listTrigger] = useHarbourRequest({
@@ -54,7 +53,10 @@ function Day1({ setInformationPage }) {
 			<div className={styles.rich_text}>
 				<div
 					className={styles.day1_text}
-					dangerouslySetInnerHTML={{ __html: data?.list?.[DEFAULT_INDEX]?.html_template || 'Day 1!' }}
+					dangerouslySetInnerHTML={{
+						__html:
+						data?.list?.[GLOBAL_CONSTANTS.zeroth_index]?.html_template || 'Day 1!',
+					}}
 				/>
 
 			</div>

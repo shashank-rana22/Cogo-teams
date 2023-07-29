@@ -1,4 +1,5 @@
 import { Modal, Button, Badge, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -12,7 +13,6 @@ import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
 import useCreateFeedback from './useCreateFeedback';
 
-const INDEX = 0;
 const NULL_VALUE = 0;
 const EMPTY_VALUE = 1;
 
@@ -97,7 +97,7 @@ function AnswerPage() {
 			<div className={styles.answer}>Answer :</div>
 
 			<div className={styles.heading_container}>
-				<div dangerouslySetInnerHTML={{ __html: answerData?.answers[INDEX]?.answer }} />
+				<div dangerouslySetInnerHTML={{ __html: answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.answer }} />
 			</div>
 
 			<div className={styles.answer}>Tags</div>
@@ -108,7 +108,7 @@ function AnswerPage() {
 						className={styles.questions_tag}
 						key={item.display_name}
 						size="sm"
-						color="white"
+						color="#fff"
 					>
 						<div className={styles.pills_text}>
 							{startCase(item.display_name)}
@@ -123,15 +123,15 @@ function AnswerPage() {
 					role="presentation"
 					className={styles.like_container}
 					onClick={() => {
-						onClickLikeButton({ _id: answerData?.answers[INDEX]?.id });
+						onClickLikeButton({ _id: answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.id });
 					}}
 				>
-					{answerData?.answers[INDEX]?.upvote_count >= NULL_VALUE ? (
+					{answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.upvote_count >= NULL_VALUE ? (
 						<Badge
 							placement="left"
 							color="green"
 							size="md"
-							text={answerData?.answers?.[INDEX]?.upvote_count || NULL_VALUE}
+							text={answerData?.answers?.[GLOBAL_CONSTANTS.zeroth_index]?.upvote_count || NULL_VALUE}
 						>
 							<IcCLike fill={isLiked === 'liked' ? 'black' : '#f8f5ec'} />
 						</Badge>
@@ -198,11 +198,12 @@ function AnswerPage() {
 			</div>
 
 			<div className={styles.liked_wrapper}>
-				{answerData?.answers[NULL_VALUE]?.upvote_count > NULL_VALUE ? (
+				{answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.upvote_count > NULL_VALUE ? (
 					<span className={styles.sidetext}>
-						{answerData?.answers[INDEX]?.upvote_count}
+						{answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.upvote_count}
 						{' '}
-						{answerData?.answers[INDEX]?.upvote_count === EMPTY_VALUE ? 'person' : 'people'}
+						{answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.upvote_count === EMPTY_VALUE
+							? 'person' : 'people'}
 						{' '}
 						found it useful.
 					</span>
