@@ -14,8 +14,6 @@ const BL_LABEL_MAPPING = {
 	do_noc_certificate         : 'DO NOC',
 };
 
-const RELEASED_BL_DATA = [];
-
 const getValidDocuments = (activeTab) => {
 	if (activeTab === 'do') {
 		return ['delivery_order', 'do_noc_certificate'];
@@ -30,6 +28,8 @@ const getValidDocuments = (activeTab) => {
 };
 
 function ReleaseCard({ data = {}, bucket = '', refetch = () => {}, setShowModal = () => {}, activeTab = '' }) {
+	const RELEASED_BL_DATA = [];
+
 	const [open, setOpen] = useState(false);
 	const [hold, setHold] = useState(false);
 	const [surrender, setSurrender] = useState(false);
