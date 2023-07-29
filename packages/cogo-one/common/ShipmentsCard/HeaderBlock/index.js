@@ -26,7 +26,7 @@ const getButtonOptions = ({ partnerId, shipmentId }) => [
 	},
 ];
 
-function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
+function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '' }) {
 	const { partnerId = '' } = useSelector(({ profile }) => ({ partnerId: profile.partner.id }));
 
 	const { serial_id = '', importer_exporter = {}, id: shipmentId = '' } = shipmentItem || {};
@@ -46,37 +46,40 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
 				</div>
 			</div>
 
-			<div className={styles.icons_container}>
-				<Image
-					src={GLOBAL_CONSTANTS.image_url.message_reply}
-					height={25}
-					width={25}
-					alt="message"
-					onClick={(e) => {
-						e.stopPropagation();
-						setShowPocDetails(shipmentItem);
-					}}
-				/>
-
-				<Popover
-					placement="bottom-end"
-					caret={false}
-					render={(
-						<ButtonGroup
-							size="sm"
-							options={getButtonOptions({ shipmentId, partnerId })}
-							direction="vertical"
-						/>
-					)}
-				>
-					<IcMOverflowDot
-						height="18px"
-						width="18px"
-						cursor="pointer"
-						onClick={(e) => e.stopPropagation()}
+			{type === 'all_shipments' ? (
+				<div className={styles.icons_container}>
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.message_reply}
+						height={25}
+						width={25}
+						alt="message"
+						onClick={(e) => {
+							e.stopPropagation();
+							setShowPocDetails(shipmentItem);
+						}}
 					/>
-				</Popover>
-			</div>
+
+					<Popover
+						placement="bottom-end"
+						caret={false}
+						render={(
+							<ButtonGroup
+								size="sm"
+								options={getButtonOptions({ shipmentId, partnerId })}
+								direction="vertical"
+							/>
+						)}
+					>
+						<IcMOverflowDot
+							height="18px"
+							width="18px"
+							cursor="pointer"
+							onClick={(e) => e.stopPropagation()}
+						/>
+					</Popover>
+				</div>
+			) : null}
+
 		</div>
 	);
 }

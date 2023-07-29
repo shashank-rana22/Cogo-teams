@@ -9,6 +9,7 @@ function ActiveComponent(props) {
 	const {
 		emptyCheck = false, activityTab = '', activeSubTab = '', data = {},
 		timeLineList = [], chatDataList = [], setRaiseTicketModal = () => {},
+		viewType = '', shipmentsData = {},
 	} = props || {};
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
@@ -21,7 +22,7 @@ function ActiveComponent(props) {
 		);
 	}
 
-	const ActiveComp = getUserActivityComponent({ activityTab, activeSubTab }) || null;
+	const ActiveComp = getUserActivityComponent({ activityTab, activeSubTab, viewType }) || null;
 
 	if (!ActiveComp) {
 		return null;
@@ -36,6 +37,7 @@ function ActiveComponent(props) {
 				timeLineList={timeLineList}
 				chatDataList={chatDataList}
 				setRaiseTicketModal={setRaiseTicketModal}
+				shipmentsData={shipmentsData}
 			/>
 		</div>
 	);

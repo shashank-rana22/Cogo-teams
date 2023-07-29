@@ -4,8 +4,10 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
 import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
+import useListTransactionalShipments from '../../../../hooks/useListTransactionalShipments';
 import useListUserChatSummary from '../../../../hooks/useListUserChatSummary';
 
 import ActiveComponent from './ActiveComponent';
@@ -20,6 +22,7 @@ function UserActivities(props) {
 	const {
 		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard, showMore,
 		setRaiseTicketModal = () => {},
+		viewType = '',
 	} = props || {};
 
 	const [activityTab, setActivityTab] = useState('transactional');
@@ -29,11 +32,11 @@ function UserActivities(props) {
 
 	const { mobile_no, channel_type = '' } = activeMessageCard;
 	const {
-		user_id:messageUserId,
-		lead_user_id:messageLeadUserId = null, id = '', sender = '',
+		user_id: messageUserId, lead_user_id: messageLeadUserId = null, id = '', sender = '',
+		organization_id: orgId = '',
 	} = formattedMessageData || {};
-
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
+	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
 
 	const user_id = activeTab === 'message' ? messageUserId : voiceCallUserId;
 	const lead_user_id = activeTab === 'message' ? messageLeadUserId : null;
@@ -56,11 +59,8 @@ function UserActivities(props) {
 		pagination,
 		setPagination,
 	});
-
-	const {
-		timeLineLoading = false,
-		timeLineData = {},
-	} = useListCogooneTimeline({
+	const { listLoading, shipmentsData } = useListTransactionalShipments({ pagination, orgId, filters });
+	const { timeLineLoading = false, timeLineData = {} } = useListCogooneTimeline({
 		activeSubTab,
 		id,
 		user_id,
@@ -93,13 +93,17 @@ function UserActivities(props) {
 	let list = [];
 	let channel_total_count;
 
-	if (activityTab === 'communication' || activityTab === 'transactional') {
+	if (showShipments && activityTab === 'transactional') {
+		list = shipmentsData?.list || [];
+		channel_total_count = shipmentsData?.total_count || '0';
+	} else if (activityTab === 'communication' || activityTab === 'transactional') {
 		list = data?.[activityTab]?.list || [];
 		channel_total_count = data?.[activityTab]?.total_count || '0';
 	} else {
 		list = data?.[activityTab]?.spot_searches?.list || [];
 		channel_total_count = data?.[activityTab]?.spot_searches?.total_count || '0';
 	}
+
 	let subtab_count;
 	if (activeSubTab === 'agent') {
 		subtab_count = agent_total_count;
@@ -109,9 +113,7 @@ function UserActivities(props) {
 		subtab_count = channel_total_count;
 	}
 
-	useEffect(() => {
-		setActivityTab('transactional');
-	}, [customerId]);
+	useEffect(() => { setActivityTab('transactional'); }, [customerId]);
 
 	useEffect(() => {
 		setFilters(null);
@@ -237,7 +239,7 @@ function UserActivities(props) {
 
 				</div>
 			)}
-			{(loading || timeLineLoading) ? (
+			{(loading || timeLineLoading || listLoading) ? (
 				<LoadingState activityTab={activityTab} />
 			) : (
 				<ActiveComponent
@@ -248,10 +250,11 @@ function UserActivities(props) {
 					chatDataList={chatDataList}
 					timeLineList={timeLineList}
 					setRaiseTicketModal={setRaiseTicketModal}
+					viewType={viewType}
+					shipmentsData={shipmentsData}
 				/>
 			)}
-
-			{(!loading || !timeLineLoading) && (
+			{(!loading || !timeLineLoading || !listLoading) && (
 				<div className={styles.pagination}>
 					<Pagination
 						type="page"

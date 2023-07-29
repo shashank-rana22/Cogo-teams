@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 
-import { formatRouteData } from '../../../../../../utils/routeDataHelpers';
+import { formatRouteData } from '../../../utils/routeDataHelpers';
 
 import styles from './styles.module.css';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RENDER_VALUE_MAPPING, serviceDetails } from '../../../../../../utils/detailsHelperFuncs';
+import { RENDER_VALUE_MAPPING, serviceDetails } from '../../../utils/detailsHelperFuncs';
 
 import styles from './styles.module.css';
 
