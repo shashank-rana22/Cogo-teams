@@ -1951,6 +1951,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'checkout',
 		},
+		{
+			api          : 'get_transacting_organization_shipment_data',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	supply_crm: [
 		{
