@@ -10,7 +10,7 @@ import TicketsSection from './TicketsSection';
 
 function FilterTicketsSection({
 	type = '', setRefreshList =	() => {}, refreshList = {}, spectatorType = '',
-	setSpectatorType =	() => {},
+	setSpectatorType =	() => {}, date = {},
 }) {
 	const { query: { ticket_id } } = useRouter();
 
@@ -31,6 +31,7 @@ function FilterTicketsSection({
 				setSpectatorType={setSpectatorType}
 			/>
 			<TicketsSection
+				date={date}
 				searchParams={searchParams}
 				spectatorType={spectatorType}
 				isAdmin={isAdmin}

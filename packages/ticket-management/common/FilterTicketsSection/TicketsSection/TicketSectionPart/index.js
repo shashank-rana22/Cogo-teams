@@ -8,12 +8,13 @@ import styles from './styles.module.css';
 
 function TicketsSectionPart({
 	label = '', status = '', searchParams = {}, spectatorType = '', refreshList = {}, setRefreshList = () => {},
-	isAdmin = false, setModalData = () => {}, isUpdated = false, setIsUpdated = () => {},
+	isAdmin = false, setModalData = () => {}, isUpdated = false, setIsUpdated = () => {}, date = {},
 }) {
 	const { tickets, listLoading, handleScroll, fetchTickets = () => {} } = useListTickets({
 		searchParams,
 		spectatorType,
 		status,
+		date,
 		label,
 		refreshList,
 		setRefreshList,
