@@ -34,7 +34,11 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.shipper_details}>
+			<div
+				className={styles.shipper_details}
+				onClick={(e) => e.stopPropagation()}
+				role="presentation"
+			>
 				<div className={styles.sid_id}>{`SID: ${serial_id}`}</div>
 
 				<div className={styles.importer_exporter_styles}>

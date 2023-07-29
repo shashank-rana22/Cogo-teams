@@ -89,6 +89,12 @@ function ShipmentCard({
 				/>
 
 				<div className={styles.price_details}>
+					{paymentTerm ? (
+						<Pill size="md" color="#DDEBC0">
+							{paymentTerm }
+						</Pill>
+					) : null}
+
 					<div className={styles.amount}>
 						{formatAmount({
 							amount   : net_total,
@@ -101,12 +107,6 @@ function ShipmentCard({
 							},
 						})}
 					</div>
-
-					{paymentTerm ? (
-						<Pill size="md" color="#BBFCBD">
-							{paymentTerm }
-						</Pill>
-					) : null}
 				</div>
 			</div>
 

@@ -8,9 +8,9 @@ import LoadingState from './LoadingState';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 
-const DEFAULT_PAGE = 0;
+const DEFAULT_PAGE = 1;
 const PAGE_LIMIT = 6;
-const DEFAULT_SHIPMENTS_COUNT = 0;
+const DEFAULT_SHIPMENTS_COUNT = 1;
 
 function ShipmentsHomePage({ setActiveTab = () => {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
@@ -44,6 +44,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 						prefix={<IcMSearchlight className={styles.bishal_search_icon} />}
 						placeholder="Search SID..."
 						type="number"
+						disabled={listLoading}
 					/>
 				</div>
 			</div>
