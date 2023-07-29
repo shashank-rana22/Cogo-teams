@@ -2,8 +2,8 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
+import FieldArray from '../../../commons/FieldArray';
 import useUpdateEmployeeDetails from '../../../hooks/useUpdateEmployeeDetailsAdmin';
-import FieldArray from '../FieldArray';
 
 import getControls from './controls';
 import styles from './styles.module.css';

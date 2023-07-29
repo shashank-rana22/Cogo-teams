@@ -12,6 +12,7 @@ import {
 	MobileNumberController,
 	CreatableMultiSelectController,
 	CreatableSelectController,
+	InputNumberController,
 } from '@cogoport/forms';
 
 const controlTypeControllerMapping = {
@@ -23,7 +24,7 @@ const controlTypeControllerMapping = {
 	radioGroup        : RadioGroupController,
 	textarea          : TextAreaController,
 	'multi-select'    : MultiselectController,
-	number            : InputController,
+	number            : InputNumberController,
 	'date-select'     : DatepickerController,
 	fileUpload        : UploadController,
 	email             : InputController,

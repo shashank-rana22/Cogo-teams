@@ -30,7 +30,7 @@ function Resume({ getEmployeeDetails, data: info }) {
 	const onSubmit = (values) => {
 		const newDoc = [{
 			document_type : 'resume',
-			document_url  : values?.resume || undefined,
+			document_url  : values?.resume?.finalUrl || undefined,
 			status        : 'active',
 		}];
 		createEmployeeDocument({ data: values, id, newDoc });
