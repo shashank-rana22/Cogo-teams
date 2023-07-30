@@ -2,7 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import { SHIPPING_LINE, EVENT_LABEL } from '../../../../constants/shippingLineMappings';
+import { SHIPPING_LINE, EVENTS_INFORMATION } from '../../../../constants/shippingLineMappings';
 import { getEventTitle } from '../../../../utils/getEventTitle';
 
 import CargoDetails from './CargoDetails';
@@ -66,11 +66,7 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 			<>
 				<div className={styles.title}>{startCase(eventTitle)}</div>
 				<div className={styles.message}>
-					Following are the details of the abandoned
-					{' '}
-					{EVENT_LABEL[eventType]}
-					{' '}
-					-
+					{EVENTS_INFORMATION[eventType]}
 				</div>
 			</>
 		);
@@ -80,11 +76,7 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 		<>
 			<div className={styles.title}>{startCase(eventTitle)}</div>
 			<div className={styles.message}>
-				Following are the details of the abandoned
-				{' '}
-				{EVENT_LABEL[eventType]}
-				{' '}
-				-
+				{EVENTS_INFORMATION[eventType]}
 			</div>
 
 			<div className={styles.banner}>

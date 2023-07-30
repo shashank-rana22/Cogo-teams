@@ -2,7 +2,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-export const USER_EVENT_MAPPING = {
+const USER_EVENT_TITLE_MAPPING = {
 	'System: Auth: Partner User Login Failed'      : 'Login Failed',
 	'System: Auth: App User Login Failed'          : 'Login Failed',
 	'System: Auth: Partner Lead User Login Failed' : 'Login Failed',
@@ -17,11 +17,17 @@ function LoginFailed({ name = '', data = {}, scope = '' }) {
 			<div className={styles.title}>
 				{startCase(scope)}
 				{' '}
-				{USER_EVENT_MAPPING[name]}
+				{USER_EVENT_TITLE_MAPPING[name]}
 
 			</div>
-			<div className={styles.message}>
+			<div className={styles.title}>
 				{startCase(data?.error)}
+			</div>
+			<div className={styles.message}>
+				{USER_EVENT_TITLE_MAPPING[name] === 'Login Failed'
+					? `If the customer has failed to login multiple times, 
+					please contact them to understand the issue and help them resolve it.`
+					: null}
 			</div>
 		</>
 	);
