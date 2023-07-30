@@ -65,7 +65,7 @@ function ExecuteTask({
 
 	if (loading) {
 		return (
-			<ThreeDotLoader message="Fetching Task Data" />
+			<ThreeDotLoader message="Fetching Task" />
 		);
 	}
 

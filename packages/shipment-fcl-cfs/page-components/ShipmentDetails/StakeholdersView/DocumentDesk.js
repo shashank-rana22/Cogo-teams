@@ -59,7 +59,7 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
 			<div className={styles.loader}>
-				<ThreeDotLoader message="Loading Shipment Data" fontSize={18} size={45} />
+				<ThreeDotLoader message="Loading Shipment" fontSize={18} size={45} />
 			</div>
 		);
 	}
@@ -155,7 +155,7 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 							<ShipmentMails
 								source="cogo_rpa"
 								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={`${shipment_data?.serial_id}`}
+								pre_subject_text={shipment_data?.serial_id}
 							/>
 						</TabPanel>
 					</Tabs>

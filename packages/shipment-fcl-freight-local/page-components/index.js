@@ -50,7 +50,7 @@ function FclFreightLocal() {
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
 			<div className={styles.loader}>
-				<ThreeDotLoader message="Loading Shipment Data" fontSize={18} size={45} />
+				<ThreeDotLoader message="Loading Shipment" fontSize={18} size={45} />
 			</div>
 		);
 	}

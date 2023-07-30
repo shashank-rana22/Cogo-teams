@@ -1,6 +1,7 @@
-import { Loader, Button, Toast, Textarea } from '@cogoport/components';
+import { Button, Toast, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -85,8 +86,7 @@ function ReviewDoc({
 	if (loading) {
 		return (
 			<div>
-				<Loader />
-				Loading Document...
+				<ThreeDotLoader message="Loading Document" />
 			</div>
 		);
 	}
