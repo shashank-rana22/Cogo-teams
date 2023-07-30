@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import { getEventTitle } from '../../../utils/getEventTitle';
 
 import EmailClicked from './EmailClicked';
+import KycEvent from './KycEvent';
 import LoginFailed from './LoginFailed';
 import Shipments from './Shipments';
 import SignUpEvents from './SignUpEvents';
@@ -29,6 +30,7 @@ const COMPONENT_MAPPING = {
 	default       : Default,
 	spot_search   : Shipments,
 	lead_user     : SignUpEvents,
+	kyc           : KycEvent,
 };
 
 const IMAGE_URL_MAPPING = {
