@@ -32,7 +32,7 @@ const useCreateAgentExperienceSlabs = ({ fetchList = () => {}, agentExpSlabs = [
 		authkey,
 	}, { manual: true });
 
-	const createAgentExperienceSlabs = async ({ values = {}, setShowForm = () => {} }) => {
+	const createAgentExperienceSlabs = async ({ values = {}, setShowForm = () => {}, clearErrors = () => {} }) => {
 		try {
 			const res = await trigger({
 				data: {
@@ -47,6 +47,8 @@ const useCreateAgentExperienceSlabs = ({ fetchList = () => {}, agentExpSlabs = [
 				await router.push(`/centralised-customer-service/
 									create-shipment-capacity-config?id=${res.data.id}`);
 			}
+
+			clearErrors();
 
 			fetchList();
 

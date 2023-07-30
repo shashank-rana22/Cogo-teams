@@ -39,7 +39,7 @@ const useAgentExpSlabs = ({
 		agentExpSlabs,
 	});
 
-	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm({
+	const { control, formState: { errors }, handleSubmit, watch, setValue, clearErrors } = useForm({
 		defaultValues: {
 			experience: (id) ? 'custom' : 'default',
 		},
@@ -78,6 +78,7 @@ const useAgentExpSlabs = ({
 				createAgentExperienceSlabs({
 					values,
 					setShowForm,
+					clearErrors,
 				});
 			}
 		} else setShowForm(false);

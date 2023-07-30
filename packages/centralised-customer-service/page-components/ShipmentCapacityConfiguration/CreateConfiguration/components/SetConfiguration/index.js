@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { RadioGroupController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
+import { IcMPlusInCircle, IcMDelete, IcMAlert } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
 
@@ -62,6 +62,13 @@ function SetConfiguration({
 						<BasicFields control={control} errors={errors} showForm={showForm} />
 
 						<h3>Set Agent Experience</h3>
+
+						{id ? (
+							<div className={styles.warning_msg}>
+								<IcMAlert className={styles.icon} />
+								<div>Updating experience slabs will result in resetting shipment capacities.</div>
+							</div>
+						) : null}
 
 						<RadioGroupController
 							className={styles.exp_input}
