@@ -7,6 +7,7 @@ import bl_do from './bl-do-apis';
 import bl_do_collection_release from './bl_do-collection-release-apis';
 import bn_salvage from './bn-salvage-apis';
 import booking_desk from './booking-desk-apis';
+import centralised_customer_service from './centralised-customer-service-apis';
 import chakravyuh from './chakravyuh-apis';
 import chro from './chro';
 import coe_finance from './coe-finance-apis';
@@ -15,7 +16,6 @@ import common_apis from './common-apis';
 import consolidated_invoices from './consolidated-invoices';
 import contract_rates from './contract-rates-apis';
 import cost_booking_desk from './cost-booking-desk-apis';
-import customer_service_desk_management from './customer-service-desk-management-apis';
 import document_walet from './doc-walet';
 import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
@@ -152,7 +152,7 @@ const apis = {
 	...saas_subscription,
 	...chakravyuh,
 	risk_management,
-	customer_service_desk_management,
+	centralised_customer_service,
 };
 
 export default apis;

@@ -1,0 +1,98 @@
+.container {
+	padding: 18px 24px;
+	margin-top: 50px;
+	background: #fff;
+	border-radius: 6px;
+}
+
+.btn_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn {
+	margin-left: auto;
+}
+
+.form_container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.control_item {
+	flex-basis: 27%;
+	margin-right: 20px;
+	margin-bottom: 30px;
+}
+
+.sup {
+	color: #f00;
+}
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.label {
+	margin-bottom: 4px;
+}
+
+.config_container {
+	:global {
+		.ui_radiogroup_container {
+			padding: unset;
+			margin-top: 16px;
+			margin-bottom: 6px;
+		}
+
+		.ui_radio_container {
+			padding: unset;
+			margin-right: 30px;
+		}
+	}
+}
+
+.accordion {
+	width: 50%;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	color: #4f4f4f;
+}
+
+.role {
+	width: 50%;
+	margin-bottom: 30px;
+}
+
+.accord_item {
+	padding: 8px 12px;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.accord_item:not(:last-child) {
+	margin-bottom: 20px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.back_icon {
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+.cancel_btn {
+	margin-right: 8px;
+}

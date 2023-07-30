@@ -2424,15 +2424,15 @@ const navigationMappingAdmin = {
 		as            : '/v2/ftl-admin',
 		possible_apis : apis.ftl_admin,
 	},
-	customer_service_desk_management: {
-		key           : 'customer_service_desk_management',
-		title         : 'Customer Service Desk',
+	centralised_customer_service: {
+		key           : 'centralised_customer_service',
+		title         : 'Centralised Customer Service',
 		isSubNavs     : false,
 		module_type   : 'dashboards',
-		href          : '/v2/customer-service-desk-management',
-		as            : '/v2/customer-service-desk-management',
+		href          : '/v2/centralised-customer-service',
+		as            : '/v2/centralised-customer-service',
 		main_apis     : [],
-		possible_apis : apis.customer_service_desk_management,
+		possible_apis : apis.centralised_customer_service,
 		icon          : IcMDashboard,
 	},
 };
