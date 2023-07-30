@@ -16,6 +16,7 @@ const PAGE_DECREMENT = 1;
 const PAGE_INCREMENT = 1;
 const MIN_TICKET_COUNT = 1;
 const WINDOW_VIEW = 20;
+const MORE_TICKETS_TIMEOUT = 4000;
 
 const getPayload = ({
 	performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate,
@@ -59,6 +60,7 @@ const useListTickets = ({
 
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
+	const [hasMoreTickets, setHasMoreTickets] = useState(true);
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
@@ -122,6 +124,12 @@ const useListTickets = ({
 		const hasMoreData = pagination <= (data?.total_pages || DEFAULT_PAGE);
 		if (reachBottom && hasMoreData && !loading) {
 			fetchTickets(pagination);
+		} else if (hasMoreTickets) {
+			setHasMoreTickets(false);
+		} else {
+			setTimeout(() => {
+				setHasMoreTickets(true);
+			}, MORE_TICKETS_TIMEOUT);
 		}
 	};
 
@@ -130,6 +138,7 @@ const useListTickets = ({
 		listLoading: loading,
 		fetchTickets,
 		handleScroll,
+		hasMoreTickets,
 	};
 };
 

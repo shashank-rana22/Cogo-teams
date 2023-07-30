@@ -13,6 +13,7 @@ function TicketStructure({
 	label = '',
 	updateTicketActivity = () => {},
 	listLoading = false,
+	hasMoreTickets = false,
 }) {
 	if (listLoading) {
 		return <TicketStructureLoader />;
@@ -44,6 +45,7 @@ function TicketStructure({
 					/>
 				))
 			}
+			{!hasMoreTickets && <div className={styles.no_tickets_available}>No More Tickets Available</div>}
 		</div>
 	);
 }

@@ -10,7 +10,7 @@ function TicketsSectionPart({
 	label = '', status = '', searchParams = {}, spectatorType = '', refreshList = {}, setRefreshList = () => {},
 	isAdmin = false, setModalData = () => {}, isUpdated = false, setIsUpdated = () => {}, date = {},
 }) {
-	const { tickets, listLoading, handleScroll, fetchTickets = () => {} } = useListTickets({
+	const { tickets, listLoading, handleScroll, hasMoreTickets, fetchTickets = () => {} } = useListTickets({
 		searchParams,
 		spectatorType,
 		status,
@@ -51,6 +51,7 @@ function TicketsSectionPart({
 				listLoading={listLoading}
 				setModalData={setModalData}
 				handleScroll={handleScroll}
+				hasMoreTickets={hasMoreTickets}
 				updateTicketActivity={updateTicketActivity}
 			/>
 		</div>
