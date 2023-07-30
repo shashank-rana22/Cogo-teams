@@ -82,3 +82,14 @@
 	border-radius: 6px;
 	box-shadow: 0 2px 3px 0 #627fac33;
 }
+
+.actions {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tags {
+	width: 112px;
+	margin-top: 4px;
+}

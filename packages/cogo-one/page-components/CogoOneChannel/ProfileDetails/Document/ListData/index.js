@@ -5,12 +5,12 @@ import { IcMPdf } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import DocumentTypeSID from '../../../../../common/DocumentTypeSID';
 import EmptyState from '../../../../../common/EmptyState';
 import documentTypeMapping from '../../../../../configurations/document-type-mapping';
 import documentStatus from '../DocumentStatus';
 
 import ActionsStatus from './ActionsStatus';
-import DocumentTypeSID from './DocumentTypeSID';
 import styles from './styles.module.css';
 
 function ListData({
@@ -140,6 +140,7 @@ function ListData({
 										formattedMessageData={formattedMessageData}
 										documentTagUrl={documentTagUrl}
 										setDocumentTagUrl={setDocumentTagUrl}
+										type="documents"
 									/>
 								)}
 							</>
