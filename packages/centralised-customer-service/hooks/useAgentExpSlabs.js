@@ -85,6 +85,8 @@ const useAgentExpSlabs = ({
 
 	useEffect(() => {
 		setValue('agent_experience_slabs', getSlabs({ data, id, experience }));
+		setValue('cogo_entity_id', data.cogo_entity_id);
+		setValue('role_id', data.role_id);
 	}, [data, experience, id, setValue]);
 
 	useEffect(() => {

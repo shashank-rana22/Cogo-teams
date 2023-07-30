@@ -3,8 +3,8 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 
-const apiMapping = ({ id }) => {
-	if (id) {
+const apiMapping = ({ id, source = '' }) => {
+	if (id || source) {
 		return {
 			url     : 'update_ccs_config',
 			authkey : 'post_allocation_update_ccs_config',
@@ -16,12 +16,12 @@ const apiMapping = ({ id }) => {
 	};
 };
 
-const useCreateCssConfig = ({ setShowModal = () => {} }) => {
+const useCreateCssConfig = ({ setShowModal = () => {}, source = '', fetchList = () => {} }) => {
 	const router = useRouter();
 
 	const { id } = router.query;
 
-	const { url = '', authkey = '' } = apiMapping({ id });
+	const { url = '', authkey = '' } = apiMapping({ id, source });
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url,
@@ -29,20 +29,22 @@ const useCreateCssConfig = ({ setShowModal = () => {} }) => {
 		authkey,
 	}, { manual: true });
 
-	const createCcsConfig = async ({ values = {} }) => {
+	const createCcsConfig = async ({ values = {}, configId = '' }) => {
 		try {
 			await trigger({
 				data: {
-					id,
-					...values,
+					id: id || configId,
+					...(source ? { status: 'inactive' } : values),
 				},
 			});
 
 			setShowModal(false);
 
-			router.push('/centralised-customer-service?activeTab=org_config');
+			if (!source) router.push('/centralised-customer-service?activeTab=org_config');
 
-			Toast.success(`${(id) ? 'Updated' : 'Created'} Successfully!`);
+			fetchList();
+
+			Toast.success(`${(id || source) ? 'Updated' : 'Created'} Successfully!`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

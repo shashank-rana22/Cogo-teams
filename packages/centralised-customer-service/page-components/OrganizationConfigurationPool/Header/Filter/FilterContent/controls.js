@@ -99,6 +99,21 @@ const controls = [
 			{ label: 'Fallback', value: 'fallback' },
 		],
 	},
+	{
+		name        : 'preferred_role_id',
+		label       : 'Select Role for CCS Config Pool',
+		placeholder : 'Select Role',
+		initialCall : true,
+		asyncKey    : 'partner_roles',
+		params      : {
+			filters: {
+				role_sub_functions : ['operations'],
+				sub_functions      : ['enterprise_customer_operations',
+					'mid_size_customer_operations', 'cp_customer_operations'],
+				status: 'active',
+			},
+		},
+	},
 ];
 
 export default controls;

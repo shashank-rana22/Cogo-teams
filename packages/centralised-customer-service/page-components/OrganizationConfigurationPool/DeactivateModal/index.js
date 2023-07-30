@@ -1,16 +1,11 @@
 import { Button, Modal } from '@cogoport/components';
 
-import useUpdateCsdConfig from '../../../hooks/useUpdateCapacityConfig';
+import useCreateCssConfig from '../../../hooks/useCreateCcsConfig';
 
 import styles from './styles.module.css';
 
-const STATUS_MAPPING = {
-	active : 'inactive',
-	draft  : 'active',
-};
-
-function DeactivateModal({ showModal = false, setShowModal = () => {}, id, status = 'draft' }) {
-	const { loading, updateCsdConfig } = useUpdateCsdConfig({ setShowModal });
+function DeactivateModal({ showModal = false, setShowModal = () => {}, id, fetchList = () => {} }) {
+	const { loading, createCcsConfig } = useCreateCssConfig({ setShowModal, source: 'list', fetchList });
 
 	return (
 		<Modal
@@ -39,7 +34,7 @@ function DeactivateModal({ showModal = false, setShowModal = () => {}, id, statu
 						type="button"
 						style={{ marginLeft: '12px' }}
 						loading={loading}
-						onClick={() => updateCsdConfig({ status: STATUS_MAPPING[status], id })}
+						onClick={() => createCcsConfig({ configId: id })}
 					>
 						Deactivate
 					</Button>

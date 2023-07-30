@@ -12,7 +12,10 @@ const PAGE_LIMIT = 10;
 const DEFAULT_PAGE = 1;
 const DEFAULT_TOTAL_COUNT = 0;
 
-function OrgConfigPoolList({ list = [], loading = false, pageData = {}, page = 1, setPage = () => {} }) {
+function OrgConfigPoolList({
+	list = [], loading = false, pageData = {}, page = 1,
+	setPage = () => {}, fetchList = () => {},
+}) {
 	const [showModal, setShowModal] = useState(false);
 
 	if (loading) {
@@ -31,6 +34,7 @@ function OrgConfigPoolList({ list = [], loading = false, pageData = {}, page = 1
 					data={item}
 					showModal={showModal}
 					setShowModal={setShowModal}
+					fetchList={fetchList}
 				/>
 			))}
 

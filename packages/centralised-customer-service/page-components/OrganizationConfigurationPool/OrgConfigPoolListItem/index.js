@@ -1,9 +1,11 @@
 import { Tooltip, Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMOverflowDot, IcMEdit, IcMDelete } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
+
+import DeactivateModal from '../DeactivateModal';
 
 import styles from './styles.module.css';
 
@@ -59,7 +61,7 @@ const getOrganizations = (organizations = []) => (
 	</section>
 );
 
-function OrgConfigPoolListItem({ data = {}, setShowModal = () => {} }) {
+function OrgConfigPoolListItem({ data = {}, showModal = false, setShowModal = () => {}, fetchList = () => {} }) {
 	const router = useRouter();
 
 	const {
@@ -140,8 +142,7 @@ function OrgConfigPoolListItem({ data = {}, setShowModal = () => {} }) {
 									type="button"
 									onClick={() => setShowModal(true)}
 								>
-									<IcMDelete className={styles.icon} />
-									<div>Delete</div>
+									Deactivate
 								</Button>
 							</div>
 						)}
@@ -155,8 +156,14 @@ function OrgConfigPoolListItem({ data = {}, setShowModal = () => {} }) {
 
 			</div>
 
-			{/* {showModal && <DeactivateModal showModal={showModal}
-			setShowModal={setShowModal} id={id} status={status} />} */}
+			{showModal && (
+				<DeactivateModal
+					showModal={showModal}
+					setShowModal={setShowModal}
+					id={id}
+					fetchList={fetchList}
+				/>
+			)}
 
 		</div>
 
