@@ -23,6 +23,7 @@ function Filter({ filters = {}, setFilters = () => {} }) {
 			animation="perspective"
 			caret={false}
 			placement="bottom"
+			width={600}
 			render={(
 				<FilterContent
 					onClickReset={onClickReset}

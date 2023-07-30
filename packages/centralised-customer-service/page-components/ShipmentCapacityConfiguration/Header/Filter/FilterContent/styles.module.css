@@ -1,12 +1,14 @@
 .fields_container {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: space-between;
-}
+	:global {
+		.ui_select_container {
+			width: 300px;
+		}
 
-.item {
-	flex-basis: 48%;
+		.ui_is_open {
+			word-break: break-word;
+			white-space: pre-wrap;
+		}
+	}
 }
 
 .title {
