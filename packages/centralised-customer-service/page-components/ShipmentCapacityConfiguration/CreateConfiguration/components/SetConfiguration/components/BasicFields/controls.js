@@ -31,6 +31,7 @@ const controls = [
 				status: 'active',
 			},
 		},
+		rules: { required: 'This is required' },
 	},
 ];
 

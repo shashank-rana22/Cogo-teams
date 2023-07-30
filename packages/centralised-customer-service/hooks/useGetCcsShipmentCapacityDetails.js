@@ -33,8 +33,9 @@ const useGetCcsShipmentCapacityDetails = () => {
 						page,
 						filters: {
 							...filters,
+							status: ['draft', 'active'],
 						},
-						status: 'active',
+
 					},
 				}),
 

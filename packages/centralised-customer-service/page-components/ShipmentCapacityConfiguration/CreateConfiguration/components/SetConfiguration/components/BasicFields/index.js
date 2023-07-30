@@ -15,6 +15,7 @@ function BasicFields({ control = {}, errors = {}, showForm = false }) {
 					<div className={styles.control_item} key={name}>
 						<div className={styles.label}>
 							{label}
+							<sup className={styles.sup}>*</sup>
 						</div>
 
 						<div>
