@@ -20,7 +20,7 @@ function Payruns({ activeEntity = '' }) {
 
 	const {
 		data = {}, loading = false, payrunStats = {}, config = {}, setSelectedPayrun = () => {}, selectedPayrun = null,
-		globalFilters = {}, selectedIds = [], setSelectedIds = () => {},
+		globalFilters = {}, selectedIds = [], setSelectedIds = () => {}, country_code = '',
 		setGlobalFilters = () => {}, sort = {}, setSort = () => {}, refetch = () => {},
 	} = useFilterData({
 		isInvoiceView,
@@ -104,6 +104,7 @@ function Payruns({ activeEntity = '' }) {
 						loadingDropDown={loadingDropDown}
 						viewId={viewId}
 						singleitem={singleitem}
+						country_code={country_code}
 					/>
 				)}
 			/>

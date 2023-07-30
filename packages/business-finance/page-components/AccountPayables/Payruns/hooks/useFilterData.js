@@ -38,14 +38,13 @@ const useFilterData = ({
 		debounceQuery(search);
 	}, [debounceQuery, search]);
 
-	const { configMapping, payrunStats } = useGetConfigDataMapping({
+	const { configMapping, payrunStats, country_code } = useGetConfigDataMapping({
 		activePayrunTab,
 		overseasData,
 		query,
 		globalFilters,
 		sort,
 		selectedPayrun,
-
 	});
 
 	const selectConfigDataKeyMapping = {
@@ -57,7 +56,7 @@ const useFilterData = ({
 
 	const selctedConfigData = selectConfigDataKeyMapping[activePayrunTab] || selectConfigDataKeyMapping.default;
 
-	const { getFunction, getConfig, getData, getLoading, true: getViewDetails } = selctedConfigData || {};
+	const { getFunction = () => {}, getConfig, getData, getLoading, true: getViewDetails } = selctedConfigData || {};
 
 	const {
 		getFunction: getViewInvoiceFunction, getConfig: getViewInvoiceConfig,
@@ -76,8 +75,7 @@ const useFilterData = ({
 				getFunction();
 			});
 		}
-	}, [activePayrunTab, overseasData, isInvoiceView, selectedPayrun,
-		getViewInvoiceFunction, getFunction]);
+	}, [activePayrunTab, overseasData, isInvoiceView, selectedPayrun, getViewInvoiceFunction, getFunction]);
 
 	useEffect(() => {
 		if (PAYRUN_INNER_TAB_NAME.includes(activePayrunTab) && !isEmpty(selectedPayrun)) {
@@ -123,6 +121,7 @@ const useFilterData = ({
 		refetch,
 		selectedIds,
 		setSelectedIds,
+		country_code,
 	};
 };
 

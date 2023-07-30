@@ -21,6 +21,7 @@ import ShowAction from './ShowAction';
 import UrgencyTag from './UrgencyTag';
 import ViewInvoices from './ViewInvoice';
 
+const SHOW_TOOLTIP_MAX_LENGTH = 24;
 const RenderFunctions = (
 	{
 		overseasData = '',
@@ -53,7 +54,7 @@ const RenderFunctions = (
 		renderTooltip: (itemData) => {
 			const { organizationName } = itemData || {};
 			return (
-				<RenderTooltip content={organizationName} maxLength={12} />
+				<RenderTooltip content={organizationName} maxLength={SHOW_TOOLTIP_MAX_LENGTH} />
 			);
 		},
 		renderInvoiceTimeLine: (itemData) => (

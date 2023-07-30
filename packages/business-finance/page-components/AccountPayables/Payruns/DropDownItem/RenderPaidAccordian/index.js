@@ -2,7 +2,13 @@ import React from 'react';
 
 import DropDownItem from '..';
 
-function RenderPaidAccordian({ dropDownData = [], loadingDropDown = false, viewId = null, singleitem = {} }) {
+function RenderPaidAccordian({
+	dropDownData = [],
+	loadingDropDown = false,
+	viewId = null,
+	singleitem = {},
+	country_code = '',
+}) {
 	if (viewId !== singleitem?.objectId) {
 		return null;
 	}
@@ -11,6 +17,7 @@ function RenderPaidAccordian({ dropDownData = [], loadingDropDown = false, viewI
 			<DropDownItem
 				data={dropDownData}
 				loadingDropDown={loadingDropDown}
+				country_code={country_code}
 			/>
 		</div>
 	);

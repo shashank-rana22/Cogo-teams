@@ -6,6 +6,7 @@ export const PAYRUN_AUDITED_PAYMENT_READY = {
 		background   : 'none',
 		color        : 'black',
 		marginLeft   : '8px',
+		fontWeight   : 600,
 	},
 	bodyStyles: {
 		color      : ' #333333',

@@ -6,6 +6,7 @@ export const ADVANCE_PAYMENT_PAYRUN_PAID_CONFIG = {
 		background   : 'none',
 		color        : 'black',
 		marginLeft   : '8px',
+		fontWeight   : 600,
 	},
 	bodyStyles: {
 		color      : ' #333333',

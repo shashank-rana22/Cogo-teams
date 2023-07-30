@@ -7,7 +7,7 @@ import RenderTooltip from '../../../commons/RenderTooltip';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-function DropDownItem({ data = [], loadingDropDown = false }) {
+function DropDownItem({ data = [], loadingDropDown = false, country_code = '' }) {
 	return (
 		<div>
 			<div className={styles.hr} />
@@ -16,6 +16,7 @@ function DropDownItem({ data = [], loadingDropDown = false }) {
 					objectNumber = '', cogoBankName = '', transactionRef = '', payrunName = '',	paidTdsAmount = '',
 					paidAmount = '', paymentDate = '', transactionType = '', objectCurrency = '',
 				} = item || {};
+
 				return (
 					<div key={objectNumber}>
 						{loadingDropDown ? (
@@ -52,20 +53,23 @@ function DropDownItem({ data = [], loadingDropDown = false }) {
 											<RenderTooltip content={payrunName || 'N/A'} maxLength={16} />
 										</div>
 									</div>
-									<div className={styles.div_container} style={{ width: '250px' }}>
-										<div className={styles.label}>TDS Amount</div>
-										<div className={styles.value}>
-											{formatAmount({
-												amount   : paidTdsAmount,
-												currency : objectCurrency,
-												options  : {
-													style                 : 'currency',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : 2,
-												},
-											})}
-										</div>
-									</div>
+									{country_code === 'VN' ? null
+										: (
+											<div className={styles.div_container} style={{ width: '250px' }}>
+												<div className={styles.label}>TDS Amount</div>
+												<div className={styles.value}>
+													{formatAmount({
+														amount   : paidTdsAmount,
+														currency : objectCurrency,
+														options  : {
+															style                 : 'currency',
+															currencyDisplay       : 'code',
+															maximumFractionDigits : 2,
+														},
+													})}
+												</div>
+											</div>
+										)}
 									<div className={styles.div_container} style={{ width: '250px' }}>
 										<div className={styles.label}>Paid Amount</div>
 										<div className={styles.value}>
