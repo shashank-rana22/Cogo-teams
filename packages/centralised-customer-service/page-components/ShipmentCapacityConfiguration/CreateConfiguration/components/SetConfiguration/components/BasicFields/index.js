@@ -4,7 +4,6 @@ import controls from './controls';
 import styles from './styles.module.css';
 
 function BasicFields({ control = {}, errors = {}, showForm = false }) {
-	console.log('test');
 	return (
 		<div className={styles.container}>
 			{controls?.map((controlItem) => {
