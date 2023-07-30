@@ -23,10 +23,10 @@ function OrganizationDocuments({
 	searchDocsVal,
 	showWalletDocs,
 	handleDocClick = () => {},
+	orgDocService = '',
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
-
-	const { importer_exporter_id = '' } = shipment_data;
+	const { importer_exporter_id = '' } = shipment_data || {};
 
 	const {
 		data,
@@ -37,10 +37,12 @@ function OrganizationDocuments({
 			status          : 'active',
 			organization_id : importer_exporter_id,
 			q               : searchDocsVal || undefined,
+			service_type    : orgDocService || undefined,
 		},
 		defaultParams: {
 			page_limit: 1000,
 		},
+		orgDocService,
 	});
 
 	const { deleteDocument } = useUpdateOrganizationDocument({
@@ -55,9 +57,7 @@ function OrganizationDocuments({
 			role="button"
 			tabIndex="0"
 			className={styles.action}
-			onClick={() => {
-				deleteDocument({ id: doc?.id });
-			}}
+			onClick={() => deleteDocument({ id: doc?.id })}
 		>
 			Delete Document
 		</div>
@@ -84,7 +84,7 @@ function OrganizationDocuments({
 						className={styles.single_doc}
 						onClick={() => handleDocClick(doc)}
 					>
-						{!showWalletDocs && (
+						{!showWalletDocs ? (
 							<div className={styles.dots}>
 								<Popover
 									interactive
@@ -94,7 +94,7 @@ function OrganizationDocuments({
 									<IcMOverflowDot />
 								</Popover>
 							</div>
-						)}
+						) : null}
 
 						{doc.type === 'pdf' ? (
 							<IcMPdf style={{ fontSize: '32px', color: '#221F20' }} />
@@ -119,7 +119,6 @@ function OrganizationDocuments({
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 									formatType : 'date',
 								})}`}
-
 							</div>
 						</div>
 
