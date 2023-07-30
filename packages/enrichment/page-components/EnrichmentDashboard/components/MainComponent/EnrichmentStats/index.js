@@ -64,26 +64,6 @@ function EnrichmentStats(props) {
 						padAngle={0}
 						cornerRadius={0}
 						activeOuterRadiusOffset={4}
-						defs={[
-							{
-								id         : 'dots',
-								type       : 'patternDots',
-								background : 'inherit',
-								color      : 'rgba(255, 255, 255, )',
-								size       : 4,
-								padding    : 1,
-								stagger    : true,
-							},
-							{
-								id         : 'lines',
-								type       : 'patternLines',
-								background : 'inherit',
-								color      : 'rgba(255, 255, 255, 0.3)',
-								rotation   : -45,
-								lineWidth  : 6,
-								spacing    : 10,
-							},
-						]}
 						enableArcLabels={false}
 						enableArcLinkLabels={false}
 						isInteractive
@@ -115,6 +95,18 @@ function EnrichmentStats(props) {
 								],
 							},
 						]}
+						tooltip={({
+							datum: { label = '', value = '' },
+						}) => (
+							<div className={styles.pie_tooltip}>
+								<strong>
+									{label}
+									:
+									{' '}
+									{value}
+								</strong>
+							</div>
+						)}
 					/>
 
 				</div>

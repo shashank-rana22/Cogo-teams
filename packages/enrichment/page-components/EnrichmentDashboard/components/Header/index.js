@@ -32,6 +32,7 @@ function Header(props) {
 	};
 
 	const isEnrichmentManager = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId);
+	const isAllowedForEnrichmentSheets = geo.navigations.enrichment.is_allowed_for_enrichment_sheets;
 
 	return (
 		<div className={styles.header}>
@@ -47,17 +48,20 @@ function Header(props) {
 					value={searchValue}
 				/>
 			</div>
-			<div className={styles.actions}>
 
-				<Button
-					size="md"
-					type="button"
-					themeType="secondary"
-					onClick={() => redirectToSheets()}
-					style={{ marginLeft: '12px' }}
-				>
-					Bulk Enrichment
-				</Button>
+			<div className={styles.actions}>
+				{isAllowedForEnrichmentSheets && (
+					<Button
+						size="md"
+						type="button"
+						themeType="secondary"
+						onClick={() => redirectToSheets()}
+						style={{ marginLeft: '12px' }}
+					>
+						Bulk Enrichment
+					</Button>
+				)}
+
 				{isEnrichmentManager && (
 					<>
 						<Button

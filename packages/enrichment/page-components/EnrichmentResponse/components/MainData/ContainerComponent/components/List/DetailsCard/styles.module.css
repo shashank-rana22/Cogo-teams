@@ -20,8 +20,14 @@
 }
 
 .edit_action {
-	align-items: center;
 	width: 100px;
+	text-align: center;
+}
+
+.edit_button {
+	display: flex;
+	justify-content: center;
+	margin-top: 8px;
 }
 
 .top {

@@ -424,69 +424,33 @@ export default {
 			},
 		},
 		enrichment: {
-			whatsapp_number_label                 : 'Zalo Number',
-			allowed_to_create_enrichment_requests : true,
-			tabs                                  : ['manual_enrichment'],
-			manual_enrichment                     : {
-				columns: {
-					relationship_manager_view: {
-						active: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
-					agent_view: {
-						active: [
-							'id',
-							'business_name',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
+			whatsapp_number_label            : 'Zalo Number',
+			is_allowed_for_enrichment_sheets : false,
+			hide_columns                     : {
+				relationship_manager_view: {
+					active    : ['registration_number', 'status'],
+					responded : ['registration_number', 'status'],
+					success   : ['registration_number', 'status'],
+					failed    : ['registration_number', 'action'],
 				},
-				actions: {
-					active: {
-						add    : 'Add Details',
-						failed : 'Mark as Failed',
-					},
-					responded:	{
-						edit    : 'Edit Details',
-						success : 'Mark as Completed',
-					},
-					success: {
-						view: 'View Details',
-					},
+				agent_view: {
+					active    : ['registration_number', 'requested_agent', 'status'],
+					responded : ['registration_number', 'requested_agent', 'status'],
+					success   : ['registration_number', 'requested_agent', 'status'],
+					failed    : ['registration_number', 'requested_agent', 'action'],
+				},
+			},
+			actions: {
+				active: {
+					add    : 'Add Details',
+					failed : 'Mark as Failed',
+				},
+				responded:	{
+					edit    : 'Edit Details',
+					success : 'Mark as Completed',
+				},
+				success: {
+					view: 'View Details',
 				},
 			},
 		},

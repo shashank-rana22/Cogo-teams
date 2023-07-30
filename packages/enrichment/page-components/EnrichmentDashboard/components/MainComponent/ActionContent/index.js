@@ -21,7 +21,7 @@ const ICONS_MAPPING = {
 function ActionContent({ onClickCta = () => {}, secondaryTab = '' }) {
 	const geo = getGeoConstants();
 
-	const ACTIONS_MAPPING = geo.navigations.enrichment.manual_enrichment.actions;
+	const ACTIONS_MAPPING = geo.navigations.enrichment.actions;
 
 	const actions = ACTIONS_MAPPING[secondaryTab];
 

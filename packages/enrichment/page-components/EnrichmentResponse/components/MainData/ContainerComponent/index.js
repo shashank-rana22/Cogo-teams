@@ -33,6 +33,7 @@ function ContainerComponent({
 				<List
 					list={list}
 					activeTab={activeTab}
+					actionType={actionType}
 					setDetailsForm={setDetailsForm}
 					loadingResponses={loadingResponses}
 				/>

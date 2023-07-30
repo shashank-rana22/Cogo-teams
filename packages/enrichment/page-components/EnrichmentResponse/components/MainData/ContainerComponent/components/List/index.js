@@ -12,6 +12,7 @@ function List(props) {
 		activeTab = '',
 		loadingResponses = false,
 		setDetailsForm = () => {},
+		actionType = '',
 	} = props;
 
 	if (loadingResponses) {
@@ -40,6 +41,7 @@ function List(props) {
 					key={response}
 					response={response}
 					setDetailsForm={setDetailsForm}
+					actionType={actionType}
 				/>
 			))}
 

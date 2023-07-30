@@ -549,73 +549,31 @@ export default {
 		},
 
 		enrichment: {
-			whatsapp_number_label                 : 'Whatsapp Number',
-			allowed_to_create_enrichment_requests : false,
-			tabs                                  : ['manual_enrichment', 'file_management'],
-			manual_enrichment                     : {
-				columns: {
-					relationship_manager_view: {
-						active: [
-							'id',
-							'business_name',
-							'registration_number',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'registration_number',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'registration_number',
-							'requested_agent',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
-					agent_view: {
-						active: [
-							'id',
-							'business_name',
-							'registration_number',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'registration_number',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'registration_number',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
+			whatsapp_number_label            : 'Whatsapp Number',
+			is_allowed_for_enrichment_sheets : true,
+			hide_columns                     : {
+				relationship_manager_view: {
+					active    : ['status'],
+					responded : ['status'],
+					success   : ['status'],
+					failed    : ['action'],
 				},
-				actions: {
-					active: {
-						add: 'Add Details',
-					},
-					responded:	{
-						edit: 'Edit Details',
-					},
-					success: {
-						view: 'View Details',
-					},
+				agent_view: {
+					active    : ['requested_agent', 'status'],
+					responded : ['requested_agent', 'status'],
+					success   : ['requested_agent', 'status'],
+					failed    : ['requested_agent', 'action'],
+				},
+			},
+			actions: {
+				active: {
+					add: 'Add Details',
+				},
+				responded:	{
+					edit: 'Edit Details',
+				},
+				success: {
+					view: 'View Details',
 				},
 			},
 		},

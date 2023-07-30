@@ -7,14 +7,6 @@ import { isEmpty, startCase } from '@cogoport/utils/';
 import ActionContent from '../components/MainComponent/ActionContent';
 import styles from '../styles.module.css';
 
-const UPLOAD_DOCUMENT_STATUS_MAPPING = {
-	success    : 'green',
-	inactive   : 'orange',
-	processing : 'yellow',
-	processed  : 'blue',
-	failed     : 'red',
-};
-
 const getEnrichmentColumnsData = ({
 	handleEditDetails = () => {},
 	setSelectedRowId = () => {},
@@ -50,7 +42,7 @@ const getEnrichmentColumnsData = ({
 
 	{
 		id       : 'registration_number',
-		Header   : 'TAX Number',
+		Header   : 'Registration Number',
 		accessor : ({ organization, lead_organization, lead_organization_id }) => (
 			<section>
 				{lead_organization_id
@@ -98,7 +90,7 @@ const getEnrichmentColumnsData = ({
 		Header   : 'STATUS',
 		accessor : ({ status }) => (
 			<seaction>
-				<Pill size="md" color={UPLOAD_DOCUMENT_STATUS_MAPPING[status]}>
+				<Pill size="md" color="green">
 					{startCase(status) || '-'}
 				</Pill>
 			</seaction>
