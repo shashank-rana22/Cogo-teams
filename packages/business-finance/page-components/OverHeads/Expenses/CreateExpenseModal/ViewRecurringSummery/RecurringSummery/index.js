@@ -1,9 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber.tsx';
-import { formatDate } from '../../../../../commons/utils/formatDate.ts';
 import stakeHolderTimeLineData from '../../../../../IncidentManagement/utils/formatStakeHolderData';
 import useGetExpenseConfig from '../../../hooks/useGetExpenseConfig';
 import StakeHolderTimeline from '../../StakeHolderTimeline';
@@ -66,7 +66,11 @@ function RecurringSummery({
 			title : 'Start Date',
 			value : (
 				<div>
-					{startDate ? formatDate(startDate, 'dd/MMM/yy', {}, false) : '-'}
+					{startDate ? formatDate({
+						date       : startDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+						formatType : 'date',
+					}) : '-'}
 				</div>
 			),
 		},
@@ -74,7 +78,11 @@ function RecurringSummery({
 			title : 'End Date',
 			value : (
 				<div>
-					{endDate ? formatDate(endDate, 'dd/MMM/yy', {}, false) : '-'}
+					{endDate ? formatDate({
+						date       : endDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+						formatType : 'date',
+					}) : '-'}
 				</div>
 			),
 		},

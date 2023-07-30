@@ -112,8 +112,7 @@ function RecuringModal({
 								GLOBAL_CONSTANTS.formats.date[
 									'dd MMM yyyy'
 								],
-							formatType : 'date',
-							separator  : ' | ',
+							formatType: 'date',
 						})
 						: '-'}
 				</div>
@@ -130,8 +129,7 @@ function RecuringModal({
 								GLOBAL_CONSTANTS.formats.date[
 									'dd MMM yyyy'
 								],
-							formatType : 'date',
-							separator  : ' | ',
+							formatType: 'date',
 						})
 						: '-'}
 				</div>

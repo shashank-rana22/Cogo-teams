@@ -1,8 +1,9 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber.tsx';
-import { formatDate } from '../../../../../commons/utils/formatDate.ts';
 import stakeHolderTimeLineData from '../../../../../IncidentManagement/utils/formatStakeHolderData';
 import useGetStakeholder from '../../../hooks/useGetStakeholder';
 import StakeHolderTimeline from '../../StakeHolderTimeline';
@@ -76,7 +77,11 @@ function Summery({
 			value : (
 				<div>
 					{billDate
-						? formatDate(billDate, 'dd/MMM/yy', {}, false)
+						? formatDate({
+							date       : billDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+							formatType : 'date',
+						})
 						: '-'}
 				</div>
 			),
@@ -86,7 +91,11 @@ function Summery({
 			value : (
 				<div>
 					{createdDate
-						? formatDate(createdDate, 'dd/MMM/yy', {}, false)
+						? formatDate({
+							date       : createdDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+							formatType : 'date',
+						})
 						: '-'}
 				</div>
 			),
@@ -118,7 +127,7 @@ function Summery({
 						<a
 							href={billDocumentUrl}
 							style={{
-								color          : 'blue',
+								color          : '#0000FF',
 								textDecoration : 'underline',
 								fontSize       : '16px',
 							}}
