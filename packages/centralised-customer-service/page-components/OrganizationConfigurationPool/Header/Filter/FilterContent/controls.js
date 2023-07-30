@@ -107,8 +107,8 @@ const controls = [
 		asyncKey    : 'partner_roles',
 		params      : {
 			filters: {
-				role_sub_functions : ['operations'],
-				sub_functions      : ['enterprise_customer_operations',
+				role_functions     : ['operations'],
+				role_sub_functions : ['enterprise_customer_operations',
 					'mid_size_customer_operations', 'cp_customer_operations'],
 				status: 'active',
 			},
