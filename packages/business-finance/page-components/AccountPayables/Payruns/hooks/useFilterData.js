@@ -48,16 +48,21 @@ const useFilterData = ({
 
 	});
 
-	const selectConfigDataMapping = {
+	const selectConfigDataKeyMapping = {
 		INITIATED      : configMapping[activePayrunTab][isInvoiceView],
 		UPLOAD_HISTORY : configMapping[activePayrunTab],
 		PAID           : configMapping[activePayrunTab][overseasData],
 		default        : configMapping?.[activePayrunTab]?.[overseasData]?.[isInvoiceView],
 	};
-	const filteredTab = selectConfigDataMapping[activePayrunTab] || selectConfigDataMapping.default;
 
-	const { getFunction, true: getViewDetails } = filteredTab || {};
-	const { getFunction: getViewInvoiceFunction } = getViewDetails || {};
+	const selctedConfigData = selectConfigDataKeyMapping[activePayrunTab] || selectConfigDataKeyMapping.default;
+
+	const { getFunction, getConfig, getData, getLoading, true: getViewDetails } = selctedConfigData || {};
+
+	const {
+		getFunction: getViewInvoiceFunction, getConfig: getViewInvoiceConfig,
+		getData: getViewInvoiceData, getLoading: getViewInvoiceLoading,
+	} = getViewDetails || {};
 
 	useEffect(() => {
 		if (PAYRUN_INNER_TAB_NAME.includes(activePayrunTab) && !isEmpty(selectedPayrun)) {
@@ -77,20 +82,19 @@ const useFilterData = ({
 	useEffect(() => {
 		if (PAYRUN_INNER_TAB_NAME.includes(activePayrunTab) && !isEmpty(selectedPayrun)) {
 			setApiData({
-				listData    : filteredTab.true.getData,
-				dataLoading : filteredTab.true.getLoading,
-				listConfig  : filteredTab.true.getConfig,
+				listData    : getViewInvoiceData,
+				dataLoading : getViewInvoiceLoading,
+				listConfig  : getViewInvoiceConfig,
 			});
 		} else {
 			setApiData({
-				listData    : filteredTab.getData,
-				dataLoading : filteredTab.getLoading,
-				listConfig  : filteredTab.getConfig,
+				listData    : getData,
+				dataLoading : getLoading,
+				listConfig  : getConfig,
 			});
 		}
-	}, [activePayrunTab, isInvoiceView, overseasData, selectedPayrun, filteredTab?.getData,
-		filteredTab?.getLoading, filteredTab?.true?.getConfig, filteredTab?.getConfig, filteredTab?.true?.getData,
-		filteredTab?.true?.getLoading]);
+	}, [activePayrunTab, isInvoiceView, overseasData, selectedPayrun, getData, getLoading, getViewInvoiceConfig,
+		getConfig, getViewInvoiceData, getViewInvoiceLoading]);
 
 	useEffect(() => {
 		setOverseasData('NORMAL');
