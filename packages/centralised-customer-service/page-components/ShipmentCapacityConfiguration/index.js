@@ -18,7 +18,14 @@ function ShipmentCapacityCofiguration() {
 	return (
 		<>
 			<Header filters={filters} setFilters={setFilters} />
-			<ConfigList list={list} loading={loading} pageData={pageData} page={page} setPage={setPage} />
+			<ConfigList
+				list={list}
+				loading={loading}
+				pageData={pageData}
+				page={page}
+				setPage={setPage}
+				fetchList={fetchList}
+			/>
 		</>
 	);
 }

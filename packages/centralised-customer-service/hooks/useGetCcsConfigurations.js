@@ -33,6 +33,7 @@ const useGetCcsConfigurations = () => {
 						page,
 						filters: {
 							...filters,
+							status: 'active',
 						},
 					},
 				}),

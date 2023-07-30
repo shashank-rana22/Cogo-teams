@@ -7,9 +7,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import CapacityDetailsTable from '../CapacityDetailsTable';
-
-// import CapacityDetailsTable from '../CapacityDetailsTable';
-// import DeactivateModal from '../DeactivateModal';
+import DeactivateModal from '../DeactivateModal';
 
 import styles from './styles.module.css';
 
@@ -56,10 +54,12 @@ const getSlabs = (agentExperienceSlabs = []) => agentExperienceSlabs?.map((item)
 	);
 });
 
-function ConfigListItem({ data = {}, setShowModal = () => {} }) {
+function ConfigListItem({ data = {}, fetchList = () => {} }) {
 	const router = useRouter();
 
-	const { shipment_capacities = [], agent_experience_slab_details = [], id, status } = data;
+	const [showModal, setShowModal] = useState(false);
+
+	const { shipment_capacities = [], agent_experience_slab_details = [], id, status = 'draft' } = data;
 
 	const { title, content } = activationStatus({ status, activated_at: '' });
 
@@ -166,6 +166,16 @@ function ConfigListItem({ data = {}, setShowModal = () => {} }) {
 				</div>
 
 			</div>
+
+			{showModal && (
+				<DeactivateModal
+					showModal={showModal}
+					setShowModal={setShowModal}
+					id={id}
+					status={status}
+					fetchList={fetchList}
+				/>
+			)}
 
 			{showDetails && (
 				<div className={styles.table_container}>

@@ -29,12 +29,13 @@ const useCreateCssConfig = ({ setShowModal = () => {}, source = '', fetchList = 
 		authkey,
 	}, { manual: true });
 
-	const createCcsConfig = async ({ values = {}, configId = '' }) => {
+	const createCcsConfig = async ({ values = {}, configId }) => {
 		try {
 			await trigger({
 				data: {
-					id: id || configId,
+					id     : id || configId,
 					...(source ? { status: 'inactive' } : values),
+					status : 'active',
 				},
 			});
 

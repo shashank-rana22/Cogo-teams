@@ -1,11 +1,21 @@
 import { Button, Modal } from '@cogoport/components';
 
-import useUpdateCsdConfig from '../../../hooks/useUpdateCapacityConfig';
+import useUpdateCapacityConfig from '../../../hooks/useUpdateCapacityConfig';
 
 import styles from './styles.module.css';
 
-function DeactivateModal({ showModal = false, setShowModal = () => {}, id }) {
-	const { loading, updateCsdConfig } = useUpdateCsdConfig({ setShowModal });
+const STATUS_MAPPING = {
+	active : 'inactive',
+	draft  : 'active',
+};
+
+const MESSAGE_MAPPING = {
+	active : 'Deactivate',
+	draft  : 'Activate',
+};
+
+function DeactivateModal({ showModal = false, setShowModal = () => {}, id, status = 'draft', fetchList = () => {} }) {
+	const { loading, updateCapacityConfig } = useUpdateCapacityConfig({ setShowModal, configId: id, fetchList });
 
 	return (
 		<Modal
@@ -16,7 +26,7 @@ function DeactivateModal({ showModal = false, setShowModal = () => {}, id }) {
 			showCloseIcon={false}
 		>
 			<Modal.Header
-				title="Are you sure you want to Delete this configuration?"
+				title={`Are you sure you want to ${MESSAGE_MAPPING[status]} this configuration?`}
 				style={{ textAlign: 'center' }}
 			/>
 
@@ -25,6 +35,7 @@ function DeactivateModal({ showModal = false, setShowModal = () => {}, id }) {
 					<Button
 						type="button"
 						themeType="secondary"
+						loading={loading}
 						onClick={() => setShowModal(false)}
 					>
 						Cancel
@@ -34,9 +45,9 @@ function DeactivateModal({ showModal = false, setShowModal = () => {}, id }) {
 						type="button"
 						style={{ marginLeft: '12px' }}
 						loading={loading}
-						onClick={() => updateCsdConfig({ id })}
+						onClick={() => updateCapacityConfig({ status: STATUS_MAPPING[status], id })}
 					>
-						Deactivate
+						{MESSAGE_MAPPING[status]}
 					</Button>
 				</div>
 			</Modal.Body>

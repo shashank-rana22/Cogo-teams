@@ -1,6 +1,5 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import EmptyState from '../../EmptyState';
 import LoadingState from '../../LoadingState';
@@ -16,8 +15,6 @@ function OrgConfigPoolList({
 	list = [], loading = false, pageData = {}, page = 1,
 	setPage = () => {}, fetchList = () => {},
 }) {
-	const [showModal, setShowModal] = useState(false);
-
 	if (loading) {
 		return <LoadingState />;
 	}
@@ -32,8 +29,6 @@ function OrgConfigPoolList({
 				<OrgConfigListItem
 					key={item.id}
 					data={item}
-					showModal={showModal}
-					setShowModal={setShowModal}
 					fetchList={fetchList}
 				/>
 			))}

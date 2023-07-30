@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot, IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import DeactivateModal from '../DeactivateModal';
 
@@ -61,8 +61,10 @@ const getOrganizations = (organizations = []) => (
 	</section>
 );
 
-function OrgConfigPoolListItem({ data = {}, showModal = false, setShowModal = () => {}, fetchList = () => {} }) {
+function OrgConfigPoolListItem({ data = {}, fetchList = () => {} }) {
 	const router = useRouter();
+
+	const [showModal, setShowModal] = useState(false);
 
 	const {
 		cogo_entity, organization = [], organization_type, id, booking_source = '',

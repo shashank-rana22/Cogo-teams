@@ -9,7 +9,7 @@ const MESSAGE_MAPPING = {
 	inactive : 'Deactivated',
 };
 
-const useUpdateCapacityConfig = ({ setShowModal = () => {} }) => {
+const useUpdateCapacityConfig = ({ setShowModal = () => {}, configId, fetchList = () => {} }) => {
 	const router = useRouter();
 
 	const { id } = router.query;
@@ -24,12 +24,15 @@ const useUpdateCapacityConfig = ({ setShowModal = () => {} }) => {
 		try {
 			await trigger({
 				data: {
-					config_id: id,
+					config_id: id || configId,
 					status,
 				},
 			});
 
-			router.push('/centralised-customer-service?activeTab=shipment_capacity_config');
+			if (!configId) router.push('/centralised-customer-service?activeTab=shipment_capacity_config');
+
+			fetchList();
+
 			Toast.success(`${MESSAGE_MAPPING[status]} Successfully!`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));

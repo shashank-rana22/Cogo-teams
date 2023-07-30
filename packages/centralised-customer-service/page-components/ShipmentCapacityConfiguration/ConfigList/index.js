@@ -1,6 +1,5 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import EmptyState from '../../EmptyState';
 import LoadingState from '../../LoadingState';
@@ -12,9 +11,7 @@ const PAGE_LIMIT = 10;
 const DEFAULT_PAGE = 1;
 const DEFAULT_TOTAL_COUNT = 0;
 
-function ConfigList({ list = [], loading = false, pageData = {}, page = 1, setPage = () => {} }) {
-	const [showModal, setShowModal] = useState(false);
-
+function ConfigList({ list = [], loading = false, pageData = {}, page = 1, setPage = () => {}, fetchList = () => {} }) {
 	if (loading) {
 		return <LoadingState />;
 	}
@@ -29,8 +26,7 @@ function ConfigList({ list = [], loading = false, pageData = {}, page = 1, setPa
 				<ConfigListItem
 					key={item.id}
 					data={item}
-					showModal={showModal}
-					setShowModal={setShowModal}
+					fetchList={fetchList}
 				/>
 			))}
 
