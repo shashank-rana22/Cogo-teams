@@ -9,7 +9,7 @@
 .icons_container {
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: flex-end;
 	width: 30%;
 
 	img {
@@ -24,6 +24,7 @@
 .sid_id {
 	font-weight: 600;
 	color: #4f4f4f;
+	cursor: pointer;
 }
 
 .importer_exporter_styles {
@@ -33,4 +34,11 @@
 	color: #000;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.overflow_container {
+	width: 18px;
+	height: 18px;
+	margin-left: 8px;
+	cursor: pointer;
 }

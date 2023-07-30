@@ -14,7 +14,13 @@ function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type =
 		net_total = 0,
 		net_total_price_currency = '',
 		payment_term : paymentTerm = '',
+		milestone_activity = [],
 	} = shipmentItem;
+
+	const milestoneActivity = [...milestone_activity].reverse();
+
+	const currentEvent = milestone_activity.find((itm) => itm?.completed_on);
+	const nextEvent = milestoneActivity.find((itm) => !itm?.completed_on);
 
 	return (
 		<>
@@ -59,12 +65,14 @@ function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type =
 			<div className={styles.footer_block}>
 				<div className={styles.footer_left_block}>
 					<Pill size="md" color="#CFEAED">
-						Booking Placed
+						{currentEvent?.milestone || 'Booking Placed'}
 					</Pill>
 				</div>
 
 				<div className={styles.footer_right_block}>
-					Next: Booking Confirmation
+					Next:
+					{' '}
+					{nextEvent?.milestone || 'Booking Confirmation'}
 				</div>
 			</div>
 

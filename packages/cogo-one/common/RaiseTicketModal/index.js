@@ -1,39 +1,33 @@
-import { Button, Modal } from '@cogoport/components';
-import { useState } from 'react';
+import { Modal } from '@cogoport/components';
 
 import TicketModal from './TicketModal';
 
-function RaiseTicketModal({ shipmentData = {} }) {
-	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
-
+function RaiseTicketModal({
+	shipmentData = {},
+	setShowRaiseTicket = () => {},
+	showRaiseTicket = () => {},
+}) {
 	const handleClose = () => {
 		setShowRaiseTicket(false);
 	};
 
-	return (
-		<div>
-			<Button
-				size="xs"
-				onClick={() => setShowRaiseTicket(true)}
-			>
-				Raise Ticket
-			</Button>
+	if (!showRaiseTicket) {
+		return null;
+	}
 
-			{showRaiseTicket && (
-				<Modal
-					placement="center"
-					size="sm"
-					show={showRaiseTicket}
-					closeOnOuterClick={handleClose}
-					onClose={handleClose}
-				>
-					<TicketModal
-						shipmentData={shipmentData}
-						setShowRaiseTicket={setShowRaiseTicket}
-					/>
-				</Modal>
-			)}
-		</div>
+	return (
+		<Modal
+			placement="center"
+			size="sm"
+			show={showRaiseTicket}
+			closeOnOuterClick={handleClose}
+			onClose={handleClose}
+		>
+			<TicketModal
+				shipmentData={shipmentData}
+				setShowRaiseTicket={setShowRaiseTicket}
+			/>
+		</Modal>
 	);
 }
 

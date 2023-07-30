@@ -5,8 +5,8 @@ import ShipmentsCard from '../../../../../common/ShipmentsCard';
 
 import styles from './styles.module.css';
 
-function ShipmentActivities({ shipmentsData = {} }) {
-	const { list = [] } = shipmentsData;
+function ShipmentActivities({ transactional = {} }) {
+	const { list = [] } = transactional;
 
 	if (isEmpty(list)) {
 		return (
@@ -15,13 +15,17 @@ function ShipmentActivities({ shipmentsData = {} }) {
 	}
 
 	return (
-		<>
-			{(list || []).map((shipmentItem) => (
-				<div key={shipmentItem.id} className={styles.container}>
-					<ShipmentsCard shipmentItem={shipmentItem} type="user_shipments" />
-				</div>
-			))}
-		</>
+		(list || []).map((shipmentItem) => (
+			<div
+				key={shipmentItem.id}
+				className={styles.container}
+			>
+				<ShipmentsCard
+					shipmentItem={shipmentItem}
+					type="user_shipments"
+				/>
+			</div>
+		))
 	);
 }
 
