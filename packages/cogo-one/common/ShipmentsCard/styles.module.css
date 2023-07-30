@@ -17,20 +17,22 @@
 .footer_block {
 	display: flex;
 	align-items: center;
-	padding: 10px 16px;
+	width: 100%;
+	padding: 10px 6px;
 	background: #f3fafa;
 }
 
 .footer_right_block {
-	width: 100px;
+	width: 50%;
 	overflow: hidden;
 	font-size: 10px;
+	text-align: center;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
 .footer_left_block {
-	width: 145px;
+	width: 50%;
 
 	:global {
 		.ui_pill_text {

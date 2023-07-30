@@ -4,25 +4,31 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
 import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
-import useListTransactionalShipments from '../../../../hooks/useListTransactionalShipments';
 import useListUserChatSummary from '../../../../hooks/useListUserChatSummary';
 
 import ActiveComponent from './ActiveComponent';
 import Filters from './Filters';
 import LoadingState from './LoadingState';
+import ShipmentLoadingState from './ShipmentActivities/LoadingState';
 import styles from './styles.module.css';
 
 const EmptyFunction = () => {};
 const DEFAULT_PAGE_COUNT = 1;
 
+function Loader({ activityTab = '' }) {
+	if (activityTab === 'transactional') {
+		return <ShipmentLoadingState />;
+	}
+
+	return <LoadingState activityTab={activityTab} />;
+}
+
 function UserActivities(props) {
 	const {
 		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard, showMore,
 		setRaiseTicketModal = () => {},
-		viewType = '',
 	} = props || {};
 
 	const [activityTab, setActivityTab] = useState('transactional');
@@ -32,11 +38,11 @@ function UserActivities(props) {
 
 	const { mobile_no, channel_type = '' } = activeMessageCard;
 	const {
-		user_id: messageUserId, lead_user_id: messageLeadUserId = null, id = '', sender = '',
-		organization_id: orgId = '',
+		user_id:messageUserId,
+		lead_user_id:messageLeadUserId = null, id = '', sender = '',
 	} = formattedMessageData || {};
+
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
-	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
 
 	const user_id = activeTab === 'message' ? messageUserId : voiceCallUserId;
 	const lead_user_id = activeTab === 'message' ? messageLeadUserId : null;
@@ -59,8 +65,11 @@ function UserActivities(props) {
 		pagination,
 		setPagination,
 	});
-	const { listLoading, shipmentsData } = useListTransactionalShipments({ pagination, orgId, filters });
-	const { timeLineLoading = false, timeLineData = {} } = useListCogooneTimeline({
+
+	const {
+		timeLineLoading = false,
+		timeLineData = {},
+	} = useListCogooneTimeline({
 		activeSubTab,
 		id,
 		user_id,
@@ -93,17 +102,13 @@ function UserActivities(props) {
 	let list = [];
 	let channel_total_count;
 
-	if (showShipments && activityTab === 'transactional') {
-		list = shipmentsData?.list || [];
-		channel_total_count = shipmentsData?.total_count || '0';
-	} else if (activityTab === 'communication' || activityTab === 'transactional') {
+	if (activityTab === 'communication' || activityTab === 'transactional') {
 		list = data?.[activityTab]?.list || [];
 		channel_total_count = data?.[activityTab]?.total_count || '0';
 	} else {
 		list = data?.[activityTab]?.spot_searches?.list || [];
 		channel_total_count = data?.[activityTab]?.spot_searches?.total_count || '0';
 	}
-
 	let subtab_count;
 	if (activeSubTab === 'agent') {
 		subtab_count = agent_total_count;
@@ -113,7 +118,9 @@ function UserActivities(props) {
 		subtab_count = channel_total_count;
 	}
 
-	useEffect(() => { setActivityTab('transactional'); }, [customerId]);
+	useEffect(() => {
+		setActivityTab('transactional');
+	}, [customerId]);
 
 	useEffect(() => {
 		setFilters(null);
@@ -239,8 +246,8 @@ function UserActivities(props) {
 
 				</div>
 			)}
-			{(loading || timeLineLoading || listLoading) ? (
-				<LoadingState activityTab={activityTab} />
+			{(loading || timeLineLoading) ? (
+				<Loader activityTab={activityTab} />
 			) : (
 				<ActiveComponent
 					emptyCheck={emptyCheck}
@@ -250,14 +257,12 @@ function UserActivities(props) {
 					chatDataList={chatDataList}
 					timeLineList={timeLineList}
 					setRaiseTicketModal={setRaiseTicketModal}
-					viewType={viewType}
-					shipmentsData={shipmentsData}
 				/>
 			)}
-			{(!loading || !timeLineLoading || !listLoading) && (
+
+			{(!loading || !timeLineLoading) && (
 				<div className={styles.pagination}>
 					<Pagination
-						type="page"
 						currentPage={pagination}
 						totalItems={subtab_count}
 						pageSize={10}
