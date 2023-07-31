@@ -1,0 +1,30 @@
+.header {
+	font-size: 24px;
+	color: #221f20;
+}
+
+.sub_header {
+	color: #4f4f4f;
+}
+
+.select_button {
+	display: flex;
+	align-items: center;
+}
+
+.main_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-weight: 550;
+}
+
+.select_wrapper {
+	padding-right: 20px;
+
+	:global {
+		.ui_select_container {
+			width: 150px;
+		}
+	}
+}
