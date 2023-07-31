@@ -1599,16 +1599,6 @@ const navigationMappingAdmin = {
 				main_apis: [],
 			},
 			{
-				key           : 'cogo_assured-rate_sheets',
-				title         : 'Rate Sheets',
-				href          : '/cogo-assured/rate_sheets',
-				as            : '/cogo-assured/rate_sheets',
-				type          : 'link',
-				possible_apis : apis.cogo_assured,
-
-				main_apis: [],
-			},
-			{
 				key           : 'cogo_assured-feedbacks',
 				title         : 'Feedbacks',
 				href          : '/cogo-assured/feedbacks',
@@ -1630,6 +1620,35 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		possible_apis : apis.tracking_air_container_job,
 		module_type   : 'dashboards',
+	},
+	forecast: {
+		key         : 'forecast',
+		title       : 'Forecast',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		icon        : IcCCogoassured,
+		options     : [
+			{
+				key           : 'forecast-supply_forecast',
+				title         : 'Supply Forecast',
+				href          : '/supply-forecast',
+				as            : '/supply-forecast',
+				type          : 'link',
+				possible_apis : apis.supply_forecast,
+
+				main_apis: [],
+			},
+			{
+				key           : 'forecast-demand_forecast',
+				title         : 'Demand Forecast',
+				href          : '/demand-forecast',
+				as            : '/demand-forecast',
+				type          : 'link',
+				possible_apis : apis.demand_forecast,
+
+				main_apis: [],
+			},
+		],
 	},
 	product_code_mapping: {
 		key           : 'product_code_mapping',
