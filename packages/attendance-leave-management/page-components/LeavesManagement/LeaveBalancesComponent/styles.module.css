@@ -1,4 +1,75 @@
 .container {
 	width: 100%;
+	min-height: 30vh;
+	padding: 16px 12px;
 	background: #f9f9f9;
+	border-radius: 16px;
+}
+
+.header_text {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.header_text1 {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.leaves_cotegory_body {
+	padding: 12px;
+	margin-top: 20px;
+	background: #fff;
+	border-radius: 6px;
+
+	:global {
+		.ui_progressbar_filename {
+			display: none;
+		}
+
+		.ui_progressbar_bar {
+			height: 4px;
+
+			.ui_progressbar_progress {
+				height: 4px;
+			}
+		}
+	}
+}
+
+.leave_ctn {
+	padding: 6px 0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.last_leave_ctn {
+	padding: 6px 0;
+}
+
+.leave_icon_ctn {
+	display: flex;
+	align-items: center;
+	padding: 8px 0;
+}
+
+.leaves_text {
+	padding-left: 10px;
+	font-size: 16px;
+}
+
+.button_ctn {
+	padding-top: 14px;
+
+	:global {
+		.ui_button_container {
+			min-width: 300px;
+		}
+	}
+}
+
+.text2 {
+	display: flex;
+	justify-content: space-between;
+	font-size: 14px;
+	font-weight: 500;
 }

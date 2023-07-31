@@ -1,12 +1,13 @@
 import Header from './Header';
 import LeaveBalancesComponent from './LeaveBalancesComponent';
+import LeaveRequestListing from './LeaveRequestListing';
 import LeaveStatsApplicationsComponent from './LeaveStatsApplicationsComponent';
 import styles from './styles.module.css';
 
 function LeavesManagement() {
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
+			<div>
 				<Header />
 			</div>
 			<div className={styles.body_container}>
@@ -16,6 +17,9 @@ function LeavesManagement() {
 				<div className={styles.leave_stats_style}>
 					<LeaveStatsApplicationsComponent />
 				</div>
+			</div>
+			<div>
+				<LeaveRequestListing />
 			</div>
 		</div>
 	);

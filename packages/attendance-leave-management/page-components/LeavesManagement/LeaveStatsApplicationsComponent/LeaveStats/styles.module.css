@@ -1,0 +1,27 @@
+.container {
+	width: 100%;
+	padding: 20px 16px;
+	background: #fff;
+	border-radius: 6px;
+}
+
+.header_ctn {
+	display: flex;
+	justify-content: space-between;
+}
+
+.text1 {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.text2 {
+	color: #828282;
+}
+
+.month_styles {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 20px;
+	color: #bdbdbd;
+}

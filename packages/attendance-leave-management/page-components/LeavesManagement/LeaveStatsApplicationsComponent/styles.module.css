@@ -1,4 +1,31 @@
 .container {
 	width: 100%;
+
+	/* min-height: 30vh; */
+	padding: 16px 12px;
 	background: #f9f9f9;
+	border-radius: 16px;
+}
+
+.header_ctn {
+	display: flex;
+	justify-content: space-between;
+}
+
+.header_text1 {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.header_text2 {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.button_styles {
+	background-color: #fffce6 !important;
+}
+
+.leave_stats_style {
+	padding-top: 16px;
 }

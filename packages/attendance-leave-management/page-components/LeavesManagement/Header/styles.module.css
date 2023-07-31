@@ -1,8 +1,14 @@
 .container {
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 20px;
 }
 
 .select_container {
 	width: 160px;
+}
+
+.header_text {
+	font-size: 24px;
+	font-weight: 600;
 }

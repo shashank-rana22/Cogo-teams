@@ -14,7 +14,7 @@ function Header() {
 	return (
 		<div className={styles.container}>
 			<div>
-				<h2>Leave Management</h2>
+				<div className={styles.header_text}>Leave Management</div>
 				<div>view and manage your leave request</div>
 			</div>
 			<div className={styles.select_container}>

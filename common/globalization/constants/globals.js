@@ -305,6 +305,9 @@ const GLOBAL_CONSTANTS = {
 		clock_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
 		sad_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
 		sign_up_failed       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
+		previlege_leave_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/privilegeLeaveImage.svg',
+		sick_leave_icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sickLeaveImage.svg',
+		casual_leave_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/casualLeaveImage.svg',
 	},
 
 	video_call_ring_tone_url:
