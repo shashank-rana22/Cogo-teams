@@ -22,11 +22,12 @@ function Item({
 	allTakenServices = [],
 }) {
 	const { shipment_type = '' } = shipmentData;
+
 	const {
 		billing_address,
 		invoice_currency = '', invoice_source = '',
-		invoicing_party_total_discounted = '',
 		invoice_total_currency = '',
+		invoice_total_discounted = '',
 		services = [],
 		status = '',
 		id = '',
@@ -125,12 +126,12 @@ function Item({
 						{invoice_currency}
 					</div>
 
-					{invoicing_party_total_discounted ? (
+					{invoice_total_discounted ? (
 						<div className={styles.overall_amount}>
 							Invoice Amount:
 							&nbsp;
 							{formatAmount({
-								amount   : invoicing_party_total_discounted,
+								amount   : invoice_total_discounted,
 								currency : invoice_total_currency,
 								options  : {
 									style           : 'currency',

@@ -27,6 +27,7 @@ function Child({
 		() => Array(controls.length).fill(null).map(() => Math.random()),
 		[controls.length],
 	);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.item_container}>
