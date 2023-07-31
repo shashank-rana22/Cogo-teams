@@ -1964,7 +1964,12 @@ const partner = {
 		{
 			api          : 'get_transacting_organization_shipment_data',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_commodities_on_trade_port_pair',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
 		},
 	],
 	supply_crm: [
