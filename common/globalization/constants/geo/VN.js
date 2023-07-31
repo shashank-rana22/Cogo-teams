@@ -38,7 +38,8 @@ export default {
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
-	uuid: {
+	office_locations : ['ho chi minh'],
+	uuid             : {
 		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
 		admin_id                         : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
@@ -136,7 +137,7 @@ export default {
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
 		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
-		ff_cost_booking_manager   : '8cc096a8-e279-425c-ba95-3970614c3d8e',
+		ff_cost_booking_executive : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		credit_controller_id      : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		vietnam_business_heads    : [
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal
@@ -170,7 +171,8 @@ export default {
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 			'123951fe-78aa-4ad1-b2da-fa6191e3a876', // SO2
 		],
-		service_ops3_role_ids: [
+		so1_so2_ops_role_id   : 'd974d323-b777-47a8-b14a-64df2e59df84',
+		service_ops3_role_ids : [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
 			'7000ed27-f649-4e00-9c20-8c20c9eccf78', // Prod_COE_Finance_Head
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
@@ -236,7 +238,8 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
-		igm_desk: '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
 	},
 	options: {
 		registration_types: [
@@ -365,8 +368,11 @@ export default {
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
 			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
 			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
+			{ label: 'E-Invoice Failed', value: 'IRN_FAILED' },
+			{ label: 'E-Invoice Cancelled', value: 'IRN_CANCELLED' },
 			{ label: 'Requested', value: 'REQUESTED' },
 		],
+
 		freight_container_types: [
 			{
 				label : 'Standard(Dry)',
@@ -415,6 +421,15 @@ export default {
 		},
 	},
 	navigations: {
+		settlement_onAccountCollection: {
+			tabs: [
+				'ap-ar-settlement',
+				'history',
+				'onAccountCollection',
+				'JournalVoucher',
+			],
+		},
+
 		supply_dashboard: {
 			rfq_enquiries: {
 				tabs: [
