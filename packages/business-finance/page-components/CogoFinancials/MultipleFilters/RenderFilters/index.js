@@ -31,8 +31,23 @@ const CURRENCY_OPTIONS = Object.values(GLOBAL_CONSTANTS.currency_code).map((item
 	}
 ));
 
-function RenderFilters({ filter = {}, setFilter = () => {} }) {
+function RenderFilters({
+	filter = {}, setFilter = () => {},
+	getProfitabilityStats = () => {},
+	setVisible = () => {},
+}) {
 	const [activeFilter, setActiveFilter] = useState('currency');
+
+	const handleReset = () => {
+		setFilter({});
+		setActiveFilter('currency');
+		getProfitabilityStats();
+	};
+
+	const onApply = () => {
+		getProfitabilityStats(filter);
+		setVisible(false);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -41,16 +56,20 @@ function RenderFilters({ filter = {}, setFilter = () => {} }) {
 				<div style={{ display: 'flex' }}>
 					<Button
 						themeType="secondary"
-						onClick={() => {
-							setFilter({});
-							setActiveFilter('currency');
-						}}
+						onClick={handleReset}
 						disabled={isEmpty(filter)}
 					>
 						Reset
 
 					</Button>
-					<Button style={{ marginLeft: '8px' }}>Apply</Button>
+					<Button
+						style={{ marginLeft: '8px' }}
+						onClick={onApply}
+						disabled={isEmpty(filter)}
+					>
+						Apply
+
+					</Button>
 				</div>
 			</div>
 

@@ -2,6 +2,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
@@ -13,8 +14,7 @@ const TOTAL_MILLISECONDS = 1000;
 const geo = getGeoConstants();
 const DEFAULT_CURRENCY = geo?.country.currency.code;
 
-const useGetProfitabilityStats = ({ filter = '', entity = '', timeRange = '' }) => {
-	const { currency } = filter;
+const useGetProfitabilityStats = ({ entity = '', timeRange = '' }) => {
 	const [
 		{ data:ongoingData, loading:ongoingLoading },
 		ongoingTrigger,
@@ -81,47 +81,49 @@ const useGetProfitabilityStats = ({ filter = '', entity = '', timeRange = '' }) 
 		return ({ startDate, endDate });
 	}, [timeRange]);
 
-	useEffect(() => {
-		// const { startDate, endDate } = getDuration();
-		const api = () => {
-			const PARAMS = {
+	const api = useCallback((filter = {}) => {
+		const { currency, channel, service, serviceCategory, segment } = filter;
+		const { startDate, endDate } = getDuration();
+		const IS_HARD_CODED = true;
 
-				entityCode : entity,
-				startDate  : '2023-07-28',
-				endDate    : '2023-07-28',
-				currency   : currency || DEFAULT_CURRENCY,
-				// parentService : 'OCEAN',
-				// service       : 'FCL_FREIGHT',
-				// tradeType     : 'EXPORT',
-				// channel       : 'SME',
-			};
-			try {
-				ongoingTrigger({
-					params: {
-						...PARAMS,
-						statsType: 'ONGOING',
-					},
-				});
-				closedTrigger({
-					params: {
-						...PARAMS,
-						statsType: 'OPR_CLOSED',
-					},
-				});
-				financialTrigger({
-					params: {
-						...PARAMS,
-						statsType: 'FINANCE_CLOSED',
-					},
-				});
-			} catch (error) {
-				toastApiError(error);
-			}
+		const PARAMS = {
+			entityCode    : entity,
+			startDate     : IS_HARD_CODED ? '2023-07-28' : startDate,
+			endDate       : IS_HARD_CODED ? '2023-07-28' : endDate,
+			currency      : currency || DEFAULT_CURRENCY,
+			parentService : segment,
+			service,
+			tradeType     : !isEmpty(service) ? upperCase(serviceCategory) : undefined,
+			channel,
 		};
+
+		try {
+			ongoingTrigger({
+				params: {
+					...PARAMS,
+					statsType: 'ONGOING',
+				},
+			});
+			closedTrigger({
+				params: {
+					...PARAMS,
+					statsType: 'OPR_CLOSED',
+				},
+			});
+			financialTrigger({
+				params: {
+					...PARAMS,
+					statsType: 'FINANCE_CLOSED',
+				},
+			});
+		} catch (error) {
+			toastApiError(error);
+		}
+	}, [entity, ongoingTrigger, closedTrigger, financialTrigger, getDuration]);
+
+	useEffect(() => {
 		api();
-	}, [ongoingTrigger, closedTrigger, financialTrigger,
-		currency, entity, timeRange,
-		getDuration]);
+	}, [api, entity, timeRange]);
 
 	return {
 		financialData,
@@ -130,6 +132,7 @@ const useGetProfitabilityStats = ({ filter = '', entity = '', timeRange = '' }) 
 		ongoingLoading,
 		operationalData,
 		operationalLoading,
+		getProfitabilityStats: api,
 	};
 };
 export default useGetProfitabilityStats;

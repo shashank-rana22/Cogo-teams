@@ -62,6 +62,7 @@ function CogoFinancials() {
 		financialData, financialLoading,
 		operationalData, operationalLoading,
 		ongoingData, ongoingLoading,
+		getProfitabilityStats,
 	} = useGetProfitabilityStats({ filter, entity, timeRange });
 
 	const handleClick = () => {
@@ -99,6 +100,7 @@ function CogoFinancials() {
 					<MultipleFilters
 						filter={filter}
 						setFilter={setFilter}
+						getProfitabilityStats={getProfitabilityStats}
 					/>
 					<Select
 						value={entity}

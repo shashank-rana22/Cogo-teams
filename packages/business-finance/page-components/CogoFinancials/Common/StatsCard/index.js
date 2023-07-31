@@ -21,7 +21,7 @@ function StatsCard({
 	heading = '', cardId = '', setActiveShipmentCard = () => {},
 	showPill = false, cardData = [], loading = false, taxType = '',
 }) {
-	const { currency, invoiceCount, jobCount } = cardData;
+	const { currency, invoiceCount = 0, jobCount } = cardData;
 
 	const mappingCards = [
 		{
