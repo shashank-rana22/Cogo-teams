@@ -7,7 +7,7 @@ const DEFAULT_PAGE = 1;
 const getParams = ({ pagination, serialId }) => ({
 	filters: {
 		state     : ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
-		serial_id : serialId,
+		serial_id : serialId || undefined,
 	},
 	get_shipment_quotation_data : true,
 	// milestone_data_required     : true,
