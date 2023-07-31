@@ -1,44 +1,54 @@
 import { useTicketsRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useState } from 'react';
 
 import { FILTER_KEYS_MAPPING } from '../constants';
 
-const useListTickets = ({ UserID = '', activeTab = '', fetchTicketsStats }) => {
+const DEFAULT_PAGE_COUNT = 1;
+const DEFAULT_PAGE_SIZE = 10;
+
+const getParams = ({ filter, userId, pagination, performedById }) => ({
+	...(FILTER_KEYS_MAPPING[filter] || {}),
+	UserID        : userId || undefined,
+	size          : DEFAULT_PAGE_SIZE,
+	page          : pagination - DEFAULT_PAGE_COUNT,
+	PerformedByID : performedById,
+});
+
+const useListTickets = ({ userId = '', activeTab = '', fetchTicketsStats = () => {} }) => {
+	const { performedById } = useSelector(({ profile }) => ({ performedById: profile.user.id }));
+
+	const [pagination, setPagination] = useState(DEFAULT_PAGE_COUNT);
 	const [filter, setFilter] = useState('requested');
+
 	const [{ loading, data }, trigger] = useTicketsRequest({
 		url     : '/list',
 		method  : 'get',
 		authkey : 'get_tickets_list',
 	}, { manual: true });
 
-	const [pagination, setPagination] = useState(1);
-
-	useEffect(() => {
-		setPagination(1);
-		fetchTicketsStats();
-	}, [filter, fetchTicketsStats]);
-
-	const fetchTickets = useCallback(async () => {
+	const fetchTickets = useCallback(() => {
+		if (activeTab === 'email' || !userId) {
+			return null;
+		}
 		try {
-			await trigger({
-				params: {
-					...(FILTER_KEYS_MAPPING[filter] || {}),
-					UserID,
-					size : 10,
-					page : pagination - 1,
-				},
-
+			trigger({
+				params: getParams({ filter, userId, pagination, performedById }),
 			});
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [trigger, UserID, filter, pagination]);
+		return null;
+	}, [activeTab, userId, trigger, filter, pagination, performedById]);
 
 	useEffect(() => {
-		if (activeTab !== 'email' && UserID) {
-			fetchTickets();
-		}
-	}, [fetchTickets, UserID, activeTab]);
+		setPagination(DEFAULT_PAGE_COUNT);
+		fetchTicketsStats();
+	}, [filter, fetchTicketsStats]);
+
+	useEffect(() => {
+		fetchTickets();
+	}, [fetchTickets]);
 
 	return {
 		ticketData  : data,
