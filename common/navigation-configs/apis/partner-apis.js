@@ -11823,11 +11823,11 @@ const partner = {
 			service_name : 'operator',
 		},
 		{
-			api         : '/air-coe/awb-inventory/list-stock',
+			api         : 'get_air_coe_awb_inventory_list_stock',
 			access_type : 'private',
 		},
 		{
-			api         : '/air-coe/awb-inventory/list',
+			api         : 'get_air_coe_awb_inventory_list',
 			access_type : 'private',
 		},
 	],
