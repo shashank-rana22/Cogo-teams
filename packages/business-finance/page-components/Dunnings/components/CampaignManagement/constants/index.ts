@@ -10,14 +10,6 @@ const TOTAL_MINUTES = 60;
 
 export const SERVICE_OPTIONS = geo?.options.services;
 
-export const CYCLE_OPTIONS = [
-	{ label: 'Scheduled', value: 'SCHEDULED' },
-	{ label: 'Cancelled', value: 'CANCELLED' },
-	{ label: 'Completed', value: 'COMPLETED' },
-	{ label: 'Ongoing', value: 'IN_PROGRESS' },
-	{ label: 'Failed', value: 'FAILED' },
-];
-
 export const CYCLE_TYPE = [
 	{
 		label: 'SOA', value: 'SOA',
@@ -40,7 +32,6 @@ export const FREQUENCY_OPTIONS = [
 	},
 	{ label: 'MONTHLY', value: 'MONTHLY' },
 	{ label: 'WEEKLY', value: 'WEEKLY' },
-	{ label: 'BI WEEKLY', value: 'BI_WEEKLY' },
 ];
 
 export const MONTH_DAYS = Array(TOTAL_MONTH_DAYS).fill(null).map((item, index) => (

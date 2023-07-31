@@ -1,6 +1,7 @@
 import { Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMSpecificUsers } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 
 import ReceiveDiv from '../../../../../common/ReceiveDiv';
 import { PRIORITY_MAPPING } from '../../../../../constants';
@@ -12,7 +13,7 @@ function EachTicket({
 	eachTicket = {},
 	createTicketActivity = () => {},
 	agentId = '',
-	handleCardClick,
+	handleCardClick = () => {},
 }) {
 	const {
 		Data: {
@@ -26,10 +27,11 @@ function EachTicket({
 			ShipmentId = 0,
 			AdditionalData = '',
 		} = {},
-		CreatedAt = '',
+		CreatedAt : createdAt = '',
 		TicketActivity:{ Description:ticketActivityDescription = '' } = {},
 		Priority = '',
 		Status = '',
+		TicketStatus = '',
 		ID = '',
 		Type = '',
 		Description = '',
@@ -37,7 +39,14 @@ function EachTicket({
 		ReviewerName = '',
 	} = eachTicket || {};
 
-	const date = CreatedAt && format(new Date(CreatedAt), 'dd MMM YYYY');
+	const date = createdAt
+		? formatDate({
+			date       : createdAt,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM YYYY'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+			formatType : 'dateTime',
+			separator  : ', ',
+		}) : '';
 
 	const handleTicketActivity = ({ type = '', status = '' }) => {
 		const payload = {
@@ -61,7 +70,7 @@ function EachTicket({
 		canPerformActions = '',
 		iconUrl = '',
 	} = getTicketActivityMapping({
-		status                  : Status,
+		status                  : TicketStatus,
 		canPerformRequestAction : agentId === TicketReviewerID,
 	}) || [];
 
@@ -75,8 +84,7 @@ function EachTicket({
 		>
 			<div className={styles.header}>
 				<div
-					role="button"
-					tabIndex={0}
+					role="presentation"
 					onClick={() => handleCardClick(ID)}
 					className={cl`${styles.details_div} 
 							${Status === 'closed' ? styles.closed_details : ''}`}
@@ -90,6 +98,7 @@ function EachTicket({
 							activityPayload = {}, icon: Icon, iconStyles = {},
 						}) => Icon && (
 							<Tooltip
+								key={tooltipContent}
 								placement="bottom"
 								content={tooltipContent}
 							>
@@ -158,7 +167,7 @@ function EachTicket({
 				</div>
 				<div>
 					{DATA_MAPPING.map(({ title = '', value = '' }) => (value ? (
-						<div className={styles.header_value}>
+						<div key={title} className={styles.header_value}>
 							{title}
 							:
 							<span>{value}</span>

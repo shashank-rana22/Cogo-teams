@@ -1,9 +1,8 @@
 .tickets_section_part {
 	display: flex;
 	flex-direction: column;
-	width: 30%;
+	width: 24.5%;
 	height: 515px;
-	margin-right: 12px;
 	background: #fdfbf6;
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
