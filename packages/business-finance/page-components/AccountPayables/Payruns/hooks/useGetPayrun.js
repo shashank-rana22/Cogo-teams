@@ -2,8 +2,19 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
+const getPayrunListPayload = ({ activePayrunTab, overseasData, query, pageIndex, pageSize }) => ({
+	pageSize,
+	state              : activePayrunTab,
+	type               : activePayrunTab !== 'INITIATED' ? overseasData : undefined,
+	uploadDateSortType : 'desc',
+	dueDateSortType    : 'asc',
+	createdAtSortType  : 'desc',
+	q                  : query !== '' ? query : undefined,
+	pageIndex,
+});
+
 const useGetPayrun = ({ activePayrunTab, overseasData, query, globalFilters }) => {
-	const { pageIndex } = globalFilters || {};
+	const { pageIndex, pageSize } = globalFilters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -14,27 +25,17 @@ const useGetPayrun = ({ activePayrunTab, overseasData, query, globalFilters }) =
 		{ manual: true, autoCancel: false },
 	);
 
-	const getPayrunListPayload = useCallback(() => ({
-		pageSize           : 10,
-		state              : activePayrunTab,
-		type               : activePayrunTab !== 'INITIATED' ? overseasData : undefined,
-		uploadDateSortType : 'desc',
-		dueDateSortType    : 'asc',
-		createdAtSortType  : 'desc',
-		q                  : query !== '' ? query : undefined,
-		pageIndex,
-	}), [activePayrunTab, overseasData, pageIndex, query]);
-
 	const getPayrunList = useCallback(() => {
-		const getPayload = getPayrunListPayload();
+		const payload = getPayrunListPayload({ activePayrunTab, overseasData, query, pageIndex, pageSize });
+
 		try {
 			trigger({
-				params: getPayload,
+				params: payload,
 			});
 		} catch (err) {
 			Toast.error(err.message);
 		}
-	}, [getPayrunListPayload, trigger]);
+	}, [activePayrunTab, overseasData, pageIndex, pageSize, query, trigger]);
 
 	const { stats } = data || {};
 

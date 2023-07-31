@@ -3,6 +3,11 @@ import { useRequestBf } from '@cogoport/request';
 
 import { openDownloadLink } from '../utils';
 
+const getDownloadPayrunPayload = (id, batchNo) => ({
+	payrunId: id,
+	batchNo,
+});
+
 const usePaymentInitiatedDownload = () => {
 	const [{ data: downloadData, loading }, trigger] = useRequestBf({
 		url     : '/purchase/payrun/download',
@@ -10,16 +15,12 @@ const usePaymentInitiatedDownload = () => {
 		authKey : 'get_purchase_payrun_download',
 	}, { manual: true, autoCancel: false });
 
-	const getDownloadPayrunPayload = (id, batchNo) => ({
-		payrunId: id,
-		batchNo,
-	});
 	const downloadPayrun = async (itemData) => {
 		const { id = '', batchNo = '' } = itemData || {};
-		const getPayload = getDownloadPayrunPayload(id, batchNo);
+		const payload = getDownloadPayrunPayload(id, batchNo);
 		try {
 			const res = await trigger({
-				params: getPayload,
+				params: payload,
 			});
 			const { data = {} } = res || {};
 			const downloadFile = `${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}`

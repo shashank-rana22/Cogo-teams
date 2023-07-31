@@ -4,6 +4,21 @@ import { useCallback } from 'react';
 
 import { dateFormatter } from '../helpers';
 
+const getPaidListPayload = ({
+	pageIndex, pageSize, activePayrunTab, query, billStatus, paymentStatusList,
+	selectFromDate, selectToDate, cogoBankId,
+}) => ({
+	pageIndex,
+	pageSize,
+	state             : activePayrunTab,
+	q                 : query !== '' ? query : undefined,
+	status            : billStatus || undefined,
+	paymentStatusList : paymentStatusList || undefined,
+	startDate         : selectFromDate || undefined,
+	endDate           : selectToDate || undefined,
+	cogoBankId        : cogoBankId || undefined,
+});
+
 const useGetPaidList = ({ activePayrunTab, query, globalFilters }) => {
 	const { paymentStatusList, billStatus, pageIndex, pageSize, selectDate, cogoBankId } = globalFilters || {};
 
@@ -15,30 +30,28 @@ const useGetPaidList = ({ activePayrunTab, query, globalFilters }) => {
 
 	const { selectFromDate, selectToDate } = dateFormatter(selectDate);
 
-	const getPaidListPayload = useCallback(() => ({
-		pageIndex,
-		pageSize,
-		state             : activePayrunTab,
-		q                 : query !== '' ? query : undefined,
-		status            : billStatus || undefined,
-		paymentStatusList : paymentStatusList || undefined,
-		startDate         : selectFromDate || undefined,
-		endDate           : selectToDate || undefined,
-		cogoBankId        : cogoBankId || undefined,
-	}), [activePayrunTab, billStatus, cogoBankId, pageIndex,
-		pageSize, paymentStatusList, query, selectFromDate, selectToDate]);
-
 	const getPaidList = useCallback(() => {
-		const getPayload = getPaidListPayload();
+		const payload = getPaidListPayload({
+			pageIndex,
+			pageSize,
+			activePayrunTab,
+			query,
+			billStatus,
+			paymentStatusList,
+			selectFromDate,
+			selectToDate,
+			cogoBankId,
+		});
 
 		try {
 			paidTrigger({
-				params: getPayload,
+				params: payload,
 			});
 		} catch (error) {
 			Toast.error(error.message || 'Somthing went wrong');
 		}
-	}, [getPaidListPayload, paidTrigger]);
+	}, [activePayrunTab, billStatus, cogoBankId, pageIndex, pageSize, paidTrigger,
+		paymentStatusList, query, selectFromDate, selectToDate]);
 
 	return {
 		paidDataList    : data,

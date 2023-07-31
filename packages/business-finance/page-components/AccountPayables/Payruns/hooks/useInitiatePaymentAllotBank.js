@@ -2,6 +2,20 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+const getInitiatePaymentPayload = ({
+	id, payrunId, entityCode, name, user_id, session_type, selectedIds, overseasData,
+}) => ({
+	bankId          : id,
+	payrunId,
+	entity          : entityCode,
+	performedByName : name,
+	performedBy     : user_id,
+	performedByType : session_type,
+	billIds         : selectedIds,
+	payrunType:
+				overseasData === 'ADVANCE_PAYMENT' ? 'ADVANCE_PAYMENT' : undefined,
+});
+
 const useInitiatePaymentAllotBank = ({
 	setShowAllotBank = () => {},
 	setCheckedRows = () => {},
@@ -20,24 +34,14 @@ const useInitiatePaymentAllotBank = ({
 		method  : 'post',
 	}, { manual: true, autoCancel: false });
 
-	const getInitiatePaymentPayload = (id, payrunId, entityCode) => ({
-		bankId          : id,
-		payrunId,
-		entity          : entityCode,
-		performedByName : name,
-		performedBy     : user_id,
-		performedByType : session_type,
-		billIds         : selectedIds,
-		payrunType:
-					overseasData === 'ADVANCE_PAYMENT' ? 'ADVANCE_PAYMENT' : undefined,
-	});
-
 	const selectBank = async (id, selectedPayrun = undefined, checkedRow = undefined) => {
 		const { id: payrunId = '', entityCode = '' } = selectedPayrun || checkedRow || {};
-		const getPayload = getInitiatePaymentPayload(id, payrunId, entityCode);
+		const payload = getInitiatePaymentPayload({
+			id, payrunId, entityCode, name, user_id, session_type, selectedIds, overseasData,
+		});
 		try {
 			await trigger({
-				data: getPayload,
+				data: payload,
 			});
 			setCheckedRows({});
 			setSelectedIds([]);

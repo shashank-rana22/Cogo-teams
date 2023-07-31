@@ -2,6 +2,14 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
+const getAdvancePaymentPayload = ({ id, query, pageIndex, pageSize, batchNo }) => ({
+	payrunId : id,
+	q        : query !== '' ? query : undefined,
+	pageIndex,
+	pageSize,
+	batchNo,
+});
+
 const useGetAdvancePaymentView = ({ globalFilters, selectedPayrun, query }) => {
 	const { pageIndex, pageSize } = globalFilters || {};
 	const { id, batchNo } = selectedPayrun || {};
@@ -13,24 +21,16 @@ const useGetAdvancePaymentView = ({ globalFilters, selectedPayrun, query }) => {
 		authKey : 'get_purchase_payrun_bill_advance_payment',
 	}, { manual: true, autoCancel: false });
 
-	const getAdvancePaymentPayload = useCallback(() => ({
-		payrunId : id,
-		q        : query !== '' ? query : undefined,
-		pageIndex,
-		pageSize,
-		batchNo,
-	}), [batchNo, id, pageIndex, pageSize, query]);
-
 	const getViewInvoicesAdvancePayment = useCallback(() => {
-		const getPayload = getAdvancePaymentPayload();
+		const payload = getAdvancePaymentPayload({ id, query, pageIndex, pageSize, batchNo });
 		try {
 			viewInvoicesAdvancePaymentTrigger({
-				params: getPayload,
+				params: payload,
 			});
 		} catch (err) {
 			Toast.error(err.message, 'Somthing went wrong');
 		}
-	}, [getAdvancePaymentPayload, viewInvoicesAdvancePaymentTrigger]);
+	}, [batchNo, id, pageIndex, pageSize, query, viewInvoicesAdvancePaymentTrigger]);
 	return {
 		getViewInvoicesAdvancePayment,
 		viewInvoicesAdvancePaymentData    : data,

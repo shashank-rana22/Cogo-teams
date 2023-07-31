@@ -4,6 +4,24 @@ import { useCallback } from 'react';
 
 import { dateFormatter } from '../helpers';
 
+const getUploadHistoryPayload = ({
+	pageIndex,
+	selectFromDate,
+	selectToDate,
+	status,
+	sort,
+	pageSize,
+	query,
+}) => ({
+	pageIndex,
+	pageSize,
+	q        : query !== '' ? query : undefined,
+	fromDate : selectFromDate || undefined,
+	toDate   : selectToDate || undefined,
+	status   : status || undefined,
+	...sort,
+});
+
 const useGetUploadHistoryList = ({ sort, query, globalFilters }) => {
 	const { pageIndex, pageSize, uploadedDate, status } = globalFilters || {};
 
@@ -16,26 +34,26 @@ const useGetUploadHistoryList = ({ sort, query, globalFilters }) => {
 
 	const { selectFromDate, selectToDate } = dateFormatter(uploadedDate);
 
-	const getUploadHistoryPayload = useCallback(() => ({
-		pageIndex,
-		pageSize,
-		q        : query !== '' ? query : undefined,
-		fromDate : selectFromDate || undefined,
-		toDate   : selectToDate || undefined,
-		status   : status || undefined,
-		...sort,
-	}), [pageIndex, pageSize, query, selectFromDate, selectToDate, sort, status]);
-
 	const getUploadHistoryList = useCallback(() => {
-		const getPayload = getUploadHistoryPayload();
+		const payload = getUploadHistoryPayload({
+			pageIndex,
+			selectFromDate,
+			selectToDate,
+			status,
+			sort,
+			pageSize,
+			query,
+		});
+
 		try {
 			uploadHistoryListTrigger({
-				params: getPayload,
+				params: payload,
 			});
 		} catch (err) {
 			Toast.error(err.message || 'somthing went wrong');
 		}
-	}, [getUploadHistoryPayload, uploadHistoryListTrigger]);
+	}, [pageIndex, pageSize, query, selectFromDate, selectToDate, sort, status, uploadHistoryListTrigger]);
+
 	return {
 		getUploadHistoryList,
 		uploadHistoryListLoading : loading,

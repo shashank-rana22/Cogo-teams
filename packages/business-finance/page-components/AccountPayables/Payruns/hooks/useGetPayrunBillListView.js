@@ -4,6 +4,23 @@ import { useCallback } from 'react';
 
 import { dateFormatter } from '../helpers';
 
+const getListofInvoicePayload = ({
+	pageIndex, pageSize,
+	activePayrunTab, query,
+	selectFromDate, selectToDate,
+	sort,
+}) => ({
+	pageIndex,
+	pageSize,
+	state             : activePayrunTab,
+	q                 : query !== '' ? query : undefined,
+	startDate         : selectFromDate || undefined,
+	endDate           : selectToDate || undefined,
+	dueDateSortType   : 'asc',
+	createdAtSortType : 'desc',
+	...sort,
+});
+
 const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters }) => {
 	const { pageIndex, pageSize, createdAt } = globalFilters || {};
 
@@ -18,29 +35,25 @@ const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters 
 
 	const { selectFromDate, selectToDate } = dateFormatter(createdAt);
 
-	const getListofInvoicePayload = useCallback(() => ({
-		pageIndex,
-		pageSize,
-		state             : activePayrunTab,
-		q                 : query !== '' ? query : undefined,
-		startDate         : selectFromDate || undefined,
-		endDate           : selectToDate || undefined,
-		dueDateSortType   : 'asc',
-		createdAtSortType : 'desc',
-		...sort,
-	}), [activePayrunTab, pageIndex, pageSize, query, selectFromDate, selectToDate, sort]);
-
 	const getPayrunListView = useCallback(() => {
-		const getPayload = getListofInvoicePayload();
+		const payload = getListofInvoicePayload({
+			pageIndex,
+			pageSize,
+			activePayrunTab,
+			query,
+			selectFromDate,
+			selectToDate,
+			sort,
+		});
 
 		try {
 			trigger({
-				params: getPayload,
+				params: payload,
 			});
 		} catch (err) {
 			Toast.error(err.message);
 		}
-	}, [getListofInvoicePayload, trigger]);
+	}, [activePayrunTab, pageIndex, pageSize, query, selectFromDate, selectToDate, sort, trigger]);
 
 	return {
 		getPayrunListView,

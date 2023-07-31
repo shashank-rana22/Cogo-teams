@@ -36,7 +36,7 @@ function AccountPayables() {
 
 	const handleTabChange = (v) => {
 		if (
-			['outstanding'].includes(v)
+			['invoices', 'payruns', 'outstanding'].includes(v)
 		) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
 			return;
