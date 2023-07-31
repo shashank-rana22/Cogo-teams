@@ -1,5 +1,6 @@
 import { cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
@@ -21,8 +22,8 @@ const MIN_SERIAL_ID_LENGTH = 8;
 const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
 const RESTRICTED_ENTITY_IDS = [];
 
-Object.entries(ENTITY_MAPPING).forEach(([, value]) => (
-	value?.feature_supported?.includes('freight_sales_invoice_restricted_enitity')
+Object.entries(ENTITY_MAPPING).forEach(([key, value]) => (
+	ENTITY_FEATURE_MAPPING[key]?.feature_supported?.includes('freight_sales_invoice_restricted_enitity')
 		? RESTRICTED_ENTITY_IDS.push(value.id) : null));
 
 function Header({
