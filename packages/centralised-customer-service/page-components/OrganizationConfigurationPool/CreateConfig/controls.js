@@ -111,8 +111,11 @@ const preferredRoleControls = {
 	params      : {
 		filters: {
 			role_functions     : ['operations'],
-			role_sub_functions : ['enterprise_customer_operations',
-				'mid_size_customer_operations', 'cp_customer_operations'],
+			role_sub_functions : [
+				'common_customer_operations',
+				'enterprise_customer_operations',
+				'mid_size_customer_operations',
+				'cp_customer_operations'],
 			status: 'active',
 		},
 	},
