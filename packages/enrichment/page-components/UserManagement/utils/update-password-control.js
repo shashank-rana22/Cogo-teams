@@ -1,4 +1,4 @@
-import validatePassword from '../components/PasswordValidator/utils/validatePassword';
+import validatePassword from './validatePassword';
 
 const updatePasswordControls = () => [
 	{
