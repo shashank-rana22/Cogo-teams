@@ -1,0 +1,22 @@
+.sub_header {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.time_container {
+	padding: 24px 8px;
+	margin: 16px 0;
+	background-color: #fff;
+	border-radius: 16px;
+}
+
+.time_wrapper {
+	/* font-weight: 400; */
+	padding-left: 10px;
+	font-size: 40px;
+}
+
+.arrow_time_wrapper {
+	display: flex;
+	align-items: center;
+}
