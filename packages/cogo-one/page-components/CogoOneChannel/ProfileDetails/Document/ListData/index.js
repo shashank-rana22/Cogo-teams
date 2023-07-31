@@ -1,4 +1,5 @@
 import { Button, cl } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf } from '@cogoport/icons-react';
@@ -26,6 +27,8 @@ function ListData({
 	formattedMessageData = {},
 }) {
 	const [documentTagUrl, setDocumentTagUrl] = useState('');
+
+	const { control, formState: { errors = {} }, watch, handleSubmit, resetField, reset } = useForm();
 
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
@@ -141,6 +144,12 @@ function ListData({
 										documentTagUrl={documentTagUrl}
 										setDocumentTagUrl={setDocumentTagUrl}
 										type="documents"
+										control={control}
+										errors={errors}
+										watch={watch}
+										handleSubmit={handleSubmit}
+										resetField={resetField}
+										reset={reset}
 									/>
 								)}
 							</>

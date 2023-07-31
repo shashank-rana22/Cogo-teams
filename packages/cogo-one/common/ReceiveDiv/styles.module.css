@@ -41,9 +41,6 @@
 }
 
 .flex_div {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
 	width: 100%;
 	padding: 5px 10px 0 0;
 }
@@ -92,4 +89,14 @@
 .tags {
 	width: 112px;
 	margin-top: 4px;
+}
+
+.action_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.single_action {
+	justify-content: flex-end;
 }

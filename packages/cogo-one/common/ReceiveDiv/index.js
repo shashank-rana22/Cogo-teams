@@ -1,7 +1,7 @@
 import { Button, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMOverflowDot, IcMCross } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMCross, IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -78,6 +78,17 @@ function ReceiveDiv({
 	});
 
 	const hasRepliedMessage = !isEmpty(reply_metadata);
+	const isDocuments = (SHOW_TAG_BUTTON || []).includes(eachMessage?.message_type);
+
+	const handleDownload = ({ imgUrl = '' }) => {
+		const downloadLink = document.createElement('a');
+		downloadLink.href = imgUrl;
+		downloadLink.download = 'image.jpg';
+		document.body.appendChild(downloadLink);
+		downloadLink.click();
+		document.body.removeChild(downloadLink);
+		URL.revokeObjectURL(imgUrl);
+	};
 
 	return (
 		<>
@@ -91,25 +102,34 @@ function ReceiveDiv({
 					{hasRepliedMessage && (
 						<RepliedMessage user_name={user_name} reply_metadata={reply_metadata} />
 					)}
-					{canRaiseTicket && (
-						<Tooltip
-							placement="right"
-							content={(
-								<TicketPopoverContent
-									setRaiseTicketModal={setRaiseTicketModal}
-									data={eachMessage}
-									formattedData={formattedData}
-									setTagModal={setTagModal}
-									setDocumentTagUrl={setDocumentTagUrl}
+					<div className={cl`${styles.action_container} ${!isDocuments ? styles.single_action : ''}`}>
+						{isDocuments
+							? (
+								<IcMDownload
+									onClick={() => handleDownload({ imgUrl: eachMessage?.response?.media_url })}
+									cursor="pointer"
 								/>
-							)}
-							interactive
-						>
-							<div className={styles.flex_div}>
-								<IcMOverflowDot className={styles.hamburger_styles} />
-							</div>
-						</Tooltip>
-					)}
+							) : null}
+						{canRaiseTicket && (
+							<Tooltip
+								placement="right"
+								content={(
+									<TicketPopoverContent
+										setRaiseTicketModal={setRaiseTicketModal}
+										data={eachMessage}
+										formattedData={formattedData}
+										setTagModal={setTagModal}
+										setDocumentTagUrl={setDocumentTagUrl}
+									/>
+								)}
+								interactive
+							>
+								<div className={styles.flex_div}>
+									<IcMOverflowDot className={styles.hamburger_styles} />
+								</div>
+							</Tooltip>
+						)}
+					</div>
 					<div className={styles.message_div}>
 						<MessageBody
 							response={response}

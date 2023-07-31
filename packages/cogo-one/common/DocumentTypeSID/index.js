@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { AsyncSelectController, useForm } from '@cogoport/forms';
+import { AsyncSelectController } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 
 import useGetDocumentTypeControls from '../../hooks/useGetDocumentTypeControls';
@@ -14,9 +14,15 @@ function DocumentTypeSID({
 	documentTagUrl = '',
 	setDocumentTagUrl = () => {},
 	type = '',
+	setTagModal = () => {},
+	control = {},
+	errors = {},
+	watch = () => {},
+	handleSubmit = () => {},
+	resetField = () => {},
+	reset = () => {},
 }) {
 	const { account_type = '' } = formattedMessageData || {};
-	const { control, formState: { errors = {} }, watch, handleSubmit, resetField } = useForm();
 	const watchListShipment = watch('list_shipments');
 	const watchListShipmentPendingTasks = watch('list_shipment_pending_tasks');
 
@@ -29,8 +35,9 @@ function DocumentTypeSID({
 	});
 
 	const {
+		loading = false,
 		postDocumentTag = () => {},
-	} = useSendShipmentDocumentationNotification();
+	} = useSendShipmentDocumentationNotification({ setTagModal, reset });
 
 	const createDocumentTag = (formValues) => {
 		const payload = {
@@ -69,7 +76,7 @@ function DocumentTypeSID({
 				);
 			})}
 			<div className={styles.button_styles}>
-				<Button size="sm" themeType="primary" onClick={handleSubmit(createDocumentTag)}>
+				<Button loading={loading} size="md" themeType="primary" onClick={handleSubmit(createDocumentTag)}>
 					Submit
 				</Button>
 			</div>
