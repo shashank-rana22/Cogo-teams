@@ -86,7 +86,6 @@
 .main_container_lowerpart {
 	display: flex;
 	flex-wrap: wrap;
-	height: 100%;
 	overflow-y: scroll;
 	background: #fbf7f1;
 }
@@ -182,4 +181,12 @@
 
 .styled_pagination {
 	justify-content: flex-end;
+}
+
+.empty_section {
+	display: flex;
+	flex-wrap: wrap;
+	height: 100%;
+	overflow-y: scroll;
+	background: #fbf7f1;
 }

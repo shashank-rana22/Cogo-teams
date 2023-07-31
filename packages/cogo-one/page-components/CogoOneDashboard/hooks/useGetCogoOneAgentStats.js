@@ -9,17 +9,21 @@ const DURATION_TYPE = {
 	month : 'weeks',
 };
 
-const getParams = ({ timeline, startDate, endDate }) => ({
+const getParams = ({ timeline, startDate, endDate, id }) => ({
 	duration_type : DURATION_TYPE[timeline],
 	start_date    : !startDate
 		? new Date(DATE_MAPPING[timeline].startDate) : new Date(startDate),
 	end_date: !endDate
 		? new Date(DATE_MAPPING[timeline].endDate) : new Date(endDate),
+	filters: {
+		agent_id: id,
+	},
 });
 
 function useGetCogoOneAgentStats({
 	timeline = '',
 	selectedDate = {},
+	id = '',
 }) {
 	const { startDate = {}, endDate = {} } = selectedDate || {};
 
@@ -31,12 +35,12 @@ function useGetCogoOneAgentStats({
 	const getCogoOneDashboard = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ timeline, startDate, endDate }),
+				params: getParams({ timeline, startDate, endDate, id }),
 			});
 		} catch (error) {
 			console.error(error, 'err');
 		}
-	}, [timeline, trigger, startDate, endDate]);
+	}, [timeline, trigger, startDate, endDate, id]);
 
 	useEffect(() => {
 		getCogoOneDashboard();
