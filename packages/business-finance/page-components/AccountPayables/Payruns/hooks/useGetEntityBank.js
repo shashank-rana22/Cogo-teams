@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useGetEntityBanks = ({ selectedPayrun }) => {
-	const [{ data: bankData, loading: bankLoading }, bankTrigger] = useRequestBf({
+	const [{ data, loading }, bankTrigger] = useRequestBf({
 		url     : '/purchase/payable/bank/list',
 		method  : 'get',
 		authKey : 'get_purchase_payable_bank_list',
@@ -24,8 +24,8 @@ const useGetEntityBanks = ({ selectedPayrun }) => {
 	}, [bankTrigger, entityCode]);
 
 	return {
-		entityBank        : bankData,
-		entityBankLoading : bankLoading,
+		entityBank        : data,
+		entityBankLoading : loading,
 	};
 };
 

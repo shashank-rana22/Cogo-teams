@@ -7,6 +7,13 @@ import useGetConfigDataMapping from '../helpers/dataMapping/getConfigDataMapping
 
 const PAYRUN_INNER_TAB_NAME = ['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'];
 
+const getRefetch = ({ activePayrunTab, selectedPayrun, getViewInvoiceFunction = () => {}, getFunction = () => {} }) => {
+	if (PAYRUN_INNER_TAB_NAME.includes(activePayrunTab) && !isEmpty(selectedPayrun)) {
+		return getViewInvoiceFunction;
+	}
+	return getFunction;
+};
+
 const useFilterData = ({
 	isInvoiceView,
 	activePayrunTab,
@@ -27,7 +34,6 @@ const useFilterData = ({
 		dataLoading : false,
 		listConfig  : PAYRUN_AUDITED_PAYMENT_READY,
 	});
-	const [refetch, setRefetch] = useState(() => () => {});
 
 	const [selectedPayrun, setSelectedPayrun] = useState(null);
 	const [selectedIds, setSelectedIds] = useState([]);
@@ -65,32 +71,24 @@ const useFilterData = ({
 
 	useEffect(() => {
 		if (PAYRUN_INNER_TAB_NAME.includes(activePayrunTab) && !isEmpty(selectedPayrun)) {
-			getViewInvoiceFunction();
-			setRefetch(() => () => {
-				getViewInvoiceFunction();
-			});
-		} else {
-			getFunction();
-			setRefetch(() => () => {
-				getFunction();
-			});
+			return getViewInvoiceFunction();
 		}
+		return getFunction();
 	}, [activePayrunTab, overseasData, isInvoiceView, selectedPayrun, getViewInvoiceFunction, getFunction]);
 
 	useEffect(() => {
 		if (PAYRUN_INNER_TAB_NAME.includes(activePayrunTab) && !isEmpty(selectedPayrun)) {
-			setApiData({
+			return setApiData({
 				listData    : getViewInvoiceData,
 				dataLoading : getViewInvoiceLoading,
 				listConfig  : getViewInvoiceConfig,
 			});
-		} else {
-			setApiData({
-				listData    : getData,
-				dataLoading : getLoading,
-				listConfig  : getConfig,
-			});
 		}
+		return setApiData({
+			listData    : getData,
+			dataLoading : getLoading,
+			listConfig  : getConfig,
+		});
 	}, [activePayrunTab, isInvoiceView, overseasData, selectedPayrun, getData, getLoading, getViewInvoiceConfig,
 		getConfig, getViewInvoiceData, getViewInvoiceLoading]);
 
@@ -118,7 +116,7 @@ const useFilterData = ({
 		setSort,
 		setSelectedPayrun,
 		selectedPayrun,
-		refetch,
+		refetch : getRefetch({ activePayrunTab, selectedPayrun, getViewInvoiceFunction, getFunction }),
 		selectedIds,
 		setSelectedIds,
 		country_code,

@@ -88,7 +88,7 @@ function RequestAmount({ itemData = {}, selectedPayrun = null, checkedRow = null
 							Cancel
 
 						</Button>
-						<Button type="submit" disabled={loading} onClick={handleSubmit(onRequest)}>
+						<Button disabled={loading} onClick={handleSubmit(onRequest)}>
 							Send Request
 						</Button>
 					</Modal.Footer>

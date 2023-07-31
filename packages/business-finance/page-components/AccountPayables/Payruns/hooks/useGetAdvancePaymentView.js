@@ -6,7 +6,7 @@ const useGetAdvancePaymentView = ({ globalFilters, selectedPayrun, query }) => {
 	const { pageIndex, pageSize } = globalFilters || {};
 	const { id, batchNo } = selectedPayrun || {};
 
-	const [{ data: viewInvoicesAdvancePaymentData, loading: viewInvoicesAdvancePaymentLoading },
+	const [{ data, loading },
 		viewInvoicesAdvancePaymentTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill/advance-payment',
 		method  : 'get',
@@ -33,8 +33,8 @@ const useGetAdvancePaymentView = ({ globalFilters, selectedPayrun, query }) => {
 	}, [getAdvancePaymentPayload, viewInvoicesAdvancePaymentTrigger]);
 	return {
 		getViewInvoicesAdvancePayment,
-		viewInvoicesAdvancePaymentData,
-		viewInvoicesAdvancePaymentLoading,
+		viewInvoicesAdvancePaymentData    : data,
+		viewInvoicesAdvancePaymentLoading : loading,
 	};
 };
 

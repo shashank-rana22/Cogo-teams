@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 const useGetViewInvoices = ({ activePayrunTab, globalFilters, selectedPayrun, query }) => {
 	const { id, batchNo } = selectedPayrun || {};
 	const { pageIndex, pageSize } = globalFilters || {};
-	const [{ data: viewInvoiceDataList, loading: viewInvoiceDataLoading }, viewInvoiceTrigger] = useRequestBf({
+	const [{ data, loading }, viewInvoiceTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill',
 		method  : 'get',
 		authKey : 'get_purchase_payrun_bill',
@@ -24,10 +24,10 @@ const useGetViewInvoices = ({ activePayrunTab, globalFilters, selectedPayrun, qu
 	}), [activePayrunTab, batchNo, id, pageIndex, pageSize, query]);
 
 	const getViewInvoice = useCallback(() => {
-		const getPayload = viewInvoicePayload();
+		const payload = viewInvoicePayload();
 		try {
 			viewInvoiceTrigger({
-				params: getPayload,
+				params: payload,
 			});
 		} catch (err) {
 			Toast.error(err.message, 'Somthing went wrong');
@@ -35,8 +35,8 @@ const useGetViewInvoices = ({ activePayrunTab, globalFilters, selectedPayrun, qu
 	}, [viewInvoicePayload, viewInvoiceTrigger]);
 	return {
 		getViewInvoice,
-		viewInvoiceDataList,
-		viewInvoiceDataLoading,
+		viewInvoiceDataList    : data,
+		viewInvoiceDataLoading : loading,
 	};
 };
 

@@ -7,7 +7,7 @@ import { dateFormatter } from '../helpers';
 const useGetUploadHistoryList = ({ sort, query, globalFilters }) => {
 	const { pageIndex, pageSize, uploadedDate, status } = globalFilters || {};
 
-	const [{ data: uploadHistoryDataList, loading: uploadHistoryListLoading },
+	const [{ data, loading },
 		uploadHistoryListTrigger] = useRequestBf({
 		url     : '/purchase/payment-upload/list',
 		method  : 'get',
@@ -38,8 +38,8 @@ const useGetUploadHistoryList = ({ sort, query, globalFilters }) => {
 	}, [getUploadHistoryPayload, uploadHistoryListTrigger]);
 	return {
 		getUploadHistoryList,
-		uploadHistoryListLoading,
-		uploadHistoryDataList,
+		uploadHistoryListLoading : loading,
+		uploadHistoryDataList    : data,
 	};
 };
 

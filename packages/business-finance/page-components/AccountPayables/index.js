@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 import Treasury from './Treasury';
 
 const ENTITY_CODE_LENGTH = 1;
+const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment'];
 
 function AccountPayables() {
 	const { query, push } = useRouter();
@@ -32,8 +33,6 @@ function AccountPayables() {
 	const entityDataCount = entityData.length;
 
 	const entity = getDefaultEntityCode(partnerId);
-
-	const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment'];
 
 	const handleTabChange = (v) => {
 		if (

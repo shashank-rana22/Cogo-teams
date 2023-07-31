@@ -7,7 +7,7 @@ import { dateFormatter } from '../helpers';
 const useGetPaidList = ({ activePayrunTab, query, globalFilters }) => {
 	const { paymentStatusList, billStatus, pageIndex, pageSize, selectDate, cogoBankId } = globalFilters || {};
 
-	const [{ data: paidDataList, loading: paidDataLoading }, paidTrigger] = useRequestBf({
+	const [{ data, loading }, paidTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill/list-paid-bill',
 		method  : 'get',
 		authKey : 'get_purchase_payrun_bill_list_paid_bill',
@@ -41,8 +41,8 @@ const useGetPaidList = ({ activePayrunTab, query, globalFilters }) => {
 	}, [getPaidListPayload, paidTrigger]);
 
 	return {
-		paidDataList,
-		paidDataLoading,
+		paidDataList    : data,
+		paidDataLoading : loading,
 		getPaidList,
 	};
 };

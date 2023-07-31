@@ -4,6 +4,15 @@ import { useSelector } from '@cogoport/store';
 
 import { dateFormatter } from '../helpers';
 
+const getSendReportPayload = ({ rest, selectFromDate, selectToDate, size, user_id, activePayrunTab }) => ({
+	...rest,
+	startDate   : selectFromDate || undefined,
+	endDate     : selectToDate || undefined,
+	pageSize    : size,
+	performedBy : user_id,
+	state       : activePayrunTab,
+});
+
 const useGetPaidBillReport = ({
 	size,
 	globalFilters,
@@ -16,7 +25,7 @@ const useGetPaidBillReport = ({
 	const { user = {} } = profile;
 	const { id: user_id } = user;
 
-	const [{ data, loading: sendReportLoading }, trigger] = useRequestBf({
+	const [{ data, loading }, trigger] = useRequestBf({
 		url     : '/purchase/report/paid-bills',
 		method  : 'get',
 		authKey : 'get_purchase_report_paid_bills',
@@ -25,20 +34,18 @@ const useGetPaidBillReport = ({
 	const { ...rest } = globalFilters;
 	const { selectFromDate, selectToDate } = dateFormatter(newdate);
 
-	const getSendReportPayload = () => ({
-		...rest,
-		startDate   : selectFromDate || undefined,
-		endDate     : selectToDate || undefined,
-		pageSize    : size,
-		performedBy : user_id,
-		state       : activePayrunTab,
-	});
-
 	const sendInvoiceReport = (dates) => {
 		if (dates === 'Invalid_Range') {
 			Toast.error('Please select a range less then a month');
 		} else if (dates) {
-			const payload = getSendReportPayload();
+			const payload = getSendReportPayload({
+				rest,
+				selectFromDate,
+				selectToDate,
+				size,
+				user_id,
+				activePayrunTab,
+			});
 			try {
 				trigger({
 					params: payload,
@@ -57,7 +64,7 @@ const useGetPaidBillReport = ({
 	};
 	return {
 		sendInvoiceReport,
-		sendReportLoading,
+		sendReportLoading: loading,
 		data,
 	};
 };
