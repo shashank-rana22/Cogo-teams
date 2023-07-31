@@ -1,28 +1,22 @@
-import { Button, Pill } from '@cogoport/components';
+import { ButtonIcon, Pill, Popover, Tooltip } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import ActionContent from '../components/ActionContent';
 import styles from '../styles.module.css';
-
-const ACTIONS_STATUS_MAPPING = {
-	active   : 'green',
-	inactive : 'orange',
-};
 
 const useUserManagement = () => {
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
+	const [selectedRowId, setSelectedRowId] = useState('');
 	const [statusToggle, setStatusToggle] = useState('active');
 	const [searchValue, setSearchValue] = useState('');
-	const [actionModal, setActionModal] = useState({
-		show      : false,
-		type      : 'onboard',
-		agentData : {},
-
-	});
+	const [actionModal, setActionModal] = useState({});
 
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
@@ -76,17 +70,40 @@ const useUserManagement = () => {
 			id       : 'name',
 			Header   : 'Name',
 			accessor : ({ name = '' }) => (
-				<section>
-					{name || '__' }
+				<section className={styles.name}>
+
+					<Tooltip
+						placement="bottom"
+						content={(
+							<div className={styles.toottip_content}>
+								{name || '__' }
+							</div>
+						)}
+					>
+						<div className={styles.business_name}>
+							{name || '__' }
+						</div>
+					</Tooltip>
 
 				</section>
+
 			),
 		},
 		{
 			id       : 'email',
 			Header   : 'Email',
 			accessor : ({ email = '' }) => (
-				<section><div className={styles.email_id}>{email || '___'}</div></section>
+				<section>
+					<Tooltip
+						placement="bottom"
+						content={email || '___'}
+					>
+						<div className={styles.email_id}>
+							{email || '___'}
+						</div>
+					</Tooltip>
+
+				</section>
 			),
 		},
 		{
@@ -114,41 +131,80 @@ const useUserManagement = () => {
 			id       : 'partner',
 			Header   : 'Partner',
 			accessor : ({ partner = {} }) => (
-				<section>
-					{(partner && !isEmpty(partner)) ? partner.business_name : '__'}
+
+				<section className={styles.name}>
+
+					<Tooltip
+						placement="bottom"
+						content={(
+							<div className={styles.toottip_content}>
+								{(partner && !isEmpty(partner)) ? partner.business_name : '__'}
+							</div>
+						)}
+					>
+						<div className={styles.business_name}>
+							{(partner && !isEmpty(partner)) ? partner.business_name : '__'}
+						</div>
+					</Tooltip>
+
 				</section>
+
 			),
 		},
 
 		{
-			id       : 'status',
-			Header   : 'STATUS',
-			accessor : ({ status }) => (
-				<seaction>
-					<Pill size="md" color={ACTIONS_STATUS_MAPPING[status]}>
-						{startCase(status) || '-'}
-					</Pill>
+			id       : 'created_at',
+			Header   : 'Created at',
+			accessor : ({ created_at }) => (
+				<seaction className={styles.date_time}>
+					<div>
+						{formatDate({
+							date       : created_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'dateTime',
+						})}
+					</div>
 				</seaction>
 			),
 		},
 		{
 			id       : 'action',
 			Header   : 'Action',
-			accessor : ({ id = '', name = '', email = '' }) => (
-				<Button
-					themeType="secondary"
-					size="sm"
-					onClick={() => setActionModal(() => ({
-						type      : 'offboard',
+			accessor : ({ id = '', name = '', email = '', status = '', user_id = '' }) => {
+				const onClickCta = (action_type = '') => {
+					setSelectedRowId(null);
+
+					setActionModal(() => ({
+						type      : action_type,
 						show      : true,
-						agentData : { id, name, email },
-					}))}
-				>
-					Deactivate
+						agentData : { id, name, email, user_id },
+					}));
+				};
 
-				</Button>
-
-			),
+				return (
+					<Popover
+						placement="bottom"
+						interactive
+						visible={selectedRowId === id}
+						render={(<ActionContent onClickCta={onClickCta} />)}
+						onClickOutside={() => setSelectedRowId(null)}
+					>
+						<ButtonIcon
+							size="md"
+							type="button"
+							icon={(
+								<IcMOverflowDot
+									height={16}
+									width={16}
+								/>
+							)}
+							disabled={status === 'inactive'}
+							themeType="primary"
+							onClick={() => setSelectedRowId(() => (selectedRowId === id ? null : id))}
+						/>
+					</Popover>
+				);
+			},
 		},
 	];
 

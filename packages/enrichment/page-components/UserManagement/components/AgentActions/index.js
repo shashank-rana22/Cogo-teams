@@ -1,3 +1,4 @@
+import ChangePassword from './ChangePassword';
 import OffboardAgent from './OffboardAgent';
 import OnboardAgent from './OnboardAgent';
 
@@ -10,8 +11,9 @@ function AgentActions(props) {
 	} = props;
 
 	const COMPONENT_MAPPING = {
-		onboard  : OnboardAgent,
-		offboard : OffboardAgent,
+		onboard         : OnboardAgent,
+		deactivate      : OffboardAgent,
+		change_password : ChangePassword,
 
 	};
 

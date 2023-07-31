@@ -24,11 +24,7 @@ const useOffboardAgent = (props) => {
 				},
 			});
 			Toast.success('Agent Deactivated Successfully!!!');
-			setActionModal(() => ({
-				type      : 'onboard',
-				agentData : {},
-				show      : false,
-			}));
+			setActionModal({});
 			refetch();
 		} catch (err) {
 			Toast.error(err?.error?.message || 'Something went wrong');

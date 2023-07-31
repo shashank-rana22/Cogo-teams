@@ -51,14 +51,10 @@ function UserManagement() {
 
 			{actionModal.show && (
 				<Modal
-					size="md"
+					size={actionModal?.type === 'deactivate' ? 'sm' : 'md'}
 					placement="top"
 					show={actionModal.show}
-					onClose={() => setActionModal(() => ({
-						show      : false,
-						type      : 'onboard',
-						agentData : {},
-					}))}
+					onClose={() => setActionModal({})}
 				>
 					<AgentActions
 						actionModal={actionModal}

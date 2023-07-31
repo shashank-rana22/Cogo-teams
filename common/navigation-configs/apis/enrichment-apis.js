@@ -26,8 +26,13 @@ const enrichment = [
 	{
 		api          : 'list_partner_users',
 		access_type  : 'private',
-		// feature      : 'enrichment',
+		feature      : 'enrichment',
 		service_name : 'partner',
+	},
+	{
+		api          : 'update_user_password',
+		access_type  : 'private',
+		service_name : 'user',
 	},
 	{
 		api          : 'bulk_create_lead_organization_feedback_request',

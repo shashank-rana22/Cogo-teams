@@ -37,11 +37,7 @@ const useOnboardAgent = (props) => {
 
 			Toast.success('Congratulations!!! Agent has been Onboarded Successfully');
 
-			setActionModal(() => ({
-				type      : 'onboard',
-				agentData : {},
-				show      : false,
-			}));
+			setActionModal({});
 			refetch();
 		} catch (err) {
 			Toast.error(err?.error?.message || 'Something went wrong');

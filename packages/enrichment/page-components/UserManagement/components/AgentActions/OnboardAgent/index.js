@@ -2,7 +2,8 @@ import { Button, Modal } from '@cogoport/components';
 
 import FormLayout from '../../../../../common/FormLayout/FormLayout';
 import useOnboardAgent from '../../../hooks/useOnboardAgent';
-import styles from '../styles.module.css';
+
+import styles from './styles.module.css';
 
 function OnboardAgent(props) {
 	const {
@@ -46,12 +47,7 @@ function OnboardAgent(props) {
 						themeType="tertiary"
 						type="button"
 						disabled={loadingOnboard || loading}
-						onClick={() => setActionModal((prev) => ({
-							...prev,
-							type      : 'onboard',
-							show      : false,
-							agentData : {},
-						}))}
+						onClick={() => setActionModal({})}
 					>
 						Cancel
 					</Button>

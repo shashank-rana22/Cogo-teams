@@ -2,7 +2,8 @@ import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import useOffboardAgent from '../../../hooks/useOffboardAgent';
-import styles from '../styles.module.css';
+
+import styles from './styles.module.css';
 
 function OffboardAgent(props) {
 	const {
@@ -26,19 +27,17 @@ function OffboardAgent(props) {
 
 			<form onSubmit={handleSubmit(offboardAgent)}>
 				<Modal.Body>
-					Are you sure about your decision to
-					{' '}
-					<strong>Deactivate</strong>
-					{' '}
-					this agent
-					{' '}
-					<span className={styles.name}>{actionModal?.agentData?.name}</span>
-					{' '}
-					with email
-					{' '}
-					<span className={styles.email}>{actionModal?.agentData?.email}</span>
-					{' '}
-					?
+					<div className={styles.container}>
+
+						<div className={styles.flex_container}>
+							<span className={styles.label}>Name:</span>
+							<span className={styles.value}>{actionModal?.agentData?.name || '__'}</span>
+						</div>
+						<div className={styles.flex_container}>
+							<span className={styles.label}>Email:</span>
+							<span className={styles.value}>{actionModal?.agentData?.email || '__'}</span>
+						</div>
+					</div>
 				</Modal.Body>
 
 				<Modal.Footer>
@@ -48,12 +47,7 @@ function OffboardAgent(props) {
 						themeType="tertiary"
 						type="button"
 						disabled={loadingOffboard || loading}
-						onClick={() => setActionModal((prev) => ({
-							...prev,
-							type      : 'onboard',
-							show      : false,
-							agentData : {},
-						}))}
+						onClick={() => setActionModal({})}
 					>
 						No
 					</Button>
