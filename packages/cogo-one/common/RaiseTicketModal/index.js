@@ -5,7 +5,7 @@ import TicketModal from './TicketModal';
 function RaiseTicketModal({
 	shipmentData = {},
 	setShowRaiseTicket = () => {},
-	showRaiseTicket = () => {},
+	showRaiseTicket = false,
 }) {
 	const handleClose = () => {
 		setShowRaiseTicket(false);
@@ -19,7 +19,7 @@ function RaiseTicketModal({
 		<Modal
 			placement="center"
 			size="sm"
-			show={showRaiseTicket}
+			show
 			closeOnOuterClick={handleClose}
 			onClose={handleClose}
 		>

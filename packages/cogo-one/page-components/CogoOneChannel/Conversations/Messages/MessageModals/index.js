@@ -1,4 +1,5 @@
 import { Modal } from '@cogoport/components';
+import { Image } from '@cogoport/next';
 import React from 'react';
 
 import MODAL_COMPONENT_MAPPING from '../../../../../constants/MODAL_COMPONENT_MAPPING';
@@ -35,7 +36,7 @@ function MessageModals({
 				<Modal.Header
 					title={(
 						<div className={styles.modal_header_title}>
-							{img && <img src={img} alt="logo" />}
+							{img && <Image src={img} alt="logo" height={18} width={18} />}
 							<div className={styles.modal_title}>
 								{name}
 							</div>

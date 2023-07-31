@@ -147,7 +147,7 @@ function Messages({
 		return (scrollToBottom, val) => assignChat(
 			{
 				payload      : { agent_id: userId, is_allowed_to_chat: true },
-				callbackFunc : () => callbackFunc(scrollToBottom, val),
+				callBackFunc : () => callbackFunc(scrollToBottom, val),
 			},
 		);
 	};

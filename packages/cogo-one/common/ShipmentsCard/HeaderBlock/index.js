@@ -15,8 +15,8 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 		children : 'View Shipments',
 		onClick  : (e) => {
 			e.stopPropagation();
-			const redirectUrl = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
-			window.open(redirectUrl, '_blank');
+			const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
+			window.open(shipmentDetailsPage, '_blank');
 		},
 		condition: ['all_shipments', 'user_shipments'],
 	},
@@ -24,8 +24,8 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 		children : 'View Documents',
 		onClick  : (e) => {
 			e.stopPropagation();
-			const redirectUrl = `${window.location.origin}/${partnerId}/shipments/${shipmentId}?tab=documents`;
-			window.open(redirectUrl, '_blank');
+			const shipmentDocuments = `${window.location.origin}/${partnerId}/shipments/${shipmentId}?tab=documents`;
+			window.open(shipmentDocuments, '_blank');
 		},
 		condition: ['all_shipments', 'user_shipments'],
 	},
@@ -72,8 +72,8 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 
 	const handleSidClick = (e) => {
 		e.stopPropagation();
-		const redirectUrl = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
-		window.open(redirectUrl, '_blank');
+		const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
+		window.open(shipmentDetailsPage, '_blank');
 	};
 
 	return (
@@ -86,7 +86,7 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 				<div
 					className={styles.sid_id}
 					role="presentation"
-					onClick={(e) => handleSidClick(e)}
+					onClick={handleSidClick}
 				>
 					{`SID: ${serial_id}`}
 				</div>

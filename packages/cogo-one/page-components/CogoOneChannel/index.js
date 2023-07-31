@@ -111,7 +111,9 @@ function CogoOne() {
 		setAutoAssignChats,
 	};
 
-	const { hasNoFireBaseRoom = false, data: { user_id = '' } = {} } = activeTab || {};
+	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
+
+	const { user_id = '' } = tabData || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
 	const orgId = activeTab?.tab === 'message'

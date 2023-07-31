@@ -9,7 +9,7 @@ function ActiveComponent(props) {
 	const {
 		emptyCheck = false, activityTab = '', activeSubTab = '', data = {},
 		timeLineList = [], chatDataList = [], setRaiseTicketModal = () => {},
-		viewType = '', shipmentsData = {},
+		shipmentsData = {},
 	} = props || {};
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
@@ -22,7 +22,7 @@ function ActiveComponent(props) {
 		);
 	}
 
-	const ActiveComp = getUserActivityComponent({ activityTab, activeSubTab, viewType }) || null;
+	const ActiveComp = getUserActivityComponent({ activityTab, activeSubTab }) || null;
 
 	if (!ActiveComp) {
 		return null;

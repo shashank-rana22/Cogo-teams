@@ -13,7 +13,7 @@ import {
 	IcMFtrailorFull,
 } from '@cogoport/icons-react';
 
-export const iconMapping = {
+export const ICONS_MAPPING = {
 	fcl_freight           : IcMFship,
 	lcl_freight           : IcMLcl,
 	air_freight           : IcMFairport,
@@ -23,11 +23,7 @@ export const iconMapping = {
 	fcl_customs           : IcMCustoms,
 	lcl_customs           : IcMFcustoms,
 	fcl_freight_local     : IcMFlocalCharges,
-	rail_domestic_freight : (
-		IcMFtrailorFull
-	),
-	lcl_freight_local: (
-		IcMLocalCharges
-	),
-	air_freight_local: IcMAir,
+	rail_domestic_freight : IcMFtrailorFull,
+	lcl_freight_local     : IcMLocalCharges,
+	air_freight_local     : IcMAir,
 };

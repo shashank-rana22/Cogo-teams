@@ -4,7 +4,7 @@ import { startCase } from '@cogoport/utils';
 
 import CargoDetails from './CargoDetails';
 import HeaderBlock from './HeaderBlock';
-import { iconMapping } from './iconsMapping';
+import { ICONS_MAPPING } from './iconsMapping';
 import ShippingRoute from './ShippingRoute';
 import styles from './styles.module.css';
 
@@ -22,7 +22,7 @@ function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type =
 	const currentEvent = milestone_activity.find((itm) => itm?.completed_on);
 	const nextEvent = milestoneActivity.find((itm) => !itm?.completed_on);
 
-	const ShipmentIcon = iconMapping[shipment_type] || null;
+	const ShipmentIcon = ICONS_MAPPING[shipment_type] || null;
 
 	return (
 		<>
@@ -45,7 +45,7 @@ function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type =
 				<div className={styles.price_details}>
 					{paymentTerm ? (
 						<Pill size="md" color="#DDEBC0">
-							{paymentTerm }
+							{paymentTerm}
 						</Pill>
 					) : null}
 

@@ -8,11 +8,6 @@
 
 .modal_header_title {
 	display: flex;
-
-	img {
-		width: 18px;
-		height: 18px;
-	}
 }
 
 .modal_title {
