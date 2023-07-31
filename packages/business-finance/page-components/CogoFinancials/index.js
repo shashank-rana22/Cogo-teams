@@ -56,7 +56,13 @@ function CogoFinancials() {
 	const [showShipmentList, setShowShipmentList] = useState(false);
 	const [filter, setFilter] = useState({});
 
-	const { financialData, financialLoading } = useGetProfitabilityStats({ filter, entity, timeRange });
+	const taxType = isPreTax ? 'PreTax' : 'PostTax';
+
+	const {
+		financialData, financialLoading,
+		operationalData, operationalLoading,
+		ongoingData, ongoingLoading,
+	} = useGetProfitabilityStats({ filter, entity, timeRange });
 
 	const handleClick = () => {
 		setShowShipmentList(false);
@@ -115,21 +121,27 @@ function CogoFinancials() {
 							cardId="ongoing"
 							setActiveShipmentCard={setActiveShipmentCard}
 							mappingCards={mappingCards}
+							cardData={ongoingData}
+							loading={ongoingLoading}
+							taxType={taxType}
 						/>
 						<ClosedShipmentCard
 							isDeviationVisible={false}
 							type="Operationally"
 							cardId="operational"
 							setActiveShipmentCard={setActiveShipmentCard}
+							cardData={operationalData}
+							loading={operationalLoading}
+							taxType={taxType}
 						/>
 					</div>
 					<ClosedShipmentCard
 						type="Financially"
 						cardId="financial"
 						setActiveShipmentCard={setActiveShipmentCard}
-						financialData={financialData}
-						financialLoading={financialLoading}
-						taxType={isPreTax ? 'PreTax' : 'PostTax'}
+						cardData={financialData}
+						loading={financialLoading}
+						taxType={taxType}
 					/>
 				</div>
 			) : (
@@ -148,6 +160,9 @@ function CogoFinancials() {
 									cardId="ongoing"
 									setActiveShipmentCard={setActiveShipmentCard}
 									mappingCards={mappingCards}
+									cardData={ongoingData}
+									loading={ongoingLoading}
+									taxType={taxType}
 								/>
 							</div>
 						)}
@@ -160,6 +175,9 @@ function CogoFinancials() {
 									cardId="operational"
 									setActiveShipmentCard={setActiveShipmentCard}
 									isAdditonalView
+									cardData={operationalData}
+									loading={operationalLoading}
+									taxType={taxType}
 								/>
 							</div>
 						)}
@@ -171,9 +189,9 @@ function CogoFinancials() {
 									cardId="financial"
 									setActiveShipmentCard={setActiveShipmentCard}
 									isAdditonalView
-									financialData={financialData}
-									financialLoading={financialLoading}
-									taxType={isPreTax ? 'PreTax' : 'PostTax'}
+									cardData={financialData}
+									loading={financialLoading}
+									taxType={taxType}
 								/>
 							</div>
 						)}

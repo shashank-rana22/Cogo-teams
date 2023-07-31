@@ -1,6 +1,7 @@
 import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar';
-import { cl } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import RenderCardHeader from '../Common/RenderCardHeader';
@@ -8,8 +9,8 @@ import RenderCardHeader from '../Common/RenderCardHeader';
 import styles from './styles.module.css';
 
 const LABEL_MAPPING = {
-	Financially   : 'Actual',
-	Operationally : 'Operational',
+	Financially   : 'actual',
+	Operationally : 'operational',
 };
 
 const displayAmount = (amount, currency) => formatAmount({
@@ -28,13 +29,13 @@ function ClosedShipmentCard({
 	isAdditonalView = false,
 	showHeading = true,
 	wrapElement = false,
-	financialData = [],
-	financialLoading = false,
+	cardData = [],
+	loading = false,
 	taxType = '',
 }) {
 	const {
 		currency,
-	} = financialData;
+	} = cardData;
 
 	const data = [
 		{
@@ -42,11 +43,11 @@ function ClosedShipmentCard({
 			data : [
 				{
 					x : 'Estimated Cost',
-					y : financialData[`estimatedCost${taxType}`],
+					y : cardData[`estimatedCost${taxType}`],
 				},
 				{
 					x : `${LABEL_MAPPING[type]} Cost`,
-					y : financialData[`actualCost${taxType}`],
+					y : cardData[`${LABEL_MAPPING[type]}Cost${taxType}`],
 				},
 			],
 		},
@@ -55,11 +56,11 @@ function ClosedShipmentCard({
 			data : [
 				{
 					x : 'Estimated Revenue',
-					y : financialData[`estimatedRevenue${taxType}`],
+					y : cardData[`estimatedRevenue${taxType}`],
 				},
 				{
 					x : `${LABEL_MAPPING[type]} Revenue`,
-					y : financialData[`actualRevenue${taxType}`],
+					y : cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`],
 				},
 			],
 		},
@@ -72,12 +73,12 @@ function ClosedShipmentCard({
 			children : [
 				{
 					label : 'Estimated Revenue',
-					value : displayAmount(financialData[`estimatedRevenue${taxType}`], currency),
+					value : displayAmount(cardData[`estimatedRevenue${taxType}`], currency),
 					color : '#cfeaed',
 				},
 				{
 					label : 'Estimated Cost',
-					value : displayAmount(financialData[`estimatedCost${taxType}`], currency),
+					value : displayAmount(cardData[`estimatedCost${taxType}`], currency),
 					color : '#f8aea8',
 				},
 			],
@@ -86,13 +87,13 @@ function ClosedShipmentCard({
 			rowId    : 'second_row',
 			children : [
 				{
-					label : `${LABEL_MAPPING[type]} Revenue`,
-					value : displayAmount(financialData[`actualRevenue${taxType}`], currency),
+					label : `${startCase(LABEL_MAPPING[type])} Revenue`,
+					value : displayAmount(cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`], currency),
 					color : '#6fa5ab',
 				},
 				{
-					label : `${LABEL_MAPPING[type]} Cost`,
-					value : displayAmount(financialData[`actualCost${taxType}`], currency),
+					label : `${startCase(LABEL_MAPPING[type])} Cost`,
+					value : displayAmount(cardData[`${LABEL_MAPPING[type]}Cost${taxType}`], currency),
 					color : '#ee3425',
 				},
 			],
@@ -100,13 +101,29 @@ function ClosedShipmentCard({
 
 	];
 
+	const revenueDeviation = `${displayAmount(cardData[`actualRevenueDeviation${taxType}`], currency)}
+	(${cardData[`actualRevenueDeviationPercentage${taxType}`]}%)
+   `;
+
+	const costDeviation = `${displayAmount(cardData[`actualCostDeviation${taxType}`], currency)}
+   (${cardData[`actualCostDeviationPercentage${taxType}`]}%)
+   `;
+
 	const updateGraphData = isDeviationVisible
 		? [...graphData,
 			{
 				rowId    : 'third_row',
 				children : [
-					{ label: 'Deviation', value: 'Curr XXXXX', color: 'null' },
-					{ label: 'Deviation', value: 'Curr XXXXX', color: 'null' },
+					{
+						label : 'Deviation(Revenue)',
+						value : revenueDeviation,
+						color : 'null',
+					},
+					{
+						label : 'Deviation(Cost)',
+						value : costDeviation,
+						color : 'null',
+					},
 				],
 			},
 		]
@@ -121,19 +138,18 @@ function ClosedShipmentCard({
 				/>
 			)}
 
-			<div className={styles.bottom_line} />
-
-			<div
-				className={cl`${styles.chart_data_combine} ${!isDeviationVisible ? styles.additional_margin : null}`}
-				role="presentation"
-				onClick={() => setActiveShipmentCard(cardId)}
-				style={{ flexWrap: wrapElement ? 'wrap' : 'nowrap' }}
-			>
+			{!loading ? (
 				<div
-					className={styles.responsive_graph_circular}
-					style={{ height: isAdditonalView ? '200px' : null }}
+					className={cl`${styles.chart_data_combine} 
+					${!isDeviationVisible ? styles.additional_margin : null}`}
+					role="presentation"
+					onClick={() => setActiveShipmentCard(cardId)}
+					style={{ flexWrap: wrapElement ? 'wrap' : 'nowrap' }}
 				>
-					{!financialLoading && (
+					<div
+						className={styles.responsive_graph_circular}
+						style={{ height: isAdditonalView ? '200px' : null }}
+					>
 						<ResponsiveRadialBar
 							data={data}
 							valueFormat=">-.2f"
@@ -148,33 +164,38 @@ function ClosedShipmentCard({
 							layers={['tracks', 'bars']}
 							colors={['#f8aea8', '#ee3425', '#cfeaed', '#6fa5ab']}
 						/>
-					)}
 
-				</div>
-				<div className={styles.show_graph_data}>
-					{updateGraphData.map((item) => (
-						<div
-							key={item?.id}
-							className={styles.graph_row}
-						>
-							{(item.children || []).map((child) => (
-								<div key={child.label}>
-									<div className={styles.graph_label}>
-										<span
-											className={styles.label_circle}
-											style={{ backgroundColor: child.color }}
-										/>
-										{child.label}
+					</div>
+					<div className={styles.show_graph_data}>
+						{updateGraphData.map((item) => (
+							<div
+								key={item?.id}
+								className={styles.graph_row}
+							>
+								{(item.children || []).map((child) => (
+									<div key={child.label}>
+										<div className={styles.graph_label}>
+											<span
+												className={styles.label_circle}
+												style={{ backgroundColor: child.color }}
+											/>
+											{child.label}
+										</div>
+										<div className={styles.graph_value}>
+											{child.value}
+										</div>
 									</div>
-									<div className={styles.graph_value}>
-										{child.value}
-									</div>
-								</div>
-							))}
-						</div>
-					))}
+								))}
+							</div>
+						))}
+					</div>
 				</div>
-			</div>
+			) : (
+				<div style={{ margin: '8px 0px' }}>
+					<Placeholder height={200} width="100%" />
+				</div>
+			) }
+
 		</div>
 	);
 }
