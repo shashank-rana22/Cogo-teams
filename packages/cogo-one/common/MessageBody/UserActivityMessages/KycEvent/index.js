@@ -1,22 +1,22 @@
 import { startCase } from '@cogoport/utils';
 
+import { getEventTitle } from '../../../../utils/getEventTitle';
+
 import styles from './styles.module.css';
 
-function KycEvent({ data = {}, scope = '' }) {
+function KycEvent({ data = {}, scope = '', name = '' }) {
+	const eventTitle = getEventTitle({ name });
+
 	return (
 		<>
 			<div className={styles.title}>
-				Customer Abandoned The Sign Up Process on
-				{' '}
-				{startCase(scope)}
-				{' '}
-				Platform
+				{`${startCase(eventTitle)} on ${startCase(scope)} platform`}
 			</div>
 			<div className={styles.message}>
 				{startCase(data?.error)}
 			</div>
 			<div className={styles.message}>
-				Please contact the customer to understand their concerns and help them proceed with the sign up journey
+				Information on user KYC verification is provided here.
 			</div>
 		</>
 	);

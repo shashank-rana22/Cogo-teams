@@ -69,6 +69,12 @@ export const SOURCE_ICON_MAPPING = {
 		width={20}
 		height={20}
 	/>,
+	organization: <Image
+		src={GLOBAL_CONSTANTS.image_url.kyc_event}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
 };
 
 export const TAGS_COLORS = ['#FEF3E9', '#F3FAFA'];

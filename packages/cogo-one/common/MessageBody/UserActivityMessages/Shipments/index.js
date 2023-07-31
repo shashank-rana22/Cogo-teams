@@ -2,15 +2,35 @@ import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import { SHIPPING_LINE, EVENTS_INFORMATION } from '../../../../constants/shippingLineMappings';
-import { getEventTitle } from '../../../../utils/getEventTitle';
+import { SHIPPING_LINE } from '../../../../constants/shippingLineMappings';
 
 import CargoDetails from './CargoDetails';
 import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
-function Shipments({ serviceData = {}, name = '', eventType = '' }) {
-	const eventTitle = getEventTitle({ name });
+function Shipments({ serviceData = {}, eventType = '', scope = '' }) {
+	const PLATFORM = startCase(scope);
+
+	const EVENTS_INFORMATION = {
+		checkout: {
+			title       : `Customer Has Not Proceeded With the Checkout Process on ${PLATFORM} platform`,
+			information : `Please contact the customer to understand their
+			 concerns and help them to complete the checkout. 
+			Here are the details of the shipment checkout that has been abandoned by the customer - `,
+		},
+		shipment: {
+			title       : `Customer Has Proceeded with Shipemnt on ${PLATFORM} platform`,
+			information : 'Here are the details of the shipment -',
+		},
+
+		spot_search: {
+			title: `Customer Has Not Proceeded With Shipment After 
+			Performing A Spot Search on ${PLATFORM} platform`,
+			information: `Please contact the customer to understand their 
+			concerns and help them to proceed with the next steps. Here are the details of the spot search - `,
+		},
+
+	};
 
 	const {
 		detail = {}, rate = {},
@@ -64,9 +84,9 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 	if (isEmpty(serviceData)) {
 		return (
 			<>
-				<div className={styles.title}>{startCase(eventTitle)}</div>
+				<div className={styles.title}>{EVENTS_INFORMATION[eventType].title}</div>
 				<div className={styles.message}>
-					{EVENTS_INFORMATION[eventType]}
+					{EVENTS_INFORMATION[eventType].information}
 				</div>
 			</>
 		);
@@ -74,9 +94,9 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 
 	return (
 		<>
-			<div className={styles.title}>{startCase(eventTitle)}</div>
+			<div className={styles.title}>{EVENTS_INFORMATION[eventType].title}</div>
 			<div className={styles.message}>
-				{EVENTS_INFORMATION[eventType]}
+				{EVENTS_INFORMATION[eventType].information}
 			</div>
 
 			<div className={styles.banner}>

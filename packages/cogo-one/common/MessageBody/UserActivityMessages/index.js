@@ -30,7 +30,7 @@ const COMPONENT_MAPPING = {
 	default       : Default,
 	spot_search   : Shipments,
 	lead_user     : SignUpEvents,
-	kyc           : KycEvent,
+	organization  : KycEvent,
 };
 
 const IMAGE_URL_MAPPING = {
@@ -38,9 +38,10 @@ const IMAGE_URL_MAPPING = {
 	shipment      : GLOBAL_CONSTANTS.image_url.abandon_shipmemts,
 	user          : GLOBAL_CONSTANTS.image_url.login_failed,
 	communication : GLOBAL_CONSTANTS.image_url.email_clicked,
-	default       : GLOBAL_CONSTANTS.image_url.login_failed,
+	default       : GLOBAL_CONSTANTS.image_url.default_event,
 	spot_search   : GLOBAL_CONSTANTS.image_url.abandon_shipmemts,
 	lead_user     : GLOBAL_CONSTANTS.image_url.sign_up_failed,
+	organization  : GLOBAL_CONSTANTS.image_url.kyc_event,
 };
 
 function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
