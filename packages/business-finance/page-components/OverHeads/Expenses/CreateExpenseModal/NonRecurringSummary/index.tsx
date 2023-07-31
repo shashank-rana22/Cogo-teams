@@ -1,11 +1,11 @@
 import { Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
-import { formatDate } from '../../../../commons/utils/formatDate';
 
 import styles from './styles.module.css';
 
@@ -14,7 +14,7 @@ interface Entity {
 	id?: string;
 }
 
-function RenderSummaryData({ summary }) {
+function RenderSummaryData({ summary = [] }) {
 	return (
 		<div style={{ display: 'flex' }}>
 			{summary?.map((item) => (
@@ -55,6 +55,130 @@ interface Props {
 
 const MAX_LENGTH = 18;
 
+const summaryDataOne = ({ vendorName, categoryName, entityObject, branch }) => [
+	{
+		title : 'Vendor Name',
+		value : vendorName ? showOverflowingNumber(vendorName, MAX_LENGTH) : '-',
+	},
+	{
+		title : 'Expense Category',
+		value : categoryName
+			? showOverflowingNumber(startCase(categoryName), MAX_LENGTH)
+			: '-',
+	},
+	{
+		title : 'Entity',
+		value : entityObject?.entity_code || '-',
+	},
+	{
+		title : 'Branch ',
+		value : branch
+			? showOverflowingNumber(JSON.parse(branch)?.name, MAX_LENGTH)
+			: '-',
+	},
+];
+const summaryDataTwo = ({
+	payableAmount,
+	invoiceCurrency,
+	invoiceDate,
+	transactionDate,
+	periodOfTransaction,
+}) => [
+	{
+		title : 'Payable Amount',
+		value : (
+			<div>
+				{formatAmount({
+					amount   : payableAmount as any,
+					currency : invoiceCurrency,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}) || '-'}
+			</div>
+		),
+	},
+	{
+		title : 'Expense Date',
+		value : (
+			<div>
+				{invoiceDate
+					? formatDate({
+						date: invoiceDate,
+						dateFormat:
+								GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+						formatType: 'date',
+					})
+					: '-'}
+			</div>
+		),
+	},
+	{
+		title : 'Transaction Date',
+		value : (
+			<div>
+				{transactionDate
+					? formatDate({
+						date: transactionDate,
+						dateFormat:
+								GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+						formatType: 'date',
+					})
+					: '-'}
+			</div>
+		),
+	},
+	{
+		title : 'Period',
+		value : (
+			<div>
+				{periodOfTransaction ? startCase(periodOfTransaction) : '-'}
+				{' '}
+			</div>
+		),
+	},
+];
+const summaryDataThree = ({ uploadedInvoice, filename, paymentMode }) => [
+	{
+		title : 'Uploaded Documents',
+		value : (
+			<div>
+				{uploadedInvoice ? (
+					<a
+						href={uploadedInvoice}
+						style={{
+							color          : 'blue',
+							textDecoration : 'underline',
+							fontSize       : '16px',
+						}}
+						target="_blank"
+						rel="noreferrer"
+					>
+						{showOverflowingNumber(filename, 20)}
+					</a>
+				) : (
+					'-'
+				)}
+			</div>
+		),
+	},
+	{
+		title : 'Payment Mode ',
+		value : startCase(paymentMode || '') || '-',
+	},
+];
+
+const summeryMappings = ({
+	summaryDataFirst,
+	summaryDataSecond,
+	summaryDataThird,
+}) => [
+	{ key: '1', val: summaryDataFirst },
+	{ key: '2', val: summaryDataSecond },
+	{ key: '3', val: summaryDataThird },
+];
+
 function NonRecurringSummary({
 	nonRecurringData = {},
 	setNonRecurringData = () => {},
@@ -86,110 +210,31 @@ function NonRecurringSummary({
 		}
 	}, [tradePartyData, setNonRecurringData]);
 
-	const summaryDataFirst = [
-		{
-			title : 'Vendor Name',
-			value : vendorName ? showOverflowingNumber(vendorName, MAX_LENGTH) : '-',
-		},
-		{
-			title : 'Expense Category',
-			value : categoryName
-				? showOverflowingNumber(startCase(categoryName), MAX_LENGTH)
-				: '-',
-		},
-		{
-			title : 'Entity',
-			value : entityObject?.entity_code || '-',
-		},
-		{
-			title : 'Branch ',
-			value : branch
-				? showOverflowingNumber(JSON.parse(branch)?.name, MAX_LENGTH)
-				: '-',
-		},
-	];
-	const summaryDataSecond = [
-		{
-			title : 'Payable Amount',
-			value : (
-				<div>
-					{formatAmount({
-						amount   : payableAmount as any,
-						currency : invoiceCurrency,
-						options  : {
-							style           : 'currency',
-							currencyDisplay : 'code',
-						},
-					}) || '-'}
-				</div>
-			),
-		},
-		{
-			title : 'Expense Date',
-			value : (
-				<div>
-					{invoiceDate
-						? formatDate(invoiceDate, 'dd/MMM/yy', {}, false)
-						: '-'}
-				</div>
-			),
-		},
-		{
-			title : 'Transaction Date',
-			value : (
-				<div>
-					{transactionDate
-						? formatDate(transactionDate, 'dd/MMM/yy', {}, false)
-						: '-'}
-				</div>
-			),
-		},
-		{
-			title : 'Period',
-			value : (
-				<div>
-					{periodOfTransaction ? startCase(periodOfTransaction) : '-'}
-					{' '}
-				</div>
-			),
-		},
-	];
-	const summaryDataThird = [
-		{
-			title : 'Uploaded Documents',
-			value : (
-				<div>
-					{uploadedInvoice ? (
-						<a
-							href={uploadedInvoice}
-							style={{
-								color          : 'blue',
-								textDecoration : 'underline',
-								fontSize       : '16px',
-							}}
-							target="_blank"
-							rel="noreferrer"
-						>
-							{showOverflowingNumber(filename, 20)}
-						</a>
-					) : (
-						'-'
-					)}
-				</div>
-			),
-		},
-		{
-			title : 'Payment Mode ',
-			value : startCase(paymentMode || '') || '-',
-		},
-	];
+	const summaryDataFirst = summaryDataOne({
+		vendorName,
+		categoryName,
+		entityObject,
+		branch,
+	});
+	const summaryDataSecond = summaryDataTwo({
+		payableAmount,
+		invoiceCurrency,
+		invoiceDate,
+		transactionDate,
+		periodOfTransaction,
+	});
 
-	const summeryMapping = [
-		{ key: '1', val: summaryDataFirst },
-		{ key: '2', val: summaryDataSecond },
-		{ key: '3', val: summaryDataThird },
-	];
+	const summaryDataThird = summaryDataThree({
+		uploadedInvoice,
+		filename,
+		paymentMode,
+	});
 
+	const summeryMapping = summeryMappings({
+		summaryDataFirst,
+		summaryDataSecond,
+		summaryDataThird,
+	});
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>

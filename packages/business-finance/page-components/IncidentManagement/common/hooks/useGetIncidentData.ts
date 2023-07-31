@@ -11,6 +11,50 @@ interface Tab {
 	activeTab?: string;
 	incidentId?: string;
 }
+
+const getParams = ({
+	rest = {},
+	activeTab,
+	isSettlementExecutive,
+	query,
+	category,
+	page,
+	pageLimit,
+	incidentId,
+	startDate,
+	urgency,
+	endDate,
+}) => ({
+	...rest,
+	status          : activeTab.toUpperCase(),
+	isStatsRequired : true,
+	deadlineTag     : urgency === 'urgent' ? 'DELAYED' : undefined,
+	role            : isSettlementExecutive ? 'SETTLEMENT_EXECUTIVE' : undefined,
+	q               : query !== '' ? query : undefined,
+	type            : category,
+	pageIndex       : page,
+	pageSize        : pageLimit,
+	id              : incidentId,
+	createdFrom     : startDate
+		? formatDate({
+			date       : startDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+			formatType : 'date',
+			separator  : ' ',
+		})
+		: undefined,
+	createdTo: endDate
+		? formatDate({
+			date       : endDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+			formatType : 'date',
+			separator  : ' ',
+		})
+		: undefined,
+});
+
 const useGetIncidentData = ({ activeTab, incidentId }: Tab) => {
 	const { user_profile: userProfile } = useSelector(({ profile }) => ({
 		user_profile: profile,
@@ -61,65 +105,43 @@ const useGetIncidentData = ({ activeTab, incidentId }: Tab) => {
 
 	const getIncidentData = async () => {
 		const { startDate, endDate } = date || {};
-		if (activeTab !== 'controller') {
-			try {
-				await trigger({
-					params: {
-						...rest,
-						status          : activeTab.toUpperCase(),
-						isStatsRequired : true,
-						deadlineTag:
-							urgency === 'urgent' ? 'DELAYED' : undefined,
-						role: isSettlementExecutive
-							? 'SETTLEMENT_EXECUTIVE'
-							: undefined,
-						q           : query !== '' ? query : undefined,
-						type        : category,
-						pageIndex   : page,
-						pageSize    : pageLimit,
-						id          : incidentId,
-						createdFrom : startDate
-							? formatDate({
-								date: startDate,
-								dateFormat:
-										GLOBAL_CONSTANTS.formats.date[
-											'yyyy-MM-dd'
-										],
-								timeFormat:
-										GLOBAL_CONSTANTS.formats.time[
-											'hh:mm aaa'
-										],
-								formatType : 'date',
-								separator  : ' ',
-							})
-							: undefined,
-						createdTo: endDate
-							? formatDate({
-								date: endDate,
-								dateFormat:
-										GLOBAL_CONSTANTS.formats.date[
-											'yyyy-MM-dd'
-										],
-								timeFormat:
-										GLOBAL_CONSTANTS.formats.time[
-											'hh:mm aaa'
-										],
-								formatType : 'date',
-								separator  : ' ',
-							})
-							: undefined,
-					},
-				});
-			} catch (err) {
-				console.log(err);
-			}
+		if (activeTab === 'controller') return;
+		try {
+			await trigger({
+				params: getParams({
+					rest,
+					activeTab,
+					isSettlementExecutive,
+					query,
+					category,
+					page,
+					pageLimit,
+					incidentId,
+					startDate,
+					urgency,
+					endDate,
+				}),
+			});
+		} catch (err) {
+			console.log(err);
 		}
 	};
+
+	const restParams = JSON.stringify(rest);
 
 	useEffect(() => {
 		getIncidentData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), category, date, query, page, urgency, incidentId, activeTab]);
+	}, [
+		restParams,
+		category,
+		date,
+		query,
+		page,
+		urgency,
+		incidentId,
+		activeTab,
+	]);
 
 	useEffect(() => {
 		setFilters((prev) => ({

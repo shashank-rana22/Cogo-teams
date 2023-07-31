@@ -6,11 +6,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 function VendorDetailsInfo({
 	data = {},
 }) {
+	const geo = getGeoConstants();
 	const {
 		country,
 		registration_number,

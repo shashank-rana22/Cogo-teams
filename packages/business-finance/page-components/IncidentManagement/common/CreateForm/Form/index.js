@@ -13,29 +13,15 @@ import styles from './styles.module.css';
 const HUNDERED_PERCENT = 100;
 const TOTAL_SPAN = 12;
 
-const getElementController = (type) => {
-	switch (type) {
-		case 'text':
-			return InputController;
-
-		case 'select':
-			return SelectController;
-
-		case 'multiSelect':
-			return MultiselectController;
-
-		case 'textArea':
-			return TextAreaController;
-
-		case 'asyncSelect':
-			return AsyncSelectController;
-
-		default:
-			return null;
-	}
+const CONTROLLER_MAPPINGS = {
+	text        : InputController,
+	select      : SelectController,
+	multiSelect : MultiselectController,
+	textArea    : TextAreaController,
+	asyncSelect : AsyncSelectController,
 };
 
-function Form({ controls = () => {}, setLevel = () => {} }, ref) {
+function Form({ controls = () => { }, setLevel = () => { } }, ref) {
 	const { formState: { errors }, control, handleSubmit, watch, setValue } = useForm();
 
 	const finalControls = controls({ incidentType: watch('incidentType'), setValue });
@@ -53,7 +39,7 @@ function Form({ controls = () => {}, setLevel = () => {} }, ref) {
 			{finalControls.map((controlItem) => {
 				const { span, show = true } = controlItem || {};
 				const el = { ...controlItem };
-				const Element = getElementController(el.type);
+				const Element = CONTROLLER_MAPPINGS[el.type];
 				if (!Element) return null;
 				return (
 					<div

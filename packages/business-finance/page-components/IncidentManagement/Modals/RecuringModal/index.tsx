@@ -38,6 +38,145 @@ function RenderSummary({ summary = [] }) {
 	);
 }
 
+const summaryDataOne = ({ businessName, categoryName, cogoEntity }) => [
+	{
+		title : 'Vendor Name',
+		value : businessName ? showOverflowingNumber(businessName, 18) : '-',
+	},
+	{
+		title : 'Expense Category',
+		value : startCase(categoryName),
+	},
+	{
+		title : 'Entity',
+		value : cogoEntity || '-',
+	},
+];
+
+const summaryDataTwo = ({
+	branchName,
+	currency,
+	maxPayoutAllowed,
+	ledgerMaxPayoutAllowed,
+	ledgerCurrency,
+}) => [
+	{
+		title : 'Branch ',
+		value : branchName || '-',
+	},
+	{
+		title: 'Maximum Payout Allowed',
+		value:
+			currency && maxPayoutAllowed ? (
+				<div>
+					{formatAmount({
+						amount  : maxPayoutAllowed,
+						currency,
+						options : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
+				</div>
+			) : (
+				'-'
+			),
+	},
+	{
+		title: 'Ledger Account',
+		value:
+			formatAmount({
+				amount   : ledgerMaxPayoutAllowed,
+				currency : ledgerCurrency,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}) || '-',
+	},
+];
+
+const summaryDataThree = ({ startDate, endDate, repeatFrequency }) => [
+	{
+		title : 'Start Date',
+		value : (
+			<div>
+				{startDate
+					? formatDate({
+						date: startDate,
+						dateFormat:
+								GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType: 'date',
+					})
+					: '-'}
+			</div>
+		),
+	},
+	{
+		title : 'End Date',
+		value : (
+			<div>
+				{endDate
+					? formatDate({
+						date: endDate,
+						dateFormat:
+								GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType: 'date',
+					})
+					: '-'}
+			</div>
+		),
+	},
+	{
+		title : 'Repeat Frequency',
+		value : DURATION_MAPPING[repeatFrequency] || '-',
+	},
+];
+
+const summaryDataFour = ({ proofDocuments, agreementNumber }) => [
+	{
+		title : 'Uploaded Documents',
+		value : (
+			<div className={styles.document_flex}>
+				{(proofDocuments || []).map((url, index) => (url !== '' ? (
+					<a
+						href={url}
+						target="_blank"
+						rel="noreferrer"
+						key={url}
+					>
+						<div className={styles.view_flex}>
+							<div className={styles.view}>
+								View Document
+								{' '}
+								{index + FIRST_INDEX}
+							</div>
+						</div>
+					</a>
+				) : (
+					<div key={url}> No document available</div>
+				)))}
+			</div>
+		),
+	},
+	{
+		title : 'Agreement Number',
+		value : agreementNumber || '-',
+	},
+];
+
+const summeryMappings = ({
+	summaryDataFirst,
+	summaryDataSecond,
+	summaryDataThird,
+	summaryDataFourth,
+}) => [
+	{ key: '1', val: summaryDataFirst },
+	{ key: '2', val: summaryDataSecond },
+	{ key: '3', val: summaryDataThird },
+	{ key: '4', val: summaryDataFourth },
+];
+
 function RecuringModal({ id, refetch, row, isEditable = true }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -70,135 +209,37 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 
 	const { businessName } = organization || {};
 
-	const summaryDataFirst = [
-		{
-			title : 'Vendor Name',
-			value : businessName ? showOverflowingNumber(businessName, 18) : '-',
-		},
-		{
-			title : 'Expense Category',
-			value : startCase(categoryName),
-		},
-		{
-			title : 'Entity',
-			value : cogoEntity || '-',
-		},
-	];
-	const summaryDataSecond = [
-		{
-			title : 'Branch ',
-			value : branchName || '-',
-		},
-		{
-			title: 'Maximum Payout Allowed',
-			value:
-				currency && maxPayoutAllowed ? (
-					<div>
-						{formatAmount({
-							amount  : maxPayoutAllowed,
-							currency,
-							options : {
-								style           : 'currency',
-								currencyDisplay : 'code',
-							},
-						})}
-					</div>
-				) : (
-					'-'
-				),
-		},
-		{
-			title: 'Ledger Account',
-			value:
-				formatAmount({
-					amount   : ledgerMaxPayoutAllowed,
-					currency : ledgerCurrency,
-					options  : {
-						style           : 'currency',
-						currencyDisplay : 'code',
-					},
-				}) || '-',
-		},
-	];
-	const summaryDataThird = [
-		{
-			title : 'Start Date',
-			value : (
-				<div>
-					{startDate
-						? formatDate({
-							date: startDate,
-							dateFormat:
-									GLOBAL_CONSTANTS.formats.date[
-										'dd MMM yyyy'
-									],
-							formatType: 'date',
-						})
-						: '-'}
-				</div>
-			),
-		},
-		{
-			title : 'End Date',
-			value : (
-				<div>
-					{endDate
-						? formatDate({
-							date: endDate,
-							dateFormat:
-									GLOBAL_CONSTANTS.formats.date[
-										'dd MMM yyyy'
-									],
-							formatType: 'date',
-						})
-						: '-'}
-				</div>
-			),
-		},
-		{
-			title : 'Repeat Frequency',
-			value : DURATION_MAPPING[repeatFrequency] || '-',
-		},
-	];
+	const summaryDataFirst = summaryDataOne({
+		businessName,
+		categoryName,
+		cogoEntity,
+	});
 
-	const summaryDataFourth = [
-		{
-			title : 'Uploaded Documents',
-			value : (
-				<div className={styles.document_flex}>
-					{(proofDocuments || []).map((url, index) => (url !== '' ? (
-						<a
-							href={url}
-							target="_blank"
-							rel="noreferrer"
-							key={url}
-						>
-							<div className={styles.view_flex}>
-								<div className={styles.view}>
-									View Document
-									{' '}
-									{index + FIRST_INDEX}
-								</div>
-							</div>
-						</a>
-					) : (
-						<div key={url}> No document available</div>
-					)))}
-				</div>
-			),
-		},
-		{
-			title : 'Agreement Number',
-			value : agreementNumber || '-',
-		},
-	];
+	const summaryDataSecond = summaryDataTwo({
+		branchName,
+		currency,
+		maxPayoutAllowed,
+		ledgerCurrency,
+		ledgerMaxPayoutAllowed,
+	});
 
-	const summeryMapping = [
-		{ key: '1', val: summaryDataFirst },
-		{ key: '2', val: summaryDataSecond },
-		{ key: '3', val: summaryDataThird },
-		{ key: '4', val: summaryDataFourth },
-	];
+	const summaryDataThird = summaryDataThree({
+		startDate,
+		endDate,
+		repeatFrequency,
+	});
+
+	const summaryDataFourth = summaryDataFour({
+		proofDocuments,
+		agreementNumber,
+	});
+
+	const summeryMapping = summeryMappings({
+		summaryDataFirst,
+		summaryDataSecond,
+		summaryDataThird,
+		summaryDataFourth,
+	});
 
 	return (
 		<div>
@@ -237,7 +278,13 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 								marginBottom : '12px',
 							}}
 						/>
-						<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
+						<StakeHolderTimeline
+							timeline={stakeHolderTimeLineData({
+								level1,
+								level2,
+								level3,
+							})}
+						/>
 					</>
 				</Modal.Body>
 				{isEditable && (

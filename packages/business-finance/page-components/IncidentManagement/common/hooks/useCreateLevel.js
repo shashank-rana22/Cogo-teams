@@ -73,7 +73,7 @@ const useCreateLevel = ({
 	return {
 		controls,
 		onSubmit,
-		createApi: { loading },
+		loading,
 		onCancel,
 	};
 };

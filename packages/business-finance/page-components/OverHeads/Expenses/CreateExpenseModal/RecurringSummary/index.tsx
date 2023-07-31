@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-indent */
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
-import { formatDate } from '../../../../commons/utils/formatDate';
 import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
@@ -62,6 +62,110 @@ function RenderSummaryData({ summary = [] }) {
 	);
 }
 
+const summaryDataOne = ({ vendorName, categoryName, entityObject, branch }) => [
+	{
+		title : 'Vendor Name',
+		value : vendorName
+			? showOverflowingNumber(vendorName, MAX_LENGTH)
+			: '-',
+	},
+	{
+		title : 'Expense Category',
+		value : startCase(categoryName),
+	},
+	{
+		title : 'Entity',
+		value : entityObject?.entity_code || '-',
+	},
+	{
+		title : 'Branch ',
+		value : branch
+			? showOverflowingNumber(JSON.parse(branch)?.name, MAX_LENGTH)
+			: '-',
+	},
+];
+
+const summaryDataTwo = ({ currency, payableAmount, startDate, endDate, agreementNumber }) => [
+	{
+		title: 'Payable Amount',
+		value:
+			currency && payableAmount ? (
+				<div>
+					{currency}
+{' '}
+{payableAmount}
+				</div>
+			) : (
+				'-'
+			),
+	},
+	{
+		title : 'Start Date',
+		value : (
+			<div>
+				{startDate
+					? formatDate({
+						date       : startDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+						formatType : 'date',
+					})
+					: '-'}
+			</div>
+		),
+	},
+	{
+		title : 'End Date',
+		value : (
+			<div>
+				{endDate
+					? formatDate({
+						date       : endDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+						formatType : 'date',
+					})
+					: '-'}
+			</div>
+		),
+	},
+	{
+		title : 'Agreement Number',
+		value : agreementNumber || '-',
+	},
+];
+
+const summaryDataThree = ({ repeatEvery, uploadedInvoice, filename }) => [
+	{
+		title : 'Duration',
+		value : (repeatEvery || '').replaceAll('_', ' ') || '-',
+	},
+
+	{
+		title : 'Uploaded Documents',
+		value : (
+			<div>
+				{uploadedInvoice ? (
+					<a
+						href={uploadedInvoice}
+						className={styles.upload_invoice}
+						target="_blank"
+						rel="noreferrer"
+					>
+						{showOverflowingNumber(filename, 20)}
+					</a>
+				) : (
+					'-'
+				)}
+			</div>
+		),
+	},
+];
+
+const summeryMappings = ({ summaryDataFirst, summaryDataSecond, summaryDataThird }) => [
+	{ key: '1', val: summaryDataFirst },
+	{ key: '2', val: summaryDataSecond },
+	{ key: '3', val: summaryDataThird },
+];
+
 function RecurringSummary({
 	recurringData = {},
 	setRecurringData = () => {},
@@ -95,100 +199,11 @@ function RecurringSummary({
 		}
 	}, [tradePartyData, setRecurringData]);
 
-	const summaryDataFirst = [
-		{
-			title : 'Vendor Name',
-			value : vendorName
-				? showOverflowingNumber(vendorName, MAX_LENGTH)
-				: '-',
-		},
-		{
-			title : 'Expense Category',
-			value : startCase(categoryName),
-		},
-		{
-			title : 'Entity',
-			value : entityObject?.entity_code || '-',
-		},
-		{
-			title : 'Branch ',
-			value : branch
-				? showOverflowingNumber(JSON.parse(branch)?.name, MAX_LENGTH)
-				: '-',
-		},
-	];
-	const summaryDataSecond = [
-		{
-			title: 'Payable Amount',
-			value:
-				currency && payableAmount ? (
-					<div>
-						{currency}
-{' '}
-{payableAmount}
-					</div>
-				) : (
-					'-'
-				),
-		},
-		{
-			title : 'Start Date',
-			value : (
-				<div>
-					{startDate
-						? formatDate(startDate, 'dd/MMM/yy', {}, false)
-						: '-'}
-				</div>
-			),
-		},
-		{
-			title : 'End Date',
-			value : (
-				<div>
-					{endDate
-						? formatDate(endDate, 'dd/MMM/yy', {}, false)
-						: '-'}
-				</div>
-			),
-		},
-		{
-			title : 'Agreement Number',
-			value : agreementNumber || '-',
-		},
-	];
-	const summaryDataThird = [
-		{
-			title : 'Duration',
-			value : (repeatEvery || '').replaceAll('_', ' ') || '-',
-		},
+	const summaryDataFirst = summaryDataOne({ vendorName, categoryName, entityObject, branch });
+	const summaryDataSecond = summaryDataTwo({ currency, payableAmount, startDate, endDate, agreementNumber });
+	const summaryDataThird = summaryDataThree({ repeatEvery, uploadedInvoice, filename });
 
-		{
-			title : 'Uploaded Documents',
-			value : (
-				<div>
-					{uploadedInvoice ? (
-						<a
-							href={uploadedInvoice}
-							className={styles.upload_invoice}
-							target="_blank"
-							rel="noreferrer"
-						>
-							{showOverflowingNumber(filename, 20)}
-						</a>
-					) : (
-						'-'
-					)}
-				</div>
-			),
-		},
-	];
-
-	const summeryMapping = [
-		{ key: '1', val: summaryDataFirst },
-		{ key: '2', val: summaryDataSecond },
-		{ key: '3', val: summaryDataThird },
-	];
-
+	const summeryMapping = summeryMappings({ summaryDataFirst, summaryDataSecond, summaryDataThird });
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>

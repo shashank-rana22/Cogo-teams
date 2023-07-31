@@ -13,8 +13,71 @@ import styles from './style.module.css';
 
 const DEFAULT_REMARK_LEN = 40;
 
+const incidentMappings = ({
+	invoiceNumber,
+	categoryName,
+	branchName,
+	subTotalAmount,
+	currency,
+	taxTotalAmount,
+	grandTotalAmount,
+	ledgerGrandTotal,
+	ledgerCurrency,
+}) => [
+	{
+		key   : 'Invoice number',
+		value : invoiceNumber,
+	},
+	{ key: 'Category Name', value: categoryName },
+	{ key: 'Branch Name', value: branchName },
+	{
+		key   : 'SubTotal',
+		value : formatAmount({
+			amount  : subTotalAmount,
+			currency,
+			options : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+	{
+		key   : 'TaxAmount',
+		value : formatAmount({
+			amount  : taxTotalAmount,
+			currency,
+			options : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+	{
+		key   : 'GrandTotal',
+		value : formatAmount({
+			amount  : grandTotalAmount,
+			currency,
+			options : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+	{
+		key   : 'Ledger GrandTotal',
+		value : formatAmount({
+			amount   : ledgerGrandTotal,
+			currency : ledgerCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+];
+
 function NonRecuringModal({
-	onSave = () => {},
+	onSave = () => { },
 	itemData = {},
 	loadingOnSave = false,
 }) {
@@ -43,58 +106,17 @@ function NonRecuringModal({
 
 	const { referenceId = '' } = itemData || {};
 
-	const incidentMappings = [
-		{
-			key   : 'Invoice number',
-			value : invoiceNumber,
-		},
-		{ key: 'Category Name', value: categoryName },
-		{ key: 'Branch Name', value: branchName },
-		{
-			key   : 'SubTotal',
-			value : formatAmount({
-				amount  : subTotalAmount,
-				currency,
-				options : {
-					style           : 'currency',
-					currencyDisplay : 'code',
-				},
-			}),
-		},
-		{
-			key   : 'TaxAmount',
-			value : formatAmount({
-				amount  : taxTotalAmount,
-				currency,
-				options : {
-					style           : 'currency',
-					currencyDisplay : 'code',
-				},
-			}),
-		},
-		{
-			key   : 'GrandTotal',
-			value : formatAmount({
-				amount  : grandTotalAmount,
-				currency,
-				options : {
-					style           : 'currency',
-					currencyDisplay : 'code',
-				},
-			}),
-		},
-		{
-			key   : 'Ledger GrandTotal',
-			value : formatAmount({
-				amount   : ledgerGrandTotal,
-				currency : ledgerCurrency,
-				options  : {
-					style           : 'currency',
-					currencyDisplay : 'code',
-				},
-			}),
-		},
-	];
+	const incidentMapping = incidentMappings({
+		invoiceNumber,
+		categoryName,
+		branchName,
+		subTotalAmount,
+		currency,
+		taxTotalAmount,
+		grandTotalAmount,
+		ledgerGrandTotal,
+		ledgerCurrency,
+	});
 
 	return (
 		<div>
@@ -125,7 +147,7 @@ function NonRecuringModal({
 						<ApproveAndRejectHeader row={itemData} />
 
 						<div className={styles.flex}>
-							{incidentMappings?.map((item) => (
+							{incidentMapping?.map((item) => (
 								<div
 									className={styles.value_data}
 									key={item.key}

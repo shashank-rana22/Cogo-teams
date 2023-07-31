@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { format } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import styles from './styles.module.css';
 
@@ -12,7 +12,13 @@ function Footer({ item = {} }) {
 				<div>
 					Cargo Readiness date:
 					{' '}
-					<b>{format(cargo_readiness_date, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'], null, true)}</b>
+					<b>
+						{formatDate({
+							date       : cargo_readiness_date,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						})}
+					</b>
 					{' '}
 				</div>
 
@@ -20,7 +26,11 @@ function Footer({ item = {} }) {
 					Exp. Vessel departure:
 					{' '}
 					<b>
-						{format(estimated_departure, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'], null, true)}
+						{formatDate({
+							date       : estimated_departure,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						})}
 					</b>
 				</div>
 

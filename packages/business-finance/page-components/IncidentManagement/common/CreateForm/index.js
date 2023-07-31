@@ -18,10 +18,8 @@ function CreateLevelModal({
 	const lineItemsRef = useRef();
 
 	const {
-		controls, onSubmit, createApi, onCancel, updating,
+		controls, onSubmit, loading, onCancel, updating,
 	} = useCreateRequest({ refetch, setShowCreateModal, ref, lineItemsRef });
-
-	const { loading } = createApi;
 
 	return (
 		<>
