@@ -24,6 +24,6 @@ const CONFIG_MAPPING = {
 	so1_so2_ops           : documentDeskConfig,
 };
 
-const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || { defaultConfig };
+const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || defaultConfig;
 
 export default stakeholderConfig;

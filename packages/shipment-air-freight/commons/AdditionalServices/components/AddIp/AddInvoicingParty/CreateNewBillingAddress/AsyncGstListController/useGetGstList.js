@@ -1,6 +1,6 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 function useGetGstList({ registrationNumber }) {
 	const [{ data }, trigger] = useRequest({
@@ -8,19 +8,21 @@ function useGetGstList({ registrationNumber }) {
 		method : 'GET',
 	});
 
-	useEffect(() => {
-		(async () => {
-			try {
-				await trigger({
-					params: {
-						registration_number: registrationNumber,
-					},
-				});
-			} catch (err) {
-				toastApiError(err);
-			}
-		})();
+	const getGstList = useCallback(async () => {
+		try {
+			await trigger({
+				params: {
+					registration_number: registrationNumber,
+				},
+			});
+		} catch (err) {
+			toastApiError(err);
+		}
 	}, [trigger, registrationNumber]);
+
+	useEffect(() => {
+		getGstList();
+	}, [getGstList]);
 
 	return {
 		data,
