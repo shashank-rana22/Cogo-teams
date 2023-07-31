@@ -12,10 +12,12 @@ const useChangePassword = ({
 	const [error, setError] = useState({});
 	const [patternError, setPatternError] = useState('');
 
-	const [{ loading = false }, trigger] = useRequest({
-		url    : 'update_user_password',
+	const api = useRequest({
+		url    : '/update_user_password',
 		method : 'post',
-	}, { manual: false });
+	}, { manual: true });
+
+	const [{ loading }, trigger] = api;
 
 	const { handleSubmit, formState: { errors }, control, watch, getValues } = useForm();
 

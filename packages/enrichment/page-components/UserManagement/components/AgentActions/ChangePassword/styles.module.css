@@ -12,8 +12,6 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	padding: 14px 20px;
-	border-top: 1.5px solid #eee;
 }
 
 .password_validator {
@@ -33,7 +31,32 @@
 	}
 }
 
+.user_container {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    background: #fdfbf6;
+}
+
+.cancel_cta {
+	margin-right: 12px;
+}
+
+.flex_container {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.value {
+	margin-bottom: 8px;
+    width: 70%;
+    font-weight: 600;
+    color: #333;
+}
+
 .label {
 	margin-bottom: 8px;
-	font-size: 16px;
+    width: 30%;
+    color: #828282;
 }
+

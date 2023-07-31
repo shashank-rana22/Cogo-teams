@@ -16,7 +16,7 @@ function ChangePassword(props) {
 
 	const {
 		onCreate = () => {},
-		onError = () => { },
+		onError = () => {},
 		loading: apiLoading = false,
 		control,
 		errors,
@@ -32,51 +32,75 @@ function ChangePassword(props) {
 	const { password = '' } = getValues();
 
 	return (
-
 		<>
 			<Modal.Header title="Update Password" />
 
-			<div className={styles.container}>
-				<div className={styles.label}>Enter password</div>
+			<form onSubmit={handleSubmit(onCreate, onError)}>
+				<Modal.Body>
 
-				<InputController
-					{...control}
-					control={control}
-					errors={errors}
-					name="password"
-					rules={{
-						required : true,
-						validate : (value) => validatePassword({
-							value,
-							errorMessage: 'Password is invalid',
-						}),
-					}}
-				/>
-				<div className={styles.password_validator}>
-					<PasswordValidator errorMessage={errors?.password?.message || patternError} password={password} />
-				</div>
+					<div className={styles.user_container}>
 
-			</div>
+						<div className={styles.flex_container}>
+							<span className={styles.label}>Name</span>
+							<span className={styles.value}>{actionModal?.agentData?.name || '__'}</span>
+						</div>
+						<div className={styles.flex_container}>
+							<span className={styles.label}>Email</span>
+							<span className={styles.value}>{actionModal?.agentData?.email || '__'}</span>
+						</div>
 
-			<Modal.Footer>
-				<Button
-					onClick={() => setActionModal({})}
-					disabled={apiLoading}
-					themeType="tertiary"
-					className={styles.cancel_cta}
-				>
-					CANCEL
-				</Button>
+						<div className={styles.container}>
+							<div className={styles.label}>Enter password</div>
 
-				<Button
-					disabled={apiLoading || !password}
-					onClick={handleSubmit(onCreate, onError)}
-					themeType="primary"
-				>
-					UPDATE
-				</Button>
+							<InputController
+								{...control}
+								control={control}
+								errors={errors}
+								name="password"
+								rules={{
+									required : true,
+									validate : (value) => validatePassword({
+										value,
+										errorMessage: 'Password is invalid',
+									}),
+								}}
+								size="sm"
+							/>
+							<div className={styles.password_validator}>
+								<PasswordValidator
+									errorMessage={errors?.password?.message || patternError}
+									password={password}
+								/>
+							</div>
 
-			</Modal.Footer>
+						</div>
+
+					</div>
+
+				</Modal.Body>
+
+				<Modal.Footer>
+					<Button
+						onClick={() => setActionModal({})}
+						disabled={apiLoading}
+						type="button"
+						themeType="tertiary"
+						className={styles.cancel_cta}
+					>
+						CANCEL
+					</Button>
+
+					<Button
+						type="submit"
+						disabled={apiLoading || !password}
+						themeType="primary"
+					>
+						UPDATE
+					</Button>
+
+				</Modal.Footer>
+
+			</form>
 		</>
 	);
 }
