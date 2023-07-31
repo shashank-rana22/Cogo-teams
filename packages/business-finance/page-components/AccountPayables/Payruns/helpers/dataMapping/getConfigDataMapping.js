@@ -12,6 +12,7 @@ import useGetPaidAdvanceList from '../../hooks/useGetPaidAdvanceList';
 import useGetPaidList from '../../hooks/useGetPaidList';
 import useGetUploadHistoryList from '../../hooks/useGetUploadHistoryList';
 
+import { getCommonMapping } from './getCommonMapping';
 import {
 	INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE,
 	INVOICE_LIST_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE,
@@ -32,8 +33,11 @@ const useGetConfigDataMapping = ({
 	selectedPayrun,
 }) => {
 	const {
-		getNormalOverseasMapping,
-		getAdvancePaymentMapping,
+		payrunCommonConfig,
+		viewInvoiceCommonConfig,
+		listInoiceCommonConfig,
+		advancePaymentViewInvoiceCommonConfig,
+		advancePaymentListView,
 		payrunStats,
 	} = useGetMappingFunctions({ activePayrunTab, overseasData, query, globalFilters, sort, selectedPayrun });
 
@@ -56,43 +60,74 @@ const useGetConfigDataMapping = ({
 	const { country_code = '' } = country;
 
 	const configMapping = {
-		INITIATED: getNormalOverseasMapping(
-			PAYRUN_AUDITED_PAYMENT_READY,
-			VIEW_INVOICE_INITITED_CONFIG_COUNTRY_WISE[country_code],
-			INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
-		),
+		INITIATED: getCommonMapping({
+			payrunConfig      : PAYRUN_AUDITED_PAYMENT_READY,
+			viewInvoiceConfig : VIEW_INVOICE_INITITED_CONFIG_COUNTRY_WISE[country_code],
+			listViewConfig    : INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
+			payrunCommonConfig,
+			viewInvoiceCommonConfig,
+			listInoiceCommonConfig,
+		}),
 		AUDITED: {
-			NORMAL: getNormalOverseasMapping(
-				PAYRUN_AUDITED_PAYMENT_READY,
-				VIEW_INVOICE_PAYMENT_READY_CONFIG_COUNTRY_WISE[country_code],
-				INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
+			NORMAL: getCommonMapping(
+				{
+					payrunConfig      : PAYRUN_AUDITED_PAYMENT_READY,
+					viewInvoiceConfig : VIEW_INVOICE_PAYMENT_READY_CONFIG_COUNTRY_WISE[country_code],
+					listViewConfig    : INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
+					payrunCommonConfig,
+					viewInvoiceCommonConfig,
+					listInoiceCommonConfig,
+				},
 			),
-			OVERSEAS: getNormalOverseasMapping(
-				PAYRUN_AUDITED_PAYMENT_READY,
-				VIEW_INVOICE_PAYMENT_READY_CONFIG_COUNTRY_WISE[country_code],
-				INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
+			OVERSEAS: getCommonMapping(
+				{
+					payrunConfig      : PAYRUN_AUDITED_PAYMENT_READY,
+					viewInvoiceConfig : VIEW_INVOICE_PAYMENT_READY_CONFIG_COUNTRY_WISE[country_code],
+					listViewConfig    : INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
+					payrunCommonConfig,
+					viewInvoiceCommonConfig,
+					listInoiceCommonConfig,
+				},
 			),
-			ADVANCE_PAYMENT: getAdvancePaymentMapping(
-				PAYRUN_AUDITED_PAYMENT_READY,
-				VIEW_INVOICE_ADVANCE_PAYMENT_READY_CONFIG,
-				ADVANCE_PAYMENT_PAYRUN_HISTORY_CONFIG,
+			ADVANCE_PAYMENT: getCommonMapping(
+				{
+					payrunConfig            : PAYRUN_AUDITED_PAYMENT_READY,
+					viewInvoiceConfig       : VIEW_INVOICE_ADVANCE_PAYMENT_READY_CONFIG,
+					listViewConfig          : ADVANCE_PAYMENT_PAYRUN_HISTORY_CONFIG,
+					payrunCommonConfig,
+					viewInvoiceCommonConfig : advancePaymentViewInvoiceCommonConfig,
+					listInoiceCommonConfig  : advancePaymentListView,
+				},
 			),
 		},
 		PAYMENT_INITIATED: {
-			NORMAL: getNormalOverseasMapping(
-				PAYMENT_INITIATED_PAYRUN,
-				VIEW_INVOICE_PAYMENT_INTIATED_COUNTRY_WISE[country_code],
-				INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
+			NORMAL: getCommonMapping({
+				payrunConfig      :	PAYMENT_INITIATED_PAYRUN,
+				viewInvoiceConfig :	VIEW_INVOICE_PAYMENT_INTIATED_COUNTRY_WISE[country_code],
+				listViewConfig    : INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
+				payrunCommonConfig,
+				viewInvoiceCommonConfig,
+				listInoiceCommonConfig,
+			}),
+			OVERSEAS: getCommonMapping(
+				{
+					payrunConfig      :	PAYMENT_INITIATED_PAYRUN,
+					viewInvoiceConfig : VIEW_INVOICE_PAYMENT_INTIATED_COUNTRY_WISE[country_code],
+					listViewConfig    : INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
+					payrunCommonConfig,
+					viewInvoiceCommonConfig,
+					listInoiceCommonConfig,
+				},
 			),
-			OVERSEAS: getNormalOverseasMapping(
-				PAYMENT_INITIATED_PAYRUN,
-				VIEW_INVOICE_PAYMENT_INTIATED_COUNTRY_WISE[country_code],
-				INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
-			),
-			ADVANCE_PAYMENT: getAdvancePaymentMapping(
-				PAYMENT_INITIATED_PAYRUN,
-				ADVANCE_PAYMENT_VIEW_INVOICE,
-				ADVANCE_PAYMENT_PAYRUN_HISTORY_CONFIG,
+			ADVANCE_PAYMENT: getCommonMapping(
+				{
+					payrunConfig            : PAYMENT_INITIATED_PAYRUN,
+					viewInvoiceConfig       : ADVANCE_PAYMENT_VIEW_INVOICE,
+					listViewConfig          : ADVANCE_PAYMENT_PAYRUN_HISTORY_CONFIG,
+					payrunCommonConfig,
+					viewInvoiceCommonConfig : advancePaymentViewInvoiceCommonConfig,
+					listInoiceCommonConfig  : advancePaymentListView,
+				},
 			),
 		},
 		PAID: {
@@ -116,20 +151,35 @@ const useGetConfigDataMapping = ({
 			getFunction : getUploadHistoryList,
 		},
 		COMPLETED: {
-			NORMAL: getNormalOverseasMapping(
-				PAYRUN_HISTORY_CONFIG,
-				VIEW_INVOICE_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE[country_code],
-				INVOICE_LIST_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE[country_code],
+			NORMAL: getCommonMapping(
+				{
+					payrunConfig      :	PAYRUN_HISTORY_CONFIG,
+					viewInvoiceConfig :	VIEW_INVOICE_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE[country_code],
+					listViewConfig    :	INVOICE_LIST_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE[country_code],
+					payrunCommonConfig,
+					viewInvoiceCommonConfig,
+					listInoiceCommonConfig,
+				},
 			),
-			OVERSEAS: getNormalOverseasMapping(
-				PAYRUN_HISTORY_CONFIG,
-				VIEW_INVOICE_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE[country_code],
-				INVOICE_LIST_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE[country_code],
+			OVERSEAS: getCommonMapping(
+				{
+					payrunConfig      :	PAYRUN_HISTORY_CONFIG,
+					viewInvoiceConfig :	VIEW_INVOICE_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE[country_code],
+					listViewConfig    :	INVOICE_LIST_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE[country_code],
+					payrunCommonConfig,
+					viewInvoiceCommonConfig,
+					listInoiceCommonConfig,
+				},
 			),
-			ADVANCE_PAYMENT: getAdvancePaymentMapping(
-				PAYRUN_HISTORY_CONFIG,
-				ADVANCE_PAYMENT_VIEW_INVOICE,
-				ADVANCE_PAYMENT_PAYRUN_HISTORY_CONFIG,
+			ADVANCE_PAYMENT: getCommonMapping(
+				{
+					payrunConfig            :	PAYRUN_HISTORY_CONFIG,
+					viewInvoiceConfig       : ADVANCE_PAYMENT_VIEW_INVOICE,
+					listViewConfig          : ADVANCE_PAYMENT_PAYRUN_HISTORY_CONFIG,
+					payrunCommonConfig,
+					viewInvoiceCommonConfig : advancePaymentViewInvoiceCommonConfig,
+					listInoiceCommonConfig  : advancePaymentListView,
+				},
 			),
 		},
 	};

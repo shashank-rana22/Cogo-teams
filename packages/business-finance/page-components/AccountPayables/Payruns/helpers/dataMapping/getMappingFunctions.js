@@ -31,57 +31,42 @@ const useGetMappingFunctions = ({ activePayrunTab, overseasData, query, globalFi
 		advancePaymentInvoiceLoading,
 	} = useGetAdvPaymentInvoiceList({ sort, query, globalFilters, activePayrunTab });
 
-	const getNormalOverseasMapping = (payrunConfig, viewInvoiceConfig, listViewConfig) => ({
-		false: {
-			getConfig   : payrunConfig,
-			getData     : payrunData,
-			getLoading  : payrunLoading,
-			getFunction : getPayrunList,
-			true        : {
-				getConfig   : viewInvoiceConfig,
-				getData     : viewInvoiceDataList,
-				getLoading  : viewInvoiceDataLoading,
-				getFunction : getViewInvoice,
-			},
-		},
-		true: {
-			getConfig   : listViewConfig,
-			getData     : billListViewData,
-			getLoading  : billListViewLoading,
-			getFunction : getPayrunListView,
-			true        : {},
-		},
+	const listInoiceCommonConfig = ({
+		getData     : billListViewData,
+		getLoading  : billListViewLoading,
+		getFunction : getPayrunListView,
+		true        : {},
+	});
+	const viewInvoiceCommonConfig = ({
+		getData     : viewInvoiceDataList,
+		getLoading  : viewInvoiceDataLoading,
+		getFunction : getViewInvoice,
+	});
+	const payrunCommonConfig = ({
+		getData     : payrunData,
+		getLoading  : payrunLoading,
+		getFunction : getPayrunList,
 	});
 
-	const getAdvancePaymentMapping = (
-		payrunConfig,
-		viewInvoiceAdvancePaymentConfig,
-		advancePaymentInvoiceListConfig,
-	) => ({
-		false: {
-			getConfig   : payrunConfig,
-			getData     : payrunData,
-			getLoading  : payrunLoading,
-			getFunction : getPayrunList,
-			true        : {
-				getConfig   : viewInvoiceAdvancePaymentConfig,
-				getData     : viewInvoicesAdvancePaymentData,
-				getLoading  : viewInvoicesAdvancePaymentLoading,
-				getFunction : getViewInvoicesAdvancePayment,
-			},
-		},
-		true: {
-			getConfig   : advancePaymentInvoiceListConfig,
-			getData     : advancePaymentInvoiceList,
-			getLoading  : advancePaymentInvoiceLoading,
-			getFunction : getAdvancePaymentInvoiceList,
-			true        : {},
-		},
+	const advancePaymentViewInvoiceCommonConfig = ({
+		getData     : viewInvoicesAdvancePaymentData,
+		getLoading  : viewInvoicesAdvancePaymentLoading,
+		getFunction : getViewInvoicesAdvancePayment,
+	});
+
+	const advancePaymentListView = ({
+		getData     : advancePaymentInvoiceList,
+		getLoading  : advancePaymentInvoiceLoading,
+		getFunction : getAdvancePaymentInvoiceList,
+		true        : {},
 	});
 
 	return {
-		getNormalOverseasMapping,
-		getAdvancePaymentMapping,
+		listInoiceCommonConfig,
+		viewInvoiceCommonConfig,
+		payrunCommonConfig,
+		advancePaymentViewInvoiceCommonConfig,
+		advancePaymentListView,
 		payrunStats,
 	};
 };
