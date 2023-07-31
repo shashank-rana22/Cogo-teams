@@ -36,7 +36,7 @@ const useGetSimplifiedGeometry = ({
 		}
 	}, [getData, type]);
 
-	return { data: data?.list, loading };
+	return { data: data?.list || [], loading };
 };
 
 export default useGetSimplifiedGeometry;

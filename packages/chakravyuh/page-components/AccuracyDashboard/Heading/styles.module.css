@@ -25,9 +25,10 @@
 }
 
 .counter {
+	position: relative;
 	display: flex;
 	align-items: center;
-	padding: 0 8px;
+	padding: 3px 12px;
 	margin-bottom: 0;
 	font-size: 22px;
 	color: #f37166;
@@ -37,6 +38,49 @@
 	span {
 		margin: 4px 8px 0;
 		font-size: 14px;
+	}
+
+	.popup {
+		position: absolute;
+		top: calc(100% + 12px);
+		right: 0;
+		z-index: 10;
+		width: 640px;
+		max-width: 100vw;
+		padding: 4px;
+		padding: 8px;
+		background: #fff;
+		border-radius: 4px;
+		box-shadow: 0 0 6px #312a2a59;
+		transform-origin: right top;
+		animation-name: scale-out;
+		animation-duration: 300ms;
+		animation-timing-function: cubic-bezier(0.175, 0.95, 0.32, 1.275);
+	}
+
+	:global {
+		.ui_loader {
+			width: 16px;
+		}
+
+		.leaflet-tile {
+			filter: hue-rotate(45deg) !important;
+		}
+
+		.leaflet-container {
+			height: 450px !important;
+			margin-top: 0 !important;
+			cursor: default !important;
+			background-color: #ccd6db !important;
+		}
+
+		.ui_popover_container {
+			max-width: 100vw !important;
+		}
+
+		.leaflet-bar {
+			display: none !important;
+		}
 	}
 }
 
@@ -51,5 +95,17 @@
 
 	&:hover {
 		cursor: pointer;
+	}
+}
+
+@keyframes scale-out {
+	0% {
+		box-shadow: none;
+		transform: scale(0);
+	}
+
+	100% {
+		box-shadow: 0 0 6px #312a2a59;
+		transform: scale(1);
 	}
 }

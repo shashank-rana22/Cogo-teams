@@ -89,22 +89,6 @@
 	}
 }
 
-@keyframes pulse {
-	0%,
-	86%,
-	100% {
-		box-shadow: 0 0 6px rgb(44 62 80 / 20%);
-	}
-
-	50% {
-		box-shadow: 0 0 50px #0a9396;
-	}
-
-	70% {
-		box-shadow: 0 0 8px #0a9396;
-	}
-}
-
 .tree_icon {
 	position: absolute;
 	top: -60px;
@@ -143,5 +127,21 @@
 
 	div {
 		opacity: 0.9;
+	}
+}
+
+@keyframes pulse {
+	0%,
+	86%,
+	100% {
+		box-shadow: 0 0 6px rgb(44 62 80 / 20%);
+	}
+
+	50% {
+		box-shadow: 0 0 50px #0a9396;
+	}
+
+	70% {
+		box-shadow: 0 0 8px #0a9396;
 	}
 }
