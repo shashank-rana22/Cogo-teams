@@ -1,16 +1,17 @@
 import { Button, cl } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import DocumentTypeSID from '../../../../../common/DocumentTypeSID';
 import EmptyState from '../../../../../common/EmptyState';
 import documentTypeMapping from '../../../../../configurations/document-type-mapping';
 import documentStatus from '../DocumentStatus';
 
 import ActionsStatus from './ActionsStatus';
-import DocumentTypeSID from './DocumentTypeSID';
 import styles from './styles.module.css';
 
 function ListData({
@@ -26,6 +27,8 @@ function ListData({
 	formattedMessageData = {},
 }) {
 	const [documentTagUrl, setDocumentTagUrl] = useState('');
+
+	const { control, formState: { errors = {} }, watch, handleSubmit, resetField, reset } = useForm();
 
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
@@ -140,6 +143,13 @@ function ListData({
 										formattedMessageData={formattedMessageData}
 										documentTagUrl={documentTagUrl}
 										setDocumentTagUrl={setDocumentTagUrl}
+										type="documents"
+										control={control}
+										errors={errors}
+										watch={watch}
+										handleSubmit={handleSubmit}
+										resetField={resetField}
+										reset={reset}
 									/>
 								)}
 							</>

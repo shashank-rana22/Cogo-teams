@@ -1,7 +1,7 @@
 import { Button, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMOverflowDot, IcMCross } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMCross, IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -11,8 +11,18 @@ import RepliedMessage from '../RepliedMessage';
 import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
 import SuggestedActions from './SuggestedActions';
+import TagModal from './TagModal';
 
-function TicketPopoverContent({ formattedData = {}, setRaiseTicketModal = () => {}, data = {} }) {
+const SHOW_TAG_BUTTON = ['image', 'audio', 'video', 'document', 'file'];
+
+function TicketPopoverContent({
+	formattedData = {},
+	setRaiseTicketModal = () => {}, data = {}, setTagModal = () => {},
+	setDocumentTagUrl = () => {},
+}) {
+	const { organization_id = '' } = formattedData || {};
+	const isTag = organization_id && (SHOW_TAG_BUTTON || []).includes(data?.message_type);
+
 	const triggerModal = () => {
 		setRaiseTicketModal((previous) => {
 			if (previous?.state) {
@@ -21,10 +31,23 @@ function TicketPopoverContent({ formattedData = {}, setRaiseTicketModal = () => 
 			return { state: true, data: { messageData: data, formattedData }, source: 'message' };
 		});
 	};
+
+	const handleTag = () => {
+		setTagModal(true);
+		setDocumentTagUrl(data?.response?.media_url);
+	};
+
 	return (
-		<Button size="md" themeType="secondary" onClick={triggerModal}>
-			Raise a ticket
-		</Button>
+		<div className={styles.actions}>
+			<Button size="md" themeType="secondary" onClick={triggerModal}>
+				Raise a ticket
+			</Button>
+			{isTag ? (
+				<Button size="md" themeType="secondary" onClick={handleTag} className={styles.tags}>
+					Tag
+				</Button>
+			) : null}
+		</div>
 	);
 }
 
@@ -36,6 +59,9 @@ function ReceiveDiv({
 	formattedData = {},
 }) {
 	const [showOrder, setShowOrder] = useState(false);
+	const [tagModal, setTagModal] = useState(false);
+	const [documentTagUrl, setDocumentTagUrl] = useState('');
+
 	const {
 		message_type = 'text',
 		created_at = '',
@@ -52,78 +78,109 @@ function ReceiveDiv({
 	});
 
 	const hasRepliedMessage = !isEmpty(reply_metadata);
+	const isDocuments = (SHOW_TAG_BUTTON || []).includes(eachMessage?.message_type);
+
+	const handleDownload = ({ imgUrl = '' }) => {
+		const downloadLink = document.createElement('a');
+		downloadLink.href = imgUrl;
+		downloadLink.download = 'image.jpg';
+		document.body.appendChild(downloadLink);
+		downloadLink.click();
+		document.body.removeChild(downloadLink);
+		URL.revokeObjectURL(imgUrl);
+	};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.time_stamp}>
-				{date || ''}
-			</div>
-			<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container} 
-			${hasRepliedMessage ? styles.replied_messages : ''}`}
-			>
-				{hasRepliedMessage && (
-					<RepliedMessage user_name={user_name} reply_metadata={reply_metadata} />
-				)}
-				{canRaiseTicket && (
-					<Tooltip
-						placement="right"
-						content={(
-							<TicketPopoverContent
-								setRaiseTicketModal={setRaiseTicketModal}
-								data={eachMessage}
-								formattedData={formattedData}
-							/>
-						)}
-						interactive
-					>
-						<div className={styles.flex_div}>
-							<IcMOverflowDot className={styles.hamburger_styles} />
-						</div>
-					</Tooltip>
-				)}
-				<div className={styles.message_div}>
-					<MessageBody
-						response={response}
-						message_type={message_type}
-						eachMessage={eachMessage}
-						formattedData={formattedData}
-					/>
+		<>
+			<div className={styles.container}>
+				<div className={styles.time_stamp}>
+					{date || ''}
 				</div>
-			</div>
-
-			{message_type === 'event' && (
-				<SuggestedActions formattedData={formattedData} />
-			)}
-
-			{message_type === 'order' && (
-				<div
-					className={styles.order_container}
+				<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container} 
+			${hasRepliedMessage ? styles.replied_messages : ''}`}
 				>
-					<div
-						role="presentation"
-						className={styles.list_button}
-						onClick={() => setShowOrder((previous) => !previous)}
-					>
-						{showOrder ? (
-							<span className={styles.btn_container}>
-								<IcMCross className={styles.btn_icon} />
-								Hide
-							</span>
-						) : (
-							<span className={styles.btn_container}>
-								<img
-									className={styles.btn_icon}
-									src={GLOBAL_CONSTANTS.image_url.cart_png}
-									alt="order"
+					{hasRepliedMessage && (
+						<RepliedMessage user_name={user_name} reply_metadata={reply_metadata} />
+					)}
+					<div className={cl`${styles.action_container} ${!isDocuments ? styles.single_action : ''}`}>
+						{isDocuments
+							? (
+								<IcMDownload
+									onClick={() => handleDownload({ imgUrl: eachMessage?.response?.media_url })}
+									cursor="pointer"
 								/>
-								View Order Items
-							</span>
+							) : null}
+						{canRaiseTicket && (
+							<Tooltip
+								placement="right"
+								content={(
+									<TicketPopoverContent
+										setRaiseTicketModal={setRaiseTicketModal}
+										data={eachMessage}
+										formattedData={formattedData}
+										setTagModal={setTagModal}
+										setDocumentTagUrl={setDocumentTagUrl}
+									/>
+								)}
+								interactive
+							>
+								<div className={styles.flex_div}>
+									<IcMOverflowDot className={styles.hamburger_styles} />
+								</div>
+							</Tooltip>
 						)}
 					</div>
-					{showOrder && <OrderDisplay message={message} />}
+					<div className={styles.message_div}>
+						<MessageBody
+							response={response}
+							message_type={message_type}
+							eachMessage={eachMessage}
+							formattedData={formattedData}
+						/>
+					</div>
 				</div>
-			)}
-		</div>
+
+				{message_type === 'event' && (
+					<SuggestedActions formattedData={formattedData} />
+				)}
+
+				{message_type === 'order' && (
+					<div
+						className={styles.order_container}
+					>
+						<div
+							role="presentation"
+							className={styles.list_button}
+							onClick={() => setShowOrder((previous) => !previous)}
+						>
+							{showOrder ? (
+								<span className={styles.btn_container}>
+									<IcMCross className={styles.btn_icon} />
+									Hide
+								</span>
+							) : (
+								<span className={styles.btn_container}>
+									<img
+										className={styles.btn_icon}
+										src={GLOBAL_CONSTANTS.image_url.cart_png}
+										alt="order"
+									/>
+									View Order Items
+								</span>
+							)}
+						</div>
+						{showOrder && <OrderDisplay message={message} />}
+					</div>
+				)}
+			</div>
+			<TagModal
+				documentTagUrl={documentTagUrl}
+				setDocumentTagUrl={setDocumentTagUrl}
+				tagModal={tagModal}
+				setTagModal={setTagModal}
+				formattedData={formattedData}
+			/>
+		</>
 	);
 }
 export default ReceiveDiv;
