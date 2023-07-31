@@ -22,7 +22,8 @@ import UrgencyTag from './UrgencyTag';
 import ViewInvoices from './ViewInvoice';
 
 const SHOW_TOOLTIP_MAX_LENGTH = 24;
-const RenderFunctions = (
+
+const renderFunctions = (
 	{
 		overseasData = '',
 		viewId = null,
@@ -124,4 +125,4 @@ const RenderFunctions = (
 	};
 };
 
-export default RenderFunctions;
+export default renderFunctions;
