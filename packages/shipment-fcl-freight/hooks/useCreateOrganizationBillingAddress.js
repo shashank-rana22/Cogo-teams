@@ -3,16 +3,11 @@ import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useCreateOrganizationBillingAddress = ({
-	checked,
-	addressType,
-	organization_id = '',
 	successMessage = 'Successfully Added Address',
 	refetch = () => {},
 }) => {
-	const END_POINT = checked ? '/create_organization_billing_address' : '/create_organization_address';
-
 	const [{ loading, data }, trigger] = useRequest({
-		url    : END_POINT,
+		url    : '/create_organization_billing_address',
 		method : 'POST',
 	}, { manual: true });
 
@@ -33,8 +28,6 @@ const useCreateOrganizationBillingAddress = ({
 								},
 							]
 							: [],
-					address_type: checked ? '' : addressType,
-					organization_id,
 				},
 			});
 			Toast.success(successMessage);
