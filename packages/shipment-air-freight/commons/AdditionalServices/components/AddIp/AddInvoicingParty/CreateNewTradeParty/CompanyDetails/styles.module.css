@@ -18,6 +18,5 @@
 	margin: 16px 0 0;
 	font-size: var(--font-size-lg);
 	font-weight: 500;
-	line-height: 16px;
-	color: #393f70;
+	color: var(--color-tertiary-lavendar-1);
 }

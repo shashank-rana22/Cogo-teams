@@ -76,7 +76,7 @@ function CreateNewTradeParty({
 	}
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<div className={styles.stepper_container}>
 				<Stepper active={currentStep} setActive={setCurrentStep} items={STEPPER_ITEMS} />
 			</div>
