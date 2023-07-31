@@ -144,7 +144,7 @@ function Card({
 									<Pill size="md" color="#FEF3E9">
 										price type :
 										{' '}
-										{data?.rowData?.price_type?.replace(/_/g, ' ')}
+										{startCase(data?.rowData?.price_type)}
 									</Pill>
 								</div>
 							) : null

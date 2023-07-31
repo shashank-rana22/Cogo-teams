@@ -1,4 +1,17 @@
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
+
+const india_country_id = GLOBAL_CONSTANTS.country_ids.IN;
+const vietnam_country_id = GLOBAL_CONSTANTS.country_ids.VN;
+
+const india_constants = getCountryConstants({ country_id: india_country_id });
+const vietnam_constants = getCountryConstants({ country_id: vietnam_country_id });
+
+const OFFICE_LOCATIONS = [...india_constants.office_locations, ...vietnam_constants.office_locations];
+
+const REPORTING_CITY_OPTIONS = OFFICE_LOCATIONS.map((location) => (
+	{ label: startCase(location), value: location }));
 
 const controls = [
 	{
@@ -10,7 +23,6 @@ const controls = [
 			required: 'name is required',
 		},
 	},
-
 	{
 		name        : 'personal_email',
 		label       : 'Personal Email ID*',
@@ -24,7 +36,6 @@ const controls = [
 			},
 		},
 	},
-
 	{
 		name        : 'mobile_number',
 		label       : 'Contact Details*',
@@ -35,25 +46,22 @@ const controls = [
 			required: 'Mobile Number is required',
 		},
 	},
-
 	{
 		name        : 'employee_code',
 		type        : 'text',
 		label       : 'Employee ID',
 		placeholder : 'Employee Id',
 	},
-
 	{
 		name        : 'designation',
 		type        : 'select',
-		label       : 'Role*',
+		label       : 'Designation*',
 		placeholder : 'Role',
 		options     : GLOBAL_CONSTANTS.options.role_options,
 		rules       : {
 			required: 'Role is required',
 		},
 	},
-
 	{
 		name                  : 'date_of_joining',
 		label                 : 'Date of joining',
@@ -62,21 +70,29 @@ const controls = [
 		isPreviousDaysAllowed : true,
 		isClearable           : true,
 	},
-
+	{
+		name        : 'office_location_country',
+		type        : 'select',
+		label       : 'Reporting Country*',
+		placeholder : 'Select Location',
+		options     : [
+			{ value: 'india', label: 'India' },
+			{ value: 'vietnam', label: 'Vietnam' },
+		],
+		rules: {
+			required: 'Reporting Country is required',
+		},
+	},
 	{
 		name        : 'office_location',
 		type        : 'select',
-		label       : 'Location Details*',
+		label       : 'Reporting City*',
 		placeholder : 'Select Location',
-		options     : [
-			{ value: 'mumbai', label: 'Mumbai' },
-			{ value: 'gurgaon', label: 'Gurgaon' },
-		],
-		rules: {
+		options     : REPORTING_CITY_OPTIONS,
+		rules       : {
 			required: 'Location is required',
 		},
 	},
-
 	{
 		name        : 'cogoport_email',
 		label       : 'Cogoport Email ID',
@@ -89,7 +105,6 @@ const controls = [
 			},
 		},
 	},
-
 	{
 		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
@@ -99,22 +114,7 @@ const controls = [
 		rules       : {
 			required: 'Hiring Manager is required',
 		},
-		params: {
-			filters: {
-				status               : 'active',
-				partner_entity_types : ['cogoport'],
-
-			},
-			page_limit: 100,
-		},
-	},
-
-	{
-		name        : 'reporting_manager_id',
-		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
-		label       : 'Reporting Manager',
-		placeholder : 'Reporting Manager',
+		initialCall : true,
 		params      : {
 			filters: {
 				status               : 'active',
@@ -124,7 +124,25 @@ const controls = [
 			page_limit: 100,
 		},
 	},
+	{
+		name        : 'reporting_manager_id',
+		type        : 'asyncSelect',
+		asyncKey    : 'partner_users_ids',
+		label       : 'Reporting Manager',
+		placeholder : 'Reporting Manager',
+		rules       : {
+			required: 'Reporting Manager is required',
+		},
+		initialCall : true,
+		params      : {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
 
+			},
+			page_limit: 100,
+		},
+	},
 	{
 		name        : 'hr_id',
 		type        : 'asyncSelect',
@@ -134,7 +152,8 @@ const controls = [
 		rules       : {
 			required: 'name is required',
 		},
-		params: {
+		initialCall : true,
+		params      : {
 			filters: {
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
@@ -142,7 +161,6 @@ const controls = [
 			page_limit: 100,
 		},
 	},
-
 	{
 		name        : 'hrbp_id',
 		type        : 'asyncSelect',

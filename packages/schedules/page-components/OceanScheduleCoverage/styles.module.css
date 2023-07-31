@@ -1,0 +1,32 @@
+.table {
+	background-color: #fff;
+}
+
+.th {
+	text-align: center;
+}
+
+.pagination {
+	display: flex;
+	justify-content: right;
+}
+
+.td {
+	padding: 8px 0;
+}
+
+.styled_table {
+	:global {
+		.ui_placeholder_skeleton_loader {
+			height: 40px !important;
+		}
+
+		.ui_button_container:hover {
+			background-color: #f9f5ec;
+		}
+	}
+}
+
+.container {
+	margin-top: 10px;
+}

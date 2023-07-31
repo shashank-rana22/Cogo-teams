@@ -10,7 +10,8 @@ const GLOBAL_CONSTANTS = {
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 	},
 	country_ids: {
-		IN: '541d1232-58ce-4d64-83d6-556a42209eb7',
+		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
+		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
 	},
 
 	platform_supported_country_codes: ['IN', 'VN'],
@@ -46,6 +47,7 @@ const GLOBAL_CONSTANTS = {
 			'hh:mm aaa' : 'hh:mm aaa',
 			'HH:mm'     : 'HH:mm',
 			'hh:mm:ss'  : 'hh:mm:ss',
+			'HH:mm:ss'  : 'HH:mm:ss',
 			hh          : 'hh',
 			HH          : 'HH',
 			mm          : 'mm',
@@ -56,8 +58,8 @@ const GLOBAL_CONSTANTS = {
 		razer_pay_url: 'https://checkout.razorpay.com/v1/checkout.js',
 	},
 	sample_document_url: {
-		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com
-		/ab3309b85b52e198b4c2bb691a7fb609/new_employee_bulk_upload_sample_sheet.csv`,
+		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
+						a3072d28df04315514414abe46a8c2f0/new_employee_bulk_upload_sample_sheet.csv`,
 	},
 	flash_booking_charge_codes: [
 		'OTC',
@@ -256,6 +258,10 @@ const GLOBAL_CONSTANTS = {
 		spam_flag_icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam_flag_black.png',
 		email_inbox_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/inbox_icon.png',
 		colored_loading     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
+		over_due_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg',
+		due_in_svg          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg',
+		cogo_assured_svg    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg',
+		empty_data          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 		empty_data_image    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		awb_docs_images     : {
 			original_3:
@@ -285,9 +291,25 @@ const GLOBAL_CONSTANTS = {
 		},
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
-		ic_initial_state_svg: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
-
+		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
+		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
+		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
+		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',
+		organization         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/organ-svg.svg',
+		user_activity        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user-actrivity.svg',
+		clock                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/alarm-timer.svg',
+		note                 : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note.svg',
+		quick_actions        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg',
+		customer_insights    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg',
+		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
+		clock_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
+		sad_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
+		sign_up_failed       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
 	},
+
+	video_call_ring_tone_url:
+	'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/microsoft_teams_audio_call_tone.mp3',
+
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 			+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
@@ -361,6 +383,7 @@ const GLOBAL_CONSTANTS = {
 			{ value: 'business_analyst', label: 'Business Analyst' },
 			{ value: 'product_analyst', label: 'Product Analyst' },
 			{ value: 'business_consultant', label: 'Business Consultant' },
+			{ value: 'key_accounts_manager', label: 'Key Accounts Manager' },
 		],
 		timezone_options: [
 			{
@@ -403,13 +426,16 @@ const GLOBAL_CONSTANTS = {
 		four_characters_pin    : /^.{4}$/,
 		amount_seperator       : /\D/g,
 		white_space_characters : /\s/g,
+		email_subject_prefix   : /^(re|fwd|fw):\s*/i,
 	},
 	zeroth_index                 : 0,
+	milliseconds_in_one_day      : 86400000,
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
 	others                       : {
-		old_shipment_serial_id  : 120347,
-		cogopoint_default_value : 0,
+		old_shipment_serial_id      : 120347,
+		cogopoint_default_value     : 0,
+		fcl_import_new_process_date : '2023-07-27T00:00:00',
 
 	},
 	shipment_types: [

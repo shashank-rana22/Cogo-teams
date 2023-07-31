@@ -27,12 +27,15 @@ const actionButtons = {
 function EditCancelService({ serviceData = {} }) {
 	const user_data = useSelector((({ profile }) => profile?.user));
 	const { shipment_data, servicesList, stakeholderConfig } = useContext(ShipmentDetailContext);
+
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
 	const { state, trade_type, service_type } = serviceData || {};
 
-	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
+	const servicesData = (servicesList || []).filter(
+		(item) => item?.service_type === service_type && item?.trade_type === trade_type,
+	);
 
 	const openModal = (modalKey) => {
 		setShowModal(modalKey);
@@ -71,7 +74,6 @@ function EditCancelService({ serviceData = {} }) {
 				className={styles.action_button}
 				onClick={() => openModal(value)}
 				themeType="tertiary"
-				size="md"
 			>
 				{label}
 			</Button>

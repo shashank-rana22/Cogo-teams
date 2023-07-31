@@ -1,3 +1,4 @@
+
 {
   "name": "cogo-control",
   "version": "0.1.0",
@@ -33,6 +34,7 @@
     "@cogoport/controlled-booking": "workspace:0.1.0",
     "@cogoport/core": "workspace:0.1.0",
     "@cogoport/cost-booking-desk": "workspace:0.1.0",
+    "@cogoport/igm-desk" : "workspace:0.1.0",
     "@cogoport/document-desk": "workspace:0.1.0",
     "@cogoport/employee-portal": "workspace:0.1.0",
     "@cogoport/enrichment": "workspace:0.1.0",
@@ -52,6 +54,7 @@
     "@cogoport/navigation-configs": "workspace:0.1.0",
     "@cogoport/new-employee-dashboard": "workspace:0.1.0",
     "@cogoport/next": "workspace:0.1.0",
+    "@cogoport/notifications": "workspace:0.1.0",
     "@cogoport/ocean-modules": "workspace:0.1.0",
     "@cogoport/performance-management": "workspace:1.0.0",
     "@cogoport/referral": "workspace:0.1.0",
@@ -93,8 +96,11 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "typescript": "^4.9.5",
+    "@cogoport/employee-dashboard": "workspace:0.1.0",
+    "@cogoport/manager-dashboard": "workspace:0.1.0",
     "@cogoport/risk-management": "workspace:0.1.0",
     "@cogoport/ftl-admin":"workspace:1.0.0",
+    "@cogoport/schedules": "workspace:^0.1.0",
     "@cogoport/airline-booking-plugin":"workspace:1.0.0",
     "@cogoport/booking-desk-surface": "workspace:1.0.0"
   },
