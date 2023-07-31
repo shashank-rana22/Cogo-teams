@@ -2,7 +2,7 @@ import { Modal, Button, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
@@ -265,27 +265,33 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 						<div className={styles.title}>Remarks:</div>
 						<div className={styles.remarkval}>{remarkData}</div>
 					</div>
-					<>
-						<div className={styles.remarks}>Remarks*</div>
-						<Textarea
-							name="remark"
-							size="md"
-							placeholder="Enter Remark Here..."
-							onChange={(value: string) => setRemarks(value)}
-							style={{
-								width        : '700',
-								height       : '100px',
-								marginBottom : '12px',
-							}}
-						/>
-						<StakeHolderTimeline
-							timeline={stakeHolderTimeLineData({
-								level1,
-								level2,
-								level3,
-							})}
-						/>
-					</>
+					{isEditable ? (
+						<>
+							<div className={styles.remarks}>Remarks*</div>
+							<Textarea
+								name="remark"
+								size="md"
+								placeholder="Enter Remark Here..."
+								onChange={(value: string) => setRemarks(value)}
+								style={{
+									width        : '700',
+									height       : '100px',
+									marginBottom : '12px',
+								}}
+							/>
+						</>
+					) : null}
+					{!isEmpty(level1)
+						|| !isEmpty(level2)
+						|| !isEmpty(level3) ? (
+							<StakeHolderTimeline
+								timeline={stakeHolderTimeLineData({
+									level1,
+									level2,
+									level3,
+								})}
+							/>
+						) : null}
 				</Modal.Body>
 				{isEditable && (
 					<Modal.Footer>

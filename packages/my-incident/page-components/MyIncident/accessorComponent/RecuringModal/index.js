@@ -21,7 +21,7 @@ export const DURATION_MAPPING = {
 const DEFAULT_VAL = 1;
 const DEFAULT_NUMBERS = 18;
 
-function RenderSummary(summary) {
+function RenderSummary({ summary = [] }) {
 	return (
 		<div style={{ display: 'flex' }}>
 			{summary?.map((item) => (

@@ -14,7 +14,7 @@ const MAX_LENGTH = 18;
 
 const FIRST_INDEX = 1;
 
-function RenderSummaryData(summary) {
+function RenderSummaryData({ summary = [] }) {
 	return (
 		<div style={{ display: 'flex' }}>
 			{summary?.map((item) => (

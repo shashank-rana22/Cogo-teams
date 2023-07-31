@@ -14,7 +14,7 @@ const MAX_LENGTH = 18;
 
 const FIRST_INDEX = 1;
 
-function RenderSummaryData(summary) {
+function RenderSummaryData({ summary = [] }) {
 	return (
 		<div style={{ display: 'flex' }}>
 			{summary?.map((item) => (
@@ -142,11 +142,11 @@ const summeryMappings = ({
 	summaryDataFirst,
 	summaryDataSecond,
 	summaryDataThird,
-}) => [
+}) => ([
 	{ key: '1', val: summaryDataFirst },
 	{ key: '2', val: summaryDataSecond },
 	{ key: '3', val: summaryDataThird },
-];
+]);
 
 function RecurringSummery({
 	itemData = {},
