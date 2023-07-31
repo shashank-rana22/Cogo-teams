@@ -1,7 +1,9 @@
-import { cl, InputNumber, Toast } from '@cogoport/components';
+import { cl, InputNumber } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
+
+const TO_FIXED_AMT_VALUE = 2;
 
 function TruckDetails({ truckDetailsdata = {}, updateRateQuantity = {}, setUpdateRateQuantity = () => {} }) {
 	const { line_items = [], truck_number = '' } = truckDetailsdata;
@@ -52,62 +54,48 @@ function TruckDetails({ truckDetailsdata = {}, updateRateQuantity = {}, setUpdat
 
 			<div className={styles.line}> </div>
 
-			{line_items.map((item) => (
-				<div key={item.service_id}>
+			{line_items.map(({
+				code = '', name = '', alias = '', currency = ' ', discount_price = 0, tax_price_discounted = 0,
+				tax_percent = 0, exchange_rate = 0, tax_total_price_discounted = 0,
+			}) => (
+				<div key={code}>
 					<div className={styles.row}>
-						<div className={styles.col}>{item.name}</div>
-
-						<div className={styles.col}>
-							{item.alias}
-						</div>
-
-						<div className={styles.col}>
-							{item.currency}
-						</div>
-
+						<div className={styles.col}>{name}</div>
+						<div className={styles.col}>{alias}</div>
+						<div className={styles.col}>{currency}</div>
 						<div className={styles.col}>
 							<InputNumber
-								value={updateRateQuantity[`${truckDetailsdata?.service_id}_${item.code}_rate`]
-								|| item?.price_discounted}
+								value={updateRateQuantity[`${truckDetailsdata?.service_id}_${code}_rate`]}
 								onChange={(e) => {
-									if (+e < item.price_discounted) {
-										Toast.error('Rate Cannot be less than current rate');
-										return;
-									}
 									setUpdateRateQuantity((prev) => ({
 										...prev,
-										[`${truckDetailsdata?.service_id}_${item.code}_rate`]: e,
+										[`${truckDetailsdata?.service_id}_${code}_rate`]: e,
 									}));
 								}}
 							/>
 						</div>
-
 						<div className={cl`${styles.col} ${styles.alias_col}`}>
 							<InputNumber
-								value={updateRateQuantity[`${truckDetailsdata?.service_id}_${item.code}_quantity`]
-							|| item.quantity}
+								value={updateRateQuantity[`${truckDetailsdata?.service_id}_${code}_quantity`]}
 								onChange={(e) => {
-									if (+e < item.quantity) {
-										Toast.error('Quantity Cannot be less than current rate');
-										return;
-									}
 									setUpdateRateQuantity((prev) => ({
 										...prev,
-										[`${truckDetailsdata?.service_id}_${item.code}_quantity`]: e,
+										[`${truckDetailsdata?.service_id}_${code}_quantity`]: e,
 									}));
 								}}
 							/>
 						</div>
-
 						<div className={styles.col}>
-							{item.discount_price}
+							{discount_price}
+						</div>
+						<div className={styles.col}>{exchange_rate}</div>
+						<div className={styles.col}>
+							{tax_price_discounted.toFixed(TO_FIXED_AMT_VALUE)}
 							(
-							{`${item.tax_percent} %`}
+							{`${tax_percent} %`}
 							)
 						</div>
-						<div className={styles.col}>{item.exchange_rate}</div>
-						<div className={styles.col}>{item.tax_total_price_discounted}</div>
-						<div className={styles.col}>{item.tax_total_price_discounted}</div>
+						<div className={styles.col}>{tax_total_price_discounted.toFixed(TO_FIXED_AMT_VALUE)}</div>
 					</div>
 					<div className={styles.line_item_divider} />
 				</div>

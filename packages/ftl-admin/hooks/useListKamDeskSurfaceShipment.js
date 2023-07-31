@@ -19,7 +19,7 @@ function useListKamDeskSurfaceShipment() {
 			await trigger({
 				params: {
 					filters: {
-						state           : 'in_progress',
+						state           : ['confirmed_by_importer_exporter', 'in_progress'],
 						task_attributes : { task: 'confirmation_of_booking_with_service_provider', status: 'pending' },
 						...filters,
 					},

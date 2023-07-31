@@ -27,17 +27,15 @@ function Card({ data = {}, activeTab = '' }) {
 	};
 
 	const handleSellQuotation = (event) => {
-		event.stopPropagation(); // Prevent the event from reaching the parent
+		event.stopPropagation();
 		setShowModal(true);
 	};
 
 	return (
 		<>
-			<div
+			<button
 				className={styles.container}
 				onClick={handleCardClick}
-				role="button"
-				tabIndex={0}
 			>
 				<div className={styles.header}>
 					<Header data={data} activeTab={activeTab} />
@@ -79,7 +77,7 @@ function Card({ data = {}, activeTab = '' }) {
 						</Button>
 					</div>
 				</div>
-			</div>
+			</button>
 
 			{showModal
 				? <UpdateSellQuotationModal showModal={showModal} setShowModal={setShowModal} data={data} /> : null }

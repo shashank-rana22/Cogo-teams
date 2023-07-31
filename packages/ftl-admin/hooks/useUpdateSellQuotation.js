@@ -8,7 +8,7 @@ function useUpdateSellQuotation() {
 		method : 'POST',
 	}, { manual: true });
 
-	const udpateSellQuotation = async (quotations = {}, callback = () => {}) => {
+	const udpateSellQuotation = async ({ quotations = {}, callback = () => {} }) => {
 		try {
 			await trigger({
 				data: quotations,

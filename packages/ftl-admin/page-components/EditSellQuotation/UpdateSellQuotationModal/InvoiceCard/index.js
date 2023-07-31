@@ -1,8 +1,8 @@
-import { cl, Pill, Button } from '@cogoport/components';
+import { cl, Pill, Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useUpdateSellQuotation from '../../../../hooks/useUpdateSellQuotation';
 import TruckDetails from '../TrucksDetails';
@@ -13,7 +13,7 @@ const FIXED_VALUE_FOR_INVOICE_AMOUNT = 2;
 const LINE_ITEM_CODE_INDEX = 1;
 const LINE_ITEM_RATE_QUANTITY_INDEX = 2;
 
-function InvoiceCard({ data = {}, setShowModal = () => {} }) {
+function InvoiceCard({ data = {} }) {
 	const [updateRateQuantity, setUpdateRateQuantity] = useState({});
 	const {
 		billing_address = {}, invoice_number = '', invoice_total_discounted,
@@ -23,47 +23,51 @@ function InvoiceCard({ data = {}, setShowModal = () => {} }) {
 	const [openCard, setOpenCard] = useState(false);
 
 	const { udpateSellQuotationLoading, udpateSellQuotation } = useUpdateSellQuotation();
+	console.log({ updateRateQuantity });
+
+	const handleCancel = () => {
+		setUpdateRateQuantity({});
+		setOpenCard(false);
+	};
+
+	// console.log({ services });
 
 	const handleSubmit = () => {
 		const payload = {
 			quotations: [],
 		};
-
-		services.forEach((serviceItem) => {
+		let shouldStopFlow = false;
+		services?.forEach((serviceItem = {}) => {
 			const { line_items = [] } = serviceItem;
 			const SERVICE_WISE_LINE_ITEMS = Object.keys(updateRateQuantity)
-				.filter((item) => item?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index] === serviceItem?.service_id);
+				?.filter((item) => item?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index] === serviceItem?.service_id);
 			const eachTruckPayload = {
 				service_id   : serviceItem?.service_id,
-				service_type : 'ftl_freight',
+				service_type : serviceItem?.service_type,
 				line_items   : [],
 			};
 
-			line_items?.forEach((lineItem) => {
+			line_items?.forEach((lineItem = {}) => {
 				const {
 					code = '', alias = '', name = '', unit = '',
 					currency = '', price_discounted = '', quantity = '',
 				} = lineItem;
-				if (!isEmpty(SERVICE_WISE_LINE_ITEMS)) {
-					const UPDATED_LINE_ITEMS = SERVICE_WISE_LINE_ITEMS
-						?.filter((item) => item?.split('_')[LINE_ITEM_CODE_INDEX] === lineItem?.code);
-					eachTruckPayload.line_items.push({
-						code,
-						alias,
-						name,
-						unit,
-						currency,
-						price_discounted: updateRateQuantity[UPDATED_LINE_ITEMS
-							?.filter((itm) => itm.split('_')[LINE_ITEM_RATE_QUANTITY_INDEX] === 'rate')
-							?.[GLOBAL_CONSTANTS.zeroth_index]]
-								|| price_discounted,
+				const UPDATED_LINE_ITEMS = SERVICE_WISE_LINE_ITEMS
+					?.filter((item) => item?.split('_')[LINE_ITEM_CODE_INDEX] === code);
 
-						quantity: updateRateQuantity[UPDATED_LINE_ITEMS
-							?.filter((itm) => itm.split('_')[LINE_ITEM_RATE_QUANTITY_INDEX] === 'quantity')
-							?.[GLOBAL_CONSTANTS.zeroth_index]]
-								|| quantity,
-					});
-					return;
+				const UPDATED_RATE = 	updateRateQuantity[UPDATED_LINE_ITEMS
+					?.filter((itm) => itm.split('_')[LINE_ITEM_RATE_QUANTITY_INDEX] === 'rate')
+					?.[GLOBAL_CONSTANTS.zeroth_index]];
+				if (+UPDATED_RATE < +price_discounted) {
+					Toast.error('Rate cannot be less than current rate');
+					shouldStopFlow = true;
+				}
+				const UPDATED_QUANTITY = 	updateRateQuantity[UPDATED_LINE_ITEMS
+					?.filter((itm) => itm.split('_')[LINE_ITEM_RATE_QUANTITY_INDEX] === 'quantity')
+					?.[GLOBAL_CONSTANTS.zeroth_index]];
+				if (+UPDATED_QUANTITY < +quantity) {
+					Toast.error('Quantity cannot be less than current quantity');
+					shouldStopFlow = true;
 				}
 				eachTruckPayload.line_items.push({
 					code,
@@ -71,17 +75,35 @@ function InvoiceCard({ data = {}, setShowModal = () => {} }) {
 					name,
 					unit,
 					currency,
-					price_discounted,
-					quantity,
+					price_discounted : UPDATED_RATE || price_discounted,
+					quantity         : UPDATED_QUANTITY || quantity,
 				});
 			});
 
 			payload.quotations.push(eachTruckPayload);
 		});
+		const callback = () => setOpenCard(false);
+		if (shouldStopFlow) { return; }
 		udpateSellQuotation({
 			quotations: payload,
-		}, () => { setShowModal(false); });
+			callback,
+		});
 	};
+
+	useEffect(() => {
+		if (isEmpty(services)) 	return;
+		const state = services.reduce((acc, service) => {
+			service?.line_items?.forEach(({
+				code = '', price_discounted, quantity,
+			}) => {
+				acc[`${service?.service_id}_${code}_rate`] = price_discounted || '';
+				acc[`${service?.service_id}_${code}_quantity`] = quantity || '';
+			});
+			return acc;
+		}, {});
+
+		setUpdateRateQuantity(state);
+	}, [services]);
 
 	return (
 		<div className={styles.card_details}>
@@ -139,7 +161,7 @@ function InvoiceCard({ data = {}, setShowModal = () => {} }) {
 						<div className={styles.cancel}>
 							<Button
 								style={{ marginRight: '10px' }}
-								onClick={() => setShowModal(false)}
+								onClick={() => handleCancel()}
 								themeType="secondary"
 							>
 								Cancel

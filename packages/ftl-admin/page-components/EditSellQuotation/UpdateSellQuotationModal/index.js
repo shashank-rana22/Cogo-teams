@@ -26,8 +26,8 @@ function UpdateSellQuotationModal({ showModal = false, setShowModal = () => {}, 
 		<div>
 			<Modal show={showModal} placement="top" size="xl" onClose={() => setShowModal(false)}>
 				<Modal.Header title="Update Sell Quotation" />
-				<Modal.Body>
-					<div className={cl`${styles.container} ${styles.modal_upper_container}`}>
+				<Modal.Body className={styles.custom_body}>
+					<div className={cl`${styles.modal_container} ${styles.modal_upper_container}`}>
 						<div className={styles.body_container}>
 							<div className={styles.details_container}>
 								<div>
@@ -61,7 +61,6 @@ function UpdateSellQuotationModal({ showModal = false, setShowModal = () => {}, 
 									key={item}
 									invoicingParties={invoicing_parties}
 									invoicingPartiesWiseTotal={invoicing_party_wise_total}
-									setShowModal={setShowModal}
 								/>
 							))
 						)}

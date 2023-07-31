@@ -8,7 +8,7 @@ const FIXED_VALUE_FOR_INVOICE_TOTAL = 2;
 
 function InvoicingParties({
 	regNumber = '', invoicingPartiesWiseTotal = {},
-	invoicingParties = [], setShowModal = () => {},
+	invoicingParties = [],
 }) {
 	const INVOICING_PARTIES_DATA = invoicingParties
 		.filter((item) => item?.billing_address?.registration_number === regNumber);
@@ -45,7 +45,6 @@ function InvoicingParties({
 					<InvoiceCard
 						data={item}
 						key={item?.id}
-						setShowModal={setShowModal}
 					/>
 				))}
 
