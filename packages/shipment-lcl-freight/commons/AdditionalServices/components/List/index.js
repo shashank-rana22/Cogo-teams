@@ -1,5 +1,6 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
@@ -16,14 +17,19 @@ import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
+const CargoInsurance = dynamic(() => import('./CargoInsurance'), { ssr: false });
+
+const TOTAL_PAGE_LIMIT = 8;
+const PAGE_LIMIT = 100;
+
 function List({ isSeller = false }) {
-	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
+	const { servicesList, refetchServices, shipment_data, stakeholderConfig, primary_service } = useContext(
 		ShipmentDetailContext,
 	);
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
-	const [pageLimit, setPageLimit] = useState(8);
+	const [pageLimit, setPageLimit] = useState(TOTAL_PAGE_LIMIT);
 
 	const { list: additionalServiceList, refetch, loading, totalCount } = useListShipmentAdditionalServices({
 		shipment_data,
@@ -48,8 +54,10 @@ function List({ isSeller = false }) {
 		showIp  : showModal === 'ip',
 	});
 
+	const isCargoInsured = servicesList?.some((service) => service?.service_type === 'cargo_insurance_service');
+
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 
 			{loading ? <Loader /> : null}
 
@@ -79,14 +87,14 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
-			{totalCount > 8 ? (
+			{totalCount > TOTAL_PAGE_LIMIT ? (
 				<div className={styles.show_more}>
-					{pageLimit > 8
+					{pageLimit > TOTAL_PAGE_LIMIT
 						? 	(
 							<Button
 								size="md"
 								themeType="link"
-								onClick={() => setPageLimit(8)}
+								onClick={() => setPageLimit(TOTAL_PAGE_LIMIT)}
 							>
 								Show Less
 							</Button>
@@ -94,7 +102,7 @@ function List({ isSeller = false }) {
 							<Button
 								size="md"
 								themeType="link"
-								onClick={() => setPageLimit(100)}
+								onClick={() => setPageLimit(PAGE_LIMIT)}
 							>
 								Show More
 							</Button>
@@ -117,8 +125,16 @@ function List({ isSeller = false }) {
 					onClick={() => setShowModal('charge_code')}
 					disabled={shipment_data?.is_job_closed}
 				>
-					<div className={styles.add_icon}>+</div>
+					<span className={styles.add_icon}>+</span>
 					Add Additional Services
+				</Button>
+				<Button
+					onClick={() => setShowModal('cargo_insurance_service')}
+					className={styles.btn_div}
+					disabled={!!isCargoInsured}
+				>
+					<span className={styles.add_icon}>+</span>
+					Add Cargo Insurance
 				</Button>
 			</div>
 
@@ -162,7 +178,16 @@ function List({ isSeller = false }) {
 				/>
 			)}
 
-		</div>
+			{showModal === 'cargo_insurance_service' ? (
+				<CargoInsurance
+					data={shipment_data}
+					refetch={refetch}
+					setShowModal={setShowModal}
+					primary_service={primary_service}
+				/>
+			) : null}
+
+		</section>
 	);
 }
 
