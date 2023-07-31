@@ -38,8 +38,9 @@ const getControls = ({
 	service_type = '',
 	servicesList = [],
 	subsidiaryService = {},
+	shipment_data = {},
 }) => {
-	const service_rendered = (servicesList || []).filter(
+	const service_rendered = (shipment_data?.all_services || []).filter(
 		(service) => service?.service_type === service_type,
 	);
 

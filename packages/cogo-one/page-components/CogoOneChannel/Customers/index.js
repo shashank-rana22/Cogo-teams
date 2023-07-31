@@ -32,6 +32,14 @@ function Customers({
 	viewType = '',
 	workPrefernceLoading = false,
 	setOpenKamContacts = () => {},
+	agentStatus = {},
+	fetchworkPrefernce = () => {},
+	agentTimeline = () => {},
+	setSendBulkTemplates = () => {},
+	setSelectedAutoAssign = () => {},
+	selectedAutoAssign = {},
+	autoAssignChats = {},
+	setAutoAssignChats = () => {},
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
 
@@ -50,7 +58,13 @@ function Customers({
 			isBotSession,
 			setIsBotSession,
 			tagOptions,
+			setModalType,
+			selectedAutoAssign,
+			setSelectedAutoAssign,
+			autoAssignChats,
+			setAutoAssignChats,
 			workPrefernceLoading,
+			setSendBulkTemplates,
 		},
 		voice: {
 			setActiveVoiceCard: (val) => {
@@ -86,7 +100,11 @@ function Customers({
 
 				{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_self_status && (
 					<div className={styles.styled_toggle}>
-						<AgentStatus />
+						<AgentStatus
+							agentStatus={agentStatus}
+							fetchworkPrefernce={fetchworkPrefernce}
+							agentTimeline={agentTimeline}
+						/>
 					</div>
 				)}
 
@@ -145,6 +163,7 @@ function Customers({
 				userId={userId}
 				viewType={viewType}
 				setOpenKamContacts={setOpenKamContacts}
+				setSendBulkTemplates={setSendBulkTemplates}
 			/>
 		</div>
 	);

@@ -1,13 +1,14 @@
 import { Pill, Popover, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
-import { startCase, format, isEmpty } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { DECIMAL_PLACES, PERCENTAGE_CHECK, VALUE_ZERO } from '../../../../constants';
 
 import ShowLineItems from './ShowLineItems';
 import ShowSellRates from './ShowSellRates';
+import showValidity from './showValidity';
 import styles from './styles.module.css';
 
 function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates, prefrence_key }) {
@@ -17,23 +18,8 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 	const isDisplayLineItems = !isEmpty([...lineItems, ...originLocalsLineItems, ...destinationLocalsLineItems]);
 	const isShowSellRate = singleServiceData?.service_type === 'fcl_freight_service';
 	const [showLineItems, setShowLineItems] = useState(false);
-	const showValidity = (item) => {
-		if (item?.rowData?.is_rate_expired) {
-			return <span style={{ color: 'red' }}> (This Rate is Expired)</span>;
-		}
+	const [showRemarks, setShowRemarks] = useState(false);
 
-		if (item?.rowData?.validity_end) {
-			return (
-				<span style={{ color: 'red' }}>
-					(Valid till:
-					{' '}
-					{format(data?.rowData?.validity_end, 'dd MMM YYYY')}
-					)
-				</span>
-			);
-		}
-		return null;
-	};
 	const isExpired = (rowData) => (
 		prefrence_key === 'System Rates'
 			&& rowData?.validity_end <= shipmentData?.schedule_departure
@@ -60,6 +46,28 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 							{`Reverted from ${data?.rowData?.platform} platform`}
 						</Pill>
 					</div>
+				) : null}
+				{data?.rowData?.remarks ? (
+					<Popover
+						placement="bottom"
+						trigger="mouseenter"
+						render={(
+							<div className={styles.text}>
+								{data?.rowData?.remarks}
+							</div>
+						)}
+					>
+						<div
+							className={styles.text3}
+							onClick={() => setShowRemarks(!showRemarks)}
+							role="button"
+							tabIndex={0}
+						>
+							remarks :
+							{' '}
+							<span style={{ textDecoration: 'underline' }}>view</span>
+						</div>
+					</Popover>
 				) : null}
 			</div>
 			<div className={styles.progress_bar_section}>

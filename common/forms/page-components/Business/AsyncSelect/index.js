@@ -53,15 +53,12 @@ import {
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
-	asyncListEmployeeDetails,
-	asyncListAllSquads,
-	asyncListAllTribes,
-	asyncListAllChapters,
 	asyncListAllManagers,
 	asyncFieldsListAgents,
 	asyncListShipmentServices,
 	asyncListShipments,
 	asyncListShipmentPendingTasks,
+	asyncFieldsLeadOrganization,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -133,15 +130,12 @@ const keyAsyncFieldsParamsMapping = {
 	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
-	list_employee_details                : asyncListEmployeeDetails,
-	list_all_squads                      : asyncListAllSquads,
-	list_all_tribes                      : asyncListAllTribes,
-	list_all_chapters                    : asyncListAllChapters,
 	list_all_managers                    : asyncListAllManagers,
 	list_chat_agents                     : asyncFieldsListAgents,
 	list_shipment_services               : asyncListShipmentServices,
 	list_shipments                       : asyncListShipments,
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
+	list_lead_organizations              : asyncFieldsLeadOrganization,
 };
 
 function AsyncSelect(props) {
