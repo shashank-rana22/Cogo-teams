@@ -4,7 +4,7 @@ import uploadControls from '../../../../../utils/upload-controls';
 import styles from './styles.module.css';
 
 function UploadModal({
-	uploadData, formProps = {},
+	uploadData = {}, formProps = {},
 
 }) {
 	const { control, formState: { errors } } = formProps;
@@ -20,7 +20,7 @@ function UploadModal({
 			<div className={styles.modal_container}>
 				{uploadControls.map((controlItem) => {
 					const el = { ...controlItem };
-					const Element = getElementController(el.type);
+					const Element = getElementController(el.component);
 					if (!Element) return null;
 					return (
 						<div key={el.name} style={el.style} className={styles.control_container}>

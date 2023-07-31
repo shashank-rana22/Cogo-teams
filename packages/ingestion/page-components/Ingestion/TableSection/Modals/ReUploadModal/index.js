@@ -38,7 +38,7 @@ function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {}, re
 				<div key={tableModal} className={styles.modal_container}>
 					{reUploadControls.map((controlItem) => {
 						const el = { ...controlItem };
-						const Element = getElementController(el.type);
+						const Element = getElementController(el.component);
 						if (!Element) return null;
 						return (
 							<div key={el.name} style={el.style} className={styles.control_container}>
