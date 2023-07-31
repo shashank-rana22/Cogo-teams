@@ -12,13 +12,16 @@ import TimelineContent from './TimelineContent';
 
 const MIN_FEEDBACK_SCORE = 0;
 const MIN_TIMER_VALUE = 0;
-const PUNCH_IN_TIME = 9;
-const PUNCH_OUT_TIME = 19;
+const PUNCH_IN_TIME_HOUR = 9;
+const PUNCH_IN_TIME_MINUTE = 30;
+const PUNCH_OUT_TIME_HOUR = 18;
+const PUNCH_OUT_TIME_MINUTE = 30;
 const MIN_SECOND = 0;
-const COUNT_DOWN_BUFFER_TIME = 900;
+const COUNT_DOWN_BUFFER_TIME = 120;
 const UPDATE_TIME_BY_ONE_SECOND = 1000;
 const MAX_SECOND_VALUE = 60;
 const TWO_DIGIT_NUMBER = 2;
+const BUTTON_SHAKE_DURATION = 120000;
 
 function PunchInOut({
 	fetchworkPrefernce = () => {},
@@ -46,6 +49,9 @@ function PunchInOut({
 
 	const shakeButton = () => {
 		setIsShaking(true);
+		setTimeout(() => {
+			setIsShaking(false);
+		}, BUTTON_SHAKE_DURATION);
 	};
 	const handlePunchIn = (event) => {
 		event.stopPropagation();
@@ -67,7 +73,7 @@ function PunchInOut({
 	const startShift = useCallback(() => {
 		const now = new Date();
 		const startTime = new Date(now);
-		startTime.setHours(PUNCH_IN_TIME, MIN_SECOND, MIN_SECOND, MIN_SECOND);
+		startTime.setHours(PUNCH_IN_TIME_HOUR, PUNCH_IN_TIME_MINUTE, MIN_SECOND, MIN_SECOND);
 
 		const timeDiff = startTime - now;
 
@@ -82,7 +88,7 @@ function PunchInOut({
 		const interval = setInterval(() => {
 			const now = new Date();
 			const targetTime = new Date(now);
-			targetTime.setHours(PUNCH_OUT_TIME, MIN_SECOND, MIN_SECOND, MIN_SECOND);
+			targetTime.setHours(PUNCH_OUT_TIME_HOUR, PUNCH_OUT_TIME_MINUTE, MIN_SECOND, MIN_SECOND);
 
 			const remainingTime = Math.floor((targetTime - now) / UPDATE_TIME_BY_ONE_SECOND);
 			if (remainingTime <= COUNT_DOWN_BUFFER_TIME && remainingTime > MIN_SECOND) {

@@ -11,20 +11,6 @@ import { getFormattedNumber } from '../../../../../../../helpers/getFormattedNum
 import styles from './styles.module.css';
 
 const MIN_COUNT = 0;
-// const ZERO_SCORE = 0;
-// const ONE_SCORE = 1;
-// const TWO_SCORE = 2;
-// const THREE_SCORE = 3;
-// const FOUR_SCORE = 4;
-// const FIVE_SCORE = 5;
-
-// const FEEDBACK_EMOJI_MAPPING = [
-// 	{ range: [ZERO_SCORE, ONE_SCORE], emoji: '😞' },
-// 	{ range: [ONE_SCORE, TWO_SCORE], emoji: '😔' },
-// 	{ range: [TWO_SCORE, THREE_SCORE], emoji: '😐' },
-// 	{ range: [THREE_SCORE, FOUR_SCORE], emoji: '🙂' },
-// 	{ range: [FOUR_SCORE, FIVE_SCORE], emoji: '😄' },
-// ];
 
 function Stats({
 	bookingCount = 0,
@@ -86,7 +72,9 @@ function Stats({
 					return (
 						<div className={styles.each_div} key={name}>
 							<div className={styles.title}>{label}</div>
-							<div className={styles.count}>{STATS_COUNT_MAPPING[name] || MIN_COUNT}</div>
+							<div className={styles.count}>
+								{getFormattedNumber(STATS_COUNT_MAPPING[name] || MIN_COUNT)}
+							</div>
 						</div>
 					);
 				})}

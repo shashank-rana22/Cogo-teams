@@ -78,6 +78,7 @@
 }
 
 .shake_button {
+	margin-left: 6px;
 	animation: shaking 0.3s infinite;
 
 	&:hover {
