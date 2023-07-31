@@ -1,8 +1,14 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
+
+const LEVEL_KEY_MAP = {
+	1 : 'onlyLevel1IncidentApproval',
+	2 : 'onlyLevel2IncidentApproval',
+	3 : 'onlyLevel3IncidentApproval',
+};
 
 const useGetLevels = () => {
 	const [filters, setFilters] = useState({
@@ -28,12 +34,6 @@ const useGetLevels = () => {
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const LEVEL_KEY_MAP = useMemo(() => ({
-		1 : 'onlyLevel1IncidentApproval',
-		2 : 'onlyLevel2IncidentApproval',
-		3 : 'onlyLevel3IncidentApproval',
-	}), []);
-
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
@@ -58,7 +58,7 @@ const useGetLevels = () => {
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [pageIndex, pageLimit, query, trigger, incidentType, incidentSubtype, entityCode, level, LEVEL_KEY_MAP]);
+	}, [pageIndex, pageLimit, query, trigger, incidentType, incidentSubtype, entityCode, level]);
 
 	useEffect(() => {
 		getIncidentLevels();
