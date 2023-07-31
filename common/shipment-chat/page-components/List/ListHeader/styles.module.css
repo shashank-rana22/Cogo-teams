@@ -1,28 +1,8 @@
 .tabs_container {
 	display: flex;
 	align-items: center;
-	padding: 8px 0 0 20px;
+	padding: 16px 20px;
 	margin-right: 20px;
-
-	:global {
-		.ui_tab_list_container {
-			padding: 4px;
-			margin: 8px 0;
-			background-color: #fff;
-			border-bottom: none;
-			border-radius: 6px;
-			box-shadow: 0 0 8px rgb(44 62 80 / 20%);
-		}
-
-		.ui_tab_active {
-			background: #fdebe9;
-			border-radius: 6px;
-		}
-
-		.ui_tab_container.ui_tab_active.ui_ps_themeType_secondary {
-			border-bottom: none;
-		}
-	}
 }
 
 .add_user {

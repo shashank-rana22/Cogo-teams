@@ -2,6 +2,7 @@ import { cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcAShipAmber } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -93,6 +94,11 @@ function List({
 
 	useEffect(() => {
 		refOuter.current.scrollTop = 0;
+		setList({
+			data       : [],
+			total      : 0,
+			total_page : 0,
+		});
 		setFilters({ page: 1 });
 	}, [status, setFilters]);
 
@@ -121,6 +127,10 @@ function List({
 				tabIndex={0}
 				onClick={() => setId(item?.id)}
 			>
+				<div className={styles.ship_image_container}>
+					<IcAShipAmber height={30} width={30} />
+				</div>
+
 				<div className={styles.card_item}>
 
 					<div className={styles.serial_id}>{item?.channel_name}</div>
@@ -176,7 +186,7 @@ function List({
 
 			</div>
 
-			{!id ? (
+			{(!id || (!loading && isEmpty(channelList))) ? (
 				<div className={styles.initial_state}>
 					<img
 						src={GLOBAL_CONSTANTS.image_url.ic_initial_state_svg}

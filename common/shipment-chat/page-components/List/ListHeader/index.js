@@ -15,7 +15,7 @@ function ListHeader({
 	return (
 		<div>
 			<div className={styles.tabs_container}>
-				<Tabs activeTab={status} onChange={setStatus}>
+				<Tabs activeTab={status} onChange={setStatus} themeType="tertiary">
 					<TabPanel name="active" title="Active" />
 					<TabPanel name="inactive" title="Inactive" />
 				</Tabs>
