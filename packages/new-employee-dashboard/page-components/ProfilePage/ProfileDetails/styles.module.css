@@ -24,3 +24,7 @@
 	flex-basis: 80%;
 	align-items: center;
 }
+
+.styled_radio_group_container {
+	margin-left: 10px;
+}

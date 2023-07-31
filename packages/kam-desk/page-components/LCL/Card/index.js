@@ -33,20 +33,19 @@ function Card({ data = {} }) {
 		shipmentType,
 	});
 
-	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}
-		?${CONSTANTS.url_navigation_params}`;
+	let href = `${window.location.origin}/${router?.query?.partner_id}/shipments`;
+	href += `/${data?.id}?${CONSTANTS.url_navigation_params}`;
 
+	const handleCardClick = (e) => {
+		const newUrl = e.currentTarget.href;
 		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
 	};
 
 	return (
-		<div
+		<a
+			href={href}
 			className={cl`${styles.container} ${isShipmentCritical ? styles.animate_card : ''}`}
 			onClick={handleCardClick}
-			role="button"
-			tabIndex={0}
 		>
 			<div className={styles.header}>
 				<Header data={data} />
@@ -79,7 +78,7 @@ function Card({ data = {} }) {
 					<CargoPills data={data} />
 				</div>
 			</div>
-		</div>
+		</a>
 	);
 }
 

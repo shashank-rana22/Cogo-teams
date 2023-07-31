@@ -5,6 +5,7 @@ import { useState, useRef } from 'react';
 import taskConfigs from '../../../configs/taskConfigs.json';
 import getMutatedControls from '../../../helpers/getMutatedControls';
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
+import useGetBill from '../../../hooks/useGetBill';
 import EmptyState from '../../EmptyState';
 import PendingTasks from '../../PendingTasks/TaskList';
 import { columns } from '../Invoices/tableColumn';
@@ -55,7 +56,9 @@ export default function AccordionContent({
 	const { mutatedControls } = getMutatedControls({ item, stateProps, controls });
 
 	const list_of_invoices = item?.invoice_data || [];
-	const tableData = getTableFormatedData(list_of_invoices);
+	const accordionOpen = (activeAccordionTab === 'invoice' && !showTask);
+	const { data } = useGetBill({ serial_id: item?.serial_id, accordionOpen });
+	const tableData = getTableFormatedData({ list_of_invoices, data });
 
 	const handleNextAction = async () => {
 		const isFormValid = await formRef.current?.formTrigger();

@@ -1,0 +1,128 @@
+.positive_profit_container {
+	display: flex;
+	align-items: center;
+	padding: 8px 0;
+	margin: 24px 0;
+	background-color: #f3fafa;
+	border: 1px solid #88cad1;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.negative_profit_container {
+	display: flex;
+	align-items: center;
+	padding: 8px 0;
+	margin: 24px 0;
+	background-color: #f9f9f9;
+	border: 1px solid #bdbdbd;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.left_section_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+}
+
+.right_section_container {
+	flex: 1;
+	border-left: 1px solid #e0e0e0;
+}
+
+.upper_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 24px 8px;
+	border-bottom: 1px dashed #bdbdbd;
+}
+
+.upper_left_section {
+	display: flex;
+	align-items: center;
+}
+
+.upper_right_section {
+	display: flex;
+}
+
+.agent_container {
+	display: flex;
+	align-items: center;
+	margin-left: 17px;
+}
+
+.tag {
+	font-size: 14px;
+	font-weight: 500;
+	color: #6fa5ab;
+}
+
+.lower_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.lower_left_section {
+	display: flex;
+	align-items: center;
+	width: 50%;
+	padding: 20px 24px;
+}
+
+.lower_right_section {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px;
+	margin-bottom: -8px;
+}
+
+.price {
+	margin-left: 4px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #ee3425;
+}
+
+.label {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.service_provider_heading {
+	margin-right: 10px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.positive_profit {
+	font-size: 18px;
+	font-weight: 600;
+	color: #849e4c;
+}
+
+.negative_profit {
+	font-size: 18px;
+	font-weight: 600;
+	color: #ee3425;
+}
+
+.total_price_text {
+	font-size: 20px;
+	font-weight: 700;
+	color: #221f20;
+}

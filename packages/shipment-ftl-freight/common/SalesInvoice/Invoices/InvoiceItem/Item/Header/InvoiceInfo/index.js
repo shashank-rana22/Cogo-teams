@@ -42,7 +42,8 @@ function InvoiceInfo({
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const isAuthorizedForCN = [
 		GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
-		GLOBAL_CONSTANTS.uuid.sachin_mehra_user_id].includes(user_data?.user?.id);
+		GLOBAL_CONSTANTS.uuid.sachin_mehra_user_id,
+		GLOBAL_CONSTANTS.uuid.manoj_mahapatra_user_id].includes(user_data?.user?.id);
 
 	const {
 		invoice_total_currency,

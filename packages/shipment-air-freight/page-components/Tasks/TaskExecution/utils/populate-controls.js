@@ -21,7 +21,7 @@ const populateControls = ({
 				const awbNumber = mainAirFreight?.service_provider_id === geo.uuid.freight_force_org_id
 					? getApisData?.get_awb_inventory_data?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.awb_number
 					: '';
-				finalControls[index].value = mainAirFreight?.master_airway_bill_number || awbNumber || '';
+				finalControls[index].value = mainAirFreight?.booking_reference_number || awbNumber || '';
 				if (
 					mainAirFreight?.service_provider_id === geo.uuid.freight_force_org_id
 				) {
@@ -47,18 +47,20 @@ const populateControls = ({
 		).map((item) => ({
 			flight_number      : item.flight_number,
 			from_airport_id    : item.origin_id,
-			schedule_arrival   : item.schedule_arrival,
-			schedule_departure : item.schedule_departure,
+			schedule_arrival   : new Date(item.schedule_arrival),
+			schedule_departure : new Date(item.schedule_departure),
 			service_type       : item.service_type,
 			to_airport_id      : item.destination_id,
 		}));
 
 		(finalControls || []).forEach((control, index) => {
 			if (control.name === 'schedule_departure') {
-				finalControls[index].value = getApisData.get_shipment_air_movement_details.final_departure_time;
+				finalControls[index].value = new Date(
+					getApisData.get_shipment_air_movement_details.final_departure_time,
+				);
 			}
 			if (control.name === 'schedule_arrival') {
-				finalControls[index].value = getApisData.get_shipment_air_movement_details.final_arrival_time;
+				finalControls[index].value = new Date(getApisData.get_shipment_air_movement_details.final_arrival_time);
 			}
 			if (control.name === 'movement_details') {
 				finalControls[index].value = values;

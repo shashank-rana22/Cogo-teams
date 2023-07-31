@@ -1,31 +1,15 @@
-import { Textarea, Button, Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { InputController, DatepickerController, UploadController, useForm } from '@cogoport/forms';
 import React from 'react';
 
 import useGetIrnCancellation from '../../../hooks/useGetIrnCancellation';
 import styles from '../styles.module.css';
 
-interface MappedValues {
-	AGREEMENT_NUMBER?: { message: string };
-	AGREEMENT_PDF_FILE?: { message: string };
-	AGREEMENT_DATE?: { message: string };
-	E_INVOICE_DATE?: { message: string };
-	CANCELLATION_REASON?: { message: string };
-}
-
-const mapping: Record<string, { key: string }> = {
-	agreementNumber     : { key: 'AGREEMENT_NUMBER' },
-	agreementPdfFile    : { key: 'AGREEMENT_PDF_FILE' },
-	agreementDate       : { key: 'AGREEMENT_DATE' },
-	E_invoice_date      : { key: 'E_INVOICE_DATE' },
-	Cancellation_reason : { key: 'CANCELLATION_REASON' },
-};
-
 function CancelEinvoice({
 	itemData,
 	showCancellationModal,
 	setShowCancellationModal,
-	IRNLabel,
+	irnLabel,
 	refetch,
 	entityCode,
 }) {
@@ -42,29 +26,8 @@ function CancelEinvoice({
 		setShowCancellationModal,
 		refetch,
 		entityCode,
+		itemData,
 	});
-
-	const mappedValues: MappedValues = Object.entries(mapping).reduce((result, [property, { key }]) => {
-		const { message = '' } = errorVal?.[property] || {};
-		return {
-			...result,
-			[key as keyof MappedValues]: { message },
-		};
-	}, {} as MappedValues);
-
-	const {
-		AGREEMENT_NUMBER = { message: '' },
-		AGREEMENT_PDF_FILE = { message: '' },
-		AGREEMENT_DATE = { message: '' },
-		E_INVOICE_DATE = { message: '' },
-		CANCELLATION_REASON = { message: '' },
-	} = mappedValues;
-
-	const { message: E_INVOICE_DATE_MESSAGE = '' } = E_INVOICE_DATE;
-	const { message: AGREEMENT_NUMBER_MESSAGE = '' } = AGREEMENT_NUMBER;
-	const { message: AGREEMENT_DATE_MESSAGE = '' } = AGREEMENT_DATE;
-	const { message: AGREEMENT_PDF_FILE_MESSAGE = '' } = AGREEMENT_PDF_FILE;
-	const { message: CANCELLATION_REASON_MESSAGE = '' } = CANCELLATION_REASON;
 
 	return (
 		<Modal show={showCancellationModal} onClose={() => setShowCancellationModal(false)} size="lg">
@@ -75,7 +38,7 @@ function CancelEinvoice({
 						<div className={styles.cancel_invoice}>
 							Cancel
 							{' '}
-							{IRNLabel}
+							{irnLabel}
 							{' '}
 							<span className={styles.styled_invoice}>
 								{invoiceNumber}
@@ -95,13 +58,17 @@ function CancelEinvoice({
 										control={control}
 										name="agreementNumber"
 										placeholder="Agreement Number"
-										type="number"
+										type="text"
+										value={response?.agreementNumber}
+										onChange={(e) => {
+											setResponse((resp) => ({ ...resp, agreementNumber: e }));
+										}}
 										rules={{ required: 'Agreement Number is required' }}
 									/>
-									{AGREEMENT_NUMBER && (
+									{(response?.agreementNumber === '') && (
 										<span className={styles.errors}>
 											{' '}
-											{AGREEMENT_NUMBER_MESSAGE.toString()}
+											{errorVal?.agreementNumber?.message.toString()}
 										</span>
 									)}
 								</div>
@@ -111,16 +78,18 @@ function CancelEinvoice({
 									</div>
 									<DatepickerController
 										control={control}
+										placement="bottom"
 										name="agreementDate"
 										type="datepicker"
+										value={response?.agreementDate}
 										isPreviousDaysAllowed
+										onChange={(e) => setResponse((resp) => ({ ...resp, agreementDate: e }))}
 										placeholder="Agreement Date"
-										rules={{ required: 'Agreement Date is required.' }}
+										rules={{ required: 'Agreement Date is required' }}
 									/>
-									{AGREEMENT_DATE ? (
+									{response?.agreementDate ? (
 										<span className={styles.errors}>
-											{' '}
-											{AGREEMENT_DATE_MESSAGE.toString()}
+											{errorVal?.agreementDate?.message.toString()}
 										</span>
 									) : null}
 								</div>
@@ -135,10 +104,10 @@ function CancelEinvoice({
 										placeholder="E-invoice Date"
 										rules={{ required: 'E invoice Date is required.' }}
 									/>
-									{E_INVOICE_DATE ? (
+									{(invoiceDate === '') ? (
 										<span className={styles.errors}>
 											{' '}
-											{E_INVOICE_DATE_MESSAGE.toString()}
+											{errorVal?.invoiceDate?.message.toString()}
 										</span>
 									) : null}
 								</div>
@@ -148,30 +117,32 @@ function CancelEinvoice({
 									<div className={styles.lable_style}>Agreement Proof *</div>
 									<UploadController
 										control={control}
-										name="agreementPdfFile"
-										rules={{
-											required: 'Agreement pdf file is required',
-										}}
+										name="agreementDocument"
+										value={response?.agreementDocument}
+										defaultValues={response?.agreementDocument}
+										onChange={(e) => setResponse((resp) => ({ ...resp, agreementDocument: e }))}
+										rules={{ required: 'Agreement file is required' }}
 									/>
-									{AGREEMENT_PDF_FILE ? (
+									{(response?.agreementDocument === '') ? (
 										<span className={styles.errors}>
 											{' '}
-											{AGREEMENT_PDF_FILE_MESSAGE.toString()}
+											{errorVal?.agreementDocument?.message.toString()}
 										</span>
 									) : null}
 								</div>
 								<div className={styles.upload_Width}>
 									<div className={styles.lable_style}>Cancellation Reason *</div>
-									<Textarea
-										size="md"
-										name="Cancellation_reason"
+									<InputController
+										control={control}
+										name="remarks"
 										value={response?.remarks}
-										onChange={(event) => setResponse((r) => ({ ...r, remarks: event }))}
+										onChange={(e) => setResponse((resp) => ({ ...resp, remarks: e }))}
+										rules={{ required: 'Reason is required' }}
 									/>
-									{CANCELLATION_REASON ? (
+									{(response?.remarks === '') ? (
 										<span className={styles.errors}>
 											{' '}
-											{CANCELLATION_REASON_MESSAGE.toString()}
+											{errorVal?.remarks?.message.toString()}
 										</span>
 									) : null}
 								</div>

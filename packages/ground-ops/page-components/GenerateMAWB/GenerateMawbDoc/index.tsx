@@ -1,4 +1,9 @@
+import ChargeDetails from '@cogoport/air-modules/components/AWBTemplate/ChargeDetails';
+import ContainerDetails from '@cogoport/air-modules/components/AWBTemplate/ContainerDetails';
+import ShipmentDetails from '@cogoport/air-modules/components/AWBTemplate/ShipmentDetails';
+import ShipperConsigneeDetails from '@cogoport/air-modules/components/AWBTemplate/ShipperConsigneeDetails';
 import { Button, Checkbox, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
@@ -8,12 +13,8 @@ import { footerValues } from '../Helpers/configurations/footerValues';
 import { backPage, footerImages } from '../Helpers/configurations/imageCopies';
 import useUpdateIndividualEditing from '../Helpers/hooks/useUpdateIndividualEditing';
 
-import ChargeDetails from './ChargeDetails';
-import ContainerDetails from './ContainerDetails';
 import getFileObject from './getFileObject';
 import SelectDocumentCopies from './SelectDocumentCopies';
-import ShipmentDetails from './ShipmentDetails';
-import ShipperConsigneeDetails from './ShipperConsigneeDetails';
 import styles from './styles.module.css';
 import useCreateShipmentDocument from './useCreateShipmentDocument';
 import useGetMediaUrl from './useGetMediaUrl';
@@ -34,7 +35,7 @@ interface Props {
 	chargeableWeight?:number;
 	setGenerate?:Function;
 	activeCategory?: string;
-	hawbDetails?: Array<string>;
+	hawbDetails?: Array<NestedObj>;
 	activeHawb?: NestedObj;
 	setHawbDetails?:Function;
 	setActiveHawb?: Function;
@@ -53,24 +54,30 @@ const DOWNLOAD_BUTTON = {
 	document_amendment_requested : 'Download',
 };
 
-const includeTnC = ['original_3', 'original_2', 'original_1'];
+const INCLUDE_TNC = ['original_3', 'original_2', 'original_1'];
+
+const ZERO_COORDINATE = 0;
+const UPDATE_CHECK_INDEX = 1;
+const PDF_HEIGHT_ADJUST_VALUE = 14;
+const PDF_SCALE = 4.5;
+const TWELEVE_COPIES_LAST_INDEX = 1;
 
 function GenerateMawb({
 	taskItem = {},
 	formData = {},
 	setBack = () => {},
 	back = false,
-	edit,
+	edit = false,
 	setEdit = () => {},
 	viewDoc = false,
-	chargeableWeight,
+	chargeableWeight = 0,
 	setGenerate = () => {},
 	activeCategory = 'mawb',
 	hawbDetails = [],
 	setHawbDetails = () => {},
 	activeHawb = {},
-	setActiveHawb,
-	setActiveKey,
+	setActiveHawb = () => {},
+	setActiveKey = () => {},
 	pendingTaskId = '',
 	category = 'mawb',
 	setViewDoc = () => {},
@@ -150,8 +157,9 @@ function GenerateMawb({
 				status          : 'generated',
 				document_number : activeCategory === 'hawb'
 					? formData?.document_number || activeHawb?.documentNo : awbNumber,
-				service_id   : serviceId,
-				service_type : 'air_freight_service',
+				service_id      : serviceId,
+				service_type    : 'air_freight_service',
+				handedOverForTd : false,
 			},
 			document_url: res || undefined,
 			file_name:
@@ -166,11 +174,12 @@ function GenerateMawb({
 					data         : {
 						document_number: activeCategory === 'hawb'
 							? formData?.document_number || activeHawb?.documentNo : awbNumber,
-						service_id   : serviceId,
-						service_type : 'air_freight_service',
+						service_id      : serviceId,
+						service_type    : 'air_freight_service',
 						...filteredData,
-						status       : 'generated',
-						bl_detail_id : blDetailId,
+						status          : 'generated',
+						bl_detail_id    : blDetailId,
+						handedOverForTd : false,
 					},
 				},
 			],
@@ -210,22 +219,30 @@ function GenerateMawb({
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 
 				(docCopies || copiesValue || []).forEach((item, i) => {
-					pdf.addImage(Object.values(item)[1] === 'updated' ? `${Object.values(item)[0]}`
-						: imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+					pdf.addImage(Object.values(item)[UPDATE_CHECK_INDEX] === 'updated'
+						? `${Object.values(item)[GLOBAL_CONSTANTS.zeroth_index]}`
+						: imgData, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
 					if (!whiteout) {
-						pdf.addImage(footerImages[Object.keys(item)[0]]
-							|| footerImages[item], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
+						pdf.addImage(
+							footerImages[Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index]]
+							|| footerImages[item],
+							'jpeg',
+							ZERO_COORDINATE,
+							pdfHeight - PDF_HEIGHT_ADJUST_VALUE,
+							pdfWidth,
+							PDF_SCALE,
+						);
 					}
 
 					if (download24) {
-						if (includeTnC.includes(Object.keys(item)[0] || item)) {
+						if (INCLUDE_TNC.includes(Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index] || item)) {
 							pdf.addPage();
-							pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+							pdf.addImage(backPage, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
 						} else {
 							pdf.addPage();
 						}
 					}
-					if (i < copiesValue.length - 1) {
+					if (i < copiesValue.length - TWELEVE_COPIES_LAST_INDEX) {
 						pdf.addPage();
 					}
 				});
@@ -237,7 +254,7 @@ function GenerateMawb({
 				const pdf = new JsPDF();
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
-				pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+				pdf.addImage(imgData, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
 				pdf.save(activeCategory === 'hawb' ? documentNumber : awbNumber);
 			});
 		}

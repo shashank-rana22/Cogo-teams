@@ -1,4 +1,4 @@
-import { Button, Toggle, Popover } from '@cogoport/components';
+import { Button, Toggle, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useContext, useState } from 'react';
@@ -20,73 +20,69 @@ function Header({
 	const contextValues = useContext(ShipmentDetailContext);
 
 	const [showBookingReq, setShowBookingReq] = useState(false);
-	const [visible, setVisible] = useState(false);
 
-	const { activeStakeholder, shipment_data, primary_service } = contextValues || {};
+	const { activeStakeholder, shipment_data, primary_service, stakeholderConfig } = contextValues || {};
 
 	const showBookingRequirementsCondition = BOOKING_REQUIREMENTS_ROLES
 		.includes(activeStakeholder) && shipment_data?.state !== 'shipment_received';
 
 	const showSupplyRemarks = SUPPLY_REMARKS_ROLES.includes(activeStakeholder);
+	const show_others_tasks = !!stakeholderConfig?.tasks?.show_others_tasks;
+
+	const supplyRemarks = primary_service?.booking_preferences?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
 	return (
-		<div className={styles.container}>
+		<header className={styles.container}>
 			<div className={styles.top_panel}>
-				<div className={styles.left_content}>
+				<span className={styles.left_content}>
 					{`${completedTaskCount} / ${count} Tasks Completed`}
-				</div>
+				</span>
 
 				<div className={styles.right_content}>
-					{showSupplyRemarks ? (
-						<Popover
+					{showSupplyRemarks && supplyRemarks ? (
+						<Tooltip
+							theme="light"
 							placement="bottom"
-							trigger="mouseenter"
-							caret={false}
-							visible={visible}
-							render={`Supply Remarks: ${primary_service?.booking_preferences?.
-								[GLOBAL_CONSTANTS.zeroth_index]?.remarks}`}
+							animation="shift-away"
+							interactive
+							content={`Supply Remarks: ${supplyRemarks}`}
 						>
-							<Button
-								size="md"
-								themeType="link"
-								onClick={() => setVisible((pev) => !pev)}
-							>
-								Remarks
-
-							</Button>
-						</Popover>
+							<div className={styles.remarks}>Remarks</div>
+						</Tooltip>
 					) : null }
-					<div className={styles.toggle_container}>
-						<div style={{ marginTop: '12px' }}>Hide completed tasks</div>
-						<Toggle
-							checked={hideCompletedTasks}
-							onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
-						/>
-					</div>
 
-					<div className={styles.toggle_container}>
-						<div style={{ marginTop: '12px' }}>Show only my tasks</div>
+					{show_others_tasks ? (
+						<div className={styles.toggle_container}>
+							<span>Hide completed tasks</span>
+							<Toggle
+								checked={hideCompletedTasks}
+								onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
+							/>
+						</div>
+					) : null}
 
-						<Toggle
-							checked={showMyTasks}
-							onChange={() => {
-								setShowMyTasks(!showMyTasks);
-							}}
-						/>
-					</div>
+					{show_others_tasks ? (
+						<div className={styles.toggle_container}>
+							<span>Show only my tasks</span>
+							<Toggle
+								checked={showMyTasks}
+								onChange={() => setShowMyTasks(!showMyTasks)}
+							/>
+						</div>
+					) : null }
 				</div>
 			</div>
 
 			{showBookingRequirementsCondition
 				? (
 					<div className={styles.booking_req_heading}>
-						<div>Booking Requirements</div>
+						<span>Booking Requirements</span>
 						<Button
 							size="sm"
 							themeType="linkUi"
 							onClick={() => setShowBookingReq(!showBookingReq)}
 						>
-							<div className={styles.booking_req_button_text}>View</div>
+							<span className={styles.booking_req_button_text}>View</span>
 						</Button>
 					</div>
 				)
@@ -100,7 +96,7 @@ function Header({
 					/>
 				)
 				: null}
-		</div>
+		</header>
 	);
 }
 

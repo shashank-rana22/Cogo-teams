@@ -1,12 +1,13 @@
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const COMMON_CONTROL_KEYS_TAB_WISE_MAPPING = {
-	all      : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
-	groups   : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
-	message  : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
-	teams    : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
-	contacts : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
-	observer : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	all         : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	groups      : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	message     : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	teams       : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	contacts    : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	observer    : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	kamContacts : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
 };
 
 const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {

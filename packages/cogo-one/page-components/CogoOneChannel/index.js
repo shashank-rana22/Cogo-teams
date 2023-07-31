@@ -1,6 +1,5 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDownload } from '@cogoport/icons-react';
-import { Image, useRouter } from '@cogoport/next';
+import { cl } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -9,20 +8,25 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
-import { ANDRIOD_APK } from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
+import useGetAgentPreference from '../../hooks/useGetAgentPreference';
+import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
+import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
-import AgentStatusToggle from './AgentStatusToggle';
+import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
+import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
+import PortPairOrgFilters from './PortPairOrgFilters';
 import ProfileDetails from './ProfileDetails';
+import PunchInOut from './PunchInOut';
 import styles from './styles.module.css';
 
 function CogoOne() {
@@ -40,8 +44,10 @@ function CogoOne() {
 	}));
 
 	const [activeTab, setActiveTab] = useState({
-		tab  : 'message',
-		data : assigned_chat ? {
+		tab               : 'message',
+		subTab            : 'all',
+		hasNoFireBaseRoom : false,
+		data              : assigned_chat ? {
 			id: assigned_chat,
 			channel_type,
 		} : {},
@@ -53,6 +59,10 @@ function CogoOne() {
 	const [buttonType, setButtonType] = useState('');
 	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
+	const [openKamContacts, setOpenKamContacts] = useState(false);
+	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
+	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
+	const [autoAssignChats, setAutoAssignChats] = useState(true);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -62,7 +72,16 @@ function CogoOne() {
 		agentId           : userId,
 	});
 
-	const { viewType } = useAgentWorkPrefernce();
+	const { viewType, loading: workPrefernceLoading = false } = useAgentWorkPrefernce();
+
+	const {
+		fetchWorkStatus = () => {},
+		agentWorkStatus = {},
+		preferenceLoading = false,
+	} = useGetAgentPreference();
+
+	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline();
+
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
 
@@ -85,6 +104,20 @@ function CogoOne() {
 		},
 	};
 
+	const commonProps = {
+		setSendBulkTemplates,
+		setActiveTab,
+		selectedAutoAssign,
+		setAutoAssignChats,
+	};
+
+	const { hasNoFireBaseRoom = false } = activeTab || {};
+
+	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
+	const orgId = activeTab?.tab === 'message'
+		? formattedMessageData?.organization_id
+		: activeTab?.data?.organization_id;
+
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
 			const auth = getAuth();
@@ -97,17 +130,15 @@ function CogoOne() {
 
 	return (
 		<>
-			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_agent_status && (
-				<div className={styles.settings}>
-					<AgentStatusToggle firestore={firestore} />
-				</div>
-			)}
+			<HeaderBar
+				firestore={firestore}
+				viewType={viewType}
+			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
 					<Customers
 						viewType={viewType}
 						activeTab={activeTab}
-						setActiveTab={setActiveTab}
 						userId={userId}
 						setModalType={setModalType}
 						modalType={modalType}
@@ -115,8 +146,24 @@ function CogoOne() {
 						mailProps={mailProps}
 						firestore={firestore}
 						suggestions={suggestions}
+						workPrefernceLoading={workPrefernceLoading}
+						setOpenKamContacts={setOpenKamContacts}
+						agentStatus={agentWorkStatus}
+						fetchworkPrefernce={fetchWorkStatus}
+						agentTimeline={agentTimeline}
+						setSelectedAutoAssign={setSelectedAutoAssign}
+						autoAssignChats={autoAssignChats}
+						{...commonProps}
 					/>
 				</div>
+
+				{sendBulkTemplates ? (
+					<PortPairOrgFilters
+						setSelectedAutoAssign={setSelectedAutoAssign}
+						sendBulkTemplates={sendBulkTemplates}
+						{...commonProps}
+					/>
+				) : null}
 
 				{isEmpty(activeTab?.data)
 					? (
@@ -126,8 +173,8 @@ function CogoOne() {
 					) : (
 						<>
 							<div
-								className={`${activeTab?.tab === 'mail'
-									? styles.mail_layout : styles.chats_layout}`}
+								className={activeTab?.tab === 'mail'
+									? styles.mail_layout : styles.chats_layout}
 							>
 								<Conversations
 									activeTab={activeTab}
@@ -139,11 +186,14 @@ function CogoOne() {
 									mailProps={mailProps}
 									setActiveTab={setActiveTab}
 									suggestions={suggestions}
+									setModalType={setModalType}
 								/>
 							</div>
 
 							{activeTab?.tab !== 'mail' && (
-								<div className={styles.user_profile_layout}>
+								<div className={cl`${styles.user_profile_layout} 
+								${hasNoFireBaseRoom ? styles.disable_user_profile : ''}`}
+								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
 										activeTab={activeTab?.tab}
@@ -157,36 +207,15 @@ function CogoOne() {
 										firestore={firestore}
 										userId={userId}
 										setActiveTab={setActiveTab}
+										formattedMessageData={formattedMessageData}
+										orgId={orgId}
 									/>
+									{hasNoFireBaseRoom && <div className={styles.overlay_div} />}
 								</div>
 							)}
 						</>
 					)}
-
-				<div className={styles.download_apk}>
-					<div
-						role="presentation"
-						className={styles.download_div}
-						onClick={() => window.open(ANDRIOD_APK, '_blank')}
-					>
-						<Image
-							src={GLOBAL_CONSTANTS.image_url.cogo_logo_without_bg}
-							alt="bot"
-							height={16}
-							width={15}
-							className={styles.bot_icon_styles}
-						/>
-						<div className={styles.text_styles}>
-							<div className={styles.flex}>
-								<IcMDownload
-									className={styles.download_icon}
-								/>
-								<div>Get the</div>
-							</div>
-							app now
-						</div>
-					</div>
-				</div>
+				<AndroidApp />
 			</div>
 
 			<ModalComp
@@ -195,7 +224,23 @@ function CogoOne() {
 				refetchTickets={refetchTickets}
 				firestore={firestore}
 				userId={userId}
+				openKamContacts={openKamContacts}
+				setOpenKamContacts={setOpenKamContacts}
+				setActiveTab={setActiveTab}
+				orgId={orgId}
 			/>
+
+			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out && (
+				<PunchInOut
+					fetchworkPrefernce={fetchWorkStatus}
+					agentStatus={agentWorkStatus}
+					data={data}
+					agentTimeline={agentTimeline}
+					preferenceLoading={preferenceLoading}
+					timelineLoading={timelineLoading}
+
+				/>
+			)}
 		</>
 	);
 }

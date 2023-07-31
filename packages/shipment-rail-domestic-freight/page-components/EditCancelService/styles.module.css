@@ -13,14 +13,14 @@
 }
 
 .action_button {
-	margin: 10px 0;
+	padding: 0 !important;
+	margin: 0 auto;
 	font-size: var(--font-size-md);
 	color: var(--color-secondary-greyscale-3);
-	text-align: center;
-	cursor: pointer;
 
 	&:hover {
 		color: var(--color-primary-error-red-2);
+		background-color: transparent !important;
 	}
 
 	&:not(:first-of-type) {
@@ -28,7 +28,7 @@
 
 		&::before {
 			position: absolute;
-			top: -6px;
+			top: 0;
 			left: 0;
 			width: 100%;
 			content: "";
@@ -39,4 +39,8 @@
 
 .three_dots {
 	cursor: pointer;
+}
+
+.popover {
+	width: 100%;
 }

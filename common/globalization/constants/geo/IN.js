@@ -30,15 +30,38 @@ export default {
 		},
 	},
 	regex: {
-		PAN              : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
+		PAN                                : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
 		// eslint-disable-next-line max-len
-		GST              : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
-		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL            : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
+		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL                              : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,
+		MOBILE_NUMBER_WITHOUT_COUNTRY_CODE : /^[0-9]{10}$/,
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
+	office_locations: [
+		'gurgaon',
+		'mumbai',
+		'delhi',
+		'coimbatore',
+		'bangalore',
+		'chennai',
+		'kolkata',
+		'noida',
+		'ambala',
+		'haldia',
+		'ludhiana',
+		'kochi',
+		'hyderabad',
+		'pune',
+		'jaipur',
+		'raipur',
+		'ahmedabad',
+		'vadodara',
+		'rudrapur',
+		'bagdogra',
+	],
 	uuid: {
 		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
 		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
@@ -57,10 +80,12 @@ export default {
 			'9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d',
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
-		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
-		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
-		customer_service_role_ids : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
-		sales_role_ids            : [
+		third_party_enrichment_agencies_role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+		third_party_enrichment_agencies_rm_ids   : [],
+		cogoxpress_id                            : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
+		any_carrier_airline_id                   : '30798ff1-992c-48f0-aabd-eb92e98df747',
+		customer_service_role_ids                : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
+		sales_role_ids                           : [
 			'fdf55227-a433-4450-aab0-5e4c215ea72c',
 			'95113dbb-43bf-4434-958c-3fe8063657e7',
 			'0461c31b-4761-40b6-ac2a-59a4e9d4e23f',
@@ -82,6 +107,7 @@ export default {
 
 		cogo_freight_supplier      : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 		prod_process_owner         : 'ae80297f-e30d-45fb-845c-61c302523476',
+		air_prod_process_owner     : '9e6dad55-dc0c-42b4-a7d1-9908204cdca7',
 		corporate_owner_id         : '89184155-1f77-4265-826a-e997d140002f',
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
@@ -124,8 +150,10 @@ export default {
 			'b69344b8-f00c-4870-be0f-3233413edccf',
 		],
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
+		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		finops_manager            : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
+		ff_cost_booking_executive : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		service_ops2_role_id      : [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
@@ -154,6 +182,7 @@ export default {
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
+			'30e7e3e4-5d6d-456d-af50-56896d4ea6aa', // Air S01
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -161,6 +190,7 @@ export default {
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
 		],
+		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		sales_role                       : [
@@ -196,6 +226,7 @@ export default {
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
@@ -220,6 +251,8 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
+		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
 	},
 	options: {
 		registration_types: [
@@ -530,6 +563,16 @@ export default {
 		disable_options: ['10th', '12th', 'Diploma'],
 	},
 	navigations: {
+
+		settlement_onAccountCollection: {
+			tabs: [
+				'ap-ar-settlement',
+				'tds-settlement',
+				'history',
+				'onAccountCollection',
+				'JournalVoucher',
+			],
+		},
 		supply_dashboard: {
 			rfq_enquiries: {
 				tabs: [
@@ -541,6 +584,78 @@ export default {
 					'rfq_enquiries',
 					'rates_sheets',
 				],
+			},
+		},
+
+		enrichment: {
+			whatsapp_number_label                 : 'Whatsapp Number',
+			allowed_to_create_enrichment_requests : false,
+			tabs                                  : ['manual_enrichment', 'file_management'],
+			manual_enrichment                     : {
+				columns: {
+					relationship_manager_view: {
+						active: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'action',
+						],
+						responded: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'action',
+						],
+						success: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'status',
+							'action',
+						],
+					},
+					agent_view: {
+						active: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'action',
+						],
+						responded: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'action',
+						],
+						success: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'status',
+							'action',
+						],
+					},
+				},
+				actions: {
+					active: {
+						add: 'Add Details',
+					},
+					responded:	{
+						edit: 'Edit Details',
+					},
+					success: {
+						view: 'View Details',
+					},
+				},
 			},
 		},
 		account_receivables: {

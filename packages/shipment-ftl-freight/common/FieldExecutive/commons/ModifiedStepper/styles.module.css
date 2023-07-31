@@ -1,0 +1,57 @@
+.container {
+	display: flex;
+	font-weight: 500;
+}
+
+.single_step {
+	display: flex;
+	align-items: center;
+}
+
+.number {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+}
+
+.active {
+	color: #fff;
+	background: #ee3425;
+}
+
+.inactive {
+	color: #bdbdbd;
+	border: 1px solid #bdbdbd;
+}
+
+.passed {
+	color: #000;
+	background: #fde74d;
+	border: 1px solid #fde74d;
+}
+
+.title {
+	margin: 0 10px;
+}
+
+.inactive_title {
+	color: #bdbdbd;
+}
+
+.passed_title {
+	color: #000;
+}
+
+.line {
+	width: 50px;
+	height: 0;
+	margin-right: 10px;
+	border: 1px solid #bdbdbd;
+}
+
+.passed_line {
+	border: 1px solid #ee3425;
+}

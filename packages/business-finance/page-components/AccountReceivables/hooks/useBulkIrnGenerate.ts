@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { useRequestBf } from '@cogoport/request';
 
 interface Props {
@@ -6,9 +7,13 @@ interface Props {
 	checkedRows?:string[],
 	setCheckedRows?:Function,
 	setIsHeaderChecked?:Function,
+	entityCode?:string,
 }
 
-const useBulkIrnGenerate = ({ getOrganizationInvoices, checkedRows, setCheckedRows, setIsHeaderChecked }:Props) => {
+const useBulkIrnGenerate = (
+	{ entityCode, getOrganizationInvoices, checkedRows, setCheckedRows, setIsHeaderChecked }:Props,
+) => {
+	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 	const [
 		{ loading:bulkIrnLoading },
 		bulkIrnTrigger,
@@ -30,7 +35,7 @@ const useBulkIrnGenerate = ({ getOrganizationInvoices, checkedRows, setCheckedRo
 			});
 			if (resp.status === 200) {
 				Toast.success(
-					'Request sent! IRN status awaited...',
+					`Request sent! ${irnLabel} status awaited...`,
 				);
 				getOrganizationInvoices(); // refetching the list
 				setCheckedRows([]);

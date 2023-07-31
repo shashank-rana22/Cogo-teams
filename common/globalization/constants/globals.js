@@ -10,8 +10,10 @@ const GLOBAL_CONSTANTS = {
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 	},
 	country_ids: {
-		IN: '541d1232-58ce-4d64-83d6-556a42209eb7',
+		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
+		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
 	},
+
 	platform_supported_country_codes: ['IN', 'VN'],
 
 	currency_code   : CURRENCY_CODE,
@@ -45,6 +47,7 @@ const GLOBAL_CONSTANTS = {
 			'hh:mm aaa' : 'hh:mm aaa',
 			'HH:mm'     : 'HH:mm',
 			'hh:mm:ss'  : 'hh:mm:ss',
+			'HH:mm:ss'  : 'HH:mm:ss',
 			hh          : 'hh',
 			HH          : 'HH',
 			mm          : 'mm',
@@ -55,12 +58,13 @@ const GLOBAL_CONSTANTS = {
 		razer_pay_url: 'https://checkout.razorpay.com/v1/checkout.js',
 	},
 	sample_document_url: {
-		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com
-		/ab3309b85b52e198b4c2bb691a7fb609/new_employee_bulk_upload_sample_sheet.csv`,
+		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
+						a3072d28df04315514414abe46a8c2f0/new_employee_bulk_upload_sample_sheet.csv`,
 	},
 	flash_booking_charge_codes: [
 		'OTC',
 		'BAS',
+		'BASNO',
 		'AGC',
 		'STC',
 		'IHC',
@@ -135,22 +139,23 @@ const GLOBAL_CONSTANTS = {
 		'CCOV',
 	],
 	uuid: {
-		amitabh_user_id        : 'cd8dde11-678c-4467-85b2-2e2d6055bef4',
-		superadmin_id          : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
-		tech_superadmin_id     : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
-		cogoacademy_admin_id   : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
-		sagar_bankar_user_id   : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
-		ajeet_singh_user_id    : '4bafde92-a30f-44d3-ace4-584dd460143e',
-		sachin_mehra_user_id   : '68c7e272-0c66-43a9-9537-eedb4e543194',
-		vinod_talapa_user_id   : '6d713339-c528-4696-9f7b-c01f86887ac1',
-		local_charge_providers : {
+		amitabh_user_id         : 'cd8dde11-678c-4467-85b2-2e2d6055bef4',
+		superadmin_id           : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
+		tech_superadmin_id      : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
+		cogoacademy_admin_id    : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
+		sagar_bankar_user_id    : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
+		ajeet_singh_user_id     : '4bafde92-a30f-44d3-ace4-584dd460143e',
+		hk_user_id              : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
+		sachin_mehra_user_id    : '68c7e272-0c66-43a9-9537-eedb4e543194',
+		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
+		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
+		local_charge_providers  : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
 			UK : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
 		},
-		third_party_enrichment_agencies_role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
-		paramount_org_id                         : '1e4b9f43-4863-4e29-a944-8e9e8780e514',
-		rfq_admin_ids                            : [
+		paramount_org_id : '1e4b9f43-4863-4e29-a944-8e9e8780e514',
+		rfq_admin_ids    : [
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
 			'ebafce31-75ef-4865-9060-775574e9606f',
 		],
@@ -182,7 +187,7 @@ const GLOBAL_CONSTANTS = {
 		empty_state               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		empty_port                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
 		empty_chart:
-		'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
+			'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
 		empty_customer_card : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg',
 		email_svg           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg',
 		platform_chat_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg',
@@ -234,8 +239,12 @@ const GLOBAL_CONSTANTS = {
 		call_icon            : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/call_light.svg',
 		whatsapp_icon        : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg',
 		email_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg',
+		login_failed         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/login_failed.png',
+		checkout_failed      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/checkout_failed.png',
+		email_clicked        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email_clicked.png',
+		abandon_shipmemts    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/abandon_shipmemts.png',
 		cargo_insurance_loader:
-		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
+			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
 		seller_address_svg : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
 		empty_promocode    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg',
 		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
@@ -249,26 +258,61 @@ const GLOBAL_CONSTANTS = {
 		spam_flag_icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam_flag_black.png',
 		email_inbox_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/inbox_icon.png',
 		colored_loading     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
+		over_due_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg',
+		due_in_svg          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg',
+		cogo_assured_svg    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg',
+		empty_data          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
+		empty_data_image    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
+		awb_docs_images     : {
+			original_3:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',
+			original_2:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/34f4ab91d2f08e432f5e99cec869e07b/original_2.png',
+			original_1:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/30186a4d8094f78fffba0aeac1847cd0/original_1.png',
+			copy_9:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/5b6c3ea3e1a28d1c3060f835ad206e99/copy_9.png',
+			copy_4:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/1c5be0fc713882e9b85303b62d3f1ac8/copy_4.png',
+			copy_5:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/3a65756e817610ddf75769c89145eb84/copy_5.png',
+			copy_6:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/84eaddd1db3e444b25d1ce0066f19581/copy_6.png',
+			copy_7:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/ca3a74c08dd2aabcba392de64cd04ed6/copy_7.png',
+			copy_8:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/c56cba1039292819dd6d700d5d8f5d07/copy_8.png',
+			copy_10:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/94fec99404e921d7a1de47c30a4e5afa/copy_10.png',
+			copy_11:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/daabebf1b3ade5afb890dbc79ce3b9eb/copy_11.png',
+			copy_12:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
+		},
+		awb_docs_tnc_page:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
+		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
+		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
+		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
+		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',
+		organization         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/organ-svg.svg',
+		user_activity        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user-actrivity.svg',
+		clock                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/alarm-timer.svg',
+		note                 : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note.svg',
+		quick_actions        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg',
+		customer_insights    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg',
+		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
+		clock_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
+		sad_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
+		sign_up_failed       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
 	},
+
+	video_call_ring_tone_url:
+	'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/microsoft_teams_audio_call_tone.mp3',
+
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
-		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
-	},
-	drive_link: {
-		introduction_to_cogoport_link:
-		'https://drive.google.com/file/d/1LHKPCefOzcakw7-uoy2dQCuWI0lbLz8y/view?usp=drive_link',
-		git_course_link:
-		'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
-		html_css_course_link:
-		'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
-		html_css_assessment:
-		'https://drive.google.com/file/d/1N1HFExQLhUaeppFEdOYUz5H1lMQq1GOx/view?usp=drive_link',
-		responsive_web_design:
-		'https://drive.google.com/file/d/17-q8E1OtNaqzG5eDqUriA9JL4IDVTpeX/view?usp=drive_link',
-		responsive_web_design_assessment:
-		'https://drive.google.com/file/d/1uqJ8jiDcDj6-6Yd_mQnBE3muuoFpGmbf/view?usp=sharing',
-		javascript_basics_game_development:
-		'https://drive.google.com/file/d/1IIVowcpe4EurhYamS16h1n2oyjUFAns8/view?usp=sharing',
+			+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
 	},
 
 	urls: {
@@ -339,6 +383,7 @@ const GLOBAL_CONSTANTS = {
 			{ value: 'business_analyst', label: 'Business Analyst' },
 			{ value: 'product_analyst', label: 'Product Analyst' },
 			{ value: 'business_consultant', label: 'Business Consultant' },
+			{ value: 'key_accounts_manager', label: 'Key Accounts Manager' },
 		],
 		timezone_options: [
 			{
@@ -354,28 +399,43 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
-		number          : /^[+-]?\d*\.?\d+$/,
-		white_space     : /\s+/,
-		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
-		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
-		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
-		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
+		number           : /^[+-]?\d*\.?\d+$/,
+		white_space      : /\s+/,
+		email            : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		pan_number       : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+		aadhar_number    : /^[1-9]{1}[0-9]{11}$/g,
+		passport_number  : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
+		ifsc_code        : /^[A-Za-z]{4}\d{7}$/,
+		eway_bill_number : /^\d{12}$/,
 		url_match:
-		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
+			'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
+		mime                              : /:(.*?);/m,
 		double_curly_braces_pattern       : /\{\{([^{}]+)\}\}/g,
 		occurrences_of_paragraphs_tag     : /<p>\s+(<[/]p>)/g,
 		enclosed_within_forward_slashes   : /<p>(<[/]p>)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
+		occurrences_of_line_breaks        : /(\r\n|\r|\n)/g,
+		url_match_regex:
+		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/,
+		ends_with_star_space   : /\* /,
+		ends_with_star_char    : /\*[^0-9a-zA-Z]/,
+		string_to_array        : /'/g,
+		file_upload_url        : /:finalUrl=>"([^"]*)"/,
+		four_characters_pin    : /^.{4}$/,
+		amount_seperator       : /\D/g,
+		white_space_characters : /\s/g,
+		email_subject_prefix   : /^(re|fwd|fw):\s*/i,
 	},
 	zeroth_index                 : 0,
+	milliseconds_in_one_day      : 86400000,
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
 	others                       : {
-		old_shipment_serial_id  : 120347,
-		cogopoint_default_value : 0,
+		old_shipment_serial_id      : 120347,
+		cogopoint_default_value     : 0,
+		fcl_import_new_process_date : '2023-07-27T00:00:00',
 
 	},
 	shipment_types: [
@@ -395,6 +455,9 @@ const GLOBAL_CONSTANTS = {
 		feature_supported_service: {
 			cargo_insurance: {
 				countries: ['IN'],
+			},
+			treasury: {
+				currencies: ['INR', 'USD', 'VND'],
 			},
 		},
 	},

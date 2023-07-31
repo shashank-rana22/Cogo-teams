@@ -13,6 +13,15 @@ import Loader from './Loader';
 import ServiceDetails from './ServiceDetails';
 import styles from './styles.module.css';
 
+function Heading({ serviceCategory = '', canUpsell = false }) {
+	if (!canUpsell && serviceCategory === 'originServices') return null;
+	return (
+		<div className={styles.header}>
+			{startCase(serviceCategory)}
+		</div>
+	);
+}
+
 function Services() {
 	const {
 		shipment_data,
@@ -21,6 +30,7 @@ function Services() {
 		servicesList,
 		servicesLoading,
 		activeStakeholder,
+		stakeholderConfig,
 	} = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
@@ -35,11 +45,9 @@ function Services() {
 
 	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
 
-	const { data = {} } = useGetBuyers({ shipment_id: shipment_data?.id });
+	const canUpsell = !!stakeholderConfig?.overview?.can_upsell;
 
-	const heading = (serviceCategory) => (
-		<div className={styles.header}>{ startCase(serviceCategory)}</div>
-	);
+	const { data = {} } = useGetBuyers({ shipment_id: shipment_data?.id });
 
 	return !servicesLoading && !isGettingShipment
 		? (
@@ -47,12 +55,11 @@ function Services() {
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<>
-							{ !isKam
-								? heading(serviceCategory) : null}
+							{!isKam ? <Heading serviceCategory={serviceCategory} canUpsell={canUpsell} /> : null}
 
-							{ isKam
+							{isKam
 							&& showTradeHeading[`${serviceCategory.split('Services')[GLOBAL_CONSTANTS.zeroth_index]}`]
-								? heading(serviceCategory) : null}
+								? <Heading serviceCategory={serviceCategory} canUpsell={canUpsell} /> : null}
 
 							<div className={styles.trade_services}>
 								{(Object.keys(serviceObj[serviceCategory])).map((service) => (
@@ -63,23 +70,25 @@ function Services() {
 								))}
 							</div>
 
-							<div className={styles.upselling}>
-								{(upsellServices[serviceCategory]).map((service) => (
-									<AddNewService
-										key={`${service?.trade_type}_${service?.service_type}`}
-										upsellableService={service}
-										servicesList={servicesList}
-										shipmentData={shipment_data}
-										primary_service={primary_service}
-										cancelUpsellDestinationFor={cancelUpsellDestinationFor}
-										cancelUpsellOriginFor={cancelUpsellOriginFor}
-										activeStakeholder={activeStakeholder}
-										setShowTradeHeading={setShowTradeHeading}
-										showTradeHeading={showTradeHeading}
-										userServicesData={data}
-									/>
-								))}
-							</div>
+							{canUpsell ? (
+								<div className={styles.upselling}>
+									{(upsellServices[serviceCategory]).map((service) => (
+										<AddNewService
+											key={`${service?.trade_type}_${service?.service_type}`}
+											upsellableService={service}
+											servicesList={servicesList}
+											shipmentData={shipment_data}
+											primary_service={primary_service}
+											cancelUpsellDestinationFor={cancelUpsellDestinationFor}
+											cancelUpsellOriginFor={cancelUpsellOriginFor}
+											activeStakeholder={activeStakeholder}
+											setShowTradeHeading={setShowTradeHeading}
+											showTradeHeading={showTradeHeading}
+											userServicesData={data}
+										/>
+									))}
+								</div>
+							) : null }
 						</>
 					))}
 				</div>

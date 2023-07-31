@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Loader } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useRef, useState, useEffect } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import useListDocuments from '../../../../../hooks/useListDocuments';
 import useListShipmentTradeDocuments from '../../../../../hooks/useListShipmentTradeDocuments';
@@ -11,6 +11,9 @@ import useDraftBLHelper from './hooks/useDraftBLHelper';
 import MBLDetails from './MBLDetails';
 import styles from './styles.module.css';
 import UploadHbl from './UploadHbl';
+
+const ZERO_CHECK = 0;
+const INCREMENT_VALUE = 1;
 
 function UploadDraftBL({
 	task = {},
@@ -23,6 +26,13 @@ function UploadDraftBL({
 	const [showSwitchGenerate, setShowSwitchGenerate] = useState(true);
 	const [canUseSwitch, setcanUseSwitch] = useState(true);
 	const mblRef = useRef();
+
+	const { list:hblList } = useListDocuments({
+		filters: {
+			document_type : 'si',
+			shipment_id   : shipmentData?.id,
+		},
+	});
 
 	const isHBL = (primaryService.bl_category || '').toLowerCase() === 'hbl';
 
@@ -53,7 +63,7 @@ function UploadDraftBL({
 				shipment_id   : task?.shipment_id,
 				document_type : 'bluetide_hbl',
 			},
-			page_limit: 1000,
+			page_limit: 60,
 		},
 	});
 
@@ -73,7 +83,7 @@ function UploadDraftBL({
 
 	useEffect(() => {
 		setcanUseSwitch(
-			(shipmentDocsLength || 0) <= 0 && (tradeDocsLength || 0) <= 0,
+			(shipmentDocsLength || ZERO_CHECK) <= ZERO_CHECK && (tradeDocsLength || ZERO_CHECK) <= ZERO_CHECK,
 		);
 		setIsAllHblUploaded(
 			tradeDocsLength >= blCount || shipmentDocsLength >= blCount,
@@ -87,9 +97,10 @@ function UploadDraftBL({
 		createTradeDocLoading,
 	} = useDraftBLHelper({
 		pendingTask: task,
+		shipmentData,
 	});
 
-	const showUploadView = shipmentDocsLength > 0 && tradeDocsLength === 0;
+	const showUploadView = !isEmpty(shipmentDocsLength) && isEmpty(tradeDocsLength);
 
 	const isNextDisabled = (isHBL && !isAllHBLUploaded) || ((!isHBL || isAllHBLUploaded) && loading);
 
@@ -160,16 +171,22 @@ function UploadDraftBL({
 				<section>
 					{showSwitchGenerate ? (
 						<>
-							{Array(blCount)
-								.fill(null)
-								.map((n, i) => (
-									<div className={styles.flex_container} key={uuid()}>
+							{createTradeDocLoading
+								? (
+									<div className={styles.create_hbl_loader}>
+										<Loader />
+										Creating Draft HBL Document...
+									</div>
+								)
+								:	Array(blCount).fill(null).map((n, i) => (
+									<div className={styles.flex_container} key={tradeDocList?.list?.[i]?.data?.id}>
 										<div className={styles.text}>
 											HBL
-											&nbsp;
-											{i + 1}
+											{' '}
+											{i + INCREMENT_VALUE}
 										</div>
 										<HBLCreate
+											initHblDataObj={hblList?.list?.[i]}
 											completed={tradeDocList?.list?.[i]}
 											hblData={hblData[i] || tradeDocList?.list?.[i]?.data}
 											onSave={(v) => handleSaveHBL(i, v)}
@@ -178,13 +195,14 @@ function UploadDraftBL({
 										/>
 									</div>
 								))}
+
 							{!isAllHBLUploaded ? (
 								<div className={styles.flex_end}>
 									<Button
 										disabled={hblData?.length !== blCount || createTradeDocLoading}
 										onClick={saveAllBls}
 									>
-										Save All HBLs
+										Save All HBL
 									</Button>
 								</div>
 							) : null}
