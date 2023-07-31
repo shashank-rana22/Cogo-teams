@@ -6,7 +6,7 @@ import { LOCATION_KEYS } from '../constants/map_constants';
 const EXCLUDE_KEYS = ['origin', 'destination', 'service_type', 'origin_type', 'destination_type',
 	'is_origin_icd', 'date_diff', 'is_destination_icd', 'end_date'];
 
-const getFormattedPayload = (globalFilters, excludeKeys = []) => {
+const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 	const keysToExclude = [...EXCLUDE_KEYS, ...excludeKeys];
 	const filters = Object.fromEntries(Object.entries(globalFilters)
 		.filter(([key, v]) => v && !keysToExclude.includes(key)));
