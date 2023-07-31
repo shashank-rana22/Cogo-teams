@@ -1,0 +1,42 @@
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 12px;
+	background: #fff;
+	border: 1px solid #f8f2e7;
+}
+
+.orgin_port {
+	width: 22%;
+	text-align: center;
+}
+
+.arrow_logo {
+	width: 2%;
+}
+
+.destination_port {
+	width: 22%;
+	text-align: center;
+}
+
+.high_demand_port_pairs {
+	width: 8%;
+	text-align: center;
+}
+
+.rated_acquired {
+	width: 10%;
+	text-align: center;
+}
+
+.forecasted_demand {
+	width: 15%;
+	text-align: center;
+}
+
+.action_logo {
+	width: 4%;
+}

@@ -7,7 +7,8 @@ import styles from './styles.module.css';
 import Tab from './Tab';
 
 function PageView() {
-	const [activeTab, setActiveTab] = useState('port_pairs');
+	const [activeTab, setActiveTab] = useState('fcl_freight');
+
 	return (
 		<div>
 			<Header />

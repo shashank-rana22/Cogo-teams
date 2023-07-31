@@ -38,7 +38,7 @@ function ForecastList() {
 			<div className={styles.row}>
 				{tableConfig.map((config) => {
 					const { key, title, width } = config;
-					return <div key={key} style={{ width, textAlign: 'center' }}>{title}</div>;
+					return <div key={key} className={styles.header} style={{ width }}>{title}</div>;
 				})}
 			</div>
 			{

@@ -2,13 +2,8 @@ import { TabPanel, Tabs } from '@cogoport/components';
 
 const TABS_MAPPING = [
 	{
-		name  : 'port_pairs',
-		title : 'Port Pairs',
-
-	},
-	{
-		name  : 'clusters',
-		title : 'Clusters',
+		name  : 'fcl_freight',
+		title : 'FCL',
 
 	},
 ];

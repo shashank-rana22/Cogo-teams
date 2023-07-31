@@ -1,43 +1,18 @@
-.container {
-	padding: 16px;
-	background-color: #ffe5ce;
+.card {
+	margin: 8px 0;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
 }
 
 .title {
-	display: flex;
-	padding: 8px;
-	background-color: #fdfbf6;
-	border-radius: 6px 6px 0 0;
-
-	/* justify-content: space-between; */
-}
-
-.table_column {
-	width: 80%;
-	margin: 16px;
-	background-color: #fff;
-	border: 1px solid #cfbc93;
-	border-radius: 6px;
-}
-
-.info {
-	display: flex;
-	justify-content: space-between;
 	padding: 12px;
 	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 500;
 }
 
-.column {
-	display: flex;
-	justify-content: space-between;
-	background: #fff;
-	border-radius: 6px;
-}
-
-.name {
-	margin-right: 6px;
-}
-
-.logo {
-	margin-right: 8px;
+.sub_card {
+	padding: 12px;
+	background-color: #fdfbf6;
 }

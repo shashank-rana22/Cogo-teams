@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMPortArrow } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -6,7 +5,7 @@ import SubCard from '../SubCard';
 
 import styles from './styles.module.css';
 
-function Card({ card }) {
+function Card({ card = {} }) {
 	const [showDetails, sethowDetails] = useState(false);
 
 	const handleChange = () => {
@@ -17,7 +16,7 @@ function Card({ card }) {
 
 	return (
 		<div>
-			<div className={cl`${styles.row} ${showDetails ? styles.details_background : ''}`}>
+			<div className={styles.row}>
 				<dv className={styles.orgin_port}>
 					{orgin_port}
 				</dv>
