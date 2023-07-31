@@ -19,7 +19,7 @@ export default function ShipmentPageContainer({ isGettingShipment, getShipmentSt
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
 			<section className={styles.loading_wrapper}>
-				<ThreeDotLoader message="Loading Shipments" fontSize={18} size={45} />
+				<ThreeDotLoader message="Loading Shipment" fontSize={18} size={45} />
 			</section>
 		);
 	}

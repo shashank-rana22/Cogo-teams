@@ -10,7 +10,6 @@ import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocum
 
 import styles from './styles.module.css';
 
-const REGEX = /:finalUrl=>"([^"]*)"/;
 const GET_FINAL_URL = 1;
 
 function ReviewDoc({
@@ -93,7 +92,7 @@ function ReviewDoc({
 
 	const getfileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
-			const match = url.match(REGEX);
+			const match = url.match(GLOBAL_CONSTANTS.regex_patterns.file_upload_url);
 			return match[GET_FINAL_URL];
 		}
 
