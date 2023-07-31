@@ -25,7 +25,7 @@ const getSearchResultsPayload = ({
 					: 'ftl_freight',
 			...(origin_cargo_handling_type === 'stuffing_at_factory'
 				? {
-					trailer_freight_services: getServiceWisePayload({
+					trailer_freight_services_attributes: getServiceWisePayload({
 						additionalFormInfo,
 						detail,
 						service_name: 'trailer_freight',
@@ -33,7 +33,7 @@ const getSearchResultsPayload = ({
 					}),
 				}
 				: {
-					ftl_freight_services: getServiceWisePayload({
+					ftl_freight_services_attributes: getServiceWisePayload({
 						additionalFormInfo,
 						detail,
 						service_name: 'ftl_freight',
@@ -52,7 +52,7 @@ const getSearchResultsPayload = ({
 					: 'ftl_freight',
 			...(destination_cargo_handling_type !== 'destuffing_at_dock'
 				? {
-					trailer_freight_services: getServiceWisePayload({
+					trailer_freight_services_attributes: getServiceWisePayload({
 						additionalFormInfo,
 						detail,
 						service_name: 'trailer_freight',
@@ -60,7 +60,7 @@ const getSearchResultsPayload = ({
 					}),
 				}
 				: {
-					ftl_freight_services: getServiceWisePayload({
+					ftl_freight_services_attributes: getServiceWisePayload({
 						additionalFormInfo,
 						detail,
 						service_name: 'ftl_freight',
