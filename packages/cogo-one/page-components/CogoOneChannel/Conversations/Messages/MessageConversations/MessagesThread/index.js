@@ -134,7 +134,7 @@ function MessagesThread(
 					>
 						<div className={styles.new_messages_count}>
 							{new_message_count > MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT
-								? '99+'
+								? `${MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT}+`
 								: new_message_count}
 						</div>
 						<IcMArrowDoubleDown className={styles.arrowicon} />
