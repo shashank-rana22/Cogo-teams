@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import {
 	IcMOverflowDot, IcMCross,
-	IcMDownload,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -48,11 +47,13 @@ function TicketPopoverContent({
 	return (
 		<div className={styles.actions}>
 			<Button size="md" themeType="secondary" onClick={triggerModal}>
+
 				Raise a ticket
 			</Button>
 			{isTag ? (
 				<>
 					<Button size="md" themeType="secondary" onClick={handleTag} className={styles.tags}>
+
 						Tag to SID
 					</Button>
 					<Button
@@ -61,10 +62,7 @@ function TicketPopoverContent({
 						onClick={() => handleDownload({ imgUrl: data?.response?.media_url })}
 						className={styles.tags}
 					>
-						<IcMDownload
-							className={styles.download}
-						/>
-						{' '}
+
 						Download
 					</Button>
 				</>
