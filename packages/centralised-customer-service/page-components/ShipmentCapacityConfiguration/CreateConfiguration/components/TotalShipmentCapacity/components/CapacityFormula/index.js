@@ -29,7 +29,7 @@ function CapacityFormula({ data = {} }) {
 		return {
 			name  : slab_lower_limit,
 			value : slab_lower_limit,
-			label : `${slab_lower_limit}${getUpperLimit(slab_upper_limit)} ${slab_unit}`,
+			label : `${slab_lower_limit}${getUpperLimit(slab_upper_limit)} ${slab_unit}s`,
 		};
 	});
 
@@ -38,15 +38,25 @@ function CapacityFormula({ data = {} }) {
 		CAPACITY_OBJECT[slab_lower_limit] += (shipment_capacity * normalized_capacity);
 	});
 
+	const TOTAL_CAPACITY = Object.values(CAPACITY_OBJECT).reduce((acc, currValue) => acc + currValue, DEFAULT_VALUE);
+
 	return (
 		<div className={styles.container}>
 
+			<RadioGroup
+				options={radioOptions}
+				onChange={(val) => {
+					setValue(Number(val));
+				}}
+				value={value}
+			/>
+
 			<div className={styles.individual_capacity}>
-				<div>Individual Combined Capacity</div>
+				<div className={styles.title}>Individual Combined Capacity</div>
 
 				<div>
 
-					<div className={styles.inner_container}>
+					<div className={styles.inner_container_one}>
 						<div className={styles.equal_sign}>&#61;</div>
 
 						<div className={styles.value}>
@@ -60,11 +70,11 @@ function CapacityFormula({ data = {} }) {
 						</div>
 					</div>
 
-					<div className={styles.inner_container}>
+					<div className={styles.inner_container_one}>
 						<div className={styles.equal_sign}>&#61;</div>
 
 						<div className={styles.value}>
-							{CAPACITY_OBJECT[value]}
+							{CAPACITY_OBJECT[value.toString()]}
 						</div>
 					</div>
 
@@ -72,7 +82,35 @@ function CapacityFormula({ data = {} }) {
 
 			</div>
 
-			<RadioGroup options={radioOptions} onChange={(val) => setValue(val)} value={value} />
+			<div className={styles.individual_capacity}>
+				<div className={styles.title}>Total Capacity</div>
+
+				<div>
+
+					<div className={styles.inner_container_two}>
+						<div className={styles.equal_sign}>&#61;</div>
+
+						<div className={styles.value}>
+							<div className={styles.symbol}>
+								&#931;
+								{' '}
+								<span>Individual Combined Capacity</span>
+							</div>
+						</div>
+					</div>
+
+					<div className={styles.inner_container_one}>
+						<div className={styles.equal_sign}>&#61;</div>
+
+						<div className={styles.value}>
+							{TOTAL_CAPACITY}
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
 		</div>
 	);
 }

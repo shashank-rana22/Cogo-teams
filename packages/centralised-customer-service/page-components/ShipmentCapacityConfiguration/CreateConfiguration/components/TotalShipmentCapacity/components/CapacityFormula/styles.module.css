@@ -1,12 +1,26 @@
 .container {
-	padding: 8px 14px;
+	padding: 8px 20px;
 	margin-top: 50px;
 	background: #fff;
 	border-radius: 6px;
+
+	:global {
+		.ui_radiogroup_container {
+			padding: unset;
+			margin-top: 30px;
+			margin-bottom: 40px;
+		}
+
+		.ui_radio_container {
+			padding: unset;
+			margin-right: 40px;
+		}
+	}
 }
 
 .individual_capacity {
 	display: flex;
+	margin-bottom: 30px;
 }
 
 .symbol {
@@ -35,6 +49,19 @@
 	display: flex;
 }
 
-.inner_container {
+.inner_container_one,
+.inner_container_two {
 	display: flex;
+}
+
+.inner_container_two {
+	span {
+		font-size: 18px;
+	}
+
+	align-items: center;
+}
+
+.title {
+	flex-basis: 20%;
 }

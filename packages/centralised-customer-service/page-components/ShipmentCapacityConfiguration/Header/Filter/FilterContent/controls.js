@@ -1,14 +1,15 @@
 const controls = [
 	{
-		label       : 'Filter By Cogo Entity',
 		name        : 'cogo_entity_id',
-		asyncKey    : 'partners',
+		label       : 'Select Cogo Entity',
 		type        : 'async-select',
+		placeholder : 'Select Cogo Entity',
 		initialCall : true,
+		asyncKey    : 'partners',
 		params      : {
 			filters: {
-				entity_types   : ['cogoport'],
-				current_status : 'active',
+				entity_types : ['cogoport'],
+				status       : 'active',
 			},
 			page_limit: 10,
 		},
