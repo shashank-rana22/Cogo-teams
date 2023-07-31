@@ -12,6 +12,7 @@ import ColumnCard from './Common/CustumTable/ColumnCard';
 import Header from './Common/CustumTable/Header';
 import StatsCard from './Common/StatsCard';
 import { CUSTOMERS_CONFIG } from './Configuration/customers';
+import useGetProfitabilityStats from './hooks/useGetProfitabilityStats';
 import MultipleFilters from './MultipleFilters';
 import ReceivablesOutstandings from './ReceivablesOutstandings';
 import styles from './styles.module.css';
@@ -53,6 +54,9 @@ function CogoFinancials() {
 	const [entity, setEntity] = useState(DEFAULT_ENTITY);
 	const [activeShipmentCard, setActiveShipmentCard] = useState('');
 	const [showShipmentList, setShowShipmentList] = useState(false);
+	const [filter, setFilter] = useState({});
+
+	const { financialData, financialLoading } = useGetProfitabilityStats({ filter, entity, timeRange });
 
 	const handleClick = () => {
 		setShowShipmentList(false);
@@ -86,7 +90,10 @@ function CogoFinancials() {
 							background="#FFFAEB"
 						/>
 					</div>
-					<MultipleFilters />
+					<MultipleFilters
+						filter={filter}
+						setFilter={setFilter}
+					/>
 					<Select
 						value={entity}
 						onChange={setEntity}
@@ -120,6 +127,9 @@ function CogoFinancials() {
 						type="Financially"
 						cardId="financial"
 						setActiveShipmentCard={setActiveShipmentCard}
+						financialData={financialData}
+						financialLoading={financialLoading}
+						taxType={isPreTax ? 'PreTax' : 'PostTax'}
 					/>
 				</div>
 			) : (
@@ -161,6 +171,9 @@ function CogoFinancials() {
 									cardId="financial"
 									setActiveShipmentCard={setActiveShipmentCard}
 									isAdditonalView
+									financialData={financialData}
+									financialLoading={financialLoading}
+									taxType={isPreTax ? 'PreTax' : 'PostTax'}
 								/>
 							</div>
 						)}

@@ -1,5 +1,6 @@
 import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar';
 import { cl } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import RenderCardHeader from '../Common/RenderCardHeader';
@@ -11,24 +12,41 @@ const LABEL_MAPPING = {
 	Operationally : 'Operational',
 };
 
+const displayAmount = (amount, currency) => formatAmount({
+	amount,
+	currency,
+	options: {
+		style                 : 'currency',
+		currencyDisplay       : 'code',
+		maximumFractionDigits : 2,
+	},
+});
+
 function ClosedShipmentCard({
 	isDeviationVisible = true, type = 'Financially',
 	cardId = '', setActiveShipmentCard = () => {},
 	isAdditonalView = false,
 	showHeading = true,
 	wrapElement = false,
+	financialData = [],
+	financialLoading = false,
+	taxType = '',
 }) {
+	const {
+		currency,
+	} = financialData;
+
 	const data = [
 		{
 			id   : 'Cost',
 			data : [
 				{
 					x : 'Estimated Cost',
-					y : 80,
+					y : financialData[`estimatedCost${taxType}`],
 				},
 				{
 					x : `${LABEL_MAPPING[type]} Cost`,
-					y : 20,
+					y : financialData[`actualCost${taxType}`],
 				},
 			],
 		},
@@ -37,11 +55,11 @@ function ClosedShipmentCard({
 			data : [
 				{
 					x : 'Estimated Revenue',
-					y : 60,
+					y : financialData[`estimatedRevenue${taxType}`],
 				},
 				{
 					x : `${LABEL_MAPPING[type]} Revenue`,
-					y : 40,
+					y : financialData[`actualRevenue${taxType}`],
 				},
 			],
 		},
@@ -52,15 +70,31 @@ function ClosedShipmentCard({
 		{
 			rowId    : 'first_row',
 			children : [
-				{ label: 'Estimated Revenue', value: 'Curr XXXXX', color: '#cfeaed' },
-				{ label: 'Estimated Cost', value: 'Curr XXXXX', color: '#f8aea8' },
+				{
+					label : 'Estimated Revenue',
+					value : displayAmount(financialData[`estimatedRevenue${taxType}`], currency),
+					color : '#cfeaed',
+				},
+				{
+					label : 'Estimated Cost',
+					value : displayAmount(financialData[`estimatedCost${taxType}`], currency),
+					color : '#f8aea8',
+				},
 			],
 		},
 		{
 			rowId    : 'second_row',
 			children : [
-				{ label: `${LABEL_MAPPING[type]} Revenue`, value: 'Curr XXXXX', color: '#6fa5ab' },
-				{ label: `${LABEL_MAPPING[type]} Cost`, value: 'Curr XXXXX', color: '#ee3425' },
+				{
+					label : `${LABEL_MAPPING[type]} Revenue`,
+					value : displayAmount(financialData[`actualRevenue${taxType}`], currency),
+					color : '#6fa5ab',
+				},
+				{
+					label : `${LABEL_MAPPING[type]} Cost`,
+					value : displayAmount(financialData[`actualCost${taxType}`], currency),
+					color : '#ee3425',
+				},
 			],
 		},
 
@@ -99,20 +133,22 @@ function ClosedShipmentCard({
 					className={styles.responsive_graph_circular}
 					style={{ height: isAdditonalView ? '200px' : null }}
 				>
-					<ResponsiveRadialBar
-						data={data}
-						valueFormat=">-.2f"
-						padding={0}
-						cornerRadius={2}
-						radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
-						circularAxisOuter={{ tickSize: 5, tickPadding: 12, tickRotation: 0 }}
-						endAngle="360"
-						innerRadius={0.6}
-						enableRadialGrid={false}
-						enableCircularGrid={false}
-						layers={['tracks', 'bars']}
-						colors={['#f8aea8', '#ee3425', '#cfeaed', '#6fa5ab']}
-					/>
+					{!financialLoading && (
+						<ResponsiveRadialBar
+							data={data}
+							valueFormat=">-.2f"
+							padding={0}
+							cornerRadius={2}
+							radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
+							circularAxisOuter={{ tickSize: 5, tickPadding: 12, tickRotation: 0 }}
+							endAngle="360"
+							innerRadius={0.6}
+							enableRadialGrid={false}
+							enableCircularGrid={false}
+							layers={['tracks', 'bars']}
+							colors={['#f8aea8', '#ee3425', '#cfeaed', '#6fa5ab']}
+						/>
+					)}
 
 				</div>
 				<div className={styles.show_graph_data}>
