@@ -1,6 +1,6 @@
-import { Select, cl } from '@cogoport/components';
+import { Chips, Select, Tooltip, cl } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-import { IcMPortArrow } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import {
@@ -14,11 +14,15 @@ import {
 } from '../../../constants/dashboard_filter_controls';
 import { LOCATION_KEYS } from '../../../constants/map_constants';
 
+import FilterButton from './FilterButton';
 import styles from './styles.module.css';
 
 function Filters(props) {
 	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
 	const { service_type } = globalFilters;
+
+	const defaultOptions = [...TIME_RANGE_OPTIONS.default,
+		...TIME_RANGE_OPTIONS.more_options.filter(({ key }) => key === globalFilters.date_diff)];
 
 	const changePrimaryFilters = (key, value) => {
 		setGlobalFilters((prev) => ({ ...prev, [key]: value || undefined }));
@@ -90,21 +94,41 @@ function Filters(props) {
 					<IcMPortArrow className={styles.port_arrow_icon} />
 				</div>
 			</div>
-			<div className={styles.single_filter}>
+			<div className={cl`${styles.single_filter} ${styles.time_range}`}>
 				<p className={styles.title_label}>Time Range</p>
 				<div className={styles.time_range_container}>
-					{TIME_RANGE_OPTIONS.map(({ label, date_diff }) => (
+					{defaultOptions.map(({ children, key }) => (
 						<button
-							key={label}
+							key={children}
 							className={cl`${styles.custom_pill}
-							 ${date_diff === globalFilters.date_diff ? styles.active : ''}`}
-							onClick={() => changePrimaryFilters('date_diff', date_diff)}
+							 ${key === globalFilters.date_diff ? styles.active : ''}`}
+							onClick={() => changePrimaryFilters('date_diff', key)}
 						>
-							{label}
+							{children}
 						</button>
 					))}
+					<Tooltip
+						interactive
+						trigger="click"
+						content={(
+							<Chips
+								size="md"
+								items={TIME_RANGE_OPTIONS.more_options}
+								selectedItems={globalFilters.date_diff}
+								onItemChange={(val) => { if (val) changePrimaryFilters('date_diff', val); }}
+							/>
+						)}
+						placement="bottom-end"
+					>
+						<IcMArrowRotateDown className={styles.rotate_icon} />
+					</Tooltip>
 				</div>
 			</div>
+			<FilterButton
+				showText
+				globalFilters={globalFilters}
+				setGlobalFilters={setGlobalFilters}
+			/>
 		</div>
 	);
 }

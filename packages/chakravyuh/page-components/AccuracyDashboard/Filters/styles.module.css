@@ -9,8 +9,8 @@
 		height: 40px;
 	}
 
-	:global #dash-main-filters {
-		height: 40px;
+	.filter_btn {
+		height: 38px;
 	}
 }
 
@@ -41,7 +41,7 @@
 		}
 	}
 
-	&:last-of-type {
+	&.time_range {
 		margin-left: auto;
 	}
 }
@@ -50,22 +50,43 @@
 	display: flex;
 	align-items: center;
 	height: 40px;
-	padding: 0 4px;
+	padding: 0 12px 0 0;
 	background-color: #fff;
 	border-radius: 8px;
 
 	.custom_pill {
 		padding: 8px 12px;
-		margin: 12px;
+		margin: 4px;
 		color: #221f20;
 		background: #fff;
 		border: none;
+		transition: all 0.2s ease-out;
 
 		&:hover,
 		&.active {
-			color: #7b6637;
+			color: #6fa5ab;
 			cursor: pointer;
-			background: #fdfbf6;
+			transition: all 0.5s;
+		}
+	}
+
+	.rotate_icon {
+		margin-top: 4px;
+		fill: #4f4f4f;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	:global {
+		.ui_chips_container {
+			flex-wrap: wrap;
+		}
+
+		.ui_chip_container {
+			min-width: 54px !important;
+			padding: 2px 4px;
 		}
 	}
 }
@@ -124,13 +145,12 @@
 }
 
 .filters_container {
-	margin: 0 0 0 auto;
+	margin-left: 24px;
 
 	.btn_label {
 		margin: 0 4px 0 6px;
 		font-size: 16px;
 		font-weight: 600;
-		color: #221f20;
 	}
 
 	.filter_icon {

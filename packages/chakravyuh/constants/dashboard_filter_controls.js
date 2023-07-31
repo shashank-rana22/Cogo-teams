@@ -18,25 +18,36 @@ export const SELECT_ICON_MAPPING = {
 	air : <IcMAir />,
 };
 
-export const TIME_RANGE_OPTIONS = [
-	{
-		label     : '1W',
-		date_diff : 7,
-	},
-	{
-		label     : '1M',
-		date_diff : 30,
-	},
-	{
-		label     : '3M',
-		date_diff : 90,
-	},
-	{
-		label     : '6M',
-		date_diff : 180,
-	},
-	{
-		label     : 'all',
-		date_diff : 2500,
-	},
-];
+export const TIME_RANGE_OPTIONS = {
+	more_options: [
+
+		{
+			children : '1W',
+			key      : 7,
+		},
+
+		{
+			children : '1Y',
+			key      : 365,
+		},
+		{
+			children : 'all',
+			key      : 2500,
+		},
+	],
+	default: [
+		{
+			children : '1M',
+			key      : 30,
+		},
+		{
+			children : '3M',
+			key      : 90,
+		},
+		{
+			children : '6M',
+			key      : 180,
+		},
+
+	],
+};

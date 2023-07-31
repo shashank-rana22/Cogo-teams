@@ -18,6 +18,7 @@ import { getPolygonStyleProps } from '../../../../utils/map-utils';
 
 import ActiveRegions from './ActiveRegions';
 import Point from './AnimatedPoint';
+import MapEvents from './MapEvents';
 import styles from './styles.module.css';
 import WorldGeometry from './WorldGeometry';
 
@@ -41,6 +42,7 @@ function Map({
 	handleBackHierarchy = () => {},
 }) {
 	const [map, setMap] = useState(null);
+	const [zoom, setZoom] = useState(INITIAL_ZOOM);
 	const activeRef = useRef(null);
 
 	const lowestHierarchy = getLowestHierarchy(hierarchy);
@@ -103,7 +105,7 @@ function Map({
 				const features = cachedRef.getLayers();
 				const firstFeature = features[GLOBAL_CONSTANTS.zeroth_index];
 				firstFeature.openTooltip();
-				map.flyToBounds(firstFeature.getBounds(), { ...paddingOptions, duration: 0.5 });
+				map.flyToBounds(firstFeature.getBounds(), { ...paddingOptions, maxZoom: zoom });
 			} else {
 				cachedRef.openTooltip();
 			}
@@ -118,7 +120,7 @@ function Map({
 				}
 			}
 		};
-	}, [activeRef, isFull, setBounds, currentId, map]);
+	}, [activeRef, isFull, setBounds, currentId, map, zoom]);
 
 	return (
 		<CogoMaps
@@ -130,6 +132,7 @@ function Map({
 			maxZoom={7}
 			zoomPosition="topright"
 		>
+			<MapEvents setZoom={setZoom} />
 			<WorldGeometry
 				map={map}
 				ref={activeRef}

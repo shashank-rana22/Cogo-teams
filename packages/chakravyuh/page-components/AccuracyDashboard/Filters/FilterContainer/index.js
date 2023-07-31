@@ -9,8 +9,12 @@ import mutateFields from '../../../../utils/mutate-fields';
 
 import styles from './styles.module.css';
 
-function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, showText = true }) {
+function FilterContainer({
+	globalFilters = {}, setGlobalFilters = () => {}, showText = true,
+	setVisible = () => {}, view = '',
+}) {
 	const { service_type = 'fcl', mode = null } = globalFilters;
+
 	const {
 		control,
 		formState: { errors },
@@ -47,6 +51,11 @@ function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, show
 
 	const onSumbit = () => {
 		setGlobalFilters((prev) => ({ ...prev, ...values }));
+		setVisible(false);
+	};
+
+	const showElements = {
+		service_type: view === 'map_view',
 	};
 
 	return (
@@ -64,6 +73,7 @@ function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {}, show
 				fields={newFields}
 				errors={errors}
 				control={control}
+				showElements={showElements}
 			/>
 		</div>
 	);

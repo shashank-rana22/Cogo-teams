@@ -36,6 +36,10 @@
 		.filter-row-flex.md > button {
 			min-height: 26px;
 		}
+
+		.ui_select_input_control > p {
+			margin: 0;
+		}
 	}
 }
 

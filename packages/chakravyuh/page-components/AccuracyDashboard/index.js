@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
-import Heading from '../../common/Heading';
-
 import DashboardView from './Dashboard';
 import DrillDownView from './DrillDown';
 import Filters from './Filters';
+import Heading from './Heading';
 import MapView from './MapView';
 import styles from './styles.module.css';
 
@@ -45,11 +44,10 @@ function AccuracyDashboard() {
 							heading={heading}
 							setView={setView}
 							backView={backView}
-							showFilters
+							showFilters={false}
 							globalFilters={globalFilters}
 							setGlobalFilters={setGlobalFilters}
 						/>
-
 					</div>
 					<Filters
 						globalFilters={globalFilters}

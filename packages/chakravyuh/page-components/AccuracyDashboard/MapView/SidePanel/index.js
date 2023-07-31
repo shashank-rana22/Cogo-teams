@@ -5,9 +5,9 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useCallback, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import Heading from '../../../../common/Heading';
 import SortButton from '../../../../common/SortButton';
 import { SORT_OPTIONS } from '../../../../constants/map_constants';
+import Heading from '../../Heading';
 
 import GeoCoder from './GeoCoder';
 import List from './List';
@@ -32,6 +32,7 @@ function SidePanel({
 	setIsFull = () => {},
 	locationFilters = {},
 	setLocationFilters = () => {},
+	setGlobalFilters = () => {},
 	activeList = [],
 	globalFilters = {},
 	setActiveId = () => {},
@@ -74,7 +75,16 @@ function SidePanel({
 		<>
 			<div className={cl`${styles.side_container} ${isFull && styles.hide}`}>
 				<div className={styles.heading}>
-					<Heading setView={setView} backView={backView} heading="Map View" showFilterText={false} />
+					<Heading
+						setView={setView}
+						backView={backView}
+						heading="Map View"
+						showFilterText={false}
+						globalFilters={globalFilters}
+						setGlobalFilters={setGlobalFilters}
+						showFilters
+						view="map_view"
+					/>
 				</div>
 				<div className={styles.sticky_container}>
 					<GeoCoder

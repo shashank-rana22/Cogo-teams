@@ -12,7 +12,7 @@ import SeriesChart from './SeriesChart';
 import styles from './styles.module.css';
 
 const VALID_IDS = ['supply_rates', 'rate_extension', 'predicted', 'cluster_extension'];
-const TIME_LIMIT = 300;
+const TIME_LIMIT = 200;
 function ScallableAccuracy({
 	accuracy = [],
 	loading = false, mode = null,
