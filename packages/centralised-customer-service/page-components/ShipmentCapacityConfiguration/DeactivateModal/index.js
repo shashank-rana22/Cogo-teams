@@ -35,7 +35,7 @@ function DeactivateModal({ showModal = false, setShowModal = () => {}, id, statu
 					<Button
 						type="button"
 						themeType="secondary"
-						loading={loading}
+						disabled={loading}
 						onClick={() => setShowModal(false)}
 					>
 						Cancel
@@ -44,7 +44,7 @@ function DeactivateModal({ showModal = false, setShowModal = () => {}, id, statu
 					<Button
 						type="button"
 						style={{ marginLeft: '12px' }}
-						loading={loading}
+						disabled={loading}
 						onClick={() => updateCapacityConfig({ status: STATUS_MAPPING[status], id })}
 					>
 						{MESSAGE_MAPPING[status]}

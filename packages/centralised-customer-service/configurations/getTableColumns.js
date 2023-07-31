@@ -27,7 +27,7 @@ const getTableColumns = ({ slabData = [] }) => {
 				accessor : 'service',
 			},
 		],
-	) || [];
+	);
 
 	columns.push({
 		Header   : 'RELEASE TRIGGER',
