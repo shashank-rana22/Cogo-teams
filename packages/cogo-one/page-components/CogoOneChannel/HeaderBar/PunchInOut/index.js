@@ -21,7 +21,7 @@ const COUNT_DOWN_BUFFER_TIME = 120;
 const UPDATE_TIME_BY_ONE_SECOND = 1000;
 const MAX_SECOND_VALUE = 60;
 const TWO_DIGIT_NUMBER = 2;
-const BUTTON_SHAKE_DURATION = 120000;
+const BUTTON_SHAKE_DURATION = 300000;
 
 function PunchInOut({
 	fetchworkPrefernce = () => {},
