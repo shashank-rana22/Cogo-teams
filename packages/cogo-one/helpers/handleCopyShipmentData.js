@@ -4,7 +4,6 @@ import { startCase } from '@cogoport/utils';
 import { RENDER_VALUE_MAPPING, serviceDetails } from '../utils/detailsHelperFuncs';
 import { formatRouteData } from '../utils/routeDataHelpers';
 
-// const TO_FIXED_2 = 2;
 export const SHIPMENT_LABELS = [
 	'container_size',
 	'containers_count',
@@ -36,8 +35,6 @@ const handleCopyShipmentData = ({ shipmentItem }) => {
 	const { originDetails, destinationDetails } = formatRouteData({ item: shipmentItem });
 	const details = serviceDetails({ detail: shipmentItem, service: shipment_type });
 
-	// const { isLTL = false } = details;
-
 	const shipmentDetails = (SHIPMENT_LABELS || []).reduce(
 		(prev, label) => {
 			let newString = prev;
@@ -52,10 +49,6 @@ const handleCopyShipmentData = ({ shipmentItem }) => {
 			if (!value || !shipmentItem?.[label]) {
 				return newString;
 			}
-
-			// if (label === 'volume') {
-			// 	value = `${Number(value)?.toFixed(TO_FIXED_2)} ${isLTL ? 'cc' : 'cbm'}`;
-			// }
 
 			newString += `\n${startCase(label)} : ${value}`;
 			return newString;

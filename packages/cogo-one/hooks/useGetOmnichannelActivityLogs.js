@@ -13,8 +13,10 @@ const getParam = ({ user_id, lead_user_id, filters, activityTab, pagination }) =
 	t_filters: !isEmpty(filters) && activityTab === 'transactional' ? {
 		serial_id: filters.toString(),
 	} : undefined,
-	milestone_data_required     : activityTab === 'transactional' ? true : undefined,
-	get_shipment_quotation_data : activityTab === 'transactional' ? true : undefined,
+	extra_params: activityTab === 'transactional' ? {
+		milestone_data_required     : true,
+		get_shipment_quotation_data : true,
+	} : undefined,
 
 });
 

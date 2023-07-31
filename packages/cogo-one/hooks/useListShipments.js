@@ -10,7 +10,7 @@ const getParams = ({ pagination, serialId }) => ({
 		serial_id : serialId || undefined,
 	},
 	get_shipment_quotation_data : true,
-	// milestone_data_required     : true,
+	milestone_data_required     : true,
 	page                        : pagination,
 	page_limit                  : 6,
 });
