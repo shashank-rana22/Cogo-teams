@@ -5,7 +5,7 @@ import { useState } from 'react';
 import FeedBackModal from './FeedBackModal';
 import styles from './styles.module.css';
 
-function RequestRate({ details = {} }) {
+function RequestRate({ details = {}, className = {} }) {
 	const [showFeedbackModal, setShowFeedBackModal] = useState(false);
 
 	const addedAdditionalService = [];
@@ -46,13 +46,12 @@ function RequestRate({ details = {} }) {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${className}`}>
 			<div className={styles.left_section}>
 				<p className={styles.label}>Missing Rate Feedback</p>
 
 				<p className={styles.text}>
-					The rates for Zim Liner, Hapag Lloyed are unavailable.
-					Send feedback about unavailability to help the team improve rates.
+					Unable to find the rates? Send feedback to help the team improve rates.
 				</p>
 			</div>
 

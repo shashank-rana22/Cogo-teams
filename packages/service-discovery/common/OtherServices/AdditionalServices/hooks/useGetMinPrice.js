@@ -53,6 +53,7 @@ const useGetMinPrice = () => {
 	}, [trigger]);
 
 	useEffect(() => {
+		// console.log('hello');
 		getMinPrice();
 	}, [getMinPrice]);
 

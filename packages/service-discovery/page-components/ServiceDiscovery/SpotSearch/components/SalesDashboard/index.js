@@ -26,7 +26,26 @@ function SalesDashboard({
 				onChange={setActiveTab}
 			>
 				{allLists.map((listItem) => {
-					const { type = '', heading = '' } = listItem;
+					const newListItem = { ...listItem };
+
+					const { type = '', heading = '', fields = [] } = newListItem;
+
+					let finalFields = [...fields];
+
+					if (['most_searched', 'most_booked'].includes(type)) {
+						let btnObj = fields.filter((fieldItem) => fieldItem.func === 'renderButton');
+						const remainingFields = fields.filter((fieldItem) => fieldItem.func !== 'renderButton');
+
+						if (!importer_exporter_id) {
+							btnObj = [{
+								...btnObj?.[GLOBAL_CONSTANTS.zeroth_index],
+								disabled : true,
+								btnLabel : 'Select an Org',
+							}];
+						}
+
+						finalFields = [...remainingFields, ...btnObj];
+					}
 
 					return (
 						<TabPanel
@@ -36,7 +55,8 @@ function SalesDashboard({
 						>
 							<List
 								key={`${type}_${heading}`}
-								{...listItem}
+								{...newListItem}
+								fields={finalFields}
 								importer_exporter_id={importer_exporter_id || undefined}
 								service_type={service_type || undefined}
 								origin_location_id={origin_location_id || undefined}

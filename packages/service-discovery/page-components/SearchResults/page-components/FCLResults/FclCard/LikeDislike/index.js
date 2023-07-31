@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcCLike } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useLikeFeedback from '../../../../hooks/useLikeFeedback';
 
@@ -25,9 +25,11 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 
 	const { service_type = '' } = detail;
 
-	const { is_liked = false, likes_count = 0, is_disliked = false } = rateCardData;
-
-	const [likeState, setLikeState] = useState({ is_liked, likes_count, is_disliked });
+	const [likeState, setLikeState] = useState({
+		is_liked    : rateCardData?.is_liked,
+		likes_count : rateCardData?.likes_count,
+		is_disliked : rateCardData?.is_disliked,
+	});
 
 	const { handleLikeRateCard, loading } = useLikeFeedback({
 		setLikeState,
@@ -35,10 +37,6 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 		rate: rateCardData,
 		likeState,
 	});
-
-	if (!LIKE_DISLIKE_ALLOWED.includes(service_type)) {
-		return null;
-	}
 
 	const handleLikeAction = () => {
 		if (likeState.is_liked) { return; }
@@ -51,6 +49,18 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 	};
 
 	const onCloseFeedbackModal = () => { setShowFeedbackModal(false); };
+
+	useEffect(() => {
+		setLikeState({
+			is_liked    : rateCardData?.is_liked,
+			likes_count : rateCardData?.likes_count,
+			is_disliked : rateCardData?.is_disliked,
+		});
+	}, [rateCardData]);
+
+	if (!LIKE_DISLIKE_ALLOWED.includes(service_type)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>

@@ -7,6 +7,7 @@ import DetailFooter from './DetailFooter';
 import QuotationDetails from './QuotationDetails';
 import RateCardTop from './RateCardTop';
 import Route from './Route';
+import { SailingWeek } from './SailingWeek';
 import styles from './styles.module.css';
 
 function RateCardTopSection({
@@ -19,6 +20,9 @@ function RateCardTopSection({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
+	cogoAssuredOptions = [],
+	onChange = () => {},
+	selectedCogoAssuredCard = {},
 	isGuideViewed = false,
 }) {
 	return (
@@ -33,6 +37,9 @@ function RateCardTopSection({
 				infoBanner={infoBanner}
 				index={index}
 				setInfoBanner={setInfoBanner}
+				cogoAssuredOptions={cogoAssuredOptions}
+				onChange={onChange}
+				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				isGuideViewed={isGuideViewed}
 			/>
 		</div>
@@ -45,12 +52,17 @@ function MiddleSection({
 	rateCardData = {},
 	scheduleData = {},
 	isSelectedCard = false,
+	isCogoAssured = false,
 	setScreen = () => {},
 }) {
 	return (
 		<div className={styles.middle}>
 
-			<Route detail={detail} scheduleData={scheduleData} />
+			<Route
+				detail={detail}
+				scheduleData={scheduleData}
+				isCogoAssured={isCogoAssured}
+			/>
 
 			<div className={styles.rateDetails}>
 				<div style={{ marginRight: 24 }}>
@@ -124,9 +136,12 @@ function FclCard({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
+	cogoAssuredOptions = [],
+	onChange = () => {},
+	selectedCogoAssuredCard = {},
 	isGuideViewed = false,
 }) {
-	const { service_rates = {}, schedules = {}, transit_time_unit, transit_time } = rateCardData;
+	const { service_rates = {}, schedules = {}, transit_time_unit, transit_time, source } = rateCardData;
 	const primaryService = detail?.search_type;
 
 	const {
@@ -157,6 +172,7 @@ function FclCard({
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 			formatType : 'date',
 		}),
+		source,
 		transit_time,
 		transit_time_unit,
 		schedule_type,
@@ -179,6 +195,9 @@ function FclCard({
 				infoBanner={infoBanner}
 				index={index}
 				setInfoBanner={setInfoBanner}
+				cogoAssuredOptions={cogoAssuredOptions}
+				onChange={onChange}
+				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				isGuideViewed={isGuideViewed}
 			/>
 
@@ -187,9 +206,18 @@ function FclCard({
 				primaryServiceRates={primaryServiceRates}
 				rateCardData={rateCardData}
 				scheduleData={scheduleData}
+				isCogoAssured={isCogoAssured}
 				isSelectedCard={isSelectedCard}
 				setScreen={setScreen}
 			/>
+
+			{isCogoAssured && !isSelectedCard ? (
+				<SailingWeek
+					cogoAssuredOptions={cogoAssuredOptions}
+					onChange={onChange}
+					selectedCogoAssuredCard={selectedCogoAssuredCard}
+				/>
+			) : null}
 
 			<BottomSection
 				rateCardData={rateCardData}

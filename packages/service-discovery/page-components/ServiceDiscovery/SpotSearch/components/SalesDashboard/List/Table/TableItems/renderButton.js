@@ -39,6 +39,7 @@ const renderButton = (itemData, field, router) => {
 				size="md"
 				themeType="primary"
 				onClick={() => onClick(URL_MAPPING[field.key])}
+				disabled={field.disabled}
 			>
 				<span>
 					{BUTTON_LABEL_MAPPING[field.key] || 'Show Rates'}

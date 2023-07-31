@@ -1,7 +1,10 @@
 import { Loader, Pagination, cl } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 // import useScrollDirection from '../../../../../common/Header/useScrollDirection';
+import RequestRate from '../../../common/EmptyState/RequestRate';
+import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
 
 import ComparisonHeader from './ComparisonHeader';
@@ -10,8 +13,6 @@ import Schedules from './Schedules';
 import styles from './styles.module.css';
 
 const MAXIMUM_RATE_CARDS = 5;
-
-const ONE = 1;
 
 function HeaderTop({
 	detail = {},
@@ -24,7 +25,7 @@ function HeaderTop({
 	refetch = () => {},
 }) {
 	// const { scrollDirection } = useScrollDirection();
-	const showComparison = Object.keys(comparisonRates).length > ONE;
+	const showComparison = !isEmpty(comparisonRates);
 
 	return (
 		<div className={styles.header}>
@@ -116,6 +117,17 @@ function ListRateCards({
 
 	const show_dim_bg = current === 'comparision_button' && rates.length;
 
+	const cogoAssuredRates = [];
+	const marketplaceRates = [];
+
+	rates.forEach((rate) => {
+		if (rate.source === 'cogo_assured_rate') {
+			cogoAssuredRates.push(rate);
+		} else {
+			marketplaceRates.push(rate);
+		}
+	});
+
 	return (
 		<div className={cl`${styles.container} ${show_dim_bg && styles.dim_bg}`}>
 			<HeaderTop
@@ -139,9 +151,24 @@ function ListRateCards({
 				loading={loading}
 			/>
 
+			{loading ? null : (
+				<CogoAssuredCard
+					rates={cogoAssuredRates}
+					loading={loading}
+					detail={detail}
+					setSelectedCard={setSelectedCard}
+					setScreen={setScreen}
+					setComparisonRates={setComparisonRates}
+					comparisonRates={comparisonRates}
+					refetchSearch={refetchSearch}
+					infoBanner={infoBanner}
+					setInfoBanner={setInfoBanner}
+				/>
+			)}
+
 			{loading ? <LoaderComponent /> : null}
 
-			{(rates || []).map((rateCardData, index) => (
+			{(marketplaceRates || []).map((rateCardData, index) => (
 				<RateCard
 					key={rateCardData.id}
 					loading={loading}
@@ -157,6 +184,8 @@ function ListRateCards({
 					setInfoBanner={setInfoBanner}
 				/>
 			))}
+
+			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}
 
 			{rates.length > MAXIMUM_RATE_CARDS && !loading ? (
 				<div className={styles.pagination}>

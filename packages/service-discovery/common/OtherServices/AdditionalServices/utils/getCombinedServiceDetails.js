@@ -4,7 +4,7 @@ const getCombinedServiceDetails = (details, rates) => {
 	Object.entries(details).forEach(([serviceId, serviceObj]) => {
 		finalDetails = {
 			...finalDetails,
-			[serviceId]: { ...serviceObj, ...rates[serviceId] },
+			[serviceId]: { ...rates[serviceId], ...serviceObj },
 		};
 	});
 
