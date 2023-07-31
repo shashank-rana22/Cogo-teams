@@ -25,7 +25,7 @@ function TaskContainer({
 				{loading ? null : <div className={styles.action_container}>{actions}</div>}
 			</div>
 
-			{!loading ? (
+			{loading ? (
 				<div className={styles.loader}>
 					<ThreeDotLoader message="Loading Data" />
 				</div>

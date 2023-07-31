@@ -13,6 +13,7 @@ function TaskForm({
 	apis_data = {},
 	pendingTask = {},
 	onCancel = () => {},
+	taskLoading = false,
 	services = [],
 	taskListRefetch = () => {},
 }) {
@@ -38,7 +39,7 @@ function TaskForm({
 	} = formProps || {};
 
 	return (
-		<TaskContainer pendingTask={pendingTask}>
+		<TaskContainer pendingTask={pendingTask} loading={taskLoading}>
 			<div className={styles.control_container}>
 				<div className={styles.input}>
 					<Input
