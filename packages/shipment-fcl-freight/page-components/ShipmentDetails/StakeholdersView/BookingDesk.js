@@ -37,7 +37,7 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 		(container) => container?.rollover_status === 'requested',
 	);
 
-	const [activeTab, setActiveTab] = useState('overview');
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,

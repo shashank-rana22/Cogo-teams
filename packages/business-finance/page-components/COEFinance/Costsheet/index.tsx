@@ -53,10 +53,13 @@ function CostSheet() {
 		buydata,
 		apiloading,
 		preTaxData,
+		postTaxData,
 		preTaxLoading,
+		postTaxLoading,
 		sellData,
 		buyData,
 	} = useGetShipmentCostSheet({ query });
+	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
 	const { data: shipmentData, loading: loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
@@ -155,6 +158,12 @@ function CostSheet() {
 					expected={preTaxExpected}
 					actual={preTaxActual}
 					loading={preTaxLoading}
+				/>
+				<StatRect
+					heading="Profit on Shipment - Post Tax"
+					expected={postTaxExpected}
+					actual={postTaxActual}
+					loading={postTaxLoading}
 				/>
 			</div>
 			<DiscountRect
