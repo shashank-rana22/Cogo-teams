@@ -47,7 +47,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 								/>
 							)}
 						>
-							<div className={styles.tooltip_container}>Click Here To View</div>
+							<div className={styles.tooltip_container}>View Here</div>
 						</Tooltip>
 
 					</div>
