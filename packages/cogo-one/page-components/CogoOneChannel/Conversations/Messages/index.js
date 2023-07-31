@@ -43,7 +43,6 @@ function Messages({
 	const [uploading, setUploading] = useState({});
 
 	const { tagOptions = [] } = useListAssignedChatTags();
-
 	const { escalateToSupplyRm, supplierLoading } = useEscalateToSupplyRm();
 
 	const formattedData = getActiveCardDetails(activeTab?.data) || {};
@@ -208,6 +207,7 @@ function Messages({
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
+						firestore={firestore}
 						formattedData={formattedData}
 						messagesData={messagesData}
 						uploading={uploading}

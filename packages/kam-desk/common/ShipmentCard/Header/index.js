@@ -1,9 +1,13 @@
 import { cl, Pill } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
+
+import checkIsEndToEnd from '../../../utils/checkIsEndToEnd';
 
 import styles from './styles.module.css';
 
 function Header({ data = {} }) {
+	const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 	const { trade_type = '', importer_exporter = [], source } = data || {};
 
 	return (
@@ -19,6 +23,10 @@ function Header({ data = {} }) {
 
 				{importer_exporter?.tags?.includes('partner')
 					? <Pill className={styles.channel_partner} color="orange">Channel Partner</Pill>
+					: null}
+
+				{checkIsEndToEnd({ booking_agents: data?.booking_agents, userId, trade_type })
+					? <Pill className={styles.channel_partner} color="red">Nominated</Pill>
 					: null}
 			</div>
 
