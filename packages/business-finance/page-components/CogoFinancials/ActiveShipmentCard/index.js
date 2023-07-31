@@ -8,6 +8,12 @@ import styles from './styles.module.css';
 function ActiveShipmentCard({
 	setActiveShipmentCard = () => {}, activeShipmentCard = '',
 	setShowShipmentList = () => {},
+	entity = '',
+	timeRange = '',
+	filter = {},
+	operationalData = [],
+	financialData = [],
+	taxType = '',
 }) {
 	return (
 		<div className={styles.active_shipment_card}>
@@ -21,6 +27,13 @@ function ActiveShipmentCard({
 					title="Operationally Closed"
 					setActiveShipmentCard={setActiveShipmentCard}
 					setShowShipmentList={setShowShipmentList}
+					entity={entity}
+					timeRange={timeRange}
+					statsType="OPR_CLOSED"
+					filter={filter}
+					cardData={operationalData}
+					type="Operationally"
+					taxType={taxType}
 				/>
 			)}
 
@@ -29,6 +42,13 @@ function ActiveShipmentCard({
 					title="Financially Closed"
 					setActiveShipmentCard={setActiveShipmentCard}
 					setShowShipmentList={setShowShipmentList}
+					entity={entity}
+					timeRange={timeRange}
+					statsType="FINANCE_CLOSED"
+					filter={filter}
+					cardData={financialData}
+					type="Financially"
+					taxType={taxType}
 				/>
 			)}
 		</div>

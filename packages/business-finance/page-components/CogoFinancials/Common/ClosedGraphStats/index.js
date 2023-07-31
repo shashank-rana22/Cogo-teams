@@ -1,18 +1,42 @@
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import ClosedShipmentCard from '../../ClosedShipmentCard';
+import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
 import RenderCardHeader from '../RenderCardHeader';
 import SingleGraphCard from '../SingleGraphCard';
 
 import SingleParentBarStats from './SingleParentBarStats';
 import styles from './styles.module.css';
 
+const LABEL_MAPPING = {
+	Financially   : 'actual',
+	Operationally : 'operational',
+};
+
 function ClosedGraphStats({
 	title = '', setActiveShipmentCard = () => {},
 	setShowShipmentList = () => {},
+	entity = '',
+	timeRange = '',
+	statsType = '',
+	filter = {},
+	cardData = [],
+	type = '',
+	taxType = '',
 }) {
 	const [activeBar, setActiveBar] = useState('');
+
+	const { serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
+		entity,
+		timeRange,
+		statsType,
+		serviceLevel: 'OVERALL',
+		filter,
+	});
+
+	console.log({ serviceLevelData, serviceLevelLoading });
+
 	return (
 		<div className={styles.container}>
 			{isEmpty(activeBar) ? (
@@ -37,7 +61,7 @@ function ClosedGraphStats({
 								style={{ background: '#6fa5ab' }}
 							/>
 							<div className={styles.graph_label}>
-								Actual
+								{startCase(LABEL_MAPPING[type])}
 							</div>
 						</div>
 					</div>
@@ -49,6 +73,9 @@ function ClosedGraphStats({
 								isAdditonalView
 								wrapElement
 								isDeviationVisible={false}
+								cardData={cardData}
+								type={type}
+								taxType={taxType}
 							/>
 						</div>
 

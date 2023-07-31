@@ -33,7 +33,6 @@ const CURRENCY_OPTIONS = Object.values(GLOBAL_CONSTANTS.currency_code).map((item
 
 function RenderFilters({
 	filter = {}, setFilter = () => {},
-	getProfitabilityStats = () => {},
 	setVisible = () => {},
 }) {
 	const [activeFilter, setActiveFilter] = useState('currency');
@@ -41,12 +40,6 @@ function RenderFilters({
 	const handleReset = () => {
 		setFilter({});
 		setActiveFilter('currency');
-		getProfitabilityStats();
-	};
-
-	const onApply = () => {
-		getProfitabilityStats(filter);
-		setVisible(false);
 	};
 
 	return (
@@ -63,11 +56,11 @@ function RenderFilters({
 
 					</Button>
 					<Button
+						themeType="secondary"
 						style={{ marginLeft: '8px' }}
-						onClick={onApply}
-						disabled={isEmpty(filter)}
+						onClick={() => setVisible(false)}
 					>
-						Apply
+						Close
 
 					</Button>
 				</div>

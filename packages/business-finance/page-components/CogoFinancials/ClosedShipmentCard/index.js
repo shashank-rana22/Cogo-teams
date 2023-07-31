@@ -24,7 +24,7 @@ const displayAmount = (amount, currency) => formatAmount({
 });
 
 function ClosedShipmentCard({
-	isDeviationVisible = true, type = 'Financially',
+	isDeviationVisible = true, type = '',
 	cardId = '', setActiveShipmentCard = () => {},
 	isAdditonalView = false,
 	showHeading = true,

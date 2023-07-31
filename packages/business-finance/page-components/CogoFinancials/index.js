@@ -62,8 +62,7 @@ function CogoFinancials() {
 		financialData, financialLoading,
 		operationalData, operationalLoading,
 		ongoingData, ongoingLoading,
-		getProfitabilityStats,
-	} = useGetProfitabilityStats({ filter, entity, timeRange });
+	} = useGetProfitabilityStats({ filter, entity, timeRange, activeShipmentCard });
 
 	const handleClick = () => {
 		setShowShipmentList(false);
@@ -100,7 +99,6 @@ function CogoFinancials() {
 					<MultipleFilters
 						filter={filter}
 						setFilter={setFilter}
-						getProfitabilityStats={getProfitabilityStats}
 					/>
 					<Select
 						value={entity}
@@ -152,6 +150,12 @@ function CogoFinancials() {
 						setActiveShipmentCard={setActiveShipmentCard}
 						activeShipmentCard={activeShipmentCard}
 						setShowShipmentList={setShowShipmentList}
+						entity={entity}
+						timeRange={timeRange}
+						filter={filter}
+						operationalData={operationalData}
+						financialData={financialData}
+						taxType={taxType}
 					/>
 					<div className={styles.remaining_shipment_cards}>
 

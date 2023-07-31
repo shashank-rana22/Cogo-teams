@@ -1,20 +1,15 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { isEmpty, upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
-
-const TOTAL_HOURS = 24;
-const TOTAL_MINUTES_OR_SECONDS = 60;
-const TOTAL_MILLISECONDS = 1000;
+import getDuration from '../utils/getDuration';
 
 const geo = getGeoConstants();
 const DEFAULT_CURRENCY = geo?.country.currency.code;
 
-const useGetProfitabilityStats = ({ entity = '', timeRange = '' }) => {
+const useGetProfitabilityStats = ({ entity = '', timeRange = '', activeShipmentCard = '', filter = {} }) => {
 	const [
 		{ data:ongoingData, loading:ongoingLoading },
 		ongoingTrigger,
@@ -51,39 +46,9 @@ const useGetProfitabilityStats = ({ entity = '', timeRange = '' }) => {
 		{ manual: true },
 	);
 
-	const getDuration = useCallback(() => {
-		const DAYS_MAPPING = {
-			'1D' : 1,
-			'1W' : 7,
-			'1M' : 30,
-			'6M' : 180,
-			'1Y' : 365,
-		};
-
-		const today = new Date();
-
-		const endDate = formatDate({
-			date       : Date.now(),
-			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			formatType : 'date',
-		});
-
-		const startDateValue = new Date(today.getTime() - DAYS_MAPPING[timeRange]
-		* TOTAL_HOURS * TOTAL_MINUTES_OR_SECONDS * TOTAL_MINUTES_OR_SECONDS
-		* TOTAL_MILLISECONDS);
-
-		const startDate = formatDate({
-			date       : startDateValue,
-			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			formatType : 'date',
-		});
-
-		return ({ startDate, endDate });
-	}, [timeRange]);
-
-	const api = useCallback((filter = {}) => {
+	const api = useCallback(() => {
 		const { currency, channel, service, serviceCategory, segment } = filter;
-		const { startDate, endDate } = getDuration();
+		const { startDate, endDate } = getDuration({ timeRange });
 		const IS_HARD_CODED = true;
 
 		const PARAMS = {
@@ -93,7 +58,7 @@ const useGetProfitabilityStats = ({ entity = '', timeRange = '' }) => {
 			currency      : currency || DEFAULT_CURRENCY,
 			parentService : segment,
 			service,
-			tradeType     : !isEmpty(service) ? upperCase(serviceCategory) : undefined,
+			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
 			channel,
 		};
 
@@ -119,11 +84,15 @@ const useGetProfitabilityStats = ({ entity = '', timeRange = '' }) => {
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [entity, ongoingTrigger, closedTrigger, financialTrigger, getDuration]);
+	}, [entity, timeRange, ongoingTrigger, closedTrigger,
+		financialTrigger,
+		filter]);
 
 	useEffect(() => {
-		api();
-	}, [api, entity, timeRange]);
+		if (isEmpty(activeShipmentCard)) { // calling stats api only at the parent level
+			api();
+		}
+	}, [api, entity, timeRange, activeShipmentCard]);
 
 	return {
 		financialData,
@@ -132,7 +101,6 @@ const useGetProfitabilityStats = ({ entity = '', timeRange = '' }) => {
 		ongoingLoading,
 		operationalData,
 		operationalLoading,
-		getProfitabilityStats: api,
 	};
 };
 export default useGetProfitabilityStats;

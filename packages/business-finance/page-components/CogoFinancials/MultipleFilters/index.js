@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import RenderFilters from './RenderFilters';
 import styles from './styles.module.css';
 
-function MultipleFilters({ filter = {}, setFilter = () => {}, getProfitabilityStats = () => {} }) {
+function MultipleFilters({ filter = {}, setFilter = () => {} }) {
 	const [visible, setVisible] = useState(false);
 	return (
 		<div>
@@ -16,7 +16,6 @@ function MultipleFilters({ filter = {}, setFilter = () => {}, getProfitabilitySt
 					<RenderFilters
 						filter={filter}
 						setFilter={setFilter}
-						getProfitabilityStats={getProfitabilityStats}
 						setVisible={setVisible}
 					/>
 				)}

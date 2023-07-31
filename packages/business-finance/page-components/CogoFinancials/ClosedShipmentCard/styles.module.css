@@ -4,6 +4,10 @@
 	background: #fff;
 }
 
+.financially_closed_container:hover {
+	background: var(--color-primary-error-red-5);
+}
+
 .responsive_graph_circular {
 	width: 50%;
 	height: 90%;
