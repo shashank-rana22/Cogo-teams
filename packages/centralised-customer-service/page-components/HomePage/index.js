@@ -27,7 +27,7 @@ function HomePage() {
 	return (
 		<div className={styles.container}>
 
-			<h2 className={styles.header}>Centralised Customer Service</h2>
+			<h2 className={styles.header}>Centralised Customer Service Desk</h2>
 
 			<div className={styles.tab_container}>
 				<Tabs

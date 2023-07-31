@@ -1,6 +1,6 @@
 {
     "name": "@cogoport/centralised-customer-service",
-    "description": "Centralised Customer Service",
+    "description": "Centralised Customer Service Desk",
     "version": "0.1.0",
     "main": "index.js",
     "sideEffects": false,

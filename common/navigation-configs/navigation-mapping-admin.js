@@ -2478,7 +2478,7 @@ const navigationMappingAdmin = {
 	},
 	centralised_customer_service: {
 		key           : 'centralised_customer_service',
-		title         : 'Centralised Customer Service',
+		title         : 'Centralised Customer Service Desk',
 		isSubNavs     : false,
 		module_type   : 'dashboards',
 		href          : '/v2/centralised-customer-service',
