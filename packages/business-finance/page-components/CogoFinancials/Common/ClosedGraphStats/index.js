@@ -9,8 +9,11 @@ import SingleParentBarStats from './SingleParentBarStats';
 import styles from './styles.module.css';
 
 function ClosedGraphStats({
-	title = '', setActiveShipmentCard = () => {},
-	setShowShipmentList = () => {},
+	title = '',
+	setActiveShipmentCard = () => { },
+	isPreTax = false,
+	status = '',
+	setShowShipmentList = () => { },
 }) {
 	const [activeBar, setActiveBar] = useState('');
 	return (
@@ -58,6 +61,8 @@ function ClosedGraphStats({
 									heading={cardTitle}
 									key={cardTitle}
 									setActiveBar={setActiveBar}
+									isPreTax={isPreTax}
+									status={status}
 								/>
 							))}
 						</div>
