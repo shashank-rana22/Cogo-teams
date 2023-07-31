@@ -1,14 +1,28 @@
 import { cl, Pill } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function Header({ data = {} }) {
+	const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 	const { trade_type = '', importer_exporter = [], source } = data || {};
 
 	function checkIsEndToEnd(booking_agents) {
-		return booking_agents.some((item) => item.stakeholder_type === 'destination_booking_agent'
-		|| item.stakeholder_type === 'origin_booking_agent');
+		const isExport = trade_type === 'export';
+		const isImport = trade_type === 'import';
+
+		return booking_agents.some((item) => {
+			const isDestinationAgent = item?.stakeholder_type === 'destination_booking_agent';
+			const isOriginAgent = item?.stakeholder_type === 'origin_booking_agent';
+
+			if ((isDestinationAgent && isExport && userId === item?.id)
+			|| (isOriginAgent && isImport && userId === item?.id)) {
+				return true;
+			}
+
+			return false;
+		});
 	}
 
 	return (
