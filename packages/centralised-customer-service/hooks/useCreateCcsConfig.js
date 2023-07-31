@@ -35,7 +35,16 @@ const useCreateCssConfig = ({ setShowModal = () => {}, source = '', fetchList = 
 				data: {
 					id     : id || configId,
 					status : 'active',
-					...(source ? { status: 'inactive' } : values),
+					...(source ? { status: 'inactive' } : {
+						cogo_entity_id    : values.cogo_entity_id || undefined,
+						config_type       : values.config_type || undefined,
+						organization_ids  : values.organization_ids || undefined,
+						organization_type : values.organization_type || undefined,
+						segment           : values.segment || undefined,
+						agent_id          : values.agent_id || undefined,
+						booking_source    : values.booking_source || undefined,
+						preferred_role_id : values.preferred_role_id || undefined,
+					}),
 				},
 			});
 
