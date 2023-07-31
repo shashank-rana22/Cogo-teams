@@ -18,10 +18,12 @@ interface ItemProps {
 interface Profile {
 	profile?: { partner: { id: string } };
 }
-const geo = getGeoConstants();
 
 function Settlement() {
+	const geo = getGeoConstants();
+
 	const { query, push } = useRouter();
+
 	const { profile }:Profile = useSelector((state) => state);
 
 	const { partner } = profile || {};
@@ -47,7 +49,7 @@ function Settlement() {
 		};
 	});
 
-	const TabPanelMapping = tabPanelMapping(entityCode, entity);
+	const tabMapping = tabPanelMapping(entityCode, entity);
 
 	const [activeTab, setActiveTab] = useState(query?.active_tab);
 
@@ -90,7 +92,7 @@ function Settlement() {
 				themeType="primary"
 				onChange={(tab) => handleChange(tab)}
 			>
-				{(TabPanelMapping || []).map((tab) => {
+				{(tabMapping || []).map((tab) => {
 					const { name, title, component } = tab || {};
 					if (!geo.navigations.settlement_onAccountCollection.tabs.includes(name)) {
 						return null;
