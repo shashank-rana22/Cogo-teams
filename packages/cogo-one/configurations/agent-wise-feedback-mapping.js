@@ -1,5 +1,10 @@
 export const AGENT_WISE_FEEDACK_MAPPING = [
 	{
+		label   : 'No. of Quotation Send',
+		name    : 'no_of_quotation_send',
+		hasIcon : false,
+	},
+	{
 		label   : 'No. of Bookings',
 		name    : 'no_of_bookings',
 		hasIcon : false,
@@ -14,11 +19,15 @@ export const AGENT_WISE_FEEDACK_MAPPING = [
 
 export const AGENT_WISE_STATS_MAPPING = [
 	{
-		label : 'Calls Made',
+		label : 'Call Made',
 		name  : 'calls_made',
 	},
 	{
-		label : 'Chats Assigned',
+		label : 'Call Received',
+		name  : 'calls_received',
+	},
+	{
+		label : 'Chat Assigned',
 		name  : 'chats_assigned',
 	},
 ];

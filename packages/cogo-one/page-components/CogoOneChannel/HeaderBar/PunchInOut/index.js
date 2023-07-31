@@ -4,7 +4,7 @@ import { IcMDown, IcMArrowDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useState, useEffect, useCallback } from 'react';
 
-import useUpdateAgentWorkPreferences from '../../../hooks/UseUpdateAgentWorkPreferences';
+import useUpdateAgentWorkPreferences from '../../../../hooks/UseUpdateAgentWorkPreferences';
 
 import ShowMoreStats from './ShowMoreStats';
 import styles from './styles.module.css';
@@ -12,9 +12,10 @@ import TimelineContent from './TimelineContent';
 
 const MIN_FEEDBACK_SCORE = 0;
 const MIN_TIMER_VALUE = 0;
-const PUNCH_IN_TIME = 16; // PUCH IN TIME
-const PUNCH_OUT_TIME = 16; // PUCH OUT TIME
+const PUNCH_IN_TIME = 9;
+const PUNCH_OUT_TIME = 19;
 const MIN_SECOND = 0;
+const COUNT_DOWN_BUFFER_TIME = 900;
 const UPDATE_TIME_BY_ONE_SECOND = 1000;
 const MAX_SECOND_VALUE = 60;
 const TWO_DIGIT_NUMBER = 2;
@@ -27,24 +28,25 @@ function PunchInOut({
 	timelineLoading = false,
 	preferenceLoading = false,
 }) {
-	const [showDetails, setShowDetails] = useState(false);
-
 	const { status = '' } = agentStatus || {};
-
 	const { list = [] } = data || {};
 
-	const lastBreakTime = list?.[GLOBAL_CONSTANTS.zeroth_index]?.break_started_at;
-
+	const [showDetails, setShowDetails] = useState(false);
 	const [isShaking, setIsShaking] = useState(false);
 	const [showTimer, setShowTimer] = useState(false);
 	const [showEndButton, setShowEndButton] = useState(false);
 	const [countdown, setCountdown] = useState(MIN_TIMER_VALUE);
+
+	const lastBreakTime = list?.[GLOBAL_CONSTANTS.zeroth_index]?.break_started_at;
 
 	const {
 		updateWorkPreference = () => {},
 		loading = false,
 	} = useUpdateAgentWorkPreferences({ fetchworkPrefernce, agentTimeline });
 
+	const shakeButton = () => {
+		setIsShaking(true);
+	};
 	const handlePunchIn = (event) => {
 		event.stopPropagation();
 		updateWorkPreference({ type: 'punched_in' });
@@ -54,10 +56,6 @@ function PunchInOut({
 		event.stopPropagation();
 		updateWorkPreference({ type: 'punched_out' });
 		setIsShaking(false);
-	};
-
-	const shakeButton = () => {
-		setIsShaking(true);
 	};
 
 	const formatTime = (seconds) => {
@@ -87,7 +85,7 @@ function PunchInOut({
 			targetTime.setHours(PUNCH_OUT_TIME, MIN_SECOND, MIN_SECOND, MIN_SECOND);
 
 			const remainingTime = Math.floor((targetTime - now) / UPDATE_TIME_BY_ONE_SECOND);
-			if (remainingTime <= MIN_SECOND && remainingTime > MIN_SECOND) {
+			if (remainingTime <= COUNT_DOWN_BUFFER_TIME && remainingTime > MIN_SECOND) {
 				setShowTimer(true);
 				setShowEndButton(false);
 				setCountdown(remainingTime);
@@ -133,7 +131,7 @@ function PunchInOut({
 				<Image src={GLOBAL_CONSTANTS.image_url.sad_icon} alt="sad-emoji" width={18} height={18} />
 				<div className={styles.break_time}>{MIN_FEEDBACK_SCORE}</div>
 				<IcMDown className={styles.down_icon} />
-				{status === 'punched_out' ? (
+				{status === 'punched_out' || status === 'inactive' ? (
 					<Button
 						size="xs"
 						onClick={handlePunchIn}
@@ -143,36 +141,21 @@ function PunchInOut({
 						Start Shift
 					</Button>
 				) : (
-					<>
-						<Image src={GLOBAL_CONSTANTS.image_url.clock_icon} alt="clock" width={18} height={18} />
-						<div className={styles.shift_time}>
-
-							{(timelineLoading || preferenceLoading)
-								? <Placeholder width="55px" height="18px" />
-								: (
-									<TimelineContent
-										handlePunchOut={handlePunchOut}
-										showTimer={showTimer}
-										showEndButton={showEndButton}
-										lastBreakTime={lastBreakTime}
-										formatTime={formatTime}
-										countdown={countdown}
-									/>
-								)}
-							{/* // 	: formatDate({
-							// 		date       : lastBreakTime,
-							// 		formatType : 'dateTime',
-							// 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
-							// 		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							// 	})}
-							// {showTimer && <div>{formatTime(countdown)}</div>}
-							// {showEndButton && (
-							// 	<Button size="xs" onClick={handlePunchOut}>
-							// 		End
-							// 	</Button>
-							// )} */}
-						</div>
-					</>
+					<div className={styles.shift_time}>
+						{(timelineLoading || preferenceLoading)
+							? <Placeholder width="55px" height="18px" />
+							: (
+								<TimelineContent
+									handlePunchOut={handlePunchOut}
+									showTimer={showTimer}
+									showEndButton={showEndButton}
+									lastBreakTime={lastBreakTime}
+									formatTime={formatTime}
+									countdown={countdown}
+									loading={loading}
+								/>
+							)}
+					</div>
 				)}
 				<IcMArrowDown className={cl`${showDetails ? styles.up_arrow : styles.arrow_down}`} />
 			</div>

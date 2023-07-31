@@ -2,10 +2,11 @@ import { Select } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { TIMELINE_FILTER_OPTIOINS } from '../../../../../configurations/agent-wise-feedback-mapping';
-import useListAgentCheckout from '../../../../../hooks/useListAgentCheckout';
-import useListAssignedChats from '../../../../../hooks/useListAssignedChats';
-import useListCallDetails from '../../../../../hooks/useListCallDetails';
+import { TIMELINE_FILTER_OPTIOINS } from '../../../../../../configurations/agent-wise-feedback-mapping';
+import useListAgentCheckout from '../../../../../../hooks/useListAgentCheckout';
+import useListAssignedChats from '../../../../../../hooks/useListAssignedChats';
+import useListCallDetails from '../../../../../../hooks/useListCallDetails';
+import useListQuotationCheckouts from '../../../../../../hooks/useListQuotationCheckouts';
 
 import AgentActivityGraph from './AgentActivitiesGraph';
 import Stats from './Stats';
@@ -18,6 +19,8 @@ function AgentStats({ showDetails = false, name = '' }) {
 		shiplentLoading = false,
 		shipmentData = {},
 	} = useListAgentCheckout({ value, showDetails });
+
+	const { quotationData = {} } = useListQuotationCheckouts();
 
 	const { statsData = {}, statsLoading = false } = useListAssignedChats({ value });
 
@@ -42,11 +45,9 @@ function AgentStats({ showDetails = false, name = '' }) {
 				<div className={styles.stats_count_container}>
 					<Stats
 						bookingCount={bookingCount}
-						loading={shiplentLoading}
 						statsData={statsData}
-						statsLoading={statsLoading}
 						callData={callData}
-						callLoading={callLoading}
+						quotationData={quotationData}
 					/>
 				</div>
 				<div className={styles.graph_container}>
