@@ -2,6 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import { handleBillType } from '../../../../utils/getHandleBillType';
 
 import styled from './styles.module.css';
@@ -23,7 +24,23 @@ interface Props {
 	}
 }
 
-function FieldPair({ itemData, field }:Props) {
+const MAX_LEN_FOR_INVOICE_TEXT = 11;
+const MAX_LEN_FOR_SID_TEXT = 10;
+const BILLNUMBER_LENGTH = 0;
+function FieldPair({
+	itemData = {
+		billType        : '',
+		billDocumentUrl : '',
+		serviceType     : '',
+		billNumber      : '',
+		isProforma      : false,
+		jobNumber       : '',
+	}, field = {
+		topKey    : {},
+		bottomKey : {},
+		label     : '',
+	},
+}:Props) {
 	const {	billType = '', billNumber = '', isProforma, billDocumentUrl, jobNumber = '', serviceType } = itemData;
 
 	return (
@@ -31,14 +48,14 @@ function FieldPair({ itemData, field }:Props) {
 			{field?.label === 'Invoice No.' && (
 				<div>
 					<div className={styled.billnumbers}>
-						{billNumber.length > 11 ? (
+						{billNumber.length > MAX_LEN_FOR_INVOICE_TEXT ? (
 							<Tooltip
 								interactive
 								placement="top"
 								content={billNumber}
 							>
 								<text onClick={() => window.open(billDocumentUrl, '_blank')}>
-									{`${billNumber.substring(0, 11)}...`}
+									{`${billNumber.substring(BILLNUMBER_LENGTH, MAX_LEN_FOR_INVOICE_TEXT)}...`}
 								</text>
 							</Tooltip>
 						) : (
@@ -54,7 +71,7 @@ function FieldPair({ itemData, field }:Props) {
 			{field?.label === 'SID' && (
 				<div>
 					<text className={styled.sid}>
-						{jobNumber}
+						{showOverflowingNumber(jobNumber, MAX_LEN_FOR_SID_TEXT)}
 					</text>
 
 					<div className={styled.service_type}>{startCase(serviceType)}</div>

@@ -13,7 +13,7 @@ const getPayload = ({
 	Category       : '',
 	Subcategory    : '',
 	Priority       : priority,
-	Usertype       : 'ticket_user',
+	UserType       : 'ticket_user',
 	Data           : { Attachment: [finalUrl] || [], ...selectedServices },
 	Type           : issue_type,
 	Description    : additional_information,
@@ -79,7 +79,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo, setRefreshList }) 
 			}));
 			setShowRaiseTicket(false);
 		} catch (error) {
-			console.error(error?.response?.data);
+			Toast.error(error?.response?.data);
 		}
 	};
 
