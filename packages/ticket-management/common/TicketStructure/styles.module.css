@@ -7,25 +7,3 @@
 .ticket_box::-webkit-scrollbar {
 	display: none;
 }
-
-.no_tickets_available {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 12px;
-	margin: 6px 12px;
-	background-color: #fff;
-	border: 1px solid #e0e0e0;
-	border-radius: 4px;
-	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
-	animation: shake 0.2s;
-	animation-iteration-count: 4;
-
-	@keyframes shake {
-		0% { transform: translate(0, 0) rotate(0deg); }
-		25% { transform: translate(3px, 3px) rotate(3deg); }
-		50% { transform: translate(0, 0) rotate(0deg); }
-		75% { transform: translate(-3px, 3px) rotate(-3deg); }
-		100% { transform: translate(0, 0) rotate(0deg); }
-	}
-}
