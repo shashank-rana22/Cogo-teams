@@ -4,3 +4,9 @@
 	overflow: auto;
 	background-color: #f9f9f9;
 }
+
+.message_loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

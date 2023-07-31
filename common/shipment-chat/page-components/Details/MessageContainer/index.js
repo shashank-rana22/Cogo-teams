@@ -1,8 +1,8 @@
+import { Loader } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import React, { useEffect, useRef } from 'react';
 
 import useUpdateMessage from '../../../hooks/useUpdateMessage';
-import MsgLoader from '../MsgLoader';
 
 import MessageContent from './MessageContent';
 import styles from './styles.module.css';
@@ -49,11 +49,15 @@ function MessageContainer({ msgContent, loadingChannel, showImpMsg }) {
 	return (
 		<div className={styles.main_container} ref={containerRef}>
 			{loadingChannel ? (
-				<MsgLoader />
+				<div className={styles.message_loader}>
+					<Loader />
+				</div>
 			) : (
+			// Todo connect with fire base and set the key for message content by checking totalMessages data
 				<>
 					{(totalMessages || []).map((msg) => (
 						<MessageContent
+							key={msg.mainKey}
 							msg={msg}
 							user_id={user_id}
 							handleClick={handleClick}

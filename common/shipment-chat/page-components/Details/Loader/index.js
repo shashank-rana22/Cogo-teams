@@ -17,14 +17,14 @@ function Loader({ setShow = () => {} }) {
 				</div>
 
 				<div className={styles.port_details_loading}>
-					<div>
+					<div style={{ width: '120px' }}>
 						<Placeholder className={styles.port_details_placeholder} />
 						<Placeholder className={styles.port_details_placeholder} />
 					</div>
 
 					<IcMPortArrow style={{ width: '1.2em', height: '1.2em' }} />
 
-					<div>
+					<div style={{ width: '120px' }}>
 						<Placeholder className={styles.port_details_placeholder} />
 						<Placeholder className={styles.port_details_placeholder} />
 					</div>
