@@ -24,12 +24,12 @@ function EmployeeDirectory() {
 
 	const {
 		filters, setFilters, debounceQuery, data : employeeData,
-		loading : detailsLoading, setemployeeFilters, employeeFilters, refetch,
+		loading : detailsLoading, setemployeeFilters, employeeFilters, refetch, getEmployeeList,
 	} = useGetEmployeeList();
 
-	const { data } = useGetEmployeeStats();
+	const { data, statsRefetch } = useGetEmployeeStats();
 
-	const { list = [] } = employeeData || {};
+	const { list = [], is_hr_admin, total_count } = employeeData || {};
 
 	const handleAllSelect = (e) => {
 		const { checked } = e.target;
@@ -77,7 +77,10 @@ function EmployeeDirectory() {
 					setFilters={setFilters}
 					setSearchText={setSearchText}
 					setSortType={setSortType}
-					totalEmployeeCount={totalEmployeeCount}
+					totalEmployeeCount={total_count}
+					employeeFilters={employeeFilters}
+					getEmployeeList={getEmployeeList}
+					setSelectedIds={setSelectedIds}
 				/>
 				<Filters
 					setFilters={setFilters}
@@ -92,6 +95,7 @@ function EmployeeDirectory() {
 					setSortType={setSortType}
 					setemployeeFilters={setemployeeFilters}
 					employeeFilters={employeeFilters}
+					bulkActions={bulkActions}
 				/>
 				<EmployeeList
 					selectedIds={selectedIds}
@@ -107,6 +111,8 @@ function EmployeeDirectory() {
 					selectedIds={selectedIds}
 					refetch={refetch}
 					setBulkActions={setBulkActions}
+					statsRefetch={statsRefetch}
+					setSelectedIds={setSelectedIds}
 				/>
 			)}
 			{openEmployeeDetails && (
@@ -115,6 +121,7 @@ function EmployeeDirectory() {
 					onClose={() => setOpenEmployeeDetails(false)}
 					show={openEmployeeDetails}
 					refetch={refetch}
+					isHRAdmin={is_hr_admin}
 				/>
 			)}
 		</>

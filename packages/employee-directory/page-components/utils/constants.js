@@ -1,10 +1,6 @@
 export const EMPLOYEE_STATUS_TABS = [
 	{
-		label : 'All Employees',
-		value : 'all_employees',
-	},
-	{
-		label : 'Regular',
+		label : 'Confirmed',
 		value : 'confirmed',
 	},
 	{
@@ -12,12 +8,15 @@ export const EMPLOYEE_STATUS_TABS = [
 		value : 'probation',
 	},
 	{
-		label : 'Notice Period',
-		value : 'separated',
+		label : 'Notice',
+		value : 'notice',
 	},
+];
+
+export const FILTER_TAB = [
 	{
-		label : 'Inactive',
-		value : 'inactive',
+		label : 'Filtered Data',
+		value : 'filtered_data',
 	},
 ];
 
@@ -136,19 +135,34 @@ export const HRBP_VIEW_DATA = [
 
 export const EMPLOYEE_STATUS = {
 	confirmed: {
-		label : 'Regular',
-		color : 'green',
+		label : 'Confirmed',
+		color : '#B4F3BE',
 	},
 	probation: {
 		label : 'Probation',
-		color : 'yellow',
+		color : '#FCEDBF',
 	},
 	separated: {
-		label : 'Notice',
-		color : 'blue',
-	},
-	inactive: {
-		label : 'Inactive',
-		color : 'red',
+		label : 'Separated',
+		color : '#F8AEA8',
 	},
 };
+
+export const EMPLOYEE_STATUS_OPTIONS = [
+	{
+		label : 'Confirmed',
+		value : 'confirmed',
+	},
+	{
+		label : 'Probation',
+		value : 'probation',
+	},
+	{
+		label : 'Separated',
+		value : 'separated',
+	},
+	{
+		label : 'Notice',
+		value : 'notice',
+	},
+];

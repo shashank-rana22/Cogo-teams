@@ -32,10 +32,14 @@
 		.ui_table_body_cell {
 			flex-wrap: wrap;
 			width: auto;
-			padding: 16px;
+			padding: 16px 16px 10px;
 			font-size: 14px;
 			background: #fff;
 			background-color: #fff;
+
+			& > div:first-child {
+				display: inline-block;
+			}
 		}
 
 		.ui_table_body_row {

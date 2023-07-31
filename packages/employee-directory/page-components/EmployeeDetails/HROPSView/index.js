@@ -10,8 +10,6 @@ import getHROPSControls from '../../utils/HROPSControls';
 import styles from './styles.module.css';
 
 function HROPSView({ show = false, onClose = () => {}, employeeDetails = {}, refetch = () => {} }) {
-	console.log('employeeDetails', employeeDetails);
-
 	const [isEdit, setIsEdit] = useState(false);
 
 	const { control, handleSubmit, formState : { errors }, watch, setValue } = useForm();
@@ -35,10 +33,10 @@ function HROPSView({ show = false, onClose = () => {}, employeeDetails = {}, ref
 		name, employee_code, cogoport_email, designation, department,
 		reporting_manager_id, office_location, squad_id, tribe_id, sub_chapter_id,
 		chapter_id, li, pi, date_of_joining, resignation_date, cfpl_joining_date, id,
-		employee_tags,
+		employee_tags, employee_status,
 	} = employeeDetails || {};
 
-	const { lwp, absconding } = employee_tags || {};
+	const { lwp, absconding, is_resigned } = employee_tags || {};
 
 	useEffect(() => {
 		setValues({
@@ -61,13 +59,22 @@ function HROPSView({ show = false, onClose = () => {}, employeeDetails = {}, ref
 			cfpl_joining_date : cfpl_joining_date && new Date(cfpl_joining_date),
 			cogo_freight      : cfpl_joining_date ? 'true' : 'false',
 			lwp               : lwp ? 'true' : 'false',
+			employee_status   : is_resigned ? 'notice' : employee_status,
 		});
 	}, [absconding, cfpl_joining_date, chapter_id, cogoport_email, date_of_joining,
 		department, designation, employeeDetails, employee_code, li, name, office_location, pi, reporting_manager_id,
-		resignation_date, setValues, squad_id, sub_chapter_id, tribe_id, lwp]);
+		resignation_date, setValues, squad_id, sub_chapter_id, tribe_id, lwp, employee_status, is_resigned]);
 
 	const onSubmit = (values) => {
-		updateEmployeeDetails(values, id);
+		const { employee_status : employeeStatus } = values;
+
+		const dataObj = {
+			...values,
+			employee_status : employeeStatus === 'notice' ? undefined : employeeStatus,
+			is_resigned     : employeeStatus === 'notice',
+		};
+
+		updateEmployeeDetails(dataObj, id);
 	};
 
 	return (

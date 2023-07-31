@@ -1,6 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useUpdateBulkData from '../../../hooks/useUpdateBulkData';
@@ -11,18 +12,38 @@ import styles from './styles.module.css';
 
 function BulkUpdate({
 	show = false, onClose = () => {},
-	refetch,
-	setBulkActions,
+	refetch = () => {},
+	setBulkActions = () => {},
 	selectedIds = [],
+	statsRefetch = () => {},
+	setSelectedIds = () => {},
 }) {
 	const { control, handleSubmit, formState : { errors } } = useForm();
 
-	const { updateBulkData, loading } = useUpdateBulkData({ onClose, refetch, setBulkActions });
+	const { updateBulkData, loading } = useUpdateBulkData({
+		onClose,
+		refetch,
+		setBulkActions,
+		statsRefetch,
+		setSelectedIds,
+	});
 
 	const onSubmit = (values) => {
+		const FORM_VALUES = {};
+
+		CONTROLS.forEach((val) => {
+			if (!isEmpty(values?.[val?.name])) {
+				FORM_VALUES[val.name] = values?.[val?.name];
+			}
+		});
+
+		const { employee_status } = FORM_VALUES || {};
+
 		const dataObj = {
-			...values,
-			employee_ids: selectedIds,
+			...FORM_VALUES,
+			employee_status : employee_status === 'notice' ? undefined : employee_status,
+			is_resigned     : employee_status === 'notice' ? true : undefined,
+			employee_ids    : selectedIds,
 		};
 
 		updateBulkData(dataObj);

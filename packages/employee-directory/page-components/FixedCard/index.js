@@ -10,6 +10,8 @@ const DEFAULT_ARRAY_LENGTH = 10;
 function FixedCard({
 	selectedIds = [], refetch = () => {},
 	setBulkActions = () => {},
+	statsRefetch = () => {},
+	setSelectedIds = () => {},
 }) {
 	const selectedIdsLength = selectedIds.length;
 	const [openBulkUpdateModal, setOpenBulkUpdateModal] = useState(false);
@@ -40,7 +42,8 @@ function FixedCard({
 					refetch={refetch}
 					setBulkActions={setBulkActions}
 					selectedIds={selectedIds}
-					// refetch =
+					statsRefetch={statsRefetch}
+					setSelectedIds={setSelectedIds}
 				/>
 			) }
 		</>

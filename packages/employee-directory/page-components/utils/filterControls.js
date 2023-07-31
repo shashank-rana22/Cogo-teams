@@ -1,4 +1,7 @@
 import { SelectController, AsyncSelectController, DatepickerController, InputController } from '@cogoport/forms';
+import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
+
+import { EMPLOYEE_STATUS_OPTIONS } from './constants';
 
 export const CONTROLS = [
 	{
@@ -128,38 +131,20 @@ export const CONTROLS = [
 		initialCall : true,
 		multiple    : true,
 	},
-];
-
-export const getControls = (type) => {
-	const STATUS_FILTER = {
-		name        : 'employee_status',
+	{
+		name        : 'status',
 		label       : 'Select Status',
-		controlType : 'select',
+		controlType : 'multiSelect',
 		placeholder : 'Search Status',
-		options     : [
-			{
-				label : 'Regular',
-				value : 'confirmed',
-			},
-			{
-				label : 'Probation',
-				value : 'probation',
-			},
-			{
-				label : 'Notice Period',
-				value : 'separated',
-			},
-		],
+		options     : EMPLOYEE_STATUS_OPTIONS,
 		isClearable : true,
-		multiple    : true,
-	};
-
-	return type === 'all_employees' ? [...CONTROLS, STATUS_FILTER] : CONTROLS;
-};
+	},
+];
 
 export const CONTROL_MAPPING = {
 	select      : SelectController,
 	asyncSelect : AsyncSelectController,
 	date        : DatepickerController,
 	text        : InputController,
+	multiSelect : MultiSelectController,
 };

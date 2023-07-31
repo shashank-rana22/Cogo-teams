@@ -64,7 +64,6 @@
 
 .filters {
 	position: relative;
-	margin-right: 20px;
 }
 
 .filter_dot {
@@ -75,4 +74,25 @@
 	height: 6px;
 	background-color: #ee3425;
 	border-radius: 50%;
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
+}
+
+.filter_reset_btn {
+	border-radius: 4px;
+
+	:global {
+		.ui_buttonicon_container.ui_ps_themeType_primary {
+			height: 38px;
+			background-color: #ed3726;
+
+			svg {
+				fill: #fff;
+			}
+		}
+	}
 }

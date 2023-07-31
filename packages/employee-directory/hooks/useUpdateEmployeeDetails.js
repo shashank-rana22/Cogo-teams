@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useHarbourRequest } from '@cogoport/request';
@@ -42,7 +43,7 @@ const useUpdateEmployeeDetails = (onClose, refetch) => {
 				data: {
 					...rest,
 					date_of_joining   : getFormattedDate(date_of_joining),
-					cfpl_joining_date : getFormattedDate(cfpl_joining_date),
+					cfpl_joining_date : cfpl_joining_date ? getFormattedDate(cfpl_joining_date) : undefined,
 					resignation_date  : getFormattedDate(resignation_date),
 					absconding        : getFormattedBoolean(absconding),
 					lwp               : getFormattedBoolean(lwp),
@@ -53,7 +54,7 @@ const useUpdateEmployeeDetails = (onClose, refetch) => {
 			Toast.success('Employee Details Updated Sucessfully');
 			onClose();
 		} catch (error) {
-			console.log('error', error);
+			Toast.error(getApiErrorString(error.response?.data || 'Something went wrong'));
 		}
 	};
 

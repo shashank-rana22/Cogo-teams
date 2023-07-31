@@ -1,4 +1,4 @@
-import { Checkbox, Pill } from '@cogoport/components';
+import { Checkbox, Pill, Tooltip } from '@cogoport/components';
 import { getByKey, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -23,8 +23,18 @@ const useGetColumns = ({
 	const columns = [
 		{
 			Header   : 'Employee Name',
-			accessor : (item) => item.name || '-',
-			id       : 'name',
+			accessor : (item) => (
+				<Tooltip
+					interactive
+					placement="top"
+					content={<div className={styles.tooltip_data}>{item.name}</div>}
+				>
+					<div className={styles.data}>
+						{item.name || '-'}
+					</div>
+				</Tooltip>
+			),
+			id: 'name',
 		},
 		{
 			Header   : 'COGO ID',
@@ -41,8 +51,22 @@ const useGetColumns = ({
 		},
 		{
 			Header   : 'Designation',
-			accessor : (item) => item.designation || '-',
-			id       : 'designation',
+			accessor : (item) => (
+				<Tooltip
+					interactive
+					placement="top"
+					content={(
+						<div className={styles.tooltip_data}>
+							{item.designation || '-'}
+						</div>
+					)}
+				>
+					<div className={styles.data}>
+						{item.designation || '-'}
+					</div>
+				</Tooltip>
+			),
+			id: 'designation',
 		},
 		{
 			Header   : 'Contact No',
@@ -51,36 +75,91 @@ const useGetColumns = ({
 		},
 		{
 			Header   : 'Email Id',
-			accessor : (item) => item.cogoport_email || '-',
-			id       : 'email_id',
+			accessor : (item) => (
+				<Tooltip
+					interactive
+					placement="top"
+					content={(
+						<div className={styles.tooltip_data}>
+							{item.cogoport_email || '-'}
+						</div>
+					)}
+				>
+					<div className={styles.data}>
+						{item.cogoport_email || '-'}
+					</div>
+				</Tooltip>
+			),
+			id: 'email_id',
 		},
 		{
 			Header   : 'Chapter',
-			accessor : (item) => item.chapter_name || '-',
-			id       : 'chapter',
+			accessor : (item) => (
+				<Tooltip
+					interactive
+					placement="top"
+					content={(
+						<div className={styles.tooltip_data}>
+							{item.chapter_name || '-'}
+						</div>
+					)}
+				>
+					<div className={styles.data}>
+						{item.chapter_name || '-'}
+					</div>
+				</Tooltip>
+			),
+			id: 'chapter',
 		},
 		{
 			Header   : 'Location',
-			accessor : (item) => startCase(item.office_location) || '-',
-			id       : 'location',
+			accessor : (item) => (
+				<Tooltip
+					interactive
+					placement="top"
+					content={(
+						<div className={styles.tooltip_data}>
+							{startCase(item.office_location) || '-'}
+						</div>
+					)}
+				>
+					<div className={styles.data}>
+						{startCase(item.office_location) || '-'}
+					</div>
+				</Tooltip>
+			),
+			id: 'location',
 		},
 		{
 			Header   : 'Reporting Manager',
-			accessor : (item) => getByKey(item, 'reporting_manager.name') || '-',
-			id       : 'reporting_manager',
+			accessor : (item) => (
+				<Tooltip
+					interactive
+					placement="top"
+					content={(
+						<div className={styles.tooltip_data}>
+							{getByKey(item, 'reporting_manager.name') || '-'}
+						</div>
+					)}
+				>
+					<div className={styles.data}>
+						{getByKey(item, 'reporting_manager.name') || '-'}
+					</div>
+				</Tooltip>
+			),
+			id: 'reporting_manager',
 		},
 		{
 			Header   : 'Status',
 			accessor : (item) => (
 				<div>
-					{item.status === 'inactive' ? (
+					{item.employee_tags?.is_resigned ? (
 						<Pill
-							key="Inactive"
-							prefix=""
+							key="Notice"
 							size="md"
-							color="red"
+							color="#CBD1F8"
 						>
-							Inactive
+							Notice
 						</Pill>
 					) : getStatus(item.employee_status) }
 				</div>

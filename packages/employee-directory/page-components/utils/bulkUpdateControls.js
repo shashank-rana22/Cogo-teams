@@ -1,3 +1,5 @@
+import { EMPLOYEE_STATUS_OPTIONS } from './constants';
+
 const CONTROLS = [
 	{
 		name        : 'designation',
@@ -15,9 +17,6 @@ const CONTROLS = [
 		labelKey    : 'designation',
 		valueKey    : 'designation',
 		initialCall : true,
-		rules       : {
-			required: true,
-		},
 	},
 	{
 		name        : 'tribe_id',
@@ -29,10 +28,7 @@ const CONTROLS = [
 			filters    : { status: 'active' },
 			page_limit : 100,
 		},
-		initialCall : true,
-		rules       : {
-			required: true,
-		},
+		initialCall: true,
 	},
 	{
 		name        : 'squad_id',
@@ -44,10 +40,7 @@ const CONTROLS = [
 			filters    : { status: 'active' },
 			page_limit : 100,
 		},
-		initialCall : true,
-		rules       : {
-			required: true,
-		},
+		initialCall: true,
 	},
 	{
 		name        : 'office_location',
@@ -65,9 +58,6 @@ const CONTROLS = [
 		initialCall : true,
 		labelKey    : 'office_location',
 		valueKey    : 'office_location',
-		rules       : {
-			required: true,
-		},
 	},
 	{
 		name        : 'reporting_manager_id',
@@ -79,37 +69,14 @@ const CONTROLS = [
 			filters    : { status: 'active' },
 			page_limit : 100,
 		},
-		initialCall : true,
-		rules       : {
-			required: true,
-		},
+		initialCall: true,
 	},
 	{
 		name        : 'employee_status',
 		label       : 'Select Status',
 		controlType : 'select',
 		placeholder : 'Select Status',
-		options     : [
-			{
-				label : 'Regular',
-				value : 'confirmed',
-			},
-			{
-				label : 'Probation',
-				value : 'probation',
-			},
-			{
-				label : 'Notice Period',
-				value : 'separated',
-			},
-			{
-				label : 'Inactive',
-				value : 'inactive',
-			},
-		],
-		rules: {
-			required: true,
-		},
+		options     : EMPLOYEE_STATUS_OPTIONS,
 	},
 ];
 

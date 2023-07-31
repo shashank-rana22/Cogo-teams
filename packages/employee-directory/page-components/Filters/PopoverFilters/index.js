@@ -1,29 +1,22 @@
 import { Button } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useMemo } from 'react';
+import React from 'react';
 
-import { CONTROL_MAPPING, getControls } from '../../utils/filterControls';
+import { CONTROL_MAPPING, CONTROLS } from '../../utils/filterControls';
 
 import styles from './styles.module.css';
 
 function PopoverFilters({
-	setFilters = () => {}, setOpenFilterPopover = () => {}, filters = {}, control = '',
+	setFilters = () => {}, setOpenFilterPopover = () => {}, control = '',
 	handleSubmit = () => {},
-	reset = () => {},
+	onReset = () => {},
 	setemployeeFilters = () => {},
 }) {
-	const { employee_status } = filters;
-
-	const filterControls = useMemo(
-		() => getControls(employee_status),
-		[employee_status],
-	);
-
 	const onSubmit = (values) => {
 		const FORM_VALUES = {};
 
-		filterControls.forEach((val) => {
+		CONTROLS.forEach((val) => {
 			if (!isEmpty(values?.[val?.name])) {
 				FORM_VALUES[val.name] = values?.[val?.name];
 			}
@@ -31,16 +24,6 @@ function PopoverFilters({
 
 		setFilters((prev) => ({ ...prev, page: 1 }));
 		setemployeeFilters(FORM_VALUES);
-		setOpenFilterPopover(false);
-	};
-
-	const onReset = () => {
-		reset();
-		setFilters((prev) => ({
-			...prev,
-			page: 1,
-		}));
-		setemployeeFilters({});
 		setOpenFilterPopover(false);
 	};
 
@@ -59,7 +42,7 @@ function PopoverFilters({
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.filter_container}>
-					{filterControls.map((val) => {
+					{CONTROLS.map((val) => {
 						const Element = CONTROL_MAPPING[val.controlType];
 						return (
 							<div key={val.name} className={styles.controller_item}>

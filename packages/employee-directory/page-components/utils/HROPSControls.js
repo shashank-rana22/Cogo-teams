@@ -1,3 +1,5 @@
+import { EMPLOYEE_STATUS_OPTIONS } from './constants';
+
 /* eslint-disable max-lines-per-function */
 function getHROPSControls(isCogoFreight, isEditable) {
 	const CONTROLS = [
@@ -76,10 +78,6 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			controlType : 'asyncSelect',
 			placeholder : 'Search Reporting Manager',
 			asyncKey    : 'list_all_managers',
-			params      : {
-				filters    : { status: 'active' },
-				page_limit : 100,
-			},
 			initialCall : true,
 			rules       : {
 				required: true,
@@ -183,10 +181,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 				page_limit : 100,
 			},
 			initialCall : true,
-			// rules       : {
-			// 	required: true,
-			// },
-			disabled    : !isEditable,
+			rules       : {
+				required: true,
+			},
+			disabled: !isEditable,
 		},
 		{
 			label       : 'LI',
@@ -258,6 +256,17 @@ function getHROPSControls(isCogoFreight, isEditable) {
 				},
 			],
 			rules: {
+				required: true,
+			},
+			disabled: !isEditable,
+		},
+		{
+			name        : 'employee_status',
+			label       : 'Status',
+			controlType : 'select',
+			placeholder : 'Status',
+			options     : EMPLOYEE_STATUS_OPTIONS,
+			rules       : {
 				required: true,
 			},
 			disabled: !isEditable,

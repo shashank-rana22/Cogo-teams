@@ -1,12 +1,12 @@
 import { useHarbourRequest } from '@cogoport/request';
 
 const useGetEmployeeStats = () => {
-	const [{ loading, data = {} }] = useHarbourRequest({
+	const [{ loading, data = {} }, refetch] = useHarbourRequest({
 		method : 'GET',
 		url    : '/list_employee_stats',
 	}, { manual: false });
 
-	return { data, loading };
+	return { data, loading, statsRefetch: refetch };
 };
 
 export default useGetEmployeeStats;

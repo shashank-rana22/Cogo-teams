@@ -3,3 +3,19 @@
 	text-decoration-line: underline;
 	cursor: pointer;
 }
+
+.data {
+	width: fit-content;
+	max-width: 140px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (max-width: 1280px) {
+		max-width: 100px;
+	}
+}
+
+.tooltip_data {
+	word-break: normal;
+}

@@ -1,6 +1,6 @@
-import { Input, Select, Popover, Button } from '@cogoport/components';
+import { Input, Select, Popover, Button, ButtonIcon } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMAppSearch, IcMDoubleFilter, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMAppSearch, IcMDoubleFilter, IcMArrowRotateDown, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -22,6 +22,7 @@ function Filters({
 	setSortType = () => {},
 	setemployeeFilters = () => {},
 	employeeFilters = {},
+	bulkActions = {},
 }) {
 	const [openFilterPopover, setOpenFilterPopover] = useState(false);
 
@@ -29,11 +30,20 @@ function Filters({
 
 	const handleSearch = (e) => {
 		setSearchText(e);
-		debounceQuery(e);
 	};
 
 	const handleSort = (e) => {
 		setSortType(e);
+	};
+
+	const onReset = () => {
+		reset();
+		setFilters((prev) => ({
+			...prev,
+			page: 1,
+		}));
+		setemployeeFilters({});
+		setOpenFilterPopover(false);
 	};
 
 	useEffect(() => {
@@ -50,6 +60,10 @@ function Filters({
 			sort_type : isEmptySort ? undefined : sortTypeKey,
 		}));
 	}, [setFilters, sortType]);
+
+	useEffect(() => {
+		debounceQuery(searchText);
+	}, [searchText, debounceQuery]);
 
 	return (
 		<div className={styles.container}>
@@ -81,12 +95,13 @@ function Filters({
 					isClearable
 				/>
 
-				<Popover
-					placement="bottom"
-					visible={openFilterPopover}
-					onClickOutside={() => setOpenFilterPopover(false)}
-					interactive
-					render={(
+				<div className={styles.filter_container}>
+					<Popover
+						placement="bottom"
+						visible={openFilterPopover}
+						onClickOutside={() => setOpenFilterPopover(false)}
+						interactive
+						render={(
 						openFilterPopover && (
 							<PopoverFilters
 								setFilters={setFilters}
@@ -94,27 +109,37 @@ function Filters({
 								filters={filters}
 								control={control}
 								handleSubmit={handleSubmit}
-								reset={reset}
+								onReset={onReset}
 								setemployeeFilters={setemployeeFilters}
 							/>
 						)
-					)}
-				>
-					<Button
-						size="lg"
-						themeType="secondary"
-						className={styles.filters}
-						onClick={() => setOpenFilterPopover(!openFilterPopover)}
+						)}
 					>
-						<div className={styles.flex}>
-							<span className={styles.filter_text}>
-								Filter
-							</span>
-							<IcMDoubleFilter />
-						</div>
-						{!isEmpty(employeeFilters) && <div className={styles.filter_dot} />}
-					</Button>
-				</Popover>
+						<Button
+							size="lg"
+							themeType="secondary"
+							className={styles.filters}
+							onClick={() => setOpenFilterPopover(!openFilterPopover)}
+						>
+							<div className={styles.flex}>
+								<span className={styles.filter_text}>
+									Filter
+								</span>
+								<IcMDoubleFilter />
+							</div>
+							{!isEmpty(employeeFilters) && <div className={styles.filter_dot} />}
+						</Button>
+					</Popover>
+					<div className={styles.filter_reset_btn}>
+						<ButtonIcon
+							disabled={isEmpty(employeeFilters)}
+							size="lg"
+							themeType="primary"
+							icon={<IcMRefresh />}
+							onClick={onReset}
+						/>
+					</div>
+				</div>
 
 				<Popover
 					placement="bottom"
@@ -122,6 +147,7 @@ function Filters({
 						<BulkAction
 							setBulkActions={setBulkActions}
 							setSelectedIds={setSelectedIds}
+							bulkActions={bulkActions}
 						/>
 					)}
 				>
