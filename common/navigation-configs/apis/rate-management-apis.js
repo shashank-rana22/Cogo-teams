@@ -503,6 +503,11 @@ const rms = [
 		service_name : 'haulage_freight_rate',
 	},
 	{
+		api          : 'list_haulage_freight_rate_sheet_stats',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+	},
+	{
 		api          : 'update_rate_sheet',
 		access_type  : 'private',
 		service_name : 'rate_sheet',
@@ -661,6 +666,26 @@ const rms = [
 		api          : 'create_air_freight_rate_sheet',
 		access_type  : 'private',
 		service_name : 'air_freight_rate',
+	},
+	{
+		api          : 'create_trailer_freight_rate_sheet',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+	},
+	{
+		api          : 'list_trailer_freight_rate_sheets',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+	},
+	{
+		api          : 'update_trailer_freight_rate_sheet',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+	},
+	{
+		api          : 'list_trailer_freight_rate_sheet_stats',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
 	},
 ];
 export default rms;
