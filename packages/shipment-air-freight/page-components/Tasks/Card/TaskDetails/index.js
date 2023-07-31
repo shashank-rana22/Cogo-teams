@@ -28,8 +28,8 @@ function TaskDetails({
 
 	if (task?.service_type === 'subsidiary_service') {
 		taskName = `Mark ${
-			task?.subsidiary_service_name.split(' ')[GLOBAL_CONSTANTS.zeroth_index]
-		} (${task?.subsidiary_service_name.split(' ').slice(REMOVE_LINE_ITEM_NAME).join(' ')}) ${
+			task?.subsidiary_service_name?.split(' ')[GLOBAL_CONSTANTS.zeroth_index]
+		} (${task?.subsidiary_service_name?.split(' ')?.slice(REMOVE_LINE_ITEM_NAME)?.join(' ')}) ${
 			task?.task === 'mark_completed' ? 'Completed' : 'Confirm'
 		}` || 	startCase(task?.label) || startCase(task?.task);
 	}
