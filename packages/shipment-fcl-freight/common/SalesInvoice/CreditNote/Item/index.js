@@ -77,7 +77,8 @@ function Item({
 							)}
 						>
 							<span className={styles.gst_number}>
-								GST Number:&nbsp;
+								GST Number:
+								{' '}
 								<span>{item?.billing_address?.tax_number}</span>
 							</span>
 						</Tooltip>
@@ -96,7 +97,8 @@ function Item({
 						</div>
 
 						<div className={styles.invoice_value}>
-							Invoice Value - &nbsp;
+							Invoice Value -
+							{' '}
 							<span>
 								{formatAmount({
 									amount   : item?.invoice_value,
