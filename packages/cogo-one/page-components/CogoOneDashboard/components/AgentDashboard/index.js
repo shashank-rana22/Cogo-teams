@@ -1,24 +1,49 @@
+import { useRouter } from '@cogoport/next';
+import { useState } from 'react';
+
 import Calendar from '../../common/Calendar';
 import CallAnalytics from '../../common/CallAnalytics';
 import ChannelMessageAnalytic from '../../common/ChannelMessageAnalytics';
 import ChatStatistics from '../../common/ChatStatistics';
 import Header from '../../common/Header';
 import LineChart from '../../common/LineChart';
+import useGetCogoOneAgentStats from '../../hooks/useGetCogoOneAgentStats';
 
 import MyStats from './MyStats';
 import Statisfaction from './Statisfaction';
 import styles from './styles.module.css';
 import TotalChatsHandled from './TotalChatshandled';
 
-function AgentDashboard(props) {
+function AgentDashboard({ isRolePresent = false }) {
+	const { query } = useRouter();
+
+	const { id = '' } = query || {};
+
+	const [timeline, setTimeline] = useState('day');
+	const [calendarData, setCalendarData] = useState([]);
+	const [selectedItem, setSelectedItem] = useState(new Date());
+	const [selectedDate, setSelectedDate] = useState({
+		startDate : null,
+		endDate   : null,
+	});
+
 	const {
-		timeline = '',
-		setTimeline = () => {},
-		data = {},
 		loading = false,
-		setSelectedDate = () => {},
-		isRolePresent = false,
-	} = props || {};
+		data = {},
+		getCogoOneDashboard = () => {},
+	} = useGetCogoOneAgentStats({ timeline, selectedDate, id });
+
+	const props = {
+		timeline,
+		setTimeline,
+		calendarData,
+		setCalendarData,
+		selectedItem,
+		setSelectedItem,
+		setSelectedDate,
+		getCogoOneDashboard,
+	};
+
 	const { calls = {}, graph = {} } = data || {};
 
 	return (
@@ -49,12 +74,12 @@ function AgentDashboard(props) {
 					<TotalChatsHandled loading={loading} />
 					<div className={styles.satisfaction_intent_served_box}>
 						<Statisfaction loading={loading} />
-						<MyStats timeline={timeline} />
+						<MyStats timeline={timeline} agentId={id} />
 					</div>
 					<div className={styles.two_characterisctics_container}>
 						<ChatStatistics
 							isAdminView={isRolePresent}
-							loading={loading}
+							agentId={id}
 						/>
 					</div>
 				</div>

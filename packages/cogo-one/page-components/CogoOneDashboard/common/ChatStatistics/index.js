@@ -9,8 +9,9 @@ import styles from './styles.module.css';
 
 const MIN_CHAT_NUMBER = 0;
 
-function ChatStatistics({ isAdminView = false }) {
-	const { data = {}, loading = false } = useListAssignedChats();
+function ChatStatistics({ isAdminView = false, agentId = '' }) {
+	const { data = {}, loading = false } = useListAssignedChats({ agentId });
+
 	const { chat_stats : chatStats = {} } = data || {};
 
 	return (

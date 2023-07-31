@@ -10,8 +10,8 @@ import { getFormattedNumber } from '../../../utils/getFormattedNumber';
 
 import styles from './styles.module.css';
 
-function MyStats({ timeline = '' }) {
-	const { data = {}, loading: chatLoading = false } = useListAssignedChats();
+function MyStats({ timeline = '', agentId = '' }) {
+	const { data = {}, loading: chatLoading = false } = useListAssignedChats({ agentId });
 	const { shipmentData = {}, shipmentLoading = false } = useListAgentCheckout({ timeline });
 	const { callData = {}, callLoading = false } = useListCallDetails({ timeline });
 

@@ -6,24 +6,41 @@ import ChannelMessageAnalytic from '../../common/ChannelMessageAnalytics';
 import ChatStatistics from '../../common/ChatStatistics';
 import Header from '../../common/Header';
 import LineChart from '../../common/LineChart';
+import useGetCogoOneAgentStats from '../../hooks/useGetCogoOneAgentStats';
 
 import AgentActivity from './AgentActivity';
 import Escalation from './Escalations';
 import PerformanceTab from './PerformanceTabs';
 import styles from './styles.module.css';
 
-function AdminDashboard(props) {
+function AdminDashboard() {
+	const [timeline, setTimeline] = useState('day');
+	const [calendarData, setCalendarData] = useState([]);
+	const [selectedItem, setSelectedItem] = useState(new Date());
+	const [selectedDate, setSelectedDate] = useState({
+		startDate : null,
+		endDate   : null,
+	});
+	const [activeTab, setActiveTab] = useState('active');
+
 	const {
+		loading = false,
+		data = {},
+		getCogoOneDashboard = () => {},
+	} = useGetCogoOneAgentStats({ timeline, selectedDate });
+
+	const props = {
 		timeline,
 		setTimeline,
-		data,
-		loading,
-		setSelectedDate = () => {},
-	} = props || {};
+		calendarData,
+		setCalendarData,
+		selectedItem,
+		setSelectedItem,
+		setSelectedDate,
+		getCogoOneDashboard,
+	};
 
 	const { calls = {}, graph = {} } = data || {};
-
-	const [activeTab, setActiveTab] = useState('active');
 
 	return (
 
