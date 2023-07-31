@@ -29,7 +29,7 @@ function PopularTags({ tabTitle = '', searchState = '' }) {
 	const { options } = useListFaqTag();
 
 	return (
-		<div style={{ marginBottom: 10 }}>
+		<div className={styles.container}>
 			<h4 style={{ margin: '12px 0' }}>
 				Popular tags in this section
 			</h4>

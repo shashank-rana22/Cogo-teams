@@ -3,6 +3,7 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
 import PopularTags from './PopularTags';
+import styles from './styles.module.css';
 
 function Dashboard({ tabTitle = '' }) {
 	const [searchState, setSearchState] = useState('');
@@ -14,7 +15,7 @@ function Dashboard({ tabTitle = '' }) {
 	}, [inputState]);
 
 	return (
-		<div style={{ marginTop: 12 }}>
+		<div className={styles.search_container}>
 			<form
 				style={{ display: 'flex' }}
 				onSubmit={(e) => {

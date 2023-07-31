@@ -41,9 +41,9 @@ export default function getControls({
 
 	const blCategoryOptions = trade_type === 'export' && payment_term === 'prepaid'
 		? [
-			{ label: 'Mbl', value: 'mbl' },
-			{ label: 'Hbl', value: 'hbl' },
-		] : [{ label: 'Hbl', value: 'hbl' }];
+			{ label: 'MBL', value: 'mbl' },
+			{ label: 'HBL', value: 'hbl' },
+		] : [{ label: 'HBL', value: 'hbl' }];
 
 	const controls = [
 		{

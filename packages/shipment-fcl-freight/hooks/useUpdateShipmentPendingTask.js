@@ -7,7 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 const SUCCESS_HTTP_CODE = 200;
 
 const useUpdateShipmentPendingTask = ({
-	successMessage = 'Task Updated Successfully!',
+	successMessage = 'Task Completed Successfully!',
 	refetch = () => {},
 	task = {},
 	tasksList = [],
