@@ -19,6 +19,7 @@ function LoadOverview({
 	infoBanner = {},
 	showSmall = false,
 	setInfoBanner = () => {},
+	isGuideViewed = false,
 }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -30,7 +31,7 @@ function LoadOverview({
 
 	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
-	const showPopover = current === 'edit_button';
+	const showPopover = current === 'edit_button' && !isGuideViewed;
 
 	const popoverComponentData = buttonProps.edit_button || {};
 

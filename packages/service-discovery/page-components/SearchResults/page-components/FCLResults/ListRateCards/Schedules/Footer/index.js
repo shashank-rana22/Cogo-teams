@@ -8,38 +8,57 @@ import styles from './styles.module.css';
 
 const ONE_VALUE = 1;
 
-function Footer({ paginationProps = {}, selectedWeek = {}, setFilters = () => {}, loading = false }) {
+function Footer({ paginationProps = {}, selectedWeek = {}, setFilters = () => {}, loading = false, schedules = [] }) {
 	const { page, page_limit, total_count } = paginationProps;
+
+	const { count = 0, start_date = '', end_date = '' } = selectedWeek;
+
+	const initialDate = schedules[GLOBAL_CONSTANTS.zeroth_index]?.start_date;
+
+	const finalDate = schedules[schedules.length - ONE_VALUE]?.end_date;
+
+	const MAPPING = {
+		true: {
+			count,
+			startDate : start_date,
+			endDate   : end_date,
+		},
+		false: {
+			count     : total_count,
+			startDate : initialDate,
+			endDate   : finalDate,
+		},
+	};
+
+	const { count:countToShow, startDate, endDate } = MAPPING[!isEmpty(selectedWeek)];
 
 	return (
 		<div className={styles.container}>
-			{!isEmpty(selectedWeek) ? (
-				<div className={styles.rates_count}>
-					{selectedWeek?.count}
+			<div className={styles.rates_count}>
+				{countToShow}
+				{' '}
+				{countToShow > ONE_VALUE ? 'Options available' : 'Option available'}
+				{'  '}
+				<span>
+					between
 					{' '}
-					{selectedWeek?.count > ONE_VALUE ? 'Options available' : 'Option available'}
-					{'  '}
-					<span>
-						between
+					<strong>
+						{formatDate({
+							date       : startDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+							formatType : 'date',
+						})}
 						{' '}
-						<strong>
-							{formatDate({
-								date       : selectedWeek?.start_date,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
-								formatType : 'date',
-							})}
-							{' '}
-							&
-							{' '}
-							{formatDate({
-								date       : selectedWeek?.end_date,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
-								formatType : 'date',
-							})}
-						</strong>
-					</span>
-				</div>
-			) : null}
+						&
+						{' '}
+						{formatDate({
+							date       : endDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+							formatType : 'date',
+						})}
+					</strong>
+				</span>
+			</div>
 
 			{loading ? null : (
 				<div className={styles.pagination}>

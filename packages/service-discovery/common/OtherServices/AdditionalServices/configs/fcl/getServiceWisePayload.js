@@ -9,6 +9,7 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 		truck_type = '',
 		trucks_count = '',
 		haulage_type = '',
+		import_fcl_cfs_cargo_handling_type = '',
 	} = additionalFormInfo;
 
 	const { bls_count = '', service_details = {}, service_type = '' } = detail;
@@ -28,7 +29,7 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 			origin_location_id      : detail?.destination_port_id,
 			port_id                 : detail?.destination_port_id,
 			trade_type              : 'import',
-			cargo_handling_type     : destination_cargo_handling_type,
+			cargo_handling_type     : destination_cargo_handling_type || import_fcl_cfs_cargo_handling_type,
 		},
 	};
 

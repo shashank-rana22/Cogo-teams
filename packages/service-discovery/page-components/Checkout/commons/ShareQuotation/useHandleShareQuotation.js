@@ -1,3 +1,4 @@
+import { IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -7,11 +8,29 @@ import handleCopy from '../../helpers/handleCopyUrl';
 import useUpdateCheckoutMargin from '../../hooks/useUpdateCheckoutMargin';
 import { transformMargins } from '../../utils/transformMargins';
 
+import styles from './styles.module.css';
+import TotalCost from './TotalCost';
+
 const ONE = 1;
+
+function SubmitButton({ rate = {}, quotation_email_sent_at = false }) {
+	if (!quotation_email_sent_at) {
+		return 'Place Booking';
+	}
+
+	return (
+		<div className={styles.flex}>
+			Place Booking
+
+			<TotalCost rate={rate} />
+
+			<IcMArrowDoubleRight width={14} height={14} />
+		</div>
+	);
+}
 
 const useHandleShareQuotation = ({
 	rateDetails = [],
-	additionalRemark = '',
 	convenienceDetails = {},
 	convenience_line_item = {},
 	noRatesPresent = false,
@@ -112,7 +131,6 @@ const useHandleShareQuotation = ({
 			checkout_id,
 			margins                                 : FINAL_MARGINS,
 			is_applicable_for_approval_confirmation : false,
-			margin_approval_request_remarks         : additionalRemark ? [additionalRemark] : undefined,
 		};
 
 		await updateCheckoutMargin({ finalPayload });
@@ -128,8 +146,9 @@ const useHandleShareQuotation = ({
 
 	const updateState = () => {
 		updateCheckout({
-			values     : { state: 'locked', id: checkout_id, is_locked: true },
-			stateValue : 'preview_booking',
+			values      : { state: 'locked', id: checkout_id, is_locked: true },
+			stateValue  : 'preview_booking',
+			scrollToTop : true,
 		});
 	};
 
@@ -180,7 +199,7 @@ const useHandleShareQuotation = ({
 		},
 		{
 			key             : 'proceed_to_booking',
-			label           : 'Proceed to Booking',
+			label           : <SubmitButton quotation_email_sent_at={quotation_email_sent_at} rate={rate} />,
 			themeType       : 'accent',
 			style           : { marginLeft: '20px' },
 			disabled        : !quotation_email_sent_at,

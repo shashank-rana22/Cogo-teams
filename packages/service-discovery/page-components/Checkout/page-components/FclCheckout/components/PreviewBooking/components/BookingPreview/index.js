@@ -1,3 +1,5 @@
+import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import BreakdownDetails from '../../../../../../commons/BreakdownDetails';
@@ -5,12 +7,11 @@ import BreakdownDetails from '../../../../../../commons/BreakdownDetails';
 import BookingDetails from './BookingDetails';
 import styles from './styles.module.css';
 
-const FIRST_INDEX = 0;
-
 function BookingPreview({ rate = {}, setShowBreakup = () => {}, showBreakup = false }) {
 	const [rateDetails, setRateDetails] = useState([]);
+	const [noRatesPresent, setNoRatesPresent] = useState([]);
 
-	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[FIRST_INDEX];
+	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[GLOBAL_CONSTANTS.zeroth_index];
 
 	const convenienceDetails = {
 		convenience_rate: {
@@ -28,7 +29,7 @@ function BookingPreview({ rate = {}, setShowBreakup = () => {}, showBreakup = fa
 
 			{showBreakup ? (
 				<div className={styles.breakdown_details}>
-					<div className={`${styles.heading} ${styles.commercial_view}`}>Commercial View</div>
+					<div className={cl`${styles.heading} ${styles.commercial_view}`}>Commercial View</div>
 
 					<BreakdownDetails
 						rateDetails={rateDetails}
@@ -36,6 +37,8 @@ function BookingPreview({ rate = {}, setShowBreakup = () => {}, showBreakup = fa
 						setRateDetails={setRateDetails}
 						convenienceDetails={convenienceDetails}
 						source="preview_booking"
+						setNoRatesPresent={setNoRatesPresent}
+						noRatesPresent={noRatesPresent}
 					/>
 				</div>
 			) : null}

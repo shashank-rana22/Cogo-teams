@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -18,6 +19,7 @@ const useGetInsuranceRate = (props) => {
 
 			setRateData(res?.data);
 		} catch (err) {
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 			setRateData({});
 		}
 	}, [setRateData, trigger]);

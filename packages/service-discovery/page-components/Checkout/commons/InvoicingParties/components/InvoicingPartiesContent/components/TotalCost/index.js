@@ -10,6 +10,8 @@ const MAX_PERCENT_VALUE = 100;
 
 const DELTA_VALUE = 1;
 
+const ROUND_OFF_VALUE = 2;
+
 const CURRENCY_OPTIONS = [
 	GLOBAL_CONSTANTS.currency_code.USD,
 	GLOBAL_CONSTANTS.currency_code.INR,
@@ -52,7 +54,7 @@ function PriceComponent({
 					size="lg"
 				/>
 
-				<div className={styles.value}>{finalConvertedValue.toFixed(2)}</div>
+				<div className={styles.value}>{finalConvertedValue.toFixed(ROUND_OFF_VALUE)}</div>
 			</div>
 		);
 	}
@@ -68,6 +70,7 @@ function getInvoicingPartyPrice({
 	cogofx_currencies,
 }) {
 	let invoicingPartyPrice = 0;
+
 	(Object.keys(serviceRates) || []).forEach((serviceRate) => {
 		const serviceAmount = serviceRates[serviceRate].tax_total_price_discounted;
 		if (!(invoiceServices || []).includes(serviceRate)) {
@@ -129,7 +132,7 @@ function getExtraCharges({
 		) {
 			price = lineItem[GLOBAL_CONSTANTS.zeroth_index].total_price_discounted;
 		} else {
-			const toBaseCurrency =				lineItem[GLOBAL_CONSTANTS.zeroth_index].total_price_discounted
+			const toBaseCurrency = lineItem[GLOBAL_CONSTANTS.zeroth_index].total_price_discounted
 				* currencies[lineItem?.[GLOBAL_CONSTANTS.zeroth_index].currency];
 
 			price = toBaseCurrency / currencies[invoicingPartyCurrency];

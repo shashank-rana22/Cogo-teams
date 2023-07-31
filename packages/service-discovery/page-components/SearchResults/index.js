@@ -1,4 +1,5 @@
 import { Loader, cl } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -9,6 +10,10 @@ import FCLResults from './page-components/FCLResults';
 import styles from './styles.module.css';
 
 function SearchResults() {
+	const { user:{ id } } = useSelector(({ profile }) => ({
+		user: profile.user,
+	}));
+
 	const [headerProps, setHeaderProps] = useState({});
 	const [comparisonRates, setComparisonRates] = useState([]);
 	const [selectedWeek, setSelectedWeek] = useState({});
@@ -65,6 +70,8 @@ function SearchResults() {
 		},
 	});
 
+	const isGuideViewed = localStorage.getItem(`guide_completed_for_${id}`) || false;
+
 	const {
 		refetchSearch = () => {},
 		loading = false,
@@ -112,11 +119,12 @@ function SearchResults() {
 				setCurrentScreen={setScreen}
 				infoBanner={infoBanner}
 				setInfoBanner={setInfoBanner}
+				isGuideViewed={isGuideViewed}
 			/>
 
 			<div
 				style={
-					showAdditionalHeader || infoBanner.current === 'edit_button'
+					(showAdditionalHeader || infoBanner.current === 'edit_button') && !isGuideViewed
 						? { opacity: 0.6, pointerEvents: 'none', background: '#000' }
 						: null
 				}
@@ -141,6 +149,7 @@ function SearchResults() {
 					possible_subsidiary_services={possible_subsidiary_services}
 					infoBanner={infoBanner}
 					setInfoBanner={setInfoBanner}
+					isGuideViewed={isGuideViewed}
 				/>
 			</div>
 		</div>

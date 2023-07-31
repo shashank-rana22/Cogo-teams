@@ -68,6 +68,7 @@ function RateCard({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
+	isGuideViewed = false,
 }) {
 	if (loading) {
 		return null;
@@ -85,6 +86,7 @@ function RateCard({
 			infoBanner={infoBanner}
 			index={index}
 			setInfoBanner={setInfoBanner}
+			isGuideViewed={isGuideViewed}
 		/>
 	);
 }

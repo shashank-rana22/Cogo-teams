@@ -34,3 +34,9 @@
 	font-size: 12px;
 	color: #373737;
 }
+
+.error_message {
+	margin-bottom: -20px;
+	font-size: 12px;
+	color: #ee3425;
+}

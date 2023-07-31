@@ -33,6 +33,8 @@ function Checkout({ checkout_type = '' }) {
 		headerProps = {},
 		search_id = '',
 		importer_exporter_id = '',
+		isShipmentCreated = false,
+		setIsShipmentCreated = () => {},
 	} = useCheckout({ query, entity_types, partner_id, checkout_type });
 
 	if (loading && isEmpty(data)) {
@@ -61,6 +63,15 @@ function Checkout({ checkout_type = '' }) {
 			<div className={styles.spinner_container}>
 				<DotLoader />
 				<div className={styles.text}>{message}</div>
+			</div>
+		);
+	}
+
+	if (isShipmentCreated) {
+		return (
+			<div className={styles.spinner_container}>
+				<DotLoader />
+				<div className={styles.text}>The shipment is booked, you are being redirected to shipment page</div>
 			</div>
 		);
 	}
@@ -101,7 +112,10 @@ function Checkout({ checkout_type = '' }) {
 					))}
 				</Breadcrumb>
 
-				<ActiveComponent state={state} />
+				<ActiveComponent
+					state={state}
+					setIsShipmentCreated={setIsShipmentCreated}
+				/>
 			</div>
 		</CheckoutContext.Provider>
 	);

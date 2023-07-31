@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 import EditDetailsHeader from '../../page-components/SearchResults/components/EditDetailsHeader';
 import AdditionalServicesForm from '../OtherServices/AdditionalServices/AdditionalServicesForm';
@@ -28,6 +28,7 @@ function Header({
 	activePage = '',
 	infoBanner = {},
 	setInfoBanner = () => {},
+	isGuideViewed = false,
 	...rest
 }) {
 	// const { scrollDirection } = useScrollDirection();
@@ -80,6 +81,7 @@ function Header({
 							isAllowedToEdit={isAllowedToEdit}
 							infoBanner={infoBanner}
 							setInfoBanner={setInfoBanner}
+							isGuideViewed={isGuideViewed}
 						/>
 
 						<Wallet

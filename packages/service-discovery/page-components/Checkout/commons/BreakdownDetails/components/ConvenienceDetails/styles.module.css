@@ -27,8 +27,9 @@
 	:global {
 		.ui_accordion_content {
 			width: 100%;
-			padding: 0 40px;
+			padding: 0 40px !important;
 			background-color: #f3fafa;
+			overflow: unset;
 		}
 
 		.ui_accordion_header {
@@ -59,6 +60,10 @@
 		.ui_input_container {
 			width: 92px;
 		}
+
+		.ui_select_options_container {
+			max-height: 200px;
+		}
 	}
 }
 
@@ -70,7 +75,6 @@
 
 .right_container {
 	width: 50%;
-	margin-bottom: 12px;
 }
 
 .left_container {

@@ -15,37 +15,47 @@ function ScheduleItem({
 	setFilters = () => {},
 	setComparisonRates = () => {},
 }) {
-	const { end_date = '', start_date = '', min_price = '', min_price_currency = 'USD' } = data;
+	const {
+		end_date = '',
+		start_date = '',
+		min_price = '',
+		min_price_currency = GLOBAL_CONSTANTS.currency_code.USD,
+	} = data;
 
 	const handleChange = () => {
-		if (getKey(selectedWeek) === getKey(data)) {
-			setSelectedWeek({});
-			setFilters((prev) => ({
-				...prev,
-				departure_before : undefined,
-				departure_after  : undefined,
-				page             : 1,
-			}));
-		} else {
-			setSelectedWeek(data);
-			setFilters((prev) => ({
-				...prev,
-				departure_before : end_date,
-				departure_after  : start_date,
-				page             : 1,
-			}));
-		}
 		setComparisonRates({});
+
+		const isExistingSchedule = selectedWeek.end_date === data.end_date
+		&& selectedWeek.start_date === data.start_date;
+
+		setSelectedWeek(() => {
+			if (isExistingSchedule) {
+				return {};
+			}
+
+			return data;
+		});
+
+		setFilters((prev) => ({
+			...prev,
+			departure_before : !isExistingSchedule ? end_date : undefined,
+			departure_after  : !isExistingSchedule ? start_date : undefined,
+			page             : 1,
+		}));
 	};
 
 	return (
 		<div
 			role="presentation"
-			className={cl`${styles.container} ${getKey(selectedWeek) === getKey(data) ? styles.selected : {}}`}
+			className={cl`${styles.container} ${
+				getKey(selectedWeek) === getKey(data) ? styles.active : styles.inactive
+			}`}
 			onClick={handleChange}
 		>
 			<span
-				className={cl`${styles.week} ${getKey(selectedWeek) === getKey(data) ? styles.selected_week : {}}`}
+				className={cl`${styles.week} ${
+					getKey(selectedWeek) === getKey(data) ? styles.selected_week : {}
+				}`}
 			>
 				{formatDate({
 					date       : start_date,

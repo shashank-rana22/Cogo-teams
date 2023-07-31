@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
+import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useRef, useContext } from 'react';
@@ -9,8 +9,10 @@ import OTPLayout from '../../../../../../commons/WhatsappNoVerificationModal/Wha
 import { CheckoutContext } from '../../../../../../context';
 import handleTimer from '../../../../../../utils/handleTimer';
 
+import CogoPoint from './CogoPoint';
 import domesticServices from './domestic-services.json';
 import styles from './styles.module.css';
+import TotalCost from './TotalCost';
 import useHandleBookingConfirmationFooter from './useHandleBookingConfirmationFooter';
 
 const SECOND_TO_MILLISECOND = 1000;
@@ -99,6 +101,8 @@ function BookingConfirmationFooter({
 	bookingConfirmationMode = '',
 	invoicingParties = [],
 	isVeryRisky = false,
+	setIsShipmentCreated = () => {},
+	earnable_cogopoints = {},
 }) {
 	const {
 		query: { shipment_id },
@@ -113,6 +117,7 @@ function BookingConfirmationFooter({
 		checkout_type = '',
 		invoice = {},
 		isChannelPartner = false,
+		rate = {},
 	} = useContext(CheckoutContext);
 
 	const timerRef = useRef(null);
@@ -157,6 +162,7 @@ function BookingConfirmationFooter({
 		getCheckout,
 		bookingConfirmationMode,
 		checkout_type,
+		setIsShipmentCreated,
 	});
 
 	useEffect(() => {
@@ -213,7 +219,8 @@ function BookingConfirmationFooter({
 				{!hasExpired && bookingConfirmationMode !== 'email' ? (
 					<Button
 						type="button"
-						size="lg"
+						size="xl"
+						themeType="accent"
 						onClick={handleSubmit}
 						loading={submitButtonLoading}
 						disabled={
@@ -231,11 +238,21 @@ function BookingConfirmationFooter({
 							})
 						}
 					>
-						{getButtonLabel({
-							checkoutMethod,
-							booking_status,
-							bookingConfirmationMode,
-						})}
+						<div className={styles.flex_column}>
+							<div className={styles.button}>
+								{getButtonLabel({
+									checkoutMethod,
+									booking_status,
+									bookingConfirmationMode,
+								})}
+
+								<TotalCost rate={rate} />
+
+								<IcMArrowDoubleRight width={14} height={14} />
+							</div>
+
+							<CogoPoint cogopoint={earnable_cogopoints} />
+						</div>
 					</Button>
 				) : null}
 			</div>

@@ -1,62 +1,46 @@
 import { Input, Select, Accordion, cl } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { startCase } from '@cogoport/utils';
 
 import currencies from '../../../../helpers/currencies';
+import Spinner from '../../../Spinner';
 
 import ExchangeRate from './ExchangeRate';
 import ServiceChargesTitle from './ServiceChargesTitle';
 import styles from './styles.module.css';
+import useHandleConvenienceDetails from './useHandleConvenienceDetails';
 
 function ConvenienceDetails({
 	total = 0,
 	convenienceDetails = {},
 	setConvenienceDetails = () => {},
 	rate = {},
-	disableForm = false,
+	shouldEditConvenienceFee = false,
 	conversions = {},
 	detail = {},
 	getCheckout = () => {},
 	source = '',
+	convenienceRateOptions = [],
+	disableControl = false,
 }) {
-	const subTotal = total;
+	const { convenience_rate = {} } = convenienceDetails || {};
 
-	const onChange = ({ value, itemKey }) => {
-		setConvenienceDetails((prev) => ({
-			convenience_rate: {
-				...prev.convenience_rate,
-				[itemKey]: value,
-			},
-		}));
-	};
+	const { unit = '', currency = '', price = '' } = convenience_rate;
 
-	const taxesDisplay = formatAmount({
-		amount   : rate?.tax_price_discounted,
-		currency : rate?.tax_price_currency,
-		options  : {
-			style                 : 'currency',
-			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
-		},
-	});
-
-	const convenienceFeeDisplay = formatAmount({
-		amount   : convenienceDetails?.convenience_rate.price,
-		currency : convenienceDetails?.convenience_rate.currency,
-		options  : {
-			style                 : 'currency',
-			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
-		},
-	});
-
-	const subTotalDisplay = formatAmount({
-		amount   : subTotal,
-		currency : rate?.total_price_currency,
-		options  : {
-			style                 : 'currency',
-			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
-		},
+	const {
+		onChangeCurrency = () => {},
+		subTotalDisplay = '',
+		convenienceFeeDisplay = '',
+		taxesDisplay = '',
+		loading = false,
+		convenienceRateMapping = {},
+		onChange = () => {},
+	} = useHandleConvenienceDetails({
+		convenienceDetails,
+		total,
+		convenienceRateOptions,
+		rate,
+		setConvenienceDetails,
+		detail,
 	});
 
 	return (
@@ -87,7 +71,9 @@ function ConvenienceDetails({
 							<div className={styles.text}>
 								Sub Total
 								{' '}
-								<span style={{ fontSize: '12px' }}>(excl service charges and taxes)</span>
+								<span style={{ fontSize: '12px' }}>
+									(excl service charges and taxes)
+								</span>
 							</div>
 							<div className={styles.amount}>{subTotalDisplay}</div>
 						</div>
@@ -97,25 +83,42 @@ function ConvenienceDetails({
 						<div className={styles.convenience_container}>
 							<div className={styles.text}>Convenience Fee</div>
 
+							{loading ? <Spinner width="24px" height="24px" /> : null}
+
 							<div className={styles.select_container}>
 								<Select
 									size="sm"
-									options={currencies}
-									value={convenienceDetails?.convenience_rate.currency}
-									disabled={disableForm}
+									options={convenienceRateOptions.map((option) => ({
+										label : startCase(option.unit),
+										value : option.unit,
+									}))}
+									value={unit}
+									disabled={disableControl || loading}
+									style={{ width: '180px' }}
 									onChange={(val) => {
 										if (val) {
-											onChange({ value: val, itemKey: 'currency' });
+											setConvenienceDetails({
+												convenience_rate: convenienceRateMapping[startCase(val)],
+											});
 										}
 									}}
 								/>
 
+								<Select
+									size="sm"
+									options={currencies}
+									value={currency}
+									disabled={!shouldEditConvenienceFee || loading}
+									style={{ marginLeft: '12px' }}
+									onChange={onChangeCurrency}
+								/>
+
 								<Input
-									value={convenienceDetails?.convenience_rate.price}
+									value={price}
 									size="sm"
 									onChange={(val) => onChange({ value: val, itemKey: 'price' })}
 									style={{ marginLeft: '12px' }}
-									disabled={disableForm}
+									disabled={!shouldEditConvenienceFee || loading}
 								/>
 							</div>
 						</div>

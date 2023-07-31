@@ -12,17 +12,31 @@ const useUpdateCheckout = ({ getCheckout, detail = {} }) => {
 
 	const { checkout_id, shipment_id } = query || {};
 
-	const [{ loading }, trigger] = useRequest({
-		method : 'post',
-		url    : '/update_checkout',
-	}, { manual: true });
+	const [{ loading }, trigger] = useRequest(
+		{
+			method : 'post',
+			url    : '/update_checkout',
+		},
+		{ manual: true },
+	);
 
-	const updateCheckout = async ({ values, closeFunction, stateValue = false, type = '', refetchRequired = true }) => {
+	const updateCheckout = async ({
+		values,
+		closeFunction,
+		stateValue = false,
+		type = '',
+		refetchRequired = true,
+		scrollToTop = false,
+	}) => {
 		try {
 			await trigger({ data: values });
 
 			if (refetchRequired) {
 				await getCheckout();
+			}
+
+			if (scrollToTop) {
+				window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			}
 
 			if (closeFunction) {

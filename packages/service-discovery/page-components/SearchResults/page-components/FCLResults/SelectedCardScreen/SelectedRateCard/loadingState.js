@@ -35,8 +35,8 @@ function LoadingState() {
 				<div className={styles.additional_services}>
 					<div className={styles.loading_heading}>You may need these services</div>
 
-					{[...Array(SERVICES_LOADING_COUNT)].map((_) => (
-						<div key={_} className={styles.loading_service_item}>
+					{[...Array(SERVICES_LOADING_COUNT).keys()].map((item) => (
+						<div key={item} className={styles.loading_service_item}>
 							<Placeholder
 								height="50%"
 								width="25%"

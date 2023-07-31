@@ -30,4 +30,12 @@
 
 .button_container {
 	display: flex;
+
+	:global {
+		.ui_button_container {
+			height: fit-content;
+			min-height: 40px;
+			padding: 8px 8px 8px 18px;
+		}
+	}
 }

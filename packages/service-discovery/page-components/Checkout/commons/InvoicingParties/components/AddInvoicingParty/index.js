@@ -20,11 +20,11 @@ function AddInvoicingParty({
 
 	return (
 		<div className={styles.container}>
-			Split this invoice, and get a chance to win upto 15% cashback.
+			Split this invoice to ensure invoices are generated for respective parties.
 			<Button
 				type="button"
 				size="lg"
-				themeType="accent"
+				themeType="secondary"
 				onClick={() => setShowAddInvoicingPartyModal(true)}
 			>
 				+ Add Invoicing Party

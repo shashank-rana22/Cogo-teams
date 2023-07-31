@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
@@ -6,11 +7,11 @@ import CANCELLATION_MAPPINGS from '../../utils/cancellationMappings';
 
 import styles from './styles.module.css';
 
-function Cancellation({ detail, serviceType, source = 'edit_margin' }) {
+function Cancellation({ detail = {}, serviceType = '', source = 'edit_margin' }) {
 	const { cancellation_charges } = detail;
 
 	return (
-		<div className={`${styles.container} ${styles[source]} ${serviceType === 'fcl_freight' ? 'fcl' : ''}`}>
+		<div className={cl`${styles.container} ${styles[source]} ${serviceType === 'fcl_freight' ? 'fcl' : ''}`}>
 			<div className={styles.header}>
 				<div className={styles.cancellation_policy}>Cancellation Policy</div>
 				<div className={styles.horizontal_line} />
@@ -18,7 +19,7 @@ function Cancellation({ detail, serviceType, source = 'edit_margin' }) {
 			</div>
 
 			<div className={styles.timeline}>
-				<div className={`${styles.text} ${styles.first_index}`}>Booking Confirmation</div>
+				<div className={cl`${styles.text} ${styles.first_index}`}>Booking Confirmation</div>
 				<div className={styles.vertical_line} />
 
 				<div className={styles.line} />
@@ -64,7 +65,7 @@ function Cancellation({ detail, serviceType, source = 'edit_margin' }) {
 				</div>
 
 				<div>
-					<div className={`${styles.text} ${styles.last_index}`}>Vessel Departure</div>
+					<div className={cl`${styles.text} ${styles.last_index}`}>Vessel Departure</div>
 					<div className={styles.vertical_line} />
 				</div>
 			</div>

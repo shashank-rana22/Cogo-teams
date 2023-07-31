@@ -47,10 +47,10 @@ const getSearchResultsPayload = ({
 		return {
 			spot_search_id,
 			service:
-				destination_cargo_handling_type === 'stuffing_at_factory'
+				destination_cargo_handling_type !== 'destuffing_at_dock'
 					? 'trailer_freight'
 					: 'ftl_freight',
-			...(destination_cargo_handling_type === 'stuffing_at_factory'
+			...(destination_cargo_handling_type !== 'destuffing_at_dock'
 				? {
 					trailer_freight_services: getServiceWisePayload({
 						additionalFormInfo,

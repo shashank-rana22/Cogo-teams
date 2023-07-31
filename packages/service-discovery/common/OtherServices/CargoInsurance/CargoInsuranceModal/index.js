@@ -154,6 +154,7 @@ function CargoInsuranceModal({
 				errors,
 				loading,
 				rateData,
+				formValues: watch(),
 			},
 		},
 	};

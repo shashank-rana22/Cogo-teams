@@ -273,8 +273,46 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 				value : 'non_enpanelled_cfs_dock_destuffing',
 			},
 		],
-		condition : { services: ['import_fcl_customs', 'import_transportation', 'import_fcl_cfs'] },
+		condition : { services: ['import_fcl_customs', 'import_transportation'] },
 		rules     : { required: 'Cargo Handling is required' },
+	},
+	{
+		name    : 'import_fcl_cfs_cargo_handling_type',
+		label   : 'Destination Cargo Handling',
+		type    : 'select',
+		caret   : true,
+		options : [
+			{
+				label : 'DPD without cfs',
+				value : 'dpd_without_cfs',
+			},
+			{
+				label : 'DPD cfs dock destuffing',
+				value : 'dpd_cfs_dock_destuffing',
+			},
+			{
+				label : 'DPD cfs factory destuffing',
+				value : 'dpd_cfs_factory_destuffing',
+			},
+			{
+				label : 'Enpanelled cfs dock destuffing',
+				value : 'enpanelled_cfs_dock_destuffing',
+			},
+			{
+				label : 'Enpanelled cfs factory destuffing',
+				value : 'enpanelled_cfs_factory_destuffing',
+			},
+			{
+				label : 'Non-enpanelled cfs dock destuffing',
+				value : 'non_enpanelled_cfs_dock_destuffing',
+			},
+			{
+				label : 'Non-enpanelled cfs factory destuffing',
+				value : 'non_enpanelled_cfs_factory_destuffing',
+			},
+		],
+		condition : { services: ['import_fcl_cfs'] },
+		rules     : { required: 'Type of stuffing at destinationn is required' },
 	},
 	{
 		label       : 'Destination Pincode',
@@ -303,7 +341,7 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		options   : currencyOptions,
 		type      : 'select',
 		style     : { width: 200 },
-		condition : { services: ['export_fcl_cfs'] },
+		condition : { services: ['export_fcl_cfs', 'import_fcl_cfs'] },
 		rules     : { required: 'This is required' },
 	},
 	{
@@ -311,7 +349,7 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		label     : 'Cargo value',
 		type      : 'number',
 		style     : { width: 200 },
-		condition : { services: ['export_fcl_cfs'] },
+		condition : { services: ['export_fcl_cfs', 'import_fcl_cfs'] },
 		rules     : { required: 'This is required' },
 	},
 	{

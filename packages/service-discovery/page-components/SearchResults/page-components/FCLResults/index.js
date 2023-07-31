@@ -34,6 +34,7 @@ function FCLResults({
 	screen,
 	infoBanner = {},
 	setInfoBanner = () => {},
+	isGuideViewed = false,
 }) {
 	const SCREEN_PROPS_MAPPING = {
 		listRateCard: {
@@ -53,6 +54,7 @@ function FCLResults({
 			refetchSearch,
 			infoBanner,
 			setInfoBanner,
+			isGuideViewed,
 		},
 		comparison: {
 			detail,

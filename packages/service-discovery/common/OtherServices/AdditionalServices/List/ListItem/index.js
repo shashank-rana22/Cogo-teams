@@ -1,4 +1,4 @@
-import { Toast, Loader } from '@cogoport/components';
+import { Toast, Loader, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
@@ -75,7 +75,7 @@ function ListItem({
 		});
 	};
 
-	const renderRate = () => {
+	function RenderRate() {
 		if (!isSelected) return null;
 
 		const { rateData = [] } = serviceItem;
@@ -104,9 +104,9 @@ function ListItem({
 				maximumFractionDigits : 0,
 			},
 		});
-	};
+	}
 
-	const renderIcon = () => {
+	function RenderIcon() {
 		const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
 
 		if (loading) {
@@ -136,13 +136,13 @@ function ListItem({
 				onClick={() => handleAddServices(serviceItem)}
 			/>
 		);
-	};
+	}
 
 	return (
 		<div
 			key={name}
 			disabled={loading}
-			className={`${styles.service} ${isSelected ? styles.active : null}`}
+			className={cl`${styles.service} ${isSelected ? styles.active : null}`}
 		>
 
 			<div className={styles.service_div}>
@@ -152,9 +152,11 @@ function ListItem({
 			</div>
 
 			<div className={styles.icn_container}>
-				<strong className={styles.rate}>{renderRate()}</strong>
+				<strong className={styles.rate}>
+					<RenderRate />
+				</strong>
 
-				{renderIcon()}
+				<RenderIcon />
 			</div>
 
 			{showDeleteModal ? (

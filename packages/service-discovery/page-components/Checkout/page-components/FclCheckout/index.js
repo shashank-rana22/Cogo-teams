@@ -10,12 +10,14 @@ const COMPONENT_MAPPING = {
 
 };
 
-function FclCheckout({ state = 'draft' }) {
-	const ActiveComponent = COMPONENT_MAPPING.booking_confirmation;
+function FclCheckout({ state = 'draft', setIsShipmentCreated = () => {} }) {
+	const ActiveComponent = COMPONENT_MAPPING[state];
 
 	return (
 		<div className={styles.container}>
-			<ActiveComponent />
+			<ActiveComponent
+				setIsShipmentCreated={setIsShipmentCreated}
+			/>
 		</div>
 	);
 }
