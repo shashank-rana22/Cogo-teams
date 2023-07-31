@@ -35,7 +35,7 @@ function TicketPopoverContent({
 		});
 	};
 
-	const handleDownload = async ({ imgUrl = '' }) => {
+	const handleDownload = ({ imgUrl = '' }) => {
 		getDownloadFiles({ imgUrl });
 	};
 
@@ -44,29 +44,43 @@ function TicketPopoverContent({
 		setDocumentTagUrl(data?.response?.media_url);
 	};
 
+	const SHOW_ACTIONS = [
+		{
+			label   : 'Raise a ticket',
+			actions : triggerModal,
+			show    : true,
+		},
+		{
+			label   : 'Tag to SID',
+			actions : handleTag,
+			show    : isTag || false,
+		},
+		{
+			label   : 'Download',
+			actions : () => handleDownload({ imgUrl: data?.response?.media_url }),
+			show    : (SHOW_TAG_BUTTON || []).includes(data?.message_type) || false,
+		},
+	];
+
 	return (
 		<div className={styles.actions}>
-			<Button size="md" themeType="secondary" onClick={triggerModal}>
+			{(SHOW_ACTIONS || []).map((item) => (
+				<div key={item} className={styles.tags}>
+					{item?.show ? (
+						<Button
+							key={item}
+							className={styles.action_button}
+							size="md"
+							themeType="secondary"
+							onClick={item?.actions}
+						>
+							{item?.label}
+						</Button>
+					) : null}
+				</div>
 
-				Raise a ticket
-			</Button>
-			{isTag ? (
-				<>
-					<Button size="md" themeType="secondary" onClick={handleTag} className={styles.tags}>
+			))}
 
-						Tag to SID
-					</Button>
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={() => handleDownload({ imgUrl: data?.response?.media_url })}
-						className={styles.tags}
-					>
-
-						Download
-					</Button>
-				</>
-			) : null}
 		</div>
 	);
 }

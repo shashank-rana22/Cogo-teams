@@ -1,8 +1,10 @@
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useCallback, useMemo } from 'react';
+import { useEffect, useCallback, useMemo, useState } from 'react';
 
 import FormatData from '../utils/formatData';
+
+const FIRST_PAGE = 1;
 
 function useListOmnichannelDocuments({
 	activeMessageCard,
@@ -13,6 +15,8 @@ function useListOmnichannelDocuments({
 	activeSelect = '',
 	type = '',
 }) {
+	const [pagination, setPagination] = useState(FIRST_PAGE);
+
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_omnichannel_documents',
 		method : 'get',
@@ -24,7 +28,7 @@ function useListOmnichannelDocuments({
 		activeTab,
 	});
 
-	const documentsList = useCallback(async (filters) => {
+	const getDocumentsList = useCallback(async (filters) => {
 		const documentTypeFilters = (['kyc_document', 'shipment_document', 'wrong_document']).includes(filters);
 		const checkfilters = !isEmpty(filters);
 		const checkConditions = isEmpty(userId) && isEmpty(userMobile);
@@ -48,33 +52,33 @@ function useListOmnichannelDocuments({
 
 			await trigger({
 				params: {
-					page_limit                : type !== 'count' ? 1000 : undefined,
 					only_total_count_required : type === 'count',
 					kyc_data_required         : type === 'count' ? false : undefined,
 					filters                   : filters_payload,
+					page                      : pagination,
 				},
 			});
 
 			setFilterVisible(false);
 		} catch (error) {
-			// console.log(error);
+			console.error('error', error);
 		}
-	}, [leadUserId, setFilterVisible, trigger, type, userId, userMobile]);
+	}, [leadUserId, pagination, setFilterVisible, trigger, type, userId, userMobile]);
 
 	const emptyCheck = useMemo(() => !isEmpty(userId) || !isEmpty(userMobile), [userId, userMobile]);
 
 	useEffect(() => {
 		if (emptyCheck) {
-			documentsList();
+			getDocumentsList();
 		}
-	}, [customerId, activeSelect, emptyCheck, documentsList]);
+	}, [customerId, activeSelect, emptyCheck, getDocumentsList]);
 
 	const { list = [], total_count = 0, is_pan_uploaded, is_gst_uploaded } = data || {};
 
 	return {
-		documentsList,
+		getDocumentsList,
 		list,
-		documents_count: total_count,
+		documents_count    : total_count,
 		loading,
 		orgId,
 		is_pan_uploaded,
@@ -82,6 +86,9 @@ function useListOmnichannelDocuments({
 		userId,
 		userMobile,
 		leadUserId,
+		setPagination,
+		pagination,
+		totalDocumentCount : total_count,
 	};
 }
 

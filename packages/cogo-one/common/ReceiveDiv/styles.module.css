@@ -87,9 +87,13 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 }
 
 .tags {
-	width: 112px;
-	margin-top: 4px;
+	margin-bottom: 6px;
+}
+
+.action_button {
+	width: 120px;
 }

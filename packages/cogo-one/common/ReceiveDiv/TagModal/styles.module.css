@@ -1,17 +1,11 @@
 .body_styles {
 	max-height: unset !important;
 	overflow-y: hidden;
-
-	:global {
-		.ui_tab_container {
-			padding: 4px 8px;
-		}
-	}
 }
 
 .styled_modal {
 	width: 300px !important;
-	height: 300px !important;
+	height: 400px !important;
 }
 
 .header_styles {

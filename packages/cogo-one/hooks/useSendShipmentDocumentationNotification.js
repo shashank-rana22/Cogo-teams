@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useSendShipmentDocumentationNotification = ({ setTagModal = () => {}, reset }) => {
+const useSendShipmentDocumentationNotification = ({ setTagModal = () => {}, reset, getDocumentsList = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/send_shipment_document_notification',
 		method : 'post',
@@ -17,6 +17,7 @@ const useSendShipmentDocumentationNotification = ({ setTagModal = () => {}, rese
 			setDocumentTagUrl(false);
 			setTagModal(false);
 			reset();
+			getDocumentsList();
 		} catch (e) {
 			Toast.error(getApiErrorString(e?.response?.data));
 		}

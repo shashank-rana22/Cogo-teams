@@ -21,6 +21,7 @@ function DocumentTypeSID({
 	handleSubmit = () => {},
 	resetField = () => {},
 	reset = () => {},
+	getDocumentsList = () => {},
 }) {
 	const { account_type = '' } = formattedMessageData || {};
 	const watchListShipment = watch('list_shipments');
@@ -37,7 +38,7 @@ function DocumentTypeSID({
 	const {
 		loading = false,
 		postDocumentTag = () => {},
-	} = useSendShipmentDocumentationNotification({ setTagModal, reset });
+	} = useSendShipmentDocumentationNotification({ setTagModal, reset, getDocumentsList });
 
 	const createDocumentTag = (formValues) => {
 		const payload = {
@@ -76,7 +77,13 @@ function DocumentTypeSID({
 				);
 			})}
 			<div className={styles.button_styles}>
-				<Button loading={loading} size="md" themeType="primary" onClick={handleSubmit(createDocumentTag)}>
+				<Button
+					loading={loading}
+					size={type === 'documents' ? 'sm' : 'md'}
+					themeType="primary"
+					onClick={handleSubmit(createDocumentTag)}
+					className={type === 'messages' ? styles.modal_footer_button : ''}
+				>
 					Submit
 				</Button>
 			</div>

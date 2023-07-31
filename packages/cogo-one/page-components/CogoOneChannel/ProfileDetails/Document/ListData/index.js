@@ -25,6 +25,7 @@ function ListData({
 	isGstUploaded = false,
 	isPanUploaded = false,
 	formattedMessageData = {},
+	getDocumentsList = () => {},
 }) {
 	const [documentTagUrl, setDocumentTagUrl] = useState('');
 
@@ -65,6 +66,7 @@ function ListData({
 							state = '',
 							file_name = '',
 							verification_status = '',
+							shipment = {},
 						} = item || {};
 
 						return (
@@ -96,7 +98,6 @@ function ListData({
 												{documentTypeMapping(document_type)}
 											</div>
 										</div>
-
 										<div className={styles.content}>
 											Document sent by customer
 										</div>
@@ -123,16 +124,23 @@ function ListData({
 											isPanUploaded={isPanUploaded}
 											isGstUploaded={isGstUploaded}
 										/>
-
-										{orgId && (
-											<Button
-												key={document_url}
-												className={styles.tag_button}
-												onClick={() => setDocumentTagUrl(document_url)}
-											>
-												Tag
-											</Button>
-										)}
+										<div className={styles.card_footer}>
+											<div className={styles.shipment_id}>
+												SID:
+												{' '}
+												{shipment?.serial_id}
+											</div>
+											{orgId && (
+												<Button
+													key={document_url}
+													onClick={() => setDocumentTagUrl(document_url)}
+													themeType="accent"
+													size="sm"
+												>
+													Tag to SID
+												</Button>
+											)}
+										</div>
 									</div>
 								</div>
 								{(documentTagUrl === document_url && orgId) && (
@@ -150,6 +158,7 @@ function ListData({
 										handleSubmit={handleSubmit}
 										resetField={resetField}
 										reset={reset}
+										getDocumentsList={getDocumentsList}
 									/>
 								)}
 							</>
