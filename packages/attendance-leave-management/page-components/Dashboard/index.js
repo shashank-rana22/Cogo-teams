@@ -10,7 +10,7 @@ function AttendanceLeaveDashboard() {
 					Attendance & Leaves
 				</h1>
 			</div>
-			<div style={{ margin: 20 }}>
+			<div>
 				<Tabs
 					activeTab={activeTab}
 					themeType="secondary"
