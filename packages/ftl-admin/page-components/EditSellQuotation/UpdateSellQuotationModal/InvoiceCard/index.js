@@ -30,8 +30,6 @@ function InvoiceCard({ data = {} }) {
 		setOpenCard(false);
 	};
 
-	// console.log({ services });
-
 	const handleSubmit = () => {
 		const payload = {
 			quotations: [],
