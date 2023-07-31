@@ -1,4 +1,4 @@
-import { Checkbox, Popover, RadioGroup } from '@cogoport/components';
+import { Checkbox, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMShare } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -107,11 +107,13 @@ function RateCardTop({
 			<div className={styles.logoContainer}>
 				{renderCheckbox()}
 
-				<img
-					src={imageUrl}
-					alt={rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
-					style={{ height: 24, objectFit: 'cover' }}
-				/>
+				{imageUrl ? (
+					<img
+						src={imageUrl}
+						alt={rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
+						style={{ height: 24, objectFit: 'cover' }}
+					/>
+				) : <strong>{rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}</strong>}
 			</div>
 
 			<div style={{ display: 'flex', marginRight: 20, alignItems: 'center' }}>

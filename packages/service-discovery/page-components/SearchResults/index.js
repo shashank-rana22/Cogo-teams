@@ -86,6 +86,7 @@ function SearchResults() {
 
 	const {
 		spot_search_detail:detail = {},
+		contract_detail = {},
 		list:rates = [],
 		possible_subsidiary_services = [],
 		total_count,
@@ -132,6 +133,7 @@ function SearchResults() {
 				<FCLResults
 					rates={rates}
 					detail={detail}
+					contract_detail={contract_detail}
 					setSelectedCard={setSelectedCard}
 					selectedCard={selectedCard}
 					setScreen={setScreen}

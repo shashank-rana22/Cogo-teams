@@ -15,6 +15,7 @@ const isCargoInsurancePresent = (services) => {
 	const isAlreadyPresent = Object.values(services || {}).find(
 		(item) => item.service_type === 'cargo_insurance',
 	);
+
 	return isAlreadyPresent;
 };
 
@@ -47,8 +48,6 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 
 	const cargoInsuranceAlreadyTaken = isCargoInsurancePresent(finalServiceDetails);
 
-	const [isSelected, setIsSelected] = useState(cargoInsuranceAlreadyTaken || {});
-
 	const primaryServiceDetails = Object.values(finalServiceDetails || {}).find(
 		(item) => item.service_type === primary_service,
 	);
@@ -67,15 +66,15 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 				itemKey="cargo_insurance"
 				active={active}
 				setActive={setActive}
-				isOpen={!!(isSelected && !isEmpty(isSelected))}
+				isOpen={!!(cargoInsuranceAlreadyTaken && !isEmpty(cargoInsuranceAlreadyTaken))}
 				title={(
 					<CargoInsuranceContainer
-						cargoInsuranceDetails={isSelected}
+						cargoInsuranceDetails={cargoInsuranceAlreadyTaken}
 						setShowDeleteModal={setShowDeleteModal}
 						setShowModal={setShowModal}
 					/>
 				)}
-				content={<AccordianContent data={isSelected} />}
+				content={<AccordianContent data={cargoInsuranceAlreadyTaken} />}
 			/>
 
 			{showModal && (
@@ -91,7 +90,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 					importer_exporter={importer_exporter}
 					addCargoInsurance={showModal}
 					setAddCargoInsurance={setShowModal}
-					setDone={setIsSelected}
+					// setDone={setIsSelected}
 					checkout_id={checkout_id}
 				/>
 			)}

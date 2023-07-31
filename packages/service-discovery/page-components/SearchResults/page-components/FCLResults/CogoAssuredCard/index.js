@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 
 import FclCard from '../FclCard';
 
@@ -61,11 +61,6 @@ function CogoAssuredCard({
 		setSelectedCard(rateId);
 		setCardData(rate);
 	};
-
-	useEffect(() => {
-		setSelectedCard(rates?.[GLOBAL_CONSTANTS.zeroth_index]?.id);
-		setCardData(rates?.[GLOBAL_CONSTANTS.zeroth_index]);
-	}, [rates]);
 
 	return (
 		<div className={styles.container}>

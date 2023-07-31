@@ -1,4 +1,5 @@
 import { Loader, Pagination, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -8,6 +9,7 @@ import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
 
 import ComparisonHeader from './ComparisonHeader';
+import ContractAd from './ContractAd';
 import Header from './Header';
 import Schedules from './Schedules';
 import styles from './styles.module.css';
@@ -93,6 +95,7 @@ function RateCard({
 
 function ListRateCards({
 	rates = [], detail = {},
+	contract_detail = {},
 	setSelectedCard = () => {},
 	setScreen = () => {},
 	setComparisonRates = () => {},
@@ -130,16 +133,18 @@ function ListRateCards({
 
 	return (
 		<div className={cl`${styles.container} ${show_dim_bg && styles.dim_bg}`}>
-			<HeaderTop
-				detail={detail}
-				filters={filters}
-				setFilters={setFilters}
-				total_rates_count={detail?.rates_count}
-				comparisonRates={comparisonRates}
-				setComparisonRates={setComparisonRates}
-				setScreen={setScreen}
-				refetch={refetchSearch}
-			/>
+			<div className={styles.header_wrapper}>
+				<HeaderTop
+					detail={detail}
+					filters={filters}
+					setFilters={setFilters}
+					total_rates_count={detail?.rates_count}
+					comparisonRates={comparisonRates}
+					setComparisonRates={setComparisonRates}
+					setScreen={setScreen}
+					refetch={refetchSearch}
+				/>
+			</div>
 
 			<Schedules
 				paginationProps={paginationProps}
@@ -151,7 +156,7 @@ function ListRateCards({
 				loading={loading}
 			/>
 
-			{loading ? null : (
+			{loading || isEmpty(cogoAssuredRates) ? null : (
 				<CogoAssuredCard
 					rates={cogoAssuredRates}
 					loading={loading}
@@ -166,23 +171,40 @@ function ListRateCards({
 				/>
 			)}
 
+			{isEmpty(cogoAssuredRates) ? null : (
+				<ContractAd
+					loading={loading}
+					importerExporterId={detail.importer_exporter_id}
+					contractDetail={contract_detail}
+				/>
+			)}
+
 			{loading ? <LoaderComponent /> : null}
 
 			{(marketplaceRates || []).map((rateCardData, index) => (
-				<RateCard
-					key={rateCardData.id}
-					loading={loading}
-					rateCardData={rateCardData}
-					detail={detail}
-					setSelectedCard={setSelectedCard}
-					setScreen={setScreen}
-					setComparisonRates={setComparisonRates}
-					comparisonRates={comparisonRates}
-					refetchSearch={refetchSearch}
-					infoBanner={infoBanner}
-					index={index}
-					setInfoBanner={setInfoBanner}
-				/>
+				<>
+					<RateCard
+						key={rateCardData.id}
+						loading={loading}
+						rateCardData={rateCardData}
+						detail={detail}
+						setSelectedCard={setSelectedCard}
+						setScreen={setScreen}
+						setComparisonRates={setComparisonRates}
+						comparisonRates={comparisonRates}
+						refetchSearch={refetchSearch}
+						infoBanner={infoBanner}
+						index={index}
+						setInfoBanner={setInfoBanner}
+					/>
+					{index === GLOBAL_CONSTANTS.zeroth_index && isEmpty(cogoAssuredRates) ? (
+						<ContractAd
+							loading={loading}
+							importerExporterId={detail.importer_exporter_id}
+							contractDetail={contract_detail}
+						/>
+					) : null}
+				</>
 			))}
 
 			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}

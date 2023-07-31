@@ -12,8 +12,8 @@ function LoadingState() {
 		<div className={styles.parent}>
 			<Placeholder
 				height="160px"
-				width="97%"
-				margin="50px 20px 30px 20px"
+				width="100%"
+				margin="50px 0 30px 0"
 				style={{ borderRadius: '8px' }}
 			/>
 

@@ -62,6 +62,7 @@ function SpotSearch() {
 							service_type={selectedMode?.mode_value}
 							origin_location_id={location?.origin?.id}
 							destination_location_id={location?.destination?.id}
+							setLocation={setLocation}
 						/>
 					</div>
 				</>

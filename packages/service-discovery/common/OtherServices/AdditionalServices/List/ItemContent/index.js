@@ -29,7 +29,6 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 			total_price_discounted = 0,
 			is_rate_available = false,
 			truck_type,
-			// cargo_handling_type,
 		} = service;
 
 		const handleRateFeedback = () => {
@@ -47,7 +46,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 				: container_size} ${startCase(container_type)} ${startCase(commodity)}`;
 
 			const PILL_DATA = {
-				transportation    : startCase(truck_type),
+				transportation    : truck_type ? startCase(truck_type) : commonDetails,
 				fcl_customs       : commonDetails,
 				fcl_cfs           : commonDetails,
 				fcl_freight_local : commonDetails,
@@ -60,11 +59,6 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 						{PILL_DATA[serviceItem.service_type]}
 					</span>
 
-					{/* {cargo_handling_type ? (
-						<span className={styles.pill}>
-							{startCase(cargo_handling_type)}
-						</span>
-					) : null} */}
 				</div>
 			);
 		};

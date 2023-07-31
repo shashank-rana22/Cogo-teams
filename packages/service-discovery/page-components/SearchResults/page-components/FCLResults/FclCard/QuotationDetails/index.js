@@ -10,6 +10,8 @@ import styles from './styles.module.css';
 function QuotationDetails({
 	rateCardData = {},
 	isSelectedCard = false,
+	isCogoAssured = false,
+	isMultiContainer = false,
 	detail = {},
 	setScreen = () => {},
 }) {
@@ -40,15 +42,17 @@ function QuotationDetails({
 
 	return (
 		<div className={styles.container}>
-			<Button
-				size="md"
-				themeType={isSelectedCard ? 'tertiary' : 'secondary'}
-				className={styles.secondaryBotton}
-				disabled={isSelectedCard}
-				onClick={() => setShowContract(!showContract)}
-			>
-				{isSelectedCard ? ('Currrently Selected') : 'Lock Freight Price'}
-			</Button>
+			{(isCogoAssured || isMultiContainer) && !isSelectedCard ? null : (
+				<Button
+					size="md"
+					themeType={isSelectedCard ? 'tertiary' : 'secondary'}
+					className={styles.secondaryBotton}
+					disabled={isSelectedCard}
+					onClick={() => setShowContract(!showContract)}
+				>
+					{isSelectedCard ? ('Currrently Selected') : 'Lock Freight Price'}
+				</Button>
+			)}
 
 			<Button
 				onClick={handleSelectButtonClick}

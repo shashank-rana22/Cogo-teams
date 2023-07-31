@@ -60,7 +60,16 @@ const formatAmountValue = (amount, currency) => (
 	}) || '-'
 );
 
-function HandleBookValue({ item, apiLoading }) {
+function HandleBookValue({ item, apiLoading, service_type }) {
+	const service_rates = Object.values(item.service_rates);
+	const primaryServiceRates = service_rates.filter(
+		(service) => service.service_type === service_type,
+	);
+
+	const isCogoAssured = item.source === 'cogo_assured_rate';
+
+	const isMultiContainer = primaryServiceRates.length > 1;
+
 	const router = useRouter();
 
 	const handleLockPrice = () => {};
@@ -71,15 +80,17 @@ function HandleBookValue({ item, apiLoading }) {
 
 	return (
 		<div className={styles.book_buttons}>
-			<Button
-				size="md"
-				themeType="secondary"
-				disabled={apiLoading}
-				style={{ marginBottom: '8px' }}
-				onClick={handleLockPrice}
-			>
-				Lock for 24 Hours
-			</Button>
+			{isCogoAssured || isMultiContainer ? null : (
+				<Button
+					size="md"
+					themeType="secondary"
+					disabled={apiLoading}
+					style={{ marginBottom: '8px' }}
+					onClick={handleLockPrice}
+				>
+					Lock freight price
+				</Button>
+			)}
 
 			<Button
 				size="md"
@@ -137,7 +148,7 @@ const getStaticLineItems = (item, mode, summary) => {
 				value: (
 					<HandleBookValue
 						item={item}
-						// apiLoading={apiLoading}
+						service_type={summary.service_type || summary.search_type}
 					/>
 				),
 			}),
@@ -233,16 +244,6 @@ function Comparison({
 						style={{ padding: '20px 44px' }}
 					>
 						Share
-					</Button>
-
-					<Button
-						onClick={() => {}}
-						size="md"
-						themeType="accent"
-						className={styles.button}
-						style={{ padding: '20px' }}
-					>
-						Create Quotation
 					</Button>
 				</div>
 			</div>

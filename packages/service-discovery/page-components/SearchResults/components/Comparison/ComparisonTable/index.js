@@ -18,11 +18,13 @@ function Table({ comparisonKey, allLineItems, LOGO_MAPPING }) {
 			{allLineItems.map((item) => {
 				const key = Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index];
 				const columnHeader = key === 'cogo_line' ? 'Cogo Assured' : startCase(key);
+				const imageUrl = LOGO_MAPPING[key];
 
 				return (
 					<div key={key} className={styles.header_column}>
-						<img src={LOGO_MAPPING[key]} alt="shipping-line" style={{ objectFit: 'cover', width: 88 }} />
-						{columnHeader}
+						{imageUrl ? (
+							<img src={imageUrl} alt="shipping-line" style={{ objectFit: 'cover', width: 88 }} />
+						) : columnHeader}
 					</div>
 				);
 			})}

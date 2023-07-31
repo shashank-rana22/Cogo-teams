@@ -17,6 +17,7 @@ const SCREEN_MAPPING = {
 function FCLResults({
 	rates = [],
 	detail = {},
+	contract_detail = {},
 	setSelectedCard = () => {},
 	selectedCard = {},
 	setScreen = () => {},
@@ -40,6 +41,7 @@ function FCLResults({
 		listRateCard: {
 			rates,
 			detail,
+			contract_detail,
 			setSelectedCard,
 			selectedCard,
 			setScreen,
