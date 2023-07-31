@@ -94,12 +94,6 @@
 	margin-top: 4px;
 }
 
-.action_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.single_action {
-	justify-content: flex-end;
+.download {
+	margin-right: 4px;
 }

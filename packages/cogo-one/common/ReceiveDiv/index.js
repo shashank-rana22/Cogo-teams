@@ -3,11 +3,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import {
 	IcMOverflowDot, IcMCross,
-	// IcMDownload
+	IcMDownload,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import getDownloadFiles from '../../utils/getDownloadFiles';
 import MessageBody from '../MessageBody';
 import RepliedMessage from '../RepliedMessage';
 
@@ -35,6 +36,10 @@ function TicketPopoverContent({
 		});
 	};
 
+	const handleDownload = async ({ imgUrl = '' }) => {
+		getDownloadFiles({ imgUrl });
+	};
+
 	const handleTag = () => {
 		setTagModal(true);
 		setDocumentTagUrl(data?.response?.media_url);
@@ -46,9 +51,23 @@ function TicketPopoverContent({
 				Raise a ticket
 			</Button>
 			{isTag ? (
-				<Button size="md" themeType="secondary" onClick={handleTag} className={styles.tags}>
-					Tag
-				</Button>
+				<>
+					<Button size="md" themeType="secondary" onClick={handleTag} className={styles.tags}>
+						Tag to SID
+					</Button>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => handleDownload({ imgUrl: data?.response?.media_url })}
+						className={styles.tags}
+					>
+						<IcMDownload
+							className={styles.download}
+						/>
+						{' '}
+						Download
+					</Button>
+				</>
 			) : null}
 		</div>
 	);
@@ -81,17 +100,6 @@ function ReceiveDiv({
 	});
 
 	const hasRepliedMessage = !isEmpty(reply_metadata);
-	// const isDocuments = (SHOW_TAG_BUTTON || []).includes(eachMessage?.message_type);
-
-	// const handleDownload = ({ imgUrl = '' }) => {
-	// 	const downloadLink = document.createElement('a');
-	// 	downloadLink.href = imgUrl;
-	// 	downloadLink.download = 'image.jpg';
-	// 	document.body.appendChild(downloadLink);
-	// 	downloadLink.click();
-	// 	document.body.removeChild(downloadLink);
-	// 	URL.revokeObjectURL(imgUrl);
-	// };
 
 	return (
 		<>
@@ -105,14 +113,7 @@ function ReceiveDiv({
 					{hasRepliedMessage && (
 						<RepliedMessage user_name={user_name} reply_metadata={reply_metadata} />
 					)}
-					{/* <div className={cl`${styles.action_container} ${!isDocuments ? styles.single_action : ''}`}>
-						{isDocuments
-							? (
-								<IcMDownload
-									onClick={() => handleDownload({ imgUrl: eachMessage?.response?.media_url })}
-									cursor="pointer"
-								/>
-							) : null} */}
+
 					{canRaiseTicket && (
 						<Tooltip
 							placement="right"
@@ -132,7 +133,7 @@ function ReceiveDiv({
 							</div>
 						</Tooltip>
 					)}
-					{/* </div> */}
+
 					<div className={styles.message_div}>
 						<MessageBody
 							response={response}
