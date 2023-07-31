@@ -3,7 +3,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 export const billingAddressControlForSelf = () => {
 	const geo = getGeoConstants();
 
-	const constrols = [
+	const controls = [
 		{
 			label       : 'PAN Number',
 			name        : 'panNumber',
@@ -21,5 +21,5 @@ export const billingAddressControlForSelf = () => {
 			},
 		},
 	];
-	return constrols;
+	return controls;
 };

@@ -127,7 +127,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 ];
 
 export const getModifiedControls = ({
-	checked,
+	checked = false,
 	setValue = () => {}, setCountryId = () => {}, countryId = '',
 }) => {
 	const geo = getGeoConstants();
