@@ -1,10 +1,11 @@
 const controls = [
 	{
-		label    : 'Filter By Cogo Entity',
-		name     : 'cogo_entity_id',
-		asyncKey : 'partners',
-		type     : 'async-select',
-		params   : {
+		label       : 'Filter By Cogo Entity',
+		name        : 'cogo_entity_id',
+		asyncKey    : 'partners',
+		type        : 'async-select',
+		initialCall : true,
+		params      : {
 			filters: {
 				entity_types   : ['cogoport'],
 				current_status : 'active',
@@ -103,6 +104,7 @@ const controls = [
 		name        : 'preferred_role_id',
 		label       : 'Select Role for CCS Config Pool',
 		placeholder : 'Select Role',
+		type        : 'async-select',
 		initialCall : true,
 		asyncKey    : 'partner_roles',
 		params      : {

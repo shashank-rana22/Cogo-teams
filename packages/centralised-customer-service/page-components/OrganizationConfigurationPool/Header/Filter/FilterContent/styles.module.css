@@ -3,6 +3,13 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
+
+	:global {
+		.ui_is_open {
+			word-break: break-word;
+			white-space: pre-wrap;
+		}
+	}
 }
 
 .item {
