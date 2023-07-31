@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useGetBillingAddress from '../../hooks/useGetBillingAddress';
 import { finalAmountInWords } from '../../utils/numToWords';
 
 import Certification from './Certification';
@@ -14,10 +15,16 @@ function InvoiceIVL({
 	tradePartyData = {},
 	customData = {},
 	importerExporterId = '',
+	entityList = [],
 }) {
 	const [tradeParty] = tradePartyData?.list || [];
 
-	const { billing_address = {} } = invoice;
+	const { billing_address = {} } = useGetBillingAddress({
+		invoice,
+		entityList,
+		importerExporterId,
+		customData,
+	});
 	const { lineItems, LINE_ITEMS_KEYS_MAPPING } = getLineItems({ customData });
 	const {
 		sub_total = '',
@@ -126,6 +133,7 @@ function InvoiceIVL({
 				billing_address={billing_address}
 				tradeParty={tradeParty}
 				importerExporterId={importerExporterId}
+				customData={customData}
 			/>
 		</div>
 	);

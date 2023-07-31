@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import getDate from '../../commons/utils/getDate';
 
 const SHIPPER = 'shipper';
@@ -10,6 +12,15 @@ const TAX_MECHANISM_MAPPING = {
 
 const FTL_FREIGHT_SERVICE = 'ftl_freight_service';
 const BAS_CODE = 'BAS';
+
+const FIXED_VALUE_UPTO = 2;
+const DEFAULT_VALUE = 0;
+const MIN_QUANTITY = 1;
+
+export const RATE_TYPES = {
+	FIXED : 'Fixed',
+	RPT   : 'RPT',
+};
 
 export const getFormatPrefillValues = ({ data = {}, invoice = {} }) => {
 	// customer
@@ -62,7 +73,6 @@ export const getFormatPrefillValues = ({ data = {}, invoice = {} }) => {
 		outward_delivery_number = '',
 		outward_delivery_date = '',
 		inward_delivery_number = '',
-		inward_delivery_date = '',
 		delivery_date = '',
 		detention_days = '',
 		packages_count = '',
@@ -70,7 +80,8 @@ export const getFormatPrefillValues = ({ data = {}, invoice = {} }) => {
 		converted_case = '',
 		lr_numbers = [],
 	} = detail;
-	const bas_rate = line_items.find((item) => item?.code === BAS_CODE)?.price_discounted || '';
+	const basLineItem = line_items.find((item) => item?.code === BAS_CODE) || {};
+	const { price_discounted: bas_rate = DEFAULT_VALUE, quantity: invoiceQuantity = DEFAULT_VALUE } = basLineItem;
 
 	const obj = {
 		customer_organization  : trade_party_id,
@@ -85,24 +96,23 @@ export const getFormatPrefillValues = ({ data = {}, invoice = {} }) => {
 		consignor_name         : customer_tp_details?.business_name || '',
 		consignor_address      : customer_custom_address,
 		consignor_gstin        : customer_tax_number,
-		rate_type              : 'Fixed',
+		rate_type              : invoiceQuantity > MIN_QUANTITY ? RATE_TYPES.RPT : RATE_TYPES.FIXED,
 		truck_no               : truck_number,
-		actual_weight          : weight,
-		charged_weight         : weight,
-		rate                   : bas_rate?.toFixed(2),
-		gcn_no                 : gcn_number || lr_numbers?.[0],
-		value_of_goods         : bas_rate?.toFixed(2),
+		actual_weight          : invoiceQuantity > MIN_QUANTITY ? invoiceQuantity : weight,
+		charged_weight         : invoiceQuantity > MIN_QUANTITY ? invoiceQuantity : weight,
+		rate                   : bas_rate?.toFixed(FIXED_VALUE_UPTO),
+		gcn_no                 : gcn_number || lr_numbers?.[GLOBAL_CONSTANTS.zeroth_index],
+		value_of_goods         : bas_rate?.toFixed(FIXED_VALUE_UPTO),
 		driver_mobile          : driver_details?.contact,
 		driver_name            : driver_details?.name,
 		pickup_date_time       : getDate(pickup_date),
-		eway_bill_no           : eway_bill_details?.[0]?.eway_bill_number,
+		eway_bill_no           : eway_bill_details?.[GLOBAL_CONSTANTS.zeroth_index]?.eway_bill_number,
 		commodity_type         : commodity || '',
 		grn_number,
 		grn_date               : getDate(grn_date),
 		outward_delivery_no    : outward_delivery_number || '',
 		outward_delivery_date  : getDate(outward_delivery_date),
 		inward_delivery_number : getDate(inward_delivery_number),
-		inward_delivery_date   : getDate(inward_delivery_date),
 		delivery_date          : getDate(delivery_date),
 		detention_days,
 		package_count          : packages_count,

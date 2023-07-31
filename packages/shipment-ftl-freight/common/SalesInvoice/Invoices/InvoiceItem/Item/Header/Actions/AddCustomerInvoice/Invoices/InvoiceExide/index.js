@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import { customerToCin } from '../../utils/serviceDescriptionMappings';
+import useGetBillingAddress from '../../hooks/useGetBillingAddress';
 
 import Annexure from './Annexure';
 import { getOtherData } from './getOtherData';
@@ -15,6 +15,7 @@ function InvoiceExide({
 	tradePartyData = {},
 	customData = {},
 	importerExporterId = '',
+	entityList = [],
 }) {
 	const {
 		customer_name = '',
@@ -32,16 +33,32 @@ function InvoiceExide({
 		consignee_gstin = '',
 	} = getOtherData({ customData });
 
+	const { billing_address = {} } = useGetBillingAddress({
+		invoice,
+		entityList,
+		importerExporterId,
+		customData,
+	});
+
 	const [tradeParty] = tradePartyData?.list || [];
 
-	const { billing_address = {} } = invoice;
+	const {
+		cin = '',
+		business_name = '',
+		address = '',
+		registration_number = '',
+		tax_number = '',
+		email = '',
+		website = '',
+	} = billing_address || {};
+
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif', fontSize: '12px', padding: '40px' }}>
 			<table border="0" cellPadding="0" cellSpacing="0">
 				<tr>
 					<td>
 						<h2 style={{ marginTop: '0px', color: '#ffa500' }}>
-							<b>{billing_address?.business_name || ''}</b>
+							<b>{business_name}</b>
 						</h2>
 					</td>
 				</tr>
@@ -50,34 +67,34 @@ function InvoiceExide({
 				<tr>
 					<td style={{ width: '45%', padding: '0 8px', verticalAlign: 'top' }}>
 						<p style={{ wordWrap: 'break-word' }}>
-							{billing_address?.address || ''}
+							{address}
 						</p>
 						<br />
-						<p>{}</p>
 						<p>
 							<b>Email :</b>
-							&nbsp;
-							info@4tigo.com &nbsp;
+							{' '}
+							{email}
+							{' '}
 							<b>Website :</b>
-							&nbsp;
-							www.4tigo.com
+							{' '}
+							{website}
 						</p>
 					</td>
 					<td style={{ width: '25%', padding: '0 8px', verticalAlign: 'top' }}>
 						<p>
 							<b>CIN : </b>
-							&nbsp;
-							{customerToCin[importerExporterId] || ''}
+							{' '}
+							{cin}
 						</p>
 						<p>
 							<b>PAN : </b>
-							&nbsp;
-							{billing_address?.registration_number || ''}
+							{' '}
+							{registration_number}
 						</p>
 						<p>
 							<b>GSTIN: </b>
-							&nbsp;
-							{billing_address?.tax_number || ''}
+							{' '}
+							{tax_number}
 						</p>
 					</td>
 					<td style={{ width: '30%' }}>
@@ -113,12 +130,15 @@ function InvoiceExide({
 				<tr style={{ marginBotton: '50px' }}>
 					<td style={{ width: '50%' }}>
 						<p>
-							<b>Customer:&nbsp;</b>
-							&nbsp;
+							<b>
+								Customer:
+								{' '}
+							</b>
+							{' '}
 							{customer_name}
-							&nbsp;
+							{' '}
 							,
-							&nbsp;
+							{' '}
 							{customer_address}
 						</p>
 					</td>
@@ -127,7 +147,8 @@ function InvoiceExide({
 					>
 						<p>
 							<b>
-								Invoice No:&nbsp;
+								Invoice No:
+								{' '}
 								{invoice_no}
 							</b>
 						</p>
@@ -136,7 +157,7 @@ function InvoiceExide({
 						<p>
 							<b>
 								Original For Recipient /
-								&nbsp;
+								{' '}
 								<del>Duplicate For Supplier</del>
 							</b>
 						</p>
@@ -153,15 +174,24 @@ function InvoiceExide({
 					<td style={{ width: '50%' }}>
 						<p style={{ wordWrap: 'break-word' }} />
 						<p>
-							<b>State Code :&nbsp;</b>
+							<b>
+								State Code :
+								{' '}
+							</b>
 							{state_code}
 						</p>
 						<p>
-							<b>GSTIN of Recipient :&nbsp;</b>
+							<b>
+								GSTIN of Recipient :
+								{' '}
+							</b>
 							{customer_gstin}
 						</p>
 						<p>
-							<b>Kind Attention :&nbsp;</b>
+							<b>
+								Kind Attention :
+								{' '}
+							</b>
 							{kind_attention}
 						</p>
 					</td>
@@ -169,7 +199,10 @@ function InvoiceExide({
 						style={{ width: '50%', paddingLeft: '30px' }}
 					>
 						<p>
-							<b>Date :&nbsp;</b>
+							<b>
+								Date :
+								{' '}
+							</b>
 
 							{formatDate({
 								date       : invoice_date,
@@ -178,23 +211,27 @@ function InvoiceExide({
 							})}
 						</p>
 						<p style={{ wordWrap: 'break-word' }}>
-							<b>Consignor Name & Address :&nbsp;</b>
+							<b>Consignor Name & Address :</b>
+							{' '}
 							{consignor_name}
 							,
 							{consignor_address}
 						</p>
 						<p>
-							<b>Consignor GSTIN :&nbsp;</b>
+							<b>Consignor GSTIN :</b>
+							{' '}
 							{consignor_gstin}
 						</p>
 						<p style={{ wordWrap: 'break-word' }}>
-							<b>Consignee Name & Address :&nbsp;</b>
+							<b>Consignee Name & Address :</b>
+							{' '}
 							{consignee_name}
 							,
 							{consignee_address}
 						</p>
 						<p>
-							<b>Consignee GSTIN :&nbsp;</b>
+							<b>Consignee GSTIN :</b>
+							{' '}
 							{consignee_gstin}
 						</p>
 					</td>
@@ -203,17 +240,20 @@ function InvoiceExide({
 			<TableData
 				customData={customData}
 				importerExporterId={importerExporterId}
+				billing_address={billing_address}
 			/>
 			<Terms
 				stampData={stampData}
 				billing_address={billing_address}
 				tradeParty={tradeParty}
 				importerExporterId={importerExporterId}
+				customData={customData}
 			/>
 			<Annexure
 				invoice_no={invoice_no}
 				invoice_date={invoice_date}
 				customData={customData}
+				billing_address={billing_address}
 			/>
 		</div>
 	);

@@ -13,10 +13,11 @@ const ROW_HEADERS = [
 ];
 const OFFSET_VALUE = 1;
 
-function TableData({ customData = {}, importerExporterId = '' }) {
+function TableData({ customData = {}, importerExporterId = '', billing_address = {} }) {
 	const { lineItems = [], LINE_ITEMS_KEY_MAPPING = {} } = getLineItems({
 		customData,
 		importerExporterId,
+		billing_address,
 	});
 	const {
 		total_value_of_supply = '',

@@ -36,10 +36,10 @@ function Actions({
 	isAuthorized = false,
 	disableAction = false,
 }) {
-	const [show, setShow] = useState(false);
-	const [showModal, setShowModal] = useState();
-
 	const { shipment_data } = useContext(ShipmentDetailContext);
+
+	const [show, setShow] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const handleSetter = (selected_modal) => {
 		setShowModal(selected_modal);

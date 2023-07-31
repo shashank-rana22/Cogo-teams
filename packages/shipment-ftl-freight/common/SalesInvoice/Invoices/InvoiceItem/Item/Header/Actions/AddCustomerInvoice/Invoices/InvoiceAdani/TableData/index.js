@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import { customerToCin } from '../../../utils/serviceDescriptionMappings';
+import { CUSTOMER_TO_CIN } from '../../../utils/serviceDescriptionMappings';
 import { getLineItems } from '../getLineItems';
 import { getOtherData, getChargesData } from '../getOtherData';
 
@@ -91,7 +91,7 @@ function TableData({
 								{billing_address?.registration_number}
 							</p>
 							<p style={{ margin: '3px 0', fontSize: '12px' }}>
-								{customerToCin[importerExporterId] || ''}
+								{CUSTOMER_TO_CIN[importerExporterId] || ''}
 							</p>
 						</div>
 					</td>

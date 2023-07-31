@@ -1,36 +1,33 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
 
-import {
-	customerToCin,
-	customerToBankDetails,
-} from '../../../utils/serviceDescriptionMappings';
 import { getOtherData } from '../getOtherData';
+
+import AddressRow from './AddressRow';
 
 function HeaderData({
 	logoData = '',
-	invoice = {},
-	importerExporterId = '',
 	customData = {},
+	billing_address = {},
 }) {
 	const {
-		customer_name = '',
-		customer_address = '',
-		customer_pan = '',
-		customer_gstin = '',
-		invoice_no = '',
-		invoice_date = '',
-		place_of_supply = '',
-		customer_state_code = '',
+		consignor_name = '',
+		consignee_name = '',
+		consignor_gstin = '',
+		consignee_gstin = '',
+		consignor_address = '',
+		consignee_address = '',
 	} = getOtherData({ customData });
+
 	const {
-		bank_name = '',
-		bank_branch = '',
-		ifsc_code = '',
-		account_number = '',
-	} = customerToBankDetails[importerExporterId] || {};
-	const { billing_address = {} } = invoice;
+		cin = '',
+		business_name = '',
+		address = '',
+		registration_number = '',
+		tax_number = '',
+		bank_details = {},
+		is_required_for_fortigo = true,
+	} = billing_address || {};
+
 	return (
 		<table
 			border="0"
@@ -50,26 +47,26 @@ function HeaderData({
 				}}
 				>
 					<h4 style={{ margin: '0', marginTop: '5px', marginBottom: '5px' }}>
-						{billing_address?.business_name || ''}
+						{business_name}
 
 					</h4>
 					<p style={{ wordWrap: 'break-word' }}>
-						{billing_address?.address || ''}
+						{address}
 					</p>
 					<p style={{ fontSize: '12px', margin: 'revert' }}>
 						<b>CIN No:</b>
-						&nbsp;
-						{customerToCin[importerExporterId] || ''}
+						{' '}
+						{cin}
 					</p>
 					<p style={{ fontSize: '12px', margin: 'revert' }}>
 						<b>PAN No:</b>
-						&nbsp;
-						{billing_address?.registration_number || 'ss'}
+						{' '}
+						{registration_number}
 					</p>
 					<p style={{ fontSize: '12px', margin: 'revert' }}>
 						<b>GST No:</b>
-						&nbsp;
-						{billing_address?.tax_number || ''}
+						{' '}
+						{tax_number}
 					</p>
 				</td>
 				<td
@@ -84,7 +81,7 @@ function HeaderData({
 						borderRight   : 0,
 					}}
 				>
-					<h2>INVOICE</h2>
+					<h2>TAX INVOICE</h2>
 				</td>
 
 				<td
@@ -100,129 +97,81 @@ function HeaderData({
 						verticalAlign : 'top',
 					}}
 				>
-					<img
-						style={{ float: 'right', margin: '20px', height: '100px' }}
-						src={logoData}
-						alt="Cogoport"
-					/>
-				</td>
-			</tr>
-			<tr>
-				<td style={{
-					borderWidth   : '1px 1px 0 0',
-					borderStyle   : 'solid',
-					fontSize      : '12px',
-					borderColor   : 'black',
-					padding       : '0px 8px',
-					verticalAlign : 'top',
-				}}
-				>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>Shipment Booked By Customer :</b>
-					</p>
-					<h4 style={{ margin: '0', marginTop: '5px', marginBottom: '5px' }}>{customer_name}</h4>
-					<p style={{ wordWrap: 'break-word' }}>{customer_address}</p>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>State Code:</b>
-						&nbsp;
-						{customer_state_code}
-					</p>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>PAN No:</b>
-						&nbsp;
-						{customer_pan}
-					</p>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>GST No:</b>
-						&nbsp;
-						{customer_gstin}
-					</p>
-				</td>
-				<td style={{
-					width         : '30%',
-					borderWidth   : '1px 1px 0 0',
-					borderStyle   : 'solid',
-					fontSize      : '12px',
-					borderColor   : 'black',
-					padding       : '0px 8px',
-					verticalAlign : 'top',
-				}}
-				>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>Bill To Customer :</b>
-					</p>
-					<h4 style={{ margin: '0', marginTop: '5px', marginBottom: '5px' }}>{customer_name}</h4>
-					<p style={{ wordWrap: 'break-word' }}>{customer_address}</p>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>State Code:</b>
-						&nbsp;
-						{customer_state_code}
-					</p>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>PAN No:</b>
-						&nbsp;
-						{customer_pan}
-					</p>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>GST No:</b>
-						&nbsp;
-						{customer_gstin}
-					</p>
-				</td>
-				<td style={{ border: '1px solid black', padding: '0 8px', borderBottom: 0, borderLeft: 0 }}>
-					<h4 style={{
-						margin        : '0',
-						marginTop     : '5px',
-						marginBottom  : '5px',
-						fontSize      : '12px',
-						verticalAlign : 'top',
+					<div style={{
+						display       : 'flex',
+						flexDirection : 'column',
+						alignItems    : 'flex-end',
+						marginRight   : '20%',
 					}}
 					>
-						Bank Details :
-					</h4>
-					<b>{bank_name}</b>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>Account No.:</b>
-						{account_number}
-					</p>
+						<img
+							style={{ margin: '20px', height: '100px' }}
+							src={logoData}
+							alt="Cogoport"
+						/>
+						<div>
+							<b>
+								Original For Recipient /
+								{' '}
+								<del>Duplicate For Supplier</del>
+							</b>
+						</div>
+					</div>
 
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>IFSC:</b>
-						{ifsc_code}
+				</td>
+			</tr>
+			<AddressRow
+				customData={customData}
+				bank_details={bank_details}
+				is_required_for_fortigo={is_required_for_fortigo}
+			/>
+			<tr>
+				<td
+					colSpan="2"
+					style={{
+						borderWidth   : '1px 1px 0 0',
+						borderStyle   : 'solid',
+						fontSize      : '12px',
+						borderColor   : 'black',
+						padding       : '0px 8px',
+						verticalAlign : 'top',
+					}}
+				>
+					<p>
+						<b>Shipping Consignee :</b>
 					</p>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>BRANCH Code:</b>
-						{bank_branch}
+					<h4>{consignee_name}</h4>
+					<p>{consignee_address}</p>
+					<p>
+						<b>GST No:</b>
+						{' '}
+						{consignee_gstin}
 					</p>
 				</td>
-				<td style={{
-					borderWidth   : '1px 1px 0 0',
-					borderStyle   : 'solid',
-					fontSize      : '12px',
-					borderColor   : 'black',
-					padding       : '0px 8px',
-					verticalAlign : 'top',
-				}}
+
+				<td
+					colSpan="2"
+					style={{
+						borderWidth   : '1px 1px 0 0',
+						borderStyle   : 'solid',
+						fontSize      : '12px',
+						borderColor   : 'black',
+						padding       : '0px 8px',
+						verticalAlign : 'top',
+					}}
 				>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>Invoice No: </b>
-						{invoice_no}
+					<p>
+						<b>Shipping Consignor :</b>
 					</p>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>Invoice Date: </b>
-						{formatDate({
-							date       : invoice_date,
-							formatType : 'date',
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd mm yyyy'],
-						})}
-					</p>
-					<p style={{ fontSize: '12px', margin: 'revert' }}>
-						<b>Place Of Supply: </b>
-						{place_of_supply}
+					<h4>{consignor_name}</h4>
+					<p>{consignor_address}</p>
+					<p>
+						<b>GST No:</b>
+						{' '}
+						{consignor_gstin}
 					</p>
 				</td>
 			</tr>
-			<tr />
 		</table>
 	);
 }

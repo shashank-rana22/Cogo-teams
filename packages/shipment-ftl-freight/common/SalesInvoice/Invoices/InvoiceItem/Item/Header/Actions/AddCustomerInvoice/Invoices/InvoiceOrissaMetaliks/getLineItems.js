@@ -1,5 +1,5 @@
 import { lineItemsHelper } from '../../utils/lineItemsHelper';
-import { customerToServiceDescription } from '../../utils/serviceDescriptionMappings';
+import { CUSTOMER_TO_SERVICE_DESCRIPTION } from '../../utils/serviceDescriptionMappings';
 
 const LINE_ITEMS_KEYS_MAPPING = {
 	service_description   : 'service_description',
@@ -28,7 +28,7 @@ export const getLineItems = ({ customData = {}, importerExporterId = '' }) => {
 
 	lineItems.forEach((item) => {
 		const newItem = item;
-		newItem.service_description = customerToServiceDescription[importerExporterId] || '';
+		newItem.service_description = CUSTOMER_TO_SERVICE_DESCRIPTION[importerExporterId] || '';
 		newItem.description = 'Fixed';
 	});
 

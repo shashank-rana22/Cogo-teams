@@ -1,4 +1,4 @@
-export const getPayload = ({ shipmentData, invoice, pdfUrl }) => {
+export const getPayload = ({ shipmentData, invoice, pdfUrl, source = '' }) => {
 	const payload = {
 		shipment_id        : shipmentData?.id,
 		document_type      : 'customer_ftl_invoice',
@@ -10,6 +10,7 @@ export const getPayload = ({ shipmentData, invoice, pdfUrl }) => {
 				document_url : pdfUrl,
 				data         : {
 					proforma_number: invoice?.live_invoice_number,
+					source,
 				},
 			},
 		],

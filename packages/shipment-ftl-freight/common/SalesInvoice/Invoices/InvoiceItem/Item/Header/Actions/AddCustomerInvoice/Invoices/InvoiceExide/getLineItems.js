@@ -1,5 +1,4 @@
 import { lineItemsHelper } from '../../utils/lineItemsHelper';
-import { customerToServiceDescription } from '../../utils/serviceDescriptionMappings';
 
 const LINE_ITEMS_KEY_MAPPING = {
 	service_description : 'service_description',
@@ -17,7 +16,7 @@ const LINE_ITEMS_KEY_MAPPING = {
 	total               : 'total',
 };
 
-export const getLineItems = ({ customData = {}, importerExporterId = '' }) => {
+export const getLineItems = ({ customData = {}, billing_address = {} }) => {
 	const lineItems = lineItemsHelper({
 		lineItems: customData?.line_items?.line_items,
 		LINE_ITEMS_KEY_MAPPING,
@@ -26,7 +25,7 @@ export const getLineItems = ({ customData = {}, importerExporterId = '' }) => {
 
 	lineItems.forEach((item) => {
 		const newItem = item;
-		newItem.service_description = customerToServiceDescription[importerExporterId] || '';
+		newItem.service_description = billing_address?.service_description || '';
 		newItem.description = 'Fixed';
 	});
 

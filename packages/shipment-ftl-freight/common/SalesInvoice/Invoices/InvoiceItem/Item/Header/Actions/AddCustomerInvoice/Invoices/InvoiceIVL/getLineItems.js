@@ -8,7 +8,7 @@ const LINE_ITEMS_KEYS_MAPPING = {
 	grade                    : 'grade',
 	quantity                 : 'delivery_qty',
 	truck_no                 : 'truck_no',
-	truck_type               : 'truck_type',
+	indent_truck_type        : 'indent_truck_type',
 	from_station             : 'from_town',
 	delivery_station         : 'to_town',
 	arrival_date             : 'arrival_date',

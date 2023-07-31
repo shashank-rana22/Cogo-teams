@@ -9,6 +9,14 @@ const OTHERS_KEY_MAPPING = {
 	invoice_no          : 'invoice_no',
 	invoice_date        : 'invoice_date',
 	place_of_supply     : 'place_of_supply',
+	value_of_goods      : 'value_of_goods',
+	consignor_name      : 'consignor_name',
+	consignee_name      : 'consignee_name',
+	consignor_gstin     : 'consignor_gstin',
+	consignee_gstin     : 'consignee_gstin',
+	consignor_address   : 'consignor_address',
+	consignee_address   : 'consignee_address',
+	kind_attention      : 'kind_attention',
 };
 
 export const getOtherData = ({ customData = {} }) => {

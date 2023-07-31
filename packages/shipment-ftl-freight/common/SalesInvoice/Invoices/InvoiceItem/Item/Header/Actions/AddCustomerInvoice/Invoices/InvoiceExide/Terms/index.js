@@ -1,4 +1,4 @@
-import { customerToBankDetails } from '../../../utils/serviceDescriptionMappings';
+import { isEmpty } from '@cogoport/utils';
 
 const BANK_VERIFICATION_STATUSES = ['pending', 'verified'];
 
@@ -6,7 +6,7 @@ function Terms({
 	stampData = '',
 	billing_address = {},
 	tradeParty = {},
-	importerExporterId = '',
+	customData = {},
 }) {
 	const bankDetails = (tradeParty?.documents || []).filter(
 		(item) => item?.document_type === 'bank_account_details',
@@ -23,13 +23,20 @@ function Terms({
 	}, []);
 
 	const [bankDetailObj] = bankDetailsArray || [];
+	const {
+		business_name = '',
+		payment_email = '',
+		branch_city = '',
+		bank_details = {},
+		is_required_for_fortigo = false,
+	} = billing_address || {};
 
 	const {
 		bank_name = '',
 		bank_branch = '',
 		ifsc_code = '',
 		account_number = '',
-	} = customerToBankDetails[importerExporterId] || {};
+	} = bank_details || {};
 
 	return (
 		<>
@@ -64,50 +71,62 @@ function Terms({
 				<tr>
 					<td style={{ width: '70%', padding: '0 8px' }}>
 						<div style={{ fontSize: '20px' }}>Terms & Conditions:</div>
-						<ol style={{ paddingLeft: '16px' }}>
-							<li> Payment Terms : Net 45 days.</li>
-							<li>
-								All Payments should be to the account of&nbsp;
-								<b>{billing_address?.business_name || '4Tigo'}</b>
-								. Bank account
-								details:
-								<p>
-									<b>Bank Name: </b>
-									{bankDetailObj?.data?.bank_name || bank_name}
-								</p>
-								<p>
-									<b>Bank Branch: </b>
-									{bankDetailObj?.data?.branch_name || bank_branch}
-								</p>
-								<p>
-									<b>IFSC Code: </b>
-									{bankDetailObj?.data?.ifsc_code || ifsc_code}
-								</p>
-								<p>
-									<b>Account No.: </b>
-									{bankDetailObj?.data?.bank_account_number || account_number}
-								</p>
-							</li>
-							<li>
-								Delayed payment penalty: 2% per month or part therof from the
-								date of invoice.
-							</li>
-							<li>
-								Any part payment made against this invoice shall be treated as
-								on Account, unless the amount of invoice is paid in full
-							</li>
+						{(isEmpty(customData?.terms_and_conditions) || is_required_for_fortigo) ? (
+							<ol style={{ paddingLeft: '16px' }}>
+								<li> Payment Terms : Net 45 days.</li>
+								<li>
+									All Payments should be to the account of
+									{' '}
+									<b>{business_name || '4Tigo'}</b>
+									. Bank account
+									details:
+									<p>
+										<b>Bank Name: </b>
+										{bankDetailObj?.data?.bank_name || bank_name}
+									</p>
+									<p>
+										<b>Bank Branch: </b>
+										{bankDetailObj?.data?.branch_name || bank_branch}
+									</p>
+									<p>
+										<b>IFSC Code: </b>
+										{bankDetailObj?.data?.ifsc_code || ifsc_code}
+									</p>
+									<p>
+										<b>Account No.: </b>
+										{bankDetailObj?.data?.bank_account_number || account_number}
+									</p>
+								</li>
+								<li>
+									Delayed payment penalty: 2% per month or part therof from the
+									date of invoice.
+								</li>
+								<li>
+									Any part payment made against this invoice shall be treated as
+									on Account, unless the amount of invoice is paid in full
+								</li>
 
-							<li>
-								Payment advice should be mailed to
-								&nbsp;
-								<b>collection@4tigo.com</b>
-								.
-							</li>
-							<li>
-								Disputes, if any shall be subject to jurisdiction of Courts at
-								Bangalore.
-							</li>
-						</ol>
+								<li>
+									Payment advice should be mailed to
+									{' '}
+									<b>{payment_email}</b>
+									.
+								</li>
+								<li>
+									Disputes, if any shall be subject to jurisdiction of Courts at
+									{' '}
+									{branch_city}
+									.
+								</li>
+							</ol>
+						) : (
+							<div
+								dangerouslySetInnerHTML={{
+									__html: customData?.terms_and_conditions,
+								}}
+							/>
+						) }
+
 					</td>
 					<td
 						style={{ width: '30%', textAlign: 'center', verticalAlign: 'top', padding: '0 8px' }}
@@ -115,7 +134,8 @@ function Terms({
 						<h3>
 							<b>
 								for
-								{billing_address?.business_name}
+								{' '}
+								{business_name}
 							</b>
 						</h3>
 						<img

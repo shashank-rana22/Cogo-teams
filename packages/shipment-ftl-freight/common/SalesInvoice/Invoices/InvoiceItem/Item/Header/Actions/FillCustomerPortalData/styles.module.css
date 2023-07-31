@@ -1,0 +1,39 @@
+.footer {
+	justify-content: space-between !important;
+}
+
+.invoice_totals {
+	display: flex;
+
+	.total_live {
+		margin-right: 20px;
+	}
+
+	.head {
+		font-size: 13px;
+		font-weight: 500;
+	}
+
+	.sub_head {
+		margin: 3px 0;
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 12px;
+		color: #808080;
+	}
+
+	.total {
+		font-size: 12px;
+	}
+}
+
+.button_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.extra {
+	margin-block: 10px;
+	font-weight: 600;
+}

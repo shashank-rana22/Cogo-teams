@@ -1,4 +1,4 @@
-import { customerToBankDetails } from '../../../utils/serviceDescriptionMappings';
+import { CUSTOMER_TO_BANK_DETAILS } from '../../../utils/serviceDescriptionMappings';
 
 const BANK_VERIFICATION_STATUSES = ['pending', 'verified'];
 
@@ -29,7 +29,7 @@ function Terms({
 		bank_branch = '',
 		bank_name = '',
 		ifsc_code = '',
-	} = customerToBankDetails[importerExporterId] || {};
+	} = CUSTOMER_TO_BANK_DETAILS[importerExporterId] || {};
 	return (
 		<>
 			<div style={{ padding: '0px 8px' }}>

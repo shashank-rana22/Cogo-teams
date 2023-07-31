@@ -1,9 +1,9 @@
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import {
-	customerToCin,
-	customerToServiceDescription,
-	taxPayableRCM,
+	CUSTOMER_TO_CIN,
+	CUSTOMER_TO_SERVICE_DESCRIPTION,
+	TAX_PAYABLE_RCM,
 } from '../../../utils/serviceDescriptionMappings';
 import { getOtherData } from '../getOtherData';
 
@@ -76,7 +76,7 @@ function TruckDetail({
 				<td style={{ border: '2px solid black' }} colSpan="2">
 					CIN :
 					&nbsp;
-					{customerToCin[importerExporterId] || ''}
+					{CUSTOMER_TO_CIN[importerExporterId] || ''}
 				</td>
 			</tr>
 			<tr style={{ border: '2px solid black' }}>
@@ -130,7 +130,7 @@ function TruckDetail({
 					WHETHER TAX IS PAYABLE ON RCM?
 				</td>
 				<td style={{ border: '2px solid black' }}>
-					{taxPayableRCM[importerExporterId] || ''}
+					{TAX_PAYABLE_RCM[importerExporterId] || ''}
 				</td>
 				<td style={{ border: '2px solid black' }}>
 					Freight Type
@@ -153,7 +153,7 @@ function TruckDetail({
 					&nbsp;
 				</td>
 				<td style={{ border: '2px solid black' }}>
-					{customerToServiceDescription[importerExporterId] || ''}
+					{CUSTOMER_TO_SERVICE_DESCRIPTION[importerExporterId] || ''}
 				</td>
 				<td style={{ border: '2px solid black' }}>
 					DELIVERY MONTH

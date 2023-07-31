@@ -6,11 +6,12 @@ import { getAnnexureTotalData } from '../getOtherData';
 
 const OFFSET_VALUE = 1;
 
-function Annexure({ customData = {}, invoice_no = '', invoice_date = '' }) {
+function Annexure({ customData = {}, invoice_no = '', invoice_date = '', billing_address = {} }) {
 	const { ANNEXURE_KEY_MAPPINGS = {}, annexureItems = [] } = getAnnexureData({
 		customData,
 	});
 
+	const { is_required_for_fortigo = true } = billing_address || {};
 	const annexureData = getAnnexureTotalData({ customData });
 
 	return (
@@ -32,21 +33,25 @@ function Annexure({ customData = {}, invoice_no = '', invoice_date = '' }) {
 					<h3>
 						Annexure to invoice no.
 						{invoice_no}
-						&nbsp;
+						{' '}
 						date
-						&nbsp;
+						{' '}
 						{formatDate({
 							date       : invoice_date,
 							formatType : 'date',
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						})}
-						&nbsp;
+						{' '}
 					</h3>
 				</td>
 			</tr>
 			<tr style={{ border: '2px solid black' }}>
 				<th style={{ border: '2px solid black', padding: '10px' }}>Sl No.</th>
-				<th style={{ border: '2px solid black', padding: '10px' }}>4Tigo Trip ID</th>
+				<th style={{ border: '2px solid black', padding: '10px' }}>
+					{is_required_for_fortigo ? '4Tigo Trip' : 'Shipment'}
+					{' '}
+					ID
+				</th>
 				<th style={{ border: '2px solid black', padding: '10px' }}>Consignor Name/ Consignee Name</th>
 				<th style={{ border: '2px solid black', padding: '10px' }}>From/To</th>
 				<th style={{ border: '2px solid black', padding: '10px' }}>EIL Invoice No</th>

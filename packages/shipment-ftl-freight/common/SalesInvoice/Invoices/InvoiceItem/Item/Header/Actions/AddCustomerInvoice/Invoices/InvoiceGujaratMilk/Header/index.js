@@ -1,43 +1,50 @@
-import { customerToCin } from '../../../utils/serviceDescriptionMappings';
-
-function Header({ billing_address = '', importerExporterId = '', logoData }) {
+function Header({ billing_address = '', logoData = '' }) {
+	const {
+		cin = '',
+		address = '',
+		registration_number = '',
+		tax_number = '',
+		email = '',
+		website = '',
+	} = billing_address || {};
 	return (
 		<table border="0" cellPadding="0" cellSpacing="0">
 			<tr>
 				<td style={{ width: '45%', verticalAlign: 'top' }}>
 					<p style={{ wordWrap: 'break-word' }}>
-						{billing_address?.address || ''}
+						{address}
 					</p>
 					<br />
 					<p>{}</p>
 					<p>
 						<b>Email :</b>
-						&nbsp;
-						info@4tigo.com &nbsp;
+						{' '}
+						{email}
+						{' '}
 						<b>Website :</b>
-						&nbsp;
-						www.4tigo.com
+						{' '}
+						{website}
 					</p>
 				</td>
 				<td style={{ width: '25%', verticalAlign: 'top' }}>
 					<p style={{ display: 'flex' }}>
 						<b>CIN : </b>
-							&nbsp;
+						{' '}
 						<span style={{ marginLeft: '3px' }}>
-							{customerToCin[importerExporterId] || ''}
+							{cin}
 						</span>
 					</p>
 					<p style={{ display: 'flex' }}>
 						<b>PAN : </b>
 						<span style={{ marginLeft: '3px' }}>
-							{billing_address?.registration_number || ''}
+							{registration_number}
 						</span>
 					</p>
 					<p style={{ display: 'flex' }}>
 						<b>GSTIN: </b>
-							&nbsp;
+						{' '}
 						<span style={{ marginLeft: '3px' }}>
-							{billing_address?.tax_number || ''}
+							{tax_number}
 						</span>
 					</p>
 				</td>

@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
 
-import { customerToCin } from '../../utils/serviceDescriptionMappings';
+import { CUSTOMER_TO_CIN } from '../../utils/serviceDescriptionMappings';
 
 import { getOtherData } from './getOtherData';
 import TableData from './TableData';
@@ -86,7 +86,7 @@ function InvoiceHIL({
 						<p style={{ display: 'flex' }}>
 							<b>CIN : </b>
 							&nbsp;
-							{customerToCin[importerExporterId] || ''}
+							{CUSTOMER_TO_CIN[importerExporterId] || ''}
 						</p>
 						<p style={{ display: 'flex' }}>
 							<b>PAN : </b>

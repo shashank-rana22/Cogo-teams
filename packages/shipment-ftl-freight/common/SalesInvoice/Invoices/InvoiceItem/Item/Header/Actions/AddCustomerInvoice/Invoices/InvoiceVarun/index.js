@@ -1,4 +1,4 @@
-import { customerToBankDetails } from '../../utils/serviceDescriptionMappings';
+import { CUSTOMER_TO_BANK_DETAILS } from '../../utils/serviceDescriptionMappings';
 
 import Quotation from './Quotation';
 import TruckDetail from './TruckDetail';
@@ -37,7 +37,7 @@ function InvoiceVarun({
 		bank_branch = '',
 		ifsc_code = '',
 		account_number = '',
-	} = customerToBankDetails[importerExporterId] || {};
+	} = CUSTOMER_TO_BANK_DETAILS[importerExporterId] || {};
 
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif', fontSize: '12px', padding: '40px' }}>

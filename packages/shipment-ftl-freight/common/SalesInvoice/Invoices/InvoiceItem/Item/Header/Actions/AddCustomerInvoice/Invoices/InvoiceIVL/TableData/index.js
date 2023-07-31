@@ -1,15 +1,24 @@
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
 
-import { customerToCin } from '../../../utils/serviceDescriptionMappings';
 import { getOtherData } from '../getOtherData';
 
 function TableData({
 	billing_address = {},
 	logoData = '',
 	customData = {},
-	importerExporterId = '',
 }) {
+	const {
+		cin = '',
+		business_name = '',
+		address = '',
+		registration_number = '',
+		tax_number = '',
+		email = '',
+		website = '',
+		branch_city = '',
+	} = billing_address || {};
+
 	const {
 		customer_name,
 		customer_state_code,
@@ -27,7 +36,7 @@ function TableData({
 				<tr>
 					<td style={{ verticalAlign: 'top' }}>
 						<h2 style={{ marginTop: '0px', color: '#ffa500' }}>
-							{billing_address?.business_name}
+							{business_name}
 						</h2>
 					</td>
 				</tr>
@@ -35,33 +44,35 @@ function TableData({
 			<table border="0" cellPadding="0" cellSpacing="0">
 				<tr>
 					<td style={{ width: '45%', verticalAlign: 'top' }}>
-						<p style={{ wordWrap: 'break-word' }}>{billing_address?.address}</p>
+						<p style={{ wordWrap: 'break-word' }}>{address}</p>
 						<br />
 						<p> </p>
 						<p>
 							<b>Email :</b>
-							&nbsp;
-							info@4tigo.com &nbsp;
+							{' '}
+							{email}
+							{' '}
+							{' '}
 							<b>Website :</b>
-							&nbsp;
-							www.4tigo.com
+							{' '}
+							{website}
 						</p>
 					</td>
 					<td style={{ width: '25%', verticalAlign: 'top' }}>
 						<p style={{ display: 'flex' }}>
 							<b>CIN : </b>
-							&nbsp;
-							{customerToCin[importerExporterId] || ''}
+							{' '}
+							{cin}
 						</p>
 						<p style={{ display: 'flex' }}>
 							<b>PAN : </b>
-							&nbsp;
-							{billing_address?.registration_number || ''}
+							{' '}
+							{registration_number}
 						</p>
 						<p style={{ display: 'flex' }}>
 							<b>GSTIN: </b>
-							&nbsp;
-							{billing_address?.tax_number || ''}
+							{' '}
+							{tax_number}
 						</p>
 					</td>
 					<td style={{ width: '30%' }}>
@@ -96,24 +107,32 @@ function TableData({
 				</tr>
 				<tr style={{ marginBottom: '50px' }}>
 					<td style={{ width: '50%' }}>
-						<b>Customer:&nbsp;</b>
-						&nbsp;
+						<b>
+							Customer:
+							{' '}
+							{' '}
+						</b>
+						{' '}
 						{customer_name}
 						,
-						&nbsp;
+						{' '}
 						{customer_address}
 					</td>
 					<td
 						style={{ width: '25%', paddingLeft: '30px' }}
 					>
-						<b>Invoice No:&nbsp; </b>
-						&nbsp;
+						<b>
+							Invoice No:
+							{' '}
+							{' '}
+						</b>
+						{' '}
 						{invoice_no}
 					</td>
 					<td style={{ width: ' 25%' }}>
 						<b>
 							Original For Recipient /
-							&nbsp;
+							{' '}
 							<del>Duplicate For Supplier</del>
 						</b>
 					</td>
@@ -129,18 +148,27 @@ function TableData({
 					<td style={{ width: '50%' }}>
 						<p style={{ wordWrap: 'break-word' }} />
 						<p>
-							<b>State Code :&nbsp;</b>
-							&nbsp;
+							<b>
+								State Code :
+								{' '}
+							</b>
+							{' '}
 							{customer_state_code}
 						</p>
 						<p>
-							<b>GSTIN :&nbsp;</b>
-							&nbsp;
+							<b>
+								GSTIN :
+								{' '}
+							</b>
+							{' '}
 							{customer_gstin}
 						</p>
 						<p>
-							<b>Kind Attention :&nbsp;</b>
-							&nbsp;
+							<b>
+								Kind Attention :
+								{' '}
+							</b>
+							{' '}
 							{kind_attention}
 						</p>
 					</td>
@@ -148,24 +176,40 @@ function TableData({
 						style={{ width: '50%', paddingLeft: '30px' }}
 					>
 						<p>
-							<b>Invoice Date :&nbsp;</b>
+							<b>
+								Invoice Date :
+								{' '}
+								{' '}
+							</b>
 							{invoice_date
 								? formatDate({ date: invoice_date, formatType: 'date' })
 								: ''}
 						</p>
 						<p style={{ wordWrap: 'break-word' }}>
-							<b>Item :&nbsp;</b>
-							&nbsp;
+							<b>
+								Item :
+								{' '}
+								{' '}
+							</b>
+							{' '}
 							Freight-GTA Service
 						</p>
 						<p>
-							<b>Issuing Branch :&nbsp;</b>
-							&nbsp;
-							Bangalore
+							<b>
+								Issuing Branch :
+								{' '}
+								{' '}
+							</b>
+							{' '}
+							{branch_city}
 						</p>
 						<p style={{ wordWrap: 'break-word' }}>
-							<b>SAC :&nbsp;</b>
-							&nbsp;
+							<b>
+								SAC :
+								{' '}
+								{' '}
+							</b>
+							{' '}
 							{sac_code}
 						</p>
 					</td>

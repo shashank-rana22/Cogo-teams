@@ -163,6 +163,10 @@ const GLOBAL_CONSTANTS = {
 			'97dcd57c-d263-496f-9f59-7a7aef400d34',
 			'20f59087-12cf-4e6d-8463-27d41e23da6f',
 		],
+		fortigo_agencies_mapping: {
+			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+		},
 
 	},
 	view_key_mappings: {
@@ -433,10 +437,49 @@ const GLOBAL_CONSTANTS = {
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
 	others                       : {
-		old_shipment_serial_id      : 120347,
-		cogopoint_default_value     : 0,
-		fcl_import_new_process_date : '2023-07-27T00:00:00',
-
+		old_shipment_serial_id       : 120347,
+		cogopoint_default_value      : 0,
+		fcl_import_new_process_date  : '2023-07-27T00:00:00',
+		fortigo_company_pan_mappings : {
+			fortigo_network_logistics : 'AACCF6637K',
+			fortigo_transport_agency  : 'AADCF3831G',
+		},
+		cogo_mumbai_gst       : '27AAICC8838P1ZR',
+		cogoport_website      : 'www.cogoport.com',
+		fortigo_website       : 'www.4tigo.com',
+		customer_pan_mappings : {
+			exide_industries : 'AAACE6641E',
+			adani_wilmar     : 'AABCA8056G',
+			gujarat_milk     : 'AAAAG5588Q',
+			hil_limited      : 'AAACH2676Q',
+			itc_limited      : 'AAACI5950L',
+			ivl_dhunseri     : 'AAFCD5214M',
+			kansai_nerolac   : 'AAACG1376N',
+			orissa_metaliks  : 'AAACO8663L',
+			varun_beverages  : 'AAACV2678L',
+		},
+		fortigo_bank_details_mappings: {
+			fortigo_network_logistics: {
+				ifsc_code      : 'UTIB000541',
+				account_number : '921020010527964',
+			},
+			fortigo_transport_agency: {
+				ifsc_code      : 'ICIC0000047',
+				account_number : '004705014491',
+			},
+		},
+		fortigo_cin_mappings: {
+			fortigo_network_logistics : 'U72200KA2015PTC082767',
+			fortigo_transport_agency  : 'U60221KA2018PTC112639',
+		},
+		fortigo_registration_number_mappings: {
+			fortigo_network_logistics : 'KR03E0088395',
+			fortigo_transport_agency  : 'KR03D0105659',
+		},
+		cogo_bank_details: {
+			ifsc_code      : 'RATN0000088',
+			account_number : '409001406475',
+		},
 	},
 	shipment_types: [
 		{ value: 'fcl_freight', label: 'FCL' },
@@ -534,8 +577,12 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	emails: {
-		import_rates : 'Import.rates@cogoport.com',
-		export_rates : 'Export.rates@cogoport.com',
+		import_rates             : 'Import.rates@cogoport.com',
+		export_rates             : 'Export.rates@cogoport.com',
+		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
+		cogoport_support         : 'support@cogoport.com',
+		fortigo_collections      : 'collection@4tigo.com',
+		fortigo_support          : 'info@4tigo.com',
 	},
 };
 

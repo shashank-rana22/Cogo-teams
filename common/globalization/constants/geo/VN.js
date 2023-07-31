@@ -240,6 +240,7 @@ export default {
 		},
 		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
+		field_service_ops_id     : '227ad5bc-d6e7-4a25-aea4-8107250e200e',
 	},
 	options: {
 		registration_types: [

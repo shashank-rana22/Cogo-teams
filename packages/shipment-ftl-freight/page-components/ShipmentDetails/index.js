@@ -1,25 +1,27 @@
 import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-import PurchaseInvoicing from '@cogoport/purchase-invoicing';
+import { dynamic } from '@cogoport/next';
+// import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
-import { ShipmentMails } from '@cogoport/shipment-mails';
-import { Tracking } from '@cogoport/surface-modules';
+// import { ShipmentMails } from '@cogoport/shipment-mails';
+// import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import AddService from '../../common/AdditionalServices/components/List/AddService';
 import CancelDetails from '../../common/CancelDetails';
-import Documents from '../../common/Documents';
-import FieldExecutive from '../../common/FieldExecutive';
-import Overview from '../../common/Overview';
-import OverviewManageServices from '../../common/Overview/OverviewManageServices';
+// import Documents from '../../common/Documents';
+// import FieldExecutive from '../../common/FieldExecutive';
+// import Overview from '../../common/Overview';
+// import OverviewManageServices from '../../common/Overview/OverviewManageServices';
 import PocSop from '../../common/PocSop';
-import SalesInvoice from '../../common/SalesInvoice';
+// import SalesInvoice from '../../common/SalesInvoice';
 import ShipmentHeader from '../../common/ShipmentHeader';
 import ShipmentInfo from '../../common/ShipmentInfo';
-import Tasks from '../../common/Tasks';
+// import Tasks from '../../common/Tasks';
 import Timeline from '../../common/TimeLine';
+import useGetActiveStakeholder from '../../hooks/useGetActiveStakeholder';
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
 import useServiceList from '../../hooks/useServiceList';
@@ -28,15 +30,27 @@ import getStakeholderConfig from '../../stakeholderConfig';
 import styles from './styles.module.css';
 
 const ACTIVE_STAKEHOLDER = 'superadmin';
+
+const TAB_MAPPING = {
+	overview        : dynamic(() => import('../../common/Overview'), { ssr: false }),
+	tasks           : dynamic(() => import('../../common/Tasks'), { ssr: false }),
+	field_executive : dynamic(() => import('../../common/FieldExecutive'), { ssr: false }),
+	sales           : dynamic(() => import('../../common/SalesInvoice'), { ssr: false }),
+	purchase        : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
+	documents       : dynamic(() => import('../../common/Documents'), { ssr: false }),
+	emails          : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
+	tracking        : dynamic(() => import('@cogoport/surface-modules/components/Tracking'), { ssr: false }),
+};
 const FORBIDDEN_STATUS_CODE = 403;
 
 function ShipmentDetails() {
 	const router = useRouter();
-
-	const stakeholderConfig = getStakeholderConfig({ stakeholder: ACTIVE_STAKEHOLDER });
+	const activeStakeholder = useGetActiveStakeholder();
+	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
 	const { get } = useGetShipment();
+	const { features = [], default_tab = 'tasks', visible_tabs = [] } = stakeholderConfig || {};
 
-	const [activeTab, setActiveTab] = useState('overview');
+	const [activeTab, setActiveTab] = useState(default_tab);
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
@@ -59,6 +73,41 @@ function ShipmentDetails() {
 	useEffect(() => {
 		router.prefetch(router.asPath);
 	}, [router]);
+
+	const tabs = Object.keys(TAB_MAPPING).filter((t) => visible_tabs.includes(t));
+
+	const conditionMapping = {
+		shipment_info       : !!features.includes('shipment_info'),
+		shipment_header     : !!features.includes('shipment_header'),
+		// purchase            : !!features.includes('purchase'),
+		poc_sop             : !!(features.includes('poc') || features.includes('sop')),
+		chat                : !!features.includes('chat'),
+		cancelDetails       : !!(features.includes('cancel_details') && shipment_data?.state === 'cancelled'),
+		documentHoldDetails : !!features.includes('document_hold_details'),
+		timeline            : !!features.includes('timeline'),
+	};
+
+	const tabProps = {
+		overview        : { shipmentData: shipment_data },
+		field_executive : {
+			shipment_data,
+			servicesList: servicesGet?.servicesList,
+		},
+		emails: {
+			source           : 'cogo_rpa',
+			filters          : { q: shipment_data?.serial_id },
+			pre_subject_text : `${shipment_data?.serial_id}`,
+			shipment_type  	 : shipment_data?.shipment_type,
+		},
+		purchase: {
+			shipmentData : shipment_data,
+			servicesData : servicesGet?.servicesList,
+			AddService,
+		},
+		tracking: {
+			shipmentData: shipment_data,
+		},
+	};
 
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
@@ -114,19 +163,19 @@ function ShipmentDetails() {
 							offLabel="New"
 							onChange={handleVersionChange}
 						/>
-						<ShipmentChat />
+						{conditionMapping.chat ? <ShipmentChat /> : null}
 					</div>
 				</div>
 
 				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
 				<div className={styles.header}>
-					<ShipmentHeader />
+					{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
 
-					<PocSop />
+					{conditionMapping.poc_sop ? <PocSop /> : null}
 				</div>
 
-				<Timeline />
+				{conditionMapping.timeline ? <Timeline /> : null}
 
 				<div className={styles.container}>
 					<Tabs
@@ -135,50 +184,14 @@ function ShipmentDetails() {
 						themeType="secondary"
 						onChange={setActiveTab}
 					>
-						<TabPanel name="overview" title="Overview">
-							<Overview shipmentData={shipment_data} />
-						</TabPanel>
-
-						<TabPanel name="timeline_and_tasks" title="TimeLine and Tasks">
-							<Tasks />
-						</TabPanel>
-
-						<TabPanel name="field_executive" title="Field Executive">
-							<FieldExecutive shipment_data={shipment_data} servicesList={servicesGet?.servicesList} />
-						</TabPanel>
-
-						<TabPanel name="invoice_and_quotation" title="Sales Invoice">
-							<SalesInvoice />
-						</TabPanel>
-
-						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-							<main className={styles.purchasecontainer}>
-								<OverviewManageServices isOpen isPurchaseTab />
-							</main>
-							<main className={styles.accordian}>
-								<PurchaseInvoicing
-									shipmentData={shipment_data}
-									servicesData={servicesGet?.servicesList}
-									AddService={AddService}
-								/>
-							</main>
-						</TabPanel>
-
-						<TabPanel name="documents" title="Documents">
-							<Documents />
-						</TabPanel>
-
-						<TabPanel name="emails" title="Emails">
-							<ShipmentMails
-								source="cogo_rpa"
-								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={`${shipment_data?.serial_id}`}
-							/>
-						</TabPanel>
-
-						<TabPanel name="tracking" title="Tracking">
-							<Tracking shipmentData={shipment_data} />
-						</TabPanel>
+						{tabs.map((singleTab) => (
+							<TabPanel name={singleTab} key={singleTab} title={stakeholderConfig[singleTab]?.tab_title}>
+								{TAB_MAPPING[singleTab]({
+									...(tabProps?.[singleTab] || {}),
+									...(stakeholderConfig[singleTab] || {}),
+								})}
+							</TabPanel>
+						))}
 					</Tabs>
 				</div>
 			</div>

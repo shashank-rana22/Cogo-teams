@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-import { shipperToPanMapping } from './serviceDescriptionMappings';
+import { SHIPPER_TO_PAN_MAPPINGS } from './serviceDescriptionMappings';
 
 const InvoiceIVL = dynamic(() => import('../Invoices/InvoiceIVL'));
 const InvoiceITC = dynamic(() => import('../Invoices/InvoiceITC'));
@@ -14,15 +14,15 @@ const InvoiceNerolac = dynamic(() => import('../Invoices/InvoiceNerolac'));
 const InvoiceDefault = dynamic(() => import('../Invoices/InvoiceDefault'));
 
 export const componentMapper = {
-	[shipperToPanMapping.ivl_dhunseri]     : InvoiceIVL,
-	[shipperToPanMapping.itc_limited]      : InvoiceITC,
-	[shipperToPanMapping.hil_limited]      : InvoiceHIL,
-	[shipperToPanMapping.gujarat_milk]     : InvoiceGujaratMilk,
-	[shipperToPanMapping.exide_industries] : InvoiceExide,
-	[shipperToPanMapping.adani_wilmar]     : InvoiceAdani,
-	[shipperToPanMapping.varun_beverages]  : InvoiceVarun,
-	[shipperToPanMapping.orissa_metaliks]  : InvoiceOrissaMetaliks,
-	[shipperToPanMapping.kansai_nerolac]   : InvoiceNerolac,
+	[SHIPPER_TO_PAN_MAPPINGS.ivl_dhunseri]     : InvoiceIVL,
+	[SHIPPER_TO_PAN_MAPPINGS.itc_limited]      : InvoiceITC,
+	[SHIPPER_TO_PAN_MAPPINGS.hil_limited]      : InvoiceHIL,
+	[SHIPPER_TO_PAN_MAPPINGS.gujarat_milk]     : InvoiceGujaratMilk,
+	[SHIPPER_TO_PAN_MAPPINGS.exide_industries] : InvoiceExide,
+	[SHIPPER_TO_PAN_MAPPINGS.adani_wilmar]     : InvoiceAdani,
+	[SHIPPER_TO_PAN_MAPPINGS.varun_beverages]  : InvoiceVarun,
+	[SHIPPER_TO_PAN_MAPPINGS.orissa_metaliks]  : InvoiceOrissaMetaliks,
+	[SHIPPER_TO_PAN_MAPPINGS.kansai_nerolac]   : InvoiceNerolac,
 };
 
 export const getComponentMapping = (registration_number) => {
