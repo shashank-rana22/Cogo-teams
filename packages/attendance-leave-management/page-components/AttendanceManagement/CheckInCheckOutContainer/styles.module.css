@@ -1,0 +1,41 @@
+.sub_header {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.header {
+	font-weight: 600;
+}
+
+.time_container {
+	padding: 24px 8px;
+	margin: 16px 0;
+	background-color: #fff;
+	border-radius: 16px;
+}
+
+.time_wrapper {
+	/* font-weight: 200; */
+	padding-left: 10px;
+	font-size: 40px;
+}
+
+.arrow_time_wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.formatted_time {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.button_wrapper {
+	margin-top: 46px;
+
+	:global {
+		.ui_button_container {
+			width: 100%;
+		}
+	}
+}
