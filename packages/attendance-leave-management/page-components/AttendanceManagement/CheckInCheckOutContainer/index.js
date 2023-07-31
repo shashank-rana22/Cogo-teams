@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
@@ -54,25 +55,30 @@ function ChecInCheckOut() {
 					</div>
 				</div>
 
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				<div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: 20 }}>
 					<div>
-						<div>
+						<div style={{ color: '#4F4F4F', paddingBottom: 2 }}>
 							Current Time
 						</div>
-						<div>
+						<div className={styles.formatted_time}>
 							{formatedTime}
 						</div>
 					</div>
 
 					<div>
-						<div>
+						<div style={{ color: '#4F4F4F', paddingBottom: 2 }}>
 							Completed Time
 						</div>
-						<div>
+						<div className={styles.formatted_time}>
 							{formatedTime}
 						</div>
 					</div>
+				</div>
 
+				<div className={styles.button_wrapper}>
+					<Button themeType="accent" size="lg">
+						Check Out
+					</Button>
 				</div>
 
 			</div>
