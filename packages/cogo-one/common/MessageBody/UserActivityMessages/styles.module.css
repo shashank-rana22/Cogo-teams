@@ -1,5 +1,11 @@
 .title {
+	display: flex;
+	align-items: center;
 	font-size: 12px;
 	font-weight: 600;
 	color: #000;
+}
+
+.user_scope {
+	margin-right: 4px;
 }

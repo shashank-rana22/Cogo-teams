@@ -1,4 +1,5 @@
 import { Popover, Button, Modal, Textarea } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -17,7 +18,7 @@ import styles from './styles.module.css';
 type Itemdata = {
 	id?: string;
 	invoiceStatus?: string;
-	entityCode?: number;
+	entityCode?: string;
 	daysLeftForAutoIrnGeneration?: string;
 	isFinalPosted?:boolean;
 	invoiceType?:string;
@@ -40,7 +41,6 @@ const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 const POSTED_STATUS = ['POSTED'];
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
 const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
-const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
 
 const PERMISSION_BUTTON = {
 	upload_invoice: {
@@ -65,7 +65,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const { NAVIGATION_KEY, API_NAME } = PERMISSION_BUTTON.upload_invoice || {};
 
 	const NAVIGATION = PERMISSION_NAVIGATION
-		?.[NAVIGATION_KEY]?.[API_NAME][GLOBAL_CONSTANTS.zeroth_index]?.type !== 'none';
+		?.[NAVIGATION_KEY]?.[API_NAME]?.[GLOBAL_CONSTANTS.zeroth_index]?.type !== 'none';
 
 	const { id: partnerId = '' } = partner;
 
@@ -81,6 +81,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	} = useGetIrnGeneration({
 		id,
 		refetch,
+		entityCode,
 	});
 	const { refresh, loadingOnRefresh } = useGetRefresh({
 		id,
@@ -99,10 +100,10 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const onChange = (e) => {
 		setTextValue(e);
 	};
-	const { labels } = CogoportEntity[entityCode] || {};
-	const { irn_label: IrnLabel } = labels || {};
+	const { labels } = ENTITY_FEATURE_MAPPING[entityCode] || {};
+	const { irn_label:irnLabel } = labels || {};
 
-	const UPLOAD_INVOICE_PERMISSION = GLOBAL_CONSTANTS.cogoport_entities[entityCode]
+	const UPLOAD_INVOICE_PERMISSION = ENTITY_FEATURE_MAPPING[entityCode]
 		?.feature_supported.includes('upload_invoice');
 
 	const handleFinalpost = () => {
@@ -127,7 +128,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 								<div className={styles.lable_width}>
 									Upload
 									{' '}
-									{IrnLabel}
+									{irnLabel}
 								</div>
 							</Button>
 						</div>
@@ -151,7 +152,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 							<span className={styles.lable_width}>
 								Generate
 								{' '}
-								{IrnLabel}
+								{irnLabel}
 							</span>
 						</Button>
 					</div>
