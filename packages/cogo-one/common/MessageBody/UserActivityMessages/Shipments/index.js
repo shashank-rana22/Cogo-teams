@@ -84,9 +84,9 @@ function Shipments({ serviceData = {}, eventType = '', scope = '' }) {
 	if (isEmpty(serviceData)) {
 		return (
 			<>
-				<div className={styles.title}>{EVENTS_INFORMATION[eventType].title}</div>
+				<div className={styles.title}>{EVENTS_INFORMATION[eventType]?.title}</div>
 				<div className={styles.message}>
-					{EVENTS_INFORMATION[eventType].information}
+					{EVENTS_INFORMATION[eventType]?.information}
 				</div>
 			</>
 		);
@@ -94,9 +94,9 @@ function Shipments({ serviceData = {}, eventType = '', scope = '' }) {
 
 	return (
 		<>
-			<div className={styles.title}>{EVENTS_INFORMATION[eventType].title}</div>
+			<div className={styles.title}>{EVENTS_INFORMATION[eventType]?.title}</div>
 			<div className={styles.message}>
-				{EVENTS_INFORMATION[eventType].information}
+				{EVENTS_INFORMATION[eventType]?.information}
 			</div>
 
 			<div className={styles.banner}>
