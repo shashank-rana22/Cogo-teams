@@ -1,12 +1,11 @@
-import { Tabs, TabPanel, Button, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMRefresh } from '@cogoport/icons-react';
-import { ThreeDotLoader } from '@cogoport/ocean-modules';
+import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
@@ -23,8 +22,6 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
-
-const FORBIDDEN_STATUS_CODE = 403;
 
 function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -53,55 +50,13 @@ function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 		activeStakeholder,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
-	useEffect(() => {
-		router.prefetch(router.asPath);
-	}, [router]);
-
-	if (isGettingShipment || getShipmentStatusCode === undefined) {
-		return (
-			<div className={styles.loader}>
-				<ThreeDotLoader message="Loading Shipment" fontSize={18} size={45} />
-			</div>
-		);
-	}
-
-	if (!shipment_data && ![FORBIDDEN_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
-		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.section}>
-					<h2 className={styles.error}>Something Went Wrong!</h2>
-
-					<div className={styles.page}>We are looking into it.</div>
-
-					<Button
-						onClick={() => router.reload()}
-						className={styles.refresh}
-					>
-						<IcMRefresh />
-						&nbsp;Refresh
-					</Button>
-				</div>
-			</div>
-		);
-	}
-
-	if (getShipmentStatusCode === FORBIDDEN_STATUS_CODE && getShipmentStatusCode !== undefined) {
-		return (
-			<section className={styles.shipment_not_found}>
-				<div className={styles.permission_message}>
-					You don&apos;t have permission to visit this page.
-					<br />
-					Please contact at
-					{' '}
-					<a href="tel:+91 7208083747">+91 7208083747</a>
-				</div>
-			</section>
-		);
-	}
-
 	return (
-		<ShipmentDetailContext.Provider value={contextValues}>
-			<div>
+		<ShipmentPageContainer
+			isGettingShipment={isGettingShipment}
+			getShipmentStatusCode={getShipmentStatusCode}
+			shipment_data={shipment_data}
+		>
+			<ShipmentDetailContext.Provider value={contextValues}>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 
@@ -144,7 +99,10 @@ function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 						</TabPanel>
 
 						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
+							<PurchaseInvoicing
+								shipmentData={shipment_data}
+								servicesData={servicesGet?.servicesList}
+							/>
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
@@ -160,8 +118,8 @@ function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 						</TabPanel>
 					</Tabs>
 				</div>
-			</div>
-		</ShipmentDetailContext.Provider>
+			</ShipmentDetailContext.Provider>
+		</ShipmentPageContainer>
 	);
 }
 

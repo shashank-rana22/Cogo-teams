@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 const UNAUTHORIZED_STATUS_CODE = 403;
 
-export default function ShipmentBeforeLoad({ isGettingShipment, getShipmentStatusCode, shipment_data, children }) {
+export default function ShipmentPageContainer({ isGettingShipment, getShipmentStatusCode, shipment_data, children }) {
 	const router = useRouter();
 
 	useEffect(() => {
@@ -19,7 +19,7 @@ export default function ShipmentBeforeLoad({ isGettingShipment, getShipmentStatu
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
 			<div className={styles.loading_wrapper}>
-				<ThreeDotLoader message="Loading Shipment Data" fontSize={18} size={45} />
+				<ThreeDotLoader message="Loading Shipments" fontSize={18} size={45} />
 			</div>
 		);
 	}

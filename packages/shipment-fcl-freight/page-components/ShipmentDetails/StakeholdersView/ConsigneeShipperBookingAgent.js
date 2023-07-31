@@ -1,6 +1,6 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import ShipmentBeforeLoad from '@cogoport/ocean-modules/components/ShipmentBeforeLoad';
+import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
@@ -11,7 +11,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
-import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
@@ -52,7 +52,7 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	return (
-		<ShipmentBeforeLoad
+		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
 			getShipmentStatusCode={getShipmentStatusCode}
 			shipment_data={shipment_data}
@@ -62,7 +62,7 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 					<div className={styles.top_header}>
 						<ShipmentInfo />
 
-						<RolloveDetails />
+						<RolloverDetails />
 
 						<ShipmentChat />
 					</div>
@@ -113,7 +113,7 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 					) : null}
 				</div>
 			</ShipmentDetailContext.Provider>
-		</ShipmentBeforeLoad>
+		</ShipmentPageContainer>
 	);
 }
 
