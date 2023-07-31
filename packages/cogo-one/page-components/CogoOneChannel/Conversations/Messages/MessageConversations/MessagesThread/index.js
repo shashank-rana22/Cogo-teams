@@ -58,11 +58,21 @@ function MessagesThread(
 	} = messageRef?.current || {};
 
 	useEffect(() => {
-		if (!isEmpty(messagesData) && (scrollHeight - scrollTop < SCROLL_WHEN_REQUIRED_HEIGHT * clientHeight)) {
+		if (
+			!isEmpty(messagesData)
+			&& (scrollHeight - scrollTop < SCROLL_WHEN_REQUIRED_HEIGHT * clientHeight)
+		) {
 			scrollToBottom();
-			updateUnreadMessagesCount({ channelType: channel_type, id, firestore });
+			if (new_message_count) {
+				updateUnreadMessagesCount({
+					channelType: channel_type,
+					id,
+					firestore,
+				});
+			}
 		}
-	}, [channel_type, clientHeight, firestore, messagesData, id, scrollHeight, scrollToBottom, scrollTop]);
+	}, [channel_type, clientHeight, firestore, messagesData, id,
+		scrollHeight, scrollToBottom, scrollTop, new_message_count]);
 
 	if (hasNoFireBaseRoom) {
 		return (
