@@ -1,9 +1,6 @@
 import { Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMCopy } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-
-import handleCopyShipmentData from '../../helpers/handleCopyShipmentData';
 
 import CargoDetails from './CargoDetails';
 import HeaderBlock from './HeaderBlock';
@@ -85,13 +82,7 @@ function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type =
 				{ShipmentIcon && <ShipmentIcon className={styles.ship_icon} /> }
 
 				{startCase(shipment_type)}
-				<IcMCopy
-					className={styles.copy_icon}
-					onClick={(e) => {
-						e.stopPropagation();
-						handleCopyShipmentData({ shipmentItem });
-					}}
-				/>
+
 			</div>
 		</>
 	);

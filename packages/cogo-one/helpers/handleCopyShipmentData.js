@@ -20,11 +20,13 @@ export const SHIPMENT_LABELS = [
 	'volume',
 ];
 
-// const STARTCASE_THE_LABELS = ['container_type',
-// 	'truck_type',
-// 	'haulage_type',
-// 	'commodity',
-// 	'inco_term'];
+const STARTCASE_THE_LABELS = [
+	'container_type',
+	'truck_type',
+	'haulage_type',
+	'commodity',
+	'inco_term',
+];
 
 const GET_FROM_RENDER_VALUE_MAPPING = ['container_size', 'packages_count', 'volume', 'weight'];
 
@@ -43,8 +45,8 @@ const handleCopyShipmentData = ({ shipmentItem }) => {
 
 			if (GET_FROM_RENDER_VALUE_MAPPING.includes(label)) {
 				value = RENDER_VALUE_MAPPING?.[label]?.(details) || value;
-			// } else if (STARTCASE_THE_LABELS.includes(label)) {
-			// 	value = startCase(value);
+			} else if (STARTCASE_THE_LABELS.includes(label)) {
+				value = startCase(value);
 			}
 
 			if (!value || !shipmentItem?.[label]) {

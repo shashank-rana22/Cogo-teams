@@ -1,10 +1,11 @@
-import { Popover, ButtonGroup } from '@cogoport/components';
+import { Popover, ButtonGroup, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMOverflowDot } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMCopy } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
+import handleCopyShipmentData from '../../../helpers/handleCopyShipmentData';
 import RaiseTicketModal from '../../RaiseTicketModal';
 
 import styles from './styles.module.css';
@@ -96,12 +97,22 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 			</div>
 
 			<div className={styles.icons_container}>
+				<IcMCopy
+					className={cl`${styles.copy_icon} 
+					${type !== 'all_shipments' ? styles.user_activity_copy_icon : ''}`}
+					onClick={(e) => {
+						e.stopPropagation();
+						handleCopyShipmentData({ shipmentItem });
+					}}
+				/>
+
 				{type === 'all_shipments' && (
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.message_reply}
 						height={25}
 						width={25}
 						alt="message"
+						className={styles.message_icon_styles}
 						onClick={(e) => {
 							e.stopPropagation();
 							setShowPocDetails(shipmentItem);

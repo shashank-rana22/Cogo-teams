@@ -89,12 +89,3 @@
 	margin-right: 6px;
 	fill: #f9ae64;
 }
-
-.copy_icon {
-	position: absolute;
-	right: 10px;
-	width: 18px;
-	height: 18px;
-	cursor: copy;
-	fill: #abb0de;
-}
