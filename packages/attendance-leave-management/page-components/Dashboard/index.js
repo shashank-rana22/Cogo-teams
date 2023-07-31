@@ -1,6 +1,8 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import LeavesManagement from '../LeavesManagement';
+
 function AttendanceLeaveDashboard() {
 	const [activeTab, setActiveTab] = useState('attendance');
 	return (
@@ -21,7 +23,7 @@ function AttendanceLeaveDashboard() {
 					</TabPanel>
 
 					<TabPanel name="leaves" title="Leaves">
-						<div>This is Leaves</div>
+						<div><LeavesManagement /></div>
 					</TabPanel>
 
 					<TabPanel name="policies" title="Policies">

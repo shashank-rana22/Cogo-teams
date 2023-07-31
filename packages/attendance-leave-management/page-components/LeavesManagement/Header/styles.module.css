@@ -1,0 +1,8 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.select_container {
+	width: 160px;
+}
