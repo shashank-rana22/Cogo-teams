@@ -6,12 +6,15 @@ import useGetCcsShipmentCapacityDetails from '../../../../../hooks/useGetCcsShip
 import useUpdateCapacityConfig from '../../../../../hooks/useUpdateCapacityConfig';
 import CapacityDetailsTable from '../../../CapacityDetailsTable';
 
+// import CapacityFormula from './components/CapacityFormula';
 import styles from './styles.module.css';
 
 function TotalShipmentCapacity({ routeLoading = false }) {
 	const [showModal, setShowModal] = useState(false);
 
 	const { list = [], loading: capacityDataLoading } = useGetCcsShipmentCapacityDetails();
+
+	const data = list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { loading, updateCapacityConfig } = useUpdateCapacityConfig({ setShowModal });
 
@@ -31,8 +34,10 @@ function TotalShipmentCapacity({ routeLoading = false }) {
 			</div>
 
 			<div className={styles.table_container}>
-				<CapacityDetailsTable data={list?.[GLOBAL_CONSTANTS.zeroth_index]} loading={capacityDataLoading} />
+				<CapacityDetailsTable data={data} loading={capacityDataLoading} />
 			</div>
+
+			{/* <CapacityFormula data={data} /> */}
 
 			<div className={styles.btn_container}>
 				<Button

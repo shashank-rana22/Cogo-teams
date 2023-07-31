@@ -113,6 +113,7 @@ function ShipmentCapacities(props) {
 										<InputController
 											name={`${key}-${service.value}`}
 											control={control}
+											type="number"
 											rules={{
 												required: 'Required',
 											}}

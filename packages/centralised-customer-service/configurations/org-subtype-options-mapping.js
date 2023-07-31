@@ -26,10 +26,6 @@ const orgSubTypeOptions = {
 			value : 'domestic_cp',
 			label : 'Domestic CP',
 		},
-		{
-			value : 'not_defined',
-			label : 'Unknown',
-		},
 	],
 };
 

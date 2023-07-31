@@ -59,9 +59,12 @@ function ConfigListItem({ data = {}, fetchList = () => {} }) {
 
 	const [showModal, setShowModal] = useState(false);
 
-	const { shipment_capacities = [], agent_experience_slab_details = [], id, status = 'draft' } = data;
+	const {
+		shipment_capacities = [], agent_experience_slab_details = [],
+		id, status = 'draft', cogo_entity = {}, role_data = {}, activated_at = '',
+	} = data;
 
-	const { title, content } = activationStatus({ status, activated_at: '' });
+	const { title, content } = activationStatus({ status, activated_at });
 
 	const [showDetails, setShowDetails] = useState(false);
 
@@ -82,11 +85,11 @@ function ConfigListItem({ data = {}, fetchList = () => {} }) {
 				<div className={styles.details_container}>
 					<div className={styles.item}>
 						<p className={styles.title}>Entity</p>
-						<p className={styles.content}>cogo freight pvt ltd</p>
+						<p className={styles.content}>{cogo_entity?.business_name || '-'}</p>
 					</div>
 					<div className={styles.item}>
 						<p className={styles.title}>Role</p>
-						<p className={styles.content}>C_KAM</p>
+						<p className={styles.content}>{role_data?.name || '-'}</p>
 					</div>
 
 					<div className={styles.slab_details}>
@@ -100,7 +103,7 @@ function ConfigListItem({ data = {}, fetchList = () => {} }) {
 
 				<div className={styles.status}>
 					<p className={styles.title}>{title}</p>
-					<p className={styles.content}>{content}</p>
+					<p className={styles.content}>{content || '-'}</p>
 				</div>
 
 				<div className={styles.tooltip}>
