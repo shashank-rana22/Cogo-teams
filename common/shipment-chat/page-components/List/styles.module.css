@@ -65,12 +65,12 @@
 	display: flex;
 	align-items: center;
 	font-weight: 600;
-	color: #333;
 }
 
 .updated_at {
 	font-size: 10px;
-	font-weight: 500;
+
+	/* font-weight: 500; */
 	line-height: 16px;
 	color: #4f4f4f;
 }
