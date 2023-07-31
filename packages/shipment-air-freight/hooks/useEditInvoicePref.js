@@ -15,6 +15,8 @@ const INVOICE_INDEX_GREATER_THAN = 0;
 
 const UNIQ_IGST_VAL_LENGTH = 1;
 
+const UNIQ_IGST_COUNT = 2;
+
 const PARTY_SERVICES_LENGTH_GREATER_THAN = 1;
 
 const geo = getGeoConstants();
@@ -165,7 +167,7 @@ const useEditInvoicePref = ({
 			const igstArray = (changedIP?.services || []).map(
 				(service) => service?.is_igst,
 			);
-			const uniq_igst_val = new Set(igstArray || []);
+			const uniq_igst_val = igstArray || [];
 			const allowServiceMerge = uniq_igst_val?.length === UNIQ_IGST_VAL_LENGTH;
 
 			let isBasicFreight = false;
@@ -176,13 +178,21 @@ const useEditInvoicePref = ({
 							&& EXPORT_SERVICES_TYPES === isBasicFreightInvService.service_type,
 					);
 
+					const isSubsidiary = (party?.services || []).some(
+						(service) => service.service_type === 'subsidiary_service',
+					);
+
 					if (party?.services?.length > PARTY_SERVICES_LENGTH_GREATER_THAN && BFLineItem) {
-						isBasicFreight = true;
+						isBasicFreight = !isSubsidiary;
 					}
 				});
 			}
 
-			if (isBasicFreight && updateExportInvoices && !allowServiceMerge) {
+			const uniq_igst_count = uniq_igst_val.filter(Boolean).length;
+
+			if (uniq_igst_count >= UNIQ_IGST_COUNT) {
+				setSelectedParties([...finalNewSelectParties]);
+			} else if (isBasicFreight && updateExportInvoices && !allowServiceMerge) {
 				Toast.error(
 					'Basic Freight or IGST invoices cannot be merged with other services',
 				);

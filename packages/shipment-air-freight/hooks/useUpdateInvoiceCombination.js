@@ -51,11 +51,16 @@ const useUpdateInvoiceCombination = ({
 				const PARTY_SERVICES = (party?.services || []).map((item) => {
 					const { display_name, trade_type, serviceKey, is_igst, ...rest } = item;
 
+					const mainServiceType =						item?.service_type !== 'subsidiary_service'
+						? item?.service_type
+						: item?.subsidiary_service_type;
+
 					return ({
 						...rest,
 						invoice_combination_id: updateExportInvoices
 							? initial_service_invoice_id[serviceKey] || undefined
 							: undefined,
+						main_service_type: mainServiceType,
 					});
 				});
 
