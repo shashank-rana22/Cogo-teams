@@ -1,5 +1,6 @@
 import { Toggle } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import OrgShipments from './OrgShipments';
@@ -7,23 +8,26 @@ import ShipmentInvoices from './ShipmentInvoices';
 import styles from './styles.module.css';
 
 function AdditionalShipmentInfo({ item = {}, filters = {}, setFilters = () => {} }) {
-	const orgDetails = item?.importer_exporter;
+	const [toggleVal, setToggleVal] = useState({});
 
-	const [toggleVal, setToggleVal] = useState(false);
+	const [selectedTradeParty, setSelectedTradeParty] = useState({});
 
-	return (
-		<div className={styles.container}>
+	const tradePartyDetails = item?.invoice_status?.invoice_total;
+
+	return (tradePartyDetails || []).map((tradeParty) => (
+		<div className={styles.container} key={tradeParty?.tax_number}>
 			<div className={styles.header}>
 				<div className={styles.customer}>
-					Customer:&nbsp;
-					{orgDetails?.business_name}
+					Customer:
+					{' '}
+					{tradeParty?.business_name}
 				</div>
 
 				<div>
-					Total Customer Outstanding of shipment: &nbsp;
-
+					Total Customer Outstanding of shipment:
+					{' '}
 					{formatAmount({
-						amount   : item?.invoice_status?.invoice_total?.[orgDetails?.id],
+						amount   : tradeParty?.total,
 						currency : item?.currency,
 						options  : {
 							style                 : 'currency',
@@ -34,7 +38,8 @@ function AdditionalShipmentInfo({ item = {}, filters = {}, setFilters = () => {}
 
 				</div>
 				<div>
-					Total Outstanding of customer:&nbsp;
+					Total Outstanding of customer:
+					{' '}
 					{formatAmount({
 						amount: item?.invoice_status
 							?.outstanding_amount,
@@ -46,28 +51,63 @@ function AdditionalShipmentInfo({ item = {}, filters = {}, setFilters = () => {}
 						},
 					})}
 				</div>
+				<div className={styles.more_info}>
+					{ !selectedTradeParty?.[tradeParty?.organization_trade_party_id]
+						? (
+							<IcMArrowRotateDown onClick={() => {
+								setSelectedTradeParty({
+									...selectedTradeParty,
+									[tradeParty?.organization_trade_party_id]:
+								!selectedTradeParty?.[tradeParty?.organization_trade_party_id],
+
+								});
+							}}
+							/>
+						)
+						: (
+							<IcMArrowRotateUp onClick={() => {
+								setSelectedTradeParty({
+									...selectedTradeParty,
+									[tradeParty?.organization_trade_party_id]:
+								!selectedTradeParty?.[tradeParty?.organization_trade_party_id],
+
+								});
+							}}
+							/>
+						)}
+				</div>
 			</div>
 
-			<Toggle
-				size="md"
-				onLabel="All Shipments"
-				offLabel="Invoices Related To Shipments"
-				onChange={() => setToggleVal(!toggleVal)}
-				className={styles.toggle}
-			/>
+			{	selectedTradeParty?.[tradeParty?.organization_trade_party_id]
+				? (
+					<>
+						<Toggle
+							size="md"
+							onLabel="All Shipments"
+							offLabel="Invoices Related To Shipments"
+							onChange={() => setToggleVal({
+								...toggleVal,
+								[tradeParty?.organization_trade_party_id]:
+								!toggleVal?.[tradeParty?.organization_trade_party_id],
 
-			{
-                !toggleVal ? <ShipmentInvoices item={item} /> : (
+							})}
+							className={styles.toggle}
+						/>
+
+						{
+!toggleVal?.[tradeParty?.organization_trade_party_id] ? <ShipmentInvoices item={item} tradeParty={tradeParty} /> : (
 	<OrgShipments
 		item={item}
 		filters={filters}
 		setFilters={setFilters}
+		tradeParty={tradeParty}
 	/>
-                )
+)
             }
+					</>
+				) : null}
 
 		</div>
-	);
+	));
 }
-
 export default AdditionalShipmentInfo;

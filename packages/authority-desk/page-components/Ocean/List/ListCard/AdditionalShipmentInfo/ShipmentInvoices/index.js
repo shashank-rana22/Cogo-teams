@@ -8,10 +8,16 @@ import useListInvoiceWrapper from '../../../../../../hooks/useListInvoiceWrapper
 
 import styles from './styles.module.css';
 
-function ShipmentInvoices({ item = {} }) {
-	const [page, setPage] = useState(1);
+const PAGE_INDEX = 1;
 
-	const { data, loading } = useListInvoiceWrapper({ serial_id: item?.serial_id, page });
+function ShipmentInvoices({ item = {}, tradeParty = {} }) {
+	const [page, setPage] = useState(PAGE_INDEX);
+
+	const { data, loading } = useListInvoiceWrapper({
+		serial_id           : item?.serial_id,
+		page,
+		registerationNumber : tradeParty?.registration_number,
+	});
 
 	const renderPagination = (
 		data?.totalRecords > 10 && !loading ? (
