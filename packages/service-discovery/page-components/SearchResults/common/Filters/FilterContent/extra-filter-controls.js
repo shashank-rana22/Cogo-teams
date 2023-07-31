@@ -1,5 +1,6 @@
 const EXTRA_FILTERS = {
 	shipping_line_id: {
+		name     : 'shipping_line_id',
 		label    : 'Shipping Line',
 		controls : [
 			{
@@ -24,6 +25,7 @@ const EXTRA_FILTERS = {
 		],
 	},
 	detention_demurrage: {
+		name     : 'detention_demurrage',
 		label    : 'Detention & Demurrage Details',
 		controls : [
 			{
@@ -34,6 +36,7 @@ const EXTRA_FILTERS = {
 		],
 	},
 	operator_type: {
+		name     : 'operator_type',
 		label    : 'Operator Type',
 		controls : [
 			{
@@ -57,6 +60,7 @@ const EXTRA_FILTERS = {
 		],
 	},
 	cargo_readiness_date: {
+		name     : 'cargo_readiness_date',
 		label    : 'Cargo Readiness Date',
 		controls : [
 			{
@@ -69,6 +73,7 @@ const EXTRA_FILTERS = {
 		],
 	},
 	source: {
+		name     : 'source',
 		label    : 'Source',
 		controls : [
 			{
@@ -92,6 +97,7 @@ const EXTRA_FILTERS = {
 		],
 	},
 	payment_term: {
+		name     : 'payment_term',
 		label    : 'Payment Terms',
 		controls : [
 			{
@@ -115,6 +121,7 @@ const EXTRA_FILTERS = {
 		],
 	},
 	offers: {
+		name     : 'offers',
 		label    : 'Offers Available',
 		controls : [
 			{
@@ -138,6 +145,7 @@ const EXTRA_FILTERS = {
 		],
 	},
 	schedule_type: {
+		name     : 'schedule_type',
 		label    : 'Shipment Type',
 		controls : [
 			{

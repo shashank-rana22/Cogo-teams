@@ -30,7 +30,7 @@ function DottedLineWithTag({ scheduleData = {} }) {
 	);
 }
 
-function Route({ detail, scheduleData = {} }) {
+function Route({ detail, scheduleData = {}, isCogoAssured = false }) {
 	const { origin, destination } = getLocationInfo(detail, {}, 'search_type');
 
 	// const originIcd = detail?.trade_type === 'export'
@@ -50,8 +50,6 @@ function Route({ detail, scheduleData = {} }) {
 		port_code: destinationPortCode = '',
 	} = destination || {};
 
-	const isScheduleExist = !!scheduleData.arrival;
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.locationNameGroup}>
@@ -67,7 +65,7 @@ function Route({ detail, scheduleData = {} }) {
 			<div className={styles.locationNameGroup}>
 				<div className={styles.origin}>
 					<div className={styles.locationCode}>
-						{isScheduleExist ? scheduleData.departure : originPortCode}
+						{!isCogoAssured ? scheduleData.departure : originPortCode}
 					</div>
 				</div>
 
@@ -83,7 +81,7 @@ function Route({ detail, scheduleData = {} }) {
 
 				<div className={styles.destination}>
 					<div className={styles.locationCode}>
-						{isScheduleExist ? scheduleData.arrival : destinationPortCode}
+						{!isCogoAssured ? scheduleData.arrival : destinationPortCode}
 					</div>
 				</div>
 			</div>

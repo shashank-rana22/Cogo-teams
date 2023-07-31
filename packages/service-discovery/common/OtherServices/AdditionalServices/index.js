@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 
 import { serviceMappings } from '../../../configs/AdditionalServicesConfig';
 import Incoterms from '../../../configs/incoterms.json';
-import useGetMinPrice from '../useGetMinPrice';
 
+import useGetMinPrice from './hooks/useGetMinPrice';
 import List from './List';
 import styles from './styles.module.css';
 import getCombinedServiceDetails from './utils/getCombinedServiceDetails';
@@ -36,7 +36,7 @@ function AdditionalServices({ // used in search results and checkout
 
 	const primaryService = service_type;
 
-	const { minPrice = {}, loading: minPriceLoading } = useGetMinPrice({ detail });
+	const { minPrice = {}, loading: minPriceLoading } = useGetMinPrice();
 
 	const isSingleLocationService = singleLocationServices.includes(service_type);
 

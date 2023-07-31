@@ -1,0 +1,27 @@
+.container {
+	padding: 16px 6px;
+
+	@media (max-width: 768px) {
+		padding: 0;
+	}
+}
+
+.heading {
+	margin-bottom: 14px;
+	font-size: 13px;
+	font-weight: 700;
+	color: #000;
+}
+
+.list {
+	padding-left: 16px;
+	margin: 0;
+	text-align: justify;
+}
+
+.item {
+	margin-bottom: 2px;
+	font-size: 12px;
+	line-height: 14px;
+	color: #333;
+}

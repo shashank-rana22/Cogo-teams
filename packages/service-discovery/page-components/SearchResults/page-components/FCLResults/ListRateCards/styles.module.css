@@ -31,3 +31,7 @@
 	pointer-events: none;
 	background-color: rgb(255 255 255 / 50%);
 }
+
+.request_rate {
+	margin: 0 20px 12px;
+}

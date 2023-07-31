@@ -6,11 +6,13 @@ import React, { useState } from 'react';
 import Detention from '../../../../common/Detention';
 import useUpdateDestinationDemurrageDays from '../../../../hooks/useUpdateDestinationDemurrageDays';
 
+import PossibleSchedules from './PossibleSchedules';
 import PriceBreakup from './PriceBreakUp';
 import RateCardDetails from './RateCardDetails';
 import styles from './styles.module.css';
+import TermsConditions from './TermsConditions';
 
-const detailsMapping = ['terms_and_condition', 'price_break_up', 'dnd_details', 'other_details'];
+const detailsMapping = ['terms_and_condition', 'price_break_up', 'dnd_details', 'possible_schedules'];
 
 const ADDITIONAL_DAYS_KEYS = ['destination_demurrage', 'origin_detention', 'origin_demurrage', 'destination_detention'];
 
@@ -68,7 +70,7 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 		terms_and_condition: {
 			key       : 'terms_and_condition',
 			label     : 'T&C',
-			component : PriceBreakup,
+			component : TermsConditions,
 			props     : {
 				rateCardData,
 				detail,
@@ -92,13 +94,13 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 				detail,
 			},
 		},
-		other_details: {
-			key       : 'other_details',
-			label     : 'Other Details',
-			component : PriceBreakup,
+		possible_schedules: {
+			key       : 'possible_schedules',
+			label     : 'Possible Schedules',
+			component : PossibleSchedules,
 			props     : {
 				rateCardData,
-				detail,
+				service_type: detail.service_type,
 			},
 		},
 	};

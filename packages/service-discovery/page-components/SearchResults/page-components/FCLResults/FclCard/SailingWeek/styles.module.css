@@ -1,0 +1,19 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 6px 0;
+	margin-top: 12px;
+	background: rgb(254 243 233);
+}
+
+.heading {
+	padding-left: 22px;
+	font-size: 14px;
+	font-weight: 600;
+	color: rgb(44 62 80);
+}
+
+.radio_group {
+	display: flex;
+	flex-wrap: wrap;
+}
