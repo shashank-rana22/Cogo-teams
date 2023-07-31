@@ -1,15 +1,21 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMRefresh } from '@cogoport/icons-react';
+import { IcMRefresh, IcMArrowDoubleDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
+import React, { forwardRef, useEffect } from 'react';
 
 import ReceiveDiv from '../../../../../../common/ReceiveDiv';
 import SentDiv from '../../../../../../common/SentDiv';
+import { updateUnreadMessagesCount } from '../../../../../../helpers/updateUnreadMessagesCount';
 import NewUserOutBound from '../NewUserOutBound';
 import TimeLine from '../TimeLine';
 
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
+const DEFAULT_UNREAD_MESSAGES = 0;
+const SCROLL_WHEN_REQUIRED_HEIGHT = 2;
+const MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT = 99;
 
 const CONVERSATION_TYPE_MAPPING = {
 	sent     : ReceiveDiv,
@@ -17,21 +23,56 @@ const CONVERSATION_TYPE_MAPPING = {
 	default  : TimeLine,
 };
 
-function MessagesThread({
-	loadingPrevMessages = false,
-	lastPage = false,
-	getNextData = () => {},
-	messagesData = [],
-	activeMessageCard = () => {},
-	formattedData = {},
-	setRaiseTicketModal = () => {},
-	hasNoFireBaseRoom = false,
-	setModalType = () => {},
-	activeTab = {},
-}) {
-	const { channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
+function MessagesThread(
+	{
+		loadingPrevMessages = false,
+		lastPage = false,
+		getNextData = () => {},
+		messagesData = [],
+		activeMessageCard = {},
+		formattedData = {},
+		setRaiseTicketModal = () => {},
+		hasNoFireBaseRoom = false,
+		setModalType = () => {},
+		activeTab = {},
+		scrollToBottom = () => {},
+		firestore = {},
+	},
+	messageRef,
+) {
+	const {
+		channel_type = '',
+		new_user_message_count = DEFAULT_UNREAD_MESSAGES,
+		user_name = '',
+		new_message_count = DEFAULT_UNREAD_MESSAGES,
+		id,
+	} = activeMessageCard;
+
 	const unreadIndex = new_user_message_count > messagesData.length
 		? DEFAULT_VALUE : messagesData.length - new_user_message_count;
+
+	const {
+		scrollHeight = '',
+		scrollTop = '',
+		clientHeight = '',
+	} = messageRef?.current || {};
+
+	useEffect(() => {
+		if (
+			!isEmpty(messagesData)
+			&& (scrollHeight - scrollTop < SCROLL_WHEN_REQUIRED_HEIGHT * clientHeight)
+		) {
+			scrollToBottom();
+			if (new_message_count) {
+				updateUnreadMessagesCount({
+					channelType: channel_type,
+					id,
+					firestore,
+				});
+			}
+		}
+	}, [channel_type, clientHeight, firestore, messagesData, id,
+		scrollHeight, scrollToBottom, scrollTop, new_message_count]);
 
 	if (hasNoFireBaseRoom) {
 		return (
@@ -62,6 +103,7 @@ function MessagesThread({
 						)}
 					</div>
 				)}
+
 			{(messagesData || []).map((eachMessage, index) => {
 				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type]
                  || CONVERSATION_TYPE_MAPPING.default;
@@ -80,8 +122,27 @@ function MessagesThread({
 				);
 			})}
 
+			{new_message_count && (scrollHeight - scrollTop >= SCROLL_WHEN_REQUIRED_HEIGHT * clientHeight)
+				? (
+					<div
+						className={styles.arrow_down_icon}
+						role="presentation"
+						onClick={() => {
+							updateUnreadMessagesCount({ channelType: channel_type, id, firestore });
+							scrollToBottom();
+						}}
+					>
+						<div className={styles.new_messages_count}>
+							{new_message_count > MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT
+								? `${MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT}+`
+								: new_message_count}
+						</div>
+						<IcMArrowDoubleDown className={styles.arrowicon} />
+					</div>
+				)
+				: null}
 		</>
 	);
 }
 
-export default MessagesThread;
+export default forwardRef(MessagesThread);
