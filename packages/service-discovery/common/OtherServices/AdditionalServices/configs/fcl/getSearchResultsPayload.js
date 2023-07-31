@@ -84,8 +84,8 @@ const getSearchResultsPayload = ({
 	return {
 		rate_card_id,
 		spot_search_id,
-		service                          : finalServiceName,
-		[`${finalServiceName}_services`] : serviceWiseValues,
+		service                                     : finalServiceName,
+		[`${finalServiceName}_services_attributes`] : serviceWiseValues,
 	};
 };
 

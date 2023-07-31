@@ -15,7 +15,6 @@ function ServiceItem({
 	selectedServices = [],
 	popularServices = [],
 	possible_subsidiary_services = [],
-	setSelectedServices = () => {},
 	setPopularServices = () => {},
 	refetch = () => {},
 	disabled = false,
@@ -49,7 +48,6 @@ function ServiceItem({
 		const deleted = await handleDeleteService(value.split('_')[GLOBAL_CONSTANTS.zeroth_index]);
 		if (!deleted) return;
 
-		setSelectedServices((prev) => (prev.filter((item) => item.value !== value)));
 		setPopularServices([...popularServices, { ...itemData }]);
 	};
 
@@ -60,7 +58,6 @@ function ServiceItem({
 		setIsDisabled('');
 		if (!added) return;
 
-		setSelectedServices([...selectedServices, { ...itemData }]);
 		setPopularServices((prev) => (prev.filter((item) => item.value !== value)));
 	};
 

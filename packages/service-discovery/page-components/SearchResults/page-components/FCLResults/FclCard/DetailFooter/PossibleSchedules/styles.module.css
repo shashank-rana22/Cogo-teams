@@ -1,6 +1,15 @@
 .container {
 	padding: 20px 32px 0;
 }
+.loader_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.loader {
+	height: 32px;
+	width: 32px
+}
 
 @keyframes top-animation {
 	0% {

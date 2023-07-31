@@ -12,7 +12,6 @@ const useDeleteSubsidiaryService = ({
 }) => {
 	const url = checkout_id ? '/update_checkout_service' : '/remove_spot_search_service';
 	const idKey = checkout_id ? 'id' : 'spot_search_id';
-	const key = checkout_id ? 'subsidiary_services' : 'subsidiary_services_attributes';
 
 	const { service_details: serviceDetails = {} } = data || [];
 
@@ -34,9 +33,9 @@ const useDeleteSubsidiaryService = ({
 
 		try {
 			const payload = {
-				[idKey] : spot_search_id || checkout_id,
-				service : 'subsidiary',
-				[key]   : params,
+				[idKey]                        : spot_search_id || checkout_id,
+				service                        : 'subsidiary',
+				subsidiary_services_attributes : params,
 			};
 
 			await trigger({ data: payload });

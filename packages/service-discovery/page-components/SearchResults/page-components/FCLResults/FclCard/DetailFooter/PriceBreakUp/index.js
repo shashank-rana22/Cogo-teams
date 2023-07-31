@@ -85,7 +85,7 @@ const handleServicesNames = (item) => {
 	const serviceObj = { ...item };
 	const tradeType = serviceObj?.trade_type;
 	const service = serviceObj?.service_type;
-	const isSubsidiaryService = serviceObj?.code && SUBSIDIARY_SERVICES.includes(serviceObj?.code);
+	const isSubsidiaryService = serviceObj?.code || SUBSIDIARY_SERVICES.includes(serviceObj?.code);
 
 	const TRADE_TYPE_MAPPING = {
 		export : 'Origin',
@@ -94,13 +94,15 @@ const handleServicesNames = (item) => {
 
 	const formattedTradeType = TRADE_TYPE_MAPPING[tradeType] || '';
 	const formattedService = startCase(service);
+	const formattedSubsidiaryServiceName = startCase(serviceObj?.service_name);
 
-	return isSubsidiaryService ? formattedService : `${formattedTradeType} ${formattedService}`;
+	return isSubsidiaryService ? `${formattedTradeType} ${formattedSubsidiaryServiceName}`
+		: `${formattedTradeType} ${formattedService}`;
 };
 
 function PriceBreakup({ rateCardData, detail }) {
-	const { service_rates, total_price_discounted = '', total_price_currency = '', service_type = '' } = rateCardData;
-	const { service_details } = detail;
+	const { service_rates, total_price_discounted = '', total_price_currency = '' } = rateCardData;
+	const { service_details, service_type } = detail;
 
 	const getIndividualPriceBreakup = ({ service, restServiceDetail }) => {
 		const {

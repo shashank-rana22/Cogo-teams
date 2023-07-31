@@ -7,6 +7,7 @@ const getService = (service) => {
 		key        : `${service.code}_${service.service}_${service.trade_type}`,
 		name       : service.service_name,
 		trade_type : service.trade_type,
+		code       : service.code,
 	};
 	return serviceObj;
 };
@@ -21,6 +22,7 @@ const getOptions = (services) => services.map((service) => {
 	return ({
 		label : `${tradeType} ${startCase(service?.name)}`,
 		value : service.key,
+		code  : service.code,
 	});
 });
 const getAddedServices = (service_details) => {
