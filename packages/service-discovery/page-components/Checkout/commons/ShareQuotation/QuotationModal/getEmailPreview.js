@@ -20,8 +20,6 @@ const getEmailPreview = async ({
 			|| {}),
 	}));
 
-	console.log('emailContentNew', emailContentNew);
-
 	const quotation_body = quotation_type === 'all_service_combined'
 		? [
 			{

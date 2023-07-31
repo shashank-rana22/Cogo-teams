@@ -14,6 +14,8 @@ import styles from './styles.module.css';
 
 const MAXIMUM_RATE_CARDS = 5;
 
+const ONE = 1;
+
 function HeaderTop({
 	detail = {},
 	filters = {},
@@ -68,7 +70,7 @@ function RateCard({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
-	isGuideViewed = false,
+	showGuide = false,
 }) {
 	if (loading) {
 		return null;
@@ -86,7 +88,7 @@ function RateCard({
 			infoBanner={infoBanner}
 			index={index}
 			setInfoBanner={setInfoBanner}
-			isGuideViewed={isGuideViewed}
+			showGuide={showGuide}
 		/>
 	);
 }
@@ -106,6 +108,7 @@ function ListRateCards({
 	loading = false,
 	infoBanner = {},
 	setInfoBanner = () => {},
+	isGuideViewed = false,
 }) {
 	const PrimaryService = detail?.search_type;
 
@@ -115,18 +118,15 @@ function ListRateCards({
 
 	const { current = '' } = infoBanner;
 
-	const show_dim_bg = current === 'comparision_button' && rates.length;
+	const show_dim_bg = current === 'comparision_button' && rates.length > ONE;
 
-	const cogoAssuredRates = [];
-	const marketplaceRates = [];
-
-	rates.forEach((rate) => {
+	const { cogoAssuredRates, marketplaceRates } = rates.reduce((acc, rate) => {
 		if (rate.source === 'cogo_assured_rate') {
-			cogoAssuredRates.push(rate);
-		} else {
-			marketplaceRates.push(rate);
+			return { ...acc, cogoAssuredRates: [...acc.cogoAssuredRates, rate] };
 		}
-	});
+
+		return { ...acc, marketplaceRates: [...acc.marketplaceRates, rate] };
+	}, { cogoAssuredRates: [], marketplaceRates: [] });
 
 	return (
 		<div className={cl`${styles.container} ${show_dim_bg && styles.dim_bg}`}>
@@ -163,6 +163,7 @@ function ListRateCards({
 					refetchSearch={refetchSearch}
 					infoBanner={infoBanner}
 					setInfoBanner={setInfoBanner}
+					isGuideViewed={isGuideViewed}
 				/>
 			)}
 
@@ -182,6 +183,7 @@ function ListRateCards({
 					infoBanner={infoBanner}
 					index={index}
 					setInfoBanner={setInfoBanner}
+					showGuide={isEmpty(cogoAssuredRates) && !index && !isGuideViewed}
 				/>
 			))}
 

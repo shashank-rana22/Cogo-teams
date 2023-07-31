@@ -1,6 +1,9 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { addDays } from '@cogoport/utils';
 
 import getLoadArray from './getLoadArray';
+
+const ONE = 1;
 
 const FCL_KEYS = ['containers_count', 'container_size', 'container_type', 'commodity', 'cargo_weight_per_container'];
 const LCL_KEYS = ['packages_count', 'weight', 'volume', 'commodity'];
@@ -22,7 +25,7 @@ const HAULAGE_KEYS = [
 
 const EXTRA_FILTERS_DEFAULT_VALUES = {
 	operator_type        : null,
-	cargo_readiness_date : addDays(new Date(), 1),
+	cargo_readiness_date : addDays(new Date(), ONE),
 	source               : null,
 	payment_term         : null,
 	offers               : null,
@@ -60,7 +63,7 @@ const getPrefillForm = (values, service_key, extraFilters = []) => {
 
 	if (service_type === 'lcl_freight') {
 		loadData = {
-			...LCL_KEYS.reduce((obj, key) => ({ ...obj, [key]: load[0]?.[key] }), {}),
+			...LCL_KEYS.reduce((obj, key) => ({ ...obj, [key]: load[GLOBAL_CONSTANTS.zeroth_index]?.[key] }), {}),
 		};
 	}
 

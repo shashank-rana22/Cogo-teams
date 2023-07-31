@@ -10,8 +10,10 @@ const handleCopy = async ({ detail = {}, shipment_id = '', checkout_id = '' }) =
 	try {
 		await navigator.clipboard.writeText(url);
 		Toast.success('Copied successfully!');
+		return { hasError: false };
 	} catch (error) {
 		Toast.error(error?.message || 'Cannot copy!');
+		return { hasError: true };
 	}
 };
 

@@ -8,6 +8,10 @@
 	align-items: center;
 	margin: 20px;
 
+	&:hover {
+		box-shadow: 0 0 8px #b7dbff;
+	}
+
 	:global {
 		.ui_accordion_content {
 			width: 100%;

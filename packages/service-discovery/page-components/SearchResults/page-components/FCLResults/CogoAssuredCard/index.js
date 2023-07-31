@@ -22,6 +22,7 @@ function CogoAssuredCard({
 	refetchSearch = () => {},
 	infoBanner = {},
 	setInfoBanner = () => {},
+	isGuideViewed = false,
 }) {
 	const [selectedCard, setSelectedCard] = useState(rates?.[GLOBAL_CONSTANTS.zeroth_index]?.id);
 	const [cardData, setCardData] = useState(rates?.[GLOBAL_CONSTANTS.zeroth_index]);
@@ -81,6 +82,7 @@ function CogoAssuredCard({
 				cogoAssuredOptions={options}
 				onChange={onChange}
 				selectedCogoAssuredCard={selectedCard}
+				showGuide={!isGuideViewed}
 			/>
 		</div>
 	);
