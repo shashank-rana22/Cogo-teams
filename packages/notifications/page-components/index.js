@@ -30,6 +30,8 @@ const notificationRedirect = ({ link, push, partner_id }) => {
 	let isVersionTwo = false;
 	let redirectLink = null;
 
+	const isLinkValid = link?.startsWith('/');
+
 	const splittedLink = link.split('/');
 
 	NAVIGATION_LINKS.forEach((href) => {
@@ -52,11 +54,12 @@ const notificationRedirect = ({ link, push, partner_id }) => {
 
 		if (!isLinkMatched) return;
 
-		redirectLink = link;
+		redirectLink = isLinkValid ? link : `/${link}`;
 	});
 
 	if (!redirectLink) {
-		window.location.href = `https://admin.cogoport.com/${partner_id}${link}`;
+		redirectLink = isLinkValid ? link : `/${link}`;
+		window.location.href = `https://admin.cogoport.com/${partner_id}${redirectLink}`;
 		return;
 	}
 
