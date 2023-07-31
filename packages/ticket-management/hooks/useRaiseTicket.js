@@ -13,7 +13,7 @@ const getPayload = ({
 	Category       : '',
 	Subcategory    : '',
 	Priority       : priority,
-	Usertype       : 'ticket_user',
+	UserType       : 'ticket_user',
 	Data           : { Attachment: [finalUrl] || [], ...selectedServices },
 	Type           : issue_type,
 	Description    : additional_information,
