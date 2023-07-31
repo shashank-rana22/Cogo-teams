@@ -6,8 +6,6 @@ import React, { useState, useEffect } from 'react';
 
 import useGetCcsShipmentCapacityDetails from '../../../hooks/useGetCcsShipmentCapacityDetails';
 
-// import useGetCsdConfigurations from '../../../hooks/useGetCsdConfigurations';
-
 import SetConfiguration from './components/SetConfiguration';
 import TotalShipmentCapacity from './components/TotalShipmentCapacity';
 import styles from './styles.module.css';

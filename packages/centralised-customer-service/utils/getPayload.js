@@ -35,9 +35,6 @@ const getPayload = ({
 
 	const payload = {
 		shipments_capacity_details      : shipmentCapacities,
-		// ...((isEditMode || !isEmpty(stage)) ? {
-		// 	id: configId,
-		// } : { config_id: configId }),
 		ccs_shipment_capacity_detail_id : id,
 	};
 
