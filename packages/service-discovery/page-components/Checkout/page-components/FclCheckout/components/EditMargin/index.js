@@ -42,7 +42,6 @@ function EditMargin() {
 				setRateDetails={setRateDetails}
 				convenienceDetails={convenienceDetails}
 				setConvenienceDetails={setConvenienceDetails}
-				convenience_line_item={convenience_line_item}
 				handleDeleteRate={handleDeleteRate}
 				deleteRateLoading={deleteRateLoading}
 				setNoRatesPresent={setNoRatesPresent}

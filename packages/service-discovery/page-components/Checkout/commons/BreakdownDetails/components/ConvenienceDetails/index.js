@@ -20,7 +20,6 @@ function ConvenienceDetails({
 	getCheckout = () => {},
 	source = '',
 	convenienceRateOptions = [],
-	disableControl = false,
 }) {
 	const { convenience_rate = {} } = convenienceDetails || {};
 
@@ -93,7 +92,7 @@ function ConvenienceDetails({
 										value : option.unit,
 									}))}
 									value={unit}
-									disabled={disableControl || loading}
+									disabled={!shouldEditConvenienceFee || loading}
 									style={{ width: '180px' }}
 									onChange={(val) => {
 										if (val) {

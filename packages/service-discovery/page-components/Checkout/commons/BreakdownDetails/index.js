@@ -22,7 +22,6 @@ function BreakdownDetails({
 	setRateDetails = () => {},
 	convenienceDetails = {},
 	setConvenienceDetails = () => {},
-	convenience_line_item = {},
 	source = '',
 	handleDeleteRate = () => {},
 	deleteRateLoading = false,
@@ -231,7 +230,6 @@ function BreakdownDetails({
 				convenienceDetails={convenienceDetails}
 				setConvenienceDetails={setConvenienceDetails}
 				rate={rate}
-				disableControl={detail?.source === 'contract' || source === 'preview_booking'}
 				shouldEditConvenienceFee={
 					source !== 'preview_booking'
 					&& shouldEditMargin

@@ -36,7 +36,7 @@ function RateCardTop({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
-	isGuideViewed = false,
+	showGuide = false,
 }) {
 	const { shipping_line = {}, id: card_id } = rateCardData;
 	const [showShareModal, setShowShareModal] = useState(false);
@@ -60,7 +60,7 @@ function RateCardTop({
 
 	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
-	const showPopover = current === 'comparision_button' && !isGuideViewed;
+	const showPopover = current === 'comparision_button' && showGuide;
 
 	const popoverComponentData = buttonProps.comparision_button || {};
 

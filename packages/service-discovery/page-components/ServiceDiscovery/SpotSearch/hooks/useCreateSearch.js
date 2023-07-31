@@ -22,6 +22,7 @@ const useCreateSearch = () => {
 				user_id,
 				origin,
 				destination,
+				formValues = {},
 			} = values;
 
 			if (action === 'default') {
@@ -35,8 +36,6 @@ const useCreateSearch = () => {
 					...defaultPayload,
 				};
 			} else if (['edit', 'quick-search'].includes(action)) {
-				const { formValues = {} } = values;
-
 				const editPayload = getEditPayload(service_type, { origin, destination, formValues });
 
 				payload = {

@@ -29,6 +29,14 @@ const useUpdateCheckout = ({ getCheckout, detail = {} }) => {
 		scrollToTop = false,
 	}) => {
 		try {
+			if (type === 'copy_link') {
+				const { hasError = false } = handleCopy({ detail, checkout_id, shipment_id });
+
+				if (hasError) {
+					return;
+				}
+			}
+
 			await trigger({ data: values });
 
 			if (refetchRequired) {
@@ -41,10 +49,6 @@ const useUpdateCheckout = ({ getCheckout, detail = {} }) => {
 
 			if (closeFunction) {
 				closeFunction(stateValue);
-			}
-
-			if (type === 'copy_link') {
-				handleCopy({ detail, checkout_id, shipment_id });
 			}
 		} catch (error) {
 			if (error?.response) {

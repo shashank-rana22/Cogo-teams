@@ -1,4 +1,5 @@
 import { Pill, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import getDetails from './getDetails';
 import styles from './styles.module.css';
@@ -8,7 +9,10 @@ function ContainerDetails({ services = {}, primary_service = '' }) {
 		(service) => service?.service_type === primary_service,
 	);
 
-	const firstContainerDetails = getDetails({ item: allContainerDetails[0], primary_service });
+	const firstContainerDetails = getDetails({
+		item: allContainerDetails[GLOBAL_CONSTANTS.zeroth_index],
+		primary_service,
+	});
 
 	const ToolTipContent = () => allContainerDetails.map((item, index) => {
 		if (!index) {

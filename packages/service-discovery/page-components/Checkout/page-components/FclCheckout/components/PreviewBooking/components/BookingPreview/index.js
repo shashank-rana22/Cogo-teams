@@ -33,7 +33,6 @@ function BookingPreview({ rate = {}, setShowBreakup = () => {}, showBreakup = fa
 
 					<BreakdownDetails
 						rateDetails={rateDetails}
-						convenience_line_item={convenience_line_item}
 						setRateDetails={setRateDetails}
 						convenienceDetails={convenienceDetails}
 						source="preview_booking"
