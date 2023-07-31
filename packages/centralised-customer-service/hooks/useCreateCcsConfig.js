@@ -34,8 +34,8 @@ const useCreateCssConfig = ({ setShowModal = () => {}, source = '', fetchList = 
 			await trigger({
 				data: {
 					id     : id || configId,
-					...(source ? { status: 'inactive' } : values),
 					status : 'active',
+					...(source ? { status: 'inactive' } : values),
 				},
 			});
 
