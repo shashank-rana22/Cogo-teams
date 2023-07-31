@@ -20,12 +20,12 @@ function TaskContainer({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<div className={styles.text}>{startCase(taskName)}</div>
+			<header className={styles.header}>
+				<span className={styles.text}>{startCase(taskName)}</span>
 				{loading ? null : <div className={styles.action_container}>{actions}</div>}
-			</div>
+			</header>
 
-			{!loading ? (
+			{loading ? (
 				<div className={styles.loader}>
 					<ThreeDotLoader message="Loading Data" />
 				</div>
