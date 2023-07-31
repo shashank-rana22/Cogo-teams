@@ -3,12 +3,13 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
 function useGetServices({ shipment_data = {}, additional_methods = [] }) {
+	const [servicesData, setServicesData] = useState([]);
+	const [bookingReqData, setBookingReqData] = useState({});
+
 	const [{ loading : servicesLoading }, trigger] = useRequest({
 		url    : 'fcl_freight/get_services',
 		method : 'GET',
 	}, { manual: true });
-
-	const [servicesData, setServicesData] = useState([]);
 
 	const { id = '' } = shipment_data;
 
@@ -23,6 +24,7 @@ function useGetServices({ shipment_data = {}, additional_methods = [] }) {
 				});
 
 				setServicesData(res?.data?.summary);
+				setBookingReqData(res?.data?.booking_requirement);
 			} catch (err) {
 				toastApiError(err);
 			}
@@ -37,8 +39,9 @@ function useGetServices({ shipment_data = {}, additional_methods = [] }) {
 	return {
 		servicesGet: {
 			servicesLoading,
-			refetchServices : listServices,
-			servicesList    : servicesData,
+			refetchServices     : listServices,
+			servicesList        : servicesData,
+			bookingRequirements : bookingReqData,
 		},
 
 	};

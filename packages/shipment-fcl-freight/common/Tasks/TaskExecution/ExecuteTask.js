@@ -222,6 +222,7 @@ function ExecuteTask({
 		return (
 			<ConfirmFreightBooking
 				task={task}
+				getApisData={taskConfigData?.apis_data}
 				onCancel={onCancel}
 				services={servicesList}
 				taskListRefetch={taskListRefetch}

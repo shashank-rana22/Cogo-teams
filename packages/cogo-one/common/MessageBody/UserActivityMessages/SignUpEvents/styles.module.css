@@ -1,0 +1,10 @@
+.title {
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+}
+
+.message {
+	margin-top: 10px;
+	font-size: 12px;
+}
