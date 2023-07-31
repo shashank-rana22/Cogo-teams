@@ -1,0 +1,27 @@
+.email_title {
+	font-weight: 600;
+}
+
+.email_fields {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.field {
+	font-weight: 600;
+}
+
+.multi_select {
+	width: 400px;
+	margin-bottom: 12px;
+}
+
+.email {
+	margin-left: 16px;
+}
+
+.divider {
+	height: 1px;
+	margin-bottom: 12px;
+	background-color: #e0e0e0;
+}
