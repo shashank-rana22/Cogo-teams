@@ -7,7 +7,7 @@ import useGetTicketStats from '../../../hooks/useGetTicketStats';
 import styles from './styles.module.css';
 
 function StatsSection({ spectatorType = '' }) {
-	const { statsData, statsLoading } = useGetTicketStats({ spectatorType });
+	const { statsData = {}, statsLoading = false } = useGetTicketStats({ spectatorType });
 
 	return (
 		<div className={styles.stats_section_container}>
