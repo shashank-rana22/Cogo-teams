@@ -42,7 +42,7 @@ const useDeleteSubsidiaryService = ({
 
 			Toast.success('Service deleted successfully!');
 			setShow(false);
-			refetch();
+			await refetch();
 			return true;
 		} catch (error) {
 			if (error?.response?.data) {

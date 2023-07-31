@@ -137,6 +137,7 @@ function SelectedRateCard({
 									data={detail}
 									refetch={refetch}
 									rate_card_id={rateCardData?.id}
+									loading={loading}
 								/>
 							</div>
 						)}

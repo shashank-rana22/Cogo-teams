@@ -13,9 +13,9 @@ const useGetRateCard = () => {
 		url    : '/get_spot_search_rate_card',
 	}, { manual: true });
 
-	const getRateDetails = useCallback(() => {
+	const getRateDetails = useCallback(async () => {
 		try {
-			trigger({
+			await trigger({
 				params: { rate_card_id, service_type: 'fcl_freight' },
 			});
 		} catch (error) {
@@ -26,8 +26,6 @@ const useGetRateCard = () => {
 	}, [rate_card_id, trigger]);
 
 	useEffect(() => {
-		console.log('ssdfghj', rate_card_id);
-
 		if (!rate_card_id) return;
 
 		getRateDetails();

@@ -17,6 +17,7 @@ function SubsidiaryServices({
 	data = {},
 	refetch = () => {},
 	checkout_id = '',
+	loading = false,
 	...rest
 }) {
 	const [searchValue, setSearchValue] = useState('');
@@ -90,7 +91,7 @@ function SubsidiaryServices({
 
 	const servicesToShow = useMemo(
 		() => [...addedOptions, ...popularServices],
-		[popularServices, addedOptions],
+		[addedOptions, popularServices],
 	);
 
 	return (
@@ -114,7 +115,7 @@ function SubsidiaryServices({
 			<div className={styles.most_popular_container}>
 				<div className={styles.label}>Our most popular services</div>
 
-				<div className={styles.wrapper}>
+				<div key={loading} className={styles.wrapper}>
 					{isEmpty(servicesToShow) ? (
 						<strong>Nothing to show here</strong>
 					) : (servicesToShow || []).map((item) => (
