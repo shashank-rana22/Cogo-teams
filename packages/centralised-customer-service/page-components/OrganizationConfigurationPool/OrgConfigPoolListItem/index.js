@@ -69,6 +69,7 @@ function OrgConfigPoolListItem({ data = {}, fetchList = () => {} }) {
 	const {
 		cogo_entity, organization = [], organization_type, id, booking_source = '',
 		segment, config_type, shipment_capacities = [], user = {},
+		role_data = {},
 	} = data;
 
 	const [BookingSource] = (booking_source || '').split('_');
@@ -88,7 +89,7 @@ function OrgConfigPoolListItem({ data = {}, fetchList = () => {} }) {
 
 					<div className={styles.item}>
 						<p className={styles.title}>Role</p>
-						<p className={styles.content}>{cogo_entity?.business_name}</p>
+						<p className={styles.content}>{role_data?.name || '-'}</p>
 					</div>
 
 					<div className={styles.item}>
@@ -107,14 +108,14 @@ function OrgConfigPoolListItem({ data = {}, fetchList = () => {} }) {
 						<p className={styles.title}>Organizations</p>
 						{getOrganizations(organization)}
 					</div>
-					<div className={styles.item}>
+					<div className={styles.config}>
 						<p className={styles.title}>Booking Source</p>
 						<p className={styles.content}>
-							{startCase(BookingSource) || '-'}
+							{booking_source === 'app_platform' ? 'APP/CP' : startCase(BookingSource) || '-'}
 						</p>
 					</div>
 
-					<div className={styles.item}>
+					<div className={styles.config}>
 						<p className={styles.title}>Config Type</p>
 						<p className={styles.content}>{startCase(config_type)}</p>
 					</div>

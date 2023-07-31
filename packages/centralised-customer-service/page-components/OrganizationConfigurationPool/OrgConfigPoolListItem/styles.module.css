@@ -12,9 +12,14 @@
 	flex-grow: 1;
 }
 
-.item {
+.item,
+.config {
 	flex-basis: 20%;
-	margin-right: 20px;
+	margin-right: 14px;
+}
+
+.config {
+	flex-basis: 14%;
 }
 
 .accordion_container {
