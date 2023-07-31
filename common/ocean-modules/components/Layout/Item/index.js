@@ -52,9 +52,13 @@ function Item(props) {
 
 			{Element ? (
 				<Element
-					size={type === 'pills' ? 'md' : 'sm'} // need to put in config
+					{...(type === 'pills' ? {
+						size    : 'md',
+						options : pillOptions,
+					} : {
+						size: 'sm', // need to put in config
+					})}
 					{...newProps}
-					{...(type === 'pills' && { options: pillOptions })}
 					control={control}
 				/>
 			) : null}

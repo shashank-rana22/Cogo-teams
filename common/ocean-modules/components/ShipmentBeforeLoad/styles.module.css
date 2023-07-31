@@ -1,33 +1,5 @@
-.top_header {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-}
-
-.header {
-	display: flex;
-	margin-top: 16px;
-}
-
-.container {
-	padding-top: 10px;
-	padding-bottom: 20px;
-	margin-top: 20px;
-	background-color: #fff;
-	border-radius: 4px;
-	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
-}
-
-.loader {
-	display: flex;
-	flex-direction: column-reverse;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-}
-
-.loader_icon {
-	width: 50px;
+.loading_wrapper {
+	height: 90vh;
 }
 
 .shipment_not_found {
@@ -61,22 +33,17 @@
 		10px 10px 8px rgb(0 0 0 / 20%);
 }
 
-.page {
+.permission_message {
 	font-size: 20px;
 	font-weight: 600;
 	color: #444;
+	text-align: center;
+
+	& > a:hover {
+		color: var(--color-accent-orange-1);
+	}
 }
 
 .refresh {
 	margin-top: 16px;
-}
-
-.toggle_chat {
-	display: flex;
-
-	:global {
-		.ui_toggle_container {
-			margin-right: 62px;
-		}
-	}
 }

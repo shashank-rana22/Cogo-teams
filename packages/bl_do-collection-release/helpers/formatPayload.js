@@ -55,8 +55,8 @@ const fillData = (value, item, formValues) => {
 	return newValue;
 };
 
-const getCurrentReleaseStatus = (item, inner_tab, formValues, active_tab) => {
-	const docs = active_tab === 'bl'
+const getCurrentReleaseStatus = (item, inner_tab, formValues, activeTab) => {
+	const docs = activeTab === 'bl'
 		? item?.bill_of_ladings
 		: item?.delivery_orders;
 
@@ -106,13 +106,14 @@ const getCurrentReleaseStatus = (item, inner_tab, formValues, active_tab) => {
 };
 
 export default function getFormattedPayload({
-	inner_tab = '',
-	active_tab = '',
+	stateProps = {},
 	item = {},
 	formValues = {},
 	taskConfig = {},
 	pendingTasks = [],
 }) {
+	const { activeTab, inner_tab, trade_type } = stateProps;
+
 	let finalPayload = {};
 
 	const { invoice_data = [] } = item;
@@ -121,7 +122,7 @@ export default function getFormattedPayload({
 		new Set(
 			invoice_data
 				.filter((invoice) => (invoice?.services || []).some((service) => (
-					(service?.service_type === 'fcl_freight_service' && active_tab === 'bl')
+					(service?.service_type === 'fcl_freight_service' && activeTab === 'bl')
 		|| service?.trade_type === 'export'
 				)))
 				.map((invoice) => invoice.id),
@@ -132,7 +133,7 @@ export default function getFormattedPayload({
 		new Set(
 			invoice_data
 				.filter((invoice) => (invoice?.services || []).some((service) => (
-					(service?.service_type === 'fcl_freight_service' && active_tab === 'do')
+					(service?.service_type === 'fcl_freight_service' && activeTab === 'do')
 				|| service?.trade_type === 'import'
 				)))
 				.map((invoice) => invoice.id),
@@ -140,9 +141,21 @@ export default function getFormattedPayload({
 	);
 
 	if (inner_tab === 'knockoff_pending') {
-		const knockoffTask = (pendingTasks || []).filter(
-			(task) => task.task === 'knockoff_do_invoices',
+		let knockoffTask = (pendingTasks || []).filter(
+			(task) => task.task === 'knockoff_invoices',
 		);
+
+		if (activeTab === 'bl' && trade_type === 'import') {
+			knockoffTask = (pendingTasks || []).filter(
+				(task) => task.task === 'knockoff_bl_invoices',
+			);
+		}
+
+		if (activeTab === 'do' && trade_type === 'export') {
+			knockoffTask = (pendingTasks || []).filter(
+				(task) => task.task === 'knockoff_do_invoices',
+			);
+		}
 
 		if (isEmpty(knockoffTask)) {
 			Toast.error('Task not found');
@@ -153,14 +166,14 @@ export default function getFormattedPayload({
 			data : {
 				collection_party: {
 					is_knocked_off : true,
-					id             : active_tab === 'bl' ? invoicesToBeKnockedOffInBL : invoicesToBeKnockedOffInDO,
+					id             : activeTab === 'bl' ? invoicesToBeKnockedOffInBL : invoicesToBeKnockedOffInDO,
 				},
 			},
 		};
 		return finalPayload;
 	}
 
-	if (inner_tab === 'collected' && active_tab === 'do') {
+	if (inner_tab === 'collected' && activeTab === 'do') {
 		const doTask = (pendingTasks || []).filter(
 			(task) => task.task === 'mark_do_released',
 		);
@@ -190,11 +203,11 @@ export default function getFormattedPayload({
 		} else if (finalPayload && data?.key === 'data') {
 			finalPayload.data = fillData(data?.value, item, formValues);
 
-			if (active_tab === 'bl'
+			if (activeTab === 'bl'
 				? isEmpty(finalPayload.data?.bl_detail?.id)
 				: isEmpty(finalPayload.data?.do_detail?.id)
 			) {
-				Toast.error(`${active_tab === 'bl' ? 'BL' : 'DO'} ID not found`);
+				Toast.error(`${activeTab === 'bl' ? 'BL' : 'DO'} ID not found`);
 				finalPayload = {};
 			}
 

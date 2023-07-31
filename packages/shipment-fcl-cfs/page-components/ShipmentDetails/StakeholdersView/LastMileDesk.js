@@ -1,6 +1,7 @@
-import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
@@ -59,8 +60,7 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
 			<div className={styles.loader}>
-				Loading Shipment Data....
-				<Loader themeType="primary" className={styles.loader_icon} />
+				<ThreeDotLoader message="Loading Shipment Data" fontSize={18} size={45} />
 			</div>
 		);
 	}
@@ -88,12 +88,15 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 
 	if (getShipmentStatusCode === FORBIDDEN_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.page}>
+			<section className={styles.shipment_not_found}>
+				<div className={styles.permission_message}>
 					You don&apos;t have permission to visit this page.
-					Please contact at +91 7208083747
+					<br />
+					Please contact at
+					{' '}
+					<a href="tel:+91 7208083747">+91 7208083747</a>
 				</div>
-			</div>
+			</section>
 		);
 	}
 

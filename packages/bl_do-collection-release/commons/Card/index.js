@@ -119,12 +119,11 @@ export default function Card({
 
 	const handleSubmit = ({ formValues = {}, taskConfig = {} }) => {
 		const payload = getFormattedPayload({
-			inner_tab    : stateProps.inner_tab,
-			active_tab   : stateProps.activeTab,
+			stateProps,
 			item,
 			formValues,
 			taskConfig,
-			pendingTasks : list,
+			pendingTasks: list,
 		});
 
 		if (!isEmpty(payload)) {
