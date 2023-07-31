@@ -1,32 +1,34 @@
 const getTableConfig = () => {
-	const config = [{
-		key   : 'action',
-		width : '5%',
-	},
-	{
-		key   : 'service_type',
-		title : 'SERVICE TYPE',
-		width : '12%',
-	},
-	{
-		key   : 'origin',
-		title : 'ORGIN',
-		width : '25%',
-	},
-	{
-		key   : 'destination',
-		title : 'DESTINATION',
-		width : '25%',
-	},
-	{
-		key   : 'forecasted_demand',
-		title : 'FORECASTED DEMAND',
-		width : '12%',
-	},
-	{
-		key   : 'start',
-		width : '12%',
-	},
+	const config = [
+		{
+			key   : 'origin',
+			title : 'ORGIN',
+			width : '24%',
+		},
+		{
+			key   : 'destination',
+			title : 'DESTINATION',
+			width : '24%',
+		},
+		{
+			key   : 'high_demand_port_pairs',
+			title : 'HIGH DEMAND PORT PAIRS',
+			width : '8%',
+		},
+		{
+			key   : 'rated_acquired',
+			title : 'RATES ADDED',
+			width : '10%',
+		},
+		{
+			key   : 'forecasted_demand',
+			title : 'FORECASTED DEMAND',
+			width : '15%',
+		},
+		{
+			key   : 'action',
+			width : '4%',
+		},
 	];
 
 	return config;

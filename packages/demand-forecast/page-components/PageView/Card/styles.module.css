@@ -1,7 +1,6 @@
 .row {
 	display: flex;
 	align-items: center;
-	align-self: stretch;
 	justify-content: space-between;
 	width: 100%;
 	padding: 8px 12px;
@@ -29,33 +28,35 @@
 	background-color: #fef3e9;
 }
 
-.action_logo {
-	width: 5%;
-	margin-left: 12px
-
-	/* text-align: center; */
-}
-
-.services {
-	width: 12%;
-}
-
 .orgin_port {
-	width: 25%;
+	width: 22%;
 	text-align: center;
 }
 
+.arrow_logo {
+	width: 2%;
+}
+
 .destination_port {
-	width: 25%;
+	width: 22%;
+	text-align: center;
+}
+
+.high_demand_port_pairs {
+	width: 8%;
+	text-align: center;
+}
+
+.rated_acquired {
+	width: 10%;
 	text-align: center;
 }
 
 .forecasted_demand {
-	width: 12%;
+	width: 15%;
 	text-align: center;
 }
 
-.start {
-	width: 12%;
-	text-align: center;
+.action_logo {
+	width: 4%;
 }

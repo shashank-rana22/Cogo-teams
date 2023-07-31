@@ -1,24 +1,20 @@
 const getDataConfig = () => {
 	const dataConfig = [
 		{
-			service_type      : 'fcl_freight',
-			orgin_port        : 'Shanghai (CNSHA), China',
-			destination_port  : 'Jawaharlal Nehru (INNSA), India',
+			orgin_port        : 'West India',
+			destination_port  : 'Middle East',
 			forecasted_demand : '200 TEUs',
 		}, {
-			service_type      : 'lcl_freight',
-			orgin_port        : 'Shanghai (CNSHA), China',
-			destination_port  : 'Jawaharlal Nehru (INNSA), India',
+			orgin_port        : 'South India',
+			destination_port  : 'Middle East',
 			forecasted_demand : '200 TEUs',
 		}, {
-			service_type      : 'air_freight',
-			orgin_port        : 'Shanghai (CNSHA), China',
-			destination_port  : 'Jawaharlal Nehru (INNSA), India',
+			orgin_port        : 'North India',
+			destination_port  : 'South America',
 			forecasted_demand : '200 TEUs',
 		}, {
-			service_type      : 'fcl_freight',
-			orgin_port        : 'Shanghai (CNSHA), China',
-			destination_port  : 'Jawaharlal Nehru (INNSA), India',
+			orgin_port        : 'East India',
+			destination_port  : 'South Africa',
 			forecasted_demand : '200 TEUs',
 		}];
 
