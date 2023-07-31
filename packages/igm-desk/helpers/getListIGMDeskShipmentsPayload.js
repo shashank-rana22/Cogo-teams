@@ -29,7 +29,8 @@ export default function getListIGMDeskShipmentsPayload({
 			...(q && { q }),
 			[file_type] : true,
 			partner_id,
-			...(activeTab === 'daily_report' && { date: true, [file_type]: undefined }),
+
+			...(activeTab === 'daily_report' ? { date: true, [file_type]: undefined } : {}),
 		},
 		page,
 		additional_methods: ['pagination', 'documents'],
