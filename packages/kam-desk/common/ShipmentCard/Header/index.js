@@ -2,28 +2,13 @@ import { cl, Pill } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 
+import checkIsEndToEnd from '../../../utils/checkIsEndToEnd';
+
 import styles from './styles.module.css';
 
 function Header({ data = {} }) {
 	const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 	const { trade_type = '', importer_exporter = [], source } = data || {};
-
-	function checkIsEndToEnd(booking_agents) {
-		const isExport = trade_type === 'export';
-		const isImport = trade_type === 'import';
-
-		return booking_agents.some((item) => {
-			const isDestinationAgent = item?.stakeholder_type === 'destination_booking_agent';
-			const isOriginAgent = item?.stakeholder_type === 'origin_booking_agent';
-
-			if ((isDestinationAgent && isExport && userId === item?.id)
-			|| (isOriginAgent && isImport && userId === item?.id)) {
-				return true;
-			}
-
-			return false;
-		});
-	}
 
 	return (
 		<div className={styles.container}>
@@ -40,7 +25,7 @@ function Header({ data = {} }) {
 					? <Pill className={styles.channel_partner} color="orange">Channel Partner</Pill>
 					: null}
 
-				{checkIsEndToEnd(data?.booking_agents)
+				{checkIsEndToEnd({ booking_agents: data?.booking_agents, userId, trade_type })
 					? <Pill className={styles.channel_partner} color="red">Nominated</Pill>
 					: null}
 			</div>

@@ -10,6 +10,20 @@ import styles from './styles.module.css';
 
 const PAGE_LIMIT = 10;
 
+function RenderPagination({ filters = {}, page = 1, total_count = 10, page_limit = 10, setFilters = () => {} }) {
+	return (
+		<div className={styles.pagination_container}>
+			<Pagination
+				type="table"
+				currentPage={page}
+				totalItems={total_count}
+				pageSize={page_limit}
+				onPageChange={(val) => setFilters({ ...filters, page: val })}
+			/>
+		</div>
+	);
+}
+
 function ShipmentList({ data = {}, loading }) {
 	const { filters, setFilters } = useContext(KamDeskContext);
 
@@ -21,33 +35,28 @@ function ShipmentList({ data = {}, loading }) {
 			<>
 				{total_count > PAGE_LIMIT
 					? (
-						<div className={styles.pagination_container}>
-							<Pagination
-								type="table"
-								currentPage={page}
-								totalItems={total_count}
-								pageSize={page_limit}
-								onPageChange={(val) => setFilters({ ...filters, page: val })}
-							/>
-						</div>
+						<RenderPagination
+							filters={filters}
+							page={page}
+							total_count={total_count}
+							setFilters={setFilters}
+							page_limit={page_limit}
+						/>
 					) : null}
 
-				<ul className={styles.list}>
-					{list?.map((item) => <li key={item?.id}><Card data={item} /></li>)}
-				</ul>
+				{list?.map((item) => <Card data={item} key={item?.id} />)}
 
 				{total_count > PAGE_LIMIT
 					? (
-						<div className={styles.pagination_container}>
-							<Pagination
-								type="table"
-								currentPage={page}
-								totalItems={total_count}
-								pageSize={page_limit}
-								onPageChange={(val) => setFilters({ ...filters, page: val })}
-							/>
-						</div>
-					) : null}
+						<RenderPagination
+							filters={filters}
+							page={page}
+							total_count={total_count}
+							setFilters={setFilters}
+							page_limit={page_limit}
+						/>
+					) : null }
+
 			</>
 		);
 }
