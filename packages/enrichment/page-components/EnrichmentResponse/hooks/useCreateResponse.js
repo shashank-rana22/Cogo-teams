@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import getMutatedControls from '../utils/get-mutated-controls';
 import getPayload from '../utils/get-payload';
@@ -46,6 +46,10 @@ const useCreateResponse = ({
 		detailsForm,
 		setValue,
 	});
+
+	useEffect(() => {
+		setValue('work_scopes', detailsForm?.initialData?.work_scopes);
+	}, [detailsForm?.initialData?.work_scopes, setValue]);
 
 	const onSubmit = async (values = {}) => {
 		const payload = getPayload({ values, activeTab, responseData });

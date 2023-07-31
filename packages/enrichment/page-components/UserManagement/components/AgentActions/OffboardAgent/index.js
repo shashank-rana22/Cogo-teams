@@ -22,11 +22,15 @@ function OffboardAgent(props) {
 
 	return (
 		<>
-			<Modal.Header title="Offboard Agent" />
+			<Modal.Header title="Deactivate Agent" />
 
 			<form onSubmit={handleSubmit(offboardAgent)}>
 				<Modal.Body>
-					Are you sure about your decision to offboard
+					Are you sure about your decision to
+					{' '}
+					<strong>Deactivate</strong>
+					{' '}
+					this agent
 					{' '}
 					<span className={styles.name}>{actionModal?.agentData?.name}</span>
 					{' '}
@@ -59,7 +63,7 @@ function OffboardAgent(props) {
 						type="submit"
 						disabled={loadingOffboard || loading}
 					>
-						Yes, Offboard
+						Yes, Deactivate
 					</Button>
 				</Modal.Footer>
 

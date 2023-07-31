@@ -2,27 +2,20 @@ import { Button, Pill } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import styles from '../styles.module.css';
 
-const UPLOAD_DOCUMENT_STATUS_MAPPING = {
+const ACTIONS_STATUS_MAPPING = {
 	active   : 'green',
 	inactive : 'orange',
 };
 
 const useUserManagement = () => {
-	// const { profile } = useSelector((state) => state || {});
-
-	// const {
-	// 	partner: { id: partner_id },
-	// 	user: { id: user_id },
-	// } = profile;
-
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
+	const [statusToggle, setStatusToggle] = useState('active');
 	const [searchValue, setSearchValue] = useState('');
 	const [actionModal, setActionModal] = useState({
 		show      : false,
@@ -38,7 +31,7 @@ const useUserManagement = () => {
 		page       : 1,
 		filters    : {
 			q      : searchQuery || undefined,
-			status : 'active',
+			status : statusToggle,
 
 		},
 		permissions_data_required    : false,
@@ -72,10 +65,11 @@ const useUserManagement = () => {
 			...previousParams,
 			filters: {
 				...previousParams.filters,
-				q: searchQuery || undefined,
+				q      : searchQuery || undefined,
+				status : statusToggle,
 			},
 		}));
-	}, [searchQuery]);
+	}, [statusToggle, searchQuery]);
 
 	const columns = [
 		{
@@ -131,7 +125,7 @@ const useUserManagement = () => {
 			Header   : 'STATUS',
 			accessor : ({ status }) => (
 				<seaction>
-					<Pill size="md" color={UPLOAD_DOCUMENT_STATUS_MAPPING[status]}>
+					<Pill size="md" color={ACTIONS_STATUS_MAPPING[status]}>
 						{startCase(status) || '-'}
 					</Pill>
 				</seaction>
@@ -171,6 +165,8 @@ const useUserManagement = () => {
 		setSearchValue,
 		actionModal,
 		setActionModal,
+		statusToggle,
+		setStatusToggle,
 
 	};
 };

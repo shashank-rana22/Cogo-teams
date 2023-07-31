@@ -23,7 +23,7 @@ const useOffboardAgent = (props) => {
 					status : 'inactive',
 				},
 			});
-			Toast.success('Agent Offboarded Successfully!!!');
+			Toast.success('Agent Deactivated Successfully!!!');
 			setActionModal(() => ({
 				type      : 'onboard',
 				agentData : {},

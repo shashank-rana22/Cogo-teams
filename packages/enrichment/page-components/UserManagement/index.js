@@ -16,29 +16,30 @@ function UserManagement() {
 		loading = false,
 		getNextPage = () => {},
 		columns = [],
-		debounceQuery,
-		searchValue,
-		setSearchValue,
-		actionModal,
-		setActionModal,
+		debounceQuery = '',
+		searchValue = '',
+		setSearchValue = () => {},
+		actionModal = {},
+		setActionModal = () => {},
+		statusToggle = '',
+		setStatusToggle = () => {},
 	} = useUserManagement();
 
 	return (
 		<div>
 			<BackToEnrichment />
 
-			<div className={styles.header}>
+			<div className={styles.title}>Users (Manage Accounts)</div>
 
-				<div className={styles.title}>Users (Manage Accounts)</div>
-
-				<Header
-					debounceQuery={debounceQuery}
-					searchValue={searchValue}
-					setSearchValue={setSearchValue}
-					setActionModal={setActionModal}
-					loading={loading}
-				/>
-			</div>
+			<Header
+				statusToggle={statusToggle}
+				setStatusToggle={setStatusToggle}
+				debounceQuery={debounceQuery}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
+				setActionModal={setActionModal}
+				loading={loading}
+			/>
 
 			<TableComponent
 				columns={columns}

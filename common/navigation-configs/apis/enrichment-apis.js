@@ -26,7 +26,7 @@ const enrichment = [
 	{
 		api          : 'list_partner_users',
 		access_type  : 'private',
-		feature      : 'enrichment',
+		// feature      : 'enrichment',
 		service_name : 'partner',
 	},
 	{

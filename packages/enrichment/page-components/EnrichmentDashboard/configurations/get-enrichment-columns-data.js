@@ -90,7 +90,7 @@ const getEnrichmentColumnsData = ({
 		Header   : 'STATUS',
 		accessor : ({ status }) => (
 			<seaction>
-				<Pill size="md" color="green">
+				<Pill size="md" color="red">
 					{startCase(status) || '-'}
 				</Pill>
 			</seaction>
