@@ -2476,6 +2476,15 @@ const navigationMappingAdmin = {
 		as            : '/v2/ftl-admin',
 		possible_apis : apis.ftl_admin,
 	},
+	attendance_leave_management: {
+		key   : 'attendance_leave_management',
+		title : 'Attendance and Leave Management',
+		icon  : IcMDashboard,
+		href  : '/v2/attendance-leave-management',
+		as    : '/v2/attendance-leave-management',
+		type  : 'link',
+		// possible_apis : apis.performance_manager_dashboard,
+	},
 };
 
 export default navigationMappingAdmin;
