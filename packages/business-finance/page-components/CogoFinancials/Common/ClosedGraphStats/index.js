@@ -85,6 +85,7 @@ function ClosedGraphStats({
 									heading={cardTitle}
 									key={cardTitle}
 									setActiveBar={setActiveBar}
+									taxType={taxType}
 								/>
 							))}
 						</div>

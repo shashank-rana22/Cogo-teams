@@ -149,6 +149,7 @@ function CogoFinancials() {
 					<ActiveShipmentCard
 						setActiveShipmentCard={setActiveShipmentCard}
 						activeShipmentCard={activeShipmentCard}
+						isPreTax={isPreTax}
 						setShowShipmentList={setShowShipmentList}
 						entity={entity}
 						timeRange={timeRange}
@@ -205,7 +206,7 @@ function CogoFinancials() {
 				</div>
 			)}
 
-			{!showShipmentList ?	(
+			{!showShipmentList ? (
 				<div>
 					<div className={styles.totalStats}>
 						<div className={styles.ongoing}>

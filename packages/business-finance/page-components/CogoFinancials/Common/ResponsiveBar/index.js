@@ -51,7 +51,7 @@ function MyResponsiveBar({
 						ticks: {
 							text: {
 								fill     : '#000',
-								fontSize : '12px',
+								fontSize : '10px',
 							},
 						},
 					},

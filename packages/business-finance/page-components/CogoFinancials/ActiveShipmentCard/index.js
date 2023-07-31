@@ -40,6 +40,7 @@ function ActiveShipmentCard({
 			{activeShipmentCard === 'financial' && (
 				<ClosedGraphStats
 					title="Financially Closed"
+					status="financial"
 					setActiveShipmentCard={setActiveShipmentCard}
 					setShowShipmentList={setShowShipmentList}
 					entity={entity}
