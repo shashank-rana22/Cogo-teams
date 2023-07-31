@@ -1,11 +1,12 @@
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, merge } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 import { LOCATION_KEYS } from '../constants/map_constants';
+import getFormattedPayload from '../utils/getFormattedPayload';
 
 const START_PAGE = 1;
-const useGetFclMapStatistics = ({ locationFilters }) => {
+const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 	const [sort, setSort] = useState({ sort_by: 'accuracy', sort_type: 'asc' });
 	const [page, setPage] = useState(START_PAGE);
 	const [activeList, setActiveList] = useState([]);
@@ -47,10 +48,11 @@ const useGetFclMapStatistics = ({ locationFilters }) => {
 	const dependency = Object.values(filters).map(({ id }) => id).join('_');
 
 	useEffect(() => {
+		const params = getFormattedPayload(globalFilters, ['origin', 'destination']);
 		setPage(START_PAGE);
-		getStats({ filters, sort, page: 1 });
+		getStats(merge(params, { filters, sort, page: 1 }));
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dependency, sort, getStats]);
+	}, [dependency, globalFilters, sort, getStats]);
 
 	useEffect(() => {
 		if (page > START_PAGE) {

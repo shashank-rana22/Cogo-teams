@@ -1,18 +1,16 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getFormattedPayload from '../utils/getFormattedPayload';
-
-const useGetFclFreightRateWorld = ({ filters }) => {
+const useGetFclFreightRateWorld = ({ flag }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : 'get_fcl_freight_rate_world',
 		method : 'GET',
 	}, { manual: true });
 
 	const getStats = useCallback(
-		async (params) => {
+		async () => {
 			try {
-				await trigger({ params });
+				await trigger();
 			} catch (err) {
 				// console.log(err);
 			}
@@ -20,12 +18,18 @@ const useGetFclFreightRateWorld = ({ filters }) => {
 		[trigger],
 	);
 
-	useEffect(() => {
-		const params = getFormattedPayload(filters);
-		getStats(params);
-	}, [filters, getStats]);
+	const countMapping = (data?.list || []).reduce((acc, { rate_count, id }) => {
+		acc[id] = rate_count;
+		return acc;
+	}, {});
 
-	return { data, loading };
+	useEffect(() => {
+		if (flag) {
+			getStats();
+		}
+	}, [flag, getStats]);
+
+	return { data, countMapping, loading };
 };
 
 export default useGetFclFreightRateWorld;

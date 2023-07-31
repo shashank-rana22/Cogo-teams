@@ -35,6 +35,7 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 		loading: accuracyLoading,
 	} = useGetFclMapStatistics({
 		locationFilters,
+		globalFilters,
 	});
 	const { data, loading } = useGetSimplifiedGeometry({ type: 'country' });
 

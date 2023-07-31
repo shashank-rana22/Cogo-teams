@@ -55,7 +55,8 @@ const WorldGeometry = React.forwardRef(({
 				<MapTooltip
 					display_name={name}
 					color={styleProps.color}
-					accuracy={accuracyMapping[id]}
+					value={accuracyMapping[id]}
+					key="Accuracy"
 				/>,
 			),
 			{ sticky: true, direction: 'top' },

@@ -13,11 +13,13 @@ const getFormattedPayload = (globalFilters, excludeKeys = []) => {
 
 	const { end_date, date_diff } = globalFilters;
 
-	filters.start_date = subtractDays(end_date, date_diff).toISOString().split('T')[GLOBAL_CONSTANTS.zeroth_index];
-	filters.end_date = end_date.toISOString().split('T')[GLOBAL_CONSTANTS.zeroth_index];
+	if (end_date) {
+		filters.start_date = subtractDays(end_date, date_diff).toISOString().split('T')[GLOBAL_CONSTANTS.zeroth_index];
+		filters.end_date = end_date.toISOString().split('T')[GLOBAL_CONSTANTS.zeroth_index];
+	}
 
 	LOCATION_KEYS.forEach((key) => {
-		if (globalFilters[key]) {
+		if (!excludeKeys.includes(key) && globalFilters[key]) {
 			filters[`${key}_${globalFilters[`${key}_type`]}_id`] = globalFilters[key];
 		}
 	});

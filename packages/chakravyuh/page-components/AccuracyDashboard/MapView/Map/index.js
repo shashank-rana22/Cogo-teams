@@ -193,7 +193,8 @@ function Map({
 							<MapTooltip
 								display_name={item.destination_name}
 								color={color}
-								accuracy={accuracyMapping[item.destination_id]}
+								value={accuracyMapping[item.destination_id]}
+								key="Accuracy"
 							/>
 						</Tooltip>
 					</Point>
