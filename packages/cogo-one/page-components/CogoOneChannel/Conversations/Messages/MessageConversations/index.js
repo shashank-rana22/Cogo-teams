@@ -136,6 +136,7 @@ function MessageConversations({
 						hasNoFireBaseRoom={hasNoFireBaseRoom}
 						setModalType={setModalType}
 						activeTab={activeTab}
+						viewType={viewType}
 					/>
 				) }
 			</div>
