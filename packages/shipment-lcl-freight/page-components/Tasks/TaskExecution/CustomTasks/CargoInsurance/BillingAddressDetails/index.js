@@ -52,18 +52,20 @@ function BillingAddressDetails({
 						placement="bottom"
 						visible={showFilters && !addAddressModal}
 						trigger="click"
-						render={AddressListPopover({
-							data,
-							checked,
-							setChecked,
-							loading      : addressLoading,
-							setshowFilters,
-							policyForSelf,
-							addAddressModal,
-							setAddAddressModal,
-							setProsporerAddress,
-							shipmentData : shipment_data,
-						})}
+						render={(
+							<AddressListPopover
+								data={data}
+								checked={checked}
+								setChecked={setChecked}
+								loading={addressLoading}
+								setshowFilters={setshowFilters}
+								policyForSelf={policyForSelf}
+								addAddressModal={addAddressModal}
+								setAddAddressModal={setAddAddressModal}
+								setProsporerAddress={setProsporerAddress}
+								shipmentData={shipment_data}
+							/>
+						)}
 					>
 						<div
 							className={styles.align_div}
