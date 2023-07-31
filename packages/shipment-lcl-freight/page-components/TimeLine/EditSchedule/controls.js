@@ -1,5 +1,5 @@
+import { getDate } from '../../../utils/getDate';
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
-import { getDate } from '../utils/getDate';
 
 const controls = ({ primary_service, departureDate }) => {
 	const disabledState = primary_service?.state === 'vessel_arrived'
@@ -20,7 +20,7 @@ const controls = ({ primary_service, departureDate }) => {
 		},
 	];
 
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
 	finalControls.forEach((control, index) => {
 		const { name, disable = disabledState } = control;
@@ -29,10 +29,10 @@ const controls = ({ primary_service, departureDate }) => {
 		finalControls[index].placeholder = 'Select Date';
 		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].showTimeSelect = true;
-		defaultValues[name] = getDate(primary_service?.[name]);
+		DEFAULT_VALUES[name] = getDate(primary_service?.[name]);
 	});
 
-	return { finalControls, defaultValues };
+	return { finalControls, DEFAULT_VALUES };
 };
 
 export default controls;

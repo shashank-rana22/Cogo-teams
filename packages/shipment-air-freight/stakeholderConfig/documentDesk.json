@@ -24,10 +24,7 @@
         "tab_title":"Emails"
     },
     "cancel_shipment": {
-        "can_cancel": false,
-        "list_reasons": {
-            "stakeholder_type": ["admin"]
-        },
+        "can_cancel": true,
         "role": "sales"
     },
     "purchase":{

@@ -26,9 +26,7 @@
     },
     "cancel_shipment": {
         "can_cancel": true,
-        "list_reasons": {
-            "stakeholder_type": ["booking_agent"]
-        }
+        "role": "sales"
     },
     "tracking": {
         "tab_title": "Tracking"

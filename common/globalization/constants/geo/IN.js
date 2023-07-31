@@ -30,12 +30,13 @@ export default {
 		},
 	},
 	regex: {
-		PAN              : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
+		PAN                                : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
 		// eslint-disable-next-line max-len
-		GST              : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
-		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL            : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
+		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL                              : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,
+		MOBILE_NUMBER_WITHOUT_COUNTRY_CODE : /^[0-9]{10}$/,
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
@@ -562,6 +563,16 @@ export default {
 		disable_options: ['10th', '12th', 'Diploma'],
 	},
 	navigations: {
+
+		settlement_onAccountCollection: {
+			tabs: [
+				'ap-ar-settlement',
+				'tds-settlement',
+				'history',
+				'onAccountCollection',
+				'JournalVoucher',
+			],
+		},
 		supply_dashboard: {
 			rfq_enquiries: {
 				tabs: [
