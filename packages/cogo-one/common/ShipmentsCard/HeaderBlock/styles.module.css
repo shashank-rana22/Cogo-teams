@@ -25,6 +25,10 @@
 	font-weight: 600;
 	color: #4f4f4f;
 	cursor: pointer;
+
+	&:hover {
+		color: #f68b21;
+	}
 }
 
 .importer_exporter_styles {
