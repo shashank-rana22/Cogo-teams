@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { IcMFfcl } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
@@ -12,55 +11,39 @@ import styles from './styles.module.css';
 
 const REQUIRED_DOC_TABS = ['vessel_arrived', 'container_gated_out'];
 
-function Body({ item = {}, open, setOpen, handleCardClick = () => {} }) {
+function Body({ item = {} }) {
 	const { activeTab } = useContext(LastMileDeskContext);
-
-	const handleClick = () => {
-		setOpen(!open);
-	};
 
 	return (
 		<div className={styles.container}>
-
-			<div className={styles.content_body}>
-				<div
-					className={styles.sub_container}
-					tabIndex={0}
-					role="button"
-					onClick={handleCardClick}
-				>
-					<div className={styles.info}>
-						<ShipmentInfo item={item} />
-					</div>
-
-					<div className={styles.divider} />
-
-					<div className={styles.fcl_icon}>
-						<div className={styles.icon_container}>
-							<IcMFfcl
-								fill="#ee3425"
-								height={28}
-								width={28}
-							/>
-
-						</div>
-
-						<div className={styles.icon_text}>FCL</div>
-					</div>
-
-					<div className={styles.port_detail}>
-						<PortDetails item={item} />
-					</div>
-
-					<div className={styles.divider} />
-
-					<div className={styles.pills}>
-						<CargoPills item={item} />
-					</div>
+			<div className={styles.sub_container}>
+				<div className={styles.info}>
+					<ShipmentInfo item={item} />
 				</div>
 
-				<div className={styles.details}>
-					<Button themeType="secondary" onClick={handleClick}>{open ? 'View Less' : 'View More'}</Button>
+				<div className={styles.divider} />
+
+				<div className={styles.fcl_icon}>
+					<div className={styles.icon_container}>
+						<IcMFfcl
+							fill="#ee3425"
+							height={28}
+							width={28}
+						/>
+
+					</div>
+
+					<div className={styles.icon_text}>FCL</div>
+				</div>
+
+				<div className={styles.port_detail}>
+					<PortDetails item={item} />
+				</div>
+
+				<div className={styles.divider} />
+
+				<div className={styles.pills}>
+					<CargoPills item={item} />
 				</div>
 			</div>
 
