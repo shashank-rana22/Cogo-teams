@@ -46,8 +46,6 @@ function OnAccountCollection({ entity }) {
 		refetch, setShowConfirm,
 	});
 
-	console.log('entityentity', entity);
-
 	const onPageChange = (val: number) => {
 		setGlobalFilters((prev) => ({ ...prev, page: val }));
 	};
