@@ -33,13 +33,6 @@
 
 .footer_left_block {
 	width: 50%;
-
-	:global {
-		.ui_pill_text {
-			font-weight: 600;
-			color: #6fa5ab;
-		}
-	}
 }
 
 .service_provider_details {
@@ -88,4 +81,18 @@
 	height: 28px;
 	margin-right: 6px;
 	fill: #f9ae64;
+}
+
+.custom_pill_styles {
+	max-width: 100%;
+	padding: 6px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 600;
+	color: #6fa5ab;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	background: #cfeaed;
+	border-radius: 4px;
 }

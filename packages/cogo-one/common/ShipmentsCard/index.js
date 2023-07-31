@@ -14,13 +14,9 @@ function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type =
 		net_total = 0,
 		net_total_price_currency = '',
 		payment_term : paymentTerm = '',
-		milestone_activity = [],
+		last_milestone = '',
+		current_milestone = '',
 	} = shipmentItem;
-
-	const milestoneActivity = [...milestone_activity].reverse();
-
-	const currentEvent = milestone_activity.find((itm) => itm?.completed_on);
-	const nextEvent = milestoneActivity.find((itm) => !itm?.completed_on);
 
 	const ShipmentIcon = iconMapping[shipment_type] || null;
 
@@ -65,24 +61,22 @@ function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type =
 			</div>
 
 			<div className={styles.footer_block}>
-				<div className={styles.footer_left_block}>
-					<Pill size="md" color="#CFEAED">
-						{currentEvent?.milestone || 'Booking Placed'}
-					</Pill>
+				<div className={styles.footer_right_block}>
+					prev:
+					{' '}
+					{last_milestone}
 				</div>
 
-				<div className={styles.footer_right_block}>
-					Next:
-					{' '}
-					{nextEvent?.milestone || 'Booking Confirmation'}
+				<div className={styles.footer_left_block}>
+					<div className={styles.custom_pill_styles}>
+						{current_milestone}
+					</div>
 				</div>
 			</div>
 
 			<div className={styles.shipment_type_container}>
 				{ShipmentIcon && <ShipmentIcon className={styles.ship_icon} /> }
-
 				{startCase(shipment_type)}
-
 			</div>
 		</>
 	);
