@@ -6,6 +6,11 @@ import styles from './styles.module.css';
 function Header({ data = {} }) {
 	const { trade_type = '', importer_exporter = [], source } = data || {};
 
+	function checkIsEndToEnd(booking_agents) {
+		return booking_agents.some((item) => item.stakeholder_type === 'destination_booking_agent'
+		|| item.stakeholder_type === 'origin_booking_agent');
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
@@ -19,6 +24,10 @@ function Header({ data = {} }) {
 
 				{importer_exporter?.tags?.includes('partner')
 					? <Pill className={styles.channel_partner} color="orange">Channel Partner</Pill>
+					: null}
+
+				{checkIsEndToEnd(data?.booking_agents)
+					? <Pill className={styles.channel_partner} color="red">Nominated</Pill>
 					: null}
 			</div>
 

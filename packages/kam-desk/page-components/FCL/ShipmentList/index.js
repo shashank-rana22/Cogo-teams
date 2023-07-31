@@ -8,32 +8,46 @@ import Card from '../Card';
 
 import styles from './styles.module.css';
 
+const PAGE_LIMIT = 10;
+
 function ShipmentList({ data = {}, loading }) {
 	const { filters, setFilters } = useContext(KamDeskContext);
 
 	const { list = [], page, total_count, page_limit } = data || {};
 
-	const renderPagination = (
-		<div className={styles.pagination_container}>
-			<Pagination
-				type="table"
-				currentPage={page}
-				totalItems={total_count}
-				pageSize={page_limit}
-				onPageChange={(val) => setFilters({ ...filters, page: val })}
-			/>
-		</div>
-	);
-
 	return !loading && isEmpty(list)
 		? <EmptyState />
 		: (
 			<>
-				{renderPagination}
+				{total_count > PAGE_LIMIT
+					? (
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={total_count}
+								pageSize={page_limit}
+								onPageChange={(val) => setFilters({ ...filters, page: val })}
+							/>
+						</div>
+					) : null}
 
-				{list?.map((item) => <Card data={item} key={item?.id} />)}
+				<ul className={styles.list}>
+					{list?.map((item) => <li key={item?.id}><Card data={item} /></li>)}
+				</ul>
 
-				{renderPagination}
+				{total_count > PAGE_LIMIT
+					? (
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={total_count}
+								pageSize={page_limit}
+								onPageChange={(val) => setFilters({ ...filters, page: val })}
+							/>
+						</div>
+					) : null}
 			</>
 		);
 }
