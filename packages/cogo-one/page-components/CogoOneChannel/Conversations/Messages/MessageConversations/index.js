@@ -140,6 +140,7 @@ function MessageConversations({
 						hasNoFireBaseRoom={hasNoFireBaseRoom}
 						setModalType={setModalType}
 						activeTab={activeTab}
+						viewType={viewType}
 						scrollToBottom={scrollToBottom}
 						firestore={firestore}
 						ref={messageRef}

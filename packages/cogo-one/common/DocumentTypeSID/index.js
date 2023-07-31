@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
-import { AsyncSelectController, useForm } from '@cogoport/forms';
+import { AsyncSelectController } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 
-import useGetDocumentTypeControls from '../../../../../../hooks/useGetDocumentTypeControls';
-import useSendShipmentDocumentationNotification from '../../../../../../hooks/useSendShipmentDocumentationNotification';
+import useGetDocumentTypeControls from '../../hooks/useGetDocumentTypeControls';
+import useSendShipmentDocumentationNotification from '../../hooks/useSendShipmentDocumentationNotification';
 
 import styles from './styles.module.css';
 
@@ -13,9 +13,17 @@ function DocumentTypeSID({
 	formattedMessageData = {},
 	documentTagUrl = '',
 	setDocumentTagUrl = () => {},
+	type = '',
+	setTagModal = () => {},
+	control = {},
+	errors = {},
+	watch = () => {},
+	handleSubmit = () => {},
+	resetField = () => {},
+	reset = () => {},
+	getDocumentsList = () => {},
 }) {
 	const { account_type = '' } = formattedMessageData || {};
-	const { control, formState: { errors = {} }, watch, handleSubmit, resetField } = useForm();
 	const watchListShipment = watch('list_shipments');
 	const watchListShipmentPendingTasks = watch('list_shipment_pending_tasks');
 
@@ -28,12 +36,13 @@ function DocumentTypeSID({
 	});
 
 	const {
+		loading = false,
 		postDocumentTag = () => {},
-	} = useSendShipmentDocumentationNotification();
+	} = useSendShipmentDocumentationNotification({ setTagModal, reset, getDocumentsList });
 
 	const createDocumentTag = (formValues) => {
 		const payload = {
-			document_id   : id,
+			document_id   : id || undefined,
 			document_type : formValues?.list_shipment_pending_tasks,
 			shipment_id   : formValues?.list_shipments,
 			document_link : documentTagUrl,
@@ -47,10 +56,13 @@ function DocumentTypeSID({
 
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.title}>
-				<div>Document Tag</div>
-				<IcMCross className={styles.cross} onClick={() => setDocumentTagUrl('')} />
-			</div>
+			{type === 'documents' ? (
+				<div className={styles.title}>
+					<div>Document Tag</div>
+					<IcMCross className={styles.cross} onClick={() => setDocumentTagUrl('')} />
+				</div>
+
+			) : null}
 			{controls.map((eachControl = {}) => {
 				const { label = '', name = '' } = eachControl || {};
 
@@ -65,8 +77,14 @@ function DocumentTypeSID({
 				);
 			})}
 			<div className={styles.button_styles}>
-				<Button size="sm" themeType="primary" onClick={handleSubmit(createDocumentTag)}>
-					OK
+				<Button
+					loading={loading}
+					size={type === 'documents' ? 'sm' : 'md'}
+					themeType="primary"
+					onClick={handleSubmit(createDocumentTag)}
+					className={type === 'messages' ? styles.modal_footer_button : ''}
+				>
+					Submit
 				</Button>
 			</div>
 		</div>

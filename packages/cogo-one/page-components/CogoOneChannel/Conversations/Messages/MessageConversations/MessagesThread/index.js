@@ -37,6 +37,7 @@ function MessagesThread(
 		activeTab = {},
 		scrollToBottom = () => {},
 		firestore = {},
+		viewType = '',
 	},
 	messageRef,
 ) {
@@ -118,6 +119,7 @@ function MessagesThread(
 						user_name={user_name}
 						setRaiseTicketModal={setRaiseTicketModal}
 						formattedData={formattedData}
+						viewType={viewType}
 					/>
 				);
 			})}
