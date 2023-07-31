@@ -62,6 +62,12 @@ const GLOBAL_CONSTANTS = {
 		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
 						a3072d28df04315514414abe46a8c2f0/new_employee_bulk_upload_sample_sheet.csv`,
 	},
+	upload_utr_sample_file: {
+		normal_payment: 'https://cogoport-testing.sgp1.digitaloceanspaces.com/06679b4fca57'
+							+ 'a312ee8f3fe0ded72246/UTRuploadSampleFile.xlsx',
+		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae5'
+							+ '9e95d4e38a4271ff/UTRuploadSampleFileForAdvancePayment.xlsx',
+	},
 	flash_booking_charge_codes: [
 		'OTC',
 		'BAS',
