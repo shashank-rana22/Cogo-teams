@@ -74,6 +74,10 @@ function CreateConfig() {
 		}
 	}, [orgSubType, orgType, setValue]);
 
+	useEffect(() => {
+		if (isEmpty(reportingManagerIds)) setValue('organization_ids', reportingManagerIds);
+	}, [reportingManagerIds, setValue]);
+
 	return (
 
 		<>
@@ -92,7 +96,7 @@ function CreateConfig() {
 			<div className={styles.container}>
 
 				<div className={styles.form_container}>
-					{getControls({ cogoEntityId, reportingManagerIds })?.map((controlItem) => {
+					{getControls({ cogoEntityId, reportingManagerIds }).map((controlItem) => {
 						const { type, label, name, showAstrick } = controlItem || {};
 
 						const Element = getElementController(type);
@@ -109,6 +113,10 @@ function CreateConfig() {
 										control={control}
 										{...controlItem}
 										{...(name === 'segment' && { options: orgSubTypeOptions[orgType] })}
+										disabled={(name === 'agent_id'
+										&& isEmpty(cogoEntityId)) || (name === 'organization_ids'
+										&& isEmpty(reportingManagerIds)) || (name === 'cogo_entity_id'
+										&& !isEmpty(cogoEntityId))}
 									/>
 									{errors[name] && <div className={styles.error_msg}>This is required</div>}
 								</div>

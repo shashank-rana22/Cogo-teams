@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 const getControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
 	{
 		name        : 'cogo_entity_id',
@@ -62,16 +64,15 @@ const getControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
 		label       : 'Select Organization',
 		type        : 'async-select',
 		placeholder : 'Select Organization',
-		initialCall : true,
 		multiple    : true,
 		asyncKey    : 'organizations',
 		isClearable : true,
 		params      : {
 			filters: {
-				sales_agent_rm_ids : [reportingManagerIds],
-				status             : 'active',
-				account_type       : 'importer_exporter',
-				kyc_status         : 'verified',
+				...(!isEmpty(reportingManagerIds) ? { sales_agent_rm_ids: [reportingManagerIds] } : {}),
+				status       : 'active',
+				account_type : 'importer_exporter',
+				kyc_status   : 'verified',
 			},
 			pagination_data_required     : false,
 			agent_data_required          : false,
