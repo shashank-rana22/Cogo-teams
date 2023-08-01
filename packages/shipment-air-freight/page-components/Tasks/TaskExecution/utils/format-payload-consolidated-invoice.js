@@ -12,17 +12,19 @@ const getPayload = ({
 	const { id = '' } = sheetData || {};
 
 	const {
-		business_name = '', cin = '', 
-		entity_code = '', registration_number = '', tan_no = '', country = {}, 
+		business_name = '', cin = '',
+		entity_code = '', registration_number = '', tan_no = '', country = {},
 		id:cogo_entity_id = '', serial_id = '',
 	} = entityData || {};
 
 	const { id:country_id = '', country_code = '', name = '', type = '' } = country || {};
 
-	const { currency = '', price = '' } = values || {};
+	const { currency = '', price = 0, tax_price = 0, total_tax_price = 0 } = values || {};
 
-	const { chargeable_weight = '', airline_id = '', origin_airport_id = '', 
-	destination_airport_id = '', booking_reference_number = '' } = mainServicesData || {};
+	const {
+		chargeable_weight = '', airline_id = '', origin_airport_id = '',
+		destination_airport_id = '', booking_reference_number = '',
+	} = mainServicesData || {};
 
 	const csr_data = [
 		{
@@ -37,10 +39,10 @@ const getPayload = ({
 					other_price     : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
 					discount        : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
 					commission      : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
-					total_tax       : Number(price) ,
+					total_tax       : Number(tax_price),
 					weight          : chargeable_weight,
 					currency,
-					tax_total_price : Number(price),
+					tax_total_price : Number(total_tax_price),
 				},
 			],
 		},

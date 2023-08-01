@@ -114,10 +114,11 @@ function List({ isSeller = false }) {
 					<Info />
 				</div>
 			) : null}
-			
+
 			<div className={styles.not_added}>
 				<Button
 					onClick={() => setTerminalChargeModal(true)}
+					className={styles.terminal_charges}
 				>
 					<div className={styles.add_icon}>+</div>
 					Add Terminal Charge
@@ -162,12 +163,14 @@ function List({ isSeller = false }) {
 					closeModal={closeModal}
 				/>
 			)}
-			{terminalChargeModal ?
-				<ConfirmTerminalChargeModal 
-				terminalChargeModal={terminalChargeModal}
-				setTerminalChargeModal={setTerminalChargeModal}
-				shipment_id={shipment_data?.id} />:null
-			}
+			{terminalChargeModal
+				? (
+					<ConfirmTerminalChargeModal
+						terminalChargeModal={terminalChargeModal}
+						setTerminalChargeModal={setTerminalChargeModal}
+						shipment_id={shipment_data?.id}
+					/>
+				) : null}
 
 		</div>
 	);

@@ -1,20 +1,19 @@
-import React from 'react';
 import { Modal, Button } from '@cogoport/components';
+import React from 'react';
+
 import useCreateShipmentTerminalService from '../../../../../hooks/useCreateShipmentTerminalServiceTask';
 
+import styles from './styles.module.css';
 
 function ConfirmTerminalChargeModal({
 	terminalChargeModal = false,
 	setTerminalChargeModal = () => {},
 	shipment_id = '',
 }) {
-
-
-	const { createShipmentTerminalService, loading } =
-		useCreateShipmentTerminalService({
-			shipment_id,
-			setTerminalChargeModal,
-		});
+	const { createShipmentTerminalService, loading } =		useCreateShipmentTerminalService({
+		shipment_id,
+		setTerminalChargeModal,
+	});
 
 	const handleSubmit = () => {
 		createShipmentTerminalService();
@@ -34,7 +33,7 @@ function ConfirmTerminalChargeModal({
 				onOuterClick={() => handleCloseModal()}
 			>
 				<Modal.Header
-					title='Add Terminal Charges'
+					title="Add Terminal Charges"
 				/>
 				<Modal.Body>
 					<div>
@@ -45,7 +44,7 @@ function ConfirmTerminalChargeModal({
 					<Button
 						onClick={() => setTerminalChargeModal(false)}
 						disabled={loading}
-						class
+						className={styles.no_button}
 					>
 						No
 

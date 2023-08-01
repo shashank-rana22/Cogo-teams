@@ -5,19 +5,23 @@ import { useRequest } from '@cogoport/request';
 const useUpdateTask = ({
 	successMessage = 'Task Updated Successfully!',
 	refetch = () => {},
-	onCancel=()=>{}
+	onCancel = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_pending_task',
 		method : 'POST',
 	});
 
-	const apiTrigger = async (val) => {
+	const apiTrigger = async (task_id) => {
 		try {
-			const res = await trigger({ data: val });
+			const res = await trigger({
+				data: {
+					id: task_id,
+				},
+			});
 			Toast.success(successMessage);
 			refetch();
-			onCancel()
+			onCancel();
 			return res;
 		} catch (err) {
 			toastApiError(err);

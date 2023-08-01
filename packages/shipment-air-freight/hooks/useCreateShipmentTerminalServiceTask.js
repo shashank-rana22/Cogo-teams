@@ -1,19 +1,14 @@
-import { useRequest } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
-
+import { useRequest } from '@cogoport/request';
 
 const useCreateShipmentTerminalService = ({
 	shipment_id = '',
 	setTerminalChargeModal = () => {},
 }) => {
-
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_terminal_service_task',
 		method : 'POST',
-    }, { manual: true });
-
-	
+	}, { manual: true });
 
 	const createShipmentTerminalService = async () => {
 		try {
