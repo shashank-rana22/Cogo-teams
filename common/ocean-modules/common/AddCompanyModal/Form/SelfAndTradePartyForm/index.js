@@ -7,7 +7,7 @@ import {
 	SelectController,
 	useForm,
 } from '@cogoport/forms';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getGeoConstants, { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useImperativeHandle, forwardRef, useState, useCallback } from 'react';
@@ -56,6 +56,7 @@ function SelfAndTradePartyForm({
 	const [addressData, setAddressData] = useState([]);
 	const [id, setId] = useState('');
 	const [pocNameOptions, setPocNameOptions] = useState([]);
+	const [countryId, setCountryId] = useState('');
 
 	const resetMultipleFields = useCallback((fields = []) => {
 		fields?.map((field) => resetField(field));
@@ -75,6 +76,7 @@ function SelfAndTradePartyForm({
 			setAddressData([...(selectedTradeParty?.billing_addresses || []),
 				...(selectedTradeParty.other_addresses || [])]);
 			setId(selectedTradeParty?.id);
+			setCountryId(selectedTradeParty?.country?.id);
 		}
 
 		resetField('address');
@@ -102,7 +104,6 @@ function SelfAndTradePartyForm({
 
 		if (name) {
 			const selectedName = pocNameOptions?.find((item) => item?.value === name);
-			console.log(selectedName, 'selectedName');
 			setValue('work_scopes', selectedName?.work_scopes || []);
 			setValue('email', selectedName?.email || '');
 			setValue('mobile_number', {
@@ -121,6 +122,8 @@ function SelfAndTradePartyForm({
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 	}
+
+	const countryValidation = getCountryConstants({ country_id: countryId, isDefaultData: false });
 
 	return (
 		<div>
@@ -145,13 +148,14 @@ function SelfAndTradePartyForm({
 
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>
-										{geo.others.identification_number.label}
+										{countryValidation?.others?.identification_number?.label || 'PAN Number'}
 									</label>
 									<InputController
 										size="sm"
 										name="registration_number"
 										control={control}
-										placeholder={`Enter ${geo.others.identification_number.label}`}
+										placeholder={`Enter ${countryValidation?.others?.identification_number?.label
+											|| 'PAN Number'}`}
 										disabled
 									/>
 								</div>

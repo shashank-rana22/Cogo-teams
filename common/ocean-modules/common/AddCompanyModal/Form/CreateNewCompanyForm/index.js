@@ -8,7 +8,7 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
-import getGeoConstants, { getCountryConstants } from '@cogoport/globalization/constants/geo';
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
 
 import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
@@ -34,8 +34,6 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref
 		defaultParams  : DEFAULT_ORG_TRADE_PARTIES_PARAMS,
 		defaultFilters : { organization_status: 'active' },
 	});
-
-	const geo = getGeoConstants();
 
 	const { destination_port, origin_port } = primary_service || {};
 
@@ -104,6 +102,8 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref
 
 	const countryValidation = getCountryConstants({ country_id: formValues.country_id, isDefaultData: false });
 
+	console.log({ countryValidation });
+
 	const taxLabel = countryValidation?.others?.registration_number?.label || 'PAN';
 
 	useEffect(() => {
@@ -141,10 +141,14 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref
 							size="sm"
 							name="registration_number"
 							control={control}
-							placeholder={`Enter ${geo.others.identification_number.label}`}
+							placeholder={`Enter ${countryValidation?.others?.identification_number?.label}`}
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
-								pattern  : { value: countryValidation?.regex?.PAN, message: 'Pan Number is invalid' },
+								pattern  : {
+									value   : countryValidation?.regex?.PAN,
+									message : `${countryValidation?.others?.identification_number?.label}} 
+									Number is invalid`,
+								},
 							}}
 						/>
 						{Error('registration_number', errors)}
