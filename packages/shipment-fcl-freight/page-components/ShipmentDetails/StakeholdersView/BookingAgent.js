@@ -32,7 +32,7 @@ const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
 
-	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
+	const [activeTab, setActiveTab] = useState('overview');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
