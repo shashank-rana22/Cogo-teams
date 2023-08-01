@@ -5,7 +5,7 @@ import Loader from './Loader';
 import ServiceDetails from './ServiceDetails';
 import styles from './styles.module.css';
 
-function Services() {
+function Services({ invoicing_parties = [] }) {
 	const {
 		isGettingShipment,
 		servicesList,
@@ -18,6 +18,7 @@ function Services() {
 				<div className={styles.services_container}>
 					<ServiceDetails
 						servicesData={servicesList}
+						invoicing_parties={invoicing_parties}
 					/>
 				</div>
 			</div>

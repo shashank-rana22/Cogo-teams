@@ -11,6 +11,7 @@ import SupplierReallocation from '../SupplierReallocation';
 import VerifyTruck from '../VerifyAssetModal';
 import VerifyDriver from '../VerifyDriverModal';
 
+import Consolidation from './Consolidation';
 import {
 	EditTruckNumberControls,
 	EditETAControls,
@@ -18,24 +19,12 @@ import {
 } from './Controls';
 import Form from './Forms';
 import styles from './styles.module.css';
-import getCanCancelService from './utils/getCanCancelService';
-import getCanEditSupplier from './utils/getCanEditSupplier';
-import getEditServiceDetails from './utils/getEditServiceDetails';
-
-const ACTION_BUTTON = {
-	supplier_reallocation:
-	{ label: 'Edit Supplier', value: 'supplier_reallocation', visibilityFunction: getCanEditSupplier },
-	edit_truck_number:
-	{ label: 'Edit Truck Number', value: 'edit_truck_number', visibilityFunction: getEditServiceDetails },
-	edit_eta_etd: { label: 'Edit ETA/ETD', value: 'edit_eta_etd', visibilityFunction: getEditServiceDetails },
-	edit_driver_details:
-	{ label: 'Edit Driver Details', value: 'edit_driver_details', visibilityFunction: getEditServiceDetails },
-	verify_truck  : { label: 'Verify Truck', value: 'verify_truck', visibilityFunction: getEditServiceDetails },
-	verify_driver : { label: 'Verify Driver', value: 'verify_driver', visibilityFunction: getEditServiceDetails },
-	cancel        : { label: 'Cancel', value: 'cancel', visibilityFunction: getCanCancelService },
-};
+import { ACTION_BUTTON } from './utils/actions';
 
 const DEFAULT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
+
+const EXCLUDED_STATES = ['cn_requested', 'revoked'];
+const INVOICE_REQUIRED_STATES = ['pending', 'amendment_requested'];
 
 export const getTrucklistWithId = (all_services) => {
 	const servicesList = (all_services || []).filter(
@@ -91,11 +80,13 @@ export const getEtaEtdList = (all_services) => {
 	return etaEtdList;
 };
 
-function EditCancelService({ serviceData = {} }) {
+function EditCancelService({ serviceData = {}, invoicing_parties = [] }) {
 	const { state, trade_type, service_type } = serviceData?.[DEFAULT_INDEX] || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
-	const { shipment_data, servicesList, activeStakeholder, refetchServices } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data, servicesList, activeStakeholder, refetchServices, refetch,
+	} = useContext(ShipmentDetailContext);
 
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
@@ -109,18 +100,36 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
+	const truckList = getTrucklistWithId(serviceData);
+
+	const isTruckPresent =	!isEmpty(truckList || [])
+		&& !['cargo_dropped', 'completed'].includes(truckList?.[DEFAULT_INDEX]?.state);
+
+	const filteredInvoices = invoicing_parties?.filter(
+		(item) => !EXCLUDED_STATES.includes(item.status),
+	);
+	let enableConsolidations = false;
+
+	if (!isEmpty(filteredInvoices)) {
+		enableConsolidations =	filteredInvoices?.every((invoice) => INVOICE_REQUIRED_STATES.includes(invoice?.status));
+	}
+
 	Object.entries(ACTION_BUTTON).forEach(([btnKey, butObj]) => {
-		ACTION_BUTTON[btnKey].show = butObj.visibilityFunction({ shipment_data, user_data, state, activeStakeholder });
+		ACTION_BUTTON[btnKey].show = butObj.visibilityFunction({
+			shipment_data,
+			user_data,
+			state,
+			activeStakeholder,
+			isTruckPresent,
+			enableConsolidations,
+		});
 	});
 
 	if (!Object.values(ACTION_BUTTON).some((actionButton) => actionButton.show)) {
 		return null;
 	}
 
-	const truckList = getTrucklistWithId(serviceData);
-
-	const isTruckPresent =	!isEmpty(truckList || [])
-		&& !['cargo_dropped', 'completed'].includes(truckList?.[DEFAULT_INDEX]?.state);
+	const showEdit = isTruckPresent || enableConsolidations;
 
 	const content = Object.values(ACTION_BUTTON).map((action) => {
 		const { label, value, show } = action || {};
@@ -148,7 +157,7 @@ function EditCancelService({ serviceData = {} }) {
 				content={content}
 				onClickOutside={() => setShowPopover(false)}
 			>
-				{isTruckPresent
+				{showEdit
 					? <IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
 					: null}
 			</Popover>
@@ -232,6 +241,25 @@ function EditCancelService({ serviceData = {} }) {
 							heading="EDIT DRIVER DETAILS"
 							type="driver"
 							driverDetails={getDriverDetails(serviceData)}
+						/>
+					</Modal.Body>
+
+				</Modal>
+			) : null}
+
+			{showModal === 'enable_consolidation' ? (
+				<Modal
+					show={showModal}
+					onClose={() => setShowModal(false)}
+					size="md"
+				>
+					<Modal.Header title="Enable Consolidations" />
+					<Modal.Body>
+						<Consolidation
+							shipment_data={shipment_data}
+							setShowModal={setShowModal}
+							servicesList={servicesList}
+							refetch={refetch}
 						/>
 					</Modal.Body>
 

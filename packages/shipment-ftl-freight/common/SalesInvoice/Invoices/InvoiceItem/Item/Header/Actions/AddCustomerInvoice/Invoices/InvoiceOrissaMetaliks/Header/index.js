@@ -41,12 +41,12 @@ function Header({
 						</p>
 						<p style={{ display: 'flex' }}>
 							<b>PAN : </b>
-							&nbsp;
+							{' '}
 							{billing_address?.registration_number}
 						</p>
 						<p style={{ display: 'flex' }}>
 							<b>GST No: </b>
-							&nbsp;
+							{' '}
 							{billing_address?.tax_number}
 						</p>
 					</td>

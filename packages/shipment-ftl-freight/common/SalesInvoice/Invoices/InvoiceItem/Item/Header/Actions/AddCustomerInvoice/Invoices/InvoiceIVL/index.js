@@ -34,7 +34,7 @@ function InvoiceIVL({
 	} = getChargesData({ customData });
 	const amountInWords = finalAmountInWords(grand_amount);
 	return (
-		<div style={{ fontSize: '12px' }}>
+		<div style={{ fontSize: '12px', border: '1px solid', padding: '5px' }}>
 			<TableData
 				billing_address={billing_address}
 				logoData={logoData}

@@ -73,12 +73,12 @@ function Terms({
 						<ol>
 							<li>
 								<b>Payment Terms:</b>
-								&nbsp;
+								{' '}
 								Immediate
 							</li>
 							<li>
 								All Payments should be to the account of
-								&nbsp;
+								{' '}
 								<b>{billing_address?.business_name}</b>
 								. Bank account details:
 								<p>
@@ -100,7 +100,7 @@ function Terms({
 							</li>
 							<li>
 								<b>Delayed payment penalty:</b>
-								&nbsp;
+								{' '}
 								2% per month or part therof from
 								the date of invoice.
 							</li>

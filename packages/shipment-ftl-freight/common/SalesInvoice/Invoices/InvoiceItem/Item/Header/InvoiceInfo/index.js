@@ -37,6 +37,7 @@ function InvoiceInfo({
 	setShowOTPModal = () => {},
 	setAskNullify = () => {},
 	salesInvoicesRefetch = () => {},
+	invoiceData = {},
 
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
@@ -174,6 +175,7 @@ function InvoiceInfo({
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						isAuthorized={isAuthorized}
 						disableAction={disableAction}
+						invoiceData={invoiceData}
 					/>
 				) : null}
 

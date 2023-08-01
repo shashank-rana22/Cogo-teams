@@ -105,7 +105,7 @@ function HeaderData({
 					}}
 					>
 						<img
-							style={{ margin: '20px', height: '100px' }}
+							style={{ margin: '10px', height: '100px' }}
 							src={logoData}
 							alt="Cogoport"
 						/>

@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import useGetBillingAddress from '../../hooks/useGetBillingAddress';
 
@@ -51,7 +52,7 @@ function InvoiceGujaratMilk({
 	} = getOtherData({ customData });
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif', fontSize: '12px', padding: '40px' }}>
-			<table border="0" cellPadding="0" cellSpacing="0">
+			<table border="0" cellPadding="0" cellSpacing="0" style={{ width: '100%' }}>
 				<tr>
 					<td>
 						<h2 style={{ marginTop: '0px', color: '#ffa500' }}>
@@ -200,7 +201,7 @@ function InvoiceGujaratMilk({
 							PO Number
 
 						</th>
-						<th style={{ border: '2px solid black', borderBottom: 'none' }}>vehicle Type</th>
+						<th style={{ border: '2px solid black', borderBottom: 'none' }}>Vehicle Type</th>
 					</tr>
 					<tr style={{ border: '2px solid black' }}>
 						<td style={{ border: '2px solid black', borderRight: 'none' }}>
@@ -224,7 +225,7 @@ function InvoiceGujaratMilk({
 							})}
 						</td>
 						<td style={{ border: '2px solid black' }}>
-							{truck_type}
+							{truck_type ? startCase(truck_type) : null}
 						</td>
 					</tr>
 				</table>

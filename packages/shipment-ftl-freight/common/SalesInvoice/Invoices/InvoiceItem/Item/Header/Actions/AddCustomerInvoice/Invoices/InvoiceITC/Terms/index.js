@@ -64,13 +64,13 @@ function Terms({
 							<li>
 								<b>
 									All Payments should be to the account of
-									&nbsp;
+									{' '}
 									{billing_address?.business_name || ''}
 									. Bank account details:
 								</b>
 								<p>
 									<b>Bank Name:</b>
-									&nbsp;
+									{' '}
 									{bankDetailObj?.data?.bank_name || bank_name}
 								</p>
 								<p>

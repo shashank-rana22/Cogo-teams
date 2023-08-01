@@ -124,7 +124,7 @@ function InvoiceVarun({
 							</p>
 							<p style={{ fontSize: '10px' }}>
 								5) Payment advice should be mailed to
-								&nbsp;
+								{' '}
 								<b>collection@4tigo.com</b>
 								.
 							</p>

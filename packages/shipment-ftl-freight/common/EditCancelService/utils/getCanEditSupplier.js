@@ -5,11 +5,12 @@ const EDIT_SUPPLIER_SERVICE_STATES = ['init',
 
 const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = [
 	'superadmin',
+	'admin',
 	'service_ops',
-	'service_ops1',
-	'service_ops2',
+	'booking_desk',
+	'document_desk',
 	'service_ops3',
-	'prod_process owner',
+	'prod_process_owner',
 ];
 
 const serviceCompletedOrCancelled = ['completed', 'cancelled'];

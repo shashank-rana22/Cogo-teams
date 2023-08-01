@@ -13,7 +13,6 @@ const LINE_ITEMS_KEYS_MAPPING = {
 	sgst_amount         : 'sgst_amount',
 	igst_rate           : 'igst_rate',
 	igst_amount         : 'igst_amount',
-	other_charges       : 'other_charges',
 	total               : 'total',
 };
 

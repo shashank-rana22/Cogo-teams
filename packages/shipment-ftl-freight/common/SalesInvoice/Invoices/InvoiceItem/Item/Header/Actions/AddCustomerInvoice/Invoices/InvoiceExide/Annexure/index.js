@@ -20,10 +20,11 @@ function Annexure({ customData = {}, invoice_no = '', invoice_date = '', billing
 			cellPadding="0"
 			cellSpacing="0"
 			style={{
-				width          : '80%',
+				width          : '100%',
 				borderWidth    : '0 0 2px 2px',
 				marginTop      : '50px',
 				borderCollapse : 'collapse',
+				breakInside    : 'avoid',
 			}}
 		>
 			<tr
@@ -70,15 +71,15 @@ function Annexure({ customData = {}, invoice_no = '', invoice_date = '', billing
 			</tr>
 			{annexureItems.map((lineItem, index) => (
 				<tr key={lineItem?.id} style={{ border: '2px solid black' }}>
-					<td style={{ padding: '1px', border: '2px solid black' }}>
+					<td style={{ padding: '1px', border: '2px solid black', textAlign: 'center' }}>
 						{index + OFFSET_VALUE}
 					</td>
 					{Object.keys(ANNEXURE_KEY_MAPPINGS).map((key) => (
 						<td
 							style={{
-								padding    : '1px',
-								background : '',
-								border     : '2px solid black',
+								padding   : '1px',
+								border    : '2px solid black',
+								textAlign : 'center',
 							}}
 							key={key}
 						>

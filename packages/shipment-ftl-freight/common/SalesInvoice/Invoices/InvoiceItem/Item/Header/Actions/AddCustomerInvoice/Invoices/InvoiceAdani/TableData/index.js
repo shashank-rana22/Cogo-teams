@@ -49,7 +49,7 @@ function TableData({
 						}}
 					>
 						<b>GSTIN:</b>
-						&nbsp;
+						{' '}
 						{billing_address?.tax_number}
 					</td>
 					<td
@@ -72,7 +72,7 @@ function TableData({
 						}}
 					>
 						<b>Invoice No:- </b>
-						&nbsp;
+						{' '}
 						{invoice_no}
 					</td>
 				</tr>
@@ -105,7 +105,7 @@ function TableData({
 						}}
 					>
 						SAC Code:
-						&nbsp;
+						{' '}
 						{sac_code}
 					</td>
 					<td
@@ -117,7 +117,7 @@ function TableData({
 						}}
 					>
 						<b>Invoice Date:- </b>
-						&nbsp;
+						{' '}
 						{formatDate({
 							date       : bill_date,
 							formatType : 'date',

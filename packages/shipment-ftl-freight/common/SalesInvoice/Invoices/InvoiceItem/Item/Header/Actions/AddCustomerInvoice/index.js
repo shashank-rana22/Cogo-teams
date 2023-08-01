@@ -19,6 +19,7 @@ function AddCustomerInvoice({
 	invoice = {},
 	shipmentData = {},
 	setShowModal = () => {},
+	invoiceData = {},
 }) {
 	const [showInvoiceModal, setShowInvoiceModal] = useState(false);
 	const [toggle, setToggle] = useState(false);
@@ -121,6 +122,7 @@ function AddCustomerInvoice({
 						handleCloseModal={handleCloseModal}
 						handleClose={() => setShowInvoiceModal(false)}
 						tradePartnerData={tradePartnerData?.list}
+						invoiceData={invoiceData}
 					/>
 				</Modal.Body>
 			</Modal>

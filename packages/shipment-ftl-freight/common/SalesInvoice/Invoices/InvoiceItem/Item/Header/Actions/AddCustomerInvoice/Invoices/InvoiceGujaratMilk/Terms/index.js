@@ -48,14 +48,12 @@ function Terms({
 					there is no flow of additional consideration directly or indirectly
 					from the buyer.
 				</p>
-				<br />
 				<p>
 					We hereby declare that though our aggregate turnover in any preceding
 					financial year from 2017-18 onwards is more than the aggregate
 					turnover notified under sub-rule (4) of rule 48, we are not required
 					to prepare an invoice in terms of the provisions of the said sub-rule.
 				</p>
-				<br />
 				<p>
 					We have taken registration under the CGST Act, 2017 and have exercised
 					the option to pay tax on services of GTA in relation to transport of
@@ -127,21 +125,30 @@ function Terms({
 						)}
 					</td>
 					<td
-						style={{ width: '30%', textAlign: 'center', verticalAlign: 'top' }}
+						style={{ width: '100%' }}
 					>
-						<h3>
-							<b>
-								for
-								{' '}
-								{business_name}
-							</b>
-						</h3>
-						<img
-							src={stampData}
-							style={{ width: '100px', height: 'auto' }}
-							alt=""
-						/>
-						<h3>Authorised Signatory</h3>
+						<div style={{
+							display        : 'flex',
+							flexDirection  : 'column',
+							justifyContent : 'center',
+							alignItems     : 'center',
+						}}
+						>
+							<h3>
+								<b>
+									For
+									{' '}
+									{business_name}
+								</b>
+							</h3>
+							<img
+								src={stampData}
+								style={{ width: '100px', height: 'auto' }}
+								alt=""
+							/>
+							<h3>Authorised Signatory</h3>
+						</div>
+
 					</td>
 				</tr>
 			</table>

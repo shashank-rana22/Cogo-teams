@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -7,10 +8,10 @@ import Details from '../Details';
 
 import styles from './styles.module.css';
 
-function Header({ serviceData = [] }) {
+function Header({ serviceData = [], invoicing_parties = [] }) {
 	const [showDetails, setShowDetails] = useState(true);
 
-	const { state, shipment_type, service_provider, payment_term } = serviceData?.[0] || {};
+	const { state, shipment_type, service_provider, payment_term } = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	let statusText = startCase(state);
 	if (state === 'init') {
@@ -43,7 +44,7 @@ function Header({ serviceData = [] }) {
 						</div>
 
 						<div className={styles.edit_cancel}>
-							<EditCancelService serviceData={serviceData} />
+							<EditCancelService serviceData={serviceData} invoicing_parties={invoicing_parties} />
 						</div>
 					</div>
 				</div>

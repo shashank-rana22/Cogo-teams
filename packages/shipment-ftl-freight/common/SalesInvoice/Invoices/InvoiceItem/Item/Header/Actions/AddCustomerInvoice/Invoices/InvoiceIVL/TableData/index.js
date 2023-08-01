@@ -41,7 +41,7 @@ function TableData({
 					</td>
 				</tr>
 			</table>
-			<table border="0" cellPadding="0" cellSpacing="0">
+			<table border="0" cellPadding="0" cellSpacing="0" style={{ width: '100%' }}>
 				<tr>
 					<td style={{ width: '45%', verticalAlign: 'top' }}>
 						<p style={{ wordWrap: 'break-word' }}>{address}</p>

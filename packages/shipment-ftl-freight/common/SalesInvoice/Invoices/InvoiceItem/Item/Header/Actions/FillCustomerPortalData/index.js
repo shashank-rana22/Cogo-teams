@@ -30,6 +30,7 @@ const DEFAULT_VALUE = 0;
 function FillCustomerPortalData({
 	setShowModal = () => {},
 	shipmentData = {},
+	handleRefetch = () => {},
 	invoice = {},
 }) {
 	const [customerObj, setCustomerObj] = useState({});
@@ -56,9 +57,12 @@ function FillCustomerPortalData({
 		},
 	});
 
-	const { loading, apiTrigger } = useCreateShipmentFortigoTripDetail();
-
-	// const defaultValues = getFormatPrefillValues({ data, invoice, customerObj });
+	const { loading, apiTrigger } = useCreateShipmentFortigoTripDetail({
+		refetch: () => {
+			handleRefetch();
+			setShowModal(false);
+		},
+	});
 
 	const {
 		formState: { errors },

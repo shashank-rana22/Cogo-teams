@@ -35,6 +35,7 @@ function Actions({
 	salesInvoicesRefetch = () => {},
 	isAuthorized = false,
 	disableAction = false,
+	invoiceData = {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -86,6 +87,7 @@ function Actions({
 			handleRefetch={handleRefetch}
 			invoice={invoice}
 			shipmentData={shipment_data}
+			invoiceData={invoiceData}
 		/>,
 	};
 

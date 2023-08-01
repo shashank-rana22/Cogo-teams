@@ -63,7 +63,7 @@ function InvoiceExide({
 					</td>
 				</tr>
 			</table>
-			<table border="0" cellPadding="0" cellSpacing="0">
+			<table border="0" cellPadding="0" cellSpacing="0" style={{ width: '100%' }}>
 				<tr>
 					<td style={{ width: '45%', padding: '0 8px', verticalAlign: 'top' }}>
 						<p style={{ wordWrap: 'break-word' }}>
@@ -100,7 +100,7 @@ function InvoiceExide({
 					<td style={{ width: '30%' }}>
 						<img
 							alt="COGOPORT"
-							style={{ float: 'right', margin: '20px', height: '100px' }}
+							style={{ margin: '10px', height: '100px' }}
 							src={logoData}
 						/>
 					</td>

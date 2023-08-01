@@ -295,6 +295,14 @@ const GLOBAL_CONSTANTS = {
 		},
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
+		fortigo_logo:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/13af930163006f55ec9f077ece369e4d/fortigo_logo.png',
+		other_stamp:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/0fcedc3fbe3661ff791bf433e6690c09/fortigo_stamp.png',
+		cogo_logo:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/a99aae91de2638328f94abd85414987b/cogoLogo.png',
+		cogo_mumbai_invoice_stamp:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/4a578b474c6d502c271e0e31987b8e7f/mumbai_stamp.png',
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
 		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
 		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',

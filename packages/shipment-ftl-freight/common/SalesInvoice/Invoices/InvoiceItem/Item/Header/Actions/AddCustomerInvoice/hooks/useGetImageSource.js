@@ -1,10 +1,7 @@
-/* eslint-disable max-len */
-import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useState } from 'react';
 
-const LOGO_URL = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/782ace87c99f4b4192741a3df89d4efb/Screenshot%202023-05-10%20at%2010.03.20%20AM.png';
-
-const STAMP_URL = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/b8726742e426c9ef54cbd08dcc30d362/Screenshot%202023-05-10%20at%2010.23.17%20AM.png';
+const INVOICE_STATUSES = ['pending', 'reviewed', 'approved'];
 
 const fetchImageData = async ({ url = '', setterFunc }) => {
 	try {
@@ -17,18 +14,75 @@ const fetchImageData = async ({ url = '', setterFunc }) => {
 			setterFunc(base64data);
 		};
 	} catch (err) {
-		Toast.error('Something went wrong');
+		console.log(err?.data);
 	}
 };
 
-const useGetImageSource = () => {
-	const [logoData, setLogoData] = useState();
-	const [stampData, setStampData] = useState();
+const getFinalUrls = ({
+	invoice = {},
+	importerExporterId = '',
+	invoicesList = [],
+}) => {
+	const { billing_address = {} } = invoice || {};
+
+	if (
+		Object.values(GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping).includes(importerExporterId)
+		|| Object.values(GLOBAL_CONSTANTS.others.fortigo_company_pan_mappings).includes(
+			billing_address?.registration_number,
+		)
+	) {
+		return {
+			finalLogoUrl  : GLOBAL_CONSTANTS.image_url.fortigo_logo,
+			finalStampUrl : GLOBAL_CONSTANTS.image_url.other_stamp,
+		};
+	}
+
+	const filteredInvoices = invoicesList.reduce(
+		(acc, inv) => {
+			if (INVOICE_STATUSES.includes(inv.status)) {
+				acc.req_invoices.push(inv);
+			}
+			if (inv.status === 'approved') {
+				acc.approved_invoices.push(inv);
+			}
+
+			return acc;
+		},
+		{ req_invoices: [], approved_invoices: [] },
+	);
+
+	const { req_invoices = [], approved_invoices = [] } = filteredInvoices;
+
+	if (approved_invoices?.length !== req_invoices?.length) {
+		return {
+			finalLogoUrl  : GLOBAL_CONSTANTS.image_url.cogo_logo,
+			finalStampUrl : GLOBAL_CONSTANTS.image_url.other_stamp,
+		};
+	}
+
+	return {
+		finalLogoUrl  : GLOBAL_CONSTANTS.image_url.cogo_logo,
+		finalStampUrl : GLOBAL_CONSTANTS.image_url.cogo_mumbai_invoice_stamp,
+	};
+};
+
+const useGetImageSource = ({
+	invoice = {},
+	importerExporterId = '',
+	invoicesList = [],
+}) => {
+	const [logoData, setLogoData] = useState('');
+	const [stampData, setStampData] = useState('');
 
 	useEffect(() => {
-		fetchImageData({ url: LOGO_URL, setterFunc: setLogoData });
-		fetchImageData({ url: STAMP_URL, setterFunc: setStampData });
-	}, []);
+		const { finalLogoUrl, finalStampUrl } = getFinalUrls({
+			invoice,
+			importerExporterId,
+			invoicesList,
+		});
+		fetchImageData({ url: finalLogoUrl, setterFunc: setLogoData });
+		fetchImageData({ url: finalStampUrl, setterFunc: setStampData });
+	}, [invoice, importerExporterId, invoicesList]);
 
 	return {
 		logoData,

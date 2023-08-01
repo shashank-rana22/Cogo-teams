@@ -1,3 +1,6 @@
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
+
 import { lineItemsHelper } from '../../utils/lineItemsHelper';
 
 const LINE_ITEMS_KEYS_MAPPING = {
@@ -11,7 +14,7 @@ const LINE_ITEMS_KEYS_MAPPING = {
 	indent_truck_type        : 'indent_truck_type',
 	from_station             : 'from_town',
 	delivery_station         : 'to_town',
-	arrival_date             : 'arrival_date',
+	delivery_date            : 'delivery_date',
 	charge_weight            : 'charge_weight',
 	rate                     : 'rate',
 	freight                  : 'freight',
@@ -22,6 +25,8 @@ const LINE_ITEMS_KEYS_MAPPING = {
 	total_amount             : 'total',
 };
 
+const EXTRA_KEYS = ['indent_truck_type', 'delivery_date'];
+
 export const getLineItems = ({ customData = {} }) => {
 	const lineItems = lineItemsHelper({
 		lineItems: customData?.line_items?.line_items,
@@ -29,5 +34,21 @@ export const getLineItems = ({ customData = {} }) => {
 		customData,
 	});
 
-	return { lineItems, LINE_ITEMS_KEYS_MAPPING };
+	const finalLineItems = lineItems.map((item) => {
+		const finalObj = { ...item };
+		EXTRA_KEYS.forEach((key) => {
+			if (key.includes('truck_type')) {
+				finalObj[key] = customData[key] ? startCase(customData[key]) : '';
+			} else if (key.includes('date') || key.includes('time')) {
+				finalObj[key] = customData[key]
+					? formatDate({ date: customData[key], formatType: 'date' })
+					: '';
+			} else {
+				finalObj[key] = customData[key];
+			}
+		});
+		return finalObj;
+	});
+
+	return { lineItems: finalLineItems, LINE_ITEMS_KEYS_MAPPING };
 };

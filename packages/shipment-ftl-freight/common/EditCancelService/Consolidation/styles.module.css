@@ -1,0 +1,10 @@
+.button_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 30px;
+}
+
+.cancel {
+	margin-right: 10px;
+}

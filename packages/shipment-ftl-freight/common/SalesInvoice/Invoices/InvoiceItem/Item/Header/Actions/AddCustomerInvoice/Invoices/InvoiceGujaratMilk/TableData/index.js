@@ -9,7 +9,6 @@ function TableData({ customData = {}, importerExporterId = '', billing_address =
 		total_cgst_amount,
 		total_sgst_amount,
 		total_igst_amount,
-		total_other_charges_amount,
 		total_discount,
 		total,
 	} = getChargesData({ customData });
@@ -111,9 +110,6 @@ function TableData({ customData = {}, importerExporterId = '', billing_address =
 					<th style={{ border: '2px solid black' }} colSpan="2">
 						IGST
 					</th>
-					<th style={{ border: '2px solid black' }} rowSpan="2">
-						Other Charges
-					</th>
 					<th style={{ border: '2px solid black' }} rowSpan="2" colSpan="4">
 						TOTAL
 					</th>
@@ -186,9 +182,6 @@ function TableData({ customData = {}, importerExporterId = '', billing_address =
 					<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 					<td style={{ border: '2px solid black' }}>
 						<b>{total_igst_amount}</b>
-					</td>
-					<td style={{ border: '2px solid black' }}>
-						<b>{total_other_charges_amount}</b>
 					</td>
 					<td style={{ border: '2px solid black' }} colSpan="4">
 						<b>{total}</b>

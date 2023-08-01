@@ -8,7 +8,7 @@ function Header({ billing_address = '', logoData = '' }) {
 		website = '',
 	} = billing_address || {};
 	return (
-		<table border="0" cellPadding="0" cellSpacing="0">
+		<table border="0" cellPadding="0" cellSpacing="0" style={{ width: '100%' }}>
 			<tr>
 				<td style={{ width: '45%', verticalAlign: 'top' }}>
 					<p style={{ wordWrap: 'break-word' }}>

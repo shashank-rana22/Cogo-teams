@@ -20,6 +20,7 @@ function Invoices({
 	handleRefetch = () => {},
 	handleCloseModal = () => {},
 	handleClose = () => {},
+	invoiceData = {},
 }) {
 	const callbackCustomerInvoice = () => {
 		handleRefetch();
@@ -57,7 +58,11 @@ function Invoices({
 		apiTrigger(payload);
 	};
 
-	const { logoData, stampData } = useGetImageSource();
+	const { logoData, stampData } = useGetImageSource({
+		invoice,
+		importerExporterId : shipmentData?.importer_exporter_id,
+		invoicesList       : invoiceData?.invoicing_parties,
+	});
 
 	const { loading: customDataLoading, data: customData } = useGetShipmentFortigoTripDetail({
 		defaultParams: {

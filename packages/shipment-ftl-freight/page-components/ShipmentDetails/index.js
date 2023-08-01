@@ -29,7 +29,7 @@ import getStakeholderConfig from '../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
-const ACTIVE_STAKEHOLDER = 'superadmin';
+// const ACTIVE_STAKEHOLDER = 'superadmin';
 
 const TAB_MAPPING = {
 	overview        : dynamic(() => import('../../common/Overview'), { ssr: false }),
@@ -66,9 +66,9 @@ function ShipmentDetails() {
 		...get,
 		...getTimeline,
 		...servicesGet,
-		activeStakeholder: ACTIVE_STAKEHOLDER,
+		activeStakeholder,
 		stakeholderConfig,
-	}), [get, servicesGet, getTimeline, stakeholderConfig]);
+	}), [get, servicesGet, getTimeline, stakeholderConfig, activeStakeholder]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);

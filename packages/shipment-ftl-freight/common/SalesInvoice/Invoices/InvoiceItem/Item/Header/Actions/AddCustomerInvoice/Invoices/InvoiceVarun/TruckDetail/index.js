@@ -75,7 +75,7 @@ function TruckDetail({
 				<td style={{ border: '2px solid black' }}>{trip_type}</td>
 				<td style={{ border: '2px solid black' }} colSpan="2">
 					CIN :
-					&nbsp;
+					{' '}
 					{CUSTOMER_TO_CIN[importerExporterId] || ''}
 				</td>
 			</tr>
@@ -150,7 +150,7 @@ function TruckDetail({
 					style={{ padding: '4px', border: '2px solid black' }}
 				>
 					DESCRIPTION OF SERVICE
-					&nbsp;
+					{' '}
 				</td>
 				<td style={{ padding: '4px', border: '2px solid black' }}>
 					{CUSTOMER_TO_SERVICE_DESCRIPTION[importerExporterId] || ''}
@@ -185,7 +185,7 @@ function TruckDetail({
 				</td>
 				<td style={{ padding: '4px', border: '2px solid black' }}>
 					BILL DATE
-					&nbsp;
+					{' '}
 				</td>
 				<td style={{ padding: '4px' }}>
 					{bill_date ? formatDate({ date: bill_date, formatType: 'date' }) : ''}
@@ -206,7 +206,7 @@ function TruckDetail({
 				<td aria-label="table-cell" style={{ padding: '4px', border: '2px solid black' }} />
 			</tr>
 			<tr>
-				<td style={{ padding: '4px' }} colSpan="6">&nbsp;</td>
+				<td style={{ padding: '4px' }} colSpan="6">{' '}</td>
 			</tr>
 		</table>
 	);

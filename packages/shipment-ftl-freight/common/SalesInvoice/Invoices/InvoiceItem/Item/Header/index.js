@@ -35,17 +35,17 @@ function Header({
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
 }) {
-	const [open, setOpen] = useState(false);
-	const [askNullify, setAskNullify] = useState(false);
-	const [showReview, setShowReview] = useState(false);
-	const [showOtpModal, setShowOTPModal] = useState(false);
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
+	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 		&& invoice.status === 'pending';
 
-	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
+	const [open, setOpen] = useState(false);
+	const [askNullify, setAskNullify] = useState(false);
+	const [showReview, setShowReview] = useState(false);
+	const [showOtpModal, setShowOTPModal] = useState(false);
 
 	const invoicePartyDetailsRef = useRef(null);
 
@@ -116,14 +116,14 @@ function Header({
 				{invoice?.source === 'pass_through' ? (
 					<div className={styles.invoice_source}>
 						Source -
-						&nbsp;
+						{' '}
 						{startCase(invoice?.source)}
 					</div>
 				) : null}
 				{invoice?.exchange_rate_state ? (
 					<div className={styles.invoice_source}>
 						Applicable State -
-						&nbsp;
+						{' '}
 						{startCase(invoice?.exchange_rate_state)}
 					</div>
 				) : null}
@@ -171,6 +171,7 @@ function Header({
 					setShowOTPModal={setShowOTPModal}
 					setAskNullify={setAskNullify}
 					salesInvoicesRefetch={salesInvoicesRefetch}
+					invoiceData={invoiceData}
 				/>
 
 				<ClickableDiv

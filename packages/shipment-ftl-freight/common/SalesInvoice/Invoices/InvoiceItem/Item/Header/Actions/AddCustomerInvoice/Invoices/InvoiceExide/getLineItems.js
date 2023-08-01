@@ -18,8 +18,8 @@ const LINE_ITEMS_KEY_MAPPING = {
 
 export const getLineItems = ({ customData = {}, billing_address = {} }) => {
 	const lineItems = lineItemsHelper({
-		lineItems: customData?.line_items?.line_items,
-		LINE_ITEMS_KEY_MAPPING,
+		lineItems               : customData?.line_items?.line_items,
+		LINE_ITEMS_KEYS_MAPPING : LINE_ITEMS_KEY_MAPPING,
 		customData,
 	});
 
@@ -56,8 +56,8 @@ export const getAnnexureData = ({ customData = {} }) => {
 		? [customData?.annexure]
 		: customData?.annexure;
 	const annexureItems = lineItemsHelper({
-		lineItems              : annexure,
-		LINE_ITEMS_KEY_MAPPING : ANNEXURE_KEY_MAPPINGS,
+		lineItems               : annexure,
+		LINE_ITEMS_KEYS_MAPPING : ANNEXURE_KEY_MAPPINGS,
 		customData,
 	});
 
