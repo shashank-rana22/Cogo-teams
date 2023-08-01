@@ -1,10 +1,16 @@
 import React from 'react';
 
+import DetentionDemurrage from '../../D&D';
 import Filters from '../../Filters';
 
 import styles from './styles.module.css';
 
-function NoRatesFound({ details = {}, filters = {}, setFilters = () => {} }) {
+function NoRatesFound({
+	details = {},
+	filters = {},
+	setFilters = () => {},
+	refetch = () => {},
+}) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>
@@ -26,6 +32,8 @@ function NoRatesFound({ details = {}, filters = {}, setFilters = () => {} }) {
 			</div>
 
 			<div className={styles.right_section}>
+				<DetentionDemurrage details={details} refetch={refetch} />
+
 				<Filters
 					data={details}
 					filters={filters}

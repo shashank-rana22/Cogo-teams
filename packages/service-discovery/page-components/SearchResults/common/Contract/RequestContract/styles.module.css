@@ -64,10 +64,14 @@
 
 .label {
 	display: flex;
-	margin-bottom: 6px;
 	font-size: 12px;
 	font-weight: 500;
 	color: #000;
+	display: inline-block;
+}
+
+.element {
+	margin: 6px 0;
 }
 
 .required_mark {
@@ -76,7 +80,6 @@
 }
 
 .error_message {
-	margin-top: 8px;
 	font-size: 12px;
 	color: #e42525;
 }

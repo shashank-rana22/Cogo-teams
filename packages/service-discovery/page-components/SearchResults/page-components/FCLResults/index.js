@@ -80,6 +80,7 @@ function FCLResults({
 				details={detail}
 				filters={filters}
 				setFilters={setFilters}
+				refetch={refetchSearch}
 			/>
 		);
 	}

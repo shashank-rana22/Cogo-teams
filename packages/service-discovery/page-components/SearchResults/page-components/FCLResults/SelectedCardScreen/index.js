@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useGetRateCard from '../../../hooks/useGetRateCard';
 
@@ -44,6 +44,16 @@ function SelectedCardScreen({
 	};
 
 	const { component: ActiveComponent, props } = SUBSEQUENT_SCREENS_MAPPING[screen];
+
+	useEffect(() => {
+		const handleUrlChange = () => setHeaderProps({});
+
+		window.addEventListener('popstate', handleUrlChange);
+
+		return () => {
+			window.removeEventListener('popstate', handleUrlChange);
+		};
+	}, [setHeaderProps]);
 
 	return (
 		<ActiveComponent {...props} />

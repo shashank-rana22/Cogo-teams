@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import DetentionDemurrage from '../../../../common/D&D';
 import Filters from '../../../../common/Filters';
 
 import RefreshRate from './RefreshRate';
@@ -26,7 +27,7 @@ function Header({
 					filterKey="currency"
 				/> */}
 
-				{/* <DetentionDemurrage /> */}
+				<DetentionDemurrage details={details} refetch={refetch} />
 
 				<Filters
 					data={details}

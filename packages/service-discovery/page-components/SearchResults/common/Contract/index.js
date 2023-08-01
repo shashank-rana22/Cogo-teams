@@ -29,7 +29,7 @@ function Contract({
 		request_contract: {
 			component : RequestContract,
 			props     : {
-				rateData: data,
+				rateCardId: data?.id,
 				detail,
 				setShow,
 				setScreen,
@@ -57,7 +57,7 @@ function Contract({
 						className={styles.cross_icn}
 						width={20}
 						height={20}
-						onClick={() => setShow(false)}
+						onClick={onClose}
 					/>
 				) : null}
 

@@ -1,4 +1,4 @@
-import { Checkbox, Popover } from '@cogoport/components';
+import { Checkbox, Popover, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMShare } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -8,6 +8,14 @@ import ShareToUsers from '../../../../common/ShareToUsers';
 import LikeDislike from '../LikeDislike';
 
 import styles from './styles.module.css';
+
+const RATE_SOURCE_MAPPING = {
+	spot_rates            : 'System Rate',
+	spot_negotiation_rate : 'Enquiry Reverted Rate',
+	predicted             : 'System Rate',
+	promotional           : 'Promotional',
+	spot_booking          : 'Spot booking',
+};
 
 const MAX_COMPARABLE_RATE_CARD_INDEX = 3;
 
@@ -38,7 +46,7 @@ function RateCardTop({
 	setInfoBanner = () => {},
 	showGuide = false,
 }) {
-	const { shipping_line = {}, id: card_id } = rateCardData;
+	const { shipping_line = {}, id: card_id, source = '' } = rateCardData;
 	const [showShareModal, setShowShareModal] = useState(false);
 
 	const selectedCardIDs = Object.keys(comparisonRates);
@@ -104,7 +112,13 @@ function RateCardTop({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.logoContainer}>
+			{isCogoAssured ? null : (
+				<div className={cl`${styles.source_tag} ${styles[source]}`}>
+					{RATE_SOURCE_MAPPING[source] || 'System Rates'}
+				</div>
+			)}
+
+			<div className={cl`${styles.logo_container} ${styles[source]}`}>
 				{renderCheckbox()}
 
 				{imageUrl ? (

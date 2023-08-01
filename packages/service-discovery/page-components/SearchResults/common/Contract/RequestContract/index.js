@@ -16,8 +16,10 @@ const DEFAULT_SPAN = 12;
 const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 2;
 
+const MAX_DAYS_DIFFERENCE = 30;
+
 function RequestContract({
-	rateData = {},
+	rateCardId = '',
 	detail = {},
 	setShow = () => {},
 	setScreen = () => {},
@@ -36,7 +38,7 @@ function RequestContract({
 	const { search_type = '' } = detail || {};
 
 	const { createContract, loading } = useCreateContract({
-		rateData,
+		rateCardId,
 		setContractData,
 		search_type,
 	});
@@ -95,7 +97,7 @@ function RequestContract({
 
 						const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENTAGE_FACTOR - FLEX_OFFSET;
 
-						const maxDate = addDays(startDate, 30);
+						const maxDate = addDays(startDate, MAX_DAYS_DIFFERENCE);
 						const minDate = startDate;
 
 						if (name === 'validity_end') {
@@ -104,22 +106,22 @@ function RequestContract({
 
 						return (
 							<div key={`${name}_${label}`} className={styles.form_item} style={{ width: `${flex}%` }}>
-								{label ? (
-									<div className={styles.label}>
-										{label || ''}
+								<div className={styles.label}>
+									{label || ''}
 
-										{newControl?.rules?.required ? (
-											<span className={styles.required_mark}>*</span>
-										) : null}
-									</div>
-								) : null}
+									{newControl?.rules?.required && label ? (
+										<span className={styles.required_mark}>*</span>
+									) : null}
+								</div>
 
-								<Element
-									{...newControl}
-									name={name}
-									label={label}
-									control={control}
-								/>
+								<div className={styles.element}>
+									<Element
+										{...newControl}
+										name={name}
+										label={label}
+										control={control}
+									/>
+								</div>
 
 								{errors[name] && (
 									<div className={styles.error_message}>

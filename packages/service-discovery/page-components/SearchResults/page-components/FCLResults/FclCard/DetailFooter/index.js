@@ -4,7 +4,6 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Detention from '../../../../common/Detention';
-import useUpdateDestinationDemurrageDays from '../../../../hooks/useUpdateDestinationDemurrageDays';
 
 import PossibleSchedules from './PossibleSchedules';
 import PriceBreakup from './PriceBreakUp';
@@ -23,19 +22,16 @@ const ZERO = 0;
 
 function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 	const [activeTab, setActiveTab] = useState('');
-
-	const { onSubmit = () => {} } = useUpdateDestinationDemurrageDays({
-		service_rates  : rateCardData?.service_rates,
-		spot_search_id : detail?.spot_search_id,
-		refetchSearch,
-	});
+	const [showDnD, setShowDnD] = useState(false);
 
 	let addDaysValue = {};
 
 	ADDITIONAL_DAYS_KEYS.forEach((item) => {
+		const { free_limit, additional_days } = rateCardData[item] || {};
+
 		addDaysValue = {
 			...addDaysValue,
-			[item]: (rateCardData[item]?.free_limit || ZERO + rateCardData[item]?.additional_days || ZERO) || ZERO,
+			[item]: (free_limit || ZERO + additional_days || ZERO) || ZERO,
 		};
 	});
 
@@ -59,10 +55,6 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 		}
 		return false;
 	});
-
-	const onAddAdditionaldays = (values) => {
-		onSubmit(values);
-	};
 
 	const templateStyles = isCogoAssured ? 'cogo_assured' : {};
 
@@ -132,21 +124,28 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 					{notToShowDnD ? null : (
 						<Popover
 							placement="bottom"
+							visible={showDnD}
+							onClickOutside={() => setShowDnD(false)}
 							render={(
 								<Detention
-									howMuchToShowInDnD={howMuchToShowInDnD}
 									heading="Update No. of Free Days"
 									buttonTitle="Update"
-									values={addDaysValue}
-									handleSave={onAddAdditionaldays}
+									defaultValues={addDaysValue}
+									refetch={refetchSearch}
+									rateCardData={rateCardData}
+									detail={detail}
+									setShow={setShowDnD}
+									howMuchToShowInDnD={howMuchToShowInDnD}
 								/>
 							)}
 							caret={false}
 						>
-							<IcMPlusInCircle className={styles.plusIcon} />
+							<IcMPlusInCircle
+								className={styles.plusIcon}
+								onClick={() => setShowDnD(true)}
+							/>
 						</Popover>
 					)}
-
 				</div>
 
 				<div className={styles.otherDetails}>

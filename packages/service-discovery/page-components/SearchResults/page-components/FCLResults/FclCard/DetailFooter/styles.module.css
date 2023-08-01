@@ -61,7 +61,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 60%;
+	width: 72%;
 }
 
 .otherDetailsTag {
@@ -69,6 +69,8 @@
 	font-weight: 500;
 	color: #e47200;
 	cursor: pointer;
+	min-width: max-content;
+	margin-right: 12px;
 }
 
 .tabs_style {
@@ -78,7 +80,7 @@
 .cogo_points {
 	display: flex;
 	align-items: center;
-	margin-right: 20px;
+	margin-right: 12px;
 }
 
 .cogo_points_logo {

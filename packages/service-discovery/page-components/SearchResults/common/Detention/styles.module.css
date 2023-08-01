@@ -4,11 +4,11 @@
 
 	:global {
 		.ui_input_number_container {
-			max-width: 160px;
+			width: 140px;
 		}
 
 		.ui_input_number_control {
-			width: 70%;
+			width: 60%;
 		}
 	}
 }
@@ -22,6 +22,11 @@
 	font-size: 16px;
 	font-weight: 600;
 }
+.sub_heading {
+	margin-bottom: 12px;
+	font-size: 12px;
+	font-weight: 600;
+}
 
 .form_item_wrapper {
 	display: flex;
@@ -29,14 +34,14 @@
 }
 
 .form_item {
-	width: 40%;
+	width: 45%;
 	margin-right: 32px;
 }
 
 .label {
 	margin-bottom: 8px;
 	font-size: 14px;
-	opacity: 0.6;
+	min-width: max-content;
 }
 
 .button_container {

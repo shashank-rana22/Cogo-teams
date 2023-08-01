@@ -1,55 +1,73 @@
-import { Button } from '@cogoport/components';
-import { CheckboxController, InputNumberController, useForm } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
-import React from 'react';
+import { Button, Toast } from '@cogoport/components';
+import { CheckboxController, useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
+import useRemoveDetentionDumurrage from '../../hooks/useRemoveDetentionDemurrage';
+import useUpdateDestinationDemurrageDays from '../../hooks/useUpdateDestinationDemurrageDays';
+
+import FormItem from './FormItem';
 import styles from './styles.module.css';
 
-const suffix = <span style={{ paddingRight: 12, fontSize: 12 }}>Days</span>;
-
-const renderFormItem = ({ name, control, howMuchToShowInDnD = {} }) => (
-	<div className={styles.form_subgroup}>
-		<div className={styles.label}>{` Total ${startCase(name)} Days `}</div>
-
-		<div className={styles.form_item_wrapper}>
-			<div className={styles.form_item}>
-				<div className={styles.label}>At Origin</div>
-
-				<InputNumberController
-					name={`origin_${name}`}
-					suffix={suffix}
-					max="21"
-					disabled={!howMuchToShowInDnD[`origin_${name}`]}
-					arrow={false}
-					control={control}
-				/>
-			</div>
-
-			<div className={styles.form_item}>
-				<div className={styles.label}>At Destination</div>
-
-				<InputNumberController
-					name={`destination_${name}`}
-					suffix={suffix}
-					max="21"
-					disabled={!howMuchToShowInDnD[`destination_${name}`]}
-					arrow={false}
-					control={control}
-				/>
-			</div>
-		</div>
-	</div>
-);
-
 function Detention({
-	values = {},
-	howMuchToShowInDnD = {},
+	defaultValues = {},
+	howMuchToShowInDnD = {
+		origin_detention      : true,
+		origin_demurrage      : true,
+		destination_detention : true,
+		destination_demurrage : true,
+	},
 	handleSave = () => {},
-	handleReset = () => {},
+	loading = false,
+	showReset = false,
 	action = 'update',
+	spot_search_id = '',
+	rateCardData = {},
+	refetch = () => {},
+	setShow = () => {},
+	detail = {},
+	alreadyAddedServicesCodes = [],
 	...rest
 }) {
-	const { control, handleSubmit } = useForm({ defaultValues: values });
+	const { service_details = {} } = detail || {};
+
+	const { onSubmit = () => {}, loading: updateLoading = false } = useUpdateDestinationDemurrageDays({
+		services: rateCardData?.service_rates || service_details,
+		refetch,
+		spot_search_id,
+		setShow,
+	});
+
+	const { handleDeleteService, loading: removeLoading = false } = useRemoveDetentionDumurrage({
+		service_details,
+		refetch,
+		setShow,
+		services: alreadyAddedServicesCodes,
+	});
+
+	const { control, handleSubmit, setValue } = useForm({ defaultValues });
+
+	const SUBMIT_BUTTON_FUNCTION_MAPPING = {
+		update : onSubmit,
+		filter : handleSave,
+	};
+
+	const onClickSave = (formValues) => {
+		const fnc = SUBMIT_BUTTON_FUNCTION_MAPPING[action];
+		let isInValid = true;
+		Object.values(formValues).forEach((val) => {
+			if (val && !isEmpty(val)) isInValid = false;
+		});
+		if (isInValid) {
+			Toast.error('Enter atleast one value');
+			return;
+		}
+		fnc(formValues);
+	};
+
+	useEffect(() => {
+		Object.keys(defaultValues).forEach((key) => setValue(key, defaultValues?.[key]));
+	}, [defaultValues, setValue]);
 
 	return (
 		<div className={styles.container}>
@@ -59,9 +77,9 @@ function Detention({
 
 			<div className={styles.form}>
 
-				{renderFormItem({ name: 'detention', control, howMuchToShowInDnD })}
+				<FormItem name="detention" control={control} howMuchToShowInDnD={howMuchToShowInDnD} />
 
-				{renderFormItem({ name: 'demurrage', control, howMuchToShowInDnD })}
+				<FormItem name="demurrage" control={control} howMuchToShowInDnD={howMuchToShowInDnD} />
 
 				{action === 'filter' ? (
 					<CheckboxController
@@ -73,13 +91,14 @@ function Detention({
 			</div>
 
 			<div className={styles.button_container}>
-				{action === 'filter' ? (
+				{showReset ? (
 					<Button
 						type="button"
 						size="md"
 						themeType="secondary"
 						className={styles.button}
-						onClick={handleReset}
+						onClick={handleDeleteService}
+						loading={removeLoading}
 					>
 						Reset
 					</Button>
@@ -89,7 +108,8 @@ function Detention({
 					type="button"
 					size="md"
 					themeType="accent"
-					onClick={handleSubmit(handleSave)}
+					onClick={handleSubmit(onClickSave)}
+					loading={updateLoading || loading}
 				>
 					{rest.buttonTitle || 'Save'}
 				</Button>

@@ -3,6 +3,7 @@
 	align-items: center;
 	justify-content: space-between;
 	padding-left: 8px;
+	position: relative;
 
 	:global {
 		.ui_popover_container {
@@ -19,6 +20,22 @@
 	}
 }
 
+.source_tag {
+	position: absolute;
+	top: -12px;
+	left: 0px;
+	font-size: 12px;
+	color: #333333;
+	border-radius: 8px 0px 4px 0px;
+	width: fit-content;
+	padding: 4px 12px;
+	background: #cfeaed;
+
+	&.spot_negotiation_rate {
+		background: #e6fbe9;
+	}
+}
+
 .image {
 	max-height: 40px;
 }
@@ -27,7 +44,12 @@
 	cursor: pointer;
 }
 
-.logoContainer {
+.logo_container {
 	display: flex;
 	align-items: center;
+	margin-top: 12px;
+
+	&.cogo_assured_rate {
+		margin-top: 0;
+	}
 }

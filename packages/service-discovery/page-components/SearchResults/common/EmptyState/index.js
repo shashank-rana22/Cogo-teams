@@ -19,7 +19,13 @@ const REQUEST_RATE_ALLOWED_SERVICES = [
 	'trailer_freight',
 ];
 
-function EmptyState({ details = {}, filters = {}, setFilters = () => {}, service_key = 'search_type' }) {
+function EmptyState({
+	details = {},
+	filters = {},
+	setFilters = () => {},
+	refetch = () => {},
+	service_key = 'search_type',
+}) {
 	const service_type = details[service_key];
 
 	return (
@@ -28,6 +34,7 @@ function EmptyState({ details = {}, filters = {}, setFilters = () => {}, service
 				details={details}
 				filters={filters}
 				setFilters={setFilters}
+				refetch={refetch}
 			/>
 
 			{REQUEST_RATE_ALLOWED_SERVICES.includes(service_type) ? (

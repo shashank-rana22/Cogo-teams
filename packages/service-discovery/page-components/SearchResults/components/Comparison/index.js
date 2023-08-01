@@ -11,6 +11,9 @@ import ShareToUsers from '../../common/ShareToUsers';
 import ComparisonTable from './ComparisonTable';
 import styles from './styles.module.css';
 
+const DEFAULT_FREE_DAYS_VALUE = 0;
+const ONE_VALUE = 1;
+
 const SCHEDULE_TYPE_MAPPING = {
 	transhipment : 'Trans-shipment',
 	direct       : 'Direct-shipment',
@@ -69,7 +72,7 @@ function HandleBookValue({ item, apiLoading, service_type, setSelectedCard, setS
 
 	const isCogoAssured = item.source === 'cogo_assured_rate';
 
-	const isMultiContainer = primaryServiceRates.length > 1;
+	const isMultiContainer = primaryServiceRates.length > ONE_VALUE;
 
 	const router = useRouter();
 
@@ -115,9 +118,9 @@ const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContrac
 
 		const createValueObject = (value) => ({ ...comparisonKey, value });
 
-		const getFreeDaysValue = (detention, demurrage) => `Detention: ${detention?.free_limit || 0}, Demurrage: ${
-			demurrage?.free_limit || 0
-		}`;
+		const getFreeDaysValue = (detention, demurrage) => `Detention: ${detention?.free_limit
+			|| DEFAULT_FREE_DAYS_VALUE}, Demurrage: ${demurrage?.free_limit
+			|| DEFAULT_FREE_DAYS_VALUE}`;
 
 		const keyHandlers = {
 			bls_count          : () => createValueObject(summary.bls_count),

@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useCreateContract = ({
-	rateData = {},
+	rateCardId = '',
 	setContractData = () => {},
 	setShow = () => {},
 	search_type = '',
@@ -32,7 +32,7 @@ const useCreateContract = ({
 				...values,
 				status                      : 'pending_approval',
 				id                          : query?.spot_search_id,
-				selected_card               : rateData?.id,
+				selected_card               : rateCardId,
 				preferred_shipping_line_ids : preferred_shipping_line_ids || undefined,
 				exclude_shipping_line_ids   : exclude_shipping_line_ids || undefined,
 				max_containers_count:

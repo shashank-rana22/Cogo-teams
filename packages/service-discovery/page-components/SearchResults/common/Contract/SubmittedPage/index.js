@@ -1,13 +1,29 @@
 import { Button, Pill } from '@cogoport/components';
-import { IcCFtick } from '@cogoport/icons-react';
+import { IcCFtick, IcMArrowNext } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import LoadOverview from '../../../../../common/Header/LoadOverview';
+import getLocationInfo from '../../../utils/locations-search';
 
+import LocationItem from './LocationItem';
 import styles from './styles.module.css';
 
 function Submitted({ detail = {}, contractData = {} }) {
+	const { query } = useSelector(({ general }) => ({ query: general.query }));
+
+	const { partner_id = '' } = query;
+
 	const { max_containers_count = 100 } = contractData;
+
+	const { container_type, container_size, commodity } = detail;
+
+	const { origin, destination } = getLocationInfo(detail, 'search_type');
+
+	const redirectToContract = () => {
+		const newHref = `${window.location.origin}/${partner_id}/contract-rates/dashboard/pending_approval`;
+		window.location.href = newHref;
+	};
 
 	return (
 		<div className={styles.container}>
@@ -20,7 +36,12 @@ function Submitted({ detail = {}, contractData = {} }) {
 					<span className={styles.sub_heading}>Our team will get back to you within the next 24 hours.</span>
 				</div>
 
-				<Button size="lg" themeType="accent" className={styles.button}>
+				<Button
+					themeType="accent"
+					className={styles.button}
+					size="lg"
+					onClick={redirectToContract}
+				>
 					View Request
 				</Button>
 			</div>
@@ -30,24 +51,42 @@ function Submitted({ detail = {}, contractData = {} }) {
 
 				<div className={styles.preview}>
 					<div className={styles.left_section}>
-						<span className={styles.request_id}>Request ID: 321249</span>
+						<div className={styles.location_details}>
+							<LocationItem location={origin} />
 
-						{/* <div className={styles.location}>
-							<LocationDetails data={detail} showSmall />
-						</div> */}
+							{destination ? (
+								<div className={styles.location_details}>
+									<IcMArrowNext style={{ width: 14, height: 14 }} className={styles.icon} />
+
+									<LocationItem location={destination} />
+								</div>
+							) : null}
+						</div>
+
 					</div>
 
 					<div className={styles.right_section}>
 						<div className={styles.containers_count}>
 							Count:
-							<strong>{`${max_containers_count} Containers`}</strong>
+							{' '}
+							<strong>{`${max_containers_count} Ctr.`}</strong>
 						</div>
 
-						<LoadOverview
-							data={detail}
-							isAllowedToEdit={false}
-							showSmall
-						/>
+						<div className={styles.load_details}>
+							{container_size ? (
+								<span className={styles.load_item}>
+									{container_size === '20' || container_size === '40'
+										? `${container_size}ft`
+										: container_size}
+									{' '}
+									{startCase(container_type)}
+								</span>
+							) : null}
+
+							<span className={styles.load_item}>
+								{startCase(commodity) || 'All Commodities'}
+							</span>
+						</div>
 
 						<Pill size="sm" color="#FBD1A6">Pending Approval</Pill>
 					</div>

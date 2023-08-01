@@ -35,14 +35,15 @@ const getFclServices = (services) => {
 	return filtered_services;
 };
 
-const specificRatePayload = (service_rates, values) => {
+const specificRatePayload = (services, values) => {
 	const specific_rate_payload = [];
 
-	const fcl_freight_services = getFclServices(service_rates);
+	const fcl_freight_services = getFclServices(services);
 
 	(fcl_freight_services || []).forEach((service) => {
 		(SUBSIDIARY_SERVICES || []).forEach((item) => {
 			const { code = '', value = '' } = item || {};
+
 			if (values?.[value]) {
 				const subsidiary_payload = {
 					code,
@@ -60,8 +61,8 @@ const specificRatePayload = (service_rates, values) => {
 	return specific_rate_payload;
 };
 
-const formatDaysPayload = ({ service_rates = {}, values }) => {
-	const subsidiary_payload = specificRatePayload(service_rates, values);
+const formatDaysPayload = ({ services = {}, values }) => {
+	const subsidiary_payload = specificRatePayload(services, values);
 
 	return subsidiary_payload;
 };

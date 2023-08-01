@@ -17,7 +17,7 @@ const createContracts = () => [
 	},
 	{
 		name        : 'validity_start',
-		label       : 'Validity starts at',
+		label       : 'Validity (Max 30 Days)',
 		type        : 'datepicker',
 		placeholder : 'Start Date ',
 		span        : 5,
@@ -26,7 +26,6 @@ const createContracts = () => [
 	},
 	{
 		name                  : 'validity_end',
-		label                 : 'Validity ends at',
 		type                  : 'datepicker',
 		placeholder           : ' End Date',
 		isPreviousDaysAllowed : true,

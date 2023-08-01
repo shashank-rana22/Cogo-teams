@@ -56,23 +56,70 @@
 	align-items: center;
 }
 
-.request_id {
-	min-width: max-content;
-	font-size: 10px;
-	font-weight: 500;
-}
-
-.location {
-	margin-left: -32px;
-}
-
 .right_section {
 	display: flex;
 	align-items: center;
+
+	:global {
+		.ui_pill_text {
+			font-weight: 600;
+		}
+	}
 }
 
 .containers_count {
 	min-width: max-content;
 	font-size: 10px;
 	font-weight: 500;
+}
+
+.location_details {
+	display: flex;
+	align-items: center;
+}
+
+.location {
+	display: flex;
+	flex-direction: column;
+	margin-left: 14px;
+
+}
+.location_country_text {
+	color: #000;
+	font-size: 10px;
+	font-weight: 600;
+}
+
+.icon {
+	margin: 0 6px 0 12px;
+}
+
+.location_port_text {
+	color: #000;
+	font-size: 12px;
+	font-weight: 400;
+	width: 80px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+.load_details {
+	margin: 0 8px;
+}
+
+.load_item {
+	border-radius: 24px;
+	border: 1px solid #FCDC00;
+	background: #FEF199;
+	padding: 3px 6px;
+	color: #4F4F4F;
+	font-size: 10px;
+	font-weight: 400;
+	margin-left: 6px;
+}
+
+.tooltip_content {
+	word-break: keep-all;
 }

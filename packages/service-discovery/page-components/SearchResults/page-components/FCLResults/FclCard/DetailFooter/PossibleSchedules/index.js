@@ -1,4 +1,5 @@
 import { Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetSchedules from '../../../../../hooks/useGetSchedules';
@@ -32,7 +33,7 @@ function PossibleSchedules({ rateCardData, service_type }) {
 			{schedules.map((item, i) => (
 				<Schedule
 					key={`${item.departure}_${item.number_of_stops}`}
-					isFirst={i === 0}
+					isFirst={i === GLOBAL_CONSTANTS.zeroth_index}
 					item={item}
 				/>
 			))}
