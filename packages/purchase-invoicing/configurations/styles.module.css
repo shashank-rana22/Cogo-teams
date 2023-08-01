@@ -137,3 +137,8 @@
 .marginright {
 	margin-right: 10px;
 }
+
+.utr {
+	max-width: 100px;
+	text-overflow: ellipsis;
+}

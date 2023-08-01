@@ -1,4 +1,5 @@
 import { Tooltip, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInformation } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -18,20 +19,20 @@ export const invoiceconfig = [
 		Header   : 'Services - Line Item',
 		accessor : (row) => {
 			const handleLineItemsMapping = (services) => {
-				const serviceLineitemMapping = {};
+				const SERVICE_LINE_ITEMS_MAPPING = {};
 				(services?.mappings || []).forEach((item) => {
 					(item?.buy_line_items || []).map((lineItem) => {
-						serviceLineitemMapping[lineItem?.service_type] = !isEmpty(
-							serviceLineitemMapping[lineItem?.service_type],
+						SERVICE_LINE_ITEMS_MAPPING[lineItem?.service_type] = !isEmpty(
+							SERVICE_LINE_ITEMS_MAPPING[lineItem?.service_type],
 						)
-							? [...serviceLineitemMapping[lineItem?.service_type], lineItem?.code]
+							? [...SERVICE_LINE_ITEMS_MAPPING[lineItem?.service_type], lineItem?.code]
 							: [lineItem?.code];
 
-						return serviceLineitemMapping;
+						return SERVICE_LINE_ITEMS_MAPPING;
 					});
 				});
 
-				const servicesKeys = Object.keys(serviceLineitemMapping);
+				const servicesKeys = Object.keys(SERVICE_LINE_ITEMS_MAPPING);
 
 				return (
 					<Tooltip
@@ -42,7 +43,7 @@ export const invoiceconfig = [
 								{startCase(item)}
 								{' '}
 								-
-								{serviceLineitemMapping[item]?.join(', ')}
+								{SERVICE_LINE_ITEMS_MAPPING[item]?.join(', ')}
 							</div>
 						))}
 					>
@@ -53,7 +54,7 @@ export const invoiceconfig = [
 										{startCase(item)}
 										{' '}
 										-
-										{serviceLineitemMapping[item]?.join(', ')}
+										{SERVICE_LINE_ITEMS_MAPPING[item]?.join(', ')}
 									</span>
 								))}
 							</span>
@@ -69,8 +70,8 @@ export const invoiceconfig = [
 	{
 		Header   : 'Collection Party',
 		accessor : (row) => {
-			const bankName = row?.bank_details?.[0]?.bank_name || '';
-			const accountNumber = row?.bank_details?.[0]?.bank_account_number || '';
+			const bankName = row?.bank_details?.[GLOBAL_CONSTANTS.zeroth_index]?.bank_name || '';
+			const accountNumber = row?.bank_details?.[GLOBAL_CONSTANTS.zeroth_index]?.bank_account_number || '';
 			return (
 				<div className={styles.value}>
 					<Tooltip
@@ -109,6 +110,23 @@ export const invoiceconfig = [
 			</div>
 		),
 		id: 'invoice_value',
+	},
+	{
+		Header   : 'UTR',
+		accessor : ({ utr_nos = [] }) => (
+			<Tooltip
+				theme="light"
+				interactive
+				content={(utr_nos || []).map((number) => (
+					<ul key={number}>
+						<li>{number}</li>
+					</ul>
+				))}
+			>
+				<div className={styles.utr}>{utr_nos?.[GLOBAL_CONSTANTS.zeroth_index]}</div>
+			</Tooltip>
+		),
+		id: 'utr',
 	},
 	{
 		Header   : 'Status',
