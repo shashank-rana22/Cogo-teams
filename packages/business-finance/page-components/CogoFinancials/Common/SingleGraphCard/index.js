@@ -14,7 +14,8 @@ const KEY_MAPPINGS = {
 };
 
 const DEFAULT_LENGTH = 1;
-const DEFAULT_WIDTH = 80;
+const STD_WIDTH = 80;
+const DEFAULT_WIDTH = 400;
 
 const LABEL_MAPPING = {
 	Financially   : 'actual',
@@ -63,7 +64,8 @@ function SingleGraphCard({
 
 			<div
 				style={{
-					minWidth: `${(serviceLevelData?.length || DEFAULT_LENGTH) * DEFAULT_WIDTH}px`,
+					minWidth: `${(serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH > DEFAULT_WIDTH
+						? (serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH : DEFAULT_WIDTH}px`,
 
 				}}
 				className={styles.graph}

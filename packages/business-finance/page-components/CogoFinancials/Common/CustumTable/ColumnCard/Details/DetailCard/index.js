@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -7,6 +8,7 @@ const fields = ({ heading }) => ['Pre Checkout', `${heading === 'Revenue' ? 'KAM
 	`${heading === 'Revenue' ? 'Sales' : 'Buy'} Quotation`, `Actual ${heading}`, 'Deviation'];
 
 const DEFAULT_LEN = 1;
+const DEFAULT_AMOUNT = 0;
 
 function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [], type = '' }) {
 	const KEY_MAPPINGS_REVENUE = {
@@ -38,8 +40,16 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 				<div key={field} className={styles.singlefield}>
 					<div className={styles.key}>{field}</div>
 					<div className={cl`${styles.value} ${getFields.length - DEFAULT_LEN ? styles.isLast : ''}`}>
-						{item?.[`${mappings[field]}${taxType}`] || item?.[`${mappings[field]}`]
-							|| '_'}
+						{formatAmount({
+							amount: item?.[`${mappings[field]}${taxType}`]
+							|| item?.[`${mappings[field]}`] || DEFAULT_AMOUNT,
+							currency : item?.currency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+							},
+						})}
 					</div>
 				</div>
 			))}
