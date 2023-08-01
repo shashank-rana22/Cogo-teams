@@ -16,7 +16,7 @@ const getParams = ({ timeline, startDate, endDate, id }) => ({
 	end_date: !endDate
 		? new Date(DATE_MAPPING[timeline].endDate) : new Date(endDate),
 	filters: {
-		agent_id: id,
+		agent_id: id || undefined,
 	},
 });
 
