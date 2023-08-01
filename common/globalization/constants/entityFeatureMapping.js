@@ -73,9 +73,9 @@ const ENTITY_FEATURE_MAPPING = {
 	501: {
 		labels: {
 			irn_label                 : 'E-Invoice',
-			tax_label                 : 'TAX Number',
+			tax_label                 : 'VAT Number',
 			sage_label                : null,
-			search_options_label_pan  : 'Business Name/TAX Number',
+			search_options_label_pan  : 'Business Name/VAT Number',
 			search_options_label_sage : null,
 		},
 		feature_supported: [
@@ -86,7 +86,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'dunning',
 		],
 		placeholder: {
-			tax_number: 'Search By Business Name/TAX Number',
+			tax_number: 'Search By Business Name/VAT Number',
 		},
 	},
 	601: {

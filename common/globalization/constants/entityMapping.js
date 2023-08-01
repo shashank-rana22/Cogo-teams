@@ -4,6 +4,9 @@ import {
 	IcCCountryNetherland,
 	IcCCountrySingapore,
 	IcCCountryVietnam,
+	IcCIndonesia,
+	IcCThailand,
+	IcCChina,
 } from '@cogoport/icons-react';
 
 const ENTITY_MAPPING = {
@@ -67,7 +70,7 @@ const ENTITY_MAPPING = {
 		country_code        : 'TH',
 		name                : 'Cogoport Thailand',
 		id                  : '6d92cf58-3392-44c3-8e1b-09192f98f8be',
-		icon                : 'https://prod-cogoport.s3.ap-south-1.amazonaws.com/Thailand_24.png',
+		icon                : IcCThailand,
 		default_entity_code : '601',
 		currency            : 'THB',
 		feature_supported   : ['cogo_books',
@@ -85,7 +88,7 @@ const ENTITY_MAPPING = {
 		country_code        : 'ID',
 		name                : 'Cogoport Indonesia',
 		id                  : 'ef9a7145-b1b6-46ff-8de7-a348de635574',
-		icon                : 'https://prod-cogoport.s3.ap-south-1.amazonaws.com/Indonesia_24.png',
+		icon                : IcCIndonesia,
 		default_entity_code : '701',
 		currency            : 'IDR',
 		feature_supported   : ['cogo_books',
@@ -103,7 +106,7 @@ const ENTITY_MAPPING = {
 		country_code        : 'CN',
 		name                : 'Cogoport China',
 		id                  : 'ff9a7145-b1b6-46ff-8de7-a348de635574',
-		icon                : 'https://prod-cogoport.s3.ap-south-1.amazonaws.com/China_24.png',
+		icon                : IcCChina,
 		default_entity_code : '81',
 		currency            : 'CNY',
 		feature_supported   : ['cogo_books',

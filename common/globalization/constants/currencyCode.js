@@ -5,7 +5,6 @@ import {
 	IcMFpound,
 	IcMFsingaporeDollar,
 	IcMFdong,
-	IcMFyen,
 } from '@cogoport/icons-react';
 
 export default {
@@ -42,8 +41,5 @@ export const CURRENCY_MAPPING = {
 	},
 	VND: {
 		icon: IcMFdong,
-	},
-	CNY: {
-		icon: IcMFyen,
 	},
 };
