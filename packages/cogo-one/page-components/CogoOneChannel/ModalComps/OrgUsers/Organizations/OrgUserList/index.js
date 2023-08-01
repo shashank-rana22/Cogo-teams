@@ -49,7 +49,7 @@ function OrgUsersList({
 				countryCode,
 				mobile_no,
 			},
-			activeTab: 'message',
+			tab: 'message',
 		}));
 
 		setOpenKamContacts(false);

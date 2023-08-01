@@ -14,7 +14,7 @@ function Fcl() {
 	const { data, loading } = useListKamDeskShipments();
 
 	return (
-		<div>
+		<main>
 			<div className={styles.header}>
 				<ShipmentType />
 
@@ -41,7 +41,7 @@ function Fcl() {
 						loading={loading}
 					/>
 				)}
-		</div>
+		</main>
 	);
 }
 
