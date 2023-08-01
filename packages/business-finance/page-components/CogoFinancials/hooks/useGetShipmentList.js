@@ -48,7 +48,7 @@ const useGetShipmentList = ({
 			currency      : currency || DEFAULT_CURRENCY,
 			startDate     : timeRange === 'custom' ? getFormattedDate(customStartDate) : startDate,
 			endDate       : timeRange === 'custom' ? getFormattedDate(customEndDate) : endDate,
-			serviceLevel  : serviceLevel || 'OVERALL',
+			serviceLevel  : serviceLevel || activeBar || 'OVERALL',
 			parentService : segment,
 			service,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
@@ -67,7 +67,7 @@ const useGetShipmentList = ({
 		}
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
-		filter, customDate]);
+		filter, customDate, activeBar]);
 
 	useEffect(() => {
 		serviceLevelApi();

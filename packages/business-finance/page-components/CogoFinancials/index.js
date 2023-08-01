@@ -9,14 +9,12 @@ import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
 import CustomDateFilter from './Common/CustomDateFilter';
-import ColumnCard from './Common/CustumTable/ColumnCard';
-import Header from './Common/CustumTable/Header';
 import StatsCard from './Common/StatsCard';
-import { CUSTOMERS_CONFIG } from './Configuration/customers';
 import useGetProfitabilityStats from './hooks/useGetProfitabilityStats';
 import MultipleFilters from './MultipleFilters';
 import ReceivablesOutstandings from './ReceivablesOutstandings';
 import styles from './styles.module.css';
+import TableComp from './TableComp';
 
 const mappingCards = [
 	{ label: 'Estimated Revenue', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
@@ -49,6 +47,7 @@ function CogoFinancials() {
 	const [activeShipmentCard, setActiveShipmentCard] = useState('');
 	const [showShipmentList, setShowShipmentList] = useState(false);
 	const [filter, setFilter] = useState({});
+	const [activeBar, setActiveBar] = useState('');
 
 	const taxType = isPreTax ? 'PreTax' : 'PostTax';
 
@@ -187,6 +186,8 @@ function CogoFinancials() {
 						taxType={taxType}
 						mainCardData={ongoingData}
 						customDate={customDate}
+						activeBar={activeBar}
+						setActiveBar={setActiveBar}
 					/>
 					<div className={styles.remaining_shipment_cards}>
 
@@ -258,18 +259,17 @@ function CogoFinancials() {
 				</div>
 			)
 				: (
-					<div className={styles.table}>
-						<Header config={CUSTOMERS_CONFIG} />
-						{[{}, {}, {}, {}, {}].map((item) => (
-							<ColumnCard
-								config={CUSTOMERS_CONFIG}
-								key={item?.id}
-								item={item}
-							/>
-						))}
-					</div>
+					<TableComp
+						activeShipmentCard={activeShipmentCard}
+						entity={entity}
+						filter={filter}
+						activeBar={activeBar}
+						timeRange={timeRange}
+						customDate={customDate}
+						statsType={activeShipmentCard === 'financial'
+							? 'FINANCE_CLOSED' : 'OPR_CLOSED'}
+					/>
 				)}
-
 		</div>
 	);
 }
