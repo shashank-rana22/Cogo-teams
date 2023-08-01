@@ -13,9 +13,9 @@ const getStatus = (employeeStatus) => {
 		return '-';
 	}
 
-	const pillData = EMPLOYEE_STATUS[employeeStatus];
+	const pillData = EMPLOYEE_STATUS[employeeStatus] || {};
 
-	return <Pill {...pillData} size="md">{pillData.label}</Pill>;
+	return <Pill {...pillData} size="md">{pillData?.label}</Pill>;
 };
 
 const useGetColumns = ({
