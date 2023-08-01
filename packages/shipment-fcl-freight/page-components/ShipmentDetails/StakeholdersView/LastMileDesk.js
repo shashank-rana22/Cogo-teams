@@ -1,7 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
-import ShipmentBeforeLoad from '@cogoport/ocean-modules/components/ShipmentBeforeLoad';
+import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
@@ -12,7 +12,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
-import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
@@ -28,7 +28,7 @@ const SERVICES_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function LastMileDesk({ get = {}, activeStakeholder = '' }) {
-	const [activeTab, setActiveTab] = useState('overview');
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
@@ -53,17 +53,17 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	return (
-		<ShipmentBeforeLoad
+		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
-			getShipmentStatusCode={getShipmentStatusCode}
-			shipment_data={shipment_data}
+			shipmentStatusCode={getShipmentStatusCode}
+			shipmentData={shipment_data}
 		>
 			<ShipmentDetailContext.Provider value={contextValues}>
 				<div>
 					<div className={styles.top_header}>
 						<ShipmentInfo />
 
-						<RolloveDetails />
+						<RolloverDetails />
 
 						<div className={styles.toggle_chat}>
 							<ShipmentChat />
@@ -121,7 +121,7 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 					) : null}
 				</div>
 			</ShipmentDetailContext.Provider>
-		</ShipmentBeforeLoad>
+		</ShipmentPageContainer>
 	);
 }
 

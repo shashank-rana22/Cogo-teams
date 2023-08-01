@@ -1,6 +1,6 @@
 import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { getByKey, omit } from '@cogoport/utils';
+import { isEmpty, getByKey, omit } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import getConfigs from '../../configurations/get-configs';
@@ -13,12 +13,9 @@ const SLICE_VALUE = 1;
 
 function Details({ serviceData = [] }) {
 	const {
-		service_type,
-		state,
-		free_days_demurrage_destination,
-		free_days_demurrage_origin,
-		free_days_detention_destination,
-		free_days_detention_origin,
+		service_type, state, free_days_demurrage_destination,
+		free_days_demurrage_origin, free_days_detention_destination, free_days_detention_origin,
+		documents,
 	} = serviceData[GLOBAL_CONSTANTS.zeroth_index];
 
 	const SERVICE_INITIAL_KEYS = {};
@@ -46,11 +43,11 @@ function Details({ serviceData = [] }) {
 		free_days_detention_origin,
 	};
 
-	const excludedKeys = [
-		...Object.keys(SERVICE_INITIAL_KEYS[Object.keys(SERVICE_INITIAL_KEYS)
-			?.[GLOBAL_CONSTANTS.zeroth_index]]),
-		...Object.keys(freeDays),
-	];
+	const excludedKeys = [...Object.keys(
+		SERVICE_INITIAL_KEYS[(Object.keys(SERVICE_INITIAL_KEYS)?.[GLOBAL_CONSTANTS.zeroth_index])],
+	),
+	...Object.keys(freeDays),
+	'documents'];
 
 	const remainingServiceData = omit(serviceData?.[GLOBAL_CONSTANTS.zeroth_index], excludedKeys);
 
@@ -109,6 +106,28 @@ function Details({ serviceData = [] }) {
 				{(service_items_key || []).map((element) => (getByKey(freeDays, element.key) ? (
 					<Item key={element.key} state={state} label={element} detail={freeDays} />
 				) : null))}
+			</div>
+
+			<div className={styles.documents}>
+				{(!isEmpty(documents))
+					? (
+						<div>
+							<div className={styles.key}>
+								Container Tracking Report
+							</div>
+							<Button
+								themeType="tertiary"
+								className={styles.value}
+								onClick={() => window.open(
+									documents[GLOBAL_CONSTANTS.zeroth_index]?.document_url,
+									'_blank',
+								)}
+							>
+								View Document
+							</Button>
+						</div>
+					)
+					: null}
 			</div>
 		</div>
 	);

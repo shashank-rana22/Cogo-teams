@@ -1,7 +1,6 @@
-import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMRefresh } from '@cogoport/icons-react';
-import { useRouter } from 'next/router';
+import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { useMemo, useState } from 'react';
 
 import Documents from '../../../common/Documents';
@@ -17,12 +16,9 @@ import config from '../../../stakeholderConfig';
 import styles from './styles.module.css';
 
 const SERVICES_ADDTIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
-const FORBIDDEN_STATUS_CODE = 403;
 const stakeholderConfig = config({ stakeholder: 'IGM_VIEW' });
 
 function IGMDesk({ get = {}, activeStakeholder = '' }) {
-	const router = useRouter();
-
 	const [activeTab, setActiveTab] = useState('overview');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
@@ -41,50 +37,6 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 		activeStakeholder,
 		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
-
-	if (isGettingShipment || getShipmentStatusCode === undefined) {
-		return (
-			<section className={styles.loader}>
-				Loading Shipment Data....
-				<Loader themeType="primary" className={styles.loader_icon} />
-			</section>
-		);
-	}
-
-	if (!shipment_data && ![FORBIDDEN_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
-		return (
-			<section className={styles.shipment_not_found}>
-				<div className={styles.section}>
-					<h2 className={styles.error}>Something Went Wrong!</h2>
-
-					<div className={styles.page}>We are looking into it.</div>
-
-					<Button
-						onClick={() => router.reload()}
-						className={styles.refresh}
-					>
-						<IcMRefresh />
-						{' '}
-						Refresh
-					</Button>
-				</div>
-			</section>
-		);
-	}
-
-	if (getShipmentStatusCode === FORBIDDEN_STATUS_CODE && getShipmentStatusCode !== undefined) {
-		return (
-			<section className={styles.shipment_not_found}>
-				<div className={styles.permission_message}>
-					You don&apos;t have permission to visit this page.
-					<br />
-					Please contact at
-					{' '}
-					<a href="tel:+91 7208083747">+91 7208083747</a>
-				</div>
-			</section>
-		);
-	}
 
 	const TAB_PANELS = [
 		{
@@ -105,8 +57,12 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 	];
 
 	return (
-		<ShipmentDetailContext.Provider value={contextValues}>
-			<main>
+		<ShipmentPageContainer
+			isGettingShipment={isGettingShipment}
+			shipmentStatusCode={getShipmentStatusCode}
+			shipmentData={shipment_data}
+		>
+			<ShipmentDetailContext.Provider value={contextValues}>
 				<header className={styles.top_header}>
 					<ShipmentInfo />
 				</header>
@@ -135,8 +91,8 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 						))}
 					</Tabs>
 				</section>
-			</main>
-		</ShipmentDetailContext.Provider>
+			</ShipmentDetailContext.Provider>
+		</ShipmentPageContainer>
 	);
 }
 

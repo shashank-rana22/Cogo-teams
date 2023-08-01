@@ -1,53 +1,38 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
+import getCollectionPartyParams from '../helpers/getCollectionPartyParams';
 import toastApiError from '../utils/toastApiError';
 
-function useGetCollectionParty({ shipment_id, shipment_type = '' }) {
-	const { partner, user_id } = useSelector(({ profile }) => ({
-		partner : (profile || {}).partner || {},
-		user_id : (profile || {}).user?.id,
-	}));
+function useGetCollectionParty({ shipmentData = {}, servicesData = [], shipment_id = '' }) {
+	const profile_data = useSelector(({ profile }) => (profile));
+
+	const stakeholder_based_params = getCollectionPartyParams({ profile_data, servicesData, shipmentData });
 
 	const [{ loading: collectionPartyLoading, data }, trigger] = useRequest({
 		url    : '/list_shipment_collection_party',
 		method : 'GET',
+		params : {
+			filters: {
+				shipment_id,
+			},
+			page       : 1,
+			page_limit : 100,
+			...stakeholder_based_params,
+
+		},
 	}, { manual: true });
-
-	const geo = getGeoConstants();
-
-	const operationRoles = (partner?.user_role_ids?.some((ele) => [
-		geo.uuid.lastmile_ops_id,
-		geo.uuid.lastmile_ops_manager_id,
-		geo.uuid.service_ops2_role_id,
-		geo.uuid.so_2_manager,
-		geo.uuid.so1_so2_role_id,
-		geo.uuid.costbooking_ops_role_ids,
-		geo.uuid.costbooking_ops_manager_role_ids,
-	].includes(ele)));
-
-	const showPurchaseEntityWise = operationRoles && shipment_type === 'fcl_freight';
 
 	const listCollectionParties = useCallback(() => {
 		(async () => {
 			try {
-				await trigger({
-					params: {
-						filters: {
-							shipment_id,
-							stakeholder_id: showPurchaseEntityWise ? user_id : undefined,
-						},
-						page       : 1,
-						page_limit : 100,
-					},
-				});
+				await trigger();
 			} catch (err) {
 				toastApiError(err);
 			}
 		})();
-	}, [trigger, shipment_id, showPurchaseEntityWise, user_id]);
+	}, [trigger]);
 
 	useEffect(() => {
 		if (shipment_id) listCollectionParties();

@@ -1,7 +1,7 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
-import ShipmentBeforeLoad from '@cogoport/ocean-modules/components/ShipmentBeforeLoad';
+import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import getNavigationFromUrl from '@cogoport/request/helpers/getNavigationFromUrl';
 import { ShipmentChat } from '@cogoport/shipment-chat';
@@ -15,7 +15,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
-import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
@@ -69,17 +69,17 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	return (
-		<ShipmentBeforeLoad
+		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
-			getShipmentStatusCode={getShipmentStatusCode}
-			shipment_data={shipment_data}
+			shipmentStatusCode={getShipmentStatusCode}
+			shipmentData={shipment_data}
 		>
 			<ShipmentDetailContext.Provider value={contextValues}>
 				<div>
 					<div className={styles.top_header}>
 						<ShipmentInfo />
 
-						<RolloveDetails />
+						<RolloverDetails />
 
 						<div className={styles.toggle_chat}>
 							<Toggle
@@ -153,7 +153,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 					) : null}
 				</div>
 			</ShipmentDetailContext.Provider>
-		</ShipmentBeforeLoad>
+		</ShipmentPageContainer>
 	);
 }
 

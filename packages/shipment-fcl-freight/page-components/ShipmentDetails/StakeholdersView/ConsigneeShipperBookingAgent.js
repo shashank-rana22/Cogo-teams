@@ -1,7 +1,7 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useRouter } from '@cogoport/next';
-import ShipmentBeforeLoad from '@cogoport/ocean-modules/components/ShipmentBeforeLoad';
+import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
@@ -12,7 +12,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
-import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
 import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
@@ -30,7 +30,8 @@ const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee_shipper_booking_agent' }) {
 	const router = useRouter();
-	const [activeTab, setActiveTab] = useState('overview');
+
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
@@ -61,10 +62,10 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	return (
-		<ShipmentBeforeLoad
+		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
-			getShipmentStatusCode={getShipmentStatusCode}
-			shipment_data={shipment_data}
+			shipmentStatusCode={getShipmentStatusCode}
+			shipmentData={shipment_data}
 		>
 			<ShipmentDetailContext.Provider value={contextValues}>
 				<div>
@@ -78,7 +79,7 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 								offLabel="New"
 								onChange={handleVersionChange}
 							/>
-							<RolloveDetails />
+							<RolloverDetails />
 							<ShipmentChat />
 						</div>
 					</div>
@@ -133,7 +134,7 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 					) : null}
 				</div>
 			</ShipmentDetailContext.Provider>
-		</ShipmentBeforeLoad>
+		</ShipmentPageContainer>
 	);
 }
 

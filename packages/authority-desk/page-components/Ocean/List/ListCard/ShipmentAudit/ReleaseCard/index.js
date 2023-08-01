@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -83,11 +83,11 @@ function ReleaseCard({ data = {}, bucket = '', refetch = () => {}, setShowModal 
 		<div className={styles.container}>
 			<div className={styles.bttn_wrap}>
 				{['eligible', 'requested'].includes(bucket) ? (
-					<Button onClick={handleClick}>Hold</Button>
+					<Button themeType="accent" onClick={handleClick}>Hold</Button>
 				) : null}
 
 				{bucket !== 'released' ? (
-					<Button onClick={() => setOpen(true)}>
+					<Button themeType="accent" onClick={() => setOpen(true)}>
 						{bucket === 'approved'
 							? 'Approve for Release'
 							: 'Approve'}

@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 
 import CancelEinvoice from './CancellationMapping/CancelEinvoice';
 import CancelIrn from './CancellationMapping/CancelIrn';
@@ -10,7 +10,7 @@ interface CancelModal {
 	itemData?: Item;
 	showCancellationModal?: boolean;
 	setShowCancellationModal?: Function;
-	IRNLabel?: string;
+	irnLabel?: string;
 	refetch?: Function;
 }
 
@@ -18,14 +18,14 @@ function CancellationModal({
 	itemData,
 	showCancellationModal,
 	setShowCancellationModal,
-	IRNLabel,
+	irnLabel,
 	refetch,
 }: CancelModal) {
 	const { entityCode } = itemData || {};
 
-	const CANCEL_IRN = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('cancel_irn');
+	const CANCEL_IRN = ENTITY_FEATURE_MAPPING[entityCode]?.feature_supported?.includes('cancel_irn');
 
-	const CANCEL_EINVOICE =	 GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
+	const CANCEL_EINVOICE =	 ENTITY_FEATURE_MAPPING[entityCode]
 		?.feature_supported?.includes('cancel_e_invoice');
 
 	return (
@@ -46,7 +46,7 @@ function CancellationModal({
 					itemData={itemData}
 					showCancellationModal={showCancellationModal}
 					setShowCancellationModal={setShowCancellationModal}
-					IRNLabel={IRNLabel}
+					irnLabel={irnLabel}
 					refetch={refetch}
 					entityCode={entityCode}
 				/>
