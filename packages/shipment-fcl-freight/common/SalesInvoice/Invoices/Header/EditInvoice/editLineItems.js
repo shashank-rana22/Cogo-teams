@@ -2,7 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
-import { useState, useCallback } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import rawControls from './rawControls';
 
@@ -23,7 +24,7 @@ const useEditLineItems = ({
 	const services = invoice.services || [];
 
 	const [selectedCodes, setSelectedCodes] = useState({});
-	const [allChargeCodes, setAllChargeCodes] = useState({});
+	let allChargeCodes = {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_sell_quotations',
@@ -54,12 +55,9 @@ const useEditLineItems = ({
 		return DEFAULT_VALUES;
 	};
 
-	const handleOptionsChange = useCallback(
-		(vals) => {
-			setAllChargeCodes((prevChargeCodes) => ({ ...prevChargeCodes, ...vals }));
-		},
-		[setAllChargeCodes],
-	);
+	const handleOptionsChange = (vals) => {
+		allChargeCodes = { ...allChargeCodes, ...vals };
+	};
 
 	const controls = services.map((service, index) => ({
 		...rawControls(
@@ -107,7 +105,7 @@ const useEditLineItems = ({
 
 	const defaultValues = generateDefaultValues({ values: controls });
 
-	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm({ defaultValues });
+	const { handleSubmit, control, setValue, setError, watch, formState: { errors = {} } } = useForm({ defaultValues });
 
 	const formValues = watch();
 
@@ -142,7 +140,57 @@ const useEditLineItems = ({
 		};
 	});
 
+	const validateForPriceChanges = (values) => {
+		const NEW_ERRORS = {};
+
+		Object.keys(values).forEach((key) => {
+			const CUSTOM_ERRORS = {};
+
+			const { line_items: lineItems, service_type: serviceType } = (services || []).find(
+				(ele) => ele.service_id === key?.split(':')?.[INITIAL_STATE_OF_FIELD_VALUE],
+			) || {};
+
+			const formValsToChecked = values[key]?.filter(
+				(ele) => ele?.id?.length > INITIAL_STATE_OF_FIELD_VALUE,
+			);
+
+			formValsToChecked.forEach((val, idx) => {
+				const originalValue = lineItems?.[idx];
+				const ERROR_ITEM = {};
+
+				if (
+					val.price_discounted < originalValue.price_discounted
+					&& shipment_data?.shipment_type === 'fcl_freight' && serviceType !== 'fcl_freight_local_service'
+				) {
+					ERROR_ITEM.price_discounted = {
+						message: `Price cannot be less than ${originalValue.price_discounted}`,
+					};
+				}
+
+				if (!isEmpty(ERROR_ITEM)) {
+					CUSTOM_ERRORS[idx] = ERROR_ITEM;
+				}
+			});
+
+			if (!isEmpty(CUSTOM_ERRORS)) {
+				NEW_ERRORS[key] = CUSTOM_ERRORS;
+			}
+		});
+
+		Object.keys(NEW_ERRORS).forEach((key) => {
+			setError(key, NEW_ERRORS[key]);
+		});
+
+		return !(Object.keys(NEW_ERRORS).length > INITIAL_STATE_OF_FIELD_VALUE);
+	};
+
 	const onCreate = async (values) => {
+		const isValid = validateForPriceChanges(values);
+
+		if (!isValid) {
+			return;
+		}
+
 		try {
 			const PAYLOAD = [];
 			Object.keys(values).forEach((key) => {

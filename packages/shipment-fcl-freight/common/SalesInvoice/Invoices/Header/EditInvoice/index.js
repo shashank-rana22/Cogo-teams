@@ -15,7 +15,7 @@ const INITIAL_STATE = 0;
 
 function EditInvoice({
 	show = 'false',
-	onClose,
+	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 	shipment_data = {},
@@ -92,6 +92,8 @@ function EditInvoice({
 						errors={errors}
 						customValues={newFormValues}
 						disabledProps={disabledProps}
+						shipment_id={shipment_data?.shipment_id}
+						shipment_type={shipment_data?.shipment_type}
 					/>
 				</div>
 

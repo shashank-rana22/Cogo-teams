@@ -709,11 +709,6 @@ export default {
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
 			},
-			bookings: {
-				invoicing: {
-					is_invoice_mergeable: false,
-				},
-			},
 		},
 	},
 };

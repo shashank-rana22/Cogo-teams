@@ -13,27 +13,29 @@ const VALUE_LENGTH_GREATER_THAN_FOR_DISABLE_LINE_ITEM = 1;
 const BAS_DISABLED_SERVICE = ['fcl_freight_service', 'lcl_freight_service'];
 
 function EditLineItems({
-	control,
+	control = {},
 	showAddButtons = true, showDeleteButton = true, controls = [],
-	name = '', cargoDetails,
+	name = '', cargoDetails = {},
 	customValues = {},
 	error = {},
 	disabledProps = false,
 	value = [],
 	service_name = '',
+	shipment_type = '',
+	path = '',
 	incoTerm = '',
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
 
 	const disableServiceEdit = disabledProps
-	&& controls?.[GLOBAL_CONSTANTS.zeroth_index]?.label === 'Fcl Freight Service';
+		&& controls?.[GLOBAL_CONSTANTS.zeroth_index]?.label === 'Fcl Freight Service';
 
 	const isBas = (value || []).some((lineItem) => lineItem?.code === 'BAS');
 
 	const disableAddLineItem = (service_name === 'subsidiary_service'
-	&& value.length > VALUE_LENGTH_GREATER_THAN_FOR_DISABLE_LINE_ITEM)
+		&& value.length > VALUE_LENGTH_GREATER_THAN_FOR_DISABLE_LINE_ITEM)
 		|| (isBas && BAS_DISABLED_SERVICE.includes(service_name)
-		&& getTradeTypeByIncoTerm(incoTerm) === 'export') || disableServiceEdit;
+			&& getTradeTypeByIncoTerm(incoTerm) === 'export') || disableServiceEdit;
 
 	const CHILD_DEFAULT_VALUES = {};
 
@@ -62,6 +64,10 @@ function EditLineItems({
 						showDeleteButton={showDeleteButton}
 						error={error?.[index]}
 						disableServiceEdit={disableServiceEdit}
+						formValues={customValues?.formValues}
+						shipment_type={shipment_type}
+						path={path}
+						service_name={service_name}
 					/>
 				))}
 			</div>
