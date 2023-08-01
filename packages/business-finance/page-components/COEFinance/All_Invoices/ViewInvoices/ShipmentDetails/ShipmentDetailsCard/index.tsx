@@ -249,14 +249,14 @@ function ShipmentDetailsCard({
 		setRemarksVal((prev) => ({
 			...prev,
 			collectionPartyRemark:
-            [...checkedValue.collectionPartyRemark, prev.collectionPartyRemark[prev.collectionPartyRemark.length
-				- CHECK_REMARK_LENGTH]].filter((item) => !!item),
+            [...checkedValue.collectionPartyRemark, prev?.collectionPartyRemark[prev.collectionPartyRemark.length
+				- CHECK_REMARK_LENGTH]]?.filter((item) => !!item),
 			billingPartyRemark:
-            [...checkedValue.billingPartyRemark, prev.billingPartyRemark[prev.billingPartyRemark.length
-				- CHECK_REMARK_LENGTH]].filter((item) => !!item),
+            [...checkedValue.billingPartyRemark, prev?.billingPartyRemark[prev.billingPartyRemark.length
+				- CHECK_REMARK_LENGTH]]?.filter((item) => !!item),
 			invoiceDetailsRemark:
-            [...checkedValue.invoiceDetailsRemark, prev.invoiceDetailsRemark[prev.invoiceDetailsRemark.length
-				- CHECK_REMARK_LENGTH]].filter((item) => !!item),
+            [...checkedValue.invoiceDetailsRemark, prev?.invoiceDetailsRemark[prev.invoiceDetailsRemark.length
+				- CHECK_REMARK_LENGTH]]?.filter((item) => !!item),
 		}));
 	}, [checkedValue, setRemarksVal]);
 
