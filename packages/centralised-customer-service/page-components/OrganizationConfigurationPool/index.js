@@ -17,7 +17,7 @@ function OrganizationConfigurationPool() {
 
 	return (
 		<>
-			<Header filters={filters} setFilters={setFilters} />
+			<Header filters={filters} setFilters={setFilters} setPage={setPage} />
 			<OrgConfigPoolList
 				list={list}
 				loading={loading}

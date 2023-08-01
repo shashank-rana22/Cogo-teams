@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import Filter from './Filter';
 import styles from './styles.module.css';
 
-function Header({ filters = {}, setFilters = () => {} }) {
+function Header({ filters = {}, setFilters = () => {}, setPage = () => {} }) {
 	const router = useRouter();
 
 	const handleClick = () => {
@@ -18,7 +18,7 @@ function Header({ filters = {}, setFilters = () => {} }) {
 		<div className={styles.container}>
 
 			<div className={styles.inner_container}>
-				<Filter filters={filters} setFilters={setFilters} />
+				<Filter filters={filters} setFilters={setFilters} setPage={setPage} />
 				<Button
 					size="md"
 					themeType="primary"

@@ -6,7 +6,7 @@ import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 import useFilterPopover from './useFilterPopover';
 
-function Filter({ filters = {}, setFilters = () => {} }) {
+function Filter({ filters = {}, setFilters = () => {}, setPage = () => {} }) {
 	const {
 		showFilter,
 		setShowFilter,
@@ -14,7 +14,7 @@ function Filter({ filters = {}, setFilters = () => {} }) {
 		handleSubmit,
 		onSubmit,
 		onClickReset,
-	} = useFilterPopover({ setFilters });
+	} = useFilterPopover({ setFilters, setPage });
 
 	return (
 		<Popover
