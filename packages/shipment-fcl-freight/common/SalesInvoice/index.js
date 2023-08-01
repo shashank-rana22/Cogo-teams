@@ -1,4 +1,4 @@
-import { Loader } from '@cogoport/components';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
@@ -18,7 +18,7 @@ function SalesInvoice() {
 	if (loading) {
 		return (
 			<div className={styles.loader}>
-				<Loader />
+				<ThreeDotLoader message="Loading Invoices" size={40} fontSize={18} />
 			</div>
 		);
 	}
