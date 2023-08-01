@@ -20,7 +20,7 @@ const SALES_REASON_OPTIONS = [
 		value : 'shipment_parameters_changed',
 	},
 	{
-		label : 'Preferred airline unavailable',
+		label : 'Preferred Airline Unavailable',
 		value : 'preferred_airline_unavailable',
 	},
 	{
