@@ -50,11 +50,12 @@
 .down_icon {
 	width: 18px;
 	height: 18px;
-	margin-right: 12px;
 	fill: #ee3425;
 }
 
 .shift_time {
+	display: flex;
+	align-items: center;
 	margin-left: 8px;
 	font-weight: 500;
 	color: #808788;
@@ -74,4 +75,30 @@
 	cursor: pointer;
 	transition: 0.8s ease;
 	transform: rotate(180deg);
+}
+
+.shake_button {
+	margin-left: 6px;
+	animation: shaking 0.3s infinite;
+
+	&:hover {
+		animation: none;
+	}
+}
+
+@keyframes shaking {
+	0% { transform: rotate(0deg); }
+	20% { transform: rotate(-5deg); }
+	50% { transform: rotate(0deg); }
+	70% { transform: rotate(5deg); }
+	100% { transform: rotate(0deg); }
+}
+
+.time_title {
+	margin-left: 4px;
+
+	span {
+		margin-left: 4px;
+		font-weight: 700;
+	}
 }

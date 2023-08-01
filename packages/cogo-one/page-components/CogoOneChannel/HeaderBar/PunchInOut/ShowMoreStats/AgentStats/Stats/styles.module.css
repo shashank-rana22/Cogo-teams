@@ -1,12 +1,17 @@
 .top_stats_content {
 	display: flex;
 	align-items: center;
+	width: 100%;
 }
 
 .each_stats_div {
-	width: 60%;
+	width: 34%;
 	padding-bottom: 16px;
 	border-bottom: 1px dashed #dde4ea;
+
+	&:last-child {
+		width: 40%;
+	}
 }
 
 .title {
@@ -14,8 +19,7 @@
 }
 
 .count {
-	margin: 0 8px;
-	font-size: 60px;
+	font-size: 40px;
 }
 
 .count_with_icon {
