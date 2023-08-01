@@ -3,9 +3,12 @@ import { useEffect, useCallback } from 'react';
 
 import { DATE_FILTER_MAPPING } from '../configurations/time-filter-mapping';
 
+const CALL_TYPE_FILTER = ['outgoing', 'incoming'];
+
 const getParams = ({ value }) => ({
 	source  : 'omnichannel',
 	filters : {
+		call_type               : CALL_TYPE_FILTER,
 		created_at_less_than    : new Date(),
 		created_at_greater_than : DATE_FILTER_MAPPING[value](new Date()),
 	},
