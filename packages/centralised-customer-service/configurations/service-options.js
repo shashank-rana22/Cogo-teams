@@ -24,6 +24,10 @@ const services = [
 		value : 'ftl_freight',
 	},
 	{
+		label : 'LTL',
+		value : 'ltl_freight',
+	},
+	{
 		label : 'HAULAGE',
 		value : 'haulage_freight',
 	},
