@@ -117,11 +117,13 @@ export const invoiceconfig = [
 			<Tooltip
 				theme="light"
 				interactive
-				content={(utr_nos || []).map((number) => (
-					<ul key={number}>
-						<li>{number}</li>
-					</ul>
-				))}
+				content={(
+					<div>
+						{(utr_nos || []).map((number) => (
+							<div key={number} className={styles.utrval}>{number}</div>
+						))}
+					</div>
+				)}
 			>
 				<div className={styles.utr}>{utr_nos?.[GLOBAL_CONSTANTS.zeroth_index]}</div>
 			</Tooltip>
@@ -150,7 +152,7 @@ export const invoiceconfig = [
 			};
 			return (
 				<div className={styles.value}>
-					{ row?.status === 'coe_rejected' ? (
+					{row?.status === 'coe_rejected' ? (
 						<Tooltip
 							theme="light"
 							interactive
