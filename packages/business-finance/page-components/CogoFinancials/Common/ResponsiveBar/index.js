@@ -20,6 +20,7 @@ function MyResponsiveBar({
 	onClick = () => {},
 	legends = true,
 	margin = { top: 50, right: 130, bottom: 50, left: 60 },
+	axisBottomRotation = 0,
 	axisLeft = {
 		tickSize       : 0,
 		tickPadding    : 0,
@@ -64,7 +65,7 @@ function MyResponsiveBar({
 				axisBottom={{
 					tickSize       : 0,
 					tickPadding    : 10,
-					tickRotation   : 0,
+					tickRotation   : axisBottomRotation,
 					legend         : legendX,
 					legendPosition : 'middle',
 					legendOffset   : 32,

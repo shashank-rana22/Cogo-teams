@@ -27,15 +27,13 @@ function ClosedGraphStats({
 }) {
 	const [activeBar, setActiveBar] = useState('');
 
-	const { serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
+	const { serviceLevelApi, serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
 		entity,
 		timeRange,
 		statsType,
-		serviceLevel: 'OVERALL',
 		filter,
+		activeBar,
 	});
-
-	console.log({ serviceLevelData, serviceLevelLoading });
 
 	return (
 		<div className={styles.container}>
@@ -86,6 +84,9 @@ function ClosedGraphStats({
 									key={cardTitle}
 									setActiveBar={setActiveBar}
 									taxType={taxType}
+									type={type}
+									serviceLevelData={serviceLevelData}
+									serviceLevelLoading={serviceLevelLoading}
 								/>
 							))}
 						</div>
@@ -98,6 +99,11 @@ function ClosedGraphStats({
 					setActiveBar={setActiveBar}
 					isFullWidth
 					setShowShipmentList={setShowShipmentList}
+					taxType={taxType}
+					type={type}
+					serviceLevelData={serviceLevelData}
+					serviceLevelLoading={serviceLevelLoading}
+					serviceLevelApi={serviceLevelApi}
 				/>
 			)}
 		</div>

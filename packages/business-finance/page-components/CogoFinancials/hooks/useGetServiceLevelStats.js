@@ -12,8 +12,8 @@ const DEFAULT_CURRENCY = geo?.country.currency.code;
 const useGetServiceLevelStats = ({
 	entity = '', timeRange = '',
 	statsType = '',
-	serviceLevel = '',
 	filter = {},
+	activeBar = '',
 }) => {
 	const [
 		{ data:serviceLevelData, loading:serviceLevelLoading },
@@ -27,7 +27,7 @@ const useGetServiceLevelStats = ({
 		{ manual: true },
 	);
 
-	const api = useCallback(() => {
+	const serviceLevelApi = useCallback((serviceLevel) => {
 		const { currency, channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
 		const IS_HARD_CODED = true;
@@ -38,7 +38,7 @@ const useGetServiceLevelStats = ({
 			currency      : currency || DEFAULT_CURRENCY,
 			startDate     : IS_HARD_CODED ? '2023-07-28' : startDate,
 			endDate       : IS_HARD_CODED ? '2023-07-28' : endDate,
-			serviceLevel,
+			serviceLevel  : serviceLevel || 'OVERALL',
 			parentService : segment,
 			service,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
@@ -52,17 +52,18 @@ const useGetServiceLevelStats = ({
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [entity, serviceLevel, serviceLevelApiTrigger,
+	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
 		filter]);
 
 	useEffect(() => {
-		api();
-	}, [api, entity, timeRange]);
+		serviceLevelApi();
+	}, [serviceLevelApi, entity, timeRange, activeBar]);
 
 	return {
 		serviceLevelData,
 		serviceLevelLoading,
+		serviceLevelApi,
 	};
 };
 export default useGetServiceLevelStats;
