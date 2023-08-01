@@ -54,8 +54,9 @@ function Actions({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-	|| isAuthorized;
+	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true
+		&& !invoice?.is_igst && !!invoice?.edit_invoice
+	) || isAuthorized;
 
 	const modalComponents = {
 		changeCurrency: <ChangeCurrency
