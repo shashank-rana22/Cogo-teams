@@ -180,6 +180,7 @@ const getDyanmicLineItems = (lineItems) => {
 			childItem?.total_price || '-',
 			childItem?.currency,
 		),
+		serviceObj: childItem?.serviceObj || {},
 	}));
 
 	return flattenedLineItems;
@@ -197,14 +198,20 @@ function Comparison({
 
 	const selectedCards = Object.values(comparisonRates);
 
+	const { service_details = {} } = detail;
+
 	const LOGO_MAPPING = {};
 
 	const allLineItems = selectedCards.map((cardItem) => {
 		const { service_rates = [], shipping_line = {}, source } = cardItem;
 
-		const services = Object.values(service_rates);
+		const services = Object.entries(service_rates);
 
-		const lineItems = services.flatMap((service) => service?.line_items).filter((item) => item !== undefined);
+		const lineItems = services.flatMap(
+			([key, service]) => (service?.line_items || []).map(
+				(child) => ({ ...child, serviceObj: { service: { ...service, ...service_details[key] }, id: key } }),
+			),
+		);
 
 		const staticComparisonKeys = getStaticLineItems(
 			cardItem,
@@ -262,6 +269,7 @@ function Comparison({
 				summary={detail}
 				allLineItems={allLineItems}
 				LOGO_MAPPING={LOGO_MAPPING}
+				mode={mode}
 			/>
 
 			{showShare ? (

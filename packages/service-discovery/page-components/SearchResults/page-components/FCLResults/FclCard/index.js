@@ -1,5 +1,7 @@
+import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import FreightPriceDetail from './BasicFreightDetail';
@@ -7,7 +9,7 @@ import DetailFooter from './DetailFooter';
 import QuotationDetails from './QuotationDetails';
 import RateCardTop from './RateCardTop';
 import Route from './Route';
-import { SailingWeek } from './SailingWeek';
+import SailingWeek from './SailingWeek';
 import styles from './styles.module.css';
 
 function RateCardTopSection({
@@ -56,6 +58,10 @@ function MiddleSection({
 	isMultiContainer = false,
 	setScreen = () => {},
 }) {
+	const firstTwoRates = primaryServiceRates.slice(0, 2);
+
+	const remainingRates = primaryServiceRates.slice(2);
+
 	return (
 		<div className={styles.middle}>
 
@@ -68,8 +74,8 @@ function MiddleSection({
 			<div className={styles.rateDetails}>
 				<div style={{ marginRight: 24 }}>
 					<div className={styles.freightText}>Basic Freight Price</div>
-					<div style={{ display: 'flex' }}>
-						{primaryServiceRates.map((item) => (
+					<div style={{ display: 'flex', alignItems: 'center' }}>
+						{(firstTwoRates || []).map((item) => (
 							<FreightPriceDetail
 								key={item.service_id}
 								container_size={item?.container_size}
@@ -78,14 +84,34 @@ function MiddleSection({
 								price_current={item?.total_price_currency}
 							/>
 						))}
+
+						{!isEmpty(remainingRates) && (
+							<Tooltip
+								theme="light"
+								placement="top"
+								content={(remainingRates || []).map((item) => (
+									<FreightPriceDetail
+										key={item.service_id}
+										container_size={item?.container_size}
+										container_type={item?.container_type}
+										price={item?.total_price_discounted}
+										price_current={item?.total_price_currency}
+									/>
+								))}
+							>
+								<span className={styles.pill}>
+									{`+${remainingRates.length} More`}
+								</span>
+							</Tooltip>
+						)}
 					</div>
 				</div>
 
 				<div>
 					<div className={styles.freightText}>Total Freight Price</div>
 					<FreightPriceDetail
-						container_size={primaryServiceRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_size}
-						container_type={primaryServiceRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_type}
+						container_size={firstTwoRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_size}
+						container_type={firstTwoRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_type}
 						price={rateCardData?.total_price_discounted}
 						price_current={rateCardData?.total_price_currency}
 						totalPrice

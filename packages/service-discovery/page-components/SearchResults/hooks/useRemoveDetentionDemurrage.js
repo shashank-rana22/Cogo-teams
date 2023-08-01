@@ -39,7 +39,7 @@ const useRemoveDetentionDumurrage = ({
 
 			await trigger({ data: payload });
 
-			Toast.success('Services deleted successfully!');
+			Toast.success('Days removed successfully!');
 			setShow(false);
 			refetch();
 			return true;

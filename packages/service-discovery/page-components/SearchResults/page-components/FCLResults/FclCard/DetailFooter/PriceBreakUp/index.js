@@ -117,14 +117,15 @@ function PriceBreakup({ rateCardData, detail }) {
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<span className={styles.service}>{handleServicesNames(service)}</span>
 
-						{(containerDetail || []).map((item) => (
-							<Pill
-								key={item}
-								size="md"
-								style={{ border: '1px solid #24C7D9', background: '#ffffff' }}
-							>
-								{item}
-							</Pill>
+						{service?.service_type === 'cargo_insurance' ? null : (
+							containerDetail || []).map((item) => (
+								<Pill
+									key={item}
+									size="md"
+									style={{ border: '1px solid #24C7D9', background: '#ffffff' }}
+								>
+									{item}
+								</Pill>
 						))}
 
 					</div>

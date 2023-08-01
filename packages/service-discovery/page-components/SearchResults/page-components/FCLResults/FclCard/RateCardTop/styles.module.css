@@ -47,7 +47,7 @@
 .logo_container {
 	display: flex;
 	align-items: center;
-	margin-top: 12px;
+	margin-top: 18px;
 
 	&.cogo_assured_rate {
 		margin-top: 0;

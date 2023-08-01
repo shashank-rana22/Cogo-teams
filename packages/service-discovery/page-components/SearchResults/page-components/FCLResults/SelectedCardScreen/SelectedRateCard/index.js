@@ -1,12 +1,12 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import AdditionalServices from '../../../../../../common/OtherServices/AdditionalServices';
 import CargoInsurance from '../../../../../../common/OtherServices/CargoInsurance';
 import SubsidiaryServices from '../../../../../../common/OtherServices/SubsidiaryServices';
+import DetentionDemurrage from '../../../../common/D&D';
 import Bundles from '../../../../components/Bundles';
 import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 import FclCard from '../../FclCard';
@@ -72,10 +72,7 @@ function SelectedRateCard({
 						</span>
 					</span>
 
-					<span style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-						<IcMPlusInCircle style={{ marginRight: 4 }} />
-						Add more Days
-					</span>
+					<DetentionDemurrage details={detail} refetch={refetch} />
 				</div>
 
 				<FclCard

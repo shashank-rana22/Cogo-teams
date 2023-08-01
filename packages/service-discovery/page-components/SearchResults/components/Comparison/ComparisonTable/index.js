@@ -1,8 +1,16 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
+import getDetails from './getDetails';
 import styles from './styles.module.css';
+
+function getStringBeforeAndAfterUnderscore(inputString) {
+	const parts = inputString.split('_');
+	const beforeUnderscore = parts[0];
+	const afterUnderscore = parts.slice(1).join('_');
+	return { before: beforeUnderscore, after: afterUnderscore };
+}
 
 function compareByArrayLength(a, b) {
 	const aKey = Object.keys(a)[GLOBAL_CONSTANTS.zeroth_index];
@@ -10,7 +18,7 @@ function compareByArrayLength(a, b) {
 	return b[bKey].length - a[aKey].length;
 }
 
-function Table({ comparisonKey, allLineItems, LOGO_MAPPING }) {
+function Table({ comparisonKey, allLineItems, LOGO_MAPPING, mode }) {
 	const renderTableHeader = () => (
 		<div className={styles.table_header}>
 			<div className={styles.header_column} />
@@ -33,19 +41,44 @@ function Table({ comparisonKey, allLineItems, LOGO_MAPPING }) {
 
 	const renderTableBody = () => Object.entries(comparisonKey).map(([key, value], index) => {
 		const rowClass = index % 2 === 0 ? styles.even : styles.odd;
+		const { serviceObj = {} } = value;
+
+		const containerDetail = getDetails({
+			primary_service : mode,
+			item            : serviceObj.service,
+		});
 
 		return (
 			<div key={key} className={`${styles.row} ${rowClass}`}>
-				<div
-					className={`${styles.column} ${key === 'total_landed_price' ? styles.bold : {}}`}
-				>
-					{value}
+
+				<div className={`${styles.column} ${key === 'total_landed_price' ? styles.bold : {}}`}>
+					<div style={{ display: 'flex', flexDirection: 'column' }}>
+						<div>{value.name}</div>
+
+						<div>
+							{!isEmpty(serviceObj)
+								? (containerDetail || []).map((item) => (
+									<span className={styles.item_details} key={item}>
+										{item}
+									</span>
+								))
+								: null}
+						</div>
+					</div>
 				</div>
 
 				{allLineItems.map((item) => {
 					const [lineItem] = Object.values(item);
 
-					const lineItemObj = lineItem.find((childItem) => childItem?.code === key) || {};
+					const lineItemObj =	lineItem.find((childItem) => {
+						if (!isEmpty(childItem.serviceObj)) {
+							return (
+								childItem?.code === getStringBeforeAndAfterUnderscore(key).before
+								&& childItem?.serviceObj?.id === getStringBeforeAndAfterUnderscore(key).after
+							);
+						}
+						return childItem?.code === key;
+					}) || {};
 
 					if (key.includes('THC')) {
 						return (
@@ -85,21 +118,10 @@ function Table({ comparisonKey, allLineItems, LOGO_MAPPING }) {
 	);
 }
 
-function ComparisonTable({ allLineItems = [], summary = {}, LOGO_MAPPING = {} }) {
-	const { container_size = '', container_type = '', commodity = '' } = summary;
-
+function ComparisonTable({ allLineItems = [], summary = {}, LOGO_MAPPING = {}, mode = 'fcl_freight' }) {
 	const newAllLineItems = [...allLineItems];
 
 	newAllLineItems.sort(compareByArrayLength);
-
-	const getCustomNames = (item = {}) => {
-		const MAPPING = {
-			BAS: `${item.name} Price (${['20', '40'].includes(container_size) ? `${container_size}ft.`
-				: container_size} ${startCase(container_type)} ${startCase(commodity)} Container)`,
-		};
-
-		return MAPPING[item.code] || item.name;
-	};
 
 	const COMPARISON_KEY = {};
 
@@ -107,7 +129,11 @@ function ComparisonTable({ allLineItems = [], summary = {}, LOGO_MAPPING = {} })
 		Object.values(obj).forEach((arr) => {
 			arr.forEach((item) => {
 				if (item?.code) {
-					COMPARISON_KEY[item?.code] = getCustomNames(item) || '';
+					if (!isEmpty(item?.serviceObj)) {
+						COMPARISON_KEY[`${item?.code}_${item?.serviceObj?.id}`] = item || '';
+					} else {
+						COMPARISON_KEY[item?.code] = item || '';
+					}
 				}
 			});
 		});
@@ -120,6 +146,7 @@ function ComparisonTable({ allLineItems = [], summary = {}, LOGO_MAPPING = {} })
 				allLineItems={newAllLineItems}
 				summary={summary}
 				LOGO_MAPPING={LOGO_MAPPING}
+				mode={mode}
 			/>
 		</div>
 	);

@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-export function SailingWeek({
+function SailingWeek({
 	cogoAssuredOptions = [],
 	onChange = () => {},
 	selectedCogoAssuredCard = {},
@@ -22,3 +22,5 @@ export function SailingWeek({
 		</div>
 	);
 }
+
+export default SailingWeek;

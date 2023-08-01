@@ -15,6 +15,8 @@ import styles from './styles.module.css';
 
 const INITIAL_REDUCE_VALUE = 0;
 
+const DEFAULT_PRICE_VALUE = 0;
+
 function ListItem({
 	serviceItem = {},
 	detail = {},
@@ -93,7 +95,7 @@ function ListItem({
 		const totalPrice = rateData
 			.map((rateItem) => {
 				currency = rateItem.total_price_currency;
-				return rateItem.total_price_discounted;
+				return rateItem.total_price_discounted || DEFAULT_PRICE_VALUE;
 			})
 			.reduce((accumulator, value) => accumulator + value, INITIAL_REDUCE_VALUE);
 

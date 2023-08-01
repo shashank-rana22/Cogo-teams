@@ -17,7 +17,8 @@ const getDetails = ({ item, primary_service }) => {
 
 	const MAPPING = {
 		fcl_freight: [
-			`${container_size} FT. ${startCase(container_type)}. ${COMMODITY_NAME_MAPPING[commodity]?.name}`,
+			`${container_size} FT. ${container_type ? startCase(container_type) : ''}. 
+			${commodity ? COMMODITY_NAME_MAPPING[commodity]?.name : ''}`,
 		],
 		lcl_freight: [
 			`${packages_count} packages`,

@@ -11,8 +11,6 @@ import RateCardDetails from './RateCardDetails';
 import styles from './styles.module.css';
 import TermsConditions from './TermsConditions';
 
-const detailsMapping = ['terms_and_condition', 'price_break_up', 'dnd_details', 'possible_schedules'];
-
 const ADDITIONAL_DAYS_KEYS = ['destination_demurrage', 'origin_detention', 'origin_demurrage', 'destination_detention'];
 
 const BOLD_FONT_WEIGHT = 700;
@@ -77,15 +75,15 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 				detail,
 			},
 		},
-		dnd_details: {
-			key       : 'dnd_details',
-			label     : 'D&D Fees',
-			component : PriceBreakup,
-			props     : {
-				rateCardData,
-				detail,
-			},
-		},
+		// dnd_details: {
+		// 	key       : 'dnd_details',
+		// 	label     : 'D&D Fees',
+		// 	component : PriceBreakup,
+		// 	props     : {
+		// 		rateCardData,
+		// 		detail,
+		// 	},
+		// },
 		possible_schedules: {
 			key       : 'possible_schedules',
 			label     : 'Possible Schedules',
@@ -150,7 +148,7 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 
 				<div className={styles.otherDetails}>
 					<div className={styles.wrapper}>
-						{detailsMapping.map((item) => (
+						{Object.keys(TABS_MAPPING).map((item) => (
 							<span
 								role="presentation"
 								key={item}
