@@ -558,7 +558,8 @@ export default {
 			},
 			bookings: {
 				invoicing: {
-					is_invoice_mergeable: true,
+					is_invoice_mergeable : true,
+					disable_edit_invoice : false,
 				},
 			},
 		},

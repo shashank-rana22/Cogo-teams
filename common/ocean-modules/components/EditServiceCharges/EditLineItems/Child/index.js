@@ -3,7 +3,7 @@ import { ENTITY_IDS_MAPPING } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
+import { getByKey, isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import Item from '../../../Layout/Item';
@@ -54,6 +54,7 @@ function Child({
 	shipment_type = '',
 	path = '',
 	service_name = '',
+	entity_id = '',
 }) {
 	const isLineItemRemovable =	shipment_type === 'fcl_freight'
 		&& !isEmpty(field?.code)
@@ -66,11 +67,10 @@ function Child({
 		[controls.length],
 	);
 
-	const { navigations } = (ENTITY_IDS_MAPPING || {}).others || {};
-
-	const { bookings } = navigations?.partner || {};
-
-	const { disable_edit_invoice = true } = bookings?.invoicing || {};
+	const disable_edit_invoice = getByKey(
+		ENTITY_IDS_MAPPING[entity_id] || {},
+		'others.navigations.bookings.invoicing.disable_edit_invoice',
+	);
 
 	const profileData = useSelector(({ profile }) => profile);
 

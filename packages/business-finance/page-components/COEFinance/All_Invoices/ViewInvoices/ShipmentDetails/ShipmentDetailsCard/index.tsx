@@ -225,34 +225,38 @@ function ShipmentDetailsCard({
 		setItemCheck(true);
 	};
 	const collectionPartyRejectionList = collectionPartyRejectCheckboxList(
-		organizationName,
-		beneficiaryName,
-		bankName,
-		accountNumber,
-		ifscCode,
-		registrationNumber,
-		taxNumber,
+		{
+			organizationName,
+			beneficiaryName,
+			bankName,
+			accountNumber,
+			ifscCode,
+			registrationNumber,
+			taxNumber,
+		},
 	);
 	const billingPartyRejectionList = billingPartyRejectCheckboxList(
-		entityCode,
-		organizationNameBuyer,
-		address,
-		registrationNumberBuyer,
-		taxNumberBuyer,
+		{
+			entityCode,
+			organizationNameBuyer,
+			address,
+			registrationNumberBuyer,
+			taxNumberBuyer,
+		},
 	);
 
 	useEffect(() => {
 		setRemarksVal((prev) => ({
 			...prev,
 			collectionPartyRemark:
-			[...checkedValue.collectionPartyRemark, prev.collectionPartyRemark[
-				prev.collectionPartyRemark.length - CHECK_REMARK_LENGTH]],
+            [...checkedValue.collectionPartyRemark, prev?.collectionPartyRemark[prev.collectionPartyRemark.length
+				- CHECK_REMARK_LENGTH]]?.filter((item) => !!item),
 			billingPartyRemark:
-			[...checkedValue.billingPartyRemark, prev.billingPartyRemark[
-				prev.billingPartyRemark.length - CHECK_REMARK_LENGTH]],
+            [...checkedValue.billingPartyRemark, prev?.billingPartyRemark[prev.billingPartyRemark.length
+				- CHECK_REMARK_LENGTH]]?.filter((item) => !!item),
 			invoiceDetailsRemark:
-			[...checkedValue.invoiceDetailsRemark, prev.invoiceDetailsRemark[
-				prev.invoiceDetailsRemark.length - CHECK_REMARK_LENGTH]],
+            [...checkedValue.invoiceDetailsRemark, prev?.invoiceDetailsRemark[prev.invoiceDetailsRemark.length
+				- CHECK_REMARK_LENGTH]]?.filter((item) => !!item),
 		}));
 	}, [checkedValue, setRemarksVal]);
 
@@ -396,10 +400,12 @@ function ShipmentDetailsCard({
 													<div className={styles.flex_center}>
 														<CheckboxGroup
 															options={invoiceDetailsRejectCheckboxList(
-																billNumber,
-																billDate,
-																status,
-																placeOfSupply,
+																{
+																	billNumber,
+																	billDate,
+																	status,
+																	placeOfSupply,
+																},
 															)}
 															onChange={(val) => {
 																setCheckedValue(
