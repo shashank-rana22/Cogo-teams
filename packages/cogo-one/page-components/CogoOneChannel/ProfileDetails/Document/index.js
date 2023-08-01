@@ -1,5 +1,5 @@
 import { Popover, Pagination } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
+import { IcMFilter, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -73,8 +73,14 @@ function Documents({
 	return (
 		<>
 			<div className={styles.header}>
-				<div className={styles.title}>Documents</div>
-				<div className={styles.filter_icon}>
+				<div className={styles.title}>
+					Documents
+				</div>
+				<div className={styles.icons_container}>
+					<IcMRefresh
+						className={styles.refresh_icon}
+						onClick={() => getDocumentsList(filters)}
+					/>
 					<Popover
 						placement="left"
 						disabled={loading}
@@ -91,12 +97,12 @@ function Documents({
 						onClickOutside={() => setFilterVisible(false)}
 					>
 						<IcMFilter
-							width={20}
-							height={20}
+							className={styles.filter_icon}
 							onClick={() => setFilterVisible(!filterVisible)}
 						/>
+
 					</Popover>
-					{!isEmpty(filters) && <div className={styles.filters_applied} />}
+					{filters && <div className={styles.filters_applied} />}
 				</div>
 			</div>
 
