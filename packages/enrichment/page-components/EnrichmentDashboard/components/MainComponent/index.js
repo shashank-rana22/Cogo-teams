@@ -22,7 +22,7 @@ function MainComponent(props) {
 
 	} = props;
 
-	const SECONDARY_TAB_OPTIONS = getSecondaryTabOptions();
+	const SECONDARY_TAB_OPTIONS = getSecondaryTabOptions({ stats });
 
 	const options = Object.values(SECONDARY_TAB_OPTIONS);
 
@@ -41,13 +41,14 @@ function MainComponent(props) {
 					themeType="primary"
 				>
 					{(options || []).map((option) => {
-						const { title = '', key = '' } = option;
+						const { title = '', key = '', value = '' } = option;
 
 						return (
 							<TabPanel
 								name={key}
 								key={key}
 								title={startCase(title)}
+								badge={value}
 							>
 								<TableComponent
 									columns={filteredColumns}
