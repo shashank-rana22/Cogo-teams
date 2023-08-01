@@ -45,11 +45,6 @@ const centralised_customer_service = [
 		service_name : 'allocation',
 	},
 	{
-		api          : 'get_allocation_ccs_shipment_capacity_details',
-		access_type  : 'private',
-		service_name : 'allocation',
-	},
-	{
 		api          : 'get_allocation_ccs_configurations',
 		access_type  : 'private',
 		service_name : 'allocation',
