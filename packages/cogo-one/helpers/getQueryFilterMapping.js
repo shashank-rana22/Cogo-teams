@@ -35,6 +35,8 @@ function getQueryFilterMapping({
 					where('last_message_document.created_at', '<=', epochTimestamp),
 					orderBy('last_message_document.created_at', 'desc'),
 				] : [],
+		events: appliedFilters?.events?.includes('events')
+			? [where('last_message_document.message_type', '==', 'event')] : [],
 	};
 }
 
