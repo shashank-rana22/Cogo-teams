@@ -84,5 +84,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
+	{
+		api          : 'get_organization_supplier_verification_details',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_market_feedback_verification_status',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+
 ];
 export default apis;

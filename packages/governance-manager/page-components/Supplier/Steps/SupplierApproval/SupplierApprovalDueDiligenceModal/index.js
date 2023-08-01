@@ -1,8 +1,8 @@
 import { Modal, Button } from '@cogoport/components';
 import { useState } from 'react';
 
+import useUpdateOrganizationDueDiligence from '../hooks/ModalHooks/useUpdateDueDiligenceStatus';
 import useGetOrganizationDueDiligence from '../hooks/useGetOrganizationDuediligence';
-import useUpdateOrganizationDueDiligence from '../hooks/useUpdateDueDiligenceStatus';
 
 import styles from './styles.module.css';
 import {
@@ -18,40 +18,31 @@ const ZERO = 0;
 const ONE = 1;
 const TWO = 1;
 
-function SupplierApprovalDueDiligenceModal({ open, setOpen, setVerify, verify }) {
+function SupplierApprovalDueDiligenceModal({
+	open, setOpen,
+	getOrganizationSupplierVerificationDetails, organization_id, organization_service_id,
+}) {
 	const {
 		data,
 	} = useGetOrganizationDueDiligence();
 
 	const { UpdateOrganizationDueDiligenceStatus } = useUpdateOrganizationDueDiligence({
-		organization_due_diligence_id : '2cea5a8e-7bbe-455e-8c5d-76c0ff77c16a',
-		organization_id               : '4c2dfeba-c715-4614-8a93-e051a270981d',
-		organization_service_id       : '481cb7d0-6712-40cd-b7e3-3fc4b1489fdc',
+		organization_due_diligence_id: data?.id,
+		organization_id,
+		organization_service_id,
 		setOpen,
+		getOrganizationSupplierVerificationDetails,
 	});
 
-	console.log(verify);
 	const onClose = () => {
 		setOpen(ZERO);
 	};
 	const handleVerify = () => {
-		setVerify((prev) => {
-			const newVerify = [...prev];
-			newVerify[open - ONE] = true;
-			return newVerify;
-		});
 		UpdateOrganizationDueDiligenceStatus({ manager_approval_status: 'accepted' });
-		onClose();
+		console.log('Hii');
 	};
 	const handleReject = () => {
-		setVerify((prev) => {
-			const newVerify = [...prev];
-
-			newVerify[open - ONE] = false;
-			return newVerify;
-		});
 		UpdateOrganizationDueDiligenceStatus({ manager_approval_status: 'rejected' });
-		onClose();
 	};
 
 	const [state, setState] = useState(ONE);
@@ -65,13 +56,12 @@ function SupplierApprovalDueDiligenceModal({ open, setOpen, setVerify, verify })
 	};
 
 	return (
-		<div style={{ padding: '20px' }}>
 
-			<Modal size="xl" show={open} onClose={() => { onClose(); }} placement="centre">
-				<Modal.Header title="Supplier Approval - Step 1" className={styles.header} />
-				<div className={styles.header} />
-				<Modal.Body className={styles.body}>
-					{
+		<Modal size="xl" show={open} onClose={() => { onClose(); }} placement="centre">
+			<Modal.Header title="Supplier Approval - Step 1" className={styles.header} />
+			<div className={styles.header} />
+			<Modal.Body className={styles.body}>
+				{
 						state === ONE
 						&& (
 							<>
@@ -144,7 +134,7 @@ function SupplierApprovalDueDiligenceModal({ open, setOpen, setVerify, verify })
 						)
 
 }
-					{
+				{
 						state === TWO
 						&& (
 							<>
@@ -217,15 +207,15 @@ function SupplierApprovalDueDiligenceModal({ open, setOpen, setVerify, verify })
 						)
 
 }
-				</Modal.Body>
-				<Modal.Footer style={{ gap: '15px' }}>
-					{
+			</Modal.Body>
+			<Modal.Footer style={{ gap: '15px' }}>
+				{
 						state === ONE
 						&& (
 							<Button onClick={nextClick}>Next</Button>
 						)
 					}
-					{
+				{
 						state === TWO
 						&& (
 							<>
@@ -235,9 +225,8 @@ function SupplierApprovalDueDiligenceModal({ open, setOpen, setVerify, verify })
 							</>
 						)
 					}
-				</Modal.Footer>
-			</Modal>
-		</div>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 

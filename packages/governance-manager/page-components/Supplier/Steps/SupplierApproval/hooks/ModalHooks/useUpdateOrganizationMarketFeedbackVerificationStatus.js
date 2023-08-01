@@ -1,18 +1,19 @@
 import { useRequest } from '@cogoport/request';
 
-const ZERO = 0;
 function useUpdateOrganizationMarketFeedbackVerificationStatus({
 	organization_id,
 	service_id,
 	service_type,
 	setOpen,
+	getOrganizationSupplierVerificationDetails,
+
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_organization_market_feedback_verification_status',
 	}, { manual: true });
 
-	const UpdateOrganizationMarketFeedbackVerificationStatus = async ({ verification_status }) => {
+	const updateOrganizationMarketFeedbackVerificationStatus = async ({ verification_status }) => {
 		try {
 			await trigger({
 				params: {
@@ -22,7 +23,8 @@ function useUpdateOrganizationMarketFeedbackVerificationStatus({
 					verification_status,
 				},
 			});
-			setOpen(ZERO);
+			getOrganizationSupplierVerificationDetails();
+			setOpen(null);
 		} catch (err) {
 			console.log(err);
 		}
@@ -30,7 +32,7 @@ function useUpdateOrganizationMarketFeedbackVerificationStatus({
 	return {
 		data,
 		loading,
-		UpdateOrganizationMarketFeedbackVerificationStatus,
+		updateOrganizationMarketFeedbackVerificationStatus,
 	};
 }
 

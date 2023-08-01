@@ -1,19 +1,17 @@
 import { useRequest } from '@cogoport/request';
 
-const ZERO = 0;
-
 function useUpdateOrganizationServiceExpertiseManagerStatus({
 	service_id,
 	organization_id,
 	setOpen,
-	manager_approval_status,
+	getOrganizationSupplierVerificationDetails,
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_organization_service_expertise_manager_status',
 	}, { manual: true });
 
-	const UpdateOrganizationServiceExpertiseManagerStatus = async () => {
+	const updateOrganizationServiceExpertiseManagerStatus = async ({ manager_approval_status }) => {
 		try {
 			await trigger({
 				params: {
@@ -22,7 +20,8 @@ function useUpdateOrganizationServiceExpertiseManagerStatus({
 					manager_approval_status,
 				},
 			});
-			setOpen(ZERO);
+			getOrganizationSupplierVerificationDetails();
+			setOpen(null);
 		} catch (err) {
 			console.log(err);
 		}
@@ -30,7 +29,7 @@ function useUpdateOrganizationServiceExpertiseManagerStatus({
 	return {
 		data,
 		loading,
-		UpdateOrganizationServiceExpertiseManagerStatus,
+		updateOrganizationServiceExpertiseManagerStatus,
 	};
 }
 

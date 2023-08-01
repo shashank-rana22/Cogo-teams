@@ -1,12 +1,11 @@
 import { useRequest } from '@cogoport/request';
 
-const ZERO = 0;
-
 function useUpdateOrganizationDueDiligenceStatus({
 	organization_service_id,
 	organization_due_diligence_id,
 	organization_id,
 	setOpen,
+	getOrganizationSupplierVerificationDetails,
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
@@ -15,6 +14,7 @@ function useUpdateOrganizationDueDiligenceStatus({
 
 	const UpdateOrganizationDueDiligenceStatus = async ({ manager_approval_status }) => {
 		try {
+			if (!organization_due_diligence_id || !organization_id || !organization_service_id) { return; }
 			await trigger({
 				params: {
 					organization_due_diligence_id,
@@ -23,7 +23,8 @@ function useUpdateOrganizationDueDiligenceStatus({
 					manager_approval_status,
 				},
 			});
-			setOpen(ZERO);
+			await getOrganizationSupplierVerificationDetails();
+			setOpen(null);
 		} catch (err) {
 			console.log(err);
 		}

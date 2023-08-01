@@ -53,8 +53,14 @@ function Supplier() {
 					getOrganizationService={getOrganizationService}
 				/>,
 				due_dilligance    : <SupplierApproval setStatus={setStatus} />,
-				supplier_approval : <SupplierApproval setStatus={setStatus} />,
-				contract_sla      : <ContractSla
+				supplier_approval : <SupplierApproval
+					setStatus={setStatus}
+					id={id}
+					organization_id={supplierData?.organization_id}
+					service_type={supplierData?.service}
+
+				/>,
+				contract_sla: <ContractSla
 					setStatus={setStatus}
 					service_type={supplierData?.service}
 					organization_id={supplierData?.organization_id}
