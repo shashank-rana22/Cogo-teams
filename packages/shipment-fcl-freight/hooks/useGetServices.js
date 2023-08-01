@@ -8,6 +8,7 @@ const SERVICES_TO_BE_FILTERED_FOR = ['consignee_shipper_booking_agent', 'booking
 
 function useGetServices({ shipment_data = {}, additional_methods = [], activeStakeholder = '' }) {
 	const [servicesData, setServicesData] = useState([]);
+	const [bookingReqData, setBookingReqData] = useState({});
 
 	const [{ loading : servicesLoading }, trigger] = useRequest({
 		url    : 'fcl_freight/get_services',
@@ -33,6 +34,7 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 				} else {
 					setServicesData(filterServicesForKam({ services: allServices, shipment_data }));
 				}
+				setBookingReqData(res?.data?.booking_requirement);
 			} catch (err) {
 				toastApiError(err);
 			}
@@ -47,8 +49,9 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 	return {
 		servicesGet: {
 			servicesLoading,
-			refetchServices : listServices,
-			servicesList    : servicesData,
+			refetchServices     : listServices,
+			servicesList        : servicesData,
+			bookingRequirements : bookingReqData,
 		},
 
 	};

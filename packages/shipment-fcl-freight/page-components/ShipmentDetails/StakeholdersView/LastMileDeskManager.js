@@ -29,7 +29,7 @@ const SERVICES_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function LastMileDeskManager({ get = {}, activeStakeholder = '' }) {
-	const [activeTab, setActiveTab] = useState('overview');
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 

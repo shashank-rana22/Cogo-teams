@@ -26,3 +26,16 @@
 		}
 	}
 }
+
+.view_button {
+	font-size: 12px;
+	text-decoration: underline;
+	cursor: pointer;
+
+	:global {
+		.ui_button_container {
+			height: 8px;
+			padding: 0;
+		}
+	}
+}

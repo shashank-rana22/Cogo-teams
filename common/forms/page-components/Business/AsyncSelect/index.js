@@ -138,6 +138,8 @@ const keyAsyncFieldsParamsMapping = {
 	list_lead_organizations              : asyncFieldsLeadOrganization,
 };
 
+const SINGLE_ENTITY = 1;
+
 function AsyncSelect(props) {
 	const {
 		params,
@@ -148,6 +150,7 @@ function AsyncSelect(props) {
 		getSelectedOption,
 		microService = '',
 		onOptionsChange,
+		isSingleEntity,
 		...rest
 	} = props;
 
@@ -168,6 +171,9 @@ function AsyncSelect(props) {
 		microService : microService || defaultParams.microService,
 	});
 
+	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'
+	&& getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
+
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
 		if (multiple) {
@@ -187,8 +193,10 @@ function AsyncSelect(props) {
 
 	return (
 		<Element
-			{...rest}
+			disabled={disabled}
 			{...getAsyncOptionsProps}
+			{...rest}
+
 		/>
 	);
 }

@@ -61,7 +61,7 @@ function SupplierReallocation({
 		apiTrigger, loading,
 	} = useUpdateShipmentService({
 		refetch        : afterUpdateRefetch,
-		successMessage : 'Service updated successfully!',
+		successMessage : 'Service Updated successfully!',
 	});
 
 	const onUpdate = (values) => {

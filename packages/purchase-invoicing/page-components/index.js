@@ -1,5 +1,3 @@
-import React from 'react';
-
 import useGetCollectionParty from '../hooks/useGetCollectionPartylist';
 
 import CollectionPartyDetails from './CollectionPartyDetails';
@@ -9,7 +7,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 	const {
 		collectionPartyList, collectionPartyLoading,
 		refetch,
-	} = useGetCollectionParty({ shipment_id: shipmentData?.id, shipment_type: shipmentData?.shipment_type });
+	} = useGetCollectionParty({ servicesData, shipmentData, shipment_id: shipmentData?.id });
 
 	return (
 		<div>
