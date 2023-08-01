@@ -23,7 +23,6 @@ function InvoiceCard({ data = {} }) {
 	const [openCard, setOpenCard] = useState(false);
 
 	const { udpateSellQuotationLoading, udpateSellQuotation } = useUpdateSellQuotation();
-	console.log({ updateRateQuantity });
 
 	const handleCancel = () => {
 		setUpdateRateQuantity({});
@@ -51,17 +50,17 @@ function InvoiceCard({ data = {} }) {
 					currency = '', price_discounted = '', quantity = '',
 				} = lineItem;
 				const UPDATED_LINE_ITEMS = SERVICE_WISE_LINE_ITEMS
-					?.filter((item) => item?.split('_')[LINE_ITEM_CODE_INDEX] === code);
+					?.filter((item) => item?.split('_')?.[LINE_ITEM_CODE_INDEX] === code);
 
 				const UPDATED_RATE = 	updateRateQuantity[UPDATED_LINE_ITEMS
-					?.filter((itm) => itm.split('_')[LINE_ITEM_RATE_QUANTITY_INDEX] === 'rate')
+					?.filter((itm) => itm?.split('_')?.[LINE_ITEM_RATE_QUANTITY_INDEX] === 'rate')
 					?.[GLOBAL_CONSTANTS.zeroth_index]];
 				if (+UPDATED_RATE < +price_discounted) {
 					Toast.error('Rate cannot be less than current rate');
 					shouldStopFlow = true;
 				}
 				const UPDATED_QUANTITY = 	updateRateQuantity[UPDATED_LINE_ITEMS
-					?.filter((itm) => itm.split('_')[LINE_ITEM_RATE_QUANTITY_INDEX] === 'quantity')
+					?.filter((itm) => itm?.split('_')?.[LINE_ITEM_RATE_QUANTITY_INDEX] === 'quantity')
 					?.[GLOBAL_CONSTANTS.zeroth_index]];
 				if (+UPDATED_QUANTITY < +quantity) {
 					Toast.error('Quantity cannot be less than current quantity');

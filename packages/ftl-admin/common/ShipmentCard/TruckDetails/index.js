@@ -5,12 +5,12 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function TruckDetails({ data = {} }) {
-	const { trucks_count, truck_type = '', trade_type = '' } = data;
+	const { trucks_count = '', truck_type = '', trade_type = '' } = data;
 	return (
 		<div className={styles.container}>
 			<div className={styles.trucks_count}>
 				<Pill>
-					{trucks_count}
+					{trucks_count || '-'}
 					{' '}
 					Trucks
 				</Pill>
