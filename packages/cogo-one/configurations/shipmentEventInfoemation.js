@@ -1,4 +1,4 @@
-const shipmentEventInfoemation = ({ activityPlatform }) => {
+const shipmentEventInfoemation = ({ activityPlatform = '' }) => {
 	const eventInformation = {
 		checkout: {
 			title       : `Customer Has Not Proceeded With the Checkout Process on ${activityPlatform} platform`,
