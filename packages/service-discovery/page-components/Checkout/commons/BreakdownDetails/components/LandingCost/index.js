@@ -4,6 +4,8 @@ import { convertCurrencyValue } from '../../../../helpers/dynamic-values';
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+
 function LandingCost({
 	convenienceDetails = {},
 	conversions = {},
@@ -20,6 +22,10 @@ function LandingCost({
 
 	const { price = 0, currency = '', quantity = 1 } = convenience_rate;
 
+	const totalBeforeDiscount = rate?.tax_total_price || DEFAULT_VALUE;
+	const totalPrice = rate?.tax_total_price_discounted || DEFAULT_VALUE;
+	const discount = totalPrice - totalBeforeDiscount;
+
 	const finalConvenienceFee = convertCurrencyValue(
 		price * quantity,
 		currency,
@@ -34,7 +40,7 @@ function LandingCost({
 		conversions,
 	);
 
-	const totalCost = total + finalConvenienceFee + finalTaxValue;
+	const totalCost = total + finalConvenienceFee + finalTaxValue + discount;
 
 	return (
 		<div className={styles.container}>
@@ -48,7 +54,7 @@ function LandingCost({
 						options  : {
 							style                 : 'currency',
 							currencyDisplay       : 'code',
-							maximumFractionDigits : 0,
+							maximumFractionDigits : 2,
 						},
 					})}
 				</div>

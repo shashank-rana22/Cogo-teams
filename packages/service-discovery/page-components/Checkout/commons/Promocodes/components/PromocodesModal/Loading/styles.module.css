@@ -1,0 +1,16 @@
+.container {
+	margin-top: 10px;
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.thumbnail {
+	width: 232px;
+	height: 150px;
+	background: rgba(242, 246, 255, 0.5);
+	border-radius: 6px;
+	padding: 10px;
+	position: relative;
+	margin: 10px;
+}

@@ -6,8 +6,11 @@ import { displayMarginValue } from '../../../../../../helpers/dynamic-values';
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+const ROUND_OFF_VALUE = 2;
+
 function CodeMargin({
-	item,
+	item = {},
 	editedDemandMargin = {},
 	style = {},
 	id_prefix = '',
@@ -16,9 +19,9 @@ function CodeMargin({
 
 	const oldDemandMargin =	(item.margins || []).find(
 		(marginObj) => marginObj?.margin_type === 'demand',
-	)?.total_margin_value || 0;
+	)?.total_margin_value || DEFAULT_VALUE;
 
-	const sell_price_without_demand = (item?.total_price_discounted || 0) - oldDemandMargin;
+	const sell_price_without_demand = (item?.total_price_discounted || DEFAULT_VALUE) - oldDemandMargin;
 
 	const new_demand_margin = displayMarginValue(oldDemandMargin, {
 		lineItem     : item,
@@ -33,7 +36,7 @@ function CodeMargin({
 		options  : {
 			style                 : 'currency',
 			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
+			maximumFractionDigits : 2,
 		},
 	});
 
@@ -49,7 +52,7 @@ function CodeMargin({
 			</div>
 
 			<div className={styles.per_container_value}>
-				{`${(total_sell_price / quantity).toFixed(2)} ${
+				{`${(total_sell_price / quantity).toFixed(ROUND_OFF_VALUE)} ${
 					GLOBAL_CONSTANTS.freight_unit_mapping[unit]
 					|| `/${startCase(unit || 'Ctr')}`
 				}`}
