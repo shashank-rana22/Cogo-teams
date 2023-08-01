@@ -6,7 +6,7 @@ const MAPPING = {
 };
 
 const getTradeTypeWiseIncoTerms = (tradeType = 'export') => {
-	const possibleIncoTerms = MAPPING[tradeType];
+	const possibleIncoTerms = MAPPING[tradeType] || MAPPING.export;
 
 	return possibleIncoTerms.map((key) => incoterms.find((incoTerm) => incoTerm.value === key));
 };
