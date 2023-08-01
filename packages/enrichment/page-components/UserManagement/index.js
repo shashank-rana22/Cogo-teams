@@ -51,7 +51,7 @@ function UserManagement() {
 
 			{actionModal.show && (
 				<Modal
-					size={actionModal?.type === 'deactivate' ? 'sm' : 'md'}
+					size="md"
 					placement="top"
 					show={actionModal.show}
 					onClose={() => setActionModal({})}
