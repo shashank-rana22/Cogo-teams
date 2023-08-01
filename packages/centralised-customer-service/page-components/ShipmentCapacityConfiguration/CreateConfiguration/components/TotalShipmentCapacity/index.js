@@ -6,7 +6,6 @@ import useGetCcsShipmentCapacityDetails from '../../../../../hooks/useGetCcsShip
 import useUpdateCapacityConfig from '../../../../../hooks/useUpdateCapacityConfig';
 import CapacityDetailsTable from '../../../CapacityDetailsTable';
 
-import CapacityFormula from './components/CapacityFormula';
 import styles from './styles.module.css';
 
 function TotalShipmentCapacity({ routeLoading = false }) {
@@ -36,8 +35,6 @@ function TotalShipmentCapacity({ routeLoading = false }) {
 			<div className={styles.table_container}>
 				<CapacityDetailsTable data={data} loading={capacityDataLoading} />
 			</div>
-
-			<CapacityFormula data={data} />
 
 			<div className={styles.btn_container}>
 				<Button
