@@ -53,6 +53,11 @@ export default function ShipmentInfo({ item = {} }) {
 				{' '}
 				{stakeholder?.name || 'NA'}
 			</span>
+			<span className={styles.stakeholder}>
+				Email:
+				{' '}
+				{stakeholder?.email || 'NA'}
+			</span>
 		</div>
 	);
 }
