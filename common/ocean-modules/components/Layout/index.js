@@ -77,7 +77,6 @@ function Layout({
 								</section>
 							);
 						}
-
 						if (type === 'edit_service_charges') {
 							return (
 								<section className={styles.width_100} key={field.name}>

@@ -1,6 +1,6 @@
-import { Popover, Tooltip, cl } from '@cogoport/components';
+import { Popover, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMOverflowDot, IcMInfo } from '@cogoport/icons-react';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -35,13 +35,6 @@ function KebabContent({
 		setState(true);
 		setShow(false);
 	};
-
-	const remarkRender = () => (
-		<div className={styles.remarkcontainer}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
@@ -144,17 +137,6 @@ function KebabContent({
 				: (
 					<div className={styles.empty_div} />
 				)}
-
-			{!isEmpty(invoice.remarks) ? (
-				<Tooltip
-					placement="bottom"
-					content={remarkRender()}
-				>
-					<div className={styles.icon_more_wrapper}>
-						<IcMInfo fill="#DDEBC0" />
-					</div>
-				</Tooltip>
-			) : null}
 		</div>
 	);
 }
