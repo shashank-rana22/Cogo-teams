@@ -24,14 +24,14 @@ function EditServiceCharges(props) {
 
 	const chargeCodes = (data?.list || []).map((item) => item.code);
 
-	const miscCharges = value
+	const miscCharges = useMemo(() => value
 		.filter((charge) => !chargeCodes.includes(charge.code))
 		.map((charge) => ({
 			...charge,
 			value : charge.code,
 			label : `${charge.code} ${charge.name || ''}`,
 			name  : charge.name || '',
-		}));
+		})), [chargeCodes, value]);
 
 	const options = (data?.list || [])
 		.filter((item) => item?.code?.includes(q) || item?.name?.includes(q) || (item?.code)?.includes(upperCase(q)))

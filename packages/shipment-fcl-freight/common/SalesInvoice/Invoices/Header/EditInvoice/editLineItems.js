@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 import rawControls from './rawControls';
 
@@ -23,7 +23,7 @@ const useEditLineItems = ({
 	const services = invoice.services || [];
 
 	const [selectedCodes, setSelectedCodes] = useState({});
-	const [allChargeCodes, setAllChargeCodes] = useState({});
+	let allChargeCodes = {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_sell_quotations',
@@ -54,12 +54,9 @@ const useEditLineItems = ({
 		return DEFAULT_VALUES;
 	};
 
-	const handleOptionsChange = useCallback(
-		(vals) => {
-			setAllChargeCodes((prevChargeCodes) => ({ ...prevChargeCodes, ...vals }));
-		},
-		[setAllChargeCodes],
-	);
+	const handleOptionsChange = (vals) => {
+		allChargeCodes = { ...allChargeCodes, ...vals };
+	};
 
 	const controls = services.map((service, index) => ({
 		...rawControls(

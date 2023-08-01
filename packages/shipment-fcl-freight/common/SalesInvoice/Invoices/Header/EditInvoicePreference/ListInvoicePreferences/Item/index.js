@@ -52,7 +52,13 @@ function Item({
 			? service?.trade_type
 			: null;
 
-		const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
+		let tradeType = '';
+		if (trade_type === 'export') {
+			tradeType = 'Origin';
+		} else if (trade_type === 'import') {
+			tradeType = 'Destination';
+		}
+
 		const isBas = (service?.line_items || []).some(
 			(lineItem) => lineItem?.code === 'BAS',
 		);
