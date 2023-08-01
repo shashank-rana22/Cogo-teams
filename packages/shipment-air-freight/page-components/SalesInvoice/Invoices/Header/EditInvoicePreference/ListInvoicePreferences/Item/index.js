@@ -48,9 +48,7 @@ function Item({
 	) : null;
 
 	const renderServicesTaken = (services || []).map((service) => {
-		const trade_type = MAIN_SERVICES !== service?.service_type
-			? service?.trade_type
-			: null;
+		const trade_type = MAIN_SERVICES !== service?.service_type && service?.trade_type;
 
 		let tradeType = '';
 		if (trade_type === 'export') {

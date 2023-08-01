@@ -1,4 +1,4 @@
-import { Popover, Tooltip } from '@cogoport/components';
+import { Popover, Tooltip, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMOverflowDot,
@@ -9,6 +9,13 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
+
+const RemarkRender = ({ remarks = '' }) => {
+	<div className={styles.remark_container}>
+		<div className={styles.title}>Invoice Remarks</div>
+		<div className={styles.value}>{remarks}</div>
+	</div>;
+};
 
 function Actions({
 	invoice = {},
@@ -41,17 +48,10 @@ function Actions({
 		setShow(false);
 	};
 
-	const remarkRender = (
-		<div className={styles.remark_container}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
-
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-		|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
+		|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id;
 
 	const content = (
 		<div className={styles.dialog_box}>
@@ -130,30 +130,28 @@ function Actions({
 					theme="light"
 					onClickOutside={() => setShow(false)}
 				>
-					<div
-						role="button"
-						tabIndex={0}
+					<ButtonIcon
 						className={styles.icon_more_wrapper}
-						onClick={() => setShow(!show)}
+						onClick={() => setShow((prev) => !prev)}
 					>
 						<IcMOverflowDot />
-					</div>
+					</ButtonIcon>
 				</Popover>
 			) : (
 				<div className={styles.empty_div} />
 			)}
 
-			{!isEmpty(invoice.remarks) ? (
+			{!isEmpty(invoice.remarks) && (
 				<Tooltip
 					placement="bottom"
 					theme="light-border"
-					content={remarkRender}
+					content={<RemarkRender remarks={invoice.remarks} />}
 				>
 					<div className={styles.icon_more_wrapper}>
-						<IcMInfo fill="yellow" />
+						<IcMInfo fill="--color-accent-orange-3" />
 					</div>
 				</Tooltip>
-			) : null}
+			)}
 		</div>
 	);
 }

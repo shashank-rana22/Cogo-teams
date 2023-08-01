@@ -86,7 +86,7 @@ function RequestCN({
 				</Modal.Footer>
 			</Modal>
 
-			{isRequestCN ? (
+			{isRequestCN && (
 				<PartialCN
 					invoice={invoice}
 					show={isRequestCN}
@@ -94,7 +94,7 @@ function RequestCN({
 					refetchCN={refetchCN}
 					invoiceData={invoiceData}
 				/>
-			) : null}
+			)}
 		</>
 	);
 }

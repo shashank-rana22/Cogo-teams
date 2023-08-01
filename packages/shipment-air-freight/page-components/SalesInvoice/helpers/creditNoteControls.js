@@ -25,7 +25,6 @@ const commonControls = (handleChange, charge) => [
 		name           : 'currency',
 		label          : 'Currency',
 		type           : 'select',
-		showOptional   : false,
 		className      : 'size-sm',
 		optionsListKey : 'exchange-rate-currencies',
 		placeholder    : 'Select Currency',

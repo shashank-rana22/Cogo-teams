@@ -19,14 +19,14 @@ const UNIQ_IGST_COUNT = 2;
 
 const PARTY_SERVICES_LENGTH_GREATER_THAN = 1;
 
-const geo = getGeoConstants();
-
 const useEditInvoicePref = ({
 	shipment_data = {},
 	servicesList,
 	invoicing_parties = [],
 	refetch = () => {},
 }) => {
+	const geo = getGeoConstants();
+
 	const { inco_term = '', importer_exporter_id = '' } = shipment_data;
 	const updateExportInvoices = getTradeTypeByIncoTerm(inco_term) === 'export';
 	const ALL_SERVICE_LINE_ITEMS = [];

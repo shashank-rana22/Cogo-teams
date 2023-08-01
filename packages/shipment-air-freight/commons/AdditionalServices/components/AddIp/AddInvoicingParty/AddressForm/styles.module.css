@@ -83,13 +83,7 @@
 	min-height: 220px;
 }
 
-.is_sez {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-
 .errors {
 	font-size: var(--font-size-md);
-	color: red;
+	color: var(--color-primary-error-red-2);
 }

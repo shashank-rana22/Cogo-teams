@@ -51,11 +51,6 @@
 	flex-direction: column;
 	justify-content: center;
 	margin-right: 10px;
-
-	.reviewed {
-		color: #393f70;
-		background-color: #e6fbe9;
-	}
 }
 
 .line {

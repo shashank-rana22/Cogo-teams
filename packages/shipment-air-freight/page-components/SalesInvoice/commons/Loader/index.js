@@ -2,13 +2,18 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+const PLACEHOLDERS_COUNT = 5;
+
 function Loader() {
 	return (
 		<div className={styles.container}>
-			<Placeholder className={styles.custom_styles} />
-			<Placeholder className={styles.custom_styles} />
-			<Placeholder className={styles.custom_styles} />
-			<Placeholder className={styles.custom_styles} />
+			{[...Array(PLACEHOLDERS_COUNT).keys()]
+				.map((key) => (
+					<Placeholder
+						className={styles.custom_styles}
+						key={key}
+					/>
+				))}
 		</div>
 	);
 }

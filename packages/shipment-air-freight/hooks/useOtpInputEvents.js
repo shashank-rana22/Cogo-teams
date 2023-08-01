@@ -71,12 +71,12 @@ const useOtpInputEvents = ({
 			setOtp((previousState) => {
 				const NEW_STATE_VALUES = {};
 
-				for (let i = 0; i < otpLength; i += INCREMENT_IN_OPT_LOOP) {
-					if (i >= currentFocusedOtpInputElementIndex) {
-						NEW_STATE_VALUES[`otp-${i
-							+ INCREMENT_IN_OPT_LOOP}`] = content[i - currentFocusedOtpInputElementIndex] || '';
+				[...Array(otpLength).keys()].forEach((optIndex) => {
+					if (optIndex >= currentFocusedOtpInputElementIndex) {
+						NEW_STATE_VALUES[`otp-${optIndex
+							+ INCREMENT_IN_OPT_LOOP}`] = content[optIndex - currentFocusedOtpInputElementIndex] || '';
 					}
-				}
+				});
 
 				return {
 					...previousState,

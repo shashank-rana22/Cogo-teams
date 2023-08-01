@@ -83,16 +83,15 @@ function Invoices({
 				))}
 			</section>
 
-			{list?.length
-				? (
-					<CreditNote
-						cnRefetch={cnRefetch}
-						list={list}
-						loading={cNLoading}
-						invoiceData={invoiceData}
-						invoicesList={invoicesList}
-					/>
-				) : null}
+			{!isEmpty(list) && (
+				<CreditNote
+					cnRefetch={cnRefetch}
+					list={list}
+					loading={cNLoading}
+					invoiceData={invoiceData}
+					invoicesList={invoicesList}
+				/>
+			)}
 		</main>
 	);
 }

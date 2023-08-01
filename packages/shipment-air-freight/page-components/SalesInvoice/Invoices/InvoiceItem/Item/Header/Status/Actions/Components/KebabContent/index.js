@@ -7,6 +7,15 @@ import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
+function Remarks({ remarks = '' }) {
+	return (
+		<div className={styles.remarkcontainer}>
+			<div className={styles.title}>Invoice Remarks</div>
+			<div className={styles.value}>{remarks}</div>
+		</div>
+	);
+}
+
 function Content({
 	commonActions = false,
 	editInvoicesVisibility = false,
@@ -118,13 +127,6 @@ function KebabContent({
 		setShow(false);
 	};
 
-	const remarkRender = () => (
-		<div className={styles.remarkcontainer}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
-
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	return (
@@ -165,7 +167,7 @@ function KebabContent({
 			{!isEmpty(invoice.remarks) && (
 				<Tooltip
 					placement="bottom"
-					content={remarkRender()}
+					content={<Remarks remarks={invoice.remarks} />}
 				>
 					<div className={styles.icon_more_wrapper}>
 						<IcMInfo fill="#DDEBC0" />

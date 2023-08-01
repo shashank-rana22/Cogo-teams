@@ -2,7 +2,6 @@
 	margin: 0;
 	font-size: var(--font-size-lg);
 	font-weight: 500;
-	color: #333;
 }
 
 .icon_wrapper {
@@ -15,17 +14,12 @@
 .address_text {
 	margin: 0;
 	font-size: var(--font-size-md);
-	font-weight: 400;
-	line-height: 16px;
-	color: #a8acce;
 }
 
 .gst_number {
 	margin: 0;
 	font-size: var(--font-size-sm);
-	font-weight: 400;
-	line-height: 16px;
-	color: #393f70;
+	color: var(--color-accent-orange-1);
 }
 
 .label_container {
@@ -41,7 +35,6 @@
 
 .add_address {
 	font-size: var(--font-size-md);
-	color: #034afd;
 	text-decoration: underline;
 	cursor: pointer;
 }

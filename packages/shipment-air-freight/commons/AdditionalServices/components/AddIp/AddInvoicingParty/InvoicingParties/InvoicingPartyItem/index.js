@@ -91,7 +91,7 @@ function InvoicingPartyItem({
 								<div>
 									<IcMInfo
 										className="image"
-										fill="red"
+										fill="var(--color-primary-error-red-2)"
 										height={16}
 										width={16}
 									/>

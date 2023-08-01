@@ -8,7 +8,7 @@
 	text-align: left;
 	word-break: break-word;
 	word-wrap: break-word;
-	background-color: red;
+	background-color: var(--color-primary-error-red-2);
 }
 
 .row {

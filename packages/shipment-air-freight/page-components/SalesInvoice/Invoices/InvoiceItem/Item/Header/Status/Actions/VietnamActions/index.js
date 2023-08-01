@@ -25,6 +25,8 @@ const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: fal
 
 const DEFAULT_COUNT = 0;
 const INVOICE_SERIAL_ID_LESS_THAN = 8;
+const INVOICE_STATES_FOR_REVIEW = ['reviewed', 'approved', 'revoked'];
+const INVOICE_STATE_FOR_STATUS = ['pending', 'approved'];
 
 function Actions({
 	invoice = {},
@@ -102,12 +104,12 @@ function Actions({
 			<div className={styles.main_container}>
 				<div className={styles.actions_wrap}>
 					<div className={styles.statuses}>
-						{['pending', 'approved'].includes(invoice.status) ? (
+						{INVOICE_STATE_FOR_STATUS.includes(invoice.status) && (
 							<div className={styles.info_container}>
 								{startCase(invoice.status)}
 							</div>
-						) : null}
-						{!['reviewed', 'approved', 'revoked'].includes(invoice.status) ? (
+						)}
+						{!INVOICE_STATES_FOR_REVIEW.includes(invoice.status) && (
 							<Button
 								size="sm"
 								onClick={() => setShowReview(true)}
@@ -115,7 +117,7 @@ function Actions({
 							>
 								Mark as Reviewed
 							</Button>
-						) : null}
+						)}
 					</div>
 					{underTranslation}
 					{approveButton}
@@ -144,24 +146,24 @@ function Actions({
 								<div className={styles.tooltip_child}>
 									<div className={styles.flex_row}>
 										Proforma email sent :
-										&nbsp;
+										{' '}
 										{invoice.proforma_email_count || DEFAULT_COUNT}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
-										&nbsp;
+										{' '}
 										{invoice.sales_email_count || DEFAULT_COUNT}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											UTR Number:
-											&nbsp;
+											{' '}
 											{invoice?.sales_utr?.utr_number || ''}
 										</div>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											Status:
-											&nbsp;
+											{' '}
 											{invoice?.sales_utr?.status || ''}
 										</div>
 									</div>
@@ -186,7 +188,7 @@ function Actions({
 				</div>
 			</div>
 
-			{(invoice.services || []).length && isEditInvoice ? (
+			{(invoice.services || []).length && isEditInvoice && (
 				<EditInvoice
 					show={isEditInvoice}
 					onClose={() => setIsEditInvoice(false)}
@@ -194,27 +196,27 @@ function Actions({
 					refetch={handleRefetch}
 					shipment_data={shipment_data}
 				/>
-			) : null}
+			)}
 
-			{showReview ? (
+			{showReview && (
 				<ReviewServices
 					showReview={showReview}
 					setShowReview={setShowReview}
 					invoice={invoice}
 					refetch={handleRefetch}
 				/>
-			) : null}
+			)}
 
-			{isChangeCurrency ? (
+			{isChangeCurrency && (
 				<ChangeCurrency
 					isChangeCurrency={isChangeCurrency}
 					setIsChangeCurrency={setIsChangeCurrency}
 					invoice={invoice}
 					refetch={handleRefetch}
 				/>
-			) : null}
+			)}
 
-			{showOtpModal ? (
+			{showOtpModal && (
 				<OTPVerification
 					showOtpModal={showOtpModal}
 					setOTPModal={setOTPModal}
@@ -222,34 +224,34 @@ function Actions({
 					refetch={salesInvoicesRefetch}
 					shipment_data={shipment_data}
 				/>
-			) : null}
+			)}
 
-			{showAddRemarks ? (
+			{showAddRemarks && (
 				<AddRemarks
 					showAddRemarks={showAddRemarks}
 					setShowAddRemarks={setShowAddRemarks}
 					invoice={invoice}
 					refetch={handleRefetch}
 				/>
-			) : null}
+			)}
 
-			{sendEmail ? (
+			{sendEmail && (
 				<SendInvoiceEmail
 					show={sendEmail}
 					setShow={setSendEmail}
 					invoice={invoice}
 					refetch={refetch}
 				/>
-			) : null}
+			)}
 
-			{showChangePaymentMode ? (
+			{showChangePaymentMode && (
 				<ChangePaymentMode
 					show={showChangePaymentMode}
 					setShow={setShowChangePaymentMode}
 					invoice={invoice}
 					refetch={refetch}
 				/>
-			) : null}
+			)}
 		</div>
 	);
 }

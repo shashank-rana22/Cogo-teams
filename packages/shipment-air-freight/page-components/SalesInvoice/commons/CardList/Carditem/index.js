@@ -8,8 +8,8 @@ import styles from './styles.module.css';
 const { TOTAL_SPAN, FLEX_HUNDRED } = CONSTANTS;
 
 function Item({
-	item,
-	fields,
+	item = {},
+	fields = [],
 	loading = false,
 }) {
 	return (

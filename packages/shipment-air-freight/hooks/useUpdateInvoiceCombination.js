@@ -1,12 +1,11 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useContext } from 'react';
 
+import isAllServicesTaken from '../commons/utils/isAllServicesTaken';
 import POST_REVIEWED_INVOICES from '../page-components/SalesInvoice/helpers/post-reviewed-sales-invoices';
-
-import IsAllServicesTaken from './IsAllServicesTaken';
 
 const useUpdateInvoiceCombination = ({
 	refetch = () => {},
@@ -30,7 +29,7 @@ const useUpdateInvoiceCombination = ({
 
 	const handleEditPreferences = async () => {
 		try {
-			const { isAllMainServicesTaken } = IsAllServicesTaken(
+			const { isAllMainServicesTaken } = isAllServicesTaken(
 				servicesList,
 				selectedParties,
 				shipment_data,
@@ -90,7 +89,7 @@ const useUpdateInvoiceCombination = ({
 			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
-			Toast.error(getApiError(err?.response?.data));
+			toastApiError(err);
 		}
 	};
 

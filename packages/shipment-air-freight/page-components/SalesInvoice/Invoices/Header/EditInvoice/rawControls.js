@@ -83,7 +83,6 @@ const rawControls = (
 			name           : 'currency',
 			label          : 'Currency',
 			type           : 'select',
-			showOptional   : false,
 			optionsListKey : 'exchange-rate-currencies',
 			placeholder    : 'Select Currency',
 			rules          : { required: 'currency is required' },

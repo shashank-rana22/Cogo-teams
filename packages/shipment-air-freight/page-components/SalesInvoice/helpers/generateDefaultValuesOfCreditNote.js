@@ -1,4 +1,4 @@
-const generateDefaultValues = ({ values }) => {
+const generateDefaultValues = ({ values = [] }) => {
 	const DEFAULT_VALUES = {};
 
 	(values || []).forEach((control) => {

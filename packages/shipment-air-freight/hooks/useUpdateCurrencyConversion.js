@@ -1,5 +1,5 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
-import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateCurrencyConversion = ({
@@ -23,7 +23,7 @@ const useUpdateCurrencyConversion = ({
 			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
-			Toast.error(getApiError(err?.response?.data));
+			toastApiError(err);
 		}
 	};
 

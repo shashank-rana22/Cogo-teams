@@ -91,7 +91,7 @@ function OTPVerification({
 
 	return (
 		<div>
-			{showOtpModal ? (
+			{showOtpModal && (
 				<Modal
 					show={showOtpModal}
 					onClose={() => setShowOTPModal(false)}
@@ -121,9 +121,9 @@ function OTPVerification({
 						</Button>
 					</Modal.Footer>
 				</Modal>
-			) : null}
+			)}
 
-			{modalIsOpen ? (
+			{modalIsOpen && (
 				<Modal
 					show={modalIsOpen}
 					onClose={() => setModalIsOpen(false)}
@@ -165,7 +165,7 @@ function OTPVerification({
 						</Button>
 					</Modal.Footer>
 				</Modal>
-			) : null}
+			)}
 		</div>
 	);
 }
