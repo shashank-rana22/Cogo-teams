@@ -1,7 +1,8 @@
-import { Checkbox, Popover } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import InvoiceContent from './InvoiceContent';
 import styles from './styles.module.css';
 
 const PurchaseInvoices = ({
@@ -33,31 +34,6 @@ const PurchaseInvoices = ({
 		}
 	};
 
-	const content = (lineItem) => {
-		const isChecked = checkedLineItem?.map((item) => item?.name);
-		return (
-			<div className={styles.content}>
-				<Checkbox
-					checked={(isChecked || []).includes(lineItem?.name)}
-					onChange={() => handleLineItemSelect(lineItem)}
-				/>
-				<div>{lineItem?.name}</div>
-				<div>{lineItem?.currency}</div>
-				<div>{lineItem?.price}</div>
-				<div>{lineItem?.quantity}</div>
-				<div>{lineItem?.tax_percent}</div>
-				<div>{lineItem?.tax_price}</div>
-				<div>{lineItem?.total_tax_price}</div>
-			</div>
-		);
-	};
-
-	const contentInvoice = (lineItems) => (
-		<div>
-			{lineItems?.map((lineItem) => <div key={lineItems.id}>{content(lineItem)}</div>)}
-		</div>
-	);
-
 	const renderInvoice = (item) => {
 		if (isEmpty(item?.collection_parties)) {
 			return <div className={styles.container}>No Options</div>;
@@ -73,7 +49,13 @@ const PurchaseInvoices = ({
 					show={showPurchaseInvoicePopover && ele?.id === checkedProforma}
 					visible={showPurchaseInvoicePopover && ele?.id === checkedProforma}
 					placement="bottom"
-					content={contentInvoice(ele?.line_items)}
+					content={(
+						<InvoiceContent
+							lineItems={ele?.line_items}
+							checkedLineItem={checkedLineItem}
+							handleLineItemSelect={handleLineItemSelect}
+						/>
+					)}
 					onClickOutside={() => {
 						setShowPurchaseInvoicePopover(false);
 						setShowBox(false);

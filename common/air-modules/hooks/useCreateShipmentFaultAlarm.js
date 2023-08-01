@@ -17,8 +17,8 @@ import toastApiError from '../utils/toastApiError';
 const FIRST_INDEX = 1;
 const SUPPLIER_OPTION_LENGTH_ONE = 1;
 
-const service_ops_constants = ['booking_agent', 'supply_agent'];
-const okam_constants = [
+const SERVICE_OPS_CONSTANTS = ['booking_agent', 'supply_agent'];
+const OKAM_CONSTANTS = [
 	'sales_agent',
 	'service_ops1',
 	'service_ops2',
@@ -127,8 +127,8 @@ const useCreateShipmentFaultAlarm = ({
 	);
 
 	const constants = stakeholder_types?.includes('booking_agent')
-		? okam_constants
-		: service_ops_constants;
+		? OKAM_CONSTANTS
+		: SERVICE_OPS_CONSTANTS;
 
 	useEffect(() => {
 		if (stakeholder_types?.includes('booking_agent') || val === 'okam') {
