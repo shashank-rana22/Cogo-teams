@@ -173,7 +173,9 @@ function FormContainer({
 	}, [taskItem?.status]);
 
 	useEffect(() => {
-		getAirFreightSurcharges();
+		if (!isEmpty(taskItem)) {
+			getAirFreightSurcharges();
+		}
 	}, [taskItem]);
 
 	useEffect(() => {
