@@ -17,6 +17,8 @@ function ActiveShipmentCard({
 	taxType = '',
 	mainCardData = [],
 	customDate = new Date(),
+	activeBar = '',
+	setActiveBar = () => {},
 }) {
 	return (
 		<div className={styles.active_shipment_card}>
@@ -45,6 +47,8 @@ function ActiveShipmentCard({
 					type="Operationally"
 					taxType={taxType}
 					customDate={customDate}
+					activeBar={activeBar}
+					setActiveBar={setActiveBar}
 				/>
 			)}
 
@@ -62,6 +66,8 @@ function ActiveShipmentCard({
 					type="Financially"
 					taxType={taxType}
 					customDate={customDate}
+					activeBar={activeBar}
+					setActiveBar={setActiveBar}
 				/>
 			)}
 		</div>

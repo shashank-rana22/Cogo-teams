@@ -25,7 +25,7 @@ const displayAmount = (amount, currency) => formatAmount({
 
 function ClosedShipmentCard({
 	isDeviationVisible = true, type = '',
-	cardId = '', setActiveShipmentCard = () => {},
+	cardId = '', setActiveShipmentCard = () => { },
 	isAdditonalView = false,
 	showHeading = true,
 	wrapElement = false,
@@ -194,7 +194,7 @@ function ClosedShipmentCard({
 				<div style={{ margin: '8px 0px' }}>
 					<Placeholder height={200} width="100%" />
 				</div>
-			) }
+			)}
 
 		</div>
 	);

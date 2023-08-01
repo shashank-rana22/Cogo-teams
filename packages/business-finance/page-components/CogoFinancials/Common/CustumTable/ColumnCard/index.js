@@ -12,22 +12,17 @@ const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
 
-function ColumnCard({ config = {}, item = {}, incidentLoading = false }) {
+function ColumnCard({ config = {}, item = {}, incidentLoading = false, taxType = '' }) {
 	const [show, setShow] = useState(false);
 	const { fields = [] } = config;
 
 	const formData = {
-		sid             : item?.sid || '_',
+		sid             : item?.jobNumber || '_',
 		customerName    : startCase(item?.customerName || '-'),
-		estimatedProfit : startCase(item?.estimatedProfit || '_'),
-		actualProfit    : item?.actualProfit || '-',
-		levels          : item?.deviation || '-',
-		remarks         : (
-			<div className={styles.flex}>
-				{item?.remarks}
-			</div>
-		),
-		action: (
+		estimatedProfit : item?.[`estimatedProfitAmount${taxType}`] || '0',
+		actualProfit    : item?.[`actualProfitAmount${taxType}`] || '0',
+		levels          : item?.[`actualProfitDeviation${taxType}`] || '0',
+		action          : (
 			<div className={styles.flex}>
 				{!show ? (
 					<IcMArrowRotateDown
@@ -57,11 +52,11 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false }) {
 					>
 						{incidentLoading
 							? <Placeholder />
-							: formData[field.key]}
+							: formData?.[field.key]}
 					</div>
 				))}
 			</div>
-			{show ? <Details item={item} /> : null}
+			{show ? <Details item={item} taxType={taxType} /> : null}
 		</div>
 	);
 }

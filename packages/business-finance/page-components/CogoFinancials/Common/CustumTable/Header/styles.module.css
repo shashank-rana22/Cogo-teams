@@ -1,13 +1,12 @@
 .col {
 	display: flex;
 	flex: var(--span);
-	padding: 10px;
+	padding: 16px;
 }
 
 .header {
 	display: flex;
 	align-items: center;
-	height: 40px;
 	font-size: var(--font-size-lg);
 	font-weight: 500;
 	line-height: 18px;

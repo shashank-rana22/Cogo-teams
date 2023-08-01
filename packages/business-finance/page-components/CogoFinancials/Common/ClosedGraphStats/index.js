@@ -1,5 +1,5 @@
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import ClosedShipmentCard from '../../ClosedShipmentCard';
 import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
@@ -15,8 +15,8 @@ const LABEL_MAPPING = {
 };
 
 function ClosedGraphStats({
-	title = '', setActiveShipmentCard = () => {},
-	setShowShipmentList = () => {},
+	title = '', setActiveShipmentCard = () => { },
+	setShowShipmentList = () => { },
 	entity = '',
 	timeRange = '',
 	statsType = '',
@@ -25,9 +25,9 @@ function ClosedGraphStats({
 	type = '',
 	taxType = '',
 	customDate = new Date(),
+	activeBar = '',
+	setActiveBar = () => {},
 }) {
-	const [activeBar, setActiveBar] = useState('');
-
 	const { serviceLevelApi, serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
 		entity,
 		timeRange,

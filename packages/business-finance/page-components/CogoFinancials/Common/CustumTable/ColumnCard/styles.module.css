@@ -14,9 +14,21 @@
 .col {
 	display: flex;
 	flex: var(--span);
-	padding: 10px;
+	padding: 16px;
 }
 
 .paddingbottom {
 	padding-bottom: 12px;
+}
+
+.background {
+	background-color: #f3fafa;
+}
+
+.edit {
+	cursor: pointer;
+}
+
+.marginbottom {
+	margin-bottom: 10px;
 }
