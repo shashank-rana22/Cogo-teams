@@ -45,11 +45,11 @@ function SlabFields({
 						disabled={checkForDisabled({ experience, controlName: 'slab_unit', index, showForm })}
 					/>
 					{errors?.agent_experience_slabs?.[index]?.slab_unit?.message
-                    && (
-	<div className={styles.error_msg}>
-		{errors?.agent_experience_slabs?.[index]?.slab_unit?.message}
-	</div>
-                    )}
+						? (
+							<div className={styles.error_msg}>
+								{errors?.agent_experience_slabs?.[index]?.slab_unit?.message}
+							</div>
+						) : null}
 				</div>
 			</div>
 
@@ -70,11 +70,11 @@ function SlabFields({
 						disabled={checkForDisabled({ experience, controlName: 'slab_lower_limit', index, showForm })}
 					/>
 					{errors?.agent_experience_slabs?.[index]?.slab_lower_limit?.message
-						&& (
+						? (
 							<div className={styles.error_msg}>
 								{errors?.agent_experience_slabs?.[index]?.slab_lower_limit?.message}
 							</div>
-						)}
+						) : null}
 				</div>
 			</div>
 
@@ -105,11 +105,11 @@ function SlabFields({
 								})}
 							/>
 							{errors?.agent_experience_slabs?.[index]?.slab_upper_limit?.message
-						&& (
-							<div className={styles.error_msg}>
-								{errors?.agent_experience_slabs?.[index]?.slab_upper_limit?.message}
-							</div>
-						)}
+								? (
+									<div className={styles.error_msg}>
+										{errors?.agent_experience_slabs?.[index]?.slab_upper_limit?.message}
+									</div>
+								) : null}
 						</div>
 					</div>
 				</>

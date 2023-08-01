@@ -120,11 +120,11 @@ function ShipmentCapacities(props, ref) {
 										/>
 
 										{errors?.[`${key}-${service.value}`]?.message
-							&& (
-								<p className={styles.err_msg}>
-									{errors?.[`${key}-${service.value}`]?.message}
-								</p>
-							)}
+											? (
+												<p className={styles.err_msg}>
+													{errors?.[`${key}-${service.value}`]?.message}
+												</p>
+											) : null}
 
 									</div>
 

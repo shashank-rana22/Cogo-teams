@@ -113,7 +113,7 @@ function CreateConfig() {
 						]}
 					/>
 
-					{errors.config_type && <div className={styles.error_msg}>This is required</div>}
+					{errors.config_type ? <div className={styles.error_msg}>This is required</div> : null}
 
 				</div>
 

@@ -24,7 +24,7 @@ function BasicFields({ control = {}, errors = {}, showForm = false }) {
 								{...controlItem}
 								disabled={showForm}
 							/>
-							{errors[name] && <div className={styles.error_msg}>This is required</div>}
+							{errors[name] ? <div className={styles.error_msg}>This is required</div> : null}
 						</div>
 					</div>
 				);
