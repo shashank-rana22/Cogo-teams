@@ -36,8 +36,8 @@ const getFormValuesFromData = ({ data }) => {
 			service_requirement_operator,
 			stats_details: {
 				date_range: {
-					startDate : new Date(start_date),
-					endDate   : new Date(end_date),
+					startDate : start_date ? new Date(start_date) : undefined,
+					endDate   : end_date ? new Date(end_date) : undefined,
 				},
 				quotation_count,
 				search_count,
