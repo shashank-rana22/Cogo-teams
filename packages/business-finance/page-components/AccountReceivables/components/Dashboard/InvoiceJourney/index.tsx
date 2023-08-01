@@ -1,4 +1,5 @@
 import { Placeholder, Tooltip, Select } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -18,6 +19,8 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 		setDateFilter, optionsVal,
 	} = useGetInvoiceJourney({ filterValue, entityCode });
 
+	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+
 	const {
 		draftInvoicesCount, financeAcceptedInvoiceCount,
 		irnGeneratedInvoicesCount, settledInvoicesCount, tatHoursFromDraftToFinanceAccepted,
@@ -28,7 +31,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 	const getCircleData = [
 		{ id: 1, number: draftInvoicesCount || 0, label: 'Draft' },
 		{ id: 2, number: financeAcceptedInvoiceCount || 0, label: 'Finance Accepted' },
-		{ id: 3, number: irnGeneratedInvoicesCount || 0, label: 'IRN Generated' },
+		{ id: 3, number: irnGeneratedInvoicesCount || 0, label: `${irnLabel} Generated` },
 		{ id: 4, number: settledInvoicesCount || 0, label: 'Settled' },
 	];
 
@@ -41,13 +44,13 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 		},
 		{
 			id    : 2,
-			label : 'Finance Accepted - IRN Generated',
+			label : `Finance Accepted - ${irnLabel} Generated`,
 			TAT   : `${tatHoursFromFinanceAcceptedToIrnGenerated || 0} Hours `,
 			Count : irnGeneratedInvoiceEventCount || 0,
 		},
 		{
 			id    : 3,
-			label : 'IRN Generated - Settled ',
+			label : `${irnLabel} Generated - Settled `,
 			TAT   : `${tatHoursFromIrnGeneratedToSettled || 0} Hours `,
 			Count : settledInvoiceEventCount || 0,
 		},

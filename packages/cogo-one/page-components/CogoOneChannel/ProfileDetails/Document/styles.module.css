@@ -23,3 +23,11 @@
 	background: #f68b21;
 	border-radius: 5px;
 }
+
+.pagination {
+	display: flex;
+	justify-content: flex-start;
+	width: 100%;
+	padding-top: 10px;
+	background: #f9f9f9;
+}

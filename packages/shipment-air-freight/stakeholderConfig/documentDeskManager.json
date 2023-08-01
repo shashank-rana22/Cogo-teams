@@ -22,7 +22,7 @@
         "tab_title":"Emails"
     },
     "cancel_shipment": {
-        "can_cancel": false,
+        "can_cancel": true,
         "role": "sales"
     },
     "purchase":{

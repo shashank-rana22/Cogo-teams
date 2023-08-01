@@ -62,7 +62,7 @@ const mutateControls = (
 					description : 'House Bill of Lading',
 				},
 				{
-					label       : 'Mbl',
+					label       : 'MBL',
 					value       : 'mbl',
 					description : 'House Bill of Lading',
 				},
