@@ -29,7 +29,7 @@ const getFormattedBoolean = (value) => {
 	return BOOLEAN_MAPPING[value];
 };
 
-const useUpdateEmployeeDetails = (onClose, refetch) => {
+const useUpdateEmployeeDetails = ({ onClose, refetch, statsRefetch }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'POST',
 		url    : '/update_employee_detail',
@@ -51,6 +51,7 @@ const useUpdateEmployeeDetails = (onClose, refetch) => {
 				},
 			});
 			refetch();
+			statsRefetch();
 			Toast.success('Employee Details Updated Sucessfully');
 			onClose();
 		} catch (error) {

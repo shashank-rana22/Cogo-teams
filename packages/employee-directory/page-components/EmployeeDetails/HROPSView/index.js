@@ -9,12 +9,15 @@ import getHROPSControls from '../../utils/HROPSControls';
 
 import styles from './styles.module.css';
 
-function HROPSView({ show = false, onClose = () => {}, employeeDetails = {}, refetch = () => {} }) {
+function HROPSView({
+	show = false, onClose = () => {}, employeeDetails = {}, refetch = () => {},
+	statsRefetch = () => {},
+}) {
 	const [isEdit, setIsEdit] = useState(false);
 
 	const { control, handleSubmit, formState : { errors }, watch, setValue } = useForm();
 
-	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails(onClose, refetch);
+	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ onClose, refetch, statsRefetch });
 
 	const isCogoFreight = watch('cogo_freight');
 

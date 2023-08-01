@@ -122,6 +122,7 @@ function EmployeeDirectory() {
 					show={openEmployeeDetails}
 					refetch={refetch}
 					isHRAdmin={is_hr_admin}
+					statsRefetch={statsRefetch}
 				/>
 			)}
 		</>
