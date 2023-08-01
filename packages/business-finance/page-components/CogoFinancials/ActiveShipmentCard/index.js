@@ -6,14 +6,16 @@ import ParentServicewiseStats from '../Common/ParentServicewiseStats';
 import styles from './styles.module.css';
 
 function ActiveShipmentCard({
-	setActiveShipmentCard = () => {}, activeShipmentCard = '',
-	setShowShipmentList = () => {},
+	setActiveShipmentCard = () => { }, activeShipmentCard = '',
+	setShowShipmentList = () => { },
 	entity = '',
 	timeRange = '',
 	filter = {},
 	operationalData = [],
 	financialData = [],
 	taxType = '',
+	activeBar = '',
+	setActiveBar = () => {},
 }) {
 	return (
 		<div className={styles.active_shipment_card}>
@@ -34,6 +36,8 @@ function ActiveShipmentCard({
 					cardData={operationalData}
 					type="Operationally"
 					taxType={taxType}
+					activeBar={activeBar}
+					setActiveBar={setActiveBar}
 				/>
 			)}
 
@@ -50,6 +54,8 @@ function ActiveShipmentCard({
 					cardData={financialData}
 					type="Financially"
 					taxType={taxType}
+					activeBar={activeBar}
+					setActiveBar={setActiveBar}
 				/>
 			)}
 		</div>

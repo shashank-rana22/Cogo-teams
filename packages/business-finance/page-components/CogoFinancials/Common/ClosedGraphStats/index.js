@@ -15,8 +15,8 @@ const LABEL_MAPPING = {
 };
 
 function ClosedGraphStats({
-	title = '', setActiveShipmentCard = () => {},
-	setShowShipmentList = () => {},
+	title = '', setActiveShipmentCard = () => { },
+	setShowShipmentList = () => { },
 	entity = '',
 	timeRange = '',
 	statsType = '',
@@ -24,9 +24,9 @@ function ClosedGraphStats({
 	cardData = [],
 	type = '',
 	taxType = '',
+	activeBar = '',
+	setActiveBar = () => {},
 }) {
-	const [activeBar, setActiveBar] = useState('');
-
 	const { serviceLevelApi, serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
 		entity,
 		timeRange,

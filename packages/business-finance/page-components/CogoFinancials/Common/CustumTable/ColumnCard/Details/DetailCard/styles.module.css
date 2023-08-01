@@ -1,0 +1,33 @@
+.head {
+	display: flex;
+	align-items: center;
+	min-height: 50px;
+	width: 180px;
+	color: #828282;
+	padding-right: 80px;
+	padding-left: 16px;
+	margin-right: 80px;
+	border-right: 1px solid #d9d9d9;
+}
+
+.card {
+	display: flex;
+	align-items: center;
+	border-top: 1px solid #d9d9d9;
+	padding: 16px;
+}
+
+.key {
+	font-weight: 500;
+	padding-bottom: 8px;
+	color: #828282;
+}
+
+.value {
+	color: #4f4f4f;
+}
+
+.singlefield {
+	flex: 1;
+	margin-right: 34px;
+}

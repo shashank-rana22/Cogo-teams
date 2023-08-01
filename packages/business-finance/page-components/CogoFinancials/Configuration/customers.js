@@ -1,4 +1,8 @@
-export const CUSTOMERS_CONFIG = {
+const HEADING_MAP = {
+	operational: 'Operational',
+};
+
+export const customersConfig = ({ activeShipmentCard }) => ({
 	headerClass : 'border',
 	fields      : [
 		{
@@ -9,7 +13,7 @@ export const CUSTOMERS_CONFIG = {
 		{
 			label : 'Customer Name',
 			key   : 'customerName',
-			span  : 3,
+			span  : 3.5,
 		},
 		{
 			label : 'Estimated Profit',
@@ -17,7 +21,7 @@ export const CUSTOMERS_CONFIG = {
 			span  : 2,
 		},
 		{
-			label : 'Actual Profit',
+			label : `${HEADING_MAP?.[activeShipmentCard] || 'Actual'} Profit`,
 			key   : 'actualProfit',
 			span  : 2,
 		},
@@ -28,13 +32,8 @@ export const CUSTOMERS_CONFIG = {
 		},
 		{
 			label : '',
-			key   : 'remarks',
-			span  : 0.5,
-		},
-		{
-			label : '',
 			key   : 'action',
 			span  : 0.5,
 		},
 	],
-};
+});
