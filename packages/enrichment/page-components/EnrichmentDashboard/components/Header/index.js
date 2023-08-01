@@ -54,7 +54,7 @@ function Header(props) {
 					<Button
 						size="md"
 						type="button"
-						themeType="secondary"
+						themeType="primary"
 						onClick={() => redirectToSheets()}
 						style={{ marginLeft: '12px' }}
 					>
