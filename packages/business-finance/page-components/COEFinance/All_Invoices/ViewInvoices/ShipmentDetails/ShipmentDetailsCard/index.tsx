@@ -225,20 +225,24 @@ function ShipmentDetailsCard({
 		setItemCheck(true);
 	};
 	const collectionPartyRejectionList = collectionPartyRejectCheckboxList(
-		organizationName,
-		beneficiaryName,
-		bankName,
-		accountNumber,
-		ifscCode,
-		registrationNumber,
-		taxNumber,
+		{
+			organizationName,
+			beneficiaryName,
+			bankName,
+			accountNumber,
+			ifscCode,
+			registrationNumber,
+			taxNumber,
+		},
 	);
 	const billingPartyRejectionList = billingPartyRejectCheckboxList(
-		entityCode,
-		organizationNameBuyer,
-		address,
-		registrationNumberBuyer,
-		taxNumberBuyer,
+		{
+			entityCode,
+			organizationNameBuyer,
+			address,
+			registrationNumberBuyer,
+			taxNumberBuyer,
+		},
 	);
 
 	useEffect(() => {
@@ -396,10 +400,12 @@ function ShipmentDetailsCard({
 													<div className={styles.flex_center}>
 														<CheckboxGroup
 															options={invoiceDetailsRejectCheckboxList(
-																billNumber,
-																billDate,
-																status,
-																placeOfSupply,
+																{
+																	billNumber,
+																	billDate,
+																	status,
+																	placeOfSupply,
+																},
 															)}
 															onChange={(val) => {
 																setCheckedValue(

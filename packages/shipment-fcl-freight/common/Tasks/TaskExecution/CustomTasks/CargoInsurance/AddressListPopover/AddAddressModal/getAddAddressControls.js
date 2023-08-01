@@ -120,7 +120,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 				if (!v?.number || !v?.country_code) {
 					return 'Phone Number is required';
 				}
-				return geo.regex.MOBILE_NUMBER.test(v.number) || 'Invalid Phone Number';
+				return geo.regex.MOBILE_NUMBER_WITHOUT_COUNTRY_CODE.test(v.number) || 'Invalid Phone Number';
 			},
 		},
 		span: 12,
@@ -133,8 +133,7 @@ export const getModifiedControls = ({
 }) => {
 	const countryCode = getCountryDetails({ country_id: countryId });
 	const controls = getAddAddressControls({ setValue, setCountryId });
-
-	(controls || []).map((control) => {
+	const updatedControls = (controls || []).map((control) => {
 		if (control.name === 'tax_number') {
 			return {
 				...control,
@@ -153,7 +152,7 @@ export const getModifiedControls = ({
 				},
 			};
 		}
-
 		return control;
 	});
+	return updatedControls;
 };
