@@ -24,6 +24,7 @@ const USER_EVENT_TITLE_MAPPING = {
 
 function LoginFailed({ name = '', data = {}, scope = '' }) {
 	const eventTitle = getEventTitle({ name });
+
 	return (
 		<>
 			<div className={styles.title}>

@@ -9,23 +9,23 @@ import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
 function Shipments({ serviceData = {}, eventType = '', scope = '' }) {
-	const PLATFORM = startCase(scope);
+	const activityPlatform = startCase(scope) || '';
 
 	const EVENTS_INFORMATION = {
 		checkout: {
-			title       : `Customer Has Not Proceeded With the Checkout Process on ${PLATFORM} platform`,
+			title       : `Customer Has Not Proceeded With the Checkout Process on ${activityPlatform} platform`,
 			information : `Please contact the customer to understand their
 			 concerns and help them to complete the checkout. 
 			Here are the details of the shipment checkout that has been abandoned by the customer - `,
 		},
 		shipment: {
-			title       : `Customer Has Proceeded with Shipemnt on ${PLATFORM} platform`,
+			title       : `Customer Has Proceeded with Shipemnt on ${activityPlatform} platform`,
 			information : 'Here are the details of the shipment -',
 		},
 
 		spot_search: {
 			title: `Customer Has Not Proceeded With Shipment After 
-			Performing A Spot Search on ${PLATFORM} platform`,
+			Performing A Spot Search on ${activityPlatform} platform`,
 			information: `Please contact the customer to understand their 
 			concerns and help them to proceed with the next steps. Here are the details of the spot search - `,
 		},
