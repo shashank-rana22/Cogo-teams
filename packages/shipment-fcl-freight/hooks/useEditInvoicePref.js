@@ -207,8 +207,8 @@ const useEditInvoicePref = ({
 	const { handleEditPreferences, loading } = useUpdateInvoiceCombination({
 		servicesList,
 		selectedParties,
-		initial_service_invoice_id : INITIAL_SERVICE_INVOICE_ID,
-		allServiceLineitemsCount   : ALL_SERVICE_LINE_ITEMS.length,
+		INITIAL_SERVICE_INVOICE_ID,
+		allServiceLineitemsCount: ALL_SERVICE_LINE_ITEMS.length,
 		refetch,
 		importer_exporter_id,
 		updateExportInvoices,
