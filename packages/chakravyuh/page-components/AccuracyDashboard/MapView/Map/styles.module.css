@@ -5,6 +5,22 @@
 	filter: drop-shadow(12px 12px 100px #040202);
 }
 
+.loader_container {
+	position: absolute;
+	top: 45vh;
+	right: 30vw;
+	z-index: 1000;
+	padding: 16px 24px;
+	background-color: #fafafa;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 30%);
+
+	.loader {
+		padding: 3px;
+		scale: 1.2;
+	}
+}
+
 .refresh_btn {
 	position: absolute;
 	top: 76px;
@@ -48,13 +64,6 @@
 		right: 40px;
 		bottom: 18px;
 	}
-}
-
-.loader {
-	position: absolute;
-	top: 50vh;
-	right: 30vw;
-	z-index: 999;
 }
 
 .worse {

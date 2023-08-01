@@ -51,11 +51,8 @@
 		padding: 8px;
 		background: #fff;
 		border-radius: 4px;
-		box-shadow: 0 0 6px #312a2a59;
+		box-shadow: 0 0 12px rgb(44 62 80 / 40%);
 		transform-origin: right top;
-		animation-name: scale-out;
-		animation-duration: 300ms;
-		animation-timing-function: cubic-bezier(0.175, 0.95, 0.32, 1.275);
 	}
 
 	:global {
@@ -95,17 +92,5 @@
 
 	&:hover {
 		cursor: pointer;
-	}
-}
-
-@keyframes scale-out {
-	0% {
-		box-shadow: none;
-		transform: scale(0);
-	}
-
-	100% {
-		box-shadow: 0 0 6px #312a2a59;
-		transform: scale(1);
 	}
 }

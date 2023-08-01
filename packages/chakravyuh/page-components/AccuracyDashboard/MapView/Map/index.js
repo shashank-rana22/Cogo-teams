@@ -217,7 +217,11 @@ function Map({
 			/>
 
 			{originPosition && <Point position={originPosition} animate />}
-			{showLoading && <Loader className={styles.loader} />}
+			{showLoading && (
+				<div className={styles.loader_container}>
+					<Loader className={styles.loader} />
+				</div>
+			)}
 			{!isEmpty(originLocation)
 				&& (
 					<GeoJSON
