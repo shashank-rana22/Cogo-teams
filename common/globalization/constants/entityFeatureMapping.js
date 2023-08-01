@@ -56,25 +56,26 @@ const ENTITY_FEATURE_MAPPING = {
 	401: {
 		labels: {
 			irn_label                 : 'IRN',
-			tax_label                 : 'PAN Number',
+			tax_label                 : 'UEN Number',
 			sage_label                : 'Sage ID',
-			search_options_label_pan  : 'Business Name/PAN Number',
+			search_options_label_pan  : 'Business Name/UEN Number',
 			search_options_label_sage : 'Sage ID',
 		},
 		feature_supported: [
 			'cogo_books',
 			'post_to_sage',
+			'cancel_irn',
 		],
 		placeholder: {
-			tax_number: 'Search By Business Name/Pan Number',
+			tax_number: 'Search By Business Name/UEN Number',
 		},
 	},
 	501: {
 		labels: {
 			irn_label                 : 'E-Invoice',
-			tax_label                 : 'VAT Number',
+			tax_label                 : 'TAX Number',
 			sage_label                : null,
-			search_options_label_pan  : 'Business Name/VAT Number',
+			search_options_label_pan  : 'Business Name/TAX Number',
 			search_options_label_sage : null,
 		},
 		feature_supported: [
@@ -85,7 +86,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'dunning',
 		],
 		placeholder: {
-			tax_number: 'Search By Business Name/VAT Number',
+			tax_number: 'Search By Business Name/TAX Number',
 		},
 	},
 	601: {
@@ -103,13 +104,13 @@ const ENTITY_FEATURE_MAPPING = {
 	701: {
 		labels: {
 			irn_label                 : 'E-invoice',
-			tax_label                 : 'NIB Number',
+			tax_label                 : 'NPWP Number',
 			sage_label                : null,
-			search_options_label_pan  : 'Business Name/NIB Number',
+			search_options_label_pan  : 'Business Name/NPWP Number',
 			search_options_label_sage : null,
 		},
 		placeholder: {
-			tax_number: 'Search By Business Name/NIB Number',
+			tax_number: 'Search By Business Name/NPWP Number',
 		},
 	},
 	801: {
