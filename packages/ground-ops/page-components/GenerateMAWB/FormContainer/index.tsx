@@ -176,7 +176,7 @@ function FormContainer({
 		if (!isEmpty(taskItem)) {
 			getAirFreightSurcharges();
 		}
-	}, [taskItem]);
+	}, []);
 
 	useEffect(() => {
 		const { line_items: lineItems } = data?.surcharge || {};
