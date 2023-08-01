@@ -1,0 +1,29 @@
+.flex_space_between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 15px;
+}
+
+.button_flex {
+	display: flex;
+	align-items: center;
+}
+
+.video_call_btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 10px;
+	cursor: pointer;
+
+	svg {
+		width: 32px;
+		height: 32px;
+		fill: #ee3425;
+	}
+}
+
+.escalate_button {
+	margin-right: 5px;
+}

@@ -5,3 +5,4 @@ export { default as SingleLocation } from './PortDetails/SingleLocation';
 export { default as DualLocation } from './PortDetails/DualLocation';
 export { default as CargoPills } from './CargoPills';
 export { default as Header } from './Header';
+export { default as TruckDetails } from './TruckDetails';

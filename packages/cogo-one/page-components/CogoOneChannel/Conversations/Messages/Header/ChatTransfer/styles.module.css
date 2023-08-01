@@ -1,0 +1,21 @@
+.approve_req {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	height: 30px;
+	padding: 0 10px;
+	overflow: hidden;
+	border-top: 1px solid #e0e0e0;
+	transition: height 0.3s ease;
+}
+
+.agent_name {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.icon_styles {
+	width: 15px;
+	height: 15px;
+	margin-left: 10px;
+}

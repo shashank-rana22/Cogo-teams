@@ -12,21 +12,23 @@ function QuestionsCollapse({ questions }) {
 				<div style={{ display: 'flex' }}>
 					<div>Q.</div>
 					{' '}
-					<div style={{ flexWrap: 'wrap' }}>{questions.question_abstract}</div>
+					<div className={styles.questions_list}>{questions.question_abstract}</div>
 
 				</div>
 				{' '}
 
-				<IcMArrowRight style={{ alignItems: 'center', marginTop: '22px' }} width={16} height={16} />
+				<IcMArrowRight
+					className={styles.styledArrowRight}
+				/>
 			</div>
 
-			<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+			<div className={styles.styled_pill_container}>
 				<Pill
 					prefix={<IcMEyeopen />}
 					size="sm"
-					color="white"
+					color="#fff"
 				>
-					<b>{questions.view_count}</b>
+					<strong>{questions.view_count}</strong>
 				</Pill>
 
 				{(questions?.faq_tags || []).map((item) => (
@@ -34,9 +36,11 @@ function QuestionsCollapse({ questions }) {
 						className={styles.questions_tag}
 						key={item.display_name}
 						size="sm"
-						color="white"
+						color="#fff"
 					>
-						{startCase(item.display_name)}
+						<div className={styles.pill_text}>
+							{startCase(item?.display_name)}
+						</div>
 					</Pill>
 				))}
 			</div>

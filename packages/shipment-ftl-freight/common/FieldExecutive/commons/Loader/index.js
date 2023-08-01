@@ -14,10 +14,10 @@ function Loader({ rowArray = ROW_ARRAY, columnArray = SKELETON_ARRAY }) {
 	return (
 		<div className={styles.container}>
 			{rowArray.map((item) => (
-				<div key={`${item}`} className={styles.row_item} style={{ display: 'flex', margin: '10px' }}>
+				<div key={item} className={styles.row_item} style={{ display: 'flex', margin: '10px' }}>
 					{columnArray.map((singleItem) => (
 						<Placeholder
-							key={`${singleItem}`}
+							key={singleItem}
 							style={{
 								width       : `${MAX_WIDTH_PERCENT / columnArray.length}%`,
 								height      : '50px',

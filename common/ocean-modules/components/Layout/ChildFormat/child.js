@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
 import getElementController from '../getController';
@@ -100,12 +101,12 @@ function Child({
 	};
 
 	return (
-		<div className={styles.fieldarray} key={field.id}>
-			<h3 className={styles.heading}>
-				{name.toUpperCase()}
+		<fieldset className={styles.fieldarray} key={field.id}>
+			<legend className={styles.heading}>
+				{startCase(name)}
 				&nbsp;
 				{index + INDEX_INCR_BY}
-			</h3>
+			</legend>
 			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={styles.row} key={keysForFields[i]}>
 					{rowFields.map((controlItem) => {
@@ -156,14 +157,13 @@ function Child({
 
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<div className={styles.delete_icon}>
-					<hr />
 					<IcMDelete
 						className={styles.icon}
 						onClick={() => remove(index, REMOVE_UPTO_INDEX)}
 					/>
 				</div>
 			) : null}
-		</div>
+		</fieldset>
 	);
 }
 export default Child;
