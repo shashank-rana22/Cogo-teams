@@ -12673,11 +12673,6 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'outbound_call_hangup_missed_or_answered',
-			access_type  : 'private',
-			service_name : 'voice_call',
-		},
-		{
 			api          : 'get_available_service_providers',
 			access_type  : 'private',
 			service_name : 'organization',

@@ -2,30 +2,27 @@ import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import { CALL_HISTORY_AUDIO_ICONS } from '../../../../../constants';
+
 import styles from './styles.module.css';
 
-function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call = '', dtmf_inputs = {} }) {
-	const ICON_MAPPING = {
-		user: {
+const COUNT_ONE = 1;
 
-			start      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disabled call.svg',
-			end        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call.svg',
-			compStyles : { borderTopLeftRadius: '0px', background: '#FFFFFF' },
-		},
-		agent: {
-			start : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call hangup.svg',
-			end   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/omni_channel.svg',
-
-			compStyles: { borderTopRightRadius: '0px', background: '#FFFCE6' },
-		},
-	};
-	const startTime = start_time_of_call?.split(' ')?.[1];
-	const endTime = end_time_of_call?.split(' ')?.[1];
-	const { start = '', end = '', compStyles = {} } = ICON_MAPPING[type] || {};
+function CallHistory({
+	type = 'user',
+	end_time_of_call = '', start_time_of_call = '', dtmf_inputs = {}, channelType = '',
+}) {
+	const startTime = start_time_of_call?.split(' ')?.[COUNT_ONE];
+	const endTime = end_time_of_call?.split(' ')?.[COUNT_ONE];
+	const { start = '', end = '', compStyles = {} } = CALL_HISTORY_AUDIO_ICONS[type] || {};
 
 	const conditionCheck = !isEmpty(dtmf_inputs) && type === 'user';
 
 	const dtmfOptions = Object.entries(dtmf_inputs || {})?.map(([key, value]) => ({ key, value }));
+
+	const isVideoCall = channelType === 'video_call';
+	const callStartedMessage = isVideoCall ? 'Video call started' : 'Audio call started';
+	const callEndedMessage = isVideoCall ? 'Video call ended' : 'Audio call ended';
 
 	return (
 		<div>
@@ -34,7 +31,7 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 				<img src={start} alt="logo" />
 				<div className={styles.padding}>
 					<div>
-						Audio call started
+						{callStartedMessage}
 					</div>
 					<div>
 						{startTime}
@@ -47,7 +44,7 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 					<img src={end} alt="logo" />
 					<div className={styles.padding}>
 						<div>
-							Audio call ended
+							{callEndedMessage}
 						</div>
 						<div>
 							{endTime}
@@ -68,7 +65,7 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 											const { key = '', value = '' } = item;
 
 											return (
-												<div className={styles.details}>
+												<div className={styles.details} key={key}>
 													{startCase(key)}
 													{' '}
 													:

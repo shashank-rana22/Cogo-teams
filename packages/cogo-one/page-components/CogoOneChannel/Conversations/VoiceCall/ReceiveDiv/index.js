@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import CallHistory from '../CallHistory';
 
@@ -8,14 +8,21 @@ import styles from './styles.module.css';
 function ReceiveDiv({ eachList = {} }) {
 	const {
 		created_at,
-		user_data = null,
-		user_id = null,
+		user_data = {},
+		user_id = '',
 		user_number = '',
 		start_time_of_call = '',
 		end_time_of_call,
 		dtmf_inputs = [],
+		channel_type = '',
 	} = eachList || {};
-	const date = format(new Date(created_at), 'dd MMM YYYY');
+
+	const date = 	created_at ? formatDate({
+		date       : new Date(created_at),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		formatType : 'date',
+	}) : '';
+
 	let name = user_number;
 	if (user_id) {
 		name = user_data?.name;
@@ -29,7 +36,13 @@ function ReceiveDiv({ eachList = {} }) {
 			</div>
 
 			<div className={styles.receive_message_container}>
-				<CallHistory type="user" end_time_of_call={end_time_of_call} start_time_of_call={start_time_of_call} dtmf_inputs={dtmf_inputs} />
+				<CallHistory
+					type="user"
+					end_time_of_call={end_time_of_call}
+					start_time_of_call={start_time_of_call}
+					dtmf_inputs={dtmf_inputs}
+					channelType={channel_type}
+				/>
 			</div>
 		</div>
 	);

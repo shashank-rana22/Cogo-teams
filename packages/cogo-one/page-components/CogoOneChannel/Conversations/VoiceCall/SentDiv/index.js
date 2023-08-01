@@ -1,6 +1,5 @@
-/* eslint-disable max-len */
-
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import CallHistory from '../CallHistory';
 
@@ -12,8 +11,14 @@ function SentDiv({ eachList = {} }) {
 		agent_data = {},
 		start_time_of_call = '',
 		end_time_of_call,
+		channel_type,
 	} = eachList || {};
-	const date = format(new Date(created_at), 'dd MMM YYYY');
+
+	const date = created_at ?	formatDate({
+		date       : new Date(created_at),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		formatType : 'date',
+	}) : '';
 
 	const name = agent_data?.name;
 
@@ -29,7 +34,12 @@ function SentDiv({ eachList = {} }) {
 					<span className={styles.time_stamp}>{date}</span>
 				</div>
 				<div className={styles.styled_div}>
-					<CallHistory type="agent" end_time_of_call={end_time_of_call} start_time_of_call={start_time_of_call} />
+					<CallHistory
+						type="agent"
+						end_time_of_call={end_time_of_call}
+						start_time_of_call={start_time_of_call}
+						channelType={channel_type}
+					/>
 				</div>
 			</div>
 			<img

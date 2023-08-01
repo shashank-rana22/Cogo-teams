@@ -6,6 +6,11 @@ import Header from './Header';
 import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
+import VoiceCallLoader from './VoiceCallLoader';
+
+const COUNT_THREE_HUNDRED = 300;
+const COUNT_ZERO = 0;
+const COUNT_TEN = 10;
 
 function VoiceCall({ activeVoiceCard = {} }) {
 	const { user_id = null, user_number = '' } = activeVoiceCard || {};
@@ -13,10 +18,10 @@ function VoiceCall({ activeVoiceCard = {} }) {
 	const scrollBottom = () => {
 		setTimeout(() => {
 			messageRef?.current?.scrollTo({
-				top      : (messageRef?.current.scrollHeight || 0) + 10,
+				top      : (messageRef?.current.scrollHeight || COUNT_ZERO) + COUNT_TEN,
 				behavior : 'smooth',
 			});
-		}, 300);
+		}, COUNT_THREE_HUNDRED);
 	};
 	const {
 		loading,
@@ -32,15 +37,7 @@ function VoiceCall({ activeVoiceCard = {} }) {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [messageRef, JSON.stringify(activeVoiceCard), loading]);
-	const loader = (
-		<div className={styles.loader}>
-			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg"
-				alt="load"
 
-			/>
-		</div>
-	);
 	return (
 		<>
 			<div className={styles.container}>
@@ -52,11 +49,11 @@ function VoiceCall({ activeVoiceCard = {} }) {
 				onScroll={(e) => handleScroll(e.target.scrollTop)}
 				ref={messageRef}
 			>
-				{loading && loader}
+				{loading && <VoiceCallLoader />}
 				{([...list] || []).reverse().map((eachList) => (eachList?.call_type === 'incoming' ? (
-					<ReceiveDiv eachList={eachList} />
+					<ReceiveDiv key={eachList} eachList={eachList} />
 				) : (
-					<SentDiv eachList={eachList} />
+					<SentDiv key={eachList} eachList={eachList} />
 				)))}
 			</div>
 		</>

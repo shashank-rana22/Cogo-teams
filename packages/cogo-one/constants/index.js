@@ -6,6 +6,7 @@ import {
 	IcCAir,
 	IcMFftl,
 	IcMFltl, IcCTelegram, IcCZalo,
+	IcMVideoCall, IcMVideoCallMute,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -186,6 +187,12 @@ export const PLACEHOLDER_MAPPING = {
 	onboarding_kyc : 'Enter Pan No',
 };
 
+export const SHOW_LOG_STATUS_ICON_MAPPING = {
+	answered      : { icon: IcMVideoCall, fill: '#b0cc64' },
+	not_connected : { icon: IcMVideoCallMute, fill: '#e0e0e0' },
+	missed        : { icon: IcMVideoCallMute, fill: '#f37166' },
+};
+
 export const DISLIKE_OPTIONS = [
 	{
 		label : 'Question not satisfactory',
@@ -311,6 +318,23 @@ export const ICON_MAPPING = {
 	incoming : GLOBAL_CONSTANTS.image_url.incoming_green_svg,
 	outgoing : GLOBAL_CONSTANTS.image_url.outgoing_orange_svg,
 	missed   : GLOBAL_CONSTANTS.image_url.missed_call_red_svg,
+};
+
+export const CALL_HISTORY_AUDIO_ICONS = {
+	user: {
+		start      : GLOBAL_CONSTANTS.image_url.start_user_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_user_audio,
+		compStyles : { borderTopLeftRadius: '0px', background: '#FFFFFF' },
+	},
+	agent: {
+		start      : GLOBAL_CONSTANTS.image_url.start_agent_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_agent_audio,
+		compStyles : { borderTopRightRadius: '0px', background: '#FFFCE6' },
+	},
+};
+
+export const VOICE_CALL_LOADER = {
+	loader: GLOBAL_CONSTANTS.image_url.voice_call_loader,
 };
 
 export const STRING_TO_ARRAY_REGEX = GLOBAL_CONSTANTS.regex_patterns.string_to_array;
