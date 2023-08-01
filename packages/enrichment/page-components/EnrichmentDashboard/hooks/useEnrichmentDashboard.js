@@ -88,6 +88,8 @@ const useEnrichmentDashboard = ({ secondaryTab = 'active' }) => {
 	}, [allowedToSeeAgentsData, partner_id, searchQuery, secondaryTab, selected_agent_id, user_id]);
 
 	const handleEditDetails = (feedback_request_id, action) => {
+		localStorage.setItem('active_enrichment_tab', secondaryTab);
+
 		router.push(`/enrichment/${feedback_request_id}?action_type=${action}`);
 	};
 

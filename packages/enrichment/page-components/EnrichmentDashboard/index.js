@@ -9,7 +9,7 @@ import useEnrichmentStats from './hooks/useEnrichmentStats';
 import styles from './styles.module.css';
 
 function EnrichmentDashboard() {
-	const [secondaryTab, setSecondaryTab] = useState('active');
+	const [secondaryTab, setSecondaryTab] = useState(localStorage.getItem('active_enrichment_tab') || 'active');
 
 	const {
 		stats = {},
