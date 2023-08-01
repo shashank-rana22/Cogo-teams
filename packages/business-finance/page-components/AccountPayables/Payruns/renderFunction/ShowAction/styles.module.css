@@ -1,0 +1,10 @@
+.section {
+	margin-bottom: 2px;
+	font-weight: 500;
+}
+
+.styled_link {
+	font-size: 12px;
+	color: #fc5555;
+	cursor: pointer;
+}

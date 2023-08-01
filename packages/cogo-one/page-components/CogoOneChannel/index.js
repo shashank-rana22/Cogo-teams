@@ -111,7 +111,9 @@ function CogoOne() {
 		setAutoAssignChats,
 	};
 
-	const { hasNoFireBaseRoom = false } = activeTab || {};
+	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
+
+	const { user_id = '' } = tabData || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
 	const orgId = activeTab?.tab === 'message'
@@ -168,7 +170,11 @@ function CogoOne() {
 				{isEmpty(activeTab?.data)
 					? (
 						<div className={styles.empty_page}>
-							<EmptyChatPage activeTab={activeTab} />
+							<EmptyChatPage
+								activeTab={activeTab}
+								viewType={viewType}
+								setActiveTab={setActiveTab}
+							/>
 						</div>
 					) : (
 						<>
@@ -192,7 +198,7 @@ function CogoOne() {
 
 							{activeTab?.tab !== 'mail' && (
 								<div className={cl`${styles.user_profile_layout} 
-								${hasNoFireBaseRoom ? styles.disable_user_profile : ''}`}
+								${(hasNoFireBaseRoom && !user_id) ? styles.disable_user_profile : ''}`}
 								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
@@ -210,7 +216,7 @@ function CogoOne() {
 										formattedMessageData={formattedMessageData}
 										orgId={orgId}
 									/>
-									{hasNoFireBaseRoom && <div className={styles.overlay_div} />}
+									{(hasNoFireBaseRoom && !user_id) && <div className={styles.overlay_div} />}
 								</div>
 							)}
 						</>
