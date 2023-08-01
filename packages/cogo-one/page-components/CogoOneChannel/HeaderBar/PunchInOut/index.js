@@ -23,8 +23,6 @@ const MAX_SECOND_VALUE = 60;
 const TWO_DIGIT_NUMBER = 2;
 const BUTTON_SHAKE_DURATION = 300000;
 
-const AGENT_BREAK_STATUS = ['punched_out', 'inactive'];
-
 const formatTime = (seconds) => {
 	const mins = Math.floor(seconds / MAX_SECOND_VALUE);
 	const secs = seconds % MAX_SECOND_VALUE;
@@ -141,7 +139,7 @@ function PunchInOut({
 				<Image src={GLOBAL_CONSTANTS.image_url.sad_icon} alt="sad-emoji" width={18} height={18} />
 				<div className={styles.break_time}>{MIN_FEEDBACK_SCORE}</div>
 				<IcMDown className={styles.down_icon} />
-				{AGENT_BREAK_STATUS.includes(status) ? (
+				{status === 'punched_out' ? (
 					<Button
 						size="xs"
 						onClick={handlePunchIn}

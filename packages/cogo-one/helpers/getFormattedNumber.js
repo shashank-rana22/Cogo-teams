@@ -1,5 +1,5 @@
-const MIN_THREE_DIGIT_NUMBER = 999;
-const MAX_FOUR_DIGIT_NUMBER = 1000;
+const MAX_THREE_DIGIT_NUMBER = 999;
+const MIN_FOUR_DIGIT_NUMBER = 1000;
 const INCREASE_COUNT_BY_ONE = 1;
 const ROUND_UP_NUMBER = 2;
 const EQUAL_TO_ZERO = 0;
@@ -15,8 +15,8 @@ export const getFormattedNumber = (val) => {
 	let newVal = val;
 	let digitRemain = 0;
 
-	while (newVal > MIN_THREE_DIGIT_NUMBER) {
-		newVal /= MAX_FOUR_DIGIT_NUMBER;
+	while (newVal > MAX_THREE_DIGIT_NUMBER) {
+		newVal /= MIN_FOUR_DIGIT_NUMBER;
 		digitRemain += INCREASE_COUNT_BY_ONE;
 	}
 
