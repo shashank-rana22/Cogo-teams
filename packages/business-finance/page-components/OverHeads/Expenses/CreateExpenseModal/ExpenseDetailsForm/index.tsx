@@ -120,11 +120,13 @@ function ExpenseDetailsForm({
 					entity_code: entityCode,
 					business_name: name,
 				} = entity || {};
-				ENTITIES.push({
-					...entity,
-					label : `${entityCode}-${name}`,
-					value : id,
-				});
+				if (entity.status === 'active') {
+					ENTITIES.push({
+						...entity,
+						label : `${entityCode}-${name}`,
+						value : id,
+					});
+				}
 			});
 			setEntityOptions([...ENTITIES]);
 		}
