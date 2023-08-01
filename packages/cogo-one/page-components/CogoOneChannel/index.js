@@ -215,6 +215,7 @@ function CogoOne() {
 										setActiveTab={setActiveTab}
 										formattedMessageData={formattedMessageData}
 										orgId={orgId}
+										mailProps={mailProps}
 									/>
 									{(hasNoFireBaseRoom && !user_id) && <div className={styles.overlay_div} />}
 								</div>
