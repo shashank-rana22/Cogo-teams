@@ -102,8 +102,6 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref
 
 	const countryValidation = getCountryConstants({ country_id: formValues.country_id, isDefaultData: false });
 
-	console.log({ countryValidation });
-
 	const taxLabel = countryValidation?.others?.registration_number?.label || 'PAN';
 
 	useEffect(() => {

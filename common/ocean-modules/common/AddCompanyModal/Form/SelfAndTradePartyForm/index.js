@@ -100,7 +100,7 @@ function SelfAndTradePartyForm({
 	}, [address, addressData, setValue, resetMultipleFields, id]);
 
 	useEffect(() => {
-		resetMultipleFields(['work_scopes', 'email', 'mobile_number']);
+		resetMultipleFields(['work_scopes', 'email']);
 
 		if (name) {
 			const selectedName = pocNameOptions?.find((item) => item?.value === name);
@@ -124,6 +124,12 @@ function SelfAndTradePartyForm({
 	}
 
 	const countryValidation = getCountryConstants({ country_id: countryId, isDefaultData: false });
+
+	useEffect(() => {
+		if (trade_party_id) {
+			setValue('mobile_number', { country_code: countryValidation?.country?.mobile_country_code });
+		}
+	}, [trade_party_id, countryValidation?.country?.mobile_country_code, setValue]);
 
 	return (
 		<div>

@@ -1,6 +1,8 @@
+import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFfcl, IcMFcustoms, IcMFlocalCharges } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import CardHeader from '../../../../common/Card/CardHeader';
@@ -31,19 +33,27 @@ const SHIPMENT_ICON = {
 	},
 };
 
+const SHIPMENT_TYPE = {
+	fcl_freight: 'fcl',
+};
+
+const STEPPER_TAB = ['import', 'export'];
+
 function Card({ item = {} }) {
+	const router = useRouter();
 	const contextValues = useContext(CostBookingDeskContext);
 
-	const { activeTab } = contextValues || {};
+	const { partner_id = '' } = router.query || {};
 
-	const router = useRouter();
+	const { shipmentType, stepperTab, activeTab } = contextValues || {};
 
-	const clickCard = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}
-		?${CONSTANTS.url_navigation_params}`;
+	const hrefPrefix = shipmentType in SHIPMENT_TYPE && STEPPER_TAB.includes(stepperTab)
+		? `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE[shipmentType]}/`
+		: `${window.location.origin}/${partner_id}/shipments/`;
 
+	const handleCardClick = (e) => {
+		const newUrl = e.currentTarget.href;
 		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
 	};
 
 	const iconProps = SHIPMENT_ICON[item?.shipment_type] || SHIPMENT_ICON.fcl_freight;
@@ -55,11 +65,10 @@ function Card({ item = {} }) {
 	const showGateInCutOff = ['assigned', 'in_progress'].includes(activeTab) && item?.gate_in_cutoff;
 
 	return (
-		<div
-			role="button"
-			tabIndex={0}
-			onClick={clickCard}
-			className={`${styles.card} ${isShipmentCritical ? styles.animate_card : ''}`}
+		<a
+			href={`${hrefPrefix}${item?.id}?${CONSTANTS.url_navigation_params}`}
+			onClick={handleCardClick}
+			className={cl`${styles.card} ${isShipmentCritical ? styles.animate_card : ''}`}
 		>
 			<CardHeader item={item} />
 
@@ -95,10 +104,16 @@ function Card({ item = {} }) {
 				<div className={styles.gate_in_cutoff}>
 					GateIn Cutoff:
 					{' '}
-					{format(item.gate_in_cutoff, 'dd MMM yyyy, hh:mm aaa')}
+					{formatDate({
+						date       : item.gate_in_cutoff,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'dateTime',
+						separator  : ', ',
+					})}
 				</div>
 			) : null}
-		</div>
+		</a>
 	);
 }
 export default Card;
