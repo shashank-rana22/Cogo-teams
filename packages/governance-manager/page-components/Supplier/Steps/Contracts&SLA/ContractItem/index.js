@@ -6,11 +6,11 @@ import { useState } from 'react';
 import useUpdateOrganizationContract from '../hooks/useUpdateOrganizationContract';
 import styles from '../styles.module.css';
 
-function ContractItem({ item, index, step, control }) {
+function ContractItem({ item, index, step, control, id }) {
 	const [value, setValue] = useState();
+	const ZERO = 0;
 	const ONE = 1;
-	const { UpdateOrganizationContract } = useUpdateOrganizationContract();
-
+	const { UpdateOrganizationContract } = useUpdateOrganizationContract({ item, id, updatedValue: value });
 	return (
 		<div key={item}>
 			<div className={styles.box_layout}>
@@ -30,18 +30,16 @@ function ContractItem({ item, index, step, control }) {
 								size="sm"
 								value={value}
 								onChange={setValue}
-								control={control}
-								name="update"
-								rules={{ required: { value: true, message: 'POC Name is required' } }}
 								style={{ marginLeft: '12px', height: '20px', width: '140px' }}
 								placeholder=" "
+								disabled={item?.state === 'approved'}
 							/>
 							<Button
 								size="sm"
 								themeType="secondary"
 								className={styles.update_button}
 								style={{ height: '28px' }}
-								onClick={UpdateOrganizationContract}
+								onClick={() => UpdateOrganizationContract('updated')}
 							>
 								Update
 
@@ -62,6 +60,8 @@ function ContractItem({ item, index, step, control }) {
 									marginRight : '24px',
 								}}
 								placeholder=" "
+								disabled
+								value={item?.variables_details?.[ZERO]?.default_value}
 							/>
 							<span className={styles.icon}>Updated Value</span>
 							<InputController
@@ -71,12 +71,16 @@ function ContractItem({ item, index, step, control }) {
 								rules={{ required: { value: true, message: 'Value is required' } }}
 								style={{ marginLeft: '12px', height: '20px', width: '90px' }}
 								placeholder=" "
+								disabled
+								value={item?.variables_details?.[ZERO]?.updated_value}
 							/>
+
 							<Button
 								size="sm"
 								themeType="secondary"
 								className={styles.update_button}
 								style={{ height: '28px' }}
+								onClick={() => UpdateOrganizationContract('approved')}
 							>
 								Confirm
 

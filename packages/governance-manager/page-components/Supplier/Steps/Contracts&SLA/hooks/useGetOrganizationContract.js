@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetOrganizationContract = ({ organization_id }) => {
+const useGetOrganizationContract = ({ organization_id, step }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : 'get_organization_contract',
@@ -22,10 +22,11 @@ const useGetOrganizationContract = ({ organization_id }) => {
 	useEffect(() => {
 		if (organization_id) { getOrganizationContract(); }
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [step]);
 
 	return {
-		data: data?.data?.terms_details,
+		data : data?.data?.terms_details,
+		id   : data?.data?.id,
 		loading,
 		getOrganizationContract,
 	};
