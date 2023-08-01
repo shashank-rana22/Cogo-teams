@@ -13,6 +13,8 @@ import BulkUpload from '../BulkUpload';
 import controls from './controls';
 import styles from './styles.module.css';
 
+const DEFAULT_HOUR_MINUTE_SECOND = 0;
+
 const PERSONAL_DETAILS_MAPPING = ['name', 'personal_email', 'mobile_number'];
 
 const EMPLOYEE_DETAILS_MAPPING = [
@@ -21,6 +23,7 @@ const EMPLOYEE_DETAILS_MAPPING = [
 	'date_of_joining',
 	'office_location',
 	'cogoport_email',
+	'office_location_country',
 ];
 
 const HR_DETAILS_MAPPING = ['hr_id', 'reporting_manager_id', 'hiring_manager_id', 'hrbp_id'];
@@ -74,8 +77,10 @@ const RenderFields = ({ show, control, errors }) => (Object.keys(controls) || []
 	);
 });
 
-function FormComponent({ setActivePage }) {
+function FormComponent({ setActivePage = () => {} }) {
 	const router = useRouter();
+
+	const { user = {} } = useSelector((state) => state.profile);
 
 	const [bulkUploadComponent, setBulkUploadComponent] = useState(false);
 
@@ -91,8 +96,6 @@ function FormComponent({ setActivePage }) {
 		router.back();
 	};
 
-	const { user = {} } = useSelector((state) => state.profile);
-
 	const {
 		control,
 		handleSubmit,
@@ -106,11 +109,26 @@ function FormComponent({ setActivePage }) {
 
 	const onClickSaveDetails = async (values) => {
 		try {
+			const doj = values?.date_of_joining;
+
+			const utcDate = new Date(
+				Date.UTC(
+					doj?.getFullYear(),
+					doj?.getMonth(),
+					doj?.getDate(),
+					DEFAULT_HOUR_MINUTE_SECOND,
+					DEFAULT_HOUR_MINUTE_SECOND,
+					DEFAULT_HOUR_MINUTE_SECOND,
+				),
+			) || undefined;
+
 			const payload = {
 				...values,
 				mobile_number       : values?.mobile_number?.number,
 				mobile_country_code : values?.mobile_number?.country_code,
+				date_of_joining     : utcDate,
 			};
+
 			const res = await trigger({ data: payload });
 
 			setActivePage(res?.data?.id);

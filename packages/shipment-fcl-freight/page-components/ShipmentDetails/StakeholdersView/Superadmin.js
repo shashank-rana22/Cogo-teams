@@ -24,11 +24,13 @@ import Tasks from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
+import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
 const UNAUTHORIZED_STATUS_CODE = 403;
 const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
+const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function Superadmin({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -64,6 +66,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 		...servicesGet,
 		...getTimeline,
 		activeStakeholder,
+		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	useEffect(() => {
@@ -92,7 +95,8 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;Refresh
+						{' '}
+						Refresh
 					</Button>
 				</div>
 			</div>
@@ -172,7 +176,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 							<ShipmentMails
 								source="cogo_rpa"
 								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={`${shipment_data?.serial_id}`}
+								pre_subject_text={shipment_data?.serial_id}
 							/>
 						</TabPanel>
 

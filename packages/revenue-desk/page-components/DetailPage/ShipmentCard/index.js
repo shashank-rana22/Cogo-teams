@@ -33,7 +33,6 @@ function ShipmentCard({ itemData, priceData }) {
 						{' '}
 						mins
 						{' '}
-						left
 					</div>
 				</div>
 			</div>

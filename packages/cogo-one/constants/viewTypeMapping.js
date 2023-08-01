@@ -77,6 +77,22 @@ function getSalesSessionQuery({ sessionType, activeSubTab = '' }) {
 		: [where('session_type', '==', sessionType)];
 }
 
+function getShipmentSpecialistButtons({
+	supportAgentId,
+	userId,
+	showBotMessages,
+}) {
+	if (supportAgentId === userId) {
+		return ['assign_modal'];
+	}
+
+	if (showBotMessages) {
+		return ['assign_to_me'];
+	}
+
+	return ['request_for_assign'];
+}
+
 export const VIEW_TYPE_GLOBAL_MAPPING = {
 	sales: {
 		all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
@@ -91,12 +107,14 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 		},
-		extra_side_bar_navs_access   : ['spot_search'],
-		get_accesible_assign_buttons : getSalesAgentButtons,
-		accesible_agent_types_query  : [where('agent_type', 'in', ['sales', 'bot'])],
-		show_relevant_templates      : ['quick_reply'],
-		mails_to_be_shown            : [],
-		permissions                  : {
+		extra_side_bar_navs_access    : ['spot_search'],
+		get_accesible_assign_buttons  : getSalesAgentButtons,
+		accesible_agent_types_query   : [where('agent_type', 'in', ['sales', 'bot'])],
+		show_relevant_templates       : ['quick_reply'],
+		mails_to_be_shown             : [],
+		bulk_assign_features          : [],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
+		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -109,7 +127,9 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : false,
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
-			global_contacts             : true,
+			flash_revert_logs           : false,
+			punch_in_out                : false,
+			show_shipments_home_page    : false,
 		},
 	},
 	sales_admin: {
@@ -124,12 +144,14 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 		},
-		accesible_agent_types_query  : [where('agent_type', 'in', ['sales', 'bot'])],
-		extra_side_bar_navs_access   : ['spot_search'],
-		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
-		show_relevant_templates      : ['quick_reply'],
-		mails_to_be_shown            : [],
-		permissions                  : {
+		accesible_agent_types_query   : [where('agent_type', 'in', ['sales', 'bot'])],
+		extra_side_bar_navs_access    : ['spot_search'],
+		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
+		show_relevant_templates       : ['quick_reply'],
+		mails_to_be_shown             : [],
+		bulk_assign_features          : [],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
+		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -142,7 +164,9 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
-			global_contacts             : true,
+			flash_revert_logs           : false,
+			punch_in_out                : false,
+			show_shipments_home_page    : false,
 		},
 	},
 	support: {
@@ -158,12 +182,14 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 		},
-		accesible_agent_types_query  : [where('agent_type', 'in', ['support', 'bot'])],
-		extra_side_bar_navs_access   : ['spot_search'],
-		get_accesible_assign_buttons : getKamButtons,
-		show_relevant_templates      : ['quick_reply'],
-		mails_to_be_shown            : [],
-		permissions                  : {
+		accesible_agent_types_query   : [where('agent_type', 'in', ['support', 'bot'])],
+		extra_side_bar_navs_access    : ['spot_search'],
+		get_accesible_assign_buttons  : getKamButtons,
+		show_relevant_templates       : ['quick_reply'],
+		mails_to_be_shown             : [],
+		bulk_assign_features          : [],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail'],
+		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -176,7 +202,9 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : false,
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
-			global_contacts             : false,
+			flash_revert_logs           : false,
+			punch_in_out                : true,
+			show_shipments_home_page    : false,
 		},
 	},
 	support_admin: {
@@ -190,12 +218,14 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 		},
-		accesible_agent_types_query  : [where('agent_type', 'in', ['support', 'bot'])],
-		extra_side_bar_navs_access   : ['spot_search'],
-		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
-		show_relevant_templates      : ['quick_reply'],
-		mails_to_be_shown            : [],
-		permissions                  : {
+		accesible_agent_types_query   : [where('agent_type', 'in', ['support', 'bot'])],
+		extra_side_bar_navs_access    : ['spot_search'],
+		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
+		show_relevant_templates       : ['quick_reply'],
+		mails_to_be_shown             : [],
+		bulk_assign_features          : [],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail'],
+		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -208,7 +238,10 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
-			global_contacts             : false,
+			flash_revert_logs           : false,
+			punch_in_out                : false,
+			show_shipments_home_page    : false,
+
 		},
 	},
 	supply: {
@@ -225,13 +258,15 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			all      : ['chat_tags'],
 			contacts : ['chat_tags'],
 		},
-		extra_side_bar_navs_access   : ['flash_shipment_bookings'],
-		accesible_agent_types_query  : [where('agent_type', 'in', ['supply', 'bot'])],
-		get_accesible_assign_buttons : getSupplyAgentButtons,
-		default_side_nav             : 'flash_shipment_bookings',
-		show_relevant_templates      : ['supply'],
-		mails_to_be_shown            : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
-		permissions                  : {
+		extra_side_bar_navs_access    : ['flash_shipment_bookings'],
+		accesible_agent_types_query   : [where('agent_type', 'in', ['supply', 'bot'])],
+		get_accesible_assign_buttons  : getSupplyAgentButtons,
+		default_side_nav              : 'flash_shipment_bookings',
+		show_relevant_templates       : ['supply'],
+		mails_to_be_shown             : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
+		bulk_assign_features          : ['bulk_send_templates'],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
+		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -244,7 +279,9 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : false,
 			send_promotional_rate       : false,
 			agent_type_filter           : false,
-			global_contacts             : false,
+			flash_revert_logs           : true,
+			punch_in_out                : false,
+			show_shipments_home_page    : false,
 		},
 	},
 	supply_admin: {
@@ -260,13 +297,15 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			all      : ['chat_tags'],
 			contacts : ['chat_tags'],
 		},
-		extra_side_bar_navs_access   : ['flash_shipment_bookings'],
-		accesible_agent_types_query  : [where('agent_type', 'in', ['supply', 'bot'])],
-		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
-		default_side_nav             : 'flash_shipment_bookings',
-		show_relevant_templates      : ['supply'],
-		mails_to_be_shown            : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
-		permissions                  : {
+		extra_side_bar_navs_access    : ['flash_shipment_bookings'],
+		accesible_agent_types_query   : [where('agent_type', 'in', ['supply', 'bot'])],
+		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
+		default_side_nav              : 'flash_shipment_bookings',
+		show_relevant_templates       : ['supply'],
+		mails_to_be_shown             : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
+		bulk_assign_features          : ['bulk_send_templates'],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
+		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -279,23 +318,24 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			send_promotional_rate       : false,
 			agent_type_filter           : false,
-			global_contacts             : false,
+			flash_revert_logs           : true,
+			punch_in_out                : false,
+			show_shipments_home_page    : false,
 		},
 	},
 	shipment_specialist: {
-		all_chats_base_query         : ({ agentId }) => [where('booking_agent_ids', 'array-contains', agentId)],
-		session_type_query           : () => [where('session_type', 'in', ['bot', 'admin'])],
-		chat_sub_tabs_access         : ['all'],
-		extra_side_bar_navs_access   : [],
-		default_side_nav             : 'user_activity',
-		get_accesible_assign_buttons : ({
-			supportAgentId,
-			userId,
-		}) => (supportAgentId === userId ? ['assign_modal'] : []),
-		accesible_agent_types_query : [where('agent_type', 'in', ['shipment', 'bot'])],
-		show_relevant_templates     : ['quick_reply'],
-		mails_to_be_shown           : [],
-		permissions                 : {
+		all_chats_base_query          : ({ agentId }) => [where('support_agent_id', '==', agentId)],
+		session_type_query            : () => [where('session_type', '==', 'admin')],
+		chat_sub_tabs_access          : ['all'],
+		extra_side_bar_navs_access    : [],
+		default_side_nav              : 'user_activity',
+		get_accesible_assign_buttons  : getShipmentSpecialistButtons,
+		accesible_agent_types_query   : [where('agent_type', 'in', ['shipment', 'bot'])],
+		show_relevant_templates       : ['quick_reply'],
+		mails_to_be_shown             : [],
+		bulk_assign_features          : [],
+		accessible_new_communications : ['new_mail'],
+		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -305,11 +345,13 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			toggle_self_status          : true,
 			has_group_access            : true,
 			can_message_on_bot_session  : true,
-			has_permission_to_edit      : true,
+			has_permission_to_edit      : false,
 			show_organization_users     : false,
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
-			global_contacts             : false,
+			flash_revert_logs           : false,
+			punch_in_out                : false,
+			show_shipments_home_page    : true,
 		},
 	},
 	cogoone_admin: {
@@ -322,13 +364,15 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			all      : ['15_min_filter', 'assigned_to', 'assigned_agent', 'chat_tags'],
 			contacts : ['chat_tags'],
 		},
-		extra_side_bar_navs_access   : ['spot_search', 'flash_shipment_bookings'],
-		accesible_agent_types_query  : [],
-		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
-		default_side_nav             : 'profile',
-		show_relevant_templates      : ['quick_reply', 'supply'],
-		mails_to_be_shown            : [],
-		permissions                  : {
+		extra_side_bar_navs_access    : ['spot_search', 'flash_shipment_bookings'],
+		accesible_agent_types_query   : [],
+		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
+		default_side_nav              : 'profile',
+		show_relevant_templates       : ['quick_reply', 'supply'],
+		mails_to_be_shown             : [],
+		bulk_assign_features          : ['bulk_auto_assign', 'bulk_send_templates'],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],
+		permissions                   : {
 			auto_assign                 : true,
 			bot_message_toggle          : true,
 			organization_users_contacts : true,
@@ -341,7 +385,9 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			send_promotional_rate       : true,
 			agent_type_filter           : true,
-			global_contacts             : true,
+			flash_revert_logs           : false,
+			punch_in_out                : false,
+			show_shipments_home_page    : false,
 		},
 	},
 };

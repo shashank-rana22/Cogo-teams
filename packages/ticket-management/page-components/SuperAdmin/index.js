@@ -27,7 +27,10 @@ function SuperAdmin() {
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"
-				onChange={setActiveTab}
+				onChange={(val) => {
+					setActiveTab(val);
+					setDate({ startDate: null, endate: null });
+				}}
 				className={styles.tab_panel}
 			>
 				<TabPanel
@@ -40,15 +43,18 @@ function SuperAdmin() {
 					name="all_tickets"
 					title="All Tickets"
 				>
-					<FilterTicketsSection type="admin" refreshList={refreshList} setRefreshList={setRefreshList} />
+					<FilterTicketsSection
+						type="admin"
+						date={date}
+						refreshList={refreshList}
+						setRefreshList={setRefreshList}
+					/>
 				</TabPanel>
 			</Tabs>
 
-			{activeTab === 'dashboard' ?	(
-				<div className={styles.date_filter}>
-					<DateRangepicker name="date" onChange={setDate} value={date} isPreviousDaysAllowed />
-				</div>
-			) : null}
+			<div className={styles.date_filter}>
+				<DateRangepicker name="date" onChange={setDate} value={date} isPreviousDaysAllowed />
+			</div>
 		</div>
 
 	);

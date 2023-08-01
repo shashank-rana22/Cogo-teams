@@ -1,21 +1,25 @@
 import { Modal, Button } from '@cogoport/components';
-import { TextAreaController, InputController, useForm, SelectController } from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
+import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 import useRaiseTicketControls from '../../configurations/raise-ticket-controls';
 import useCreateTicket from '../../hooks/useCreateTicket';
+import { getFieldController } from '../../utils/getFieldController';
 import HeaderName from '../HeaderName';
 import ReceiveDiv from '../ReceiveDiv';
 
 import styles from './styles.module.css';
 
-const CONTROLLER_MAPPING = {
-	input    : InputController,
-	select   : SelectController,
-	textarea : TextAreaController,
-};
-function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, refetchTickets = () => {} }) {
-	const { data:{ messageData = {}, formattedData = {} } = {}, source = null } = raiseTicketModal || {};
+function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, refetchTickets = () => {}, orgId = '' }) {
+	const {
+		performedById,
+	} = useSelector(({ profile }) => ({
+		performedById: profile.user.id,
+	}));
+
+	const { data : { messageData = {}, formattedData = {} } = {}, source = null } = raiseTicketModal || {};
+
 	const closeModal = () => {
 		setRaiseTicketModal({ state: false, data: {} });
 	};
@@ -24,15 +28,16 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 		createTicket,
 		loading = false,
 	} = useCreateTicket({ closeModal, refetchTickets });
+
 	const {
 		control,
 		handleSubmit,
 		watch,
-		formState:{ errors = {} },
+		formState : { errors = {} },
 		setValue,
 	} = useForm();
 
-	const { ticket_type:watchTicketType = '' } = watch();
+	const { ticket_type : watchTicketType = '' } = watch();
 
 	const { controls = [], ticketDataKey = '' } = useRaiseTicketControls({
 		watchTicketType,
@@ -45,14 +50,18 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 			created_at = '',
 		} = messageData;
 
-		const { user_id = null, lead_user_id = null } = formattedData || {};
-		const { ticket_data = null, ticket_type = null, description = null } = val || {};
+		const { user_id = null, lead_user_id = null, organization_id: organizationId = '' } = formattedData || {};
+		const { ticket_data = null, ticket_type = null, description = null, notify_customer = false } = val || {};
 		const payload = {
-			UserID      : user_id || lead_user_id,
-			Source      : 'client',
-			Type        : ticket_type,
-			Description : description,
-			Data        : {
+			PerformedByID  : performedById,
+			OrganizationID : organizationId || orgId || undefined,
+			UserID         : user_id || lead_user_id,
+			Source         : 'client',
+			Type           : ticket_type,
+			Description    : description,
+			NotifyCustomer : notify_customer,
+			UserType       : 'ticket_user',
+			Data           : {
 				MessageData: {
 					Message     : message,
 					MediaUrl    : media_url,
@@ -92,18 +101,22 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 					</>
 				)}
 				<div className={styles.styled_form}>
-					{controls.map((eachControl = {}) => {
+					{(controls || []).map((eachControl = {}) => {
 						const { label = '', controlType = '', name = '' } = eachControl || {};
-						const Element = CONTROLLER_MAPPING[controlType] || null;
-						return (Element && (
-							<div className={styles.styled_element}>
+
+						const Element = getFieldController(controlType);
+
+						if (!Element) return null;
+
+						return (
+							<div key={name} className={styles.styled_element}>
 								<div className={styles.label}>{label}</div>
 								<Element control={control} {...eachControl} />
 								<div className={styles.error_text}>
 									{errors?.[name] && (errors?.[name]?.message || 'This is Required')}
 								</div>
 							</div>
-						));
+						);
 					})}
 				</div>
 			</Modal.Body>

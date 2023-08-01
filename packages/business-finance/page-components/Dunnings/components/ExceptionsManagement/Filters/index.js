@@ -21,6 +21,7 @@ function Filters({
 	setSearchValue = null,
 	cycleListId = '',
 	getMasterList = null,
+	entityId = '',
 }) {
 	const [show, setShow] = useState(false);
 	const [uncheckedRows, setUncheckedRows] = useState([]);
@@ -96,6 +97,7 @@ function Filters({
 						uploadListLoading={uploadListLoading}
 						reset={reset}
 						showEntityFilter={showEntityFilter}
+						entityId={entityId}
 					/>
 				)}
 

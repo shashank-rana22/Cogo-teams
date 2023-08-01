@@ -1,0 +1,35 @@
+{
+    "features":["shipment_info", "shipment_header","overview", "tasks", "documents", "emails"],  
+    "shipment_info":{
+        "show_source": false
+    },
+    "shipment_header": {
+        "show_po_number": false,
+        "show_poc_details": false
+    },
+    "default_tab":"tasks",
+    "timeline": {
+        "can_edit_schedule": true
+    },
+    "overview":{
+        "tab_title":"Overview",
+        "can_upsell": false,
+        "can_edit_cancel_service": false,
+        "can_edit_container_details": false,
+        "show_terms_and_conditions": false
+    },
+    "tasks":{
+        "tab_title":"Timeline and Tasks",
+        "show_booking_req":true,
+        "is_task_assigned":false,
+        "can_reassign_task":true,
+        "show_others_tasks": false,
+        "show_igm_tasks": true
+    },
+    "documents":{
+        "tab_title":"Documents",
+        "default_wallet":"trade_documents",
+        "can_edit_documents": false,
+        "show_igm_docs": true
+    }
+}

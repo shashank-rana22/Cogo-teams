@@ -5,7 +5,9 @@ import BLDetails from './BLDetails';
 import OverviewManageServices from './OverviewManageServices';
 import styles from './styles.module.css';
 
-function Overview({ shipmentData = {} }) {
+function Overview({ shipmentData = {}, stakeholderConfig = {} }) {
+	const showTermsAndConditions = !!stakeholderConfig?.overview?.show_terms_and_conditions;
+
 	return (
 		<div className={styles.container}>
 			<OverviewManageServices />
@@ -15,7 +17,7 @@ function Overview({ shipmentData = {} }) {
 					<Assured shipmentData={shipmentData} />
 				) : null}
 
-				{shipmentData?.terms_and_conditions?.length ? (
+				{showTermsAndConditions && shipmentData?.terms_and_conditions?.length ? (
 					<TermsAndConditions shipmentData={shipmentData} />
 				) : null}
 			</div>
