@@ -39,9 +39,11 @@ const useAgentExpSlabs = ({
 		agentExpSlabs,
 	});
 
-	const { control, formState: { errors }, handleSubmit, watch, setValue, clearErrors } = useForm({
+	const { control, formState: { errors }, handleSubmit, watch, setValue, reset } = useForm({
 		defaultValues: {
-			experience: (id) ? 'custom' : 'default',
+			experience     : (id) ? 'custom' : 'default',
+			cogo_entity_id : '',
+			role_id        : '',
 		},
 	});
 
@@ -78,7 +80,7 @@ const useAgentExpSlabs = ({
 				createAgentExperienceSlabs({
 					values,
 					setShowForm,
-					clearErrors,
+					reset,
 				});
 			}
 		} else setShowForm(false);
