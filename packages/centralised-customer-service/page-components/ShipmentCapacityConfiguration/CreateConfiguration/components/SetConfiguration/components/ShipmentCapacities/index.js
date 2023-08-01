@@ -81,7 +81,7 @@ function ShipmentCapacities(props) {
 									const { slab_unit, slab_lower_limit, slab_upper_limit } = item;
 
 									return (
-										<div key={item.id} className={styles.item}>
+										<div key={item.slab_lower_limit} className={styles.item}>
 											{slab_lower_limit}
 											{getUpperLimit(slab_upper_limit, source)}
 											{' '}

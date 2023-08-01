@@ -1,15 +1,12 @@
 import { Button, Accordion, Modal } from '@cogoport/components';
-import { useForm, RadioGroupController, AsyncSelectController } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { RadioGroupController, AsyncSelectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useState, useMemo } from 'react';
+import React from 'react';
 
 import getElementController from '../../../configurations/getElementController';
 import orgSubTypeOptions from '../../../configurations/org-subtype-options-mapping';
-import useCreateCssConfig from '../../../hooks/useCreateCcsConfig';
-import useGetCcsConfigurations from '../../../hooks/useGetCcsConfigurations';
+import { useCreateConfig } from '../../../hooks/useCreateConfig';
 
 import { getControls, preferredRoleControls } from './controls';
 import styles from './styles.module.css';
@@ -29,54 +26,21 @@ const ACCORD_CONTENT = [{
 
 function CreateConfig() {
 	const router = useRouter();
-
-	const [showModal, setShowModal] = useState(false);
-
 	const { id } = router.query;
 
-	const { list = [], fetchList = () => {} } = useGetCcsConfigurations();
-
-	const data = useMemo(() => list[GLOBAL_CONSTANTS.zeroth_index] || {}, [list]);
-
-	const { loading, createCcsConfig } = useCreateCssConfig({ setShowModal });
-
-	const { control, formState:{ errors }, handleSubmit, watch, setValue = () => {} } = useForm();
-
-	const [orgType, cogoEntityId, reportingManagerIds, orgSubType] = watch(['organization_type',
-		'cogo_entity_id', 'agent_id', 'segment']);
-
-	useEffect(() => {
-		if (!isEmpty(data)) {
-			const {
-				agent_id, booking_source, cogo_entity_id,
-				config_type, organization_ids, organization_type, segment, preferred_role_id,
-			} = data || {};
-
-			setValue('cogo_entity_id', cogo_entity_id);
-			setValue('config_type', config_type);
-			setValue('organization_ids', organization_ids);
-			setValue('organization_type', organization_type);
-			setValue('segment', segment);
-			setValue('agent_id', agent_id);
-			setValue('booking_source', booking_source);
-			setValue('preferred_role_id', preferred_role_id);
-		}
-	}, [data, setValue]);
-
-	useEffect(() => {
-		if (id) fetchList();
-	}, [id, fetchList]);
-
-	useEffect(() => {
-		if (orgSubType) {
-			const isValuePresent = orgSubTypeOptions[orgType].some((obj) => obj.value === orgSubType);
-			if (!isValuePresent) setValue('segment', undefined);
-		}
-	}, [orgSubType, orgType, setValue]);
-
-	useEffect(() => {
-		if (isEmpty(reportingManagerIds)) setValue('organization_ids', reportingManagerIds);
-	}, [reportingManagerIds, setValue]);
+	const {
+		control = () => {},
+		errors = {},
+		handleSubmit = () => {},
+		showModal = false,
+		setShowModal = () => {},
+		loading = false,
+		createCcsConfig = () => {},
+		orgType = '',
+		cogoEntityId = '',
+		reportingManagerIds = '',
+		isInputDisabled = () => {},
+	} = useCreateConfig({ id });
 
 	return (
 
@@ -112,11 +76,8 @@ function CreateConfig() {
 									<Element
 										control={control}
 										{...controlItem}
-										{...(name === 'segment' && { options: orgSubTypeOptions[orgType] })}
-										disabled={(name === 'agent_id'
-										&& isEmpty(cogoEntityId)) || (name === 'organization_ids'
-										&& isEmpty(reportingManagerIds)) || (name === 'cogo_entity_id'
-										&& !isEmpty(cogoEntityId))}
+										{...(name === 'segment' && { options: orgSubTypeOptions[orgType] || [] })}
+										disabled={isInputDisabled(name)}
 									/>
 									{errors[name] && <div className={styles.error_msg}>This is required</div>}
 								</div>
