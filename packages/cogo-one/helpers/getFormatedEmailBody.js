@@ -2,13 +2,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 function getFormatedEmailBody({ emailState }) {
 	const emailBody = emailState?.body || '';
-	const {
-		para_html_tag_text:checkRegex,
-		h1_html_tag_text: checkH1Regex,
-		h2_html_tag_text: checkH2Regex,
-		h3_html_tag_text: checkH3Regex,
-		li_html_tag_text: checkListRegex,
-	} = GLOBAL_CONSTANTS.regex_patterns;
+
+	const checkRegex = GLOBAL_CONSTANTS?.regex_patterns?.para_html_tag_text || '';
+	const checkH1Regex = GLOBAL_CONSTANTS?.regex_patterns?.h1_html_tag_text || '';
+	const checkH2Regex = GLOBAL_CONSTANTS?.regex_patterns?.h2_html_tag_text || '';
+	const checkH3Regex = GLOBAL_CONSTANTS?.regex_patterns?.h3_html_tag_text || '';
+	const checkListRegex = GLOBAL_CONSTANTS?.regex_patterns?.li_html_tag_text || '';
 
 	const testEmailBody = emailBody.replaceAll('&nbsp;', '');
 	const matchedGroups = (testEmailBody)?.match(checkRegex) || [];
