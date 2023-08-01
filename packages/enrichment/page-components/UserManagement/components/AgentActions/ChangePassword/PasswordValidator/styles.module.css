@@ -17,14 +17,12 @@
 
 		& .item {
 			display: flex;
-			flex-direction: row;
 			gap: 8px;
 			align-items: center;
 			justify-content: flex-start;
 
 			& .icon {
 				display: flex;
-				flex-direction: row;
 				align-items: center;
 				justify-content: center;
 
