@@ -39,8 +39,8 @@ function FclCustoms() {
 	return (
 		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
-			getShipmentStatusCode={getShipmentStatusCode}
-			shipment_data={shipment_data}
+			shipmentStatusCode={getShipmentStatusCode}
+			shipmentData={shipment_data}
 		>
 			<ShipmentDetailContext.Provider value={contextValues}>
 				<DefaultView />

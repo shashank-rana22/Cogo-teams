@@ -70,8 +70,8 @@ function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 	return (
 		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
-			getShipmentStatusCode={getShipmentStatusCode}
-			shipment_data={shipment_data}
+			shipmentStatusCode={getShipmentStatusCode}
+			shipmentData={shipment_data}
 		>
 			<ShipmentDetailContext.Provider value={contextValues}>
 				<div>

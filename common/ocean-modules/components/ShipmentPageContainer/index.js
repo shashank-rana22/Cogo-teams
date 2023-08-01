@@ -9,14 +9,19 @@ import styles from './styles.module.css';
 
 const UNAUTHORIZED_STATUS_CODE = 403;
 
-export default function ShipmentPageContainer({ isGettingShipment, getShipmentStatusCode, shipment_data, children }) {
+export default function ShipmentPageContainer({
+	isGettingShipment = false,
+	shipmentStatusCode = 200,
+	shipmentData = {},
+	children,
+}) {
 	const router = useRouter();
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
 	}, [router]);
 
-	if (isGettingShipment || getShipmentStatusCode === undefined) {
+	if (isGettingShipment || shipmentStatusCode === undefined) {
 		return (
 			<section className={styles.loading_wrapper}>
 				<ThreeDotLoader message="Loading Shipment" fontSize={18} size={45} />
@@ -24,7 +29,7 @@ export default function ShipmentPageContainer({ isGettingShipment, getShipmentSt
 		);
 	}
 
-	if (!shipment_data && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
+	if (!shipmentData && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(shipmentStatusCode)) {
 		return (
 			<section className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -45,7 +50,7 @@ export default function ShipmentPageContainer({ isGettingShipment, getShipmentSt
 		);
 	}
 
-	if (getShipmentStatusCode === UNAUTHORIZED_STATUS_CODE && getShipmentStatusCode !== undefined) {
+	if (shipmentStatusCode === UNAUTHORIZED_STATUS_CODE && shipmentStatusCode !== undefined) {
 		return (
 			<section className={styles.shipment_not_found}>
 				<p className={styles.permission_message}>

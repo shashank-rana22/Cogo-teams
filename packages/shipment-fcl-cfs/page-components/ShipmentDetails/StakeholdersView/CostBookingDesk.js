@@ -42,8 +42,8 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 	return (
 		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
-			getShipmentStatusCode={getShipmentStatusCode}
-			shipment_data={shipment_data}
+			shipmentStatusCode={getShipmentStatusCode}
+			shipmentData={shipment_data}
 		>
 			<ShipmentDetailContext.Provider value={contextValues}>
 				<div className={styles.top_header}>
