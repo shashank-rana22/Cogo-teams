@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
@@ -8,7 +9,7 @@ function EmptyState({
 	return (
 		<div className={styles.container}>
 			<Image
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man"
+				src={GLOBAL_CONSTANTS.image_url.empty_data_image}
 				width={200}
 				height={300}
 				alt="Empty-state"

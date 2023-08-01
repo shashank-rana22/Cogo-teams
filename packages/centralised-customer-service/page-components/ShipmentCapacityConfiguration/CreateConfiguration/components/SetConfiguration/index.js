@@ -162,14 +162,18 @@ function SetConfiguration({
 			</div>
 
 			{showForm && (
-				<ShipmentCapacities
-					agentExperienceSlabs={agentExperienceSlabs}
-					setActiveItem={setActiveItem}
-					data={data}
-					routeLoading={routeLoading}
-					loading={loading}
-					defaultSlabUnit={defaultSlabUnit}
-				/>
+
+				<div id="shipment-capacities">
+					<ShipmentCapacities
+						agentExperienceSlabs={agentExperienceSlabs}
+						setActiveItem={setActiveItem}
+						data={data}
+						routeLoading={routeLoading}
+						loading={loading}
+						defaultSlabUnit={defaultSlabUnit}
+					/>
+				</div>
+
 			)}
 
 		</>

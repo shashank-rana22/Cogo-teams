@@ -15,6 +15,11 @@ const STEPPER_ITEMS = [
 	{ title: 'Total Shipment Capacity', key: 'total_shipment_capacity' },
 ];
 
+const COMPONENTS_MAPPING = {
+	set_configuration       : SetConfiguration,
+	total_shipment_capacity : TotalShipmentCapacity,
+};
+
 function CreateCofiguration() {
 	const router = useRouter();
 
@@ -25,28 +30,22 @@ function CreateCofiguration() {
 
 	const data = list[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const COMPONENT_MAPPING = {
+	const PROPS_MAPPING = {
 		set_configuration: {
-			component : SetConfiguration,
-			props     : {
-				setActiveItem,
-				data,
-				routeLoading,
-				fetchList,
-				loading,
-			},
+			setActiveItem,
+			data,
+			routeLoading,
+			fetchList,
+			loading,
 		},
 		total_shipment_capacity: {
-			component : TotalShipmentCapacity,
-			props     : {
-				setActiveItem,
-				routeLoading,
-				fetchList,
-			},
+			setActiveItem,
+			routeLoading,
+			fetchList,
 		},
 	};
 
-	const { component: ActiveComponent, props: activeComponentProps } = COMPONENT_MAPPING[activeItem];
+	const ActiveComponent = COMPONENTS_MAPPING[activeItem];
 
 	useEffect(() => {
 		router.events.on('routeChangeStart', () => setRouteLoading(true));
@@ -79,7 +78,8 @@ function CreateCofiguration() {
 				items={STEPPER_ITEMS}
 				arrowed
 			/>
-			<ActiveComponent {...activeComponentProps} />
+
+			<ActiveComponent {...PROPS_MAPPING[activeItem]} />
 		</div>
 
 	);

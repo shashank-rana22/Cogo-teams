@@ -44,7 +44,7 @@ function ShipmentCapacities(props) {
 	const handleClick = () => router.push('/centralised-customer-service?activeTab=shipment_capacity_config');
 
 	return (
-		<div className={styles.container} id="shipment-capacities">
+		<div className={styles.container}>
 
 			{loading ? <LoadingState /> : (
 				<>
