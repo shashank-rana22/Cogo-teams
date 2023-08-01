@@ -25,21 +25,6 @@ const centralised_customer_service = [
 		service_name : 'allocation',
 	},
 	{
-		api          : 'post_allocation_csd_config_agent_experience_slabs',
-		access_type  : 'private',
-		service_name : 'allocation',
-	},
-	{
-		api          : 'post_allocation_csd_config_shipment_capacities',
-		access_type  : 'private',
-		service_name : 'allocation',
-	},
-	{
-		api          : 'get_allocation_csd_configurations',
-		access_type  : 'private',
-		service_name : 'allocation',
-	},
-	{
 		api          : 'list_partners',
 		access_type  : 'private',
 		service_name : 'partner',
