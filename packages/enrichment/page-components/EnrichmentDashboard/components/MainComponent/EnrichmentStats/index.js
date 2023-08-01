@@ -16,7 +16,6 @@ function EnrichmentStats(props) {
 
 	if (loadingStats) {
 		return (
-
 			<div className={styles.container}>
 				<div style={{ width: '50%' }}>
 					<Placeholder

@@ -4,7 +4,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
-const useCheckEnrichmentRequestEligibility = () => {
+const useGetEnrichmentManagerStats = () => {
 	const {
 		profile = {},
 	} = useSelector((state) => state);
@@ -43,4 +43,4 @@ const useCheckEnrichmentRequestEligibility = () => {
 	};
 };
 
-export default useCheckEnrichmentRequestEligibility;
+export default useGetEnrichmentManagerStats;
