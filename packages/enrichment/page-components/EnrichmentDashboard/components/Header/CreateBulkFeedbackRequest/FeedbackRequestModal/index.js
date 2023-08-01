@@ -8,8 +8,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import { OPTIONS } from '../../../../configurations/bulk-create-feedback-options';
+import useCheckEnrichmentRequestEligbility from '../../../../hooks/useCheckEnrichmentRequestEligbility';
 import useCreateBulkEnrichmentRequests from '../../../../hooks/useCreateBulkEnrichmentRequests';
 
+import Statistics from './Statistics';
 import styles from './styles.module.css';
 
 function FeedbackRequestModal({
@@ -17,6 +19,11 @@ function FeedbackRequestModal({
 	refetchStats = () => {},
 	setShowModal = () => {},
 }) {
+	const {
+		loadingCheckEligibility = false,
+		enrichmentData = {},
+	} = useCheckEnrichmentRequestEligbility();
+
 	const {
 		onCreateFeedback,
 		loading = false,
@@ -57,6 +64,10 @@ function FeedbackRequestModal({
 			<Modal.Header title="Assign Accounts" />
 
 			<Modal.Body className={styles.modal_body}>
+
+				<div className={styles.statistics_container}>
+					<Statistics loadingCheckEligibility={loadingCheckEligibility} enrichmentData={enrichmentData} />
+				</div>
 
 				<div className={styles.control}>
 					Select Agent for Enrichment
@@ -102,7 +113,8 @@ function FeedbackRequestModal({
 					size="md"
 					themeType="primary"
 					className={styles.submit_button}
-					disabled={isEmpty(selectedCount) || loading}
+					disabled={isEmpty(selectedCount)
+						|| loading || !enrichmentData?.is_account_assign_eligible}
 					onClick={onCreateFeedback}
 				>
 					Assign

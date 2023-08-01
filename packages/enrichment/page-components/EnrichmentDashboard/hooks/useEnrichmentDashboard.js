@@ -22,6 +22,8 @@ const useEnrichmentDashboard = ({ secondaryTab = 'active' }) => {
 		authParams,
 	} = profile;
 
+	const allowedToSeeAgentsData = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId);
+
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');
@@ -31,8 +33,6 @@ const useEnrichmentDashboard = ({ secondaryTab = 'active' }) => {
 	});
 
 	const [selectedRowId, setSelectedRowId] = useState('');
-
-	const allowedToSeeAgentsData = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId);
 
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',

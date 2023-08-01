@@ -1,4 +1,4 @@
-import { Carousel, TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import TableComponent from '../../../../common/TableComponent';
@@ -28,19 +28,10 @@ function MainComponent(props) {
 
 	const filteredColumns = getEnrichmentTableColumns({ secondaryTab, authRoleId, columns });
 
-	const CAROUSELDATA = [{
-		key    : 'item1',
-		render : () => (<EnrichmentStats stats={stats} loadingStats={loadingStats} />),
-	},
-	{
-		key    : 'item4',
-		render : () => (<EnrichmentStats stats={{}} loadingStats={loadingStats} />),
-	},
-	];
-
 	return (
 		<div>
-			<Carousel size="md" slides={CAROUSELDATA} autoScroll timeInterval={5000} />
+
+			<EnrichmentStats stats={stats} loadingStats={loadingStats} />
 
 			<div>
 				<Tabs
