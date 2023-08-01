@@ -9,24 +9,24 @@ import LoadingState from './loadingState';
 import styles from './styles.module.css';
 
 const onCardClick = ({
-	other_channel_type,
-	has_existing_room = false,
-	id_name,
+	otherChannelType,
+	hasExistingRoom = false,
+	idName,
 	userData,
-	user_channel_ids,
+	userChannelIds,
 	setActiveMessage,
 	setModalType,
 	mailProps,
 }) => {
-	if (has_existing_room) {
+	if (hasExistingRoom) {
 		setActiveMessage({
-			channel_type : other_channel_type,
-			id           : user_channel_ids?.[id_name],
+			channel_type : otherChannelType,
+			id           : userChannelIds?.[idName],
 		});
 		return;
 	}
 
-	if (other_channel_type === 'email') {
+	if (otherChannelType === 'email') {
 		const { setButtonType, setEmailState } = mailProps;
 		setButtonType('send_mail');
 		setEmailState(
@@ -42,7 +42,7 @@ const onCardClick = ({
 		return;
 	}
 
-	setModalType(other_channel_type);
+	setModalType(otherChannelType);
 };
 
 function ConversationContainer({
@@ -120,10 +120,10 @@ function ConversationContainer({
 								role="presentation"
 								className={styles.contacts_container}
 								onClick={() => onCardClick({
-									other_channel_type,
-									id_name,
-									has_existing_room,
-									user_channel_ids,
+									otherChannelType :	other_channel_type,
+									idName           : id_name,
+									hasExistingRoom  : has_existing_room,
+									userChannelIds   : user_channel_ids,
 									setActiveMessage,
 									setModalType,
 									mailProps,

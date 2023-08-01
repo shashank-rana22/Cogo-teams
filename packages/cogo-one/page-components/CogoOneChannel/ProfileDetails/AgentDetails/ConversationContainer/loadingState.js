@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 const LOADER_LENGTH = 2;
 
-function loadingState() {
+function LoadingState() {
 	return ([...Array(LOADER_LENGTH).keys()].map(
 		(key) => (
 			<div
@@ -41,4 +41,4 @@ function loadingState() {
 	));
 }
 
-export default loadingState;
+export default LoadingState;
