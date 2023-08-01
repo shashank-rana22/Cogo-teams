@@ -1,6 +1,8 @@
 import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMDownload } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -40,10 +42,18 @@ interface ItemProps {
 interface OutstandingListProps {
 	item?: ItemProps,
 	entityCode?: string
+	showElement?: boolean
+	orderBy?: object;
+	outStandingFilters?: object;
+	formFilters?: object;
+	organizationId?: string;
 }
 
-function OutstandingList({ item = {}, entityCode = '' }: OutstandingListProps) {
-	const [activeTab, setActiveTab] = useState('');
+function OutstandingList({
+	item = {}, entityCode = '', showElement = false, organizationId = '',
+}: OutstandingListProps) {
+	const router = useRouter();
+	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
@@ -70,7 +80,6 @@ function OutstandingList({ item = {}, entityCode = '' }: OutstandingListProps) {
 		organizationSerialId,
 		lastUpdatedAt,
 		selfOrganizationName,
-		organizationId = '',
 		selfOrganizationId = '',
 	} = item;
 
@@ -108,6 +117,14 @@ function OutstandingList({ item = {}, entityCode = '' }: OutstandingListProps) {
 		</div>
 
 	);
+
+	const handleViewDetailClick = () => {
+		router.push(
+			`/business-finance/account-receivables/outstanding/
+			viewOrgDetail/?orgSerialId=${organizationSerialId}&entityCode=${entityCode}
+			&organizationId=${organizationId}`,
+		);
+	};
 
 	return (
 		<div
@@ -221,14 +238,29 @@ function OutstandingList({ item = {}, entityCode = '' }: OutstandingListProps) {
 								</div>
 							);
 						})}
-						<Button
-							size="sm"
-							style={{ marginLeft: '20px' }}
-							onClick={() => setShowLedgerModal(true)}
-						>
-							Download Ledger
 
-						</Button>
+					</div>
+					<div className={styles.ledger_style}>
+						<Tooltip
+							content="Ledger Download"
+							placement="top"
+						>
+							<IcMDownload
+								className={styles.download_icon_div}
+								onClick={() => setShowLedgerModal(true)}
+							/>
+						</Tooltip>
+						{!showElement
+						&& (
+							<Button
+								size="md"
+								style={{ marginLeft: '20px' }}
+								onClick={() => handleViewDetailClick()}
+							>
+								View Details
+
+							</Button>
+						)}
 					</div>
 				</div>
 
@@ -236,18 +268,22 @@ function OutstandingList({ item = {}, entityCode = '' }: OutstandingListProps) {
 					<StatsOutstanding item={item} />
 				</div>
 
-				<Tabs
-					activeTab={activeTab}
-					onChange={(val) => handleActiveTabs(val)}
-					fullWidth
-					themeType="primary"
-				>
-					{(TabsOptions || []).map(({ key, name, component: Component }) => (
-						<TabPanel key={key} name={key} title={name}>
-							{activeTab && <Component {...propsData[activeTab]} />}
-						</TabPanel>
-					))}
-				</Tabs>
+				{showElement
+
+				&& (
+					<Tabs
+						activeTab={activeTab}
+						onChange={(val) => handleActiveTabs(val)}
+						fullWidth
+						themeType="primary"
+					>
+						{(TabsOptions || []).map(({ key, name, component: Component }) => (
+							<TabPanel key={key} name={key} title={name}>
+								{activeTab && <Component {...propsData[activeTab]} />}
+							</TabPanel>
+						))}
+					</Tabs>
+				)}
 			</div>
 
 			{showLedgerModal ? (

@@ -1,0 +1,7 @@
+.communication_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 24px 0;
+	background-color: var(--color-secondary-5);
+}

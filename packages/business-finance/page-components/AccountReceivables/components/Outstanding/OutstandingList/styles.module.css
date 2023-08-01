@@ -145,3 +145,17 @@
 .padding_container {
 	padding: 4px;
 }
+
+.download_icon_div {
+	width: 32px;
+	height: 32px;
+	padding: 8px;
+	color: var(--color-secondary-5);
+	cursor: pointer;
+	background-color: var(--color-secondary-greyscale-2);
+	border-radius: 4px;
+}
+
+.ledger_style {
+	display: flex;
+}

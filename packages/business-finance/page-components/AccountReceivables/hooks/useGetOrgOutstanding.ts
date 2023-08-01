@@ -1,9 +1,7 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState } from 'react';
-
-import { GenericObject } from '../commons/Interfaces';
+import { useEffect, useState, useCallback } from 'react';
 
 interface Outstanding {
 	page?:number,
@@ -16,11 +14,10 @@ interface Outstanding {
 }
 
 interface GetOrgOutstanding {
-	formFilters?: GenericObject
 	entityCode?: string
 }
 
-const useGetOrgOutstanding = ({ formFilters, entityCode }: GetOrgOutstanding) => {
+const useGetOrgOutstanding = ({ entityCode }: GetOrgOutstanding) => {
 	const [outStandingFilters, setoutStandingFilters] = useState<Outstanding>({
 		page      : 1,
 		pageLimit : 10,
@@ -35,8 +32,6 @@ const useGetOrgOutstanding = ({ formFilters, entityCode }: GetOrgOutstanding) =>
 	const {
 		search, organizationSerialId, pageLimit, page, q, sageId, tradePartySerialId,
 	} = outStandingFilters || {};
-
-	const { kamId, salesAgentId, creditControllerId, companyType } = formFilters;
 
 	const { order, key } = orderBy || {};
 
@@ -57,33 +52,34 @@ const useGetOrgOutstanding = ({ formFilters, entityCode }: GetOrgOutstanding) =>
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
+	const refetch = useCallback((formFilter) => {
+		try {
+			trigger({
+				params: {
+					sortBy               : key || undefined,
+					sortType             : order || undefined,
+					page,
+					pageLimit,
+					salesAgentId         : formFilter?.salesAgentId || undefined,
+					creditControllerId   : formFilter?.creditControllerId || undefined,
+					kamId                : formFilter?.kamId || undefined,
+					companyType          : formFilter?.companyType || undefined,
+					entityCode           : entityCode || undefined,
+					organizationSerialId : organizationSerialId || undefined,
+					sageId               : sageId || undefined,
+					tradePartySerialId   : tradePartySerialId || undefined,
+					q                    : q || undefined,
+				},
+			});
+		} catch (e) {
+			Toast.error(e?.message);
+		}
+	}, [entityCode, key, order, organizationSerialId, page, pageLimit, q, sageId, tradePartySerialId, trigger]);
+
 	useEffect(() => {
-		const refetch = () => {
-			try {
-				trigger({
-					params: {
-						sortBy               : key || undefined,
-						sortType             : order || undefined,
-						page,
-						pageLimit,
-						salesAgentId         : salesAgentId || undefined,
-						creditControllerId   : creditControllerId || undefined,
-						kamId                : kamId || undefined,
-						companyType          : companyType || undefined,
-						entityCode           : entityCode || undefined,
-						organizationSerialId : organizationSerialId || undefined,
-						sageId               : sageId || undefined,
-						tradePartySerialId   : tradePartySerialId || undefined,
-						q                    : q || undefined,
-					},
-				});
-			} catch (e) {
-				Toast.error(e?.message);
-			}
-		};
 		refetch();
-	}, [entityCode, companyType, creditControllerId, orderBy, salesAgentId, trigger,
-		organizationSerialId, page, pageLimit, sageId, tradePartySerialId, q, key, order, kamId]);
+	}, [entityCode, orderBy, organizationSerialId, page,
+		pageLimit, sageId, tradePartySerialId, q, key, order, refetch]);
 
 	useEffect(() => {
 		const resetQuery = {
@@ -117,6 +113,7 @@ const useGetOrgOutstanding = ({ formFilters, entityCode }: GetOrgOutstanding) =>
 		setOrderBy,
 		setQueryKey,
 		queryKey,
+		refetch,
 	};
 };
 

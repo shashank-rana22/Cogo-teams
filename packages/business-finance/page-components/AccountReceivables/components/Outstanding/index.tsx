@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
@@ -9,7 +10,7 @@ import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
 import styles from './styles.module.css';
 
-function Outstanding({ entityCode }) {
+function Outstanding({ entityCode = '' }) {
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
 		salesAgentId       : '',
@@ -26,7 +27,8 @@ function Outstanding({ entityCode }) {
 		setOrderBy,
 		setQueryKey,
 		queryKey,
-	} = useGetOrgOutstanding({ formFilters, entityCode });
+		refetch,
+	} = useGetOrgOutstanding({ entityCode });
 
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
@@ -63,6 +65,7 @@ function Outstanding({ entityCode }) {
 				queryKey={queryKey}
 				setQueryKey={setQueryKey}
 				entityCode={entityCode}
+				refetch={refetch}
 			/>
 
 			{outstandingLoading ? (
@@ -74,10 +77,19 @@ function Outstanding({ entityCode }) {
 			) : (
 				<>
 					{list?.map((item) => (
-						<OutstandingList item={item} entityCode={entityCode} key={item?.serialId} />
+						<OutstandingList
+							item={item}
+							entityCode={entityCode}
+							key={item?.serialId}
+							showElement={false}
+							orderBy={orderBy}
+							outStandingFilters={outStandingFilters}
+							formFilters={formFilters}
+							organizationId={item?.organizationId}
+						/>
 					))}
-					{list?.length === 0 && <div className={styles.empty_state}><EmptyState /></div>}
-					{list?.length > 0 && (
+					{isEmpty(list) && <div className={styles.empty_state}><EmptyState /></div>}
+					{!isEmpty(list) && (
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"

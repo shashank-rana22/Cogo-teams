@@ -31,12 +31,11 @@
 	color: #393f70;
 	cursor: pointer;
 	background: #fff;
-	border-bottom: 1.5px solid #ee3425;
+	border-bottom: 1.5px solid var(--color-tertiary-beige-2);
 }
 
 .styled_col:hover {
-	background: #fdebe9;
-	border-bottom: 1.5px solid #ee3425;
+	background: var(--color-tertiary-beige-4);
 }
 
 .tile_heading {
@@ -48,19 +47,26 @@
 }
 
 .filter_value {
+	display: flex;
+	align-items: center;
 	margin-left: 4px;
 	font-size: 14px;
 	font-weight: 600;
-	color: #f68b21;
+	color: var(--color-primary-error-red-2);
 }
 
 .icon_div {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	width: 15px;
-	margin-left: 8px;
+	padding: 0 16px;
+	margin: 0 8px;
 	cursor: pointer;
+	background: var(--color-secondary-5);
+	border: 1px solid var(--color-secondary-greyscale-5);
+	border-radius: 6px;
 }
 
 .flex_wrap {
@@ -95,4 +101,15 @@
 
 .icon_style {
 	margin-right: 4px;
+}
+
+.upper_sort_div {
+	display: flex;
+}
+
+.sort_icon_style {
+	display: flex;
+	align-items: center;
+	margin-left: 8px;
+	color: black;
 }

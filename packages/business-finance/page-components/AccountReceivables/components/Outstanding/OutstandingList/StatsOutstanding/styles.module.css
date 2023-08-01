@@ -43,12 +43,13 @@
 
 .count {
 	margin-left: 5px;
+	font-size: var(--font-size-md);
 	color: #356efd;
 }
 
 .icon {
 	padding: 4px 0 0 4px;
-	color: red;
+	color: var(--color-primary-error-red-2);
 }
 
 .cn {
@@ -57,7 +58,6 @@
 
 .right_container {
 	display: flex;
-	justify-content: space-around;
 	width: 100%;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .label {
-	display: flex;
+	width: 124px;
 	font-size: 12px;
 	font-weight: 600;
 }
@@ -74,8 +74,9 @@
 .amount_open {
 	display: flex;
 	margin-top: 2px;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 600;
+	color: var(--color-primary-error-red-2);
 	word-break: break-all;
 }
 
@@ -84,7 +85,7 @@
 	margin-top: 2px;
 	font-size: 12px;
 	font-weight: 600;
-	color: #cb6464;
+	color: var(--color-primary-error-red-2);
 	word-break: break-all;
 }
 
@@ -106,4 +107,21 @@
 	margin: 8px 4px 2px 12px;
 	border-radius: 8px;
 	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+}
+
+.stats_key {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.stats_lable {
+	width: 128px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.count_open {
+	margin-left: 4px;
+	font-size: var(--font-size-lg);
+	color: #356efd;
 }

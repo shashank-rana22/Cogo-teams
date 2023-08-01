@@ -28,21 +28,23 @@ interface OutstandingFilterProps {
 	queryKey: string,
 	setQueryKey: (p:string) => void,
 	entityCode
+	refetch: (p?: object) => void;
 }
 
 function Filters({
-	handleChange,
-	handleInputReset,
-	setOrderBy,
-	orderBy,
-	setParams,
-	params,
-	formFilters,
-	setFormFilters,
-	clearFilter,
-	queryKey,
-	entityCode,
-	setQueryKey,
+	handleChange = () => {},
+	handleInputReset = () => {},
+	setOrderBy = () => {},
+	orderBy = { key: '', order: '', label: '' },
+	setParams = () => {},
+	params = {},
+	formFilters = {},
+	setFormFilters = () => {},
+	clearFilter = () => {},
+	queryKey = '',
+	entityCode = '',
+	setQueryKey = () => {},
+	refetch = () => {},
 }: OutstandingFilterProps) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 
@@ -67,45 +69,53 @@ function Filters({
 	return (
 		<div className={styles.container}>
 			<div className={styles.filter_container}>
-				<div className={styles.sort_container}>
-					<Popover
-						placement="bottom"
-						render={(
-							<div className={styles.styled_row}>
-								{SORTBY_OPTION.map((item) => (
-									<div
-										key={item.value}
-										className={styles.styled_col}
-										onClick={() => {
-											setOrderBy({
-												key   : item.value,
-												order : 'Desc',
-												label : item.label,
-											});
-											setShowSortPopover(!showSortPopover);
-											setParams({ ...params, page: 1 });
-										}}
-										role="presentation"
-									>
-										<div className={styles.tile_heading}>{item.label}</div>
-									</div>
-								))}
-							</div>
-						)}
-					>
-						<div
-							style={{ display: 'flex', cursor: 'pointer' }}
-							onClick={() => setShowSortPopover(true)}
-							role="presentation"
+				<div className={styles.upper_sort_div}>
+					<div className={styles.sort_container}>
+						<Popover
+							placement="bottom"
+							render={(
+								<div className={styles.styled_row}>
+									{SORTBY_OPTION.map((item) => (
+										<div
+											key={item.value}
+											className={styles.styled_col}
+											onClick={() => {
+												setOrderBy({
+													key   : item.value,
+													order : 'Desc',
+													label : item.label,
+												});
+												setShowSortPopover(!showSortPopover);
+												setParams({ ...params, page: 1 });
+											}}
+											role="presentation"
+										>
+											<div className={styles.tile_heading}>{item.label}</div>
+										</div>
+									))}
+								</div>
+							)}
 						>
-							Sort By:
-							{' '}
-							<div className={styles.filter_value}>
-								{orderBy.label}
+							<div
+								style={{ display: 'flex', cursor: 'pointer' }}
+								onClick={() => setShowSortPopover(!showSortPopover)}
+								role="presentation"
+							>
+								Sort By:
 								{' '}
+								<div className={styles.filter_value}>
+									{orderBy.label}
+									{' '}
+									<div className={styles.sort_icon_style}>
+										{showSortPopover
+											? <IcMArrowRotateUp />
+											: <IcMArrowRotateDown />}
+									</div>
+								</div>
 							</div>
-						</div>
-					</Popover>
+						</Popover>
+
+					</div>
 					<div
 						role="presentation"
 						className={styles.icon_div}
@@ -123,6 +133,12 @@ function Filters({
 						<IcMArrowRotateDown style={{ color: sortStyleDesc }} />
 					</div>
 
+					<FilterpopOver
+						filters={formFilters}
+						setFilters={setFormFilters}
+						clearFilter={clearFilter}
+						refetch={refetch}
+					/>
 				</div>
 				<div className={styles.flex_wrap}>
 					<div className={styles.sort_container}>
@@ -184,11 +200,7 @@ function Filters({
 							className={styles.styled_input}
 						/>
 					</div>
-					<FilterpopOver
-						filters={formFilters}
-						setFilters={setFormFilters}
-						clearFilter={clearFilter}
-					/>
+
 				</div>
 			</div>
 		</div>

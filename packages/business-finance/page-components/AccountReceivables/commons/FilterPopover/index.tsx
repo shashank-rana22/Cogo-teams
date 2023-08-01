@@ -1,10 +1,10 @@
-import { Button, Popover, Tabs, TabPanel, RadioGroup } from '@cogoport/components';
-import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import { Button, Popover, Tabs, TabPanel, RadioGroup, SingleDateRange } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { GenericObject } from '../../../../commons/Interfaces';
-import { companyType } from '../../../../constants/index';
+import { GenericObject } from '../../../commons/Interfaces';
+import { SERVICE_TYPE } from '../../constants';
 
 import styles from './styles.module.css';
 
@@ -16,16 +16,16 @@ interface Props {
 
 }
 
-function FilterpopOver({
+function FilterPopover({
 	filters = {},
 	setFilters = () => {},
 	clearFilter = () => {},
 	refetch = () => {},
 }: Props) {
 	const [show, setShow] = useState(false);
-	const [receivables, setReceivables] = useState('kamOwner');
+	const [receivables, setReceivables] = useState('services');
 
-	const onChange = (val:string, name:string) => {
+	const onChange = (val:string | object, name:string) => {
 		setFilters((p:object) => ({ ...p, [name]: val }));
 	};
 	const rest = { onClickOutside: () => setShow(false) };
@@ -73,63 +73,54 @@ function FilterpopOver({
 					themeType="primary-vertical"
 					style={{ display: 'flex', width: '440px' }}
 				>
-					<TabPanel name="kamOwner" title="KAM Owner">
+					<TabPanel name="services" title="Service type">
 						<div className={styles.tabpanel_style}>
-							<AsyncSelect
-								name="user_id"
-								asyncKey="partner_users"
-								valueKey="user_id"
-								initialCall={false}
-								onChange={(userId:string) => onChange(userId, 'kamId')}
-								value={filters.kamId}
-								placeholder="Select Kam Owner"
-								size="sm"
-								isClearable
-							/>
-						</div>
-					</TabPanel>
-					<TabPanel name="salesAgent" title="Sales Agent">
-						<div className={styles.tabpanel_style}>
-							<AsyncSelect
-								name="user_id"
-								asyncKey="partner_users"
-								valueKey="user_id"
-								initialCall={false}
-								onChange={(userId:string) => onChange(userId, 'salesAgentId')}
-								value={filters.salesAgentId}
-								placeholder="Select Sales Agent User"
-								size="sm"
-								isClearable
-							/>
-						</div>
-					</TabPanel>
-					<TabPanel name="creditController" title="Credit Controller">
-						<div className={styles.tabpanel_style}>
-							<AsyncSelect
-								name="credit_controller_id"
-								asyncKey="partner_users"
-								valueKey="user_id"
-								initialCall={false}
-								onChange={(userId:string) => onChange(userId, 'creditControllerId')}
-								value={filters.creditControllerId}
-								placeholder="Select Credit Controller User"
-								size="sm"
-								isClearable
-							/>
-						</div>
-					</TabPanel>
-					<TabPanel name="companyType" title="Company Type">
-						<div className={styles.style_radio}>
 							<RadioGroup
-								options={companyType}
-								value={filters?.companyType}
-								onChange={(val?:string) => onChange(val, 'companyType')}
+								options={SERVICE_TYPE}
+								value={filters?.services}
+								onChange={(val?:string) => onChange(val, 'services')}
 								className={styles.style_radio}
 							/>
-
 						</div>
 					</TabPanel>
-
+					<TabPanel name="invoiceDate" title="Invoice Date">
+						<div className={styles.tabpanel_style}>
+							<SingleDateRange
+								name="invoiceDate"
+								placeholder="Invoice Date"
+								value={filters?.invoiceDate}
+								onChange={(val) => onChange(val, 'invoiceDate')}
+								isPreviousDaysAllowed
+								style={{ width: '200px' }}
+							/>
+						</div>
+					</TabPanel>
+					<TabPanel name="dueDate" title="Due Date">
+						<div className={styles.tabpanel_style}>
+							<SingleDateRange
+								name="dueDate"
+								placeholder="Due Date"
+								value={filters?.dueDate}
+								onChange={(val) => onChange(val, 'dueDate')}
+								isPreviousDaysAllowed
+								style={{ width: '200px' }}
+							/>
+						</div>
+					</TabPanel>
+					<TabPanel name="currency" title="Currency">
+						<div className={styles.tabpanel_style}>
+							<RadioGroup
+								options={Object.keys(GLOBAL_CONSTANTS.currency_code).map((currencyCode) => ({
+									name  : currencyCode,
+									label : currencyCode,
+									value : currencyCode,
+								}))}
+								value={filters?.currency}
+								onChange={(val?:string) => onChange(val, 'currency')}
+								className={styles.style_radio}
+							/>
+						</div>
+					</TabPanel>
 				</Tabs>
 			</div>
 		</div>
@@ -145,7 +136,7 @@ function FilterpopOver({
 			>
 				<Button
 					themeType="secondary"
-					size="lg"
+					size="md"
 					onClick={() => {
 						setShow(!show);
 					}}
@@ -159,4 +150,4 @@ function FilterpopOver({
 	);
 }
 
-export default FilterpopOver;
+export default FilterPopover;

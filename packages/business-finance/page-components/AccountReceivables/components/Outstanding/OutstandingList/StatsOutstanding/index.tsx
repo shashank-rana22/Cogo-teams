@@ -5,7 +5,7 @@ import { StatsKeyMapping, StatsKeyMappingPayment } from '../../../../constants/i
 
 import styles from './styles.module.css';
 
-function StatsOutstanding({ item }) {
+function StatsOutstanding({ item = {} }) {
 	const {
 		openInvoice = {},
 		totalOutstanding = {},
@@ -19,26 +19,27 @@ function StatsOutstanding({ item }) {
 
 	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
-	const invoiceContainer = [{
-		name         : 'OPEN INVOICES',
-		LedgerAmount : openInvoice,
-		ageingBucket : openInvoiceAgeingBucket,
-		statsKey     : StatsKeyMapping,
-	},
-	{
-		name         : 'ON ACCOUNT PAYMENTS',
-		LedgerAmount : onAccount,
-		ageingBucket : onAccountAgeingBucket,
-		statsKey     : StatsKeyMappingPayment,
+	const invoiceContainer = [
+		{
+			name         : 'OPEN INVOICES',
+			LedgerAmount : openInvoice,
+			ageingBucket : openInvoiceAgeingBucket,
+			statsKey     : StatsKeyMapping,
+		},
+		{
+			name         : 'ON ACCOUNT PAYMENTS',
+			LedgerAmount : onAccount,
+			ageingBucket : onAccountAgeingBucket,
+			statsKey     : StatsKeyMappingPayment,
 
-	},
-	{
-		name         : 'CREDIT NOTES',
-		LedgerAmount : creditNote,
-		ageingBucket : creditNoteAgeingBucket,
-		statsKey     : StatsKeyMapping,
+		},
+		{
+			name         : 'CREDIT NOTES',
+			LedgerAmount : creditNote,
+			ageingBucket : creditNoteAgeingBucket,
+			statsKey     : StatsKeyMapping,
 
-	},
+		},
 
 	];
 
@@ -46,6 +47,11 @@ function StatsOutstanding({ item }) {
 		<div className={styles.container}>
 
 			<div className={styles.invoices_wrapper}>
+				<div className={styles.stats_key}>
+					{StatsKeyMapping.map((stats) => (
+						<div className={styles.stats_lable} key={stats.valueKey}>{stats.label}</div>
+					))}
+				</div>
 				{invoiceContainer.map((invoiceObject) => (
 					<div className={styles.invoices_card} key={invoiceObject.name}>
 						<div className={styles.left_container}>
@@ -63,7 +69,7 @@ function StatsOutstanding({ item }) {
 										maximumFractionDigits : 0,
 									},
 								})}
-								<div className={styles.count}>
+								<div className={styles.count_open}>
 									(
 									{invoiceObject.LedgerAmount?.ledgerCount}
 									)
@@ -72,15 +78,7 @@ function StatsOutstanding({ item }) {
 						</div>
 						<div className={styles.right_container}>
 							{(invoiceObject.statsKey || []).map((val) => (
-								<div key={val.label}>
-									<div className={styles.label}>
-										{val.label}
-										<div className={styles.count}>
-											(
-											{invoiceObject.ageingBucket[val.valueKey]?.ledgerCount || 0}
-											)
-										</div>
-									</div>
+								<div key={val.label} className={styles.label}>
 									<div
 										className={styles.amount}
 									>
@@ -94,6 +92,11 @@ function StatsOutstanding({ item }) {
 												maximumFractionDigits : 0,
 											},
 										})}
+									</div>
+									<div className={styles.count}>
+										(
+										{invoiceObject.ageingBucket[val.valueKey]?.ledgerCount || 0}
+										)
 									</div>
 								</div>
 							))}

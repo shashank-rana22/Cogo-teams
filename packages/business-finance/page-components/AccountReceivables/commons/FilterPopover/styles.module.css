@@ -65,7 +65,7 @@
 
 .tabpanel_style {
 	display: flex;
-	justify-content: flex-end;
+	margin-left: 20px;
 }
 
 .style_radio {

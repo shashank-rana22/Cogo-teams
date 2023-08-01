@@ -9,7 +9,7 @@
 
 .filter_wrap {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	margin-top: 12px;
 
 	::placeholder {

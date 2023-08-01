@@ -6,7 +6,7 @@ import completedColumn from '../../configs/Completed_table';
 import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
 import { INVOICE_FILTER } from '../../Utils/invoicelistFilter';
-import FilterModal from '../FilterModal';
+import FilterPopover from '../FilterPopover';
 import FooterCard from '../FooterCard';
 import SearchInput from '../searchInput';
 import StyledTable from '../styledTable';
@@ -99,11 +99,11 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 						setFilters={setinvoiceFilters}
 						controls={INVOICE_FILTER()}
 					/>
-
-					<FilterModal
-						setFilters={setinvoiceFilters}
+					<FilterPopover
 						filters={invoiceFilters}
+						setFilters={setinvoiceFilters}
 						clearFilter={clearInvoiceFilters}
+						refetch={getOrganizationInvoices}
 					/>
 				</div>
 				<div className={styles.filter_container}>
