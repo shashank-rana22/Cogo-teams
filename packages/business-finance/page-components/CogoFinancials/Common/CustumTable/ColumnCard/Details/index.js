@@ -5,10 +5,19 @@ import styles from './styles.module.css';
 
 const fields = ['Revenue', 'Expense'];
 
-function Details({ item = {}, taxType = {} }) {
+function Details({ item = {}, taxType = {}, LABEL_MAPPING = [], type = '' }) {
 	return (
 		<div className={styles.background}>
-			{fields.map((field) => (<DetailCard heading={field} key={field} item={item} taxType={taxType} />))}
+			{fields.map((field) => (
+				<DetailCard
+					heading={field}
+					key={field}
+					item={item}
+					taxType={taxType}
+					LABEL_MAPPING={LABEL_MAPPING}
+					type={type}
+				/>
+			))}
 		</div>
 	);
 }

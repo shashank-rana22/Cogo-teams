@@ -12,7 +12,12 @@ const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
 
-function ColumnCard({ config = {}, item = {}, incidentLoading = false, taxType = '' }) {
+const LABEL_MAPPING = {
+	Financially   : 'actual',
+	Operationally : 'operational',
+};
+
+function ColumnCard({ config = {}, item = {}, incidentLoading = false, taxType = '', type = '' }) {
 	const [show, setShow] = useState(false);
 	const { fields = [] } = config;
 
@@ -20,8 +25,8 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false, taxType =
 		sid             : item?.jobNumber || '_',
 		customerName    : startCase(item?.customerName || '-'),
 		estimatedProfit : item?.[`estimatedProfitAmount${taxType}`] || '0',
-		actualProfit    : item?.[`actualProfitAmount${taxType}`] || '0',
-		levels          : item?.[`actualProfitDeviation${taxType}`] || '0',
+		actualProfit    : item?.[`${LABEL_MAPPING[type]}ProfitAmount${taxType}`] || '0',
+		levels          : item?.[`${LABEL_MAPPING[type]}ProfitDeviation${taxType}`] || '0',
 		action          : (
 			<div className={styles.flex}>
 				{!show ? (
@@ -56,7 +61,14 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false, taxType =
 					</div>
 				))}
 			</div>
-			{show ? <Details item={item} taxType={taxType} /> : null}
+			{show ? (
+				<Details
+					item={item}
+					taxType={taxType}
+					LABEL_MAPPING={LABEL_MAPPING}
+					type={type}
+				/>
+			) : null}
 		</div>
 	);
 }

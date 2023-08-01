@@ -6,25 +6,27 @@ import styles from './styles.module.css';
 const fields = ({ heading }) => ['Pre Checkout', `${heading === 'Revenue' ? 'KAM' : 'RD'} Wallet`,
 	`${heading === 'Revenue' ? 'Sales' : 'Buy'} Quotation`, `Actual ${heading}`, 'Deviation'];
 
-const KEY_MAPPINGS_REVENUE = {
-	'Pre Checkout'    : 'preCheckoutCost',
-	'Actual Revenue'  : 'actualRevenue',
-	Deviation         : 'actualRevenueDeviation',
-	'KAM Wallet'      : 'kamMarginUtilizationAmount',
-	'Sales Quotation' : 'estimatedRevenue',
-};
-
-const KEY_MAPPINGS_EXPENSE = {
-	'Pre Checkout'   : 'preCheckoutSales',
-	'Actual Expense' : 'actualCost',
-	'RD Wallet'      : 'rdWalletUtilizationAmount',
-	Deviation        : 'actualCostDeviation',
-	'Buy Quotation'  : 'estimatedCost',
-};
-
 const DEFAULT_LEN = 1;
 
-function DetailCard({ heading = '', item = {}, taxType = '' }) {
+function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [], type = '' }) {
+	const KEY_MAPPINGS_REVENUE = {
+		'Pre Checkout'      : 'preCheckoutCost',
+		'Actual Revenue'    : 'actualRevenue',
+		'Operation Revenue' : 'operationalRevenue',
+		Deviation           : `${LABEL_MAPPING[type]}RevenueDeviation`,
+		'KAM Wallet'        : 'kamMarginUtilizationAmount',
+		'Sales Quotation'   : 'estimatedRevenue',
+	};
+
+	const KEY_MAPPINGS_EXPENSE = {
+		'Pre Checkout'        : 'preCheckoutSales',
+		'Actual Expense'      : 'actualCost',
+		'Operational Expense' : 'operationalCost',
+		'RD Wallet'           : 'rdWalletUtilizationAmount',
+		Deviation             : `${LABEL_MAPPING[type]}CostDeviation`,
+		'Buy Quotation'       : 'estimatedCost',
+	};
+
 	const mappings = heading === 'Revenue' ? KEY_MAPPINGS_REVENUE : KEY_MAPPINGS_EXPENSE;
 	const getFields = fields({ heading });
 	return (

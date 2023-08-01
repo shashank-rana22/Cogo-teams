@@ -268,6 +268,9 @@ function CogoFinancials() {
 						customDate={customDate}
 						statsType={activeShipmentCard === 'financial'
 							? 'FINANCE_CLOSED' : 'OPR_CLOSED'}
+						taxType={taxType}
+						type={activeShipmentCard === 'financial'
+							? 'Financially' : 'Operationally'}
 					/>
 				)}
 		</div>

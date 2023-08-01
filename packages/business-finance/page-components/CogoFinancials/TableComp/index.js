@@ -15,6 +15,8 @@ function TableComp({
 	statsType = '',
 	activeBar = '',
 	customDate = new Date(),
+	taxType = '',
+	type = '',
 }) {
 	const config = customersConfig({ activeShipmentCard });
 	const {
@@ -37,6 +39,8 @@ function TableComp({
 					config={config}
 					key={item?.id}
 					item={item}
+					taxType={taxType}
+					type={type}
 				/>
 			))}
 		</div>
