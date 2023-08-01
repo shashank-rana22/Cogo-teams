@@ -1,4 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { isEmpty, upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
@@ -9,7 +11,16 @@ import getDuration from '../utils/getDuration';
 const geo = getGeoConstants();
 const DEFAULT_CURRENCY = geo?.country.currency.code;
 
-const useGetProfitabilityStats = ({ entity = '', timeRange = '', activeShipmentCard = '', filter = {} }) => {
+const getFormattedDate = (date) => formatDate({
+	date,
+	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	formatType : 'date',
+});
+
+const useGetProfitabilityStats = ({
+	entity = '', timeRange = '', customDate = {},
+	activeShipmentCard = '', filter = {},
+}) => {
 	const [
 		{ data:ongoingData, loading:ongoingLoading },
 		ongoingTrigger,
@@ -49,18 +60,21 @@ const useGetProfitabilityStats = ({ entity = '', timeRange = '', activeShipmentC
 	const api = useCallback(() => {
 		const { currency, channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
-		const IS_HARD_CODED = true;
+		const { startDate:customStartDate, endDate:customEndDate } = customDate || {};
 
 		const PARAMS = {
 			entityCode    : entity,
-			startDate     : IS_HARD_CODED ? '2023-07-28' : startDate,
-			endDate       : IS_HARD_CODED ? '2023-07-28' : endDate,
+			startDate     : timeRange === 'custom' ? getFormattedDate(customStartDate) : startDate,
+			endDate       : timeRange === 'custom' ? getFormattedDate(customEndDate) : endDate,
 			currency      : currency || DEFAULT_CURRENCY,
 			parentService : segment,
 			service,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
 			channel,
 		};
+
+		// no api call if no custom date & range selected
+		if (timeRange === 'custom' && !customEndDate) return;
 
 		try {
 			ongoingTrigger({
@@ -85,7 +99,7 @@ const useGetProfitabilityStats = ({ entity = '', timeRange = '', activeShipmentC
 			toastApiError(error);
 		}
 	}, [entity, timeRange, ongoingTrigger, closedTrigger,
-		financialTrigger,
+		financialTrigger, customDate,
 		filter]);
 
 	useEffect(() => {

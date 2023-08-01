@@ -1,27 +1,67 @@
+import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowBack, IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import { mappingCardsData } from '../../constants';
+import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
 import ServiceWiseStats from '../ServicewiseStats';
 
 import StatCard from './statCard';
 import styles from './styles.module.css';
 
-function ParentServicewiseStats({ setActiveShipmentCard = () => {} }) {
+const PLACEHOLDER_COUNT = 3;
+
+const displayAmount = (amount, currency) => formatAmount({
+	amount,
+	currency,
+	options: {
+		style                 : 'currency',
+		currencyDisplay       : 'code',
+		maximumFractionDigits : 2,
+	},
+});
+
+function ParentServicewiseStats({
+	setActiveShipmentCard = () => {}, mainCardData = {}, taxType = '',
+	activeShipmentCard = '', entity = '', timeRange = '', filter = {},
+	customDate = new Date(),
+}) {
 	const [activeService, setActiveService] = useState('');
+	const { currency, invoiceCount, jobCount } = mainCardData || {};
 
-	const mappingCardsData = [
-		{ label: 'Estimated Revenue', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
-		{ label: 'Estimated Cost', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
+	const { serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
+		entity,
+		timeRange,
+		filter,
+		statsType: 'ONGOING',
+		activeShipmentCard,
+		activeService,
+		customDate,
+	});
+
+	const cardData = [
+		{
+			label : 'Estimated Revenue',
+			value : displayAmount(mainCardData[`estimatedRevenue${taxType}`], currency),
+			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
+		},
+		{
+			label : 'Estimated Cost',
+			value : displayAmount(mainCardData[`estimatedCost${taxType}`], currency),
+			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
+		},
+		{
+			label : 'Estimated Profit',
+			value : displayAmount(mainCardData[`estimatedProfit${taxType}`], currency),
+			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
+		},
 	];
 
-	const mainCardData = [
-		{ label: 'Estimated Revenue', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
-		{ label: 'Estimated Cost', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
-		{ label: 'Estimated Profit', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
-	];
+	const services = (serviceLevelData || []).map((item) => (item.serviceName));
 
-	const services = ['Ocean', 'Air', 'Surface', 'Rail'];
 	return (
 		<div>
 			{isEmpty(activeService) ? (
@@ -47,18 +87,35 @@ function ParentServicewiseStats({ setActiveShipmentCard = () => {} }) {
 
 					<div className={styles.flex}>
 						<div className={styles.maincard}>
-							<StatCard mappingCards={mainCardData} isMain />
+							<StatCard mappingCards={cardData} isMain />
 						</div>
-						<div className={styles.sidestats}>
-							{services.map((service) => (
-								<StatCard
-									mappingCards={mappingCardsData}
-									service={service}
-									key={service}
-									setActiveService={setActiveService}
-								/>
-							))}
-						</div>
+						{!serviceLevelLoading ? (
+							<div className={styles.sidestats}>
+								{services.map((service) => {
+									const singleServiceData = (serviceLevelData || []).filter(
+										(item) => item.serviceName === service,
+									)?.[GLOBAL_CONSTANTS.zeroth_index];
+									return (
+										<StatCard
+											mappingCards={mappingCardsData}
+											service={service}
+											key={service}
+											setActiveService={setActiveService}
+											singleServiceData={singleServiceData}
+											taxType={taxType}
+											displayAmount={displayAmount}
+										/>
+									);
+								})}
+							</div>
+						) : (
+							<div className={styles.placeholder_container}>
+								{[...Array(PLACEHOLDER_COUNT).keys()].map((item) => (
+									<Placeholder key={item} height={250} width="29%" />
+								))}
+
+							</div>
+						)}
 					</div>
 				</div>
 			) : (
@@ -66,6 +123,17 @@ function ParentServicewiseStats({ setActiveShipmentCard = () => {} }) {
 					<ServiceWiseStats
 						activeService={activeService}
 						setActiveService={setActiveService}
+						mainCardData={(serviceLevelData || []).filter(
+							(item) => item.serviceName === activeService,
+						)?.[GLOBAL_CONSTANTS.zeroth_index]}
+						serviceLevelData={serviceLevelData}
+						displayAmount={displayAmount}
+						taxType={taxType}
+						entity={entity}
+						timeRange={timeRange}
+						filter={filter}
+						activeShipmentCard={activeShipmentCard}
+						customDate={customDate}
 					/>
 				</div>
 			)}

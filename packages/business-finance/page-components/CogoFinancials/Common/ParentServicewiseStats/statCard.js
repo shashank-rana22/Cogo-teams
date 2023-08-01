@@ -8,7 +8,11 @@ const DEFAULT_INDEX = 1;
 function StatCard({
 	mappingCards = [], service = '', isMain = false,
 	setActiveService = () => {},
+	singleServiceData = [],
+	taxType = '',
+	displayAmount = () => {},
 }) {
+	const { currency, invoiceCount = 0, jobCount = 0 } = singleServiceData || [];
 	return (
 		<div
 			key={service}
@@ -39,12 +43,13 @@ function StatCard({
 					${!isMain && styles.fontvalue} 
 					${mappingCards?.length === index + DEFAULT_INDEX && styles.color}`}
 						>
-							{item.value}
+							{isMain ? item?.value
+								: displayAmount(singleServiceData[`${item.name}${taxType}`], currency)}
 						</div>
 						<div className={cl`${styles.statval}
 					${!isMain && styles.fontstatval}`}
 						>
-							{item.stats}
+							{isMain ? item.stats : `${invoiceCount} Invoices | ${jobCount} Shimpents`}
 						</div>
 					</div>
 				))}

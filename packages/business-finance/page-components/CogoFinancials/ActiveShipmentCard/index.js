@@ -6,7 +6,8 @@ import ParentServicewiseStats from '../Common/ParentServicewiseStats';
 import styles from './styles.module.css';
 
 function ActiveShipmentCard({
-	setActiveShipmentCard = () => {}, activeShipmentCard = '',
+	setActiveShipmentCard = () => {},
+	activeShipmentCard = '',
 	setShowShipmentList = () => {},
 	entity = '',
 	timeRange = '',
@@ -14,12 +15,21 @@ function ActiveShipmentCard({
 	operationalData = [],
 	financialData = [],
 	taxType = '',
+	mainCardData = [],
+	customDate = new Date(),
 }) {
 	return (
 		<div className={styles.active_shipment_card}>
 			{activeShipmentCard === 'ongoing' && (
 				<ParentServicewiseStats
 					setActiveShipmentCard={setActiveShipmentCard}
+					mainCardData={mainCardData}
+					taxType={taxType}
+					activeShipmentCard={activeShipmentCard}
+					entity={entity}
+					timeRange={timeRange}
+					filter={filter}
+					customDate={customDate}
 				/>
 			)}
 			{activeShipmentCard === 'operational' && (
@@ -34,6 +44,7 @@ function ActiveShipmentCard({
 					cardData={operationalData}
 					type="Operationally"
 					taxType={taxType}
+					customDate={customDate}
 				/>
 			)}
 
@@ -50,6 +61,7 @@ function ActiveShipmentCard({
 					cardData={financialData}
 					type="Financially"
 					taxType={taxType}
+					customDate={customDate}
 				/>
 			)}
 		</div>

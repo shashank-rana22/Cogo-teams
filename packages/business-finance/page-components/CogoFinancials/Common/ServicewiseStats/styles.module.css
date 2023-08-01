@@ -121,3 +121,9 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.placeholder_container {
+	display: flex;
+	justify-content: space-between;
+	width: 98%;
+}

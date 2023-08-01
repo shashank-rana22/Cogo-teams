@@ -24,6 +24,7 @@ function ClosedGraphStats({
 	cardData = [],
 	type = '',
 	taxType = '',
+	customDate = new Date(),
 }) {
 	const [activeBar, setActiveBar] = useState('');
 
@@ -33,6 +34,7 @@ function ClosedGraphStats({
 		statsType,
 		filter,
 		activeBar,
+		customDate,
 	});
 
 	return (

@@ -1,4 +1,4 @@
-import { Select, Toggle } from '@cogoport/components';
+import { Button, Popover, Select, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
@@ -8,6 +8,7 @@ import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
 import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
+import CustomDateFilter from './Common/CustomDateFilter';
 import ColumnCard from './Common/CustumTable/ColumnCard';
 import Header from './Common/CustumTable/Header';
 import StatsCard from './Common/StatsCard';
@@ -16,14 +17,6 @@ import useGetProfitabilityStats from './hooks/useGetProfitabilityStats';
 import MultipleFilters from './MultipleFilters';
 import ReceivablesOutstandings from './ReceivablesOutstandings';
 import styles from './styles.module.css';
-
-const TIME_RANGE_OPTIONS = [
-	{ label: '1D', value: '1D' },
-	{ label: '1W', value: '1W' },
-	{ label: '1M', value: '1M' },
-	{ label: '6M', value: '6M' },
-	{ label: '1Y', value: '1Y' },
-];
 
 const mappingCards = [
 	{ label: 'Estimated Revenue', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
@@ -51,6 +44,7 @@ const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((ite
 function CogoFinancials() {
 	const [isPreTax, setIsPreTax] = useState(true);
 	const [timeRange, setTimeRange] = useState('1D');
+	const [customDate, setCustomDate] = useState(null);
 	const [entity, setEntity] = useState(DEFAULT_ENTITY);
 	const [activeShipmentCard, setActiveShipmentCard] = useState('');
 	const [showShipmentList, setShowShipmentList] = useState(false);
@@ -58,11 +52,41 @@ function CogoFinancials() {
 
 	const taxType = isPreTax ? 'PreTax' : 'PostTax';
 
+	const TIME_RANGE_OPTIONS = [
+		{ label: '1D', value: '1D' },
+		{ label: '1W', value: '1W' },
+		{ label: '1M', value: '1M' },
+		{ label: '6M', value: '6M' },
+		{ label: '1Y', value: '1Y' },
+		{
+			label: (
+				<Popover
+					placement="bottom"
+					render={(
+						<CustomDateFilter
+							customDate={customDate}
+							setCustomDate={setCustomDate}
+						/>
+					)}
+				>
+					<Button
+						size="xs"
+						style={{ background: 'none', border: 'none', color: 'black' }}
+					>
+						+
+					</Button>
+
+				</Popover>
+			),
+			value: 'custom',
+		},
+	];
+
 	const {
 		financialData, financialLoading,
 		operationalData, operationalLoading,
 		ongoingData, ongoingLoading,
-	} = useGetProfitabilityStats({ filter, entity, timeRange, activeShipmentCard });
+	} = useGetProfitabilityStats({ filter, entity, timeRange, activeShipmentCard, customDate });
 
 	const handleClick = () => {
 		setShowShipmentList(false);
@@ -87,13 +111,17 @@ function CogoFinancials() {
 						onLabel="Post Tax"
 						onChange={() => setIsPreTax(!isPreTax)}
 					/>
-					<div style={{ margin: '0px 12px' }}>
+					<div
+						className={styles.segmented_section}
+					>
 						<SegmentedControl
 							options={TIME_RANGE_OPTIONS}
 							activeTab={timeRange}
 							setActiveTab={setTimeRange}
 							color="#ED3726"
-							background="#FFFAEB"
+							background="#FFE69D"
+							style={{ overflow: 'visible' }}
+
 						/>
 					</div>
 					<MultipleFilters
@@ -157,6 +185,8 @@ function CogoFinancials() {
 						operationalData={operationalData}
 						financialData={financialData}
 						taxType={taxType}
+						mainCardData={ongoingData}
+						customDate={customDate}
 					/>
 					<div className={styles.remaining_shipment_cards}>
 

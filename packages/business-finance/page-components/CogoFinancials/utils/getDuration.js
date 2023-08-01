@@ -7,11 +7,12 @@ const TOTAL_MILLISECONDS = 1000;
 
 const getDuration = ({ timeRange }) => {
 	const DAYS_MAPPING = {
-		'1D' : 1,
-		'1W' : 7,
-		'1M' : 30,
-		'6M' : 180,
-		'1Y' : 365,
+		'1D'   : 1,
+		'1W'   : 7,
+		'1M'   : 30,
+		'6M'   : 180,
+		'1Y'   : 365,
+		custom : 0,
 	};
 
 	const today = new Date();
