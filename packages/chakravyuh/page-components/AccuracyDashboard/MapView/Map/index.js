@@ -105,7 +105,7 @@ function Map({
 				const features = cachedRef.getLayers();
 				const firstFeature = features[GLOBAL_CONSTANTS.zeroth_index];
 				firstFeature.openTooltip();
-				map.flyToBounds(firstFeature.getBounds(), { ...paddingOptions, maxZoom: zoom });
+				map.flyToBounds(firstFeature.getBounds(), { ...paddingOptions, maxZoom: 3 });
 			} else {
 				cachedRef.openTooltip();
 			}
@@ -194,7 +194,7 @@ function Map({
 								display_name={item.destination_name}
 								color={color}
 								value={accuracyMapping[item.destination_id]}
-								key="Accuracy"
+								value_key=""
 							/>
 						</Tooltip>
 					</Point>

@@ -10,7 +10,7 @@ const UNIT_MAPPING = {
 };
 
 export const formatBigNumbers = (cnt) => {
-	if (Number.isNaN(cnt)) return 'NA';
+	if (Number.isNaN(+cnt)) return GLOBAL_CONSTANTS.zeroth_index;
 	const unit = Object.entries(UNIT_MAPPING).find(([, value]) => cnt >= value);
 	return unit
 		? `${(cnt / unit[SECOND_IDX]).toFixed(DECIMALS)}${unit[GLOBAL_CONSTANTS.zeroth_index]}`

@@ -18,8 +18,12 @@ const useGetFclFreightRateWorld = ({ flag }) => {
 		[trigger],
 	);
 
-	const countMapping = (data?.list || []).reduce((acc, { rate_count, id }) => {
-		acc[id] = rate_count;
+	let maxCount = 0;
+	let minCount = Infinity;
+	const countMapping = (data?.statistics || []).reduce((acc, { rate_count, country_id }) => {
+		acc[country_id] = rate_count;
+		maxCount = Math.max(maxCount, rate_count);
+		minCount = Math.min(minCount, rate_count);
 		return acc;
 	}, {});
 
@@ -29,7 +33,7 @@ const useGetFclFreightRateWorld = ({ flag }) => {
 		}
 	}, [flag, getStats]);
 
-	return { data, countMapping, loading };
+	return { data, countMapping, maxCount, minCount, loading };
 };
 
 export default useGetFclFreightRateWorld;

@@ -39,7 +39,7 @@ const ActiveRegions = React.forwardRef(({
 					display_name={code}
 					color={styleProps?.color}
 					value={accuracyMapping[id]}
-					key="Accuracy"
+					value_key=""
 				/>,
 			),
 			{ sticky: true, direction: 'top' },

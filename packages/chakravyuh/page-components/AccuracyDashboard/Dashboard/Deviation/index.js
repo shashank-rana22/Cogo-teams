@@ -2,7 +2,8 @@ import { ResponsiveBump } from '@cogoport/charts/bump';
 import { ResponsiveMarimekko } from '@cogoport/charts/marimekko';
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React, { useEffect, useState } from 'react';
+import React,
+{ useEffect, useState } from 'react';
 
 import CustomTooltip from '../../../../common/CustomTooltip';
 import NoDataState from '../../../../common/NoDataState';
@@ -15,7 +16,23 @@ import { section_header, section_container } from '../styles.module.css';
 import styles from './styles.module.css';
 
 const ANIMATION_TIME = 500;
-const HALF_DECIMAL = 0.5;
+const TEN = 10;
+const HUNDRED = 100;
+const FIFTY = 50;
+const SEVENTY = 70;
+const TWENTY_FIVE = 25;
+
+const getRandomArray = () => {
+	const rem = Math.floor(Math.random() * TEN);
+	return Array.from(
+		{ length: 30 },
+		(_, i) => (i % TEN === rem
+			? [-Math.ceil(HUNDRED + Math.random() * FIFTY),
+				Math.ceil(SEVENTY + Math.random() * FIFTY),
+				-Math.ceil(SEVENTY - TWENTY_FIVE + Math.random() * TWENTY_FIVE)]
+			: GLOBAL_CONSTANTS.zeroth_index),
+	).flat();
+};
 
 function Deviation({ data = [], loading = false }) {
 	const [loadingData, setLoadingData] = useState([]);
@@ -41,15 +58,13 @@ function Deviation({ data = [], loading = false }) {
 
 	useEffect(() => {
 		const updateData = () => {
-			const randomArray = Array.from(
-				{ length: 10 },
-				() => Math.ceil(Math.random() * (ANIMATION_TIME + ANIMATION_TIME)),
-			);
+			const randomArray = getRandomArray();
+
 			const newData = [{
 				id   : 'line',
 				data : randomArray.map((val, idx) => ({
 					x : idx,
-					y : (Math.random() - HALF_DECIMAL) * val,
+					y : val,
 				})),
 			}];
 			setLoadingData(newData);
@@ -91,8 +106,8 @@ function Deviation({ data = [], loading = false }) {
 										tickRotation : 0,
 										format       : (value) => `${value - TOTAL_DEVIATION}%`,
 									}}
-									margin={{ top: 10, right: 20, bottom: 25, left: 20 }}
-									borderWidth={0.5}
+									margin={{ top: 10, right: 22, bottom: 25, left: 23 }}
+									borderWidth={1}
 									enableGridY={false}
 									enableGridX={false}
 									colors={['#f2f3fa', '#FDFBF6']}
@@ -151,6 +166,14 @@ function Deviation({ data = [], loading = false }) {
 									lineWidth={1.5}
 									activeLineWidth={6}
 									inactiveLineWidth={3}
+									motionConfig={{
+										mass      : 0.5,
+										tension   : 170,
+										friction  : 18,
+										clamp     : false,
+										precision : 0.01,
+										velocity  : 0,
+									}}
 									opacity={1}
 									activeOpacity={0.4}
 									inactiveOpacity={0.15}

@@ -7,7 +7,6 @@ import { startCase } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 const STROKE_WIDTH = 2;
-const INCREMENT = 1;
 
 function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
 	useEffect(() => {
@@ -136,9 +135,11 @@ function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
 		const cursor = chart.get('cursor');
 		function cursorMoved() {
 			if (loading) return;
-			for (let i = 0; i < previousBulletSprites.length; i += INCREMENT) {
-				previousBulletSprites[i].unhover();
-			}
+
+			previousBulletSprites.forEach((previousBulletSprite) => {
+				previousBulletSprite.unhover();
+			});
+
 			previousBulletSprites = [];
 			chart.series.each((series) => {
 				const { dataItem } = series.get('tooltip');

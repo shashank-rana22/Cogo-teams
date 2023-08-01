@@ -19,7 +19,13 @@ function Heading({
 }) {
 	const [show, setShow] = useState(false);
 	const ref = useRef(null);
-	const { data = {}, countMapping, loading } =	useGetFclFreightRateWorld({ flag: !showFilters });
+	const {
+		data = {},
+		countMapping = {},
+		maxCount,
+		minCount,
+		loading,
+	} = useGetFclFreightRateWorld({ flag: !showFilters });
 	const { total_rates } = data;
 
 	const handleClickOutside = (event) => {
@@ -70,7 +76,11 @@ function Heading({
 						: <IcMEyeopen className={styles.redirect} onClick={() => setShow(true)} />}
 					{show && (
 						<div className={styles.popup} ref={ref}>
-							<BirdsEyeView countMapping={countMapping} />
+							<BirdsEyeView
+								countMapping={countMapping}
+								maxCount={maxCount}
+								minCount={minCount}
+							/>
 						</div>
 					)}
 				</h1>

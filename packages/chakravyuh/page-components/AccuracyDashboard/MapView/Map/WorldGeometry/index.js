@@ -60,7 +60,7 @@ const WorldGeometry = React.forwardRef(({
 					display_name={name}
 					color={styleProps.color}
 					value={accuracyMapping[id]}
-					key="Accuracy"
+					value_key=""
 				/>,
 			),
 			{ sticky: true, direction: 'top' },

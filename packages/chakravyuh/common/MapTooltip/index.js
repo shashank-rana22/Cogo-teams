@@ -1,13 +1,21 @@
 import React from 'react';
 
-function MapTooltip({ color = null, display_name = '', value = null, key = '', alt_text = 'No Rates' }) {
+import styles from './styles.module.css';
+
+function MapTooltip({
+	color = null,
+	display_name = '',
+	value = null,
+	value_key = '',
+	value_suffix = '%',
+}) {
 	return (
-		<div style={{ color: color || '#333' }}>
+		<div className={styles.tooltip} style={{ borderColor: `${color || 'transparent'}` }}>
 			<h3>{display_name}</h3>
 			{value && (
-				<h4>
-					{`${key} : ${value || alt_text} ${value ? '%' : ''}`}
-				</h4>
+				<h1>
+					{`${value_key ? `${value_key} :` : ''} ${value} ${value ? value_suffix : ''}`}
+				</h1>
 			)}
 		</div>
 	);
