@@ -58,8 +58,9 @@ export const HRBP_VIEW_DATA = [
 		value : 'employee_code',
 	},
 	{
-		label : 'Email-ID',
-		value : 'cogoport_email',
+		label     : 'Email-ID',
+		value     : 'cogoport_email',
+		className : 'w_100',
 	},
 	{
 		label     : 'Designation',
@@ -159,15 +160,15 @@ export const EMPLOYEE_STATUS = {
 export const EMPLOYEE_STATUS_OPTIONS = [
 	{
 		label : 'Confirmed',
-		value : 'confirmed',
+		value : 'Confirmed',
 	},
 	{
 		label : 'Probation',
-		value : 'probation',
+		value : 'Probation',
 	},
 	{
 		label : 'Separated',
-		value : 'separated',
+		value : 'Separated',
 	},
 	{
 		label : 'Notice',

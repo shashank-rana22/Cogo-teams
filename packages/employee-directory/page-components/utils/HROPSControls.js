@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import { EMPLOYEE_STATUS_OPTIONS } from './constants';
 
 /* eslint-disable max-lines-per-function */
@@ -10,7 +12,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			placeholder : 'Employee Name',
 			disabled    : !isEditable,
 			rules       : {
-				required: true,
+				required: {
+					value   : true,
+					message : 'Name is required',
+				},
 			},
 		},
 		{
@@ -26,7 +31,14 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			controlType : 'text',
 			placeholder : 'Email',
 			rules       : {
-				required: true,
+				required: {
+					value   : true,
+					message : 'Email is required',
+				},
+				pattern: {
+					value   : GLOBAL_CONSTANTS.regex_patterns.email,
+					message : 'Enter valid email',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -47,7 +59,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			valueKey    : 'designation',
 			initialCall : true,
 			rules       : {
-				required: true,
+				required: {
+					value   : true,
+					message : 'Designation is required',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -68,7 +83,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			valueKey    : 'department',
 			initialCall : true,
 			rules       : {
-				required: true,
+				required: {
+					value   : true,
+					message : 'Department is required',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -80,7 +98,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			asyncKey    : 'list_all_managers',
 			initialCall : true,
 			rules       : {
-				required: true,
+				required: {
+					value   : true,
+					message : 'Reporting Manager is required',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -101,7 +122,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			labelKey    : 'office_location',
 			valueKey    : 'office_location',
 			rules       : {
-				required: true,
+				required: {
+					value   : true,
+					message : 'Reporting Office is required',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -118,7 +142,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			},
 			initialCall : true,
 			rules       : {
-				required: true,
+				required: {
+					value   : true,
+					message : 'Payroll Country is required',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -196,7 +223,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			isPreviousDaysAllowed : true,
 			dateFormat            : 'dd-MM-yyyy',
 			rules                 : {
-				required: true,
+				required: {
+					value   : true,
+					message : 'DOJ is required',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -224,7 +254,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 				},
 			],
 			rules: {
-				required: true,
+				required: {
+					value   : true,
+					message : 'LWP is required',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -244,7 +277,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 				},
 			],
 			rules: {
-				required: true,
+				required: {
+					value   : true,
+					message : 'Required',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -255,7 +291,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			placeholder : 'Status',
 			options     : EMPLOYEE_STATUS_OPTIONS,
 			rules       : {
-				required: true,
+				required: {
+					value   : true,
+					message : 'Status is required',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -275,7 +314,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 				},
 			],
 			rules: {
-				required: true,
+				required: {
+					value   : true,
+					message : 'Required',
+				},
 			},
 			disabled: !isEditable,
 		},
@@ -288,7 +330,10 @@ function getHROPSControls(isCogoFreight, isEditable) {
 		isPreviousDaysAllowed : true,
 		placeholder           : 'Cogo Freight DOJ',
 		rules                 : {
-			required: true,
+			required: {
+				value   : true,
+				message : 'Cogo Freight DOJ is Required',
+			},
 		},
 		disabled: !isEditable,
 	};

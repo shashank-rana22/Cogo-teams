@@ -60,7 +60,7 @@ function HROPSView({ show = false, onClose = () => {}, employeeDetails = {}, ref
 			cfpl_joining_date : cfpl_joining_date && new Date(cfpl_joining_date),
 			cogo_freight      : cfpl_joining_date ? 'true' : 'false',
 			lwp               : lwp ? 'true' : 'false',
-			employee_status   : is_resigned ? 'notice' : employee_status,
+			employee_status   : is_resigned ? 'notice' : employee_status.toLowerCase(),
 		});
 	}, [absconding, cfpl_joining_date, chapter_id, cogoport_email, date_of_joining,
 		department, designation, employeeDetails, employee_code, li, name, office_location, pi, reporting_manager_id,
@@ -100,7 +100,7 @@ function HROPSView({ show = false, onClose = () => {}, employeeDetails = {}, ref
 									<div className={styles.controller}>
 										<Element control={control} {...val} />
 									</div>
-									{errors[val.name] && <div className={styles.error}>Required</div>}
+									{errors[val.name] && <div className={styles.error}>{errors[val.name].message}</div>}
 								</div>
 							);
 						})}

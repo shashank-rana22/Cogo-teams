@@ -49,6 +49,16 @@
 	}
 }
 
+.w_100 {
+	width: 33.33%;
+	padding: 8px;
+	margin-bottom: 12px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
 .label {
 	margin-bottom: 4px;
 	font-size: 14px;
@@ -57,4 +67,20 @@
 
 .bold {
 	font-weight: 700;
+}
+
+.data {
+	width: fit-content;
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (max-width: 1280px) {
+		max-width: 100px;
+	}
+}
+
+.tooltip {
+	max-width: none !important;
 }

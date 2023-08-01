@@ -1,4 +1,4 @@
-import { Modal, Pill } from '@cogoport/components';
+import { Modal, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCross } from '@cogoport/icons-react';
@@ -15,9 +15,24 @@ const getViewData = (data, val) => {
 			return <Pill {...EMPLOYEE_STATUS.inactive}>Inactive</Pill>;
 		}
 
-		const statusData = EMPLOYEE_STATUS[data.employee_status];
+		const statusData = EMPLOYEE_STATUS[data.employee_status.toLowerCase()];
 
 		return <Pill {...statusData}>{statusData?.label}</Pill>;
+	}
+
+	if (val === 'cogoport_email') {
+		return (
+			<Tooltip
+				interactive
+				placement="top"
+				className={styles.tooltip}
+				content={data[val]}
+			>
+				<div className={styles.data}>
+					{data[val]}
+				</div>
+			</Tooltip>
+		);
 	}
 
 	if (['date_of_joining', 'resignation_date'].includes(val)) {
@@ -44,7 +59,7 @@ function HRBPView({ show = false, onClose = () => {}, employeeDetails = {} }) {
 				</div>
 				<div className={styles.employee_details_container}>
 					{HRBP_VIEW_DATA.map((val) => (
-						<div key={val.value} className={styles.container_item}>
+						<div key={val.value} className={val.className ? styles[val.className] : styles.container_item}>
 							<div className={styles.label}>
 								{val.label}
 							</div>

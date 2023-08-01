@@ -47,7 +47,7 @@ function Header({
 						key={val.value}
 						name={val.value}
 						title={val.label}
-						badge={data[val.value] || totalEmployeeCount}
+						badge={isEmptyFilters ? data[val.value] : totalEmployeeCount}
 					/>
 				))}
 			</Tabs>
