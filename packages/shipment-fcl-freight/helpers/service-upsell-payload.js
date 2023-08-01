@@ -13,7 +13,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 			};
 		}
 		return {
-			port_id             : primary_service?.origin_port?.id,
+			port_id             : primary_service?.destination_port?.id,
 			trade_type,
 			cargo_handling_type : formValues?.cargo_handling_type,
 		};
@@ -27,7 +27,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 				cargo_handling_type : formValues?.cargo_handling_type,
 			};
 		} return {
-			port_id             : primary_service?.origin_port?.id,
+			port_id             : primary_service?.destination_port?.id,
 			trade_type,
 			cargo_handling_type : formValues?.cargo_handling_type,
 		};
@@ -42,7 +42,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 			};
 		} return {
 			destination_location_id : formValues?.location_id,
-			origin_location_id      : primary_service?.origin_port?.id,
+			origin_location_id      : primary_service?.destination_port?.id,
 			trade_type,
 		};
 	}
