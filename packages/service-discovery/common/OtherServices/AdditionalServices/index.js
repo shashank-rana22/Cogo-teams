@@ -3,18 +3,14 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { serviceMappings } from '../../../configs/AdditionalServicesConfig';
-import Incoterms from '../../../configs/incoterms.json';
+import getTradeTypeWiseIncoTerms from '../../../configs/getTradeTypeWiseIncoTerms';
 
+import ChangeIncoTermModal from './ChangeIncoTermModal';
 import useGetMinPrice from './hooks/useGetMinPrice';
 import List from './List';
 import styles from './styles.module.css';
 import getCombinedServiceDetails from './utils/getCombinedServiceDetails';
 import getServiceName from './utils/getServiceName';
-
-const INCOTERM_MAPPING = {
-	export : 'ddp',
-	import : 'exw',
-};
 
 const TRANSPORTATION_SERVICES = ['ftl_freight', 'ltl_freight', 'trailer_freight'];
 
@@ -25,14 +21,16 @@ function AdditionalServices({ // used in search results and checkout
 	detail = {},
 	setHeaderProps = () => {},
 	refetchSearch = () => {},
+	source = '',
+	searchLoading = false,
 }) {
 	const { service_rates = [] } = rateCardData;
 
-	const { service_details = {}, service_type = '', trade_type = '' } = detail;
+	const { service_details = {}, service_type = '', trade_type = '', inco_term = '' } = detail;
 
 	const finalServiceDetails = getCombinedServiceDetails(service_details, service_rates);
 
-	const [incoterm, setIncoterm] = useState(INCOTERM_MAPPING[trade_type]);
+	const [incoTermModalData, setIncoTermModalData] = useState({});
 
 	const primaryService = service_type;
 
@@ -135,18 +133,20 @@ function AdditionalServices({ // used in search results and checkout
 		});
 	});
 
-	const filteredAllServices = allServices.filter((service_item) => service_item.inco_terms.includes(incoterm));
+	const filteredAllServices = allServices.filter((service_item) => service_item.inco_terms.includes(inco_term));
 
 	const shipperSideServices = [];
 	const consigneeSideServices = [];
 
-	(incoterm ? filteredAllServices : allServices).forEach((item) => {
+	(source === 'checkout' ? filteredAllServices : allServices).forEach((item) => {
 		if (item.name.includes('import')) {
 			consigneeSideServices.push(item);
 		} else {
 			shipperSideServices.push(item);
 		}
 	});
+
+	const incoTermOptions = getTradeTypeWiseIncoTerms(trade_type);
 
 	const SERVICES_CANNOT_BE_REMOVED = [trade_type === 'export'
 		? 'export_fcl_freight_local' : 'import_fcl_freight_local', 'fcl_freight'];
@@ -155,17 +155,18 @@ function AdditionalServices({ // used in search results and checkout
 		<>
 			<div className={styles.heading}>
 				You may need these services
-				<div style={{ fontWeight: 500, display: 'flex', alignItems: 'center' }}>
-					IncoTerms
-					<Select
-						value={incoterm}
-						onChange={setIncoterm}
-						size="sm"
-						options={Incoterms}
-						className={styles.select}
-					/>
-				</div>
-
+				{source === 'checkout' ? (
+					<div style={{ fontWeight: 500, display: 'flex', alignItems: 'center' }}>
+						IncoTerms
+						<Select
+							value={inco_term}
+							onChange={(val) => setIncoTermModalData({ selectedValue: val })}
+							size="sm"
+							options={incoTermOptions}
+							className={styles.select}
+						/>
+					</div>
+				) : null}
 			</div>
 
 			<div className={styles.additional_services}>
@@ -193,6 +194,17 @@ function AdditionalServices({ // used in search results and checkout
 					/>
 				)}
 			</div>
+
+			{!isEmpty(incoTermModalData) ? (
+				<ChangeIncoTermModal
+					incoTermModalData={incoTermModalData}
+					setIncoTermModalData={setIncoTermModalData}
+					searchLoading={searchLoading}
+					getCheckout={refetchSearch}
+					incoterm={inco_term}
+					checkout_id={detail?.checkout_id}
+				/>
+			) : null}
 		</>
 	);
 }

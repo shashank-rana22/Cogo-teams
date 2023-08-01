@@ -100,6 +100,7 @@ function SelectedRateCard({
 							detail={detail}
 							setHeaderProps={setHeaderProps}
 							refetchSearch={refetch}
+							source="search-results"
 						/>
 
 						<CargoInsurance

@@ -6,6 +6,8 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
+const DEFAULT_VALUE = 0;
+
 const ROUND_OFF_VALUE = 3;
 
 const useHandleConvenienceDetails = ({
@@ -21,6 +23,10 @@ const useHandleConvenienceDetails = ({
 	const { convenience_rate = {} } = convenienceDetails || {};
 
 	const { currency = '', price = '', quantity = 1 } = convenience_rate;
+
+	const totalBeforeDiscount = rate?.tax_total_price || DEFAULT_VALUE;
+	const totalPrice = rate?.tax_total_price_discounted || DEFAULT_VALUE;
+	const discount = totalPrice - totalBeforeDiscount;
 
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -73,7 +79,7 @@ const useHandleConvenienceDetails = ({
 		options  : {
 			style                 : 'currency',
 			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
+			maximumFractionDigits : 2,
 		},
 	});
 
@@ -83,7 +89,7 @@ const useHandleConvenienceDetails = ({
 		options : {
 			style                 : 'currency',
 			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
+			maximumFractionDigits : 2,
 		},
 	});
 
@@ -93,7 +99,18 @@ const useHandleConvenienceDetails = ({
 		options  : {
 			style                 : 'currency',
 			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
+			maximumFractionDigits : 2,
+		},
+	});
+
+	const localedDiscount = formatAmount({
+		amount   : discount,
+		currency : rate?.total_price_currency,
+		options  : {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 2,
+			minimumFractionDigits : 2,
 		},
 	});
 
@@ -136,6 +153,8 @@ const useHandleConvenienceDetails = ({
 		loading,
 		convenienceRateMapping,
 		onChange,
+		localedDiscount,
+		discount,
 	};
 };
 

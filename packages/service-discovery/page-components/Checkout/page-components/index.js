@@ -46,7 +46,7 @@ function Checkout({ checkout_type = '' }) {
 	const isCheckoutApiSuccess = !isEmpty(data);
 	const isServiceSupported = GLOBAL_CONSTANTS.s2c_supported_services.includes(primary_service);
 
-	if (!isCheckoutApiSuccess || !isServiceSupported || !tags.includes('new_admin') || shipment_id) {
+	if (!isCheckoutApiSuccess || !isServiceSupported || shipment_id) {
 		const { url = '', message = '' } = getRedirectionDetails({
 			isCheckoutApiSuccess,
 			partner_id,

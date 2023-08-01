@@ -2,6 +2,7 @@ import { Input, Select, Accordion, cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import currencies from '../../../../helpers/currencies';
+import Promocodes from '../../../Promocodes';
 import Spinner from '../../../Spinner';
 
 import ExchangeRate from './ExchangeRate';
@@ -20,6 +21,7 @@ function ConvenienceDetails({
 	getCheckout = () => {},
 	source = '',
 	convenienceRateOptions = [],
+	checkout_id = '',
 }) {
 	const { convenience_rate = {} } = convenienceDetails || {};
 
@@ -33,6 +35,8 @@ function ConvenienceDetails({
 		loading = false,
 		convenienceRateMapping = {},
 		onChange = () => {},
+		localedDiscount,
+		discount = 0,
 	} = useHandleConvenienceDetails({
 		convenienceDetails,
 		total,
@@ -41,6 +45,8 @@ function ConvenienceDetails({
 		setConvenienceDetails,
 		detail,
 	});
+
+	console.log('rate.promotions', rate.promotions);
 
 	return (
 		<Accordion
@@ -56,6 +62,12 @@ function ConvenienceDetails({
 		>
 			<div className={styles.flex}>
 				<div className={styles.left_container}>
+					<Promocodes
+						checkout_id={checkout_id}
+						refetch={getCheckout}
+						promotions={rate.promotions.promocodes}
+					/>
+
 					<ExchangeRate
 						conversions={conversions}
 						rate={rate}
@@ -122,6 +134,15 @@ function ConvenienceDetails({
 							</div>
 						</div>
 					</div>
+
+					{discount ? (
+						<div className={styles.item_container}>
+							<div className={styles.convenience_container}>
+								<div className={styles.text}>Discount</div>
+								<div className={styles.amount}>{localedDiscount}</div>
+							</div>
+						</div>
+					) : null}
 
 					<div className={styles.item_container}>
 						<div className={styles.convenience_container}>

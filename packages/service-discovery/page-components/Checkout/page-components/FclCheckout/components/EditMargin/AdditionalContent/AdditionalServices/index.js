@@ -48,6 +48,8 @@ function AdditionalServices({
 				rateCardData={rateCardData}
 				setHeaderProps={setHeaderProps}
 				refetchSearch={getCheckout}
+				searchLoading={loading}
+				source="checkout"
 			/>
 
 			<CargoInsurance

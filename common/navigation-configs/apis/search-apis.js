@@ -564,5 +564,10 @@ const apis = [
 		feature      : 'search',
 		service_name : 'fcl_freight_rate',
 	},
+	{
+		api          : 'update_checkout_inco_term',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
 ];
 export default apis;

@@ -17,6 +17,8 @@ import renderServiceType from './renderServiceType';
 import styles from './styles.module.css';
 import useHandleBreakdownDetails from './useHandleBreakdownDetails';
 
+const ROUND_OFF_VALUE = 4;
+
 function BreakdownDetails({
 	rateDetails = [],
 	setRateDetails = () => {},
@@ -87,7 +89,7 @@ function BreakdownDetails({
 				);
 
 				total += convertCurrencyValue(
-					Number(Math.floor(totalDisplay)),
+					Number(totalDisplay.toFixed(ROUND_OFF_VALUE)),
 					item?.tax_total_price_currency,
 					rate?.total_price_currency,
 					conversions,
@@ -99,7 +101,7 @@ function BreakdownDetails({
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',
-						maximumFractionDigits : 0,
+						maximumFractionDigits : 2,
 					},
 				});
 
@@ -230,6 +232,7 @@ function BreakdownDetails({
 				convenienceDetails={convenienceDetails}
 				setConvenienceDetails={setConvenienceDetails}
 				rate={rate}
+				checkout_id={checkout_id}
 				shouldEditConvenienceFee={
 					source !== 'preview_booking'
 					&& shouldEditMargin
