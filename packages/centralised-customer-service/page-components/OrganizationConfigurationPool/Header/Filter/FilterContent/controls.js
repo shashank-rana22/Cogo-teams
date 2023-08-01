@@ -103,7 +103,7 @@ const controls = [
 	},
 	{
 		name        : 'preferred_role_id',
-		label       : 'Select Role for CCS Config Pool',
+		label       : 'Select Role',
 		placeholder : 'Select Role',
 		type        : 'async-select',
 		initialCall : true,
