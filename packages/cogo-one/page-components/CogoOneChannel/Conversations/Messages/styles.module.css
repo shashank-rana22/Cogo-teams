@@ -8,27 +8,3 @@
 	height: calc(100% - 104px);
 	background: #f9f9f9;
 }
-
-.modal_header_title {
-	display: flex;
-
-	img {
-		width: 18px;
-		height: 18px;
-	}
-}
-
-.modal_title {
-	margin-left: 5px;
-	font-size: 14px;
-	font-weight: 600;
-	color: #221f20;
-}
-
-.styled_ui_modal_container {
-	:global {
-		.ui_modal_header_container {
-			padding: 10px !important;
-		}
-	}
-}

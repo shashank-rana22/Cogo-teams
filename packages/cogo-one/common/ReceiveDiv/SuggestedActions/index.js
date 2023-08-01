@@ -4,6 +4,7 @@ import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUser from '../../../hooks/useGetUser';
 import CommunicationModal from '../../CommunicationModal';
 
@@ -12,7 +13,7 @@ import styles from './styles.module.css';
 const COUNTRY_CODE_START = 0;
 const COUNTRY_CODE_END = 2;
 
-function SuggestedActions({ formattedData = {} }) {
+function SuggestedActions({ formattedData = {}, viewType = '' }) {
 	const dispatch = useDispatch();
 
 	const [modalType, setModalType] = useState('');
@@ -74,29 +75,47 @@ function SuggestedActions({ formattedData = {} }) {
 
 	const ACTIONS = [
 		{
-			label    : 'Call',
-			action   : handleCall,
-			disabled : !mobile_no || !hasVoiceCallAccess,
+			label     : 'Call',
+			action    : handleCall,
+			disabled  : !mobile_no || !hasVoiceCallAccess,
+			accessKey : 'new_call',
 		},
-		{ label: 'Message on WhatsApp', action: handleSendTemplate, disabled: false },
-		{ label: 'Send Email', action: handleSendEmail, disabled: false },
+		{
+			label     : 'Message on WhatsApp',
+			action    : handleSendTemplate,
+			disabled  : false,
+			accessKey : 'new_whatsapp',
+		},
+		{
+			label     : 'Send Email',
+			action    : handleSendEmail,
+			disabled  : false,
+			accessKey : 'new_mail',
+		},
 	];
+	const accesibleButtons = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accessible_new_communications;
 
 	return (
 		<>
 			<div className={styles.suggested_actions}>Suggested Actions :</div>
 			<div className={styles.actions}>
-				{(ACTIONS || []).map((item) => (
-					<Button
-						onClick={item?.action}
-						className={cl`${styles.actions_button} ${item?.disabled ? styles.action_disabled : ''}`}
-						key={item}
-						size="sm"
-						themeType="secondary"
-					>
-						{item.label}
-					</Button>
-				))}
+				{(ACTIONS || []).map((item) => {
+					if (!accesibleButtons?.includes(item?.accessKey)) {
+						return null;
+					}
+
+					return (
+						<Button
+							onClick={item?.action}
+							className={cl`${styles.actions_button} ${item?.disabled ? styles.action_disabled : ''}`}
+							key={item?.accessKey}
+							size="sm"
+							themeType="secondary"
+						>
+							{item.label}
+						</Button>
+					);
+				})}
 			</div>
 
 			{modalType && (
