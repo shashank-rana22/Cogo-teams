@@ -21,25 +21,22 @@ const useGetCcsShipmentCapacityDetails = () => {
 
 	const fetchList = useCallback(() => {
 		try {
-			trigger({
+			const params = {
 				...(id ? {
-					params: {
-						filters: {
-							id,
-						},
+					filters: {
+						id,
 					},
 				} : {
-					params: {
-						page,
-						filters: {
-							...(filters.status ? { status: filters.status } : { status: ['draft', 'active'] }),
-							...filters,
-						},
-
+					page,
+					filters: {
+						...(filters.status ? { status: filters.status } : { status: ['draft', 'active'] }),
+						...filters,
 					},
 				}),
 
-			});
+			};
+
+			trigger({ params });
 		} catch (error) {
 			Toast.error(error?.message || 'Something went wrong');
 		}

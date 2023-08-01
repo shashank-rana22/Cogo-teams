@@ -24,7 +24,9 @@ const getSlabs = ({ data = {}, id = '', experience = '' }) => {
 			};
 		});
 	}
+
 	if (experience === 'custom') return [{ slab_unit: 'month', slab_lower_limit: '0' }];
+
 	return DEFAULT_SLABS;
 };
 
@@ -100,8 +102,7 @@ const useAgentExpSlabs = ({
 		[...Array(fieldsLength).keys()].forEach((index) => {
 			setValue(`agent_experience_slabs.${index}.slab_unit`, defaultSlabUnit);
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [defaultSlabUnit, setValue]);
+	}, [defaultSlabUnit, fieldsLength, setValue]);
 
 	return {
 		handleSubmit,

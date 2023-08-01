@@ -21,24 +21,22 @@ const useGetCcsConfigurations = () => {
 
 	const fetchList = useCallback(() => {
 		try {
-			trigger({
+			const params = {
 				...(id ? {
-					params: {
-						filters: {
-							id,
-						},
+					filters: {
+						id,
 					},
 				} : {
-					params: {
-						page,
-						filters: {
-							...filters,
-							status: 'active',
-						},
+					page,
+					filters: {
+						...filters,
+						status: 'active',
 					},
 				}),
 
-			});
+			};
+
+			trigger({ params });
 		} catch (error) {
 			Toast.error(error?.message || 'Something went wrong');
 		}
