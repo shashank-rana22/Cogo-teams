@@ -3,11 +3,14 @@ import { InputController } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useUpdateOrganizationContract from '../hooks/useUpdateOrganizationContract';
 import styles from '../styles.module.css';
 
 function ContractItem({ item, index, step, control }) {
 	const [value, setValue] = useState();
 	const ONE = 1;
+	const { UpdateOrganizationContract } = useUpdateOrganizationContract();
+
 	return (
 		<div key={item}>
 			<div className={styles.box_layout}>
@@ -38,6 +41,7 @@ function ContractItem({ item, index, step, control }) {
 								themeType="secondary"
 								className={styles.update_button}
 								style={{ height: '28px' }}
+								onClick={UpdateOrganizationContract}
 							>
 								Update
 
