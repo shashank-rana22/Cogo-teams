@@ -23,11 +23,8 @@
         "tab_title":"Emails"
     },
     "cancel_shipment": {
-        "can_cancel": false,
-        "list_reasons": {
-            "stakeholder_type": ["admin"]
-        },
-        "role": "sales"
+        "can_cancel": true,
+        "role": "supply"
     },
     "purchase":{
         "tab_title": "Purchase Invoice"
