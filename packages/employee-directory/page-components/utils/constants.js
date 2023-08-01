@@ -30,11 +30,11 @@ export const SORT_OPTIONS = [
 		value : 'name_desc',
 	},
 	{
-		label : 'COGO-ID (01-1000)',
+		label : 'COGO-ID (Increasing)',
 		value : 'employee_code_asc',
 	},
 	{
-		label : 'COGO-ID (1000-01)',
+		label : 'COGO-ID (Decreasing)',
 		value : 'employee_code_desc',
 	},
 ];
@@ -164,5 +164,24 @@ export const EMPLOYEE_STATUS_OPTIONS = [
 	{
 		label : 'Notice',
 		value : 'notice',
+	},
+];
+
+export const PAGE_LIMIT_OPTIONS = [
+	{
+		label : 10,
+		value : 10,
+	},
+	{
+		label : 50,
+		value : 50,
+	},
+	{
+		label : 100,
+		value : 100,
+	},
+	{
+		label : 200,
+		value : 200,
 	},
 ];

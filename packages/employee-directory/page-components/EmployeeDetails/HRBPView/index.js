@@ -17,7 +17,7 @@ const getViewData = (data, val) => {
 
 		const statusData = EMPLOYEE_STATUS[data.employee_status];
 
-		return <Pill {...statusData}>{statusData.label}</Pill>;
+		return <Pill {...statusData}>{statusData?.label}</Pill>;
 	}
 
 	if (['date_of_joining', 'resignation_date'].includes(val)) {

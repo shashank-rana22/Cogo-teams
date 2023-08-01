@@ -1,11 +1,10 @@
-import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
 const DEFAULT_PAGE_NO = 1;
+const DEFAULT_PAGE_LIMIT = 10;
 
 const getEmployeeStatus = (employeeFilters, rest) => {
 	const { status } = employeeFilters;
@@ -40,6 +39,7 @@ const useGetEmployeeList = () => {
 	const [filters, setFilters] = useState({
 		employee_status : 'confirmed',
 		page            : DEFAULT_PAGE_NO,
+		page_limit      : DEFAULT_PAGE_LIMIT,
 	});
 	const [employeeFilters, setemployeeFilters] = useState({});
 
@@ -53,7 +53,7 @@ const useGetEmployeeList = () => {
 	const getEmployeeList = useCallback(
 		async (download_as_csv) => {
 			try {
-				const { sort_by, sort_type, page, ...rest } = filters || {};
+				const { sort_by, sort_type, page, page_limit, ...rest } = filters || {};
 				const { status, ...restData } = employeeFilters || {};
 				const res = await trigger({
 					params: {
@@ -67,7 +67,7 @@ const useGetEmployeeList = () => {
 						sort_by,
 						sort_type,
 						page,
-						page_limit             : 10,
+						page_limit,
 						mappings_data_required : true,
 						download_as_csv        : download_as_csv || undefined,
 					},
@@ -79,7 +79,7 @@ const useGetEmployeeList = () => {
 
 				return res;
 			} catch (error) {
-				Toast.error(getApiErrorString(error.response?.data || 'Something went wrong'));
+				console.log('err', error);
 			}
 			return false;
 		},

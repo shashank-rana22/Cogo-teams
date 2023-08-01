@@ -33,7 +33,7 @@ function HROPSView({ show = false, onClose = () => {}, employeeDetails = {}, ref
 		name, employee_code, cogoport_email, designation, department,
 		reporting_manager_id, office_location, squad_id, tribe_id, sub_chapter_id,
 		chapter_id, li, pi, date_of_joining, resignation_date, cfpl_joining_date, id,
-		employee_tags, employee_status,
+		employee_tags, employee_status, payroll_country_id,
 	} = employeeDetails || {};
 
 	const { lwp, absconding, is_resigned } = employee_tags || {};
@@ -51,6 +51,7 @@ function HROPSView({ show = false, onClose = () => {}, employeeDetails = {}, ref
 			tribe_id,
 			sub_chapter_id,
 			chapter_id,
+			payroll_country_id,
 			li,
 			pi,
 			date_of_joining   : date_of_joining && new Date(date_of_joining),
@@ -63,7 +64,8 @@ function HROPSView({ show = false, onClose = () => {}, employeeDetails = {}, ref
 		});
 	}, [absconding, cfpl_joining_date, chapter_id, cogoport_email, date_of_joining,
 		department, designation, employeeDetails, employee_code, li, name, office_location, pi, reporting_manager_id,
-		resignation_date, setValues, squad_id, sub_chapter_id, tribe_id, lwp, employee_status, is_resigned]);
+		resignation_date, setValues, squad_id, sub_chapter_id, tribe_id, lwp, employee_status,
+		is_resigned, payroll_country_id]);
 
 	const onSubmit = (values) => {
 		const { employee_status : employeeStatus } = values;

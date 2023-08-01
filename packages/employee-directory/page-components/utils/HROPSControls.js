@@ -105,23 +105,23 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			},
 			disabled: !isEditable,
 		},
-		// {
-		// 	name        : 'payroll_country',
-		// 	label       : 'Select Payroll Country',
-		// 	controlType : 'asyncSelect',
-		// 	placeholder : 'Select Payroll Country',
-		// 	asyncKey    : 'list_locations',
-		// 	params      : {
-		// 		filters: {
-		// 			type: ['country'],
-		// 		},
-		// 	},
-		// 	initialCall : true,
-		// 	rules       : {
-		// 		required: true,
-		// 	},
-		// 	disabled: !isEditable,
-		// },
+		{
+			name        : 'payroll_country',
+			label       : 'Select Payroll Country',
+			controlType : 'asyncSelect',
+			placeholder : 'Select Payroll Country',
+			asyncKey    : 'list_locations',
+			params      : {
+				filters: {
+					type: ['country'],
+				},
+			},
+			initialCall : true,
+			rules       : {
+				required: true,
+			},
+			disabled: !isEditable,
+		},
 		{
 			name        : 'squad_id',
 			label       : 'Select Squad',
@@ -133,10 +133,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 				page_limit : 100,
 			},
 			initialCall : true,
-			rules       : {
-				required: true,
-			},
-			disabled: !isEditable,
+			disabled    : !isEditable,
 		},
 		{
 			name        : 'tribe_id',
@@ -149,10 +146,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 				page_limit : 100,
 			},
 			initialCall : true,
-			rules       : {
-				required: true,
-			},
-			disabled: !isEditable,
+			disabled    : !isEditable,
 		},
 		{
 			name        : 'chapter_id',
@@ -165,10 +159,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 				page_limit : 100,
 			},
 			initialCall : true,
-			rules       : {
-				required: true,
-			},
-			disabled: !isEditable,
+			disabled    : !isEditable,
 		},
 		{
 			name        : 'sub_chapter_id',
@@ -181,10 +172,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 				page_limit : 100,
 			},
 			initialCall : true,
-			rules       : {
-				required: true,
-			},
-			disabled: !isEditable,
+			disabled    : !isEditable,
 		},
 		{
 			label       : 'LI',

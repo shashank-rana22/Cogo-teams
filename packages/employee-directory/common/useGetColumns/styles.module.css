@@ -6,7 +6,7 @@
 
 .data {
 	width: fit-content;
-	max-width: 140px;
+	max-width: 110px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -17,5 +17,10 @@
 }
 
 .tooltip_data {
+	max-width: none;
 	word-break: normal;
+}
+
+.tooltip {
+	max-width: none !important;
 }

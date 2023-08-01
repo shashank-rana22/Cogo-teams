@@ -1,4 +1,6 @@
 import { Checkbox, Pill, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { getByKey, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -27,6 +29,7 @@ const useGetColumns = ({
 				<Tooltip
 					interactive
 					placement="top"
+					className={styles.tooltip}
 					content={<div className={styles.tooltip_data}>{item.name}</div>}
 				>
 					<div className={styles.data}>
@@ -55,6 +58,7 @@ const useGetColumns = ({
 				<Tooltip
 					interactive
 					placement="top"
+					className={styles.tooltip}
 					content={(
 						<div className={styles.tooltip_data}>
 							{item.designation || '-'}
@@ -79,6 +83,7 @@ const useGetColumns = ({
 				<Tooltip
 					interactive
 					placement="top"
+					className={styles.tooltip}
 					content={(
 						<div className={styles.tooltip_data}>
 							{item.cogoport_email || '-'}
@@ -93,21 +98,13 @@ const useGetColumns = ({
 			id: 'email_id',
 		},
 		{
-			Header   : 'Chapter',
+			Header   : 'Date of Joining',
 			accessor : (item) => (
-				<Tooltip
-					interactive
-					placement="top"
-					content={(
-						<div className={styles.tooltip_data}>
-							{item.chapter_name || '-'}
-						</div>
-					)}
-				>
-					<div className={styles.data}>
-						{item.chapter_name || '-'}
-					</div>
-				</Tooltip>
+				formatDate({
+					date       : item.date_of_joining || '-',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				})
 			),
 			id: 'chapter',
 		},
@@ -117,6 +114,7 @@ const useGetColumns = ({
 				<Tooltip
 					interactive
 					placement="top"
+					className={styles.tooltip}
 					content={(
 						<div className={styles.tooltip_data}>
 							{startCase(item.office_location) || '-'}
@@ -136,6 +134,7 @@ const useGetColumns = ({
 				<Tooltip
 					interactive
 					placement="top"
+					className={styles.tooltip}
 					content={(
 						<div className={styles.tooltip_data}>
 							{getByKey(item, 'reporting_manager.name') || '-'}
