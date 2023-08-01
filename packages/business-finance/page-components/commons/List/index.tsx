@@ -32,6 +32,8 @@ export interface Props {
 	width?: string;
 	rowStyle?: string;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
+	viewId?:null;
+	renderDropDown?:Function;
 }
 
 function List({
@@ -50,6 +52,8 @@ function List({
 	width = null,
 	rowStyle = null,
 	paginationType = 'table',
+	viewId = null,
+	renderDropDown = () => {},
 }: Props) {
 	const {
 		showHeader = true,
@@ -88,20 +92,24 @@ function List({
 					</div>
 				) : (
 					<div>
-						{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-							<CardColumn
-								key={singleitem.id}
-								fields={fields}
-								itemStyles={itemStyles}
-								singleitem={singleitem}
-								config={config}
-								loading={loading}
-								functions={commonFunctions(functions)}
-								isMobile={isMobile}
-								subActiveTab={subActiveTab}
-								width={width}
-								rowStyle={rowStyle}
-							/>
+						{(!isEmpty(list) ? list : [1, 2, 3, 4, 5]).map((singleitem) => (
+							<>
+								<CardColumn
+									key={singleitem.id}
+									fields={fields}
+									itemStyles={itemStyles}
+									singleitem={singleitem}
+									config={config}
+									loading={loading}
+									functions={commonFunctions(functions)}
+									isMobile={isMobile}
+									subActiveTab={subActiveTab}
+									width={width}
+									rowStyle={rowStyle}
+									viewId={viewId}
+								/>
+								{renderDropDown(singleitem)}
+							</>
 						))}
 					</div>
 				)}

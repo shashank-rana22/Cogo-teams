@@ -421,6 +421,15 @@ export default {
 		},
 	},
 	navigations: {
+		settlement_onAccountCollection: {
+			tabs: [
+				'ap-ar-settlement',
+				'history',
+				'onAccountCollection',
+				'JournalVoucher',
+			],
+		},
+
 		supply_dashboard: {
 			rfq_enquiries: {
 				tabs: [
