@@ -20,8 +20,8 @@ const SALES_REASON_OPTIONS = [
 		value : 'shipment_parameters_changed',
 	},
 	{
-		label : 'Contracted Fleet Unavailable',
-		value : 'contracted_fleet_unavailable',
+		label : 'Preferred airline unavailable',
+		value : 'preferred_airline_unavailable',
 	},
 	{
 		label : 'Truck Type Changed',
