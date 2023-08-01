@@ -349,8 +349,8 @@ export default {
 		],
 		tax_types: [
 			{
-				label : 'NIB',
-				value : 'nib',
+				label : 'NPWP',
+				value : 'npwp',
 			},
 		],
 		invoice_status: [
@@ -498,7 +498,7 @@ export default {
 	},
 	others: {
 		registration_number: {
-			label      : 'NIB',
+			label      : 'NPWP',
 			pattern    : /^\d{13}$/,
 			max_length : 13,
 		},

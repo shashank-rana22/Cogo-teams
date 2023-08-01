@@ -31,7 +31,9 @@ export default {
 	},
 	regex: {
 		PAN              : '',
-		GST              : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		// eslint-disable-next-line max-len
+		GST              : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		ECN              : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL            : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
@@ -521,7 +523,7 @@ export default {
 	others: {
 		registration_number: {
 			label      : 'VAT',
-			pattern    : /^[0-3]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+			pattern    : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 			max_length : 15,
 		},
 
