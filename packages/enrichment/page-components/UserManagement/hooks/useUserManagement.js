@@ -80,7 +80,7 @@ const useUserManagement = () => {
 							</div>
 						)}
 					>
-						<div className={styles.business_name}>
+						<div>
 							{name || '__' }
 						</div>
 					</Tooltip>

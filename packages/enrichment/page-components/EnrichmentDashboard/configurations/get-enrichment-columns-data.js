@@ -1,4 +1,4 @@
-import { ButtonIcon, Pill, Popover } from '@cogoport/components';
+import { ButtonIcon, Pill, Popover, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot } from '@cogoport/icons-react';
@@ -31,13 +31,25 @@ const getEnrichmentColumnsData = ({
 	{
 		id       : 'business_name',
 		Header   : 'ORGANIZATION',
-		accessor : ({ organization, lead_organization, lead_organization_id }) => (
-			<section>
-				{lead_organization_id
-					? (lead_organization || {}).business_name || '-'
-					: (organization || {}).business_name || '-'}
-			</section>
-		),
+		accessor : ({ organization, lead_organization, lead_organization_id }) => {
+			const business_name = lead_organization_id
+				? (lead_organization || {}).business_name : (organization || {}).business_name;
+
+			return (
+				<Tooltip
+					placement="bottom"
+					content={(
+						<div className={styles.toottip_content}>
+							{business_name || '__' }
+						</div>
+					)}
+				>
+					<div className={styles.business_name}>
+						{business_name || '__' }
+					</div>
+				</Tooltip>
+			);
+		},
 	},
 
 	{

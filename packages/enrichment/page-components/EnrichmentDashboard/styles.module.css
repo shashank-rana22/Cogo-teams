@@ -47,6 +47,17 @@
 	min-width: 200px;
 }
 
+.toottip_content {
+	word-break: initial;
+}
+
+.business_name {
+	width: fit-content;
+	max-width: 300px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .email_id {
 	color: #888fd1;
 }
