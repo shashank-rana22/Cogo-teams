@@ -19,11 +19,11 @@ function FieldPair({ itemData, field }) {
 		} if (type === 'tag') {
 			return (
 				<text className={styled.lower_keys}>
-					{getByKey(itemData, key)}
+					{startCase(getByKey(itemData, key))}
 				</text>
 			);
 		} if (type === 'serviceType') {
-			return (<div>{startCase(getByKey(itemData, key))}</div>);
+			return (<div className={styled.lower_keys}>{startCase(getByKey(itemData, key))}</div>);
 		} if (type === 'amount') {
 			return (
 				<div>

@@ -114,7 +114,8 @@ const controls = [
 		rules       : {
 			required: 'Hiring Manager is required',
 		},
-		params: {
+		initialCall : true,
+		params      : {
 			filters: {
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
@@ -129,6 +130,10 @@ const controls = [
 		asyncKey    : 'partner_users_ids',
 		label       : 'Reporting Manager',
 		placeholder : 'Reporting Manager',
+		rules       : {
+			required: 'Reporting Manager is required',
+		},
+		initialCall : true,
 		params      : {
 			filters: {
 				status               : 'active',
@@ -147,7 +152,8 @@ const controls = [
 		rules       : {
 			required: 'name is required',
 		},
-		params: {
+		initialCall : true,
+		params      : {
 			filters: {
 				status               : 'active',
 				partner_entity_types : ['cogoport'],

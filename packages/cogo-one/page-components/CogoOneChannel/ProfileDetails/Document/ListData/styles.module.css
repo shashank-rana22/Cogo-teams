@@ -5,7 +5,7 @@
 }
 
 .list_container {
-	height: 80vh;
+	height: 76vh;
 	margin-top: 10px;
 	overflow-y: auto;
 
@@ -45,21 +45,6 @@
 	padding: 8px;
 	margin: -5px 0 -5px 5px;
 	border-left: 1px solid #bdbdbd;
-
-	:global {
-		.ui_button_container {
-			height: 20px;
-			padding: 0;
-			font-size: 10px;
-			color: #bf291e;
-			background-color: #fdebe9;
-		}
-
-		.ui_button_container:hover {
-			color: #bf291e;
-			background-color: #fdebe9;
-		}
-	}
 }
 
 .main_card:last-child {
@@ -67,7 +52,7 @@
 }
 
 .card {
-	padding: 8px 8px 8px 15px;
+	padding: 8px 8px 8px 10px;
 	margin: 5px 5px 15px;
 	background: #fff;
 	border-radius: 12px;
@@ -132,6 +117,13 @@
 	color: #bf291e;
 }
 
-.tag_button {
-	margin-top: 5px;
+.card_footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 3px;
+}
+
+.shipment_id {
+	color: #6fa5ab;
 }

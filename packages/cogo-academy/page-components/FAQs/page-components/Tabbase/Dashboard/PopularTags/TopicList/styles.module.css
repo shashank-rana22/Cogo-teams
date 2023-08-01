@@ -1,5 +1,7 @@
 .grid_container {
 	:global {
+		display: flex;
+
 		.ui_tabs_container {
 			width: 100%;
 		}
@@ -55,6 +57,12 @@
 	&:hover {
 		box-shadow: 0 0 10px rgb(33 32 32 / 50%);
 	}
+
+	@media (max-width: 768px) {
+		display: none;
+		flex: 1 1 0%;
+		visibility: hidden;
+	}
 }
 
 .spinner {
@@ -63,4 +71,10 @@
 	justify-content: center;
 	height: 50vh;
 	margin-top: 32px;
+}
+
+.questions_container_tag {
+	@media (min-width: 768px) {
+		flex: 1.5;
+	}
 }
