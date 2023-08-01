@@ -3,7 +3,7 @@ import { InputController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import services from '../../../../../../../configurations/service-options';
 import useShipmentCapacities from '../../../../../../../hooks/useShipmentCapacities';
@@ -23,7 +23,7 @@ const getUpperLimit = (slab_upper_limit, source) => {
 	return result;
 };
 
-function ShipmentCapacities(props) {
+function ShipmentCapacities(props, ref) {
 	const {
 		agentExperienceSlabs = [],
 		setActiveItem = () => {}, data = {},
@@ -44,7 +44,7 @@ function ShipmentCapacities(props) {
 	const handleClick = () => router.push('/centralised-customer-service?activeTab=shipment_capacity_config');
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} ref={ref}>
 
 			{loading ? <LoadingState /> : (
 				<>
@@ -179,4 +179,4 @@ function ShipmentCapacities(props) {
 	);
 }
 
-export default ShipmentCapacities;
+export default forwardRef(ShipmentCapacities);

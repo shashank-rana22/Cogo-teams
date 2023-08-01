@@ -3,7 +3,7 @@ import { RadioGroupController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlusInCircle, IcMDelete, IcMAlert } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import useAgentExpSlabs from '../../../../../hooks/useAgentExpSlabs';
 
@@ -25,6 +25,8 @@ function SetConfiguration({
 
 	const [showForm, setShowForm] = useState(id);
 
+	const shipmentCapacityRef = useRef(null);
+
 	const {
 		handleSubmit = () => {},
 		errors = {},
@@ -41,9 +43,8 @@ function SetConfiguration({
 
 	useEffect(() => {
 		if (showForm) {
-			const shipmentCapacitiesElement = document.getElementById('shipment-capacities');
-			if (shipmentCapacitiesElement) {
-				window.scrollTo({ top: shipmentCapacitiesElement.offsetTop, behavior: 'smooth' });
+			if (shipmentCapacityRef.current) {
+				shipmentCapacityRef.current.scrollIntoView({ behavior: 'smooth' });
 			}
 		}
 	}, [showForm]);
@@ -163,16 +164,15 @@ function SetConfiguration({
 
 			{showForm && (
 
-				<div id="shipment-capacities">
-					<ShipmentCapacities
-						agentExperienceSlabs={agentExperienceSlabs}
-						setActiveItem={setActiveItem}
-						data={data}
-						routeLoading={routeLoading}
-						loading={loading}
-						defaultSlabUnit={defaultSlabUnit}
-					/>
-				</div>
+				<ShipmentCapacities
+					agentExperienceSlabs={agentExperienceSlabs}
+					ref={shipmentCapacityRef}
+					setActiveItem={setActiveItem}
+					data={data}
+					routeLoading={routeLoading}
+					loading={loading}
+					defaultSlabUnit={defaultSlabUnit}
+				/>
 
 			)}
 
