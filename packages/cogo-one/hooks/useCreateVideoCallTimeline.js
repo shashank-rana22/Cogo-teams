@@ -43,7 +43,6 @@ const useCreateVideoCallTimeline = ({ formattedData = {} }) => {
 
 		try {
 			const res = await trigger({ data: payload });
-			console.log('res:', res);
 
 			if (res?.data?.call_record_id) {
 				dispatch(
