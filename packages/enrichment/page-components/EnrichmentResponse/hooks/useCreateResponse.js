@@ -60,24 +60,32 @@ const useCreateResponse = ({
 
 		const payload = getPayload({ values, activeTab });
 
-		try {
-			await trigger({
-				data: {
-					...payload,
-					source              : 'manual',
-					feedback_request_id : query.id,
+		const isPayloadEmpty = Object.keys(payload).every(
+			(key) => key === 'response_type' || payload[key] === undefined,
+		);
 
-				},
-			});
+		if (!isPayloadEmpty) {
+			try {
+				await trigger({
+					data: {
+						...payload,
+						source              : 'manual',
+						feedback_request_id : query.id,
 
-			Toast.success(`${startCase(activeTab)} Added Successfully`);
+					},
+				});
 
-			onClose();
+				Toast.success(`${startCase(activeTab)} Added Successfully`);
 
-			refetchResponses();
-		} catch (err) {
-			Toast.error(getApiErrorString(err?.response?.data)
-			|| `Failed to add new ${startCase(activeTab)}, please try again...`);
+				onClose();
+
+				refetchResponses();
+			} catch (err) {
+				Toast.error(getApiErrorString(err?.response?.data)
+				|| `Failed to add new ${startCase(activeTab)}, please try again...`);
+			}
+		} else {
+			Toast.error('At least one field should be present');
 		}
 	};
 
