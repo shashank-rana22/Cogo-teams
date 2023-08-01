@@ -23,6 +23,7 @@ import employeeDashboard from './config/employee-dashboard';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
+import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import groundOps from './config/ground-ops';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
@@ -137,6 +138,7 @@ const routeConfig = {
 	...igmDesk,
 	...airlinePluginBooking,
 	...bookingDeskSurface,
+	...ftlFieldSreviceOps,
 	...notifications,
 	...centralisedCustomerService,
 };

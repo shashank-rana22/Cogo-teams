@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const DEFAULT_PAGE = 1;
 const DEFAULT_VISIBILITY_COUNT = 1;
 
 const useUpdateTestUserMapping = ({ setActiveState }) => {
@@ -36,10 +35,6 @@ const useUpdateTestUserMapping = ({ setActiveState }) => {
 
 			setActiveState('ongoing');
 			localStorage.setItem('visibilityChangeCount', DEFAULT_VISIBILITY_COUNT);
-			localStorage.setItem(
-				`current_question_${test_id}_${user_id}`,
-				DEFAULT_PAGE,
-			);
 
 			// const elem = document.getElementById('maincontainer');
 

@@ -9,10 +9,12 @@ import AdvancePayment from './AdvancePayment/index.tsx';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities.ts';
 import Dashboard from './Dashboard/index.tsx';
 import Invoices from './Invoices';
+import Payruns from './Payruns';
 import styles from './styles.module.css';
 import Treasury from './Treasury';
 
 const ENTITY_CODE_LENGTH = 1;
+const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment'];
 
 function AccountPayables() {
 	const { query, push } = useRouter();
@@ -31,8 +33,6 @@ function AccountPayables() {
 	const entityDataCount = entityData.length;
 
 	const entity = getDefaultEntityCode(partnerId);
-
-	const FILTER_TABS = ['dashboard', 'advance-payment'];
 
 	const handleTabChange = (v) => {
 		if (
@@ -102,7 +102,7 @@ function AccountPayables() {
 						<AdvancePayment activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="payruns" title="PAYRUN">
-						<h1>Payruns</h1>
+						<Payruns activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="OUTSTANDING">
 						<h1>Outstandings</h1>

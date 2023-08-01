@@ -48,6 +48,7 @@ const GLOBAL_CONSTANTS = {
 			'HH:mm'     : 'HH:mm',
 			'hh:mm:ss'  : 'hh:mm:ss',
 			'HH:mm:ss'  : 'HH:mm:ss',
+			'HH:mm a'   : 'HH:mm a',
 			hh          : 'hh',
 			HH          : 'HH',
 			mm          : 'mm',
@@ -60,6 +61,12 @@ const GLOBAL_CONSTANTS = {
 	sample_document_url: {
 		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
 						a3072d28df04315514414abe46a8c2f0/new_employee_bulk_upload_sample_sheet.csv`,
+	},
+	upload_utr_sample_file: {
+		normal_payment: 'https://cogoport-testing.sgp1.digitaloceanspaces.com/06679b4fca57'
+							+ 'a312ee8f3fe0ded72246/UTRuploadSampleFile.xlsx',
+		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae5'
+							+ '9e95d4e38a4271ff/UTRuploadSampleFileForAdvancePayment.xlsx',
 	},
 	flash_booking_charge_codes: [
 		'OTC',
@@ -291,6 +298,8 @@ const GLOBAL_CONSTANTS = {
 		},
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
+		message_reply        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/message_reply.png',
+		cargo_ship_vector    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargoShipsVector.png',
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
 		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
 		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
