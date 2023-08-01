@@ -3,11 +3,19 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 16px;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
 }
 
 .left_container {
 	display: flex;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
 }
 
 .right_container {
@@ -18,6 +26,10 @@
 		.ui_select_options_container {
 			z-index: 10;
 		}
+	}
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
 	}
 }
 
@@ -30,6 +42,10 @@
 	background-color: #fff;
 	border: 1px solid #cacaca;
 	border-radius: 4px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .employee_no {
@@ -46,11 +62,21 @@
 .search_input {
 	width: 300px;
 	margin-left: 20px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 12px 0;
+	}
 }
 
 .sort_by {
 	width: 200px;
 	margin-right: 20px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-right: 0;
+	}
 }
 
 .flex {
@@ -80,6 +106,10 @@
 	display: flex;
 	align-items: center;
 	margin-right: 20px;
+
+	@media (max-width: 768px) {
+		margin: 12px 20px;
+	}
 }
 
 .filter_reset_btn {

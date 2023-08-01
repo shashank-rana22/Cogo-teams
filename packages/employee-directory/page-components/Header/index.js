@@ -51,7 +51,7 @@ function Header({
 					/>
 				))}
 			</Tabs>
-			<Button size="md" themeType="accent" onClick={handleDownload}>
+			<Button size="md" className={styles.download_btn} themeType="accent" onClick={handleDownload}>
 				<IcMDownload />
 				{' '}
 				<span className={styles.download_text}>Download Current View</span>

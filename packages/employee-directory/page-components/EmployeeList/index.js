@@ -22,7 +22,7 @@ function EmployeeList({
 	};
 
 	return (
-		<div>
+		<div className={styles.main_container}>
 			<StyledTable
 				className={!isEmpty(selectedIds) ? 'height_500' : 'height_100'}
 				columns={columns}

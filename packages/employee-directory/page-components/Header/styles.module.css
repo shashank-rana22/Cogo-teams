@@ -23,6 +23,20 @@
 			background-color: #ddcbf8;
 		}
 	}
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+
+		.download_btn {
+			margin-top: 16px;
+		}
+
+		:global {
+			.ui_tab_list_container {
+				flex-wrap: wrap;
+			}
+		}
+	}
 }
 
 .download_text {

@@ -28,8 +28,7 @@ function PopoverFilters({
 	};
 
 	return (
-		<div>
-
+		<div className={styles.popover_filter_container}>
 			<div className={styles.flex}>
 				<div className={styles.title}>
 					Filter

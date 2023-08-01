@@ -18,14 +18,12 @@ function FixedCard({
 	return (
 		<>
 			<div className={styles.container}>
-				<div>
-					<div className={styles.text}>
-						Selected No. Of Employees :
-						<span className={styles.span_text}>
-							{' '}
-							{selectedIdsLength > DEFAULT_ARRAY_LENGTH ? selectedIdsLength : `0${selectedIdsLength}`}
-						</span>
-					</div>
+				<div className={styles.text}>
+					Selected No. Of Employees :
+					<span className={styles.span_text}>
+						{' '}
+						{selectedIdsLength > DEFAULT_ARRAY_LENGTH ? selectedIdsLength : `0${selectedIdsLength}`}
+					</span>
 				</div>
 				<Button
 					size="md"

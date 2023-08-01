@@ -37,6 +37,14 @@ export const SORT_OPTIONS = [
 		label : 'COGO-ID (Decreasing)',
 		value : 'employee_code_desc',
 	},
+	{
+		label : 'Department (A-Z)',
+		value : 'department_asc',
+	},
+	{
+		label : 'Department (Z-A)',
+		value : 'department_desc',
+	},
 ];
 
 export const HRBP_VIEW_DATA = [

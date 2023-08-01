@@ -28,6 +28,10 @@
 .controller_item {
 	width: 50%;
 	padding: 8px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .label {
@@ -55,4 +59,11 @@
 
 .refresh_icon {
 	margin-right: 4px;
+}
+
+.popover_filter_container {
+	@media (max-width: 768px) {
+		height: 500px;
+		overflow-y: auto;
+	}
 }
