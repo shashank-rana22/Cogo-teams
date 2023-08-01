@@ -1,8 +1,8 @@
 const MIN_THREE_DIGIT_NUMBER = 999;
 const MAX_FOUR_DIGIT_NUMBER = 1000;
-const INCREASE_CNT_BY_ONE = 1;
+const INCREASE_COUNT_BY_ONE = 1;
 const ROUND_UP_NUMBER = 2;
-const CHECK_INTEGER_NUMBER = 0;
+const EQUAL_TO_ZERO = 0;
 
 const SUFFIX_MAPPING = {
 	1 : 'K',
@@ -17,12 +17,13 @@ export const getFormattedNumber = (val) => {
 
 	while (newVal > MIN_THREE_DIGIT_NUMBER) {
 		newVal /= MAX_FOUR_DIGIT_NUMBER;
-		digitRemain += INCREASE_CNT_BY_ONE;
+		digitRemain += INCREASE_COUNT_BY_ONE;
 	}
 
 	let num = Number(newVal).toFixed(ROUND_UP_NUMBER);
+	const checkLastDigit = num - Math.floor(num);
 
-	if (num - Math.floor(num) === CHECK_INTEGER_NUMBER) {
+	if (checkLastDigit === EQUAL_TO_ZERO) {
 		num = Math.floor(num);
 	}
 

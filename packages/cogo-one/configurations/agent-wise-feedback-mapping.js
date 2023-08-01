@@ -19,15 +19,15 @@ export const AGENT_WISE_FEEDACK_MAPPING = [
 
 export const AGENT_WISE_STATS_MAPPING = [
 	{
-		label : 'Call Made',
+		label : 'Calls Made',
 		name  : 'calls_made',
 	},
 	{
-		label : 'Call Received',
+		label : 'Calls Received',
 		name  : 'calls_received',
 	},
 	{
-		label : 'Chat Assigned',
+		label : 'Chats Assigned',
 		name  : 'chats_assigned',
 	},
 ];

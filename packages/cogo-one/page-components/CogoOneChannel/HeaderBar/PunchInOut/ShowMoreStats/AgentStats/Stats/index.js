@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 
 const MIN_COUNT = 0;
 
+const getCallCountByType = ({ list, callType }) => list.filter((call) => call?.call_type === callType).length;
+
 function Stats({
 	bookingCount = 0,
 	statsData = {},
@@ -23,9 +25,6 @@ function Stats({
 	const { list = [] } = callData || {};
 	const { total_count: quotationCount = 0 } = quotationData || {};
 
-	const outgoingCalls = list.filter((call) => call.call_type === 'outgoing').length;
-	const incomingCalls = list.filter((call) => call.call_type === 'incoming').length;
-
 	const FEEDBACK_COUNT_MAPPING = {
 		no_of_bookings       : bookingCount,
 		no_of_quotation_send : quotationCount,
@@ -33,8 +32,8 @@ function Stats({
 
 	const STATS_COUNT_MAPPING = {
 		chats_assigned : active,
-		calls_made     : outgoingCalls,
-		calls_received : incomingCalls,
+		calls_made     : getCallCountByType({ list, callType: 'outgoing' }),
+		calls_received : getCallCountByType({ list, callType: 'incoming' }),
 	};
 
 	return (
@@ -52,8 +51,8 @@ function Stats({
 										<Image
 											src={GLOBAL_CONSTANTS.image_url.sad_icon}
 											alt="sad-emoji"
-											width={40}
-											height={40}
+											width={30}
+											height={30}
 										/>
 									) : null}
 								<div className={styles.count}>

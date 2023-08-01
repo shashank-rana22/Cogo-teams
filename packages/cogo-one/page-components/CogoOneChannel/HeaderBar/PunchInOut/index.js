@@ -23,6 +23,14 @@ const MAX_SECOND_VALUE = 60;
 const TWO_DIGIT_NUMBER = 2;
 const BUTTON_SHAKE_DURATION = 300000;
 
+const AGENT_BREAK_STATUS = ['punched_out', 'inactive'];
+
+const formatTime = (seconds) => {
+	const mins = Math.floor(seconds / MAX_SECOND_VALUE);
+	const secs = seconds % MAX_SECOND_VALUE;
+	return `${mins.toString().padStart(TWO_DIGIT_NUMBER, '0')}:${secs.toString().padStart(TWO_DIGIT_NUMBER, '0')}`;
+};
+
 function PunchInOut({
 	fetchworkPrefernce = () => {},
 	agentStatus = {},
@@ -45,7 +53,7 @@ function PunchInOut({
 	const {
 		updateWorkPreference = () => {},
 		loading = false,
-	} = useUpdateAgentWorkPreferences({ fetchworkPrefernce, agentTimeline });
+	} = useUpdateAgentWorkPreferences({ fetchworkPrefernce, agentTimeline, setIsShaking });
 
 	const shakeButton = () => {
 		setIsShaking(true);
@@ -53,6 +61,7 @@ function PunchInOut({
 			setIsShaking(false);
 		}, BUTTON_SHAKE_DURATION);
 	};
+
 	const handlePunchIn = (event) => {
 		event.stopPropagation();
 		updateWorkPreference({ type: 'punched_in' });
@@ -61,21 +70,14 @@ function PunchInOut({
 	const handlePunchOut = (event) => {
 		event.stopPropagation();
 		updateWorkPreference({ type: 'punched_out' });
-		setIsShaking(false);
-	};
-
-	const formatTime = (seconds) => {
-		const mins = Math.floor(seconds / MAX_SECOND_VALUE);
-		const secs = seconds % MAX_SECOND_VALUE;
-		return `${mins.toString().padStart(TWO_DIGIT_NUMBER, '0')}:${secs.toString().padStart(TWO_DIGIT_NUMBER, '0')}`;
 	};
 
 	const startShift = useCallback(() => {
-		const now = new Date();
-		const startTime = new Date(now);
+		const currentTime = new Date();
+		const startTime = new Date();
 		startTime.setHours(PUNCH_IN_TIME_HOUR, PUNCH_IN_TIME_MINUTE, MIN_SECOND, MIN_SECOND);
 
-		const timeDiff = startTime - now;
+		const timeDiff = startTime - currentTime;
 
 		if (timeDiff < MIN_SECOND && status === 'punched_out') {
 			setIsShaking(false);
@@ -86,11 +88,13 @@ function PunchInOut({
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			const now = new Date();
-			const targetTime = new Date(now);
+			const currentTime = new Date();
+			const targetTime = new Date();
+
 			targetTime.setHours(PUNCH_OUT_TIME_HOUR, PUNCH_OUT_TIME_MINUTE, MIN_SECOND, MIN_SECOND);
 
-			const remainingTime = Math.floor((targetTime - now) / UPDATE_TIME_BY_ONE_SECOND);
+			const remainingTime = Math.floor((targetTime - currentTime) / UPDATE_TIME_BY_ONE_SECOND);
+
 			if (remainingTime <= COUNT_DOWN_BUFFER_TIME && remainingTime > MIN_SECOND) {
 				setShowTimer(true);
 				setShowEndButton(false);
@@ -137,7 +141,7 @@ function PunchInOut({
 				<Image src={GLOBAL_CONSTANTS.image_url.sad_icon} alt="sad-emoji" width={18} height={18} />
 				<div className={styles.break_time}>{MIN_FEEDBACK_SCORE}</div>
 				<IcMDown className={styles.down_icon} />
-				{status === 'punched_out' || status === 'inactive' ? (
+				{AGENT_BREAK_STATUS.includes(status) ? (
 					<Button
 						size="xs"
 						onClick={handlePunchIn}
