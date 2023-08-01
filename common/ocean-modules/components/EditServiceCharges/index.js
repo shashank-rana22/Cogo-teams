@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { upperCase } from '@cogoport/utils';
 import { useState, useEffect, useMemo, useContext } from 'react';
@@ -66,6 +67,15 @@ function EditServiceCharges(props) {
 			onOptionsChange({ [service_name]: allOptions });
 		}
 	}, [allOptions, onOptionsChange, service_name]);
+
+	if (loading) {
+		return (
+			<section className={`${styles.loading_wrapper} loading_wrapper`}>
+				<Loader />
+				Loading Line Items...
+			</section>
+		);
+	}
 
 	return (
 		<div>
