@@ -9,7 +9,6 @@ import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
@@ -26,7 +25,6 @@ import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
 import PortPairOrgFilters from './PortPairOrgFilters';
 import ProfileDetails from './ProfileDetails';
-import PunchInOut from './PunchInOut';
 import styles from './styles.module.css';
 
 function CogoOne() {
@@ -135,6 +133,12 @@ function CogoOne() {
 			<HeaderBar
 				firestore={firestore}
 				viewType={viewType}
+				fetchWorkStatus={fetchWorkStatus}
+				agentStatus={agentWorkStatus}
+				data={data}
+				agentTimeline={agentTimeline}
+				preferenceLoading={preferenceLoading}
+				timelineLoading={timelineLoading}
 			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
@@ -235,18 +239,6 @@ function CogoOne() {
 				setActiveTab={setActiveTab}
 				orgId={orgId}
 			/>
-
-			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out && (
-				<PunchInOut
-					fetchworkPrefernce={fetchWorkStatus}
-					agentStatus={agentWorkStatus}
-					data={data}
-					agentTimeline={agentTimeline}
-					preferenceLoading={preferenceLoading}
-					timelineLoading={timelineLoading}
-
-				/>
-			)}
 		</>
 	);
 }
