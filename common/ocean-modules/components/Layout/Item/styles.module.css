@@ -20,7 +20,7 @@
 }
 
 .errors {
-	font-size: var(--font-size-md);
+	font-size: var(--font-size-sm);
 	color: var(--color-primary-error-red-2);
 }
 
