@@ -42,6 +42,7 @@ function AgentDetails({
 	userId: agentId = '',
 	viewType = '',
 	setActiveTab = () => {},
+	mailProps = {},
 }) {
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
@@ -259,6 +260,7 @@ function AgentDetails({
 						leadLoading={leadLoading}
 						activeRoomLoading={activeRoomLoading}
 						viewType={viewType}
+						mailProps={mailProps}
 					/>
 				</>
 			)}
