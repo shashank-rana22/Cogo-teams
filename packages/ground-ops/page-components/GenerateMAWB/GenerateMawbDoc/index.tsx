@@ -131,8 +131,6 @@ function GenerateMawb({
 		return dataURI;
 	};
 
-	console.log('category', category);
-
 	const downloadScreenshot = () => takeImageScreenShot(document.getElementById('mawb'));
 
 	const documentId = category === 'mawb' ? docId : id;
