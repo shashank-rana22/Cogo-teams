@@ -2,6 +2,7 @@ import { Textarea, Popover, Toast } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSend, IcMAttach, IcMDocument } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useRef, useState } from 'react';
 
 import useCreateMessage from '../../hooks/useCreateMessage';
@@ -179,54 +180,58 @@ function Details({
 						<div style={{ padding: '21px' }} />
 					)}
 
-					<div className={styles.typing_container}>
-						<Popover
-							theme="light"
-							interactive
-							content={(
-								<div className={styles.uploader}>
-									<FileUploader
-										value={selectedFile}
-										onChange={setSelectedFile}
-										showProgress
-										draggable
-										multiple
-									/>
-								</div>
-							)}
-						>
-							<div className={styles.icon_wrap}>
-								<IcMAttach width={21} height={21} />
+					<div className={styles.text_docs_container}>
+						{!isEmpty(formValues?.file) && (
+							<div className={styles.attached_container}>
+								{(formValues?.file || []).map((url) => (
+									<div className={styles.attached_doc} key={url}>
+										<IcMDocument style={{ marginRight: '4px' }} />
+										{url?.split('/').pop()}
+									</div>
+								))}
 							</div>
-						</Popover>
+						)}
 
-						<div className={styles.attached_container}>
-							{(formValues?.file || []).map((url) => (
-								<div className={styles.attached_doc} key={url}>
-									<IcMDocument style={{ marginRight: '4px' }} />
-									{url?.split('/').pop()}
+						<div className={styles.typing_container}>
+							<Popover
+								theme="light"
+								interactive
+								content={(
+									<div className={styles.uploader}>
+										<FileUploader
+											value={selectedFile}
+											onChange={setSelectedFile}
+											showProgress
+											draggable
+											multiple
+										/>
+									</div>
+								)}
+							>
+								<div className={styles.icon_wrap}>
+									<IcMAttach width={21} height={21} />
 								</div>
-							))}
-						</div>
+							</Popover>
 
-						<Textarea
-							className={styles.text_area}
-							placeholder="Type your message here...."
-							value={textContent}
-							onKeyDown={(e) => handleClick(e)}
-							rows={rows}
-							onChange={(val) => {
-								setTextContent(val);
-							}}
-						/>
+							<Textarea
+								className={styles.text_area}
+								placeholder="Type your message here...."
+								value={textContent}
+								onKeyDown={(e) => handleClick(e)}
+								rows={rows}
+								onChange={(val) => {
+									setTextContent(val);
+								}}
+							/>
 
-						<div
-							className={styles.send}
-							role="button"
-							tabIndex={0}
-							onClick={!loading ? onCreateMessage : null}
-						>
-							<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />
+							<div
+								className={styles.send}
+								role="button"
+								tabIndex={0}
+								onClick={!loading ? onCreateMessage : null}
+							>
+								<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />
+							</div>
 						</div>
 					</div>
 				</div>
