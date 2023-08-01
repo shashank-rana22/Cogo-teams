@@ -347,7 +347,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			can_message_on_bot_session  : true,
 			has_permission_to_edit      : false,
 			show_organization_users     : false,
-			send_promotional_rate       : true,
+			send_promotional_rate       : false,
 			agent_type_filter           : false,
 			flash_revert_logs           : false,
 			punch_in_out                : false,
