@@ -59,6 +59,8 @@ function ConfigListItem({ data = {}, fetchList = () => {} }) {
 
 	const [showModal, setShowModal] = useState(false);
 
+	const [source, setSource] = useState('');
+
 	const {
 		shipment_capacities = [], agent_experience_slab_details = [],
 		id, status = 'draft', cogo_entity = {}, role_data = {}, activated_at = '',
@@ -116,7 +118,7 @@ function ConfigListItem({ data = {}, fetchList = () => {} }) {
 									<>
 										<Button
 											themeType="primary"
-											className={styles.button}
+											className={styles.btn}
 											onClick={handleEditClick}
 										>
 											<IcMEdit className={styles.icon} />
@@ -125,10 +127,13 @@ function ConfigListItem({ data = {}, fetchList = () => {} }) {
 
 										{!isEmpty(shipment_capacities) && (
 											<Button
-												themeType="secondary"
-												className={styles.button}
+												themeType="accent"
+												className={styles.btn}
 												type="button"
-												onClick={() => setShowModal(true)}
+												onClick={() => {
+													setShowModal(true);
+													setSource('active');
+												}}
 											>
 												Activate
 											</Button>
@@ -138,25 +143,26 @@ function ConfigListItem({ data = {}, fetchList = () => {} }) {
 								)}
 
 								{status === 'active' && (
-									<>
-
-										<Button
-											themeType="primary"
-											className={styles.btn}
-											onClick={handleEditCapacity}
-										>
-											Edit Capacity
-										</Button>
-										<Button
-											themeType="secondary"
-											className={styles.btn}
-											type="button"
-											onClick={() => setShowModal(true)}
-										>
-											Deactivate
-										</Button>
-									</>
+									<Button
+										themeType="primary"
+										className={styles.btn}
+										onClick={handleEditCapacity}
+									>
+										Edit Capacity
+									</Button>
 								)}
+
+								<Button
+									themeType="secondary"
+									className={styles.btn}
+									type="button"
+									onClick={() => {
+										setShowModal(true);
+										setSource('');
+									}}
+								>
+									Deactivate
+								</Button>
 
 							</div>
 						)}
@@ -177,6 +183,8 @@ function ConfigListItem({ data = {}, fetchList = () => {} }) {
 					id={id}
 					status={status}
 					fetchList={fetchList}
+					source={source}
+					setSource={setSource}
 				/>
 			)}
 

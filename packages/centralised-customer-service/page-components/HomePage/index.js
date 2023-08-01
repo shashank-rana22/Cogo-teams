@@ -42,7 +42,7 @@ function HomePage() {
 
 					<TabPanel
 						name="shipment_capacity_config"
-						title="Active Shipment Capacity Configuration"
+						title="Shipment Capacity Configuration"
 					>
 						<ShipmentCapacityCofiguration />
 					</TabPanel>

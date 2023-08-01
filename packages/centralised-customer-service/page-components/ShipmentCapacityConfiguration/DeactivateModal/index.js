@@ -4,29 +4,29 @@ import useUpdateCapacityConfig from '../../../hooks/useUpdateCapacityConfig';
 
 import styles from './styles.module.css';
 
-const STATUS_MAPPING = {
-	active : 'inactive',
-	draft  : 'active',
-};
-
-const MESSAGE_MAPPING = {
-	active : 'Deactivate',
-	draft  : 'Activate',
-};
-
-function DeactivateModal({ showModal = false, setShowModal = () => {}, id, status = 'draft', fetchList = () => {} }) {
+function DeactivateModal({
+	showModal = false, setShowModal = () => {},
+	id = '', fetchList = () => {}, source = '', setSource = '',
+}) {
 	const { loading, updateCapacityConfig } = useUpdateCapacityConfig({ setShowModal, configId: id, fetchList });
+
+	const message = source === 'active' ? 'Activate' : 'Deactivate';
+
+	const configStatus = source === 'active' ? 'active' : 'inactive';
 
 	return (
 		<Modal
 			size="md"
 			show={showModal}
-			onClose={() => setShowModal(false)}
+			onClose={() => {
+				setShowModal(false);
+				setSource('');
+			}}
 			placement="center"
 			showCloseIcon={false}
 		>
 			<Modal.Header
-				title={`Are you sure you want to ${MESSAGE_MAPPING[status]} this configuration?`}
+				title={`Are you sure you want to ${message} this configuration?`}
 				style={{ textAlign: 'center' }}
 			/>
 
@@ -45,9 +45,9 @@ function DeactivateModal({ showModal = false, setShowModal = () => {}, id, statu
 						type="button"
 						style={{ marginLeft: '12px' }}
 						disabled={loading}
-						onClick={() => updateCapacityConfig({ status: STATUS_MAPPING[status], id })}
+						onClick={() => updateCapacityConfig({ status: configStatus, id })}
 					>
-						{MESSAGE_MAPPING[status]}
+						{message}
 					</Button>
 				</div>
 			</Modal.Body>

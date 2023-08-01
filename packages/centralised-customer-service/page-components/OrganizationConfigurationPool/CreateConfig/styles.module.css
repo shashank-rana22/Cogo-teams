@@ -37,6 +37,8 @@
 }
 
 .label {
+	display: flex;
+	align-items: center;
 	margin-bottom: 4px;
 }
 
@@ -95,4 +97,12 @@
 
 .cancel_btn {
 	margin-right: 8px;
+}
+
+.word_break {
+	word-break: break-word;
+}
+
+.info_icon {
+	margin-left: 4px;
 }

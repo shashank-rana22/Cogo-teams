@@ -1,6 +1,6 @@
-import { Button, Accordion, Modal } from '@cogoport/components';
+import { Button, Accordion, Modal, Tooltip } from '@cogoport/components';
 import { RadioGroupController, AsyncSelectController } from '@cogoport/forms';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMInfo } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
@@ -70,6 +70,21 @@ function CreateConfig() {
 								<div className={styles.label}>
 									{label}
 									{showAstrick && <sup className={styles.sup}>*</sup>}
+
+									{name === 'segment' ? (
+										<div style={{ width: 'fit-content' }}>
+											<Tooltip
+												className={styles.word_break}
+												content="Org Sub-Type or Segment is taken from
+													lead organisation table where source=platform"
+												placement="top"
+												maxWidth={400}
+											>
+												<IcMInfo height={16} className={styles.info_icon} color="red" />
+											</Tooltip>
+										</div>
+									) : null}
+
 								</div>
 
 								<div>
@@ -79,6 +94,7 @@ function CreateConfig() {
 										{...(name === 'segment' && { options: orgSubTypeOptions[orgType] || [] })}
 										disabled={isInputDisabled(name)}
 									/>
+
 									{errors[name] && <div className={styles.error_msg}>This is required</div>}
 								</div>
 							</div>
