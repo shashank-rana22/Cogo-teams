@@ -1244,6 +1244,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'update_lead_organization_stakeholder',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'post_allocation_request',
 			access_type  : 'private',
 			feature      : 'allocation',
