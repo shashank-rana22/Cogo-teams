@@ -4,15 +4,14 @@
 }
 
 .sailing_week {
-	margin-bottom: 4px;
+	margin-bottom: 2px;
 	font-size: 12px;
 	font-weight: 600;
-	line-height: 14px;
 	color: rgb(44 62 80);
 }
 
 .freight_price {
-	font-size: 8px;
-	line-height: 9px;
+	font-size: 12px;
+	line-height: 12px;
 	color: rgb(44 62 80);
 }

@@ -1,12 +1,17 @@
 .container {
+	padding: 0 20px;
 	background-color: #fff;
 }
 
-.header {
+.header_wrapper {
 	position: sticky;
 	top: 116px;
 	z-index: 99;
 	width: 100%;
+}
+
+.header {
+	margin: 0 -20px;
 }
 
 .loading {
@@ -33,5 +38,5 @@
 }
 
 .request_rate {
-	margin: 0 20px 12px;
+	margin-top: 24px;
 }

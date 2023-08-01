@@ -7,16 +7,10 @@ const useDeleteAdditionalService = ({ service, source = '', refetch = () => {} }
 	const { general: { query = {} } } = useSelector((state) => state);
 	const { spot_search_id = '', checkout_id = '' } = query;
 
-	const [{ loading }, trigger] = useRequest(
-		{
-			method: 'post',
-			url:
-            checkout_id ? 'update_checkout_service' : 'remove_spot_search_service',
-		},
-		{
-			manual: true,
-		},
-	);
+	const [{ loading }, trigger] = useRequest({
+		method : 'post',
+		url    : checkout_id ? 'update_checkout_service' : 'remove_spot_search_service',
+	}, { manual: true });
 
 	const handleRemoveService = async () => {
 		let serviceName = service.service_type;
@@ -63,9 +57,8 @@ const useDeleteAdditionalService = ({ service, source = '', refetch = () => {} }
 			if (error?.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
+			return false;
 		}
-
-		return {};
 	};
 
 	return {

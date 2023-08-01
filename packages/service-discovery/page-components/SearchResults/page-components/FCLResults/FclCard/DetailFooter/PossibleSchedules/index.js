@@ -1,3 +1,6 @@
+import { Loader } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+
 import useGetSchedules from '../../../../../hooks/useGetSchedules';
 
 import Schedule from './Schedule';
@@ -8,26 +11,21 @@ function PossibleSchedules({ rateCardData, service_type }) {
 
 	const schedules = scheduleObject[rateCardData.shipping_line.id]?.schedules || [];
 
-	// if (loading) {
-	// 	return (
-	// 		<div className={styles.container}>
-	// 			<Spinner
-	// 				size={20}
-	// 				style={{ padding: '4px', margin: '16px' }}
-	// 				spinBorderColor="#1444a1"
-	// 				outerBorderColor="#e7efff"
-	// 			/>
-	// 		</div>
-	// 	);
-	// }
+	if (loading) {
+		return (
+			<div className={styles.loader_container}>
+				<Loader themeType="primary" className={styles.loader} />
+			</div>
+		);
+	}
 
-	// if (!schedules.length) {
-	// 	return (
-	// 		<div className={styles.container}>
-	// 			<EmptyState />
-	// 		</div>
-	// 	);
-	// }
+	if (isEmpty(schedules)) {
+		return (
+			<div className={styles.container}>
+				Nothing to show here!
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

@@ -28,8 +28,8 @@
 		.ui_accordion_content {
 			width: 100%;
 			padding: 0 40px !important;
-			background-color: #f3fafa;
 			overflow: unset;
+			background-color: #f3fafa;
 		}
 
 		.ui_accordion_header {

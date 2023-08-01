@@ -83,7 +83,8 @@ const getLocationName = (data, pair_type, type, key) => {
 };
 
 const renderPortPair = (item, field) => {
-	const { pair_type = 'fcl_freight', key = '-' } = field || {};
+	const { pair_type = 'fcl_freight', key = '-', props = {} } = field || {};
+	const { setLocation = () => {} } = props;
 	const service_type = item[pair_type];
 	const [origin, origin_display_name] = getLocationName(
 		item,
@@ -97,7 +98,15 @@ const renderPortPair = (item, field) => {
 		'destination',
 		key,
 	);
+
 	const isSingleLocation = onlySingleLocation.includes(service_type);
+
+	const handleClickLocation = () => {
+		setLocation({
+			origin      : item.origin_location,
+			destination : item.destination_location,
+		});
+	};
 
 	return (
 		<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -126,7 +135,11 @@ const renderPortPair = (item, field) => {
 						</div>
 					)}
 				>
-					<div style={{ display: 'flex', alignItems: 'center', width: 'fit-content' }}>
+					<div
+						role="presentation"
+						style={{ display: 'flex', alignItems: 'center', width: 'fit-content', cursor: 'pointer' }}
+						onClick={handleClickLocation}
+					>
 						{(origin || origin_display_name)?.length && (
 							<>
 								<span style={{ maxWidth: 80, fontSize: 14, fontWeight: 500 }}>

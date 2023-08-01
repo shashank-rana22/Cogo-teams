@@ -11,7 +11,6 @@ const useDeleteCargoInsurance = ({
 }) => {
 	const url = checkout_id ? '/update_checkout_service' : '/remove_spot_search_service';
 	const idKey = checkout_id ? 'id' : 'spot_search_id';
-	const key = checkout_id ? 'cargo_insurance_services_attributes' : 'cargo_insurance_services';
 
 	const servicesList = Object.values(service_details || {});
 
@@ -31,9 +30,9 @@ const useDeleteCargoInsurance = ({
 
 		try {
 			const payload = {
-				[idKey] : spot_search_id || checkout_id,
-				service : 'cargo_insurance',
-				[key]   : params,
+				[idKey]                             : spot_search_id || checkout_id,
+				service                             : 'cargo_insurance',
+				cargo_insurance_services_attributes : params,
 			};
 
 			await trigger({ data: payload });

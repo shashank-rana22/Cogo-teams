@@ -12,7 +12,6 @@ const useDeleteSubsidiaryService = ({
 }) => {
 	const url = checkout_id ? '/update_checkout_service' : '/remove_spot_search_service';
 	const idKey = checkout_id ? 'id' : 'spot_search_id';
-	const key = checkout_id ? 'subsidiary_services_attributes' : 'subsidiary_services';
 
 	const { service_details: serviceDetails = {} } = data || [];
 
@@ -34,16 +33,16 @@ const useDeleteSubsidiaryService = ({
 
 		try {
 			const payload = {
-				[idKey] : spot_search_id || checkout_id,
-				service : 'subsidiary',
-				[key]   : params,
+				[idKey]                        : spot_search_id || checkout_id,
+				service                        : 'subsidiary',
+				subsidiary_services_attributes : params,
 			};
 
 			await trigger({ data: payload });
 
 			Toast.success('Service deleted successfully!');
 			setShow(false);
-			refetch();
+			await refetch();
 			return true;
 		} catch (error) {
 			if (error?.response?.data) {

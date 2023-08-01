@@ -50,6 +50,10 @@
 	padding-left: 30px;
 }
 
+.column:last-child {
+	align-items: end;
+}
+
 .table_body {
 	display: flex;
 	flex-direction: column;

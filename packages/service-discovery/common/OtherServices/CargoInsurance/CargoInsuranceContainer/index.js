@@ -18,6 +18,12 @@ function CargoInsuranceContainer({
 
 	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
 
+	const handleDelete = (event) => {
+		event.stopPropagation();
+		event.preventDefault();
+		setShowDeleteModal(true);
+	};
+
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.left_section}>
@@ -63,7 +69,7 @@ function CargoInsuranceContainer({
 						height={25}
 						width={25}
 						className={styles.tick_icon}
-						onClick={() => setShowDeleteModal(true)}
+						onClick={handleDelete}
 					/>
 				) : (
 					<IcMPlus

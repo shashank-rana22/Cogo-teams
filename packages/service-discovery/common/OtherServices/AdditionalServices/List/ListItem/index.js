@@ -34,10 +34,12 @@ function ListItem({
 
 	const { isSelected = false, name = '', service_type = '', title = '' } = serviceItem;
 
+	const source = detail?.checkout_id ? 'checkout' : 'search_results';
+
 	const {
 		handleRemoveService,
 		loading:deleteLoading,
-	} = useDeleteAdditionalService({ service: serviceItem, refetch });
+	} = useDeleteAdditionalService({ service: serviceItem, refetch, source });
 
 	const handleMouseEnter = () => { setIsHovered(true); };
 	const handleMouseLeave = () => { setIsHovered(false); };

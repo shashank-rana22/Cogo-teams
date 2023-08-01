@@ -5,6 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import Contract from '../../common/Contract';
 import ShareToUsers from '../../common/ShareToUsers';
 
 import ComparisonTable from './ComparisonTable';
@@ -60,10 +61,19 @@ const formatAmountValue = (amount, currency) => (
 	}) || '-'
 );
 
-function HandleBookValue({ item, apiLoading }) {
+function HandleBookValue({ item, apiLoading, service_type, setSelectedCard, setShowContract }) {
+	const service_rates = Object.values(item.service_rates);
+	const primaryServiceRates = service_rates.filter(
+		(service) => service.service_type === service_type,
+	);
+
+	const isCogoAssured = item.source === 'cogo_assured_rate';
+
+	const isMultiContainer = primaryServiceRates.length > 1;
+
 	const router = useRouter();
 
-	const handleLockPrice = () => {};
+	const handleLockPrice = () => { setShowContract(true); setSelectedCard(item); };
 
 	const handleBook = () => {
 		router.push(`/book/${router.query.spot_search_id}?rate_card_id=${item?.id}`);
@@ -71,15 +81,17 @@ function HandleBookValue({ item, apiLoading }) {
 
 	return (
 		<div className={styles.book_buttons}>
-			<Button
-				size="md"
-				themeType="secondary"
-				disabled={apiLoading}
-				style={{ marginBottom: '8px' }}
-				onClick={handleLockPrice}
-			>
-				Lock for 24 Hours
-			</Button>
+			{isCogoAssured || isMultiContainer ? null : (
+				<Button
+					size="md"
+					themeType="secondary"
+					disabled={apiLoading}
+					style={{ marginBottom: '8px' }}
+					onClick={handleLockPrice}
+				>
+					Lock freight price
+				</Button>
+			)}
 
 			<Button
 				size="md"
@@ -93,7 +105,7 @@ function HandleBookValue({ item, apiLoading }) {
 	);
 }
 
-const getStaticLineItems = (item, mode, summary) => {
+const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContract) => {
 	const keys = Object.keys(STATIC_COMPARISON_KEY[mode || 'default']);
 	const otherComparisonKeys = keys.map((key) => {
 		const comparisonKey = {
@@ -137,7 +149,9 @@ const getStaticLineItems = (item, mode, summary) => {
 				value: (
 					<HandleBookValue
 						item={item}
-						// apiLoading={apiLoading}
+						service_type={summary.service_type || summary.search_type}
+						setSelectedCard={setSelectedCard}
+						setShowContract={setShowContract}
 					/>
 				),
 			}),
@@ -174,11 +188,13 @@ function Comparison({
 	mode = 'fcl_freight',
 	comparisonRates = {},
 }) {
+	const [showShare, setShowShare] = useState(false);
+	const [showContract, setShowContract] = useState(false);
+	const [selectedCard, setSelectedCard] = useState(false);
+
 	const selectedCards = Object.values(comparisonRates);
 
 	const LOGO_MAPPING = {};
-
-	const [showShare, setShowShare] = useState(false);
 
 	const allLineItems = selectedCards.map((cardItem) => {
 		const { service_rates = [], shipping_line = {}, source } = cardItem;
@@ -191,6 +207,8 @@ function Comparison({
 			cardItem,
 			mode,
 			detail,
+			setSelectedCard,
+			setShowContract,
 		);
 
 		const flattenedArraylineItems = getDyanmicLineItems(lineItems);
@@ -234,16 +252,6 @@ function Comparison({
 					>
 						Share
 					</Button>
-
-					<Button
-						onClick={() => {}}
-						size="md"
-						themeType="accent"
-						className={styles.button}
-						style={{ padding: '20px' }}
-					>
-						Create Quotation
-					</Button>
 				</div>
 			</div>
 
@@ -260,6 +268,15 @@ function Comparison({
 					onClose={() => setShowShare(false)}
 					source="spot_search"
 					org_id={detail?.importer_exporter_id}
+				/>
+			) : null}
+
+			{showContract ? (
+				<Contract
+					data={selectedCard}
+					detail={detail}
+					setShow={setShowContract}
+					show={showContract}
 				/>
 			) : null}
 		</div>

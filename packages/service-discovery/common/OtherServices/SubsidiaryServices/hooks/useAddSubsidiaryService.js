@@ -49,7 +49,7 @@ const useAddSubsidiaryService = ({
 			false: {
 				keyToUse    : 'spot_search_id',
 				value       : spot_search_id,
-				service_key : 'subsidiary_services',
+				service_key : 'subsidiary_services_attributes',
 			},
 		};
 
@@ -65,7 +65,7 @@ const useAddSubsidiaryService = ({
 			await trigger({ data: payload });
 
 			Toast.success('Service added successfully!');
-			refetch();
+			await refetch();
 			return true;
 		} catch (error) {
 			if (error?.response?.data) {

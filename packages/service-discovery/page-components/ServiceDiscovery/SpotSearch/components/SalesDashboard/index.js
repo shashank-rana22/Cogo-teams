@@ -12,10 +12,15 @@ function SalesDashboard({
 	service_type = '',
 	destination_location_id = '',
 	origin_location_id = '',
+	setLocation = () => {},
 }) {
 	const allLists = configurations;
 
 	const [activeTab, setActiveTab] = useState(allLists[GLOBAL_CONSTANTS.zeroth_index].type);
+
+	const PROPS_MAPPING = {
+		primary_service: { setLocation },
+	};
 
 	return (
 		<div className={styles.container}>
@@ -34,7 +39,7 @@ function SalesDashboard({
 
 					if (['most_searched', 'most_booked'].includes(type)) {
 						let btnObj = fields.filter((fieldItem) => fieldItem.func === 'renderButton');
-						const remainingFields = fields.filter((fieldItem) => fieldItem.func !== 'renderButton');
+						const remainingBtnFields = fields.filter((fieldItem) => fieldItem.func !== 'renderButton');
 
 						if (!importer_exporter_id) {
 							btnObj = [{
@@ -44,8 +49,13 @@ function SalesDashboard({
 							}];
 						}
 
-						finalFields = [...remainingFields, ...btnObj];
+						finalFields = [...remainingBtnFields, ...btnObj];
 					}
+
+					const updatedFields = finalFields.map((fieldItem) => ({
+						...fieldItem,
+						props: PROPS_MAPPING[fieldItem.key],
+					}));
 
 					return (
 						<TabPanel
@@ -56,7 +66,7 @@ function SalesDashboard({
 							<List
 								key={`${type}_${heading}`}
 								{...newListItem}
-								fields={finalFields}
+								fields={updatedFields}
 								importer_exporter_id={importer_exporter_id || undefined}
 								service_type={service_type || undefined}
 								origin_location_id={origin_location_id || undefined}

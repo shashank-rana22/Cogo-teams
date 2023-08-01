@@ -53,6 +53,7 @@ function MiddleSection({
 	scheduleData = {},
 	isSelectedCard = false,
 	isCogoAssured = false,
+	isMultiContainer = false,
 	setScreen = () => {},
 }) {
 	return (
@@ -95,6 +96,8 @@ function MiddleSection({
 					rateCardData={rateCardData}
 					detail={detail}
 					isSelectedCard={isSelectedCard}
+					isCogoAssured={isCogoAssured}
+					isMultiContainer={isMultiContainer}
 					setScreen={setScreen}
 				/>
 			</div>
@@ -180,6 +183,8 @@ function FclCard({
 
 	const isCogoAssured = rateCardData.source === 'cogo_assured_rate';
 
+	const isMultiContainer = primaryServiceRates.length > 1;
+
 	return (
 		<div
 			className={styles.container}
@@ -207,6 +212,7 @@ function FclCard({
 				rateCardData={rateCardData}
 				scheduleData={scheduleData}
 				isCogoAssured={isCogoAssured}
+				isMultiContainer={isMultiContainer}
 				isSelectedCard={isSelectedCard}
 				setScreen={setScreen}
 			/>
