@@ -786,6 +786,17 @@ function asyncListAllManagers() {
 	};
 }
 
+function asyncListAllocationObjectives() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/objectives',
+		authkey      : 'get_allocation_objectives',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -850,4 +861,5 @@ export {
 	asyncListShipmentPendingTasks,
 	asyncListShipments,
 	asyncListShipmentServices,
+	asyncListAllocationObjectives,
 };

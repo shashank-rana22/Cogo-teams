@@ -3,6 +3,23 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 const getAgentsFilterControls = () => {
 	const controls = [
 		{
+			name        : 'objective_id',
+			label       : 'Objective',
+			placeholder : 'Select Objective',
+			size        : 'sm',
+			type        : 'asyncSelect',
+			asyncKey    : 'allocation_objectives',
+			multiple    : true,
+			initialCall : true,
+			isClearable : true,
+			params      : {
+				page_limit : 20,
+				filters    : {
+					status: 'active',
+				},
+			},
+		},
+		{
 			name    : 'objective_type',
 			type    : 'chips',
 			label   : 'Type',
@@ -54,6 +71,24 @@ const getAgentsFilterControls = () => {
 				},
 			},
 			isClearable: true,
+		},
+		{
+			name        : 'user_id',
+			label       : 'Agents',
+			placeholder : 'Agents',
+			type        : 'asyncSelect',
+			size        : 'sm',
+			asyncKey    : 'partner_users',
+			multiple    : true,
+			params      : {
+				page_limit : 20,
+				filters    : {
+					status               : 'active',
+					partner_entity_types : ['cogoport'],
+				},
+			},
+			initialCall : true,
+			isClearable : true,
 		},
 		{
 			name    : 'partner_id',

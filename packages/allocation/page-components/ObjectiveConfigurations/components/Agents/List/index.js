@@ -20,18 +20,12 @@ const List = forwardRef((props, ref) => {
 		paginationData,
 		getNextPage,
 		setParams,
-		debounceQuery,
-		searchValue,
-		setSearchValue,
 	} = useGetObjectiveAgentsMapping();
 
 	return (
 		<section className={styles.container}>
 			<Header
 				setParams={setParams}
-				debounceQuery={debounceQuery}
-				searchValue={searchValue}
-				setSearchValue={setSearchValue}
 			/>
 
 			<ListAgents

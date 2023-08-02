@@ -2,7 +2,6 @@ import { Button, Badge } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 
 import Filters from '../../../../../../common/Filters';
-import SearchInput from '../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
@@ -12,9 +11,6 @@ const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wr
 function Header(props) {
 	const {
 		setParams,
-		debounceQuery,
-		searchValue,
-		setSearchValue,
 	} = props;
 
 	const {
@@ -29,16 +25,6 @@ function Header(props) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.search_container}>
-				<SearchInput
-					size="sm"
-					placeholder="Search by Agent Name"
-					debounceQuery={debounceQuery}
-					value={searchValue}
-					setGlobalSearch={setSearchValue}
-				/>
-			</div>
-
 			<Filters
 				controls={controls}
 				open={showFilters}
