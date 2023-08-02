@@ -51,7 +51,7 @@ function Actions({
 	}
 
 	const remarkRender = () => (
-		<div className={styles.remarkcontainer}>
+		<div className={styles.remark_container}>
 			<div className={styles.title}>Invoice Remarks</div>
 			<div className={styles.value}>{invoice.remarks}</div>
 		</div>
