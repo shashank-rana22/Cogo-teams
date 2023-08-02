@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const SERVICES_COUNT = 1;
 
-function Details({ serviceData = [] }) {
+function Details({ serviceData = [], containerDetails = [] }) {
 	const {
 		service_type, state, free_days_demurrage_destination,
 		free_days_demurrage_origin, free_days_detention_destination, free_days_detention_origin,
@@ -49,7 +49,10 @@ function Details({ serviceData = [] }) {
 	...Object.keys(freeDays),
 	'documents'];
 
-	const remainingServiceData = omit(serviceData?.[GLOBAL_CONSTANTS.zeroth_index], excludedKeys);
+	const remainingServiceData = {
+		...omit(serviceData?.[GLOBAL_CONSTANTS.zeroth_index], excludedKeys),
+		...containerDetails?.[GLOBAL_CONSTANTS.zeroth_index],
+	};
 
 	return (
 		<div className={cl`${styles.container} ${styles[state]}`}>
