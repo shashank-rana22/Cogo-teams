@@ -12,19 +12,12 @@ import CustomDateFilter from './Common/CustomDateFilter';
 import StatsCard from './Common/StatsCard';
 import useGetProfitabilityStats from './hooks/useGetProfitabilityStats';
 import MultipleFilters from './MultipleFilters';
-import ReceivablesOutstandings from './ReceivablesOutstandings';
 import styles from './styles.module.css';
 import TableComp from './TableComp';
 
 const mappingCards = [
 	{ label: 'Estimated Revenue', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
 	{ label: 'Estimated Cost', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
-];
-
-const mapping = [
-	{ label: 'AR', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
-	{ label: 'Bank', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
-	{ label: 'Deviation', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
 ];
 
 const geo = getGeoConstants();
@@ -237,41 +230,23 @@ function CogoFinancials() {
 				</div>
 			)}
 
-			{!showShipmentList ? (
-				<div>
-					<div className={styles.totalStats}>
-						<div className={styles.ongoing}>
-							<StatsCard
-								heading="Total Collected"
-								mappingCards={mapping}
-								showPill
-							/>
-						</div>
-						<div className={styles.card}>
-							<StatsCard
-								heading="Total Paid"
-								mappingCards={mapping}
-								showPill
-							/>
-						</div>
-					</div>
-					<ReceivablesOutstandings />
-				</div>
+			{showShipmentList ? (
+				<TableComp
+					activeShipmentCard={activeShipmentCard}
+					entity={entity}
+					filter={filter}
+					activeBar={activeBar}
+					timeRange={timeRange}
+					customDate={customDate}
+					statsType={activeShipmentCard === 'financial'
+						? 'FINANCE_CLOSED' : 'OPR_CLOSED'}
+					taxType={taxType}
+					type={activeShipmentCard === 'financial'
+						? 'Financially' : 'Operationally'}
+				/>
 			)
 				: (
-					<TableComp
-						activeShipmentCard={activeShipmentCard}
-						entity={entity}
-						filter={filter}
-						activeBar={activeBar}
-						timeRange={timeRange}
-						customDate={customDate}
-						statsType={activeShipmentCard === 'financial'
-							? 'FINANCE_CLOSED' : 'OPR_CLOSED'}
-						taxType={taxType}
-						type={activeShipmentCard === 'financial'
-							? 'Financially' : 'Operationally'}
-					/>
+					null
 				)}
 		</div>
 	);
