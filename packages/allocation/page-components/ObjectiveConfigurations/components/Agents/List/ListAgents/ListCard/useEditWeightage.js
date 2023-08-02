@@ -5,6 +5,8 @@ import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import validateTotalWeightage from '../../../../../helpers/validate-total-weightage';
+
 const DEFAULT_WEIGHTAGE = 100;
 const DECIMAL_COUNT = 2;
 const INDEX_LENGTH_NORMALIZATION = 1;
@@ -33,29 +35,35 @@ const useEditWeightage = (props) => {
 
 	const onSaveChanges = async (values) => {
 		try {
-			const payload = {
-				objective_weightages: [
-					{
-						user_id                   : user?.id,
-						role_id                   : role?.id,
-						user_objective_weightages : Object.entries(values)?.map(([controlName, value]) => {
-							const [objective_id] = controlName.split('_');
+			const objective_weightages = [
+				{
+					user_id                   : user?.id,
+					role_id                   : role?.id,
+					user_objective_weightages : Object.entries(values)?.map(([controlName, value]) => {
+						const [objective_id] = controlName.split('_');
 
-							return {
-								objective_id,
-								weightage : value,
-								action    : 'update',
-							};
-						}),
-					},
-				],
-			};
+						return {
+							objective_id,
+							weightage : value,
+							action    : 'update',
+						};
+					}),
+				},
+			];
+
+			const isValidWeightages = validateTotalWeightage({ objective_weightages });
+
+			if (!isValidWeightages) {
+				throw new Error('Weightage sum should be 100');
+			}
+
+			const payload = { objective_weightages };
 
 			await trigger({ data: payload });
 
 			refetch();
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response?.data));
+			Toast.error(getApiErrorString(err.response?.data) || err?.message || 'Unable to set weightages');
 		}
 	};
 
