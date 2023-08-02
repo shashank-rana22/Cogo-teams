@@ -66,6 +66,9 @@ function SuggestedActions({ formattedData = {}, viewType = '' }) {
 	};
 
 	const handleSendTemplate = () => {
+		if (!mobile_no) {
+			return;
+		}
 		setModalType('whatsapp');
 	};
 
@@ -83,7 +86,7 @@ function SuggestedActions({ formattedData = {}, viewType = '' }) {
 		{
 			label     : 'Message on WhatsApp',
 			action    : handleSendTemplate,
-			disabled  : false,
+			disabled  : !mobile_no,
 			accessKey : 'new_whatsapp',
 		},
 		{

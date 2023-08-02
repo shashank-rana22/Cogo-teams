@@ -69,6 +69,12 @@ export const SOURCE_ICON_MAPPING = {
 		width={20}
 		height={20}
 	/>,
+	organization: <Image
+		src={GLOBAL_CONSTANTS.image_url.kyc_event}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
 };
 
 export const TAGS_COLORS = ['#FEF3E9', '#F3FAFA'];
@@ -84,6 +90,19 @@ export const VOICE_ICON_MAPPING = {
 	not_connected : GLOBAL_CONSTANTS.image_url.not_connected_svg,
 	outgoing      : GLOBAL_CONSTANTS.image_url.outgoing_svg,
 	incoming      : GLOBAL_CONSTANTS.image_url.incoming_svg,
+};
+
+export const CALL_HISTORY_AUDIO_ICONS = {
+	user: {
+		start      : GLOBAL_CONSTANTS.image_url.start_user_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_user_audio,
+		compStyles : { borderTopLeftRadius: '0px', background: '#FFFFFF' },
+	},
+	agent: {
+		start      : GLOBAL_CONSTANTS.image_url.start_agent_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_agent_audio,
+		compStyles : { borderTopRightRadius: '0px', background: '#FFFCE6' },
+	},
 };
 
 export const USER_ACTIVITY_MAPPING = {

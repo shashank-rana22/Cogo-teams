@@ -1,0 +1,59 @@
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 10px;
+}
+
+.buttons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.plus {
+	margin-right: 24px;
+	color: var(--color-primary-error-red-2);
+	cursor: pointer;
+}
+
+.delete {
+	color: #ee3425;
+	cursor: pointer;
+}
+
+.flex {
+	display: flex;
+}
+
+.select {
+	:global {
+		.ui_select_container {
+			width: 280px;
+		}
+	}
+}
+
+.message {
+	padding-left: 4px;
+	font-size: var(--font-size-sm);
+	color: #ee3425;
+}
+
+.input {
+	:global {
+		.ui_input_container {
+			width: 260px;
+		}
+
+		.ui_input_control::placeholder {
+			opacity: 0.6;
+		}
+	}
+}
+
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
