@@ -1,5 +1,6 @@
 import { Button, Placeholder } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import { LABEL_MAPPING } from '../../constants';
@@ -30,18 +31,26 @@ function SingleGraphCard({
 }) {
 	const isLastView = isViewDetailsVisible; // last view of graph cards
 
+	const graphCurrency = serviceLevelData?.[GLOBAL_CONSTANTS.zeroth_index]?.currency || '';
+	const verticalLabel = (heading === 'Operational Profitability') ? 'Percentage'
+		: `Amount ( ${graphCurrency} )`;
+
 	const onBarClick = (e) => {
 		if (!isLastView) { setActiveBar(e?.indexValue); }
 	};
 
-	if (!isEmpty(serviceLevelData)) {
-		// formatting bottom axis labels
-		serviceLevelData.forEach((item) => {
-			const singleItem = item;
-			const { serviceName } = singleItem || {};
-			singleItem.serviceName = serviceName.replaceAll('_', ' ');
-		});
-	}
+	// formatting bottom axis labels  ¯¯\_(ツ)_/¯¯
+	const formattedServiceLevelData = serviceLevelData.map((item) => {
+		const singleItem = { ...item };
+		const { serviceName } = singleItem || {};
+
+		const newServiceName = serviceName.replaceAll('_', ' ');
+
+		return {
+			...item,
+			serviceName: newServiceName,
+		};
+	});
 
 	return (
 		<div className={styles.container}>
@@ -68,11 +77,12 @@ function SingleGraphCard({
 			>
 				{!serviceLevelLoading ? (
 					<MyResponsiveBar
-						data={serviceLevelData}
+						data={formattedServiceLevelData}
 						keys={[
 							`estimated${KEY_MAPPINGS?.[heading]}${taxType}`,
 							`${LABEL_MAPPING[type]}${KEY_MAPPINGS?.[heading]}${taxType}`,
 						]}
+						groupMode="grouped"
 						legendX=""
 						legendY=""
 						width="100%"
@@ -82,18 +92,33 @@ function SingleGraphCard({
 						indexBy="serviceName"
 						enableGridY
 						legends={false}
+						enableLabel={false}
 						onClick={onBarClick}
 						margin={{ top: 50, right: 30, bottom: 50, left: 60 }}
 						axisLeft={{
 							tickSize       : 0,
 							tickPadding    : 0,
 							tickRotation   : 0,
-							legend         : 'Percentage',
+							legend         : verticalLabel,
 							legendPosition : 'middle',
 							legendOffset   : -40,
 							ariaHidden     : true,
+							format         : (value) => formatAmount({
+								amount  : String(value),
+								options : {
+									style    : 'decimal',
+									notation : 'compact',
+								},
+							}),
 						}}
-						axisBottomRotation={isLastView ? '20' : '0'}
+						axisBottomRotation={0}
+						valueFormat={(value) => formatAmount({
+							amount  : String(value),
+							options : {
+								style                 : 'decimal',
+								maximumFractionDigits : 2,
+							},
+						})}
 					/>
 				) : (
 					<div>

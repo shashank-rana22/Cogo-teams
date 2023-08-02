@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const SERVICE_CATEGORY = ['Import', 'Export', 'Local', 'Domestic'];
+
 const SHIPMENT_TYPES = GLOBAL_CONSTANTS.shipment_types;
 
 const SEGMENT_OPTIONS = [
@@ -66,8 +68,8 @@ function RenderFilters({
 				</div>
 			</div>
 
-			<div style={{ display: 'flex', width: '100%' }}>
-				<div style={{ width: '90%' }}>
+			<div className={styles.main_content}>
+				<div style={{ width: '100%' }}>
 					<Tabs
 						activeTab={activeFilter}
 						fullWidth
@@ -102,7 +104,7 @@ function RenderFilters({
 
 						<TabPanel name="service" title="Service">
 							<div className={styles.btn_group_section}>
-								{['Import', 'Export', 'Local', 'Domestic'].map((item) => (
+								{SERVICE_CATEGORY.map((item) => (
 									<div
 										key={item}
 										role="presentation"
@@ -113,7 +115,7 @@ function RenderFilters({
 									>
 										<Pill
 											size="sm"
-											color={filter.serviceCategory === item ? '#fef199'
+											color={filter.serviceCategory === item ? '#cfeaed'
 												: 'white'}
 										>
 											{item}
@@ -131,7 +133,7 @@ function RenderFilters({
 								}))}
 								value={filter[activeFilter]}
 								className={styles.radio_group_section}
-								style={{ flexDirection: 'column' }}
+								style={{ margin: 0 }}
 							/>
 						</TabPanel>
 						<TabPanel name="segment" title="Segment">

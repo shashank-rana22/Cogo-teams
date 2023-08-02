@@ -1,5 +1,5 @@
 .container {
-	width: 320px;
+	min-width: 320px;
 }
 
 .header {
@@ -15,16 +15,19 @@
 
 .tabs_container_element {
 	display: flex;
+	min-width: 332px;
+	overflow: hidden;
 
 	:global {
 		.ui_tab_list_container {
 			flex-direction: column;
-			width: 50%;
+			width: 52% !important;
 			max-height: 166px;
 			margin-top: 16px;
 		}
 
 		.ui_tab_container {
+			width: 100%;
 			max-height: 40px;
 		}
 	}
@@ -32,13 +35,17 @@
 
 .radio_group_section {
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
+	max-height: 268px;
+	margin-left: 16px;
+	overflow-y: scroll;
 	font-size: var(--font-size-md);
 }
 
 .btn_group_section {
 	display: flex;
-	margin-top: 20px;
+	min-width: 140%;
+	margin: 16px 8px;
 
 	:global {
 		.ui_pill_container {
@@ -46,4 +53,9 @@
 			border: 1px solid;
 		}
 	}
+}
+
+.main_content {
+	display: flex;
+	width: 100%;
 }

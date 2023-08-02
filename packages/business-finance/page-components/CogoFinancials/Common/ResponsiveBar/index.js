@@ -18,7 +18,10 @@ function MyResponsiveBar({
 	enableGridY = false,
 	enableGridX = false,
 	onClick = () => {},
+	enableLabel = true,
 	legends = true,
+	groupMode = 'stacked',
+	valueFormat = () => {},
 	margin = { top: 50, right: 130, bottom: 50, left: 60 },
 	axisBottomRotation = 0,
 	axisLeft = {
@@ -35,6 +38,7 @@ function MyResponsiveBar({
 	return (
 		<div style={{ width, height }} className={styles.container}>
 			<ResponsiveBar
+				enableLabel={enableLabel}
 				data={data}
 				keys={keys}
 				indexBy={indexBy}
@@ -46,6 +50,38 @@ function MyResponsiveBar({
 				axisTop={null}
 				axisRight={null}
 				onClick={onClick}
+				groupMode={groupMode}
+				valueFormat={valueFormat}
+				tooltip={(props) => {
+					const {
+						formattedValue,
+						color,
+						label,
+					} = props || {};
+
+					let displayLabel;
+					if (label?.includes('financial')) {
+						displayLabel = 'Actual';
+					} else if (label?.includes('operational')) {
+						displayLabel = 'Operational';
+					} else if (label?.includes('estimated')) {
+						displayLabel = 'Estimated';
+					}
+
+					return (
+						<div className={styles.custom_tooltip}>
+							<div
+								className={styles.color_indicator}
+								style={{ background: color }}
+							/>
+							<div>
+								{displayLabel}
+								:
+							</div>
+							<div className={styles.value}>{formattedValue}</div>
+						</div>
+					);
+				}}
 				theme={{
 					textColor : 'String',
 					axis      : {

@@ -1,3 +1,5 @@
+import { startCase } from '@cogoport/utils';
+
 import { LABEL_MAPPING } from '../constants';
 
 export const getData = ({ taxType, type, cardData }) => [
@@ -9,7 +11,7 @@ export const getData = ({ taxType, type, cardData }) => [
 				y : cardData[`estimatedCost${taxType}`],
 			},
 			{
-				x : `${LABEL_MAPPING[type]} Cost`,
+				x : `${startCase(LABEL_MAPPING[type])} Cost`,
 				y : cardData[`${LABEL_MAPPING[type]}Cost${taxType}`],
 			},
 		],
@@ -22,7 +24,7 @@ export const getData = ({ taxType, type, cardData }) => [
 				y : cardData[`estimatedRevenue${taxType}`],
 			},
 			{
-				x : `${LABEL_MAPPING[type]} Revenue`,
+				x : `${startCase(LABEL_MAPPING[type])} Revenue`,
 				y : cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`],
 			},
 		],

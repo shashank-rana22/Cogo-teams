@@ -6,3 +6,22 @@
 		cursor: pointer;
 	}
 }
+
+.custom_tooltip {
+	display: flex;
+	align-items: center;
+	padding: 8px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.value {
+	margin-left: 8px;
+	font-weight: bold;
+}
+
+.color_indicator {
+	width: 16px;
+	height: 16px;
+	margin: 0 4px;
+}
