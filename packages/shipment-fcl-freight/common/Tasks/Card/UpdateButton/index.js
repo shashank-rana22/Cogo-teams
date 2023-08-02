@@ -96,14 +96,8 @@ function UpdateButton({
 		<div className={styles.container}>
 			<Button
 				className={styles.upload_button}
-				themeType={task.status === 'completed' ? 'secondary' : 'primary'}
-				onClick={() => {
-					if (task.status === 'completed') {
-						handleEmail();
-					} else {
-						handleClick(task);
-					}
-				}}
+				themeType={task?.status === 'completed' ? 'secondary' : 'primary'}
+				onClick={() => (task?.status === 'completed' ? handleEmail() : handleClick(task))}
 				disabled={disableTask}
 			>
 				{buttonText}

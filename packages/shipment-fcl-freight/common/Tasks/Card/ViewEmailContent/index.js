@@ -1,6 +1,5 @@
 import { Loader, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import useListCommunications from '../../../../hooks/useListCommunications';
 

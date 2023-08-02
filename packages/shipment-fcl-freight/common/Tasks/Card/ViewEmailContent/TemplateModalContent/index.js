@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import styles from './styles.module.css';
 
