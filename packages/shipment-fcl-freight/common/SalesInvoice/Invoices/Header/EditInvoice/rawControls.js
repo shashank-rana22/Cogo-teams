@@ -94,6 +94,7 @@ const rawControls = ({
 				options  : convertObjectMappingToArray(FCL_UNITS),
 				disabled : isFieldsDisabled,
 				span     : 2,
+				rules    : { required: true },
 			},
 			{
 				name         : 'currency',
@@ -102,7 +103,7 @@ const rawControls = ({
 				showOptional : false,
 				options      : currencyCodeOptions,
 				placeholder  : 'Select Currency',
-				rules        : { required: 'currency is required' },
+				rules        : { required: true },
 				span         : 1.5,
 				disabled:
 				handleDisableCond(charge, isAdminSuperAdmin),
@@ -114,7 +115,7 @@ const rawControls = ({
 				placeholder : 'enter price',
 				span        : 1.5,
 				rules       : {
-					required : 'Price is Required',
+					required : true,
 					validate : (v) => v > PRICE_GREATER_THAN || 'Price must be greater than 0',
 				},
 				disabled: isFieldsDisabled,
@@ -124,7 +125,7 @@ const rawControls = ({
 				name        : 'quantity',
 				type        : 'number',
 				placeholder : 'enter quantity',
-				rules       : { required: 'Required', min: 1 },
+				rules       : { required: true, min: 1 },
 				span        : 1,
 				disabled    : isFieldsDisabled,
 			},
