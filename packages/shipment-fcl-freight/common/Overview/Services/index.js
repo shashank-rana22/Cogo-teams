@@ -30,6 +30,7 @@ function Services() {
 		servicesLoading,
 		activeStakeholder,
 		stakeholderConfig,
+		container_details,
 	} = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
@@ -43,8 +44,6 @@ function Services() {
 		main        : true,
 	});
 
-	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
-
 	const canUpsell = !!stakeholderConfig?.overview?.can_upsell;
 
 	const isOtherServiceOperations = ['booking_desk_manager', 'booking_desk', 'costbooking_ops',
@@ -57,10 +56,8 @@ function Services() {
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<>
-							{!isKam ? <Heading serviceCategory={serviceCategory} canUpsell={canUpsell} /> : null}
 
-							{(isKam || isOtherServiceOperations)
-							&& showTradeHeading[`${serviceCategory.split('Services')[GLOBAL_CONSTANTS.zeroth_index]}`]
+							{ showTradeHeading[`${serviceCategory.split('Services')[GLOBAL_CONSTANTS.zeroth_index]}`]
 								? <Heading serviceCategory={serviceCategory} canUpsell={canUpsell} /> : null}
 
 							<div className={styles.trade_services}>
@@ -68,6 +65,7 @@ function Services() {
 									<ServiceDetails
 										key={service}
 										servicesData={serviceObj[serviceCategory][service]}
+										containerDetails={container_details}
 									/>
 								))}
 							</div>
