@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Stepper, RadioGroup, Toast, Toggle, Badge } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -176,6 +175,7 @@ function FormContainer({
 		if (!isEmpty(taskItem)) {
 			getAirFreightSurcharges();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
@@ -191,6 +191,7 @@ function FormContainer({
 
 			setValue('carrierOtherCharges', carrierChargesData);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data?.surcharge]);
 
 	return (
