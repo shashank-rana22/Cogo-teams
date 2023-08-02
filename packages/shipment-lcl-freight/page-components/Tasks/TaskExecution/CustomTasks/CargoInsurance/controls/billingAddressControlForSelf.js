@@ -5,10 +5,10 @@ export const billingAddressControlForSelf = () => {
 
 	const controls = [
 		{
-			label       : 'PAN Number',
+			label       : `${geo.others.identification_number.label} Number`,
 			name        : 'panNumber',
 			type        : 'text',
-			placeholder : 'Enter PAN Number',
+			placeholder : `Enter ${geo.others.identification_number.label} Number`,
 			showLabel   : false,
 			span        : 3,
 			disabled    : false,
