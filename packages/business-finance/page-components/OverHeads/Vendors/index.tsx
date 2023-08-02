@@ -1,5 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { Select, Button, Input, Tooltip } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMCrossInCircle, IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -13,7 +14,7 @@ import CreateVendorModal from './CreateVendorModal';
 import useListVendors from './hooks/useListVendors';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
-import { VENDOR_CONFIG } from './utils/config';
+import configs from './utils/config';
 import Controls from './utils/controls';
 
 interface ItemProps {
@@ -22,6 +23,7 @@ interface ItemProps {
 	kycStatus?: String,
 	name?: String,
 	pan?: String,
+	tax?: String,
 	category?: String,
 	payments?: Number,
 	openInvoices?: Number,
@@ -31,6 +33,9 @@ interface ItemProps {
 
 function VenderComponent() {
 	const router = useRouter();
+	const geo = getGeoConstants();
+
+	const { VENDOR_CONFIG } = configs();
 
 	const [filters, setFilters] = useState({
 		KYC_STATUS  : '',
@@ -86,7 +91,9 @@ function VenderComponent() {
 			<div className={styles.right_container}>
 				<Input
 					size="sm"
-					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
+					placeholder={
+						`Search by Vendor Name/${geo.others.identification_number.label}/Organization ID/Sage ID`
+					}
 					suffix={<IcMSearchlight />}
 					value={filters.searchValue}
 					onChange={(e:any) => handleChange(e, 'searchValue')}
@@ -119,7 +126,7 @@ function VenderComponent() {
 								width={22}
 							/>
 						</div>
-						<div>&nbsp;Verified </div>
+						<div>Verified </div>
 					</div>
 				)}
 				{

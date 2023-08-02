@@ -1,32 +1,35 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import getPayload from '../utils/getPayload';
 
 interface AddressInterface {
-	pincode?:number | string,
-	address?:string,
-	cityName?:string,
-	countryName?:string,
-	countryCode?:number | string,
-	countryId?:number | string,
-	taxNumber?:number | string,
-	branchId?:number | string,
+	pincode?: number | string;
+	address?: string;
+	cityName?: string;
+	countryName?: string;
+	countryCode?: number | string;
+	countryId?: number | string;
+	taxNumber?: number | string;
+	branchId?: number | string;
 }
 
 const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 	const {
-		vendorId:vendorID, businessName:vendorName, id:expenseConfigurationId,
-		category:expenseCategory,
-		subCategory:expenseSubCategory,
+		vendorId: vendorID,
+		businessName: vendorName,
+		id: expenseConfigurationId,
+		categoryId,
+		category: expenseCategory,
+		categoryName,
 	} = rowData || {};
 
 	const [addressData, setAddressData] = useState<AddressInterface>({});
-	const {
-		profile,
-	} = useSelector((state:any) => state);
+	const { profile } = useSelector((state: any) => state);
 
 	const {
 		stakeholderId,
@@ -41,33 +44,34 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		branch,
 		lineItemsList,
 		tradeParty,
+		remarks,
 	} = expenseData || {};
 
 	const {
-		entity_code:entityCodeTradeParty,
-		cogo_entity_id:entityIdTradeParty,
-		organization_id:orgIdTradeParty,
-		serial_id:sidTradeParty,
-		business_name:nameTradeParty,
-		country:tradePartyCountry,
-		registration_number:registrationNumberTradeParty,
-		tds_deduction_rate:tdsTradeParty,
-		organization_trade_party_detail_id:tradePartyMappingIdFromTradeParty,
-		is_tax_applicable:isTaxApplicable,
+		entity_code: entityCodeTradeParty,
+		cogo_entity_id: entityIdTradeParty,
+		organization_id: orgIdTradeParty,
+		serial_id: sidTradeParty,
+		business_name: nameTradeParty,
+		country: tradePartyCountry,
+		registration_number: registrationNumberTradeParty,
+		tds_deduction_rate: tdsTradeParty,
+		organization_trade_party_detail_id: tradePartyMappingIdFromTradeParty,
+		is_tax_applicable: isTaxApplicable,
 	} = tradeParty || {};
 
 	const {
-		country_code:countryCodeTradeParty,
-		id:countryIdTradeParty,
-		name:countryNameTradeParty,
+		country_code: countryCodeTradeParty,
+		id: countryIdTradeParty,
+		name: countryNameTradeParty,
 	} = tradePartyCountry || {};
 
-	const { name:branchName, branchId } = branch || {};
+	const { name: branchName, branchId } = branch || {};
 
 	const {
-		entity_code:entityCode,
+		entity_code: entityCode,
 		id,
-		serial_id:serialId,
+		serial_id: serialId,
 		business_name: businessName,
 		addresses,
 		registration_number: registrationNumber,
@@ -76,8 +80,8 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 	} = entityObject || {};
 
 	useEffect(() => {
-		if (addresses?.length > 0) {
-			const singleAddress = addresses?.[0];
+		if (!isEmpty(addresses)) {
+			const singleAddress = addresses?.[GLOBAL_CONSTANTS.zeroth_index];
 			if (singleAddress) {
 				setAddressData({
 					pincode     : singleAddress?.pin_code,
@@ -99,16 +103,16 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		serial_id: vendorSid,
 		business_name: vendorBusinessName,
 		cogo_entity_id: vendorCogoEntityId,
-		serial_id:vendorSerialId,
-		kyc_status:kycStatus,
-		registration_type:registrationType,
-		bank_details:bankDetails,
+		serial_id: vendorSerialId,
+		kyc_status: kycStatus,
+		registration_type: registrationType,
+		bank_details: bankDetails,
 		pincode,
-		city_name:cityName,
-		id:idFromVendor,
+		city_name: cityName,
+		id: idFromVendor,
 	} = vendorData || {};
 
-	const [{ data:responseData, loading }, trigger] = useRequestBf(
+	const [{ data: responseData, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense',
 			method  : 'post',
@@ -118,11 +122,12 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 	);
 
 	const {
-		bank_name:bankName, ifsc_code:ifscCode,
-		account_number:accountNumber,
-		id:bankId,
-		vendor_id:collectionPartyId,
-	} = bankDetails?.[0] || {};
+		bank_name: bankName,
+		ifsc_code: ifscCode,
+		account_number: accountNumber,
+		id: bankId,
+		vendor_id: collectionPartyId,
+	} = bankDetails?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const payload = getPayload({
 		vendorID,
@@ -168,15 +173,16 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		vendorBusinessName,
 		vendorCountryId,
 		vendorRegistrationNumber,
-		expenseCategory,
-		expenseSubCategory,
+		expenseCategory : expenseCategory || categoryId,
 		stakeholderEmail,
 		stakeholderId,
 		stakeholderName,
 		kycStatus,
 		lineItemsList,
-		expenseType: 'RECURRING',
+		expenseType     : 'RECURRING',
 		expenseConfigurationId,
+		remarks,
+		categoryName,
 	});
 
 	const submitData = async () => {

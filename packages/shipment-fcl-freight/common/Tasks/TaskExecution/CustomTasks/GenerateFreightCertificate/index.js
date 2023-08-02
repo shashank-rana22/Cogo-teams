@@ -1,6 +1,7 @@
-import { Loader, Table } from '@cogoport/components';
+import { Table } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import React, { useContext } from 'react';
 
 import useGenerateFreightCertificate from '../../../../../hooks/useGenerateFreightCertificate';
@@ -14,8 +15,8 @@ import tableColumn from './tableColumn';
 
 function GenerateFreightCertificate({
 	task = {},
-	refetch,
-	onCancel,
+	refetch = () => {},
+	onCancel = () => {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -40,8 +41,7 @@ function GenerateFreightCertificate({
 			{ generateLoading
 				? (
 					<div className={styles.loaderr}>
-						<Loader />
-						Generating Certificate...
+						<ThreeDotLoader message="Generating Certificate" />
 					</div>
 				) : null}
 

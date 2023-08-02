@@ -26,8 +26,19 @@ export interface Props {
 	handlePageChange?: (currentPage: number) => void;
 	pageSize?: number;
 	showPagination?: boolean;
-	renderDropdown?: (p:any) => JSX.Element | null ;
+	renderDropdown?: (p: any) => JSX.Element | null;
+	showRibbon?: boolean;
 }
+
+export const toTitleCase = (str: string) => {
+	const titleCase = str
+		.toLowerCase()
+		.split(' ')
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(' ');
+
+	return titleCase;
+};
 
 function List({
 	config,
@@ -42,6 +53,7 @@ function List({
 	pageSize = 10,
 	showPagination = true,
 	renderDropdown = () => null,
+	showRibbon = false,
 }: Props) {
 	const {
 		showHeader = true,
@@ -55,7 +67,7 @@ function List({
 
 	const {
 		general: { isMobile = false },
-	}:any = useSelector((state: object) => state);
+	}: any = useSelector((state: object) => state);
 
 	const isListEmpty = !itemData || list?.length === 0;
 
@@ -74,7 +86,10 @@ function List({
 			{!isListEmpty || loading ? (
 				<div style={bodyStyles}>
 					{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-						<div className={styles.card_container}>
+						<div
+							className={styles.card_container}
+							key={singleitem.key || singleitem}
+						>
 							<CardColumn
 								fields={fields}
 								itemStyles={itemStyles}
@@ -84,6 +99,11 @@ function List({
 								functions={commonFunctions(functions)}
 								isMobile={isMobile}
 							/>
+							{showRibbon ? (
+								<div className={styles.ribbon}>
+									{toTitleCase(singleitem?.status || '')}
+								</div>
+							) : null}
 							{renderDropdown(singleitem)}
 						</div>
 					))}
