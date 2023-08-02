@@ -138,7 +138,7 @@
           "under_collection": true,
           "is_knocked_off": true,
           "state": ["confirmed_by_importer_exporter", "in_progress", "shipment_received"],
-          "task_attributes": [{"task": ["upload_bill_of_lading", "upload_endorsed_bill_of_lading","upload_delivery_order"], "status": "pending"}]
+          "task_attributes": [{"task": ["upload_bill_of_lading", "upload_endorsed_bill_of_lading"], "status": "pending"}]
         },
         "additional_methods": ["pagination", "seller"]
       },
@@ -148,7 +148,7 @@
         },
         "import": {
           "filters": {
-            "task_attributes": [{"task": "upload_delivery_order", "status": "pending"}]
+            "task_attributes": [{"task": ["upload_bill_of_lading", "upload_endorsed_bill_of_lading"], "status": "pending"}]
           }
         }
       },
