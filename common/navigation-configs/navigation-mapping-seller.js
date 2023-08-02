@@ -1,3 +1,4 @@
+import common_apis from './apis/common-apis';
 import app_apis from './apis/get-app-apis';
 
 const navigationMappingSeller = {
@@ -124,6 +125,14 @@ const navigationMappingSeller = {
 				icon          : 'nav-insurance',
 				main_apis     : [],
 				possible_apis : app_apis.saas_insurance,
+			},
+			{
+				key           : 'saas_premium_services-export-factoring',
+				title         : 'Export Factoring',
+				href          : '/export-factoring',
+				as            : '/export-factoring',
+				possible_apis : common_apis.export_factoring,
+
 			},
 		],
 	},
