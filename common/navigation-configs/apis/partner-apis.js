@@ -12764,6 +12764,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'list_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -13183,6 +13188,22 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'list_kam_desk_surface_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_shipment_invoice_preference',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_sell_quotations',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+
 	],
 	printing_desk: [
 		{

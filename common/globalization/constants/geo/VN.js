@@ -368,8 +368,11 @@ export default {
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
 			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
 			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
+			{ label: 'E-Invoice Failed', value: 'IRN_FAILED' },
+			{ label: 'E-Invoice Cancelled', value: 'IRN_CANCELLED' },
 			{ label: 'Requested', value: 'REQUESTED' },
 		],
+
 		freight_container_types: [
 			{
 				label : 'Standard(Dry)',
@@ -418,6 +421,15 @@ export default {
 		},
 	},
 	navigations: {
+		settlement_onAccountCollection: {
+			tabs: [
+				'ap-ar-settlement',
+				'history',
+				'onAccountCollection',
+				'JournalVoucher',
+			],
+		},
+
 		supply_dashboard: {
 			rfq_enquiries: {
 				tabs: [
@@ -545,6 +557,17 @@ export default {
 				has_voice_call_access       : false,
 				template_default_language   : 'vietnamese',
 				supply_sender_mobile_number : '918069195980',
+			},
+
+			business_finance: {
+				ar: {
+					settlement: {
+						invoice_number: {
+							document_key : 'destinationIrnNumber',
+							irn_key      : 'destinationDocumentValue',
+						},
+					},
+				},
 			},
 		},
 	},

@@ -3,13 +3,13 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
 import { getDate } from '../utils/getDate';
 
-const FLIGHT_STATE_ORIGIN = ['flight_departed', 'cargo_handed_over_at_origin'];
-const FLIGHT_STATE_DEPART = ['flight_departed'];
+const FLIGHT_STATE_ORIGIN = ['flight_arrived', 'flight_departed', 'cargo_handed_over_at_origin'];
+const FLIGHT_STATE_DEPART = ['flight_arrived', 'flight_departed'];
 
 const controls = ({ primary_service, departureDate, stakeholderConfig = {} }) => {
 	const state = primary_service?.state || '';
 
-	const disabledState = !TIMELINE_EDITABLE.primary_service.state.includes(state);
+	const disabledState = !TIMELINE_EDITABLE?.primary_service?.state?.includes(state);
 	const editableFields = stakeholderConfig?.timeline?.editable_fields;
 
 	const finalControls = [
