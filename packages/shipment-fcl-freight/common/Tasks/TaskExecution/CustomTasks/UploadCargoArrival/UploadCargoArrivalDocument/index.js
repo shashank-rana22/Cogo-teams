@@ -23,11 +23,11 @@ function UploadCargoArrivalDocument({
 		refetch();
 		clearTask();
 	};
-	const { apiTrigger, docLoading } = useCreateShipmentDocument({
-		refetch: cargoDocRefetch,
-	});
+	const { apiTrigger, docLoading } = useCreateShipmentDocument({});
 
-	const { loading : taskLoading, apiTrigger : taskTrigger } = useUpdateShipmentPendingTask({});
+	const { loading : taskLoading, apiTrigger : taskTrigger } = useUpdateShipmentPendingTask(
+		{ refetch: cargoDocRefetch },
+	);
 
 	const onSubmit = async (values) => {
 		const data = {
@@ -46,14 +46,9 @@ function UploadCargoArrivalDocument({
 				},
 			],
 		};
-		const res = 	await apiTrigger(data);
+		apiTrigger(data);
 
-		if (!res.hasError) {
-			const payload = {
-				id: pendingTask?.id,
-			};
-			taskTrigger(payload);
-		}
+		taskTrigger({ id: pendingTask?.id });
 	};
 
 	return (
