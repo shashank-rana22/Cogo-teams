@@ -3,7 +3,11 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import getServiceNameforTableColumn from '../../../../helpers/getServiceNameforTableColumn';
 
 export const InvoiceTable = (serviceItem = {}) => {
-	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, serviceItem?.trade_type);
+	const serviceName = getServiceNameforTableColumn(
+		serviceItem?.service_type,
+		serviceItem?.trade_type,
+		serviceItem?.detail?.service_type,
+	);
 
 	return [
 		{
