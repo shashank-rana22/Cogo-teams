@@ -10,12 +10,6 @@ import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-const allowedRoles = {
-	IN : [geo.uuid.admin_id, geo.uuid.super_admin_id],
-	VN : [geo.uuid.admin_id, geo.uuid.super_admin_id, ...geo.uuid.kam_ids],
-};
-
 const INITIAL_STATE = 0;
 
 function EditInvoice({
@@ -24,6 +18,12 @@ function EditInvoice({
 	invoice = {},
 	refetch = () => {},
 }) {
+	const geo = getGeoConstants();
+	const allowedRoles = {
+		IN : [geo.uuid.admin_id, geo.uuid.super_admin_id],
+		VN : [geo.uuid.admin_id, geo.uuid.super_admin_id, ...geo.uuid.kam_ids],
+	};
+
 	const { role_ids } = useSelector(({ profile }) => ({
 		role_ids: profile.partner?.user_role_ids,
 	}));
