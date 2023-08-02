@@ -9,7 +9,7 @@ const registrationNumbersMapping = {
 	pan: {
 		key     : 'pan',
 		text    : 'PAN',
-		pattern : GLOBAL_CONSTANTS_IN.regex.PAN,
+		pattern : GLOBAL_CONSTANTS_IN.regex.TAX,
 		length  : 10,
 		type    : 'registration',
 	},

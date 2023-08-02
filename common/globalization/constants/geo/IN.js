@@ -31,7 +31,7 @@ export default {
 		},
 	},
 	regex: {
-		PAN                                : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
+		TAX                                : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g, // PAN Regular Expression
 		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
 		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL                              : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
@@ -475,6 +475,18 @@ export default {
 				label : '501 Cogoport Vietnam',
 				value : '501',
 			},
+			{
+				label : '601 Cogoport Thailand',
+				value : '601',
+			},
+			{
+				label : '701 Cogoport Indonesia',
+				value : '701',
+			},
+			{
+				label : '801 Cogoport China',
+				value : '801',
+			},
 		],
 		migration_status: [
 			{ label: 'True', value: true },
@@ -677,21 +689,21 @@ export default {
 			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 			max_length : 15,
 		},
-
 		banking_code: {
 			financial_system_code : 'ifsc',
 			pattern               : /^[A-Za-z]{4}\d{7}$/,
 		},
-
 		pan_number: {
 			label   : 'PAN',
-			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
 		},
-
 		economic_zone: {
 			label: 'SEZ',
 		},
-
+		identification_number: {
+			label   : 'PAN Number',
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
+		},
 		navigations: {
 			onboard_vendor: {
 				validate_registration : true,

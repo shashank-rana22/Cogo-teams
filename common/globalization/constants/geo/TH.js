@@ -30,9 +30,10 @@ export default {
 		},
 	},
 	regex: {
-		PAN              : '',
-		GST              : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
-		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
+		TAX              : /^\d{13}|\d{15}$/,
+		// eslint-disable-next-line max-len
+		GST              : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		MOBILE_NUMBER    : /^(?:(?:\+66)|(?:66)|0)(?:8[1-9]\d{7}|9\d{8})$/,
 		EMAIL            : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
 		// password_pattern:
@@ -503,21 +504,21 @@ export default {
 			pattern    : /^\d{13}|\d{15}$/,
 			max_length : 15,
 		},
-
 		banking_code: {
 			financial_system_code : 'swift',
 			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
 		},
-
 		pan_number: {
 			label   : 'PAN',
 			pattern : undefined,
 		},
-
 		economic_zone: {
 			label: 'Non-Tariff Zone',
 		},
-
+		identification_number: {
+			label   : 'TIN',
+			pattern : /^\d{13}|\d{15}$/,
+		},
 		navigations: {
 			onboard_vendor: {
 				validate_registration : false,

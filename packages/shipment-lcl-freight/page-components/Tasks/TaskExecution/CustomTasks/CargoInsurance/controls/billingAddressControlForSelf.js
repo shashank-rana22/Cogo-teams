@@ -14,10 +14,10 @@ export const billingAddressControlForSelf = () => {
 			disabled    : false,
 			rules       : {
 				pattern: {
-					value   : geo?.regex.PAN,
-					message : 'Enter a valid PAN',
+					value   : geo.others.identification_number.pattern,
+					message : `Enter a valid ${geo.others.identification_number.label}`,
 				},
-				required: { value: true, message: 'PAN Number is required' },
+				required: { value: true, message: `${geo.others.identification_number.label} Number is required` },
 			},
 		},
 	];

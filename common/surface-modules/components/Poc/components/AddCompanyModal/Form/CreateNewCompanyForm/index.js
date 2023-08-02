@@ -18,8 +18,6 @@ import getBillingAddressFromRegNum, { getAddressRespectivePincodeAndPoc } from
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 const PAN_REQUIRED = ['collection_party', 'paying_party'];
 
 const ORG_TRADE_PARTY_DEFAUT_PARAMS = {
@@ -44,6 +42,8 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 
 	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
 	const formValues = watch();
+
+	const geo = getGeoConstants();
 
 	const resetMultipleFields = useCallback((fields = []) => {
 		fields?.map((field) => resetField(field));
@@ -118,7 +118,8 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 					</div>
 					<div className={styles.pan_number}>
 						<label className={styles.form_label}>
-							{`PAN Number / Registration Number ${PAN_REQUIRED.includes(tradePartyType) ? ''
+							{`${geo.others.identification_number.label} Number / Registration Number 
+								${PAN_REQUIRED.includes(tradePartyType) ? ''
 								: '(Optional)'}`}
 						</label>
 						<InputController
@@ -128,7 +129,10 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							placeholder="Enter Registration Number"
 							rules={{
 								required : PAN_REQUIRED.includes(tradePartyType),
-								pattern  : { value: geo.regex.PAN, message: 'Pan Number is invalid' },
+								pattern  : {
+									value   : geo.others.identification_number.pattern,
+									message : `${geo.others.identification_number.label} Number is invalid`,
+								},
 							}}
 						/>
 						{Error('registration_number', errors)}

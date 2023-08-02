@@ -30,7 +30,7 @@ export default {
 		},
 	},
 	regex: {
-		PAN              : '',
+		TAX              : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		// eslint-disable-next-line max-len
 		GST              : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
 		ECN              : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
@@ -531,16 +531,17 @@ export default {
 			financial_system_code : 'swift',
 			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
 		},
-
 		pan_number: {
 			label   : 'PAN',
 			pattern : undefined,
 		},
-
 		economic_zone: {
 			label: 'Non-Tariff Zone',
 		},
-
+		identification_number: {
+			label   : 'VAT',
+			pattern : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		},
 		navigations: {
 			onboard_vendor: {
 				validate_registration : false,

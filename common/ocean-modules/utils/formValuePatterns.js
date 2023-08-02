@@ -4,7 +4,7 @@ const formValuePatterns = (country_id) => {
 	const regEx = getCountryConstants({ country_id, isDefaultData: false })?.regex || {};
 
 	return {
-		PAN_NUMBER: regEx.PAN,
+		PAN_NUMBER: regEx.TAX,
 
 		EMAIL: regEx.EMAIL,
 
