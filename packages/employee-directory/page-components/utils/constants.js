@@ -109,7 +109,7 @@ export const HRBP_VIEW_DATA = [
 	},
 	{
 		label     : 'HRBP',
-		value     : 'hrbp.name',
+		value     : 'hrbp.userName',
 		startCase : true,
 	},
 	{
