@@ -1,7 +1,10 @@
+import { useState } from 'react';
+
 import styles from './styles.module.css';
 import TaskDetails from './TaskDetails';
 import UpdateAction from './UpdateAction';
 import UpdateButton from './UpdateButton';
+import ViewEmailContent from './ViewEmailContent';
 
 function Card({
 	task = {},
@@ -10,8 +13,14 @@ function Card({
 	isTaskOpen = false,
 	tasksList = [],
 }) {
+	const [showEmailModal, setShowEmailModal] = useState(false);
+
 	const handleChange = (newMails) => {
 		handleClick(task, newMails);
+	};
+
+	const handleEmail = () => {
+		setShowEmailModal(true);
 	};
 
 	return (
@@ -27,7 +36,9 @@ function Card({
 						task={task}
 						handleClick={handleClick}
 						handleChange={handleChange}
-						hideButton={task.status === 'completed' || selectedTaskId.length}
+						handleEmail={handleEmail}
+						hideButton={(task.status === 'completed' && task.assigned_stakeholder !== 'system')
+							|| (selectedTaskId.length)}
 						tasksList={tasksList}
 					/>
 				)}
@@ -37,6 +48,15 @@ function Card({
 					hideThreeDots={task.status === 'completed'}
 				/>
 			</div>
+
+			{showEmailModal && (
+				<ViewEmailContent
+					taskId={task?.id}
+					taskName={task?.label}
+					onCancel={() => setShowEmailModal(false)}
+					showEmailModal={showEmailModal}
+				/>
+			)}
 		</div>
 	);
 }
