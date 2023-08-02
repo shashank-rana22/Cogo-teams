@@ -33,31 +33,16 @@ function SelectServices({
 	setShowAddInvoicingPartyModal = () => {},
 	services: selectedServices = [],
 	rate = {},
-	paymentModes = {},
 	getCheckoutInvoices = () => {},
 }) {
 	const {
 		detail = {},
 		checkout_id = '',
 		conversions = {},
+		activated_on_paylater = {},
 	} = useContext(CheckoutContext);
 
 	const { primary_service = '', services: allServices = {} } = detail;
-
-	const {
-		BUTTONS_MAPPING,
-		PAYMENT_MODES,
-		loading,
-	} = useHandleSelectServices({
-		checkout_id,
-		getCheckoutInvoices,
-		paymentModes,
-		setShowAddInvoicingPartyModal,
-		setCurrentView,
-		setSelectedAddress,
-		detail,
-		selectedAddress,
-	});
 
 	const { services = [] } = selectedAddress;
 
@@ -66,6 +51,24 @@ function SelectServices({
 	const primaryServicesLength = Object.values(allServices).filter(
 		(item) => item.service_type === primary_service,
 	).length;
+
+	const isFclInvoice = services.some((item) => item.service === 'fcl_freight');
+
+	const {
+		BUTTONS_MAPPING,
+		PAYMENT_MODES,
+		loading,
+	} = useHandleSelectServices({
+		checkout_id,
+		getCheckoutInvoices,
+		setShowAddInvoicingPartyModal,
+		setCurrentView,
+		setSelectedAddress,
+		detail,
+		selectedAddress,
+		activated_on_paylater,
+		isFclInvoice,
+	});
 
 	return (
 		<div key={loading} className={styles.container}>
@@ -172,6 +175,7 @@ function SelectServices({
 							([key]) => key === selectedAddress.id,
 						)[ONE]
 					}
+					isFclInvoice={isFclInvoice}
 					editMode
 				/>
 			</div>

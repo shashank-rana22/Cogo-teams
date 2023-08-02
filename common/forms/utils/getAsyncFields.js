@@ -850,6 +850,15 @@ function asyncHsCodeListCommodities() {
 	};
 }
 
+function asyncListSpotSearchRateCardOperators() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_spot_search_rate_card_operators',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -918,4 +927,5 @@ export {
 	asyncListShipmentServices,
 	asyncListSaasHsCodes,
 	asyncHsCodeListCommodities,
+	asyncListSpotSearchRateCardOperators,
 };

@@ -45,6 +45,7 @@ function CurrentInvoicingParty({
 	allServices = [],
 	paymentModeValues = {},
 	paymentModesLoading = false,
+	isFclInvoice = false,
 }) {
 	const { rate, conversions, detail = {} } = useContext(CheckoutContext);
 
@@ -117,6 +118,7 @@ function CurrentInvoicingParty({
 				setEditInvoiceDetails={setEditInvoiceDetails}
 				paymentModeValues={paymentModeValues}
 				updateLoading={updateLoading}
+				isFclInvoice={isFclInvoice}
 			/>
 
 			<div className={styles.payment_modes}>
@@ -125,6 +127,7 @@ function CurrentInvoicingParty({
 					editMode={isEditMode}
 					paymentModeValues={paymentModeValues}
 					paymentModesLoading={paymentModesLoading}
+					isFclInvoice={isFclInvoice}
 				/>
 			</div>
 		</div>

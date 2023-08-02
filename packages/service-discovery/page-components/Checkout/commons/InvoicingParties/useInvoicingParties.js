@@ -48,8 +48,13 @@ const formatServices = ({ savedServicesInvoiceTo, invoicingPartyServices }) => {
 	});
 };
 
-const useInvoicingParties = ({ detail = {}, setInvoicingParties = () => {}, invoicingParties = [] }) => {
-	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =	useState(false);
+const useInvoicingParties = ({
+	detail = {},
+	setInvoicingParties = () => {},
+	invoicingParties = [],
+	activated_on_paylater = {},
+}) => {
+	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =		useState(false);
 
 	const [editInvoice, setEditInvoice] = useState({});
 	const [editInvoiceDetails, setEditInvoiceDetails] = useState({});
@@ -69,9 +74,12 @@ const useInvoicingParties = ({ detail = {}, setInvoicingParties = () => {}, invo
 
 	const { services = {} } = detail;
 
-	const savedServicesInvoiceTo = useMemo(() => formatSavedServicesInvoiceTo({
-		services: Object.values(services),
-	}), [services]);
+	const savedServicesInvoiceTo = useMemo(
+		() => formatSavedServicesInvoiceTo({
+			services: Object.values(services),
+		}),
+		[services],
+	);
 
 	const getCheckoutInvoices = () => {
 		trigger({
@@ -95,53 +103,51 @@ const useInvoicingParties = ({ detail = {}, setInvoicingParties = () => {}, invo
 				list.reduce((acc, { id }) => ({ ...acc, [id]: false }), {}),
 			);
 
-			setPaymentModes(list.reduce((acc, savedInvoicingParty) => {
-				const {
-					credit_option = {},
-					organization_trade_party_id = '',
-					id = '',
-					payment_mode_details = {},
-				} = savedInvoicingParty;
+			setPaymentModes(
+				list.reduce((acc, savedInvoicingParty) => {
+					const {
+						credit_option = {},
+						organization_trade_party_id = '',
+						id = '',
+						payment_mode_details = {},
+					} = savedInvoicingParty;
 
-				const {
-					payment_mode = '',
-					payment_term = '',
-					payment_method = '',
-					documentCategory = '',
-					documentType = '',
-					documentDeliveryMode = '',
-				} = payment_mode_details;
+					const {
+						payment_mode = '',
+						payment_term = '',
+						payment_method = '',
+						documentCategory = '',
+						documentType = '',
+						documentDeliveryMode = '',
+					} = payment_mode_details;
 
-				const { selected_credit_days = 0, interest_percent = 0 } = credit_option;
+					const { selected_credit_days = 0, interest_percent = 0 } = credit_option;
 
-				return {
-					...acc,
-					[id || savedInvoicingParty.length]: {
-						credit_days    : selected_credit_days,
-						interest       : interest_percent,
-						paymentMode    : payment_mode || 'cash',
-						paymentTerms   : payment_term,
-						paymentMethods : payment_method,
-						documentCategory,
-						documentType,
-						documentDeliveryMode,
-						organization_trade_party_id,
-					},
-				};
-			}, {}));
+					return {
+						...acc,
+						[id || savedInvoicingParty.length]: {
+							credit_days    : selected_credit_days,
+							interest       : interest_percent,
+							paymentMode    : payment_mode || 'cash',
+							paymentTerms   : payment_term,
+							paymentMethods : payment_method,
+							documentCategory,
+							documentType,
+							documentDeliveryMode,
+							organization_trade_party_id,
+						},
+					};
+				}, {}),
+			);
 		}
-	}, [list, savedServicesInvoiceTo]);
+	}, [list, savedServicesInvoiceTo, setInvoicingParties]);
 
-	const {
-		PAYMENT_MODES,
-		loading,
-		paymentModes: paymentModeValuesObj,
-	} = useGetPaymentModes({
+	const { PAYMENT_MODES, loading } = useGetPaymentModes({
 		invoicingParties,
 		detail,
-		paymentModes,
 		setEditInvoiceDetails,
 		editInvoiceDetails,
+		activated_on_paylater,
 	});
 
 	return {
@@ -150,15 +156,14 @@ const useInvoicingParties = ({ detail = {}, setInvoicingParties = () => {}, invo
 		setShowAddInvoicingPartyModal,
 		PAYMENT_MODES,
 		editInvoice,
-		loading             : listLoading,
-		paymentModesLoading : loading,
+		loading              : listLoading,
+		paymentModesLoading  : loading,
 		setEditInvoice,
-		paymentModes,
 		getCheckoutInvoices,
 		editInvoiceDetails,
 		setEditInvoiceDetails,
-		allServices         : savedServicesInvoiceTo,
-		paymentModeValuesObj,
+		allServices          : savedServicesInvoiceTo,
+		paymentModeValuesObj : paymentModes,
 	};
 };
 

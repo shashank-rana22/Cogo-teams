@@ -38,7 +38,11 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		setInvoicingParties = () => {},
 		isVeryRisky = false,
 		setIsVeryRisky = () => {},
+		isAllShippingLinesRequired = false,
+		setIsAllShippingLinesRequired = () => {},
 	} = useHandleBookingConfirmation();
+
+	const { source_id: search_id } = detail || {};
 
 	const { is_any_invoice_on_credit = false } = detail?.credit_details || {};
 
@@ -72,6 +76,10 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 			<ShippingPreferences
 				formProps={formProps}
 				primaryService={primaryService}
+				search_id={search_id}
+				setIsAllShippingLinesRequired={setIsAllShippingLinesRequired}
+				isAllShippingLinesRequired={isAllShippingLinesRequired}
+				updateLoading={updateLoading}
 			/>
 
 			<BookingTypeOptions

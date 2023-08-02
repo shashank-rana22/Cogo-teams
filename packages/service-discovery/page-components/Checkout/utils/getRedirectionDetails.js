@@ -6,6 +6,7 @@ const getRedirectionDetails = ({
 	tags = [],
 	checkout_id = '',
 	shipment_id = '',
+	redirect_required = 'true',
 }) => {
 	if (!isCheckoutApiSuccess) {
 		return {
@@ -15,7 +16,7 @@ const getRedirectionDetails = ({
 		};
 	}
 
-	if (shipment_id) {
+	if (shipment_id && redirect_required === 'true') {
 		return {
 			url: `/${partner_id}/shipments/${shipment_id}`,
 			message:
