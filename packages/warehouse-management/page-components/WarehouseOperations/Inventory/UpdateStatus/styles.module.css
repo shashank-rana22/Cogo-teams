@@ -1,0 +1,25 @@
+.modal_styled {
+	:global {
+		.ui_modal_body_container {
+			max-height: 600px;
+		}
+
+		.ui_tab_container {
+			width: 80px;
+		}
+
+		.ui_input_container,
+		.ui_input_control {
+			font-size: 14px !important;
+		}
+
+		.ui_select_input_control {
+			font-size: 15px !important;
+		}
+	}
+}
+
+.cancel_button {
+	margin-right: 10px;
+	border: 1px solid #333;
+}

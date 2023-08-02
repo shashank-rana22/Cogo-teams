@@ -1,0 +1,110 @@
+.header_footer_part {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.header_part {
+	display: flex;
+	justify-content: space-between;
+	margin: 48px 0 24px;
+
+	:global {
+		.ui_tabs_container {
+			.ui_tab_list_container {
+				background-color: transparent;
+				box-shadow: none;
+
+				.ui_tab_container {
+					padding: 12px 20px;
+					margin: 4px 20px 4px 4px;
+					background: var(--color-secondary-5);
+					border-radius: 6px;
+					box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+
+					.ui_tabs_list_title {
+						font-size: var(--font-size-md);
+						font-weight: 600;
+					}
+				}
+
+				.ui_tab_container::after {
+					border: none;
+				}
+
+				.ui_tab_container.ui_tab_active {
+					background: var(--color-primary-error-red-5);
+				}
+			}
+		}
+	}
+}
+
+.header_search_filter {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	margin: 10px 0 0;
+
+	:global {
+		.ui_button_container {
+			margin-right: 8px;
+		}
+
+		.ui_input_container {
+			.ui_input_control::placeholder {
+				font-size: var(--font-size-md);
+				color: var(--color-secondary-greyscale-5);
+			}
+		}
+	}
+}
+
+.icon_wrapper {
+	position: relative;
+	margin: 4px;
+	font-size: 20px;
+}
+
+.scope_select_wrapper {
+	margin-right: 8px;
+}
+
+.active_filter_icon {
+	position: absolute;
+	top: 4px;
+	right: 23px;
+}
+
+.search_text {
+	width: 30%;
+}
+
+.add_icon {
+	margin-right: 6px;
+	font-size: var(--font-size-xl);
+}
+
+.date_picker {
+	position: relative;
+	width: 20%;
+}
+
+.calendar_icon {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.select_input {
+	width: 20%;
+}
+
+.truck_in_out_tabs {
+	position: relative;
+	width: 50%;
+}
+
+.profile-icon {
+	position: absolute;
+}

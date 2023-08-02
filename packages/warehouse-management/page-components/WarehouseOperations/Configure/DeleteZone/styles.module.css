@@ -1,0 +1,14 @@
+.warning_icon {
+	text-align: center;
+}
+
+.cancel_button {
+	margin-right: 10px;
+	border: 1px solid #333;
+}
+
+.sure_delete {
+	font-size: 16px;
+	line-height: 24px;
+	text-align: center;
+}
