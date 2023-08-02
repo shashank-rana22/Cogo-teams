@@ -715,6 +715,16 @@ export default {
 					disable_edit_invoice : true,
 				},
 			},
+			business_finance: {
+				ar: {
+					settlement: {
+						invoice_number: {
+							document_key : 'destinationDocumentValue',
+							irn_key      : 'destinationIrnNumber',
+						},
+					},
+				},
+			},
 		},
 	},
 };

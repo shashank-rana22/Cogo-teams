@@ -315,6 +315,8 @@ const GLOBAL_CONSTANTS = {
 		clock_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
 		sad_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
 		sign_up_failed       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
+		kyc_event            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc_event.png',
+		default_event        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
 	},
 
 	video_call_ring_tone_url:
@@ -437,6 +439,11 @@ const GLOBAL_CONSTANTS = {
 		amount_seperator       : /\D/g,
 		white_space_characters : /\s/g,
 		email_subject_prefix   : /^(re|fwd|fw):\s*/i,
+		para_html_tag_text     : /<p>([\s\S]*?)<\/p>/gm,
+		h1_html_tag_text       : /<h1>([\s\S]*?)<\/h1>/gm,
+		h2_html_tag_text       : /<h2>([\s\S]*?)<\/h2>/gm,
+		h3_html_tag_text       : /<h3>([\s\S]*?)<\/h3>/gm,
+		li_html_tag_text       : /<li>([\s\S]*?)<\/li>/gm,
 	},
 	zeroth_index                 : 0,
 	milliseconds_in_one_day      : 86400000,
