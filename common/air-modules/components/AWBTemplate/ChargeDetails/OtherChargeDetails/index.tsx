@@ -161,7 +161,7 @@ function OtherChargeDetails({
 						`}
 						>
 							<p style={{ fontSize: 14 }}>
-								{`${formatDate(formData.executedDate) || formatDate(new Date())}`}
+								{formatDate(formData.executedDate) || formatDate(new Date())}
 							</p>
 						</div>
 						<div

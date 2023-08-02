@@ -1,0 +1,19 @@
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 10px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	height: 40px;
+	font-size: var(--font-size-lg);
+	font-weight: 500;
+	line-height: 18px;
+	color: #000;
+}
+
+.border {
+	border-bottom: 2px solid #f68b21;
+}

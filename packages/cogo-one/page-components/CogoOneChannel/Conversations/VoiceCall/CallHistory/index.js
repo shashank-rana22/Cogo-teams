@@ -1,4 +1,6 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -6,14 +8,22 @@ import { CALL_HISTORY_AUDIO_ICONS } from '../../../../../constants';
 
 import styles from './styles.module.css';
 
-const COUNT_ONE = 1;
-
 function CallHistory({
-	type = 'user',
-	end_time_of_call = '', start_time_of_call = '', dtmf_inputs = {}, channelType = '',
+	type = 'user', end_time_of_call = '', start_time_of_call = '', dtmf_inputs = {},
+	channelType = '',
 }) {
-	const startTime = start_time_of_call?.split(' ')?.[COUNT_ONE];
-	const endTime = end_time_of_call?.split(' ')?.[COUNT_ONE];
+	const startTime = start_time_of_call ? formatDate({
+		date       : new Date(start_time_of_call),
+		dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss aaa'],
+		formatType : 'time',
+	}) : '';
+
+	const endTime = end_time_of_call ? formatDate({
+		date       : new Date(end_time_of_call),
+		dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss aaa'],
+		formatType : 'time',
+	}) : '';
+
 	const { start = '', end = '', compStyles = {} } = CALL_HISTORY_AUDIO_ICONS[type] || {};
 
 	const conditionCheck = !isEmpty(dtmf_inputs) && type === 'user';

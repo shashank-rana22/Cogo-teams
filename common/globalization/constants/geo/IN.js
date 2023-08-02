@@ -670,12 +670,21 @@ export default {
 				},
 			},
 		},
+		over_heads: {
+			region_specific_cogo_entities            : false,
+			expense_non_recurring_upload_invoice_tds : false,
+		},
 	},
 	others: {
 		registration_number: {
 			label      : 'GST',
 			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 			max_length : 15,
+		},
+
+		identification_number: {
+			label   : 'PAN Number',
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
 		},
 
 		banking_code: {
@@ -701,6 +710,16 @@ export default {
 				has_voice_call_access       : true,
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
+			},
+			business_finance: {
+				ar: {
+					settlement: {
+						invoice_number: {
+							document_key : 'destinationDocumentValue',
+							irn_key      : 'destinationIrnNumber',
+						},
+					},
+				},
 			},
 		},
 	},
