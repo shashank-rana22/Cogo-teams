@@ -51,12 +51,14 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 			disable : false,
 		},
 		...(origin_port?.is_icd ? [{
-			name  : 'origin_icd_departed_at',
-			label : 'Departure from ICD Port date',
+			name    : 'origin_icd_departed_at',
+			label   : 'Departure from ICD Port date',
+			disable : false,
 		}] : []),
 		...(destination_port?.is_icd ? [{
-			name  : 'arrived_at_destination_icd_at',
-			label : 'Arrived At ICD Port date',
+			name    : 'arrived_at_destination_icd_at',
+			label   : 'Arrived At ICD Port date',
+			disable : false,
 		}] : []),
 	];
 
