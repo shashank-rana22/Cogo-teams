@@ -1,9 +1,7 @@
-import { Modal } from '@cogoport/components';
 import { collection } from 'firebase/firestore';
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
-import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import { getHasPermissionToEdit } from '../../../../helpers/conversationHelpers';
 import { snapshotCleaner, mountActiveRoomSnapShot } from '../../../../helpers/snapshotHelpers';
@@ -18,6 +16,7 @@ import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import Header from './Header';
 import MessageConversations from './MessageConversations';
 import Footer from './MessageConversations/Footer';
+import MessageModals from './MessageModals';
 import styles from './styles.module.css';
 
 const TIMEOUT_FOR_SCROLL = 200;
@@ -53,7 +52,7 @@ function Messages({
 	let activeChatCollection;
 
 	const {
-		id = '', channel_type = '', support_agent_id = '', spectators_data = [], session_type = '',
+		id = '', channel_type = '', support_agent_id : supportAgentId = '', spectators_data = [], session_type = '',
 	} = formattedData || {};
 
 	const {
@@ -75,11 +74,11 @@ function Messages({
 	});
 
 	const filteredSpectators = (spectators_data || []).filter(
-		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,
+		({ agent_id: spectatorId }) => spectatorId !== supportAgentId,
 	);
 
 	const activeAgentName = (spectators_data || []).find(
-		(val) => val.agent_id === support_agent_id,
+		(val) => val.agent_id === supportAgentId,
 	)?.agent_name;
 
 	if (channel_type && id) {
@@ -116,12 +115,6 @@ function Messages({
 			});
 		}, TIMEOUT_FOR_SCROLL);
 	}, []);
-
-	const {
-		comp: ActiveModalComp = null,
-		title: { img = null, name = null } = {},
-		modalSize = 'md',
-	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
 
 	const activeCardId = activeTab?.data?.id;
 	const activeChannelType = activeTab?.data?.channel_type;
@@ -162,7 +155,7 @@ function Messages({
 						hasPermissionToEdit={hasPermissionToEdit}
 						filteredSpectators={filteredSpectators}
 						tagOptions={tagOptions}
-						support_agent_id={support_agent_id}
+						supportAgentId={supportAgentId}
 						showBotMessages={showBotMessages}
 						userId={userId}
 						requestForAssignChat={requestForAssignChat}
@@ -222,36 +215,14 @@ function Messages({
 					)}
 				</div>
 			</div>
-
-			{openModal?.type && ActiveModalComp && (
-				<Modal
-					size={modalSize}
-					show
-					onClose={closeModal}
-					placement="center"
-					className={styles.styled_ui_modal_container}
-				>
-					{name && (
-						<Modal.Header
-							title={(
-								<div className={styles.modal_header_title}>
-									{img && <img src={img} alt="logo" />}
-									<div className={styles.modal_title}>
-										{name}
-									</div>
-								</div>
-							)}
-						/>
-					)}
-					<ActiveModalComp
-						data={openModal?.data || {}}
-						activeMessageCard={activeTab?.data}
-						assignLoading={assignLoading}
-						loading={loading}
-						viewType={viewType}
-					/>
-				</Modal>
-			)}
+			<MessageModals
+				openModal={openModal}
+				closeModal={closeModal}
+				activeTab={activeTab}
+				loading={loading}
+				assignLoading={assignLoading}
+				viewType={viewType}
+			/>
 		</>
 	);
 }

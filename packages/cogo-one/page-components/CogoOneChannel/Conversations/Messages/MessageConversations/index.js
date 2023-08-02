@@ -23,6 +23,7 @@ function MessageConversations({
 	scrollToLastMessage = () => {},
 	setMailActions = () => {},
 	mailActions = {},
+	firestore = {},
 }, ref) {
 	const { id = '', channel_type = '' } = activeMessageCard || {};
 
@@ -74,6 +75,10 @@ function MessageConversations({
 					activeTab={activeTab}
 					setMailActions={setMailActions}
 					mailActions={mailActions}
+					firestore={firestore}
+					scrollToBottom={scrollToLastMessage}
+					viewType={viewType}
+					ref={ref}
 				/>
 			) }
 		</div>
