@@ -13,28 +13,30 @@ import styles from './styles.module.css';
 const MAIN_SERVICES = 'air_freight_service';
 const ZERO_TAX_TOTAL = 0;
 
-const Content = ({ service = {}, invoiceAmount = '' }) => {
-	<div className={styles.service_details}>
-		<div>
-			<b>Invoice Currency: </b>
-			<span>{service?.currency}</span>
+function Content({ service = {}, invoiceAmount = '' }) {
+	return (
+		<div className={styles.service_details}>
+			<div>
+				<b>Invoice Currency: </b>
+				<span>{service?.currency}</span>
+			</div>
+
+			{service?.detail?.commodity && (
+				<div>
+					<b>Commodity: </b>
+					<span>{startCase(service?.detail?.commodity)}</span>
+				</div>
+			)}
+
+			{invoiceAmount && (
+				<div>
+					<b>Invoice Amount: </b>
+					<span>{invoiceAmount}</span>
+				</div>
+			)}
 		</div>
-
-		{service?.detail?.commodity && (
-			<div>
-				<b>Commodity: </b>
-				<span>{startCase(service?.detail?.commodity)}</span>
-			</div>
-		)}
-
-		{invoiceAmount && (
-			<div>
-				<b>Invoice Amount: </b>
-				<span>{invoiceAmount}</span>
-			</div>
-		)}
-	</div>;
-};
+	);
+}
 
 function SelectService({
 	invoice = {},
@@ -78,10 +80,12 @@ function SelectService({
 
 			const serviceName = service?.service_name || service?.service_type;
 
+			const serviceCode = service?.detail?.code;
+
 			const serviceType = service?.service_type === 'shipment'
 				? 'Convenience Fees'
 				: `${tradeType} ${startCase(serviceName)} ${service?.is_igst ? '(IGST)' : ''} ${isBas
-					&& !service?.is_igst ? '(BAS)' : ''}`;
+					&& !service?.is_igst ? '(BAS)' : ''} ${serviceCode ? `(${serviceCode})` : ''}`;
 
 			const servicesToPush = {
 				label: (

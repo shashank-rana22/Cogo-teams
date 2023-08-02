@@ -39,10 +39,12 @@ const formatIps = (ips) => {
 				address,
 			},
 			services: (services || []).map((service) => ({
-				service_type : service?.service_type,
-				service_id   : service?.service_id,
-				trade_type   : service?.trade_type,
-				display_name : service?.service_type === 'shipment'
+				subsidiary_service_type : service?.detail?.service_type,
+				charge_code             : service?.detail?.code,
+				service_type            : service?.service_type,
+				service_id              : service?.service_id,
+				trade_type              : service?.trade_type,
+				display_name            : service?.service_type === 'shipment'
 					? 'Convenience Fees'
 					: service?.display_name,
 				serviceKey : service?.serviceKey,

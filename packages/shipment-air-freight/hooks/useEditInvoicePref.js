@@ -131,19 +131,18 @@ const useEditInvoicePref = ({
 					);
 
 					let serviceType = currentService?.service_type;
-					if (currentService?.service_type === 'trailer_freight_service') {
-						serviceType = 'haulage_freight_service';
-					}
+
 					if (isEmpty(currentService?.service_type)) {
 						serviceType = itemsService?.service_type;
 					}
 
 					return {
-						serviceKey   : service,
-						is_igst      : itemsService?.is_igst || null,
-						service_type : serviceType,
-						service_id   : currentService?.id || itemsService?.service_id,
-						trade_type   : currentService?.trade_type || itemsService?.trade_type,
+						subsidiary_service_type : itemsService?.detail?.service_type,
+						serviceKey              : service,
+						is_igst                 : itemsService?.is_igst || null,
+						service_type            : serviceType,
+						service_id              : currentService?.id || itemsService?.service_id,
+						trade_type              : currentService?.trade_type || itemsService?.trade_type,
 						display_name:
 							itemsService?.service_type === 'shipment'
 								? 'Convenience Fees'
