@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/supply-forecast/page-components/';
+export { default } from '@cogoport/supply-forecast/page-components/SupplyForecast/';

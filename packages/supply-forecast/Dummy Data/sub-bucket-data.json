@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "actions": "Action 1",
+    "service_provider": "Provider A",
+    "promised": 10,
+    "capability": 15,
+    "allocated": 8,
+    "fulfilled": 5,
+    "avg_deviation": 1.5,
+    "avg_rank": 4.2
+  },
+  {
+    "id": 2,
+    "actions": "Action 2",
+    "service_provider": "Provider B",
+    "promised": 8,
+    "capability": 12,
+    "allocated": 6,
+    "fulfilled": 4,
+    "avg_deviation": 0.8,
+    "avg_rank": 4.8
+  },
+  {
+    "id": 3,
+    "actions": "Action 3",
+    "service_provider": "Provider C",
+    "promised": 12,
+    "capability": 20,
+    "allocated": 10,
+    "fulfilled": 8,
+    "avg_deviation": 1.2,
+    "avg_rank": 3.9
+  }
+]

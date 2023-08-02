@@ -1,0 +1,27 @@
+[
+    {
+      "id": "sme",
+      "label": "SME",
+      "value": 448,
+      "color":"hsl(233, 44%, 96%)"
+    },
+    {
+      "id": "mid_size",
+      "label": "MID SIZE",
+      "value": 508,
+      "color": "hsl(234, 46%, 87%)"
+    },
+    {
+      "id": "long_tail",
+      "label": "LONG TILE",
+      "value": 344,
+      "color": "hsl(235, 48%, 82%)"
+    },
+    {
+      "id": "enterprise",
+      "label": "EnterPrise (310 TEU)",
+      "value": 78,
+      "color":  "hsl(234, 32%, 70%)"
+    }
+  ]
+  

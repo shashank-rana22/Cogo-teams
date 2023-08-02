@@ -1,0 +1,25 @@
+.location_container {
+	display: flex;
+	gap: 30px;
+	align-items: center;
+	margin-top: 30px;
+}
+
+.select_controller {
+	display: flex;
+	flex-direction: column;
+
+	:global {
+		.ui_select_container {
+			width: 350px;
+		}
+	}
+}
+
+.location_label {
+	margin-bottom: 6px;
+}
+
+.port_arrow_icon {
+	margin-top: 30px;
+}
