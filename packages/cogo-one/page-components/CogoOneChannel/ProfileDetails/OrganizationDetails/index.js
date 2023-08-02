@@ -161,7 +161,7 @@ function OrganizationDetails({
 							</Pill>
 						) : null }
 
-						{!hideCpButton && !orgLoading && (
+						{!hideCpButton && !orgLoading && organizationId && (
 							<Button
 								size="sm"
 								themeType="primary"
@@ -220,34 +220,39 @@ function OrganizationDetails({
 				</>
 			)}
 
-			<div className={styles.agent_title}>User Reedemable Cogopoints</div>
-			<div className={styles.points}>
-				<div className={styles.cogo_icon}>
-					<IcCCogoCoin className={styles.cogocoins_icon} />
-				</div>
+			{organizationId ? (
+				<>
+					<div className={styles.agent_title}>User Reedemable Cogopoints</div>
+					<div className={styles.points}>
+						<div className={styles.cogo_icon}>
+							<IcCCogoCoin className={styles.cogocoins_icon} />
+						</div>
 
-				<div className={styles.cogopoints}>Cogopoints : </div>
-				{pointLoading ? (
-					<Placeholder
-						height="18px"
-						width="35px"
-						margin="0px 0px 0px 8px"
-					/>
-				) : (
-					<div className={styles.value}>{total_redeemable || '0'}</div>
-				)}
-			</div>
-			<div className={styles.agent_title}>Available Promocodes</div>
+						<div className={styles.cogopoints}>Cogopoints : </div>
+						{pointLoading ? (
+							<Placeholder
+								height="18px"
+								width="35px"
+								margin="0px 0px 0px 8px"
+							/>
+						) : (
+							<div className={styles.value}>{total_redeemable || '0'}</div>
+						)}
+					</div>
 
-			{promoLoading ? (
-				<div className={styles.loader_div}>
-					<Loader themeType="primary" />
-				</div>
-			) : (
-				<ListPromos list={list} />
-			)}
+					<div className={styles.agent_title}>Available Promocodes</div>
 
-			<QuotationDetails organizationId={organizationId} />
+					{promoLoading ? (
+						<div className={styles.loader_div}>
+							<Loader themeType="primary" />
+						</div>
+					) : (
+						<ListPromos list={list} />
+					)}
+
+					<QuotationDetails organizationId={organizationId} />
+				</>
+			) : null}
 		</div>
 	);
 }

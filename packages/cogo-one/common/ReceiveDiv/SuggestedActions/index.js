@@ -27,6 +27,8 @@ function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} })
 		mobile_no,
 		organization_id,
 		lead_user_id,
+		lead_user_details = {},
+		user_details = {},
 	} = formattedData;
 
 	const ACTIVE_CARD_DATA = {
@@ -36,14 +38,17 @@ function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} })
 	};
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
+	const userMobileNumber = mobile_no || user_details?.whatsapp_number_eformat
+	|| user_details?.mobile_number_eformat || lead_user_details?.whatsapp_number_eformat
+	|| lead_user_details?.mobile_number_eformat;
 
-	const code = mobile_no?.slice(COUNTRY_CODE_START, COUNTRY_CODE_END);
-	const number = mobile_no?.slice(COUNTRY_CODE_END);
+	const code = userMobileNumber?.slice(COUNTRY_CODE_START, COUNTRY_CODE_END);
+	const number = userMobileNumber?.slice(COUNTRY_CODE_END);
 
 	const { userData = {} } = useGetUser({ userId: user_id, lead_user_id, customerId: id });
 
 	const handleCall = () => {
-		if (mobile_no && hasVoiceCallAccess) {
+		if (userMobileNumber && hasVoiceCallAccess) {
 			dispatch(
 				setProfileState({
 					is_in_voice_call          : true,
@@ -81,7 +86,7 @@ function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} })
 	};
 
 	const handleSendTemplate = () => {
-		if (!mobile_no) {
+		if (!userMobileNumber) {
 			return;
 		}
 		setModalType('whatsapp');
@@ -95,13 +100,13 @@ function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} })
 		{
 			label     : 'Call',
 			action    : handleCall,
-			disabled  : !mobile_no || !hasVoiceCallAccess,
+			disabled  : !userMobileNumber || !hasVoiceCallAccess,
 			accessKey : 'new_call',
 		},
 		{
 			label     : 'Message on WhatsApp',
 			action    : handleSendTemplate,
-			disabled  : !mobile_no,
+			disabled  : !userMobileNumber,
 			accessKey : 'new_whatsapp',
 		},
 		{
