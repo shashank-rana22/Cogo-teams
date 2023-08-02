@@ -8250,10 +8250,36 @@ const partner = {
 			module       : 'Expenses',
 			service_name : 'vendor',
 		},
+		{
+			api         : 'get_purchase_expense_expense_category',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_configuration_by_id',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_by_id',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
+		{
+			api         : 'get_incident_management_incident_get_incident_approval_management',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
 	],
 	my_incident: [
 		{
 			api         : 'get_incident_management_incident_list',
+			access_type : 'private',
+			module      : 'myIncident',
+			feature     : 'myIncident',
+		},
+		{
+			api         : 'get_incident_management_incident_list_my_incident',
 			access_type : 'private',
 			module      : 'myIncident',
 			feature     : 'myIncident',
@@ -8732,6 +8758,42 @@ const partner = {
 		},
 		{
 			api         : 'post_payments_journal_voucher_reject',
+			access_type : 'private',
+		},
+		{
+			api         : 'list_partner_users',
+			access_type : 'private',
+		},
+		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_incident_management_incident_incident_sub_type',
+			access_type : 'private',
+		},
+		{
+			api         : 'patch_incident_management_incident_by_id',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_incident_management_incident_approval',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_incident_management_incident_approval_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_incident_management_incident_approval',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_purchase_expense_expense_configuration_by_id',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_incident_management_incident_send_overhead_mail',
 			access_type : 'private',
 		},
 	],
@@ -10341,8 +10403,8 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api        	 : 'create_campaign_email_configuration',
-			access_type	 : 'private',
+			api          : 'create_campaign_email_configuration',
+			access_type  : 'private',
 			service_name : 'campaign',
 		},
 		{

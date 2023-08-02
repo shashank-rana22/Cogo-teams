@@ -1,4 +1,7 @@
 import { useFieldArray, useForm } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import StyledTable from '../../../commons/StyledTable';
@@ -9,19 +12,21 @@ import styles from './styles.module.css';
 import TotalAfterTax from './TotalAfterTax';
 import TotalColumn from './TotalColumn';
 
-function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
+const PERCENTAGE = 100;
+
+const DEFAULT_LEN = 0;
+
+function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions, isTaxApplicable = true }) {
 	const { invoiceCurrency = '', lineItemsList:lineItemsListData = [] } = formData || {};
 	const { lineItemsList, loading } = useGetListItemTaxes({ formData });
 	const rest = { loading };
-	const { control, watch, setValue } = useForm(
-		{
-			defaultValues: {
-				line_items: lineItemsListData.length > 0 ? lineItemsListData : [
-					{ new: true, price: 0, quantity: 0 },
-				],
-			},
+	const { control, watch, setValue } = useForm({
+		defaultValues: {
+			line_items: !isEmpty(lineItemsListData)
+				? lineItemsListData
+				: [{ new: true, price: 0, quantity: 0 }],
 		},
-	);
+	});
 
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -29,20 +34,21 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 	});
 
 	useEffect(() => {
-		const taxList = [];
-		if (lineItemsList?.length > 0) {
+		const TAX_LIST = [];
+		if (!isEmpty(lineItemsList)) {
 			lineItemsList.forEach((item) => {
-				taxList.push({
+				TAX_LIST.push({
 					label : `${item?.taxPercent}%-${item?.itemName}`,
 					value : JSON.stringify(item),
 				});
 			});
-			setTaxOptions([...taxList]);
+			setTaxOptions([...TAX_LIST]);
 		}
 	}, [lineItemsList, setTaxOptions]);
 
 	const watchFieldArray = watch('line_items');
-	const controlledFields = fields.map((field:any, index:number) => ({
+	const geo = getGeoConstants();
+	const controlledFields = fields.map((field: any, index: number) => ({
 		...field,
 		...watchFieldArray[index],
 	}));
@@ -50,10 +56,13 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 	const stringifiedControlledFields = JSON.stringify(controlledFields);
 
 	useEffect(() => {
-		if (watchFieldArray?.length > 0) {
-			setFormData((prev:object) => ({ ...prev, lineItemsList: watchFieldArray }));
+		if (!isEmpty(watchFieldArray)) {
+			setFormData((prev: object) => ({
+				...prev,
+				lineItemsList: watchFieldArray,
+			}));
 		}
-		const fieldsLength = (controlledFields).length || 0;
+		const fieldsLength = controlledFields.length || DEFAULT_LEN;
 		const mappingArray = Array(fieldsLength)?.fill('value');
 
 		mappingArray?.forEach((item, index) => {
@@ -61,18 +70,50 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 			const tax = watch(`line_items.${index}.tax`);
 
 			if (tax) {
-				const taxPercent = JSON.parse(tax || '')?.taxPercent;
+				const taxPercent = JSON.parse(tax || '')?.taxPercent || 0;
 				if (beforeTax && +taxPercent >= 0) {
-					const amountAfterTax = beforeTax + (beforeTax * (taxPercent / 100));
-					setValue(`line_items.${index}.amount_after_tax`, +amountAfterTax);
+					const amountAfterTax =						beforeTax + beforeTax * (taxPercent / PERCENTAGE);
+					setValue(
+						`line_items.${index}.amount_after_tax`,
+						+amountAfterTax,
+					);
 					const tds = +watch(`line_items.${index}.tds`);
-					if (tds >= 0) { setValue(`line_items.${index}.payable_amount`, +amountAfterTax - tds); }
+					if (
+						geo.navigations.over_heads
+							.expense_non_recurring_upload_invoice_tds
+					) {
+						setValue(
+							`line_items.${index}.payable_amount`,
+							+amountAfterTax,
+						);
+					} else if (
+						!geo.navigations.over_heads
+							.expense_non_recurring_upload_invoice_tds
+						&& tds >= GLOBAL_CONSTANTS.zeroth_index
+					) {
+						setValue(
+							`line_items.${index}.payable_amount`,
+							+amountAfterTax - (beforeTax * tds) / PERCENTAGE,
+						);
+						setValue(
+							`line_items.${index}.tdsAmount`,
+							(beforeTax * tds) / PERCENTAGE,
+						);
+					}
 				}
 			}
 		});
-	}, [setFormData, setValue, watchFieldArray, watch, controlledFields?.length, stringifiedControlledFields]);
+	}, [
+		setFormData,
+		setValue,
+		watchFieldArray,
+		watch,
+		controlledFields?.length,
+		stringifiedControlledFields,
+		geo,
+	]);
 
-	const getSum = (columnName:string) => {
+	const getSum = (columnName: string) => {
 		const sum = watchFieldArray?.reduce((acc, curr) => {
 			const columnVal = curr?.[columnName];
 			if (!Number.isNaN(+columnVal)) {
@@ -102,23 +143,29 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 
 	useEffect(() => {
 		if (payableAmount) {
-			setFormData((prev:object) => ({ ...prev, payableAmount }));
+			setFormData((prev: object) => ({ ...prev, payableAmount }));
 		}
 	}, [payableAmount, setFormData]);
+
+	const hideTdsColumn =		geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds;
+
+	const modifiedColumns = lineItemColumns({
+		remove,
+		control,
+		taxOptions,
+		formData,
+		isTaxApplicable,
+	}).filter((column) => column.id !== 'tds' || !hideTdsColumn);
 
 	return (
 		<div className={styles.section}>
 			<form className={styles.container}>
 				<StyledTable
-					columns={lineItemColumns({
-						remove, control, taxOptions, formData,
-					})}
+					columns={modifiedColumns}
 					data={controlledFields}
-					style={{ margin: '0px' }}
 					imageFind=""
 					{...rest}
 				/>
-
 				<TotalColumn
 					append={append}
 					totalAmountBeforeTax={totalAmountBeforeTax}

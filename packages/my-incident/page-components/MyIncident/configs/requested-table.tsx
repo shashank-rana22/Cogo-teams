@@ -1,4 +1,6 @@
-import { format, getByKey, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { getByKey, startCase } from '@cogoport/utils';
 
 import CompanyName from '../accessorComponent/CompanyName';
 import DeleteModal from '../accessorComponent/DeleteModal';
@@ -41,6 +43,11 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refe
 		),
 	},
 	{
+		Header   : 'REQUEST SUB TYPE',
+		accessor : 'incidentSubtype',
+		id       : 'request_sub_type',
+	},
+	{
 		Header:
 	<div>
 		<SortData isSortActive={isSortActive} setIsSortActive={setIsSortActive} setGlobalFilters={setGlobalFilters} />
@@ -50,8 +57,21 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refe
 			const { createdAt } = row;
 			return (
 				<div>
-					{format(createdAt, 'dd MMM YYYY', {}, false)}
-					<div>{format(createdAt, 'hh:mm a', {}, false)}</div>
+					{formatDate({
+						date: createdAt,
+						dateFormat:
+							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'date',
+					})}
+					<div>
+						{formatDate({
+							date: createdAt,
+							timeFormat:
+								GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType: 'time',
+						})}
+					</div>
 				</div>
 			);
 		},

@@ -1,122 +1,93 @@
-/* eslint-disable react/jsx-indent */
-import { Placeholder } from '@cogoport/components';
+import { Textarea } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
-import { formatDate } from '../../../../commons/utils/formatDate';
-import useGetStakeholders from '../../hooks/useGetStakeholders';
-import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
 
 interface Entity {
-	entity_code?: number | string,
+	entity_code?: number | string;
+	id?: string;
 }
 
-interface Summary {
-	title?: string,
-	value?: any,
+function RenderSummaryData({ summary = [] }) {
+	return (
+		<div style={{ display: 'flex' }}>
+			{summary?.map((item) => (
+				<div key={item.title} className={styles.section}>
+					<div className={styles.title}>{item.title}</div>
+					<div className={styles.value}>{item.value}</div>
+				</div>
+			))}
+		</div>
+	);
 }
 
 interface Data {
-	vendorName?: string,
-	transactionDate?: Date,
-	paymentMode?: string,
-	uploadedInvoice?: string,
-	periodOfTransaction?: string,
-	expenseCategory?: string,
-	expenseSubCategory?: string,
-	branch?: string,
-	entityObject?: Entity,
-	invoiceDate?: Date,
-	totalPayable?: number | string,
-	stakeholderName?: string,
-	invoiceCurrency?: string,
-	vendorID?: number | string,
-	payableAmount?: number,
+	vendorName?: string;
+	transactionDate?: Date;
+	paymentMode?: string;
+	uploadedInvoice?: string;
+	periodOfTransaction?: string;
+	expenseCategory?: string;
+	expenseSubCategory?: string;
+	branch?: string;
+	entityObject?: Entity;
+	invoiceDate?: Date;
+	totalPayable?: number | string;
+	stakeholderName?: string;
+	invoiceCurrency?: string;
+	vendorID?: number | string;
+	payableAmount?: number;
+	remarks?: string;
+	categoryName?: string;
 }
 
 interface Props {
-	nonRecurringData?: Data,
-	setNonRecurringData?: (obj) => void,
+	nonRecurringData?: Data;
+	setNonRecurringData?: (obj) => void;
+	tradePartyData?: object;
 }
 
-function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
-	const {
-		periodOfTransaction,
-		vendorName,
-		expenseCategory,
-		expenseSubCategory,
-		branch,
-		paymentMode,
-		entityObject,
-		invoiceDate,
-		transactionDate,
-		uploadedInvoice,
-		payableAmount,
-		stakeholderName,
-		invoiceCurrency,
-		vendorID,
-	} = nonRecurringData || {};
+const MAX_LENGTH = 18;
 
-	const { stakeholdersData, loading: stakeholderLoading } = useGetStakeholders(expenseCategory);
-	const { tradePartyData } = useGetTradePartyDetails(vendorID);
-
-	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
-	const filename = splitArray[splitArray.length - 1];
-
-	useEffect(() => {
-		if (stakeholdersData) {
-			const { userEmail, userId, userName } = stakeholdersData || {};
-			setNonRecurringData((prev: object) => ({
-				...prev,
-				stakeholderEmail : userEmail,
-				stakeholderId    : userId,
-				stakeholderName  : userName,
-			}));
-		}
-	}, [stakeholdersData, setNonRecurringData]);
-
-	useEffect(() => {
-		if (tradePartyData?.length > 0) {
-			setNonRecurringData((prev: object) => ({
-				...prev,
-				tradeParty: tradePartyData?.[0],
-			}));
-		}
-	}, [tradePartyData, setNonRecurringData]);
-
-	const summaryDataFirst = [
-		{
-			title : 'Vendor Name',
-			value : vendorName ? showOverflowingNumber(vendorName, 18) : '-',
-		},
-		{
-			title : 'Expense Category',
-			value : expenseCategory ? (showOverflowingNumber(startCase(expenseCategory), 18)) : '-',
-		},
-		{
-			title : 'Expense Sub-Category',
-			value : expenseSubCategory ? showOverflowingNumber(
-				startCase(expenseSubCategory.replaceAll('_', ' ')),
-				18,
-			) : '-',
-		},
-		{
-			title : 'Entity',
-			value : entityObject?.entity_code || '-',
-		},
-		{
-			title : 'Branch ',
-			value : branch ? showOverflowingNumber(JSON.parse(branch)?.name, 18) : '-',
-		},
-	];
-	const summaryDataSecond = [
-		{
-			title : 'Payable Amount',
-			value : <div>
+const summaryDataOne = ({ vendorName, categoryName, entityObject, branch }) => [
+	{
+		title : 'Vendor Name',
+		value : vendorName ? showOverflowingNumber(vendorName, MAX_LENGTH) : '-',
+	},
+	{
+		title : 'Expense Category',
+		value : categoryName
+			? showOverflowingNumber(startCase(categoryName), MAX_LENGTH)
+			: '-',
+	},
+	{
+		title : 'Entity',
+		value : entityObject?.entity_code || '-',
+	},
+	{
+		title : 'Branch ',
+		value : branch
+			? showOverflowingNumber(JSON.parse(branch)?.name, MAX_LENGTH)
+			: '-',
+	},
+];
+const summaryDataTwo = ({
+	payableAmount,
+	invoiceCurrency,
+	invoiceDate,
+	transactionDate,
+	periodOfTransaction,
+}) => [
+	{
+		title : 'Payable Amount',
+		value : (
+			<div>
 				{formatAmount({
 					amount   : payableAmount as any,
 					currency : invoiceCurrency,
@@ -125,78 +96,160 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 						currencyDisplay : 'code',
 					},
 				}) || '-'}
-           </div>,
-		},
-		{
-			title : 'Expense Date',
-			value : <div>
+			</div>
+		),
+	},
+	{
+		title : 'Expense Date',
+		value : (
+			<div>
 				{invoiceDate
-					? formatDate(invoiceDate, 'dd/MMM/yy', {}, false) : '-'}
-           </div>,
-		},
-		{
-			title : 'Transaction Date',
-			value : <div>
+					? formatDate({
+						date: invoiceDate,
+						dateFormat:
+								GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+						formatType: 'date',
+					})
+					: '-'}
+			</div>
+		),
+	},
+	{
+		title : 'Transaction Date',
+		value : (
+			<div>
 				{transactionDate
-					? formatDate(transactionDate, 'dd/MMM/yy', {}, false) : '-'}
-
-           </div>,
-		},
-		{
-			title : 'Period',
-			value : <div>
+					? formatDate({
+						date: transactionDate,
+						dateFormat:
+								GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+						formatType: 'date',
+					})
+					: '-'}
+			</div>
+		),
+	},
+	{
+		title : 'Period',
+		value : (
+			<div>
 				{periodOfTransaction ? startCase(periodOfTransaction) : '-'}
 				{' '}
-           </div>,
-		},
-		{
-			title : 'Payment Mode ',
-			value : startCase(paymentMode || '') || '-',
-		},
-	];
-	const summaryDataThird = [
-		{
-			title : 'To be Approved by',
-			value : stakeholderLoading ? <Placeholder height="20px" width="150px" />
-				: startCase(stakeholderName || '') || '-',
-		},
-		{
-			title : 'Uploaded Documents',
-			value : <div>
-				{uploadedInvoice
-					? (
-						<a
-							href={uploadedInvoice}
-							style={{ color: 'blue', textDecoration: 'underline', fontSize: '16px' }}
-							target="_blank"
-							rel="noreferrer"
-						>
-							{showOverflowingNumber(filename, 20)}
-						</a>
-					)
-					: '-'}
-           </div>,
-		},
-	];
+			</div>
+		),
+	},
+];
+const summaryDataThree = ({ uploadedInvoice, filename, paymentMode }) => [
+	{
+		title : 'Uploaded Documents',
+		value : (
+			<div>
+				{uploadedInvoice ? (
+					<a
+						href={uploadedInvoice}
+						style={{
+							color          : 'blue',
+							textDecoration : 'underline',
+							fontSize       : '16px',
+						}}
+						target="_blank"
+						rel="noreferrer"
+					>
+						{showOverflowingNumber(filename, 20)}
+					</a>
+				) : (
+					'-'
+				)}
+			</div>
+		),
+	},
+	{
+		title : 'Payment Mode ',
+		value : startCase(paymentMode || '') || '-',
+	},
+];
 
-	const renderSummaryData = (summary: Summary[]) => (
-		<div style={{ display: 'flex' }}>
-			{summary?.map((item: Summary) => (
-				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item.title}</div>
-					<div className={styles.value}>{item.value}</div>
-				</div>
-			))}
-		</div>
-	);
+const summeryMappings = ({
+	summaryDataFirst,
+	summaryDataSecond,
+	summaryDataThird,
+}) => [
+	{ key: '1', val: summaryDataFirst },
+	{ key: '2', val: summaryDataSecond },
+	{ key: '3', val: summaryDataThird },
+];
 
+function NonRecurringSummary({
+	nonRecurringData = {},
+	setNonRecurringData = () => {},
+	tradePartyData = {},
+}: Props) {
+	const {
+		periodOfTransaction,
+		vendorName,
+		branch,
+		paymentMode,
+		entityObject,
+		invoiceDate,
+		transactionDate,
+		uploadedInvoice,
+		payableAmount,
+		invoiceCurrency,
+		categoryName,
+	} = nonRecurringData || {};
+
+	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
+	const filename = splitArray[splitArray.length - 1];
+
+	useEffect(() => {
+		if (!isEmpty(tradePartyData)) {
+			setNonRecurringData((prev: object) => ({
+				...prev,
+				tradeParty: tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index],
+			}));
+		}
+	}, [tradePartyData, setNonRecurringData]);
+
+	const summaryDataFirst = summaryDataOne({
+		vendorName,
+		categoryName,
+		entityObject,
+		branch,
+	});
+	const summaryDataSecond = summaryDataTwo({
+		payableAmount,
+		invoiceCurrency,
+		invoiceDate,
+		transactionDate,
+		periodOfTransaction,
+	});
+
+	const summaryDataThird = summaryDataThree({
+		uploadedInvoice,
+		filename,
+		paymentMode,
+	});
+
+	const summeryMapping = summeryMappings({
+		summaryDataFirst,
+		summaryDataSecond,
+		summaryDataThird,
+	});
 	return (
 		<div className={styles.container}>
 			<div>Confirm Expense Details</div>
 			<div className={styles.header} />
-			{renderSummaryData(summaryDataFirst)}
-			{renderSummaryData(summaryDataSecond)}
-			{renderSummaryData(summaryDataThird)}
+			{summeryMapping.map(({ key, val }) => (
+				<RenderSummaryData key={key} summary={val} />
+			))}
+			<div className={styles.textarea}>
+				<Textarea
+					value={nonRecurringData?.remarks}
+					onChange={(e) => setNonRecurringData({ ...nonRecurringData, remarks: e })}
+					size="lg"
+					placeholder="Reason..."
+				/>
+			</div>
 		</div>
 	);
 }
