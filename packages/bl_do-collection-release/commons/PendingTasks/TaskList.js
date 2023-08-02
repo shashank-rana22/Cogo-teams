@@ -1,6 +1,6 @@
 import { Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import EmptyState from '../EmptyState';
 
@@ -27,7 +27,7 @@ function PendingTasks({
 		);
 	}
 
-	if (taskList.length === 0) {
+	if (taskList.length === GLOBAL_CONSTANTS.zeroth_index) {
 		return (
 			<div>
 				<EmptyState
@@ -47,14 +47,14 @@ function PendingTasks({
 					index={index}
 					handleClick={setSelectedTask}
 					refetch={refetchForTask}
-					key={uuid()}
+					key={task.id}
 				/>
 			))}
 		</div>
 	) : (
 		<Task
+			shipment_data={item}
 			task={selectedTask}
-			shipment_data={{ id: item?.id }}
 			shipment_type={shipment_type}
 			onCancel={handleAccordionOpen}
 			refetch={refetchForTask}
