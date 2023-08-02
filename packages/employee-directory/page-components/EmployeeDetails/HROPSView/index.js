@@ -36,7 +36,7 @@ function HROPSView({
 		name, employee_code, cogoport_email, designation, department,
 		reporting_manager_id, office_location, squad_id, tribe_id, sub_chapter_id,
 		chapter_id, li, pi, date_of_joining, resignation_date, cfpl_joining_date, id,
-		employee_tags, employee_status, payroll_country_id,
+		employee_tags, employee_status, payroll_country_id, hrbp_id,
 	} = employeeDetails || {};
 
 	const { lwp, absconding, is_resigned } = employee_tags || {};
@@ -53,6 +53,7 @@ function HROPSView({
 			squad_id,
 			tribe_id,
 			sub_chapter_id,
+			hrbp_id,
 			chapter_id,
 			payroll_country_id,
 			li,
@@ -63,12 +64,12 @@ function HROPSView({
 			cfpl_joining_date : cfpl_joining_date && new Date(cfpl_joining_date),
 			cogo_freight      : cfpl_joining_date ? 'true' : 'false',
 			lwp               : lwp ? 'true' : 'false',
-			employee_status   : is_resigned ? 'notice' : employee_status.toLowerCase(),
+			employee_status   : is_resigned ? 'notice' : employee_status?.toLowerCase(),
 		});
 	}, [absconding, cfpl_joining_date, chapter_id, cogoport_email, date_of_joining,
 		department, designation, employeeDetails, employee_code, li, name, office_location, pi, reporting_manager_id,
 		resignation_date, setValues, squad_id, sub_chapter_id, tribe_id, lwp, employee_status,
-		is_resigned, payroll_country_id]);
+		is_resigned, payroll_country_id, hrbp_id]);
 
 	const onSubmit = (values) => {
 		const { employee_status : employeeStatus } = values;

@@ -150,6 +150,22 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			disabled: !isEditable,
 		},
 		{
+			name        : 'hrbp_id',
+			controlType : 'asyncSelect',
+			asyncKey    : 'partner_users_ids',
+			label       : 'HRBP',
+			placeholder : 'HRBP',
+			params      : {
+				filters: {
+					status               : 'active',
+					partner_entity_types : ['cogoport'],
+				},
+				page_limit: 100,
+			},
+			initialCall : true,
+			disabled    : !isEditable,
+		},
+		{
 			name        : 'squad_id',
 			label       : 'Select Squad',
 			controlType : 'asyncSelect',
