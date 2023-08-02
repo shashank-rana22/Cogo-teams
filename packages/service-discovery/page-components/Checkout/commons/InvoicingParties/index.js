@@ -14,6 +14,7 @@ function InvoicingParties({
 	const {
 		rate,
 		detail = {},
+		activated_on_paylater = {},
 	} = useContext(CheckoutContext);
 
 	const { services = {} } = detail;
@@ -27,14 +28,13 @@ function InvoicingParties({
 		loading = false,
 		editInvoice,
 		setEditInvoice,
-		paymentModes,
 		getCheckoutInvoices,
 		editInvoiceDetails,
 		setEditInvoiceDetails,
 		allServices,
 		paymentModeValuesObj,
 		paymentModesLoading = false,
-	} = useInvoicingParties({ detail, setInvoicingParties, invoicingParties });
+	} = useInvoicingParties({ detail, setInvoicingParties, invoicingParties, activated_on_paylater });
 
 	const {
 		updateCheckoutInvoice,
@@ -57,7 +57,6 @@ function InvoicingParties({
 				setEditInvoice={setEditInvoice}
 				services={selectedServices}
 				rate={rate}
-				paymentModes={paymentModes}
 				getCheckoutInvoices={getCheckoutInvoices}
 				updateCheckoutInvoice={updateCheckoutInvoice}
 				updateLoading={updateLoading}

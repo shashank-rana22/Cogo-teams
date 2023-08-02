@@ -1,17 +1,54 @@
+// import { Checkbox } from '@cogoport/components';  //commented for now, may use in future
 import { ChipsController } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../../../commons/forms/getElementController';
 
-import controls from './controls';
+import getControls from './controls';
 import styles from './styles.module.css';
 
-function ShippingPreferences({ formProps = {}, primaryService = {} }) {
+function ShippingLineLabel({
+	label = '',
+	name = '',
+	// setIsAllShippingLinesRequired = () => {},
+	// isAllShippingLinesRequired = false,
+	// updateLoading = false,
+}) {
+	if (name !== 'preferred_shipping_line_ids') {
+		return <div className={styles.label}>{label}</div>;
+	}
+
+	return (
+		<div className={styles.flex_row}>
+			<div className={styles.label}>{label}</div>
+			{/*
+			<Checkbox
+				checked={isAllShippingLinesRequired}
+				onChange={() => {
+					setIsAllShippingLinesRequired((prev) => !prev);
+				}}
+				label="All"
+				loading={updateLoading}
+			/> */}
+		</div>
+	);
+}
+
+function ShippingPreferences({
+	formProps = {},
+	primaryService = {},
+	search_id = '',
+	setIsAllShippingLinesRequired = () => {},
+	isAllShippingLinesRequired = false,
+	updateLoading = false,
+}) {
 	const {
 		control,
 		formState: { errors = {} },
 		setValue,
 	} = formProps;
+
+	const controls = getControls({ search_id });
 
 	const { shipping_preferences = {} } = primaryService;
 
@@ -87,7 +124,13 @@ function ShippingPreferences({ formProps = {}, primaryService = {} }) {
 
 					return (
 						<div key={name} className={styles.item_container} style={style}>
-							<div className={styles.label}>{label}</div>
+							<ShippingLineLabel
+								name={name}
+								updateLoading={updateLoading}
+								setIsAllShippingLinesRequired={setIsAllShippingLinesRequired}
+								isAllShippingLinesRequired={isAllShippingLinesRequired}
+								label={label}
+							/>
 
 							<Element {...controlItem} control={control} />
 

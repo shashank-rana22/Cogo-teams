@@ -23,6 +23,7 @@ function HandleButtons({
 	setEditInvoiceDetails = () => {},
 	paymentModeValues = {},
 	updateLoading = false,
+	isFclInvoice = false,
 }) {
 	const IconToShow = ICON_MAPPING[isEditMode];
 
@@ -40,7 +41,7 @@ function HandleButtons({
 
 		const documentDetailsPresent = !isEmpty(
 			documentCategory || documentType || documentDeliveryMode,
-		);
+		) && isFclInvoice;
 
 		const {
 			credit_days = 0,

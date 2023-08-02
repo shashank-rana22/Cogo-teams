@@ -31,6 +31,8 @@ const CREDIT_PAYMENT_TERMS_SHORT_FORM = {
 	pre_approved_rolling_credit : 'Pre Approved Rolling Deferred Payment',
 };
 
+const DEFAULT_DOCUMENT_CATEGORY = 'mbl';
+
 const getPaymentModeLabel = ({ mode }) => {
 	if (mode === 'cash') {
 		return startCase(mode);
@@ -117,9 +119,9 @@ const getPaymentTermsLabel = ({ paymentTerm, detail }) => {
 const useGetPaymentModes = ({
 	invoicingParties,
 	detail = {},
-	paymentModes = {},
 	setEditInvoiceDetails = () => {},
 	editInvoiceDetails,
+	activated_on_paylater = {},
 }) => {
 	const {
 		services = {},
@@ -128,6 +130,7 @@ const useGetPaymentModes = ({
 		importer_exporter = {},
 		existing_shipment_id = '',
 		id:checkout_id = '',
+		risk_category = '',
 	} = detail;
 
 	const { cogo_entity_id = '' } = importer_exporter;
@@ -141,6 +144,15 @@ const useGetPaymentModes = ({
 
 	const { rate_id = '' } = rate;
 
+	const payLaterStatus = activated_on_paylater?.paylater_eligibility;
+
+	const riskParams = primary_service === 'fcl_freight' && payLaterStatus
+		? {
+			risk_category: risk_category || undefined,
+			checkout_id,
+		}
+		: {};
+
 	const params = {
 		origin_country_id      : origin_country_id || country_id,
 		destination_country_id : destination_country_id || country_id,
@@ -152,7 +164,7 @@ const useGetPaymentModes = ({
 		cogo_entity_id,
 		rate_id,
 		existing_shipment_id: existing_shipment_id || undefined,
-		checkout_id,
+		...riskParams,
 	};
 
 	const [{ data = {}, loading }] = useRequest(
@@ -172,6 +184,7 @@ const useGetPaymentModes = ({
 		documentCategory = '',
 		documentType = '',
 		documentDeliveryMode = '',
+		paymentModes = {},
 	} = editInvoiceDetails || {};
 
 	const optionsObj = Object.entries(data).reduce((acc, [orgTradePartyId, orgTradePartyData]) => {
@@ -185,7 +198,7 @@ const useGetPaymentModes = ({
 			paymentMode = 'cash',
 			paymentTerms = '',
 			paymentMethods = '',
-		} = Object.values(paymentModes).find((item) => item.organization_trade_party_id === orgTradePartyId) || {};
+		} = paymentModes;
 
 		const options = (modes || []).map((mode) => {
 			const currentPaymentModeData = orgTradePartyData[mode];
@@ -362,8 +375,13 @@ const useGetPaymentModes = ({
 							paymentModes: {
 								...(pv.paymentModes || {}),
 								...creditDetails,
-								paymentTerms   : i,
-								paymentMethods : finalPaymentMethods?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
+								paymentTerms     : i,
+								paymentMethods   : finalPaymentMethods?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
+								documentCategory : payLaterStatus?.paylater_eligibility
+								&& !isEmpty(documentCategoryPreference?.[i])
+									? documentCategoryPreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value
+								|| DEFAULT_DOCUMENT_CATEGORY
+									: undefined,
 							},
 						}));
 					},
@@ -379,8 +397,12 @@ const useGetPaymentModes = ({
 							...pv,
 							paymentModes: {
 								...(pv.paymentModes || {}),
+								...creditDetails,
 								paymentMethods: i,
+								documentCategory:
+								documentCategoryPreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
 							},
+							documentCategory: documentCategoryPreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
 						}));
 					},
 				},
@@ -447,7 +469,6 @@ const useGetPaymentModes = ({
 	return {
 		loading,
 		PAYMENT_MODES,
-		paymentModes,
 	};
 };
 

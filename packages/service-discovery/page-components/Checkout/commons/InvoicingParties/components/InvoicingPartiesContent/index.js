@@ -23,7 +23,6 @@ function InvoicingPartiesContent({
 	setEditInvoice = () => {},
 	services = [],
 	rate = {},
-	paymentModes = {},
 	getCheckoutInvoices = () => {},
 	updateCheckoutInvoice = () => {},
 	updateLoading = false,
@@ -55,7 +54,6 @@ function InvoicingPartiesContent({
 					source="checkout"
 					services={services}
 					rate={rate}
-					paymentModes={paymentModes}
 					getCheckoutInvoices={getCheckoutInvoices}
 				/>
 			</div>
@@ -100,6 +98,7 @@ function InvoicingPartiesContent({
 						allServices={allServices}
 						paymentModeValues={paymentModeValues}
 						paymentModesLoading={paymentModesLoading}
+						isFclInvoice={isFclInvoice}
 					/>
 				);
 			})}
@@ -111,7 +110,6 @@ function InvoicingPartiesContent({
 				source="checkout"
 				rate={rate}
 				services={services}
-				paymentModes={paymentModes}
 				getCheckoutInvoices={getCheckoutInvoices}
 			/>
 		</div>

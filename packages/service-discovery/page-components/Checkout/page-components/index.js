@@ -35,6 +35,7 @@ function Checkout({ checkout_type = '' }) {
 		importer_exporter_id = '',
 		isShipmentCreated = false,
 		setIsShipmentCreated = () => {},
+		redirect_required,
 	} = useCheckout({ query, entity_types, partner_id, checkout_type });
 
 	if (loading && isEmpty(data)) {
@@ -46,7 +47,7 @@ function Checkout({ checkout_type = '' }) {
 	const isCheckoutApiSuccess = !isEmpty(data);
 	const isServiceSupported = GLOBAL_CONSTANTS.s2c_supported_services.includes(primary_service);
 
-	if (!isCheckoutApiSuccess || !isServiceSupported || shipment_id) {
+	if (!isCheckoutApiSuccess || !isServiceSupported || shipment_id || !tags.includes('new_admin')) {
 		const { url = '', message = '' } = getRedirectionDetails({
 			isCheckoutApiSuccess,
 			partner_id,
@@ -55,6 +56,7 @@ function Checkout({ checkout_type = '' }) {
 			tags,
 			checkout_id: detail.id,
 			shipment_id,
+			redirect_required,
 		});
 
 		window.location.replace(url);

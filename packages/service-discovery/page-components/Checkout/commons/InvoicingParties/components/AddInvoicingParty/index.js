@@ -11,7 +11,6 @@ function AddInvoicingParty({
 	source = '',
 	services = [],
 	rate = {},
-	paymentModes = {},
 	getCheckoutInvoices = () => {},
 }) {
 	const disabledInvoicingParties = invoicingParties.map(
@@ -38,7 +37,6 @@ function AddInvoicingParty({
 					setShowAddInvoicingPartyModal={setShowAddInvoicingPartyModal}
 					services={services}
 					rate={rate}
-					paymentModes={paymentModes}
 					getCheckoutInvoices={getCheckoutInvoices}
 				/>
 			) : null}

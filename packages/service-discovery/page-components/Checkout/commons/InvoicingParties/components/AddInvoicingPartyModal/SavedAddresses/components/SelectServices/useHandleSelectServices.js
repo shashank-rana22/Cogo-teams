@@ -8,19 +8,20 @@ import getErrors from '../../../../../utils/getErrors';
 const useHandleSelectServices = ({
 	checkout_id = '',
 	getCheckoutInvoices = () => {},
-	paymentModes = {},
 	setShowAddInvoicingPartyModal = () => {},
 	setCurrentView = () => {},
 	setSelectedAddress = () => {},
 	detail = {},
 	selectedAddress = {},
+	activated_on_paylater = {},
+	isFclInvoice,
 }) => {
 	const { PAYMENT_MODES, loading } = useGetPaymentModes({
 		invoicingParties      : [selectedAddress],
 		detail,
-		paymentModes,
 		setEditInvoiceDetails : setSelectedAddress,
 		editInvoiceDetails    : selectedAddress,
+		activated_on_paylater,
 	});
 
 	const { createCheckoutInvoice, loading: createLoading } = useCreateCheckoutInvoice({
@@ -47,7 +48,7 @@ const useHandleSelectServices = ({
 
 		const documentDetailsPresent = !isEmpty(
 			documentCategory || documentType || documentDeliveryMode,
-		);
+		) && isFclInvoice;
 
 		const fcl_freight_services = {
 			bl_category      : documentCategory || undefined,

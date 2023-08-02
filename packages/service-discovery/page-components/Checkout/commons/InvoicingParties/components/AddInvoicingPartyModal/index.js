@@ -1,4 +1,4 @@
-import { Modal, Chips, Pill } from '@cogoport/components';
+import { Modal, Chips } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext } from 'react';
 
@@ -13,16 +13,8 @@ const COMPONENTS_MAPPING = {
 		component : SavedAddresses,
 	},
 	invoice_to_trade_partner: {
-		label: (
-			<div className={styles.flex}>
-				Trade Partner
-				{' '}
-				<Pill size="md" color="#DDEBC0" style={{ color: '#6c8831' }}>
-					OFFER
-				</Pill>
-			</div>
-		),
-		component: SavedAddresses,
+		label     : 'Trade Partner',
+		component : SavedAddresses,
 	},
 };
 
@@ -37,7 +29,6 @@ function AddInvoicingPartyModal({
 	source = '',
 	services = [],
 	rate = {},
-	paymentModes = {},
 	getCheckoutInvoices = () => {},
 }) {
 	const {
@@ -114,7 +105,6 @@ function AddInvoicingPartyModal({
 					setShowAddInvoicingPartyModal={setShowAddInvoicingPartyModal}
 					services={services}
 					rate={rate}
-					paymentModes={paymentModes}
 					getCheckoutInvoices={getCheckoutInvoices}
 					{...activeComponentProps}
 				/>

@@ -36,6 +36,7 @@ const useHandleBookingConfirmation = () => {
 	const [isControlBookingDetailsFilled, setIsControlBookingDetailsFilled] = useState(iscommercialInvoicePresent);
 	const [invoicingParties, setInvoicingParties] = useState([]);
 	const [isVeryRisky, setIsVeryRisky] = useState(false);
+	const [isAllShippingLinesRequired, setIsAllShippingLinesRequired] = useState(false);
 
 	const formProps = useForm();
 
@@ -99,6 +100,8 @@ const useHandleBookingConfirmation = () => {
 		setInvoicingParties,
 		isVeryRisky,
 		setIsVeryRisky,
+		isAllShippingLinesRequired,
+		setIsAllShippingLinesRequired,
 	};
 };
 

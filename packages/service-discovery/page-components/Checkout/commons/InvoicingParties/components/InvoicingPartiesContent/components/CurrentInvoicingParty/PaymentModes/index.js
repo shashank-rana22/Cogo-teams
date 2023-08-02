@@ -34,13 +34,14 @@ function PaymentModes({
 	paymentModes = [],
 	paymentModeValues = {},
 	paymentModesLoading = false,
+	isFclInvoice = false,
 }) {
 	return paymentModes.map((item) => {
 		const { label, style, name, ...restProps } = item;
 
 		const { options = [], value = '' } = restProps;
 
-		if (isEmpty(options) && DOCUMENT_HANDLING_FIELDS.includes(label)) {
+		if ((!isFclInvoice || isEmpty(options)) && DOCUMENT_HANDLING_FIELDS.includes(label)) {
 			return null;
 		}
 

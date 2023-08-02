@@ -2,22 +2,19 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import currencies from '../../../../../../helpers/currencies';
 
-const controls = [
+const getControls = ({ search_id = '' }) => [
 	{
 		label       : 'Alternate Line',
 		name        : 'preferred_shipping_line_ids',
 		type        : 'async-select',
 		multiple    : true,
+		initialCall : true,
 		placeholder : 'Select Line',
-		asyncKey    : 'list_operators',
+		asyncKey    : 'list_spot_search_operators',
 		params      : {
-			filters: {
-				operator_type : 'shipping_line',
-				status        : 'active',
-			},
-			page_limit : 100,
-			sort_by    : 'short_name',
-			sort_type  : 'asc',
+			pagination_data_required : false,
+			spot_search_id           : search_id,
+			page_limit               : 100,
 		},
 		styles: { flexBasis: '24%', paddingRight: '40px' },
 	},
@@ -66,4 +63,4 @@ const controls = [
 	},
 ];
 
-export default controls;
+export default getControls;

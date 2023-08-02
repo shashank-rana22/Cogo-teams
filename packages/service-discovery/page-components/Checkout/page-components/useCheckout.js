@@ -25,7 +25,12 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 	const [headerProps, setHeaderProps] = useState({});
 	const [isShipmentCreated, setIsShipmentCreated] = useState(false);
 
-	const { checkout_id = '', shipment_id = '', checkoutType = '' } = query;
+	const {
+		checkout_id = '',
+		shipment_id = '',
+		checkoutType = '',
+		redirect_required = 'true',
+	} = query;
 
 	const { data = {}, loading, getCheckout } = useGetCheckout({ checkout_id });
 
@@ -184,6 +189,7 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 		importer_exporter_id,
 		isShipmentCreated,
 		setIsShipmentCreated,
+		redirect_required,
 	};
 };
 
