@@ -19,6 +19,7 @@ function Footer({
 				size="md"
 				onClick={() => handleSubmitTest()}
 				themeType="accent"
+				className={styles.styledbutton}
 			>
 				Submit Test
 			</Button>

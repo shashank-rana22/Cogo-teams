@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import { Toast } from '@cogoport/components';
 import { useState, useEffect, useMemo } from 'react';
 
@@ -15,11 +16,12 @@ import InstructionsModal from './components/RightSection/InstructionsModal';
 import useGetUserTestQuestion from './hooks/useGetUserTestQuestion';
 import styles from './styles.module.css';
 
+const INITIAL_VALUE = 1;
 function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mapping_state, page }) {
 	const { guidelines = [] } = testData || {};
 
-	const [currentQuestion, setCurrentQuestion] = useState(1);
-	const [subQuestion, setSubQuestion] = useState(1);
+	const [currentQuestion, setCurrentQuestion] = useState(INITIAL_VALUE);
+	const [subQuestion, setSubQuestion] = useState(INITIAL_VALUE);
 	// const [isFullscreen, setIsFullscreen] = useState(false);
 	const [showLeaveTestModal, setShowLeaveTestModal] = useState(false);
 	const [showInstructionsModal, setShowInstructionsModal] = useState(false);
@@ -81,8 +83,9 @@ function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mappin
 
 	useEffect(() => {
 		if ((!(page && page !== 'undefined')
-		|| (!(currentQuestionId && currentQuestionId !== 'undefined') && page && page !== 'undefined' && page > 1))) {
-			setCurrentQuestion(1);
+		|| (!(currentQuestionId && currentQuestionId !== 'undefined')
+		&& page && page !== 'undefined' && page > INITIAL_VALUE))) {
+			setCurrentQuestion(INITIAL_VALUE);
 		} else {
 			setCurrentQuestion(Number(page));
 		}
@@ -164,26 +167,30 @@ function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mappin
 
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.left_container}>
-				<LeftSection
-					data={question_data}
-					testData={testData}
-					loading={loading}
-					currentQuestion={currentQuestion}
-					setCurrentQuestion={setCurrentQuestion}
-					fetchQuestions={getUserTestQuestion}
-					setShowLeaveTestModal={setShowLeaveTestModal}
-					showTimeOverModal={showTimeOverModal}
-					setShowTimeOverModal={setShowTimeOverModal}
-					setActiveState={setActiveState}
-					start_time={start_time}
-					total_question_count={total_question_count}
-					test_user_mapping_id={test_user_mapping_id}
-					user_appearance={user_appearance}
-					subQuestion={subQuestion}
-					setSubQuestion={setSubQuestion}
-				/>
-			</div>
+			<QuestionStatsContext.Provider value={questionProps}>
+				<div className={styles.left_container}>
+					<LeftSection
+						data={question_data}
+						testData={testData}
+						loading={loading}
+						currentQuestion={currentQuestion}
+						setCurrentQuestion={setCurrentQuestion}
+						fetchQuestions={getUserTestQuestion}
+						setShowLeaveTestModal={setShowLeaveTestModal}
+						showTimeOverModal={showTimeOverModal}
+						setShowTimeOverModal={setShowTimeOverModal}
+						setActiveState={setActiveState}
+						start_time={start_time}
+						total_question_count={total_question_count}
+						test_user_mapping_id={test_user_mapping_id}
+						user_appearance={user_appearance}
+						subQuestion={subQuestion}
+						setSubQuestion={setSubQuestion}
+						setShowSubmitTestModal={setShowSubmitTestModal}
+						setShowInstructionsModal={setShowInstructionsModal}
+					/>
+				</div>
+			</QuestionStatsContext.Provider>
 
 			<QuestionStatsContext.Provider value={questionProps}>
 				<div className={styles.right_container}>
@@ -193,6 +200,7 @@ function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mappin
 						setActiveState={setActiveState}
 					/>
 				</div>
+
 			</QuestionStatsContext.Provider>
 		</div>
 	);
