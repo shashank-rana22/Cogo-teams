@@ -56,9 +56,18 @@ function Child({
 	service_name = '',
 	entity_id = '',
 }) {
-	const isLineItemRemovable =	shipment_type === 'fcl_freight'
-		&& !isEmpty(field?.code)
-		&& path === 'sales_invoice'
+	const profileData = useSelector(({ profile }) => profile);
+
+	const disable_edit_invoice = getByKey(
+		ENTITY_IDS_MAPPING[entity_id] || {},
+		'others.navigations.bookings.invoicing.disable_edit_invoice',
+	);
+
+	const isAuthorised = AUTHORISED_USER_IDS.includes(profileData?.user?.id);
+
+	// can delete  only new added line items for FCL
+	const isLineItemRemovable = shipment_type === 'fcl_freight' && service_name !== 'fcl_freight_local_service'
+		&& !isEmpty(field?.code) && path === 'sales_invoice' && disable_edit_invoice && !isAuthorised
 		? false
 		: showDeleteButton;
 
@@ -66,15 +75,6 @@ function Child({
 		() => Array(controls.length).fill(null).map(() => Math.random()),
 		[controls.length],
 	);
-
-	const disable_edit_invoice = getByKey(
-		ENTITY_IDS_MAPPING[entity_id] || {},
-		'others.navigations.bookings.invoicing.disable_edit_invoice',
-	);
-
-	const profileData = useSelector(({ profile }) => profile);
-
-	const isAuthorised = AUTHORISED_USER_IDS.includes(profileData?.user?.id);
 
 	return (
 		<div className={styles.container}>

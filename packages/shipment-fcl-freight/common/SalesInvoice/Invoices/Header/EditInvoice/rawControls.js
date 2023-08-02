@@ -1,24 +1,26 @@
 import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import currencyCodeOptions from '@cogoport/ocean-modules/utils/currencyCode';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
-// const MIN_ALIAS_LENGTH = 3;
+const MIN_ALIAS_LENGTH = 3;
 const PRICE_GREATER_THAN = 0;
 
 const handleDisableCond = (charge, isAdminSuperAdmin) => charge?.service_type === 'fcl_freight_service'
 && !isAdminSuperAdmin;
 
-const rawControls = (
+const rawControls = ({
 	handleChange,
 	charge,
 	info,
 	isAdminSuperAdmin,
-	shipment_data,
+	shipment_data = {},
+	primary_service = {},
 	index,
 	TRADE_MAPPING = {},
-) => {
+}) => {
 	const isFieldsDisabled = handleDisableCond(charge, isAdminSuperAdmin);
+	const { shipment_id, shipment_type, entity_id } = shipment_data;
 
 	return {
 		type         : 'edit_service_charges',
@@ -26,6 +28,11 @@ const rawControls = (
 		service_name : charge?.service_type,
 		showHeader   : true,
 		showButtons  : true,
+		path         : 'sales_invoice',
+		shipment_id,
+		shipment_type,
+		entity_id,
+		trade_type   : primary_service?.trade_type,
 		value        : [
 			{
 				code             : '',
@@ -72,14 +79,12 @@ const rawControls = (
 				disabled    : handleDisableCond(charge, isAdminSuperAdmin),
 				span        : 2,
 				rules       : {
-					// validate: (v) => {
-					// return true;
-					// if(isFieldsDisabled) {
-					// 	return true;
-					// } else {
-					// 	return v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3';
-					// }
-				// }
+					validate: (v) => {
+						if (isFieldsDisabled || isEmpty(v)) {
+							return true;
+						}
+						return v?.length >= MIN_ALIAS_LENGTH || 'Characters should be >= 3';
+					},
 				},
 			},
 			{

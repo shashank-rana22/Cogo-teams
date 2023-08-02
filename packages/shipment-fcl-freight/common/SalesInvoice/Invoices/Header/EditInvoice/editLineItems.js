@@ -19,6 +19,7 @@ const useEditLineItems = ({
 	refetch = () => {},
 	isAdminSuperAdmin = false,
 	shipment_data = {},
+	primary_service = {},
 	info,
 }) => {
 	const services = invoice.services || [];
@@ -44,7 +45,7 @@ const useEditLineItems = ({
 				DEFAULT_VALUES[control.name] = control.value.map((value) => {
 					const FIELD_VALUE = {};
 					control.controls.forEach((subControl) => {
-						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_STATE_OF_FIELD_VALUE;
+						FIELD_VALUE[subControl.name] = value[subControl.name];
 					});
 
 					return FIELD_VALUE;
@@ -60,15 +61,16 @@ const useEditLineItems = ({
 	};
 
 	const controls = services.map((service, index) => ({
-		...rawControls(
+		...rawControls({
 			handleChange,
-			service,
+			charge: service,
 			info,
 			isAdminSuperAdmin,
 			shipment_data,
+			primary_service,
 			index,
 			TRADE_MAPPING,
-		),
+		}),
 		onOptionsChange : handleOptionsChange,
 		value           : (service?.line_items || []).map((item) => {
 			const {
@@ -230,7 +232,7 @@ const useEditLineItems = ({
 			refetch();
 			onClose();
 		} catch (err) {
-			Toast.error(err?.data?.invoices);
+			Toast.error(err?.data?.invoices || 'Something went wrong');
 		}
 	};
 

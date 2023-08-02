@@ -1,16 +1,21 @@
 import { Button, Modal } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 
 import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();
+const allowedRoles = {
+	IN : [geo.uuid.admin_id, geo.uuid.super_admin_id],
+	VN : [geo.uuid.admin_id, geo.uuid.super_admin_id, ...geo.uuid.kam_ids],
+};
+
 const INITIAL_STATE = 0;
 
 function EditInvoice({
@@ -18,13 +23,14 @@ function EditInvoice({
 	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
-	shipment_data = {},
 }) {
 	const { role_ids } = useSelector(({ profile }) => ({
 		role_ids: profile.partner?.user_role_ids,
 	}));
 	const isAdminSuperAdmin = [geo.uuid.admin_id, geo.uuid.super_admin_id]
 		.some((ele) => role_ids?.includes(ele));
+
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const {
 		controls,
@@ -42,11 +48,15 @@ function EditInvoice({
 		refetch,
 		isAdminSuperAdmin,
 		shipment_data,
+		primary_service,
 		info: <Info />,
 	});
 
-	const disabledProps = controls?.[INITIAL_STATE]?.service_name === 'fcl_freight_service' && !isAdminSuperAdmin
-	&& shipment_data?.serial_id > GLOBAL_CONSTANTS.serial_check_id;
+	const editAliasNames = allowedRoles[geo.country.code].some(
+		(ele) => role_ids?.includes(ele),
+	) && shipment_data?.shipment_type === 'fcl_freight';
+
+	const disabledProps = controls?.[INITIAL_STATE]?.service_name === 'fcl_freight_service' && !editAliasNames;
 
 	const formValues = watch();
 

@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
 
 import CargoDetails from '../../../common/CargoDetails';
 
@@ -23,7 +22,8 @@ function EditLineItems({
 	service_name = '',
 	shipment_type = '',
 	path = '',
-	incoTerm = '',
+	entity_id = '',
+	trade_type = '',
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
 
@@ -34,8 +34,8 @@ function EditLineItems({
 
 	const disableAddLineItem = (service_name === 'subsidiary_service'
 		&& value.length > VALUE_LENGTH_GREATER_THAN_FOR_DISABLE_LINE_ITEM)
-		|| (isBas && BAS_DISABLED_SERVICE.includes(service_name)
-			&& getTradeTypeByIncoTerm(incoTerm) === 'export') || disableServiceEdit;
+		|| (isBas && BAS_DISABLED_SERVICE.includes(service_name) && trade_type === 'export')
+		|| disableServiceEdit;
 
 	const CHILD_DEFAULT_VALUES = {};
 
@@ -66,6 +66,7 @@ function EditLineItems({
 						disableServiceEdit={disableServiceEdit}
 						formValues={customValues?.formValues}
 						shipment_type={shipment_type}
+						entity_id={entity_id}
 						path={path}
 						service_name={service_name}
 					/>

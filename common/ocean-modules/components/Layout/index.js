@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function Layout({
 	control = {}, fields = [], showElements = {}, errors = {}, customValues = {}, formValues = {},
-	shipment_id = '', shipment_type = '', disabledProps = false,
+	disabledProps = false,
 }) {
 	const { TOTAL_FIELDS = [] } = getTotalFields({ fields, showElements });
 
@@ -52,8 +52,6 @@ function Layout({
 										error={errors?.[field?.name]}
 										control={control}
 										customValues={customValues?.[field?.name]}
-										shipment_id={shipment_id}
-										shipment_type={shipment_type}
 										disabledProps={disabledProps}
 										{...field}
 									/>
