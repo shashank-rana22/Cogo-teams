@@ -9,7 +9,7 @@ import Back from './Back';
 import LoadOverview from './LoadOverview';
 import SearchDetails from './SearchDetails';
 import styles from './styles.module.css';
-import useScrollDirection from './useScrollDirection';
+// import useScrollDirection from './useScrollDirection';
 import Wallet from './Wallet';
 
 const SUB_HEADER_COMPONENT_MAPPING = {
