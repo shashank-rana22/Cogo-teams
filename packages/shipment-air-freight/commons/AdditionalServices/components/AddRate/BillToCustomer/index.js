@@ -31,7 +31,7 @@ function BillToCustomer({ updateResponse, onCancel = () => {}, onBillToCustomer 
 				<Button
 					onClick={() => {
 						if (modeOfReview === 'bill') {
-							onBillToCustomer(true);
+							onBillToCustomer();
 						} else {
 							updateBillingInfo(modeOfReview);
 							onCancel();
