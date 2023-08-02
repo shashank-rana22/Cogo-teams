@@ -1,5 +1,5 @@
-import { Placeholder, Loader as ToggleLoader } from '@cogoport/components';
-import { IcMCross, IcMPortArrow, IcMProfile } from '@cogoport/icons-react';
+import { Button, Placeholder, Loader as ToggleLoader } from '@cogoport/components';
+import { IcMCross, IcMPortArrow } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -30,20 +30,18 @@ function Loader({ setShow = () => {} }) {
 					</div>
 				</div>
 
-				<div className={styles.button}>
-					<IcMProfile width={12} height={12} />
+				{/* <div className={styles.button}> */}
+				{/* <IcMProfile width={12} height={12} /> */}
 
-					<Placeholder height="10px" />
-				</div>
+				<Placeholder height="20px" width="80px" style={{ marginRight: '12px' }} />
+				{/* </div> */}
 
-				<div
-					className={styles.close_icon}
-					role="button"
-					tabIndex={0}
-					onClick={() => setShow(false)}
+				<Button
+					themeType="linkUi"
+					onClick={() => { setShow(false); }}
 				>
 					<IcMCross />
-				</div>
+				</Button>
 			</div>
 
 			<div className={styles.filter_box}>

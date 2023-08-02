@@ -1,4 +1,4 @@
-import { Textarea, Popover, Toast } from '@cogoport/components';
+import { Textarea, Popover, Toast, Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSend, IcMAttach, IcMDocument } from '@cogoport/icons-react';
@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 
 const INITIAL_STATE_ROWS = 1;
 const TOTAL_STAKEHOLDERS_LENGTH = 2;
-const TOTAL_ROWS = 5;
+const TOTAL_ROWS = 3;
 const ENTER_KEY = 13;
 const DELETE_KEY_1 = 46;
 const DELETE_KEY_2 = 8;
@@ -63,6 +63,7 @@ function Details({
 
 	const reset = () => {
 		setTextContent('');
+		setRows(INITIAL_STATE_ROWS);
 	};
 
 	// formatting Data for hooks
@@ -139,7 +140,6 @@ function Details({
 		if (e.keyCode === ENTER_KEY && !e.shiftKey) {
 			onCreateMessage();
 			reset();
-			setRows(INITIAL_STATE_ROWS);
 		}
 		if (contentData > INITIAL_STATE_ROWS && (e.keyCode === DELETE_KEY_2 || e.keyCode === DELETE_KEY_1)) {
 			setRows(contentData - INITIAL_STATE_ROWS);
@@ -149,7 +149,7 @@ function Details({
 	return (
 		<div className={styles.container}>
 			{loadingChannel ? (
-				<Loader />
+				<Loader setShow={setShow} />
 			) : (
 				<Header
 					channelData={channelData}
@@ -220,18 +220,22 @@ function Details({
 								onKeyDown={(e) => handleClick(e)}
 								rows={rows}
 								onChange={(val) => {
-									setTextContent(val);
+									if (textContent === '' && val === '\n') {
+										reset();
+									} else {
+										setTextContent(val);
+									}
 								}}
 							/>
 
-							<div
+							<Button
+								themeType="linkUi"
 								className={styles.send}
-								role="button"
 								tabIndex={0}
 								onClick={!loading ? onCreateMessage : null}
 							>
-								<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />
-							</div>
+								<IcMSend style={{ width: '2.8em', height: '2.8em' }} />
+							</Button>
 						</div>
 					</div>
 				</div>
