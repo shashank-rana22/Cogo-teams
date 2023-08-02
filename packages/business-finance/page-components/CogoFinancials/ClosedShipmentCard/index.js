@@ -102,11 +102,11 @@ function ClosedShipmentCard({
 	];
 
 	const revenueDeviation = `${displayAmount(cardData[`actualRevenueDeviation${taxType}`], currency)}
-	(${cardData[`actualRevenueDeviationPercentage${taxType}`]}%)
+	(${cardData[`actualRevenueDeviationPercentage${taxType}`] || '_'}%)
    `;
 
 	const costDeviation = `${displayAmount(cardData[`actualCostDeviation${taxType}`], currency)}
-   (${cardData[`actualCostDeviationPercentage${taxType}`]}%)
+   (${cardData[`actualCostDeviationPercentage${taxType}`] || '_'}%)
    `;
 
 	const updateGraphData = isDeviationVisible
