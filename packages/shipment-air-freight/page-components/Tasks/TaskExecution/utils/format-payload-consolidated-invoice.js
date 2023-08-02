@@ -1,4 +1,5 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const DEFAULT_VALUE_FOR_TERMINAL_CHARGE = 0;
 const DEFAULT_VALUE_FOR_SHEET_INDEX = 1;
@@ -15,6 +16,7 @@ const getPayload = ({
 		business_name = '', cin = '',
 		entity_code = '', registration_number = '', tan_no = '', country = {},
 		id:cogo_entity_id = '', serial_id = '',
+		addresses = [],
 	} = entityData || {};
 
 	const { id:country_id = '', country_code = '', name = '', type = '' } = country || {};
@@ -68,6 +70,9 @@ const getPayload = ({
 				country_code,
 				name,
 				type,
+			},
+			address: {
+				...addresses[GLOBAL_CONSTANTS.zeroth_index],
 			},
 		},
 	};
