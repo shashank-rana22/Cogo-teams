@@ -15,7 +15,7 @@ function TerminalChargeReceipt({ shipmentData = {}, task = {}, refetch = () => {
 
 	const [sheetData, setSheetData] = useState({});
 
-	const { getCSROCRData } = useGetShipmentAirCSROCRSheetData({ setTerminalChargeState, sheetData });
+	const { getCSROCRData, data } = useGetShipmentAirCSROCRSheetData({ setTerminalChargeState, sheetData });
 
 	const { servicesList } = useListShipmentServices({ defaultFilters: { shipment_id: shipmentData?.id } });
 
@@ -27,7 +27,7 @@ function TerminalChargeReceipt({ shipmentData = {}, task = {}, refetch = () => {
 			const timeoutId = setTimeout(getCSROCRData, TIME_TO_FETCH_CSR_DATA);
 			return () => clearTimeout(timeoutId);
 		}
-		return null;
+		return () => {};
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [terminalChargeState]);
 
@@ -51,6 +51,8 @@ function TerminalChargeReceipt({ shipmentData = {}, task = {}, refetch = () => {
 					refetch={refetch}
 					onCancel={onCancel}
 					task_id={task?.id}
+					shipmentData={shipmentData}
+					csr_data={data}
 				/>
 			) : null}
 

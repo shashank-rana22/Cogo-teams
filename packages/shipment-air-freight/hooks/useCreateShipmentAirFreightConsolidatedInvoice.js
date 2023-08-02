@@ -3,21 +3,15 @@ import { useRequest } from '@cogoport/request';
 
 import getPayload from '../page-components/Tasks/TaskExecution/utils/format-payload-consolidated-invoice';
 
-import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
-
 const useCreateShipmentAirFreightConsolidatedInvoice = ({
 	sheetData = {}, mainServicesData = {},
-	entityData = {}, refetch = () => {}, onCancel = () => {}, task_id,
+	entityData = {},
+	createShipmentAdditionalService = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_air_freight_consolidated_invoice',
 		method : 'POST',
 	}, { manual: true });
-
-	const {
-		apiTrigger = () => {},
-		loading:updateLoading = false,
-	} = 		useUpdateShipmentPendingTask({ refetch, onCancel });
 
 	const createShipmentAirFreightConsolidatedInvoice = async (values) => {
 		const additionalServicePayload = getPayload({
@@ -31,7 +25,7 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 			await trigger({
 				data: additionalServicePayload,
 			});
-			apiTrigger({ id: task_id });
+			createShipmentAdditionalService();
 		} catch (err) {
 			toastApiError(err);
 		}
@@ -40,7 +34,6 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 	return {
 		loading,
 		createShipmentAirFreightConsolidatedInvoice,
-		updateLoading,
 
 	};
 };
