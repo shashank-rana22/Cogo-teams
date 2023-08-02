@@ -12,9 +12,9 @@ function PasswordValidator({ password = '', errorMessage = '' }) {
 				{!isEmpty(errorMessage) ? 'Invalid Password' : null}
 			</div>
 			<div className={styles.password_validator}>
-				<div className="title">Password must contain:</div>
+				<div className={styles.title}>Password must contain:</div>
 
-				<div className="list">
+				<div className={styles.list}>
 					{Object.entries(VALID_PASSWORD_MAPPINGS)?.map(([key, value]) => {
 						const { message = '', length = 0, characters = [] } = value;
 
@@ -45,7 +45,7 @@ function PasswordValidator({ password = '', errorMessage = '' }) {
 									)}
 								</div>
 
-								<div className="message">{message}</div>
+								<div className={styles.message}>{message}</div>
 							</div>
 						);
 					})}

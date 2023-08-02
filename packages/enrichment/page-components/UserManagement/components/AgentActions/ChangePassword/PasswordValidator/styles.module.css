@@ -13,11 +13,9 @@
 	& .list {
 		display: flex;
 		flex-direction: column;
-		gap: 2px;
 
 		& .item {
 			display: flex;
-			gap: 8px;
 			align-items: center;
 			justify-content: flex-start;
 
