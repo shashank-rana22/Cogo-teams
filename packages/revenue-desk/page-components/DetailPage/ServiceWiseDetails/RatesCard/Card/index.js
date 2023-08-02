@@ -178,7 +178,8 @@ function Card({
 								</Pill>
 							</div>
 							) : null}
-						{
+						<div>
+							{
 							data?.rowData?.agent ? (
 								<div>
 									Supply Agent :
@@ -187,6 +188,14 @@ function Card({
 								</div>
 							) : null
 						}
+							{data?.rowData?.sourced_by ? (
+								<div>
+									Source :
+									{' '}
+									{data?.rowData?.sourced_by}
+								</div>
+							) : null}
+						</div>
 					</div>
 				</div>
 				<div>
