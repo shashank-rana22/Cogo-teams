@@ -58,6 +58,7 @@ const getPayload = ({
 		sheet_index          : DEFAULT_VALUE_FOR_SHEET_INDEX,
 		organization_id      : geo.uuid.freight_force_org_id,
 		billing_party_detail : {
+			organization_id : cogo_entity_id,
 			cin,
 			entity_code,
 			tan_no,
@@ -65,7 +66,7 @@ const getPayload = ({
 			cogo_entity_id,
 			business_name,
 			serial_id,
-			country: {
+			country         : {
 				id: country_id,
 				country_code,
 				name,
