@@ -302,6 +302,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api         : 'get_purchase_bills_stats',
+		access_type : 'private',
+		feature     : 'coe_finance',
+	},
 ];
 
 export default apis;

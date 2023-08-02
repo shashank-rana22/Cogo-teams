@@ -558,7 +558,19 @@ export default {
 			},
 			bookings: {
 				invoicing: {
-					is_invoice_mergeable: true,
+					is_invoice_mergeable : true,
+					disable_edit_invoice : false,
+				},
+			},
+
+			business_finance: {
+				ar: {
+					settlement: {
+						invoice_number: {
+							document_key : 'destinationIrnNumber',
+							irn_key      : 'destinationDocumentValue',
+						},
+					},
 				},
 			},
 		},

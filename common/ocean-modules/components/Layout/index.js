@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function Layout({
 	control = {}, fields = [], showElements = {}, errors = {}, customValues = {}, formValues = {},
-	shipment_id = '', disabledProps = false,
+	disabledProps = false,
 }) {
 	const { TOTAL_FIELDS = [] } = getTotalFields({ fields, showElements });
 
@@ -45,7 +45,6 @@ function Layout({
 								</section>
 							);
 						}
-
 						if (type === 'edit_service_charges') {
 							return (
 								<section className={styles.width_100} key={field.name}>
@@ -53,7 +52,6 @@ function Layout({
 										error={errors?.[field?.name]}
 										control={control}
 										customValues={customValues?.[field?.name]}
-										shipment_id={shipment_id}
 										disabledProps={disabledProps}
 										{...field}
 									/>

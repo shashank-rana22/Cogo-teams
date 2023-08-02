@@ -1,0 +1,79 @@
+.card_details {
+	display: flex;
+	flex-direction: column;
+	padding-block: 13px;
+	margin-block: 12px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 1px 6px #a9bcdaa6;
+}
+
+.invoice_card_container {
+	display: flex;
+}
+
+.divider {
+	align-self: stretch;
+	width: 1px;
+	margin: 0 16px;
+	background: var(--color-secondary-greyscale-5);
+}
+
+.details_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 30%;
+	margin-left: 15px;
+}
+
+.serial_id {
+	font-weight: 600;
+}
+
+.gst_no {
+	color: ##E0E0E0;
+}
+
+.importer_exporter {
+	margin-top: 4px;
+	font-size: var(--font-size-md);
+}
+
+.invoice_number {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 45%;
+}
+
+.invoice_payment {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 15%;
+}
+
+.payment_status {
+	background-color: var(--color-secondary-3);
+}
+
+.view_card_detais {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 13%;
+}
+
+.arrow_rotation {
+	width: 20px;
+	height: 18px;
+	cursor: pointer;
+}
+
+.button_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-block: 10px;
+	margin-right: 10px;
+}

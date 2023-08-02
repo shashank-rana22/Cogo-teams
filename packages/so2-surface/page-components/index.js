@@ -1,3 +1,5 @@
+import { Toggle } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useState, useMemo } from 'react';
 
 import DashboardContext from '../context/DashboardContext';
@@ -14,6 +16,7 @@ const TAB_COMPONENT_MAPPER = {
 };
 
 export default function SO2Surface() {
+	const router = useRouter();
 	const [filters, setFilters] = useState({});
 	const [stepperTab, setStepperTab] = useState('ftl_freight');
 	const [activeTab, setActiveTab] = useState('mandatory_docs_upload');
@@ -31,11 +34,26 @@ export default function SO2Surface() {
 
 	const ActiveStepperComponent = TAB_COMPONENT_MAPPER[stepperTab];
 
+	const handleOnchange = () => {
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipment-management`;
+		window.sessionStorage.setItem('prev_nav', newUrl);
+		window.location.href = newUrl;
+	};
+
 	return (
 		<DashboardContext.Provider value={contextValues}>
 			<div>
 				<div className={styles.header}>
 					<h1>SO2 Dashboard - Surface</h1>
+					<div style={{ marginLeft: '150px' }}>
+						<Toggle
+							offLabel="New"
+							onLabel="Old"
+							size="md"
+							onChange={() => handleOnchange()}
+							showOnOff
+						/>
+					</div>
 					<Filters />
 				</div>
 				<StepperTabs />

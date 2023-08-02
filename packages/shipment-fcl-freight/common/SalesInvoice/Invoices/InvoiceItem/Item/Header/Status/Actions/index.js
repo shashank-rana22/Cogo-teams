@@ -1,6 +1,6 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCError } from '@cogoport/icons-react';
+import { IcCError, IcMInfo } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -49,6 +49,13 @@ function Actions({
 	if (invoice.status === 'amendment_requested') {
 		disableAction = false;
 	}
+
+	const remarkRender = () => (
+		<div className={styles.remark_container}>
+			<div className={styles.title}>Invoice Remarks</div>
+			<div className={styles.value}>{invoice.remarks}</div>
+		</div>
+	);
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
@@ -104,6 +111,17 @@ function Actions({
 					) : null}
 				</div>
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
+					{!isEmpty(invoice.remarks) ? (
+						<Tooltip
+							placement="bottom"
+							content={remarkRender()}
+						>
+							<div className={styles.icon_more_wrapper}>
+								<IcMInfo fill="#DDEBC0" />
+							</div>
+						</Tooltip>
+					) : null}
+
 					<EmailInfo invoice={invoice} setSendEmail={setSendEmail} />
 					<KebabContent
 						invoice={invoice}

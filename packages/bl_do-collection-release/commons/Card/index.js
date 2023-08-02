@@ -91,13 +91,13 @@ export default function Card({
 		} else if (
 			stateProps.inner_tab === 'collected'
 			&& stateProps?.activeTab === 'do'
-			&& isEmpty(item?.do_documents)
+			&& isEmpty(item?.delivery_orders)
 		) {
 			Toast.error('DO document has not been uploaded');
 		} else if (
 			stateProps.inner_tab === 'collected'
 			&& stateProps?.activeTab === 'do'
-			&& !isEmpty(item?.do_documents)
+			&& !isEmpty(item?.delivery_orders)
 		) {
 			setConfirmationModal({
 				show      : true,
