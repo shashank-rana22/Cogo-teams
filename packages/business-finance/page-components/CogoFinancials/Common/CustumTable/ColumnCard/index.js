@@ -51,7 +51,7 @@ function ColumnCard({
 				maximumFractionDigits : 2,
 			},
 		}),
-		deviation : item?.[`${LABEL_MAPPING[type]}ProfitDeviation${taxType}`] || '_',
+		deviation : item?.[`${LABEL_MAPPING[type]}ProfitAmountDeviation${taxType}`] || '_',
 		action    : (
 			<div className={styles.flex}>
 				{!show ? (

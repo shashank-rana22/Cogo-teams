@@ -7,15 +7,17 @@ function Filters({ setTableFilters = () => { }, tableFilters = {} }) {
 	return (
 		<div className={styles.container}>
 			<Select
-				options={[{ label: 'Overall', value: 'Overall' }]}
-				onChange={(val) => setTableFilters({ ...tableFilters, type1: val, pageIndex: 1 })}
+				options={[
+					{ label: 'OVERALL', value: 'OVERALL' },
+					{ label: 'AIR', value: 'AIR' },
+					{ label: 'OCEAN', value: 'OCEAN' },
+					{ label: 'RAIL', value: 'RAIL' },
+					{ label: 'SURFACE', value: 'SURFACE' },
+				]}
+				onChange={(val) => setTableFilters({ ...tableFilters, serviceLevel: val, pageIndex: 1 })}
+				value={tableFilters?.serviceLevel}
+				placeholder="Service Level"
 			/>
-			<div className={styles.select}>
-				<Select
-					options={[{ label: 'Customs', value: 'customs' }]}
-					onChange={(val) => setTableFilters({ ...tableFilters, type2: val, pageIndex: 1 })}
-				/>
-			</div>
 		</div>
 	);
 }

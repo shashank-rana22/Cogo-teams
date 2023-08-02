@@ -18,6 +18,7 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 		Deviation           : `${LABEL_MAPPING[type]}RevenueDeviation`,
 		'KAM Wallet'        : 'kamMarginUtilizationAmount',
 		'Sales Quotation'   : 'estimatedRevenue',
+		deviationPercent    : 'RevenuePercentDeviation',
 	};
 
 	const KEY_MAPPINGS_EXPENSE = {
@@ -27,22 +28,26 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 		'RD Wallet'           : 'rdWalletUtilizationAmount',
 		Deviation             : `${LABEL_MAPPING[type]}CostDeviation`,
 		'Buy Quotation'       : 'estimatedCost',
+		deviationPercent      : 'CostPercentDeviation',
 	};
 
 	const mappings = heading === 'Revenue' ? KEY_MAPPINGS_REVENUE : KEY_MAPPINGS_EXPENSE;
 	const getFields = fields({ heading });
+	const isLast = getFields.length - DEFAULT_LEN;
+	const amount = ({ field }) => (item?.[`${mappings[field]}${taxType}`]
+	|| item?.[`${mappings[field]}`] || DEFAULT_AMOUNT);
+	const isNegative = amount < DEFAULT_AMOUNT;
 	return (
 		<div className={styles.card}>
 			<div className={styles.head}>
 				{heading}
 			</div>
-			{getFields?.map((field) => (
+			{getFields?.map((field, index) => (
 				<div key={field} className={styles.singlefield}>
 					<div className={styles.key}>{field}</div>
-					<div className={cl`${styles.value} ${getFields.length - DEFAULT_LEN ? styles.isLast : ''}`}>
+					<div className={cl`${styles.value} ${isLast === index ? styles.isLast : ''}`}>
 						{formatAmount({
-							amount: item?.[`${mappings[field]}${taxType}`]
-							|| item?.[`${mappings[field]}`] || DEFAULT_AMOUNT,
+							amount   : amount({ field }),
 							currency : item?.currency,
 							options  : {
 								style                 : 'currency',
@@ -50,6 +55,13 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 								maximumFractionDigits : 2,
 							},
 						})}
+						<span className={cl`${styles.percent} ${styles.value} ${isLast === index ? styles.isLast : ''} 
+					${isNegative ? styles.negative : styles.positive}`}
+						>
+							{isLast === index
+								? `(${item?.[`${LABEL_MAPPING[type]}${mappings.deviationPercent}${taxType}`]} %)`
+								: null}
+						</span>
 					</div>
 				</div>
 			))}

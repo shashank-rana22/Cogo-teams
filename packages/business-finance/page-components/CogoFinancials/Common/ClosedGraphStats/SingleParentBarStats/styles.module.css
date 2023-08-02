@@ -5,6 +5,7 @@
 
 .graphs {
 	display: flex;
+	justify-content: space-evenly;
 	margin: 16px 32px;
 	overflow: scroll;
 }

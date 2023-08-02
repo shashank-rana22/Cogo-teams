@@ -31,3 +31,15 @@
 	flex: 1;
 	margin-right: 34px;
 }
+
+.percent {
+	margin-left: 12px;
+}
+
+.negative {
+	color: red;
+}
+
+.positive {
+	color: green;
+}

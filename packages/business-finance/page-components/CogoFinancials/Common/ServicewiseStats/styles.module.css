@@ -105,18 +105,6 @@
 	color: #abcd62;
 }
 
-.select {
-	:global {
-		.ui_select_container {
-			width: 160px;
-		}
-
-		.ui_select_options_container {
-			min-width: 260px;
-		}
-	}
-}
-
 .justifiy {
 	display: flex;
 	justify-content: space-between;

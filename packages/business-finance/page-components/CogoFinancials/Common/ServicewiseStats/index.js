@@ -1,4 +1,4 @@
-import { Placeholder, Select } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
@@ -73,9 +73,7 @@ function ServiceWiseStats({
 					</div>
 
 				</div>
-				<div className={styles.select}>
-					<Select placeholder="Select" />
-				</div>
+
 			</div>
 			<div className={styles.flex}>
 				<div className={styles.maincard}>

@@ -39,7 +39,7 @@ const useGetShipmentList = ({
 		{ manual: true },
 	);
 
-	const { pageIndex } = tableFilters;
+	const { pageIndex, serviceLevel:serviceLevelFilter } = tableFilters;
 
 	const serviceLevelApi = useCallback((serviceLevel) => {
 		const { currency, channel, service, serviceCategory, segment } = filter;
@@ -52,7 +52,7 @@ const useGetShipmentList = ({
 			currency      : currency || DEFAULT_CURRENCY,
 			startDate     : timeRange === 'custom' ? getFormattedDate(customStartDate) : startDate,
 			endDate       : timeRange === 'custom' ? getFormattedDate(customEndDate) : endDate,
-			serviceLevel  : serviceLevel || activeBar || 'OVERALL',
+			serviceLevel  : serviceLevel || serviceLevelFilter || activeBar || 'OVERALL',
 			parentService : segment,
 			service,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
@@ -72,7 +72,7 @@ const useGetShipmentList = ({
 		}
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
-		filter, customDate, pageIndex, activeBar]);
+		filter, customDate, pageIndex, activeBar, serviceLevelFilter]);
 
 	useEffect(() => {
 		serviceLevelApi();
