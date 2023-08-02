@@ -4,88 +4,78 @@ const scheduleFields = {
 			key    : 'wh_transfer_id',
 			label  : 'WH Transfer ID',
 			span   : 1.5,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{item.transfer_id}
-				</div>;
-			},
+					{item?.warehouseTransferId}
+				</div>
+			),
 		},
 		{
 			key    : 'sid_count',
 			label  : 'No. of SIDs',
 			span   : 2.5,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{item.sid_count}
-				</div>;
-			},
+					{item?.shipmentDetails?.length}
+				</div>
+			),
 		},
 		{
 			key    : 'truck_in_eta',
 			label  : 'Truck-in ETA',
 			span   : 1.5,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{item.truck_in_eta}
-				</div>;
-			},
+					{item?.truckInEta}
+				</div>
+			),
 		},
 		{
 			key    : 'truck_type',
 			label  : 'Truck type',
 			span   : 2.5,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{item.truck_type}
-				</div>;
-			},
+					{item?.truckDetails?.truckType}
+				</div>
+			),
 		},
 		{
 			key    : 'truck_number',
 			label  : 'Truck Number',
 			span   : 1,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{item.truck_number}
-				</div>;
-			},
+					{item?.truckDetails?.truckNumber}
+				</div>
+			),
 		},
 		{
 			key    : 'truck_size',
 			label  : 'Truck Size',
 			span   : 1,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{item.truck_size}
-				</div>;
-			},
+					{item.truckDetails?.truckSize}
+				</div>
+			),
 		},
 		{
 			key    : 'driver_contact_number',
 			label  : 'Driver Contact Number',
 			span   : 2.2,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{item.driver_contact_number}
-				</div>;
-			},
+					{item?.truckDetails?.driverContactNumber}
+				</div>
+			),
 		},
-		{
-			key    : 'boxes_dimensions_weight',
-			label  : 'Boxes/Dimensions/Weight',
-			span   : 2.2,
-			render : (item) => {
-				<div>
-					{item.dimensions}
-				</div>;
-			},
-		},
-		{
-			key   : 'action',
-			label : 'Action',
-			span  : 2.2,
-			func  : 'handleTruckStatus',
-		},
+		// {
+		// 	key   : 'action',
+		// 	label : 'Action',
+		// 	span  : 2.2,
+		// 	func  : 'handleTruckStatus',
+		// },
 	],
 };
 

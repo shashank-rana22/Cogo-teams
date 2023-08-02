@@ -32,9 +32,8 @@ const useListConfigurations = ({
 		try {
 			await trigger({
 				params: {
-					q         : (query || '').trim() || undefined,
+					q: (query || '').trim() || undefined,
 					...PAYLOAD,
-					pageIndex : page,
 				},
 			});
 		} catch (err) {

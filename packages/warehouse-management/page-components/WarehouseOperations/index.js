@@ -4,7 +4,7 @@ import Schedules from './Schedules';
 
 // import Loader from '../../commons/Loader';
 
-const tabsComponentMapping = {
+const TABS_COMPONENT_MAPPING = {
 	schedules : Schedules,
 	inventory : Inventory,
 	configure : Configure,
@@ -14,25 +14,14 @@ function WarehouseOperations({
 	activeTab = 'schedule',
 	truckStatus = 'truck_in',
 	selectedTimeInterval = 'daily',
+	searchValue = '',
+	setSearchValue = () => {},
 	addNewZone = false,
 	setAddNewZone = () => {},
 	date = new Date(),
 	selectedWarehouse = 'delhi',
 }) {
-	// const {
-	// 	data, filters, setFilters,
-	// 	loading, setPage,
-	// } = useListTruckSchedules({ activeTab, truckStatus, searchQuery });
-
-	// activeTab === 'inventory' ? (
-	// 	const {
-	// 		data, loading, setPage,
-	// 		searchValue, setSearchValue
-	// 	} = useListWarehouseInvenotory({ })
-	// ) : ()
-
-	// const { list = [], total_count = 0, page = 0 } = data;
-	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
+	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
 
 	return (
 		<div>
@@ -41,6 +30,8 @@ function WarehouseOperations({
 					activeTab={activeTab}
 					truckStatus={truckStatus}
 					selectedTimeInterval={selectedTimeInterval}
+					searchValue={searchValue}
+					setSearchValue={setSearchValue}
 					addNewZone={addNewZone}
 					setAddNewZone={setAddNewZone}
 					date={date}

@@ -1,38 +1,28 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Header from './Header';
 import styles from './styles.module.css';
 import WarehouseOperations from './WarehouseOperations';
 
-// const truckStatusMapping = [
-// 	{
-// 		key   : 'truck_in',
-// 		label : 'Truck in',
-// 		count : 'truckInCount',
-// 	},
-// 	{
-// 		key   : 'truck_out',
-// 		label : 'Truck out',
-// 		count : 'truckOutCount',
-// 	},
-// ];
-
-// const TRUCK_STATUS_STATS_MAPPING = {
-// 	truckInCount  : 'truck_in',
-// 	truckOutCount : 'truck_out',
-// };
-
 function WarehouseManagement() {
 	const [activeTab, setActiveTab] = useState('schedules');
+
 	const [truckStatus, setTruckStatus] = useState('truck_in');
-	const [selectedTimeInterval, setSelectedTimeInterval] = useState('daily_report');
-	const [selectedWarehouseLocation, setSelectedWarehouseLocation] = useState('delhi');
-	const [addNewZone, setAddNewZone] = useState(false);
-	const [searchValue, setSearchValue] = useState('');
 	const [date, setDate] = useState(new Date());
 
+	const [selectedTimeInterval, setSelectedTimeInterval] = useState('daily_report');
+
+	const [selectedWarehouseLocation, setSelectedWarehouseLocation] = useState('delhi');
+	const [addNewZone, setAddNewZone] = useState(false);
+
+	const [searchValue, setSearchValue] = useState('');
+
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+
+	useEffect(() => {
+		setSearchValue('');
+	}, [activeTab, setSearchValue]);
 
 	return (
 		<div className={styles.container}>
@@ -60,6 +50,7 @@ function WarehouseManagement() {
 				activeTab={activeTab}
 				truckStatus={truckStatus}
 				selectedTimeInterval={selectedTimeInterval}
+				searchValue={searchValue}
 				addNewZone={addNewZone}
 				setAddNewZone={setAddNewZone}
 				date={date}
