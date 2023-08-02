@@ -1,17 +1,15 @@
 import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar';
 import { Placeholder, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import RenderCardHeader from '../Common/RenderCardHeader';
 
+import { getData } from './getData';
+import { getGraphData } from './getGraphData';
 import styles from './styles.module.css';
 
-const LABEL_MAPPING = {
-	Financially   : 'actual',
-	Operationally : 'operational',
-};
+const DEFAULT_VALUE = 0;
 
 const displayAmount = (amount, currency) => formatAmount({
 	amount,
@@ -37,76 +35,16 @@ function ClosedShipmentCard({
 		currency,
 	} = cardData;
 
-	const data = [
-		{
-			id   : 'Cost',
-			data : [
-				{
-					x : 'Estimated Cost',
-					y : cardData[`estimatedCost${taxType}`],
-				},
-				{
-					x : `${LABEL_MAPPING[type]} Cost`,
-					y : cardData[`${LABEL_MAPPING[type]}Cost${taxType}`],
-				},
-			],
-		},
-		{
-			id   : 'Revenue',
-			data : [
-				{
-					x : 'Estimated Revenue',
-					y : cardData[`estimatedRevenue${taxType}`],
-				},
-				{
-					x : `${LABEL_MAPPING[type]} Revenue`,
-					y : cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`],
-				},
-			],
-		},
+	const data = getData({ taxType, type, cardData });
 
-	];
-
-	const graphData = [
-		{
-			rowId    : 'first_row',
-			children : [
-				{
-					label : 'Estimated Revenue',
-					value : displayAmount(cardData[`estimatedRevenue${taxType}`], currency),
-					color : '#cfeaed',
-				},
-				{
-					label : 'Estimated Cost',
-					value : displayAmount(cardData[`estimatedCost${taxType}`], currency),
-					color : '#f8aea8',
-				},
-			],
-		},
-		{
-			rowId    : 'second_row',
-			children : [
-				{
-					label : `${startCase(LABEL_MAPPING[type])} Revenue`,
-					value : displayAmount(cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`], currency),
-					color : '#6fa5ab',
-				},
-				{
-					label : `${startCase(LABEL_MAPPING[type])} Cost`,
-					value : displayAmount(cardData[`${LABEL_MAPPING[type]}Cost${taxType}`], currency),
-					color : '#ee3425',
-				},
-			],
-		},
-
-	];
+	const graphData = getGraphData({ cardData, taxType, currency, type, displayAmount });
 
 	const revenueDeviation = `${displayAmount(cardData[`actualRevenueDeviation${taxType}`], currency)}
-	(${cardData[`actualRevenueDeviationPercentage${taxType}`]}%)
+	(${cardData[`actualRevenueDeviationPercentage${taxType}`] || DEFAULT_VALUE}%)
    `;
 
 	const costDeviation = `${displayAmount(cardData[`actualCostDeviation${taxType}`], currency)}
-   (${cardData[`actualCostDeviationPercentage${taxType}`]}%)
+   (${cardData[`actualCostDeviationPercentage${taxType}`] || DEFAULT_VALUE}%)
    `;
 
 	const updateGraphData = isDeviationVisible
@@ -117,12 +55,12 @@ function ClosedShipmentCard({
 					{
 						label : 'Deviation(Revenue)',
 						value : revenueDeviation,
-						color : 'null',
+						color : null,
 					},
 					{
 						label : 'Deviation(Cost)',
 						value : costDeviation,
-						color : 'null',
+						color : null,
 					},
 				],
 			},
@@ -167,7 +105,7 @@ function ClosedShipmentCard({
 
 					</div>
 					<div className={styles.show_graph_data}>
-						{updateGraphData.map((item) => (
+						{(updateGraphData || []).map((item) => (
 							<div
 								key={item?.id}
 								className={styles.graph_row}

@@ -41,7 +41,7 @@
 .statval {
 	font-size: var(--font-size-md);
 	font-weight: 500;
-	color: gray;
+	color: var(--color-secondary-greyscale-3);
 }
 
 .statscontainer {
@@ -70,7 +70,7 @@
 }
 
 .fontlabel {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }
 
 .fontvalue {
@@ -88,7 +88,7 @@
 
 .underline {
 	width: 80%;
-	border: 1px solid #ed3726;
+	border: 1px solid var(--color-primary-error-red-2);
 }
 
 .maincard {
@@ -102,7 +102,7 @@
 }
 
 .color {
-	color: #abcd62;
+	color: var(--color-tertiary-success-green-2);
 }
 
 .justifiy {

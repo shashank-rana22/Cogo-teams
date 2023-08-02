@@ -39,7 +39,7 @@
 
 .graph_label {
 	font-size: var(--font-size-md);
-	color: #747474;
+	color: var(--color-secondary-greyscale-3);
 }
 
 .chart_data_combine {

@@ -2,7 +2,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
-import { isEmpty, upperCase } from '@cogoport/utils';
+import { upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
@@ -19,7 +19,7 @@ const getFormattedDate = (date) => formatDate({
 
 const useGetProfitabilityStats = ({
 	entity = '', timeRange = '', customDate = {},
-	activeShipmentCard = '', filter = {},
+	filter = {}, showShipmentList = false,
 }) => {
 	const [
 		{ data:ongoingData, loading:ongoingLoading },
@@ -103,10 +103,10 @@ const useGetProfitabilityStats = ({
 		filter]);
 
 	useEffect(() => {
-		if (isEmpty(activeShipmentCard)) { // calling stats api only at the parent level
+		if (!showShipmentList) { // calling stats api only at the parent level
 			api();
 		}
-	}, [api, entity, timeRange, activeShipmentCard]);
+	}, [api, entity, timeRange, showShipmentList]);
 
 	return {
 		financialData,

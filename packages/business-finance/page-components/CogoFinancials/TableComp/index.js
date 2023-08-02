@@ -44,8 +44,8 @@ function TableComp({
 	return (
 		<div className={styles.table}>
 			<Header config={config} />
-			{isEmpty(serviceLevelData) && !serviceLevelLoading ? <EmptyState /> : null}
-			{(!isEmpty(serviceLevelData) || serviceLevelLoading)
+			{isEmpty(serviceLevelData?.list) && !serviceLevelLoading && <EmptyState />}
+			{(!isEmpty(serviceLevelData?.list) || serviceLevelLoading)
 				? (serviceLevelData?.list || Array(EMPTY_STATE).fill(null)).map((item) => (
 					<ColumnCard
 						loading={serviceLevelLoading}

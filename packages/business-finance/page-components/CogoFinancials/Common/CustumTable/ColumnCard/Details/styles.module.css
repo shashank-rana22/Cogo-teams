@@ -3,5 +3,5 @@
 }
 
 .background {
-	background-color: #f3fafa;
+	background-color: var(--color-tertiary-blue-5);
 }

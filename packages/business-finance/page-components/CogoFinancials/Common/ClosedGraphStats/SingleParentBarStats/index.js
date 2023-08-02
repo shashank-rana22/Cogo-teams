@@ -1,15 +1,13 @@
 import { startCase } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
+import { LABEL_MAPPING } from '../../../constants';
 import RenderCardHeader from '../../RenderCardHeader';
 import SingleGraphCard from '../../SingleGraphCard';
 
 import styles from './styles.module.css';
 
-const LABEL_MAPPING = {
-	Financially   : 'actual',
-	Operationally : 'operational',
-};
+const GRAPHS = ['Operational Profitability', 'Revenue', 'Expense'];
 
 function SingleParentBarStats({
 	activeBar = '', setActiveBar = () => {}, isFullWidth = false,
@@ -62,7 +60,7 @@ function SingleParentBarStats({
 				className={styles.graphs}
 				style={{ width: isFullWidth ? '100%' : '69%' }}
 			>
-				{['Operational Profitability', 'Revenue', 'Expense'].map((cardTitle) => (
+				{GRAPHS.map((cardTitle) => (
 					<SingleGraphCard
 						heading={cardTitle}
 						key={cardTitle}

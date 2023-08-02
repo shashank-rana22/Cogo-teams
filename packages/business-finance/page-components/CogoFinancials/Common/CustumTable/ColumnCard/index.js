@@ -4,6 +4,8 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import { LABEL_MAPPING } from '../../../constants';
+
 import Details from './Details';
 import styles from './styles.module.css';
 
@@ -14,11 +16,6 @@ const HUNDERED_PERCENT = 100;
 const TOTAL_SPAN = 12;
 
 const DEFAULT_AMOUNT = 0;
-
-const LABEL_MAPPING = {
-	Financially   : 'actual',
-	Operationally : 'operational',
-};
 
 function ColumnCard({
 	config = {},
@@ -86,14 +83,14 @@ function ColumnCard({
 					</div>
 				))}
 			</div>
-			{show ? (
+			{show && (
 				<Details
 					item={item}
 					taxType={taxType}
 					LABEL_MAPPING={LABEL_MAPPING}
 					type={type}
 				/>
-			) : null}
+			)}
 		</div>
 	);
 }

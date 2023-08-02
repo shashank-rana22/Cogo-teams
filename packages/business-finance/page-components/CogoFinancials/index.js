@@ -16,11 +16,6 @@ import MultipleFilters from './MultipleFilters';
 import styles from './styles.module.css';
 import TableComp from './TableComp';
 
-const mappingCards = [
-	{ label: 'Estimated Revenue', value: 'INR 5,40,000', stats: '120 Invoices | 24 Shipments' },
-	{ label: 'Estimated Cost', value: 'INR 10,40,000', stats: '210 Invoices | 80 Shipments' },
-];
-
 const geo = getGeoConstants();
 const countryCode = geo?.country.code;
 const DEFAULT_ENTITY_DATA = Object.values(GLOBAL_CONSTANTS.cogoport_entities)?.filter(
@@ -80,7 +75,7 @@ function CogoFinancials() {
 		financialData, financialLoading,
 		operationalData, operationalLoading,
 		ongoingData, ongoingLoading,
-	} = useGetProfitabilityStats({ filter, entity, timeRange, activeShipmentCard, customDate });
+	} = useGetProfitabilityStats({ filter, entity, timeRange, customDate, showShipmentList });
 
 	const handleClick = () => {
 		setShowShipmentList(false);
@@ -142,7 +137,6 @@ function CogoFinancials() {
 							heading="Ongoing Shipments"
 							cardId="ongoing"
 							setActiveShipmentCard={setActiveShipmentCard}
-							mappingCards={mappingCards}
 							cardData={ongoingData}
 							loading={ongoingLoading}
 							taxType={taxType}
@@ -192,7 +186,6 @@ function CogoFinancials() {
 									heading="Ongoing Shipments"
 									cardId="ongoing"
 									setActiveShipmentCard={setActiveShipmentCard}
-									mappingCards={mappingCards}
 									cardData={ongoingData}
 									loading={ongoingLoading}
 									taxType={taxType}
@@ -232,7 +225,7 @@ function CogoFinancials() {
 				</div>
 			)}
 
-			{showShipmentList ? (
+			{showShipmentList && (
 				<div>
 					<Filters setTableFilters={setTableFilters} tableFilters={tableFilters} />
 					<TableComp
@@ -251,10 +244,7 @@ function CogoFinancials() {
 							? 'Financially' : 'Operationally'}
 					/>
 				</div>
-			)
-				: (
-					null
-				)}
+			)}
 		</div>
 	);
 }

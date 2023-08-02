@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 const fields = ({ heading }) => ['Pre Checkout', `${heading === 'Revenue' ? 'KAM' : 'RD'} Wallet`,
 	`${heading === 'Revenue' ? 'Sales' : 'Buy'} Quotation`, `Actual ${heading}`, 'Deviation'];
 
-const DEFAULT_LEN = 1;
+const EXTRA_LENGTH = 1;
 const DEFAULT_AMOUNT = 0;
 
 function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [], type = '' }) {
@@ -33,7 +33,7 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 
 	const mappings = heading === 'Revenue' ? KEY_MAPPINGS_REVENUE : KEY_MAPPINGS_EXPENSE;
 	const getFields = fields({ heading });
-	const isLast = getFields.length - DEFAULT_LEN;
+	const isLast = getFields.length - EXTRA_LENGTH;
 	const amount = ({ field }) => (item?.[`${mappings[field]}${taxType}`]
 	|| item?.[`${mappings[field]}`] || DEFAULT_AMOUNT);
 	const isNegative = amount < DEFAULT_AMOUNT;

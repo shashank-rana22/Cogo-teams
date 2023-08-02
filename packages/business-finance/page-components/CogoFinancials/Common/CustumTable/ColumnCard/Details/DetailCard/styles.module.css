@@ -3,28 +3,27 @@
 	align-items: center;
 	width: 180px;
 	min-height: 50px;
-	padding-right: 80px;
-	padding-left: 16px;
+	padding: 0 80px 0 16px;
 	margin-right: 80px;
-	color: #828282;
-	border-right: 1px solid #d9d9d9;
+	color: var(--color-secondary-greyscale-3);
+	border-right: 1px solid var(--color-secondary-greyscale-4);
 }
 
 .card {
 	display: flex;
 	align-items: center;
 	padding: 16px;
-	border-top: 1px solid #d9d9d9;
+	border-top: 1px solid var(--color-secondary-greyscale-5);
 }
 
 .key {
 	padding-bottom: 8px;
 	font-weight: 500;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 }
 
 .value {
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 }
 
 .singlefield {
@@ -37,9 +36,9 @@
 }
 
 .negative {
-	color: red;
+	color: var(--color-primary-error-red-2);
 }
 
 .positive {
-	color: green;
+	color: var(--color-tertiary-success-green-2);
 }

@@ -5,6 +5,7 @@ import React from 'react';
 import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
 import RenderCardHeader from '../RenderCardHeader';
 
+import getMappingCard from './getMappingCard';
 import StatCard from './statCard';
 import styles from './styles.module.css';
 
@@ -32,26 +33,14 @@ function ServiceWiseStats({
 		specificServiceLevel : activeService,
 	});
 
-	const mappingCard = [
-		{
-			label : 'Estimated Revenue',
-			key   : 'estimatedRevenue',
-			value : displayAmount(mainCardData[`estimatedRevenue${taxType}`], currency),
-			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
-		},
-		{
-			label : 'Estimated Cost',
-			key   : 'estimatedCost',
-			value : displayAmount(mainCardData[`estimatedCost${taxType}`], currency),
-			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
-		},
-		{
-			label : 'Estimated Profit',
-			key   : 'estimatedProfit',
-			value : displayAmount(mainCardData[`estimatedProfit${taxType}`], currency),
-			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
-		},
-	];
+	const mappingCard = getMappingCard({
+		displayAmount,
+		mainCardData,
+		taxType,
+		currency,
+		invoiceCount,
+		jobCount,
+	});
 
 	const services = (singleService || []).map((item) => ({
 		label : (item.serviceName)?.replaceAll('_', ' '),

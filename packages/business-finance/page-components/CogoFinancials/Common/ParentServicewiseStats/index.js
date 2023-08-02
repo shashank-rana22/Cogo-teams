@@ -5,10 +5,11 @@ import { IcMArrowBack, IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { mappingCardsData } from '../../constants';
+import { MAPPING_CARDS_DATA } from '../../constants';
 import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
 import ServiceWiseStats from '../ServicewiseStats';
 
+import getCardData from './getCardData';
 import StatCard from './statCard';
 import styles from './styles.module.css';
 
@@ -42,23 +43,7 @@ function ParentServicewiseStats({
 		customDate,
 	});
 
-	const cardData = [
-		{
-			label : 'Estimated Revenue',
-			value : displayAmount(mainCardData[`estimatedRevenue${taxType}`], currency),
-			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
-		},
-		{
-			label : 'Estimated Cost',
-			value : displayAmount(mainCardData[`estimatedCost${taxType}`], currency),
-			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
-		},
-		{
-			label : 'Estimated Profit',
-			value : displayAmount(mainCardData[`estimatedProfit${taxType}`], currency),
-			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
-		},
-	];
+	const cardData = getCardData({ displayAmount, mainCardData, invoiceCount, taxType, currency, jobCount });
 
 	const services = (serviceLevelData || []).map((item) => (item.serviceName));
 
@@ -67,21 +52,16 @@ function ParentServicewiseStats({
 			{isEmpty(activeService) ? (
 				<div className={styles.container}>
 					<div className={styles.justifiy}>
-						<div>
+						<div className={styles.header}>
+							<IcMArrowBack
+								onClick={() => setActiveShipmentCard('')}
+								style={{ cursor: 'pointer', marginRight: '8px' }}
+							/>
 							<div>
-								<div className={styles.header}>
-									<IcMArrowBack
-										onClick={() => setActiveShipmentCard('')}
-										style={{ cursor: 'pointer', marginRight: '8px' }}
-									/>
-									<div>
-										<div>Ongoing Shipments</div>
-										<div className={styles.bottom_line} />
-									</div>
-									<div className={styles.info}><IcMInfo /></div>
-								</div>
+								<div>Ongoing Shipments</div>
+								<div className={styles.bottom_line} />
 							</div>
-
+							<div className={styles.info}><IcMInfo /></div>
 						</div>
 					</div>
 
@@ -97,7 +77,7 @@ function ParentServicewiseStats({
 									)?.[GLOBAL_CONSTANTS.zeroth_index];
 									return (
 										<StatCard
-											mappingCards={mappingCardsData}
+											mappingCards={MAPPING_CARDS_DATA}
 											service={service}
 											key={service}
 											setActiveService={setActiveService}
@@ -119,23 +99,21 @@ function ParentServicewiseStats({
 					</div>
 				</div>
 			) : (
-				<div>
-					<ServiceWiseStats
-						activeService={activeService}
-						setActiveService={setActiveService}
-						mainCardData={(serviceLevelData || []).filter(
-							(item) => item.serviceName === activeService,
-						)?.[GLOBAL_CONSTANTS.zeroth_index]}
-						serviceLevelData={serviceLevelData}
-						displayAmount={displayAmount}
-						taxType={taxType}
-						entity={entity}
-						timeRange={timeRange}
-						filter={filter}
-						activeShipmentCard={activeShipmentCard}
-						customDate={customDate}
-					/>
-				</div>
+				<ServiceWiseStats
+					activeService={activeService}
+					setActiveService={setActiveService}
+					mainCardData={(serviceLevelData || []).filter(
+						(item) => item.serviceName === activeService,
+					)?.[GLOBAL_CONSTANTS.zeroth_index]}
+					serviceLevelData={serviceLevelData}
+					displayAmount={displayAmount}
+					taxType={taxType}
+					entity={entity}
+					timeRange={timeRange}
+					filter={filter}
+					activeShipmentCard={activeShipmentCard}
+					customDate={customDate}
+				/>
 			)}
 		</div>
 	);

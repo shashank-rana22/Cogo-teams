@@ -2,6 +2,7 @@ import { Button, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import { LABEL_MAPPING } from '../../constants';
 import RenderCardHeader from '../RenderCardHeader';
 import MyResponsiveBar from '../ResponsiveBar';
 
@@ -16,11 +17,6 @@ const KEY_MAPPINGS = {
 const DEFAULT_LENGTH = 1;
 const STD_WIDTH = 80;
 const DEFAULT_WIDTH = 400;
-
-const LABEL_MAPPING = {
-	Financially   : 'actual',
-	Operationally : 'operational',
-};
 
 function SingleGraphCard({
 	heading = '',

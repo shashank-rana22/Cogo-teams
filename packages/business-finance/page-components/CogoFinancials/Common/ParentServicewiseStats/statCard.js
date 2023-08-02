@@ -8,11 +8,11 @@ const DEFAULT_INDEX = 1;
 function StatCard({
 	mappingCards = [], service = '', isMain = false,
 	setActiveService = () => {},
-	singleServiceData = [],
+	singleServiceData = {},
 	taxType = '',
 	displayAmount = () => {},
 }) {
-	const { currency, invoiceCount = 0, jobCount = 0 } = singleServiceData || [];
+	const { currency, invoiceCount = 0, jobCount = 0 } = singleServiceData || {};
 	return (
 		<div
 			key={service}
@@ -21,18 +21,17 @@ function StatCard({
 			role="presentation"
 			onClick={() => setActiveService(service)}
 		>
-			{isMain ? null : (
+			{!isMain && (
 				<div className={styles.service}>
 					{service}
 					<div className={styles.underline} />
 				</div>
 			)}
-			<div style={{
-				display        : 'flex',
-				justifyContent : 'space-between',
-				flexDirection  : isMain ? 'column' : 'row',
-
-			}}
+			<div
+				className={styles.mapping_cards_group}
+				style={{
+					flexDirection: isMain ? 'column' : 'row',
+				}}
 			>
 				{mappingCards.map((item, index) => (
 					<div className={cl`${styles.stats} ${isMain && styles.margin}`} key={item.label}>

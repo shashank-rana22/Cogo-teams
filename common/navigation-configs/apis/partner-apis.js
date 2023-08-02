@@ -8847,8 +8847,21 @@ const partner = {
 			access_type : 'private',
 		},
 	],
-	cogo_financials : [],
-	settlement      : [
+	cogo_financials: [
+		{
+			api         : 'get_common_job_profitability_stats',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_profitability_service_level_stats',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_profitability_list_shipment',
+			access_type : 'private',
+		},
+	],
+	settlement: [
 		{
 			api          : 'list_organizations',
 			access_type  : 'private',

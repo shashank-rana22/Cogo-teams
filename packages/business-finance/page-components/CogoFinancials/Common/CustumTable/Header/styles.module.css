@@ -14,5 +14,5 @@
 }
 
 .border {
-	border-bottom: 2px solid #f68b21;
+	border-bottom: 2px solid var(--color-accent-orange-2);
 }

@@ -1,4 +1,4 @@
-export const mappingCardsData = [
+export const MAPPING_CARDS_DATA = [
 	{
 		label : 'Estimated Revenue',
 		name  : 'estimatedRevenue',
@@ -8,3 +8,8 @@ export const mappingCardsData = [
 		name  : 'estimatedCost',
 	},
 ];
+
+export const LABEL_MAPPING = {
+	Financially   : 'actual',
+	Operationally : 'operational',
+};

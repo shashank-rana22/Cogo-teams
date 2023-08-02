@@ -2,6 +2,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import ClosedShipmentCard from '../../ClosedShipmentCard';
+import { LABEL_MAPPING } from '../../constants';
 import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
 import RenderCardHeader from '../RenderCardHeader';
 import SingleGraphCard from '../SingleGraphCard';
@@ -9,10 +10,7 @@ import SingleGraphCard from '../SingleGraphCard';
 import SingleParentBarStats from './SingleParentBarStats';
 import styles from './styles.module.css';
 
-const LABEL_MAPPING = {
-	Financially   : 'actual',
-	Operationally : 'operational',
-};
+const GRAPH = ['Operational Profitability', 'Revenue', 'Expense'];
 
 function ClosedGraphStats({
 	title = '', setActiveShipmentCard = () => { },
@@ -80,7 +78,7 @@ function ClosedGraphStats({
 						</div>
 
 						<div className={styles.graphs}>
-							{['Operational Profitability', 'Revenue', 'Expense'].map((cardTitle) => (
+							{GRAPH.map((cardTitle) => (
 								<SingleGraphCard
 									heading={cardTitle}
 									key={cardTitle}
