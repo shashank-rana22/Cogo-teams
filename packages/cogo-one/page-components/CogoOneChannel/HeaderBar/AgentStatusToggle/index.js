@@ -13,11 +13,13 @@ function AgentStatusToggle({ firestore = {} }) {
 				className={styles.settings_icon}
 				onClick={() => setShowAgentDetails(true)}
 			/>
-			<AgentModal
-				showAgentDetails={showAgentDetails}
-				setShowAgentDetails={setShowAgentDetails}
-				firestore={firestore}
-			/>
+			{showAgentDetails && (
+				<AgentModal
+					showAgentDetails={showAgentDetails}
+					setShowAgentDetails={setShowAgentDetails}
+					firestore={firestore}
+				/>
+			)}
 		</>
 	);
 }

@@ -65,9 +65,9 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 					placeholder="Enter number"
 				/>
 				<div className={styles.number_div}>
-					{mobileNumberPads.map(({ label, lowerlabel, icon }) => (
-						<>
-							{label !== '' && (
+					{mobileNumberPads.map(({ label, key, lowerlabel, icon }) => (
+						<div key={key}>
+							{label && (
 								<div
 									role="presentation"
 									className={styles.number_pad}
@@ -88,7 +88,7 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 									</div>
 								)}
 							</div>
-						</>
+						</div>
 					))}
 				</div>
 				<div

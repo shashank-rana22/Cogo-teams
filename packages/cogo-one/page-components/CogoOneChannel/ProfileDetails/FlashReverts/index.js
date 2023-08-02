@@ -37,7 +37,7 @@ function FlashReverts({
 		return (
 			<div className={styles.loader_div}>
 				<IcMServices className={styles.icon} />
-				<text>User is Not a Service Provider</text>
+				<div>User is Not a Service Provider</div>
 			</div>
 		);
 	}

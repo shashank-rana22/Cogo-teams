@@ -92,18 +92,24 @@ function AgentModal({
 						isClearable
 					/>
 				</div>
-				{!isEmpty(modifiedGroupedAgents)
-					? Object.keys(modifiedGroupedAgents).map((eachType) => (
-						<GroupedAgents
-							key={eachType}
-							groupedList={modifiedGroupedAgents[eachType]}
-							groupName={eachType}
-							createLoading={createLoading}
-							updateAgentPreference={updateAgentPreference}
-							loading={loading}
-						/>
-					))
-					: <div className={styles.empty_state}>No data found</div>}
+				{isEmpty(modifiedGroupedAgents)
+					? (
+						<div className={styles.empty_state}>
+							No data found
+						</div>
+					)
+					: Object.keys(modifiedGroupedAgents).map(
+						(eachType) => (
+							<GroupedAgents
+								key={eachType}
+								groupedList={modifiedGroupedAgents[eachType]}
+								groupName={eachType}
+								createLoading={createLoading}
+								updateAgentPreference={updateAgentPreference}
+								loading={loading}
+							/>
+						),
+					)}
 			</Modal.Body>
 			<Modal.Footer className={styles.footer_styles}>
 				{!loading && (

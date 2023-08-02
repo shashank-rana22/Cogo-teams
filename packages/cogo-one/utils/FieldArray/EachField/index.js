@@ -24,9 +24,9 @@ function EachField({
 						value={field?.[eachControl?.name]}
 						control={control}
 					/>
-					<text className={styles.error_text}>
+					<div className={styles.error_text}>
 						{error?.[eachControl.name] && (error?.[eachControl.name]?.message || 'This is Required')}
-					</text>
+					</div>
 				</div>
 			);
 		})
