@@ -35,7 +35,8 @@ const useUpdateCapacityConfig = ({ setShowModal = () => {}, configId, fetchList 
 
 			Toast.success(`${MESSAGE_MAPPING[status]} Successfully!`);
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			if (error.response?.data?.status) Toast.error('Config already exist');
+			else Toast.error(getApiErrorString(error.response?.data));
 		}
 		setShowModal(false);
 	};

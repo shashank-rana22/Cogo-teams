@@ -55,7 +55,8 @@ const useCreateAgentExperienceSlabs = ({ fetchList = () => {}, agentExpSlabs = [
 			setShowForm(true);
 			Toast.success('Experience set successfully!');
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			if (error.response?.data?.status) Toast.error('Config already exist');
+			else Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 

@@ -58,7 +58,8 @@ const useCreateCssConfig = ({ setShowModal = () => {}, source = '', fetchList = 
 
 			Toast.success(`${(id || source) ? 'Updated' : 'Created'} Successfully!`);
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			if (error.response?.data?.status) Toast.error('Config already exist');
+			else Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 
