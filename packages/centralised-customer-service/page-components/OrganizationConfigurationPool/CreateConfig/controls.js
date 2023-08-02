@@ -69,7 +69,9 @@ const getControls = ({ cogoEntityId = '', reportingManagerIds = '' }) => ([
 		isClearable : true,
 		params      : {
 			filters: {
-				...(!isEmpty(reportingManagerIds) ? { sales_agent_rm_ids: [reportingManagerIds] } : {}),
+				...(!isEmpty(reportingManagerIds) ? {
+					sales_agent_rm_id: reportingManagerIds,
+				} : {}),
 				status       : 'active',
 				account_type : 'importer_exporter',
 				kyc_status   : 'verified',
