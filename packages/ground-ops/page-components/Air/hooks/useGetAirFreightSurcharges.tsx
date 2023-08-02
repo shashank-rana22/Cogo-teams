@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
 const useGetAirFreightSurcharges = (taskItem) => {
-	const [{ data = {}, loading }, trigger] = useRequest('/get_air_freight_rate_surcharge', { manual: true });
+	const [{ data = {} }, trigger] = useRequest('/get_air_freight_rate_surcharge', { manual: true });
 
 	const getAirFreightSurcharges = useCallback(async () => {
 		try {
@@ -25,7 +25,7 @@ const useGetAirFreightSurcharges = (taskItem) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [trigger]);
 
-	return { data, getAirFreightSurcharges, loading };
+	return { data, getAirFreightSurcharges };
 };
 
 export default useGetAirFreightSurcharges;
