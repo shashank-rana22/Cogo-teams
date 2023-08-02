@@ -60,3 +60,22 @@
 .additional_margin {
 	margin-top: 24px;
 }
+
+.tooltip {
+	display: flex;
+	align-items: center;
+	padding: 6px;
+	background-color: #fff;
+}
+
+.rect {
+	width: 10px;
+	height: 10px;
+	margin-right: 6px;
+}
+
+.val {
+	min-width: 100px;
+	margin-right: 4px;
+	font-size: 12px;
+}
