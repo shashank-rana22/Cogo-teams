@@ -20,7 +20,7 @@ const rawControls = ({
 	TRADE_MAPPING = {},
 }) => {
 	const isFieldsDisabled = handleDisableCond(charge, isAdminSuperAdmin);
-	const { shipment_id, shipment_type, entity_id } = shipment_data;
+	const { id, shipment_type, entity_id } = shipment_data;
 
 	return {
 		type         : 'edit_service_charges',
@@ -29,7 +29,7 @@ const rawControls = ({
 		showHeader   : true,
 		showButtons  : true,
 		path         : 'sales_invoice',
-		shipment_id,
+		shipment_id  : id,
 		shipment_type,
 		entity_id,
 		trade_type   : primary_service?.trade_type,
