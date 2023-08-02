@@ -1,4 +1,5 @@
 import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
 
 import taskDisplayNames from '../../../../../../configurations/display-name-mappings';
@@ -8,8 +9,8 @@ import styles from './styles.module.css';
 function TaskContainer({
 	children = null,
 	loading = false,
-	pendingTask,
-	actions,
+	pendingTask = {},
+	actions = '',
 	shipment_data = {},
 }) {
 	const trade_type = getTradeTypeByIncoTerm(shipment_data?.inco_term);
@@ -24,7 +25,11 @@ function TaskContainer({
 				{loading ? null : <div>{actions}</div>}
 			</div>
 
-			{loading ? <div className={styles.text}>Loading ...</div> : children}
+			{loading ? (
+				<div className={styles.loader}>
+					<ThreeDotLoader message="Loading Data" />
+				</div>
+			) : children}
 		</div>
 	);
 }

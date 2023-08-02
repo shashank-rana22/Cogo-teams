@@ -1,0 +1,41 @@
+.container {
+	.history_tl_container ul.tl li {
+		position: relative;
+		padding: 0 30px 30px;
+		font-size: var(--font-size-md);
+		list-style: none;
+		border-left: 1px solid var(--color-accent-orange-2);
+	}
+
+	.history_tl_container ul.tl li:last-child {
+		padding-bottom: 0;
+		border-left: 0;
+	}
+
+	.history_tl_container ul.tl li::before {
+		position: absolute;
+		left: -8px;
+		content: " ";
+		background: var(--color-accent-orange-2);
+		border: 8px solid var(--color-accent-orange-2);
+		border-radius: 500%;
+	}
+}
+
+.sub_container {
+	display: flex;
+	width: 100%;
+}
+
+.amount_text {
+	width: 100px;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+}
+
+.date_name_text {
+	flex-direction: column;
+	font-size: var(--font-size-sm);
+	font-weight: 500;
+	color: var(--color-secondary-greyscale-3);
+}

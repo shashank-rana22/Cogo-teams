@@ -1,30 +1,36 @@
 import { useTicketsRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-const useGetTicketStats = ({ UserID = '', activeTab = '' }) => {
+const getParams = ({ userId = '', performedById = '' }) => ({
+	UserID        : userId || undefined,
+	PerformedByID : performedById || undefined,
+});
+
+const useGetTicketStats = ({ userId = '', activeTab = '' }) => {
+	const { performedById } = useSelector(({ profile }) => ({ performedById: profile.user.id }));
+
 	const [{ loading, data }, trigger] = useTicketsRequest({
 		url     : '/stats',
 		method  : 'get',
 		authkey : 'get_tickets_stats',
 	}, { manual: true });
 
-	const fetchTicketsStats = useCallback(async () => {
+	const fetchTicketsStats = useCallback(() => {
 		try {
-			await trigger({
-				params: {
-					UserID,
-				},
+			trigger({
+				params: getParams({ userId, performedById }),
 			});
 		} catch (e) {
-			// console.log('e:', e);
+			console.error('error', e);
 		}
-	}, [trigger, UserID]);
+	}, [performedById, trigger, userId]);
 
 	useEffect(() => {
-		if (activeTab !== 'email' && UserID) {
+		if (activeTab !== 'email' && userId) {
 			fetchTicketsStats();
 		}
-	}, [fetchTicketsStats, UserID, activeTab]);
+	}, [fetchTicketsStats, userId, activeTab]);
 
 	return {
 		statsData    : data,
@@ -32,4 +38,5 @@ const useGetTicketStats = ({ UserID = '', activeTab = '' }) => {
 		fetchTicketsStats,
 	};
 };
+
 export default useGetTicketStats;

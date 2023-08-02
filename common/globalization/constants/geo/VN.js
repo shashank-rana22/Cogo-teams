@@ -421,6 +421,15 @@ export default {
 		},
 	},
 	navigations: {
+		settlement_onAccountCollection: {
+			tabs: [
+				'ap-ar-settlement',
+				'history',
+				'onAccountCollection',
+				'JournalVoucher',
+			],
+		},
+
 		supply_dashboard: {
 			rfq_enquiries: {
 				tabs: [
@@ -539,6 +548,17 @@ export default {
 				has_voice_call_access       : false,
 				template_default_language   : 'vietnamese',
 				supply_sender_mobile_number : '918069195980',
+			},
+
+			business_finance: {
+				ar: {
+					settlement: {
+						invoice_number: {
+							document_key : 'destinationIrnNumber',
+							irn_key      : 'destinationDocumentValue',
+						},
+					},
+				},
 			},
 		},
 	},

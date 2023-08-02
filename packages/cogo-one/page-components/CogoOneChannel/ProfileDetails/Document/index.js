@@ -1,5 +1,5 @@
-import { Popover } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
+import { Popover, Pagination } from '@cogoport/components';
+import { IcMFilter, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -19,7 +19,7 @@ function Documents({
 	activeVoiceCard = {},
 	activeTab = 'message',
 	customerId = '',
-	documents_count = 0,
+	documentsCount = 0,
 	formattedMessageData = {},
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
@@ -35,13 +35,16 @@ function Documents({
 	const {
 		list = [],
 		loading = false,
-		documentsList = () => {},
+		getDocumentsList = () => {},
 		orgId = '',
 		userId = '',
 		userMobile = '',
 		leadUserId = '',
 		is_pan_uploaded = false,
 		is_gst_uploaded = false,
+		setPagination = () => {},
+		pagination,
+		totalDocumentCount = 0,
 	} = useListOmnichannelDocuments({
 		activeMessageCard,
 		activeVoiceCard,
@@ -53,25 +56,31 @@ function Documents({
 
 	useEffect(() => {
 		const listIds = list.map((i) => i.id);
-		if (!isEmpty(listIds) && documents_count > INIT_CNT) {
+		if (!isEmpty(listIds) && documentsCount > INIT_CNT) {
 			documentCountUpdates({ listIds });
 		}
-	}, [documentCountUpdates, documents_count, list]);
+	}, [documentCountUpdates, documentsCount, list]);
 
 	const handleFilters = () => {
-		documentsList(filters);
+		getDocumentsList(filters);
 	};
 
 	const handleReset = () => {
 		setFilters('');
-		documentsList();
+		getDocumentsList();
 	};
 
 	return (
 		<>
 			<div className={styles.header}>
-				<div className={styles.title}>Documents</div>
-				<div className={styles.filter_icon}>
+				<div className={styles.title}>
+					Documents
+				</div>
+				<div className={styles.icons_container}>
+					<IcMRefresh
+						className={styles.refresh_icon}
+						onClick={() => getDocumentsList(filters)}
+					/>
 					<Popover
 						placement="left"
 						disabled={loading}
@@ -88,12 +97,12 @@ function Documents({
 						onClickOutside={() => setFilterVisible(false)}
 					>
 						<IcMFilter
-							width={20}
-							height={20}
+							className={styles.filter_icon}
 							onClick={() => setFilterVisible(!filterVisible)}
 						/>
+
 					</Popover>
-					{!isEmpty(filters) && <div className={styles.filters_applied} />}
+					{filters && <div className={styles.filters_applied} />}
 				</div>
 			</div>
 
@@ -111,16 +120,27 @@ function Documents({
 					userMobile={userMobile}
 					leadUserId={leadUserId}
 					formattedMessageData={formattedMessageData}
+					getDocumentsList={getDocumentsList}
 				/>
 
 			)}
+			{(!isEmpty(list)) ? (
+				<div className={styles.pagination}>
+					<Pagination
+						currentPage={pagination}
+						totalItems={totalDocumentCount}
+						pageSize={10}
+						onPageChange={(val) => setPagination(val)}
+					/>
+				</div>
+			) : null}
 
 			{showModal && (
 				<UploadDetailsModal
 					setShowModal={setShowModal}
 					orgId={orgId}
 					documentType={showModal}
-					documentsList={documentsList}
+					getDocumentsList={getDocumentsList}
 					singleItem={singleItem}
 					setSingleItem={setSingleItem}
 					isPanUploaded={is_pan_uploaded}

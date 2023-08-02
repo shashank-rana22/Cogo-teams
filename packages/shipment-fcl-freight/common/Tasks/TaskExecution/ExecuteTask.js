@@ -1,4 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { useContext } from 'react';
 
 import useGetOrganization from '../../../hooks/useGetOrganization';
@@ -63,7 +64,9 @@ function ExecuteTask({
 		: {};
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return (
+			<ThreeDotLoader message="Fetching Task" />
+		);
 	}
 
 	if (
@@ -192,6 +195,11 @@ function ExecuteTask({
 				taskListRefetch={taskListRefetch}
 			/>
 		);
+	}
+
+	if (
+		task?.task === 'generate_cargo_insurance') {
+		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
 	if (task.task === 'upload_compliance_documents') {

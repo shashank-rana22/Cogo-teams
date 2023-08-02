@@ -24,9 +24,6 @@
     },
     "cancel_shipment": {
         "can_cancel": true,
-        "list_reasons": {
-            "stakeholder_type": ["admin"]
-        },
         "role": "sales"
     },
     "purchase":{
