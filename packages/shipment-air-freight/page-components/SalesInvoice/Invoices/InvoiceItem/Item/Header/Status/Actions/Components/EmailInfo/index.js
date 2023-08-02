@@ -29,14 +29,6 @@ function EmailInfo({
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										{`Live email sent: ${invoice.sales_email_count || '-'}`}
 									</div>
-									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
-										<div className={cl`${styles.flex_row} ${styles.margin}`}>
-											{`UTR Number:	${invoice?.sales_utr?.utr_number || ''}`}
-										</div>
-										<div className={cl`${styles.flex_row} ${styles.margin}`}>
-											{`Status:	${invoice?.sales_utr?.status || ''}`}
-										</div>
-									</div>
 								</div>
 							)}
 							theme="light"
