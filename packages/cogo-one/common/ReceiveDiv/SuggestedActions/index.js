@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 const COUNTRY_CODE_START = 0;
 const COUNTRY_CODE_END = 2;
 
-function SuggestedActions({ formattedData = {}, viewType = '' }) {
+function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} }) {
 	const dispatch = useDispatch();
 
 	const [modalType, setModalType] = useState('');
@@ -40,7 +40,7 @@ function SuggestedActions({ formattedData = {}, viewType = '' }) {
 	const code = mobile_no?.slice(COUNTRY_CODE_START, COUNTRY_CODE_END);
 	const number = mobile_no?.slice(COUNTRY_CODE_END);
 
-	const { userData } = useGetUser({ userId: user_id, lead_user_id, customerId: id });
+	const { userData = {} } = useGetUser({ userId: user_id, lead_user_id, customerId: id });
 
 	const handleCall = () => {
 		if (mobile_no && hasVoiceCallAccess) {
@@ -62,7 +62,22 @@ function SuggestedActions({ formattedData = {}, viewType = '' }) {
 	};
 
 	const handleSendEmail = () => {
-		setModalType('email');
+		if (!userData?.email) {
+			return;
+		}
+
+		const { setButtonType, setEmailState } = mailProps;
+		setButtonType('send_mail');
+		setEmailState(
+			(prev) => ({
+				...prev,
+				body          : '',
+				subject       : '',
+				toUserEmail   : [userData?.email],
+				ccrecipients  : [],
+				bccrecipients : [],
+			}),
+		);
 	};
 
 	const handleSendTemplate = () => {
@@ -92,7 +107,7 @@ function SuggestedActions({ formattedData = {}, viewType = '' }) {
 		{
 			label     : 'Send Email',
 			action    : handleSendEmail,
-			disabled  : false,
+			disabled  : !userData?.email,
 			accessKey : 'new_mail',
 		},
 	];

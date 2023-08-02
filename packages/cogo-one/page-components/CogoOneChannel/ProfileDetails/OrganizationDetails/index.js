@@ -1,6 +1,7 @@
-import { Button, Pill, Placeholder, Loader } from '@cogoport/components';
+import { Button, Pill, Placeholder, Loader, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcCCogoCoin } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -28,19 +29,28 @@ function OrganizationDetails({
 	hideCpButton = false,
 	getOrgDetails = () => {},
 }) {
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
+
 	const [showConvertModal, setShowConvertModal] = useState(false);
+
 	const geo = getGeoConstants();
+
 	const {
 		organization_id: messageOrgId = '', user_id: messageUserId = '',
 		account_type = '',
+		lead_user_details = {},
 	} = formattedMessageData || {};
-	const { organization_id: voiceOrgId = '', user_id: voiceUserId = '' } = activeVoiceCard || {};
 
+	const { organization_id: voiceOrgId = '', user_id: voiceUserId = '' } = activeVoiceCard || {};
+	const leadOrganizationId = lead_user_details?.lead_organization_id;
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 	const userId = activeTab === 'message' ? messageUserId : voiceUserId;
 
-	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
+	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({
+		organizationId,
+		leadOrganizationId,
+	});
 	const { agent = {}, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
 	const isOrgUsersVisible = account_type === 'service_provider';
 	const {
@@ -70,7 +80,11 @@ function OrganizationDetails({
 		getOrgDetails();
 	};
 
-	if (isEmpty(organizationId)) {
+	const handleRoute = () => {
+		window.open(`/${partnerId}/lead-organization/${leadOrganizationId}`, '_blank');
+	};
+
+	if (isEmpty(organizationId || leadOrganizationId)) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.title}>Organization Details</div>
@@ -126,27 +140,28 @@ function OrganizationDetails({
 						role="presentation"
 						className={styles.name}
 						style={{ cursor: 'pointer' }}
-						// eslint-disable-next-line no-undef
-						onClick={openNewTab}
+						onClick={organizationId ? openNewTab : handleRoute}
 					>
 						ID:
 						{' '}
 						{serial_id}
 					</div>
-					<div className={styles.convert_to_cp}>
-						<Pill
-							key="Importer/Exporter"
-							size="sm"
-							color="#FFF7BF"
-						>
-							{tags.includes('partner') ? 'Channel Partner' : (
-								<div>
-									{ACCOUNT_TYPE[account_type]}
-								</div>
-							)}
+					<div className={cl`${styles.convert_to_cp} ${account_type ? styles.check_type : ''}`}>
+						{account_type ? (
+							<Pill
+								key="Importer/Exporter"
+								size="sm"
+								color="#FFF7BF"
+							>
+								{tags.includes('partner') ? 'Channel Partner' : (
+									<div>
+										{ACCOUNT_TYPE[account_type]}
+									</div>
+								)}
+							</Pill>
+						) : null }
 
-						</Pill>
-						{ !hideCpButton && !orgLoading && (
+						{!hideCpButton && !orgLoading && (
 							<Button
 								size="sm"
 								themeType="primary"
