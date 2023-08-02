@@ -160,15 +160,15 @@ export const EMPLOYEE_STATUS = {
 export const EMPLOYEE_STATUS_OPTIONS = [
 	{
 		label : 'Confirmed',
-		value : 'Confirmed',
+		value : 'confirmed',
 	},
 	{
 		label : 'Probation',
-		value : 'Probation',
+		value : 'probation',
 	},
 	{
 		label : 'Separated',
-		value : 'Separated',
+		value : 'separated',
 	},
 	{
 		label : 'Notice',
