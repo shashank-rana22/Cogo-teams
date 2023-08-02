@@ -1,18 +1,18 @@
-import { Button, Modal, Pill } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { AsyncSelectController, RadioGroupController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Layout, useShipmentBack } from '@cogoport/ocean-modules';
-import { startCase, isEmpty, upperCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
 import Footer from '../Footer';
 
+import DestinationPortStep from './DestinationPortStep';
 import styles from './styles.module.css';
 
 const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent'];
-
-const ZEROTH_INDEX = 0;
 const FIRST_STEP = 1;
 const SECOND_STEP = 2;
 
@@ -47,17 +47,7 @@ function Form({
 		inco_term = '',
 	} = primary_service;
 
-	const {
-		name: destination_port_name = '',
-	} = destination_port;
-
-	const {
-		cargo_weight_per_container = 0,
-		commodity = '',
-		container_size = '',
-		container_type = '',
-		containers_count = '',
-	} = cargo_details[ZEROTH_INDEX] || {};
+	const { name: destination_port_name = '' } = destination_port;
 
 	const haveToAskOrgDetails = !KAM_AGENTS.includes(activeStakeholder) && consignee_shipper_id;
 
@@ -74,7 +64,7 @@ function Form({
 		organization_id,
 	});
 
-	const { errors, formValues, control } = formProps;
+	const { errors, formValues, control, resetField } = formProps;
 
 	const formOrganizationId = formValues?.organization_id;
 
@@ -90,8 +80,10 @@ function Form({
 	];
 
 	const getModifiedOptions = (option) => option?.options?.map(
-		(op) => ({ ...op, custom_key: { user_id: op.user_id, branch_id: op.branch.id } }),
+		(op) => ({ ...op, custom_key: `${op.user_id}:${op.branch.id}` }),
 	);
+
+	const [customValueUserId, customValueBranchId] = (formValues?.user_id || '').split(':');
 
 	return (
 		<Modal
@@ -120,75 +112,61 @@ function Form({
 			)}
 			/>
 
-			<Modal.Body>
-				{ isEmpty(controls) && step === FIRST_STEP
-					? (
-						<div className={styles.modal_content}>
-							<div className={styles.label}> Are you sure you want to Upsell this service?</div>
-							<div className={styles.destination_label}>
-								Destination Port:
-								{' '}
-								<strong>{destination_port_name}</strong>
-							</div>
-							<div>
-								<Pill>{`${cargo_weight_per_container}MT`}</Pill>
-								<Pill>{startCase(container_type)}</Pill>
-								<Pill>{startCase(commodity)}</Pill>
-								<Pill>{`${container_size}ft`}</Pill>
-								<Pill>{`${containers_count} containers`}</Pill>
-								<Pill>{startCase(trade_type)}</Pill>
-								<Pill>{`Inco : ${upperCase(inco_term)}`}</Pill>
-							</div>
-						</div>
-					)
-					: null }
-				{ !isEmpty(controls) && step === FIRST_STEP
-					? (
-						<Layout
-							control={control}
-							errors={errors}
-							fields={controls}
-						/>
-					)
-					: null }
+			<Modal.Body className={styles.modal_body}>
+				{isEmpty(controls) && step === FIRST_STEP ? (
+					<DestinationPortStep
+						cargoDetails={{
+							...(cargo_details[GLOBAL_CONSTANTS.zeroth_index] || {}),
+							trade_type,
+							inco_term,
+						}}
+						destination_port_name={destination_port_name}
+					/>
+				) : null }
 
-				{ step === SECOND_STEP && haveToAskOrgDetails
-					? (
-						<>
-							<div> Choose The organisation for which you want to upsell- </div>
+				{!isEmpty(controls) && step === FIRST_STEP ? (
+					<Layout
+						control={control}
+						errors={errors}
+						fields={controls}
+					/>
+				) : null }
 
-							<RadioGroupController
-								options={orgOptions}
-								control={formProps.control}
-								name="organization_id"
-								rules={{ required: 'Organisation is required' }}
-							/>
-						</>
-					) : null}
+				{step === SECOND_STEP && haveToAskOrgDetails ? (
+					<>
+						<div> Choose the organisation for which you want to upsell - </div>
 
-				{
-					step === SECOND_STEP ? (
-						<AsyncSelectController
-							className={styles.select}
+						<RadioGroupController
+							options={orgOptions}
 							control={formProps.control}
-							name="user_id"
-							asyncKey="organization_users"
-							isClearable
-							valueKey="custom_key"
-							initialCall={false}
-							placeholder="Select Organization User"
-							params={{
-								filters: {
-									organization_id : formOrganizationId,
-									status          : 'active',
-								},
-								page_limit: 30,
-							}}
-							getModifiedOptions={getModifiedOptions}
-							rules={{ required: 'User is required' }}
+							name="organization_id"
+							onChange={() => resetField('user_id')}
+							rules={{ required: 'Organisation is required' }}
 						/>
-					) : null
-}
+					</>
+				) : null}
+
+				{step === SECOND_STEP ? (
+					<AsyncSelectController
+						className={styles.select}
+						control={formProps.control}
+						name="user_id"
+						asyncKey="organization_users"
+						isClearable
+						valueKey="custom_key"
+						initialCall={false}
+						placeholder="Select Organization User"
+						params={{
+							filters: {
+								organization_id : formOrganizationId,
+								status          : 'active',
+							},
+							page_limit: 30,
+						}}
+						getModifiedOptions={getModifiedOptions}
+						rules={{ required: 'User is required' }}
+					/>
+				) : null}
 
 				{!isEmpty(errors?.user_id)
 					? <div className={styles.error}>{errors?.user_id?.message}</div>
@@ -206,7 +184,7 @@ function Form({
 					step={step}
 					setStep={setStep}
 					organization_id={formOrganizationId}
-					user={formValues?.user_id}
+					user={{ user_id: customValueUserId, branch_id: customValueBranchId }}
 				/>
 			</Modal.Footer>
 		</Modal>
