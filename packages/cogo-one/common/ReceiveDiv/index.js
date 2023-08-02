@@ -65,10 +65,9 @@ function TicketPopoverContent({
 	return (
 		<div className={styles.actions}>
 			{(SHOW_ACTIONS || []).map((item) => (
-				<div key={item} className={styles.tags}>
+				<div key={item?.label} className={styles.tags}>
 					{item?.show ? (
 						<Button
-							key={item}
 							className={styles.action_button}
 							size="md"
 							themeType="secondary"

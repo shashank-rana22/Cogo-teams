@@ -36,7 +36,7 @@ function SendActions({
 	const hasNoPermissionToSend = !hasPermissionToEdit || messageLoading
 	|| (isEmpty(draftMessage?.trim()) && !hasUploadedFiles);
 
-	const canSendMessage = !hasNoPermissionToSend && getCanSendMessage({ emailState });
+	const canSendMessage = !hasNoPermissionToSend && getCanSendMessage({ emailState, channelType: channel_type });
 
 	const {
 		sendPromotionalRate = () => {},
@@ -61,7 +61,7 @@ function SendActions({
 						handleProgress={handleProgress}
 						showProgress={false}
 						draggable
-						multiple
+						multiple={channel_type === 'email'}
 						accept={ACCEPT_FILE_MAPPING[channel_type] || ACCEPT_FILE_MAPPING.default}
 						className="file_uploader"
 						uploadIcon={(

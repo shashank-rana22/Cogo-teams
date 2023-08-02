@@ -39,6 +39,7 @@ function MessagesThread(
 		viewType = '',
 		setMailActions = () => {},
 		mailActions = {},
+		hasPermissionToEdit = false,
 	},
 	messageRef,
 ) {
@@ -123,6 +124,7 @@ function MessagesThread(
 						setMailActions={setMailActions}
 						mailActions={mailActions}
 						viewType={viewType}
+						hasPermissionToEdit={hasPermissionToEdit}
 					/>
 				);
 			})}

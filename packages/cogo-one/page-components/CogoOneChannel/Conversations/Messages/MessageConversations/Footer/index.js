@@ -32,13 +32,13 @@ const setEmailStateFunc = ({ mailActions, email = '' }) => {
 
 	if (actionType === 'reply') {
 		return {
-			toUserEmail : toEmail ? [sender] : [],
-			subject     : subject ? `RE: ${subject}` : '',
+			toUserEmail: toEmail ? [sender] : [],
+			subject,
 		};
 	}
 	return {
-		toUserEmail : [],
-		subject     : subject ? `FWD: ${subject}` : '',
+		toUserEmail: [],
+		subject,
 	};
 };
 
@@ -199,6 +199,7 @@ function Footer({
 					uploaderRef={uploaderRef}
 					hasPermissionToEdit={hasPermissionToEdit}
 					key={mailActions?.actionType}
+					setMailActions={setMailActions}
 				/>
 			)}
 			<div

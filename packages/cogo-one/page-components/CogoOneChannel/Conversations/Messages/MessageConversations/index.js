@@ -24,6 +24,7 @@ function MessageConversations({
 	setMailActions = () => {},
 	mailActions = {},
 	firestore = {},
+	hasPermissionToEdit = false,
 }, ref) {
 	const { id = '', channel_type = '' } = activeMessageCard || {};
 
@@ -78,6 +79,7 @@ function MessageConversations({
 					firestore={firestore}
 					scrollToBottom={scrollToLastMessage}
 					viewType={viewType}
+					hasPermissionToEdit={hasPermissionToEdit}
 					ref={ref}
 				/>
 			) }

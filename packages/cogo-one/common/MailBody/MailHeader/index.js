@@ -36,7 +36,7 @@ function ReceipientComp({ array = [], label = '' }) {
 	);
 }
 
-function MailHeader({ eachMessage = {}, setMailActions = () => {} }) {
+function MailHeader({ eachMessage = {}, setMailActions = () => {}, hasPermissionToEdit = false }) {
 	const { response, send_by = '', conversation_type = '' } = eachMessage || {};
 
 	const {
@@ -71,7 +71,7 @@ function MailHeader({ eachMessage = {}, setMailActions = () => {} }) {
 					{BUTTON_MAPPING.map((item) => {
 						const { key, icon:Icon } = item || {};
 
-						if (!Icon) {
+						if (!Icon || !hasPermissionToEdit) {
 							return null;
 						}
 

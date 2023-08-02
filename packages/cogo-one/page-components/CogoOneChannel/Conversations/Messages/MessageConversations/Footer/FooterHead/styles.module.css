@@ -76,3 +76,30 @@
 	overflow: hidden;
 	transition: height 0.3s ease-in-out;
 }
+
+.header_email {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 4px 8px;
+	background-color: #fbd1a6;
+	border-radius: 4px 4px 0 0;
+}
+
+.cross_icon {
+	width: 13px;
+	height: 13px;
+	cursor: pointer;
+	fill: #4f4f4f;
+}
+
+.reply_header_text {
+	font-size: 12px;
+	font-weight: 600;
+	color: #432609;
+
+	span {
+		margin-left: 4px;
+		font-weight: 400;
+	}
+}

@@ -27,7 +27,9 @@ function ShowMessage({ messageType, message }) {
 		)
 		: (
 			<div dangerouslySetInnerHTML={{
-				__html: renderText(message.replace(GLOBAL_CONSTANTS.regex_patterns.occurrences_of_line_breaks, '<br>')),
+				__html: renderText(
+					message?.replace(GLOBAL_CONSTANTS.regex_patterns.occurrences_of_line_breaks, '<br>'),
+				),
 			}}
 			/>
 		);
@@ -116,11 +118,11 @@ function MediaComponent({
 	);
 }
 
-function CustomDocument({ mediaUrl = '' }) {
+function CustomDocument({ mediaUrl = '', messageType = '', message = '' }) {
 	return (
 		<>
 			<CustomFileDiv mediaUrl={mediaUrl} />
-			<ShowMessage />
+			<ShowMessage messageType={messageType} message={message} />
 		</>
 	);
 }

@@ -170,7 +170,7 @@ function Messages({
 				</div>
 				<div
 					className={styles.message_container}
-					style={{ height: (channel_type === 'email' && !actionType) ? '86%' : '66%' }}
+					style={{ height: (channel_type === 'email' && !actionType) ? '83%' : '64%' }}
 				>
 					<MessageConversations
 						formattedData={formattedData}
