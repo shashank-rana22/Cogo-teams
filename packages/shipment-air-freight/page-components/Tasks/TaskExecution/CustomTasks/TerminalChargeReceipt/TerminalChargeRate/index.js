@@ -30,6 +30,7 @@ function TerminalChargeRate({
 	const {
 		createShipmentAirFreightConsolidatedInvoice,
 		loading, updateLoading,
+		data:invoiceData,
 	} = useCreateShipmentAirFreightConsolidatedInvoice({
 		sheetData,
 		mainServicesData,
@@ -41,7 +42,7 @@ function TerminalChargeRate({
 		updateShipmentAirFreightConsolidatedInvoice = () => {},
 		loading:updateConsolidatedLoading,
 		updateLoading:taskUpdateLoading,
-	} = 	useUpdateShipmentAirFreightConsolidatedInvoice({ refetch, onCancel, task_id });
+	} = 	useUpdateShipmentAirFreightConsolidatedInvoice({ refetch, onCancel, task_id, invoiceData });
 
 	const handleCreateProforma = (values) => {
 		createShipmentAirFreightConsolidatedInvoice(values);

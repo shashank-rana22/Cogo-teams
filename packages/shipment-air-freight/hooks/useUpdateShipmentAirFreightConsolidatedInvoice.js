@@ -1,10 +1,12 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 
 import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
 const useUpdateShipmentAirFreightConsolidatedInvoice = ({
 	refetch = () => {}, onCancel = () => {}, task_id,
+	invoiceData = [],
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_air_freight_consolidated_invoice',
@@ -20,8 +22,8 @@ const useUpdateShipmentAirFreightConsolidatedInvoice = ({
 		try {
 			await trigger({
 				params: {
-					status: 'finance_approved',
-					// id,
+					status : 'finance_approved',
+					id     : invoiceData[GLOBAL_CONSTANTS.zeroth_index],
 				},
 			});
 			apiTrigger(task_id);

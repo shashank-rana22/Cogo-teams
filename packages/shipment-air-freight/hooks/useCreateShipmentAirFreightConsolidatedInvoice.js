@@ -8,7 +8,7 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 	entityData = {},
 	createShipmentAdditionalService = () => {},
 }) => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/create_shipment_air_freight_consolidated_invoice',
 		method : 'POST',
 	}, { manual: true });
@@ -34,6 +34,7 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 	return {
 		loading,
 		createShipmentAirFreightConsolidatedInvoice,
+		data,
 
 	};
 };

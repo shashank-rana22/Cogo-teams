@@ -1,5 +1,6 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
@@ -23,6 +24,8 @@ function List({ isSeller = false }) {
 	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
 		ShipmentDetailContext,
 	);
+
+	const tradeType = GLOBAL_CONSTANTS.options.inco_term?.[shipment_data?.inco_term]?.trade_type;
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
@@ -116,13 +119,15 @@ function List({ isSeller = false }) {
 			) : null}
 
 			<div className={styles.not_added}>
-				<Button
-					onClick={() => setTerminalChargeModal(true)}
-					className={styles.terminal_charges}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Terminal Charge
-				</Button>
+				{tradeType === 'export' ? (
+					<Button
+						onClick={() => setTerminalChargeModal(true)}
+						className={styles.terminal_charges}
+					>
+						<div className={styles.add_icon}>+</div>
+						Add Terminal Charge
+					</Button>
+				) : null}
 				<Button
 					onClick={() => setShowModal('charge_code')}
 					disabled={shipment_data?.is_job_closed}
@@ -161,6 +166,7 @@ function List({ isSeller = false }) {
 					refetch={refetch}
 					setItem={setItem}
 					closeModal={closeModal}
+					tradeType={tradeType}
 				/>
 			)}
 			{terminalChargeModal
