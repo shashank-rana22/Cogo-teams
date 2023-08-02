@@ -21,7 +21,7 @@ const useGetAgentTimeline = ({ viewType = '' }) => {
 		method : 'get',
 	}, { manual: true, autoCancel: false });
 
-	const isKamAgent = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out === true;
+	const isKamAgent = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out;
 
 	const agentTimeline = useCallback(() => {
 		if (!isKamAgent) {
