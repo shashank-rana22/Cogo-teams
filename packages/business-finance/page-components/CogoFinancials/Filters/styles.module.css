@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+
+	:global {
+		.ui_select_container {
+			width: 210px;
+		}
+
+		.ui_select_options_container {
+			width: 240px;
+		}
+	}
+}
+
+.select {
+	margin-left: 12px;
+}

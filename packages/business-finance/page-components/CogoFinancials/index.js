@@ -10,6 +10,7 @@ import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
 import CustomDateFilter from './Common/CustomDateFilter';
 import StatsCard from './Common/StatsCard';
+import Filters from './Filters';
 import useGetProfitabilityStats from './hooks/useGetProfitabilityStats';
 import MultipleFilters from './MultipleFilters';
 import styles from './styles.module.css';
@@ -41,6 +42,7 @@ function CogoFinancials() {
 	const [showShipmentList, setShowShipmentList] = useState(false);
 	const [filter, setFilter] = useState({});
 	const [activeBar, setActiveBar] = useState('');
+	const [tableFilters, setTableFilters] = useState({});
 
 	const taxType = isPreTax ? 'PreTax' : 'PostTax';
 
@@ -231,19 +233,24 @@ function CogoFinancials() {
 			)}
 
 			{showShipmentList ? (
-				<TableComp
-					activeShipmentCard={activeShipmentCard}
-					entity={entity}
-					filter={filter}
-					activeBar={activeBar}
-					timeRange={timeRange}
-					customDate={customDate}
-					statsType={activeShipmentCard === 'financial'
-						? 'FINANCE_CLOSED' : 'OPR_CLOSED'}
-					taxType={taxType}
-					type={activeShipmentCard === 'financial'
-						? 'Financially' : 'Operationally'}
-				/>
+				<div>
+					<Filters setTableFilters={setTableFilters} tableFilters={tableFilters} />
+					<TableComp
+						activeShipmentCard={activeShipmentCard}
+						entity={entity}
+						filter={filter}
+						activeBar={activeBar}
+						timeRange={timeRange}
+						customDate={customDate}
+						setTableFilters={setTableFilters}
+						tableFilters={tableFilters}
+						statsType={activeShipmentCard === 'financial'
+							? 'FINANCE_CLOSED' : 'OPR_CLOSED'}
+						taxType={taxType}
+						type={activeShipmentCard === 'financial'
+							? 'Financially' : 'Operationally'}
+					/>
+				</div>
 			)
 				: (
 					null

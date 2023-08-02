@@ -24,9 +24,11 @@ const useGetShipmentList = ({
 	filter = {},
 	activeBar = '',
 	customDate = new Date(),
+	tableFilters,
+	setTableFilters,
 }) => {
 	const [
-		{ data:serviceLevelData, loading:serviceLevelLoading },
+		{ data: serviceLevelData, loading: serviceLevelLoading },
 		serviceLevelApiTrigger,
 	] = useRequestBf(
 		{
@@ -37,10 +39,12 @@ const useGetShipmentList = ({
 		{ manual: true },
 	);
 
+	const { pageIndex } = tableFilters;
+
 	const serviceLevelApi = useCallback((serviceLevel) => {
 		const { currency, channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
-		const { startDate:customStartDate, endDate:customEndDate } = customDate || {};
+		const { startDate: customStartDate, endDate: customEndDate } = customDate || {};
 
 		const params = {
 			statsType,
@@ -53,6 +57,7 @@ const useGetShipmentList = ({
 			service,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
 			channel,
+			pageIndex,
 		};
 
 		// no api call if no custom date & range selected
@@ -67,16 +72,18 @@ const useGetShipmentList = ({
 		}
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
-		filter, customDate, activeBar]);
+		filter, customDate, pageIndex, activeBar]);
 
 	useEffect(() => {
 		serviceLevelApi();
-	}, [serviceLevelApi, entity, timeRange, activeBar]);
+	}, [serviceLevelApi]);
 
 	return {
 		serviceLevelData,
 		serviceLevelLoading,
 		serviceLevelApi,
+		setTableFilters,
+		tableFilters,
 	};
 };
 export default useGetShipmentList;
