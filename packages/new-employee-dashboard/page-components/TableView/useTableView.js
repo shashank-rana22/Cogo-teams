@@ -9,7 +9,10 @@ import useGetZipFile from './useGetZipFile';
 
 const INITIAL_PAGE = 1;
 
-const useTableView = ({ search, btnloading, updateEmployeeStatus, bulkAction }) => {
+const useTableView = ({
+	search, btnloading, updateEmployeeStatus, bulkAction,
+	pageLimit, selectedIds, setSelectedIds,
+}) => {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('active');
 	const [page, setPage] = useState(INITIAL_PAGE);
@@ -34,7 +37,8 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus, bulkAction }) 
 						joining_before : filters?.joining_date?.endDate || undefined,
 						designation    : filters?.roles || undefined,
 					},
-					page: search ? INITIAL_PAGE : page,
+					page       : search ? INITIAL_PAGE : page,
+					page_limit : pageLimit,
 				},
 			});
 		} catch (error) {
@@ -42,7 +46,26 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus, bulkAction }) 
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
-	}, [activeTab, search, trigger, page, filters]);
+	}, [activeTab, search, trigger, page, filters, pageLimit]);
+	const { list } = data || {};
+
+	const handleAllSelect = (e) => {
+		const { checked } = e.target;
+		if (checked) {
+			const ids = list.map((val) => val.id);
+			return setSelectedIds(ids);
+		}
+		return setSelectedIds([]);
+	};
+
+	const handleSelectId = (e, id) => {
+		const { checked } = e.target;
+		if (checked) {
+			return setSelectedIds((prev) => ([...prev, id]));
+		}
+		const filterArr = selectedIds.filter((val) => val !== id);
+		return setSelectedIds(filterArr);
+	};
 
 	useEffect(() => {
 		fetch();
@@ -65,7 +88,10 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus, bulkAction }) 
 		downloadDocuments,
 		documentLoading,
 		bulkAction,
-		data,
+		handleAllSelect,
+		handleSelectId,
+		selectedIds,
+		dataArr: list,
 	});
 
 	if (activeTab !== 'rejected_by_user') {

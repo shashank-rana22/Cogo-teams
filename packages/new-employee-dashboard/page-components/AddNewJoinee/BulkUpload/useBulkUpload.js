@@ -8,8 +8,26 @@ import { useState, useEffect } from 'react';
 const onClickViewSampleFile = () => {
 	window.open(GLOBAL_CONSTANTS.sample_document_url.new_hire_bulk_upload_url, '_blank', 'noreferrer');
 };
+const getPayload = ({ SOURCE, selectedIds, finalUrl, activeTab }) => {
+	let payload;
 
-const useBulkUpload = () => {
+	if (SOURCE === 'BULKACTION') {
+		payload = {
+			action_name         : activeTab,
+			employee_detail_ids : selectedIds,
+
+		};
+	} else {
+		payload = {
+			action_name : activeTab,
+			file_url    : finalUrl,
+		};
+	}
+
+	return payload;
+};
+
+const useBulkUpload = ({ selectedIds = [], SOURCE = '' }) => {
 	const [activeTab, setActiveTab] = useState('create');
 
 	const [{ loading = false }, trigger] = useHarbourRequest({
@@ -23,10 +41,7 @@ const useBulkUpload = () => {
 		try {
 			const { finalUrl } = val?.upload_new_hire_info || {};
 
-			const payload = {
-				file_url    : finalUrl,
-				action_name : activeTab,
-			};
+			const payload = getPayload({ SOURCE, selectedIds, finalUrl, activeTab });
 
 			await trigger({ data: payload });
 

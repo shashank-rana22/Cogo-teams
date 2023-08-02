@@ -22,6 +22,10 @@ const getColumns = ({
 	downloadDocuments = () => {},
 	documentLoading,
 	bulkAction,
+	handleAllSelect,
+	handleSelectId,
+	selectedIds,
+	dataArr,
 }) => {
 	const columns = [
 		{
@@ -140,19 +144,20 @@ const getColumns = ({
 			id     : 'action',
 			Header : () => (
 				<div>
-					<Checkbox />
+					<Checkbox
+						checked={dataArr.length === selectedIds.length}
+						onChange={(e) => handleAllSelect(e)}
+					/>
 				</div>
 			),
-			accessor: (item) => {
-				console.log(item, 'itemm');
-				return (
-					<div>
-						<Checkbox
-							value={item?.id}
-						/>
-					</div>
-				);
-			},
+			accessor: (item) => (
+				<div>
+					<Checkbox
+						checked={selectedIds.includes(item.id)}
+						onChange={(e) => handleSelectId(e, item.id)}
+					/>
+				</div>
+			),
 		});
 	}
 	return columns;
