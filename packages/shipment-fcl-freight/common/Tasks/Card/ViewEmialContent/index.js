@@ -1,4 +1,4 @@
-import { Button, Loader, Modal } from '@cogoport/components';
+import { Loader, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -33,10 +33,6 @@ function ViewEmailContent({ taskId = '', taskName = '', onCancel = () => {}, sho
 				)}
 
 			</Modal.Body>
-
-			<Modal.Footer>
-				<Button type="button" themeType="secondary" onClick={onCancel} loading={loading}> Done </Button>
-			</Modal.Footer>
 		</Modal>
 	);
 }
