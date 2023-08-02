@@ -3,6 +3,9 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+const ONE_VALUE = 1;
+const DEFAULT_COUNT_VALUE = 0;
+
 const URL = '/create_spot_search_rate_feedback';
 const KEYS_TO_SEND = {
 	fcl_freight     : 'preferred_freight_rate',
@@ -84,9 +87,10 @@ const useDislikeFeedback = ({
 				await trigger({ data: body });
 
 				setLikeState({
-					is_liked    : false,
-					likes_count : likeState.is_liked ? likeState.likes_count - 1 : likeState.likes_count,
-					is_disliked : true,
+					is_liked       : false,
+					likes_count    : likeState.is_liked ? likeState.likes_count - ONE_VALUE : likeState.likes_count,
+					is_disliked    : true,
+					dislikes_count : (likeState.dislikes_count || DEFAULT_COUNT_VALUE) + ONE_VALUE,
 				});
 
 				onClose();

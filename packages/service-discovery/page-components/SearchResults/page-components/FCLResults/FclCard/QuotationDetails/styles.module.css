@@ -2,20 +2,23 @@
 	padding-right: 20px;
 }
 
-.primaryBotton {
+
+.primary_button {
 	width: 94%;
 	margin-left: 10px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	border-radius: 6px;
+	
+	&.green {
+		background: #40AD3E !important; 
+	}
 }
 
-.secondaryBotton {
+.secondary_button {
 	width: 94%;
-	margin-top: 8px;
-	margin-bottom: 10px;
-	margin-left: 10px;
+	margin: 8px 0 10px 10px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

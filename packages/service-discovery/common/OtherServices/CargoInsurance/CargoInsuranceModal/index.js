@@ -213,7 +213,6 @@ function CargoInsuranceModal({
 					</Button>
 				</Modal.Footer>
 			) : null}
-
 		</Modal>
 	);
 }

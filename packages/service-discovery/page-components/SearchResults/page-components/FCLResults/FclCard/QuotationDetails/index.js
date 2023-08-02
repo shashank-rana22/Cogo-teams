@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
@@ -46,7 +46,7 @@ function QuotationDetails({
 				<Button
 					size="md"
 					themeType={isSelectedCard ? 'tertiary' : 'secondary'}
-					className={styles.secondaryBotton}
+					className={styles.secondary_button}
 					disabled={isSelectedCard}
 					onClick={() => setShowContract(!showContract)}
 				>
@@ -58,7 +58,7 @@ function QuotationDetails({
 				onClick={handleSelectButtonClick}
 				size="md"
 				themeType="accent"
-				className={styles.primaryBotton}
+				className={cl`${styles.primary_button} ${isSelectedCard ? {} : styles.green}`}
 			>
 				{!isSelectedCard ? `Select For ${formattedAmount}` : 'Remove'}
 			</Button>
