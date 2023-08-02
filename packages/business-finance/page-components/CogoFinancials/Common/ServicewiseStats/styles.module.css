@@ -47,8 +47,8 @@
 .statscontainer {
 	display: flex;
 	flex-direction: column;
-	min-width: 200px;
-	margin-top: 12px;
+	min-width: 236px;
+	margin: 12px 0;
 }
 
 .margin {
@@ -105,19 +105,13 @@
 	color: #abcd62;
 }
 
-.select {
-	:global {
-		.ui_select_container {
-			width: 160px;
-		}
-
-		.ui_select_options_container {
-			min-width: 260px;
-		}
-	}
-}
-
 .justifiy {
 	display: flex;
 	justify-content: space-between;
+}
+
+.placeholder_container {
+	display: flex;
+	justify-content: space-between;
+	width: 98%;
 }

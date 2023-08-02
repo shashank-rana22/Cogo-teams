@@ -35,3 +35,15 @@
 	flex-wrap: wrap;
 	font-size: var(--font-size-md);
 }
+
+.btn_group_section {
+	display: flex;
+	margin-top: 20px;
+
+	:global {
+		.ui_pill_container {
+			padding: 4px;
+			border: 1px solid;
+		}
+	}
+}

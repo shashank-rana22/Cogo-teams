@@ -1,6 +1,12 @@
 .header {
 	display: flex;
 	justify-content: space-between;
+	cursor: pointer;
+}
+
+.main_heading:hover {
+	color: var(--color-primary-error-red-2);
+	text-decoration: underline;
 }
 
 .top_card {
@@ -47,7 +53,12 @@
 	background: #fff;
 }
 
-.graphs {
-	display: flex;
-	overflow: scroll;
+.table {
+	padding: 12px;
+	margin-top: 12px;
+	background-color: #fff;
+}
+
+.segmented_section {
+	margin: 0 12px;
 }

@@ -1,91 +1,110 @@
-import { IcMInfo } from '@cogoport/icons-react';
+import { Button, Placeholder } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import RenderCardHeader from '../RenderCardHeader';
 import MyResponsiveBar from '../ResponsiveBar';
 
 import styles from './styles.module.css';
 
-function SingleGraphCard({ heading = '' }) {
-	const NEW_DATA = [
-		{
-			name    : 'surface',
-			surface : 24,
-		},
-		{
-			name    : 'air',
-			surface : 190,
-		},
-		{
-			name    : 'surfaces',
-			surface : 99,
-		},
-		{
-			name : 'airs',
-			air  : -5,
-		},
-		{
-			name    : 'surfacess',
-			surface : 99,
-		},
-		{
-			name : 'airss',
-			air  : -5,
-		},
-		{
-			name    : 'surfacesss',
-			surface : 99,
-		},
-		{
-			name : 'airsss',
-			air  : -5,
-		},
-		{
-			name    : 'surfacessss',
-			surface : 99,
-		},
-		{
-			name : 'airssss',
-			air  : -5,
-		},
-	];
+const KEY_MAPPINGS = {
+	'Operational Profitability' : 'Profitability',
+	Revenue                     : 'Revenue',
+	Expense                     : 'Cost',
+};
+
+const DEFAULT_LENGTH = 1;
+const STD_WIDTH = 80;
+const DEFAULT_WIDTH = 400;
+
+const LABEL_MAPPING = {
+	Financially   : 'actual',
+	Operationally : 'operational',
+};
+
+function SingleGraphCard({
+	heading = '',
+	setActiveBar = () => { },
+	isViewDetailsVisible = false,
+	onViewDetails = () => { },
+	taxType = '',
+	type = '',
+	serviceLevelData = [],
+	serviceLevelLoading = false,
+}) {
+	const isLastView = isViewDetailsVisible; // last view of graph cards
+
+	const onBarClick = (e) => {
+		if (!isLastView) { setActiveBar(e?.indexValue); }
+	};
+
+	if (!isEmpty(serviceLevelData)) {
+		// formatting bottom axis labels
+		serviceLevelData.forEach((item) => {
+			const singleItem = item;
+			const { serviceName } = singleItem || {};
+			singleItem.serviceName = serviceName.replaceAll('_', ' ');
+		});
+	}
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.flexhead}>
-				<div>
-					<div className={styles.header}>
-						<div>
-							{heading}
-						</div>
-						<div className={styles.info}>
-							<IcMInfo />
-						</div>
-					</div>
-					<div className={styles.bottom_line} />
-				</div>
+				<RenderCardHeader title={heading} />
+				{isViewDetailsVisible && (
+					<Button
+						themeType="secondary"
+						onClick={onViewDetails}
+					>
+						View Details
+
+					</Button>
+				)}
 			</div>
-			<MyResponsiveBar
-				data={NEW_DATA}
-				keys={['surface', 'air']}
-				legendX=""
-				legendY=""
-				width="750px"
-				colors={['#88CAD1']}
-				height="274px"
-				indexBy="name"
-				enableGridY
-				legends={false}
-				margin={{ top: 50, right: 30, bottom: 50, left: 60 }}
-				axisLeft={{
-					tickSize       : 0,
-					tickPadding    : 0,
-					tickRotation   : 0,
-					legend         : 'Percentage',
-					legendPosition : 'middle',
-					legendOffset   : -40,
-					ariaHidden     : true,
+
+			<div
+				style={{
+					minWidth: `${(serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH > DEFAULT_WIDTH
+						? (serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH : DEFAULT_WIDTH}px`,
+
 				}}
-			/>
+				className={styles.graph}
+			>
+				{!serviceLevelLoading ? (
+					<MyResponsiveBar
+						data={serviceLevelData}
+						keys={[
+							`estimated${KEY_MAPPINGS?.[heading]}${taxType}`,
+							`${LABEL_MAPPING[type]}${KEY_MAPPINGS?.[heading]}${taxType}`,
+						]}
+						legendX=""
+						legendY=""
+						width="100%"
+						height="300px"
+						colors={['#cfeaed', '#6fa5ab']}
+						colorBy="id"
+						indexBy="serviceName"
+						enableGridY
+						legends={false}
+						onClick={onBarClick}
+						margin={{ top: 50, right: 30, bottom: 50, left: 60 }}
+						axisLeft={{
+							tickSize       : 0,
+							tickPadding    : 0,
+							tickRotation   : 0,
+							legend         : 'Percentage',
+							legendPosition : 'middle',
+							legendOffset   : -40,
+							ariaHidden     : true,
+						}}
+						axisBottomRotation={isLastView ? '20' : '0'}
+					/>
+				) : (
+					<div>
+						<Placeholder height={380} width="100%" />
+					</div>
+				)}
+			</div>
 
 		</div>
 	);

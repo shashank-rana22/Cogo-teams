@@ -16,8 +16,11 @@ function MyResponsiveBar({
 	legendY = 'Amount',
 	indexBy = 'Duration',
 	enableGridY = false,
+	enableGridX = false,
+	onClick = () => {},
 	legends = true,
 	margin = { top: 50, right: 130, bottom: 50, left: 60 },
+	axisBottomRotation = 0,
 	axisLeft = {
 		tickSize       : 0,
 		tickPadding    : 0,
@@ -42,13 +45,14 @@ function MyResponsiveBar({
 				colors={colors}
 				axisTop={null}
 				axisRight={null}
+				onClick={onClick}
 				theme={{
 					textColor : 'String',
 					axis      : {
 						ticks: {
 							text: {
 								fill     : '#000',
-								fontSize : '12px',
+								fontSize : '10px',
 							},
 						},
 					},
@@ -61,7 +65,7 @@ function MyResponsiveBar({
 				axisBottom={{
 					tickSize       : 0,
 					tickPadding    : 10,
-					tickRotation   : 0,
+					tickRotation   : axisBottomRotation,
 					legend         : legendX,
 					legendPosition : 'middle',
 					legendOffset   : 32,
@@ -93,8 +97,8 @@ function MyResponsiveBar({
 						],
 					},
 				] : []}
-				enableGridX={false}
 				enableGridY={enableGridY}
+				enableGridX={enableGridX}
 				role="application"
 				ariaLabel="bar chart"
 			/>

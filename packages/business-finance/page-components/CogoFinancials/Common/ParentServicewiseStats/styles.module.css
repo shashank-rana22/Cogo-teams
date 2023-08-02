@@ -48,7 +48,7 @@
 .statscontainer {
 	display: flex;
 	flex-direction: column;
-	width: 49%;
+	width: 47%;
 	min-width: 200px;
 	margin: 32px;
 }
@@ -59,7 +59,7 @@
 
 .border {
 	padding: 16px 26px 36px;
-	margin: 6px;
+	margin: 6px 12px;
 	border: 1px solid #cfcfcf;
 	border-radius: 6px;
 }
@@ -95,14 +95,14 @@
 }
 
 .maincard {
-	width: 30%;
+	width: 20%;
 	margin-right: 40px;
 }
 
 .sidestats {
 	display: flex;
 	flex-flow: column wrap;
-	width: 70%;
+	width: 78%;
 	max-height: 400px;
 	overflow-x: scroll;
 }
@@ -126,4 +126,10 @@
 .justifiy {
 	display: flex;
 	justify-content: space-between;
+}
+
+.placeholder_container {
+	display: flex;
+	justify-content: space-between;
+	width: 98%;
 }

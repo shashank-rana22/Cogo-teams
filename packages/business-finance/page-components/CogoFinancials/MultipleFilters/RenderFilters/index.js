@@ -1,8 +1,11 @@
-import { Button, RadioGroup, TabPanel, Tabs } from '@cogoport/components';
+import { Button, Pill, RadioGroup, TabPanel, Tabs } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
+
+const SHIPMENT_TYPES = GLOBAL_CONSTANTS.shipment_types;
 
 const SEGMENT_OPTIONS = [
 	{ label: 'Air', value: 'air' },
@@ -28,21 +31,38 @@ const CURRENCY_OPTIONS = Object.values(GLOBAL_CONSTANTS.currency_code).map((item
 	}
 ));
 
-function RenderFilters() {
+function RenderFilters({
+	filter = {}, setFilter = () => {},
+	setVisible = () => {},
+}) {
 	const [activeFilter, setActiveFilter] = useState('currency');
-	const [filter, setFilter] = useState({
-		filterValue     : null,
-		serviceCategory : null,
-	});
-	const { filterValue } = filter;
+
+	const handleReset = () => {
+		setFilter({});
+		setActiveFilter('currency');
+	};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.heading_text}>Filters</div>
 				<div style={{ display: 'flex' }}>
-					<Button themeType="secondary">Reset</Button>
-					<Button style={{ marginLeft: '8px' }}>Apply</Button>
+					<Button
+						themeType="secondary"
+						onClick={handleReset}
+						disabled={isEmpty(filter)}
+					>
+						Reset
+
+					</Button>
+					<Button
+						themeType="secondary"
+						style={{ marginLeft: '8px' }}
+						onClick={() => setVisible(false)}
+					>
+						Close
+
+					</Button>
 				</div>
 			</div>
 
@@ -60,9 +80,9 @@ function RenderFilters() {
 								options={CURRENCY_OPTIONS}
 								onChange={(val) => setFilter((prev) => ({
 									...prev,
-									filterValue: val,
+									[activeFilter]: val,
 								}))}
-								value={filterValue}
+								value={filter[activeFilter]}
 								className={styles.radio_group_section}
 							/>
 						</TabPanel>
@@ -72,25 +92,56 @@ function RenderFilters() {
 								options={CHANNEL_OPTIONS}
 								onChange={(val) => setFilter((prev) => ({
 									...prev,
-									filterValue: val,
+									[activeFilter]: val,
 								}))}
-								value={filterValue}
+								value={filter[activeFilter]}
 								className={styles.radio_group_section}
 								style={{ flexDirection: 'column' }}
 							/>
 						</TabPanel>
 
 						<TabPanel name="service" title="Service">
-							Service
+							<div className={styles.btn_group_section}>
+								{['Import', 'Export', 'Local', 'Domestic'].map((item) => (
+									<div
+										key={item}
+										role="presentation"
+										onClick={() => setFilter((prev) => ({
+											...prev,
+											serviceCategory: item,
+										}))}
+									>
+										<Pill
+											size="sm"
+											color={filter.serviceCategory === item ? '#fef199'
+												: 'white'}
+										>
+											{item}
+
+										</Pill>
+									</div>
+								))}
+
+							</div>
+							<RadioGroup
+								options={SHIPMENT_TYPES}
+								onChange={(val) => setFilter((prev) => ({
+									...prev,
+									[activeFilter]: val,
+								}))}
+								value={filter[activeFilter]}
+								className={styles.radio_group_section}
+								style={{ flexDirection: 'column' }}
+							/>
 						</TabPanel>
 						<TabPanel name="segment" title="Segment">
 							<RadioGroup
 								options={SEGMENT_OPTIONS}
 								onChange={(val) => setFilter((prev) => ({
 									...prev,
-									filterValue: val,
+									[activeFilter]: val,
 								}))}
-								value={filterValue}
+								value={filter[activeFilter]}
 								className={styles.radio_group_section}
 								style={{ flexDirection: 'column' }}
 							/>

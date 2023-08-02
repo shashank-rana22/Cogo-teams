@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: max-content;
+}
+
+.row {
+	flex-direction: row;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.text {
+	font-size: var(--font-size-md);
+	color: var(--color-secondary-greyscale-4);
+}
+
+.margintop {
+	margin: 10px;
+}
