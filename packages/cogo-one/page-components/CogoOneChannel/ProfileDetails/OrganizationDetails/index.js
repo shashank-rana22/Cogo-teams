@@ -161,7 +161,7 @@ function OrganizationDetails({
 							</Pill>
 						) : null }
 
-						{!hideCpButton && !orgLoading && organizationId && (
+						{!hideCpButton && !orgLoading && organizationId ? (
 							<Button
 								size="sm"
 								themeType="primary"
@@ -169,7 +169,7 @@ function OrganizationDetails({
 							>
 								Convert Account to CP
 							</Button>
-						)}
+						) : null}
 					</div>
 				</>
 			)}
