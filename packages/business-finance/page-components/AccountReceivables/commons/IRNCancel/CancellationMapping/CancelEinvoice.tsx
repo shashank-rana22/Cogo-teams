@@ -9,7 +9,7 @@ function CancelEinvoice({
 	itemData,
 	showCancellationModal,
 	setShowCancellationModal,
-	IRNLabel,
+	irnLabel,
 	refetch,
 	entityCode,
 }) {
@@ -38,7 +38,7 @@ function CancelEinvoice({
 						<div className={styles.cancel_invoice}>
 							Cancel
 							{' '}
-							{IRNLabel}
+							{irnLabel}
 							{' '}
 							<span className={styles.styled_invoice}>
 								{invoiceNumber}

@@ -194,6 +194,11 @@ function ExecuteTask({
 		);
 	}
 
+	if (
+		task?.task === 'generate_cargo_insurance') {
+		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+	}
+
 	if (task.task === 'upload_compliance_documents') {
 		return (
 			<UploadComplianceDocs
@@ -217,6 +222,7 @@ function ExecuteTask({
 		return (
 			<ConfirmFreightBooking
 				task={task}
+				getApisData={taskConfigData?.apis_data}
 				onCancel={onCancel}
 				services={servicesList}
 				taskListRefetch={taskListRefetch}
