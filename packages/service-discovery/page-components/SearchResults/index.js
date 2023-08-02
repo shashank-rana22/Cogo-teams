@@ -108,7 +108,10 @@ function SearchResults() {
 	}
 
 	return (
-		<div className={cl`${styles.container} ${showAdditionalHeader ? styles.backdrop : {}}`}>
+		<div className={cl`${styles.container} ${
+			(showAdditionalHeader || (infoBanner.current === 'edit_button' && !isGuideViewed))
+				? styles.backdrop : {}}`}
+		>
 			<div className={styles.header}>
 				<Header
 					data={detail}
@@ -128,7 +131,7 @@ function SearchResults() {
 			<div
 				style={
 					(showAdditionalHeader || (infoBanner.current === 'edit_button' && !isGuideViewed))
-						? { opacity: 0.6, pointerEvents: 'none', background: '#000' }
+						? { opacity: 0.6, pointerEvents: 'none', background: '#fff' }
 						: null
 				}
 				className={styles.children}
