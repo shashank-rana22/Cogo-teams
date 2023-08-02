@@ -43,9 +43,9 @@ export const TASK_FILTER = {
 			export : 'upload_bill_of_lading',
 		},
 		do: {
-			import: ['upload_endorsed_bill_of_lading', 'upload_delivery_order', 'generate_do_noc_certificat',
+			import: ['upload_endorsed_bill_of_lading', 'upload_delivery_order', 'generate_do_noc_certificate',
 				'generate_do_certificate', 'upload_security_dd'],
-			export: ['upload_endorsed_bill_of_lading', 'upload_delivery_order', 'generate_do_noc_certificat',
+			export: ['upload_endorsed_bill_of_lading', 'upload_delivery_order', 'generate_do_noc_certificate',
 				'generate_do_certificate', 'upload_security_dd'],
 		},
 	},

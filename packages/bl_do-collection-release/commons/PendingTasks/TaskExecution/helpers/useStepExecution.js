@@ -10,6 +10,8 @@ function useStepExecution({
 	stepConfig = {},
 	getApisData = {},
 	selectedMail = [],
+	shipment_data = {},
+	primary_service = {},
 }) {
 	const populatedControls = populateControls(stepConfig.controls);
 
@@ -18,6 +20,8 @@ function useStepExecution({
 		task,
 		getApisData,
 		selectedMail,
+		shipment_data,
+		primary_service,
 	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);
