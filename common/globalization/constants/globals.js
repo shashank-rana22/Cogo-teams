@@ -201,6 +201,10 @@ const GLOBAL_CONSTANTS = {
 		platform_notification_svg:
 			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg',
 		missed_call_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
+		start_user_audio    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disabled call.svg',
+		end_user_audio      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call.svg',
+		start_agent_audio   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call hangup.svg',
+		end_agent_audio     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/omni_channel.svg',
 		not_connected_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
 		outgoing_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
 		incoming_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
