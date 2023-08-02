@@ -326,7 +326,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 	shipment_specialist: {
 		all_chats_base_query          : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 		session_type_query            : () => [where('session_type', '==', 'admin')],
-		chat_sub_tabs_access          : ['all'],
+		chat_sub_tabs_access          : ['all', 'teams'],
+		teams_chats_base_query        : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		extra_side_bar_navs_access    : [],
 		default_side_nav              : 'user_activity',
 		get_accesible_assign_buttons  : getShipmentSpecialistButtons,

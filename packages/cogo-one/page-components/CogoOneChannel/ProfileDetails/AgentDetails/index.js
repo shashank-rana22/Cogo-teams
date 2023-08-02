@@ -42,6 +42,7 @@ function AgentDetails({
 	userId: agentId = '',
 	viewType = '',
 	setActiveTab = () => {},
+	mailProps = {},
 }) {
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
@@ -64,10 +65,10 @@ function AgentDetails({
 		channel_type = '',
 		user_type,
 		id = '',
+		lead_user_details = {},
 	} = formattedMessageData || {};
 
 	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
-
 	const {
 		deleteGroupMember,
 		approveGroupRequest,
@@ -98,8 +99,8 @@ function AgentDetails({
 		},
 		message: {
 			userId        : user_id,
-			name          : messageName,
-			userEmail     : email,
+			name          : messageName || lead_user_details?.name,
+			userEmail     : email || lead_user_details?.email,
 			mobile_number : mobile_no,
 			orgId         : organization_id,
 			leadUserId    : lead_user_id,
@@ -118,7 +119,6 @@ function AgentDetails({
 	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
 
 	const { mobile_verified, whatsapp_verified } = userData || {};
-
 	const VERIFICATION_STATUS = [
 		{
 			label      : mobile_verified ? 'Verified' : 'Not Verified',
@@ -260,6 +260,7 @@ function AgentDetails({
 						leadLoading={leadLoading}
 						activeRoomLoading={activeRoomLoading}
 						viewType={viewType}
+						mailProps={mailProps}
 					/>
 				</>
 			)}
