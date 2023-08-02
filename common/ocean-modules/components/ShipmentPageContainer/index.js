@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import ThreeDotLoader from '../../common/ThreeDotLoader';
@@ -13,7 +14,7 @@ export default function ShipmentPageContainer({
 	isGettingShipment = false,
 	shipmentStatusCode = 200,
 	shipmentData = {},
-	children,
+	children = null,
 }) {
 	const router = useRouter();
 
@@ -29,7 +30,7 @@ export default function ShipmentPageContainer({
 		);
 	}
 
-	if (!shipmentData && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(shipmentStatusCode)) {
+	if (isEmpty(shipmentData) && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(shipmentStatusCode)) {
 		return (
 			<section className={styles.shipment_not_found}>
 				<div className={styles.section}>

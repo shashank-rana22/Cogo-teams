@@ -42,7 +42,7 @@ function Item({
 		document_urls : item?.document_urls || [],
 	};
 
-	const bfInvoice = invoicesList.filter((ele) => ele?.proformaNumber === item?.cn_number);
+	const bfInvoice = (invoicesList || []).filter((ele) => ele?.proformaNumber === item?.cn_number);
 
 	const handleDownload = () => {
 		const cnLink = bfInvoice[GLOBAL_CONSTANTS.zeroth_index]?.invoicePdfUrl
