@@ -660,6 +660,16 @@ export default {
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
 			},
+			business_finance: {
+				ar: {
+					settlement: {
+						invoice_number: {
+							document_key : 'destinationDocumentValue',
+							irn_key      : 'destinationIrnNumber',
+						},
+					},
+				},
+			},
 		},
 	},
 };
