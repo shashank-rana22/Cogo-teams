@@ -9,7 +9,7 @@ import useGetZipFile from './useGetZipFile';
 
 const INITIAL_PAGE = 1;
 
-const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
+const useTableView = ({ search, btnloading, updateEmployeeStatus, pageLimit }) => {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('active');
 	const [page, setPage] = useState(INITIAL_PAGE);
@@ -34,7 +34,8 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 						joining_before : filters?.joining_date?.endDate || undefined,
 						designation    : filters?.roles || undefined,
 					},
-					page: search ? INITIAL_PAGE : page,
+					page       : search ? INITIAL_PAGE : page,
+					page_limit : pageLimit,
 				},
 			});
 		} catch (error) {
@@ -42,7 +43,7 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
-	}, [activeTab, search, trigger, page, filters]);
+	}, [activeTab, search, trigger, page, filters, pageLimit]);
 
 	useEffect(() => {
 		fetch();
