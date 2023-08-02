@@ -2,6 +2,8 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
+
 const getParams = ({ userId }) => ({
 	filters: {
 		agent_id          : userId,
@@ -9,7 +11,7 @@ const getParams = ({ userId }) => ({
 	},
 });
 
-const useGetAgentTimeline = () => {
+const useGetAgentTimeline = ({ viewType = '' }) => {
 	const { userId } = useSelector(({ profile }) => ({
 		userId: profile.user.id,
 	}));
@@ -19,7 +21,13 @@ const useGetAgentTimeline = () => {
 		method : 'get',
 	}, { manual: true, autoCancel: false });
 
+	const isKamAgent = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out === true;
+
 	const agentTimeline = useCallback(() => {
+		if (!isKamAgent) {
+			return;
+		}
+
 		try {
 			trigger({
 				params: getParams({ userId }),
@@ -27,7 +35,7 @@ const useGetAgentTimeline = () => {
 		} catch (error) {
 			console.error(error, 'error');
 		}
-	}, [trigger, userId]);
+	}, [trigger, userId, isKamAgent]);
 
 	useEffect(() => {
 		agentTimeline({ userId });
