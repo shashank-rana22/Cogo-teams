@@ -30,6 +30,7 @@ function Services() {
 		servicesLoading,
 		activeStakeholder,
 		stakeholderConfig,
+		container_details,
 	} = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
@@ -68,6 +69,7 @@ function Services() {
 									<ServiceDetails
 										key={service}
 										servicesData={serviceObj[serviceCategory][service]}
+										containerDetails={container_details}
 									/>
 								))}
 							</div>
