@@ -13,8 +13,12 @@ import getCombinedServiceDetails from './utils/getCombinedServiceDetails';
 import getServiceName from './utils/getServiceName';
 
 const TRANSPORTATION_SERVICES = ['ftl_freight', 'ltl_freight', 'trailer_freight'];
-
 const singleLocationServices = ['fcl_freight_local'];
+
+const SERVICES_CANNOT_BE_REMOVED_MAPPING = {
+	export : 'export_fcl_freight_local',
+	import : 'import_fcl_freight_local',
+};
 
 function AdditionalServices({ // used in search results and checkout
 	rateCardData = {},
@@ -23,18 +27,22 @@ function AdditionalServices({ // used in search results and checkout
 	refetchSearch = () => {},
 	source = '',
 	searchLoading = false,
+	refetchLoading = false,
 }) {
-	const { service_rates = [] } = rateCardData;
+	const { service_rates = [], total_price_currency = 'USD' } = rateCardData;
 
-	const { service_details = {}, service_type = '', trade_type = '', inco_term = '' } = detail;
+	const {
+		service_details = {},
+		service_type = '',
+		trade_type = '',
+		inco_term = '',
+	} = detail;
 
 	const finalServiceDetails = getCombinedServiceDetails(service_details, service_rates);
 
 	const [incoTermModalData, setIncoTermModalData] = useState({});
 
 	const primaryService = service_type;
-
-	const { minPrice = {}, loading: minPriceLoading } = useGetMinPrice();
 
 	const isSingleLocationService = singleLocationServices.includes(service_type);
 
@@ -133,6 +141,12 @@ function AdditionalServices({ // used in search results and checkout
 		});
 	});
 
+	const { startingPrices = {}, loading: startingPriceLoading } = useGetMinPrice({
+		allServices,
+		total_price_currency,
+		detail,
+	});
+
 	const filteredAllServices = allServices.filter((service_item) => service_item.inco_terms.includes(inco_term));
 
 	const shipperSideServices = [];
@@ -148,8 +162,7 @@ function AdditionalServices({ // used in search results and checkout
 
 	const incoTermOptions = getTradeTypeWiseIncoTerms(trade_type);
 
-	const SERVICES_CANNOT_BE_REMOVED = [trade_type === 'export'
-		? 'export_fcl_freight_local' : 'import_fcl_freight_local', 'fcl_freight'];
+	const SERVICES_CANNOT_BE_REMOVED = ['fcl_freight', SERVICES_CANNOT_BE_REMOVED_MAPPING[trade_type]];
 
 	return (
 		<>
@@ -179,6 +192,9 @@ function AdditionalServices({ // used in search results and checkout
 						setHeaderProps={setHeaderProps}
 						refetch={refetchSearch}
 						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
+						startingPrices={startingPrices}
+						startingPriceLoading={startingPriceLoading}
+						refetchLoading={refetchLoading}
 					/>
 				)}
 
@@ -191,6 +207,9 @@ function AdditionalServices({ // used in search results and checkout
 						setHeaderProps={setHeaderProps}
 						refetch={refetchSearch}
 						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
+						startingPrices={startingPrices}
+						startingPriceLoading={startingPriceLoading}
+						refetchLoading={refetchLoading}
 					/>
 				)}
 			</div>

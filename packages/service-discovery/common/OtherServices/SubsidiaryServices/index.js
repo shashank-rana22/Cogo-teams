@@ -34,8 +34,12 @@ function SubsidiaryServices({
 		} else if (item?.trade_type === 'import') {
 			tradeType = 'Destination';
 		}
+
+		const formattedName = startCase(item?.name);
+		const formattedLabel = formattedName.includes(tradeType) ? formattedName : `${tradeType} ${formattedName}`;
+
 		const service = {
-			label : `${tradeType} ${startCase(item?.name)}`,
+			label : formattedLabel,
 			value : item?.key,
 			code  : item.code,
 		};

@@ -37,6 +37,8 @@ const useUpdateDestinationDemurrageDays = ({
 			};
 
 			await trigger({ data: payload });
+
+			Toast.success('Days updated successfully!');
 			setShow(false);
 			refetch();
 			return true;

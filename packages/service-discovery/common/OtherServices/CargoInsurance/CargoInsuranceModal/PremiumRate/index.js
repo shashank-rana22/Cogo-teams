@@ -1,11 +1,11 @@
 import { Tooltip, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const PREMIUM = 0;
 const PLATFORM_CHARGES = 1;
 const CONVENIENCE_CHARGES = 2;
 const geo = getGeoConstants();
@@ -34,7 +34,7 @@ function PremiumRate({ rateData = {} }) {
 
 					<Tooltip
 						theme="light"
-						placement="bottom"
+						placement="top"
 						content="Exclusive of Taxes"
 					>
 						<IcMInfo className={styles.info_icon} />
@@ -42,7 +42,7 @@ function PremiumRate({ rateData = {} }) {
 				</div>
 
 				<span className={styles.price}>
-					{formatAmounts(serviceChargeList?.[PREMIUM]?.totalCharges)}
+					{formatAmounts(serviceChargeList?.[GLOBAL_CONSTANTS.zeroth_index]?.totalCharges)}
 				</span>
 			</div>
 

@@ -19,6 +19,9 @@ function List({
 	setHeaderProps = () => {},
 	refetch = () => {},
 	SERVICES_CANNOT_BE_REMOVED = [],
+	startingPrices = {},
+	startingPriceLoading = false,
+	refetchLoading = false,
 }) {
 	const [active, setActive] = useState('');
 
@@ -63,6 +66,9 @@ function List({
 								setHeaderProps={setHeaderProps}
 								refetch={refetch}
 								SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
+								startingPrices={startingPrices}
+								startingPriceLoading={startingPriceLoading}
+								refetchLoading={refetchLoading}
 							/>
 						)}
 						content={(

@@ -1,4 +1,4 @@
-import { Toast, Loader, cl, Tooltip } from '@cogoport/components';
+import { Toast, Loader, cl, Tooltip, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMInfo, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
@@ -24,6 +24,8 @@ function ListItem({
 	setHeaderProps = () => {},
 	refetch = () => {},
 	SERVICES_CANNOT_BE_REMOVED = [],
+	startingPrices = {},
+	startingPriceLoading = false,
 }) {
 	const [isHovered, setIsHovered] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -80,7 +82,16 @@ function ListItem({
 	};
 
 	function RenderRate() {
-		if (!isSelected) return null;
+		if (startingPriceLoading) {
+			return <Placeholder height="24px" width="100px" style={{ borderRadius: 4 }} />;
+		}
+
+		if (!isSelected) {
+			if (serviceItem.service_type === 'fcl_freight_local') {
+				return <span className={styles.starting_price}>Calculated at Actuals</span>;
+			}
+			return <span className={styles.starting_price}>Starting at $80/Ctr.</span>;
+		}
 
 		const { rateData = [] } = serviceItem;
 

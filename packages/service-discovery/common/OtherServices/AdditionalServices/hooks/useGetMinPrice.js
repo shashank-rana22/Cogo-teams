@@ -1,7 +1,26 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useCallback, useEffect } from 'react';
 
-const useGetMinPrice = () => {
+import getRequiredFilters from '../utils/getRequiredFilters';
+
+const useGetMinPrice = ({ allServices = [], total_price_currency = 'USD', detail = {} }) => {
+	const newServices = [...allServices].splice(1);
+
+	newServices.pop();
+
+	const service_attributes = newServices.map((serviceItem) => {
+		const { name = '', service_type, trade_type } = serviceItem;
+
+		const filters = getRequiredFilters({ detail, service: name, trade_type });
+
+		return {
+			filters,
+			id: name,
+			service_type,
+		};
+	});
+
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
 		url    : 'get_freight_rate_min_price',
@@ -11,54 +30,25 @@ const useGetMinPrice = () => {
 		try {
 			await trigger({
 				params: {
-					currency           : 'USD',
-					service_attributes : [
-						{
-							filters: {
-								// id: '1c09df70-f14b-4921-86c7-741cdb58abd7',
-							},
-							id           : '1234567',
-							service_type : 'haulage_freight',
-						},
-						{
-							filters: {
-								// id: '1c09df70-f14b-4921-86c7-741cdb58abd7',
-							},
-							id           : '09876',
-							service_type : 'fcl_freight',
-						},
-						{
-							filters: {
-								// id: '1c09df70-f14b-4921-86c7-741cdb58abd7',
-							},
-							id           : '4567',
-							service_type : 'fcl_customs',
-						},
-						{
-							filters: {
-								// id: '1c09df70-f14b-4921-86c7-741cdb58abd7',
-							},
-							id           : 'esdrftg',
-							service_type : 'fcl_cfs',
-						},
-					],
+					currency: total_price_currency,
+					service_attributes,
 				},
 			});
 		} catch (err) {
 			// if (err?.response?.data) {
 			// 	Toast.error(getApiErrorString(err.response?.data));
 			// }
-			console.log(err);
 		}
 	}, [trigger]);
 
 	useEffect(() => {
-		// console.log('hello');
+		if (!allServices || isEmpty(allServices)) return;
+
 		getMinPrice();
 	}, [getMinPrice]);
 
 	return {
-		minPrice: data,
+		startingPrices: data,
 		loading,
 	};
 };

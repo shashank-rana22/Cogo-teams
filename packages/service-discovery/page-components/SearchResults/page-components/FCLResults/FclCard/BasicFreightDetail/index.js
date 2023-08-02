@@ -14,14 +14,16 @@ function FreightPriceDetail({
 }) {
 	return (
 		<div className={styles.container}>
-			{container_size ? (
-				<div className={styles.containerDetails}>
-					{container_size}
-					ft. ctr
-					{' '}
-					{container_type}
-				</div>
-			) : null}
+			<div className={styles.wrapper}>
+				{container_size && !totalPrice ? (
+					<div className={styles.container_details}>
+						{container_size}
+						ft. ctr
+						{' '}
+						{container_type}
+					</div>
+				) : null}
+			</div>
 
 			<div className={styles.amount}>
 				{`${formatAmount({
@@ -34,7 +36,7 @@ function FreightPriceDetail({
 					},
 				})}`}
 				{!totalPrice ? (
-					<div className={styles.containerDetails}>
+					<div className={styles.container_details}>
 						Per ctr.
 					</div>
 				) : null}

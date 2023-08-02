@@ -120,6 +120,7 @@ function SelectedRateCard({
 							setHeaderProps={setHeaderProps}
 							refetchSearch={refetch}
 							source="search-results"
+							refetchLoading={loading}
 						/>
 
 						<CargoInsurance

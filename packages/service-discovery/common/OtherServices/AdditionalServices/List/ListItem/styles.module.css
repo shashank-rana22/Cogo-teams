@@ -74,3 +74,8 @@
 .tooltip_content {
 	word-break: keep-all;
 }
+
+.starting_price {
+	font-size: 12px;
+	font-weight: 400;
+}

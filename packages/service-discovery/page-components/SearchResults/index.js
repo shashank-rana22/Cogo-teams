@@ -125,7 +125,7 @@ function SearchResults() {
 
 			<div
 				style={
-					(showAdditionalHeader || infoBanner.current === 'edit_button') && !isGuideViewed
+					(showAdditionalHeader || (infoBanner.current === 'edit_button' && !isGuideViewed))
 						? { opacity: 0.6, pointerEvents: 'none', background: '#000' }
 						: null
 				}

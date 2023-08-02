@@ -9,6 +9,9 @@ import useUpdateDestinationDemurrageDays from '../../hooks/useUpdateDestinationD
 import FormItem from './FormItem';
 import styles from './styles.module.css';
 
+const FORM_KEYS = ['origin_detention', 'destination_detention', 'origin_demurrage', 'destination_demurrage'];
+const DEFAULT_DAYS_VALUE = 0;
+
 function Detention({
 	defaultValues = {},
 	howMuchToShowInDnD = {
@@ -66,7 +69,7 @@ function Detention({
 	};
 
 	useEffect(() => {
-		Object.keys(defaultValues).forEach((key) => setValue(key, defaultValues?.[key]));
+		FORM_KEYS.forEach((key) => setValue(key, defaultValues?.[key] || DEFAULT_DAYS_VALUE));
 	}, [defaultValues, setValue]);
 
 	return (
