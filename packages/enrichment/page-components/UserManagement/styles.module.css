@@ -8,8 +8,8 @@
 .email_id {
 	width: fit-content;
 	max-width: 160px;
-	color: #888fd1;
 	overflow: hidden;
+	color: #888fd1;
 	text-overflow: ellipsis;
 }
 
