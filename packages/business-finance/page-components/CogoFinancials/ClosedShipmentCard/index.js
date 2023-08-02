@@ -55,43 +55,34 @@ function ClosedShipmentCard({
 
 	const data = getData({ taxType, type, cardData, totalCost, totalRevenue });
 
-	const graphData = getGraphData({ cardData, taxType, currency, type, displayAmount });
-
 	const revenueDeviation = `${displayAmount(cardData[`actualRevenueDeviation${taxType}`], currency)}
 	(${cardData[`actualRevenueDeviationPercentage${taxType}`] || DEFAULT_VALUE}%)
-   `;
+	`;
 
 	const costDeviation = `${displayAmount(cardData[`actualCostDeviation${taxType}`], currency)}
    (${cardData[`actualCostDeviationPercentage${taxType}`] || DEFAULT_VALUE}%)
    `;
 
-	const updateGraphData = isDeviationVisible
-		? [...graphData,
-			{
-				rowId    : 'third_row',
-				children : [
-					{
-						label : 'Deviation(Revenue)',
-						value : revenueDeviation,
-						color : null,
-					},
-					{
-						label : 'Deviation(Cost)',
-						value : costDeviation,
-						color : null,
-					},
-				],
-			},
-		]
-		: graphData;
+	const graphData = getGraphData({
+		cardData,
+		taxType,
+		currency,
+		type,
+		displayAmount,
+		isDeviationVisible,
+		revenueDeviation,
+		costDeviation,
+	});
 
 	return (
 		<div className={styles.financially_closed_container}>
 			{showHeading && (
-				<RenderCardHeader
-					title={`${type} Closed Shipments`}
-					showInfo
-				/>
+				<div style={{ marginBottom: '16px' }}>
+					<RenderCardHeader
+						title={`${type} Closed Shipments`}
+						showInfo
+					/>
+				</div>
 			)}
 
 			{!loading ? (
@@ -145,27 +136,37 @@ function ClosedShipmentCard({
 
 					</div>
 					<div className={styles.show_graph_data}>
-						{(updateGraphData || []).map((item) => (
+						{(graphData || []).map((item) => (
 							<div
 								key={item?.id}
 								className={styles.graph_row}
 							>
-								{(item.children || []).map((child) => (
-									<div key={child.label}>
-										<div className={styles.graph_label}>
-											<span
-												className={styles.label_circle}
-												style={{ backgroundColor: child.color }}
-											/>
-											{child.label}
+								{(item.children || []).map((child) => {
+									if (!child.show) return null;
+									return (
+										<div
+											key={child.label}
+										>
+											<div
+												className={styles.graph_label}
+											>
+												{child.color && (
+													<span
+														className={styles.label_circle}
+														style={{ backgroundColor: child.color }}
+													/>
+												)}
+												{child.label}
+											</div>
+											<div className={styles.graph_value}>
+												{child.value}
+											</div>
 										</div>
-										<div className={styles.graph_value}>
-											{child.value}
-										</div>
-									</div>
-								))}
+									);
+								})}
 							</div>
 						))}
+
 					</div>
 				</div>
 			) : (

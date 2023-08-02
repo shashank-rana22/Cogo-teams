@@ -11,6 +11,7 @@
 .responsive_graph_circular {
 	width: 50%;
 	height: 90%;
+	margin: auto;
 
 	& > div:first-of-type {
 		width: 80% !important;
@@ -19,8 +20,10 @@
 }
 
 .show_graph_data {
-	width: 60%;
-	padding: 20px 0;
+	display: flex;
+	justify-content: space-between;
+	width: 96%;
+	height: 100%;
 }
 
 .label_circle {
@@ -32,7 +35,7 @@
 }
 
 .graph_value {
-	margin-left: 8px;
+	margin: 0 0 8px 8px;
 	font-size: var(--font-size-xl);
 	font-weight: 600;
 }
@@ -52,8 +55,9 @@
 
 .graph_row {
 	display: flex;
-	justify-content: space-between;
-	width: 100%;
+	flex-direction: column;
+	justify-content: space-evenly;
+	width: 50%;
 	margin: 20px 0;
 }
 
