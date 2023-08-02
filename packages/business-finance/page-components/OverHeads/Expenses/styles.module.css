@@ -11,12 +11,24 @@
 
 .left_container {
 	display: flex;
-	gap: 8px;
+
+	:global {
+		.ui_select_display_container {
+			height: 32px !important;
+		}
+
+		.ui_select_input_placeholder {
+			font-size: 12px;
+		}
+	}
 }
 
 .right_container {
 	display: flex;
-	gap: 8px;
+}
+
+.input_container {
+	margin-right: 8px;
 }
 
 .select {
