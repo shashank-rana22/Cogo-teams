@@ -5,6 +5,7 @@ import { useEffect, forwardRef } from 'react';
 
 import useGetMessages from '../../../../../hooks/useGetMessages';
 
+import Footer from './Footer';
 import MessagesThread from './MessagesThread';
 import styles from './styles.module.css';
 
@@ -25,6 +26,14 @@ function MessageConversations({
 	mailActions = {},
 	firestore = {},
 	hasPermissionToEdit = false,
+	actionType = '',
+	canMessageOnBotSession = false,
+	communicationLoading = false,
+	assignLoading = false,
+	suggestions = [],
+	setOpenModal = () => {},
+	assignChat = () => {},
+	sendCommunicationTemplate = () => {},
 }, ref) {
 	const { id = '', channel_type = '' } = activeMessageCard || {};
 
@@ -45,7 +54,6 @@ function MessageConversations({
 	}, [scrollToLastMessage, id, firstLoadingMessages]);
 
 	return (
-
 		<div
 			key={id}
 			className={cl`${styles.container} ${channel_type === 'email' ? styles.mail_container : ''}`}
@@ -83,6 +91,27 @@ function MessageConversations({
 					ref={ref}
 				/>
 			) }
+			<div className={styles.footer}>
+				{(channel_type !== 'email' || actionType) && (
+					<Footer
+						canMessageOnBotSession={canMessageOnBotSession}
+						hasPermissionToEdit={hasPermissionToEdit}
+						suggestions={suggestions}
+						formattedData={formattedData}
+						viewType={viewType}
+						firestore={firestore}
+						activeChatCollection={activeChatCollection}
+						setOpenModal={setOpenModal}
+						sendCommunicationTemplate={sendCommunicationTemplate}
+						communicationLoading={communicationLoading}
+						assignChat={assignChat}
+						assignLoading={assignLoading}
+						scrollToBottom={scrollToLastMessage}
+						mailActions={mailActions}
+						setMailActions={setMailActions}
+					/>
+				)}
+			</div>
 		</div>
 	);
 }

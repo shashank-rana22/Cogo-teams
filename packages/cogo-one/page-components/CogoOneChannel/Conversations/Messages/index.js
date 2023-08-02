@@ -15,7 +15,6 @@ import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import Header from './Header';
 import MessageConversations from './MessageConversations';
-import Footer from './MessageConversations/Footer';
 import MessageModals from './MessageModals';
 import styles from './styles.module.css';
 
@@ -170,7 +169,7 @@ function Messages({
 				</div>
 				<div
 					className={styles.message_container}
-					style={{ height: (channel_type === 'email' && !actionType) ? '83%' : '64%' }}
+					style={{ height: (channel_type === 'email' && !actionType) ? '83%' : 'calc(100% - 102px)' }}
 				>
 					<MessageConversations
 						formattedData={formattedData}
@@ -191,28 +190,13 @@ function Messages({
 						scrollToLastMessage={scrollToLastMessage}
 						setMailActions={setMailActions}
 						mailActions={mailActions}
+						actionType={actionType}
+						communicationLoading={communicationLoading}
+						assignLoading={assignLoading}
+						setOpenModal={setOpenModal}
+						assignChat={assignChat}
+						sendCommunicationTemplate={sendCommunicationTemplate}
 					/>
-				</div>
-				<div className={styles.footer}>
-					{(channel_type !== 'email' || actionType) && (
-						<Footer
-							canMessageOnBotSession={canMessageOnBotSession}
-							hasPermissionToEdit={hasPermissionToEdit}
-							suggestions={suggestions}
-							formattedData={formattedData}
-							viewType={viewType}
-							firestore={firestore}
-							activeChatCollection={activeChatCollection}
-							setOpenModal={setOpenModal}
-							sendCommunicationTemplate={sendCommunicationTemplate}
-							communicationLoading={communicationLoading}
-							assignChat={assignChat}
-							assignLoading={assignLoading}
-							scrollToBottom={scrollToLastMessage}
-							mailActions={mailActions}
-							setMailActions={setMailActions}
-						/>
-					)}
 				</div>
 			</div>
 			<MessageModals

@@ -17,22 +17,24 @@ const renderText = (txt = '') => {
 	return newTxt;
 };
 
-function ShowMessage({ messageType, message }) {
-	return messageType === 'template'
-		? (
+function ShowMessage({ messageType = '', message = '' }) {
+	if (messageType === 'template') {
+		return (
 			<div dangerouslySetInnerHTML={{
 				__html: message.replace(GLOBAL_CONSTANTS.regex_patterns.occurrences_of_line_breaks, '<br>'),
 			}}
 			/>
-		)
-		: (
-			<div dangerouslySetInnerHTML={{
-				__html: renderText(
-					message?.replace(GLOBAL_CONSTANTS.regex_patterns.occurrences_of_line_breaks, '<br>'),
-				),
-			}}
-			/>
 		);
+	}
+
+	return (
+		<div dangerouslySetInnerHTML={{
+			__html: renderText(
+				message?.replace(GLOBAL_CONSTANTS.regex_patterns.occurrences_of_line_breaks, '<br>'),
+			),
+		}}
+		/>
+	);
 }
 
 function CustomImage({ mediaUrl = '', hasProfanity = false }) {

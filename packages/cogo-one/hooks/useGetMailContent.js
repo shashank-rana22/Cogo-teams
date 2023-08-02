@@ -9,13 +9,15 @@ const getParams = ({ messageId }) => ({
 const formatBody = ({ mailResData, attachmentResData }) => {
 	const { body } = mailResData?.data || {};
 	const { content = '' } = body || {};
-	const { value:allAttachements } = attachmentResData?.data || {};
+	const { value: allAttachements } = attachmentResData?.data || {};
 
-	const newContent = allAttachements?.reduce((prevContent, attachment) => prevContent.replaceAll(
-		`cid:${attachment.contentId}`,
-		`data:${attachment.contentType};base64,${attachment.contentBytes}`,
-	), content);
-	return newContent;
+	return allAttachements?.reduce(
+		(prevContent, attachment) => prevContent.replaceAll(
+			`cid:${attachment.contentId}`,
+			`data:${attachment.contentType};base64,${attachment.contentBytes}`,
+		),
+		content,
+	);
 };
 
 function useGetMailContent({ messageId }) {
