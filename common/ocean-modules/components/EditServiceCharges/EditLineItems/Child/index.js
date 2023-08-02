@@ -1,5 +1,9 @@
 import { cl } from '@cogoport/components';
+import { ENTITY_IDS_MAPPING } from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
+import { getByKey, isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import Item from '../../../Layout/Item';
@@ -7,11 +11,38 @@ import Item from '../../../Layout/Item';
 import styles from './styles.module.css';
 
 const INDEX_UPTO_REMOVE_ITEM = 1;
+const FIELDS_CAN_BE_CHANGED = ['alias', 'price_discounted'];
+const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id];
+
+const priceDisabled = (
+	controlItem,
+	code,
+	field,
+	shipment_type,
+	path,
+	disable_edit_invoice = true,
+	isAuthorised = false,
+	service_name = '',
+) => {
+	if (
+		shipment_type === 'fcl_freight'
+		&& service_name !== 'fcl_freight_local_service'
+		&& !isEmpty(field?.code)
+		&& !FIELDS_CAN_BE_CHANGED.includes(controlItem?.name)
+		&& path === 'sales_invoice'
+		&& disable_edit_invoice
+		&& !isAuthorised
+	) {
+		return true;
+	}
+
+	return controlItem?.disabled;
+};
 
 function Child({
-	control,
+	control = {},
 	controls = [],
-	index,
+	index = 0,
 	name = '',
 	field = {},
 	remove = () => {},
@@ -19,11 +50,32 @@ function Child({
 	showDeleteButton = true,
 	error = {},
 	disableServiceEdit = false,
+	formValues = {},
+	shipment_type = '',
+	path = '',
+	service_name = '',
+	entity_id = '',
 }) {
+	const profileData = useSelector(({ profile }) => profile);
+
+	const disable_edit_invoice = getByKey(
+		ENTITY_IDS_MAPPING[entity_id] || {},
+		'others.navigations.bookings.invoicing.disable_edit_invoice',
+	);
+
+	const isAuthorised = AUTHORISED_USER_IDS.includes(profileData?.user?.id);
+
+	// can delete  only new added line items for FCL
+	const isLineItemRemovable = shipment_type === 'fcl_freight' && service_name !== 'fcl_freight_local_service'
+		&& !isEmpty(field?.code) && path === 'sales_invoice' && disable_edit_invoice && !isAuthorised
+		? false
+		: showDeleteButton;
+
 	const keys = useMemo(
 		() => Array(controls.length).fill(null).map(() => Math.random()),
 		[controls.length],
 	);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.item_container}>
@@ -46,13 +98,23 @@ function Child({
 							value={field?.[controlItem?.name]}
 							control={control}
 							source="edit_line_items"
+							disabled={priceDisabled(
+								controlItem,
+								formValues?.code,
+								field,
+								shipment_type,
+								path,
+								disable_edit_invoice,
+								isAuthorised,
+								service_name,
+							)}
 							label={controlItem?.label}
 							error={error?.[controlItem.name]}
 						/>
 					);
 				})}
 
-				{showDeleteButton
+				{showDeleteButton && isLineItemRemovable
 					? (
 						<IcMDelete
 							width={20}

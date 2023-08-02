@@ -104,7 +104,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 		placeholder : 'Enter Email Id',
 		rules       : {
 			pattern: {
-				value   : geo.regex.EMAIL,
+				value   : geo?.regex?.EMAIL,
 				message : 'Invalid email address',
 			},
 		},
@@ -145,7 +145,7 @@ export const getModifiedControls = ({
 								.cargo_insurance.countries.includes(
 									countryCode?.country_code,
 								)
-								? geo.regex.GST
+								? geo?.regex?.GST
 								: '',
 						message: 'Invalid Tax Number',
 					},
