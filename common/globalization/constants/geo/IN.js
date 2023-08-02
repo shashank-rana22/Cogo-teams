@@ -33,6 +33,7 @@ export default {
 	regex: {
 		TAX                                : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g, // PAN Regular Expression
 		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		ECN                                : '',
 		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL                              : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,

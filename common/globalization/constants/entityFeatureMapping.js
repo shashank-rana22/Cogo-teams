@@ -97,6 +97,13 @@ const ENTITY_FEATURE_MAPPING = {
 			search_options_label_pan  : 'Business Name/TIN Number',
 			search_options_label_sage : null,
 		},
+		feature_supported: [
+			'cogo_books',
+			'freight_sales_invoice_restricted_enitity',
+			'cancel_e_invoice',
+			'upload_invoice',
+			'dunning',
+		],
 		placeholder: {
 			tax_number: 'Search By Business Name/TIN Number',
 		},
@@ -109,6 +116,13 @@ const ENTITY_FEATURE_MAPPING = {
 			search_options_label_pan  : 'Business Name/NPWP Number',
 			search_options_label_sage : null,
 		},
+		feature_supported: [
+			'cogo_books',
+			'freight_sales_invoice_restricted_enitity',
+			'cancel_e_invoice',
+			'upload_invoice',
+			'dunning',
+		],
 		placeholder: {
 			tax_number: 'Search By Business Name/NPWP Number',
 		},
@@ -121,6 +135,13 @@ const ENTITY_FEATURE_MAPPING = {
 			search_options_label_pan  : 'Business Name/USCC Number',
 			search_options_label_sage : null,
 		},
+		feature_supported: [
+			'cogo_books',
+			'freight_sales_invoice_restricted_enitity',
+			'cancel_e_invoice',
+			'upload_invoice',
+			'dunning',
+		],
 		placeholder: {
 			tax_number: 'Search By Business Name/USCC Number',
 		},

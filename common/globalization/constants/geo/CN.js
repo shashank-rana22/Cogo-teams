@@ -33,14 +33,17 @@ export default {
 		TAX : /^[0-9A-Z]{18}$/,
 		// eslint-disable-next-line max-len
 		GST : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		ECN : '',
 		MOBILE_NUMBER:
 		/^(?:\+?86)?1(?:3\d{3}|5[^4\D]\d{2}|8\d{3}|7(?:[235-8]\d{2}|4(?:0\d|1[0-2]|9\d))|9[0-35-9]\d{2}|66\d{2})\d{6}$/,
-		EMAIL            : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
+		EMAIL                              : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,
+		MOBILE_NUMBER_WITHOUT_COUNTRY_CODE : '',
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
-	uuid: {
+	office_locations : [''],
+	uuid             : {
 		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
 		admin_id                         : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
