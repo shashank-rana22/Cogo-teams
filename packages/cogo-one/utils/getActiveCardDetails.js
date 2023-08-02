@@ -16,9 +16,10 @@ const getActiveCardDetails = (data = {}) => {
 		sender = null,
 		country_code = '',
 		cogo_entity_id = '',
+		lead_user_details = {},
 		...rest
 	} = data || {};
-	const lowerCasedName = user_name?.toLowerCase();
+	const lowerCasedName = user_name?.toLowerCase() || lead_user_details?.name?.toLowerCase();
 	const cogoEntityId = cogo_entity_id || GLOBAL_CONSTANTS.country_entity_ids[country_code] || '';
 
 	if (isEmpty(user_details)) {
@@ -36,6 +37,7 @@ const getActiveCardDetails = (data = {}) => {
 			organization_id,
 			organization_name,
 			email            : user_email,
+			lead_user_details,
 		};
 	}
 
@@ -64,6 +66,7 @@ const getActiveCardDetails = (data = {}) => {
 		cogo_entity_id    : orgCogoEntityId,
 		account_type,
 		sender,
+		lead_user_details,
 	};
 };
 export default getActiveCardDetails;
