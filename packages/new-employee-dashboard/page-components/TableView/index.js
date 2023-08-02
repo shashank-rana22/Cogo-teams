@@ -1,6 +1,6 @@
-import { Tabs, TabPanel, Input, Pagination } from '@cogoport/components';
+import { Tabs, TabPanel, Input, Pagination, Toggle, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import StyledTable from '../StyledTable';
@@ -16,10 +16,11 @@ const INITIAL_PAGE = 1;
 
 function TableView({ search, setSearch }) {
 	const { btnloading, updateEmployeeStatus } = useRejectAction();
+	const [bulkAction, setBulkAction] = useState(false);
 
 	const {
 		columns, loading, list, setActiveTab, activeTab, data, setPage, page, filters, setFilters,
-	} = useTableView({ search, btnloading, updateEmployeeStatus });
+	} = useTableView({ search, btnloading, updateEmployeeStatus, bulkAction });
 
 	return (
 		<div className={styles.container}>
@@ -34,6 +35,19 @@ function TableView({ search, setSearch }) {
 					<TabPanel name="inactive" title="Inactive" />
 					<TabPanel name="rejected_by_user" title="Rejected By User" />
 				</Tabs>
+				<div className={styles.bulkupload_container}>
+					BulkAction
+					<Toggle
+						onChange={(val) => setBulkAction(val?.target?.checked)}
+						value={bulkAction}
+						styles={{ marginBottom: '30px' }}
+					/>
+				</div>
+				{bulkAction && (
+					<div>
+						<Button themeType="secondary"> Send email </Button>
+					</div>
+				)}
 
 				<div className={styles.filter_options}>
 					<Input

@@ -9,7 +9,7 @@ import useGetZipFile from './useGetZipFile';
 
 const INITIAL_PAGE = 1;
 
-const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
+const useTableView = ({ search, btnloading, updateEmployeeStatus, bulkAction }) => {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('active');
 	const [page, setPage] = useState(INITIAL_PAGE);
@@ -64,6 +64,8 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 		fetch,
 		downloadDocuments,
 		documentLoading,
+		bulkAction,
+		data,
 	});
 
 	if (activeTab !== 'rejected_by_user') {
