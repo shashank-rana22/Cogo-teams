@@ -191,7 +191,6 @@ function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mappin
 					/>
 				</div>
 			</QuestionStatsContext.Provider>
-
 			<QuestionStatsContext.Provider value={questionProps}>
 				<div className={styles.right_container}>
 					<RightSection
@@ -200,7 +199,6 @@ function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mappin
 						setActiveState={setActiveState}
 					/>
 				</div>
-
 			</QuestionStatsContext.Provider>
 		</div>
 	);

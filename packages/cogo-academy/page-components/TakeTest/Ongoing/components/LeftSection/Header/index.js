@@ -11,7 +11,7 @@ const PERCENT = 100;
 const DECIMAL_PLACES = 2;
 
 function Header({
-	total_question, testData,	setShowTimeOverModal, start_time, setActiveState,
+	total_question, testData, setShowTimeOverModal, start_time, setActiveState,
 	setShowInstructionsModal, setShowSubmitTestModal, user_appearance = [],
 }) {
 	const time = new Date(start_time).getTime();
