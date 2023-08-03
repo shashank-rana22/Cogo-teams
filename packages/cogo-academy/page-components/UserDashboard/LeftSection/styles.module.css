@@ -3,6 +3,12 @@
 	flex-direction: column;
 	width: 70%;
 	padding-right: 42px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		padding-right: 2px;
+		margin-top: 52px;
+	}
 }
 
 .user_name {
