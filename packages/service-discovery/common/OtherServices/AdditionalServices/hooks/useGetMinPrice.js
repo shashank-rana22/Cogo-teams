@@ -1,5 +1,5 @@
-import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
+// import { Toast } from '@cogoport/components';
+// import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useMemo } from 'react';
@@ -32,7 +32,7 @@ const transportationServices = [
 ];
 
 const useGetMinPrice = ({ allServices = [], total_price_currency = 'USD', detail = {}, rateCardData = {} }) => {
-	const newServices = useMemo(() => [
+	const newServices = [
 		...allServices.filter(
 			(service) => service.service_type !== 'transportation',
 		).map((item) => ({
@@ -41,9 +41,9 @@ const useGetMinPrice = ({ allServices = [], total_price_currency = 'USD', detail
 			name         : item.name,
 		})),
 		...transportationServices,
-	], [allServices]);
+	];
 
-	const service_attributes = useMemo(() => newServices.map((serviceItem) => {
+	const service_attributes = newServices.map((serviceItem) => {
 		const { name = '', service_type, trade_type } = serviceItem;
 
 		const filters = getRequiredFilters({ detail, service: name, trade_type, rateCardData });
@@ -53,7 +53,7 @@ const useGetMinPrice = ({ allServices = [], total_price_currency = 'USD', detail
 			id: name,
 			service_type,
 		};
-	}), [detail, newServices, rateCardData]);
+	});
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
@@ -71,11 +71,12 @@ const useGetMinPrice = ({ allServices = [], total_price_currency = 'USD', detail
 				},
 			});
 		} catch (err) {
-			if (err?.response?.data) {
-				Toast.error(getApiErrorString(err.response?.data));
-			}
+			// if (err?.response?.data) {
+			// 	Toast.error(getApiErrorString(err.response?.data));
+			// }
+			console.log(err);
 		}
-	}, [trigger, total_price_currency]);
+	}, []);
 
 	useEffect(() => {
 		getMinPrice();
