@@ -2,13 +2,13 @@ import { Input } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import useListOrganization from '../../../../../hooks/useListOrganizations';
+import useListLeadOrganization from '../../../../../hooks/useListLeadOrganizations';
+import OrganizationList from '../Organizations/OrganizationList';
+import OrgUsersList from '../Organizations/OrgUserList';
 
-import OrganizationList from './OrganizationList';
-import OrgUsersList from './OrgUserList';
 import styles from './styles.module.css';
 
-function Organizations({
+function LeadOrganizations({
 	setActiveTab = () => {},
 	setOpenKamContacts = () => {},
 	activeOrg = '',
@@ -26,12 +26,12 @@ function Organizations({
 		listData = {},
 		loading = false,
 		handleScroll = () => {},
-	} = useListOrganization({ search });
+	} = useListLeadOrganization({ search });
 
 	const { list = [] } = listData || {};
 
 	return (
-		<div className={styles.org_container}>
+		<div className={styles.container}>
 			{showUser ? (
 				<OrgUsersList
 					orgDetail={orgDetail}
@@ -41,10 +41,11 @@ function Organizations({
 					key={id}
 					activeOrg={activeOrg}
 					setShowUser={setShowUser}
-					endPoint="list_organization_users"
-					filterKey="organization_id"
+					endPoint="get_lead_organization_users"
+					filterKey="lead_organization_id"
 				/>
 			) : (
+
 				<>
 					<div className={styles.input_container}>
 						<Input
@@ -56,9 +57,9 @@ function Organizations({
 						/>
 					</div>
 					<OrganizationList
-						list={list}
-						loading={loading}
 						handleScroll={handleScroll}
+						loading={loading}
+						list={list}
 						setOrgDetail={setOrgDetail}
 						orgDetail={orgDetail}
 						setShowUser={setShowUser}
@@ -68,4 +69,5 @@ function Organizations({
 		</div>
 	);
 }
-export default Organizations;
+
+export default LeadOrganizations;
