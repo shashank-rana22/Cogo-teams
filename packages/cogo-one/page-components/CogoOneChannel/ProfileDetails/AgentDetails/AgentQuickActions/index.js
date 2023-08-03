@@ -63,7 +63,7 @@ function AgentQuickActions({
 							);
 						}}
 					>
-						Onboard
+						Onboard User
 					</Button>
 				)
 				}
