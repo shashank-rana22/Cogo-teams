@@ -56,7 +56,7 @@ export const personalDetailsControl = [
 		rules       : {
 			required : 'Email is required',
 			pattern  : {
-				value   : geo?.regex.EMAIL,
+				value   : geo.regex.EMAIL,
 				message : 'Email is invalid',
 			},
 		},
@@ -70,7 +70,7 @@ export const personalDetailsControl = [
 		rules       : {
 			required : 'Mobile Number is required',
 			pattern  : {
-				value   : geo?.regex.MOBILE_NUMBER_WITHOUT_COUNTRY_CODE,
+				value   : geo.regex.MOBILE_NUMBER_WITHOUT_COUNTRY_CODE,
 				message : 'Invalid Mobile Number',
 			},
 		},
