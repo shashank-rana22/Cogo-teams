@@ -1920,18 +1920,6 @@ const navigationMappingAdmin = {
 		module_type   : 'dashboards',
 	},
 
-	page_builder: {
-		key           : 'page_builder',
-		title         : 'Page Builder',
-		href          : '/v2/page-builder',
-		icon          : IcMDashboard,
-		as            : '/v2/page-builder',
-		main_apis     : [],
-		possible_apis : apis.page_builder,
-		module_type   : 'dashboards',
-
-	},
-
 	document_wallet: {
 		key           : 'document_wallet',
 		title         : 'Document Wallet',
