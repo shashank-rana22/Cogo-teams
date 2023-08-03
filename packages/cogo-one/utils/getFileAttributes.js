@@ -1,40 +1,69 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMImage } from '@cogoport/icons-react';
 
-const fileIconMapping = {
-	document : <IcMDocument height={22} width={22} />,
-	img      : <IcMImage height={22} width={25} />,
+const STEP_COUNT = 1;
+const MINIMUM_COUNT = 2;
+
+const FILE_ICON_MAPPING = {
+	document : <IcMDocument height={18} width={18} fill="#bdbdbd" />,
+	img      : <IcMImage height={22} width={25} fill="#bdbdbd" />,
 };
 
-function getFileAttributes({ fileName = '', finalUrl }) {
+const EXTENSIONS_MAPPING = {
+	image: {
+		icon : FILE_ICON_MAPPING.img,
+		type : 'image',
+	},
+	audio: {
+		icon : FILE_ICON_MAPPING.document,
+		type : 'audio',
+	},
+	video: {
+		icon : FILE_ICON_MAPPING.img,
+		type : 'video',
+	},
+	default: {
+		icon : FILE_ICON_MAPPING.document,
+		type : 'document',
+	},
+};
+
+const MEDIA_EXTENSION_TYPES = {
+	image : ['jpg', 'jpeg', 'png', 'svg'],
+	audio : ['mp3', 'aac'],
+	video : ['mp4', 'mkv', 'mov', 'wmv', 'gif'],
+};
+
+function getFileAttributes({ fileName = '', finalUrl = '' }) {
 	const splitFileName = fileName.split('.');
-	let fileExtension = '';
-	let uploadedFileName = '';
-	let fileType = '';
+	let extension = '';
+	let name = '';
 
-	let fileIcon = null;
-	if (splitFileName.length > 1) {
-		fileExtension = splitFileName.pop();
-		uploadedFileName = splitFileName.join('');
+	if (splitFileName.length > MINIMUM_COUNT) {
+		extension = splitFileName[splitFileName.length - STEP_COUNT];
+
+		name = splitFileName.slice(
+			GLOBAL_CONSTANTS.zeroth_index,
+			splitFileName.length - STEP_COUNT,
+		).join(' ');
 	} else {
-		fileExtension = 'document';
-		uploadedFileName = fileName;
+		[name, extension] = splitFileName;
 	}
 
-	if (['jpeg', 'jpg', 'png', 'svg'].includes(fileExtension)) {
-		fileIcon = fileIconMapping.img;
-		fileType = 'image';
-	} else if (['mp3', 'aac'].includes(fileExtension)) {
-		fileIcon = fileIconMapping.document;
-		fileType = 'audio';
-	} else if (['mp4', 'gif'].includes(fileExtension)) {
-		fileIcon = fileIconMapping.img;
-		fileType = 'video';
-	} else {
-		fileIcon = fileIconMapping.document;
-		fileType = 'document';
-	}
+	const mediaType = Object.keys(MEDIA_EXTENSION_TYPES).find(
+		(itm) => MEDIA_EXTENSION_TYPES[itm].includes(extension),
+	);
 
-	return { uploadedFileName, fileIcon, fileType, finalUrl };
+	const { icon, type } = EXTENSIONS_MAPPING[mediaType || 'default'];
+
+	return {
+		fileName      : name,
+		fileIcon      : icon,
+		fileType      : type,
+		fileExtension : extension,
+		fileUrl       : finalUrl,
+		fileMediaType : mediaType,
+	};
 }
 
 export default getFileAttributes;

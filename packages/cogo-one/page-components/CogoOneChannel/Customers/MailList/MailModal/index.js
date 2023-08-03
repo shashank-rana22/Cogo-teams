@@ -172,20 +172,17 @@ function MailModal({
 
 						{(attachments || []).map(
 							(data) => {
-								const {
-									fileIcon = {},
-									uploadedFileName = '',
-								} = getDecodedData(data) || {};
+								const { fileIcon = {}, fileName = '' } = getDecodedData(data) || {};
 
 								return (
 									<div
 										className={styles.uploaded_files}
-										key={uploadedFileName}
+										key={fileName}
 									>
 										<div className={styles.uploaded_files_content}>
 											{fileIcon}
 											<div className={styles.content_div}>
-												{uploadedFileName}
+												{fileName}
 											</div>
 										</div>
 										<IcMCross

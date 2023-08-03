@@ -1,4 +1,5 @@
 import { IcMDelete } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -19,37 +20,62 @@ function deletefile({
 	return filteredFiles;
 }
 
-function UploadedFiles({ uploadedFiles = [], id = '', setDraftUploadedFiles = () => {}, uploaderRef = {} }) {
-	return uploadedFiles?.map((eachFileData) => {
-		const { file, icon = null, fileUrl = '' } = eachFileData || {};
-		return (
-			<div
-				role="presentation"
-				className={styles.files_container}
-				key={fileUrl}
-				onClick={() => {
-					window.open(fileUrl, '_blank', 'noreferrer');
-				}}
-			>
-				{icon || null}
-				<div className={styles.file_name}>{file}</div>
-				<IcMDelete
-					className={styles.delete_icon}
-					onClick={(e) => {
-						e.stopPropagation();
+function UploadedFiles({
+	uploadedFiles = [],
+	id = '',
+	setDraftUploadedFiles = () => {},
+	uploaderRef = {},
+}) {
+	const handleDelete = ({ event, fileUrl }) => {
+		event.stopPropagation();
 
-						setDraftUploadedFiles((prev) => ({
-							...prev,
-							[id]: deletefile({
-								fileUrl,
-								uploadedFiles: prev?.[id],
-								uploaderRef,
-							}),
-						}));
-					}}
-				/>
-			</div>
+		setDraftUploadedFiles(
+			(prev) => ({
+				...prev,
+				[id]: deletefile({
+					fileUrl,
+					uploadedFiles: prev?.[id],
+					uploaderRef,
+				}),
+			}),
 		);
-	});
+	};
+
+	return uploadedFiles?.map(
+		(eachFileData) => {
+			const {
+				fileName,
+				fileIcon = null,
+				fileUrl = '',
+				fileExtension = '',
+			} = eachFileData || {};
+
+			return (
+				<div
+					role="presentation"
+					className={styles.files_container}
+					key={fileUrl}
+					onClick={() => {
+						window.open(fileUrl, '_blank', 'noreferrer');
+					}}
+				>
+					{fileIcon || null}
+
+					<div className={styles.file_name}>
+						{startCase(fileName)}
+					</div>
+
+					<div className={styles.extension}>
+						{fileExtension ? `.${fileExtension}` : ''}
+					</div>
+
+					<IcMDelete
+						className={styles.delete_icon}
+						onClick={(event) => handleDelete({ event, fileUrl })}
+					/>
+				</div>
+			);
+		},
+	);
 }
 export default UploadedFiles;

@@ -112,13 +112,13 @@ function ComposeEmail({
 					<div className={styles.attachments_scroll}>
 						<div className={styles.uploading}>{uploading && 'Uploading...'}</div>
 						{(attachments || []).map((eachAttachement) => {
-							const { fileIcon, uploadedFileName } = getdecodedData({ data: eachAttachement });
+							const { fileIcon, fileName } = getdecodedData({ data: eachAttachement });
 							return (
 								<div className={styles.uploaded_files} key={eachAttachement}>
 									<div className={styles.uploaded_files_content}>
 										{fileIcon}
 										<div className={styles.content_div}>
-											{uploadedFileName}
+											{fileName}
 										</div>
 									</div>
 									<IcMCross

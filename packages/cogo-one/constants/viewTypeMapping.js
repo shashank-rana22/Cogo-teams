@@ -370,7 +370,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		default_side_nav              : 'profile',
 		show_relevant_templates       : ['quick_reply', 'supply'],
-		mails_to_be_shown             : [],
+		mails_to_be_shown             : ['sandeep.nalabolu@cogoport.com'],
 		bulk_assign_features          : ['bulk_auto_assign', 'bulk_send_templates'],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],
 		permissions                   : {
