@@ -19,20 +19,18 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
-			<div className={styles.port_code}>
-				{location?.port_code || location?.postal_code ? (
-					<div className={styles.code}>
-						(
-						{location?.port_code || location?.postal_code}
-						)
-					</div>
-				) : (
-					<div style={{ height: '20px' }} />
-				)}
-
-				<div className={styles.country}>
-					{location?.country?.name}
+			{location?.port_code || location?.postal_code ? (
+				<div className={styles.code}>
+					(
+					{location?.port_code || location?.postal_code}
+					)
 				</div>
+			) : (
+				<div style={{ height: '20px' }} />
+			)}
+
+			<div className={styles.country}>
+				{location?.country?.name}
 			</div>
 
 			<Tooltip
@@ -54,7 +52,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 
 	const renderLocation = () => (
 		<>
-			<div className={styles.flex_row_origin}>
+			<div className={styles.port_code}>
 				{handleLocationDetails(origin_port, origin_main_port)}
 			</div>
 
@@ -65,7 +63,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 			) : null}
 
 			{destination_port ? (
-				<div className={styles.flex_row_destination}>
+				<div className={styles.port_code}>
 					{handleLocationDetails(destination_port, destination_main_port)}
 				</div>
 			) : null}

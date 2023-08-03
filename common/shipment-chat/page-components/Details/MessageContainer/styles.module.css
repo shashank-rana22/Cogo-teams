@@ -5,8 +5,13 @@
 	background-color: #f9f9f9;
 }
 
-.message_loader {
+.flex_container {
 	display: flex;
-	align-items: center;
 	justify-content: center;
+}
+
+.message_loader {
+	position: fixed;
+	top: 45%;
+	left: 62.5%;
 }

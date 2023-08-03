@@ -3,7 +3,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
-	min-height: 80px;
+	height: 80px;
 	background-color: #fff;
 	border-radius: 0 8px 0 0;
 }
@@ -18,16 +18,16 @@
 }
 
 .serial_id {
-	width: 160px;
+	width: 164px;
 	padding: 0 12px;
-	border-right: 1px solid #f68b21;
 }
 
 .port_details_loading {
 	display: flex;
 	align-items: center;
-	width: 60%;
-	padding: 0 12px 0 20px;
+	width: 56%;
+	padding: 0 12px 0 16px;
+	border-left: 1px solid #f68b21;
 }
 
 .port_details_placeholder {
@@ -39,7 +39,7 @@
 .port_arrow {
 	width: 1.2em;
 	height: 1.2em;
-	margin: 0 28px 0 12px;
+	margin: 0 32px 0 8px;
 }
 
 .filter_box {
@@ -50,4 +50,21 @@
 	padding-right: 12px;
 	font-size: 12px;
 	background: #cfeaed;
+}
+
+.close_icon {
+	min-width: fit-content !important;
+	height: fit-content !important;
+	padding: 4px !important;
+	margin-right: 6px;
+	font-size: 16px !important;
+	font-weight: bold;
+	color: #ee3425 !important;
+	cursor: pointer;
+	border-radius: 50%;
+
+	&:hover {
+		background: white;
+		box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+	}
 }

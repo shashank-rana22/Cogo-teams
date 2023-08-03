@@ -13,24 +13,24 @@ function Loader({ setShow = () => {} }) {
 				</div>
 
 				<div className={styles.port_details_loading}>
-					<div style={{ width: '120px' }}>
+					<div style={{ width: '40%', marginLeft: '4px' }}>
 						<Placeholder className={styles.port_details_placeholder} />
 						<Placeholder className={styles.port_details_placeholder} />
 					</div>
 
 					<IcMPortArrow className={styles.port_arrow} />
 
-					<div style={{ width: '120px' }}>
+					<div style={{ width: '40%' }}>
 						<Placeholder className={styles.port_details_placeholder} />
 						<Placeholder className={styles.port_details_placeholder} />
 					</div>
 				</div>
 
-				<Placeholder height="18px" width="80px" />
+				<Placeholder height="18px" width="80px" margin="0 12px 0 0" />
 
 				<Button
 					themeType="linkUi"
-					style={{ padding: '0px' }}
+					className={styles.close_icon}
 					onClick={() => { setShow(false); }}
 				>
 					<IcMCross />

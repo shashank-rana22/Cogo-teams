@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -186,7 +186,7 @@ function List({
 
 			</div>
 
-			{(!id || (!loading && isEmpty(channelList))) ? (
+			{(!id || isEmpty(channelList)) ? (
 				<div className={styles.initial_state}>
 					<Button
 						themeType="tertiary"
@@ -196,14 +196,18 @@ function List({
 						<IcMCross />
 					</Button>
 
-					<img
-						src={GLOBAL_CONSTANTS.image_url.ic_initial_state_svg}
-						alt="empty"
-					/>
+					{loading ? <Loader /> : (
+						<>
+							<img
+								src={GLOBAL_CONSTANTS.image_url.ic_initial_state_svg}
+								alt="empty"
+							/>
 
-					<div className={styles.text}>
-						Welcome to Cogo Chat
-					</div>
+							<div className={styles.text}>
+								Welcome to Cogo Chat
+							</div>
+						</>
+					)}
 				</div>
 			) : (
 				channelList?.map((item) => (

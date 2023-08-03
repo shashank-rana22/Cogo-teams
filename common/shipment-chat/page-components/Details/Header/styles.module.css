@@ -80,14 +80,13 @@
 }
 
 .close_icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 4px;
+	min-width: fit-content !important;
+	height: fit-content !important;
+	padding: 4px !important;
 	margin-right: 6px;
-	font-size: 16px;
+	font-size: 16px !important;
 	font-weight: bold;
-	color: #ee3425;
+	color: #ee3425 !important;
 	cursor: pointer;
 	border-radius: 50%;
 

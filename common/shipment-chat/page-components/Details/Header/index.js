@@ -78,14 +78,14 @@ function Header({
 					</div>
 				</Popover>
 
-				<div
+				<Button
 					className={styles.close_icon}
-					role="button"
+					themeType="linkUi"
 					tabIndex={0}
 					onClick={() => setShow(false)}
 				>
 					<IcMCross />
-				</div>
+				</Button>
 			</div>
 
 			<div className={styles.filter_box}>
