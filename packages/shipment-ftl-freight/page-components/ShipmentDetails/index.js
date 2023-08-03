@@ -46,9 +46,11 @@ const FORBIDDEN_STATUS_CODE = 403;
 
 function ShipmentDetails() {
 	const router = useRouter();
-	const { authParams } = useSelector(
+	const prof = useSelector(
 		({ profile }) => profile,
 	) || {};
+	const { authParams } = prof;
+
 	const activeStakeholder = useGetActiveStakeholder();
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder, authParams });
 	const { get } = useGetShipment();
