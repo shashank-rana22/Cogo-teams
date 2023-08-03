@@ -12,10 +12,10 @@ import styles from './styles.module.css';
 const EditInvoice = dynamic(() => import('../../../../../Header/EditInvoice'), { ssr: false });
 const AddRemarks = dynamic(() => import('./AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('./ChangeCurrency'), { ssr: false });
-const OTPVerification = dynamic(() => import('./OTPVerification'), { ssr: false });
-const ReviewServices = dynamic(() => import('./ReviewServices'), { ssr: false });
-const AmendmentReasons = dynamic(() => import('./AmendmentReasons'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
+const ReviewServices = dynamic(() => import('./ReviewServices'), { ssr: false });
+const OTPVerification = dynamic(() => import('./OTPVerification'), { ssr: false });
+const AmendmentReasons = dynamic(() => import('./AmendmentReasons'), { ssr: false });
 const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
@@ -29,13 +29,8 @@ function Actions({
 	invoiceData = {},
 	isIRNGenerated = false,
 }) {
-	const [isEditInvoice, setIsEditInvoice] = useState(false);
-	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
-	const [showReview, setShowReview] = useState(false);
-	const [showAddRemarks, setShowAddRemarks] = useState(false);
-	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
-	const [sendEmail, setSendEmail] = useState(false);
-	const [showOtpModal, setShowOTPModal] = useState(false);
+	const [showModal, setShowModal] = useState('');
+
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
 
@@ -50,12 +45,7 @@ function Actions({
 		disableAction = false;
 	}
 
-	const remarkRender = () => (
-		<div className={styles.remark_container}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
+	const onModalClose = () => setShowModal('');
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
@@ -83,7 +73,7 @@ function Actions({
 						{!INVOICE_STATUS.includes(invoice.status) ? (
 							<Button
 								size="sm"
-								onClick={() => setShowReview(true)}
+								onClick={() => setShowModal('show_review')}
 								themeType="accent"
 								disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
 							>
@@ -92,7 +82,7 @@ function Actions({
 						) : null}
 
 						{invoice?.status === 'reviewed' ? (
-							<Button size="sm" onClick={() => setShowOTPModal(true)}>
+							<Button size="sm" onClick={() => setShowModal('otp_verification')}>
 								Send OTP for Approval
 							</Button>
 						) : null}
@@ -114,7 +104,13 @@ function Actions({
 					{!isEmpty(invoice.remarks) ? (
 						<Tooltip
 							placement="bottom"
-							content={remarkRender()}
+							content={(
+								<>
+									<h6 className={styles.title}>Invoice Remarks</h6>
+									<p className={styles.value}>{invoice.remarks}</p>
+								</>
+							)}
+							className={styles.remark_container}
 						>
 							<div className={styles.icon_more_wrapper}>
 								<IcMInfo fill="#DDEBC0" />
@@ -122,80 +118,78 @@ function Actions({
 						</Tooltip>
 					) : null}
 
-					<EmailInfo invoice={invoice} setSendEmail={setSendEmail} />
+					<EmailInfo invoice={invoice} setSendEmail={() => setShowModal('send_invoice_email')} />
+
 					<KebabContent
 						invoice={invoice}
 						shipment_data={shipment_data}
 						invoiceData={invoiceData}
 						isIRNGenerated={isIRNGenerated}
-						setIsChangeCurrency={setIsChangeCurrency}
-						setShowAddRemarks={setShowAddRemarks}
-						setShowChangePaymentMode={setShowChangePaymentMode}
-						setIsEditInvoice={setIsEditInvoice}
+						setShowModal={setShowModal}
 					/>
 				</div>
 			</div>
 
-			{(invoice.services || []).length && isEditInvoice ? (
+			{(invoice.services || []).length && showModal === 'edit_invoice' ? (
 				<EditInvoice
-					show={isEditInvoice}
-					onClose={() => setIsEditInvoice(false)}
+					show={showModal === 'edit_invoice'}
+					onClose={onModalClose}
 					invoice={invoice}
 					refetch={refetch}
 					shipment_data={shipment_data}
 				/>
 			) : null}
 
-			{showReview ? (
-				<ReviewServices
-					showReview={showReview}
-					setShowReview={setShowReview}
-					invoice={invoice}
-					refetch={refetch}
-				/>
-			) : null}
-
-			{isChangeCurrency ? (
+			{showModal === 'change_currency' ? (
 				<ChangeCurrency
-					isChangeCurrency={isChangeCurrency}
-					setIsChangeCurrency={setIsChangeCurrency}
+					show={showModal === 'change_currency'}
+					onClose={onModalClose}
 					invoice={invoice}
 					refetch={refetch}
 				/>
 			) : null}
 
-			{showOtpModal ? (
+			{showModal === 'add_remarks' ? (
+				<AddRemarks
+					show={showModal === 'add_remarks'}
+					onClose={onModalClose}
+					invoice={invoice}
+					refetch={refetch}
+				/>
+			) : null}
+
+			{showModal === 'change_payment_mode' ? (
+				<ChangePaymentMode
+					show={showModal === 'change_payment_mode'}
+					onClose={onModalClose}
+					invoice={invoice}
+					refetch={refetch}
+				/>
+			) : null}
+
+			{showModal === 'show_review' ? (
+				<ReviewServices
+					show={showModal === 'show_review'}
+					onClose={onModalClose}
+					invoice={invoice}
+					refetch={refetch}
+				/>
+			) : null}
+
+			{showModal === 'opt_verification' ? (
 				<OTPVerification
-					showOtpModal={showOtpModal}
-					setShowOTPModal={setShowOTPModal}
+					show={showModal === 'opt_verification'}
+					onClose={onModalClose}
 					invoice={invoice}
 					refetch={refetch}
 					shipment_data={shipment_data}
 				/>
 			) : null}
 
-			{showAddRemarks ? (
-				<AddRemarks
-					showAddRemarks={showAddRemarks}
-					setShowAddRemarks={setShowAddRemarks}
-					invoice={invoice}
-					refetch={refetch}
-				/>
-			) : null}
-
-			{sendEmail ? (
+			{showModal === 'send_invoice_email' ? (
 				<SendInvoiceEmail
-					show={sendEmail}
-					setShow={setSendEmail}
-					invoice={invoice}
-					refetch={refetch}
-				/>
-			) : null}
-
-			{showChangePaymentMode ? (
-				<ChangePaymentMode
-					show={showChangePaymentMode}
-					setShow={setShowChangePaymentMode}
+					show={showModal === 'send_invoice_email'}
+					onClose={onModalClose}
 					invoice={invoice}
 					refetch={refetch}
 				/>

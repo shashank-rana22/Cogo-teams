@@ -9,6 +9,7 @@ import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
 import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
+import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
@@ -139,6 +140,7 @@ const routeConfig = {
 	...bookingDeskSurface,
 	...ftlFieldSreviceOps,
 	...notifications,
+	...centralisedCustomerService,
 };
 
 export default routeConfig;

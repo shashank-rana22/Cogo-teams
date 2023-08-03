@@ -22,6 +22,7 @@ function PendingKnockOff({
 	refetchList = () => {},
 	getShipmentPendingTask = () => {},
 	taskLoading = false,
+	stateProps = {},
 }) {
 	const [tab, setTab] = useState('invoice');
 	const list_of_invoices = item?.invoice_data || [];
@@ -68,6 +69,7 @@ function PendingKnockOff({
 							handleAccordionOpen={handleAccordionOpen}
 							refetchForTask={refetchForTask}
 							tasksLoading={taskLoading}
+							shipment_type={stateProps.shipment_type}
 						/>
 					)
 			}

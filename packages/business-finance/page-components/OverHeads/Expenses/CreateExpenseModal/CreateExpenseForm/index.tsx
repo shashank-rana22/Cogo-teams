@@ -1,29 +1,31 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
+import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 import ExpenseDetailsForm from '../ExpenseDetailsForm';
 import NonRecurringSummary from '../NonRecurringSummary';
 import RecurringSummary from '../RecurringSummary';
 import UploadInvoiceForm from '../UploadInvoiceForm';
 
 interface Props {
-	active:string
-	createExpenseType:string,
-	recurringData?:object,
-	setRecurringData?:(obj:any)=>void,
-	nonRecurringData?:object,
-	setNonRecurringData?:(obj:any)=>void,
-	setIsFormValidated?:(obj:any)=>void,
+	active: string;
+	createExpenseType: string;
+	recurringData?: object;
+	setRecurringData?: (obj: any) => void;
+	nonRecurringData?: any;
+	setNonRecurringData?: (obj: any) => void;
+	setIsFormValidated?: (obj: any) => void;
 }
 
 function CreateExpenseForm({
-	active,
-	createExpenseType,
-	recurringData,
-	setRecurringData,
-	nonRecurringData,
-	setNonRecurringData,
-	setIsFormValidated,
-}:Props) {
+	active = '',
+	createExpenseType = '',
+	recurringData = {},
+	setRecurringData = () => {},
+	nonRecurringData = {},
+	setNonRecurringData = () => {},
+	setIsFormValidated = () => {},
+}: Props) {
 	const [categoryOptions, setCategoryOptions] = useState([]);
 	const [subCategoryOptions, setSubCategoryOptions] = useState([]);
 	const [taxOptions, setTaxOptions] = useState([]);
@@ -31,8 +33,8 @@ function CreateExpenseForm({
 	const [entityOptions, setEntityOptions] = useState([]);
 	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
 
-	let formData:any;
-	let setFormData:any;
+	let formData: any;
+	let setFormData: any;
 	if (createExpenseType === 'recurring') {
 		formData = recurringData;
 		setFormData = setRecurringData;
@@ -41,10 +43,11 @@ function CreateExpenseForm({
 		setFormData = setNonRecurringData;
 	}
 
+	const { vendorID } = nonRecurringData || {};
+	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 	return (
 		<div>
-			{active === 'Expense Details'
-			&& (
+			{active === 'Expense Details' && (
 				<div style={{ marginTop: '40px' }}>
 					<ExpenseDetailsForm
 						formData={formData}
@@ -62,23 +65,30 @@ function CreateExpenseForm({
 					/>
 				</div>
 			)}
-			{active === 'Upload Invoice' && createExpenseType === 'nonRecurring' && (
-				<UploadInvoiceForm
-					formData={formData}
-					setFormData={setFormData}
-					isUploadConfirm={isUploadConfirm}
-					setIsUploadConfirm={setIsUploadConfirm}
-					taxOptions={taxOptions}
-					setTaxOptions={setTaxOptions}
-					setIsFormValidated={setIsFormValidated}
-				/>
+			{active === 'Upload Invoice'
+				&& createExpenseType === 'nonRecurring' && (
+					<UploadInvoiceForm
+						formData={formData}
+						setFormData={setFormData}
+						isUploadConfirm={isUploadConfirm}
+						setIsUploadConfirm={setIsUploadConfirm}
+						taxOptions={taxOptions}
+						setTaxOptions={setTaxOptions}
+						setIsFormValidated={setIsFormValidated}
+						isTaxApplicable={
+							tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index]
+								?.is_tax_applicable
+						}
+					/>
 			)}
-			{ active === 'Final Confirmation' && (
+
+			{active === 'Final Confirmation' && (
 				<div>
 					{createExpenseType === 'nonRecurring' && (
 						<NonRecurringSummary
 							nonRecurringData={nonRecurringData}
 							setNonRecurringData={setNonRecurringData}
+							tradePartyData={tradePartyData}
 						/>
 					)}
 					{createExpenseType === 'recurring' && (

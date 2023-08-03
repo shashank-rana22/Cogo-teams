@@ -1,0 +1,32 @@
+.dialog_box {
+	min-width: 64px;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.text {
+	width: 100%;
+	height: min-content !important;
+	color: var(--color-secondary-greyscale-3) !important;
+
+	&:not(:first-of-type) {
+		position: relative;
+
+		&::before {
+			position: absolute;
+			top: -6px;
+			top: 0;
+			left: 0;
+			width: 100%;
+			content: "";
+			border-top: 1px solid var(--color-secondary-greyscale-5);
+		}
+	}
+
+	&:hover {
+		color: var(--color-accent-orange-2) !important;
+		background-color: transparent !important;
+	}
+}

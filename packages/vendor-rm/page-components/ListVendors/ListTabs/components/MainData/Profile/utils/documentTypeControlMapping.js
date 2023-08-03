@@ -1,14 +1,13 @@
 import contactControls from '../../../../../../OnBoardVendor/ContactDetails/utils/controls';
 import getPaymentControls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
-import { getControls } from '../../../../../../OnBoardVendor/VendorDetails/utils/getControls';
-
-const controls = getControls({});
-
-const registrationControl = controls.find((item) => item.name === 'registration_proof_url');
-
-const contactControl = contactControls.find((item) => item.name === 'contact_proof_url');
+import getControls from '../../../../../../OnBoardVendor/VendorDetails/utils/getControls';
 
 const getDocumentControlsTypeMapping = ({ country_id }) => {
+	const controls = getControls({});
+
+	const registrationControl = controls.find((item) => item.name === 'registration_proof_url');
+
+	const contactControl = contactControls.find((item) => item.name === 'contact_proof_url');
 	const { controls: paymentControls } = getPaymentControls({ country_id });
 
 	const taxDocumentControl = paymentControls.find((item) => item.name === 'tax_document_url');

@@ -59,6 +59,7 @@ function RenderAccordion({
 	getShipmentPendingTask = () => {},
 	taskLoading = false,
 	tableData = [],
+	stateProps = {},
 }) {
 	const propsMapping = {
 		import: {
@@ -68,6 +69,7 @@ function RenderAccordion({
 			refetchList: refetch,
 			getShipmentPendingTask,
 			taskLoading,
+			stateProps,
 		},
 
 		export: {
@@ -95,6 +97,7 @@ export default function Invoices({
 	refetch = () => {},
 	getShipmentPendingTask = () => {},
 	taskLoading = false,
+	stateProps = {},
 }) {
 	const list_of_invoices = (item?.invoice_data || []).filter(
 		(inv) => inv.status !== 'init',
@@ -166,6 +169,7 @@ export default function Invoices({
 					getShipmentPendingTask={getShipmentPendingTask}
 					taskLoading={taskLoading}
 					tableData={tableData}
+					stateProps={stateProps}
 				/>
 			) : null}
 		</>

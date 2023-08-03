@@ -6,8 +6,10 @@ import checkIsEndToEnd from '../../../utils/checkIsEndToEnd';
 
 import styles from './styles.module.css';
 
+const BOOKING_AGENTS_FOR_END_2_END = 2;
+
 function Header({ data = {} }) {
-	const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
+	const { userData } = useSelector(({ profile }) => ({ userData: profile }));
 	const { trade_type = '', importer_exporter = [], source } = data || {};
 
 	return (
@@ -25,7 +27,8 @@ function Header({ data = {} }) {
 					? <Pill className={styles.channel_partner} color="orange">Channel Partner</Pill>
 					: null}
 
-				{checkIsEndToEnd({ booking_agents: data?.booking_agents, userId, trade_type })
+				{checkIsEndToEnd({ booking_agents: data?.booking_agents, userData, trade_type })
+					&& data?.booking_agents?.length === BOOKING_AGENTS_FOR_END_2_END
 					? <Pill className={styles.channel_partner} color="red">Nominated</Pill>
 					: null}
 			</div>

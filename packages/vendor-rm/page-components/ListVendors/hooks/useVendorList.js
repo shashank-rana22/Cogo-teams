@@ -14,6 +14,8 @@ const ICON_STYLE = {
 	width  : '16px',
 };
 
+const FIRST_INDEX = 1;
+
 const ICON_MAPPING = {
 	pending_verification : <IcMError {...ICON_STYLE} />,
 	pending_from_user    : <IcMError {...ICON_STYLE} />,
@@ -36,10 +38,10 @@ const iconFilterMapping = [
 	},
 ];
 
-const renderToolTipContent = (unique_services) => (
+const renderToolTipContent = (UNIQUE_SERVICES) => (
 	<div>
-		{(unique_services || []).map((item, index) => {
-			if (index === 0) {
+		{(UNIQUE_SERVICES || []).map((item, index) => {
+			if (index === GLOBAL_CONSTANTS.zeroth_index) {
 				return null;
 			}
 			return <div key={item}>{startCase(item)}</div>;
@@ -50,31 +52,31 @@ const renderToolTipContent = (unique_services) => (
 const renderUniqueServices = ({ services, type }) => {
 	if (isEmpty(services)) return null;
 
-	const unique_services = [];
+	const UNIQUE_SERVICES = [];
 
 	(services || []).forEach((item) => {
 		if (type === 'category') {
-			if (!unique_services.includes(item?.category)) {
-				unique_services.push(item?.category);
+			if (!UNIQUE_SERVICES.includes(item?.category)) {
+				UNIQUE_SERVICES.push(item?.category);
 			}
-		} else if (!unique_services.includes(item?.sub_category)) {
-			unique_services.push(item?.sub_category);
+		} else if (!UNIQUE_SERVICES.includes(item?.sub_category)) {
+			UNIQUE_SERVICES.push(item?.sub_category);
 		}
 	});
 
-	const length = unique_services?.length;
+	const length = UNIQUE_SERVICES?.length;
 
 	return (
 		<div style={{ display: 'flex' }}>
-			{startCase(unique_services?.[0])}
+			{startCase(UNIQUE_SERVICES?.[GLOBAL_CONSTANTS.zeroth_index])}
 			<Tooltip
-				content={renderToolTipContent(unique_services)}
+				content={renderToolTipContent(UNIQUE_SERVICES)}
 				placement="left"
 			>
-				{length - 1 > 0 ? (
+				{length - FIRST_INDEX > GLOBAL_CONSTANTS.zeroth_index ? (
 					<div className={styles.underline}>
 						(+
-						{length - 1}
+						{length - FIRST_INDEX}
 						{' '}
 						more)
 					</div>
@@ -119,9 +121,9 @@ const useVendorList = () => {
 	}, [searchQuery]);
 
 	const handleViewMore = (id) => {
-		const href = '/vendors/[vendor_id]';
+		const HREF = '/vendors/[vendor_id]';
 		const as = `/vendors/${id}`;
-		router.push(href, as);
+		router.push(HREF, as);
 	};
 
 	const handleChangeQuery = (value) => {
@@ -203,15 +205,6 @@ const useVendorList = () => {
 			accessor : ({ services = [] }) => (
 				<section className={styles.bold}>
 					{renderUniqueServices({ services, type: 'category' })}
-				</section>
-			),
-		},
-		{
-			Header   : 'SUB-CATEGORY',
-			id       : 'sub_category',
-			accessor : ({ services = [] }) => (
-				<section className={styles.bold}>
-					{renderUniqueServices({ services, type: 'sub_category' })}
 				</section>
 			),
 		},
