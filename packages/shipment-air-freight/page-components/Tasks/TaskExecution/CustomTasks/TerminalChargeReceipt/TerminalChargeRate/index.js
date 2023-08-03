@@ -58,7 +58,7 @@ function TerminalChargeRate({
 		setValue('tax_price', Number(tax));
 		setValue('total_tax_price', Number(total_amount));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [csr_data]);
+	}, [JSON.stringify(csr_data)]);
 
 	return (
 		<div>
