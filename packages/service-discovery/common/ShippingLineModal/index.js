@@ -42,24 +42,15 @@ function ShippingLineModal({ shipping_line = {}, show = false, setShow = () => {
 
 					<div className={styles.wrapper}>
 						Looks like you have selected
-
 						<span className={styles.shipping_line_name}>{short_name}</span>
-
 						. In the past we have seen around
-
 						<strong> 40% </strong>
-
 						cancellations in this route for non
-
 						<CogoAssured />
-
 						bookings. Why not try
-
 						<CogoAssured />
 						for
-
 						<strong> 100% </strong>
-
 						booking confirmation?
 					</div>
 				</div>

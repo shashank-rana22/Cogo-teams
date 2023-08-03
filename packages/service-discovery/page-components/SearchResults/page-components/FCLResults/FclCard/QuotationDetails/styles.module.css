@@ -2,7 +2,6 @@
 	padding-right: 20px;
 }
 
-
 .primary_button {
 	width: 94%;
 	margin-left: 10px;
@@ -10,9 +9,9 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	border-radius: 6px;
-	
+
 	&.green {
-		background: #40AD3E !important; 
+		background: #40ad3e !important;
 	}
 }
 

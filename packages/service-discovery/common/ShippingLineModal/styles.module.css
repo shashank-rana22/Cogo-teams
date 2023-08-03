@@ -1,50 +1,46 @@
 .modal {
-    border: none;
-    margin-left: 36px;
-    max-width: max-content;
-    position: relative;
+	position: relative;
+	max-width: max-content;
+	margin-left: 36px;
+	border: none;
 }
 
 .modal_body {
-    background: #CFF1F4;
-    border-radius: 8px;
-    box-shadow: 0 8px 8px rgba(44,62,80,.2);
-    
+	background: #cff1f4;
+	border-radius: 8px;
+	box-shadow: 0 8px 8px rgb(44 62 80 / 20%);
 }
 
 .wrapper {
-   /* display: flex;
-   align-items: center; */
-   text-align: start;
-   /* flex-wrap: wrap; */
+	line-height: 28px;
+	text-align: start;
 }
 
 .container {
-    padding-right: 22px;
+	padding-right: 22px;
 }
 
 .shipping_line_name {
-    font-size: 14px;
-    font-weight: 700;
-    margin-left: 4px;
-    text-decoration: underline;
-    width: max-content;
+	width: max-content;
+	margin-left: 4px;
+	font-size: 14px;
+	font-weight: 700;
+	text-decoration: underline;
 }
 
 .cogo_assured_banner {
-    object-fit: cover;
-    margin: 0 6px;
+	object-fit: cover;
+	margin: 0 6px -6px;
 }
 
 .text {
-    margin-right: 4px;
-    font-size: 14px;
-    /* min-width: max-content; */
+	margin-right: 4px;
+	font-size: 14px;
 }
 
 .cross_icon {
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    cursor: pointer;
+	position: absolute;
+	top: -8px;
+	left: -8px;
+	cursor: pointer;
 }
