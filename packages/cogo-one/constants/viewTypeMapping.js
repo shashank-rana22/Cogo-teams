@@ -111,7 +111,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons  : getSalesAgentButtons,
 		accesible_agent_types_query   : [where('agent_type', 'in', ['sales', 'bot'])],
 		show_relevant_templates       : ['quick_reply'],
-		mails_to_be_shown             : [],
+		mails_to_be_shown             : ['sandeep.nalabolu@cogoport.com'],
 		bulk_assign_features          : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
@@ -148,7 +148,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		extra_side_bar_navs_access    : ['spot_search'],
 		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		show_relevant_templates       : ['quick_reply'],
-		mails_to_be_shown             : [],
+		mails_to_be_shown             : ['sandeep.nalabolu@cogoport.com'],
 		bulk_assign_features          : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
@@ -186,7 +186,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		extra_side_bar_navs_access    : ['spot_search'],
 		get_accesible_assign_buttons  : getKamButtons,
 		show_relevant_templates       : ['quick_reply'],
-		mails_to_be_shown             : [],
+		mails_to_be_shown             : ['sandeep.nalabolu@cogoport.com'],
 		bulk_assign_features          : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail'],
 		permissions                   : {
@@ -222,7 +222,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		extra_side_bar_navs_access    : ['spot_search'],
 		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		show_relevant_templates       : ['quick_reply'],
-		mails_to_be_shown             : [],
+		mails_to_be_shown             : ['sandeep.nalabolu@cogoport.com'],
 		bulk_assign_features          : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail'],
 		permissions                   : {
@@ -333,7 +333,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons  : getShipmentSpecialistButtons,
 		accesible_agent_types_query   : [where('agent_type', 'in', ['shipment', 'bot'])],
 		show_relevant_templates       : ['quick_reply'],
-		mails_to_be_shown             : [],
+		mails_to_be_shown             : ['sandeep.nalabolu@cogoport.com'],
 		bulk_assign_features          : [],
 		accessible_new_communications : ['new_mail'],
 		permissions                   : {

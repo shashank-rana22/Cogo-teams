@@ -7,13 +7,15 @@ import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 
 const getLensPayload = ({ payload }) => payload;
 
-const getCommunicationPayload = ({ payload, userId }) => ({
+const getCommunicationPayload = ({ payload, userId, userName }) => ({
 	type             : 'rpa_email',
 	recipient        : payload?.toUserEmail?.[GLOBAL_CONSTANTS.zeroth_index],
 	message_metadata : {
-		endpoint            : 'cogolens/send_mail',
+		endpoint            : '/cogolens/send_mail',
 		body                : payload,
-		send_to_omnichannel : false,
+		send_to_omnichannel : true,
+		sender_user_id      : userId,
+		send_by             : userName,
 	},
 	sender_user_id : userId,
 	service        : 'user',
@@ -34,6 +36,7 @@ function useReplyMail(mailProps) {
 		buttonType = 'send_mail',
 		setButtonType = () => {},
 		userId = '',
+		userName = '',
 	} = mailProps;
 
 	const {
@@ -51,7 +54,7 @@ function useReplyMail(mailProps) {
 	const replyMailApi = async (payload) => {
 		try {
 			await trigger({
-				data: getPayload({ payload, userId }),
+				data: getPayload({ payload, userId, userName }),
 			});
 			Toast.success('Mail Sent Successfully.');
 			setEmailState(DEFAULT_EMAIL_STATE);
