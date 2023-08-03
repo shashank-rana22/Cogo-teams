@@ -25,7 +25,7 @@ function AgentQuickActions({
 	const countryCodeRegex = GLOBAL_CONSTANTS.regex_patterns.mobile_country_code_format;
 	const countryCode = mobile_country_code.replace(countryCodeRegex, COUNTRY_CODE_PREFIX);
 
-	const queryParams = `?mobile=${mobile_number}&mobile_country_code=${countryCode})}${emailParams}`;
+	const queryParams = `?mobile=${mobile_number}&mobile_country_code=${countryCode}${emailParams}`;
 	const redirectionUrl = `/create-importer-exporter${queryParams}`;
 
 	return (
