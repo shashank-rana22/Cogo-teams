@@ -1,0 +1,17 @@
+.item_container {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 24px;
+	margin-bottom: 30px;
+	background: #fff;
+	border-radius: 6px 6px 0 0;
+	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
+}
+
+.inner_container {
+	width: 16%;
+}
+
+.item {
+	margin-bottom: 12px;
+}

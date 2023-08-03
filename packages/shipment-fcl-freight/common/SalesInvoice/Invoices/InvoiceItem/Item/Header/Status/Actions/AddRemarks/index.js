@@ -1,4 +1,4 @@
-import { Button, Textarea, Modal } from '@cogoport/components';
+import { Button, Textarea, Modal, Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -7,29 +7,43 @@ import useUpdateInvoiceRemarks from '../../../../../../../../../hooks/useUpdateI
 import styles from './styles.module.css';
 
 function AddRemarks({
-	showAddRemarks = false,
-	setShowAddRemarks = () => {},
+	show = false,
+	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
-	const [remarkValue, setRemarkValue] = useState(invoice?.remarks || []);
-
-	const onClose = () => {
-		setRemarkValue(invoice?.remarks);
-		setShowAddRemarks(false);
-	};
+	const [defaultRemarks] = invoice?.remarks || [];
+	const [remarkValue, setRemarkValue] = useState(defaultRemarks);
 
 	const refetchAfterCall = () => {
-		onClose();
 		refetch();
+		onClose();
 	};
 
 	const { onSubmitRemarks = () => {}, loading } = useUpdateInvoiceRemarks({
 		refetch: refetchAfterCall,
 	});
 
+	const handleSubmit = () => {
+		if (isEmpty(remarkValue.trim())) {
+			Toast.error('Remarks cannot be empty spaced!');
+			return;
+		}
+
+		onSubmitRemarks({
+			id      : invoice?.id,
+			remarks : [remarkValue],
+		});
+	};
+
 	return (
-		<Modal onClose={onClose} show={showAddRemarks} width={600} closeOnOuterClick={false}>
+		<Modal
+			onClose={onClose}
+			show={show}
+			size="lg"
+			closeOnOuterClick={false}
+			showCloseIcon={!loading}
+		>
 			<Modal.Header title="Invoice Remarks" />
 
 			<Modal.Body>
@@ -37,7 +51,7 @@ function AddRemarks({
 					value={remarkValue}
 					size="md"
 					rows="6"
-					onChange={(e) => setRemarkValue([e])}
+					onChange={setRemarkValue}
 					placeholder="Add remarks for your invoice..."
 					className={styles.text_area}
 				/>
@@ -55,10 +69,7 @@ function AddRemarks({
 
 				<Button
 					size="md"
-					onClick={() => onSubmitRemarks({
-						id      : invoice?.id,
-						remarks : remarkValue,
-					})}
+					onClick={handleSubmit}
 					disabled={loading || isEmpty(remarkValue)}
 				>
 					Submit

@@ -1,57 +1,70 @@
-import { AsyncSelect } from '@cogoport/forms';
+import { Input } from '@cogoport/components';
+import { IcMSearchdark } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useListOrganization from '../../../../../hooks/useListOrganizations';
+
+import OrganizationList from './OrganizationList';
 import OrgUsersList from './OrgUserList';
 import styles from './styles.module.css';
 
-const ACTIVE_SERVICE_MAPPING = {
-	organization: {
-		asyncKey  : 'organizations',
-		endPoint  : 'list_organization_users',
-		filterKey : 'organization_id',
-	},
-	lead_organization: {
-		asyncKey  : 'list_lead_organizations',
-		endPoint  : 'get_lead_organization_users',
-		filterKey : 'lead_organization_id',
-	},
-};
+function Organizations({
+	setActiveTab = () => {},
+	setOpenKamContacts = () => {},
+	activeOrg = '',
+}) {
+	const [search, setSearch] = useState('');
+	const [orgDetail, setOrgDetail] = useState({
+		id   : '',
+		name : '',
+	});
+	const [showUser, setShowUser] = useState(false);
 
-function Organizations({ setActiveTab = () => {}, setOpenKamContacts = () => {}, activeOrg = '' }) {
-	const [orgId, setOrgId] = useState('');
+	const { id = '' } = orgDetail;
 
 	const {
-		asyncKey,
-		endPoint,
-		filterKey,
-	} = ACTIVE_SERVICE_MAPPING[activeOrg];
+		listData = {},
+		loading = false,
+		handleScroll = () => {},
+	} = useListOrganization({ search });
+
+	const { list = [] } = listData || {};
 
 	return (
-		<>
-			<AsyncSelect
-				asyncKey={asyncKey}
-				initialCall
-				onChange={setOrgId}
-				value={orgId}
-				className={styles.container}
-				placeholder="Search by serial id / business name"
-				size="md"
-				isClearable
-			/>
-			<div className={styles.org_users_styles}>
+		<div className={styles.org_container}>
+			{showUser ? (
 				<OrgUsersList
-					orgId={orgId}
+					orgDetail={orgDetail}
 					setActiveTab={setActiveTab}
 					setOpenKamContacts={setOpenKamContacts}
-					setOrgId={setOrgId}
-					key={orgId}
-					endPoint={endPoint}
-					filterKey={filterKey}
+					key={id}
 					activeOrg={activeOrg}
+					setShowUser={setShowUser}
+					endPoint="list_organization_users"
+					filterKey="organization_id"
 				/>
-			</div>
-
-		</>
+			) : (
+				<>
+					<div className={styles.input_container}>
+						<Input
+							placeholder="search by name..."
+							onChange={setSearch}
+							val={search}
+							size="sm"
+							prefix={<IcMSearchdark />}
+						/>
+					</div>
+					<OrganizationList
+						list={list}
+						loading={loading}
+						handleScroll={handleScroll}
+						setOrgDetail={setOrgDetail}
+						orgDetail={orgDetail}
+						setShowUser={setShowUser}
+					/>
+				</>
+			)}
+		</div>
 	);
 }
 export default Organizations;

@@ -1410,6 +1410,15 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment],
 			},
+			{
+				key           : 'coe-ftl_field_service_ops',
+				title         : 'FTL Field Service OPS',
+				href          : '/v2/ftl-field-service-ops',
+				as            : '/v2/ftl-field-service-ops',
+				type          : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : apis.ftl_field_service_ops_apis,
+			},
 		],
 	},
 	terms_and_conditions: {
@@ -2475,6 +2484,17 @@ const navigationMappingAdmin = {
 		href          : '/v2/ftl-admin',
 		as            : '/v2/ftl-admin',
 		possible_apis : apis.ftl_admin,
+	},
+	centralised_customer_service: {
+		key           : 'centralised_customer_service',
+		title         : 'Centralised Customer Service Desk',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		href          : '/v2/centralised-customer-service',
+		as            : '/v2/centralised-customer-service',
+		main_apis     : [],
+		possible_apis : apis.centralised_customer_service,
+		icon          : IcMDashboard,
 	},
 };
 

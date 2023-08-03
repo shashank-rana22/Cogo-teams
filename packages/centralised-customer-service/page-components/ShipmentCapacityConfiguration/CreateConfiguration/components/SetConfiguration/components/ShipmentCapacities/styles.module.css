@@ -1,0 +1,97 @@
+.container {
+	margin-top: 30px;
+
+	h4 {
+		color: #4f4f4f;
+	}
+
+	span {
+		font-weight: normal;
+	}
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.back_icon {
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+.header_title {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.service_item,
+.header_card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	margin-bottom: 20px;
+	background: #fff;
+	border-radius: 4px;
+}
+
+.header_card {
+	background: #fdfbf6;
+}
+
+.label,
+.trigger {
+	flex-basis: 16%;
+	max-width: 16%;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.exp_container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.title {
+	align-self: center;
+	margin-bottom: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.capacity_container,
+.slab_details {
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	justify-content: center;
+}
+
+.item,
+.capacity_input {
+	flex-basis: 25%;
+	margin-right: 30px;
+}
+
+.item {
+	text-align: center;
+}
+
+.err_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.btn_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.reset_btn {
+	margin-right: 10px;
+}

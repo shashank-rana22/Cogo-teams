@@ -48,6 +48,7 @@ const GLOBAL_CONSTANTS = {
 			'HH:mm'     : 'HH:mm',
 			'hh:mm:ss'  : 'hh:mm:ss',
 			'HH:mm:ss'  : 'HH:mm:ss',
+			'HH:mm a'   : 'HH:mm a',
 			hh          : 'hh',
 			HH          : 'HH',
 			mm          : 'mm',
@@ -60,6 +61,12 @@ const GLOBAL_CONSTANTS = {
 	sample_document_url: {
 		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
 						a3072d28df04315514414abe46a8c2f0/new_employee_bulk_upload_sample_sheet.csv`,
+	},
+	upload_utr_sample_file: {
+		normal_payment: 'https://cogoport-testing.sgp1.digitaloceanspaces.com/06679b4fca57'
+							+ 'a312ee8f3fe0ded72246/UTRuploadSampleFile.xlsx',
+		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae5'
+							+ '9e95d4e38a4271ff/UTRuploadSampleFileForAdvancePayment.xlsx',
 	},
 	flash_booking_charge_codes: [
 		'OTC',
@@ -194,6 +201,10 @@ const GLOBAL_CONSTANTS = {
 		platform_notification_svg:
 			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg',
 		missed_call_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
+		start_user_audio  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disabled call.svg',
+		end_user_audio    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call.svg',
+		start_agent_audio : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call hangup.svg',
+		end_agent_audio   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/omni_channel.svg',
 		not_connected_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
 		outgoing_svg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
 		incoming_svg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
@@ -212,6 +223,7 @@ const GLOBAL_CONSTANTS = {
 		user_avatar            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png',
 		destination_icon       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
 		document_icon_png      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
+		download_icon_svg     	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg',
 		document_icon_dark_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/document-svg.svg',
 		day_one_png            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
 		books_png              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
@@ -293,6 +305,8 @@ const GLOBAL_CONSTANTS = {
 		},
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
+		message_reply        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/message_reply.png',
+		cargo_ship_vector    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargoShipsVector.png',
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
 		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
 		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
@@ -308,6 +322,8 @@ const GLOBAL_CONSTANTS = {
 		clock_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
 		sad_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
 		sign_up_failed       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
+		kyc_event            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc_event.png',
+		default_event        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
 	},
 
 	video_call_ring_tone_url:
@@ -430,6 +446,11 @@ const GLOBAL_CONSTANTS = {
 		amount_seperator       : /\D/g,
 		white_space_characters : /\s/g,
 		email_subject_prefix   : /^(re|fwd|fw):\s*/i,
+		para_html_tag_text     : /<p>([\s\S]*?)<\/p>/gm,
+		h1_html_tag_text       : /<h1>([\s\S]*?)<\/h1>/gm,
+		h2_html_tag_text       : /<h2>([\s\S]*?)<\/h2>/gm,
+		h3_html_tag_text       : /<h3>([\s\S]*?)<\/h3>/gm,
+		li_html_tag_text       : /<li>([\s\S]*?)<\/li>/gm,
 	},
 	zeroth_index                 : 0,
 	milliseconds_in_one_day      : 86400000,

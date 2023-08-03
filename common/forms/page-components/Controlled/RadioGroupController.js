@@ -17,7 +17,12 @@ function RadioGroupController(props) {
 				<RadioGroup
 					{...rest}
 					key={rest.id}
-					onChange={onChange}
+					onChange={(v) => {
+						if (typeof rest?.onChange === 'function') {
+							rest.onChange(v);
+						}
+						onChange(v);
+					}}
 					value={newValue}
 					onBlur={onBlur}
 				/>
