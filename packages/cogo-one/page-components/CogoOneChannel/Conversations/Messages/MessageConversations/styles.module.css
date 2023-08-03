@@ -1,4 +1,8 @@
 .container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
 	height: 100%;
 	padding-top: 10px;
 	overflow-y: scroll;
@@ -158,10 +162,15 @@
 	right: 3px;
 }
 
-.footer {
+.omni_channel_text_footer {
 	position: sticky;
 	bottom: 0;
-	z-index: 100;
 	width: 100%;
+	background: #fff;
 	box-shadow: 0 -4px 3px rgb(255 187 187 / 20%);
+}
+
+.message_container {
+	flex: 1;
+	overflow-y: scroll;
 }

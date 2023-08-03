@@ -5,6 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import useGetMailContent from '../../hooks/useGetMailContent';
 
 import MailActions from './mailActions';
+import MailAttachments from './MailAttachments';
 import MailHeader from './MailHeader';
 import styles from './styles.module.css';
 
@@ -95,6 +96,7 @@ function MailBody({
 						setMailActions={setMailActions}
 					/>
 				)}
+				<MailAttachments />
 			</div>
 		</div>
 	);
