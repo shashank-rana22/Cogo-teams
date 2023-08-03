@@ -4,6 +4,6 @@
 
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function Check() {
+export default function check() {
 	return 'Redirecting...';
 }
