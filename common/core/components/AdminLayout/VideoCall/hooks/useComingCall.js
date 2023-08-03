@@ -14,26 +14,29 @@ const NOT_CALLING_CALL_STATUS = ['rejected', 'end_call', 'miss_call', 'technical
 const STOP_CALL_STATUS = ['rejected', 'end_call', 'technical_error'];
 
 function useComingCall({
-	firestore,
-	setCallDetails,
-	callDetails,
-	inVideoCall,
-	setCallComing,
-	setStreams,
-	peerRef,
-	webrtcToken,
-	setWebrtcToken,
-	handleCallEnd,
+	firestore = {},
+	setCallDetails = () => {},
+	callDetails = {},
+	inVideoCall = false,
+	setCallComing = () => {},
+	setStreams = () => {},
+	peerRef = {},
+	webrtcToken = {},
+	setWebrtcToken = () => {},
+	handleCallEnd = () => {},
 }) {
+	const { callingRoomId = '', webrtcTokenRoomId = '', callingRoomDetails = {} } = callDetails || {};
+	const { call_status: callStatus = '' } = callingRoomDetails || {};
+
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
 	}));
 	const { id: userId } = user_data || {};
-	const { callingRoomId = '', webrtcTokenRoomId = '' } = callDetails || {};
 
-	const { saveInACallStatus } = useSetInACall();
 	const callComingSnapshotRef = useRef(null);
 	const tokenSnapshotRef = useRef(null);
+
+	const { saveInACallStatus = () => {} } = useSetInACall();
 
 	const getWebrtcToken = useCallback(async () => {
 		if (!webrtcTokenRoomId || !callingRoomId) {
@@ -114,7 +117,7 @@ function useComingCall({
 
 	const answerCall = useCallback(async () => {
 		await getWebrtcToken();
-		saveInACallStatus(true);
+		saveInACallStatus({ inACallStatus: true });
 		setCallComing(false);
 
 		callUpdate({
@@ -167,24 +170,22 @@ function useComingCall({
 	}, [callingRoomId, firestore, setWebrtcToken, webrtcTokenRoomId]);
 
 	useEffect(() => {
-		const room_data = callDetails?.callingRoomDetails;
-
 		if (
-			room_data?.call_status
-			&& STOP_CALL_STATUS.includes(room_data?.call_status)
+			callStatus
+			&& STOP_CALL_STATUS.includes(callStatus)
 			&& callingRoomId
 		) {
-			if (room_data?.call_status === 'rejected') {
+			if (callStatus === 'rejected') {
 				handleCallEnd({ callActivity: 'not_connected', description: 'user rejected the call' });
 			} else {
 				handleCallEnd({ callActivity: 'answered' });
 			}
 		}
 
-		if (NOT_CALLING_CALL_STATUS.includes(room_data?.call_status)) {
+		if (NOT_CALLING_CALL_STATUS.includes(callStatus)) {
 			setCallComing(false);
 		}
-	}, [callDetails?.callingRoomDetails, handleCallEnd, setCallComing, callingRoomId]);
+	}, [callStatus, handleCallEnd, setCallComing, callingRoomId]);
 
 	return {
 		answerCall,

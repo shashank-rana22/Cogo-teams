@@ -208,7 +208,7 @@ export const PLACEHOLDER_MAPPING = {
 
 export const SHOW_LOG_STATUS_ICON_MAPPING = {
 	answered      : { icon: IcMVideoCall, fill: '#b0cc64' },
-	not_connected : { icon: IcMVideoCallMute, fill: '#e0e0e0' },
+	not_connected : { icon: IcMVideoCallMute, fill: '#828282' },
 	missed        : { icon: IcMVideoCallMute, fill: '#f37166' },
 };
 

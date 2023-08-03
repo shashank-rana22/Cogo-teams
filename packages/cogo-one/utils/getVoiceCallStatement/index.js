@@ -11,7 +11,7 @@ const getVoiceCallStatus = ({ type, status, present, previous, channel = '' }) =
 	};
 
 	const VideoCallIcon = SHOW_LOG_STATUS_ICON_MAPPING[status]?.icon || null;
-	const VideoCallIconColor = SHOW_LOG_STATUS_ICON_MAPPING[status]?.fill || '#fff';
+	const videoCallIconColor = SHOW_LOG_STATUS_ICON_MAPPING[status]?.fill || '#fff';
 
 	return (
 		<div className={styles.flex}>
@@ -20,7 +20,7 @@ const getVoiceCallStatus = ({ type, status, present, previous, channel = '' }) =
 					width={20}
 					height={20}
 					className={styles.video_call_icon}
-					fill={VideoCallIconColor}
+					fill={videoCallIconColor}
 				/>
 			) : (
 				<img
@@ -55,7 +55,7 @@ const getVoiceCallStatement = ({
 	previous = '',
 	startAt = null,
 	voiceCallStatus = '',
-	channel,
+	channel = '',
 }) => {
 	if (type === 'assigned') {
 		if (startAt === null) {

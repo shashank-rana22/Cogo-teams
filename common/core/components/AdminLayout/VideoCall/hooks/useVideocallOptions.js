@@ -4,15 +4,15 @@ import { useCallback } from 'react';
 import { callUpdate } from '../utils/callFunctions';
 
 function useVideocallOptions({
-	toggleState,
-	setToggleState,
-	streams,
-	handleCallEnd,
-	callDetails,
-	firestore,
+	toggleState = {},
+	setToggleState = () => {},
+	streams = {},
+	handleCallEnd = () => {},
+	callDetails = {},
+	firestore = {},
 }) {
-	const { callingRoomDetails } = callDetails;
-	const { call_status: callStatus } = callingRoomDetails;
+	const { callingRoomDetails } = callDetails || {};
+	const { call_status: callStatus = '' } = callingRoomDetails || {};
 
 	const stopCall = useCallback(({ e, clickType, duration = 0 }) => {
 		if (clickType === 'mini_screen') {

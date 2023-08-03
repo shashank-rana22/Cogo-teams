@@ -21,6 +21,7 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 	const { name : presentAgent } = agent_data || {};
 	const { name : previousAgent } = performed_by_data || {};
 	const { name: voiceCallUserName = '' } = user_data || {};
+
 	const timelineText = getVoiceCallStatement({
 		type            : conversation_type,
 		present         : presentAgent,

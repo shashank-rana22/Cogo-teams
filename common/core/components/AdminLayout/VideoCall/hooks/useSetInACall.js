@@ -5,13 +5,13 @@ import { useCallback } from 'react';
 export const useSetInACall = () => {
 	const dispatch = useDispatch();
 
-	const saveInACallStatus = useCallback((inAcallStatus) => {
+	const saveInACallStatus = useCallback(({ inACallStatus }) => {
 		let dataNeedToUpdate = {
 			video_call_recipient_data : {},
-			is_in_video_call          : inAcallStatus,
+			is_in_video_call          : inACallStatus,
 		};
 
-		if (!inAcallStatus) {
+		if (!inACallStatus) {
 			dataNeedToUpdate = {
 				...dataNeedToUpdate,
 				video_call_id: '',

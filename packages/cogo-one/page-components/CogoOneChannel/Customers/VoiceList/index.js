@@ -1,12 +1,10 @@
 import { cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Image } from '@cogoport/next';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import {
-	VOICE_ICON_MAPPING,
-	SHOW_LOG_STATUS_ICON_MAPPING,
-} from '../../../../constants';
+import { VOICE_ICON_MAPPING, SHOW_LOG_STATUS_ICON_MAPPING } from '../../../../constants';
 import useGetVoiceCallList from '../../../../hooks/useGetVoiceCallList';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import EmptyCard from '../EmptyCard';
@@ -100,10 +98,12 @@ function VoiceList(voiceProps) {
 												/>
 											)
 										) : (
-											<img
+											<Image
 												src={VOICE_ICON_MAPPING[callStatus(item)]}
 												className={styles.avatar}
 												alt="voice_icon"
+												height={15}
+												width={15}
 											/>
 										) }
 
