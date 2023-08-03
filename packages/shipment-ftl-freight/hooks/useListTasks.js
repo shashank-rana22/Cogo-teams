@@ -29,7 +29,7 @@ function useListTasks({
 
 	const user_id = profile?.user?.id;
 	const cont = useContext(ShipmentDetailContext);
-	console.log(cont);
+	console.log({ cont, profile });
 
 	const stakeholder = STAKEHOLDER_MAPPINGS[activeStakeholder] ?? activeStakeholder;
 
