@@ -10,7 +10,7 @@ function Overview({ shipmentData = {}, stakeholderConfig = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<OverviewManageServices />
+			<OverviewManageServices source="overview" />
 			<BLDetails />
 			<div className={styles.extra_details}>
 				{shipmentData?.is_cogo_assured ? (

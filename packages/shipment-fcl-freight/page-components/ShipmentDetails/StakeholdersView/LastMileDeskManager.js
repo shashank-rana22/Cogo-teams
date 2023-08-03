@@ -99,7 +99,7 @@ function LastMileDeskManager({ get = {}, activeStakeholder = '' }) {
 							</TabPanel>
 
 							<TabPanel name="purchase_live_invoice" title="Live Invoices">
-								<PurchaseInvoice />
+								<PurchaseInvoice activeTab={activeTab} />
 							</TabPanel>
 
 							<TabPanel name="documents" title="Documents">

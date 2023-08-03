@@ -5,12 +5,12 @@ import Services from '../Services';
 
 import styles from './styles.module.css';
 
-function OverviewManageServices({ isOpen = true }) {
+function OverviewManageServices({ isOpen = true, activeTab = '', source = '', isSeller = false }) {
 	return (
 		<Accordion title={<div className={styles.title}>Manage Services</div>} isOpen={isOpen}>
-			<Services />
+			{ activeTab !== 'purchase_live_invoice' ? <Services /> : null}
 
-			<AdditionalServiceList />
+			<AdditionalServiceList source={source} isSeller={isSeller} />
 		</Accordion>
 	);
 }

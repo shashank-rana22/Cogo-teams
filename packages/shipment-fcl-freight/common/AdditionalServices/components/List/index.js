@@ -25,7 +25,7 @@ const SHOW_MORE_PAGE_LIMIT = 16;
 const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent',
 	'superadmin', 'admin'];
 
-function List({ isSeller = false }) {
+function List({ isSeller = false, source = '' }) {
 	const {
 		servicesList, refetchServices = () => {},
 		shipment_data, activeStakeholder, primary_service, stakeholderConfig,
@@ -199,6 +199,7 @@ function List({ isSeller = false }) {
 						refetch={refetch}
 						setItem={setItem}
 						setShowChargeCodes={setShowModal}
+						source={source}
 					/>
 				)
 				: null}

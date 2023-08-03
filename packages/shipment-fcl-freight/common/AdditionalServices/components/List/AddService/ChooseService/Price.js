@@ -55,7 +55,7 @@ function Price({
 					}}
 					style={{ marginRight: 10 }}
 				>
-					Add Rate
+					Add Rate---not is seller
 				</Button>
 			) : null}
 
@@ -63,12 +63,16 @@ function Price({
 				themeType="secondary"
 				onClick={(e) => {
 					e.stopPropagation();
-					onRequestRate(item);
+					if (isSeller) {
+						setAddRate(item);
+					} else {
+						onRequestRate(item);
+					}
 				}}
 				style={{ marginRight: 10 }}
 				disabled={loading}
 			>
-				{isSeller ? 'Add Rate' : 'Request Rate'}
+				{isSeller ? 'Add Rate--is seller' : 'Request Rate'}
 			</Button>
 			<Button
 				themeType="secondary"

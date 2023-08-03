@@ -24,13 +24,13 @@ const SHOW_REMARKS_STATUS = [
 ];
 
 function AddRate({
-	item,
-	setAddRate,
-	status,
+	item = {},
+	setAddRate = () => {},
+	status = {},
 	setAddSellPrice = () => {},
-	refetch,
+	refetch = () => {},
 	onCancel = () => {},
-	filters,
+	filters = {},
 	setShowChargeCodes = () => {},
 	source = '',
 	isSeller = false,
@@ -62,14 +62,7 @@ function AddRate({
 		handleSubmit,
 		control,
 		formState: { errors },
-		setValue,
-	} = useForm();
-
-	useEffect(() => {
-		['currency', 'quantity', 'unit', 'price', 'alias', 'buy_price'].forEach((key) => {
-			setValue(key, item?.[key]);
-		});
-	}, [item, setValue]);
+	} = useForm({ defaultValues: item });
 
 	const afterAddRate = () => {
 		setAddRate(false);

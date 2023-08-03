@@ -11,7 +11,7 @@ const CURRENCY_OPTIONS = [
 	value : currency,
 }));
 
-const COMMON_SHOW_SOURCE = ['task', 'overview'];
+const COMMON_SHOW_SOURCE = ['task', 'overview', 'purchase', 'add_sell_price'];
 
 const controls = ({ serviceData = {}, source = '' }) => {
 	const UNIT_OPTIONS = [];
@@ -63,12 +63,29 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			size        : 'sm',
 		},
 		{
+			name        : 'service_provider_id',
+			label      	: 'Service Provider',
+			type        : 'asyncSelect',
+			placeholder : 'Select Service Provider',
+			asyncKey    : 'organizations',
+			params      : {
+				filters: {
+					account_type : 'service_provider',
+					kyc_status   : 'verified',
+				},
+			},
+			show  : source === 'purchase',
+			size  : 'sm',
+			rules : { required: 'Service Provider is required' },
+		},
+
+		{
 			name        : 'price',
-			label       : 'Price',
+			label       : 'Sell Price',
 			type        : 'number',
 			placeholder : 'Enter Sell Price',
 			rules       : { required: 'Price is required', min: 0 },
-			show        : COMMON_SHOW_SOURCE.includes(source),
+			show        : ['overview', 'task', 'add_sell_price'].includes(source),
 			size        : 'sm',
 		},
 		{
