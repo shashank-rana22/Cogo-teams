@@ -1,4 +1,5 @@
-import { Button, Tabs, TabPanel, Table, Loader } from '@cogoport/components';
+import { Button, Tabs, TabPanel, Table } from '@cogoport/components';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
@@ -90,8 +91,7 @@ export default function AccordionContent({
 		if (taskLoading) {
 			return (
 				<div className={styles.loading_container}>
-					<div>Loading Tasks...</div>
-					<Loader className={styles.loader_icon} />
+					<ThreeDotLoader message="Loading Tasks" fontSize={16} size={30} />
 				</div>
 			);
 		}
