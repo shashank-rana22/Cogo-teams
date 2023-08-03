@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import Layout from '../../Air/commons/Layout';
+import useGetAirFreightSurcharges from '../../Air/hooks/useGetAirFreightSurcharges';
 import useCreateShipmentDocument from '../GenerateMawbDoc/useCreateShipmentDocument';
 import UploadMAWB from '../UploadMAWB';
 
@@ -98,6 +99,8 @@ function FormContainer({
 		});
 	};
 
+	const { data, getAirFreightSurcharges } = useGetAirFreightSurcharges(taskItem);
+
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
 		setGenerate,
@@ -135,14 +138,6 @@ function FormContainer({
 		setConfirmDelete(false);
 	};
 
-	useEffect(() => {
-		if (taskItem?.status === 'uploaded') {
-			onChange('upload');
-		} else {
-			onChange('manual');
-		}
-	}, [taskItem?.status]);
-
 	function RemoveHawb() {
 		return (
 			<Button
@@ -159,18 +154,45 @@ function FormContainer({
 	const calculateCharges = () => {
 		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
 			let price:number = 0;
-			if (charge.chargeType === 'chargeable_wt') {
-				price = Number(
-					(Number(charge.chargeUnit) * Number(formValues.chargeableWeight))
-						.toFixed(DECIMAL_PLACE),
-				);
-			} else if (charge.chargeType === 'gross_wt') {
-				price = Number((Number(formValues.weight) * Number(charge.chargeUnit)).toFixed(DECIMAL_PLACE));
-			}
+			price = Number(
+				(Number(charge.chargeUnit) * Number(charge.quantity))
+					.toFixed(DECIMAL_PLACE),
+			);
 			return { ...charge, price };
 		});
 		setValue('carrierOtherCharges', updatedCharges);
 	};
+
+	useEffect(() => {
+		if (taskItem?.status === 'uploaded') {
+			onChange('upload');
+		} else {
+			onChange('manual');
+		}
+	}, [taskItem?.status]);
+
+	useEffect(() => {
+		if (!isEmpty(taskItem)) {
+			getAirFreightSurcharges();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		const { line_items: lineItems } = data?.surcharge || {};
+		if (lineItems && !edit) {
+			const carrierChargesData = (lineItems || []).map((lineItem) => (
+				{
+					code       : lineItem?.code,
+					unit       : lineItem?.unit,
+					chargeUnit : lineItem?.price,
+				}
+			));
+
+			setValue('carrierOtherCharges', carrierChargesData);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data?.surcharge]);
 
 	return (
 		<div className={styles.form_container}>

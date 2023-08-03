@@ -1,0 +1,21 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: max-content;
+	margin-top: 64px;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.text {
+	font-size: var(--font-size-md);
+	color: var(--color-secondary-greyscale-4);
+}
+
+.margintop {
+	margin: 10px;
+}

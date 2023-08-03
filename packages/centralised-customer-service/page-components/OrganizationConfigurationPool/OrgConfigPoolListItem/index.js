@@ -36,7 +36,7 @@ function OrgConfigPoolListItem({ data = {}, fetchList = () => {} }) {
 					</div>
 
 					<div className={styles.item}>
-						<p className={styles.title}>Role</p>
+						<p className={styles.title}>Preferred Role</p>
 						<p className={styles.content}>{role_data?.name || '-'}</p>
 					</div>
 
@@ -51,7 +51,7 @@ function OrgConfigPoolListItem({ data = {}, fetchList = () => {} }) {
 					</div>
 
 					<div className={styles.item}>
-						<p className={styles.title}>Agent Name</p>
+						<p className={styles.title}>Reporting Manager</p>
 						<p className={styles.content}>{user?.name || '-'}</p>
 					</div>
 
