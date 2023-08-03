@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
 import getFileAttributes from '../../../../../utils/getFileAttributes';
 
@@ -15,6 +15,7 @@ const DISTANCE_FROM_TOP = 0;
 const LAST_VALUE = 1;
 
 function MessageConversations({
+	firestore = {},
 	messagesData = [],
 	draftMessage = '',
 	setDraftMessages = () => {},
@@ -42,6 +43,7 @@ function MessageConversations({
 	hasNoFireBaseRoom = false,
 	setModalType = () => {},
 	activeTab = {},
+	mailProps = {},
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;
@@ -51,14 +53,17 @@ function MessageConversations({
 
 	const { uploadedFileName, fileIcon } = getFileAttributes({ finalUrl, fileName });
 
-	const scrollToBottom = () => {
-		setTimeout(() => {
-			messageRef.current?.scrollTo({
-				top   	  : messageRef.current.scrollHeight,
-				behavior : 'smooth',
-			});
-		}, SET_TIME_OUT);
-	};
+	const scrollToBottom = useCallback(
+		() => {
+			setTimeout(() => {
+				messageRef.current?.scrollTo({
+					top   	  : messageRef.current.scrollHeight,
+					behavior : 'smooth',
+				});
+			}, SET_TIME_OUT);
+		},
+		[],
+	);
 
 	const handleProgress = (val) => {
 		setUploading((prev) => ({ ...prev, [id]: val }));
@@ -104,7 +109,7 @@ function MessageConversations({
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [firstLoadingMessages, id]);
+	}, [firstLoadingMessages, id, scrollToBottom]);
 
 	return (
 		<div className={styles.styled_div}>
@@ -136,6 +141,11 @@ function MessageConversations({
 						hasNoFireBaseRoom={hasNoFireBaseRoom}
 						setModalType={setModalType}
 						activeTab={activeTab}
+						viewType={viewType}
+						scrollToBottom={scrollToBottom}
+						firestore={firestore}
+						ref={messageRef}
+						mailProps={mailProps}
 					/>
 				) }
 			</div>

@@ -1,3 +1,6 @@
+import { Toggle } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
+
 import AppliedFilters from '../../common/AppliedFilters';
 import DeskTabs from '../../common/DeskTabs';
 import Filters from '../../common/Filters';
@@ -11,7 +14,14 @@ import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
 function Surface({ activeTab = '' }) {
+	const router = useRouter();
 	const { data, loading } = useListKamDeskSurfaceShipments();
+
+	const handleOnchange = () => {
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipment-management`;
+		window.sessionStorage.setItem('prev_nav', newUrl);
+		window.location.href = newUrl;
+	};
 
 	return (
 		<div>
@@ -24,7 +34,16 @@ function Surface({ activeTab = '' }) {
 			<div className={styles.stepper_container}>
 				<StepperTabs />
 
-				<Filters />
+				<div style={{ display: 'flex' }}>
+					<Toggle
+						offLabel="New"
+						onLabel="Old"
+						size="md"
+						onChange={() => handleOnchange()}
+						showOnOff
+					/>
+					<Filters />
+				</div>
 			</div>
 
 			<AppliedFilters />

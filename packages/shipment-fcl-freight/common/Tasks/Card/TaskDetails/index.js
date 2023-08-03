@@ -71,7 +71,7 @@ function TaskDetails({
 										<IcMTimer />
 										{' '}
 										Deadline:
-										{' '}
+										&nbsp;
 										{formatDeadlineDate(new Date(task?.deadline))}
 									</div>
 								</div>

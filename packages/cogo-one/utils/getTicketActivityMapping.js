@@ -99,6 +99,40 @@ const getTicketActivityMapping = ({ status, canPerformRequestAction = false }) =
 			canPerformActions : true,
 			iconUrl           : '',
 		},
+		overdue: {
+			requestedText     : status,
+			canPerformActions : true,
+		},
+		escalated: {
+			actions: [
+				{
+					tooltipContent  : 'Resolve request',
+					activityPayload : {
+						type   : 'resolve_requested',
+						status : 'resolve_requested',
+					},
+					iconStyles: {
+						height : '15px',
+						width  : '20px',
+					},
+					icon: IcMTick,
+				},
+				{
+					tooltipContent  : 'Reject request',
+					activityPayload : {
+						type   : 'reject_requested',
+						status : 'reject_requested',
+					},
+					iconStyles: {
+						height : '15px',
+						width  : '15px',
+					},
+					icon: IcMCross,
+				},
+			],
+			requestedText     : status,
+			canPerformActions : true,
+		},
 	};
 	const statusType = Object.keys(TICKET_ACTIVITY_MAPPING).find((val) => status.includes(val));
 	return TICKET_ACTIVITY_MAPPING[statusType] || {};

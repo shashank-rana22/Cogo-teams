@@ -1,4 +1,5 @@
-import { Button, Loader } from '@cogoport/components';
+import { Button } from '@cogoport/components';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useState, useEffect } from 'react';
 
@@ -26,6 +27,13 @@ function UploadDraftBL({
 	const [showSwitchGenerate, setShowSwitchGenerate] = useState(true);
 	const [canUseSwitch, setcanUseSwitch] = useState(true);
 	const mblRef = useRef();
+
+	const { list:hblList } = useListDocuments({
+		filters: {
+			document_type : 'si',
+			shipment_id   : shipmentData?.id,
+		},
+	});
 
 	const isHBL = (primaryService.bl_category || '').toLowerCase() === 'hbl';
 
@@ -167,8 +175,7 @@ function UploadDraftBL({
 							{createTradeDocLoading
 								? (
 									<div className={styles.create_hbl_loader}>
-										<Loader />
-										Creating Draft HBL Document...
+										<ThreeDotLoader message="Creating Draft HBL Document" />
 									</div>
 								)
 								:	Array(blCount).fill(null).map((n, i) => (
@@ -179,6 +186,7 @@ function UploadDraftBL({
 											{i + INCREMENT_VALUE}
 										</div>
 										<HBLCreate
+											initHblDataObj={hblList?.list?.[i]}
 											completed={tradeDocList?.list?.[i]}
 											hblData={hblData[i] || tradeDocList?.list?.[i]?.data}
 											onSave={(v) => handleSaveHBL(i, v)}
