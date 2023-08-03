@@ -1,5 +1,6 @@
 import { Placeholder, cl } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from '../styles.module.css';
 
@@ -22,6 +23,14 @@ function OrganizationList({
 		});
 		setShowUser(true);
 	};
+
+	if (isEmpty(list) && !loading) {
+		return (
+			<div className={styles.empty_text}>
+				No Data Found
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container} onScroll={handleScroll}>
