@@ -22,38 +22,41 @@ function ContactVerification({ leadUserId = '', userId = '', loading = false, us
 			prefixIcon : <IcCWhatsapp />,
 		},
 	];
+
+	if (!(leadUserId || userId)) {
+		return null;
+	}
+
 	return (
 		<div>
-			{(leadUserId || userId) && (
-				<div className={styles.verification_pills}>
-					{VERIFICATION_STATUS.map((item, index) => {
-						const { label = '', prefixIcon, color } = item;
-						const itemKey = `${snakeCase(item.label)}_${index}`;
-						return (
-							<div key={itemKey}>
-								{loading ? (
-									<Placeholder
-										height="20px"
-										width="120px"
-										margin="10px 0px 10px 0px"
-									/>
-								) : (
-									<Pill
-										key={label}
-										prefix={prefixIcon}
-										size="md"
-										color={color}
-									>
-										<div className={styles.pill_name}>
-											{label}
-										</div>
-									</Pill>
-								)}
-							</div>
-						);
-					})}
-				</div>
-			)}
+			<div className={styles.verification_pills}>
+				{VERIFICATION_STATUS.map((item, index) => {
+					const { label = '', prefixIcon, color } = item;
+					const itemKey = `${snakeCase(item.label)}_${index}`;
+					return (
+						<div key={itemKey}>
+							{loading ? (
+								<Placeholder
+									height="20px"
+									width="120px"
+									margin="10px 0px 10px 0px"
+								/>
+							) : (
+								<Pill
+									key={label}
+									prefix={prefixIcon}
+									size="md"
+									color={color}
+								>
+									<div className={styles.pill_name}>
+										{label}
+									</div>
+								</Pill>
+							)}
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 }
