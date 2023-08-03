@@ -1,29 +1,45 @@
-import { IcMVideoCall } from '@cogoport/icons-react';
+/* eslint-disable max-len */
+import { Modal } from '@cogoport/components';
+import { useState } from 'react';
 
-import FileUploader from '../FileUploader';
+import useUpdateComponentsContent from '../../../helpers/useUpdateComponentsContent';
+import UploadImageModal from '../../UploadImageModal';
 
 import styles from './styles.module.css';
 
 function VideoComponent(props) {
-	const { components, setComponents, childId, selectedRow, widget } = props;
+	const {
+		pageConfiguration,
+		setPageConfiguration,
+		widget,
+		rowData,
+		selectedRow,
+		selectedColumn,
+		selectedNestedColumn,
+		selectedItem,
+		columnData,
+		nestedColumData,
+		modeType,
+	} = props;
 
-	const { content = '' } = widget || {};
+	const [showUploadModal, setShowUploadModal] = useState(false);
 
-	const handleFileChange = (val) => {
-		if (val) {
-			const { parentId, id } = selectedRow || {};
-			const data = components;
-			const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
+	const { component } = widget || {};
 
-			if (parentId) {
-				data.layouts[selectedComponentIndex].children[childId].content = val;
-			} else {
-				data.layouts[selectedComponentIndex].content = val;
-			}
+	const { content = '' } = component || {};
 
-			setComponents((prev) => ({ ...prev, layouts: data.layouts }));
-		}
-	};
+	const { handleUpdateContent } = useUpdateComponentsContent({
+		pageConfiguration,
+		setPageConfiguration,
+		selectedRow,
+		selectedColumn,
+		selectedNestedColumn,
+		selectedItem,
+		columnData,
+		nestedColumData,
+		type: 'video',
+		modeType,
+	});
 
 	return (
 		<div>
@@ -31,24 +47,51 @@ function VideoComponent(props) {
 				<div
 					role="presentation"
 				>
+
 					<iframe
 						className={styles.video_frame}
-						scrolling="no"
-						frameBorder="0"
-						title="Preview"
 						src={content}
-						alt="upload-img"
+						frameBorder="0"
+						scrolling="no"
+						allow="autoplay; gyroscope; picture-in-picture"
+						allowFullScreen
+						title="Preview"
 					/>
 				</div>
 			) : (
-				<FileUploader
-					value={content}
-					onChange={(val) => handleFileChange(val)}
-					uploadDesc="Upload"
-					uploadIcon={<IcMVideoCall width="60px" height="60px" />}
-
-				/>
+				<div style={{ display: 'flex', justifyContent: 'center' }}>
+					<div
+						onClick={() => { if (modeType === 'edit') { setShowUploadModal(true); } }}
+						role="presentation"
+						className={styles.video_drop}
+					>
+						<img
+							alt=""
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/svgviewer-png-output%20(5).png"
+							width="48px"
+							height="48px"
+						/>
+						<div>Add your YouTube or video content</div>
+					</div>
+				</div>
 			) }
+
+			{showUploadModal && (
+				<Modal
+					size="md"
+					placement="top"
+					show={showUploadModal}
+					onClose={() => setShowUploadModal(false)}
+				>
+					<UploadImageModal
+						setShowUploadModal={setShowUploadModal}
+						handleChange={handleUpdateContent}
+						rowData={rowData}
+						type="video"
+						accept=".mp4"
+					/>
+				</Modal>
+			)}
 		</div>
 	);
 }

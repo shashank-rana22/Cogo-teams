@@ -1,9 +1,21 @@
 import React from 'react';
 
-function HtmlComponent({ html = '' }) {
+import DragPreview from '../../DragPreview';
+
+function HtmlComponent({ widget }) {
+	const { component } = widget || {};
+
+	const { content, isDraggingPreview } = component || {};
+
+	if (isDraggingPreview) {
+		return (
+			<DragPreview showBackDrop={false} type="html" />
+		);
+	}
+
 	return (
 		<div
-			dangerouslySetInnerHTML={{ __html: html }}
+			dangerouslySetInnerHTML={{ __html: content }}
 		/>
 	);
 }

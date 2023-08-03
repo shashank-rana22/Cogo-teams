@@ -14,31 +14,7 @@ const imageSettings = [
 			},
 		],
 	},
-	{
-		type    : 'Margin',
-		options : [
-			{
-				label : 'Top',
-				key   : 'margin-top',
-				type  : 'number',
-			},
-			{
-				label : 'Left',
-				key   : 'margin-left',
-				type  : 'number',
-			},
-			{
-				label : 'Bottom',
-				key   : 'margin-bottom',
-				type  : 'number',
-			},
-			{
-				label : 'Right',
-				key   : 'margin-right',
-				type  : 'number',
-			},
-		],
-	},
+
 	{
 		type    : 'Padding',
 		options : [

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-cycle */
 import { Tooltip } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
@@ -6,103 +7,176 @@ import Carousel from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import RenderComponents from '../../../page-components/CreatePage2/RightPanel/RenderComponent';
+import RenderElement from '../../../page-components/PageBuilder/DNDComponent/DNDBody/RightPanel/DropBox/Components/RenderElement';
+import DragPreview from '../../DragPreview';
 
 import styles from './styles.module.css';
 
 const CAROUSEL_SETTINGS = {
 	dots           : true,
-	infinite       : false,
+	infinite       : true,
 	speed          : 1000,
-	autoplaySpeed  : 5000,
+	autoplaySpeed  : 3000,
 	slidesToShow   : 1,
 	slidesToScroll : 1,
-	autoplay       : false,
+	autoplay       : true,
 	arrows         : false,
 	pauseOnHover   : true,
 };
 
 function CarouselComponent({
 	widget,
-	selectedRow,
-	components,
-	setComponents,
-	setChildId,
+	pageConfiguration,
+	setPageConfiguration,
 	setSelectedItem,
-	childId,
+	// childId,
 	setParentComponentId,
 	setShowContentModal,
+	rowData,
+	setSelectedRow,
+	setSelectedColumn,
+	// columnData,
+	setSelectedNestedColumn,
+	// nestedColumData,
+	selectedItem,
+	selectedRow,
+	selectedColumn,
+	selectedNestedColumn,
+	modeType,
 }) {
-	const { children, id: componentId } = widget || {};
+	const { component, id: componentId } = widget || {};
+
+	const { children, isDraggingPreview } = component || {};
+
+	const { id: columnChildId } = selectedColumn || {};
 
 	const { id: selectedRowId } = selectedRow || {};
 
-	const handleSubmitClick = ({ index, parentId }) => {
-		setParentComponentId({ childId: index, parentId });
-		setShowContentModal(true);
+	const { id: nestedColumnId } = selectedNestedColumn || {};
+
+	const handleSubmitClick = ({ id, parentId }) => {
+		if (modeType === 'edit') {
+			setParentComponentId({ childId: id, parentId });
+			setShowContentModal(true);
+		}
 	};
 
 	const handleRemovelides = (e, idx, itemList) => {
 		e.stopPropagation();
 		const { id } = itemList || {};
 
-		const data = components;
+		const data = pageConfiguration;
 
 		const selectedComponentIndex = (data.layouts || []).findIndex(
-			(component) => component.id === id,
+			(selectedRowIndex) => selectedRowIndex.id === id,
 		);
 
-		data.layouts[selectedComponentIndex].children.splice(idx, 1);
+		data.layouts[selectedComponentIndex].component.children.splice(idx, 1);
 
-		setComponents({ ...data });
+		setPageConfiguration({ ...data });
 	};
+
+	const handleClick = (e, columnData) => {
+		if (modeType === 'edit') {
+			e.stopPropagation();
+			setSelectedRow({ ...rowData });
+			setSelectedColumn({ ...columnData });
+			setSelectedNestedColumn({});
+			setSelectedItem({ ...columnData });
+		}
+	};
+
+	const handleNestedClick = (e, columnData, nestedData) => {
+		if (modeType === 'edit') {
+			e.stopPropagation();
+			setSelectedRow({ ...rowData });
+			setSelectedColumn({ ...columnData });
+			setSelectedNestedColumn({ ...nestedData });
+			setSelectedItem({ ...nestedData });
+		}
+	};
+
+	if (isDraggingPreview) {
+		return (
+			<DragPreview type="carousel" />
+		);
+	}
 
 	return (
 		<div className={styles.container}>
 			<Carousel {...CAROUSEL_SETTINGS}>
 				{(children || []).map((childComponent, idx) => {
-					const { id, style, icon, type, parentId, children: childChildren } = childComponent || {};
+					const {
+						id,
+						parentId,
+						component: childrenComponent,
+					} = childComponent || {};
 
-					const isChildSelected = childId === id && componentId === selectedRowId && type;
-					const border = isChildSelected ? '1px solid red' : style.border;
+					const { style, icon, type, children: childChildren } = childrenComponent || {};
+
+					const modifiedStyle = {
+						...style,
+						...(type && {
+							border: '1px solid transparent',
+						}),
+					};
+
+					const isChildSelected = columnChildId === id && componentId === selectedRowId;
+					const border = isChildSelected ? '1px solid pink' : modifiedStyle.border;
 
 					if (!isEmpty(childChildren)) {
 						return 	(
 							<div
+								role="presentation"
+								onClick={(e) => handleClick(e, childComponent)}
 								className={styles.content_container}
 								style={{ ...style, display: 'block' }}
 							>
-								{ (childChildren || []).map((childrenComponent, childrenIndex) => {
+								{ (childChildren || []).map((nestedChildComponent, childrenIndex) => {
 									const {
 										id: childrenId,
+										component: nestedComponent,
+									} = nestedChildComponent || {};
+
+									const {
 										style: childrenStyles,
 										type: childrenType,
-									} = childrenComponent || {};
+									} = nestedComponent || {};
 
-									// const isChildSelected = childId === id && componentId === selectedRowId && type;
-									// const border = isChildSelected ? '1px solid red' : allStyles.border;
+									const isNestedChildSelected = columnChildId === id && componentId === selectedRowId && childrenId === nestedColumnId;
+
+									const nestedBorder = isNestedChildSelected ? '5px solid grey' : childrenStyles.border;
 
 									return (
 
 										<div
 											role="presentation"
 											className={styles.content_container}
-											style={{ ...childrenStyles }}
-											onClick={() => setChildId(id)}
+											style={{ ...childrenStyles, nestedBorder }}
+											onClick={(e) => handleNestedClick(e, childComponent, nestedChildComponent)}
 										>
-											<RenderComponents
+											<RenderElement
 												componentType={childrenType}
-												widget={childrenComponent}
-												components={components}
-												setComponents={setComponents}
+												widget={nestedChildComponent}
+												pageConfiguration={pageConfiguration}
+												setPageConfiguration={setPageConfiguration}
 												elementId={childrenId}
-												childId={childId}
-												selectedRow={selectedRow}
+												childId={childrenIndex}
 												setSelectedItem={setSelectedItem}
 												index={childrenIndex}
-												setChildId={setChildId}
 												setParentComponentId={setParentComponentId}
 												setShowContentModal={setShowContentModal}
+												rowData={rowData}
+												columnData={childComponent}
+												setSelectedRow={setSelectedRow}
+												setSelectedColumn={setSelectedColumn}
+												setSelectedNestedColumn={setSelectedNestedColumn}
+												nestedColumData={nestedChildComponent}
+												selectedItem={selectedItem}
+												selectedRow={selectedRow}
+												selectedColumn={selectedColumn}
+												selectedNestedColumn={selectedNestedColumn}
+
 											/>
 										</div>
 									);
@@ -118,42 +192,55 @@ function CarouselComponent({
 								role="presentation"
 								style={{ ...style, border }}
 								className={styles.block_wrapper}
-								onClick={() => setChildId(idx)}
+								onClick={(e) => handleClick(e, childComponent)}
 							>
 
 								{!type ? (
 									<div
 										role="presentation"
-										onClick={() => handleSubmitClick({ index: idx, parentId })}
+										onClick={() => handleSubmitClick({ id, parentId })}
 									>
 										{icon}
 									</div>
 								) : (
-									<RenderComponents
+									<RenderElement
 										componentType={type}
 										widget={childComponent}
-										components={components}
-										setComponents={setComponents}
+										pageConfiguration={pageConfiguration}
+										setPageConfiguration={setPageConfiguration}
 										elementId={id}
-										childId={childId}
-										selectedRow={selectedRow}
+										childId={idx}
 										setSelectedItem={setSelectedItem}
 										index={idx}
-										setChildId={setChildId}
 										setParentComponentId={setParentComponentId}
 										setShowContentModal={setShowContentModal}
+										rowData={rowData}
+										columnData={childComponent}
+										setSelectedRow={setSelectedRow}
+										setSelectedColumn={setSelectedColumn}
+										setSelectedNestedColumn={setSelectedNestedColumn}
+										nestedColumData={{}}
+										selectedItem={selectedItem}
+										selectedRow={selectedRow}
+										selectedColumn={selectedColumn}
+										selectedNestedColumn={selectedNestedColumn}
+										modeType={modeType}
 									/>
 								) }
-								<div role="presentation" className={styles.show_wrapper}>
-									<Tooltip content="Click here to remove current slides" placement="bottom">
-										<IcMDelete
-											height="24px"
-											width="24px"
-											cursor="pointer"
-											onClick={(e) => handleRemovelides(e, idx, widget)}
-										/>
-									</Tooltip>
-								</div>
+
+								{modeType === 'edit' && (
+									<div role="presentation" className={styles.show_wrapper}>
+										<Tooltip content="Remove current slide" placement="top">
+											<IcMDelete
+												height="24px"
+												width="24px"
+												cursor="pointer"
+												fill="#ee3425"
+												onClick={(e) => handleRemovelides(e, idx, widget)}
+											/>
+										</Tooltip>
+									</div>
+								)}
 							</div>
 						</div>
 					);

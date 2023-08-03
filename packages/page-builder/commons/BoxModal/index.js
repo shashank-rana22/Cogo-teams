@@ -1,25 +1,38 @@
 import { Input } from '@cogoport/components';
+import { useState, useEffect, useCallback } from 'react';
 
 import styles from './styles.module.css';
 
+const marginKeys = [
+	'margin-top',
+	'margin-left',
+	'margin-right',
+	'margin-bottom',
+];
+
+const paddingKeys = [
+	'padding-top',
+	'padding-left',
+	'padding-right',
+	'padding-bottom',
+];
+
 function BoxModal(props) {
-	const {
-		handleChange,
-	} = props;
+	const { selectedItem, isRootComponent, pageConfiguration, handleChange } = props;
 
-	const marginKeys = [
-		'margin-top',
-		'margin-left',
-		'margin-right',
-		'margin-bottom',
-	];
+	const [value, setValue] = useState < { } > ({});
 
-	const paddingKeys = [
-		'padding-top',
-		'padding-left',
-		'padding-right',
-		'padding-bottom',
-	];
+	useEffect(() => {
+		setValue(isRootComponent ? { ...pageConfiguration.style } : { ...selectedItem.component.style });
+	}, [isRootComponent, pageConfiguration.style, selectedItem, setValue]);
+
+	const handleInputChange = useCallback(
+		(key, val) => {
+			setValue((prevValue) => ({ ...prevValue, [key]: val }));
+			handleChange(key, Number(val));
+		},
+		[handleChange, setValue],
+	);
 
 	return (
 		<div className={styles.container}>
@@ -30,10 +43,11 @@ function BoxModal(props) {
 					<div className={styles.box}>
 						{marginKeys.map((key) => (
 							<Input
+								key={key}
 								size="sm"
 								type="number"
-								defaultValue={0}
-								onChange={(val) => handleChange(key, Number(val))}
+								value={value?.[key] || ''}
+								onChange={(val) => handleInputChange(key, val)}
 								placeholder="0"
 								className={styles[key]}
 							/>
@@ -41,11 +55,12 @@ function BoxModal(props) {
 					</div>
 					{paddingKeys.map((key) => (
 						<Input
+							key={key}
 							size="sm"
 							type="number"
-							defaultValue={0}
+							value={value?.[key] || ''}
+							onChange={(val) => handleInputChange(key, val)}
 							placeholder="0"
-							onChange={(val) => handleChange(key, Number(val))}
 							className={styles[key]}
 						/>
 					))}

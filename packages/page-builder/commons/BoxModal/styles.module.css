@@ -1,40 +1,47 @@
-.container{
+.container {
+  padding: 20px 0px;
   :global(.ui_input_container) {
-		width: 50px;
+    width: 50px;
     height: 20px;
     border: none;
     background-color: transparent;
-	}
+  }
 }
+
 .rectangle {
   width: 290px;
   height: 180px;
-  border: 1px solid #e2e5e6;
+  border: 1px solid #BDBDBD;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-radius: 4px;
   align-items: center;
-  background-color: #f8fafb;
+  background: linear-gradient(to bottom right, #E0E0E0, #F9F9F9);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0px 0px 2px rgba(255, 255, 255, 0.5);
   position: relative;
 }
 
 .inner-rectangle {
   width: 180px;
   height: 108px;
-  border: 1px solid #1a73e8;
   display: flex;
+  border: 1px solid #BDBDBD;
   flex-direction: column;
   justify-content: center;
   border-radius: 4px;
   align-items: center;
-  background-color: #1a6de80d;
+  background: linear-gradient(to bottom right, #BDBDBD, #F9F9F9);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0px 0px 2px rgba(255, 255, 255, 0.5);
   position: relative;
 }
 
+
 .title {
   position: absolute;
-  top: 0;
+  top: 2px;
   font-size: 12px;
   left: 4px;
 }
@@ -44,50 +51,10 @@
   height: 28px;
   background-color: #ffffff;
   border-radius: 4px;
-  border: 1px solid #E0E0E0;
+  border: 1px solid #e0e0e0;
   margin: 20px;
   position: relative;
 }
-
-/* .input-left {
-  position: absolute;
-  top: 50%;
-  left: -30px;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 20px;
-  background-color: red;
-}
-
-.input-right {
-  position: absolute;
-  top: 50%;
-  right: -30px;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 20px;
-  background-color: red;
-}
-
-.input-top {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 20px;
-  background-color: red;
-}
-
-.input-bottom {
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 20px;
-  background-color: red;
-} */
 
 .margin-left {
   position: absolute;
