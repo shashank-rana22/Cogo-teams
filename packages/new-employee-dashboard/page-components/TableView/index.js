@@ -55,7 +55,7 @@ function TableView({ search, setSearch }) {
 						<Toggle
 							onChange={(val) => setBulkAction(val?.target?.checked)}
 							value={bulkAction}
-							styles={{ marginBottom: '30px', paddingRight: '10px', paddingLeft: '10px' }}
+							styles={{ marginBottom: '30px' }}
 						/>
 					</div>
 
