@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../common/EmptyState';
-import useBulkUpload from '../AddNewJoinee/BulkUpload/useBulkUpload';
+import useBulkEmployeeDetails from '../hooks/useBulkEmployeeDetails';
 import StyledTable from '../StyledTable';
 
 import FilterPopover from './FilterPopover';
@@ -21,7 +21,6 @@ const PAGELIMIT_OPTIONS = [
 	{ label: 200, value: 200 },
 ];
 const INITIAL_PAGE_LIMIT = 10;
-const SOURCE = 'BULKACTION';
 
 function TableView({ search, setSearch }) {
 	const { btnloading, updateEmployeeStatus } = useRejectAction();
@@ -33,7 +32,7 @@ function TableView({ search, setSearch }) {
 		columns, loading, list, setActiveTab, activeTab, data, setPage, page, filters, setFilters,
 	} = useTableView({ search, btnloading, updateEmployeeStatus, bulkAction, pageLimit, selectedIds, setSelectedIds });
 
-	const { bulkUploadNewHire, loading:bulkloading } = useBulkUpload({ selectedIds, SOURCE });
+	const { btnloading:bulkloading, sendBulkActionMail } = useBulkEmployeeDetails({ selectedIds });
 
 	return (
 		<div className={styles.container}>
@@ -57,11 +56,11 @@ function TableView({ search, setSearch }) {
 					/>
 				</div>
 				{bulkAction && (
-					<div>
+					<div className={styles.styled_button}>
 						<Button
 							themeType="secondary"
 							disabled={isEmpty(selectedIds)}
-							onClick={bulkUploadNewHire}
+							onClick={sendBulkActionMail}
 							loading={bulkloading}
 						>
 							Send email

@@ -5,7 +5,8 @@
 .filter_container {
 	display: flex;
 	align-items: baseline;
-	justify-content: space-between;
+
+	/* justify-content: space-between; */
 }
 
 .name_and_email {
@@ -61,12 +62,14 @@
 .filter_options {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
+	margin-left: 20%;
 }
 
 .bulkupload_container {
 	display: flex;
 	justify-content: center;
+	margin-left: 20px;
 
 	:global {
 		.ui_TE06c {
@@ -76,7 +79,9 @@
 }
 
 .text {
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-left: 10px;
+	margin: 10px 10px 0;
+}
+
+.styled_button {
+	margin-left: 20px;
 }
