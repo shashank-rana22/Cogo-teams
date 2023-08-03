@@ -13,10 +13,10 @@ const useSubmitOmniChannelKyc = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const submitKyc = async ({ organization_id, user_id, lead_user_id }) => {
+	const submitKyc = ({ orgId, userId, leadUserId }) => {
 		try {
-			await trigger({
-				data: getPayload({ organization_id, user_id, lead_user_id }),
+			trigger({
+				data: getPayload({ organization_id: orgId, user_id: userId, lead_user_id: leadUserId }),
 			});
 		} catch (error) {
 			Toast.error(error.message);

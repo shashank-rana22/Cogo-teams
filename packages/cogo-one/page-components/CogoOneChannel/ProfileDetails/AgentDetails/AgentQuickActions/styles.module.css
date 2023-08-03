@@ -2,16 +2,13 @@
 	margin: 10px 0;
 
 	:global {
-		.ui_button_container {
-			width: 100% !important;
-		}
-
-		.ui_pill_container {
+		.ui_button_container,
+		.ui_pill_container,
+		.ui_pill_text {
 			width: 100% !important;
 		}
 
 		.ui_pill_text {
-			width: 100% !important;
 			text-align: center;
 		}
 	}

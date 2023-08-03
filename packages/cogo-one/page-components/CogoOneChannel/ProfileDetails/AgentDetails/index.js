@@ -185,11 +185,11 @@ function AgentDetails({
 			&& (
 				<AgentQuickActions
 					userEmail={userEmail}
-					user_id={user_id}
-					lead_user_id={lead_user_id}
-					organization_id={organization_id}
-					kyc_status={kyc_status}
-					mobile_number={mobile_number}
+					userId={user_id}
+					leadUserId={lead_user_id}
+					orgId={orgId}
+					kycStatus={kyc_status}
+					mobileNumber={mobile_number}
 					userData={userData}
 				/>
 			)}

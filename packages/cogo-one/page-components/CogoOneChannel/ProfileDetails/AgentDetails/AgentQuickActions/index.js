@@ -6,66 +6,65 @@ import useSubmitOmniChannelKyc from '../../../../../hooks/useSubmitOmniChannelKy
 
 import styles from './styles.module.css';
 
-function AgentQuickActions({
-	kyc_status = '',
-	userData = {},
-	organization_id = '',
-	user_id = '',
-	lead_user_id = '',
-}) {
-	const router = useRouter();
+const COUNTRY_CODE_PREFIX = '%2B';
 
-	const { email = '', mobile_number = '', mobile_country_code = '' } = userData;
+function AgentQuickActions({
+	kycStatus = '',
+	userData = {},
+	orgId = '',
+	userId = '',
+	leadUserId = '',
+}) {
+	const { email = '', mobile_number = '', mobile_country_code = '' } = userData || {};
+
+	const { push } = useRouter();
 
 	const { submitKyc = () => {}, loading = false } = useSubmitOmniChannelKyc();
 
 	const emailParams = email ? `&email=${email}` : '';
+	const countryCodeRegex = GLOBAL_CONSTANTS.regex_patterns.mobile_country_code_format;
+	const countryCode = mobile_country_code.replace(countryCodeRegex, COUNTRY_CODE_PREFIX);
+
+	const queryParams = `?mobile=${mobile_number}&mobile_country_code=${countryCode})}${emailParams}`;
+	const redirectionUrl = `/create-importer-exporter${queryParams}`;
 
 	return (
 
 		<div className={styles.main_container}>
 			{
-			(user_id)
-				? (
-					<div>
+			userId ? (
 
-						{kyc_status === 'verified' ? (
-							<Pill
-								size="md"
-								color="green"
-							>
-								KYC Verified
-							</Pill>
-						) : (
+				<div>
+					{kycStatus === 'verified' ? (
+						<Pill
+							size="md"
+							color="green"
+						>
+							KYC Verified
+						</Pill>
+					) : (
 
-							<Button
-								size="sm"
-								themeType="secondary"
-								onClick={() => submitKyc({ organization_id, user_id, lead_user_id })}
-								disabled={loading}
-							>
-								Verify KYC
-							</Button>
+						<Button
+							size="sm"
+							themeType="secondary"
+							onClick={() => submitKyc({ orgId, userId, leadUserId })}
+							disabled={loading}
+						>
+							Verify KYC
+						</Button>
 
-						)}
-					</div>
+					)}
+				</div>
 
-				) : (
-					<Button
-						size="sm"
-						themeType="secondary"
-						onClick={() => {
-							router.push(
-								// eslint-disable-next-line max-len
-								`/create-importer-exporter?mobile=${mobile_number}&mobile_country_code=${mobile_country_code.replace(GLOBAL_CONSTANTS.regex_patterns.mobile_country_code_format, '%2B')}${emailParams}`,
-								// eslint-disable-next-line max-len
-								`/create-importer-exporter?mobile=${mobile_number}&mobile_country_code=${mobile_country_code.replace(GLOBAL_CONSTANTS.regex_patterns.mobile_country_code_format, '%2B')}${emailParams}`,
-							);
-						}}
-					>
-						Onboard User
-					</Button>
-				)
+			) : (
+				<Button
+					size="sm"
+					themeType="secondary"
+					onClick={() => push(redirectionUrl)}
+				>
+					Onboard User
+				</Button>
+			)
 				}
 
 		</div>
