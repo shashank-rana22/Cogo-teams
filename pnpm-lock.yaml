@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@cogoport/eslint-config': 2.0.3
+      '@cogoport/eslint-config': 2.0.5
       '@cogoport/maps': ^1.0.3
       '@cogoport/stylelint-config': ^1.0.3
       '@sentry/nextjs': ^7.54.0
@@ -32,7 +32,7 @@ importers:
       next: 13.1.6_fe3dnxkyax5wguqewcrbc4wcza
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
-      '@cogoport/eslint-config': 2.0.3_eslint@8.46.0
+      '@cogoport/eslint-config': 2.0.5_eslint@8.46.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
       eslint: 8.46.0
@@ -858,9 +858,9 @@ importers:
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.437_jbkdfmwn4pruupygfcv3deyn7u
+      '@cogoport/components': 1.0.437_alnqrvxi5nmaicyhvladaiksvm
       '@cogoport/core': link:../../common/core
-      '@cogoport/icons-react': 1.0.90_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/icons-react': 1.0.90_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/scope-select': link:../../common/scope-select
@@ -4046,8 +4046,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config/2.0.3_eslint@8.46.0:
-    resolution: {integrity: sha512-lFWGRXqz954NjknRPBg7FL8GYum+ZnNK1OgCj8TSt/tButZAuKhCXdqpLpR+y+1v+HA1GLsMmOsMGLWXY7Jk9A==}
+  /@cogoport/eslint-config/2.0.5_eslint@8.46.0:
+    resolution: {integrity: sha512-3H2PINggHDcT1UiiGVEv7fwGTWq2mwOu5Q8CcGicXwsuEdeTJ00xTO8cjAI1KTBdmY1/Z/bhB3B48bLXBb9MOg==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:
@@ -8659,7 +8659,7 @@ packages:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.12.1
-      resolve: 1.22.3
+      resolve: 1.22.2
     transitivePeerDependencies:
       - supports-color
     dev: true
