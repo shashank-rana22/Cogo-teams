@@ -33,3 +33,12 @@
 	margin: 4px 0 0 8px;
 	cursor: pointer;
 }
+
+.empty_section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 300px;
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-3);
+}

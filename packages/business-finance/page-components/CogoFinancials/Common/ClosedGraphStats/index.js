@@ -25,6 +25,7 @@ function ClosedGraphStats({
 	customDate = new Date(),
 	activeBar = '',
 	setActiveBar = () => {},
+	defaultWidth = '400',
 }) {
 	const { serviceLevelApi, serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
 		entity,
@@ -87,6 +88,7 @@ function ClosedGraphStats({
 									type={type}
 									serviceLevelData={serviceLevelData}
 									serviceLevelLoading={serviceLevelLoading}
+									defaultWidth={defaultWidth}
 								/>
 							))}
 						</div>

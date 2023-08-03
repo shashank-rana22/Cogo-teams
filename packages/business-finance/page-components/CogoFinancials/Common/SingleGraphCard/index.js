@@ -1,6 +1,7 @@
 import { Button, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { LABEL_MAPPING } from '../../constants';
@@ -17,17 +18,17 @@ const KEY_MAPPINGS = {
 
 const DEFAULT_LENGTH = 1;
 const STD_WIDTH = 80;
-const DEFAULT_WIDTH = 400;
 
 function SingleGraphCard({
 	heading = '',
-	setActiveBar = () => { },
+	setActiveBar = () => {},
 	isViewDetailsVisible = false,
 	onViewDetails = () => { },
 	taxType = '',
 	type = '',
 	serviceLevelData = [],
 	serviceLevelLoading = false,
+	defaultWidth = '400',
 }) {
 	const isLastView = isViewDetailsVisible; // last view of graph cards
 
@@ -69,57 +70,65 @@ function SingleGraphCard({
 
 			<div
 				style={{
-					minWidth: `${(serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH > DEFAULT_WIDTH
-						? (serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH : DEFAULT_WIDTH}px`,
+					minWidth: `${(serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH > defaultWidth
+						? (serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH : defaultWidth}px`,
 
 				}}
 				className={styles.graph}
 			>
 				{!serviceLevelLoading ? (
-					<MyResponsiveBar
-						data={formattedServiceLevelData}
-						keys={[
-							`estimated${KEY_MAPPINGS?.[heading]}${taxType}`,
-							`${LABEL_MAPPING[type]}${KEY_MAPPINGS?.[heading]}${taxType}`,
-						]}
-						groupMode="grouped"
-						legendX=""
-						legendY=""
-						width="100%"
-						height="300px"
-						colors={['#cfeaed', '#6fa5ab']}
-						colorBy="id"
-						indexBy="serviceName"
-						enableGridY
-						legends={false}
-						enableLabel={false}
-						onClick={onBarClick}
-						margin={{ top: 50, right: 30, bottom: 50, left: 60 }}
-						axisLeft={{
-							tickSize       : 0,
-							tickPadding    : 0,
-							tickRotation   : 0,
-							legend         : verticalLabel,
-							legendPosition : 'middle',
-							legendOffset   : -40,
-							ariaHidden     : true,
-							format         : (value) => formatAmount({
-								amount  : String(value),
-								options : {
-									style    : 'decimal',
-									notation : 'compact',
-								},
-							}),
-						}}
-						axisBottomRotation={0}
-						valueFormat={(value) => formatAmount({
-							amount  : String(value),
-							options : {
-								style                 : 'decimal',
-								maximumFractionDigits : 2,
-							},
-						})}
-					/>
+					<div>
+						{!isEmpty(formattedServiceLevelData) ? (
+							<MyResponsiveBar
+								data={formattedServiceLevelData}
+								keys={[
+									`estimated${KEY_MAPPINGS?.[heading]}${taxType}`,
+									`${LABEL_MAPPING[type]}${KEY_MAPPINGS?.[heading]}${taxType}`,
+								]}
+								groupMode="grouped"
+								legendX=""
+								legendY=""
+								width="100%"
+								height="300px"
+								colors={['#cfeaed', '#6fa5ab']}
+								colorBy="id"
+								indexBy="serviceName"
+								enableGridY
+								legends={false}
+								enableLabel={false}
+								onClick={onBarClick}
+								margin={{ top: 50, right: 30, bottom: 50, left: 60 }}
+								axisLeft={{
+									tickSize       : 0,
+									tickPadding    : 0,
+									tickRotation   : 0,
+									legend         : verticalLabel,
+									legendPosition : 'middle',
+									legendOffset   : -40,
+									ariaHidden     : true,
+									format         : (value) => formatAmount({
+										amount  : String(value),
+										options : {
+											style    : 'decimal',
+											notation : 'compact',
+										},
+									}),
+								}}
+								axisBottomRotation={0}
+								valueFormat={(value) => formatAmount({
+									amount  : String(value),
+									options : {
+										style                 : 'decimal',
+										maximumFractionDigits : 2,
+									},
+								})}
+							/>
+						) : (
+							<div className={styles.empty_section}>
+								No Data Found
+							</div>
+						)}
+					</div>
 				) : (
 					<div>
 						<Placeholder height={380} width="100%" />

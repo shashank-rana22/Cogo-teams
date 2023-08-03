@@ -49,6 +49,7 @@ function ActiveShipmentCard({
 					customDate={customDate}
 					activeBar={activeBar}
 					setActiveBar={setActiveBar}
+					defaultWidth="360"
 				/>
 			)}
 
@@ -68,6 +69,7 @@ function ActiveShipmentCard({
 					customDate={customDate}
 					activeBar={activeBar}
 					setActiveBar={setActiveBar}
+					defaultWidth="360"
 				/>
 			)}
 		</div>
