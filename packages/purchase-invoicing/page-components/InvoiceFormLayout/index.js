@@ -66,7 +66,8 @@ function InvoiceFormLayout({
 
 	const { control, watch, setValue, handleSubmit, formState: { errors: errorVal } } = useForm({
 		defaultValues: {
-			exchange_rate: purchaseInvoiceValues?.exchange_rate || [
+			invoice_type  : 'purchase_invoice',
+			exchange_rate : purchaseInvoiceValues?.exchange_rate || [
 				{ from_currency: 'INR', to_currency: 'INR', rate: '1' },
 			],
 			line_items: isEmpty(defaultLineItems) ? [EMPTY_LINE_ITEMS] : defaultLineItems,
@@ -181,7 +182,7 @@ function InvoiceFormLayout({
 			<div className={styles.formlayout}>
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
 					<div className={`${styles.flex} ${styles.justifiy}`}>
-						<div className={`${styles.flex}`}>
+						<div className={styles.flex}>
 							{!isJobClosed ? (
 								<Segmented
 									setBillCatogory={setBillCatogory}
