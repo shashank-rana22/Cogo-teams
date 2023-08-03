@@ -1,7 +1,6 @@
 import { Placeholder, Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -13,6 +12,7 @@ import useGroupChat from '../../../../hooks/useGroupChat';
 import useListPartnerUsers from '../../../../hooks/useListPartnerUsers';
 
 import AddGroupMember from './AddGroupMember';
+import AgentQuickActions from './AgentQuickActions';
 import ContactVerification from './ContactVerification';
 import ConversationContainer from './ConversationContainer';
 import ExecutiveSummary from './ExecutiveSummary';
@@ -44,8 +44,6 @@ function AgentDetails({
 	viewType = '',
 	setActiveTab = () => {},
 }) {
-	// const router = useRouter();
-
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
 		name         : '',
@@ -67,6 +65,7 @@ function AgentDetails({
 		channel_type = '',
 		user_type,
 		id = '',
+		kyc_status = '',
 	} = formattedMessageData || {};
 
 	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
@@ -162,32 +161,32 @@ function AgentDetails({
 	return (
 		<>
 			<div className={styles.top_div}>
+
 				<div className={styles.title}>Profile</div>
-				{activeTab === 'message' && (
-					<div
-						role="presentation"
-						className={styles.copy_link}
-						onClick={() => handleClick({ id, channel_type })}
-					>
-						Share
-					</div>
-				)}
-			</div>
-			{activeTab === 'message' && (
-				<div
-					role="presentation"
-					className={styles.copy_link}
-					onClick={() => {
-						// console.log(`/create-importer-exporter?email=${userEmail}&mobile=${mobile_number}`);
-						// router.push(
-						// 	`/create-importer-exporter?email=${userEmail}&mobile=${mobile_number}`,
-						// 	`/create-importer-exporter?email=${userEmail}&mobile=${mobile_number}`,
-						// );
-					}}
-				>
-					Onboard
+				<div className={styles.quick_actions}>
+					{activeTab === 'message' && (
+						<div
+							role="presentation"
+							className={styles.copy_link}
+							onClick={() => handleClick({ id, channel_type })}
+						>
+							Share
+						</div>
+					)}
+					{activeTab === 'message'
+			&& (
+				<AgentQuickActions
+					userEmail={userEmail}
+					user_id={user_id}
+					lead_user_id={lead_user_id}
+					organization_id={organization_id}
+					kyc_status={kyc_status}
+					mobile_number={mobile_number}
+					userData={userData}
+				/>
+			)}
 				</div>
-			) }
+			</div>
 
 			<Profile loading={loading} name={name} userEmail={userEmail} />
 

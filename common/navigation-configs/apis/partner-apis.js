@@ -12308,6 +12308,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'submit_omnichannel_kyc',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'create_agent_feedback',
 			access_type  : 'private',
 			service_name : 'communication',

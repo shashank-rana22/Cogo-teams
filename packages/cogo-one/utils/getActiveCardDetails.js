@@ -47,6 +47,7 @@ const getActiveCardDetails = (data = {}) => {
 		email,
 		cogo_entity_id:orgCogoEntityId = '',
 		account_type = '',
+		kyc_status = '',
 	} = user_details || {};
 
 	return {
@@ -64,6 +65,7 @@ const getActiveCardDetails = (data = {}) => {
 		cogo_entity_id    : orgCogoEntityId,
 		account_type,
 		sender,
+		kyc_status,
 	};
 };
 export default getActiveCardDetails;
