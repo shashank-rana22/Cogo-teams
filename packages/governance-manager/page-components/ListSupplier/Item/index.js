@@ -62,7 +62,7 @@ function Item({ isSupplierPage = false, item }) {
 			</div>
 
 			{ !isSupplierPage && (
-				<div>
+				<div className={styles.view_btn}>
 					<Button themeType="accent" onClick={() => navigate()}>
 						View
 					</Button>

@@ -1,12 +1,11 @@
 import { Button, Input } from '@cogoport/components';
-import { InputController } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useUpdateOrganizationContract from '../hooks/useUpdateOrganizationContract';
 import styles from '../styles.module.css';
 
-function ContractItem({ item, index, step, control, id }) {
+function ContractItem({ item, index, step, id }) {
 	const [value, setValue] = useState();
 	const ZERO = 0;
 	const ONE = 1;
@@ -48,11 +47,9 @@ function ContractItem({ item, index, step, control, id }) {
 					) : (
 						<>
 							<span className={styles.icon}>Original Value</span>
-							<InputController
+							<Input
 								size="sm"
-								control={control}
-								name="original_value"
-								rules={{ required: { value: true, message: 'Value is required' } }}
+								onChange={setValue}
 								style={{
 									marginLeft  : '12px',
 									height      : '20px',
@@ -64,12 +61,15 @@ function ContractItem({ item, index, step, control, id }) {
 								value={item?.variables_details?.[ZERO]?.default_value}
 							/>
 							<span className={styles.icon}>Updated Value</span>
-							<InputController
+							<Input
 								size="sm"
-								control={control}
-								name="updated_value"
-								rules={{ required: { value: true, message: 'Value is required' } }}
-								style={{ marginLeft: '12px', height: '20px', width: '90px' }}
+								onChange={setValue}
+								style={{
+									marginLeft  : '12px',
+									height      : '20px',
+									width       : '90px',
+									marginRight : '24px',
+								}}
 								placeholder=" "
 								disabled
 								value={item?.variables_details?.[ZERO]?.updated_value}
