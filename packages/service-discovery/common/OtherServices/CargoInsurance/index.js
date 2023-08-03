@@ -11,6 +11,9 @@ import CargoInsuranceModal from './CargoInsuranceModal';
 import useDeleteCargoInsurance from './CargoInsuranceModal/hooks/useDeleteCargoInsurance';
 import styles from './styles.module.css';
 
+const DELETE_TITLE = `Customers have lost around $10 billion worth of goods in just last 1 
+year due to various reasons. We recommend keeping your cargo insurance.`;
+
 const isCargoInsurancePresent = (services) => {
 	const isAlreadyPresent = Object.values(services || {}).find(
 		(item) => item.service_type === 'cargo_insurance',
@@ -102,6 +105,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 					onClick={onClickDelete}
 					loading={loading}
 					setShow={setShowDeleteModal}
+					title={DELETE_TITLE}
 				/>
 			) : null}
 		</div>

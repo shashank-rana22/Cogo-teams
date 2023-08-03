@@ -18,8 +18,8 @@ function DeleteServiceModal({
 			onClose={() => setShow(false)}
 			closeOnOuterClick={false}
 		>
-			<Modal.Header title={`Are you sure you want to delete 
-			${startCase(rest.service_name || service.label || service.name)}`}
+			<Modal.Header title={rest.title ? rest.title : `Are you sure you want to delete 
+			${startCase(rest.service_name || service.label || service.name)} ?`}
 			/>
 
 			<Modal.Footer>
@@ -29,7 +29,7 @@ function DeleteServiceModal({
 					onClick={(event) => { event.stopPropagation(); setShow(false); }}
 					disabled={loading}
 				>
-					Cancel
+					{rest.cancelText || 'Cancel'}
 				</Button>
 
 				<Button
@@ -45,7 +45,7 @@ function DeleteServiceModal({
 						if (done) { setShow(false); }
 					}}
 				>
-					Delete
+					{rest.deleteText || 'Delete'}
 				</Button>
 			</Modal.Footer>
 		</Modal>
