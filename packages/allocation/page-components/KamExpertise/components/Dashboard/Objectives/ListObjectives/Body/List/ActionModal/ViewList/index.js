@@ -1,6 +1,8 @@
 import { Pagination, Toggle } from '@cogoport/components';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from '../../../../../../../../../../common/EmptyState';
 import useGetObjectiveKAMsList from '../../../../../../../../hooks/useGetObjectiveKAMsList';
 
 import Filters from './Filters';
@@ -37,7 +39,7 @@ function ViewList({
 		<section>
 			<div className={styles.header}>
 				<div className={styles.header_text}>
-					“Objective 1” Leaderboard Generated
+					{`"${startCase(showModal?.objective_title)}" Leaderboard Generated`}
 				</div>
 				<div>
 					<Toggle
@@ -73,18 +75,26 @@ function ViewList({
 				debounceQuery={debounceQuery}
 			/>
 
-			<ListHeader
-				LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
-			/>
+			{isEmpty(KAMsList) ? (
+				<div className={styles.empty_state}>
+					<EmptyState />
+				</div>
+			) : (
+				<>
+					<ListHeader
+						LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
+					/>
 
-			{(KAMsList || []).map((item) => (
-				<List
-					key={item}
-					item={item}
-					LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
-					loadingKAMsList={loading}
-				/>
-			))}
+					{(KAMsList || []).map((item) => (
+						<List
+							key={item}
+							item={item}
+							LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
+							loadingKAMsList={loading}
+						/>
+					))}
+				</>
+			)}
 
 			{total_count > page_limit ? (
 				<div className={styles.pagination_container}>

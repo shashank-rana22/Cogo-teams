@@ -31,10 +31,11 @@ const getListColumnMapping = (props) => {
 		}));
 	};
 
-	const handleViewList = (id) => {
+	const handleViewList = (id, name) => {
 		setShowModal(() => ({
 			id,
-			action: 'view',
+			action          : 'view',
+			objective_title : name,
 		}));
 	};
 
@@ -179,7 +180,7 @@ const getListColumnMapping = (props) => {
 			key      : 'action',
 			flex     : 2,
 			Header   : <div className={styles.top_heading}>ACTIONS</div>,
-			accessor : ({ id, kam_expertise_status }) => (
+			accessor : ({ id, name, kam_expertise_status }) => (
 				<div className={styles.action_buttons}>
 					<Button
 						onClick={(e) => {
@@ -198,7 +199,7 @@ const getListColumnMapping = (props) => {
 							<Button
 								onClick={(e) => {
 									e.stopPropagation();
-									handleViewList(id);
+									handleViewList(id, name);
 								}}
 								type="button"
 								themeType="secondary"
