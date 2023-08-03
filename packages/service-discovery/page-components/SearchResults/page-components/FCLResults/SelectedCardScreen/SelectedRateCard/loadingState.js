@@ -9,11 +9,11 @@ const SERVICES_LOADING_COUNT = 6;
 
 function LoadingState() {
 	return (
-		<div className={styles.parent}>
+		<div className={styles.loading_container}>
 			<Placeholder
 				height="160px"
 				width="100%"
-				margin="50px 0 30px 0"
+				margin="0 0 30px 0"
 				style={{ borderRadius: '8px' }}
 			/>
 

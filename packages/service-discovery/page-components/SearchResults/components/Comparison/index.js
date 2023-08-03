@@ -260,7 +260,7 @@ function Comparison({
 						className={styles.button}
 						style={{ padding: '20px 44px' }}
 					>
-						Share
+						Share rate cards
 					</Button>
 				</div>
 			</div>

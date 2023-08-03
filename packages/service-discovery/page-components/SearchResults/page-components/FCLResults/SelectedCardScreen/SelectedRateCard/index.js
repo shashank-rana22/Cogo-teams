@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import AdditionalServices from '../../../../../../common/OtherServices/AdditionalServices';
 import CargoInsurance from '../../../../../../common/OtherServices/CargoInsurance';
@@ -11,10 +11,19 @@ import Bundles from '../../../../components/Bundles';
 import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 import FclCard from '../../FclCard';
 
+import CargoModal from './CargoModal';
 import LoadingState from './loadingState';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
+
+const isCargoInsuranceThere = (services = {}) => {
+	const isAlreadyPresent = Object.values(services || {}).find(
+		(item) => item.service_type === 'cargo_insurance',
+	);
+
+	return isAlreadyPresent;
+};
 
 function TotalLandedCost({ total_price_discounted = '', total_price_currency = '' }) {
 	return (
@@ -42,6 +51,8 @@ function SelectedRateCard({
 	setScreen = () => {},
 	setHeaderProps = () => {},
 }) {
+	const [cargoModal, setCargoModal] = useState('pending'); // pending,progress,success
+
 	const {
 		possible_subsidiary_services = [],
 		rate_card: rateCardData = {},
@@ -60,6 +71,14 @@ function SelectedRateCard({
 	}
 
 	const { source = '' } = rateCardData;
+
+	const handleProceedToCheckout = () => {
+		const cargoInsurancePresent = isCargoInsuranceThere(detail?.service_details);
+
+		if (!cargoInsurancePresent && cargoModal === 'pending') {
+			setCargoModal('progress');
+		} else handleBook();
+	};
 
 	return (
 		<div className={styles.parent}>
@@ -101,6 +120,7 @@ function SelectedRateCard({
 							setHeaderProps={setHeaderProps}
 							refetchSearch={refetch}
 							source="search-results"
+							refetchLoading={loading}
 						/>
 
 						<CargoInsurance
@@ -116,7 +136,7 @@ function SelectedRateCard({
 
 							<div className={styles.proceed_container}>
 								<Button
-									onClick={handleBook}
+									onClick={handleProceedToCheckout}
 									size="lg"
 									themeType="accent"
 									style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 16, paddingBottom: 16 }}
@@ -142,6 +162,15 @@ function SelectedRateCard({
 					</div>
 				</div>
 			</div>
+
+			{cargoModal === 'progress' ? (
+				<CargoModal
+					refetch={refetch}
+					cargoModal={cargoModal}
+					setCargoModal={setCargoModal}
+					detail={detail}
+				/>
+			) : null}
 		</div>
 	);
 }

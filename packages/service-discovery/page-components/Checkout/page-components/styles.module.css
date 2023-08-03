@@ -3,8 +3,16 @@
 	background: #fff;
 }
 
+.header {
+	position: fixed;
+	top: 0;
+	left: 80px;
+	right: 0;
+	z-index: 100;
+}
+
 .breadcrumb {
-	position: sticky;
+	position: fixed;
 	top: 88px;
 	z-index: 2;
 	padding: 12px 28px;
@@ -48,4 +56,8 @@
 	margin-top: 32px;
 	font-size: 18px;
 	font-weight: 600;
+}
+
+.children {
+	padding-top: 140px;
 }

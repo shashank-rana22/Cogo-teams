@@ -5,6 +5,9 @@ import { useSelector } from '@cogoport/store';
 
 const URL = '/create_spot_search_rate_feedback';
 
+const ONE_VALUE = 1;
+const DEFAULT_COUNT_VALUE = 0;
+
 const useLikeFeedback = ({ rate, detail, setLikeState = () => {}, likeState = {} }) => {
 	const {
 		general: { query = {} },
@@ -29,9 +32,11 @@ const useLikeFeedback = ({ rate, detail, setLikeState = () => {}, likeState = {}
 			await trigger({ data: params });
 
 			setLikeState({
-				is_liked    : true,
-				likes_count : (likeState.likes_count || 0) + 1,
-				is_disliked : false,
+				is_liked       : true,
+				likes_count    : (likeState.likes_count || DEFAULT_COUNT_VALUE) + ONE_VALUE,
+				is_disliked    : false,
+				dislikes_count : likeState.is_disliked
+					? likeState.dislikes_count - ONE_VALUE : likeState.dislikes_count,
 			});
 		} catch (error) {
 			if (error.response?.data) {

@@ -4,18 +4,20 @@
 	margin: -24px -20px;
 	background-color: #fff;
 }
-
 .header {
-	position: sticky;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 100;
+	position: fixed;
+	top:0;
+	left:80px;
+	right:0;
+	z-index:100;
 }
 
 .backdrop {
 	background: rgb(0 0 0 / 30%);
+}
+
+.children {
+	padding-top: 116px;
 }
 
 .loading {

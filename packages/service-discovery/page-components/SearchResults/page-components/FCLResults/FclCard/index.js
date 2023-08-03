@@ -71,10 +71,10 @@ function MiddleSection({
 				isCogoAssured={isCogoAssured}
 			/>
 
-			<div className={styles.rateDetails}>
+			<div className={styles.rate_details}>
 				<div style={{ marginRight: 24 }}>
-					<div className={styles.freightText}>Basic Freight Price</div>
-					<div style={{ display: 'flex', alignItems: 'center' }}>
+					<div className={styles.freight_text}>Basic Freight Price</div>
+					<div style={{ display: 'flex', alignItems: 'end' }}>
 						{(firstTwoRates || []).map((item) => (
 							<FreightPriceDetail
 								key={item.service_id}
@@ -108,7 +108,7 @@ function MiddleSection({
 				</div>
 
 				<div>
-					<div className={styles.freightText}>Total Freight Price</div>
+					<div className={`${styles.freight_text} ${styles.total}`}>Total Freight Price</div>
 					<FreightPriceDetail
 						container_size={firstTwoRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_size}
 						container_type={firstTwoRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_type}

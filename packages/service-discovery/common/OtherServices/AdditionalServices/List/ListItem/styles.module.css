@@ -61,3 +61,21 @@
 	border: 1.5px solid #221f20;
 	border-radius: 50%;
 }
+
+.rate_not_available_for_all {
+	display: flex;
+	align-items: center;
+}
+
+.more_icon {
+	margin-left: 4px;
+}
+
+.tooltip_content {
+	word-break: keep-all;
+}
+
+.starting_price {
+	font-size: 12px;
+	font-weight: 400;
+}

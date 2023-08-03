@@ -108,27 +108,33 @@ function SearchResults() {
 	}
 
 	return (
-		<div className={cl`${styles.container} ${showAdditionalHeader ? styles.backdrop : {}}`}>
-			<Header
-				data={detail}
-				showAdditionalHeader={showAdditionalHeader}
-				setHeaderProps={setHeaderProps}
-				headerProps={headerProps}
-				loading={loading}
-				activePage="search_results"
-				currentScreen={screen}
-				setCurrentScreen={setScreen}
-				infoBanner={infoBanner}
-				setInfoBanner={setInfoBanner}
-				isGuideViewed={isGuideViewed}
-			/>
+		<div className={cl`${styles.container} ${
+			(showAdditionalHeader || (infoBanner.current === 'edit_button' && !isGuideViewed))
+				? styles.backdrop : {}}`}
+		>
+			<div className={styles.header}>
+				<Header
+					data={detail}
+					showAdditionalHeader={showAdditionalHeader}
+					setHeaderProps={setHeaderProps}
+					headerProps={headerProps}
+					loading={loading}
+					activePage="search_results"
+					currentScreen={screen}
+					setCurrentScreen={setScreen}
+					infoBanner={infoBanner}
+					setInfoBanner={setInfoBanner}
+					isGuideViewed={isGuideViewed}
+				/>
+			</div>
 
 			<div
 				style={
-					(showAdditionalHeader || infoBanner.current === 'edit_button') && !isGuideViewed
-						? { opacity: 0.6, pointerEvents: 'none', background: '#000' }
+					(showAdditionalHeader || (infoBanner.current === 'edit_button' && !isGuideViewed))
+						? { opacity: 0.6, pointerEvents: 'none', background: '#fff' }
 						: null
 				}
+				className={styles.children}
 			>
 				<FCLResults
 					rates={rates}

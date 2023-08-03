@@ -1,7 +1,7 @@
-import { Toast, Loader, cl } from '@cogoport/components';
+import { Toast, Loader, cl, Tooltip, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
+import { IcCFtick, IcMInfo, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -24,6 +24,8 @@ function ListItem({
 	setHeaderProps = () => {},
 	refetch = () => {},
 	SERVICES_CANNOT_BE_REMOVED = [],
+	startingPrices = {},
+	startingPriceLoading = false,
 }) {
 	const [isHovered, setIsHovered] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -80,7 +82,16 @@ function ListItem({
 	};
 
 	function RenderRate() {
-		if (!isSelected) return null;
+		if (startingPriceLoading) {
+			return <Placeholder height="24px" width="100px" style={{ borderRadius: 4 }} />;
+		}
+
+		if (!isSelected) {
+			if (serviceItem.service_type === 'fcl_freight_local') {
+				return <span className={styles.starting_price}>Calculated at Actuals</span>;
+			}
+			return <span className={styles.starting_price}>Starting at $80/Ctr.</span>;
+		}
 
 		const { rateData = [] } = serviceItem;
 
@@ -92,14 +103,19 @@ function ListItem({
 		}
 
 		let currency = '';
+		let ratesAvailableForAll = true;
+
 		const totalPrice = rateData
 			.map((rateItem) => {
 				currency = rateItem.total_price_currency;
+				if (!rateItem.total_price_discounted) {
+					ratesAvailableForAll = false;
+				}
 				return rateItem.total_price_discounted || DEFAULT_PRICE_VALUE;
 			})
 			.reduce((accumulator, value) => accumulator + value, INITIAL_REDUCE_VALUE);
 
-		return formatAmount({
+		const formattedAmount = formatAmount({
 			amount  : totalPrice,
 			currency,
 			options : {
@@ -108,6 +124,27 @@ function ListItem({
 				maximumFractionDigits : 0,
 			},
 		});
+
+		if (!ratesAvailableForAll) {
+			return (
+				<div className={styles.rate_not_available_for_all}>
+					<span>{formattedAmount}</span>
+
+					<Tooltip
+						content={(
+							<div className={styles.tooltip_content}>
+								Rates for all configurations might not be available
+							</div>
+						)}
+						placement="top"
+					>
+						<IcMInfo height={12} width={12} className={styles.more_icon} />
+					</Tooltip>
+				</div>
+			);
+		}
+
+		return formattedAmount;
 	}
 
 	function RenderIcon() {

@@ -70,6 +70,10 @@
 	justify-content: space-between;
 }
 
+.loading_container {
+	padding: 24px;
+}
+
 .loading_heading {
 	margin-bottom: 20px;
 	font-size: 16px;

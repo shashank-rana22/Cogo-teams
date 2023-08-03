@@ -1,6 +1,6 @@
 import { Checkbox, Popover, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMShare } from '@cogoport/icons-react';
+// import { IcMShare } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import InfoBannerContent from '../../../../../../common/InfoBannerContent';
@@ -104,9 +104,9 @@ function RateCardTop({
 
 	const renderLikeDislike = () => <LikeDislike rateCardData={rateCardData} detail={detail} />;
 
-	const handleShareIconClick = () => {
-		setShowShareModal(!showShareModal);
-	};
+	// const handleShareIconClick = () => {
+	// 	setShowShareModal(!showShareModal);
+	// };
 
 	const imageUrl = isCogoAssured ? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : shipping_line?.logo_url;
 
@@ -133,12 +133,12 @@ function RateCardTop({
 			<div style={{ display: 'flex', marginRight: 20, alignItems: 'center' }}>
 				{renderLikeDislike()}
 
-				<IcMShare
+				{/* <IcMShare
 					className={styles.share_icon}
 					width="20px"
 					height="16px"
 					onClick={handleShareIconClick}
-				/>
+				/> */}
 			</div>
 
 			<ShareRate

@@ -26,9 +26,10 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 	const { service_type = '' } = detail;
 
 	const [likeState, setLikeState] = useState({
-		is_liked    : rateCardData?.is_liked,
-		likes_count : rateCardData?.likes_count,
-		is_disliked : rateCardData?.is_disliked,
+		is_liked       : rateCardData?.is_liked,
+		likes_count    : rateCardData?.likes_count,
+		is_disliked    : rateCardData?.is_disliked,
+		dislikes_count : rateCardData?.dislikes_count,
 	});
 
 	const { handleLikeRateCard, loading } = useLikeFeedback({
@@ -52,9 +53,10 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 
 	useEffect(() => {
 		setLikeState({
-			is_liked    : rateCardData?.is_liked,
-			likes_count : rateCardData?.likes_count,
-			is_disliked : rateCardData?.is_disliked,
+			is_liked       : rateCardData?.is_liked,
+			likes_count    : rateCardData?.likes_count,
+			is_disliked    : rateCardData?.is_disliked,
+			dislikes_count : rateCardData?.dislikes_count,
 		});
 	}, [rateCardData]);
 
@@ -89,6 +91,7 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 					height="16px"
 					className={`${styles.dislike} ${likeState.is_disliked ? styles.active : ''}`}
 				/>
+				<span className={styles.count}>{likeState.dislikes_count}</span>
 			</Button>
 
 			{showFeedbackModal ? (

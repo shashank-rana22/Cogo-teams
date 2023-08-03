@@ -96,14 +96,16 @@ function Checkout({ checkout_type = '' }) {
 	return (
 		<CheckoutContext.Provider value={checkoutData}>
 			<div className={styles.container}>
-				<Header
-					data={detail}
-					service_key="primary_service"
-					activePage="checkout"
-					loading={loading}
-					headerProps={headerProps}
-					showAdditionalHeader={showAdditionalHeader}
-				/>
+				<div className={styles.header}>
+					<Header
+						data={detail}
+						service_key="primary_service"
+						activePage="checkout"
+						loading={loading}
+						headerProps={headerProps}
+						showAdditionalHeader={showAdditionalHeader}
+					/>
+				</div>
 
 				<Breadcrumb className={styles.breadcrumb}>
 					<Breadcrumb.Item
@@ -127,10 +129,12 @@ function Checkout({ checkout_type = '' }) {
 					))}
 				</Breadcrumb>
 
-				<ActiveComponent
-					state={state}
-					setIsShipmentCreated={setIsShipmentCreated}
-				/>
+				<div className={styles.children}>
+					<ActiveComponent
+						state={state}
+						setIsShipmentCreated={setIsShipmentCreated}
+					/>
+				</div>
 			</div>
 		</CheckoutContext.Provider>
 	);

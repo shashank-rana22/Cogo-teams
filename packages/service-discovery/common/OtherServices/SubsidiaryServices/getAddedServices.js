@@ -19,22 +19,27 @@ const getOptions = (services) => services.map((service) => {
 	} else if (service?.trade_type === 'import') {
 		tradeType = 'Destination';
 	}
+
+	const formattedName = startCase(service?.name);
+	const formattedLabel = formattedName.includes(tradeType) ? formattedName : `${tradeType} ${formattedName}`;
+
 	return ({
-		label : `${tradeType} ${startCase(service?.name)}`,
+		label : formattedLabel,
 		value : service.key,
 		code  : service.code,
 	});
 });
+
 const getAddedServices = (service_details) => {
 	const servicesList = Object.values(service_details || {});
 
-	const servicesArr = [];
+	const SERVICES_ARRAY = [];
 
 	(servicesList || []).forEach((item) => {
-		if (item?.service_type === 'subsidiary') { servicesArr.push(getService(item)); }
+		if (item?.service_type === 'subsidiary') { SERVICES_ARRAY.push(getService(item)); }
 	});
 
-	const added_services = [...new Set(servicesArr)];
+	const added_services = [...new Set(SERVICES_ARRAY)];
 
 	return getOptions(added_services);
 };

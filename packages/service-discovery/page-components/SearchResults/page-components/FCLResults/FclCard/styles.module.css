@@ -1,4 +1,4 @@
-.rateDetails {
+.rate_details {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -22,22 +22,27 @@
 	margin-bottom: 20px;
 }
 
-.freightDetailsContainer {
+.freight_details_container {
 	flex-basis: 50%;
 	margin-right: 24px;
 }
 
-.totalFreightContainer {
+.total_freight_container {
 	flex-basis: 50%;
 }
 
-.freightText {
-	margin-bottom: 12px;
+.freight_text {
+	margin-bottom: 4px;
 	font-size: 10px;
 	color: #000;
+
+	&.total {
+		font-size: 12px;
+		margin-right: 6px;
+	}
 }
 
-.freightDetails {
+.freight_details {
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -48,8 +53,8 @@
 		align-items: stretch;
 	}
 
-	.freightDetailsContainer,
-	.totalFreightContainer {
+	.freight_details_container,
+	.total_freight_container {
 		flex-basis: 100%;
 		margin-right: 0;
 		margin-bottom: 24px;
@@ -61,11 +66,10 @@
 	align-items: center;
 	padding: 2px 8px;
 	margin-right: 2px;
-	font-size: 10px;
-	font-weight: 500;
-	color: #221f20;
-	cursor: pointer;
-	background: #f9f9f9;
-	border: 1px solid #e0e0e0;
-	border-radius: 24px;
+    color: #221f20;
+    cursor: pointer;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 24px;
+	margin-bottom: 6px;
 }
