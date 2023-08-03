@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -33,16 +34,16 @@ function useGetVendor() {
 
 			setVendorInformation({
 				...res.data,
-				contact_details : res.data?.pocs[0],
-				payment_details : res.data?.bank_details[0],
+				contact_details : res.data?.pocs[GLOBAL_CONSTANTS.zeroth_index],
+				payment_details : res.data?.bank_details[GLOBAL_CONSTANTS.zeroth_index],
 				vendor_services : res.data?.services,
 			});
 
 			if (res.data.vendor_details.kyc_status === 'pending_verification') {
-				const href = '/vendors/[vendor_id]';
+				const HREF = '/vendors/[vendor_id]';
 				const as = `/vendors/${res.data?.vendor_details?.id}`;
 
-				router.push(href, as);
+				router.push(HREF, as);
 			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
@@ -59,14 +60,14 @@ function useGetVendor() {
 		const componentKeys = TABS_MAPPING.map((mapping) => mapping.key);
 
 		const emptyVendorInformationTab = componentKeys.find((key) => !vendorInformation[key]
-		|| isEmpty(vendorInformation[key])) || 'vendor_details';
+			|| isEmpty(vendorInformation[key])) || 'vendor_details';
 
 		setActiveStepper(emptyVendorInformationTab);
 	}, [getVendorLoading, vendorInformation]);
 
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
-	const onBack = useCallback(() => router.push('/vendors'), [router]);
+	const onBack = useCallback(() => router.back(), [router]);
 
 	return {
 		ActiveComponent,

@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 
-import useRaisedAgain from '../../hooks/useRaisedAgain';
-import useSave from '../../hooks/useSave';
+import useRaisedAgain from '../../hooks/useRaisedAgain.ts';
+import useSave from '../../hooks/useSave.ts';
+import NonRecuringModal from '../NonRecuringModal';
+import RecuringModal from '../RecuringModal';
 
-import AdvanceSecurityDepositModal from './AdvanceSecurityDepositModal';
-import AdvanceSecurityDepositRefundModal from './AdvanceSecurityDepositRefundModal';
-import BankDatailsModal from './BankDetailsModal';
-import IcJvApproval from './IcJvApproval';
-import JournalVoucher from './JournalVoucher';
-import PaymentConfirmation from './PaymentConfirmation';
-import RequestCN from './RequestCN';
-import SettlementModal from './SettlementModal';
-import TdsDeviationModal from './TdsDeviationModal';
+import AdvanceSecurityDepositModal from './AdvanceSecurityDepositModal/index.tsx';
+import AdvanceSecurityDepositRefundModal from './AdvanceSecurityDepositRefundModal/index.tsx';
+import BankDatailsModal from './BankDetailsModal/index.tsx';
+import IcJvApproval from './IcJvApproval/index.tsx';
+import JournalVoucher from './JournalVoucher/index.tsx';
+import PaymentConfirmation from './PaymentConfirmation/index.tsx';
+import RequestCN from './RequestCN/index.tsx';
+import SettlementModal from './SettlementModal/index.tsx';
+import TdsDeviationModal from './TdsDeviationModal/index.tsx';
 
 const TYPE_COMPONENT_MAPPING = {
 	BANK_DETAIL_APPROVAL                   : BankDatailsModal,
@@ -23,9 +25,11 @@ const TYPE_COMPONENT_MAPPING = {
 	PAYMENT_CONFIRMATION_APPROVAL          : PaymentConfirmation,
 	ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDepositModal,
 	ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefundModal,
+	RECURRING_EXPENSE_APPROVAL             : RecuringModal,
+	OVERHEAD_APPROVAL                      : NonRecuringModal,
 };
 
-function ViewRequested({ itemData, name, refetch }) {
+function ViewRequested({ itemData = {}, name = '', refetch = () => {} }) {
 	const [remarks, setRemarks] = useState('');
 	const { type, id } = itemData || {};
 
@@ -59,6 +63,7 @@ function ViewRequested({ itemData, name, refetch }) {
 			setShowModal={setShowModal}
 			loadingOnSave={loadingOnSave}
 			loadingOnRaise={loadingOnRaise}
+			refetch={refetch}
 		/>
 	);
 }

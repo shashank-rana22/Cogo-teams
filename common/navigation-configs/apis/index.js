@@ -7,6 +7,7 @@ import bl_do from './bl-do-apis';
 import bl_do_collection_release from './bl_do-collection-release-apis';
 import bn_salvage from './bn-salvage-apis';
 import booking_desk from './booking-desk-apis';
+import centralised_customer_service from './centralised-customer-service-apis';
 import chakravyuh from './chakravyuh-apis';
 import chro from './chro';
 import coe_finance from './coe-finance-apis';
@@ -165,6 +166,7 @@ const apis = {
 	...schedules,
 	igm_desk,
 	...supply_forecast,
+	centralised_customer_service,
 };
 
 export default apis;
