@@ -7,8 +7,6 @@ function Body(props) {
 		params = {},
 		setParams = () => { },
 		data = {},
-		// page,
-		// setPage = () => { },
 		loading: loadingListObjectives = false,
 		refetchListObjectives = () => { },
 		debounceQuery,
@@ -24,11 +22,8 @@ function Body(props) {
 			<List
 				data={data}
 				setActionMode={setActionMode}
-				// page={page}
-				// setPage={setPage}
-				params={params}
-				setParams={setParams}
 				loadingListObjectives={loadingListObjectives}
+				listObjectiveParams={params}
 				setListObjectivesParams={setParams}
 				refetchListObjectives={refetchListObjectives}
 			/>

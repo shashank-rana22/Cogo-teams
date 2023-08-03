@@ -67,8 +67,6 @@ const MODAL_COMPONENT_MAPPING = ({
 function ActionModal({
 	showModal = {},
 	setShowModal = () => { },
-	filters = {},
-	setFilters = () => { },
 	refetchListObjectives = () => { },
 }) {
 	const { action } = showModal || {};
@@ -116,8 +114,6 @@ function ActionModal({
 			<Modal.Header title={title} />
 			<Modal.Body style={customModalStyle}>
 				<Component
-					filters={filters}
-					setFilters={setFilters}
 					showModal={showModal}
 					refetchListObjectives={refetchListObjectives}
 					loader={loader}

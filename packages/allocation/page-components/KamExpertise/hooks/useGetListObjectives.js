@@ -1,14 +1,9 @@
-// import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-// const INITIAL_PAGE_NUMBER = 1;
-
 function useGetListObjectives() {
 	const { query = '', debounceQuery } = useDebounceQuery();
-
-	// const [page, setPage] = useState(INITIAL_PAGE_NUMBER);
 
 	const [params, setParams] = useState({
 		page      : 1,
@@ -57,8 +52,6 @@ function useGetListObjectives() {
 		loading,
 		data,
 		refetchListObjectives,
-		// page,
-		// setPage,
 		params,
 		setParams,
 		debounceQuery,

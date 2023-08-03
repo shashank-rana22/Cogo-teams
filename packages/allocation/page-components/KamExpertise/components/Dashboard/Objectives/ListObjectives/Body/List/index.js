@@ -16,14 +16,12 @@ function List(props) {
 		objectiveList,
 		activeObjectiveId,
 		setActiveObjectiveId,
-		params,
+		listObjectiveParams,
 		total_count,
 		page_limit,
 		handlePageChange,
 		showModal,
 		setShowModal,
-		filters,
-		setFilters,
 		refetchListObjectives,
 	} = useList(props);
 
@@ -54,7 +52,7 @@ function List(props) {
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="number"
-					currentPage={params?.page || ONE}
+					currentPage={listObjectiveParams?.page || ONE}
 					totalItems={total_count}
 					pageSize={page_limit}
 					onPageChange={(v) => handlePageChange(v)}
@@ -64,8 +62,6 @@ function List(props) {
 			<ActionModal
 				showModal={showModal}
 				setShowModal={setShowModal}
-				filters={filters}
-				setFilters={setFilters}
 				refetchListObjectives={refetchListObjectives}
 			/>
 		</section>

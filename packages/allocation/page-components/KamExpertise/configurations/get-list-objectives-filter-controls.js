@@ -2,7 +2,7 @@ import getEntityOptions from '../helpers/get-entity-options';
 
 const controls = [
 	{
-		name        : 'agent_role',
+		name        : 'role_ids',
 		label       : 'By Agent Role',
 		placeholder : 'select',
 		type        : 'asyncSelect',
@@ -20,7 +20,7 @@ const controls = [
 		isClearable : true,
 	},
 	{
-		name        : 'entity',
+		name        : 'partner_id',
 		label       : 'By Entity',
 		placeholder : 'select',
 		type        : 'select',
@@ -30,7 +30,7 @@ const controls = [
 		isClearable : true,
 	},
 	{
-		name        : 'channel',
+		name        : 'channels',
 		label       : 'By Channel',
 		placeholder : 'select',
 		type        : 'select',

@@ -23,14 +23,20 @@ function ServiceRequirements(props) {
 			<h4 className={styles.heading}>Serivce Requirements</h4>
 
 			<div className={styles.card_list}>
-				{serviceRequirementsDetails.map((item, index) => (
-					<ServiceCard
-						key={item.id}
-						index={index}
-						item={item}
-						operator={service_requirement_operator}
-					/>
-				))}
+
+				{(serviceRequirementsDetails || []).map((item, index) => {
+					if (!item?.service_type) {
+						return null;
+					}
+					return (
+						<ServiceCard
+							key={item.id}
+							index={index}
+							item={item}
+							operator={service_requirement_operator}
+						/>
+					);
+				})}
 			</div>
 		</div>
 	);

@@ -68,3 +68,7 @@
 	flex-direction: row;
 	align-items: center;
 }
+
+.origin_location {
+	margin-right: 48px;
+}

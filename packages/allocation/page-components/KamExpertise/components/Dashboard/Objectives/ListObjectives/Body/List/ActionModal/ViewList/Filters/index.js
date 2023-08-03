@@ -7,8 +7,7 @@ import FilterForm from './FilterForm';
 import styles from './styles.module.css';
 
 function Filters({
-	filters = {},
-	setFilters = () => { },
+	setParams = () => { },
 	debounceQuery = () => { },
 }) {
 	const [showFilterPopover, setShowFilterPopover] = useState(false);
@@ -19,6 +18,7 @@ function Filters({
 		control,
 		handleSubmit = () => { },
 		formState: { errors = {} },
+		setValue,
 	} = useForm();
 
 	const handleChange = (v) => {
@@ -37,9 +37,9 @@ function Filters({
 					<FilterForm
 						control={control}
 						handleSubmit={handleSubmit}
+						setValue={setValue}
 						errors={errors}
-						filters={filters}
-						setFilters={setFilters}
+						setParams={setParams}
 						setShowFilterPopover={setShowFilterPopover}
 					/>
 				)}

@@ -10,16 +10,35 @@ function FilterForm({
 	control = {},
 	handleSubmit = () => { },
 	errors = {},
-	setFilters = () => { },
+	setParams = () => { },
 	setShowFilterPopover = () => { },
+	setValue = () => { },
 }) {
 	const onSubmit = async (values) => {
-		setFilters(() => ({
-			...values,
+		setParams((pv) => ({
+			...pv,
+			filters: {
+				...pv.filters,
+				manager_ids         : values?.manager_ids || undefined,
+				role_ids            : values?.role_ids || undefined,
+				kam_expertise_level : values?.kam_expertise_level || undefined,
+				kam_status          : values?.kam_status || undefined,
+			},
 		}));
+		setShowFilterPopover(false);
 	};
 
 	const onClickCancel = () => {
+		controls.forEach((item) => {
+			setValue(`${item.name}`, '');
+		});
+
+		setParams((pv) => ({
+			...pv,
+			filters: {
+				objective_id: pv?.filters?.objective_id,
+			},
+		}));
 		setShowFilterPopover(false);
 	};
 
@@ -54,12 +73,12 @@ function FilterForm({
 					style={{ marginRight: 8 }}
 					onClick={onClickCancel}
 				>
-					Cancel
+					Reset All
 				</Button>
 				<Button
 					type="submit"
 					size="md"
-					themeType="secondary"
+					themeType="primary"
 				>
 					Apply
 				</Button>

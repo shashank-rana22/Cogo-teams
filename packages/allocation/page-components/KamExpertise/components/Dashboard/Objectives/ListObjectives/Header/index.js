@@ -13,7 +13,7 @@ function Header(props) {
 			...pv,
 			filters: {
 				...pv.filters,
-				status: pv?.filters?.status.includes('active') ? ['inactive'] : ['active', 'live'],
+				status: (pv?.filters?.status || []).includes('active') ? ['inactive'] : ['active', 'live'],
 			},
 		}));
 	};

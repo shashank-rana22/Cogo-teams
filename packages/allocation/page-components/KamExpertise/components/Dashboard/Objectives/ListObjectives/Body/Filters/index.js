@@ -19,6 +19,7 @@ function Filters({
 		control,
 		handleSubmit = () => { },
 		formState: { errors = {} },
+		reset,
 	} = useForm();
 
 	const handleChange = (v) => {
@@ -47,6 +48,7 @@ function Filters({
 					<FilterForm
 						control={control}
 						handleSubmit={handleSubmit}
+						reset={reset}
 						errors={errors}
 						params={params}
 						setParams={setParams}
@@ -54,15 +56,20 @@ function Filters({
 					/>
 				)}
 			>
-				<Button
-					themeType="secondary"
-					type="button"
-					size="lg"
-					onClick={() => setShowFilterPopover(!showFilterPopover)}
-				>
-					Filter
-					<IcMFilter style={{ marginLeft: '8px' }} />
-				</Button>
+				<div className={styles.btn_text}>
+					<Button
+						themeType="secondary"
+						type="button"
+						size="lg"
+						onClick={() => setShowFilterPopover(!showFilterPopover)}
+					>
+						Filter
+						<IcMFilter style={{ marginLeft: '8px' }} />
+						{/* {!isEmpty(formValues) ? (
+							<div className={styles.red_dot} />
+						) : null} */}
+					</Button>
+				</div>
 			</Popover>
 		</div>
 	);

@@ -10,8 +10,6 @@ import ListHeader from './ListHeader';
 import styles from './styles.module.css';
 
 function ViewList({
-	filters = {},
-	setFilters = () => { },
 	showModal = {},
 }) {
 	const {
@@ -70,8 +68,8 @@ function ViewList({
 			</div>
 
 			<Filters
-				filters={filters}
-				setFilters={setFilters}
+				params={params}
+				setParams={setParams}
 				debounceQuery={debounceQuery}
 			/>
 

@@ -13,8 +13,6 @@ function ListObjectives(props) {
 		refetchListObjectives = () => { },
 		params = {},
 		setParams = () => { },
-		// page,
-		// setPage = () => { },
 		debounceQuery,
 	} = useGetListObjectives();
 
@@ -37,8 +35,6 @@ function ListObjectives(props) {
 				refetchListObjectives={refetchListObjectives}
 				params={params}
 				setParams={setParams}
-				// page={page}
-				// setPage={setPage}
 				debounceQuery={debounceQuery}
 			/>
 		</>

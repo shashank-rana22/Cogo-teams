@@ -1,6 +1,6 @@
 const controls = [
 	{
-		name        : 'manager_name',
+		name        : 'manager_ids',
 		label       : 'By Manager Name',
 		placeholder : 'select',
 		type        : 'asyncSelect',
@@ -12,7 +12,7 @@ const controls = [
 		isClearable : true,
 	},
 	{
-		name        : 'role',
+		name        : 'role_ids',
 		label       : 'By Role',
 		placeholder : 'select',
 		type        : 'asyncSelect',
@@ -29,7 +29,7 @@ const controls = [
 		isClearable : true,
 	},
 	{
-		name        : 'kam_level',
+		name        : 'kam_expertise_level',
 		label       : 'By KAM Level',
 		placeholder : 'select',
 		type        : 'select',
@@ -52,7 +52,6 @@ const controls = [
 			},
 		],
 		caret       : true,
-		multiple    : true,
 		isClearable : true,
 	},
 	{
@@ -68,10 +67,6 @@ const controls = [
 			{
 				label : 'Inactive',
 				value : 'inactive',
-			},
-			{
-				label : 'Blocked',
-				value : 'blocked',
 			},
 		],
 		caret       : true,

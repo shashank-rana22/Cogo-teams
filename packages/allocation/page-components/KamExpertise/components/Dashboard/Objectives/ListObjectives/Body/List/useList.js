@@ -11,11 +11,8 @@ function useList(props) {
 	const {
 		setActionMode = () => { },
 		data = {},
-		// page,
-		// setPage = () => { },
-		params = {},
-		setParams = () => { },
 		loadingListObjectives = false,
+		listObjectiveParams = {},
 		setListObjectivesParams = () => { },
 		refetchListObjectives = () => { },
 	} = props;
@@ -51,7 +48,7 @@ function useList(props) {
 	})), [LIST_COLUMN_MAPPING, list, loadingListObjectives]);
 
 	const handlePageChange = (pg) => {
-		setParams((pv) => ({
+		setListObjectivesParams((pv) => ({
 			...pv,
 			page: pg + ONE,
 		}));
@@ -62,7 +59,7 @@ function useList(props) {
 		objectiveList,
 		activeObjectiveId,
 		setActiveObjectiveId,
-		params,
+		listObjectiveParams,
 		total_count,
 		page_limit,
 		handlePageChange,

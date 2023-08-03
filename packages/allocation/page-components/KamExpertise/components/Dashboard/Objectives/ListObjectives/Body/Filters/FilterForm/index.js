@@ -25,6 +25,10 @@ function FilterForm({
 	};
 
 	const onClickCancel = () => {
+		setParams((pv) => ({
+			...pv,
+			filters: {},
+		}));
 		setShowFilterPopover(false);
 	};
 
@@ -59,12 +63,12 @@ function FilterForm({
 					style={{ marginRight: 8 }}
 					onClick={onClickCancel}
 				>
-					Cancel
+					Reset All
 				</Button>
 				<Button
 					type="submit"
 					size="md"
-					themeType="secondary"
+					themeType="primary"
 				>
 					Apply
 				</Button>

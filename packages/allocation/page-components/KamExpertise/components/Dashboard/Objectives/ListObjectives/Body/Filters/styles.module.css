@@ -8,3 +8,21 @@
 .search_container {
 	min-width: 300px;
 }
+
+.btn_text {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.red_dot {
+	position: absolute;
+	top: 4px;
+	right: 16px;
+	width: 6px;
+	height: 6px;
+	margin-top: 4px;
+	background-color: #f00;
+	border-radius: 3px;
+}
