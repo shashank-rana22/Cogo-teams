@@ -6,6 +6,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import FEEDBACK_RESPONSE_API_MAPPING from '../configurations/post-feedback-response-api-mapping';
 import getMutatedControls from '../utils/get-mutated-controls';
 import getPayload from '../utils/get-payload';
 import getResponseControls from '../utils/get-response-controls';
@@ -29,11 +30,13 @@ const useCreateResponse = ({
 
 	const { query = {} } = router;
 
+	const actionType = detailsForm?.type;
+
 	const [{ loading }, trigger] = useAllocationRequest({
 
-		url     : '/feedback_response',
+		url     : FEEDBACK_RESPONSE_API_MAPPING[actionType]?.api,
 		method  : 'POST',
-		authkey : 'post_allocation_feedback_response',
+		authkey : FEEDBACK_RESPONSE_API_MAPPING[actionType]?.authkey,
 
 	}, { manual: true });
 
@@ -63,11 +66,14 @@ const useCreateResponse = ({
 				await trigger({
 					data: {
 						...payload,
-						...(detailsForm?.type === 'edit' && {
-							feedback_response_id: detailsForm?.initialData?.id,
+						...(actionType === 'edit' && {
+							feedback_response_id : detailsForm?.initialData?.id,
+							response_type        : undefined,
 						}),
-						source              : 'manual',
-						feedback_request_id : query.id,
+						...(actionType === 'create' && {
+							source              : 'manual',
+							feedback_request_id : query.id,
+						}),
 
 					},
 				});

@@ -89,6 +89,13 @@ const enrichment = [
 		service_name : 'allocation',
 	},
 	{
+		api          : 'post_allocation_feedback_response_update',
+		access_type  : 'private',
+		feature      : 'enrichment',
+		service_name : 'allocation',
+
+	},
+	{
 		api          : 'get_allocation_feedback_request_enrichment_eligibility',
 		access_type  : 'private',
 		feature      : 'enrichment',
