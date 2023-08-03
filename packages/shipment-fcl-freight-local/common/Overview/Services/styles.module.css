@@ -1,0 +1,57 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	background-color: #fff;
+}
+
+.services_container {
+	width: 100%;
+	padding: 0 5px 20px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		width: 100%;
+		margin: 0 10px 0 30%;
+	}
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 0;
+	}
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 19px;
+	color: #4f4f4f;
+}
+
+.upselling {
+	display: flex;
+	flex-wrap: wrap;
+
+	& > div {
+		flex: 0 0 23.5%;
+		margin: 0 8px 4px 0;
+	}
+}
+
+.header {
+	position: relative;
+	display: flex;
+	width: fit-content;
+	height: fit-content;
+	margin: 24px 0 16px;
+	font-weight: 600;
+	white-space: nowrap;
+
+	&::after {
+		position: absolute;
+		top: 22px;
+		display: inline-block;
+		width: 30%;
+		height: 2px;
+		content: "";
+		background-color: #ee3425;
+	}
+}

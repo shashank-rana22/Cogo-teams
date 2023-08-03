@@ -1,4 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AudienceComponent from './AudienceComponent';
@@ -17,16 +18,19 @@ const CONFIGURATION_MAPPING = {
 	topic    : CreateForm,
 };
 
+const TABS_MAPPING = {
+	audience_groups : AudienceComponent,
+	tags            : TagComponent,
+	topics          : TopicComponent,
+	keywords        : KeywordsComponent,
+};
+
 function ConfigurationEngine() {
 	const [activeTab, setActiveTab] = useState('audience_groups');
 
 	const props = useCreateFaq();
 
-	const {
-		configurationPage = '',
-		setConfigurationPage = () => {},
-		reset,
-	} = props;
+	const { configurationPage = '' } = props;
 
 	if (['audience', 'tag', 'topic'].includes(configurationPage)) {
 		const Component = CONFIGURATION_MAPPING[configurationPage];
@@ -48,36 +52,17 @@ function ConfigurationEngine() {
 				activeTab={activeTab}
 				onChange={setActiveTab}
 			>
-				<TabPanel name="audience_groups" title="Audience Groups">
-					<AudienceComponent
-						configurationPage={configurationPage}
-						setConfigurationPage={setConfigurationPage}
-					/>
-				</TabPanel>
+				{Object.keys(TABS_MAPPING).map((keys) => {
+					const Component = TABS_MAPPING[keys];
+					return (
+						<TabPanel name={keys} title={startCase(keys || '')}>
+							<Component
+								{...props}
+							/>
+						</TabPanel>
+					);
+				})}
 
-				<TabPanel name="tags" title="Tags">
-					<TagComponent
-						configurationPage={configurationPage}
-						setConfigurationPage={setConfigurationPage}
-						reset={reset}
-					/>
-				</TabPanel>
-
-				<TabPanel name="topics" title="Topics">
-					<TopicComponent
-						configurationPage={configurationPage}
-						setConfigurationPage={setConfigurationPage}
-						reset={reset}
-					/>
-				</TabPanel>
-
-				<TabPanel name="keywords" title="Keywords">
-					<KeywordsComponent
-						configurationPage={configurationPage}
-						setConfigurationPage={setConfigurationPage}
-						reset={reset}
-					/>
-				</TabPanel>
 			</Tabs>
 		</div>
 	);

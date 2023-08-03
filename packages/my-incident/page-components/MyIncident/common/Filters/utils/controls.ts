@@ -15,6 +15,26 @@ export const filterControls = (activeTab) => {
 						{ value: 'JOURNAL_VOUCHER_APPROVAL', label: 'Journal Voucher' },
 						{ value: 'ISSUE_CREDIT_NOTE', label: 'Request CN' },
 						{ value: 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL', label: 'IC JV Approval' },
+						{
+							value : 'ADVANCE_SECURITY_DEPOSIT',
+							label : 'Advance Container Security Deposit',
+						},
+						{
+							value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
+							label : 'Advance Container Security Deposit Refund',
+						},
+						{
+							value : 'PAYMENT_CONFIRMATION_APPROVAL',
+							label : 'Payment Confirmation Approval',
+						},
+						{
+							value : 'RECURRING_EXPENSE_APPROVAL',
+							label : 'Expense Configuration Approval',
+						},
+						{
+							value : 'OVERHEAD_APPROVAL',
+							label : 'Expense Approval',
+						},
 					],
 				},
 				{
@@ -53,6 +73,26 @@ export const filterControls = (activeTab) => {
 						{ value: 'JOURNAL_VOUCHER_APPROVAL', label: 'Journal Voucher' },
 						{ value: 'ISSUE_CREDIT_NOTE', label: 'Request CN' },
 						{ value: 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL', label: 'IC JV Approval' },
+						{
+							value : 'ADVANCE_SECURITY_DEPOSIT',
+							label : 'Advance Container Security Deposit',
+						},
+						{
+							value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
+							label : 'Advance Container Security Deposit Refund',
+						},
+						{
+							value : 'PAYMENT_CONFIRMATION_APPROVAL',
+							label : 'Payment Confirmation Approval',
+						},
+						{
+							value : 'RECURRING_EXPENSE_APPROVAL',
+							label : 'Expense Configuration Approval',
+						},
+						{
+							value : 'OVERHEAD_APPROVAL',
+							label : 'Expense Approval',
+						},
 					],
 				},
 				{
@@ -91,6 +131,26 @@ export const filterControls = (activeTab) => {
 						{ value: 'JOURNAL_VOUCHER_APPROVAL', label: 'Journal Voucher' },
 						{ value: 'ISSUE_CREDIT_NOTE', label: 'Request CN' },
 						{ value: 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL', label: 'IC JV Approval' },
+						{
+							value : 'ADVANCE_SECURITY_DEPOSIT',
+							label : 'Advance Container Security Deposit',
+						},
+						{
+							value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
+							label : 'Advance Container Security Deposit Refund',
+						},
+						{
+							value : 'PAYMENT_CONFIRMATION_APPROVAL',
+							label : 'Payment Confirmation Approval',
+						},
+						{
+							value : 'RECURRING_EXPENSE_APPROVAL',
+							label : 'Expense Configuration Approval',
+						},
+						{
+							value : 'OVERHEAD_APPROVAL',
+							label : 'Expense Approval',
+						},
 					],
 				},
 				{

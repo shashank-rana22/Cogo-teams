@@ -11,7 +11,20 @@ function asyncFieldsLocations2() {
 		},
 	};
 }
-
+function asyncFieldsPartnerUsersIds() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'user_id',
+		endpoint    : 'list_partner_users',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
 function asyncFieldsLocations() {
 	return {
 		valueKey    : 'id',
@@ -216,6 +229,15 @@ function asyncAllotBanks() {
 		},
 	};
 }
+function asyncShippingLines() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'get_saas_container_shipping_lines',
+		initialCall  : false,
+		microService : 'saas_traceability',
+	};
+}
 
 function asyncFieldsExpertiseConfigurations() {
 	return {
@@ -247,6 +269,24 @@ function asyncKamExpertiseRuleOptions() {
 		authkey      : 'get_allocation_kam_expertise_rule_options',
 		microService : 'allocation',
 		initialCall  : false,
+	};
+}
+
+function asyncOrganizationTradeParties() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'registration_number',
+		endpoint    : '/list_organization_trade_parties',
+		initialCall : true,
+	};
+}
+
+function asyncSearchProducts() {
+	return {
+		labelKey    : 'item_name',
+		valueKey    : 'code',
+		endpoint    : '/search_products_v2',
+		initialCall : true,
 	};
 }
 
@@ -285,6 +325,492 @@ function asyncListCogoEntity() {
 	};
 }
 
+function asyncAccountEngagementScoringEvents() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'name',
+		endpoint     : '/engagement_scoring_event_names',
+		authkey      : 'get_allocation_engagement_scoring_event_names',
+		microService : 'allocation',
+		initialCall  : true,
+	};
+}
+
+function asyncShipmentContainerDetails() {
+	return {
+		valueKey      : 'container_number',
+		finalLabelKey : 'container_number',
+		endpoint      : 'list_shipment_container_details',
+		initialCall   : true,
+		defaultParams : {},
+	};
+}
+
+function asyncFieldsTicketTypes() {
+	return {
+		labelKey     : 'TicketType',
+		valueKey     : 'TicketType',
+		endpoint     : 'default_types',
+		authkey      : 'get_tickets_default_types',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+		searchByq    : true,
+	};
+}
+
+function asyncListHsCodes() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_hs_codes',
+		initialCall : false,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListCurrency() {
+	return {
+		labelKey    : 'iso_code',
+		valueKey    : 'iso_code',
+		endpoint    : 'list_exchange_rate_currencies',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+function asyncListServetelAgents() {
+	return {
+		labelKey    : 'mobile_number',
+		valueKey    : 'id',
+		endpoint    : 'list_servetel_agents',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncJvList() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'payments/parent-jv/jv-category',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_jv_category',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncJournalCode() {
+	return {
+		labelKey     : 'description',
+		valueKey     : 'number',
+		endpoint     : 'payments/parent-jv/journal-code',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_journal_code',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncAccMode() {
+	return {
+		labelKey     : 'label',
+		valueKey     : 'label',
+		endpoint     : 'payments/parent-jv/acc-mode',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_acc_mode',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncIncidentSubtypeList() {
+	return {
+		labelKey     : 'incidentSubtype',
+		valueKey     : 'incidentSubtype',
+		endpoint     : 'incident-management/incident/incident-sub-type',
+		initialCall  : true,
+		authkey      : 'get_incident_management_incident_incident_sub_type',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncCodeMaster() {
+	return {
+		labelKey     : 'accountCode',
+		valueKey     : 'accountCode',
+		endpoint     : 'payments/parent-jv/gl-code-master',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_gl_code_master',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncListOrgTradeParties() {
+	return {
+		labelKey    : 'legal_business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_organization_trade_party_details',
+		initialCall : true,
+		params      : {
+			sage_organization_id_required : true,
+			filters                       : {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncAllocationRequestRejectionType() {
+	return {
+		labelKey     : 'reason',
+		valueKey     : 'reason',
+		endpoint     : '/request_rejection_reasons',
+		authkey      : 'get_allocation_request_rejection_reasons',
+		microService : 'allocation',
+		initialCall  : true,
+	};
+}
+
+function asyncPlanPricingList() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_plan_pricings',
+		initialCall : true,
+		params      : {
+			filters: { is_active: true },
+		},
+	};
+}
+
+function asyncQuotaList() {
+	return {
+		labelKey    : 'product_name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_products',
+		initialCall : true,
+	};
+}
+
+function asyncCommoditiesList() {
+	return {
+		labelKey     : 'description',
+		valueKey     : 'id',
+		endpoint     : 'saas/hs-code/list',
+		initialCall  : true,
+		authkey      : 'get_saas_hs_code_list',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+function asyncFortigoLocations() {
+	return {
+		labelKey    : 'location_name',
+		valueKey    : 'id',
+		endpoint    : 'list_shipment_fortigo_trip_locations',
+		initialCall : true,
+	};
+}
+
+function asyncOrganizationBranches() {
+	return {
+		valueKey      : 'id',
+		labelKey      : 'branch_name',
+		endpoint      : 'list_organization_branches',
+		initialCall   : true,
+		defaultParams : {
+			filters    : { status: 'active' },
+			page_limit : 10,
+		},
+	};
+}
+
+function asyncListFAQTopics() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_topics',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListFAQTags() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_tags',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListCourseCategories() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_course_categories',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListTests() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_tests',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListEmployees() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_employee_details',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListSquad() {
+	return {
+		labelKey    : 'squad_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_squads',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListSubChapters() {
+	return {
+		labelKey    : 'sub_chapter_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_sub_chapters',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListTribes() {
+	return {
+		labelKey    : 'tribe_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_tribes',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListChapter() {
+	return {
+		labelKey    : 'chapter_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_chapters',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListRoles() {
+	return {
+		labelKey    : 'role_name',
+		valueKey    : 'id',
+		endpoint    : 'list_roles',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListPromotions() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_promotions',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'published',
+			},
+			page_limit: 100,
+		},
+	};
+}
+function asyncListServiceLanes() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_service_lanes',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+		},
+	};
+}
+function asyncListVessels() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_vessels',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+		},
+	};
+}
+
+function asyncInsuranceCommoditiesList() {
+	return {
+		labelKey     : 'commodity',
+		valueKey     : 'id',
+		endpoint     : 'saas/insurance/list-commodities',
+		initialCall  : true,
+		authkey      : 'get_saas_insurance_list_commodities',
+		microService : 'business_finance',
+	};
+}
+
+function asyncListDunningTemplates() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_dunning_templates',
+		initialCall : true,
+	};
+}
+
+function asyncListOrganizationStakeholders() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'payments/dunning/organization-stakeholders',
+		initialCall : true,
+	};
+}
+
+function asyncListShipmentPendingTasks() {
+	return {
+		labelKey    : 'document_type',
+		valueKey    : 'document_type',
+		endpoint    : 'list_shipment_pending_tasks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListShipments() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_shipments',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListShipmentServices() {
+	return {
+		labelKey    : 'shipment_serial_id',
+		valueKey    : 'shipment_id',
+		endpoint    : 'list_shipment_services',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListAllManagers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_managers',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 20,
+		},
+	};
+}
+
+function asyncListExpenseCategories() {
+	return {
+		labelKey     : 'categoryName',
+		valueKey     : 'id',
+		endpoint     : 'purchase/expense/expense-category',
+		microService : 'business_finance',
+		authKey      : 'get_purchase_expense_expense_category',
+		initialCall  : true,
+		searchByq    : true,
+		params       : { pageSize: 10000 },
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -302,10 +828,53 @@ export {
 	asyncFieldsListAgents,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncShippingLines,
 	asyncFieldsExpertiseConfigurations,
 	asyncFieldsExpertiseBadgeName,
 	asyncKamExpertiseRuleOptions,
 	asyncKamExpertiseGroupOptions,
 	listVendors,
 	asyncListCogoEntity,
+	asyncListHsCodes,
+	asyncListCurrency,
+	asyncJvList,
+	asyncAccountEngagementScoringEvents,
+	asyncFieldsTicketTypes,
+	asyncOrganizationTradeParties,
+	asyncSearchProducts,
+	asyncShipmentContainerDetails,
+	asyncJournalCode,
+	asyncAccMode,
+	asyncCodeMaster,
+	asyncListOrgTradeParties,
+	asyncFieldsPartnerUsersIds,
+	asyncListServetelAgents,
+	asyncListPromotions,
+	asyncPlanPricingList,
+	asyncQuotaList,
+	asyncAllocationRequestRejectionType,
+	asyncCommoditiesList,
+	asyncFortigoLocations,
+	asyncOrganizationBranches,
+	asyncListFAQTopics,
+	asyncListFAQTags,
+	asyncListCourseCategories,
+	asyncListTests,
+	asyncListServiceLanes,
+	asyncListVessels,
+	asyncListEmployees,
+	asyncListSquad,
+	asyncListSubChapters,
+	asyncListTribes,
+	asyncListChapter,
+	asyncListRoles,
+	asyncInsuranceCommoditiesList,
+	asyncListDunningTemplates,
+	asyncListOrganizationStakeholders,
+	asyncListExpenseCategories,
+	asyncListAllManagers,
+	asyncListShipmentPendingTasks,
+	asyncListShipments,
+	asyncListShipmentServices,
+	asyncIncidentSubtypeList,
 };

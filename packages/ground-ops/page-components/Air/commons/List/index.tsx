@@ -1,6 +1,9 @@
-import { Pagination } from '@cogoport/components';
+import { Button, Pagination } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
-import React, { useState, ReactFragment } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState, ReactFragment, useEffect } from 'react';
+
+import useGetUsers from '../../hooks/useGetUsers';
 
 import EmptyState from './EmptyState';
 import { FunctionObjects, FieldType, ListDataType } from './Interfaces';
@@ -19,36 +22,68 @@ interface Props {
 	Child?: ReactFragment;
 	setViewDoc?: Function;
 	setItem?: Function;
+	listAPI?: Function;
+	edit?: boolean | string;
+	setEdit?: Function;
+	setGenerate?: Function;
 }
 
 function List({
 	fields = [],
 	data:listData = {},
 	loading = false,
-	page,
-	setPage,
-	functions,
+	page = 1,
+	setPage = () => {},
+	functions = {},
 	activeTab = '',
 	Child = () => {},
 	setViewDoc = () => {},
 	setItem = () => {},
+	listAPI = () => {},
+	edit = false,
+	setEdit = () => {},
+	setGenerate = () => {},
 } :Props) {
 	const { data = {} } = listData;
-	const { shipmentPendingTasks = [] } = data;
+	const { stakeholderIds = [], shipmentPendingTasks = [] } = data;
 	const [isOpen, setIsOpen] = useState(null);
+
+	const { data: userData = {}, listUsers } = useGetUsers({ stakeholderIds });
+
+	const { list: userList = [] } = userData;
+
+	const FINAL_DATA = [];
+	(userList || []).forEach((item) => {
+		(shipmentPendingTasks || []).map((itm) => {
+			if (item.user_id === itm.stakeholderId) {
+				const pushData = {
+					...itm,
+					stakeholderName: item.name,
+				};
+				FINAL_DATA.push(pushData);
+			}
+			return FINAL_DATA;
+		});
+	});
 
 	const handleProgramDetail = (itm) => {
 		setIsOpen(isOpen === null ? itm.id : null);
 		setIsOpen(itm.id);
 	};
 
-	const render = () => {
-		type TypeObject = string | number | Date | null | React.FC ;
-		const showlist:TypeObject = shipmentPendingTasks.length ? shipmentPendingTasks : Array(6).fill(1);
+	useEffect(() => {
+		if (!loading) {
+			listUsers();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [listData]);
 
-		if (loading || shipmentPendingTasks.length) {
-			return (showlist).map((singleitem) => (
-				<div className="card-list-data">
+	const render = () => {
+		const finalList = isEmpty(FINAL_DATA) ? shipmentPendingTasks : FINAL_DATA;
+
+		if (loading || finalList.length) {
+			return (finalList).map((singleitem) => (
+				<div className="card-list-data" key={singleitem.id}>
 					<ListItem
 						singleitem={singleitem}
 						fields={fields}
@@ -58,6 +93,10 @@ function List({
 						Child={Child}
 						setViewDoc={setViewDoc}
 						setItem={setItem}
+						listAPI={listAPI}
+						edit={edit}
+						setEdit={setEdit}
+						setGenerate={setGenerate}
 					/>
 					{singleitem.blCategory === 'hawb' && ['approval_pending', 'approved_awb'].includes(activeTab) && (
 						<div
@@ -81,6 +120,39 @@ function List({
 							)}
 						</div>
 					)}
+					{activeTab === 'amendment' && (
+						<div
+							style={{ '--length': isOpen ? 0 : '-20px' } as React.CSSProperties}
+							className={styles.amaendment_accordian_style}
+						>
+							{isOpen === singleitem.id ? (
+								<Button
+									themeType="linkUi"
+									onClick={() => {
+										setIsOpen(null);
+									}}
+								>
+									Show Less
+									<IcMArrowDown
+										style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
+									/>
+								</Button>
+							) : (
+								<Button
+									size="md"
+									themeType="linkUi"
+									onClick={() => {
+										handleProgramDetail(singleitem);
+									}}
+								>
+									<span>Show More</span>
+									<IcMArrowDown
+										style={{ cursor: 'pointer' }}
+									/>
+								</Button>
+							)}
+						</div>
+					)}
 				</div>
 			));
 		}
@@ -92,7 +164,7 @@ function List({
 			<ListHeader fields={fields} />
 			<div className={styles.scroll}>
 				{render()}
-				{!loading && shipmentPendingTasks.length > 0 ? (
+				{!loading && !isEmpty(shipmentPendingTasks) ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}

@@ -2,8 +2,10 @@ import { isEmpty } from '@cogoport/utils';
 
 function getFaqPayload({ values, editorValue, data, showAlias }) {
 	const {
-		faq_topics = [], faq_audiences = [], faq_tags = [], answers = [],
+		faq_topics = [], faq_tags = [], answers = [],
 	} = data || {};
+
+	const { faq_audiences = [], id : answerId } = answers?.[0] || {};
 
 	const {
 		question_abstract,
@@ -58,7 +60,7 @@ function getFaqPayload({ values, editorValue, data, showAlias }) {
 		inactive_topic_ids : !isEmpty(inactive_topic_ids) ? inactive_topic_ids : undefined,
 		inactive_tag_ids   : !isEmpty(inactive_tag_ids) ? inactive_tag_ids : undefined,
 		answers            : [{
-			id                    : answers?.[0]?.id || undefined,
+			id                    : answerId || undefined,
 			answer                : editorValue.toString('html'),
 			state                 : 'draft',
 			status                : 'active',

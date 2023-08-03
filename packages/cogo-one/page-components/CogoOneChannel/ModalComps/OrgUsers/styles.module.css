@@ -1,0 +1,21 @@
+.body_styles {
+	height: 85%;
+	max-height: unset !important;
+	overflow-y: hidden;
+
+	:global {
+		.ui_tab_container {
+			padding: 4px 8px;
+		}
+	}
+}
+
+.styled_modal {
+	width: 320px !important;
+	height: 480px !important;
+}
+
+.header_styles {
+	padding: 16px;
+	border-bottom: solid #dedede;
+}

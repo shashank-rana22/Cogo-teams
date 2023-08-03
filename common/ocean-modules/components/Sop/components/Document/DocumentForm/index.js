@@ -1,7 +1,7 @@
 import { Button, Loader } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
 
-import { BL_CATEGORY_MAPPING, BL_PREFERENCE_MAPPING } from '../../../../../contants/BL_MAPPING';
+import { BL_CATEGORY_MAPPING, BL_PREFERENCE_MAPPING } from '../../../../../constants/BL_MAPPING';
 import useCreateShipmentOperatingInstruction from '../../../../../hooks/useCreateShipmentOperatingInstruction';
 import useGetShipmentOperatingProcedure from '../../../../../hooks/useGetShipmentOperatingProcedure';
 import useUpdateShipmentOperatingInstruction from '../../../../../hooks/useUpdateShipmentOperatingInstruction';
@@ -62,11 +62,11 @@ function DocumentForm({
 		contact_number:contactNoOptions = [],
 	} = getDocumentOptions(orgData?.document_handling_preference || []);
 
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
-	DOCUMENT_FORM_FIELDS.forEach((k) => { if (sop_detail[k]) defaultValues[k] = sop_detail[k]; });
+	DOCUMENT_FORM_FIELDS.forEach((k) => { if (sop_detail[k]) DEFAULT_VALUES[k] = sop_detail[k]; });
 
-	const { control, watch, handleSubmit, formState:{ errors = {} } } = useForm({ defaultValues });
+	const { control, watch, handleSubmit, formState:{ errors = {} } } = useForm({ defaultValues: DEFAULT_VALUES });
 
 	const watchModeOfExecution = watch('preferred_mode_of_document_execution');
 
@@ -87,9 +87,9 @@ function DocumentForm({
 
 	return (
 		<div className={styles.form_container}>
-			{loading && <Loader />}
-			{!loading
-				? (
+			{loading
+				? <Loader />
+				: (
 					<form>
 						<div className={styles.form_item_container}>
 							<label className={styles.form_label}>BL Category</label>
@@ -106,7 +106,6 @@ function DocumentForm({
 						<div className={styles.form_item_container}>
 							<label className={styles.form_label}>
 								BL Preferences
-
 							</label>
 							<SelectController
 								size="sm"
@@ -119,10 +118,7 @@ function DocumentForm({
 						</div>
 
 						<div className={styles.form_item_container}>
-							<label className={styles.form_label}>
-								Delivery Preferences
-
-							</label>
+							<label className={styles.form_label}>Delivery Preferences</label>
 							<SelectController
 								size="sm"
 								name="preferred_mode_of_document_execution"
@@ -134,76 +130,76 @@ function DocumentForm({
 						</div>
 
 						{watchModeOfExecution !== 'telex'
-						&& (
-							<div className={styles.form_item_container}>
-								<label className={styles.form_label}>
-									{watchModeOfExecution === 'pickup' ? "Receiver's Name" : 'Name'}
+							? (
+								<div className={styles.form_item_container}>
+									<label className={styles.form_label}>
+										{watchModeOfExecution === 'pickup' ? "Receiver's Name" : 'Name'}
+									</label>
+									<SelectController
+										size="sm"
+										name="name"
+										control={control}
+										options={nameOptions}
+										rules={{ required: { value: true, message: 'Name is required' } }}
+									/>
+									{Error('name')}
+								</div>
+							) : null}
 
-								</label>
-								<SelectController
-									size="sm"
-									name="name"
-									control={control}
-									options={nameOptions}
-									rules={{ required: { value: true, message: 'Name is required' } }}
-								/>
-								{Error('name')}
-							</div>
-						)}
 						<div className={styles.contact_form_item}>
 							{watchModeOfExecution !== 'telex'
-							&& 						(
-								<div className={styles.country_code}>
-									<label className={styles.form_label}>
-										Country Code
+								? (
+									<>
+										<div className={styles.country_code}>
+											<label className={styles.form_label}>
+												Country Code
+											</label>
+											<SelectController
+												size="sm"
+												name="country_code"
+												control={control}
+												options={countryCodeOptions}
+												rules={{
+													required: { value: true, message: 'Country Code is required' },
+												}}
+											/>
+											{Error('country_code')}
+										</div>
 
-									</label>
-									<SelectController
-										size="sm"
-										name="country_code"
-										control={control}
-										options={countryCodeOptions}
-										rules={{ required: { value: true, message: 'Country Code is required' } }}
-									/>
-									{Error('country_code')}
-								</div>
-							)}
-
-							{watchModeOfExecution !== 'telex'
-							&& 						(
-								<div className={styles.contact_number}>
-									<label className={styles.form_label}>
-										{watchModeOfExecution === 'pickup' ? "Receiver's Contact Number" : 'Contact'}
-									</label>
-									<SelectController
-										size="sm"
-										name="contact_no"
-										control={control}
-										options={contactNoOptions}
-										rules={{ required: { value: true, message: 'Contact is required' } }}
-									/>
-									{Error('contact_no')}
-								</div>
-							)}
+										<div className={styles.contact_number}>
+											<label className={styles.form_label}>
+												{watchModeOfExecution === 'pickup'
+													? "Receiver's Contact Number" : 'Contact'}
+											</label>
+											<SelectController
+												size="sm"
+												name="contact_no"
+												control={control}
+												options={contactNoOptions}
+												rules={{ required: { value: true, message: 'Contact is required' } }}
+											/>
+											{Error('contact_no')}
+										</div>
+									</>
+								) : null}
 						</div>
 
 						{watchModeOfExecution !== 'telex'
-						&& 						(
-							<div className={styles.form_item_container}>
-								<label className={styles.form_label}>
-									{watchModeOfExecution === 'pickup' ? 'Pickup Address' : 'Address'}
-
-								</label>
-								<SelectController
-									size="sm"
-									name="address"
-									control={control}
-									options={addressOptions}
-									rules={{ required: { value: true, message: 'Address is required' } }}
-								/>
-								{Error('address')}
-							</div>
-						)}
+							? (
+								<div className={styles.form_item_container}>
+									<label className={styles.form_label}>
+										{watchModeOfExecution === 'pickup' ? 'Pickup Address' : 'Address'}
+									</label>
+									<SelectController
+										size="sm"
+										name="address"
+										control={control}
+										options={addressOptions}
+										rules={{ required: { value: true, message: 'Address is required' } }}
+									/>
+									{Error('address')}
+								</div>
+							) : null}
 
 						<div className={styles.form_action}>
 							<div className={styles.cancel}>
@@ -229,7 +225,7 @@ function DocumentForm({
 
 						</div>
 					</form>
-				) : null}
+				)}
 		</div>
 	);
 }

@@ -1,6 +1,6 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -23,13 +23,16 @@ interface OutsatndingProps {
 
 interface DateAndAccountProps {
 	outstandingData?: OutsatndingProps,
-	outstandingLoading?: boolean
+	outstandingLoading?: boolean,
+	entityCode?: string,
 }
 
-function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountProps) {
+function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: DateAndAccountProps) {
 	const {
 		overallStats = {},
 	} = outstandingData || {};
+
+	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	return (
 		<div>
@@ -41,31 +44,32 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 						: (
 							<>
 								<div className={styles.account_receivables_line}>
-									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
-									</div>
 									<div className={styles.account_receivables_amount}>
 										<Tooltip content={(
 											<div>
-												{getFormattedPrice(
-													overallStats?.openInvoicesAmount || 0,
-													overallStats?.dashboardCurrency,
-
-												)}
+												{formatAmount({
+													amount   : overallStats?.openInvoicesAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || currency,
+													options  : {
+														style           : 'currency',
+														currencyDisplay : 'code',
+													},
+												})}
 											</div>
 										)}
 										>
 											<div className={styles.wrapper}>
-												{getFormattedPrice(
-													overallStats?.openInvoicesAmount || 0,
-													overallStats?.dashboardCurrency,
-													{
+												{formatAmount({
+													amount   : overallStats?.openInvoicesAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || currency,
+													options  : {
 														notation              : 'compact',
 														compactDisplay        : 'short',
 														maximumFractionDigits : 2,
-														style                 : 'decimal',
+														style                 : 'currency',
+														currencyDisplay       : 'code',
 													},
-												)}
+												})}
 											</div>
 
 										</Tooltip>
@@ -98,33 +102,36 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 						: (
 							<>
 								<div className={styles.account_receivables_open_line}>
-									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
-									</div>
 
 									<div
 										className={styles.account_receivables_amount}
 									>
 										<Tooltip content={(
 											<div>
-												{getFormattedPrice(
-													overallStats?.onAccountAmount || 0,
-													overallStats?.dashboardCurrency,
-												)}
+												{formatAmount({
+													amount   : overallStats?.onAccountAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || currency,
+													options  : {
+														style           : 'currency',
+														currencyDisplay : 'code',
+													},
+												})}
 											</div>
 										)}
 										>
 											<div className={styles.wrapper}>
-												{getFormattedPrice(
-													overallStats?.onAccountAmount || 0,
-													overallStats?.dashboardCurrency,
-													{
+												{formatAmount({
+													amount   : overallStats?.onAccountAmount as any || 0,
+													currency :	overallStats?.dashboardCurrency || currency,
+													options  :	{
 														notation              : 'compact',
 														compactDisplay        : 'short',
 														maximumFractionDigits : 2,
-														style                 : 'decimal',
+														style                 : 'currency',
+														currencyDisplay       : 'code',
+
 													},
-												)}
+												})}
 											</div>
 
 										</Tooltip>
@@ -146,33 +153,36 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 						: (
 							<>
 								<div className={styles.account_receivables_open_line}>
-									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
-									</div>
 
 									<div
 										className={styles.account_receivables_amount}
 									>
 										<Tooltip content={(
 											<div>
-												{getFormattedPrice(
-													overallStats?.totalOutstandingAmount || 0,
-													overallStats?.dashboardCurrency,
-												)}
+												{formatAmount({
+													amount   : overallStats?.totalOutstandingAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || currency,
+													options  : {
+														style           : 'currency',
+														currencyDisplay : 'code',
+													},
+												})}
 											</div>
 										)}
 										>
 											<div className={styles.wrapper}>
-												{getFormattedPrice(
-													overallStats?.totalOutstandingAmount || 0,
-													overallStats?.dashboardCurrency,
-													{
+												{formatAmount({
+													amount   : overallStats?.totalOutstandingAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || currency,
+													options  : {
 														notation              : 'compact',
 														compactDisplay        : 'short',
 														maximumFractionDigits : 2,
-														style                 : 'decimal',
+														style                 : 'currency',
+														currencyDisplay       : 'code',
+
 													},
-												)}
+												})}
 											</div>
 
 										</Tooltip>

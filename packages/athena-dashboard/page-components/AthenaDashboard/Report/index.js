@@ -1,6 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Table, Placeholder } from '@cogoport/components';
-import globals from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import Map from '../../../common/responsive-choropleth';
@@ -11,8 +11,6 @@ import useSetReport from '../hooks/useSetReport';
 import styles from './styles.module.css';
 
 function Report() {
-	const { currency_code:{ INR } } = globals;
-
 	const {
 		hsdesc,
 		share,
@@ -130,7 +128,7 @@ function Report() {
 								<div>
 									Rs.
 									{' '}
-									{formatAmount({ amount: item.total, currency: INR })}
+									{formatAmount({ amount: item.total, currency: GLOBAL_CONSTANTS.currency_code.INR })}
 									{' '}
 									(
 									{item.percent_share.toFixed(2)}

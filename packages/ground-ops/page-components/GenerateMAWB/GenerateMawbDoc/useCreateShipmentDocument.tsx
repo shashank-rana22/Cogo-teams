@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRequestAir } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -14,7 +15,7 @@ interface Props {
 	setGenerate?:Function;
 	setEdit?:Function;
 	activeCategory?: string;
-	hawbDetails?: Array<string>;
+	hawbDetails?: Array<NestedObj>;
 	setHawbDetails?: Function;
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
@@ -35,28 +36,26 @@ const useCreateShipmentDocument = ({
 	handleClick = () => {},
 	activeHawb = {},
 }:Props) => {
-	let api = 'create_shipment_document';
-	if (edit && activeCategory === 'hawb') {
-		if (activeHawb.isNew === false) {
-			api = 'update_shipment_document';
-		} else {
-			api = 'create_shipment_document';
-		}
-	} else if (edit && activeCategory === 'mawb') {
-		api = 'update_shipment_document';
+	let authKey = 'post_air_coe_documents';
+	let method = 'POST';
+
+	if ((activeCategory === 'hawb' && activeHawb.isNew === false) || (edit && activeCategory === 'mawb')) {
+		authKey = 'put_air_coe_documents';
+		method = 'PUT';
 	}
 
 	const [success, setSuccess] = useState(false);
 
-	const [{ loading }, trigger] = useRequest({
-		url    : `${api}`,
-		method : 'POST',
+	const [{ loading }, trigger] = useRequestAir({
+		url: '/air-coe/documents',
+		method,
+		authKey,
 	});
 
 	const { hawbData, getHawb, hawbSuccess, setHawbSuccess } = useGetHawb();
 
 	useEffect(() => {
-		if (hawbSuccess && !edit) {
+		if (hawbSuccess) {
 			const updatedDetails = (hawbDetails || []).map((item:any) => {
 				if (item.id === activeHawb.id) {
 					return {
@@ -96,7 +95,7 @@ const useCreateShipmentDocument = ({
 				setEdit(false);
 			} else {
 				if (!edit) { setHawbDetails([...hawbDetails, { id: uuid(), documentNo: null, isNew: true }]); }
-				getHawb(edit ? res?.data?.id : res?.data?.ids[0]);
+				getHawb(!activeHawb.isNew ? res?.data?.id : res?.data?.ids?.[GLOBAL_CONSTANTS.zeroth_index]);
 			}
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || error?.message || 'Failed to save Document');

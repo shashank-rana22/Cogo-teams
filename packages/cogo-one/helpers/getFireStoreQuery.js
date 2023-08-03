@@ -1,91 +1,69 @@
-import { orderBy, where } from 'firebase/firestore';
+import { orderBy } from 'firebase/firestore';
+
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
+
+import getQueryFilterMapping from './getQueryFilterMapping';
+
+const BULK_ASSIGN_SEEN_MINUTES = 15;
+
+const TAB_WISE_QUERY_KEY_MAPPING = {
+	all         : 'all_chats_base_query',
+	observer    : 'observer_chats_base_query',
+	groups      : 'group_chats_query',
+	teams       : 'teams_chats_base_query',
+	contacts    : 'contacts_base_query',
+	kamContacts : 'kam_contacts_base_query',
+};
 
 function getFireStoreQuery({
 	userId,
 	appliedFilters,
-	isomniChannelAdmin = false,
-	showBotMessages = false,
+	isBotSession = false,
+	viewType,
+	activeSubTab,
 }) {
-	let queryFilters = [];
-	let mainQuery = [];
+	const filterId = appliedFilters.assigned_to === 'me'
+		? userId
+		: appliedFilters?.assigned_agent;
 
-	const isObserver = ['adminSession', 'botSession'].includes(appliedFilters?.observer) || false;
+	const currentTime = new Date();
+	currentTime.setMinutes(currentTime.getMinutes() - BULK_ASSIGN_SEEN_MINUTES);
+	const epochTimestamp = currentTime.getTime();
 
-	if (isomniChannelAdmin) {
-		mainQuery = [];
-	} else {
-		mainQuery = [
-			!isObserver ? where('support_agent_id', '==', userId) : where('spectators_ids', 'array-contains', userId),
-		];
-	}
-
-	const sessionTypeQuery = showBotMessages
-		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
-
-	Object.keys(appliedFilters).forEach((item) => {
-		if (item === 'channels') {
-			queryFilters = [
-				...queryFilters,
-				where('channel_type', 'in', appliedFilters[item]),
-			];
-		} else if (item === 'status') {
-			if (appliedFilters[item] === 'unread') {
-				queryFilters = [
-					...queryFilters,
-					where('has_admin_unread_messages', '==', true),
-				];
-			} else if (appliedFilters[item] === 'seen_by_user') {
-				const currentTime = new Date();
-				currentTime.setMinutes(currentTime.getMinutes() - 15);
-				const epochTimestamp = currentTime.getTime();
-
-				queryFilters = [
-					...queryFilters,
-					where('last_message_document.conversation_type', '==', 'received'),
-					where('last_message_document.message_type', '==', 'text'),
-					where('last_message_document.created_at', '<=', epochTimestamp),
-					orderBy('last_message_document.created_at', 'desc'),
-				];
-			}
-		} else if (item === 'escalation') {
-			queryFilters = [
-				...queryFilters,
-				where('chat_status', '==', appliedFilters[item]),
-			];
-		} else if (item === 'assigned_to') {
-			let filterId = '';
-			if (appliedFilters.assigned_to === 'me') {
-				filterId = userId;
-			} else {
-				filterId = appliedFilters?.assigned_agent;
-			}
-			queryFilters = [
-				...queryFilters,
-				!showBotMessages ? where('support_agent_id', '==', filterId)
-					: where('spectators_ids', 'array-contains', filterId),
-			];
-		} else if (
-			(
-				(item === 'observer' && appliedFilters[item] === 'chat_tags')
-				|| 	(isomniChannelAdmin && item === 'chat_tags')
-			)
-			&& 	!showBotMessages
-		) {
-			queryFilters = [
-				...queryFilters,
-				where('chat_tags', 'array-contains', appliedFilters?.chat_tags),
-			];
-		} else if (item === 'shipment_filters' && appliedFilters[item]?.includes('likely_to_book_shipment')) {
-			queryFilters = [
-				...queryFilters,
-				where('is_likely_to_book_shipment', '==', true),
-			];
-		}
+	const queryFilterMapping = getQueryFilterMapping({
+		appliedFilters,
+		isBotSession,
+		epochTimestamp,
+		filterId,
 	});
 
-	const firestoreQuery = [...queryFilters, ...mainQuery, sessionTypeQuery, orderBy('new_message_sent_at', 'desc')];
+	const queryFilters = Object.keys(appliedFilters).reduce(
+		(accumulator, currentValue) => [
+			...accumulator,
+			...(queryFilterMapping?.[currentValue] || []),
+		],
+		[],
+	);
 
-	return firestoreQuery;
+	const tabWiseQuery = (
+		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.[TAB_WISE_QUERY_KEY_MAPPING[activeSubTab]]?.({
+			agentId: userId,
+		}) || []
+	);
+
+	const sessionTypeQuery = (
+		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query?.({
+			sessionType: isBotSession ? 'bot' : 'admin',
+			activeSubTab,
+		}) || []
+	);
+
+	return [
+		...tabWiseQuery,
+		...sessionTypeQuery,
+		...queryFilters,
+		orderBy('new_message_sent_at', 'desc'),
+	];
 }
 
 export default getFireStoreQuery;

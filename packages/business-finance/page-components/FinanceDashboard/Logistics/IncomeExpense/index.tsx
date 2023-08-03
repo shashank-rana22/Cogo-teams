@@ -147,7 +147,7 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 						</div>
 						<div style={{ marginTop: '10px', marginLeft: '20px' }}>
 							<Popover render={content()} caret={false} placement="bottom">
-								<div style={{ width: '140px', padding: '-10px' }}>
+								<div className={styles.input_div}>
 									<Input
 										placeholder="Select Year Mode"
 										size="sm"
@@ -158,7 +158,7 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 						</div>
 					</div>
 
-					<div style={{ display: 'flex', gap: '8px', marginRight: '50px' }}>
+					<div className={styles.toggle_div}>
 						<div style={{ marginTop: '10px' }}>Contribution Margin Line Graph</div>
 						<Toggle
 							name="a1"

@@ -1,28 +1,10 @@
-.list_container {
-	min-height: 70vh;
-	background: var(--color-secondary-5);
-	border-radius: 4px;
-
-	:global {
-		.ui_pagination_table_container {
-			justify-content: flex-end;
-			padding: 10px 0 4px;
-			font-size: var(--font-size-md);
-		}
-	}
-}
-
-.header {
+.flex_row {
 	display: flex;
-	align-items: flex-end;
+	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 10px;
-
-	> h1 {
-		margin-bottom: 0;
-	}
+	margin-bottom: 22px;
 }
 
-.loading {
-	padding-top: 14px;
+.stepper_container {
+	margin-left: 16px;
 }

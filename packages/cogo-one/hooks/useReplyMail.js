@@ -1,24 +1,25 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { usePublicRequest } from '@cogoport/request';
+import { useLensRequest } from '@cogoport/request';
+
+import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
+
+const API_MAPPING = {
+	reply     : 'reply_mail',
+	reply_all : 'reply_all',
+	forward   : 'forward_mail',
+	send_mail : 'send_mail',
+};
 
 function useReplyMail(mailProps) {
 	const {
 		setEmailState = () => {},
-		setRecipientArray = () => {},
-		setBccArray = () => {},
 		buttonType = '',
 		setButtonType = () => {},
 	} = mailProps;
 
-	const apiName = {
-		reply     : 'reply_mail',
-		reply_all : 'reply_all',
-		forward   : 'forward_mail',
-		send_mail : 'send_mail',
-	};
-	const [{ loading }, trigger] = usePublicRequest({
-		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/${apiName[buttonType]}`,
+	const [{ loading }, trigger] = useLensRequest({
+		url    : `/${API_MAPPING[buttonType]}`,
 		method : 'POST',
 
 	}, { manual: true });
@@ -29,16 +30,10 @@ function useReplyMail(mailProps) {
 				data: payload,
 			});
 			Toast.success('Mail Sent Successfully.');
-		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
-		} finally {
-			setEmailState({
-				body    : '',
-				subject : '',
-			});
-			setRecipientArray([]);
-			setBccArray([]);
+			setEmailState(DEFAULT_EMAIL_STATE);
 			setButtonType('');
+		} catch (error) {
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

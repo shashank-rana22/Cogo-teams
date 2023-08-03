@@ -1,22 +1,24 @@
 export interface FilterInterface {
-	year?:any
-	month?:any
-	shipmentType?:string
-	profitAmount?:string
-	profitType?:string
-	tradeType?:string
-	service?:string
-	range?:string
-	jobState?:string
-	query?:string
-	profitAmountUpper?:string
-	profitPercentUpper?:string
-	date?:any
-	profitPercent?:string
-	sortBy?:string
-	page?:number,
-	sortType?:string
-	entity?:string
+	year?: any
+	month?: any
+	shipmentType?: string
+	profitAmount?: string
+	profitType?: string
+	tradeType?: string
+	service?: string
+	range?: string
+	jobState?: string
+	query?: string
+	profitAmountUpper?: string
+	profitPercentUpper?: string
+	date?: any
+	profitPercent?: string
+	sortBy?: string
+	page?: number,
+	sortType?: string
+	entity?: string
+	milestone?: string,
+	channel?: string
 }
 
 export interface ColumnInterface {

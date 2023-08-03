@@ -1,0 +1,51 @@
+.buttons_container {
+	display: flex;
+	gap: 1rem;
+	justify-content: flex-end;
+	padding: 1rem;
+}
+
+.Choose_from_wallet {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	padding: 10px 45px;
+	color: #393f70;
+	border: 1px dashed #e0e0e0;
+	border-radius: 8px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.upload_wrapper {
+	padding: 0 16px;
+
+	.core-ui-uploaded-file {
+		width: max-content;
+		padding: 4px 16px;
+		border: 1px dashed #e0e0e0;
+		border-radius: 4px;
+	}
+}
+
+.separator {
+	width: max-content;
+	margin: 16px auto;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 14px;
+	color: #393f70;
+	letter-spacing: 0.02em;
+}
+
+.styled_button {
+	display: flex;
+	justify-content: center;
+}
+
+.label {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}

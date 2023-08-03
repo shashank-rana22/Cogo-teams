@@ -72,7 +72,7 @@ function Navigation(props) {
 	const navigationApis = getNavOptions(navigation.key);
 
 	const navPermissions = (roleData?.old_permissions || [])
-		.find((nav) => nav.navigation === navigation.key);
+		.find((nav) => nav.navigation === navigation.key && nav.status === 'active');
 
 	const isActive = navPermissions?.status === 'active';
 

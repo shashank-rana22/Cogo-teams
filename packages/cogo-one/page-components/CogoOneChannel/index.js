@@ -1,257 +1,245 @@
-import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth, signInWithCustomToken } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
-import { ANDRIOD_APK } from '../../constants';
-import { hasPermission } from '../../constants/IDS_CONSTANTS';
+import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
+import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
-import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
+import useGetAgentPreference from '../../hooks/useGetAgentPreference';
+import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
-import useListChats from '../../hooks/useListChats';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
+import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
-import AgentModal from './AgentModal';
+import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
 import Customers from './Customers';
-import DialCallModal from './DialCallModal';
 import EmptyChatPage from './EmptyChatPage';
+import HeaderBar from './HeaderBar';
+import ModalComp from './ModalComps';
+import PortPairOrgFilters from './PortPairOrgFilters';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
 function CogoOne() {
 	const {
-		agentStatus = {},
-		fetchworkPrefernce = () => {},
-	} = useAgentWorkPrefernce();
+		query: {
+			assigned_chat = '',
+			channel_type = '',
+		},
+	} = useRouter();
 
-	const { status = '' } = agentStatus || {};
+	const { userId, token, userEmailAddress } = useSelector(({ profile, general }) => ({
+		userId           : profile?.user?.id,
+		token            : general.firestoreToken,
+		userEmailAddress : profile?.user?.email,
+	}));
 
-	const [activeTab, setActiveTab] = useState('message');
-	const [toggleStatus, setToggleStatus] = useState(false);
-	const [activeVoiceCard, setActiveVoiceCard] = useState({});
-	const [searchValue, setSearchValue] = useState('');
-	const [showBotMessages, setShowBotMessages] = useState(false);
-	const [filterVisible, setFilterVisible] = useState(false);
-	const [openModal, setOpenModal] = useState(false);
-	const { suggestions = [] } = useListChatSuggestions();
-	const [showDialModal, setShowDialModal] = useState(false);
-
-	const [activeMail, setActiveMail] = useState({});
-	const [recipientArray, setRecipientArray] = useState([]);
-	const [bccArray, setBccArray] = useState([]);
-	const [buttonType, setButtonType] = useState('');
-	const [emailState, setEmailState] = useState({
-		subject : '',
-		body    : '',
+	const [activeTab, setActiveTab] = useState({
+		tab               : 'message',
+		subTab            : 'all',
+		hasNoFireBaseRoom : false,
+		data              : assigned_chat ? {
+			id: assigned_chat,
+			channel_type,
+		} : {},
 	});
 
-	const [agentDetails, setAgentDetails] = useState(false);
-
+	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
+	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [modalType, setModalType] = useState({ type: null, data: {} });
-	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+	const [buttonType, setButtonType] = useState('');
+	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
+	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
+	const [openKamContacts, setOpenKamContacts] = useState(false);
+	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
+	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
+	const [autoAssignChats, setAutoAssignChats] = useState(true);
+
+	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
+		activeMessageCard : activeTab?.data,
+		activeVoiceCard   : activeTab?.data,
+		activeTab         : activeTab?.tab,
+		setRaiseTicketModal,
+		agentId           : userId,
+	});
+
+	const { viewType, loading: workPrefernceLoading = false } = useAgentWorkPrefernce();
+
+	const {
+		fetchWorkStatus = () => {},
+		agentWorkStatus = {},
+		preferenceLoading = false,
+	} = useGetAgentPreference();
+
+	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
+
+	const { suggestions = [] } = useListChatSuggestions();
+	const { tagOptions = [] } = useListAssignedChatTags();
+
+	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 
 	const firestore = getFirestore(app);
 
-	const { userRoleIds, userId, emailAddress } = useSelector(({ profile }) => ({
-		userRoleIds  : profile.partner?.user_role_ids || [],
-		userId       : profile?.user?.id,
-		emailAddress : profile?.user?.email,
-	}));
-
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
-
-	const {
-		loading:statusLoading,
-		updateUserStatus = () => {},
-	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
-
-	const { tagOptions = [] } = useListAssignedChatTags();
 	const mailProps = {
-		activeMail,
-		setActiveMail,
-		recipientArray,
-		setRecipientArray,
-		bccArray,
-		setBccArray,
 		buttonType,
 		setButtonType,
 		emailState,
 		setEmailState,
-		emailAddress,
+		userEmailAddress,
+		activeMailAddress,
+		setActiveMailAddress,
+		viewType,
+		activeMail    : activeTab?.data,
+		setActiveMail : (val) => {
+			setActiveTab((prev) => ({ ...prev, data: val }));
+		},
 	};
 
-	const {
-		chatsData = {},
-		setActiveMessage = () => {},
-		activeMessageCard = {},
-		setAppliedFilters = () => {},
-		appliedFilters,
-		loading,
-		setActiveCard,
-		activeCardId,
-		firstLoading,
-		updateLeaduser,
-		handleScroll,
-		activeRoomLoading,
-	} = useListChats({
-		firestore,
-		userId,
-		isomniChannelAdmin,
-		showBotMessages,
-		searchValue,
-	});
-
-	const renderComponent = () => {
-		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
-			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
-			|| (activeTab === 'mail' && !isEmpty(activeMail))) {
-			return (
-				<>
-					<Conversations
-						activeTab={activeTab}
-						activeMessageCard={activeMessageCard}
-						firestore={firestore}
-						activeVoiceCard={activeVoiceCard}
-						suggestions={suggestions}
-						userId={userId}
-						isomniChannelAdmin={isomniChannelAdmin}
-						mailProps={mailProps}
-						setActiveMessage={setActiveMessage}
-					/>
-					{activeTab !== 'mail' && (
-						<ProfileDetails
-							activeMessageCard={activeMessageCard}
-							activeTab={activeTab}
-							activeVoiceCard={activeVoiceCard}
-							updateLeaduser={updateLeaduser}
-							activeCardId={activeCardId}
-							setActiveMessage={setActiveMessage}
-							setModalType={setModalType}
-							activeRoomLoading={activeRoomLoading}
-						/>
-					)}
-				</>
-			);
-		}
-		return (
-			<EmptyChatPage
-				displayMessage={activeTab === 'message' ? 'chat' : 'call log'}
-			/>
-		);
+	const commonProps = {
+		setSendBulkTemplates,
+		setActiveTab,
+		selectedAutoAssign,
+		setAutoAssignChats,
 	};
 
-	useEffect(() => {
-		if (!firstLoading) {
-			setActiveVoiceCard({});
-			setActiveCard({});
-			setActiveMail({});
-		}
-	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
+	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
+
+	const { user_id = '' } = tabData || {};
+
+	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
+	const orgId = activeTab?.tab === 'message'
+		? formattedMessageData?.organization_id
+		: activeTab?.data?.organization_id;
 
 	useEffect(() => {
-		if (isomniChannelAdmin) {
-			setAppliedFilters({});
-		}
-	}, [setAppliedFilters, isomniChannelAdmin, showBotMessages]);
+		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
+			const auth = getAuth();
 
-	useEffect(() => {
-		setToggleStatus(status === 'active');
-	}, [status]);
+			signInWithCustomToken(auth, token).catch((error) => {
+				console.error(error.message);
+			});
+		}
+	}, [token]);
 
 	return (
 		<>
-			{isomniChannelAdmin && (
-				<div className={styles.settings}>
-					<IcMSettings
-						className={styles.settings_icon}
-						onClick={() => setAgentDetails(true)}
-					/>
-				</div>
-			)}
+			<HeaderBar
+				firestore={firestore}
+				viewType={viewType}
+				fetchWorkStatus={fetchWorkStatus}
+				agentStatus={agentWorkStatus}
+				data={data}
+				agentTimeline={agentTimeline}
+				preferenceLoading={preferenceLoading}
+				timelineLoading={timelineLoading}
+			/>
 			<div className={styles.layout_container}>
-				<Customers
-					isomniChannelAdmin={isomniChannelAdmin}
-					setActiveMessage={setActiveMessage}
-					activeMessageCard={activeMessageCard}
-					setActiveVoiceCard={setActiveVoiceCard}
-					activeVoiceCard={activeVoiceCard}
-					setSearchValue={setSearchValue}
-					searchValue={searchValue}
-					setFilterVisible={setFilterVisible}
-					filterVisible={filterVisible}
-					activeTab={activeTab}
-					setActiveTab={setActiveTab}
-					setToggleStatus={setToggleStatus}
-					toggleStatus={toggleStatus}
-					chatsData={chatsData}
-					appliedFilters={appliedFilters}
-					setAppliedFilters={setAppliedFilters}
-					fetchworkPrefernce={fetchworkPrefernce}
-					messagesLoading={loading}
-					setOpenModal={setOpenModal}
-					openModal={openModal}
-					updateUserStatus={updateUserStatus}
-					statusLoading={statusLoading}
-					activeCardId={activeCardId}
-					setShowBotMessages={setShowBotMessages}
-					showBotMessages={showBotMessages}
-					setShowDialModal={setShowDialModal}
-					activeMail={activeMail}
-					setActiveMail={setActiveMail}
-					userId={userId}
-					handleScroll={handleScroll}
-					setModalType={setModalType}
-					modalType={modalType}
-					tagOptions={tagOptions}
-					mailProps={mailProps}
-					firestore={firestore}
-				/>
-
-				<div className={styles.chat_details_continer}>
-					{renderComponent()}
-				</div>
-				<div
-					className={styles.download_apk}
-				>
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.download_div}
-						onClick={() => window.open(ANDRIOD_APK, '_blank')}
-					>
-						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg"
-							alt="bot"
-							className={styles.bot_icon_styles}
-						/>
-						<div className={styles.text_styles}>
-							<div className={styles.flex}>
-								<IcMDownload
-									className={styles.download_icon}
-								/>
-								<div>Get the</div>
-							</div>
-							app now
-						</div>
-					</div>
-				</div>
-				{showDialModal && (
-					<DialCallModal
-						setShowDialModal={setShowDialModal}
-						showDialModal={showDialModal}
+				<div className={styles.customers_layout}>
+					<Customers
+						viewType={viewType}
+						activeTab={activeTab}
+						userId={userId}
+						setModalType={setModalType}
+						modalType={modalType}
+						tagOptions={tagOptions}
+						mailProps={mailProps}
+						firestore={firestore}
+						suggestions={suggestions}
+						workPrefernceLoading={workPrefernceLoading}
+						setOpenKamContacts={setOpenKamContacts}
+						agentStatus={agentWorkStatus}
+						fetchworkPrefernce={fetchWorkStatus}
+						agentTimeline={agentTimeline}
+						setSelectedAutoAssign={setSelectedAutoAssign}
+						autoAssignChats={autoAssignChats}
+						{...commonProps}
 					/>
-				)}
+				</div>
+
+				{sendBulkTemplates ? (
+					<PortPairOrgFilters
+						setSelectedAutoAssign={setSelectedAutoAssign}
+						sendBulkTemplates={sendBulkTemplates}
+						{...commonProps}
+					/>
+				) : null}
+
+				{isEmpty(activeTab?.data)
+					? (
+						<div className={styles.empty_page}>
+							<EmptyChatPage
+								activeTab={activeTab}
+								viewType={viewType}
+								setActiveTab={setActiveTab}
+							/>
+						</div>
+					) : (
+						<>
+							<div
+								className={activeTab?.tab === 'mail'
+									? styles.mail_layout : styles.chats_layout}
+							>
+								<Conversations
+									activeTab={activeTab}
+									firestore={firestore}
+									userId={userId}
+									setRaiseTicketModal={setRaiseTicketModal}
+									viewType={viewType}
+									setActiveRoomLoading={setActiveRoomLoading}
+									mailProps={mailProps}
+									setActiveTab={setActiveTab}
+									suggestions={suggestions}
+									setModalType={setModalType}
+								/>
+							</div>
+
+							{activeTab?.tab !== 'mail' && (
+								<div className={cl`${styles.user_profile_layout} 
+								${(hasNoFireBaseRoom && !user_id) ? styles.disable_user_profile : ''}`}
+								>
+									<ProfileDetails
+										activeMessageCard={activeTab?.data}
+										activeTab={activeTab?.tab}
+										activeVoiceCard={activeTab?.data}
+										activeCardId={activeTab?.data?.id}
+										setModalType={setModalType}
+										activeRoomLoading={activeRoomLoading}
+										setRaiseTicketModal={setRaiseTicketModal}
+										zippedTicketsData={zippedTicketsData}
+										viewType={viewType}
+										firestore={firestore}
+										userId={userId}
+										setActiveTab={setActiveTab}
+										formattedMessageData={formattedMessageData}
+										orgId={orgId}
+										mailProps={mailProps}
+									/>
+									{(hasNoFireBaseRoom && !user_id) && <div className={styles.overlay_div} />}
+								</div>
+							)}
+						</>
+					)}
+				<AndroidApp />
 			</div>
-			{agentDetails && (
-				<AgentModal
-					agentDetails={agentDetails}
-					setAgentDetails={setAgentDetails}
-				/>
-			)}
+
+			<ModalComp
+				raiseTicketModal={raiseTicketModal}
+				setRaiseTicketModal={setRaiseTicketModal}
+				refetchTickets={refetchTickets}
+				firestore={firestore}
+				userId={userId}
+				openKamContacts={openKamContacts}
+				setOpenKamContacts={setOpenKamContacts}
+				setActiveTab={setActiveTab}
+				orgId={orgId}
+			/>
 		</>
 	);
 }

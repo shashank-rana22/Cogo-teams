@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
-import { snakeCase } from '@cogoport/utils';
+import { isEmpty, snakeCase } from '@cogoport/utils';
 
 function useCreateNewEvent(props) {
 	const {
@@ -26,10 +26,10 @@ function useCreateNewEvent(props) {
 		const payloadAttribute = [];
 		attributeList.forEach((res) => {
 			Object.keys(formValues).forEach((response) => {
-				if (response === res?.name && formValues[response]) {
+				if (response === res?.name && !isEmpty(formValues[response] || [])) {
 					payloadAttribute.push({
 						rule_id   : res?.id,
-						parameter : formValues[response],
+						parameter : Array.isArray(formValues[response]) ? formValues[response] : [formValues[response]],
 					});
 				}
 			});

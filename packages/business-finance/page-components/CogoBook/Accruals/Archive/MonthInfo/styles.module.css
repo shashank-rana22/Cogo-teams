@@ -56,10 +56,36 @@
 	font-size: 12px;
 }
 
+.variance_data {
+	font-size: 12px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 .info_container_border {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
 	width: 336px;
 	border-left: 2px solid #f68b21;
+}
+
+.expense {
+	color: #ee3425;
+	text-decoration: underline;
+}
+
+.variance_styles {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.income {
+	color: #849e4c;
+	text-decoration: underline;
+}
+
+.amount {
+	font-weight: 600;
 }

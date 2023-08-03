@@ -5,12 +5,16 @@ import getCorrectAnswers from '../../utils/getCorrectAnswers';
 import CorrectAnswersCombined from './CorrectAnswersCombined';
 import styles from './styles.module.css';
 
-function CaseAnswerKey({ item, caseToShow }) {
+function CaseAnswerKey({ item, caseToShow, setQuestionToShow = () => {} }) {
 	const { test_case_study_questions = [] } = item || {};
 
 	return (
 		<div className={styles.flex_column}>
-			<div className={styles.flex_row}>
+			<div
+				role="presentation"
+				onClick={() => setQuestionToShow(item?.id)}
+				className={styles.flex_row}
+			>
 				<div className={styles.bold}>{`+${test_case_study_questions.length} Sub Questions`}</div>
 			</div>
 

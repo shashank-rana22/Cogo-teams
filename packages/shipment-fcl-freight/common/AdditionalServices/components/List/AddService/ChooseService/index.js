@@ -1,5 +1,6 @@
 import { Pill, Placeholder } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
@@ -24,7 +25,7 @@ function ChooseService({
 	const tagDisplay = (item) => (
 		<div>
 			{item?.tags ? (
-				<Pill className="primary">{startCase(item?.tags?.[0])}</Pill>
+				<Pill className="primary">{startCase(item?.tags?.[GLOBAL_CONSTANTS.zeroth_index])}</Pill>
 			) : null}
 		</div>
 	);
@@ -46,7 +47,10 @@ function ChooseService({
 
 	const fields = tableFields(priceRequest, countObj, tagDisplay);
 
-	const serviceOptions = (shipment_data?.services || []
+	const services = (shipment_data?.services || []
+	).filter((e) => e !== 'cargo_insurance_service');
+
+	const serviceOptions = (services || []
 	).map((service) => ({ label: startCase(service), value: service }));
 
 	return (

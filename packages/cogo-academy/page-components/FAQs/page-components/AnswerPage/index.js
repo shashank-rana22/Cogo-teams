@@ -1,4 +1,5 @@
 import { Modal, Button, Badge, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -11,6 +12,9 @@ import useGetQuestions from '../../hooks/useGetQuestions';
 import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
 import useCreateFeedback from './useCreateFeedback';
+
+const NULL_VALUE = 0;
+const EMPTY_VALUE = 1;
 
 function AnswerPage() {
 	const {
@@ -45,7 +49,8 @@ function AnswerPage() {
 	} = useCreateFeedback({ refetchQuestions, answerData, loading });
 
 	const onClickBackIcon = () => {
-		const href = `/learning/faq${topicId ? `?topicId=${topicId}` : ''}`;
+		const showTopicId = topicId ? `?topicId=${topicId}` : '';
+		const href = `/learning/faq${showTopicId}`;
 		router.push(href, href);
 	};
 
@@ -81,10 +86,18 @@ function AnswerPage() {
 				{answerData?.question_abstract}
 			</div>
 
-			<div className={styles.answer}>Answer:</div>
+			<div className={styles.view_count}>
+				{' '}
+				{answerData?.view_count}
+				{' '}
+				people viewed this question
+
+			</div>
+
+			<div className={styles.answer}>Answer :</div>
 
 			<div className={styles.heading_container}>
-				<div dangerouslySetInnerHTML={{ __html: answerData?.answers[0]?.answer }} />
+				<div dangerouslySetInnerHTML={{ __html: answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.answer }} />
 			</div>
 
 			<div className={styles.answer}>Tags</div>
@@ -95,9 +108,11 @@ function AnswerPage() {
 						className={styles.questions_tag}
 						key={item.display_name}
 						size="sm"
-						color="white"
+						color="#fff"
 					>
-						{startCase(item.display_name)}
+						<div className={styles.pills_text}>
+							{startCase(item.display_name)}
+						</div>
 					</Pill>
 				))}
 			</div>
@@ -108,15 +123,15 @@ function AnswerPage() {
 					role="presentation"
 					className={styles.like_container}
 					onClick={() => {
-						onClickLikeButton({ _id: answerData?.answers[0]?.id });
+						onClickLikeButton({ _id: answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.id });
 					}}
 				>
-					{answerData?.answers[0]?.upvote_count >= 0 ? (
+					{answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.upvote_count >= NULL_VALUE ? (
 						<Badge
 							placement="left"
 							color="green"
 							size="md"
-							text={answerData?.answers?.[0]?.upvote_count || 0}
+							text={answerData?.answers?.[GLOBAL_CONSTANTS.zeroth_index]?.upvote_count || NULL_VALUE}
 						>
 							<IcCLike fill={isLiked === 'liked' ? 'black' : '#f8f5ec'} />
 						</Badge>
@@ -183,11 +198,14 @@ function AnswerPage() {
 			</div>
 
 			<div className={styles.liked_wrapper}>
-				{answerData?.answers[0]?.upvote_count > 0 ? (
+				{answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.upvote_count > NULL_VALUE ? (
 					<span className={styles.sidetext}>
-						{answerData?.answers[0]?.upvote_count}
+						{answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.upvote_count}
 						{' '}
-						people found it useful.
+						{answerData?.answers[GLOBAL_CONSTANTS.zeroth_index]?.upvote_count === EMPTY_VALUE
+							? 'person' : 'people'}
+						{' '}
+						found it useful.
 					</span>
 				) : null}
 				{'    '}

@@ -10,6 +10,8 @@ import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDef
 
 import styles from './styles.module.css';
 
+const PINCODE_IN_ADDRESS_INDEX = 1;
+
 function DefaultForm({
 	companyType = '',
 	tradePartyType = '',
@@ -62,6 +64,7 @@ function DefaultForm({
 						<>
 							<div className={styles.form_item_container}>
 								<label className={styles.form_label}>Select Company</label>
+
 								<SelectController
 									style={{ maxWidth: '350px', minWidth: '300px' }}
 									size="sm"
@@ -78,13 +81,14 @@ function DefaultForm({
 							{!isEmpty(formValues?.trade_party_id) && (
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>Select Address</label>
+
 									<SelectController
 										style={{ maxWidth: '350px', minWidth: '300px' }}
 										size="sm"
 										name="address"
 										placeholder="Select Address"
 										control={control}
-										options={address_options[formValues.trade_party_id]}
+										options={address_options?.[formValues?.trade_party_id]}
 										rules={{ required: { value: true, message: 'Address is required' } }}
 									/>
 									{Error('address')}
@@ -93,8 +97,13 @@ function DefaultForm({
 
 							{!isEmpty(formValues?.address) && (
 								<div className={styles.form_item_container}>
-									<div>Pincode</div>
-									<Input disabled value={formValues.address?.split('::')?.[1]} size="sm" />
+									<label className={styles.form_label}>Pincode</label>
+
+									<Input
+										disabled
+										value={formValues.address?.split('::')?.[PINCODE_IN_ADDRESS_INDEX]}
+										size="sm"
+									/>
 								</div>
 							)}
 						</>

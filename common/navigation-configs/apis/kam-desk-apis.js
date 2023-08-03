@@ -110,23 +110,20 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'create_chat_message',
-		access_type  : 'private',
-		service_name : 'chat',
+		api         : 'create_chat_message',
+		access_type : 'private',
 	},
 	{
-		api          : 'list_chat_channels',
-		access_type  : 'private',
-		service_name : 'chat',
+		api         : 'list_chat_channels',
+		access_type : 'private',
 	},
 	{
 		api         : 'delete_chat_message',
 		access_type : 'private',
 	},
 	{
-		api          : 'update_chat_message',
-		access_type  : 'private',
-		service_name : 'chat',
+		api         : 'update_chat_message',
+		access_type : 'private',
 	},
 	{
 		api         : 'get_chat_channel',
@@ -137,9 +134,8 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api          : 'update_chat_channel_seen',
-		access_type  : 'private',
-		service_name : 'chat',
+		api         : 'update_chat_channel_seen',
+		access_type : 'private',
 
 	},
 	{
@@ -232,9 +228,8 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api          : 'list_kam_desk_surface_shipments',
-		access_type  : 'private',
-		service_name : 'shipment',
+		api         : 'list_kam_desk_surface_shipments',
+		access_type : 'private',
 	},
 	{
 		api          : 'update_shipment_currency_conversion',
@@ -382,7 +377,7 @@ const apis = [
 	{
 		api          : 'list_cogo_entities',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'partner',
 	},
 	{
 		api          : 'list_organization_documents',
@@ -658,6 +653,24 @@ const apis = [
 		api          : 'list_shipment_cancellation_reasons',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'list_partner_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_pending_task_authorization',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api         : 'get_saas_hs_code_list_commodities',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_saas_hs_code_list',
+		access_type : 'private',
 	},
 
 ];

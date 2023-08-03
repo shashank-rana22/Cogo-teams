@@ -1,5 +1,5 @@
 export interface Object {
-	itemData: object;
+	itemData: any
 }
 
 export interface TableProps {
@@ -19,3 +19,5 @@ export interface TableProps {
 export interface GenericObject {
 	[key: string]: any;
 }
+
+export type Refetch = () => void;

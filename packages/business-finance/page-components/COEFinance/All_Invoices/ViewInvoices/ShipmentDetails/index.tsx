@@ -1,4 +1,5 @@
-import { Loader, Placeholder, Pill } from '@cogoport/components';
+import { Loader, Placeholder, Pill, Accordion } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateDown,
 	IcMArrowRotateUp,
@@ -12,6 +13,7 @@ import useGetVariance from '../../../hook/useGetVariance';
 import useGetWallet from '../../../hook/useGetWallet';
 import useListShipment from '../../../hook/useListShipment';
 
+import ConsolidatedShipmentDetail from './ConsolidatedShipmentDetails/index';
 import Details from './Details/index';
 import Documents from './Documents/index';
 // eslint-disable-next-line import/no-cycle
@@ -30,18 +32,21 @@ interface BuyerDetailInterface {
 	address?: string;
 	registrationNumber?: string;
 	taxNumber?: string;
+	tdsRate?: string | number;
 }
 
 interface SellerDetailInterface {
 	organizationName?: string;
 	registrationNumber?: string;
 	taxNumber?: string;
+	organizationId?: string,
 }
 
 interface SellerBankDetailInterface {
 	bankName?: string;
 	accountNumber?: string;
 	ifscCode?: string;
+	beneficiaryName?: string;
 }
 
 interface BillInterface {
@@ -58,6 +63,8 @@ interface BillInterface {
 	recurringState?:string,
 	billType: string;
 	isProforma: boolean,
+	tdsAmount: string | number;
+	paidTds: string | number
 }
 
 interface JobInterface {
@@ -66,20 +73,30 @@ interface JobInterface {
 
 interface BillAdditionalObjectInterface {
 	collectionPartyId: string;
+	shipmentType?: string;
+	reasonForCN? : string;
+	outstandingDocument? : string;
+	paymentType? : string;
+	isIncidental? : string;
+	advancedAmountCurrency? : string;
+	serialId?: string,
+	advancedAmount?: string,
 }
 export interface DataInterface {
 	job?: JobInterface;
-	lineItems: Array<object>;
+	lineItems?: Array<object>;
 	billAdditionalObject?: BillAdditionalObjectInterface;
 	buyerDetail?: BuyerDetailInterface;
 	sellerBankDetail?: SellerBankDetailInterface;
 	sellerDetail?: SellerDetailInterface;
-	bill: BillInterface;
+	bill?: BillInterface;
+	consolidatedShipmentIds?:Array<string>;
+	organizationId?: string;
+	serviceProviderDetail?: any
 }
 
 interface ShipmentDetailsInterface {
 	data: DataInterface;
-	orgId: string;
 	remarksVal?: RemarksValInterface;
 	setRemarksVal: any;
 	lineItemsRemarks: object;
@@ -87,28 +104,29 @@ interface ShipmentDetailsInterface {
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	lineItem?: boolean;
 	status: string;
+	jobType?:string;
 }
 function ShipmentDetails({
-	data,
-	orgId,
-	remarksVal,
-	setRemarksVal,
-	lineItemsRemarks,
-	setLineItemsRemarks,
-	setLineItem,
-	lineItem,
-	status,
+	data = {},
+	remarksVal = {},
+	setRemarksVal = () => {},
+	lineItemsRemarks = {},
+	setLineItemsRemarks = () => {},
+	setLineItem = () => {},
+	lineItem = false,
+	status = '',
+	jobType = '',
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
-	const [showDocuments, setShowDocuments] = useState(false);
+	const [showDocuments, setShowDocuments] = useState(true);
 	const [showVariance, setShowVariance] = useState(false);
 	const [itemCheck, setItemCheck] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
-	const { job } = data || {};
+	const { job, consolidatedShipmentIds = [] } = data || {};
 	const { jobNumber } = job || {};
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
-	const dataList = shipmentData?.list[0] || {};
+	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { source, trade_type: tradeType } = dataList;
 	const shipmentId = dataList?.id || '';
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
@@ -118,7 +136,7 @@ function ShipmentDetails({
 		agent_role_data: agentRoleData,
 		amount,
 		amount_currency: amountCurrency,
-	} = dataWallet?.list?.[0] || {};
+	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const getPills = () => {
 		if (loadingShipment) {
@@ -133,10 +151,13 @@ function ShipmentDetails({
 		return <div>NO DATA FOUND</div>;
 	};
 
+	const jobTypeValue = jobType?.toLowerCase();
 	return (
 		<div className={styles.container}>
 			<h3>
-				Shipment Details
+				{startCase(jobTypeValue)}
+				{' '}
+				Details
 				{' '}
 				{jobNumber && (
 					<span>
@@ -152,102 +173,115 @@ function ShipmentDetails({
 
 			<div className={styles.small_hr} />
 
-			<div className={styles.card}>
-				<div
-					className={styles.card_upper}
-					onClick={() => {
-						setShowDetails(!showDetails);
-					}}
-					role="presentation"
-				>
-					<div className={styles.sub_container}>
-						Details
-						<div className={styles.tags_container}>
-							{getPills()}
-						</div>
-						{dataWallet?.list?.[0] && (
-							<div className={styles.data}>
-								<div className={styles.kam_data}>KAM -</div>
-								<div>
-									{agentData?.name}
-                  &nbsp;(
-									{agentRoleData?.name}
-									)
+			{jobType === 'SHIPMENT' && (
+				<>
+					<div className={styles.card}>
+						<div
+							className={styles.card_upper}
+							onClick={() => {
+								setShowDetails(!showDetails);
+							}}
+							role="presentation"
+						>
+							<div className={styles.sub_container}>
+								Details
+								<div className={styles.tags_container}>
+									{getPills()}
 								</div>
-								<div className={styles.kam_data}>Wallet Usage - </div>
-								<div>
-									{amountCurrency || 'USD'}
+								{dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] && (
+									<div className={styles.data}>
+										<div className={styles.kam_data}>KAM -</div>
+										<div>
+											{agentData?.name}
+											(
+											{agentRoleData?.name}
+											)
+										</div>
+										<div className={styles.kam_data}>Wallet Usage - </div>
+										<div>
+											{amountCurrency || ''}
 
-									{amount || 0}
-								</div>
+											{amount || 0}
+										</div>
+									</div>
+								)}
 							</div>
-						)}
+
+							<div
+								className={styles.caret}
+								onClick={() => {
+									setShowDetails(!showDetails);
+								}}
+								role="presentation"
+							>
+								{showDetails ? (
+									<IcMArrowRotateUp height="17px" width="17px" />
+								) : (
+									<IcMArrowRotateDown height="17px" width="17px" />
+								)}
+							</div>
+						</div>
+						{showDetails && <div className={styles.hr} />}
+						<div className={styles.details}>
+							{showDetails && (
+								<Details
+									dataList={dataList}
+									shipmentId={shipmentId}
+								/>
+							)}
+						</div>
 					</div>
 
 					<div
-						className={styles.caret}
-						onClick={() => {
-							setShowDetails(!showDetails);
-						}}
-						role="presentation"
-					>
-						{showDetails ? (
-							<IcMArrowRotateUp height="17px" width="17px" />
-						) : (
-							<IcMArrowRotateDown height="17px" width="17px" />
-						)}
-					</div>
-				</div>
-				{showDetails && <div className={styles.hr} />}
-				<div className={styles.details}>
-					{showDetails && (
-						<Details
-							orgId={orgId}
-							dataList={dataList}
-							shipmentId={shipmentId}
-						/>
-					)}
-				</div>
-			</div>
-
-			<div
-				className={styles.card}
-				onClick={() => {
-					setShowDocuments(!showDocuments);
-				}}
-				role="presentation"
-			>
-				<div className={styles.card_upper}>
-					<div className={styles.sub_container}>
-						Shipment Documents
-						<IcADocumentTemplates height="17px" width="17px" />
-						{loadingShipment && (
-							<Loader />
-						)}
-					</div>
-
-					<div
-						className={styles.caret}
+						className={styles.card}
 						onClick={() => {
 							setShowDocuments(!showDocuments);
 						}}
 						role="presentation"
 					>
-						{showDocuments ? (
-							<IcMArrowRotateUp height="17px" width="17px" />
-						) : (
-							<IcMArrowRotateDown height="17px" width="17px" />
-						)}
-					</div>
-				</div>
-				{showDocuments && <div className={styles.hr} />}
-				<div className={styles.documents}>
-					{showDocuments && <Documents shipmentId={shipmentId} />}
-					{' '}
-				</div>
-			</div>
+						<div className={styles.card_upper}>
+							<div className={styles.sub_container}>
+								Shipment Documents
+								<IcADocumentTemplates height="17px" width="17px" />
+								{loadingShipment && (
+									<Loader />
+								)}
+							</div>
 
+							<div
+								className={styles.caret}
+								onClick={() => {
+									setShowDocuments(!showDocuments);
+								}}
+								role="presentation"
+							>
+								{showDocuments ? (
+									<IcMArrowRotateUp height="17px" width="17px" />
+								) : (
+									<IcMArrowRotateDown height="17px" width="17px" />
+								)}
+							</div>
+						</div>
+						{showDocuments && <div className={styles.hr} />}
+						<div className={styles.documents}>
+							{showDocuments && <Documents shipmentId={shipmentId} />}
+							{' '}
+						</div>
+					</div>
+				</>
+			)}
 			<div>
+				{jobType === 'CONSOLIDATED' && (
+					<div className={styles.consolidated_shipment_details}>
+						<Accordion
+							type="text"
+							title="Shipment Details"
+						>
+							<div className={styles.line} />
+							<ConsolidatedShipmentDetail consolidatedSids={consolidatedShipmentIds} />
+						</Accordion>
+					</div>
+				)}
 				{collectionPartyId ? (
 					<div className={styles.variance}>
 						<div>

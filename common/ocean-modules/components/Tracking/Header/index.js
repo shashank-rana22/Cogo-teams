@@ -50,9 +50,10 @@ function Header({
 					},
 				}}
 			/>
-			{errors?.query_type && (
+
+			{errors?.query_type ? (
 				<div className={styles.error_text}>Query type is required</div>
-			)}
+			) : null}
 
 			<div className={styles.text_area_container}>
 				<div className={styles.label}>Remarks</div>
@@ -66,9 +67,9 @@ function Header({
 					}}
 					rows={4}
 				/>
-				{errors?.remarks && (
+				{errors?.remarks ? (
 					<div className={styles.error_text}>Remarks is required</div>
-				)}
+				) : null}
 			</div>
 
 			<div className={styles.button_div}>

@@ -1,7 +1,7 @@
-import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import ThreeDotLoader from '../../common/ThreeDotLoader';
 import useListStakeholders from '../../hooks/useListShipmentStakeholders';
 import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartners';
 
@@ -13,14 +13,18 @@ import NotifyingParty from './components/NotifyingParty';
 import Pocs from './components/Pocs';
 import ServiceProvider from './components/ServiceProvider';
 import TradeParties from './components/TradeParties';
+import roleBasedView from './config/role_base_view.json';
 import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
-function Poc({ shipment_data = {}, servicesList = [] }) {
+function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) {
 	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
 	const [addPoc, setAddPoc] = useState(null);
+
+	const rolesPermission = roleBasedView[activeStakeholder] || {};
+	const rolesViewPermission = rolesPermission.can_view || [];
 
 	const {
 		data,
@@ -41,48 +45,61 @@ function Poc({ shipment_data = {}, servicesList = [] }) {
 		<div>
 			{loading
 				? (
-					<div className={styles.loader}>
-						<Loader />
+					<div className={styles.loader_wrapper}>
+						<ThreeDotLoader message="Loading POCs" fontSize={16} size={30} />
 					</div>
 				)
-
 				: (
 					<div className={styles.container}>
 						<TradeParties
 							tradePartnersData={data}
 							setAddCompany={setAddCompany}
 							serviceProviders={serviceProviders}
+							rolesPermission={rolesPermission}
 						/>
 
-						<Pocs
-							tradePartnersData={data}
-							setAddPoc={setAddPoc}
-							shipmentStakeholderData={shipmentStakeholderData}
-							stakeHolderLoading={stakeHolderLoading}
-							servicesList={servicesList}
-							shipment_data={shipment_data}
-						/>
+						{rolesViewPermission?.includes('pocs') ? (
+							<Pocs
+								tradePartnersData={data}
+								setAddPoc={setAddPoc}
+								shipmentStakeholderData={shipmentStakeholderData}
+								stakeHolderLoading={stakeHolderLoading}
+								servicesList={servicesList}
+								shipment_data={shipment_data}
+								rolesPermission={rolesPermission}
+							/>
+						) : null}
 
 						<AddedTradeParty
 							tradePartnersData={data}
 							setAddCompany={setAddCompany}
 							setAddPoc={setAddPoc}
+							rolesPermission={rolesPermission}
 						/>
 
-						<NotifyingParty
-							tradePartnersData={data}
-							shipment_id={shipment_id}
-							tradePartnerTrigger={tradePartnerTrigger}
-						/>
+						{rolesViewPermission?.includes('notifying_party') ? (
+							<NotifyingParty
+								tradePartnersData={data}
+								shipment_id={shipment_id}
+								tradePartnerTrigger={tradePartnerTrigger}
+								rolesPermission={rolesPermission}
+							/>
+						) : null}
 
-						<InvoicingParty
-							tradePartnersData={data}
-						/>
-						<ServiceProvider
-							tradePartnersData={data}
-							setAddPoc={setAddPoc}
-							serviceProviders={serviceProviders}
-						/>
+						{rolesViewPermission?.includes('invoicing_party') ? (
+							<InvoicingParty
+								tradePartnersData={data}
+							/>
+						) : null}
+
+						{rolesViewPermission?.includes('service_provider') ? (
+							<ServiceProvider
+								tradePartnersData={data}
+								setAddPoc={setAddPoc}
+								serviceProviders={serviceProviders}
+								rolesPermission={rolesPermission}
+							/>
+						) : null}
 
 						{!isEmpty(addCompany) && (
 							<AddCompanyModal
@@ -105,6 +122,7 @@ function Poc({ shipment_data = {}, servicesList = [] }) {
 								services={services}
 								stakeholdersTrigger={stakeholdersTrigger}
 								servicesList={servicesList}
+								listStakeholdersData={shipmentStakeholderData}
 							/>
 						)}
 					</div>
@@ -112,4 +130,5 @@ function Poc({ shipment_data = {}, servicesList = [] }) {
 		</div>
 	);
 }
+
 export default Poc;

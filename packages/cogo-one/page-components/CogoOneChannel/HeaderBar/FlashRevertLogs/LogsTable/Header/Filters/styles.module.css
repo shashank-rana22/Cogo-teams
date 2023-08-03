@@ -1,0 +1,25 @@
+.filters_view {
+	display: flex;
+	align-items: center;
+	margin-left: 8px;
+
+	:global {
+		.ui_pill_text {
+			display: flex;
+			align-items: center;
+		}
+	}
+}
+
+.button_container {
+	margin-left: 4px;
+	font-size: 12px !important;
+	font-weight: 600;
+}
+
+.delete_icon {
+	width: 12px;
+	height: 12px;
+	margin-left: 4px;
+	cursor: pointer;
+}

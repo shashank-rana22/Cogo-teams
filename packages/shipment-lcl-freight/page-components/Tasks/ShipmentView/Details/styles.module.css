@@ -1,0 +1,14 @@
+.action_container {
+	display: flex;
+	justify-content: center;
+	padding: 4px;
+	margin-bottom: 18px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #5936f0;
+	text-align: center;
+	cursor: pointer;
+	background: #f6f5fe;
+	border-radius: 0 0 4px 4px;
+	opacity: 0.8;
+}

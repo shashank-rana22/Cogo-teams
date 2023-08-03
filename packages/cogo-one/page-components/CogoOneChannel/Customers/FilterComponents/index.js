@@ -1,9 +1,11 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import useGetControls from '../../../../configurations/filter-controls';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 
 import Item from './Item';
 import styles from './styles.module.css';
@@ -25,26 +27,40 @@ function FilterComponents({
 	setFilterVisible = () => {},
 	setAppliedFilters = () => {},
 	appliedFilters = {},
-	setShowBotMessages = () => {},
-	isomniChannelAdmin = false,
+	setIsBotSession = () => {},
 	tagOptions = [],
-	showBotMessages = false,
+	viewType,
+	activeSubTab,
 }) {
-	const filterControls = useGetControls({ isomniChannelAdmin, tagOptions, showBotMessages });
-
-	const defaultValues = getDefaultValues({ filters: appliedFilters, filterControls });
+	const filterControls = useGetControls({
+		tagOptions,
+		viewType,
+		activeSubTab,
+	});
 
 	const {
-		control, formState: { errors }, watch, setValue, handleSubmit,
-	} = useForm({ defaultValues });
+		control,
+		formState: { errors },
+		watch,
+		setValue,
+		handleSubmit,
+	} = useForm(
+		{
+			defaultValues: getDefaultValues(
+				{
+					filters: appliedFilters,
+					filterControls,
+				},
+			),
+		},
+	);
 
 	const formValues = watch();
 
-	const { assigned_to = '', observer = '' } = formValues || {};
+	const { assigned_to = '' } = formValues || {};
 
 	const showElements = {
-		assigned_agent : assigned_to === 'agent',
-		chat_tags      : observer === 'chat_tags' || isomniChannelAdmin,
+		assigned_agent: assigned_to === 'agent',
 	};
 
 	let filterValues = {};
@@ -72,33 +88,19 @@ function FilterComponents({
 	const handleClick = () => {
 		setAppliedFilters(filterValues);
 		setFilterVisible(false);
-		if (!isomniChannelAdmin) {
-			setShowBotMessages(filterValues?.observer === 'botSession');
+
+		if (!VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.bot_message_toggle) {
+			setIsBotSession(filterValues?.closed_session?.[GLOBAL_CONSTANTS.zeroth_index] === 'closed');
 		}
 	};
-	const renderComp = (singleField) => {
-		const show = !(singleField?.name in showElements) || showElements[singleField?.name];
-		return (
-			show && (
-				<Item
-					{...singleField}
-					control={control}
-					value={formValues[singleField.name]}
-					setValue={setValue}
-					error={errors[singleField.name]}
-				/>
-			)
-		);
-	};
+
 	return (
 		<form className={styles.container} onSubmit={handleSubmit(handleClick)}>
-			<div className={styles.header}>
+			<div className={cl`${styles.sticky_boxshadow_styles} ${styles.header}`}>
 				<div className={styles.title}>
 					Filters
 					{checkFiltersCount ? ` (${checkFiltersCount})` : ''}
-
 				</div>
-
 				<div className={styles.styled_icon}>
 					{checkFiltersCount
 						? (
@@ -112,15 +114,52 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
-			{filterControls.map((field) => (
-				<div className={styles.filter_container} key={field.name}>
-					{renderComp(field)}
-				</div>
-			))}
 
-			<div className={styles.actions}>
-				<Button size="md" themeType="tertiary" onClick={() => setFilterVisible(false)}>Cancel</Button>
-				<Button size="md" themeType="accent" type="submit">Apply</Button>
+			<div className={styles.filters_container}>
+				{filterControls.map(
+					(singleField) => {
+						const show = (
+							!(singleField?.name in showElements)
+							|| showElements[singleField?.name]
+						);
+
+						if (!show) {
+							return null;
+						}
+
+						return (
+							<div
+								className={styles.filter_container}
+								key={singleField.name}
+							>
+								<Item
+									{...singleField}
+									control={control}
+									value={formValues[singleField.name]}
+									setValue={setValue}
+									error={errors[singleField.name]}
+								/>
+							</div>
+						);
+					},
+				)}
+			</div>
+
+			<div className={cl`${styles.sticky_boxshadow_styles} ${styles.footer}`}>
+				<Button
+					size="md"
+					themeType="tertiary"
+					onClick={() => setFilterVisible(false)}
+				>
+					Cancel
+				</Button>
+				<Button
+					size="md"
+					themeType="accent"
+					type="submit"
+				>
+					Apply
+				</Button>
 			</div>
 		</form>
 	);

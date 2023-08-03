@@ -31,35 +31,37 @@ function AdminResults() {
 
 	const [activeTab, setActiveTab] = useState('students');
 
+	const [activeAttempt, setActiveAttempt] = useState('attempt1');
+
 	const { test_id = '' } = query || {};
 
 	const {
 		loading,
 		data,
 		getTest,
+		retest,
 	} = useGetTest({ id: test_id });
 
+	const { status, validity_end } = data || {};
+
 	const COMPONENT_PROPS_MAPPING = {
-		students  : { test_id },
-		questions : { test_id },
+		students  : { test_id, status, activeAttempt, retest },
+		questions : { test_id, activeAttempt },
 	};
 
 	const handleGoBack = () => {
 		push('/learning?activeTab=test_module', '/learning?activeTab=test_module');
 	};
 
-	const { status, validity_end } = data || {};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
 					<IcMArrowBack />
-
 					<p className={styles.go_back_text}>Test Result</p>
 				</div>
 
-				{data?.status !== 'published' && (
+				{data?.status === 'publishing' && (
 					<Button themeType="accent" onClick={() => getTest({ test_id })} disabled={loading}>
 						Refresh
 
@@ -68,7 +70,21 @@ function AdminResults() {
 				)}
 			</div>
 
-			{status === 'published' ? <TestResults test_id={test_id} /> : null}
+			{retest ? (
+				<Tabs
+					themeType="primary"
+					className={styles.tab}
+					activeTab={activeAttempt}
+					onChange={setActiveAttempt}
+				>
+					<TabPanel name="attempt1" title="Attempt 1" />
+
+					<TabPanel name="retest" title="Retest" />
+				</Tabs>
+			) : null}
+
+			{status === 'published' || activeAttempt === 'attempt1'
+				? <TestResults test_id={test_id} activeAttempt={activeAttempt} /> : null}
 
 			<InfoBanner
 				loading={loading}
@@ -76,6 +92,8 @@ function AdminResults() {
 				test_id={test_id}
 				validity_end={validity_end}
 				refetchTest={getTest}
+				retest={retest}
+				activeAttempt={activeAttempt}
 			/>
 
 			<div className={styles.tabs_container}>
@@ -88,7 +106,6 @@ function AdminResults() {
 				>
 					{Object.values(COMPONENT_MAPPING).map((tab) => {
 						const { key, title, component : ContainerComponent = null } = tab;
-
 						const componentProps = COMPONENT_PROPS_MAPPING[key];
 
 						if (!ContainerComponent) return null;

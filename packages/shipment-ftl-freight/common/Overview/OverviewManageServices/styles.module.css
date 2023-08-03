@@ -1,0 +1,20 @@
+.container {
+	background-color: #fff;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 19px;
+	color: #4f4f4f;
+}
+
+.tags {
+	color: white;
+
+	:global {
+		.ui_tag_container.ui_ps_size_lg {
+			max-width: 260px;
+		}
+	}
+}

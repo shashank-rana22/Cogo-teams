@@ -12,6 +12,12 @@ const apis = [
 		service_name : 'vendor',
 	},
 	{
+		api          : 'list_cogo_entities',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'vendor',
+	},
+	{
 		api          : 'update_vendor',
 		access_type  : 'private',
 		feature      : 'vendor',
@@ -31,6 +37,12 @@ const apis = [
 	},
 	{
 		api          : 'get_bank_details',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_organization_swift_code_details',
 		access_type  : 'private',
 		feature      : 'vendor',
 		service_name : 'organization',
@@ -99,6 +111,11 @@ const apis = [
 		access_type  : 'private',
 		feature      : 'vendor',
 		service_name : 'vendor',
+	},
+	{
+		api         : 'get_purchase_expense_expense_category',
+		access_type : 'private',
+		feature     : 'vendor',
 	},
 ];
 

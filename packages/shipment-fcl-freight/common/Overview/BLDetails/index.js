@@ -1,10 +1,11 @@
 import { Button, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useListBillOfLadings from '../../../hooks/useListBillOfLadings';
-import EmptyState from '../../EmptyState';
 
 import BlContainersMapping from './BlContainersMapping';
 import ContainerDetails from './ContainerDetails';
@@ -12,86 +13,95 @@ import ContainerNmUpdate from './ContainerNumUpdate';
 import styles from './styles.module.css';
 import TitleCard from './TitleCard';
 
-function BLDetails() {
-	const [open, setOpen] = useState(false);
-	const [activeId, setActiveId] = useState('');
-	const [mappingModal, setMappingModal] = useState(false);
-	const [editContainerNum, setEditContainerNum] = useState(false);
+const INCR_IN_CONTAINER_COUNT_FOR_BL = 0;
+const DEFAULT_BL_COUNT = 0;
+const DEFAULT_CONTAINER_COUNT = 0;
 
-	const { shipment_data, primary_service } = useContext(
-		ShipmentDetailContext,
-	);
+const EMPTY_STATE_CONTENT = {
+	heading     : 'No BL Details Found!',
+	description : 'Currently BL is not uploaded from the respective stakeholder.',
+};
 
-	let containersCount = 0;
-	(primary_service?.cargo_details || []).forEach((container) => {
-		containersCount += container?.containers_count || 0;
-	});
-
-	const { list, containerDetails, refetch } = useListBillOfLadings({ shipment_data });
-
-	const containerDetailsArray = containerDetails?.[shipment_data?.id];
-
-	const renderBlCount = (
+function RenderBlCount({ primary_service = {}, containerDetailsArray = [], containersCount = 0 }) {
+	return (
 		<div className={styles.bl_count_container}>
 			BL and Container Details
-			<div className="bl-count">
+			<div className={styles.bl_count}>
 				(
-				{list?.length || primary_service?.bls_count || 0}
-				&nbsp;BL & &nbsp;
-				{containerDetailsArray?.length || containersCount || 0}
-				&nbsp;
+				{primary_service?.bls_count || DEFAULT_BL_COUNT}
+				{' '}
+				BL
+				{' '}
+				{containerDetailsArray?.length || containersCount || DEFAULT_CONTAINER_COUNT}
+				{' '}
 				Containers
 				)
 			</div>
 		</div>
 	);
+}
 
-	const renderButtons = () => (
+function RenderButtons({ setShowModal = () => {} }) {
+	return (
 		<div className={styles.button_container}>
-			{!isEmpty(list)
-				? (
-					<Button
-						onClick={(e) => {
-							setMappingModal(true);
-							e.stopPropagation();
-						}}
-						size="md"
-						style={{ marginLeft: '6px' }}
-					>
-						BL Container Mapping
-					</Button>
-				)
+			<Button
+				onClick={() => setShowModal('container_mapping')}
+				size="md"
+				style={{ marginLeft: '6px' }}
+				themeType="linkUi"
+			>
+				BL Container Mapping
+			</Button>
 
-				: null}
-
-			{!isEmpty(containerDetailsArray)
-				? (
-					<Button
-						onClick={(e) => {
-							setEditContainerNum(true);
-							e.stopPropagation();
-						}}
-						size="md"
-					>
-						Update Container Number
-					</Button>
-				) : null}
+			<Button
+				onClick={() => setShowModal('container_num_update')}
+				size="md"
+				themeType="linkUi"
+			>
+				Update Container Number
+			</Button>
 		</div>
 	);
+}
 
-	const emptyStateContent = {
-		heading     : 'No BL Details Found!',
-		description : 'Currently BL is not uploaded from the respective stakeholder.',
-	};
+function BLDetails() {
+	const { shipment_data, primary_service, stakeholderConfig } = useContext(ShipmentDetailContext);
+
+	const [open, setOpen] = useState(false);
+	const [activeId, setActiveId] = useState('');
+	const [showModal, setShowModal] = useState(false);
+
+	let containersCount = 0;
+
+	(primary_service?.cargo_details || []).forEach((container) => {
+		containersCount += container?.containers_count || INCR_IN_CONTAINER_COUNT_FOR_BL;
+	});
+
+	const can_edit_container_details = !!stakeholderConfig?.overview?.can_edit_container_details;
+
+	const { list, containerDetails, refetch } = useListBillOfLadings({ shipment_data });
+
+	const containerDetailsArray = containerDetails?.[shipment_data?.id];
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.button_div}>{renderButtons()}</div>
 
-			<Accordion title={renderBlCount} style={{ width: '100%' }}>
+			{containerDetailsArray?.[GLOBAL_CONSTANTS.zeroth_index]?.container_number && can_edit_container_details
+				? <div className={styles.button_div}><RenderButtons setShowModal={setShowModal} /></div> : null}
+
+			<Accordion
+				title={(
+					<RenderBlCount
+						containerDetailsArray={containerDetailsArray}
+						containersCount={containersCount}
+						primary_service={primary_service}
+					/>
+				)}
+				style={{ width: '100%' }}
+			>
 				{!list?.length ? (
 					<EmptyState
-						showContent={emptyStateContent}
+						showContent={EMPTY_STATE_CONTENT}
 						textSize="20px"
 						emptyText="No BL Details Found!"
 						subEmptyText="Currently BL is not uploaded from the respective stakeholder."
@@ -99,9 +109,22 @@ function BLDetails() {
 				) : (
 					<div className={styles.manage_services_div}>
 						{(list || []).map((item) => (
-							item?.containers?.length >= 1
+							isEmpty(item?.containers)
 								? (
-									<div className={styles.service_card}>
+									<div className={styles.service_card} key={item?.id}>
+										<TitleCard
+											item={item}
+											setOpen={setOpen}
+											open={open}
+											setActiveId={setActiveId}
+											activeId={activeId}
+											shipmentData={shipment_data}
+											containerDetails={containerDetailsArray}
+										/>
+									</div>
+								)
+								: (
+									<div className={styles.service_card} key={item?.id}>
 										<Accordion
 											title={(
 												<TitleCard
@@ -122,41 +145,26 @@ function BLDetails() {
 										</Accordion>
 									</div>
 								)
-								: (
-									<div className={styles.service_card}>
-										<TitleCard
-											item={item}
-											setOpen={setOpen}
-											open={open}
-											setActiveId={setActiveId}
-											activeId={activeId}
-											shipmentData={shipment_data}
-											containerDetails={item?.containers}
-										/>
-									</div>
-								)
 						))}
 					</div>
 				)}
 			</Accordion>
 
-			{mappingModal ? (
+			{showModal === 'container_mapping' ? (
 				<BlContainersMapping
 					data={list}
-					setMappingModal={setMappingModal}
+					setMappingModal={setShowModal}
 					containerDetails={containerDetailsArray}
 					refetch={refetch}
-					mappingModal={mappingModal}
 				/>
 
 			) : null}
 
-			{editContainerNum ? (
+			{showModal === 'container_num_update' ? (
 				<ContainerNmUpdate
-					setEditContainerNum={setEditContainerNum}
+					setEditContainerNum={setShowModal}
 					containerDetails={containerDetailsArray}
 					refetch={refetch}
-					editContainerNum={editContainerNum}
 				/>
 			) : null}
 		</div>

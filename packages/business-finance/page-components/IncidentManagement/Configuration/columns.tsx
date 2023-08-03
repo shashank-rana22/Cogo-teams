@@ -1,15 +1,12 @@
-import { Tooltip } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import { Tooltip, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
-import BankDetails from '../Modals/BankDetails';
-import ICJVModal from '../Modals/ICJV_Modal';
-import JvModal from '../Modals/JvModal';
-import RequestCN from '../Modals/RequestCN';
-import SettlementModal from '../Modals/SettlementModal';
-import TDSModal from '../Modals/TDSModal';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
 
+import AccessorComponent from './AccessorComponent';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
@@ -42,12 +39,12 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				<Tooltip
 					interactive
 					content={(list || [{}]).map((item:TooltipInterface) => (
-						<div className={styles.trade_party_name}>
+						<div className={styles.trade_party_name} key={item?.id}>
 							<div>{toTitleCase(item?.div || '-')}</div>
 						</div>
 					))}
 				>
-					<div className={styles.wrapper}>{getList()[0]}</div>
+					<div className={styles.wrapper}>{getList()[GLOBAL_CONSTANTS.zeroth_index]}</div>
 				</Tooltip>
 			) : (
 				<div>
@@ -96,14 +93,36 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		accessor : 'type',
 		id       : 'request_type',
 		Cell     : ({ row: { original } }) => {
-			const { type: requestType = '' } = original || {};
+			const { type: requestType = '', data } = original || {};
+
+			const { creditNoteRequest } = data || {};
+
+			const { revoked } = creditNoteRequest || {};
 			return (
-				<span>
-					{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
-						: toTitleCase(requestType.replace(/_/g, ' '))}
-				</span>
+				<div className={styles.credit}>
+					<span>
+						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
+							: toTitleCase(requestType ? startCase(requestType) : '-')}
+
+					</span>
+					<span>
+						{typeof (revoked) === 'boolean' && (
+							<div>
+								{revoked
+									? <Pill size="md" color="#C4DC91">Fully</Pill>
+									: <Pill size="md" color="#FEF199">Partial</Pill>}
+							</div>
+						)}
+					</span>
+				</div>
+
 			);
 		},
+	},
+	{
+		Header   : 'REQUEST SUB TYPE',
+		accessor : 'incidentSubtype',
+		id       : 'request_sub_type',
 	},
 	{
 		Header   : 'SOURCE',
@@ -129,8 +148,20 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			const { createdAt } = row;
 			return (
 				<div>
-					{format(createdAt, 'dd MMM YYYY', {}, false)}
-					<div>{format(createdAt, 'hh:mm a', {}, false)}</div>
+					{formatDate({
+						date: createdAt,
+						dateFormat:
+							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType: 'date',
+					})}
+					<div>
+						{formatDate({
+							date: createdAt,
+							timeFormat:
+								GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType: 'time',
+						})}
+					</div>
 				</div>
 			);
 		},
@@ -146,7 +177,14 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			return (
 				<div className={styles.flex_reverse}>
 					<div>{name}</div>
-					{format(updatedAt, 'dd MMM YYYY hh:mm a', {}, false)}
+					{formatDate({
+						date: updatedAt,
+						dateFormat:
+							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'dateTime',
+						seperator  : ' ',
+					})}
 				</div>
 			);
 		},
@@ -169,93 +207,9 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 	},
 
 	{
-		accessor: (row:any) => {
-			const {
-				tdsRequest,
-				bankRequest,
-				organization,
-				settlementRequest,
-				journalVoucherRequest,
-				interCompanyJournalVoucherRequest,
-			} = row.data || {};
-
-			const { type: requestType, id, remark, status } = row || {};
-
-			return (
-				<>
-					{requestType === 'TDS_APPROVAL' && (
-						<TDSModal
-							tdsData={tdsRequest}
-							id={id}
-							refetch={getIncidentData}
-							isEditable={false}
-							row={row}
-						/>
-					)}
-					{requestType === 'SETTLEMENT_APPROVAL' && (
-						<SettlementModal
-							settlementData={settlementRequest}
-							id={id}
-							row={row}
-							refetch={getIncidentData}
-							isEditable={false}
-						/>
-					)}
-					{requestType === 'JOURNAL_VOUCHER_APPROVAL' && (
-						<JvModal
-							journalVoucherRequest={journalVoucherRequest}
-							id={id}
-							row={row}
-							refetch={getIncidentData}
-							isEditable={false}
-						/>
-					)}
-					{requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' && (
-						<ICJVModal
-							interCompanyJournalVoucherRequest={
-							interCompanyJournalVoucherRequest
-								}
-							row={row}
-							refetch={getIncidentData}
-							isEditable={false}
-							id={id}
-						/>
-					)}
-					{requestType === 'BANK_DETAIL_APPROVAL' && (
-						<BankDetails
-							bankData={bankRequest}
-							bankId={id}
-							row={row}
-							organization={organization}
-							refetch={getIncidentData}
-							isEditable={false}
-							remark={remark}
-						/>
-					)}
-
-					{requestType === 'ISSUE_CREDIT_NOTE' && (
-						<RequestCN
-							row={row}
-							refetch={getIncidentData}
-							id={id}
-							isEditable={false}
-							status={status}
-						/>
-					)}
-
-					{requestType === 'CONSOLIDATED_CREDIT_NOTE' && (
-						<RequestCN
-							row={row}
-							refetch={getIncidentData}
-							id={id}
-							isEditable={false}
-							status={status}
-						/>
-					)}
-
-				</>
-			);
-		},
+		accessor: (row:any) => (
+			<AccessorComponent row={row} getIncidentData={getIncidentData} />
+		),
 		id: 'actionColumn',
 	},
 ];

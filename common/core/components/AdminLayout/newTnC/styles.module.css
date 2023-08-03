@@ -1,0 +1,38 @@
+.modal_container {
+	height: 220px;
+	padding: 16px 24px;
+	margin: 20px;
+	overflow: auto;
+	border: 1px solid #d3d3d3;
+}
+
+.container {
+	padding: 20px;
+}
+
+.flex {
+	display: flex;
+	justify-content: space-between;
+}
+
+.button {
+	margin-top: 6px;
+	margin-right: 18px;
+}
+
+.header {
+	font-size: 24px;
+	font-weight: 800;
+}
+
+.sub_heading {
+	margin-top: 12px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.address {
+	display: flex;
+	flex-direction: column;
+	margin-top: 12px;
+}

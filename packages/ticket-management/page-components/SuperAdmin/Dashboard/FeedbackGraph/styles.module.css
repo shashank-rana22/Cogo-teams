@@ -1,0 +1,102 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 12px;
+	margin-top: 12px;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.graph {
+	position: relative;
+	width: 280px;
+	height: 180px;
+}
+
+.graph_total {
+	position: absolute;
+	top: 80px;
+	left: 114px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.graph_label {
+	font-size: 14px;
+	color: #828282;
+}
+
+.graph_count {
+	font-size: 22px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.legends {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.legend {
+	display: flex;
+	flex-direction: column;
+}
+
+.dot {
+	width: 8px;
+	height: 8px;
+	margin-right: 4px;
+	border-radius: 50%;
+}
+
+.stats_count {
+	min-width: 35px;
+	font-size: 14px;
+	font-weight: 700;
+	color: #221f20;
+}
+
+.stats_label {
+	margin-left: 12px;
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.legend_count {
+	display: flex;
+	align-items: center;
+}
+
+.satisfied {
+	background-color: #fef199;
+}
+
+.neutral {
+	background-color: #cfeaed;
+}
+
+.unsatisfied {
+	background-color: #fdebe9;
+}
+
+.pie_tooltip {
+	display: flex;
+	align-items: center;
+	width: max-content;
+	padding: 2px 4px;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 2px 2px 8px #4d4d4d;
+}
+
+.tooltip_dot {
+	width: 12px;
+	height: 12px;
+	margin-right: 8px;
+	border-radius: 2px;
+}

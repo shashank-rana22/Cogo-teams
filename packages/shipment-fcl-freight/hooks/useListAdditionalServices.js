@@ -1,22 +1,25 @@
+import { ShipmentDetailContext } from '@cogoport/context';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useState } from 'react';
+import { useContext, useEffect, useCallback, useState } from 'react';
 
-import toastApiError from '../utils/toastApiError';
-
-const useListAdditionalServices = ({ shipment_data, pageLimit }) => {
+const useListAdditionalServices = ({ payload = {} } = {}) => {
 	const [apiData, setApiData] = useState({});
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const { importer_exporter_id, id } = shipment_data || {};
+	const { importer_exporter_id = '', id:shipment_id = '' } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'fcl_freight/list_additional_services',
+		method : 'GET',
 		params : {
 			performed_by_org_id : importer_exporter_id,
 			filters             : {
-				shipment_id: id,
+				shipment_id,
+				...payload,
 			},
 			additional_methods : ['pagination'],
-			page_limit         : pageLimit || 8,
+			page_limit         : 8,
 		},
 	}, { manual: true });
 
@@ -26,6 +29,7 @@ const useListAdditionalServices = ({ shipment_data, pageLimit }) => {
 			setApiData(res.data || {});
 		} catch (err) {
 			setApiData({});
+
 			toastApiError(err);
 		}
 	}, [trigger]);

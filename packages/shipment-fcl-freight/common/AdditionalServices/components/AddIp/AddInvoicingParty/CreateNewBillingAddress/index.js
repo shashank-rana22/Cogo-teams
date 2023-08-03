@@ -1,11 +1,12 @@
 import { Toast } from '@cogoport/components';
-import { useForm, useFieldArray } from '@cogoport/forms';
 import { useState } from 'react';
 
 import useCreateOrganizationAddress from '../../../../../../hooks/useCreateOrganizationAddress';
 import AddressForm from '../AddressForm';
 
 import styles from './styles.module.css';
+
+const EMPTY_POC_DETAILS_LENGTH = 0;
 
 function CreateNewBillingAddress({
 	setShowComponent = () => {},
@@ -15,26 +16,13 @@ function CreateNewBillingAddress({
 }) {
 	const [isAddressRegisteredUnderGst, setIsAddressRegisteredUnderGst] = useState(false);
 	const [gstNumber, setGstNumber] = useState('');
-	const {
-		id = '',
-	} = organizationDetails;
+
+	const { id = '' } = organizationDetails;
 
 	const {
 		registrationNumber = '',
 		tradePartyId = '',
 	} = invoiceToTradePartyDetails;
-
-	const {
-		handleSubmit,
-		control,
-		register,
-		setValue,
-		formState: { errors },
-	} = useForm({
-		defaultValues: {
-			poc_details: [{ name: '', email: '', mobile_country_code: '', mobile_number: '' }],
-		},
-	});
 
 	const afterCreateBillingAddress = () => {
 		refetch();
@@ -47,7 +35,7 @@ function CreateNewBillingAddress({
 	});
 
 	const onSubmit = (values) => {
-		if (values?.poc_details?.length === 0) {
+		if (values?.poc_details?.length === EMPTY_POC_DETAILS_LENGTH) {
 			Toast.info('Please create at-least one POC before proceeding ');
 			return;
 		}
@@ -64,13 +52,7 @@ function CreateNewBillingAddress({
 	return (
 		<div className={styles.container}>
 			<AddressForm
-				control={control}
-				useFieldArray={useFieldArray}
-				register={register}
-				handleSubmit={handleSubmit}
 				refetch={refetch}
-				errors={errors}
-				setValue={setValue}
 				onSubmit={onSubmit}
 				gstNumber={gstNumber}
 				setGstNumber={setGstNumber}

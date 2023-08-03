@@ -60,8 +60,9 @@ export const incomeConfig = {
 			span  : 1,
 		},
 		{
-			span : 2,
-			func : 'renderInvoices',
+			span     : 2,
+			func     : 'renderInvoices',
+			isIncome : true,
 		},
 	],
 };

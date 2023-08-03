@@ -1,4 +1,5 @@
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { Tooltip } from '@cogoport/components';
+import { IcMArrowDown, IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { mappingData } from '../constant';
@@ -130,12 +131,56 @@ function ListProfit({
 						)}
 						{dropDown?.revenue && (
 							<div className={styles.row_vis_data}>
-								{isRowVisible && <div>Booked Revenue</div>}
-								{isRowVisible && <div>Accrued Revenue</div>}
+								{isRowVisible && (
+									<div style={{ display: 'flex' }}>
+										Billed Revenue
+										<Tooltip
+											content={(
+												<div className={styles.font_size_tooltip}>
+													Invoiced revenue w.r.t
+													<br />
+													current month SIDs +
+													<br />
+													Invoiced revenue w.r.t
+													<br />
+													previous months SIDs
+													<br />
+													in freeze state
+												</div>
+											)}
+											placement="top"
+										>
+											<div className={styles.info_icon_container}>
+												<IcMInfo />
+											</div>
+										</Tooltip>
+									</div>
+								)}
+								{isRowVisible && (
+									<div style={{ display: 'flex' }}>
+										Unbilled Revenue
+										<Tooltip
+											content={(
+												<div className={styles.font_size_tooltip}>
+													Accrued Revenue w.r.t
+													{' '}
+													<br />
+													{' '}
+													current month SIDs
+												</div>
+											)}
+											placement="top"
+										>
+											<div className={styles.info_icon_container}>
+												<IcMInfo />
+											</div>
+										</Tooltip>
+									</div>
+								)}
 							</div>
 						) }
 
-						{isRowVisible &&	(
+						{isRowVisible && (
 							<div className={styles.particular_data_review}>
 								(-) Operating Expenses
 								<div
@@ -151,17 +196,21 @@ function ListProfit({
 						)}
 						{dropDown?.operating && (
 							<div className={styles.row_vis_data}>
-								{isRowVisible &&	<div>Booked Expenses</div>}
-								{isRowVisible &&	<div>Accrued Expenses</div>}
+								{isRowVisible && (
+									<>
+										<div>Billed Expense</div>
+										<div>Accrued Expense</div>
+									</>
+								)}
 							</div>
 						)}
 					</div>
 
 					{getRelevantData().map((itemData) => {
 						const segmentType = item[itemData?.type.toLowerCase()];
-						const bookedRevenue = segmentType?.[itemData?.keys?.bookedRevenue] || 0;
+						const billedRevenue = segmentType?.[itemData?.keys?.billedRevenue] || 0;
 						const accruedRevenue = segmentType?.[itemData?.keys?.accruedRevenue] || 0;
-						const bookedExpense = segmentType?.[itemData?.keys?.bookedExpense] || 0;
+						const billedExpense = segmentType?.[itemData?.keys?.billedExpense] || 0;
 						const accruedExpense = segmentType?.[itemData?.keys?.accruedExpense] || 0;
 
 						if (itemData?.type !== 'total') {
@@ -169,7 +218,7 @@ function ListProfit({
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									{isRowVisible &&	(
 										<div className={styles.particular_data}>
-											{(bookedRevenue + accruedRevenue)?.toLocaleString('en-IN', options)}
+											{(billedRevenue + accruedRevenue)?.toLocaleString('en-IN', options)}
 										</div>
 									)}
 									{dropDown?.revenue && (
@@ -177,7 +226,7 @@ function ListProfit({
 											{isRowVisible
 												&& (
 													<div>
-														{(bookedRevenue)?.toLocaleString('en-IN', options)}
+														{(billedRevenue)?.toLocaleString('en-IN', options)}
 													</div>
 												)}
 											{isRowVisible
@@ -190,13 +239,13 @@ function ListProfit({
 									) }
 									{isRowVisible &&	(
 										<div className={styles.particular_data}>
-											{(bookedExpense + accruedExpense)?.toLocaleString('en-IN', options)}
+											{(billedExpense + accruedExpense)?.toLocaleString('en-IN', options)}
 										</div>
 									)}
 									{dropDown?.operating && (
 										<>
 											{isRowVisible
-												&& <div>{(bookedExpense)?.toLocaleString('en-IN', options)}</div>}
+												&& <div>{(billedExpense)?.toLocaleString('en-IN', options)}</div>}
 											{isRowVisible
 												&& <div>{(accruedExpense)?.toLocaleString('en-IN', options)}</div>}
 										</>
@@ -206,9 +255,9 @@ function ListProfit({
 						}
 
 						const {
-							bookedRevenue:totalBookedRevenue,
+							billedRevenue:totalBilledRevenue,
 							accruedRevenue:totalAccruedRevenue,
-							bookedExpense:totalBookedExpense,
+							billedExpense:totalBilledExpense,
 							accruedExpense:totalAccruedExpense,
 						} = item || {};
 
@@ -216,7 +265,7 @@ function ListProfit({
 							<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 								{isRowVisible &&	(
 									<div className={styles.particular_data}>
-										{(totalBookedRevenue + totalAccruedRevenue)?.toLocaleString('en-IN', options)}
+										{(totalBilledRevenue + totalAccruedRevenue)?.toLocaleString('en-IN', options)}
 									</div>
 								)}
 								{dropDown?.revenue && (
@@ -224,7 +273,7 @@ function ListProfit({
 										{isRowVisible
 											&& (
 												<div>
-													{(totalBookedRevenue)?.toLocaleString('en-IN', options)}
+													{(totalBilledRevenue)?.toLocaleString('en-IN', options)}
 												</div>
 											)}
 										{isRowVisible
@@ -237,13 +286,13 @@ function ListProfit({
 								) }
 								{isRowVisible &&	(
 									<div className={styles.particular_data}>
-										{(totalBookedExpense + totalAccruedExpense)?.toLocaleString('en-IN', options)}
+										{(totalBilledExpense + totalAccruedExpense)?.toLocaleString('en-IN', options)}
 									</div>
 								)}
 								{dropDown?.operating && (
 									<>
 										{isRowVisible
-											&& <div>{(totalBookedExpense)?.toLocaleString('en-IN', options)}</div>}
+											&& <div>{(totalBilledExpense)?.toLocaleString('en-IN', options)}</div>}
 										{isRowVisible
 											&& <div>{(totalAccruedExpense)?.toLocaleString('en-IN', options)}</div>}
 									</>
@@ -258,9 +307,9 @@ function ListProfit({
 					{isRowVisible && <div className={styles.header_particular}>GROSS PROFIT</div>}
 					{getRelevantData()?.map((itemData) => {
 						const segmentType = item[itemData?.type.toLowerCase()];
-						const bookedRevenue = segmentType?.[itemData?.keys?.bookedRevenue] || 0;
+						const billedRevenue = segmentType?.[itemData?.keys?.billedRevenue] || 0;
 						const accruedRevenue = segmentType?.[itemData?.keys?.accruedRevenue] || 0;
-						const bookedExpense = segmentType?.[itemData?.keys?.bookedExpense] || 0;
+						const billedExpense = segmentType?.[itemData?.keys?.billedExpense] || 0;
 						const accruedExpense = segmentType?.[itemData?.keys?.accruedExpense] || 0;
 
 						if (itemData?.type !== 'total') {
@@ -269,7 +318,7 @@ function ListProfit({
 									{isRowVisible
 										? (
 											<span>
-												{(((bookedRevenue + accruedRevenue) - (bookedExpense + accruedExpense)))
+												{(((billedRevenue + accruedRevenue) - (billedExpense + accruedExpense)))
 													.toLocaleString('en-IN', options)}
 											</span>
 										) : null}
@@ -734,9 +783,9 @@ function ListProfit({
 					{
 						getRelevantData()?.map((itemData) => {
 							const segmentType = item[itemData?.type.toLowerCase()];
-							const bookedRevenue = segmentType?.[itemData?.keys?.bookedRevenue] || 0;
+							const billedRevenue = segmentType?.[itemData?.keys?.billedRevenue] || 0;
 							const accruedRevenue = segmentType?.[itemData?.keys?.accruedRevenue] || 0;
-							const bookedExpense = segmentType?.[itemData?.keys?.bookedExpense] || 0;
+							const billedExpense = segmentType?.[itemData?.keys?.billedExpense] || 0;
 							const accruedExpense = segmentType?.[itemData?.keys?.accruedExpense] || 0;
 							const ratio = ratioData?.turnoverRatioDetails?.[itemData?.key];
 							if (itemData?.type !== 'total') {
@@ -745,8 +794,8 @@ function ListProfit({
 										{isRowVisible
 											? (
 												<span>
-													{(((bookedRevenue + accruedRevenue)
-													- (bookedExpense + accruedExpense)
+													{(((billedRevenue + accruedRevenue)
+													- (billedExpense + accruedExpense)
 													- totalDepreciationAndAmortization
 													- totalFinanceCost - totalOtherExpense) * ratio)
 														.toLocaleString('en-IN', options)}
@@ -781,11 +830,6 @@ function ListProfit({
 								Extraordinary Items
 							</div>
 						)}
-						{isRowVisible && (
-							<div className={styles.depreciation}>
-								Prior Period Item
-							</div>
-						)}
 
 					</div>
 
@@ -805,12 +849,6 @@ function ListProfit({
 												{(totalExtraordinaryItems).toLocaleString('en-IN', options)}
 											</div>
 										)}
-										{isRowVisible && (
-											<div className={styles.particular_data}>
-												{(totalPriorPeriodItem).toLocaleString('en-IN', options)}
-											</div>
-										)}
-
 									</div>
 								);
 							}
@@ -826,11 +864,6 @@ function ListProfit({
 											{(totalExtraordinaryItems * ratio).toLocaleString('en-IN', options)}
 										</div>
 									)}
-									{isRowVisible && (
-										<div className={styles.particular_data}>
-											{(totalPriorPeriodItem * ratio).toLocaleString('en-IN', options)}
-										</div>
-									)}
 
 								</div>
 							);
@@ -843,9 +876,9 @@ function ListProfit({
 						getRelevantData()?.map((value) => {
 							const ratio = ratioData?.turnoverRatioDetails?.[value?.key];
 							const segmentType = item[value?.type.toLowerCase()];
-							const bookedRevenue = segmentType?.[value?.keys?.bookedRevenue] || 0;
+							const billedRevenue = segmentType?.[value?.keys?.billedRevenue] || 0;
 							const accruedRevenue = segmentType?.[value?.keys?.accruedRevenue] || 0;
-							const bookedExpense = segmentType?.[value?.keys?.bookedExpense] || 0;
+							const billedExpense = segmentType?.[value?.keys?.billedExpense] || 0;
 							const accruedExpense = segmentType?.[value?.keys?.accruedExpense] || 0;
 							if (value?.type !== 'total') {
 								return (
@@ -853,8 +886,8 @@ function ListProfit({
 										{isRowVisible
 											? (
 												<span>
-													{(((bookedRevenue + accruedRevenue)
-													- (bookedExpense + accruedExpense)
+													{(((billedRevenue + accruedRevenue)
+													- (billedExpense + accruedExpense)
 													- totalDepreciationAndAmortization - totalFinanceCost
 													- totalOtherExpense - totalExceptionalItems
 													- totalExtraordinaryItems - totalPriorPeriodItem) * ratio)
@@ -896,9 +929,9 @@ function ListProfit({
 						getRelevantData()?.map((itemDataValue) => {
 							const ratio = ratioData?.turnoverRatioDetails?.[itemDataValue?.key];
 							const segmentType = item[itemDataValue?.type.toLowerCase()];
-							const bookedRevenue = segmentType?.[itemDataValue?.keys?.bookedRevenue] || 0;
+							const billedRevenue = segmentType?.[itemDataValue?.keys?.billedRevenue] || 0;
 							const accruedRevenue = segmentType?.[itemDataValue?.keys?.accruedRevenue] || 0;
-							const bookedExpense = segmentType?.[itemDataValue?.keys?.bookedExpense] || 0;
+							const billedExpense = segmentType?.[itemDataValue?.keys?.billedExpense] || 0;
 							const accruedExpense = segmentType?.[itemDataValue?.keys?.accruedExpense] || 0;
 							if (itemDataValue?.type !== 'total') {
 								return (
@@ -906,8 +939,8 @@ function ListProfit({
 										{isRowVisible
 											? (
 												<div className={styles.particular_data}>
-													{((((bookedRevenue + accruedRevenue)
-													- (bookedExpense + accruedExpense)
+													{((((billedRevenue + accruedRevenue)
+													- (billedExpense + accruedExpense)
 													- totalDepreciationAndAmortization - totalFinanceCost
 													- totalOtherExpense - totalExceptionalItems
 													- totalExtraordinaryItems - totalPriorPeriodItem) * ratio) * 0.2517)
@@ -943,9 +976,9 @@ function ListProfit({
 						getRelevantData()?.map((valData) => {
 							const segmentType = item[valData?.type.toLowerCase()];
 							const ratio = ratioData?.turnoverRatioDetails?.[valData?.key];
-							const bookedRevenue = segmentType?.[valData?.keys?.bookedRevenue] || 0;
+							const billedRevenue = segmentType?.[valData?.keys?.billedRevenue] || 0;
 							const accruedRevenue = segmentType?.[valData?.keys?.accruedRevenue] || 0;
-							const bookedExpense = segmentType?.[valData?.keys?.bookedExpense] || 0;
+							const billedExpense = segmentType?.[valData?.keys?.billedExpense] || 0;
 							const accruedExpense = segmentType?.[valData?.keys?.accruedExpense] || 0;
 							if (valData?.type !== 'total') {
 								return (
@@ -953,14 +986,14 @@ function ListProfit({
 										{isRowVisible
 											? (
 												<span>
-													{(((((bookedRevenue + accruedRevenue)
-													- (bookedExpense + accruedExpense)
+													{(((((billedRevenue + accruedRevenue)
+													- (billedExpense + accruedExpense)
 													- totalDepreciationAndAmortization - totalFinanceCost
 													- totalOtherExpense - totalExceptionalItems
 													- totalExtraordinaryItems
 													- totalPriorPeriodItem) * ratio)
-													- ((((bookedRevenue + accruedRevenue)
-													- (bookedExpense + accruedExpense)
+													- ((((billedRevenue + accruedRevenue)
+													- (billedExpense + accruedExpense)
 													- totalDepreciationAndAmortization - totalFinanceCost
 													- totalOtherExpense - totalExceptionalItems
 													- totalExtraordinaryItems

@@ -34,6 +34,7 @@ function RenderComponent({
 	fetchFaqNotification,
 	showNotificationContent,
 	setShowNotificationContent,
+	setInput,
 }) {
 	if (topic) {
 		return (
@@ -53,6 +54,7 @@ function RenderComponent({
 				setQuestion={setQuestion}
 				setShowHistory={setShowHistory}
 				setSearch={setSearch}
+				setInput={setInput}
 			/>
 		);
 	}

@@ -7,28 +7,40 @@ import Card from '../Card';
 import Detail from './Detail';
 import styles from './styles.module.css';
 
-function ServiceProvider({ tradePartnersData = {}, setAddPoc = () => {}, serviceProviders = {} }) {
+const MIN_SERVICE_PROVIDERS_LENGTH = 1;
+
+function ServiceProvider({
+	tradePartnersData = {},
+	setAddPoc = () => {},
+	serviceProviders = {},
+	rolesPermission = {},
+}) {
 	const [show, setShow] = useState({});
+	const addPocPermission = !!rolesPermission?.can_add_service_provider_poc;
+
 	const { service_provider_details:{ poc_data = [] } = {} } = tradePartnersData;
 
 	const serviceProvidersLength = Object.keys(serviceProviders)?.length;
 
 	return (
 		Object.keys(serviceProviders).map((sp_key, index) => (
-			<Card title={`Service Provider ${serviceProvidersLength <= 1 ? '' : index + 1}`}>
+			<Card
+				title={`Service Provider ${serviceProvidersLength <= MIN_SERVICE_PROVIDERS_LENGTH
+					? '' : index + MIN_SERVICE_PROVIDERS_LENGTH}`}
+				key={sp_key}
+			>
 				<div className={styles.header}>
 					<div className={styles.service_provider_name}>{serviceProviders[sp_key]}</div>
 					<div className={styles.row}>
 
-						<div>
-							<Button
-								themeType="linkUi"
-								onClick={() => { setShow({ ...show, [sp_key]: !show[sp_key] }); }}
-							>
-								{show[sp_key] ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-							</Button>
-						</div>
-						<div>
+						<Button
+							themeType="linkUi"
+							onClick={() => { setShow({ ...show, [sp_key]: !show[sp_key] }); }}
+						>
+							{show[sp_key] ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+						</Button>
+
+						{addPocPermission ?	(
 							<Button
 								size="sm"
 								onClick={() => setAddPoc({
@@ -41,13 +53,12 @@ function ServiceProvider({ tradePartnersData = {}, setAddPoc = () => {}, service
 							>
 								+ ADD POC
 							</Button>
-						</div>
+						) : null}
 
 					</div>
 				</div>
 
-				{show[sp_key] && (<Detail data={poc_data} sp_key={sp_key} />)}
-
+				{show[sp_key] ? (<Detail data={poc_data} sp_key={sp_key} />) : null}
 			</Card>
 		))
 	);

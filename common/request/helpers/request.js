@@ -7,7 +7,7 @@ import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
 import { getCookie } from './getCookieFromCtx';
 
-const PEEWEE_SERVICES = ['fcl_freight_rate'];
+const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate', 'air_freight_rate'];
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
@@ -54,7 +54,7 @@ request.interceptors.request.use((oldConfig) => {
 		.filter((t) => t)
 		.join('/');
 
-	const serviceName = microServices[apiPath];
+	const serviceName = newConfig?.service_name || microServices[apiPath];
 
 	newConfig.paramsSerializer = { serialize: customSerializer };
 

@@ -1,0 +1,29 @@
+.container {
+	overflow: auto;
+}
+
+.table_container {
+	width: fit-content;
+	overflow-x: auto;
+	background-color: #fff;
+	border-radius: 5px;
+
+	:global {
+		.ui_table_head_cell {
+			margin: 4px 14px 8px;
+			line-height: 18px;
+			border-bottom: 2px solid red;
+		}
+
+		.ui_table_head_cell div {
+			padding: 4px;
+			white-space: normal;
+		}
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 8px 0;
+}

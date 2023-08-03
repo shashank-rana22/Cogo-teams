@@ -1,0 +1,27 @@
+{
+  "name": "@cogoport/shipment-ftl-freight",
+  "version": "0.1.0",
+  "description": "Package for Shipment Ftl Service",
+  "main": "index.js",
+  "dependencies": {
+    "@cogoport/components": "^1.0.421",
+    "@cogoport/constants": "workspace:^0.1.0",
+    "@cogoport/context": "workspace:^0.1.0",
+    "@cogoport/forms": "workspace:^0.1.0",
+    "@cogoport/globalization": "workspace:^0.0.1",
+    "@cogoport/icons-react": "^1.0.75",
+    "@cogoport/navigation-configs": "workspace:^0.1.0",
+    "@cogoport/next": "workspace:^0.1.0",
+    "@cogoport/request": "workspace:^0.1.0",
+    "@cogoport/shipment-chat": "workspace:^0.1.0",
+    "@cogoport/shipment-mails": "workspace:^0.1.0",
+    "@cogoport/store": "workspace:^0.1.0",
+    "@cogoport/surface-modules": "workspace:^0.1.0",
+    "@cogoport/purchase-invoicing": "workspace:^0.1.0",
+    "@cogoport/utils": "^1.2.10",
+    "file-saver": "^2.0.5",
+    "number-to-words": "^1.2.4",
+    "react": "18.2.0",
+    "uuid": "^9.0.0"
+  }
+}

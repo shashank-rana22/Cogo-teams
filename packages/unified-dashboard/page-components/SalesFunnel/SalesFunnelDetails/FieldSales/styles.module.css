@@ -1,0 +1,75 @@
+.card_wrapper {
+	padding: 5px 0;
+	background: #f5fafe;
+	border: 1px solid #efefef;
+	box-shadow: none;
+}
+
+.colllapse_icon_active {
+	width: 14px;
+	min-width: 14px;
+	height: 16px;
+	margin-left: 15px;
+	transition: transform 400ms;
+	transform: rotate(360deg);
+}
+
+.colllapse_icon_inactive {
+	width: 14px;
+	min-width: 14px;
+	height: 16px;
+	margin-left: 15px;
+	transition: transform 400ms;
+	transform: rotate(270deg);
+}
+
+.row {
+	display: flex;
+}
+
+.head_name {
+	align-self: center;
+	font-size: 12px;
+}
+
+.revenue_arrow {
+	position: relative;
+	display: flex;
+	flex: 25%;
+	align-items: center;
+	padding: 14px;
+	cursor: pointer;
+	border-right: none;
+}
+
+.text_tag {
+	padding-left: 10px;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.rev {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-left: 50px;
+	border-right: none;
+}
+
+.revenue_col {
+	position: relative;
+	display: flex;
+	flex: 33%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 4px 0;
+	text-align: center;
+	border-right: none;
+}
+
+.revenue_gap {
+	display: flex;
+	flex: 25%;
+}

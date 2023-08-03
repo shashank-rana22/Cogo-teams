@@ -9,14 +9,16 @@ const getControls = ({ mode }) => [
 	},
 	{
 		name    : 'question_type',
-		type    : 'chips',
+		type    : 'select',
 		label   : 'Pick Question Type',
 		value   : 'stand_alone',
 		options : [
 			{ value: 'stand_alone', label: 'Stand Alone' },
 			{ value: 'case_study', label: 'Case Study' },
+			{ value: 'subjective', label: 'Subjective' },
 		],
-		multiple: false,
+		disabled : mode === 'view',
+		multiple : false,
 	},
 	{
 		name    : 'difficulty_level',
@@ -30,14 +32,7 @@ const getControls = ({ mode }) => [
 		rules    : { required: 'Required' },
 		multiple : false,
 	},
-	{
-		name        : 'question_text',
-		type        : 'textarea',
-		placeholder : 'Type Case...',
-		disabled    : mode === 'view',
-		rules       : { required: 'This is required' },
-		rows        : 4,
-	},
+
 ];
 
 export default getControls;

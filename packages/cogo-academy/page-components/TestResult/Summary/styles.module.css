@@ -3,7 +3,7 @@
 	align-items: center;
 	width: 100%;
 	padding: 0 40px;
-	margin: 40px 0;
+	margin: 28px 0;
 	background: #fff;
 	border-radius: 6px;
 }
@@ -72,6 +72,22 @@
 	align-items: center;
 	justify-content: center;
 	width: 50%;
+}
+
+.chart_item {
+	position: relative;
+	width: max-content;
+}
+
+.question_count {
+	position: absolute;
+	top: 104px;
+	left: 34px;
+	max-width: 80px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #828282;
+	text-align: center;
 }
 
 .bar_charts {

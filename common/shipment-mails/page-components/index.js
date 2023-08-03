@@ -22,11 +22,14 @@ import styles from './styles.module.css';
  * @returns
  */
 
+const AIR_SHIPMENT_TYPE = ['air_freight', 'air_freight_local', 'air_customs', 'domestic_air_freight'];
+
 function ShipmentMails({
 	source = 'outlook',
 	filters = {},
 	pre_subject_text = '',
 	subject_position = 'prefix',
+	shipment_type = '',
 }) {
 	const [composingEmail, setComposingEmail] = useState(null);
 	const [action, setAction] = useState('send');
@@ -48,10 +51,12 @@ function ShipmentMails({
 		}
 	};
 
-	const COMPOSE_EMAIL = RPA.BOOKINGS_DEFAULT_COMPOSE_EMAIL;
-	const RECIEVE_EMAIL = RPA.BOOKINGS_DEFAULT_RECIEVE_EMAIL;
+	const COMPOSE_EMAIL = AIR_SHIPMENT_TYPE.includes(shipment_type)
+		? RPA.AIR_BOOKINGS_COMPOSE_EMAIL : RPA.BOOKINGS_DEFAULT_COMPOSE_EMAIL;
+	const RECIEVE_EMAIL = AIR_SHIPMENT_TYPE.includes(shipment_type)
+		? RPA.AIR_BOOKINGS_RECEIVE_EMAIL : RPA.BOOKINGS_DEFAULT_RECIEVE_EMAIL;
 
-	if (process.env.REST_BASE_API_URL !== 'https://api.cogoport.com') {
+	if (process.env.NEXT_PUBLIC_REST_BASE_API_URL !== 'https://api.cogoport.com') {
 		return (
 			<div>
 				<EmptyState showContent={{

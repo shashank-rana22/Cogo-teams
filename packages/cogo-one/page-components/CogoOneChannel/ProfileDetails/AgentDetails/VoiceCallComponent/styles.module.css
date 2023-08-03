@@ -44,14 +44,6 @@
 	color: #828282;
 }
 
-.disable {
-	width: 17px;
-	height: 17px;
-	margin-right: 22px;
-	cursor: not-allowed;
-	fill: #abcd62;
-}
-
 .whatsapp_icon {
 	width: 36px;
 	height: 36px;
@@ -64,4 +56,8 @@
 
 .flex_div {
 	display: flex;
+}
+
+.disable_call_icon {
+	cursor: not-allowed;
 }

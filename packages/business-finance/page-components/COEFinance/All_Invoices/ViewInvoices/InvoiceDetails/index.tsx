@@ -1,9 +1,8 @@
 import { Button, Tooltip, Modal, Pill } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
-
-import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 
 import AddUrgencyTag from './AddUrgencyTag/index';
 import { urgencyOptions } from './controls';
@@ -147,7 +146,14 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 					Invoice Amount - &nbsp;
 					{' '}
 					<span className={styles.amount}>
-						{getFormattedPrice(grandTotal, billCurrency)}
+						{formatAmount({
+							amount   :	grandTotal as any,
+							currency :	billCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</span>
 				</div>
 				<div className={styles.vertical_small_hr} />

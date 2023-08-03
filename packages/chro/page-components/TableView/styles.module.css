@@ -1,0 +1,13 @@
+.table_container {
+	margin-top: 20px;
+}
+
+.button_container {
+	display: flex;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-start;
+	width: 100%;
+}

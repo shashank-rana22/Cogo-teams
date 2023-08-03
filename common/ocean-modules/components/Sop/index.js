@@ -40,7 +40,6 @@ function Sop({
 
 	return (
 		<div>
-
 			<Header
 				setShowHistory={setShowHistory}
 				showHistory={showHistory}
@@ -67,7 +66,6 @@ function Sop({
 					primary_service={primary_service}
 				/>
 			)}
-
 		</div>
 	);
 }

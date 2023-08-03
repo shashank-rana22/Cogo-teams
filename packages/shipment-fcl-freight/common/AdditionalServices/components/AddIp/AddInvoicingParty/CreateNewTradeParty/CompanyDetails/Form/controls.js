@@ -1,34 +1,17 @@
-import PATTERNS from '@cogoport/constants/patterns';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 
-const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_ids;
+const geo = getGeoConstants();
 
-const countryOptions = [
-	{
-		label : 'Private Limited Company',
-		value : 'private_limited',
-	},
-	{
-		label : 'Public Limited Company',
-		value : 'public_limited',
-	},
-	{
-		label : 'Partnership',
-		value : 'partnership',
-	},
-	{
-		label : 'Proprietorship',
-		value : 'proprietorship',
-	},
-	{
-		label : 'Limited Liability Partnership',
-		value : 'limited_liability_partnership',
-	},
-];
-
-const controls = ({ watch }) => {
+const controls = ({ watch = () => {} }) => {
 	const watchCountryId = watch('country_id');
-	const isCountryIndia = watchCountryId === INDIA_COUNTRY_ID;
+
+	const panPatternValue = getCountrySpecificData({
+		country_id    : watchCountryId,
+		accessorType  : 'pan_number',
+		accessor      : 'pattern',
+		isDefaultData : false,
+	});
 
 	const formControl = [
 		{
@@ -50,7 +33,7 @@ const controls = ({ watch }) => {
 			rules       : {
 				required : 'PAN Number is required',
 				pattern  : {
-					value   : isCountryIndia && PATTERNS.PAN_NUMBER,
+					value   : panPatternValue,
 					message : 'PAN is invalid',
 				},
 			},
@@ -67,7 +50,7 @@ const controls = ({ watch }) => {
 			label       : 'Type of Company',
 			type        : 'select',
 			placeholder : 'Select Type of Company',
-			options     : countryOptions,
+			options     : geo.options.registration_types,
 			rules       : { required: 'Type of Company is required' },
 		},
 		{

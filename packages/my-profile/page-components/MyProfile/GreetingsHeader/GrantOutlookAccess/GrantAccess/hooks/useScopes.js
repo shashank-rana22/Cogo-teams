@@ -1,4 +1,4 @@
-import { usePublicRequest } from '@cogoport/request';
+import { useLensRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 /**
@@ -6,9 +6,9 @@ import { useEffect } from 'react';
  */
 
 const useScopes = ({ showAccessUrl, scopes }) => {
-	const [getScopesApi, triggerGetMail] = usePublicRequest(
+	const [getScopesApi, triggerGetMail] = useLensRequest(
 		{
-			url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/outlook_scopes`,
+			url    : '/outlook_scopes',
 			method : 'GET',
 		},
 		{ manual: true },

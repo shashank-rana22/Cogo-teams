@@ -1,7 +1,8 @@
 import { Avatar } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import timeLineFunctions from '../../../../../utils/timeLineFunctions';
+import getVoiceCallStatement from '../../../../../utils/getVoiceCallStatement';
 
 import styles from './styles.module.css';
 
@@ -15,10 +16,13 @@ function AgentTimeLine({ timeLineList = [] }) {
 					performed_by_data = {},
 					created_at,
 					conversation_started_at,
+					channel = '',
+					status = '',
+					user_data = {},
 				} = item || {};
 				const { name : presentAgent } = agent_data || {};
 				const { name : previousAgent } = performed_by_data || {};
-				const { renderStatement } = timeLineFunctions();
+				const { name : voiceCallUserName = '' } = user_data || {};
 
 				return (
 					<>
@@ -28,22 +32,29 @@ function AgentTimeLine({ timeLineList = [] }) {
 						>
 							<div className={styles.dot} />
 							<div className={styles.durations}>
-								{format(created_at, 'HH:mm a dd MMM')}
+								{formatDate({
+									date       : created_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+									timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm a'],
+									formatType : 'dateTime',
+									separator  : ' ',
+								})}
 							</div>
 						</div>
 						<div className={styles.main_card}>
 							<div className={styles.card}>
 								<div className={styles.title}>
-									{renderStatement({
-										type     : conversation_type,
-										present  : presentAgent,
-										previous : previousAgent,
-										startAt  : conversation_started_at,
+									{getVoiceCallStatement({
+										type            : conversation_type,
+										present         : presentAgent,
+										previous        : channel === 'voice_call' ? voiceCallUserName : previousAgent,
+										startAt         : conversation_started_at,
+										voiceCallStatus : status,
 									})}
 								</div>
 								<div className={styles.user_avatar}>
 									<Avatar
-										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
+										src={GLOBAL_CONSTANTS.image_url.user_avatar}
 										alt="img"
 										size="30px"
 									/>

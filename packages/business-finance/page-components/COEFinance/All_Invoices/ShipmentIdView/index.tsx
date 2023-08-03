@@ -19,7 +19,7 @@ export interface ItemDataProps {
 	incomeCount: number,
 	incomeTotalAmount: number,
 	expenseCount: number,
-	expenseTotalAmount: number,
+	expenseTotalAmount: string,
 	serviceType: string,
 	discountAppliedKam: number,
 	discountAppliedRevenueDesk: number,
@@ -50,7 +50,7 @@ function ShipmentIdView() {
 		if (loading) {
 			return (
 				<div style={{ marginTop: '10px' }}>
-					{[1, 2, 3, 4, 5].map(() => <LoadingState />)}
+					{[1, 2, 3, 4, 5].map((val) => <LoadingState key={val} />)}
 				</div>
 			);
 		}

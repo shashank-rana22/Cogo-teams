@@ -4,17 +4,27 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, merge } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
-import controls from '../utils/controls';
+import getControls from '../utils/controls';
+
+const API_MAPPING = {
+	ifsc  : { api: '/get_bank_details', code_name: 'ifsc_code' },
+	swift : {
+		api       : '/get_organization_swift_code_details',
+		code_name : 'swift_code',
+	},
+};
 
 function useVendorBankDetail({
 	setActiveStepper = () => {},
 	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
-	const formProps = useForm();
+	const {
+		general : { query = {} },
+	} = useSelector((state) => state);
 
 	const {
 		control,
@@ -23,25 +33,26 @@ function useVendorBankDetail({
 		setValue,
 		handleSubmit,
 		getValues,
-	} = formProps;
+	} = useForm();
 
-	const ifscCode = watch('ifsc_code');
 	const tax_number = watch('tax_number');
 
 	const { payment_details, vendor_details = {} } = vendorInformation;
 
 	const { country_id } = vendor_details;
 
-	const isUpdateAction = !isEmpty(payment_details);
+	const { bankingCode, controls } = getControls({ country_id });
 
-	const {
-		general : { query = {} },
-	} = useSelector((state) => state);
+	const isUpdateAction = !isEmpty(payment_details);
 
 	const { vendor_id } = query;
 
+	const codeType = watch(`${bankingCode}_code`);
+
+	const { api, code_name } = API_MAPPING[bankingCode];
+
 	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
-		url    : '/get_bank_details',
+		url    : api,
 		method : 'get',
 	}, { manual: true });
 
@@ -50,31 +61,25 @@ function useVendorBankDetail({
 		method : 'post',
 	}, { manual: true });
 
-	const setIfscCode = useCallback(async () => {
-		const regex = /^[A-Za-z]{4}\d{7}$/;
-
-		if (ifscCode?.match(regex)) {
+	useEffect(() => {
+		const fetch_data = async () => {
 			try {
 				const sessionData = await triggerGetBankDetails({
-					params: { ifsc_code: ifscCode },
+					params: { [code_name]: codeType },
 				});
 				const { data = {} } = sessionData || {};
-				const { branch = '', bank = '' } = data || {};
-				setValue('branch_name', branch);
-				setValue('bank_name', bank);
+				setValue('branch_name', data.branch || data.branch_name || '');
+				setValue('bank_name', data.bank || data.bank_name || '');
 			} catch (error) {
 				setValue('branch_name', '');
 				setValue('bank_name', '');
 			}
-		} else {
-			setValue('branch_name', '');
-			setValue('bank_name', '');
-		}
-	}, [ifscCode, setValue, triggerGetBankDetails]);
+		};
 
-	useEffect(() => {
-		setIfscCode();
-	}, [ifscCode, setIfscCode]);
+		if (codeType) {
+			fetch_data();
+		}
+	}, [codeType, triggerGetBankDetails, code_name, setValue]);
 
 	const onSubmit = async ({ data, step }) => {
 		const values = getValues();
@@ -133,6 +138,7 @@ function useVendorBankDetail({
 				setValue(`${field.name}`, payment_details?.[field.name]);
 			}
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [payment_details, setValue, vendorInformation]);
 
 	return {

@@ -1,11 +1,11 @@
 import { Toast, Checkbox } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format, isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FilterInterface } from '../Accruals/interface';
-import { entityMappingData } from '../P&L/PLStatement/constant';
 
 import calculateAccrue from './calculateAccrue';
 
@@ -34,8 +34,15 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
 		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
-		sortType = '', sortBy = '', entity = '',
+		sortType = '', sortBy = '', entity = '', channel = '', milestone = '',
 	} = filters || {};
+
+	const entityDetails = GLOBAL_CONSTANTS.cogoport_entities[entity] || {};
+
+	const { id: entityId } = entityDetails;
+
+	const { startDate, endDate } = date || {};
+
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
 	const [
@@ -75,22 +82,24 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			const resp = await shipmentTrigger({
 				params: {
 					query                : query || undefined,
+					shipmentMilestone    : milestone || undefined,
 					year                 : year || undefined,
 					month                : month || undefined,
 					serviceType          : service || undefined,
 					tradeType            : tradeType || undefined,
 					jobType              : shipmentType || undefined,
 					entityCode           : entity || undefined,
-					entityId             : entityMappingData[entity] || undefined,
+					entityId             : entityId || undefined,
 					profitComparisonType : rangeMapping[range] || undefined,
 					jobState             : jobState || undefined,
 					lowerProfitMargin    : profitAmount || profitPercent || undefined,
 					profitType           : profitType || undefined,
 					sortType             : sortType || undefined,
+					channel              : channel || undefined,
 					sortBy               : sortBy || undefined,
 					upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
-					startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
-					endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
+					startDate            : (startDate && endDate) ? format(startDate, 'yyy-MM-dd') : undefined,
+					endDate              : (startDate && endDate) ? format(endDate, 'yyy-MM-dd') : undefined,
 					page                 : page || undefined,
 					pageLimit            : 10,
 				},
@@ -112,7 +121,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			setApiData({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
 		}
 	}, [
-		date,
+		startDate,
+		endDate,
 		jobState,
 		month,
 		page,
@@ -131,6 +141,9 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		tradeType,
 		year,
 		entity,
+		entityId,
+		milestone,
+		channel,
 	]);
 
 	useEffect(() => {
@@ -270,7 +283,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 				data: {
 					shipmentList   : newPayload,
 					performedBy    : userId,
-					selectionMode  : bulkAction || 'SINGLE',
+					archivedStatus : bulkAction || 'BOOK',
+					selectionMode  : 'SINGLE',
 					jobListRequest : {
 						query                : query || undefined,
 						year                 : year || undefined,
@@ -283,8 +297,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 						lowerProfitMargin    : profitAmount || profitPercent || undefined,
 						upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
 						profitType           : profitType || undefined,
-						startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
-						endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
+						startDate            : startDate ? format(startDate, 'yyy-MM-dd') : undefined,
+						endDate              : endDate ? format(endDate, 'yyy-MM-dd') : undefined,
 						pageLimit            : apiData?.totalRecords,
 						page                 : 1,
 					},

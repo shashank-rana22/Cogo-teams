@@ -1,0 +1,9 @@
+.button_wrap {
+	display: flex;
+	justify-content: flex-end;
+	margin: 20px 0;
+
+	& > button:not(:last-of-type) {
+		margin-right: 12px;
+	}
+}

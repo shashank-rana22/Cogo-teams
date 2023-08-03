@@ -1,0 +1,52 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	margin: 16px;
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+	}
+}
+
+.action {
+	display: flex;
+	justify-content: space-between;
+}
+
+.field {
+	width: 50%;
+
+	&:last-child {
+		margin-left: 3%;
+	}
+}
+
+.flex {
+	display: flex;
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+
+	:global {
+		.ui_button_container:first-child {
+			margin-right: 8px;
+		}
+	}
+}
+
+.label {
+	font-weight: 600;
+}
+
+.error {
+	color: #f00;
+}

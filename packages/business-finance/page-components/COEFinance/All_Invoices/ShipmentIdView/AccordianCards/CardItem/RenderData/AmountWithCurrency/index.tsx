@@ -1,9 +1,10 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
 import showOverflowingNumber from '../../../../../../../commons/showOverflowingNumber';
-import getFormattedPrice from '../../../../../../../commons/utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
@@ -22,22 +23,40 @@ interface PropsType {
 function AmountWithCurrency({ item, field }: PropsType) {
 	const { grandTotal, subTotal, billCurrency, currency }: ItemTypes = item;
 
-	const formatAmount = getFormattedPrice(
-		grandTotal,
-		billCurrency || currency || 'INR',
-	) || '';
+	const formattedAmount = formatAmount({
+		amount   :	grandTotal as any,
+		currency :	billCurrency || currency || GLOBAL_CONSTANTS.currency_code.INR,
+		options  : {
+			style           : 'currency',
+			currencyDisplay : 'code',
+		},
+	}) || '';
 	const content = (
 		<>
 			<div className={styles.pre_tax}>
 				Pre Tax :
 				<text className={styles.pre_tax_amount}>
-					{getFormattedPrice(subTotal, billCurrency || currency)}
+					{formatAmount({
+						amount   :	subTotal as any,
+						currency :	billCurrency || currency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 				</text>
 			</div>
 			<div className={styles.post_tax}>
 				Post Tax:
 				<text className={styles.post_tax_amount}>
-					{getFormattedPrice(grandTotal, billCurrency || currency)}
+					{formatAmount({
+						amount   :	grandTotal as any,
+						currency :	billCurrency || currency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 				</text>
 			</div>
 		</>
@@ -49,9 +68,9 @@ function AmountWithCurrency({ item, field }: PropsType) {
 					<div className={styles.size}>
 						<div className={styles.amount_value}>
 							{' '}
-							{showOverflowingNumber(formatAmount, 12)}
+							{showOverflowingNumber(formattedAmount, 12)}
 						</div>
-						<Tooltip placement="top" content={content}>
+						<Tooltip placement="top" content={content} interactive>
 							<div className={styles.ic_min_icon}>
 								<IcMInfo width="16px" height="16px" />
 							</div>

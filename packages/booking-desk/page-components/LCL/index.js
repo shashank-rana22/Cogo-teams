@@ -1,44 +1,70 @@
+import { dynamic } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
+import { useContext } from 'react';
 
-import Filters from '../../commons/Filters';
-import List from '../../commons/List';
-import Loader from '../../commons/Loader';
+import Search from '../../commons/Search';
+import SegmentedTabs from '../../commons/SegmentedTabs';
+import StepperTabs from '../../commons/StepperTabs';
 import Tabs from '../../commons/Tabs';
-import allTabs from '../../config/TABS_CONFIG.json';
-import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
+import TABS_CONFIG from '../../config/TABS_CONFIG';
+import BookingDeskContext from '../../context/BookingDeskContext';
+import handleSegmentedTabChange from '../../helpers/handleSegmentedTabChange';
+import handleStepperTabChange from '../../helpers/handleStepperTabChange';
 
-import Card from './Card';
 import styles from './styles.module.css';
 
-const { lcl_freight: tabs } = allTabs;
+const RESOLVE_DESK = {
+	export : dynamic(() => import('./Export-Import'), { ssr: false }),
+	import : dynamic(() => import('./Export-Import'), { ssr: false }),
+};
 
-export default function FCLDesk({ stateProps = {} }) {
-	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'lcl_freight' });
+const STEPPER_TAB_OPTIONS = Object.entries(TABS_CONFIG).map(([key, obj]) => ({
+	label : obj.title,
+	value : key,
+}));
 
-	const couldBeCardsCritical = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
+const SEGMENTED_TAB_OPTIONS = Object.entries(TABS_CONFIG.lcl_freight.segmented_tabs).map(([key, obj]) => ({
+	title : obj.title,
+	name  : key,
+}));
+
+export default function LclDesk() {
+	const contextValues = useContext(BookingDeskContext);
+	const { tabState: { stepperTab, segmentedTab }, scopeFilters } = contextValues || {};
+
+	const { tabs } = TABS_CONFIG.lcl_freight.segmented_tabs[segmentedTab];
+
+	const ResolvedList = RESOLVE_DESK[segmentedTab];
 
 	return (
 		<>
-			<div className={styles.header}>
-				<h1>Booking Desk</h1>
-
-				<ScopeSelect size="md" defaultValues={stateProps.scopeFilters} />
-			</div>
-
-			<Filters stateProps={stateProps} />
-
-			<Tabs tabs={tabs} stateProps={stateProps} />
-
-			<div className={`${styles.list_container} ${loading ? styles.loading : ''}`}>
-				{loading ? <Loader /> : (
-					<List
-						data={data}
-						stateProps={stateProps}
-						Card={Card}
-						couldBeCardsCritical={couldBeCardsCritical}
+			<div className={styles.flex_row}>
+				<div className={styles.stepper_container}>
+					<StepperTabs
+						options={STEPPER_TAB_OPTIONS}
+						value={stepperTab}
+						onChange={(v) => handleStepperTabChange({ ...contextValues, newStepperTab: v })}
 					/>
-				)}
+				</div>
+
+				<ScopeSelect size="md" defaultValues={scopeFilters} />
 			</div>
+
+			<div className={styles.flex_row}>
+				<SegmentedTabs
+					options={SEGMENTED_TAB_OPTIONS}
+					value={segmentedTab}
+					onChange={(v) => handleSegmentedTabChange({ ...contextValues, newSegmentedTab: v })}
+				/>
+
+				<div>
+					<Search />
+				</div>
+			</div>
+
+			<Tabs tabs={tabs} />
+
+			{ResolvedList ? <ResolvedList tabs={tabs} /> : null}
 		</>
 	);
 }

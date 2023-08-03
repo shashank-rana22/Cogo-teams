@@ -22,6 +22,10 @@
 	border-right: 1px solid #acdadf;
 }
 
+.info_icon_container {
+	padding: 2px 0 0 4px;
+}
+
 .header_ocean {
 	display: flex;
 	flex-direction: column;

@@ -1,0 +1,21 @@
+.back_container {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	margin-bottom: 8px;
+	cursor: pointer;
+}
+
+.back_text {
+	margin-left: 8px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.empty_container {
+	padding: 8px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}

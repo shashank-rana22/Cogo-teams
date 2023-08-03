@@ -5,24 +5,16 @@ import getValue from '../../../../../../../../utils/getValue';
 
 import styles from './styles.module.css';
 
-function Item({ item, fields, handleClick, loading = false }) {
-	const stylesCol = { padding: '0 4px' };
+function Item({ item, fields, loading = false }) {
+	const STYLES_COL = { padding: '0 4px' };
 
 	return (
 		<div
-			onClick={handleClick}
-			tabIndex="0"
 			className={cl` ${item.expired ? styles.expired : ''} ${styles.row}`}
-			onKeyDown={(e) => {
-				if (e.key === 'Enter') {
-					handleClick();
-				}
-			}}
-			role="button"
 		>
 			{fields.map((singleItem) => (
 				<div
-					style={singleItem.hasStyle ? singleItem.styles : stylesCol}
+					style={singleItem.hasStyle ? singleItem.styles : STYLES_COL}
 					key={singleItem?.key}
 				>
 					{loading && <Placeholder width="100%" height="20px" />}

@@ -11,4 +11,10 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 12px;
+
+	::placeholder {
+		font-size: 12px;
+		font-weight: bold;
+		opacity: 0.5;
+	}
 }

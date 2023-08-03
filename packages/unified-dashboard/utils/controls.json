@@ -1,0 +1,91 @@
+[
+	{
+		"name": "trade_type",
+		"type": "checkbox",
+		"span": 4,
+		"multiple": true,
+		"rules": {
+		"required": true
+		},
+		"options": [
+		{
+			 "label": "Import",
+			 "value": "import"
+		 },
+		 {
+			 "label": "Export",
+			 "value": "export"
+		 },
+		 {
+			 "label": "Domestic",
+			 "value": "domestic"
+		 },
+		 {
+			 "label": "Local",
+			 "value": "local"
+		 }
+		 ]
+	},
+	{
+   "name": "shipment_type",
+   "type": "checkbox",
+   "span": 4,
+   "multiple": true,
+   "rules": {
+      "required": true
+   },
+   "options": [
+	{
+		"label": "FCL freight",
+		"value": "fcl_freight"
+	},
+	{
+		"label": "LCL freight",
+		"value": "lcl_freight"
+	},
+	{
+		"label": "AIR freight",
+		"value": "air_freight"
+	},
+	{
+		"label": "LTL freight",
+		"value": "ltl_freight"
+	},
+	{
+		
+		"label": "FTL freight",
+		"value": "ftl_freight"
+	},
+	{
+		"label": "Haulage freight",
+		"value": "haulage_freight"
+	},
+	{
+		"label": "LCL customs",
+		"value": "lcl_customs"
+	},
+	{
+		"label": "FCL customs",
+		"value": "fcl_customs"
+	},
+	{
+		"label": "AIR customs",
+		"value": "air_customs"
+	},
+	{
+		"label": "FCL freight local",
+		"value": "fcl_freight_local"
+	},
+	{
+		"label": "LCL freight local",
+		"value": "lcl_freight_local"
+	},
+	{
+		"label": "AIR freight local",
+		"value": "air_freight_local"
+	}
+	]
+}
+
+]
+

@@ -1,9 +1,11 @@
-import { cl, Tooltip, Checkbox } from '@cogoport/components';
+import { cl, Tooltip, Checkbox, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCPin, IcMPin, IcMShip } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../../common/UserAvatar';
-import { PLATFORM_MAPPING, ECLAMATION_SVG } from '../../../../../constants';
+import { PLATFORM_MAPPING } from '../../../../../constants';
 import updatePin from '../../../../../helpers/updatePin';
 import dateTimeConverter from '../../../../../utils/dateTimeConverter';
 import formatLastMessage from '../../../../../utils/formatLastMessage';
@@ -11,35 +13,47 @@ import getActiveCardDetails from '../../../../../utils/getActiveCardDetails';
 
 import styles from './styles.module.css';
 
+const DEFAULT_UNREAD_MESSAGES = 0;
+const MAXIMUM_UNREAD_MESSAGES = 100;
+const LAST_UPDATED_PIN_TIME = 0;
+
 function MessageCardData({
 	item = {},
-	activeCardId = '',
+	activeTab = {},
 	userId = '',
-	setActiveMessage,
-	firestore,
+	setActiveMessage = () => {},
+	firestore = {},
 	autoAssignChats = true,
 	handleCheckedChats = () => {},
+	source = '',
+	claimChat = () => {},
+	claimLoading = false,
+	viewType = '',
 }) {
+	const formattedData = getActiveCardDetails(item) || {};
+
 	const {
 		user_name = '',
 		organization_name = '',
 		user_type = '',
 		search_user_name = '',
-		chat_tags = [], chat_status = '',
+		chat_tags = [],
+		chat_status = '',
 		id = '',
-		channel_type = '',
+		channel_type: channelType = '',
 		new_message_sent_at = '',
 		pinnedTime = {},
 		last_message = '',
 		last_message_document = null,
 		new_message_count = 0,
 		is_likely_to_book_shipment = false,
-	} = getActiveCardDetails(item) || {};
+	} = formattedData || {};
 
 	const lastMessageVar = last_message_document || last_message;
 	const isImportant = chat_tags?.includes('important') || false;
 	const lastActive = new Date(new_message_sent_at);
-	const checkActiveCard = activeCardId === id;
+
+	const checkActiveCard = activeTab?.data?.id === id;
 
 	const { renderTime } = dateTimeConverter(
 		Date.now() - Number(lastActive),
@@ -49,11 +63,14 @@ function MessageCardData({
 	const orgName = (user_name?.toLowerCase() || '').includes('anonymous')
 		? startCase(PLATFORM_MAPPING[user_type] || '') : startCase(organization_name);
 
+	const isFlashMessages = source === 'flash_messages';
+
 	const updatePinnedChats = (e, type) => {
 		e.stopPropagation();
+
 		updatePin({
-			pinnedID    : id,
-			channelType : channel_type,
+			pinnedID: id,
+			channelType,
 			type,
 			firestore,
 			userId,
@@ -63,28 +80,31 @@ function MessageCardData({
 	return (
 		<div
 			key={id}
-			className={styles.chat_card_main_container}
+			className={cl`${styles.chat_card_main_container} ${isFlashMessages ? styles.flash_height : ''}`}
 		>
 			{!autoAssignChats && (
 				<Checkbox
 					onChange={() => handleCheckedChats(item, id)}
+					disabled={channelType !== 'whatsapp'}
 				/>
-			) }
+			)}
+
 			<div
-				role="button"
-				tabIndex={0}
+				role="presentation"
+				onClick={() => setActiveMessage(item)}
 				className={cl`
 						${styles.card_container} 
-						${!autoAssignChats ? styles.card_with_checkbox : ''}
+						${autoAssignChats ? '' : styles.card_with_checkbox}
 						${checkActiveCard ? styles.active_card : ''} 
-							`}
-				onClick={() => setActiveMessage(item)}
+						${isFlashMessages ? styles.flash_messages_padding : ''} 
+					`}
 			>
 				<div className={styles.card}>
 					<div className={styles.user_information}>
 						<div className={styles.avatar_container}>
 							<UserAvatar
-								type={channel_type}
+								type={channelType}
+								event={last_message_document?.source}
 							/>
 							<div className={styles.user_details}>
 								<Tooltip
@@ -122,15 +142,20 @@ function MessageCardData({
 					</div>
 
 					<div className={styles.content_div}>
-						{formatLastMessage(lastMessageVar)}
+						{formatLastMessage({
+							lastMessage: lastMessageVar,
+							viewType,
+						})}
+
 						<div className={styles.flex_div}>
-							{new_message_count > 0 && (
+							{new_message_count > DEFAULT_UNREAD_MESSAGES && (
 								<div className={styles.new_message_count}>
-									{new_message_count > 100 ? '99+' : (
-										new_message_count
-									)}
+									{new_message_count > MAXIMUM_UNREAD_MESSAGES
+										? '99+'
+										: new_message_count}
 								</div>
 							)}
+
 							{is_likely_to_book_shipment && (
 								<div className={styles.likely_to_book_shipment}>
 									<IcMShip className={styles.ship_icon_container} />
@@ -139,31 +164,42 @@ function MessageCardData({
 						</div>
 					</div>
 				</div>
+
 				{isImportant && (
 					<div className={styles.important_icon}>
-						<img
-							src={ECLAMATION_SVG}
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.eclamation_svg}
 							alt="important"
-							width="10px"
+							width="10"
+							height="10"
 						/>
 					</div>
 				)}
-				<div className={styles.pinned_div}>
-					{pinnedTime[userId] > 0
-						? (
-							<IcCPin
-								onClick={(e) => updatePinnedChats(e, 'unpin')}
-							/>
-						) : (
-							<IcMPin
-								onClick={(e) => updatePinnedChats(e, 'pin')}
-							/>
-						)}
-				</div>
 
+				{isFlashMessages ? (
+					<Button
+						size="xs"
+						themeType="primary"
+						className={styles.claim_button_styles}
+						disabled={claimLoading}
+						onClick={(e) => {
+							e.stopPropagation();
+							claimChat(formattedData);
+						}}
+					>
+						CLAIM
+					</Button>
+				) : (
+					<div className={styles.pinned_div}>
+						{pinnedTime[userId] > LAST_UPDATED_PIN_TIME
+							? <IcCPin onClick={(e) => updatePinnedChats(e, 'unpin')} />
+							: <IcMPin onClick={(e) => updatePinnedChats(e, 'pin')} />}
+					</div>
+				)}
 			</div>
 		</div>
 
 	);
 }
+
 export default MessageCardData;

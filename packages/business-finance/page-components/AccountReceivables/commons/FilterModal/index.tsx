@@ -50,7 +50,7 @@ function FilterModal({ filters, setFilters, clearFilter }: Props) {
 				<Modal.Body>
 					<div className={styles.container_filter}>
 						<Filter
-							controls={INVOICE_MORE_FILTERS}
+							controls={INVOICE_MORE_FILTERS()}
 							filters={filters}
 							setFilters={setFilters}
 						/>

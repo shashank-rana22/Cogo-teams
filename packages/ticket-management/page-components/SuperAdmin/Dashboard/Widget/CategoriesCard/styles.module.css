@@ -1,0 +1,25 @@
+.list {
+	min-height: 220px;
+	max-height: 460px;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 4px;
+	margin-bottom: 8px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.type { width: 85%; }
+
+.count {
+	font-size: 14px;
+	font-weight: 500;
+}

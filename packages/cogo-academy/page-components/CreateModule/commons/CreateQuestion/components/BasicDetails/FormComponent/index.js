@@ -1,4 +1,5 @@
-import { TextAreaController, ChipsController } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
+import { ChipsController } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 
 import getElementController from '../../../../../../../configs/getElementController';
@@ -22,10 +23,15 @@ function FormComponent({
 	setAllKeysSaved,
 	setShowForm,
 	listSetQuestions,
+	caseStudyQuestionEditorValue,
+	setCaseStudyQuestionEditorValue,
 }) {
 	const {
 		controls,
 		closeForm,
+		handleUpdateCaseStudy,
+		loading,
+		RichTextEditor,
 	} = useHandleBasicDetails({
 		setEditDetails,
 		setAllKeysSaved,
@@ -38,6 +44,8 @@ function FormComponent({
 		setValue,
 		setShowForm,
 		listSetQuestions,
+		caseStudyQuestionEditorValue,
+		setCaseStudyQuestionEditorValue,
 	});
 
 	return (
@@ -94,12 +102,40 @@ function FormComponent({
 					</div>
 
 					<div style={{ marginBottom: '16px' }}>
-						<TextAreaController
-							control={control}
-							{...((controls || []).find((item) => item.name === 'question_text'))}
-						/>
+						<div>
+							<RichTextEditor
+								value={caseStudyQuestionEditorValue}
+								onChange={((val) => { setCaseStudyQuestionEditorValue(val); })}
+								required
+								id="body-text"
+								name="bodyText"
+								type="string"
+								multiline
+								variant="filled"
+								placeholder="Type Case..."
+								rootStyle={{
+									zIndex    : 0,
+									position  : 'relative',
+									minHeight : '200px',
+								}}
+							/>
+						</div>
 						{errors?.question_text ? <div className={styles.error_msg}>This is required</div> : null}
+
+						{(!isNewQuestion) && (
+							<Button
+								className={styles.save_btn}
+								themeType="primary"
+								size="sm"
+								loading={loading}
+								type="button"
+								onClick={() => handleUpdateCaseStudy()}
+							>
+								Update
+							</Button>
+						)}
 					</div>
+
 				</>
 			) : null}
 

@@ -226,7 +226,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 			<QuestionFeedBack
 				id={id}
 				onClickEdit={onclickEdit}
-				faqAudiences={faq_audiences}
+
 			/>
 		</div>
 	);

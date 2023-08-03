@@ -42,19 +42,25 @@ function Summary({ summaryData = {} }) {
 							<div className={styles.percentile_heading}>Percentile</div>
 
 							<div className={styles.percentile_data}>
-								{user_percentile.toFixed(2)}
+								{toFixed(user_percentile, 2)}
 								%
 							</div>
-
 						</div>
 					</div>
 
 					<div className={styles.radial_chart_item}>
-						<QuestionWiseStats
-							height="250px"
-							width="250px"
-							question_stats={question_stats}
-						/>
+						<div className={styles.chart_item}>
+							<QuestionWiseStats
+								height="250px"
+								width="250px"
+								question_stats={question_stats}
+							/>
+
+							<div className={styles.question_count}>
+								<span>Questions: </span>
+								<span>{question_stats?.total_questions || 0}</span>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -63,18 +69,16 @@ function Summary({ summaryData = {} }) {
 						<div className={styles.bar_chart_heading}>Topic Wise Percentile</div>
 
 						<div className={styles.bar_chart}>
-							<BarChart chart_data={getTopicWiseData()} />
+							<BarChart chart_data={getTopicWiseData()} yAxis="Percentile" />
 						</div>
 					</div>
 
 					<div className={styles.bar_chart_item}>
 						<div className={styles.bar_chart_heading}>Level of Difficulty</div>
-
 						<div className={styles.bar_chart}>
-							<BarChart chart_data={getDifficultyData()} />
+							<BarChart chart_data={getDifficultyData()} yAxis="Percentile" />
 						</div>
 					</div>
-
 				</div>
 			</div>
 

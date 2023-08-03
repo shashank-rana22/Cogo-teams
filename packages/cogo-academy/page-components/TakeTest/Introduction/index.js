@@ -1,33 +1,25 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { Image, useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { useMemo } from 'react';
 
 import styles from './styles.module.css';
-import useCreateTestUserMapping from './useCreateTestUserMapping';
+import useUpdateTestUserMapping from './useUpdateTestUserMapping';
 
 function Introduction({ setActiveState, testData = {} }) {
-	const {
-		query: { test_id },
-		user: { id: user_id },
-	} = useSelector(({ general, profile }) => ({
-		query : general.query,
-		user  : profile.user,
-	}));
-
 	const router = useRouter();
 
 	const {
 		set_data,
 		case_study_questions,
 		stand_alone_questions,
+		subjective_questions,
 		test_duration,
 		name,
 		guidelines = [],
 	} = testData || {};
 
-	const { passStartTime } = useCreateTestUserMapping();
+	const { handleStartExam } = useUpdateTestUserMapping({ setActiveState });
 
 	const formatArrayValues = useMemo(
 		() => {
@@ -36,27 +28,6 @@ function Introduction({ setActiveState, testData = {} }) {
 		},
 		[set_data],
 	);
-
-	const handleStartExam = async () => {
-		await passStartTime();
-
-		setActiveState('ongoing');
-		localStorage.setItem('visibilityChangeCount', 1);
-		localStorage.setItem(
-			`current_question_${test_id}_${user_id}`,
-			1,
-		);
-
-		// const elem = document.getElementById('maincontainer');
-
-		// if (elem?.requestFullscreen) {
-		// 	elem?.requestFullscreen();
-		// } else if (elem?.webkitRequestFullscreen) { /* Safari */
-		// 	elem?.webkitRequestFullscreen();
-		// } else if (elem?.msRequestFullscreen) { /* IE11 */
-		// 	elem?.msRequestFullscreen();
-		// }
-	};
 
 	const items = [
 		`Opening test instructions during the test will lead to wastage of test time, 
@@ -116,7 +87,11 @@ function Introduction({ setActiveState, testData = {} }) {
 								{' '}
 								{stand_alone_questions}
 								{' '}
-								Standalone Questions
+								Standalone Questions,
+								{' '}
+								{subjective_questions}
+								{' '}
+								Subjective Questions
 							</div>
 						</div>
 						<div className={styles.content_container}>
@@ -178,7 +153,7 @@ function Introduction({ setActiveState, testData = {} }) {
 					Go Back
 				</Button>
 
-				<Button type="button" size="md" onClick={() => handleStartExam()}>
+				<Button type="button" size="md" onClick={handleStartExam}>
 					Begin test
 					<IcMArrowRight />
 				</Button>

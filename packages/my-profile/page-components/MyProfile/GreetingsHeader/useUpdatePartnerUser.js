@@ -6,7 +6,10 @@ import { useState, useEffect } from 'react';
 const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsData }) => {
 	const [showModal, setShowModal] = useState(false);
 
-	const [editNameModal, setEditNameModal] = useState(false);
+	const [editNameModal, setEditNameModal] = useState({
+		from  : 'name',
+		state : false,
+	});
 
 	const { handleSubmit, formState: { errors }, control, watch, setValue } = useForm();
 
@@ -21,14 +24,14 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 
 	const onOuterClick = () => {
 		setShowModal(false);
-		setEditNameModal(false);
+		setEditNameModal((prev) => ({ ...prev, state: false }));
 		setValue('profile_picture_url', watchProfilePicture || picture);
 	};
 
 	const onSubmit = async (values) => {
 		try {
 			const payload = {
-				picture : values?.profile_picture_url,
+				picture : values?.profile_picture_url.finalUrl,
 				id      : partner_user_id,
 			};
 
@@ -75,7 +78,7 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 	};
 
 	const onClickCancel = () => {
-		setEditNameModal(false);
+		setEditNameModal((prev) => ({ ...prev, state: false }));
 	};
 
 	return {

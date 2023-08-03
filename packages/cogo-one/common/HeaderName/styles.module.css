@@ -1,0 +1,36 @@
+.align_channel_type {
+	display: flex;
+	align-items: center;
+	width: 60%;
+
+	svg {
+		cursor: pointer;
+	}
+}
+
+.name {
+	width: 100%;
+	overflow: hidden;
+	font-size: 16px;
+	color: #4f4f4f;
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.span_whatsapp_name {
+	margin-left: 5px;
+	font-size: 12px;
+	color: #4f4f4f;
+	text-align: left;
+}
+
+.phone_number {
+	font-size: 12px;
+	color: #828282;
+	text-align: left;
+}
+
+.parent {
+	width: 75%;
+}

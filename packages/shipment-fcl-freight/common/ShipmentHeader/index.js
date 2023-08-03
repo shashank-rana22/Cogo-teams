@@ -1,55 +1,80 @@
-import { Tooltip } from '@cogoport/components';
+import { Popover, Tooltip, Toast, cl, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { IcMOverflowDot, IcMCopy } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import React, { useContext, useState } from 'react';
 
+import CancelShipment from '../CancelShipment';
 import CargoDetails from '../CargoDetails';
 import PortDetails from '../PortDetails';
 
 import AddPoNumber from './AddPoNumber';
 import Loader from './Loader';
 import styles from './styles.module.css';
+import getCanCancelShipment from './utils/getCanCancelShipment';
+
+const STYLE_ICON = {
+	height : 25,
+	width  : 25,
+};
+
+const handleCopy = (val) => {
+	navigator.clipboard
+		.writeText(val)
+		.then(Toast.info('Copied Successfully !!', { autoClose: 1000 }));
+};
+
+function CfsDetails({ showPocDetails = true, primary_service = {} }) {
+	return (
+		<div className={styles.heading}>
+			<span>CFS Address:</span>
+			<div className={styles.cfs_details}>
+				{primary_service?.cfs_address ?? 'NA'}
+			</div>
+			{showPocDetails && primary_service?.cfs_address ? (
+				<IcMCopy
+					onClick={() => handleCopy(primary_service?.cfs_address)}
+					style={STYLE_ICON}
+				/>
+			) : null }
+		</div>
+	);
+}
 
 function ShipmentHeader() {
-	const [show, setShow] = useState(false);
-	const { shipment_data, primary_service, isGettingShipment, refetch } = useContext(ShipmentDetailContext);
+	const user_data = useSelector((({ profile }) => profile?.user));
 
-	const { po_number, importer_exporter } = shipment_data || {};
+	const {
+		shipment_data, primary_service,
+		isGettingShipment,
+		activeStakeholder, stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
 
-	const handlePoNo = () => {
-		if (po_number) {
-			return (
-				<div className={styles.po_number}>
-					PO Number:&nbsp;
-					{po_number}
-				</div>
-			);
-		}
+	const [showModal, setShowModal] = useState(false);
+	const [showPopover, setShowPopover] = useState(false);
 
-		if (
-			!po_number
-		) {
-			return (
-				<div
-					className={styles.button}
-					role="button"
-					tabIndex={0}
-					onClick={() => setShow(true)}
-				>
-					Add Po Number
-				</div>
-			);
-		}
-
-		return null;
-	};
+	const { po_number, importer_exporter = {}, consignee_shipper = {} } = shipment_data || {};
 
 	if (isGettingShipment) {
 		return <Loader />;
 	}
 
+	const showPoNumber = !!stakeholderConfig?.shipment_header?.show_po_number;
+	const showCfsDetails = !!stakeholderConfig?.shipment_header?.show_poc_details;
+
+	const showCancelShipmentIcon = getCanCancelShipment({
+		shipment_data,
+		primary_service,
+		user_data,
+		activeStakeholder,
+		stakeholderConfig,
+	});
+
+	const showPocDetails = !!stakeholderConfig?.shipment_header?.show_poc_details;
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.customer}>
+		<header className={cl`${styles.container} ${!showPocDetails ? styles.igm_desk : ''}`}>
+			<div className={cl`${styles.customer} ${!showPocDetails ? styles.igm_desk : ''}`}>
 				<Tooltip
 					theme="light"
 					placement="bottom"
@@ -57,27 +82,82 @@ function ShipmentHeader() {
 					interactive
 					content={(
 						<div className={styles.tooltip}>
-							{importer_exporter?.business_name}
+							{activeStakeholder !== 'consignee_shipper_booking_agent'
+								? importer_exporter?.business_name
+								: consignee_shipper?.business_name}
 						</div>
 					)}
 				>
-					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
+					<div className={styles.business_name}>
+						{activeStakeholder !== 'consignee_shipper_booking_agent'
+							? importer_exporter?.business_name
+							: consignee_shipper?.business_name}
+					</div>
 				</Tooltip>
-				<div className={styles.po_number}>
-					{handlePoNo()}
-				</div>
+
+				{showPoNumber ? (
+					<div>
+						{po_number ? (
+							<span className={styles.po_number}>
+								PO Number:
+								{' '}
+								{po_number}
+							</span>
+						) : (
+							<Button
+								className={styles.button}
+								themeType="linkUi"
+								onClick={() => setShowModal('add_po_number')}
+							>
+								Add PO Number
+							</Button>
+						)}
+					</div>
+				) : null }
 			</div>
+
 			<div className={styles.port_details}>
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
-			<CargoDetails
-				primary_service={primary_service}
-			/>
 
-			{show ? (
-				<AddPoNumber show={show} setShow={setShow} shipment_data={shipment_data} refetch={refetch} />
+			{showCfsDetails ? <CargoDetails primary_service={primary_service} /> : (
+				<CfsDetails
+					primary_service={primary_service}
+					showPocDetails={showPocDetails}
+				/>
+			)}
+
+			{showCancelShipmentIcon
+				? (
+					<Popover
+						visible={showPopover}
+						render={(
+							<div
+								role="presentation"
+								className={styles.cancel_button}
+								onClick={() => { setShowModal('cancel_shipment'); setShowPopover(false); }}
+							>
+								Cancel Shipment
+							</div>
+						)}
+						onClickOutside={() => setShowPopover(false)}
+						placement="bottom"
+					>
+						<IcMOverflowDot className={styles.three_dot_icon} onClick={() => setShowPopover((p) => !p)} />
+					</Popover>
+				) : null}
+
+			{showModal === 'add_po_number' ? (
+				<AddPoNumber
+					setShow={setShowModal}
+					shipment_data={shipment_data}
+				/>
 			) : null}
-		</div>
+
+			{showModal === 'cancel_shipment' ? (
+				<CancelShipment setShow={setShowModal} />
+			) : null}
+		</header>
 	);
 }
 

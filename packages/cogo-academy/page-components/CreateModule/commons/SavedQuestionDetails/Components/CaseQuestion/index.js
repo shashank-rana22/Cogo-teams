@@ -2,20 +2,29 @@ import IconComponent from '../../IconComponent';
 
 import styles from './styles.module.css';
 
-function CaseQuestion({ item, from, caseToShow }) {
-	const { test_case_study_questions = [] } = item || {};
+function CaseQuestion({ item, from: source, caseToShow, setQuestionToShow, setCaseToShow }) {
+	const { test_case_study_questions = [], id = '' } = item || {};
 
 	return (
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
+
 				<div
-					className={`${styles.question_text} ${(from === 'tooltip') ? styles.question_text_content : null}`}
+					role="presentation"
+					className={`${styles.question_text} 
+				${(source === 'tooltip') ? styles.question_text_content : null}`}
+					onClick={() => setQuestionToShow(id)}
 				>
-					{item?.question_text}
+					click to see details
 				</div>
 
-				{from !== 'tooltip' ? (
-					<div style={{ marginLeft: '8px' }} className={styles.bold}>
+				{source !== 'tooltip' ? (
+					<div
+						role="presentation"
+						onClick={() => setCaseToShow(item.id === caseToShow ? '' : item.id)}
+						style={{ marginLeft: '8px' }}
+						className={styles.bold}
+					>
 						{`+${test_case_study_questions.length} More`}
 						{' '}
 						<IconComponent
@@ -26,17 +35,6 @@ function CaseQuestion({ item, from, caseToShow }) {
 					</div>
 				) : null}
 			</div>
-
-			{item.id === caseToShow
-				? test_case_study_questions.map((caseStudyQuestion) => (
-					<div
-						className={styles.text}
-						key={caseStudyQuestion.id}
-					>
-						{caseStudyQuestion.question_text}
-					</div>
-				))
-				: null}
 		</div>
 	);
 }

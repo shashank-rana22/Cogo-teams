@@ -1,7 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
-
-import { months } from '../constants';
 
 interface FilterInterface {
 	serviceType?:string
@@ -16,7 +15,7 @@ const useGetInvoiceJourney = ({ filterValue, entityCode }:ParamsInterface) => {
 	const { serviceType = '', companyType = '' } = filterValue || {};
 
 	const CurrentDate = new Date();
-	const currentMonth = months[CurrentDate.getMonth()];
+	const currentMonth = GLOBAL_CONSTANTS.months[CurrentDate.getMonth()];
 
 	const currentYearsState = new Date().getFullYear();
 

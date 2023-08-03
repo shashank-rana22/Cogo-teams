@@ -24,7 +24,7 @@ function FilterContent({
 				filtersMapping.map((filterElement) => {
 					const { name, options, title } = filterElement || {};
 					return	(
-						<div>
+						<div key={name}>
 							<div className={styles.title}>
 								{' '}
 								{title}
@@ -45,11 +45,15 @@ function FilterContent({
 					themeType="secondary"
 					style={{ marginRight: '8px' }}
 					onClick={onClickReset}
+					type="button"
 				>
 					Reset
 				</Button>
 
-				<Button themeType="primary" type="submit">
+				<Button
+					themeType="primary"
+					type="submit"
+				>
 					Apply
 				</Button>
 			</div>

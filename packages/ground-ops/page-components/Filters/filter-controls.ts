@@ -37,6 +37,14 @@ const filterControls = [
 		placeholder : 'select',
 		span        : 6,
 	},
+	{
+		name                  : 'deadline',
+		type                  : 'date_picker',
+		label                 : 'Due Date',
+		placeholder           : 'Due Date',
+		isPreviousDaysAllowed : true,
+		span                  : 6,
+	},
 
 ];
 export default filterControls;

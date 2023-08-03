@@ -8,6 +8,7 @@ function QuestionListComponent({
 	setQuestion,
 	loading,
 	search,
+	from,
 	faqNotificationApiLoading,
 	paginationData,
 	page,
@@ -22,10 +23,12 @@ function QuestionListComponent({
 	fetchFaqNotification,
 	showNotificationContent,
 	setShowNotificationContent,
+	setInput,
 }) {
 	if (search) {
 		return (
 			<QuestionList
+				from={from}
 				search={search}
 				question={question}
 				setQuestion={setQuestion}
@@ -53,6 +56,7 @@ function QuestionListComponent({
 			fetchFaqNotification={fetchFaqNotification}
 			setShowNotificationContent={setShowNotificationContent}
 			showNotificationContent={showNotificationContent}
+			setInput={setInput}
 		/>
 	);
 }

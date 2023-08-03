@@ -1,22 +1,21 @@
 import { Modal } from '@cogoport/components';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useListServiceChargeCodes from '../../../../../hooks/useListServiceChargeCodes';
-import EmptyState from '../../../../EmptyState';
 import AddRate from '../../AddRate';
 
 import ChooseService from './ChooseService';
 import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
+const FILTERS_SPLIT_FIRST = 0;
 function AddService({
 	shipmentId,
 	services,
 	isSeller,
 	refetch = () => {},
-	show = false,
-	showChargeCodes = false,
 	setShowChargeCodes = () => {},
 }) {
 	const [showAddRate, setAddRate] = useState(null);
@@ -28,15 +27,14 @@ function AddService({
 
 	const { list, loading } = useListServiceChargeCodes({
 		shipmentId,
-		show,
 	});
 
 	let finalList = (list || []).map((item) => ({
 		...item,
-		shipmentId,
+		shipment_id : shipmentId,
 		services,
 		isSeller,
-		name: `${item.code} ${startCase(item.name)}`,
+		name        : `${item.code} ${startCase(item.name)}`,
 	}));
 
 	if (filters.name) {
@@ -46,7 +44,7 @@ function AddService({
 	if (filters.service_type) {
 		finalList = finalList.filter((item) => {
 			if (filters?.service_type?.includes('?')) {
-				return item.service_type === filters?.service_type?.split('?')?.[0];
+				return item.service_type === filters?.service_type?.split('?')?.[FILTERS_SPLIT_FIRST];
 			}
 			return item.service_type === filters?.service_type;
 		});
@@ -59,10 +57,10 @@ function AddService({
 	return (
 		<Modal
 			size="xl"
-			show={showChargeCodes}
+			show
 			onClose={() => setShowChargeCodes(false)}
-			placement="top"
 			className={styles.modal_container}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title="ADD NEW SERVICE" />
 			<Modal.Body>
@@ -82,6 +80,7 @@ function AddService({
 							setShowChargeCodes={setShowChargeCodes}
 						/>
 					) : null}
+
 					{showAddRate ? (
 						<AddRate
 							isSeller={isSeller}
@@ -90,8 +89,10 @@ function AddService({
 							setShowChargeCodes={setShowChargeCodes}
 							refetch={refetch}
 							filters={filters}
+							source="overview"
 						/>
 					) : null}
+
 					{!showAddRate && showPrice ? (
 						<ViewPrice
 							showPrice={showPrice}

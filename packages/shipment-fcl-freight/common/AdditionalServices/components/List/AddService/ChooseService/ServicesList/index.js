@@ -1,6 +1,5 @@
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import React from 'react';
-
-import EmptyState from '../../../../../../EmptyState';
 
 import Header from './CardHeader';
 import CardItem from './Carditem';
@@ -13,7 +12,12 @@ function List({ fields, data, loading }) {
 			<div className={styles.card_list}>
 				{data.length ? (
 					(data || []).map((item) => (
-						<CardItem item={item} loading={loading} fields={fields} />
+						<CardItem
+							key={item?.code}
+							item={item}
+							loading={loading}
+							fields={fields}
+						/>
 					))
 				) : (
 					<EmptyState />

@@ -11,7 +11,7 @@ import useUpdateTestUserMapping from './hooks/useUpdateTestUserMapping';
 import styles from './styles.module.css';
 import getTableColumns from './TableColumns';
 
-function StudentsComponent({ test_id }) {
+function StudentsComponent({ test_id, status, activeAttempt, retest }) {
 	const router = useRouter();
 
 	const [showModal, setShowModal] = useState(false);
@@ -36,7 +36,7 @@ function StudentsComponent({ test_id }) {
 		showReAttemptModal,
 		setShowReAttemptModal,
 		STUDENTS_MAPPING,
-	} = useStudentWiseTestResult({ test_id });
+	} = useStudentWiseTestResult({ test_id, activeAttempt });
 
 	const { userSessionMapping, setUserId } = useUpdateTestUserMapping({ refetch });
 
@@ -56,6 +56,9 @@ function StudentsComponent({ test_id }) {
 		handleDelete,
 		setUserId,
 		router,
+		status,
+		activeAttempt,
+		retest,
 	});
 
 	useEffect(() => {
@@ -67,7 +70,7 @@ function StudentsComponent({ test_id }) {
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
-					themeType="tertiary"
+					themeType="secondary"
 					onChange={setActiveTab}
 				>
 					{Object.keys(STUDENTS_MAPPING).map((item) => {

@@ -1,79 +1,103 @@
-import { Button, Popover } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import usePostToSage from '../../hooks/usePostToSage';
 
 import CancellationModal from './CancellationModal';
+import Content from './Content';
 import styles from './styles.module.css';
 
-function IRNCancel({ itemData }) {
+const TIME_VALUE = 86400000;
+
+type InvoiceAdditionals = {
+	reqCancelReason?:string
+};
+
+type ItemData = {
+	id?: string;
+	invoiceStatus?: string;
+	entityCode?: number;
+	irnGeneratedAt?: string;
+	isRevoked?: boolean;
+	invoiceAdditionals?: InvoiceAdditionals
+};
+interface INRCancel {
+	itemData?: ItemData;
+	refetch?: Function;
+}
+
+function IRNCancel({ itemData, refetch }: INRCancel) {
 	const [showCancellationModal, setShowCancellationModal] = useState(false);
 	const [show, setShow] = useState(false);
 
-	const { invoiceStatus, id } = itemData;
+	const { invoiceStatus, id, entityCode, irnGeneratedAt, invoiceAdditionals = { } } = itemData || {};
+	const statusPresent = ['IRN_GENERATED', 'FAILED'].includes(invoiceStatus);
 
-	const isAfterADay =		itemData?.irnGeneratedAt !== null
-		? itemData.irnGeneratedAt + 86400000 >= Date.now()
-		: false;
+	const { postToSage, loading } = usePostToSage({ id });
 
-	const { postToSage, loading } = usePostToSage(id);
+	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
-	const content = () => (
-		<div className={styles.container}>
-			{ isAfterADay && (
-				<Button
-					className="secondary sm"
-					onClick={() => {
-						setShowCancellationModal(true);
-						setShow(false);
-					}}
-					style={{ marginBottom: '8px' }}
-				>
-					Cancel IRN
-				</Button>
-			)}
-			{(['IRN_GENERATED', 'FAILED'].includes(invoiceStatus)) && (
-				<Button
-					disabled={loading}
-					className="secondary sm"
-					onClick={postToSage}
-				>
-					Post to Sage
-				</Button>
-			)}
-		</div>
-	);
+	const sageAllowed = ENTITY_FEATURE_MAPPING[entityCode]?.feature_supported?.includes('post_to_sage');
+	const cancelSupported = ENTITY_FEATURE_MAPPING?.[entityCode]
+		?.feature_supported?.includes('cancel_e_invoice');
+
+	const cancelApproved = (cancelSupported && invoiceAdditionals?.reqCancelReason)
+		|| (!cancelSupported && (irnGeneratedAt !== null ? Number(irnGeneratedAt) + TIME_VALUE >= Date.now() : false));
+
+	const hasOptions = (cancelApproved) || (statusPresent && sageAllowed);
+
+	const rest = {
+		onClickOutside: () => setShow(false),
+	};
 
 	if (
-		(isAfterADay)
-		|| (['IRN_GENERATED', 'FAILED'].includes(invoiceStatus))
+		(cancelApproved) || (statusPresent)
 	) {
 		return (
-			<div className={styles.div_container}>
-				<Popover
-					placement="left"
-					visible={show}
-					render={content()}
-				>
-					<div>
-						<IcMOverflowDot
-							onClick={() => setShow(!show)}
-							style={{ cursor: 'pointer' }}
-							width="16px"
-							height="16px"
-						/>
-					</div>
-				</Popover>
+			hasOptions
+				? (
+					<div className={styles.div_container}>
+						<Popover
+							placement="left"
+							visible={show}
+							render={(
+								<Content
+									cancelApproved={cancelApproved}
+									statusPresent={statusPresent}
+									sageAllowed={sageAllowed}
+									loading={loading}
+									postToSage={postToSage}
+									setShowCancellationModal={setShowCancellationModal}
+									setShow={setShow}
+									irnLabel={irnLabel}
+								/>
+							)}
+							{...rest}
+						>
+							<div>
+								<IcMOverflowDot
+									onClick={() => setShow(!show)}
+									style={{ cursor: 'pointer' }}
+									width="16px"
+									height="16px"
+								/>
+							</div>
+						</Popover>
 
-				{showCancellationModal && (
-					<CancellationModal
-						itemData={itemData}
-						showCancellationModal={showCancellationModal}
-						setShowCancellationModal={setShowCancellationModal}
-					/>
-				)}
-			</div>
+						{showCancellationModal && (
+							<CancellationModal
+								itemData={itemData}
+								showCancellationModal={showCancellationModal}
+								setShowCancellationModal={setShowCancellationModal}
+								irnLabel={irnLabel}
+								refetch={refetch}
+							/>
+						)}
+					</div>
+				)
+				: null
 		);
 	}
 

@@ -1,10 +1,11 @@
-import { Input } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { Input, Select, Tooltip } from '@cogoport/components';
+import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useShipmentView from '../../hooks/useShipmentView';
+import { CHANNEL_OPTIONS, MILESTONE_OPTIONS } from '../constant';
 
 import Card from './Card';
 import { accrualColumn } from './constant';
@@ -35,6 +36,8 @@ function ShipmentView() {
 		sortType           : 'ASC',
 		page               : 1,
 		pageLimit          : 10,
+		milestone          : null,
+		channel            : '',
 	});
 
 	const { bulkAction } = bulkSection;
@@ -69,6 +72,7 @@ function ShipmentView() {
 	const { page, year, month } = filters || {};
 
 	const isApplyEnable = year?.length > 0 && month?.length > 0;
+
 	return (
 		<div>
 			<Card
@@ -82,6 +86,7 @@ function ShipmentView() {
 				filters={filters}
 				isApplyEnable={isApplyEnable}
 			/>
+
 			<div className={styles.flex}>
 				<div className={styles.sub_flex}>
 					{filters?.service && (
@@ -91,25 +96,90 @@ function ShipmentView() {
 							{startCase(filters?.service)}
 						</div>
 					)}
+
 					{filters?.tradeType && (
 						<div className={styles.card_small}>
 							{' '}
 							{filters?.tradeType}
 						</div>
 					)}
-				</div>
-				<div className={styles.input_container}>
-					<Input
-						value={filters?.query}
-						onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
-						placeholder="Search by SID"
-						disabled={!isApplyEnable}
-						suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
-					/>
+
+					<div className={styles.card_small}>
+						<span className={styles.steps}>Step 1 -</span>
+
+						{' '}
+						<span className={styles.text_step}>Select The Shipments You Want To Accrue/Book</span>
+					</div>
+
+					<div className={styles.card_small}>
+						Remaining -
+						{' '}
+						<span className={styles.color}>{totalRecords}</span>
+					</div>
 				</div>
 
 			</div>
+
 			<div className={styles.table_data}>
+				<div className={styles.input_data_container}>
+					<div className={styles.select_container}>
+						<Select
+							value={filters?.milestone}
+							onChange={(val) => setFilters({ ...filters, milestone: val })}
+							options={MILESTONE_OPTIONS}
+							isClearable
+							placeholder="Select Milestone"
+							className={styles.milestone}
+							size="sm"
+						/>
+
+						<div className={styles.channel_info}>
+							<Select
+								value={filters?.channel}
+								onChange={(val) => setFilters({ ...filters, channel: val })}
+								options={CHANNEL_OPTIONS}
+								isClearable
+								placeholder="Channel"
+								className={styles.milestone}
+								size="sm"
+							/>
+
+							<Tooltip
+								maxWidth={500}
+								placement="top"
+								content={(
+									<div className={styles.content_tooltip}>
+										<div>
+											<span className={styles.heading_bold}>Review Channel: </span>
+											Shipment IDs having expected profitability
+										</div>
+
+										<div>
+											<span className={styles.heading_bold}>Audit Channel: </span>
+											{' '}
+											Shipment IDs to be investigated
+										</div>
+									</div>
+								)}
+							>
+								<IcMInfo />
+							</Tooltip>
+						</div>
+
+					</div>
+
+					<div className={styles.input_container}>
+						<Input
+							size="sm"
+							value={filters?.query}
+							onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
+							placeholder="Search by SID"
+							disabled={!isApplyEnable}
+							suffix={<IcMSearchlight height="15px" width="15px" style={{ marginRight: '8px' }} />}
+							style={{ padding: '4px' }}
+						/>
+					</div>
+				</div>
 				<StyledTable
 					page={page}
 					total={totalRecords}

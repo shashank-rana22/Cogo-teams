@@ -1,32 +1,25 @@
 import { Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format, startCase } from '@cogoport/utils';
 
 import SortIcon from '../../common/SortIcon';
 
-import EditIcon from './Card/EditIcon';
 import styles from './styles.module.css';
 
 const currentYear = new Date().getFullYear();
 const newArray = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
 
-export const optionsYear = () => (newArray || [{}]).map((item) => (
-	{ value: item.toString(), label: item.toString() }));
+export const optionsYear = (newArray || [{}]).map((item) => (
+	{ value: item?.toString(), label: item?.toString() }));
 
-export const optionsMonth = [
-	{ value: '1', label: 'January' },
-	{ value: '2', label: 'February' },
-	{ value: '3', label: 'March' },
-	{ value: '4', label: 'April' },
-	{ value: '5', label: 'May' },
-	{ value: '6', label: 'June' },
-	{ value: '7', label: 'July' },
-	{ value: '8', label: 'August' },
-	{ value: '9', label: 'September' },
-	{ value: '10', label: 'October' },
-	{ value: '11', label: 'November' },
-	{ value: '12', label: 'December' },
-];
+const getMonth = GLOBAL_CONSTANTS.months;
+
+export const optionsMonth = (getMonth || [{}]).map((item: string, index: number) => {
+	const count = index + 1;
+	const options = { value: count?.toString(), label: item };
+	return options;
+});
 
 export const optionsShipment = [
 	{ value: 'SHIPMENT', label: 'Shipment' },
@@ -56,12 +49,12 @@ export const optionSelect = [
 ];
 export const optionsRadio = [
 	{
-		label : 'Amount',
+		label : 'By Amount',
 		value : 'amount',
 		name  : 'amount',
 	},
 	{
-		label : 'Percentage',
+		label : 'By Percentage',
 		value : 'percentage',
 		name  : 'percentage',
 	},
@@ -69,23 +62,23 @@ export const optionsRadio = [
 
 export const optionsData = [
 	{
-		label : '> Greater than',
+		label : 'Greater than',
 		value : '>',
 	},
 	{
-		label : '>= Greater than or equal to',
+		label : 'Greater than or equal to',
 		value : '>=',
 	},
 	{
-		label : '<=x=< Between',
+		label : 'Between',
 		value : '<=x=<',
 	},
 	{
-		label : '< less than ',
+		label : 'less than ',
 		value : '<',
 	},
 	{
-		label : '<= less than or equal to',
+		label : 'less than or equal to',
 		value : '<=',
 	},
 ];
@@ -193,6 +186,7 @@ export const accrualColumn = (
 					interactive
 				>
 					<div className={styles.job_number}>
+
 						<div className={styles.job_number_data}>{ jobNumber || '-' }</div>
 						<div>{startCase(serviceType || '-')}</div>
 					</div>
@@ -235,29 +229,61 @@ export const accrualColumn = (
 		Cell     : ({ row: { original } }) => {
 			const {
 				expenseBooked = '',
-				expenseCurrency = '', expenseIncludesProforma = '',
+				expenseCurrency = '',
+				buyQuotation = '',
+				buyQuotationCurrency = '',
 			} = original || {};
+			const quotationDiff = buyQuotation - expenseBooked || 0;
+			const quotationDiffProfit = buyQuotation !== 0 ? (((quotationDiff / buyQuotation) * 100) || 0) : 0;
 			return (
-				<>
-					<span>
-						{getFormattedPrice(expenseBooked, expenseCurrency)}
-					</span>
-					<span>
-						{expenseIncludesProforma && (
-							<div style={{ color: '#F06D6D' }}>Quotation</div>)}
+				<div className={styles.quotation_styles}>
+					<div>
+						<span>
+							{formatAmount({
+								amount   :	expenseBooked,
+								currency : expenseCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
+						</span>
+					</div>
 
-					</span>
-				</>
+					<div className={styles.quotation_value}>
+						Quotation :
+						{' '}
+						{formatAmount({
+							amount   :	buyQuotation,
+							currency : buyQuotationCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+					</div>
+					<div className={styles.line_value}>
+						<div className={quotationDiffProfit >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
+							{(quotationDiffProfit || 0.00).toFixed(2) || '0'}
+							%
+						</div>
+						<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
+						{' '}
+						<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
+							{formatAmount({
+								amount   :	quotationDiff as any,
+								currency : expenseCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+
+							}) }
+						</div>
+					</div>
+
+				</div>
 			);
-		},
-	},
-	{
-		Header   : 'Adjusted Expense',
-		accessor : 'adjusted_expense',
-		id       : 'adjusted_expense',
-		Cell     : ({ row: { original } }) => {
-			const { expenseAccrued = {} } = original || {};
-			return <span>{ expenseAccrued || '----' }</span>;
 		},
 	},
 	{
@@ -274,32 +300,94 @@ export const accrualColumn = (
 		accessor : 'sales_invoice_amount',
 		id       : 'sales_invoice_amount',
 		Cell     : ({ row: { original } }) => {
-			const { actualIncome = '', incomeCurrency = '', incomeIncludesProforma } = original || {};
+			const {
+				actualIncome = '', incomeCurrency = '',
+				sellQuotation = '', sellQuotationCurrency = '',
+			} = original || {};
+
+			const quotationDiff = sellQuotation - actualIncome || 0;
+
+			// Setting quotationDiffProfit = 0 if sellQuotation is zero(to prevent calculation to give infinity)
+			const quotationDiffProfit = sellQuotation !== 0 ? (((quotationDiff / sellQuotation) * 100) || 0) : 0;
+
 			return (
-				<>
-					<span>{getFormattedPrice(actualIncome, incomeCurrency) || '-' }</span>
-					{incomeIncludesProforma && (
-						<span>
-							<div style={{ color: '#F06D6D' }}>Quotation</div>
-						</span>
-					)}
-				</>
+				<div className={styles.quotation_styles}>
+					<span>
+						{formatAmount({
+							amount   :	actualIncome,
+							currency : incomeCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+
+					</span>
+
+					<div className={styles.quotation_value}>
+						Quotation :
+						{' '}
+						{formatAmount({
+							amount   :	sellQuotation,
+							currency : sellQuotationCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+					</div>
+					<div className={styles.line_value}>
+						<div className={quotationDiffProfit >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
+							{(quotationDiffProfit || 0.00).toFixed(2) || '0'}
+							%
+						</div>
+						<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
+						{' '}
+						<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
+							{formatAmount({
+								amount   :	quotationDiff as any,
+								currency : sellQuotationCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							}) }
+						</div>
+					</div>
+				</div>
 			);
 		},
 	},
 	{
-		Header   : 'Adjusted Income ',
+		Header   : 'Quotation Margin',
 		accessor : 'adjusted_income',
 		id       : 'adjusted_income',
 		Cell     : ({ row: { original } }) => {
-			const { incomeAccrued = {} } = original || {};
-			return <span>{ incomeAccrued || '----' }</span>;
+			const { quotationProfit = '', quotationMargin = '', sellQuotationCurrency } = original || {};
+			return (
+				<div>
+					<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
+						{formatAmount({
+							amount   :	quotationProfit,
+							currency : sellQuotationCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+					</div>
+					<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
+						{(quotationMargin || 0.00)?.toFixed(2) || '0'}
+						%
+					</div>
+				</div>
+			);
 		},
 	},
 	{
 		Header: () => (
 			<div className={styles.flex_sort}>
-				Profit
+				Margin
 				<SortIcon
 					setFilters={setFilters}
 					sortingKey="PROFIT"
@@ -310,7 +398,7 @@ export const accrualColumn = (
 		accessor : 'profit',
 		id       : 'profit',
 		Cell     : ({ row: { original } }) => {
-			const { profit = '', expenseCurrency = '' } = original || {};
+			const { profit = '', expenseCurrency = '', profitPercentage = 0 } = original || {};
 			function checkNumber(number) {
 				if (number > 0) {
 					return 'positive';
@@ -330,23 +418,28 @@ export const accrualColumn = (
 			}
 
 			return (
-				<>
+				<div>
 					<div>
-						<EditIcon
-							profit={profitData}
-							itemData={original}
-							profitValue={profitValue}
-							onEditProfit={editProfitHandler}
-							changeProfitHandler={changeProfitHandler}
-							onCrossProfit={crossProfitHandler}
-							onTickProfit={tickProfitHandler}
-						/>
-					</div>
-					<span className={renderClassName()}>
-						{getFormattedPrice(profit, expenseCurrency) || '-' }
+						<span className={renderClassName()}>
+							<div>
+								{formatAmount({
+									amount   :	profit,
+									currency : expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								}) || '-' }
 
-					</span>
-				</>
+							</div>
+							<div>
+								{(profitPercentage || 0.00).toFixed(2)}
+								%
+							</div>
+						</span>
+					</div>
+				</div>
+
 			);
 		},
 	},
@@ -388,5 +481,20 @@ export const accrualColumn = (
 			);
 		},
 	},
-
+	{
+		Header   : '',
+		id       : 'ribbon',
+		accessor : (row:{ shipmentType?:string }) => {
+			const { shipmentType } = row || {};
+			return (
+				<div>
+					{shipmentType && (
+						<div className={styles.ribbon}>
+							{shipmentType}
+						</div>
+					)}
+				</div>
+			);
+		},
+	},
 ];

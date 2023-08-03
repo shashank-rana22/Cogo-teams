@@ -1,5 +1,6 @@
-import getFormattedPrice from '../../commons/utils/getFormattedPrice';
-import { getAmountInLakhCrK } from '../Logistics/getAmountInLakhCrK';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
 import showInTooltop from '../utils/getOverFlowData';
 
 const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
@@ -11,8 +12,23 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '0-30 DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(thirtyDayOverdue, 'INR'),
-				getAmountInLakhCrK(thirtyDayOverdue, 'INR'),
+				formatAmount({
+					amount   :	thirtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				formatAmount({
+					amount   :	thirtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+						notation        : 'compact',
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_0_30',
@@ -20,8 +36,24 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '30-60 DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(threeSixtyDayOverdue, 'INR'),
-				getAmountInLakhCrK(threeSixtyDayOverdue, 'INR'),
+				formatAmount({
+					amount   : threeSixtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				formatAmount({
+					amount   :	threeSixtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+						notation        : 'compact',
+
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_30_60',
@@ -29,8 +61,24 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '60-90 DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(sixtyDayOverdue, 'INR'),
-				getAmountInLakhCrK(sixtyDayOverdue, 'INR'),
+				formatAmount({
+					amount   :	sixtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				formatAmount({
+					amount   :	sixtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+						notation        : 'compact',
+
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_60_90',
@@ -38,8 +86,24 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '90-180 DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(ninetyDayOverdue, 'INR'),
-				getAmountInLakhCrK(ninetyDayOverdue, 'INR'),
+				formatAmount({
+					amount   :	ninetyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				formatAmount({
+					amount   :	ninetyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+						notation        : 'compact',
+
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_90_180',
@@ -47,8 +111,24 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '180-365 DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(oneEightyDayOverdue, 'INR'),
-				getAmountInLakhCrK(oneEightyDayOverdue, 'INR'),
+				formatAmount({
+					amount   :	oneEightyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				formatAmount({
+					amount   :	oneEightyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+						notation        : 'compact',
+
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count__180_365',
@@ -56,8 +136,24 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '365+ DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(threeSixtyPlusDayOverdue, 'INR'),
-				getAmountInLakhCrK(threeSixtyPlusDayOverdue, 'INR'),
+				formatAmount({
+					amount   :	threeSixtyPlusDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				formatAmount({
+					amount   :	threeSixtyPlusDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+						notation        : 'compact',
+
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_365',

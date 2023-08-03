@@ -35,6 +35,8 @@
 }
 
 .modal_container {
+	margin-top: 20px;
+
 	:global {
 		.ui_modal_dialog {
 			width: 600px !important;
@@ -60,7 +62,6 @@
 
 .currency_values {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	width: fit-content;
 	padding: 14px 20px;
@@ -106,4 +107,49 @@
 	text-decoration-thickness: 3px;
 	text-decoration-color: #ed3726;
 	text-underline-offset: 10px;
+}
+
+.select {
+	padding-top: 26px;
+}
+
+.currency_filter {
+	flex-direction: column;
+}
+
+.select_input {
+	width: 200px;
+	padding-bottom: 12px;
+}
+
+.text {
+	padding: 12px;
+}
+
+.selected_options {
+	display: flex;
+	width: 100%;
+	padding: 4px;
+	margin-bottom: 8px;
+	font-size: var(--font-size-md);
+	background: #edd7a9;
+	border-radius: 6px 0 0 6px;
+}
+
+.selected_items_container {
+	display: flex;
+}
+
+.items {
+	display: flex;
+	width: fit-content;
+	margin-right: 8px;
+}
+
+.cross {
+	padding: 4px 8px;
+	margin-bottom: 8px;
+	cursor: pointer;
+	background-color: #f2e3c3;
+	border-radius: 0 6px 6px 0;
 }

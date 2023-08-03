@@ -4,9 +4,7 @@ import {
 	startCase,
 } from '@cogoport/utils';
 
-const ACTIONS = {
-	startCase,
-};
+const ACTIONS = { startCase };
 
 const getValue = (itemData, itemField, functions, emptyState) => {
 	if (isEmpty(itemData) || isEmpty(itemField)) {

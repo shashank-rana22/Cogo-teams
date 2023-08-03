@@ -11,7 +11,7 @@ function Remarks({ itemData }: Object) {
 	return (
 		<div className={styles.center}>
 			<Popover
-				placement="bottom"
+				placement="left"
 				render={<RemarkContent itemData={itemData} />}
 			>
 				<div>

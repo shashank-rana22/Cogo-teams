@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -21,6 +22,8 @@ const getValue = ({ item, editDetails }) => {
 };
 
 function ContentComponent({ editDetails, setShowForm }) {
+	const { question_text = '' } = editDetails || {};
+
 	return (
 		<div className={`${styles.container} ${styles.flex_row} ${styles.flex}`}>
 			{constants.map((item) => (
@@ -32,6 +35,21 @@ function ContentComponent({ editDetails, setShowForm }) {
 					</div>
 				</div>
 			))}
+
+			<div className={styles.flex_container}>
+				<div className={styles.label}>Description</div>
+
+				<Tooltip
+					content={<div className={styles.tooltip_content}>{question_text}</div>}
+					animation="shift-away"
+					placement="top"
+					interactive
+					theme="light"
+					style={{ width: '400px' }}
+				>
+					<div className={styles.styled_button}>View</div>
+				</Tooltip>
+			</div>
 
 			<div
 				role="presentation"

@@ -74,7 +74,7 @@ function CreateEvent(props) {
 								if (!Element) return null;
 
 								return (
-									<div className={styles.form_group}>
+									<div className={styles.form_group} key={el.name}>
 										<span className={styles.label}>{el.label}</span>
 
 										<div className={styles.input_group}>

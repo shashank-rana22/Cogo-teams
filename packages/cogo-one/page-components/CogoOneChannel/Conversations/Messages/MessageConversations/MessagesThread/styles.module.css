@@ -1,0 +1,53 @@
+.raise_ticket {
+	cursor: pointer;
+}
+
+.loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.load_prev_messages {
+	display: flex;
+	justify-content: center;
+}
+
+.refresh_icon {
+	cursor: pointer;
+}
+
+.arrow_down_icon {
+	position: sticky;
+	bottom: 0;
+	left: 95%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: -1px 2px 9px 2px #e0e0e0;
+}
+
+.arrowicon {
+	fill: #000;
+}
+
+.new_messages_count {
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16px;
+	height: 16px;
+	font-size: 10px;
+	color: #fff;
+	text-align: center;
+	background: #f68b21;
+	border-radius: 50%;
+}

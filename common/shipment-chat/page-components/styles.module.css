@@ -1,4 +1,7 @@
 .chat_container {
+	position: fixed;
+	top: 20px;
+	right: 20px;
 	z-index: 100;
 	transition: 150ms ease-in-out;
 }
@@ -22,15 +25,15 @@
 
 .circle {
 	position: absolute;
-	top: 16px;
-	right: 20px;
+	top: -4px;
+	right: -4px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: fit-content;
 	height: 20px;
-	padding: 2px 4px;
-	font-size: 11px;
+	padding: 2px 8px;
+	font-size: 12px;
 	color: #fff;
 	background-color: #f68b21;
 	border-radius: 10px;

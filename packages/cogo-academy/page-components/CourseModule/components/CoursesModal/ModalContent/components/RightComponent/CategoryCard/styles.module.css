@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100px;
+	padding: 8px;
+	border-radius: 6px;
+	box-shadow: 0 3px 3px rgb(238 52 37 / 15%);
+
+	:global {
+		.ui_pill_container {
+			padding: 4px;
+			margin: 2px;
+		}
+
+		.ui_pill_text {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+}
+
+.outer_container {
+	width: 33%;
+	padding: 12px;
+	cursor: pointer;
+}
+
+.container:hover {
+	transform: scale(1.1);
+}
+
+.title {
+	word-wrap: break-word;
+}

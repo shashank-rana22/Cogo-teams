@@ -1,5 +1,5 @@
-import { Tooltip, Select, Popover, Textarea, Modal, Button } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import { Tooltip, Select, Popover, Textarea, Modal, Button, Pill } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMEyeopen } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
@@ -14,6 +14,8 @@ import {
 	requestCreditNoteColumns, REVENUE_OPTIONS,
 } from './credit-note-config';
 import styles from './style.module.css';
+
+const MAX_LEN = 40;
 
 function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
@@ -42,6 +44,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		creditNoteRemarks,
 		currency,
 		documentUrls,
+		revoked,
 	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
 
 	const { useOnAction:OnAction, loading } = useGetTdsData({
@@ -185,26 +188,38 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${toTitleCase(businessName)}`} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
-						<div className={styles.button_container_data}>
-							<Popover
-								placement="bottom"
-								visible={showPopover}
-								render={content()}
-								{...rest}
-							>
-								<Button
-									themeType="secondary"
-									onClick={() => setShowPopover(!showPopover)}
+						<div className={styles.credit}>
+							<div className={styles.button_container_data}>
+								<Popover
+									placement="bottom"
+									visible={showPopover}
+									render={content()}
+									{...rest}
 								>
-									<div className={styles.flex}>
-										CN Category
-										<div className={styles.icon_container}>
-											{showPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+									<Button
+										themeType="secondary"
+										onClick={() => setShowPopover(!showPopover)}
+									>
+										<div className={styles.flex}>
+											CN Category
+											<div className={styles.icon_container}>
+												{showPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+											</div>
 										</div>
-									</div>
-								</Button>
-							</Popover>
+									</Button>
+								</Popover>
+							</div>
+
+							{typeof (revoked) === 'boolean' && (
+								<div>
+									{revoked
+										? <Pill size="md" color="#C4DC91">Fully</Pill>
+										: <Pill size="md" color="#FEF199">Partial</Pill>}
+								</div>
+							)}
+
 						</div>
+
 						<div className={styles.flex}>
 
 							<div className={styles.value_data}>
@@ -246,7 +261,14 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									SubTotal
 								</div>
 								<div className={styles.date_value}>
-									{getFormattedPrice(subTotal, currency) || '-'}
+									{formatAmount({
+										amount  :	subTotal,
+										currency,
+										options : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || '-'}
 								</div>
 							</div>
 
@@ -255,7 +277,14 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									TaxAmount
 								</div>
 								<div className={styles.date_value}>
-									{getFormattedPrice(taxAmount, currency) || '-'}
+									{formatAmount({
+										amount  :	taxAmount,
+										currency,
+										options : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || '-'}
 								</div>
 							</div>
 
@@ -264,7 +293,15 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									GrandTotal
 								</div>
 								<div className={styles.date_value}>
-									{getFormattedPrice(grandTotal, currency) || '-'}
+
+									{formatAmount({
+										amount  :	grandTotal,
+										currency,
+										options : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || '-'}
 								</div>
 							</div>
 
@@ -272,7 +309,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 						<div className={styles.document_flex}>
 							<div className={styles.document}>Remarks -</div>
-							{remark.length > 40 ? (
+							{remark?.length > MAX_LEN ? (
 								<Tooltip
 									className={styles.tooltip}
 									interactive
@@ -286,7 +323,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						<div className={styles.document_flex}>
 							<div className={styles.document}>Document -</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
-								<a href={url} target="_blank" rel="noreferrer">
+								<a href={url} target="_blank" rel="noreferrer" key={url}>
 									<div className={styles.view_flex}>
 										<div className={styles.view}>View Document</div>
 										<IcMEyeopen />
@@ -294,7 +331,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 								</a>
 							) : (
-								<div> No document available</div>
+								<div key={url}> No document available</div>
 							)))}
 
 						</div>

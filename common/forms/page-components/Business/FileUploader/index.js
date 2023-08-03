@@ -1,10 +1,14 @@
 import { Upload, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMCloudUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
+
+const FILE_NAME_IN_URL_SLICE_INDEX = -1;
+const PERCENT_FACTOR = 100;
 
 function FileUploader(props) {
 	const {
@@ -24,37 +28,43 @@ function FileUploader(props) {
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
-			setFileName([{ name: defaultValues.split('/').slice(-1).join('') }]);
+			setFileName([{ name: defaultValues.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join('') }]);
 			setUrlStore([{
-				fileName : defaultValues.split('/').slice(-1).join(''),
+				fileName : defaultValues.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join(''),
 				finalUrl : defaultValues,
 			}]);
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
-			const names = defaultValues.map((url) => ({ name: url.split('/').slice(-1).join('') }));
-			const urls = defaultValues.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
+			const names = defaultValues.map((url) => ({
+				name: url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
+			}));
+			const urls = defaultValues.map((url) => ({
+				fileName : url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
+				finalUrl : url,
+			}));
 
 			setFileName(names);
 			setUrlStore(urls);
 		}
 		setLoading(false);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [defaultValues?.length > 0]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [!isEmpty(defaultValues)]);
 
 	useEffect(() => {
 		if (multiple) {
 			onChange(urlStore);
 		} else {
-			onChange(urlStore[0]);
+			onChange(urlStore[GLOBAL_CONSTANTS.zeroth_index]);
 		}
-	}, [multiple, urlStore, onChange]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [multiple, urlStore]);
 
 	const onUploadProgress = (index) => (file) => {
 		setProgress((previousProgress) => ({
 			...previousProgress,
 			[`${index}`]: (() => {
 				const { loaded, total } = file;
-				const percentCompleted = Math.floor((loaded * 100) / total);
+				const percentCompleted = Math.floor((loaded * PERCENT_FACTOR) / total);
 
 				return percentCompleted;
 			})(),
@@ -83,7 +93,7 @@ function FileUploader(props) {
 			onUploadProgress: onUploadProgress(index),
 		});
 
-		const finalUrl = url.split('?')[0];
+		const finalUrl = url.split('?')[GLOBAL_CONSTANTS.zeroth_index];
 
 		return finalUrl;
 	};
@@ -92,7 +102,7 @@ function FileUploader(props) {
 		try {
 			setLoading(true);
 
-			if (values.length > 0) {
+			if (values?.length) {
 				setProgress({});
 
 				const promises = values.map((value, index) => uploadFile(index)(value));
@@ -106,7 +116,11 @@ function FileUploader(props) {
 					});
 					setFileName((prev) => {
 						if (prev === null) return values;
-						return [...prev, ...values];
+						let prevValue = [];
+
+						if (typeof prev !== 'object' || !Array.isArray(prev)) { prevValue = prev?.target?.value || []; }
+
+						return [...prevValue, ...values];
 					});
 				} else {
 					setUrlStore(allUrls);
@@ -122,7 +136,7 @@ function FileUploader(props) {
 
 	const handleDelete = (values) => {
 		setFileName(values);
-		const files = values.map((item) => item.name);
+		const files = Array.isArray(values) ? values?.map((item) => item.name) : [];
 		const newUrls = urlStore.filter((item) => files.includes(item.fileName));
 		setUrlStore(newUrls);
 	};
@@ -142,7 +156,7 @@ function FileUploader(props) {
 			/>
 
 			{loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
-				<div className={styles.progress_container}>
+				<div className={styles.progress_container} key={key}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}
 					/>

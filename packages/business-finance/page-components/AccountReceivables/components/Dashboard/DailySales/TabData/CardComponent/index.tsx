@@ -1,6 +1,5 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
@@ -47,8 +46,8 @@ function CardComponent({
 			return (
 				<div className={styles.place}>
 					{
-				[1, 2, 3, 4].map(() => (
-					<Placeholder className={styles.placeholder_container} />
+				[1, 2, 3, 4].map((val) => (
+					<Placeholder key={val} className={styles.placeholder_container} />
 				))
                       }
 				</div>
@@ -59,33 +58,38 @@ function CardComponent({
 			return (dailyStatsData[subActiveTab] || [{}]).map((item) => {
 				const { count, amount, duration, dashboardCurrency } = item || {};
 				return (
-					<div className={styles.item}>
+					<div className={styles.item} key={item}>
 						<div className={styles.sub_flex}>
 							<div className={styles.label_flex}>
-								<div className={styles.styled_text}>
-									{dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
-								</div>
+								<div className={styles.styled_text} />
 								<div className={styles.label}>
 									<Tooltip content={(
 										<div>
-											{getFormattedPrice(
+											{formatAmount({
 												amount,
-												dashboardCurrency,
-											)}
+												currency : dashboardCurrency,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+
+												},
+											})}
 										</div>
 									)}
 									>
 										<div className={styles.wrapper}>
-											{getFormattedPrice(
-												amount || 0,
-												dashboardCurrency,
-												{
+											{formatAmount({
+												amount   : amount || 0,
+												currency : dashboardCurrency,
+												options  : {
 													notation              : 'compact',
 													compactDisplay        : 'short',
+													currencyDisplay       : 'code',
 													maximumFractionDigits : 2,
-													style                 : 'decimal',
+													style                 : 'currency',
+
 												},
-											)}
+											})}
 										</div>
 
 									</Tooltip>

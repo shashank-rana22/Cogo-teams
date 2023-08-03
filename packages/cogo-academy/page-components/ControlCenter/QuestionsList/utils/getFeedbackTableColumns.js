@@ -14,6 +14,7 @@ const finalTagsToDisplay = (tags) => {
 		size  : 'md',
 	}] : tagsToDisplay;
 };
+
 const hiddenTagsToDisplay = (tags) => {
 	const tagsToDisplay = (tags || []).map((tag) => ({
 		label : tag,
@@ -21,6 +22,7 @@ const hiddenTagsToDisplay = (tags) => {
 	}));
 	return tagsToDisplay.length > 3 ? [...tagsToDisplay.slice(3, tagsToDisplay.length)] : '';
 };
+
 const truncate = (str) => (str?.length > 38 ? `${startCase(str.substring(0, 36))}...` : startCase(str));
 
 const columns = ({
@@ -39,11 +41,7 @@ const columns = ({
 	{
 		Header   : 'TOPICS',
 		accessor : (item) => {
-			const tags = (item.faq_topics
-				|| []).map((ele) => {
-				const { display_name } = ele || {};
-				return display_name;
-			});
+			const tags = (item.faq_topics || []).map(({ display_name }) => (display_name));
 
 			return (
 				<div className={styles.pills}>

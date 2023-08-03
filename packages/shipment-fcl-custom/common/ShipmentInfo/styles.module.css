@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
+
+	.link {
+		cursor: pointer;
+
+		:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.inactive {
+		> div {
+			cursor: initial;
+		}
+	}
+
+	:global {
+		.ui_pill_text {
+			white-space: nowrap;
+		}
+	}
+}
+
+.pill {
+	display: flex;
+	white-space: nowrap;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+
+	button {
+		margin: 0;
+	}
+}

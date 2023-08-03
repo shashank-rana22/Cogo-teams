@@ -16,6 +16,10 @@
 		.ui_select_options_container {
 			width: 150%;
 		}
+
+		.heading {
+			display: none;
+		}
 	}
 }
 

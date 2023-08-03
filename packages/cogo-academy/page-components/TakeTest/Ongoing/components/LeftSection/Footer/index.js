@@ -7,7 +7,11 @@ function Footer({
 	currentQuestion,
 	total_question,
 	fetchQuestions,
+	subjectiveAnswer,
+	setSubjectiveAnswer,
 	loading: getLoading,
+	uploadValue,
+	setUploadValue,
 	...restProps
 }) {
 	const {
@@ -18,6 +22,10 @@ function Footer({
 		currentQuestion,
 		total_question,
 		fetchQuestions,
+		subjectiveAnswer,
+		setSubjectiveAnswer,
+		uploadValue,
+		setUploadValue,
 		...restProps,
 	});
 

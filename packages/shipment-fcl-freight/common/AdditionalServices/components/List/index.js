@@ -1,38 +1,48 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
-import AddIp from '../AddIp';
-import AddRate from '../AddRate';
 import Loader from '../Loader';
 
-import AddService from './AddService';
 import Info from './Info';
 import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
-function List({
-	services = [],
-	isSeller = false,
-	refetchServices = () => { },
-}) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+const AddIp = dynamic(() => import('../AddIp'), { ssr: false });
+const AddRate = dynamic(() => import('../AddRate'), { ssr: false });
+const AddService = dynamic(() => import('./AddService'), { ssr: false });
+const CargoInsurance = dynamic(() => import('./CargoInsurance'), { ssr: false });
 
-	const [addSellPrice, setAddSellPrice] = useState(false);
-	const [showChargeCodes, setShowChargeCodes] = useState(false);
+const DEFAULT_PAGE_LIMIT = 8;
+const SHOW_MORE_PAGE_LIMIT = 16;
+
+const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent',
+	'superadmin', 'admin'];
+
+function List({ isSeller = false }) {
+	const {
+		servicesList, refetchServices = () => {},
+		shipment_data, activeStakeholder, primary_service, stakeholderConfig,
+	} = useContext(
+		ShipmentDetailContext,
+	);
+
+	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
+		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
+
+	const canEditCancelService = !!stakeholderConfig?.overview?.can_edit_cancel_service;
+
 	const [item, setItem] = useState({});
-	const [showIp, setShowIp] = useState(false);
-	const [pageLimit, setPageLimit] = useState(8);
+	const [showModal, setShowModal] = useState(false);
+	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
 
-	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
-		shipment_data,
-		pageLimit,
-	});
+	const { list: additionalServiceList, refetch = () => {}, loading, totalCount } = useListAdditionalServices();
 
 	const handleRefetch = () => {
 		refetchServices();
@@ -40,20 +50,22 @@ function List({
 	};
 
 	const refetchForUpdateSubService = () => {
-		setShowIp(false);
+		setShowModal(false);
 		refetch();
 	};
 
 	const updateResponse = useUpdateShipmentAdditionalService({
 		item,
-		setShowIp,
-		refetch: refetchForUpdateSubService,
-		showIp,
+		refetch : refetchForUpdateSubService,
+		showIp  : showModal === 'ip',
 	});
 
+	const isCargoInsured = servicesList?.some((service) => service?.service_type === 'cargo_insurance_service');
+
 	return (
-		<div className={styles.container}>
-			{loading && <Loader />}
+		<section className={styles.container}>
+			{loading ? <Loader /> : null}
+
 			{!isEmpty(additionalServiceList) && !loading ? (
 				<div className={styles.added_services}>
 					{additionalServiceList?.map((serviceListItem) => {
@@ -61,19 +73,21 @@ function List({
 
 						return (
 							<ItemAdded
+								key={serviceListItem}
 								item={serviceListItem}
 								status={status}
-								showIp={showIp}
+								showIp={showModal === 'ip'}
 								actionButton={actions({
 									status,
 									serviceListItem,
-									setShowIp,
-									setAddSellPrice,
+									setShowModal,
 									setItem,
 									shipment_data,
+									activeStakeholder,
+									canEditCancelService,
 								})}
 								refetch={handleRefetch}
-								services={services}
+								services={servicesList}
 								isSeller={isSeller}
 							/>
 						);
@@ -81,15 +95,15 @@ function List({
 				</div>
 			) : null}
 
-			{totalCount > 8
+			{totalCount > DEFAULT_PAGE_LIMIT
 				? (
 					<div className={styles.show_more}>
-						{pageLimit > 8
+						{pageLimit > DEFAULT_PAGE_LIMIT
 							? 	(
 								<Button
 									size="md"
 									themeType="link"
-									onClick={() => setPageLimit(8)}
+									onClick={() => setPageLimit(DEFAULT_PAGE_LIMIT)}
 								>
 									Show Less
 								</Button>
@@ -97,7 +111,7 @@ function List({
 								<Button
 									size="md"
 									themeType="link"
-									onClick={() => setPageLimit(16)}
+									onClick={() => setPageLimit(SHOW_MORE_PAGE_LIMIT)}
 								>
 									Show More
 								</Button>
@@ -109,66 +123,95 @@ function List({
 			{additionalServiceList?.length ? (
 				<div className={styles.info_container}>
 					<div className={styles.circle} />
-					<div className={styles.service_name}>Incidental Services</div>
+					<span className={styles.service_name}>Incidental Services</span>
 					<div className={cl` ${styles.circle} ${styles.upsell}`} />
-					<div className={styles.service_name}>Upselling Services</div>
+					<span className={styles.service_name}>Upselling Services</span>
 					<Info />
 				</div>
 			) : null}
+
 			<div className={styles.not_added}>
-				<Button
-					onClick={() => setShowChargeCodes(true)}
-					disabled={shipment_data?.is_job_closed}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Additional Services
-				</Button>
+
+				{isAdditionalServiceAllowed
+					? (
+						<Button
+							onClick={() => setShowModal('charge_code')}
+							disabled={shipment_data?.is_job_closed}
+						>
+							<span className={styles.add_icon}>+</span>
+							Add Additional Services
+						</Button>
+					)
+					: null }
+
+				{canEditCancelService ? (
+					<Button
+						onClick={() => setShowModal('cargo_insurance_service')}
+						className={styles.btn_div}
+						disabled={!!isCargoInsured}
+					>
+						<span className={styles.add_icon}>+</span>
+						Add Cargo Insurance
+					</Button>
+				) : null }
 			</div>
 
-			{addSellPrice ? (
-				<Modal
-					size="lg"
-					show={addSellPrice}
-					onClose={() => setAddSellPrice(null)}
-					closable={false}
-					placement="top"
-					onOuterClick={() => setAddSellPrice(null)}
-				>
-					<Modal.Body>
-						<AddRate
-							item={item?.serviceListItem}
-							status={item?.status}
-							setAddSellPrice={setAddSellPrice}
-							updateResponse={updateResponse}
-						/>
-					</Modal.Body>
-				</Modal>
-			) : null}
+			{showModal === 'add_sell_price'
+				? (
+					<Modal
+						size="lg"
+						show
+						onClose={() => setShowModal(false)}
+						closeOnOuterClick={false}
+						showCloseIcon={!updateResponse.loading}
+					>
+						<Modal.Header title="Add Sell Price" />
 
-			{showIp ? (
-				<AddIp
-					shipmentData={shipment_data}
-					setShowIp={setShowIp}
-					showIp={showIp}
-					updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
-				/>
+						<Modal.Body>
+							<AddRate
+								item={item?.serviceListItem}
+								status={item?.status}
+								setAddSellPrice={setShowModal}
+								updateResponse={updateResponse}
+								source="add_sell_price"
+							/>
+						</Modal.Body>
+					</Modal>
+				)
+				: null}
 
-			) : null}
+			{showModal === 'ip'
+				? (
+					<AddIp
+						shipmentData={shipment_data}
+						setShowIp={setShowModal}
+						updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
+					/>
+				)
+				: null}
 
-			{showChargeCodes ? (
-				<AddService
-					shipmentId={shipment_data?.id}
-					services={services}
-					isSeller={isSeller}
+			{showModal === 'charge_code'
+				? (
+					<AddService
+						shipmentId={shipment_data?.id}
+						services={servicesList}
+						isSeller={isSeller}
+						refetch={refetch}
+						setItem={setItem}
+						setShowChargeCodes={setShowModal}
+					/>
+				)
+				: null}
+
+			{showModal === 'cargo_insurance_service' ? (
+				<CargoInsurance
+					data={shipment_data}
 					refetch={refetch}
-					setItem={setItem}
-					showChargeCodes={showChargeCodes}
-					setShowChargeCodes={setShowChargeCodes}
+					setShowModal={setShowModal}
+					primary_service={primary_service}
 				/>
-
 			) : null}
-
-		</div>
+		</section>
 	);
 }
 

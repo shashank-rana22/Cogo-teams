@@ -8,15 +8,16 @@ import InvoiceDetails from './InvoiceDetails/index';
 import ShipmentDetails from './ShipmentDetails/index';
 import SupplierDetails from './SupplierDetails/index';
 import Tagging from './Taggings';
+import VendorDetail from './VendorDetails';
 
 function ViewInvoices() {
 	const { query } = useRouter();
-	const { billId, orgId, status, jobNumber } = query || {};
+	const { billId, orgId, status, jobNumber, jobType } = query || {};
 	const [remarksVal, setRemarksVal] = useState({
-		collectionPartyRemark : '',
-		billingPartyRemark    : '',
-		invoiceDetailsRemark  : '',
-		taggingRemark         : '',
+		collectionPartyRemark : [],
+		billingPartyRemark    : [],
+		invoiceDetailsRemark  : [],
+		taggingRemark         : [],
 	});
 	const [overAllRemark, setOverAllRemark] = useState('');
 	const [lineItemsRemarks, setLineItemsRemarks] = useState({});
@@ -41,6 +42,14 @@ function ViewInvoices() {
 				status={status}
 			/>
 			<Tagging billId={billId} setRemarksVal={setRemarksVal} status={status} />
+
+			{fullResponse?.billAdditionalObject?.shipmentType === 'ftl_freight'
+			&& (
+				<VendorDetail
+					data={fullResponse}
+				/>
+			)}
+
 			<SupplierDetails
 				data={fullResponse}
 				paymentsData={paymentsData}
@@ -49,7 +58,6 @@ function ViewInvoices() {
 			<InvoiceDetails data={fullResponse} getBillRefetch={getBillRefetch} />
 			<ShipmentDetails
 				data={fullResponse}
-				orgId={query?.orgId || ''}
 				remarksVal={remarksVal}
 				setRemarksVal={setRemarksVal}
 				lineItemsRemarks={lineItemsRemarks}
@@ -57,6 +65,7 @@ function ViewInvoices() {
 				setLineItem={setLineItem}
 				lineItem={lineItem}
 				status={status}
+				jobType={jobType}
 			/>
 		</div>
 	);

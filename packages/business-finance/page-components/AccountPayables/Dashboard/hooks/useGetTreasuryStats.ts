@@ -39,7 +39,7 @@ const useGetTreasuryStats = ({ activeEntity }:ItemProps) => {
 							: undefined,
 						toDate: endDate
 							? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
-						entityCode: activeEntity,
+						entityCode: [activeEntity],
 					},
 				});
 			} catch (err) {

@@ -1,8 +1,8 @@
 import { BarDatum, ResponsiveBar } from '@cogoport/charts/bar';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
-const tooltTipStyle = {
+const TOOL_TIPS_STYLE = {
 	fontSize     : '10px',
 	background   : '#eee',
 	padding      : '5px',
@@ -42,7 +42,7 @@ function BarChart({
 	margin = {},
 	dsoResponse = false,
 }: BarchartProps) {
-	const axisPadding = {
+	const AXIS_PADDING = {
 		tickSize    : 0,
 		tickPadding : 12,
 		fill        : 'red',
@@ -58,7 +58,7 @@ function BarChart({
 				colors={dsoResponse ? ['#DDEBC0'] : ['#FFD555']}
 				layout="vertical"
 				enableGridY={!!dsoResponse}
-				axisLeft={axisPadding}
+				axisLeft={AXIS_PADDING}
 				padding={0.5}
 				maxValue="auto"
 				minValue="auto"
@@ -69,21 +69,22 @@ function BarChart({
 				innerPadding={0}
 				label=""
 				tooltip={({ label, value }) => (
-					<strong style={tooltTipStyle}>
+					<strong style={TOOL_TIPS_STYLE}>
 						{label?.split('-')[0]}
 						{' '}
 						:
 						{' '}
 						<tspan color="#000">
-							{getFormattedPrice(
-								value,
-								currencyType,
-								{
+							{formatAmount({
+								amount   : value,
+								currency : currencyType as string,
+								options  : {
+									currencyDisplay       : 'code',
 									compactDisplay        : 'short',
 									maximumFractionDigits : 2,
-									style                 : 'decimal',
+									style                 : 'currency',
 								},
-							)}
+							})}
 						</tspan>
 					</strong>
 				)}
@@ -101,7 +102,17 @@ function BarChart({
 								style={{ dominantBaseline: 'central', fontWeight: '600', fontSize: 11, fill: '#333' }}
 							>
 								{' '}
-								{getAmountInLakhCrK(bar.data.value)}
+								{formatAmount({
+									amount   : bar.data.value as any,
+									currency : currencyType as string,
+									options  : {
+										notation              : 'compact',
+										currencyDisplay       : 'code',
+										compactDisplay        : 'short',
+										maximumFractionDigits : 2,
+										style                 : 'currency',
+									},
+								})}
 								{' '}
 								{' '}
 							</text>

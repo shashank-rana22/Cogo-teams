@@ -3,15 +3,23 @@
 	display: flex;
 	flex-direction: row;
 	background-color: #f6f5fe;
+
+	:global {
+		.ui_accordion_content {
+			background-color: #fff !important;
+			border-top: 1px solid var(--color-secondary-greyscale-5) !important;
+			border-radius: initial;
+		}
+	}
 }
 
 .bl_overview_card {
 	height: auto;
 	padding-left: 15px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 600;
-	color: #393f70;
-	background: #fff;
+	color: var(--color-secondary-greyscale-1);
+	background-color: var(--color-secondary-5);
 	border-radius: 4px;
 	box-shadow: 0 0 10 rgb(0 0 0 / 20%);
 }
@@ -30,16 +38,16 @@
 	display: flex;
 	align-items: center;
 	width: 100%;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 600;
 	line-height: 19px;
-	color: #393f70;
+	color: var(--color-secondary-greyscale-1);
 	white-space: nowrap;
 
 	.bl-count {
 		margin: 0 8px;
 		font-weight: 400;
-		color: #828282;
+		color: var(--color-secondary-greyscale-3);
 
 		@media (max-width: 768px) {
 			font-size: 10;
@@ -52,12 +60,18 @@
 }
 
 .manage_services_div {
-	padding: 28px 32px 8px;
+	padding: 20px 5px 10px;
+
+	:global {
+		.ui_accordion_container,
+		.ui_accordion_header {
+			background-color: var(--color-tertiary-blue-5) !important;
+		}
+	}
 }
 
 .service_card {
 	margin-bottom: 16px;
-	border: 1px solid #ded7fc;
 	border-radius: 4px;
 
 	:global {
@@ -71,4 +85,8 @@
 	position: absolute;
 	top: 5px;
 	left: 410px;
+}
+
+.bl_count {
+	margin-left: 8px;
 }

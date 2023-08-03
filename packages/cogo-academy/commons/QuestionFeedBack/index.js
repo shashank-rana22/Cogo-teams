@@ -3,12 +3,14 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
+import Spinner from '../Spinner';
+
 import FeedBackContent from './FeedbackContent';
 import styles from './styles.module.css';
 import useGetFaqFeedback from './useGetFaqFeedback';
 import useListfaqFeedback from './useListFaqFeedback';
 
-function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuestion, faqAudiences }) {
+function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuestion }) {
 	const general = useSelector((state) => state.general || {});
 	const { feedbackId = '' } = general.query || {};
 
@@ -22,9 +24,10 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuesti
 		question_answer_remark,
 		question_remark,
 		fetchListFaqFeedback,
+		loading,
 	} = useListfaqFeedback({ id, feedbackId });
 
-	const { data = {} } = useGetFaqFeedback({ feedbackId, page });
+	const { data = {}, getApiLoading } = useGetFaqFeedback({ feedbackId, page });
 
 	const feedbacksList = page === 1 && feedbackId ? [data] : [];
 
@@ -56,6 +59,21 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuesti
 		answer                   : answer_remark + feedbackOnAnswer,
 		both_question_and_answer : question_answer_remark + feedbackonBoth,
 	};
+
+	if (getApiLoading || loading) {
+		return (
+			<div className={styles.spinner}>
+				<Spinner
+					borderWidth="4px"
+					outerBorderColor="#FBD69F"
+					spinBorderColor="red"
+					width="60px"
+					height="60px"
+
+				/>
+			</div>
+		);
+	}
 
 	if (isEmpty(feedbacksList)) {
 		return null;
@@ -89,7 +107,6 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuesti
 						key={id}
 						fetchListFaqFeedback={fetchListFaqFeedback}
 						fetchQuestion={fetchQuestion}
-						faqAudiences={faqAudiences}
 
 					/>
 				))}

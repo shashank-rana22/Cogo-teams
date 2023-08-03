@@ -66,16 +66,10 @@ const getFormControls = () => [
 		accept     : '.png, .jpeg',
 	},
 	{
-		name           : 'audience_ids',
-		type           : 'multiselect',
-		optionsListKey : 'audiences',
-		isClearable    : true,
-		label          : 'Select Audience',
-		params         : {
-			filters: {
-				status: 'active',
-			},
-		},
+		name        : 'audience_ids',
+		type        : 'multiselect',
+		isClearable : true,
+		label       : 'Select Audience',
 		placeholder : 'Select Audience',
 		rules       : { required: 'Required' },
 	},

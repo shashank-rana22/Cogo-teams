@@ -1,9 +1,30 @@
-import TABS_CONFIG from '../config/TABS_CONFIG.json';
-import FCL from '../config/tabSpecificPayload/FCL.json';
-import FCL_Local from '../config/tabSpecificPayload/FCL_LOCAL.json';
-import LCL from '../config/tabSpecificPayload/LCL.json';
+import setDateHours from '@cogoport/core/helpers/setDateHours';
 
-const shipmentStates = {
+import NUMERICAL_VALUES from '../config/NUMERICAL_VALUES.json';
+import TABS_CONFIG from '../config/TABS_CONFIG';
+import FCL_CFS from '../config/tabSpecificPayload/FCL_CFS.json';
+import FCL_CUSTOM from '../config/tabSpecificPayload/FCL_CUSTOM.json';
+import FCL_EXPORT from '../config/tabSpecificPayload/FCL_EXPORT.json';
+import FCL_IMPORT from '../config/tabSpecificPayload/FCL_IMPORT.json';
+import FCL_LOCAL from '../config/tabSpecificPayload/FCL_LOCAL.json';
+import LCL_EXPORT from '../config/tabSpecificPayload/LCL_EXPORT.json';
+import LCL_IMPORT from '../config/tabSpecificPayload/LCL_IMPORT.json';
+
+const timezoneOffset = new Date().getTimezoneOffset()
+	* NUMERICAL_VALUES.SECONDS_IN_ONE_MINUTE
+	* NUMERICAL_VALUES.MILLISECONDS_IN_ONE_SECOND;
+
+const getPayloadDate = (daysLater = '') => {
+	let daysLaterDate = new Date();
+
+	daysLaterDate.setDate(daysLaterDate.getDate() + NUMERICAL_VALUES.DAYS_LATER[daysLater]);
+	daysLaterDate.setTime(daysLaterDate.getTime() - timezoneOffset);
+	daysLaterDate = setDateHours({ date: daysLaterDate, time: '23:59:59:999' });
+
+	return daysLaterDate;
+};
+
+const SHIPMENT_STATES = {
 	in_progress: [
 		'shipment_received',
 		'confirmed_by_importer_exporter',
@@ -11,44 +32,56 @@ const shipmentStates = {
 	],
 	cancelled: ['cancelled'],
 };
-shipmentStates.completed = [...shipmentStates.in_progress, 'completed'];
 
-const shipmentSpecificPayload = {
-	fcl_freight       : FCL,
-	fcl_freight_local : FCL_Local,
-	lcl_freight       : LCL,
+const TRADE_TYPES = ['import', 'export'];
+
+SHIPMENT_STATES.completed = [...SHIPMENT_STATES.in_progress, 'completed'];
+
+const SHIPMENT_SPECIFIC_PAYLOAD = {
+	fcl_freight_export : FCL_EXPORT,
+	fcl_freight_import : FCL_IMPORT,
+	fcl_freight_local  : FCL_LOCAL,
+	fcl_freight_cfs    : FCL_CFS,
+	fcl_freight_custom : FCL_CUSTOM,
+	lcl_freight_export : LCL_EXPORT,
+	lcl_freight_import : LCL_IMPORT,
 };
 
-const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
+export default function getListBookingDeskShipmentsPayload({
+	filters = {},
+	tabState = {},
+	selected_agent_id = '',
+}) {
+	const { isCriticalOn, page, q, ...restFilters } = filters;
+	const { stepperTab, segmentedTab, activeTab } = tabState;
 
-export default function getListBookingDeskShipmentsPayload({ filters, activeTab, selected_agent_id }) {
-	const { isCriticalOn, page, q, shipment_type, ...restFilters } = filters;
+	const { tabs } = TABS_CONFIG[stepperTab].segmented_tabs[segmentedTab] || {};
 
-	const tabSpecificPayload = shipmentSpecificPayload[shipment_type][activeTab];
+	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible || false;
 
-	const tabs = TABS_CONFIG[shipment_type];
+	const tabSpecificPayload = (SHIPMENT_SPECIFIC_PAYLOAD[`${stepperTab}_${segmentedTab}`] || {})[activeTab] || {};
 
-	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible ?? false;
+	const oneDayLater = getPayloadDate('ONE_DAY_LATER');
+	const threeDaysLater = getPayloadDate('THREE_DAYS_LATER');
 
-	const threeDaysLater = new Date();
-	threeDaysLater.setDate(threeDaysLater.getDate() + 3);
-	threeDaysLater.setTime(threeDaysLater.getTime() - timezoneOffset);
+	const criticalPayload = activeTab === 'container_pick_up'
+		? { bn_expiry_less_than: oneDayLater }
+		: { schedule_departure_less_than: threeDaysLater };
 
 	const payload = {
 		filters: {
-			state: shipmentStates[activeTab] || shipmentStates.in_progress,
-			...(tabSpecificPayload[filters.trade_type] || tabSpecificPayload),
-			...(selected_agent_id && { selected_agent_id }),
-			...(isCriticalVisible && isCriticalOn
-				&& { schedule_departure_less_than: threeDaysLater }),
-			...(q && { q }),
 			...restFilters,
+			state: SHIPMENT_STATES[activeTab] || SHIPMENT_STATES.in_progress,
+			...tabSpecificPayload,
+			...(selected_agent_id && { stakeholder_id: selected_agent_id }),
+			...(isCriticalVisible && isCriticalOn ? criticalPayload : {}),
+			...(q && { q }),
+			...(TRADE_TYPES.includes(segmentedTab) && { trade_type: segmentedTab }),
 		},
 		page,
 		additional_methods : ['pagination'],
 		sort_by            : 'created_at',
 		sort_type          : 'desc',
-
 	};
 
 	return payload;

@@ -10,9 +10,10 @@ import styles from './styles.module.css';
 interface OutsatndingKamProps {
 	kamOutstandingData?: object[],
 	kamOutstandingLoading?: boolean
+	entityCode?: string
 }
 
-function OutStandingKam({ kamOutstandingData, kamOutstandingLoading }: OutsatndingKamProps) {
+function OutStandingKam({ kamOutstandingData, kamOutstandingLoading, entityCode }: OutsatndingKamProps) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.styled_container}>
@@ -20,17 +21,12 @@ function OutStandingKam({ kamOutstandingData, kamOutstandingLoading }: Outsatndi
 					className={styles.overall_outstanding_container}
 				>
 					<div
-						className={styles.outstanding_container}
+						className={styles.styled_text}
 					>
-						<div
-							className={styles.styled_text}
-						>
-							Outstanding
-						</div>
-
+						Outstanding By KAM
 					</div>
+
 					<div className={styles.styled_kam_text}>
-						By KAM
 						<Tooltip
 							content={(
 								<div>
@@ -54,7 +50,7 @@ function OutStandingKam({ kamOutstandingData, kamOutstandingLoading }: Outsatndi
 					<div>
 						<div className={styles.table}>
 							<Table
-								columns={OutstandingKamColumn}
+								columns={OutstandingKamColumn({ entityCode })}
 								data={kamOutstandingData || [{}]}
 								loading={kamOutstandingLoading}
 							/>

@@ -1,36 +1,80 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcCWhatsapp, IcCFacebook, IcCInstagram,
 	IcCLcl,
 	IcCFcl,
 	IcCAir,
 	IcMFftl,
-	IcMFltl, IcCTelegram,
+	IcMFltl, IcCTelegram, IcCZalo,
 } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 
 export const SOURCE_ICON_MAPPING = {
 	whatsapp  : <IcCWhatsapp width={25} height={25} />,
 	facebook  : <IcCFacebook width={25} height={25} />,
 	instagram : <IcCInstagram width={25} height={25} />,
 	telegram  : <IcCTelegram width={25} height={25} />,
+	zalo      : <IcCZalo width={25} height={25} />,
 	email     : <img
-		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg"
-		alt=""
+		src={GLOBAL_CONSTANTS.image_url.email_svg}
+		alt="email_svg"
 		width="18px"
 		height="18px"
 	/>,
 	platform_chat: <img
-		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg"
-		alt=""
+		src={GLOBAL_CONSTANTS.image_url.platform_chat_svg}
+		alt="platform_chat_svg"
 		width="18px"
 		height="18px"
 	/>,
 	platform_notification: <img
-		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg"
-		alt=""
+		src={GLOBAL_CONSTANTS.image_url.platform_notification_svg}
+		alt="platform_notification_svg"
 		width="30px"
 		height="30px"
 	/>,
-
+	user: <Image
+		src={GLOBAL_CONSTANTS.image_url.login_failed}
+		alt="status-icon"
+		width={18}
+		height={18}
+	/>,
+	checkout: <Image
+		src={GLOBAL_CONSTANTS.image_url.checkout_failed}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
+	communication: <Image
+		src={GLOBAL_CONSTANTS.image_url.email_clicked}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
+	shipment: <Image
+		src={GLOBAL_CONSTANTS.image_url.abandon_shipmemts}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
+	spot_search: <Image
+		src={GLOBAL_CONSTANTS.image_url.checkout_failed}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
+	lead_user: <Image
+		src={GLOBAL_CONSTANTS.image_url.sign_up_failed}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
+	organization: <Image
+		src={GLOBAL_CONSTANTS.image_url.kyc_event}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
 };
 
 export const TAGS_COLORS = ['#FEF3E9', '#F3FAFA'];
@@ -42,10 +86,23 @@ export const ASSIGNE_COLORS = {
 };
 
 export const VOICE_ICON_MAPPING = {
-	missed        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
-	not_connected : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
-	outgoing      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
-	incoming      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
+	missed        : GLOBAL_CONSTANTS.image_url.missed_call_svg,
+	not_connected : GLOBAL_CONSTANTS.image_url.not_connected_svg,
+	outgoing      : GLOBAL_CONSTANTS.image_url.outgoing_svg,
+	incoming      : GLOBAL_CONSTANTS.image_url.incoming_svg,
+};
+
+export const CALL_HISTORY_AUDIO_ICONS = {
+	user: {
+		start      : GLOBAL_CONSTANTS.image_url.start_user_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_user_audio,
+		compStyles : { borderTopLeftRadius: '0px', background: '#FFFFFF' },
+	},
+	agent: {
+		start      : GLOBAL_CONSTANTS.image_url.start_agent_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_agent_audio,
+		compStyles : { borderTopRightRadius: '0px', background: '#FFFCE6' },
+	},
 };
 
 export const USER_ACTIVITY_MAPPING = {
@@ -55,7 +112,7 @@ export const USER_ACTIVITY_MAPPING = {
 	summary       : 'Summary',
 };
 
-export const emptyChat = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg';
+export const emptyChat = GLOBAL_CONSTANTS.image_url.empty_chat_jpg;
 
 export const SERVICE = {
 	fcl_freight     : 'FCL',
@@ -75,8 +132,8 @@ export const SERVICE_ICON_MAPPING = {
 };
 
 export const LOGO_URL = {
-	admin : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg',
-	bot   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
+	admin : GLOBAL_CONSTANTS.image_url.admin_logo_svg,
+	bot   : GLOBAL_CONSTANTS.image_url.bot_logo_svg,
 };
 
 export const OFFLINE_STATUS_OPTIONS = [
@@ -108,11 +165,9 @@ export const PLATFORM_MAPPING = {
 	public_app     : 'App Platform',
 };
 
-// eslint-disable-next-line max-len
-export const URL_MATCH_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
-
-export const ENDS_WITH_STAR_SPACE = /\* /;
-export const ENDS_WITH_STAR_CHAR = /\*[^0-9a-zA-Z]/;
+export const URL_MATCH_REGEX = GLOBAL_CONSTANTS.regex_patterns.url_match_regex;
+export const ENDS_WITH_STAR_SPACE = GLOBAL_CONSTANTS.regex_patterns.ends_with_star_space;
+export const ENDS_WITH_STAR_CHAR = GLOBAL_CONSTANTS.regex_patterns.ends_with_star_char;
 
 export const DEFAULT_PILLS_ITEMS = [
 	{
@@ -136,17 +191,11 @@ export const DEFAULT_PILLS_ITEMS = [
 		value : 'other',
 	},
 ];
-export const statusMapping = {
-	approved : 'Approved',
-	rejected : 'Rejected',
-	pending  : 'Pending',
 
-};
-
-export const statusColorMapping = {
-	approved : 'green',
-	rejected : 'red',
-	pending  : 'orange',
+export const STATUS_MAPPING = {
+	approved : { label: 'Approved', color: 'green' },
+	rejected : { label: 'Rejected', color: 'red' },
+	pending  : { label: 'Pending', color: 'orange' },
 
 };
 
@@ -242,7 +291,7 @@ export const MAIL_REPLY_TYPE = [
 		label : 'Reply',
 		value : 'reply',
 		icon  : <img
-			src="https://cdn-icons-png.flaticon.com/512/1933/1933011.png"
+			src={GLOBAL_CONSTANTS.image_url.reply_icon_png}
 			alt="reply icon"
 		/>,
 	},
@@ -250,7 +299,7 @@ export const MAIL_REPLY_TYPE = [
 		label : 'Reply All',
 		value : 'reply_all',
 		icon  : <img
-			src="https://cdn-icons-png.flaticon.com/512/747/747334.png"
+			src={GLOBAL_CONSTANTS.image_url.reply_all_icon_png}
 			alt="reply all icon"
 		/>,
 	},
@@ -258,14 +307,58 @@ export const MAIL_REPLY_TYPE = [
 		label : 'Forward',
 		value : 'forward',
 		icon  : <img
-			src="https://cdn-icons-png.flaticon.com/512/60/60546.png"
+			src={GLOBAL_CONSTANTS.image_url.forward_icon_png}
 			alt="forward icon"
 		/>,
 	},
 ];
 export const PAGE_LIMIT = 50;
-export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
 
-export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg';
+export const FILTER_KEYS_MAPPING = {
+	requested  : { Statuses: 'reject_requested,resolve_requested,pending' },
+	unresolved : { Statuses: 'unresolved,escalated' },
+	closed     : { Statuses: 'closed,overdue' },
+};
 
-export const ECLAMATION_SVG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg';
+export const PRIORITY_MAPPING = {
+	medium : '#F68B21',
+	high   : '#EE3425',
+	low    : '#FCDC00',
+};
+
+export const ICON_MAPPING = {
+	incoming : GLOBAL_CONSTANTS.image_url.incoming_green_svg,
+	outgoing : GLOBAL_CONSTANTS.image_url.outgoing_orange_svg,
+	missed   : GLOBAL_CONSTANTS.image_url.missed_call_red_svg,
+};
+
+export const STRING_TO_ARRAY_REGEX = GLOBAL_CONSTANTS.regex_patterns.string_to_array;
+
+export const API_MAPPING = {
+	whatsapp      : '/create_communication',
+	platform_chat : '/create_communication_platform_chat',
+	telegram      : '/create_communication',
+	zalo          : '/create_communication',
+};
+
+export const ACCEPT_FILE_MAPPING = {
+	default : '.png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx',
+	zalo    : '.png, .pdf, .jpg, .jpeg, .csv, .svg',
+};
+
+export const MAX_WEIGHT_SLAB = 500;
+
+export const OFFLINE_REASONS_OPTIONS = [
+	{
+		label : 'Lunch Break',
+		value : 'lunch_break',
+	},
+	{
+		label : 'Snack Break',
+		value : 'snack_break',
+	},
+	{
+		label : 'Others',
+		value : 'others',
+	},
+];

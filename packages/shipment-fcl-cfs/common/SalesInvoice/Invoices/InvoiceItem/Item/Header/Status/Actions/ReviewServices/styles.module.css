@@ -1,0 +1,10 @@
+.form {
+	height: 59vh;
+	overflow: auto;
+}
+
+.btn_div {
+	> button:not(:last-of-type) {
+		margin-right: 16px;
+	}
+}

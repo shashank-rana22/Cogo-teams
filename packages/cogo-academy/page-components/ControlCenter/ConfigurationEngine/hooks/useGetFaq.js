@@ -1,5 +1,8 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useCallback } from 'react';
 
 function useGetFaq() {
 	const { general } = useSelector((state) => state);
@@ -11,15 +14,15 @@ function useGetFaq() {
 
 	}, { manual: false });
 
-	const fetchFaq = async () => {
+	const fetchFaq = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: { id },
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
-	};
+	}, [id, trigger]);
 
 	return { fetchFaq, data: data?.[`${update}_details`], loading };
 }

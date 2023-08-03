@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
+const DEFAULT_PAGE_LIMIT = 20;
 const useListShipmentTradePartners = ({ shipment_id = '' }) => {
 	const [apiData, setApiData] = useState({});
 
@@ -11,9 +12,10 @@ const useListShipmentTradePartners = ({ shipment_id = '' }) => {
 		params : {
 			filters: {
 				shipment_id,
+				status: 'active',
 			},
 			add_service_objects_required : true,
-			page_limit                   : 20,
+			page_limit                   : DEFAULT_PAGE_LIMIT,
 		},
 	}, { manual: true });
 

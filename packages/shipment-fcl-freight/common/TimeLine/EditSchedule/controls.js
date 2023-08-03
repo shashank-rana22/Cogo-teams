@@ -1,10 +1,18 @@
-import { getPrefillValue } from '../../utils/dateFormatter';
-import { getDate } from '../utils/formatters';
+import { getDate } from '../../../utils/getDate';
+import TIMELINE_EDITABLE from '../config/timelineEditable.json';
+import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
+import { getDisplayDate } from '../utils/getDisplayDate';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
-	const disabledState = ['vessel_arrived'].includes(
-		primary_service?.state,
-	);
+	const modifiedPrimaryService = {
+		...primary_service || {},
+		schedule_departure : getDepartureArrivalDate(primary_service, 'departure'),
+		schedule_arrival   : getDepartureArrivalDate(primary_service, 'arrival'),
+	};
+	const { state, origin_port, destination_port } = modifiedPrimaryService || {};
+
+	const disabledState = state === 'vessel_arrived'
+		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
 
 	let deviated_departure;
 	let deviated_arrival;
@@ -12,9 +20,9 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 	(timelineData || []).forEach((data) => {
 		if (data?.actual_completed_on) {
 			if (data?.milestone === 'Vessel Departed From Origin (ETD)') {
-				deviated_departure = getDate(data.actual_completed_on);
+				deviated_departure = getDisplayDate({ date: data.actual_completed_on, formatType: 'dateTime' });
 			} else if (data?.milestone === 'Vessel Arrived At Destination (ETA)') {
-				deviated_arrival = getDate(data.actual_completed_on);
+				deviated_arrival = getDisplayDate({ date: data.actual_completed_on, formatType: 'dateTime' });
 			}
 		}
 	});
@@ -42,22 +50,39 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 			minDate : departureDate,
 			disable : false,
 		},
+		...(origin_port?.is_icd ? [{
+			name  : 'origin_icd_departed_at',
+			label : 'Departure from ICD Port date',
+		}] : []),
+		...(destination_port?.is_icd ? [{
+			name  : 'arrived_at_destination_icd_at',
+			label : 'Arrived At ICD Port date',
+		}] : []),
 	];
 
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
 	finalControls.forEach((control, index) => {
-		const { name, maxDate = departureDate, disable = disabledState } = control;
+		const { name, label, maxDate = departureDate, disable = disabledState } = control || {};
+		const prefillValue = getDate(modifiedPrimaryService[name]);
+
 		finalControls[index].maxDate = maxDate;
 		finalControls[index].disable = disable;
 		finalControls[index].dateFormat = 'MMM dd, yyyy, hh:mm:ss aaa';
 		finalControls[index].placeholder = 'Select Date';
 		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].showTimeSelect = true;
-		defaultValues[name] = getPrefillValue(primary_service?.[name]);
+		finalControls[index].rules = {
+			required: {
+				value   : !!prefillValue,
+				message : `${label} is required`,
+			},
+		};
+
+		DEFAULT_VALUES[name] = prefillValue;
 	});
 
-	return { finalControls, defaultValues };
+	return { finalControls, defaultValues: DEFAULT_VALUES };
 };
 
 export default controls;

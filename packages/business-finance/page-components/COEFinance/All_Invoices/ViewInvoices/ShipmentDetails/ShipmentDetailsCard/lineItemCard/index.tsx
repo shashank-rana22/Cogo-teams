@@ -6,6 +6,8 @@ import {
 	Modal,
 	Textarea,
 } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcCFtick,
 	IcMOverflowDot,
@@ -17,7 +19,6 @@ import converter from 'number-to-words';
 import React, { useEffect, useState } from 'react';
 
 import List from '../../../../../../commons/List/index';
-import getFormattedPrice from '../../../../../../commons/utils/getFormattedPrice';
 import {
 	LINE_ITEMS,
 	LINE_ITEMS_CHECK,
@@ -32,6 +33,7 @@ interface LineItemCardInterface {
 		billCurrency: string;
 		grandTotal: any;
 		subTotal: string | number;
+		tdsAmount: string | number;
 	};
 	setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	lineItemsRemarks: object;
@@ -39,17 +41,35 @@ interface LineItemCardInterface {
 	invoiceType?: string;
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	isInvoiceApproved: boolean;
+	shipmentType: string;
+	tdsRate: string | number;
+	paidTds: string | number;
+	subTotal: string | number;
 }
 
+const PERCENTAGE_FACTOR = 100;
+const MAX_DECIMAL_PLACES = 2;
+const DEFAULT_GRAND_TOTAL = 1;
+const DEFAULT_ZERO_VALUE = 0;
 function LineItemCard({
-	lineItems,
-	bill,
+	lineItems = [],
+	bill = {
+		taxTotal     : 0,
+		billCurrency : '',
+		grandTotal   : 0,
+		subTotal     : '' || 0,
+		tdsAmount    : 0,
+	},
 	setShowLineItem = () => {},
-	lineItemsRemarks,
-	setLineItemsRemarks,
+	lineItemsRemarks = {},
+	setLineItemsRemarks = () => {},
 	invoiceType = '',
-	setLineItem,
-	isInvoiceApproved,
+	setLineItem = () => {},
+	isInvoiceApproved = false,
+	shipmentType = '',
+	tdsRate = 0,
+	paidTds = 0,
+	subTotal = 0,
 }: LineItemCardInterface) {
 	const [approvedItems, setApprovedItems] = useState({});
 	const [popover, setPopover] = useState(false);
@@ -177,6 +197,9 @@ function LineItemCard({
 		setLineItemsRemarks({ ...lineItemsRemarks, [activeLineItem]: val });
 	};
 
+	const paidTdsPercentage = +((+paidTds / (+subTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
+		.toFixed(MAX_DECIMAL_PLACES);
+
 	return (
 		<div>
 			<div className={styles.main_header}>
@@ -227,17 +250,52 @@ function LineItemCard({
 
 						<div className={styles.amount}>
 							<div className={styles.border}>
-								{getFormattedPrice(
-									bill?.taxTotal || '0',
-									bill?.billCurrency || 'INR',
-								)}
+								{formatAmount({
+									amount   :	bill?.taxTotal || '0',
+									currency :	bill?.billCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 							</div>
 						</div>
 						<div className={styles.amount_right}>
 							<div className={styles.border_right}>
-								{getFormattedPrice(
-									bill?.grandTotal || '0',
-									bill?.billCurrency || 'INR',
+								{formatAmount({
+									amount   :	bill?.grandTotal || '0',
+									currency :	bill?.billCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
+								{shipmentType === 'ftl_freight'
+								&& (
+									<div>
+										<div className={styles.tds_amount}>
+											(Applicable  TDS
+											{' '}
+											{tdsRate}
+											% -
+											{' '}
+											{startCase(bill?.billCurrency)}
+											{' '}
+											{bill?.tdsAmount || DEFAULT_ZERO_VALUE}
+											)
+										</div>
+										<div className={styles.tds_amount}>
+											(Ded. TDS
+											{' '}
+											{paidTdsPercentage}
+											% -
+											{' '}
+											{startCase(bill?.billCurrency)}
+											{' '}
+											{paidTds || DEFAULT_ZERO_VALUE}
+											)
+										</div>
+									</div>
 								)}
 							</div>
 						</div>

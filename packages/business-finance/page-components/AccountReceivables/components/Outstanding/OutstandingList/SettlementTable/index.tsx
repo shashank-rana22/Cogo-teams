@@ -1,4 +1,5 @@
 import { Select, Input, Pagination } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -16,10 +17,13 @@ interface Props {
 	entityCode?: string
 }
 
-function SettlementTable({ organizationId, entityCode }: Props) {
+function SettlementTable({ organizationId = '', entityCode = '' }: Props) {
+	const geo = getGeoConstants();
+
+	const invoiceKeys = geo.others.navigations.business_finance.ar.settlement.invoice_number;
+
 	const {
 		singleData,
-		getHistoryChild,
 		singleListLoading,
 		globalFilters,
 		setGlobalFilters,
@@ -30,6 +34,8 @@ function SettlementTable({ organizationId, entityCode }: Props) {
 		loading,
 		settlementFilters,
 		setSettlementFilters,
+		sort,
+		setSort,
 	} = useGetSettlementTable(organizationId, entityCode);
 
 	const [active, setActive] = useState(false);
@@ -61,10 +67,7 @@ function SettlementTable({ organizationId, entityCode }: Props) {
 			</div>
 			<StyledTable
 				data={list}
-				columns={SettlementList({
-					setActive,
-					getHistoryChild,
-				})}
+				columns={SettlementList({ sort, setSort, settlementFilters, setSettlementFilters, invoiceKeys })}
 				loading={loading}
 			/>
 			<div className={styles.pagination_container}>
@@ -85,6 +88,7 @@ function SettlementTable({ organizationId, entityCode }: Props) {
 				singleListLoading={singleListLoading}
 				globalFilters={globalFilters}
 				setGlobalFilters={setGlobalFilters}
+				entityCode={entityCode}
 
 			/>
 

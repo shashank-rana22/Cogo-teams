@@ -1,4 +1,6 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -15,9 +17,9 @@ function useListKeywords({ searchKeyWord = '', sortType }) {
 		debounceQuery(searchKeyWord);
 	}, [searchKeyWord, debounceQuery]);
 
-	const fetchFaqKeyword = useCallback(async () => {
+	const fetchFaqKeyword = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					page                 : !query ? keywordCurrentPage : 1,
 					page_limit           : 10,
@@ -27,7 +29,7 @@ function useListKeywords({ searchKeyWord = '', sortType }) {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	}, [activeKeyword, keywordCurrentPage, query, sortType, trigger]);
 

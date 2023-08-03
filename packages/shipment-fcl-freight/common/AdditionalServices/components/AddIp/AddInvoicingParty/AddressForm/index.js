@@ -1,4 +1,7 @@
 import { Button, Checkbox } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useEffect } from 'react';
 
 import useGetBusiness from '../../../../../../hooks/useGetBusiness';
 import AsyncGstListController from '../CreateNewBillingAddress/AsyncGstListController';
@@ -6,16 +9,13 @@ import AsyncGstListController from '../CreateNewBillingAddress/AsyncGstListContr
 import Form from './Form';
 import styles from './styles.module.css';
 
+const POC_DETAILS_DEFAULT_VALUES = [{ name: '', email: '', mobile_country_code: '', mobile_number: '' }];
+
 function AddressForm({
-	control,
-	useFieldArray,
-	register = () => {},
-	errors,
-	handleSubmit = () => {},
 	registrationNumber,
-	setValue = () => {},
 	companyDetails = {},
 	setCurrentStep = () => {},
+	showComponent = '',
 	onSubmit = () => {},
 	gstNumber,
 	setGstNumber = () => {},
@@ -23,12 +23,39 @@ function AddressForm({
 	setShowComponent = () => {},
 	setIsAddressRegisteredUnderGst = () => {},
 	source = '',
-	refetch,
+	refetch = () => {},
 }) {
-	useGetBusiness({ gstNumber, setValue });
+	const data = useGetBusiness({ gstNumber });
+
+	const {
+		handleSubmit,
+		control,
+		setValue,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			poc_details: POC_DETAILS_DEFAULT_VALUES,
+		},
+	});
+
+	const {
+		addresses = [],
+		trade_name = '',
+		business_name = '',
+	} = data || {};
+
+	const { firstPincode, firstAddress } = addresses?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+	useEffect(() => {
+		setValue('name', trade_name || business_name || '');
+		setValue('pincode', firstPincode || '');
+		setValue('address', firstAddress || '');
+	}, [setValue, firstPincode, firstAddress, business_name, trade_name]);
 
 	const handleCancel = () => {
-		if (source === 'create_trade_party') { setCurrentStep('company_details'); }
+		if (source === 'create_trade_party') {
+			setCurrentStep('company_details');
+		}
 		setShowComponent('view_billing_addresses');
 		refetch();
 	};
@@ -51,16 +78,16 @@ function AddressForm({
 			)}
 
 			{isAddressRegisteredUnderGst ? (
-				<Form
-					control={control}
-					useFieldArray={useFieldArray}
-					register={register}
-					handleSubmit={handleSubmit}
-					errors={errors}
-				/>
+				<section className={styles.section}>
+					<Form
+						control={control}
+						errors={errors}
+						showComponent={showComponent}
+					/>
+				</section>
 			)
 				: (
-					<>
+					<section className={styles.section}>
 						<h3>Billing Address</h3>
 
 						<AsyncGstListController
@@ -72,18 +99,19 @@ function AddressForm({
 						{gstNumber ? (
 							<Form
 								control={control}
-								useFieldArray={useFieldArray}
-								register={register}
-								handleSubmit={handleSubmit}
 								errors={errors}
+								showComponent={showComponent}
 							/>
 						) : null}
 
-					</>
+					</section>
 				)}
 
 			<div className={styles.button_container}>
-				<Button onClick={handleCancel}>{source === 'create_trade_party' ? 'Back' : 'Cancel'}</Button>
+				<Button onClick={handleCancel}>
+					{source === 'create_trade_party' ? 'Back' : 'Cancel'}
+				</Button>
+
 				<Button type="submit" onClick={handleSubmit(onSubmit)}>Submit</Button>
 			</div>
 		</div>

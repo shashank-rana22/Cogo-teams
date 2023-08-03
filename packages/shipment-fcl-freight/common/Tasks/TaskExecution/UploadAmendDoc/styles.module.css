@@ -1,0 +1,26 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.button_wrap {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.custom_div {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.custom_skeleton {
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.movement_details {
+	margin-left: 10px;
+	color: #393f70;
+}

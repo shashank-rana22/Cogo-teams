@@ -73,45 +73,43 @@ function keyWordListColumns({
 		{
 			Header   : 'ACTIONS',
 			accessor : (item) => (
-				<div>
+				<div className={styles.button_container}>
+					{activeKeyword === 'active' ? (
+						<Popover
+							placement="top"
+							interactive
+							visible={showPopOver === item?.id}
+							styles={{ marginRight: '20px' }}
+							render={(
+								<PopOverContent
+									source="keyword"
+									onCLickYesButton={() => onClickDeleteIcon(item)}
+									onClickNoButton={() => onClickNoButton(item)}
+									loading={updateApiLoading}
+								/>
+							)}
+						>
 
-					<div className={styles.button_container}>
-						{activeKeyword === 'active' ? (
-							<Popover
-								placement="top"
-								interactive
-								visible={showPopOver === item?.id}
-								styles={{ marginRight: '20px' }}
-								render={(
-									<PopOverContent
-										source="keyword"
-										onCLickYesButton={() => onClickDeleteIcon(item)}
-										onClickNoButton={() => onClickNoButton(item)}
-										loading={updateApiLoading}
-									/>
-								)}
-							>
-
-								<div className={styles.delete_button}>
-									<IcMDelete
-										height={20}
-										width={20}
-										onClick={() => {
-											setShowPopOver(() => (showPopOver === item?.id ? null : item?.id));
-										}}
-									/>
-								</div>
-							</Popover>
-						) : (
-							<Button
-								themeType="secondary"
-								onClick={() => onClickRestore({ id: item?.id })}
-							>
-								Restore
-							</Button>
-						)}
-					</div>
+							<div className={styles.delete_button}>
+								<IcMDelete
+									height={20}
+									width={20}
+									onClick={() => {
+										setShowPopOver(() => (showPopOver === item?.id ? null : item?.id));
+									}}
+								/>
+							</div>
+						</Popover>
+					) : (
+						<Button
+							themeType="secondary"
+							onClick={() => onClickRestore({ id: item?.id })}
+						>
+							Restore
+						</Button>
+					)}
 				</div>
+
 			),
 		},
 	];

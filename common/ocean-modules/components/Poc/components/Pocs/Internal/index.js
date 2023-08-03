@@ -6,8 +6,9 @@ import getInternalPocData from '../../../helpers/getInternalPocData';
 import Stakeholders from './Stakeholders';
 import styles from './styles.module.css';
 
-function Internal({ data = [], setAddPoc = () => { }, loading = false }) {
+function Internal({ data = [], setAddPoc = () => { }, loading = false, rolesPermission = {}, shipment_data = {} }) {
 	const internalData = getInternalPocData(data);
+	const canAddPoc = !!rolesPermission?.add_internal_poc;
 
 	return (
 		<div>
@@ -15,7 +16,7 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false }) {
 				<>
 					<div className={styles.header}>
 						<div className={styles.heading}>Internal : Cogoport</div>
-						<div>
+						{canAddPoc ? (
 							<Button
 								size="sm"
 								onClick={() => {
@@ -25,20 +26,21 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false }) {
 							>
 								+ ADD POC
 							</Button>
-
-						</div>
+						) : null}
 					</div>
 
 					<div>
 						{Object.keys(internalData).map((key) => (
-							<div className={styles.service_container}>
+							<div className={styles.service_container} key={key}>
 								<div className={styles.service_name}>{startCase(key)}</div>
+
 								<div>
 									<Stakeholders
 										data={internalData[key]}
 										setAddPoc={setAddPoc}
+										rolesPermission={rolesPermission}
+										shipment_type={shipment_data?.shipment_type}
 									/>
-
 								</div>
 							</div>
 						))}

@@ -1,0 +1,121 @@
+.plus_circle {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 45px;
+	height: 45px;
+	cursor: pointer;
+	background-color: #000;
+	border-radius: 100%;
+	box-shadow: 3px 7px 16px #8a795d99;
+}
+
+.plus_circle svg {
+	transition: 0.5s;
+}
+
+.wheel {
+	position: absolute;
+	bottom: 26px;
+	height: 128px;
+	transition: all 0.3s ease;
+	transform: scale(0);
+	transform-origin: bottom right;
+}
+
+.wheel_box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.action {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	opacity: 1;
+	transition: all 1s ease;
+}
+
+.wrapper {
+	position: absolute;
+	right: 65px;
+	bottom: 100px;
+	z-index: 99;
+	cursor: pointer;
+
+	& .checkbox {
+		display: none;
+
+		&:checked ~ .plus_circle .wheel_box .wheel {
+			transform: scale(1);
+		}
+
+		&:checked ~ .plus_circle .wheel_box .wheel .action {
+			opacity: 1;
+		}
+
+		&:checked ~ .plus_circle svg {
+			transition: 0.5s;
+			transform: rotate(45deg);
+		}
+	}
+}
+
+.action img {
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	box-shadow: 3px 7px 16px #8a795d61;
+}
+
+.call_icon_styles {
+	border-radius: 50%;
+}
+
+.mail_icon_styles {
+	background: #ffff;
+	border-radius: 50%;
+}
+
+.common_contact_icon_styles {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	background-color: #f9ae64;
+	border-radius: 50%;
+	transform: rotate(-43deg) !important;
+}
+
+.sp_contacts_icon {
+	background-color: #f97a64;
+}
+
+.position_1 {
+	top: 160px;
+	right: 14px;
+}
+
+.position_2 {
+	top: 79%;
+	right: 40px;
+}
+
+.position_3 {
+	top: 35%;
+	right: 11px;
+}
+
+.position_4 {
+	top: 25%;
+}
+
+.position_5 {
+	top: 60%;
+	left: 40px;
+}

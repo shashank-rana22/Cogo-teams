@@ -1,0 +1,28 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.party_name {
+	width: 70%;
+	font-weight: 600;
+	font-weight: 16px;
+	text-transform: uppercase;
+}
+
+.service_container {
+	display: flex;
+}
+
+.service {
+	width: fit-content;
+	font-size: 14px;
+	color: #333;
+}
+
+.service_names {
+	padding-left: 4px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #828282;
+}

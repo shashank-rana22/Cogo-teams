@@ -1,12 +1,12 @@
 import { Button } from '@cogoport/components';
 import { SelectController, InputController } from '@cogoport/forms';
+import getCountryOptions from '@cogoport/globalization/utils/getCountryOptions';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import getAudienceControls from './utils/getAudienceControls';
-import getCountryOptions from './utils/getCountryOptions';
 
 function CreateAudienceForm(props) {
 	const {

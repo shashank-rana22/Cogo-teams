@@ -1,5 +1,5 @@
 import { Avatar, Input, Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMFtick } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -15,7 +15,7 @@ function FeedBackContent({
 	source = '',
 	fetchListFaqFeedback = () => {},
 	fetchQuestion,
-	faqAudiences,
+
 }) {
 	const general = useSelector((state) => state.general || {});
 	const { feedbackId: id = '' } = general.query || {};
@@ -42,7 +42,6 @@ function FeedBackContent({
 		fetchListFaqFeedback,
 		feedbackId,
 		fetchQuestion,
-		faqAudiences,
 	});
 
 	const { name = '', picture = '' } = author?.[0] || {};

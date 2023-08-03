@@ -1,9 +1,27 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { routeConfig } from '@cogoport/navigation-configs';
 
 import getNavData from './get-nav-data';
+import getNavigationFromUrl from './getNavigationFromUrl';
 
 const getAuthParam = (permissions_navigations, pathname) => {
-	const navigation = routeConfig?.[pathname]?.navigation || '';
+	const navigation_from_url = getNavigationFromUrl();
+	let navigation = navigation_from_url || routeConfig?.[pathname]?.navigation || '';
+
+	const permissionNavigationKeys = Object.keys(permissions_navigations || {});
+
+	if (permissionNavigationKeys?.length && !permissionNavigationKeys?.includes(navigation)) {
+		const alternatekeys = routeConfig?.[pathname]?.alternateNavigation || [];
+		let find = false;
+
+		alternatekeys?.forEach((key) => {
+			if (permissionNavigationKeys?.includes(key) && !find) {
+				find = true;
+				navigation = key;
+			}
+		});
+	}
+
 	const navigationData = getNavData(navigation);
 	const userNavigationPermissions = permissions_navigations?.[navigation];
 	let defaultScope = null;
@@ -13,7 +31,7 @@ const getAuthParam = (permissions_navigations, pathname) => {
 		(apiData || []).forEach((scope) => {
 			if (scope?.is_default && scope.type !== 'none') {
 				defaultScope = scope?.type;
-				defaultView = scope?.through_criteria?.[0] || null;
+				defaultView = scope?.through_criteria?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 			}
 		});
 	});

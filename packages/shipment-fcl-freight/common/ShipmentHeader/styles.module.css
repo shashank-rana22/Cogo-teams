@@ -3,13 +3,17 @@
 	align-items: center;
 	width: 90%;
 	padding: 10px 24px;
-	background: #fff;
+	background-color: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+
+	&.igm_desk {
+		width: 100%;
+	}
 }
 
 .po_number {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 400;
 	color: #979797;
 	white-space: nowrap;
@@ -18,7 +22,11 @@
 .customer {
 	width: 18%;
 	padding-right: 20px 4px;
-	border-right: 1px solid #e0e0e0;
+	border-right: 1px solid var(--color-secondary-greyscale-5);
+
+	&.igm_desk {
+		width: 25%;
+	}
 }
 
 .port_details {
@@ -26,14 +34,14 @@
 	justify-content: center;
 	width: 55%;
 	margin-right: 30px;
-	border-right: 1px solid #e0e0e0;
+	border-right: 1px solid var(--color-secondary-greyscale-5);
 }
 
 .business_name {
 	width: fit-content;
-	max-width: 100px;
+	max-width: 210px;
 	overflow: hidden;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
@@ -46,21 +54,53 @@
 	width: fit-content;
 	max-width: 500px;
 	overflow: hidden;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 500;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 	text-align: start;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
 .button {
-	font-size: 12px;
-	color: red;
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
 	text-decoration: underline;
-	cursor: pointer;
+}
 
-	:hover {
-		box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+.three_dot_icon {
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	fill: var(--color-primary-error-red-2);
+}
+
+.cancel_button {
+	font-size: var(--font-size-md);
+	cursor: pointer;
+}
+
+.cfs_details {
+	margin-left: 5px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-1);
+	white-space: break-spaces;
+}
+
+.heading {
+	display: flex;
+	align-items: flex-start;
+	margin: 16px;
+	font-size: var(--font-size-md);
+	font-weight: 400;
+	color: var(--color-secondary-greyscale-3);
+
+	& > span {
+		white-space: nowrap;
+	}
+
+	& > svg {
+		cursor: pointer;
 	}
 }

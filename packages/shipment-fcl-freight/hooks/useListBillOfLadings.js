@@ -1,18 +1,17 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 const useListBillOfLadings = ({ shipment_data = {} }) => {
 	const [apiData, setApiData] = useState({});
 
-	const { id: sid } = shipment_data;
+	const { id: shipment_id = '' } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'fcl_freight/list_bill_of_ladings',
 		params : {
 			filters: {
-				shipment_id: sid,
+				shipment_id,
 			},
 			additional_methods: ['cargo_details'],
 		},
@@ -21,9 +20,11 @@ const useListBillOfLadings = ({ shipment_data = {} }) => {
 	const getBillOfLadingApi = useCallback(async () => {
 		try {
 			const res = await trigger();
+
 			setApiData(res.data || {});
 		} catch (err) {
 			setApiData({});
+
 			toastApiError(err);
 		}
 	}, [trigger]);

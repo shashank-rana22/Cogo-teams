@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import useLIstFaqAudience from '../hooks/useLIstFaqAudience';
 import audienceListColumns from '../TableConfigurations/audienceListColumns';
 
-import AudianceTable from './AudianceTable';
+import AudianceTable from './AudienceTable';
 import Header from './Header';
 import useUpdateAudience from './useUpdateAudience';
 

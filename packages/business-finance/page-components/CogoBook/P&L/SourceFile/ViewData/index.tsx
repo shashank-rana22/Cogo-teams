@@ -1,11 +1,11 @@
 import { Breadcrumb, Button } from '@cogoport/components';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import { useEffect, useMemo, useState } from 'react';
 
 import useDeleteView from '../../../hooks/useDeleteView';
 import useReport from '../../../hooks/useReport';
-import { entityMapping } from '../../PLStatement/constant';
 import {
 	getAirRatio, getAllShipment,
 	getColumnView, getOceanRatio,
@@ -153,7 +153,7 @@ function ViewData() {
 				<div className={styles.basis}>
 					Entity :
 					{' '}
-					{entityMapping[entity] }
+					{ getEntityCode(entity) }
 				</div>
 
 				<div>

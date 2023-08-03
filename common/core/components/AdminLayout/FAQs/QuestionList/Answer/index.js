@@ -1,10 +1,10 @@
 import { Button } from '@cogoport/components';
 import {
 	IcMRedo,
-	IcMSad,
-	IcMHappy,
-	IcCHappy,
-	IcCSad,
+	IcMVerySad,
+	IcMVeryHappy,
+	IcCVeryHappy,
+	IcCVerySad,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -16,13 +16,13 @@ import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
 
 const LIKE_MAPPING = {
-	liked    : <IcCHappy />,
-	disliked : <IcMHappy />,
+	liked    : <IcCVeryHappy />,
+	disliked : <IcMVeryHappy />,
 };
 
 const DISLIKE_MAPPING = {
-	liked    : <IcMSad />,
-	disliked : <IcCSad />,
+	liked    : <IcMVerySad />,
+	disliked : <IcCVerySad />,
 };
 
 function Answer({ topic = {}, question, setQuestion }) {
@@ -84,7 +84,9 @@ function Answer({ topic = {}, question, setQuestion }) {
 							<div className={styles.no_of_people_like_it} style={{ marginTop: 24 }}>
 								{ upvote_count}
 								{' '}
-								people liked this answer
+								{upvote_count === 1 ? 'person' : 'people'}
+								{' '}
+								liked this answer
 							</div>
 						) : null}
 					</>
@@ -112,7 +114,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 						}}
 						style={{ marginLeft: 8, cursor: 'pointer' }}
 					>
-						{LIKE_MAPPING[isLiked] || <IcMHappy />}
+						{LIKE_MAPPING[isLiked] || <IcMVeryHappy />}
 					</div>
 
 					<div
@@ -128,7 +130,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 						}}
 						style={{ marginLeft: 8, cursor: 'pointer' }}
 					>
-						{DISLIKE_MAPPING[isLiked] || <IcMSad />}
+						{DISLIKE_MAPPING[isLiked] || <IcMVerySad />}
 					</div>
 				</div>
 			</div>

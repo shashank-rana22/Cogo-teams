@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
@@ -11,8 +10,6 @@ function useCreateAudience({
 	setShowCreateAudienceModal = () => {},
 }) {
 	const router = useRouter();
-
-	const { control, handleSubmit, formState: { errors }, setValue, reset, watch } = useForm();
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_faq_audience',
@@ -64,12 +61,6 @@ function useCreateAudience({
 	};
 	return {
 		createAudience,
-		control,
-		handleSubmit,
-		errors,
-		setValue,
-		reset,
-		watch,
 		loading,
 
 	};

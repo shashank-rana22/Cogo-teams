@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function EventDetails(props) {
 	const {
 		setEventListData, debounceQuery, loading, setSearchValue, searchValue, expertise, setExpertise,
-		list = [], paginationData, getNextPage,
+		list = [], paginationData, getNextPage, listRefetch,
 	} = props;
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
@@ -29,6 +29,7 @@ function EventDetails(props) {
 					list={list}
 					setEventListData={setEventListData}
 					loading={loading}
+					listRefetch={listRefetch}
 				/>
 
 				<div className={styles.pagination_container}>

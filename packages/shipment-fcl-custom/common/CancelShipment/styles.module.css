@@ -1,0 +1,50 @@
+.form_container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.no_reasons_found {
+	padding: 16px;
+	font-size: var(--font-size-xl);
+}
+
+.modal_footer {
+	> button:not(:last-of-type) {
+		margin-right: 10px;
+	}
+}
+
+.form_element {
+	width: 48%;
+
+	:global {
+		.ui_radiogroup_container {
+			flex-wrap: wrap;
+			justify-content: space-between;
+			padding: 0;
+		}
+
+		.ui_radio_container {
+			width: 48%;
+		}
+	}
+
+	&.width_100 {
+		width: 100%;
+	}
+
+	.label {
+		margin-bottom: 10px;
+		font-weight: 600;
+	}
+
+	.error_msg {
+		font-size: var(--font-size-md);
+		color: var(--color-primary-error-red-2);
+	}
+
+	&:not(:last-of-type) {
+		margin-bottom: 16px;
+	}
+}

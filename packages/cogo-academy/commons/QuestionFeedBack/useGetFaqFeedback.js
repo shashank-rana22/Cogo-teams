@@ -23,7 +23,7 @@ const useGetFaqFeedback = ({ feedbackId, page }) => {
 		}
 	}, [feedbackId, fetchFaqFeedback, page]);
 
-	return { data, loading };
+	return { data, getApiLoading: loading };
 };
 
 export default useGetFaqFeedback;

@@ -1,19 +1,29 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 // import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 
-const getAnswerState = ({ type, answer }) => {
-	let answerState = 'answered';
+let RichTextEditor;
 
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
+
+const API_SUCCESS_STATUS = 200;
+const INCREMENTAL_ELEMENT = 1;
+
+const getAnswerState = ({ type, answer, subjectiveAnswer, question_type }) => {
+	let answerState = 'answered';
 	if (type === 'marked_for_review') {
 		answerState = type;
-	} else if (isEmpty(answer)) {
+	} else if (question_type === 'subjective' && (subjectiveAnswer.toString('html') === '<p><br></p>'
+	|| subjectiveAnswer.toString('html') === '')) {
+		answerState = 'viewed';
+	} else if (question_type !== 'subjective' && isEmpty(answer)) {
 		answerState = 'viewed';
 	}
-
 	return answerState;
 };
 
@@ -29,15 +39,11 @@ function useUpdateAnswers({
 	user_appearance = [],
 	fetchQuestions,
 	total_question,
+	subjectiveAnswer,
+	uploadValue,
+	setUploadValue,
+	setSubjectiveAnswer = () => {},
 }) {
-	const {
-		query: { test_id },
-		user: { id: user_id },
-	} = useSelector(({ general, profile }) => ({
-		query : general.query,
-		user  : profile.user,
-	}));
-
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_test_user_question_response',
@@ -46,7 +52,7 @@ function useUpdateAnswers({
 	const { id, question_type, sub_questions = [] } = data || {};
 
 	const handleUpdate = async ({ type }) => {
-		const answerState = getAnswerState({ type, answer });
+		const answerState = getAnswerState({ type, answer, subjectiveAnswer, question_type });
 
 		let answerArray = answer;
 
@@ -56,22 +62,33 @@ function useUpdateAnswers({
 
 		const payload = {
 			test_user_mapping_id,
-			test_question_id         : id,
-			test_question_answer_ids : answerArray || [],
-			answer_state             : answerState,
+			test_question_id : id,
+			answer_state     : answerState,
 			question_type,
 			...(question_type === 'case_study'
-				? { test_case_study_question_id: sub_questions?.[subQuestion - 1]?.id } : null),
+				? { test_case_study_question_id: sub_questions?.[subQuestion - INCREMENTAL_ELEMENT]?.id } : null),
 
+			...(question_type === 'subjective'
+				? {
+					subjective_answer_text : subjectiveAnswer.toString('html'),
+					subjective_file_url    : uploadValue?.finalUrl
+						? uploadValue?.finalUrl : uploadValue,
+				} : { test_question_answer_ids: answerArray || [] }),
 		};
 
 		const res = await trigger({
 			data: payload,
 		});
 
-		if (res?.status !== 200) {
+		if (res?.status !== API_SUCCESS_STATUS) {
 			// handleMinimizeTest();
 			Toast.error('Something is wrong');
+			return;
+		}
+
+		if (question_type === 'case_study' && sub_questions.length > subQuestion) {
+			setSubQuestion((prev) => prev + INCREMENTAL_ELEMENT);
+			fetchQuestions({ question_id: data?.id });
 			return;
 		}
 
@@ -80,20 +97,10 @@ function useUpdateAnswers({
 			return;
 		}
 
-		if (question_type === 'case_study' && sub_questions.length > subQuestion) {
-			setSubQuestion((prev) => prev + 1);
-			fetchQuestions({ question_id: data?.id });
-			return;
-		}
-
 		const num = Number(currentQuestion);
 
-		localStorage.setItem(
-			`current_question_${test_id}_${user_id}`,
-			total_question > currentQuestion ? num + 1 : num,
-		);
-
-		if (['answered', 'marked_for_review', 'viewed'].includes((user_appearance?.[num - 1] || {}).answer_state)) {
+		if (['answered', 'marked_for_review', 'viewed']
+			.includes((user_appearance?.[num - INCREMENTAL_ELEMENT] || {}).answer_state)) {
 			await fetchQuestions({ question_id: (user_appearance?.[num] || {})?.test_question_id || '' });
 		} else {
 			await fetchQuestions({});
@@ -101,11 +108,13 @@ function useUpdateAnswers({
 
 		setCurrentQuestion((pv) => {
 			if (total_question !== pv) {
-				return Number(pv) + 1;
+				return Number(pv) + INCREMENTAL_ELEMENT;
 			}
 			return pv;
 		});
-		setSubQuestion(1);
+		setSubQuestion(INCREMENTAL_ELEMENT);
+		setSubjectiveAnswer(RichTextEditor.createEmptyValue());
+		setUploadValue('');
 	};
 
 	const handleLeaveTest = () => {

@@ -7,7 +7,7 @@ import {
 	Tooltip,
 	Modal,
 } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcADocumentTemplates,
 	IcCFtick,
@@ -33,11 +33,16 @@ interface SellerDetail {
 interface DocumentData {
 	list: Array<object>;
 }
+interface BillAdditionalObject {
+	shipmentType?: string;
+}
 
 interface DataProps {
 	sellerDetail?: SellerDetail;
 	serviceProviderCategory?: string;
 	serviceProviderDocuments: DocumentData;
+	billAdditionalObject? : BillAdditionalObject;
+
 }
 
 interface PaymentsData {
@@ -64,6 +69,7 @@ function SupplierDetails({
 		sellerDetail,
 		serviceProviderCategory = '',
 		serviceProviderDocuments,
+		billAdditionalObject,
 	} = data || {};
 	const { payables, receivables, payablesCurrency, receivablesCurrency } = paymentsData || {};
 
@@ -117,11 +123,12 @@ function SupplierDetails({
 		if (isEmpty(historyData)) {
 			return <div>First Time</div>;
 		}
+
 		return (
 			<>
 				<div className={styles.details}>LAST 10 SID Details</div>
 				{historyData.map((item:any) => (
-					<div>
+					<div key={item}>
 						{' '}
 						SID -
 						{' '}
@@ -135,7 +142,9 @@ function SupplierDetails({
 
 	return (
 		<div className={styles.container}>
-			<h3>Supplier Details</h3>
+			{billAdditionalObject?.shipmentType === 'ftl_freight'
+				? <h3>Collection Party Details</h3>
+				: <h3>Supplier Details</h3> }
 
 			<div className={styles.small_hr} />
 
@@ -197,7 +206,14 @@ function SupplierDetails({
 						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
-									{showOverflowingNumber(getFormattedPrice(payables, payablesCurrency) || 0, 10)}
+									{showOverflowingNumber(formatAmount({
+										amount   :	payables,
+										currency : payablesCurrency,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || 0, 10)}
 								</div>
 							) : (
 								<div>
@@ -224,10 +240,14 @@ function SupplierDetails({
 						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
-									{showOverflowingNumber(getFormattedPrice(
-										receivables,
-										receivablesCurrency,
-									) || 0, 10)}
+									{showOverflowingNumber(formatAmount({
+										amount   :	receivables,
+										currency :	receivablesCurrency,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || 0, 10)}
 								</div>
 							) : (
 								<div>

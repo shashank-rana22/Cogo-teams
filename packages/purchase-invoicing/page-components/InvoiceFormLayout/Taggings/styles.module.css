@@ -1,0 +1,25 @@
+.container {
+	background-color: var(--color-secondary-5);
+}
+
+.margin {
+	margin: 16px;
+}
+
+.padding {
+	padding: 4px 16px;
+}
+
+.heading {
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+}
+
+.buttoncontainer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.button {
+	margin-left: 16px;
+}

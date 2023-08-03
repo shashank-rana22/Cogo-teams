@@ -1,0 +1,78 @@
+[
+	{
+		"name": "origin_location",
+		"size": "sm",
+		"type": "async_select",
+		"asyncKey": "list_locations",
+		"placeholder": "Origin Location",
+		"isClearable": true,
+		"params": {
+			"filters": {
+				"status": "active",
+				"type": [
+					"seaport",
+					"country",
+					"trade"
+				]
+			},
+			"includes": {
+				"country": true,
+				"default_params_required": true
+			},
+			"page_limit": 20,
+			"sort_by": "name",
+			"sort_type": "asc"
+		}
+	},
+	{
+		"name": "desitination_location",
+		"size": "sm",
+		"type": "async_select",
+		"asyncKey": "list_locations",
+		"placeholder": "Destination Location",
+		"isClearable": true,
+		"params": {
+			"filters": {
+				"status": "active",
+				"type": [
+					"seaport",
+					"country",
+					"trade"
+				]
+			},
+			"includes": {
+				"country": true,
+				"default_params_required": true
+			},
+			"page_limit": 20,
+			"sort_by": "name",
+			"sort_type": "asc"
+		}
+	},
+	{
+		"name": "container_type",
+		"placeholder": "Container Type",
+		"type": "select",
+		"size": "sm",
+		"isClearable": true
+	},
+	{
+		"name": "operator_id",
+		"size": "sm",
+		"type": "async_select",
+		"asyncKey": "list_operators",
+		"labelKey": "business_name",
+		"valueKey": "id",
+		"placeholder": "Shipping Line",
+		"isClearable": true,
+		"params": {
+			"filters": {
+				"operator_type": "shipping_line",
+				"status": "active"
+			},
+			"page_limit": 100,
+			"sort_by": "short_name",
+			"sort_type": "asc"
+		}
+	}
+]

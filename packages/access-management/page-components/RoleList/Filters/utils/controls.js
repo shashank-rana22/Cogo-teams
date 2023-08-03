@@ -1,20 +1,22 @@
 import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
 
+const MIN_ARRAY_LENGTH = 0;
+
 const getAllNavigations = () => {
-	const allNavs = [];
+	const ALL_NAVS = [];
 	Object.values(navigationMappingAdmin || {}).forEach((navigation) => {
 		if (navigation.isSubNavs) {
 			navigation.options.forEach((navOpt) => {
-				allNavs.push({ label: navOpt?.title, value: navOpt?.key });
+				ALL_NAVS.push({ label: navOpt?.title, value: navOpt?.key });
 			});
 		} else {
-			allNavs.push({
+			ALL_NAVS.push({
 				label : navigation?.title,
 				value : navigation?.key,
 			});
 		}
 	});
-	return allNavs;
+	return ALL_NAVS;
 };
 
 const FUNCTION_SUB_FUNCTION_MAPPING = {
@@ -41,10 +43,16 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 		{ label: 'Booking Desk', value: 'booking_desk' },
 		{ label: 'Post Shipment', value: 'post_shipment' },
 		{ label: 'FINOPS', value: 'finops' },
+		{ label: 'Common Customer Operations', value: 'common_customer_operations' },
+		{ label: 'CP Customer Operations', value: 'cp_customer_operations' },
+		{ label: 'Mid Size Customer Operations', value: 'mid_size_customer_operations' },
+		{ label: 'Enterprise Customer Operations', value: 'enterprise_customer_operations' },
 	],
 	finance  : [{ label: 'Credit Controller', value: 'credit_controller' }],
 	training : [
 		{ label: 'Training General', value: 'training_general' },
+		{ label: 'Tech', value: 'tech' },
+		{ label: 'Product', value: 'product' },
 	],
 	hr: [
 		{ label: 'HR Admin', value: 'hr_admin' },
@@ -57,21 +65,21 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 };
 
 const get_all_sub_functions = (role_functions) => {
-	const role_sub_functions = [];
-	if (role_functions?.length > 0) {
+	const ROLE_SUB_FUNCTIONS = [];
+	if (role_functions?.length > MIN_ARRAY_LENGTH) {
 		role_functions?.forEach((item) => {
 			FUNCTION_SUB_FUNCTION_MAPPING[item].forEach((sub_function) => {
-				role_sub_functions.push(sub_function);
+				ROLE_SUB_FUNCTIONS.push(sub_function);
 			});
 		});
 	} else {
 		Object.values(FUNCTION_SUB_FUNCTION_MAPPING).forEach((sub_functions) => {
 			sub_functions?.forEach((sub_function) => {
-				role_sub_functions.push(sub_function);
+				ROLE_SUB_FUNCTIONS.push(sub_function);
 			});
 		});
 	}
-	return role_sub_functions;
+	return ROLE_SUB_FUNCTIONS;
 };
 
 export const controls = (role_functions, partnerOptions) => [

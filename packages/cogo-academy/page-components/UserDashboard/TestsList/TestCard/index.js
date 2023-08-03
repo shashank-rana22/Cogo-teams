@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
@@ -96,20 +96,19 @@ function TestCard({ test_card }) {
 				)}
 			</div>
 
-			{current_status === 'active' || (current_status === 'completed' && attempts_count < maximum_attempts)
-				? (
-					<div
-						role="presentation"
-						onClick={() => handleRedirect({ test_id: id, redirect_to: 'test', push })}
-						className={styles.arrow}
-					>
-						<IcMArrowRight
-							height={40}
-							width={30}
-						/>
-					</div>
-				)
-				: null}
+			{['active', 'retest'].includes(current_status)
+			|| (current_status === 'completed' && attempts_count < maximum_attempts) ? (
+				<div
+					role="presentation"
+					onClick={() => handleRedirect({ test_id: id, redirect_to: 'test', push })}
+					className={styles.arrow}
+				>
+					<IcMArrowRight
+						height={40}
+						width={30}
+					/>
+				</div>
+				) : null}
 		</div>
 	);
 }

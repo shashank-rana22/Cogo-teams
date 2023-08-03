@@ -1,0 +1,30 @@
+.container {
+	position: relative;
+	width: 18%;
+
+	&::after {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		display: inline-block;
+		width: 1px;
+		height: 120%;
+		content: "";
+		background-color: #f2e3c3;
+		transform: translateY(-50%);
+	}
+}
+
+.serial_id {
+	font-size: 12px;
+	font-weight: 600;
+	color: #f68b21;
+
+	&.clickable {
+		cursor: pointer;
+	}
+}
+
+.created_at {
+	font-size: 12px;
+}

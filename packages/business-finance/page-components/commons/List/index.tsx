@@ -1,5 +1,7 @@
 import { Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React, { ReactNode } from 'react';
 
 import {
@@ -28,22 +30,30 @@ export interface Props {
 	showPagination?: boolean;
 	subActiveTab?: string;
 	width?: string;
+	rowStyle?: string;
+	paginationType?: 'number' | 'table' | 'page' | 'compact';
+	viewId?:null;
+	renderDropDown?:Function;
 }
 
 function List({
-	config,
-	sort,
-	setSort,
-	itemData,
-	renderHeaderCheckbox,
+	config = { fields: [] },
+	sort = {},
+	setSort = () => {},
+	itemData = { list: [] },
+	renderHeaderCheckbox = () => '',
 	functions = {},
 	loading = false,
 	page = 1,
 	handlePageChange = () => {},
 	pageSize = 10,
 	showPagination = true,
-	subActiveTab,
-	width,
+	subActiveTab = undefined,
+	width = null,
+	rowStyle = null,
+	paginationType = 'table',
+	viewId = null,
+	renderDropDown = () => {},
 }: Props) {
 	const {
 		showHeader = true,
@@ -72,33 +82,51 @@ function List({
 				/>
 			)}
 			<div style={bodyStyles}>
-				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-					<CardColumn
-						fields={fields}
-						itemStyles={itemStyles}
-						singleitem={singleitem}
-						config={config}
-						loading={loading}
-						functions={commonFunctions(functions)}
-						isMobile={isMobile}
-						subActiveTab={subActiveTab}
-						width={width}
-					/>
-				))}
+				{isEmpty(list) && !loading ? (
+					<div className={styles.no_data}>
+						<img
+							style={{ width: '24%', margin: '8%' }}
+							src={GLOBAL_CONSTANTS.image_url.list_no_result_found}
+							alt="no data"
+						/>
+					</div>
+				) : (
+					<div>
+						{(!isEmpty(list) ? list : [1, 2, 3, 4, 5]).map((singleitem) => (
+							<>
+								<CardColumn
+									key={singleitem.id}
+									fields={fields}
+									itemStyles={itemStyles}
+									singleitem={singleitem}
+									config={config}
+									loading={loading}
+									functions={commonFunctions(functions)}
+									isMobile={isMobile}
+									subActiveTab={subActiveTab}
+									width={width}
+									rowStyle={rowStyle}
+									viewId={viewId}
+								/>
+								{renderDropDown(singleitem)}
+							</>
+						))}
+					</div>
+				)}
 			</div>
 			{showPagination && (
 				<div>
-					{itemData?.totalRecords && (
+					{itemData?.totalRecords ? (
 						<div className={styles.pagination_container}>
 							<Pagination
-								type="table"
+								type={paginationType}
 								currentPage={page}
 								totalItems={itemData?.totalRecords}
 								pageSize={pageSize}
 								onPageChange={handlePageChange}
 							/>
 						</div>
-					)}
+					) : null}
 				</div>
 			)}
 		</section>

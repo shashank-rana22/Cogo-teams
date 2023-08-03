@@ -3,7 +3,8 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import {
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';
@@ -25,13 +26,15 @@ function EnrichmentRequest({
 		setThirdPartyPayload = () => {},
 	} = useCreateBulkEnrichment({ setActiveTab, checkedRowsId });
 
+	const geo = getGeoConstants();
+
 	const thirdPartyOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(),
 		initialCall : false,
 		params      : {
 			filters: {
 				status   : 'active',
-				role_ids : GLOBAL_CONSTANTS.uuid.third_party_enrichment_agencies_role_ids,
+				role_ids : geo.uuid.third_party_enrichment_agencies_role_ids,
 			},
 		},
 	});
@@ -41,7 +44,7 @@ function EnrichmentRequest({
 
 		const selectedOption = options.filter((option) => option.id === id);
 
-		const { user_id, partner_id } = selectedOption[0] || {};
+		const { user_id, partner_id } = selectedOption[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 		setThirdPartyPayload(
 			[{ user_id, partner_id }],

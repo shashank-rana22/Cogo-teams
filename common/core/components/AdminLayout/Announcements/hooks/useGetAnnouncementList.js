@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -23,21 +22,15 @@ const useGetAnnouncementList = () => {
 		},
 	});
 
-	const { query = '', debounceQuery } = useDebounceQuery();
-
-	useEffect(() => {
-		debounceQuery(search);
-	}, [debounceQuery, search]);
-
 	useEffect(() => {
 		setParams((prev) => ({
 			page    : 1,
 			filters : {
 				...prev.filters,
-				q: query,
+				q: search,
 			},
 		}));
-	}, [query]);
+	}, [search]);
 
 	const { scope = '' } = general || {};
 
@@ -108,7 +101,6 @@ const useGetAnnouncementList = () => {
 		announcementList,
 		searchAnnouncement    : search,
 		setSearchAnnouncement : setSearch,
-		query,
 		params,
 		setParams,
 	};

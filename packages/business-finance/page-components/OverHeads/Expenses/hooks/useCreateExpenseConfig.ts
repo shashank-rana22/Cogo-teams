@@ -4,10 +4,13 @@ import { useSelector } from '@cogoport/store';
 
 import { formatDate } from '../../../commons/utils/formatDate';
 
-const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) => {
+const useCreateExpenseConfig = ({
+	mailData,
+	setShowModal,
+	getRecurringList,
+}) => {
 	const {
 		expenseCategory,
-		expenseSubCategory,
 		stakeholderId,
 		branch,
 		vendorName,
@@ -23,16 +26,15 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 		uploadedInvoice,
 		agreementNumber,
 		tradeParty,
+		categoryName,
 	} = mailData || {};
 
-	const { branchId } = JSON.parse(branch || '{}');
-	const { registration_number:registrationNumber } = vendorData || {};
-	const { id:cogoEntityId } = entityObject || {};
-	const { organization_trade_party_detail_id:tradePartyDetailId } = tradeParty || {};
+	const { branchId, name: branchName } = JSON.parse(branch || '{}');
+	const { registration_number: registrationNumber } = vendorData || {};
+	const { id: cogoEntityId } = entityObject || {};
+	const { organization_trade_party_detail_id: tradePartyDetailId } =		tradeParty || {};
 
-	const {
-		profile,
-	} = useSelector((state:any) => state);
+	const { profile } = useSelector((state: any) => state);
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -47,8 +49,7 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 		try {
 			await trigger({
 				data: {
-					category             : (expenseCategory || '').toUpperCase(),
-					subCategory          : (expenseSubCategory || '').toUpperCase(),
+					categoryId           : expenseCategory,
 					approvedBy           : stakeholderId,
 					branchId,
 					businessName         : vendorName,
@@ -65,8 +66,10 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 					createdBy            : profile?.user?.id,
 					updatedBy            : profile?.user?.id,
 					agreementNumber,
-					// eslint-disable-next-line max-len
-					tradePartyDetailId   : tradePartyDetailId || '0005bfb6-06d4-4974-9989-773b441c9f44', // need to come from trade party only
+					tradePartyDetailId,
+					categoryName,
+					branchName,
+					incidentSubType      : categoryName,
 				},
 			});
 		} catch (err) {

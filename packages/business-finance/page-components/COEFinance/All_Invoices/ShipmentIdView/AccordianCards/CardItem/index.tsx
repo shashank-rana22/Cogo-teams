@@ -78,7 +78,7 @@ function CardItem({
 			<AmountWithCurrency item={item} field={field} />
 		),
 		renderStatus   : (item: {}) => <Status item={item} />,
-		renderInvoices : (item: {}) => <ViewInvoice item={item} />,
+		renderInvoices : (item: {}, field: object) => <ViewInvoice item={item} field={field} />,
 		renderRemarks  : (item: {}) => <Remarks itemData={item} />,
 	};
 

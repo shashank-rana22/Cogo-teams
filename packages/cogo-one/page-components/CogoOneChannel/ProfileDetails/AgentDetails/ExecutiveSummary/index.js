@@ -34,7 +34,7 @@ function ExecutiveSummary({
 		return (
 			<div className={styles.container}>
 				<div className={styles.title}><Placeholder width="70px" height="10px" margin="12px 0 6px 0" /></div>
-				<div className={styles.content}>
+				<div className={styles.summary}>
 					<Placeholder width="270px" height="100px" />
 				</div>
 			</div>
@@ -46,15 +46,10 @@ function ExecutiveSummary({
 			<div className={styles.container}>
 				<div className={styles.title}>Executive Summary</div>
 				<div className={styles.content}>
-					{summary}
-				</div>
-				<div
-					role="button"
-					tabIndex={0}
-					onClick={handleSummary}
-					className={styles.show_button}
-				>
-					<Button size="md" themeType="secondary">Show More</Button>
+					<div className={styles.summary}>{summary}</div>
+					<div className={styles.show_button}>
+						<Button size="md" themeType="linkUi" onClick={handleSummary}>Show More</Button>
+					</div>
 				</div>
 			</div>
 		)

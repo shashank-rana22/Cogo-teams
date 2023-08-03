@@ -1,8 +1,8 @@
 import { Button, Modal, RadioGroup, Select } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useRef } from 'react';
 
-import TRADE_PARTY_MAPPING from '../../../../contants/TRADE_PARTY_MAPPING';
+import TRADE_PARTY_MAPPING from '../../../../constants/TRADE_PARTY_MAPPING';
 import useCreateShipmentTradePartner from '../../../../hooks/useCreateShipmentTradePartner';
 import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
 
@@ -16,8 +16,8 @@ function AddCompanyModal({
 	addCompany = {},
 	setAddCompany = () => {},
 	tradePartnerTrigger = () => {},
-	shipment_id,
-	importer_exporter_id,
+	shipment_id = '',
+	importer_exporter_id = '',
 }) {
 	const formRef = useRef(null);
 	const { trade_party_type = '', organization_id } = addCompany || {};
@@ -47,7 +47,13 @@ function AddCompanyModal({
 	}, [trade_party_type]);
 
 	const onSubmit = (formValues) => {
-		const params = getCreateTradePartnerParams({ ...formValues, trade_party_type });
+		const params = getCreateTradePartnerParams({
+			...formValues,
+			trade_party_type,
+			importer_exporter_id,
+			organization_id,
+			companyType,
+		});
 		createTrigger(params);
 	};
 
@@ -59,16 +65,27 @@ function AddCompanyModal({
 
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
 				<div className={styles.modal_body_container}>
-					<div className={styles.role_container}>
-						<label>Role</label>
-						<Select
-							options={tradePartyOptions}
-							value={role}
-							size="sm"
-							disabled={trade_party_type}
-							onChange={(val) => setRole(val)}
-						/>
-					</div>
+
+					{trade_party_type
+						? (
+							<div className={styles.role_container}>
+								<b>Role:</b>
+								{' '}
+								<span>{startCase(trade_party_type)}</span>
+							</div>
+						)
+						: (
+							<div className={styles.role_container}>
+								<label>Role</label>
+								<Select
+									options={tradePartyOptions}
+									value={role}
+									size="sm"
+									disabled={trade_party_type}
+									onChange={(val) => setRole(val)}
+								/>
+							</div>
+						) }
 
 					<div className={styles.radio_container}>
 						<RadioGroup

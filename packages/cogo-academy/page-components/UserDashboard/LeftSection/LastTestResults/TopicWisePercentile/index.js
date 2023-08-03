@@ -22,7 +22,6 @@ const renderTooltip = ({ topic_wise_percentile = 0 }) => (
 				</div>
 			);
 		}
-
 		return null;
 	})
 );

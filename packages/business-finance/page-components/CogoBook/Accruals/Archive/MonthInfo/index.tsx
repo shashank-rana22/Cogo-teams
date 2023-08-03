@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
-import { IcMArrowBack, IcMUnlock, IcMLock } from '@cogoport/icons-react';
+import { Button, Popover } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMArrowBack, IcMUnlock, IcMLock, IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import ValuePercentage from '../ValuePercentage';
 
@@ -10,14 +10,14 @@ interface MonthInterface {
 	data?:{
 		periodName?:string
 		expenseCurrency?:string
-		expenseBooked?:string
+		expenseBooked?:number
 		isLocked?:boolean
 		expenseAccrued?:string
 		incomeCurrency?:string
-		incomeBooked?:string
+		incomeBooked?:number
 		incomeAccrued?:string
-		actualExpense?:string
-		actualIncome?:string
+		actualExpense?:number
+		actualIncome?:number
 	}
 	handleClick?: () => void
 	loading?:boolean
@@ -27,15 +27,55 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 	const {
 		periodName,
 		expenseCurrency,
-		expenseBooked,
+		expenseBooked = 0,
 		expenseAccrued,
 		incomeCurrency,
-		incomeBooked,
+		incomeBooked = 0,
 		incomeAccrued,
-		actualExpense,
-		actualIncome,
+		actualExpense = 0,
+		actualIncome = 0,
 		isLocked,
 	} = data || {};
+
+	const renderContent = () => (
+		<div className={styles.variance_styles}>
+			<div>
+				<div className={styles.expense}>Expense Variation</div>
+				<div>
+					Amount :
+					{' '}
+					<span className={styles.amount}>
+						{formatAmount({
+							amount   :	(expenseBooked - actualExpense) as any,
+							currency : expenseCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+					</span>
+				</div>
+			</div>
+			<div>
+				<div className={styles.income}>Income Variation</div>
+				<div>
+					Amount :
+					{' '}
+					<span className={styles.amount}>
+						{formatAmount({
+							amount   :	(incomeBooked - actualIncome) as any,
+							currency : expenseCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+					</span>
+				</div>
+			</div>
+		</div>
+	);
+
 	return (
 		<div>
 
@@ -64,14 +104,28 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 					<div>
 						<div className={styles.para_data}>Expense Booked</div>
 						<div className={styles.para}>
-							{getFormattedPrice(expenseBooked || actualExpense, expenseCurrency)}
+							{formatAmount({
+								amount   :	(expenseBooked || actualExpense) as any,
+								currency : expenseCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 
 					<div>
 						<div className={styles.para_data}>Expense Accrued</div>
 						<div className={styles.para}>
-							{getFormattedPrice(expenseAccrued, expenseCurrency)}
+							{formatAmount({
+								amount   :	expenseAccrued,
+								currency : expenseCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 				</div>
@@ -80,14 +134,28 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 					<div>
 						<div className={styles.para_data}>Income Booked</div>
 						<div className={styles.para}>
-							{getFormattedPrice(incomeBooked || actualIncome, incomeCurrency)}
+							{formatAmount({
+								amount   :	(incomeBooked || actualIncome) as any,
+								currency : incomeCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 
 					<div>
 						<div className={styles.para_data}>Income Accrued</div>
 						<div className={styles.para}>
-							{getFormattedPrice(incomeAccrued, incomeCurrency)}
+							{formatAmount({
+								amount   :	incomeAccrued,
+								currency : incomeCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 				</div>
@@ -106,13 +174,24 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 							<ValuePercentage data={data} keys="actualProfit" flag />
 						</div>
 					</div>
+					<div style={{ display: 'flex', flexDirection: 'column' }}>
+						<Popover
+							placement="bottom"
+							render={renderContent()}
+						>
+							<div>
+								<div className={styles.variance_data}>
+									Variance
+									<IcMArrowRotateDown />
+								</div>
 
-					<div>
-						<div className={styles.para_data}>Variance</div>
+							</div>
+						</Popover>
 						<div className={styles.para}>
 							<ValuePercentage data={data} keys="variance" flag />
 						</div>
 					</div>
+
 				</div>
 
 			</div>

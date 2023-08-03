@@ -53,8 +53,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	width: 19%;
 	padding: 16px;
 	margin-top: 16px;
+	overflow-x: auto;
 	background: #fff;
 	border-radius: 8px;
 }
@@ -65,14 +67,13 @@
 }
 
 .card_label {
-	padding-right: 60px;
-	padding-left: 36px;
+	padding-right: 4px;
 	font-size: 14px;
 	font-weight: 500;
 }
 
 .card_value {
-	padding-left: 14px;
+	padding-left: 4px;
 	font-size: 30px;
 	font-weight: 600;
 }
@@ -162,6 +163,11 @@
 	font-weight: 600;
 }
 
+.tooltip_text {
+	word-break: break-word;
+	word-wrap: break-word;
+}
+
 .jobs {
 	display: flex;
 	gap: 4px;
@@ -204,4 +210,26 @@
 .table_data {
 	height: 45vh;
 	overflow: scroll;
+
+	:global {
+		.ui_table_head_container {
+			position: sticky;
+			top: 0;
+			z-index: 1;
+			background: #ffff;
+
+			.ui_table_head_row {
+				.ui_table_head_cell:first-child {
+					padding-left: 12px;
+				}
+			}
+		}
+	}
+}
+
+.bar_chart_loader {
+	position: relative;
+	top: 150px;
+	display: flex;
+	justify-content: center;
 }

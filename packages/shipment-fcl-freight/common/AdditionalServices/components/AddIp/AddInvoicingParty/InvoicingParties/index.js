@@ -1,16 +1,17 @@
 import { Button, Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import useListOrganizationInvoicingParties from '../../../../../../hooks/useListOrganizationInvoicingParties';
-import EmptyState from '../../../../../EmptyState';
 import CreateNewBillingAddress from '../CreateNewBillingAddress';
 import CreateNewTradeParty from '../CreateNewTradeParty';
 
 import InvoicingPartyItem from './InvoicingPartyItem';
 import styles from './styles.module.css';
 
-const tradePartyType = {
+const TRADE_PARTY_TYPE = {
 	key   : 'paying_party',
 	label : 'PAYING PARTY',
 	value : 'paying_party',
@@ -51,23 +52,23 @@ function InvoicingParties({
 	const address_to_use = is_tax_applicable ? 'billing_addresses' : 'other_addresses';
 
 	useEffect(() => {
-		if (loading || invoicingPartiesList.length === 0) {
+		if (loading || isEmpty(invoicingPartiesList)) {
 			return;
 		}
 
-		const values = [];
-		const optionsDisabled = {}; // optionsDisabled only for billing_addresses
+		const VALUES = [];
+		const OPTIONS_DISABLED = {}; // optionsDisabled only for billing_addresses
 
 		invoicingPartiesList.forEach((item) => {
 			(item.billing_addresses || []).forEach((billingAddress) => {
 				const { id = '' } = billingAddress;
 
-				values.push(id);
+				VALUES.push(id);
 			});
 		});
 
-		setValuesState(values);
-		setOptionsDisabledState(optionsDisabled);
+		setValuesState(VALUES);
+		setOptionsDisabledState(OPTIONS_DISABLED);
 	}, [loading, invoicingPartiesList]);
 
 	const handleChange = (newValue) => {
@@ -112,7 +113,7 @@ function InvoicingParties({
 				organization_id,
 				organization_country_id : invoicingParty.country_id,
 				tax_number,
-				tax_mechanism           : tax_mechanism?.[0]?.mechanism_type,
+				tax_mechanism           : tax_mechanism?.[GLOBAL_CONSTANTS.zeroth_index]?.mechanism_type,
 				address,
 				pincode,
 				is_sez                  : !!is_sez,
@@ -158,6 +159,7 @@ function InvoicingParties({
 					</>
 				);
 			}
+
 			return <EmptyState />;
 		}
 
@@ -216,7 +218,8 @@ function InvoicingParties({
 				<CreateNewTradeParty
 					orgResponse={organization}
 					setShowComponent={setShowComponent}
-					tradePartyType={tradePartyType}
+					showComponent={showComponent}
+					tradePartyType={TRADE_PARTY_TYPE}
 					fetchOrganizationTradeParties={refetch}
 				/>
 

@@ -1,0 +1,97 @@
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.fieldarray {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px;
+	margin: 4px;
+	margin-bottom: 24px;
+	border: 1px solid #dedede;
+	border-radius: 4px;
+}
+
+.heading {
+	font-size: var(--font-size-lg);
+	color: var(--color-accent-orange-1);
+}
+
+.child {
+	width: 100%;
+}
+
+.add_button_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.label {
+	margin-bottom: 6px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.add_button_text {
+	font-size: var(--font-size-md);
+}
+
+.element {
+	padding: 4px;
+
+	:global {
+		.ui_select_input_placeholder {
+			font-size: var(--font-size-lg);
+			font-weight: 400;
+			color: #bdbdbd;
+		}
+
+		.ui_input_control::placeholder {
+			font-size: var(--font-size-lg);
+			font-weight: 400;
+			color: #bdbdbd;
+		}
+
+		.ui_upload_droparea_subheading {
+			text-align: center;
+			opacity: 0.3;
+		}
+
+		.react-datepicker-wrapper {
+			width: 100% !important;
+		}
+
+		.react-datepicker__input-container input {
+			height: 32px;
+		}
+	}
+}
+
+.delete_icon {
+	position: absolute;
+	right: -6px;
+	bottom: 8px;
+}
+
+.icon {
+	position: absolute;
+	top: -10.7px;
+	right: -3px;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+}
+
+.errors {
+	padding-left: 4px;
+	margin: 0;
+	font-size: var(--font-size-md);
+	line-height: 16px;
+	color: #cb6464;
+	letter-spacing: 0.02em;
+}

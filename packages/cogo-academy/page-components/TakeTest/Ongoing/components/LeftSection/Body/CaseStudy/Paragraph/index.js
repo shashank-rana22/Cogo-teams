@@ -6,9 +6,8 @@ function Paragraph({ content }) {
 			<div className={styles.header}>
 				Read the passage given and answer the following Questions on the basis of the passage
 			</div>
-			<div className={styles.container}>
-				{content}
-			</div>
+
+			<div className={styles.container} dangerouslySetInnerHTML={{ __html: content }} />
 		</div>
 	);
 }

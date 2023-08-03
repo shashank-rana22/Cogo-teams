@@ -1,7 +1,8 @@
 import { Pill, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
-import getFormattedPrice from '../../commons/utils/getFormattedPrice';
 import GetSortingData from '../Logistics/Profitabillity/profitabilitySorting';
 
 import styles from './styles.module.css';
@@ -61,9 +62,15 @@ const profitabillityColumn = (sort, setSort) => [
 		id       : 'income',
 		accessor : (row) => (
 			<div className={styles.expense_text_style}>
-				{getFormattedPrice(
-					Math.abs(row?.income),
-					'INR',
+				{formatAmount(
+					{
+						amount   :	Math.abs(row?.income) as any,
+						currency : GLOBAL_CONSTANTS.currency_code.INR,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					},
 				)}
 			</div>
 		),
@@ -74,10 +81,14 @@ const profitabillityColumn = (sort, setSort) => [
 		id       : 'expense',
 		accessor : (row) => (
 			<div className={styles.expense_text_style}>
-				{getFormattedPrice(
-					row?.expense,
-					'INR',
-				)}
+				{formatAmount({
+					amount   :	row?.expense,
+					currency :	GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				})}
 			</div>
 		),
 

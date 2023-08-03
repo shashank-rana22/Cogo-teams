@@ -1,8 +1,12 @@
-import { cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf } from '@cogoport/icons-react';
-import { format, startCase, isEmpty } from '@cogoport/utils';
-import React from 'react';
+import { startCase, isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
+import DocumentTypeSID from '../../../../../common/DocumentTypeSID';
 import EmptyState from '../../../../../common/EmptyState';
 import documentTypeMapping from '../../../../../configurations/document-type-mapping';
 import documentStatus from '../DocumentStatus';
@@ -11,10 +15,22 @@ import ActionsStatus from './ActionsStatus';
 import styles from './styles.module.css';
 
 function ListData({
-	userId = '', userMobile = '', leadUserId = '',
-	list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {},
-	isGstUploaded, isPanUploaded,
+	userId = '',
+	userMobile = '',
+	leadUserId = '',
+	list = [],
+	orgId = '',
+	setShowModal = () => {},
+	setSingleItem = () => {},
+	isGstUploaded = false,
+	isPanUploaded = false,
+	formattedMessageData = {},
+	getDocumentsList = () => {},
 }) {
+	const [documentTagUrl, setDocumentTagUrl] = useState('');
+
+	const { control, formState: { errors = {} }, watch, handleSubmit, resetField, reset } = useForm();
+
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
 	};
@@ -43,21 +59,30 @@ function ListData({
 				<div className={styles.list_container}>
 					{ (list || []).map((item) => {
 						const {
+							id = '',
 							created_at = '',
 							document_type = '',
 							document_url = '',
 							state = '',
 							file_name = '',
 							verification_status = '',
+							shipment = {},
 						} = item || {};
+
+						const serialId = shipment?.serial_id || '';
 
 						return (
 							<>
 								<div className={styles.activity_date}>
 									<div className={styles.dot} />
 									<div className={styles.durations}>
-										{format(created_at, 'hh:mm a,')}
-										{format(created_at, ' MMM dd')}
+										{formatDate({
+											date       : created_at,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+											formatType : 'dateTime',
+											separator  : '|',
+										})}
 									</div>
 								</div>
 								<div className={styles.main_card}>
@@ -75,7 +100,6 @@ function ListData({
 												{documentTypeMapping(document_type)}
 											</div>
 										</div>
-
 										<div className={styles.content}>
 											Document sent by customer
 										</div>
@@ -102,9 +126,46 @@ function ListData({
 											isPanUploaded={isPanUploaded}
 											isGstUploaded={isGstUploaded}
 										/>
-
+										<div className={cl`${styles.card_footer}
+										${serialId ? styles.tag_action : ''}`}
+										>
+											{serialId ? (
+												<div className={styles.shipment_id}>
+													SID:
+													{' '}
+													{serialId}
+												</div>
+											) : null}
+											{orgId && (
+												<Button
+													key={document_url}
+													onClick={() => setDocumentTagUrl(document_url)}
+													size="sm"
+												>
+													Tag to SID
+												</Button>
+											)}
+										</div>
 									</div>
 								</div>
+								{(documentTagUrl === document_url && orgId) && (
+									<DocumentTypeSID
+										key={document_url}
+										id={id}
+										orgId={orgId}
+										formattedMessageData={formattedMessageData}
+										documentTagUrl={documentTagUrl}
+										setDocumentTagUrl={setDocumentTagUrl}
+										type="documents"
+										control={control}
+										errors={errors}
+										watch={watch}
+										handleSubmit={handleSubmit}
+										resetField={resetField}
+										reset={reset}
+										getDocumentsList={getDocumentsList}
+									/>
+								)}
 							</>
 						);
 					})}

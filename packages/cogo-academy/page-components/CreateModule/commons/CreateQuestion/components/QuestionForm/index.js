@@ -4,6 +4,7 @@ import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
+import updateStates from '../../../../utils/updateStates';
 import SingleQuestionComponent from '../../../SingleQuestionComponent';
 
 import controls from './controls';
@@ -14,6 +15,14 @@ if (typeof window !== 'undefined') {
 	// eslint-disable-next-line global-require
 	RichTextEditor = require('react-rte').default;
 }
+
+const NAME_ARRAY_MAPPING = {
+	stand_alone : 'question',
+	case_study  : 'case_questions',
+	subjective  : 'subjective',
+};
+
+const OFFSET = 1;
 
 function QuestionForm({
 	control,
@@ -31,15 +40,23 @@ function QuestionForm({
 	listSetQuestions,
 	editorValue,
 	setEditorValue,
+	questionState,
+	setQuestionState,
+	subjectiveEditorValue,
+	setSubjectiveEditorValue = () => {},
+	uploadable,
+	setUploadable,
+	caseStudyQuestionEditorValue,
+	setCaseStudyQuestionEditorValue,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
-		const hash = {};
+		const HASH = {};
 
 		controls.forEach((item) => {
-			hash[item?.name] = item;
+			HASH[item?.name] = item;
 		});
 
-		return hash;
+		return HASH;
 	}, []);
 
 	const fieldArrayControls = useMemo(() => NAME_CONTROL_MAPPING.case_questions, [NAME_CONTROL_MAPPING]);
@@ -49,38 +66,59 @@ function QuestionForm({
 		name: fieldArrayControls.name,
 	});
 
-	const childEmptyValues = {};
+	const CHILD_EMPTY_VALUES = {};
 	fieldArrayControls.controls.forEach((controlItem) => {
-		childEmptyValues[controlItem.name] = controlItem.value || '';
+		CHILD_EMPTY_VALUES[controlItem.name] = controlItem.value || '';
 	});
 
 	const handleAppendChild = (index) => {
-		append({ ...childEmptyValues, isNew: true });
+		append({ ...CHILD_EMPTY_VALUES, isNew: true });
 
 		setEditorValue((prev) => ({
 			...prev,
-			[`case_questions_${index + 1}_explanation`]: RichTextEditor.createEmptyValue(),
+			[`case_questions_${index + OFFSET}_explanation`]: RichTextEditor.createEmptyValue(),
+		}));
+
+		setQuestionState((prev) => ({
+			...prev,
+			editorValue: {
+				...prev.editorValue,
+				[`case_questions_${index + OFFSET}`]: RichTextEditor.createEmptyValue(),
+			},
 		}));
 	};
 
 	if (isEmpty(fields) && editDetails.question_type !== 'case_study') {
-		append({ ...childEmptyValues, isNew: true });
+		append({ ...CHILD_EMPTY_VALUES, isNew: true });
 
 		setEditorValue((prev) => ({
 			...prev,
 			question_0_explanation: RichTextEditor.createEmptyValue(),
 		}));
+
+		setQuestionState((prev) => ({
+			...prev,
+			editorValue: {
+				...prev.editorValue,
+				question_0: RichTextEditor.createEmptyValue(),
+			},
+		}));
 	}
 
 	const handleDeleteNewObject = (index) => {
-		remove(index, 1);
+		remove(index, OFFSET);
 
-		setEditorValue((prev) => ({ ...prev, [`case_questions_${index}_explanation`]: undefined }));
+		updateStates({
+			setQuestionState,
+			setEditorValue,
+			index: questionState?.editorValue?.question_0 ? (index + OFFSET) : index,
+			OFFSET,
+		});
 	};
 
 	return (
 		<div key={questionTypeWatch} className={styles.container}>
-			{fields.map((field, index) => (
+			{fields?.map((field, index) => (
 				<div key={field.id} className={styles.field_container}>
 					<div className={styles.question_container}>
 						<SingleQuestionComponent
@@ -102,12 +140,20 @@ function QuestionForm({
 							questionTypeWatch={questionTypeWatch}
 							editorValue={editorValue}
 							setEditorValue={setEditorValue}
-							name={questionTypeWatch === 'stand_alone' ? 'question' : 'case_questions'}
+							questionState={questionState}
+							setQuestionState={setQuestionState}
+							subjectiveEditorValue={subjectiveEditorValue}
+							setSubjectiveEditorValue={setSubjectiveEditorValue}
+							uploadable={uploadable}
+							setUploadable={setUploadable}
+							name={NAME_ARRAY_MAPPING[questionTypeWatch]}
 							errors={questionTypeWatch === 'stand_alone'
 								? errors.question?.[index] : errors?.case_questions?.[index]}
+							caseStudyQuestionEditorValue={caseStudyQuestionEditorValue}
+							setCaseStudyQuestionEditorValue={setCaseStudyQuestionEditorValue}
 						/>
 
-						{fields.length > 1 && field?.isNew ? (
+						{fields.length > OFFSET && field?.isNew ? (
 							<IcMCrossInCircle
 								className={styles.delete_button}
 								width={16}
@@ -117,7 +163,7 @@ function QuestionForm({
 						) : null}
 					</div>
 
-					{index === fields.length - 1 && mode !== 'view' && questionTypeWatch === 'case_study' ? (
+					{index === fields.length - OFFSET && mode !== 'view' && questionTypeWatch === 'case_study' ? (
 						<div className={styles.button_container}>
 							<Button
 								type="button"

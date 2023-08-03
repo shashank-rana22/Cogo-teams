@@ -1,0 +1,85 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.task_date_details {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-left: -2px;
+	white-space: nowrap;
+}
+
+.cargo_details {
+	display: flex;
+	flex-direction: row;
+}
+
+.icon {
+	margin-top: 2px;
+	margin-right: 8px;
+}
+
+.task_and_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@media (max-width: 768px) {
+		margin-bottom: 20px;
+	}
+}
+
+.task_name {
+	margin-right: 20px;
+	margin-left: 4px;
+	font-weight: 600;
+	color: #313030;
+	white-space: break-spaces;
+}
+
+.deadline {
+	display: flex;
+	align-items: center;
+	padding: 2px 8px;
+	margin-right: 10px;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-primary-error-red-2);
+	background: #fff1f3;
+	border-radius: 16px;
+
+	& > svg {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+.completed {
+	display: flex;
+	align-items: center;
+	padding: 2px 8px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #027a48;
+	background: #ecfdf3;
+	border-radius: 16px;
+
+	& > svg {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+.details {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-bottom: 4px;
+}

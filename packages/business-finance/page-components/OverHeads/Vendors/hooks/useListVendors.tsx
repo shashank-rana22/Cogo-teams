@@ -20,7 +20,6 @@ const useListVendors = ({ filters, sort }) => {
 		try {
 			trigger({
 				params: {
-					entityCodeId               : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 					page_limit                 : pageLimit,
 					page,
 					verification_data_required : true,

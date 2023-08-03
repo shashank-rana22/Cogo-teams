@@ -1,0 +1,38 @@
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.title {
+	margin-left: 6px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.back_icon {
+	color: #221f20;
+	cursor: pointer;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.input_group {
+	display: flex;
+	flex-direction: column;
+	width: 120%;
+}
+
+.map_field_container {
+	display: flex;
+	justify-content: space-between;
+	width: 40%;
+	margin: 20px 0 0;
+}
+
+.lower_text {
+	margin: 40px 0;
+}

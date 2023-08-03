@@ -1,0 +1,14 @@
+.icon {
+	display: flex;
+	justify-content: center;
+	padding-top: 8px;
+}
+
+.container {
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+.button {
+	margin-right: 12px;
+}

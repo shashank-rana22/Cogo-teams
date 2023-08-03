@@ -1,0 +1,25 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 0 15px 2px;
+}
+
+.pair {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin-right: 5px;
+}
+
+.circle {
+	width: 8px;
+	height: 8px;
+	margin: 0 5px 0 0;
+	border-radius: 50px;
+}
+
+.name {
+	font-size: 11px;
+	color: #828282;
+}

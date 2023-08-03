@@ -1,0 +1,58 @@
+.top_header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.header {
+	display: flex;
+	margin-top: 16px;
+}
+
+.container {
+	padding-top: 10px;
+	margin-top: 20px;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+}
+
+.page {
+	font-size: 20px;
+	font-weight: 600;
+	color: #444;
+}
+
+.refresh {
+	margin-top: 16px;
+}
+
+.toggle_chat {
+	display: flex;
+
+	:global {
+		.ui_toggle_container {
+			margin-right: 62px;
+		}
+	}
+}
+
+.shipment_not_found {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 80vh;
+}
+
+.error_heading {
+	font-size: 60px;
+	font-weight: 900;
+	color: #ee3425;
+}
+
+.error_subheading {
+	font-size: 20px;
+	font-weight: 600;
+	color: #444;
+}

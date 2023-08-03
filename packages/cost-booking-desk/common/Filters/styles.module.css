@@ -1,0 +1,44 @@
+.container {
+	display: flex;
+	align-items: center;
+}
+
+.container > div {
+	margin-left: 10px;
+}
+
+.toggle_container {
+	:global {
+		.ui_toggle_container {
+			align-items: center;
+			padding: 0 10px;
+		}
+
+		.ui_toggle_offlabel {
+			color: var(--color-secondary-greyscale-2);
+		}
+	}
+}
+
+.popover_container {
+	:global {
+		.ui_popover_container {
+			width: 350px;
+		}
+
+		.tippy-content {
+			width: 100%;
+		}
+	}
+}
+
+.popover_button_text {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.button_text {
+	margin-left: 8px;
+	font-size: var(--font-size-lg);
+}

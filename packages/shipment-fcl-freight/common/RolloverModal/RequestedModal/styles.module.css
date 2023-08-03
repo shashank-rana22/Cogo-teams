@@ -1,0 +1,17 @@
+.reddish {
+	background-color: #fde7e7;
+}
+
+.rollover_info {
+	display: flex;
+	align-items: center;
+
+	> svg {
+		margin-right: 10px;
+	}
+}
+
+.link {
+	padding: 0;
+	cursor: pointer;
+}

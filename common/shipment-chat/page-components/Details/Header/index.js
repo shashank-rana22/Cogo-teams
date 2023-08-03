@@ -1,4 +1,4 @@
-import { Popover, Button, Toggle } from '@cogoport/components';
+import { Popover, Toggle } from '@cogoport/components';
 import { IcMProfile, IcMCross } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
@@ -64,6 +64,22 @@ function Header({
 					isShow={false}
 				/>
 
+				<Popover
+					placement="bottom"
+					interactive
+					render={content()}
+					className={styles.popover_container}
+				>
+					<div className={styles.button}>
+						<IcMProfile width={12} height={12} />
+						+
+						{' '}
+						{groupChatUsers?.length}
+						{' '}
+						others
+					</div>
+				</Popover>
+
 				<div
 					className={styles.close_icon}
 					role="button"
@@ -73,28 +89,10 @@ function Header({
 					<IcMCross />
 				</div>
 			</div>
-			<div className={styles.sub_container}>
-				<div className={styles.filter_box}>
-					<div style={{ color: '#221F20' }}>Important Message</div>
-					<Toggle value={showImpMsg} onChange={setShowImpMsg} />
-				</div>
 
-				<Popover
-					placement="bottom"
-					interactive
-					render={content()}
-					className={styles.popover_container}
-				>
-					<div className={styles.button}>
-						<Button>
-							<IcMProfile width={15} height={15} />
-							+
-							{' '}
-							{groupChatUsers?.length}
-						</Button>
-					</div>
-				</Popover>
-
+			<div className={styles.filter_box}>
+				<div style={{ color: '#221F20' }}>Show Starred Messages</div>
+				<Toggle value={showImpMsg} onChange={setShowImpMsg} />
 			</div>
 
 		</div>

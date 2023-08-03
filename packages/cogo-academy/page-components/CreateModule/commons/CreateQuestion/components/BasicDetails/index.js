@@ -18,8 +18,10 @@ function BasicDetails({
 	questionSetId,
 	mode,
 	listSetQuestions,
+	caseStudyQuestionEditorValue,
+	setCaseStudyQuestionEditorValue,
 }) {
-	const [showForm, setShowForm] = useState(false);
+	const [showForm, setShowForm] = useState(true);
 
 	return (
 		<div key={showForm}>
@@ -47,6 +49,8 @@ function BasicDetails({
 						setValue={setValue}
 						setShowForm={setShowForm}
 						listSetQuestions={listSetQuestions}
+						caseStudyQuestionEditorValue={caseStudyQuestionEditorValue}
+						setCaseStudyQuestionEditorValue={setCaseStudyQuestionEditorValue}
 					/>
 				)}
 		</div>

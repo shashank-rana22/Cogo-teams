@@ -1,3 +1,4 @@
+import { Toggle } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import toFixed from '../../../../CreateModule/utils/toFixed';
@@ -9,11 +10,12 @@ const colorArray = ['hsla(232, 44%, 96%, 1)', 'hsla(234, 46%, 87%, 1)', 'hsla(23
 
 const getBarChartData = ({ chart_data = {}, toggleState }) => (Object.keys(chart_data).map((key, index) => ({
 	label      : toggleState ? startCase(key) : startCase(key.split('_')[0]),
-	percentile : Math.ceil(toFixed(chart_data[key], 2)),
+	percentage : Math.ceil(toFixed(chart_data[key], 2)),
 	color      : colorArray[index],
 })));
 
-function DifficultyAndTopicDistribution({ data = {}, toggleState = false }) {
+function DifficultyAndTopicDistribution({ data = {}, toggleState = false, header_data, loading = false }) {
+	const { setToggleState } = header_data || {};
 	const { difficulty_wise_stats, topic_wise_percent } = data || {};
 
 	const topic_wise_data = getBarChartData({ chart_data: topic_wise_percent, toggleState });
@@ -23,6 +25,17 @@ function DifficultyAndTopicDistribution({ data = {}, toggleState = false }) {
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.toggle_part}>
+				<Toggle
+					name="a4"
+					size="md"
+					disabled={loading}
+					offLabel="Level of Difficulty"
+					onLabel="Topic wise"
+					className={styles.toggle}
+					onChange={() => setToggleState((prev) => (!prev))}
+				/>
+			</div>
 			<BarChart chart_data={chart_data} yAxis="Correct Answer %" />
 		</div>
 	);

@@ -2,6 +2,7 @@ import {
 	IcCTelegram, IcMPlatformchat,
 	IcCWhatsapp,
 	IcMEmail,
+	IcMZalo,
 } from '@cogoport/icons-react';
 
 const OtherChannels = [
@@ -35,6 +36,14 @@ const OtherChannels = [
 		other_channel_type : 'telegram',
 		value_type         : 'number',
 		id_name            : 'telegram_id',
+		has_existing_room  : false,
+	},
+	{
+		name               : 'zalo',
+		icon               : <IcMZalo width={20} height={20} fill="#E09B3D" />,
+		other_channel_type : 'zalo',
+		value_type         : 'number',
+		id_name            : 'zalo_id',
 		has_existing_room  : false,
 	},
 ];

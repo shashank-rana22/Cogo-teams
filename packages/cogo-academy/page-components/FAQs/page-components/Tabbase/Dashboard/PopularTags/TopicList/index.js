@@ -11,6 +11,9 @@ import QuestionsList from '../../../QuestionsList';
 import styles from './styles.module.css';
 
 const ALL_TOPICS = 'All Topics';
+const TRESHOLD_LENGTH = 30;
+const TRIM_START = 0;
+const TRIM_END = 28;
 
 function TopicList({ searchState = '', tagId = [] }) {
 	const {
@@ -22,16 +25,15 @@ function TopicList({ searchState = '', tagId = [] }) {
 
 	if (loading) {
 		return (
-			<div style={{ display: 'flex', justifyContent: 'center', marginTop: '32px' }}>
-				<div className={styles.spinner}>
-					<Spinner
-						height={60}
-						width={60}
-						borderWidth="7px"
-						outerBorderColor="#FBD69F"
-						spinBorderColor="red"
-					/>
-				</div>
+			<div className={styles.spinner}>
+				<Spinner
+					height={60}
+					width={60}
+					borderWidth="7px"
+					outerBorderColor="#FBD69F"
+					spinBorderColor="red"
+				/>
+
 			</div>
 		);
 	}
@@ -40,11 +42,12 @@ function TopicList({ searchState = '', tagId = [] }) {
 		return (<EmptyQuestionListState />);
 	}
 
-	const truncate = (input) => (input?.length > 30 ? `${input.substring(0, 28)}..` : input);
+	const truncate = (input) => (input?.length
+		> TRESHOLD_LENGTH ? `${input.substring(TRIM_START, TRIM_END)}..` : input);
 
-	if (!searchState && (tagId.length === 0)) {
+	if (!searchState && (isEmpty(tagId))) {
 		return (
-			<div className={styles.grid_container} style={{ display: 'flex' }}>
+			<div className={styles.grid_container}>
 				<div
 					style={{
 						margin : '4px 0',
@@ -76,13 +79,13 @@ function TopicList({ searchState = '', tagId = [] }) {
 
 						{(data?.list || []).map((singleOption) => (
 							<TabPanel
+								key={singleOption}
 								name={singleOption.id}
 								title={(
-
-									<div>
+									<div className={styles.topics_container}>
 										<div className={styles.title}>
 
-											{truncate(startCase(singleOption?.name))}
+											{truncate(startCase(singleOption?.display_name))}
 											{' '}
 											<Badge
 												color="#FA9E96"
@@ -102,7 +105,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 					</Tabs>
 				</div>
 
-				<div style={{ flex: 3.5 }}>
+				<div className={styles.questions_container_tag}>
 					<QuestionsList
 						tabTitle={activeTab.name}
 						searchState={searchState}

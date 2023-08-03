@@ -9,8 +9,13 @@ import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
 export default function ScopeSelect({
-	size = 'sm', themeType = 'secondary', popoverSize = 'sm',
-	className = '', defaultValues, showChooseAgent = true, apisToConsider = [],
+	size = 'sm',
+	themeType = 'secondary',
+	className = '',
+	defaultValues = {},
+	showChooseAgent = true,
+	popoverSize = 'sm',
+	apisToConsider = [],
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 

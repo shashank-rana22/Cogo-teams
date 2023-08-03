@@ -1,12 +1,21 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { PARTNER_IDS } from '@cogoport/constants/role_ids';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useSelector } from '@cogoport/store';
 
-import RfqEnquiries from './Content';
+import tabPanelMapping from './configurations/tab-panel-mapping';
 
 function RfqEnquiriesView() {
 	const partnerId = useSelector((state) => state?.profile?.partner?.id);
 	const activeTab = 'rfq_enquiries';
+
+	const geo = getGeoConstants();
+
+	const { navigations } = geo || {};
+
+	const { supply_dashboard } = navigations || {};
+
+	const { tabs = [] } = supply_dashboard.rfq_enquiries || {};
+
 	const handleTabChange = (tab) => {
 		if (tab !== 'rfq_enquiries') {
 			const route = tab.replace('_', '-');
@@ -18,16 +27,17 @@ function RfqEnquiriesView() {
 	return (
 		<div>
 			<Tabs fullWidth activeTab={activeTab} onChange={(tab) => { handleTabChange(tab); }}>
-				<TabPanel name="live_bookings" title="Live Bookings">--</TabPanel>
-				<TabPanel name="trade_enquiry" title="Missing Rates">--</TabPanel>
-				<TabPanel name="disliked_rates" title="Disliked Rates">--</TabPanel>
-				{partnerId !== PARTNER_IDS.VIETNAM_PARTNER_ID && (
-					<TabPanel name="rate_density" title="Rate Density & Coverage">--</TabPanel>)}
-				<TabPanel name="manage_forecast" title="Manage Forecast">--</TabPanel>
-				<TabPanel name="rfq_enquiries" title="RFQ Enquiries">
-					<RfqEnquiries />
-				</TabPanel>
-				<TabPanel name="rates_sheets" title="Rate Sheets">--</TabPanel>
+				{(tabPanelMapping || []).map(({
+					name, title,
+					component,
+				}) => {
+					if (tabs.includes(name)) {
+						return <TabPanel key={title} name={name} title={title}>{component}</TabPanel>;
+					}
+
+					return null;
+				})}
+
 			</Tabs>
 		</div>
 	);

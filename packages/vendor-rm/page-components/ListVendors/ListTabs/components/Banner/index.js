@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';
@@ -12,7 +12,6 @@ const keysToDisplay = [
 	'kyc_status',
 	'registration_number',
 	'service_category',
-	'service_sub_category',
 	'created_on',
 ];
 
@@ -22,8 +21,6 @@ function Banner({ data = {} }) {
 	const { kyc_status, serial_id, registration_number, created_at } = vendor_details || {};
 
 	const serviceCategories = [...new Set(services.map((service) => service.category))];
-
-	const serviceSubCategories = [...new Set(services.map((service) => service.sub_category))];
 
 	const checkVerified = (value) => {
 		if (value === 'verified') {
@@ -78,10 +75,6 @@ function Banner({ data = {} }) {
 			label : 'Service Category',
 			value : formatArrayValues(serviceCategories),
 		},
-		service_sub_category: {
-			label : 'Service Sub-Catogory',
-			value : formatArrayValues(serviceSubCategories),
-		},
 		created_on: {
 			label: 'Created on',
 			value:
@@ -102,7 +95,7 @@ function Banner({ data = {} }) {
 
 			<div className={styles.content}>
 				{keysToDisplay.map((item) => (
-					<div className={styles.item}>
+					<div key={item} className={styles.item}>
 						<div className={styles.label}>
 							{valuesToDisplay[item].label}
 						</div>
