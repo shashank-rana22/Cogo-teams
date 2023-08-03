@@ -7,13 +7,13 @@ const getPayload = ({ organization_id = '', user_id = '', lead_user_id = '' }) =
 	lead_user_id : lead_user_id || undefined,
 });
 
-const useSubmitOmniChannelKyc = () => {
+const useVerifyOmniChannelKyc = () => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/submit_omnichannel_kyc',
+		url    : '/verify_omnichannel_kyc',
 		method : 'post',
 	}, { manual: true });
 
-	const submitKyc = ({ orgId, userId, leadUserId }) => {
+	const verifyKyc = ({ orgId, userId, leadUserId }) => {
 		try {
 			trigger({
 				data: getPayload({ organization_id: orgId, user_id: userId, lead_user_id: leadUserId }),
@@ -23,7 +23,7 @@ const useSubmitOmniChannelKyc = () => {
 		}
 	};
 
-	return { loading, submitKyc, data };
+	return { loading, verifyKyc, data };
 };
 
-export default useSubmitOmniChannelKyc;
+export default useVerifyOmniChannelKyc;

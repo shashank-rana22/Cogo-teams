@@ -2,7 +2,7 @@ import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 
-import useSubmitOmniChannelKyc from '../../../../../hooks/useSubmitOmniChannelKyc';
+import useVerifyOmniChannelKyc from '../../../../../hooks/useVerifyOmniChannelKyc';
 
 import styles from './styles.module.css';
 
@@ -19,7 +19,7 @@ function AgentQuickActions({
 
 	const { push } = useRouter();
 
-	const { submitKyc = () => {}, loading = false } = useSubmitOmniChannelKyc();
+	const { verifyKyc = () => {}, loading = false } = useVerifyOmniChannelKyc();
 
 	const emailParams = email ? `&email=${email}` : '';
 	const countryCodeRegex = GLOBAL_CONSTANTS.regex_patterns.mobile_country_code_format;
@@ -47,7 +47,7 @@ function AgentQuickActions({
 						<Button
 							size="sm"
 							themeType="secondary"
-							onClick={() => submitKyc({ orgId, userId, leadUserId })}
+							onClick={() => verifyKyc({ orgId, userId, leadUserId })}
 							disabled={loading}
 						>
 							Verify KYC

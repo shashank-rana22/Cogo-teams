@@ -12390,7 +12390,7 @@ const partner = {
 	],
 	cogo_one: [
 		{
-			api          : 'submit_omnichannel_kyc',
+			api          : 'verify_omnichannel_kyc',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
