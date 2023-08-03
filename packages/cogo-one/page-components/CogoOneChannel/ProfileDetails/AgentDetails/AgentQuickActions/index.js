@@ -1,6 +1,6 @@
+import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
-import React from 'react';
 
 import useSubmitOmniChannelKyc from '../../../../../hooks/useSubmitOmniChannelKyc';
 
@@ -22,27 +22,38 @@ function AgentQuickActions({
 	const emailParams = email ? `&email=${email}` : '';
 
 	return (
-		<div>
-			{(user_id && !loading)
-				? (
 
+		<div className={styles.main_container}>
+			{
+			(user_id)
+				? (
 					<div>
 
-						{kyc_status === 'verified' ? 'KYC Verified' : (
-							<div
-								role="presentation"
-								className={styles.copy_link}
+						{kyc_status === 'verified' ? (
+							<Pill
+								size="md"
+								color="green"
+							>
+								KYC Verified
+							</Pill>
+						) : (
+
+							<Button
+								size="sm"
+								themeType="secondary"
 								onClick={() => submitKyc({ organization_id, user_id, lead_user_id })}
+								disabled={loading}
 							>
 								Verify KYC
-							</div>
+							</Button>
+
 						)}
 					</div>
 
 				) : (
-					<div
-						role="presentation"
-						className={styles.copy_link}
+					<Button
+						size="sm"
+						themeType="secondary"
 						onClick={() => {
 							router.push(
 								// eslint-disable-next-line max-len
@@ -53,10 +64,12 @@ function AgentQuickActions({
 						}}
 					>
 						Onboard
-					</div>
-				)}
+					</Button>
+				)
+				}
 
 		</div>
+
 	);
 }
 

@@ -1,3 +1,22 @@
+.main_container {
+	margin: 10px 0;
+
+	:global {
+		.ui_button_container {
+			width: 100% !important;
+		}
+
+		.ui_pill_container {
+			width: 100% !important;
+		}
+
+		.ui_pill_text {
+			width: 100% !important;
+			text-align: center;
+		}
+	}
+}
+
 .copy_link {
 	font-size: 12px;
 	color: #034afd;

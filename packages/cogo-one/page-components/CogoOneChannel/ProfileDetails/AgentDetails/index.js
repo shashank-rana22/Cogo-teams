@@ -173,7 +173,15 @@ function AgentDetails({
 							Share
 						</div>
 					)}
-					{activeTab === 'message'
+
+				</div>
+			</div>
+
+			<Profile loading={loading} name={name} userEmail={userEmail} />
+
+			<ContactVerification leadUserId={leadUserId} userId={userId} loading={loading} userData={userData} />
+
+			{activeTab === 'message'
 			&& (
 				<AgentQuickActions
 					userEmail={userEmail}
@@ -185,12 +193,6 @@ function AgentDetails({
 					userData={userData}
 				/>
 			)}
-				</div>
-			</div>
-
-			<Profile loading={loading} name={name} userEmail={userEmail} />
-
-			<ContactVerification leadUserId={leadUserId} userId={userId} loading={loading} userData={userData} />
 
 			{loading ? (
 				<Placeholder
