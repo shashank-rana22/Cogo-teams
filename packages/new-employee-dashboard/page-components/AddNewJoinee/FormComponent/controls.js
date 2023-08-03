@@ -142,17 +142,6 @@ const controls = [
 
 	},
 	{
-		name        : 'segment',
-		type        : 'select',
-		label       : 'Segment*',
-		placeholder : 'Select Segment',
-		options     : GLOBAL_CONSTANTS.segment_options,
-		rules       : {
-			required: 'Segment is required',
-		},
-
-	},
-	{
 		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
