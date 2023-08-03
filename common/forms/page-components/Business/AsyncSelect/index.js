@@ -43,14 +43,24 @@ import {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncListEmployees,
+	asyncListSquad,
+	asyncListSubChapters,
+	asyncListTribes,
+	asyncListChapter,
+	asyncListRoles,
 	asyncFieldsTicketTypes,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncListExpenseCategories,
+	asyncListAllManagers,
 	asyncFieldsListAgents,
 	asyncListShipmentServices,
 	asyncListShipments,
 	asyncListShipmentPendingTasks,
+	asyncIncidentSubtypeList,
+	asyncFieldsLeadOrganization,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -112,15 +122,27 @@ const keyAsyncFieldsParamsMapping = {
 	faq_tags                             : asyncListFAQTags,
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
+	list_employees                       : asyncListEmployees,
+	list_squads                          : asyncListSquad,
+	list_sub_chapters                    : asyncListSubChapters,
+	list_tribes                          : asyncListTribes,
+	list_chapters                        : asyncListChapter,
+	list_roles                           : asyncListRoles,
 	default_types                        : asyncFieldsTicketTypes,
 	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
+	list_expense_category                : asyncListExpenseCategories,
+	list_all_managers                    : asyncListAllManagers,
 	list_chat_agents                     : asyncFieldsListAgents,
 	list_shipment_services               : asyncListShipmentServices,
 	list_shipments                       : asyncListShipments,
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
+	list_incident_subtype                : asyncIncidentSubtypeList,
+	list_lead_organizations              : asyncFieldsLeadOrganization,
 };
+
+const SINGLE_ENTITY = 1;
 
 function AsyncSelect(props) {
 	const {
@@ -132,6 +154,7 @@ function AsyncSelect(props) {
 		getSelectedOption,
 		microService = '',
 		onOptionsChange,
+		isSingleEntity,
 		...rest
 	} = props;
 
@@ -143,6 +166,7 @@ function AsyncSelect(props) {
 
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
+		getModifiedOptions,
 		initialCall,
 		onOptionsChange,
 		params       : params || defaultParams.params,
@@ -151,9 +175,8 @@ function AsyncSelect(props) {
 		microService : microService || defaultParams.microService,
 	});
 
-	if (typeof getModifiedOptions === 'function' && !isEmpty(getAsyncOptionsProps.options)) {
-		getAsyncOptionsProps.options = getModifiedOptions({ options: getAsyncOptionsProps.options });
-	}
+	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'
+	&& getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
 
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
@@ -174,8 +197,10 @@ function AsyncSelect(props) {
 
 	return (
 		<Element
-			{...rest}
+			disabled={disabled}
 			{...getAsyncOptionsProps}
+			{...rest}
+
 		/>
 	);
 }

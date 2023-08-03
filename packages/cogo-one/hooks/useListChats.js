@@ -28,6 +28,7 @@ function useListChats({
 	activeSubTab,
 	setActiveTab,
 	setCarouselState,
+	workPrefernceLoading = false,
 }) {
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
@@ -76,7 +77,7 @@ function useListChats({
 
 	), [searchQuery]);
 
-	const setActiveMessage = useCallback(async (val) => {
+	const setActiveMessage = useCallback((val) => {
 		const { channel_type, id } = val || {};
 		if (channel_type && id) {
 			try {
@@ -84,8 +85,8 @@ function useListChats({
 					firestore,
 					`${FIRESTORE_PATH[channel_type]}/${id}`,
 				);
-				await updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_messages: false });
-				setActiveTab((prev) => ({ ...prev, data: val }));
+				updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_messages: false });
+				setActiveTab((prev) => ({ ...prev, hasNoFireBaseRoom: false, data: val }));
 			} catch (e) {
 				Toast.error('Chat Not Found');
 			}
@@ -136,13 +137,14 @@ function useListChats({
 			viewType,
 			activeSubTab,
 			updateLoadingState,
+			workPrefernceLoading,
 		});
 
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
 		};
 	}, [canShowPinnedChats, omniChannelCollection, omniChannelQuery, queryForSearch, userId, viewType, activeSubTab,
-		updateLoadingState]);
+		updateLoadingState, workPrefernceLoading]);
 
 	useEffect(() => {
 		mountSnapShot({
@@ -153,11 +155,12 @@ function useListChats({
 			queryForSearch,
 			omniChannelQuery,
 			updateLoadingState,
+			workPrefernceLoading,
 		});
 		return () => {
 			snapshotCleaner({ ref: snapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, queryForSearch, updateLoadingState]);
+	}, [omniChannelCollection, omniChannelQuery, queryForSearch, updateLoadingState, workPrefernceLoading]);
 
 	useEffect(() => {
 		mountFlashChats({

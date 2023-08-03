@@ -3,9 +3,7 @@
 	justify-content: flex-end;
 	margin: 20px 0;
 
-	:global {
-		.ui_button_container.ui_ps_themeType_primary {
-			margin-right: 12px;
-		}
+	& > button:not(:last-of-type) {
+		margin-right: 12px;
 	}
 }

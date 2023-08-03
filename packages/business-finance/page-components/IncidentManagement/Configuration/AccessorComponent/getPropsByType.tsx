@@ -10,6 +10,7 @@ function getPropsByType(type, data) {
 		paymentConfirmationRequest,
 		advanceSecurityDeposit,
 		advanceSecurityDepositRefund,
+		revokeInvoiceRequest,
 	} = data || {};
 
 	const typeMappings = {
@@ -25,6 +26,9 @@ function getPropsByType(type, data) {
 		PAYMENT_CONFIRMATION_APPROVAL          : { paymentConfirmationRequest },
 		ADVANCE_SECURITY_DEPOSIT               : { advanceSecurityDeposit },
 		CONSOLIDATED_CREDIT_NOTE               : {},
+		RECURRING_EXPENSE_APPROVAL             : {},
+		OVERHEAD_APPROVAL                      : {},
+		REVOKE_INVOICE                         : { revokeInvoiceData: revokeInvoiceRequest },
 	};
 
 	return typeMappings[type] || {};

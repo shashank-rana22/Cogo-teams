@@ -98,7 +98,7 @@
 .status {
 	display: flex;
 	justify-content: flex-end;
-	width: 29%;
+	width: 35%;
 	max-height: 19px;
 
 	@media (max-width: 1280px) {
@@ -155,14 +155,19 @@
 
 .convert_to_cp {
 	display: flex;
+	justify-content: flex-end;
+}
+
+.check_type {
 	justify-content: space-between;
 }
 
 .organization_users {
 	max-height: 40vh;
-	padding: 2px;
+	padding: 2px 4px;
 	margin-top: 3px;
 	overflow-y: scroll;
+	box-shadow: rgb(0 0 0 / 6%) 0 2px 4px 0 inset;
 
 	&::-webkit-scrollbar {
 		display: none;

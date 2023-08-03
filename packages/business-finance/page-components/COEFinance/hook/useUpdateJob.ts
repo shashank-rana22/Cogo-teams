@@ -5,17 +5,23 @@ import { useSelector } from '@cogoport/store';
 import { GenericObject } from '../../commons/Interfaces';
 
 interface Params {
-	shipmentData?:GenericObject
-	query?: GenericObject
-	showButton?:boolean
-	showFinal?:boolean
-	setShowButton:Function
-	setShowFinal:Function
+	shipmentData?: GenericObject;
+	query?: GenericObject;
+	showButton?: boolean;
+	showFinal?: boolean;
+	setShowButton: Function;
+	setShowFinal: Function;
 }
-const useUpdateJob = ({ query, setShowButton, showButton, setShowFinal, showFinal }:Params) => {
+const useUpdateJob = ({
+	query,
+	setShowButton,
+	showButton,
+	setShowFinal,
+	showFinal,
+}: Params) => {
 	const { shipmentId, jobNumber, jobSource, jobType } = query || {};
 
-	const { user_data:userData } = useSelector(({ profile }:any) => ({
+	const { user_data: userData } = useSelector(({ profile }: any) => ({
 		user_data: profile?.user || {},
 	}));
 
@@ -24,14 +30,16 @@ const useUpdateJob = ({ query, setShowButton, showButton, setShowFinal, showFina
 			url    : '/update_shipment',
 			method : 'post',
 		},
+		{ manual: true },
 	);
 
-	const [{ loading:FinalLoading }, FinalTrigger] = useRequestBf(
+	const [{ loading: FinalLoading }, FinalTrigger] = useRequestBf(
 		{
 			url     : '/common/job/close-financially',
 			method  : 'post',
 			authKey : 'post_common_job_close_financially',
 		},
+		{ manual: true },
 	);
 
 	const getFinalData = async () => {
@@ -50,7 +58,7 @@ const useUpdateJob = ({ query, setShowButton, showButton, setShowFinal, showFina
 			Toast.error(error?.response?.data?.message);
 		}
 	};
-	const getData = async (data:string) => {
+	const getData = async (data: string) => {
 		const jobClose = () => {
 			if (data === 'Undo') {
 				return false;

@@ -1,10 +1,12 @@
-import { Button, Tabs, TabPanel, Table, Loader } from '@cogoport/components';
+import { Button, Tabs, TabPanel, Table } from '@cogoport/components';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
 import taskConfigs from '../../../configs/taskConfigs.json';
 import getMutatedControls from '../../../helpers/getMutatedControls';
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
+import useGetBill from '../../../hooks/useGetBill';
 import EmptyState from '../../EmptyState';
 import PendingTasks from '../../PendingTasks/TaskList';
 import { columns } from '../Invoices/tableColumn';
@@ -55,7 +57,9 @@ export default function AccordionContent({
 	const { mutatedControls } = getMutatedControls({ item, stateProps, controls });
 
 	const list_of_invoices = item?.invoice_data || [];
-	const tableData = getTableFormatedData(list_of_invoices);
+	const accordionOpen = (activeAccordionTab === 'invoice' && !showTask);
+	const { data } = useGetBill({ serial_id: item?.serial_id, accordionOpen });
+	const tableData = getTableFormatedData({ list_of_invoices, data });
 
 	const handleNextAction = async () => {
 		const isFormValid = await formRef.current?.formTrigger();
@@ -87,8 +91,7 @@ export default function AccordionContent({
 		if (taskLoading) {
 			return (
 				<div className={styles.loading_container}>
-					<div>Loading Tasks...</div>
-					<Loader className={styles.loader_icon} />
+					<ThreeDotLoader message="Loading Tasks" fontSize={16} size={30} />
 				</div>
 			);
 		}

@@ -1,15 +1,20 @@
 import { Button, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-import { format, startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import useListOrganizationDocuments from '../../../../hooks/useListOrganizationDocuments';
 import useUpdateOrganizationDocument from '../../../../hooks/useUpdateOrganizationDocument';
 import Loader from '../Loader';
 
 import styles from './styles.module.css';
+
+const LOADING_STATES = 2;
 
 function OrganizationDocuments({
 	forModal = false,
@@ -18,10 +23,10 @@ function OrganizationDocuments({
 	searchDocsVal,
 	showWalletDocs,
 	handleDocClick = () => {},
+	orgDocService = '',
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
-
-	const { importer_exporter_id = '' } = shipment_data;
+	const { importer_exporter_id = '' } = shipment_data || {};
 
 	const {
 		data,
@@ -32,10 +37,12 @@ function OrganizationDocuments({
 			status          : 'active',
 			organization_id : importer_exporter_id,
 			q               : searchDocsVal || undefined,
+			service_type    : orgDocService || undefined,
 		},
 		defaultParams: {
 			page_limit: 1000,
 		},
+		orgDocService,
 	});
 
 	const { deleteDocument } = useUpdateOrganizationDocument({
@@ -50,9 +57,7 @@ function OrganizationDocuments({
 			role="button"
 			tabIndex="0"
 			className={styles.action}
-			onClick={() => {
-				deleteDocument({ id: doc?.id });
-			}}
+			onClick={() => deleteDocument({ id: doc?.id })}
 		>
 			Delete Document
 		</div>
@@ -60,23 +65,26 @@ function OrganizationDocuments({
 
 	const contentToShow = () => {
 		if (loading) {
-			return [...Array(forModal ? 3 : 2)].map(() => (
-				<Loader forModal={forModal} />
+			return [...Array(LOADING_STATES)].map(() => (
+				<Loader key={uuid()} forModal={forModal} />
 			));
 		}
-		if (!loading && data?.list?.length === 0) {
+
+		if (!loading && isEmpty(data?.list)) {
 			return <EmptyState />;
 		}
+
 		return (
 			<>
 				{(data?.list || []).map((doc) => (
 					<div
+						key={doc?.id}
 						role="button"
 						tabIndex={0}
 						className={styles.single_doc}
 						onClick={() => handleDocClick(doc)}
 					>
-						{!showWalletDocs && (
+						{!showWalletDocs ? (
 							<div className={styles.dots}>
 								<Popover
 									interactive
@@ -86,23 +94,34 @@ function OrganizationDocuments({
 									<IcMOverflowDot />
 								</Popover>
 							</div>
-						)}
+						) : null}
+
 						{doc.type === 'pdf' ? (
 							<IcMPdf style={{ fontSize: '32px', color: '#221F20' }} />
 						) : (
 							<IcMImage style={{ fontSize: '32px', color: '#221F20' }} />
 						)}
+
 						<div className={styles.main}>
-							<div className={styles.heading} style={{ fontSize: '14px' }}>
+							<div className={styles.heading}>
 								{startCase(doc.document_type)}
 							</div>
+
+							<div className={styles.sub_heading}>
+								(
+								{startCase(doc?.name)}
+								)
+							</div>
+
 							<div className={styles.upload_info}>
-								{`Uploaded On ${format(
-									doc?.updated_at,
-									'dd MMM yyyy',
-								)}`}
+								{`Uploaded On ${formatDate({
+									date       : doc?.updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})}`}
 							</div>
 						</div>
+
 						<div className={styles.button_wrapper}>
 							<Button
 								style={{ color: '#F68B21' }}
@@ -111,6 +130,7 @@ function OrganizationDocuments({
 							>
 								View
 							</Button>
+
 							<Button
 								style={{ color: '#F68B21' }}
 								themeType="link"

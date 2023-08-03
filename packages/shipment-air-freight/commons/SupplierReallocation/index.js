@@ -37,7 +37,7 @@ function SupplierReallocation({
 		shipment_data, refetch = () => {},
 		refetchServices = () => {}, primary_service = {},
 	} = useContext(ShipmentDetailContext);
-	const { service_provider = {} } = primary_service;
+	const { service_provider = {}, service_type: primary_service_type = '' } = primary_service;
 
 	const { shipment_type } = shipment_data || {};
 
@@ -46,6 +46,7 @@ function SupplierReallocation({
 	const { service_type } = serviceObj || {};
 
 	const { defaultValues, controls } = getControls({
+		primary_service_type,
 		serviceObj,
 		shipment_type,
 	});

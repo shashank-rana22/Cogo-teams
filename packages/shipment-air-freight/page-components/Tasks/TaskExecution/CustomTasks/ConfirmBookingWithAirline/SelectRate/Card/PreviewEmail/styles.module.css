@@ -8,6 +8,10 @@
 	background: white;
 }
 
+.button_container {
+	margin-right: 8px;
+}
+
 .footer {
 	position: sticky;
 	bottom: 0;
@@ -18,7 +22,17 @@
 	background: white;
 	border-top: 1px solid #000;
 
-	.core-ui-button-root {
-		margin: 5px 10px;
+	:global {
+		.core-ui-button-root {
+			margin: 5px 10px;
+		}
+	}
+}
+
+.container {
+	:global {
+		.styles_label__w_POy {
+			display: none;
+		}
 	}
 }

@@ -1,25 +1,26 @@
-import { useRouter } from 'next/router';
-import { useState, useCallback, useMemo } from 'react';
+import { Toggle } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
+import { useState, useMemo } from 'react';
 
 import DashboardContext from '../context/DashboardContext';
-import getLocalStorageVal from '../helpers/getLocalStorageVal';
 
-import FTL from './FTL';
+import Ftl from './FTL';
+import Filters from './FTL/Filters';
+import StepperTabs from './FTL/StepperTabs';
+import Rail from './RAIL';
+import styles from './styles.module.css';
+
+const TAB_COMPONENT_MAPPER = {
+	ftl_freight           : Ftl,
+	rail_domestic_freight : Rail,
+};
 
 export default function SO2Surface() {
-	const defaultValues = getLocalStorageVal();
 	const router = useRouter();
-
-	const [filters, setFilters] = useState(defaultValues?.filters);
-	const [stepperTab, setStepperTab] = useState(defaultValues?.stepperTab);
-	const [activeTab, setActiveTab] = useState(defaultValues?.activeTab);
-	const [scopeFilters] = useState(defaultValues?.scopeFilters);
-
-	const handleVersionChange = useCallback(() => {
-		const newPathname = `${router.asPath}`;
-		window.location.replace(newPathname);
-		localStorage.setItem('document_desk_version', 'v1');
-	}, [router.asPath]);
+	const [filters, setFilters] = useState({});
+	const [stepperTab, setStepperTab] = useState('ftl_freight');
+	const [activeTab, setActiveTab] = useState('mandatory_docs_upload');
+	const [scopeFilters] = useState({});
 
 	const contextValues = useMemo(() => ({
 		activeTab,
@@ -27,14 +28,37 @@ export default function SO2Surface() {
 		filters,
 		setFilters,
 		scopeFilters,
-		handleVersionChange,
 		stepperTab,
 		setStepperTab,
-	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters, handleVersionChange, stepperTab, setStepperTab]);
+	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters, stepperTab, setStepperTab]);
+
+	const ActiveStepperComponent = TAB_COMPONENT_MAPPER[stepperTab];
+
+	const handleOnchange = () => {
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipment-management`;
+		window.sessionStorage.setItem('prev_nav', newUrl);
+		window.location.href = newUrl;
+	};
 
 	return (
 		<DashboardContext.Provider value={contextValues}>
-			{activeTab ? <FTL /> : null}
+			<div>
+				<div className={styles.header}>
+					<h1>SO2 Dashboard - Surface</h1>
+					<div style={{ marginLeft: '150px' }}>
+						<Toggle
+							offLabel="New"
+							onLabel="Old"
+							size="md"
+							onChange={() => handleOnchange()}
+							showOnOff
+						/>
+					</div>
+					<Filters />
+				</div>
+				<StepperTabs />
+				<ActiveStepperComponent key={stepperTab} />
+			</div>
 		</DashboardContext.Provider>
 	);
 }

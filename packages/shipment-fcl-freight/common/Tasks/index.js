@@ -1,7 +1,10 @@
-import { Button, Loader } from '@cogoport/components';
+import { Button } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import Card from './Card';
 import Header from './Header';
@@ -9,7 +12,11 @@ import styles from './styles.module.css';
 import TaskExecution from './TaskExecution';
 import useListTasksHelper from './useListTasksHelper';
 
+const IGM_TASKS = ['mark_igm_shipment_confirmed', 'upload_igm_document', 'upload_checklist'];
+
 function List() {
+	const { stakeholderConfig } = useContext(ShipmentDetailContext);
+
 	const {
 		count = 0,
 		completedTaskCount = 0,
@@ -27,27 +34,40 @@ function List() {
 		setSelectedMail = () => {},
 	} = useListTasksHelper();
 
+	const showIgmTasks = !!stakeholderConfig?.tasks?.show_igm_tasks;
+
+	const IGM_TASK_LIST = [];
+
+	tasksList.forEach((item) => {
+		if (IGM_TASKS.includes(item?.task)) {
+			IGM_TASK_LIST.push(item);
+		}
+	});
+
+	const updatedTaskList = showIgmTasks ? IGM_TASK_LIST : tasksList;
+
 	if (loading) {
 		return (
 			<div className={styles.loading_container}>
-				Loading Tasks....
-				<Loader themeType="primary" className={styles.loader_icon} />
+				<ThreeDotLoader message="Loading Tasks" fontSize={16} size={30} />
 			</div>
 		);
 	}
 
 	return (
 		<div className={styles.container}>
-			<Header
-				count={count}
-				completedTaskCount={completedTaskCount}
-				hideCompletedTasks={hideCompletedTasks}
-				setHideCompletedTasks={setHideCompletedTasks}
-				showMyTasks={showMyTasks}
-				setShowMyTasks={setShowMyTasks}
-			/>
+			{!showIgmTasks ? (
+				<Header
+					count={count}
+					completedTaskCount={completedTaskCount}
+					hideCompletedTasks={hideCompletedTasks}
+					setHideCompletedTasks={setHideCompletedTasks}
+					showMyTasks={showMyTasks}
+					setShowMyTasks={setShowMyTasks}
+				/>
+			) : null }
 
-			{isEmpty(tasksList)
+			{isEmpty(updatedTaskList)
 				? <EmptyState width={500} height={300} />
 				: (
 					<>
@@ -65,32 +85,33 @@ function List() {
 						) : null}
 
 						{!selectedTaskId
-							? (tasksList || []).map((task) => (
+							? (updatedTaskList || []).map((task) => (
 								<Card
 									key={task?.id}
 									task={task}
 									handleClick={handleClick}
 									loading={loading}
-									tasksList={tasksList}
+									tasksList={updatedTaskList}
 								/>
 							)) : null}
 
 						{selectedTaskId ? (
 							<>
 								<Card
-									task={tasksList?.find((task) => task.id === selectedTaskId)}
+									task={updatedTaskList?.find((task) => task.id === selectedTaskId)}
 									handleClick={handleClick}
 									isTaskOpen
 									loading={loading}
-									tasksList={tasksList}
+									tasksList={updatedTaskList}
 								/>
 
 								<TaskExecution
-									task={tasksList?.find((task) => task.id === selectedTaskId)}
+									task={updatedTaskList?.find((task) => task.id === selectedTaskId)}
 									onCancel={() => setSelectedTaskId(null)}
 									taskListRefetch={taskListRefetch}
 									selectedMail={selectedMail}
 									setSelectedMail={setSelectedMail}
+									tasksList={tasksList}
 								/>
 							</>
 						) : null }

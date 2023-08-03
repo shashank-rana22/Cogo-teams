@@ -4,13 +4,27 @@ import BankDetails from '../../Modals/BankDetails';
 import ConcorModal from '../../Modals/ConcorModal';
 import ICJVModal from '../../Modals/ICJV_Modal';
 import JvModal from '../../Modals/JvModal';
+import NonRecuringModal from '../../Modals/NonRecuringModal';
 import PaymentConfirmation from '../../Modals/PaymentConfirmation';
+import RecuringModal from '../../Modals/RecuringModal';
 import RequestCN from '../../Modals/RequestCN';
+import RevokeInvoice from '../../Modals/RevokeInvoice';
 import SettlementModal from '../../Modals/SettlementModal';
 import SezApproval from '../../Modals/SezApproval';
 import TDSModal from '../../Modals/TDSModal';
 
 import getPropsByType from './getPropsByType';
+
+interface Row {
+	type: string;
+	id: string;
+	data: {
+		organization: string;
+	};
+	remark: string;
+	status: string;
+	getIncidentData: Function;
+}
 
 const TYPE_COMPONENT_MAPPING = {
 	BANK_DETAIL_APPROVAL                   : BankDetails,
@@ -25,9 +39,12 @@ const TYPE_COMPONENT_MAPPING = {
 	SEZ_APPROVAL                           : SezApproval,
 	CONCOR_PDA_APPROVAL                    : ConcorModal,
 	CONSOLIDATED_CREDIT_NOTE               : RequestCN,
+	RECURRING_EXPENSE_APPROVAL             : RecuringModal,
+	OVERHEAD_APPROVAL                      : NonRecuringModal,
+	REVOKE_INVOICE                         : RevokeInvoice,
 };
 
-function AccessorComponent({ row, getIncidentData }) {
+function AccessorComponent({ row = {} as Row, getIncidentData = () => {} }: { row?: Row; getIncidentData?: Function }) {
 	const { type = '', id = '', data, remark = '', status = '' } = row || {};
 	const { organization } = data || {};
 

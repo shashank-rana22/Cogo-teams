@@ -1,0 +1,29 @@
+.labelText {
+	width: 120px;
+	padding: 6px;
+	font-weight: 600;
+	background: #fdfbf6;
+	border-radius: 6px;
+}
+
+.valueText {
+	width: 120px;
+	padding: 6px;
+}
+
+.heading_text {
+	margin-bottom: 12px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.table {
+	display: "flex";
+	flex-direction: "column";
+	margin-bottom: 8px;
+}
+
+.container {
+	max-height: 400px;
+	overflow: scroll;
+}

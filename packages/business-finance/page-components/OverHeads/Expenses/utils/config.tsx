@@ -2,7 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
-const headerStyle = {
+const HEADER_STYLES = {
 	marginBottom : '16px',
 	borderRadius : '8px 8px 0px 0px',
 	borderBottom : '2px solid #F68B21',
@@ -14,7 +14,7 @@ const headerStyle = {
 	fontFamily   : 'Poppins',
 };
 
-const bodyStyles = {
+const BODY_STYLES = {
 	color      : ' #333333',
 	fontWeight : '400',
 	fontSize   : '14px',
@@ -26,7 +26,7 @@ const bodyStyles = {
 export const expenseRecurringConfig = () => {
 	const renderExpensePeriod = () => (
 		<div style={{ display: 'flex', alignItems: 'center' }}>
-			Expense Period &nbsp;
+			Expense Period
 			<Tooltip content="Start to End Date" placement="top">
 				<div style={{ cursor: 'pointer', paddingTop: '3px' }}>
 					{' '}
@@ -37,8 +37,8 @@ export const expenseRecurringConfig = () => {
 	);
 	return {
 		showHeader   : true,
-		headerStyles : headerStyle,
-		bodyStyles,
+		headerStyles : HEADER_STYLES,
+		bodyStyles   : BODY_STYLES,
 		fields       : [
 			{
 				label : 'Name',
@@ -48,41 +48,51 @@ export const expenseRecurringConfig = () => {
 			{
 				label : 'Agreement',
 				func  : 'showAgreement',
-				span  : 1.5,
+				span  : 1.2,
 			},
 			{
 				label : 'Category',
-				span  : 1.8,
+				span  : 1.2,
 				func  : 'renderCategory',
 			},
 			{
 				label   : 'Created on',
 				func    : 'getCreatedOn',
-				span    : 2,
+				span    : 1.2,
 				sorting : { name: 'createdDateSortBy' },
 			},
 			{
 				label : renderExpensePeriod(),
-				span  : 2,
+				span  : 1.4,
 				func  : 'renderExpensePeriod',
 			},
 			{
 				label   : 'Recurring Amount',
 				key     : 'recurringAmount',
-				span    : 2,
+				span    : 1.8,
 				func    : 'renderRecurringAmount',
 				sorting : { name: 'amountSortBy' },
-				// styles  : { display: 'flex', justifyContent: 'center' },
+			},
+			{
+				label : 'Ledger Amount',
+				key   : 'recurringAmount',
+				span  : 1.8,
+				func  : 'renderLedgerAmount',
 			},
 			{
 				label : 'Approved By',
 				func  : 'getApprovedByRecurring',
-				span  : 1.5,
+				span  : 1.2,
 			},
 			{
 				key  : 'actionButton',
-				span : 1.5,
+				span : 1.4,
 				func : 'addExpense',
+			},
+			{
+				label : '',
+				func  : 'renderView',
+				span  : 1,
 			},
 		],
 	};
@@ -90,28 +100,28 @@ export const expenseRecurringConfig = () => {
 
 export const expenseNonRecurringConfig = () => ({
 	showHeader   : true,
-	headerStyles : headerStyle,
-	bodyStyles,
+	headerStyles : HEADER_STYLES,
+	bodyStyles   : BODY_STYLES,
 	fields       : [
 		{
 			label : 'Name',
 			key   : 'sellerDetails.organizationName',
-			span  : 1.5,
+			span  : 1.4,
 		},
 		{
 			label : 'Invoice Number',
 			func  : 'getInvoiceNumber',
-			span  : 1.5,
+			span  : 1.4,
 		},
 		{
 			label : 'Category',
-			span  : 1.3,
+			span  : 1.2,
 			func  : 'renderCategory',
 		},
 		{
 			label   : 'Invoice Amount',
 			func    : 'renderInvoiceAmount',
-			span    : 1.5,
+			span    : 1.6,
 			sorting : { name: 'invoiceAmountSortType' },
 		},
 		{
@@ -122,7 +132,7 @@ export const expenseNonRecurringConfig = () => ({
 		},
 		{
 			label   : 'Payable',
-			span    : 1.5,
+			span    : 1.2,
 			func    : 'getPayable',
 			sorting : { name: 'payableSortType' },
 		},
@@ -133,14 +143,25 @@ export const expenseNonRecurringConfig = () => ({
 			sorting : { name: 'paidAmountSortType' },
 		},
 		{
+			label : 'Ledger Amount',
+			key   : 'recurringAmount',
+			span  : 1.2,
+			func  : 'renderLedgerAmount',
+		},
+		{
 			label : 'Invoice Dates',
 			func  : 'getInvoiceDates',
-			span  : 1.7,
+			span  : 1.4,
 		},
 		{
 			label : 'Approved By',
 			func  : 'getApprovedByRecurring',
-			span  : 1.25,
+			span  : 1.2,
+		},
+		{
+			label : '',
+			func  : 'renderView',
+			span  : 1,
 		},
 	],
 });

@@ -5,10 +5,10 @@ import styles from './styles.module.css';
 
 const LOADER_FILL = 4;
 
-function TicketLoader() {
+function TicketLoader({ count = 0 }) {
 	return (
 		<div className={styles.tickets_container}>
-			{[...Array(LOADER_FILL).keys()].map((key) => (
+			{[...Array(count || LOADER_FILL).keys()].map((key) => (
 				<div key={key} className={styles.container}>
 					<div className={styles.sub_container}>
 						<div className={styles.header}>

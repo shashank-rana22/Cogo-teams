@@ -2,7 +2,8 @@
     "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview","purchase", "tasks", "documents", "emails", "tracking"],  
     "shipment_info":{},
     "timeline": {
-        "can_edit": false
+        "can_edit": true,
+        "editable_fields": ["schedule_arrival", "schedule_departure", "cargo_handed_over_at_origin_at"]
     },
     "default_tab":"tasks",
     "overview":{
@@ -23,10 +24,7 @@
         "tab_title":"Emails"
     },
     "cancel_shipment": {
-        "can_cancel": false,
-        "list_reasons": {
-            "stakeholder_type": ["admin"]
-        },
+        "can_cancel": true,
         "role": "sales"
     },
     "purchase":{
@@ -49,5 +47,11 @@
     },
     "tracking": {
         "tab_title": "Tracking"
+    },
+    "pocs": {
+        "trade_parties":["collection_party"],
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
+        "can_edit":["notifying_party","collection_party"],
+        "can_add_service_provider_poc":true
     }
 }

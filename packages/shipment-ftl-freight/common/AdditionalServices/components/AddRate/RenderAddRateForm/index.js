@@ -1,4 +1,4 @@
-import { SelectController, InputController } from '@cogoport/forms';
+import { SelectController, InputController, AsyncSelectController } from '@cogoport/forms';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -6,17 +6,18 @@ import styles from './styles.module.css';
 function RenderAddRateForm({
 	handleSubmit = () => {},
 	onSubmit = () => {},
-	control,
-	errors,
+	control = {},
+	errors = {},
 	serviceData = {},
 	source = '',
 }) {
 	const { formControl } = controls({ serviceData, source });
 
 	const controlTypeMapping = {
-		select : SelectController,
-		text   : InputController,
-		number : InputController,
+		select      : SelectController,
+		text        : InputController,
+		number      : InputController,
+		asyncSelect : AsyncSelectController,
 	};
 
 	function FormElement({ name, label, type, show, ...rest }) {

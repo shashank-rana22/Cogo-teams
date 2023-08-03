@@ -1,60 +1,103 @@
-import { cl } from '@cogoport/components';
+import { Popover, Input, ButtonIcon } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
-import CustomInput from '../EmailCustomTag';
+import useGetListEmailSuggestions from '../../hooks/useGetListEmailSuggestions';
 
+import EmailCustomTag from './EmailCustomTag';
+import ListEmails from './ListEmails';
 import styles from './styles.module.css';
 
 function MailRecipientType({
 	emailRecipientType = [],
 	handleDelete = () => {},
-	showControl,
+	showControl = '',
 	type = '',
-	value,
-	errorValue,
+	errorValue = '',
 	handleChange = () => {},
 	handleKeyPress = () => {},
-	handleError = () => {},
+	handleCancel = () => {},
 	handleEdit = () => {},
 }) {
+	const [newEmailInput, setNewEmailInput] = useState('');
+
+	const { emailSuggestionsData, loading } = useGetListEmailSuggestions({
+		searchQuery: newEmailInput,
+	});
+
+	const { body = [] } = emailSuggestionsData || {};
+
+	const emailSuggestions = body?.map((itm) => itm.email) || [];
+
+	const showPopover = newEmailInput && !isEmpty(emailSuggestions) && !loading;
+
 	return (
 		<div className={styles.tags_div}>
-			{(emailRecipientType || []).map((data) => (
-				<CustomInput
-					email={data}
-					handleDelete={handleDelete}
-					type={type}
-				/>
-			))}
-
-			{(showControl === type) && (
-				<div className={styles.tag_and_error_container}>
-					<div className={styles.tag_container}>
-						<input
-							size="sm"
-							placeholder="Enter recipient"
-							type="text"
-							value={value}
-							onChange={(e) => handleChange({ e, type })}
-							onKeyPress={(e) => handleKeyPress({ e, type })}
-							className={cl`
-										${errorValue ? styles.error_input_container : styles.input_container}`}
-							id="input_id"
-						/>
-						<div className={styles.cross_icon}>
-							<IcMCross onClick={() => handleError(type)} />
-						</div>
-					</div>
-					{(errorValue) && (
-						<div className={styles.error_content_container}>
-							{errorValue}
-						</div>
-					)}
-				</div>
+			{(emailRecipientType || []).map(
+				(data) => (
+					<EmailCustomTag
+						key={data}
+						email={data}
+						handleDelete={handleDelete}
+						type={type}
+					/>
+				),
 			)}
+
+			{showControl === type && (
+				<Popover
+					placement="bottom"
+					visible={showPopover}
+					caret={false}
+					render={(
+						showPopover ? (
+							<ListEmails
+								loading={loading}
+								emailSuggestions={emailSuggestions}
+								type={type}
+								setNewEmailInput={setNewEmailInput}
+								handleKeyPress={handleKeyPress}
+							/>
+						) : null
+					)}
+				>
+					<div className={styles.tag_and_error_container}>
+						<div className={styles.tag_container}>
+							<Input
+								size="xs"
+								placeholder="Enter recipient"
+								type="text"
+								value={newEmailInput}
+								onChange={(val) => handleChange({ val, type, setNewEmailInput })}
+								onKeyDown={(event) => handleKeyPress({ event, type, newEmailInput, setNewEmailInput })}
+								suffix={newEmailInput ? (
+									<ButtonIcon
+										size="xs"
+										icon={<IcMCross />}
+										disabled={false}
+										themeType="primary"
+										onClick={() => handleCancel({ type, setNewEmailInput })}
+									/>
+								) : null}
+								className={errorValue
+									? styles.error_input_container
+									: styles.input_container}
+							/>
+						</div>
+
+						{errorValue ? (
+							<div className={styles.error_content_container}>
+								{errorValue}
+							</div>
+						) : null}
+					</div>
+				</Popover>
+			)}
+
 			<div
 				className={styles.add_icon}
-				onClick={() => handleEdit(type)}
+				onClick={() => handleEdit({ type, setNewEmailInput })}
 				role="presentation"
 			>
 				+

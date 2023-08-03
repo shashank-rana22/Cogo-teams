@@ -5,7 +5,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMUpload } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import AccordianView from '../../common/Accordianview';
@@ -23,9 +23,10 @@ const EMPTY_TRADE_PARTY_LENGTH = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
 
-const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
+const PURCHASE_INVOICE_SHIPMENT_STATES = ['init', 'awaiting_service_provider_confirmation'];
 
-const LAST_INDEX = 1;
+const INVOICE_SHIPMENT_TYPES = ['air_freight', 'ftl_freight'];
+const ADD_SERVICE_MODALS = ['purchase', 'charge_code'];
 
 const STAKE_HOLDER_TYPES = [
 	'superadmin',
@@ -36,10 +37,14 @@ const STAKE_HOLDER_TYPES = [
 	'cost booking manager',
 ];
 
-function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, servicesData = {} }) {
+function CollectionPartyDetails({
+	collectionParty = {}, refetch = () => {}, servicesData = {},
+	fullwidth = false, AddService = () => {},
+}) {
 	const { user } = useSelector(({ profile }) => ({ user: profile }));
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
+	const [showModal, setShowModal] = useState(false);
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
@@ -52,13 +57,14 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 	const geo = getGeoConstants();
 
 	const serviceProviderConfirmation = (collectionParty.service_charges || []).find(
-		(item) => STATE.includes(item?.detail?.state),
+		(item) => PURCHASE_INVOICE_SHIPMENT_STATES.includes(item?.detail?.state),
 	);
 
 	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
 		&& serviceProviderConfirmation;
 
-	const uploadInvoiceAllowed = shipment_data?.stakeholder_types?.some((ele) => STAKE_HOLDER_TYPES.includes(ele))
+	const uploadInvoiceAllowed = shipment_data?.stakeholders
+		?.some((ele) => STAKE_HOLDER_TYPES.includes(ele?.stakeholder_type))
 		|| [
 			geo.uuid.super_admin_id,
 			geo.uuid.admin_id,
@@ -67,16 +73,6 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 		].some((ele) => user?.partner.user_role_ids?.includes(ele));
 
 	const showUpload = uploadInvoiceAllowed || shipment_data?.source === 'spot_line_booking';
-
-	const serviceswrapper = (allservices) => (
-		<>
-			{(allservices || []).map((ser, i) => (
-				<span key={ser}>
-					{`${startCase(ser)} ${(services).length - LAST_INDEX === i ? '' : ', '}`}
-				</span>
-			))}
-		</>
-	);
 
 	const onClose = () => {
 		setUploadInvoiceUrl('');
@@ -129,13 +125,15 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 
 	return (
 		<div className={styles.container}>
-			<AccordianView title={(
-				<TitleCard
-					collectionParty={collectionParty}
-					services={services}
-					serviceswrapper={serviceswrapper}
-				/>
-			)}
+
+			<AccordianView
+				fullwidth={fullwidth}
+				title={(
+					<TitleCard
+						collectionParty={collectionParty}
+						services={services}
+					/>
+				)}
 			>
 				<InvoicesUploaded
 					invoicesdata={collectionParty?.existing_collection_parties}
@@ -147,18 +145,37 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 				<div className={styles.buttoncontailner}>
 					{(showUpload || user?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id)
 					&& !airServiceProviderConfirmation ? (
-						<Button
-							size="md"
-							themeType="secondary"
-							className={styles.marginright}
-							onClick={() => { setOpen(true); }}
-						>
-							{isJobClosed ? 'Upload Credit Note' : 'Upload Invoice'}
-						</Button>
+						<div className={styles.uploadbuttonwrapper}>
+							<Button
+								size="md"
+								themeType="secondary"
+								className={styles.marginright}
+								disabled={disableInvoice}
+								onClick={() => { setOpen(true); }}
+							>
+								{isJobClosed ? 'Upload Credit Note' : 'Upload Invoice'}
+							</Button>
+
+							{disableInvoice ? (
+								<div className={styles.uploadtooltip}>{errorMsg}</div>
+							) : null}
+						</div>
 						) : null}
-					{disableInvoice ? (
-						<div className="upload-tooltip">{errorMsg}</div>
-					) : null}
+					{INVOICE_SHIPMENT_TYPES.includes(shipment_type) && (
+						<div className={styles.not_added}>
+							<Button
+								size="md"
+								themeType="secondary"
+								className={styles.marginright}
+								onClick={() => setShowModal(
+									shipment_type === 'ftl_freight' ? 'purchase' : 'charge_code',
+								)}
+								disabled={shipment_data?.is_job_closed}
+							>
+								Add Incidental Charges
+							</Button>
+						</div>
+					)}
 				</div>
 				<ServiceTables service_charges={collectionParty?.service_charges} shipment_data={shipment_data} />
 				<div className={styles.totalamount}>
@@ -208,6 +225,19 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 						</Modal.Footer>
 					</Modal>
 				) : null}
+
+				{ADD_SERVICE_MODALS.includes(showModal)
+				&& (
+					<AddService
+						shipmentType={shipment_type}
+						shipmentId={shipment_data?.id}
+						services={SERVICES_LIST}
+						refetch={refetch}
+						source={showModal}
+						setShowChargeCodes={setShowModal}
+						closeModal={setShowModal}
+					/>
+				)}
 
 				{openComparision ? (
 					<ComparisionModal

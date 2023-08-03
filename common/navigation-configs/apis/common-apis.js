@@ -173,6 +173,63 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api          : 'get_recommended_spot_searches',
+			access_type  : 'private',
+			feature      : 'search',
+			service_name : 'spot_search',
+		},
+		{
+			api          : 'list_saas_container_subscriptions_summary',
+			access_type  : 'private',
+			feature      : 'tracking',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'create_saas_container_subscription',
+			access_type  : 'private',
+			feature      : 'tracking',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'get_organization_profile_progress',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'tracking',
+		},
+		{
+			api          : 'create_saas_air_subscription',
+			access_type  : 'private',
+			service_name : 'air_tracking',
+			feature      : 'tracking',
+		},
+		{
+			api          : 'get_shipping_line_for_search_value',
+			access_type  : 'private',
+			service_name : 'air_tracking',
+			feature      : 'tracking',
+		},
+		{
+			api          : 'get_airline_from_airway_bill',
+			access_type  : 'private',
+			service_name : 'air_tracking',
+			feature      : 'tracking',
+		},
+		{
+			api          : 'get_multiple_sea_routes',
+			access_type  : 'public',
+			service_name : 'location',
+		},
+		{
+			api          : 'get_saas_container_shipping_lines',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+			feature      : 'tracking',
+		},
+		{
+			api         : 'list_operators',
+			access_type : 'public',
+		},
 	],
 	forecast: [
 		{
@@ -601,6 +658,11 @@ const common_apis = {
 		},
 		{
 			api          : 'get_ef_invoice_funding_summary',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_ef_invoice_advice',
 			access_type  : 'private',
 			service_name : 'credit',
 		},

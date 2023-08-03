@@ -1,4 +1,4 @@
-import { Popover, Tooltip } from '@cogoport/components';
+import { Popover, Tooltip, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -14,12 +14,10 @@ import styles from './styles.module.css';
 import getCanCancelShipment from './utils/getCanCancelShipment';
 
 function ShipmentHeader() {
+	const user_data = useSelector((({ profile }) => profile?.user));
+	const { shipment_data, primary_service, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
-
-	const { shipment_data, primary_service, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);
-
-	const user_data = useSelector((({ profile }) => profile?.user));
 
 	const { po_number, importer_exporter = {} } = shipment_data || {};
 
@@ -52,14 +50,13 @@ function ShipmentHeader() {
 						{`PO Number: ${po_number}`}
 					</div>
 				) : (
-					<div
+					<Button
 						className={styles.button}
-						role="button"
-						tabIndex={0}
+						themeType="linkUi"
 						onClick={() => setShowModal('add_po_number')}
 					>
 						Add PO Number
-					</div>
+					</Button>
 				)}
 			</div>
 
@@ -67,24 +64,26 @@ function ShipmentHeader() {
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
 
-			<CargoDetails primary_service={primary_service} />
+			<div className={styles.tags}>
+				<CargoDetails primary_service={primary_service} />
+			</div>
 
 			{showCancelShipmentIcon
 				? (
 					<Popover
 						visible={showPopover}
 						render={(
-							<div
-								role="button"
-								tabIndex={0}
+							<Button
 								className={styles.cancel_button}
+								themeType="tertiary"
 								onClick={() => { setShowModal('cancel_shipment'); setShowPopover(false); }}
 							>
 								Cancel Shipment
-							</div>
+							</Button>
 						)}
 						onClickOutside={() => setShowPopover(false)}
 						placement="bottom"
+						className={styles.popover}
 					>
 						<IcMOverflowDot className={styles.three_dot_icon} onClick={() => setShowPopover((p) => !p)} />
 					</Popover>

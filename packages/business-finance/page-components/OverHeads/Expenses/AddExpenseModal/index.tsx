@@ -1,4 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import { SummaryInterface } from '../../commons/Interfaces';
@@ -12,10 +14,10 @@ import styles from './styles.module.css';
 import UploadInvoice from './UploadInvoice';
 
 interface Props {
-	showExpenseModal?:boolean,
-	setShowExpenseModal?:(p:any)=>void,
-	setShowWarning?:(p:any)=>void,
-	rowData?:SummaryInterface,
+	showExpenseModal?: boolean;
+	setShowExpenseModal?: (p: any) => void;
+	setShowWarning?: (p: any) => void;
+	rowData?: SummaryInterface;
 }
 
 function AddExpenseModal({
@@ -23,7 +25,7 @@ function AddExpenseModal({
 	setShowExpenseModal,
 	rowData,
 	setShowWarning = () => {},
-}:Props) {
+}: Props) {
 	const [mailModal, setMailModal] = useState(false);
 	const [expenseData, setExpenseData] = useState({});
 	const [modalView, setModalView] = useState('upload');
@@ -39,19 +41,19 @@ function AddExpenseModal({
 	const { vendorList } = useGetVendor(vendorId);
 
 	useEffect(() => {
-		if (vendorList?.length > 0) {
-			setExpenseData((p) => ({ ...p, vendorData: vendorList[0] }));
+		if (!isEmpty(vendorList)) {
+			setExpenseData((p) => ({ ...p, vendorData: vendorList[GLOBAL_CONSTANTS.zeroth_index] }));
 		}
 	}, [vendorList]);
 
 	useEffect(() => {
-		if (entityList?.length > 0) {
-			setExpenseData((p) => ({ ...p, entityObject: entityList[0] }));
+		if (!isEmpty(entityList)) {
+			setExpenseData((p) => ({ ...p, entityObject: entityList[GLOBAL_CONSTANTS.zeroth_index] }));
 		}
-		if (tradePartyData?.length > 0) {
-			setExpenseData((p) => ({ ...p, tradeParty: tradePartyData[0] }));
+		if (!isEmpty(tradePartyData)) {
+			setExpenseData((p) => ({ ...p, tradeParty: tradePartyData[GLOBAL_CONSTANTS.zeroth_index] }));
 		}
-	}, [entityList, expenseData, tradePartyData]);
+	}, [entityList, tradePartyData]);
 
 	const handleClick = () => {
 		if (modalView === 'upload') {
@@ -79,6 +81,10 @@ function AddExpenseModal({
 						isUploadConfirm={isUploadConfirm}
 						setIsUploadConfirm={setIsUploadConfirm}
 						setIsFormValidated={setIsFormValidated}
+						isTaxApplicable={
+							tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index]
+								?.is_tax_applicable
+						}
 					/>
 				) : (
 					<Summary
@@ -90,35 +96,35 @@ function AddExpenseModal({
 			</Modal.Body>
 
 			<Modal.Footer>
-				{
-					modalView !== 'upload' && (
-						<Button
-							onClick={() => setModalView('upload')}
-							style={{ marginRight: '8px' }}
-						>
-							Go Back
-						</Button>
-					)
-				}
+				{modalView !== 'upload' && (
+					<Button
+						onClick={() => setModalView('upload')}
+						style={{ marginRight: '8px' }}
+					>
+						Go Back
+					</Button>
+				)}
 				<Button onClick={handleClick} disabled={!isFormValidated}>
 					{modalView === 'upload' ? 'Save & Next' : 'Request Email'}
 				</Button>
-
 			</Modal.Footer>
 
-			{mailModal 	&& (
-				<Modal size="lg" show={mailModal} onClose={() => setMailModal(false)} placement="top">
-					<Modal.Header title="Request Email Preview" />
-					<Modal.Body className={styles.modal_body}>
-						<MailTemplate
-							expenseData={expenseData}
-							setShowModal={setShowExpenseModal}
-							getList={() => {}}
-							rowData={rowData}
-						/>
-					</Modal.Body>
-				</Modal>
-			)}
+			<Modal
+				size="lg"
+				show={mailModal}
+				onClose={() => setMailModal(false)}
+				placement="top"
+			>
+				<Modal.Header title="Request Email Preview" />
+				<Modal.Body className={styles.modal_body}>
+					<MailTemplate
+						expenseData={expenseData}
+						setShowModal={setShowExpenseModal}
+						getList={() => {}}
+						rowData={rowData}
+					/>
+				</Modal.Body>
+			</Modal>
 		</Modal>
 	);
 }

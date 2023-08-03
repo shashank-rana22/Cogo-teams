@@ -40,6 +40,8 @@ function HighAmountRequestModal({
 
 	const [remark, setRemark] = useState('');
 
+	const [advanceAmount, setadvanceAmount] = useState('');
+
 	const { loading, data } = useGetAdvancedPaymentHistory({ sellerOrganizationId });
 
 	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments({});
@@ -94,10 +96,26 @@ function HighAmountRequestModal({
 			Toast.error('Remark is required');
 			return;
 		}
+		if (!advanceAmount) {
+			Toast.error('Advance Amount is required');
+			return;
+		}
+		if (+advancedAmountValue === +advanceAmount) {
+			Toast.error('Pls Change Advance amount , Cannot be same as previous Advance Amount');
+			return;
+		}
+
+		const advancePaymentObjData = JSON.parse(advancedPaymentObj.data);
+
 		updateDocument({
 			id                  : advancedPaymentObj?.id,
 			remarks             : [REJECTED, remark],
 			performed_by_org_id : serviceProviderOrgId,
+			data                : {
+				...advancePaymentObjData,
+				updated_advanced_amount: advanceAmount,
+			},
+
 		}, () => { refetchShipmentDocument(); hide(); });
 	};
 
@@ -185,7 +203,7 @@ function HighAmountRequestModal({
 								<div className={styles.col}>Advance Requested Value</div>
 							</div>
 							{paymentHistory?.map((item) => (
-								<div className={`${styles.row}`} key={item?.jobNumber}>
+								<div className={styles.row} key={item?.jobNumber}>
 									<div className={styles.col}>{item?.billNumber || '-'}</div>
 									<div className={styles.col}>{item?.jobNumber || '-'}</div>
 									<div className={styles.col}>
@@ -234,6 +252,18 @@ function HighAmountRequestModal({
 								}}
 							/>
 						</div>
+						<div className={styles.form_item_container}>
+							<label>Advance Amount</label>
+							<Input
+								type="number"
+								value={advanceAmount}
+								onChange={(e) => {
+									setadvanceAmount(e);
+								}}
+							/>
+
+						</div>
+
 					</div>
 
 				)}

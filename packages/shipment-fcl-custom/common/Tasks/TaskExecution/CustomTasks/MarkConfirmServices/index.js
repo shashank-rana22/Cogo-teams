@@ -6,6 +6,8 @@ import SelectRate from './SelectRate';
 
 const REVENEUE_DESK_SERVICES = [
 	'fcl_customs_service',
+	'ftl_freight_service',
+	'ltl_freight_service',
 ];
 
 function MarkServiceConfirmed({
@@ -18,16 +20,21 @@ function MarkServiceConfirmed({
 	refetch = () => {},
 	localService = '',
 }) {
-	const intialStep = REVENEUE_DESK_SERVICES.includes(task.service_type) ? 1 : 2;
+	const ONE = 1;
+	const TWO = 2;
+	const intialStep = REVENEUE_DESK_SERVICES.includes(task.service_type) ? ONE : TWO;
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [step, setStep] = useState(intialStep);
 
-	if (step === 1) {
+	if (step === ONE) {
 		return (
 			<SelectRate
 				setStep={setStep}
 				setSelectedCard={setSelectedCard}
 				task={task}
+				servicesList={servicesList}
+				selectedCard={selectedCard}
+				step={step}
 			/>
 		);
 	}

@@ -1,12 +1,13 @@
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const COMMON_CONTROL_KEYS_TAB_WISE_MAPPING = {
-	all      : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
-	groups   : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
-	message  : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
-	teams    : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
-	contacts : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
-	observer : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	all         : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters', 'events'],
+	groups      : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters', 'events'],
+	message     : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters', 'events'],
+	teams       : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters', 'events'],
+	contacts    : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters', 'events'],
+	observer    : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters', 'events'],
+	kamContacts : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters', 'events'],
 };
 
 const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
@@ -134,6 +135,18 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 				{
 					label : 'Closed',
 					value : 'closed',
+				},
+			],
+		},
+		{
+			label          : 'Show Events',
+			name           : 'events',
+			controllerType : 'checkboxGroup',
+			className      : 'channels_field_controller',
+			options        : [
+				{
+					label : 'Show Events',
+					value : 'events',
 				},
 			],
 		},
