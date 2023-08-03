@@ -62,7 +62,7 @@ function List() {
 			Header   : '',
 			accessor : () => (
 				<Button onClick={() => {
-					router.push('/supply-forecast/view');
+					router.push('/supply-allocation/view');
 				}}
 				>
 					View

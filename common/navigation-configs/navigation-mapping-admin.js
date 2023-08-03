@@ -1638,12 +1638,12 @@ const navigationMappingAdmin = {
 		icon        : IcCCogoassured,
 		options     : [
 			{
-				key           : 'forecast-supply_forecast',
-				title         : 'Supply Forecast',
-				href          : '/supply-forecast',
-				as            : '/supply-forecast',
+				key           : 'forecast-supply_allocation',
+				title         : 'Supply Allocation',
+				href          : '/supply-allocation',
+				as            : '/supply-allocation',
 				type          : 'link',
-				possible_apis : apis.supply_forecast,
+				possible_apis : apis.supply_allocation,
 
 				main_apis: [],
 			},

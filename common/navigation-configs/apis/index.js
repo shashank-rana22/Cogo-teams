@@ -55,7 +55,7 @@ import search from './search-apis';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
 import sop from './sop-apis';
-import supply_forecast from './supply-forecast';
+import supply_allocation from './supply-allocation';
 import tech_ops from './tech-ops-apis';
 import tools from './tools';
 import vendor_rm_apis from './vendor_rm_apis';
@@ -165,7 +165,7 @@ const apis = {
 	ftl_field_service_ops_apis,
 	...schedules,
 	igm_desk,
-	...supply_forecast,
+	...supply_allocation,
 	centralised_customer_service,
 };
 

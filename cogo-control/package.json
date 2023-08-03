@@ -82,7 +82,7 @@
     "@cogoport/so2-surface": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
     "@cogoport/supply-dashboards": "workspace:0.1.0",
-    "@cogoport/supply-forecast":"workspace:0.1.0",
+    "@cogoport/supply-allocation":"workspace:0.1.0",
     "@cogoport/surface-modules": "workspace:0.1.0",
     "@cogoport/ticket-management": "workspace:0.1.1",
     "@cogoport/translate": "workspace:0.1.0",

@@ -52,7 +52,7 @@ function Header() {
 	const { control } = useForm({});
 
 	const onClickBack = () => {
-		router.push('/supply-forecast');
+		router.push('/supply-allocation');
 	};
 
 	return (

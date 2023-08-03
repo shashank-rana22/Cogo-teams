@@ -130,8 +130,8 @@ importers:
       '@cogoport/shipment-rail-domestic-freight': workspace:0.1.0
       '@cogoport/so2-surface': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
+      '@cogoport/supply-allocation': workspace:0.1.0
       '@cogoport/supply-dashboards': workspace:0.1.0
-      '@cogoport/supply-forecast': workspace:0.1.0
       '@cogoport/surface-modules': workspace:0.1.0
       '@cogoport/ticket-management': workspace:0.1.1
       '@cogoport/translate': workspace:0.1.0
@@ -227,8 +227,8 @@ importers:
       '@cogoport/shipment-rail-domestic-freight': link:../packages/shipment-rail-domestic-freight
       '@cogoport/so2-surface': link:../packages/so2-surface
       '@cogoport/store': link:../common/store
+      '@cogoport/supply-allocation': link:../packages/supply-allocation
       '@cogoport/supply-dashboards': link:../packages/supply-dashboards
-      '@cogoport/supply-forecast': link:../packages/supply-forecast
       '@cogoport/surface-modules': link:../common/surface-modules
       '@cogoport/ticket-management': link:../packages/ticket-management
       '@cogoport/translate': link:../packages/Translation
@@ -2492,6 +2492,32 @@ importers:
       react: 18.2.0
       uuid: 9.0.0
 
+  packages/supply-allocation:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.359
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.58
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      axios: ^1.3.4
+      axios-hooks: ^4.0.0
+      react: 18.2.0
+    dependencies:
+      '@cogoport/charts': 1.0.3_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/components': 1.0.437_33anfcebeh5c4mwpkkbioyhs2q
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.86_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      axios: 1.4.0
+      axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
+      react: 18.2.0
+
   packages/supply-dashboards:
     specifiers:
       '@cogoport/charts': ^1.0.1
@@ -2517,32 +2543,6 @@ importers:
       '@cogoport/utils': 1.2.10
       react: 18.2.0
       react-hook-form: 7.45.2_react@18.2.0
-
-  packages/supply-forecast:
-    specifiers:
-      '@cogoport/charts': ^1.0.1
-      '@cogoport/components': ^1.0.359
-      '@cogoport/forms': workspace:^0.1.0
-      '@cogoport/icons-react': ^1.0.58
-      '@cogoport/next': workspace:0.1.0
-      '@cogoport/request': workspace:^0.1.0
-      '@cogoport/store': workspace:^0.1.0
-      '@cogoport/utils': ^1.2.6
-      axios: ^1.3.4
-      axios-hooks: ^4.0.0
-      react: 18.2.0
-    dependencies:
-      '@cogoport/charts': 1.0.3_biqbaboplfbrettd7655fr4n2y
-      '@cogoport/components': 1.0.437_33anfcebeh5c4mwpkkbioyhs2q
-      '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.86_biqbaboplfbrettd7655fr4n2y
-      '@cogoport/next': link:../../common/next
-      '@cogoport/request': link:../../common/request
-      '@cogoport/store': link:../../common/store
-      '@cogoport/utils': 1.2.10
-      axios: 1.4.0
-      axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
-      react: 18.2.0
 
   packages/ticket-management:
     specifiers:

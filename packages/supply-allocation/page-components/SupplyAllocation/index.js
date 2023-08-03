@@ -2,7 +2,7 @@ import Header from './Header';
 import List from './List';
 import LocationSelect from './LocationSelect';
 
-function SupplyForecast() {
+function SupplyAllocation() {
 	return (
 		<>
 			<Header />
@@ -14,4 +14,4 @@ function SupplyForecast() {
 	);
 }
 
-export default SupplyForecast;
+export default SupplyAllocation;

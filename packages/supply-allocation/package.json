@@ -1,6 +1,6 @@
 {
-	"name": "@cogoport/supply-forecast",
-	"description": "Supply Forecast",
+	"name": "@cogoport/supply-allocation",
+	"description": "Supply Allocation",
 	"version": "0.1.0",
 	"main": "index.js",
 	"sideEffects": false,
