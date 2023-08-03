@@ -77,6 +77,7 @@ function ActiveShipmentCard({
 		<div className={styles.active_shipment_card}>
 			{ActiveCard && (
 				<ActiveCard
+					key={activeShipmentCard}
 					{...PROPS_KEY_MAPPING[activeShipmentCard]}
 				/>
 			)}
