@@ -17,6 +17,16 @@ const INITIAL_REDUCE_VALUE = 0;
 
 const DEFAULT_PRICE_VALUE = 0;
 
+const formatPrice = (currency, amount) => formatAmount({
+	amount,
+	currency,
+	options: {
+		style                 : 'currency',
+		currencyDisplay       : 'code',
+		maximumFractionDigits : 0,
+	},
+});
+
 function ListItem({
 	serviceItem = {},
 	detail = {},
@@ -24,7 +34,7 @@ function ListItem({
 	setHeaderProps = () => {},
 	refetch = () => {},
 	SERVICES_CANNOT_BE_REMOVED = [],
-	startingPrices = {},
+	startingPrices = [],
 	startingPriceLoading = false,
 }) {
 	const [isHovered, setIsHovered] = useState(false);
@@ -87,10 +97,20 @@ function ListItem({
 		}
 
 		if (!isSelected) {
-			if (serviceItem.service_type === 'fcl_freight_local') {
-				return <span className={styles.starting_price}>Calculated at Actuals</span>;
-			}
-			return <span className={styles.starting_price}>Starting at $80/Ctr.</span>;
+			const priceObj = (startingPrices || []).find((item) => item.id === serviceItem.name);
+
+			const { price = 0 } = priceObj || {};
+
+			if (!price) return null;
+
+			return (
+				<span className={styles.starting_price}>
+					Starting at
+					{' '}
+					<strong>{formatPrice(rateCardData?.total_price_currency, price)}</strong>
+					/Ctr.
+				</span>
+			);
 		}
 
 		const { rateData = [] } = serviceItem;
@@ -101,13 +121,11 @@ function ListItem({
 			}
 			return 'No Rates';
 		}
-
-		let currency = '';
+		const currency = rateData?.[GLOBAL_CONSTANTS.zeroth_index]?.total_price_currency;
 		let ratesAvailableForAll = true;
 
 		const totalPrice = rateData
 			.map((rateItem) => {
-				currency = rateItem.total_price_currency;
 				if (!rateItem.total_price_discounted) {
 					ratesAvailableForAll = false;
 				}
@@ -115,15 +133,7 @@ function ListItem({
 			})
 			.reduce((accumulator, value) => accumulator + value, INITIAL_REDUCE_VALUE);
 
-		const formattedAmount = formatAmount({
-			amount  : totalPrice,
-			currency,
-			options : {
-				style                 : 'currency',
-				currencyDisplay       : 'code',
-				maximumFractionDigits : 0,
-			},
-		});
+		const formattedAmount = formatPrice(currency, totalPrice);
 
 		if (!ratesAvailableForAll) {
 			return (

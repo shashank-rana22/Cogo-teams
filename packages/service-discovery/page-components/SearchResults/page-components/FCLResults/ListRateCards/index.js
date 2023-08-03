@@ -73,6 +73,7 @@ function RateCard({
 	index = 0,
 	setInfoBanner = () => {},
 	showGuide = false,
+	cogoAssuredRates = [],
 }) {
 	if (loading) {
 		return null;
@@ -91,6 +92,7 @@ function RateCard({
 			index={index}
 			setInfoBanner={setInfoBanner}
 			showGuide={showGuide}
+			cogoAssuredRates={cogoAssuredRates}
 		/>
 	);
 }
@@ -143,6 +145,7 @@ function ListRateCards({
 					setComparisonRates={setComparisonRates}
 					setScreen={setScreen}
 					refetch={refetchSearch}
+					cogoAssuredRates={cogoAssuredRates}
 				/>
 			</div>
 
@@ -198,6 +201,7 @@ function ListRateCards({
 						index={index}
 						setInfoBanner={setInfoBanner}
 						showGuide={isEmpty(cogoAssuredRates) && !index && !isGuideViewed}
+						cogoAssuredRates={cogoAssuredRates}
 					/>
 					{index === GLOBAL_CONSTANTS.zeroth_index && isEmpty(cogoAssuredRates) ? (
 						<ContractAd

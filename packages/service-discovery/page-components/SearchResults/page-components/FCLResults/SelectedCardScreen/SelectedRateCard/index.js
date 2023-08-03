@@ -1,11 +1,12 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import AdditionalServices from '../../../../../../common/OtherServices/AdditionalServices';
 import CargoInsurance from '../../../../../../common/OtherServices/CargoInsurance';
 import SubsidiaryServices from '../../../../../../common/OtherServices/SubsidiaryServices';
+import ShippingLineModal from '../../../../../../common/ShippingLineModal';
 import DetentionDemurrage from '../../../../common/D&D';
 import Bundles from '../../../../components/Bundles';
 import useCreateCheckout from '../../../../hooks/useCreateCheckout';
@@ -59,18 +60,14 @@ function SelectedRateCard({
 		spot_search_detail: detail = {},
 	} = data || {};
 
+	const { source = 'cogo_assured_rate', shipping_line = {} } = rateCardData;
+
+	const [showShippingLineModal, setShowShippingLineModal] = useState(false);
+
 	const { handleBook = () => {}, loading: createCheckoutLoading } = useCreateCheckout({
 		rateCardData,
 		spot_search_id: detail?.spot_search_id,
 	});
-
-	if (loading && isEmpty(data)) {
-		return (
-			<LoadingState />
-		);
-	}
-
-	const { source = '' } = rateCardData;
 
 	const handleProceedToCheckout = () => {
 		const cargoInsurancePresent = isCargoInsuranceThere(detail?.service_details);
@@ -79,6 +76,16 @@ function SelectedRateCard({
 			setCargoModal('progress');
 		} else handleBook();
 	};
+
+	useEffect(() => {
+		setShowShippingLineModal(source !== 'cogo_assured_rate');
+	}, [source]);
+
+	if (loading && isEmpty(data)) {
+		return (
+			<LoadingState />
+		);
+	}
 
 	return (
 		<div className={styles.parent}>
@@ -169,6 +176,14 @@ function SelectedRateCard({
 					cargoModal={cargoModal}
 					setCargoModal={setCargoModal}
 					detail={detail}
+				/>
+			) : null}
+
+			{showShippingLineModal ? (
+				<ShippingLineModal
+					shipping_line={shipping_line}
+					show={showShippingLineModal}
+					setShow={setShowShippingLineModal}
 				/>
 			) : null}
 		</div>

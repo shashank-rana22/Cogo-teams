@@ -26,6 +26,7 @@ function RateCardTopSection({
 	onChange = () => {},
 	selectedCogoAssuredCard = {},
 	showGuide = false,
+	cogoAssuredRates = [],
 }) {
 	return (
 		<div className={styles.top}>
@@ -43,6 +44,7 @@ function RateCardTopSection({
 				onChange={onChange}
 				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				showGuide={showGuide}
+				cogoAssuredRates={cogoAssuredRates}
 			/>
 		</div>
 	);
@@ -169,6 +171,7 @@ function FclCard({
 	onChange = () => {},
 	selectedCogoAssuredCard = {},
 	showGuide = false,
+	cogoAssuredRates = [],
 }) {
 	const { service_rates = {}, schedules = {}, transit_time_unit, transit_time, source } = rateCardData;
 	const primaryService = detail?.search_type;
@@ -230,6 +233,7 @@ function FclCard({
 				onChange={onChange}
 				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				showGuide={showGuide}
+				cogoAssuredRates={cogoAssuredRates}
 			/>
 
 			<MiddleSection

@@ -19,7 +19,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 
 	const { rateData = [] } = serviceItem;
 
-	const renderRateItem = (service) => {
+	function RenderRateItem({ service }) {
 		const {
 			container_size = '',
 			container_type = '',
@@ -41,7 +41,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 			});
 		};
 
-		const renderPill = () => {
+		function RenderPill() {
 			const commonDetails = `${['20', '40'].includes(container_size) ? `${container_size}ft.`
 				: container_size} ${startCase(container_type)} ${startCase(commodity)}`;
 
@@ -61,9 +61,9 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 
 				</div>
 			);
-		};
+		}
 
-		const renderRate = () => {
+		function RenderRate() {
 			const conditionToRequestRate = !(total_price_discounted || is_rate_available);
 
 			if (conditionToRequestRate) {
@@ -102,14 +102,14 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 					</div>
 				</div>
 			);
-		};
+		}
 
 		return (
 			<div className={styles.rate_item}>
 				<div className={styles.header}>
-					{renderPill()}
+					<RenderPill />
 
-					{renderRate()}
+					<RenderRate />
 				</div>
 
 				<LineItems line_items={line_items} />
@@ -123,14 +123,18 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 						requestService={requestService}
 					/>
 				) : null}
-
 			</div>
 		);
-	};
+	}
 
 	return (
 		<div className={styles.container}>
-			{rateData.map((rateItem) => renderRateItem(rateItem))}
+			{rateData.map((rateItem) => (
+				<RenderRateItem
+					key={rateItem.id}
+					service={rateItem}
+				/>
+			))}
 		</div>
 	);
 }

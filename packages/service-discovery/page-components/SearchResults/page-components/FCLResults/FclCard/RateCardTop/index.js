@@ -1,7 +1,8 @@
 import { Checkbox, Popover, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 // import { IcMShare } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState, useEffect } from 'react';
 
 import InfoBannerContent from '../../../../../../common/InfoBannerContent';
 import ShareToUsers from '../../../../common/ShareToUsers';
@@ -45,11 +46,13 @@ function RateCardTop({
 	index = 0,
 	setInfoBanner = () => {},
 	showGuide = false,
+	cogoAssuredRates = [],
 }) {
 	const { shipping_line = {}, id: card_id, source = '' } = rateCardData;
 	const [showShareModal, setShowShareModal] = useState(false);
 
 	const selectedCardIDs = Object.keys(comparisonRates);
+	const selectedCardValues = Object.values(comparisonRates);
 
 	const handleCheckbox = () => {
 		if (!selectedCardIDs.includes(card_id)) {
@@ -65,6 +68,19 @@ function RateCardTop({
 			});
 		}
 	};
+
+	useEffect(() => {
+		const selectedCogoAssuredRate = selectedCardValues.find(
+			(cardValue) => cardValue.source === 'cogo_assured_rate',
+		);
+		if (selectedCogoAssuredRate || isEmpty(cogoAssuredRates) || isEmpty(selectedCardValues)) return;
+		const cogoAssuredRate = cogoAssuredRates?.[GLOBAL_CONSTANTS.zeroth_index];
+
+		setComparisonRates((pv) => ({
+			...pv,
+			[cogoAssuredRate?.id]: cogoAssuredRate,
+		}));
+	}, [cogoAssuredRates, selectedCardValues, setComparisonRates]);
 
 	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
@@ -94,7 +110,7 @@ function RateCardTop({
 						handleCheckbox();
 					}}
 					disabled={
-					selectedCardIDs.length > MAX_COMPARABLE_RATE_CARD_INDEX
+					selectedCardIDs.length >= MAX_COMPARABLE_RATE_CARD_INDEX
 					&& !selectedCardIDs.includes(card_id)
 				}
 				/>
