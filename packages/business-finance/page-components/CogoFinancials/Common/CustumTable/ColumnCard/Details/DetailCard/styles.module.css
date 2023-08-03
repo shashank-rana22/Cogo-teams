@@ -1,0 +1,44 @@
+.head {
+	display: flex;
+	align-items: center;
+	width: 180px;
+	min-height: 50px;
+	padding: 0 80px 0 16px;
+	margin-right: 80px;
+	color: var(--color-secondary-greyscale-3);
+	border-right: 1px solid var(--color-secondary-greyscale-4);
+}
+
+.card {
+	display: flex;
+	align-items: center;
+	padding: 16px;
+	border-top: 1px solid var(--color-secondary-greyscale-5);
+}
+
+.key {
+	padding-bottom: 8px;
+	font-weight: 500;
+	color: var(--color-secondary-greyscale-3);
+}
+
+.value {
+	color: var(--color-secondary-greyscale-1);
+}
+
+.singlefield {
+	flex: 1;
+	margin-right: 34px;
+}
+
+.percent {
+	margin-left: 12px;
+}
+
+.negative {
+	color: var(--color-primary-error-red-2);
+}
+
+.positive {
+	color: var(--color-tertiary-success-green-2);
+}

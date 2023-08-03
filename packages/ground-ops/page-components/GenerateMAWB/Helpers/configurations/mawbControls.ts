@@ -1,5 +1,20 @@
 import currencies from '../currencies';
 
+const UNITS = {
+	per_kg         : 'Per Kg',
+	per_kg_gross   : 'Per Kg Gross',
+	per_shipment   : 'Per Shipment',
+	per_awb        : 'Per Awb',
+	per_document   : 'Per Document',
+	per_package    : 'Per Package',
+	per_kg_per_day : 'Per Kg Per Day',
+};
+
+const convertObjectMappingToArray = (obj) => Object.keys(obj).map((item) => ({
+	value : item,
+	label : obj[item],
+}));
+
 const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) => ({
 	hawb_controls: [
 		{
@@ -414,6 +429,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 			controls: [
 				{
 					name        : 'code',
+					label       : 'Charge Code',
 					type        : 'text',
 					className   : 'primary lg',
 					span        : 2,
@@ -423,25 +439,29 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					},
 				},
 				{
-					name        : 'chargeType',
-					type        : 'select',
-					className   : 'primary lg',
-					span        : 3,
-					placeholder : 'Enter Charge Type',
-					options     : [
-						{ value: 'chargeable_wt', label: 'Chargeable Weight' },
-						{ value: 'gross_wt', label: 'Gross Weight' },
-					],
+					type    : 'select',
+					label   : 'Unit',
+					name    : 'unit',
+					options : convertObjectMappingToArray(UNITS),
+					span    : 3,
 				},
 				{
 					name        : 'chargeUnit',
+					label       : 'Price/Unit',
 					type        : 'text',
 					className   : 'primary lg',
 					span        : 2,
 					placeholder : 'Enter Charge Unit',
 				},
 				{
+					name  : 'quantity',
+					label : 'Quantity',
+					type  : 'number',
+					span  : 2,
+				},
+				{
 					name        : 'price',
+					label       : 'Total Price',
 					placeholder : 'Enter Price',
 					type        : 'text',
 					span        : 2,
