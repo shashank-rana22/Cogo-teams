@@ -13,7 +13,7 @@ const controls = ({
 		schedule_departure : getDepartureArrivalDate(primary_service, 'departure'),
 		schedule_arrival   : getDepartureArrivalDate(primary_service, 'arrival'),
 	};
-	const { origin_port, destination_port, mark_container_gated_out } = modifiedPrimaryService || {};
+	const { origin_port, destination_port, is_containers_gated_out } = modifiedPrimaryService || {};
 
 	const disabledState = !defaultEditable;
 
@@ -60,7 +60,7 @@ const controls = ({
 		...(destination_port?.is_icd ? [{
 			name    : 'arrived_at_destination_icd_at',
 			label   : 'Arrived At ICD Port Date',
-			disable : !!mark_container_gated_out,
+			disable : !!is_containers_gated_out,
 		}] : []),
 	];
 
