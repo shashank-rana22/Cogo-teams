@@ -1,21 +1,11 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
 import getDuration from '../utils/getDuration';
-
-const geo = getGeoConstants();
-const DEFAULT_CURRENCY = geo?.country.currency.code;
-
-const getFormattedDate = (date) => formatDate({
-	date,
-	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-	formatType : 'date',
-});
+import getFormattedDate from '../utils/getFormattedDate';
 
 const useGetShipmentList = ({
 	entity = '',
@@ -25,8 +15,10 @@ const useGetShipmentList = ({
 	activeBar = '',
 	customDate = new Date(),
 	tableFilters,
-	setTableFilters,
 }) => {
+	const geo = getGeoConstants();
+	const DEFAULT_CURRENCY = geo?.country.currency.code;
+
 	const [
 		{ data: serviceLevelData, loading: serviceLevelLoading },
 		serviceLevelApiTrigger,
@@ -41,7 +33,7 @@ const useGetShipmentList = ({
 
 	const { pageIndex, serviceLevel:serviceLevelFilter } = tableFilters;
 
-	const serviceLevelApi = useCallback((serviceLevel) => {
+	const getShipmentList = useCallback((serviceLevel) => {
 		const { currency, channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
 		const { startDate: customStartDate, endDate: customEndDate } = customDate || {};
@@ -72,18 +64,16 @@ const useGetShipmentList = ({
 		}
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
-		filter, customDate, pageIndex, activeBar, serviceLevelFilter]);
+		filter, customDate, pageIndex, activeBar, serviceLevelFilter,
+		DEFAULT_CURRENCY]);
 
 	useEffect(() => {
-		serviceLevelApi();
-	}, [serviceLevelApi]);
+		getShipmentList();
+	}, [getShipmentList]);
 
 	return {
 		serviceLevelData,
 		serviceLevelLoading,
-		serviceLevelApi,
-		setTableFilters,
-		tableFilters,
 	};
 };
 export default useGetShipmentList;

@@ -38,7 +38,6 @@ function TableComp({
 		activeBar,
 		customDate,
 		tableFilters,
-		setTableFilters,
 	});
 
 	return (

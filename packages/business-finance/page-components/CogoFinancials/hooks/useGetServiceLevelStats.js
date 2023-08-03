@@ -1,21 +1,11 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { isEmpty, upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
 import getDuration from '../utils/getDuration';
-
-const geo = getGeoConstants();
-const DEFAULT_CURRENCY = geo?.country.currency.code;
-
-const getFormattedDate = (date) => formatDate({
-	date,
-	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-	formatType : 'date',
-});
+import getFormattedDate from '../utils/getFormattedDate';
 
 const useGetServiceLevelStats = ({
 	entity = '', timeRange = '',
@@ -26,6 +16,9 @@ const useGetServiceLevelStats = ({
 	customDate = new Date(),
 	specificServiceLevel = null,
 }) => {
+	const geo = getGeoConstants();
+	const DEFAULT_CURRENCY = geo?.country.currency.code;
+
 	const [
 		{ data:serviceLevelData, loading:serviceLevelLoading },
 		serviceLevelApiTrigger,
@@ -38,7 +31,7 @@ const useGetServiceLevelStats = ({
 		{ manual: true },
 	);
 
-	const serviceLevelApi = useCallback((serviceLevel) => {
+	const getServiceLevelData = useCallback((serviceLevel) => {
 		const { currency, channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
 		const { startDate:customStartDate, endDate:customEndDate } = customDate || {};
@@ -68,16 +61,16 @@ const useGetServiceLevelStats = ({
 		}
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
-		filter, customDate, specificServiceLevel]);
+		filter, customDate, specificServiceLevel, DEFAULT_CURRENCY]);
 
 	useEffect(() => {
-		serviceLevelApi();
-	}, [serviceLevelApi, entity, timeRange, activeBar, activeShipmentCard]);
+		getServiceLevelData();
+	}, [getServiceLevelData, entity, timeRange, activeBar, activeShipmentCard]);
 
 	return {
 		serviceLevelData,
 		serviceLevelLoading,
-		serviceLevelApi,
+		getServiceLevelData,
 	};
 };
 export default useGetServiceLevelStats;

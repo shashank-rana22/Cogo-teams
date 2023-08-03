@@ -1,12 +1,10 @@
 import { Placeholder, cl } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { LABEL_MAPPING } from '../../../constants';
 
 import Details from './Details';
+import getFormData from './getFormData';
 import styles from './styles.module.css';
 
 const DEFAULT_SPAN = 1;
@@ -14,8 +12,6 @@ const DEFAULT_SPAN = 1;
 const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
-
-const DEFAULT_AMOUNT = 0;
 
 function ColumnCard({
 	config = {},
@@ -27,43 +23,7 @@ function ColumnCard({
 	const [show, setShow] = useState(false);
 	const { fields = [] } = config;
 
-	const formData = {
-		sid             : item?.jobNumber || '_',
-		customerName    : startCase(item?.customerName || '-'),
-		estimatedProfit : formatAmount({
-			amount   : item?.[`estimatedProfitAmount${taxType}`] || DEFAULT_AMOUNT,
-			currency : item?.currency,
-			options  : {
-				style                 : 'currency',
-				currencyDisplay       : 'code',
-				maximumFractionDigits : 2,
-			},
-		}),
-		actualProfit: formatAmount({
-			amount   : item?.[`${LABEL_MAPPING[type]}ProfitAmount${taxType}`] || DEFAULT_AMOUNT,
-			currency : item?.currency,
-			options  : {
-				style                 : 'currency',
-				currencyDisplay       : 'code',
-				maximumFractionDigits : 2,
-			},
-		}),
-		deviation : item?.[`${LABEL_MAPPING[type]}ProfitAmountDeviation${taxType}`] || '_',
-		action    : (
-			<div className={styles.flex}>
-				{!show ? (
-					<IcMArrowRotateDown
-						className={styles.edit}
-						height={15}
-						width={15}
-						onClick={() => setShow(true)}
-					/>
-				) : (
-					<IcMArrowRotateUp className={styles.edit} height={15} width={15} onClick={() => setShow(false)} />
-				)}
-			</div>
-		),
-	};
+	const formData = getFormData({ item, taxType, show, setShow, type });
 
 	return (
 		<div className={styles.marginbottom}>

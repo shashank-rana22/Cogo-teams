@@ -16,15 +16,15 @@ function SingleParentBarStats({
 	type = '',
 	serviceLevelData = [],
 	serviceLevelLoading = false,
-	serviceLevelApi = () => {},
+	getServiceLevelData = () => {},
 }) {
 	const onViewDetails = () => {
 		setShowShipmentList(true);
 	};
 
 	useEffect(() => {
-		serviceLevelApi(activeBar);
-	}, [activeBar, serviceLevelApi]);
+		getServiceLevelData(activeBar);
+	}, [activeBar, getServiceLevelData]);
 
 	return (
 		<div className={styles.container}>

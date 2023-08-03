@@ -1,26 +1,19 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { isEmpty, upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
 import getDuration from '../utils/getDuration';
-
-const geo = getGeoConstants();
-const DEFAULT_CURRENCY = geo?.country.currency.code;
-
-const getFormattedDate = (date) => formatDate({
-	date,
-	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-	formatType : 'date',
-});
+import getFormattedDate from '../utils/getFormattedDate';
 
 const useGetProfitabilityStats = ({
 	entity = '', timeRange = '', customDate = {},
 	filter = {}, showShipmentList = false,
 }) => {
+	const geo = getGeoConstants();
+	const DEFAULT_CURRENCY = geo?.country.currency.code;
+
 	const [
 		{ data:ongoingData, loading:ongoingLoading },
 		ongoingTrigger,
@@ -57,7 +50,7 @@ const useGetProfitabilityStats = ({
 		{ manual: true },
 	);
 
-	const api = useCallback(() => {
+	const getProfitabilityStatsData = useCallback(() => {
 		const { currency, channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
 		const { startDate:customStartDate, endDate:customEndDate } = customDate || {};
@@ -99,14 +92,14 @@ const useGetProfitabilityStats = ({
 			toastApiError(error);
 		}
 	}, [entity, timeRange, ongoingTrigger, closedTrigger,
-		financialTrigger, customDate,
+		financialTrigger, customDate, DEFAULT_CURRENCY,
 		filter]);
 
 	useEffect(() => {
 		if (!showShipmentList) { // calling stats api only at the parent level
-			api();
+			getProfitabilityStatsData();
 		}
-	}, [api, entity, timeRange, showShipmentList]);
+	}, [getProfitabilityStatsData, entity, timeRange, showShipmentList]);
 
 	return {
 		financialData,

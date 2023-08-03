@@ -16,13 +16,6 @@ import MultipleFilters from './MultipleFilters';
 import styles from './styles.module.css';
 import TableComp from './TableComp';
 
-const geo = getGeoConstants();
-const countryCode = geo?.country.code;
-const DEFAULT_ENTITY_DATA = Object.values(GLOBAL_CONSTANTS.cogoport_entities)?.filter(
-	(item) => item.country_code === countryCode,
-);
-const DEFAULT_ENTITY = DEFAULT_ENTITY_DATA[GLOBAL_CONSTANTS.zeroth_index]?.default_entity_code;
-
 const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((item) => ({
 	value : String(item),
 	label : `${item} - ${GLOBAL_CONSTANTS.cogoport_entities[item].name}`,
@@ -32,12 +25,19 @@ function CogoFinancials() {
 	const [isPreTax, setIsPreTax] = useState(true);
 	const [timeRange, setTimeRange] = useState('1D');
 	const [customDate, setCustomDate] = useState(null);
-	const [entity, setEntity] = useState(DEFAULT_ENTITY);
 	const [activeShipmentCard, setActiveShipmentCard] = useState('');
 	const [showShipmentList, setShowShipmentList] = useState(false);
 	const [filter, setFilter] = useState({});
 	const [activeBar, setActiveBar] = useState('');
 	const [tableFilters, setTableFilters] = useState({});
+
+	const geo = getGeoConstants();
+	const countryCode = geo?.country.code;
+	const DEFAULT_ENTITY_DATA = Object.values(GLOBAL_CONSTANTS.cogoport_entities)?.filter(
+		(item) => item.country_code === countryCode,
+	);
+	const DEFAULT_ENTITY = DEFAULT_ENTITY_DATA[GLOBAL_CONSTANTS.zeroth_index]?.default_entity_code;
+	const [entity, setEntity] = useState(DEFAULT_ENTITY);
 
 	const taxType = isPreTax ? 'PreTax' : 'PostTax';
 
