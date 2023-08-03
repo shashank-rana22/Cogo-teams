@@ -28,12 +28,12 @@ const subBucketColumns = [
 	},
 	{
 		id       : 'service_provider',
-		Header   : 'Service Provider',
+		Header   : 'SERVICE PROVIDER',
 		accessor : (item) => item.service_provider,
 	},
 	{
 		id       : 'promised',
-		Header   : 'Promised',
+		Header   : 'PROMISED',
 		accessor : (item) => (
 			<Promised item={item} />
 		),
@@ -42,7 +42,7 @@ const subBucketColumns = [
 		id     : 'capability',
 		Header : (
 			<>
-				<div>Capability</div>
+				<div>CAPABILITY</div>
 				<div>(ON BEST RATE)</div>
 			</>
 		),
@@ -50,20 +50,20 @@ const subBucketColumns = [
 	},
 	{
 		id       : 'allocated',
-		Header   : 'Allocated',
+		Header   : 'ALLOCATED',
 		accessor : ({ unit = '', percent = '' }) => <Label unit={unit} percent={percent} type="allocated" />,
 	},
 	{
 		id       : 'fulfilled',
-		Header   : 'Fulfilled',
+		Header   : 'FULLFILLED',
 		accessor : ({ unit = '', percent = '' }) => <Label unit={unit} percent={percent} type="fulfilled" />,
 	},
 	{
 		id     : 'avg_deviation',
 		Header : (
 			<>
-				<div>Avg Deviation</div>
-				<div>from best rate</div>
+				<div>AVG DEVAITION</div>
+				<div>FROM BEST RATE</div>
 			</>
 		),
 		accessor: (item) => item.avg_deviation,
@@ -76,7 +76,7 @@ const subBucketColumns = [
 				<div> (Cogoport Profitability)</div>
 			</>
 		),
-		accessor: (item) => item.avg_rank,
+		accessor: ({ unit = '', percent = '' }) => <Label unit={unit} percent={percent} type="profitability" />,
 	},
 ];
 

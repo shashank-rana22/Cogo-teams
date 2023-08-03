@@ -3,6 +3,7 @@ import {
 	// Toast
 } from '@cogoport/components';
 // import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { AsyncSelectController, InputController, useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 import styles from './styles.module.css';
@@ -30,6 +31,8 @@ function MoveSupplierModal({
 	// 	}
 	// };
 
+	const { control } = useForm({});
+
 	return (
 		<Modal
 			size="sm"
@@ -42,9 +45,28 @@ function MoveSupplierModal({
 
 			<Modal.Body>
 				<div className={styles.container}>
-					<div className={styles.date_container}>
-						<div className={styles.text}>Change Supplier </div>
-					</div>
+
+					<div>Current Supplier : Alaska </div>
+
+					<div>Allocated: 122 TEU </div>
+
+					<div> New Bucket </div>
+
+					<AsyncSelectController
+						name="destination_location_id"
+						isClearable
+						label="Select Origin SeaPort"
+						control={control}
+					/>
+
+					<div>New Allocated</div>
+
+					<InputController
+						name="destination_location_id"
+						isClearable
+						label="Select Origin SeaPort"
+						control={control}
+					/>
 
 					<div className={styles.btn_container}>
 						<Button
