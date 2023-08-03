@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { Image, useRouter } from '@cogoport/next';
 import { useMemo } from 'react';
@@ -68,7 +69,7 @@ function Introduction({ setActiveState, testData = {} }) {
 								width={18}
 								height={22}
 								className={styles.image}
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/document-svg.svg"
+								src={GLOBAL_CONSTANTS.image_url.document_icon_dark_svg}
 								alt=""
 							/>
 							<div className={styles.label}>Topics Covered</div>
@@ -98,7 +99,7 @@ function Introduction({ setActiveState, testData = {} }) {
 							width={18}
 							height={22}
 							className={styles.image}
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg"
+							src={GLOBAL_CONSTANTS.image_url.timer}
 							alt=""
 						/>
 
