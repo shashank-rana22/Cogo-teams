@@ -13,7 +13,7 @@ const getPayload = ({ SOURCE, selectedIds, finalUrl, activeTab }) => {
 
 	if (SOURCE === 'BULKACTION') {
 		payload = {
-			action_name         : activeTab,
+			action_name         : 'send_quickchex_mail',
 			employee_detail_ids : selectedIds,
 
 		};

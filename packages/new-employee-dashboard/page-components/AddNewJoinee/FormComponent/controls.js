@@ -106,6 +106,53 @@ const controls = [
 		},
 	},
 	{
+		name        : 'attendence',
+		type        : 'select',
+		label       : 'Attendence*',
+		placeholder : 'Select Attendence',
+		options     : GLOBAL_CONSTANTS.attendence_options,
+		rules       : {
+			required: 'Attendence is required',
+		},
+	},
+	{
+		name        : 'li',
+		type        : 'select',
+		label       : 'LI',
+		placeholder : 'select LI',
+		options     : GLOBAL_CONSTANTS.li_options,
+
+	},
+	{
+		name        : 'pi',
+		type        : 'number',
+		label       : 'PI',
+		placeholder : 'Enter PI',
+
+	},
+	{
+		name        : 'department',
+		type        : 'select',
+		label       : 'Department*',
+		placeholder : 'Select Department',
+		options     : GLOBAL_CONSTANTS.department_options,
+		rules       : {
+			required: 'Department is required',
+		},
+
+	},
+	{
+		name        : 'segment',
+		type        : 'select',
+		label       : 'Segment*',
+		placeholder : 'Select Segment',
+		options     : GLOBAL_CONSTANTS.segment_options,
+		rules       : {
+			required: 'Segment is required',
+		},
+
+	},
+	{
 		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
