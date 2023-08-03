@@ -1,4 +1,4 @@
-import { Popover, Toggle } from '@cogoport/components';
+import { Popover, Toggle, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMProfile, IcMCross } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -11,11 +11,11 @@ import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
 function Header({
-	isStakeholder,
+	isStakeholder = false,
 	channelData = {},
 	primaryService = {},
 	setShow = () => {},
-	showImpMsg,
+	showImpMsg = false,
 	setShowImpMsg = () => {},
 }) {
 	const { push } = useRouter();
@@ -45,18 +45,18 @@ function Header({
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
 				{serial_id ? (
-					<div
+					<Button
 						className={styles.serial_id}
-						role="button"
+						themeType="link"
 						tabIndex={0}
 						onClick={() => handleClick()}
 					>
 						Shipment ID
-						<span style={{ fontWeight: 700, marginLeft: '4px' }}>
+						<span>
 							#
 							{serial_id}
 						</span>
-					</div>
+					</Button>
 				) : null}
 
 				<PortDetails
@@ -73,8 +73,8 @@ function Header({
 				>
 					<div className={styles.button}>
 						<IcMProfile width={12} height={12} />
-
-						{`+${groupChatUsers?.length} others`}
+						Contacts
+						{/* {`+${groupChatUsers?.length} others`} */}
 					</div>
 				</Popover>
 

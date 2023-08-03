@@ -13,41 +13,33 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
+	padding: 6px 0;
 	border-radius: 0 8px 0 0;
 }
 
 .serial_id {
 	width: 160px;
-	padding: 0 16px;
+	padding: 0 12px;
 	border-right: 1px solid #f68b21;
 }
 
 .port_details_loading {
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
 	width: 60%;
-	padding: 0 20px;
+	padding: 0 12px 0 20px;
 }
 
 .port_details_placeholder {
 	width: 50px;
-	height: 15px;
-	margin: 4px;
+	height: 12px;
+	margin-bottom: 4px;
 }
 
-.button {
-	display: flex;
-	gap: 8px;
-	align-items: center;
-	justify-content: center;
-	width: 80px;
-	padding: 2px 4px;
-	margin-right: 12px;
-	font-size: 10px;
-	cursor: pointer;
-	background-color: #e5f5f5;
-	border-radius: 6px;
+.port_arrow {
+	width: 1.2em;
+	height: 1.2em;
+	margin: 0 28px 0 12px;
 }
 
 .filter_box {
@@ -55,8 +47,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	height: 36px;
+	padding-right: 12px;
 	font-size: 12px;
-	font-weight: 500;
-	color: #221f20;
 	background: #cfeaed;
 }

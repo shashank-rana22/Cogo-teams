@@ -1,8 +1,8 @@
-import { cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcAShipAmber } from '@cogoport/icons-react';
+import { IcAShipAmber, IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -120,10 +120,10 @@ function List({
 		}
 
 		return channelList?.map((item) => (
-			<div
+			<Button
 				key={item?.id}
 				className={cl` ${styles.card} ${id === item?.id ? styles.colored : ''}`}
-				role="button"
+				themeType="tertiary"
 				tabIndex={0}
 				onClick={() => setId(item?.id)}
 			>
@@ -150,7 +150,7 @@ function List({
 					obj?.mainKey === item?.id && obj[user_id] > MSG_COUNT && id !== item?.id ? (
 						<div key={item?.id} className={styles.circle}>{obj[user_id]}</div>
 					) : null))}
-			</div>
+			</Button>
 		));
 	};
 
@@ -188,6 +188,14 @@ function List({
 
 			{(!id || (!loading && isEmpty(channelList))) ? (
 				<div className={styles.initial_state}>
+					<Button
+						themeType="tertiary"
+						className={styles.close_button}
+						onClick={() => setShow(false)}
+					>
+						<IcMCross />
+					</Button>
+
 					<img
 						src={GLOBAL_CONSTANTS.image_url.ic_initial_state_svg}
 						alt="empty"

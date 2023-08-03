@@ -132,8 +132,10 @@ function Details({
 		return null;
 	}
 
-	const contentData = formValues?.message?.split('\n').length;
 	const handleClick = (e) => {
+		const text = formValues?.message;
+		const contentData = text?.split('\n').length;
+
 		if (e.keyCode === ENTER_KEY && e.shiftKey && rows < TOTAL_ROWS) {
 			setRows(contentData + INITIAL_STATE_ROWS);
 		}
@@ -141,8 +143,10 @@ function Details({
 			onCreateMessage();
 			reset();
 		}
-		if (contentData > INITIAL_STATE_ROWS && (e.keyCode === DELETE_KEY_2 || e.keyCode === DELETE_KEY_1)) {
-			setRows(contentData - INITIAL_STATE_ROWS);
+		if (text[text.length - INITIAL_STATE_ROWS] === '\n'
+		&& (e.keyCode === DELETE_KEY_2 || e.keyCode === DELETE_KEY_1)) {
+			const maxRows = contentData - INITIAL_STATE_ROWS;
+			setRows(maxRows > TOTAL_ROWS ? TOTAL_ROWS : maxRows);
 		}
 	};
 

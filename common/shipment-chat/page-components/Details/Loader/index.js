@@ -6,14 +6,10 @@ import styles from './styles.module.css';
 
 function Loader({ setShow = () => {} }) {
 	return (
-		// <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
-		// 	<Placeholder width="220px" height="50px" margin="16px 8px" />
-		// 	<Placeholder width="220px" height="50px" margin="16px 8px" />
-		// </div>
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
 				<div className={styles.serial_id}>
-					<Placeholder height="20px" width="130px" />
+					<Placeholder height="18px" width="136px" />
 				</div>
 
 				<div className={styles.port_details_loading}>
@@ -22,7 +18,7 @@ function Loader({ setShow = () => {} }) {
 						<Placeholder className={styles.port_details_placeholder} />
 					</div>
 
-					<IcMPortArrow style={{ width: '1.2em', height: '1.2em' }} />
+					<IcMPortArrow className={styles.port_arrow} />
 
 					<div style={{ width: '120px' }}>
 						<Placeholder className={styles.port_details_placeholder} />
@@ -30,14 +26,11 @@ function Loader({ setShow = () => {} }) {
 					</div>
 				</div>
 
-				{/* <div className={styles.button}> */}
-				{/* <IcMProfile width={12} height={12} /> */}
-
-				<Placeholder height="20px" width="80px" style={{ marginRight: '12px' }} />
-				{/* </div> */}
+				<Placeholder height="18px" width="80px" />
 
 				<Button
 					themeType="linkUi"
+					style={{ padding: '0px' }}
 					onClick={() => { setShow(false); }}
 				>
 					<IcMCross />
@@ -45,7 +38,7 @@ function Loader({ setShow = () => {} }) {
 			</div>
 
 			<div className={styles.filter_box}>
-				<div style={{ color: '#221F20' }}>Show Starred Messages</div>
+				<div style={{ marginRight: '8px' }}>Show Starred Messages</div>
 
 				<ToggleLoader themeType="secondary" />
 			</div>
