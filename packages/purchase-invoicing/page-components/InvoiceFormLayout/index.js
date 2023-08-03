@@ -55,7 +55,7 @@ function InvoiceFormLayout({
 		value : address?.tax_number,
 	}));
 
-	const { listEntities } = useGetEntities();
+	const { listEntities, entitiesLoading } = useGetEntities();
 
 	const defaultLineItems = purchaseInvoiceValues?.line_items?.map((item) => ({
 		...item,
@@ -229,6 +229,7 @@ function InvoiceFormLayout({
 					errMszs={errMszs}
 					purchaseInvoiceValues={purchaseInvoiceValues}
 					open={isEdit}
+					entitiesLoading={entitiesLoading}
 					listEntities={listEntities}
 				/>
 				<CollectionPartyDetails
