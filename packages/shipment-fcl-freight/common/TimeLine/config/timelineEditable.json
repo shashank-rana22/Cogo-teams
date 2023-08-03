@@ -6,8 +6,7 @@
             "confirmed_by_service_provider",
             "containers_gated_in",
             "vessel_departed",
-            "vessel_arrived",
-            "containers_gated_out"
+            "vessel_arrived"
         ],
         "key_present_check": ["vessel_arrived_at"]
     },
