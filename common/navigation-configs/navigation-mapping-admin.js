@@ -2485,6 +2485,17 @@ const navigationMappingAdmin = {
 		as            : '/v2/ftl-admin',
 		possible_apis : apis.ftl_admin,
 	},
+	centralised_customer_service: {
+		key           : 'centralised_customer_service',
+		title         : 'Centralised Customer Service Desk',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		href          : '/v2/centralised-customer-service',
+		as            : '/v2/centralised-customer-service',
+		main_apis     : [],
+		possible_apis : apis.centralised_customer_service,
+		icon          : IcMDashboard,
+	},
 };
 
 export default navigationMappingAdmin;

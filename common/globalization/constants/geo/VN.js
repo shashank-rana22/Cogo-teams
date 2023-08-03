@@ -517,6 +517,10 @@ export default {
 				},
 			},
 		},
+		over_heads: {
+			region_specific_cogo_entities            : true,
+			expense_non_recurring_upload_invoice_tds : true,
+		},
 	},
 	others: {
 		registration_number: {
@@ -528,6 +532,11 @@ export default {
 		banking_code: {
 			financial_system_code : 'swift',
 			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
+		},
+
+		identification_number: {
+			label   : 'VAT',
+			pattern : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		},
 
 		pan_number: {

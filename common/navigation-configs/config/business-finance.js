@@ -73,6 +73,10 @@ const businessFinance = {
 		navigation : 'business_finance-overheads',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/overheads/expenses': {
+		navigation : 'business_finance-overheads',
+		isMainNav  : true,
+	},
 	'/[partner_id]/business-finance/overheads/[active_tab]': {
 		navigation : 'business_finance-overheads',
 		isMainNav  : true,
