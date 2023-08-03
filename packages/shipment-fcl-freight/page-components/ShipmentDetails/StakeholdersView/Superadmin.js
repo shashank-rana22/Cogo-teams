@@ -41,8 +41,8 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 	const handleVersionChange = useCallback(() => {
 		const navigation = getNavigationFromUrl();
 
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}
-		${navigation ? `?navigation=${navigation}` : ''}`;
+		let newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
+		newHref += navigation ? `?navigation=${navigation}` : '';
 
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
