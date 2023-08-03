@@ -10,10 +10,10 @@ import POST_REVIEWED_INVOICES from '../page-components/SalesInvoice/helpers/post
 const useUpdateInvoiceCombination = ({
 	refetch = () => {},
 	successMessage = 'Invoice Preference edited!',
-	servicesList,
+	servicesList = [],
 	selectedParties = [],
 	initial_service_invoice_id = {},
-	allServiceLineitemsCount,
+	allServiceLineitemsCount = 0,
 	importer_exporter_id,
 	updateExportInvoices,
 }) => {

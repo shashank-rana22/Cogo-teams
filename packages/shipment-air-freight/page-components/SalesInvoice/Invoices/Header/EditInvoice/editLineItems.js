@@ -160,7 +160,7 @@ const useEditLineItems = ({
 					service_type : currentService?.service_type,
 					line_items   : (values?.[key] || []).map((line_item) => ({
 						code             : line_item?.code,
-						alias            : line_item?.alias,
+						alias            : line_item?.alias || undefined,
 						name             : CHARGECODES[line_item?.code]?.name || line_item?.name,
 						currency         : line_item?.currency,
 						price_discounted : Number(line_item?.price_discounted),

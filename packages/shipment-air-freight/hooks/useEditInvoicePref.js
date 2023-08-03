@@ -21,7 +21,7 @@ const PARTY_SERVICES_LENGTH_GREATER_THAN = 1;
 
 const useEditInvoicePref = ({
 	shipment_data = {},
-	servicesList,
+	servicesList = [],
 	invoicing_parties = [],
 	refetch = () => {},
 }) => {

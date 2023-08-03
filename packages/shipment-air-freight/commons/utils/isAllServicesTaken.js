@@ -1,8 +1,8 @@
 const isAllServicesTaken = (
-	servicesList,
-	selectedParties,
-	shipment_data,
-	allServiceLineitemsCount,
+	servicesList = [],
+	selectedParties = [],
+	shipment_data = {},
+	allServiceLineitemsCount = 0,
 ) => {
 	const shipmentMainService = `${shipment_data?.shipment_type}_service`;
 

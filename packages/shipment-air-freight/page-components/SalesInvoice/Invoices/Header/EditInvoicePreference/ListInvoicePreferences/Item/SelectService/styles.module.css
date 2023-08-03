@@ -1,5 +1,11 @@
 .container {
 	padding: 0 16px 20px;
+
+	:global {
+		.ui_checkbox_group_container {
+			flex-wrap: wrap;
+		}
+	}
 }
 
 .service_name {

@@ -1,8 +1,7 @@
 import AIR_UNITS from '@cogoport/air-modules/constants/AIR_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/air-modules/utils/convertObjectMappingToArray';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
-const MIN_ALIAS_LENGTH = 3;
 const PRICE_GREATER_THAN = 0;
 
 const handleDisableCond = (charge, isAdminSuperAdmin) => charge?.service_type === 'air_freight_service'
@@ -65,11 +64,8 @@ const rawControls = (
 				</>
 			),
 			placeholder : 'Enter alias name/code',
-			rules       : {
-				validate: (v) => v?.length >= MIN_ALIAS_LENGTH || isEmpty(v) || 'Characters should be >= 3',
-			},
-			disabled : handleDisableCond(charge, isAdminSuperAdmin),
-			span     : 2,
+			disabled    : handleDisableCond(charge, isAdminSuperAdmin),
+			span        : 2,
 		},
 		{
 			label    : 'Unit',
