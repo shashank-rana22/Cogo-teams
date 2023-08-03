@@ -1132,6 +1132,16 @@ const partner = {
 			service_name : 'lead',
 		},
 		{
+			api          : 'get_organization_search_port_pair_stats',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_organization_search_country_stats',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'organization_kam_allocation_migration',
 			access_type  : 'private',
 			service_name : 'organization',
