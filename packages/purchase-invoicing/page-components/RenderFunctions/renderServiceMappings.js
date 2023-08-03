@@ -13,7 +13,7 @@ export const renderServiceMappings = (renderCheck = () => { }) => ({
 			{item?.name}
 			{' '}
 			(
-			{item.code}
+			{item?.code}
 			)
 		</div>
 	),
