@@ -1,8 +1,11 @@
 .wrapper {
 	box-sizing: border-box;
 	width: 100%;
-	margin-top: 32px;
 	background: #fff;
+
+	&.multiple {
+		margin-top: 32px;
+	}
 }
 
 .header_text {
@@ -13,6 +16,7 @@
 
 .container {
 	max-width: 500px;
+	min-width: 320px;
 
 	&.uploaded {
 		padding: 6px;

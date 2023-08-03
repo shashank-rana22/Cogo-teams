@@ -1,5 +1,3 @@
-import { Image } from '@cogoport/next';
-
 import styles from './styles.module.css';
 
 function ShippingLineDetails({ shipping_line = {} }) {
@@ -8,7 +6,7 @@ function ShippingLineDetails({ shipping_line = {} }) {
 	return (
 		<div className={styles.container}>
 			{logo_url ? (
-				<Image
+				<img
 					src={logo_url}
 					alt="shipping line"
 					width={60}

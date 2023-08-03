@@ -48,6 +48,7 @@ function BookingTypeOptions({
 						detail={detail}
 						updateCheckout={updateCheckout}
 						updateLoading={updateLoading}
+						length={radioOption.length}
 					/>
 				) : null}
 			</div>

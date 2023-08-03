@@ -7,10 +7,13 @@ import { useState, useEffect, useCallback } from 'react';
 
 import styles from './styles.module.css';
 
+const ONE = 1;
+
 function BookingProof({
 	detail = {},
 	updateCheckout = () => {},
 	updateLoading = false,
+	length = 0,
 }) {
 	const { booking_proof = '' } = detail;
 
@@ -47,7 +50,7 @@ function BookingProof({
 	}, [file]);
 
 	return (
-		<div className={styles.wrapper}>
+		<div className={`${styles.wrapper} ${length > ONE && styles.multiple}`}>
 			<div className={styles.header_text}>Booking Proof</div>
 
 			<div className={cl`${styles.container} ${file && styles.uploaded}`}>

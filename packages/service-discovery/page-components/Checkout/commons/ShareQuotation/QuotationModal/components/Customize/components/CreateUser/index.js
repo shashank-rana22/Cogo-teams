@@ -80,7 +80,7 @@ function PopoverContent({
 }
 
 function CreateUser({
-	organization_id,
+	organization_id = '',
 	onCreate = () => {},
 	title = '',
 	branch_id = null,
