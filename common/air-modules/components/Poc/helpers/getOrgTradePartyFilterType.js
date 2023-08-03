@@ -6,7 +6,7 @@ const getOrgTradePartyFilterType = ({ companyType = '', tradePartyType = '' }) =
 		['self', 'shipper', 'consignee'].includes(tradePartyType)
         && companyType === 'trade_partner'
 	) {
-		stakeholder = ['shipper', 'consignee', 'paying_party'];
+		stakeholder = 'paying_party';
 	} else if (
 		companyType === 'historical'
         && ['shipper', 'consignee'].includes(tradePartyType)

@@ -7,7 +7,6 @@ import {
 	SelectController,
 	useForm,
 } from '@cogoport/forms';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 
@@ -36,8 +35,6 @@ function SelfAndTradePartyForm({
 		...getTradePartiesDefaultParams({ companyType, tradePartyType }),
 		organization_id: organization_id || importer_exporter_id,
 	});
-
-	const geo = getGeoConstants();
 
 	const {
 		control,
@@ -104,13 +101,13 @@ function SelfAndTradePartyForm({
 
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>
-										{geo.others.identification_number.label}
+										PAN Number / Registration Number
 									</label>
 									<InputController
 										size="sm"
 										name="registration_number"
 										control={control}
-										placeholder={`Enter ${geo.others.identification_number.label}`}
+										placeholder="Enter Registration Number"
 										disabled
 									/>
 								</div>
@@ -189,7 +186,6 @@ function SelfAndTradePartyForm({
 										size="sm"
 										control={control}
 										name="mobile_number"
-										value={{ country_code: geo.country.mobile_country_code }}
 									/>
 									{Error('mobile_number')}
 								</div>
@@ -199,7 +195,6 @@ function SelfAndTradePartyForm({
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>Alternate Mobile Number (optional)</label>
 									<MobileNumberController
-										value={{ country_code: geo.country.mobile_country_code }}
 										size="sm"
 										control={control}
 										name="alternate_mobile_number"

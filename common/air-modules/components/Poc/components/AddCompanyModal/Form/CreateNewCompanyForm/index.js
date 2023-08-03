@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import {
 	CheckboxController,
 	CountrySelectController,
@@ -8,7 +7,6 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
 
 import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
@@ -32,8 +30,6 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 		},
 	});
 
-	const geo = getGeoConstants();
-
 	const [addressOptions, setAddressOptions] = useState([]);
 	const [addressData, setAddressData] = useState([]);
 
@@ -41,8 +37,6 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 
 	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
 	const formValues = watch();
-
-	const taxLabel = geo.others.registration_number.label;
 
 	const resetMultipleFields = useCallback((fields = []) => {
 		fields?.map((field) => resetField(field));
@@ -115,26 +109,25 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							placeholder="Enter or Select Country"
 							optionValueKey="id"
-							value={geo.country.id}
 							rules={{ required: 'Country of Registration is required' }}
 						/>
 						{Error('country')}
 					</div>
 					<div className={styles.pan_number}>
 						<label className={styles.form_label}>
-							{`${geo.others.identification_number.label} ${
+							{`PAN Number / Registration Number ${
 								['collection_party', 'paying_party'].includes(tradePartyType) ? '' : '(Optional)'}`}
 						</label>
 						<InputController
 							size="sm"
 							name="registration_number"
 							control={control}
-							placeholder={`Enter ${geo.others.identification_number.label}`}
+							placeholder="Enter Registration Number"
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
 								pattern  : {
-									value   : geo.others.identification_number.pattern,
-									message : `${geo.others.identification_number.label} is invalid`,
+									value   : FORM_VALUE_PATTERNS.PAN_NUMBER,
+									message : 'Pan Number is invalid',
 								},
 							}}
 						/>
@@ -220,19 +213,13 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						<MobileNumberController
 							size="sm"
 							control={control}
-							value={{ country_code: geo.country.mobile_country_code }}
 							name="mobile_number"
 						/>
 						{Error('mobile_number')}
 					</div>
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>Alternate Mobile Number (optional)</label>
-						<MobileNumberController
-							value={{ country_code: geo.country.mobile_country_code }}
-							size="sm"
-							control={control}
-							name="alternate_mobile_number"
-						/>
+						<MobileNumberController size="sm" control={control} name="alternate_mobile_number" />
 					</div>
 				</div>
 				<div className={styles.checkbox}>
@@ -261,11 +248,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						{Error('tax_number')}
 					</div>
 					<div className={styles.upload_container}>
-						<label className={styles.form_label}>
-							{taxLabel}
-							{' '}
-							Proof
-						</label>
+						<label className={styles.form_label}>GST Proof</label>
 						<UploadController
 							className="tax_document"
 							name="tax_number_document_url"
@@ -274,7 +257,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							rules={{
 								required: {
 									value   : !formValues.not_reg_under_gst,
-									message : `${taxLabel} Proof is required`,
+									message : 'GST Proof is required',
 								},
 							}}
 						/>

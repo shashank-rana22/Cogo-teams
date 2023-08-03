@@ -16,6 +16,10 @@ const MAPPING = {
 			value : 'create_new_company',
 			label : 'Create New Company',
 		},
+		{
+			value : 'historical',
+			label : 'Historical',
+		},
 	],
 	consignee: [
 		{
@@ -25,6 +29,10 @@ const MAPPING = {
 		{
 			value : 'create_new_company',
 			label : 'Create New Company',
+		},
+		{
+			value : 'historical',
+			label : 'Historical',
 		},
 	],
 	self: [
