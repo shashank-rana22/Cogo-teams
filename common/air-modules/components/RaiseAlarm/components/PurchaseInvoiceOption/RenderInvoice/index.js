@@ -18,44 +18,47 @@ function RenderInvoice({
 		return <div className={styles.container}>No Options</div>;
 	}
 
-	return item?.collection_parties?.map((ele) => (
-		<div className={styles.container} key={ele.id}>
-			<div>
-				{ele?.invoice_no ? ele?.invoice_no : ele?.proforma_invoice_no}
-			</div>
-
-			<Popover
-				show={showPurchaseInvoicePopover && ele?.id === checkedProforma}
-				visible={showPurchaseInvoicePopover && ele?.id === checkedProforma}
-				placement="bottom"
-				content={(
-					<InvoiceContent
-						lineItems={ele?.line_items}
-						checkedLineItem={checkedLineItem}
-						handleLineItemSelect={handleLineItemSelect}
-					/>
-				)}
-				onClickOutside={() => {
-					setShowPurchaseInvoicePopover(false);
-					setShowBox(false);
-				}}
-				interactive
-			>
-				<div
-					className={styles.view_invoices}
-					role="presentation"
-					onClick={() => {
-						setCheckedProforma(ele?.id);
-						setShowPurchaseInvoicePopover(true);
-					}}
-				>
-					{ele?.invoice_type === 'purchase_invoice'
-						? 'View Purchase Invoice'
-						: 'View Proforma Invoice'}
+	return item?.collection_parties?.map((ele) => {
+		const isPopoverVisible = showPurchaseInvoicePopover && ele?.id === checkedProforma;
+		return (
+			<div className={styles.container} key={ele.id}>
+				<div>
+					{ele?.invoice_no ? ele?.invoice_no : ele?.proforma_invoice_no}
 				</div>
-			</Popover>
-		</div>
-	));
+
+				<Popover
+					show={isPopoverVisible}
+					visible={isPopoverVisible}
+					placement="bottom"
+					content={(
+						<InvoiceContent
+							lineItems={ele?.line_items}
+							checkedLineItem={checkedLineItem}
+							handleLineItemSelect={handleLineItemSelect}
+						/>
+					)}
+					onClickOutside={() => {
+						setShowPurchaseInvoicePopover(false);
+						setShowBox(false);
+					}}
+					interactive
+				>
+					<div
+						className={styles.view_invoices}
+						role="presentation"
+						onClick={() => {
+							setCheckedProforma(ele?.id);
+							setShowPurchaseInvoicePopover(true);
+						}}
+					>
+						{ele?.invoice_type === 'purchase_invoice'
+							? 'View Purchase Invoice'
+							: 'View Proforma Invoice'}
+					</div>
+				</Popover>
+			</div>
+		);
+	});
 }
 
 export default RenderInvoice;
