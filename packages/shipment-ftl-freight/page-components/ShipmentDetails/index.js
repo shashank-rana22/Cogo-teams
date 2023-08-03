@@ -51,6 +51,8 @@ function ShipmentDetails() {
 	) || {};
 	const { authParams } = prof;
 
+	console.log(prof);
+
 	const activeStakeholder = useGetActiveStakeholder();
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder, authParams });
 	const { get } = useGetShipment();
