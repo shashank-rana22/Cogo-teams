@@ -4,8 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../configurations/objective-status-color-mapping';
-import ACTIVE_MODE_KEYS_MAPPING from '../../../../../constants/active-mode-keys-mapping';
+import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../configurations/objective-status-color-mapping';
+import ACTIVE_MODE_KEYS_MAPPING from '../../../../constants/active-mode-keys-mapping';
 
 import styles from './styles.module.css';
 
@@ -21,14 +21,20 @@ const getListColumnMapping = (props) => {
 			key      : 'status',
 			flex     : 1,
 			Header   : <div className={styles.top_heading}>STATUS</div>,
-			accessor : ({ lead_objective_status }) => (lead_objective_status ? (
-				<Pill
-					size="md"
-					color={OBJECTIVE_STATUS_COLOR_MAPPING[lead_objective_status]}
-				>
-					{startCase(lead_objective_status)}
-				</Pill>
-			) : '___'),
+			accessor : ({ lead_objective_status, status }) => {
+				const showStatus = status === 'live' ? 'live' : lead_objective_status;
+
+				if (!showStatus) return '___';
+
+				return (
+					<Pill
+						size="md"
+						color={OBJECTIVE_STATUS_COLOR_MAPPING[showStatus]}
+					>
+						{startCase(showStatus)}
+					</Pill>
+				);
+			},
 		},
 		{
 			key    : 'objective_name',

@@ -5,8 +5,8 @@ import { useState, useMemo } from 'react';
 import EmptyState from '../../../../../../common/EmptyState';
 
 import ACTION_COMPONENT_MAPPING from './get-action-component-mapping';
+import getListColumnMapping from './get-list-column-mapping';
 import ListCard from './ListCard';
-import getListColumnMapping from './ListCard/get-list-column-mapping';
 import ListChildCard from './ListChildCard';
 import ListHeader from './ListHeader';
 import LoadingState from './LoadingState';

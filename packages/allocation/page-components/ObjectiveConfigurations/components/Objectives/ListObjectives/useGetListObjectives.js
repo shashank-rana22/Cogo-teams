@@ -39,7 +39,7 @@ const useGetListObjectives = () => {
 			...previousParams,
 			filters: {
 				...(previousParams.filters || {}),
-				status : toggleValue || undefined,
+				status : toggleValue === 'active' ? ['active', 'live'] : 'inactive',
 				q      : searchQuery || undefined,
 			},
 		}));

@@ -20,13 +20,13 @@ const getObjectiveFilterControls = () => {
 		{
 			name     : 'lead_objective_status',
 			type     : 'chips',
-			label    : 'Status',
+			label    : 'Lead Objective Status',
 			multiple : true,
 			options  : [
-				{
-					label : 'Live',
-					value : 'live',
-				},
+				// {
+				// 	label : 'Live',
+				// 	value : 'live',
+				// },
 				{
 					label : 'Verified',
 					value : 'verified',
