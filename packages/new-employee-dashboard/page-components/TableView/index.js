@@ -37,36 +37,38 @@ function TableView({ search, setSearch }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.filter_container}>
-				<Tabs
-					activeTab={activeTab}
-					themeType="tertiary"
-					onChange={setActiveTab}
-					style={{ marginBottom: 6 }}
-				>
-					<TabPanel name="active" title="Active" />
-					<TabPanel name="inactive" title="Inactive" />
-					<TabPanel name="rejected_by_user" title="Rejected By User" />
-				</Tabs>
-				<div className={styles.bulkupload_container}>
-					BulkAction
-					<Toggle
-						onChange={(val) => setBulkAction(val?.target?.checked)}
-						value={bulkAction}
-						styles={{ marginBottom: '30px' }}
-					/>
-				</div>
-				{bulkAction && (
-					<div className={styles.styled_button}>
-						<Button
-							themeType="secondary"
-							disabled={isEmpty(selectedIds)}
-							onClick={sendBulkActionMail}
-							loading={bulkloading}
-						>
-							Send email
-						</Button>
+				<div className={styles.tab_conatiner}>
+					<Tabs
+						activeTab={activeTab}
+						themeType="tertiary"
+						onChange={setActiveTab}
+						style={{ marginBottom: 6 }}
+					>
+						<TabPanel name="active" title="Active" />
+						<TabPanel name="inactive" title="Inactive" />
+						<TabPanel name="rejected_by_user" title="Rejected By User" />
+					</Tabs>
+					<div className={styles.bulkupload_container}>
+						BulkAction
+						<Toggle
+							onChange={(val) => setBulkAction(val?.target?.checked)}
+							value={bulkAction}
+							styles={{ marginBottom: '30px' }}
+						/>
 					</div>
-				)}
+					{bulkAction && (
+						<div className={styles.styled_button}>
+							<Button
+								themeType="secondary"
+								disabled={isEmpty(selectedIds)}
+								onClick={sendBulkActionMail}
+								loading={bulkloading}
+							>
+								Send email
+							</Button>
+						</div>
+					)}
+				</div>
 
 				<div className={styles.filter_options}>
 					<Input

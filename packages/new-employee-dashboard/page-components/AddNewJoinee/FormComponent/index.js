@@ -24,9 +24,9 @@ const EMPLOYEE_DETAILS_MAPPING = [
 	'office_location',
 	'cogoport_email',
 	'office_location_country',
-	'attendence',
-	'li',
-	'pi',
+	'attendance',
+	'learning_indicator',
+	'predictive_index',
 	'department',
 ];
 
@@ -112,6 +112,14 @@ function FormComponent({ setActivePage = () => {} }) {
 	}, [setValue, user.id]);
 
 	const onClickSaveDetails = async (values) => {
+		const { attendance, learning_indicator, predictive_index, ...rest } = values || {};
+		const additional_information_attributes = [
+			{
+				attendance,
+				predictive_index,
+				learning_indicator,
+			},
+		];
 		try {
 			const doj = values?.date_of_joining;
 
@@ -127,10 +135,11 @@ function FormComponent({ setActivePage = () => {} }) {
 			) || undefined;
 
 			const payload = {
-				...values,
+				...rest,
 				mobile_number       : values?.mobile_number?.number,
 				mobile_country_code : values?.mobile_number?.country_code,
 				date_of_joining     : utcDate,
+				additional_information_attributes,
 			};
 
 			const res = await trigger({ data: payload });

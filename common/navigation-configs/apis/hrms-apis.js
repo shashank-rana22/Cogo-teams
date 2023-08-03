@@ -293,7 +293,7 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 		{
-			api          : 'list_roles',
+			api          : 'list_employee_roles',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},

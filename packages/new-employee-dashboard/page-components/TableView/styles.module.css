@@ -5,8 +5,7 @@
 .filter_container {
 	display: flex;
 	align-items: baseline;
-
-	/* justify-content: space-between; */
+	justify-content: space-between;
 }
 
 .name_and_email {
@@ -84,4 +83,10 @@
 
 .styled_button {
 	margin-left: 20px;
+}
+
+.tab_conatiner {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
 }

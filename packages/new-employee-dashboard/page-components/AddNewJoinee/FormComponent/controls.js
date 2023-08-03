@@ -106,7 +106,7 @@ const controls = [
 		},
 	},
 	{
-		name        : 'attendence',
+		name        : 'attendance',
 		type        : 'select',
 		label       : 'Attendence*',
 		placeholder : 'Select Attendence',
@@ -116,17 +116,17 @@ const controls = [
 		},
 	},
 	{
-		name        : 'li',
+		name        : 'learning_indicator',
 		type        : 'select',
-		label       : 'LI',
+		label       : 'Learning Indicator',
 		placeholder : 'select LI',
 		options     : GLOBAL_CONSTANTS.li_options,
 
 	},
 	{
-		name        : 'pi',
+		name        : 'predictive_index',
 		type        : 'number',
-		label       : 'PI',
+		label       : 'Predictive Index',
 		placeholder : 'Enter PI',
 
 	},
