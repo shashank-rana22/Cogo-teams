@@ -37,7 +37,6 @@ function Organizations({
 					orgDetail={orgDetail}
 					setActiveTab={setActiveTab}
 					setOpenKamContacts={setOpenKamContacts}
-					setOrgDetail={setOrgDetail}
 					key={id}
 					activeOrg={activeOrg}
 					setShowUser={setShowUser}

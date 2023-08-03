@@ -13,7 +13,6 @@ function OrgUsersList({
 	orgDetail = {},
 	setActiveTab = () => {},
 	setOpenKamContacts = () => {},
-	setOrgDetail = () => {},
 	endPoint = '',
 	filterKey = '',
 	activeOrg = '',
@@ -56,21 +55,9 @@ function OrgUsersList({
 		}));
 
 		setOpenKamContacts(false);
-		setOrgDetail({
-			id   : '',
-			name : '',
-		});
 	};
 
 	const modifiedList = loading ? [...Array(LOADER_COUNT).fill({})] : formattedOrgUsersList;
-
-	if (!id) {
-		return (
-			<div className={styles.select_org_text}>
-				Select a Organizaton
-			</div>
-		);
-	}
 
 	return (
 		<div className={styles.container}>
