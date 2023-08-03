@@ -34,7 +34,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 	} = useListShipmentTradePartners({ shipment_id });
 
 	const {
-		data:{ list:shipmentStakeholderData = [] } = {}, loading:stakeHolderLoading,
+		data: shipmentStakeholderData, loading:stakeHolderLoading,
 		apiTrigger:stakeholdersTrigger,
 	} = useListStakeholders({
 		shipment_id,

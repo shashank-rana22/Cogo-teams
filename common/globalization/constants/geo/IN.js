@@ -129,7 +129,6 @@ export default {
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
 			'594be53f-e39a-45d1-a705-57660a4a4a00', // IE Owner - SME Demand
 			'a35fbbbe-38ea-4ee8-82a8-06d1245a23a4', // KAM - Enterprise Demand
-			'4c6f6036-2383-4c40-9b84-fa2b598031e1', // KAM SO1
 			'eb292d80-a05f-4a56-a0f7-ef51255583aa', // Prod_KAM_Transport_Supply
 			'b5dd96b2-11a2-4655-8319-040614262f3d', // OKAM (Operational Key Account Manager)
 		],
@@ -256,10 +255,11 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
-		igm_desk                  : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
-		document_control_manager  : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
-		ftl_ground_ops_role_id    : 'd2275231-30ad-4df9-8451-daf03b766f8a',
-		field_service_ops_role_id : '6ebacc3c-05c9-43fd-8a51-e7aad9751d9b',
+		igm_desk                   : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager   : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
+		ftl_ground_ops_role_ids    : ['d2275231-30ad-4df9-8451-daf03b766f8a'],
+		field_service_ops_role_ids : ['6ebacc3c-05c9-43fd-8a51-e7aad9751d9b'],
+		kam_service_ops1_role_ids  : ['4c6f6036-2383-4c40-9b84-fa2b598031e1'],
 	},
 	options: {
 		registration_types: [

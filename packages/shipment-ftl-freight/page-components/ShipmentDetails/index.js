@@ -4,6 +4,7 @@ import { IcMRefresh } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 // import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
+import { useSelector } from '@cogoport/store';
 // import { ShipmentMails } from '@cogoport/shipment-mails';
 // import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
@@ -45,8 +46,11 @@ const FORBIDDEN_STATUS_CODE = 403;
 
 function ShipmentDetails() {
 	const router = useRouter();
+	const { authParams } = useSelector(
+		({ profile }) => profile,
+	) || {};
 	const activeStakeholder = useGetActiveStakeholder();
-	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
+	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder, authParams });
 	const { get } = useGetShipment();
 	const { features = [], default_tab = 'tasks', visible_tabs = [] } = stakeholderConfig || {};
 
