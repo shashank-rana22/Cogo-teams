@@ -29,6 +29,7 @@ export default function Accordion({
 					refetch={refetch}
 					getShipmentPendingTask={getShipmentPendingTask}
 					taskLoading={taskLoading}
+					stateProps={stateProps}
 				/>
 			) : (
 				<AccordionText
