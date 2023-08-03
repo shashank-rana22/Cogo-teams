@@ -29,6 +29,11 @@ const FTL_FIELD_SERVICE_OPS_APP_APIS = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_shipment_services',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default FTL_FIELD_SERVICE_OPS_APP_APIS;
