@@ -13,7 +13,10 @@ function MailBody({
 	setMailActions = () => {},
 	mailActions = {},
 	hasPermissionToEdit = false,
+	formattedData = {},
 }) {
+	const { source = '' } = formattedData || {};
+
 	const { response, send_by = '', created_at = 0 } = eachMessage || {};
 
 	const {
@@ -26,7 +29,7 @@ function MailBody({
 		getEmailBody,
 		message: bodyMessage = '',
 		loading = false,
-	} = useGetMailContent({ messageId: message_id });
+	} = useGetMailContent({ messageId: message_id, source });
 
 	const { data } = mailActions || {};
 	const { response: selectedResponse = {} } = data || {};
