@@ -18,6 +18,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			allocation_ratio                  : undefined,
 			price                             : Number(validities?.total_price) / Number(container_count),
 			agent                             : element?.procured_by?.name,
+			sourced_by                        : element?.sourced_by?.name,
 			total_price                       : validities?.total_price || DEFAULT_VALUE,
 			currency                          : validities?.currency,
 			total_price_in_preferred_currency : validities?.total_price_in_preferred_currency,

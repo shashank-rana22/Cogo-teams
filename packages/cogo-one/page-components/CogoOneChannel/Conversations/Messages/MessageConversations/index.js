@@ -34,6 +34,7 @@ function MessageConversations({
 	setOpenModal = () => {},
 	assignChat = () => {},
 	sendCommunicationTemplate = () => {},
+	mailProps = {},
 }) {
 	const conversationsDivRef = useRef(null);
 
@@ -103,6 +104,7 @@ function MessageConversations({
 						viewType={viewType}
 						hasPermissionToEdit={hasPermissionToEdit}
 						ref={conversationsDivRef}
+						mailProps={mailProps}
 					/>
 				)}
 			</div>

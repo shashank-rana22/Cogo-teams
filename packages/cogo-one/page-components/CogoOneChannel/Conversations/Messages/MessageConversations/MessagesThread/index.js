@@ -40,6 +40,7 @@ function MessagesThread(
 		setMailActions = () => {},
 		mailActions = {},
 		hasPermissionToEdit = false,
+		mailProps = {},
 	},
 	messageRef,
 ) {
@@ -125,6 +126,7 @@ function MessagesThread(
 						mailActions={mailActions}
 						viewType={viewType}
 						hasPermissionToEdit={hasPermissionToEdit}
+						mailProps={mailProps}
 					/>
 				);
 			})}
