@@ -2,16 +2,20 @@ import { ResponsivePie } from '@cogoport/charts/pie';
 import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
+import DisplayTime from '../../../../common/DisplayTime';
 import { statsMapping } from '../../../../configurations/stats-mapping';
 
 import styles from './styles.module.css';
 
-function OverallStats({ data, ticketCount }) {
+const DEFAULT_TOTAL_TICKET = 0;
+const DEFAULT_COUNT = 0;
+
+function OverallStats({ data = {}, ticketCount = {} }) {
 	const pieData = Object.keys(ticketCount || {}).map((key) => ({
 		id    : key.toLocaleLowerCase(),
 		label : key,
-		value : ticketCount[key] || 0,
-	}));
+		value : ticketCount[key] || DEFAULT_COUNT,
+	})).filter((item) => item.label !== 'TotalTicket');
 
 	return (
 		<div className={styles.container}>
@@ -48,7 +52,7 @@ function OverallStats({ data, ticketCount }) {
 					</span>
 					<span className={styles.graph_count}>
 						{formatAmount({
-							amount  : ticketCount?.TotalTicket || 0,
+							amount  : ticketCount?.TotalTicket || DEFAULT_TOTAL_TICKET,
 							options : {
 								style                 : 'decimal',
 								notation              : 'compact',
@@ -58,28 +62,36 @@ function OverallStats({ data, ticketCount }) {
 					</span>
 				</div>
 				<div className={styles.legends}>
-					{(pieData || []).map(({ id, label, value, isMargin }) => (
-						<div className={cl`${styles.legend} ${isMargin ? styles.margin_bottom : ''}`} key={id}>
-							<div className={styles.legend_count}>
-								<div className={cl`${styles.dot} ${styles[id]}`} />
-								<span className={styles.stats_count}>{value || 0}</span>
+					{(pieData || []).map(({ id, label, value, isMargin }) => {
+						if (label === 'TotalTicket') { return null; }
+
+						return (
+							<div className={cl`${styles.legend} ${isMargin ? styles.margin_bottom : ''}`} key={id}>
+								<div className={styles.legend_count}>
+									<div className={cl`${styles.dot} ${styles[id]}`} />
+									<span className={styles.stats_count}>{value || DEFAULT_COUNT}</span>
+								</div>
+								<div className={styles.stats_label}>{label || ''}</div>
 							</div>
-							<div className={styles.stats_label}>{label || ''}</div>
-						</div>
-					))}
+						);
+					})}
 				</div>
 			</div>
-			{(statsMapping || []).map(({ key, icon, label, suffix }) => (
-				<div className={styles.tile} key={key}>
-					<div>{icon}</div>
-					<div className={styles.count}>
-						{(Number(data?.[key]) || ticketCount?.[key] || 0).toFixed()}
-						{' '}
-						{suffix}
+
+			{(statsMapping || []).map((item) => {
+				const { key, icon, label, type } = item || {};
+
+				return (
+					<div className={styles.tile} key={key}>
+						<div>{icon}</div>
+						<div className={styles.count}>
+							{type ? <DisplayTime sec={data?.[key]} />
+								: (ticketCount?.[key] || DEFAULT_COUNT).toFixed()}
+						</div>
+						<div className={styles.label}>{label || ''}</div>
 					</div>
-					<div className={styles.label}>{label || ''}</div>
-				</div>
-			))}
+				);
+			})}
 		</div>
 
 	);
