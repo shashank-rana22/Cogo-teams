@@ -100,6 +100,7 @@ function CogoOne() {
 		setActiveMail : (val) => {
 			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
+		userId,
 	};
 
 	const commonProps = {

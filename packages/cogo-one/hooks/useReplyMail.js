@@ -11,9 +11,9 @@ const getCommunicationPayload = ({ payload, userId }) => ({
 	type             : 'rpa_email',
 	recipient        : payload?.toUserEmail?.[GLOBAL_CONSTANTS.zeroth_index],
 	message_metadata : {
-		endpoint            : 'cogolens/send_mail',
+		endpoint            : '/cogolens/send_mail',
 		body                : payload,
-		send_to_omnichannel : false,
+		send_to_omnichannel : true,
 	},
 	sender_user_id : userId,
 	service        : 'user',
@@ -32,7 +32,6 @@ function useReplyMail(mailProps) {
 	const {
 		setEmailState = () => {},
 		buttonType = 'send_mail',
-
 		setButtonType = () => {},
 		userId = '',
 	} = mailProps;
