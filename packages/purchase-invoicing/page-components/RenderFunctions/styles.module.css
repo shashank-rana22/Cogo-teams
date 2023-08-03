@@ -93,6 +93,7 @@
 
 .text {
 	margin-top: 6px;
+	overflow-wrap: break-word;
 }
 
 .errors {

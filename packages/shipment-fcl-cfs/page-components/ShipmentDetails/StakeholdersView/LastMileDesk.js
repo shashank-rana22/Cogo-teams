@@ -1,7 +1,6 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
-import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
@@ -12,6 +11,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import PurchaseInvoice from '../../../common/PurchaseInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -99,10 +99,7 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 						</TabPanel>
 
 						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-							<PurchaseInvoicing
-								shipmentData={shipment_data}
-								servicesData={servicesGet?.servicesList}
-							/>
+							<PurchaseInvoice />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">

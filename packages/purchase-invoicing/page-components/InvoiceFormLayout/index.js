@@ -1,7 +1,9 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm, RadioGroupController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useContext, useImperativeHandle, forwardRef, useState } from 'react';
 
@@ -21,6 +23,8 @@ import PurchaseInvoiceDates from './PurchaseInvoiceDates';
 import Segmented from './Segmented';
 import styles from './styles.module.css';
 import Taggings from './Taggings';
+
+const IS_SAME = 1;
 
 function InvoiceFormLayout({
 	uploadInvoiceUrl = '',
@@ -60,13 +64,14 @@ function InvoiceFormLayout({
 	const defaultLineItems = purchaseInvoiceValues?.line_items?.map((item) => ({
 		...item,
 		rate    : item?.price,
-		tax_amt : item?.tax_price || 0,
+		tax_amt : item?.tax_price || GLOBAL_CONSTANTS.zeroth_index,
 		cost    : item?.tax_total_price,
 	}));
 
 	const { control, watch, setValue, handleSubmit, formState: { errors: errorVal } } = useForm({
 		defaultValues: {
-			exchange_rate: purchaseInvoiceValues?.exchange_rate || [
+			invoice_type  : 'purchase_invoice',
+			exchange_rate : purchaseInvoiceValues?.exchange_rate || [
 				{ from_currency: 'INR', to_currency: 'INR', rate: '1' },
 			],
 			line_items: isEmpty(defaultLineItems) ? [EMPTY_LINE_ITEMS] : defaultLineItems,
@@ -83,7 +88,7 @@ function InvoiceFormLayout({
 	);
 
 	useEffect(() => {
-		if (initialValueBP && Object.keys(billingParty || {}).length === 0) {
+		if (initialValueBP && Object.keys(billingParty || {}).length === GLOBAL_CONSTANTS.zeroth_index) {
 			setBillingParty({
 				...initialValueBP,
 				billing_party_address:
@@ -100,7 +105,7 @@ function InvoiceFormLayout({
 				return {
 					...item,
 					to_currency : formValues?.invoice_currency,
-					rate        : isSame ? 1 : item?.rate,
+					rate        : isSame ? IS_SAME : item?.rate,
 				};
 			});
 			setValue('exchange_rate', declaredExcRate);
@@ -111,9 +116,9 @@ function InvoiceFormLayout({
 		formValues?.line_items?.forEach((item, index) => {
 			const exchRate = formValues?.exchange_rate?.filter(
 				(ex) => ex?.from_currency === item?.currency,
-			)?.[0]?.rate;
+			)?.[GLOBAL_CONSTANTS.zeroth_index]?.rate;
 
-			const newExcRate = item?.currency === formValues?.invoice_currency ? 1 : exchRate || '';
+			const newExcRate = item?.currency === formValues?.invoice_currency ? IS_SAME : exchRate || '';
 
 			setValue(`line_items.${index}.exchange_rate`, newExcRate);
 		});
@@ -181,7 +186,7 @@ function InvoiceFormLayout({
 			<div className={styles.formlayout}>
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
 					<div className={`${styles.flex} ${styles.justifiy}`}>
-						<div className={`${styles.flex}`}>
+						<div className={styles.flex}>
 							{!isJobClosed ? (
 								<Segmented
 									setBillCatogory={setBillCatogory}

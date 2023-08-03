@@ -1,7 +1,6 @@
 .accordianContainer {
-	width: 95%;
 	padding-bottom: 14px;
-	margin: 14px 26px;
+	margin: 14px auto;
 }
 
 .fullwidth {

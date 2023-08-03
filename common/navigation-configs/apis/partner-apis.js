@@ -1132,6 +1132,16 @@ const partner = {
 			service_name : 'lead',
 		},
 		{
+			api          : 'get_organization_search_port_pair_stats',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_organization_search_country_stats',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'organization_kam_allocation_migration',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1229,6 +1239,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_lead_organization_stakeholders',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'list_organization_stakeholders',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1237,6 +1252,11 @@ const partner = {
 			api          : 'update_organization_stakeholder',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'update_lead_organization_stakeholder',
+			access_type  : 'private',
+			service_name : 'lead',
 		},
 		{
 			api          : 'post_allocation_request',
