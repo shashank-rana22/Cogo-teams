@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import { BILL_MAPPINGS } from '../constants';
 
 const getEditData = (editData) => {
@@ -16,8 +18,8 @@ const getEditData = (editData) => {
 		billing_party_address : editData?.billing_party_detail?.address?.gst_number,
 		collection_party      : editData?.registration_number,
 		collection_party_bank_details:
-            editData?.bank_details?.[0]?.bank_account_number,
-		collection_party_address : editData?.tax_number,
+            editData?.bank_details?.[GLOBAL_CONSTANTS.zeroth_index]?.bank_account_number,
+		collection_party_address : editData?.address,
 		...(editData?.shipment_detail || {}),
 		...editData,
 		line_items               : editData?.line_items || [],
