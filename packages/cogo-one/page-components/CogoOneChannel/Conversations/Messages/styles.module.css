@@ -6,7 +6,7 @@
 }
 
 .message_container {
-	height: 65%;
+	height: calc(100% - 102px);
 	background: #f9f9f9;
 }
 

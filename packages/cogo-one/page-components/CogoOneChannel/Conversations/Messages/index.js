@@ -1,5 +1,5 @@
 import { collection } from 'firebase/firestore';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
@@ -18,8 +18,6 @@ import MessageConversations from './MessageConversations';
 import MessageModals from './MessageModals';
 import styles from './styles.module.css';
 
-const TIMEOUT_FOR_SCROLL = 200;
-
 function Messages({
 	activeTab = {},
 	firestore = {},
@@ -33,7 +31,6 @@ function Messages({
 	setModalType = () => {},
 }) {
 	const activeRoomSnapshotListener = useRef(null);
-	const conversationsDivRef = useRef(null);
 
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [mailActions, setMailActions] = useState({ actionType: '', data: {} });
@@ -106,15 +103,6 @@ function Messages({
 		requestAssignLoading,
 	} = useRequestAssignChat();
 
-	const scrollToLastMessage = useCallback(() => {
-		setTimeout(() => {
-			conversationsDivRef.current?.scrollTo({
-				top   	  : conversationsDivRef.current.scrollHeight,
-				behavior : 'smooth',
-			});
-		}, TIMEOUT_FOR_SCROLL);
-	}, []);
-
 	const activeCardId = activeTab?.data?.id;
 	const activeChannelType = activeTab?.data?.channel_type;
 
@@ -167,10 +155,7 @@ function Messages({
 						hasNoFireBaseRoom={hasNoFireBaseRoom}
 					/>
 				</div>
-				<div
-					className={styles.message_container}
-					style={{ height: (channel_type === 'email' && !actionType) ? '83%' : 'calc(100% - 102px)' }}
-				>
+				<div className={styles.message_container}>
 					<MessageConversations
 						formattedData={formattedData}
 						activeMessageCard={activeTab?.data}
@@ -186,8 +171,6 @@ function Messages({
 						activeChatCollection={activeChatCollection}
 						newUserRoomLoading={newUserRoomLoading}
 						firestore={firestore}
-						ref={conversationsDivRef}
-						scrollToLastMessage={scrollToLastMessage}
 						setMailActions={setMailActions}
 						mailActions={mailActions}
 						actionType={actionType}

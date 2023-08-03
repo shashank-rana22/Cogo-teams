@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import { useEffect, forwardRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
 import useGetMessages from '../../../../../hooks/useGetMessages';
 
@@ -10,6 +10,7 @@ import MessagesThread from './MessagesThread';
 import styles from './styles.module.css';
 
 const DISTANCE_FROM_TOP = 10;
+const TIMEOUT_FOR_SCROLL = 200;
 
 function MessageConversations({
 	activeMessageCard = {},
@@ -21,7 +22,6 @@ function MessageConversations({
 	activeTab = {},
 	activeChatCollection = {},
 	newUserRoomLoading = false,
-	scrollToLastMessage = () => {},
 	setMailActions = () => {},
 	mailActions = {},
 	firestore = {},
@@ -34,7 +34,9 @@ function MessageConversations({
 	setOpenModal = () => {},
 	assignChat = () => {},
 	sendCommunicationTemplate = () => {},
-}, ref) {
+}) {
+	const conversationsDivRef = useRef(null);
+
 	const { id = '', channel_type = '' } = activeMessageCard || {};
 
 	const {
@@ -49,6 +51,15 @@ function MessageConversations({
 		}
 	};
 
+	const scrollToLastMessage = useCallback(() => {
+		setTimeout(() => {
+			conversationsDivRef.current?.scrollTo({
+				top   	  : conversationsDivRef.current.scrollHeight,
+				behavior : 'smooth',
+			});
+		}, TIMEOUT_FOR_SCROLL);
+	}, []);
+
 	useEffect(() => {
 		scrollToLastMessage();
 	}, [scrollToLastMessage, id, firstLoadingMessages]);
@@ -57,41 +68,45 @@ function MessageConversations({
 		<div
 			key={id}
 			className={cl`${styles.container} ${channel_type === 'email' ? styles.mail_container : ''}`}
-			onScroll={handleScroll}
-			ref={ref}
 		>
-			{(newUserRoomLoading || firstLoadingMessages) ? (
-				<div className={styles.flex_div}>
-					<Image
-						src={GLOBAL_CONSTANTS.image_url.cogo_one_loader}
-						type="video/gif"
-						alt="loading"
-						width={80}
-						height={80}
+			<div
+				className={styles.message_container}
+				onScroll={handleScroll}
+				ref={conversationsDivRef}
+			>
+				{(newUserRoomLoading || firstLoadingMessages) ? (
+					<div className={styles.flex_div}>
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.cogo_one_loader}
+							type="video/gif"
+							alt="loading"
+							width={80}
+							height={80}
+						/>
+					</div>
+				) : (
+					<MessagesThread
+						getNextData={getNextData}
+						lastPage={lastPage}
+						loadingPrevMessages={loadingPrevMessages}
+						messagesData={messagesData}
+						activeMessageCard={activeMessageCard}
+						formattedData={formattedData}
+						setRaiseTicketModal={setRaiseTicketModal}
+						hasNoFireBaseRoom={hasNoFireBaseRoom}
+						setModalType={setModalType}
+						activeTab={activeTab}
+						setMailActions={setMailActions}
+						mailActions={mailActions}
+						firestore={firestore}
+						scrollToBottom={scrollToLastMessage}
+						viewType={viewType}
+						hasPermissionToEdit={hasPermissionToEdit}
+						ref={conversationsDivRef}
 					/>
-				</div>
-			) : (
-				<MessagesThread
-					getNextData={getNextData}
-					lastPage={lastPage}
-					loadingPrevMessages={loadingPrevMessages}
-					messagesData={messagesData}
-					activeMessageCard={activeMessageCard}
-					formattedData={formattedData}
-					setRaiseTicketModal={setRaiseTicketModal}
-					hasNoFireBaseRoom={hasNoFireBaseRoom}
-					setModalType={setModalType}
-					activeTab={activeTab}
-					setMailActions={setMailActions}
-					mailActions={mailActions}
-					firestore={firestore}
-					scrollToBottom={scrollToLastMessage}
-					viewType={viewType}
-					hasPermissionToEdit={hasPermissionToEdit}
-					ref={ref}
-				/>
-			) }
-			<div className={styles.footer}>
+				)}
+			</div>
+			<div className={styles.omni_channel_text_footer}>
 				{(channel_type !== 'email' || actionType) && (
 					<Footer
 						canMessageOnBotSession={canMessageOnBotSession}
@@ -116,4 +131,4 @@ function MessageConversations({
 	);
 }
 
-export default forwardRef(MessageConversations);
+export default MessageConversations;
