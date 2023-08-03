@@ -24,7 +24,7 @@ export const getGraphData = ({
 			{
 				label : 'Deviation (Revenue)',
 				value : revenueDeviation,
-				color : null,
+				color : 'inherit',
 				show  : isDeviationVisible,
 			},
 		],
@@ -47,7 +47,7 @@ export const getGraphData = ({
 			{
 				label : 'Deviation (Cost)',
 				value : costDeviation,
-				color : null,
+				color : 'inherit',
 				show  : isDeviationVisible,
 			},
 		],

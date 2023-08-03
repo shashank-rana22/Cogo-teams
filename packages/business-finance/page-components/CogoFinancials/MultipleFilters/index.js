@@ -16,11 +16,11 @@ function MultipleFilters({ filter = {}, setFilter = () => {} }) {
 					<RenderFilters
 						filter={filter}
 						setFilter={setFilter}
-						setVisible={setVisible}
 					/>
 				)}
 				placement="bottom"
 				interactive
+				onClickOutside={() => setVisible(false)}
 			>
 				<div
 					className={styles.filter}

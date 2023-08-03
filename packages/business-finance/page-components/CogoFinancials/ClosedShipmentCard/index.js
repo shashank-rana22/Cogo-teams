@@ -95,7 +95,7 @@ function ClosedShipmentCard({
 				>
 					<div
 						className={styles.responsive_graph_circular}
-						style={{ height: isAdditonalView ? '200px' : null }}
+						style={{ height: isAdditonalView ? '186px' : null }}
 					>
 						<ResponsiveRadialBar
 							data={data}
@@ -141,29 +141,24 @@ function ClosedShipmentCard({
 								key={item?.id}
 								className={styles.graph_row}
 							>
-								{(item.children || []).map((child) => {
-									if (!child.show) return null;
-									return (
+								{(item.children || []).map((child) => (
+									<div key={child.label}>
 										<div
-											key={child.label}
+											className={styles.graph_label}
 										>
-											<div
-												className={styles.graph_label}
-											>
-												{child.color && (
-													<span
-														className={styles.label_circle}
-														style={{ backgroundColor: child.color }}
-													/>
-												)}
-												{child.label}
-											</div>
-											<div className={styles.graph_value}>
-												{child.value}
-											</div>
+											{child.color && (
+												<span
+													className={styles.label_circle}
+													style={{ backgroundColor: child.color }}
+												/>
+											)}
+											{child.label}
 										</div>
-									);
-								})}
+										<div className={styles.graph_value}>
+											{child.value}
+										</div>
+									</div>
+								))}
 							</div>
 						))}
 

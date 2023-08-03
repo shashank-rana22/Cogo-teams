@@ -30,7 +30,6 @@
 
 .stathead {
 	font-size: var(--font-size-lg);
-	font-weight: 600;
 }
 
 .value {
@@ -92,7 +91,7 @@
 }
 
 .maincard {
-	padding-right: 60px;
+	padding: 0 24px;
 }
 
 .sidestats {

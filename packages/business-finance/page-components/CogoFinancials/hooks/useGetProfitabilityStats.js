@@ -2,7 +2,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
-import { upperCase } from '@cogoport/utils';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
@@ -68,7 +68,7 @@ const useGetProfitabilityStats = ({
 			endDate       : timeRange === 'custom' ? getFormattedDate(customEndDate) : endDate,
 			currency      : currency || DEFAULT_CURRENCY,
 			parentService : segment,
-			service,
+			service       : !isEmpty(service) ? service.toUpperCase() : undefined,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
 			channel,
 		};

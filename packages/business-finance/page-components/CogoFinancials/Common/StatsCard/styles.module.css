@@ -6,7 +6,7 @@
 }
 
 .container:hover {
-	background: var(--color-primary-error-red-5);
+	background: rgb(255 236 236);
 }
 
 .header {
@@ -36,7 +36,6 @@
 
 .stathead {
 	font-size: var(--font-size-lg);
-	font-weight: 600;
 }
 
 .value {

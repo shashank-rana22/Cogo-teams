@@ -6,7 +6,7 @@
 .header_combine {
 	display: flex;
 	justify-content: space-between;
-	width: 90%;
+	width: 100%;
 	margin: 20px 0;
 }
 

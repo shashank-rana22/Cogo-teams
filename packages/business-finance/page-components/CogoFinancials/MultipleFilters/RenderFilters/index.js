@@ -35,7 +35,6 @@ const CURRENCY_OPTIONS = Object.values(GLOBAL_CONSTANTS.currency_code).map((item
 
 function RenderFilters({
 	filter = {}, setFilter = () => {},
-	setVisible = () => {},
 }) {
 	const [activeFilter, setActiveFilter] = useState('currency');
 
@@ -57,14 +56,7 @@ function RenderFilters({
 						Reset
 
 					</Button>
-					<Button
-						themeType="secondary"
-						style={{ marginLeft: '8px' }}
-						onClick={() => setVisible(false)}
-					>
-						Close
 
-					</Button>
 				</div>
 			</div>
 

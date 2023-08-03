@@ -5,12 +5,12 @@
 }
 
 .financially_closed_container:hover {
-	background: var(--color-primary-error-red-5);
+	background: rgb(255 236 236);
 }
 
 .responsive_graph_circular {
 	width: 50%;
-	height: 90%;
+	height: 86%;
 	margin: 10px 0;
 
 	& > div:first-of-type {
@@ -36,7 +36,7 @@
 }
 
 .graph_value {
-	margin: 0 0 8px 8px;
+	margin: 0 0 8px 20px;
 	font-size: var(--font-size-xl);
 	font-weight: 600;
 }
