@@ -1,21 +1,21 @@
 import { getDate } from '../../../utils/getDate';
-import TIMELINE_EDITABLE from '../config/timelineEditable.json';
 import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
-const controls = ({ primary_service, departureDate, timelineData = [] }) => {
+const controls = ({
+	primary_service = {},
+	departureDate = '',
+	timelineData = [],
+	defaultEditable = false,
+}) => {
 	const modifiedPrimaryService = {
 		...primary_service || {},
 		schedule_departure : getDepartureArrivalDate(primary_service, 'departure'),
 		schedule_arrival   : getDepartureArrivalDate(primary_service, 'arrival'),
 	};
-	const { state, origin_port, destination_port, mark_containers_gated_out } = modifiedPrimaryService || {};
+	const { origin_port, destination_port, mark_container_gated_out } = modifiedPrimaryService || {};
 
-	const disabledState = state === 'vessel_arrived'
-		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
-
-	const icdDisabledState = mark_containers_gated_out === 'completed'
-		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
+	const disabledState = !defaultEditable;
 
 	let deviated_departure;
 	let deviated_arrival;
@@ -40,13 +40,13 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		{
 			name       : 'schedule_departure',
 			label      : 'Actual time of departure',
-			lowerlabel : deviated_departure ? `Fluctuated time of departure: ${deviated_departure}` : '',
+			lowerLabel : deviated_departure ? `Fluctuated time of departure: ${deviated_departure}` : '',
 			maxDate    : null,
 		},
 		{
 			name       : 'schedule_arrival',
 			label      : 'Actual time of arrival',
-			lowerlabel : deviated_arrival && deviated_departure
+			lowerLabel : deviated_arrival && deviated_departure
 				&& new Date(deviated_arrival) > new Date(deviated_departure)
 				? `Fluctuated time of arrival: ${deviated_arrival}` : '',
 			maxDate : null,
@@ -55,12 +55,12 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		},
 		...(origin_port?.is_icd ? [{
 			name  : 'origin_icd_departed_at',
-			label : 'Departure from ICD Port date',
+			label : 'Departure from ICD Port Date',
 		}] : []),
 		...(destination_port?.is_icd ? [{
 			name    : 'arrived_at_destination_icd_at',
-			label   : 'Arrived At ICD Port date',
-			disable : icdDisabledState,
+			label   : 'Arrived At ICD Port Date',
+			disable : !!mark_container_gated_out,
 		}] : []),
 	];
 
@@ -70,16 +70,19 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		const { name, label, maxDate = departureDate, disable = disabledState } = control || {};
 		const prefillValue = getDate(modifiedPrimaryService[name]);
 
-		finalControls[index].maxDate = maxDate;
-		finalControls[index].disable = disable;
-		finalControls[index].dateFormat = 'MMM dd, yyyy, hh:mm:ss aaa';
-		finalControls[index].placeholder = 'Select Date';
-		finalControls[index].isPreviousDaysAllowed = true;
-		finalControls[index].showTimeSelect = true;
-		finalControls[index].rules = {
-			required: {
-				value   : !!prefillValue,
-				message : `${label} is required`,
+		finalControls[index] = {
+			...finalControls[index],
+			maxDate,
+			disable,
+			dateFormat            : 'MMM dd, yyyy, hh:mm:ss aaa',
+			placeholder           : 'Select Date',
+			isPreviousDaysAllowed : true,
+			showTimeSelect        : true,
+			rules                 : {
+				required: {
+					value   : !!prefillValue,
+					message : `${label} is required`,
+				},
 			},
 		};
 
