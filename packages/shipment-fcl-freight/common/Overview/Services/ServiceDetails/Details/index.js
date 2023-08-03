@@ -1,7 +1,8 @@
 import { cl, Button } from '@cogoport/components';
+import ShipmentDetailContext from '@cogoport/context/page-components/ShipmentDetailContext';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, getByKey, omit } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import getConfigs from '../../configurations/get-configs';
 
@@ -12,11 +13,14 @@ const INITIAL_LENGTH = 1;
 const SLICE_VALUE = 1;
 
 function Details({ serviceData = [], containerDetails = [] }) {
+	const { primary_service } = useContext(ShipmentDetailContext);
+
+	const { service_type, state, documents } = serviceData[GLOBAL_CONSTANTS.zeroth_index];
+
 	const {
-		service_type, state, free_days_demurrage_destination,
-		free_days_demurrage_origin, free_days_detention_destination, free_days_detention_origin,
-		documents,
-	} = serviceData[GLOBAL_CONSTANTS.zeroth_index];
+		free_days_demurrage_destination, free_days_demurrage_origin,
+		free_days_detention_destination, free_days_detention_origin,
+	} = primary_service || {};
 
 	const SERVICE_INITIAL_KEYS = {};
 
