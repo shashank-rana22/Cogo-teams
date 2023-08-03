@@ -1,4 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { useContext } from 'react';
 
 import useGetOrganization from '../../../hooks/useGetOrganization';
@@ -63,7 +64,9 @@ function ExecuteTask({
 		: {};
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return (
+			<ThreeDotLoader message="Fetching Task" />
+		);
 	}
 
 	if (
@@ -194,6 +197,11 @@ function ExecuteTask({
 		);
 	}
 
+	if (
+		task?.task === 'generate_cargo_insurance') {
+		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+	}
+
 	if (task.task === 'upload_compliance_documents') {
 		return (
 			<UploadComplianceDocs
@@ -209,7 +217,7 @@ function ExecuteTask({
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
-	if (task.task === 'mark_confirmed'
+	if (task.task === 'mark_confirmed' && task.service_type === 'fcl_freight_service'
 	&& !orgData?.data?.category_types?.includes('shipping_line')
 	&& orgData?.data?.category_types?.some((value) => INCLUDED_ORG.includes(value))
         && primary_service?.trade_type === 'export'
@@ -217,6 +225,7 @@ function ExecuteTask({
 		return (
 			<ConfirmFreightBooking
 				task={task}
+				getApisData={taskConfigData?.apis_data}
 				onCancel={onCancel}
 				services={servicesList}
 				taskListRefetch={taskListRefetch}

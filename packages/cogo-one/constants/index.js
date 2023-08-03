@@ -63,6 +63,18 @@ export const SOURCE_ICON_MAPPING = {
 		width={20}
 		height={20}
 	/>,
+	lead_user: <Image
+		src={GLOBAL_CONSTANTS.image_url.sign_up_failed}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
+	organization: <Image
+		src={GLOBAL_CONSTANTS.image_url.kyc_event}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
 };
 
 export const TAGS_COLORS = ['#FEF3E9', '#F3FAFA'];
@@ -78,6 +90,19 @@ export const VOICE_ICON_MAPPING = {
 	not_connected : GLOBAL_CONSTANTS.image_url.not_connected_svg,
 	outgoing      : GLOBAL_CONSTANTS.image_url.outgoing_svg,
 	incoming      : GLOBAL_CONSTANTS.image_url.incoming_svg,
+};
+
+export const CALL_HISTORY_AUDIO_ICONS = {
+	user: {
+		start      : GLOBAL_CONSTANTS.image_url.start_user_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_user_audio,
+		compStyles : { borderTopLeftRadius: '0px', background: '#FFFFFF' },
+	},
+	agent: {
+		start      : GLOBAL_CONSTANTS.image_url.start_agent_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_agent_audio,
+		compStyles : { borderTopRightRadius: '0px', background: '#FFFCE6' },
+	},
 };
 
 export const USER_ACTIVITY_MAPPING = {
@@ -290,9 +315,9 @@ export const MAIL_REPLY_TYPE = [
 export const PAGE_LIMIT = 50;
 
 export const FILTER_KEYS_MAPPING = {
-	requested  : { Statuses: 'reject_requested,resolve_requested' },
-	unresolved : { Status: 'unresolved' },
-	closed     : { Status: 'closed' },
+	requested  : { Statuses: 'reject_requested,resolve_requested,pending' },
+	unresolved : { Statuses: 'unresolved,escalated' },
+	closed     : { Statuses: 'closed,overdue' },
 };
 
 export const PRIORITY_MAPPING = {
@@ -322,3 +347,18 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
+
+export const OFFLINE_REASONS_OPTIONS = [
+	{
+		label : 'Lunch Break',
+		value : 'lunch_break',
+	},
+	{
+		label : 'Snack Break',
+		value : 'snack_break',
+	},
+	{
+		label : 'Others',
+		value : 'others',
+	},
+];

@@ -53,11 +53,13 @@ import {
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncListExpenseCategories,
 	asyncListAllManagers,
 	asyncFieldsListAgents,
 	asyncListShipmentServices,
 	asyncListShipments,
 	asyncListShipmentPendingTasks,
+	asyncIncidentSubtypeList,
 	asyncFieldsLeadOrganization,
 } from '../../../utils/getAsyncFields';
 
@@ -130,13 +132,17 @@ const keyAsyncFieldsParamsMapping = {
 	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
+	list_expense_category                : asyncListExpenseCategories,
 	list_all_managers                    : asyncListAllManagers,
 	list_chat_agents                     : asyncFieldsListAgents,
 	list_shipment_services               : asyncListShipmentServices,
 	list_shipments                       : asyncListShipments,
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
+	list_incident_subtype                : asyncIncidentSubtypeList,
 	list_lead_organizations              : asyncFieldsLeadOrganization,
 };
+
+const SINGLE_ENTITY = 1;
 
 function AsyncSelect(props) {
 	const {
@@ -148,6 +154,7 @@ function AsyncSelect(props) {
 		getSelectedOption,
 		microService = '',
 		onOptionsChange,
+		isSingleEntity,
 		...rest
 	} = props;
 
@@ -168,6 +175,9 @@ function AsyncSelect(props) {
 		microService : microService || defaultParams.microService,
 	});
 
+	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'
+	&& getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
+
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
 		if (multiple) {
@@ -187,8 +197,10 @@ function AsyncSelect(props) {
 
 	return (
 		<Element
-			{...rest}
+			disabled={disabled}
 			{...getAsyncOptionsProps}
+			{...rest}
+
 		/>
 	);
 }

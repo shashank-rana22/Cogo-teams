@@ -1132,6 +1132,16 @@ const partner = {
 			service_name : 'lead',
 		},
 		{
+			api          : 'get_organization_search_port_pair_stats',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_organization_search_country_stats',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'organization_kam_allocation_migration',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1199,9 +1209,19 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_lead_communication_log_info',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'get_organizations_communication_log_stats',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_lead_communication_log_stats',
+			access_type  : 'private',
+			service_name : 'lead',
 		},
 		{
 			api          : 'get_organizations_segmentation_stats',
@@ -8240,10 +8260,36 @@ const partner = {
 			module       : 'Expenses',
 			service_name : 'vendor',
 		},
+		{
+			api         : 'get_purchase_expense_expense_category',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_configuration_by_id',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
+		{
+			api         : 'get_purchase_expense_by_id',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
+		{
+			api         : 'get_incident_management_incident_get_incident_approval_management',
+			access_type : 'private',
+			module      : 'Expenses',
+		},
 	],
 	my_incident: [
 		{
 			api         : 'get_incident_management_incident_list',
+			access_type : 'private',
+			module      : 'myIncident',
+			feature     : 'myIncident',
+		},
+		{
+			api         : 'get_incident_management_incident_list_my_incident',
 			access_type : 'private',
 			module      : 'myIncident',
 			feature     : 'myIncident',
@@ -8722,6 +8768,42 @@ const partner = {
 		},
 		{
 			api         : 'post_payments_journal_voucher_reject',
+			access_type : 'private',
+		},
+		{
+			api         : 'list_partner_users',
+			access_type : 'private',
+		},
+		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_incident_management_incident_incident_sub_type',
+			access_type : 'private',
+		},
+		{
+			api         : 'patch_incident_management_incident_by_id',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_incident_management_incident_approval',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_incident_management_incident_approval_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_incident_management_incident_approval',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_purchase_expense_expense_configuration_by_id',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_incident_management_incident_send_overhead_mail',
 			access_type : 'private',
 		},
 	],
@@ -10331,8 +10413,8 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api        	 : 'create_campaign_email_configuration',
-			access_type	 : 'private',
+			api          : 'create_campaign_email_configuration',
+			access_type  : 'private',
 			service_name : 'campaign',
 		},
 		{
@@ -12648,6 +12730,11 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'send_users_bulk_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'send_shipment_document_notification',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -12661,6 +12748,11 @@ const partner = {
 			api          : 'get_omnichannel_agent_types',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'get_available_service_providers',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'list_cogoone_flash_rates_logs',
@@ -12686,6 +12778,16 @@ const partner = {
 			api          : 'update_agent_work_preference',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'list_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_lead_organization',
+			access_type  : 'private',
+			service_name : 'lead',
 		},
 	],
 	analytics_dashboard: [
@@ -13015,7 +13117,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'delete_payments_dunning_delete_dunning_cycle',
+			api         : 'delete_payments_dunning_dunning_cycle',
 			access_type : 'private',
 		},
 		{
@@ -13070,6 +13172,10 @@ const partner = {
 			api         : 'get_payments_dunning_card_data',
 			access_type : 'private',
 		},
+		{
+			api         : 'put_payments_dunning_status',
+			access_type : 'private',
+		},
 	],
 	ftl_admin: [
 		{
@@ -13102,8 +13208,32 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'list_kam_desk_surface_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_shipment_invoice_preference',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_sell_quotations',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+
 	],
 	printing_desk: [
+		{
+			api         : 'post_air_coe_documents',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_documents',
+			access_type : 'private',
+		},
 		{
 			api         : 'get_air_coe_pending_tasks_list',
 			access_type : 'private',

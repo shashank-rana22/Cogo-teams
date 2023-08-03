@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -8,7 +8,8 @@ import styles from './styles.module.css';
 
 function FooterCard({ entityCode = '', bulkIrnGenerate = () => {}, bulkIrnLoading = false, checkedRows = [] }) {
 	const [confirmation, setConfirmation] = useState(false);
-	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].labels.irn_label;
+
+	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
 	return (
 		<div className={styles.footer_div}>
@@ -30,7 +31,7 @@ function FooterCard({ entityCode = '', bulkIrnGenerate = () => {}, bulkIrnLoadin
 				</Button>
 			</div>
 			<ConfirmationModal
-				IrnLabel={irnLabel}
+				entityCode={entityCode}
 				checkedRows={checkedRows}
 				bulkIrnGenerate={bulkIrnGenerate}
 				bulkIrnLoading={bulkIrnLoading}

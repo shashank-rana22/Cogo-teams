@@ -1,3 +1,4 @@
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
@@ -11,7 +12,8 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
 
 	const entityOptions = Object.keys(entityData).map((entity) => {
-		const isEligible = entityData[entity].feature_supported.includes('dunning');
+		const isEligible = ENTITY_FEATURE_MAPPING[entity].feature_supported.includes('dunning');
+
 		return ({
 			label    : `${entity} (${entityData[entity].currency})`,
 			name     : String(entity),
@@ -98,14 +100,15 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			span    : 12,
 			groupBy : [
 				{
-					label    : 'Service Type',
-					name     : 'serviceType',
-					type     : 'multiSelect',
-					prefix   : () => {},
-					disabled : isEditMode,
-					options  : SERVICE_OPTIONS,
-					style    : { width: '288px' },
-					span     : 4,
+					label       : 'Service Type',
+					name        : 'serviceType',
+					placeholder : 'All(default)',
+					type        : 'multiSelect',
+					prefix      : () => null,
+					disabled    : true,
+					options     : SERVICE_OPTIONS,
+					style       : { width: '288px' },
+					span        : 4,
 				},
 				{
 					name        : 'creditController',
@@ -191,7 +194,15 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			type     : 'radioGroup',
 			value    : formData?.triggerType || 'ONE_TIME',
 			onChange : (value) => {
-				setFormData((prev) => ({ ...prev, triggerType: value }));
+				if (value === 'PERIODIC') {
+					setFormData((prev) => ({
+						...prev,
+						triggerType : value,
+						frequency   : 'DAILY',
+					}));
+				} else {
+					setFormData((prev) => ({ ...prev, triggerType: value }));
+				}
 			},
 			radioOptions: [
 				{ name: 'ONE_TIME', value: 'ONE_TIME', label: 'One Time' },

@@ -22,7 +22,7 @@ const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) =>
 			filters: {
 				state                    : SHIPMENT_STATE_MAPPINGS[shipmentStateTab],
 				q                        : searchQuery,
-				stakeholder_service_type : 'ftl_freight_service',
+				stakeholder_service_type : `${serviceActiveTab}_service`,
 				...filters,
 			},
 		},

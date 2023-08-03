@@ -9,6 +9,7 @@ import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
 import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
+import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
@@ -22,6 +23,7 @@ import employeeDashboard from './config/employee-dashboard';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
+import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import groundOps from './config/ground-ops';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
@@ -36,6 +38,7 @@ import managerDashboard from './config/manager-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
+import notifications from './config/notifications';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
 import referral from './config/referral';
@@ -135,6 +138,9 @@ const routeConfig = {
 	...igmDesk,
 	...airlinePluginBooking,
 	...bookingDeskSurface,
+	...ftlFieldSreviceOps,
+	...notifications,
+	...centralisedCustomerService,
 };
 
 export default routeConfig;

@@ -43,6 +43,7 @@ function AgentDetails({
 	userId: agentId = '',
 	viewType = '',
 	setActiveTab = () => {},
+	mailProps = {},
 }) {
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
@@ -66,10 +67,11 @@ function AgentDetails({
 		user_type,
 		id = '',
 		kyc_status = '',
+		lead_user_details = {},
+		user_details = {},
 	} = formattedMessageData || {};
 
 	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
-
 	const {
 		deleteGroupMember,
 		approveGroupRequest,
@@ -89,6 +91,10 @@ function AgentDetails({
 		organization_id: voiceOrgId = '',
 	} = activeVoiceCard || {};
 
+	const userMessageMobileNumber = mobile_no || user_details?.whatsapp_number_eformat
+	|| user_details?.mobile_number_eformat || lead_user_details?.whatsapp_number_eformat
+	|| lead_user_details?.mobile_number_eformat;
+
 	const DATA_MAPPING = {
 		voice: {
 			userId        : user_data?.id,
@@ -100,16 +106,15 @@ function AgentDetails({
 		},
 		message: {
 			userId        : user_id,
-			name          : messageName,
-			userEmail     : email,
-			mobile_number : mobile_no,
+			name          : messageName || lead_user_details?.name,
+			userEmail     : email || lead_user_details?.email,
+			mobile_number : userMessageMobileNumber,
 			orgId         : organization_id,
-			leadUserId    : lead_user_id,
+			leadUserId    : lead_user_id || lead_user_details?.lead_user_id,
 		},
 	};
 
 	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
-
 	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({
 		setShowError,
 		sender,
@@ -129,14 +134,9 @@ function AgentDetails({
 		}
 	};
 
-	const handleSummary = () => {
-		setShowMore(true);
-		setActiveSelect('user_activity');
-	};
+	const handleSummary = () => { setShowMore(true); setActiveSelect('user_activity'); };
 
-	const setActiveMessage = (val) => {
-		switchUserChats({ val, firestore, setActiveTab });
-	};
+	const setActiveMessage = (val) => { switchUserChats({ val, firestore, setActiveTab }); };
 
 	if (!userId && !leadUserId && !mobile_no) {
 		return (
@@ -238,6 +238,7 @@ function AgentDetails({
 						leadLoading={leadLoading}
 						activeRoomLoading={activeRoomLoading}
 						viewType={viewType}
+						mailProps={mailProps}
 					/>
 				</>
 			)}

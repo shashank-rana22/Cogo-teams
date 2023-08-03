@@ -9,7 +9,7 @@ import Details from '../Details';
 
 import styles from './styles.module.css';
 
-function Header({ serviceData = [] }) {
+function Header({ serviceData = [], containerDetails = [] }) {
 	const { stakeholderConfig } = useContext(ShipmentDetailContext);
 
 	const can_edit_cancel_service = !!stakeholderConfig?.overview?.can_edit_cancel_service;
@@ -69,7 +69,7 @@ function Header({ serviceData = [] }) {
 			</section>
 
 			{showDetails[SERVICE_DATA_FIRST.display_label]
-				? <Details serviceData={serviceData} />
+				? <Details serviceData={serviceData} containerDetails={containerDetails} />
 				: null}
 		</header>
 

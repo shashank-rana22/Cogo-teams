@@ -9,11 +9,10 @@ import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
-import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
+import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
@@ -24,8 +23,8 @@ import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
 import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
+import PortPairOrgFilters from './PortPairOrgFilters';
 import ProfileDetails from './ProfileDetails';
-import PunchInOut from './PunchInOut';
 import styles from './styles.module.css';
 
 function CogoOne() {
@@ -59,7 +58,9 @@ function CogoOne() {
 	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 	const [openKamContacts, setOpenKamContacts] = useState(false);
-	const [openInactiveModal, setOpenInactiveModal] = useState(false);
+	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
+	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
+	const [autoAssignChats, setAutoAssignChats] = useState(true);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -74,18 +75,13 @@ function CogoOne() {
 	const {
 		fetchWorkStatus = () => {},
 		agentWorkStatus = {},
+		preferenceLoading = false,
 	} = useGetAgentPreference();
+
+	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
-
-	const {
-		loading: statusLoading,
-		updateUserStatus = () => {},
-	} = useCreateUserInactiveStatus({
-		fetchworkPrefernce : fetchWorkStatus,
-		setOpenModal       : setOpenInactiveModal,
-	});
 
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 
@@ -105,10 +101,20 @@ function CogoOne() {
 			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
 	};
-	const { hasNoFireBaseRoom = false } = activeTab || {};
+
+	const commonProps = {
+		setSendBulkTemplates,
+		setActiveTab,
+		selectedAutoAssign,
+		setAutoAssignChats,
+	};
+
+	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
+
+	const { user_id = '' } = tabData || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
-	const orgId = activeTab === 'message'
+	const orgId = activeTab?.tab === 'message'
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
 
@@ -127,13 +133,18 @@ function CogoOne() {
 			<HeaderBar
 				firestore={firestore}
 				viewType={viewType}
+				fetchWorkStatus={fetchWorkStatus}
+				agentStatus={agentWorkStatus}
+				data={data}
+				agentTimeline={agentTimeline}
+				preferenceLoading={preferenceLoading}
+				timelineLoading={timelineLoading}
 			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
 					<Customers
 						viewType={viewType}
 						activeTab={activeTab}
-						setActiveTab={setActiveTab}
 						userId={userId}
 						setModalType={setModalType}
 						modalType={modalType}
@@ -144,18 +155,30 @@ function CogoOne() {
 						workPrefernceLoading={workPrefernceLoading}
 						setOpenKamContacts={setOpenKamContacts}
 						agentStatus={agentWorkStatus}
-						statusLoading={statusLoading}
-						updateUserStatus={updateUserStatus}
-						openInactiveModal={openInactiveModal}
-						setOpenInactiveModal={setOpenInactiveModal}
 						fetchworkPrefernce={fetchWorkStatus}
+						agentTimeline={agentTimeline}
+						setSelectedAutoAssign={setSelectedAutoAssign}
+						autoAssignChats={autoAssignChats}
+						{...commonProps}
 					/>
 				</div>
+
+				{sendBulkTemplates ? (
+					<PortPairOrgFilters
+						setSelectedAutoAssign={setSelectedAutoAssign}
+						sendBulkTemplates={sendBulkTemplates}
+						{...commonProps}
+					/>
+				) : null}
 
 				{isEmpty(activeTab?.data)
 					? (
 						<div className={styles.empty_page}>
-							<EmptyChatPage activeTab={activeTab} />
+							<EmptyChatPage
+								activeTab={activeTab}
+								viewType={viewType}
+								setActiveTab={setActiveTab}
+							/>
 						</div>
 					) : (
 						<>
@@ -179,7 +202,7 @@ function CogoOne() {
 
 							{activeTab?.tab !== 'mail' && (
 								<div className={cl`${styles.user_profile_layout} 
-								${hasNoFireBaseRoom ? styles.disable_user_profile : ''}`}
+								${(hasNoFireBaseRoom && !user_id) ? styles.disable_user_profile : ''}`}
 								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
@@ -196,8 +219,9 @@ function CogoOne() {
 										setActiveTab={setActiveTab}
 										formattedMessageData={formattedMessageData}
 										orgId={orgId}
+										mailProps={mailProps}
 									/>
-									{hasNoFireBaseRoom && <div className={styles.overlay_div} />}
+									{(hasNoFireBaseRoom && !user_id) && <div className={styles.overlay_div} />}
 								</div>
 							)}
 						</>
@@ -216,13 +240,6 @@ function CogoOne() {
 				setActiveTab={setActiveTab}
 				orgId={orgId}
 			/>
-
-			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out && (
-				<PunchInOut
-					fetchworkPrefernce={fetchWorkStatus}
-					agentStatus={agentWorkStatus}
-				/>
-			)}
 		</>
 	);
 }
