@@ -181,7 +181,7 @@ function AgentDetails({
 
 			<ContactVerification leadUserId={leadUserId} userId={userId} loading={loading} userData={userData} />
 
-			{activeTab === 'message'
+			{(activeTab === 'message' && !loading)
 			&& (
 				<AgentQuickActions
 					userEmail={userEmail}
