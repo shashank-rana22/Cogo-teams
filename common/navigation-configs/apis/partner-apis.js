@@ -8950,6 +8950,20 @@ const partner = {
 			access_type : 'private',
 		},
 	],
+	cogo_financials: [
+		{
+			api         : 'get_common_job_profitability_stats',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_profitability_service_level_stats',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_profitability_list_shipment',
+			access_type : 'private',
+		},
+	],
 	settlement: [
 		{
 			api          : 'list_organizations',
@@ -12356,6 +12370,11 @@ const partner = {
 			api          : 'list_locations',
 			access_type  : 'private',
 			service_name : 'location',
+		},
+		{
+			api          : 'get_air_freight_rate_surcharge',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
 		},
 		{
 			api          : 'list_operators',

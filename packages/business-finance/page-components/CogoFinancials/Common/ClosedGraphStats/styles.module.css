@@ -1,0 +1,34 @@
+.container {
+	padding: 12px 36px;
+	background-color: #fff;
+}
+
+.header_combine {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin: 20px 0;
+}
+
+.graphs {
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+	overflow: scroll;
+}
+
+.graph_label {
+	margin: 0 16px 0 8px;
+}
+
+.graph_label_container {
+	display: flex;
+	align-items: center;
+}
+
+.dot {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+}
