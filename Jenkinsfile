@@ -45,7 +45,7 @@ pipeline {
 				cache(caches: [arbitraryFileCache(path: 'node_modules')], defaultBranch: 'feat/jenkinsfile', maxCacheSize: 3000) {
 					nodejs(nodeJSInstallationName: 'node-18') {
                         SERVER_IP = sh (script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout:true).trim()
-						sh "scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} ${SERVER_NAME}@${SERVER_IP}:.env.admin .env"
+						sh "scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}/.env.admin .env"
 						sh (script: "echo ${NPMRC} >> .npmrc")
 						sh 'pnpm i --frozen-lockfile'
 					}
@@ -79,9 +79,9 @@ pipeline {
                 }
 
                 // get private IP of server
-                script {
-                    SERVER_IP = sh (script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout:true).trim()
-                }
+                // script {
+                //     SERVER_IP = sh (script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout:true).trim()
+                // }
 
                 // ssh into server ip and run deploy commands
                 sh """ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} \" sed -i \'/^ADMIN_TAG/s/=.*\$/=${COMMIT_ID}/g\' /home/${SERVER_NAME}/.env.front && \
