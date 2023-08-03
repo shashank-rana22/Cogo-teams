@@ -13,6 +13,7 @@ const MAIL_RECIEPIENTS_MAPPING = [
 		value : 'bccrecipients',
 	},
 ];
+
 const DISABLE_TYPE_MAPPING = {
 	toUserEmail: ['reply'],
 };

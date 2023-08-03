@@ -16,6 +16,7 @@ function MessageBody({
 
 	return (
 		<Component
+			key={message_type}
 			message={message}
 			mediaUrl={media_url}
 			hasProfanity={hasProfanity}

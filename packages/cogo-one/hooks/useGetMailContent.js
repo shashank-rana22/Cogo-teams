@@ -28,7 +28,7 @@ function useGetMailContent({ messageId, source = '' }) {
 		method : 'get',
 	}, { manual: true });
 
-	const [{ loading:attachmentLoading }, attachmentTrigger] = useLensRequest({
+	const [{ loading: attachmentLoading }, attachmentTrigger] = useLensRequest({
 		url    : '/get_attachments',
 		method : 'get',
 	}, { manual: true });

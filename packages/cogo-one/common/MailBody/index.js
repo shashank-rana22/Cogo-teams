@@ -82,7 +82,7 @@ function MailBody({
 						onClick={getEmailBody}
 						role="presentation"
 						style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
-						size=""
+						size="xs"
 						className={styles.dots_body}
 						themeType="tertiary"
 					>

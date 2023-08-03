@@ -2,15 +2,18 @@ import { IcMDelete } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function deletefile(
-	{ uploadedFiles, fileUrl, uploaderRef = {} },
-) {
+function deletefile({
+	uploadedFiles,
+	fileUrl,
+	uploaderRef = {},
+}) {
 	if (typeof uploadedFiles === 'string') {
 		uploaderRef.current?.externalHandleDelete(null);
 		return null;
 	}
 
 	const filteredFiles = uploadedFiles.filter((eachFile) => eachFile !== fileUrl);
+
 	uploaderRef.current?.externalHandleDelete(filteredFiles);
 
 	return filteredFiles;
@@ -34,9 +37,14 @@ function UploadedFiles({ uploadedFiles = [], id = '', setDraftUploadedFiles = ()
 					className={styles.delete_icon}
 					onClick={(e) => {
 						e.stopPropagation();
-						setDraftUploadedFiles((p) => ({
-							...p,
-							[id]: deletefile({ fileUrl, uploadedFiles: p?.[id], uploaderRef }),
+
+						setDraftUploadedFiles((prev) => ({
+							...prev,
+							[id]: deletefile({
+								fileUrl,
+								uploadedFiles: prev?.[id],
+								uploaderRef,
+							}),
 						}));
 					}}
 				/>

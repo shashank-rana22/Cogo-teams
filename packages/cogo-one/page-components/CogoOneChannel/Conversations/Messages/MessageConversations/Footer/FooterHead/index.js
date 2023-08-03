@@ -104,7 +104,7 @@ function FooterHead({
 								</div>
 								<Input
 									value={emailState?.subject}
-									onChange={(e) => setEmailState((p) => ({ ...p, subject: e }))}
+									onChange={(e) => setEmailState((prev) => ({ ...prev, subject: e }))}
 									size="xs"
 									className={styles.styled_input}
 								/>
@@ -112,7 +112,7 @@ function FooterHead({
 							<Button
 								size="md"
 								themeType="linkUi"
-								onClick={() => setOpenReceipents((p) => !p)}
+								onClick={() => setOpenReceipents((prev) => !prev)}
 							>
 								{openReceipients ? 'hide' : 'cc'}
 							</Button>

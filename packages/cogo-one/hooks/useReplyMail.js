@@ -32,7 +32,6 @@ function useReplyMail(mailProps) {
 	const {
 		setEmailState = () => {},
 		buttonType = 'send_mail',
-
 		setButtonType = () => {},
 		userId = '',
 	} = mailProps;

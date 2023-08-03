@@ -20,7 +20,7 @@ function ReceipientComp({ array = [], label = '' }) {
 				:
 			</div>
 			{array?.map((eachEmail) => {
-				const { userName:senderName } = getUserNameFromEmail({ query: eachEmail });
+				const { userName: senderName } = getUserNameFromEmail({ query: eachEmail });
 				return (
 					<Tooltip
 						placement="bottom"
@@ -49,7 +49,7 @@ function MailHeader({ eachMessage = {}, setMailActions = () => {}, hasPermission
 
 	const { userName } = getUserNameFromEmail({ query: sender });
 
-	const senderName = conversation_type === 'sent' ? userName : send_by || userName;
+	const senderName = conversation_type === 'sent' ? userName : (send_by || userName);
 
 	const RECEIPIENT_MAPPING = [
 		{ label: 'To', array: to_mails },
@@ -69,7 +69,7 @@ function MailHeader({ eachMessage = {}, setMailActions = () => {}, hasPermission
 			<div>
 				<div className={styles.icon_flex}>
 					{BUTTON_MAPPING.map((item) => {
-						const { key, icon:Icon } = item || {};
+						const { key, icon: Icon } = item || {};
 
 						if (!Icon || !hasPermissionToEdit) {
 							return null;

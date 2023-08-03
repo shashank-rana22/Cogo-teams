@@ -78,8 +78,8 @@ function Footer({
 	const hasUploadedFiles = !isEmpty(draftUploadedFiles?.[id]);
 
 	const resetEmailStates = () => {
-		setDraftMessages((p) => ({ ...p, [id]: '' }));
-		setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
+		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
+		setDraftUploadedFiles((prev) => ({ ...prev, [id]: undefined }));
 		setEmailState({
 			toUserEmail   : [email],
 			subject       : '',
@@ -128,9 +128,21 @@ function Footer({
 	});
 
 	const SEND_FUNC_MAPPING = {
-		whatsapp : { function: sendChatMessage, sendMessageLoading: messageLoading, sendOnEnter: true },
-		email    : { function: sendMail, sendMessageLoading: mailLoading, sendOnEnter: false },
-		default  : { function: sendChatMessage, sendMessageLoading: messageLoading, sendOnEnter: true },
+		whatsapp: {
+			function           : sendChatMessage,
+			sendMessageLoading : messageLoading,
+			sendOnEnter        : true,
+		},
+		email: {
+			function           : sendMail,
+			sendMessageLoading : mailLoading,
+			sendOnEnter        : false,
+		},
+		default: {
+			function           : sendChatMessage,
+			sendMessageLoading : messageLoading,
+			sendOnEnter        : true,
+		},
 	};
 
 	const {
@@ -155,7 +167,7 @@ function Footer({
 			type : 'instant_messages',
 			data : {
 				updateMessage: (val) => {
-					setDraftMessages((p) => ({ ...p, [id]: val }));
+					setDraftMessages((prev) => ({ ...prev, [id]: val }));
 					setOpenModal({ type: null, data: {} });
 				},
 				sendCommunicationTemplate,
