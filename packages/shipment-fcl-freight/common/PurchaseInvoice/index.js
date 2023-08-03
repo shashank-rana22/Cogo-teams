@@ -2,7 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { useContext } from 'react';
 
-import OverviewManageServices from '../Overview/OverviewManageServices';
+// import OverviewManageServices from '../Overview/OverviewManageServices';
 
 import styles from './styles.module.css';
 
@@ -11,7 +11,7 @@ function PurchaseInvoice() {
 
 	return (
 		<main className={styles.main}>
-			<OverviewManageServices isOpen={false} />
+			{/* <OverviewManageServices isOpen={false} /> */}
 			<PurchaseInvoicing
 				shipmentData={shipment_data}
 				servicesData={servicesList}
