@@ -1,8 +1,73 @@
-.org_users_styles {
+.org_container {
 	width: 100%;
 	height: 100%;
 }
 
 .container {
-	margin-top: 8px;
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.active_org {
+	background: #f8f2e7 !important;
+	border-bottom: 1px solid #edd7a9 !important;
+
+	svg {
+		display: block;
+	}
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 4px 4px 0 0;
+	color: #221f20;
+	cursor: pointer;
+	background: #fff;
+	border-bottom: 1px solid #f8f2e7;
+
+	&:hover {
+		background: #f8f2e7;
+		border-bottom: 1px solid #edd7a9;
+
+		svg {
+			display: block;
+		}
+	}
+}
+
+.container::-webkit-scrollbar {
+	display: none;
+}
+
+.name {
+	width: 100%;
+	padding: 8px;
+	font-size: 16px;
+}
+
+.input_container {
+	margin: 12px 0;
+}
+
+.skeleton {
+	border-bottom: 1px solid #edd7a9;
+}
+
+.arrow_icon {
+	display: none;
+	width: 25px;
+	height: 25px;
+	color: #4f4f4f;
+}
+
+.empty_text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 80%;
+	color: #1c1b1b;
 }
