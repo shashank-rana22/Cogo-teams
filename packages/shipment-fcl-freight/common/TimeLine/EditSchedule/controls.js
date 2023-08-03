@@ -14,6 +14,9 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 	const disabledState = state === 'vessel_arrived'
 		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
 
+	const icdDisabledState = state === 'containers_gated_out'
+		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
+
 	let deviated_departure;
 	let deviated_arrival;
 
@@ -53,12 +56,12 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		...(origin_port?.is_icd ? [{
 			name    : 'origin_icd_departed_at',
 			label   : 'Departure from ICD Port date',
-			disable : false,
+			disable : icdDisabledState,
 		}] : []),
 		...(destination_port?.is_icd ? [{
 			name    : 'arrived_at_destination_icd_at',
 			label   : 'Arrived At ICD Port date',
-			disable : false,
+			disable : icdDisabledState,
 		}] : []),
 	];
 
