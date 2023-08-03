@@ -9,12 +9,12 @@ const useBulkEmployeeDetails = ({ selectedIds }) => {
 	}, { manual: true });
 
 	const sendBulkActionMail = async () => {
-		const payload = {
-			action_name         : 'send_quickchex_mail',
-			employee_detail_ids : selectedIds,
-		};
-
 		try {
+			const payload = {
+				action_name         : 'send_quickchex_mail',
+				employee_detail_ids : selectedIds,
+			};
+
 			await trigger({
 				data: payload,
 			});

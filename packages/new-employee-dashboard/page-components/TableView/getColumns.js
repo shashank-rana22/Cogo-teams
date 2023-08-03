@@ -125,9 +125,7 @@ const getColumns = ({
 						{status === 'rejected_by_user' ? (
 							<Button
 								loading={btnloading}
-								onClick={() => {
-									updateEmployeeStatus(id, 'active', fetch).then(() => fetch());
-								}}
+								onClick={() => { updateEmployeeStatus(id, 'active', fetch).then(() => fetch()); }}
 								themeType="secondary"
 							>
 								Re-Apply

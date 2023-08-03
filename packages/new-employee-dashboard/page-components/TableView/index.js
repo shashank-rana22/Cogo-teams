@@ -14,7 +14,7 @@ import useTableView from './useTableView';
 const TOTAL_COUNT = 10;
 const INITIAL_TOTAL_COUNT = 0;
 const INITIAL_PAGE = 1;
-const PAGELIMIT_OPTIONS = [
+const PAGE_LIMIT_OPTIONS = [
 	{ label: 10, value: 10 },
 	{ label: 50, value: 50 },
 	{ label: 100, value: 100 },
@@ -48,14 +48,17 @@ function TableView({ search, setSearch }) {
 						<TabPanel name="inactive" title="Inactive" />
 						<TabPanel name="rejected_by_user" title="Rejected By User" />
 					</Tabs>
+
 					<div className={styles.bulkupload_container}>
 						BulkAction
+
 						<Toggle
 							onChange={(val) => setBulkAction(val?.target?.checked)}
 							value={bulkAction}
-							styles={{ marginBottom: '30px' }}
+							styles={{ marginBottom: '30px', paddingRight: '10px', paddingLeft: '10px' }}
 						/>
 					</div>
+
 					{bulkAction && (
 						<div className={styles.styled_button}>
 							<Button
@@ -78,6 +81,7 @@ function TableView({ search, setSearch }) {
 						style={{ marginRight: '8px', width: 300, height: 40 }}
 						placeholder="Search via Name or Email"
 					/>
+
 					<FilterPopover filters={filters} setFilters={setFilters} />
 				</div>
 			</div>
@@ -96,11 +100,12 @@ function TableView({ search, setSearch }) {
 							<Select
 								onChange={(val) => setPageLimit(val)}
 								value={pageLimit}
-								options={PAGELIMIT_OPTIONS}
+								options={PAGE_LIMIT_OPTIONS}
 								size="sm"
 								placeholder="Page Limit"
 								style={{ paddingRight: '10px', paddingTop: '5px' }}
 							/>
+
 							<Pagination
 								totalItems={data?.total_count || INITIAL_TOTAL_COUNT}
 								currentPage={page || INITIAL_PAGE}

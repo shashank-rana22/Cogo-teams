@@ -69,12 +69,6 @@
 	display: flex;
 	justify-content: center;
 	margin-left: 20px;
-
-	:global {
-		.ui_TE06c {
-			padding: 0 10px;
-		}
-	}
 }
 
 .text {

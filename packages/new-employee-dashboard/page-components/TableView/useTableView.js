@@ -55,14 +55,13 @@ const useTableView = ({
 			const ids = list.map((val) => val.id);
 			return setSelectedIds(ids);
 		}
+
 		return setSelectedIds([]);
 	};
 
 	const handleSelectId = (e, id) => {
 		const { checked } = e.target;
-		if (checked) {
-			return setSelectedIds((prev) => ([...prev, id]));
-		}
+		if (checked) { return setSelectedIds((prev) => ([...prev, id])); }
 		const filterArr = selectedIds.filter((val) => val !== id);
 		return setSelectedIds(filterArr);
 	};
