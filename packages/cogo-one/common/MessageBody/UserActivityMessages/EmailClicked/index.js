@@ -38,7 +38,7 @@ function EmailClicked({ serviceData = {}, name = '', formattedData = {}, eventNa
 
 	return (
 		<>
-			{(Object.keys(EVENT_INFORMATION_MAPPING) || {}).includes(eventName) ? (
+			{(Object.keys(EVENT_INFORMATION_MAPPING)).includes(eventName) ? (
 				<>
 					<div className={styles.title}>{EVENT_INFORMATION_MAPPING[eventName]?.title}</div>
 					<div className={styles.message}>
