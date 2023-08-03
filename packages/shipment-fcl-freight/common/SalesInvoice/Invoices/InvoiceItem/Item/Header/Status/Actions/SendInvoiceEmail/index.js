@@ -7,20 +7,20 @@ import styles from './styles.module.css';
 
 function SendInvoiceEmail({
 	show = false,
-	setShow = () => {},
+	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
 	const refetchAfterApiCall = () => {
 		refetch();
-		setShow(false);
+		onClose();
 	};
 	const { handleSend = () => {}, loading } = useSendInvoiceEmail({
 		refetch: refetchAfterApiCall,
 	});
 
 	return (
-		<Modal show={show} onClose={() => setShow(false)} closeOnOuterClick={false}>
+		<Modal show={show} onClose={onClose} closeOnOuterClick={false} showCloseIcon={!loading}>
 			<Modal.Body className={styles.body}>
 				<div className={cl`${styles.text} ${styles.bold}`}>Are you sure, you want to send invoice email?</div>
 
@@ -30,7 +30,7 @@ function SendInvoiceEmail({
 			<Modal.Footer className={styles.button_div}>
 				<Button
 					themeType="secondary"
-					onClick={() => setShow(false)}
+					onClick={onClose}
 					disabled={loading}
 				>
 					Cancel
