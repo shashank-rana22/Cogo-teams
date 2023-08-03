@@ -45,13 +45,6 @@ function Actions({
 		disableAction = false;
 	}
 
-	const remarkRender = () => (
-		<div className={styles.remark_container}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
-
 	const onModalClose = () => setShowModal('');
 
 	// HARD CODING STARTS
@@ -111,7 +104,13 @@ function Actions({
 					{!isEmpty(invoice.remarks) ? (
 						<Tooltip
 							placement="bottom"
-							content={remarkRender()}
+							content={(
+								<>
+									<h6 className={styles.title}>Invoice Remarks</h6>
+									<p className={styles.value}>{invoice.remarks}</p>
+								</>
+							)}
+							className={styles.remark_container}
 						>
 							<div className={styles.icon_more_wrapper}>
 								<IcMInfo fill="#DDEBC0" />

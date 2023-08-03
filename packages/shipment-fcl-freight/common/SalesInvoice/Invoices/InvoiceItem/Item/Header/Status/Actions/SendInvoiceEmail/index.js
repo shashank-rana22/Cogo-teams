@@ -22,7 +22,7 @@ function SendInvoiceEmail({
 	return (
 		<Modal show={show} onClose={onClose} closeOnOuterClick={false} showCloseIcon={!loading}>
 			<Modal.Body className={styles.body}>
-				<div className={cl`${styles.text} ${styles.bold}`}>Are you sure, you want to send invoice email?</div>
+				<p className={cl`${styles.text} ${styles.bold}`}>Are you sure, you want to send invoice email?</p>
 
 				<div className={styles.text}>You cannot undo this step so please do it carefully.</div>
 			</Modal.Body>
