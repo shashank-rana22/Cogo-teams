@@ -102,8 +102,6 @@ function EditInvoice({
 						errors={errors}
 						customValues={newFormValues}
 						disabledProps={disabledProps}
-						shipment_id={shipment_data?.shipment_id}
-						shipment_type={shipment_data?.shipment_type}
 					/>
 				</div>
 

@@ -19,7 +19,6 @@ function UpdateButton({
 	task = {},
 	handleClick = () => {},
 	handleChange = () => {},
-	handleEmail = () => {},
 	hideButton = false,
 	show = false,
 	tasksList = [],
@@ -46,10 +45,6 @@ function UpdateButton({
 
 	if (task?.task_type === 'approve_document') {
 		buttonText = 'Review';
-	}
-
-	if (task?.task_type === 'send_email' && task?.status === 'completed') {
-		buttonText = 'View';
 	}
 
 	let disableTask = DISABLE_TASK_FOR_STAKEHOLDERS.includes(task?.assigned_stakeholder);
@@ -96,14 +91,7 @@ function UpdateButton({
 		<div className={styles.container}>
 			<Button
 				className={styles.upload_button}
-				themeType={task.status === 'completed' ? 'secondary' : 'primary'}
-				onClick={() => {
-					if (task.status === 'completed') {
-						handleEmail();
-					} else {
-						handleClick(task);
-					}
-				}}
+				onClick={() => handleClick(task)}
 				disabled={disableTask}
 			>
 				{buttonText}
