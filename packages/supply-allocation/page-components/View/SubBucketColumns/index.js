@@ -1,5 +1,24 @@
 import Actions from './Actions';
 import Promised from './Promised';
+import styles from './styles.module.css';
+
+function Label({ units = '', percent = '', type = '' }) {
+	return (
+		<>
+			<div className={styles[`${type}_container`]}>
+				{units}
+				{' '}
+				TEU
+			</div>
+
+			<div className={styles[`${type}_sub_container`]}>
+				{ percent}
+				{' '}
+				% of Capability
+			</div>
+		</>
+	);
+}
 
 const subBucketColumns = [
 	{
@@ -32,12 +51,12 @@ const subBucketColumns = [
 	{
 		id       : 'allocated',
 		Header   : 'Allocated',
-		accessor : (item) => item.allocated,
+		accessor : ({ unit = '', percent = '' }) => <Label unit={unit} percent={percent} type="allocated" />,
 	},
 	{
 		id       : 'fulfilled',
 		Header   : 'Fulfilled',
-		accessor : (item) => item.fulfilled,
+		accessor : ({ unit = '', percent = '' }) => <Label unit={unit} percent={percent} type="fulfilled" />,
 	},
 	{
 		id     : 'avg_deviation',

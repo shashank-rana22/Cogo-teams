@@ -2,6 +2,7 @@ import { IcMArrowRotateRight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import CustomProgressBar from '../../../commons/CustomProgressBar';
+import WaveLoadingAnimation from '../../../commons/Loading';
 import StyledTable from '../../../commons/StyledTable';
 import subBucketDummyData from '../../../Dummy Data/sub-bucket-data.json';
 import subBucketColumns from '../SubBucketColumns';
@@ -74,6 +75,8 @@ function Content({
 					</div>
 				))}
 			</div>
+
+			<WaveLoadingAnimation />
 			{show
 				? (
 					<div style={{ padding: '0 20px', background: '#F9F9F9' }}>
