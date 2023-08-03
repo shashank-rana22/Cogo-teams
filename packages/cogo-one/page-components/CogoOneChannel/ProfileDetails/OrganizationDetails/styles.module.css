@@ -155,6 +155,10 @@
 
 .convert_to_cp {
 	display: flex;
+	justify-content: flex-end;
+}
+
+.check_type {
 	justify-content: space-between;
 }
 

@@ -8,8 +8,8 @@ import useUpdateCurrency from '../../../../../../../../../hooks/useUpdateCurrenc
 import styles from './styles.module.css';
 
 function ChangeCurrency({
-	isChangeCurrency = false,
-	setIsChangeCurrency = () => {},
+	show = false,
+	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
@@ -30,8 +30,6 @@ function ChangeCurrency({
 
 	const isCurrencyChanged = value !== invoice_currency;
 
-	const onClose = () => setIsChangeCurrency(false);
-
 	const refetchAfterCall = () => {
 		onClose();
 		refetch();
@@ -45,7 +43,7 @@ function ChangeCurrency({
 	return (
 		<Modal
 			className={styles.form}
-			show={isChangeCurrency}
+			show={show}
 			closeOnOuterClick={false}
 			onClose={onClose}
 		>
@@ -66,7 +64,7 @@ function ChangeCurrency({
 			<Modal.Footer className={styles.button_div}>
 				<Button
 					themeType="secondary"
-					onClick={() => setIsChangeCurrency(false)}
+					onClick={onClose}
 					disabled={loading}
 				>
 					Cancel
