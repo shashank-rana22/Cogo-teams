@@ -6,8 +6,8 @@ import LANGUAGE_OPTIONS from './languageMapping';
 
 const GLOBAL_CONSTANTS = {
 	attendence_options: [
-		{ value: 'flexishift', label: 'Flexi Shift' },
-		{ value: 'geolocation', label: 'Geolocation' },
+		{ value: 'flexi_shift', label: 'Flexi Shift' },
+		{ value: 'geo_location', label: 'Geolocation' },
 	],
 	li_options: [
 		{ value: 'analyzer', label: 'Analyzer' },
@@ -30,28 +30,24 @@ const GLOBAL_CONSTANTS = {
 	],
 	department_options: [
 		{ value: 'admin', label: 'Admin' },
-		{ value: 'business finance', label: 'Business Finance' },
-		{ value: 'air exports bd', label: 'Air Exports BD' },
-		{ value: 'channel partner', label: 'Channel Partner' },
+		{ value: 'business_finance', label: 'Business Finance' },
+		{ value: 'air_exports_bd', label: 'Air Exports BD' },
+		{ value: 'channel_partner', label: 'Channel Partner' },
 		{ value: 'design', label: 'Design' },
-		{ value: 'enterprise sales', label: 'Enterprise Sales' },
-		{ value: 'experience (COE)', label: 'Experience (COE)' },
+		{ value: 'enterprise_sales', label: 'Enterprise Sales' },
+		{ value: 'experience_(COE)', label: 'Experience (COE)' },
 		{ value: 'fintech', label: 'Fintech' },
-		{ value: 'human resources', label: 'Human Resources' },
+		{ value: 'human_resources', label: 'Human Resources' },
 		{ value: 'marketing', label: 'Marketing' },
-		{ value: 'MM business development', label: 'MM Business Development' },
-		{ value: 'process excellence', label: 'Process Excellence' },
+		{ value: 'MM_business_development', label: 'MM Business Development' },
+		{ value: 'process_excellence', label: 'Process Excellence' },
 		{ value: 'product', label: 'Product' },
-		{ value: 'rail business development', label: 'Rail business development' },
-		{ value: 'SME demand', label: 'SME Demand' },
+		{ value: 'rail_business_development', label: 'Rail business development' },
+		{ value: 'SME_demand', label: 'SME Demand' },
 		{ value: 'supply', label: 'Supply' },
-		{ value: 'supply management', label: 'Supply Management' },
+		{ value: 'supply_management', label: 'Supply Management' },
 		{ value: 'technology', label: 'Technology' },
 
-	],
-	segment_options: [
-		{ value: 'commercial', label: 'Commercial' },
-		{ value: 'NC', label: 'NC' },
 	],
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
