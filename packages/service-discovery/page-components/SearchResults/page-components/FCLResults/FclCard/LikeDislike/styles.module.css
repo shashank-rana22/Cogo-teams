@@ -9,7 +9,7 @@
 	transition: color 0.5s ease;
 
 	&.active {
-		color: #40AD3E;
+		color: #40ad3e;
 	}
 }
 

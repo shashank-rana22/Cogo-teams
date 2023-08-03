@@ -5,10 +5,14 @@ import React from 'react';
 import getDetails from './getDetails';
 import styles from './styles.module.css';
 
+const ONE_VALUE = 1;
+const EVEN_NUMBER_CONDITION = 2;
+const EVEN_CONDITION_REMAINDER = 0;
+
 function getStringBeforeAndAfterUnderscore(inputString) {
 	const parts = inputString.split('_');
-	const beforeUnderscore = parts[0];
-	const afterUnderscore = parts.slice(1).join('_');
+	const beforeUnderscore = parts[GLOBAL_CONSTANTS.zeroth_index];
+	const afterUnderscore = parts.slice(ONE_VALUE).join('_');
 	return { before: beforeUnderscore, after: afterUnderscore };
 }
 
@@ -31,7 +35,7 @@ function Table({ comparisonKey, allLineItems, LOGO_MAPPING, mode }) {
 				return (
 					<div key={key} className={styles.header_column}>
 						{imageUrl ? (
-							<img src={imageUrl} alt="shipping-line" style={{ objectFit: 'cover', width: 88 }} />
+							<img src={imageUrl} alt="shipping-line" style={{ objectFit: 'cover', width: 92 }} />
 						) : columnHeader}
 					</div>
 				);
@@ -40,7 +44,7 @@ function Table({ comparisonKey, allLineItems, LOGO_MAPPING, mode }) {
 	);
 
 	const renderTableBody = () => Object.entries(comparisonKey).map(([key, value], index) => {
-		const rowClass = index % 2 === 0 ? styles.even : styles.odd;
+		const rowClass = index % EVEN_NUMBER_CONDITION === EVEN_CONDITION_REMAINDER ? styles.even : styles.odd;
 		const { serviceObj = {} } = value;
 
 		const containerDetail = getDetails({

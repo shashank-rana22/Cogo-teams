@@ -19,7 +19,7 @@ function List({
 	setHeaderProps = () => {},
 	refetch = () => {},
 	SERVICES_CANNOT_BE_REMOVED = [],
-	startingPrices = {},
+	startingPrices = [],
 	startingPriceLoading = false,
 	refetchLoading = false,
 }) {

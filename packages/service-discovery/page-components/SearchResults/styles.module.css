@@ -4,12 +4,13 @@
 	margin: -24px -20px;
 	background-color: #fff;
 }
+
 .header {
 	position: fixed;
-	top:0;
-	left:80px;
-	right:0;
-	z-index:100;
+	top: 0;
+	right: 0;
+	left: 80px;
+	z-index: 100;
 }
 
 .backdrop {

@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { IcMCross } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -19,7 +20,17 @@ function ComparisonHeader({
 
 	const selectedCardsCount = selectedCards.length;
 
-	const handleDelete = () => setComparisonRates({});
+	const handleDeleteAll = () => setComparisonRates({});
+
+	const handleDelete = (rate) => {
+		const { id: idOfCardToBeDeleted = '' } = rate;
+
+		setComparisonRates((pv) => {
+			const tempObj = { ...pv };
+			delete tempObj[idOfCardToBeDeleted];
+			return tempObj;
+		});
+	};
 
 	return (
 		<div className={styles.container}>
@@ -40,12 +51,19 @@ function ComparisonHeader({
 
 				<div className={styles.pills_container}>
 					{selectedCards.map((cardItem) => {
-						const { shipping_line = {} } = cardItem;
+						const { shipping_line = {}, source = '' } = cardItem;
 						const { short_name = '', id: shipping_line_id = '' } = shipping_line || {};
 
 						return (
 							<div key={shipping_line_id} className={styles.pill}>
 								{renderName(short_name)}
+
+								{source === 'cogo_assured_rate' ? null : (
+									<IcMCross
+										className={styles.cross_icon}
+										onClick={() => handleDelete(cardItem)}
+									/>
+								)}
 							</div>
 						);
 					})}
@@ -55,7 +73,7 @@ function ComparisonHeader({
 					type="button"
 					size="md"
 					themeType="link"
-					onClick={handleDelete}
+					onClick={handleDeleteAll}
 					className={styles.unselect_button}
 				>
 					Unselect All

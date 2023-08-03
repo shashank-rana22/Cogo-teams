@@ -52,21 +52,21 @@ function AdditionalServices({ // used in search results and checkout
 		origin_country_id      : detail.origin_country_id,
 	});
 
-	const serviceData = {};
+	const SERVICE_DATA = {};
 
 	Object.keys(finalServiceDetails).forEach((serviceId) => {
 		const serviceItem = finalServiceDetails[serviceId];
 
 		const serviceName = getServiceName(serviceItem);
 
-		if (!serviceData[serviceName]) {
-			serviceData[serviceName] = [];
+		if (!SERVICE_DATA[serviceName]) {
+			SERVICE_DATA[serviceName] = [];
 		}
 
-		serviceData[serviceName].push(serviceItem);
+		SERVICE_DATA[serviceName].push(serviceItem);
 	});
 
-	const allServices = [];
+	const ALL_SERVICES = [];
 
 	servicesArray.forEach((service) => {
 		if (service.service_type === 'haulage_freight') {
@@ -91,14 +91,15 @@ function AdditionalServices({ // used in search results and checkout
 			}
 		}
 
-		let isSelected = !!serviceData[service.name];
+		let isSelected = !!SERVICE_DATA[service.name];
 
-		const tempServiceNames = [];
+		const TEMP_SERVICE_NAMES = [];
+
 		if (
 			service.name.includes('air_freight_local')
-			&& Object.keys(serviceData).includes('domestic_air_freight_local')
+			&& Object.keys(SERVICE_DATA).includes('domestic_air_freight_local')
 		) {
-			serviceData.domestic_air_freight_local.forEach((element) => {
+			SERVICE_DATA.domestic_air_freight_local.forEach((element) => {
 				let name = '';
 				if (element?.terminal_charge_type === 'outbound') {
 					name = 'export';
@@ -106,29 +107,29 @@ function AdditionalServices({ // used in search results and checkout
 					name = 'import';
 				}
 
-				tempServiceNames.push(`${name}_${element.service_type}`);
+				TEMP_SERVICE_NAMES.push(`${name}_${element.service_type}`);
 			});
 		}
 
-		if (tempServiceNames.includes(service.name)) {
+		if (TEMP_SERVICE_NAMES.includes(service.name)) {
 			isSelected = true;
 		}
 
 		let transportationData = null;
 
 		if (service.name.includes('transportation')) {
-			transportationData = serviceData[`${service.trade_type}_ltl_freight`]
-				|| serviceData[`${service.trade_type}_ftl_freight`]
-				|| serviceData[`${service.trade_type}_trailer_freight`];
+			transportationData = SERVICE_DATA[`${service.trade_type}_ltl_freight`]
+				|| SERVICE_DATA[`${service.trade_type}_ftl_freight`]
+				|| SERVICE_DATA[`${service.trade_type}_trailer_freight`];
 
 			isSelected = !!transportationData;
 		}
 
-		allServices.push({
+		ALL_SERVICES.push({
 			...service,
 			data: service.name.includes('transportation')
 				? transportationData
-				: serviceData[service.name],
+				: SERVICE_DATA[service.name],
 			isSelected,
 			rateData: Object.values(finalServiceDetails).filter(
 				(serviceItem) => {
@@ -141,22 +142,23 @@ function AdditionalServices({ // used in search results and checkout
 		});
 	});
 
-	const { startingPrices = {}, loading: startingPriceLoading } = useGetMinPrice({
-		allServices,
+	const { startingPrices = [], loading: startingPriceLoading } = useGetMinPrice({
+		allServices: ALL_SERVICES,
 		total_price_currency,
 		detail,
+		rateCardData,
 	});
 
-	const filteredAllServices = allServices.filter((service_item) => service_item.inco_terms.includes(inco_term));
+	const filteredAllServices = ALL_SERVICES.filter((service_item) => service_item.inco_terms.includes(inco_term));
 
-	const shipperSideServices = [];
-	const consigneeSideServices = [];
+	const SHIPPER_SIDE_SERVICES = [];
+	const CONSIGNEE_SIDE_SERVICES = [];
 
-	(source === 'checkout' ? filteredAllServices : allServices).forEach((item) => {
+	(source === 'checkout' ? filteredAllServices : ALL_SERVICES).forEach((item) => {
 		if (item.name.includes('import')) {
-			consigneeSideServices.push(item);
+			CONSIGNEE_SIDE_SERVICES.push(item);
 		} else {
-			shipperSideServices.push(item);
+			SHIPPER_SIDE_SERVICES.push(item);
 		}
 	});
 
@@ -183,9 +185,9 @@ function AdditionalServices({ // used in search results and checkout
 			</div>
 
 			<div className={styles.additional_services}>
-				{isEmpty(shipperSideServices) ? null : (
+				{isEmpty(SHIPPER_SIDE_SERVICES) ? null : (
 					<List
-						list={shipperSideServices}
+						list={SHIPPER_SIDE_SERVICES}
 						type="seller"
 						detail={detail}
 						rateCardData={rateCardData}
@@ -198,9 +200,9 @@ function AdditionalServices({ // used in search results and checkout
 					/>
 				)}
 
-				{isEmpty(consigneeSideServices) ? null : (
+				{isEmpty(CONSIGNEE_SIDE_SERVICES) ? null : (
 					<List
-						list={consigneeSideServices}
+						list={CONSIGNEE_SIDE_SERVICES}
 						type="buyer"
 						detail={detail}
 						rateCardData={rateCardData}
