@@ -7,6 +7,7 @@ const controls = [
 		placeholder : 'select',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_roles',
+		initialCall : true,
 		params      : {
 			permissions_data_required : false,
 			filters                   : {

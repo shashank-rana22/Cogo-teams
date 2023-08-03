@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -6,16 +7,18 @@ const INITIAL_PAGE = 1;
 function useGetObjectiveKAMsList({
 	objective_id,
 }) {
+	const { query = '', debounceQuery } = useDebounceQuery();
+
 	const [page, setPage] = useState(INITIAL_PAGE);
 
-	// const [params, setParams] = useState({
-	// 	params: {
-	// 		page,
-	// 		filters: {
-	// 			objective_id,
-	// 		},
-	// 	},
-	// });
+	const [params, setParams] = useState({
+		page,
+		for_individual_rule : false,
+		filters             : {
+			objective_id,
+			q: query || undefined,
+		},
+	});
 
 	const [{ loading = false, data = {} }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_objective_stats',
@@ -23,8 +26,10 @@ function useGetObjectiveKAMsList({
 		authkey : 'get_allocation_kam_expertise_objective_stats',
 		params  : {
 			page,
-			filters: {
+			for_individual_rule : false,
+			filters             : {
 				objective_id,
+				q: query || undefined,
 			},
 		},
 	}, { manual: false });
@@ -32,30 +37,26 @@ function useGetObjectiveKAMsList({
 	const fetch = useCallback(async () => {
 		try {
 			await trigger({
-				params: {
-					page,
-					filters: {
-						objective_id,
-					},
-				},
+				params,
 			});
 		} catch (error) {
 			console.log(error?.response?.data);
 		}
-	}, [objective_id, page, trigger]);
+	}, [trigger, params]);
 
 	useEffect(() => {
 		fetch();
-	}, [fetch, page]);
+	}, [fetch, page, params]);
 
 	return {
 		data,
 		loading,
 		page,
 		setPage,
-		// params,
-		// setParams,
+		params,
+		setParams,
 		fetch,
+		debounceQuery,
 	};
 }
 

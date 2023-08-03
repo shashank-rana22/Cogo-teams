@@ -14,7 +14,7 @@ function useGetListObjectives() {
 		page      : 1,
 		sort_type : 'asc',
 		filters   : {
-			status : 'inactive',
+			status : ['inactive'],
 			q      : query || undefined,
 		},
 	});
@@ -27,7 +27,7 @@ function useGetListObjectives() {
 			page      : 1,
 			sort_type : 'asc',
 			filters   : {
-				status : 'inactive',
+				status : ['inactive'],
 				q      : query || undefined,
 			},
 		},

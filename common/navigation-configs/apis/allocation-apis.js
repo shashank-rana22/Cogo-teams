@@ -366,6 +366,12 @@ const allocation = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'post_allocation_kam_expertise_objective_status',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
 	],
 	crm_feedback_dashboard: [
 		{

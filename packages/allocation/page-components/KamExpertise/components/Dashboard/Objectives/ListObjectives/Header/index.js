@@ -13,7 +13,7 @@ function Header(props) {
 			...pv,
 			filters: {
 				...pv.filters,
-				status: pv?.filters?.status === 'active' ? 'inactive' : 'active',
+				status: pv?.filters?.status.includes('active') ? ['inactive'] : ['active', 'live'],
 			},
 		}));
 	};
@@ -26,17 +26,9 @@ function Header(props) {
 				name="active_status"
 				onLabel="Active"
 				offLabel="Inactive"
-				value={params?.filters?.status || 'active'}
+				value={params?.filters?.status || ['active', 'live']}
 				onChange={() => handleToggle()}
 			/>
-
-			{/* <Button
-				type="button"
-				themeType="primary"
-				onClick={() => setActionMode('create')}
-			>
-				+ Create New Objective
-			</Button> */}
 		</section>
 	);
 }

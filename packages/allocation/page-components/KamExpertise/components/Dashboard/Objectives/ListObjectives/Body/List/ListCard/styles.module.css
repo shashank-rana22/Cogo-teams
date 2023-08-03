@@ -63,3 +63,8 @@
 .action_button {
 	margin-right: 8px;
 }
+
+.loader_container {
+	margin: 8px 48px;
+	border-radius: 8px;
+}

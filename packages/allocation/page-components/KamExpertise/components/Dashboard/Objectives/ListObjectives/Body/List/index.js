@@ -1,4 +1,7 @@
 import { Collapse, Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+
+import EmptyState from '../../../../../../../../common/EmptyState';
 
 import ActionModal from './ActionModal';
 import ListHeader from './ListHeader';
@@ -23,6 +26,17 @@ function List(props) {
 		setFilters,
 		refetchListObjectives,
 	} = useList(props);
+
+	if (isEmpty(objectiveList)) {
+		return (
+			<EmptyState
+				height="400px"
+				width="600px"
+				flexDirection="column"
+				emptyText="Objectives list not found"
+			/>
+		);
+	}
 
 	return (
 		<section>

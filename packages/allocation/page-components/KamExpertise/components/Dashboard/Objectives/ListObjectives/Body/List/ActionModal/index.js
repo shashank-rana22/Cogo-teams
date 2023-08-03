@@ -1,13 +1,19 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import useDeleteObjectivesKAMList from '../../../../../../../hooks/useDeleteObjectivesKAMList';
 
 import DeleteList from './DeleteList';
 import Generate from './Generate';
 import styles from './styles.module.css';
 import ViewList from './ViewList';
 
-const MODAL_COMPONENT_MAPPING = ({ handleClose = () => { }, loader }) => ({
+const MODAL_COMPONENT_MAPPING = ({
+	handleCloseActionModal = () => { },
+	loader,
+	handleDeleteKAMsList = () => { },
+}) => ({
 	generate: {
 		title         : 'Generate List',
 		modalSize     : 'lg',
@@ -16,15 +22,16 @@ const MODAL_COMPONENT_MAPPING = ({ handleClose = () => { }, loader }) => ({
 			{
 				text       : loader ? 'Cancel list generation' : 'Close',
 				themeType  : 'accent',
-				onClickFun : handleClose,
+				onClickFun : handleCloseActionModal,
 			},
 		],
 	},
 	view: {
-		title         : 'Generated List',
-		modalSize     : 'lg',
-		Component     : ViewList,
-		actionButtons : [
+		title            : 'Generated List',
+		modalSize        : 'lg',
+		Component        : ViewList,
+		customModalStyle : { minHeight: '400px' },
+		actionButtons    : [
 			{
 				prefix    : <IcMDownload height={16} width={16} />,
 				text      : 'Download List',
@@ -34,24 +41,24 @@ const MODAL_COMPONENT_MAPPING = ({ handleClose = () => { }, loader }) => ({
 			{
 				text       : 'Close List',
 				themeType  : 'accent',
-				onClickFun : handleClose,
+				onClickFun : handleCloseActionModal,
 			},
 		],
 	},
 	delete: {
 		title         : 'Delete List',
-		modalSize     : 'sm',
+		modalSize     : 'md',
 		Component     : DeleteList,
 		actionButtons : [
 			{
 				text       : 'No, Cancel',
 				themeType  : 'secondary',
-				onClickFun : handleClose,
+				onClickFun : handleCloseActionModal,
 			},
 			{
-				text      : 'Yes, Delete List',
-				themeType : 'accent',
-				// onClickFun : handleClose,
+				text       : 'Yes, Delete List',
+				themeType  : 'accent',
+				onClickFun : handleDeleteKAMsList,
 			},
 		],
 	},
@@ -68,34 +75,46 @@ function ActionModal({
 
 	const [loader, setLoader] = useState(true);
 
-	if (!showModal.id) {
-		return null;
-	}
-
-	const handleClose = () => {
+	const handleCloseActionModal = () => {
 		setShowModal(() => ({
 			id: '',
 		}));
 	};
+
+	const { handleDeleteKAMsList = () => { } } = useDeleteObjectivesKAMList({
+		objective_id: showModal?.id,
+		refetchListObjectives,
+		handleCloseActionModal,
+	});
+
+	useEffect(() => {
+		setLoader(true);
+	}, [showModal?.id]);
+
+	if (!showModal.id) {
+		return null;
+	}
 
 	const {
 		Component = null,
 		title = '',
 		modalSize = 'lg',
 		actionButtons = [],
+		customModalStyle = {},
 	} = MODAL_COMPONENT_MAPPING({
-		handleClose,
+		handleCloseActionModal,
 		loader,
+		handleDeleteKAMsList,
 	})[action] || {};
 
 	return (
 		<Modal
 			show={showModal.id}
-			onClose={handleClose}
+			onClose={handleCloseActionModal}
 			size={modalSize}
 		>
 			<Modal.Header title={title} />
-			<Modal.Body>
+			<Modal.Body style={customModalStyle}>
 				<Component
 					filters={filters}
 					setFilters={setFilters}

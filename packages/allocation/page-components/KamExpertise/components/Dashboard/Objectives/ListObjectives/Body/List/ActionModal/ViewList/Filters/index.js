@@ -1,6 +1,6 @@
 import { Button, Input, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFilter } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import FilterForm from './FilterForm';
@@ -8,15 +8,23 @@ import styles from './styles.module.css';
 
 function Filters({
 	filters = {},
-	setFilters = () => {},
+	setFilters = () => { },
+	debounceQuery = () => { },
 }) {
 	const [showFilterPopover, setShowFilterPopover] = useState(false);
+
+	const [searchKey, setsearchKey] = useState('');
 
 	const {
 		control,
 		handleSubmit = () => { },
 		formState: { errors = {} },
 	} = useForm();
+
+	const handleChange = (v) => {
+		setsearchKey(v);
+		debounceQuery(v);
+	};
 
 	return (
 		<div className={styles.filter_container}>
@@ -49,9 +57,11 @@ function Filters({
 
 			<div className={styles.search_container}>
 				<Input
+					name="searchKey"
 					size="md"
-					placeholder="Search by KAM Name"
-					prefix={<IcMSearchlight />}
+					placeholder="Search by Objective Name"
+					value={searchKey}
+					onChange={(val) => handleChange(val)}
 				/>
 			</div>
 		</div>

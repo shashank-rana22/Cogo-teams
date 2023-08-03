@@ -110,7 +110,13 @@ const getListColumnMapping = (props) => {
 					<div className={styles.business_name}>{startCase(partner?.business_name || '___')}</div>
 					<div>
 						{!isEmpty(channels)
-                         && channels.map((item) => <Pill color="#F3FAFA" key={item} size="md">{startCase(item)}</Pill>)}
+							&& channels.map(
+								(item) => (
+									<Pill color="#F3FAFA" key={item} size="md">
+										{item.toUpperCase() || '--'}
+									</Pill>
+								),
+							)}
 					</div>
 				</>
 			),

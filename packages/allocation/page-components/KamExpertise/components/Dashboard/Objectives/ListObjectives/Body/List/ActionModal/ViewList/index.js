@@ -1,4 +1,4 @@
-import { Pagination } from '@cogoport/components';
+import { Pagination, Toggle } from '@cogoport/components';
 import React from 'react';
 
 import useGetObjectiveKAMsList from '../../../../../../../../hooks/useGetObjectiveKAMsList';
@@ -17,16 +17,18 @@ function ViewList({
 	const {
 		data = {},
 		loading = false,
-		page = 1,
-		setPage = () => { },
-		// params = {},
-		// setParams = () => { },
-		// fetch = () => { },
+		params = {},
+		setParams = () => { },
+		debounceQuery = () => { },
 	} = useGetObjectiveKAMsList({
 		objective_id: showModal?.id,
 	});
 
-	const { list: KAMsList = [], total_count, page_limit } = data || {};
+	const {
+		list: KAMsList = [],
+		total_count,
+		page_limit,
+	} = data || {};
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({
 		loading,
@@ -35,9 +37,27 @@ function ViewList({
 
 	return (
 		<section>
-			<div className={styles.header_text}>
-				“Objective 1” Leaderboard Generated
+			<div className={styles.header}>
+				<div className={styles.header_text}>
+					“Objective 1” Leaderboard Generated
+				</div>
+				<div>
+					<Toggle
+						name="toggle"
+						size="md"
+						onLabel="OR"
+						offLabel="AND"
+						value={params?.for_individual_rule}
+						onChange={() => {
+							setParams((pv) => ({
+								...pv,
+								for_individual_rule: !(pv?.for_individual_rule),
+							}));
+						}}
+					/>
+				</div>
 			</div>
+
 			<div className={styles.description_text}>
 				If you want to be able to Regenerate Updated list,
 				delete this list by clicking on
@@ -49,27 +69,41 @@ function ViewList({
 				from the table.
 			</div>
 
-			<Filters filters={filters} setFilters={setFilters} />
+			<Filters
+				filters={filters}
+				setFilters={setFilters}
+				debounceQuery={debounceQuery}
+			/>
 
-			<ListHeader LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING} />
+			<ListHeader
+				LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
+			/>
 
 			{(KAMsList || []).map((item) => (
 				<List
 					key={item}
 					item={item}
 					LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
+					loadingKAMsList={loading}
 				/>
 			))}
 
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="number"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={page_limit}
-					onPageChange={setPage}
-				/>
-			</div>
+			{total_count > page_limit ? (
+				<div className={styles.pagination_container}>
+					<Pagination
+						type="number"
+						currentPage={params?.page}
+						totalItems={total_count}
+						pageSize={page_limit}
+						onPageChange={(v) => {
+							setParams((pv) => ({
+								...pv,
+								page: v,
+							}));
+						}}
+					/>
+				</div>
+			) : null}
 
 		</section>
 	);
