@@ -29,6 +29,7 @@ function Messages({
 	setActiveTab = () => {},
 	newUserRoomLoading = false,
 	setModalType = () => {},
+	mailProps = {},
 }) {
 	const activeRoomSnapshotListener = useRef(null);
 
@@ -178,6 +179,7 @@ function Messages({
 						assignLoading={assignLoading}
 						setOpenModal={setOpenModal}
 						assignChat={assignChat}
+						mailProps={mailProps}
 						sendCommunicationTemplate={sendCommunicationTemplate}
 					/>
 				</div>

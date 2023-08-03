@@ -91,6 +91,7 @@ function ReceiveDiv({
 	setRaiseTicketModal = () => {},
 	formattedData = {},
 	viewType = '',
+	mailProps = {},
 }) {
 	const [showOrder, setShowOrder] = useState(false);
 	const [tagModal, setTagModal] = useState(false);
@@ -157,7 +158,7 @@ function ReceiveDiv({
 				</div>
 
 				{message_type === 'event' && (
-					<SuggestedActions formattedData={formattedData} viewType={viewType} />
+					<SuggestedActions formattedData={formattedData} viewType={viewType} mailProps={mailProps} />
 				)}
 
 				{message_type === 'order' && (
