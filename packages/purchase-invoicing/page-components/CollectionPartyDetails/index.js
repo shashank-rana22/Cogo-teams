@@ -63,7 +63,8 @@ function CollectionPartyDetails({
 	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
 		&& serviceProviderConfirmation;
 
-	const uploadInvoiceAllowed = shipment_data?.stakeholder_types?.some((ele) => STAKE_HOLDER_TYPES.includes(ele))
+	const uploadInvoiceAllowed = shipment_data?.stakeholders
+		?.some((ele) => STAKE_HOLDER_TYPES.includes(ele?.stakeholder_type))
 		|| [
 			geo.uuid.super_admin_id,
 			geo.uuid.admin_id,

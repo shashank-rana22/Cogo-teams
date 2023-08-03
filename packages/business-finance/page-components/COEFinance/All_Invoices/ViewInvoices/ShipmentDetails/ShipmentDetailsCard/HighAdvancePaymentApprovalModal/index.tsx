@@ -203,7 +203,7 @@ function HighAmountRequestModal({
 								<div className={styles.col}>Advance Requested Value</div>
 							</div>
 							{paymentHistory?.map((item) => (
-								<div className={`${styles.row}`} key={item?.jobNumber}>
+								<div className={styles.row} key={item?.jobNumber}>
 									<div className={styles.col}>{item?.billNumber || '-'}</div>
 									<div className={styles.col}>{item?.jobNumber || '-'}</div>
 									<div className={styles.col}>
