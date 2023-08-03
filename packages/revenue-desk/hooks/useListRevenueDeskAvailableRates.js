@@ -25,11 +25,12 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 						is_rate_available : true,
 						trade_type        : singleServiceData?.trade_type
 														|| incoTermMapping[singleServiceData?.inco_term],
-						airport_id               : singleServiceData?.airpot_id || undefined,
+						airport_id               : singleServiceData?.airport_id || undefined,
 						origin_port_id           : singleServiceData?.origin_port_id || undefined,
 						destination_port_id      : singleServiceData?.destination_port_id || undefined,
 						container_size           : singleServiceData?.container_size,
 						container_type           : singleServiceData?.container_type,
+						location_id              : singleServiceData?.port_id || undefined,
 						commodity                : singleServiceData?.commodity,
 						origin_airport_id        : singleServiceData?.origin_airport_id || undefined,
 						destination_airport_id   : singleServiceData?.destination_airport_id || undefined,

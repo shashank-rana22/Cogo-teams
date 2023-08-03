@@ -23,10 +23,10 @@ const routeInfo = {
 	haulage_freight: {
 		origin_pickup         : 'origin_pickup',
 		origin_drop           : 'origin_drop',
-		origin_port           : 'origin_port',
+		origin_port           : 'origin_location',
 		origin_main_port      : 'origin_main_port',
 		destination_main_port : 'destination_main_port',
-		destination_port      : 'destination_port',
+		destination_port      : 'destination_location',
 		destination_pickup    : 'destination_pickup',
 		destination_drop      : 'destination_drop',
 	},
