@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import { Tooltip, Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -29,15 +28,15 @@ function RaiseAlarmCard({ data = {}, reload = false, setReload = () => {} }) {
 	const [resolve, setResolve] = useState(false);
 
 	const {
-		onUpdate,
-		errors,
-		loading,
-		onSubmit,
-		reset,
-		handleSubmit,
-		onError,
-		control,
-		setErrors,
+		onUpdate = () => {},
+		errors = {},
+		loading = false,
+		onSubmit = () => {},
+		reset = () => {},
+		handleSubmit = () => {},
+		onError = () => {},
+		control = {},
+		setErrors = () => {},
 	} = useUpdateShipmentFaultAlarm({
 		setResolve,
 		reload,
@@ -61,7 +60,7 @@ function RaiseAlarmCard({ data = {}, reload = false, setReload = () => {} }) {
 			</div>
 			<div className={styles.text_box}>
 				<div className={styles.text}>
-					Alert! {fraud_reason}({CRITICALITY_MAPPING[data?.criticality]})
+					{`Alert! ${fraud_reason}(${CRITICALITY_MAPPING[data?.criticality]})`}
 				</div>
 
 				<div className={cl`${styles.text} ${styles.small}`}>
@@ -80,11 +79,11 @@ function RaiseAlarmCard({ data = {}, reload = false, setReload = () => {} }) {
 						</div>
 					</Tooltip>
 					<div className={styles.bold}>
-						(SID:{shipment_data?.serial_id})
+						{`(SID: ${shipment_data?.serial_id})`}
 					</div>
 					with the reason:
 					<div className={styles.bold}>
-						{fraud_reason} on {data?.updated_at}
+						{`${fraud_reason} on ${data?.updated_at}`}
 					</div>
 				</div>
 

@@ -34,7 +34,7 @@ const useCreateShipmentFaultAlarm = ({
 	checkedProforma = '',
 	alarmId,
 	setAlarmId = () => {},
-	StakeHolderList = [],
+	stakeHolderList = [],
 	val = '',
 	setVal = () => {},
 	handleClose = () => {},
@@ -68,7 +68,7 @@ const useCreateShipmentFaultAlarm = ({
 
 	const SUPPLY_AGENT = [];
 
-	const uniqueStakeHolder = getUnique(StakeHolderList);
+	const uniqueStakeHolder = getUnique(stakeHolderList);
 	uniqueStakeHolder
 		?.filter((item) => item?.stakeholder_type === 'supply_agent')
 		?.forEach((user) => {

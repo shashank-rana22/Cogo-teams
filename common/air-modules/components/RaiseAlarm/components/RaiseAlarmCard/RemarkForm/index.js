@@ -10,7 +10,6 @@ function RemarkForm({
 	errors = {},
 	loading = false,
 	onSubmit = () => {},
-	reset = () => {},
 	handleSubmit = () => {},
 	onError = () => {},
 }) {
@@ -28,7 +27,7 @@ function RemarkForm({
 			<div className={styles.button_wrap}>
 				<Button
 					disabled={loading}
-					onClick={handleSubmit(onSubmit, onError, reset)}
+					onClick={handleSubmit(onSubmit, onError)}
 				>
 					{loading ? 'Sending Remarks...' : 'Send Remarks'}
 				</Button>

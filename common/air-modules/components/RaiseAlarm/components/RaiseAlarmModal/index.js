@@ -39,7 +39,7 @@ function RaiseAlarmModal({
 		stakeholder_type : 'supply_agent',
 	});
 
-	const StakeHolderList = data?.list;
+	const stakeHolderList = data?.list;
 
 	const { loadingServiceProvider, serviceProviderList = [] } = useListServiceProviders({ id: shipment_data?.id });
 
@@ -50,15 +50,15 @@ function RaiseAlarmModal({
 	};
 
 	const {
-		loading,
-		controls,
-		control,
-		finalShowElements,
-		errors,
-		onCreate,
-		handleSubmit,
-		setErrors,
-		formValues,
+		loading = false,
+		controls = [],
+		control = {},
+		finalShowElements = {},
+		errors = {},
+		onCreate = () => {},
+		handleSubmit = {},
+		setErrors = () => {},
+		formValues = {},
 		reset,
 	} = useCreateShipmentFaultAlarm({
 		setShow,
@@ -67,7 +67,7 @@ function RaiseAlarmModal({
 		checkedProforma,
 		alarmId,
 		setAlarmId,
-		StakeHolderList,
+		stakeHolderList,
 		val,
 		setVal,
 		handleClose,
@@ -75,9 +75,7 @@ function RaiseAlarmModal({
 		serviceProviderList,
 	});
 
-	const allParams = { shipment_id: shipment_data?.id };
-
-	const { list } = useListShipmentCollectionParty(allParams, formValues);
+	const { list } = useListShipmentCollectionParty({ shipment_id: shipment_data?.id }, formValues);
 
 	const handleOnClose = () => {
 		handleClose();
@@ -88,8 +86,9 @@ function RaiseAlarmModal({
 
 	let showAll = false;
 	if (
-		partner?.user_role_ids?.includes(geo.uuid.super_admin_id)
-		|| partner?.user_role_ids?.includes(geo.uuid.admin_id)
+		(partner?.user_role_ids || []).some(
+			(id) => id.includes(geo.uuid.super_admin_id) || id.includes(geo.uuid.admin_id),
+		)
 	) {
 		showAll = true;
 	}
@@ -173,7 +172,7 @@ function RaiseAlarmModal({
 
 				<Button
 					disabled={loading}
-					onClick={handleSubmit(onCreate, setErrors, reset)}
+					onClick={handleSubmit(onCreate, setErrors)}
 				>
 					{loading ? 'Raising Alarm...' : 'Raise Alarm'}
 				</Button>

@@ -18,8 +18,3 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
-
-.flex_column {
-	display: flex;
-	flex-direction: column;
-}

@@ -8,7 +8,7 @@ function ModalContent({ content = {} }) {
 	const contents = [
 		{
 			label : 'Fraud Reason :',
-			value : alarm_reason?.fraud_reason?.split('-')[GLOBAL_CONSTANTS.zeroth_index],
+			value : alarm_reason?.fraud_reason?.split('-')?.[GLOBAL_CONSTANTS.zeroth_index],
 		},
 		{ label: 'Source :', value: alarm_reason?.source },
 		{ label: 'Detailed Explanation :', value: alarm_reason?.detailed_explain },
