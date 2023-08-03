@@ -1,3 +1,4 @@
+import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext } from 'react';
 
@@ -31,6 +32,8 @@ function PreviewBooking() {
 
 	const [agreeTandC, setAgreeTandC] = useState(false);
 
+	const formProps = useForm();
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Preview Booking</div>
@@ -46,6 +49,7 @@ function PreviewBooking() {
 				setCargoDetails={setCargoDetails}
 				agreeTandC={agreeTandC}
 				setAgreeTandC={setAgreeTandC}
+				formProps={formProps}
 			/>
 		</div>
 	);

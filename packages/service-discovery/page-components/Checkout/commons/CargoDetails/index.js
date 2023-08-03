@@ -6,7 +6,7 @@ import currencies from '../../helpers/currencies';
 import styles from './styles.module.css';
 import useGetCommodityOptions from './useGetCommodityOptions';
 
-function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = {} }) {
+function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = {}, primaryService = {} }) {
 	const { commodityTypeOptions = [], loading = false } = useGetCommodityOptions({ detail });
 
 	const MAPPING = [
@@ -19,7 +19,8 @@ function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = 
 			key             : 'cargo_readiness_date',
 			icon            : GLOBAL_CONSTANTS.image_url.cargo_readiness_date_s2c_png,
 			componentProps  : {
-				minDate: new Date(),
+				minDate : new Date(),
+				maxDate : new Date(primaryService?.departure),
 			},
 		},
 		{

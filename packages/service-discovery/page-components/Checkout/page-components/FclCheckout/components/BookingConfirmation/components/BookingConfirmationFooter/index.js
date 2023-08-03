@@ -96,7 +96,6 @@ function BookingConfirmationFooter({
 	detail = {},
 	checkoutMethod = '',
 	isControlBookingDetailsFilled = false,
-	formProps = {},
 	getCheckout = () => {},
 	bookingConfirmationMode = '',
 	invoicingParties = [],
@@ -167,7 +166,6 @@ function BookingConfirmationFooter({
 		validity_end = '',
 	} = useHandleBookingConfirmationFooter({
 		detail,
-		formProps,
 		checkoutMethod,
 		getCheckout,
 		bookingConfirmationMode,

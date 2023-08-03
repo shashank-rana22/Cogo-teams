@@ -59,6 +59,8 @@ function ConvenienceDetails({
 					convenienceFeeDisplay={convenienceFeeDisplay}
 					taxesDisplay={taxesDisplay}
 					subTotalDisplay={subTotalDisplay}
+					discount={discount}
+					localedDiscount={localedDiscount}
 				/>
 			)}
 		>

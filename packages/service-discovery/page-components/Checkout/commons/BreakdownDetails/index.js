@@ -50,7 +50,7 @@ function BreakdownDetails({
 
 	let total = 0;
 
-	const disableForm = source === 'preview_booking';
+	const disableForm = ['preview_booking', 'booking_confirmation'].includes(source);
 
 	const { primary_service = '' } = detail || {};
 
@@ -243,7 +243,7 @@ function BreakdownDetails({
 				rate={rate}
 				checkout_id={checkout_id}
 				shouldEditConvenienceFee={
-					source !== 'preview_booking'
+					source === 'edit_margin'
 					&& shouldEditMargin
 					&& detail?.source !== 'contract'
 }

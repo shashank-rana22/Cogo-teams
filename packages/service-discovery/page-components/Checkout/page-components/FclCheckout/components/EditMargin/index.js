@@ -45,6 +45,7 @@ function EditMargin({ state = '' }) {
 				handleDeleteRate={handleDeleteRate}
 				deleteRateLoading={deleteRateLoading}
 				setNoRatesPresent={setNoRatesPresent}
+				source="edit_margin"
 			/>
 
 			{noRatesPresent ? (

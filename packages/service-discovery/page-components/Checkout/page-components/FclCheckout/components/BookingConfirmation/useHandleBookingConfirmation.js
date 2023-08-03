@@ -1,4 +1,3 @@
-import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -36,9 +35,6 @@ const useHandleBookingConfirmation = () => {
 	const [isControlBookingDetailsFilled, setIsControlBookingDetailsFilled] = useState(iscommercialInvoicePresent);
 	const [invoicingParties, setInvoicingParties] = useState([]);
 	const [isVeryRisky, setIsVeryRisky] = useState(false);
-	const [isAllShippingLinesRequired, setIsAllShippingLinesRequired] = useState(false);
-
-	const formProps = useForm();
 
 	const { importer_exporter = {} } = detail;
 
@@ -92,7 +88,6 @@ const useHandleBookingConfirmation = () => {
 		checkout_approvals,
 		isControlBookingDetailsFilled,
 		setIsControlBookingDetailsFilled,
-		formProps,
 		controlledBookingServices,
 		bookingConfirmationMode,
 		setBookingConfirmationMode,
@@ -100,8 +95,6 @@ const useHandleBookingConfirmation = () => {
 		setInvoicingParties,
 		isVeryRisky,
 		setIsVeryRisky,
-		isAllShippingLinesRequired,
-		setIsAllShippingLinesRequired,
 	};
 };
 

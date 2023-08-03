@@ -16,7 +16,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {} }) => 
 
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
 	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
-	const [selectedModes, setSelectedModes] = useState([]);
+	const [selectedModes, setSelectedModes] = useState(['email']);
 
 	const quotationOptions = [
 		{
@@ -76,7 +76,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {} }) => 
 		{
 			key             : 'share_quotation',
 			label           : 'Share Quotation',
-			themeType       : 'secondary',
+			themeType       : 'primary',
 			onClickFunction : () => setShowShareQuotationModal(true),
 			style           : { marginLeft: '20px' },
 			disabled        : isEmpty(selectedModes),

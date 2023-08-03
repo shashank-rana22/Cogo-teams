@@ -1,10 +1,11 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMLock } from '@cogoport/icons-react';
+import { IcMUnlock } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
 import ContainerDetails from '../../../../../../../../../common/ContainerDetails';
 import LocationDetails from '../../../../../../../../../common/LocationDetails';
+import PromocodesModal from '../../../../../../../commons/Promocodes/components/PromocodesModal';
 import { CheckoutContext } from '../../../../../../../context';
 
 import ShippingLineDetails from './ShippingLineDetails';
@@ -14,6 +15,8 @@ import useHandleBookingDetails from './useHandleBookingDetails';
 function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 	const {
 		rate = {},
+		checkout_id = '',
+		getCheckout,
 	} = useContext(CheckoutContext);
 
 	const { tax_total_price_discounted = 0, tax_total_price_currency = '' } = rate;
@@ -26,6 +29,11 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 		services = {},
 		hasExpired = false,
 		timerRef,
+		showCouponCode = false,
+		setShowCouponCode = () => {},
+		isCouponApplied = false,
+		setCouponApplied = () => {},
+		appliedPromotion = {},
 	} = useHandleBookingDetails({ setShowBreakup, showBreakup });
 
 	return (
@@ -41,7 +49,7 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 				/>
 
 				<div className={styles.total_price}>
-					<IcMLock style={{ marginRight: '6px' }} />
+					<IcMUnlock style={{ marginRight: '6px' }} />
 
 					{formatAmount({
 						amount   : tax_total_price_discounted,
@@ -71,6 +79,16 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 							</span>
 						</div>
 					</div>
+
+					<PromocodesModal
+						checkout_id={checkout_id}
+						setShowCoupons={setShowCouponCode}
+						setCouponApplied={setCouponApplied}
+						refetch={getCheckout}
+						appliedPromotion={appliedPromotion}
+						isCouponApplied={isCouponApplied}
+						showCoupons={showCouponCode}
+					/>
 
 					<div className={styles.button_container}>
 						{BUTTON_MAPPING.map((item) => {
