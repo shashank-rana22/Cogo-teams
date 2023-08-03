@@ -1,4 +1,5 @@
 import { Input, Select, Accordion, cl } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
 import currencies from '../../../../helpers/currencies';
@@ -22,10 +23,13 @@ function ConvenienceDetails({
 	source = '',
 	convenienceRateOptions = [],
 	checkout_id = '',
+	otherCharges = [],
 }) {
 	const { convenience_rate = {} } = convenienceDetails || {};
 
 	const { unit = '', currency = '', price = '' } = convenience_rate;
+
+	const { promotions = {} } = rate;
 
 	const {
 		onChangeCurrency = () => {},
@@ -46,8 +50,6 @@ function ConvenienceDetails({
 		detail,
 	});
 
-	console.log('rate.promotions', rate.promotions);
-
 	return (
 		<Accordion
 			className={cl`${styles.container} ${styles[source]}`}
@@ -57,6 +59,8 @@ function ConvenienceDetails({
 					convenienceFeeDisplay={convenienceFeeDisplay}
 					taxesDisplay={taxesDisplay}
 					subTotalDisplay={subTotalDisplay}
+					discount={discount}
+					localedDiscount={localedDiscount}
 				/>
 			)}
 		>
@@ -65,7 +69,7 @@ function ConvenienceDetails({
 					<Promocodes
 						checkout_id={checkout_id}
 						refetch={getCheckout}
-						promotions={rate.promotions.promocodes}
+						promotions={promotions.promocodes}
 					/>
 
 					<ExchangeRate
@@ -89,6 +93,34 @@ function ConvenienceDetails({
 							<div className={styles.amount}>{subTotalDisplay}</div>
 						</div>
 					</div>
+
+					{otherCharges.map((item) => {
+						const {
+							name = '',
+							code = '',
+							total_price_discounted = 0,
+							currency:otherChargesCurrency = '',
+						} = item;
+
+						const chargesDisplay = formatAmount({
+							amount   : total_price_discounted,
+							currency : otherChargesCurrency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+							},
+						});
+
+						return (
+							<div key={code} className={styles.item_container}>
+								<div className={styles.convenience_container}>
+									<div className={styles.text}>{name}</div>
+									<div className={styles.amount}>{chargesDisplay}</div>
+								</div>
+							</div>
+						);
+					})}
 
 					<div className={styles.item_container}>
 						<div className={styles.convenience_container}>

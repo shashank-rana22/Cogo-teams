@@ -1,4 +1,5 @@
 import { Button, Accordion, cl, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useContext } from 'react';
@@ -49,9 +50,17 @@ function BreakdownDetails({
 
 	let total = 0;
 
-	const disableForm = source === 'preview_booking';
+	const disableForm = ['preview_booking', 'booking_confirmation'].includes(source);
 
 	const { primary_service = '' } = detail || {};
+
+	const { booking_charges = {} } = rate;
+
+	const otherCharges = Object.entries(booking_charges)
+		.filter(([key]) => key !== 'convenience_rate')
+		.map(([, item]) => ({
+			...item.line_items[GLOBAL_CONSTANTS.zeroth_index],
+		}));
 
 	return (
 		<div>
@@ -234,7 +243,7 @@ function BreakdownDetails({
 				rate={rate}
 				checkout_id={checkout_id}
 				shouldEditConvenienceFee={
-					source !== 'preview_booking'
+					source === 'edit_margin'
 					&& shouldEditMargin
 					&& detail?.source !== 'contract'
 }
@@ -242,6 +251,7 @@ function BreakdownDetails({
 				detail={detail}
 				getCheckout={getCheckout}
 				source={source}
+				otherCharges={otherCharges}
 				convenienceRateOptions={
 					detail?.convenience_rate_configurations
 						?.convenience_rate_options
@@ -253,6 +263,7 @@ function BreakdownDetails({
 				convenienceDetails={convenienceDetails}
 				conversions={conversions}
 				rate={rate}
+				otherCharges={otherCharges}
 			/>
 		</div>
 	);

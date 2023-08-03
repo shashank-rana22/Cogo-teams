@@ -19,7 +19,7 @@
 	background-color: #fff;
 }
 
-.Breadcrumb_item {
+.breadcrumb_item {
 	font-weight: 500;
 
 	&.active {
@@ -30,6 +30,12 @@
 
 .link {
 	text-decoration: underline;
+	cursor: pointer;
+
+	&.disabled {
+		text-decoration: unset;
+		cursor: not-allowed;
+	}
 }
 
 .spinner_container {

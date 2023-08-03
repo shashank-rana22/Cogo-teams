@@ -51,7 +51,7 @@ const useHandleConvenienceDetails = ({
 		return MAPPING;
 	}, [convenienceRateOptions]);
 
-	const convenience_line_item =		rate?.booking_charges?.convenience_rate?.line_items[
+	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[
 		GLOBAL_CONSTANTS.zeroth_index
 	];
 

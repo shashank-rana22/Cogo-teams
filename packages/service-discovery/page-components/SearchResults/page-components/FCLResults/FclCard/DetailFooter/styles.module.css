@@ -65,12 +65,12 @@
 }
 
 .otherDetailsTag {
+	min-width: max-content;
+	margin-right: 12px;
 	font-size: 11px;
 	font-weight: 500;
 	color: #e47200;
 	cursor: pointer;
-	min-width: max-content;
-	margin-right: 12px;
 }
 
 .tabs_style {

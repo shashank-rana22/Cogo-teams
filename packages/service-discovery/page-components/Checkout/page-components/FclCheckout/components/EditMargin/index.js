@@ -8,7 +8,7 @@ import useUpdateCheckoutService from '../../../../hooks/useUpdateCheckoutService
 import AdditionalContent from './AdditionalContent';
 import styles from './styles.module.css';
 
-function EditMargin() {
+function EditMargin({ state = '' }) {
 	const {
 		detail = {},
 		rate,
@@ -45,6 +45,7 @@ function EditMargin() {
 				handleDeleteRate={handleDeleteRate}
 				deleteRateLoading={deleteRateLoading}
 				setNoRatesPresent={setNoRatesPresent}
+				source="edit_margin"
 			/>
 
 			{noRatesPresent ? (
@@ -58,6 +59,7 @@ function EditMargin() {
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}
 				noRatesPresent={noRatesPresent}
+				state={state}
 			/>
 		</div>
 	);

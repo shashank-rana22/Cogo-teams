@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import getPanHolderStatus from '@cogoport/forms/utils/getPanHolderStatus';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
@@ -78,7 +80,7 @@ const useGetBusiness = (props) => {
 				setValue('name', trade_name || business_name || '');
 			}
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	}, [
 		registrationNumberType,

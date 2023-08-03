@@ -58,8 +58,6 @@ function AddressForm(props) {
 							return null;
 						}
 
-						console.log('controls', controls);
-
 						return (
 							<div className={styles.flex_column} key={key}>
 								{title && (

@@ -67,7 +67,7 @@ const getDisabledCondition = ({
 		importer_exporter_poc_id,
 	} = detail;
 
-	const { whatsapp_number_eformat = '', whatsapp_verified = '' } =		importer_exporter_poc;
+	const { whatsapp_number_eformat = '', whatsapp_verified = '' } = importer_exporter_poc;
 
 	if (checkoutMethod === 'controlled_checkout') {
 		return (
@@ -96,7 +96,6 @@ function BookingConfirmationFooter({
 	detail = {},
 	checkoutMethod = '',
 	isControlBookingDetailsFilled = false,
-	formProps = {},
 	getCheckout = () => {},
 	bookingConfirmationMode = '',
 	invoicingParties = [],
@@ -113,7 +112,6 @@ function BookingConfirmationFooter({
 	const {
 		primaryService = {},
 		activated_on_paylater = {},
-		primary_service = '',
 		checkout_type = '',
 		invoice = {},
 		isChannelPartner = false,
@@ -122,9 +120,20 @@ function BookingConfirmationFooter({
 
 	const timerRef = useRef(null);
 
+	const {
+		primary_service = '',
+		credit_details = {},
+		credit_terms_amd_condition = {},
+		quotation_email_sent_at = '',
+	} = detail || {};
+
+	const { credit_source = '', is_any_invoice_on_credit = false } = credit_details;
+
 	const { paylater_eligibility = false } = activated_on_paylater || {};
 
-	const domesticService = domesticServices.includes(detail?.primary_service);
+	const { is_tnc_accepted = false } = credit_terms_amd_condition || {};
+
+	const domesticService = domesticServices.includes(primary_service);
 
 	const disableConditionForFcl = primary_service === 'fcl_freight'
 		&& paylater_eligibility
@@ -138,9 +147,9 @@ function BookingConfirmationFooter({
 			&& !isChannelPartner
 			&& !shipment_id
 			&& !domesticService)
-		|| (detail?.credit_details?.is_any_invoice_on_credit
-			&& !detail?.credit_terms_amd_condition?.is_tnc_accepted
-			&& detail?.credit_details?.credit_source === 'pre_approved_clean_credit');
+		|| (is_any_invoice_on_credit
+			&& !is_tnc_accepted
+			&& credit_source === 'pre_approved_clean_credit');
 
 	const {
 		handleSubmit,
@@ -157,7 +166,6 @@ function BookingConfirmationFooter({
 		validity_end = '',
 	} = useHandleBookingConfirmationFooter({
 		detail,
-		formProps,
 		checkoutMethod,
 		getCheckout,
 		bookingConfirmationMode,
@@ -224,7 +232,8 @@ function BookingConfirmationFooter({
 						onClick={handleSubmit}
 						loading={submitButtonLoading}
 						disabled={
-							disableConditionForFcl
+							!quotation_email_sent_at
+							|| disableConditionForFcl
 							|| disableCondition
 							|| isVeryRisky
 							|| isEmpty(invoicingParties)

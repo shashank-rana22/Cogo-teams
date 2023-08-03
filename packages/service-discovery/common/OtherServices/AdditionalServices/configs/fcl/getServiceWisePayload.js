@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', tradeType = '' }) => {
 	const {
 		origin_warehouse_id = '',
@@ -41,6 +43,8 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 		cargo_handling_type,
 	} = TRADE_TYPE_MAPPING[tradeType];
 
+	const commodity = primaryServicesObj?.[GLOBAL_CONSTANTS.zeroth_index].commodity;
+
 	const MAPPING = {
 		trailer_freight: primaryServicesObj.map((item) => ({
 			origin_location_id,
@@ -54,10 +58,10 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 			service_type               : service_name,
 			trade_type,
 		})),
-		ftl_freight: primaryServicesObj.map((item) => ({
+		ftl_freight: [{
 			origin_location_id,
 			destination_location_id,
-			commodity : item.commodity,
+			commodity,
 			status    : 'active',
 			trade_type,
 			trucks_count,
@@ -65,7 +69,7 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 			volume    : 1,
 			weight    : 1,
 			trip_type : 'one_Way',
-		})),
+		}],
 		fcl_freight_local: primaryServicesObj.map((item) => ({
 			port_id,
 			container_size             : item.container_size,

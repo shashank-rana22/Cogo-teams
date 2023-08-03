@@ -126,19 +126,20 @@ function RenderLineItem({
 		<div className={styles.container}>
 			<div className={styles.service_name}>
 				{name}
-				{is_added && !disableForm ? (
+				{is_added && !detail.quotation_email_sent_at ? (
 					<Button
 						type="button"
 						size="sm"
 						themeType="secondary"
 						style={{ marginLeft: '16px' }}
-						onClick={() => handleDelete()}
+						onClick={handleDelete}
 						loading={loading || checkoutLoading}
 					>
 						Delete
 					</Button>
 				) : null}
 			</div>
+
 			<div className={styles.currency}>{currency}</div>
 			<div className={styles.buy_price}>
 				{displayBuyPrice}

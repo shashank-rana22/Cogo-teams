@@ -63,7 +63,6 @@ import {
 	asyncListShipments,
 	asyncListShipmentPendingTasks,
 	asyncListSaasHsCodes,
-	asyncHsCodeListCommodities,
 	asyncListSpotSearchRateCardOperators,
 } from '../../../utils/getAsyncFields';
 
@@ -146,7 +145,6 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipments                       : asyncListShipments,
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
-	list_hs_code_commodities             : asyncHsCodeListCommodities,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
 };
 

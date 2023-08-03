@@ -9,6 +9,8 @@ import DefaultQuotationInfo from '../../../../../../commons/DefaultQuotationInfo
 import PreviewBookingFooter from '../../../../../../commons/PreviewBookingFooter';
 import ServiceTerms from '../../../../../../commons/ServiceTerms';
 import { CheckoutContext } from '../../../../../../context';
+import AdditionalServices from '../../../EditMargin/AdditionalContent/AdditionalServices';
+import ShippingPreferences from '../ShippingPreferences';
 
 import styles from './styles.module.css';
 
@@ -17,6 +19,7 @@ function AdditionalContent({
 	setCargoDetails = () => {},
 	agreeTandC = false,
 	setAgreeTandC = () => {},
+	formProps = {},
 }) {
 	const {
 		rate,
@@ -30,9 +33,11 @@ function AdditionalContent({
 		updateLoading,
 		orgData,
 		loading,
+		setHeaderProps,
+		possible_subsidiary_services = [],
 	} = useContext(CheckoutContext);
 
-	const { primary_service = '', services = {}, trade_type = '' } = detail || {};
+	const { primary_service = '', services = {}, trade_type = '', source_id: search_id } = detail || {};
 
 	return (
 		<div className={styles.container}>
@@ -40,6 +45,25 @@ function AdditionalContent({
 				detail={detail}
 				cargoDetails={cargoDetails}
 				setCargoDetails={setCargoDetails}
+				primaryService={primaryService}
+			/>
+
+			<ShippingPreferences
+				formProps={formProps}
+				primaryService={primaryService}
+				search_id={search_id}
+				updateLoading={updateLoading}
+			/>
+
+			<AdditionalServices
+				rate={rate}
+				detail={detail}
+				setHeaderProps={setHeaderProps}
+				primaryService={primaryService}
+				getCheckout={getCheckout}
+				loading={loading}
+				possible_subsidiary_services={possible_subsidiary_services}
+				servicesLength={Object.values(services).length}
 			/>
 
 			<BookingContent
@@ -94,6 +118,7 @@ function AdditionalContent({
 				updateLoading={updateLoading}
 				agreeTandC={agreeTandC}
 				cargoDetails={cargoDetails}
+				formProps={formProps}
 			/>
 		</div>
 	);

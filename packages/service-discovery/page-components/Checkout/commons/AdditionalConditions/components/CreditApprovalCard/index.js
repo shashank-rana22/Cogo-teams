@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import { IcMInvoiceApprovals, IcMRefresh } from '@cogoport/icons-react';
 
 import hideDetails from '../../../../helpers/hideDetails';
@@ -7,9 +7,9 @@ import styles from './styles.module.css';
 import useSendCreditTnc from './useSendCreditTnc';
 
 function CreditApprovalCard({
-	detail,
-	loading: getCheckoutLoading,
-	getCheckout,
+	detail = {},
+	loading: getCheckoutLoading = false,
+	getCheckout = () => {},
 }) {
 	const { email, name, showModal, onClose, onSubmit, loading } = useSendCreditTnc({ detail });
 
@@ -42,7 +42,7 @@ function CreditApprovalCard({
 					>
 						<div>Refresh </div>
 						<div
-							className={`${styles.refresh_icon} ${
+							className={cl`${styles.refresh_icon} ${
 								getCheckoutLoading ? styles.animate : ''
 							}`}
 						>

@@ -10,7 +10,6 @@ import useSendWhatsappBooking from '../../../../../../hooks/useSendWhatsappBooki
 
 const useHandleBookingConfirmationFooter = ({
 	detail = {},
-	formProps = {},
 	checkoutMethod = '',
 	bookingConfirmationMode = '',
 	checkout_type = '',
@@ -30,12 +29,8 @@ const useHandleBookingConfirmationFooter = ({
 		importer_exporter_id,
 		importer_exporter,
 		id,
-		services = {},
-		primary_service = '',
 		id: checkout_id = '',
 	} = detail;
-
-	const { getValues } = formProps;
 
 	const [showOtpModal, setShowOtpModal] = useState(false);
 	const [otpValue, setOtpValue] = useState('');
@@ -52,14 +47,6 @@ const useHandleBookingConfirmationFooter = ({
 		{
 			method : 'post',
 			url    : '/verify_booking_confirmation_otp',
-		},
-		{ manual: true },
-	);
-
-	const [{ loading :updateLoading }, triggerUpdateCheckoutService] = useRequest(
-		{
-			method : 'post',
-			url    : '/update_checkout_service',
 		},
 		{ manual: true },
 	);
@@ -116,55 +103,6 @@ const useHandleBookingConfirmationFooter = ({
 	};
 
 	const handleSubmit = async () => {
-		const {
-			sailing_range = {},
-			max_price, min_price,
-			agreed_for_partial_shipment = false,
-			...restValues
-		} = getValues();
-
-		const { startDate = '', endDate = '' } = sailing_range;
-
-		const primaryServicesArray = Object.values(services).filter(
-			(item) => item.service_type === primary_service,
-		);
-
-		if ((startDate && !endDate) || (!startDate && endDate)) {
-			Toast.error('Select sailing range correctly');
-			return;
-		}
-
-		if (Number(min_price) > Number(max_price)) {
-			Toast.error('Min price cannot be greater than max price');
-			return;
-		}
-
-		const payload = {
-			id,
-			update_rates                    : false,
-			service                         : primary_service,
-			fcl_freight_services_attributes : primaryServicesArray.map(
-				({ id: service_id }) => ({
-					id                   : service_id,
-					shipping_preferences : {
-						sailing_start_date          : startDate || undefined,
-						sailing_end_date            : endDate || undefined,
-						min_price                   : Number(min_price) || undefined,
-						max_price                   : Number(max_price) || undefined,
-						agreed_for_partial_shipment : agreed_for_partial_shipment === 'yes',
-						...restValues,
-					},
-				}),
-			),
-		};
-
-		const res = await triggerUpdateCheckoutService({ data: payload });
-
-		if (!res || res?.hasError) {
-			Toast.error('Something went wrong while saving shipping preferences');
-			return;
-		}
-
 		if (bookingConfirmationMode === 'mobile_otp') {
 			submitForOtpVerification();
 			return;
@@ -189,7 +127,7 @@ const useHandleBookingConfirmationFooter = ({
 	return {
 		handleSubmit,
 		onClickSubmitOtp,
-		submitButtonLoading: updateLoading || bookCheckoutLoading || loading || sendOtpLoading || whatsappLoading,
+		submitButtonLoading: bookCheckoutLoading || loading || sendOtpLoading || whatsappLoading,
 		verifyOtpLoading,
 		checkout_approvals,
 		hasExpired,

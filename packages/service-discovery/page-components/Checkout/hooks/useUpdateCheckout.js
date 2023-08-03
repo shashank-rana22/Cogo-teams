@@ -21,8 +21,8 @@ const useUpdateCheckout = ({ getCheckout, detail = {} }) => {
 	);
 
 	const updateCheckout = async ({
-		values,
-		closeFunction,
+		values = {},
+		closeFunction = () => {},
 		stateValue = false,
 		type = '',
 		refetchRequired = true,

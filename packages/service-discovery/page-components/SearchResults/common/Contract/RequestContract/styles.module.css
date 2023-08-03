@@ -64,10 +64,10 @@
 
 .label {
 	display: flex;
+	display: inline-block;
 	font-size: 12px;
 	font-weight: 500;
 	color: #000;
-	display: inline-block;
 }
 
 .element {

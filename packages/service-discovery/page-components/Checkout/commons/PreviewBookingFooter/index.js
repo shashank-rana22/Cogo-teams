@@ -1,6 +1,7 @@
 import { Button, Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useRef, useEffect, useContext } from 'react';
 
@@ -30,7 +31,10 @@ function PreviewBookingFooter({
 	isVeryRisky = false,
 	agreeTandC = false,
 	cargoDetails = {},
+	formProps = {},
 }) {
+	const { push } = useRouter();
+
 	const { detail = {}, rate } = useContext(CheckoutContext);
 
 	const timerRef = useRef(null);
@@ -41,6 +45,8 @@ function PreviewBookingFooter({
 		primary_service = '',
 		services = {},
 	} = detail;
+
+	const { getValues } = formProps;
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -64,8 +70,28 @@ function PreviewBookingFooter({
 			commodity_category = '',
 		} = cargoDetails || {};
 
+		const {
+			sailing_range = {},
+			max_price, min_price,
+			agreed_for_partial_shipment = false,
+			...restValues
+		} = getValues();
+
+		const { startDate = '', endDate = '' } = sailing_range;
+
+		if ((startDate && !endDate) || (!startDate && endDate)) {
+			Toast.error('Select sailing range correctly');
+			return;
+		}
+
+		if (Number(min_price) > Number(max_price)) {
+			Toast.error('Min price cannot be greater than max price');
+			return;
+		}
+
 		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency || !commodity_category) {
 			Toast.error('Please select cargo details');
+			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			return;
 		}
 
@@ -82,6 +108,14 @@ function PreviewBookingFooter({
 							cargo_value          : Number(cargo_value) || undefined,
 							cargo_value_currency : cargo_value_currency || undefined,
 							commodity_category   : commodity_category || commodity_category,
+							shipping_preferences : {
+								sailing_start_date          : startDate || undefined,
+								sailing_end_date            : endDate || undefined,
+								min_price                   : Number(min_price) || undefined,
+								max_price                   : Number(max_price) || undefined,
+								agreed_for_partial_shipment : agreed_for_partial_shipment === 'yes',
+								...restValues,
+							},
 						}),
 					),
 				},
@@ -102,6 +136,15 @@ function PreviewBookingFooter({
 		}
 	};
 
+	const onClickSaveForLater = () => {
+		updateCheckout({ values: { id, state: 'save_for_later' }, refetchRequired: false });
+
+		push(
+			'/service_discovery',
+			'/service_discovery',
+		);
+	};
+
 	const disableButton = isVeryRisky || !agreeTandC
 		|| (detail?.importer_exporter?.kyc_status !== 'verified'
 			&& !detail?.importer_exporter?.skippable_checks?.includes('kyc'));
@@ -112,7 +155,9 @@ function PreviewBookingFooter({
 			themeType : 'secondary',
 			size      : 'lg',
 			key       : 'save_for_later',
-			disabled  : updateLoading || updateCheckoutServiceLoading,
+			onClick   : onClickSaveForLater,
+			loading   : updateLoading,
+			disabled  : updateCheckoutServiceLoading,
 		},
 		{
 			label     : <SubmitButton rate={rate} />,

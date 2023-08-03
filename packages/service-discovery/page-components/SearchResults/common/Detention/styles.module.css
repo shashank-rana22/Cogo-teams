@@ -22,6 +22,7 @@
 	font-size: 16px;
 	font-weight: 600;
 }
+
 .sub_heading {
 	margin-bottom: 12px;
 	font-size: 12px;
@@ -39,9 +40,9 @@
 }
 
 .label {
+	min-width: max-content;
 	margin-bottom: 8px;
 	font-size: 14px;
-	min-width: max-content;
 }
 
 .button_container {

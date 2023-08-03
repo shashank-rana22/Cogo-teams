@@ -3,11 +3,13 @@ import { useContext } from 'react';
 import AdditionalConditions from '../../../../commons/AdditionalConditions';
 import ControlledBooking from '../../../../commons/ControlledBooking';
 import InvoicingParties from '../../../../commons/InvoicingParties';
+import ShareQuotation from '../../../../commons/ShareQuotation';
 import { CheckoutContext } from '../../../../context';
+import AdditionalServices from '../EditMargin/AdditionalContent/AdditionalServices';
 
 import BookingConfirmationFooter from './components/BookingConfirmationFooter';
 import BookingTypeOptions from './components/BookingTypeOptions';
-import ShippingPreferences from './components/ShippingPreferences';
+import PriceBreakup from './components/PriceBreakup';
 import styles from './styles.module.css';
 import useHandleBookingConfirmation from './useHandleBookingConfirmation';
 
@@ -23,6 +25,9 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		loading,
 		checkoutMethod,
 		earnable_cogopoints = {},
+		rate = {},
+		setHeaderProps = () => {},
+		possible_subsidiary_services = [],
 	} = useContext(CheckoutContext);
 
 	const {
@@ -30,7 +35,6 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		checkout_approvals,
 		isControlBookingDetailsFilled,
 		setIsControlBookingDetailsFilled,
-		formProps,
 		controlledBookingServices,
 		bookingConfirmationMode = '',
 		setBookingConfirmationMode = () => {},
@@ -38,11 +42,9 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		setInvoicingParties = () => {},
 		isVeryRisky = false,
 		setIsVeryRisky = () => {},
-		isAllShippingLinesRequired = false,
-		setIsAllShippingLinesRequired = () => {},
 	} = useHandleBookingConfirmation();
 
-	const { source_id: search_id } = detail || {};
+	const { services = {} } = detail || {};
 
 	const { is_any_invoice_on_credit = false } = detail?.credit_details || {};
 
@@ -61,6 +63,19 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 
 			<InvoicingParties invoicingParties={invoicingParties} setInvoicingParties={setInvoicingParties} />
 
+			<AdditionalServices
+				rate={rate}
+				detail={detail}
+				setHeaderProps={setHeaderProps}
+				primaryService={primaryService}
+				getCheckout={getCheckout}
+				loading={loading}
+				possible_subsidiary_services={possible_subsidiary_services}
+				servicesLength={Object.values(services).length}
+			/>
+
+			<PriceBreakup />
+
 			<AdditionalConditions
 				detail={detail}
 				updateCheckout={updateCheckout}
@@ -73,14 +88,7 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				source="booking_confirmation"
 			/>
 
-			<ShippingPreferences
-				formProps={formProps}
-				primaryService={primaryService}
-				search_id={search_id}
-				setIsAllShippingLinesRequired={setIsAllShippingLinesRequired}
-				isAllShippingLinesRequired={isAllShippingLinesRequired}
-				updateLoading={updateLoading}
-			/>
+			<ShareQuotation />
 
 			<BookingTypeOptions
 				radioOption={radioOption}
@@ -92,7 +100,6 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				detail={detail}
 				checkoutMethod={checkoutMethod}
 				isControlBookingDetailsFilled={isControlBookingDetailsFilled}
-				formProps={formProps}
 				bookingConfirmationMode={bookingConfirmationMode}
 				invoicingParties={invoicingParties}
 				isVeryRisky={isVeryRisky && is_any_invoice_on_credit}

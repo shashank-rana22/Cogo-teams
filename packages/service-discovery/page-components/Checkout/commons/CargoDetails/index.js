@@ -1,14 +1,13 @@
 import { Datepicker, Input, Select, cl } from '@cogoport/components';
-import { AsyncSelect } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import currencies from '../../helpers/currencies';
 
-import { getServiceMode } from './getServiceMode';
 import styles from './styles.module.css';
+import useGetCommodityOptions from './useGetCommodityOptions';
 
-function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = {} }) {
-	const mode = getServiceMode(detail?.primary_service);
+function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = {}, primaryService = {} }) {
+	const { commodityTypeOptions = [], loading = false } = useGetCommodityOptions({ detail });
 
 	const MAPPING = [
 		{
@@ -20,7 +19,8 @@ function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = 
 			key             : 'cargo_readiness_date',
 			icon            : GLOBAL_CONSTANTS.image_url.cargo_readiness_date_s2c_png,
 			componentProps  : {
-				minDate: new Date(),
+				minDate : new Date(),
+				maxDate : new Date(primaryService?.departure),
 			},
 		},
 		{
@@ -51,13 +51,11 @@ function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = 
 			label           : 'Select Commodity Type',
 			backgroundColor : '#FFFEFD',
 			border          : '1px solid #F3FAFA',
-			component       : AsyncSelect,
+			component       : Select,
 			key             : 'commodity_category',
 			icon            : GLOBAL_CONSTANTS.image_url.hs_code_s2c_png,
 			componentProps  : {
-				asyncKey    : 'list_hs_code_commodities',
-				params      : { service: mode },
-				initialCall : true,
+				options: commodityTypeOptions,
 			},
 		},
 	];
@@ -80,7 +78,7 @@ function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = 
 				} = item;
 
 				return (
-					<div key={key} className={styles.item_container}>
+					<div key={`${key}_${loading}`} className={styles.item_container}>
 						<div className={styles.heading}>
 							{heading}
 							<sup className={styles.superscipt}>*</sup>

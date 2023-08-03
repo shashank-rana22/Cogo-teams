@@ -1,5 +1,6 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import getPrefillForm from '../../../../../../../../SearchResults/utils/getPrefillForm';
 import useCreateSearch from '../../../../../../../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
@@ -14,11 +15,12 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 	const {
 		detail = {},
 		primaryService = {},
+		rate = {},
 	} = useContext(CheckoutContext);
 
 	const timerRef = useRef({});
 
-	const { createSearch, loading } = useCreateSearch();
+	const [showCouponCode, setShowCouponCode] = useState(false);
 
 	const {
 		validity_end,
@@ -29,6 +31,33 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 		user = {},
 	} = detail;
 
+	const {
+		tax_total_price = 0,
+		tax_total_price_discounted = 0,
+		total_price_currency = '',
+		promotions = {},
+	} = rate;
+
+	const { promocodes = [] } = promotions;
+
+	const totalBeforeDiscount = tax_total_price;
+	const totalPrice = tax_total_price_discounted;
+
+	const discount = totalPrice - totalBeforeDiscount;
+
+	const localedDiscount = formatAmount({
+		amount   : discount,
+		currency : total_price_currency,
+		options  : {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 2,
+			minimumFractionDigits : 2,
+		},
+	});
+
+	const { createSearch, loading } = useCreateSearch();
+
 	const { destination_port = {}, origin_port = {} } = primaryService;
 
 	const mainServiceObject = Object.values(services).find(
@@ -38,6 +67,14 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 	const { shipping_line = {} } = mainServiceObject || {};
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
+
+	const appliedPromotion = promocodes.find(
+		(x) => x.consumption_mode === 'manual',
+	);
+
+	const [isCouponApplied, setCouponApplied] = useState(
+		appliedPromotion?.id !== undefined,
+	);
 
 	useEffect(() => {
 		let time;
@@ -91,11 +128,17 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 
 	const BUTTON_MAPPING = [
 		{
-			key       : 'coupon_code',
-			label     : 'Have a Coupon Code?',
+			key   : 'coupon_code',
+			label : !discount ? 'Have a Coupon Code?' : (
+				<div style={{ color: '#849e4c' }}>
+					Coupon Applied -
+					{' '}
+					{localedDiscount}
+				</div>
+			),
 			themeType : 'link',
 			style     : {},
-			onClick   : () => {},
+			onClick   : () => setShowCouponCode(true),
 		},
 		{
 			key   : 'view_details',
@@ -125,6 +168,11 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 		services,
 		hasExpired,
 		timerRef,
+		showCouponCode,
+		setShowCouponCode,
+		isCouponApplied,
+		setCouponApplied,
+		appliedPromotion,
 	};
 };
 

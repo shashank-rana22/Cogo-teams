@@ -3,18 +3,16 @@ import { useContext } from 'react';
 
 import { CheckoutContext } from '../../context';
 
-import LockMarginModal from './LockMarginModal';
 import PocDetails from './PocDetails';
 import QuotationModal from './QuotationModal';
 import styles from './styles.module.css';
 import useHandleShareQuotation from './useHandleShareQuotation';
 
-function ShareQuotation(props) {
+function ShareQuotation() {
 	const {
 		rate,
 		detail,
 		isChannelPartner,
-		getCheckout,
 		invoice,
 		orgData,
 		updateCheckout,
@@ -25,23 +23,15 @@ function ShareQuotation(props) {
 		BUTTON_MAPPING,
 		size,
 		widths,
-		updateQuotation,
 		quotationOptions,
 		showWhatsappVerificationModal,
 		setShowWhatsappVerificationModal,
 		showShareQuotationModal,
 		setSelectedModes,
-		loading,
 		selectedModes,
 		setShowShareQuotationModal,
-		lockMarginModalData,
-		setLockMarginModalData,
 	} = useHandleShareQuotation({
-		...props,
-		getCheckout,
 		detail,
-		rate,
-		updateLoading,
 		updateCheckout,
 	});
 
@@ -83,15 +73,6 @@ function ShareQuotation(props) {
 					widths={widths}
 					updateCheckout={updateCheckout}
 					updateLoading={updateLoading}
-				/>
-			) : null}
-
-			{lockMarginModalData ? (
-				<LockMarginModal
-					updateQuotation={updateQuotation}
-					lockMarginModalData={lockMarginModalData}
-					setLockMarginModalData={setLockMarginModalData}
-					loading={loading}
 				/>
 			) : null}
 

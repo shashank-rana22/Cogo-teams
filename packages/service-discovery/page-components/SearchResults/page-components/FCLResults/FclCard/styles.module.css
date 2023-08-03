@@ -63,10 +63,8 @@
 
 .pill {
 	display: flex;
-    align-items: center;
-    padding: 2px 8px;
-    font-size: 10px;
-    font-weight: 500;
+	align-items: center;
+	padding: 2px 8px;
 	margin-right: 2px;
     color: #221f20;
     cursor: pointer;

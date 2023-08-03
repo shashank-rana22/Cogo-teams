@@ -1,9 +1,9 @@
-.accordion {
+.container {
 	margin: 20px 0;
-	background-color: #fdf3e9;
+	background-color: #f3fafa;
 
 	&:hover {
-		box-shadow: 0 0 8px #edd7a9 !important;
+		box-shadow: 0 0 8px #b7dbff !important;
 	}
 
 	:global {
@@ -14,13 +14,11 @@
 
 		.ui_accordion_header {
 			padding: 20px 24px;
-			background-color: #fdf3e9;
 		}
 
 		.ui_accordion_content {
-			padding: 32px;
-			padding-top: 8px;
-			background-color: #fdf3e9;
+			padding: 12px !important;
+            padding-top: 0px !important;
 		}
 
 		.ui_accordion_icon {
