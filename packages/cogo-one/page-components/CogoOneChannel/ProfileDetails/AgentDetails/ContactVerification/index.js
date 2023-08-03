@@ -26,33 +26,31 @@ function ContactVerification({ leadUserId = '', userId = '', loading = false, us
 	if (!(leadUserId || userId)) {
 		return null;
 	}
+	if (loading) {
+		return (
+			<Placeholder height="20px" width="120px" margin="10px 0px 10px 0px" />
+		);
+	}
 
 	return (
 		<div>
 			<div className={styles.verification_pills}>
-				{VERIFICATION_STATUS.map((item, index) => {
+				{VERIFICATION_STATUS.map((item) => {
 					const { label = '', prefixIcon, color } = item;
-					const itemKey = `${snakeCase(item.label)}_${index}`;
+					const itemKey = `${snakeCase(item.label)}`;
 					return (
 						<div key={itemKey}>
-							{loading ? (
-								<Placeholder
-									height="20px"
-									width="120px"
-									margin="10px 0px 10px 0px"
-								/>
-							) : (
-								<Pill
-									key={label}
-									prefix={prefixIcon}
-									size="md"
-									color={color}
-								>
-									<div className={styles.pill_name}>
-										{label}
-									</div>
-								</Pill>
-							)}
+							<Pill
+								key={label}
+								prefix={prefixIcon}
+								size="md"
+								color={color}
+							>
+								<div className={styles.pill_name}>
+									{label}
+								</div>
+							</Pill>
+
 						</div>
 					);
 				})}
