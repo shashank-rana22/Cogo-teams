@@ -1,4 +1,4 @@
-import { Input, Select, Tooltip } from '@cogoport/components';
+import { Button, Input, Select, Tooltip } from '@cogoport/components';
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -7,6 +7,7 @@ import StyledTable from '../../common/StyledTable';
 import useShipmentView from '../../hooks/useShipmentView';
 import { CHANNEL_OPTIONS, MILESTONE_OPTIONS } from '../constant';
 
+import BookShipmentModal from './BookShipmentModal';
 import Card from './Card';
 import { accrualColumn } from './constant';
 import Footer from './Footer';
@@ -15,6 +16,7 @@ import styles from './styles.module.css';
 function ShipmentView() {
 	const [checkedRows, setCheckedRows] = useState({});
 	const [showBtn, setShowBtn] = useState(false);
+	const [showBookShipment, setShowBookShipment] = useState(false);
 	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
 	const [filters, setFilters] = useState({
 		year               : '',
@@ -72,9 +74,17 @@ function ShipmentView() {
 	const { page, year, month } = filters || {};
 
 	const isApplyEnable = year?.length > 0 && month?.length > 0;
+	console.log(showBookShipment, 'showBookShipment');
 
 	return (
 		<div>
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Button onClick={() => setShowBookShipment(true)}>Book Shipment</Button>
+			</div>
+			{showBookShipment
+				? <BookShipmentModal showBookShipment={showBookShipment} setShowBookShipment={setShowBookShipment} />
+				: <span>hy</span>}
+
 			<Card
 				refetch={refetch}
 				setPayload={setPayload}
