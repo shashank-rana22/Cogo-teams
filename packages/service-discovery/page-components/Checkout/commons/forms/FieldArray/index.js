@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import Child from './Child';
@@ -25,14 +26,12 @@ function FieldArray(props) {
 
 	const EMPTY_VALUES = {};
 	controls.forEach((controlItem) => {
-		EMPTY_VALUES[controlItem.name] = value[0][controlItem.name] || '';
+		EMPTY_VALUES[controlItem.name] = value[GLOBAL_CONSTANTS.zeroth_index][controlItem.name] || '';
 	});
 
 	if (isEmpty(fields)) {
 		append(EMPTY_VALUES);
 	}
-
-	console.log('controls', value, controls);
 
 	return (
 		<div>

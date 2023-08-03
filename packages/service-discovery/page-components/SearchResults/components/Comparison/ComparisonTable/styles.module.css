@@ -74,10 +74,10 @@
 }
 
 .item_details {
-	background: #fff;
-	color: #000;
+	margin-right: 4px;
 	font-size: 10px;
 	font-weight: 500;
-	margin-right: 4px;
+	color: #000;
+	background: #fff;
 	opacity: 0.6;
 }

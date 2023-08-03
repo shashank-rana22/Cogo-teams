@@ -4,6 +4,7 @@ import PreviewBooking from './components/PreviewBooking';
 import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {
+	save_for_later       : EditMargin,
 	draft                : EditMargin,
 	locked               : PreviewBooking,
 	booking_confirmation : BookingConfirmation,
@@ -11,12 +12,13 @@ const COMPONENT_MAPPING = {
 };
 
 function FclCheckout({ state = 'draft', setIsShipmentCreated = () => {} }) {
-	const ActiveComponent = COMPONENT_MAPPING[state];
+	const ActiveComponent = COMPONENT_MAPPING[state] || COMPONENT_MAPPING.draft;
 
 	return (
 		<div className={styles.container}>
 			<ActiveComponent
 				setIsShipmentCreated={setIsShipmentCreated}
+				state={state}
 			/>
 		</div>
 	);

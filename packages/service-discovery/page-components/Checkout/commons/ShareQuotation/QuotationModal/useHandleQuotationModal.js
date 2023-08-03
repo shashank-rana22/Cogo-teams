@@ -151,8 +151,6 @@ const useHandleQuotationModal = ({
 				setShowShareQuotationModal(false);
 
 				Toast.success('Email sent');
-
-				// updateCheckout({ values: { id: checkout_id, is_locked: true } });
 			} catch (err) {
 				if (err?.response) {
 					getApiErrorString(err.response?.data);

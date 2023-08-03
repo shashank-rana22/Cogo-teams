@@ -15,6 +15,7 @@ function InvoicingParties({
 		rate,
 		detail = {},
 		activated_on_paylater = {},
+		getCheckout = () => {},
 	} = useContext(CheckoutContext);
 
 	const { services = {} } = detail;
@@ -39,7 +40,7 @@ function InvoicingParties({
 	const {
 		updateCheckoutInvoice,
 		loading: updateLoading,
-	} = useUpdateCheckoutInvoice({ getCheckoutInvoices });
+	} = useUpdateCheckoutInvoice({ getCheckoutInvoices, getCheckout });
 
 	return (
 		<div className={styles.container}>

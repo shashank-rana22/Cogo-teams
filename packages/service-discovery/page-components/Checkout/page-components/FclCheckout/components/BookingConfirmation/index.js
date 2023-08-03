@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import AdditionalConditions from '../../../../commons/AdditionalConditions';
 import ControlledBooking from '../../../../commons/ControlledBooking';
 import InvoicingParties from '../../../../commons/InvoicingParties';
+import ShareQuotation from '../../../../commons/ShareQuotation';
 import { CheckoutContext } from '../../../../context';
 
 import BookingConfirmationFooter from './components/BookingConfirmationFooter';
@@ -81,6 +82,8 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				isAllShippingLinesRequired={isAllShippingLinesRequired}
 				updateLoading={updateLoading}
 			/>
+
+			<ShareQuotation />
 
 			<BookingTypeOptions
 				radioOption={radioOption}

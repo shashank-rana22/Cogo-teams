@@ -1,13 +1,13 @@
 .terms_and_conditions_container {
-	padding: 15px;
 	max-height: 200px;
+	padding: 15px;
 	overflow: scroll;
 	text-align: justify;
 }
 
 .title {
-	font-weight: 500;
-	font-size: 18px;
-	color: #2c3e50;
 	padding-bottom: 3px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #2c3e50;
 }

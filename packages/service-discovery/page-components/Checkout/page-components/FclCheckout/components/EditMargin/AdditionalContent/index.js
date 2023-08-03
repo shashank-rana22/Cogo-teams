@@ -3,10 +3,10 @@ import { useContext } from 'react';
 import Cancellation from '../../../../../commons/Cancellation';
 import ConfirmationTexts from '../../../../../commons/ConfirmationTexts';
 import DefaultQuotationInfo from '../../../../../commons/DefaultQuotationInfo';
-import ShareQuotation from '../../../../../commons/ShareQuotation';
 import { CheckoutContext } from '../../../../../context';
 
 import AdditionalServices from './AdditionalServices';
+import EditMarginFooter from './EditMarginFooter';
 import styles from './styles.module.css';
 
 function AdditionalContent({
@@ -14,6 +14,7 @@ function AdditionalContent({
 	convenienceDetails = {},
 	convenience_line_item = {},
 	noRatesPresent = false,
+	state = '',
 }) {
 	const {
 		rate,
@@ -23,6 +24,8 @@ function AdditionalContent({
 		setHeaderProps,
 		possible_subsidiary_services = [],
 		loading,
+		updateCheckout,
+		updateLoading = false,
 	} = useContext(CheckoutContext);
 
 	const { services = {}, trade_type = '' } = detail;
@@ -57,13 +60,15 @@ function AdditionalContent({
 
 			<DefaultQuotationInfo />
 
-			<div className={styles.sub_heading}>Share Quotation with</div>
-
-			<ShareQuotation
+			<EditMarginFooter
+				updateCheckout={updateCheckout}
+				updateLoading={updateLoading}
+				noRatesPresent={noRatesPresent}
+				loading={loading}
 				rateDetails={rateDetails}
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}
-				noRatesPresent={noRatesPresent}
+				state={state}
 			/>
 		</div>
 	);

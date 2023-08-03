@@ -1,5 +1,5 @@
 .container {
-	margin: 40px 0;
+	margin: 32px 0;
 
 	:global {
 		.ui_multiselectt_options_container {
@@ -90,6 +90,6 @@
 
 .flex_row {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 }

@@ -47,8 +47,6 @@ function PromocodesModal({
 		checkout_id,
 	});
 
-	console.log('appliedPromotion', appliedPromotion);
-
 	if (checkoutLoading && disableCursor !== 'not-allowed') {
 		setDisableCursor('not-allowed');
 	}

@@ -836,20 +836,6 @@ function asyncListSaasHsCodes() {
 	};
 }
 
-function asyncHsCodeListCommodities() {
-	return {
-		valueKey       : 'commodity',
-		labelKey       : 'commodityDisplayName',
-		authkey        : 'get_saas_hs_code_list_commodities',
-		endpoint       : '/saas/hs-code/list-commodities',
-		defaultOptions : true,
-		searchByq      : true,
-		qFilterKey     : 'query',
-		microService   : 'business_finance',
-		defaultParams  : {},
-	};
-}
-
 function asyncListSpotSearchRateCardOperators() {
 	return {
 		labelKey    : 'short_name',
@@ -926,6 +912,5 @@ export {
 	asyncListShipments,
 	asyncListShipmentServices,
 	asyncListSaasHsCodes,
-	asyncHsCodeListCommodities,
 	asyncListSpotSearchRateCardOperators,
 };

@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { CheckboxGroupController } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -141,7 +142,7 @@ function SelectRecipients({
 				)}
 
 				{ccRecipients.length && (
-					<div className={`${styles.flex} ${styles.cc_user_ids}`}>
+					<div className={cl`${styles.flex} ${styles.cc_user_ids}`}>
 						<div>
 							CC:
 						</div>
@@ -160,7 +161,7 @@ function SelectRecipients({
 				)}
 			</div>
 
-			<div className={`${styles.label} ${styles.email_preview}`}>
+			<div className={cl`${styles.label} ${styles.email_preview}`}>
 				Email preview
 				{' '}
 				<span style={{ fontWeight: '500' }}>

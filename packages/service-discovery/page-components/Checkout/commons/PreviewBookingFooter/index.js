@@ -1,6 +1,7 @@
 import { Button, Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useRef, useEffect, useContext } from 'react';
 
@@ -31,6 +32,8 @@ function PreviewBookingFooter({
 	agreeTandC = false,
 	cargoDetails = {},
 }) {
+	const { push } = useRouter();
+
 	const { detail = {}, rate } = useContext(CheckoutContext);
 
 	const timerRef = useRef(null);
@@ -66,6 +69,7 @@ function PreviewBookingFooter({
 
 		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency || !commodity_category) {
 			Toast.error('Please select cargo details');
+			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			return;
 		}
 
@@ -102,6 +106,15 @@ function PreviewBookingFooter({
 		}
 	};
 
+	const onClickSaveForLater = () => {
+		updateCheckout({ values: { id, state: 'save_for_later' }, refetchRequired: false });
+
+		push(
+			'/service_discovery',
+			'/service_discovery',
+		);
+	};
+
 	const disableButton = isVeryRisky || !agreeTandC
 		|| (detail?.importer_exporter?.kyc_status !== 'verified'
 			&& !detail?.importer_exporter?.skippable_checks?.includes('kyc'));
@@ -112,7 +125,9 @@ function PreviewBookingFooter({
 			themeType : 'secondary',
 			size      : 'lg',
 			key       : 'save_for_later',
-			disabled  : updateLoading || updateCheckoutServiceLoading,
+			onClick   : onClickSaveForLater,
+			loading   : updateLoading,
+			disabled  : updateCheckoutServiceLoading,
 		},
 		{
 			label     : <SubmitButton rate={rate} />,

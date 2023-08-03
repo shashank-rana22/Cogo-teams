@@ -156,8 +156,6 @@ const getAddressControls = ({
 
 		const value = newValues?.[name];
 
-		console.log('value', value);
-
 		let newControl = { ...control, value };
 
 		if (name === 'gst_list') {

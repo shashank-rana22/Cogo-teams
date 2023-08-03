@@ -7,7 +7,7 @@ function BookingContent({ detail = {}, getCheckout = () => {}, isChannelPartner 
 		{
 			key       : 'booking_verification',
 			component : BookingVerification,
-			label     : 'Share Quotation',
+			label     : 'Share Link (Coming soon)',
 			props     : {
 				detail,
 			},

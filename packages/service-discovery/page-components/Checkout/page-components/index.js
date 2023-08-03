@@ -36,9 +36,11 @@ function Checkout({ checkout_type = '' }) {
 		isShipmentCreated = false,
 		setIsShipmentCreated = () => {},
 		redirect_required,
+		isLoadingStateRequired = false,
+		setIsLoadingStateRequired = () => {},
 	} = useCheckout({ query, entity_types, partner_id, checkout_type });
 
-	if (loading && isEmpty(data)) {
+	if ((loading && isEmpty(data)) || isLoadingStateRequired) {
 		return <LoadingState />;
 	}
 
@@ -47,7 +49,12 @@ function Checkout({ checkout_type = '' }) {
 	const isCheckoutApiSuccess = !isEmpty(data);
 	const isServiceSupported = GLOBAL_CONSTANTS.s2c_supported_services.includes(primary_service);
 
-	if (!isCheckoutApiSuccess || !isServiceSupported || shipment_id || !tags.includes('new_admin')) {
+	if (
+		!isCheckoutApiSuccess
+		|| !isServiceSupported
+		|| (shipment_id && redirect_required === 'true')
+		|| !tags.includes('new_admin')
+	) {
 		const { url = '', message = '' } = getRedirectionDetails({
 			isCheckoutApiSuccess,
 			partner_id,
@@ -105,11 +112,17 @@ function Checkout({ checkout_type = '' }) {
 
 					<Breadcrumb.Item label={(<a className={styles.link} href={resultsUrl}>Results</a>)} />
 
-					{Object.entries(BREADCRUMB_MAPPING).map(([key, value]) => (
+					{Object.entries(BREADCRUMB_MAPPING).map(([key, { label, onClickFunction, disabled }]) => (
 						<Breadcrumb.Item
 							key={key}
-							className={cl`${styles.Breadcrumb_item} ${key === state && styles.active}`}
-							label={value}
+							className={cl`${styles.breadcrumb_item} ${key === state && styles.active}`}
+							label={<div className={cl`${styles.link} ${disabled && styles.disabled}`}>{label}</div>}
+							onClick={() => {
+								if (!disabled) {
+									setIsLoadingStateRequired(true);
+									onClickFunction();
+								}
+							}}
 						/>
 					))}
 				</Breadcrumb>

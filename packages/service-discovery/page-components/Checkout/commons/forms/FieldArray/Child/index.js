@@ -4,6 +4,8 @@ import getElementController from '../../getElementController';
 
 import styles from './styles.module.css';
 
+const ONE = 1;
+
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
 	return rest;
@@ -23,8 +25,6 @@ function Child(props) {
 		deleteMargin = '12px',
 		field,
 	} = props;
-
-	console.log('ield[controlItem.name]', field);
 
 	return (
 		<div className={styles.content}>
@@ -62,7 +62,7 @@ function Child(props) {
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<IcMDelete
 					className={`form-fieldArray-${name}-remove`}
-					onClick={() => remove(index, 1)}
+					onClick={() => remove(index, ONE)}
 					style={{
 						height    : '20px',
 						width     : '20px',

@@ -11,6 +11,7 @@ function LandingCost({
 	conversions = {},
 	rate = {},
 	total = 0,
+	otherCharges = [],
 }) {
 	const {
 		tax_price_discounted,
@@ -40,7 +41,19 @@ function LandingCost({
 		conversions,
 	);
 
-	const totalCost = total + finalConvenienceFee + finalTaxValue + discount;
+	const otherChargesPrice = otherCharges.reduce((acc, { total_price_discounted = 0, currency: chargesCurrency }) => {
+		if (total_price_discounted) {
+			return acc + convertCurrencyValue(
+				total_price_discounted,
+				chargesCurrency,
+				total_price_currency,
+				conversions,
+			);
+		}
+		return acc;
+	}, DEFAULT_VALUE);
+
+	const totalCost = total + finalConvenienceFee + finalTaxValue + discount + otherChargesPrice;
 
 	return (
 		<div className={styles.container}>

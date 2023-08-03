@@ -9,12 +9,6 @@ import AirCheckout from './AirCheckout';
 import FclCheckout from './FclCheckout';
 import LclCheckout from './LclCheckout';
 
-const BREADCRUMB_MAPPING = {
-	draft                : 'Add or Edit Margin',
-	locked               : 'Preview Booking',
-	booking_confirmation : 'Set Invoicing Parties',
-};
-
 const MAPPING = {
 	fcl_freight : FclCheckout,
 	lcl_freight : LclCheckout,
@@ -24,6 +18,7 @@ const MAPPING = {
 const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_type = '' }) => {
 	const [headerProps, setHeaderProps] = useState({});
 	const [isShipmentCreated, setIsShipmentCreated] = useState(false);
+	const [isLoadingStateRequired, setIsLoadingStateRequired] = useState(false);
 
 	const {
 		checkout_id = '',
@@ -32,7 +27,7 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 		redirect_required = 'true',
 	} = query;
 
-	const { data = {}, loading, getCheckout } = useGetCheckout({ checkout_id });
+	const { data = {}, loading, getCheckout } = useGetCheckout({ checkout_id, setIsLoadingStateRequired });
 
 	const {
 		detail = {},
@@ -72,6 +67,29 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 		data: orgData = {},
 		loading: orgLoading,
 	} = useGetOrganization({ importer_exporter_id });
+
+	const BREADCRUMB_MAPPING = {
+		draft: {
+			label           : 'Add or Edit Margin',
+			onClickFunction : () => updateCheckout({ values: { id: detail?.id, state: 'draft' } }),
+			disabled        : ['draft', 'save_for_later'].includes(state),
+		},
+		locked: {
+			label           : 'Preview Booking',
+			onClickFunction : () => updateCheckout({ values: { id: detail?.id, state: 'locked' } }),
+			disabled:
+				state === 'locked'
+				|| (['draft', 'save_for_later'].includes(state)
+					&& !quotation_email_sent_at),
+		},
+		booking_confirmation: {
+			label           : 'Set Invoicing Parties',
+			onClickFunction : () => updateCheckout({
+				values: { id: detail?.id, state: 'booking_confirmation' },
+			}),
+			disabled: state === 'booking_confirmation' || !quotation_email_sent_at,
+		},
+	};
 
 	const isChannelPartner = entity_types?.includes('channel_partner')
 		&& !entity_types?.includes('cogoport');
@@ -190,6 +208,8 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 		isShipmentCreated,
 		setIsShipmentCreated,
 		redirect_required,
+		isLoadingStateRequired,
+		setIsLoadingStateRequired,
 	};
 };
 

@@ -1,9 +1,9 @@
 .container {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding-left: 8px;
-	position: relative;
 
 	:global {
 		.ui_popover_container {
@@ -23,13 +23,13 @@
 .source_tag {
 	position: absolute;
 	top: -12px;
-	left: 0px;
-	font-size: 12px;
-	color: #333333;
-	border-radius: 8px 0px 4px 0px;
+	left: 0;
 	width: fit-content;
 	padding: 4px 12px;
+	font-size: 12px;
+	color: #333;
 	background: #cfeaed;
+	border-radius: 8px 0 4px;
 
 	&.spot_negotiation_rate {
 		background: #e6fbe9;
