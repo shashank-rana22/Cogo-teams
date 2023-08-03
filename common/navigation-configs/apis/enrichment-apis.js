@@ -12,6 +12,29 @@ const enrichment = [
 		service_name : 'allocation',
 	},
 	{
+		api          : 'update_partner_user_status_for_enrichment',
+		access_type  : 'private',
+		feature      : 'enrichment',
+		service_name : 'partner',
+	},
+	{
+		api          : 'create_partner_user_for_enrichment',
+		access_type  : 'private',
+		feature      : 'enrichment',
+		service_name : 'partner',
+	},
+	{
+		api          : 'list_partner_users',
+		access_type  : 'private',
+		feature      : 'enrichment',
+		service_name : 'partner',
+	},
+	{
+		api          : 'update_user_password',
+		access_type  : 'private',
+		service_name : 'user',
+	},
+	{
 		api          : 'bulk_create_lead_organization_feedback_request',
 		access_type  : 'private',
 		feature      : 'enrichment',
@@ -64,6 +87,13 @@ const enrichment = [
 		access_type  : 'private',
 		feature      : 'enrichment',
 		service_name : 'allocation',
+	},
+	{
+		api          : 'get_allocation_feedback_request_enrichment_eligibility',
+		access_type  : 'private',
+		feature      : 'enrichment',
+		service_name : 'allocation',
+
 	},
 	{
 		api          : 'create_lead_organization_enrichment_response',

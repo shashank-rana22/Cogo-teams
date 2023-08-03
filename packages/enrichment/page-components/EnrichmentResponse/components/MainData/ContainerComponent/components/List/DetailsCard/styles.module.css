@@ -19,12 +19,24 @@
 	margin-right: 12px;
 }
 
+.edit_action {
+	width: 100px;
+	text-align: center;
+}
+
+.edit_button {
+	display: flex;
+	justify-content: center;
+	margin-top: 8px;
+}
+
 .top {
 	font-size: 14px;
 	color: #707070;
 }
 
 .bottom {
+	margin-top: 8px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #333;
