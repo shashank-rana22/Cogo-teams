@@ -1,8 +1,0 @@
-.container {
-  padding: 8px;
-}
-
-.grid_container {
-  display: grid;
-  grid-template-columns: auto auto;
-}
