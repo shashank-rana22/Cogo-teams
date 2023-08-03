@@ -9,12 +9,12 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		schedule_departure : getDepartureArrivalDate(primary_service, 'departure'),
 		schedule_arrival   : getDepartureArrivalDate(primary_service, 'arrival'),
 	};
-	const { state, origin_port, destination_port } = modifiedPrimaryService || {};
+	const { state, origin_port, destination_port, mark_containers_gated_out } = modifiedPrimaryService || {};
 
 	const disabledState = state === 'vessel_arrived'
 		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
 
-	const icdDisabledState = state === 'containers_gated_out'
+	const icdDisabledState = mark_containers_gated_out === 'completed'
 		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
 
 	let deviated_departure;
