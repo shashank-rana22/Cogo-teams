@@ -10,7 +10,7 @@ const OPTIONS_TO_SHOW = {
 
 function ChangePaymentMode({
 	show = false,
-	setShow = () => {},
+	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
@@ -24,14 +24,14 @@ function ChangePaymentMode({
 	const payload = { id: invoice?.id, payment_mode: paymentMode };
 
 	const refetchAfterCall = () => {
-		setShow(false);
 		refetch();
+		onClose();
 	};
 
 	const { changePaymentMode = () => {}, loading } = useUpdateInvoicePaymentMode({ refetch: refetchAfterCall });
 
 	return (
-		<Modal show={show} onClose={() => setShow(false)} closeOnOuterClick={false}>
+		<Modal show={show} onClose={onClose} closeOnOuterClick={false} showCloseIcon={!loading}>
 			<Modal.Header title="Change Payment Mode" />
 
 			<Modal.Body>
