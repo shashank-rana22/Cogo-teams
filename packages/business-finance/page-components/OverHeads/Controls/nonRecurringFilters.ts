@@ -1,18 +1,19 @@
+import { startCase } from '@cogoport/utils';
+
 import { BRANCH_OPTIONS } from '../constants/BRANCH_OPTIONS';
-import CATEGORY_OPTIONS from '../constants/CATEGORY_OPTIONS';
 import { REPEAT_FREQUENCY } from '../constants/REPEAT_FREQUENCY';
 
 export const nonRecurringFilters = [
 	{
-		span           : 2,
-		name           : 'expenseCategory',
-		placeholder    : 'Expense Category',
-		type           : 'select',
-		multiple       : false,
-		defaultOptions : false,
-		size           : 'sm',
-		isClearable    : true,
-		options        : CATEGORY_OPTIONS,
+		name        : 'expenseCategory',
+		placeholder : 'Expense Category',
+		type        : 'asyncSelect',
+		asyncKey    : 'list_expense_category',
+		initialCall : true,
+		renderLabel : (item) => startCase(item.categoryName),
+		valueKey    : 'id',
+		span        : 2,
+		style       : { width: '164px', height: '32px' },
 	},
 	{
 		name           : 'branch',
@@ -25,20 +26,19 @@ export const nonRecurringFilters = [
 		size           : 'sm',
 		options        : BRANCH_OPTIONS,
 	},
-
 ];
 
 export const recurringFilters = [
 	{
-		span           : 1,
-		name           : 'expenseCategory',
-		placeholder    : 'Expense Category',
-		type           : 'select',
-		multiple       : false,
-		defaultOptions : false,
-		size           : 'sm',
-		isClearable    : true,
-		options        : CATEGORY_OPTIONS,
+		name        : 'expenseCategory',
+		placeholder : 'Expense Category',
+		type        : 'asyncSelect',
+		asyncKey    : 'list_expense_category',
+		renderLabel : (item) => startCase(item.categoryName),
+		initialCall : true,
+		valueKey    : 'id',
+		span        : 1,
+		style       : { width: '164px', height: '32px' },
 	},
 	{
 		name           : 'branch',

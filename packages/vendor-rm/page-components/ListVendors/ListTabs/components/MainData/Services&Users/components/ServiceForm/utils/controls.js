@@ -1,25 +1,22 @@
-import officeLocations from '../../../../../../../../../utils/office-locations.json';
-import categoryOptions from '../../../../../../../../utils/category-options';
-import subCategoryOptions from '../../../../../../../../utils/sub-category-options';
+import { startCase } from '@cogoport/utils';
 
-const getControls = ({ watchCategory = '', pocOptions }) => [
+import officeLocations from '../../../../../../../../../utils/office-locations.json';
+import { EXCLUDE_CATEGORIES } from '../../../../../../../constants';
+
+const getControls = ({ pocOptions }) => [
 	{
-		name        : 'category',
-		label       : 'Select Category',
-		type        : 'select',
-		placeholder : 'Select a Category',
-		options     : categoryOptions,
-		style       : { flexBasis: '46%', marginRight: '20px' },
-		rules       : { required: 'Category is required' },
-	},
-	{
-		name        : 'sub_category',
-		label       : 'Select Sub-category',
-		type        : 'select',
-		placeholder : 'Select a sub-category',
-		options     : subCategoryOptions[watchCategory],
-		style       : { flexBasis: '46%', marginRight: '20px' },
-		rules       : { required: 'Sub Category is required' },
+		name               : 'category',
+		label              : 'Select Category',
+		type               : 'asyncSelect',
+		placeholder        : 'Select a Category',
+		asyncKey           : 'list_expense_category',
+		initialCall        : true,
+		renderLabel        : (item) => startCase(item.categoryName),
+		// eslint-disable-next-line max-len
+		getModifiedOptions : ({ options }) => (options?.filter(({ categoryName = '' }) => (!EXCLUDE_CATEGORIES.includes(categoryName)))),
+		valueKey           : 'categoryName',
+		style              : { flexBasis: '46%', marginRight: '20px' },
+		rules              : { required: 'Category is required' },
 	},
 	{
 		name        : 'cogoport_office_id',
