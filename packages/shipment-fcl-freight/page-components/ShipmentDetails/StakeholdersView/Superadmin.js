@@ -2,7 +2,6 @@ import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
-import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import getNavigationFromUrl from '@cogoport/request/helpers/getNavigationFromUrl';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
@@ -15,6 +14,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import PurchaseInvoice from '../../../common/PurchaseInvoice';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import SalesInvoice from '../../../common/SalesInvoice';
@@ -124,10 +124,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 							</TabPanel>
 
 							<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-								<PurchaseInvoicing
-									shipmentData={shipment_data}
-									servicesData={servicesGet?.servicesList}
-								/>
+								<PurchaseInvoice />
 							</TabPanel>
 
 							<TabPanel name="documents" title="Documents">
