@@ -14,16 +14,16 @@ const useGetCustomerLastShipmentDetails = ({ itemData, isPillSelected }) => {
 
 	const getLastShipmentDetails = useCallback(async () => {
 		let PAYLOAD = {};
-		if (isPillSelected) {
+		if (isPillSelected?.origin || isPillSelected?.destination) {
 			PAYLOAD = (shipmentType === 'fcl_freight') ? {
 				fcl_freight_services: {
-					origin_port_id      : originPortId,
-					destination_port_id : destinationPortId,
+					origin_port_id      : isPillSelected?.origin ? originPortId : undefined,
+					destination_port_id : isPillSelected?.destination ? destinationPortId : undefined,
 				},
 			} : {
 				air_freight_services: {
-					origin_airport_id      : originPortId,
-					destination_airport_id : destinationPortId,
+					origin_airport_id      : isPillSelected?.origin ? originPortId : undefined,
+					destination_airport_id : isPillSelected?.destination ? destinationPortId : undefined,
 				},
 			};
 		}
