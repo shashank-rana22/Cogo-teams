@@ -26,7 +26,7 @@ function OverallStats({ data = {}, ticketCount = {} }) {
 						innerRadius={0.85}
 						enableArcLinkLabels={false}
 						enableArcLabels={false}
-						colors={['#F8AEA8', '#e0e0e0', '#FCDC00', '#7278AD', '#2AC85F']}
+						colors={['#F8AEA8', '#e0e0e0', '#FCDC00', '#7278AD', '#2AC85F', '#e76f51']}
 						colorBy="index"
 						margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
 						tooltip={({
