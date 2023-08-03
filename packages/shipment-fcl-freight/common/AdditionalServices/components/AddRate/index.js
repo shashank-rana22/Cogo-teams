@@ -1,7 +1,7 @@
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
@@ -35,6 +35,7 @@ function AddRate({
 	source = '',
 	isSeller = false,
 	task = {},
+	refetchServices = () => {},
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setSecondStep] = useState(false);
@@ -42,6 +43,7 @@ function AddRate({
 	const refetchForUpdateSubService = () => {
 		refetch();
 		onCancel();
+		refetchServices();
 	};
 
 	const updateResponse = useUpdateShipmentAdditionalService({

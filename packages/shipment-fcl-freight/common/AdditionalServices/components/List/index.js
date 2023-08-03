@@ -2,7 +2,7 @@ import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
@@ -27,7 +27,7 @@ const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent'
 
 function List({ isSeller = false, source = '' }) {
 	const {
-		servicesList, refetchServices = () => {},
+		servicesList, refetchServices,
 		shipment_data, activeStakeholder, primary_service, stakeholderConfig,
 	} = useContext(
 		ShipmentDetailContext,
@@ -42,7 +42,7 @@ function List({ isSeller = false, source = '' }) {
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
 
-	const { list: additionalServiceList, refetch = () => {}, loading, totalCount } = useListAdditionalServices();
+	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({ pageLimit });
 
 	const handleRefetch = () => {
 		refetchServices();
@@ -52,6 +52,7 @@ function List({ isSeller = false, source = '' }) {
 	const refetchForUpdateSubService = () => {
 		setShowModal(false);
 		refetch();
+		refetchServices();
 	};
 
 	const updateResponse = useUpdateShipmentAdditionalService({
@@ -173,7 +174,9 @@ function List({ isSeller = false, source = '' }) {
 								status={item?.status}
 								setAddSellPrice={setShowModal}
 								updateResponse={updateResponse}
+								refetch={refetch}
 								source="add_sell_price"
+								refetchServices={refetchServices}
 							/>
 						</Modal.Body>
 					</Modal>

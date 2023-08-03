@@ -15,23 +15,21 @@ const useUpdateShipmentAdditionalService = ({
 	const [remarks, setRemarks] = useState(null);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_additional_service',
+		url    : 'update_shipment_additional_service',
 		method : 'POST',
-	});
+	}, { autoCancel: false });
 
-	const handleSubmit = async (data) => {
+	const handleSubmit = async (payload) => {
 		try {
 			await trigger({
 				data: {
-					...data,
+					...payload,
 					pending_task_id: showIp ? undefined : task?.id,
 				},
 			});
 
 			Toast.success('Service Updated successfully');
-
 			setRemarks(null);
-
 			refetch();
 		} catch (err) {
 			toastApiError(err);
@@ -155,7 +153,7 @@ const useUpdateShipmentAdditionalService = ({
 				add_to_sell_quotation: value === 'bill',
 				state:
 					value === 'not_bill' ? 'accepted_by_importer_exporter' : undefined,
-				id: item.serviceListItem.id,
+				id: item?.serviceListItem?.id || item?.id,
 			};
 
 			await handleSubmit(payload);

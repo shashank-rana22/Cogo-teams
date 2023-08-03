@@ -19,9 +19,12 @@ export default function getTaskDisplayName({
 	}
 
 	if (task?.service_type === 'subsidiary_service') {
-		taskName = `Mark ( ${REQUIRED_SERVICE_ARR?.[GLOBAL_CONSTANTS.zeroth_index]?.service_name} ) ${
-			task?.task === 'mark_completed' ? 'Completed' : 'Confirm'
-		}` || 	startCase(task?.label) || startCase(task?.task);
+		const [serviceObj] = REQUIRED_SERVICE_ARR || [];
+
+		taskName = serviceObj?.service_name
+			? `Mark (${serviceObj?.service_name}) ${task?.task === 'mark_completed' ? 'Completed' : 'Confirm'}`
+			: (startCase(task?.label)
+		|| startCase(task?.task));
 	}
 
 	if (

@@ -3,9 +3,9 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useContext, useEffect, useCallback, useState } from 'react';
 
-const useListAdditionalServices = ({ payload = {} } = {}) => {
-	const [apiData, setApiData] = useState({});
+const useListAdditionalServices = ({ payload = {}, pageLimit = 8 } = {}) => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
+	const [apiData, setApiData] = useState({});
 
 	const { importer_exporter_id = '', id:shipment_id = '' } = shipment_data || {};
 
@@ -19,7 +19,7 @@ const useListAdditionalServices = ({ payload = {} } = {}) => {
 				...payload,
 			},
 			additional_methods : ['pagination'],
-			page_limit         : 8,
+			page_limit         : pageLimit,
 		},
 	}, { manual: true });
 

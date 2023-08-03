@@ -5,14 +5,14 @@ import React, { useContext } from 'react';
 import styles from './styles.module.css';
 
 function ActionsToShow({
-	status,
+	status = '',
 	setAddRate = () => {},
-	onAddRate,
-	handleSubmit,
-	setSecondStep,
+	onAddRate = () => {},
+	handleSubmit = () => {},
+	setSecondStep = () => {},
 	setAddSellPrice = () => {},
 	updateResponse = {},
-	loading,
+	loading = false,
 	onCancel = () => {},
 }) {
 	const { activeStakeholder } = useContext(ShipmentDetailContext);
