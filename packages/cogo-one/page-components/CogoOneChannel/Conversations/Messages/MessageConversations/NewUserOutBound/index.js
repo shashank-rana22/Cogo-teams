@@ -21,6 +21,8 @@ function NewUserOutBound({ setModalType = () => {}, activeTab = {} }) {
 		lead_user_id = '',
 	} = data || {};
 
+	const isAddFeedBackButton = lead_organization_id && lead_user_id && !user_id;
+
 	const onTemplateClick = () => {
 		setModalType({
 			type : 'new_user_outbound',
@@ -60,7 +62,7 @@ function NewUserOutBound({ setModalType = () => {}, activeTab = {} }) {
 	const ACTIONS_MAPPING = [
 		{ name: 'voice_call', onClick: handleVoiceCall, label: 'call', show: true },
 		{ name: 'whatsapp_message', onClick: onTemplateClick, label: 'Message on WhatsApp', show: true },
-		{ name: 'add_feedback', onClick: handleRoute, label: 'Add Feedback', show: lead_user_id && !user_id },
+		{ name: 'add_feedback', onClick: handleRoute, label: 'Add Feedback', show: isAddFeedBackButton },
 	];
 
 	return (

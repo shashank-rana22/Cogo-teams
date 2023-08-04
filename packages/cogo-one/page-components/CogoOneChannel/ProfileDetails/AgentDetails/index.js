@@ -115,7 +115,7 @@ function AgentDetails({
 	});
 
 	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
-
+	const isAddFeedBackButton = !loading && !orgId && lead_user_details?.lead_organization_id;
 	const { mobile_verified, whatsapp_verified } = userData || {};
 	const VERIFICATION_STATUS = [
 		{
@@ -213,7 +213,7 @@ function AgentDetails({
 					})}
 				</div>
 			)}
-			{!loading && !orgId && lead_user_details?.lead_organization_id ? (
+			{isAddFeedBackButton ? (
 				<Button size="sm" themeType="secondary" onClick={handleRoute}>Add Feedback</Button>
 			) : null}
 			{loading ? (
