@@ -10,6 +10,7 @@ import React, { useMemo, useState } from 'react';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import PurchaseInvoice from '../../../common/PurchaseInvoice';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
@@ -87,6 +88,10 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 
 							<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 								<Tasks />
+							</TabPanel>
+
+							<TabPanel name="purchase_live_invoice" title="Live Invoices">
+								<PurchaseInvoice activeTab={activeTab} />
 							</TabPanel>
 
 							<TabPanel name="documents" title="Documents">
