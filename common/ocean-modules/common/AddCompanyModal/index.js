@@ -1,13 +1,14 @@
-import { Button, Modal, RadioGroup, Select } from '@cogoport/components';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useRef } from 'react';
 
 import TRADE_PARTY_MAPPING from '../../constants/TRADE_PARTY_MAPPING';
 import useCreateShipmentTradePartner from '../../hooks/useCreateShipmentTradePartner';
 import { convertObjectMappingToArray } from '../../utils/convertObjectMappingToArray';
 
-import Form from './Form';
 import getCreateTradePartnerParams from './helpers/getCreateTradePartnerParams';
+import { ModalBodyContent } from './ModalBodyContent';
+import { ModalFooterContent } from './ModalFooterContent';
 import styles from './styles.module.css';
 import tradePartyTypeMapping from './tradePartyTypeMapping';
 
@@ -18,7 +19,7 @@ function AddCompanyModal({
 	tradePartnerTrigger = () => {},
 	shipment_id = '',
 	importer_exporter_id = '',
-	throughPoc = true,
+	withModal = true,
 	shipment_data = {},
 	primary_service = {},
 	stakeholdersTrigger = () => {},
@@ -67,83 +68,34 @@ function AddCompanyModal({
 
 	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
 
-	const modalBodyContent = (
-		<div className={styles.modal_body_container}>
-			{trade_party_type
-				? (
-					<div className={styles.role_container}>
-						<b>Role:</b>
-						{' '}
-						<span>{startCase(trade_party_type)}</span>
-					</div>
-				)
-				: (
-					<div className={styles.role_container}>
-						<label>Role</label>
-						<Select
-							options={tradePartyOptions}
-							value={role}
-							size="sm"
-							disabled={trade_party_type}
-							onChange={(val) => setRole(val)}
-						/>
-					</div>
-				) }
-			<div className={styles.radio_container}>
-				<RadioGroup
-					options={options}
-					onChange={(val) => setCompanyType(val)}
-					value={companyType}
-				/>
-			</div>
-			<Form
-				companyType={companyType}
-				tradePartyType={role}
-				tradePartnersData={tradePartnersData}
-				ref={formRef}
-				importer_exporter_id={importer_exporter_id}
-				shipment_id={shipment_id}
-				organization_id={organization_id}
-				shipment_data={shipment_data}
-				primary_service={primary_service}
-			/>
-		</div>
-	);
+	const modalBodyProps = {
+		trade_party_type,
+		options,
+		tradePartyOptions,
+		setRole,
+		role,
+		setCompanyType,
+		companyType,
+		tradePartnersData,
+		ref: formRef,
+		importer_exporter_id,
+		shipment_id,
+		organization_id,
+		shipment_data,
+		primary_service,
+	};
 
-	const modalFooterContent = (
-		<div className={styles.actions}>
-			<div className={styles.cancel}>
-				<Button
-					themeType="secondary"
-					onClick={onClose}
-					disabled={createLoading}
-				>
-					Cancel
-				</Button>
-			</div>
-			<div>
-				<Button
-					themeType="accent"
-					onClick={formSubmit}
-					disabled={createLoading}
-				>
-					Submit
-				</Button>
-			</div>
-		</div>
-	);
-
-	if (throughPoc) {
+	if (withModal) {
 		return (
 			<Modal show={!isEmpty(addCompany)} placement="top" size="lg" onClose={onClose}>
 				<Modal.Header title="Add Company" />
 
 				<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
-					{ modalBodyContent}
+					<ModalBodyContent {...modalBodyProps} />
 				</Modal.Body>
 
 				<Modal.Footer>
-					{ modalFooterContent}
+					<ModalFooterContent formSubmit={formSubmit} onClose={onClose} createLoading={createLoading} />
 				</Modal.Footer>
 
 			</Modal>
@@ -152,8 +104,11 @@ function AddCompanyModal({
 
 	return (
 		<div>
-			{modalBodyContent}
-			<div className={styles.footer}>{modalFooterContent}</div>
+			<ModalBodyContent {...modalBodyProps} />
+
+			<div className={styles.footer}>
+				<ModalFooterContent formSubmit={formSubmit} onClose={onClose} createLoading={createLoading} />
+			</div>
 		</div>
 	);
 }

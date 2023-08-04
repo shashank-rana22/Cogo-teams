@@ -9,10 +9,10 @@
 
 .actions {
 	display: flex;
-}
 
-.cancel {
-	margin-right: 8px;
+	> button:not(:first-of-type) {
+		margin-left: 12px;
+	}
 }
 
 .radio_container {

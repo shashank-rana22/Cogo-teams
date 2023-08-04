@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
@@ -9,8 +10,6 @@ import { useEffect, useContext } from 'react';
 import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
-
-const INITIAL_STATE = 0;
 
 function EditInvoice({
 	show = 'false',
@@ -56,7 +55,8 @@ function EditInvoice({
 		(ele) => role_ids?.includes(ele),
 	) && shipment_data?.shipment_type === 'fcl_freight';
 
-	const disabledProps = controls?.[INITIAL_STATE]?.service_name === 'fcl_freight_service' && !editAliasNames;
+	const disabledProps = controls?.[GLOBAL_CONSTANTS.zeroth_index]?.service_name === 'fcl_freight_service'
+	&& !editAliasNames;
 
 	const formValues = watch();
 

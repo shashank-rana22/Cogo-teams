@@ -30,6 +30,11 @@ function SelfAndTradePartyForm({
 	importer_exporter_id = '',
 	organization_id = '',
 }, ref) {
+	const [addressData, setAddressData] = useState([]);
+	const [id, setId] = useState('');
+	const [pocNameOptions, setPocNameOptions] = useState([]);
+	const [countryId, setCountryId] = useState('');
+
 	const {
 		data:{ list = [] } = {},
 		loading,
@@ -52,11 +57,6 @@ function SelfAndTradePartyForm({
 	const { trade_party_id, address, name } = watch();
 
 	const firstTradeParty = list?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
-
-	const [addressData, setAddressData] = useState([]);
-	const [id, setId] = useState('');
-	const [pocNameOptions, setPocNameOptions] = useState([]);
-	const [countryId, setCountryId] = useState('');
 
 	const resetMultipleFields = useCallback((fields = []) => {
 		fields?.map((field) => resetField(field));
@@ -103,12 +103,15 @@ function SelfAndTradePartyForm({
 		resetMultipleFields(['work_scopes', 'email']);
 
 		if (name) {
-			const selectedName = pocNameOptions?.find((item) => item?.value === name);
-			setValue('work_scopes', selectedName?.work_scopes || []);
-			setValue('email', selectedName?.email || '');
+			const { work_scopes, email, mobile_number, mobile_country_code } = (pocNameOptions || []).find(
+				(item) => item?.value === name,
+			) || {};
+
+			setValue('work_scopes', work_scopes || []);
+			setValue('email', email || '');
 			setValue('mobile_number', {
-				country_code : selectedName?.mobile_country_code,
-				number       : selectedName?.mobile_number,
+				country_code : mobile_country_code,
+				number       : mobile_number,
 			});
 		}
 	}, [name, pocNameOptions, setValue, resetMultipleFields]);

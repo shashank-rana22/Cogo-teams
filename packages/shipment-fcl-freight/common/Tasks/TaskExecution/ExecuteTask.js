@@ -215,7 +215,7 @@ function ExecuteTask({
 				tradePartnerTrigger={taskListRefetch}
 				shipment_id={shipment_data?.id}
 				importer_exporter_id={shipment_data?.importer_exporter_id}
-				throughPoc={false}
+				withModal={false}
 				setAddCompany={onCancel}
 			/>
 		);
