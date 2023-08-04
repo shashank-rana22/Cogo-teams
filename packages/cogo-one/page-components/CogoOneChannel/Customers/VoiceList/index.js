@@ -7,9 +7,9 @@ import { startCase, isEmpty } from '@cogoport/utils';
 import { VOICE_ICON_MAPPING, SHOW_LOG_STATUS_ICON_MAPPING } from '../../../../constants';
 import useGetVoiceCallList from '../../../../hooks/useGetVoiceCallList';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
-import EmptyCard from '../EmptyCard';
 import LoadingState from '../LoadingState';
 
+import EmptyCard from './EmptyCard';
 import styles from './styles.module.css';
 
 function VoiceList(voiceProps) {
@@ -27,7 +27,7 @@ function VoiceList(voiceProps) {
 
 	const { list = [] } = data;
 
-	const callStatus = (item) => {
+	const getCallStatus = (item) => {
 		let status = '';
 		const { call_status = '', call_type = '' } = item || {};
 		if (call_status === 'answered' && call_type === 'outgoing') {
@@ -57,14 +57,16 @@ function VoiceList(voiceProps) {
 				const {
 					user_data = null, user_number = '', organization_data = null,
 					start_time_of_call = '', initiated_by = '',
-					call_status:status = '', channel_type :channelType = '',
+					call_status: status = '', channel_type: channelType = '',
 				} = item || {};
 
 				const checkActiveCard = activeVoiceCard?.id === item?.id;
-				const checkUserData = !isEmpty(Object.keys(user_data || {}));
+				const checkUserData = !isEmpty(user_data || {});
 
 				const VideoCallIcon = SHOW_LOG_STATUS_ICON_MAPPING[status]?.icon || null;
-				const VideoCallIconColor = SHOW_LOG_STATUS_ICON_MAPPING[status]?.fill || '#fff';
+				const videoCallIconColor = SHOW_LOG_STATUS_ICON_MAPPING[status]?.fill || '#fff';
+
+				const callStatus = getCallStatus(item);
 
 				const showUserData = checkUserData ? (
 					startCase(user_data?.name)
@@ -94,12 +96,12 @@ function VoiceList(voiceProps) {
 													width={20}
 													height={20}
 													className={styles.video_call_icon}
-													fill={VideoCallIconColor}
+													fill={videoCallIconColor}
 												/>
 											)
 										) : (
 											<Image
-												src={VOICE_ICON_MAPPING[callStatus(item)]}
+												src={VOICE_ICON_MAPPING[callStatus] || ''}
 												className={styles.avatar}
 												alt="voice_icon"
 												height={15}
@@ -107,7 +109,7 @@ function VoiceList(voiceProps) {
 											/>
 										) }
 
-										{callStatus(item) === 'missed' && (
+										{callStatus === 'missed' && (
 											<div className={styles.activity_duration}>
 												{initiated_by === 'user'
 													? 'by you' : 'by user'}
@@ -147,7 +149,7 @@ function VoiceList(voiceProps) {
 											date       : new Date(start_time_of_call),
 											timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm a'],
 											formatType : 'time',
-										}) : null}
+										}) : ''}
 									</div>
 								</div>
 							</div>

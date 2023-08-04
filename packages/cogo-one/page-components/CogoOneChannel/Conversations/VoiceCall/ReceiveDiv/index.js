@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import CallHistory from '../CallHistory';
+import CallHistory from '../../../../../common/CallHistory';
 
 import styles from './styles.module.css';
 
@@ -38,9 +38,9 @@ function ReceiveDiv({ eachList = {} }) {
 			<div className={styles.receive_message_container}>
 				<CallHistory
 					type="user"
-					end_time_of_call={end_time_of_call}
-					start_time_of_call={start_time_of_call}
-					dtmf_inputs={dtmf_inputs}
+					endTimeOfCall={end_time_of_call}
+					startTimeOfCall={start_time_of_call}
+					dtmfInputs={dtmf_inputs}
 					channelType={channel_type}
 				/>
 			</div>

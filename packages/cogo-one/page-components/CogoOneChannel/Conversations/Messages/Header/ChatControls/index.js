@@ -2,9 +2,9 @@ import { Button } from '@cogoport/components';
 import React from 'react';
 
 import HeaderName from '../../../../../../common/HeaderName';
-import VideoCalling from '../VideoCalling';
 
 import styles from './styles.module.css';
+import VideoCalling from './VideoCalling';
 
 function ChatControls({
 	escalateToSupplyRm = () => {},

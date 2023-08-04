@@ -2,7 +2,7 @@ import { IcMCallmonitor } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
-import useCreateVideoCallTimeline from '../../../../../../hooks/useCreateVideoCallTimeline';
+import useCreateVideoCallTimeline from '../../../../../../../hooks/useCreateVideoCallTimeline';
 
 import styles from './styles.module.css';
 

@@ -18,7 +18,7 @@ function VoiceCall({ activeVoiceCard = {} }) {
 	const scrollBottom = () => {
 		setTimeout(() => {
 			messageRef?.current?.scrollTo({
-				top      : (messageRef?.current.scrollHeight || COUNT_ZERO) + COUNT_TEN,
+				top      : (messageRef?.current?.scrollHeight || COUNT_ZERO) + COUNT_TEN,
 				behavior : 'smooth',
 			});
 		}, COUNT_THREE_HUNDRED);
@@ -35,8 +35,7 @@ function VoiceCall({ activeVoiceCard = {} }) {
 		if (!loading) {
 			scrollBottom();
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [messageRef, JSON.stringify(activeVoiceCard), loading]);
+	}, [messageRef, activeVoiceCard, loading]);
 
 	return (
 		<>
@@ -51,9 +50,9 @@ function VoiceCall({ activeVoiceCard = {} }) {
 			>
 				{loading && <VoiceCallLoader />}
 				{([...list] || []).reverse().map((eachList) => (eachList?.call_type === 'incoming' ? (
-					<ReceiveDiv key={eachList} eachList={eachList} />
+					<ReceiveDiv key={eachList?.created_at} eachList={eachList} />
 				) : (
-					<SentDiv key={eachList} eachList={eachList} />
+					<SentDiv key={eachList?.created_at} eachList={eachList} />
 				)))}
 			</div>
 		</>

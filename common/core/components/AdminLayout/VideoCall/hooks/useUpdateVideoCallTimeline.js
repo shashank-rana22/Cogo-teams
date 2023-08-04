@@ -13,7 +13,7 @@ const getPayload = ({
 	videoCallId = '',
 	createdAt = '',
 }) => {
-	const payload = {
+	const webhook = {
 		call_id      : videoCallId,
 		call_status  : callActivity,
 		hangup_cause : description,
@@ -34,14 +34,14 @@ const getPayload = ({
 	};
 
 	if (duration > ZERO_COUNT) {
-		payload.outbound_sec = duration / THOUSAND_COUNT;
+		webhook.outbound_sec = duration / THOUSAND_COUNT;
 	}
 
-	return payload;
+	return { webhook, provider_name: 'web_rtc' };
 };
 
-const useUpdateVideoCallTimeline = ({ callDetails }) => {
-	const { created_at :createdAt = '' } = callDetails?.callingRoomDetails || {};
+const useUpdateVideoCallTimeline = ({ callDetails = {} }) => {
+	const { created_at: createdAt = '' } = callDetails?.callingRoomDetails || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/outbound_call_hangup_missed_or_answered',
@@ -54,13 +54,16 @@ const useUpdateVideoCallTimeline = ({ callDetails }) => {
 		description = '',
 		videoCallId = '',
 	}) => {
-		const payload = {
-			webhook       : getPayload({ callActivity, duration, description, videoCallId, createdAt }),
-			provider_name : 'web_rtc',
-		};
-
 		try {
-			trigger({ data: payload });
+			trigger({
+				data: getPayload({
+					callActivity,
+					duration,
+					description,
+					videoCallId,
+					createdAt,
+				}),
+			});
 		} catch (e) {
 			console.error(e);
 		}

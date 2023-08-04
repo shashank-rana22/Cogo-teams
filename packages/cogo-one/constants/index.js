@@ -339,9 +339,9 @@ export const ICON_MAPPING = {
 	missed   : GLOBAL_CONSTANTS.image_url.missed_call_red_svg,
 };
 
-export const VOICE_CALL_LOADER = { loader: GLOBAL_CONSTANTS.image_url.voice_call_loader };
-
 export const STRING_TO_ARRAY_REGEX = GLOBAL_CONSTANTS.regex_patterns.string_to_array;
+
+export const CHANNEL_TYPE = ['voice_call', 'video_call'];
 
 export const API_MAPPING = {
 	whatsapp      : '/create_communication',

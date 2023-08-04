@@ -2,33 +2,34 @@ import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import { CALL_HISTORY_AUDIO_ICONS } from '../../../../../constants';
+import { CALL_HISTORY_AUDIO_ICONS } from '../../constants';
 
 import styles from './styles.module.css';
 
 function CallHistory({
-	type = 'user', end_time_of_call = '', start_time_of_call = '', dtmf_inputs = {},
+	type = 'user', endTimeOfCall = '', startTimeOfCall = '', dtmfInputs = {},
 	channelType = '',
 }) {
-	const startTime = start_time_of_call ? formatDate({
-		date       : new Date(start_time_of_call),
-		dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss aaa'],
+	const startTime = startTimeOfCall ? formatDate({
+		date       : new Date(startTimeOfCall),
+		dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 		formatType : 'time',
 	}) : '';
 
-	const endTime = end_time_of_call ? formatDate({
-		date       : new Date(end_time_of_call),
-		dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss aaa'],
+	const endTime = endTimeOfCall ? formatDate({
+		date       : new Date(endTimeOfCall),
+		dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 		formatType : 'time',
 	}) : '';
 
 	const { start = '', end = '', compStyles = {} } = CALL_HISTORY_AUDIO_ICONS[type] || {};
 
-	const conditionCheck = !isEmpty(dtmf_inputs) && type === 'user';
+	const conditionCheck = !isEmpty(dtmfInputs) && type === 'user';
 
-	const dtmfOptions = Object.entries(dtmf_inputs || {})?.map(([key, value]) => ({ key, value }));
+	const dtmfOptions = Object.entries(dtmfInputs || {})?.map(([key, value]) => ({ key, value }));
 
 	const isVideoCall = channelType === 'video_call';
 	const callStartedMessage = isVideoCall ? 'Video call started' : 'Audio call started';
@@ -38,7 +39,7 @@ function CallHistory({
 		<div>
 
 			<div className={styles.started} style={compStyles}>
-				<img src={start} alt="logo" />
+				<Image src={start} alt="logo" width={40} height={40} />
 				<div className={styles.padding}>
 					<div>
 						{callStartedMessage}
@@ -51,7 +52,7 @@ function CallHistory({
 
 			<div className={styles.ended_call_div}>
 				<div className={styles.ended_call} style={compStyles}>
-					<img src={end} alt="logo" />
+					<Image src={end} alt="logo" width={40} height={40} />
 					<div className={styles.padding}>
 						<div>
 							{callEndedMessage}

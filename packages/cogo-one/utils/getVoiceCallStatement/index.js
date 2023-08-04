@@ -1,3 +1,4 @@
+import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
 import { SHOW_LOG_STATUS_ICON_MAPPING, ICON_MAPPING } from '../../constants';
@@ -15,7 +16,7 @@ const getVoiceCallStatus = ({ type, status, present, previous, channel = '' }) =
 
 	return (
 		<div className={styles.flex}>
-			{channel === 'video_call' ? (
+			{(channel === 'video_call' && VideoCallIcon) ? (
 				<VideoCallIcon
 					width={20}
 					height={20}
@@ -23,9 +24,11 @@ const getVoiceCallStatus = ({ type, status, present, previous, channel = '' }) =
 					fill={videoCallIconColor}
 				/>
 			) : (
-				<img
+				<Image
 					src={ICON_MAPPING[status === 'missed' ? 'missed' : type]}
 					alt="call_status"
+					width={15}
+					height={15}
 					className={styles.img_styles}
 				/>
 			) }

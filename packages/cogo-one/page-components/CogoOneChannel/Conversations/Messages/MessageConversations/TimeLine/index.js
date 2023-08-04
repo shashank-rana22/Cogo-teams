@@ -2,6 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
 
+import { CHANNEL_TYPE } from '../../../../../../constants';
 import getVoiceCallStatement from '../../../../../../utils/getVoiceCallStatement';
 
 import styles from './styles.module.css';
@@ -25,7 +26,7 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 	const timelineText = getVoiceCallStatement({
 		type            : conversation_type,
 		present         : presentAgent,
-		previous        : ['voice_call', 'video_call'].includes(channel) ? voiceCallUserName : previousAgent,
+		previous        : CHANNEL_TYPE.includes(channel) ? voiceCallUserName : previousAgent,
 		startAt         : conversation_started_at,
 		voiceCallStatus : status,
 		channel,

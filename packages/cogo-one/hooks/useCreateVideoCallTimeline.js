@@ -5,24 +5,20 @@ import { useSelector, useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useCallback } from 'react';
 
-const getPayload = ({ userCallId = '', leadUserId = '' }, loggedInAgentId) => {
-	const payload = {
-		agent_id      : loggedInAgentId,
-		user_id       : userCallId,
-		provider_name : 'web_rtc',
-		lead_user_id  : leadUserId,
-		source        : 'cogo_one',
-		start_stamp   : formatDate({
-			date       : new Date(),
-			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
-			formatType : 'dateTime',
-			separator  : ' ',
-		}),
-	};
-
-	return payload;
-};
+const getPayload = ({ userCallId = '', leadUserId = '', loggedInAgentId }) => ({
+	agent_id      : loggedInAgentId,
+	user_id       : userCallId,
+	provider_name : 'web_rtc',
+	lead_user_id  : leadUserId,
+	source        : 'cogo_one',
+	start_stamp   : formatDate({
+		date       : new Date(),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
+		formatType : 'dateTime',
+		separator  : ' ',
+	}),
+});
 
 const useCreateVideoCallTimeline = ({ formattedData = {} }) => {
 	const profile = useSelector((state) => state.profile || {});
@@ -34,12 +30,12 @@ const useCreateVideoCallTimeline = ({ formattedData = {} }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/create_outgoing_call',
 		method : 'post',
-	}, { manual: true, autoCancel: false });
+	}, { manual: true });
 
 	const { user_id, user_name } = formattedData || {};
 
 	const createVideoCallTimeline = useCallback(async ({ userCallId = '', leadUserId = '' }) => {
-		const payload = getPayload({ userCallId, leadUserId }, loggedInAgentId);
+		const payload = getPayload({ userCallId, leadUserId, loggedInAgentId });
 
 		try {
 			const res = await trigger({ data: payload });
