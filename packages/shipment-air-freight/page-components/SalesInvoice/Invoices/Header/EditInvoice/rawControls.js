@@ -46,7 +46,7 @@ const rawControls = (
 			),
 			type        : 'select',
 			name        : 'code',
-			span        : 2,
+			span        : 2.5,
 			handleChange,
 			placeholder : 'select line item',
 			disabled:
@@ -113,7 +113,7 @@ const rawControls = (
 			type   : 'static',
 			name   : 'total',
 			render : (item) => <div style={{ marginLeft: '24px' }} className="amount-excl">{item?.total}</div>,
-			span   : 2,
+			span   : 1.5,
 		},
 	],
 });

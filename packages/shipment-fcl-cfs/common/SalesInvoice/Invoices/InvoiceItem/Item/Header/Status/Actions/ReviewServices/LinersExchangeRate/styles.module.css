@@ -69,7 +69,7 @@
 		width: 10px;
 		height: 10px;
 		content: "";
-		border: 2px solid var(--color-primary-error-red-2);
+		border: 2px solid red;
 		border-color: transparent #cbd1f8 #cbd1f8 transparent;
 		transform: rotateZ(-40deg) skew(15deg, 15deg);
 	}
