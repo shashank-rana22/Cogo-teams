@@ -17,7 +17,9 @@ import styles from './styles.module.css';
 function Card({ data = {} }) {
 	const router = useRouter();
 
-	let href = `${window.location.origin}/${router?.query?.partner_id}/shipments`;
+	let href = data?.shipment_type === 'air_freight'
+		? `${window.location.origin}/v2/${router?.query?.partner_id}/booking/air-freight`
+		: `${window.location.origin}/${router?.query?.partner_id}/shipments`;
 	href += `/${data?.id}?${CONSTANTS.url_navigation_params}`;
 
 	const handleCardClick = (e) => {

@@ -1,10 +1,9 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 
-const geo = getGeoConstants();
-
 const controls = ({ watch = () => {} }) => {
 	const watchCountryId = watch('country_id');
+	const geo = getGeoConstants();
 
 	const panPatternValue = getCountrySpecificData({
 		country_id    : watchCountryId,
