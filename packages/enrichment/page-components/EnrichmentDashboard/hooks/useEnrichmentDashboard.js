@@ -3,6 +3,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { setCookie } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import getEnrichmentColumnsData from '../configurations/get-enrichment-columns-data';
@@ -88,8 +89,7 @@ const useEnrichmentDashboard = ({ secondaryTab = 'active' }) => {
 	}, [allowedToSeeAgentsData, partner_id, searchQuery, secondaryTab, selected_agent_id, user_id]);
 
 	const handleEditDetails = (feedback_request_id, action) => {
-		localStorage.setItem('active_enrichment_tab', secondaryTab);
-
+		setCookie('active_enrichment_tab', secondaryTab);
 		router.push(`/enrichment/${feedback_request_id}?action_type=${action}`);
 	};
 

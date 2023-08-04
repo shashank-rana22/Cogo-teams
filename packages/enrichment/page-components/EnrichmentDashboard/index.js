@@ -1,4 +1,5 @@
 import { Modal } from '@cogoport/components';
+import { getCookie } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AgentActions from './components/AgentActions';
@@ -9,7 +10,7 @@ import useEnrichmentStats from './hooks/useEnrichmentStats';
 import styles from './styles.module.css';
 
 function EnrichmentDashboard() {
-	const [secondaryTab, setSecondaryTab] = useState(localStorage.getItem('active_enrichment_tab') || 'active');
+	const [secondaryTab, setSecondaryTab] = useState(getCookie('active_enrichment_tab') || 'active');
 
 	const {
 		stats = {},
