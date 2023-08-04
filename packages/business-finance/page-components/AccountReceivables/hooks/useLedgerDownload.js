@@ -41,9 +41,13 @@ const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 					entityCodes : entities,
 				},
 			});
-			const { data: downloadUrl } = response || {};
-			window.open(String(downloadUrl));
-			setShowLedgerModal(false);
+
+			const { data: responseData } = response || {};
+			const downloadUrl = responseData?.toString();
+			if (downloadUrl) {
+				window.open(downloadUrl);
+				setShowLedgerModal(false);
+			}
 		} catch (err) {
 			toastApiError(err);
 		}
