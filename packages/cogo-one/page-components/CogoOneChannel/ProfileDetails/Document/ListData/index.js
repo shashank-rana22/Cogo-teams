@@ -1,16 +1,17 @@
 import { Button, cl } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import DocumentTypeSID from '../../../../../common/DocumentTypeSID';
 import EmptyState from '../../../../../common/EmptyState';
 import documentTypeMapping from '../../../../../configurations/document-type-mapping';
 import documentStatus from '../DocumentStatus';
 
 import ActionsStatus from './ActionsStatus';
-import DocumentTypeSID from './DocumentTypeSID';
 import styles from './styles.module.css';
 
 function ListData({
@@ -24,8 +25,11 @@ function ListData({
 	isGstUploaded = false,
 	isPanUploaded = false,
 	formattedMessageData = {},
+	getDocumentsList = () => {},
 }) {
 	const [documentTagUrl, setDocumentTagUrl] = useState('');
+
+	const { control, formState: { errors = {} }, watch, handleSubmit, resetField, reset } = useForm();
 
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
@@ -62,7 +66,10 @@ function ListData({
 							state = '',
 							file_name = '',
 							verification_status = '',
+							shipment = {},
 						} = item || {};
+
+						const serialId = shipment?.serial_id || '';
 
 						return (
 							<>
@@ -93,7 +100,6 @@ function ListData({
 												{documentTypeMapping(document_type)}
 											</div>
 										</div>
-
 										<div className={styles.content}>
 											Document sent by customer
 										</div>
@@ -120,16 +126,26 @@ function ListData({
 											isPanUploaded={isPanUploaded}
 											isGstUploaded={isGstUploaded}
 										/>
-
-										{orgId && (
-											<Button
-												key={document_url}
-												className={styles.tag_button}
-												onClick={() => setDocumentTagUrl(document_url)}
-											>
-												Tag
-											</Button>
-										)}
+										<div className={cl`${styles.card_footer}
+										${serialId ? styles.tag_action : ''}`}
+										>
+											{serialId ? (
+												<div className={styles.shipment_id}>
+													SID:
+													{' '}
+													{serialId}
+												</div>
+											) : null}
+											{orgId && (
+												<Button
+													key={document_url}
+													onClick={() => setDocumentTagUrl(document_url)}
+													size="sm"
+												>
+													Tag to SID
+												</Button>
+											)}
+										</div>
 									</div>
 								</div>
 								{(documentTagUrl === document_url && orgId) && (
@@ -140,6 +156,14 @@ function ListData({
 										formattedMessageData={formattedMessageData}
 										documentTagUrl={documentTagUrl}
 										setDocumentTagUrl={setDocumentTagUrl}
+										type="documents"
+										control={control}
+										errors={errors}
+										watch={watch}
+										handleSubmit={handleSubmit}
+										resetField={resetField}
+										reset={reset}
+										getDocumentsList={getDocumentsList}
 									/>
 								)}
 							</>

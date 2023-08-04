@@ -1,0 +1,27 @@
+.container {
+	:global {
+		.ui_stepper_container {
+			justify-content: center;
+			width: 100%;
+			padding: 12px 0;
+			margin: unset;
+			margin-bottom: 30px;
+		}
+	}
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.back_icon {
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 600;
+}

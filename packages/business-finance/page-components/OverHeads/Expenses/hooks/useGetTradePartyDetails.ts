@@ -26,7 +26,9 @@ const useGetTradePartyDetails = (vendorID:string | number) => {
 				console.log('error-', err);
 			}
 		};
-		api();
+		if (vendorID) {
+			api();
+		}
 	}, [trigger, vendorID]);
 
 	return {

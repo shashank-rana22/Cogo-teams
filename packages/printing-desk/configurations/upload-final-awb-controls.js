@@ -14,6 +14,18 @@ const controls = [
 
 	},
 	{
+		name        : 'hawbCount',
+		label       : 'Numbers of HAWBs Included in Shipment',
+		type        : 'number',
+		span        : 12,
+		maxLength   : 150,
+		placeholder : 'Number Of HAWB Included',
+		rows        : 3,
+		style       : { maxHeight: '120px', border: '1px solid #BDBDBD', borderRadius: 4 },
+		rules       : { required: true },
+
+	},
+	{
 		name       : 'document',
 		label      : 'Document',
 		type       : 'file',

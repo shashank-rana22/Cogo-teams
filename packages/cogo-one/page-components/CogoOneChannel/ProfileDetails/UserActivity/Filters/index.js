@@ -9,9 +9,9 @@ import styles from './styles.module.css';
 
 function Filters({
 	setFilterVisible = () => {},
-	activityTab,
+	activityTab = '',
 	filters: appliedFilters = null,
-	dateFilters,
+	dateFilters = {},
 	handleFilters = () => {},
 	handleReset = () => {},
 	loading = false,
@@ -50,6 +50,7 @@ function Filters({
 						options={FILTERS_MAPPING[activityTab]}
 						onChange={setValues}
 						value={values || ''}
+						type="number"
 					/>
 				</>
 			);

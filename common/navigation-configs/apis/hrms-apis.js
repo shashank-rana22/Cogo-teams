@@ -91,6 +91,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'bulk_employee_actions',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_portal: [
 		{
@@ -288,7 +293,7 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 		{
-			api          : 'list_roles',
+			api          : 'list_employee_roles',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},

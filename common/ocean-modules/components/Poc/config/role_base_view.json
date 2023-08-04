@@ -122,5 +122,11 @@
         "add_external_export_poc":true,
         "edit_internal_poc":[],
         "can_add_service_provider_poc":true
+    },
+    "coe_head":{
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
+        "can_edit":["pocs"],
+        "add_internal_poc":true,
+        "edit_internal_poc":["service_ops1","service_ops2","lastmile_ops","release_desk","service_ops3","collection_desk","credit_controller","booking_agent","portfolio_manager","entity_manager","sales_agent","costbooking_ops","ftl_ground_ops","field_service_ops","supply_agent"]
     }
 }

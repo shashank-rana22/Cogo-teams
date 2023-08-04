@@ -17,7 +17,6 @@ const useCreateBulkEnrichmentRequests = ({
 	const [{ loading }, trigger] = useRequest({
 		url    : 'bulk_create_lead_organization_feedback_request',
 		method : 'POST',
-
 	}, { manual: true });
 
 	const onCreateFeedback = async () => {

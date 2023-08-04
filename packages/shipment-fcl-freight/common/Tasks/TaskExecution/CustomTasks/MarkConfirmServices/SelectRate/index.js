@@ -1,7 +1,6 @@
 import { Loader, Tabs, TabPanel } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useEffect, useState } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import useListShipmentBookingConfirmationPreferences
 	from '../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
@@ -19,7 +18,6 @@ function SelectRate({
 	selectedCard,
 	task = {},
 	servicesList,
-	step,
 }) {
 	const TWO = 2;
 	const ONE = 1;
@@ -46,14 +44,15 @@ function SelectRate({
 		}
 	}, [setStep, setSelectedCard, data]);
 
-	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ setStep, step });
-	const SIMILAR_LENGTH = similarServiceIds.length;
+	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ });
 
-	useEffect(() => {
-		if (selectedCard.length === SIMILAR_LENGTH && step === ONE) {
-			apiTrigger(selectedCard);
+	const handleProceed = async (item) => {
+		setSelectedCard((prev) => [...prev, item]);
+		if (selectedCard.length >= similarServiceIds.length - ONE) {
+			await apiTrigger([...selectedCard, item]);
+			setStep((prev) => prev + ONE);
 		}
-	}, [selectedCard, SIMILAR_LENGTH, step, apiTrigger]);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -69,13 +68,12 @@ function SelectRate({
 					<>
 						{(data?.list || []).map((item) => (
 							<Card
-								key={uuid()}
+								key={item?.service_id}
 								item={item}
 								priority={item.priority}
-								setStep={setStep}
-								setSelectedCard={setSelectedCard}
 								similarServiceIds={similarServiceIds}
 								selectedCard={selectedCard}
+								handleProceed={handleProceed}
 							/>
 						))}
 						<SelectNormal
@@ -93,13 +91,12 @@ function SelectRate({
 								{(data?.list || []).map((item) => (
 									item?.service_id === service_id ? (
 										<Card
-											key={uuid()}
+											key={item?.service_id}
 											item={item}
 											priority={item.priority}
-											setStep={setStep}
-											setSelectedCard={setSelectedCard}
 											similarServiceIds={similarServiceIds}
 											selectedCard={selectedCard}
+											handleProceed={handleProceed}
 										/>
 									) : null
 								))}

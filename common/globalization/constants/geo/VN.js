@@ -368,8 +368,11 @@ export default {
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
 			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
 			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
+			{ label: 'E-Invoice Failed', value: 'IRN_FAILED' },
+			{ label: 'E-Invoice Cancelled', value: 'IRN_CANCELLED' },
 			{ label: 'Requested', value: 'REQUESTED' },
 		],
+
 		freight_container_types: [
 			{
 				label : 'Standard(Dry)',
@@ -418,6 +421,15 @@ export default {
 		},
 	},
 	navigations: {
+		settlement_onAccountCollection: {
+			tabs: [
+				'ap-ar-settlement',
+				'history',
+				'onAccountCollection',
+				'JournalVoucher',
+			],
+		},
+
 		supply_dashboard: {
 			rfq_enquiries: {
 				tabs: [
@@ -431,69 +443,33 @@ export default {
 			},
 		},
 		enrichment: {
-			whatsapp_number_label                 : 'Zalo Number',
-			allowed_to_create_enrichment_requests : true,
-			tabs                                  : ['manual_enrichment'],
-			manual_enrichment                     : {
-				columns: {
-					relationship_manager_view: {
-						active: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
-					agent_view: {
-						active: [
-							'id',
-							'business_name',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
+			whatsapp_number_label            : 'Zalo Number',
+			is_allowed_for_enrichment_sheets : false,
+			hide_columns                     : {
+				relationship_manager_view: {
+					active    : ['registration_number', 'status'],
+					responded : ['registration_number', 'status'],
+					success   : ['registration_number', 'status'],
+					failed    : ['registration_number', 'action'],
 				},
-				actions: {
-					active: {
-						add    : 'Add Details',
-						failed : 'Mark as Failed',
-					},
-					responded:	{
-						edit    : 'Edit Details',
-						success : 'Mark as Completed',
-					},
-					success: {
-						view: 'View Details',
-					},
+				agent_view: {
+					active    : ['registration_number', 'requested_agent', 'status'],
+					responded : ['registration_number', 'requested_agent', 'status'],
+					success   : ['registration_number', 'requested_agent', 'status'],
+					failed    : ['registration_number', 'requested_agent', 'action'],
+				},
+			},
+			actions: {
+				active: {
+					add    : 'Add Details',
+					failed : 'Mark as Failed',
+				},
+				responded:	{
+					edit    : 'Edit Details',
+					success : 'Mark as Completed',
+				},
+				success: {
+					view: 'View Details',
 				},
 			},
 		},
@@ -504,6 +480,10 @@ export default {
 					show_filter: false,
 				},
 			},
+		},
+		over_heads: {
+			region_specific_cogo_entities            : true,
+			expense_non_recurring_upload_invoice_tds : true,
 		},
 	},
 	others: {
@@ -516,6 +496,11 @@ export default {
 		banking_code: {
 			financial_system_code : 'swift',
 			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
+		},
+
+		identification_number: {
+			label   : 'VAT',
+			pattern : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		},
 
 		pan_number: {
@@ -536,6 +521,17 @@ export default {
 				has_voice_call_access       : false,
 				template_default_language   : 'vietnamese',
 				supply_sender_mobile_number : '918069195980',
+			},
+
+			business_finance: {
+				ar: {
+					settlement: {
+						invoice_number: {
+							document_key : 'destinationIrnNumber',
+							irn_key      : 'destinationDocumentValue',
+						},
+					},
+				},
 			},
 		},
 	},
