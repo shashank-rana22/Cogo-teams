@@ -9,6 +9,11 @@
 	padding: 32px;
 	background-color: #fff;
 	transform: translate(-50%, -50%);
+
+	@media (max-width: 768px) {
+		width: 95%;
+		margin-top: 42px;
+	}
 }
 
 .header {
@@ -19,12 +24,20 @@
 	display: flex;
 	justify-content: space-between;
 	margin: 24px 0;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .stats {
 	display: flex;
 	flex-direction: column;
 	width: 45%;
+
+	@media (max-width: 768px) {
+		width: 80%;
+	}
 }
 
 .label {

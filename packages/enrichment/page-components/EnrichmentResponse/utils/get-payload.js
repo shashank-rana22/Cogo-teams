@@ -1,11 +1,9 @@
 import getAddressPayload from './get-address-payload';
 import getUserPayload from './get-user-payload';
 
-const getByKey = (obj, key) => (obj && obj[key]) || undefined;
-
-const getPayload = ({ values = {}, activeTab = '' }) => {
-	const userPayload = getUserPayload({ values, getByKey });
-	const addressPayload = getAddressPayload(({ values, activeTab, getByKey }));
+const getPayload = ({ values = {}, activeTab = '', responseData = {} }) => {
+	const userPayload = getUserPayload({ values });
+	const addressPayload = getAddressPayload(({ values, responseData }));
 
 	const payloadMapping = {
 		user    : userPayload,

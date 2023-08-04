@@ -73,6 +73,10 @@ const businessFinance = {
 		navigation : 'business_finance-overheads',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/overheads/expenses': {
+		navigation : 'business_finance-overheads',
+		isMainNav  : true,
+	},
 	'/[partner_id]/business-finance/overheads/[active_tab]': {
 		navigation : 'business_finance-overheads',
 		isMainNav  : true,
@@ -86,6 +90,10 @@ const businessFinance = {
 	},
 	'/[partner_id]/business-finance/dunnings/[active_tab]': {
 		navigation : 'business_finance-dunnings',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/cogo-financials': {
+		navigation : 'business_finance-cogo_financials',
 		isMainNav  : true,
 	},
 };

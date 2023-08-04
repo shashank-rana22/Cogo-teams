@@ -1,5 +1,4 @@
-import { getElementController } from '../../configurations/get-element-controller';
-
+import { getElementController } from './get-element-controller';
 import styles from './styles.module.css';
 
 function FormLayout({

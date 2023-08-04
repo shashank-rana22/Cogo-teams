@@ -1,0 +1,15 @@
+.tab_container {
+	:global {
+		.ui_tab_list_container {
+			width: 100%;
+		}
+
+		.ui_tab_container {
+			flex-basis: 50%;
+		}
+	}
+}
+
+.header {
+	margin-bottom: 30px;
+}
