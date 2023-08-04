@@ -1,0 +1,32 @@
+.pagination_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 12px 0;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
+}
+
+.page_limit_container {
+	display: flex;
+	align-items: center;
+	margin-right: 12px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-bottom: 16px;
+	}
+}
+
+.label {
+	margin-right: 4px;
+}
+
+.main_container {
+	@media (max-width: 768px) {
+		margin-bottom: 80px;
+	}
+}

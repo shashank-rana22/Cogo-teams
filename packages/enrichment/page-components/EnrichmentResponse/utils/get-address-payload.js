@@ -1,18 +1,20 @@
 import { isEmpty } from '@cogoport/utils';
 
-import getResponseKeysMapping from '../configurations/response-keys-mapping';
+const getByKey = (obj, key) => (obj && obj[key]) || undefined;
 
-const getAddressPayload = ({ values = {}, activeTab = '', getByKey }) => {
-	const addressKeys = getResponseKeysMapping({ activeTab });
-
-	const payload = (addressKeys || []).reduce((acc, key) => {
-		acc[key] = getByKey(values, key);
+const getAddressPayload = ({ values = {}, responseData = {} }) => {
+	const payload = Object.keys(values).reduce((acc, key) => {
+		const value = getByKey(values, key);
+		acc[key] = isEmpty(value) ? undefined : value;
 		return acc;
 	}, {});
 
 	const newPayload = {
 		...payload,
-		response_type: isEmpty(getByKey(values, 'tax_number')) ? 'address' : 'billing_address',
+		response_type : isEmpty(values?.tax_number) ? 'address' : 'billing_address',
+		country       : responseData?.country?.name,
+		state         : responseData?.state?.name,
+		city          : responseData?.city?.name,
 	};
 
 	return newPayload;

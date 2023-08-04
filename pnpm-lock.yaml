@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@cogoport/eslint-config': 2.0.5
+      '@cogoport/eslint-config': 2.0.8
       '@cogoport/maps': ^1.0.3
       '@cogoport/stylelint-config': ^1.0.3
       '@sentry/nextjs': ^7.54.0
@@ -32,7 +32,7 @@ importers:
       next: 13.1.6_fe3dnxkyax5wguqewcrbc4wcza
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
-      '@cogoport/eslint-config': 2.0.5_eslint@8.46.0
+      '@cogoport/eslint-config': 2.0.8_eslint@8.46.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
       eslint: 8.46.0
@@ -79,6 +79,7 @@ importers:
       '@cogoport/cost-booking-desk': workspace:0.1.0
       '@cogoport/document-desk': workspace:0.1.0
       '@cogoport/employee-dashboard': workspace:0.1.0
+      '@cogoport/employee-directory': workspace:0.1.0
       '@cogoport/employee-portal': workspace:0.1.0
       '@cogoport/enrichment': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
@@ -175,6 +176,7 @@ importers:
       '@cogoport/cost-booking-desk': link:../packages/cost-booking-desk
       '@cogoport/document-desk': link:../packages/document-desk
       '@cogoport/employee-dashboard': link:../packages/employee-dashboard
+      '@cogoport/employee-directory': link:../packages/employee-directory
       '@cogoport/employee-portal': link:../packages/employee-portal
       '@cogoport/enrichment': link:../packages/enrichment
       '@cogoport/forms': link:../common/forms
@@ -814,10 +816,10 @@ importers:
       react-hook-form: ^7.43.3
       uuid: ^9.0.0
     dependencies:
-      '@cogoport/components': 1.0.437_alnqrvxi5nmaicyhvladaiksvm
+      '@cogoport/components': 1.0.437_jbkdfmwn4pruupygfcv3deyn7u
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.90_react@18.2.0
+      '@cogoport/icons-react': 1.0.90_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/ocean-modules': link:../../common/ocean-modules
       '@cogoport/request': link:../../common/request
@@ -838,10 +840,10 @@ importers:
       '@cogoport/utils': ^1.2.10
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.437_alnqrvxi5nmaicyhvladaiksvm
+      '@cogoport/components': 1.0.437_jbkdfmwn4pruupygfcv3deyn7u
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.90_react@18.2.0
+      '@cogoport/icons-react': 1.0.90_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
       '@cogoport/utils': 1.2.10
       react: 18.2.0
@@ -858,9 +860,9 @@ importers:
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.437_alnqrvxi5nmaicyhvladaiksvm
+      '@cogoport/components': 1.0.437_jbkdfmwn4pruupygfcv3deyn7u
       '@cogoport/core': link:../../common/core
-      '@cogoport/icons-react': 1.0.90_react@18.2.0
+      '@cogoport/icons-react': 1.0.90_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/scope-select': link:../../common/scope-select
@@ -1264,6 +1266,28 @@ importers:
       '@cogoport/utils': 1.2.10
       react: 18.2.0
       stylelint: 14.16.1
+
+  packages/employee-directory:
+    specifiers:
+      '@cogoport/components': ^1.0.432
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.85
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.10
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.437_jbkdfmwn4pruupygfcv3deyn7u
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.90_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
 
   packages/employee-portal:
     specifiers:
@@ -4046,8 +4070,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config/2.0.5_eslint@8.46.0:
-    resolution: {integrity: sha512-3H2PINggHDcT1UiiGVEv7fwGTWq2mwOu5Q8CcGicXwsuEdeTJ00xTO8cjAI1KTBdmY1/Z/bhB3B48bLXBb9MOg==}
+  /@cogoport/eslint-config/2.0.8_eslint@8.46.0:
+    resolution: {integrity: sha512-fuGaByXnd6pfozrB3w4UO15noyC/l3W31HYd/xV8JI6ZFDQffDq6+fl8TSgxN3f8ZQxEZiyofIu6CoxjdoYZOA==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:
