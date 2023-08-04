@@ -1,4 +1,4 @@
-import { Button, Pill } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import { getResponseKeysMapping } from '../../../../../../configurations/response-keys-mapping';
@@ -10,7 +10,6 @@ function DetailsCard(props) {
 	const {
 		activeTab = '',
 		response = {},
-		setDetailsForm = () => {},
 		actionType = '',
 	} = props;
 
@@ -35,22 +34,9 @@ function DetailsCard(props) {
 				))}
 
 				<div className={styles.edit_action}>
-					<div className={styles.top}>{actionType === 'view' ? 'Status' : 'Action'}</div>
+					<div className={styles.top}>{actionType === 'view' && 'Status'}</div>
 					<div className={styles.edit_button}>
-						{actionType !== 'view' ? (
-							<Button
-								size="sm"
-								themeType="secondary"
-								type="button"
-								onClick={() => setDetailsForm({
-									show        : true,
-									type        : 'edit',
-									initialData : response,
-								})}
-							>
-								Edit
-							</Button>
-						) : (
+						{actionType === 'view' && (
 							<Pill
 								size="md"
 								color="green"

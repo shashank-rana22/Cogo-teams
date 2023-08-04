@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { IcMUsersManageAccounts } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 
@@ -27,9 +26,9 @@ function Header(props) {
 		router.push('/enrichment/sheets');
 	};
 
-	const redirectToUsers = () => {
-		router.push('/enrichment/user-management');
-	};
+	// const redirectToUsers = () => {
+	// 	router.push('/enrichment/user-management');
+	// };
 
 	const isEnrichmentManager = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId);
 	const isAllowedForEnrichmentSheets = geo.navigations.enrichment.is_allowed_for_enrichment_sheets;
@@ -64,7 +63,7 @@ function Header(props) {
 
 				{isEnrichmentManager && (
 					<>
-						<Button
+						{/* <Button
 							size="md"
 							type="button"
 							themeType="secondary"
@@ -73,7 +72,7 @@ function Header(props) {
 						>
 							<IcMUsersManageAccounts width={16} height={16} style={{ marginRight: '4px' }} />
 
-						</Button>
+						</Button> */}
 
 						<CreateBulkFeedbackRequest
 							refetch={refetch}
