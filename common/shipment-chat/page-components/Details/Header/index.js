@@ -33,13 +33,15 @@ function Header({
 		|| []
 		: stakeholderMappings.default;
 
-	const content = () => (
-		<div className={styles.chat_users}>
-			{groupChatUsers?.map((item) => (
-				<div key={item} className={styles.user_name}>{startCase(item)}</div>
-			))}
-		</div>
-	);
+	function Content() {
+		return (
+			<div className={styles.chat_users}>
+				{groupChatUsers?.map((item) => (
+					<div key={item} className={styles.user_name}>{startCase(item)}</div>
+				))}
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -68,13 +70,12 @@ function Header({
 				<Popover
 					placement="bottom"
 					interactive
-					render={content()}
+					render={Content()}
 					className={styles.popover_container}
 				>
 					<div className={styles.button}>
-						<IcMProfile width={12} height={12} />
-						Contacts
-						{/* {`+${groupChatUsers?.length} others`} */}
+						<IcMProfile width={12} height={12} style={{ marginRight: '4px' }} />
+						{`${groupChatUsers?.length} Contacts`}
 					</div>
 				</Popover>
 

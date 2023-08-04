@@ -130,7 +130,7 @@ function List({
 				<div className={styles.initial_state}>
 					<Button
 						themeType="tertiary"
-						className={styles.close_button}
+						className={styles.close_icon}
 						onClick={() => setShow(false)}
 					>
 						<IcMCross />

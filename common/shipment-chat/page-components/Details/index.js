@@ -132,10 +132,10 @@ function Details({
 		return null;
 	}
 
-	const handleClick = (e) => {
-		const text = formValues?.message;
-		const contentData = text?.split('\n').length;
+	const text = formValues?.message;
+	const contentData = text?.split('\n').length;
 
+	const handleClick = (e) => {
 		if (e.keyCode === ENTER_KEY && e.shiftKey && rows < TOTAL_ROWS) {
 			setRows(contentData + INITIAL_STATE_ROWS);
 		}
@@ -190,7 +190,7 @@ function Details({
 								{(formValues?.file || []).map((url) => (
 									<div className={styles.attached_doc} key={url}>
 										<IcMDocument style={{ marginRight: '4px' }} />
-										{url?.split('/').pop()}
+										{decodeURIComponent(url?.split('/').pop())}
 									</div>
 								))}
 							</div>

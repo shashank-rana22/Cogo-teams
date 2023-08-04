@@ -1,7 +1,6 @@
 .list_container {
 	height: 390px;
 	overflow: auto;
-	background: #fff;
 
 	.colored {
 		background: #cfeaed;
@@ -24,7 +23,7 @@
 	justify-content: flex-start;
 	width: 100% !important;
 	height: fit-content !important;
-	padding: 12px 24px !important;
+	padding: 12px 20px !important;
 	border-bottom: 1px solid #e0e0e0 !important;
 	border-radius: 0;
 }
@@ -63,6 +62,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-left: 32px;
 	width: 20px;
 	height: 18px;
 	padding: 0 2px;

@@ -40,7 +40,7 @@ function ListBody({
 	}, [loading, setFilters, page]);
 
 	function RenderContent() {
-		if (loading && filters?.page === PAGE_FACTOR) {
+		if (loading && page === PAGE_FACTOR) {
 			return <ListLoader />;
 		}
 
