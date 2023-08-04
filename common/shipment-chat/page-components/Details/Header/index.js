@@ -91,7 +91,7 @@ function Header({
 
 			<div className={styles.filter_box}>
 				<div style={{ color: '#221F20' }}>Show Starred Messages</div>
-				<Toggle value={showImpMsg} onChange={setShowImpMsg} />
+				<Toggle value={showImpMsg} onChange={(event) => setShowImpMsg(event?.target?.checked)} />
 			</div>
 
 		</div>
