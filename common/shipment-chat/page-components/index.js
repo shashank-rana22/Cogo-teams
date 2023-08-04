@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
@@ -39,20 +39,20 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 
 	return (
 		<div className={styles.chat_container}>
-			<div
+			<Button
 				className={styles.chat_icon}
-				role="button"
+				themeType="tertiary"
 				tabIndex={0}
 				onClick={() => setShow(true)}
 			>
 				{count > GLOBAL_CONSTANTS.zeroth_index && !show ? <div className={styles.circle}>{count}</div> : null}
 				<div className={styles.icon}>
 					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipment-chat-icon.svg"
+						src={GLOBAL_CONSTANTS.image_url.shipment_chat_icon}
 						alt="chat"
 					/>
 				</div>
-			</div>
+			</Button>
 
 			{show ? (
 				<Modal
@@ -63,12 +63,14 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 					closable={!seenLoading}
 					className={styles.modal_styles}
 				>
-					<List
-						setShow={setShow}
-						messageContentArr={MESSAGE_CONTENT_ARR}
-						user_id={user_id}
-						setSeenLoading={setSeenLoading}
-					/>
+					<Modal.Body>
+						<List
+							setShow={setShow}
+							messageContentArr={MESSAGE_CONTENT_ARR}
+							user_id={user_id}
+							setSeenLoading={setSeenLoading}
+						/>
+					</Modal.Body>
 				</Modal>
 
 			) : null}

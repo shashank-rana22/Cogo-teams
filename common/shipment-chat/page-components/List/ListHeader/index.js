@@ -22,7 +22,8 @@ function ListHeader({
 	useEffect(() => {
 		setFilters((prev) => ({
 			...prev,
-			q: query,
+			page : 1,
+			q    : query,
 		}));
 	}, [query, setFilters]);
 

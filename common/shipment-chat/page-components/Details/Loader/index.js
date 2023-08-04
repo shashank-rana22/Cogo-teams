@@ -9,7 +9,7 @@ function Loader({ setShow = () => {} }) {
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
 				<div className={styles.serial_id}>
-					<Placeholder height="18px" width="136px" />
+					<Placeholder height="18px" width="139px" />
 				</div>
 
 				<div className={styles.port_details_loading}>

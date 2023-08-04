@@ -324,6 +324,7 @@ const GLOBAL_CONSTANTS = {
 		sign_up_failed       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
 		kyc_event            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc_event.png',
 		default_event        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
+		shipment_chat_icon   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipment-chat-icon.svg',
 	},
 
 	video_call_ring_tone_url:

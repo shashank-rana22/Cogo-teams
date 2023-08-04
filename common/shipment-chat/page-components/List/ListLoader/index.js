@@ -4,12 +4,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const NUMBER_OF_LODING_CARDS = 6;
+const NUMBER_OF_LOADING_CARDS = 6;
 
 function Loader() {
 	return (
 		<div>
-			{Array(NUMBER_OF_LODING_CARDS).fill().map((i) => (
+			{Array(NUMBER_OF_LOADING_CARDS).fill().map((i) => (
 				<div className={styles.card} key={i}>
 					<div className={styles.ship_image_container}>
 						<IcAShipAmber height={30} width={30} />

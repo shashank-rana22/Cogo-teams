@@ -1,25 +1,18 @@
-import { Button, cl, Loader } from '@cogoport/components';
+import { Button, Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcAShipAmber, IcMCross } from '@cogoport/icons-react';
+import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 
-import EmptyState from '../../common/EmptyState';
 import useGetChannel from '../../hooks/useGetChannel';
 import useGetShipmentChatList from '../../hooks/useGetShipmentChatList';
 import useUpdateSeen from '../../hooks/useUpdateSeen';
 import Details from '../Details';
 
+import ListBody from './ListBody';
 import ListHeader from './ListHeader';
-import ListLoader from './ListLoader';
 import styles from './styles.module.css';
-
-const TIME_DURATION_FOR_SET_TME_OUT = 200;
-const PAGE_FACTOR = 1;
-const MSG_COUNT = 0;
 
 function List({
 	setShow = () => { },
@@ -102,58 +95,6 @@ function List({
 		setFilters({ page: 1 });
 	}, [status, setFilters]);
 
-	const loadMore = useCallback(() => {
-		setTimeout(() => {
-			if (!loading) {
-				setFilters({ ...filters, page: page + PAGE_FACTOR });
-			}
-		}, TIME_DURATION_FOR_SET_TME_OUT);
-	}, [loading, filters, setFilters, page]);
-
-	const renderContent = () => {
-		if (loading && isEmpty(listData)) {
-			return <ListLoader />;
-		}
-
-		if (!loading && !channelList?.length) {
-			return <EmptyState isMobile />;
-		}
-
-		return channelList?.map((item) => (
-			<Button
-				key={item?.id}
-				className={cl` ${styles.card} ${id === item?.id ? styles.colored : ''}`}
-				themeType="tertiary"
-				tabIndex={0}
-				onClick={() => setId(item?.id)}
-			>
-				<div className={styles.ship_image_container}>
-					<IcAShipAmber height={30} width={30} />
-				</div>
-
-				<div className={styles.card_item}>
-
-					<div className={styles.serial_id}>{item?.channel_name}</div>
-
-					<div className={styles.updated_at}>
-						{formatDate({
-							date       : item?.updated_at,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							formatType : 'dateTime',
-							separator  : ' | ',
-						})}
-					</div>
-				</div>
-
-				{(messageContentArr || []).map((obj) => (
-					obj?.mainKey === item?.id && obj[user_id] > MSG_COUNT && id !== item?.id ? (
-						<div key={item?.id} className={styles.circle}>{obj[user_id]}</div>
-					) : null))}
-			</Button>
-		));
-	};
-
 	return (
 		<div style={{ display: 'flex' }}>
 			<div className={styles.container}>
@@ -168,21 +109,20 @@ function List({
 					handleClick={handleClick}
 				/>
 
-				<div className={styles.list_container} ref={refOuter}>
-					<InfiniteScroll
-						pageStart={1}
-						initialLoad={false}
-						loadMore={!showUnreadChat && loadMore}
-						hasMore={page < total_page}
-						useWindow={false}
-					>
-						{renderContent()}
-					</InfiniteScroll>
-
-					{loading && !isEmpty(listData) && !showUnreadChat && (
-						<div className={styles.custom_loader}>Loading...</div>
-					)}
-				</div>
+				<ListBody
+					total_page={total_page}
+					loading={loading}
+					filters={filters}
+					channelList={channelList}
+					id={id}
+					setId={setId}
+					messageContentArr={messageContentArr}
+					user_id={user_id}
+					refOuter={refOuter}
+					showUnreadChat={showUnreadChat}
+					listData={listData}
+					setFilters={setFilters}
+				/>
 
 			</div>
 
