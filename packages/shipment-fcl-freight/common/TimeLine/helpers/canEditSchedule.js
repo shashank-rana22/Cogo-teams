@@ -1,13 +1,22 @@
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
 
 export function canEditSchedule({ primary_service, activeStakeholder }) {
-	const stateCheck = TIMELINE_EDITABLE.primary_service.state
-		.includes(primary_service?.state);
+	const { state = '' } = primary_service;
 
-	const keyPresenceCheck = TIMELINE_EDITABLE.primary_service.key_present_check
+	const stateCheck = TIMELINE_EDITABLE.primary_service.state
+		.includes(state);
+
+	const keysNotPresent = TIMELINE_EDITABLE.primary_service.key_present_check
 		.every((key) => !primary_service?.[key]);
 
 	const userNotAllowedCheck = !TIMELINE_EDITABLE.stakeholders_not_allowed.includes(activeStakeholder);
 
-	return userNotAllowedCheck && (stateCheck || keyPresenceCheck);
+	const defaultEditable = userNotAllowedCheck && stateCheck;
+
+	const editableBecauseKeyNotPresent = userNotAllowedCheck && keysNotPresent;
+
+	return {
+		isEditable: defaultEditable || editableBecauseKeyNotPresent,
+		defaultEditable,
+	};
 }
