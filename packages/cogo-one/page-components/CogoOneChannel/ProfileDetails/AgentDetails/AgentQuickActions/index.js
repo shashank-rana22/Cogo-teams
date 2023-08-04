@@ -53,7 +53,7 @@ function AgentQuickActions({
 							onClick={() => submitKyc({ orgId, userId, leadUserId, fetchOrganization })}
 							disabled={loading}
 						>
-							Verify KYC
+							Submit KYC Documents
 						</Button>
 
 					)}
