@@ -1,14 +1,19 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+const PASSWORD_MIN_LENGTH = 8;
+const FIRST_INDEX = 1;
+
 function range(start, stop) {
-	const startCharCode = start.charCodeAt(0);
-	const endCharCode = stop.charCodeAt(0);
+	const START_CHAR_CODE = start.charCodeAt(GLOBAL_CONSTANTS.zeroth_index);
+	const END_CHAR_CODE = stop.charCodeAt(GLOBAL_CONSTANTS.zeroth_index);
 
-	const result = [];
+	const RESULT = [];
 
-	for (let charCode = startCharCode; charCode <= endCharCode; charCode += 1) {
-		result.push(String.fromCharCode(charCode));
+	for (let charCode = START_CHAR_CODE; charCode <= END_CHAR_CODE; charCode += FIRST_INDEX) {
+		RESULT.push(String.fromCharCode(charCode));
 	}
 
-	return result;
+	return RESULT;
 }
 
 const VALID_PASSWORD_MAPPINGS = {
@@ -29,7 +34,7 @@ const VALID_PASSWORD_MAPPINGS = {
 		message    : 'at least one special character.',
 	},
 	minLength: {
-		length  : 8,
+		length  : PASSWORD_MIN_LENGTH,
 		message : 'minimum 8 characters.',
 	},
 };
