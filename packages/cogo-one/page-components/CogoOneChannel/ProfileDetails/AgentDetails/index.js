@@ -213,7 +213,7 @@ function AgentDetails({
 					})}
 				</div>
 			)}
-			{ !orgId && lead_user_details?.lead_organization_id ? (
+			{!loading && !orgId && lead_user_details?.lead_organization_id ? (
 				<Button size="sm" themeType="secondary" onClick={handleRoute}>Add Feedback</Button>
 			) : null}
 			{loading ? (
