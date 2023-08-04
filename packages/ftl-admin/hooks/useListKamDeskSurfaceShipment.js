@@ -19,9 +19,8 @@ function useListKamDeskSurfaceShipment() {
 			await trigger({
 				params: {
 					filters: {
-						state           : ['confirmed_by_importer_exporter', 'in_progress'],
-						service_state   : ['awaiting_service_provider_confirmation', 'confirmed_by_service_provider'],
-						task_attributes : { task: 'confirmation_of_booking_with_service_provider', status: 'pending' },
+						state                        : ['confirmed_by_importer_exporter', 'in_progress'],
+						edit_quotation_ftl_shipments : true,
 						...filters,
 					},
 					shipment_type : 'ftl_freight',
