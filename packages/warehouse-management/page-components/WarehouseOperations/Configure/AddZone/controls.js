@@ -1,6 +1,6 @@
 const controls = [
 	{
-		name  : 'zone_name',
+		name  : 'zoneName',
 		label : 'Enter Zone name',
 		type  : 'text',
 		span  : 6,
@@ -9,25 +9,21 @@ const controls = [
 		},
 	},
 	{
-		name  : 'commodity_type',
-		label : 'Select Commodity type',
-		type  : 'select',
-		span  : 6,
-
-		options: [
-			{
-				label : 'General',
-				value : 'general',
-			},
-			{
-				label : 'Dangerous',
-				value : 'dangerous',
-			},
-		],
-		rules: { required: 'This is required' },
+		name        : 'commodityType',
+		label       : 'Select Commodity type',
+		type        : 'select',
+		span        : 6,
+		value       : 'general',
+		initialCall : true,
+		params      : {
+			service: 'AIR',
+		},
+		asyncKey    : 'list_hs_code_commodities',
+		renderLabel : (item) => (item?.commodityDisplayName),
+		rules       : { required: 'This is required' },
 	},
 	{
-		name               : 'aisle',
+		name               : 'aisles',
 		type               : 'fieldArray',
 		showButtons        : true,
 		label              : '+ Add More Aisle',
@@ -37,7 +33,7 @@ const controls = [
 		controls: [
 			{
 				label : 'Enter number of aisle of this type',
-				name  : 'no_of_aisle',
+				name  : 'aislesCount',
 				span  : 6,
 				type  : 'number',
 
@@ -45,7 +41,7 @@ const controls = [
 			},
 			{
 				label : 'Enter number of Racks',
-				name  : 'no_of_racks',
+				name  : 'racksCount',
 				span  : 6,
 				type  : 'number',
 
@@ -53,7 +49,7 @@ const controls = [
 			},
 			{
 				label : 'Enter number of Shelves/racks',
-				name  : 'no_of_shelves_by_racks',
+				name  : 'shelvesCount',
 				span  : 6,
 				type  : 'number',
 
@@ -61,7 +57,7 @@ const controls = [
 			},
 			{
 				label : 'Enter number of bins in shelf',
-				name  : 'no_of_bins_in_shelf',
+				name  : 'totalBinsInShelf',
 				span  : 6,
 				type  : 'number',
 
@@ -69,7 +65,7 @@ const controls = [
 			},
 			{
 				label : 'Enter number of Bins',
-				name  : 'no_of_bins',
+				name  : 'binsCount',
 				span  : 6,
 				type  : 'number',
 
@@ -77,7 +73,7 @@ const controls = [
 			},
 			{
 				label       : 'Length',
-				name        : 'length',
+				name        : 'binLength',
 				span        : 2,
 				type        : 'number',
 				placeholder : 'Length',
@@ -85,7 +81,7 @@ const controls = [
 			},
 			{
 				label       : 'Width',
-				name        : 'width',
+				name        : 'binWidth',
 				span        : 2,
 				type        : 'number',
 				placeholder : 'Width',
@@ -93,7 +89,7 @@ const controls = [
 			},
 			{
 				label       : 'Height',
-				name        : 'height',
+				name        : 'binHeight',
 				span        : 2,
 				type        : 'number',
 				placeholder : 'Height',
