@@ -12,6 +12,7 @@ function FixedCard({
 	setBulkActions = () => {},
 	statsRefetch = () => {},
 	setSelectedIds = () => {},
+	filters = {},
 }) {
 	const selectedIdsLength = selectedIds.length;
 	const [openBulkUpdateModal, setOpenBulkUpdateModal] = useState(false);
@@ -42,6 +43,7 @@ function FixedCard({
 					selectedIds={selectedIds}
 					statsRefetch={statsRefetch}
 					setSelectedIds={setSelectedIds}
+					filters={filters}
 				/>
 			) }
 		</>

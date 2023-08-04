@@ -113,6 +113,7 @@ function EmployeeDirectory() {
 					setBulkActions={setBulkActions}
 					statsRefetch={statsRefetch}
 					setSelectedIds={setSelectedIds}
+					filters={filters}
 				/>
 			)}
 			{openEmployeeDetails && (

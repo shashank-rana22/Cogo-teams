@@ -10,6 +10,18 @@ import { CONTROL_MAPPING } from '../../utils/filterControls';
 
 import styles from './styles.module.css';
 
+const getStatus = (newStatus, oldStatus) => {
+	if (newStatus === 'notice') {
+		return true;
+	}
+
+	if (oldStatus === 'notice' && newStatus !== 'notice') {
+		return false;
+	}
+
+	return undefined;
+};
+
 function BulkUpdate({
 	show = false, onClose = () => {},
 	refetch = () => {},
@@ -17,6 +29,7 @@ function BulkUpdate({
 	selectedIds = [],
 	statsRefetch = () => {},
 	setSelectedIds = () => {},
+	filters = {},
 }) {
 	const { control, handleSubmit, formState : { errors } } = useForm();
 
@@ -29,6 +42,7 @@ function BulkUpdate({
 	});
 
 	const onSubmit = (values) => {
+		const { employee_status : employeeStatus } = filters || {};
 		const FORM_VALUES = {};
 
 		CONTROLS.forEach((val) => {
@@ -42,7 +56,7 @@ function BulkUpdate({
 		const dataObj = {
 			...FORM_VALUES,
 			employee_status : employee_status === 'notice' ? undefined : employee_status,
-			is_resigned     : employee_status === 'notice' ? true : undefined,
+			is_resigned     : getStatus(employee_status, employeeStatus),
 			employee_ids    : selectedIds,
 		};
 
