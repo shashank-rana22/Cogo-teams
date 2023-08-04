@@ -20,6 +20,8 @@ export default function useListIGMDeskShipments() {
 		partner_id: general?.query?.partner_id,
 	}));
 
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
+
 	const { filters, setFilters, tabState } = useContext(IGMDeskContext) || {};
 	const [data, setData] = useState(EMPTY_DATA);
 
@@ -29,6 +31,12 @@ export default function useListIGMDeskShipments() {
 	}, { manual: true });
 
 	const listShipments = useCallback(async () => {
+		const [, scope, view_type] = (authParams || '').split(':');
+
+		if (!scope) { return; }
+
+		const newScopeFilters = { scope, view_type, selected_agent_id };
+
 		try {
 			const res = await trigger({
 				params: getPayload({ filters, tabState, partner_id }),
@@ -39,11 +47,15 @@ export default function useListIGMDeskShipments() {
 			} else {
 				setData(res.data || {});
 			}
+
+			localStorage.setItem('igm_desk_stored_values', JSON.stringify({
+				scopeFilters: newScopeFilters,
+			}));
 		} catch (err) {
 			toastApiError(err);
 			setData(EMPTY_DATA);
 		}
-	}, [filters, setFilters, tabState, trigger, partner_id]);
+	}, [authParams, selected_agent_id, trigger, filters, tabState, partner_id, setFilters]);
 
 	useCallApi({ listShipments, filters, tabState });
 

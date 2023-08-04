@@ -7,6 +7,8 @@ export default function getValidatedStoredValues() {
 
 	let { page, q, fileType, sort_by, sort_type, trade_type, current_filter } = storedValues?.filters || {};
 
+	const { scopeFilters = {} } = storedValues || {};
+
 	let { activeTab } = storedValues?.tabState || {};
 
 	const [defaultActiveTab] = FCL_COMMON_TABS;
@@ -58,5 +60,6 @@ export default function getValidatedStoredValues() {
 		tabState: {
 			activeTab,
 		},
+		scopeFilters,
 	};
 }

@@ -11,10 +11,12 @@ const ResolveIgmDesk = {
 export default function IGMDesk() {
 	const [filters, setFilters] = useState(null);
 	const [tabState, setTabState] = useState(null);
+	const [scopeFilters, setScopeFilters] = useState(null);
 
 	useEffect(() => {
 		const defaultValues = getValidatedStoredValues();
 
+		setScopeFilters(defaultValues?.scopeFilters);
 		setFilters(defaultValues.filters);
 		setTabState(defaultValues.tabState);
 	}, []);
@@ -24,7 +26,8 @@ export default function IGMDesk() {
 		setFilters,
 		tabState,
 		setTabState,
-	}), [filters, tabState]);
+		scopeFilters,
+	}), [filters, scopeFilters, tabState]);
 
 	const RenderDesk = tabState?.activeTab
 		? ResolveIgmDesk.fcl_freight

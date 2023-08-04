@@ -1,3 +1,4 @@
+import HeaderFilters from '../../commons/HeaderFilters';
 import RenderList from '../../commons/RenderList';
 import Tabs from '../../commons/Tabs';
 import FCL_COMMON_TABS from '../../config/FCL_COMMON_TABS';
@@ -11,6 +12,8 @@ export default function FclDesk() {
 		<>
 			<span className={styles.flex_row}>
 				<h1>IGM Desk</h1>
+
+				<HeaderFilters />
 			</span>
 
 			<div className={styles.flex_row}>
