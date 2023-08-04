@@ -28,9 +28,7 @@ function DetailsCard(props) {
 							{startCase(labelKey)}
 						</div>
 
-						<div className={styles.bottom}>
-							<Value response={response} labelKey={labelKey} />
-						</div>
+						<Value response={response} labelKey={labelKey} />
 
 					</div>
 
