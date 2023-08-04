@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const getPayload = ({ organization_id = '', user_id = '', lead_user_id = '' }) => ({
@@ -20,7 +21,7 @@ const useSubmitOmniChannelKyc = () => {
 			});
 			fetchOrganization();
 		} catch (error) {
-			Toast.error(error.message);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 
