@@ -1,7 +1,8 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useCallback } from 'react';
+import { useContext, useEffect, useCallback } from 'react';
 
 const STAKEHOLDER_MAPPINGS = {
 	booking_desk  : 'service_ops',
@@ -18,6 +19,9 @@ function useListTasks({
 	activeStakeholder,
 }) {
 	const { profile } = useSelector((state) => state);
+	const {
+		refetchServices,
+	} = useContext(ShipmentDetailContext);
 
 	const user_id = profile?.user?.id;
 
@@ -44,11 +48,12 @@ function useListTasks({
 		(async () => {
 			try {
 				await trigger();
+				refetchServices();
 			} catch (err) {
 				toastApiError(err);
 			}
 		})();
-	}, [trigger]);
+	}, [trigger, refetchServices]);
 
 	useEffect(() => {
 		apiTrigger();
