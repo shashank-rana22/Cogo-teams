@@ -17,12 +17,14 @@ function EditRate({
 	refetch = () => {},
 	formattedRate = {},
 }) {
+	const filterServicesList = (servicesList.filter((item) => item.id === task?.service_id));
+
 	const editQuote = useGetStep3Data({
-		servicesList,
+		servicesList    : filterServicesList,
 		shipment_data,
 		onCancel,
 		task,
-		taskListRefetch: refetch,
+		taskListRefetch : refetch,
 		formattedRate,
 	});
 
