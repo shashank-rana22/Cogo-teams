@@ -86,7 +86,7 @@ function SupplierReallocation({
 		>
 			<Modal.Header title={`Supplier Reallocation${showAllControls ? ' & BL Details' : ''}`} />
 
-			<Modal.Body style={{ overflow: 'visible' }}>
+			<Modal.Body>
 				<div className={styles.form_wrapper}>
 					{controls.map((ctrl) => (
 						<FormElement

@@ -134,13 +134,14 @@ function ShipmentHeader() {
 						render={(
 							<Button
 								themeType="tertiary"
-								tabIndex={0}
+								className={styles.popover_text_button}
 								onClick={() => { setShowModal('cancel_shipment'); setShowPopover(false); }}
 							>
 								Cancel Shipment
 							</Button>
 						)}
 						onClickOutside={() => setShowPopover(false)}
+						className={styles.cancel_popover}
 						placement="bottom"
 					>
 						<IcMOverflowDot className={styles.three_dot_icon} onClick={() => setShowPopover((p) => !p)} />

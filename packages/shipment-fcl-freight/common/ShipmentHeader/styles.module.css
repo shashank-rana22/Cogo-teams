@@ -104,3 +104,23 @@
 		cursor: pointer;
 	}
 }
+
+.cancel_popover {
+	padding: 0;
+
+	:global {
+		.tippy-content {
+			padding: 0;
+		}
+	}
+}
+
+.popover_text_button {
+	width: fit-content;
+	background-color: var(--color-secondary-greyscale-5);
+
+	&:hover {
+		color: var(--color-primary-error-red-2);
+		background-color: transparent !important;
+	}
+}
