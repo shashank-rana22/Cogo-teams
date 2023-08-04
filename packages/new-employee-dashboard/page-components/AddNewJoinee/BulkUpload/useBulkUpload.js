@@ -22,10 +22,9 @@ const useBulkUpload = () => {
 	const bulkUploadNewHire = async (val) => {
 		try {
 			const { finalUrl } = val?.upload_new_hire_info || {};
-
 			const payload = {
-				file_url    : finalUrl,
 				action_name : activeTab,
+				file_url    : finalUrl,
 			};
 
 			await trigger({ data: payload });

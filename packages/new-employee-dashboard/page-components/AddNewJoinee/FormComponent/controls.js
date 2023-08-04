@@ -106,6 +106,42 @@ const controls = [
 		},
 	},
 	{
+		name        : 'attendance',
+		type        : 'select',
+		label       : 'Attendence*',
+		placeholder : 'Select Attendence',
+		options     : GLOBAL_CONSTANTS.attendence_options,
+		rules       : {
+			required: 'Attendence is required',
+		},
+	},
+	{
+		name        : 'learning_indicator',
+		type        : 'select',
+		label       : 'Learning Indicator',
+		placeholder : 'select LI',
+		options     : GLOBAL_CONSTANTS.li_options,
+
+	},
+	{
+		name        : 'predictive_index',
+		type        : 'number',
+		label       : 'Predictive Index',
+		placeholder : 'Enter PI',
+
+	},
+	{
+		name        : 'department',
+		type        : 'select',
+		label       : 'Department*',
+		placeholder : 'Select Department',
+		options     : GLOBAL_CONSTANTS.department_options,
+		rules       : {
+			required: 'Department is required',
+		},
+
+	},
+	{
 		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
