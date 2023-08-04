@@ -130,7 +130,7 @@ function ShippingLineModal({
 										container_size={item?.container_size}
 										container_type={item?.container_type}
 										price={item?.total_price_discounted}
-										price_current={item?.total_price_currency}
+										price_currency={item?.total_price_currency}
 									/>
 								))}
 
@@ -144,7 +144,7 @@ function ShippingLineModal({
 												container_size={item?.container_size}
 												container_type={item?.container_type}
 												price={item?.total_price_discounted}
-												price_current={item?.total_price_currency}
+												price_currency={item?.total_price_currency}
 											/>
 										))}
 									>
@@ -162,7 +162,7 @@ function ShippingLineModal({
 								container_size={firstTwoRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_size}
 								container_type={firstTwoRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_type}
 								price={selectedRateData?.total_price_discounted}
-								price_current={selectedRateData?.total_price_currency}
+								price_currency={selectedRateData?.total_price_currency}
 								totalPrice
 							/>
 						</div>

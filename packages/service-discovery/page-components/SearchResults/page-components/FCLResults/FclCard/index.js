@@ -88,7 +88,7 @@ function MiddleSection({
 								container_size={item?.container_size}
 								container_type={item?.container_type}
 								price={item?.total_price_discounted}
-								price_current={item?.total_price_currency}
+								price_currency={item?.total_price_currency}
 							/>
 						))}
 
@@ -102,7 +102,7 @@ function MiddleSection({
 										container_size={item?.container_size}
 										container_type={item?.container_type}
 										price={item?.total_price_discounted}
-										price_current={item?.total_price_currency}
+										price_currency={item?.total_price_currency}
 									/>
 								))}
 							>
@@ -120,7 +120,7 @@ function MiddleSection({
 						container_size={firstTwoRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_size}
 						container_type={firstTwoRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_type}
 						price={rateCardData?.total_price_discounted}
-						price_current={rateCardData?.total_price_currency}
+						price_currency={rateCardData?.total_price_currency}
 						totalPrice
 					/>
 				</div>
@@ -188,6 +188,8 @@ function FclCard({
 		validity_end,
 		schedule_type,
 	} = schedules;
+
+	console.log('rateCardData', rateCardData);
 
 	const serviceRateswithId = Object.keys(service_rates).map((service_id) => {
 		const service = service_rates[service_id];
