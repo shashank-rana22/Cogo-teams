@@ -1,0 +1,19 @@
+.heading {
+	font-size: 28px;
+	font-weight: bold;
+	color: #333;
+
+	@media (max-width: 768px) {
+		margin-top: 50px;
+	}
+}
+
+.container {
+	margin-bottom: 20px;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 2px;
+		}
+	}
+}

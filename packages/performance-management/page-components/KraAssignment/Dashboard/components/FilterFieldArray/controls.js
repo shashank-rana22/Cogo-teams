@@ -6,7 +6,7 @@ const getControls = (watchTribeId) => {
 			{
 				name        : 'role_id',
 				type        : 'asyncSelect',
-				asyncKey    : 'list_roles',
+				asyncKey    : 'list_employee_roles',
 				label       : 'Roles',
 				placeholder : 'Select',
 				initialCall : true,

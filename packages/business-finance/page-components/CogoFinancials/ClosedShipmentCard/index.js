@@ -99,7 +99,6 @@ function ClosedShipmentCard({
 					>
 						<ResponsiveRadialBar
 							data={data}
-							cornerRadius={40}
 							valueFormat=">-.2f"
 							padding={0}
 							radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
@@ -107,26 +106,22 @@ function ClosedShipmentCard({
 							endAngle="360"
 							innerRadius={0.6}
 							tooltip={({ bar = {} }) => {
-								const group = bar?.groupId === 'Revenue' ? totalRevenue : totalCost;
-								return (
-									<div className={styles.tooltip}>
-										<div className={styles.rect} style={{ backgroundColor: bar?.color }} />
-										<div className={styles.val}>
-											{toTitleCase(bar?.category || '')}
+								const { category, color, formattedValue } = bar;
+								if (!category?.includes('Estimated')) {
+									return (
+										<div className={styles.tooltip}>
+											<div className={styles.rect} style={{ backgroundColor: color }} />
+											<div className={styles.val}>
+												{toTitleCase(category || '')}
+											</div>
+											<div>
+												{formattedValue}
+												%
+											</div>
 										</div>
-										<div>
-											{formatAmount({
-												amount  : (Number(bar.value) * group),
-												currency,
-												options : {
-													style                 : 'currency',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : 2,
-												},
-											})}
-										</div>
-									</div>
-								);
+									);
+								}
+								return null;
 							}}
 							enableRadialGrid={false}
 							enableCircularGrid={false}
@@ -143,20 +138,24 @@ function ClosedShipmentCard({
 							>
 								{(item.children || []).map((child) => (
 									<div key={child.label}>
-										<div
-											className={styles.graph_label}
-										>
-											{child.color && (
-												<span
-													className={styles.label_circle}
-													style={{ backgroundColor: child.color }}
-												/>
-											)}
-											{child.label}
-										</div>
-										<div className={styles.graph_value}>
-											{child.value}
-										</div>
+										{child.show && (
+											<div>
+												<div
+													className={styles.graph_label}
+												>
+													{child.color && (
+														<span
+															className={styles.label_circle}
+															style={{ backgroundColor: child.color }}
+														/>
+													)}
+													{child.label}
+												</div>
+												<div className={styles.graph_value}>
+													{child.value}
+												</div>
+											</div>
+										)}
 									</div>
 								))}
 							</div>
