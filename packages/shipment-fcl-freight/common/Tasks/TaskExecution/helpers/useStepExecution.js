@@ -13,7 +13,7 @@ function useStepExecution({
 	getApisData = {},
 	selectedMail = {},
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const populatedControls = populateControls(stepConfig.controls);
 
@@ -24,6 +24,7 @@ function useStepExecution({
 		getApisData,
 		shipment_data,
 		stepConfig,
+		primary_service,
 	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);

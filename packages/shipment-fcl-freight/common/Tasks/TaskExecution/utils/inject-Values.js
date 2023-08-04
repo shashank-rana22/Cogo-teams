@@ -12,6 +12,7 @@ const injectValues = ({
 	getApisData,
 	shipment_data,
 	stepConfig,
+	primary_service,
 }) => {
 	const controls = populatedControls || [];
 
@@ -123,6 +124,13 @@ const injectValues = ({
 			if (control.name === 'containers_count') {
 				controls[index].value = containersCount;
 				controls[index].rules.max = containersCount;
+			}
+		});
+	} else if (task?.task === 'mark_haulage_container_picked_up') {
+		(controls || []).forEach((control) => {
+			if (control.name === 'cargo_readiness_date') {
+				// eslint-disable-next-line no-param-reassign
+				control.value = new Date(primary_service?.cargo_readiness_date);
 			}
 		});
 	}
