@@ -6,7 +6,7 @@ const controls = [
 		isClearable : true,
 		multiple    : true,
 		asyncKey    : 'faq_topics',
-		options     : [],
+		initialCall : true,
 		rules       : { required: { value: true, message: 'This is required' } },
 	},
 	{
@@ -16,7 +16,7 @@ const controls = [
 		isClearable : true,
 		multiple    : true,
 		asyncKey    : 'faq_tags',
-		options     : [],
+		initialCall : true,
 		rules       : { required: { value: true, message: 'This is required' } },
 	},
 	{

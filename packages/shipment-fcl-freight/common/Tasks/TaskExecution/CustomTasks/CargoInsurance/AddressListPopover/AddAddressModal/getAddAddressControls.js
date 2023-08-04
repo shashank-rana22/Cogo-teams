@@ -2,8 +2,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
-const geo = getGeoConstants();
-export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () => {} }) => [
+export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () => {}, geo = {} }) => [
 	{
 		label       : 'Billing Party Name',
 		name        : 'name',
@@ -131,8 +130,11 @@ export const getModifiedControls = ({
 	checked,
 	setValue = () => {}, setCountryId = () => {}, countryId = '',
 }) => {
+	const geo = getGeoConstants();
+
 	const countryCode = getCountryDetails({ country_id: countryId });
-	const controls = getAddAddressControls({ setValue, setCountryId });
+	const controls = getAddAddressControls({ setValue, setCountryId, geo });
+
 	const updatedControls = (controls || []).map((control) => {
 		if (control.name === 'tax_number') {
 			return {

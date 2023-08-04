@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 import useUpdateAnswers from './useUpdateAnswers';
@@ -37,6 +38,7 @@ function Footer({
 				themeType="secondary"
 				onClick={handleLeaveTest}
 			>
+				<IcMArrowBack />
 				Leave Test
 			</Button>
 

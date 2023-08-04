@@ -2,15 +2,16 @@ import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import { SHIPPING_LINE, EVENT_LABEL } from '../../../../constants/shippingLineMappings';
-import { getEventTitle } from '../../../../utils/getEventTitle';
+import shipmentEventInfoemation from '../../../../configurations/shipmentEventInfoemation';
+import { SHIPPING_LINE } from '../../../../constants/shippingLineMappings';
 
 import CargoDetails from './CargoDetails';
 import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
-function Shipments({ serviceData = {}, name = '', eventType = '' }) {
-	const eventTitle = getEventTitle({ name });
+function Shipments({ serviceData = {}, eventType = '', scope = '' }) {
+	const activityPlatform = startCase(scope) || '';
+	const eventInformationMapping = shipmentEventInfoemation({ activityPlatform });
 
 	const {
 		detail = {}, rate = {},
@@ -64,13 +65,9 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 	if (isEmpty(serviceData)) {
 		return (
 			<>
-				<div className={styles.title}>{startCase(eventTitle)}</div>
+				<div className={styles.title}>{eventInformationMapping[eventType]?.title}</div>
 				<div className={styles.message}>
-					Following are the details of the abandoned
-					{' '}
-					{EVENT_LABEL[eventType]}
-					{' '}
-					-
+					{eventInformationMapping[eventType]?.information}
 				</div>
 			</>
 		);
@@ -78,13 +75,9 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 
 	return (
 		<>
-			<div className={styles.title}>{startCase(eventTitle)}</div>
+			<div className={styles.title}>{eventInformationMapping[eventType]?.title}</div>
 			<div className={styles.message}>
-				Following are the details of the abandoned
-				{' '}
-				{EVENT_LABEL[eventType]}
-				{' '}
-				-
+				{eventInformationMapping[eventType]?.information}
 			</div>
 
 			<div className={styles.banner}>

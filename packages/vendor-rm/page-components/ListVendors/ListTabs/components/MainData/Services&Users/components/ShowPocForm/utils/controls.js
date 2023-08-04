@@ -1,7 +1,8 @@
+import { startCase } from '@cogoport/utils';
+
 import officeLocations from '../../../../../../../../../utils/office-locations.json';
 import workScopes from '../../../../../../../../../utils/work-scopes.json';
-import categoryOptions from '../../../../../../../../utils/category-options';
-import subCategoryOptions from '../../../../../../../../utils/sub-category-options';
+import { EXCLUDE_CATEGORIES } from '../../../../../../../constants';
 
 const controls = [
 	{
@@ -48,23 +49,17 @@ const controls = [
 		showIn      : ['editPOC'],
 	},
 	{
-		name        : 'category',
-		label       : 'Category',
-		type        : 'select',
-		placeholder : 'Select Category',
-		options     : categoryOptions,
-		style       : { flexBasis: '42%' },
-		rules       : { required: 'Category is required' },
-
-	},
-	{
-		name        : 'sub_category',
-		label       : 'Sub Category',
-		type        : 'select',
-		placeholder : 'Select Sub-Category',
-		options     : subCategoryOptions,
-		style       : { flexBasis: '42%' },
-		rules       : { required: 'Sub Category is required' },
+		name               : 'category',
+		label              : 'Category',
+		type               : 'asyncSelect',
+		placeholder        : 'Select Category',
+		asyncKey           : 'list_expense_category',
+		renderLabel        : (item) => startCase(item.categoryName),
+		// eslint-disable-next-line max-len
+		getModifiedOptions : ({ options }) => (options?.filter(({ categoryName = '' }) => (!EXCLUDE_CATEGORIES.includes(categoryName)))),
+		valueKey           : 'categoryName',
+		style              : { flexBasis: '42%' },
+		rules              : { required: 'Category is required' },
 
 	},
 	{

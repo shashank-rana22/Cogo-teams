@@ -940,7 +940,6 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
 			},
-
 			{
 				key           : 'business_finance-reports',
 				title         : 'Reports',
@@ -949,6 +948,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.reports,
+			},
+			{
+				key           : 'business_finance-cogo_financials',
+				title         : 'Cogo Financials',
+				href          : '/v2/business-finance/cogo-financials',
+				as            : '/v2/business-finance/cogo-financials',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_financials,
 			},
 		],
 		module_type: 'dashboards',
@@ -1409,6 +1417,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment],
+			},
+			{
+				key           : 'coe-ftl_field_service_ops',
+				title         : 'FTL Field Service OPS',
+				href          : '/v2/ftl-field-service-ops',
+				as            : '/v2/ftl-field-service-ops',
+				type          : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : apis.ftl_field_service_ops_apis,
 			},
 		],
 	},
@@ -2484,6 +2501,17 @@ const navigationMappingAdmin = {
 		href          : '/v2/ftl-admin',
 		as            : '/v2/ftl-admin',
 		possible_apis : apis.ftl_admin,
+	},
+	centralised_customer_service: {
+		key           : 'centralised_customer_service',
+		title         : 'Centralised Customer Service Desk',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		href          : '/v2/centralised-customer-service',
+		as            : '/v2/centralised-customer-service',
+		main_apis     : [],
+		possible_apis : apis.centralised_customer_service,
+		icon          : IcMDashboard,
 	},
 };
 

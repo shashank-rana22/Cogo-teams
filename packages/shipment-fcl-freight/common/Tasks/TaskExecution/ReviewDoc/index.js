@@ -1,6 +1,7 @@
-import { Loader, Button, Toast, Textarea } from '@cogoport/components';
+import { Button, Toast, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -9,7 +10,6 @@ import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocum
 
 import styles from './styles.module.css';
 
-const REGEX = /:finalUrl=>"([^"]*)"/;
 const GET_FINAL_URL = 1;
 
 function ReviewDoc({
@@ -85,15 +85,14 @@ function ReviewDoc({
 	if (loading) {
 		return (
 			<div>
-				<Loader />
-				Loading Document...
+				<ThreeDotLoader message="Loading Document" />
 			</div>
 		);
 	}
 
 	const getfileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
-			const match = url.match(REGEX);
+			const match = url.match(GLOBAL_CONSTANTS.regex_patterns.file_upload_url);
 			return match[GET_FINAL_URL];
 		}
 

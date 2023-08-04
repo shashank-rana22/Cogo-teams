@@ -3,7 +3,7 @@ import { startCase, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function Header({ data = {} }) {
+function Header({ data = {}, activeTab = '' }) {
 	const { trade_type = '', importer_exporter = [], source } = data || {};
 
 	return (
@@ -17,18 +17,33 @@ function Header({ data = {} }) {
 					</Pill>
 				) : null}
 
+				{activeTab === 'Edit Sell Quotaion'
+				&& (
+					<div>
+						{source ? (
+							<Pill className={cl`${styles.source} customize_source`}>
+								{source === 'direct' ? 'Sell Without Buy' : startCase(source) }
+							</Pill>
+						) : null}
+					</div>
+				)}
+
 				{importer_exporter?.tags?.includes('partner')
 					? <Pill className={styles.channel_partner} color="orange">Channel Partner</Pill>
 					: null}
 			</div>
 
-			<div>
-				{source ? (
-					<Pill className={cl`${styles.source} customize_source`}>
-						{source === 'direct' ? 'Sell Without Buy' : startCase(source) }
-					</Pill>
-				) : null}
-			</div>
+			{activeTab !== 'Edit Sell Quotaion'
+			&& (
+				<div>
+					{source ? (
+						<Pill className={cl`${styles.source} customize_source`}>
+							{source === 'direct' ? 'Sell Without Buy' : startCase(source) }
+						</Pill>
+					) : null}
+				</div>
+			)}
+
 		</div>
 	);
 }
