@@ -129,9 +129,11 @@ const injectValues = ({
 	} else if (task?.task === 'mark_haulage_container_picked_up') {
 		(controls || []).forEach((control) => {
 			if (control.name === 'cargo_readiness_date') {
-				// eslint-disable-next-line no-param-reassign
-				control.value = new Date(primary_service?.cargo_readiness_date);
+				const newControl = control;
+				newControl.value = new Date(primary_service?.cargo_readiness_date);
+				return newControl;
 			}
+			return control;
 		});
 	}
 
