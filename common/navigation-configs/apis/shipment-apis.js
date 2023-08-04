@@ -1335,6 +1335,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'list_communications',
+		access_type  : 'private',
+		service_name : 'communication',
+	},
+	{
 		api          : 'get_process',
 		access_type  : 'private',
 		service_name : 'bookings',
@@ -1586,6 +1591,11 @@ const apis = [
 		api          : 'create_shipment_sales_utr',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'create_document',
+		access_type  : 'private',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'update_shipment_invoice_preference',

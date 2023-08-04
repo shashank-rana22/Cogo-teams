@@ -14,6 +14,7 @@ import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
+import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -28,7 +29,7 @@ const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_r
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
-	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
+	const [activeTab, setActiveTab] = useState('overview');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
@@ -63,9 +64,10 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 					<div className={styles.top_header}>
 						<ShipmentInfo />
 
-						<RolloverDetails />
-
-						<ShipmentChat />
+						<div className={styles.toggle_chat}>
+							<RolloverDetails />
+							<ShipmentChat />
+						</div>
 					</div>
 
 					{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
@@ -93,6 +95,10 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 
 							<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 								<Tasks />
+							</TabPanel>
+
+							<TabPanel name="invoice" title="Sales Invoice">
+								<SalesInvoice />
 							</TabPanel>
 
 							<TabPanel name="documents" title="Documents">

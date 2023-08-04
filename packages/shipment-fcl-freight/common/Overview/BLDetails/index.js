@@ -1,11 +1,11 @@
 import { Button, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useListBillOfLadings from '../../../hooks/useListBillOfLadings';
+import EmptyState from '../../EmptyState';
 
 import BlContainersMapping from './BlContainersMapping';
 import ContainerDetails from './ContainerDetails';
@@ -100,12 +100,14 @@ function BLDetails() {
 				style={{ width: '100%' }}
 			>
 				{!list?.length ? (
-					<EmptyState
-						showContent={EMPTY_STATE_CONTENT}
-						textSize="20px"
-						emptyText="No BL Details Found!"
-						subEmptyText="Currently BL is not uploaded from the respective stakeholder."
-					/>
+					<div className={styles.empty_state}>
+						<EmptyState
+							showContent={EMPTY_STATE_CONTENT}
+							textSize="20px"
+							emptyText="No BL Details Found!"
+							subEmptyText="Currently BL is not uploaded from the respective stakeholder."
+						/>
+					</div>
 				) : (
 					<div className={styles.manage_services_div}>
 						{(list || []).map((item) => (
