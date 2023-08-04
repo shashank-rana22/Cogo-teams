@@ -47,10 +47,14 @@ function StatsOutstanding({ item = {} }) {
 		<div className={styles.container}>
 
 			<div className={styles.invoices_wrapper}>
+
 				<div className={styles.stats_key}>
-					{StatsKeyMapping.map((stats) => (
-						<div className={styles.stats_lable} key={stats.valueKey}>{stats.label}</div>
-					))}
+					<div className={styles.empty_container} />
+					<div className={styles.statsfull}>
+						{StatsKeyMapping.map((stats) => (
+							<div className={styles.stats_lable} key={stats.valueKey}>{stats.label}</div>
+						))}
+					</div>
 				</div>
 				{invoiceContainer.map((invoiceObject) => (
 					<div className={styles.invoices_card} key={invoiceObject.name}>

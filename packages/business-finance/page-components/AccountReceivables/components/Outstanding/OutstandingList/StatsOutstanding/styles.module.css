@@ -58,6 +58,7 @@
 
 .right_container {
 	display: flex;
+	justify-content: space-between;
 	width: 100%;
 }
 
@@ -111,11 +112,14 @@
 
 .stats_key {
 	display: flex;
-	justify-content: flex-end;
+}
+
+.empty_container {
+	min-width: 20%;
 }
 
 .stats_lable {
-	width: 128px;
+	width: 124px;
 	font-size: 14px;
 	font-weight: 600;
 }
@@ -124,4 +128,10 @@
 	margin-left: 4px;
 	font-size: var(--font-size-lg);
 	color: #356efd;
+}
+
+.statsfull {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 }
