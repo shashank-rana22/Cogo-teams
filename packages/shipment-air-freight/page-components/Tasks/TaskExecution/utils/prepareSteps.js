@@ -169,7 +169,7 @@ const evaluateObject = ({ control = {}, task = {}, shipment_data = {}, fieldType
 			if (!condition) {
 				finalControl[obj.key_to_add] = evaluateVal({
 					value_to_insert,
-					shipment_data,
+					data: shipment_data,
 					fieldTypeMapping,
 					fieldName,
 				});
@@ -289,11 +289,11 @@ const injectDataIntoValues = ({ step = {}, task = {}, shipment_data = {}, fieldT
 		...step,
 		controls: (step?.controls || []).map((ctrl) => ({
 			...evaluateObject({
-				control   : ctrl,
+				control          : ctrl,
 				task,
 				shipment_data,
-				updatedFieldTypeMapping,
-				fieldName : ctrl.name,
+				fieldTypeMapping : updatedFieldTypeMapping,
+				fieldName        : ctrl.name,
 			}),
 		})),
 	};
