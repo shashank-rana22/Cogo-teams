@@ -10,7 +10,7 @@ const getOrganizationalDetailsControls = (props) => {
 	const controls = [
 		{
 			name        : 'country',
-			label       : 'Select Country',
+			label       : 'Select Country of Registration',
 			placeholder : 'Country',
 			type        : 'asyncSelect',
 			multiple    : true,
@@ -35,7 +35,7 @@ const getOrganizationalDetailsControls = (props) => {
 		},
 		{
 			name        : 'state',
-			label       : 'Select State',
+			label       : 'Select State of Registration',
 			placeholder : 'State',
 			type        : 'asyncSelect',
 			multiple    : true,
@@ -64,7 +64,7 @@ const getOrganizationalDetailsControls = (props) => {
 		},
 		{
 			name        : 'city',
-			label       : 'Select City',
+			label       : 'Select City of Registration',
 			placeholder : 'City',
 			type        : 'asyncSelect',
 			multiple    : true,
@@ -93,7 +93,7 @@ const getOrganizationalDetailsControls = (props) => {
 		},
 		{
 			name        : 'pincode',
-			label       : 'Select Pincode',
+			label       : 'Select Pincode of Registration',
 			placeholder : 'Pincode',
 			type        : 'asyncSelect',
 			multiple    : true,

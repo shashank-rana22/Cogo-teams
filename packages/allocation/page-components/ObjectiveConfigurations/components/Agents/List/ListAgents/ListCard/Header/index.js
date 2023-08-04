@@ -4,11 +4,11 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const MIN_LENGTH = 1;
+
 function Header(props) {
 	const {
-		role,
-		user,
-		partner,
+		userDetails,
 		mode,
 		setMode,
 		handleSubmit,
@@ -16,7 +16,10 @@ function Header(props) {
 		onDistributeEqually,
 		onDiscardChanges,
 		loading,
+		objectivesCount,
 	} = props;
+
+	const { user = {}, partner = {}, role = {} } = userDetails || {};
 
 	const BUTTON_MAPPING_BASIS_MODE = {
 		view: (
@@ -78,15 +81,13 @@ function Header(props) {
 						{partner.business_name}
 					</Pill>
 				)}
-
-				{/* <Pill size="md">
-					Channel:
-					{' '}
-					{role.role_sub_function}
-				</Pill> */}
 			</div>
 
-			<div className={styles.button_container}>{BUTTON_MAPPING_BASIS_MODE[mode]}</div>
+			{objectivesCount > MIN_LENGTH && (
+				<div className={styles.button_container}>
+					{BUTTON_MAPPING_BASIS_MODE[mode]}
+				</div>
+			)}
 		</div>
 	);
 }

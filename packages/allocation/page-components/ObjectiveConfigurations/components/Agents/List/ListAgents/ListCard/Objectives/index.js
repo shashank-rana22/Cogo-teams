@@ -47,28 +47,32 @@ function Objectives(props) {
 			{objectives.map((item) => {
 				const { weightage = '', objective = {} } = item;
 
+				const { id, name, objective_type, lead_objective_status, status } = objective || {};
+
+				const showStatus = status === 'live' ? status : lead_objective_status;
+
 				return (
 					<Accordion
-						key={objective.id}
+						key={id}
 						className={styles.accordian}
 						type="text"
 						title={(
 							<div className={styles.accordian_title}>
 								<div className={styles.title_left_container}>
-									<div>{objective.name}</div>
-									<Pill>{startCase(objective.objective_type)}</Pill>
-									<Pill color={OBJECTIVE_STATUS_COLOR_MAPPING[objective.lead_objective_status]}>
-										{startCase(objective.lead_objective_status)}
+									<div>{name}</div>
+									<Pill>{startCase(objective_type)}</Pill>
+									<Pill color={OBJECTIVE_STATUS_COLOR_MAPPING[showStatus]}>
+										{startCase(showStatus)}
 									</Pill>
 								</div>
 
 								<div className={styles.title_right_container}>
-									{MODE_BASIS_MAPPING[mode]({ id: objective.id, weightage, control })}
+									{MODE_BASIS_MAPPING[mode]({ id, weightage, control })}
 								</div>
 							</div>
 						)}
 					>
-						<ObjectiveDetails activeObjectiveId={objective.id} />
+						<ObjectiveDetails activeObjectiveId={id} />
 					</Accordion>
 				);
 			})}

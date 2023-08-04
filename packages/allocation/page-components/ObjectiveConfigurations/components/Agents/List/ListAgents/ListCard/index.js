@@ -10,7 +10,9 @@ const { CREATE } = ACTIVE_MODE_KEYS_MAPPING;
 function ListCard(props) {
 	const { item, refetch, setActiveMode, setRefCallback } = props;
 
-	const { objectives = [], user = {}, role = {}, partner = {} } = item;
+	const { objectives = [], ...userDetails } = item;
+
+	const { user = {}, role = {}, partner = {} } = userDetails || {};
 
 	const {
 		mode,
@@ -20,16 +22,14 @@ function ListCard(props) {
 		onDistributeEqually,
 		onDiscardChanges,
 		loading,
-	} = useEditWeightage({ objectives, user, role, refetch });
+	} = useEditWeightage({ objectives, userDetails, refetch });
 
 	const { control, handleSubmit } = formProps;
 
 	return (
 		<div className={styles.card_container}>
 			<Header
-				user={user}
-				role={role}
-				partner={partner}
+				userDetails={userDetails}
 				mode={mode}
 				setMode={setMode}
 				handleSubmit={handleSubmit}
@@ -37,6 +37,7 @@ function ListCard(props) {
 				onDistributeEqually={onDistributeEqually}
 				onDiscardChanges={onDiscardChanges}
 				loading={loading}
+				objectivesCount={(objectives || []).length}
 			/>
 
 			<Objectives

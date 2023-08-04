@@ -12,7 +12,9 @@ const DECIMAL_COUNT = 2;
 const INDEX_LENGTH_NORMALIZATION = 1;
 
 const useEditWeightage = (props) => {
-	const { objectives, user, role, refetch } = props;
+	const { objectives, userDetails, refetch } = props;
+
+	const { user = {}, role = {} } = userDetails || {};
 
 	const [mode, setMode] = useState('view');
 
