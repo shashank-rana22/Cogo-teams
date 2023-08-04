@@ -1,6 +1,7 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 const useEditApplicableAgents = (props) => {
@@ -12,15 +13,18 @@ const useEditApplicableAgents = (props) => {
 
 	const [selectMode, setSelectMode] = useState(formValues.generalConfiguration?.selectMode || 'select_all');
 
+	const [selectedRmIds, setSelectedRmIds] = useState([]);
+
 	const [selectedAgentIds, setSelectedAgentIds] = useState(formValues.generalConfiguration?.user_ids || []);
 
 	const [params, setParams] = useState({
 		page       : 1,
 		page_limit : 10,
 		filters    : {
-			role_ids : watchRoles.map((role) => role.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]),
-			status   : 'active',
-			q        : searchQuery || undefined,
+			role_ids             : watchRoles.map((role) => role.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]),
+			status               : 'active',
+			q                    : searchQuery || undefined,
+			reporting_manager_id : !isEmpty(selectedRmIds) ? selectedRmIds : undefined,
 		},
 	});
 
@@ -69,10 +73,11 @@ const useEditApplicableAgents = (props) => {
 			page    : 1,
 			filters : {
 				...(previousParams.filters || {}),
-				q: searchQuery || undefined,
+				q                    : searchQuery || undefined,
+				reporting_manager_id : !isEmpty(selectedRmIds) ? selectedRmIds : undefined,
 			},
 		}));
-	}, [searchQuery]);
+	}, [searchQuery, selectedRmIds]);
 
 	return {
 		list,
@@ -87,6 +92,8 @@ const useEditApplicableAgents = (props) => {
 		selectedAgentIds,
 		setSelectedAgentIds,
 		onApplyChanges,
+		selectedRmIds,
+		setSelectedRmIds,
 	};
 };
 

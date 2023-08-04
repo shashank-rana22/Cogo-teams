@@ -79,6 +79,7 @@ const getAgentsFilterControls = () => {
 			type        : 'asyncSelect',
 			size        : 'sm',
 			asyncKey    : 'partner_users',
+			valueKey    : 'user_id',
 			multiple    : true,
 			params      : {
 				page_limit : 20,

@@ -11,6 +11,15 @@
 	margin: 20px 0;
 }
 
+.filters {
+	display: flex;
+	justify-content: space-between;
+}
+
+.control_container {
+	width: 48%;
+}
+
 .table {
 	margin: 16px 0;
 	border: none;
