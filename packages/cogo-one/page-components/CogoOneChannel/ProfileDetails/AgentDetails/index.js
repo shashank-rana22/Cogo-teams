@@ -1,7 +1,8 @@
-import { Pill, Placeholder, Toast } from '@cogoport/components';
+import { Pill, Placeholder, Toast, Button } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -44,6 +45,8 @@ function AgentDetails({
 	setActiveTab = () => {},
 	mailProps = {},
 }) {
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
+
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
 		name         : '',
@@ -55,17 +58,8 @@ function AgentDetails({
 	const geo = getGeoConstants();
 
 	const {
-		user_id,
-		lead_user_id,
-		email,
-		user_name: messageName,
-		mobile_no,
-		organization_id,
-		sender,
-		channel_type = '',
-		user_type,
-		id = '',
-		lead_user_details = {},
+		user_id, lead_user_id, email, user_name: messageName, mobile_no, organization_id, sender,
+		channel_type = '', user_type, id = '', lead_user_details = {},
 		user_details = {},
 	} = formattedMessageData || {};
 
@@ -147,6 +141,10 @@ function AgentDetails({
 		}
 	};
 
+	const handleRoute = () => {
+		window.open(`/${partnerId}/lead-organization/${lead_user_details?.lead_organization_id}`, '_blank');
+	};
+
 	const handleSummary = () => { setShowMore(true); setActiveSelect('user_activity'); };
 
 	const setActiveMessage = (val) => { switchUserChats({ val, firestore, setActiveTab }); };
@@ -215,6 +213,9 @@ function AgentDetails({
 					})}
 				</div>
 			)}
+			{ !orgId && lead_user_details?.lead_organization_id ? (
+				<Button size="sm" themeType="secondary" onClick={handleRoute}>Add Feedback</Button>
+			) : null}
 			{loading ? (
 				<Placeholder
 					height="50px"

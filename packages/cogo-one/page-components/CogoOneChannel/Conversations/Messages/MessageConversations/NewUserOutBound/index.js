@@ -60,7 +60,7 @@ function NewUserOutBound({ setModalType = () => {}, activeTab = {} }) {
 	const ACTIONS_MAPPING = [
 		{ name: 'voice_call', onClick: handleVoiceCall, label: 'call', show: true },
 		{ name: 'whatsapp_message', onClick: onTemplateClick, label: 'Message on WhatsApp', show: true },
-		{ name: 'add_feedback', onClick: handleRoute, label: 'Add Feedback', show: lead_user_id || false },
+		{ name: 'add_feedback', onClick: handleRoute, label: 'Add Feedback', show: lead_user_id && !user_id },
 	];
 
 	return (
@@ -71,7 +71,12 @@ function NewUserOutBound({ setModalType = () => {}, activeTab = {} }) {
 			<div className={styles.pills_styled}>
 				{ACTIONS_MAPPING.map((eachAction) => {
 					const { name, onClick, label, show } = eachAction || {};
-					return show ? (
+
+					if (!show) {
+						return null;
+					}
+
+					return (
 						<Button
 							key={name}
 							size="md"
@@ -82,7 +87,7 @@ function NewUserOutBound({ setModalType = () => {}, activeTab = {} }) {
 						>
 							{label}
 						</Button>
-					) : null;
+					);
 				})}
 			</div>
 		</div>
