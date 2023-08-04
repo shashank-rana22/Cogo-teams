@@ -75,8 +75,8 @@ function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 								onLabel="Old"
 								offLabel="New"
 								onChange={() => handleVersionChange({
-									partner_id: router?.query?.partner_id,
-									shipment_id: shipment_data?.id,
+									partner_id  : router?.query?.partner_id,
+									shipment_id : shipment_data?.id,
 								})}
 							/>
 							<ShipmentChat />
