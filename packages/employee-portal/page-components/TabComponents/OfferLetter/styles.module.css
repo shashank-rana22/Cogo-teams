@@ -3,6 +3,10 @@
 	align-items: center;
 	margin-top: 10px;
 	margin-bottom: 16px;
+
+	@media (max-width: 800px) {
+		margin: 38px 16px 16px;
+	}
 }
 
 .title {
