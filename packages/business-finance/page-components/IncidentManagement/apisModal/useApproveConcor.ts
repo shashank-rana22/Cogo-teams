@@ -3,15 +3,32 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useApproveConcor = ({
-	refetch, setShowModal, id, bookingProof,
-	quotation,
-	sid,
-	totalBuyPrice,
+	refetch,
+	setShowModal,
+	id,
+	concorData,
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
-
+	const {
+		placeOfDestination = '',
+		documentDate = '',
+		placeOfSupply = '',
+		dueDate = '',
+		isTaxApplicable = false,
+		bankName = '',
+		accountNumber = '',
+		ifscCode = '',
+		beneficiaryName = '',
+		bookingProof = [],
+		supplierName = '',
+		entity = '',
+		sid = '',
+		totalBuyPrice = '',
+		currency = '',
+		registrationNo = '',
+	} = concorData || {};
 	const [
 		{ loading },
 		trigger,
@@ -24,24 +41,32 @@ const useApproveConcor = ({
 		{ manual: true },
 	);
 
-	const useOnAction = async (inputValues) => {
-		const { utr, paymentProof, remarks, bankId, bankname, bankAccountNo } = inputValues || {};
+	const useOnAction = async (inputValues, status) => {
+		const { remarks } = inputValues || {};
 		try {
 			const apiResponse = await trigger({
 				data: {
-					status : 'APPROVED',
+					status,
 					remark : remarks,
 					data   : {
 						concorPdaApprovalRequest: {
 							sid,
 							totalBuyPrice,
 							bookingProof,
-							quotation,
-							bankId,
-							bankName         : bankname,
-							cogoAccountNo    : bankAccountNo,
-							paymentProof,
-							transactionRefNo : utr,
+							bankName,
+							placeOfDestination,
+							documentDate,
+							placeOfSupply,
+							dueDate,
+							isTaxApplicable,
+							accountNumber,
+							ifscCode,
+							beneficiaryName,
+							supplierName,
+							registrationNo,
+							entity,
+							currency,
+
 						},
 					},
 					updatedBy: userId,

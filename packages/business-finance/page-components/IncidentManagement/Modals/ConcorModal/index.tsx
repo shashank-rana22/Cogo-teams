@@ -1,104 +1,77 @@
-import { Input, Textarea, Modal, Button } from '@cogoport/components';
-import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import { Textarea, Modal, Button } from '@cogoport/components';
 import { useEffect, useState } from 'react';
 
 import useApproveConcor from '../../apisModal/useApproveConcor';
+import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
+import { getBankDetails, getInvoiceDetails, getOrganisationDetails } from './getDetails';
 import styles from './styles.module.css';
-
-interface ObjectInterface {
-	bankAccountNo:string | number,
-	bankId: string,
-	bankname: string
-}
 
 interface ConcorInterface {
 	bookingProof: string[],
 	quotation: string[],
 	sid: string,
 	totalBuyPrice: number | string,
+	supplierName: string;
+	entity: string;
+	placeOfSupply: string;
+	placeOfDestination: string;
+	documentDate: string;
+	dueDate : string;
+	isTaxApplicable: boolean;
 }
+const defaultConcorData: ConcorInterface = {
+	bookingProof       : [],
+	quotation          : [],
+	sid                : '',
+	totalBuyPrice      : 0,
+	supplierName       : '',
+	entity             : '',
+	placeOfSupply      : '',
+	placeOfDestination : '',
+	documentDate       : '',
+	dueDate            : '',
+	isTaxApplicable    : false,
+};
 
 interface Props {
 	concorData: ConcorInterface,
 	id: string,
 	refetch:()=>void,
+	referenceId: string;
+	isEditable: boolean;
+	remark: string;
+	row: {};
 }
 
-function ConcorModal({ concorData, id, refetch }:Props) {
+function ConcorModal({
+	concorData = defaultConcorData,
+	id = '',
+	refetch = () => {},
+	referenceId = '',
+	isEditable = true,
+	remark = '',
+	row = {},
+}: Props) {
 	const [showModal, setShowModal] = useState(false);
-	const [inputValues, setInputValues] = useState({
-		utr           : null,
-		paymentProof  : null,
-		remarks       : null,
-		bankAccountNo : null,
-		bankId        : null,
-		bankname      : null,
-	});
+	const [inputValues, setInputValues] = useState({ remarks: null });
 
-	const { bookingProof = [], quotation = [], sid = '', totalBuyPrice } = concorData || {};
-
-	const { useOnAction:OnAction, loading } = useApproveConcor({
+	const { useOnAction: onAction, loading } = useApproveConcor({
 		refetch,
 		setShowModal,
 		id,
-		bookingProof,
-		quotation,
-		sid,
-		totalBuyPrice,
+		concorData,
 	});
 
-	const concorDetails = [
-		{ title: 'Organization Name', value: <div>CONCOR</div> },
-		{ title: 'SID', value: <div>{sid}</div> },
-		{ title: 'Total Buy Price', value: <div>{totalBuyPrice}</div> },
-		{
-			title: 'Booking Proof (Indent)',
-			value:
-	<div>
-		{bookingProof.map((url, index) => (
-			<div key={url}>
-				<a className={styles.link} href={url} target="_blank" rel="noreferrer">{url}</a>
-				{index !== bookingProof.length - 1 ? ('     ,') : null}
-			</div>
-		))}
-	</div>,
-		},
-		{
-			title: 'Quotation',
-			value:
-	<div>
-		{quotation.map((url, index) => (
-			<div key={url}>
-				<a className={styles.link} href={url} target="_blank" rel="noreferrer">{url}</a>
-				{index !== quotation.length - 1 ? ('     ,') : null}
-			</div>
-		))}
-	</div>,
-		},
-	];
-
-	const handleUpload = (val:string) => {
-		if (val) {
-			setInputValues({ ...inputValues, paymentProof: val });
-		}
-	};
-
-	const isDisabled = loading || !inputValues.paymentProof
-	|| !inputValues.remarks || !inputValues.utr || !inputValues.bankname;
+	const invoiceDetailsMapping = getInvoiceDetails({ concorData, referenceId });
+	const concorDetails = getOrganisationDetails(concorData);
+	const bankData = getBankDetails(concorData);
+	const isDisabled = loading || !inputValues.remarks;
 
 	useEffect(() => {
 		if (!showModal) {
-			setInputValues({
-				utr           : null,
-				paymentProof  : null,
-				remarks       : null,
-				bankAccountNo : null,
-				bankId        : null,
-				bankname      : null,
-			});
+			setInputValues({ remarks: null });
 		}
 	}, [showModal]);
 
@@ -115,65 +88,65 @@ function ConcorModal({ concorData, id, refetch }:Props) {
 						setShowModal(false);
 					}}
 				>
-					<Modal.Header title="Concor PDA Approval" />
+					<Modal.Header title={`Concor PDA Approval : ${referenceId}`} />
 					<Modal.Body>
-						{concorDetails.map((detail) => (
-							<div key={detail.title} className={styles.flex}>
-								<div className={styles.title}>
-									{detail.title}
+						{!isEditable ? <ApproveAndReject row={row} /> : null}
+						<div className={styles.bank}>
+							{concorDetails.map((detail) => (
+								<div key={detail.title} className={styles.flex}>
+									<div className={styles.title}>
+										{detail.title}
+									</div>
+									<div className={styles.divider}>
+										:
+									</div>
+									<div className={styles.name}>
+										<div>{detail.value || '-'}</div>
+									</div>
 								</div>
-								<div className={styles.divider}>
-									:
-								</div>
-								<div className={styles.name}>
-									<div>{detail.value}</div>
-								</div>
-							</div>
-						))	}
-
+							))	}
+						</div>
+						<div className={styles.hr} />
 						<div>
-							<div className={styles.section}>
-								<div className={styles.input_titles}>Bank*</div>
-								<span className={styles.divider}>:</span>
-								<AsyncSelect
-									name="bank"
-									asyncKey="allot_bank"
-									valueKey="bankname"
-									labelKey="bankname"
-									value={inputValues.bankname}
-									initialCall={false}
-									placeholder="Select Bank"
-									microService="business_finance"
-									onChange={(value:string, obj:ObjectInterface) => setInputValues({
-										...inputValues,
-										bankAccountNo : obj?.bankAccountNo,
-										bankId        : obj?.bankId,
-										bankname      : obj?.bankname,
-									})}
-								/>
+							<div className={styles.flex}>
+								<div className={styles.name}>
+									Invoice Details
+								</div>
+								<div className={styles.tag}>
+									Type: Advance
+								</div>
 							</div>
+							<div className={styles.bank}>
+								{(invoiceDetailsMapping || []).map((item) => (
+									<div key={item.title} className={styles.flex}>
+										<div className={styles.title}>
+											{item.title}
+										</div>
+										<div className={styles.divider}>
+											:
+										</div>
+										<div className={styles.name}>
+											<div>{item.value || '-'}</div>
+										</div>
+									</div>
 
-							<div className={styles.section}>
-								<div className={styles.input_titles}>UTR*</div>
-								<span className={styles.divider}>:</span>
-								<Input
-									name="utr"
-									size="xs"
-									placeholder="Enter UTR"
-									onChange={(value: string) => setInputValues({ ...inputValues, utr: value })}
-									style={{ width: '30%', height: '36px' }}
-								/>
-							</div>
+								))}
 
-							<div className={styles.section}>
-								<div className={styles.input_titles}>Payment Proof*</div>
-								<span className={styles.divider}>:</span>
-								<FileUploader
-									value={inputValues.paymentProof}
-									onChange={(e:string) => handleUpload(e)}
-									showProgress
-									draggable
-								/>
+								<div className={styles.hr} />
+
+								{(bankData || []).map((item) => (
+									<div key={item.title} className={styles.flex}>
+										<div className={styles.title}>
+											{item.title}
+										</div>
+										<div className={styles.divider}>
+											:
+										</div>
+										<div className={styles.name}>
+											<div>{item.value || '-'}</div>
+										</div>
+									</div>
+								))}
 							</div>
 
 							<div style={{ display: 'flex' }}>
@@ -182,29 +155,40 @@ function ConcorModal({ concorData, id, refetch }:Props) {
 								<Textarea
 									name="remark"
 									size="sm"
+									defaultValue={remark}
+									disabled={!isEditable}
 									placeholder="Enter Remarks Here..."
 									onChange={(value: string) => setInputValues({ ...inputValues, remarks: value })}
-									style={{ height: '100px', marginBottom: '12px' }}
+									style={{ height: '100px', marginBottom: '12px', marginRight: '12px' }}
 								/>
 							</div>
 						</div>
 
 					</Modal.Body>
-					<Modal.Footer>
-						<div className={styles.button}>
-							<Button
-								size="md"
-								style={{ marginRight: '8px' }}
-								disabled={isDisabled}
-								loading={loading}
-								onClick={() => {
-									OnAction(inputValues);
-								}}
-							>
-								Approve
-							</Button>
-						</div>
-					</Modal.Footer>
+					{isEditable && (
+						<Modal.Footer>
+							<div className={styles.button}>
+								<Button
+									style={{ marginRight: '8px' }}
+									disabled={isDisabled}
+									onClick={() => {
+										onAction(inputValues, 'REJECTED');
+									}}
+								>
+									Reject
+								</Button>
+								<Button
+									size="md"
+									disabled={isDisabled}
+									onClick={() => {
+										onAction(inputValues, 'APPROVED');
+									}}
+								>
+									Approve
+								</Button>
+							</div>
+						</Modal.Footer>
+					)}
 				</Modal>
 			)}
 		</div>
