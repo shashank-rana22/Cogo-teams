@@ -44,7 +44,7 @@ const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 			});
 
 			const { data: responseData } = response || {};
-			const downloadUrl = (responseData || '')?.toString();
+			const downloadUrl = responseData?.toString();
 
 			if (!isEmpty(downloadUrl)) {
 				window.open(downloadUrl);
