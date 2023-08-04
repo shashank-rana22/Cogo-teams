@@ -29,6 +29,7 @@ function useListShipmentSellQuotation({ id = '' }) {
 		data,
 		loading,
 		getShipmentSellQuotation,
+		refetch: getShipmentSellQuotation,
 	};
 }
 
