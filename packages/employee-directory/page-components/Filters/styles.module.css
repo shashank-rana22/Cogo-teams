@@ -1,0 +1,128 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 16px;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
+}
+
+.left_container {
+	display: flex;
+	align-items: center;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
+}
+
+.right_container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_select_options_container {
+			z-index: 10;
+		}
+	}
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
+}
+
+.total_employees {
+	display: flex;
+	align-items: center;
+	padding: 8px 10px;
+	font-size: 14px;
+	font-weight: 500;
+	background-color: #fff;
+	border: 1px solid #cacaca;
+	border-radius: 4px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.employee_no {
+	margin-left: 4px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #ed3726;
+}
+
+.search_icon {
+	margin: 0 12px;
+}
+
+.search_input {
+	width: 300px;
+	margin-left: 20px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 12px 0;
+	}
+}
+
+.sort_by {
+	width: 200px;
+	margin-right: 20px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-right: 0;
+	}
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.filter_text {
+	margin-right: 8px;
+}
+
+.filters {
+	position: relative;
+}
+
+.filter_dot {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	width: 6px;
+	height: 6px;
+	background-color: #ee3425;
+	border-radius: 50%;
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
+
+	@media (max-width: 768px) {
+		margin: 12px 20px;
+	}
+}
+
+.filter_reset_btn {
+	border-radius: 4px;
+
+	:global {
+		.ui_buttonicon_container.ui_ps_themeType_primary {
+			height: 38px;
+			background-color: #ed3726;
+
+			svg {
+				fill: #fff;
+			}
+		}
+	}
+}
