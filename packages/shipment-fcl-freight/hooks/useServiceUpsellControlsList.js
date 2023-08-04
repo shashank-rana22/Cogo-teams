@@ -15,7 +15,7 @@ const useGetControls = ({ truckTypeToggle }) => {
 		fcl_customs: [
 			{
 				name    : 'cargo_handling_type',
-				label   : 'Select type of stuffing',
+				label   : 'Select type of Stuffing',
 				type    : 'select',
 				options : [
 					{
