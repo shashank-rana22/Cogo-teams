@@ -9,6 +9,8 @@ import AccordianView from '../../../common/Accordianview';
 
 import styles from './styles.module.css';
 
+const ONE_OPTION = 1;
+
 function CollectionPartyDetails({
 	control,
 	collectionParty = {},
@@ -139,19 +141,19 @@ function CollectionPartyDetails({
 	};
 
 	const handleCollectionParty = (v, obj) => {
-		if (obj?.verification_status == 'pending') {
+		if (obj?.verification_status === 'pending') {
 			setValue('collection_party', undefined);
 			Toast.error('Cannot select KYC pending collection party!');
 		} else {
 			setCollectionParty(obj);
 			setValue('collection_party', v);
 		}
-		if (collectionPartyAddresses?.length === 1) {
+		if (collectionPartyAddresses?.length === ONE_OPTION) {
 			setValue('collection_party_address', collectionPartyAddresses?.[GLOBAL_CONSTANTS.zeroth_index].id);
 		} else {
 			setValue('collection_party_address', '');
 		}
-		if (collectionPartyBankOptions?.length === 1) {
+		if (collectionPartyBankOptions?.length === ONE_OPTION) {
 			setValue('collection_party_bank_details', collectionPartyBankOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.data?.bank_account_number);
 		} else {
 			setValue('collection_party_bank_details', '');
