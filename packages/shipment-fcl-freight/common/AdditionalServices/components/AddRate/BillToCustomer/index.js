@@ -37,7 +37,7 @@ function BillToCustomer({ updateResponse = {}, onCancel = () => {}, onBillToCust
 						}
 					}}
 				>
-					{modeOfReview === 'bill' ? 'Add Sell Price' : 'Submit---'}
+					{modeOfReview === 'bill' ? 'Add Sell Price' : 'Submit'}
 				</Button>
 			</div>
 		</div>
