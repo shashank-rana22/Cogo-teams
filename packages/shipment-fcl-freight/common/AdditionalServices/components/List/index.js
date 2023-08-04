@@ -27,11 +27,9 @@ const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent'
 
 function List({ isSeller = false, source = '' }) {
 	const {
-		servicesList, refetchServices,
-		shipment_data, activeStakeholder, primary_service, stakeholderConfig,
-	} = useContext(
-		ShipmentDetailContext,
-	);
+		servicesList = [], refetchServices = () => {},
+		shipment_data = {}, activeStakeholder = '', primary_service = {}, stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
 
 	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
 		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
@@ -42,7 +40,10 @@ function List({ isSeller = false, source = '' }) {
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
 
-	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({ pageLimit });
+	const {
+		list: additionalServiceList = [],
+		refetch = () => {}, loading, totalCount,
+	} = useListAdditionalServices({ pageLimit });
 
 	const handleRefetch = () => {
 		refetchServices();

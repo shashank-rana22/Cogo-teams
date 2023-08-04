@@ -86,7 +86,7 @@ function AddRate({
 	const onAddRate = (data) => {
 		const payload = getPayload(data, item, preProps, filters, billToCustomer);
 
-		if (preProps.api === '/create_shipment_additional_service') {
+		if (preProps?.api === '/create_shipment_additional_service') {
 			apiTriggerCreate(payload);
 		} else {
 			apiTriggerUpdate(payload);

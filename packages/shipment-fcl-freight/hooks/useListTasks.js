@@ -19,9 +19,7 @@ function useListTasks({
 	activeStakeholder,
 }) {
 	const { profile } = useSelector((state) => state);
-	const {
-		refetchServices,
-	} = useContext(ShipmentDetailContext);
+	const { refetchServices = () => {} } = useContext(ShipmentDetailContext);
 
 	const user_id = profile?.user?.id;
 

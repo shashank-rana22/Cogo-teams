@@ -26,7 +26,7 @@ const useListAdditionalServices = ({ payload = {}, pageLimit = 8 } = {}) => {
 	const getAdditionalServiceListApi = useCallback(async () => {
 		try {
 			const res = await trigger();
-			setApiData(res.data || {});
+			setApiData(res?.data || {});
 		} catch (err) {
 			setApiData({});
 

@@ -17,7 +17,7 @@ function EditRate({
 	refetch = () => {},
 	formattedRate = {},
 }) {
-	const filterServicesList = (servicesList.filter((item) => item.id === task?.service_id));
+	const filterServicesList = (servicesList.filter((item) => item?.id === task?.service_id));
 
 	const editQuote = useGetStep3Data({
 		servicesList    : filterServicesList,

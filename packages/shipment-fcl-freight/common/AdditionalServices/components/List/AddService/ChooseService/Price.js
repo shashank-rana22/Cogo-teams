@@ -18,7 +18,7 @@ function Price({
 		refetch();
 	};
 
-	const { apiTrigger, loading } = useCreateShipmentAdditionalService({
+	const { apiTrigger = () => {}, loading } = useCreateShipmentAdditionalService({
 		refetch        : afterRequestRate,
 		successMessage : 'Successfully Requested',
 	});
