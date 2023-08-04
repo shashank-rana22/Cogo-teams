@@ -6,17 +6,17 @@ import { isEmpty } from '@cogoport/utils';
 
 import toastApiError from '../../commons/toastApiError.ts';
 
+const convertDate = (dateToConvert) => formatDate({
+	date       : dateToConvert,
+	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	formatType : 'date',
+});
+
 const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 	const { profile } = useSelector((state) => state || {});
 
 	const { startDate, endDate } = date || {};
 	const { businessName, organizationId } = item;
-
-	const convertDate = (dateToConvert) => formatDate({
-		date       : dateToConvert,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		formatType : 'date',
-	});
 
 	const [
 		{ data, loading },
