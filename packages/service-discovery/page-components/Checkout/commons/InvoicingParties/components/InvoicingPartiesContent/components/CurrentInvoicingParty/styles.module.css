@@ -22,7 +22,6 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 150px;
-	overflow: scroll;
 
 	:global {
 		.ui_multiselectt_options_container {
