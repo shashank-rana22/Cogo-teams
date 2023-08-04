@@ -36,7 +36,10 @@ const useUpdateEmployeeDetails = ({ onClose, refetch, statsRefetch }) => {
 	}, { manual: true });
 
 	const updateEmployeeDetails = async (values, id) => {
-		const { date_of_joining, cfpl_joining_date, resignation_date, absconding, lwp, cogo_freight, ...rest } = values;
+		const {
+			date_of_joining, cfpl_joining_date, resignation_date, absconding, lwp,
+			cogo_freight, payroll_country_id, ...rest
+		} = values;
 
 		try {
 			await trigger({

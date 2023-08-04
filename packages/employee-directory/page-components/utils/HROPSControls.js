@@ -141,13 +141,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 				},
 			},
 			initialCall : true,
-			rules       : {
-				required: {
-					value   : true,
-					message : 'Payroll Country is required',
-				},
-			},
-			disabled: !isEditable,
+			disabled    : true,
 		},
 		{
 			name        : 'hrbp_id',
