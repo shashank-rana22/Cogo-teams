@@ -1,6 +1,7 @@
 import { Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { ImageBody, VideoBody, AudioBody, ObjectBody } from './renderModalBody';
@@ -27,19 +28,28 @@ function RenderTitle({ item = '', handleDownload = () => {} }) {
 	);
 }
 
-function ViewModal({
+function ViewAttachmentsModal({
 	handleDownload = () => {},
 	activeAttachmentData = {},
 	setActiveAttachmentData = () => {},
+	urlType = '',
 }) {
-	const activeAttachmentContent = activeAttachmentData?.contentType;
-	const activeAttachmentType = activeAttachmentContent.split('/')?.[GLOBAL_CONSTANTS.zeroth_index];
+	let activeAttachmentContent;
+	let activeAttachmentType;
+
+	if (urlType === 'urlBased') {
+		activeAttachmentContent = activeAttachmentData?.fileUrl;
+		activeAttachmentType = activeAttachmentData?.fileExtension;
+	} else {
+		activeAttachmentContent = activeAttachmentData?.contentType;
+		activeAttachmentType = activeAttachmentContent.split('/')?.[GLOBAL_CONSTANTS.zeroth_index];
+	}
 
 	const ActiveCompoonent = COMPONENT_MAPPING[activeAttachmentType] || ObjectBody;
 
 	return (
 		<Modal
-			show={activeAttachmentData}
+			show={!isEmpty(activeAttachmentData)}
 			onClose={() => setActiveAttachmentData(null)}
 			size="xl"
 			placement="center"
@@ -57,7 +67,7 @@ function ViewModal({
 			<Modal.Body>
 				<ActiveCompoonent
 					key={activeAttachmentType}
-					media_url={renderContent(activeAttachmentData)}
+					media_url={urlType === 'urlBased' ? activeAttachmentContent : renderContent(activeAttachmentData)}
 					contentType={activeAttachmentContent}
 				/>
 			</Modal.Body>
@@ -65,4 +75,4 @@ function ViewModal({
 	);
 }
 
-export default ViewModal;
+export default ViewAttachmentsModal;

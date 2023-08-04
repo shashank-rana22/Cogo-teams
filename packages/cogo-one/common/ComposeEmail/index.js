@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 
 import { TOOLBARCONFIG } from '../../constants';
 import getFormatedEmailBody from '../../helpers/getFormatedEmailBody';
-import getFileAttributes from '../../utils/getFileAttributes';
+import { getFileAttributes } from '../../utils/getFileAttributes';
 import hideDetails from '../../utils/hideDetails';
 import CustomFileUploader from '../CustomFileUploader';
 

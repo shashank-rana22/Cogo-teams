@@ -39,7 +39,7 @@ function CogoOne() {
 		userId           : profile?.user?.id,
 		userName         : profile?.user?.name,
 		token            : general.firestoreToken,
-		userEmailAddress : profile?.user?.email,
+		userEmailAddress : 'sandeep.nalabolu@cogoport.com' || profile?.user?.email,
 	}));
 
 	const [activeTab, setActiveTab] = useState({

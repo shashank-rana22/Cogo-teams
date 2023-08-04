@@ -154,6 +154,7 @@ function Messages({
 						escalateToSupplyRm={escalateToSupplyRm}
 						supplierLoading={supplierLoading}
 						hasNoFireBaseRoom={hasNoFireBaseRoom}
+						setActiveTab={setActiveTab}
 					/>
 				</div>
 				<div className={styles.message_container}>

@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 
-import getFileAttributes from './getFileAttributes';
+import { getFileAttributes } from './getFileAttributes';
 
 const LAST_INDEX = 1;
 

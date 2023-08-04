@@ -6,10 +6,10 @@ import { useState, useRef, useEffect } from 'react';
 import { TOOLBARCONFIG } from '../../../../../../constants';
 import useSendChat from '../../../../../../hooks/useSendChat';
 import useSendOmnichannelMail from '../../../../../../hooks/useSendOmnichannelMail';
+import { formatFileAttributes } from '../../../../../../utils/getFileAttributes';
 import styles from '../styles.module.css';
 
 import FooterHead from './FooterHead';
-import { formatFileAttributes } from './footerHelpers';
 import SendActions from './SendActions';
 
 const getPlaceHolder = ({ hasPermissionToEdit, canMessageOnBotSession }) => {

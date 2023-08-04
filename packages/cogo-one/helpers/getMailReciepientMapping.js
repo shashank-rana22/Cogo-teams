@@ -1,10 +1,5 @@
 const MAIL_RECIEPIENTS_MAPPING = [
 	{
-		label : 'To',
-		value : 'toUserEmail',
-
-	},
-	{
 		label : 'Cc',
 		value : 'ccrecipients',
 	},
@@ -14,14 +9,4 @@ const MAIL_RECIEPIENTS_MAPPING = [
 	},
 ];
 
-const DISABLE_TYPE_MAPPING = {
-	toUserEmail: ['reply'],
-};
-
-const getMailReciepientMapping = ({ mailActions = {} }) => {
-	const { actionType = '' } = mailActions || {};
-
-	return MAIL_RECIEPIENTS_MAPPING.filter((eachItem) => !DISABLE_TYPE_MAPPING[eachItem?.value]?.includes(actionType));
-};
-
-export default getMailReciepientMapping;
+export default MAIL_RECIEPIENTS_MAPPING;

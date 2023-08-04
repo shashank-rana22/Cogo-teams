@@ -4,6 +4,8 @@ import { IcMDocument, IcMImage } from '@cogoport/icons-react';
 const STEP_COUNT = 1;
 const MINIMUM_COUNT = 2;
 
+const DOT_AFTER_SLASH = 1;
+
 const FILE_ICON_MAPPING = {
 	document : <IcMDocument height={18} width={18} fill="#bdbdbd" />,
 	img      : <IcMImage height={22} width={25} fill="#bdbdbd" />,
@@ -34,7 +36,7 @@ const MEDIA_EXTENSION_TYPES = {
 	video : ['mp4', 'mkv', 'mov', 'wmv', 'gif'],
 };
 
-function getFileAttributes({ fileName = '', finalUrl = '' }) {
+export function getFileAttributes({ fileName = '', finalUrl = '' }) {
 	const splitFileName = fileName.split('.');
 	let extension = '';
 	let name = '';
@@ -66,4 +68,17 @@ function getFileAttributes({ fileName = '', finalUrl = '' }) {
 	};
 }
 
-export default getFileAttributes;
+export const formatFileAttributes = ({
+	uploadedFiles = '',
+}) => {
+	const flattenFilesArray = [uploadedFiles].flat();
+
+	return flattenFilesArray?.map(
+		(eachFile = '') => {
+			const decodedUrl = decodeURI(eachFile);
+			const file = decodedUrl?.substring(decodedUrl.lastIndexOf('/') + DOT_AFTER_SLASH);
+
+			return getFileAttributes({ fileName: file, finalUrl: eachFile });
+		},
+	);
+};

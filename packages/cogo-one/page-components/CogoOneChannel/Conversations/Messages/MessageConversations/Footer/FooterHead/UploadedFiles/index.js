@@ -21,10 +21,10 @@ function deletefile({
 }
 
 function UploadedFiles({
-	uploadedFiles = [],
 	id = '',
 	setDraftUploadedFiles = () => {},
 	uploaderRef = {},
+	eachFileData = {},
 }) {
 	const handleDelete = ({ event, fileUrl }) => {
 		event.stopPropagation();
@@ -41,41 +41,39 @@ function UploadedFiles({
 		);
 	};
 
-	return uploadedFiles?.map(
-		(eachFileData) => {
-			const {
-				fileName,
-				fileIcon = null,
-				fileUrl = '',
-				fileExtension = '',
-			} = eachFileData || {};
+	const {
+		fileName,
+		fileIcon = null,
+		fileUrl = '',
+		fileExtension = '',
+	} = eachFileData || {};
 
-			return (
-				<div
-					role="presentation"
-					className={styles.files_container}
-					key={fileUrl}
-					onClick={() => {
-						window.open(fileUrl, '_blank', 'noreferrer');
-					}}
-				>
-					{fileIcon || null}
+	return (
+		<div
+			role="presentation"
+			className={styles.files_container}
+			key={fileUrl}
+			onClick={() => {
+				window.open(fileUrl, '_blank', 'noreferrer');
+			}}
+		>
+			{fileIcon || null}
 
-					<div className={styles.file_name}>
-						{startCase(fileName)}
-					</div>
+			<div className={styles.file_name}>
+				{startCase(fileName)}
+			</div>
 
-					<div className={styles.extension}>
-						{fileExtension ? `.${fileExtension}` : ''}
-					</div>
+			<div className={styles.extension}>
+				{fileExtension ? `.${fileExtension}` : ''}
+			</div>
 
-					<IcMDelete
-						className={styles.delete_icon}
-						onClick={(event) => handleDelete({ event, fileUrl })}
-					/>
-				</div>
-			);
-		},
+			<IcMDelete
+				className={styles.delete_icon}
+				onClick={(event) => handleDelete({ event, fileUrl })}
+			/>
+		</div>
+
 	);
 }
+
 export default UploadedFiles;

@@ -18,7 +18,7 @@ function MailBody({
 }) {
 	const { source = '' } = formattedData || {};
 
-	const { response, send_by = '', created_at = 0 } = eachMessage || {};
+	const { response, send_by = '', created_at = 0, media_url = [] } = eachMessage || {};
 
 	const {
 		subject = '',
@@ -50,7 +50,7 @@ function MailBody({
 			<div className={styles.send_by_name}>
 				Replied by
 				{' '}
-				{send_by || 'kam'}
+				{send_by || 'user'}
 				,
 				<span className={styles.time_stamp}>{date || ''}</span>
 			</div>
@@ -96,7 +96,7 @@ function MailBody({
 						setMailActions={setMailActions}
 					/>
 				)}
-				<MailAttachments />
+				<MailAttachments mediaUrls={media_url} />
 			</div>
 		</div>
 	);

@@ -3,7 +3,7 @@ import { IcMCross } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import MailRecipientType from '../../../../../../../common/MailRecipientType';
-import getMailReciepientMapping from '../../../../../../../helpers/getMailReciepientMapping';
+import MAIL_RECIEPIENTS_MAPPING from '../../../../../../../helpers/getMailReciepientMapping';
 import mailFunction from '../../../../../../../utils/mailFunctions';
 
 import styles from './styles.module.css';
@@ -34,10 +34,9 @@ function FooterHead({
 	uploaderRef = {},
 	setMailActions = () => {},
 }) {
-	const [openReceipients, setOpenReceipents] = useState(mailActions?.actionType === 'forward');
-	const mailRecipientMapping = getMailReciepientMapping({ mailActions });
+	const [openReceipients, setOpenReceipents] = useState(false);
 
-	const visibleReceipients = mailRecipientMapping.length * DEFAULT_VISIBLE_RECIEPIENTS;
+	const visibleReceipients = MAIL_RECIEPIENTS_MAPPING.length * DEFAULT_VISIBLE_RECIEPIENTS;
 
 	const emailReceipientProps = mailFunction({
 		setErrorValue,
@@ -68,6 +67,23 @@ function FooterHead({
 							}}
 						/>
 					</div>
+					{
+						mailActions?.actionType === 'forward' && (
+							<div className={styles.child_flex}>
+								<div className={styles.label}>
+									To:
+								</div>
+								<MailRecipientType
+									{...emailReceipientProps}
+									emailRecipientType={emailState?.toUserEmail}
+									type="toUserEmail"
+									errorValue={errorValue}
+									showControl={showControl}
+									key={mailActions?.type}
+								/>
+							</div>
+						)
+					}
 					<div className={styles.parent_reciepients} key={mailActions?.type}>
 						<div
 							className={styles.reciepents}
@@ -76,7 +92,7 @@ function FooterHead({
 									? `${visibleReceipients * DEFAULT_HEIGHT}px` : '0',
 							}}
 						>
-							{mailRecipientMapping.map((eachItem) => {
+							{MAIL_RECIEPIENTS_MAPPING.map((eachItem) => {
 								const { label = '', value = '' } = eachItem || {};
 
 								return (
@@ -125,15 +141,22 @@ function FooterHead({
 				${((hasUploadedFiles) || uploading?.[id]) ? styles.upload_file_container : ''}`}
 			>
 				{(hasUploadedFiles) && !uploading?.[id] && (
-					<UploadedFiles
-						uploadedFiles={fileMetaData}
-						id={id}
-						setDraftUploadedFiles={setDraftUploadedFiles}
-						uploaderRef={uploaderRef}
-					/>
+					fileMetaData?.map(
+						(eachFileData) => (
+							<UploadedFiles
+								id={id}
+								key={eachFileData?.fileUrl}
+								setDraftUploadedFiles={setDraftUploadedFiles}
+								uploaderRef={uploaderRef}
+								eachFileData={eachFileData}
+							/>
+						),
+					)
 				)}
 				{uploading?.[id] && (
-					<div className={styles.uploading}>uploading.....</div>
+					<div className={styles.uploading}>
+						uploading.....
+					</div>
 				)}
 			</div>
 		</>
