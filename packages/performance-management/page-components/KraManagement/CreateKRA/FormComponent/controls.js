@@ -23,7 +23,7 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 			{
 				name        : 'role_ids',
 				type        : 'asyncSelect',
-				asyncKey    : 'list_roles',
+				asyncKey    : 'list_employee_roles',
 				label       : 'Roles',
 				placeholder : 'Roles',
 				multiple    : true,
