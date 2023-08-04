@@ -29,13 +29,13 @@ const CHANNEL_OPTIONS = [
 function RenderFilters({
 	filter = {}, setFilter = () => {}, entity = '',
 }) {
-	const [activeFilter, setActiveFilter] = useState('currency');
+	const [activeFilter, setActiveFilter] = useState('channel');
 
 	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity].currency;
 
 	const handleReset = () => {
 		setFilter({});
-		setActiveFilter('currency');
+		setActiveFilter('channel');
 	};
 
 	return (
@@ -64,15 +64,6 @@ function RenderFilters({
 						onChange={setActiveFilter}
 						className={styles.tabs_container_element}
 					>
-						<TabPanel name="currency" title="Currency">
-							<Radio
-								name="currency"
-								label={DEFAULT_CURRENCY}
-								disabled
-								checked
-								style={{ marginTop: '12px' }}
-							/>
-						</TabPanel>
 
 						<TabPanel name="channel" title="Channel">
 							<RadioGroup
@@ -131,6 +122,16 @@ function RenderFilters({
 								value={filter[activeFilter]}
 								className={styles.radio_group_section}
 								style={{ flexDirection: 'column' }}
+							/>
+						</TabPanel>
+
+						<TabPanel name="currency" title="Currency">
+							<Radio
+								name="currency"
+								label={DEFAULT_CURRENCY}
+								disabled
+								checked
+								style={{ marginTop: '12px' }}
 							/>
 						</TabPanel>
 					</Tabs>
