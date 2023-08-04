@@ -1,4 +1,4 @@
-import { Loader } from '@cogoport/components';
+import { Loader, cl } from '@cogoport/components';
 import {
 	CreatableSelectController,
 	InputController,
@@ -7,29 +7,34 @@ import {
 	SelectController,
 	useForm,
 } from '@cogoport/forms';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getGeoConstants, { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useEffect, useImperativeHandle, forwardRef } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect, useImperativeHandle, forwardRef, useState, useCallback } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
-import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
-import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
-import getCompanyAddressOptions from '../../../../helpers/getCompanyAddressOptions';
-import getCompanyNameOptions from '../../../../helpers/getCompanyNameOptions';
-import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDefaultParams';
+import getCompanyAddressOptions from '../../../../components/Poc/helpers/getCompanyAddressOptions';
+import getCompanyNameOptions from '../../../../components/Poc/helpers/getCompanyNameOptions';
+import getTradePartiesDefaultParams from '../../../../components/Poc/helpers/getTradePartiesDefaultParams';
+import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
+import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
+import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
+import { getAddressRespectivePincodeAndPoc } from '../../helpers/getBillingAddressFromRegNum';
 
 import styles from './styles.module.css';
-
-const geo = getGeoConstants();
 
 const PINCODE_IN_ADDRESS_INDEX = 1;
 
 function SelfAndTradePartyForm({
 	companyType = '',
 	tradePartyType = '',
-	importer_exporter_id,
-	organization_id,
+	importer_exporter_id = '',
+	organization_id = '',
 }, ref) {
+	const [addressData, setAddressData] = useState([]);
+	const [id, setId] = useState('');
+	const [pocNameOptions, setPocNameOptions] = useState([]);
+	const [countryId, setCountryId] = useState('');
+
 	const {
 		data:{ list = [] } = {},
 		loading,
@@ -37,6 +42,8 @@ function SelfAndTradePartyForm({
 		...getTradePartiesDefaultParams({ companyType, tradePartyType }),
 		organization_id: organization_id || importer_exporter_id,
 	});
+
+	const geo = getGeoConstants();
 
 	const {
 		control,
@@ -47,9 +54,13 @@ function SelfAndTradePartyForm({
 		setValue,
 	} = useForm();
 
-	const { trade_party_id, address } = watch() || {};
+	const { trade_party_id, address, name } = watch();
 
 	const firstTradeParty = list?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
+
+	const resetMultipleFields = useCallback((fields = []) => {
+		fields?.map((field) => resetField(field));
+	}, [resetField]);
 
 	useEffect(() => {
 		if (companyType === 'self') {
@@ -61,6 +72,13 @@ function SelfAndTradePartyForm({
 		const selectedTradeParty = list?.find((t) => t.id === trade_party_id);
 		setValue('registration_number', selectedTradeParty?.registration_number || '');
 
+		if (!isEmpty(selectedTradeParty)) {
+			setAddressData([...(selectedTradeParty?.billing_addresses || []),
+				...(selectedTradeParty.other_addresses || [])]);
+			setId(selectedTradeParty?.id);
+			setCountryId(selectedTradeParty?.country?.id);
+		}
+
 		resetField('address');
 		resetField('pincode');
 	}, [trade_party_id, list, setValue, resetField]);
@@ -68,6 +86,35 @@ function SelfAndTradePartyForm({
 	useEffect(() => {
 		setValue('pincode', address?.split('::')?.[PINCODE_IN_ADDRESS_INDEX]);
 	}, [address, setValue]);
+
+	useEffect(() => {
+		resetMultipleFields(['name']);
+
+		const { pocNameOptions:nameOptions } = getAddressRespectivePincodeAndPoc({
+			data: addressData,
+			address,
+			id,
+		});
+
+		setPocNameOptions(nameOptions);
+	}, [address, addressData, setValue, resetMultipleFields, id]);
+
+	useEffect(() => {
+		resetMultipleFields(['work_scopes', 'email']);
+
+		if (name) {
+			const { work_scopes, email, mobile_number, mobile_country_code } = (pocNameOptions || []).find(
+				(item) => item?.value === name,
+			) || {};
+
+			setValue('work_scopes', work_scopes || []);
+			setValue('email', email || '');
+			setValue('mobile_number', {
+				country_code : mobile_country_code,
+				number       : mobile_number,
+			});
+		}
+	}, [name, pocNameOptions, setValue, resetMultipleFields]);
 
 	const company_options = getCompanyNameOptions(list);
 	const address_options = getCompanyAddressOptions(list);
@@ -78,6 +125,14 @@ function SelfAndTradePartyForm({
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 	}
+
+	const countryValidation = getCountryConstants({ country_id: countryId, isDefaultData: false });
+
+	useEffect(() => {
+		if (trade_party_id) {
+			setValue('mobile_number', { country_code: countryValidation?.country?.mobile_country_code });
+		}
+	}, [trade_party_id, countryValidation?.country?.mobile_country_code, setValue]);
 
 	return (
 		<div>
@@ -102,13 +157,14 @@ function SelfAndTradePartyForm({
 
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>
-										PAN Number / Registration Number
+										{countryValidation?.others?.identification_number?.label || 'PAN Number'}
 									</label>
 									<InputController
 										size="sm"
 										name="registration_number"
 										control={control}
-										placeholder="Enter Registration Number"
+										placeholder={`Enter ${countryValidation?.others?.identification_number?.label
+											|| 'PAN Number'}`}
 										disabled
 									/>
 								</div>
@@ -149,6 +205,7 @@ function SelfAndTradePartyForm({
 										control={control}
 										name="name"
 										placeholder="Enter your POC Name"
+										options={pocNameOptions}
 									/>
 								</div>
 								<div className={styles.form_item_container}>
@@ -178,7 +235,7 @@ function SelfAndTradePartyForm({
 									{Error('email')}
 								</div>
 
-								<div className={styles.form_item_container}>
+								<div className={cl`${styles.form_item_container}  ${styles.mobile_number_controller}`}>
 									<label className={styles.form_label}>Mobile Number</label>
 									<MobileNumberController
 										size="sm"
@@ -190,8 +247,8 @@ function SelfAndTradePartyForm({
 							</div>
 
 							<div className={styles.row}>
-								<div className={styles.form_item_container}>
-									<label className={styles.form_label}>Alternate Mobile Number (optional)</label>
+								<div className={cl`${styles.form_item_container} ${styles.mobile_number_controller}`}>
+									<label className={styles.form_label}>Alternate Mobile Number (Optional)</label>
 									<MobileNumberController
 										size="sm"
 										control={control}

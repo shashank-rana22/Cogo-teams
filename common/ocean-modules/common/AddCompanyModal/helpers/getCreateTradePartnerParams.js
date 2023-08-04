@@ -10,6 +10,7 @@ const getCreateTradePartnerParams = (values) => {
 		importer_exporter_id,
 		organization_id,
 		companyType,
+		tax_number_document_url,
 		...restValues
 	} = values || {};
 
@@ -28,6 +29,7 @@ const getCreateTradePartnerParams = (values) => {
 		...(ORG_ID_REQUIRED.includes(companyType) && { organization_id: organization_id || importer_exporter_id }),
 		...(companyType === 'historical' && pincode ? { pincode } : {}),
 		...restValues,
+		tax_number_document_url: tax_number_document_url?.finalUrl,
 	};
 
 	return params;

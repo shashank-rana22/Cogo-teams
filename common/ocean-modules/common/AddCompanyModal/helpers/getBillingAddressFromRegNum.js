@@ -1,5 +1,5 @@
-export const getAddressRespectivePincodeAndPoc = ({ data, address = '' }) => {
-	const selectedAddress = data?.find((item) => item?.address === address);
+export const getAddressRespectivePincodeAndPoc = ({ data, address = '', id }) => {
+	const selectedAddress = data?.find((item) => item?.address === address || item?.organization_trade_party_id	=== id);
 
 	const pocNameOptions = selectedAddress?.organization_pocs?.map((item) => (
 		{

@@ -12,6 +12,7 @@ const injectValues = ({
 	getApisData,
 	shipment_data,
 	stepConfig,
+	setCommodityUnit = () => {},
 }) => {
 	const controls = populatedControls || [];
 
@@ -123,6 +124,21 @@ const injectValues = ({
 			if (control.name === 'containers_count') {
 				controls[index].value = containersCount;
 				controls[index].rules.max = containersCount;
+			}
+		});
+	} else if (task?.task === 'mark_confirmed') {
+		(controls || []).forEach((ctrl, index) => {
+			if (ctrl?.name === 'commodity_category') {
+				if (shipment_data?.commodity_category) {
+					controls[index].value = shipment_data?.commodity_category;
+					controls[index].disabled = !!shipment_data?.commodity_category;
+				}
+			}
+
+			if (ctrl?.name === 'hs_code') {
+				controls[index].onChange = (val, obj) => {
+					setCommodityUnit(obj);
+				};
 			}
 		});
 	}

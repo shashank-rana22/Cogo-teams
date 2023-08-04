@@ -4,11 +4,14 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useContext, useEffect, useCallback } from 'react';
 
+const SHOW_ALL_TASKS = ['manager', 'admin'];
+
 const STAKEHOLDER_MAPPINGS = {
 	booking_desk  : 'service_ops',
 	lastmile_ops  : 'lastmile_ops',
 	document_desk : 'service_ops',
 	so1_so2_ops   : 'service_ops',
+	booking_agent : 'booking_agent',
 };
 
 function useListTasks({
@@ -16,8 +19,9 @@ function useListTasks({
 	defaultFilters = {},
 	defaultParams = {},
 	showMyTasks = true,
-	activeStakeholder,
+	activeStakeholder = '',
 }) {
+	let showOnlyMyTasks = showMyTasks;
 	const { profile } = useSelector((state) => state);
 	const { refetchServices = () => {} } = useContext(ShipmentDetailContext);
 
@@ -26,6 +30,12 @@ function useListTasks({
 	const stakeholder = STAKEHOLDER_MAPPINGS[activeStakeholder] || '';
 
 	const showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
+
+	SHOW_ALL_TASKS.forEach((item) => {
+		if (activeStakeholder?.includes(item)) {
+			showOnlyMyTasks = false;
+		}
+	});
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/list_tasks',
@@ -36,7 +46,7 @@ function useListTasks({
 				...defaultFilters,
 				...filters,
 				...showTaskFilters,
-				...(showMyTasks ? { show_my_tasks: true } : null),
+				...(showOnlyMyTasks ? { show_my_tasks: true } : {}),
 			},
 		},
 

@@ -8,7 +8,7 @@ const DEFAULT_PRICE_VALUE = 0;
 const DEFAULT_QUANTITY_VALUE = 0;
 const STEP_ON_BACK = 2;
 
-function Step3({ data, setStep = () => {}, shipment_id }) {
+function StepThree({ data = {}, setStep = () => {}, shipment_id = '', updateServiceFunc = () => {}, loading = false }) {
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 
 	const formProps = useForm({ defaultValues });
@@ -41,6 +41,11 @@ function Step3({ data, setStep = () => {}, shipment_id }) {
 		};
 	});
 
+	const handleFinalSubmit = () => {
+		onSubmit();
+		updateServiceFunc();
+	};
+
 	return (
 		<div>
 			<Layout
@@ -54,9 +59,9 @@ function Step3({ data, setStep = () => {}, shipment_id }) {
 			<div className={styles.button_container}>
 				<Button themeType="secondary" onClick={() => setStep(STEP_ON_BACK)}>Back</Button>
 
-				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>Submit</Button>
+				<Button themeType="primary" onClick={handleSubmit(handleFinalSubmit)} disabled={loading}>Submit</Button>
 			</div>
 		</div>
 	);
 }
-export default Step3;
+export default StepThree;

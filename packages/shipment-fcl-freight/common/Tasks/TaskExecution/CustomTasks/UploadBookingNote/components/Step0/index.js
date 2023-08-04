@@ -37,10 +37,10 @@ function Step0({ data = {}, onCancel = () => {}, setStep = () => {}, servicesLis
 
 	return (
 		<div>
-			<div>
+			<div className={styles.tab_container}>
 				{bookingPreferenceLoading ? <div><Loader /></div>
 					: (
-						<Tabs activeTab={activeTab} onChange={setActiveTab}>
+						<Tabs activeTab={activeTab} onChange={setActiveTab} themeType="primary">
 							{(similarServiceIds || []).map((service_id) => (
 								<TabPanel
 									name={service_id}
@@ -67,7 +67,7 @@ function Step0({ data = {}, onCancel = () => {}, setStep = () => {}, servicesLis
 
 			<div className={styles.custom_service_provider_container}>
 				<div className={styles.sub_container}>
-					<div className={styles.label}>Mode of Booking</div>
+					<h6 className={styles.label}>Mode of Booking</h6>
 
 					<div className={styles.value}>{getSource()}</div>
 				</div>

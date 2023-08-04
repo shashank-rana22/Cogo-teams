@@ -1,11 +1,11 @@
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import AddCompanyModal from '../../common/AddCompanyModal';
 import ThreeDotLoader from '../../common/ThreeDotLoader';
 import useListStakeholders from '../../hooks/useListShipmentStakeholders';
 import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartners';
 
-import AddCompanyModal from './components/AddCompanyModal';
 import AddedTradeParty from './components/AddedTradeParty';
 import AddPocModal from './components/AddPocModal';
 import InvoicingParty from './components/InvoicingParty';
@@ -17,7 +17,13 @@ import roleBasedView from './config/role_base_view.json';
 import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
-function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) {
+function Poc({
+	shipment_data = {},
+	servicesList = [],
+	activeStakeholder = '',
+	primary_service = {},
+	getShipmentRefetch = () => {},
+}) {
 	const {
 		id:shipment_id, importer_exporter_id, services,
 		is_rate_reverted = true, shipment_type = '',
@@ -85,6 +91,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 							setAddCompany={setAddCompany}
 							setAddPoc={setAddPoc}
 							rolesPermission={rolesPermission}
+							primary_service={primary_service}
 						/>
 
 						{rolesViewPermission?.includes('notifying_party') ? (
@@ -119,6 +126,10 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 								tradePartnerTrigger={tradePartnerTrigger}
 								shipment_id={shipment_id}
 								importer_exporter_id={importer_exporter_id}
+								shipment_data={shipment_data}
+								primary_service={primary_service}
+								stakeholdersTrigger={stakeholdersTrigger}
+								getShipmentRefetch={getShipmentRefetch}
 							/>
 						)}
 
@@ -133,6 +144,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 								stakeholdersTrigger={stakeholdersTrigger}
 								servicesList={servicesList}
 								listStakeholdersData={shipmentStakeholderData}
+								getShipmentRefetch={getShipmentRefetch}
 							/>
 						)}
 					</div>
