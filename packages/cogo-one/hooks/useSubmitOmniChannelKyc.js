@@ -13,9 +13,9 @@ const useSubmitOmniChannelKyc = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const submitKyc = ({ orgId = '', userId = '', leadUserId = '', fetchOrganization = () => {} }) => {
+	const submitKyc = async ({ orgId = '', userId = '', leadUserId = '', fetchOrganization = () => {} }) => {
 		try {
-			trigger({
+			await trigger({
 				data: getPayload({ organization_id: orgId, user_id: userId, lead_user_id: leadUserId }),
 			});
 			fetchOrganization();
