@@ -10,11 +10,9 @@ function AttendanceLeaveDashboard() {
 	const [activeTab, setActiveTab] = useState('attendance');
 	return (
 		<div>
-			<div>
-				<h1>
-					Attendance & Leaves
-				</h1>
-			</div>
+			<h1>
+				Attendance & Leaves
+			</h1>
 			<div>
 				<Tabs
 					activeTab={activeTab}

@@ -1,0 +1,93 @@
+.header_text {
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+	text-transform: uppercase;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	min-width: 300px;
+}
+
+.separator {
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	text-align: center;
+}
+
+.dot {
+	width: 12px;
+	min-width: 12px;
+	height: 12px;
+	margin-right: 8px;
+	background-color: #abcd62;
+	border-radius: 50%;
+}
+
+.right_dot {
+	width: 12px;
+	min-width: 12px;
+	height: 12px;
+	margin-left: 8px;
+	background-color: #fc0101;
+	border-radius: 50%;
+}
+
+.separator::after {
+	position: relative;
+	flex: 1;
+	content: "";
+	border-bottom: 1px solid #abcd62;
+}
+
+.separator::before {
+	position: relative;
+	flex: 1;
+	content: "";
+	border-right: 1px solid green;
+	border-bottom: 1px solid #abcd62;
+}
+
+.line {
+	position: absolute;
+	right: 0;
+	border: 1px solid green;
+}
+
+.title_text {
+	padding: 0 12px;
+	font-size: 12px;
+	color: #4f4f4f;
+	border-right: 1px solid #000;
+	border-left: 1px solid #000;
+	border-radius: 4px;
+}
+
+.total_hrs_flex {
+	display: flex;
+	align-items: center;
+}
+
+.extra_hrs {
+	margin-left: 4px;
+	font-size: 12px;
+	color: #828282;
+}
+
+.action_flex {
+	display: flex;
+	align-items: center;
+}
+
+.cursor_pointer {
+	cursor: pointer;
+}
+
+.timer_icon {
+	margin-right: 16px;
+}

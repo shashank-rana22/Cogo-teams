@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import AttendanceStats from './AttedanceStats';
+import AttendanceLogs from './AttendanceLogs';
 import ChecInCheckOut from './CheckInCheckOutContainer';
 import Header from './Header';
 import styles from './styles.module.css';
@@ -22,6 +23,7 @@ function AttendanceComponent() {
 					<AttendanceStats />
 				</div>
 			</div>
+			<AttendanceLogs />
 		</div>
 	);
 }

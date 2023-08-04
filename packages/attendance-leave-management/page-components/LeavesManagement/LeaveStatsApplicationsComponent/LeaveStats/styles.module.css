@@ -25,3 +25,12 @@
 	padding-top: 20px;
 	color: #bdbdbd;
 }
+
+.month_dates {
+	padding: 6px;
+
+	/* background-color: #FDEBE9; */
+
+	/* color: #BF291E; */
+	font-size: 12px;
+}

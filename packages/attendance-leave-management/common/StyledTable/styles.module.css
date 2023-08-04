@@ -11,13 +11,15 @@
 
 		.ui_table_head_cell {
 			padding: 10px;
-			background-color: #deebed;
+			background-color: #f3fafa;
 		}
 
 		.ui_table_body_cell {
 			flex-wrap: wrap;
 			width: auto;
 			padding: 10px;
+			font-size: 14px;
+			font-weight: 500;
 			background: #fff;
 			background-color: #fff;
 		}
@@ -44,6 +46,7 @@
 
 		.ui_table_container {
 			margin-bottom: 0;
+			border: none;
 		}
 	}
 

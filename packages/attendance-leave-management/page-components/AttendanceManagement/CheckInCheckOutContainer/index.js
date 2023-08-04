@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
+import CurrentTimeClock from './CurrentTimeClock';
 import styles from './styles.module.css';
 
 function ChecInCheckOut() {
@@ -61,7 +62,7 @@ function ChecInCheckOut() {
 							Current Time
 						</div>
 						<div className={styles.formatted_time}>
-							{formatedTime}
+							<CurrentTimeClock />
 						</div>
 					</div>
 

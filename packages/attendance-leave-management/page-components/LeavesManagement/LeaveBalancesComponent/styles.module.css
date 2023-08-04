@@ -16,6 +16,28 @@
 	color: #4f4f4f;
 }
 
+.leave_ctn {
+	padding: 6px 0;
+	border-bottom: 1px solid #e0e0e0;
+
+	:global {
+		.ui_progressbar_progress {
+			background-color: #f37166;
+		}
+	}
+}
+
+.leave_ctn_privilege {
+	padding: 6px 0;
+	border-bottom: 1px solid #e0e0e0;
+
+	:global {
+		.ui_progressbar_progress {
+			background-color: #abb0de;
+		}
+	}
+}
+
 .leaves_cotegory_body {
 	padding: 12px;
 	margin-top: 20px;
@@ -35,11 +57,6 @@
 			}
 		}
 	}
-}
-
-.leave_ctn {
-	padding: 6px 0;
-	border-bottom: 1px solid #e0e0e0;
 }
 
 .last_leave_ctn {

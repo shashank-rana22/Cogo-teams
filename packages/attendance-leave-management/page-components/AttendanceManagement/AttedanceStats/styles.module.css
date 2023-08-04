@@ -42,3 +42,65 @@
 .line_4 {
 	background-color: #f68b21;
 }
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.arrow_icon {
+	margin-left: 4px;
+}
+
+.present_days {
+	font-size: 14px;
+	color: #828282;
+}
+
+.attendance_stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 32px;
+	align-items: center;
+}
+
+.attendance_dot {
+	width: 8px;
+	height: 8px;
+	margin-right: 6px;
+	border-radius: 50%;
+}
+
+.span {
+	margin-right: 6px;
+	color: #828282;
+}
+
+.present_color {
+	background-color: #abcd62;
+}
+
+.absent_color {
+	background-color: #ee3425;
+}
+
+.leave_color {
+	background-color: #888fd1;
+}
+
+.holiday_color {
+	background-color: #f68b21;
+}
+
+.attendance_stats_data {
+	display: flex;
+	align-items: center;
+}
+
+.leave_team_stats {
+	display: flex;
+
+	/* align-items: center; */
+	gap: 12px;
+}
