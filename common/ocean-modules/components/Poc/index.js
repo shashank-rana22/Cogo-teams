@@ -18,7 +18,10 @@ import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
 function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) {
-	const { id:shipment_id, importer_exporter_id, services, is_rate_reverted, shipment_type } = shipment_data || {};
+	const {
+		id:shipment_id, importer_exporter_id, services,
+		is_rate_reverted = 'true', shipment_type = '',
+	} = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
 	const [addPoc, setAddPoc] = useState(null);
