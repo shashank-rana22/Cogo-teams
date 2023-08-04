@@ -55,7 +55,7 @@ function Price({
 					}}
 					style={{ marginRight: 10 }}
 				>
-					Add Rate---not is seller
+					Add Rate
 				</Button>
 			) : null}
 
@@ -72,7 +72,7 @@ function Price({
 				style={{ marginRight: 10 }}
 				disabled={loading}
 			>
-				{isSeller ? 'Add Rate--is seller' : 'Request Rate'}
+				{isSeller ? 'Add Rate' : 'Request Rate'}
 			</Button>
 			<Button
 				themeType="secondary"
