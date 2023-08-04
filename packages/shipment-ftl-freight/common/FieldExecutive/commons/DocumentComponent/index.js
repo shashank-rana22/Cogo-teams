@@ -14,6 +14,7 @@ function DocumentComponent(props) {
 		item = {},
 		formattedData = {},
 		setInitFormattedData = () => {},
+		fieldExecTabConfig = {},
 	} = props || {};
 
 	const handleCheck = (id) => {
@@ -61,12 +62,14 @@ function DocumentComponent(props) {
 						docItem={item}
 						setInitFormattedData={setInitFormattedData}
 					/>
-					<MovePopOver
-						selectedFiles={selectedFiles}
-						docItem={item}
-						setInitFormattedData={setInitFormattedData}
-						setSelectedFiles={setSelectedFiles}
-					/>
+					{fieldExecTabConfig?.move_document_visible ? (
+						<MovePopOver
+							selectedFiles={selectedFiles}
+							docItem={item}
+							setInitFormattedData={setInitFormattedData}
+							setSelectedFiles={setSelectedFiles}
+						/>
+					) : null}
 				</div>
 			</div>
 			<div className={styles.sub_body}>

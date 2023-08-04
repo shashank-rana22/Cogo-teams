@@ -30,7 +30,11 @@ export default {
 		tab_title: 'Timeline and Tasks',
 	},
 	field_executive: {
-		tab_title: 'Field Executive',
+		tab_title                : 'Field Executive',
+		document_history_visible : true,
+		edit_details_visible     : true,
+		start_tracking_visible   : true,
+		move_document_visible    : true,
 	},
 	sales: {
 		tab_title: 'Sales Live Invoice',

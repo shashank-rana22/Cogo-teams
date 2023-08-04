@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import { formatFinalData } from '../utils/formatFinalData';
 
@@ -23,13 +24,23 @@ const useUpdateFieldServiceOpsDetails = ({
 			otherFormattedData,
 		});
 
+		const isDocPresent = Object.values(initFormattedData).some(
+			(values) => !isEmpty(values),
+		);
+
+		if (!isDocPresent) {
+			Toast.error('Please Upload Atleast a Single Document');
+			return;
+		}
+
 		try {
 			await trigger({
 				data: { ...formattedData, is_data_append_required: false },
 			});
+			Toast.success('Data Updated Successfully!!');
 			updateCallback();
 		} catch (error) {
-			Toast.error(error?.data);
+			Toast.error(getApiErrorString(error?.data) || 'Something went wrong');
 		}
 	};
 
@@ -46,6 +57,7 @@ const useUpdateFieldServiceOpsDetails = ({
 					updated_truck_number,
 				},
 			});
+			Toast.success('Truck Number Updated Successfully!!');
 			callback();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.data) || 'Something went wrong');

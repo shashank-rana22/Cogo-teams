@@ -2,25 +2,16 @@ import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
-// import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useSelector } from '@cogoport/store';
-// import { ShipmentMails } from '@cogoport/shipment-mails';
-// import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import AddService from '../../common/AdditionalServices/components/List/AddService';
 import CancelDetails from '../../common/CancelDetails';
-// import Documents from '../../common/Documents';
-// import FieldExecutive from '../../common/FieldExecutive';
-// import Overview from '../../common/Overview';
-// import OverviewManageServices from '../../common/Overview/OverviewManageServices';
 import PocSop from '../../common/PocSop';
-// import SalesInvoice from '../../common/SalesInvoice';
 import ShipmentHeader from '../../common/ShipmentHeader';
 import ShipmentInfo from '../../common/ShipmentInfo';
-// import Tasks from '../../common/Tasks';
 import Timeline from '../../common/TimeLine';
 import useGetActiveStakeholder from '../../hooks/useGetActiveStakeholder';
 import useGetShipment from '../../hooks/useGetShipment';
@@ -29,8 +20,6 @@ import useServiceList from '../../hooks/useServiceList';
 import getStakeholderConfig from '../../stakeholderConfig';
 
 import styles from './styles.module.css';
-
-// const ACTIVE_STAKEHOLDER = 'superadmin';
 
 const TAB_MAPPING = {
 	overview        : dynamic(() => import('../../common/Overview'), { ssr: false }),
@@ -48,10 +37,8 @@ function ShipmentDetails() {
 	const router = useRouter();
 	const prof = useSelector(
 		({ profile }) => profile,
-	) || {};
-	const { authParams } = prof;
-
-	console.log(prof);
+	);
+	const { authParams } = prof || {};
 
 	const activeStakeholder = useGetActiveStakeholder();
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder, authParams });
@@ -85,14 +72,13 @@ function ShipmentDetails() {
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => visible_tabs.includes(t));
 
 	const conditionMapping = {
-		shipment_info       : !!features.includes('shipment_info'),
-		shipment_header     : !!features.includes('shipment_header'),
-		// purchase            : !!features.includes('purchase'),
-		poc_sop             : !!(features.includes('poc') || features.includes('sop')),
-		chat                : !!features.includes('chat'),
-		cancelDetails       : !!(features.includes('cancel_details') && shipment_data?.state === 'cancelled'),
-		documentHoldDetails : !!features.includes('document_hold_details'),
-		timeline            : !!features.includes('timeline'),
+		shipment_info       : features.includes('shipment_info'),
+		shipment_header     : features.includes('shipment_header'),
+		poc_sop             : (features.includes('poc') || features.includes('sop')),
+		chat                : features.includes('chat'),
+		cancelDetails       : (features.includes('cancel_details') && shipment_data?.state === 'cancelled'),
+		documentHoldDetails : features.includes('document_hold_details'),
+		timeline            : features.includes('timeline'),
 	};
 
 	const tabProps = {

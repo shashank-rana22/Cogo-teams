@@ -11,16 +11,27 @@ export default {
 	visible_tabs: [
 		'overview',
 		'tasks',
-		'tracking',
 		'purchase',
+		'field_executive',
+		'documents',
 	],
 	shipment_info : {},
 	default_tab   : 'tasks',
 	overview      : {
 		tab_title: 'Overview',
 	},
+	field_executive: {
+		tab_title                : 'Field Executive',
+		document_history_visible : true,
+		edit_details_visible     : false,
+		start_tracking_visible   : false,
+		move_document_visible    : true,
+	},
 	tasks: {
 		tab_title: 'Timeline and Tasks',
+	},
+	documents: {
+		tab_title: 'Documents',
 	},
 	cancel_shipment: {
 		can_cancel   : false,

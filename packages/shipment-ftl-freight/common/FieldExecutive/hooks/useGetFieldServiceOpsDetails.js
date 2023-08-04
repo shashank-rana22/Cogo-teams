@@ -29,6 +29,9 @@ const useGetFieldServiceOpsDetails = ({
 			const formattedData = getFormattedData(data.data);
 			setInitFormattedData(formattedData.data);
 			setOtherFormattedData(formattedData.inputData);
+		} else {
+			setInitFormattedData({});
+			setOtherFormattedData({});
 		}
 	}, [data, setInitFormattedData, setOtherFormattedData]);
 

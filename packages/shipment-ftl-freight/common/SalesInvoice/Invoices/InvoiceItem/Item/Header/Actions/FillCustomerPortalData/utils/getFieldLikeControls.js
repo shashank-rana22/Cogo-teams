@@ -74,7 +74,7 @@ function getFieldLikeControls({
 			const entityOptions = entityList.map((item) => ({
 				label : `${item?.entity_code}, ${item?.business_name}`,
 				value : item?.id,
-				...item,
+				...(item || {}),
 			}));
 
 			return {

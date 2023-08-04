@@ -4,10 +4,16 @@ import React from 'react';
 import ModalContent from './ModalContent';
 
 function DocumentHistory(props) {
-	const { showHistory } = props;
+	const { showHistory, setShowHistory } = props;
 	return (
 		<div>
-			<Modal size="lg" closeOnOuterClick={false} show={showHistory} placement="center">
+			<Modal
+				size="lg"
+				closeOnOuterClick={false}
+				show={showHistory}
+				placement="center"
+				onClose={() => setShowHistory(false)}
+			>
 				<Modal.Header title="Document history" />
 				<Modal.Body>
 					<ModalContent {...props} />

@@ -21,6 +21,7 @@ export default {
 		'emails',
 		'tracking',
 		'purchase',
+		'field_executive',
 	],
 	shipment_info : {},
 	default_tab   : 'tasks',
@@ -35,6 +36,13 @@ export default {
 	},
 	emails: {
 		tab_title: 'Emails',
+	},
+	field_executive: {
+		tab_title                : 'Field Executive',
+		document_history_visible : true,
+		edit_details_visible     : false,
+		start_tracking_visible   : false,
+		move_document_visible    : true,
 	},
 	cancel_shipment: {
 		can_cancel   : false,

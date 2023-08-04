@@ -23,6 +23,8 @@ function ViewDetails({
 	truckNumber = {},
 	shipment_data = {},
 	servicesList = [],
+	filterOptions = [],
+	fieldExecTabConfig = {},
 }) {
 	const {
 		showHistory,
@@ -52,11 +54,14 @@ function ViewDetails({
 			<div className={styles.stepper_container}>
 				<ModifiedStepper active={activeStepper} items={STEPPER_ARRAY} />
 			</div>
-			<div className={styles.history_btn}>
-				<Button themeType="accent" size="md" onClick={() => setShowHistory(true)}>
-					Show document history
-				</Button>
-			</div>
+			{fieldExecTabConfig?.document_history_visible ? (
+				<div className={styles.history_btn}>
+					<Button themeType="accent" size="md" onClick={() => setShowHistory(true)}>
+						Show document history
+					</Button>
+				</div>
+			) : null}
+
 			{isEmpty(STEPPER_OBJ[activeStepper]) ? <EmptyState /> : null}
 			{Object.entries(STEPPER_OBJ[activeStepper]).map(([key, value]) => (
 				<CardDetails
@@ -67,43 +72,52 @@ function ViewDetails({
 					otherFormattedData={otherFormattedData}
 				/>
 			))}
-			{activeStepper === STEPPER_KEYS_OBJ.TRIP_DOCUMENTS ? (
-				<div className={styles.tracking}>
-					<div className={styles.tracking_label}>Tracking : </div>
-					<div className={styles.tracking_input}>
-						{isTaskCompleted ? (
-							<Select
-								className={styles.sub_input}
+
+			{fieldExecTabConfig?.start_tracking_visible ? (
+				<div>
+					{activeStepper === STEPPER_KEYS_OBJ.TRIP_DOCUMENTS ? (
+						<div className={styles.tracking}>
+							<div className={styles.tracking_label}>Tracking : </div>
+							<div className={styles.tracking_input}>
+								{isTaskCompleted ? (
+									<Select
+										className={styles.sub_input}
+										size="md"
+										placeholder="Select Mobile No."
+										options={mobileOptions}
+										value={mobileNumber}
+										onChange={(e) => setMobileNumber(e)}
+									/>
+								) : (
+									<Input
+										className={styles.sub_select}
+										placeholder="Enter Mobile No."
+										type="number"
+										size="md"
+										value={mobileNumber}
+										onChange={(val) => setMobileNumber(val)}
+									/>
+								)}
+							</div>
+							<Button
+								themeType="accent"
 								size="md"
-								placeholder="Select Mobile No."
-								options={mobileOptions}
-								value={mobileNumber}
-								onChange={(e) => setMobileNumber(e)}
-							/>
-						) : (
-							<Input
-								className={styles.sub_select}
-								placeholder="Enter Mobile No."
-								type="number"
-								size="md"
-								value={mobileNumber}
-								onChange={(val) => setMobileNumber(val)}
-							/>
-						)}
-					</div>
-					<Button
-						themeType="accent"
-						size="md"
-						disabled={isEmpty(mobileNumber) || loading}
-						onClick={() => createTracking({
-							truck_number  : selectedTruckNumber,
-							mobile_number : mobileNumber,
-						})}
-					>
-						Start tracking
-					</Button>
+								disabled={isEmpty(mobileNumber)
+							|| loading
+							|| isEmpty(selectedTruckNumber)
+							|| !filterOptions.some((fil) => fil.value === selectedTruckNumber)}
+								onClick={() => createTracking({
+									truck_number  : selectedTruckNumber,
+									mobile_number : mobileNumber,
+								})}
+							>
+								Start tracking
+							</Button>
+						</div>
+					) : null}
 				</div>
-			) : null}
+			) : null }
+
 			<div className={styles.button_wrapper}>
 				<Button
 					themeType="secondary"

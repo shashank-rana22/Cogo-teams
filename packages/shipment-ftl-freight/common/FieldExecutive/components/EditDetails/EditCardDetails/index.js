@@ -11,6 +11,7 @@ function EditCardDetails({
 	setInitFormattedData = () => {},
 	otherFormattedData = {},
 	setOtherFormattedData = () => {},
+	fieldExecTabConfig = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -24,6 +25,7 @@ function EditCardDetails({
 							setInitFormattedData={setInitFormattedData}
 							otherFormattedData={otherFormattedData}
 							setOtherFormattedData={setOtherFormattedData}
+							fieldExecTabConfig={fieldExecTabConfig}
 						/>
 					</div>
 				))}

@@ -1,4 +1,4 @@
-import { Button, Select, Input } from '@cogoport/components';
+import { Button, Input, CreatableSelect } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -32,6 +32,7 @@ function FieldExecutive(props) {
 		updateDetails,
 		truckLoading,
 		listLoading,
+		fieldExecTabConfig,
 	} = useFieldServiceOpsHelper(props);
 
 	if (loading || truckLoading || listLoading) {
@@ -48,7 +49,7 @@ function FieldExecutive(props) {
 			<div className={styles.truck_number}>Truck Number</div>
 			<div className={styles.heading}>
 				<div className={styles.select}>
-					<Select
+					<CreatableSelect
 						value={truckNumber[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER]}
 						onChange={(e) => setTruckNumber({
 							...truckNumber,
@@ -59,23 +60,26 @@ function FieldExecutive(props) {
 						size="md"
 					/>
 				</div>
-				<div>
-					<Button
-						themeType="secondary"
-						size="md"
-						onClick={() => {
-							if (viewType === VIEW_TYPES.VIEW) {
-								setViewType(VIEW_TYPES.EDIT);
-							} else {
-								setViewType(VIEW_TYPES.VIEW);
-							}
-						}}
-					>
-						{viewType === VIEW_TYPES.EDIT ? 'View' : 'Edit'}
-						{' '}
-						Details
-					</Button>
-				</div>
+				{fieldExecTabConfig.edit_details_visible ? (
+					<div>
+						<Button
+							themeType="secondary"
+							size="md"
+							onClick={() => {
+								if (viewType === VIEW_TYPES.VIEW) {
+									setViewType(VIEW_TYPES.EDIT);
+								} else {
+									setViewType(VIEW_TYPES.VIEW);
+								}
+							}}
+						>
+							{viewType === VIEW_TYPES.EDIT ? 'View' : 'Edit'}
+							{' '}
+							Details
+						</Button>
+					</div>
+				) : null}
+
 			</div>
 
 			{isEdit ? (
@@ -112,10 +116,12 @@ function FieldExecutive(props) {
 				<Button
 					className={styles.edit_btn}
 					size="md"
-					themeType="secondary"
+					themeType="accent"
 					onClick={() => setIsEdit(!isEdit)}
 					disabled={isEmpty(
 						truckNumber[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER],
+					) || !filterOptions.some(
+						(fil) => fil.value === truckNumber[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER],
 					)}
 				>
 					Edit truck no.
@@ -130,6 +136,8 @@ function FieldExecutive(props) {
 					setViewType={setViewType}
 					formattedData={initFormattedData}
 					otherFormattedData={otherFormattedData}
+					filterOptions={filterOptions}
+					fieldExecTabConfig={fieldExecTabConfig}
 				/>
 			) : (
 				<EditDetails
@@ -143,6 +151,7 @@ function FieldExecutive(props) {
 					setOtherFormattedData={setOtherFormattedData}
 					updateDetails={updateDetails}
 					editLoading={loading}
+					fieldExecTabConfig={fieldExecTabConfig}
 				/>
 			)}
 		</div>

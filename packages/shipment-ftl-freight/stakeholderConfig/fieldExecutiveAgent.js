@@ -22,7 +22,11 @@ export default {
 		tab_title: 'Documents',
 	},
 	field_executive: {
-		tab_title: 'Field Executive',
+		tab_title                : 'Field Executive',
+		document_history_visible : true,
+		edit_details_visible     : true,
+		start_tracking_visible   : true,
+		move_document_visible    : false,
 	},
 	emails: {
 		tab_title: 'Emails',
