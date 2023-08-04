@@ -11,7 +11,7 @@ const useGetProfitabilityStats = ({
 	entity = '', timeRange = '', customDate = {},
 	filter = {}, showShipmentList = false,
 }) => {
-	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity].currency;
+	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity]?.currency;
 
 	const [
 		{ data:ongoingData, loading:ongoingLoading },

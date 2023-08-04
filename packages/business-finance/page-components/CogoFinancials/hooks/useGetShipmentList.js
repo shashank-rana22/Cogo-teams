@@ -16,7 +16,7 @@ const useGetShipmentList = ({
 	customDate = new Date(),
 	tableFilters,
 }) => {
-	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity].currency;
+	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity]?.currency;
 
 	const [
 		{ data: serviceLevelData, loading: serviceLevelLoading },

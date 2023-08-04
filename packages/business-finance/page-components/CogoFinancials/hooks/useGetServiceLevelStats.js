@@ -16,7 +16,7 @@ const useGetServiceLevelStats = ({
 	customDate = new Date(),
 	specificServiceLevel = null,
 }) => {
-	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity].currency;
+	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity]?.currency;
 
 	const [
 		{ data:serviceLevelData, loading:serviceLevelLoading },
