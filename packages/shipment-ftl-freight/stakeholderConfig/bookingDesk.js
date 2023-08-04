@@ -10,13 +10,12 @@ export default {
 	],
 	visible_tabs: [
 		'overview',
-		'tasks',
 		'purchase',
 		'field_executive',
 		'documents',
 	],
 	shipment_info : {},
-	default_tab   : 'tasks',
+	default_tab   : 'overview',
 	overview      : {
 		tab_title: 'Overview',
 	},

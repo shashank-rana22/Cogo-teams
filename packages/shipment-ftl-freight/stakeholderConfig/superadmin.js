@@ -10,7 +10,6 @@ export default {
 	],
 	visible_tabs: [
 		'overview',
-		'tasks',
 		'documents',
 		'emails',
 		'field_executive',
@@ -22,7 +21,7 @@ export default {
 	shipment_header : {
 		add_po_number: true,
 	},
-	default_tab : 'tasks',
+	default_tab : 'overview',
 	overview    : {
 		tab_title: 'Overview',
 	},
