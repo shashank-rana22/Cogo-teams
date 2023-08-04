@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import ListHeader from './ListHeader';
-import ListItem from './ListItem';
+import ListItem from './ListItem/index';
 import styles from './styles.module.css';
 
 const INITIAL_PAGE = 1;
@@ -15,20 +15,13 @@ const SIX = 6;
 const ONE = 1;
 const ZERO = 0;
 
-// activeTab = { activeTab };
-// fields = { fields };
-// data = { DATA };
-// loading = { loading };
-// page = { page };
-// setPage = { setPage };
-// functions = { functions };
-// handlePageChange = { handlePageChange };
-
 function List({
 	fields = {},
 	data = {},
 	loading = false,
+	listAPI = () => {},
 	functions = {},
+	Child = () => {},
 	total_count = 0,
 	activeTab = '',
 	page = 1,
@@ -37,24 +30,30 @@ function List({
 	const { list = {} } = data;
 	const [isOpen, setIsOpen] = useState(null);
 
+	const handleScheduleInfo = (item) => {
+		setIsOpen(item.warehouseTransferId);
+	};
+
 	const render = () => {
 		const showList = list.length ? list : Array(SIX).fill(ONE);
-		// console.log('showList.1');
 		if (loading || list.length) {
 			return (showList).map((item) => (
-				<div key={item.id}>
+				<div key={item.warehouseTransferId}>
 					<ListItem
 						item={item}
 						loading={loading}
 						fields={fields}
 						functions={functions}
+						Child={Child}
+						listAPI={listAPI}
+						isOpen={isOpen}
 					/>
 					{['schedules', 'inventory'].includes(activeTab) && (
 						<div
 							style={{ '--length': isOpen ? ZERO : '-20px' }}
 							className={styles.amaendment_accordian_style}
 						>
-							{isOpen === item.id ? (
+							{isOpen === item.warehouseTransferId ? (
 								<Button
 									themeType="linkUi"
 									onClick={() => {
@@ -70,9 +69,9 @@ function List({
 								<Button
 									size="md"
 									themeType="linkUi"
-									// onClick={() => {
-									// 	handleScheduleInfo(singleitem);
-									// }}
+									onClick={() => {
+										handleScheduleInfo(item);
+									}}
 								>
 									<span>Show More</span>
 									<IcMArrowDown

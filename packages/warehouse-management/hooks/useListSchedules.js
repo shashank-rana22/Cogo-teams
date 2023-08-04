@@ -16,8 +16,9 @@ const useListSchedules = ({
 
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url    : '/air-coe/warehouse-management/warehouse-schedules',
-			method : 'get',
+			url     : '/air-coe/warehouse-management/warehouse-schedules',
+			method  : 'get',
+			authKey : 'get_air_coe_warehouse_management_schedule',
 		},
 		{ manual: true },
 	);
@@ -25,8 +26,8 @@ const useListSchedules = ({
 	const listAPI = useCallback(async () => {
 		const PAYLOAD = {
 			truckInEta     : '2023-01-27 09:25:26',
-			truckInStatus  : (truckStatus === 'truck_in'),
-			truckOutStatus : (truckStatus === 'truck_out'),
+			truckInStatus  : (truckStatus === ''),
+			truckOutStatus : (truckStatus === 'truck_in'),
 		};
 
 		try {
@@ -40,7 +41,7 @@ const useListSchedules = ({
 			toastApiError(err);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, query, trigger]);
+	}, [page, query, trigger, truckStatus]);
 
 	useEffect(() => {
 		if (searchValue) {

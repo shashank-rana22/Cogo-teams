@@ -70,12 +70,50 @@ const scheduleFields = {
 				</div>
 			),
 		},
-		// {
-		// 	key   : 'action',
-		// 	label : 'Action',
-		// 	span  : 2.2,
-		// 	func  : 'handleTruckStatus',
-		// },
+		{
+			key   : 'action',
+			label : 'Action',
+			span  : 2.2,
+			func  : 'handleTruckStatus',
+		},
+	],
+	showMoreFields: [
+		{
+			key   : 'serialID',
+			label : 'SID No.',
+			span  : 2.2,
+			func  : 'handleSID',
+		},
+		{
+			key   : 'boxDimensions',
+			label : 'Box Dimensions',
+			span  : 2.2,
+			func  : 'handleBoxDimensions',
+		},
+		{
+			key   : 'services',
+			label : 'Services',
+			span  : 2.2,
+			func  : 'handleServices',
+		},
+		{
+			key   : 'status',
+			label : 'Status',
+			span  : 2.2,
+			func  : 'handleStatus',
+		},
+		{
+			key   : 'flightSchedule',
+			label : 'Flight Schedule',
+			span  : 2.2,
+			func  : 'handleFlightSchedule',
+		},
+		{
+			key   : 'expectedDepartureTime',
+			label : 'Expected dept. Time',
+			span  : 2.1,
+			func  : 'handleDepartureTime',
+		},
 	],
 };
 

@@ -1,5 +1,6 @@
 import { Placeholder, cl } from '@cogoport/components';
 
+import getValue from './getValue';
 import styles from './styles.module.css';
 
 const NO_MARGIN = 0;
@@ -8,17 +9,13 @@ const SPAN_ONE = 1;
 function ListItem({
 	fields = {},
 	item = [],
-	// functions = {},
+	functions = {},
 	loading = false,
 	isMobile = false,
 	isOpen = '',
 	Child = () => {},
-	setViewDoc = () => {},
 	setItem = () => {},
 	listAPI = () => {},
-	edit = false,
-	setEdit = () => {},
-	setGenerate = () => {},
 }) {
 	return (
 		<div>
@@ -40,7 +37,6 @@ function ListItem({
 							}`}
 							style={{
 								'--span': (field.span || SPAN_ONE),
-								// ...itemStyle,
 							}}
 							key={field.key}
 						>
@@ -51,29 +47,23 @@ function ListItem({
 							{loading ? <Placeholder />
 								: (
 									<div>
-										{field?.render(item) || 'ff'}
-										{/* {item?.zoneName} */}
-										{/* // getValue(
-										// 	item,
-										// 	field,
-										// 	functions,
-										// 	'-',
-										//) */}
+										{field.render ? field.render(item) : getValue(
+											item,
+											field,
+											functions,
+											'',
+										)}
 									</div>
 								)}
 						</div>
 					))}
 				</div>
 			</section>
-			{isOpen === item.id && (
+			{isOpen === item.warehouseTransferId && (
 				<Child
 					data={item}
-					setViewDoc={setViewDoc}
 					setItem={setItem}
 					listAPI={listAPI}
-					edit={edit}
-					setEdit={setEdit}
-					setGenerate={setGenerate}
 				/>
 			)}
 		</div>

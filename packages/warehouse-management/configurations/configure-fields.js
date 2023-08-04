@@ -1,64 +1,69 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const configureFields = {
 	fields: [
 		{
-			key    : 'zone_name',
+			key    : 'zoneName',
 			label  : 'Zone name',
 			span   : 0.8,
-			render : (item) => {
+			render : (item) => (
 				<div>
 					{item?.zoneName}
-				</div>;
-			},
+				</div>
+			),
 		},
 		{
-			key    : 'commodity_type',
+			key    : 'commodityType',
 			label  : 'Commodity Type',
 			span   : 1.2,
-			render : (item) => {
+			render : (item) => (
 				<div>
 					{item?.commodityType}
-				</div>;
-			},
+				</div>
+			),
 		},
 		{
-			key    : 'aisle_types',
+			key    : 'aislesCount',
 			label  : 'No. of Aisle Type',
 			span   : 1,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{item?.aisles?.aislesCount}
-				</div>;
-			},
+					{item?.aisles[GLOBAL_CONSTANTS.zeroth_index]?.aislesCount}
+				</div>
+			),
 		},
 		{
-			key    : 'racks',
+			key    : 'racksCount',
 			label  : 'No. of Racks',
 			span   : 1.5,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{item?.aisles?.racksCount}
-				</div>;
-			},
+					{item?.aisles[GLOBAL_CONSTANTS.zeroth_index]?.racksCount}
+				</div>
+			),
 		},
 		{
-			key    : 'shelf',
+			key    : 'shelvesCount',
 			label  : 'No. of Shelf in Rack',
 			span   : 1.5,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{item?.aisles?.shelvesCount}
-				</div>;
-			},
+					{item?.aisles[GLOBAL_CONSTANTS.zeroth_index]?.shelvesCount}
+				</div>
+			),
 		},
 		{
-			key    : 'number_by_bin_size',
+			key    : 'binDimensions',
 			label  : 'Number / size of bin',
 			span   : 1,
-			render : (item) => {
+			render : (item) => (
 				<div>
-					{`x${item.totalBinsInShelf} (${item.binLength} x ${item.binWidth} x ${item.binHeight})`}
-				</div>;
-			},
+					{`x${item.aisles[GLOBAL_CONSTANTS.zeroth_index].totalBinsInShelf} 
+					(${item.aisles[GLOBAL_CONSTANTS.zeroth_index].binLength} 
+						x ${item.aisles[GLOBAL_CONSTANTS.zeroth_index].binWidth} x 
+						${item.aisles[GLOBAL_CONSTANTS.zeroth_index].binHeight})`}
+				</div>
+			),
 		},
 		{
 			key   : 'delete',
