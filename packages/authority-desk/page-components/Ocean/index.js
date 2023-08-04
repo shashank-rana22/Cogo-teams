@@ -9,11 +9,14 @@ import useListAuthorityDeskShipments from '../../hooks/useListAuthorityDeskShipm
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
 import Filters from './Filters';
+import GoToKamDesk from './GoToKamDesk';
 import List from './List';
 import styles from './styles.module.css';
 
-const services = { fcl_freight: 'FCL Freight', lcl_freight: 'LCL Freight', fcl_local: 'FCL Locals' };
-const roleName = {
+const DEFAULT_COUNT = 0;
+
+const SERVICES = { fcl_freight: 'FCL Freight', lcl_freight: 'LCL Freight', fcl_local: 'FCL Locals' };
+const ROLE_NAME = {
 	kam            : 'KAM',
 	so2            : 'SO2',
 	credit_control : '',
@@ -48,7 +51,11 @@ function Ocean() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>{`${roleName[role]} Authority Desk`}</div>
+			<div className={styles.header}>
+				<div className={styles.heading}>{`${ROLE_NAME[role]} Authority Desk`}</div>
+				{role === 'kam'
+				&& <GoToKamDesk />}
+			</div>
 
 			<Tabs
 				activeTab={tabsState.activeTab}
@@ -73,7 +80,7 @@ function Ocean() {
 
 			<div className={styles.second_stepper}>
 				<div className={styles.service_tabs}>
-					{Object.keys(services).map((item) => (
+					{Object.keys(SERVICES).map((item) => (
 						<ClickableDiv
 							key={item}
 							onClick={() => {
@@ -83,7 +90,7 @@ function Ocean() {
 							className={cl`${tabsState.service === item ? styles.active : ''}
 							${styles.service_tab}`}
 						>
-							{services[item]}
+							{SERVICES[item]}
 						</ClickableDiv>
 					))}
 				</div>
@@ -126,7 +133,7 @@ function Ocean() {
 								<span className={`cl${tabsState.bucket === item ? styles.active : ''} 
 										${styles.count}`}
 								>
-									{item.count || 0}
+									{item.count || DEFAULT_COUNT}
 								</span>
 							</ClickableDiv>
 						)
