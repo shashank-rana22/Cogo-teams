@@ -1,24 +1,24 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, cl } from '@cogoport/components';
 import { DatepickerController } from '@cogoport/forms';
 
 import useEditServiceSchedule from '../hooks/useEditServiceSchedule';
 
 import styles from './styles.module.css';
 
-function FormItem({ finalControl = {}, control, errors = {} }) {
-	const { name, label, lowerlabel, ...rest } = finalControl || {};
+function FormItem({ finalControl = {}, control = {}, errors = {} }) {
+	const { name, label, lowerLabel, ...rest } = finalControl || {};
 
 	const { message: errorMessage } = errors[name] || {};
 
-	const { required } = finalControl.rules || {};
+	const { required: { value } = {} } = finalControl.rules || {};
 
 	return (
 		<div className={styles.form_item}>
-			<div className={`${styles.label} ${required ? styles.required : ''}`}>
+			<div className={cl`${styles.label} ${value ? styles.required : ''}`}>
 				{label}
 			</div>
 
-			{lowerlabel ? <div className={styles.lower_label}>{lowerlabel}</div> : null}
+			{lowerLabel ? <div className={styles.lower_label}>{lowerLabel}</div> : null}
 
 			<DatepickerController name={name} control={control} {...rest} />
 
@@ -31,7 +31,11 @@ function FormItem({ finalControl = {}, control, errors = {} }) {
 	);
 }
 
-export default function EditSchedule({ setShow = () => {}, timelineData = [] }) {
+function EditSchedule({
+	setShow = () => {},
+	timelineData = [],
+	defaultEditable = false,
+}) {
 	const {
 		loading,
 		updateData,
@@ -39,7 +43,7 @@ export default function EditSchedule({ setShow = () => {}, timelineData = [] }) 
 		formSubmit,
 		errors,
 		control,
-	} = useEditServiceSchedule({ setShow, timelineData });
+	} = useEditServiceSchedule({ setShow, timelineData, defaultEditable });
 
 	const closeModal = () => setShow(false);
 
@@ -76,8 +80,10 @@ export default function EditSchedule({ setShow = () => {}, timelineData = [] }) 
 					Cancel
 				</Button>
 
-				<Button disabled={loading} onClick={formSubmit(updateData)}>Save</Button>
+				<Button disabled={loading} loading={loading} onClick={formSubmit(updateData)}>Save</Button>
 			</Modal.Footer>
 		</Modal>
 	);
 }
+
+export default EditSchedule;
