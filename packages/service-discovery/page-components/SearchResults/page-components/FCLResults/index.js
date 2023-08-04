@@ -37,6 +37,14 @@ function FCLResults({
 	setInfoBanner = () => {},
 	isGuideViewed = false,
 }) {
+	const { cogoAssuredRates, marketplaceRates } = rates.reduce((acc, rate) => {
+		if (rate.source === 'cogo_assured_rate') {
+			return { ...acc, cogoAssuredRates: [...acc.cogoAssuredRates, rate] };
+		}
+
+		return { ...acc, marketplaceRates: [...acc.marketplaceRates, rate] };
+	}, { cogoAssuredRates: [], marketplaceRates: [] });
+
 	const SCREEN_PROPS_MAPPING = {
 		listRateCard: {
 			rates,
@@ -57,6 +65,8 @@ function FCLResults({
 			infoBanner,
 			setInfoBanner,
 			isGuideViewed,
+			cogoAssuredRates,
+			marketplaceRates,
 		},
 		comparison: {
 			detail,
@@ -69,6 +79,7 @@ function FCLResults({
 			setHeaderProps,
 			screen,
 			setScreen,
+			cogoAssuredRates,
 		},
 	};
 

@@ -51,6 +51,7 @@ function SelectedRateCard({
 	loading = false,
 	setScreen = () => {},
 	setHeaderProps = () => {},
+	cogoAssuredRates = [],
 }) {
 	const [cargoModal, setCargoModal] = useState('pending'); // pending,progress,success
 
@@ -78,8 +79,8 @@ function SelectedRateCard({
 	};
 
 	useEffect(() => {
-		setShowShippingLineModal(source !== 'cogo_assured_rate');
-	}, [source]);
+		setShowShippingLineModal(source !== 'cogo_assured_rate' && !isEmpty(cogoAssuredRates));
+	}, [cogoAssuredRates, source]);
 
 	if (loading && isEmpty(data)) {
 		return (
@@ -184,6 +185,8 @@ function SelectedRateCard({
 					shipping_line={shipping_line}
 					show={showShippingLineModal}
 					setShow={setShowShippingLineModal}
+					cogoAssuredRates={cogoAssuredRates}
+					detail={detail}
 				/>
 			) : null}
 		</div>

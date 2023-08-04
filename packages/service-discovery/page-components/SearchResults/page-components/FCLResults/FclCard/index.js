@@ -1,16 +1,21 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import FreightPriceDetail from './BasicFreightDetail';
+import FreightPriceDetail from '../../../common/BasicFreightDetail';
+
 import DetailFooter from './DetailFooter';
 import QuotationDetails from './QuotationDetails';
 import RateCardTop from './RateCardTop';
 import Route from './Route';
 import SailingWeek from './SailingWeek';
 import styles from './styles.module.css';
+
+const ZERO = 0;
+const ONE = 1;
+const TWO = 2;
 
 function RateCardTopSection({
 	rateCardData = {},
@@ -60,9 +65,9 @@ function MiddleSection({
 	isMultiContainer = false,
 	setScreen = () => {},
 }) {
-	const firstTwoRates = primaryServiceRates.slice(0, 2);
+	const firstTwoRates = primaryServiceRates.slice(ZERO, TWO);
 
-	const remainingRates = primaryServiceRates.slice(2);
+	const remainingRates = primaryServiceRates.slice(TWO);
 
 	return (
 		<div className={styles.middle}>
@@ -110,7 +115,7 @@ function MiddleSection({
 				</div>
 
 				<div>
-					<div className={`${styles.freight_text} ${styles.total}`}>Total Freight Price</div>
+					<div className={cl`${styles.freight_text} ${styles.total}`}>Total Freight Price</div>
 					<FreightPriceDetail
 						container_size={firstTwoRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_size}
 						container_type={firstTwoRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_type}
@@ -186,7 +191,7 @@ function FclCard({
 
 	const serviceRateswithId = Object.keys(service_rates).map((service_id) => {
 		const service = service_rates[service_id];
-		return { ...service, service_id };
+		return { ...service, service_id, ...detail?.service_details?.[service_id] };
 	});
 
 	const primaryServiceRates = serviceRateswithId.filter(
@@ -212,7 +217,7 @@ function FclCard({
 
 	const isCogoAssured = rateCardData.source === 'cogo_assured_rate';
 
-	const isMultiContainer = primaryServiceRates.length > 1;
+	const isMultiContainer = primaryServiceRates.length > ONE;
 
 	return (
 		<div

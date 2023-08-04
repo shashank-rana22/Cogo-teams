@@ -26,7 +26,7 @@ function FreightPriceDetail({
 			</div>
 
 			<div className={styles.amount}>
-				{`${formatAmount({
+				{formatAmount({
 					amount   : price || ZERO,
 					currency : price_currency,
 					options  : {
@@ -34,7 +34,7 @@ function FreightPriceDetail({
 						currencyDisplay       : 'symbol',
 						maximumFractionDigits : 0,
 					},
-				})}`}
+				})}
 				{!totalPrice ? (
 					<div className={styles.container_details}>
 						Per ctr.

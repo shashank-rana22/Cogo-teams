@@ -1,4 +1,4 @@
-import { RadioGroup } from '@cogoport/components';
+import { RadioGroup, cl } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -7,9 +7,10 @@ function SailingWeek({
 	cogoAssuredOptions = [],
 	onChange = () => {},
 	selectedCogoAssuredCard = {},
+	source = '',
 }) {
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${source !== 'banner' && styles.rate_card}`}>
 			<div className={styles.heading}>Select Sailing Week</div>
 
 			<div className={styles.radio_group}>

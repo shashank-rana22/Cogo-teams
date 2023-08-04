@@ -6,7 +6,8 @@
 }
 
 .modal_body {
-	background: #cff1f4;
+	max-height: 500px !important;
+	background: #f3fafa;
 	border-radius: 8px;
 	box-shadow: 0 8px 8px rgb(44 62 80 / 20%);
 }
@@ -43,4 +44,46 @@
 	top: -8px;
 	left: -8px;
 	cursor: pointer;
+}
+
+.option_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.sailing_week {
+	margin-bottom: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: rgb(44 62 80);
+}
+
+.freight_price {
+	font-size: 12px;
+	line-height: 12px;
+	color: rgb(44 62 80);
+}
+
+.rate_details {
+	display: flex;
+	padding: 8px 20px;
+}
+
+.cogo_assured {
+	margin: 4px 0;
+	background: #fefdff;
+	border-radius: 8px;
+}
+
+.text {
+	margin-top: 16px;
+	font-size: 12px;
+	color: #ee3425;
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+	margin-bottom: -6px;
 }

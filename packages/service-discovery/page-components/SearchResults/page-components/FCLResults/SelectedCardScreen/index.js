@@ -13,6 +13,7 @@ const SelectedRateCard = dynamic(() => import('./SelectedRateCard'), {
 function SelectedCardScreen({
 	setHeaderProps = () => {},
 	headerProps = {},
+	cogoAssuredRates = [],
 }) {
 	const [screen, setScreen] = useState('selectedCard');
 
@@ -32,6 +33,7 @@ function SelectedCardScreen({
 				setScreen,
 				setHeaderProps,
 				headerProps,
+				cogoAssuredRates,
 			},
 		},
 		bookCheckout: {

@@ -114,6 +114,8 @@ function ListRateCards({
 	infoBanner = {},
 	setInfoBanner = () => {},
 	isGuideViewed = false,
+	cogoAssuredRates = [],
+	marketplaceRates = [],
 }) {
 	const PrimaryService = detail?.search_type;
 
@@ -124,14 +126,6 @@ function ListRateCards({
 	const { current = '' } = infoBanner;
 
 	const show_dim_bg = current === 'comparision_button' && rates.length > ONE;
-
-	const { cogoAssuredRates, marketplaceRates } = rates.reduce((acc, rate) => {
-		if (rate.source === 'cogo_assured_rate') {
-			return { ...acc, cogoAssuredRates: [...acc.cogoAssuredRates, rate] };
-		}
-
-		return { ...acc, marketplaceRates: [...acc.marketplaceRates, rate] };
-	}, { cogoAssuredRates: [], marketplaceRates: [] });
 
 	return (
 		<div className={cl`${styles.container} ${show_dim_bg && styles.dim_bg}`}>
