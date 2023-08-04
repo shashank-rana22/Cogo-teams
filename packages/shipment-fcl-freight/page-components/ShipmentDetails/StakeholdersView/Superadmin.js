@@ -117,7 +117,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 							</TabPanel>
 
 							<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-								<PurchaseInvoice />
+								<PurchaseInvoice activeTab={activeTab} />
 							</TabPanel>
 
 							<TabPanel name="documents" title="Documents">
