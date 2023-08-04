@@ -49,7 +49,7 @@ function SelfAndTradePartyForm({
 		setValue,
 	} = useForm();
 
-	const { trade_party_id, address, name } = watch() || {};
+	const { trade_party_id, address, name } = watch();
 
 	const firstTradeParty = list?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
