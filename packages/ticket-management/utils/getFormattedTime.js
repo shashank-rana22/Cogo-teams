@@ -10,7 +10,7 @@ const getFormattedTime = (totalSeconds) => {
 
 	const time = { days, hours, minutes, seconds };
 
-	return { time };
+	return time;
 };
 
 export default getFormattedTime;

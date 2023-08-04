@@ -24,7 +24,7 @@ const TIME_MAPPING = [
 ];
 
 function DisplayTime({ sec = 0 }) {
-	const { time } = getFormattedTime(sec);
+	const time = getFormattedTime(sec);
 
 	if (!sec) { return sec; }
 
