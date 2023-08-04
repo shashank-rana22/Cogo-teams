@@ -145,6 +145,16 @@ function useVideoCallFirebase({
 				});
 				handleCallEnd({ callActivity: 'answered', description: 'peer js technical error' });
 			});
+			peer.on('close', () => {
+				handleCallEnd();
+				callUpdate({
+					data: {
+						call_status: 'call_end',
+					},
+					callingRoomId,
+					firestore,
+				});
+			});
 		} catch (err) {
 			console.error('my user stream error', err);
 			callUpdate({

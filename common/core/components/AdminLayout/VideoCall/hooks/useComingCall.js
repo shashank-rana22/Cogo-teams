@@ -100,6 +100,16 @@ function useComingCall({
 				});
 				handleCallEnd({ callActivity: 'answered', description: 'peer js technical error' });
 			});
+			peer.on('close', () => {
+				handleCallEnd();
+				callUpdate({
+					data: {
+						call_status: 'call_end',
+					},
+					callingRoomId,
+					firestore,
+				});
+			});
 		} catch (error) {
 			console.error('user stream is not working', error);
 
