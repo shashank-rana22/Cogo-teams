@@ -20,7 +20,7 @@ export default function useListIGMDeskShipments() {
 		partner_id: general?.query?.partner_id,
 	}));
 
-	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
+	const { authParams = {}, selected_agent_id = '' } = useSelector(({ profile }) => profile) || {};
 
 	const { filters, setFilters, tabState } = useContext(IGMDeskContext) || {};
 	const [data, setData] = useState(EMPTY_DATA);

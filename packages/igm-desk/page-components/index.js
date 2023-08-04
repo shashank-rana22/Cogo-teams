@@ -11,14 +11,14 @@ const ResolveIgmDesk = {
 export default function IGMDesk() {
 	const [filters, setFilters] = useState(null);
 	const [tabState, setTabState] = useState(null);
-	const [scopeFilters, setScopeFilters] = useState(null);
+	const [scopeFilters, setScopeFilters] = useState({});
 
 	useEffect(() => {
 		const defaultValues = getValidatedStoredValues();
 
 		setScopeFilters(defaultValues?.scopeFilters);
-		setFilters(defaultValues.filters);
-		setTabState(defaultValues.tabState);
+		setFilters(defaultValues?.filters);
+		setTabState(defaultValues?.tabState);
 	}, []);
 
 	const contextValues = useMemo(() => ({
