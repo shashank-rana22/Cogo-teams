@@ -1,7 +1,7 @@
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
 
-export function canEditSchedule({ primary_service, activeStakeholder }) {
-	const { state = '' } = primary_service;
+export function canEditSchedule({ primary_service = {}, activeStakeholder = '' }) {
+	const { state = '' } = primary_service || {};
 
 	const stateCheck = TIMELINE_EDITABLE.primary_service.state
 		.includes(state);
