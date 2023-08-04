@@ -94,3 +94,23 @@
 		cursor: pointer;
 	}
 }
+
+.legend {
+	position: absolute;
+	bottom: 8px;
+	left: 8px;
+	z-index: 1000;
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: space-between;
+	width: 18px;
+	height: 180px;
+	background: linear-gradient(to top, #e4f4ac, #9ed688, #7ec87b, #45a95d, #076536);
+	border-radius: 2px;
+
+	p {
+		margin: 0 0 0 28px;
+		font-size: 12px;
+		color: #333;
+	}
+}
