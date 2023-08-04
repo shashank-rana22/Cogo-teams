@@ -60,6 +60,7 @@ function AccuracyDashboard() {
 				globalFilters={globalFilters}
 				setGlobalFilters={setGlobalFilters}
 				backView={backView}
+				key={heading}
 			/>
 		</div>
 	);
