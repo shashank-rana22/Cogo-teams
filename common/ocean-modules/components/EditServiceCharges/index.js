@@ -77,15 +77,11 @@ function EditServiceCharges(props) {
 	}
 
 	return (
-		<div>
-			{!loading ? (
-				<EditLineItems
-					{...props}
-					controls={finalControls}
-					customValues={customValues}
-				/>
-			) : null}
-		</div>
+		<EditLineItems
+			{...props}
+			controls={finalControls}
+			customValues={customValues}
+		/>
 	);
 }
 

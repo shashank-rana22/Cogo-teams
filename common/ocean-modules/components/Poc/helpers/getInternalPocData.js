@@ -12,7 +12,9 @@ const getInternalPocData = (data = []) => {
 
 	data.forEach((item) => {
 		if (item?.service_type) {
-			if (!Object.keys(format_data)?.includes(getNewServiceType(item))) {
+			const modifiedServiceType = getNewServiceType(item);
+
+			if (!(modifiedServiceType in format_data)) {
 				if (item?.trade_type === 'import') {
 					format_data[`destination_${item.service_type}`] = [item];
 				} else if (item?.trade_type === 'export') {
@@ -21,7 +23,7 @@ const getInternalPocData = (data = []) => {
 					format_data[item.service_type] = [item];
 				}
 			} else {
-				format_data[getNewServiceType(item)]?.push(item);
+				format_data[modifiedServiceType]?.push(item);
 			}
 		} else {
 			format_data.shipment.push(item);
