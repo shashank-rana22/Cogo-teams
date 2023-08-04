@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { CheckboxGroupController, TextAreaController, useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 
 import useUpdateShipmentBlDoDetails from '../../../../../hooks/useUpdateShipmentBlDoDetails';
 
@@ -45,7 +46,7 @@ function RequestModal({ closeModal = () => {}, data = {}, refetch = () => {}, ta
 
 			<Modal.Body>
 				<div className={styles.form}>
-					{blOptions.length ? (
+					{isEmpty(blOptions) ? (
 						<div className={styles.no_data_warning}>
 							No document has been uploaded!
 						</div>

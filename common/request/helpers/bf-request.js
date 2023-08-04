@@ -19,16 +19,11 @@ const decodedCustomSerializer = (params) => {
 const bfRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL });
 
 bfRequest.interceptors.request.use((oldConfig) => {
-	const newConfig = oldConfig;
-
-	if (newConfig.url === 'saas/hs-code/list') {
-		newConfig.baseURL = 'https://api.stage.cogoport.io';
-	}
-	const { authKey = '', authkey = '', ...axiosConfig } = newConfig;
+	const { authKey = '', authkey = '', ...axiosConfig } = oldConfig;
 
 	const auth = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME;
 
-	const token = getCookie(auth, newConfig.ctx);
+	const token = getCookie(auth, oldConfig.ctx);
 	const authorizationparameters = getAuthorizationParams(store, (authKey || authkey));
 
 	return {
