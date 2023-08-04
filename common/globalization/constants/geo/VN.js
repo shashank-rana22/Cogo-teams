@@ -111,6 +111,12 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
+			'69013c68-2d1b-4332-91fb-ada1a6471240', // business consultant
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5',
+			'5f79d531-50e0-4843-995f-71057e659e0f',
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',
+			'264a83ab-d438-48c3-8095-bb503f5b619c',
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
