@@ -41,7 +41,7 @@ export default function Card({
 	if (
 		['under_collection', 'collected', 'knockoff_pending', 'collection_pending'].includes(stateProps.inner_tab)
 	) {
-		restFilters.task = TASK_FILTER[stateProps.inner_tab][stateProps.activeTab][item?.trade_type];
+		restFilters.task = TASK_FILTER?.[stateProps.inner_tab]?.[stateProps.activeTab]?.[item?.trade_type];
 	}
 
 	const {

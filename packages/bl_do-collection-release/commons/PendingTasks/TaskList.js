@@ -1,5 +1,5 @@
 import { Loader } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../EmptyState';
@@ -27,7 +27,7 @@ function PendingTasks({
 		);
 	}
 
-	if (taskList.length === GLOBAL_CONSTANTS.zeroth_index) {
+	if (isEmpty(taskList)) {
 		return (
 			<div>
 				<EmptyState

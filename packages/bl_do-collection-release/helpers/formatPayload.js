@@ -120,7 +120,7 @@ export default function getFormattedPayload({
 
 	const invoicesToBeKnockedOffInBL = Array.from(
 		new Set(
-			invoice_data
+			(invoice_data || [])
 				.filter((invoice) => (invoice?.services || []).some((service) => (
 					(service?.service_type === 'fcl_freight_service' && activeTab === 'bl')
 		|| service?.trade_type === 'export'
@@ -131,7 +131,7 @@ export default function getFormattedPayload({
 
 	const invoicesToBeKnockedOffInDO = Array.from(
 		new Set(
-			invoice_data
+			(invoice_data || [])
 				.filter((invoice) => (invoice?.services || []).some((service) => (
 					(service?.service_type === 'fcl_freight_service' && activeTab === 'do')
 				|| service?.trade_type === 'import'

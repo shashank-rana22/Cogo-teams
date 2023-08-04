@@ -95,7 +95,7 @@ const injectValues = ({
 					|| shipment_data.local_service?.port?.name;
 			} else if (control.name === 'shipping_line') {
 				controls[index].value =	shipment_data?.freight_service?.shipping_line?.business_name
-				|| shipment_data?.local_service?.shipping_line?.business_nam;
+				|| shipment_data?.local_service?.shipping_line?.business_name;
 			}
 		});
 	}
