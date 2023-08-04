@@ -183,7 +183,7 @@ function AgentDetails({
 					</div>
 				)}
 			</div>
-			<Profile loading={loading} name={name} userEmail={userEmail} />
+			<Profile loading={loading} name={name} userEmail={userEmail || userData?.email} />
 			{(leadUserId || userId) && (
 				<div className={styles.verification_pills}>
 					{VERIFICATION_STATUS.map((item, index) => {
