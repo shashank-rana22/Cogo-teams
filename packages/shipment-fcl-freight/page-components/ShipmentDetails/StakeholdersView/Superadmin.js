@@ -76,7 +76,10 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 								size="md"
 								onLabel="Old"
 								offLabel="New"
-								onChange={() => handleVersionChange(router?.query?.partner_id, shipment_data?.id)}
+								onChange={() => handleVersionChange({
+									partner_id: router?.query?.partner_id,
+									shipment_id: shipment_data?.id,
+								})}
 							/>
 							<ShipmentChat />
 						</div>
