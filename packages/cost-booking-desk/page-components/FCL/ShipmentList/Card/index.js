@@ -110,7 +110,7 @@ function Card({ item = {} }) {
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',
 						separator  : ', ',
-					})}
+					}) || 'NA'}
 				</div>
 			) : null}
 		</a>
