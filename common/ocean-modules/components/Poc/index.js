@@ -27,11 +27,11 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 	const [addPoc, setAddPoc] = useState(null);
 
 	const rolesPermission = roleBasedView[activeStakeholder] || {};
-	const rolesViewPermission = rolesPermission.can_view || [];
+	const rolesViewPermission = rolesPermission?.can_view || [];
 
 	const {
 		data,
-		apiTrigger:tradePartnerTrigger,
+		apiTrigger:tradePartnerTrigger = () => {},
 		loading,
 	} = useListShipmentTradePartners({ shipment_id });
 
@@ -42,7 +42,8 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 		shipment_id,
 	});
 
-	const checkForStakeholders = activeStakeholder === 'booking_agent' || activeStakeholder === 'sales_agent';
+	const checkForStakeholders = ['booking_agent',
+		'sales_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
 
 	const serviceProviders = getServiceProviderData(servicesList);
 
