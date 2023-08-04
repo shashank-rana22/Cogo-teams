@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -9,7 +11,11 @@ const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 	const { startDate, endDate } = date || {};
 	const { businessName, organizationId } = item;
 
-	const convertDate = (dateToConvert) => dateToConvert?.toISOString()?.replace('T', ' ');
+	const convertDate = (dateToConvert) => formatDate({
+		date       : dateToConvert,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		formatType : 'date',
+	});
 
 	const [
 		{ data, loading },
