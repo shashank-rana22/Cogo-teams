@@ -130,7 +130,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			disabled: !isEditable,
 		},
 		{
-			name        : 'payroll_country',
+			name        : 'payroll_country_id',
 			label       : 'Select Payroll Country',
 			controlType : 'asyncSelect',
 			placeholder : 'Select Payroll Country',
