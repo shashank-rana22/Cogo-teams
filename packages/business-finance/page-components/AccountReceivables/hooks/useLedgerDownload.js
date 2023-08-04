@@ -42,7 +42,7 @@ const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 				},
 			});
 			const { data: downloadUrl } = response || {};
-			window.open(downloadUrl);
+			window.open(String(downloadUrl));
 			setShowLedgerModal(false);
 		} catch (err) {
 			toastApiError(err);
