@@ -1,4 +1,4 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo/index';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
@@ -16,8 +16,7 @@ const useGetShipmentList = ({
 	customDate = new Date(),
 	tableFilters,
 }) => {
-	const geo = getGeoConstants();
-	const DEFAULT_CURRENCY = geo?.country.currency.code;
+	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity].currency;
 
 	const [
 		{ data: serviceLevelData, loading: serviceLevelLoading },
@@ -34,14 +33,14 @@ const useGetShipmentList = ({
 	const { pageIndex, serviceLevel:serviceLevelFilter } = tableFilters;
 
 	const getShipmentList = useCallback((serviceLevel) => {
-		const { currency, channel, service, serviceCategory, segment } = filter;
+		const { channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
 		const { startDate: customStartDate, endDate: customEndDate } = customDate || {};
 
 		const params = {
 			statsType,
 			entityCode    : entity,
-			currency      : currency || DEFAULT_CURRENCY,
+			currency      : DEFAULT_CURRENCY,
 			startDate     : timeRange === 'custom' ? getFormattedDate(customStartDate) : startDate,
 			endDate       : timeRange === 'custom' ? getFormattedDate(customEndDate) : endDate,
 			serviceLevel  : serviceLevel || serviceLevelFilter || activeBar || 'OVERALL',

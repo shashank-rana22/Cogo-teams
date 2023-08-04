@@ -1,4 +1,4 @@
-import { Button, Pill, RadioGroup, TabPanel, Tabs } from '@cogoport/components';
+import { Button, Pill, Radio, RadioGroup, TabPanel, Tabs } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -26,17 +26,12 @@ const CHANNEL_OPTIONS = [
 	{ label: 'Others', value: 'others' },
 ];
 
-const CURRENCY_OPTIONS = Object.values(GLOBAL_CONSTANTS.currency_code).map((item) => (
-	{
-		label : item,
-		value : item,
-	}
-));
-
 function RenderFilters({
-	filter = {}, setFilter = () => {},
+	filter = {}, setFilter = () => {}, entity = '',
 }) {
 	const [activeFilter, setActiveFilter] = useState('currency');
+
+	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity].currency;
 
 	const handleReset = () => {
 		setFilter({});
@@ -70,14 +65,12 @@ function RenderFilters({
 						className={styles.tabs_container_element}
 					>
 						<TabPanel name="currency" title="Currency">
-							<RadioGroup
-								options={CURRENCY_OPTIONS}
-								onChange={(val) => setFilter((prev) => ({
-									...prev,
-									[activeFilter]: val,
-								}))}
-								value={filter[activeFilter]}
-								className={styles.radio_group_section}
+							<Radio
+								name="currency"
+								label={DEFAULT_CURRENCY}
+								disabled
+								checked
+								style={{ marginTop: '12px' }}
 							/>
 						</TabPanel>
 

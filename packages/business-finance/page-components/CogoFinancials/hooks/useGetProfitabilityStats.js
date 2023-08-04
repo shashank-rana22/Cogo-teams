@@ -1,4 +1,4 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo/index';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { isEmpty, upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
@@ -11,8 +11,7 @@ const useGetProfitabilityStats = ({
 	entity = '', timeRange = '', customDate = {},
 	filter = {}, showShipmentList = false,
 }) => {
-	const geo = getGeoConstants();
-	const DEFAULT_CURRENCY = geo?.country.currency.code;
+	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity].currency;
 
 	const [
 		{ data:ongoingData, loading:ongoingLoading },
@@ -51,7 +50,7 @@ const useGetProfitabilityStats = ({
 	);
 
 	const getProfitabilityStatsData = useCallback(() => {
-		const { currency, channel, service, serviceCategory, segment } = filter;
+		const { channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
 		const { startDate:customStartDate, endDate:customEndDate } = customDate || {};
 
@@ -59,7 +58,7 @@ const useGetProfitabilityStats = ({
 			entityCode    : entity,
 			startDate     : timeRange === 'custom' ? getFormattedDate(customStartDate) : startDate,
 			endDate       : timeRange === 'custom' ? getFormattedDate(customEndDate) : endDate,
-			currency      : currency || DEFAULT_CURRENCY,
+			currency      : DEFAULT_CURRENCY,
 			parentService : segment,
 			service       : !isEmpty(service) ? service.toUpperCase() : undefined,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
