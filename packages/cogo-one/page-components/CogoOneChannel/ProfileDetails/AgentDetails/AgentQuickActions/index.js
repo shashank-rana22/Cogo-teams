@@ -2,24 +2,27 @@ import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 
-import useVerifyOmniChannelKyc from '../../../../../hooks/useVerifyOmniChannelKyc';
+import useSubmitOmniChannelKyc from '../../../../../hooks/useSubmitOmniChannelKyc';
 
 import styles from './styles.module.css';
 
 const COUNTRY_CODE_PREFIX = '%2B';
 
 function AgentQuickActions({
-	kycStatus = '',
 	userData = {},
 	orgId = '',
 	userId = '',
 	leadUserId = '',
+	organizationData = {},
+	fetchOrganization = () => {},
 }) {
 	const { email = '', mobile_number = '', mobile_country_code = '' } = userData || {};
 
 	const { push } = useRouter();
 
-	const { verifyKyc = () => {}, loading = false } = useVerifyOmniChannelKyc();
+	const { submitKyc = () => {}, loading = false } = useSubmitOmniChannelKyc();
+
+	const { kyc_status } = organizationData || {};
 
 	const emailParams = email ? `&email=${email}` : '';
 	const countryCodeRegex = GLOBAL_CONSTANTS.regex_patterns.mobile_country_code_format;
@@ -32,10 +35,10 @@ function AgentQuickActions({
 
 		<div className={styles.main_container}>
 			{
-			userId ? (
+			orgId ? (
 
 				<div>
-					{kycStatus === 'verified' ? (
+					{kyc_status === 'verified' ? (
 						<Pill
 							size="md"
 							color="green"
@@ -47,7 +50,7 @@ function AgentQuickActions({
 						<Button
 							size="sm"
 							themeType="secondary"
-							onClick={() => verifyKyc({ orgId, userId, leadUserId })}
+							onClick={() => submitKyc({ orgId, userId, leadUserId, fetchOrganization })}
 							disabled={loading}
 						>
 							Verify KYC

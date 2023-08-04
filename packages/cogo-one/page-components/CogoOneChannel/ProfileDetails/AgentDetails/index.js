@@ -7,6 +7,7 @@ import { useState } from 'react';
 import EmptyState from '../../../../common/EmptyState';
 import { getHasAccessToEditGroup, switchUserChats } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
+import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetUser from '../../../../hooks/useGetUser';
 import useGroupChat from '../../../../hooks/useGroupChat';
 import useListPartnerUsers from '../../../../hooks/useListPartnerUsers';
@@ -66,7 +67,6 @@ function AgentDetails({
 		channel_type = '',
 		user_type,
 		id = '',
-		kyc_status = '',
 		lead_user_details = {},
 		user_details = {},
 	} = formattedMessageData || {};
@@ -120,6 +120,11 @@ function AgentDetails({
 		sender,
 		formattedMessageData,
 		firestore,
+	});
+
+	const { organizationData = {}, fetchOrganization = () => {}, orgLoading = false } = useGetOrganization({
+		organizationId     : orgId,
+		leadOrganizationId : lead_user_details.lead_organization_id,
 	});
 
 	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
@@ -181,16 +186,17 @@ function AgentDetails({
 
 			<ContactVerification leadUserId={leadUserId} userId={userId} loading={loading} userData={userData} />
 
-			{(activeTab === 'message' && !loading)
+			{(activeTab === 'message' && !loading && !orgLoading)
 			&& (
 				<AgentQuickActions
 					userEmail={userEmail}
 					userId={user_id}
 					leadUserId={lead_user_id}
 					orgId={orgId}
-					kycStatus={kyc_status}
 					mobileNumber={mobile_number}
 					userData={userData}
+					organizationData={organizationData}
+					fetchOrganization={fetchOrganization}
 				/>
 			)}
 

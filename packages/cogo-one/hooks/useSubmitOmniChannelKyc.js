@@ -7,23 +7,24 @@ const getPayload = ({ organization_id = '', user_id = '', lead_user_id = '' }) =
 	lead_user_id : lead_user_id || undefined,
 });
 
-const useVerifyOmniChannelKyc = () => {
+const useSubmitOmniChannelKyc = () => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/verify_omnichannel_kyc',
+		url    : '/submit_omnichannel_kyc',
 		method : 'post',
 	}, { manual: true });
 
-	const verifyKyc = ({ orgId, userId, leadUserId }) => {
+	const submitKyc = ({ orgId = '', userId = '', leadUserId = '', fetchOrganization = () => {} }) => {
 		try {
 			trigger({
 				data: getPayload({ organization_id: orgId, user_id: userId, lead_user_id: leadUserId }),
 			});
+			fetchOrganization();
 		} catch (error) {
 			Toast.error(error.message);
 		}
 	};
 
-	return { loading, verifyKyc, data };
+	return { loading, submitKyc, data };
 };
 
-export default useVerifyOmniChannelKyc;
+export default useSubmitOmniChannelKyc;
