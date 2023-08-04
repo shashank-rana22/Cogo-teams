@@ -319,11 +319,14 @@ const GLOBAL_CONSTANTS = {
 		quick_actions        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg',
 		customer_insights    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer-insight.svg',
 		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
-		clock_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
-		sad_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
-		sign_up_failed       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
-		kyc_event            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc_event.png',
-		default_event        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
+		clock_icon:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
+		sad_icon                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
+		sign_up_failed          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
+		kyc_event               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc_event.png',
+		default_event           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
+		password_validator_tick : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick.svg',
+		password_validator_dot  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dot.svg',
 	},
 
 	video_call_ring_tone_url:
