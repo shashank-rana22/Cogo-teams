@@ -104,10 +104,14 @@ function FilterLocation({ filters, setFilters }) {
 				<div>
 					<img src={IMG_SRC} alt="img" height="20px" width="20px" />
 				</div>
-				<div className={styles.dashed_line} />
-				<div style={{ marginTop: '5px' }}>
-					<IcALocationwhite width="20" height="20" />
-				</div>
+				{locationData?.destination_placeholder && (
+					<div>
+						<div className={styles.dashed_line} />
+						<div style={{ marginTop: '5px' }}>
+							<IcALocationwhite width="20" height="20" />
+						</div>
+					</div>
+				)}
 			</div>
 			<div className={styles.select_conatiner}>
 				<div className={styles.origin}>
