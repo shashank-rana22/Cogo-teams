@@ -1123,6 +1123,17 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
+	employee_directory: {
+		key           : 'employee_directory',
+		title         : 'Employee Directory',
+		href          : '/v2/employee-directory',
+		as            : '/v2/employee-directory',
+		type          : 'link',
+		icon          : IcMDashboard,
+		possible_apis : apis.employee_directory_hrms,
+		main_apis     : [],
+		module_type   : 'dashboards',
+	},
 	lens: {
 		key           : 'lens',
 		title         : 'Lens',

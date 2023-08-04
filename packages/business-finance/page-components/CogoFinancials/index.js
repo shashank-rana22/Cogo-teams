@@ -116,6 +116,7 @@ function CogoFinancials() {
 					<MultipleFilters
 						filter={filter}
 						setFilter={setFilter}
+						entity={entity}
 					/>
 					<Select
 						value={entity}
