@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { CheckboxGroupController, TextAreaController, useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useUpdateShipmentBlDoDetails from '../../../../../../../hooks/useUpdateShipmentBlDoDetails';
@@ -17,22 +18,19 @@ function Form({
 	refetch = () => {},
 	activeTab = '',
 }) {
-	const docOptions = () => {
-		if (surrender) {
-			const docsToSurrender = blData.filter(
-				(item) => [
-					'draft_bill_of_lading',
-					'bill_of_lading',
-					'draft_house_bill_of_lading',
-					'house_bill_of_lading',
-				].includes(item?.document_type)
-					&& item?.status === 'approved',
-			);
-			return docsToSurrender;
-		}
+	let docOptions = blData || [];
 
-		return blData;
-	};
+	if (surrender) {
+		docOptions = docOptions.filter(
+			(item) => [
+				'draft_bill_of_lading',
+				'bill_of_lading',
+				'draft_house_bill_of_lading',
+				'house_bill_of_lading',
+			].includes(item?.document_type)
+				&& item?.status === 'approved',
+		);
+	}
 
 	const {
 		formState: { errors },
@@ -86,7 +84,7 @@ function Form({
 
 			<Modal.Body>
 				<div className={styles.form}>
-					{!(docOptions()).length ? (
+					{isEmpty(docOptions) ? (
 						<div className={styles.no_data_warning}>
 							No document has been uploaded!
 						</div>
@@ -97,7 +95,7 @@ function Form({
 							name="ids"
 							control={control}
 							size="md"
-							options={docOptions()}
+							options={docOptions}
 							className={styles.checkbox_controller}
 							rules={{ required: 'This field is required' }}
 						/>

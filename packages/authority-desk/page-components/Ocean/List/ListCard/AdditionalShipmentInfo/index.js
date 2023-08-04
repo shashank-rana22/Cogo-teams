@@ -10,79 +10,67 @@ import OrgShipments from './OrgShipments';
 import ShipmentInvoices from './ShipmentInvoices';
 import styles from './styles.module.css';
 
+function formatAmountHelper({ amount = '', currency = '' }) {
+	return formatAmount({
+		amount,
+		currency,
+		options: {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 2,
+		},
+	});
+}
+
 function AdditionalShipmentInfo({ item = {}, filters = {}, setFilters = () => {} }) {
 	const [toggleVal, setToggleVal] = useState({});
 	const [selectedTradeParty, setSelectedTradeParty] = useState({});
 
 	const tradePartyDetails = item?.invoice_status?.invoice_total;
+	const currency = item?.currency;
+
+	const toggleMoreInfo = (currentTradeParty) => {
+		setSelectedTradeParty((prev) => ({
+			...prev,
+			[currentTradeParty]: !selectedTradeParty?.[currentTradeParty],
+		}));
+	};
 
 	return isEmpty(tradePartyDetails) ? <EmptyState />
-		: (tradePartyDetails || []).map((tradeParty) => (
-			<div className={styles.container} key={tradeParty?.tax_number}>
-				<div className={styles.header}>
-					<div className={styles.customer}>
-						Customer:
-						{' '}
-						{tradeParty?.business_name}
-					</div>
+		: (tradePartyDetails || []).map((tradeParty) => {
+			const { tax_number, business_name, total, organization_trade_party_id } = tradeParty || {};
 
-					<div>
-						Total Customer Outstanding of shipment:
-						{' '}
-						{formatAmount({
-							amount   : tradeParty?.total,
-							currency : item?.currency,
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-								maximumFractionDigits : 2,
-							},
-						})}
+			return (
+				<div className={styles.container} key={tax_number}>
+					<div className={styles.header}>
+						<div className={styles.customer}>
+							Customer:
+							{' '}
+							{business_name}
+						</div>
 
-					</div>
-					<div>
-						Total Outstanding of customer:
-						{' '}
-						{formatAmount({
-							amount: item?.invoice_status
-								?.outstanding_amount,
-							currency : item?.currency,
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-								maximumFractionDigits : 2,
-							},
-						})}
-					</div>
-					<div className={styles.more_info}>
-						{ !selectedTradeParty?.[tradeParty?.organization_trade_party_id]
-							? (
-								<IcMArrowRotateDown onClick={() => {
-									setSelectedTradeParty({
-										...selectedTradeParty,
-										[tradeParty?.organization_trade_party_id]:
-								!selectedTradeParty?.[tradeParty?.organization_trade_party_id],
+						<div>
+							Total Customer Outstanding of shipment:
+							{' '}
+							{formatAmountHelper({ amount: total, currency })}
+						</div>
 
-									});
-								}}
-								/>
-							)
-							: (
-								<IcMArrowRotateUp onClick={() => {
-									setSelectedTradeParty({
-										...selectedTradeParty,
-										[tradeParty?.organization_trade_party_id]:
-								!selectedTradeParty?.[tradeParty?.organization_trade_party_id],
+						<div>
+							Total Outstanding of customer:
+							{' '}
+							{formatAmountHelper({ amount: item?.invoice_status?.outstanding_amount, currency })}
+						</div>
 
-									});
-								}}
-								/>
+						<div className={styles.more_info}>
+							{!selectedTradeParty?.[organization_trade_party_id] ? (
+								<IcMArrowRotateDown onClick={() => toggleMoreInfo(organization_trade_party_id)} />
+							) : (
+								<IcMArrowRotateUp onClick={() => toggleMoreInfo(organization_trade_party_id)} />
 							)}
+						</div>
 					</div>
-				</div>
 
-				{selectedTradeParty?.[tradeParty?.organization_trade_party_id]
-					? (
+					{selectedTradeParty?.[organization_trade_party_id] ? (
 						<>
 							<Toggle
 								size="md"
@@ -90,27 +78,27 @@ function AdditionalShipmentInfo({ item = {}, filters = {}, setFilters = () => {}
 								offLabel="Invoices Related To Shipments"
 								onChange={() => setToggleVal({
 									...toggleVal,
-									[tradeParty?.organization_trade_party_id]:
-								!toggleVal?.[tradeParty?.organization_trade_party_id],
+									[organization_trade_party_id]:
+								!toggleVal?.[organization_trade_party_id],
 
 								})}
 								className={styles.toggle}
 							/>
 
-							{
-						!toggleVal?.[tradeParty?.organization_trade_party_id]
-							? <ShipmentInvoices item={item} tradeParty={tradeParty} /> : (
-								<OrgShipments
-									item={item}
-									filters={filters}
-									setFilters={setFilters}
-									tradeParty={tradeParty}
-								/>
-							)
-						}
+							{!toggleVal?.[organization_trade_party_id]
+								? <ShipmentInvoices item={item} tradeParty={tradeParty} />
+								: (
+									<OrgShipments
+										item={item}
+										filters={filters}
+										setFilters={setFilters}
+										tradeParty={tradeParty}
+									/>
+								)}
 						</>
 					) : null}
-			</div>
-		));
+				</div>
+			);
+		});
 }
 export default AdditionalShipmentInfo;
