@@ -19,8 +19,8 @@ const formatData = (data, pendingTask, services) => {
 	const modifiedSIData = (data.documents || []).map((item) => {
 		const url = typeof (item?.url) === 'string'
 			? {
-				fileName : item?.url?.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join(''),
-				finalUrl : item?.url,
+				fileName : item.url.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join(''),
+				finalUrl : item.url,
 			} : item?.url;
 
 		return {
