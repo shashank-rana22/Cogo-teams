@@ -2,6 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 import toastApiError from '../../commons/toastApiError.ts';
 
@@ -43,8 +44,9 @@ const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 			});
 
 			const { data: responseData } = response || {};
-			const downloadUrl = responseData?.toString();
-			if (downloadUrl) {
+			const downloadUrl = (responseData || '')?.toString();
+
+			if (!isEmpty(downloadUrl)) {
 				window.open(downloadUrl);
 				setShowLedgerModal(false);
 			}
