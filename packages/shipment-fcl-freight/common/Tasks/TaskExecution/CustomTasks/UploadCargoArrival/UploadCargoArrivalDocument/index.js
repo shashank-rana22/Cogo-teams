@@ -46,9 +46,8 @@ function UploadCargoArrivalDocument({
 				},
 			],
 		};
-		apiTrigger(data);
 
-		taskTrigger({ id: pendingTask?.id });
+		apiTrigger(data).then(() => taskTrigger({ id: pendingTask?.id }));
 	};
 
 	return (

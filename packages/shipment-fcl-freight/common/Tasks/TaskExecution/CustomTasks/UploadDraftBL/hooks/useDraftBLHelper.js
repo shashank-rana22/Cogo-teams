@@ -90,7 +90,7 @@ const useDraftBLHelper = ({
 				})),
 			};
 
-			const res = 	await trigger({ data: body });
+			const res = await trigger({ data: body });
 
 			if (!res?.hasError) {
 				const val = {

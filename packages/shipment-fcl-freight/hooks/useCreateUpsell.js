@@ -29,14 +29,13 @@ const useCreateUpsell = ({
 		});
 
 		try {
-			const res = await trigger({ data: { ...payload } });
-			if (!res.hasError) {
-				let newHref = `${window.location.origin}/${router?.query?.partner_id}/book/`;
-				newHref += `${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}
-				?shipment_type=${shipmentData?.shipment_type}`;
+			const res = await trigger({ data: payload });
 
-				window.location.href = newHref;
-			}
+			let newHref = `${window.location.origin}/${router?.query?.partner_id}/book/`;
+			newHref += `${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}
+			?shipment_type=${shipmentData?.shipment_type}`;
+
+			window.location.href = newHref;
 		} catch (err) {
 			toastApiError(err);
 		}

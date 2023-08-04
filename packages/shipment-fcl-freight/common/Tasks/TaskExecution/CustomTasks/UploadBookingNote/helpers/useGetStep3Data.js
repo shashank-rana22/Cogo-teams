@@ -17,7 +17,7 @@ const TRADE_MAPPING = {
 
 const HTTP_SUCCESS_CODE = 200;
 
-const useGetStep3Data = ({
+const useGetStepThreeData = ({
 	servicesList = [],
 	shipment_data = {},
 	onCancel = () => {},
@@ -29,7 +29,9 @@ const useGetStep3Data = ({
 	const SERVICE_IDS = [];
 	let trade_type;
 
-	const incoTerm = servicesList.find((serviceObj) => serviceObj.service_type === 'fcl_freight_service')?.inco_term;
+	const incoTerm = (servicesList || []).find(
+		(serviceObj) => serviceObj.service_type === 'fcl_freight_service',
+	)?.inco_term;
 
 	(servicesList || []).forEach((serviceObj) => {
 		if ((serviceObj.service_type === 'fcl_freight_service'
@@ -174,4 +176,4 @@ const useGetStep3Data = ({
 	};
 };
 
-export default useGetStep3Data;
+export default useGetStepThreeData;

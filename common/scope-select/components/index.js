@@ -16,6 +16,7 @@ export default function ScopeSelect({
 	showChooseAgent = true,
 	popoverSize = 'sm',
 	apisToConsider = [],
+	placement = 'bottom',
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 
@@ -29,6 +30,7 @@ export default function ScopeSelect({
 		<Popover
 			visible={showPopover}
 			onClickOutside={closePopover}
+			placement={placement}
 			render={(
 				<PopoverContent
 					onClose={closePopover}
