@@ -37,6 +37,7 @@ const useSaveDraft = ({
 					userId,
 					...payload,
 					sid            : shipmentData?.serial_id,
+					performedBy    : userId,
 				},
 			});
 			Toast.success(successMessage);

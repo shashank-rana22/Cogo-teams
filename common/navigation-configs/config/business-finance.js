@@ -92,6 +92,10 @@ const businessFinance = {
 		navigation : 'business_finance-dunnings',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/cogo-financials': {
+		navigation : 'business_finance-cogo_financials',
+		isMainNav  : true,
+	},
 };
 
 export default businessFinance;

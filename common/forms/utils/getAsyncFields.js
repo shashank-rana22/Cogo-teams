@@ -669,7 +669,7 @@ function asyncListRoles() {
 	return {
 		labelKey    : 'role_name',
 		valueKey    : 'id',
-		endpoint    : 'list_roles',
+		endpoint    : 'list_employee_roles',
 		initialCall : true,
 		params      : {
 			filters: {
@@ -804,7 +804,7 @@ function asyncListExpenseCategories() {
 		valueKey     : 'id',
 		endpoint     : 'purchase/expense/expense-category',
 		microService : 'business_finance',
-		authKey      : 'get_purchase_expense_expense_category',
+		authkey      : 'get_purchase_expense_expense_category',
 		initialCall  : true,
 		searchByq    : true,
 		params       : { pageSize: 10000 },

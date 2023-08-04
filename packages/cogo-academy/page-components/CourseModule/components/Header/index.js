@@ -50,6 +50,7 @@ function Header({
 						size="lg"
 						type="button"
 						onClick={() => setShowCoursesModal(true)}
+						className={styles.styled_button}
 					>
 						All Courses
 						{' '}

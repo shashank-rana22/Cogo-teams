@@ -1,0 +1,64 @@
+.container {
+	min-width: 320px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.heading_text {
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+}
+
+.tabs_container_element {
+	display: flex;
+	min-width: 332px;
+	overflow: hidden;
+
+	:global {
+		.ui_tab_list_container {
+			flex-direction: column;
+			width: 52% !important;
+			max-height: 166px;
+			margin-top: 16px;
+		}
+
+		.ui_tab_container {
+			width: 100%;
+			max-height: 40px;
+		}
+
+		.ui_tabs_tabpanel {
+			height: 268px;
+			overflow-y: scroll;
+		}
+	}
+}
+
+.radio_group_section {
+	display: flex;
+	flex-direction: column;
+	margin-left: 16px;
+	font-size: var(--font-size-md);
+}
+
+.btn_group_section {
+	display: flex;
+	min-width: 140%;
+	margin: 16px 8px;
+
+	:global {
+		.ui_pill_container {
+			padding: 4px;
+			border: 1px solid;
+		}
+	}
+}
+
+.main_content {
+	display: flex;
+	width: 100%;
+}

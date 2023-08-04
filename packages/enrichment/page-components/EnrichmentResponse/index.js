@@ -1,11 +1,12 @@
-import BackButton from './components/Backbutton';
+import BackToEnrichment from '../../common/BackToEnrichment';
+
 import Header from './components/Header';
 import MainData from './components/MainData';
 
 function EnrichmentResponse() {
 	return (
 		<section>
-			<BackButton />
+			<BackToEnrichment />
 			<Header />
 			<MainData />
 		</section>
