@@ -7,7 +7,7 @@
 .label.required::after {
 	position: absolute;
 	top: 0;
-	right: -10px;
+	margin-left: 2px;
 	color: #ee3426;
 	content: "*";
 }
@@ -24,6 +24,12 @@
 	justify-content: space-between;
 	width: 48%;
 	margin-bottom: 16px;
+
+	:global {
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+	}
 }
 
 .form_container {
@@ -33,9 +39,8 @@
 }
 
 .error_message {
-	margin-left: 6px;
 	font-size: var(--font-size-sm);
-	color: #ee3426;
+	color: var(--color-primary-error-red-2);
 }
 
 .custom_modal {

@@ -2,7 +2,6 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
-import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
@@ -13,6 +12,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import PurchaseInvoice from '../../../common/PurchaseInvoice';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
@@ -99,10 +99,7 @@ function LastMileDeskManager({ get = {}, activeStakeholder = '' }) {
 							</TabPanel>
 
 							<TabPanel name="purchase_live_invoice" title="Live Invoices">
-								<PurchaseInvoicing
-									shipmentData={shipment_data}
-									servicesData={servicesGet?.servicesList}
-								/>
+								<PurchaseInvoice />
 							</TabPanel>
 
 							<TabPanel name="documents" title="Documents">

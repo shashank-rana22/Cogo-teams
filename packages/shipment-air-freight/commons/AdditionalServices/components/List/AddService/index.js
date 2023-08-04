@@ -12,11 +12,12 @@ import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
 function AddService({
-	shipmentId: shipment_id,
-	services,
-	isSeller,
+	shipmentId: shipment_id = '',
+	services = '',
+	isSeller = '',
 	refetch = () => {},
 	closeModal = () => {},
+	tradeType = '',
 }) {
 	const [showAddRate, setAddRate] = useState(null);
 	const [showPrice, setShowPrice] = useState(null);
@@ -27,13 +28,18 @@ function AddService({
 
 	const { list, loading } = useListServiceChargeCodes({ defaultFilters: { shipment_id } });
 
-	let finalList = (list || []).map((item) => ({
-		...item,
-		shipment_id,
-		services,
-		isSeller,
-		name: `${item?.code} ${startCase(item?.name)}`,
-	}));
+	let finalList = (list || [])
+		.map((item) => ({
+			...item,
+			shipment_id,
+			services,
+			isSeller,
+			name: `${item?.code} ${startCase(item?.name)}`,
+		}));
+
+	if (tradeType === 'export') {
+		finalList = finalList.filter((item) => item.code !== 'THC');
+	}
 
 	if (filters.name) {
 		finalList = finalList.filter((item) => item.name.toLowerCase().includes(filters.name.toLowerCase()));

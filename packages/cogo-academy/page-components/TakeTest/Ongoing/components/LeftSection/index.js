@@ -28,6 +28,10 @@ function LeftSection({
 	user_appearance,
 	subQuestion,
 	setSubQuestion,
+	setShowSubmitTestModal,
+	setShowInstructionsModal,
+	setActiveState,
+
 }) {
 	const [answer, setAnswer] = useState('');
 	const [subjectiveAnswer, setSubjectiveAnswer] = useState(RichTextEditor.createEmptyValue());
@@ -43,6 +47,9 @@ function LeftSection({
 				showTimeOverModal={showTimeOverModal}
 				start_time={start_time}
 				user_appearance={user_appearance}
+				setShowSubmitTestModal={setShowSubmitTestModal}
+				setShowInstructionsModal={setShowInstructionsModal}
+				setActiveState={setActiveState}
 			/>
 
 			<Body
