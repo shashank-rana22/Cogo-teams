@@ -8,9 +8,7 @@ const getFormattedTime = (totalSeconds) => {
 	const minutes = Math.floor((totalSeconds % MINUTES) / SECONDS);
 	const seconds = Math.floor(totalSeconds % SECONDS);
 
-	const time = { days, hours, minutes, seconds };
-
-	return time;
+	return { days, hours, minutes, seconds };
 };
 
 export default getFormattedTime;
