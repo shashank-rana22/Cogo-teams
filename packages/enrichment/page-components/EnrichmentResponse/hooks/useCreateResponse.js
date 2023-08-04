@@ -67,8 +67,8 @@ const useCreateResponse = ({
 					data: {
 						...payload,
 						...(actionType === 'edit' && {
-							feedback_response_id : detailsForm?.initialData?.id,
-							response_type        : undefined,
+							id            : detailsForm?.initialData?.id,
+							response_type : undefined,
 						}),
 						...(actionType === 'create' && {
 							source              : 'manual',
