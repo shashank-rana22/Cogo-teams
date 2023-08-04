@@ -30,7 +30,7 @@ function Step2({ data, setStep, step1_data }) {
 					onChange={setCurrentBookingNote}
 					className={styles.tabs_container}
 				>
-					{step1Files?.map((file, index) => {
+					{Array.isArray(step1Files) && step1Files.map((file, index) => {
 						const currentUrl = typeof file === 'object' ? file?.finalUrl : file;
 						const splitUrl = currentUrl.split('.');
 						const fileType = splitUrl?.[(splitUrl?.length || FIRST_INDEX) - FIRST_INDEX];
@@ -44,7 +44,7 @@ function Step2({ data, setStep, step1_data }) {
 
 						return (
 							<TabPanel
-								name={`${index}`}
+								name={index}
 								title={`Booking Note ${index + FIRST_INDEX}`}
 								key={keysForRows[index]}
 							>
