@@ -6,7 +6,6 @@ const COMPONENT_MAPPING = {
 	onboard         : OnboardAgent,
 	deactivate      : OffboardAgent,
 	change_password : ChangePassword,
-
 };
 
 function AgentActions(props) {
@@ -19,8 +18,9 @@ function AgentActions(props) {
 
 	const Component = COMPONENT_MAPPING[actionModal?.type];
 
-	return (
+	if (!Component) return null;
 
+	return (
 		<Component
 			key={actionModal?.type}
 			actionModal={actionModal}
