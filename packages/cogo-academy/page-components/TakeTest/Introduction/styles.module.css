@@ -12,6 +12,12 @@
 	background-color: #fff;
 	border-radius: 4px;
 	transform: translate(-50%, -50%);
+
+	@media (max-width: 576px) {
+		margin-top: 42px;
+		margin-left: 0;
+		overflow: scroll;
+	}
 }
 
 .top_container {
@@ -49,12 +55,20 @@
 	color: #221f20;
 	text-align: start;
 	background: #f9f9f9;
+
+	@media (max-width: 768px) {
+		padding: 10px 10px 10px 36px;
+	}
 }
 
 .content_container {
 	display: flex;
 	align-items: center;
 	margin: 16px 16px 16px 0;
+
+	@media (max-width: 768px) {
+		margin-left: 0;
+	}
 }
 
 .content_text {
@@ -78,12 +92,21 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 40px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }
 
 .right_content {
 	display: flex;
 	gap: 32px;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .button_container {
@@ -103,4 +126,43 @@
 
 .warning {
 	color: #f00 !important;
+}
+
+.topics_covered_container {
+	display: flex;
+}
+
+.content_text_duration {
+	display: flex;
+	flex-direction: column;
+
+	@media (max-width: 768px) {
+		flex-direction: row;
+	}
+}
+
+.value_duration {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+
+	@media (max-width: 768px) {
+		padding-left: 12px;
+	}
+}
+
+.content_container_duration {
+	display: flex;
+	align-items: center;
+	margin: 16px 16px 16px 0;
+
+	@media (max-width: 768px) {
+		margin-top: 8px;
+	}
+}
+
+.content_container_topicscovered {
+	@media (max-width: 768px) {
+		margin-top: 12px;
+	}
 }

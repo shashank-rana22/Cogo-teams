@@ -148,10 +148,10 @@
 .calcuate_button {
 	display: flex;
 	justify-content: flex-end;
-	margin-right: 20%;
+	margin-right: 10%;
 
 	:global(.ui_button_container) {
 		position: relative;
-		bottom: 42px;
+		bottom: 36px;
 	}
 }
