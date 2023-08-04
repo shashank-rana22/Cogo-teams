@@ -12,6 +12,13 @@
 	border-radius: 4px;
 }
 
+.arrow_icon {
+	display: none;
+	width: 25px;
+	height: 25px;
+	color: #4f4f4f;
+}
+
 .each_container {
 	display: flex;
 	align-items: center;
@@ -21,13 +28,29 @@
 	margin-top: 8px;
 	cursor: pointer;
 	border-radius: 4px;
-}
 
-.each_container:hover {
-	background: #fbf7ec;
+	&:hover {
+		background: #fbf7ec;
 
-	svg {
-		display: block;
+		.arrow_icon {
+			display: block;
+			transition: 0.5s ease;
+			animation: direction 0.6s both;
+
+			@keyframes direction {
+				0% {
+					transform: scale3d(0.3, 0.3, 0.3);
+				}
+
+				50% {
+					transform: translate3d(-10px, 0, 0);
+				}
+
+				100% {
+					transform: none;
+				}
+			}
+		}
 	}
 }
 
@@ -81,11 +104,4 @@
 .parent_flex {
 	display: flex;
 	align-items: center;
-}
-
-.arrow_icon {
-	display: none;
-	width: 25px;
-	height: 25px;
-	color: #4f4f4f;
 }
