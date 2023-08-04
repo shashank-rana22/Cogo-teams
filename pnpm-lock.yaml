@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@cogoport/eslint-config': 2.0.7
+      '@cogoport/eslint-config': 2.0.8
       '@cogoport/maps': ^1.0.3
       '@cogoport/stylelint-config': ^1.0.3
       '@sentry/nextjs': ^7.54.0
@@ -32,7 +32,7 @@ importers:
       next: 13.1.6_fe3dnxkyax5wguqewcrbc4wcza
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
-      '@cogoport/eslint-config': 2.0.7_eslint@8.46.0
+      '@cogoport/eslint-config': 2.0.8_eslint@8.46.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
       eslint: 8.46.0
@@ -4046,8 +4046,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config/2.0.7_eslint@8.46.0:
-    resolution: {integrity: sha512-uxeC8v+daZfByo6/LuFqkYZsONHunz31AjYUitqdi9lOqusFmhpQEukzbHposfz51bvRPwp8QueKRmqW4/gDLg==}
+  /@cogoport/eslint-config/2.0.8_eslint@8.46.0:
+    resolution: {integrity: sha512-fuGaByXnd6pfozrB3w4UO15noyC/l3W31HYd/xV8JI6ZFDQffDq6+fl8TSgxN3f8ZQxEZiyofIu6CoxjdoYZOA==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:
