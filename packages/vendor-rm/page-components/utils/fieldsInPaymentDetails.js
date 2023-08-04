@@ -11,10 +11,10 @@ const fieldsInPaymentDetails = () => {
 		swift_code          : 'SWIFT Code',
 		bank_name           : 'Bank Name',
 		branch_name         : 'Branch Name',
-		bank_document_url   : 'Cancelled Cheque/Passbook',
-		address             : 'Billing Address',
 		tax_number          : `${geo.others.registration_number.label} Number`,
 		tax_document_url    : `${geo.others.registration_number.label} Proof`,
+		bank_document_url   : 'Cancelled Cheque/Passbook',
+		address             : 'Billing Address',
 	};
 	return FIELDS_TO_SHOW;
 };

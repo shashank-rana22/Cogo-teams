@@ -1,17 +1,17 @@
-import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMRefresh } from '@cogoport/icons-react';
-import PurchaseInvoicing from '@cogoport/purchase-invoicing';
+import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import PurchaseInvoice from '../../../common/PurchaseInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -22,7 +22,6 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 import styles from './styles.module.css';
 
 const SERVICES_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
-const FORBIDDEN_STATUS_CODE = 403;
 
 export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -51,54 +50,13 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 		activeStakeholder,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
-	useEffect(() => {
-		router.prefetch(router.asPath);
-	}, [router]);
-
-	if (isGettingShipment || getShipmentStatusCode === undefined) {
-		return (
-			<div className={styles.loader}>
-				Loading Shipment Data....
-				<Loader themeType="primary" className={styles.loader_icon} />
-			</div>
-		);
-	}
-
-	if (!shipment_data && ![FORBIDDEN_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
-		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.section}>
-					<h2 className={styles.error}>Something Went Wrong!</h2>
-
-					<div className={styles.page}>We are looking into it.</div>
-
-					<Button
-						onClick={() => router.reload()}
-						className={styles.refresh}
-					>
-						<IcMRefresh />
-						&nbsp;
-						Refresh
-					</Button>
-				</div>
-			</div>
-		);
-	}
-
-	if (getShipmentStatusCode === FORBIDDEN_STATUS_CODE && getShipmentStatusCode !== undefined) {
-		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.page}>
-					You don&apos;t have permission to visit this page.
-					Please contact at +91 7208083747
-				</div>
-			</div>
-		);
-	}
-
 	return (
-		<ShipmentDetailContext.Provider value={contextValues}>
-			<div>
+		<ShipmentPageContainer
+			isGettingShipment={isGettingShipment}
+			shipmentStatusCode={getShipmentStatusCode}
+			shipmentData={shipment_data}
+		>
+			<ShipmentDetailContext.Provider value={contextValues}>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 
@@ -141,7 +99,7 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 						</TabPanel>
 
 						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
+							<PurchaseInvoice />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
@@ -152,12 +110,12 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 							<ShipmentMails
 								source="cogo_rpa"
 								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={`${shipment_data?.serial_id}`}
+								pre_subject_text={shipment_data?.serial_id?.toString() || ''}
 							/>
 						</TabPanel>
 					</Tabs>
 				</div>
-			</div>
-		</ShipmentDetailContext.Provider>
+			</ShipmentDetailContext.Provider>
+		</ShipmentPageContainer>
 	);
 }

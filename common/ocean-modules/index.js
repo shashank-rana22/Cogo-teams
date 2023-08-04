@@ -8,3 +8,4 @@ export { default as TradeDocTemplate } from './common/TradeDocTemplate';
 export { default as RPASearch } from './common/RPASearch';
 export { default as Layout } from './components/Layout';
 export { default as useShipmentBack } from './hooks/useShipmentBack';
+export { default as ThreeDotLoader } from './common/ThreeDotLoader';

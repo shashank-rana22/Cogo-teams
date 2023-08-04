@@ -1,5 +1,5 @@
 import { Placeholder, Input } from '@cogoport/components';
-import { IcMSearchdark, IcMArrowNext } from '@cogoport/icons-react';
+import { IcMSearchdark, IcMArrowNext, IcMArrowBack } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import UserAvatar from '../../../../../../common/UserAvatar';
@@ -10,20 +10,22 @@ import styles from './styles.module.css';
 const LOADER_COUNT = 4;
 
 function OrgUsersList({
-	orgId = '',
+	orgDetail = {},
 	setActiveTab = () => {},
 	setOpenKamContacts = () => {},
-	setOrgId = () => {},
 	endPoint = '',
 	filterKey = '',
 	activeOrg = '',
+	setShowUser = () => {},
 }) {
+	const { id = '', name = '' } = orgDetail;
+
 	const {
 		formattedOrgUsersList = [],
 		loading = false,
 		setSearch = () => {},
 		search = '',
-	} = useListOrganizationUsers({ organizationId: orgId, endPoint, filterKey });
+	} = useListOrganizationUsers({ organizationId: id, endPoint, filterKey });
 
 	const onCardClick = ({ item }) => {
 		const {
@@ -53,33 +55,30 @@ function OrgUsersList({
 		}));
 
 		setOpenKamContacts(false);
-		setOrgId('');
 	};
 
 	const modifiedList = loading ? [...Array(LOADER_COUNT).fill({})] : formattedOrgUsersList;
 
-	if (!orgId) {
-		return (
-			<div className={styles.select_org_text}>
-				Select a Organizaton
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.container}>
-			{activeOrg === 'organization' ? (
-				<div className={styles.input_container}>
-					<Input
-						placeholder="search by name..."
-						onChange={setSearch}
-						value={search}
-						className={styles.input_styles}
-						size="sm"
-						prefix={<IcMSearchdark />}
-					/>
+			<div className={styles.header_section}>
+				<div className={styles.top_section}>
+					<IcMArrowBack className={styles.back_icon} onClick={() => setShowUser(false)} />
+					<div className={styles.org_name}>{startCase(name)}</div>
 				</div>
-			) : null}
+				{activeOrg === 'organization' ? (
+					<div className={styles.input_container}>
+						<Input
+							placeholder="search by name..."
+							onChange={setSearch}
+							value={search}
+							className={styles.input_styles}
+							size="sm"
+							prefix={<IcMSearchdark />}
+						/>
+					</div>
+				) : null}
+			</div>
 
 			<div className={styles.list_container}>
 				{!isEmpty(modifiedList) ? modifiedList?.map((eachUser) => {

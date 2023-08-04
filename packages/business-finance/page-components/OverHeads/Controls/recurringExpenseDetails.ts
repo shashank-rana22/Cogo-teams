@@ -1,48 +1,54 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 interface FormDataInterface {
-	registrationNumber?: string,
-	entityObject?:{ id?:string },
-	periodOfTransaction?:string,
-	vendorName?:string,
-	expenseCategory?:string,
+	registrationNumber?: string;
+	entityObject?: { id?: string };
+	periodOfTransaction?: string;
+	vendorName?: string;
+	expenseCategory?: string;
 }
 
 interface EntityInt {
-	id?:string | number,
-	entity_code?:string,
-	business_name?:string
+	id?: string | number;
+	entity_code?: string;
+	business_name?: string;
 }
 
 interface Props {
-	formData: FormDataInterface,
-	setFormData: (obj:any)=>void,
-	categoryOptions: object[],
-	subCategoryOptions:object[],
-	setCategoryOptions: (obj:any)=>void,
-	setSubCategoryOptions:(obj:any)=>void,
-	branchOptions: object,
-	setBranchOptions: (obj:any)=>void,
-	entityList: EntityInt[],
-	entityOptions: object[],
-	setEntityOptions: (obj:any)=>void,
-	handleVendorChange:(obj:any)=>void,
+	formData: FormDataInterface;
+	setFormData: (obj: any) => void;
+	categoryOptions: object[];
+	subCategoryOptions: object[];
+	setCategoryOptions: (obj: any) => void;
+	setSubCategoryOptions: (obj: any) => void;
+	branchOptions: object;
+	setBranchOptions: (obj: any) => void;
+	entityList: EntityInt[];
+	entityOptions: object[];
+	setEntityOptions: (obj: any) => void;
+	handleVendorChange: (obj: any) => void;
+	handleCategoryChange: (obj: any, val: object) => void;
 }
 
 export const recurringExpenseDetails = ({
 	formData,
 	setFormData,
-	categoryOptions,
-	subCategoryOptions,
 	branchOptions,
 	entityList,
 	entityOptions,
 	handleVendorChange = () => {},
-}:Props) => {
-	const handleEntityChange = (e:string | number) => {
-		const entityData = (entityList || []).filter((entityItem) => entityItem.id === e)?.[0];
+	handleCategoryChange = () => {},
+}: Props) => {
+	const geo = getGeoConstants();
+	const handleEntityChange = (e: string | number) => {
+		const entityData = (entityList || []).filter(
+			(entityItem) => entityItem.id === e,
+		)?.[GLOBAL_CONSTANTS.zeroth_index];
 		setFormData({
 			...formData,
 			entityObject: entityData,
@@ -60,7 +66,7 @@ export const recurringExpenseDetails = ({
 					asyncKey       : 'list_vendors',
 					params         : { filters: { kyc_status: 'verified' } },
 					value          : formData?.vendorName,
-					onChange       : (item:any, obj:object) => handleVendorChange(obj),
+					onChange       : (item: any, obj: object) => handleVendorChange(obj),
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Vendor name',
@@ -70,35 +76,30 @@ export const recurringExpenseDetails = ({
 				},
 				{
 					name        : 'registrationNumber',
-					label       : 'PAN',
-					type        : 'textarea',
+					label       : `${geo.others.identification_number.label.toUpperCase()}`,
+					type        : 'input',
 					value       : formData.registrationNumber || null,
 					className   : styles.pan_area,
-					placeholder : 'Autofilled PAN',
+					placeholder : `Autofilled ${geo.others.identification_number.label}`,
+					prefix      : null,
 					span        : 2.2,
 				},
 				{
 					name           : 'expenseCategory',
 					label          : 'Expense Category',
-					type           : 'select',
+					type           : 'asyncSelect',
+					asyncKey       : 'list_expense_category',
+					initialCall    : true,
+					placeholder    : 'Select a Category',
+					valueKey       : 'id',
 					multiple       : false,
 					defaultOptions : false,
-					placeholder    : 'Category',
 					value          : formData?.expenseCategory,
+					onChange       : (e, obj) => handleCategoryChange(e, obj),
+					renderLabel    : (item) => startCase(item.categoryName),
 					span           : 2.2,
-					options        : categoryOptions,
+					className      : styles.select,
 					style          : { width: '164px' },
-				},
-				{
-					name           : 'expenseSubCategory',
-					label          : 'Expense Sub-Category',
-					type           : 'select',
-					multiple       : false,
-					defaultOptions : false,
-					placeholder    : 'Sub-Category',
-					span           : 2.2,
-					options        : subCategoryOptions,
-					style          : { width: '168px' },
 				},
 				{
 					name           : 'cogoEntity',
@@ -110,24 +111,29 @@ export const recurringExpenseDetails = ({
 					span           : 2.2,
 					options        : entityOptions,
 					value          : formData?.entityObject?.id,
-					onChange       : (e:any) => handleEntityChange(e),
+					onChange       : (e: any) => handleEntityChange(e),
 					style          : { width: '164px' },
 				},
-			],
-		},
-		{
-			span    : 12,
-			groupBy : [
 				{
 					name               : 'payableAmount',
 					label              : 'Payable Amount',
 					type               : 'input',
 					prefix             : null,
 					onlyNumbersAllowed : true,
-					style              : { borderRadius: '4px', width: '164px', height: '40px', padding: '7px' },
-					span               : 2.2,
-					size               : 'md',
+					style              : {
+						borderRadius : '4px',
+						width        : '164px',
+						height       : '40px',
+						padding      : '7px',
+					},
+					span : 2.2,
+					size : 'md',
 				},
+			],
+		},
+		{
+			span    : 12,
+			groupBy : [
 				{
 					name    : 'currency',
 					label   : 'Currency',
@@ -168,11 +174,6 @@ export const recurringExpenseDetails = ({
 					isPreviousDaysAllowed : true,
 					span                  : 2.2,
 				},
-			],
-		},
-		{
-			span    : 12,
-			groupBy : [
 				{
 					name           : 'branch',
 					label          : 'Branch',
@@ -184,12 +185,18 @@ export const recurringExpenseDetails = ({
 					options        : branchOptions,
 					style          : { width: '164px' },
 				},
+			],
+		},
+		{
+			span    : 12,
+			groupBy : [
 				{
 					name      : 'agreementNumber',
 					label     : 'Agreement Number',
-					type      : 'textarea',
+					type      : 'input',
 					className : styles.agreement,
 					span      : 2,
+					prefix    : null,
 					size      : 'md',
 				},
 			],
@@ -209,9 +216,12 @@ export const recurringExpenseDetails = ({
 			multiple      : true,
 			draggable     : true,
 			loading       : true,
-			dropareaProps : { heading: 'Upload your file here', subHeading: 'supports - jpeg, pdf, docx' },
-			style         : { width: '410px' },
-			span          : 12,
+			dropareaProps : {
+				heading    : 'Upload your file here',
+				subHeading : 'supports - jpeg, pdf, docx',
+			},
+			style : { width: '410px' },
+			span  : 12,
 		},
 	];
 };
