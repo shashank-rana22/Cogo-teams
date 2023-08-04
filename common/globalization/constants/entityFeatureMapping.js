@@ -16,6 +16,7 @@ const ENTITY_FEATURE_MAPPING = {
 		placeholder: {
 			tax_number: 'Search By Business Name/Pan Number',
 		},
+		feature_supported: [],
 	},
 	201: {
 		labels: {
@@ -32,6 +33,7 @@ const ENTITY_FEATURE_MAPPING = {
 		placeholder: {
 			tax_number: 'Search By Business Name/Pan Number',
 		},
+		feature_supported: [],
 	},
 	301: {
 		labels: {
@@ -52,6 +54,7 @@ const ENTITY_FEATURE_MAPPING = {
 		placeholder: {
 			tax_number: 'Search By Business Name/Pan Number',
 		},
+		feature_supported: ['terminal_charge'],
 	},
 	401: {
 		labels: {
@@ -69,6 +72,7 @@ const ENTITY_FEATURE_MAPPING = {
 		placeholder: {
 			tax_number: 'Search By Business Name/UEN Number',
 		},
+		feature_supported: [],
 	},
 	501: {
 		labels: {
@@ -88,6 +92,7 @@ const ENTITY_FEATURE_MAPPING = {
 		placeholder: {
 			tax_number: 'Search By Business Name/VAT Number',
 		},
+		feature_supported: [],
 	},
 	601: {
 		labels: {
