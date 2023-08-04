@@ -87,6 +87,10 @@
 	background-color: #2ac85f;
 }
 
+.overdue {
+	background-color: #e76f51;
+}
+
 .pie_tooltip {
 	display: flex;
 	align-items: center;
