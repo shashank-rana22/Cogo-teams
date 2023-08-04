@@ -61,7 +61,8 @@ const controls = ({
 			name    : 'arrived_at_destination_icd_at',
 			label   : 'Arrived At ICD Port Date',
 			disable : !!is_containers_gated_out,
-			maxDate : new Date(),
+			maxDate : null,
+			minDate : departureDate,
 		}] : []),
 	];
 
