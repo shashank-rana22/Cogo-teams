@@ -59,6 +59,12 @@
 	svg {
 		fill: #849e4c;
 	}
+
+	&.locked {
+		svg {
+			fill: #ee3425;
+		}
+	}
 }
 
 .button_container {

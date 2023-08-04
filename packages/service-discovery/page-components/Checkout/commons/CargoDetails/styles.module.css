@@ -19,6 +19,7 @@
 	align-items: center;
 	height: 120px;
 	padding: 20px;
+	border-radius: 8px;
 }
 
 .label {

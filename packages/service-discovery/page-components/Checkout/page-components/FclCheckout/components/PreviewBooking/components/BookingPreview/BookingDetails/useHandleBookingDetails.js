@@ -129,6 +129,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 	const BUTTON_MAPPING = [
 		{
 			key   : 'coupon_code',
+			id    : 'coupon_code',
 			label : !discount ? 'Have a Coupon Code?' : (
 				<div style={{ color: '#849e4c' }}>
 					Coupon Applied -
@@ -138,27 +139,43 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 			),
 			themeType : 'link',
 			style     : {},
-			onClick   : () => setShowCouponCode(true),
 		},
 		{
 			key   : 'view_details',
+			id    : 'view_details',
 			label : showBreakup
 				? 'Hide Details & Break Up'
 				: 'View Details & Break Up',
 			themeType : 'link',
 			style     : { marginLeft: '36px' },
 			loading,
-			onClick   : () => setShowBreakup((prev) => !prev),
 		},
 		{
 			key       : 'latest_rate',
+			id        : 'latest_rate',
 			label     : 'Unlock Latest rate',
 			themeType : 'link',
 			style     : { marginLeft: '36px' },
 			loading,
-			onClick   : handleUnlockLatestRate,
 		},
 	];
+
+	const onClickButtonDiv = (event) => {
+		const funcMapping = {
+			coupon_code  : () => setShowCouponCode(true),
+			view_details : () => setShowBreakup((prev) => !prev),
+			latest_rate  : handleUnlockLatestRate,
+		};
+
+		const button = event.target.closest('BUTTON');
+
+		if (button) {
+			event.stopPropagation();
+			event.preventDefault();
+
+			funcMapping[button.getAttribute('id')]();
+		}
+	};
 
 	return {
 		shipping_line,
@@ -173,6 +190,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 		isCouponApplied,
 		setCouponApplied,
 		appliedPromotion,
+		onClickButtonDiv,
 	};
 };
 

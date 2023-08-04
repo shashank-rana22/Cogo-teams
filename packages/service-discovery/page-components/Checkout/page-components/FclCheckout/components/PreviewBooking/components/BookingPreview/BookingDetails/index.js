@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMUnlock } from '@cogoport/icons-react';
+import { IcMUnlock, IcMLock } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
 import ContainerDetails from '../../../../../../../../../common/ContainerDetails';
@@ -16,10 +16,13 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 	const {
 		rate = {},
 		checkout_id = '',
-		getCheckout,
+		getCheckout = () => {},
+		detail = {},
 	} = useContext(CheckoutContext);
 
 	const { tax_total_price_discounted = 0, tax_total_price_currency = '' } = rate;
+
+	const { quotation_email_sent_at = '' } = detail;
 
 	const {
 		shipping_line = {},
@@ -34,6 +37,7 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 		isCouponApplied = false,
 		setCouponApplied = () => {},
 		appliedPromotion = {},
+		onClickButtonDiv,
 	} = useHandleBookingDetails({ setShowBreakup, showBreakup });
 
 	return (
@@ -48,8 +52,10 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 					services={services}
 				/>
 
-				<div className={styles.total_price}>
-					<IcMUnlock style={{ marginRight: '6px' }} />
+				<div className={cl`${styles.total_price} ${quotation_email_sent_at && styles.locked}`}>
+					{quotation_email_sent_at ? (
+						<IcMLock style={{ marginRight: '6px' }} />
+					) : <IcMUnlock style={{ marginRight: '6px' }} />}
 
 					{formatAmount({
 						amount   : tax_total_price_discounted,
@@ -90,7 +96,11 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 						showCoupons={showCouponCode}
 					/>
 
-					<div className={styles.button_container}>
+					<div
+						role="presentation"
+						onClick={onClickButtonDiv}
+						className={styles.button_container}
+					>
 						{BUTTON_MAPPING.map((item) => {
 							const { key, label, ...restProps } = item || {};
 

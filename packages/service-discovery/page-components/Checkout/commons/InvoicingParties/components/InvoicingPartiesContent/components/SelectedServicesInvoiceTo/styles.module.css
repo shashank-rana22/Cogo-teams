@@ -2,10 +2,10 @@
 	display: flex;
 	flex-wrap: wrap;
 	max-width: 86%;
-	margin: -4px;
-	overflow: scroll;
 	max-height: 100px;
+	margin: -4px;
 	margin-bottom: 12px;
+	overflow: scroll;
 }
 
 .item {
@@ -22,8 +22,8 @@
 }
 
 .popover_content {
+	display: flex;
+	flex-wrap: wrap;
 	max-height: 300px;
 	overflow: auto;
-	display: flex;
-    flex-wrap: wrap;
 }
