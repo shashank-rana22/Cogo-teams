@@ -11,6 +11,7 @@ import controls from '../EditSchedule/controls';
 export default function useEditServiceSchedule({
 	setShow = () => {},
 	timelineData = [],
+	defaultEditable = false,
 }) {
 	const { servicesList, primary_service, refetch: shipmentRefetch = () => {} } = useContext(ShipmentDetailContext);
 
@@ -21,7 +22,12 @@ export default function useEditServiceSchedule({
 		method : 'POST',
 	}, { manual: true });
 
-	const { finalControls, defaultValues } = controls({ primary_service, departureDate, timelineData });
+	const { finalControls, defaultValues } = controls({
+		primary_service,
+		departureDate,
+		timelineData,
+		defaultEditable,
+	});
 
 	const { handleSubmit: formSubmit, formState: { errors }, watch, reset, control } = useForm({ defaultValues });
 

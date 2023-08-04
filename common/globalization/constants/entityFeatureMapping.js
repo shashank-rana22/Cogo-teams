@@ -48,6 +48,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'compliance',
 			'dunning',
 			'ftl_task_date_validation',
+			'terminal_charge',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/Pan Number',
@@ -68,6 +69,7 @@ const ENTITY_FEATURE_MAPPING = {
 		placeholder: {
 			tax_number: 'Search By Business Name/Pan Number',
 		},
+
 	},
 	501: {
 		labels: {
