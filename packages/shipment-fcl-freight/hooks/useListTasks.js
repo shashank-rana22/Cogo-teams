@@ -18,7 +18,7 @@ function useListTasks({
 	defaultFilters = {},
 	defaultParams = {},
 	showMyTasks = true,
-	activeStakeholder,
+	activeStakeholder = '',
 }) {
 	let showOnlyMyTasks = showMyTasks;
 	const { profile } = useSelector((state) => state);
@@ -30,7 +30,7 @@ function useListTasks({
 	const showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 
 	SHOW_ALL_TASKS.forEach((item) => {
-		if (activeStakeholder.includes(item)) {
+		if (activeStakeholder?.includes(item)) {
 			showOnlyMyTasks = false;
 		}
 	});
@@ -44,7 +44,7 @@ function useListTasks({
 				...defaultFilters,
 				...filters,
 				...showTaskFilters,
-				...(showOnlyMyTasks ? { show_my_tasks: true } : null),
+				...(showOnlyMyTasks ? { show_my_tasks: true } : {}),
 			},
 		},
 

@@ -1,11 +1,10 @@
-import { Tabs, TabPanel, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useRouter } from '@cogoport/next';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
@@ -27,32 +26,22 @@ import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
-
 function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee_shipper_booking_agent' }) {
-	const router = useRouter();
-
 	const [activeTab, setActiveTab] = useState('overview');
-
-	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
+	const {
+		shipment_data = {}, isGettingShipment = false, getShipmentStatusCode = '',
+		container_details = [],
+	} = get || {};
 
 	const rollover_containers = (container_details || []).filter(
-		(container) => container?.rollover_status === 'requested',
+		(c) => c?.rollover_status === 'requested',
 	);
-
-	const handleVersionChange = useCallback(() => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
-		window.location.replace(newHref);
-		window.sessionStorage.setItem('prev_nav', newHref);
-	}, [router?.query?.partner_id, shipment_data?.id]);
-
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
 		additional_methods: SERVICE_ADDITIONAL_METHODS,
 		activeStakeholder,
 	});
-
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
-
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
@@ -60,7 +49,6 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 		activeStakeholder,
 		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
-
 	return (
 		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
@@ -73,12 +61,6 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 						<ShipmentInfo />
 
 						<div className={styles.toggle_chat}>
-							<Toggle
-								size="md"
-								onLabel="Old"
-								offLabel="New"
-								onChange={handleVersionChange}
-							/>
 							<RolloverDetails />
 							<ShipmentChat />
 						</div>
