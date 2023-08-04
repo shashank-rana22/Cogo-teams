@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 
 import SingleLineItem from './SingleLineItem';
 import styles from './styles.module.css';
@@ -11,7 +11,6 @@ function TruckDetails({
 	chargesList = [],
 }) {
 	const { line_items = [], truck_number = '' } = truckDetailsdata;
-	const [consumptionArray, setConsumptionArray] = useState(['']);
 
 	const chargeOptions = chargesList?.map(
 		(item) => ({
@@ -19,14 +18,6 @@ function TruckDetails({
 			value : item?.code,
 			...(item || {}),
 		}),
-	);
-
-	useCallback(
-		() => {
-			const initItems = line_items.map((itm) => itm.code);
-			setConsumptionArray(initItems);
-		},
-		[line_items],
 	);
 
 	return (
@@ -84,8 +75,6 @@ function TruckDetails({
 					setUpdateRateQuantity={setUpdateRateQuantity}
 					chargeOptions={chargeOptions}
 					index={index}
-					consumptionArray={consumptionArray}
-					setConsumptionArray={setConsumptionArray}
 				/>
 			))}
 
