@@ -253,7 +253,7 @@ function Footer({
 					value={draftMessage || ''}
 					onChange={(e) => setDraftMessages((p) => ({ ...p, [id]: e }))}
 					disabled={!hasPermissionToEdit}
-					style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'text' }}
+					style={{ cursor: hasPermissionToEdit ? 'text' : 'not-allowed' }}
 					onKeyDown={handleKeyPress}
 					toolbarConfig={TOOLBARCONFIG}
 					showToolbar={false}
