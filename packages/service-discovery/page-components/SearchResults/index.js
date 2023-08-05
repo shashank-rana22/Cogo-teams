@@ -113,21 +113,19 @@ function SearchResults() {
 			(showAdditionalHeader || (infoBanner.current === 'edit_button' && !isGuideViewed))
 				? styles.backdrop : {}}`}
 		>
-			<div className={styles.header}>
-				<Header
-					data={detail}
-					showAdditionalHeader={showAdditionalHeader}
-					setHeaderProps={setHeaderProps}
-					headerProps={headerProps}
-					loading={loading}
-					activePage="search_results"
-					currentScreen={screen}
-					setCurrentScreen={setScreen}
-					infoBanner={infoBanner}
-					setInfoBanner={setInfoBanner}
-					isGuideViewed={isGuideViewed}
-				/>
-			</div>
+			<Header
+				data={detail}
+				showAdditionalHeader={showAdditionalHeader}
+				setHeaderProps={setHeaderProps}
+				headerProps={headerProps}
+				loading={loading}
+				activePage="search_results"
+				currentScreen={screen}
+				setCurrentScreen={setScreen}
+				infoBanner={infoBanner}
+				setInfoBanner={setInfoBanner}
+				isGuideViewed={isGuideViewed}
+			/>
 
 			<div
 				style={
@@ -138,6 +136,7 @@ function SearchResults() {
 				className={styles.children}
 			>
 				<TryOldBanner />
+
 				<FCLResults
 					rates={rates}
 					detail={detail}

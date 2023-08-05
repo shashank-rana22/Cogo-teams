@@ -5,14 +5,6 @@
 	background-color: #fff;
 }
 
-.header {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 80px;
-	z-index: 100;
-}
-
 .backdrop {
 	background: rgb(0 0 0 / 30%);
 }

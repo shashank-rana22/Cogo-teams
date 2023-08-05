@@ -97,16 +97,14 @@ function Checkout({ checkout_type = '' }) {
 	return (
 		<CheckoutContext.Provider value={checkoutData}>
 			<div className={styles.container}>
-				<div className={styles.header}>
-					<Header
-						data={detail}
-						service_key="primary_service"
-						activePage="checkout"
-						loading={loading}
-						headerProps={headerProps}
-						showAdditionalHeader={showAdditionalHeader}
-					/>
-				</div>
+				<Header
+					data={detail}
+					service_key="primary_service"
+					activePage="checkout"
+					loading={loading}
+					headerProps={headerProps}
+					showAdditionalHeader={showAdditionalHeader}
+				/>
 
 				<Breadcrumb className={styles.breadcrumb}>
 					<Breadcrumb.Item

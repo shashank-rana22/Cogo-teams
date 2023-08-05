@@ -3,14 +3,6 @@
 	background: #fff;
 }
 
-.header {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 80px;
-	z-index: 100;
-}
-
 .breadcrumb {
 	position: fixed;
 	top: 88px;
