@@ -1,11 +1,11 @@
-import { Button, Input, Select, Tooltip } from '@cogoport/components';
-import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { Button } from '@cogoport/components';
+// import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useShipmentView from '../../hooks/useShipmentView';
-import { CHANNEL_OPTIONS, MILESTONE_OPTIONS } from '../constant';
+// import { CHANNEL_OPTIONS, MILESTONE_OPTIONS } from '../constant';
 
 import BookShipmentModal from './BookShipmentModal';
 import Card from './Card';
@@ -74,16 +74,27 @@ function ShipmentView() {
 	const { page, year, month } = filters || {};
 
 	const isApplyEnable = year?.length > 0 && month?.length > 0;
-	console.log(showBookShipment, 'showBookShipment');
 
 	return (
 		<div>
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-				<Button onClick={() => setShowBookShipment(true)}>Book Shipment</Button>
+				<Button
+					disabled={isEmpty(year) || isEmpty(month)}
+					onClick={() => setShowBookShipment(true)}
+				>
+					Book Shipment
+
+				</Button>
 			</div>
 			{showBookShipment
-				? <BookShipmentModal showBookShipment={showBookShipment} setShowBookShipment={setShowBookShipment} />
-				: <span>hy</span>}
+				? (
+					<BookShipmentModal
+						showBookShipment={showBookShipment}
+						setShowBookShipment={setShowBookShipment}
+						filters={filters}
+					/>
+				)
+				: ''}
 
 			<Card
 				refetch={refetch}
@@ -133,7 +144,7 @@ function ShipmentView() {
 			<div className={styles.table_data}>
 				<div className={styles.input_data_container}>
 					<div className={styles.select_container}>
-						<Select
+						{/* <Select
 							value={filters?.milestone}
 							onChange={(val) => setFilters({ ...filters, milestone: val })}
 							options={MILESTONE_OPTIONS}
@@ -141,9 +152,9 @@ function ShipmentView() {
 							placeholder="Select Milestone"
 							className={styles.milestone}
 							size="sm"
-						/>
+						/> */}
 
-						<div className={styles.channel_info}>
+						{/* <div className={styles.channel_info}>
 							<Select
 								value={filters?.channel}
 								onChange={(val) => setFilters({ ...filters, channel: val })}
@@ -174,11 +185,11 @@ function ShipmentView() {
 							>
 								<IcMInfo />
 							</Tooltip>
-						</div>
+						</div> */}
 
 					</div>
 
-					<div className={styles.input_container}>
+					{/* <div className={styles.input_container}>
 						<Input
 							size="sm"
 							value={filters?.query}
@@ -188,7 +199,7 @@ function ShipmentView() {
 							suffix={<IcMSearchlight height="15px" width="15px" style={{ marginRight: '8px' }} />}
 							style={{ padding: '4px' }}
 						/>
-					</div>
+					</div> */}
 				</div>
 				<StyledTable
 					page={page}

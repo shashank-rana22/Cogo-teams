@@ -70,7 +70,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 	);
 
 	const refetch = useCallback(async () => {
-		const rangeMapping = {
+		const RANGE_MAPPING = {
 			''      : '',
 			'>'     : 'gt',
 			'>='    : 'gte',
@@ -90,7 +90,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					jobType              : shipmentType || undefined,
 					entityCode           : entity || undefined,
 					entityId             : entityId || undefined,
-					profitComparisonType : rangeMapping[range] || undefined,
+					profitComparisonType : RANGE_MAPPING[range] || undefined,
 					jobState             : jobState || undefined,
 					lowerProfitMargin    : profitAmount || profitPercent || undefined,
 					profitType           : profitType || undefined,
@@ -102,6 +102,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					endDate              : (startDate && endDate) ? format(endDate, 'yyy-MM-dd') : undefined,
 					page                 : page || undefined,
 					pageLimit            : 10,
+					archiveStatus        : 'UNBILLED',
 				},
 			});
 			const data = { ...resp.data };
@@ -269,7 +270,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			...item,
 		}));
 
-		const rangeMapping = {
+		const RANGE_MAPPING = {
 			''      : '',
 			'>'     : 'gt',
 			'>='    : 'gte',
@@ -292,7 +293,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 						serviceType          : service || undefined,
 						tradeType            : tradeType || undefined,
 						jobType              : shipmentType || undefined,
-						profitComparisonType : rangeMapping[range] || undefined,
+						profitComparisonType : RANGE_MAPPING[range] || undefined,
 						jobState             : jobState || undefined,
 						lowerProfitMargin    : profitAmount || profitPercent || undefined,
 						upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,

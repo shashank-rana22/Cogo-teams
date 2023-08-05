@@ -35,7 +35,6 @@
 
 .select_container {
 	display: flex;
-	gap: 8px;
 	width: fit-content;
 	margin-top: 16px;
 }
@@ -169,4 +168,15 @@
 	margin: 0 0 8px 2px;
 	background-color: #ee3425;
 	border-radius: 50%;
+}
+
+.input_container {
+	display: flex;
+	align-items: center;
+	width: 300px;
+}
+
+.channel_info {
+	width: 200px;
+	margin-right: 20px;
 }
