@@ -4,16 +4,16 @@ import { startOfDay, startOfWeek, startOfMonth } from '@cogoport/utils';
 
 export const SATIFICATION_IMAGE_MAPPING = [
 	{
-		key   : 'happy_customers',
+		key   : 'happy',
 		label : 'Happy Customers',
 		icon  : <IcMVeryHappy width={25} height={25} fill="#ABCD62" />,
 	}, {
-		key   : 'neutral_customers',
+		key   : 'neutral',
 		label : 'Neutral Customers',
 		icon  : <IcMAverage fill="#FCDC00" width={25} height={25} />,
 
 	}, {
-		key   : 'sad_customers',
+		key   : 'sad',
 		label : 'Sad Customers',
 		icon  : <IcMVerySad fill="#EE3425" width={25} height={25} />,
 
@@ -43,20 +43,6 @@ export const CHAT_STATS_DATA = [
 		label   : 'No. of escalated chat',
 		key     : 'escalated',
 		isAgent : true,
-	},
-];
-
-export const MY_STATS_DATA = [
-	{
-		key   : 'no_of_booking',
-		label : 'No. of Booking',
-	}, {
-		key   : 'calls_made',
-		label : 'Calls Made',
-
-	}, {
-		key   : 'chat_assigned',
-		label : 'Chat Assigned',
 	},
 ];
 

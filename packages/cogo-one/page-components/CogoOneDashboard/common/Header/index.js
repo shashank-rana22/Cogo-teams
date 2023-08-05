@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function Header({ timeline = '', setTimeline = () => {}, setSelectedDate = () => {} }) {
 	const { query, back } = useRouter();
 
-	const { id: agentId = '' } = query || {};
+	const { id: agentId = '', agentName = '' } = query || {};
 
 	const handleTabChange = (val) => {
 		setTimeline(val);
@@ -29,6 +29,12 @@ function Header({ timeline = '', setTimeline = () => {}, setSelectedDate = () =>
 				)}
 				<div><Image src={GLOBAL_CONSTANTS.image_url.cogo_one_logo} alt="CogoOne" width={30} height={30} /></div>
 				<div className={styles.heading_name}>ogoOne Dashboard</div>
+
+				{agentId && (
+					<div className={styles.name_section}>
+						{`{${agentName}}`}
+					</div>
+				)}
 			</div>
 
 			<div className={styles.header_right_section}>

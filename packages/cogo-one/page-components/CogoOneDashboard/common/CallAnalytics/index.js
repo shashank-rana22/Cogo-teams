@@ -7,7 +7,7 @@ import CallTypeStats from './CallTypeStats';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function CallAnalytics({ loading = false, callsAnalytics = {} }) {
+function CallAnalytics({ loading = false, callsAnalytics = [] }) {
 	const {
 		incoming_answered = 0,
 		incoming_missed = 0,

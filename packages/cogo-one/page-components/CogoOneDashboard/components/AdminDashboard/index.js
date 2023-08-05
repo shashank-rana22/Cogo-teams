@@ -27,7 +27,7 @@ function AdminDashboard() {
 		loading = false,
 		data = {},
 		getCogoOneDashboard = () => {},
-	} = useGetCogoOneAgentStats({ timeline, selectedDate });
+	} = useGetCogoOneAgentStats({ timeline, selectedDate, isAgent: true });
 
 	const props = {
 		timeline,
@@ -40,7 +40,7 @@ function AdminDashboard() {
 		getCogoOneDashboard,
 	};
 
-	const { calls = {}, graph = {} } = data || {};
+	const { calls = [], graph = {}, messages = [] } = data || {};
 
 	return (
 
@@ -76,6 +76,7 @@ function AdminDashboard() {
 					<div className={styles.two_statistics}>
 						<ChannelMessageAnalytic
 							loading={loading}
+							messages={messages}
 						/>
 						<CallAnalytics callsAnalytics={calls} loading={loading} />
 					</div>

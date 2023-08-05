@@ -6,7 +6,15 @@ import { SATIFICATION_IMAGE_MAPPING } from '../../../constants';
 
 import styles from './styles.module.css';
 
-function Statisfaction({ loading = false, customerSatisfaction = {} }) {
+function Statisfaction({ loading = false, feedback = [] }) {
+	const { happy = 0, neutral = 0, sad = 0 } = feedback[GLOBAL_CONSTANTS.zeroth_index] || [];
+
+	const feedbackStats = {
+		happy,
+		sad,
+		neutral,
+	};
+
 	return (
 		<div className={styles.statisfaction_box}>
 			<div className={styles.heading}>User Satisfaction</div>
@@ -21,8 +29,7 @@ function Statisfaction({ loading = false, customerSatisfaction = {} }) {
 								? <Placeholder width="40px" height="18px" className={styles.placeholder} />
 								: (
 									<div className={styles.customers_numbers}>
-										{customerSatisfaction[key]
-								|| GLOBAL_CONSTANTS.zeroth_index}
+										{feedbackStats?.[key] || GLOBAL_CONSTANTS.zeroth_index}
 									</div>
 								)}
 						</div>

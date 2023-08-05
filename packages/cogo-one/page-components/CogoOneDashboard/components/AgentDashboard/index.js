@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
@@ -44,7 +45,7 @@ function AgentDashboard({ isRolePresent = false }) {
 		getCogoOneDashboard,
 	};
 
-	const { calls = {}, graph = {} } = data || {};
+	const { calls = [], graph = {}, feedback = [], messages = [] } = data || {};
 
 	return (
 		<div className={styles.prime_container}>
@@ -66,19 +67,28 @@ function AgentDashboard({ isRolePresent = false }) {
 					<div className={styles.statistics}>
 						<ChannelMessageAnalytic
 							loading={loading}
+							messages={messages}
 						/>
 						<CallAnalytics callsAnalytics={calls} loading={loading} />
 					</div>
 				</div>
 				<div className={styles.right_sub_container}>
-					<TotalChatsHandled loading={loading} />
+					<TotalChatsHandled agentId={id} />
 					<div className={styles.satisfaction_intent_served_box}>
-						<Statisfaction loading={loading} />
-						<MyStats timeline={timeline} agentId={id} />
+						<Statisfaction loading={loading} feedback={feedback} />
+						<MyStats
+							timeline={timeline}
+							agentId={id}
+							calls={calls}
+							loading={loading}
+							isRolePresent={isRolePresent}
+						/>
 					</div>
-					<div className={styles.two_characterisctics_container}>
+					<div className={cl`${(isRolePresent)
+						? styles.agent_view : styles.two_characterisctics_container}`}
+					>
 						<ChatStatistics
-							isAdminView={isRolePresent}
+							isAdminView={false}
 							agentId={id}
 						/>
 					</div>

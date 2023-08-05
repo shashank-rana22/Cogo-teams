@@ -16,6 +16,7 @@
 
 .heading {
 	display: flex;
+	align-items: center;
 }
 
 .heading .heading_name {
@@ -49,4 +50,10 @@
 	margin: 5px 10px 10px 0;
 	cursor: pointer;
 	fill: #ff2431;
+}
+
+.name_section {
+	display: flex;
+	margin-left: 8px;
+	font-size: 16px;
 }

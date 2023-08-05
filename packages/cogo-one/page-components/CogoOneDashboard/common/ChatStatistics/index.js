@@ -1,9 +1,9 @@
 import { Placeholder, cl } from '@cogoport/components';
 import React from 'react';
 
+import { getFormattedNumber } from '../../../../helpers/getFormattedNumber';
 import { CHAT_STATS_DATA } from '../../constants';
 import useListAssignedChats from '../../hooks/ListAssignedChats';
-import { getFormattedNumber } from '../../utils/getFormattedNumber';
 
 import styles from './styles.module.css';
 
@@ -17,7 +17,7 @@ function ChatStatistics({ isAdminView = false, agentId = '' }) {
 	return (
 		<>
 			{CHAT_STATS_DATA.map((item) => {
-				const { label = '', isAgent, key } = item;
+				const { label = '', isAgent, key = '' } = item;
 
 				if (!isAdminView && !isAgent) {
 					return null;
@@ -27,8 +27,7 @@ function ChatStatistics({ isAdminView = false, agentId = '' }) {
 					(isAdminView || isAgent) && (
 						<div
 							key={key}
-							className={cl`${styles.chatstatistics_box}
-							${isAdminView ? styles.agent_view : ''}`}
+							className={cl`${isAdminView ? styles.chatstatistics_box : styles.agent_view} `}
 						>
 							<div className={styles.chatstatistics_type}>{label}</div>
 							{loading
@@ -36,7 +35,7 @@ function ChatStatistics({ isAdminView = false, agentId = '' }) {
 								: (
 									<div className={styles.small_data_box}>
 										<div className={styles.chat_numbers}>
-											{getFormattedNumber(chatStats[key]) || MIN_CHAT_NUMBER}
+											{getFormattedNumber(chatStats?.[key] || MIN_CHAT_NUMBER)}
 										</div>
 									</div>
 								)}

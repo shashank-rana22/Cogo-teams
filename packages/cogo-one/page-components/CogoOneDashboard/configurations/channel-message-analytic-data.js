@@ -1,4 +1,4 @@
-import { IcCWhatsapp, IcCFacebook, IcMEmail, IcMPlatformchat } from '@cogoport/icons-react';
+import { IcCWhatsapp, IcCZalo, IcCTelegram, IcMPlatformchat } from '@cogoport/icons-react';
 
 export const CHANNEL_STATS = [
 	{
@@ -8,15 +8,15 @@ export const CHANNEL_STATS = [
 		static_data : 'customer',
 	},
 	{
-		key         : 'facebook',
-		icon        : <IcCFacebook width={20} height={20} />,
-		channel     : 'Facebook',
+		key         : 'zalo',
+		icon        : <IcCZalo width={20} height={20} />,
+		channel     : 'Zalo',
 		static_data : 'customer',
 	},
 	{
-		key         : 'mail',
-		icon        : <IcMEmail fill="#E09B3D" width={20} height={20} />,
-		channel     : 'Mail',
+		key         : 'telegram',
+		icon        : <IcCTelegram width={20} height={20} />,
+		channel     : 'Telegram',
 		static_data : 'customer',
 	},
 	{

@@ -6,13 +6,24 @@ import { CHANNEL_STATS } from '../../configurations/channel-message-analytic-dat
 
 import styles from './styles.module.css';
 
-function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {} }) {
+function ChannelMessageAnalytic({ loading = false, messages = [] }) {
+	const channelStats = CHANNEL_STATS.map((val) => {
+		const { key } = val;
+		const channelPresent = messages.find((item) => item?.type === key);
+		const customer = channelPresent ? channelPresent?.customer : null;
+
+		return {
+			...val,
+			customer,
+		};
+	});
+
 	return (
 		<div className={styles.statistics}>
 			<div className={styles.heading}>Channels Messages Analytics</div>
 			<div className={styles.socoal_icons_and_data_list}>
-				{(CHANNEL_STATS || []).map((stat) => {
-					const { key, channel, static_data, icon } = stat;
+				{(channelStats || []).map((stat) => {
+					const { key, channel, static_data, icon, customer } = stat;
 
 					return (
 						<div className={styles.socoal_icons_and_data} key={key}>
@@ -24,10 +35,7 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 								? <Placeholder height="15px" width="100px" className={styles.placeholder} />
 								: (
 									<div className={styles.customer_nos}>
-										<span>
-											{channelsMessageAnalytics?.[key]
-										|| GLOBAL_CONSTANTS.zeroth_index}
-										</span>
+										{customer || GLOBAL_CONSTANTS.zeroth_index}
 										<span>{static_data}</span>
 									</div>
 								)}
