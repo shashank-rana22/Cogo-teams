@@ -128,14 +128,14 @@ const useGetStepThreeData = ({
 	const onSubmit = async (values) => {
 		const QUOTATIONS = [];
 
-		Object.keys(values).forEach((key) => {
-			const items = values[key];
+		Object.keys(values || {}).forEach((key) => {
+			const items = values[key] || [];
 
 			const newQuote = {
 				id: (service_charges || []).find((charge) => charge?.service_id === key)
 					?.id,
 				service_id : key,
-				line_items : items.map((line_item) => ({
+				line_items : items?.map((line_item) => ({
 					code     : line_item.code,
 					currency : line_item.currency,
 					name     : chargeCodes?.[line_item?.code] || '',
