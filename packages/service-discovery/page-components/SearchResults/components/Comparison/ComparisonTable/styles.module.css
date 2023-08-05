@@ -50,10 +50,6 @@
 	padding-left: 30px;
 }
 
-.column:last-child {
-	align-items: end;
-}
-
 .table_body {
 	display: flex;
 	flex-direction: column;
@@ -71,6 +67,7 @@
 .row:last-child {
 	background-color: #fff;
 	border: none;
+	align-items: end;
 }
 
 .item_details {

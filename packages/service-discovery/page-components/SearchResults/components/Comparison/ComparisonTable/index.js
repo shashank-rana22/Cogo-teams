@@ -16,19 +16,35 @@ function getStringBeforeAndAfterUnderscore(inputString) {
 	return { before: beforeUnderscore, after: afterUnderscore };
 }
 
-function compareByArrayLength(a, b) {
-	const aKey = Object.keys(a)[GLOBAL_CONSTANTS.zeroth_index];
-	const bKey = Object.keys(b)[GLOBAL_CONSTANTS.zeroth_index];
-	return b[bKey].length - a[aKey].length;
-}
+const getFinalLineItems = (lineItems) => {
+	const COMPARISON_KEY = {};
 
-function Table({ comparisonKey, allLineItems, LOGO_MAPPING, mode }) {
+	const finalLineItems = { ...lineItems };
+
+	Object.values(finalLineItems).forEach((arr) => {
+		arr.forEach((item) => {
+			if (item?.code) {
+				if (!isEmpty(item?.serviceObj)) {
+					COMPARISON_KEY[`${item?.code}_${item?.serviceObj?.id}`] = item || '';
+				} else {
+					COMPARISON_KEY[item?.code] = item || '';
+				}
+			}
+		});
+	});
+
+	return { finalLineItems, COMPARISON_KEY };
+};
+
+function Table({ staticKeys = {}, dynamicKeys = {}, staticLineItems = {}, dynamicLineitems = {}, LOGO_MAPPING, mode }) {
+	const itemsKeys = Object.keys({ ...staticLineItems, ...dynamicLineitems });
+
 	const renderTableHeader = () => (
 		<div className={styles.table_header}>
 			<div className={styles.header_column} />
 
-			{allLineItems.map((item) => {
-				const key = Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index];
+			{itemsKeys.map((key) => {
+				// const key = Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index];
 				const columnHeader = key === 'cogo_line' ? 'Cogo Assured' : startCase(key);
 				const imageUrl = LOGO_MAPPING[key];
 
@@ -43,7 +59,7 @@ function Table({ comparisonKey, allLineItems, LOGO_MAPPING, mode }) {
 		</div>
 	);
 
-	const renderTableBody = () => Object.entries(comparisonKey).map(([key, value], index) => {
+	const renderTableBody = (keys, values) => Object.entries(keys).map(([key, value], index) => {
 		const rowClass = index % EVEN_NUMBER_CONDITION === EVEN_CONDITION_REMAINDER ? styles.even : styles.odd;
 		const { serviceObj = {} } = value;
 
@@ -54,7 +70,6 @@ function Table({ comparisonKey, allLineItems, LOGO_MAPPING, mode }) {
 
 		return (
 			<div key={key} className={`${styles.row} ${rowClass}`}>
-
 				<div className={`${styles.column} ${key === 'total_landed_price' ? styles.bold : {}}`}>
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						<div>{value.name}</div>
@@ -71,14 +86,12 @@ function Table({ comparisonKey, allLineItems, LOGO_MAPPING, mode }) {
 					</div>
 				</div>
 
-				{allLineItems.map((item) => {
-					const [lineItem] = Object.values(item);
-
+				{Object.values(values).map((lineItem) => {
 					const lineItemObj =	lineItem.find((childItem) => {
 						if (!isEmpty(childItem.serviceObj)) {
 							return (
 								childItem?.code === getStringBeforeAndAfterUnderscore(key).before
-								&& childItem?.serviceObj?.id === getStringBeforeAndAfterUnderscore(key).after
+				&& childItem?.serviceObj?.id === getStringBeforeAndAfterUnderscore(key).after
 							);
 						}
 						return childItem?.code === key;
@@ -117,37 +130,38 @@ function Table({ comparisonKey, allLineItems, LOGO_MAPPING, mode }) {
 		<div className={styles.table}>
 			{renderTableHeader()}
 
-			<div className={styles.table_body}>{renderTableBody()}</div>
+			<div className={styles.table_body}>
+				{renderTableBody(dynamicKeys, dynamicLineitems)}
+				{renderTableBody(staticKeys, staticLineItems)}
+			</div>
 		</div>
 	);
 }
 
-function ComparisonTable({ allLineItems = [], summary = {}, LOGO_MAPPING = {}, mode = 'fcl_freight' }) {
-	const newAllLineItems = [...allLineItems];
+function ComparisonTable({
+	staticLineItems = {},
+	dynamicLineItems = {},
+	summary = {},
+	LOGO_MAPPING = {},
+	mode = 'fcl_freight',
+}) {
+	const {
+		finalLineItems: newStaticLineItems,
+		COMPARISON_KEY: staticKeys,
+	} = getFinalLineItems(staticLineItems);
 
-	newAllLineItems.sort(compareByArrayLength);
-
-	const COMPARISON_KEY = {};
-
-	newAllLineItems.forEach((obj) => {
-		Object.values(obj).forEach((arr) => {
-			arr.forEach((item) => {
-				if (item?.code) {
-					if (!isEmpty(item?.serviceObj)) {
-						COMPARISON_KEY[`${item?.code}_${item?.serviceObj?.id}`] = item || '';
-					} else {
-						COMPARISON_KEY[item?.code] = item || '';
-					}
-				}
-			});
-		});
-	});
+	const {
+		finalLineItems: newDynamicLineItems,
+		COMPARISON_KEY: dynamicKeys,
+	} = getFinalLineItems(dynamicLineItems);
 
 	return (
 		<div className={styles.container}>
 			<Table
-				comparisonKey={COMPARISON_KEY}
-				allLineItems={newAllLineItems}
+				staticKeys={staticKeys}
+				dynamicKeys={dynamicKeys}
+				staticLineItems={newStaticLineItems}
+				dynamicLineitems={newDynamicLineItems}
 				summary={summary}
 				LOGO_MAPPING={LOGO_MAPPING}
 				mode={mode}

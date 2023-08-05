@@ -202,7 +202,10 @@ function Comparison({
 
 	const LOGO_MAPPING = {};
 
-	const allLineItems = selectedCards.map((cardItem) => {
+	const STATIC_LINE_ITEMS = {};
+	const DYNMAIC_LINE_ITEMS = {};
+
+	selectedCards.forEach((cardItem) => {
 		const { service_rates = [], shipping_line = {}, source } = cardItem;
 
 		const services = Object.entries(service_rates);
@@ -213,7 +216,7 @@ function Comparison({
 			),
 		);
 
-		const staticComparisonKeys = getStaticLineItems(
+		const staticLineItems = getStaticLineItems(
 			cardItem,
 			mode,
 			detail,
@@ -221,18 +224,15 @@ function Comparison({
 			setShowContract,
 		);
 
-		const flattenedArraylineItems = getDyanmicLineItems(lineItems);
-
-		const finalArray = flattenedArraylineItems.concat(staticComparisonKeys);
+		const dynamicLineItems = getDyanmicLineItems(lineItems);
 
 		const logo = source === 'cogo_assured_rate'
 			? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : shipping_line.logo_url;
 
 		LOGO_MAPPING[toSnakeCase(shipping_line.short_name)] = logo;
 
-		return {
-			[toSnakeCase(shipping_line.short_name)]: finalArray,
-		};
+		STATIC_LINE_ITEMS[toSnakeCase(shipping_line.short_name)] = staticLineItems;
+		DYNMAIC_LINE_ITEMS[toSnakeCase(shipping_line.short_name)] = dynamicLineItems;
 	});
 
 	const handleBack = () => setScreen('listRateCard');
@@ -267,9 +267,10 @@ function Comparison({
 
 			<ComparisonTable
 				summary={detail}
-				allLineItems={allLineItems}
 				LOGO_MAPPING={LOGO_MAPPING}
 				mode={mode}
+				staticLineItems={STATIC_LINE_ITEMS}
+				dynamicLineItems={DYNMAIC_LINE_ITEMS}
 			/>
 
 			{showShare ? (
