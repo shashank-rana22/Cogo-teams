@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useState } from 'react';
 
 const PAGE_LIMIT = 10;
@@ -7,13 +8,20 @@ const DEFAULT_PAGE_NUMBER = 1;
 const DEFAULT_NO_OF_AGENTS = 0;
 const MIN_HEIGHT_FOR_API_CALL = 3;
 
-const getParams = ({ page }) => ({
+const getParams = ({ page, userId }) => ({
 	page,
 	sort_by                   : 'escalations',
 	escalation_stats_required : true,
+	filters                   : {
+		sales_agent_rm_id: userId,
+	},
 });
 
 const useListEscalationChat = () => {
+	const { userId } = useSelector(({ profile }) => ({
+		userId: profile.user.id,
+	}));
+
 	const [listData, setListData] = useState({ list: [], isLastPage: false });
 	const [pagination, setPagination] = useState(DEFAULT_PAGE_NUMBER);
 
@@ -25,7 +33,7 @@ const useListEscalationChat = () => {
 	const chatAgent = useCallback(async ({ page }) => {
 		try {
 			const res = await trigger({
-				params: getParams({ page }),
+				params: getParams({ page, userId }),
 			});
 
 			setPagination(page);
@@ -42,7 +50,7 @@ const useListEscalationChat = () => {
 		} catch (error) {
 			console.error(error);
 		}
-	}, [trigger]);
+	}, [trigger, userId]);
 
 	const handleScroll = (e) => {
 		const { clientHeight, scrollTop, scrollHeight } = e.target;
