@@ -5,7 +5,6 @@ import SupplierList from './SupplierList';
 function DetailView() {
 	return (
 		<div>
-			Details View
 			<Header />
 			<Graph />
 			<SupplierList />

@@ -1,12 +1,17 @@
-import { Button, Modal, MultiSelect, Tags } from '@cogoport/components';
+import { Button, CheckboxGroup, Modal, MultiSelect, Tags } from '@cogoport/components';
 import { useState } from 'react';
 
 import EmailInfo from './EmailInfo';
+import PortSelect from './PortSelect';
 import styles from './styles.module.css';
 
 function EmailPreview({ isEmail = false, setIsEmail }) {
 	const onClose = () => {
 		setIsEmail(false);
+	};
+
+	const onConfirm = () => {
+		console.log('clicked confirmed');
 	};
 
 	const options = [
@@ -19,6 +24,18 @@ function EmailPreview({ isEmail = false, setIsEmail }) {
 	const [emailSelected, setEmailSelected] = useState([]);
 
 	const [tagsOption, setTagsOption] = useState([]);
+
+	const [checkBoxValue, setCheckBoxValue] = useState([]);
+
+	const checkBoxOptions = [
+		{
+			label : 'checkbox1',
+			value : 'a1',
+		}, {
+			label : 'checkbox12',
+			value : 'a12',
+		},
+	];
 
 	const onTagChange = (val) => {
 		setTagsOption(val);
@@ -44,78 +61,104 @@ function EmailPreview({ isEmail = false, setIsEmail }) {
 	};
 
 	return (
-		<div>
-			<div style={{ padding: '20px' }}>
+		<div className={styles.container}>
+			<Modal size="xl" show={isEmail} onClose={onClose}>
+				<Modal.Header title={
+					<PortSelect />
+					}
+				/>
+				<Modal.Body>
+					<>
+						<div className={styles.email_title}>
+							Email Preview
+						</div>
+						<div className={styles.email_info}>
+							(You are about to share
+							information with the supplier, please verify the following details.)
+						</div>
 
-				<Modal size="xl" show={isEmail} onClose={onClose}>
-					<Modal.Header title={(
-						<>
-							<div className={styles.email_title}>
-								Email Preview
+					</>
+
+					<div className={styles.email_fields}>
+						<div className={styles.field}>
+							From :
+						</div>
+						{' '}
+						sayali.kumar@cogoport.com
+					</div>
+					<div className={styles.divider} />
+					<div />
+					<div className={styles.email_fields}>
+						<div className={styles.field}>
+							To :
+						</div>
+						{' '}
+						<div className={styles.email}>
+							<div className={styles.multi_select}>
+								<MultiSelect
+									value={emailSelected}
+									onChange={onMultiSelect}
+									placeholder="Select Recipient"
+									options={options}
+									isClearable
+								/>
 							</div>
 							<div>
-								(You are about to share
-								information with the supplier, please verify the following details.)
+								<Tags
+									items={tagsOption}
+									onItemsChange={onTagChange}
+									size="lg"
+								/>
 							</div>
+						</div>
 
-						</>
-					)}
+					</div>
+					<div className={styles.divider} />
+					<div className={styles.email_fields}>
+						<div className={styles.field}>
+							Subject :
+							{'  '}
+						</div>
+						Demand for August 2023 - Marine Trans Shipping Private Limited
+					</div>
+					<div className={styles.divider} />
+					<div />
+					<EmailInfo />
+					<div className={styles.divider} />
+					<div>
+						<img
+							width="100%"
+							alt=""
+							height={300}
+							className={styles.img}
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/yellow_card.svg"
+						/>
+					</div>
+					<CheckboxGroup
+						options={checkBoxOptions}
+						onChange={(val) => { setCheckBoxValue((prev) => ({ ...prev, rowCheck: val })); }}
+						value={checkBoxValue?.rowCheck}
 					/>
-					<Modal.Body>
-						<div className={styles.email_fields}>
-							<div className={styles.field}>
-								From :
-							</div>
-							{' '}
-							sayali.kumar@cogoport.com
+				</Modal.Body>
+				<Modal.Footer>
+					<div className={styles.footer}>
+						<div className={styles.footer_title}>
+							Note : The selected report will be generated and sent automatically
 						</div>
-						<div className={styles.divider} />
-						<div />
-						<div className={styles.email_fields}>
-							<div className={styles.field}>
-								To :
-							</div>
-							{' '}
-							<div className={styles.email}>
-								<div className={styles.multi_select}>
-									<MultiSelect
-										value={emailSelected}
-										onChange={onMultiSelect}
-										placeholder="Select Recipient"
-										options={options}
-										isClearable
-
-									/>
-								</div>
-								<div>
-									<Tags
-										items={tagsOption}
-										onItemsChange={onTagChange}
-										size="lg"
-									/>
-								</div>
-							</div>
-
+						<div className={styles.footer_buttons}>
+							<Button
+								onClick={onClose}
+								size="md"
+								themeType="secondary"
+								className={styles.cancel}
+							>
+								Cancel
+							</Button>
+							<Button onClick={onConfirm} size="md" themeType="accent">Confirm</Button>
 						</div>
-						<div className={styles.divider} />
-						<div className={styles.email_fields}>
-							<div className={styles.field}>
-								Subject :
-								{'  '}
-							</div>
-							Demand for August 2023 - Marine Trans Shipping Private Limited
-						</div>
-						<div className={styles.divider} />
-						<div />
-						<EmailInfo />
-						<div className={styles.divider} />
-					</Modal.Body>
-					<Modal.Footer>
-						<Button onClick={onClose}>OK</Button>
-					</Modal.Footer>
-				</Modal>
-			</div>
-
+					</div>
+				</Modal.Footer>
+			</Modal>
 		</div>
 	);
 }
