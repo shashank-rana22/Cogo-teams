@@ -116,6 +116,7 @@ const controls = () => [
 		label       : 'Personal Email Id',
 		type        : 'email',
 		placeholder : 'Email',
+		disabled    : true,
 		rules       :	{
 			pattern: {
 				value   : GLOBAL_CONSTANTS.regex_patterns.email,
