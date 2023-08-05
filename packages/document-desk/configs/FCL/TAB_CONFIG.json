@@ -60,10 +60,6 @@
         {
             "label":"Cancelled",
             "value":"cancelled"
-        },
-        {
-            "label":"Pending Pre Alert",
-            "value":"pending_pre_alert"
         }
     ],
     "fcl_customs":[
