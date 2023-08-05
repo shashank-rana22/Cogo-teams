@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { merge } from '@cogoport/utils';
 import { useEffect, useCallback, useState } from 'react';
 
 import getFormattedPayload from '../utils/getFormattedPayload';
@@ -48,11 +49,11 @@ const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 
 	useEffect(() => {
 		const params = getFormattedPayload(filters);
-		const extraFilters = KEY_TO_SEND[activeParent] ? { [KEY_TO_SEND[activeParent]]: true } : {};
+		const extraFilters = KEY_TO_SEND[activeParent] ? { filters: { [KEY_TO_SEND[activeParent]]: true } } : {};
 		if (activeParent === 'missing_rates') {
 			getRateRequestsData({ ...params, page });
 		} else {
-			getRatesData({ ...params, ...extraFilters, page });
+			getRatesData(merge({ ...params, page }, extraFilters));
 		}
 	}, [filters, page, activeParent, getRateRequestsData, getRatesData]);
 
