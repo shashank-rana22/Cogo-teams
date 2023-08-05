@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const FIRST_INDEX = 1;
 
-function Step2({ data, setStep, step1_data }) {
+function StepTwo({ data = {}, setStep = () => {}, step1_data = {} }) {
 	const [currentBookingNote, setCurrentBookingNote] = useState('0');
 
 	const { formProps, handleFinalSubmit, departureDate = '' } = data || {};
@@ -26,7 +26,7 @@ function Step2({ data, setStep, step1_data }) {
 			<div className={styles.container}>
 
 				<Tabs
-					activeTab={currentBookingNote}
+					activeTab={currentBookingNote.toString()}
 					onChange={setCurrentBookingNote}
 					className={styles.tabs_container}
 				>
@@ -44,7 +44,7 @@ function Step2({ data, setStep, step1_data }) {
 
 						return (
 							<TabPanel
-								name={index}
+								name={index.toString()}
 								title={`Booking Note ${index + FIRST_INDEX}`}
 								key={keysForRows[index]}
 							>
@@ -92,4 +92,4 @@ function Step2({ data, setStep, step1_data }) {
 	);
 }
 
-export default Step2;
+export default StepTwo;
