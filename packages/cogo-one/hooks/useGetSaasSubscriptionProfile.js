@@ -5,7 +5,7 @@ const getParams = ({ saasSubscriptionCustomerId = '' }) => ({
 	saas_subscription_customer_id: saasSubscriptionCustomerId,
 });
 
-const useGetSaasSubscriptionProfile = ({ saasSubscriptionCustomerId }) => {
+const useGetSaasSubscriptionProfile = ({ saasSubscriptionCustomerId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_saas_subscription_profile',
 		method : 'get',

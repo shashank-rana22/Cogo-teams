@@ -6,9 +6,9 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import useAssignSubscription from '../../../../../../../hooks/useAssignSubscription';
-import useGetBillingAdresses from '../../../../../../../hooks/useGetBillingAdresses';
-import useGetOrganizationAddresses from '../../../../../../../hooks/useGetOrganizationAddresses';
+import useAssignSubscription from '../../../../../../hooks/useAssignSubscription';
+import useGetBillingAdresses from '../../../../../../hooks/useGetBillingAdresses';
+import useGetOrganizationAddresses from '../../../../../../hooks/useGetOrganizationAddresses';
 
 import AddAddressModal from './AddAddressModal';
 import styles from './styles.module.css';

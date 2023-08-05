@@ -25,6 +25,31 @@ export const getSubscriptionColumns = (props) => {
 		}
 	};
 
+	function RenderActions({ isEditable = false, item = {} }) {
+		if (!isEditable) {
+			return null;
+		}
+
+		return (
+			<div className={styles.enter_quota}>
+				<IcMTick
+					width={25}
+					height={25}
+					cursor="pointer"
+					fill="#ABCD62"
+					onClick={() => handleAddQuantity({ item })}
+				/>
+				<IcMCross
+					width={18}
+					height={18}
+					cursor="pointer"
+					fill="#EE3425"
+					onClick={() => setIsEdit((previous) => ({ ...previous, show: false }))}
+				/>
+			</div>
+		);
+	}
+
 	return [
 		{
 			Header   : 'Products',
@@ -36,7 +61,6 @@ export const getSubscriptionColumns = (props) => {
 			Header   : 'Quota',
 			accessor : (item) => {
 				const { id = '', left_limit = 0 } = item || {};
-				console.log('item:', item);
 				const isEditable = show && id === data?.id;
 
 				return (
@@ -86,55 +110,43 @@ export const getSubscriptionColumns = (props) => {
 		{
 			Header   : 'Total',
 			accessor : (item) => (
-				(
-					<div className={styles.label}>
-						{formatAmount({
-							amount   : Number(item.addon_limit) * (Number(quota[item.id]) || DEFAULT_TOTAL_AMOUNT),
-							currency : item.currency,
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'symbol',
-								notation              : 'compact',
-								compactDisplay        : 'short',
-								minimumFractionDigits : 2,
-							},
-						})}
-					</div>
-				)
+				<div className={styles.label}>
+					{formatAmount({
+						amount   : Number(item.addon_limit) * (Number(quota[item.id]) || DEFAULT_TOTAL_AMOUNT),
+						currency : item.currency,
+						options  : {
+							style                 : 'currency',
+							currencyDisplay       : 'symbol',
+							notation              : 'compact',
+							compactDisplay        : 'short',
+							minimumFractionDigits : 2,
+						},
+					})}
+				</div>
 			),
 		},
 		{
 			Header   : ' ',
-			accessor : (item) => (
-				<div className={styles.action}>
-					{!show ? (
-						<IcMEdit
-							width={16}
-							height={16}
-							cursor="pointer"
-							fill="#221F20"
-							onClick={() => setIsEdit((previous) => ({ ...previous, data: item, show: true }))}
-						/>
-					) : (
-						<div style={{ display: 'flex', alignItems: 'center' }}>
-							<IcMTick
-								width={25}
-								height={25}
+			accessor : (item) => {
+				const { id = '' } = item || {};
+				const isEditable = show && id === data?.id;
+
+				return (
+					<div className={styles.action}>
+						{!show ? (
+							<IcMEdit
+								width={16}
+								height={16}
 								cursor="pointer"
-								fill="#ABCD62"
-								onClick={() => handleAddQuantity({ item })}
+								fill="#221F20"
+								onClick={() => setIsEdit((previous) => ({ ...previous, data: item, show: true }))}
 							/>
-							<IcMCross
-								width={18}
-								height={18}
-								cursor="pointer"
-								fill="#EE3425"
-								onClick={() => setIsEdit((previous) => ({ ...previous, show: false }))}
-							/>
-						</div>
-					)}
-				</div>
-			),
+						) : (
+							<RenderActions isEditable={isEditable} item={item} />
+						)}
+					</div>
+				);
+			},
 		},
 	];
 };

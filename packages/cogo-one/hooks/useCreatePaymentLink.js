@@ -4,23 +4,16 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-const getPayload = ({ values = {}, performedById = '', userType = '', organizationId = '' }) => {
-	const { currency = '', amount = '' } = values || {};
+const getPayload = ({ performedById = '', userType = '', saasSubscriptionCustomerId = '', planPricingId = '' }) => ({
+	saas_subscription_customer_id : saasSubscriptionCustomerId,
+	plan_pricing_id               : planPricingId,
+	user_id                       : performedById,
+	platform                      : 'cogone',
+	performed_by_id               : performedById,
+	performed_by_type             : userType === 'partner' ? 'user' : 'agent',
+});
 
-	return {
-		organization_id   : organizationId,
-		service_name      : 'COGO_ONE',
-		source            : 'SUBSCRIPTION',
-		currency,
-		amount,
-		performed_by_id   : performedById,
-		performed_by_type : userType === 'partner' ? 'user' : 'agent',
-	};
-};
-
-function useCreatePaymentLink({ organizationData = {} }) {
-	const { id : organizationId = '' } = organizationData || {};
-
+function useCreatePaymentLink({ saasSubscriptionCustomerId = '' }) {
 	const {
 		performedById,
 		userType,
@@ -32,18 +25,18 @@ function useCreatePaymentLink({ organizationData = {} }) {
 	const [showLink, setShowLink] = useState({ show: false, link: '' });
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_payment_link',
+		url    : '/create_subscription_payment_link',
 		method : 'post',
 	}, { manual: true });
 
-	const createLink = async ({ values = {} }) => {
+	const createLink = async ({ planPricingId = '' }) => {
 		try {
 			const response = await trigger({
 				data: getPayload({
-					values,
 					performedById,
 					userType,
-					organizationId,
+					saasSubscriptionCustomerId,
+					planPricingId,
 				}),
 			});
 			const { link = '' } = response?.data || {};

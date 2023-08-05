@@ -11,8 +11,8 @@ import styles from './styles.module.css';
 
 const NULL_AMOUNT = 0;
 
-const getTotalAmount = ({ quotas = [], quota = {} }) => quotas.reduce(
-	(acc, curr) => acc + (quota?.[curr?.id] || NULL_AMOUNT) * (curr?.left_limit || NULL_AMOUNT),
+const getTotalAmount = ({ quotas, quota }) => quotas.reduce(
+	(acc, curr) => acc + (quota?.[curr?.id] || NULL_AMOUNT) * (curr?.addon_limit || NULL_AMOUNT),
 	NULL_AMOUNT,
 );
 

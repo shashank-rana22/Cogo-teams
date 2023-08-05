@@ -37,14 +37,12 @@ function SubscriptionCard(props) {
 		(a, b) => a.sequence < b.sequence,
 	);
 
-	const FORMATTED_PAYLOAD = {
-		amount   : display_pricing?.[activeTab]?.price,
-		currency : displayCurrency,
-	};
-
 	const handleGenerateLink = ({ plan }) => {
+		const { display_pricing: displayPricing = '' } = plan || {};
+		const planPricingId = displayPricing?.[activeTab]?.id;
+
 		setSelectedPlan(plan);
-		createLink({ values: FORMATTED_PAYLOAD });
+		createLink({ planPricingId });
 	};
 
 	return (

@@ -6,13 +6,14 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useCreatePaymentLink from '../../../../../hooks/useCreatePaymentLink';
+import useGetPaymentStatus from '../../../../../hooks/useGetPaymentStatus';
 import useListSaasPlans from '../../../../../hooks/useListSaasPlans';
 import copyToClipboard from '../../../../../utils/copyToClipboard';
 
 import AddOnModal from './AddOnModal';
+import AssignModal from './AssignModal';
 import styles from './styles.module.css';
 import SubscriptionCard from './SubscriptionCard';
-import AssignModal from './SubscriptionCard/AssignModal';
 
 const CARD_LAYOUT_PLACEHODER_COUNT = 3;
 const CARD_LAYOUT_PLACEHODER = [...Array(CARD_LAYOUT_PLACEHODER_COUNT).keys()];
@@ -37,12 +38,17 @@ function ManageSubscriptions(props) {
 
 	const { plansData = {}, loading = false } = useListSaasPlans({ orgId });
 
+	const { item_plans = [], saas_subscription_customer_id : saasSubscriptionCustomerId = '' } = plansData || {};
+
 	const {
 		createLink = () => {}, createLinkloading = false,
 		showLink = false,
-	} = useCreatePaymentLink({ organizationData });
+	} = useCreatePaymentLink({ saasSubscriptionCustomerId });
+
+	const { paymentDetails } = useGetPaymentStatus();
+	console.log('paymentDetails:', paymentDetails);
+
 	const { show = false, linkUrl = '' } = showLink || {};
-	const { item_plans = [], saas_subscription_customer_id : saasSubscriptionCustomerId = '' } = plansData || {};
 
 	const sortedItemPlans = (item_plans || []).sort(
 		(a, b) => a.priority_sequence - b.priority_sequence,
@@ -93,7 +99,7 @@ function ManageSubscriptions(props) {
 				</div>
 			) : null}
 
-			{isEmpty(sortedItemPlans) ? <EmptyState /> : (
+			{isEmpty(sortedItemPlans) && !loading ? <EmptyState /> : (
 				<div>
 					{loading ? (
 						<div>
@@ -114,17 +120,18 @@ function ManageSubscriptions(props) {
 					))}
 				</div>
 			)}
-
 			<div className={styles.plans_fixed_footer}>
-				<Button
+				{/* This part will be take live soon...ignore commented code */}
+
+				{/* <Button
 					themeType="link"
 					size="md"
 					className={styles.buy_add_on_button}
 					onClick={() => setShowAddOn(true)}
 				>
 					Buy Add-On
-				</Button>
-				<Button themeType="accent" size="md" onClick={() => setShowAssign(true)}>Assign</Button>
+				</Button> */}
+				<Button themeType="accent" size="md" onClick={() => setShowAssign(true)} disabled>Assign</Button>
 			</div>
 
 			<AddOnModal

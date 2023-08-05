@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { MANDENTORY_BILLING_ITEMS, POC_BILLING_ITEMS } from '../../../../../../../../../constants/addOnServices';
+import { MANDENTORY_BILLING_ITEMS, POC_BILLING_ITEMS } from '../../../../../../../../constants/addOnServices';
 import styles from '../styles.module.css';
 
 const getSpecifiedControls = ({

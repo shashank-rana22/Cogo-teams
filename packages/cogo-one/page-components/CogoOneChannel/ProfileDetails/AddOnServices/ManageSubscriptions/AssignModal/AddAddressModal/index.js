@@ -4,9 +4,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import React, { useState, useMemo } from 'react';
 
-import { useGetControls } from '../../../../../../../../configurations/billing-controls';
-import useCreateBillingAddres from '../../../../../../../../hooks/useCreateBillingAddres';
-import { getFieldController } from '../../../../../../../../utils/getFieldController';
+import { useGetControls } from '../../../../../../../configurations/billing-controls';
+import useCreateBillingAddres from '../../../../../../../hooks/useCreateBillingAddres';
+import { getFieldController } from '../../../../../../../utils/getFieldController';
 
 import Form from './Form';
 import styles from './styles.module.css';
