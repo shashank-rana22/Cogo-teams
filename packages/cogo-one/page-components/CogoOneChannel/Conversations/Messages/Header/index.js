@@ -64,7 +64,7 @@ function Header({
 		});
 	};
 
-	const { chat_tags = [] } = activeMessageCard || {};
+	const { chat_tags = [], channel_type: channelType = '' } = activeMessageCard || {};
 
 	const {
 		mobile_no = '',
@@ -166,6 +166,7 @@ function Header({
 					setOpenModal={setOpenModal}
 					updateChat={updateChat}
 					loading={loading}
+					channelType={channelType}
 					supplierLoading={supplierLoading}
 					hasPermissionToEdit={hasPermissionToEdit}
 					canMessageOnBotSession={canMessageOnBotSession}
