@@ -1,25 +1,27 @@
-const getDefaultValues = (oldfields) => {
-	const defaultValues = {};
+const getDefaultValues = (oldFields) => {
+	const DEFAULT_VALUES = {};
 
-	oldfields?.forEach((field) => {
-		const { value, type = '', name = '', controls = [], ...rest } = field;
+	oldFields?.forEach((field) => {
+		const { value, type = '', name = '', controls = [] } = field;
 
 		if (type === 'fieldArray') {
-			const childDeafultValues = {};
+			const CHILD_DEFAULT_VALUES = {};
 
 			controls?.forEach((ctrl) => {
-				childDeafultValues[ctrl?.name] = defaultValues?.[ctrl?.name];
+				CHILD_DEFAULT_VALUES[ctrl?.name] = DEFAULT_VALUES?.[ctrl?.name];
 			});
 
-			defaultValues[name] = value || childDeafultValues;
-		} else {
-			defaultValues[name] = value || '';
-		}
+			const shouldShow = controls?.some?.(({ show = true } = {}) => show);
 
-		return rest;
+			if (shouldShow) {
+				DEFAULT_VALUES[name] = value || CHILD_DEFAULT_VALUES;
+			}
+		} else {
+			DEFAULT_VALUES[name] = value || '';
+		}
 	});
 
-	return defaultValues;
+	return DEFAULT_VALUES;
 };
 
 export default getDefaultValues;

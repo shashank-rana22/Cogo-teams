@@ -12,6 +12,7 @@ function SopAndPoc() {
 		servicesList,
 		primary_service,
 		activeStakeholder,
+		refetch,
 	} = useContext(ShipmentDetailContext);
 
 	const [activeTab, setActiveTab] = useState('poc');
@@ -71,6 +72,8 @@ function SopAndPoc() {
 											shipment_data={shipment_data}
 											servicesList={servicesList}
 											activeStakeholder={activeStakeholder}
+											primary_service={primary_service}
+											getShipmentRefetch={refetch}
 										/>
 									</div>
 								</TabPanel>

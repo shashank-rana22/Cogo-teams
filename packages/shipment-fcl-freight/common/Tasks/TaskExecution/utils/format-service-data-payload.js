@@ -23,12 +23,13 @@ const extraParamsToMerge = (values) => {
 	return {};
 };
 
-const formatDataForService = (
+const formatDataForService = ({
 	dataToSend,
 	rawValues,
 	taskData,
 	serviceIdMapping,
-) => {
+	primaryService,
+}) => {
 	const PAYLOAD = {};
 
 	(dataToSend || []).forEach((sendKeyObj) => {
@@ -42,7 +43,7 @@ const formatDataForService = (
 			} else {
 				PAYLOAD[sendKeyObj?.key] = taskData?.service_type
 					? serviceIdMapping?.[`${taskData?.service_type}.id`]
-					: serviceIdMapping?.[`${taskData?.shipment_type}_service.id`];
+					: serviceIdMapping?.[`${primaryService?.service_type}.id`];
 			}
 		}
 

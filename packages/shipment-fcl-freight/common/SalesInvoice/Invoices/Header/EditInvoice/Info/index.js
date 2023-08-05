@@ -15,8 +15,6 @@ function Info() {
 						{' '}
 					</div>
 				)}
-				animation="scale"
-				interactive
 			>
 				<div className={styles.info_div}>
 					<IcMInfo fill="rgb(89, 54, 240)" />
