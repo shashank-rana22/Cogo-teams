@@ -1,10 +1,10 @@
 import { Placeholder, Input } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { IcMSearchdark, IcMArrowNext } from '@cogoport/icons-react';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { IcMAppSearch } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
-import UserAvatar from '../../../../../common/UserAvatar';
 import useListLeadOrganizationUsers from '../../../../../hooks/useListLeadOrganizationUsers';
+import UserCard from '../UserCard';
 
 import styles from './styles.module.css';
 
@@ -72,8 +72,8 @@ function Leads({
 					onChange={setSearch}
 					value={search}
 					className={styles.input_styles}
-					size="sm"
-					prefix={<IcMSearchdark />}
+					size="md"
+					suffix={<IcMAppSearch className={styles.search_icon} />}
 				/>
 			</div>
 
@@ -86,7 +86,20 @@ function Leads({
 					const {
 						id = '',
 						name = '',
+						email = '',
+						mobile_number = '',
+						mobile_country_code = '',
+						whatsapp_country_code = '',
+						whatsapp_number = '',
 					} = eachUser || {};
+
+					const userData = {
+						name,
+						email,
+						country_code  : whatsapp_country_code || mobile_country_code,
+						user_number   : whatsapp_number || mobile_number,
+						business_name : '',
+					};
 
 					return (
 						<div
@@ -99,11 +112,7 @@ function Leads({
 								});
 							}}
 						>
-							<div className={styles.parent_flex}>
-								<UserAvatar type="whatsapp" />
-								<div className={styles.name}>{startCase(name) || '-'}</div>
-							</div>
-							<IcMArrowNext className={styles.arrow_icon} />
+							<UserCard userData={userData} />
 						</div>
 					);
 				}) }
