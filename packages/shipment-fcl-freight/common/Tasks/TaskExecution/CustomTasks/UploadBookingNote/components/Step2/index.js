@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const FIRST_INDEX = 1;
 
-function StepTwo({ data = {}, setStep = () => {}, step1_data = {} }) {
+function StepTwo({ data = {}, step1_data = {} }) {
 	const [currentBookingNote, setCurrentBookingNote] = useState('0');
 
 	const { formProps, handleFinalSubmit, departureDate = '' } = data || {};
@@ -84,7 +84,7 @@ function StepTwo({ data = {}, setStep = () => {}, step1_data = {} }) {
 			</div>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => setStep(FIRST_INDEX)}>Back</Button>
+				{/* <Button themeType="secondary" onClick={() => setStep(FIRST_INDEX)}>Back</Button> */}
 
 				<Button themeType="primary" onClick={handleSubmit(handleFinalSubmit)}>Next</Button>
 			</div>
