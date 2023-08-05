@@ -12,16 +12,14 @@ function StatsSection({ spectatorType = '' }) {
 	return (
 		<div className={styles.stats_section_container}>
 			{statsIconsAndData.map((item) => {
-				const { label, icon, key } = item;
+				const { label, key } = item;
 
 				const formattedKey = pascalCase(key);
 				return (
 					<StatsBody
-						label={label}
-						formattedKey={key}
-						count={statsData?.[formattedKey]}
-						icon={icon}
+						{...item}
 						key={label}
+						count={statsData?.[formattedKey]}
 						statsLoading={statsLoading}
 					/>
 				);
