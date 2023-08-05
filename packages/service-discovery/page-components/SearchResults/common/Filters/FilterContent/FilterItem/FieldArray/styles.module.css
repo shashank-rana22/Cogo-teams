@@ -11,7 +11,7 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	margin: 0 -8px;
 }
 
 .childs_container {
@@ -24,6 +24,14 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	border-radius: 6px;
+	border: 1px dotted #fef199;
+	padding: 12px 12px 8px 12px;
+	margin-bottom: 16px;
+}
+
+.child:last-child {
+	margin-bottom: 8px;
 }
 
 .heading {
@@ -41,12 +49,20 @@
 	margin-bottom: 12px;
 }
 
-.remove_icon {
-	width: 20px;
-	height: 20px;
-	margin-bottom: 20px;
-	margin-left: 4px;
+.remove_button {
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+
+	&:hover {
+		font-weight: 600;
+	}
+}
+
+.remove_icon {
+	width: 18px;
+	height: 18px;
+	margin-right: 4px;
 }
 
 .flex_container {
@@ -62,9 +78,11 @@
 .form_item {
 	display: flex;
 	flex-direction: column;
-
-	/* width: 100%; */
 	margin-bottom: 24px;
+
+	&.sub_control {
+		margin-bottom: 0;
+	}
 
 	:global {
 		.ui_input_container {
@@ -88,9 +106,6 @@
 .content {
 	display: flex;
 	flex-wrap: wrap;
-
-	/* align-items: last baseline;
-	justify-content: last baseline; */
 	justify-content: space-between;
 }
 
@@ -109,10 +124,10 @@
 }
 
 .form_container {
-	/* display: flex;
+	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	width: 100%; */
+	width: 100%;
 }
 
 .add_icon {

@@ -9,6 +9,7 @@ function CargoModal({
 	cargoModal = 'progress',
 	setCargoModal = () => {},
 	refetch = () => {},
+	goToCheckout = () => {},
 }) {
 	const [showForm, setShowForm] = useState(false);
 
@@ -33,6 +34,7 @@ function CargoModal({
 	const setAddCargoInsurance = () => {
 		setCargoModal('success');
 		setShowForm(false);
+		goToCheckout();
 	};
 
 	const COMPONENT_MAPPING = {
@@ -58,6 +60,7 @@ function CargoModal({
 				cargoModal,
 				setCargoModal,
 				setShowForm,
+				goToCheckout,
 			},
 		},
 	};

@@ -5,8 +5,17 @@ function Content({
 	cargoModal = 'progress',
 	setCargoModal = () => {},
 	setShowForm = () => {},
+	goToCheckout = () => {},
 }) {
-	const onClose = () => setCargoModal('not_needed');
+	const onClose = () => {
+		setCargoModal('success');
+		goToCheckout();
+	};
+
+	const onProceed = () => {
+		setCargoModal('progress');
+		setShowForm(true);
+	};
 
 	return (
 		<Modal
@@ -14,7 +23,6 @@ function Content({
 			show={cargoModal === 'progress'}
 			onClose={onClose}
 			closeOnOuterClick={false}
-			showCloseIcon={false}
 		>
 			<Modal.Header title="Do you want to add Cargo Insurance?" />
 
@@ -28,8 +36,7 @@ function Content({
 				<Button
 					type="button"
 					themeType="secondary"
-					// disabled={loading || addCargoLoading}
-					onClick={() => setCargoModal('success')}
+					onClick={onClose}
 					size="md"
 				>
 					No, I like to live dangerously
@@ -39,7 +46,7 @@ function Content({
 					type="button"
 					style={{ marginLeft: 12 }}
 					themeType="primary"
-					onClick={() => { setCargoModal('progress'); setShowForm(true); }}
+					onClick={onProceed}
 				>
 					Yes, I want to insure my cargo
 				</Button>

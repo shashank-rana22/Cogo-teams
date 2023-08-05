@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
@@ -58,7 +59,11 @@ function Child({
 
 					if (subControls) {
 						return (
-							<div key={name} className={styles.form_item} style={{ width: `${flex}%` }}>
+							<div
+								key={name}
+								className={`${styles.form_item} ${isSubControl && styles.sub_control}`}
+								style={{ width: `${flex}%` }}
+							>
 								{newControl?.showTopLabelOnly ? (
 									<div className={styles.heading}>{newControl.label || lowerlabel}</div>
 								) : null}
@@ -147,10 +152,17 @@ function Child({
 			</div>
 
 			{length >= TWO_VALUE && !disabled && !isSubControl ? (
-				<IcMDelete
-					className={styles.remove_icon}
-					onClick={() => remove(index, FIRST_INDEX)}
-				/>
+				<div className={styles.remove_button}>
+					<Button
+						size="md"
+						type="button"
+						themeType="tertiary"
+						onClick={() => remove(index, FIRST_INDEX)}
+					>
+						<IcMDelete className={styles.remove_icon} />
+						Delete
+					</Button>
+				</div>
 			) : null}
 		</div>
 	);

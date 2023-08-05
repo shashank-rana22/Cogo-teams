@@ -71,6 +71,7 @@ function FieldArray({
 					</div>
 				))}
 			</div>
+
 			{showButtons && !disabled ? (
 				<div className={styles.add_button}>
 					<Button

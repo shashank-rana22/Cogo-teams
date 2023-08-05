@@ -25,6 +25,16 @@ function SubsidiaryServices({
 
 	const addedOptions = getAddedServices(data.service_details || {});
 
+	const uniqueAddedOptions = Object.values(
+		addedOptions.reduce((acc, obj) => {
+			const key = JSON.stringify(obj);
+			if (!acc[key]) {
+				acc[key] = obj;
+			}
+			return acc;
+		}, {}),
+	);
+
 	const SUBSIDIARY_OPTIONS = [];
 
 	(possible_subsidiary_services || []).forEach((item) => {
@@ -50,7 +60,7 @@ function SubsidiaryServices({
 	const [popularServices, setPopularServices] = useState(mostPopularArray);
 
 	const removeSelectedOptions = (array) => {
-		const finalArray = array.filter((item) => !addedOptions.some(
+		const finalArray = array.filter((item) => !uniqueAddedOptions.some(
 			(selectedItem) => selectedItem.value === item.value,
 		));
 		return finalArray;
@@ -94,8 +104,8 @@ function SubsidiaryServices({
 	}
 
 	const servicesToShow = useMemo(
-		() => [...addedOptions, ...popularServices],
-		[addedOptions, popularServices],
+		() => [...uniqueAddedOptions, ...popularServices],
+		[uniqueAddedOptions, popularServices],
 	);
 
 	return (
@@ -127,7 +137,7 @@ function SubsidiaryServices({
 							data={data}
 							itemData={item}
 							key={`${item.label}_${item.value}`}
-							selectedServices={addedOptions}
+							selectedServices={uniqueAddedOptions}
 							popularServices={popularServices}
 							setPopularServices={setPopularServices}
 							possible_subsidiary_services={possible_subsidiary_services}

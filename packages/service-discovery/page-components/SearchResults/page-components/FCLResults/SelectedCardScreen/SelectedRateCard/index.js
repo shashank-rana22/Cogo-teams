@@ -177,6 +177,7 @@ function SelectedRateCard({
 					cargoModal={cargoModal}
 					setCargoModal={setCargoModal}
 					detail={detail}
+					goToCheckout={handleBook}
 				/>
 			) : null}
 

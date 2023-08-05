@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const getLoadArray = (search_type, serviceDetails) => {
 	const load = [];
 
@@ -38,12 +40,12 @@ const getLoadArray = (search_type, serviceDetails) => {
 					cargo_readiness_date : service.cargo_readiness_date,
 					volume               : service.volume,
 					weight               : service.weight,
-					height               : service.packages?.[0].height,
-					length               : service.packages?.[0].length,
-					width                : service.packages?.[0].width,
-					package_type         : service.packages?.[0].packing_type,
-					packages_count       : service.packages?.[0].packages_count,
-					stackability         : service.packages?.[0].handling_type,
+					height               : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].height,
+					length               : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].length,
+					width                : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].width,
+					package_type         : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].packing_type,
+					packages_count       : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].packages_count,
+					stackability         : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].handling_type,
 				});
 			} else if (service.service_type === 'air_freight') {
 				load.push({
