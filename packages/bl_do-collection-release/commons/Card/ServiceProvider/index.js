@@ -80,7 +80,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 											caret={false}
 											content={(
 												<BLPopver
-													blDetails={item?.bill_of_ladings}
+													blDoDetails={docs}
 													bl_do={stateProps.activeTab}
 												/>
 											)}

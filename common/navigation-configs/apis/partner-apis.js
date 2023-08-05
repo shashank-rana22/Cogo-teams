@@ -12813,6 +12813,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'lead',
 		},
+		{
+			api          : 'list_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
 	],
 	analytics_dashboard: [
 		{

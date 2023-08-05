@@ -9,6 +9,7 @@ const getTradePartiesDefaultParams = ({ companyType = '', tradePartyType = '' })
 		defaultParams: {
 			billing_addresses_data_required : true,
 			other_addresses_data_required   : true,
+			poc_data_required               : true,
 		},
 	};
 	return params;

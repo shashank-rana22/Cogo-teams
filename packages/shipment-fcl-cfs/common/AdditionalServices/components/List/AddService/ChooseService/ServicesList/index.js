@@ -1,4 +1,5 @@
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
+import { isEmpty } from '@cogoport/utils';
 
 import Header from './CardHeader';
 import CardItem from './Carditem';
@@ -9,13 +10,11 @@ function List({ fields, data, loading }) {
 		<div className={styles.container}>
 			<Header fields={fields} />
 			<div className={styles.card_list}>
-				{data.length ? (
-					(data || []).map((item) => (
+				{isEmpty(data)
+					? <EmptyState />
+					: (data || []).map((item) => (
 						<CardItem item={item} loading={loading} fields={fields} key={item?.id} />
-					))
-				) : (
-					<EmptyState />
-				)}
+					))}
 			</div>
 		</div>
 	);

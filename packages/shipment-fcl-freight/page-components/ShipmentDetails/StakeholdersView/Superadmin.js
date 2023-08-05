@@ -1,11 +1,10 @@
-import { Tabs, TabPanel, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
-import { useRouter } from 'next/router';
 import React, { useMemo, useState } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
@@ -21,7 +20,6 @@ import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
-import handleVersionChange from '../../../helpers/handleVersionChange';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
 import config from '../../../stakeholderConfig';
@@ -32,8 +30,6 @@ const services_additional_methods = ['stakeholder', 'service_objects', 'booking_
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function Superadmin({ get = {}, activeStakeholder = '' }) {
-	const router = useRouter();
-
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
@@ -72,15 +68,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 						<RolloverDetails />
 
 						<div className={styles.toggle_chat}>
-							<Toggle
-								size="md"
-								onLabel="Old"
-								offLabel="New"
-								onChange={() => handleVersionChange({
-									partner_id  : router?.query?.partner_id,
-									shipment_id : shipment_data?.id,
-								})}
-							/>
+
 							<ShipmentChat />
 						</div>
 					</div>
@@ -117,7 +105,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 							</TabPanel>
 
 							<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-								<PurchaseInvoice />
+								<PurchaseInvoice activeTab={activeTab} />
 							</TabPanel>
 
 							<TabPanel name="documents" title="Documents">
