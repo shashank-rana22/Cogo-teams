@@ -128,7 +128,7 @@ const useGetStepThreeData = ({
 	const onSubmit = async (values) => {
 		const QUOTATIONS = [];
 
-		Object.keys(values).forEach((key) => {
+		Object.keys(values || {}).forEach((key) => {
 			const items = values[key];
 
 			const newQuote = {
