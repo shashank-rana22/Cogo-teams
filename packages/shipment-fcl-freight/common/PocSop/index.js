@@ -12,6 +12,7 @@ function SopAndPoc() {
 		servicesList,
 		primary_service,
 		activeStakeholder,
+		refetch,
 	} = useContext(ShipmentDetailContext);
 
 	const [activeTab, setActiveTab] = useState('poc');
@@ -66,16 +67,18 @@ function SopAndPoc() {
 								className={styles.custom_tabs}
 							>
 								<TabPanel name="poc" title="POC">
-									<div style={{ height: '80vh', overflow: 'scroll' }}>
+									<div style={{ height: '80vh', overflow: 'auto' }}>
 										<Poc
 											shipment_data={shipment_data}
 											servicesList={servicesList}
 											activeStakeholder={activeStakeholder}
+											primary_service={primary_service}
+											getShipmentRefetch={refetch}
 										/>
 									</div>
 								</TabPanel>
 								<TabPanel name="sop" title="SOP">
-									<div style={{ height: '80vh', overflow: 'scroll' }}>
+									<div style={{ height: '80vh', overflow: 'auto' }}>
 										<Sop shipment_data={shipment_data} primary_service={primary_service} />
 									</div>
 								</TabPanel>

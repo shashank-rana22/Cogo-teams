@@ -132,6 +132,12 @@ export default {
 			'4c6f6036-2383-4c40-9b84-fa2b598031e1', // KAM SO1
 			'eb292d80-a05f-4a56-a0f7-ef51255583aa', // Prod_KAM_Transport_Supply
 			'b5dd96b2-11a2-4655-8319-040614262f3d', // OKAM (Operational Key Account Manager)
+			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
+			'69013c68-2d1b-4332-91fb-ada1a6471240', // business consultant
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5',
+			'5f79d531-50e0-4843-995f-71057e659e0f',
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',
+			'264a83ab-d438-48c3-8095-bb503f5b619c',
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
@@ -593,73 +599,31 @@ export default {
 		},
 
 		enrichment: {
-			whatsapp_number_label                 : 'Whatsapp Number',
-			allowed_to_create_enrichment_requests : false,
-			tabs                                  : ['manual_enrichment', 'file_management'],
-			manual_enrichment                     : {
-				columns: {
-					relationship_manager_view: {
-						active: [
-							'id',
-							'business_name',
-							'registration_number',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'registration_number',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'registration_number',
-							'requested_agent',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
-					agent_view: {
-						active: [
-							'id',
-							'business_name',
-							'registration_number',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'registration_number',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'registration_number',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
+			whatsapp_number_label            : 'Whatsapp Number',
+			is_allowed_for_enrichment_sheets : true,
+			hide_columns                     : {
+				relationship_manager_view: {
+					active    : ['status'],
+					responded : ['status'],
+					success   : ['status'],
+					failed    : ['action'],
 				},
-				actions: {
-					active: {
-						add: 'Add Details',
-					},
-					responded:	{
-						edit: 'Edit Details',
-					},
-					success: {
-						view: 'View Details',
-					},
+				agent_view: {
+					active    : ['requested_agent', 'status'],
+					responded : ['requested_agent', 'status'],
+					success   : ['requested_agent', 'status'],
+					failed    : ['requested_agent', 'action'],
+				},
+			},
+			actions: {
+				active: {
+					add: 'Add Details',
+				},
+				responded:	{
+					edit: 'Edit Details',
+				},
+				success: {
+					view: 'View Details',
 				},
 			},
 		},
@@ -670,12 +634,21 @@ export default {
 				},
 			},
 		},
+		over_heads: {
+			region_specific_cogo_entities            : false,
+			expense_non_recurring_upload_invoice_tds : false,
+		},
 	},
 	others: {
 		registration_number: {
 			label      : 'GST',
 			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 			max_length : 15,
+		},
+
+		identification_number: {
+			label   : 'PAN Number',
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
 		},
 
 		banking_code: {
@@ -692,6 +665,8 @@ export default {
 			label: 'SEZ',
 		},
 
+		ask_gst_details: true,
+
 		navigations: {
 			onboard_vendor: {
 				validate_registration : true,
@@ -701,6 +676,22 @@ export default {
 				has_voice_call_access       : true,
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
+			},
+			bookings: {
+				invoicing: {
+					is_invoice_mergeable : false,
+					disable_edit_invoice : true,
+				},
+			},
+			business_finance: {
+				ar: {
+					settlement: {
+						invoice_number: {
+							document_key : 'destinationDocumentValue',
+							irn_key      : 'destinationIrnNumber',
+						},
+					},
+				},
 			},
 		},
 	},

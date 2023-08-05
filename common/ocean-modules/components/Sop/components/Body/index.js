@@ -1,5 +1,4 @@
-import { Loader } from '@cogoport/components';
-
+import ThreeDotLoader from '../../../../common/ThreeDotLoader';
 import getInstructionData from '../../helpers/getInstructionData';
 import Additional from '../Additional';
 import Card from '../Card';
@@ -30,8 +29,8 @@ function Body({
 
 	return loading
 		? (
-			<div className={styles.loader}>
-				<Loader />
+			<div className={styles.loading_wrapper}>
+				<ThreeDotLoader message="Loading SOPs" fontSize={16} size={30} />
 			</div>
 		)
 		: (

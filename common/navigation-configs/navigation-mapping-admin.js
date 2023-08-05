@@ -940,7 +940,6 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
 			},
-
 			{
 				key           : 'business_finance-reports',
 				title         : 'Reports',
@@ -949,6 +948,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.reports,
+			},
+			{
+				key           : 'business_finance-cogo_financials',
+				title         : 'Cogo Financials',
+				href          : '/v2/business-finance/cogo-financials',
+				as            : '/v2/business-finance/cogo-financials',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_financials,
 			},
 		],
 		module_type: 'dashboards',
@@ -1112,6 +1120,17 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		icon          : IcMDashboard,
 		possible_apis : apis.unified_dashboard,
+		main_apis     : [],
+		module_type   : 'dashboards',
+	},
+	employee_directory: {
+		key           : 'employee_directory',
+		title         : 'Employee Directory',
+		href          : '/v2/employee-directory',
+		as            : '/v2/employee-directory',
+		type          : 'link',
+		icon          : IcMDashboard,
+		possible_apis : apis.employee_directory_hrms,
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
@@ -1292,11 +1311,11 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-cost_booking_desk',
 				title         : 'Cost Booking Desk',
-				href          : '/cost-booking-desk',
-				as            : '/cost-booking-desk',
+				href          : '/v2/cost-booking-desk',
+				as            : '/v2/cost-booking-desk',
 				type          : 'link',
 				main_apis     : ['list_cost_booking_desk_shipments'],
-				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens],
+				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-cancellation_policies',
@@ -1359,7 +1378,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
+				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -2491,6 +2510,17 @@ const navigationMappingAdmin = {
 		href          : '/v2/ftl-admin',
 		as            : '/v2/ftl-admin',
 		possible_apis : apis.ftl_admin,
+	},
+	centralised_customer_service: {
+		key           : 'centralised_customer_service',
+		title         : 'Centralised Customer Service Desk',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		href          : '/v2/centralised-customer-service',
+		as            : '/v2/centralised-customer-service',
+		main_apis     : [],
+		possible_apis : apis.centralised_customer_service,
+		icon          : IcMDashboard,
 	},
 };
 

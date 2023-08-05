@@ -1,0 +1,7 @@
+.container {
+	background-color: #fff;
+}
+
+.background {
+	background-color: var(--color-tertiary-blue-5);
+}

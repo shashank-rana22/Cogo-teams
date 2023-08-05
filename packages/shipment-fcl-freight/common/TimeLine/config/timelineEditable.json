@@ -5,10 +5,9 @@
             "awaiting_service_provider_confirmation",
             "confirmed_by_service_provider",
             "containers_gated_in",
-            "vessel_departed",
-            "vessel_arrived"
+            "vessel_departed"
         ],
-        "key_present_check": ["vessel_arrived_at"]
+        "key_present_check": ["vessel_arrived_at", "is_containers_gated_out"]
     },
     "stakeholders_not_allowed": [
         "booking_agent",

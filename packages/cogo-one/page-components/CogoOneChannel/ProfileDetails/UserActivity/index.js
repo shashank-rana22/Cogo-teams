@@ -11,10 +11,19 @@ import useListUserChatSummary from '../../../../hooks/useListUserChatSummary';
 import ActiveComponent from './ActiveComponent';
 import Filters from './Filters';
 import LoadingState from './LoadingState';
+import ShipmentLoadingState from './ShipmentActivities/LoadingState';
 import styles from './styles.module.css';
 
 const EmptyFunction = () => {};
 const DEFAULT_PAGE_COUNT = 1;
+
+function Loader({ activityTab = '' }) {
+	if (activityTab === 'transactional') {
+		return <ShipmentLoadingState />;
+	}
+
+	return <LoadingState activityTab={activityTab} />;
+}
 
 function UserActivities(props) {
 	const {
@@ -238,7 +247,7 @@ function UserActivities(props) {
 				</div>
 			)}
 			{(loading || timeLineLoading) ? (
-				<LoadingState activityTab={activityTab} />
+				<Loader activityTab={activityTab} />
 			) : (
 				<ActiveComponent
 					emptyCheck={emptyCheck}
@@ -254,7 +263,6 @@ function UserActivities(props) {
 			{(!loading || !timeLineLoading) && (
 				<div className={styles.pagination}>
 					<Pagination
-						type="page"
 						currentPage={pagination}
 						totalItems={subtab_count}
 						pageSize={10}
