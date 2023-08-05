@@ -8,13 +8,6 @@ import useCreateEmployeeDocument from '../../../hooks/useCreateEmployeeDocument'
 import controls from './controls';
 import styles from './styles.module.css';
 
-const DOC_ARRAY = [
-	'aadhaar_card_number',
-	'aadhaar_card',
-	'pan_card_number',
-	'pan_card',
-];
-
 const DOC_TYPE_MAPPING = ['aadhaar_card', 'pan_card', 'driving_license', 'passport'];
 
 const getDocType = ({ documents }) => {
@@ -130,9 +123,6 @@ function EditIdentificationDocuments({ data: info, getEmployeeDetails }) {
 									) : null}
 								</span>
 
-								{DOC_ARRAY.includes(controlName) && status !== 'approved' ? (
-									<sup className={styles.sup}>*</sup>
-								) : null}
 							</div>
 
 							<div className={styles.control}>

@@ -113,23 +113,23 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 		} = values || {};
 
 		const permanent_final_address = {
-			city    : permanent_city,
-			state   : permanent_state,
-			country : permanent_country,
-			pincode : permanent_pincode,
-			address : permanent_address,
+			city    : permanent_city || '',
+			state   : permanent_state || '',
+			country : permanent_country || '',
+			pincode : permanent_pincode || '',
+			address : permanent_address || '',
 		};
 		const current_final_address = {
-			city    : current_city,
-			state   : current_state,
-			country : current_country,
-			pincode : current_pincode,
-			address : current_address,
+			city    : current_city || '',
+			state   : current_state || '',
+			country : current_country || '',
+			pincode : current_pincode || '',
+			address : current_address || '',
 		};
 		const final_params = {
 			...rest,
-			permanent_address : permanent_final_address,
-			present_address   : current_final_address,
+			permanent_address : permanent_final_address || {},
+			present_address   : current_final_address || {},
 		};
 		updateEmployeeDetails({ data: final_params, formType: PERSONAL_INFO });
 	};
@@ -143,7 +143,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 			emergency_contact_details: {
 				mobile_number: {
 					number: content?.detail?.emergency_contact_details?.
-						[GLOBAL_CONSTANTS.zeroth_index]?.mobile_number,
+						[GLOBAL_CONSTANTS.zeroth_index]?.mobile_number || '',
 					country_code: content?.detail?.emergency_contact_details?.
 						[GLOBAL_CONSTANTS.zeroth_index]?.mobile_country_code || DEFAULT_MOBILE_CODE,
 				},

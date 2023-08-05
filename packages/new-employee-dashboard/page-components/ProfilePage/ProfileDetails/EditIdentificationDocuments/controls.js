@@ -7,8 +7,7 @@ const controls = [
 		type        : 'number',
 		placeholder : 'Aadhaar Card Number',
 		rules       : {
-			required : 'This is required',
-			pattern  : {
+			pattern: {
 				value   : GLOBAL_CONSTANTS.regex_patterns?.aadhar_number,
 				message : 'Enter valid Adhar card number',
 			},
@@ -21,7 +20,6 @@ const controls = [
 		type             : 'fileUpload',
 		maxSize          : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
 		accept           : '.pdf',
-		rules            : { required: 'This is required' },
 		verification_key : 'aadhaar_card',
 	},
 	{
@@ -30,8 +28,7 @@ const controls = [
 		type        : 'input',
 		placeholder : 'Pan Card Number',
 		rules       : {
-			required : 'This is required',
-			pattern  : {
+			pattern: {
 				value   : GLOBAL_CONSTANTS.regex_patterns?.pan_number,
 				message : 'Enter valid Pan card number',
 			},
@@ -44,7 +41,6 @@ const controls = [
 		type             : 'fileUpload',
 		accept           : '.pdf',
 		maxSize          : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
-		rules            : { required: 'This is required' },
 		verification_key : 'pan_card',
 	},
 	{
