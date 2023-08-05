@@ -4,14 +4,16 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
+const DEFAULT_PAGE = 1;
+
 const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 	const { general: { query = {} } } = useSelector((state) => state);
 	const { spot_search_id = '', rate_card_id, checkout_id } = query;
 
 	const [screen, setScreen] = useState(rate_card_id ? 'selectedCardScreen' : 'listRateCard');
 	const [selectedCard, setSelectedCard] = useState({});
+	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [filters, setFilters] = useState({
-		page             : 1,
 		departure_before : undefined,
 		departure_after  : undefined,
 	});
@@ -27,8 +29,6 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 		let finalFilters = {};
 
 		Object.keys(filters).forEach((key) => {
-			if (key === 'page') return;
-
 			finalFilters = {
 				...finalFilters,
 				[key]: filters[key] || undefined,
@@ -39,7 +39,7 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 			await trigger({
 				params: {
 					spot_search_id,
-					page       : filters.page,
+					page,
 					page_limit : 10,
 					filters    : { ...finalFilters, status: 'active' },
 				},
@@ -50,18 +50,22 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		}
-	}, [filters, setComparisonRates, spot_search_id, trigger]);
+	}, [filters, page, setComparisonRates, spot_search_id, trigger]);
 
 	useEffect(() => {
 		if (screen === 'comparison') return;
 		getSearch();
-	}, [getSearch, filters, screen]);
+	}, [getSearch, filters, screen, page]);
 
 	useEffect(() => {
 		if (checkout_id) return;
 
 		setScreen(rate_card_id ? 'selectedCardScreen' : 'listRateCard');
 	}, [rate_card_id, checkout_id]);
+
+	useEffect(() => {
+		setPage(DEFAULT_PAGE);
+	}, [filters]);
 
 	return {
 		refetchSearch: getSearch,
@@ -73,6 +77,8 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 		selectedCard,
 		filters,
 		setFilters,
+		page,
+		setPage,
 	};
 };
 export default useGetSpotSearch;

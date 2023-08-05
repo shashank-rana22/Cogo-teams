@@ -106,6 +106,7 @@ function ListRateCards({
 	comparisonRates = {},
 	filters = {},
 	setFilters = () => {},
+	setPage = () => {},
 	refetchSearch = () => {},
 	selectedWeek = {},
 	setSelectedWeek = () => {},
@@ -147,6 +148,7 @@ function ListRateCards({
 				paginationProps={paginationProps}
 				filters={filters}
 				setFilters={setFilters}
+				setPage={setPage}
 				setComparisonRates={setComparisonRates}
 				setSelectedWeek={setSelectedWeek}
 				selectedWeek={selectedWeek}
@@ -214,13 +216,10 @@ function ListRateCards({
 				<div className={styles.pagination}>
 					<Pagination
 						type="table"
-						currentPage={filters.page}
+						currentPage={paginationProps?.page}
 						totalItems={paginationProps?.total_count}
 						pageSize={paginationProps?.page_limit}
-						onPageChange={(val) => setFilters((prev) => ({
-							...prev,
-							page: val,
-						}))}
+						onPageChange={(val) => setPage(val)}
 					/>
 				</div>
 			) : null}

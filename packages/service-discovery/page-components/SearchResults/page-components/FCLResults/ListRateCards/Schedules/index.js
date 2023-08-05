@@ -16,6 +16,7 @@ function Schedules({
 	selectedWeek = {},
 	setSelectedWeek = () => {},
 	setFilters = () => {},
+	setPage = () => {},
 	setComparisonRates = () => {},
 	loading = false,
 }) {
@@ -58,7 +59,7 @@ function Schedules({
 					<div className={styles.footer}>
 						<Footer
 							paginationProps={paginationProps}
-							setFilters={setFilters}
+							setPage={setPage}
 							selectedWeek={selectedWeek}
 							loading={loading}
 							schedules={schedules}

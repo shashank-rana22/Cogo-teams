@@ -83,6 +83,8 @@ function SearchResults() {
 		setScreen,
 		setSelectedCard,
 		selectedCard,
+		page = 1,
+		setPage = () => {},
 	} = useGetSpotSearch({ setComparisonRates });
 
 	const {
@@ -91,7 +93,6 @@ function SearchResults() {
 		list:rates = [],
 		possible_subsidiary_services = [],
 		total_count,
-		page,
 		page_limit,
 	} = data || {};
 
@@ -148,6 +149,7 @@ function SearchResults() {
 					comparisonRates={comparisonRates}
 					filters={filters}
 					setFilters={setFilters}
+					setPage={setPage}
 					paginationProps={paginationProps}
 					loading={loading}
 					setHeaderProps={setHeaderProps}

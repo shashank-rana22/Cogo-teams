@@ -8,7 +8,13 @@ import styles from './styles.module.css';
 
 const ONE_VALUE = 1;
 
-function Footer({ paginationProps = {}, selectedWeek = {}, setFilters = () => {}, loading = false, schedules = [] }) {
+function Footer({
+	paginationProps = {},
+	selectedWeek = {},
+	setPage = () => {},
+	loading = false,
+	schedules = [],
+}) {
 	const { page, page_limit, total_count } = paginationProps;
 
 	const { count = 0, start_date = '', end_date = '' } = selectedWeek;
@@ -67,10 +73,7 @@ function Footer({ paginationProps = {}, selectedWeek = {}, setFilters = () => {}
 						currentPage={page}
 						totalItems={total_count}
 						pageSize={page_limit}
-						onPageChange={(val) => setFilters((prev) => ({
-							...prev,
-							page: val,
-						}))}
+						onPageChange={(val) => setPage(val)}
 					/>
 				</div>
 			)}
