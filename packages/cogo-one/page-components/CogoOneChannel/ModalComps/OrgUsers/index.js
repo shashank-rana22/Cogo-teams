@@ -1,20 +1,30 @@
 import { Modal, Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
+import LeadOrganizations from './LeadOrganizations';
+import Leads from './Leads';
 import Organizations from './Organizations';
 import styles from './styles.module.css';
 
 const TABS_MAPPING = [
+	{ name: 'leads', title: 'Leads' },
 	{ name: 'organization', title: 'Organizations' },
-	{ name: 'lead_organization', title: 'Lead Organizations' },
 ];
+
+const TABS_COMPONENT_MAPPING = {
+	organization      : Organizations,
+	lead_organization : LeadOrganizations,
+	leads             : Leads,
+};
 
 function OrgUsers({
 	openKamContacts = false,
 	setOpenKamContacts = () => {},
 	setActiveTab = () => {},
 }) {
-	const [activeOrg, setActiveOrg] = useState('organization');
+	const [activeOrg, setActiveOrg] = useState('leads');
+
+	const Component = TABS_COMPONENT_MAPPING[activeOrg];
 
 	return (
 		<Modal
@@ -26,7 +36,7 @@ function OrgUsers({
 		>
 			<Modal.Header
 				className={styles.header_styles}
-				title="Organizaton Users"
+				title="Contacts"
 			/>
 			<Modal.Body className={styles.body_styles}>
 				<Tabs
@@ -34,11 +44,15 @@ function OrgUsers({
 					themeType="tertiary"
 					onChange={setActiveOrg}
 				>
-					{(TABS_MAPPING || []).map((item) => (
-						<TabPanel key={item?.name} name={item?.name} title={item?.title} />
-					))}
+					{(TABS_MAPPING || []).map((item) => {
+						const { name = '', title = '' } = item || {};
+
+						return (
+							<TabPanel key={name} name={name} title={title} />
+						);
+					})}
 				</Tabs>
-				<Organizations
+				<Component
 					setActiveTab={setActiveTab}
 					setOpenKamContacts={setOpenKamContacts}
 					activeOrg={activeOrg}

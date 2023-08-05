@@ -669,7 +669,7 @@ function asyncListRoles() {
 	return {
 		labelKey    : 'role_name',
 		valueKey    : 'id',
-		endpoint    : 'list_roles',
+		endpoint    : 'list_employee_roles',
 		initialCall : true,
 		params      : {
 			filters: {

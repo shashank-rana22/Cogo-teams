@@ -1,0 +1,69 @@
+.title {
+	position: relative;
+	z-index: 1;
+	width: 150px;
+	height: 30px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.title::before {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 50%;
+	height: 2px;
+	content: "";
+	border-bottom: 2px solid #f68b21;
+	border-radius: 20px;
+}
+
+.filter_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.controller_item {
+	width: 50%;
+	padding: 8px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.label {
+	margin-bottom: 8px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.btn_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.reset_btn {
+	margin-right: 12px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.refresh_icon {
+	margin-right: 4px;
+}
+
+.popover_filter_container {
+	@media (max-width: 768px) {
+		height: 500px;
+		overflow-y: auto;
+	}
+}
