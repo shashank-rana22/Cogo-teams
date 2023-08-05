@@ -1,5 +1,3 @@
-import React from 'react';
-
 import useGetCollectionParty from '../hooks/useGetCollectionPartylist';
 
 import CollectionPartyDetails from './CollectionPartyDetails';
@@ -11,21 +9,21 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 		refetch,
 	} = useGetCollectionParty({ servicesData, shipmentData, shipment_id: shipmentData?.id });
 
+	if (collectionPartyLoading) {
+		return <Loader />;
+	}
 	return (
-		<div>
-			{collectionPartyLoading ? (<Loader />)
-				: (collectionPartyList || []).map((collectionParty) => (
-					<CollectionPartyDetails
-						shipmentData={shipmentData}
-						collectionParty={collectionParty}
-						refetch={refetch}
-						servicesData={servicesData}
-						key={collectionParty.id}
-						AddService={AddService}
-						fullwidth={shipmentData?.shipment_type === 'ftl_freight'}
-					/>
-				))}
-		</div>
+		(collectionPartyList || []).map((collectionParty) => (
+			<CollectionPartyDetails
+				shipmentData={shipmentData}
+				collectionParty={collectionParty}
+				refetch={refetch}
+				servicesData={servicesData}
+				key={collectionParty.id}
+				AddService={AddService}
+				fullwidth={shipmentData?.shipment_type === 'ftl_freight'}
+			/>
+		))
 	);
 }
 
