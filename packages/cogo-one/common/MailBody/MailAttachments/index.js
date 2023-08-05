@@ -1,4 +1,4 @@
-import { IcMDocument, IcMDownload } from '@cogoport/icons-react';
+import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -20,7 +20,7 @@ function MailAttachments({ mediaUrls = [] }) {
 		<div className={styles.container}>
 			{formatedFiles.map((file) => (
 				<div className={styles.preview_wrapper} key={file.fileUrl}>
-					<IcMDocument />
+					{file?.fileIcon || null}
 					<div
 						role="presentation"
 						className={styles.name}

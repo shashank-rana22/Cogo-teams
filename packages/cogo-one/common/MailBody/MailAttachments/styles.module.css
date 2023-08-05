@@ -16,6 +16,10 @@
 	&:hover {
 		cursor: pointer;
 	}
+
+	svg {
+		fill: #4f4f4f;
+	}
 }
 
 .name {
