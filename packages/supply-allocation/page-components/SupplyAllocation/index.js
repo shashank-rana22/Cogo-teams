@@ -7,9 +7,9 @@ function SupplyAllocation() {
 		<>
 			<Header />
 			<LocationSelect />
-			<List />
+			<List source="add" />
 			<div>your favourite regions</div>
-			<List />
+			<List source="view" />
 		</>
 	);
 }

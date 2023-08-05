@@ -1,5 +1,7 @@
 import { Button } from '@cogoport/components';
+import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useMemo } from 'react';
 
 import StyledTable from '../../../commons/StyledTable';
 
@@ -26,61 +28,59 @@ const data = [
 	},
 ];
 
-function List() {
+function List({ source = '' }) {
 	const router = useRouter();
 
-	const columns = [
+	const columns = useMemo(() => [
 		{
 			id       : 'origin',
 			Header   : 'ORIGIN',
 			accessor : (item) => item.firstName,
 		},
 		{
-			id       : 'DESITNATION',
-			Header   : 'DESITNATION',
+			id       : 'destination',
+			Header   : 'DESTINATION',
 			accessor : (item) => item.lastName,
 		},
 		{
-			id: 'avg_profitablity',
-
-			Header   : 'AVG PROFITABLITY',
-			accessor : (item) => item.lastName,
+			id       : 'avg_profitability',
+			Header   : 'AVG PROFITABILITY',
+			accessor : (item) => item.firstName,
 		},
 		{
-			id     : 'percent_fulfillemt',
-			Header : `% FULFILLMENT
-			(ON BEST RATE)`,
-			accessor: (item) => item.lastName,
+			id       : 'percent_fulfillment',
+			Header   : '% FULFILLMENT (ON BEST RATE)',
+			accessor : (item) => item.firstName,
 		},
 		{
 			id       : 'forecasted_volume',
 			Header   : 'FORECASTED VOLUME',
-			accessor : (item) => item.lastName,
+			accessor : (item) => item.firstName,
 		},
 		{
 			id       : 'actions',
 			Header   : '',
 			accessor : () => (
-				<Button onClick={() => {
-					router.push('/supply-allocation/view');
-				}}
+				<Button
+					themeType="secondary"
+					onClick={() => {
+						router.push('/supply-allocation/view');
+					}}
 				>
-					View
 
+					{source === 'add' ? 'Add to List' : 'View'}
+					{' '}
+					<IcMArrowRight />
 				</Button>
 			),
 		},
-	];
+	], [source, router]);
 
 	return (
 		<div className={styles.container}>
-
-			<StyledTable
-				data={data}
-				columns={columns}
-			/>
-
+			<StyledTable data={data} columns={columns} />
 		</div>
 	);
 }
+
 export default List;
