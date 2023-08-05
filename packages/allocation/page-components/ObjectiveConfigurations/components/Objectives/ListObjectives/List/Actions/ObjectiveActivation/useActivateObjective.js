@@ -1,12 +1,18 @@
 import { Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
-import { useState } from 'react';
+
+const MAX_LENGTH = 2;
 
 const useActivateObjective = (props) => {
 	const { objectiveId, setShowActionModal } = props;
 
-	const [activationDate, setActivationDate] = useState(new Date());
+	const formState = useForm({
+		defaultValues: {
+			activation_date: new Date(),
+		},
+	});
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/objective_activation_date',
@@ -14,9 +20,18 @@ const useActivateObjective = (props) => {
 		authkey : 'post_allocation_objective_activation_date',
 	}, { manual: true });
 
-	const onSetActivation = async () => {
+	const onSetActivation = async (values) => {
+		const { activation_date, communication_details, communication_operator } = values || {};
+
 		try {
-			const payload = { objective_id: objectiveId, activate_at: activationDate };
+			const payload = {
+				objective_id           : objectiveId,
+				activate_at            : activation_date,
+				is_email_required      : !!communication_details?.includes('is_email_required'),
+				is_mobile_required     : !!communication_details?.includes('is_mobile_required'),
+				communication_operator : communication_details?.length > MAX_LENGTH
+					? communication_operator : undefined,
+			};
 
 			await trigger({ data: payload });
 
@@ -29,8 +44,7 @@ const useActivateObjective = (props) => {
 	return {
 		loading,
 		onSetActivation,
-		activationDate,
-		setActivationDate,
+		formState,
 	};
 };
 

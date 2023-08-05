@@ -1,5 +1,5 @@
 import { Stepper } from '@cogoport/components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import STEPPER_OPTIONS_MAPPING from '../../../configurations/objective-form-stepper-options';
 import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../constants/create-form-stepper-keys-mapping';
@@ -37,10 +37,6 @@ function CreateAndEditForm(props) {
 		/>,
 	};
 
-	useEffect(() => {
-		console.log('formValues :: ', formValues);
-	}, [formValues]);
-
 	return (
 		<section className={styles.container}>
 			<div className={styles.stepper_container}>
@@ -49,7 +45,6 @@ function CreateAndEditForm(props) {
 					items={STEPPER_OPTIONS_MAPPING}
 					active={activeStep}
 					setActive={setActiveStep}
-					enableForwardClick
 				/>
 			</div>
 

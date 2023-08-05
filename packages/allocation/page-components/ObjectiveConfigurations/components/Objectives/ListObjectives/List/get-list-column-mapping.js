@@ -149,23 +149,38 @@ const getListColumnMapping = (props) => {
 			key      : 'activation',
 			flex     : 1,
 			Header   : <div />,
-			accessor : ({ id, lead_objective_status }) => (
-				<Button
-					type="button"
-					themeType="secondary"
-					disabled={lead_objective_status === 'verification_pending'}
-					onClick={() => setShowActionModal({
-						mode: ['verification_pending', 'verified'].includes(lead_objective_status)
-							? 'activation' : 'deactivation',
-						objectiveId: id,
-					})}
-				>
-					<strong>
-						{['verification_pending', 'verified'].includes(lead_objective_status)
-							? 'Set Activation' : 'Deactivate'}
-					</strong>
-				</Button>
-			),
+			accessor : ({ id, lead_objective_status, status, activate_at }) => {
+				const finalStatus = status === 'live' ? status : lead_objective_status;
+
+				if (finalStatus === 'live') {
+					return (
+						<Button
+							type="button"
+							themeType="secondary"
+							onClick={() => setShowActionModal({
+								mode        : 'deactivation',
+								objectiveId : id,
+							})}
+						>
+							<b>Deactivate</b>
+						</Button>
+					);
+				}
+
+				return (
+					<Button
+						type="button"
+						themeType="secondary"
+						disabled={finalStatus === 'verification_pending'}
+						onClick={() => setShowActionModal({
+							mode        : 'activation',
+							objectiveId : id,
+						})}
+					>
+						<b>{isEmpty(activate_at) ? 'Set Activation' : 'Update Activation'}</b>
+					</Button>
+				);
+			},
 		},
 	];
 
