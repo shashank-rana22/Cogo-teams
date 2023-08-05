@@ -10,6 +10,8 @@ import {
 	RadioGroupController,
 	CheckboxController,
 	CreatableMultiSelectController,
+	MobileNumberController,
+	ChipsController,
 } from '@cogoport/forms';
 
 import FieldArrayController from './FieldArray';
@@ -27,6 +29,8 @@ const CONTROLLER_MAPPING = {
 	textArea           : TextAreaController,
 	checkbox           : CheckboxController,
 	'creatable-select' : CreatableMultiSelectController,
+	mobile_number      : MobileNumberController,
+	chips              : ChipsController,
 };
 
 export const getFieldController = (type = 'text') => CONTROLLER_MAPPING[type] || null;

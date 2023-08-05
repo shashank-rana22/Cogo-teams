@@ -1,0 +1,101 @@
+.plans_container {
+	padding: 12px 24px;
+	margin: 12px 0;
+	background: #fff;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	border-radius: 6px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 8%);
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.plans_header {
+	font-size: 16px;
+	font-weight: 800;
+	color: #221f20;
+
+	span {
+		margin-left: 3px;
+	}
+}
+
+.plans_sub_header {
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+	color: #ee3425;
+
+	span {
+		margin-left: 5px;
+	}
+}
+
+.plans_points {
+	display: flex;
+	align-items: center;
+	margin: 8px 0;
+	font-size: 12px;
+	color: #828282;
+}
+
+.plan_points_prefix {
+	margin-right: 4px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.active_plan_label {
+	padding: 4px 0;
+	font-weight: 600;
+	color: #abcd62;
+	text-align: center;
+}
+
+.plan_tag {
+	padding: 4px 8px;
+	font-size: 12px;
+	font-weight: 500;
+	background: #fcdc00;
+	border-radius: 40px;
+}
+
+.align_content_middle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.subscription_currency {
+	margin: 0 2px;
+	font-size: 18px;
+}
+
+.rate_per_month_with_currency {
+	margin: 0 4px;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.change_color_on_hover {
+	color: #fff;
+}
+
+.footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.call_to_action {
+	margin: 10px 0;
+}
+
+.custom_plan_img {
+	margin: 8px 0;
+}

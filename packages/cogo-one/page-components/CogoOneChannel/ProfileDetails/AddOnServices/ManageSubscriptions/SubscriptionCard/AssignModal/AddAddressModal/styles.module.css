@@ -1,0 +1,61 @@
+.element_column {
+	width: 45%;
+}
+
+.error_text {
+	font-size: 10px;
+	color: #ee3425;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
+}
+
+.modal_heading {
+	margin-left: 10px;
+	font-size: 18px;
+}
+
+.element_row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.address_save_label {
+	margin: 5px 0;
+	margin-bottom: 6px;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.tax_number_label {
+	margin: 0 3px;
+}
+
+.modal_body_resolution {
+	min-height: 500px;
+}
+
+.add_new_address_button {
+	margin-left: 15px;
+}
+
+.form_item_styled {
+	margin-bottom: 10px;
+}
+
+.address_type {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}

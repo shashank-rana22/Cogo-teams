@@ -1,0 +1,23 @@
+.cancel_button {
+	margin-right: 10px;
+}
+
+.title {
+	margin-bottom: 10px;
+}
+
+.modal_body_content {
+	min-height: 500px;
+	padding: 20px 30px;
+}
+
+.table_container {
+	width: 70%;
+	margin-left: 100px;
+}
+
+.table_footer {
+	display: flex;
+	justify-content: flex-end;
+	font-weight: 600;
+}

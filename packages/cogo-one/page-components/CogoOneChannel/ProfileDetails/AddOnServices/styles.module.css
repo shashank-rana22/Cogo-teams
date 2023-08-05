@@ -1,0 +1,89 @@
+.main_container {
+	padding: 12px 12px 0;
+}
+
+.heading {
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.tabs_container {
+	display: flex;
+	padding: 5px 0;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 6px;
+	margin: 0 10px;
+	text-align: center;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+
+	&:first-child {
+		margin: 0;
+	}
+
+	&:last-child {
+		margin: 0;
+	}
+}
+
+.active_card {
+	border: 1.5px solid #ee3425;
+}
+
+.service_name_label {
+	font-size: 12px;
+	color: #828282;
+}
+
+.active_label {
+	font-weight: 500;
+	color: #000;
+}
+
+.disabled_card {
+	cursor: not-allowed;
+}
+
+.plans_fixed_footer {
+	position: sticky;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+}
+
+.left_limit {
+	margin-right: 6px;
+}
+
+.enter_quantity {
+	width: 100px;
+}
+
+.plus_icon {
+	display: flex;
+	align-items: center;
+	width: 100px;
+	height: 32px;
+	font-weight: 600;
+	color: #849e4c;
+}
+
+.action {
+	display: flex;
+	align-items: center;
+	width: 70px;
+}
+
+.enter_quota {
+	display: flex;
+	align-items: center;
+}
