@@ -11,7 +11,7 @@ export const useStakeholderCheck = () => {
 	}));
 
 	const stakeholderMap = [
-		{ role_ids: [geo.uuid.kam_ids, geo.uuid.centralised_customer_support], stakeholder: 'booking_agent' },
+		{ role_ids: geo.uuid.kam_ids, stakeholder: 'booking_agent' },
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
 		{ role_ids: geo.uuid.so_1_manager, stakeholder: 'booking_desk_manager' },
 		{ role_ids: geo.uuid.service_ops2_role_id, stakeholder: 'document_desk' },
@@ -29,6 +29,7 @@ export const useStakeholderCheck = () => {
 		{ role_ids: geo.uuid.finops_manager, stakeholder: 'finops_manager' },
 		{ role_ids: geo.uuid.document_control_manager, stakeholder: 'document_control_manager' },
 		{ role_ids: geo.uuid.document_control_lead, stakeholder: 'document_control_lead' },
+		{ role_ids: geo.uuid.centralised_customer_support, stakeholder: 'booking_agent' },
 		{
 			role_ids: [geo.uuid.coe_finance_head,
 				geo.uuid.super_admin_id,
