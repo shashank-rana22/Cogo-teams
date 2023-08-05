@@ -26,7 +26,7 @@ function StepTwo({ data = {}, setStep = () => {}, step1_data = {} }) {
 			<div className={styles.container}>
 
 				<Tabs
-					activeTab={currentBookingNote.toString()}
+					activeTab={currentBookingNote?.toString()}
 					onChange={setCurrentBookingNote}
 					className={styles.tabs_container}
 				>
@@ -44,7 +44,7 @@ function StepTwo({ data = {}, setStep = () => {}, step1_data = {} }) {
 
 						return (
 							<TabPanel
-								name={index.toString()}
+								name={index?.toString()}
 								title={`Booking Note ${index + FIRST_INDEX}`}
 								key={keysForRows[index]}
 							>
