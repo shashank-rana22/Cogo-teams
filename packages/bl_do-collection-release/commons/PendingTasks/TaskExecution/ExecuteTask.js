@@ -7,10 +7,13 @@ import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 import styles from './styles.module.css';
 
+const REDUCE_LENGTH_BY = 1;
+
 function ExecuteTask({
 	task = {},
 	refetch = () => {},
 	onCancel = () => {},
+	shipment_data = {},
 	servicesLoading = false,
 	primary_service = {},
 	servicesList = [],
@@ -30,7 +33,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData, primary_service, servicesList });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - 1]
+		? steps[currentStep] || steps[steps.length - REDUCE_LENGTH_BY]
 		: {};
 
 	if (loading || servicesLoading) {
@@ -48,7 +51,8 @@ function ExecuteTask({
 			onCancel={onCancel}
 			refetch={refetch}
 			primary_service={primary_service}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - REDUCE_LENGTH_BY}
+			shipment_data={shipment_data}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

@@ -132,6 +132,14 @@ export default {
 			'4c6f6036-2383-4c40-9b84-fa2b598031e1', // KAM SO1
 			'eb292d80-a05f-4a56-a0f7-ef51255583aa', // Prod_KAM_Transport_Supply
 			'b5dd96b2-11a2-4655-8319-040614262f3d', // OKAM (Operational Key Account Manager)
+			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
+			'69013c68-2d1b-4332-91fb-ada1a6471240', // business consultant
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5',
+			'5f79d531-50e0-4843-995f-71057e659e0f',
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',
+			'264a83ab-d438-48c3-8095-bb503f5b619c',
+			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
+			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
@@ -234,8 +242,11 @@ export default {
 		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
-		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
-		cogo_one_admin_ids    : [
+		so_2_manager          : [
+			'1665784f-6e58-4299-8a33-4b7487f61188',
+			'eff02645-cb9c-44bf-8f5a-4d273b36e52d', // Prod_SO-2 Manager
+		],
+		cogo_one_admin_ids: [
 			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
@@ -258,6 +269,7 @@ export default {
 		},
 		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
+		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
 	},
 	options: {
 		registration_types: [
@@ -659,6 +671,8 @@ export default {
 			label: 'SEZ',
 		},
 
+		ask_gst_details: true,
+
 		navigations: {
 			onboard_vendor: {
 				validate_registration : true,
@@ -668,6 +682,12 @@ export default {
 				has_voice_call_access       : true,
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
+			},
+			bookings: {
+				invoicing: {
+					is_invoice_mergeable : false,
+					disable_edit_invoice : true,
+				},
 			},
 			business_finance: {
 				ar: {

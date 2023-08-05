@@ -467,6 +467,63 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 	],
+	employee_directory_hrms: [
+		{
+			api          : 'list_all_squads',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_sub_chapters',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_tribes',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_chapters',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_managers',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_stats',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_detail',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_bulk_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_locations',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+	],
 };
 
 export default HRMS;
