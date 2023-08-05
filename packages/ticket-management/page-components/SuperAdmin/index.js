@@ -19,7 +19,7 @@ function SuperAdmin() {
 	});
 	const [date, setDate] = useState({
 		startDate : subtractDays(new Date(), SUBTRACT_DAYS),
-		endate    : new Date(),
+		endDate   : new Date(),
 	});
 
 	return (
@@ -27,10 +27,7 @@ function SuperAdmin() {
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"
-				onChange={(val) => {
-					setActiveTab(val);
-					setDate({ startDate: null, endate: null });
-				}}
+				onChange={(val) => setActiveTab(val)}
 				className={styles.tab_panel}
 			>
 				<TabPanel
@@ -53,7 +50,13 @@ function SuperAdmin() {
 			</Tabs>
 
 			<div className={styles.date_filter}>
-				<DateRangepicker name="date" onChange={setDate} value={date} isPreviousDaysAllowed />
+				<DateRangepicker
+					name="date"
+					value={date}
+					onChange={setDate}
+					maxDate={new Date()}
+					isPreviousDaysAllowed
+				/>
 			</div>
 		</div>
 

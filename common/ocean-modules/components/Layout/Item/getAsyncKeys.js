@@ -796,6 +796,11 @@ const getAsyncFields = (key) => {
 			defaultParams : {},
 			microService  : 'business_finance',
 		},
+		'hscode-list': {
+			valueKey : 'id',
+			lableKey : 'name',
+			asyncKey : 'hs_code_list',
+		},
 
 	};
 

@@ -99,7 +99,9 @@ function OrganizationDetails({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>Organization Details</div>
+			<div className={styles.title}>
+				{organizationId ? 'Organization Details' : 'Lead Organization Details'}
+			</div>
 			{orgLoading ? (
 				<>
 					<div className={styles.content}>

@@ -11,6 +11,12 @@ import styles from './styles.module.css';
 
 const PARTNER_ID_INDEX_IN_PATH = 1;
 
+const SHIPMENT_TYPE_PATH = {
+	fcl_freight : 'fcl',
+	lcl_freight : 'lcl',
+	fcl_local   : 'fcl_local',
+};
+
 const iconMapping = {
 	fcl_freight : IcMFfcl,
 	lcl_freight : IcMFlcl,
@@ -23,11 +29,12 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 	const handleClick = useCallback(() => {
 		const path = router.asPath.split('/');
 
-		const newPathname = `/${path[PARTNER_ID_INDEX_IN_PATH]}/shipments/${item.id}
+		const newPathname = `/v2/${path[PARTNER_ID_INDEX_IN_PATH]}
+		/booking/${SHIPMENT_TYPE_PATH[stateProps.shipment_type]}/${item.id}
 		?${CONSTANTS.url_navigation_params}`;
 
 		window.location.replace(newPathname);
-	}, [router.asPath, item.id]);
+	}, [router.asPath, item.id, stateProps]);
 
 	const Element = iconMapping[stateProps.shipment_type || 'fcl_freight'];
 

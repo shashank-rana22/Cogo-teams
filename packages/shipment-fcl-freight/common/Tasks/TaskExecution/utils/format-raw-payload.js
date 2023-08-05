@@ -74,19 +74,6 @@ const formatRawValues = (rawValues, task, getApisData) => {
 			),
 		};
 	}
-	if (
-		task?.task === 'update_container_details'
-		&& task?.shipment_type === 'fcl_freight_local'
-	) {
-		return {
-			update_data: (rawValues?.update_data || []).map((item) => ({
-				id   : item?.id,
-				data : {
-					...item,
-				},
-			})),
-		};
-	}
 
 	if (values?.authorize_letter_and_dpd_code) {
 		const newRawValues = JSON.parse(JSON.stringify(values));
