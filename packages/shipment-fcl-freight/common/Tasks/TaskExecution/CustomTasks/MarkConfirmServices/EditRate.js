@@ -5,7 +5,7 @@ import { Layout } from '@cogoport/ocean-modules';
 import useUpdateShipmentService from '../../../../../hooks/useUpdateShipmentService';
 import getDefaultValues from '../../utils/get-default-values';
 import Step3 from '../UploadBookingNote/components/Step3';
-import useGetStep3Data from '../UploadBookingNote/helpers/useGetStep3Data';
+import useGetStepThreeData from '../UploadBookingNote/helpers/useGetStep3Data';
 
 import getControls from './helper/getControls';
 import styles from './styles.module.css';
@@ -20,7 +20,7 @@ function EditRate({
 }) {
 	const filterServicesList = (servicesList.filter((item) => item?.id === task?.service_id));
 
-	const editQuote = useGetStep3Data({
+	const editQuote = useGetStepThreeData({
 		servicesList    : filterServicesList,
 		shipment_data,
 		onCancel,
