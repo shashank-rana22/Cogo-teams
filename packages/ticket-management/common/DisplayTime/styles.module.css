@@ -1,0 +1,8 @@
+.container {
+	display: flex;
+	align-items: center;
+}
+
+.state {
+	margin-right: 4px;
+}

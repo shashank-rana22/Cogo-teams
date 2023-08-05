@@ -1311,11 +1311,11 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-cost_booking_desk',
 				title         : 'Cost Booking Desk',
-				href          : '/cost-booking-desk',
-				as            : '/cost-booking-desk',
+				href          : '/v2/cost-booking-desk',
+				as            : '/v2/cost-booking-desk',
 				type          : 'link',
 				main_apis     : ['list_cost_booking_desk_shipments'],
-				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens],
+				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-cancellation_policies',
@@ -1378,7 +1378,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
+				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-document_desk',

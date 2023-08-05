@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-const LOADERS_COUNT = 4;
+const LOADERS_COUNT = 5;
 
 function Card() {
 	return (

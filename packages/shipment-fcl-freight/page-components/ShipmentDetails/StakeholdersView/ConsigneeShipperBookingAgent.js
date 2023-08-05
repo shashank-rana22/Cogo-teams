@@ -13,6 +13,7 @@ import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
+import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -25,24 +26,22 @@ import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
-
 function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee_shipper_booking_agent' }) {
-	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
-
-	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
+	const [activeTab, setActiveTab] = useState('overview');
+	const {
+		shipment_data = {}, isGettingShipment = false, getShipmentStatusCode = '',
+		container_details = [],
+	} = get || {};
 
 	const rollover_containers = (container_details || []).filter(
-		(container) => container?.rollover_status === 'requested',
+		(c) => c?.rollover_status === 'requested',
 	);
-
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
 		additional_methods: SERVICE_ADDITIONAL_METHODS,
 		activeStakeholder,
 	});
-
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
-
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
@@ -50,7 +49,6 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 		activeStakeholder,
 		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
-
 	return (
 		<ShipmentPageContainer
 			isGettingShipment={isGettingShipment}
@@ -62,9 +60,10 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 					<div className={styles.top_header}>
 						<ShipmentInfo />
 
-						<RolloverDetails />
-
-						<ShipmentChat />
+						<div className={styles.toggle_chat}>
+							<RolloverDetails />
+							<ShipmentChat />
+						</div>
 					</div>
 
 					{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
@@ -92,6 +91,10 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 
 							<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 								<Tasks />
+							</TabPanel>
+
+							<TabPanel name="invoice" title="Sales Invoice">
+								<SalesInvoice />
 							</TabPanel>
 
 							<TabPanel name="documents" title="Documents">
