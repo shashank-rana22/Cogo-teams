@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Header from '../../common/Header';
+import TryOldBanner from '../../common/TryOldBanner';
 
 import useGetSpotSearch from './hooks/useGetSpotSearch';
 import FCLResults from './page-components/FCLResults';
@@ -136,6 +137,7 @@ function SearchResults() {
 				}
 				className={styles.children}
 			>
+				<TryOldBanner />
 				<FCLResults
 					rates={rates}
 					detail={detail}

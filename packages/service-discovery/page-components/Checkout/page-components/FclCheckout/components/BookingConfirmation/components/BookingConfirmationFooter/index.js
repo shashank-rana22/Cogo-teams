@@ -102,6 +102,8 @@ function BookingConfirmationFooter({
 	isVeryRisky = false,
 	setIsShipmentCreated = () => {},
 	earnable_cogopoints = {},
+	setEror = () => {},
+	error = '',
 }) {
 	const {
 		query: { shipment_id },
@@ -193,6 +195,22 @@ function BookingConfirmationFooter({
 		return () => {};
 	}, [hasExpired, validity_end]);
 
+	useEffect(() => {
+		if (!quotation_email_sent_at) {
+			setEror('please send quotation Email to continue');
+			return;
+		}
+
+		if (isEmpty(invoicingParties)) {
+			setEror('Ther should be atleast 1 invoicing party');
+			return;
+		}
+
+		if (disableConditionForFcl) {
+			setEror('please select document preferences in Invoicing party that contains FCL freight');
+		}
+	}, [disableConditionForFcl, invoicingParties, quotation_email_sent_at, setEror]);
+
 	const {
 		booking_status = '',
 		manager_approval_proof = '',
@@ -222,6 +240,13 @@ function BookingConfirmationFooter({
 					{hasExpired ? 'This Quotation has expired' : ''}
 				</span>
 			</div>
+
+			{!isEmpty(error) ? (
+				<div className={styles.error}>
+					{error}
+					....
+				</div>
+			) : null}
 
 			<div className={styles.button_container}>
 				{!hasExpired && bookingConfirmationMode !== 'email' ? (

@@ -4,6 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import Header from '../../../common/Header';
+import TryOldBanner from '../../../common/TryOldBanner';
 import { LoadingState } from '../commons/LoadingState';
 import DotLoader from '../commons/LoadingState/DotLoader';
 import { CheckoutContext } from '../context';
@@ -128,6 +129,8 @@ function Checkout({ checkout_type = '' }) {
 						/>
 					))}
 				</Breadcrumb>
+
+				<TryOldBanner />
 
 				<div className={styles.children}>
 					<ActiveComponent
