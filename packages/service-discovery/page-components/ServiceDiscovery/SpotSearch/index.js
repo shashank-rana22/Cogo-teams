@@ -1,6 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import TryOldBanner from '../../../common/TryOldBanner';
+
 import Header from './components/Header';
 import ModeSelection from './components/ModeSelection';
 import OtherServices from './components/OtherServices';
@@ -23,6 +25,8 @@ function SpotSearch() {
 
 	return (
 		<div className={styles.container}>
+			<TryOldBanner />
+
 			<div className={styles.header}>
 				<Header
 					organization={organization}

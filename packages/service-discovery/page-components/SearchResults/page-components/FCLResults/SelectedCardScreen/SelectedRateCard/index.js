@@ -95,7 +95,7 @@ function SelectedRateCard({
 					<span className={styles.line}>
 						Selected:
 						<span style={{ fontWeight: 'bold', marginLeft: 8 }}>
-							{rateCardData?.shipping_line?.short_name}
+							{source === 'cogo_assured_rate' ? 'Cogo Assured' : rateCardData?.shipping_line?.short_name}
 						</span>
 					</span>
 
