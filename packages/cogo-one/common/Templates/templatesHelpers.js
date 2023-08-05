@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import { STATUS_MAPPING } from '../../constants';
 
 import styles from './styles.module.css';
+import TemplateDocument from './TemplateDocument';
 
 const PREVIEW_REPLACE_MAPPING = [
 	{ find: GLOBAL_CONSTANTS.regex_patterns.occurrences_of_paragraphs_tag, replace: '<br>' },
@@ -20,6 +21,10 @@ export function Preview({
 	previewData = '',
 	variables = [],
 	setCustomizableData = () => {},
+	tags = [],
+	fileValue = {},
+	setFileValue = () => {},
+	fileName = '',
 }) {
 	const formattedPreview = PREVIEW_REPLACE_MAPPING.reduce(
 		(accumulator, currentValue) => accumulator?.replaceAll(currentValue?.find, currentValue?.replace),
@@ -37,6 +42,14 @@ export function Preview({
 		<>
 			<div dangerouslySetInnerHTML={{ __html: formattedPreview }} />
 			<div className={styles.user_work_scope}>
+				{tags.includes('document') && (
+					<TemplateDocument
+						setFileValue={setFileValue}
+						fileValue={fileValue}
+						fileName={fileName}
+					/>
+				)}
+
 				{(variables || []).map((item) => (
 					<div className={styles.scope_name} key={item}>
 						{startCase(item)}

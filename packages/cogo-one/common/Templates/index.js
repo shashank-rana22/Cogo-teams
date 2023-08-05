@@ -1,4 +1,6 @@
 import { Input, Button } from '@cogoport/components';
+import { AsyncSelect } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -13,6 +15,8 @@ import styles from './styles.module.css';
 import { Preview, Loader, ListItem } from './templatesHelpers';
 
 const DEFAULT_OPTIONS = ['whatsapp_new_message_modal', 'bulk_communication'];
+const LAST_VALUE = 1;
+const SHIPMENT_STATE = ['completed', 'in_progress', 'confirmed_by_importer_exporter', 'shipment_received'];
 
 function Templates({
 	openCreateReply = false,
@@ -23,19 +27,22 @@ function Templates({
 	setDialNumber = () => {},
 	viewType = '',
 	userName = '',
+	orgId = '',
 }) {
 	const [customizableData, setCustomizableData] = useState({});
 	const [activeCard, setActiveCard] = useState({
 		show : DEFAULT_OPTIONS.includes(type),
 		data : {},
 	});
+	const [fileValue, setFileValue] = useState({});
+	const [selectShipmentId, setSelectShipmentId] = useState('');
 
 	const {
 		sendCommunicationTemplate = () => {},
 		communicationLoading = false,
 	} = data || {};
 
-	const { name, html_template, variables = [] } = activeCard?.data || {};
+	const { name, html_template, variables = [], tags = [] } = activeCard?.data || {};
 
 	const isAllKeysAndValuesPresent = variables.every(
 		(key) => (key in customizableData) && customizableData[key],
@@ -45,6 +52,9 @@ function Templates({
 
 	const maskedMobileNumber = `${dialNumber?.country_code}
 	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
+
+	const urlArray = decodeURI(fileValue)?.split('/');
+	const fileName = urlArray?.[(urlArray.length || GLOBAL_CONSTANTS.zeroth_index) - LAST_VALUE] || '';
 
 	const {
 		setQfilter,
@@ -62,7 +72,13 @@ function Templates({
 			template_name : name,
 			type          : 'whatsapp',
 			tags          : ['update_time'],
-			variables     : customizableData,
+			variables     : {
+				...customizableData,
+				document: {
+					filename : fileName,
+					link     : fileValue,
+				},
+			},
 		});
 	};
 
@@ -138,6 +154,23 @@ function Templates({
 
 			{activeCard?.show && !openCreateReply && (
 				<div className={styles.create_container}>
+					<div className={styles.select_section}>
+						<AsyncSelect
+							asyncKey="list_shipments"
+							valueKey="serial_id"
+							labelKey="serial_id"
+							placeholder="Select SID"
+							value={selectShipmentId}
+							onChange={setSelectShipmentId}
+							isClearable
+							params={{
+								filters: {
+									importer_exporter_id : orgId,
+									state                : SHIPMENT_STATE,
+								},
+							}}
+						/>
+					</div>
 					<div className={styles.preview}>
 						<div className={styles.whatsapp}>
 							<div className={styles.overflow_div}>
@@ -147,6 +180,10 @@ function Templates({
 										variables={variables}
 										customizableData={customizableData}
 										setCustomizableData={setCustomizableData}
+										tags={tags}
+										setFileValue={setFileValue}
+										fileValue={fileValue}
+										fileName={fileName}
 									/>
 								</div>
 							</div>
