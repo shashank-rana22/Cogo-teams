@@ -4,5 +4,14 @@
 }
 
 .state {
-	margin-right: 4px;
+	margin-right: 6px;
+}
+
+.count {
+	font-size: 16px;
+	color: #000;
+}
+
+.label {
+	color: #828282;
 }
