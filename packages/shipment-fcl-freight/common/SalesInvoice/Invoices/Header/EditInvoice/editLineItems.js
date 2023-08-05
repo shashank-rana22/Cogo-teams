@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import rawControls from './rawControls';
 
@@ -23,7 +23,7 @@ const useEditLineItems = ({
 	const services = invoice.services || [];
 
 	const [selectedCodes, setSelectedCodes] = useState({});
-	let allChargeCodes = {};
+	const allChargeCodesRef = useRef({});
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_sell_quotations',
@@ -56,7 +56,17 @@ const useEditLineItems = ({
 	};
 
 	const handleOptionsChange = (vals) => {
-		allChargeCodes = { ...allChargeCodes, ...vals };
+		if (typeof vals === 'object') {
+			Object.entries(vals).forEach(([serviceName, options]) => {
+				allChargeCodesRef.current = {
+					...allChargeCodesRef.current,
+					[serviceName]: [
+						...(allChargeCodesRef.current?.[serviceName] || []),
+						...(options || []),
+					],
+				};
+			});
+		}
 	};
 
 	const controls = services.map((service, index) => ({
@@ -195,7 +205,7 @@ const useEditLineItems = ({
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
 				);
 				const CHARGECODES = {};
-				(allChargeCodes[currentService?.service_type] || []).forEach(
+				(allChargeCodesRef.current?.[currentService?.service_type] || []).forEach(
 					(chgCode) => {
 						CHARGECODES[chgCode.code] = chgCode;
 					},
