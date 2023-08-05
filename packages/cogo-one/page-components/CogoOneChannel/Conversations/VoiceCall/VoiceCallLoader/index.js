@@ -7,7 +7,7 @@ function VoiceCallLoader() {
 	return (
 		<div className={styles.loader}>
 			<Image
-				src={GLOBAL_CONSTANTS.image_url.voice_call_loader}
+				src={GLOBAL_CONSTANTS.image_url.colored_loading}
 				alt="load"
 				width={15}
 				height={15}

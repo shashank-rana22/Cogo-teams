@@ -369,7 +369,6 @@ const GLOBAL_CONSTANTS = {
 		sign_up_failed          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
 		kyc_event               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc_event.png',
 		default_event           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
-		voice_call_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 		password_validator_tick : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick.svg',
 		password_validator_dot  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dot.svg',
 	},

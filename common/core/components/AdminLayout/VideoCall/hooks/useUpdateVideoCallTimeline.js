@@ -46,7 +46,7 @@ const useUpdateVideoCallTimeline = ({ callDetails = {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/outbound_call_hangup_missed_or_answered',
 		method : 'post',
-	}, { manual: true, autoCancel: false });
+	}, { manual: true });
 
 	const updateVideoCallTimeline = useCallback(async ({
 		callActivity = '',
