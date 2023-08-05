@@ -12,10 +12,8 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
-import PurchaseInvoice from '../../../common/PurchaseInvoice';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
-import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -26,10 +24,10 @@ import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
-const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
-function Superadmin({ get = {}, activeStakeholder = '' }) {
+function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
@@ -40,7 +38,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
-		additional_methods: services_additional_methods,
+		additional_methods: SERVICE_ADDITIONAL_METHODS,
 		activeStakeholder,
 	});
 
@@ -100,14 +98,6 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 								<Tasks />
 							</TabPanel>
 
-							<TabPanel name="invoice_and_quotation" title="Sales Invoice">
-								<SalesInvoice />
-							</TabPanel>
-
-							<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-								<PurchaseInvoice activeTab={activeTab} />
-							</TabPanel>
-
 							<TabPanel name="documents" title="Documents">
 								<Documents />
 							</TabPanel>
@@ -135,4 +125,4 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 	);
 }
 
-export default Superadmin;
+export default So1So2Ops;
