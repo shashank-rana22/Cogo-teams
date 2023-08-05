@@ -372,6 +372,9 @@ const GLOBAL_CONSTANTS = {
 		default_event           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
 		password_validator_tick : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick.svg',
 		password_validator_dot  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dot.svg',
+		subscription_bg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/subscription_bg.png',
+		custom_plan:
+		'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/reshot-icon-checklist-YUWL2XGFTQ%202.png',
 	},
 
 	video_call_ring_tone_url:

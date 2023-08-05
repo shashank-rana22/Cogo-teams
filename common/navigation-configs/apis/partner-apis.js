@@ -12818,6 +12818,41 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'lead',
 		},
+		{
+			api          : 'get_saas_subscription_profile',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'create_saas_subscription',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'saas_get_user_active_plan',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_organization_billing_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	analytics_dashboard: [
 		{

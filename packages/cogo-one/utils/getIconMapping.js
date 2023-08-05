@@ -4,6 +4,7 @@ import {
 	IcMDocument, IcMShip,
 	IcMTicket,
 	IcMProfile,
+	IcMServices,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -17,6 +18,7 @@ const COMMON_ACCESIBLE_NAVIGATIONS = [
 	'documents',
 	'help_desk',
 	'customer_insights',
+	'add_on_services',
 ];
 
 const ICON_MAPPING = [
@@ -105,6 +107,11 @@ const ICON_MAPPING = [
 		name    : 'documents',
 		content : 'Documents',
 		icon    : <IcMDocument width={20} height={20} />,
+	},
+	{
+		name    : 'add_on_services',
+		content : 'Add On Services',
+		icon    : <IcMServices width={20} height={20} />,
 	},
 	{
 		name    : 'help_desk',

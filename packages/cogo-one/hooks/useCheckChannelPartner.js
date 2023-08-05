@@ -85,7 +85,12 @@ const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab:a
 	};
 
 	return {
-		openNewTab, loading: partnersLoading || loading, disableQuickActions, hideCpButton, getOrgDetails,
+		openNewTab,
+		loading          : partnersLoading || loading,
+		disableQuickActions,
+		hideCpButton,
+		getOrgDetails,
+		organizationData : data?.data || {},
 	};
 };
 export default useCheckChannelPartner;

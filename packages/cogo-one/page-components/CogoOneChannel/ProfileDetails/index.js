@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
@@ -35,6 +36,7 @@ function ProfileDetails({
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 
 	const {
+		organizationData = {},
 		openNewTab,
 		loading,
 		ORG_PAGE_URL = '',
@@ -63,7 +65,9 @@ function ProfileDetails({
 
 	return (
 		<div className={styles.profile_div}>
-			<div className={styles.container}>
+			<div className={cl`${styles.container}
+			${activeSelect === 'add_on_services' ? styles.add_on_services_tab : ''}`}
+			>
 				{ActiveComp && (
 					<ActiveComp
 						customerId={customerId}
@@ -93,6 +97,7 @@ function ProfileDetails({
 						userId={userId}
 						setActiveTab={setActiveTab}
 						mailProps={mailProps}
+						organizationData={organizationData}
 					/>
 				)}
 			</div>
