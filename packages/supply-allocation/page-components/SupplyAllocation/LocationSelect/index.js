@@ -1,3 +1,4 @@
+import { Button, Chips } from '@cogoport/components';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
 
@@ -52,6 +53,10 @@ function LocationSelect() {
 					label="Select Origin SeaPort"
 					{...commonLocationProps}
 				/>
+			</div>
+
+			<div className={styles.port_arrow_icon}>
+				<Button themeType="accent">+ Allocation</Button>
 			</div>
 		</div>
 	);
