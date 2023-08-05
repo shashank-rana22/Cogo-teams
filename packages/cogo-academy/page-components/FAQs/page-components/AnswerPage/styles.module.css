@@ -21,6 +21,10 @@
 	font-size: 20px;
 	font-weight: 1000;
 	color: #221f20;
+
+	@media (max-width: 768px) {
+		margin-top: 10px;
+	}
 }
 
 .answer {
@@ -42,6 +46,10 @@
 	display: flex;
 	align-items: center;
 	cursor: pointer;
+
+	@media (max-width: 576px) {
+		margin-top: 46px;
+	}
 }
 
 .subtitle {
@@ -79,7 +87,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 59rem;
+	width: 100%;
 	margin-top: 1.5%;
 	margin-bottom: 1%;
 	overflow: auto;
@@ -93,6 +101,7 @@
 	@media (max-width: 768px) {
 		flex-flow: column wrap;
 		align-items: flex-start;
+		margin-top: 10px;
 		opacity: 0.7;
 
 		:global(.ui_chips_container) {
@@ -149,6 +158,11 @@
 			background: white;
 			border: 1px solid #ffe4af;
 			border-radius: 16px;
+
+			@media (max-width: 768px) {
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
 		}
 	}
 }
@@ -175,4 +189,10 @@
 	font-size: 12px;
 	color: #221f20;
 	opacity: 0.6;
+}
+
+.pills_text {
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
 }

@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDelete } from '@cogoport/icons-react';
@@ -27,7 +28,7 @@ export const MONTH_DATA = {
 };
 
 export const getEntityOptions = () => {
-	const filteredEntity = Object.entries(GLOBAL_CONSTANTS.cogoport_entities).filter(
+	const filteredEntity = Object.entries(ENTITY_FEATURE_MAPPING).filter(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		([_, value]: any) => value.feature_supported.includes('cogo_books'),
 	);

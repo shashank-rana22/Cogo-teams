@@ -15,6 +15,7 @@ const cycleWiseExceptionTable = ({
 	exceptionFilter,
 	setExceptionFilter,
 	setCycleListId,
+	setEntityId,
 }) => (
 	[
 		{
@@ -162,7 +163,11 @@ const cycleWiseExceptionTable = ({
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => { setCycleListId(row?.id); setShowCycleExceptions(true); }}
+						onClick={() => {
+							setCycleListId(row?.id);
+							setShowCycleExceptions(true);
+							setEntityId(row?.filters?.cogoEntityId);
+						}}
 					>
 						Manage Exceptions
 

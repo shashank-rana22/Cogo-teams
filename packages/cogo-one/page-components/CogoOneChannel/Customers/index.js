@@ -33,11 +33,13 @@ function Customers({
 	workPrefernceLoading = false,
 	setOpenKamContacts = () => {},
 	agentStatus = {},
-	statusLoading = false,
-	updateUserStatus = () => {},
-	openInactiveModal = false,
-	setOpenInactiveModal = () => {},
 	fetchworkPrefernce = () => {},
+	agentTimeline = () => {},
+	setSendBulkTemplates = () => {},
+	setSelectedAutoAssign = () => {},
+	selectedAutoAssign = {},
+	autoAssignChats = {},
+	setAutoAssignChats = () => {},
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
 
@@ -56,7 +58,13 @@ function Customers({
 			isBotSession,
 			setIsBotSession,
 			tagOptions,
+			setModalType,
+			selectedAutoAssign,
+			setSelectedAutoAssign,
+			autoAssignChats,
+			setAutoAssignChats,
 			workPrefernceLoading,
+			setSendBulkTemplates,
 		},
 		voice: {
 			setActiveVoiceCard: (val) => {
@@ -94,11 +102,8 @@ function Customers({
 					<div className={styles.styled_toggle}>
 						<AgentStatus
 							agentStatus={agentStatus}
-							statusLoading={statusLoading}
-							updateUserStatus={updateUserStatus}
-							openInactiveModal={openInactiveModal}
-							setOpenInactiveModal={setOpenInactiveModal}
 							fetchworkPrefernce={fetchworkPrefernce}
+							agentTimeline={agentTimeline}
 						/>
 					</div>
 				)}
@@ -158,6 +163,7 @@ function Customers({
 				userId={userId}
 				viewType={viewType}
 				setOpenKamContacts={setOpenKamContacts}
+				setSendBulkTemplates={setSendBulkTemplates}
 			/>
 		</div>
 	);

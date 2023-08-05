@@ -13,6 +13,7 @@ export interface SummaryInterface {
 	branchId?:number | string,
 	cogoEntityId?:number | string,
 	vendorId?:number | string,
+	categoryName?:string,
 }
 
 export interface ConfigType {

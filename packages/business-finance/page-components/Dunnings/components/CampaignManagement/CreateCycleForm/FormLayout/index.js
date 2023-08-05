@@ -70,7 +70,9 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 	};
 
 	const unformatDate = (stringDate) => {
-		const [day, month, year] = stringDate.split('/');
+		if (isEmpty(stringDate)) return null;
+
+		const [day, month, year] = (stringDate).split('/');
 		const date = new Date(`${year}-${month}-${day}`);
 		return date;
 	};

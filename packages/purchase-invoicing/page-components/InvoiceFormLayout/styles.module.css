@@ -1,7 +1,7 @@
 .upload_invoice {
 	flex: 1;
 	height: calc(100vh - 178px);
-	overflow: scroll;
+	overflow: auto;
 	border: 1px solid black;
 	border-radius: 8px;
 }

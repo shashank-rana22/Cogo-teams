@@ -49,7 +49,7 @@ const useUpdateInvoiceCombination = ({
 
 			filteredParties.forEach((party) => {
 				const PARTY_SERVICES = party?.services?.map((item) => {
-					const { display_name, trade_type, serviceKey, is_igst, ...rest } = item;
+					const { display_name, trade_type, serviceKey, ...rest } = item;
 
 					return ({
 						...rest,

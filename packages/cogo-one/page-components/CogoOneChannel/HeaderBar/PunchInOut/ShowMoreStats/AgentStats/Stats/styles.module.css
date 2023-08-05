@@ -1,0 +1,45 @@
+.top_stats_content {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.each_stats_div {
+	width: 34%;
+	padding-bottom: 16px;
+	border-bottom: 1px dashed #dde4ea;
+
+	&:last-child {
+		width: 40%;
+	}
+}
+
+.title {
+	color: #808080;
+}
+
+.count {
+	font-size: 40px;
+}
+
+.count_with_icon {
+	display: flex;
+	align-items: center;
+}
+
+.arrow_icon {
+	width: 20px;
+	height: 20px;
+	margin-top: 18px;
+	fill: #ee3425;
+}
+
+.bottom_stats_content {
+	display: flex;
+	align-items: center;
+}
+
+.each_div {
+	width: 60%;
+	padding-top: 32px;
+}

@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { AsyncSelectController, InputController, SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -6,6 +7,8 @@ import options from '../../common/currencies';
 import { UNIT_OPTIONS } from '../../constants';
 
 import styles from './styles.module.css';
+
+const DEFAULT_ROUNDING = 2;
 
 const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map((option) => ({
 	...option,
@@ -17,7 +20,7 @@ const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map(
 				(
 				{option?.code || ''}
 				)-
-				{option?.tax_percent || ''}
+				{option?.tax_percent || '0'}
 				%
 			</span>
 			<div>
@@ -37,7 +40,7 @@ const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map(
 
 export const renderLineItemFunctions = {
 	container_number: ({ control, index, setCodes, errors, shipmentId }) => (
-		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
+		<div className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
 			<AsyncSelectController
 				control={control}
 				name={`line_items.${index}.container_number`}
@@ -59,7 +62,7 @@ export const renderLineItemFunctions = {
 		</div>
 	),
 	code: ({ control, index, extradata, setCodes, errors }) => (
-		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
+		<div className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
 			<AsyncSelectController
 				control={control}
 				name={`line_items.${index}.code`}
@@ -72,7 +75,7 @@ export const renderLineItemFunctions = {
 					organization_billing_id : extradata?.organization_billing_id,
 					entity_id               : extradata?.entity_id,
 					organization_trade_party_detail_id:
-                        extradata?.organization_trade_party_detail_id,
+						extradata?.organization_trade_party_detail_id,
 					filters: {
 						service_names: isEmpty(extradata?.serviceNames)
 							? [extradata?.shipment_type] : extradata?.serviceNames,
@@ -90,7 +93,7 @@ export const renderLineItemFunctions = {
 		</div>
 	),
 	currency: ({ control, index, errors }) => (
-		<div className={`${styles.selectcontainer} ${styles.paddingleft}`}>
+		<div className={cl`${styles.selectcontainer} ${styles.paddingleft}`}>
 			<SelectController
 				control={control}
 				name={`line_items.${index}.currency`}
@@ -106,7 +109,7 @@ export const renderLineItemFunctions = {
 		</div>
 	),
 	rate: ({ control, index, errors }) => (
-		<div className={`${styles.inputcontainer} ${styles.paddingleft}`}>
+		<div className={cl`${styles.inputcontainer} ${styles.paddingleft}`}>
 			<InputController
 				name={`line_items.${index}.rate`}
 				control={control}
@@ -122,7 +125,7 @@ export const renderLineItemFunctions = {
 		</div>
 	),
 	unit: ({ control, index, errors }) => (
-		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidthmd}`}>
+		<div className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidthmd}`}>
 			<SelectController
 				name={`line_items.${index}.unit`}
 				control={control}
@@ -138,7 +141,7 @@ export const renderLineItemFunctions = {
 		</div>
 	),
 	quantity: ({ control, index, errors }) => (
-		<div className={`${styles.inputcontainer} ${styles.paddingleft}`}>
+		<div className={cl`${styles.inputcontainer} ${styles.paddingleft}`}>
 			<InputController
 				name={`line_items.${index}.quantity`}
 				control={control}
@@ -154,12 +157,12 @@ export const renderLineItemFunctions = {
 		</div>
 	),
 	tax_amount: ({ index, calculatedValues }) => (
-		<div className={`${styles.text} ${styles.paddingleft}`}>
+		<div className={cl`${styles.text} ${styles.paddingleft}`}>
 			{calculatedValues?.[index]?.tax_amt || '--'}
 		</div>
 	),
 	exchange_rate: ({ control, index, errors }) => (
-		<div className={`${styles.inputcontainer} ${styles.paddingleft}`}>
+		<div className={cl`${styles.inputcontainer} ${styles.paddingleft}`}>
 			<InputController
 				name={`line_items.${index}.exchange_rate`}
 				control={control}
@@ -176,8 +179,8 @@ export const renderLineItemFunctions = {
 		</div>
 	),
 	cost: ({ index, calculatedValues }) => (
-		<div className={`${styles.text} ${styles.paddingleft}`}>
-			{calculatedValues?.[index]?.cost?.toFixed(2) || '--'}
+		<div className={cl`${styles.text} ${styles.paddingleft}`}>
+			{calculatedValues?.[index]?.cost?.toFixed(DEFAULT_ROUNDING) || '--'}
 		</div>
 	),
 	delete: ({ index, remove, showDelete }) => (

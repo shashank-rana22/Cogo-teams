@@ -1,0 +1,51 @@
+.truck_detals {
+	margin-block: 1rem;
+	margin-inline: 7px;
+	border: 2px solid #f3f3f3;
+	border-radius: 5px;
+
+	.row {
+		display: grid;
+		grid-template-columns: repeat(9, 1fr);
+		padding-block: 5px;
+		padding-inline: 10px;
+		font-size: 12px;
+		text-transform: capitalize;
+
+		.col {
+			flex: 1;
+			padding-block: 0.5rem;
+		}
+
+		.alias_col {
+			padding-inline: 20px;
+		}
+	}
+
+	.row:not(:first-of-type):nth-of-type(odd) {
+		background: #fbfaf9;
+	}
+
+	.heading_row {
+		font-weight: 600;
+		color: #c26d1a;
+	}
+}
+
+.line_item_divider {
+	margin: 2px 13px 5px 10px;
+	border: 1px solid #e0e0e0;
+}
+
+.button_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-block: 10px;
+	margin-right: 10px;
+}
+
+.line {
+	margin-right: 10px;
+	margin-left: 13px;
+	border: 1.5px solid #e0e0e0;
+}

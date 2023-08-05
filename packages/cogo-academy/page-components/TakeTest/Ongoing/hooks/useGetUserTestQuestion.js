@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -18,29 +20,25 @@ function useGetUserTestQuestion({ currentQuestionId, page }) {
 			user_id,
 			...(currentQuestionId && currentQuestionId !== 'undefined' && page
 				? { question_id: currentQuestionId } : {}),
-			...((!(page && page !== 'undefined')
-			|| (!(currentQuestionId && currentQuestionId !== 'undefined') && page && page !== undefined && page > 1))
+			...((!currentQuestionId && currentQuestionId === 'undefined')
 				? { first_question_required: true } : {}),
+
 		},
 	}, { manual: false });
 
-	const getUserTestQuestion = async ({ question_id }) => {
+	const getUserTestQuestion = ({ question_id }) => {
 		try {
-			const res = await trigger({
+			trigger({
 				params: {
 					test_id,
 					user_id,
 					question_id,
 				},
 			});
-
-			const { question_data } = res.data;
-
-			const { id } = question_data || {};
-
-			localStorage.setItem(`current_question_id_${test_id}_${user_id}`, id);
-		} catch (err) {
-			console.log('err', err);
+		} catch (error) {
+			if (error?.response?.data) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	};
 

@@ -1,27 +1,27 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
+
+import { CALL_HISTORY_AUDIO_ICONS } from '../../../../../constants';
 
 import styles from './styles.module.css';
 
 function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call = '', dtmf_inputs = {} }) {
-	const ICON_MAPPING = {
-		user: {
+	const startTime = start_time_of_call ? formatDate({
+		date       : new Date(start_time_of_call),
+		dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss aaa'],
+		formatType : 'time',
+	}) : '';
 
-			start      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disabled call.svg',
-			end        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call.svg',
-			compStyles : { borderTopLeftRadius: '0px', background: '#FFFFFF' },
-		},
-		agent: {
-			start : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call hangup.svg',
-			end   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/omni_channel.svg',
+	const endTime = end_time_of_call ? formatDate({
+		date       : new Date(end_time_of_call),
+		dateFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss aaa'],
+		formatType : 'time',
+	}) : '';
 
-			compStyles: { borderTopRightRadius: '0px', background: '#FFFCE6' },
-		},
-	};
-	const startTime = start_time_of_call?.split(' ')?.[1];
-	const endTime = end_time_of_call?.split(' ')?.[1];
-	const { start = '', end = '', compStyles = {} } = ICON_MAPPING[type] || {};
+	const { start = '', end = '', compStyles = {} } = CALL_HISTORY_AUDIO_ICONS[type] || {};
 
 	const conditionCheck = !isEmpty(dtmf_inputs) && type === 'user';
 
@@ -68,7 +68,7 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 											const { key = '', value = '' } = item;
 
 											return (
-												<div className={styles.details}>
+												<div className={styles.details} key={key}>
 													{startCase(key)}
 													{' '}
 													:

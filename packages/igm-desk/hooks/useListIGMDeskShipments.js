@@ -16,9 +16,11 @@ const PAGE_ONE = 1;
 const EMPTY_DATA = { list: [], total: 0, total_page: 0 };
 
 export default function useListIGMDeskShipments() {
-	const { user } = useSelector(({ profile }) => profile) || {};
-	const { filters, setFilters, tabState } = useContext(IGMDeskContext) || {};
+	const { partner_id } = useSelector(({ general }) => ({
+		partner_id: general?.query?.partner_id,
+	}));
 
+	const { filters, setFilters, tabState } = useContext(IGMDeskContext) || {};
 	const [data, setData] = useState(EMPTY_DATA);
 
 	const [{ loading }, trigger] = useRequest({
@@ -29,7 +31,7 @@ export default function useListIGMDeskShipments() {
 	const listShipments = useCallback(async () => {
 		try {
 			const res = await trigger({
-				params: getPayload({ filters, tabState, userId: user?.id }),
+				params: getPayload({ filters, tabState, partner_id }),
 			});
 
 			if (isEmpty(res.data?.list) && filters?.page > PAGE_ONE) {
@@ -41,9 +43,9 @@ export default function useListIGMDeskShipments() {
 			toastApiError(err);
 			setData(EMPTY_DATA);
 		}
-	}, [filters, setFilters, tabState, trigger, user?.id]);
+	}, [filters, setFilters, tabState, trigger, partner_id]);
 
-	useCallApi({ listShipments, filters, tabState, userId: user?.id });
+	useCallApi({ listShipments, filters, tabState });
 
 	return {
 		data: {

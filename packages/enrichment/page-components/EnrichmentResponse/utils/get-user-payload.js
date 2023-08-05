@@ -1,6 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 
-const getUserPayload = ({ values = {}, getByKey }) => {
+const getByKey = (obj, key) => (obj && obj[key]) || undefined;
+
+const getUserPayload = ({ values = {} }) => {
 	const work_scopes = getByKey(values, 'work_scopes');
 
 	return {

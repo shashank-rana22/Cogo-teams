@@ -6,7 +6,6 @@ export default function useCallApi({
 	listShipments = () => {},
 	filters = {},
 	tabState = {},
-	userId = '',
 }) {
 	const debounceQuery = useRef({ q: filters?.q });
 
@@ -31,6 +30,5 @@ export default function useCallApi({
 		listShipments,
 		tabState,
 		filters,
-		userId,
 	]);
 }

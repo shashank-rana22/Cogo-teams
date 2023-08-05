@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, merge } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
 import getControls from '../utils/controls';
@@ -61,23 +61,25 @@ function useVendorBankDetail({
 		method : 'post',
 	}, { manual: true });
 
-	const setIfscCode = useCallback(async () => {
-		try {
-			const sessionData = await triggerGetBankDetails({
-				params: { [code_name]: codeType },
-			});
-			const { data = {} } = sessionData || {};
-			setValue('branch_name', data.branch || data.branch_name || '');
-			setValue('bank_name', data.bank || data.bank_name || '');
-		} catch (error) {
-			setValue('branch_name', '');
-			setValue('bank_name', '');
-		}
-	}, [code_name, codeType, setValue, triggerGetBankDetails]);
-
 	useEffect(() => {
-		setIfscCode();
-	}, [codeType, setIfscCode]);
+		const fetch_data = async () => {
+			try {
+				const sessionData = await triggerGetBankDetails({
+					params: { [code_name]: codeType },
+				});
+				const { data = {} } = sessionData || {};
+				setValue('branch_name', data.branch || data.branch_name || '');
+				setValue('bank_name', data.bank || data.bank_name || '');
+			} catch (error) {
+				setValue('branch_name', '');
+				setValue('bank_name', '');
+			}
+		};
+
+		if (codeType) {
+			fetch_data();
+		}
+	}, [codeType, triggerGetBankDetails, code_name, setValue]);
 
 	const onSubmit = async ({ data, step }) => {
 		const values = getValues();

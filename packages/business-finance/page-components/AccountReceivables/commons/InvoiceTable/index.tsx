@@ -120,7 +120,8 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 						value={invoiceFilters.search || ''}
 						onChange={(value) => setinvoiceFilters({
 							...invoiceFilters,
-							search: value || undefined,
+							search : value || undefined,
+							page   : 1,
 						})}
 						size="md"
 						placeholder="Search by /Invoice number /SID"

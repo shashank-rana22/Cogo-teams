@@ -10,7 +10,7 @@ env:
 jobs:
   start-runner:
     name: Start self-hosted EC2 runner
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/lint')
+    if: github.event.issue.pull_request && (contains(github.event.comment.body, '/lint') || contains(github.event.comment.body, '/checks'))
     runs-on: ubuntu-latest
 
     environment: production

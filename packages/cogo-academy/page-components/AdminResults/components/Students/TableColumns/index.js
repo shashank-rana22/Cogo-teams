@@ -9,7 +9,7 @@ import IsEvaluated from './IsEvaluated';
 import styles from './styles.module.css';
 
 const ROUND_OFF_DIGITS = 2;
-
+const PERCENT = 100;
 const SINGULAR_VALUE = 1;
 
 const handleRedirectToDashboard = ({ router, user, test_id, is_evaluated, status }) => {
@@ -47,7 +47,6 @@ const getAppearedColumns = ({
 	activeAttempt,
 	retest,
 }) => [
-
 	{
 		Header: (
 			<div className={styles.container}>
@@ -57,18 +56,15 @@ const getAppearedColumns = ({
 		id       : 'user',
 		accessor : ({ user = {} }) => <section className={styles.section}>{user?.name}</section>,
 	},
-
 	{
 		Header   : <div className={styles.container}>PASSED/FAILED</div>,
 		id       : 'passed_failed',
-		accessor : ({ result_status = '', is_evaluated = false }) => (
+		accessor : ({ result_status = '' }) => (
 			<section className={`${styles.section} ${styles[result_status]}`}>
-				{showResult(is_evaluated, activeAttempt, status, retest)
-					? (startCase(result_status) || '-') : <IsEvaluated is_evaluated={is_evaluated} />}
+				{startCase(result_status) || '-'}
 			</section>
 		),
 	},
-
 	{
 		Header: (
 			<div className={styles.container}>
@@ -82,11 +78,9 @@ const getAppearedColumns = ({
 			</div>
 		),
 		id       : 'score_achieved',
-		accessor : ({ final_score = '', test = {}, is_evaluated = false }) => (
+		accessor : ({ final_score = '', test = {} }) => (
 			<section className={styles.section}>
-				{showResult(is_evaluated, activeAttempt, status, retest)
-					? `${toFixed(final_score, ROUND_OFF_DIGITS)}/${toFixed(test.total_marks, ROUND_OFF_DIGITS)}`
-					: <IsEvaluated is_evaluated={is_evaluated} />}
+				{`${toFixed(final_score, ROUND_OFF_DIGITS)}/${toFixed(test.total_marks, ROUND_OFF_DIGITS)}`}
 			</section>
 		),
 	},
@@ -103,11 +97,9 @@ const getAppearedColumns = ({
 			</div>
 		),
 		id       : 'percentage',
-		accessor : ({ final_score = '', test = {}, is_evaluated = false }) => (
+		accessor : ({ final_score = '', test = {} }) => (
 			<section className={styles.section}>
-				{showResult(is_evaluated, activeAttempt, status, retest)
-					? `${toFixed(final_score / test.total_marks, ROUND_OFF_DIGITS)}`
-					: <IsEvaluated is_evaluated={is_evaluated} />}
+				{toFixed((final_score / test.total_marks) * PERCENT, ROUND_OFF_DIGITS)}
 			</section>
 		),
 	},

@@ -53,11 +53,11 @@ function SignYourDocuments({ setInformationPage, data }) {
 			) : (
 				<div className={styles.signed_document_container}>
 					{(companyDoc || []).map((item) => (
-						<div key={item?.id} style={{ padding: '0 12px', flexWrap: 'wrap' }}>
+						<div key={item?.id} className={styles.signed_documents_display}>
 
 							<PreviewDocument document_url={item?.signed_document_url || item?.document_url} />
 
-							<div>
+							<div className={styles.signed_document_status}>
 								{item?.status === 'accepted' ? (
 									<div className={styles.already_signed}>
 										<span style={{ paddingRight: 4 }}>Already Signed</span>
