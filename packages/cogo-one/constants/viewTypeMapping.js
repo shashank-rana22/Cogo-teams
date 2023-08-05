@@ -265,7 +265,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['supply'],
 		mails_to_be_shown             : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
 		bulk_assign_features          : ['bulk_send_templates'],
-		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts', 'global_contacts'],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -304,7 +304,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['supply'],
 		mails_to_be_shown             : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
 		bulk_assign_features          : ['bulk_send_templates'],
-		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts', 'global_contacts'],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -335,7 +335,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
-		accessible_new_communications : ['new_mail', 'global_contacts'],
+		accessible_new_communications : ['new_mail'],
 		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
