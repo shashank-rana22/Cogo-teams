@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
@@ -27,7 +27,7 @@ import styles from './styles.module.css';
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
-function So1So2Ops({ get = {}, activeStakeholder = '' }) {
+function SoOneSoTwoOps({ get = {}, activeStakeholder = '' }) {
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
@@ -59,70 +59,69 @@ function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 			shipmentData={shipment_data}
 		>
 			<ShipmentDetailContext.Provider value={contextValues}>
-				<div>
-					<div className={styles.top_header}>
-						<ShipmentInfo />
+				<div className={styles.top_header}>
+					<ShipmentInfo />
 
-						<RolloverDetails />
+					<RolloverDetails />
 
-						<div className={styles.toggle_chat}>
+					{shipment_data?.is_job_closed
+						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
+						: null}
 
-							<ShipmentChat />
-						</div>
-					</div>
-
-					{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
-
-					<DocumentHoldDetails />
-
-					<div className={styles.header}>
-						<ShipmentHeader />
-
-						<PocSop />
-					</div>
-
-					<Timeline />
-
-					<div className={styles.container}>
-						<Tabs
-							activeTab={activeTab}
-							fullWidth
-							themeType="secondary"
-							onChange={setActiveTab}
-						>
-							<TabPanel name="overview" title="Overview">
-								<Overview shipmentData={shipment_data} />
-							</TabPanel>
-
-							<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-								<Tasks />
-							</TabPanel>
-
-							<TabPanel name="documents" title="Documents">
-								<Documents />
-							</TabPanel>
-
-							<TabPanel name="emails" title="Emails">
-								<ShipmentMails
-									source="cogo_rpa"
-									filters={{ q: shipment_data?.serial_id }}
-									pre_subject_text={shipment_data?.serial_id?.toString() || ''}
-								/>
-							</TabPanel>
-
-							<TabPanel name="tracking" title="Tracking">
-								<Tracking shipmentData={shipment_data} />
-							</TabPanel>
-						</Tabs>
-					</div>
-
-					{!isEmpty(rollover_containers) ? (
-						<RolloverRequestedModal rollover_containers={rollover_containers} />
-					) : null}
+					<ShipmentChat />
 				</div>
+
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
+
+				<DocumentHoldDetails />
+
+				<div className={styles.header}>
+					<ShipmentHeader />
+
+					<PocSop />
+				</div>
+
+				<Timeline />
+
+				<div className={styles.container}>
+					<Tabs
+						activeTab={activeTab}
+						fullWidth
+						themeType="secondary"
+						onChange={setActiveTab}
+					>
+						<TabPanel name="overview" title="Overview">
+							<Overview shipmentData={shipment_data} />
+						</TabPanel>
+
+						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
+							<Tasks />
+						</TabPanel>
+
+						<TabPanel name="documents" title="Documents">
+							<Documents />
+						</TabPanel>
+
+						<TabPanel name="emails" title="Emails">
+							<ShipmentMails
+								source="cogo_rpa"
+								filters={{ q: shipment_data?.serial_id }}
+								pre_subject_text={shipment_data?.serial_id?.toString() || ''}
+							/>
+						</TabPanel>
+
+						<TabPanel name="tracking" title="Tracking">
+							<Tracking shipmentData={shipment_data} />
+						</TabPanel>
+					</Tabs>
+				</div>
+
+				{!isEmpty(rollover_containers) ? (
+					<RolloverRequestedModal rollover_containers={rollover_containers} />
+				) : null}
 			</ShipmentDetailContext.Provider>
 		</ShipmentPageContainer>
 	);
 }
 
-export default So1So2Ops;
+export default SoOneSoTwoOps;
