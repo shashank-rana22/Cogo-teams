@@ -41,8 +41,8 @@ function StepThree({ data = {}, setStep = () => {}, shipment_id = '', updateServ
 		};
 	});
 
-	const handleFinalSubmit = () => {
-		onSubmit();
+	const handleFinalSubmit = (values) => {
+		onSubmit(values);
 		updateServiceFunc();
 	};
 
