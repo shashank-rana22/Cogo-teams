@@ -111,6 +111,12 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
+			'69013c68-2d1b-4332-91fb-ada1a6471240', // business consultant
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5',
+			'5f79d531-50e0-4843-995f-71057e659e0f',
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',
+			'264a83ab-d438-48c3-8095-bb503f5b619c',
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -443,69 +449,33 @@ export default {
 			},
 		},
 		enrichment: {
-			whatsapp_number_label                 : 'Zalo Number',
-			allowed_to_create_enrichment_requests : true,
-			tabs                                  : ['manual_enrichment'],
-			manual_enrichment                     : {
-				columns: {
-					relationship_manager_view: {
-						active: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
-					agent_view: {
-						active: [
-							'id',
-							'business_name',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
+			whatsapp_number_label            : 'Zalo Number',
+			is_allowed_for_enrichment_sheets : false,
+			hide_columns                     : {
+				relationship_manager_view: {
+					active    : ['registration_number', 'status'],
+					responded : ['registration_number', 'status'],
+					success   : ['registration_number', 'status'],
+					failed    : ['registration_number', 'action'],
 				},
-				actions: {
-					active: {
-						add    : 'Add Details',
-						failed : 'Mark as Failed',
-					},
-					responded:	{
-						edit    : 'Edit Details',
-						success : 'Mark as Completed',
-					},
-					success: {
-						view: 'View Details',
-					},
+				agent_view: {
+					active    : ['registration_number', 'requested_agent', 'status'],
+					responded : ['registration_number', 'requested_agent', 'status'],
+					success   : ['registration_number', 'requested_agent', 'status'],
+					failed    : ['registration_number', 'requested_agent', 'action'],
+				},
+			},
+			actions: {
+				active: {
+					add    : 'Add Details',
+					failed : 'Mark as Failed',
+				},
+				responded:	{
+					edit    : 'Edit Details',
+					success : 'Mark as Completed',
+				},
+				success: {
+					view: 'View Details',
 				},
 			},
 		},
@@ -548,6 +518,8 @@ export default {
 			label: 'Non-Tariff Zone',
 		},
 
+		ask_gst_details: false,
+
 		navigations: {
 			onboard_vendor: {
 				validate_registration : false,
@@ -557,6 +529,12 @@ export default {
 				has_voice_call_access       : false,
 				template_default_language   : 'vietnamese',
 				supply_sender_mobile_number : '918069195980',
+			},
+			bookings: {
+				invoicing: {
+					is_invoice_mergeable : true,
+					disable_edit_invoice : false,
+				},
 			},
 
 			business_finance: {

@@ -51,6 +51,7 @@ function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
 		source = '',
 		data = {},
 		scope = '',
+		event_name = '',
 	} = eachMessage;
 
 	const ActiveModalComp = COMPONENT_MAPPING[source] || COMPONENT_MAPPING.default;
@@ -73,6 +74,7 @@ function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
 					formattedData={formattedData}
 					data={data}
 					scope={scope}
+					eventName={event_name}
 				/>
 			)}
 

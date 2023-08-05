@@ -12,7 +12,7 @@ const dataExtractionFunc = (obj, index, arr, fieldTypeMapping) => {
 		if (returnValue && fieldTypeMapping[arr?.[index]] === 'datepicker') {
 			returnValue = new Date(obj?.[arr?.[index]]);
 		}
-		return returnValue;
+		return new Date(obj?.[arr?.[index]]);
 	}
 
 	if (obj?.[arr?.[index]] === undefined) {

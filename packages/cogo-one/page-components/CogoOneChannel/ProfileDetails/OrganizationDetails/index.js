@@ -51,7 +51,11 @@ function OrganizationDetails({
 		organizationId,
 		leadOrganizationId,
 	});
-	const { agent = {}, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
+	const {
+		agent = {}, kyc_status, serial_id, short_name, city, tags = [],
+		business_name = '',
+	} = organizationData || {};
+
 	const isOrgUsersVisible = account_type === 'service_provider';
 	const {
 		organizationUsersData,
@@ -95,7 +99,9 @@ function OrganizationDetails({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>Organization Details</div>
+			<div className={styles.title}>
+				{organizationId ? 'Organization Details' : 'Lead Organization Details'}
+			</div>
 			{orgLoading ? (
 				<>
 					<div className={styles.content}>
@@ -122,7 +128,7 @@ function OrganizationDetails({
 					<div className={styles.content}>
 						<div className={styles.organization_details}>
 							<div className={styles.name}>
-								{short_name}
+								{short_name || business_name}
 							</div>
 							<div className={styles.location}>{display_name}</div>
 						</div>
