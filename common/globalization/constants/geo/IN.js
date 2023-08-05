@@ -266,6 +266,7 @@ export default {
 		},
 		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
+		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
 	},
 	options: {
 		registration_types: [
