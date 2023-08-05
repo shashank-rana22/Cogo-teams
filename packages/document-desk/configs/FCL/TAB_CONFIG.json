@@ -5,6 +5,16 @@
             "value":"awaiting_service_provider_confirmation"
         },
         {
+            "label":"Pending SI",
+            "value":"upload_shipping_instruction",
+            "isCriticalVisible": true
+        },
+        {
+            "label":"Pending Draft BL",
+            "value":"upload_draft_bil_of_lading",
+            "isCriticalVisible": true
+        },
+        {
             "label":"Upload Documents",
             "value":"confirmed_by_service_provider",
             "isCriticalVisible": true
@@ -21,7 +31,7 @@
         {
             "label":"Cancelled",
             "value":"cancelled"
-        }
+        }   
     ],
     "import":[
         {
@@ -50,6 +60,10 @@
         {
             "label":"Cancelled",
             "value":"cancelled"
+        },
+        {
+            "label":"Pending Pre Alert",
+            "value":"pending_pre_alert"
         }
     ],
     "fcl_customs":[
