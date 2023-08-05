@@ -59,7 +59,7 @@ const useEditLineItems = ({
 		if (typeof vals === 'object') {
 			Object.entries(vals).forEach(([serviceName, options]) => {
 				allChargeCodesRef.current = {
-					...allChargeCodesRef.current,
+					...allChargeCodesRef.current || {},
 					[serviceName]: [
 						...(allChargeCodesRef.current?.[serviceName] || []),
 						...(options || []),
