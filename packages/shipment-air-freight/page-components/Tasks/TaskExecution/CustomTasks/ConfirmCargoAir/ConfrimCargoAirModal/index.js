@@ -38,9 +38,7 @@ function ConfirmCargoAirModal({
 	if (noOfStops > ZERO_STOPS) {
 		controls[flightNumberControlIndex] = {};
 	} else {
-		controls[flightNumberControlIndex].value = {
-			...controls[flightNumberControlIndex],
-		};
+		controls[flightNumberControlIndex].value = primary_service?.flight_number;
 	}
 
 	const STOP_CONTROLS = [];
@@ -108,7 +106,7 @@ function ConfirmCargoAirModal({
 		setValue('movement', newStopsValue);
 	}, noOfStops);
 
-	const render = () => {
+	function Render() {
 		if (agent === 'true') {
 			return (
 				<div>
@@ -142,7 +140,7 @@ function ConfirmCargoAirModal({
 			);
 		}
 		return null;
-	};
+	}
 
 	return (
 		<div className={styles.container}>
@@ -159,7 +157,7 @@ function ConfirmCargoAirModal({
 					</div>
 				)}
 
-				{render()}
+				<Render />
 				<div className={styles.button_div}>
 					<div className={styles.div1}>
 						<Button className="secondary md" onClick={() => onCancel()}>
