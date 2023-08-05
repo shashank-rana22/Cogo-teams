@@ -8,6 +8,8 @@ import getUserNameFromEmail from '../../../helpers/getUserNameFromEmail';
 
 import styles from './styles.module.css';
 
+const ARRAY_ELEMENT_STEP = 1;
+
 function ReceipientComp({ array = [], label = '' }) {
 	if (isEmpty(array)) {
 		return null;
@@ -19,19 +21,26 @@ function ReceipientComp({ array = [], label = '' }) {
 				{label}
 				:
 			</div>
-			{array?.map((eachEmail) => {
-				const { userName: senderName } = getUserNameFromEmail({ query: eachEmail });
-				return (
-					<Tooltip
-						placement="bottom"
-						key={eachEmail}
-						content={eachEmail}
-						interactive
-					>
-						<div className={styles.each_receipient}>{senderName}</div>
-					</Tooltip>
-				);
-			})}
+
+			{array?.map(
+				(eachEmail, index) => {
+					const { userName: senderName } = getUserNameFromEmail({ query: eachEmail });
+
+					return (
+						<Tooltip
+							placement="bottom"
+							key={eachEmail}
+							content={eachEmail}
+							interactive
+						>
+							<div className={styles.each_receipient}>
+								{senderName}
+								{index !== array.length - ARRAY_ELEMENT_STEP ? ', ' : ''}
+							</div>
+						</Tooltip>
+					);
+				},
+			)}
 		</div>
 	);
 }

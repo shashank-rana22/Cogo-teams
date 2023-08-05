@@ -18,7 +18,7 @@ const renderContent = (showPreview) => `data:${showPreview?.contentType};base64,
 function RenderTitle({ item = '', handleDownload = () => {} }) {
 	return (
 		<div className={styles.title}>
-			<div>{decodeURI(item?.name)}</div>
+			<div>{decodeURI(item?.fileName)}</div>
 
 			<IcMDownload
 				onClick={() => handleDownload(item)}
@@ -39,7 +39,7 @@ function ViewAttachmentsModal({
 
 	if (urlType === 'urlBased') {
 		activeAttachmentContent = activeAttachmentData?.fileUrl;
-		activeAttachmentType = activeAttachmentData?.fileExtension;
+		activeAttachmentType = activeAttachmentData?.fileMediaType;
 	} else {
 		activeAttachmentContent = activeAttachmentData?.contentType;
 		activeAttachmentType = activeAttachmentContent.split('/')?.[GLOBAL_CONSTANTS.zeroth_index];
