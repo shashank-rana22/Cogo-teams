@@ -66,7 +66,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
-					{!shipment_data?.is_job_closed
+					{shipment_data?.is_job_closed
 						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
 						: null}
 
