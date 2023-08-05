@@ -1,0 +1,57 @@
+.header_text {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 19px;
+	color: #000;
+}
+
+.cancel_cta {
+	margin-right: 12px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.password_validator {
+	margin-top: 12px;
+
+	:global {
+		.icon {
+			display: flex;
+			align-items: center;
+			padding-right: 8px;
+		}
+
+		.message {
+			font-size: 12px;
+			color: #808080;
+		}
+	}
+}
+
+.user_container {
+	display: flex;
+	flex-direction: column;
+	padding: 24px;
+	background: #fdfbf6;
+}
+
+.flex_container {
+	display: flex;
+	margin-bottom: 12px;
+}
+
+.value {
+	width: 70%;
+	margin-bottom: 8px;
+	font-weight: 600;
+	color: #333;
+}
+
+.label {
+	width: 30%;
+	margin-bottom: 8px;
+	color: #828282;
+}

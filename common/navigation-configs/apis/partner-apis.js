@@ -12813,6 +12813,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'lead',
 		},
+		{
+			api          : 'list_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -12887,6 +12892,11 @@ const partner = {
 		},
 	],
 	ticket_management: [
+		{
+			api          : 'get_tickets_configuration_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
 		{
 			api          : 'list_partner_users',
 			access_type  : 'private',

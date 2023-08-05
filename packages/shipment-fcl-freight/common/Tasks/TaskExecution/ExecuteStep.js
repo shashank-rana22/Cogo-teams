@@ -3,6 +3,8 @@ import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 import { useRef } from 'react';
 
+import useGetCommodityOptions from '../../../hooks/useGetCommodityOptions';
+
 import BookingPreferenceCard from './CustomTasks/UploadBookingNote/components/Step0/BookingPreferenceCard';
 import EditBookingParams from './EditBookingParams';
 import { getCanShipmentRollover } from './helpers/getCanShipmentRollover';
@@ -21,6 +23,8 @@ function ExecuteStep({
 	selectedMail = [],
 	serviceIdMapping = [],
 }) {
+	const { options, allCommodity } = useGetCommodityOptions({ task });
+
 	const {
 		formProps,
 		fields,
@@ -30,7 +34,10 @@ function ExecuteStep({
 		stepConfig,
 		getApisData,
 		selectedMail,
+		options,
+		allCommodity,
 	});
+
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 
 	const { editBookingParams } = showElements || {};
