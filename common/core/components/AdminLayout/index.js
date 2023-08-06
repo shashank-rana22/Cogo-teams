@@ -42,7 +42,7 @@ function AdminLayout({
 	const {
 		user: { id: user_id = '' },
 		partner: partnerData,
-		is_in_voice_call: inCall = false, voice_call_recipient_data = {},
+		is_in_voice_call: inCall = false,
 		is_in_video_call: inVideoCall = false, video_call_recipient_data = {},
 	} = user_data;
 
@@ -101,11 +101,6 @@ function AdminLayout({
 				/>
 			) : null}
 			<VoiceCall
-				voice_call_recipient_data={{
-					...(voice_call_recipient_data || {}),
-					loggedInAgentId: user_id,
-				}}
-				inCall={inCall}
 				firestore={firestore}
 			/>
 			<VideoCall

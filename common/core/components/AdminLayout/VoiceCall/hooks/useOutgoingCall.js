@@ -1,13 +1,57 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
+const getPayload = ({
+	isUnkownUser,
+	mobile_country_code,
+	mobile_number,
+	orgId,
+	userId,
+	loggedInAgentId,
+}) => {
+	let payload = {};
+	if (isUnkownUser) {
+		payload = {
+			destination_number: {
+				mobile_country_code,
+				mobile_number,
+			},
+		};
+	} else {
+		payload = {
+			organization_id : orgId,
+			user_id         : userId,
+		};
+	}
+
+	return { ...payload, source: 'cogo_one', agent_id: loggedInAgentId };
+};
+
+const setCallStateData = ({
+	mobile_number,
+	orgId,
+	userId,
+	userName,
+	setCallState,
+}) => {
+	const receiverUserDetails = {
+		mobile_number,
+		user_id         : userId,
+		lead_user_id    : '',
+		userName,
+		organization_id : orgId,
+	};
+
+	setCallState((p) => ({ ...p, receiverUserDetails, showCallModalType: 'fullCallModal', isSelfIntiated: true }));
+};
+
 function useOutgoingCall({
-	voice_call_recipient_data = {},
-	checkToOpenFeedBack,
-	localStateReducer,
-	startApiCallInterval,
-	fetchCallStatus,
+	voiceCallData = {},
+	setCallState = () => {},
+	unmountVoiceCall = () => {},
+	loggedInAgentId = '',
 }) {
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -23,48 +67,35 @@ function useOutgoingCall({
 		userId = '',
 		mobile_number = '',
 		mobile_country_code = '',
-		loggedInAgentId = '',
-	} = voice_call_recipient_data || {};
+		userName = '',
+	} = voiceCallData || {};
 
-	const makeCallApi = useCallback(async () => {
-		let payload = {};
-		if (isUnkownUser) {
-			payload = {
-				destination_number: {
+	const makeCallApi = useCallback(() => {
+		try {
+			setCallStateData({
+				mobile_number,
+				orgId,
+				userId,
+				userName,
+				setCallState,
+			});
+
+			trigger({
+				data: getPayload({
+					isUnkownUser,
 					mobile_country_code,
 					mobile_number,
-				},
-			};
-		} else {
-			payload = {
-				organization_id : orgId,
-				user_id         : userId,
-			};
-		}
-		try {
-			const res = await trigger({
-				data: { ...payload, source: 'cogo_one', agent_id: loggedInAgentId },
+					orgId,
+					userId,
+					loggedInAgentId,
+				}),
 			});
-			const callRecordId = res?.data?.call_record_id;
-			localStateReducer({ callRecordId });
-			startApiCallInterval(() => fetchCallStatus(callRecordId));
 		} catch (error) {
-			Toast.error(error?.response?.data?.message[0]);
-			checkToOpenFeedBack({ hasAgentPickedCall: false });
+			Toast.error(error?.response?.data?.message[GLOBAL_CONSTANTS.zeroth_index] || 'something went wrong');
+			unmountVoiceCall();
 		}
-	}, [
-		isUnkownUser,
-		mobile_country_code,
-		mobile_number,
-		orgId,
-		trigger,
-		userId,
-		loggedInAgentId,
-		checkToOpenFeedBack,
-		localStateReducer,
-		fetchCallStatus,
-		startApiCallInterval,
-	]);
+	}, [isUnkownUser, loggedInAgentId, mobile_country_code,
+		mobile_number, orgId, setCallState, trigger, unmountVoiceCall, userId, userName]);
 
 	return {
 		makeCallApi,
