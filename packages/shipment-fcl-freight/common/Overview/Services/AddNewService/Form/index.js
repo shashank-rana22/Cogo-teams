@@ -42,12 +42,14 @@ function Form({
 
 	const {
 		destination_port = {},
+		origin_port = {},
 		cargo_details = [],
 		trade_type = '',
 		inco_term = '',
 	} = primary_service;
 
 	const { name: destination_port_name = '' } = destination_port;
+	const { name : origin_port_name = '' } = origin_port;
 
 	const haveToAskOrgDetails = !KAM_AGENTS.includes(activeStakeholder) && consignee_shipper_id;
 
@@ -121,6 +123,7 @@ function Form({
 							inco_term,
 						}}
 						destination_port_name={destination_port_name}
+						origin_port_name={origin_port_name}
 					/>
 				) : null }
 

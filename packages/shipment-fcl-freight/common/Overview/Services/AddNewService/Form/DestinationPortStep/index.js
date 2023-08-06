@@ -3,7 +3,12 @@ import { startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-export default function DestinationPortStep({ cargoDetails = {}, destination_port_name = '' }) {
+const TRADE_TYPE = {
+	export : 'Origin Port',
+	import : 'Destination Port',
+};
+
+export default function DestinationPortStep({ cargoDetails = {}, destination_port_name = '', origin_port_name = '' }) {
 	const {
 		cargo_weight_per_container,
 		container_type,
@@ -19,9 +24,13 @@ export default function DestinationPortStep({ cargoDetails = {}, destination_por
 			<div className={styles.label}>Are you sure you want to Upsell this service?</div>
 
 			<div className={styles.destination_label}>
-				Destination Port:
+				{TRADE_TYPE[trade_type]}
+				:
 				{' '}
-				<strong>{destination_port_name}</strong>
+				<strong>
+					{' '}
+					{ trade_type === 'import' ? destination_port_name : origin_port_name}
+				</strong>
 			</div>
 
 			<div>
