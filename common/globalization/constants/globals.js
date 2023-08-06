@@ -77,14 +77,6 @@ const GLOBAL_CONSTANTS = {
 		SGD : '$',
 
 	},
-	EDUCATION_LEVEL_OPTIONS: [
-		{ label: '10th', value: '10th' },
-		{ label: '12th', value: '12th' },
-		{ label: 'Diploma', value: 'Diploma' },
-		{ label: 'Graduate degree', value: 'graduate_degree' },
-		{ label: 'Post Graduates degree', value: 'post_graduates_degree' },
-		{ label: 'Doctorate degree', value: 'doctorate_degree' },
-	],
 
 	formats: {
 		date: {
@@ -471,6 +463,14 @@ const GLOBAL_CONSTANTS = {
 			{
 				label: 'VNM', value: 'VNM',
 			},
+		],
+		educational_level_options: [
+			{ label: '10th', value: '10th' },
+			{ label: '12th', value: '12th' },
+			{ label: 'Diploma', value: 'Diploma' },
+			{ label: 'Graduate degree', value: 'graduate_degree' },
+			{ label: 'Post Graduates degree', value: 'post_graduates_degree' },
+			{ label: 'Doctorate degree', value: 'doctorate_degree' },
 		],
 	},
 

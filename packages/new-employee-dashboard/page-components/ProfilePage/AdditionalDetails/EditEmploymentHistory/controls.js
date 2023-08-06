@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const getControls = [{
+const controls = [{
 	name     : 'employment_history',
 	type     : 'fieldArray',
 	controls : [
@@ -43,4 +43,4 @@ const getControls = [{
 	],
 }];
 
-export default getControls;
+export default controls;

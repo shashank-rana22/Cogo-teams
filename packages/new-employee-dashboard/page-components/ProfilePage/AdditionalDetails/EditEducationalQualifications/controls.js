@@ -8,7 +8,7 @@ const getControls = () => [{
 			name        : 'education_level',
 			label       : 'Education Level*',
 			type        : 'createselect',
-			options     : GLOBAL_CONSTANTS.EDUCATION_LEVEL_OPTIONS,
+			options     : GLOBAL_CONSTANTS.educational_level_options,
 			placeholder : 'Degree',
 			rules       : { required: 'This is required' },
 		},
