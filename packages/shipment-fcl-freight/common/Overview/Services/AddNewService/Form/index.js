@@ -119,7 +119,7 @@ function Form({
 					<DestinationPortStep
 						cargoDetails={{
 							...(cargo_details[GLOBAL_CONSTANTS.zeroth_index] || {}),
-							trade_type,
+							trade_type: upsellableService.trade_type,
 							inco_term,
 						}}
 						destination_port_name={destination_port_name}

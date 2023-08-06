@@ -39,7 +39,6 @@ export default function DestinationPortStep({ cargoDetails = {}, destination_por
 				<Pill>{startCase(commodity)}</Pill>
 				<Pill>{`${container_size}ft`}</Pill>
 				<Pill>{`${containers_count} containers`}</Pill>
-				<Pill>{startCase(trade_type)}</Pill>
 				<Pill>{`Inco : ${upperCase(inco_term)}`}</Pill>
 			</div>
 		</div>
