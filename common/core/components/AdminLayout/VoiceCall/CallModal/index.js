@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import hideNumber from '../../../../helpers/hideNumber';
 import { useGetControls } from '../configurations/group-call-controls';
-// import getConferenceText from '../helpers/getConferenceText';
+import getConferenceText from '../helpers/getConferenceText';
 import secsToDurationConverter from '../utils/secsToDurationConverter';
 
 import Attendees from './Attendees';
@@ -23,8 +23,8 @@ function CallModal({
 	hangUpCall = () => {},
 	hangUpLoading = false,
 	attendees = [],
-	// conferenceType = '',
-	// callState = {},
+	conferenceType = '',
+	callState = {},
 }) {
 	const { handleSubmit, control, formState: { errors }, watch, reset } = useForm();
 
@@ -78,7 +78,9 @@ function CallModal({
 							<div className={styles.timer}>{secsToDurationConverter(status, counter)}</div>
 						</div>
 					</div>
-					{isInConferenceCall &&	<Attendees attendees={attendees} />}
+					{!status && conferenceType
+					&& <div className={styles.call_text}>{getConferenceText({ callState })}</div>}
+					{status && isInConferenceCall &&	<Attendees attendees={attendees} />}
 					<div className={styles.footer} style={{ '--height': status ? '56%' : '30%' }}>
 						{status
 							? (

@@ -136,3 +136,10 @@
 	cursor: pointer;
 	fill: #4f4f4f;
 }
+
+.call_text {
+	height: 54%;
+	font-size: 12px;
+	color: #f9ae64;
+	text-align: center;
+}
