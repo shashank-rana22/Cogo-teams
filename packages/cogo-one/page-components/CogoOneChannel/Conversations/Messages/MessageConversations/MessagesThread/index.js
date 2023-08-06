@@ -38,6 +38,7 @@ function MessagesThread(
 		scrollToBottom = () => {},
 		firestore = {},
 		viewType = '',
+		mailProps = {},
 	},
 	messageRef,
 ) {
@@ -120,6 +121,7 @@ function MessagesThread(
 						setRaiseTicketModal={setRaiseTicketModal}
 						formattedData={formattedData}
 						viewType={viewType}
+						mailProps={mailProps}
 					/>
 				);
 			})}

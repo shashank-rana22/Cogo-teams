@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function Header({
 	actionType = '',
 	activeTab = '',
-	setShowForm = () => {},
+	setDetailsForm = () => {},
 	loadingResponses = false,
 }) {
 	return (
@@ -26,7 +26,11 @@ function Header({
 					disabled={actionType === 'view' || loadingResponses}
 					role="presentation"
 					style={{ marginLeft: '8px' }}
-					onClick={() => setShowForm(true)}
+					onClick={() => setDetailsForm(() => ({
+						show        : true,
+						type        : 'create',
+						initialData : {},
+					}))}
 				>
 					Add
 					{' '}

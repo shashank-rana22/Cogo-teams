@@ -1,4 +1,6 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useGenerateBluetideHbl from '../../../../../hooks/useGenerateBluetideHbl';
@@ -45,7 +47,7 @@ function AmendDraftBl({
 		},
 	});
 
-	const hblDoc = tradeDocList?.list?.[0];
+	const hblDoc = tradeDocList?.list?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const afterRefetch = () => {
 		refetch();
@@ -56,7 +58,7 @@ function AmendDraftBl({
 	const { updateDocument } = useUpdateShipmentDocuments({ refetch: afterRefetch });
 
 	useEffect(() => {
-		setisHBLUploaded(tradeDocList?.list?.length > 0);
+		setisHBLUploaded(!isEmpty(tradeDocList?.list));
 	}, [tradeDocList?.list]);
 
 	useEffect(() => {
@@ -67,7 +69,7 @@ function AmendDraftBl({
 		if (hblData) {
 			const body = {
 				trade_document_id    : hblDoc?.id,
-				shipment_document_id : uploadedDocs?.list?.[0]?.id,
+				shipment_document_id : uploadedDocs?.list?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
 				document_type        : 'bluetide_hbl',
 				data                 : {
 					...hblData,
@@ -80,13 +82,13 @@ function AmendDraftBl({
 			await apiTrigger(body);
 		} else if (hblUploadData) {
 			const body = {
-				id              : uploadedDocs?.list?.[0]?.id,
+				id              : uploadedDocs?.list?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
 				pending_task_id : task?.id,
 				data            : {
 					document_number  : hblUploadData?.document_number,
 					containers_count : hblUploadData?.containers_count,
 				},
-				document_url        : hblUploadData?.url?.url,
+				document_url        : hblUploadData?.url?.url || hblUploadData?.url?.finalUrl,
 				performed_by_org_id : task?.organization_id,
 				shipment_id         : task?.shipment_id,
 			};
@@ -125,11 +127,11 @@ function AmendDraftBl({
 			<div className={styles.text}>
 				Remarks:
 				&nbsp;
-				{uploadedDocs?.list?.[0]?.remarks}
+				{uploadedDocs?.list?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks}
 			</div>
 			<HBLCreate
 				isHBLUploaded={isHBLUploaded}
-				shipmentHblDoc={uploadedDocs?.list?.[0]}
+				shipmentHblDoc={uploadedDocs?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
 				hblData={hblData}
 				onSave={handleSaveHBL}
 				hblUploadData={hblUploadData}

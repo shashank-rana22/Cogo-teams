@@ -32,6 +32,7 @@ function Conversations({
 			setActiveTab,
 			suggestions,
 			setModalType,
+			mailProps,
 		},
 		voice: {
 			activeVoiceCard: activeTab?.data || {},

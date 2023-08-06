@@ -78,7 +78,7 @@ function CogoOne() {
 		preferenceLoading = false,
 	} = useGetAgentPreference();
 
-	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline();
+	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
