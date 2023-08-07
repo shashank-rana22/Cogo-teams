@@ -6,6 +6,7 @@ const MINUTE_COUNT = 60;
 const SECOND_COUNT = 60;
 const DEFAULT_ZERO_VALUE = 0;
 const TOTAL_TIME_COUNT = 1000;
+const DEFAULT_TDS_RATE = 1;
 
 const getPayload = ({
 	vendorID,
@@ -63,9 +64,9 @@ const getPayload = ({
 	categoryName,
 	dueDate,
 }) => {
-	const lineItemsData = (lineItemsList || []).map((lineItem: any) => {
+	const lineItemsData = (lineItemsList || []).map((lineItem) => {
 		if (lineItem?.tax) {
-			const { code, serviceName, productCode } =				JSON.parse(lineItem?.tax) || {};
+			const { code, serviceName, productCode } = JSON.parse(lineItem?.tax) || {};
 
 			return {
 				unit                : '',
@@ -128,9 +129,9 @@ const getPayload = ({
 					placeOfSupply      : branchName,
 					billCurrency       : invoiceCurrency,
 					creditDays:
-                Math.ceil(Math.abs(new Date(dueDate)
-                        - new Date(invoiceDate))
-                    / (HOUR_COUNT * MINUTE_COUNT * SECOND_COUNT * TOTAL_TIME_COUNT)) || DEFAULT_ZERO_VALUE,
+						Math.ceil(Math.abs(new Date(dueDate)
+							- new Date(invoiceDate))
+							/ (HOUR_COUNT * MINUTE_COUNT * SECOND_COUNT * TOTAL_TIME_COUNT)) || DEFAULT_ZERO_VALUE,
 					exchangeRate    : null,
 					ledgerCurrency,
 					billDocumentUrl : uploadedInvoice,
@@ -160,7 +161,7 @@ const getPayload = ({
 						registrationType === 'tax'
 							? registrationNumberTradeParty
 							: null,
-					tdsRate    : tdsTradeParty || 1,
+					tdsRate    : tdsTradeParty || DEFAULT_TDS_RATE,
 					bankDetail : {
 						bankName,
 						beneficiaryName: bankName,
@@ -208,7 +209,7 @@ const getPayload = ({
 					countryId            : vendorCountryId,
 					registrationNumber   : vendorRegistrationNumber,
 					taxNumber            : vendorRegistrationNumber,
-					tdsRate              : tdsTradeParty || 1,
+					tdsRate              : tdsTradeParty || DEFAULT_TDS_RATE,
 				},
 				lineItems: lineItemsData,
 			},
