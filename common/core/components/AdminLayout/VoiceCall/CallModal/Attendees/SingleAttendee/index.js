@@ -9,7 +9,7 @@ function SingleAttendee({ eachAttendee = {} }) {
 	const { name = '' } = agent_details || {};
 
 	const ActionIcon = ICON_MAPPING[call_type] || null;
-	const callIcon = CALL_MAPPING[call_status] || null;
+	const CallIcon = CALL_MAPPING[call_status] || null;
 
 	return (
 		<div className={styles.attendee_flex} key={id}>
@@ -17,7 +17,7 @@ function SingleAttendee({ eachAttendee = {} }) {
 				{ActionIcon && <ActionIcon className={styles.icon_styles_attendee} fill="#4f4f4f" />}
 				<div className={styles.name}>{name}</div>
 			</div>
-			{callIcon || <div className={styles.connecting_text}>connecting...</div>}
+			{CallIcon || <div className={styles.connecting_text}>connecting...</div>}
 		</div>
 	);
 }
