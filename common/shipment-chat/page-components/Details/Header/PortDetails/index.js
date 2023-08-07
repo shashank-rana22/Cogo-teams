@@ -17,58 +17,62 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 		return null;
 	}
 
-	const handleLocationDetails = (location, icdPortInfo) => (
-		<>
-			{location?.port_code || location?.postal_code ? (
-				<div className={styles.code}>
-					(
-					{location?.port_code || location?.postal_code}
-					)
-				</div>
-			) : (
-				<div style={{ height: '20px' }} />
-			)}
-
-			<div className={styles.country}>
-				{location?.country?.name}
-			</div>
-
-			<Tooltip
-				placement="bottom"
-				theme="light"
-				content={(
-					<div>
-						<div style={{ fontSize: '10px' }}>{location?.display_name}</div>
-
-						{!isEmpty(icdPortInfo) ? <div className={styles.icd}>{icdPortInfo?.name}</div> : null}
+	function HandleLocationDetails(location, icdPortInfo) {
+		return (
+			<>
+				{location?.port_code || location?.postal_code ? (
+					<div className={styles.code}>
+						(
+						{location?.port_code || location?.postal_code}
+						)
 					</div>
+				) : (
+					<div className={styles.empty_code} />
 				)}
-			>
-				<div className={styles.value}>{location?.name}</div>
-			</Tooltip>
 
-		</>
-	);
-
-	const renderLocation = () => (
-		<>
-			<div className={styles.port_code}>
-				{handleLocationDetails(origin_port, origin_main_port)}
-			</div>
-
-			{destination_port ? (
-				<div className={styles.icon_wrapper}>
-					<IcMPortArrow style={{ width: '1.2em', height: '1.2em' }} />
+				<div className={styles.country}>
+					{location?.country?.name}
 				</div>
-			) : null}
 
-			{destination_port ? (
+				<Tooltip
+					placement="bottom"
+					theme="light"
+					content={(
+						<div>
+							<div className={styles.display_name}>{location?.display_name}</div>
+
+							{!isEmpty(icdPortInfo) ? <div className={styles.icd}>{icdPortInfo?.name}</div> : null}
+						</div>
+					)}
+				>
+					<div className={styles.value}>{location?.name}</div>
+				</Tooltip>
+
+			</>
+		);
+	}
+
+	function RenderLocation() {
+		return (
+			<>
 				<div className={styles.port_code}>
-					{handleLocationDetails(destination_port, destination_main_port)}
+					{HandleLocationDetails(origin_port, origin_main_port)}
 				</div>
-			) : null}
-		</>
-	);
+
+				{destination_port ? (
+					<div className={styles.icon_wrapper}>
+						<IcMPortArrow width="1.2em" height="1.2em" />
+					</div>
+				) : null}
+
+				{destination_port ? (
+					<div className={styles.port_code}>
+						{HandleLocationDetails(destination_port, destination_main_port)}
+					</div>
+				) : null}
+			</>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -76,7 +80,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 				<div className={styles.icons_and_service} />
 			) : null}
 
-			{renderLocation()}
+			{RenderLocation()}
 		</div>
 	);
 }

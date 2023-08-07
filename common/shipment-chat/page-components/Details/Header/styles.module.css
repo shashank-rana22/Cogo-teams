@@ -66,6 +66,10 @@
 	border-radius: 6px;
 }
 
+.profile_img {
+	margin-right: 4px;
+}
+
 .filter_box {
 	display: flex;
 	align-items: center;
@@ -75,6 +79,10 @@
 	font-weight: 500;
 	color: #221f20;
 	background: #cfeaed;
+
+	> div {
+		color: #221f20;
+	}
 }
 
 .close_icon {

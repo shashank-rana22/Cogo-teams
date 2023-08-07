@@ -7,8 +7,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function MessageContent({ msg, user_id, handleClick = () => {} }) {
-	const getSplited = (str) => {
+function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
+	const getSplitted = (str) => {
 		const all = str.split('\\n');
 		let res = '';
 		(all || []).forEach((ele) => {
@@ -31,8 +31,8 @@ function MessageContent({ msg, user_id, handleClick = () => {} }) {
 							? styles.right : styles.left} `}
 					>
 						<div className={styles.details}>
-							<div style={{ display: 'flex', alignItems: 'center' }}>
-								<span style={{ margin: '0px 8px' }}>
+							<div>
+								<span>
 									{msg?.created_by_stakeholder ? (
 										<div className={styles.stakeholder}>
 											{msg?.created_by_stakeholder
@@ -54,40 +54,34 @@ function MessageContent({ msg, user_id, handleClick = () => {} }) {
 								</div>
 							</div>
 
-							<div
+							<button
 								className={cl` ${styles.imp_sign} ${msg?.created_by_user_id === user_id
 									? styles.right : styles.left} `}
-								role="button"
 								tabIndex={0}
 								onClick={() => handleClick(msg)}
 							>
 								{msg?.important === true ? (
-									<IcCStar
-										style={{ width: '1.3em', height: '1.3em' }}
-									/>
+									<IcCStar width="1.3em" height="1.3em" />
 								) : (
-									<IcMStar
-										style={{ width: '1.3em', height: '1.3em' }}
-									/>
+									<IcMStar width="1.3em" height="1.3em" />
 								)}
-							</div>
+							</button>
 						</div>
 
 						{(msg?.attachment_urls || []).map((url) => (
-							<div
+							<button
 								key={url}
-								role="button"
 								tabIndex={0}
 								className={styles.flex_row}
 								onClick={() => window.open(url, '_blank')}
 							>
-								<IcMDocument style={{ width: '1.5em', height: '1.5em', marginRight: '6px' }} />
+								<IcMDocument width="1.6em" height="1.6em" className={styles.icm_document} />
 								{url?.split('/').pop()}
-							</div>
+							</button>
 						))}
 
 						{msg?.content ? (
-							<div className={styles.msg}>{`${getSplited(msg.content)}`}</div>
+							<div className={styles.msg}>{`${getSplitted(msg.content)}`}</div>
 						) : null}
 					</div>
 				) : null

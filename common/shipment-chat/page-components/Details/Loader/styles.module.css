@@ -29,6 +29,15 @@
 	border-left: 1px solid #f68b21;
 }
 
+.first_port_details_container {
+	width: 40%;
+	margin-left: 4px;
+}
+
+.second_port_details_container {
+	width: 40%;
+}
+
 .port_details_placeholder {
 	width: 50px;
 	height: 12px;
@@ -49,6 +58,10 @@
 	padding-right: 12px;
 	font-size: 12px;
 	background: #cfeaed;
+
+	> div {
+		margin-right: 8px;
+	}
 }
 
 .close_icon {

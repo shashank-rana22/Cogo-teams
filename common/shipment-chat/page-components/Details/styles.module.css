@@ -62,6 +62,14 @@
 	}
 }
 
+.empty_send_to {
+	padding: 21px;
+}
+
+.icm_doc {
+	margin-right: 4px;
+}
+
 .text_docs_container {
 	display: flex;
 	flex-direction: column;

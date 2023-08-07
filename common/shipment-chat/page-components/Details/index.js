@@ -181,7 +181,7 @@ function Details({
 							isStakeholder={isStakeholder}
 						/>
 					) : (
-						<div style={{ padding: '21px' }} />
+						<div className={styles.empty_send_to} />
 					)}
 
 					<div className={styles.text_docs_container}>
@@ -189,7 +189,7 @@ function Details({
 							<div className={styles.attached_container}>
 								{(formValues?.file || []).map((url) => (
 									<div className={styles.attached_doc} key={url}>
-										<IcMDocument style={{ marginRight: '4px' }} />
+										<IcMDocument className={styles.icm_doc} />
 										{decodeURIComponent(url?.split('/').pop())}
 									</div>
 								))}
@@ -223,10 +223,12 @@ function Details({
 								value={textContent}
 								onKeyDown={(e) => handleClick(e)}
 								rows={rows}
-								onChange={(val) => (
-									textContent === '' && val === '\n'
-										? reset() : setTextContent(val)
-								)}
+								onChange={(val) => {
+									setTextContent(val);
+									if (textContent === '' && val === '\n') {
+										reset();
+									}
+								}}
 							/>
 
 							<Button
@@ -235,7 +237,7 @@ function Details({
 								tabIndex={0}
 								onClick={!loading ? onCreateMessage : null}
 							>
-								<IcMSend style={{ width: '2.8em', height: '2.8em' }} />
+								<IcMSend width="2.8em" height="2.8em" />
 							</Button>
 						</div>
 					</div>

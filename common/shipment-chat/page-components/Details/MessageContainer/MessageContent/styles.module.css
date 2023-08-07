@@ -47,9 +47,19 @@
 	padding: 4px;
 	font-size: 10px;
 	color: #828282;
+
+	> div {
+		display: flex;
+		align-items: center;
+
+		> span {
+			margin: 0 8px;
+		}
+	}
 }
 
 .flex_row {
+	all: unset;
 	display: flex;
 	align-items: center;
 	padding: 4px 0 4px 10px;
@@ -84,7 +94,12 @@
 	color: #918c8c;
 }
 
+.icm_document {
+	margin-right: 6px;
+}
+
 .imp_sign {
+	all: unset;
 	display: flex;
 	justify-content: flex-end;
 	cursor: pointer;

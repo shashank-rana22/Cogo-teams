@@ -74,7 +74,7 @@ function Header({
 					className={styles.popover_container}
 				>
 					<div className={styles.button}>
-						<IcMProfile width={12} height={12} style={{ marginRight: '4px' }} />
+						<IcMProfile width={12} height={12} className={styles.profile_img} />
 						{`${groupChatUsers?.length} Contacts`}
 					</div>
 				</Popover>
@@ -90,7 +90,7 @@ function Header({
 			</div>
 
 			<div className={styles.filter_box}>
-				<div style={{ color: '#221F20' }}>Show Starred Messages</div>
+				<div>Show Starred Messages</div>
 				<Toggle value={showImpMsg} onChange={(event) => setShowImpMsg(event?.target?.checked)} />
 			</div>
 

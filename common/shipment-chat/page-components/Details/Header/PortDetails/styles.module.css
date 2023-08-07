@@ -40,6 +40,14 @@
 	color: #f68b21;
 }
 
+.empty_code {
+	height: 20px;
+}
+
+.display_name {
+	font-size: 10px;
+}
+
 .country {
 	margin: 0;
 	overflow: hidden;

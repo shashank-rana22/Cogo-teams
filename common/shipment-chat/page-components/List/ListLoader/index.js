@@ -16,7 +16,7 @@ function Loader() {
 					</div>
 
 					<div className={styles.card_item}>
-						<Placeholder height="16px" width="120px" style={{ marginBottom: '4px' }} />
+						<Placeholder height="16px" width="120px" className={styles.first_placeholder} />
 
 						<Placeholder height="12px" width="100px" />
 					</div>

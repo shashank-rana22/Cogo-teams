@@ -13,14 +13,14 @@ function Loader({ setShow = () => {} }) {
 				</div>
 
 				<div className={styles.port_details_loading}>
-					<div style={{ width: '40%', marginLeft: '4px' }}>
+					<div className={styles.first_port_details_container}>
 						<Placeholder className={styles.port_details_placeholder} />
 						<Placeholder className={styles.port_details_placeholder} />
 					</div>
 
 					<IcMPortArrow className={styles.port_arrow} />
 
-					<div style={{ width: '40%' }}>
+					<div className={styles.second_port_details_container}>
 						<Placeholder className={styles.port_details_placeholder} />
 						<Placeholder className={styles.port_details_placeholder} />
 					</div>
@@ -38,7 +38,7 @@ function Loader({ setShow = () => {} }) {
 			</div>
 
 			<div className={styles.filter_box}>
-				<div style={{ marginRight: '8px' }}>Show Starred Messages</div>
+				<div>Show Starred Messages</div>
 
 				<ToggleLoader themeType="secondary" />
 			</div>

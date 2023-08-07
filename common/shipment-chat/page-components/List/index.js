@@ -96,7 +96,7 @@ function List({
 	}, [status, setFilters]);
 
 	return (
-		<div style={{ display: 'flex' }}>
+		<div className={styles.list_container}>
 			<div className={styles.container}>
 
 				<ListHeader
