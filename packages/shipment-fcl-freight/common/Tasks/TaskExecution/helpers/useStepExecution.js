@@ -54,14 +54,14 @@ function useStepExecution({
 	let isUploadAllowed = true;
 
 	if (task?.task === 'upload_bill_of_lading') {
-		isUploadAllowed = (getApisData?.getApisData?.list_shipment_documents || [])
+		isUploadAllowed = (getApisData?.list_shipment_documents || [])
 			.filter((item) => item?.state !== 'document_rejected')
 			?.every((doc) => doc.state === 'document_accepted');
 	}
 
 	useEffect(() => {
 		if (!isUploadAllowed) {
-			const blState = getApisData?.getApisData?.list_shipment_documents?.map(
+			const blState = getApisData?.list_shipment_documents?.map(
 				(item) => item?.state,
 			);
 
@@ -69,7 +69,7 @@ function useStepExecution({
 
 			setRestrictTask(true);
 		}
-	}, [isUploadAllowed, getApisData?.getApisData?.list_shipment_documents]);
+	}, [isUploadAllowed, getApisData?.list_shipment_documents]);
 
 	return {
 		fields: controls,
