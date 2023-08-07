@@ -27,7 +27,7 @@ function DocumentForm({
 	primary_service = {},
 }) {
 	const { shipment_id, organization_id, procedure_id } = shipment_ids;
-	const { trade_type } = primary_service || {};
+	const { trade_type = '', bl_type = '', bl_delivery_mode = '', bl_category = '' } = primary_service || {};
 
 	const afterUpdateOrCreateRefetch = () => {
 		setShowForm(false);
@@ -98,6 +98,8 @@ function DocumentForm({
 								name="bl_category"
 								control={control}
 								options={convertObjectMappingToArray(BL_CATEGORY_MAPPING)}
+								value={bl_category}
+								disabled={!!bl_category}
 								rules={{ required: { value: true, message: 'BL Category is required' } }}
 							/>
 							{Error('bl_category')}
@@ -112,6 +114,8 @@ function DocumentForm({
 								name="bl_preference"
 								control={control}
 								options={convertObjectMappingToArray(BL_PREFERENCE_MAPPING)}
+								value={bl_type}
+								disabled={!!bl_type}
 								rules={{ required: { value: true, message: 'BL Preferences is required' } }}
 							/>
 							{Error('bl_preference')}
@@ -124,6 +128,8 @@ function DocumentForm({
 								name="preferred_mode_of_document_execution"
 								control={control}
 								options={modeOfDocumentOptions}
+								disabled={!!bl_delivery_mode}
+								value={bl_delivery_mode}
 								rules={{ required: { value: true, message: 'Delivery Preferences is required' } }}
 							/>
 							{Error('preferred_mode_of_document_execution')}
