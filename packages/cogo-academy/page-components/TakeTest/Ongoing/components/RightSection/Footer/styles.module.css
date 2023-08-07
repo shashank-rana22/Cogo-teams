@@ -3,4 +3,10 @@
 	display: block;
 	margin-top: 54px;
 	margin-left: 280px;
+
+	@media (max-width: 768px) {
+		margin-top: 6px;
+		margin-bottom: 20px;
+		margin-left: 100px;
+	}
 }

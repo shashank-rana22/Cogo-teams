@@ -1,0 +1,21 @@
+.title {
+	margin: 20px 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.email_id {
+	width: fit-content;
+	max-width: 160px;
+	overflow: hidden;
+	color: #888fd1;
+	text-overflow: ellipsis;
+}
+
+.business_name {
+	width: fit-content;
+	max-width: 160px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

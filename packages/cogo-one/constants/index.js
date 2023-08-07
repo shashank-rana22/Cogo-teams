@@ -92,6 +92,19 @@ export const VOICE_ICON_MAPPING = {
 	incoming      : GLOBAL_CONSTANTS.image_url.incoming_svg,
 };
 
+export const CALL_HISTORY_AUDIO_ICONS = {
+	user: {
+		start      : GLOBAL_CONSTANTS.image_url.start_user_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_user_audio,
+		compStyles : { borderTopLeftRadius: '0px', background: '#FFFFFF' },
+	},
+	agent: {
+		start      : GLOBAL_CONSTANTS.image_url.start_agent_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_agent_audio,
+		compStyles : { borderTopRightRadius: '0px', background: '#FFFCE6' },
+	},
+};
+
 export const USER_ACTIVITY_MAPPING = {
 	platform      : 'Platform Activity',
 	communication : 'Communication Activity',

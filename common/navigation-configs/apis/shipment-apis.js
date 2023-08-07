@@ -1335,6 +1335,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'list_communications',
+		access_type  : 'private',
+		service_name : 'communication',
+	},
+	{
 		api          : 'get_process',
 		access_type  : 'private',
 		service_name : 'bookings',
@@ -1355,9 +1360,19 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'update_shipment_invoice_currency',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'update_invoice_payment_mode',
 		access_type  : 'private',
 		service_name : 'bookings',
+	},
+	{
+		api          : 'update_shipment_invoice_payment_mode',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'update_invoice_remarks',
@@ -1588,6 +1603,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'create_document',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'update_shipment_invoice_preference',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1691,6 +1711,36 @@ const apis = [
 	},
 	{
 		api          : 'download_rail_domestic_container_details_as_csv',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_air_freight_consolidated_invoice',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_additional_service',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_terminal_service_task',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_air_freight_consolidated_invoice',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_air_csr_sheet',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_air_csr_ocr_data',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

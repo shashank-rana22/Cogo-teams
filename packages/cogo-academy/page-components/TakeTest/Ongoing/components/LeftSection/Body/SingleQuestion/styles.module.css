@@ -29,6 +29,10 @@
 			padding: 0;
 		}
 	}
+
+	@media (max-width: 768px) {
+		margin-top: 10px;
+	}
 }
 
 .container {
@@ -61,10 +65,20 @@
 		max-width: 100%;
 		height: 100%;
 	}
+
+	@media (max-width: 768px) {
+		padding: 2px;
+	}
 }
 
 .question_content {
 	height: 73vh;
+
+	@media (max-width: 768px) {
+		justify-content: center;
+		width: 100%;
+		height: auto;
+	}
 }
 
 .options {

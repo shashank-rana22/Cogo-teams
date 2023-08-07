@@ -1,5 +1,7 @@
 import { Tooltip, Pill } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
@@ -42,7 +44,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 						</div>
 					))}
 				>
-					<div className={styles.wrapper}>{getList()[0]}</div>
+					<div className={styles.wrapper}>{getList()[GLOBAL_CONSTANTS.zeroth_index]}</div>
 				</Tooltip>
 			) : (
 				<div>
@@ -100,7 +102,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				<div className={styles.credit}>
 					<span>
 						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
-							: toTitleCase(requestType.replace(/_/g, ' ') || '-')}
+							: toTitleCase(requestType ? startCase(requestType) : '-')}
 
 					</span>
 					<span>
@@ -116,6 +118,11 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 
 			);
 		},
+	},
+	{
+		Header   : 'REQUEST SUB TYPE',
+		accessor : 'incidentSubtype',
+		id       : 'request_sub_type',
 	},
 	{
 		Header   : 'SOURCE',
@@ -141,8 +148,20 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			const { createdAt } = row;
 			return (
 				<div>
-					{format(createdAt, 'dd MMM YYYY', {}, false)}
-					<div>{format(createdAt, 'hh:mm a', {}, false)}</div>
+					{formatDate({
+						date: createdAt,
+						dateFormat:
+							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType: 'date',
+					})}
+					<div>
+						{formatDate({
+							date: createdAt,
+							timeFormat:
+								GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType: 'time',
+						})}
+					</div>
 				</div>
 			);
 		},
@@ -158,7 +177,14 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			return (
 				<div className={styles.flex_reverse}>
 					<div>{name}</div>
-					{format(updatedAt, 'dd MMM YYYY hh:mm a', {}, false)}
+					{formatDate({
+						date: updatedAt,
+						dateFormat:
+							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'dateTime',
+						seperator  : ' ',
+					})}
 				</div>
 			);
 		},

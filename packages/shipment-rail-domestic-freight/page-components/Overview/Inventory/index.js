@@ -115,9 +115,9 @@ function Inventory() {
 												<div>
 													<Button
 														disabled={updateLoading}
-														themeType={`${globalRouteState?.routeList?.size
+														themeType={globalRouteState?.routeList?.size
 															> MINIMUM_ROUTE_LIST_SIZE
-															? 'secondary' : 'primary'}`}
+															? 'secondary' : 'primary'}
 														size="md"
 														style={{ marginLeft: '15px' }}
 														onClick={onSubmit}
