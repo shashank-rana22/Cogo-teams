@@ -16,12 +16,19 @@ function SelectedCardScreen({
 	cogoAssuredRates = [],
 }) {
 	const [screen, setScreen] = useState('selectedCard');
+	const [showShippingLineModal, setShowShippingLineModal] = useState(false);
 
 	const {
 		data = {},
 		refetch = () => {},
 		loading = false,
 	} = useGetRateCard();
+
+	const {
+		rate_card: rateCardData = {},
+	} = data || {};
+
+	const { source = 'cogo_assured_rate' } = rateCardData;
 
 	const SUBSEQUENT_SCREENS_MAPPING = {
 		selectedCard: {
@@ -34,6 +41,8 @@ function SelectedCardScreen({
 				setHeaderProps,
 				headerProps,
 				cogoAssuredRates,
+				showShippingLineModal,
+				setShowShippingLineModal,
 			},
 		},
 		bookCheckout: {
@@ -47,6 +56,8 @@ function SelectedCardScreen({
 
 	const { component: ActiveComponent, props } = SUBSEQUENT_SCREENS_MAPPING[screen];
 
+	const len = cogoAssuredRates.length;
+
 	useEffect(() => {
 		const handleUrlChange = () => setHeaderProps({});
 
@@ -56,6 +67,10 @@ function SelectedCardScreen({
 			window.removeEventListener('popstate', handleUrlChange);
 		};
 	}, [setHeaderProps]);
+
+	useEffect(() => {
+		setShowShippingLineModal(source !== 'cogo_assured_rate' && len);
+	}, [len, source]);
 
 	return (
 		<ActiveComponent {...props} />

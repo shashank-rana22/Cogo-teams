@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import AdditionalServices from '../../../../../../common/OtherServices/AdditionalServices';
 import CargoInsurance from '../../../../../../common/OtherServices/CargoInsurance';
@@ -52,6 +52,8 @@ function SelectedRateCard({
 	setScreen = () => {},
 	setHeaderProps = () => {},
 	cogoAssuredRates = [],
+	showShippingLineModal = false,
+	setShowShippingLineModal = () => {},
 }) {
 	const [cargoModal, setCargoModal] = useState('pending'); // pending,progress,success
 
@@ -62,8 +64,6 @@ function SelectedRateCard({
 	} = data || {};
 
 	const { source = 'cogo_assured_rate', shipping_line = {} } = rateCardData;
-
-	const [showShippingLineModal, setShowShippingLineModal] = useState(false);
 
 	const { handleBook = () => {}, loading: createCheckoutLoading } = useCreateCheckout({
 		rateCardData,
@@ -77,10 +77,6 @@ function SelectedRateCard({
 			setCargoModal('progress');
 		} else handleBook();
 	};
-
-	useEffect(() => {
-		setShowShippingLineModal(source !== 'cogo_assured_rate' && !isEmpty(cogoAssuredRates));
-	}, [cogoAssuredRates, source]);
 
 	if (loading && isEmpty(data)) {
 		return (
