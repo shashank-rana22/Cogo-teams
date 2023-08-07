@@ -1360,9 +1360,19 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'update_shipment_invoice_currency',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'update_invoice_payment_mode',
 		access_type  : 'private',
 		service_name : 'bookings',
+	},
+	{
+		api          : 'update_shipment_invoice_payment_mode',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'update_invoice_remarks',
