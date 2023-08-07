@@ -1,7 +1,7 @@
-const react = require('react');
+import { useState, useEffect } from 'react';
 
 const useKey = (targetKey) => {
-	const [keyPressed, setKeyPressed] = react.useState(false);
+	const [keyPressed, setKeyPressed] = useState(false);
 
 	// If pressed key is our target key then set to true
 	function downHandler({ key }) {
@@ -20,7 +20,7 @@ const useKey = (targetKey) => {
 
 	// Add event listeners
 
-	react.useEffect(() => {
+	useEffect(() => {
 		window.addEventListener('keydown', downHandler);
 
 		window.addEventListener('keyup', upHandler);
@@ -32,6 +32,7 @@ const useKey = (targetKey) => {
 
 			window.removeEventListener('keyup', upHandler);
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []); // Empty array ensures that effect is only run on mount and unmount
 
 	return keyPressed;

@@ -17,6 +17,67 @@ const TRADE_PARTY_TYPE = {
 	value : 'paying_party',
 };
 
+function RenderList({
+	loading = false,
+	invoicingPartiesList = [],
+	address_to_use = '',
+	bookingType = '',
+	setShowComponent = () => {},
+	setInvoiceToTradePartyDetails = () => {},
+	valuesState,
+	organization = {},
+	handleChange = () => {},
+	optionsDisabledState = {},
+}) {
+	if (loading) {
+		return (
+			<div className={styles.loader_container}>
+				<Loader themeType="primary" />
+			</div>
+		);
+	}
+
+	const newInvoicingPartiesList = invoicingPartiesList.filter((item) => !isEmpty(item[address_to_use] || []));
+
+	if (isEmpty(newInvoicingPartiesList)) {
+		if (bookingType === 'self') {
+			return (
+				<>
+					<Button
+						onClick={() => {
+							setShowComponent('create_billing_address');
+							setInvoiceToTradePartyDetails((previousState) => ({
+								...previousState,
+								tradePartyId: organization.organization_trade_party_id,
+							}));
+						}}
+						style={{ marginBottom: 16 }}
+					>
+						Add Address
+					</Button>
+
+					<EmptyState />
+				</>
+			);
+		}
+
+		return <EmptyState />;
+	}
+
+	return newInvoicingPartiesList.map((item) => (
+		<InvoicingPartyItem
+			key={item.id}
+			item={item}
+			value={valuesState}
+			organization={organization}
+			handleChange={handleChange}
+			optionsDisabled={optionsDisabledState}
+			setShowComponent={setShowComponent}
+			setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
+		/>
+	));
+}
+
 function InvoicingParties({
 	organization = {},
 	primary_service = '',
@@ -49,26 +110,6 @@ function InvoicingParties({
 	const invoicingPartiesList = useMemo(() => (data || {}).list || [], [data]);
 
 	const address_to_use = is_tax_applicable ? 'billing_addresses' : 'other_addresses';
-
-	useEffect(() => {
-		if (loading || isEmpty(invoicingPartiesList)) {
-			return;
-		}
-
-		const VALUES = [];
-		const OPTIONS_DISABLED = {}; // optionsDisabled only for billing_addresses
-
-		invoicingPartiesList.forEach((item) => {
-			(item.billing_addresses || []).forEach((billingAddress) => {
-				const { id = '' } = billingAddress;
-
-				VALUES.push(id);
-			});
-		});
-
-		setValuesState(VALUES);
-		setOptionsDisabledState(OPTIONS_DISABLED);
-	}, [loading, invoicingPartiesList]);
 
 	const handleChange = (newValue) => {
 		setValuesState(newValue);
@@ -126,56 +167,6 @@ function InvoicingParties({
 		}
 	};
 
-	const renderList = () => {
-		if (loading) {
-			return (
-				<div className={styles.loader_container}>
-					<Loader themeType="primary" />
-				</div>
-			);
-		}
-
-		const newInvoicingPartiesList = invoicingPartiesList.filter((item) => !isEmpty(item[address_to_use] || []));
-
-		if (isEmpty(newInvoicingPartiesList)) {
-			if (bookingType === 'self') {
-				return (
-					<>
-						<Button
-							onClick={() => {
-								setShowComponent('create_billing_address');
-								setInvoiceToTradePartyDetails((previousState) => ({
-									...previousState,
-									tradePartyId: organization.organization_trade_party_id,
-								}));
-							}}
-							style={{ marginBottom: 16 }}
-						>
-							Add Address
-						</Button>
-
-						<EmptyState />
-					</>
-				);
-			}
-
-			return <EmptyState />;
-		}
-
-		return newInvoicingPartiesList.map((item) => (
-			<InvoicingPartyItem
-				key={item.id}
-				item={item}
-				value={valuesState}
-				organization={organization}
-				handleChange={handleChange}
-				optionsDisabled={optionsDisabledState}
-				setShowComponent={setShowComponent}
-				setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
-			/>
-		));
-	};
-
 	const renderAdditionalItems = () => {
 		if (bookingType === 'self' || showComponent !== 'view_billing_addresses') {
 			return null;
@@ -195,7 +186,20 @@ function InvoicingParties({
 
 	const renderMainComponent = () => {
 		if (showComponent === 'view_billing_addresses') {
-			return renderList();
+			return (
+				<RenderList
+					loading={loading}
+					invoicingPartiesList={invoicingPartiesList}
+					address_to_use={address_to_use}
+					bookingType={bookingType}
+					setShowComponent={setShowComponent}
+					setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
+					valuesState={valuesState}
+					organization={organization}
+					handleChange={handleChange}
+					optionsDisabledState={optionsDisabledState}
+				/>
+			);
 		}
 
 		if (showComponent === 'create_billing_address') {
@@ -226,6 +230,26 @@ function InvoicingParties({
 
 		return null;
 	};
+
+	useEffect(() => {
+		if (loading || isEmpty(invoicingPartiesList)) {
+			return;
+		}
+
+		const VALUES = [];
+		const OPTIONS_DISABLED = {}; // optionsDisabled only for billing_addresses
+
+		invoicingPartiesList.forEach((item) => {
+			(item.billing_addresses || []).forEach((billingAddress) => {
+				const { id = '' } = billingAddress;
+
+				VALUES.push(id);
+			});
+		});
+
+		setValuesState(VALUES);
+		setOptionsDisabledState(OPTIONS_DISABLED);
+	}, [loading, invoicingPartiesList]);
 
 	return (
 		<>

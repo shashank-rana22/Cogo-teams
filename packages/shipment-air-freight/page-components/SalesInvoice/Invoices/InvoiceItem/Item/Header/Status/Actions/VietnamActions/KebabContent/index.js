@@ -51,7 +51,7 @@ function Actions({
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-		|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id;
+		|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.linh_nguyen_user_id;
 
 	const content = (
 		<div className={styles.dialog_box}>

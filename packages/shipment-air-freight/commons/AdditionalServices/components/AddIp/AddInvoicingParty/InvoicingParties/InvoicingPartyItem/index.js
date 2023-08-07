@@ -1,6 +1,7 @@
 import { RadioGroup, Pill, Tooltip, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import React, { useMemo } from 'react';
 
 import styles from './styles.module.css';
@@ -37,11 +38,11 @@ function InvoicingPartyItem({
 				<div className={styles.label_container} key={id} id={`checkout_invoicing_party_${index}`}>
 					<div className={styles.address_align}>
 						<div className={styles.icon_wrapper}>
-							<img
+							<Image
 								src={GLOBAL_CONSTANTS.image_url.address_icon}
 								alt="address icon"
-								width="20"
-								height="20"
+								width={20}
+								height={20}
 							/>
 						</div>
 
@@ -71,7 +72,7 @@ function InvoicingPartyItem({
 		<div>
 			<div className={styles.label}>
 				<div className={styles.business_name}>{business_name}</div>
-				{verification_status && (
+				{verification_status ? (
 					<div className={styles.tag_container}>
 						<Pill size="md" className={verification_status} color="green">
 							{verification_status}
@@ -87,19 +88,18 @@ function InvoicingPartyItem({
 							placement="top"
 							caret={false}
 						>
-							{verification_status === 'pending' ? (
+							{verification_status === 'pending' && (
 								<div>
 									<IcMInfo
-										className="image"
 										fill="var(--color-primary-error-red-2)"
 										height={16}
 										width={16}
 									/>
 								</div>
-							) : null}
+							)}
 						</Tooltip>
 					</div>
-				)}
+				) : null}
 			</div>
 
 			<RadioGroup

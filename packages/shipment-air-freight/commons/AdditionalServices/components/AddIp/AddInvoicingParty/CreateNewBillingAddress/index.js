@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useCreateOrganizationAddress from '../../../../../../hooks/useCreateOrganizationAddress';
@@ -6,15 +7,13 @@ import AddressForm from '../AddressForm';
 
 import styles from './styles.module.css';
 
-const EMPTY_POC_DETAILS_LENGTH = 0;
-
 function CreateNewBillingAddress({
 	setShowComponent = () => {},
 	organizationDetails = {},
 	refetch = () => {},
 	invoiceToTradePartyDetails = {},
 }) {
-	const [isAddressRegisteredUnderGst, setIsAddressRegisteredUnderGst] = useState(false);
+	const [isAddressNotRegisteredUnderGst, setIsAddressNotRegisteredUnderGst] = useState(false);
 	const [gstNumber, setGstNumber] = useState('');
 
 	const { id = '' } = organizationDetails;
@@ -35,7 +34,7 @@ function CreateNewBillingAddress({
 	});
 
 	const onSubmit = (values) => {
-		if (values?.poc_details?.length === EMPTY_POC_DETAILS_LENGTH) {
+		if (isEmpty(values?.poc_details)) {
 			Toast.info('Please create at-least one POC before proceeding ');
 			return;
 		}
@@ -58,8 +57,8 @@ function CreateNewBillingAddress({
 				setGstNumber={setGstNumber}
 				setShowComponent={setShowComponent}
 				registrationNumber={registrationNumber}
-				isAddressRegisteredUnderGst={isAddressRegisteredUnderGst}
-				setIsAddressRegisteredUnderGst={setIsAddressRegisteredUnderGst}
+				isAddressNotRegisteredUnderGst={isAddressNotRegisteredUnderGst}
+				setIsAddressNotRegisteredUnderGst={setIsAddressNotRegisteredUnderGst}
 			/>
 		</div>
 	);

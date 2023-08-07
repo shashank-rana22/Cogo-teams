@@ -1,3 +1,7 @@
+.field_array_container {
+	flex: 0 0 100% !important;
+}
+
 .field_array {
 	display: flex;
 	align-items: center;

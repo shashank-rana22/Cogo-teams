@@ -19,9 +19,9 @@ function AddressForm({
 	onSubmit = () => {},
 	gstNumber = '',
 	setGstNumber = () => {},
-	isAddressRegisteredUnderGst = false,
+	isAddressNotRegisteredUnderGst = false,
 	setShowComponent = () => {},
-	setIsAddressRegisteredUnderGst = () => {},
+	setIsAddressNotRegisteredUnderGst = () => {},
 	source = '',
 	refetch = () => {},
 }) {
@@ -64,20 +64,20 @@ function AddressForm({
 		<div className={styles.container}>
 			<Checkbox
 				label="Not Registered Under GST Law"
-				checked={isAddressRegisteredUnderGst}
-				onChange={() => setIsAddressRegisteredUnderGst(!isAddressRegisteredUnderGst)}
+				checked={isAddressNotRegisteredUnderGst}
+				onChange={() => setIsAddressNotRegisteredUnderGst(!isAddressNotRegisteredUnderGst)}
 			/>
 
-			{isAddressRegisteredUnderGst && (
+			{isAddressNotRegisteredUnderGst && (
 				<span className={styles.text}>
 					Addresses not registered under GST will be added in
 					&quot;Other Addresses&quot; for the organization and
-					<b> will not be available for GST Invoicing</b>
+					<strong> will not be available for GST Invoicing</strong>
 					.
 				</span>
 			)}
 
-			{isAddressRegisteredUnderGst ? (
+			{isAddressNotRegisteredUnderGst ? (
 				<section className={styles.section}>
 					<Form
 						control={control}

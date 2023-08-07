@@ -14,13 +14,6 @@ function Form({
 	watch = () => {},
 }) {
 	const { registration_number, business_name, company_type, country_id } = filledDetails;
-	useEffect(() => {
-		setValue('registration_number', registration_number);
-		setValue('business_name', business_name);
-		setValue('company_type', company_type);
-		setValue('country_id', country_id);
-	}, [registration_number, business_name, company_type, country_id, setValue]);
-
 	const { formControl } = controls({ watch });
 
 	const renderForm = (field) => {
@@ -104,6 +97,13 @@ function Form({
 				return null;
 		}
 	};
+
+	useEffect(() => {
+		setValue('registration_number', registration_number);
+		setValue('business_name', business_name);
+		setValue('company_type', company_type);
+		setValue('country_id', country_id);
+	}, [registration_number, business_name, company_type, country_id, setValue]);
 
 	return (
 		<div>

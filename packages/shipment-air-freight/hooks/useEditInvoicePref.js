@@ -50,7 +50,7 @@ const useEditInvoicePref = ({
 
 	const [selectedParties, setSelectedParties] = useState(formattedIps || []);
 
-	const handleInvoicingPartyAdd = (ba) => {
+	const handleInvoicingPartyAdd = (invoicingParty) => {
 		const {
 			trade_party_type,
 			tax_number,
@@ -65,7 +65,7 @@ const useEditInvoicePref = ({
 			business_name,
 			address,
 			tax_mechanism,
-		} = ba || {};
+		} = invoicingParty || {};
 
 		const newParty = {
 			id              : selectedParties.length,

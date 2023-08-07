@@ -20,7 +20,7 @@ function CreateNewTradeParty({
 	fetchOrganizationTradeParties = () => {},
 }) {
 	const [filledDetails, setFilledDetails] = useState({});
-	const [isAddressRegisteredUnderGst, setIsAddressRegisteredUnderGst] = useState(false);
+	const [isAddressNotRegisteredUnderGst, setIsAddressNotRegisteredUnderGst] = useState(false);
 	const [gstNumber, setGstNumber] = useState('');
 	const [currentStep, setCurrentStep] = useState('company_details');
 
@@ -30,7 +30,7 @@ function CreateNewTradeParty({
 	};
 
 	const { apiTrigger } = useCreateOrganizationTradeParty({
-		refech: afterCreateTradeParty,
+		refetch: afterCreateTradeParty,
 	});
 
 	const onSubmit = (values) => {
@@ -38,7 +38,7 @@ function CreateNewTradeParty({
 			values,
 			filledDetails,
 			orgResponse,
-			isAddressRegisteredUnderGst,
+			isAddressNotRegisteredUnderGst,
 			setFilledDetails,
 			gstNumber,
 		});
@@ -68,8 +68,8 @@ function CreateNewTradeParty({
 				onSubmit={onSubmit}
 				gstNumber={gstNumber}
 				setGstNumber={setGstNumber}
-				isAddressRegisteredUnderGst={isAddressRegisteredUnderGst}
-				setIsAddressRegisteredUnderGst={setIsAddressRegisteredUnderGst}
+				isAddressNotRegisteredUnderGst={isAddressNotRegisteredUnderGst}
+				setIsAddressNotRegisteredUnderGst={setIsAddressNotRegisteredUnderGst}
 				source="create_trade_party"
 			/>
 		);

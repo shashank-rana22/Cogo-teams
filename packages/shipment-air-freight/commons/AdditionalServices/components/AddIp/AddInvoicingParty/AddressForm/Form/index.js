@@ -47,9 +47,9 @@ function FormElement({
 }
 
 function Form({
-	control = {},
-	errors = {},
-	showComponent = '',
+	control,
+	errors,
+	showComponent,
 }) {
 	const { formControls, pocControls } = controls({ showComponent, mobileCountryCodeOptions });
 
@@ -65,7 +65,7 @@ function Form({
 			<h3>POC Details</h3>
 
 			{fields.map((field, index) => (
-				<div key={field.id} style={{ flex: '0 0 100%' }}>
+				<div key={field.id} className={styles.field_array_container}>
 					<div className={styles.field_array}>
 						{pocControls.map((ctrl) => (
 							<FormElement
