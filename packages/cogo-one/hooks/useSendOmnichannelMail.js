@@ -107,7 +107,6 @@ const useSendOmnichannelMail = ({
 			scrollToBottom();
 			resetEmailStates();
 		} catch (error) {
-			console.log('error', error);
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};

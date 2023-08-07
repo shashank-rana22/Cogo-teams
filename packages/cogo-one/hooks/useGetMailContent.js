@@ -1,12 +1,12 @@
 import { useLensRequest } from '@cogoport/request';
 import { useCallback, useState } from 'react';
 
-const getParams = ({ messageId, source }) => ({
+const getParams = ({ messageId = '', source = '' }) => ({
 	email_address : source,
 	message_id    : messageId,
 });
 
-const formatBody = ({ mailResData, attachmentResData }) => {
+const formatBody = ({ mailResData = {}, attachmentResData = {} }) => {
 	const { body } = mailResData?.data || {};
 	const { content = '' } = body || {};
 	const { value: allAttachements } = attachmentResData?.data || {};
@@ -20,7 +20,7 @@ const formatBody = ({ mailResData, attachmentResData }) => {
 	);
 };
 
-function useGetMailContent({ messageId, source = '' }) {
+function useGetMailContent({ messageId = '', source = '' }) {
 	const [message, setMessage] = useState('');
 
 	const [{ loading }, trigger] = useLensRequest({

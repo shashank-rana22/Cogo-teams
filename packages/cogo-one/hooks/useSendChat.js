@@ -8,19 +8,19 @@ import sendUserMessage from '../helpers/sendUserMessage';
 import useSendMessage from './useSendMessage';
 
 const useSendChat = ({
-	setDraftMessages,
-	activeChatCollection,
-	draftMessages,
-	firestore,
-	channelType,
+	setDraftMessages = () => {},
+	activeChatCollection = {},
+	draftMessages = {},
+	firestore = {},
+	channelType = '',
 	uploadedFile = {},
-	setDraftUploadedFiles,
-	id,
-	formattedData,
-	canMessageOnBotSession,
-	assignChat,
-	scrollToBottom,
-	hasUploadedFiles,
+	setDraftUploadedFiles = () => {},
+	id = '',
+	formattedData = {},
+	canMessageOnBotSession = false,
+	assignChat = () => {},
+	scrollToBottom = () => {},
+	hasUploadedFiles = false,
 }) => {
 	const { user_name } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,

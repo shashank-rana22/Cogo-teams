@@ -13,8 +13,8 @@ const INCREASE_MESSAGE_COUNT_BY_ONE = 1;
 
 const useSendMessage = ({
 	channelType = '',
-	activeChatCollection,
-	formattedData,
+	activeChatCollection = {},
+	formattedData = {},
 	assignChat = () => {},
 	canMessageOnBotSession = false,
 }) => {
