@@ -1,25 +1,26 @@
-import { Avatar } from '@cogoport/components';
+import { Avatar, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFtick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function UserCard({ user, onClick, isSelected }) {
+function UserCard({ user = {}, onClick = () => {}, isSelected = false }) {
 	return (
 		<div
 			role="presentation"
-			className={`${styles.container} ${isSelected && styles.active}`}
+			className={cl`${styles.container} ${isSelected && styles.active}`}
 			onClick={() => onClick(user)}
 		>
 			<div className={styles.content}>
 				<Avatar
-					src="https://cogoport-production.sgp1.digitaloceanspaces.com/b17e97c0185eb584ed0227f8f630ebac/avatar.svg"
+					src={GLOBAL_CONSTANTS.image_url.user_avatar}
 					alt="img"
 					size="40px"
 					style={{ width: 34, height: 34 }}
 				/>
 
 				<div className={styles.main}>
-					<div className={`${styles.name} ${styles.names}`}>{user.name}</div>
+					<div className={cl`${styles.name} ${styles.names}`}>{user.name}</div>
 					<div className={styles.name}>{user.email}</div>
 				</div>
 			</div>

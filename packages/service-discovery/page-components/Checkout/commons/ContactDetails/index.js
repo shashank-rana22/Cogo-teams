@@ -6,8 +6,8 @@ import hideDetails from '../../helpers/hideDetails';
 import styles from './styles.module.css';
 
 function ContactDetails({
-	bookingConfirmationMode,
-	importer_exporter_poc,
+	bookingConfirmationMode = [],
+	importer_exporter_poc = {},
 	setShowWhatsappVerificationModal = () => {},
 }) {
 	const {

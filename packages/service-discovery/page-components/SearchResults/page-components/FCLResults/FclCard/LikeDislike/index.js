@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { IcCLike } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
@@ -75,7 +75,7 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 				<IcCLike
 					width="20px"
 					height="16px"
-					className={`${styles.like} ${likeState.is_liked ? styles.active : ''}`}
+					className={cl`${styles.like} ${likeState.is_liked ? styles.active : ''}`}
 				/>
 				<span className={styles.count}>{likeState.likes_count}</span>
 			</Button>
@@ -89,7 +89,7 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 				<IcCLike
 					width="20px"
 					height="16px"
-					className={`${styles.dislike} ${likeState.is_disliked ? styles.active : ''}`}
+					className={cl`${styles.dislike} ${likeState.is_disliked ? styles.active : ''}`}
 				/>
 				<span className={styles.count}>{likeState.dislikes_count}</span>
 			</Button>

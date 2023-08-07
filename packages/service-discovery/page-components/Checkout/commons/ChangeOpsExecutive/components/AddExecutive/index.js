@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 
 import getElementController from '../../../forms/getElementController';
 
@@ -6,9 +6,9 @@ import styles from './styles.module.css';
 import useCreateNewUser from './useCreateNewUser';
 
 function AddExecutive({
-	organization_id,
-	branch_id,
-	setAddExecutive,
+	organization_id = '',
+	branch_id = '',
+	setAddExecutive = () => {},
 	onUpdate = () => {},
 }) {
 	const {
@@ -40,13 +40,13 @@ function AddExecutive({
 					if (!Element) return null;
 
 					return (
-						<div key={name} className={`${styles.form_group} ${styles[name]}`}>
+						<div key={name} className={cl`${styles.form_group} ${styles[name]}`}>
 							<div className={styles.label}>
 								{label}
 								{rules ? <sup className={styles.superscipt}>*</sup> : null}
 							</div>
 
-							<div className={`${styles.input_group} ${styles[name]}`}>
+							<div className={cl`${styles.input_group} ${styles[name]}`}>
 								<Element
 									{...controlItem}
 									control={control}

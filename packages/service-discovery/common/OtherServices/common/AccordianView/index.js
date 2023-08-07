@@ -1,4 +1,4 @@
-import React from 'react';
+import { cl } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
@@ -17,17 +17,17 @@ function AccordianView({
 	};
 
 	return (
-		<div className={`${styles.container} custom_accordian_main_container`}>
+		<div className={cl`${styles.container} custom_accordian_main_container`}>
 			<div
 				role="presentation"
-				className={`${styles.title} custom_accordian_title_container`}
+				className={cl`${styles.title} custom_accordian_title_container`}
 				onClick={handleClick}
 			>
 				{title}
 			</div>
 
 			{(active === itemKey && isOpen) ? (
-				<div className={`${styles.content} custom_accordian_content_container`}>
+				<div className={cl`${styles.content} custom_accordian_content_container`}>
 					{content}
 				</div>
 			) : null}

@@ -25,7 +25,7 @@ function Cancellation({ detail = {}, serviceType = '', source = 'edit_margin' })
 				<div className={styles.line} />
 
 				<div className={styles.vertical_line_array}>
-					{cancellation_charges?.map((item, idx) => {
+					{cancellation_charges?.map((item) => {
 						const { charge_type, value, currency, milestone, conditions } = item;
 						const { schedule_departure = '' } = conditions?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 						const [conditionality, days] = schedule_departure?.split(' ') || [];
@@ -33,7 +33,7 @@ function Cancellation({ detail = {}, serviceType = '', source = 'edit_margin' })
 						return (
 							<div
 								className={styles.content}
-								key={charge_type.replace(' ', '').concat(idx)}
+								key={milestone}
 							>
 								<div style={{ marginTop: '-4px' }}>
 									{charge_type === 'percentage'

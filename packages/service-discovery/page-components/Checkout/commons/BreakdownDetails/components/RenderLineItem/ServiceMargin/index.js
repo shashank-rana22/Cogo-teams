@@ -6,12 +6,12 @@ import CodeMargin from './CodeMargin';
 import styles from './styles.module.css';
 
 function ServiceMargin({
-	serviceIndex,
-	lineItemIndex,
+	serviceIndex = 0,
+	lineItemIndex = 0,
 	filteredMargins = {},
-	item,
+	item = {},
 	onChangeLineItem = () => {},
-	shouldEditMargin,
+	shouldEditMargin = false,
 }) {
 	const { type, value } = filteredMargins;
 

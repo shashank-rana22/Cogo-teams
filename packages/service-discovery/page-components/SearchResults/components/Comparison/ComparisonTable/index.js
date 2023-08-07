@@ -1,6 +1,6 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
 
 import getDetails from './getDetails';
 import styles from './styles.module.css';
@@ -69,8 +69,8 @@ function Table({ staticKeys = {}, dynamicKeys = {}, staticLineItems = {}, dynami
 		});
 
 		return (
-			<div key={key} className={`${styles.row} ${rowClass}`}>
-				<div className={`${styles.column} ${key === 'total_landed_price' ? styles.bold : {}}`}>
+			<div key={key} className={cl`${styles.row} ${rowClass}`}>
+				<div className={cl`${styles.column} ${key === 'total_landed_price' ? styles.bold : {}}`}>
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						<div>{value.name}</div>
 
@@ -109,7 +109,7 @@ function Table({ staticKeys = {}, dynamicKeys = {}, staticLineItems = {}, dynami
 						return (
 							<div
 								key={key}
-								className={`${styles.column} ${styles.bold}`}
+								className={cl`${styles.column} ${styles.bold}`}
 							>
 								{lineItemObj.value}
 							</div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { cl } from '@cogoport/components';
 
 import getElementController from '../../../../../configs/getElementController';
 import getErrorMessage from '../../../../../configs/getErrorMessage';
@@ -9,7 +9,7 @@ const DEFAULT_SPAN = 12;
 const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 1;
 
-function Layout({ controls = [], control, errors = {} }) {
+function Layout({ controls = [], control = () => {}, errors = {} }) {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
@@ -29,7 +29,7 @@ function Layout({ controls = [], control, errors = {} }) {
 
 				return (
 					<div key={`${name}_${label}`} className={styles.form_item} style={{ width: `${flex}%` }}>
-						<div className={`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
+						<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
 							{newControl?.boldLabel || label || ''}
 							{' '}
 							{newControl?.rules?.required ? (

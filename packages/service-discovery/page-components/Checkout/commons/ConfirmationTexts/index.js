@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMInformation } from '@cogoport/icons-react';
@@ -14,8 +14,8 @@ const BL_STATUS_MAPPING = {
 };
 
 function ConfirmationTexts({
-	primaryService,
-	trade_type,
+	primaryService = {},
+	trade_type = '',
 	detailedServices = [],
 	services = [],
 	detail = {},
@@ -42,7 +42,7 @@ function ConfirmationTexts({
 
 				<div className={styles.text}>
 					<div className={styles.bold_text}>Free Days at Origin:</div>
-					<div className={`${styles.text} ${styles.detention_demurrage}`}>
+					<div className={cl`${styles.text} ${styles.detention_demurrage}`}>
 						{originDetention}
 						{' '}
 						detention day(s),
@@ -60,7 +60,7 @@ function ConfirmationTexts({
 				<IcCFtick className={styles.tick_icon} />
 				<div className={styles.text}>
 					<div className={styles.bold_text}>Free Days at Destination:</div>
-					<div className={`${styles.text} ${styles.detention_demurrage}`}>
+					<div className={cl`${styles.text} ${styles.detention_demurrage}`}>
 						{destinationDetention}
 						{' '}
 						detention day(s),

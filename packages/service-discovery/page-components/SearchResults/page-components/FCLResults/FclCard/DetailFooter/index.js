@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, cl } from '@cogoport/components';
 import { IcCCogoCoin, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -97,7 +97,7 @@ function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
 
 	return (
 		<>
-			<div className={`${styles.container} ${styles[templateStyles]}`}>
+			<div className={cl`${styles.container} ${styles[templateStyles]}`}>
 				<div className={styles.dndDetails}>
 					<span className={styles.tag}>Origin</span>
 					DET.

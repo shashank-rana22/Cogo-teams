@@ -1,4 +1,4 @@
-import { Pill, Tooltip } from '@cogoport/components';
+import { Pill, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
@@ -116,7 +116,7 @@ const getTableColumnFunction = (key) => {
 			);
 		},
 		renderShipmentStatus: ({ state = '-' }) => (
-			<div className={`${styles.status_tag} ${styles[state]}`}>
+			<div className={cl`${styles.status_tag} ${styles[state]}`}>
 				<span>{startCase(state)}</span>
 			</div>
 		),

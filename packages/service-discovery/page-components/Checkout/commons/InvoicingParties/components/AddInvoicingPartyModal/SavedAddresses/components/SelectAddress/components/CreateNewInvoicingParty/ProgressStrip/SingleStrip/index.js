@@ -1,3 +1,5 @@
+import { cl } from '@cogoport/components';
+
 import styles from './styles.module.css';
 
 const ONE = 1;
@@ -12,7 +14,7 @@ function SingleStrip({
 
 	return (
 		<div className={styles.flex}>
-			<div className={`${styles.count} ${styles[status]}`}>{count}</div>
+			<div className={cl`${styles.count} ${styles[status]}`}>{count}</div>
 
 			<span
 				className={styles.title}

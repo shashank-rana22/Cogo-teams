@@ -17,9 +17,8 @@ const MAPPING = {
 };
 
 const ROUNDOFF_VALUE = 4;
-const FIRST_INDEX = 0;
 
-function ExchangeRate({ conversions, rate, detail, getCheckout }) {
+function ExchangeRate({ conversions = {}, rate = {}, detail = {}, getCheckout = () => {} }) {
 	const { handleUpdateStage, value, loading } = useHandleUpdateStage({
 		detail,
 		refetch: getCheckout,
@@ -46,7 +45,7 @@ function ExchangeRate({ conversions, rate, detail, getCheckout }) {
 	const currency = (
 		(line_items || []).find((item) => item.code === 'BAS')
         || (line_items || []).find((item) => item.currency !== base_currency)
-        || line_items[FIRST_INDEX]
+        || line_items[GLOBAL_CONSTANTS.zeroth_index]
 	)?.currency || GLOBAL_CONSTANTS.currency_code.USD;
 
 	let currency_conversion = '';

@@ -1,3 +1,5 @@
+const ONE = 1;
+
 const sortTable = (data, field) => {
 	const labelKey = field.key;
 	const typeOfLabel = (item) => {
@@ -10,7 +12,7 @@ const sortTable = (data, field) => {
 		return null;
 	};
 
-	if (data.length > 1) {
+	if (data.length > ONE) {
 		const sortedData = data.sort((a, b) => {
 			if (typeOfLabel(a) === 'string' && typeOfLabel(b) === 'string') {
 				return a[labelKey].localeCompare(b[labelKey]);
