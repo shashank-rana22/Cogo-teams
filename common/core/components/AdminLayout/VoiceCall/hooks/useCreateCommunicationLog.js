@@ -4,12 +4,12 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const getPayload = ({
-	receiverUserDetails,
+	receiverUserDetails = {},
 	extraPayload = {},
-	partnerId,
-	loggedInAgentId,
-	callStartAt,
-	callEndAt,
+	partnerId = '',
+	loggedInAgentId = '',
+	callStartAt = '',
+	callEndAt = '',
 }) => {
 	const {
 		organization_id = '',
@@ -23,7 +23,7 @@ const getPayload = ({
 		user_id,
 		organization_id,
 		partner_id               : partnerId,
-		communication_start_time : callStartAt,
+		communication_start_time : new Date(callStartAt),
 		communication_end_time   : callEndAt,
 		...(extraPayload || {}),
 	};

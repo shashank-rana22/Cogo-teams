@@ -18,7 +18,7 @@ function useHangUpCall({
 				},
 			});
 		} catch (error) {
-			Toast.error(error?.response?.data?.message[GLOBAL_CONSTANTS.zeroth_index]);
+			Toast.error(error?.response?.data?.message?.[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	};
 

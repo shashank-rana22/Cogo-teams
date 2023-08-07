@@ -30,11 +30,11 @@ const getPayload = ({
 };
 
 const setCallStateData = ({
-	mobile_number,
-	orgId,
-	userId,
-	userName,
-	setCallState,
+	mobile_number = '',
+	orgId = '',
+	userId = '',
+	userName = '',
+	setCallState = () => {},
 }) => {
 	const receiverUserDetails = {
 		mobile_number,
@@ -91,7 +91,7 @@ function useOutgoingCall({
 				}),
 			});
 		} catch (error) {
-			Toast.error(error?.response?.data?.message[GLOBAL_CONSTANTS.zeroth_index] || 'something went wrong');
+			Toast.error(error?.response?.data?.message?.[GLOBAL_CONSTANTS.zeroth_index] || 'Something Went Wrong');
 			unmountVoiceCall();
 		}
 	}, [isUnkownUser, loggedInAgentId, mobile_country_code,

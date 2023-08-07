@@ -40,7 +40,7 @@ function AdminLayout({
 	const [announcements, setAnnouncements] = useState([]);
 
 	const {
-		user: { id: user_id = '' },
+		user: { id: user_id = '' } = {},
 		partner: partnerData,
 		is_in_voice_call: inCall = false,
 		is_in_video_call: inVideoCall = false, video_call_recipient_data = {},
