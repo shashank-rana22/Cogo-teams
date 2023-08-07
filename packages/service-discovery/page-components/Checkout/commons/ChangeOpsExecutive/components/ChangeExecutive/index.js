@@ -5,14 +5,14 @@ import styles from './styles.module.css';
 import useHandleChangeExecutive from './useHandleChangeExecutive';
 
 function ChangeExecutive({
-	loading,
-	onUpdate,
-	data,
-	user_id,
-	branch_id,
-	isChannelPartner,
-	setAddExecutive,
-	setShowEditContact,
+	loading = false,
+	onUpdate = () => {},
+	data = {},
+	user_id = '',
+	branch_id = '',
+	isChannelPartner = false,
+	setAddExecutive = () => {},
+	setShowEditContact = () => {},
 }) {
 	const {
 		setSelectedUser,

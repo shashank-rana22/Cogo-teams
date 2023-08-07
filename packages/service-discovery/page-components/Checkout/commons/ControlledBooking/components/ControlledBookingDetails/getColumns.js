@@ -62,7 +62,13 @@ const getColumns = () => [
 					textDecoration : item?.commercial_invoice_url ? 'underline' : 'none',
 					cursor         : 'pointer',
 				}}
-				onClick={() => docDownloader(item?.commercial_invoice_url)}
+				onClick={() => {
+					const val = item?.commercial_invoice_url;
+
+					if (val) {
+						window.open(val, '_blank');
+					}
+				}}
 			>
 				{item?.commercial_invoice_url ? 'Download Commercial Invoice' : '---'}
 			</div>

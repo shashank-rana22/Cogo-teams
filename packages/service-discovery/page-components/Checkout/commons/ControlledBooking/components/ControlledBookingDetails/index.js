@@ -5,7 +5,7 @@ import getColumns from './getColumns';
 import ManagerApproval from './ManagerApproval';
 import styles from './styles.module.css';
 
-function ControlledBookingDetails({ refetchCheckout, checkout_approvals, servicesApplicable = [] }) {
+function ControlledBookingDetails({ refetchCheckout = () => {}, checkout_approvals = [], servicesApplicable = [] }) {
 	const { manager_approval_proof } = checkout_approvals?.[GLOBAL_CONSTANTS.zeroth_index] || [];
 
 	const columns = getColumns();

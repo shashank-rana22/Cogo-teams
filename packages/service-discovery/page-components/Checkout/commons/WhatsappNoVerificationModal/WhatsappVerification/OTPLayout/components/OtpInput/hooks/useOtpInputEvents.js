@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRef, useEffect, useCallback } from 'react';
 
 const INDEX_TO_VALUE_DIFF = 1;
@@ -70,7 +71,7 @@ const useOtpInputEvents = ({
 				content = window.clipboardData.getData('Text');
 			}
 
-			content = content.replace(/[^0-9]/g, '').substring(ZERO_VALUE, otpLength);
+			content = content.replace(GLOBAL_CONSTANTS.regex_patterns.otp, '').substring(ZERO_VALUE, otpLength);
 
 			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 

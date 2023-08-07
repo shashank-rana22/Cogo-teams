@@ -3,16 +3,16 @@ import MessageComponent from './components/MessageComponent';
 import styles from './styles.module.css';
 
 function Customize({
-	detail,
-	organization,
-	selectedModes,
+	detail = {},
+	organization = {},
+	selectedModes = [],
 	widths = {},
 	billing_addresses = [],
-	setSelected,
-	selected,
-	emailContent,
-	emailControl,
-	emailErrors,
+	setSelected = () => {},
+	selected = '',
+	emailContent = {},
+	emailControl = () => {},
+	emailErrors = {},
 	handleNext = () => {},
 }) {
 	const { email, message } = widths;

@@ -10,7 +10,12 @@ import WhatsappNoVerificationModal from '../../../WhatsappNoVerificationModal';
 
 import styles from './styles.module.css';
 
-function PointOfContact({ bookingConfirmationMode = [], getCheckout, detail = {}, isChannelPartner }) {
+function PointOfContact({
+	bookingConfirmationMode = [],
+	getCheckout = () => {},
+	detail = {},
+	isChannelPartner = false,
+}) {
 	const {
 		importer_exporter_poc = {},
 		id,

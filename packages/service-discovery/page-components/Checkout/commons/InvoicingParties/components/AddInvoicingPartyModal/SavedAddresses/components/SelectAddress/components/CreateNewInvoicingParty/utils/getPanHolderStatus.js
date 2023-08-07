@@ -1,3 +1,7 @@
+const PAN_LENGTH = 10;
+
+const FOURTH_ELEMENT = 3;
+
 export const getPanHolderStatusOptions = () => [
 	{ label: 'Private Limited', value: 'private_limited' },
 	{ label: 'Public Limited', value: 'public_limited' },
@@ -17,9 +21,9 @@ const PAN_HOLDER_STATUS = {
 };
 
 export const getPanHolderStatus = (pan = '') => {
-	if ((pan || '').length !== 10) {
+	if ((pan || '').length !== PAN_LENGTH) {
 		return null;
 	}
 
-	return PAN_HOLDER_STATUS[pan[3]] || 'other';
+	return PAN_HOLDER_STATUS[pan[FOURTH_ELEMENT]] || 'other';
 };
