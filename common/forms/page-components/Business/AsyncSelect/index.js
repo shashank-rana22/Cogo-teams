@@ -127,7 +127,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_sub_chapters                    : asyncListSubChapters,
 	list_tribes                          : asyncListTribes,
 	list_chapters                        : asyncListChapter,
-	list_roles                           : asyncListRoles,
+	list_employee_roles                  : asyncListRoles,
 	default_types                        : asyncFieldsTicketTypes,
 	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,

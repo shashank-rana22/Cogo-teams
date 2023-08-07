@@ -1239,6 +1239,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_lead_organization_stakeholders',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'list_organization_stakeholders',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1247,6 +1252,11 @@ const partner = {
 			api          : 'update_organization_stakeholder',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'update_lead_organization_stakeholder',
+			access_type  : 'private',
+			service_name : 'lead',
 		},
 		{
 			api          : 'post_allocation_request',
@@ -8940,6 +8950,20 @@ const partner = {
 			access_type : 'private',
 		},
 	],
+	cogo_financials: [
+		{
+			api         : 'get_common_job_profitability_stats',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_profitability_service_level_stats',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_profitability_list_shipment',
+			access_type : 'private',
+		},
+	],
 	settlement: [
 		{
 			api          : 'list_organizations',
@@ -12348,6 +12372,11 @@ const partner = {
 			service_name : 'location',
 		},
 		{
+			api          : 'get_air_freight_rate_surcharge',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
 			api          : 'list_operators',
 			access_type  : 'private',
 			service_name : 'operator',
@@ -12389,6 +12418,11 @@ const partner = {
 		},
 	],
 	cogo_one: [
+		{
+			api          : 'submit_omnichannel_kyc',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 		{
 			api          : 'create_agent_feedback',
 			access_type  : 'private',
@@ -12625,11 +12659,6 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'get_tickets_default_types',
-			access_type  : 'private',
-			service_name : 'tickets',
-		},
-		{
 			api          : 'post_tickets_activity',
 			access_type  : 'private',
 			service_name : 'tickets',
@@ -12784,6 +12813,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'lead',
 		},
+		{
+			api          : 'list_lead_organization_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -12858,6 +12892,31 @@ const partner = {
 		},
 	],
 	ticket_management: [
+		{
+			api          : 'post_tickets_category',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'delete_tickets_category',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'put_tickets_category',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_configuration_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
 		{
 			api          : 'list_partner_users',
 			access_type  : 'private',

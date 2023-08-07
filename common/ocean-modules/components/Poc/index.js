@@ -1,11 +1,11 @@
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import AddCompanyModal from '../../common/AddCompanyModal';
 import ThreeDotLoader from '../../common/ThreeDotLoader';
 import useListStakeholders from '../../hooks/useListShipmentStakeholders';
 import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartners';
 
-import AddCompanyModal from './components/AddCompanyModal';
 import AddedTradeParty from './components/AddedTradeParty';
 import AddPocModal from './components/AddPocModal';
 import InvoicingParty from './components/InvoicingParty';
@@ -17,18 +17,27 @@ import roleBasedView from './config/role_base_view.json';
 import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
-function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) {
-	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
+function Poc({
+	shipment_data = {},
+	servicesList = [],
+	activeStakeholder = '',
+	primary_service = {},
+	getShipmentRefetch = () => {},
+}) {
+	const {
+		id:shipment_id, importer_exporter_id, services,
+		is_rate_reverted = true, shipment_type = '',
+	} = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
 	const [addPoc, setAddPoc] = useState(null);
 
 	const rolesPermission = roleBasedView[activeStakeholder] || {};
-	const rolesViewPermission = rolesPermission.can_view || [];
+	const rolesViewPermission = rolesPermission?.can_view || [];
 
 	const {
 		data,
-		apiTrigger:tradePartnerTrigger,
+		apiTrigger:tradePartnerTrigger = () => {},
 		loading,
 	} = useListShipmentTradePartners({ shipment_id });
 
@@ -39,7 +48,14 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 		shipment_id,
 	});
 
+	const checkForStakeholders = ['booking_agent',
+		'sales_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
+
 	const serviceProviders = getServiceProviderData(servicesList);
+
+	const isPocStakeholdersVisible = checkForStakeholders && shipment_type === 'fcl_freight'
+		? is_rate_reverted
+		: true;
 
 	return (
 		<div>
@@ -58,7 +74,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 							rolesPermission={rolesPermission}
 						/>
 
-						{rolesViewPermission?.includes('pocs') ? (
+						{rolesViewPermission?.includes('pocs') && isPocStakeholdersVisible ? (
 							<Pocs
 								tradePartnersData={data}
 								setAddPoc={setAddPoc}
@@ -75,6 +91,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 							setAddCompany={setAddCompany}
 							setAddPoc={setAddPoc}
 							rolesPermission={rolesPermission}
+							primary_service={primary_service}
 						/>
 
 						{rolesViewPermission?.includes('notifying_party') ? (
@@ -109,6 +126,10 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 								tradePartnerTrigger={tradePartnerTrigger}
 								shipment_id={shipment_id}
 								importer_exporter_id={importer_exporter_id}
+								shipment_data={shipment_data}
+								primary_service={primary_service}
+								stakeholdersTrigger={stakeholdersTrigger}
+								getShipmentRefetch={getShipmentRefetch}
 							/>
 						)}
 
@@ -123,6 +144,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 								stakeholdersTrigger={stakeholdersTrigger}
 								servicesList={servicesList}
 								listStakeholdersData={shipmentStakeholderData}
+								getShipmentRefetch={getShipmentRefetch}
 							/>
 						)}
 					</div>

@@ -10,9 +10,12 @@ const controlTypeMapping = {
 	number : InputController,
 };
 
+const TOTAL_SPAN = 12;
+const TOTAL_WIDTH = 100;
+
 function FormElement({ name, label, errors, type, span, ...rest }) {
 	const Element = controlTypeMapping[type];
-	const widthVal = (span / 12) * 100;
+	const widthVal = (span / TOTAL_SPAN) * TOTAL_WIDTH;
 	return Element ? (
 		<div style={{ width: `${widthVal}%` }}>
 			<div className={styles.label}>{label}</div>
@@ -22,7 +25,7 @@ function FormElement({ name, label, errors, type, span, ...rest }) {
 	) : null;
 }
 
-function Form({ handleUploadHBL }) {
+function Form({ handleUploadHBL = () => {} }) {
 	const {
 		control,
 		formState: { errors },
@@ -40,12 +43,14 @@ function Form({ handleUploadHBL }) {
 			<form className={styles.form_container}>
 				{controls.map((item) => <FormElement control={control} errors={errors} {...item} key={item?.name} />)}
 			</form>
-			<Button
-				style={{ marginLeft: 8 }}
-				onClick={handleSubmit(onSubmit)}
-			>
-				Save
-			</Button>
+			<div className={styles.btn_wrap}>
+				<Button
+					style={{ marginLeft: 8 }}
+					onClick={handleSubmit(onSubmit)}
+				>
+					Save
+				</Button>
+			</div>
 		</>
 	);
 }
