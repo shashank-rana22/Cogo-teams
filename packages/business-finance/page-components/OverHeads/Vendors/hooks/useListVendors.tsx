@@ -13,7 +13,7 @@ const formatedDate = (date) => formatDate({
 
 const useListVendors = ({ filters, sort }) => {
 	const {
-		page, pageLimit, KYC_STATUS, CATEGORY, searchValue, dueDate, uploadDate, billDate,
+		page, pageLimit, paymentStatus, CATEGORY, searchValue, dueDate, uploadDate, billDate,
 	} = filters;
 	const { paymentSortType, openInvoiceSortType, createdAtSortType } = sort;
 	const { startDate, endDate } = dueDate || {};
@@ -41,7 +41,7 @@ const useListVendors = ({ filters, sort }) => {
 					paymentSortType            : paymentSortType || undefined,
 					openInvoiceSortType        : openInvoiceSortType || undefined,
 					createdAtSortType          : createdAtSortType || undefined,
-					kycStatus                  : KYC_STATUS || undefined,
+					paymentStatus              : paymentStatus || undefined,
 					category                   : CATEGORY || undefined,
 					q                          : searchValue || undefined,
 					startDate                  : startDate ? formatedDate(startDate) : undefined,
@@ -62,7 +62,7 @@ const useListVendors = ({ filters, sort }) => {
 		paymentSortType,
 		openInvoiceSortType,
 		createdAtSortType,
-		KYC_STATUS, CATEGORY, searchValue,
+		paymentStatus, CATEGORY, searchValue,
 		startDate,
 		endDate,
 		fromUploadBillDate,

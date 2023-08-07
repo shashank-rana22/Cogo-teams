@@ -46,11 +46,11 @@ function VenderComponent() {
 	const { VENDOR_CONFIG } = configs();
 
 	const [filters, setFilters] = useState({
-		KYC_STATUS  : '',
-		CATEGORY    : '',
-		searchValue : '',
-		page        : 1,
-		pageLimit   : 10,
+		paymentStatus : '',
+		CATEGORY      : '',
+		searchValue   : '',
+		page          : 1,
+		pageLimit     : 10,
 	});
 
 	const [sort, setSort] = useState({
