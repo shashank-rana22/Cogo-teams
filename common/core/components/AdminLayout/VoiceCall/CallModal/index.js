@@ -80,7 +80,7 @@ function CallModal({
 					</div>
 					{!status && conferenceType
 					&& <div className={styles.call_text}>{getConferenceText({ callState })}</div>}
-					{status && isInConferenceCall &&	<Attendees attendees={attendees} />}
+					{status && isInConferenceCall && <Attendees attendees={attendees} />}
 					<div className={styles.footer} style={{ height: status ? '56%' : '30%' }}>
 						{status
 							? (

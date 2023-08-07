@@ -4,7 +4,6 @@ import { useRequest } from '@cogoport/request';
 
 function useHangUpCall({
 	callRecordId,
-
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/hang_up_outgoing_call',
