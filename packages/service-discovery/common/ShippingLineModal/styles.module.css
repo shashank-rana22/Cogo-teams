@@ -34,11 +34,6 @@
 	margin: 0 6px -6px;
 }
 
-.text {
-	margin-right: 4px;
-	font-size: 14px;
-}
-
 .cross_icon {
 	position: absolute;
 	top: -8px;
@@ -77,6 +72,7 @@
 
 .text {
 	margin-top: 16px;
+	margin-left: 4px;
 	font-size: 12px;
 	color: #ee3425;
 }

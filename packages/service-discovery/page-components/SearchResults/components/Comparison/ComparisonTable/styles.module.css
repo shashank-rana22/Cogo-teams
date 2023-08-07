@@ -65,9 +65,9 @@
 }
 
 .row:last-child {
+	align-items: end;
 	background-color: #fff;
 	border: none;
-	align-items: end;
 }
 
 .item_details {

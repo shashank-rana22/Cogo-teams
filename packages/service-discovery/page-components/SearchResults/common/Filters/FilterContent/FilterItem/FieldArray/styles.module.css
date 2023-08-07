@@ -46,9 +46,9 @@
 }
 
 .remove_button {
-	cursor: pointer;
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 
 	&:hover {
 		font-weight: 600;
@@ -98,7 +98,6 @@
 		}
 	}
 }
-
 
 .content {
 	display: flex;
