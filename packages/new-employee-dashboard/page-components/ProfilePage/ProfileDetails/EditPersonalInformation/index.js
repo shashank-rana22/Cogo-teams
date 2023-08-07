@@ -20,7 +20,7 @@ const DATE_OF_BIRTH = 'date_of_birth';
 const DATE_OF_JOINING = 'date_of_joining';
 const EMERGENCY_CONTACT_DETAILS = 'emergency_contact_details';
 const DESIGNATION = 'designation';
-const HIRING_MANAGER = 'hiring_manager';
+const HIRING_MANAGER = 'hiring_manager_id';
 const ATTENDENCE = 'attendance';
 const LEARNING_INDICATOR = 'learning_indicator';
 const PREDICTIVE_INDEX = 'predictive_index';
@@ -37,7 +37,7 @@ const PERSONAL_DETAILS_MAPPING = ['name_title', 'name', 'gender', 'date_of_birth
 	'personal_email', 'mobile_number', 'passport_size_photo_url'];
 
 const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
-	'cogoport_email', 'hiring_manager', 'attendance', 'learning_indicator', 'predictive_index',
+	'cogoport_email', 'hiring_manager_id', 'attendance', 'learning_indicator', 'predictive_index',
 	'department',
 ];
 
@@ -108,7 +108,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 
 	const id = content?.detail?.id;
 	const status = content?.detail?.status;
-	const additional_information_id = content?.detail.additional_information[GLOBAL_CONSTANTS.zeroth_index]?.id;
+	const additional_information_id = content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails, SOURCE, status });
 

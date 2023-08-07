@@ -150,10 +150,20 @@ const controls = () => [
 		placeholder: 'Cogoport Email Id',
 	},
 	{
-		name        : 'hiring_manager',
+		name        : 'hiring_manager_id',
+		type        : 'asyncSelect',
+		asyncKey    : 'partner_users_ids',
 		label       : 'Hiring Manager',
-		type        : 'input',
-		placeholder : 'Hiring Manager Name',
+		placeholder : 'Hiring Manager',
+		initialCall : true,
+		params      : {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+
+			},
+			page_limit: 100,
+		},
 	},
 	{
 		name        : 'attendance',
