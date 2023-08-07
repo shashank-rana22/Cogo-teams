@@ -176,9 +176,9 @@ function Actions({
 				/>
 			) : null}
 
-			{showModal === 'opt_verification' ? (
+			{showModal === 'otp_verification' ? (
 				<OTPVerification
-					show={showModal === 'opt_verification'}
+					show={showModal === 'otp_verification'}
 					onClose={onModalClose}
 					invoice={invoice}
 					refetch={refetch}

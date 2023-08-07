@@ -1,9 +1,9 @@
 import { Placeholder, Input } from '@cogoport/components';
-import { IcMSearchdark, IcMArrowNext, IcMArrowBack } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMAppSearch } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import UserAvatar from '../../../../../../common/UserAvatar';
 import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
+import UserCard from '../../UserCard';
 
 import styles from './styles.module.css';
 
@@ -74,7 +74,7 @@ function OrgUsersList({
 							value={search}
 							className={styles.input_styles}
 							size="sm"
-							prefix={<IcMSearchdark />}
+							suffix={<IcMAppSearch className={styles.search_icon} />}
 						/>
 					</div>
 				) : null}
@@ -84,8 +84,20 @@ function OrgUsersList({
 				{!isEmpty(modifiedList) ? modifiedList?.map((eachUser) => {
 					const {
 						user_id,
-						userName,
+						userName = '',
+						email = '',
+						countryCode = '',
+						whatsapp_number_eformat = '',
+						business_name = '',
 					} = eachUser || {};
+
+					const userData = {
+						name         : userName,
+						email,
+						country_code : countryCode,
+						user_number  : whatsapp_number_eformat,
+						business_name,
+					};
 
 					if (loading) {
 						return (
@@ -107,11 +119,7 @@ function OrgUsersList({
 								});
 							}}
 						>
-							<div className={styles.parent_flex}>
-								<UserAvatar type="whatsapp" />
-								<div className={styles.name}>{startCase(userName)}</div>
-							</div>
-							<IcMArrowNext className={styles.arrow_icon} />
+							<UserCard userData={userData} />
 						</div>
 					);
 				}) : <div className={styles.no_data_found}>No Users Found</div>}

@@ -1,7 +1,7 @@
 import getNavigationFromUrl from '@cogoport/request/helpers/getNavigationFromUrl';
 
 export default function handleVersionChange({ partner_id = '', shipment_id = '' }) {
-	if(typeof window !== 'object') {
+	if (typeof window !== 'object') {
 		return;
 	}
 
