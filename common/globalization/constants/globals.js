@@ -77,6 +77,7 @@ const GLOBAL_CONSTANTS = {
 		SGD : '$',
 
 	},
+
 	formats: {
 		date: {
 			'dd/MM/yyyy'        : 'dd/MM/yyyy',
@@ -463,6 +464,14 @@ const GLOBAL_CONSTANTS = {
 				label: 'VNM', value: 'VNM',
 			},
 		],
+		educational_level_options: [
+			{ label: '10th', value: '10th' },
+			{ label: '12th', value: '12th' },
+			{ label: 'Diploma', value: 'Diploma' },
+			{ label: 'Graduate degree', value: 'graduate_degree' },
+			{ label: 'Post Graduates degree', value: 'post_graduates_degree' },
+			{ label: 'Doctorate degree', value: 'doctorate_degree' },
+		],
 	},
 
 	regex_patterns: {
@@ -486,19 +495,20 @@ const GLOBAL_CONSTANTS = {
 		occurrences_of_line_breaks        : /(\r\n|\r|\n)/g,
 		url_match_regex:
 		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/,
-		ends_with_star_space   : /\* /,
-		ends_with_star_char    : /\*[^0-9a-zA-Z]/,
-		string_to_array        : /'/g,
-		file_upload_url        : /:finalUrl=>"([^"]*)"/,
-		four_characters_pin    : /^.{4}$/,
-		amount_seperator       : /\D/g,
-		white_space_characters : /\s/g,
-		email_subject_prefix   : /^(re|fwd|fw):\s*/i,
-		para_html_tag_text     : /<p>([\s\S]*?)<\/p>/gm,
-		h1_html_tag_text       : /<h1>([\s\S]*?)<\/h1>/gm,
-		h2_html_tag_text       : /<h2>([\s\S]*?)<\/h2>/gm,
-		h3_html_tag_text       : /<h3>([\s\S]*?)<\/h3>/gm,
-		li_html_tag_text       : /<li>([\s\S]*?)<\/li>/gm,
+		ends_with_star_space       : /\* /,
+		ends_with_star_char        : /\*[^0-9a-zA-Z]/,
+		string_to_array            : /'/g,
+		file_upload_url            : /:finalUrl=>"([^"]*)"/,
+		four_characters_pin        : /^.{4}$/,
+		amount_seperator           : /\D/g,
+		white_space_characters     : /\s/g,
+		mobile_country_code_format : /^./,
+		email_subject_prefix       : /^(re|fwd|fw):\s*/i,
+		para_html_tag_text         : /<p>([\s\S]*?)<\/p>/gm,
+		h1_html_tag_text           : /<h1>([\s\S]*?)<\/h1>/gm,
+		h2_html_tag_text           : /<h2>([\s\S]*?)<\/h2>/gm,
+		h3_html_tag_text           : /<h3>([\s\S]*?)<\/h3>/gm,
+		li_html_tag_text           : /<li>([\s\S]*?)<\/li>/gm,
 	},
 	zeroth_index                 : 0,
 	milliseconds_in_one_day      : 86400000,
