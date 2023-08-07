@@ -1,7 +1,8 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
+import getBlUploadRestrictMessage from '../utils/get-bl-upload-restrict-message';
 import getDefaultValues from '../utils/get-default-values';
 import injectForm from '../utils/inject-form';
 import injectValues from '../utils/inject-Values';
@@ -17,6 +18,8 @@ function useStepExecution({
 	options,
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
+	const [restrictTask, setRestrictTask] = useState(false);
+	const [toastMessage, setToastMessage] = useState('');
 	const [commodityUnit, setCommodityUnit] = useState({});
 	const populatedControls = populateControls(stepConfig.controls);
 
@@ -48,10 +51,33 @@ function useStepExecution({
 		commodityUnit,
 	});
 
+	let isUploadAllowed = true;
+
+	if (task?.task === 'upload_bill_of_lading') {
+		isUploadAllowed = (getApisData?.list_shipment_documents || [])
+			.filter((item) => item?.state !== 'document_rejected')
+			?.every((doc) => doc.state === 'document_accepted');
+	}
+
+	useEffect(() => {
+		if (!isUploadAllowed) {
+			const blState = getApisData?.list_shipment_documents?.map(
+				(item) => item?.state,
+			);
+
+			setToastMessage(getBlUploadRestrictMessage({ blState }));
+
+			setRestrictTask(true);
+		}
+	}, [isUploadAllowed, getApisData?.list_shipment_documents]);
+
 	return {
 		fields: controls,
 		formProps,
 		showElements,
+		restrictTask,
+		toastMessage,
+		setRestrictTask,
 	};
 }
 export default useStepExecution;
