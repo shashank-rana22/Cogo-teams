@@ -57,7 +57,11 @@ const useGetIrnGeneration = ({ id, refetch, entityCode }: IrnGenerationProps) =>
 
 	const generateIrn = async () => {
 		try {
-			const resp = await generateIrnTrigger({ data: {} });
+			const resp = await generateIrnTrigger({
+				params: {
+					updatedBy: userId,
+				},
+			});
 			if (resp.status === 200) {
 				Toast.success(`${irnLabel} Generated Successfully`);
 			} else {
