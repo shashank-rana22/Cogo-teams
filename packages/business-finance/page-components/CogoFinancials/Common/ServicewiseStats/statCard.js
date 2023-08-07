@@ -14,6 +14,7 @@ const displayAmount = (amount, currency) => formatAmount({
 	options: {
 		style                 : 'currency',
 		currencyDisplay       : 'code',
+		notation              : 'compact',
 		maximumFractionDigits : 2,
 	},
 });
