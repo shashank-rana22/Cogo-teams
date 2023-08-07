@@ -2,6 +2,8 @@ import { addDays } from '@cogoport/utils';
 
 import getIncoterm from './getIncoterm';
 
+const PLUS_ONE_DAY = 1;
+
 const getPayload = (serviceType, origin, destination) => {
 	const incoTerm = getIncoterm(origin, destination);
 
@@ -34,7 +36,7 @@ const getPayload = (serviceType, origin, destination) => {
 			status              : 'active',
 		},
 		air_freight: {
-			cargo_clearance_date   : addDays(new Date(), 1),
+			cargo_clearance_date   : addDays(new Date(), PLUS_ONE_DAY),
 			commodity              : 'general',
 			commodity_details      : [{ commodity_type: 'all' }],
 			destination_airport_id : destinationId,
@@ -56,7 +58,7 @@ const getPayload = (serviceType, origin, destination) => {
 			status       : 'active',
 		},
 		ftl_freight: {
-			cargo_readiness_date                        : addDays(new Date(), 1),
+			cargo_readiness_date                        : addDays(new Date(), PLUS_ONE_DAY),
 			commodity                                   : null,
 			ftl_freight_service_touch_points_attributes : [
 				{
@@ -91,7 +93,7 @@ const getPayload = (serviceType, origin, destination) => {
 			trip_type               : 'one_way',
 		},
 		ltl_freight: {
-			cargo_readiness_date    : addDays(new Date(), 1),
+			cargo_readiness_date    : addDays(new Date(), PLUS_ONE_DAY),
 			commodity               : null,
 			load_selection_type     : 'cargo_gross',
 			destination_location_id : destinationId,

@@ -6,13 +6,16 @@ import getValue from '../../../../../../utils/getValue';
 import SERVICE_TYPE_ICON_MAPPING from './service-type-icon-mapping';
 import styles from './styles.module.css';
 
+const ZERO_DAYS_TO_EXPIRE = 0;
+const DAYS_TO_EXPIRE = 4;
+
 function SearchType({ item = {}, field = {}, type = '' }) {
 	if (type === 'expiry') {
 		const daysToExpire = differenceInDays(item?.expiration_time, new Date());
-		if (daysToExpire < 0 || item.expired) {
+		if (daysToExpire < ZERO_DAYS_TO_EXPIRE || item.expired) {
 			return <span className="expired">Expired</span>;
 		}
-		return daysToExpire < 4 ? <span className="expiring">Expiring Soon</span> : null;
+		return daysToExpire < DAYS_TO_EXPIRE ? <span className="expiring">Expiring Soon</span> : null;
 	}
 	const service_type = getValue(item, field);
 

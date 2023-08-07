@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -15,10 +16,10 @@ function StatItem({
 	const newClass = `${styles[className] || ''} ${isActive ? styles.active : ''}`;
 
 	return (
-		<div className={`${newClass} ${styles.container}`} onClick={onClick} role="presentation">
+		<div className={cl`${newClass} ${styles.container}`} onClick={onClick} role="presentation">
 			{isActive ? <IcMTick fontSize={20} /> : null}
 
-			<div className={`${newClass} ${styles.text}`}>
+			<div className={cl`${newClass} ${styles.text}`}>
 				{text}
 				{' '}
 				{subText && (
@@ -31,7 +32,7 @@ function StatItem({
 			</div>
 
 			{showCount ? (
-				<div className={`${styles.active} ${styles.margin}`}>{count}</div>
+				<div className={cl`${styles.active} ${styles.margin}`}>{count}</div>
 			) : null}
 		</div>
 	);

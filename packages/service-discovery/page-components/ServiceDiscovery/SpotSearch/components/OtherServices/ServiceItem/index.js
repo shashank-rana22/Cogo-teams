@@ -46,7 +46,7 @@ function ServiceItem({
 			<div className={styles.img_container}>
 
 				{selectedService?.mode_value === value ? null : (
-					<div className={`${styles.yellow_circle}`} />
+					<div className={styles.yellow_circle} />
 				)}
 
 				<Icon

@@ -1,4 +1,4 @@
-import { Popover, Tooltip } from '@cogoport/components';
+import { Popover, Tooltip, cl } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import getValue from '../../../../../../utils/getValue';
@@ -6,6 +6,8 @@ import getValue from '../../../../../../utils/getValue';
 import styles from './styles.module.css';
 
 const SUFFIX = { rates_count: 'Rates AVAILABLE' };
+
+const ONE_VALUE = 1;
 
 function FieldPair({ item = {}, field = {} }) {
 	const [show, setShow] = useState(false);
@@ -23,7 +25,7 @@ function FieldPair({ item = {}, field = {} }) {
 			<div className={styles.card} role="presentation" onClick={(e) => e.stopPropagation()}>
 				<div className={styles.option_label} style={{ width: '33%' }}>{userData?.name}</div>
 				<div
-					className={`${styles.option_label} ${styles.clickable}`}
+					className={cl`${styles.option_label} ${styles.clickable}`}
 					role="presentation"
 					style={{ width: '30%' }}
 					onClick={(e) => {
@@ -40,7 +42,7 @@ function FieldPair({ item = {}, field = {} }) {
 						: userData?.mobile_number_eformat}
 				</div>
 				<div
-					className={`${styles.option_label} ${styles.clickable}`}
+					className={cl`${styles.option_label} ${styles.clickable}`}
 					role="presentation"
 					style={{ width: '37%', marginLeft: 10 }}
 					onClick={(e) => {
@@ -73,8 +75,8 @@ function FieldPair({ item = {}, field = {} }) {
 				{getValue(item, field?.lowerKey)}
 				{' '}
 				{SUFFIX[field?.lowerKey?.key]}
-				{Array.isArray(item[popoverKey]) && item[popoverKey].length > 1
-					? `+ ${item[popoverKey].length - 1}`
+				{Array.isArray(item[popoverKey]) && item[popoverKey].length > ONE_VALUE
+					? `+ ${item[popoverKey].length - ONE_VALUE}`
 					: ''}
 			</div>
 		</Popover>

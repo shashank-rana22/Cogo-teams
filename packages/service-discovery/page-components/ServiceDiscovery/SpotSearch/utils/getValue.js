@@ -4,6 +4,9 @@ import { getByKey, isEmpty, startCase } from '@cogoport/utils';
 import { CONTAINER_SIZE, CONTAINER_TYPE } from './container';
 import formatDateToString from './formatDateToString';
 
+const ZERO_VALUE = 0;
+const ONE_VALUE = 1;
+
 const iterateSubKeys = (itemField, value) => {
 	let val = value;
 	if ((itemField.subKeys || []).length) {
@@ -51,7 +54,6 @@ const getValue = (
 			);
 
 		case 'shipping-line':
-			// return <ShippingLine name={val.short_name} logo={val.logo} isMobile={isMobile} />;
 			return (val || {}).short_name || (val || {}).name;
 
 		case 'range':
@@ -67,7 +69,7 @@ const getValue = (
 
 		case 'price':
 			return `${itemData.currency} ${(
-				itemData[itemField.key || 'price'] || 0
+				itemData[itemField.key || 'price'] || ZERO_VALUE
 			).toLocaleString()}`;
 
 		case 'bool':
@@ -79,13 +81,13 @@ const getValue = (
 		case 'days':
 			return val !== null || val !== undefined
 				? `${val} ${
-					val > 1 ? itemField.suffix || 'days' : itemField.suffix || 'day '
+					val > ONE_VALUE ? itemField.suffix || 'days' : itemField.suffix || 'day '
 				}`
 				: null;
 
 		case 'stops':
 			return val !== null || val !== undefined
-				? `${val} ${val > 1 ? 'stops' : 'stop '}`
+				? `${val} ${val > ONE_VALUE ? 'stops' : 'stop '}`
 				: null;
 
 		case 'container':

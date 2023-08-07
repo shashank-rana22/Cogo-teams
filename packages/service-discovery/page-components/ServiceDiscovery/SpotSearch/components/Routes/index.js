@@ -31,8 +31,9 @@ function Routes({
 	createSearchLoading,
 	setErrors,
 }) {
-	const [buttonDisabled, setButtonDisabled] = useState(true);
 	const router = useRouter();
+
+	const [buttonDisabled, setButtonDisabled] = useState(true);
 
 	const service_type = mode.mode_value;
 

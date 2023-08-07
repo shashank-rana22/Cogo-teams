@@ -23,8 +23,6 @@ function Header({
 
 	const otherFilters = filters || {};
 
-	// const searchParam = searchKey ? { [searchKey]: filters?.[searchKey] } : {};
-
 	let searchBar = null;
 
 	if (searchKey) {

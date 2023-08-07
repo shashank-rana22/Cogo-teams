@@ -1,29 +1,27 @@
-/* eslint-disable no-magic-numbers */
-/* eslint-disable no-unsafe-optional-chaining */
+const DEFAULT_VALUE = 0;
+
 const getSalesDashboardListStats = ({ data, rest, stats }) => {
 	let totalListCount = 0;
 	Object.keys(data?.[rest?.stats_key] || {}).forEach((key) => {
-		totalListCount += data?.[rest?.stats_key][key];
+		const tempObj = data?.[rest?.stats_key] || {};
+		totalListCount += tempObj[key];
 	});
 
 	let statsData = {
 		...(data?.[rest?.stats_key] || {}),
-		only_total_count : data?.total_count || 0,
-		total_count      : Math.max(totalListCount || 0, data?.total_count || 0),
+		only_total_count : data?.total_count || DEFAULT_VALUE,
+		total_count      : Math.max(totalListCount || DEFAULT_VALUE, data?.total_count || DEFAULT_VALUE),
 		ongoing_shipments:
-			(data?.stats?.confirmed_by_importer_exporter || 0)
-			+ (data?.stats?.in_progress || 0),
+			(data?.stats?.confirmed_by_importer_exporter || DEFAULT_VALUE)
+			+ (data?.stats?.in_progress || DEFAULT_VALUE),
 		cancelled_shipments:
-			(data?.stats?.cancelled || 0) + (data?.stats?.aborted || 0),
+			(data?.stats?.cancelled || DEFAULT_VALUE) + (data?.stats?.aborted || DEFAULT_VALUE),
 		kyc_pending:
-			(data?.kyc_stats?.pending_from_user || 0)
-			+ (data?.kyc_stats?.pending_verification || 0),
-		booked_enquiries : data?.quotation_stats?.booked || 0,
+			(data?.kyc_stats?.pending_from_user || DEFAULT_VALUE)
+			+ (data?.kyc_stats?.pending_verification || DEFAULT_VALUE),
+		booked_enquiries : data?.quotation_stats?.booked || DEFAULT_VALUE,
 		documents_si     : data?.list?.documents || [],
-		elapsed_time_1   : data?.elapsed_time || 0,
-		reverted_key:
-			data?.negotiation_stats?.total
-				- data?.negotiation_stats?.total_unreverted || 0,
+		elapsed_time_1   : data?.elapsed_time || DEFAULT_VALUE,
 	};
 
 	if (rest?.serviceType) {
@@ -44,14 +42,14 @@ const getSalesDashboardListStats = ({ data, rest, stats }) => {
 
 		statsData = {
 			...statsData,
-			total                            : total || 0,
-			containers_not_departed          : containers_not_departed || 0,
-			containers_not_gated_in          : containers_not_gated_in || 0,
-			si_not_uploaded                  : si_not_uploaded || 0,
-			draft_bl_not_uploaded            : draft_bl_not_uploaded || 0,
-			booking_note_uploaded            : booking_note_uploaded || 0,
-			booking_not_placed_with_supplier : booking_not_placed_with_supplier || 0,
-			booking_placed_with_supplier     : booking_placed_with_supplier || 0,
+			total                            : total || DEFAULT_VALUE,
+			containers_not_departed          : containers_not_departed || DEFAULT_VALUE,
+			containers_not_gated_in          : containers_not_gated_in || DEFAULT_VALUE,
+			si_not_uploaded                  : si_not_uploaded || DEFAULT_VALUE,
+			draft_bl_not_uploaded            : draft_bl_not_uploaded || DEFAULT_VALUE,
+			booking_note_uploaded            : booking_note_uploaded || DEFAULT_VALUE,
+			booking_not_placed_with_supplier : booking_not_placed_with_supplier || DEFAULT_VALUE,
+			booking_placed_with_supplier     : booking_placed_with_supplier || DEFAULT_VALUE,
 		};
 	}
 
@@ -66,11 +64,11 @@ const getSalesDashboardListStats = ({ data, rest, stats }) => {
 
 		statsData = {
 			...statsData,
-			confirmed_by_importer_exporter : confirmed_by_importer_exporter || 0,
-			containers_gated_in            : fcl_freight?.containers_gated_in || 0,
-			cancelled                      : cancelled || 0,
-			on_going                       : on_going || 0,
-			completed                      : completed || 0,
+			confirmed_by_importer_exporter : confirmed_by_importer_exporter || DEFAULT_VALUE,
+			containers_gated_in            : fcl_freight?.containers_gated_in || DEFAULT_VALUE,
+			cancelled                      : cancelled || DEFAULT_VALUE,
+			on_going                       : on_going || DEFAULT_VALUE,
+			completed                      : completed || DEFAULT_VALUE,
 		};
 	}
 
