@@ -78,7 +78,7 @@ function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0 }) {
 				))}
 			</FeatureGroup>
 			<div className={styles.legend}>
-				{COLORS.map((color, idx) => (
+				{!!maxCount && COLORS.map((color, idx) => (
 					<p key={color}>
 						{formatBigNumbers(range * (idx + NEXT))}
 					</p>
