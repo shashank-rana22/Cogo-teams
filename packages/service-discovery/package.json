@@ -4,6 +4,19 @@
 	"version": "0.1.0",
 	"main": "index.js",
 	"sideEffects": false,
+	"scripts": {
+		"deploy": "pnpm run build && (cd cogo-control && pm2 start pm2.config.js)",
+		"build": "pnpm run pre-build && NODE_ENV=production NODE_OPTIONS=\"--max-old-space-size=6144\" turbo run build",
+		"pre-build": "NODE_ENV=production node scripts/build-pages && node scripts/pre-build",
+		"dev": "npx husky install && node scripts/build-pages && node scripts/pre-build && turbo run dev",
+		"start": "turbo run start",
+		"eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+		"eslint_file": "eslint",
+		"stylelint": "stylelint \"**/*.css\"",
+		"clean": "turbo run clean",
+		"lint": "eslint",
+		"precommit": "lint-staged"
+	  },
 	"dependencies": {
 		"@cogoport/components": "^1.0.359",
 		"@cogoport/forms": "workspace:*",

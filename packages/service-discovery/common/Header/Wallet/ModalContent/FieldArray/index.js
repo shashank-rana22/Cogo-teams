@@ -8,16 +8,16 @@ import Child from './child';
 import styles from './styles.module.css';
 
 function FieldArray({
-	name,
-	control,
-	controls,
-	error,
+	name = '',
+	control = () => {},
+	controls = [],
+	error = [],
 	showButtons = true,
 	showLabelOnce = false,
 	disabled = false,
 	buttonText = 'Add',
-	watch,
-	setValue,
+	watch = () => {},
+	setValue = () => {},
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -25,17 +25,17 @@ function FieldArray({
 		name,
 	});
 
-	const childEmptyValues = {};
+	const EMPTY_VALUES = {};
 	controls.forEach((controlItem) => {
-		childEmptyValues[controlItem.name] = controlItem.value || '';
+		EMPTY_VALUES[controlItem.name] = controlItem.value || '';
 	});
 
 	const handleAppendChild = () => {
-		append(childEmptyValues);
+		append(EMPTY_VALUES);
 	};
 
 	if (isEmpty(fields)) {
-		append(childEmptyValues);
+		append(EMPTY_VALUES);
 	}
 
 	const form = watch();

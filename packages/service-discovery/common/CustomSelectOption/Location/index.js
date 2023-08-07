@@ -1,10 +1,6 @@
 import { IcMAirport, IcMLocation, IcMPort } from '@cogoport/icons-react';
-import React from 'react';
 
 import styles from './styles.module.css';
-
-const ZERO_INDEX = 0;
-const FIRST_INDEX = 1;
 
 function Location(props) {
 	const { data = {}, returnOnlyIcon } = props;
@@ -13,9 +9,9 @@ function Location(props) {
 
 	const { display_name = '' } = data || {};
 
-	const tempNameArray = display_name.split(',').reverse() || [];
+	const [firstElelment = '', secondElelment = ''] = display_name.split(',').reverse() || [];
 
-	const cityAndCountryName = `${tempNameArray[FIRST_INDEX] || ''},${tempNameArray[ZERO_INDEX] || ''}`;
+	const cityAndCountryName = `${secondElelment},${firstElelment}`;
 
 	let portCode = null;
 	let IconElemennt = IcMLocation;

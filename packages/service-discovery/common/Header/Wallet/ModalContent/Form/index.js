@@ -1,4 +1,4 @@
-import React from 'react';
+import { cl } from '@cogoport/components';
 
 import getElementController from '../../../../../configs/getElementController';
 import getErrorMessage from '../../../../../configs/getErrorMessage';
@@ -12,7 +12,7 @@ const FLEX_OFFSET = 1;
 
 function Form({
 	controls = [],
-	control,
+	control = () => {},
 	errors = {},
 	watch = () => {},
 	handleSubmit = () => {},
@@ -53,7 +53,7 @@ function Form({
 
 				return (
 					<div key={`${name}_${label}`} className={styles.form_item} style={{ width: `${flex}%` }}>
-						<div className={`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
+						<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
 							{newControl?.boldLabel || label || ''}
 							{' '}
 							{newControl?.rules?.required ? (

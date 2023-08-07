@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 function OrganisationForm({
 	organization = {},
 	setOrganization = () => {},
-	errors,
+	errors = {},
 	...rest
 }) {
 	const ORG_PARAMS = {

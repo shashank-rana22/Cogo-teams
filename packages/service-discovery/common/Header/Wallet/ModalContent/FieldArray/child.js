@@ -9,16 +9,16 @@ import styles from './styles.module.css';
 const DEFAULT_SPAN = 12;
 const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 1;
-const ZEROTH_INDEX = 0;
+
 const FIRST_INDEX = 1;
 const TWO_VALUE = 2;
 
 function Child({
-	controls,
-	control,
-	index,
-	name,
-	remove,
+	controls = [],
+	control = () => {},
+	index = 0,
+	name = '',
+	remove = () => {},
 	disabled = false,
 	showLabelOnce = false,
 	lowerlabel = '',
@@ -54,7 +54,7 @@ function Child({
 							style={{ width: `${flex}%` }}
 							key={`create_form_${newControl.name}_${index}`}
 						>
-							{(showLabelOnce && index === ZEROTH_INDEX && newControl.label)
+							{(showLabelOnce && !index && newControl.label)
 							|| (!showLabelOnce && newControl.label) ? (
 								<div className={styles.heading}>
 									{newControl.label || lowerlabel}

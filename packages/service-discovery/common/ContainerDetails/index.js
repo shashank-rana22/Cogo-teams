@@ -4,6 +4,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getDetails from './getDetails';
 import styles from './styles.module.css';
 
+const ONE = 1;
+
 function ContainerDetails({ services = {}, primary_service = '' }) {
 	const allContainerDetails = (Object.values(services) || []).filter(
 		(service) => service?.service_type === primary_service,
@@ -49,7 +51,7 @@ function ContainerDetails({ services = {}, primary_service = '' }) {
 					</Pill>
 				))}
 
-				{allContainerDetails?.length > 1 && (
+				{allContainerDetails?.length > ONE && (
 					<Tooltip
 						theme="light"
 						placement="bottom"
@@ -61,7 +63,7 @@ function ContainerDetails({ services = {}, primary_service = '' }) {
 							color="##F9F9F9"
 							style={{ border: '1px solid #E0E0E0' }}
 						>
-							{`${allContainerDetails.length - 1} More`}
+							{`${allContainerDetails.length - ONE} More`}
 						</Pill>
 					</Tooltip>
 				)}
