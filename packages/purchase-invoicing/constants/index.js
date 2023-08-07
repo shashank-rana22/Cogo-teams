@@ -55,7 +55,6 @@ export const INVOICE_TYPE_OPTIONS = [
 	{ label: 'Invoice', value: 'purchase_invoice' },
 	{ label: 'Credit Note', value: 'credit_note' },
 	{ label: 'Proforma', value: 'proforma_invoice' },
-	{ label: 'Advance Payment', value: 'advanceBill' },
 ];
 
 export const EMPTY_EXCHANGE_RATES = { from_currency: '', to_currency: '', rate: 1 };
@@ -95,7 +94,6 @@ export const BILL_MAPPINGS = {
 export const INVOICE_TYPE_OPTIONS_CN = [
 	{ label: 'Invoice', value: 'purchase_invoice' },
 	{ label: 'Proforma', value: 'proforma_invoice' },
-	{ label: 'Advance Payment', value: 'advanceBill' },
 ];
 
 export const OPTIONSCN = [
