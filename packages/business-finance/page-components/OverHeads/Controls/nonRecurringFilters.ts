@@ -1,7 +1,6 @@
 import { startCase } from '@cogoport/utils';
 
-import { BRANCH_OPTIONS } from '../constants/BRANCH_OPTIONS';
-import { REPEAT_FREQUENCY } from '../constants/REPEAT_FREQUENCY';
+import { PAYMENT_OPTIONS, REPEAT_FREQUENCY } from '../constants/REPEAT_FREQUENCY';
 
 export const nonRecurringFilters = [
 	{
@@ -12,11 +11,12 @@ export const nonRecurringFilters = [
 		initialCall : true,
 		renderLabel : (item) => startCase(item.categoryName),
 		valueKey    : 'id',
+		isClearable : true,
 		span        : 2,
 		style       : { width: '164px', height: '32px' },
 	},
 	{
-		name           : 'branch',
+		name           : 'paymentStatus',
 		type           : 'select',
 		multiple       : false,
 		defaultOptions : false,
@@ -24,7 +24,28 @@ export const nonRecurringFilters = [
 		span           : 2,
 		isClearable    : true,
 		size           : 'sm',
-		options        : BRANCH_OPTIONS,
+		options        : PAYMENT_OPTIONS,
+	},
+	{
+		name        : 'uploadDate',
+		type        : 'singleDateRange',
+		placeholder : 'Upload Date',
+		span        : 2,
+		isClearable : true,
+	},
+	{
+		name        : 'dueDate',
+		type        : 'singleDateRange',
+		placeholder : 'Due Date',
+		span        : 2,
+		isClearable : true,
+	},
+	{
+		name        : 'billDate',
+		type        : 'singleDateRange',
+		placeholder : 'Bill Date',
+		span        : 2,
+		isClearable : true,
 	},
 ];
 
@@ -37,19 +58,20 @@ export const recurringFilters = [
 		renderLabel : (item) => startCase(item.categoryName),
 		initialCall : true,
 		valueKey    : 'id',
+		isClearable : true,
 		span        : 1,
 		style       : { width: '164px', height: '32px' },
 	},
 	{
-		name           : 'branch',
+		name           : 'paymentStatus',
 		type           : 'select',
 		multiple       : false,
 		defaultOptions : false,
-		placeholder    : 'Branch',
+		placeholder    : 'Payment Status',
 		span           : 2,
 		isClearable    : true,
 		size           : 'sm',
-		options        : BRANCH_OPTIONS,
+		options        : PAYMENT_OPTIONS,
 	},
 	{
 		name           : 'repeatsEvery',
@@ -57,9 +79,29 @@ export const recurringFilters = [
 		multiple       : false,
 		defaultOptions : false,
 		placeholder    : 'Repeats Every',
-		span           : 1,
 		isClearable    : true,
 		size           : 'sm',
 		options        : REPEAT_FREQUENCY,
+	},
+	{
+		name        : 'uploadDate',
+		type        : 'singleDateRange',
+		placeholder : 'Upload Date',
+		span        : 1.5,
+		isClearable : true,
+	},
+	{
+		name        : 'dueDate',
+		type        : 'singleDateRange',
+		placeholder : 'Due Date',
+		span        : 1.5,
+		isClearable : true,
+	},
+	{
+		name        : 'billDate',
+		type        : 'singleDateRange',
+		placeholder : 'Bill Date',
+		span        : 1.5,
+		isClearable : true,
 	},
 ];

@@ -2,15 +2,22 @@
 import { Select, Button, Input, Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMCrossInCircle, IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
+import {
+	IcMCrossInCircle,
+	IcMSearchlight,
+	IcMFtick,
+	IcMInfo,
+} from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import Filter from '../../commons/Filters';
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { formatDate } from '../../commons/utils/formatDate';
 import List from '../commons/List';
 
 import CreateVendorModal from './CreateVendorModal';
+import filtersconfig from './filtersconfig';
 import useListVendors from './hooks/useListVendors';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
@@ -18,22 +25,23 @@ import configs from './utils/config';
 import Controls from './utils/controls';
 
 interface ItemProps {
-	createdDate?:String,
-	venderSerialId?: Number,
-	kycStatus?: String,
-	name?: String,
-	pan?: String,
-	tax?: String,
-	category?: String,
-	payments?: Number,
-	openInvoices?: Number,
-	organizationName?:string,
-	createdAt?:Date,
+	createdDate?: String;
+	venderSerialId?: Number;
+	kycStatus?: String;
+	name?: String;
+	pan?: String;
+	tax?: String;
+	category?: String;
+	payments?: Number;
+	openInvoices?: Number;
+	organizationName?: string;
+	createdAt?: Date;
 }
 
 function VenderComponent() {
 	const router = useRouter();
 	const geo = getGeoConstants();
+	const val = geo.others.identification_number.label;
 
 	const { VENDOR_CONFIG } = configs();
 
@@ -53,7 +61,7 @@ function VenderComponent() {
 	const [showModal, setShowModal] = useState(false);
 	const { listData, loading } = useListVendors({ filters, sort });
 
-	const handleChange = (e:any, value:string | number) => {
+	const handleChange = (e: any, value: string | number) => {
 		setFilters((previousState) => ({
 			...previousState,
 			...{ [value]: e },
@@ -69,34 +77,40 @@ function VenderComponent() {
 	const renderHeaders = () => (
 		<div className={styles.header_container}>
 			<div className={styles.left_container}>
-				{
-                Object.keys(Controls).map((key) => {
-                        	const { options = [], placeholder = '', value = '' } = Controls[key];
-                        	return (
-	<Select
-		key={key}
-		value={filters?.[key]}
-		onChange={(e:any) => handleChange(e, value)}
-		placeholder={placeholder}
-		options={options}
-		className={styles.select}
-		size="sm"
-		isClearable
-	/>
-                	);
-                })
-                    }
-
+				{Object.keys(Controls).map((key) => {
+					const {
+						options = [],
+						placeholder = '',
+						value = '',
+					} = Controls[key];
+					return (
+						<Select
+							key={key}
+							value={filters?.[key]}
+							onChange={(e: any) => handleChange(e, value)}
+							placeholder={placeholder}
+							options={options}
+							className={styles.select}
+							size="sm"
+							isClearable
+						/>
+					);
+				})}
+			</div>
+			<div className={styles.filtercont}>
+				<Filter
+					controls={filtersconfig}
+					filters={filters}
+					setFilters={setFilters}
+				/>
 			</div>
 			<div className={styles.right_container}>
 				<Input
 					size="sm"
-					placeholder={
-						`Search by Vendor Name/${geo.others.identification_number.label}/Organization ID/Sage ID`
-					}
+					placeholder={`Search by Vendor Name/${val}/Organization ID/Sage ID`}
 					suffix={<IcMSearchlight />}
 					value={filters.searchValue}
-					onChange={(e:any) => handleChange(e, 'searchValue')}
+					onChange={(e: any) => handleChange(e, 'searchValue')}
 					className={styles.search}
 				/>
 				<Button
@@ -111,27 +125,27 @@ function VenderComponent() {
 		</div>
 	);
 
-	function RenderKYCStatus(item:any) {
+	function RenderKYCStatus(item: any) {
 		const { item: itemData = {} } = item;
 
 		const { kycStatus = '' } = itemData;
 		return (
-			<div style={{ display: 'flex', alignItems: 'center', width: '120px' }}>
-				{kycStatus === 'VERIFIED' && 	(
+			<div
+				style={{
+					display    : 'flex',
+					alignItems : 'center',
+					width      : '120px',
+				}}
+			>
+				{kycStatus === 'VERIFIED' && (
 					<div className={styles.verified}>
 						<div>
-							<IcMFtick
-								color="#67C676"
-								height={22}
-								width={22}
-							/>
+							<IcMFtick color="#67C676" height={22} width={22} />
 						</div>
 						<div>Verified </div>
 					</div>
 				)}
-				{
-                kycStatus === 'REJECTED'
-				&& (
+				{kycStatus === 'REJECTED' && (
 					<div className={styles.pending}>
 						<div className={styles.icm_info}>
 							<IcMCrossInCircle
@@ -139,42 +153,36 @@ function VenderComponent() {
 								height={14}
 								width={14}
 							/>
-
 						</div>
-						<div>
-							Rejected
-						</div>
+						<div>Rejected</div>
 					</div>
-				)
-				}
-				{ kycStatus !== 'VERIFIED' && kycStatus !== 'REJECTED' && (
+				)}
+				{kycStatus !== 'VERIFIED' && kycStatus !== 'REJECTED' && (
 					<div className={styles.pending}>
 						<div className={styles.icm_info}>
-							<IcMInfo
-								color="#e10d1f"
-								height={14}
-								width={14}
-							/>
+							<IcMInfo color="#e10d1f" height={14} width={14} />
 						</div>
-						<div>
-							Pending
-						</div>
+						<div>Pending</div>
 					</div>
 				)}
 			</div>
 		);
 	}
 
-	function RenderPayments(item:any) {
+	function RenderPayments(item: any) {
 		const { item: itemData = {} } = item;
-		const { totalPaidAmount = 0, currentMonthPaidAmount = 0, currency = '' } = itemData;
+		const {
+			totalPaidAmount = 0,
+			currentMonthPaidAmount = 0,
+			currency = '',
+		} = itemData;
 
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
 				{formatAmount({
-					amount  :	totalPaidAmount,
-				 currency,
-				 options : {
+					amount  : totalPaidAmount,
+					currency,
+					options : {
 						style           : 'currency',
 						currencyDisplay : 'code',
 					},
@@ -182,9 +190,9 @@ function VenderComponent() {
 				{' '}
 				<Tooltip
 					content={`Current Month: ${formatAmount({
-						amount  :	currentMonthPaidAmount,
-					 currency,
-					 options : {
+						amount  : currentMonthPaidAmount,
+						currency,
+						options : {
 							style           : 'currency',
 							currencyDisplay : 'code',
 						},
@@ -202,9 +210,9 @@ function VenderComponent() {
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
 				{formatAmount({
-					amount  :	openInvoiceAmount,
-				 currency,
-				 options : {
+					amount  : openInvoiceAmount,
+					currency,
+					options : {
 						style           : 'currency',
 						currencyDisplay : 'code',
 					},
@@ -218,29 +226,25 @@ function VenderComponent() {
 		);
 	}
 
-	const renderDropdown = (vendorId:number | string) => (
-		<ShowMore
-			vendorId={vendorId}
-		/>
+	const renderDropdown = (vendorId: number | string) => (
+		<ShowMore vendorId={vendorId} />
 	);
 
-	const functions:any = {
-		renderKYCStatus: (itemData:ItemProps) => (
+	const functions: any = {
+		renderKYCStatus: (itemData: ItemProps) => (
 			<RenderKYCStatus item={itemData} />
 		),
-		renderPayments: (itemData:ItemProps) => (
+		renderPayments: (itemData: ItemProps) => (
 			<RenderPayments item={itemData} />
 		),
-		renderInvoice: (itemData:ItemProps) => (
+		renderInvoice: (itemData: ItemProps) => (
 			<RenderInvoice item={itemData} />
 		),
-		renderName: (itemData:ItemProps) => {
+		renderName: (itemData: ItemProps) => {
 			const { organizationName = '' } = itemData || {};
-			return (
-				<div>{showOverflowingNumber(organizationName, 15)}</div>
-			);
+			return <div>{showOverflowingNumber(organizationName, 15)}</div>;
 		},
-		rendeDate: (itemData:ItemProps) => {
+		rendeDate: (itemData: ItemProps) => {
 			const { createdAt } = itemData || {};
 			return (
 				<div>
@@ -248,13 +252,9 @@ function VenderComponent() {
 				</div>
 			);
 		},
-		renderCategory: (itemData:ItemProps) => {
+		renderCategory: (itemData: ItemProps) => {
 			const { category = '' } = itemData || {};
-			return (
-				<div>
-					{category.replaceAll('_', ' ')}
-				</div>
-			);
+			return <div>{category.replaceAll('_', ' ')}</div>;
 		},
 	};
 
@@ -269,16 +269,19 @@ function VenderComponent() {
 				sort={sort}
 				setSort={setSort}
 				functions={functions}
-				handlePageChange={(pageValue:number) => {
+				handlePageChange={(pageValue: number) => {
 					setFilters((p) => ({ ...p, page: pageValue }));
 				}}
 				showPagination
 				renderDropdown={({ vendorId }) => renderDropdown(vendorId)}
 			/>
 
-			{
-                showModal && <CreateVendorModal showModal={showModal} setShowModal={setShowModal} />
-            }
+			{showModal && (
+				<CreateVendorModal
+					showModal={showModal}
+					setShowModal={setShowModal}
+				/>
+			)}
 		</div>
 	);
 }

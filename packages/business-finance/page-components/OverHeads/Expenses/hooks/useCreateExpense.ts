@@ -41,6 +41,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		tradeParty,
 		remarks,
 		categoryName,
+		dueDate,
 	} = formData || {};
 
 	const {
@@ -180,6 +181,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		expenseConfigurationId : null,
 		remarks,
 		categoryName,
+		dueDate,
 	});
 
 	const submitData = async () => {

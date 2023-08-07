@@ -1,9 +1,24 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
+const formatedDate = (date) => formatDate({
+	date,
+	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+	formatType : 'dateTime',
+	separator  : 'T',
+});
+
 const useListVendors = ({ filters, sort }) => {
-	const { page, pageLimit, KYC_STATUS, CATEGORY, searchValue } = filters;
+	const {
+		page, pageLimit, KYC_STATUS, CATEGORY, searchValue, dueDate, uploadDate, billDate,
+	} = filters;
 	const { paymentSortType, openInvoiceSortType, createdAtSortType } = sort;
+	const { startDate, endDate } = dueDate || {};
+	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = uploadDate || {};
+	const { startDate: fromBillDate, endDate: toBillDate } = billDate || {};
 	const [
 		{ data, loading },
 		trigger,
@@ -29,6 +44,12 @@ const useListVendors = ({ filters, sort }) => {
 					kycStatus                  : KYC_STATUS || undefined,
 					category                   : CATEGORY || undefined,
 					q                          : searchValue || undefined,
+					startDate                  : startDate ? formatedDate(startDate) : undefined,
+					endDate                    : endDate ? formatedDate(endDate) : undefined,
+					fromUploadBillDate         : fromUploadBillDate ? formatedDate(fromUploadBillDate) : undefined,
+					toUploadBillDate           : toUploadBillDate ? formatedDate(toUploadBillDate) : undefined,
+					fromBillDate               : fromBillDate ? formatedDate(fromBillDate) : undefined,
+					toBillDate                 : toBillDate ? formatedDate(toBillDate) : undefined,
 				},
 			});
 		} catch (err) {
@@ -42,6 +63,12 @@ const useListVendors = ({ filters, sort }) => {
 		openInvoiceSortType,
 		createdAtSortType,
 		KYC_STATUS, CATEGORY, searchValue,
+		startDate,
+		endDate,
+		fromUploadBillDate,
+		toUploadBillDate,
+		fromBillDate,
+		toBillDate,
 	]);
 
 	return {
