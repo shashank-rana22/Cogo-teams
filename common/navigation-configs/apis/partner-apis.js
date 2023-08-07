@@ -13123,6 +13123,18 @@ const partner = {
 			api         : 'put_air_coe_warehouse_management_schedule',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_air_coe_warehouse_app_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_warehouse_management_inventory',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_warehouse_management_inventory',
+			access_type : 'private',
+		},
 	],
 	printing_desk: [
 		{
