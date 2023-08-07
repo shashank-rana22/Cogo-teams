@@ -1,0 +1,18 @@
+.container {
+	/* display: flex; */
+	width: 100%;
+}
+
+.employee_name {
+	width: 23%;
+}
+
+.attendance_date {
+	width: 11%;
+}
+
+.header_container {
+	display: flex;
+	align-items: center;
+	margin: 12px 0;
+}

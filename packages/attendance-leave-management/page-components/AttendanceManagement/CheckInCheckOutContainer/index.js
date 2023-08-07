@@ -51,7 +51,7 @@ function ChecInCheckOut() {
 						/>
 					</div>
 
-					<div className={styles.time_wrapper}>
+					<div className={styles.time_wrapper_out}>
 						9:15am
 					</div>
 				</div>

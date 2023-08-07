@@ -1,0 +1,31 @@
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.heading {
+	margin: 0;
+	font-size: 24px;
+	color: #221f20;
+}
+
+.header_container_flex {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.select_container {
+	width: 180px;
+	margin-right: 12px;
+}
+
+.input_search {
+	width: 300px;
+	margin-left: 12px;
+}
+
+.table_container {
+	margin-top: 20px;
+}

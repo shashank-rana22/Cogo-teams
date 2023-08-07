@@ -2,6 +2,22 @@
 	width: 100%;
 	min-height: 30vh;
 	padding: 16px 12px;
+	margin-top: 20px;
 	background: #f9f9f9;
 	border-radius: 16px;
+}
+
+.heading {
+	font-weight: 600;
+	color: #221f20;
+	text-transform: uppercase;
+}
+
+.sub_heading {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.heading_container {
+	margin-bottom: 16px;
 }
