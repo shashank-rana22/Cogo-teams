@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useListCommunications = ({ taskId }) => {
+const useListCommunications = ({ taskId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_communications',
 		method : 'GET',

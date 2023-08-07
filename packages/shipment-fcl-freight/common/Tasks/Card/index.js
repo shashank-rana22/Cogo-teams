@@ -37,8 +37,8 @@ function Card({
 						handleClick={handleClick}
 						handleChange={handleChange}
 						handleEmail={handleEmail}
-						hideButton={(task.status === 'completed' && task.assigned_stakeholder !== 'system')
-							|| (selectedTaskId.length)}
+						hideButton={(task?.status === 'completed' && task?.assigned_stakeholder !== 'system')
+							|| (selectedTaskId?.length)}
 						tasksList={tasksList}
 					/>
 				)}
