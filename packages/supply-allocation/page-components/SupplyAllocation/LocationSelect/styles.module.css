@@ -17,7 +17,24 @@
 }
 
 .location_label {
-	margin-bottom: 6px;
+	position: relative;
+	top: 9px;
+	left: 6px;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: fit-content;
+	padding: 0 3px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #333;
+	background: white;
+	border-radius: 4px;
+
+	&:hover {
+		border-color: var(--color-tertiary-blue-2);
+	}
 }
 
 .port_arrow_icon {
