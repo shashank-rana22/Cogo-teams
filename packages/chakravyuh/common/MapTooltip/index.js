@@ -10,7 +10,7 @@ function MapTooltip({
 	value_suffix = '%',
 }) {
 	return (
-		<div className={styles.tooltip} style={{ borderColor: `${color || 'transparent'}` }}>
+		<div className={styles.tooltip} style={{ borderColor: `${color || '#828282'}` }}>
 			<h3>{display_name}</h3>
 			{value && (
 				<h1>

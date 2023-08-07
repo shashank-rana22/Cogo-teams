@@ -42,7 +42,7 @@ const WorldGeometry = React.forwardRef(({
 		const activeProps = activeId === id ? {
 			fillOpacity : 0,
 			fillColor   : 'transparent',
-			color       : '#9BA0CB',
+			color       : '#f37166',
 			weight      : 1.5,
 		} : {};
 
