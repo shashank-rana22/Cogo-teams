@@ -7,7 +7,7 @@ import useCreateShipmentTradePartner from '../../hooks/useCreateShipmentTradePar
 import { convertObjectMappingToArray } from '../../utils/convertObjectMappingToArray';
 
 import getCreateTradePartnerParams from './helpers/getCreateTradePartnerParams';
-import { ModalBodyContent } from './ModalBodyContent';
+import ModalBodyContent from './ModalBodyContent';
 import { ModalFooterContent } from './ModalFooterContent';
 import styles from './styles.module.css';
 import tradePartyTypeMapping from './tradePartyTypeMapping';
@@ -66,7 +66,7 @@ function AddCompanyModal({
 		createTrigger(params);
 	};
 
-	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
+	const formSubmit = () => formRef?.current?.handleSubmit?.(onSubmit)();
 
 	const modalBodyProps = {
 		trade_party_type,
@@ -77,7 +77,6 @@ function AddCompanyModal({
 		setCompanyType,
 		companyType,
 		tradePartnersData,
-		ref: formRef,
 		importer_exporter_id,
 		shipment_id,
 		organization_id,
@@ -91,7 +90,7 @@ function AddCompanyModal({
 				<Modal.Header title="Add Company" />
 
 				<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
-					<ModalBodyContent {...modalBodyProps} />
+					<ModalBodyContent {...modalBodyProps} ref={formRef} />
 				</Modal.Body>
 
 				<Modal.Footer>
@@ -104,7 +103,7 @@ function AddCompanyModal({
 
 	return (
 		<div>
-			<ModalBodyContent {...modalBodyProps} />
+			<ModalBodyContent {...modalBodyProps} ref={formRef} />
 
 			<div className={styles.footer}>
 				<ModalFooterContent formSubmit={formSubmit} onClose={onClose} createLoading={createLoading} />
