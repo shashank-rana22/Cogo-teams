@@ -13,6 +13,50 @@ const MIDDLE_KEYS1 = ['cargo_ready_date', 'airline', 'no_of_stops'];
 const LOWER_KEYS = ['flight_departure', 'flight_arrival', 'flight_number'];
 const ZERO_STOPS = 0;
 const FOR_LOOP_INCREMENT_VALUE = 1;
+
+function Render({
+	agent = '',
+	MIDDLE_CONTROLS = [],
+	LOWER_CONTROLS = [],
+	STOP_CONTROLS = [],
+	control = {},
+	errors = {},
+}) {
+	if (agent !== 'true') {
+		return null;
+	}
+	return (
+		<div>
+			<div>
+				<Layout
+					fields={MIDDLE_CONTROLS}
+					control={control}
+					errors={errors}
+				/>
+			</div>
+			<div>
+				<div className={styles.heading_div}>Flight Details</div>
+				<div>
+					<Layout
+						fields={LOWER_CONTROLS}
+						control={control}
+						errors={errors}
+					/>
+				</div>
+			</div>
+			<div>
+				<div className={styles.layout_div}>
+					<Layout
+						fields={STOP_CONTROLS}
+						control={control}
+						errors={errors}
+					/>
+				</div>
+			</div>
+		</div>
+	);
+}
+
 function ConfirmCargoAirModal({
 	task = {},
 	handleUpdate = () => {},
@@ -106,42 +150,6 @@ function ConfirmCargoAirModal({
 		setValue('movement', newStopsValue);
 	}, noOfStops);
 
-	function Render() {
-		if (agent === 'true') {
-			return (
-				<div>
-					<div>
-						<Layout
-							fields={MIDDLE_CONTROLS}
-							control={control}
-							errors={errors}
-						/>
-					</div>
-					<div>
-						<div className={styles.heading_div}>Flight Details</div>
-						<div>
-							<Layout
-								fields={LOWER_CONTROLS}
-								control={control}
-								errors={errors}
-							/>
-						</div>
-					</div>
-					<div>
-						<div className={styles.layout_div}>
-							<Layout
-								fields={STOP_CONTROLS}
-								control={control}
-								errors={errors}
-							/>
-						</div>
-					</div>
-				</div>
-			);
-		}
-		return null;
-	}
-
 	return (
 		<div className={styles.container}>
 			<div>
@@ -157,7 +165,14 @@ function ConfirmCargoAirModal({
 					</div>
 				)}
 
-				<Render />
+				<Render
+					agent={agent}
+					MIDDLE_CONTROLS={MIDDLE_CONTROLS}
+					LOWER_CONTROLS={LOWER_CONTROLS}
+					STOP_CONTROLS={STOP_CONTROLS}
+					control={control}
+					errors={errors}
+				/>
 				<div className={styles.button_div}>
 					<div className={styles.div1}>
 						<Button className="secondary md" onClick={() => onCancel()}>
