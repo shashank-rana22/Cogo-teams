@@ -82,7 +82,6 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	height: var(--height);
 	overflow: hidden;
 	background: radial-gradient(50% 67.94% at 50% 50%, rgb(242 243 250 / 50%) 8.17%, rgb(206 209 237 / 50%) 100%);
 	border-radius: 10px;
