@@ -36,3 +36,17 @@
 .justifiy {
 	justify-content: space-between;
 }
+
+.select {
+	margin-top: 16px;
+
+	:global {
+		.ui_select_container {
+			max-width: 200px;
+		}
+
+		.ui_select_options_container {
+			width: 240px;
+		}
+	}
+}
