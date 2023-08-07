@@ -1,19 +1,21 @@
-import { Pill, Placeholder, Toast, Button } from '@cogoport/components';
+import { Placeholder, Toast, Button } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import { isEmpty, snakeCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { getHasAccessToEditGroup, switchUserChats } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
+import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetUser from '../../../../hooks/useGetUser';
 import useGroupChat from '../../../../hooks/useGroupChat';
 import useListPartnerUsers from '../../../../hooks/useListPartnerUsers';
 
 import AddGroupMember from './AddGroupMember';
+import AgentQuickActions from './AgentQuickActions';
+import ContactVerification from './ContactVerification';
 import ConversationContainer from './ConversationContainer';
 import ExecutiveSummary from './ExecutiveSummary';
 import GroupMembers from './GroupMembers';
@@ -114,23 +116,15 @@ function AgentDetails({
 		firestore,
 	});
 
+	const { organizationData = {}, fetchOrganization = () => {}, orgLoading = false } = useGetOrganization({
+		organizationId     : orgId,
+		leadOrganizationId : lead_user_details.lead_organization_id,
+	});
+
 	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
+
 	const isAddFeedBackButton = !loading && !orgId && lead_user_details?.lead_organization_id;
-	const { mobile_verified, whatsapp_verified } = userData || {};
-	const VERIFICATION_STATUS = [
-		{
-			label      : mobile_verified ? 'Verified' : 'Not Verified',
-			color      : mobile_verified ? 'green' : '#f8aea8',
-			size       : 'sm',
-			prefixIcon : <IcMCall />,
-		},
-		{
-			label      : whatsapp_verified ? 'Verified' : 'Not Verified',
-			color      : whatsapp_verified ? 'green' : '#f8aea8',
-			size       : 'sm',
-			prefixIcon : <IcCWhatsapp />,
-		},
-	];
+
 	const handleSubmit = async () => {
 		if (!isEmpty(profileValue?.name) && !isEmpty(profileValue?.number)) {
 			await leadUserProfile({ profileValue });
@@ -172,47 +166,41 @@ function AgentDetails({
 	return (
 		<>
 			<div className={styles.top_div}>
+
 				<div className={styles.title}>Profile</div>
-				{activeTab === 'message' && (
-					<div
-						role="presentation"
-						className={styles.copy_link}
-						onClick={() => handleClick({ id, channel_type })}
-					>
-						Share
-					</div>
-				)}
-			</div>
-			<Profile loading={loading} name={name} userEmail={userEmail || userData?.email} />
-			{(leadUserId || userId) && (
-				<div className={styles.verification_pills}>
-					{VERIFICATION_STATUS.map((item, index) => {
-						const itemKey = `${snakeCase(item.label)}_${index}`;
-						return (
-							<div key={itemKey}>
-								{loading ? (
-									<Placeholder
-										height="20px"
-										width="120px"
-										margin="10px 0px 10px 0px"
-									/>
-								) : (
-									<Pill
-										key={item.label}
-										prefix={item.prefixIcon}
-										size="md"
-										color={item.color}
-									>
-										<div className={styles.pill_name}>
-											{item.label}
-										</div>
-									</Pill>
-								)}
-							</div>
-						);
-					})}
+				<div className={styles.quick_actions}>
+					{activeTab === 'message' && (
+						<div
+							role="presentation"
+							className={styles.copy_link}
+							onClick={() => handleClick({ id, channel_type })}
+						>
+							Share
+						</div>
+					)}
+
 				</div>
+			</div>
+
+			<Profile loading={loading} name={name} userEmail={userEmail} />
+
+			<ContactVerification leadUserId={leadUserId} userId={userId} loading={loading} userData={userData} />
+
+			{(activeTab === 'message' && !loading && !orgLoading)
+			&& (
+				<AgentQuickActions
+					userEmail={userEmail}
+					userId={user_id}
+					leadUserId={lead_user_id}
+					orgId={orgId}
+					mobileNumber={mobile_number}
+					userData={userData}
+					organizationData={organizationData}
+					fetchOrganization={fetchOrganization}
+					partnerId={partnerId}
+				/>
 			)}
+
 			{isAddFeedBackButton ? (
 				<Button size="sm" themeType="secondary" onClick={handleRoute}>Add Feedback</Button>
 			) : null}

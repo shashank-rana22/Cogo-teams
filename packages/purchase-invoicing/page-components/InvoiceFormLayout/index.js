@@ -52,10 +52,10 @@ function InvoiceFormLayout({
 	const collectionPartyAddresses = (allAddresses || []).map((address) => ({
 		...address,
 		label : `${address?.address} / ${address?.tax_number}`,
-		value : address?.tax_number,
+		value : address?.id,
 	}));
 
-	const { listEntities } = useGetEntities();
+	const { listEntities, entitiesLoading } = useGetEntities();
 
 	const defaultLineItems = purchaseInvoiceValues?.line_items?.map((item) => ({
 		...item,
@@ -66,7 +66,7 @@ function InvoiceFormLayout({
 
 	const { control, watch, setValue, handleSubmit, formState: { errors: errorVal } } = useForm({
 		defaultValues: {
-			invoice_type  : 'purchase_invoice',
+			invoice_type  : isJobClosed ? 'credit_note' : 'purchase_invoice',
 			exchange_rate : purchaseInvoiceValues?.exchange_rate || [
 				{ from_currency: 'INR', to_currency: 'INR', rate: '1' },
 			],
@@ -229,6 +229,7 @@ function InvoiceFormLayout({
 					errMszs={errMszs}
 					purchaseInvoiceValues={purchaseInvoiceValues}
 					open={isEdit}
+					entitiesLoading={entitiesLoading}
 					listEntities={listEntities}
 				/>
 				<CollectionPartyDetails
