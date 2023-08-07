@@ -56,7 +56,7 @@ export function getFileAttributes({ fileName = '', finalUrl = '' }) {
 		(itm) => MEDIA_EXTENSION_TYPES[itm].includes(extension),
 	);
 
-	const { icon, type } = EXTENSIONS_MAPPING[mediaType || 'default'];
+	const { icon, type } = EXTENSIONS_MAPPING[mediaType] || EXTENSIONS_MAPPING.default;
 
 	return {
 		fileName      : name,
