@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 
 function SalesInvoice() {
 	const { list } = useListSageSalesInvoices();
+
 	const { data: invoiceData, groupedInvoices, refetch: salesInvoicesRefetch, loading } = useGetShipmentInvoice();
 
 	const isIRNGenerated = !!list?.find((item) => !!item?.irn_number);
@@ -24,7 +25,7 @@ function SalesInvoice() {
 
 	return (
 		<main className={styles.container}>
-			<OverviewManageServices isOpen={false} />
+			<OverviewManageServices isOpen={false} source="overview" />
 
 			{!loading && !isEmpty(invoiceData) ? (
 				<Invoices

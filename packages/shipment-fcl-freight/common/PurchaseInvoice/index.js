@@ -2,16 +2,16 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { useContext } from 'react';
 
-// import OverviewManageServices from '../Overview/OverviewManageServices';
+import OverviewManageServices from '../Overview/OverviewManageServices';
 
 import styles from './styles.module.css';
 
-function PurchaseInvoice() {
+function PurchaseInvoice({ activeTab = '' }) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
 	return (
 		<main className={styles.main}>
-			{/* <OverviewManageServices isOpen={false} /> */}
+			<OverviewManageServices isOpen={false} activeTab={activeTab} source="purchase" />
 			<PurchaseInvoicing
 				shipmentData={shipment_data}
 				servicesData={servicesList}
