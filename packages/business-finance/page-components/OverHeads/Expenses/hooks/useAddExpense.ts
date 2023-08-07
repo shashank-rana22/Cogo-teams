@@ -110,6 +110,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		pincode,
 		city_name: cityName,
 		id: idFromVendor,
+		dueDate,
 	} = vendorData || {};
 
 	const [{ data: responseData, loading }, trigger] = useRequestBf(
@@ -183,6 +184,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		expenseConfigurationId,
 		remarks,
 		categoryName,
+		dueDate,
 	});
 
 	const submitData = async () => {
