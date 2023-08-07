@@ -71,8 +71,15 @@ function MailHeader({ eachMessage = {}, setMailActions = () => {}, hasPermission
 			<div className={styles.left_container}>
 				<Avatar personName={senderName} className={styles.avatar} />
 				<div>
-					<div className={styles.sender_name}>{startCase(senderName)}</div>
-					{RECEIPIENT_MAPPING.map((item) => <ReceipientComp {...item} key={item?.label} />)}
+					<div className={styles.sender_name}>
+						{startCase(senderName)}
+					</div>
+					{RECEIPIENT_MAPPING.map((item) => (
+						<ReceipientComp
+							{...item}
+							key={item?.label}
+						/>
+					))}
 				</div>
 			</div>
 			<div>
@@ -88,7 +95,10 @@ function MailHeader({ eachMessage = {}, setMailActions = () => {}, hasPermission
 							<Icon
 								key={key}
 								className={styles.icon_styles}
-								onClick={() => setMailActions({ actionType: key, data: eachMessage })}
+								onClick={() => setMailActions({
+									actionType : key,
+									data       : eachMessage,
+								})}
 							/>
 						);
 					})}

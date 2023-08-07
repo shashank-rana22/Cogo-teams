@@ -17,6 +17,7 @@ const getCommunicationPayload = ({
 	emailState,
 	mailActions,
 	name,
+	source,
 }) => {
 	const { actionType = '', data = {} } = mailActions || {};
 
@@ -31,14 +32,14 @@ const getCommunicationPayload = ({
 	const { ccrecipients = [], bccrecipients = [], subject = '', toUserEmail = [] } = emailState || {};
 
 	const payload = {
-		sender      : 'sandeep.nalabolu@cogoport.com',
+		sender      : source,
 		toUserEmail,
 		ccrecipients,
 		bccrecipients,
 		subject,
 		content     : draftMessage,
 		msgId       : message_id,
-		attachments : !isEmpty(uploadedFiles) ? uploadedFiles : undefined,
+		attachments : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
 		userId,
 
 	};
@@ -60,9 +61,9 @@ const getCommunicationPayload = ({
 		service         : 'user',
 		service_id      : userId,
 		sender          : payload?.sender,
-		cc_emails       : !isEmpty(ccrecipients) ? ccrecipients : undefined,
-		bcc_emails      : !isEmpty(bccrecipients) ? ccrecipients : undefined,
-		attachment_urls : !isEmpty(uploadedFiles) ? uploadedFiles : undefined,
+		cc_emails       : isEmpty(ccrecipients) ? undefined : ccrecipients,
+		bcc_emails      : isEmpty(bccrecipients) ? undefined : ccrecipients,
+		attachment_urls : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
 	};
 };
 
@@ -74,6 +75,7 @@ const useSendOmnichannelMail = ({
 	uploadedFiles = [],
 	mailActions = {},
 	resetEmailStates = () => {},
+	source = '',
 }) => {
 	const {
 		user: { id, name = '' },
@@ -98,6 +100,7 @@ const useSendOmnichannelMail = ({
 					emailState,
 					mailActions,
 					name,
+					source,
 				}),
 			});
 

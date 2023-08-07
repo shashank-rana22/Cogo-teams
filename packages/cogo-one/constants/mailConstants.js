@@ -34,6 +34,14 @@ export const DEFAULT_EMAIL_STATE = {
 };
 
 export const BUTTON_MAPPING = [
-	{ buttonName: 'Reply', icon: IcMReply, key: 'reply' },
-	{ buttonName: 'Forward', icon: IcMForward, key: 'forward' },
+	{
+		buttonName : 'Reply',
+		icon       : IcMReply,
+		key        : 'reply',
+	},
+	{
+		buttonName : 'Forward',
+		icon       : IcMForward,
+		key        : 'forward',
+	},
 ];

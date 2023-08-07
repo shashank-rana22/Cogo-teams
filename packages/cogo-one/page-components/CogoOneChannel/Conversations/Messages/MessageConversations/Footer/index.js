@@ -61,7 +61,7 @@ function Footer({
 }) {
 	const uploaderRef = useRef(null);
 
-	const { id = '', channel_type = '', email = '' } = formattedData;
+	const { id = '', channel_type = '', email = '', source = '' } = formattedData;
 
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
@@ -125,6 +125,7 @@ function Footer({
 		mailActions,
 		id,
 		resetEmailStates,
+		source,
 	});
 
 	const SEND_FUNC_MAPPING = {

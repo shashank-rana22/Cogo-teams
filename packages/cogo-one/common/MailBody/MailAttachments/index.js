@@ -23,29 +23,31 @@ function MailAttachments({ mediaUrls = [] }) {
 
 	return (
 		<div className={styles.container}>
-			{formatedFiles.map((file) => (
-				<div className={styles.preview_wrapper} key={file.fileUrl}>
-					{file?.fileIcon || null}
-					<div
-						role="presentation"
-						className={styles.name}
-						onClick={() => setActiveAttachmentData(file)}
-					>
-						<div className={styles.file_name}>
-							{file.fileName}
+			{formatedFiles.map(
+				(file) => (
+					<div className={styles.preview_wrapper} key={file.fileUrl}>
+						{file?.fileIcon || null}
+						<div
+							role="presentation"
+							className={styles.name}
+							onClick={() => setActiveAttachmentData(file)}
+						>
+							<div className={styles.file_name}>
+								{file.fileName}
+							</div>
+							.
+							<div>
+								{file.fileExtension}
+							</div>
 						</div>
-						.
-						<div>
-							{file.fileExtension}
-						</div>
-					</div>
 
-					<IcMDownload
-						className={styles.download_icon}
-						onClick={() => handleDownload({ imgUrl: file.fileUrl })}
-					/>
-				</div>
-			))}
+						<IcMDownload
+							className={styles.download_icon}
+							onClick={() => handleDownload({ imgUrl: file.fileUrl })}
+						/>
+					</div>
+				),
+			)}
 			<ViewAttachmentsModal
 				activeAttachmentData={activeAttachmentData}
 				setActiveAttachmentData={setActiveAttachmentData}
