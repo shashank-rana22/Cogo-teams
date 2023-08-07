@@ -67,8 +67,8 @@ function SubscriptionCard(props) {
 							<IcMCalendar />
 							<span>
 								{display_pricing[activeTab]?.expires_in}
-								days to expire
 							</span>
+							days to expire
 						</div>
 					)}
 				</div>

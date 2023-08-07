@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -22,7 +21,7 @@ function useCreatePaymentLink({ saasSubscriptionCustomerId = '' }) {
 		userType      : profile.user.session_type,
 	}));
 
-	const [showLink, setShowLink] = useState({ show: false, link: '' });
+	const [link, setLink] = useState('');
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_subscription_payment_link',
@@ -39,18 +38,18 @@ function useCreatePaymentLink({ saasSubscriptionCustomerId = '' }) {
 					planPricingId,
 				}),
 			});
-			const { link = '' } = response?.data || {};
-			setShowLink({ show: true, linkUrl: link });
+			const { link : linkUrl = '' } = response?.data || {};
+			setLink(linkUrl);
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
-			setShowLink({ show: true, linkUrl: 'It is pending from backend' });
+			// Toast.error(getApiErrorString(error?.response?.data));
+			Toast.error('Unable to generate payment link');
 		}
 	};
 
 	return {
 		createLink,
 		createLinkloading: loading,
-		showLink,
+		link,
 	};
 }
 export default useCreatePaymentLink;

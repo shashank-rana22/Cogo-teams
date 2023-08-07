@@ -1,4 +1,4 @@
-import { Toggle, Placeholder, Button } from '@cogoport/components';
+import { Toggle, Placeholder, Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCopy } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
@@ -42,13 +42,12 @@ function ManageSubscriptions(props) {
 
 	const {
 		createLink = () => {}, createLinkloading = false,
-		showLink = false,
+		link = false,
 	} = useCreatePaymentLink({ saasSubscriptionCustomerId });
 
 	const { paymentDetails } = useGetPaymentStatus();
+	const { status: paymentStatus = '' } = paymentDetails || {};
 	console.log('paymentDetails:', paymentDetails);
-
-	const { show = false, linkUrl = '' } = showLink || {};
 
 	const sortedItemPlans = (item_plans || []).sort(
 		(a, b) => a.priority_sequence - b.priority_sequence,
@@ -89,16 +88,6 @@ function ManageSubscriptions(props) {
 				)}
 			</div>
 
-			{show ? (
-				<div className={styles.share_payment_link}>
-					<div>Copy Payment Link</div>
-					<IcMCopy
-						className={styles.copy_icon}
-						onClick={() => copyToClipboard({ content: linkUrl, label: 'Payment link' })}
-					/>
-				</div>
-			) : null}
-
 			{isEmpty(sortedItemPlans) && !loading ? <EmptyState /> : (
 				<div>
 					{loading ? (
@@ -120,7 +109,7 @@ function ManageSubscriptions(props) {
 					))}
 				</div>
 			)}
-			<div className={styles.plans_fixed_footer}>
+			<div className={cl`${styles.plans_fixed_footer} ${link ? styles.two_childs_present : ''}`}>
 				{/* This part will be take live soon...ignore commented code */}
 
 				{/* <Button
@@ -131,21 +120,49 @@ function ManageSubscriptions(props) {
 				>
 					Buy Add-On
 				</Button> */}
-				<Button themeType="accent" size="md" onClick={() => setShowAssign(true)} disabled>Assign</Button>
+
+				{link && (
+					<div style={{ display: 'flex' }}>
+						<div
+							role="presentation"
+							className={styles.payment_link_status}
+							onClick={() => window.open(link, '_blank') || '#'}
+						>
+							{link}
+						</div>
+						<IcMCopy
+							className={styles.copy_icon}
+							onClick={() => copyToClipboard({ content: link, label: 'Payment link' })}
+						/>
+					</div>
+				)}
+
+				<Button
+					themeType="accent"
+					size="md"
+					onClick={() => setShowAssign(true)}
+					disabled={paymentStatus !== 'CREATED'}
+				>
+					Assign
+				</Button>
 			</div>
 
-			<AddOnModal
-				showAddOn={showAddOn}
-				setShowAddOn={setShowAddOn}
-				organizationData={organizationData}
-				saasSubscriptionCustomerId={saasSubscriptionCustomerId}
-			/>
+			{showAddOn && (
+				<AddOnModal
+					showAddOn={showAddOn}
+					setShowAddOn={setShowAddOn}
+					organizationData={organizationData}
+					saasSubscriptionCustomerId={saasSubscriptionCustomerId}
+				/>
+			)}
 
-			<AssignModal
-				showAssign={showAssign}
-				setShowAssign={setShowAssign}
-				orgId={orgId}
-			/>
+			{showAssign && (
+				<AssignModal
+					showAssign={showAssign}
+					setShowAssign={setShowAssign}
+					orgId={orgId}
+				/>
+			)}
 		</div>
 	);
 }
