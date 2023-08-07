@@ -1,13 +1,12 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 
+import Entity from './Entity';
+import Reports from './Reports';
 import styles from './styles.module.css';
 
-function Header({ filters = {}, setFilters = () => {}, setActiveEntity }) {
+function Header({ filters = {}, setFilters = () => {}, currentEntity }) {
 	const onEntityChange = (val) => {
 		setFilters((prev) => ({ ...prev, activeEntity: val }));
-		if (val === 'reports') {
-			setActiveEntity('');
-		}
 	};
 	return (
 		<div className={styles.container}>
@@ -16,7 +15,15 @@ function Header({ filters = {}, setFilters = () => {}, setActiveEntity }) {
 				activeTab={filters?.activeEntity}
 				onChange={onEntityChange}
 			>
-				<TabPanel id="reports" name="reports" title="Reports" />
+
+				<TabPanel
+					key={currentEntity}
+					id={currentEntity}
+					name={currentEntity}
+					title={<Entity entityCode={currentEntity} />}
+				/>
+
+				<TabPanel id="reports" name="reports" title={<Reports />} />
 			</Tabs>
 		</div>
 	);
