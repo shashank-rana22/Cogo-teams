@@ -39,7 +39,7 @@ export const useStakeholderCheck = () => {
 		},
 		{
 			role_ids: [geo.uuid.admin_id, geo.uuid.corporate_owner_finance_id,
-				geo.uuid.corporate_owner_id],
+				geo.uuid.corporate_owner_id, geo.uuid.corporate_owner_demand],
 			stakeholder: 'admin',
 		},
 		{

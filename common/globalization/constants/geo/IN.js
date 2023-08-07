@@ -275,7 +275,8 @@ export default {
 			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
 			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
 		],
-		document_control_lead: 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		document_control_lead  : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		corporate_owner_demand : '14fe1423-3c2d-4f66-bc33-89bed08b92ee',
 	},
 	options: {
 		registration_types: [
