@@ -4,12 +4,12 @@ import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
 const getPayload = ({
-	isUnkownUser,
-	mobile_country_code,
-	mobile_number,
-	orgId,
-	userId,
-	loggedInAgentId,
+	isUnkownUser = false,
+	mobile_country_code = '',
+	mobile_number = '',
+	orgId = '',
+	userId = '',
+	loggedInAgentId = '',
 }) => {
 	let payload = {};
 	if (isUnkownUser) {
