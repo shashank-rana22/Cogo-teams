@@ -197,6 +197,7 @@ function AgentDetails({
 					userData={userData}
 					organizationData={organizationData}
 					fetchOrganization={fetchOrganization}
+					partnerId={partnerId}
 				/>
 			)}
 
