@@ -2,6 +2,8 @@ import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
+import formatCount from '../../utils/formatCount';
+
 import styles from './styles.module.css';
 
 const DEFAULT_INDEX = 1;
@@ -40,7 +42,8 @@ function StatCard({ mappingCards = [], service = '', isMain = false, singleServi
 					<div className={cl`${styles.statval}
 					${!isMain && styles.fontstatval}`}
 					>
-						{isMain ? item.stats : `${invoiceCount} Invoices | ${jobCount} Shipments`}
+						{isMain ? item.stats
+							: `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shipments`}
 					</div>
 				</div>
 			))}
