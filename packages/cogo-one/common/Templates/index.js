@@ -29,13 +29,13 @@ function Templates({
 	userName = '',
 	orgId = '',
 }) {
+	const [shipmentData, setShipmentData] = useState({});
 	const [customizableData, setCustomizableData] = useState({});
 	const [activeCard, setActiveCard] = useState({
 		show : DEFAULT_OPTIONS.includes(type),
 		data : {},
 	});
 	const [fileValue, setFileValue] = useState({});
-	const [selectShipmentId, setSelectShipmentId] = useState('');
 
 	const {
 		sendCommunicationTemplate = () => {},
@@ -49,12 +49,14 @@ function Templates({
 	);
 
 	const isDefaultOpen = DEFAULT_OPTIONS.includes(type);
+	const isShipment = tags.includes('shipment') && orgId;
 
 	const maskedMobileNumber = `${dialNumber?.country_code}
 	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
 
 	const urlArray = decodeURI(fileValue)?.split('/');
 	const fileName = urlArray?.[(urlArray.length || GLOBAL_CONSTANTS.zeroth_index) - LAST_VALUE] || '';
+	const formatFileName = fileName.split('.')[GLOBAL_CONSTANTS.zeroth_index];
 
 	const {
 		setQfilter,
@@ -67,6 +69,11 @@ function Templates({
 
 	const { createTemplate, loading: createLoading } = useCreateCommunicationTemplate();
 
+	const documentDetails = {
+		filename : formatFileName || undefined,
+		link     : fileValue || undefined,
+	};
+
 	const handleClick = () => {
 		sendCommunicationTemplate({
 			template_name : name,
@@ -74,10 +81,7 @@ function Templates({
 			tags          : ['update_time'],
 			variables     : {
 				...customizableData,
-				document: {
-					filename : fileName,
-					link     : fileValue,
-				},
+				document: isShipment ? documentDetails : undefined,
 			},
 		});
 	};
@@ -154,23 +158,27 @@ function Templates({
 
 			{activeCard?.show && !openCreateReply && (
 				<div className={styles.create_container}>
-					<div className={styles.select_section}>
-						<AsyncSelect
-							asyncKey="list_shipments"
-							valueKey="serial_id"
-							labelKey="serial_id"
-							placeholder="Select SID"
-							value={selectShipmentId}
-							onChange={setSelectShipmentId}
-							isClearable
-							params={{
-								filters: {
-									importer_exporter_id : orgId,
-									state                : SHIPMENT_STATE,
-								},
-							}}
-						/>
-					</div>
+					{isShipment && (
+						<div className={styles.select_section}>
+							<AsyncSelect
+								asyncKey="list_shipments"
+								valueKey="serial_id"
+								labelKey="serial_id"
+								placeholder="Select SID"
+								value={shipmentData?.serial_id}
+								onChange={(_, obj) => {
+									setShipmentData(obj);
+								}}
+								isClearable
+								params={{
+									filters: {
+										importer_exporter_id : orgId,
+										state                : SHIPMENT_STATE,
+									},
+								}}
+							/>
+						</div>
+					)}
 					<div className={styles.preview}>
 						<div className={styles.whatsapp}>
 							<div className={styles.overflow_div}>
@@ -180,10 +188,11 @@ function Templates({
 										variables={variables}
 										customizableData={customizableData}
 										setCustomizableData={setCustomizableData}
-										tags={tags}
+										isShipment={isShipment}
 										setFileValue={setFileValue}
 										fileValue={fileValue}
 										fileName={fileName}
+										shipmentData={shipmentData}
 									/>
 								</div>
 							</div>

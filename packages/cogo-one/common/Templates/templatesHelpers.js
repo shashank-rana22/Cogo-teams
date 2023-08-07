@@ -1,8 +1,10 @@
 import { Placeholder, Pill, Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
+import { useEffect, useCallback } from 'react';
 
 import { STATUS_MAPPING } from '../../constants';
+import { formatRouteData } from '../../utils/routeDataHelpers';
 
 import styles from './styles.module.css';
 import TemplateDocument from './TemplateDocument';
@@ -21,11 +23,22 @@ export function Preview({
 	previewData = '',
 	variables = [],
 	setCustomizableData = () => {},
-	tags = [],
+	isShipment = false,
 	fileValue = {},
 	setFileValue = () => {},
 	fileName = '',
+	shipmentData = {},
+	customizableData = {},
 }) {
+	const { serial_id } = shipmentData || {};
+
+	const {
+		originDisplay = {},
+		destinationDisplay = {},
+		originMainDisplay = {},
+		destinationMainDisplay = {},
+	} = formatRouteData({ item: shipmentData });
+
 	const formattedPreview = PREVIEW_REPLACE_MAPPING.reduce(
 		(accumulator, currentValue) => accumulator?.replaceAll(currentValue?.find, currentValue?.replace),
 		previewData,
@@ -38,11 +51,31 @@ export function Preview({
 		}));
 	};
 
+	const getVariablesDetails = useCallback(() => {
+		variables.map((itm) => (
+			setCustomizableData((prev) => ({
+				...prev,
+				[itm]            : shipmentData?.[itm] || '',
+				origin_port      : originDisplay || originMainDisplay,
+				destination_port : destinationDisplay || destinationMainDisplay,
+				shipment_id      : serial_id,
+			}))
+		));
+	}, [variables,
+		setCustomizableData,
+		shipmentData, originDisplay, originMainDisplay, destinationDisplay, destinationMainDisplay, serial_id]);
+
+	useEffect(() => {
+		if (!isEmpty(shipmentData)) {
+			getVariablesDetails();
+		}
+	}, [getVariablesDetails, shipmentData]);
+
 	return (
 		<>
 			<div dangerouslySetInnerHTML={{ __html: formattedPreview }} />
 			<div className={styles.user_work_scope}>
-				{tags.includes('document') && (
+				{isShipment && (
 					<TemplateDocument
 						setFileValue={setFileValue}
 						fileValue={fileValue}
@@ -56,6 +89,7 @@ export function Preview({
 						<Input
 							className={styles.value_field}
 							size="xs"
+							value={customizableData?.[item]}
 							placeholder="value"
 							onChange={(val) => handleInputChange({ variable: item, value: val })}
 						/>
