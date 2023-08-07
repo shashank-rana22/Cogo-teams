@@ -20,7 +20,7 @@ function UploadModal({
 			<div className={styles.modal_container}>
 				{uploadControls.map((controlItem) => {
 					const el = { ...controlItem };
-					const Element = getElementController(el.component);
+					const Element = getElementController(el.type);
 					if (!Element) return null;
 					return (
 						<div key={el.name} style={el.style} className={styles.control_container}>
@@ -33,6 +33,7 @@ function UploadModal({
 							</span>
 							<Element
 								{...el}
+								{...(el.component && { type: el.component })}
 								size="md"
 								key={el.name}
 								control={control}

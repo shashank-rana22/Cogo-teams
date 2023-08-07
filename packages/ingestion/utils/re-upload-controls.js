@@ -3,19 +3,19 @@ const reUploadControls = [
 	{
 		name        : 're_file_name',
 		label       : 'File Name',
-		component   : 'text',
+		type        : 'text',
 		placeholder : 'File Name',
 		rules       : { required: 'Name is Required' },
 	},
 	{
 		name        : 're_upload',
 		label       : 'Re-Upload your files',
-		component   : 'file',
+		type        : 'file',
 		placeholder : 'Upload Corrected CSV',
 		rules       : { required: 'File is Required' },
 		uploadType  : 'aws',
 		accept      : '.csv',
-		type        : 'card',
+		component   : 'card',
 	},
 
 ];
