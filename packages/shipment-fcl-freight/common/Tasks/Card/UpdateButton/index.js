@@ -49,6 +49,13 @@ function UpdateButton({
 
 	let disableTask = DISABLE_TASK_FOR_STAKEHOLDERS.includes(task?.assigned_stakeholder);
 
+	if (task?.task === 'upload_bill_of_lading' && task?.status === 'pending') {
+		disableTask = (tasksList || []).some(
+			(item) => ((item?.task === 'approve_draft_bill_of_lading' && item?.status === 'pending')
+			|| (item?.task === 'amend_draft_bill_of_lading' && item?.status === 'pending')),
+		);
+	}
+
 	if (task.task === 'upload_si'
 	&& task.status === 'pending'
 	&& primary_service?.trade_type === 'export') {
@@ -79,7 +86,7 @@ function UpdateButton({
 					entity_type={task?.task}
 					onUpload={handleChange}
 				>
-					<Button className={styles.upload_button}>
+					<Button className={styles.upload_button} disabled={disableTask}>
 						{!show ? buttonText : 'Close'}
 					</Button>
 				</RPASearch>
