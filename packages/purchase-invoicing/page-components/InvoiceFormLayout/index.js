@@ -1,12 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useForm, RadioGroupController } from '@cogoport/forms';
+import { useForm, RadioGroupController, SelectController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useContext, useImperativeHandle, forwardRef, useState } from 'react';
 
 import AccordianView from '../../common/Accordianview';
-import { EMPTY_LINE_ITEMS, INVOICE_TYPE_OPTIONS, INVOICE_TYPE_OPTIONS_CN, OPTIONSCN } from '../../constants';
+import {
+	EMPTY_LINE_ITEMS,
+	INVOICE_TYPE_OPTIONS,
+	INVOICE_TYPE_OPTIONS_CN,
+	OPTIONSCN,
+	URGENCY_TAG_OPTIONS,
+} from '../../constants';
 import useCalculateTotalPrice from '../../helpers/useCalculateTotalPrice';
 import useResetErrors from '../../helpers/useResetErrors';
 import useGetEntities from '../../hooks/useGetEntities';
@@ -180,6 +186,10 @@ function InvoiceFormLayout({
 				/>
 			</div>
 			<div className={styles.formlayout}>
+				<div className={styles.select}>
+					<SelectController name="urgency_tag" control={control} options={URGENCY_TAG_OPTIONS} isClearable />
+				</div>
+
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
 					<div className={`${styles.flex} ${styles.justifiy}`}>
 						<div className={styles.flex}>
