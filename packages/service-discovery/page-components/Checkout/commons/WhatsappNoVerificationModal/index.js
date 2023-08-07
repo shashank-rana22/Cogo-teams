@@ -8,7 +8,7 @@ function WhatsappNoVerificationModal({
 	showWhatsappVerificationModal = false,
 	setShowWhatsappVerificationModal = () => {},
 	handleWhatsappVerification = () => {},
-	refetchUsers,
+	refetchUsers = () => {},
 	source_id = '',
 }) {
 	const handleCloseModal = () => {
