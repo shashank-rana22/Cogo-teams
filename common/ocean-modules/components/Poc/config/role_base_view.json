@@ -52,6 +52,18 @@
         "document_control_lead","document_control_manager"],
         "can_add_service_provider_poc":true
     }, 
+    "document_control_lead":{
+        "trade_parties":["collection_party"],
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party","shipper", "consignee"],
+        "can_edit":["notifying_party","collection_party"],
+        "can_add_service_provider_poc":true
+    },
+    "document_control_manager":{
+        "trade_parties":["collection_party"],
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party","shipper", "consignee"],
+        "can_edit":["notifying_party","collection_party"],
+        "can_add_service_provider_poc":true
+    },
     "booking_agent":{
         "trade_parties":["self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
