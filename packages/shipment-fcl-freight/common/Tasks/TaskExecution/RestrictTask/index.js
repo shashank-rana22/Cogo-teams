@@ -37,7 +37,7 @@ function RestrictTask({
 
 				<div className={styles.text}>{message}</div>
 
-				<Button themeType="primary" size="md" type="button" onClick={handleClose}>
+				<Button themeType="primary" size="md" onClick={handleClose}>
 					Noted
 				</Button>
 			</div>

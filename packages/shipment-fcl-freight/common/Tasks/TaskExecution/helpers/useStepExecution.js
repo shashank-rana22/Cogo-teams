@@ -61,11 +61,11 @@ function useStepExecution({
 
 	useEffect(() => {
 		if (!isUploadAllowed) {
-			const bl_state = getApisData?.getApisData?.list_shipment_documents?.map(
+			const blState = getApisData?.getApisData?.list_shipment_documents?.map(
 				(item) => item?.state,
 			);
 
-			setToastMessage(getBlUploadRestrictMessage({ bl_state }));
+			setToastMessage(getBlUploadRestrictMessage({ blState }));
 
 			setRestrictTask(true);
 		}
