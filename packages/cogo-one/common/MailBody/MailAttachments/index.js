@@ -13,10 +13,6 @@ function MailAttachments({ mediaUrls = [] }) {
 
 	const formatedFiles = formatFileAttributes({ uploadedFiles: mediaUrls });
 
-	const handleDownload = ({ imgUrl = '' }) => {
-		getDownloadFiles({ imgUrl });
-	};
-
 	if (isEmpty(mediaUrls)) {
 		return null;
 	}
@@ -43,7 +39,7 @@ function MailAttachments({ mediaUrls = [] }) {
 
 						<IcMDownload
 							className={styles.download_icon}
-							onClick={() => handleDownload({ imgUrl: file.fileUrl })}
+							onClick={() => getDownloadFiles({ imgUrl: file.fileUrl })}
 						/>
 					</div>
 				),
@@ -52,7 +48,7 @@ function MailAttachments({ mediaUrls = [] }) {
 				activeAttachmentData={activeAttachmentData}
 				setActiveAttachmentData={setActiveAttachmentData}
 				urlType="urlBased"
-				handleDownload={handleDownload}
+				handleDownload={getDownloadFiles}
 			/>
 		</div>
 	);
