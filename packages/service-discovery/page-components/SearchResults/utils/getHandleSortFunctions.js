@@ -36,14 +36,24 @@ export const transitTimeHighToLow = ({ list }) => {
 
 export const detentionFreeLimitLowToHigh = ({ list }) => {
 	const sorted_list = (list || []).sort(
-		(a, b) => a.destination_detention?.free_limit - b.destination_detention?.free_limit,
+		(a, b) => {
+			const destination_detention_a = a.destination_detention || {};
+			const destination_detention_b = b.destination_detention || {};
+
+			return destination_detention_a.free_limit - destination_detention_b.free_limit;
+		},
 	);
 	return sorted_list;
 };
 
 export const detentionFreeLimitHighToLow = ({ list }) => {
 	const sorted_list = (list || []).sort(
-		(a, b) => b.destination_detention?.free_limit - a.destination_detention?.free_limit,
+		(a, b) => {
+			const destination_detention_a = a.destination_detention || {};
+			const destination_detention_b = b.destination_detention || {};
+
+			return destination_detention_b.free_limit - destination_detention_a.free_limit;
+		},
 	);
 	return sorted_list;
 };

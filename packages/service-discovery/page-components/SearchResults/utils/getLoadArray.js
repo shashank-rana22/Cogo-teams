@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const getLoadArray = (search_type, serviceDetails) => {
-	const load = [];
+	const LOAD = [];
 
 	Object.keys(serviceDetails).forEach((serviceId) => {
 		const service = serviceDetails[serviceId];
@@ -11,7 +11,7 @@ const getLoadArray = (search_type, serviceDetails) => {
 				service.service_type === 'fcl_freight'
 				|| service.service_type === 'fcl_freight_local'
 			) {
-				load.push({
+				LOAD.push({
 					cargo_weight_per_container : service.cargo_weight_per_container,
 					commodity                  : service.commodity,
 					container_size             : service.container_size,
@@ -19,14 +19,14 @@ const getLoadArray = (search_type, serviceDetails) => {
 					containers_count           : service.containers_count,
 				});
 			} else if (service.service_type === 'lcl_freight') {
-				load.push({
+				LOAD.push({
 					packages_count : service.packages_count,
 					commodity      : service.commodity,
 					weight         : service.weight,
 					volume         : service.volume,
 				});
 			} else if (service.service_type === 'ftl_freight') {
-				load.push({
+				LOAD.push({
 					volume       : service.volume,
 					weight       : service.weight,
 					packages     : service.packages,
@@ -35,7 +35,7 @@ const getLoadArray = (search_type, serviceDetails) => {
 					trucks_count : service.trucks_count,
 				});
 			} else if (service.service_type === 'ltl_freight') {
-				load.push({
+				LOAD.push({
 					commodity            : service.commodity,
 					cargo_readiness_date : service.cargo_readiness_date,
 					volume               : service.volume,
@@ -48,7 +48,7 @@ const getLoadArray = (search_type, serviceDetails) => {
 					stackability         : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].handling_type,
 				});
 			} else if (service.service_type === 'air_freight') {
-				load.push({
+				LOAD.push({
 					packages             : service?.packages,
 					commodity_details    : service?.commodity_details,
 					commodity            : service.commodity,
@@ -57,7 +57,7 @@ const getLoadArray = (search_type, serviceDetails) => {
 					volume               : service.volume,
 				});
 			} else if (service.service_type === 'trailer_freight') {
-				load.push({
+				LOAD.push({
 					cargo_weight_per_container : service.cargo_weight_per_container,
 					commodity                  : service.commodity,
 					container_size             : service.container_size,
@@ -66,7 +66,7 @@ const getLoadArray = (search_type, serviceDetails) => {
 					trip_type                  : service.trip_type,
 				});
 			} else if (service.service_type === 'haulage_freight') {
-				load.push({
+				LOAD.push({
 					cargo_weight_per_container : service.cargo_weight_per_container,
 					commodity                  : service.commodity,
 					container_size             : service.container_size,
@@ -78,7 +78,7 @@ const getLoadArray = (search_type, serviceDetails) => {
 		}
 	});
 
-	return load;
+	return LOAD;
 };
 
 export default getLoadArray;
