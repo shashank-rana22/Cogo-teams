@@ -32,7 +32,7 @@ function AgentDashboard({ isRolePresent = false }) {
 		loading = false,
 		data = {},
 		getCogoOneDashboard = () => {},
-	} = useGetCogoOneAgentStats({ timeline, selectedDate, id });
+	} = useGetCogoOneAgentStats({ timeline, selectedDate, id, isRolePresent });
 
 	const props = {
 		timeline,

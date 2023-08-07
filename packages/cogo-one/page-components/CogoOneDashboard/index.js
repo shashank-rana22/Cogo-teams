@@ -24,7 +24,7 @@ function CogoOneDashboard() {
 			<div className={styles.prime_container}>
 				{isRolePresent
 					? <AgentDashboard isRolePresent={isRolePresent} />
-					: <AdminDashboard />}
+					: <AdminDashboard isRolePresent={isRolePresent} />}
 			</div>
 		</div>
 	);

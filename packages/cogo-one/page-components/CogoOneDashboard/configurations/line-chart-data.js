@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { format } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 const FORMAT_TYPE = {
 	day: {
@@ -15,10 +15,16 @@ const FORMAT_TYPE = {
 
 const chartData = ({ graph = {}, timeline }) => {
 	function getDateValue(date) {
-		return format(date, FORMAT_TYPE[timeline]?.label);
+		return formatDate({
+			date,
+			dateFormat : timeline !== 'day' ? FORMAT_TYPE[timeline]?.label : null,
+			timeFormat : timeline === 'day' ? FORMAT_TYPE[timeline]?.label : null,
+			formatType : timeline === 'day' ? 'time' : 'date',
+			separator  : '/',
+		});
 	}
 
-	const X_AXIS_LABEL_MAPPING = ({ start, end, index }) => ({
+	const axisLabelMapping = ({ start, end, index }) => ({
 		day   : `${getDateValue(start)}-${getDateValue(end)}`,
 		week  : GLOBAL_CONSTANTS.days[index],
 		month : `${getDateValue(start)}-${getDateValue(end)}`,
@@ -28,7 +34,7 @@ const chartData = ({ graph = {}, timeline }) => {
 		const [start, end] = JSON.parse(key);
 
 		return {
-			x : X_AXIS_LABEL_MAPPING({ start, end, index })[timeline],
+			x : axisLabelMapping({ start, end, index })[timeline],
 			y : graph[key]?.msg_customers,
 		};
 	});
@@ -37,7 +43,7 @@ const chartData = ({ graph = {}, timeline }) => {
 		const [start, end] = JSON.parse(key);
 
 		return {
-			x : X_AXIS_LABEL_MAPPING({ start, end, index })[timeline],
+			x : axisLabelMapping({ start, end, index })[timeline],
 			y : graph[key]?.call_customers,
 		};
 	});

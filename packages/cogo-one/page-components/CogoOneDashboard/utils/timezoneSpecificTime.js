@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
 
 const formatDateTime = ({ date, dateformat }) => {
@@ -5,7 +6,7 @@ const formatDateTime = ({ date, dateformat }) => {
 
 	const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-	const userFormattedDateTime = currentDate.toLocaleString('en-US', {
+	const userFormattedDateTime = currentDate.toLocaleString(GLOBAL_CONSTANTS.currency_locale.USD, {
 		timeZone: userTimezone,
 	});
 
