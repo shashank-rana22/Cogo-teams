@@ -2,6 +2,7 @@ import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import getDownloadFiles from '../../../utils/getDownloadFiles';
 import { formatFileAttributes } from '../../../utils/getFileAttributes';
 import ViewAttachmentsModal from '../../ViewAttachmentsModal';
 
@@ -11,6 +12,10 @@ function MailAttachments({ mediaUrls = [] }) {
 	const [activeAttachmentData, setActiveAttachmentData] = useState({});
 
 	const formatedFiles = formatFileAttributes({ uploadedFiles: mediaUrls });
+
+	const handleDownload = ({ imgUrl = '' }) => {
+		getDownloadFiles({ imgUrl });
+	};
 
 	if (isEmpty(mediaUrls)) {
 		return null;
@@ -37,6 +42,7 @@ function MailAttachments({ mediaUrls = [] }) {
 
 					<IcMDownload
 						className={styles.download_icon}
+						onClick={() => handleDownload({ imgUrl: file.fileUrl })}
 					/>
 				</div>
 			))}
@@ -44,6 +50,7 @@ function MailAttachments({ mediaUrls = [] }) {
 				activeAttachmentData={activeAttachmentData}
 				setActiveAttachmentData={setActiveAttachmentData}
 				urlType="urlBased"
+				handleDownload={handleDownload}
 			/>
 		</div>
 	);

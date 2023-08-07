@@ -21,7 +21,7 @@ function RenderTitle({ item = '', handleDownload = () => {} }) {
 			<div>{decodeURI(item?.fileName)}</div>
 
 			<IcMDownload
-				onClick={() => handleDownload(item)}
+				onClick={() => handleDownload({ imgUrl: item?.fileUrl })}
 				className={styles.download_icon}
 			/>
 		</div>
