@@ -114,7 +114,7 @@ function CogoOne() {
 
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
 
-	const { user_id = '' } = tabData || {};
+	const { user_id = '', lead_user_id = '' } = tabData || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
 	const orgId = activeTab?.tab === 'message'
@@ -205,7 +205,7 @@ function CogoOne() {
 
 							{activeTab?.tab !== 'mail' && (
 								<div className={cl`${styles.user_profile_layout} 
-								${(hasNoFireBaseRoom && !user_id) ? styles.disable_user_profile : ''}`}
+								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}`}
 								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
@@ -224,7 +224,8 @@ function CogoOne() {
 										orgId={orgId}
 										mailProps={mailProps}
 									/>
-									{(hasNoFireBaseRoom && !user_id) && <div className={styles.overlay_div} />}
+									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
+									&& <div className={styles.overlay_div} />}
 								</div>
 							)}
 						</>
