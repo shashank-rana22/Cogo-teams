@@ -3,12 +3,12 @@ import countries from '../../../../../.data-store/constants/countries.json';
 
 import sort from './sortTabel';
 
-const previousCurriencies = [];
-const optionsAll = [];
+const PREV = [];
+const OPTIONS = [];
 (countries || []).forEach((country) => {
-	if (country.currency_code && !previousCurriencies.includes(country.currency_code)) {
-		previousCurriencies.push(country.currency_code);
-		optionsAll.push({
+	if (country.currency_code && !PREV.includes(country.currency_code)) {
+		PREV.push(country.currency_code);
+		OPTIONS.push({
 			label : country.currency_code,
 			value : country.currency_code,
 			key   : country.currency_code,
@@ -16,8 +16,8 @@ const optionsAll = [];
 	}
 });
 const prefferdCurrencies = ['INR', 'USD', 'GBP', 'EUR'];
-const prefferedOptons = optionsAll.filter((option) => prefferdCurrencies.includes(option.key));
-const restOptionsList = optionsAll.filter((option) => !prefferdCurrencies.includes(option.key));
+const prefferedOptons = OPTIONS.filter((option) => prefferdCurrencies.includes(option.key));
+const restOptionsList = OPTIONS.filter((option) => !prefferdCurrencies.includes(option.key));
 const restOptions = sort(restOptionsList, { key: 'label' });
 const options = [...prefferedOptons, ...restOptions];
 export default options;
