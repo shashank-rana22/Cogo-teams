@@ -3,10 +3,9 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { TIMELINE_FILTER_OPTIOINS } from '../../../../../../configurations/agent-wise-feedback-mapping';
+import useGetCogoOneAgentStats from '../../../../../../hooks/useGetOmniChannelStats';
 import useListAgentCheckout from '../../../../../../hooks/useListAgentCheckout';
 import useListAssignedChats from '../../../../../../hooks/useListAssignedChats';
-import useListCallDetails from '../../../../../../hooks/useListCallDetails';
-import useListQuotationCheckouts from '../../../../../../hooks/useListQuotationCheckouts';
 
 import AgentActivityGraph from './AgentActivitiesGraph';
 import Stats from './Stats';
@@ -20,13 +19,14 @@ function AgentStats({ showDetails = false, name = '' }) {
 		shipmentData = {},
 	} = useListAgentCheckout({ value, showDetails });
 
-	const { quotationData = {} } = useListQuotationCheckouts();
-
 	const { statsData = {}, statsLoading = false } = useListAssignedChats({ value });
+	const { data = {}, loading = false } = useGetCogoOneAgentStats({ value });
 
-	const { callLoading = false, callData = {} } = useListCallDetails({ value });
+	const { calls = [] } = data || {};
+	const { sales_dashboard_stats = {} } = shipmentData || {};
+	const { booked = 0, total_sent = 0, expired = 0 } = sales_dashboard_stats || {};
 
-	const { total_count: bookingCount = 0 } = shipmentData || {};
+	const totalQuotationSend = total_sent + booked + expired;
 
 	return (
 		<div className={styles.section}>
@@ -44,10 +44,10 @@ function AgentStats({ showDetails = false, name = '' }) {
 			<div className={styles.stats_content}>
 				<div className={styles.stats_count_container}>
 					<Stats
-						bookingCount={bookingCount}
+						totalQuotationSend={totalQuotationSend}
+						booked={booked}
 						statsData={statsData}
-						callData={callData}
-						quotationData={quotationData}
+						calls={calls}
 					/>
 				</div>
 				<div className={styles.graph_container}>
@@ -63,9 +63,9 @@ function AgentStats({ showDetails = false, name = '' }) {
 						/>
 					</div>
 					<AgentActivityGraph
-						loading={shiplentLoading || callLoading || statsLoading}
-						bookingCount={bookingCount}
-						callData={callData}
+						loading={shiplentLoading || loading || statsLoading}
+						bookingCount={booked}
+						callData={calls}
 						statsData={statsData}
 					/>
 				</div>

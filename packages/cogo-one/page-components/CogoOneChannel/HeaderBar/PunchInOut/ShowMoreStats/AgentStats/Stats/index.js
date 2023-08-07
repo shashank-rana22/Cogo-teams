@@ -12,28 +12,34 @@ import styles from './styles.module.css';
 
 const MIN_COUNT = 0;
 
-const getCallCountByType = ({ list, callType }) => list.filter((call) => call?.call_type === callType).length;
-
 function Stats({
-	bookingCount = 0,
+	totalQuotationSend = 0,
 	statsData = {},
-	callData = {},
-	quotationData = {},
+	booked = 0,
+	calls = [],
 }) {
 	const { chat_stats = {} } = statsData || {};
 	const { active = 0 } = chat_stats || {};
-	const { list = [] } = callData || {};
-	const { total_count: quotationCount = 0 } = quotationData || {};
+
+	const {
+		incoming_answered = 0,
+		incoming_missed = 0,
+		outgoing_answered = 0,
+		outgoing_missed = 0,
+	} = calls[GLOBAL_CONSTANTS.zeroth_index] || [];
+
+	const totalCallMade = outgoing_answered + outgoing_missed;
+	const totalCallReceive = incoming_answered + incoming_missed;
 
 	const FEEDBACK_COUNT_MAPPING = {
-		no_of_bookings       : bookingCount,
-		no_of_quotation_send : quotationCount,
+		no_of_bookings       : booked,
+		no_of_quotation_send : totalQuotationSend,
 	};
 
 	const STATS_COUNT_MAPPING = {
 		chats_assigned : active,
-		calls_made     : getCallCountByType({ list, callType: 'outgoing' }),
-		calls_received : getCallCountByType({ list, callType: 'incoming' }),
+		calls_made     : totalCallMade,
+		calls_received : totalCallReceive,
 	};
 
 	return (
