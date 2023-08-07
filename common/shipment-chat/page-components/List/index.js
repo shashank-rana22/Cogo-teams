@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 
 import useGetChannel from '../../hooks/useGetChannel';
 import useGetShipmentChatList from '../../hooks/useGetShipmentChatList';

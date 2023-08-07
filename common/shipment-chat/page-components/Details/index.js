@@ -3,7 +3,7 @@ import FileUploader from '@cogoport/forms/page-components/Business/FileUploader'
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSend, IcMAttach, IcMDocument } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import useCreateMessage from '../../hooks/useCreateMessage';
 import useFireBase from '../../hooks/useFireBase';
@@ -223,13 +223,10 @@ function Details({
 								value={textContent}
 								onKeyDown={(e) => handleClick(e)}
 								rows={rows}
-								onChange={(val) => {
-									if (textContent === '' && val === '\n') {
-										reset();
-									} else {
-										setTextContent(val);
-									}
-								}}
+								onChange={(val) => (
+									textContent === '' && val === '\n'
+										? reset() : setTextContent(val)
+								)}
 							/>
 
 							<Button

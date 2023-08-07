@@ -7,7 +7,7 @@ import useUpdateMessage from '../../../hooks/useUpdateMessage';
 import MessageContent from './MessageContent';
 import styles from './styles.module.css';
 
-function MessageContainer({ msgContent, loadingChannel, showImpMsg }) {
+function MessageContainer({ msgContent = {}, loadingChannel = false, showImpMsg = false }) {
 	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 	const { onUpdateMessage } = useUpdateMessage();
 	const containerRef = useRef(null);
@@ -53,11 +53,10 @@ function MessageContainer({ msgContent, loadingChannel, showImpMsg }) {
 					<Loader />
 				</div>
 			) : (
-			// Todo connect with fire base and set the key for message content by checking totalMessages data
 				<>
 					{(totalMessages || []).map((msg) => (
 						<MessageContent
-							key={msg.mainKey}
+							key={msg?.mainKey}
 							msg={msg}
 							user_id={user_id}
 							handleClick={handleClick}

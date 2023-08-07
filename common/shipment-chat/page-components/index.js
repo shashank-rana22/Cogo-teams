@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import useSeen from '../hooks/useSeen';
 
