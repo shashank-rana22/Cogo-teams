@@ -1,33 +1,42 @@
 import { Input, Popover } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
-import { IcMArrowRotateUp, IcMArrowRotateDown, IcMCross, IcMSearchdark } from '@cogoport/icons-react';
+import {
+	IcMArrowRotateUp,
+	IcMArrowRotateDown,
+	IcMCross,
+	IcMSearchdark,
+} from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces';
-import { SORTBY_OPTION, getSearchOptionsLabels } from '../../../constants/index';
+import {
+	SORTBY_OPTION,
+	getSearchOptionsLabels,
+} from '../../../constants/index';
 
+import CallPriorityModal from './CallPriorityModal';
 import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
 
 interface OrderBy {
-	key: string
-	order: string,
-	label: string
+	key: string;
+	order: string;
+	label: string;
 }
 
 interface OutstandingFilterProps {
-	handleChange: (p:string) => void,
-	handleInputReset: () => void,
-	setOrderBy: Function,
-	orderBy: OrderBy,
+	handleChange: (p: string) => void;
+	handleInputReset: () => void;
+	setOrderBy: Function;
+	orderBy: OrderBy;
 	setParams: (p: object) => void;
-	params: GenericObject,
-	formFilters: GenericObject,
+	params: GenericObject;
+	formFilters: GenericObject;
 	setFormFilters: (p: object) => void;
 	clearFilter: () => void;
-	queryKey: string,
-	setQueryKey: (p:string) => void,
-	entityCode
+	queryKey: string;
+	setQueryKey: (p: string) => void;
+	entityCode;
 	refetch: (p?: object) => void;
 }
 
@@ -47,7 +56,7 @@ function Filters({
 	refetch = () => {},
 }: OutstandingFilterProps) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
-
+	const [showCallPriority, setShowCallPriority] = useState(false);
 	const [showSearchPopover, setShowSearchPopover] = useState(false);
 
 	const sortStyleAsc = orderBy.order === 'Asc' ? '#303B67' : '#BDBDBD';
@@ -85,12 +94,21 @@ function Filters({
 													order : 'Desc',
 													label : item.label,
 												});
-												setShowSortPopover(!showSortPopover);
-												setParams({ ...params, page: 1 });
+												setShowSortPopover(
+													!showSortPopover,
+												);
+												setParams({
+													...params,
+													page: 1,
+												});
 											}}
 											role="presentation"
 										>
-											<div className={styles.tile_heading}>{item.label}</div>
+											<div
+												className={styles.tile_heading}
+											>
+												{item.label}
+											</div>
 										</div>
 									))}
 								</div>
@@ -107,14 +125,15 @@ function Filters({
 									{orderBy.label}
 									{' '}
 									<div className={styles.sort_icon_style}>
-										{showSortPopover
-											? <IcMArrowRotateUp />
-											: <IcMArrowRotateDown />}
+										{showSortPopover ? (
+											<IcMArrowRotateUp />
+										) : (
+											<IcMArrowRotateDown />
+										)}
 									</div>
 								</div>
 							</div>
 						</Popover>
-
 					</div>
 					<div
 						role="presentation"
@@ -141,30 +160,61 @@ function Filters({
 					/>
 				</div>
 				<div className={styles.flex_wrap}>
+					<div className={styles.call}>
+						<div
+							style={{ display: 'flex', cursor: 'pointer' }}
+							onClick={() => setShowCallPriority(true)}
+							role="presentation"
+						>
+							<div className={styles.calllabel}>
+								Yash Bootwala TMT Machinery, inc.
+							</div>
+							<div className={styles.callpriority}>
+								Call Priority
+							</div>
+						</div>
+					</div>
 					<div className={styles.sort_container}>
 						<Popover
 							placement="bottom"
 							render={(
 								<div className={styles.styled_row}>
-									{getSearchOptionsLabels(entityCode)?.map((item) => {
-										if (!item.label) {
-											return null;
-										}
-										return (
-											<div
-												key={item.value}
-												className={styles.styled_col}
-												onClick={() => {
-													setQueryKey(item?.value || 'q');
-													setShowSearchPopover(!showSearchPopover);
-													setParams((prev) => ({ ...prev, page: 1 }));
-												}}
-												role="presentation"
-											>
-												<div className={styles.tile_heading}>{item.label}</div>
-											</div>
-										);
-									})}
+									{getSearchOptionsLabels(entityCode)?.map(
+										(item) => {
+											if (!item.label) {
+												return null;
+											}
+											return (
+												<div
+													key={item.value}
+													className={
+														styles.styled_col
+													}
+													onClick={() => {
+														setQueryKey(
+															item?.value || 'q',
+														);
+														setShowSearchPopover(
+															!showSearchPopover,
+														);
+														setParams((prev) => ({
+															...prev,
+															page: 1,
+														}));
+													}}
+													role="presentation"
+												>
+													<div
+														className={
+															styles.tile_heading
+														}
+													>
+														{item.label}
+													</div>
+												</div>
+											);
+										},
+									)}
 								</div>
 							)}
 						>
@@ -194,15 +244,18 @@ function Filters({
 									className={styles.icon_style}
 								/>
 							)}
-							prefix={(
-								<IcMSearchdark />
-							)}
+							prefix={<IcMSearchdark />}
 							className={styles.styled_input}
 						/>
 					</div>
-
 				</div>
 			</div>
+			{showCallPriority ? (
+				<CallPriorityModal
+					showCallPriority={showCallPriority}
+					setShowCallPriority={setShowCallPriority}
+				/>
+			) : null}
 		</div>
 	);
 }
