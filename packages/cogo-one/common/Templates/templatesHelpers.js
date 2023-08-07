@@ -23,12 +23,13 @@ export function Preview({
 	previewData = '',
 	variables = [],
 	setCustomizableData = () => {},
-	isShipment = false,
+	tags = [],
 	fileValue = {},
 	setFileValue = () => {},
 	fileName = '',
 	shipmentData = {},
 	customizableData = {},
+	orgId = '',
 }) {
 	const { serial_id } = shipmentData || {};
 
@@ -75,7 +76,7 @@ export function Preview({
 		<>
 			<div dangerouslySetInnerHTML={{ __html: formattedPreview }} />
 			<div className={styles.user_work_scope}>
-				{isShipment && (
+				{tags.includes('document') && orgId && (
 					<TemplateDocument
 						setFileValue={setFileValue}
 						fileValue={fileValue}

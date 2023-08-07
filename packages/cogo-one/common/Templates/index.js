@@ -49,7 +49,8 @@ function Templates({
 	);
 
 	const isDefaultOpen = DEFAULT_OPTIONS.includes(type);
-	const isShipment = tags.includes('shipment') && orgId;
+	// const isShipment = tags.includes('shipment') && orgId;
+	// const
 
 	const maskedMobileNumber = `${dialNumber?.country_code}
 	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
@@ -81,7 +82,7 @@ function Templates({
 			tags          : ['update_time'],
 			variables     : {
 				...customizableData,
-				document: isShipment ? documentDetails : undefined,
+				document: tags.includes('document') ? documentDetails : undefined,
 			},
 		});
 	};
@@ -158,7 +159,7 @@ function Templates({
 
 			{activeCard?.show && !openCreateReply && (
 				<div className={styles.create_container}>
-					{isShipment && (
+					{tags.includes('shipment') && orgId && (
 						<div className={styles.select_section}>
 							<AsyncSelect
 								asyncKey="list_shipments"
@@ -188,11 +189,12 @@ function Templates({
 										variables={variables}
 										customizableData={customizableData}
 										setCustomizableData={setCustomizableData}
-										isShipment={isShipment}
+										tags={tags}
 										setFileValue={setFileValue}
 										fileValue={fileValue}
 										fileName={fileName}
 										shipmentData={shipmentData}
+										orgId={orgId}
 									/>
 								</div>
 							</div>
