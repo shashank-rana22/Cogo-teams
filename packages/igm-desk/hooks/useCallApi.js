@@ -11,13 +11,9 @@ export default function useCallApi({
 	const debounceQuery = useRef({ q: filters?.q });
 	const { authParams = '', selected_agent_id = '' } = useSelector(({ profile }) => profile) || {};
 
+	const [, scope, view_type] = (authParams || '').split(':');
+
 	useEffect(() => {
-		const [, scope, view_type] = (authParams || '').split(':');
-
-		if (!scope) { return; }
-
-		const newScopeFilters = { scope, view_type, selected_agent_id };
-
 		if (debounceQuery.current.q !== filters?.q) {
 			clearTimeout(debounceQuery.current.timerId);
 
@@ -31,9 +27,9 @@ export default function useCallApi({
 			'igm_desk_stored_values',
 			JSON.stringify({
 				filters,
-				scopeFilters: newScopeFilters,
+				scopeFilters: { scope, view_type, selected_agent_id },
 				tabState,
 			}),
 		);
-	}, [listShipments, tabState, filters, authParams, selected_agent_id]);
+	}, [listShipments, tabState, filters, authParams, selected_agent_id, scope, view_type]);
 }
