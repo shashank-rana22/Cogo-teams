@@ -32,15 +32,12 @@ export const useStakeholderCheck = () => {
 		{ role_ids: geo.uuid.centralised_customer_support, stakeholder: 'booking_agent' },
 		{
 			role_ids: [geo.uuid.coe_finance_head,
-				geo.uuid.super_admin_id,
-				geo.uuid.admin_id,
 				geo.uuid.prod_settlement_executive, ...geo.uuid.service_ops3_role_ids],
 			stakeholder: 'credit_control',
 		},
 		{
-			role_ids: [geo.uuid.admin_id, geo.uuid.corporate_owner_finance_id,
-				geo.uuid.corporate_owner_id],
-			stakeholder: 'admin',
+			role_ids    : [geo.uuid.admin_id, geo.uuid.corporate_owner_finance_id],
+			stakeholder : 'admin',
 		},
 		{
 			role_ids: [geo.uuid.super_admin_id,
