@@ -14,7 +14,7 @@ const getDateString = ({ date }) => formatDate({
 
 const getParams = ({ value }) => ({
 	duration_type : value,
-	start_date    : getDateString({ date: DATE_FILTER_MAPPING?.[value](new Date()) }),
+	start_date    : getDateString({ date: DATE_FILTER_MAPPING[value]?.(new Date()) }),
 	end_date      : getDateString({ date: new Date() }),
 });
 
