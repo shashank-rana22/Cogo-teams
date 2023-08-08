@@ -73,7 +73,8 @@ const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab: 
 		},
 		{ manual: true },
 	);
-	const getOrgDetails = useCallback(async () => {
+
+	const getOrgDetails = useCallback(() => {
 		if (!orgId) {
 			return;
 		}
