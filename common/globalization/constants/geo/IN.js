@@ -93,7 +93,7 @@ export default {
 		cogo_demo_account_shipper_user: '7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
 		cogo_demo_account_shipper_user_branch:
 			'2c72817c-c663-48ea-b8ef-cd92397842a1',
-		business_owner_ids : ['0f9ddc9b-e2d7-4fee-83f6-08fb8bed6d11'],
+		business_owner_ids : ['0f9ddc9b-e2d7-4fee-83f6-08fb8bed6d11', '8ecf37e5-4605-4c4c-9f8f-77183101317'],
 		supply_role_ids    : [
 			'e31c6d7b-e62e-4fd5-a2e1-106e037ac03c',
 			'70710ab2-0f80-4e12-a4f5-d75660c05315',
@@ -237,7 +237,7 @@ export default {
 			'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		],
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
-		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
+		finance_head          : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
 		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
@@ -275,7 +275,9 @@ export default {
 			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
 			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
 		],
-		document_control_lead: 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		corporate_owner_demand   : '14fe1423-3c2d-4f66-bc33-89bed08b92ee',
+		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
 	},
 	options: {
 		registration_types: [

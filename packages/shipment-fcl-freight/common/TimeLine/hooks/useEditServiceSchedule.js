@@ -60,10 +60,8 @@ export default function useEditServiceSchedule({
 		const payloadForUpdateShipment = {
 			ids                 : mainServiceIds,
 			performed_by_org_id : primary_service?.service_provider?.id,
-			data                : ['vessel_arrived'].includes(primary_service?.state)
-				? { schedule_arrival: values?.schedule_arrival }
-				: { ...values },
-			service_type: primary_service?.service_type,
+			data                : values,
+			service_type        : primary_service?.service_type,
 		};
 
 		try {

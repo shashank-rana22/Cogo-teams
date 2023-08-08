@@ -20,7 +20,12 @@ const DATE_OF_BIRTH = 'date_of_birth';
 const DATE_OF_JOINING = 'date_of_joining';
 const EMERGENCY_CONTACT_DETAILS = 'emergency_contact_details';
 const DESIGNATION = 'designation';
-const HIRING_MANAGER = 'hiring_manager';
+const HIRING_MANAGER = 'hiring_manager_id';
+const ATTENDENCE = 'attendance';
+const LEARNING_INDICATOR = 'learning_indicator';
+const PREDICTIVE_INDEX = 'predictive_index';
+const DEPARTMENT = 'department';
+
 const SOURCE = 'save';
 
 const removeTypeField = (controlItem) => {
@@ -32,7 +37,8 @@ const PERSONAL_DETAILS_MAPPING = ['name_title', 'name', 'gender', 'date_of_birth
 	'personal_email', 'mobile_number', 'passport_size_photo_url'];
 
 const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
-	'cogoport_email', 'hiring_manager',
+	'cogoport_email', 'hiring_manager_id', 'attendance', 'learning_indicator', 'predictive_index',
+	'department',
 ];
 
 const ADDITIONAL_DETAILS_MAPPING = ['relation_type',
@@ -102,6 +108,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 
 	const id = content?.detail?.id;
 	const status = content?.detail?.status;
+	const additional_information_id = content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails, SOURCE, status });
 
@@ -109,7 +116,8 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 		const {
 			permanent_city, permanent_state,
 			permanent_country, permanent_pincode, permanent_address, current_address,
-			current_city, current_state, current_country, current_pincode, ...rest
+			current_city, current_state, current_country, current_pincode,
+			attendance, learning_indicator, predictive_index, ...rest
 		} = values || {};
 
 		const permanent_final_address = {
@@ -126,10 +134,19 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 			pincode : current_pincode || '',
 			address : current_address || '',
 		};
+		const additional_information_attributes = [
+			{
+				id                 : additional_information_id,
+				attendance         : attendance || '',
+				learning_indicator : learning_indicator || '',
+				predictive_index,
+			},
+		];
 		const final_params = {
 			...rest,
-			permanent_address : permanent_final_address || {},
-			present_address   : current_final_address || {},
+			permanent_address      : permanent_final_address || {},
+			present_address        : current_final_address || {},
+			additional_information : additional_information_attributes || [],
 		};
 		updateEmployeeDetails({ data: final_params, formType: PERSONAL_INFO });
 	};
@@ -172,6 +189,18 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 				setValue(item.name, startCase(content?.detail?.[item?.name]));
 			} else if (item?.name === HIRING_MANAGER) {
 				setValue(item.name, startCase(content?.detail?.[item?.name]?.userName));
+			} else if (item?.name === ATTENDENCE) {
+				setValue(item.name, (content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]
+					?.attendance));
+			} else if (item?.name === LEARNING_INDICATOR) {
+				setValue(item.name, (content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]
+					?.learning_indicator));
+			} else if (item?.name === PREDICTIVE_INDEX) {
+				setValue(item.name, startCase(content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]
+					?.predictive_index));
+			} else if (item?.name === DEPARTMENT) {
+				setValue(item.name, (content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]
+					?.department));
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}
