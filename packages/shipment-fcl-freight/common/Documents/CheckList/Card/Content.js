@@ -173,7 +173,7 @@ function Content({
 							themeType="link"
 							onClick={() => setPrintDoc(true)}
 						>
-							print
+							Print
 						</Button>
 					)}
 
@@ -204,7 +204,7 @@ function Content({
 							) : null}
 
 					</div>
-				) : GetUploadButton()}
+				) : <GetUploadButton />}
 
 			</div>
 

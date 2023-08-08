@@ -57,7 +57,7 @@ function Read({
 			<section className={styles.section}>
 				<div className={styles.section_one}>
 					<div className={styles.section_one_child_1}>
-						{SectionOneChild(defaultValues)}
+						<SectionOneChild defaultValues={defaultValues} />
 					</div>
 
 					<div className={styles.section_one_child_2}>

@@ -19,9 +19,7 @@ function PrintDocument({ shipment_data = {}, primary_service = {}, show = {}, se
 	) || {};
 
 	const movement_details = fcl_service?.movement_details
-        || fcl_service?.movement_detail
-        || primary_service?.movement_details
-        || primary_service?.movement_detail;
+        || primary_service?.movement_details;
 
 	const templateInitialValues = {
 		port_of_loading   : primary_service?.origin_port?.display_name,
