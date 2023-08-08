@@ -43,7 +43,6 @@ function ColumnCard({ item, refetch, getTableBodyCheckbox }: ColumnCardInterface
 		paymentNumValue = '',
 		amount = '',
 		utr = '',
-		entityType = '',
 		currency = '',
 	} = item || {};
 	const calcBankLength = bankName.length;
@@ -63,8 +62,6 @@ function ColumnCard({ item, refetch, getTableBodyCheckbox }: ColumnCardInterface
 				</div>
 
 				<div className={styles.orgSerialId}>{orgSerialId || '---'}</div>
-
-				<div className={styles.entityType}>{entityType || '---'}</div>
 
 				<div className={styles.accCode}>
 					<div>

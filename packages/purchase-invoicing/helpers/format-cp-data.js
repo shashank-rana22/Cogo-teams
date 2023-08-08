@@ -348,11 +348,13 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			signatureUrl            : serviceProviderOrg?.signature_url,
 		},
 		billAdditional: {
-			shipperId            : invoiceData?.service_provider.id || undefined,
-			shipmentType         : shipment_data?.shipment_type || undefined,
-			noOfContainers       : shipment_data?.containers_count || undefined,
-			collectionPartyId    : partyId || undefined,
-			urgencyTag           : formValues?.urgency_tag || undefined,
+			shipperId         : invoiceData?.service_provider.id || undefined,
+			shipmentType      : shipment_data?.shipment_type || undefined,
+			noOfContainers    : shipment_data?.containers_count || undefined,
+			collectionPartyId : partyId || undefined,
+			urgencyTag        : formValues?.urgency_tag || undefined,
+			advanceBill:
+			formValues?.advance_bill === 'advance_bill' ? 'true' : undefined,
 			exchangeRateDocument : uploadProof || undefined,
 			isDeviationAccepted  : data?.is_deviation_accepted || undefined,
 			serviceProviderType  : 'freight_forwarder',

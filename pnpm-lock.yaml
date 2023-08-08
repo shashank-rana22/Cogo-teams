@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@cogoport/eslint-config': 2.0.8
+      '@cogoport/eslint-config': 2.0.9
       '@cogoport/maps': ^1.0.3
       '@cogoport/stylelint-config': ^1.0.3
       '@sentry/nextjs': ^7.54.0
@@ -32,7 +32,7 @@ importers:
       next: 13.1.6_w4exofnty45araakomg6jes2wu
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
-      '@cogoport/eslint-config': 2.0.8_eslint@8.46.0
+      '@cogoport/eslint-config': 2.0.9_eslint@8.46.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
       eslint: 8.46.0
@@ -1408,6 +1408,7 @@ importers:
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/ocean-modules': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
+      '@cogoport/scope-select': workspace:0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
@@ -1419,6 +1420,7 @@ importers:
       '@cogoport/next': link:../../common/next
       '@cogoport/ocean-modules': link:../../common/ocean-modules
       '@cogoport/request': link:../../common/request
+      '@cogoport/scope-select': link:../../common/scope-select
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       react: 18.2.0
@@ -2212,6 +2214,7 @@ importers:
       file-saver: ^2.0.5
       prop-types: ^15.8.1
       react: 18.2.0
+      react-to-print: ^2.14.13
       uuid: ^9.0.0
     dependencies:
       '@cogoport/components': 1.0.437_v5oquwtmz4b76hdjitkx7a6uj4
@@ -2234,6 +2237,7 @@ importers:
       file-saver: 2.0.5
       prop-types: 15.8.1
       react: 18.2.0
+      react-to-print: 2.14.13_react@18.2.0
       uuid: 9.0.0
 
   packages/shipment-fcl-freight-local:
@@ -4075,8 +4079,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config/2.0.8_eslint@8.46.0:
-    resolution: {integrity: sha512-fuGaByXnd6pfozrB3w4UO15noyC/l3W31HYd/xV8JI6ZFDQffDq6+fl8TSgxN3f8ZQxEZiyofIu6CoxjdoYZOA==}
+  /@cogoport/eslint-config/2.0.9_eslint@8.46.0:
+    resolution: {integrity: sha512-q0SG6KN845IdIAQytFVRmXHDgRG7sT8ndxJhqX2pfaZRyAmp3rEbc1G/W7DNQKmj8c6RxqW8X/vIbib756DerA==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:
@@ -8671,7 +8675,7 @@ packages:
     dependencies:
       eslint-plugin-import: 2.28.0_zx2ldm4646tzugbvbfrlkdfxxm
       glob-parent: 6.0.2
-      resolve: 1.22.2
+      resolve: 1.22.4
     dev: true
 
   /eslint-import-resolver-node/0.3.9:
@@ -8743,7 +8747,7 @@ packages:
       eslint-import-resolver-node: 0.3.9
       eslint-module-utils: 2.8.0_hhfuamxigwac2gxjtxfcppmugi
       has: 1.0.3
-      is-core-module: 2.12.1
+      is-core-module: 2.13.0
       is-glob: 4.0.3
       minimatch: 3.1.2
       object.fromentries: 2.0.6
@@ -11881,6 +11885,15 @@ packages:
       react: 18.2.0
     dev: false
 
+  /react-to-print/2.14.13_react@18.2.0:
+    resolution: {integrity: sha512-PqUGgTRZvkyBzWgaZHVBECWPX2nGEc3HOUy6WNXof6HT4yTFI92wtIkqQtr4jfvHbadqjwTgzgh6vgN8KXlWWw==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
@@ -12020,15 +12033,6 @@ packages:
   /resolve-from/5.0.0:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
     engines: {node: '>=8'}
-
-  /resolve/1.22.2:
-    resolution: {integrity: sha512-Sb+mjNHOULsBv818T40qSPeRiuWLyaGMa5ewydRLFimneixmVy2zdivRl+AF6jaYPC8ERxGDmFSiqui6SfPd+g==}
-    hasBin: true
-    dependencies:
-      is-core-module: 2.12.1
-      path-parse: 1.0.7
-      supports-preserve-symlinks-flag: 1.0.0
-    dev: true
 
   /resolve/1.22.4:
     resolution: {integrity: sha512-PXNdCiPqDqeUou+w1C2eTQbNfxKSuMxqTCuvlmmMsk1NWHL5fRrhY6Pl0qEYYc6+QqGClco1Qj8XnjPego4wfg==}
