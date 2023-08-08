@@ -15,17 +15,13 @@ function Header({
 	setFilters = () => {},
 	refetch = () => {},
 	total_rates_count = 0,
+	loading = false,
 }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.count}>{`${total_rates_count} Results Found for your search`}</div>
 
 			<div className={styles.filters_container}>
-				{/* <Currency
-					filters={filters}
-					setFilters={setFilters}
-					filterKey="currency"
-				/> */}
 
 				<DetentionDemurrage details={details} refetch={refetch} />
 
@@ -33,6 +29,7 @@ function Header({
 					data={details}
 					filters={filters}
 					setFilters={setFilters}
+					loading={loading}
 				/>
 
 				<RefreshRate refetch={refetch} details={details} />

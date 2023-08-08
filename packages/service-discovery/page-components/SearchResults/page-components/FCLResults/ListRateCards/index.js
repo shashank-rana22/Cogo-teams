@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-// import useScrollDirection from '../../../../../common/Header/useScrollDirection';
 import RequestRate from '../../../common/EmptyState/RequestRate';
 import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
@@ -27,8 +26,8 @@ function HeaderTop({
 	setComparisonRates = () => {},
 	setScreen = () => {},
 	refetch = () => {},
+	loading = false,
 }) {
-	// const { scrollDirection } = useScrollDirection();
 	const showComparison = !isEmpty(comparisonRates);
 
 	return (
@@ -39,6 +38,7 @@ function HeaderTop({
 				setFilters={setFilters}
 				total_rates_count={total_rates_count}
 				refetch={refetch}
+				loading={loading}
 			/>
 
 			{showComparison ? (
@@ -141,6 +141,7 @@ function ListRateCards({
 					setScreen={setScreen}
 					refetch={refetchSearch}
 					cogoAssuredRates={cogoAssuredRates}
+					loading={loading}
 				/>
 			</div>
 

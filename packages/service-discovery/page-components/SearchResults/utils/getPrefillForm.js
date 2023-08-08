@@ -23,16 +23,16 @@ const HAULAGE_KEYS = [
 	'cargo_weight_per_container',
 ];
 
-const EXTRA_FILTERS_DEFAULT_VALUES = {
+export const EXTRA_FILTERS_DEFAULT_VALUES = {
 	operator_type        : null,
 	cargo_readiness_date : addDays(new Date(), ONE),
 	source               : null,
 	payment_term         : null,
 	offers               : null,
-	shipping_line        : '',
+	shipping_line_id     : [],
 };
 
-const getExtraFiltersObj = (filtersArray) => {
+const getExtraFiltersObj = (filtersArray = []) => {
 	let resultObj = {};
 
 	(filtersArray || []).forEach((item) => {

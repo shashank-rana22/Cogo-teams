@@ -1,20 +1,21 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 const FEATURES_MAPPING = [
 	{
-		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_213.svg',
+		icon  : GLOBAL_CONSTANTS.image_url.lock_icon,
 		label : '30 Day Price Lock In',
 		text  : 'Free of Market Fluctuation',
 	},
 	{
-		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/calender',
+		icon  : GLOBAL_CONSTANTS.image_url.calender_icon,
 		label : 'Ease of Consumption',
 		text  : 'With Shipment Plan',
 	}, {
-		icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/guarenteed_booking',
+		icon  : GLOBAL_CONSTANTS.image_url.guarenteed_booking_icon,
 		label : 'Guaranteed Booking',
 		text  : 'Planned Procurement',
 	},

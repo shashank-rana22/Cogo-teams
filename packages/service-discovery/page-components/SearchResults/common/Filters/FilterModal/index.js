@@ -1,38 +1,33 @@
-import { Modal, Button, Toast } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import useCreateSearch from '../../../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
-import getPrefillForm from '../../../utils/getPrefillForm';
-import getLocationInfo from '../../../utils/locations-search';
+import { EXTRA_FILTERS_DEFAULT_VALUES } from '../../../utils/getPrefillForm';
 import FilterContent from '../FilterContent';
-import EXTRA_FILTERS from '../FilterContent/extra-filter-controls';
-import getFilterControls, { MAIN_CONTROLS_MAPPING } from '../FilterContent/getControls';
+import getFilterControls from '../FilterContent/getControls';
 
 import styles from './styles.module.css';
 
 const SERVICE_KEY = 'search_type';
 
-const getSeperateObjects = (mainObj, extraArray) => {
-	const filters = extraArray.reduce((arr, key) => ([...arr, ...EXTRA_FILTERS[key].controls]), []);
+const checkIfFiltersChanged = (defaultValues, finalValues) => {
+	let isApplied = false;
 
-	const filterKeys = filters.map((item) => item.name);
-
-	const filterObj = filterKeys.reduce((obj, key) => ({ ...obj, [key]: mainObj[key] }), {});
-	delete filterObj.detention_demurrage;
-
-	const loadObj = { ...mainObj };
-
-	Object.keys(loadObj).forEach((key) => {
-		if (filterKeys.includes(key)) {
-			delete loadObj[key];
+	Object.entries(finalValues).forEach(([key, value]) => {
+		if (key === 'shipping_line_id') {
+			value.forEach((shipping_line) => {
+				if (!defaultValues[key].includes(shipping_line)) {
+					isApplied = true;
+				}
+			});
+		} else if ((value && !defaultValues[key]) || (!value && defaultValues[key])
+		|| (value && value !== defaultValues[key])) {
+			isApplied = true;
 		}
 	});
-	delete loadObj.currency;
 
-	return { loadObj, filterObj };
+	return isApplied;
 };
 
 function FilterModal({
@@ -42,20 +37,11 @@ function FilterModal({
 	filters = {},
 	setFilters = () => {},
 	setFiltersApplied = () => {},
-	showLoadControlsOnly = false,
-	showFiltersOnly = false,
+	loading = false,
 }) {
-	const { createSearch, loading } = useCreateSearch();
+	const controls = getFilterControls(data, SERVICE_KEY, false, true);
 
-	const router = useRouter();
-
-	const service_type = data[SERVICE_KEY];
-
-	const controls = getFilterControls(data, SERVICE_KEY, showLoadControlsOnly, showFiltersOnly);
-
-	const extraFiltersKeysArray = MAIN_CONTROLS_MAPPING[service_type].extraControls;
-
-	const defaultValues = { ...getPrefillForm(data, SERVICE_KEY, extraFiltersKeysArray), ...filters };
+	const defaultValues = { ...EXTRA_FILTERS_DEFAULT_VALUES, ...filters };
 
 	const {
 		control,
@@ -65,49 +51,19 @@ function FilterModal({
 		setValue,
 	} = useForm({ defaultValues });
 
-	const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
-
-	const requiredParams = {
-		organization_id        : data?.importer_exporter_id,
-		organization_branch_id : data?.importer_exporter_branch_id,
-		user_id                : data?.user_id,
-		origin,
-		destination,
-	};
-
-	const handleApply = async (finalValues) => {
+	const handleApply = async (values) => {
 		if (!isEmpty(errors)) {
 			return;
 		}
 
-		const hasChanges = JSON.stringify(finalValues) !== JSON.stringify(defaultValues);
+		const finalValues = { ...values };
 
-		if (!hasChanges) {
-			Toast.info('No Changes Found');
-			return;
-		}
+		delete finalValues.container;
 
-		const { filterObj, loadObj: finalLoadObj = {} } = getSeperateObjects(finalValues, extraFiltersKeysArray);
-		const { loadObj: initialLoadObj = {} } = getSeperateObjects(defaultValues, extraFiltersKeysArray);
+		const isChanged = checkIfFiltersChanged(EXTRA_FILTERS_DEFAULT_VALUES, finalValues);
 
-		const hasLoadChanged = JSON.stringify(finalLoadObj) !== JSON.stringify(initialLoadObj);
-
-		if (hasLoadChanged) {
-			const spot_search_id = await createSearch({
-				action : 'edit',
-				values : { service_type, ...requiredParams, formValues: finalValues },
-			});
-
-			if (spot_search_id && typeof spot_search_id === 'string') {
-				router.push(
-					'/book/[spot_search_id]',
-					`/book/${spot_search_id}`,
-				);
-			}
-		}
-
-		setFilters({ ...filters, ...filterObj });
-		setFiltersApplied(true);
+		setFilters({ ...filters, ...finalValues });
+		setFiltersApplied(isChanged);
 		setShow(false);
 	};
 

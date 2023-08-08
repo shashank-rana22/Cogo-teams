@@ -37,12 +37,6 @@ const STATIC_COMPARISON_KEY = {
 	default: {},
 };
 
-const toSnakeCase = (str) => str
-	&& str
-		.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-		.map((x) => x.toLowerCase())
-		.join('_');
-
 function flattenArray(arr) {
 	return arr.reduce(
 		(flat, toFlatten) => flat.concat(
@@ -81,7 +75,13 @@ function getAllLineItems(staticLineItems = {}, dynamicLineItems = {}) {
 	return combinedLineItems;
 }
 
-function HandleBookValue({ item, apiLoading, service_type, setSelectedCard, setShowContract }) {
+function HandleBookValue({
+	item = {},
+	apiLoading = false,
+	service_type = '',
+	setSelectedCard = () => {},
+	setShowContract = () => {},
+}) {
 	const service_rates = Object.values(item.service_rates);
 	const primaryServiceRates = service_rates.filter(
 		(service) => service.service_type === service_type,
@@ -246,17 +246,13 @@ function Comparison({
 		const logo = source === 'cogo_assured_rate'
 			? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : shipping_line.logo_url;
 
-		LOGO_MAPPING[toSnakeCase(shipping_line.short_name)] = logo;
+		LOGO_MAPPING[shipping_line.short_name] = logo;
 
-		STATIC_LINE_ITEMS[toSnakeCase(shipping_line.short_name)] = staticLineItems;
-		DYNMAIC_LINE_ITEMS[toSnakeCase(shipping_line.short_name)] = dynamicLineItems;
+		STATIC_LINE_ITEMS[shipping_line.short_name] = staticLineItems;
+		DYNMAIC_LINE_ITEMS[shipping_line.short_name] = dynamicLineItems;
 	});
 
 	const allLineItems = getAllLineItems(STATIC_LINE_ITEMS, DYNMAIC_LINE_ITEMS);
-
-	console.log('STATIC_LINE_ITEMS', STATIC_LINE_ITEMS);
-	console.log('DYNMAIC_LINE_ITEMS', DYNMAIC_LINE_ITEMS);
-	console.log('allLineItems', allLineItems);
 
 	const handleBack = () => setScreen('listRateCard');
 

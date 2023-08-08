@@ -309,8 +309,11 @@ const GLOBAL_CONSTANTS = {
 		ip_empty_state_s2c_png       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ip_empty_icon_s2c',
 		kyc_pending_png:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg',
-		cogo_assured_banner  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_assured_banner',
-		cogo_contract_banner : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogocontract-tag.svg',
+		cogo_assured_banner     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_assured_banner',
+		cogo_contract_banner    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogocontract-tag.svg',
+		lock_icon               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/lock.svg',
+		calender_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/calender',
+		guarenteed_booking_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/guarenteed_booking',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
@@ -430,6 +433,7 @@ const GLOBAL_CONSTANTS = {
 		white_space_characters : /\s/g,
 		gst_number             : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 		otp                    : /[^0-9]/g,
+		hyphen_characters      : /-/g,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,

@@ -1,67 +1,5 @@
-// import airServiceDetails from '@cogo/app-search/configurations/search/air/services/details.json';
-// import airIncotermsMapping from '@cogo/app-search/configurations/search/air/services/mapping.json';
-// import airCustomsDetails from '@cogo/app-search/configurations/search/domestic/air-customs/details.json';
-// import airCustomsMapping from '@cogo/app-search/configurations/search/domestic/air-customs/mapping.json';
-// import airLocalsDetails from '@cogo/app-search/configurations/search/domestic/air-locals/details.json';
-// import airLocalsMapping from '@cogo/app-search/configurations/search/domestic/air-locals/mapping.json';
-// import fclCustomsDetails from '@cogo/app-search/configurations/search/domestic/fcl-customs/details.json';
-// import fclCustomsMapping from '@cogo/app-search/configurations/search/domestic/fcl-customs/mapping.json';
-// import fclLocalsDetails from '@cogo/app-search/configurations/search/domestic/fcl-locals/details.json';
-// import fclLocalsMapping from '@cogo/app-search/configurations/search/domestic/fcl-locals/mapping.json';
-// import lclCustomsDetails from '@cogo/app-search/configurations/search/domestic/lcl-customs/details.json';
-// import lclCustomsMapping from '@cogo/app-search/configurations/search/domestic/lcl-customs/mapping.json';
-// import lclLocalsDetails from '@cogo/app-search/configurations/search/domestic/lcl-locals/details.json';
-// import lclLocalsMapping from '@cogo/app-search/configurations/search/domestic/lcl-locals/mapping.json';
-// import lclServiceDetails from '@cogo/app-search/configurations/search/lcl/services/details.json';
-// import lclIncotermsMapping from '@cogo/app-search/configurations/search/lcl/services/mapping.json';
-
 import fclIncotermsMapping from './FCL/fclIncotermsMapping.json';
 import fclAdditionalServiceControls from './FCL/serviceControls';
-
-function Police() {
-	return (
-		<img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Police.svg"
-			alt="police"
-		/>
-	);
-}
-
-function Hangar() {
-	return (
-		<img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Hangar.svg"
-			alt="hangar"
-		/>
-	);
-}
-
-function Weight() {
-	return (
-		<img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/weight.svg"
-			alt="weight"
-		/>
-	);
-}
-
-function Wave() {
-	return (
-		<img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-wave.svg"
-			alt="wave"
-		/>
-	);
-}
-
-function Circle() {
-	return (
-		<img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-circle.svg"
-			alt="circle"
-		/>
-	);
-}
 
 export const defaultAddedServices = {
 	ltl_freight     : ['ltl_freight'],
@@ -71,17 +9,6 @@ export const defaultAddedServices = {
 	fcl_customs     : ['fcl_customs'],
 	lcl_customs     : ['lcl_customs'],
 	air_customs     : ['air_customs'],
-};
-
-export const defaultIcons = {
-	origin_ftl_freight : Police,
-	trailer_freight    : Hangar,
-	fcl_customs        : Police,
-	fcl_cfs            : Hangar,
-	vgm                : Weight,
-	igm                : Weight,
-	fumigation         : Wave,
-	dummy              : Circle,
 };
 
 export const nonRemovableServices = [
@@ -104,30 +31,6 @@ export const serviceMappings = ({ service:primaryService, origin_country_id = ''
 			services : fclIncotermsMapping,
 			controls : fclAdditionalServiceControls({ origin_country_id, destination_country_id }),
 		},
-	// lcl_freight: {
-	// 	services : lclServices,
-	// 	controls : lclServicesControls,
-	// },
-	// air_freight: {
-	// 	services : airServices,
-	// 	controls : airServicesControls,
-	// },
-	// ftl_freight: {
-	// 	services : ftlServices,
-	// 	controls : ftlServicesControls,
-	// },
-	// ltl_freight: {
-	// 	services : ltlServices,
-	// 	controls : ltlServicesControls,
-	// },
-	// trailer_freight: {
-	// 	services : trailerServices,
-	// 	controls : trailerServicesControls,
-	// },
-	// fcl_freight_local: {
-	// 	services : ftlLocalServices,
-	// 	controls : ftlLocalServicesControls,
-	// },
 	};
 
 	const configureService = (type) => {

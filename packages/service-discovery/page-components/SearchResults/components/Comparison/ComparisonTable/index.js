@@ -36,7 +36,14 @@ const getFinalLineItems = (lineItems) => {
 	return { finalLineItems, COMPARISON_KEY };
 };
 
-function Table({ staticKeys = {}, dynamicKeys = {}, staticLineItems = {}, dynamicLineitems = {}, LOGO_MAPPING, mode }) {
+function Table({
+	staticKeys = {},
+	dynamicKeys = {},
+	staticLineItems = {},
+	dynamicLineitems = {},
+	LOGO_MAPPING = {},
+	mode = '',
+}) {
 	const itemsKeys = Object.keys({ ...staticLineItems, ...dynamicLineitems });
 
 	const renderTableHeader = () => (
@@ -44,7 +51,7 @@ function Table({ staticKeys = {}, dynamicKeys = {}, staticLineItems = {}, dynami
 			<div className={styles.header_column} />
 
 			{itemsKeys.map((key) => {
-				const columnHeader = key === 'cogo_line' ? 'Cogo Assured' : startCase(key);
+				const columnHeader = key.includes('COGO') ? 'Cogo Assured' : startCase(key);
 				const imageUrl = LOGO_MAPPING[key];
 
 				return (
