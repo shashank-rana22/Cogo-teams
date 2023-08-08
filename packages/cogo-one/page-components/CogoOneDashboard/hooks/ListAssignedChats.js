@@ -1,22 +1,25 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
+import { startOfDay, startOfWeek, startOfMonth } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-const getParams = ({ agentId = '', userId = '' }) => ({
+const DATE_FILTER_MAPPING = {
+	day   : startOfDay,
+	week  : startOfWeek,
+	month : startOfMonth,
+
+};
+
+const getParams = ({ timeline }) => ({
 	chat_stats_required      : true,
 	data_required            : false,
 	pagination_data_required : false,
 	filters                  : {
-		sales_agent_id    : agentId || undefined,
-		sales_agent_rm_id : !agentId ? userId : undefined,
+		created_at_less_than    : new Date(),
+		created_at_greater_than : DATE_FILTER_MAPPING[timeline](new Date()),
 	},
 });
 
-const useListAssignedChats = ({ agentId = '' }) => {
-	const { userId } = useSelector(({ profile }) => ({
-		userId: profile.user.id,
-	}));
-
+const useListAssignedChats = ({ timeline = '' }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_assigned_chats',
 		method : 'get',
@@ -25,12 +28,12 @@ const useListAssignedChats = ({ agentId = '' }) => {
 	const assignChats = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ agentId, userId }),
+				params: getParams({ timeline }),
 			});
 		} catch (error) {
 			console.error(error);
 		}
-	}, [trigger, agentId, userId]);
+	}, [trigger, timeline]);
 
 	useEffect(() => {
 		assignChats();

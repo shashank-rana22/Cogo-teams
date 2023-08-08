@@ -1,5 +1,4 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 import DATE_MAPPING from '../utils/formatPayload';
@@ -10,15 +9,14 @@ const DURATION_TYPE = {
 	month : 'weeks',
 };
 
-const getParams = ({ timeline, startDate, endDate, id, userId, isRolePresent }) => ({
+const getParams = ({ timeline, startDate, endDate, id }) => ({
 	duration_type : DURATION_TYPE[timeline],
 	start_date    : !startDate
 		? new Date(DATE_MAPPING[timeline].startDate) : new Date(startDate),
 	end_date: !endDate
 		? new Date(DATE_MAPPING[timeline].endDate) : new Date(endDate),
 	filters: {
-		sales_agent_id    : isRolePresent ? userId : id,
-		sales_agent_rm_id : !isRolePresent ? userId : undefined,
+		sales_agent_id: id || undefined,
 	},
 });
 
@@ -26,13 +24,8 @@ function useGetCogoOneAgentStats({
 	timeline = '',
 	selectedDate = {},
 	id = '',
-	isRolePresent = false,
 }) {
 	const { startDate = {}, endDate = {} } = selectedDate || {};
-
-	const { userId } = useSelector(({ profile }) => ({
-		userId: profile?.user?.id,
-	}));
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_agent_stats',
@@ -42,12 +35,12 @@ function useGetCogoOneAgentStats({
 	const getCogoOneDashboard = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ timeline, startDate, endDate, id, userId, isRolePresent }),
+				params: getParams({ timeline, startDate, endDate, id }),
 			});
 		} catch (error) {
 			console.error(error, 'err');
 		}
-	}, [timeline, trigger, startDate, endDate, id, userId, isRolePresent]);
+	}, [timeline, trigger, startDate, endDate, id]);
 
 	useEffect(() => {
 		getCogoOneDashboard();

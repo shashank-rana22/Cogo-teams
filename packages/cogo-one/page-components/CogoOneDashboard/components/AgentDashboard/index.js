@@ -90,6 +90,7 @@ function AgentDashboard({ isRolePresent = false }) {
 						<ChatStatistics
 							isAdminView={false}
 							agentId={id}
+							timeline={timeline}
 						/>
 					</div>
 				</div>

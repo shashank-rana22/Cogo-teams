@@ -11,10 +11,8 @@ const MIN_CALL_COUNT = 0;
 
 function MyStats({
 	timeline = '',
-	agentId = '',
 	calls = [],
 	loading: callLoading = false,
-	isRolePresent = false,
 }) {
 	const {
 		outgoing_missed = 0,
@@ -25,9 +23,10 @@ function MyStats({
 
 	const totalCallMade = outgoing_missed + outgoing_answered;
 	const totalCallreceive = incoming_answered + incoming_missed;
-	const { shipmentData = {}, shipmentLoading = false } = useListAgentCheckout({ timeline, agentId, isRolePresent });
+	const { shipmentData = {}, shipmentLoading = false } = useListAgentCheckout({ timeline });
 
-	const { total_count = 0 } = shipmentData || {};
+	const { sales_dashboard_stats = {} } = shipmentData || {};
+	const { booked = 0 } = sales_dashboard_stats || {};
 
 	const loading = shipmentLoading || callLoading;
 
@@ -39,7 +38,7 @@ function MyStats({
 						? <Placeholder width="60px" height="40px" className={styles.placeholder} />
 						: (
 							<div>
-								{getFormattedNumber(total_count) || MIN_CALL_COUNT}
+								{getFormattedNumber(booked) || MIN_CALL_COUNT}
 							</div>
 						)}
 				</div>
