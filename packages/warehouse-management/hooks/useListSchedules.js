@@ -5,6 +5,19 @@ import { useState, useCallback, useEffect } from 'react';
 
 import CONSTANTS from '../constants/constants';
 
+const getParams = (truckStatus) => {
+	let req = { truckOutStatus: false };
+
+	if (truckStatus === 'truck_in') {
+		req = {
+			...req,
+			truckInStatus : false,
+			truckInEta    : '2023-01-27 09:25:26',
+		};
+	}
+	return req;
+};
+
 const useListSchedules = ({
 	activeTab = 'schedules',
 	truckStatus = 'truck_in',
@@ -18,17 +31,13 @@ const useListSchedules = ({
 		{
 			url     : '/air-coe/warehouse-management/warehouse-schedules',
 			method  : 'get',
-			authKey : 'get_air_coe_warehouse_management_schedule',
+			authKey : 'get_air_coe_warehouse_management_warehouse_schedules',
 		},
 		{ manual: true },
 	);
 
 	const listAPI = useCallback(async () => {
-		const PAYLOAD = {
-			truckInEta     : '2023-01-27 09:25:26',
-			truckInStatus  : (truckStatus === 'truck_in'),
-			truckOutStatus : (truckStatus === 'truck_out'),
-		};
+		const PAYLOAD = getParams(truckStatus);
 
 		try {
 			await trigger({
@@ -40,8 +49,7 @@ const useListSchedules = ({
 		} catch (err) {
 			toastApiError(err);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, query, trigger, truckStatus]);
+	}, [query, trigger, truckStatus]);
 
 	useEffect(() => {
 		if (searchValue) {
@@ -69,4 +77,3 @@ const useListSchedules = ({
 };
 
 export default useListSchedules;
-//

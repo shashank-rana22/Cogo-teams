@@ -1,76 +1,89 @@
 import { Button } from '@cogoport/components';
-// import { IcMEdit } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import List from '../../../commons/List';
 import scheduleFields from '../../../configurations/schedule-fields';
 import useListSchedules from '../../../hooks/useListSchedules';
 
+import SIDList from './SIDList';
 import styles from './styles.module.css';
-import TruckInModal from './TruckInModal';
+import TruckStatusUpdateModal from './TruckStatusUpdateModal';
 
 function Schedules({
 	activeTab = 'configure',
 	truckStatus = 'truck_in',
+	setTruckStatus = () => {},
 	searchValue = '',
 }) {
-	const { fields } = scheduleFields;
-	const [truckIn, setTruckIn] = useState(false);
+	const { fields } = scheduleFields(truckStatus);
+	const [showTruckStatusModal, setShowTruckStatusModal] = useState({});
+
+	const {
+		data,
+		loading,
+		page,
+		setPage,
+		listAPI,
+	} = useListSchedules({ activeTab, truckStatus, searchValue });
+
+	const handleStatusChange = ({ singleItem }) => (
+		!isEmpty(showTruckStatusModal)
+		&& singleItem?.warehouseTransferId === showTruckStatusModal?.warehouseTransferId && (
+			<TruckStatusUpdateModal
+				item={singleItem}
+				setShowTruckStatusModal={setShowTruckStatusModal}
+				truckStatus={truckStatus}
+				setTruckStatus={setTruckStatus}
+				listAPI={listAPI}
+			/>
+		)
+	);
 
 	const functions = {
-		handleTruckStatus: (item) => (
+		handleTruckStatus: (singleItem) => (
 			<>
 				{truckStatus === 'truck_in' && (
 					<Button
-						themeType="linkUi"
 						style={{ fontSize: 12 }}
-						onClick={() => {
-							<TruckInModal
-								truckIn={truckIn}
-								setTruckIn={setTruckIn}
-								item={item}
-							/>;
-						}}
+						onClick={() => setShowTruckStatusModal(singleItem)}
 					>
 						Truck-in
 					</Button>
 				)}
 				{truckStatus === 'truck_out' && (
 					<Button
-						themeType="linkUi"
 						style={{ fontSize: 12 }}
-						// onClick={() => { handleOnEdit(singleItem); }}
+						onClick={() => setShowTruckStatusModal(singleItem)}
 					>
 						Truck-out
 					</Button>
 				)}
+				{handleStatusChange({ singleItem })}
 			</>
 		),
 	};
 
-	const { data, loading, page, setPage, total_count } = useListSchedules(activeTab, truckStatus, searchValue);
 	const handlePageChange = (pageVal) => {
 		setPage(pageVal);
 	};
 
 	return (
 		<div className={styles.body_container}>
-			{loading ? <div>nodf</div> : (
-				<div className={styles.details_list}>
-					<List
-						fields={fields}
-						activeTab={activeTab}
-						truckStatus={truckStatus}
-						data={data}
-						loading={loading}
-						total_count={total_count}
-						page={page}
-						setPage={setPage}
-						functions={functions}
-						handlePageChange={handlePageChange}
-					/>
-				</div>
-			)}
+			<div className={styles.details_list}>
+				<List
+					fields={fields}
+					activeTab={activeTab}
+					truckStatus={truckStatus}
+					data={data}
+					loading={loading}
+					page={page}
+					setPage={setPage}
+					functions={functions}
+					handlePageChange={handlePageChange}
+					Child={SIDList}
+				/>
+			</div>
 		</div>
 	);
 }
