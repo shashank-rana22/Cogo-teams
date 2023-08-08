@@ -1,12 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { isEmpty } from '@cogoport/utils';
 
-const getCountryCode = ({ country_id }) => {
-	const countryDetails = getCountryDetails({ country_id });
-
-	return countryDetails.country_code || null;
-};
+import getCountryCode from '../../../../../helpers/getCountryCode';
 
 const isCargoInsuranceApplicable = ({
 	importer_exporter_country_id,

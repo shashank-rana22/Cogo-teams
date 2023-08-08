@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -7,6 +8,7 @@ import AdditionalServices from '../../../../../../common/OtherServices/Additiona
 import CargoInsurance from '../../../../../../common/OtherServices/CargoInsurance';
 import SubsidiaryServices from '../../../../../../common/OtherServices/SubsidiaryServices';
 import ShippingLineModal from '../../../../../../common/ShippingLineModal';
+import getCountryCode from '../../../../../../helpers/getCountryCode';
 import DetentionDemurrage from '../../../../common/D&D';
 import Bundles from '../../../../components/Bundles';
 import useCreateCheckout from '../../../../hooks/useCreateCheckout';
@@ -18,12 +20,19 @@ import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
 
-const isCargoInsuranceThere = (services = {}) => {
+const ifToShowCargoInsurance = ({ services = {}, service_type = '', importer_exporter = {} }) => {
 	const isAlreadyPresent = Object.values(services || {}).find(
 		(item) => item.service_type === 'cargo_insurance',
 	);
 
-	return isAlreadyPresent;
+	const importer_exporter_country_code = getCountryCode({
+		country_id: importer_exporter?.country_id || importer_exporter?.country?.id,
+	});
+
+	const isCountrySupported = (GLOBAL_CONSTANTS.cargo_insurance[importer_exporter_country_code] || [])
+		.includes(service_type);
+
+	return !isAlreadyPresent && isCountrySupported;
 };
 
 function TotalLandedCost({ total_price_discounted = '', total_price_currency = '' }) {
@@ -65,15 +74,21 @@ function SelectedRateCard({
 
 	const { source = 'cogo_assured_rate', shipping_line = {} } = rateCardData;
 
+	const { spot_search_id = '', service_details = {}, service_type = '', importer_exporter } = detail;
+
 	const { handleBook = () => {}, loading: createCheckoutLoading } = useCreateCheckout({
 		rateCardData,
-		spot_search_id: detail?.spot_search_id,
+		spot_search_id,
 	});
 
 	const handleProceedToCheckout = () => {
-		const cargoInsurancePresent = isCargoInsuranceThere(detail?.service_details);
+		const showCargoInsurance = ifToShowCargoInsurance({
+			services: service_details,
+			service_type,
+			importer_exporter,
+		});
 
-		if (!cargoInsurancePresent && cargoModal === 'pending') {
+		if (showCargoInsurance && cargoModal === 'pending') {
 			setCargoModal('progress');
 		} else handleBook();
 	};

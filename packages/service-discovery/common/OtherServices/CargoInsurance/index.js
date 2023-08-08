@@ -1,6 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import getCountryCode from '../../../helpers/getCountryCode';
 import getCombinedServiceDetails from '../AdditionalServices/utils/getCombinedServiceDetails';
 import AccordianView from '../common/AccordianView';
 import DeleteServiceModal from '../common/DeleteServiceModal';
@@ -60,6 +62,14 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 	const { destination_country_id = '', origin_country_id = '' } = primaryServiceDetails || {};
 
 	const onClickDelete = async () => { await handleDelete(); };
+
+	const importer_exporter_country_code = getCountryCode({
+		country_id: importer_exporter?.country_id || importer_exporter?.country?.id,
+	});
+
+	if (!(GLOBAL_CONSTANTS.cargo_insurance[importer_exporter_country_code] || []).includes(primary_service)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>

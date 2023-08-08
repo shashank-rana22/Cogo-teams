@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
@@ -38,7 +39,7 @@ const useCreateCheckout = ({
 		const isCogoVerseMember = userRoleIDs.some((elem) => cogoVerseTeamIDS.includes(elem));
 
 		const params = {
-			id            : query?.search_id || spot_search_id,
+			id            : query?.spot_search_id || spot_search_id,
 			source        : source || null,
 			selected_card : rateCardData?.id,
 			tags:
@@ -66,8 +67,10 @@ const useCreateCheckout = ({
 				}
 				router.push(partnerHref, partnerAs);
 			}
-		} catch (e) {
-			Toast.error(e?.response?.data);
+		} catch (error) {
+			if (error?.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 	};
 
