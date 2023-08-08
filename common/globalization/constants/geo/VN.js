@@ -86,10 +86,7 @@ export default {
 			'568c5939-3721-4444-a0ff-4c0298bc948d',
 		],
 		supply_relation_manager_role_id : '568c5939-3721-4444-a0ff-4c0298bc948d',
-		supplier_relations_head_id      : [
-			'0a623fc0-bd23-4990-b2ec-0115d3f1095b',
-			'c9489b96-44ac-4919-9e21-1f67277d331d',	// Vietnam
-		],
+		supplier_relations_head_id      : 'c9489b96-44ac-4919-9e21-1f67277d331d',	// Vietnam
 
 		prod_process_owner         : 'ae80297f-e30d-45fb-845c-61c302523476',
 		air_prod_process_owner     : '9e6dad55-dc0c-42b4-a7d1-9908204cdca7',
