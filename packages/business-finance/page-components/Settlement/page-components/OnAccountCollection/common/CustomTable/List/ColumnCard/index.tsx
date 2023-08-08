@@ -63,8 +63,6 @@ function ColumnCard({ item, refetch, getTableBodyCheckbox }: ColumnCardInterface
 
 				<div className={styles.orgSerialId}>{orgSerialId || '---'}</div>
 
-				{/* <div className={styles.entityType}>{entityType || '---'}</div> */}
-
 				<div className={styles.accCode}>
 					<div>
 						{calcBankLength >= MAX_BANK_LENGTH ? (
