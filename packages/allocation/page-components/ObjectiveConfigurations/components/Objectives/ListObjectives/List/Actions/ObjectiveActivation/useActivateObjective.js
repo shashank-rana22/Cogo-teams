@@ -29,7 +29,7 @@ const useActivateObjective = (props) => {
 				activate_at            : activation_date,
 				is_email_required      : !!communication_details?.includes('is_email_required'),
 				is_mobile_required     : !!communication_details?.includes('is_mobile_required'),
-				communication_operator : communication_details?.length > MAX_LENGTH
+				communication_operator : communication_details?.length === MAX_LENGTH
 					? communication_operator : undefined,
 			};
 

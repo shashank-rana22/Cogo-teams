@@ -52,7 +52,7 @@ function ObjectiveActivation(props) {
 							className={styles.checkbox_group}
 							name="communication_details"
 							options={[
-								{ name: 'is_mobile_requied', value: 'is_mobile_requied', label: 'Mobile' },
+								{ name: 'is_mobile_required', value: 'is_mobile_required', label: 'Mobile' },
 								{ name: 'is_email_required', value: 'is_email_required', label: 'Email' },
 							]}
 							control={control}
