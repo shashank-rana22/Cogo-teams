@@ -17,17 +17,17 @@
 	font-weight: 600;
 }
 
-.blue_color_stat_number, .gold_color_stat_number {
+.blue_color_stat_number,
+.gold_color_stat_number {
+	padding: 20px 0 10px;
 	font-size: 28px;
 	font-weight: 700;
-	padding: 20px 0 10px;
 }
 
 .sub_text {
-	font-family: 'Poppins';
+	font-size: 12px;
 	font-style: normal;
 	font-weight: 400;
-	font-size: 12px;
 	line-height: 18px;
 }
 
@@ -38,14 +38,15 @@
 	border-radius: 6px;
 }
 
-.blue_color_stat_number{
+.blue_color_stat_number {
 	color: #6fa5ab;
 }
-.gold_color_stat_number{
-	color: #D6B300;
+
+.gold_color_stat_number {
+	color: #d6b300;
 }
 
-.hr_line{
+.hr_line {
 	margin-top: 28px;
-	border: 1px solid #E0E0E0;
+	border: 1px solid #e0e0e0;
 }

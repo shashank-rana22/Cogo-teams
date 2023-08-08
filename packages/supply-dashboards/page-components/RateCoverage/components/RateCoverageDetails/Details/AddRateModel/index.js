@@ -10,7 +10,7 @@ import Layout from '../../../../../RfqEnquiries/Layout';
 import LclFields from '../../../../configurations/lcl-controls';
 import useAddRate from '../../../../hooks/useAddRate';
 
-function AddRateModel({ show, setShow }) {
+function AddRateModel({ show, setShow, line_item_data }) {
 	const serviceProviderOptions = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganization(),
@@ -30,8 +30,7 @@ function AddRateModel({ show, setShow }) {
 		setShow(false);
 	};
 
-	const controls = LclFields();
-
+	const controls = LclFields({ line_item_data });
 	const newControls = controls.map((cont) => {
 		const { name } = cont;
 		let newControl = { ...cont };
@@ -78,18 +77,18 @@ function AddRateModel({ show, setShow }) {
 	});
 
 	const handleData = (values, e) => {
-		// e.preventDefault();
+		e.preventDefault();
 		postApi(values);
 	};
 
-	const onError = (errs, e) => {
-		e.preventDefault();
+	const onError = (errs) => {
+		// e.preventDefault();
 		setErrors({ ...errs });
 	};
 
 	return (
 		<Modal size="lg" show={show} onClose={onClose} placement="center">
-			<Modal.Header title="Add Rate " />
+			<Modal.Header title="Add Rate" />
 			<Modal.Body>
 				<Layout
 					fields={newControls}

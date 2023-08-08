@@ -4,18 +4,27 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
+import useListRateChargeCodes from '../../../../hooks/useGetChargeCodes';
 import useListFreightRateRequest from '../../../../hooks/useListFreightRateRequest';
 import AddRateModel from '../AddRateModel';
 import styles from '../styles.module.css';
 
+const ONE = 1;
+const ZERO = 0;
+const MINUS_ONE = -1;
 function MissingRates({ setIndex, value, filter }) {
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(ONE);
 	const [show, setShow] = useState(false);
 	const { loading, data = {} } = useListFreightRateRequest({ filter, currentPage });
 
-	const { total_count = 0 } = data;
-	const { page_limit = 0 } = data;
+	const { total_count = ZERO } = data;
+	const { page_limit = ZERO } = data;
 	const { list = [] } = data;
+
+	const {
+		data: chargeCodeData,
+		listRateChargeCodes,
+	} = useListRateChargeCodes({ service: `${filter?.service}_charges` });
 
 	const listData = list.map((item) => ({
 		originPort      : (filter.service === 'air_freight') ? item?.origin_airport?.name : item?.origin_port?.name,
@@ -37,9 +46,9 @@ function MissingRates({ setIndex, value, filter }) {
 				accessor : () => (
 					<button
 						className={styles.add_rate}
-						onClick={() => setShow(true)}
+						onClick={() => { setShow(true); listRateChargeCodes(); }}
 					>
-						Add Rate
+						Add Rates
 
 					</button>
 				),
@@ -72,20 +81,20 @@ function MissingRates({ setIndex, value, filter }) {
 
 	return (
 		<>
-			<AddRateModel show={show} setShow={setShow} />
+			<AddRateModel show={show} setShow={setShow} line_item_data={chargeCodeData?.list} />
 			<div className={styles.parent}>
 				<div className={styles.nav}>
 					<div>
 						<div>
 							<ButtonIcon
-								onClick={() => setIndex(-1)}
+								onClick={() => setIndex(MINUS_ONE)}
 								size="md"
 								icon={<IcMArrowBack />}
 								themeType="primary"
 								style={{ backgroundColor: 'inherit' }}
 							/>
 						</div>
-						<div style={{ color: '#828282', fontWeight: '700' }}>{!isNaN(value) ? value : 0}</div>
+						<div style={{ color: '#828282', fontWeight: '700' }}>{!Number.isNaN(value) ? value : ZERO}</div>
 						<div>
 							rates are missing today
 						</div>

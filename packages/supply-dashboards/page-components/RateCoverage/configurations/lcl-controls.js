@@ -4,7 +4,7 @@ import { merge } from '@cogoport/utils';
 
 import lclChildControls from './lcl-child-controls';
 
-const LclFields = () => {
+const LclFields = ({ line_item_data }) => {
 	const countryOptions1 = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country', 'seaport'] } },
 	}));
@@ -88,7 +88,7 @@ const LclFields = () => {
 			span        : 4,
 			rules       : { required: 'This is required' },
 		},
-		lclChildControls({ heading: '', charge_code_name: 'freights_charge_codes' }),
+		lclChildControls({ heading: '', charge_code_name: 'freights_charge_codes', line_item_data }),
 	];
 	return control;
 };

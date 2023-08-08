@@ -42,11 +42,11 @@
 
 .add_rate {
 	width: 100%;
-	color:#034AFD;;
+	color: #034afd;
+	text-decoration: underline;
 	cursor: pointer;
 	background: none;
 	border: 0;
-	text-decoration: underline;
 }
 
 .pagination {
@@ -86,7 +86,7 @@
 	line-height: 150%;
 }
 
-.loader{
-	margin-top: 20px;
+.loader {
 	height: 12vh;
+	margin-top: 20px;
 }
