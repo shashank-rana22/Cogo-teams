@@ -46,7 +46,7 @@ const useSendChat = ({
 	const sendChatMessage = async () => {
 		const newMessage = draftMessages?.[id]?.trim() || '';
 
-		const { fileName, fileUrl, type } = uploadedFile;
+		const { fileName, fileUrl, fileType } = uploadedFile;
 
 		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
 		setDraftUploadedFiles((prev) => ({ ...prev, [id]: undefined }));
@@ -56,8 +56,8 @@ const useSendChat = ({
 		}
 
 		await sendUserMessage({
-			fileType : type,
-			finalUrl : fileUrl,
+			fileType,
+			finalUrl: fileUrl,
 			fileName,
 			formattedData,
 			channelType,

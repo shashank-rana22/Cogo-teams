@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 function PopoverContent({
 	loading = false,
 	filteredOptions = [],
-	prevtags = [],
+	prevTags = [],
 	setIsVisible = () => {},
 	updateChat = () => {},
 }) {
@@ -33,7 +33,7 @@ function PopoverContent({
 					themeType="accent"
 					loading={loading}
 					onClick={() => {
-						updateChat({ tags: [headertags, ...(prevtags || [])] });
+						updateChat({ tags: [headertags, ...(prevTags || [])] });
 						setIsVisible(false);
 					}}
 				>
@@ -45,7 +45,7 @@ function PopoverContent({
 }
 
 function TagsPopOver({
-	prevtags = [],
+	prevTags = [],
 	updateChat = () => {},
 	hasPermissionToEdit = false,
 	tagOptions = [],
@@ -54,7 +54,7 @@ function TagsPopOver({
 	const [isVisible, setIsVisible] = useState(false);
 
 	const filteredOptions = tagOptions.filter(
-		({ value }) => !prevtags?.includes(value),
+		({ value }) => !prevTags?.includes(value),
 	);
 
 	if (isEmpty(filteredOptions) || !hasPermissionToEdit) {
@@ -70,7 +70,7 @@ function TagsPopOver({
 					<PopoverContent
 						loading={loading}
 						filteredOptions={filteredOptions}
-						prevtags={prevtags}
+						prevTags={prevTags}
 						setIsVisible={setIsVisible}
 						updateChat={updateChat}
 					/>
