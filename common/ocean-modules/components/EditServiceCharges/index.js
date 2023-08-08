@@ -3,14 +3,14 @@ import { upperCase } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import useGetServiceChargeCodes from '../../hooks/useGetServiceChargeCodes';
+import { calcWidth } from '../Layout/helpers/getTotalFields';
 
 import EditLineItems from './EditLineItems';
 import styles from './styles.module.css';
 
 function EditServiceCharges(props) {
 	const {
-		controls, service_name = '', customValues = {},
-		shipment_id = '', onOptionsChange = () => {}, value,
+		controls, service_name = '', customValues = {}, onOptionsChange = () => {}, value, shipment_id,
 	} = props || {};
 
 	const [q, setQ] = useState('');
@@ -22,14 +22,14 @@ function EditServiceCharges(props) {
 
 	const chargeCodes = (data?.list || []).map((item) => item.code);
 
-	const miscCharges = value
+	const miscCharges = useMemo(() => value
 		.filter((charge) => !chargeCodes.includes(charge.code))
 		.map((charge) => ({
 			...charge,
 			value : charge.code,
 			label : `${charge.code} ${charge.name || ''}`,
 			name  : charge.name || '',
-		}));
+		})), [chargeCodes, value]);
 
 	const options = (data?.list || [])
 		.filter((item) => item?.code?.includes(q) || item?.name?.includes(q) || (item?.code)?.includes(upperCase(q)))
@@ -46,15 +46,17 @@ function EditServiceCharges(props) {
 		}));
 
 	const finalControls = (controls || []).map((item) => {
+		const newItem = { ...item, flex: calcWidth(item?.span) };
+
 		if (item?.name === 'code') {
 			return {
-				...item,
+				...newItem,
 				options,
 				onSearch: (val) => setQ(val),
 			};
 		}
 
-		return item;
+		return newItem;
 	});
 
 	const allOptions = useMemo(() => [...options, ...miscCharges], [miscCharges, options]);
@@ -80,7 +82,6 @@ function EditServiceCharges(props) {
 			controls={finalControls}
 			customValues={customValues}
 		/>
-
 	);
 }
 

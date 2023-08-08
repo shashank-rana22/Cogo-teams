@@ -22,3 +22,11 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.tabscontainer {
+	:global {
+		.ui_tab_list_container {
+			max-height: 34px;
+		}
+	}
+}

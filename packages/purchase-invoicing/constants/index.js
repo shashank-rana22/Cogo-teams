@@ -129,3 +129,18 @@ export const REMARKS_FOR_CN = [
 		value : 'non_placement_penalty_charges',
 	},
 ];
+
+export const URGENCY_TAG_OPTIONS = [
+	{ label: 'Surrender (Telex) BL Payments', value: 'telex' },
+	{ label: 'BL Amendment Payments', value: 'bl_amnd' },
+	{ label: 'LDC/LBC Payments', value: 'ldc_lbc' },
+	{ label: 'Cancel Charges', value: 'cxl' },
+	{ label: 'Detention Payments', value: 'dtn' },
+	{ label: 'Direct Port Delivery (DPD)', value: 'dpd' },
+	{ label: 'Short Payment', value: 'short_payment' },
+	{ label: 'ODEX', value: 'odex' },
+	{ label: 'Short Transit Shipment', value: 'short_transit_shipment' },
+	{ label: 'Co-ordination Charges', value: 'coordination_charges' },
+	{ label: 'SEZ Shipment', value: 'sez_shipment' },
+	{ label: 'Airlines DO Payments', value: 'air_do' },
+];

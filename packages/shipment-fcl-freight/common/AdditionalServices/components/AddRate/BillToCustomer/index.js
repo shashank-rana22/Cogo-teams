@@ -7,10 +7,9 @@ const REVIEW_SERVICE_OPTIONS = [
 	{ label: 'Bill to Customer', value: 'bill' },
 	{ label: 'Don’t Bill to Customer', value: 'not_bill' },
 ];
-function BillToCustomer({ updateResponse, onCancel, onBillToCustomer }) {
+function BillToCustomer({ updateResponse = {}, onCancel = () => {}, onBillToCustomer = () => {} }) {
 	const [modeOfReview, setModeOfReview] = useState('bill');
 	const { updateBillingInfo } = updateResponse || {};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Review Services</div>

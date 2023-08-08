@@ -188,7 +188,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
-		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail'],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -224,7 +224,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
-		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail'],
+		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
