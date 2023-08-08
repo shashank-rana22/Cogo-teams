@@ -1,6 +1,6 @@
 import { Toggle } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import StyledTable from '../../commons/StyledTable/index.tsx';
 
@@ -11,7 +11,7 @@ import useGetEntityList from './hooks/useGetEntityList';
 import SelectFilters from './SelectFilters';
 import styles from './styles.module.css';
 
-function Treasury() {
+function Treasury({ currentEntity, setActiveEntity }) {
 	const { query } = useRouter();
 
 	const {
@@ -22,7 +22,7 @@ function Treasury() {
 		refetch,
 		entityFilters,
 		setEntityFilters,
-	} = useGetEntityList();
+	} = useGetEntityList({ currentEntity });
 
 	const { list = [] } = entityListData || {};
 
@@ -33,10 +33,21 @@ function Treasury() {
 		window.location.href = `/${query.partner_id}/business-finance/account-payables/treasury-chest`;
 	};
 
+	useEffect(() => {
+		if (currentEntity) {
+			setEntityFilters((prev) => ({ ...prev, activeEntity: currentEntity }));
+		}
+	}, [currentEntity, setEntityFilters]);
+
 	return (
 		<>
 			<div className={styles.header_div}>
-				<Header filters={entityFilters} setFilters={setEntityFilters} />
+				<Header
+					filters={entityFilters}
+					setFilters={setEntityFilters}
+					currentEntity={currentEntity}
+					setActiveEntity={setActiveEntity}
+				/>
 				<Toggle
 					name="toggle"
 					size="md"
