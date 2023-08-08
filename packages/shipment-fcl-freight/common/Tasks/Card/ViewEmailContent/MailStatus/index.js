@@ -16,36 +16,40 @@ const PRIORITY_ARRAY = [
 	'is_seen',
 ];
 
+const NOT_SUCCESS = ['spammed', 'blocked'];
+
 function MailStatus({ list = [] }) {
-	let date = '';
 	const renderTemplate = list[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const STATUS = {};
-	let not_found = true;
 
-	PRIORITY_ARRAY.forEach((item) => {
-		if (renderTemplate[item] && not_found) {
+	PRIORITY_ARRAY.some((item) => {
+		if (renderTemplate[item]) {
 			STATUS.key = item?.split('_')[FIRST_INDEX];
-			date = renderTemplate[`${STATUS.key}_at`];
-			not_found = false;
-			return STATUS;
+			STATUS.date = renderTemplate[`${STATUS.key}_at`];
+			return true;
 		}
-		return undefined;
+		return false;
 	});
 
 	if (isEmpty(STATUS)) {
 		return null;
 	}
+
 	let isSuccess = true;
-	if (STATUS.key === 'spammed' || STATUS.key === 'blocked') {
+
+	if (NOT_SUCCESS.includes(STATUS.key)) {
 		isSuccess = false;
 	}
 
 	return (
-		<div className={styles.container} style={{ color: isSuccess ? '#358856' : '#ff0000' }}>
+		<div
+			className={styles.container}
+			style={{ color: isSuccess ? '--color-tertiary-success-green-1' : '--color-primary-error-red-1' }}
+		>
 			{`This email has been ${STATUS.key} on 
             ${formatDate({
-				date,
+				date       : STATUS?.date,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				timeFormat : geo.formats.time['12hrs'],
 				formatType : 'dateTime',

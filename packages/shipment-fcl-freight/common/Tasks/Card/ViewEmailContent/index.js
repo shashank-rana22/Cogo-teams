@@ -4,10 +4,11 @@ import { isEmpty } from '@cogoport/utils';
 import useListCommunications from '../../../../hooks/useListCommunications';
 
 import MailStatus from './MailStatus';
+import styles from './styles.module.css';
 import TemplateModalContent from './TemplateModalContent';
 
 function ViewEmailContent({ taskId = '', taskName = '', onCancel = () => {}, showEmailModal = false }) {
-	const { loading, list } = useListCommunications({ taskId });
+	const { loading = false, list = [] } = useListCommunications({ taskId });
 
 	return (
 		<Modal
@@ -20,7 +21,7 @@ function ViewEmailContent({ taskId = '', taskName = '', onCancel = () => {}, sho
 
 			<Modal.Body>
 				{loading ? (
-					<div style={{ display: 'flex', justifyContent: 'center' }}>
+					<div className={styles.loading_container}>
 						<Loader />
 					</div>
 				) : (

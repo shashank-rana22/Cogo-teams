@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 const useListCommunications = ({ taskId = '' }) => {
-	const [{ loading, data }, trigger] = useRequest({
+	const [{ loading = false, data }, trigger] = useRequest({
 		url    : 'list_communications',
 		method : 'GET',
 		params : {
@@ -18,22 +18,17 @@ const useListCommunications = ({ taskId = '' }) => {
 		},
 	}, { manual: false });
 
-	const listCommunications = useCallback(
-		() => {
-			(async () => {
-				try {
-					await trigger();
-				} catch (err) {
-					toastApiError(err);
-				}
-			})();
-		},
-		[trigger],
-	);
+	const getListCommunications = useCallback(async () => {
+		try {
+			await trigger();
+		} catch (err) {
+			toastApiError(err);
+		}
+	}, [trigger]);
 
 	useEffect(() => {
-		listCommunications();
-	}, [listCommunications]);
+		getListCommunications();
+	}, [getListCommunications]);
 
 	return {
 		list: data?.list,

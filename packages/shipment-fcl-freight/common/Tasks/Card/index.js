@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -19,10 +20,6 @@ function Card({
 		handleClick(task, newMails);
 	};
 
-	const handleEmail = () => {
-		setShowEmailModal(true);
-	};
-
 	return (
 		<div className={styles.container}>
 
@@ -36,9 +33,9 @@ function Card({
 						task={task}
 						handleClick={handleClick}
 						handleChange={handleChange}
-						handleEmail={handleEmail}
+						handleEmail={() => setShowEmailModal(true)}
 						hideButton={(task?.status === 'completed' && task?.assigned_stakeholder !== 'system')
-							|| (selectedTaskId?.length)}
+							|| (!isEmpty(selectedTaskId))}
 						tasksList={tasksList}
 					/>
 				)}
