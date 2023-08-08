@@ -16,17 +16,18 @@ const formatData = ({
 	partnerId = '',
 }) => {
 	const { data: orgDetails = {} } = data || {};
-	const { tags = [], twin_partner = {}, account_type = '' } = orgDetails || {};
+	const { tags = [], twin_partner = {} } = orgDetails || {};
 
 	const isChannelPartner = loading ? false : tags?.includes('partner') || false;
 
-	const isTwinIE = account_type === 'importer_exporter';
-
-	const userPartnerId = twin_partner?.id;
+	const {
+		id: userPartnerId = '',
+		twin_importer_exporter_id = '',
+	} = twin_partner || {};
 
 	const ORGID = orgId || GLOBAL_CONSTANTS.uuid.paramount_org_id;
 
-	const disableQuickActions = isChannelPartner && (!isTwinIE || !userPartnerId);
+	const disableQuickActions = isChannelPartner && !(twin_importer_exporter_id);
 
 	const hideCpButton = isChannelPartner || loading;
 
