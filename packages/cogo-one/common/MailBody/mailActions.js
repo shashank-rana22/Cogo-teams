@@ -17,7 +17,7 @@ const EMAIL_SUBJECT_PREFIX_MAPPING = {
 function getSubject({ subject = '', val = '' }) {
 	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
 
-	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[val];
+	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[val] || '';
 
 	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
 		? subject : `${emailPrefix}: ${formatedSubject}`;
@@ -27,6 +27,24 @@ function MailActions({
 	eachMessage = {},
 	setMailActions = () => {},
 }) {
+	const handleClick = (key) => {
+		setMailActions({
+			actionType : key,
+			data       : {
+				...eachMessage,
+				response: {
+					...eachMessage?.response,
+					subject: getSubject(
+						{
+							subject : eachMessage?.response?.subject,
+							val     : key,
+						},
+					),
+				},
+			},
+		});
+	};
+
 	return (
 		<div className={styles.buttons_flex}>
 			{BUTTON_MAPPING.map((eachButton) => {
@@ -38,22 +56,7 @@ function MailActions({
 						themeType="secondary"
 						size="sm"
 						className={styles.styled_button}
-						onClick={() => setMailActions({
-							actionType : key,
-							data       : {
-								...eachMessage,
-								response: {
-									...eachMessage?.response,
-									subject: getSubject(
-										{
-											subject : eachMessage?.response?.subject,
-											val     : key,
-										},
-									),
-								},
-							},
-
-						})}
+						onClick={() => handleClick(key)}
 					>
 						<Icon className={styles.icon} />
 						<div className={styles.button_text}>

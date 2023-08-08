@@ -79,7 +79,7 @@ function TagsPopOver({
 			onClickOutside={() => setIsVisible(false)}
 			visible={isVisible}
 		>
-			<div className={styles.flex}>
+			<div className={styles.flex_container_add}>
 				<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} width={18} height={18} />
 			</div>
 		</Popover>

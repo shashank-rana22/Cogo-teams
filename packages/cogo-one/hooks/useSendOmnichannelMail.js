@@ -9,6 +9,7 @@ const ENDPOINT_MAPPING = {
 	forward : '/cogolens/forward_mail',
 	reply   : '/cogolens/reply_mail',
 };
+
 const getCommunicationPayload = ({
 	userId,
 	formattedData,
@@ -39,9 +40,8 @@ const getCommunicationPayload = ({
 		subject,
 		content     : draftMessage,
 		msgId       : message_id,
-		attachments : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
 		userId,
-
+		attachments : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
 	};
 
 	return {

@@ -10,12 +10,12 @@ import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import useTransferChat from '../../../../../hooks/useTransferChat';
 import useUpdateUserRoom from '../../../../../hooks/useUpdateUserRoom';
 
-import Assignes from './Assignes';
 import ChatControls from './ChatControls';
 import ChatTransfer from './ChatTransfer';
-import TagsPopOver from './HeaderFuncs';
+import Assignes from './HeaderFuncs/assignes';
+import ShowContent from './HeaderFuncs/showContent';
+import TagsPopOver from './HeaderFuncs/tagsPopOver';
 import RightButton from './RightButton';
-import ShowContent from './ShowContent';
 import styles from './styles.module.css';
 
 function Header({
@@ -95,7 +95,7 @@ function Header({
 							onClick={() => setActiveTab((prev) => ({ ...prev, data: {} }))}
 						/>
 						<TagsPopOver
-							prevtags={chat_tags}
+							prevTags={chat_tags}
 							updateChat={updateChat}
 							loading={loading}
 							tagOptions={tagOptions}

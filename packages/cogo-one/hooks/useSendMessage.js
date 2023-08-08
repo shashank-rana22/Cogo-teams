@@ -11,6 +11,22 @@ const geo = getGeoConstants();
 
 const INCREASE_MESSAGE_COUNT_BY_ONE = 1;
 
+const getPayload = ({
+	channelType, recipient, message_metadata, user_id, organization_id, service, service_id, lead_user_id, id,
+}) => ({
+	type           : channelType,
+	recipient,
+	message_metadata,
+	user_id,
+	organization_id,
+	service,
+	service_id,
+	source         : 'CogoOne:AdminPlatform',
+	lead_user_id,
+	sender         : channelType === 'platform_chat' ? id : undefined,
+	sender_user_id : id,
+});
+
 const useSendMessage = ({
 	channelType = '',
 	activeChatCollection = {},
@@ -62,19 +78,17 @@ const useSendMessage = ({
 				});
 			}
 			const res = await trigger({
-				data: {
-					type           : channelType,
+				data: getPayload({
+					channelType,
 					recipient,
 					message_metadata,
 					user_id,
 					organization_id,
 					service,
 					service_id,
-					source         : 'CogoOne:AdminPlatform',
 					lead_user_id,
-					sender         : channelType === 'platform_chat' ? id : undefined,
-					sender_user_id : id,
-				},
+					id,
+				}),
 			});
 
 			const lastMessageDocument = {

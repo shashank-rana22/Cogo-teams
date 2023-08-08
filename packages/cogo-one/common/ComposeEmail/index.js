@@ -112,7 +112,7 @@ function ComposeEmail({
 					<div className={styles.attachments_scroll}>
 						<div className={styles.uploading}>{uploading && 'Uploading...'}</div>
 						{(attachments || []).map((eachAttachement) => {
-							const { fileIcon, fileName } = getdecodedData({ data: eachAttachement });
+							const { fileIcon = '', fileName = '' } = getdecodedData({ data: eachAttachement }) || {};
 
 							return (
 								<div className={styles.uploaded_files} key={eachAttachement}>

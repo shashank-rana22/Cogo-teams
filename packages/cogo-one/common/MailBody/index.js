@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
@@ -18,7 +18,7 @@ function MailBody({
 }) {
 	const { source = '' } = formattedData || {};
 
-	const { response, send_by = '', created_at = 0, media_url = [] } = eachMessage || {};
+	const { response, send_by = '', created_at = '', media_url = [] } = eachMessage || {};
 
 	const {
 		subject = '',
@@ -55,12 +55,8 @@ function MailBody({
 				<span className={styles.time_stamp}>{date || ''}</span>
 			</div>
 			<div
-				className={styles.container}
-				style={{
-					border: (selectedMessageid === message_id)
-						? '1px solid #F9AE64'
-						: '1px solid #e0e0e0',
-				}}
+				className={cl`${styles.container} 
+				${selectedMessageid === message_id ? styles.active_container : ''}`}
 			>
 				<MailHeader
 					eachMessage={eachMessage}
