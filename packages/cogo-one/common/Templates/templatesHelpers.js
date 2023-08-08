@@ -24,7 +24,7 @@ export function Preview({
 	variables = [],
 	setCustomizableData = () => {},
 	tags = [],
-	fileValue = {},
+	fileValue = '',
 	setFileValue = () => {},
 	fileName = '',
 	shipmentData = {},

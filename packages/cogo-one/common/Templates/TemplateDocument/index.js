@@ -1,5 +1,4 @@
 import { IcMPdf, IcMDelete } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
 import getFileAttributes from '../../../utils/getFileAttributes';
@@ -8,7 +7,7 @@ import CustomFileUploader from '../../CustomFileUploader';
 import styles from './styles.module.css';
 
 function TemplateDocument({
-	fileValue = {},
+	fileValue = '',
 	fileName = '',
 	setFileValue = () => {},
 }) {
@@ -16,7 +15,7 @@ function TemplateDocument({
 
 	const [uploading, setUploading] = useState(false);
 
-	const { uploadedFileName, fileIcon } = getFileAttributes({ fileValue, fileName });
+	const { fileName: uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: fileValue });
 
 	return (
 		<div className={styles.container}>
@@ -37,7 +36,7 @@ function TemplateDocument({
 				ref={uploaderRef}
 			/>
 
-			{(!isEmpty(fileValue) && !uploading) && (
+			{(fileValue && !uploading) && (
 				<div className={styles.files_view}>
 					<div className={styles.file_icon_container}>
 						{fileIcon}
@@ -54,7 +53,7 @@ function TemplateDocument({
 					<div className={styles.delete_icon_container}>
 						<IcMDelete
 							className={styles.delete_icon}
-							onClick={() => setFileValue({})}
+							onClick={() => setFileValue('')}
 						/>
 					</div>
 				</div>

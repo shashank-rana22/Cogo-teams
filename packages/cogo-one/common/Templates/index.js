@@ -35,7 +35,7 @@ function Templates({
 		show : DEFAULT_OPTIONS.includes(type),
 		data : {},
 	});
-	const [fileValue, setFileValue] = useState({});
+	const [fileValue, setFileValue] = useState('');
 
 	const {
 		sendCommunicationTemplate = () => {},
@@ -49,8 +49,6 @@ function Templates({
 	);
 
 	const isDefaultOpen = DEFAULT_OPTIONS.includes(type);
-	// const isShipment = tags.includes('shipment') && orgId;
-	// const
 
 	const maskedMobileNumber = `${dialNumber?.country_code}
 	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
