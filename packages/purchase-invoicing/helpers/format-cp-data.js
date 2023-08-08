@@ -139,7 +139,7 @@ export const validateData = (data, extraData) => {
 	);
 
 	const collectionPartyBA = allBillingAddresses?.find(
-		(address) => address?.tax_number === formValues?.collection_party_address,
+		(address) => address?.id === formValues?.collection_party_address,
 	) || {};
 	if (!validatePincode(billingPartyAddress?.pin_code?.toString(), 'Buyer')) {
 		return false;
@@ -219,7 +219,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 	const billType = activeTab === 'pass_through' ? 'REIMBURSEMENT' : BILL_MAPPINGS[formValues?.invoice_type];
 	const isTagginsAllowed = billType === 'BILL';
 	const collectionPartyBA = allBillingAddresses?.find(
-		(address) => address?.tax_number === formValues?.collection_party_address,
+		(address) => address?.id === formValues?.collection_party_address,
 	) || {};
 	const collectionPartyPOC = collectionPartyObj?.poc_data?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const rootid = taggedProformas?.length === DEFAULT_ONE_VALUE

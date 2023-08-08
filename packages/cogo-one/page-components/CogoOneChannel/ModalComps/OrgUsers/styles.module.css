@@ -5,7 +5,7 @@
 
 	:global {
 		.ui_tab_container {
-			padding: 4px 8px;
+			padding: 4px 32px;
 		}
 	}
 }
