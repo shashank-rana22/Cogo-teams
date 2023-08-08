@@ -22,6 +22,12 @@
         "can_edit":["notifying_party","collection_party"],
         "can_add_service_provider_poc":true
     },
+    "supplier_relations_head":{
+        "trade_parties":["collection_party"],
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party","shipper", "consignee"],
+        "can_edit":["notifying_party","collection_party"],
+        "can_add_service_provider_poc":true
+    },
     "document_desk_manager":{
         "trade_parties":["collection_party"],
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party","shipper", "consignee","self"],

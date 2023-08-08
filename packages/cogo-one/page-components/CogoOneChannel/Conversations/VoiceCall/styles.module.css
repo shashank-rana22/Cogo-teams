@@ -15,18 +15,3 @@
 .message_container::-webkit-scrollbar {
 	display: none;
 }
-
-.loader {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: fit-content;
-	margin-top: 10px;
-	background: transparent;
-
-	img {
-		width: 18px;
-		height: 18px;
-	}
-}

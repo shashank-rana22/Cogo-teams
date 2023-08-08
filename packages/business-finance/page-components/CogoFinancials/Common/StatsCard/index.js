@@ -3,6 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import formatCount from '../../utils/formatCount';
 import RenderCardHeader from '../RenderCardHeader';
 
 import styles from './styles.module.css';
@@ -13,6 +14,7 @@ const displayAmount = (amount, currency) => formatAmount({
 	options: {
 		style                 : 'currency',
 		currencyDisplay       : 'code',
+		notation              : 'compact',
 		maximumFractionDigits : 2,
 	},
 });
@@ -27,12 +29,12 @@ function StatsCard({
 		{
 			label : 'Estimated Revenue',
 			value : displayAmount(cardData[`estimatedRevenue${taxType}`], currency),
-			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
+			stats : `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shipments`,
 		},
 		{
 			label : 'Estimated Cost',
 			value : displayAmount(cardData[`estimatedCost${taxType}`], currency),
-			stats : `${invoiceCount} Invoices | ${jobCount} Shipments`,
+			stats : `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shipments`,
 		},
 	];
 
