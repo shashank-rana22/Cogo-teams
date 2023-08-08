@@ -17,8 +17,6 @@ function MyAgents({ list = [], activeTab = '' }) {
 	const { push } = useRouter();
 
 	const redirectToAgentView = ({ agentId = '', name = '' }) => {
-		// if (!agentId) return;
-
 		push(
 			`/cogo-one/dashboard/[id]?view=agent&agentName=${name}`,
 			`/cogo-one/dashboard/${agentId}?view=agent&agentName=${name}`,

@@ -11,16 +11,17 @@ const getDateString = (date) => formatDate({
 	formatType : 'date',
 }) || '';
 
-const getParams = ({ timeline }) => ({
+const getParams = ({ timeline, agentId }) => ({
 	data_required                  : false,
 	sales_dashboard_stats_required : true,
 	pagination_data_required       : false,
 	filters                        : {
-		quotation_sent_at_greater_than: getDateString(DATE_FILTER_MAPPING[timeline](new Date())),
+		sales_agent_id                 : agentId,
+		quotation_sent_at_greater_than : getDateString(DATE_FILTER_MAPPING[timeline](new Date())),
 	},
 });
 
-function useListAgentCheckout({ timeline = '' }) {
+function useListAgentCheckout({ timeline = '', agentId = '' }) {
 	const [{ loading, data }, trigger] = useRequest(
 		{
 			url    : '/list_checkouts',
@@ -32,12 +33,12 @@ function useListAgentCheckout({ timeline = '' }) {
 	const getAgentShipmentsCount = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ timeline }),
+				params: getParams({ timeline, agentId }),
 			});
 		} catch (error) {
 			console.error(error, 'error');
 		}
-	}, [trigger, timeline]);
+	}, [trigger, timeline, agentId]);
 
 	useEffect(() => {
 		getAgentShipmentsCount();

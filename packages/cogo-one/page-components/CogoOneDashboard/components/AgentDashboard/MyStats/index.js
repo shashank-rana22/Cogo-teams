@@ -13,6 +13,7 @@ function MyStats({
 	timeline = '',
 	calls = [],
 	loading: callLoading = false,
+	agentId = '',
 }) {
 	const {
 		outgoing_missed = 0,
@@ -23,7 +24,7 @@ function MyStats({
 
 	const totalCallMade = outgoing_missed + outgoing_answered;
 	const totalCallreceive = incoming_answered + incoming_missed;
-	const { shipmentData = {}, shipmentLoading = false } = useListAgentCheckout({ timeline });
+	const { shipmentData = {}, shipmentLoading = false } = useListAgentCheckout({ timeline, agentId });
 
 	const { sales_dashboard_stats = {} } = shipmentData || {};
 	const { booked = 0 } = sales_dashboard_stats || {};

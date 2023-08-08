@@ -1,11 +1,13 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import chartData from '../../configurations/line-chart-data';
 import { LABLE_TYPE } from '../../constants';
 
+import EmptyStats from './EmptyStats';
 import Header from './Header';
 import LineChartLoader from './LoaderLineChart';
 import styles from './styles.module.css';
@@ -46,42 +48,48 @@ function LineChart({
 		<div className={styles.main_container}>
 			<Header graph={graph} />
 			<div className={styles.chart_container}>
-				<ResponsiveLine
-					data={data}
-					margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
-					xScale={{ type: 'point' }}
-					yFormat=" >-.2f"
-					axisTop={null}
-					axisRight={null}
-					axisBottom={{
-						orient         : 'bottom',
-						tickSize       : 5,
-						tickPadding    : 5,
-						tickRotation   : 0,
-						legend         : LABLE_TYPE[timeline]?.label,
-						legendOffset   : 36,
-						legendPosition : 'middle',
-					}}
-					axisLeft={{
-						orient         : 'left',
-						tickSize       : 5,
-						tickValues     : 5,
-						tickPadding    : 5,
-						tickRotation   : 0,
-						legend         : 'Customers',
-						legendOffset   : -40,
-						legendPosition : 'middle',
-					}}
-					colors={['#C4C4C4', '#F98600']}
-					enableGridX={false}
-					pointSize={4}
-					pointColor={{ theme: 'background' }}
-					pointBorderWidth={4}
-					pointBorderColor={{ from: 'serieColor' }}
-					pointLabelYOffset={-12}
-					useMesh
-					tooltip={({ point }) => <CustomToolTip point={point} timeline={timeline} />}
-				/>
+				{isEmpty(graph) ? (
+					<div className={styles.empty_container}>
+						<EmptyStats />
+					</div>
+				) : (
+					<ResponsiveLine
+						data={data}
+						margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
+						xScale={{ type: 'point' }}
+						yFormat=" >-.2f"
+						axisTop={null}
+						axisRight={null}
+						axisBottom={{
+							orient         : 'bottom',
+							tickSize       : 5,
+							tickPadding    : 5,
+							tickRotation   : 0,
+							legend         : LABLE_TYPE[timeline]?.label,
+							legendOffset   : 36,
+							legendPosition : 'middle',
+						}}
+						axisLeft={{
+							orient         : 'left',
+							tickSize       : 5,
+							tickValues     : 5,
+							tickPadding    : 5,
+							tickRotation   : 0,
+							legend         : 'Customers',
+							legendOffset   : -40,
+							legendPosition : 'middle',
+						}}
+						colors={['#C4C4C4', '#F98600']}
+						enableGridX={false}
+						pointSize={4}
+						pointColor={{ theme: 'background' }}
+						pointBorderWidth={4}
+						pointBorderColor={{ from: 'serieColor' }}
+						pointLabelYOffset={-12}
+						useMesh
+						tooltip={({ point }) => <CustomToolTip point={point} timeline={timeline} />}
+					/>
+				)}
 			</div>
 		</div>
 	);
