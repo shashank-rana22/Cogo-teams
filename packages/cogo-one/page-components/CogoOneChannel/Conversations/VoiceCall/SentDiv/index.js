@@ -1,8 +1,8 @@
-/* eslint-disable max-len */
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Image } from '@cogoport/next';
 
-import { format } from '@cogoport/utils';
-
-import CallHistory from '../CallHistory';
+import CallHistory from '../../../../../common/CallHistory';
 
 import styles from './styles.module.css';
 
@@ -12,8 +12,14 @@ function SentDiv({ eachList = {} }) {
 		agent_data = {},
 		start_time_of_call = '',
 		end_time_of_call,
+		channel_type,
 	} = eachList || {};
-	const date = format(new Date(created_at), 'dd MMM YYYY');
+
+	const date = created_at ? formatDate({
+		date       : new Date(created_at),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		formatType : 'date',
+	}) : '';
 
 	const name = agent_data?.name;
 
@@ -29,12 +35,19 @@ function SentDiv({ eachList = {} }) {
 					<span className={styles.time_stamp}>{date}</span>
 				</div>
 				<div className={styles.styled_div}>
-					<CallHistory type="agent" end_time_of_call={end_time_of_call} start_time_of_call={start_time_of_call} />
+					<CallHistory
+						type="agent"
+						endTimeOfCall={end_time_of_call}
+						startTimeOfCall={start_time_of_call}
+						channelType={channel_type}
+					/>
 				</div>
 			</div>
-			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg"
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.admin_logo_svg}
 				alt="KAM"
+				width={25}
+				height={25}
 			/>
 		</div>
 	);

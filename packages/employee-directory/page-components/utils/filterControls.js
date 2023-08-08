@@ -133,19 +133,17 @@ export const CONTROLS = [
 	},
 	{
 		name        : 'hrbp_id',
+		label       : 'Select HRBP',
 		controlType : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
-		label       : 'HRBP',
-		placeholder : 'HRBP',
-		params      : {
-			filters: {
-				status               : 'active',
-				partner_entity_types : ['cogoport'],
-			},
-			page_limit: 100,
-		},
+		placeholder : 'Search HRBP',
+		asyncKey    : 'list_all_managers',
 		initialCall : true,
-		multiple    : true,
+		params      : {
+			filters         : { status: 'active' },
+			fetch_hrbp_only : true,
+			page_limit      : 100,
+		},
+		multiple: true,
 	},
 	{
 		name        : 'status',
