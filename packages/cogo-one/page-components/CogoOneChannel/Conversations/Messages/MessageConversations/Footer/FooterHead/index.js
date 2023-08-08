@@ -67,23 +67,29 @@ function FooterHead({
 							}}
 						/>
 					</div>
-					{
-						mailActions?.actionType === 'forward' && (
-							<div className={styles.child_flex}>
-								<div className={styles.label}>
-									To:
-								</div>
-								<MailRecipientType
-									{...emailReceipientProps}
-									emailRecipientType={emailState?.toUserEmail}
-									type="toUserEmail"
-									errorValue={errorValue}
-									showControl={showControl}
-									key={mailActions?.type}
-								/>
+					<div className={styles.child_flex}>
+						<div className={styles.subject}>
+							<div className={styles.label}>
+								To:
 							</div>
-						)
-					}
+							<MailRecipientType
+								{...emailReceipientProps}
+								emailRecipientType={emailState?.toUserEmail}
+								type="toUserEmail"
+								errorValue={errorValue}
+								showControl={showControl}
+								key={mailActions?.type}
+							/>
+
+						</div>
+						<Button
+							size="md"
+							themeType="linkUi"
+							onClick={() => setOpenReceipents((prev) => !prev)}
+						>
+							{openReceipients ? 'hide' : 'cc'}
+						</Button>
+					</div>
 					<div className={styles.parent_reciepients} key={mailActions?.type}>
 						<div
 							className={styles.reciepents}
@@ -114,24 +120,15 @@ function FooterHead({
 							})}
 						</div>
 						<div className={styles.child_flex}>
-							<div className={styles.subject}>
-								<div className={styles.label}>
-									Sub:
-								</div>
-								<Input
-									value={emailState?.subject}
-									onChange={(e) => setEmailState((prev) => ({ ...prev, subject: e }))}
-									size="xs"
-									className={styles.styled_input}
-								/>
+							<div className={styles.label}>
+								Sub:
 							</div>
-							<Button
-								size="md"
-								themeType="linkUi"
-								onClick={() => setOpenReceipents((prev) => !prev)}
-							>
-								{openReceipients ? 'hide' : 'cc'}
-							</Button>
+							<Input
+								value={emailState?.subject}
+								onChange={(e) => setEmailState((prev) => ({ ...prev, subject: e }))}
+								size="xs"
+								className={styles.styled_input}
+							/>
 						</div>
 					</div>
 				</>

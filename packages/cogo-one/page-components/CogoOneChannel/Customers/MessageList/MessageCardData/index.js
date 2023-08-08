@@ -143,7 +143,7 @@ function MessageCardData({
 
 					<div className={styles.content_div}>
 						{formatLastMessage({
-							lastMessage: lastMessageVar,
+							lastMessage: channelType === 'email' ? last_message : lastMessageVar,
 							viewType,
 						})}
 

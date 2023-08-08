@@ -24,20 +24,17 @@ const getPlaceHolder = ({ hasPermissionToEdit, canMessageOnBotSession }) => {
 
 const setEmailStateFunc = ({ mailActions, email = '' }) => {
 	const { data, actionType = '' } = mailActions || {};
+	const { response, conversation_type } = data || {};
+	const { sender = '', subject = '', to_mails = [] } = response || {};
 
-	const { response } = data || {};
+	let toEmail = [sender || email];
 
-	const { sender = '', subject = '' } = response || {};
-	const toEmail = sender || email;
-
-	if (actionType === 'reply') {
-		return {
-			toUserEmail: toEmail ? [sender] : [],
-			subject,
-		};
+	if (conversation_type === 'received') {
+		toEmail = to_mails;
 	}
+
 	return {
-		toUserEmail: [],
+		toUserEmail: actionType === 'reply' ? toEmail : [],
 		subject,
 	};
 };
