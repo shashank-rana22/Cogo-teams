@@ -27,6 +27,7 @@ const useGetIrnGeneration = ({ id, refetch, entityCode }: IrnGenerationProps) =>
 			url     : `/sales/invoice/${id}/irn-generate`,
 			method  : 'post',
 			authKey : 'post_sales_invoice_by_id_irn_generate',
+			data    : {},
 		},
 		{ manual: true },
 	);
@@ -58,8 +59,7 @@ const useGetIrnGeneration = ({ id, refetch, entityCode }: IrnGenerationProps) =>
 	const generateIrn = async () => {
 		try {
 			const resp = await generateIrnTrigger({
-				data   : {},
-				params : {
+				params: {
 					updatedBy: userId,
 				},
 			});
