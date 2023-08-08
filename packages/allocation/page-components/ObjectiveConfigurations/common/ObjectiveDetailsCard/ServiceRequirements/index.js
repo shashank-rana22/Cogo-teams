@@ -6,7 +6,7 @@ function ServiceRequirements(props) {
 
 	return (
 		<div>
-			<h4 className={styles.heading}>Serivce Requirements</h4>
+			<h4 className={styles.heading}>Service Requirements</h4>
 
 			<div className={styles.card_list}>
 				{serviceRequirementsDetails.map((item, index) => (
