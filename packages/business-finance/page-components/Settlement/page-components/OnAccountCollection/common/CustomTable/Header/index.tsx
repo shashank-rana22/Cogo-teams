@@ -51,7 +51,7 @@ function Header(
 			</div>
 			<div className={styles.customer_name}>Customer Name</div>
 			<div className={styles.customer_id}>Customer ID</div>
-			<div className={styles.entity}>Entity</div>
+			{/* <div className={styles.entity}>Entity</div> */}
 			<div className={styles.cogo_bank}>Cogo Bank</div>
 			<div className={styles.doc_value}>Doc. Value</div>
 			<div className={styles.amount}>
