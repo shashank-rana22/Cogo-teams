@@ -182,7 +182,7 @@ function AgentDetails({
 				</div>
 			</div>
 
-			<Profile loading={loading} name={name} userEmail={userEmail} />
+			<Profile loading={loading} name={name} userEmail={userEmail || userData?.email} />
 
 			<ContactVerification leadUserId={leadUserId} userId={userId} loading={loading} userData={userData} />
 
@@ -197,6 +197,7 @@ function AgentDetails({
 					userData={userData}
 					organizationData={organizationData}
 					fetchOrganization={fetchOrganization}
+					partnerId={partnerId}
 				/>
 			)}
 
