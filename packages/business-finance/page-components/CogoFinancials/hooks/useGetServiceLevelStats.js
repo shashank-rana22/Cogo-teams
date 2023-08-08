@@ -15,6 +15,7 @@ const useGetServiceLevelStats = ({
 	activeShipmentCard = '',
 	customDate = new Date(),
 	specificServiceLevel = null,
+	serviceLevel,
 }) => {
 	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity]?.currency;
 
@@ -30,7 +31,7 @@ const useGetServiceLevelStats = ({
 		{ manual: true },
 	);
 
-	const getServiceLevelData = useCallback((serviceLevel) => {
+	const getServiceLevelData = useCallback(() => {
 		const { channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
 		const { startDate:customStartDate, endDate:customEndDate } = customDate || {};
@@ -67,7 +68,7 @@ const useGetServiceLevelStats = ({
 
 	useEffect(() => {
 		getServiceLevelData();
-	}, [getServiceLevelData, entity, timeRange, activeBar, activeShipmentCard]);
+	}, [getServiceLevelData, entity, timeRange, activeBar, activeShipmentCard, serviceLevel]);
 
 	return {
 		serviceLevelData,
