@@ -63,6 +63,7 @@ const getPayload = ({
 	remarks,
 	categoryName,
 	dueDate,
+	accountHolderName,
 }) => {
 	const lineItemsData = (lineItemsList || []).map((lineItem) => {
 		if (lineItem?.tax) {
@@ -164,7 +165,7 @@ const getPayload = ({
 					tdsRate    : tdsTradeParty || DEFAULT_TDS_RATE,
 					bankDetail : {
 						bankName,
-						beneficiaryName: bankName,
+						beneficiaryName: accountHolderName || vendorName,
 						ifscCode,
 						accountNumber,
 						bankId,

@@ -125,6 +125,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 	const {
 		bank_name: bankName,
 		ifsc_code: ifscCode,
+		account_holder__name: accountHolderName,
 		account_number: accountNumber,
 		id: bankId,
 		vendor_id: collectionPartyId,
@@ -185,6 +186,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		remarks,
 		categoryName,
 		dueDate,
+		accountHolderName,
 	});
 
 	const submitData = async () => {

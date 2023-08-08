@@ -11,13 +11,11 @@ import {
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import Filter from '../../commons/Filters';
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { formatDate } from '../../commons/utils/formatDate';
 import List from '../commons/List';
 
 import CreateVendorModal from './CreateVendorModal';
-import filtersconfig from './filtersconfig';
 import useListVendors from './hooks/useListVendors';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
@@ -96,13 +94,6 @@ function VenderComponent() {
 						/>
 					);
 				})}
-			</div>
-			<div className={styles.filtercont}>
-				<Filter
-					controls={filtersconfig}
-					filters={filters}
-					setFilters={setFilters}
-				/>
 			</div>
 			<div className={styles.right_container}>
 				<Input

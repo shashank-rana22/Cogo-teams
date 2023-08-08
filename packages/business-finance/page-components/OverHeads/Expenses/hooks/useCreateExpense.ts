@@ -112,6 +112,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 
 	const {
 		bank_name: bankName,
+		account_holder_name: accountHolderName,
 		ifsc_code: ifscCode,
 		account_number: accountNumber,
 		id: bankId,
@@ -182,6 +183,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		remarks,
 		categoryName,
 		dueDate,
+		accountHolderName,
 	});
 
 	const submitData = async () => {
