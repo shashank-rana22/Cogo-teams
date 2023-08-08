@@ -10,7 +10,10 @@ const getPayload = ({ performedById = '', userType = '', billingAddressId = '', 
 	billing_address_id : billingAddressId,
 });
 
-function useCreateSubscriptionInvoice({ selectedAddress = {}, checkoutId = {} }) {
+function useCreateSubscriptionInvoice({
+	selectedAddress = {}, checkoutId = {},
+	setShowAssign = () => {}, getUserActivePlans = () => {},
+}) {
 	const { id : billingAddressId = '' } = selectedAddress || {};
 
 	const {
@@ -36,6 +39,8 @@ function useCreateSubscriptionInvoice({ selectedAddress = {}, checkoutId = {} })
 					checkoutId,
 				}),
 			});
+			setShowAssign(false);
+			getUserActivePlans();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

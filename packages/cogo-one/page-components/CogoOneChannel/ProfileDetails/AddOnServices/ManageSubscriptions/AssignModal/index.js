@@ -32,6 +32,7 @@ function AssignModal({
 	setShowAssign = () => {},
 	orgId = '',
 	selectedPlan = {},
+	getUserActivePlans = () => {},
 }) {
 	const { checkout = {} } = selectedPlan || {};
 	const { id: checkoutId = '' } = checkout || {};
@@ -62,7 +63,7 @@ function AssignModal({
 	const {
 		createSubscriptionInvoice = () => {},
 		loading = false,
-	} = useCreateSubscriptionInvoice({ selectedAddress, checkoutId });
+	} = useCreateSubscriptionInvoice({ selectedAddress, checkoutId, setShowAssign, getUserActivePlans });
 
 	useEffect(() => {
 		getOrgBillingAddresses();

@@ -18,7 +18,6 @@ import SubscriptionCard from './SubscriptionCard';
 const CARD_LAYOUT_PLACEHODER_COUNT = 3;
 const CARD_LAYOUT_PLACEHODER = [...Array(CARD_LAYOUT_PLACEHODER_COUNT).keys()];
 const ANNUAL_SUBSCRIPTION_DISCOUNT_PERCENT = 20;
-const PAID_PLANS = ['standard-pack', 'premium-pack'];
 
 function EmptyState() {
 	return (
@@ -57,12 +56,6 @@ function ManageSubscriptions(props) {
 	const sortedItemPlans = (item_plans || []).sort(
 		(a, b) => a.priority_sequence - b.priority_sequence,
 	);
-
-	const activePlan = (item_plans || []).filter(
-		(item) => item.display_pricing?.[activeTab]?.is_active_plan,
-	)?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	const isPlanBuyed = PAID_PLANS.includes(activePlan?.plan_name);
 
 	const handleToggle = (event) => {
 		if (event.target.checked) {
@@ -129,9 +122,9 @@ function ManageSubscriptions(props) {
 			)}
 			{!isEmpty(checkout) ? (
 				<div className={cl`${styles.plans_fixed_footer}
-				${!isPlanBuyed && paymentLink ? styles.two_childs_present : ''}`}
+				${!isEmpty(paymentLink) ? styles.two_childs_present : ''}`}
 				>
-					{!isPlanBuyed && paymentLink && (
+					{!isEmpty(paymentLink) && (
 						<div className={styles.link_with_refresh}>
 							<div
 								role="presentation"
@@ -173,6 +166,7 @@ function ManageSubscriptions(props) {
 					setShowAssign={setShowAssign}
 					orgId={orgId}
 					selectedPlan={selectedPlan}
+					getUserActivePlans={getUserActivePlans}
 				/>
 			)}
 		</div>
