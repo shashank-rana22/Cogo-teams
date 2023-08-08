@@ -13,7 +13,7 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { setActiveMode, loading, list, paginationData, getNextPage, setRefCallback } = props;
+	const { setActiveMode, loading, list, paginationData, getNextPage, setRefCallback, refetch } = props;
 
 	const { page, total_count, page_limit } = paginationData || {};
 
@@ -77,7 +77,7 @@ function List(props) {
 					animate
 				>
 					{ACTION_COMPONENT_MAPPING[showActionModal.mode]
-						?.render({ objectiveId: showActionModal.objectiveId, setShowActionModal })}
+						?.render({ objectiveId: showActionModal.objectiveId, setShowActionModal, refetch })}
 				</Modal>
 			)}
 		</>

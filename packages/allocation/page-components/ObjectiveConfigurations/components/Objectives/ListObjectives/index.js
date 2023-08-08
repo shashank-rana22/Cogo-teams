@@ -17,6 +17,7 @@ const ListObjectives = forwardRef((props, ref) => {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
+		refetch,
 	} = useGetListObjectives();
 
 	const setRefCallback = (value) => {
@@ -42,6 +43,7 @@ const ListObjectives = forwardRef((props, ref) => {
 				paginationData={paginationData}
 				getNextPage={getNextPage}
 				setRefCallback={setRefCallback}
+				refetch={refetch}
 			/>
 		</>
 	);

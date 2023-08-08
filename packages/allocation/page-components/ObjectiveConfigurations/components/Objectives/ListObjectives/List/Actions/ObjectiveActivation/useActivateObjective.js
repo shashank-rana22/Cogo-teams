@@ -6,7 +6,7 @@ import { useAllocationRequest } from '@cogoport/request';
 const MAX_LENGTH = 2;
 
 const useActivateObjective = (props) => {
-	const { objectiveId, setShowActionModal } = props;
+	const { objectiveId, setShowActionModal, refetch } = props;
 
 	const formState = useForm({
 		defaultValues: {
@@ -36,6 +36,8 @@ const useActivateObjective = (props) => {
 			await trigger({ data: payload });
 
 			setShowActionModal({});
+
+			refetch();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data));
 		}

@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 const useDeactivateObjective = (props) => {
-	const { objectiveId, setShowActionModal } = props;
+	const { objectiveId, setShowActionModal, refetch } = props;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/objective_status',
@@ -18,6 +18,8 @@ const useDeactivateObjective = (props) => {
 			await trigger({ data: payload });
 
 			setShowActionModal({});
+
+			refetch();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data));
 		}

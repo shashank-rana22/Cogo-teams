@@ -4,19 +4,21 @@ import ObjectiveDeactivation from './Actions/ObjectiveDeactivation';
 const ACTION_COMPONENT_MAPPING = {
 	activation: {
 		size   : 'sm',
-		render : ({ objectiveId, setShowActionModal }) => (
+		render : ({ objectiveId, setShowActionModal, refetch }) => (
 			<ObjectiveActivation
 				objectiveId={objectiveId}
 				setShowActionModal={setShowActionModal}
+				refetch={refetch}
 			/>
 		),
 	},
 	deactivation: {
 		size   : 'sm',
-		render : ({ objectiveId, setShowActionModal }) => (
+		render : ({ objectiveId, setShowActionModal, refetch }) => (
 			<ObjectiveDeactivation
 				objectiveId={objectiveId}
 				setShowActionModal={setShowActionModal}
+				refetch={refetch}
 			/>
 		),
 	},

@@ -3,9 +3,9 @@ import { Modal, Button } from '@cogoport/components';
 import useDeactivateObjective from './useDeativateObjective';
 
 function ObjectiveDeactivation(props) {
-	const { objectiveId, setShowActionModal } = props;
+	const { objectiveId, setShowActionModal, refetch } = props;
 
-	const { loading, onDeactivation } = useDeactivateObjective({ objectiveId, setShowActionModal });
+	const { loading, onDeactivation } = useDeactivateObjective({ objectiveId, setShowActionModal, refetch });
 
 	return (
 		<>

@@ -10,13 +10,13 @@ const MIN_LENGTH = 1;
 const MAX_LENGTH = 2;
 
 function ObjectiveActivation(props) {
-	const { objectiveId, setShowActionModal } = props;
+	const { objectiveId, setShowActionModal, refetch } = props;
 
 	const {
 		loading,
 		onSetActivation,
 		formState,
-	} = useActivateObjective({ objectiveId, setShowActionModal });
+	} = useActivateObjective({ objectiveId, setShowActionModal, refetch });
 
 	const { control, handleSubmit, watch, setValue } = formState;
 

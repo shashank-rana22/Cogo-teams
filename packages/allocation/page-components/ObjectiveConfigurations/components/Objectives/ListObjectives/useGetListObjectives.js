@@ -18,7 +18,7 @@ const useGetListObjectives = () => {
 		},
 	});
 
-	const [{ data, loading }] = useAllocationRequest({
+	const [{ data, loading }, refetch] = useAllocationRequest({
 		url     : '/objectives',
 		method  : 'GET',
 		authkey : 'get_allocation_objectives',
@@ -55,6 +55,7 @@ const useGetListObjectives = () => {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
+		refetch,
 	};
 };
 
