@@ -10,8 +10,8 @@ function Statistics({
 	statsData = {},
 	setFilters = () => {},
 	setBucketParams = () => {},
-	activeStat,
-	restFilters,
+	activeStat = {},
+	restFilters = {},
 }) {
 	return (
 		<div className={styles.container}>

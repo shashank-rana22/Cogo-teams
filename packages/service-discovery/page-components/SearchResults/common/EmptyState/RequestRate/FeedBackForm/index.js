@@ -9,7 +9,7 @@ const DEFAULT_SPAN = 12;
 const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 1;
 
-function FeedBackForm({ controls, control, errors }) {
+function FeedBackForm({ controls = [], control = () => {}, errors = {} }) {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {

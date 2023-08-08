@@ -4,11 +4,9 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const suffix = <span style={{ paddingRight: 12, fontSize: 12 }}>Days</span>;
-
 function FormItem({
-	name,
-	control,
+	name = '',
+	control = () => {},
 	howMuchToShowInDnD = {
 		origin_detention      : true,
 		origin_demurrage      : true,
@@ -26,7 +24,7 @@ function FormItem({
 
 					<InputNumberController
 						name={`origin_${name}`}
-						suffix={suffix}
+						suffix={<span style={{ paddingRight: 12, fontSize: 12 }}>Days</span>}
 						max="21"
 						min="0"
 						disabled={!howMuchToShowInDnD[`origin_${name}`]}
@@ -40,7 +38,7 @@ function FormItem({
 
 					<InputNumberController
 						name={`destination_${name}`}
-						suffix={suffix}
+						suffix={<span style={{ paddingRight: 12, fontSize: 12 }}>Days</span>}
 						max="21"
 						min="0"
 						disabled={!howMuchToShowInDnD[`destination_${name}`]}

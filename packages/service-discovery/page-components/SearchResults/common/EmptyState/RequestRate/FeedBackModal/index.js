@@ -14,7 +14,7 @@ const ZERO_MARGIN = 0;
 function FeedBackModal({
 	data = {},
 	details = {},
-	show,
+	show = false,
 	onClose = () => {},
 	requestService = {},
 	proceeedWithFeedback = true,

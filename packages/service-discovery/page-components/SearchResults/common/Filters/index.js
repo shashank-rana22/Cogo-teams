@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useState } from 'react';
 
 import FilterModal from './FilterModal';
 import styles from './styles.module.css';
@@ -17,7 +18,7 @@ function Filters({ data = {}, filters = {}, setFilters = () => {}, loading = fal
 				className={styles.filter_button}
 			>
 				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_228.svg"
+					src={GLOBAL_CONSTANTS.image_url.filter_icon}
 					alt="filter-icon"
 					width={20}
 					height={20}

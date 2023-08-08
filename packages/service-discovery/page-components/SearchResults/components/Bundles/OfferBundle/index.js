@@ -5,7 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function OfferBundle({ data }) {
+function OfferBundle({ data = {} }) {
 	return (
 		<div
 			className={styles.container}

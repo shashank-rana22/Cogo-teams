@@ -15,7 +15,7 @@ const useDeleteAdditionalService = ({ service, source = '', refetch = () => {} }
 	const handleRemoveService = async () => {
 		let serviceName = service.service_type;
 
-		const services = [];
+		const SERVICES = [];
 
 		service.data?.forEach((serviceItem) => {
 			const serviceObj = {
@@ -32,7 +32,7 @@ const useDeleteAdditionalService = ({ service, source = '', refetch = () => {} }
 				serviceName = serviceItem.service_type;
 			}
 
-			services.push(serviceObj);
+			SERVICES.push(serviceObj);
 		});
 
 		let apiServiceName = serviceName;
@@ -45,7 +45,7 @@ const useDeleteAdditionalService = ({ service, source = '', refetch = () => {} }
 			id                                        : checkout_id || undefined,
 			spot_search_id                            : !checkout_id ? spot_search_id : undefined,
 			service                                   : apiServiceName,
-			[`${apiServiceName}_services_attributes`] : services,
+			[`${apiServiceName}_services_attributes`] : SERVICES,
 		};
 
 		try {

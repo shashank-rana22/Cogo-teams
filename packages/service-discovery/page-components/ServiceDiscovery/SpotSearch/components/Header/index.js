@@ -5,7 +5,7 @@ import OrganisationForm from '../../../../../common/OrganisationForm';
 import styles from './styles.module.css';
 import TextSection from './TextSection';
 
-function Header({ organization, setOrganization, errors, setErrors }) {
+function Header({ organization = {}, setOrganization = () => {}, errors = {}, setErrors = () => {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>

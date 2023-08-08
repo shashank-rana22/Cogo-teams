@@ -6,10 +6,10 @@ import SuccessModal from './SuccessModal';
 function ShareToUsers({
 	shareType = '',
 	rate = {},
-	show,
-	source,
-	onClose,
-	org_id,
+	show = false,
+	source = '',
+	onClose = () => {},
+	org_id = '',
 	comparedRateCardDetails = [],
 }) {
 	const [showSuccess, setShowSuccess] = useState(false);

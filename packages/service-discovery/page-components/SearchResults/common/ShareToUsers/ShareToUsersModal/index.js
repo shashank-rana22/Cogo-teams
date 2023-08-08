@@ -8,12 +8,12 @@ import InviteUser from './InviteUser';
 import List from './List';
 
 function ShareToUsersModal({
-	shareType,
-	onClose,
-	onSuccess,
+	shareType = '',
+	onClose = () => {},
+	onSuccess = () => {},
 	rate = {},
-	source,
-	org_id,
+	source = '',
+	org_id = '',
 	show = false,
 	comparedRateCardDetails = [],
 }) {

@@ -19,10 +19,10 @@ const SERVICES = [
 ];
 
 function ExtraFilters({
-	serviceType,
-	setFilters,
-	setServiceType,
-	type,
+	serviceType = '',
+	setFilters = () => {},
+	setServiceType = () => {},
+	type = '',
 }) {
 	return (
 		<div className={styles.container}>

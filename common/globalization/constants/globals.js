@@ -314,6 +314,8 @@ const GLOBAL_CONSTANTS = {
 		lock_icon               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/lock.svg',
 		calender_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/calender',
 		guarenteed_booking_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/guarenteed_booking',
+		filter_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_228.svg',
+		no_rates_found_emoji    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'

@@ -6,7 +6,14 @@ import styles from './styles.module.css';
 
 const ZEROTH_INDEX = 0;
 
-function FilterContent({ controls, control, watch, errors, setValue, handleSubmit }) {
+function FilterContent({
+	controls = [],
+	control = () => {},
+	watch = () => {},
+	errors = {},
+	setValue = () => {},
+	handleSubmit = () => {},
+}) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.form}>

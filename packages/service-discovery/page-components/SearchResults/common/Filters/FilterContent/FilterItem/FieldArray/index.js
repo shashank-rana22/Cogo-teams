@@ -8,17 +8,17 @@ import Child from './child';
 import styles from './styles.module.css';
 
 function FieldArray({
-	name,
-	control,
-	controls,
-	error,
+	name = '',
+	control = () => {},
+	controls = [],
+	error = [],
 	showButtons = true,
 	showLabelOnce = false,
 	disabled = false,
 	buttonText = 'Add',
-	watch,
-	handleSubmit,
-	setValue,
+	watch = () => {},
+	handleSubmit = () => {},
+	setValue = () => {},
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({

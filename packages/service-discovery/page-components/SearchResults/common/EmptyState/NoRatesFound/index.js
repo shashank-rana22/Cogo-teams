@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import DetentionDemurrage from '../../D&D';
@@ -15,7 +16,7 @@ function NoRatesFound({
 		<div className={styles.container}>
 			<div className={styles.left_section}>
 				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg"
+					src={GLOBAL_CONSTANTS.image_url.no_rates_found_emoji}
 					alt="no-rates-found"
 					height={72}
 					className={styles.icon}
