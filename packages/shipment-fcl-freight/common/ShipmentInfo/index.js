@@ -39,11 +39,12 @@ function ShipmentInfo() {
 				) : null}
 
 			{
-				bl_type === 'seaway' ? (
-					<Pill size="sm" color="green" className={styles.pill}>
-						{startCase(bl_type)}
-					</Pill>
-				) : null
+				bl_type === 'seaway'
+					? (
+						<Pill size="sm" color="green" className={styles.pill}>
+							{startCase(bl_type)}
+						</Pill>
+					) : null
 			}
 
 			{showSource && shipment_data?.is_cogo_assured ? (
