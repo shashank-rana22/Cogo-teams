@@ -107,7 +107,7 @@ function PersonalInformation({ data: content, getEmployeeDetails }) {
 		let final_params = { ...rest };
 		if (cogoport_email !== cogo_email) {
 			final_params = {
-				...rest,
+				...final_params,
 				cogoport_email,
 			};
 		}
