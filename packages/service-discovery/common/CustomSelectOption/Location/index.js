@@ -14,17 +14,17 @@ function Location(props) {
 	const cityAndCountryName = `${secondElelment},${firstElelment}`;
 
 	let portCode = null;
-	let IconElemennt = IcMLocation;
+	let iconToShow = IcMLocation;
 
 	if (data.type === 'seaport' && data.is_icd) {
 		portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
-		IconElemennt = IcMLocation;
+		iconToShow = IcMLocation;
 	} else if (data.type === 'seaport') {
 		portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
-		IconElemennt = IcMPort;
+		iconToShow = IcMPort;
 	} else if (data.type === 'airport') {
 		portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
-		IconElemennt = IcMAirport;
+		iconToShow = IcMAirport;
 	} else if (data.type === 'pincode') {
 		portCode = countryName
 			? `${data.postal_code}, ${countryName}`
@@ -34,13 +34,15 @@ function Location(props) {
 	}
 
 	if (returnOnlyIcon) {
-		return IconElemennt;
+		return iconToShow;
 	}
+
+	const IconElement = iconToShow;
 
 	return (
 		<div className={styles.label_container}>
 			<div className={styles.label_icon}>
-				<IconElemennt fill="#333333" />
+				<IconElement fill="#333333" />
 			</div>
 
 			<div className={styles.name_container}>
