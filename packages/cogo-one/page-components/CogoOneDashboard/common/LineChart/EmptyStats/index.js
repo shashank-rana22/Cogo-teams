@@ -19,7 +19,6 @@ function EmptyStats() {
 			</div>
 			{[...Array(NO_OF_HORIZONTAL_LINE).keys()].map((key) => (
 				<div className={styles.horizontal_line} key={key} />
-
 			))}
 		</div>
 	);

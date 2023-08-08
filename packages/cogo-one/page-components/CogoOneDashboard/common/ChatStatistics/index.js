@@ -24,23 +24,21 @@ function ChatStatistics({ isAdminView = false, agentId = '', timeline = '' }) {
 				}
 
 				return (
-					(isAdminView || isAgent) && (
-						<div
-							key={key}
-							className={cl`${isAdminView ? styles.chatstatistics_box : styles.agent_view} `}
-						>
-							<div className={styles.chatstatistics_type}>{label}</div>
-							{loading
-								? <Placeholder height="40px" width="123px" className={styles.placeholder} />
-								: (
-									<div className={styles.small_data_box}>
-										<div className={styles.chat_numbers}>
-											{getFormattedNumber(chatStats?.[key] || MIN_CHAT_NUMBER)}
-										</div>
+					<div
+						key={key}
+						className={cl`${isAdminView ? styles.chatstatistics_box : styles.agent_view} `}
+					>
+						<div className={styles.chatstatistics_type}>{label}</div>
+						{loading
+							? <Placeholder height="40px" width="123px" className={styles.placeholder} />
+							: (
+								<div className={styles.small_data_box}>
+									<div className={styles.chat_numbers}>
+										{getFormattedNumber(chatStats?.[key] || MIN_CHAT_NUMBER)}
 									</div>
-								)}
-						</div>
-					)
+								</div>
+							)}
+					</div>
 				);
 			})}
 		</>
