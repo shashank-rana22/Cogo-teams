@@ -17,23 +17,23 @@ function Content({ service = {}, invoiceAmount = '' }) {
 	return (
 		<div className={styles.service_details}>
 			<div>
-				<b>Invoice Currency: </b>
+				<strong>Invoice Currency: </strong>
 				<span>{service?.currency}</span>
 			</div>
 
-			{service?.detail?.commodity && (
+			{service?.detail?.commodity ? (
 				<div>
-					<b>Commodity: </b>
+					<strong>Commodity: </strong>
 					<span>{startCase(service?.detail?.commodity)}</span>
 				</div>
-			)}
+			) : null}
 
-			{invoiceAmount && (
+			{invoiceAmount ? (
 				<div>
-					<b>Invoice Amount: </b>
+					<strong>Invoice Amount: </strong>
 					<span>{invoiceAmount}</span>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }
@@ -76,7 +76,7 @@ function SelectService({
 				},
 			});
 
-			const id_with_igst = service?.serviceKey;
+			const idWithIgst = service?.serviceKey;
 
 			const serviceName = service?.service_name || service?.service_type;
 
@@ -100,7 +100,7 @@ function SelectService({
 					</Tooltip>
 				),
 				isTaxable : service?.tax_total > ZERO_TAX_TOTAL,
-				value     : id_with_igst,
+				value     : idWithIgst,
 				...service,
 			};
 

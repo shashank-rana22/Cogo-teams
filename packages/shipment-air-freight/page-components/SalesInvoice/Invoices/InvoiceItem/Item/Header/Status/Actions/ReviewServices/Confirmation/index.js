@@ -6,8 +6,7 @@ import styles from './styles.module.css';
 function Confirmation({ value = false, setValue = () => {} }) {
 	return (
 		<div
-			role="button"
-			tabIndex={0}
+			role="presentation"
 			className={styles.container}
 			onClick={() => setValue((prev) => !prev)}
 		>

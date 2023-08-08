@@ -69,11 +69,11 @@ function Actions({
 			<div className={styles.main_container}>
 				<div className={styles.actions_wrap}>
 					<div className={styles.statuses}>
-						{invoice.status && (
+						{invoice.status ? (
 							<div className={styles.info_container}>
 								{startCase(invoice.status)}
 							</div>
-						)}
+						) : null}
 
 						{!INVOICE_STATUS.includes(invoice.status) && (
 							<Button

@@ -31,27 +31,25 @@ function Content({
 		<div className={styles.dialog_box}>
 			{commonActions && (
 				<>
-					<>
-						{editInvoicesVisibility ? (
-							<div>
-								<Button
-									themeType="tertiary"
-									onClick={() => handleClick(setIsEditInvoice)}
-								>
-									Edit Invoice
-								</Button>
-								<div className={styles.line} />
+					{editInvoicesVisibility ? (
+						<div>
+							<Button
+								themeType="tertiary"
+								onClick={() => handleClick(setIsEditInvoice)}
+							>
+								Edit Invoice
+							</Button>
+							<div className={styles.line} />
 
-							</div>
-						) : null}
-						<Button
-							themeType="tertiary"
-							onClick={() => handleClick(setIsChangeCurrency)}
-						>
-							Change Currency
-						</Button>
-						<div className={styles.line} />
-					</>
+						</div>
+					) : null}
+					<Button
+						themeType="tertiary"
+						onClick={() => handleClick(setIsChangeCurrency)}
+					>
+						Change Currency
+					</Button>
+					<div className={styles.line} />
 					<Button
 						themeType="tertiary"
 						onClick={() => handleClick(setShowAddRemarks)}

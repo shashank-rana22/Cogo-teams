@@ -17,6 +17,78 @@ const RemarkRender = ({ remarks = '' }) => {
 	</div>;
 };
 
+function Content({
+	commonActions = false,
+	editInvoicesVisiblity = false,
+	invoice = {},
+	handleClick = () => {},
+	setIsChangeCurrency = () => {},
+	setShowAddRemarks = () => {},
+	setShowChangePaymentMode = () => {},
+	setIsEditInvoice = () => {},
+}) {
+	return (
+		<div className={styles.dialog_box}>
+			{commonActions ? (
+				<>
+					<div>
+						{editInvoicesVisiblity ? (
+							<div>
+								<div
+									role="presentation"
+									className={styles.text}
+									onClick={() => handleClick(setIsEditInvoice)}
+								>
+									Edit Invoice
+								</div>
+								<div className={styles.line} />
+
+							</div>
+						) : null}
+						<div
+							role="presentation"
+							className={styles.text}
+							onClick={() => handleClick(setIsChangeCurrency)}
+						>
+							Change Currency
+						</div>
+						<div className={styles.line} />
+					</div>
+					<div
+						role="presentation"
+						className={styles.text}
+						onClick={() => handleClick(setShowAddRemarks)}
+					>
+						Add Remarks
+					</div>
+					<div>
+						<div className={styles.line} />
+						<div
+							role="presentation"
+							className={styles.text}
+							onClick={() => handleClick(setShowChangePaymentMode)}
+						>
+							Change Payment Mode
+						</div>
+					</div>
+				</>
+			) : null}
+			{(invoice.exchange_rate_document || []).map((url) => (
+				<div key={url}>
+					{commonActions ? <div className={styles.line} /> : null}
+					<div
+						role="presentation"
+						className={styles.text}
+						onClick={() => window.open(url, '_blank')}
+					>
+						Exchange Rate Document
+					</div>
+				</div>
+			))}
+		</div>
+	);
+}
+
 function Actions({
 	invoice = {},
 	shipment_data = {},
@@ -53,72 +125,6 @@ function Actions({
 	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
 		|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.linh_nguyen_user_id;
 
-	const content = (
-		<div className={styles.dialog_box}>
-			{commonActions ? (
-				<>
-					<div>
-						{editInvoicesVisiblity ? (
-							<div>
-								<div
-									role="button"
-									tabIndex={0}
-									className={styles.text}
-									onClick={() => handleClick(setIsEditInvoice)}
-								>
-									Edit Invoice
-								</div>
-								<div className={styles.line} />
-
-							</div>
-						) : null}
-						<div
-							role="button"
-							tabIndex={0}
-							className={styles.text}
-							onClick={() => handleClick(setIsChangeCurrency)}
-						>
-							Change Currency
-						</div>
-						<div className={styles.line} />
-					</div>
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.text}
-						onClick={() => handleClick(setShowAddRemarks)}
-					>
-						Add Remarks
-					</div>
-					<div>
-						<div className={styles.line} />
-						<div
-							role="button"
-							tabIndex={0}
-							className={styles.text}
-							onClick={() => handleClick(setShowChangePaymentMode)}
-						>
-							Change Payment Mode
-						</div>
-					</div>
-				</>
-			) : null}
-			{(invoice.exchange_rate_document || []).map((url) => (
-				<div key={url}>
-					{commonActions ? <div className={styles.line} /> : null}
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.text}
-						onClick={() => window.open(url, '_blank')}
-					>
-						Exchange Rate Document
-					</div>
-				</div>
-			))}
-		</div>
-	);
-
 	return (
 		<div className={styles.actions_wrap}>
 			{!disableAction || invoice.exchange_rate_document?.length ? (
@@ -126,7 +132,18 @@ function Actions({
 					interactive
 					placement="bottom"
 					visible={show}
-					content={content}
+					content={(
+						<Content
+							commonActions={commonActions}
+							editInvoicesVisiblity={editInvoicesVisiblity}
+							invoice={invoice}
+							handleClick={handleClick}
+							setIsChangeCurrency={setIsChangeCurrency}
+							setShowAddRemarks={setShowAddRemarks}
+							setShowChangePaymentMode={setShowChangePaymentMode}
+							setIsEditInvoice={setIsEditInvoice}
+						/>
+					)}
 					theme="light"
 					onClickOutside={() => setShow(false)}
 				>
@@ -148,7 +165,7 @@ function Actions({
 					content={<RemarkRender remarks={invoice.remarks} />}
 				>
 					<div className={styles.icon_more_wrapper}>
-						<IcMInfo fill="--color-accent-orange-3" />
+						<IcMInfo fill="var(--color-accent-orange-3)" />
 					</div>
 				</Tooltip>
 			)}

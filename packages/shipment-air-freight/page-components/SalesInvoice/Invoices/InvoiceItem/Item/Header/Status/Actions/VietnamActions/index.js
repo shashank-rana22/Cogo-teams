@@ -89,16 +89,6 @@ function Actions({
 			&& !bfInvoice?.systemGeneratedInvoice) ? (
 				<div className={styles.pill}>Under Translation</div>) : null);
 
-	const approveButton = () => (
-		invoice?.status === 'reviewed' && bfInvoice?.systemGeneratedProforma && bfInvoice?.proformaPdfUrl ? (
-			<div className={styles.review_invoice}>
-				<Button size="sm" onClick={updateInvoiceStatus} disabled={loading}>
-					Approve
-				</Button>
-			</div>
-		) : null
-	);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_container}>
@@ -119,8 +109,18 @@ function Actions({
 							</Button>
 						)}
 					</div>
+
 					{underTranslation}
-					{approveButton}
+
+					{invoice?.status === 'reviewed'
+					&& bfInvoice?.systemGeneratedProforma && bfInvoice?.proformaPdfUrl ? (
+						<div className={styles.review_invoice}>
+							<Button size="sm" onClick={updateInvoiceStatus} disabled={loading}>
+								Approve
+							</Button>
+						</div>
+						) : null}
+
 					{invoice?.status === 'amendment_requested' ? (
 						<Tooltip
 							placement="bottom"

@@ -112,21 +112,20 @@ function Edit({
 			<Modal.Body>
 				<div />
 				<div className={styles.title}>
-					<b>
+					<strong>
 						{`SID ${shipment_data?.serial_id} - Invoice number -`}
-						<u>{live_invoice_number}</u>
-					</b>
+						<span className={styles.underline}>{live_invoice_number}</span>
+					</strong>
 				</div>
 
 				<div>
-					<b>Requested By</b>
+					<strong>Requested By</strong>
 					<span>{` - ${item?.requested_by?.name}`}</span>
 				</div>
 
 				<div>
-					<b>Date</b>
+					<strong>Date - </strong>
 					<span>
-						&nbsp; -
 						{formatDate({
 							date       : item?.created_at,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],

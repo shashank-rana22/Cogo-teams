@@ -1,7 +1,7 @@
 const formatIps = (ips) => {
 	const newIps = ips?.map((ip) => {
 		const {
-			billing_address : ba, id, is_active, services = [], is_igst,
+			billing_address : billingAddress, id, is_active, services = [], is_igst,
 			invoice_currency, invoicing_party_total_discounted, invoice_total_currency,
 			status, source:invoice_source,
 		} = ip || {};
@@ -19,7 +19,7 @@ const formatIps = (ips) => {
 			is_sez,
 			business_name,
 			address,
-		} = ba || {};
+		} = billingAddress || {};
 
 		return {
 			id,

@@ -54,13 +54,13 @@ function Header({
 					</div>
 				)}
 
-				{invoice?.exchange_rate_state && (
+				{invoice?.exchange_rate_state ? (
 					<div className={styles.invoice_source}>
 						Applicable State -
 						{' '}
 						{startCase(invoice?.exchange_rate_state)}
 					</div>
-				)}
+				) : null}
 			</div>
 
 			<div className={cl`${styles.flex_row} ${open ? styles.open : ''}`}>

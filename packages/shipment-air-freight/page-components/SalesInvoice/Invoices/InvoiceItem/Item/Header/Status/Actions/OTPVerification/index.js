@@ -1,4 +1,5 @@
 import { Modal, Button, RadioGroup, Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -10,7 +11,6 @@ import OtpInput from './OtpInput';
 import styles from './styles.module.css';
 
 const USER_MOBILE_NUMBER_INDEX = 1;
-const USER_ID_INDEX = 0;
 const OTP_LENGTH = 4;
 
 function OTPVerification({
@@ -61,7 +61,7 @@ function OTPVerification({
 		if (!isEmpty(selectedUser)) {
 			const payload = {
 				invoice_id : invoice?.id,
-				user_id    : selectedUser?.split('_')?.[USER_ID_INDEX],
+				user_id    : selectedUser?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
 			};
 			await sendOtpForInvoiceApproval(payload);
 		}

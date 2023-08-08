@@ -13,6 +13,38 @@ import styles from './styles.module.css';
 const MAIN_SERVICES = 'air_freight_service';
 const ACTION_STATE = ['reviewed', 'approved', 'revoked', 'finance_rejected'];
 
+function RenderServicesTaken({ services = [] }) {
+	return (
+		<>
+			{(services || []).map((service) => {
+				const trade_type = MAIN_SERVICES !== service?.service_type && service?.trade_type;
+
+				let tradeType = '';
+				if (trade_type === 'export') {
+					tradeType = 'Origin';
+				} else if (trade_type === 'import') {
+					tradeType = 'Destination';
+				}
+
+				const isBas = (service?.line_items || []).some(
+					(lineItem) => lineItem?.code === 'BAS',
+				);
+
+				const serviceCode = service?.charge_code;
+
+				return service?.service_type ? (
+					<div className={styles.service_name} key={service?.service_id}>
+						{`${tradeType} ${startCase(service?.service_type)} ${
+							service?.is_igst ? '(IGST INVOICE)' : ''
+						} ${isBas && !service?.is_igst ? '(BAS)' : ''}
+			${serviceCode ? `(${serviceCode})` : ''}`}
+					</div>
+				) : null;
+			})}
+		</>
+	);
+}
+
 function Item({
 	invoice = {},
 	shipmentData = {},
@@ -46,32 +78,6 @@ function Item({
 	const isBookingParty = billing_address?.organization_id === shipmentData?.importer_exporter_id ? (
 		<div className={styles.booking_text}> - Booking Party</div>
 	) : null;
-
-	const renderServicesTaken = (services || []).map((service) => {
-		const trade_type = MAIN_SERVICES !== service?.service_type && service?.trade_type;
-
-		let tradeType = '';
-		if (trade_type === 'export') {
-			tradeType = 'Origin';
-		} else if (trade_type === 'import') {
-			tradeType = 'Destination';
-		}
-
-		const isBas = (service?.line_items || []).some(
-			(lineItem) => lineItem?.code === 'BAS',
-		);
-
-		const serviceCode = service?.charge_code;
-
-		return service?.service_type && (
-			<div className={styles.service_name}>
-				{`${tradeType} ${startCase(service?.service_type)} ${
-					service?.is_igst ? '(IGST INVOICE)' : ''
-				} ${isBas && !service?.is_igst ? '(BAS)' : ''}
-				${serviceCode ? `(${serviceCode})` : ''}`}
-			</div>
-		);
-	});
 
 	const noActionState = ACTION_STATE.includes(status);
 
@@ -146,7 +152,7 @@ function Item({
 					<div
 						className={styles.flex}
 					>
-						{renderServicesTaken}
+						<RenderServicesTaken services={services} />
 					</div>
 				</div>
 
