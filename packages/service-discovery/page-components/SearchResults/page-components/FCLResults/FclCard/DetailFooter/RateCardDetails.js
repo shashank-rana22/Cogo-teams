@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function RateCardDetails({ TABS_MAPPING, activeTab, setActiveTab }) {
+function RateCardDetails({ TABS_MAPPING = {}, activeTab = '', setActiveTab = () => {} }) {
 	return (
 		<div className={styles.containerDetails}>
 

@@ -19,7 +19,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 
 	const { rateData = [] } = serviceItem;
 
-	function RenderRateItem({ service }) {
+	function RenderRateItem({ service = {} }) {
 		const {
 			container_size = '',
 			container_type = '',

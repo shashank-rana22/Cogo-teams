@@ -30,15 +30,8 @@ function DottedLineWithTag({ scheduleData = {} }) {
 	);
 }
 
-function Route({ detail, scheduleData = {}, isCogoAssured = false }) {
+function Route({ detail = {}, scheduleData = {}, isCogoAssured = false }) {
 	const { origin, destination } = getLocationInfo(detail, {}, 'search_type');
-
-	// const originIcd = detail?.trade_type === 'export'
-	// 	? detail?.origin_port?.is_icd || detail?.port?.is_icd
-	// 	: detail?.origin_port?.is_icd;
-	// const destinationIcd = detail?.trade_type === 'import'
-	// 	? detail?.destination_port?.is_icd || detail?.port?.is_icd
-	// 	: detail?.destination_port?.is_icd;
 
 	const {
 		name: originPortName = '',

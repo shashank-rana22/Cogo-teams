@@ -1,10 +1,10 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 
 import usePublishKamPromotion from './usePublishKamPromotion';
 
-const ZEROTH_INDEX = 0;
 const FIRST_INDEX = 1;
 
 const useCreateKamPromotion = () => {
@@ -32,10 +32,10 @@ const useCreateKamPromotion = () => {
 				'ltl_freight',
 				'haulage_freight',
 			];
-			const checkTradeType = validServices.includes(service[ZEROTH_INDEX]);
+			const checkTradeType = validServices.includes(service[GLOBAL_CONSTANTS.zeroth_index]);
 			const payload = {
 				organization_id,
-				service_type : service[ZEROTH_INDEX],
+				service_type : service[GLOBAL_CONSTANTS.zeroth_index],
 				trade_type   : checkTradeType ? 'domestic' : service[FIRST_INDEX],
 				purchased_type,
 				discounts    : [

@@ -18,12 +18,12 @@ const useUpdateDestinationDemurrageDays = ({
 		url    : '/add_spot_search_service',
 	}, { manual: true });
 
-	const fclLocalsTradeTypes = [];
+	const FCL_LOCALS_TRADE_TYPES = [];
 
 	Object.keys(services || {}).forEach((key) => {
 		if (services?.[key]?.service_type === 'fcl_freight_local') {
-			if (!fclLocalsTradeTypes.includes(services?.[key]?.trade_type)) {
-				fclLocalsTradeTypes.push(services?.[key]?.trade_type);
+			if (!FCL_LOCALS_TRADE_TYPES.includes(services?.[key]?.trade_type)) {
+				FCL_LOCALS_TRADE_TYPES.push(services?.[key]?.trade_type);
 			}
 		}
 	});

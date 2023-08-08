@@ -36,7 +36,14 @@ const getFinalLineItems = (lineItems) => {
 	return { finalLineItems, COMPARISON_KEY };
 };
 
-function Table({ staticKeys = {}, dynamicKeys = {}, staticLineItems = {}, dynamicLineitems = {}, LOGO_MAPPING, mode }) {
+function Table({
+	staticKeys = {},
+	dynamicKeys = {},
+	staticLineItems = {},
+	dynamicLineitems = {},
+	LOGO_MAPPING = {},
+	mode = '',
+}) {
 	const itemsKeys = Object.keys({ ...staticLineItems, ...dynamicLineitems });
 
 	const renderTableHeader = () => (

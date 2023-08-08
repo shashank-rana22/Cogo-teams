@@ -1,8 +1,6 @@
-// import { Toast } from '@cogoport/components';
-// import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import getRequiredFilters from '../utils/getRequiredFilters';
 
@@ -55,32 +53,14 @@ const useGetMinPrice = ({ allServices = [], total_price_currency = 'USD', detail
 		};
 	});
 
-	const [{ loading, data }, trigger] = useRequest({
+	const [{ loading, data }] = useRequest({
 		method : 'GET',
 		url    : 'get_freight_rate_min_price',
-	}, { manual: true });
-
-	const getMinPrice = useCallback(async () => {
-		if (!allServices || isEmpty(allServices)) return;
-
-		try {
-			await trigger({
-				params: {
-					currency: total_price_currency,
-					service_attributes,
-				},
-			});
-		} catch (err) {
-			// if (err?.response?.data) {
-			// 	Toast.error(getApiErrorString(err.response?.data));
-			// }
-			console.log(err);
-		}
-	}, []);
-
-	useEffect(() => {
-		getMinPrice();
-	}, [getMinPrice]);
+		params : {
+			currency: total_price_currency,
+			service_attributes,
+		},
+	}, { manual: !allServices || isEmpty(allServices) });
 
 	const startingPrices = useMemo(() => {
 		const STARTING_PRICES = [];

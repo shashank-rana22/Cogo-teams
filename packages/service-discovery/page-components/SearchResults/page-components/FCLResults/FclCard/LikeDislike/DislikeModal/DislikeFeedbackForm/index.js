@@ -14,7 +14,7 @@ const FLEX_ONE = 1;
 
 function DislikeFeedbackForm({
 	rate = {},
-	control,
+	control = () => {},
 	errors = {},
 	formValues = {},
 	setValue = () => {},

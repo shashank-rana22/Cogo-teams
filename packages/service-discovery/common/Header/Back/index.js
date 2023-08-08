@@ -24,8 +24,6 @@ function Back({
 		const { currentScreen = '', setCurrentScreen = () => {} } = rest;
 		const backscreen = backScreen(currentScreen);
 
-		console.log('backscreen', backscreen);
-
 		if (backscreen !== 'back') {
 			setCurrentScreen(() => backscreen);
 		} else {

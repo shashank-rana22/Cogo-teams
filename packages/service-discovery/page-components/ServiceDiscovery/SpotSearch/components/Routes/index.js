@@ -26,10 +26,10 @@ function Routes({
 	mode = {},
 	formValues = {},
 	setFormValues = () => {},
-	organization,
-	createSearch,
-	createSearchLoading,
-	setErrors,
+	organization = {},
+	createSearch = () => {},
+	createSearchLoading = false,
+	setErrors = () => {},
 }) {
 	const router = useRouter();
 

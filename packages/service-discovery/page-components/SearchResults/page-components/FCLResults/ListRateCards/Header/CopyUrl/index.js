@@ -3,7 +3,7 @@ import { IcMCopy } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
 
-function CopyUrl({ details }) {
+function CopyUrl({ details = {} }) {
 	const { spot_search_id } = useSelector(({ general }) => ({
 		spot_search_id: general?.query?.spot_search_id,
 	}));

@@ -100,7 +100,7 @@ const handleServicesNames = (item) => {
 		: `${formattedTradeType} ${formattedService}`;
 };
 
-function PriceBreakup({ rateCardData, detail }) {
+function PriceBreakup({ rateCardData = {}, detail = {} }) {
 	const { service_rates, total_price_discounted = '', total_price_currency = '' } = rateCardData;
 	const { service_details, service_type } = detail;
 
