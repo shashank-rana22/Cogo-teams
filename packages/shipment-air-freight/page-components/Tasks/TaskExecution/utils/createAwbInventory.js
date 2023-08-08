@@ -7,9 +7,9 @@ const createAwbInventory = async (
 	service_provider_id,
 	createAwbInventoryTrigger,
 ) => {
-	let responseAwbInventory = {};
+	let hasError = false;
 	try {
-		const res = await createAwbInventoryTrigger({
+		await createAwbInventoryTrigger({
 			params: {
 				shipment_id,
 				first_awb_number      : formValues?.booking_reference_number,
@@ -20,11 +20,10 @@ const createAwbInventory = async (
 				procured_date         : new Date(),
 			},
 		});
-		responseAwbInventory = res;
 	} catch (error) {
-		responseAwbInventory = error?.response?.data;
+		hasError = true;
 		toastApiError(error);
 	}
-	return responseAwbInventory;
+	return hasError;
 };
 export default createAwbInventory;

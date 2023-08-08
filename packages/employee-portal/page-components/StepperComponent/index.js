@@ -10,7 +10,7 @@ function StepperComponent({ data, loading }) {
 	const { progress_stats = {}, company_policy_data, signed_documents } = data || {};
 	const {
 		additional_info_added = {},
-		offer_letter_signed = {},
+		// offer_letter_signed = {},
 		personal_details = {},
 		documents_signed = {},
 		company_policies_read,
@@ -18,26 +18,27 @@ function StepperComponent({ data, loading }) {
 
 	const { documents_signed:document_sign = false } = documents_signed;
 
-	const { get_offer_letter_signed = false } = offer_letter_signed;
+	// const { get_offer_letter_signed = false } = offer_letter_signed;
 
 	const MAPPING = [
 		{
 			name      : 'personal_details',
 			icon      : IcMProfile,
-			is_added  : Object.keys(personal_details).every((key) => (personal_details[key])),
+			is_added  : (Object.keys(personal_details) || []).every((key) => (personal_details[key])),
 			sub_title : 'Added',
 		},
+		// {
+		// 	name      : 'offer_letter',
+		// 	icon      : IcMDocument,
+		// 	is_added  : get_offer_letter_signed,
+		// 	sub_title : 'Signed',
+		// },
 		{
-			name      : 'offer_letter',
-			icon      : IcMDocument,
-			is_added  : get_offer_letter_signed,
-			sub_title : 'Signed',
-		},
-		{
-			name      : 'additional_info',
-			icon      : IcMDocument,
-			is_added  : !loading && Object.keys(additional_info_added).every((key) => (additional_info_added[key])),
-			sub_title : 'Added',
+			name     : 'additional_info',
+			icon     : IcMDocument,
+			is_added : !loading
+			&& (Object.keys(additional_info_added) || []).every((key) => (additional_info_added[key])),
+			sub_title: 'Added',
 		},
 		{
 			name      : 'documents',

@@ -1,5 +1,4 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const LIST_PREFERENCE_RATE_STEP = 1;
@@ -23,7 +22,7 @@ const useUpdateBookingPreference = () => {
 			refetchList(shipment_id);
 			setStep(LIST_PREFERENCE_RATE_STEP);
 		} catch (err) {
-			Toast.error(toastApiError(err?.data) || 'Something went wrong.');
+			toastApiError(err);
 		}
 	};
 	return {

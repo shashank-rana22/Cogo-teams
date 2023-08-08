@@ -1,17 +1,10 @@
 import { Placeholder } from '@cogoport/components';
 
-import styles from './styles.module.css';
+const ARRAY_LENGTH = 5;
 
-function LoadingState() {
-	return (
-		<div direction="column">
-			{[1, 2, 3, 4, 5].map((item) => (
-				<div key={item} className={styles.loading_container}>
-					{[6, 7, 8, 9, 10].map((key) => (<Placeholder key={key} height="24px" width="15%" />))}
-				</div>
-			))}
-		</div>
-	);
+function LoadingState({ height = '50px', arrayLength = ARRAY_LENGTH }) {
+	return [...Array(arrayLength).keys()].map((index) => (
+		<Placeholder key={index} height={height} width="100%" margin="0px 0px 20px 0px" />));
 }
 
 export default LoadingState;

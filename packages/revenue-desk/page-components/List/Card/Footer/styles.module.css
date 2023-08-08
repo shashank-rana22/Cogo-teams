@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 16px;
+}
+
+.text {
+	font-size: 12px;
+	font-weight: 400;
+	color: #828282;
+}

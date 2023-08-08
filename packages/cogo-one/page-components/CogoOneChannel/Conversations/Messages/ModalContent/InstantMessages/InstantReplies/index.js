@@ -9,21 +9,38 @@ import useListSuggestions from '../../../../../../../hooks/useListSuggestions';
 
 import styles from './styles.module.css';
 
+const DEFAULT_LOADER_LENGTH = 6;
+
+const Loader = () => (
+	[...Array(DEFAULT_LOADER_LENGTH).keys()].map((itm) => (
+		<div className={styles.loader_div} key={itm}>
+			<Placeholder height="10px" width="100px" margin="0 0 10px 0" />
+			<Placeholder height="30px" width="200px" margin="0 0 10px 0" />
+		</div>
+	))
+);
+
 function InstantReplies({
 	data = {},
-	activeTab,
-	openCreateReply,
+	activeTab = '',
+	openCreateReply = false,
 	setOpenCreateReply = () => {},
 }) {
 	const { updateMessage = () => {} } = data || {};
-	const { title, content } = controls;
-	const { control, handleSubmit, formState:{ errors }, reset } = useForm();
+
+	const { title, content } = controls.reduce((accumulator, currentControl) => ({
+		...accumulator,
+		[currentControl.name]: currentControl,
+	}), {});
+
+	const { control, handleSubmit, formState: { errors }, reset } = useForm();
 	const {
 		setQfilter,
 		handleScroll,
 		qfilter,
-		infiniteList:{ list = [] },
-		loading, refetch,
+		infiniteList: { list = [] },
+		loading,
+		refetch,
 	} = useListSuggestions({ activeTab });
 
 	const { createSuggestion, loading:CreateLoading } = useCreateSuggestions({
@@ -33,14 +50,6 @@ function InstantReplies({
 		refetch,
 	});
 
-	const loader = () => (
-		[...Array(6)].map(() => (
-			<div className={styles.loader_div}>
-				<Placeholder height="10px" width="100px" margin="0 0 10px 0" />
-				<Placeholder height="30px" width="200px" margin="0 0 10px 0" />
-			</div>
-		))
-	);
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>
@@ -55,9 +64,13 @@ function InstantReplies({
 						className={styles.message_container}
 						onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
 					>
-						{(list || []).map(({ title:messageTitle = '', content:messageContent = '' }) => (
+						{(list || []).map(({
+							title: messageTitle = '',
+							content: messageContent = '',
+						}) => (
 							<div
 								role="presentation"
+								key={messageTitle}
 								className={styles.each_message}
 								onClick={() => updateMessage(messageContent)}
 							>
@@ -69,7 +82,7 @@ function InstantReplies({
 								</div>
 							</div>
 						))}
-						{loading && loader()}
+						{loading && <Loader />}
 						{isEmpty(list) && !loading && <div className={styles.empty_div}>No Quick Messages</div>}
 					</div>
 				</div>
@@ -81,7 +94,6 @@ function InstantReplies({
 						onClick={() => setOpenCreateReply(true)}
 					>
 						+ Create Reply
-
 					</Button>
 				</div>
 			</div>

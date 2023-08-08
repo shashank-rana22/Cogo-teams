@@ -1,0 +1,31 @@
+.modal_styles {
+	background-color: #fff;
+}
+
+.head {
+	margin: 12px 0;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.sidnum {
+	margin: 16px 0;
+}
+
+.billnum {
+	margin: 16px 0;
+}
+
+.flexend {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
+}
+
+.marginRight {
+	margin-right: 12px;
+}
+
+.body {
+	padding: 2px 16px;
+}

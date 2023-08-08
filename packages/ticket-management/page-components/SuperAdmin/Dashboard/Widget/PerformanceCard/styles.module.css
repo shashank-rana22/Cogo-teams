@@ -1,6 +1,5 @@
 .list {
-	min-height: 220px;
-	max-height: 460px;
+	height: 30vh;
 	overflow-y: auto;
 }
 

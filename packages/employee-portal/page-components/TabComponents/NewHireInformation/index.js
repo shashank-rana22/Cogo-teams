@@ -92,7 +92,7 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 										/>
 									</div>
 								)}
-								animate={false}
+								animate
 							>
 								<Component
 									id={id}

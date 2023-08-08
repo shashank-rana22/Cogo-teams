@@ -27,7 +27,7 @@ function ScoreDistributionGraph(props) {
 				margin={{ top: 90, right: 60, bottom: 90, left: 150 }}
 				padding={0.5}
 				valueScale={{
-					type: 'linear',
+					type: 'symlog', base: 10,
 				}}
 				colors={['#888FD1']}
 				axisBottom={{

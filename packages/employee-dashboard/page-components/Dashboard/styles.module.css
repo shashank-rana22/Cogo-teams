@@ -1,0 +1,36 @@
+.flex_container {
+	display: flex;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+		margin-top: 50px;
+	}
+}
+
+.flex_item1 {
+	flex: 0 0 30%;
+	padding-right: 12px;
+
+	@media (max-width: 768px) {
+		flex: 0 0 100%;
+		padding-right: 0;
+	}
+}
+
+.flex_item2 {
+	flex: 0 0 70%;
+	padding-left: 12px;
+	overflow: hidden;
+
+	@media (max-width: 768px) {
+		flex: 0 0 100%;
+		padding-left: 0;
+		margin-top: 20px;
+	}
+}
+
+.heading {
+	margin-bottom: 20px;
+	font-size: 24px;
+	font-weight: 700;
+}

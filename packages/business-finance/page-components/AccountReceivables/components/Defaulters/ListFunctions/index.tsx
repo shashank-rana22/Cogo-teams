@@ -48,7 +48,7 @@ const listFunctions = ({ refetch }) => ({
 			<div>
 				<Pill size="sm" color={INVOICE_TYPE[(row?.invoiceType as string)]}>
 
-					{row?.eInvoicePdfUrl ? 'E INVOICE' : startCase(row?.invoiceType)}
+					{row?.eInvoicePdfUrl ? 'E-INVOICE' : startCase(row?.invoiceType)}
 
 				</Pill>
 			</div>
@@ -178,7 +178,7 @@ const listFunctions = ({ refetch }) => ({
 									className={styles.tool_tip}
 								>
 									{row?.eInvoicePdfUrl
-										? 'E INVOICE GENERATED'
+										? 'E-INVOICE GENERATED'
 										: startCase(row?.invoiceStatus)}
 
 								</div>
@@ -186,7 +186,7 @@ const listFunctions = ({ refetch }) => ({
 						>
 							<text className={styles.style_text}>
 								{row?.eInvoicePdfUrl
-									? `${'E INVOICE GENERATED'.substring(
+									? `${'E-INVOICE GENERATED'.substring(
 										0,
 										10,
 									)}...`

@@ -1,0 +1,18 @@
+{
+	"name": "@cogoport/operators",
+	"version": "1.0.0",
+	"description": "Package for Operators",
+	"private": true,
+	"dependencies": {
+	  "@cogoport/components": "^1.0.322",
+	  "@cogoport/forms": "workspace:0.1.0",
+	  "@cogoport/icons-react": "^1.0.51",
+	  "@cogoport/request": "workspace:0.1.0",
+	  "@cogoport/store": "workspace:0.1.0",
+	  "@cogoport/utils": "^1.2.2",
+	  "@cogoport/globalization": "^0.0.1",
+   	  "react-infinite-scroller": "^1.2.4",
+	  "react": "18.2.0"
+	}
+  }
+  

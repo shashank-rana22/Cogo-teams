@@ -130,6 +130,8 @@ const useProfileDetails = () => {
 	const yearlyJoiningBonus = watch('joining_bonus_yearly');
 	const monthlyJoiningBonus = watch('joining_bonus_monthly');
 	const yearlyRetentionBonus = watch('retention_bonus_yearly');
+	const twiceYearlyRetentionBonus = watch('retention_bonus_twice_yearly');
+	const thriceYearlyRetentionBonus = watch('retention_bonus_thrice_yearly');
 	const monthlyRetentionBonus = watch('retention_bonus_monthly');
 	const yearlyPerformance = watch('performance_linked_variable_yearly');
 	const monthlyPerformance = watch('performance_linked_variable_monthly');
@@ -141,6 +143,8 @@ const useProfileDetails = () => {
 			yearlyJoiningBonus,
 			monthlyJoiningBonus,
 			yearlyRetentionBonus,
+			twiceYearlyRetentionBonus,
+			thriceYearlyRetentionBonus,
 			monthlyRetentionBonus,
 			yearlyPerformance,
 			monthlyPerformance,
@@ -155,9 +159,14 @@ const useProfileDetails = () => {
 			const ctcInfo = ctcModalLessControls(initialQuestion, data);
 			setCtcStructure(ctcInfo.controls);
 		}
-	}, [initialQuestion, monthlyPerformance, yearlyPerformance,
-		monthlyRetentionBonus, yearlyRetentionBonus, monthlyJoiningBonus,
-		yearlyJoiningBonus, yearlySignInBonus, monthlySignInBonus]);
+	}, [initialQuestion,
+		monthlyPerformance,
+		yearlyPerformance,
+		monthlyRetentionBonus,
+		yearlyRetentionBonus,
+		monthlyJoiningBonus,
+		yearlyJoiningBonus,
+		yearlySignInBonus, monthlySignInBonus, twiceYearlyRetentionBonus, thriceYearlyRetentionBonus]);
 
 	const params = {
 		id                      : profile_id,

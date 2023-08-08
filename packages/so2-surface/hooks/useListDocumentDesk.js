@@ -1,16 +1,21 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useContext, useState, useEffect, useCallback } from 'react';
 
 import payloadMapping from '../configs/payloadMapping';
 import DashboardContext from '../context/DashboardContext';
 
+const PAGE_SIZE = 20;
+const DEFAULT_PAGE = 1;
+const CANCELED_ERROR = 'canceled';
+
 const useListDocumentDesk = () => {
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const dashboardContextValues = useContext(DashboardContext);
 	const { filters, setFilters, activeTab, stepperTab } = dashboardContextValues || {};
 
-	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const { page = 1, ...restFilters } = filters || {};
 
 	const { startDate:from_created_at, endDate:to_created_at } = filters || {};
@@ -25,11 +30,16 @@ const useListDocumentDesk = () => {
 				...restFilters,
 				...payloadMapping[stepperTab][activeTab],
 			},
-			sort_by                  : filters?.sortValue,
-			sort_type                : filters?.order,
-			task_stats_required      : true,
-			pagination_data_required : true,
+			pending_task_required: !['eway_bill_validity',
+				'cancelled_shipment', 'completed_shipment'].includes(activeTab),
+			service_details_required          : true,
+			sort_by                           : filters?.sortValue,
+			sort_type                         : filters?.order,
+			task_stats_required               : true,
+			pagination_data_required          : true,
+			is_collection_party_data_required : payloadMapping[stepperTab][activeTab]?.shipment_type !== 'ftl_freight',
 			page,
+			page_limit                        : PAGE_SIZE,
 		},
 	});
 
@@ -37,12 +47,13 @@ const useListDocumentDesk = () => {
 		try {
 			const res = await trigger();
 
-			if (res?.data?.list?.length === 0 && page > 1) setFilters({ ...filters, page: 1 });
+			if (isEmpty(res?.data?.list) && page > DEFAULT_PAGE) setFilters({ ...filters, page: DEFAULT_PAGE });
 
 			setApiData(res?.data || {});
 		} catch (err) {
+			if (err?.message === 'canceled') return;
 			setApiData({});
-
+			if (err?.message === CANCELED_ERROR) { return; }
 			Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');
 		}
 	}, [trigger, setFilters, page, filters]);

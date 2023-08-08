@@ -5,11 +5,17 @@ on:
     secrets:
       NPM_TOKEN:
         required: true
+    inputs:
+      platform:
+        description: 'Platform'
+        default: 'ubuntu-latest'
+        required: false
+        type: string
 
 jobs:
   run-setup:
     name: Run Setup
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.platform }}
 
     steps:
       - name: Checkout

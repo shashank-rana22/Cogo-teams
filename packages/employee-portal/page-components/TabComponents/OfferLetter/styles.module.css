@@ -3,6 +3,10 @@
 	align-items: center;
 	margin-top: 10px;
 	margin-bottom: 16px;
+
+	@media (max-width: 800px) {
+		margin: 38px 16px 16px;
+	}
 }
 
 .title {
@@ -25,4 +29,9 @@
 	display: flex;
 	justify-content: center;
 	padding-bottom: 12px;
+}
+
+.btn_container {
+	display: flex;
+	justify-content: flex-end;
 }

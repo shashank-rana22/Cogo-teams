@@ -1,9 +1,13 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import React from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import styles from '../styles.module.css';
 
+const MAX_LENGTH = 4;
+
 function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterTax, payableAmount, totalTds }) {
+	const geo = getGeoConstants();
 	const getValue = (value) => {
 		if (Number.isNaN(value)) {
 			return '---';
@@ -30,24 +34,27 @@ function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterT
 						{ getValue(totalAmountBeforeTax)}
 					</span>
 				</div>
-				<div className={`${styles.col}`} style={{ width: '14%' }}>
+				<div className={styles.col} style={{ width: '14%' }}>
 					Tax
 					<span>
 						{ getValue(totalTax)}
 						%
 					</span>
 				</div>
-				<div className={`${styles.col}`} style={{ width: '18%' }}>
+				<div className={styles.col} style={{ width: '18%' }}>
 					Amount after Tax
 					<span>
 						{ getValue(totalAmountAfterTax)}
 					</span>
 				</div>
-				<div className={`${styles.col}`} style={{ width: '10%' }}>
-					TDS
-					<span>{totalTds ? showOverflowingNumber(totalTds, 4) : null}</span>
-				</div>
-				<div className={`${styles.col}`} style={{ width: '10%' }}>
+				{!geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds
+					&& (
+						<div className={styles.col} style={{ width: '10%' }}>
+							TDS
+							<span>{totalTds ? showOverflowingNumber(totalTds, MAX_LENGTH) : null}</span>
+						</div>
+					)}
+				<div className={styles.col} style={{ width: '10%' }}>
 					Payable
 					<span>{ getValue(payableAmount)}</span>
 				</div>

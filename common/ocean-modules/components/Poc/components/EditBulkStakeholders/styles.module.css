@@ -1,0 +1,33 @@
+.form_container {
+	margin: 10px 0;
+}
+
+.form_item {
+	width: 55%;
+	margin-right: 10px;
+}
+
+.check_box_container {
+	display: flex;
+	align-items: center;
+}
+
+.error_text {
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}
+
+.service_additional_details {
+	margin-top: -10px;
+	margin-left: 48px;
+}
+
+.form_item_container {
+	display: flex;
+	align-items: center;
+}
+
+.description_details {
+	font-size: var(--font-size-md);
+	color: var(--color-secondary-greyscale-3);
+}

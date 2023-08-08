@@ -1,7 +1,8 @@
 import { Button, Tooltip } from '@cogoport/components';
-import { IcMEyeopen, IcMDelete, IcMOverflowDot, IcMEdit } from '@cogoport/icons-react';
+import { IcMEyeopen, IcMDelete, IcMOverflowDot, IcMEdit, IcMCopy } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import DuplicateModal from '../DuplicateModal';
 import ExtendValidityModal from '../ExtendValidityModal';
 
 import styles from './styles.module.css';
@@ -91,6 +92,8 @@ export function TestSetButtons({
 }) {
 	const [showExtendValidityModal, setShowExtendValidityModal] = useState(false);
 
+	const [showDuplicateModal, setShowDuplicateModal] = useState(false);
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -126,21 +129,46 @@ export function TestSetButtons({
 								</>
 							) : null}
 
-							{current_status !== 'draft' ?	(
+							{current_status === 'published' ?	(
 								<Button
 									loading={loading}
 									themeType="secondary"
 									className={styles.btn}
 									type="button"
-									onClick={() => {
-										setShowExtendValidityModal(true);
-									}}
+									onClick={() => setShowDuplicateModal(true)}
 								>
-									<IcMEdit />
-									<div>Extend Validity</div>
+									<IcMCopy />
+									<div>Duplicate</div>
 								</Button>
 							) : null }
 
+							{current_status !== 'draft' ?	(
+								<>
+									<Button
+										loading={loading}
+										themeType="secondary"
+										className={styles.btn}
+										type="button"
+										onClick={() => setShowExtendValidityModal(true)}
+									>
+										<IcMEdit />
+										<div>Extend Validity</div>
+									</Button>
+									<Button
+										loading={loading}
+										themeType="primary"
+										className={styles.btn}
+										type="button"
+										onClick={() => {
+											setShowModal(true);
+											setTestId(id);
+										}}
+									>
+										<IcMDelete />
+										<div>Delete</div>
+									</Button>
+								</>
+							) : null }
 						</div>
 					)}
 					trigger="click"
@@ -158,6 +186,15 @@ export function TestSetButtons({
 					validity_end={validity_end}
 					validity_start={validity_start}
 					setShowModal={setShowModal}
+					id={id}
+					fetchList={fetchList}
+				/>
+			) : null}
+
+			{showDuplicateModal ? (
+				<DuplicateModal
+					showDuplicateModal={showDuplicateModal}
+					setShowDuplicateModal={setShowDuplicateModal}
 					id={id}
 					fetchList={fetchList}
 				/>

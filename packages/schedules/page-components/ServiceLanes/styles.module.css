@@ -1,0 +1,17 @@
+.button {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+
+.tabPanelWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.tabPanelWrapper button {
+	margin-top: -40px;
+	margin-right: 20px;
+	margin-left: auto;
+}

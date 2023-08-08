@@ -1,0 +1,15 @@
+.flex_row {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 22px;
+}
+
+.filters {
+	position: absolute;
+	right: 0;
+	bottom: 20px;
+	display: flex;
+	justify-content: flex-end;
+}

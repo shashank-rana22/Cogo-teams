@@ -1,18 +1,21 @@
 import { cl, Button, Modal } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMError } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from '../styles.module.css';
 
+const FIRST_PARAMETER = 1;
+
 function LinersExchangeRateConfirm({
 	invoice = {},
-	setShowExchangeRateConfirmation = () => {},
+	show = false,
+	onClose = () => {},
 	setShow = () => {},
-	showExchangeRateConfirmation = '',
 }) {
 	return (
-		<Modal show={showExchangeRateConfirmation} onClose={() => setShow(false)} width={800} closeOnOuterClick={false}>
+		<Modal show={show} onClose={onClose} width={800} closeOnOuterClick={false}>
 			<Modal.Header title="MARK AS REVIEWED - WARNING" />
 			<Modal.Body>
 				<div className={styles.form}>
@@ -32,10 +35,10 @@ function LinersExchangeRateConfirm({
 
 					{Object.keys(invoice?.exchange_rates)?.map((item) => (
 						<div key={item} className={cl`${styles.flex} ${styles.row}`}>
-							<div className={styles.title}>{item?.split('_')?.[0]}</div>
+							<div className={styles.title}>{item?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}</div>
 							<div className={styles.line} />
 
-							<div className={styles.title}>{item?.split('_')?.[1]}</div>
+							<div className={styles.title}>{item?.split('_')?.[FIRST_PARAMETER]}</div>
 							<div className={cl`${styles.line} ${styles.arrow}`} />
 
 							<div className={cl`${styles.title} ${styles.value}`}>
@@ -49,13 +52,13 @@ function LinersExchangeRateConfirm({
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => setShow(false)}
+					onClick={onClose}
 				>
 					Close
 				</Button>
 				<Button
 					size="md"
-					onClick={() => setShowExchangeRateConfirmation(false)}
+					onClick={() => setShow(false)}
 				>
 					Proceed
 				</Button>

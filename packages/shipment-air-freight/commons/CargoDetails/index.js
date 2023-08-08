@@ -21,6 +21,7 @@ const LABELS = [
 	'is_minimum_price_shipment',
 	'master_airway_bill_number',
 	'house_airway_bill_number',
+	'bl_category',
 ];
 
 function CargoDetails({ primary_service = {} }) {
@@ -37,11 +38,10 @@ function CargoDetails({ primary_service = {} }) {
 				<div className={styles.multi_service}>
 					<MultiServiceDetailsPopover mainServices={primary_service.cargo_details}>
 						<div className={styles.more_details_popover_text}>
-							+
-							{(primary_service.cargo_details?.length
-									|| CARGO_DETAILS_MIN_LENGTH) - CARGO_DETAILS_LENGTH_CHECK}
-							&nbsp;
-							Details
+							{`+
+							${(primary_service.cargo_details?.length
+									|| CARGO_DETAILS_MIN_LENGTH) - CARGO_DETAILS_LENGTH_CHECK} 
+							Details`}
 						</div>
 					</MultiServiceDetailsPopover>
 				</div>

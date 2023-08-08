@@ -103,3 +103,44 @@ export const OPTIONSCN = [
 export const VERIFICATION_STATUS = ['pending', 'verified'];
 
 export const EMPTY_POC = [{ name: '', email: '', mobile_number: '', alternate_mobile_number: '' }];
+
+export const PAYMENT_TYPE = [
+	{ label: 'Full', value: 'full' },
+	{ label: 'Balance', value: 'balance' },
+	{ label: 'Advance', value: 'advanced' },
+];
+
+export const IS_INVOICE_INCEDENTAL = [
+	{ label: 'Yes', value: 'yes' },
+	{ label: 'No', value: 'no' },
+];
+
+export const REMARKS_FOR_CN = [
+	{
+		label : 'Delayed Delivery',
+		value : 'delayed_delivery',
+	},
+	{
+		label : 'Goods Damage',
+		value : 'good_damage',
+	},
+	{
+		label : 'Non-Placement Penalty charges',
+		value : 'non_placement_penalty_charges',
+	},
+];
+
+export const URGENCY_TAG_OPTIONS = [
+	{ label: 'Surrender (Telex) BL Payments', value: 'telex' },
+	{ label: 'BL Amendment Payments', value: 'bl_amnd' },
+	{ label: 'LDC/LBC Payments', value: 'ldc_lbc' },
+	{ label: 'Cancel Charges', value: 'cxl' },
+	{ label: 'Detention Payments', value: 'dtn' },
+	{ label: 'Direct Port Delivery (DPD)', value: 'dpd' },
+	{ label: 'Short Payment', value: 'short_payment' },
+	{ label: 'ODEX', value: 'odex' },
+	{ label: 'Short Transit Shipment', value: 'short_transit_shipment' },
+	{ label: 'Co-ordination Charges', value: 'coordination_charges' },
+	{ label: 'SEZ Shipment', value: 'sez_shipment' },
+	{ label: 'Airlines DO Payments', value: 'air_do' },
+];

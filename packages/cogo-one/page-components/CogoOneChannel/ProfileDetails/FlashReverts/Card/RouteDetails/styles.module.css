@@ -35,11 +35,8 @@
 }
 
 .each_location {
-	width: 90%;
 	margin: 0 10px;
-	overflow: hidden;
 	font-size: 12px;
 	text-align: center;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	white-space: wrap;
 }

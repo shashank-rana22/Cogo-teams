@@ -23,7 +23,7 @@ function ExecuteStep({
 	getShipment = () => {},
 	getShipmentTimeline = () => {},
 	services = [],
-	tradeType,
+	tradeType = '',
 }) {
 	const [showEditParamsModal, setShowEditParamsModal] = useState(false);
 	const [updateModal, setUpdateModal] = useState(true);
@@ -48,6 +48,7 @@ function ExecuteStep({
 		services,
 		onCancel,
 		refetch,
+		tradeType,
 	});
 
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;

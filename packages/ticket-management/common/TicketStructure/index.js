@@ -1,6 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
 
-import useUpdateTicketActivity from '../../hooks/useUpdateTicketActivity';
 import EmptyTicket from '../EmptyTicket';
 
 import styles from './styles.module.css';
@@ -10,16 +9,18 @@ import TicketStructureLoader from './TicketStructureLoader';
 function TicketStructure({
 	data = [],
 	handleScroll = () => {},
-	loading = false,
-	refreshTickets = () => {},
 	setModalData = () => {},
-	label,
+	label = '',
+	updateTicketActivity = () => {},
+	listLoading = false,
 }) {
-	const { updateTicketActivity } = useUpdateTicketActivity({
-		refreshTickets,
-	});
+	if (listLoading) {
+		return <TicketStructureLoader />;
+	}
 
-	if (isEmpty(data) && !loading) return <EmptyTicket emptyText={`No ${label} Tickets`} />;
+	if (isEmpty(data)) {
+		return <EmptyTicket emptyText={`No ${label} Tickets`} />;
+	}
 
 	return (
 		<div
@@ -33,7 +34,7 @@ function TicketStructure({
 			)}
 		>
 			{
-				data.map((item = {}) => (
+				(data || []).map((item = {}) => (
 					<TicketStructureBody
 						data={item}
 						key={item.id}
@@ -43,10 +44,6 @@ function TicketStructure({
 					/>
 				))
 			}
-
-			{loading && (
-				<TicketStructureLoader />
-			)}
 		</div>
 	);
 }

@@ -10,6 +10,7 @@ const actions = ({
 	setShowModal = () => {},
 	setItem = () => {},
 	activeStakeholder = '',
+	canEditCancelService = false,
 }) => {
 	const isSameItem = serviceListItem.id === addRate?.item?.id;
 
@@ -76,7 +77,7 @@ const actions = ({
 
 	if (
 		(!IP_STATE_CONDITONS.includes(serviceListItem.state)
-			|| !serviceListItem.invoice_preference)
+			|| !serviceListItem.invoice_preference) && canEditCancelService
 	) {
 		return (
 			<Button

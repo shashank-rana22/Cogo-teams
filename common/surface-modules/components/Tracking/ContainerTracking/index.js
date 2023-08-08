@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState, useEffect } from 'react';
 
 import useGetSaasContainerSubscription from '../../../hooks/useGetSaasContainerSubscription';
@@ -6,16 +7,23 @@ import styles from './styles.module.css';
 import TrackingDetails from './TrackingDetails';
 import TrackingHeader from './TrackingHeader';
 
+const DEFAULT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
+
 function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 	const serialId = shipment_data?.serial_id;
 
 	const [containerNo, setContainerNo] = useState('');
 
-	const truckOptions = [];
-	const ftlServices = (shipment_data?.all_services || []).filter((item) => truckOptions.push({
-		label : item?.truck_number,
-		value : item?.truck_number,
-	}));
+	const TRUCK_OPTIONS = [];
+	const ftlServices = (shipment_data?.all_services || []).filter((item) => {
+		if (item?.service_type === 'ftl_freight_service') {
+			TRUCK_OPTIONS.push({
+				label : item?.truck_number,
+				value : item?.truck_number,
+			});
+		}
+		return item?.service_type === 'ftl_freight_service';
+	});
 
 	const {
 		loading,
@@ -23,13 +31,13 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 		data: list,
 	} = useGetSaasContainerSubscription({
 		serialId,
-		truckNumber: containerNo || truckOptions?.[0]?.value,
+		truckNumber: containerNo || TRUCK_OPTIONS?.[DEFAULT_INDEX]?.value,
 	});
 
-	const ContainerOptions = Array.isArray(list)
+	const containerOptions = Array.isArray(list)
 		? (list || [])
 			.filter((e) => e?.type === 'CONTAINER_NO')
-			?.map((e) => ({ label: e?.input, value: e?.input }))
+			.map((e) => ({ label: e?.input, value: e?.input }))
 		: [];
 
 	useEffect(() => {
@@ -40,17 +48,15 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 		<div className={styles.Container}>
 			<TrackingHeader
 				trackingLoading={loading}
-				ContainerOptions={ContainerOptions}
+				ContainerOptions={containerOptions}
 				setContainerNo={setContainerNo}
 				containerNo={
 							containerNo
-							|| ContainerOptions?.[0]?.value
-							|| truckOptions?.[0]?.value
+							|| containerOptions?.[DEFAULT_INDEX]?.value
+							|| TRUCK_OPTIONS?.[DEFAULT_INDEX]?.value
 						}
-				truckOptions={truckOptions}
-				shipmentId={shipment_data?.id}
+				truckOptions={TRUCK_OPTIONS}
 				serialId={serialId}
-				airwayBillNo={list?.airway_bill_no}
 				data={list}
 				listShipments={listShipments}
 				refetch={refetch}

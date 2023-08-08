@@ -44,7 +44,7 @@ function PublishCourse({ data = {}, id = '' }, ref) {
 					hasError : false,
 					values   : {
 						id,
-						thumbnail_url: finalUrl,
+						thumbnail_url: finalUrl || thumbnail_url,
 						...restValues,
 					},
 				};

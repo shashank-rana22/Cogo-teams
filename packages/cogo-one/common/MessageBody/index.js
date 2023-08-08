@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMUserAllocations, IcMEyeclose } from '@cogoport/icons-react';
 
 import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
@@ -7,8 +8,14 @@ import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
 import CustomFileDiv from './CustomFileDiv';
 import Order from './Order';
 import styles from './styles.module.css';
+import UserActivityMessages from './UserActivityMessages';
 
-function MessageBody({ response = {}, message_type = 'text' }) {
+function MessageBody({
+	response = {},
+	message_type = 'text',
+	eachMessage = {},
+	formattedData = {},
+}) {
 	const { message = '', media_url = '', profanity_check = '' } = response;
 	const hasProfanity = profanity_check === 'nudity';
 	const fileExtension = media_url?.split('.').pop();
@@ -22,8 +29,20 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 
 	function ShowMessage() {
 		return message_type === 'template'
-			? <div dangerouslySetInnerHTML={{ __html: message.replace(/(\r\n|\r|\n)/g, '<br>') }} />
-			: <div dangerouslySetInnerHTML={{ __html: renderText(message.replace(/(\r\n|\r|\n)/g, '<br>')) }} />;
+			? (
+				<div dangerouslySetInnerHTML={{
+					__html: message.replace(GLOBAL_CONSTANTS
+						.regex_patterns.occurrences_of_line_breaks, '<br>'),
+				}}
+				/>
+			)
+			: (
+				<div dangerouslySetInnerHTML={{
+					__html: renderText(message.replace(GLOBAL_CONSTANTS
+						.regex_patterns.occurrences_of_line_breaks, '<br>')),
+				}}
+				/>
+			);
 	}
 
 	function LoadMedia(type) {
@@ -115,6 +134,15 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 					))}
 				</div>
 			</div>
+		);
+	}
+
+	if (message_type === 'event') {
+		return (
+			<UserActivityMessages
+				eachMessage={eachMessage}
+				formattedData={formattedData}
+			/>
 		);
 	}
 

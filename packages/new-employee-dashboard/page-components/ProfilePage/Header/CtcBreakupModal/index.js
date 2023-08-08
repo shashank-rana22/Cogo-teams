@@ -2,6 +2,7 @@ import { Modal, Button, Popover } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import ModalComponent from '../ModalComponent';
+import usePostCreateEmployeeOfferLetter from '../usePostCreateEmployeeOfferLetter';
 
 import styles from './styles.module.css';
 import SubmitSection from './SubmitSection';
@@ -19,6 +20,13 @@ export default function CtcBreakupModal({
 	setError,
 }) {
 	const [visible, setVisible] = useState(false);
+
+	const {
+		loading,
+		onFinalSubmit, shareOfferLetter, setShareOfferLetter,
+	} = usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch });
+
+	const { is_offer_letter_applicable } = detail || {};
 
 	const {
 		handleSubmit,
@@ -52,6 +60,10 @@ export default function CtcBreakupModal({
 					setInitialQuestion={setInitialQuestion}
 					control={control}
 					error={error}
+					shareOfferLetter={shareOfferLetter}
+					setShareOfferLetter={setShareOfferLetter}
+					is_offer_letter_applicable={is_offer_letter_applicable}
+
 				/>
 			</Modal.Body>
 
@@ -70,14 +82,16 @@ export default function CtcBreakupModal({
 								setVisible={setVisible}
 								handleSubmit={handleSubmit}
 								reset={reset}
-								setShowCtcBreakupModal={setShowCtcBreakupModal}
 								setInitialQuestion={setInitialQuestion}
-								offerLetterApiRefetch={offerLetterApiRefetch}
 								setError={setError}
+								loading={loading}
+								shareOfferLetter={shareOfferLetter}
+								setShareOfferLetter={setShareOfferLetter}
+								onFinalSubmit={onFinalSubmit}
 							/>
 						)}
 					>
-						<Button onClick={onCheck}>Submit</Button>
+						<Button onClick={onCheck} loading={loading}>Submit</Button>
 					</Popover>
 				</div>
 			</Modal.Footer>

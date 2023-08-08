@@ -22,7 +22,7 @@ const useListOrganizationTradeParties = ({
 				...restFilters,
 			},
 			page,
-			page_limit: 10,
+			page_limit: 50,
 			...defaultParams,
 		},
 

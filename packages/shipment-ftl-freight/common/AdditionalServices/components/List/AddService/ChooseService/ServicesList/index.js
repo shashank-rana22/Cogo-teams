@@ -5,7 +5,7 @@ import Header from './CardHeader';
 import CardItem from './Carditem';
 import styles from './styles.module.css';
 
-function List({ fields, data, loading }) {
+function List({ fields = {}, data = [], loading = false }) {
 	return (
 		<div className={styles.container}>
 			<Header fields={fields} />

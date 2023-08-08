@@ -1,0 +1,85 @@
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 9px 0 9px 22px;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-top: 5px;
+}
+
+.agent_type {
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.name {
+	padding-left: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.type {
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.disable_call_icon {
+	cursor: not-allowed;
+}
+
+.call_icon {
+	width: 13px;
+	height: 18px;
+	fill: #fff;
+}
+
+.dialer_icon_div {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: flex;
+	padding: 2px 4px;
+	cursor: pointer;
+	background: #abcd62;
+	border-radius: 6px;
+}
+
+.user_work_scope {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.scope_name {
+	padding: 2px 8px;
+	margin: 5px 10px 0 0;
+	font-size: 10px;
+	background: #c4dc91;
+	border-radius: 6px;
+}
+
+.more_tags {
+	margin: 0 2px;
+	font-size: 10px;
+}
+
+.show_number {
+	margin-left: 8px;
+	font-size: 9px;
+	font-weight: 600;
+	color: #5936f0;
+	cursor: pointer;
+}

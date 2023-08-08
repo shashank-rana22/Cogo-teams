@@ -1,0 +1,8 @@
+.year_bottom_border {
+	margin-bottom: 10px;
+}
+
+.year_bottom_border :hover {
+	cursor: pointer;
+	background: var(--color-accent-orange-5);
+}

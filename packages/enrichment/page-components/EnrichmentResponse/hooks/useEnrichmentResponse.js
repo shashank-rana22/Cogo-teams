@@ -2,22 +2,21 @@ import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useEnrichmentResponse = () => {
+const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 	const router = useRouter();
 
 	const { query = {} } = router;
 
-	const [activeTab, setActiveTab] = useState('user');
-
-	const [showAddPoc, setShowAddPoc] = useState(false);
+	const { action_type:actionType = '', id:feedback_request_id } = query;
 
 	const [params, setParams] = useState({
-		sort_type : 'asc',
-		sort_by   : 'created_at',
-		page      : 1,
-		filters   : {
-			feedback_request_id : query.id,
-			response_type       : 'user',
+		sort_type  : 'desc',
+		sort_by    : 'created_at',
+		page       : 1,
+		page_limit : 4,
+		filters    : {
+			feedback_request_id,
+			response_type: 'user',
 		},
 		is_third_party: true,
 	});
@@ -29,31 +28,33 @@ const useEnrichmentResponse = () => {
 		params,
 	}, { manual: false });
 
-	const { list = [] } = data || {};
+	const { list = [], ...paginationData } = data || {};
+
+	const getNextPage = (newPage) => {
+		setParams((previousParams) => ({
+			...previousParams,
+			page: newPage,
+		}));
+	};
 
 	useEffect(() => {
-		if (showAddPoc) {
-			setShowAddPoc(false);
-		}
-
 		setParams((prev) => ({
 			...prev,
 			filters: {
 				...prev.filters,
-				response_type: activeTab,
+				response_type: activeTab === 'address' ? ['address', 'billing_address'] : activeTab,
 			},
 		}));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
 	return {
 		list,
-		refetch,
-		loading,
-		activeTab,
-		setActiveTab,
-		showAddPoc,
-		setShowAddPoc,
+		refetchResponses : refetch,
+		loadingResponses : loading,
+		setParams,
+		actionType,
+		getNextPage,
+		paginationData,
 	};
 };
 

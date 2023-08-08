@@ -11,8 +11,8 @@ function EditQuotations({
 	data,
 	shipment_id,
 	onCancel,
-	airInput,
-	localAirInput,
+	airServiceFormValues,
+	airLocalServiceFormValues,
 	reallocationFunc,
 	watchServiceProvider,
 }) {
@@ -20,7 +20,10 @@ function EditQuotations({
 
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 	const formProps = useForm({ defaultValues });
-	const { control, handleSubmit, formState:{ errors = {} } = {}, watch, loading, confirmLoading } = formProps || {};
+	const {
+		control, handleSubmit, formState:{ errors = {} } = {},
+		watch, loading, confirmLoading,
+	} = formProps || {};
 
 	const CUSTOM_VALUES = {};
 	const formValues = watch();
@@ -76,8 +79,8 @@ function EditQuotations({
 				<ConfirmModal
 					confirmModal={confirmModal}
 					setConfirmModal={setConfirmModal}
-					airInput={airInput}
-					localAirInput={localAirInput}
+					airServiceFormValues={airServiceFormValues}
+					airLocalServiceFormValues={airLocalServiceFormValues}
 					handleSubmit={handleSubmit}
 					onCreate={onSubmit}
 					reallocationFunc={reallocationFunc}

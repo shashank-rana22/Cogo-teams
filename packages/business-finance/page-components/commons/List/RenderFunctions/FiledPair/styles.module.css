@@ -1,0 +1,15 @@
+.lower_keys {
+	width: max-content;
+	padding: 0 4px;
+	margin-top: 4px;
+	font-size: 12px;
+	color: #333;
+	background: #d9eafd;
+	border-radius: 4px;
+}
+
+.link {
+	color: #ed3726;
+	text-decoration: underline;
+	cursor: pointer;
+}

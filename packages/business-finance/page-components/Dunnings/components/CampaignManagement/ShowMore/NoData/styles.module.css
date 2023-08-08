@@ -1,0 +1,11 @@
+.empty_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	padding: 60px;
+}
+
+.no_data_text {
+	color: #a9a0a0;
+}

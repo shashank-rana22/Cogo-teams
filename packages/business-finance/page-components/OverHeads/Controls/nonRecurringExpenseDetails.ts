@@ -1,47 +1,61 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
+
 import { MONTH_OPTIONS } from '../constants/MONTH_OPTIONS';
 
 import styles from './styles.module.css';
 
 interface FormDataInterface {
-	registrationNumber?: string,
-	entityObject?:{ id?:string },
-	periodOfTransaction?:string,
-	vendorName?:string,
+	registrationNumber?: string;
+	entityObject?: { id?: string };
+	periodOfTransaction?: string;
+	vendorName?: string;
+	transactionDate?: string;
 }
 
 interface EntityInt {
-	id?:string | number,
-	entity_code?:string,
-	business_name?:string
+	id?: string | number;
+	entity_code?: string;
+	business_name?: string;
 }
 
 interface Props {
-	formData: FormDataInterface,
-	setFormData: (obj:any)=>void,
-	categoryOptions: object[],
-	subCategoryOptions:object[],
-	setCategoryOptions: (obj:any)=>void,
-	setSubCategoryOptions:(obj:any)=>void,
-	branchOptions: object,
-	setBranchOptions: (obj:any)=>void,
-	entityList: EntityInt[],
-	entityOptions: object[],
-	setEntityOptions: (obj:any)=>void,
-	handleVendorChange?:(obj:any)=>void,
+	formData: FormDataInterface;
+	setFormData: (obj: any) => void;
+	categoryOptions: object[];
+	subCategoryOptions: object[];
+	setCategoryOptions: (obj: any) => void;
+	setSubCategoryOptions: (obj: any) => void;
+	branchOptions: object;
+	setBranchOptions: (obj: any) => void;
+	entityList: EntityInt[];
+	entityOptions: object[];
+	setEntityOptions: (obj: any) => void;
+	handleVendorChange?: (obj: any) => void;
+	handleCategoryChange?: (obj: any, val: object) => void;
 }
+
+const getMonthOptions = (minMonth) => {
+	const date = minMonth ? new Date(minMonth) : new Date();
+	const options = MONTH_OPTIONS.filter(
+		(option) => option.key > date.getMonth(),
+	);
+	return options;
+};
 
 export const nonRecurringExpenseDetails = ({
 	formData,
 	setFormData,
-	categoryOptions,
-	subCategoryOptions,
 	branchOptions,
 	entityList,
 	entityOptions,
 	handleVendorChange = () => {},
-}:Props) => {
+	handleCategoryChange = () => {},
+}: Props) => {
+	const geo = getGeoConstants();
 	const handleEntityChange = (e:number | string) => {
-		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[0];
+		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[GLOBAL_CONSTANTS.zeroth_index];
 		setFormData({
 			...formData,
 			entityObject: entityData,
@@ -59,7 +73,7 @@ export const nonRecurringExpenseDetails = ({
 					asyncKey       : 'list_vendors',
 					params         : { filters: { kyc_status: 'verified' } },
 					value          : formData?.vendorName,
-					onChange       : (item:any, obj:object) => handleVendorChange(obj),
+					onChange       : (item: any, obj: object) => handleVendorChange(obj),
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Vendor name',
@@ -77,9 +91,9 @@ export const nonRecurringExpenseDetails = ({
 				},
 				{
 					name                  : 'transactionDate',
-					label                 : 'Transaction Date',
+					label                 : 'Accounting Date',
 					type                  : 'datepicker',
-					isPreviousDaysAllowed : false,
+					isPreviousDaysAllowed : true,
 					span                  : 2.2,
 					className             : styles.input_width,
 				},
@@ -87,15 +101,17 @@ export const nonRecurringExpenseDetails = ({
 					name           : 'periodOfTransaction',
 					label          : 'Period Of Transaction',
 					type           : 'select',
-					disabled       : true,
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Select Month',
 					span           : 2.2,
 					value          : formData?.periodOfTransaction,
-					onChange       : (month:string) => setFormData({ ...formData, periodOfTransaction: month }),
-					options        : MONTH_OPTIONS,
-					className      : styles.input_width,
+					onChange       : (month: string) => setFormData({
+						...formData,
+						periodOfTransaction: month,
+					}),
+					options   : getMonthOptions(formData.transactionDate),
+					className : styles.input_width,
 				},
 				{
 					name           : 'cogoEntity',
@@ -107,7 +123,7 @@ export const nonRecurringExpenseDetails = ({
 					span           : 2.2,
 					options        : entityOptions,
 					value          : formData?.entityObject?.id,
-					onChange       : (e:any) => handleEntityChange(e),
+					onChange       : (e: any) => handleEntityChange(e),
 					className      : styles.input_width,
 				},
 			],
@@ -117,34 +133,26 @@ export const nonRecurringExpenseDetails = ({
 			groupBy : [
 				{
 					name        : 'registrationNumber',
-					label       : 'PAN',
-					type        : 'textarea',
+					label       : geo.others.identification_number.label,
+					type        : 'input',
 					value       : formData?.registrationNumber || null,
+					prefix      : null,
 					className   : styles.pan,
-					placeholder : 'Autofilled PAN',
+					placeholder : `Autofilled ${geo.others.identification_number.label}`,
 					span        : 2.2,
 				},
 				{
-					name           : 'expenseCategory',
-					label          : 'Expense Category',
-					type           : 'select',
-					multiple       : false,
-					defaultOptions : false,
-					placeholder    : 'Category',
-					span           : 2.2,
-					className      : styles.select,
-					options        : categoryOptions,
-				},
-				{
-					name           : 'expenseSubCategory',
-					label          : 'Expense Sub-Category',
-					type           : 'select',
-					multiple       : false,
-					defaultOptions : false,
-					placeholder    : 'Sub-Category',
-					span           : 2.2,
-					className      : styles.select,
-					options        : subCategoryOptions,
+					name        : 'expenseCategory',
+					label       : 'Expense Category',
+					type        : 'asyncSelect',
+					asyncKey    : 'list_expense_category',
+					initialCall : true,
+					placeholder : 'Select a Category',
+					valueKey    : 'id',
+					span        : 2.2,
+					className   : styles.select,
+					renderLabel : (item) => startCase(item.categoryName),
+					onChange    : (e, obj) => handleCategoryChange(e, obj),
 				},
 				{
 					name           : 'branch',
@@ -166,12 +174,9 @@ export const nonRecurringExpenseDetails = ({
 					className      : styles.select,
 					defaultOptions : false,
 					span           : 2.2,
-					options        : [
-						{ label: 'Pay Run', value: 'payrun' },
-					],
+					options        : [{ label: 'Pay Run', value: 'payrun' }],
 				},
 			],
-
 		},
 	];
 };

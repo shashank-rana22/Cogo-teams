@@ -1,0 +1,13 @@
+.loader {
+	width: 220px;
+	height: 16px;
+}
+
+.percent {
+	margin-top: 8px;
+}
+
+.flex_row {
+	display: flex;
+	flex-direction: column;
+}

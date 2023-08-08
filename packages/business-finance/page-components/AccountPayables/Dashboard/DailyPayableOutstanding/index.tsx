@@ -1,5 +1,4 @@
 import { Placeholder, Toggle, Tooltip } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -115,7 +114,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 
 							item?.amount
 								? (
-									<div className={styles.month_container} key={item?.amount}>
+									<div className={styles.month_container} key={item?.amount?.dpo}>
 										{loading ? (
 											<Placeholder
 												className={styles.loader}
@@ -128,15 +127,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 														placement="top"
 														interactive
 													>
-														{formatAmount({
-															amount   : item?.amount?.dpo?.toFixed(2),
-															currency : item?.currency,
-															options  : {
-																currencyDisplay : 'code',
-																style           : 'currency',
-															},
-														})}
-														{/* {item?.amount?.dpo?.toFixed(2)} */}
+														{item?.amount?.dpo?.toFixed(2)}
 													</Tooltip>
 
 												</div>
@@ -161,7 +152,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 					<div className={styles.sub_container}>
 
 						{QUARTER_MAPPING.map((item) => (
-							<div className={styles.month_box} key={item?.amount}>
+							<div className={styles.month_box} key={item?.amount?.dpo}>
 								{loading ? (
 									<Placeholder
 										className={styles.loader}
@@ -171,7 +162,11 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 										<div className={styles.value}>
 											{item?.amount
 												? (
-													<Tooltip content={item?.amount?.dpo} placement="top" interactive>
+													<Tooltip
+														content={item?.amount?.dpo}
+														placement="top"
+														interactive
+													>
 														{item?.amount?.dpo?.toFixed(2)}
 													</Tooltip>
 												)

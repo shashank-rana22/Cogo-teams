@@ -5,7 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function MyResponsiveBar({ data }) {
+function MyResponsiveBar({ data = [] }) {
 	return (
 		<>
 			<div className={styles.invoice}>
@@ -31,7 +31,7 @@ function MyResponsiveBar({ data }) {
 				keys={['Uploaded', 'Approved', 'Rejected']}
 				indexBy="date"
 				margin={{ top: 50, right: 30, bottom: 80, left: 60 }}
-				padding={0.2}
+				padding={0.1}
 				enableGridY
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
@@ -52,9 +52,20 @@ function MyResponsiveBar({ data }) {
 				axisRight={null}
 				minValue={0}
 				axisBottom={{
-					tickSize     : 0,
-					tickPadding  : 10,
-					tickRotation : 0,
+					tickSize    : 0,
+					tickPadding : 10,
+					renderTick  : (tick) => (
+						<g transform={`translate(${tick.x - 30},${tick.y + 20})`}>
+							<text
+								style={{
+									fontSize    : 9,
+									marginRight : 10,
+								}}
+							>
+								{tick.value}
+							</text>
+						</g>
+					),
 				}}
 				axisLeft={{
 					tickSize     : 0,

@@ -1,10 +1,16 @@
+const OFFSET_ARRAY_LENGTH_FOR_LAST_INDEX = 1;
+
+const DEFAULT_CONTAINER_COUNT_INCREMENT = 0;
+
 const controls = ({ data = {} }) => {
 	const file_nameArr = (data?.url || '').split('/');
-	const file_name = file_nameArr[file_nameArr.length - 1];
+
+	const file_name = file_nameArr[file_nameArr.length - OFFSET_ARRAY_LENGTH_FOR_LAST_INDEX];
 
 	let containersCount = 0;
+
 	(data?.cargo_details || []).forEach((container) => {
-		containersCount += container?.containers_count || 0;
+		containersCount += container?.containers_count || DEFAULT_CONTAINER_COUNT_INCREMENT;
 	});
 
 	const form_controls = [
@@ -40,7 +46,7 @@ const controls = ({ data = {} }) => {
 			rules: { required: 'Document is required' },
 		},
 		{
-			label : 'Document Description (optional)',
+			label : 'Document Description (Optional)',
 			name  : 'description',
 			type  : 'textarea',
 			span  : 12,

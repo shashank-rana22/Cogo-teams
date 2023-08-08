@@ -1,11 +1,15 @@
 import airRepository from './config/air-repository';
+import airlinePluginBooking from './config/airline-booking-plugin';
 import allocations from './config/allocations';
-import athenaDashboard from './config/athena-dashboard';
 import authorityDesk from './config/authority-desk';
+import awbInventory from './config/awb-inventory';
 import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
+import bookingDeskAir from './config/booking-desk-air';
+import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
+import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
@@ -15,25 +19,37 @@ import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
+import employeeDashboard from './config/employee-dashboard';
+import employeeDirectory from './config/employee-directory';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
+import ftlAdmin from './config/ftl-admin';
+import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import groundOps from './config/ground-ops';
+import igmDesk from './config/igm-desk';
+import ihls from './config/ihls';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
 import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import liabilityDashboard from './config/liability-dashboard';
+import locations from './config/location';
+import managerDashboard from './config/manager-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
-import performanceManagement from './config/performance-management';
+import notifications from './config/notifications';
+import PERFORMANCE_MANAGEMENT from './config/performance-management';
+import printingDesk from './config/printing-desk';
 import referral from './config/referral';
+import revenueDesk from './config/revenue-desk';
 import rfqDashboard from './config/rfq-dashboard';
+import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
-import shipmentAir from './config/shipment-air';
+import schedules from './config/schedules';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -56,6 +72,7 @@ import welcome from './config/welcome';
 
 const routeConfig = {
 	...rolesAndPermissions,
+	...locations,
 	...groundOps,
 	...allocations,
 	...supplyDashboard,
@@ -64,6 +81,7 @@ const routeConfig = {
 	...unifiedDashboard,
 	...vendorRM,
 	...cogoAcademy,
+	...ihls,
 	...myIncident,
 	...myProfile,
 	...enrichment,
@@ -72,12 +90,12 @@ const routeConfig = {
 	...myProfile,
 	...inventory_management,
 	...kamMonitoring,
-	...performanceManagement,
+	...PERFORMANCE_MANAGEMENT,
 	...employeePortal,
 	...shipmentFclFreight,
 	...shipmentFclCfs,
 	...shipmentLclFreight,
-	...shipmentAir,
+	...bookingDeskAir,
 	...shipmentAirFreight,
 	...shipmentAirFreightLocal,
 	...shipmentAirCustoms,
@@ -91,7 +109,6 @@ const routeConfig = {
 	...lastMileDesk,
 	...welcome,
 	...referral,
-	...athenaDashboard,
 	...kamDesk,
 	...airRepository,
 	...documentDesk,
@@ -104,6 +121,9 @@ const routeConfig = {
 	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
+	...riskManagement,
+	...awbInventory,
+	...revenueDesk,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
 	...shipmentFtlFreight,
@@ -111,6 +131,18 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...employeeDashboard,
+	...managerDashboard,
+	...printingDesk,
+	...ftlAdmin,
+	...schedules,
+	...igmDesk,
+	...airlinePluginBooking,
+	...bookingDeskSurface,
+	...employeeDirectory,
+	...ftlFieldSreviceOps,
+	...notifications,
+	...centralisedCustomerService,
 };
 
 export default routeConfig;

@@ -16,13 +16,12 @@ const useUpdateServiceProvider = ({
 	const onError = (err) => {
 		setError(err);
 	};
-
 	const [{ loading }, updateShipmentTrigger] = useRequest(
 		{
 			url    : '/update_shipment_service',
 			method : 'POST',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const updateShipmentTriggerFunc = async (payload, trigger) => trigger({ data: payload });
@@ -65,10 +64,26 @@ const useUpdateServiceProvider = ({
 		const CHECK_UNIQ = {};
 		if (formData || formDataLocal) {
 			servicesList.forEach((serviceObj) => {
+				let data = {};
+				if (serviceObj?.service_type === 'air_freight_local_service') {
+					if (serviceObj?.trade_type === 'export') {
+						data = {
+							service_provider_id : formDataLocal?.origin_service_provider_id,
+							airline_id          : formDataLocal?.origin_airline_id,
+						};
+					} else {
+						data = {
+							service_provider_id : formDataLocal?.destination_service_provider_id,
+							airline_id          : formDataLocal?.destination_airline_id,
+						};
+					}
+				} else {
+					data = {
+						...(formData || {}), ...(otherFormData || {}),
+					};
+				}
 				const payloadForUpdateShipment = {
-					data:
-            serviceObj.service_type === `${localService}_local_service` ? { ...(formDataLocal || {}) }
-            	: { ...(formData || {}), ...(otherFormData || {}) },
+					data,
 					ids: [serviceObj?.id],
 					service_type:
             serviceObj.service_type === `${localService}_local_service`
@@ -78,6 +93,7 @@ const useUpdateServiceProvider = ({
 				};
 				if (!CHECK_UNIQ[serviceObj.id]) {
 					CHECK_UNIQ[serviceObj.id] = true;
+
 					PROMISES_ARRAY.push(
 						updateShipmentTriggerFunc(
 							payloadForUpdateShipment,
@@ -86,25 +102,14 @@ const useUpdateServiceProvider = ({
 					);
 				}
 			});
-			try {
-				const resArr = await Promise.all(PROMISES_ARRAY);
 
-				let check = false;
-				let error = '';
-				(resArr || []).forEach((res) => {
-					if (res?.hasError) {
-						check = true;
-						error += `${res?.data}, `;
-					}
-				});
-				if (check) {
-					Toast.error(error);
-				} else {
+			await Promise.all(PROMISES_ARRAY).then(
+				() => {
 					Toast.success('Services Successfully Allocated !');
-				}
-			} catch (err) {
+				},
+			).catch((err) => {
 				toastApiError(err);
-			}
+			});
 		}
 	};
 	return {

@@ -1,55 +1,67 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
-function useListTemplate() {
-	const [{ loading }, trigger] = useRequest({
-		url    : '/list_communication_templates',
-		method : 'get',
-	}, { manual: true });
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
+const DEFAULT_PAGE = 1;
+const SCROLL_HEIGHT = 50;
+
+const getParams = ({ pagination, qfilter, viewType, userId, isomniChannelAdmin }) => ({
+	page                     : pagination,
+	pagination_data_required : true,
+	filters                  : {
+		q                : qfilter?.trim() || undefined,
+		type             : 'whatsapp',
+		tags             : VIEW_TYPE_GLOBAL_MAPPING[viewType]?.show_relevant_templates,
+		performed_by_ids : !isomniChannelAdmin ? [userId] : undefined,
+	},
+});
+
+function useListTemplate({ viewType }) {
 	const { userRoleIds, userId } = useSelector(({ profile }) => ({
 		userRoleIds : profile.partner?.user_role_ids || [],
 		userId      : profile?.user?.id,
 	}));
 
-	const geo = getGeoConstants();
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => geo.uuid.cogo_one_admin_ids.includes(eachRole)) || false;
 	const [qfilter, setQfilter] = useState('');
-	const [pagination, setPagination] = useState(1);
+	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [infiniteList, setInfiniteList] = useState({
 		list  : [],
 		total : 0,
 	});
 
+	const geo = getGeoConstants();
+
+	const isomniChannelAdmin = userRoleIds?.some((eachRole) => geo.uuid.cogo_one_admin_ids.includes(eachRole)) || false;
+
+	const [{ loading }, trigger] = useRequest({
+		url    : '/list_communication_templates',
+		method : 'get',
+	}, { manual: true });
+
 	const fetchListTemplate = useCallback(async () => {
 		try {
 			const res = await trigger({
-				params: {
-					page                     : pagination,
-					pagination_data_required : true,
-					filters                  : {
-						q                : !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
-						type             : 'whatsapp',
-						tags             : ['quick_reply'],
-						performed_by_ids : !isomniChannelAdmin ? [userId] : undefined,
-					},
-				},
+				params: getParams({ pagination, qfilter, viewType, userId, isomniChannelAdmin }),
 			});
 			if (res?.data) {
 				const { list = [], ...paginationData } = res?.data || {};
-				setInfiniteList((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+				setInfiniteList((previous) => ({
+					list: [...(previous.list || []),
+						...(list || [])],
+					...paginationData,
+				}));
 			}
 		} catch (error) {
-			// console.log(error);
+			console.error(error);
 		}
-	}, [pagination, qfilter, trigger, userId, isomniChannelAdmin]);
+	}, [trigger, pagination, qfilter, viewType, isomniChannelAdmin, userId]);
 
 	useEffect(() => {
-		setInfiniteList((p) => ({ ...p, list: [] }));
-		setPagination(1);
+		setInfiniteList((previous) => ({ ...previous, list: [] }));
+		setPagination(DEFAULT_PAGE);
 	}, [qfilter]);
 
 	useEffect(() => {
@@ -57,18 +69,18 @@ function useListTemplate() {
 	}, [fetchListTemplate]);
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
-		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 50;
+		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= SCROLL_HEIGHT;
 		const hasMoreData = pagination < infiniteList?.total;
 		if (reachBottom && hasMoreData && !loading) {
-			setPagination((p) => p + 1);
+			setPagination((previous) => previous + DEFAULT_PAGE);
 		}
 	};
 	const refetch = () => {
-		setInfiniteList((p) => ({ ...p, list: [] }));
-		if (pagination === 1) {
+		setInfiniteList((previous) => ({ ...previous, list: [] }));
+		if (pagination === DEFAULT_PAGE) {
 			fetchListTemplate();
 		} else {
-			setPagination(1);
+			setPagination(DEFAULT_PAGE);
 		}
 	};
 

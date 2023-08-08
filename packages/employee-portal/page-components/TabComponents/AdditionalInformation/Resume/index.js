@@ -52,7 +52,6 @@ function Resume({ getEmployeeDetails, data: info }) {
 						<div key={controlName} className={styles.control_container}>
 							<div className={styles.label}>
 								{label}
-								<sup className={styles.sup}>*</sup>
 							</div>
 
 							<div className={styles.control}>

@@ -11,6 +11,7 @@ function ExecuteStep({
 	onCancel = () => {},
 	refetch = () => {},
 	primary_service = {},
+	shipment_data = {},
 	currentStep = 0,
 	isLastStep = false,
 	getApisData = {},
@@ -24,6 +25,8 @@ function ExecuteStep({
 		task,
 		stepConfig,
 		getApisData,
+		shipment_data,
+		primary_service,
 	});
 
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;

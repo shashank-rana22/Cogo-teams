@@ -106,4 +106,4 @@ export const REVERT_STATUS_LABEL_MAPPING = {
 	awaiting_confirmation : 'Awaiting Response',
 };
 
-export const REVERTABLE_SERVICES = ['fcl_freight_service', 'lcl_freight_service'];
+export const REVERTABLE_SERVICES = ['fcl_freight_service', 'lcl_freight_service', 'air_freight_service'];

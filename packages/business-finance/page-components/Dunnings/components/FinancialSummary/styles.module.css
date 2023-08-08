@@ -1,0 +1,15 @@
+.filters {
+	display: flex;
+	margin-top: 16px;
+}
+
+.single_filter {
+	width: 12%;
+	margin-right: 8px;
+}
+
+.stats_container {
+	margin: 20px 0;
+	background: #fff;
+	border-radius: 8px;
+}

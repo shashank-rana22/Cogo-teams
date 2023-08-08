@@ -9,7 +9,7 @@ import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
-function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getTestLoading }) {
+function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getTestLoading, getTest }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 
 	const [idArray, setIdArray] = useState([]);
@@ -20,14 +20,14 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 
 	const { control, formState:{ errors }, handleSubmit, setValue, watch } = useForm();
 
-	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
+	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper, getTest });
 
 	const radioGroupVal = watch('select_users') || '';
 
 	const { set_data = [] } = data || {};
 
 	const handleChange = ({ type }) => {
-		if (idArray.length === 0) {
+		if (isEmpty(idArray)) {
 			Toast.error('Atleast one of the question sets must be selected');
 		} else {
 			handleSubmit((values) => {
@@ -56,6 +56,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 				uploadDocument={uploadDocument}
 				setUploadDocument={setUploadDocument}
 				radioGroupVal={radioGroupVal}
+				getTest={getTest}
 			/>
 
 			<div className={styles.btn_container}>

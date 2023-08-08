@@ -1,0 +1,9 @@
+.filter {
+	display: flex;
+	gap: 28px;
+	align-items: center;
+}
+
+.filter_select {
+	width: 300px;
+}

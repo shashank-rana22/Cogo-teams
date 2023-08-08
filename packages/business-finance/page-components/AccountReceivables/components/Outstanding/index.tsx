@@ -62,6 +62,7 @@ function Outstanding({ entityCode }) {
 				handleInputReset={handleInputReset}
 				queryKey={queryKey}
 				setQueryKey={setQueryKey}
+				entityCode={entityCode}
 			/>
 
 			{outstandingLoading ? (

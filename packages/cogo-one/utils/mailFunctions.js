@@ -1,89 +1,96 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
+
 import getFileAttributes from './getFileAttributes';
+
+const LAST_INDEX = 1;
 
 function mailFunction({
 	setErrorValue = () => {},
-	recipientArray = [],
-	bccArray = [],
-	setRecipientArray = () => {},
-	value = '',
-	setValue = () => {},
+	emailState = {},
 	setShowControl = () => {},
 	showControl,
-	setBccArray = () => {},
 	setAttachments = () => {},
 	setEmailState = () => {},
 	setButtonType = () => {},
 	attachments = [],
 	uploaderRef,
 }) {
-	const isInList = (email, data) => data?.includes(email);
+	const isInList = ({ email, data }) => data?.includes(email);
 
 	const validateEmail = (emailInput) => {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		const emailRegex = GLOBAL_CONSTANTS.regex_patterns.email;
 		return emailRegex.test(emailInput);
 	};
 
-	const handleKeyPress = ({ e, type }) => {
-		if (e.key === 'Enter') {
-			e.preventDefault();
-			if ((type === 'recipient' && !validateEmail(value))
-			|| (type === 'cc_bcc' && !validateEmail(value))) {
+	const handleKeyPress = ({
+		event = {},
+		type = '',
+		email = '',
+		newEmailInput = '',
+		setNewEmailInput = () => {},
+	}) => {
+		if (event?.key === 'Enter' || email) {
+			event?.preventDefault?.();
+			const newEmail = email || newEmailInput;
+
+			if (!validateEmail(newEmail)) {
 				setErrorValue('Enter valid id');
 				return;
 			}
-			if ((type === 'recipient' && isInList(value, recipientArray))
-			|| (type === 'cc_bcc' && isInList(value, bccArray))) {
+
+			const isEmailPresent = isInList({
+				email : newEmail,
+				data  : emailState?.[type] || [],
+			});
+
+			if (isEmailPresent) {
 				setErrorValue('Email already present');
 				return;
 			}
 
 			setErrorValue(null);
-			if (type === 'recipient') {
-				setRecipientArray((prev) => [...prev, value]);
-				setShowControl(null);
-			} else {
-				setBccArray((prev) => [...prev, value]);
-				setShowControl(null);
-			}
+			setEmailState((prev) => ({
+				...prev,
+				[type]: [...(prev?.[type] || []), newEmail],
+			}));
+			setNewEmailInput('');
+			setShowControl(null);
 		}
 	};
 
-	const handleEdit = (type) => {
+	const handleEdit = ({ type, setNewEmailInput }) => {
 		setShowControl(type);
 		setErrorValue(null);
-		setValue('');
+		setNewEmailInput('');
 	};
 
-	const handleChange = ({ e, type }) => {
+	const handleChange = ({ val, type, setNewEmailInput }) => {
 		if (showControl === type) {
-			setValue(e.target?.value);
+			setNewEmailInput(val);
 		}
 	};
 
 	const handleDelete = ({ val, emailType }) => {
-		if (emailType === 'recipient') {
-			setRecipientArray((p) => p.filter((data) => data !== val));
-		} else {
-			setBccArray((p) => p.filter((data) => data !== val));
-		}
+		setEmailState((prev) => ({
+			...prev,
+			[emailType]: prev?.[emailType]?.filter(
+				(data) => data !== val,
+			),
+		}));
 	};
 
-	const handleError = (type) => {
+	const handleCancel = ({ type, setNewEmailInput }) => {
 		if (showControl === type) {
-			setValue('');
+			setNewEmailInput('');
 			setShowControl(null);
 		}
 	};
 
 	const handleClose = () => {
 		setAttachments([]);
-		setBccArray([]);
-		setEmailState({
-			body    : '',
-			subject : '',
-		});
-		setRecipientArray([]);
-		setValue('');
+		setEmailState(DEFAULT_EMAIL_STATE);
 		setButtonType('');
 	};
 
@@ -93,11 +100,10 @@ function mailFunction({
 		uploaderRef?.current?.externalHandleDelete(filteredAttachments);
 	};
 
-	const decode = (data = '') => {
+	const getDecodedData = (data = '') => {
 		const val = decodeURI(data).split('/');
-		const fileName = val[val.length - 1];
-		const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
-		return { uploadedFileName, fileIcon };
+		const fileName = val[val.length - LAST_INDEX];
+		return getFileAttributes({ fileName, finalUrl: data });
 	};
 
 	return {
@@ -105,10 +111,10 @@ function mailFunction({
 		handleEdit,
 		handleChange,
 		handleDelete,
-		handleError,
+		handleCancel,
 		handleClose,
 		handleAttachmentDelete,
-		decode,
+		getDecodedData,
 	};
 }
 

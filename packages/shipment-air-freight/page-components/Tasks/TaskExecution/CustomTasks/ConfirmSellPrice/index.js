@@ -12,7 +12,7 @@ import useUpdateRevenueDeskShipmentSellQuotation from './hooks/useUpdateRevenueD
 import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
 import styles from './styles.module.css';
 
-function ConfirmSellPrice({ shipmentData, task, refetch, onCancel }) {
+function ConfirmSellPrice({ shipmentData = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
 	const { profile } = useSelector((state) => state);
 	const { getNewSellData, data } = useGetNewSellData(shipmentData);
 
@@ -36,6 +36,7 @@ function ConfirmSellPrice({ shipmentData, task, refetch, onCancel }) {
 	const { updateShipmentSellQuotation, loading } = useUpdateRevenueDeskShipmentSellQuotation({
 		sellData: data?.new_sell_data,
 		updateShipmentPendingTask,
+		task,
 	});
 
 	const finalControls = controls(new_sell_price, isDisabled);
