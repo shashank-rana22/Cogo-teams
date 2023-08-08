@@ -7,6 +7,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function ConfirmModal({
+	handlePriceLimitCheck = () => {},
 	confirmModal = false,
 	setConfirmModal = () => {},
 	airServiceFormValues = {},
@@ -153,6 +154,12 @@ function ConfirmModal({
 									</div>
 								</div>
 							</>
+						)}
+						{handlePriceLimitCheck()
+						&& (
+							<div className={styles.check_price}>
+								Your line item price exceeds 5000 USD. Are you sure you want to proceed?
+							</div>
 						)}
 						<div className={styles.button_div}>
 							<div className={styles.button_head}>
