@@ -2215,7 +2215,7 @@ importers:
       react-to-print: ^2.14.13
       uuid: ^9.0.0
     dependencies:
-      '@cogoport/components': 1.0.437_nq2dsfvf3xiy6kraqrhauunjoq
+      '@cogoport/components': 1.0.437_jbkdfmwn4pruupygfcv3deyn7u
       '@cogoport/context': link:../../common/context
       '@cogoport/core': link:../../common/core
       '@cogoport/forms': link:../../common/forms
