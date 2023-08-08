@@ -32,7 +32,7 @@ function List({
 		total_page : 0,
 	});
 	const [filters, setFilters] = useState({ page: 1 });
-	const { page, q } = filters;
+	const { page, q } = filters || {};
 
 	const getListPayload = {
 		page,
@@ -103,7 +103,6 @@ function List({
 					status={status}
 					setStatus={setStatus}
 					setShow={setShow}
-					filters={filters}
 					setFilters={setFilters}
 					showUnreadChat={showUnreadChat}
 					handleClick={handleClick}
