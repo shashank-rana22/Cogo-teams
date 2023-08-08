@@ -12,10 +12,10 @@ const getDateString = (date) => formatDate({
 }) || '';
 
 const getParams = ({ timeline, agentId }) => ({
-	data_required                  : false,
-	sales_dashboard_stats_required : true,
-	pagination_data_required       : false,
-	filters                        : {
+	data_required : false,
+	filters       : {
+		is_email_quotation_sent        : true,
+		is_converted_to_booking        : true,
 		sales_agent_id                 : agentId,
 		quotation_sent_at_greater_than : getDateString(DATE_FILTER_MAPPING[timeline](new Date())),
 	},
