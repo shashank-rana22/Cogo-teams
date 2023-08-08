@@ -15,7 +15,7 @@ import InvoicingParties from './InvoicingParties';
 
 function UpdateSellQuotationModal({ showModal = false, setShowModal = () => {}, data = {} }) {
 	const { id = '' } = data;
-	const { data : sellQuotationData, loading: sellQuotationLoading } = useListShipmentSellQuotation({ id });
+	const { data : sellQuotationData, loading: sellQuotationLoading, refetch } = useListShipmentSellQuotation({ id });
 	const {
 		invoicing_parties = [], invoicing_party_wise_total = {},
 	} = sellQuotationData || {};
@@ -61,6 +61,7 @@ function UpdateSellQuotationModal({ showModal = false, setShowModal = () => {}, 
 									key={item}
 									invoicingParties={invoicing_parties}
 									invoicingPartiesWiseTotal={invoicing_party_wise_total}
+									refetch={refetch}
 								/>
 							))
 						)}

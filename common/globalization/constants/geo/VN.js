@@ -85,7 +85,8 @@ export default {
 			'd9c490f9-afcc-467e-a86d-2a02edf81959',
 			'568c5939-3721-4444-a0ff-4c0298bc948d',
 		],
-		supply_relation_manager_role_id: '568c5939-3721-4444-a0ff-4c0298bc948d',
+		supply_relation_manager_role_id : '568c5939-3721-4444-a0ff-4c0298bc948d',
+		supplier_relations_head_id      : 'c9489b96-44ac-4919-9e21-1f67277d331d',	// Vietnam
 
 		prod_process_owner         : 'ae80297f-e30d-45fb-845c-61c302523476',
 		air_prod_process_owner     : '9e6dad55-dc0c-42b4-a7d1-9908204cdca7',
@@ -219,7 +220,6 @@ export default {
 			'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		],
 		prod_coe_finance_head        : '7b1fc916-6984-4179-aee5-c23f9871085d',
-		finance_head_id              : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager                 : '17885538-e746-4650-a5bc-7d4d81247c7d',
 		air_so_1_manager             : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
 		cogoverse_kam                : 'f041b303-3239-42c5-a386-03e787900bcd',
@@ -256,6 +256,8 @@ export default {
 		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
 		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
 	},
 	options: {
 		registration_types: [

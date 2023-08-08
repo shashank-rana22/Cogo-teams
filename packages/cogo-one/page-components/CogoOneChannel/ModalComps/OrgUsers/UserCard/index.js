@@ -29,9 +29,12 @@ function UserCard({ userData = {} }) {
 						</div>
 					) : null}
 					<div className={styles.user_contact_details}>
-						<div className={styles.email_info}>
-							{email ? getHidedUserDetails({ data: email, type: 'mail' }) : ''}
-						</div>
+						{email ? (
+							<div className={styles.email_info}>
+								{getHidedUserDetails({ data: email, type: 'mail' }) }
+							</div>
+						) : null}
+
 						<div className={styles.contact_info}>
 							{user_number ? getHidedUserDetails({
 								data        : user_number,
