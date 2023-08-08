@@ -10492,6 +10492,11 @@ const partner = {
 			service_name : 'communication_control',
 		},
 		{
+			api          : 'bulk_update_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
 			api          : 'list_communication_channel_controls',
 			access_type  : 'private',
 			service_name : 'communication_control',
@@ -12419,6 +12424,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'submit_omnichannel_kyc',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'create_agent_feedback',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -12652,11 +12662,6 @@ const partner = {
 			api          : 'request_assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',
-		},
-		{
-			api          : 'get_tickets_default_types',
-			access_type  : 'private',
-			service_name : 'tickets',
 		},
 		{
 			api          : 'post_tickets_activity',
@@ -12937,6 +12942,26 @@ const partner = {
 		},
 	],
 	ticket_management: [
+		{
+			api          : 'post_tickets_category',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'delete_tickets_category',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'put_tickets_category',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
 		{
 			api          : 'get_tickets_configuration_categories',
 			access_type  : 'private',

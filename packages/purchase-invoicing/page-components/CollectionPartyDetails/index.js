@@ -35,6 +35,8 @@ const STAKE_HOLDER_TYPES = [
 	'cost booking executive',
 	'costbooking_ops',
 	'cost booking manager',
+	'release_desk',
+	'collection_desk',
 ];
 
 function CollectionPartyDetails({

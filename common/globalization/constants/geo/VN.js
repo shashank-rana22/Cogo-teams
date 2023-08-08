@@ -117,6 +117,8 @@ export default {
 			'5f79d531-50e0-4843-995f-71057e659e0f',
 			'447c2b70-90c9-4e9d-a0df-49bb803b0314',
 			'264a83ab-d438-48c3-8095-bb503f5b619c',
+			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
+			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -216,14 +218,20 @@ export default {
 			'2acd7cb8-a986-45f3-8e14-391075d50daf',
 			'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		],
-		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
-		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
-		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
-		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
-		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
-		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
-		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
-		cogo_one_admin_ids    : [
+		prod_coe_finance_head        : '7b1fc916-6984-4179-aee5-c23f9871085d',
+		so_1_manager                 : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		air_so_1_manager             : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
+		cogoverse_kam                : 'f041b303-3239-42c5-a386-03e787900bcd',
+		cogoverse_admin              : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+		so_2_manager                 : ['1665784f-6e58-4299-8a33-4b7487f61188',
+			'eff02645-cb9c-44bf-8f5a-4d273b36e52d'], // Prod_SO-2 Manager
+		centralised_customer_support : [
+			'264a83ab-d438-48c3-8095-bb503f5b619c',	// Common Pool
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5', // SME
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
+			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
+		],
+		cogo_one_admin_ids: [
 			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
@@ -246,6 +254,9 @@ export default {
 		},
 		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
+		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
 	},
 	options: {
 		registration_types: [

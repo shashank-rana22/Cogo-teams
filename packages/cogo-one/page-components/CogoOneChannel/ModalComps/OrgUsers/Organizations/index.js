@@ -1,5 +1,5 @@
 import { Input } from '@cogoport/components';
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMAppSearch } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useListOrganization from '../../../../../hooks/useListOrganizations';
@@ -51,7 +51,7 @@ function Organizations({
 							onChange={setSearch}
 							val={search}
 							size="sm"
-							prefix={<IcMSearchdark />}
+							suffix={<IcMAppSearch className={styles.search_icon} />}
 						/>
 					</div>
 					<OrganizationList
