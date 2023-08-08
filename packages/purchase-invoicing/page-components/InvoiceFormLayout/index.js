@@ -130,8 +130,8 @@ function InvoiceFormLayout({
 		JSON.stringify(formValues?.line_items),
 	]);
 
-	useEffect(()=>{
-		if(formValues?.invoice_type === 'credit_note'){
+	useEffect(() => {
+		if (formValues?.invoice_type === 'credit_note') {
 			setValue('advance_bill', '');
 		}
 	}, [formValues?.invoice_type]);
@@ -219,13 +219,13 @@ function InvoiceFormLayout({
 							) : null}
 
 							{billCatogory === 'purchase' ? (
-							<CheckboxController
-								control={control}
-								name="advance_bill"
-								label="Advance Bill"
-								value="advance_bill"
-								disabled={formValues.invoice_type === 'credit_note' ? true : false}
-							/>
+								<CheckboxController
+									control={control}
+									name="advance_bill"
+									label="Advance Bill"
+									value="advance_bill"
+									disabled={formValues.invoice_type === 'credit_note'}
+								/>
 							) : null}
 
 						</div>
