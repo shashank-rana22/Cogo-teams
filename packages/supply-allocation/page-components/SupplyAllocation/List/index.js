@@ -20,7 +20,7 @@ function List({ data = [] }) {
 		{
 
 			id       : 'icon',
-			Header   : '',
+			Header   : <IcMPortArrow width={30} height={30} />,
 			accessor : () => <IcMPortArrow width={30} height={30} />,
 
 		},

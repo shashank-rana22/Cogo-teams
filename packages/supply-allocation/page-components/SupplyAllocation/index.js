@@ -8,18 +8,25 @@ import List from './List';
 import LocationSelect from './LocationSelect';
 
 function SupplyAllocation() {
-	const { data, loading } = useListFclSearches();
-	const { control, watch } = useForm({});
-	console.log('watch:', watch());
+	const { data, loading, refetchListFclSearches } = useListFclSearches();
+	const { control } = useForm({});
 
-	console.log('data:', data);
-	const { createSupplySearch } = useCreateSupplySearch();
+	const { createSupplySearch } = useCreateSupplySearch({ refetchListFclSearches });
 
-	if (loading) { return null; }
+	if (loading) {
+		return null;
+	}
+
 	return (
 		<>
 			<Header />
-			<LocationSelect control={control} createSupplySearch={createSupplySearch} />
+
+			<LocationSelect
+				control={control}
+				createSupplySearch={createSupplySearch}
+				refetchListFclSearches={refetchListFclSearches}
+			/>
+
 			<List source="add" data={data} />
 
 		</>

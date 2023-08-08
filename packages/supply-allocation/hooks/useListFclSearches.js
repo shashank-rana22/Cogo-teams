@@ -8,8 +8,23 @@ const useListFclSearches = () => {
 			service_data_required: true,
 		},
 	}, { manual: false });
+
+	const refetchListFclSearches = async () => {
+		try {
+			await trigger({
+				params: {
+					service_data_required: true,
+				},
+			});
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	return {
 		data,
+		loading,
+		refetchListFclSearches,
 	};
 };
 
