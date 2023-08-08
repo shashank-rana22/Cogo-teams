@@ -3,7 +3,16 @@
 	overflow: auto;
 
 	.colored {
-		background: #cfeaed;
+		background: var(--color-tertiary-blue-4);
+	}
+
+	:global {
+		.ui_button_container {
+			width: 100%;
+			height: fit-content;
+			padding: 12px 20px;
+			border-bottom: 1px solid #e0e0e0;
+		}
 	}
 }
 
@@ -12,19 +21,15 @@
 	align-items: center;
 	justify-content: center;
 	margin-top: 4px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 500;
-	color: #f00;
+	color: var(--color-primary-error-red-2);
 }
 
 .card {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	width: 100% !important;
-	height: fit-content !important;
-	padding: 12px 20px !important;
-	border-bottom: 1px solid #e0e0e0 !important;
 	border-radius: 0;
 }
 
@@ -42,14 +47,14 @@
 .serial_id {
 	display: flex;
 	align-items: center;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 600;
 }
 
 .updated_at {
 	font-size: 10px;
 	line-height: 16px;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 }
 
 .card_item {
@@ -66,9 +71,9 @@
 	height: 18px;
 	padding: 0 2px;
 	margin-left: 32px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 700;
-	color: #fef3e9;
-	background: #ee3425;
+	color: var(--color-accent-orange-5);
+	background: var(--color-primary-error-red-2);
 	border-radius: 5px;
 }

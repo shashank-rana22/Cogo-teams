@@ -26,7 +26,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 	});
 
 	let totalCount = [];
-	MESSAGE_CONTENT_ARR?.map((count) => totalCount.push(count[user_id]));
+	(MESSAGE_CONTENT_ARR || []).map((count) => totalCount.push(count[user_id]));
 
 	totalCount = totalCount?.filter((item) => item !== undefined);
 
@@ -39,20 +39,23 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 
 	return (
 		<div className={styles.chat_container}>
-			<Button
-				className={styles.chat_icon}
-				themeType="tertiary"
-				tabIndex={0}
-				onClick={() => setShow(true)}
-			>
-				{count > GLOBAL_CONSTANTS.zeroth_index && !show ? <div className={styles.circle}>{count}</div> : null}
-				<div className={styles.icon}>
-					<img
-						src={GLOBAL_CONSTANTS.image_url.shipment_chat_icon}
-						alt="chat"
-					/>
-				</div>
-			</Button>
+			<div className={styles.chat_icon}>
+				<Button
+					themeType="linkUi"
+					tabIndex={0}
+					onClick={() => setShow(true)}
+				>
+					{count > GLOBAL_CONSTANTS.zeroth_index && !show
+						? <div className={styles.circle}>{count}</div> : null}
+
+					<div className={styles.icon}>
+						<img
+							src={GLOBAL_CONSTANTS.image_url.shipment_chat_icon}
+							alt="chat"
+						/>
+					</div>
+				</Button>
+			</div>
 
 			{show ? (
 				<Modal

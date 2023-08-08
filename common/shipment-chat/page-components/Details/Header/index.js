@@ -53,24 +53,19 @@ function Header({
 						tabIndex={0}
 						onClick={() => handleClick()}
 					>
-						Shipment ID
-						<span>
-							#
-							{serial_id}
-						</span>
+						{`Shipment ID #${serial_id}`}
 					</Button>
 				) : null}
 
 				<PortDetails
 					data={channelData}
 					primary_service={primaryService}
-					isShow={false}
 				/>
 
 				<Popover
 					placement="bottom"
 					interactive
-					render={Content()}
+					render={<Content />}
 					className={styles.popover_container}
 				>
 					<div className={styles.button}>
@@ -79,14 +74,15 @@ function Header({
 					</div>
 				</Popover>
 
-				<Button
-					className={styles.close_icon}
-					themeType="linkUi"
-					tabIndex={0}
-					onClick={() => setShow(false)}
-				>
-					<IcMCross />
-				</Button>
+				<div className={styles.close_icon}>
+					<Button
+						themeType="linkUi"
+						tabIndex={0}
+						onClick={() => setShow(false)}
+					>
+						<IcMCross />
+					</Button>
+				</div>
 			</div>
 
 			<div className={styles.filter_box}>

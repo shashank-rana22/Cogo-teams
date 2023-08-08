@@ -17,6 +17,16 @@
 	align-items: center;
 	justify-content: center;
 	width: 70%;
+
+	:global {
+		.ui_button_container {
+			min-width: fit-content;
+			height: fit-content;
+			padding: 10px;
+			font-size: var(--font-size-xl);
+			color: var(--color-primary-error-red-2);
+		}
+	}
 }
 
 .input_styles {
@@ -41,11 +51,6 @@
 	position: fixed;
 	top: 1%;
 	right: 0;
-	min-width: fit-content !important;
-	height: fit-content !important;
-	padding: 10px !important;
-	font-size: 16px !important;
-	color: #ee3425 !important;
 	border-radius: 50%;
 
 	&:hover {
