@@ -1,5 +1,6 @@
 import { Input, Popover } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateUp,
 	IcMArrowRotateDown,
@@ -38,6 +39,7 @@ interface OutstandingFilterProps {
 	setQueryKey: (p: string) => void;
 	entityCode;
 	refetch: (p?: object) => void;
+	list: { businessName?: string }[];
 }
 
 function Filters({
@@ -54,6 +56,7 @@ function Filters({
 	entityCode = '',
 	setQueryKey = () => {},
 	refetch = () => {},
+	list = [],
 }: OutstandingFilterProps) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 	const [showCallPriority, setShowCallPriority] = useState(false);
@@ -167,7 +170,7 @@ function Filters({
 							role="presentation"
 						>
 							<div className={styles.calllabel}>
-								Yash Bootwala TMT Machinery, inc.
+								{list?.[GLOBAL_CONSTANTS.zeroth_index]?.businessName}
 							</div>
 							<div className={styles.callpriority}>
 								Call Priority
@@ -254,6 +257,7 @@ function Filters({
 				<CallPriorityModal
 					showCallPriority={showCallPriority}
 					setShowCallPriority={setShowCallPriority}
+					data={list?.[GLOBAL_CONSTANTS.zeroth_index]}
 				/>
 			) : null}
 		</div>

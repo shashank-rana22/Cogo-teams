@@ -11,38 +11,38 @@ import useGetPartnerRmMapping from '../../../hooks/useGetPartnerRmMapping';
 
 import DownloadLedgerModal from './DownloadLedgerModal';
 import PopoverTags from './PopoverTags';
-import StatsOutstanding from './StatsOutstanding';
+import StatsOutstanding from './StatsOutstanding/index';
 import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
 
 interface CreditController {
-	id?: string,
-	name?: string,
-	email?: string
+	id?: string;
+	name?: string;
+	email?: string;
 }
 
 interface SalesAgent {
-	id?: string,
-	name?: string,
-	email?: string
+	id?: string;
+	name?: string;
+	email?: string;
 }
 interface ItemProps {
-	creditController?: CreditController,
-	salesAgent?: SalesAgent,
-	businessName?: string,
-	collectionPartyType?: string[],
-	serialId?: string,
-	countryCode?: string,
-	organizationSerialId?: string,
-	lastUpdatedAt?: Date,
-	selfOrganizationName?: string,
-	organizationId?: string,
-	selfOrganizationId?: string
+	creditController?: CreditController;
+	salesAgent?: SalesAgent;
+	businessName?: string;
+	collectionPartyType?: string[];
+	serialId?: string;
+	countryCode?: string;
+	organizationSerialId?: string;
+	lastUpdatedAt?: Date;
+	selfOrganizationName?: string;
+	organizationId?: string;
+	selfOrganizationId?: string;
 }
 interface OutstandingListProps {
-	item?: ItemProps,
-	entityCode?: string
-	showElement?: boolean
+	item?: ItemProps;
+	entityCode?: string;
+	showElement?: boolean;
 	orderBy?: object;
 	outStandingFilters?: object;
 	formFilters?: object;
@@ -50,7 +50,10 @@ interface OutstandingListProps {
 }
 
 function OutstandingList({
-	item = {}, entityCode = '', showElement = false, organizationId = '',
+	item = {},
+	entityCode = '',
+	showElement = false,
+	organizationId = '',
 }: OutstandingListProps) {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('invoice_details');
@@ -96,7 +99,6 @@ function OutstandingList({
 		settlement_list: {
 			organizationId,
 			entityCode,
-
 		},
 		organization_users: {
 			selfOrganizationId,
@@ -110,12 +112,13 @@ function OutstandingList({
 			<div className={styles.width_container}>
 				{types?.map((party) => (
 					<div className={styles.style_margin_top} key={party}>
-						<div className={styles.styled_tag}>{startCase(party)}</div>
+						<div className={styles.styled_tag}>
+							{startCase(party)}
+						</div>
 					</div>
 				))}
 			</div>
 		</div>
-
 	);
 
 	const handleViewDetailClick = () => {
@@ -141,7 +144,6 @@ function OutstandingList({
 							{' '}
 							{organizationSerialId}
 						</div>
-
 					</div>
 					<div className={styles.custom_tag_margin}>
 						<div>
@@ -153,15 +155,16 @@ function OutstandingList({
 				</div>
 				<div className={styles.serial_id_card}>
 					<div className={styles.custom_tag}>
-						<div>
-							Last Updated At :
-							{' '}
-						</div>
+						<div>Last Updated At : </div>
 						<div className={styles.value}>
 							{formatDate({
-								date       : lastUpdatedAt,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								date: lastUpdatedAt,
+								dateFormat:
+									GLOBAL_CONSTANTS.formats.date[
+										'dd MMM yyyy'
+									],
+								timeFormat:
+									GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 								formatType : 'dateTime',
 								separator  : '|',
 							})}
@@ -182,7 +185,6 @@ function OutstandingList({
 				/>
 			</div>
 			<div style={{ padding: '2px 16px' }}>
-
 				<div className={styles.org_name_conatiner}>
 					<div className={styles.sub_org_name_conatiner}>
 						<div style={{ display: 'flex' }}>
@@ -199,24 +201,31 @@ function OutstandingList({
 									placement="right"
 								>
 									<div className={styles.styled_tag}>
-										{`${startCase(collectionPartyType[GLOBAL_CONSTANTS.zeroth_index])}  +${
+										{`${startCase(
+											collectionPartyType[
+												GLOBAL_CONSTANTS.zeroth_index
+											],
+										)}  +${
 											collectionPartyType.length - 1
 										}` || '-'}
 									</div>
-
 								</Tooltip>
 							) : (
 								<div className={styles.styled_tag}>
-									{startCase(collectionPartyType[GLOBAL_CONSTANTS.zeroth_index]) || '-'}
+									{startCase(
+										collectionPartyType[
+											GLOBAL_CONSTANTS.zeroth_index
+										],
+									) || '-'}
 								</div>
 							)}
 						</div>
 						{' '}
-
 						{selfOrganizationName && (
-							<div className={styles.legal_business_name}>{selfOrganizationName}</div>
+							<div className={styles.legal_business_name}>
+								{selfOrganizationName}
+							</div>
 						)}
-
 					</div>
 					<div className={styles.category_container}>
 						{getTaxLabels(entityCode).map((it) => {
@@ -224,7 +233,10 @@ function OutstandingList({
 								return null;
 							}
 							return (
-								<div className={styles.sub_category_container} key={it?.label}>
+								<div
+									className={styles.sub_category_container}
+									key={it?.label}
+								>
 									<div className={styles.tag_text}>
 										{it.label}
 										:
@@ -232,33 +244,29 @@ function OutstandingList({
 									<div className={styles.tag_text_left}>
 										{it.valueKey === 'registrationNumber'
 											? item[it.valueKey]
-											: startCase(item[it.valueKey]?.name || item[it.valueKey])
-                                            || it.defaultValueKey}
+											: startCase(
+												item[it.valueKey]?.name
+														|| item[it.valueKey],
+											) || it.defaultValueKey}
 									</div>
 								</div>
 							);
 						})}
-
 					</div>
 					<div className={styles.ledger_style}>
-						<Tooltip
-							content="Ledger Download"
-							placement="top"
-						>
+						<Tooltip content="Ledger Download" placement="top">
 							<IcMDownload
 								className={styles.download_icon_div}
 								onClick={() => setShowLedgerModal(true)}
 							/>
 						</Tooltip>
-						{!showElement
-						&& (
+						{!showElement && (
 							<Button
 								size="md"
 								style={{ marginLeft: '20px' }}
 								onClick={() => handleViewDetailClick()}
 							>
 								View Details
-
 							</Button>
 						)}
 					</div>
@@ -268,20 +276,22 @@ function OutstandingList({
 					<StatsOutstanding item={item} />
 				</div>
 
-				{showElement
-
-				&& (
+				{showElement && (
 					<Tabs
 						activeTab={activeTab}
 						onChange={(val) => handleActiveTabs(val)}
 						fullWidth
 						themeType="primary"
 					>
-						{(TabsOptions || []).map(({ key, name, component: Component }) => (
-							<TabPanel key={key} name={key} title={name}>
-								{activeTab && <Component {...propsData[activeTab]} />}
-							</TabPanel>
-						))}
+						{(TabsOptions || []).map(
+							({ key, name, component: Component }) => (
+								<TabPanel key={key} name={key} title={name}>
+									{activeTab && (
+										<Component {...propsData[activeTab]} />
+									)}
+								</TabPanel>
+							),
+						)}
 					</Tabs>
 				)}
 			</div>
@@ -293,7 +303,6 @@ function OutstandingList({
 					item={item}
 				/>
 			) : null}
-
 		</div>
 	);
 }

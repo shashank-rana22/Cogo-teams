@@ -135,3 +135,23 @@
 	justify-content: space-between;
 	width: 100%;
 }
+
+.headings {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.outstanding {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 24px;
+	background-color: #fdebe9;
+}
+
+.totaloutstanding {
+	font-size: 14px;
+	font-weight: 600;
+	color: #fc5555;
+}

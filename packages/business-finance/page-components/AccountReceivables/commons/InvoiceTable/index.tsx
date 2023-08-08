@@ -1,4 +1,4 @@
-import { Pagination } from '@cogoport/components';
+import { cl, Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters';
@@ -14,15 +14,23 @@ import StyledTable from '../styledTable';
 import styles from './styles.module.css';
 
 interface Props {
-	organizationId: string,
-	entityCode?: string,
-	showName?: boolean
+	organizationId: string;
+	entityCode?: string;
+	showName?: boolean;
+	showFilters?: boolean;
+	limit?: number;
 }
 
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
-function InvoiceTable({ organizationId = '', entityCode = '', showName = false }: Props) {
+function InvoiceTable({
+	organizationId = '',
+	entityCode = '',
+	showName = false,
+	showFilters = true,
+	limit = 10,
+}: Props) {
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
 
@@ -36,12 +44,9 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 		sendReport,
 		sort,
 		setSort,
-	} = useGetOutstandingCard(organizationId, entityCode);
+	} = useGetOutstandingCard({ organizationId, entityCode, limit });
 
-	const {
-		bulkIrnGenerate,
-		bulkIrnLoading,
-	} = useBulkIrnGenerate({
+	const { bulkIrnGenerate, bulkIrnLoading } = useBulkIrnGenerate({
 		entityCode,
 		getOrganizationInvoices,
 		checkedRows,
@@ -49,21 +54,25 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 		setIsHeaderChecked,
 	});
 
-	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
+	const {
+		list: invoiceList = [],
+		page: pageInvoiceList,
+		totalRecords: recordInvoiceList,
+	} = listData || {};
 
 	const { sortType = '', sortBy = '' } = sort || {};
 
-	const sortStyleGrandTotalAsc = sortType === 'asc' && sortBy === 'grandTotal' ? ORANGE : GREY;
+	const sortStyleGrandTotalAsc =		sortType === 'asc' && sortBy === 'grandTotal' ? ORANGE : GREY;
 
-	const sortStyleGrandTotalDesc = sortType === 'desc' && sortBy === 'grandTotal' ? ORANGE : GREY;
+	const sortStyleGrandTotalDesc =		sortType === 'desc' && sortBy === 'grandTotal' ? ORANGE : GREY;
 
-	const sortStyleInvoiceDateAsc = sortType === 'asc' && sortBy === 'invoiceDate' ? ORANGE : GREY;
+	const sortStyleInvoiceDateAsc =		sortType === 'asc' && sortBy === 'invoiceDate' ? ORANGE : GREY;
 
-	const sortStyleInvoiceDateDesc = sortType === 'desc' && sortBy === 'invoiceDate' ? ORANGE : GREY;
+	const sortStyleInvoiceDateDesc =		sortType === 'desc' && sortBy === 'invoiceDate' ? ORANGE : GREY;
 
-	const sortStyleDueDateAsc = sortType === 'asc' && sortBy === 'dueDate' ? ORANGE : GREY;
+	const sortStyleDueDateAsc =		sortType === 'asc' && sortBy === 'dueDate' ? ORANGE : GREY;
 
-	const sortStyleDueDateDesc = sortType === 'desc' && sortBy === 'dueDate' ? ORANGE : GREY;
+	const sortStyleDueDateDesc =		sortType === 'desc' && sortBy === 'dueDate' ? ORANGE : GREY;
 
 	const columns = completedColumn({
 		refetch   : getOrganizationInvoices,
@@ -84,38 +93,52 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 		setIsHeaderChecked,
 	});
 
+	const columnsFiltered = showFilters
+		? columns
+		: columns?.filter((column) => column.id !== 'checkbox');
+
 	return (
 		<div>
-			{' '}
-			<div
-				className={styles.filter_container}
-			>
-				<div
-					className={styles.filter_div}
-				>
-
-					<Filters
-						filters={invoiceFilters}
-						setFilters={setinvoiceFilters}
-						controls={INVOICE_FILTER()}
-					/>
-					<FilterPopover
-						filters={invoiceFilters}
-						setFilters={setinvoiceFilters}
-						clearFilter={clearInvoiceFilters}
-						refetch={getOrganizationInvoices}
-					/>
-				</div>
+			{showFilters ? (
 				<div className={styles.filter_container}>
-					<div
-						className={styles.send_report}
-						onClick={() => { sendReport(); }}
-						role="presentation"
-					>
-						Send Report
-
+					<div className={styles.filter_div}>
+						<Filters
+							filters={invoiceFilters}
+							setFilters={setinvoiceFilters}
+							controls={INVOICE_FILTER()}
+						/>
+						<FilterPopover
+							filters={invoiceFilters}
+							setFilters={setinvoiceFilters}
+							clearFilter={clearInvoiceFilters}
+							refetch={getOrganizationInvoices}
+						/>
 					</div>
+					<div className={styles.filter_container}>
+						<div
+							className={styles.send_report}
+							onClick={() => {
+								sendReport();
+							}}
+							role="presentation"
+						>
+							Send Report
+						</div>
 
+						<SearchInput
+							value={invoiceFilters.search || ''}
+							onChange={(value) => setinvoiceFilters({
+								...invoiceFilters,
+								search : value || undefined,
+								page   : 1,
+							})}
+							size="md"
+							placeholder="Search by /Invoice number /SID"
+						/>
+					</div>
+				</div>
+			) : (
+				<div className={styles.inputstyles}>
 					<SearchInput
 						value={invoiceFilters.search || ''}
 						onChange={(value) => setinvoiceFilters({
@@ -127,10 +150,13 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 						placeholder="Search by /Invoice number /SID"
 					/>
 				</div>
-			</div>
-
-			<StyledTable data={invoiceList} columns={columns} loading={invoiceLoading} />
-			<div className={styles.pagination_container}>
+			)}
+			<StyledTable
+				data={invoiceList}
+				columns={columnsFiltered}
+				loading={invoiceLoading}
+			/>
+			<div className={cl`${styles.pagination_container} ${showFilters ? '' : styles.nomargin}`}>
 				<Pagination
 					type="table"
 					currentPage={pageInvoiceList}
@@ -138,14 +164,15 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 					pageSize={invoiceFilters.pageLimit}
 					onPageChange={(val) => setinvoiceFilters({ ...invoiceFilters, page: val })}
 				/>
-
 			</div>
-			<FooterCard
-				entityCode={entityCode}
-				bulkIrnGenerate={bulkIrnGenerate}
-				bulkIrnLoading={bulkIrnLoading}
-				checkedRows={checkedRows}
-			/>
+			{showFilters ? (
+				<FooterCard
+					entityCode={entityCode}
+					bulkIrnGenerate={bulkIrnGenerate}
+					bulkIrnLoading={bulkIrnLoading}
+					checkedRows={checkedRows}
+				/>
+			) : null}
 		</div>
 	);
 }

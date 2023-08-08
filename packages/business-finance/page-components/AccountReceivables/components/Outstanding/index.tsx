@@ -66,6 +66,7 @@ function Outstanding({ entityCode = '' }) {
 				setQueryKey={setQueryKey}
 				entityCode={entityCode}
 				refetch={refetch}
+				list={list}
 			/>
 
 			{outstandingLoading ? (

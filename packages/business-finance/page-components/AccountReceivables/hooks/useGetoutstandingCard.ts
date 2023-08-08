@@ -7,36 +7,36 @@ import { format } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 type DueDate = {
-	startDate?: Date,
-	endDate?: Date,
+	startDate?: Date;
+	endDate?: Date;
 };
 
 type InvoiceDate = {
-	startDate?: Date,
-	endDate?: Date,
+	startDate?: Date;
+	endDate?: Date;
 };
 
 type DateObj = {
-	startDate?: Date,
-	endDate?: Date,
+	startDate?: Date;
+	endDate?: Date;
 };
 
 interface InvoiceFilterProps {
-	page : number,
-	pageLimit: number,
-	date?: DateObj,
-	search?: string,
-	dueDate?: DueDate,
-	invoiceDate?: InvoiceDate,
-	orgId?: string,
-	migrated?: string,
-	paymentStatusList?: string[],
-	invoiceStatus?: string,
-	services?: string[],
-	currency?: string
+	page: number;
+	pageLimit: number;
+	date?: DateObj;
+	search?: string;
+	dueDate?: DueDate;
+	invoiceDate?: InvoiceDate;
+	orgId?: string;
+	migrated?: string;
+	paymentStatusList?: string[];
+	invoiceStatus?: string;
+	services?: string[];
+	currency?: string;
 }
 
-const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
+const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 	const { userData } = useSelector(({ profile }) => ({
 		userData: profile?.user || {},
 	}));
@@ -45,7 +45,7 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 
 	const [invoiceFilters, setinvoiceFilters] = useState<InvoiceFilterProps>({
 		page              : 1,
-		pageLimit         : 10,
+		pageLimit         : limit,
 		orgId             : organizationId,
 		paymentStatusList : ['unpaid'],
 	});
@@ -55,10 +55,7 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 		sortBy   : 'invoiceDate',
 	});
 
-	const [
-		{ data: listData, loading: listLoading },
-		listApi,
-	] = useRequestBf(
+	const [{ data: listData, loading: listLoading }, listApi] = useRequestBf(
 		{
 			url     : '/sales/outstanding/invoice-list',
 			method  : 'get',
@@ -77,65 +74,136 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 	);
 
 	const {
-		page, pageLimit, migrated, paymentStatusList, invoiceStatus,
-		services, search, dueDate, invoiceDate, orgId,
+		page,
+		pageLimit,
+		migrated,
+		paymentStatusList,
+		invoiceStatus,
+		services,
+		search,
+		dueDate,
+		invoiceDate,
+		orgId,
 	} = invoiceFilters || {};
 
-	const dueDateStart = dueDate && format(dueDate?.startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'], {}, false);
-	const dueDateEnd = dueDate && format(dueDate?.endDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'], {}, false);
+	const dueDateStart =		dueDate
+		&& format(
+			dueDate?.startDate,
+			GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			{},
+			false,
+		);
+	const dueDateEnd =		dueDate
+		&& format(
+			dueDate?.endDate,
+			GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			{},
+			false,
+		);
 
-	const invoiceDateStart = invoiceDate
-	&& format(invoiceDate?.startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'], {}, false);
-	const invoiceDateEnd = invoiceDate
-	&& format(invoiceDate?.endDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'], {}, false);
+	const invoiceDateStart =		invoiceDate
+		&& format(
+			invoiceDate?.startDate,
+			GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			{},
+			false,
+		);
+	const invoiceDateEnd =		invoiceDate
+		&& format(
+			invoiceDate?.endDate,
+			GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			{},
+			false,
+		);
 
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
-	const getOrganizationInvoices = useCallback(async (filters) => {
-		const dueDateStartFilter = filters?.dueDate
-		&& format(filters?.dueDate?.startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'], {}, false);
-		const dueDateEndFilter = filters?.dueDate
-		&& format(filters?.dueDate?.endDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'], {}, false);
+	const getOrganizationInvoices = useCallback(
+		async (filters) => {
+			const dueDateStartFilter =				filters?.dueDate
+				&& format(
+					filters?.dueDate?.startDate,
+					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+					{},
+					false,
+				);
+			const dueDateEndFilter =				filters?.dueDate
+				&& format(
+					filters?.dueDate?.endDate,
+					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+					{},
+					false,
+				);
 
-		const invoiceDateStartFilter = filters?.invoiceDate
-		&& format(filters?.invoiceDate?.startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'], {}, false);
-		const invoiceDateEndFilter = filters?.invoiceDate
-		&& format(filters?.invoiceDate?.endDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'], {}, false);
+			const invoiceDateStartFilter =				filters?.invoiceDate
+				&& format(
+					filters?.invoiceDate?.startDate,
+					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+					{},
+					false,
+				);
+			const invoiceDateEndFilter =				filters?.invoiceDate
+				&& format(
+					filters?.invoiceDate?.endDate,
+					GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+					{},
+					false,
+				);
 
-		try {
-			await listApi({
-				params: {
-					page,
-					pageLimit,
-					migrated          : migrated || undefined,
-					paymentStatusList : paymentStatusList || undefined,
-					invoiceStatus     : invoiceStatus || undefined,
-					services          : filters?.services || undefined,
-					query             : query !== '' ? query : undefined,
-					role              : userData.id,
-					orgId             : orgId || undefined,
-					dueDateStart      : dueDateStartFilter || undefined,
-					dueDateEnd        : dueDateEndFilter || undefined,
-					invoiceDateStart  : invoiceDateStartFilter || undefined,
-					invoiceDateEnd    : invoiceDateEndFilter || undefined,
-					cogoEntity        : entityCode || undefined,
-					currency          : filters?.currency || undefined,
-					sortBy            : sort.sortBy || undefined,
-					sortType          : sort.sortType || undefined,
-				},
+			try {
+				await listApi({
+					params: {
+						page,
+						pageLimit,
+						migrated          : migrated || undefined,
+						paymentStatusList : paymentStatusList || undefined,
+						invoiceStatus     : invoiceStatus || undefined,
+						services          : filters?.services || undefined,
+						query             : query !== '' ? query : undefined,
+						role              : userData.id,
+						orgId             : orgId || undefined,
+						dueDateStart      : dueDateStartFilter || undefined,
+						dueDateEnd        : dueDateEndFilter || undefined,
+						invoiceDateStart  : invoiceDateStartFilter || undefined,
+						invoiceDateEnd    : invoiceDateEndFilter || undefined,
+						cogoEntity        : entityCode || undefined,
+						currency          : filters?.currency || undefined,
+						sortBy            : sort.sortBy || undefined,
+						sortType          : sort.sortType || undefined,
+					},
+				});
 
-			});
-
-			if (sort.sortBy === 'grandTotal' && filters?.currency === undefined) {
-				Toast.warn('Please apply currency filter to sort invoice amount accurately');
+				if (
+					sort.sortBy === 'grandTotal'
+					&& filters?.currency === undefined
+				) {
+					Toast.warn(
+						'Please apply currency filter to sort invoice amount accurately',
+					);
+				}
+			} catch (e) {
+				if (e?.error?.message) {
+					Toast.error(e?.error?.message || 'Failed');
+				}
 			}
-		} catch (e) {
-			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed'); }
-		}
-	}, [listApi, page, pageLimit,
-		migrated, paymentStatusList, invoiceStatus, query, userData.id, orgId, entityCode, sort.sortBy, sort.sortType]);
+		},
+		[
+			listApi,
+			page,
+			pageLimit,
+			migrated,
+			paymentStatusList,
+			invoiceStatus,
+			query,
+			userData.id,
+			orgId,
+			entityCode,
+			sort.sortBy,
+			sort.sortType,
+		],
+	);
 
 	const sendReport = async () => {
 		try {
@@ -158,7 +226,9 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 			});
 			Toast.success('Report Sent Successfully');
 		} catch (e) {
-			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed to Send Report'); }
+			if (e?.error?.message) {
+				Toast.error(e?.error?.message || 'Failed to Send Report');
+			}
 		}
 	};
 
