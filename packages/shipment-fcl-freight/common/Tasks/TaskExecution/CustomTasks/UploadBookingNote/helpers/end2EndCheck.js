@@ -2,7 +2,7 @@ import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeBy
 
 const INCO_TERM_CHECK = ['cif', 'cfr', 'fob'];
 
-const endToEndCheck = (serviceObj, shipment_data, incoTerm) => {
+const endToEndCheck = ({ serviceObj = {}, shipment_data = {}, incoTerm = '' }) => {
 	if (serviceObj.service_type === 'fcl_freight_service' || !INCO_TERM_CHECK.includes(incoTerm)) {
 		return true;
 	}

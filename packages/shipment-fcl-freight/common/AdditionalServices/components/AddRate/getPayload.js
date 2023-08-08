@@ -1,6 +1,9 @@
 const SERVICE_ID_FROM_SERVICE_INDEX = 1;
 
-const getPayload = (data = {}, item = {}, preProps = {}, filters = {}, billToCustomer = null, whoIsAddingRate = '') => {
+const getPayload = ({
+	data = {}, item = {}, preProps = {},
+	filters = {}, billToCustomer = null, whoIsAddingRate = '',
+}) => {
 	const addedService = (item.services || []).find((service) => {
 		if (filters?.service_type?.includes('?')) {
 			return service.id === filters?.service_type?.split('?')?.[SERVICE_ID_FROM_SERVICE_INDEX];
