@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 
-const useCreateSupplySearch = ({ refetchListFclSearches }) => {
+const useCreateSupplySearch = ({ refetchListFclSearches, reset, setLocationDetails }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/create_supply_fcl_freight_search',
 		method : 'POST',
@@ -10,6 +10,8 @@ const useCreateSupplySearch = ({ refetchListFclSearches }) => {
 		try {
 			await trigger({ data: payload });
 			refetchListFclSearches();
+			setLocationDetails({});
+			reset();
 		} catch (err) {
 			console.error(err);
 		}

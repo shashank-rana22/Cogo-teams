@@ -14,7 +14,10 @@ function List({ data = [] }) {
 			id       : 'origin',
 			Header   : 'ORIGIN',
 			accessor : ({ origin_location }) => (
-				<div>{ origin_location?.display_name}</div>
+				<div>
+					{ origin_location?.display_name}
+
+				</div>
 			),
 		},
 		{

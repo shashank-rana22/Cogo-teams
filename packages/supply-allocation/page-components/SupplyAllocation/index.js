@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import { useState } from 'react';
 
 import useCreateSupplySearch from '../../hooks/useCreateSupplySearch';
 import useListFclSearches from '../../hooks/useListFclSearches';
@@ -8,10 +9,13 @@ import List from './List';
 import LocationSelect from './LocationSelect';
 
 function SupplyAllocation() {
-	const { data, loading, refetchListFclSearches } = useListFclSearches();
-	const { control } = useForm({});
+	const [locationDetails, setLocationDetails] = useState({});
 
-	const { createSupplySearch } = useCreateSupplySearch({ refetchListFclSearches });
+	const { data, loading, refetchListFclSearches } = useListFclSearches();
+
+	const { control, reset } = useForm({});
+
+	const { createSupplySearch } = useCreateSupplySearch({ refetchListFclSearches, reset, setLocationDetails });
 
 	if (loading) {
 		return null;
@@ -25,9 +29,11 @@ function SupplyAllocation() {
 				control={control}
 				createSupplySearch={createSupplySearch}
 				refetchListFclSearches={refetchListFclSearches}
+				locationDetails={locationDetails}
+				setLocationDetails={setLocationDetails}
 			/>
 
-			<List source="add" data={data} />
+			<List data={data} />
 
 		</>
 	);

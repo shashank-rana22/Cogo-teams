@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import RenderLabelNew from '../../../commons/RenderLabelNew';
 
@@ -24,12 +23,9 @@ const commonLocationProps = {
 	placeholder : 'Search via port name/code...',
 };
 
-function LocationSelect({ control, createSupplySearch }) {
-	const [originDetails, setOriginDetails] = useState({});
-	const [destinationDetails, setDestinationDetails] = useState({});
-
+function LocationSelect({ control, createSupplySearch, locationDetails, setLocationDetails }) {
 	const onClickAllocate = () => {
-		const payload = { ...originDetails, ...destinationDetails };
+		const payload = { ...locationDetails };
 		createSupplySearch({ payload });
 	};
 
@@ -45,8 +41,13 @@ function LocationSelect({ control, createSupplySearch }) {
 					label="Select Origin SeaPort"
 					{...commonLocationProps}
 					onChange={(id, item) => {
-						setOriginDetails({ origin_location_id: id, origin_location_type: item?.type });
+						setLocationDetails((prev) => ({
+							...prev,
+							origin_location_id   : id,
+							origin_location_type : item?.type,
+						}));
 					}}
+
 				/>
 			</div>
 
@@ -63,7 +64,11 @@ function LocationSelect({ control, createSupplySearch }) {
 					label="Select Origin SeaPort"
 					{...commonLocationProps}
 					onChange={(id, item) => {
-						setDestinationDetails({ destination_location_id: id, destination_location_type: item?.type });
+						setLocationDetails((prev) => ({
+							...prev,
+							destination_location_id   : id,
+							destination_location_type : item?.type,
+						}));
 					}}
 				/>
 			</div>
