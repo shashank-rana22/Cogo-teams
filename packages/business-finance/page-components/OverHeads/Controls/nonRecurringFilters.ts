@@ -20,7 +20,7 @@ export const nonRecurringFilters = [
 		type           : 'select',
 		multiple       : false,
 		defaultOptions : false,
-		placeholder    : 'Branch',
+		placeholder    : 'Payment Status',
 		span           : 2,
 		isClearable    : true,
 		size           : 'sm',
