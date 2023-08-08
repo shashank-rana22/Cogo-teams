@@ -1,6 +1,6 @@
 const SERVICE_ID_FROM_SERVICE_INDEX = 1;
 
-const getPayload = (data = {}, item = {}, preProps = {}, filters = {}, billToCustomer = null) => {
+const getPayload = (data = {}, item = {}, preProps = {}, filters = {}, billToCustomer = null, whoIsAddingRate = '') => {
 	const addedService = (item.services || []).find((service) => {
 		if (filters?.service_type?.includes('?')) {
 			return service.id === filters?.service_type?.split('?')?.[SERVICE_ID_FROM_SERVICE_INDEX];
@@ -26,7 +26,7 @@ const getPayload = (data = {}, item = {}, preProps = {}, filters = {}, billToCus
 			price                 : Number(price) || undefined,
 			service_provider_id   : service_provider_id || undefined,
 			pending_task_id       : pending_task_id || undefined,
-			add_to_sell_quotation : null,
+			add_to_sell_quotation : whoIsAddingRate === 'okam_create' ? true : undefined,
 			alias                 : alias || undefined,
 			state                 : preProps.state,
 		}
