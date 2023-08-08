@@ -1,20 +1,20 @@
 import { Button, Loader } from '@cogoport/components';
-import { SelectController, useForm } from '@cogoport/forms';
+import { SelectController, CheckboxController, useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 
 import { BL_CATEGORY_MAPPING, BL_PREFERENCE_MAPPING } from '../../../../../constants/BL_MAPPING';
 import useCreateShipmentOperatingInstruction from '../../../../../hooks/useCreateShipmentOperatingInstruction';
 import useGetShipmentOperatingProcedure from '../../../../../hooks/useGetShipmentOperatingProcedure';
+import useListOrganizationBillingAddresses from '../../../../../hooks/useListOrgBillingAddresses';
 import useUpdateShipmentOperatingInstruction from '../../../../../hooks/useUpdateShipmentOperatingInstruction';
 import { convertObjectMappingToArray } from '../../../../../utils/convertObjectMappingToArray';
 import getDocumentOptions from '../../../helpers/getDocumentOptions';
 import getCreateInstructionParams from '../helpers/getCreateInstructionParams';
+import { getDefaultValues } from '../helpers/getDefaultValues';
 import getUpdateInstructionParams from '../helpers/getUpdateInstructionParams';
 
 import modeOfDocumentOptions from './modeOfDocumentOptions';
 import styles from './styles.module.css';
-
-const DOCUMENT_FORM_FIELDS = ['bl_category', 'bl_preference', 'preferred_mode_of_document_execution', 'name',
-	'country_code', 'contact_no', 'address'];
 
 function DocumentForm({
 	sop_detail = {},
@@ -55,20 +55,16 @@ function DocumentForm({
 		refetch     : afterUpdateOrCreateRefetch,
 	});
 
-	const {
-		name:nameOptions = [],
-		address:addressOptions = [],
-		country_code:countryCodeOptions = [],
-		contact_number:contactNoOptions = [],
-	} = getDocumentOptions(orgData?.document_handling_preference || []);
-
-	const DEFAULT_VALUES = {};
-
-	DOCUMENT_FORM_FIELDS.forEach((k) => { if (sop_detail[k]) DEFAULT_VALUES[k] = sop_detail[k]; });
+	const { DEFAULT_VALUES } = getDefaultValues({ sop_detail });
 
 	const { control, watch, handleSubmit, formState:{ errors = {} } } = useForm({ defaultValues: DEFAULT_VALUES });
 
 	const watchModeOfExecution = watch('preferred_mode_of_document_execution');
+
+	const {
+		billingAddressData,
+		orgPocData,
+	} = useListOrganizationBillingAddresses({ organization_id, watchModeOfExecution });
 
 	const onSubmit = (formValues) => {
 		if (showForm === 'edit') {
@@ -77,9 +73,28 @@ function DocumentForm({
 			return;
 		}
 
-		const params = getCreateInstructionParams({ formValues });
+		const params = getCreateInstructionParams({
+			formValues,
+			sop_detail,
+			trade_type,
+			billingAddressData,
+			orgPocData,
+			watchModeOfExecution,
+		});
 		createTrigger(params);
 	};
+
+	const {
+		name:nameOptions = [],
+		address:addressOptions = [],
+		country_code:countryCodeOptions = [],
+		contact_number:contactNoOptions = [],
+	} = getDocumentOptions({
+		data: orgData?.document_handling_preference,
+		billingAddressData,
+		orgPocData,
+		watchModeOfExecution,
+	});
 
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
@@ -99,7 +114,6 @@ function DocumentForm({
 								control={control}
 								options={convertObjectMappingToArray(BL_CATEGORY_MAPPING)}
 								value={bl_category}
-								disabled={!!bl_category}
 								rules={{ required: { value: true, message: 'BL Category is required' } }}
 							/>
 							{Error('bl_category')}
@@ -115,7 +129,6 @@ function DocumentForm({
 								control={control}
 								options={convertObjectMappingToArray(BL_PREFERENCE_MAPPING)}
 								value={bl_type}
-								disabled={!!bl_type}
 								rules={{ required: { value: true, message: 'BL Preferences is required' } }}
 							/>
 							{Error('bl_preference')}
@@ -128,7 +141,6 @@ function DocumentForm({
 								name="preferred_mode_of_document_execution"
 								control={control}
 								options={modeOfDocumentOptions}
-								disabled={!!bl_delivery_mode}
 								value={bl_delivery_mode}
 								rules={{ required: { value: true, message: 'Delivery Preferences is required' } }}
 							/>
@@ -206,6 +218,17 @@ function DocumentForm({
 									{Error('address')}
 								</div>
 							) : null}
+
+						{isEmpty(sop_detail) ? (
+							<div className={styles.checkbox}>
+								<CheckboxController
+									control={control}
+									name="is_primary"
+									rules={{ required: { value: true, message: 'This is required' } }}
+								/>
+								<label>Set this as default preference for all the shipments</label>
+							</div>
+						) : null}
 
 						<div className={styles.form_action}>
 							<div className={styles.cancel}>

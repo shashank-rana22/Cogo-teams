@@ -15,6 +15,7 @@ function LabelValue({ label, value }) {
 function Details({
 	sop_detail = {},
 	setShowForm = () => {},
+	documents = [],
 }) {
 	const mapping = {
 		'BL Category'      : upperCase(sop_detail?.bl_category || ''),
@@ -25,6 +26,7 @@ function Details({
 		Address            : sop_detail?.address,
 	};
 
+	const isDraftBlUploaded = !isEmpty(documents);
 	const isAddOrEdit = isEmpty(sop_detail) ? 'add' : 'edit';
 
 	return (
@@ -42,15 +44,17 @@ function Details({
 					</div>
 				)}
 
-			<div>
-				<Button
-					themeType="accent"
-					size="sm"
-					onClick={() => setShowForm(isAddOrEdit)}
-				>
-					{startCase(isAddOrEdit)}
-				</Button>
-			</div>
+			{!isDraftBlUploaded ? (
+				<div>
+					<Button
+						themeType="accent"
+						size="sm"
+						onClick={() => setShowForm(isAddOrEdit)}
+					>
+						{startCase(isAddOrEdit)}
+					</Button>
+				</div>
+			) : null}
 		</div>
 	);
 }

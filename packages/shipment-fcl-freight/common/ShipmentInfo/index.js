@@ -8,7 +8,8 @@ import { useContext } from 'react';
 import styles from './styles.module.css';
 
 function ShipmentInfo() {
-	const { shipment_data, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);
+	const { bl_type } = primary_service || {};
 
 	const { handleShipmentsClick } = useShipmentBack();
 
@@ -36,6 +37,14 @@ function ShipmentInfo() {
 						{sourceText}
 					</Pill>
 				) : null}
+
+			{
+				bl_type === 'seaway' ? (
+					<Pill size="sm" color="green" className={styles.pill}>
+						{startCase(bl_type)}
+					</Pill>
+				) : null
+			}
 
 			{showSource && shipment_data?.is_cogo_assured ? (
 				<img
