@@ -10,7 +10,7 @@ function Read({
 	defaultValues = {},
 	watermark = null,
 }) {
-	function SectionOneChild(values) {
+	function SectionOneChild({ values = {} }) {
 		return (
 			SECTION_ONE_CHILD_1_MAPPINGS.map(({ label, key, children }) => (children ? (
 				<div className={styles[`section_one_child_1-${key}`]} key={key}>
@@ -57,7 +57,7 @@ function Read({
 			<section className={styles.section}>
 				<div className={styles.section_one}>
 					<div className={styles.section_one_child_1}>
-						<SectionOneChild defaultValues={defaultValues} />
+						<SectionOneChild values={defaultValues} />
 					</div>
 
 					<div className={styles.section_one_child_2}>
