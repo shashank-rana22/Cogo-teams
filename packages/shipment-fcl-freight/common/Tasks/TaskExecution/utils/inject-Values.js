@@ -110,7 +110,7 @@ const injectValues = ({
 
 		(controls || []).forEach((control, index) => {
 			if (control.name === 'bl_detail') {
-				const shipment_bl_details =	getApisData?.list_shipment_bl_details?.filter(
+				const shipment_bl_details = getApisData?.list_shipment_bl_details?.filter(
 					(i) => i?.bl_document_type === doc_type,
 				);
 
@@ -128,13 +128,11 @@ const injectValues = ({
 			}
 		});
 	} else if (task?.task === 'mark_haulage_container_picked_up') {
-		(controls || []).forEach((control) => {
+		(controls || []).forEach((control, index) => {
 			if (control.name === 'cargo_readiness_date') {
-				const newControl = control;
-				newControl.value = new Date(primary_service?.cargo_readiness_date);
-				return newControl;
+				controls[index].value = primary_service?.cargo_readiness_date
+					? new Date(primary_service?.cargo_readiness_date) : null;
 			}
-			return control;
 		});
 	} else if (task?.task === 'mark_confirmed') {
 		(controls || []).forEach((ctrl, index) => {
