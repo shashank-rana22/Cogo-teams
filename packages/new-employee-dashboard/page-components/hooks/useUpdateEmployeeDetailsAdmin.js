@@ -80,7 +80,6 @@ function useUpdateEmployeeDetails({
 			await trigger({
 				data: {
 					id,
-					employee_detail_id: id,
 					...GET_PAYLOAD_MAPPING?.[formType],
 				},
 			});
