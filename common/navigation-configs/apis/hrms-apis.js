@@ -518,16 +518,6 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
-		{
-			api          : 'list_partner_users',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-		{
-			api          : 'list_locations',
-			access_type  : 'private',
-			service_name : 'location',
-		},
 	],
 };
 
