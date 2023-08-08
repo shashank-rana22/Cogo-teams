@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 const NUMBER_OF_MONTHS = 12;
+const GENERATE_LINK_AGAIN_STATUSES = ['CANCELLED', 'REFUNDED', 'EXPIRED', 'FAILED'];
 
 function Footer(props) {
 	const {
@@ -25,6 +26,8 @@ function Footer(props) {
 	const subscriptionRate = activeTab === 'annual' ? totalAmount / NUMBER_OF_MONTHS : totalAmount;
 
 	const isLoading = selectedPlan?.id === planId ? createLinkloading : false;
+	const showGenerateLinkCTA = isEmpty(checkout)
+	|| GENERATE_LINK_AGAIN_STATUSES.includes(paymentStatus);
 
 	const handleGenerateLink = ({ plan }) => {
 		const { display_pricing: displayPricing = '' } = plan || {};
@@ -69,16 +72,7 @@ function Footer(props) {
 				</span>
 			</div>
 
-			{!isEmpty(checkout?.payment_order_id) ? (
-				<Button
-					themeType={hover ? 'primary' : 'accent'}
-					size="md"
-					onClick={() => setShowAssign(true)}
-					disabled={paymentStatus !== 'PAID'}
-				>
-					Assign
-				</Button>
-			) : (
+			{showGenerateLinkCTA ? (
 				<Button
 					size="md"
 					themeType={hover ? 'primary' : 'secondary'}
@@ -88,6 +82,15 @@ function Footer(props) {
 					disabled={isLoading}
 				>
 					Generate Link
+				</Button>
+			) : (
+				<Button
+					themeType={hover ? 'primary' : 'accent'}
+					size="md"
+					onClick={() => setShowAssign(true)}
+					disabled={paymentStatus !== 'PAID'}
+				>
+					Assign
 				</Button>
 			)}
 		</div>

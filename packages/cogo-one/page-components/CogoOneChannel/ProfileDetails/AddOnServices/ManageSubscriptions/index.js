@@ -32,6 +32,8 @@ function EmptyState() {
 function ManageSubscriptions(props) {
 	const { orgId = '', organizationData = {} } = props || {};
 
+	const selectedUserId = organizationData?.users?.[GLOBAL_CONSTANTS.zeroth_index]?.id || '';
+
 	const [activeTab, setActiveTab] = useState('monthly');
 	const [showAddOn, setShowAddOn] = useState(false);
 	const [showAssign, setShowAssign] = useState(false);
@@ -44,7 +46,7 @@ function ManageSubscriptions(props) {
 
 	const {
 		createLink = () => {}, createLinkloading = false,
-	} = useCreatePaymentLink({ saasSubscriptionCustomerId, getUserActivePlans });
+	} = useCreatePaymentLink({ saasSubscriptionCustomerId, getUserActivePlans, selectedUserId });
 
 	const {
 		paymentDetails = {},

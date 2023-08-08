@@ -11,6 +11,8 @@ const ADD_ON_SERVICES_COMPONENT_MAPPING = {
 };
 
 function AddOnServices(props) {
+	const { orgId = '' } = props || {};
+
 	const [selectedService, setSelectedService] = useState('manage_subscriptions');
 
 	const handleTabChange = ({ item = {} }) => {
@@ -26,7 +28,7 @@ function AddOnServices(props) {
 	const Component = ADD_ON_SERVICES_COMPONENT_MAPPING[selectedService] || null;
 
 	return (
-		<div>
+		<div key={orgId}>
 			<div className={styles.main_container}>
 				<div className={styles.heading}>Add-On Services</div>
 				<div className={styles.tabs_container}>

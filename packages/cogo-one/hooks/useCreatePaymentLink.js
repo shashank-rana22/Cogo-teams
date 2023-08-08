@@ -2,16 +2,19 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const getPayload = ({ performedById = '', userType = '', saasSubscriptionCustomerId = '', planPricingId = '' }) => ({
+const getPayload = ({
+	performedById = '', userType = '', saasSubscriptionCustomerId = '',
+	planPricingId = '', selectedUserId = '',
+}) => ({
 	saas_subscription_customer_id : saasSubscriptionCustomerId,
 	plan_pricing_id               : planPricingId,
-	user_id                       : performedById,
+	user_id                       : selectedUserId,
 	platform                      : 'cogoone',
 	performed_by_id               : performedById,
 	performed_by_type             : userType === 'partner' ? 'user' : 'agent',
 });
 
-function useCreatePaymentLink({ saasSubscriptionCustomerId = '', getUserActivePlans = () => {} }) {
+function useCreatePaymentLink({ saasSubscriptionCustomerId = '', getUserActivePlans = () => {}, selectedUserId = '' }) {
 	const {
 		performedById,
 		userType,
@@ -33,6 +36,7 @@ function useCreatePaymentLink({ saasSubscriptionCustomerId = '', getUserActivePl
 					userType,
 					saasSubscriptionCustomerId,
 					planPricingId,
+					selectedUserId,
 				}),
 			});
 			getUserActivePlans();
