@@ -36,7 +36,7 @@ function Header({
 	function Content() {
 		return (
 			<div className={styles.chat_users}>
-				{groupChatUsers?.map((item) => (
+				{(groupChatUsers || []).map((item) => (
 					<div key={item} className={styles.user_name}>{startCase(item)}</div>
 				))}
 			</div>
