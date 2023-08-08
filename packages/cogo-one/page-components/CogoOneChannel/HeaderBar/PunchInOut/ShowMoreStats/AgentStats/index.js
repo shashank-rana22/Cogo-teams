@@ -24,9 +24,9 @@ function AgentStats({ showDetails = false, name = '' }) {
 
 	const { calls = [] } = data || {};
 	const { sales_dashboard_stats = {} } = shipmentData || {};
-	const { booked = 0, total_sent = 0, expired = 0 } = sales_dashboard_stats || {};
+	const { booked = 0, total_sent = 0 } = sales_dashboard_stats || {};
 
-	const totalQuotationSend = total_sent + booked + expired;
+	const totalQuotationSend = total_sent + booked;
 
 	return (
 		<div className={styles.section}>
@@ -48,6 +48,7 @@ function AgentStats({ showDetails = false, name = '' }) {
 						booked={booked}
 						statsData={statsData}
 						calls={calls}
+						loading={shiplentLoading || loading || statsLoading}
 					/>
 				</div>
 				<div className={styles.graph_container}>

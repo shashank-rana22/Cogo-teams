@@ -16,7 +16,7 @@ const getParams = ({ value }) => ({
 	sales_dashboard_stats_required : true,
 	pagination_data_required       : false,
 	filters                        : {
-		quotation_sent_at_greater_than: getDateString(DATE_FILTER_MAPPING[value](new Date())),
+		created_at_greater_than: getDateString(DATE_FILTER_MAPPING[value](new Date())),
 	},
 });
 

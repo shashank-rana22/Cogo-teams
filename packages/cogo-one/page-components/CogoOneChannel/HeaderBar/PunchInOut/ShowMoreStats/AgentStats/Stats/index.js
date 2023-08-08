@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
@@ -17,6 +18,7 @@ function Stats({
 	statsData = {},
 	booked = 0,
 	calls = [],
+	loading = false,
 }) {
 	const { chat_stats = {} } = statsData || {};
 	const { active = 0 } = chat_stats || {};
@@ -59,10 +61,13 @@ function Stats({
 											alt="sad-emoji"
 											width={30}
 											height={30}
+											className={styles.emoji_icon}
 										/>
 									) : null}
 								<div className={styles.count}>
-									{getFormattedNumber(FEEDBACK_COUNT_MAPPING[name] || MIN_COUNT)}
+									{loading ? <Placeholder width="80px" height="40px" /> : (
+										<div>{getFormattedNumber(FEEDBACK_COUNT_MAPPING[name] || MIN_COUNT)}</div>
+									)}
 								</div>
 								{hasIcon ? <IcMDown className={styles.arrow_icon} /> : null}
 							</div>
@@ -78,7 +83,9 @@ function Stats({
 						<div className={styles.each_div} key={name}>
 							<div className={styles.title}>{label}</div>
 							<div className={styles.count}>
-								{getFormattedNumber(STATS_COUNT_MAPPING[name] || MIN_COUNT)}
+								{loading ? <Placeholder width="80px" height="40px" /> : (
+									<div>{getFormattedNumber(STATS_COUNT_MAPPING[name] || MIN_COUNT)}</div>
+								)}
 							</div>
 						</div>
 					);

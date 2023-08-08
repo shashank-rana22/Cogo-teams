@@ -6,7 +6,7 @@ import { useEffect, useCallback } from 'react';
 
 import { DATE_FILTER_MAPPING } from '../configurations/time-filter-mapping';
 
-const getDateString = (date) => formatDate({
+const getDateString = ({ date }) => formatDate({
 	date,
 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 	formatType : 'date',
@@ -14,8 +14,8 @@ const getDateString = (date) => formatDate({
 
 const getParams = ({ value }) => ({
 	duration_type : value,
-	start_date    : getDateString(DATE_FILTER_MAPPING[value](new Date())),
-	end_date      : getDateString(new Date()),
+	start_date    : getDateString({ date: DATE_FILTER_MAPPING?.[value](new Date()) }),
+	end_date      : getDateString({ date: new Date() }),
 });
 
 function useGetCogoOneAgentStats({
