@@ -1,10 +1,23 @@
-import { asyncFieldsTicketTypes, asyncFieldsOrganizations, asyncFieldsOrganizationUser } from '@cogoport/forms';
+import {
+	asyncFieldsTicketTypes, asyncFieldsOrganizations, asyncFieldsOrganizationUser,
+	asyncTicketsCategory,
+} from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
 
-const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
-	const ticketTypeOptions = useGetAsyncTicketOptions({ ...asyncFieldsTicketTypes() });
+const useRaiseTicketcontrols = ({
+	watchOrgId, setAdditionalInfo, formattedSubCategories, setSubCategories, watchCategory,
+	watchSubCategory, resetField,
+}) => {
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
+	const categoryOptions = useGetAsyncTicketOptions({ ...asyncTicketsCategory() });
+	const ticketTypeOptions = useGetAsyncTicketOptions({
+		...asyncFieldsTicketTypes(),
+		params: {
+			Category    : watchCategory,
+			Subcategory : watchSubCategory,
+		},
+	});
 	const organizationUserOptions = useGetAsyncOptions({
 		...asyncFieldsOrganizationUser(),
 		params: {
@@ -15,6 +28,31 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 
 	return [
 		{
+			...(categoryOptions || {}),
+			label          : 'Select category',
+			name           : 'category',
+			controllerType : 'select',
+			placeholder    : 'Select Type',
+			isClearable    : true,
+			rules          : { required: true },
+			defaultOptions : true,
+			onChange       : (_, val) => {
+				setSubCategories(val?.subcategories);
+				resetField('sub_category');
+				resetField('issue_type');
+			},
+		},
+		{
+			label          : 'Select Sub-category',
+			name           : 'sub_category',
+			controllerType : 'select',
+			placeholder    : 'Select sub category',
+			rules          : { required: true },
+			isClearable    : true,
+			options        : formattedSubCategories,
+			onChange       : () => resetField('issue_type'),
+		},
+		{
 			...(ticketTypeOptions || {}),
 			label          : 'Select issue type',
 			name           : 'issue_type',
@@ -23,7 +61,6 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 			isClearable    : true,
 			rules          : { required: true },
 			defaultOptions : true,
-			showOptional   : false,
 			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
 		},
 		{
@@ -40,7 +77,6 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 			controllerType : 'select',
 			placeholder    : 'Select Organization',
 			isClearable    : true,
-			showOptional   : true,
 		},
 		{
 			...(organizationUserOptions || {}),
@@ -50,7 +86,6 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 			placeholder    : 'Select User',
 			isClearable    : true,
 			rules          : { required: true },
-			showOptional   : true,
 
 		},
 		{
@@ -63,23 +98,23 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 				{
 					label : 'Medium',
 					value : 'medium',
-				}, {
+				},
+				{
 					label : 'low',
 					value : 'Low',
-				}, {
+				},
+				{
 					label : 'High',
 					value : 'high',
 				},
 			],
-			theme        : 'admin',
-			className    : 'primary md',
-			showOptional : false,
+			theme     : 'admin',
+			className : 'primary md',
 		},
 		{
 			label          : 'Upload Supporting Document',
 			name           : 'file_url',
 			controllerType : 'uploader',
-			showOptional   : false,
 		},
 		{
 			label          : 'Notify customer',

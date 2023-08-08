@@ -20,11 +20,10 @@ function MyTickets() {
 		Closed    : false,
 	});
 
-	const { control, handleSubmit, watch, formState: { errors }, reset } = useForm();
+	const formProps = useForm();
+	const { handleSubmit, reset } = formProps;
 
 	const { raiseTickets, loading } = useRaiseTicket({ setShowRaiseTicket, additionalInfo, setRefreshList });
-
-	const watchOrgId = watch('organization_id');
 
 	const handleClose = () => {
 		reset();
@@ -58,9 +57,7 @@ function MyTickets() {
 
 					<Modal.Body className={styles.preview_modal_body}>
 						<RaiseTickets
-							errors={errors}
-							control={control}
-							watchOrgId={watchOrgId}
+							{...formProps}
 							additionalInfo={additionalInfo}
 							setAdditionalInfo={setAdditionalInfo}
 						/>
