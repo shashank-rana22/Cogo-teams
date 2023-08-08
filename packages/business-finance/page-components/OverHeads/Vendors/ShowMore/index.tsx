@@ -60,12 +60,13 @@ function ShowMore({ vendorId }: Props) {
 				grandTotal,
 				paidAmount,
 				billCurrency = '',
+				payableAmount,
 			} = itemData || {};
 			return (
 				<div>
 					{grandTotal >= 0 && paidAmount >= 0
 						? formatAmount({
-							amount   : (grandTotal - paidAmount) as any,
+							amount   : payableAmount,
 							currency : billCurrency,
 							options  : {
 								style           : 'currency',
