@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 const ENDPOINT_MAPPING = {
 	forward : '/cogolens/forward_mail',
@@ -89,6 +89,8 @@ const useSendOmnichannelMail = ({
 		{ manual: true, autoCancel: false },
 	);
 
+	const { actionType = '' } = mailActions || {};
+
 	const sendMail = async () => {
 		try {
 			await trigger({
@@ -103,6 +105,7 @@ const useSendOmnichannelMail = ({
 					source,
 				}),
 			});
+			Toast.success(`${startCase(actionType)} mail sent successfully`);
 
 			scrollToBottom();
 			resetEmailStates();

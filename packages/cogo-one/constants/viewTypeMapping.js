@@ -1,4 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { where } from 'firebase/firestore';
 
 const COMMON_ADMIN_ACCESIBLE_BUTTONS = ['auto_assign', 'assign_modal', 'assign_to_me'];
@@ -111,7 +110,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons  : getSalesAgentButtons,
 		accesible_agent_types_query   : [where('agent_type', 'in', ['sales', 'bot'])],
 		show_relevant_templates       : ['quick_reply'],
-		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
@@ -148,7 +146,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		extra_side_bar_navs_access    : ['spot_search'],
 		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		show_relevant_templates       : ['quick_reply'],
-		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
@@ -186,7 +183,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		extra_side_bar_navs_access    : ['spot_search'],
 		get_accesible_assign_buttons  : getKamButtons,
 		show_relevant_templates       : ['quick_reply'],
-		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
@@ -222,7 +218,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		extra_side_bar_navs_access    : ['spot_search'],
 		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		show_relevant_templates       : ['quick_reply'],
-		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
@@ -263,7 +258,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons  : getSupplyAgentButtons,
 		default_side_nav              : 'flash_shipment_bookings',
 		show_relevant_templates       : ['supply'],
-		mails_to_be_shown             : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
 		bulk_assign_features          : ['bulk_send_templates'],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
 		permissions                   : {
@@ -302,7 +296,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		default_side_nav              : 'flash_shipment_bookings',
 		show_relevant_templates       : ['supply'],
-		mails_to_be_shown             : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
 		bulk_assign_features          : ['bulk_send_templates'],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
 		permissions                   : {
@@ -333,7 +326,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons  : getShipmentSpecialistButtons,
 		accesible_agent_types_query   : [where('agent_type', 'in', ['shipment', 'bot'])],
 		show_relevant_templates       : ['quick_reply'],
-		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
 		accessible_new_communications : ['new_mail'],
 		permissions                   : {
@@ -370,7 +362,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		default_side_nav              : 'profile',
 		show_relevant_templates       : ['quick_reply', 'supply'],
-		mails_to_be_shown             : [],
 		bulk_assign_features          : ['bulk_auto_assign', 'bulk_send_templates'],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],
 		permissions                   : {
