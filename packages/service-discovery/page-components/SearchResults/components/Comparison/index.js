@@ -64,6 +64,23 @@ const formatAmountValue = (amount, currency) => (
 	}) || '-'
 );
 
+function getAllLineItems(staticLineItems = {}, dynamicLineItems = {}) {
+	const combinedLineItems = Object.keys(staticLineItems).reduce(
+		(result, key) => ({ ...result, [key]: [...staticLineItems[key]] }),
+		{},
+	);
+
+	Object.keys(dynamicLineItems).forEach((shipping_line) => {
+		if (combinedLineItems[shipping_line]) {
+			combinedLineItems[shipping_line].push(...dynamicLineItems[shipping_line]);
+		} else {
+			combinedLineItems[shipping_line] = [...dynamicLineItems[shipping_line]];
+		}
+	});
+
+	return combinedLineItems;
+}
+
 function HandleBookValue({ item, apiLoading, service_type, setSelectedCard, setShowContract }) {
 	const service_rates = Object.values(item.service_rates);
 	const primaryServiceRates = service_rates.filter(
@@ -235,6 +252,12 @@ function Comparison({
 		DYNMAIC_LINE_ITEMS[toSnakeCase(shipping_line.short_name)] = dynamicLineItems;
 	});
 
+	const allLineItems = getAllLineItems(STATIC_LINE_ITEMS, DYNMAIC_LINE_ITEMS);
+
+	console.log('STATIC_LINE_ITEMS', STATIC_LINE_ITEMS);
+	console.log('DYNMAIC_LINE_ITEMS', DYNMAIC_LINE_ITEMS);
+	console.log('allLineItems', allLineItems);
+
 	const handleBack = () => setScreen('listRateCard');
 
 	return (
@@ -275,10 +298,12 @@ function Comparison({
 
 			{showShare ? (
 				<ShareToUsers
-					rate={[]}
+					rate={{}}
 					show={showShare}
 					onClose={() => setShowShare(false)}
-					source="spot_search"
+					shareType="compareRates"
+					comparedRateCardDetails={allLineItems}
+					source=""
 					org_id={detail?.importer_exporter_id}
 				/>
 			) : null}

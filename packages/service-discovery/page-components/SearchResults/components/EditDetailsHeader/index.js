@@ -16,7 +16,7 @@ function removeItemFromLocalStorage() {
 	localStorage.removeItem('additionalFormInfo');
 }
 
-function EditDetailsHeader({ data = {}, setShow, ...rest }) {
+function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 	const { createSearch, loading } = useCreateSearch();
 
 	const router = useRouter();

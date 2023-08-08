@@ -189,8 +189,6 @@ function FclCard({
 		schedule_type,
 	} = schedules;
 
-	console.log('rateCardData', rateCardData);
-
 	const serviceRateswithId = Object.keys(service_rates).map((service_id) => {
 		const service = service_rates[service_id];
 		return { ...service, service_id, ...detail?.service_details?.[service_id] };

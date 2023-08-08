@@ -8,7 +8,7 @@ import Schedule from './Schedule';
 import styles from './styles.module.css';
 
 function PossibleSchedules({ rateCardData, service_type }) {
-	const { scheduleObject, loading } = useGetSchedules(service_type);
+	const { scheduleObject = {}, loading } = useGetSchedules(service_type);
 
 	const schedules = scheduleObject[rateCardData.shipping_line.id]?.schedules || [];
 

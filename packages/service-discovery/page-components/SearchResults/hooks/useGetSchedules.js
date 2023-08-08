@@ -1,74 +1,49 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
+
+const SHIPPING_LINE_MAPPING = {
+	fcl_freight : 'shipping_line_id',
+	air_freight : 'airline_id',
+};
 
 const useGetSchedules = (service) => {
-	const { spot_search_id } = useSelector(({ general }) => general.query);
+	const { spot_search_id = '' } = useSelector(({ general }) => general.query);
 
-	const [state, setState] = useState({
-		loading        : true,
-		scheduleObject : {},
-	});
-
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/get_spot_search_schedules',
 	}, { manual: true });
 
-	const getSchedules = () => {
-		trigger({
-			params: {
-				spot_search_id,
-			},
-		})
-			.then((response) => {
-				const data = response.data || {};
-				const obj = {};
+	const getSchedules = useCallback(async () => {
+		await trigger({
+			params: { spot_search_id },
+		});
+	}, [spot_search_id, trigger]);
 
-				data.list.forEach((item) => {
-					let objKey = '';
+	const scheduleObject = useMemo(() => {
+		const key = SHIPPING_LINE_MAPPING[service || 'fcl_freight'];
 
-					switch (service) {
-						case 'fcl_freight':
-							objKey = item.shipping_line_id;
-							break;
-						case 'air_freight':
-							objKey = item.airline_id;
-							break;
-						default:
-					}
+		const OBJECT = {};
 
-					obj[objKey] = item;
-				});
+		const { list = [] } = data || {};
 
-				setState({
-					loading        : false,
-					scheduleObject : obj,
-				});
-			})
-			.catch(() => {
-				setState({
-					...state,
-					loading: false,
-				});
-			});
-	};
+		(list || []).forEach((item) => {
+			OBJECT[item?.[key || 'shipping_line_id']] = item;
+		});
+
+		return OBJECT;
+	}, [data, service]);
 
 	useEffect(() => {
 		getSchedules();
-	}, []);
+	}, [getSchedules]);
 
-	const refetch = (isSetLoading = false) => {
-		setState((prevState) => ({
-			...prevState,
-			loading: isSetLoading ? true : prevState.loading,
-		}));
+	const refetch = () => {
 		getSchedules();
 	};
 
-	console.log('state', state);
-
-	return { ...state, refetch, loading };
+	return { refetch, loading, scheduleObject };
 };
 
 export default useGetSchedules;

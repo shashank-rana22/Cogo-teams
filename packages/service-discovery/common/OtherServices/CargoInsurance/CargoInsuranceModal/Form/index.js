@@ -19,11 +19,11 @@ function Form({
 
 			{loading ? <Loading /> : null}
 
-			{isEmpty(rateData) && !loading && formValues?.cargo_value && (
+			{(isEmpty(rateData) && !loading && formValues?.cargo_value) ? (
 				<div style={{ color: '#FF0000' }}>
 					* Unable to fetch rates at the moment, please try after some time.
 				</div>
-			)}
+			) : null}
 
 			{!isEmpty(rateData) && !loading ? (
 				<PremiumRate rateData={rateData} />

@@ -26,17 +26,17 @@ function FieldArray({
 		name,
 	});
 
-	const childEmptyValues = {};
+	const CHILD_EMPTY_VALUES = {};
 	controls.forEach((controlItem) => {
-		childEmptyValues[controlItem.name] = controlItem.value || '';
+		CHILD_EMPTY_VALUES[controlItem.name] = controlItem.value || '';
 	});
 
 	const handleAppendChild = () => {
-		append(childEmptyValues);
+		append(CHILD_EMPTY_VALUES);
 	};
 
 	if (isEmpty(fields)) {
-		append(childEmptyValues);
+		append(CHILD_EMPTY_VALUES);
 	}
 
 	const form = watch();

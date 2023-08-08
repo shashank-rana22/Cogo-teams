@@ -1,12 +1,22 @@
 import { Modal } from '@cogoport/components';
 
+import useShareModal from '../../../hooks/useShareModal';
+
 import Footer from './Footer';
 import Header from './Header';
 import InviteUser from './InviteUser';
 import List from './List';
-import useShareModal from './useShareModal';
 
-function ShareToUsersModal({ onClose, rate, source, org_id }) {
+function ShareToUsersModal({
+	shareType,
+	onClose,
+	onSuccess,
+	rate = {},
+	source,
+	org_id,
+	show = false,
+	comparedRateCardDetails = [],
+}) {
 	const {
 		modalType = '',
 		handleModalType,
@@ -20,14 +30,20 @@ function ShareToUsersModal({ onClose, rate, source, org_id }) {
 		newControls,
 	} = useShareModal({
 		rate,
-		onClose,
+		onSuccess,
 		source,
+		shareType,
+		comparedRateCardDetails,
 	});
 
-	console.log('rate', rate);
-
 	return (
-		<div>
+		<Modal
+			show={show}
+			onClose={onClose}
+			onOuterClick={onClose}
+		>
+			<Modal.Header title="Share Rate within your Company" />
+
 			<Modal.Body>
 				<Header modalType={modalType} onClick={handleModalType} />
 
@@ -44,7 +60,6 @@ function ShareToUsersModal({ onClose, rate, source, org_id }) {
 						newControls={newControls}
 					/>
 				)}
-
 			</Modal.Body>
 
 			<Modal.Footer>
@@ -54,7 +69,7 @@ function ShareToUsersModal({ onClose, rate, source, org_id }) {
 					loading={shareRateCardLoading}
 				/>
 			</Modal.Footer>
-		</div>
+		</Modal>
 	);
 }
 

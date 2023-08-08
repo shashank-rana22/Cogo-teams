@@ -5,8 +5,8 @@ function ModalContent({ loading, onClick, modalType }) {
 		<div>
 			<Button disabled={loading} onClick={onClick} size="md" themeType="accent">
 				{modalType === 'select_user'
-					? 'select'
-					: 'share'}
+					? 'Share'
+					: 'Invite'}
 			</Button>
 		</div>
 	);

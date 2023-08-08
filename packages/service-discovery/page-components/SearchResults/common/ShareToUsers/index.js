@@ -1,39 +1,54 @@
-import { Modal } from '@cogoport/components';
 import { useState } from 'react';
 
 import ShareToUsersModal from './ShareToUsersModal';
+import SuccessModal from './SuccessModal';
 
-function ShareToUsers({ rate, show, source, onClose, org_id }) {
+function ShareToUsers({
+	shareType = '',
+	rate = {},
+	show,
+	source,
+	onClose,
+	org_id,
+	comparedRateCardDetails = [],
+}) {
 	const [showSuccess, setShowSuccess] = useState(false);
+
 	const onSuccess = () => {
 		setShowSuccess(true);
 		onClose();
 	};
 
+	const COMPONENT_MAPPING = {
+		true: {
+			component : SuccessModal,
+			props     : {
+				show        : showSuccess,
+				setShow     : setShowSuccess,
+				title       : 'Rate Shared',
+				description : `Rates have been shared to the user. 
+				They will receive an mail to view the rates on platform.`,
+			},
+		},
+		false: {
+			component : ShareToUsersModal,
+			props     : {
+				source,
+				shareType,
+				onSuccess,
+				onClose,
+				rate,
+				org_id,
+				comparedRateCardDetails,
+				show,
+			},
+		},
+	};
+
+	const { component: ActiveComponent, props = {} } = COMPONENT_MAPPING[showSuccess];
+
 	return (
-		<>
-			<Modal
-				show={show}
-				onClose={onClose}
-				onOuterClick={onClose}
-			>
-				<Modal.Header title="Share Rate within your Company" />
-
-				<ShareToUsersModal
-					source={source}
-					onClose={onSuccess}
-					rate={rate}
-					org_id={org_id}
-				/>
-			</Modal>
-
-			{/* <SuccessModal
-				show={showSuccess}
-				setShow={setShowSuccess}
-				title={t('book:searchResults_rates_13')}
-				description={t('book:searchResults_rates_14')}
-			/> */}
-		</>
+		<ActiveComponent {...props} />
 	);
 }
 

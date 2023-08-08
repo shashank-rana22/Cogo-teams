@@ -34,7 +34,7 @@ const useAddCargoInsurance = ({
 
 		const payload = {
 			[idKey]                             : spot_search_id || checkout_id,
-			rate_card_id,
+			rate_card_id                        : rate_card_id || undefined,
 			service                             : 'cargo_insurance',
 			cargo_insurance_services_attributes : [
 				{
