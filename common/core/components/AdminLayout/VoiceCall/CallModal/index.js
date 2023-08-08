@@ -105,7 +105,7 @@ function CallModal({
 								onClick={hangUpFunc}
 							>
 								<IcMCall className={styles.end_call_icon} />
-								<div className={styles.warn_text}>This will end the complete call</div>
+								<div className={styles.warn_text}>End Complete Call</div>
 							</div>
 						)}
 					</div>
