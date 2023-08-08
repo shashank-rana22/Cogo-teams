@@ -39,6 +39,12 @@
 
 .filter_container {
 	display: flex;
+
+	:global {
+		.ui_select_display_container {
+			width: 160px;
+		}
+	}
 }
 
 .bishal_search_icon {
@@ -56,4 +62,12 @@
 
 .empty_shipments_image {
 	margin-bottom: 30px;
+}
+
+.select_field {
+	margin-left: 6px;
+}
+
+.custom_date_filter {
+	margin-right: 4px;
 }
