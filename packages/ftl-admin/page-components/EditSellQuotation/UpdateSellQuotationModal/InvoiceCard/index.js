@@ -4,16 +4,19 @@ import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
 import useUpdateSellQuotation from '../../../../hooks/useUpdateSellQuotation';
 import TruckDetails from '../TrucksDetails';
 
 import styles from './styles.module.css';
 
 const FIXED_VALUE_FOR_INVOICE_AMOUNT = 2;
-const LINE_ITEM_CODE_INDEX = 1;
-const LINE_ITEM_RATE_QUANTITY_INDEX = 2;
+const INCREAMENT_VALUE = 1;
+const LAST_POSITION = -1;
 
-function InvoiceCard({ data = {} }) {
+const MANDATORY_CHARGES = ['BAS', 'GSTC', 'STC'];
+
+function InvoiceCard({ data = {}, refetch = () => {} }) {
 	const [updateRateQuantity, setUpdateRateQuantity] = useState({});
 	const {
 		billing_address = {}, invoice_number = '', invoice_total_discounted,
@@ -23,6 +26,7 @@ function InvoiceCard({ data = {} }) {
 	const [openCard, setOpenCard] = useState(false);
 
 	const { udpateSellQuotationLoading, udpateSellQuotation } = useUpdateSellQuotation();
+	const { list: chargesList } = useGetChargeCodes();
 
 	const handleCancel = () => {
 		setUpdateRateQuantity({});
@@ -36,65 +40,95 @@ function InvoiceCard({ data = {} }) {
 		let shouldStopFlow = false;
 		services?.forEach((serviceItem = {}) => {
 			const { line_items = [] } = serviceItem;
-			const SERVICE_WISE_LINE_ITEMS = Object.keys(updateRateQuantity)
+			const serviceWiseLineItems = Object.keys(updateRateQuantity)
 				?.filter((item) => item?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index] === serviceItem?.service_id);
+
 			const eachTruckPayload = {
 				service_id   : serviceItem?.service_id,
 				service_type : serviceItem?.service_type,
 				line_items   : [],
 			};
 
-			line_items?.forEach((lineItem = {}) => {
+			line_items.forEach((lineItem, index) => {
 				const {
-					code = '', alias = '', name = '', unit = '',
-					currency = '', price_discounted = '', quantity = '',
-				} = lineItem;
-				const UPDATED_LINE_ITEMS = SERVICE_WISE_LINE_ITEMS
-					?.filter((item) => item?.split('_')?.[LINE_ITEM_CODE_INDEX] === code);
+					alias = '',
+					unit = '',
+					currency = '',
+					price_discounted = '',
+					quantity = '',
+				} = lineItem || {};
 
-				const UPDATED_RATE = 	updateRateQuantity[UPDATED_LINE_ITEMS
-					?.filter((itm) => itm?.split('_')?.[LINE_ITEM_RATE_QUANTITY_INDEX] === 'rate')
-					?.[GLOBAL_CONSTANTS.zeroth_index]];
-				if (+UPDATED_RATE < +price_discounted) {
-					Toast.error('Rate cannot be less than current rate');
-					shouldStopFlow = true;
-				}
-				const UPDATED_QUANTITY = 	updateRateQuantity[UPDATED_LINE_ITEMS
-					?.filter((itm) => itm?.split('_')?.[LINE_ITEM_RATE_QUANTITY_INDEX] === 'quantity')
-					?.[GLOBAL_CONSTANTS.zeroth_index]];
-				if (+UPDATED_QUANTITY < +quantity) {
-					Toast.error('Quantity cannot be less than current quantity');
-					shouldStopFlow = true;
-				}
+				const updatedLineItemsKey = serviceWiseLineItems.find(
+					(itm) => itm?.split('_')?.at(LAST_POSITION) === `${index}`,
+				);
+
+				const {
+					code = '',
+					name = '',
+					updated_rate = '',
+					updated_quantity = '',
+				} = updateRateQuantity[updatedLineItemsKey] || {};
+
 				eachTruckPayload.line_items.push({
 					code,
-					alias,
 					name,
+					alias,
 					unit,
 					currency,
-					price_discounted : UPDATED_RATE || price_discounted,
-					quantity         : UPDATED_QUANTITY || quantity,
+					price_discounted : updated_rate || price_discounted,
+					quantity         : updated_quantity || quantity,
 				});
 			});
 
+			if (serviceItem?.service_type === 'ftl_freight_service') {
+				const CHECK_OBJ = {};
+				eachTruckPayload.line_items.forEach((item) => {
+					if (item?.code in CHECK_OBJ) {
+						CHECK_OBJ[item?.code] += INCREAMENT_VALUE;
+					}
+					CHECK_OBJ[item?.code] = INCREAMENT_VALUE;
+				});
+
+				let val = 0;
+				MANDATORY_CHARGES.forEach((code) => {
+					if (code in CHECK_OBJ) {
+						val += INCREAMENT_VALUE;
+					}
+				});
+				if (val > INCREAMENT_VALUE && !shouldStopFlow) {
+					Toast.error('Main Invoice Should only have single BAS , STC or GSTC');
+					shouldStopFlow = true;
+				}
+
+				const isMultiple = MANDATORY_CHARGES.some((code) => CHECK_OBJ[code] > INCREAMENT_VALUE);
+				if (isMultiple && !shouldStopFlow) {
+					Toast.error('Main Invoice Should only have single BAS , STC or GSTC');
+					shouldStopFlow = true;
+				}
+			}
 			payload.quotations.push(eachTruckPayload);
 		});
-		const callback = () => setOpenCard(false);
+
 		if (shouldStopFlow) { return; }
 		udpateSellQuotation({
-			quotations: payload,
-			callback,
+			quotations : payload,
+			callback   : () => {
+				setOpenCard(false);
+				refetch();
+			},
 		});
 	};
 
 	useEffect(() => {
 		if (isEmpty(services)) 	return;
 		const state = services.reduce((acc, service) => {
-			service?.line_items?.forEach(({
-				code = '', price_discounted, quantity,
-			}) => {
-				acc[`${service?.service_id}_${code}_rate`] = price_discounted || '';
-				acc[`${service?.service_id}_${code}_quantity`] = quantity || '';
+			service?.line_items?.forEach((lineItem, index) => {
+				const { price_discounted = 0, quantity = 0 } = lineItem || {};
+				acc[`${service?.service_id}_${index}`] = {
+					updated_rate     : price_discounted,
+					updated_quantity : quantity,
+					...(lineItem || {}),
+				};
 			});
 			return acc;
 		}, {});
@@ -151,6 +185,7 @@ function InvoiceCard({ data = {} }) {
 							key={item?.service_id}
 							updateRateQuantity={updateRateQuantity}
 							setUpdateRateQuantity={setUpdateRateQuantity}
+							chargesList={chargesList}
 						/>
 
 					))}

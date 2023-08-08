@@ -58,9 +58,12 @@ const useGetServiceLevelStats = ({
 		} catch (error) {
 			toastApiError(error);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
-		filter, customDate, specificServiceLevel, DEFAULT_CURRENCY]);
+		filter, customDate, specificServiceLevel, DEFAULT_CURRENCY,
+		activeBar,
+	]);
 
 	useEffect(() => {
 		getServiceLevelData();
