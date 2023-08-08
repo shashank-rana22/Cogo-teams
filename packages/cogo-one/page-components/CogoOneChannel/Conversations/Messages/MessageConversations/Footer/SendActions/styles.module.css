@@ -23,14 +23,8 @@
 			border: unset;
 		}
 
-		.ui_upload_droparea_heading {
-			display: none;
-		}
-
-		.ui_upload_droparea_subheading {
-			display: none;
-		}
-
+		.ui_upload_droparea_heading,
+		.ui_upload_droparea_subheading,
 		.ui_upload_filesuccess_container {
 			display: none;
 		}
