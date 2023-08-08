@@ -6,7 +6,7 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import useAssignSubscription from '../../../../../../hooks/useAssignSubscription';
+import useCreateSubscriptionInvoice from '../../../../../../hooks/useCreateSubscriptionInvoice';
 import useGetBillingAdresses from '../../../../../../hooks/useGetBillingAdresses';
 import useGetOrganizationAddresses from '../../../../../../hooks/useGetOrganizationAddresses';
 
@@ -31,7 +31,11 @@ function AssignModal({
 	showAssign = false,
 	setShowAssign = () => {},
 	orgId = '',
+	selectedPlan = {},
 }) {
+	const { checkout = {} } = selectedPlan || {};
+	const { id: checkoutId = '' } = checkout || {};
+
 	const geo = getGeoConstants();
 	const REGISTRATION_LABEL = geo.others.registration_number.label;
 
@@ -55,7 +59,10 @@ function AssignModal({
 		setBillingAddresses,
 	});
 
-	const { assignSubscription = () => {}, loading = false } = useAssignSubscription({ selectedAddress });
+	const {
+		createSubscriptionInvoice = () => {},
+		loading = false,
+	} = useCreateSubscriptionInvoice({ selectedAddress, checkoutId });
 
 	useEffect(() => {
 		getOrgBillingAddresses();
@@ -187,7 +194,7 @@ function AssignModal({
 					>
 						Cancel
 					</Button>
-					<Button size="md" disabled={loading} onClick={assignSubscription}>Assign</Button>
+					<Button size="md" disabled={loading} onClick={createSubscriptionInvoice}>Assign</Button>
 				</Modal.Footer>
 			</Modal>
 

@@ -49,14 +49,9 @@
 	color: #221f20;
 }
 
-.active_plan_label {
-	padding: 4px 0;
-	font-weight: 600;
-	color: #abcd62;
-	text-align: center;
-}
-
 .plan_tag {
+	width: fit-content;
+	height: fit-content;
 	padding: 4px 8px;
 	font-size: 12px;
 	font-weight: 500;
@@ -64,36 +59,8 @@
 	border-radius: 40px;
 }
 
-.align_content_middle {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.subscription_currency {
-	margin: 0 2px;
-	font-size: 18px;
-}
-
-.rate_per_month_with_currency {
-	margin: 0 4px;
-	font-size: 18px;
-	font-weight: 700;
-}
-
 .change_color_on_hover {
 	color: #fff;
-}
-
-.footer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.call_to_action {
-	margin: 10px 0;
 }
 
 .custom_plan_img {

@@ -1,19 +1,19 @@
-import { cl, Button } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMTick, IcMCalendar } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { isEmpty, startCase } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
+import Footer from './Footer';
 import styles from './styles.module.css';
 
-const NUMBER_OF_MONTHS = 12;
+const DEFAULT_EXPIRY_DAYS = 0;
+const SHOW_REMAINING_EXPIRY_DAYS = 31;
 
 function SubscriptionCard(props) {
 	const {
-		item = {}, activeTab = '', createLink = () => {}, createLinkloading = false,
-		selectedPlan, setSelectedPlan = () => {},
+		item = {}, activeTab = '', setSelectedPlan = () => {},
 	} = props || {};
 
 	const [hover, setHover] = useState(false);
@@ -23,27 +23,21 @@ function SubscriptionCard(props) {
 		metadata = {},
 		display_pricing = '',
 		category = '',
-		id: planId = '',
+		checkout = {},
 	} = item || {};
 
 	const isActive = display_pricing?.[activeTab]?.is_active_plan;
-	const totalAmount = display_pricing?.[activeTab]?.price;
-	const displayCurrency = display_pricing?.[activeTab]?.currency;
-	const subscriptionRate = activeTab === 'annual' ? totalAmount / NUMBER_OF_MONTHS : totalAmount;
-
-	const isLoading = selectedPlan?.id === planId ? createLinkloading : false;
+	const numberOfExpiryDays = display_pricing?.[activeTab]?.expires_in || DEFAULT_EXPIRY_DAYS;
 
 	const sortePlans = (metadata?.plan_details || []).sort(
 		(a, b) => a.sequence < b.sequence,
 	);
 
-	const handleGenerateLink = ({ plan }) => {
-		const { display_pricing: displayPricing = '' } = plan || {};
-		const planPricingId = displayPricing?.[activeTab]?.id;
-
-		setSelectedPlan(plan);
-		createLink({ planPricingId });
-	};
+	useEffect(() => {
+		if (!isEmpty(checkout)) {
+			setSelectedPlan(item);
+		}
+	}, [checkout, item, setSelectedPlan]);
 
 	return (
 		<div
@@ -62,11 +56,11 @@ function SubscriptionCard(props) {
 					>
 						{startCase(plan_name)}
 					</div>
-					{display_pricing?.[activeTab]?.expires_in && (
+					{numberOfExpiryDays > DEFAULT_EXPIRY_DAYS && numberOfExpiryDays <= SHOW_REMAINING_EXPIRY_DAYS && (
 						<div className={styles.plans_sub_header}>
 							<IcMCalendar />
 							<span>
-								{display_pricing[activeTab]?.expires_in}
+								{numberOfExpiryDays}
 							</span>
 							days to expire
 						</div>
@@ -102,48 +96,18 @@ function SubscriptionCard(props) {
 							${isActive || hover ? styles.change_color_on_hover : ''}`}
 							>
 								{value}
+								{' '}
+								{display_name}
 							</span>
-							{display_name}
 						</div>
 					);
 				})}
 			</div>
-			{isActive ? (
-				<div className={styles.active_plan_label}>
-					Active Plan
-				</div>
-			) : (
-				<div className={styles.footer}>
-					<div className={cl`${styles.align_content_middle} ${hover ? styles.change_color_on_hover : ''}`}>
-						<span className={styles.subscription_currency}>{displayCurrency}</span>
-						<div className={styles.rate_per_month_with_currency}>
-							{formatAmount({
-								amount   : subscriptionRate,
-								currency : displayCurrency,
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'symbol',
-									maximumFractionDigits : 2,
-									minimumFractionDigits : 0,
-								},
-							})}
-						</div>
-						<span>
-							/month
-						</span>
-					</div>
-					<Button
-						size="md"
-						themeType={hover ? 'primary' : 'secondary'}
-						className={styles.call_to_action}
-						onClick={() => handleGenerateLink({ plan: item })}
-						loading={isLoading}
-						disabled={isLoading}
-					>
-						Generate Link
-					</Button>
-				</div>
-			)}
+
+			<Footer
+				{...props}
+				hover={hover}
+			/>
 		</div>
 	);
 }

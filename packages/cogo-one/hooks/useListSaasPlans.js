@@ -7,7 +7,7 @@ const getParams = ({ orgId = '' }) => ({
 
 const useListSaasPlans = ({ orgId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/saas_get_user_active_plan',
+		url    : '/saas_get_active_plan_checkout_details',
 		method : 'get',
 	}, { manual: true });
 
@@ -28,6 +28,7 @@ const useListSaasPlans = ({ orgId = '' }) => {
 	return {
 		loading,
 		plansData: data,
+		getUserActivePlans,
 	};
 };
 export default useListSaasPlans;

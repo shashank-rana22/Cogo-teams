@@ -1,6 +1,6 @@
-import { Toggle, Placeholder, Button, cl } from '@cogoport/components';
+import { Toggle, Placeholder, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCopy } from '@cogoport/icons-react';
+import { IcMCopy, IcMRefresh } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -18,6 +18,7 @@ import SubscriptionCard from './SubscriptionCard';
 const CARD_LAYOUT_PLACEHODER_COUNT = 3;
 const CARD_LAYOUT_PLACEHODER = [...Array(CARD_LAYOUT_PLACEHODER_COUNT).keys()];
 const ANNUAL_SUBSCRIPTION_DISCOUNT_PERCENT = 20;
+const PAID_PLANS = ['standard-pack', 'premium-pack'];
 
 function EmptyState() {
 	return (
@@ -36,22 +37,30 @@ function ManageSubscriptions(props) {
 	const [showAssign, setShowAssign] = useState(false);
 	const [selectedPlan, setSelectedPlan] = useState({});
 
-	const { plansData = {}, loading = false } = useListSaasPlans({ orgId });
+	const { payment_link : paymentLink = '', checkout = {} } = selectedPlan || {};
+	const { plansData = {}, loading = false, getUserActivePlans = () => {} } = useListSaasPlans({ orgId });
 
 	const { item_plans = [], saas_subscription_customer_id : saasSubscriptionCustomerId = '' } = plansData || {};
 
 	const {
 		createLink = () => {}, createLinkloading = false,
-		link = false,
-	} = useCreatePaymentLink({ saasSubscriptionCustomerId });
+	} = useCreatePaymentLink({ saasSubscriptionCustomerId, getUserActivePlans });
 
-	const { paymentDetails } = useGetPaymentStatus();
+	const {
+		paymentDetails = {},
+		getPaymentStatus = () => {},
+	} = useGetPaymentStatus({ getUserActivePlans, selectedPlan });
 	const { status: paymentStatus = '' } = paymentDetails || {};
-	console.log('paymentDetails:', paymentDetails);
 
 	const sortedItemPlans = (item_plans || []).sort(
 		(a, b) => a.priority_sequence - b.priority_sequence,
 	);
+
+	const activePlan = (item_plans || []).filter(
+		(item) => item.display_pricing?.[activeTab]?.is_active_plan,
+	)?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+	const isPlanBuyed = PAID_PLANS.includes(activePlan?.plan_name);
 
 	const handleToggle = (event) => {
 		if (event.target.checked) {
@@ -59,6 +68,11 @@ function ManageSubscriptions(props) {
 		} else {
 			setActiveTab('monthly');
 		}
+	};
+
+	const handleRefresh = () => {
+		getPaymentStatus();
+		getUserActivePlans();
 	};
 
 	return (
@@ -105,47 +119,42 @@ function ManageSubscriptions(props) {
 							createLinkloading={createLinkloading}
 							setSelectedPlan={setSelectedPlan}
 							selectedPlan={selectedPlan}
+							paymentStatus={paymentStatus}
+							setShowAssign={setShowAssign}
 						/>
 					))}
 				</div>
 			)}
-			<div className={cl`${styles.plans_fixed_footer} ${link ? styles.two_childs_present : ''}`}>
-				{/* This part will be take live soon...ignore commented code */}
-
-				{/* <Button
-					themeType="link"
-					size="md"
-					className={styles.buy_add_on_button}
-					onClick={() => setShowAddOn(true)}
+			{!isEmpty(checkout) ? (
+				<div className={cl`${styles.plans_fixed_footer}
+				${!isPlanBuyed && paymentLink ? styles.two_childs_present : ''}`}
 				>
-					Buy Add-On
-				</Button> */}
-
-				{link && (
-					<div style={{ display: 'flex' }}>
-						<div
-							role="presentation"
-							className={styles.payment_link_status}
-							onClick={() => window.open(link, '_blank') || '#'}
-						>
-							{link}
+					{!isPlanBuyed && paymentLink && (
+						<div className={styles.link_with_refresh}>
+							<div
+								role="presentation"
+								className={styles.payment_link_status}
+								onClick={() => window.open(paymentLink, '_blank') || '#'}
+							>
+								{paymentLink}
+							</div>
+							<IcMCopy
+								className={styles.copy_icon}
+								onClick={() => copyToClipboard({ content: paymentLink, label: 'Payment link' })}
+							/>
 						</div>
-						<IcMCopy
-							className={styles.copy_icon}
-							onClick={() => copyToClipboard({ content: link, label: 'Payment link' })}
-						/>
-					</div>
-				)}
+					)}
 
-				<Button
-					themeType="accent"
-					size="md"
-					onClick={() => setShowAssign(true)}
-					disabled={paymentStatus !== 'CREATED'}
-				>
-					Assign
-				</Button>
-			</div>
+					<Tooltip
+						placement="bottom"
+						theme="light"
+						content="Refresh List"
+						className={styles.link_with_refresh}
+					>
+						<IcMRefresh onClick={handleRefresh} className={styles.refresh_icon} />
+					</Tooltip>
+				</div>
+			) : null}
 
 			{showAddOn && (
 				<AddOnModal
@@ -161,6 +170,7 @@ function ManageSubscriptions(props) {
 					showAssign={showAssign}
 					setShowAssign={setShowAssign}
 					orgId={orgId}
+					selectedPlan={selectedPlan}
 				/>
 			)}
 		</div>
