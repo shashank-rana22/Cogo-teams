@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
@@ -35,10 +35,10 @@ export const callUpdate = ({ data, firestore, callingRoomId }) => {
 	}
 };
 
-export const saveCallData = async ({ data, callBackFunc, firestore }) => {
-	const videoCallRoomCollection = collection(
+export const saveCallData = async ({ data, callingRoomId, callBackFunc, firestore }) => {
+	const videoCallRoomCollection = doc(
 		firestore,
-		`${FIRESTORE_PATH.video_calls}`,
+		`${FIRESTORE_PATH.video_calls}/${callingRoomId}`,
 	);
 
 	try {
@@ -47,14 +47,20 @@ export const saveCallData = async ({ data, callBackFunc, firestore }) => {
 			updated_at : Date.now(),
 			created_at : Date.now(),
 		};
-		const docData = await addDoc(videoCallRoomCollection, dataToSave);
-		callBackFunc(docData.id);
+		setDoc(videoCallRoomCollection, dataToSave);
+		callBackFunc(callingRoomId);
 	} catch (error) {
 		console.error(error);
 	}
 };
 
 export const saveWebrtcToken = ({ data, callingRoomId, tokenId, firestore }) => {
+	const savingData = data;
+
+	if (data?.token?.type === 'transceiverRequest') {
+		savingData.token.transceiverRequest.init = {};
+	}
+
 	if (!callingRoomId) {
 		return;
 	}
@@ -69,10 +75,10 @@ export const saveWebrtcToken = ({ data, callingRoomId, tokenId, firestore }) => 
 		setDoc(
 			webrtcTokenRoomDoc,
 			{
-				...data,
+				...savingData,
 				updated_at: Date.now(),
 			},
-			{ merge: true },
+			// { merge: true },
 		);
 	} catch (error) {
 		console.error(error);

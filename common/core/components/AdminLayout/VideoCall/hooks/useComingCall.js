@@ -5,6 +5,7 @@ import { useEffect, useCallback, useRef } from 'react';
 import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import { ICESERVER } from '../constants';
 import { getCallingRoomData, getTokenData } from '../helpers/snapshortHelpers';
 import { callUpdate, saveWebrtcToken } from '../utils/callFunctions';
 
@@ -29,7 +30,7 @@ function useComingCall({
 		user_data: state.profile.user,
 	}));
 	const { id: userId } = user_data || {};
-	const { callingRoomId = '', webrtcTokenRoomId = '' } = callDetails || {};
+	const { callingRoomId = '', webrtcTokenRoomId = '', peerDetails = {} } = callDetails || {};
 
 	const { saveInACallStatus } = useSetInACall();
 	const callComingSnapshotRef = useRef(null);
@@ -49,32 +50,35 @@ function useComingCall({
 
 		if (docSnap.exists()) {
 			const token = docSnap.data();
-			setWebrtcToken((prev) => ({ ...prev, userToken: token?.user_token }));
+			setWebrtcToken(token);
 		}
 	}, [webrtcTokenRoomId, callingRoomId, firestore, setWebrtcToken]);
 
 	const accepteCallMedia = useCallback(async () => {
 		try {
-			const userStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+			const userStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
 
 			setStreams((prev) => ({ ...prev, userStream }));
 			const peer = new Peer({
 				initiator : false,
 				trickle   : false,
 				stream    : userStream,
+				config    : {
+					iceServers: ICESERVER,
+				},
 			});
 
 			const localPeerRef = peerRef;
 			localPeerRef.current = peer;
 
-			if (!isEmpty(webrtcToken.userToken)) {
-				peer.signal(webrtcToken.userToken);
+			if (!isEmpty(webrtcToken?.token)) {
+				peer.signal(webrtcToken.token);
 			}
 
 			peer.on('signal', (data) => {
 				saveWebrtcToken(
 					{
-						data    : { peer_token: data },
+						data    : { token: data, token_for: peerDetails?.user_id },
 						callingRoomId,
 						tokenId : webrtcTokenRoomId,
 						firestore,
@@ -110,7 +114,8 @@ function useComingCall({
 			});
 			handleCallEnd();
 		}
-	}, [setStreams, peerRef, webrtcToken.userToken, callingRoomId, webrtcTokenRoomId, firestore, handleCallEnd]);
+	}, [setStreams, peerRef, webrtcToken?.token, peerDetails?.user_id, callingRoomId,
+		webrtcTokenRoomId, firestore, handleCallEnd]);
 
 	const answerCall = useCallback(async () => {
 		await getWebrtcToken();

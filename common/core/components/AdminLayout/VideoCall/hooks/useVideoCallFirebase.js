@@ -1,6 +1,7 @@
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useRef } from 'react';
 import Peer from 'simple-peer';
+import { v1 as uuid } from 'uuid';
 
 import { ICESERVER } from '../constants';
 import { updateCallDetails } from '../helpers/snapshortHelpers';
@@ -44,15 +45,12 @@ function useVideoCallFirebase({
 			myDetails          : {},
 			peerDetails        : {},
 			callingRoomDetails : {},
-			callingRoomId      : '',
+			callingRoomId      : uuid(),
 			webrtcTokenRoomId  : '',
 			callingType        : '',
 		});
 
-		setWebrtcToken({
-			userToken : {},
-			peerToken : {},
-		});
+		setWebrtcToken({});
 
 		setToggleState({
 			isMicActive         : true,
@@ -72,7 +70,7 @@ function useVideoCallFirebase({
 
 	const callingToMediaStream = useCallback(async (peerDetails) => {
 		try {
-			const myStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+			const myStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
 
 			saveInACallStatus(true);
 			setStreams((prev) => ({ ...prev, userStream: myStream }));
@@ -88,35 +86,43 @@ function useVideoCallFirebase({
 
 			const localPeerRef = peerRef;
 			localPeerRef.current = peer;
+			let callOneTimeSaveInitialToken = true;
 
 			peer.on('signal', (data) => {
-				saveCallData({
-					data: {
-						call_status : 'calling',
-						calling_by  : 'admin',
-						my_details  : {
-							user_name : userName,
-							user_id   : userId,
-							user_type : 'admin',
+				if (callOneTimeSaveInitialToken) {
+					saveCallData({
+						data: {
+							call_status : 'calling',
+							calling_by  : 'admin',
+							my_details  : {
+								user_name : userName,
+								user_id   : userId,
+								user_type : 'admin',
+							},
+							peer_details         : peerDetails,
+							peer_id              : peerDetails?.user_id,
+							webrtc_token_room_id : userId,
 						},
-						peer_details         : peerDetails,
-						peer_id              : peerDetails?.user_id,
-						webrtc_token_room_id : userId,
-					},
-					callBackFunc: (getCallingRoomId) => {
-						saveWebrtcToken({
-							data          : { user_token: data },
-							callingRoomId : getCallingRoomId,
-							tokenId       : userId,
-							firestore,
-						});
-						setCallDetails((prev) => ({
-							...prev,
-							callingRoomId: getCallingRoomId,
-						}));
-					},
-					firestore,
-				});
+						callingRoomId,
+						callBackFunc: (getCallingRoomId) => {
+							saveWebrtcToken({
+								data          : { token: data, token_for: peerDetails?.user_id },
+								callingRoomId : getCallingRoomId,
+								tokenId       : userId,
+								firestore,
+							});
+						},
+						firestore,
+					});
+					callOneTimeSaveInitialToken = false;
+				} else {
+					saveWebrtcToken({
+						data    : { token: data, token_for: peerDetails?.user_id },
+						callingRoomId,
+						tokenId : userId,
+						firestore,
+					});
+				}
 			});
 
 			peer.on('stream', (peerStream) => {
@@ -146,8 +152,7 @@ function useVideoCallFirebase({
 			});
 			handleCallEnd();
 		}
-	}, [callingRoomId, handleCallEnd, firestore,
-		peerRef, saveInACallStatus, setCallDetails, setStreams, userId, userName]);
+	}, [callingRoomId, handleCallEnd, firestore, peerRef, saveInACallStatus, setStreams, userId, userName]);
 
 	const handleOutgoingCall = useCallback(
 		(peerDetails = {}) => {

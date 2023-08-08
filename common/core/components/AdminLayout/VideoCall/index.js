@@ -1,7 +1,9 @@
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { v1 as uuid } from 'uuid';
 
 import IncomingCall from './components/IncomingCall';
 import VideoCallScreen from './components/VideoCallScreen';
@@ -15,19 +17,21 @@ function VideoCall({
 	videoCallRecipientData = {},
 	inVideoCall = false,
 }) {
+	const { user_data } = useSelector((state) => ({
+		user_data: state.profile.user,
+	}));
+	const { id: userId } = user_data || {};
+
 	const streamRef = useRef(null);
 	const peerRef = useRef(null);
 
 	const [callComing, setCallComing] = useState(false);
-	const [webrtcToken, setWebrtcToken] = useState({
-		userToken : {},
-		peerToken : {},
-	});
+	const [webrtcToken, setWebrtcToken] = useState({});
 	const [callDetails, setCallDetails] = useState({
 		myDetails          : {},
 		peerDetails        : {},
 		callingRoomDetails : {},
-		callingRoomId      : '',
+		callingRoomId      : uuid(),
 		webrtcTokenRoomId  : '',
 		callingType        : '',
 	});
@@ -101,18 +105,18 @@ function VideoCall({
 
 	useEffect(() => {
 		if (
-			!webrtcToken.peerToken || !peerRef.current
-			|| callDetails?.callingType !== 'outgoing'
+			isEmpty(webrtcToken) || !peerRef.current
+			|| webrtcToken?.token_for !== userId
 		) {
 			return;
 		}
 
 		try {
-			peerRef.current?.signal?.(webrtcToken?.peerToken);
+			peerRef.current?.signal?.(webrtcToken?.token);
 		} catch (error) {
 			console.error('not able to load signal', error);
 		}
-	}, [callDetails?.callingType, webrtcToken?.peerToken]);
+	}, [userId, webrtcToken]);
 
 	if (callComing) {
 		return (

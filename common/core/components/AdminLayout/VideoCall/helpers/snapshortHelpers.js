@@ -80,11 +80,7 @@ export const getTokenData = ({ webrtcTokenRoomId, callingRoomId, firestore, setW
 		);
 		localTokenSnapshotRef.current = onSnapshot(tokenDocRef, (docp) => {
 			const roomData = docp.data();
-			setWebrtcToken((prev) => ({
-				...prev,
-				peerToken : roomData?.peer_token,
-				userToken : roomData?.user_token,
-			}));
+			setWebrtcToken(roomData);
 		});
 	}
 };
