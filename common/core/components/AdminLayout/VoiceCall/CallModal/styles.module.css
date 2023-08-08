@@ -91,9 +91,11 @@
 .end_call {
 	display: flex;
 	flex-basis: 10%;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 10px;
+	width: 73%;
+	padding: 4px 8px;
 	margin-bottom: 15px;
 	cursor: pointer;
 	background-color: #bf291e;
@@ -140,5 +142,11 @@
 	height: 54%;
 	font-size: var(--font-size-md);
 	color: #864c12;
+	text-align: center;
+}
+
+.warn_text {
+	font-size: var(--font-size-sm);
+	color: var(--color-secondary-5);
 	text-align: center;
 }

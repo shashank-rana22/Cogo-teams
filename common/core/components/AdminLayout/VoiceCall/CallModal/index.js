@@ -97,7 +97,7 @@ function CallModal({
 								/>
 							)
 							: <div className={styles.connecting}>Connecting...</div>}
-						{!live_call_action_type && (
+						{!live_call_action_type && (status || !conferenceType) && (
 							<div
 								className={cl`${styles.end_call} 
 								${(hangUpLoading || callLoading) ? styles.disable : ''}`}
@@ -105,6 +105,7 @@ function CallModal({
 								onClick={hangUpFunc}
 							>
 								<IcMCall className={styles.end_call_icon} />
+								<div className={styles.warn_text}>This will end the complete call</div>
 							</div>
 						)}
 					</div>

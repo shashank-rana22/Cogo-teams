@@ -51,7 +51,7 @@ function MinimizeModal({
 				</div>
 			</div>
 
-			{!callLoading && (
+			{!callLoading && status && (
 				<div
 					onClick={handleEndClick}
 					role="presentation"

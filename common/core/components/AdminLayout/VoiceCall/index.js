@@ -76,16 +76,16 @@ function VoiceCall({ firestore = {} }) {
 	useEffect(() => {
 		const formattedData = formatData({ callDetails, loggedInAgentId });
 
-		if (!isEmpty(callDetails)) {
-			setCallState((p) => ({
-				...p,
-				...formattedData,
-				showCallModalType: CALL_MODALS.includes(p.showCallModalType) ? p.showCallModalType : 'fullCallModal',
-			}));
+		if (isEmpty(formattedData)) {
+			checkHangupStatus({ setCallState, openFeedbackform, timeoutId: countdownRef.current, unmountVoiceCall });
 			return;
 		}
 
-		checkHangupStatus({ setCallState, openFeedbackform, timeoutId: countdownRef.current, unmountVoiceCall });
+		setCallState((p) => ({
+			...p,
+			...formattedData,
+			showCallModalType: CALL_MODALS.includes(p.showCallModalType) ? p.showCallModalType : 'fullCallModal',
+		}));
 	}, [callDetails, loggedInAgentId, openFeedbackform, unmountVoiceCall]);
 
 	useEffect(() => {
