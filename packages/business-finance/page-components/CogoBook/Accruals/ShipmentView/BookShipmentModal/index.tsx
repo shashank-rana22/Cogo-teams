@@ -6,7 +6,10 @@ import useBookShipmentCount from '../../../hooks/getBookShipmentCount';
 import styles from './style.module.css';
 
 function BookShipmentModal({ showBookShipment = false, setShowBookShipment, filters = {} }) {
-	const { data, loading } = useBookShipmentCount({ filters });
+	const {
+		data, loading, bookShipmentConfirmData,
+		bookShipmentConfirmLoading,
+	} =	 useBookShipmentCount({ filters, setShowBookShipment });
 	const onClose = () => {
 		setShowBookShipment(false);
 	};
@@ -37,7 +40,14 @@ function BookShipmentModal({ showBookShipment = false, setShowBookShipment, filt
 				</Modal.Body>
 				<Modal.Footer>
 					<Button size="md" themeType="secondary" onClick={onClose}>Cancel</Button>
-					<Button onClick={onClose} style={{ marginLeft: '10px' }}>Confirm</Button>
+					<Button
+						onClick={bookShipmentConfirmData}
+						disabled={bookShipmentConfirmLoading}
+						style={{ marginLeft: '10px' }}
+					>
+						Confirm
+
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

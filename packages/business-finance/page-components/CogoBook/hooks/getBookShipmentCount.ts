@@ -1,17 +1,14 @@
 import { Toast } from '@cogoport/components';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
-import { useCallback, useEffect } from 'react';
+import { useSelector } from '@cogoport/store';
+import { useCallback, useEffect, useState } from 'react';
 
-// interface FilterInterface {
-// 	filters?:{
-// 		month?:string
-// 		query?:string
-// 		entity?:string
-// 	}
-// }
+const useBookShipmentCount = ({ filters, setShowBookShipment }) => {
+	const [bookShipmentValue, setBookShipmentValue] = useState('');
 
-const useBookShipmentCount = ({ filters }) => {
+	const { user } = useSelector((state) => state?.profile);
+	const { id: userId } = user || {};
+
 	const [
 		{ data, loading }, trigger] = useRequestBf(
 		{
@@ -21,12 +18,19 @@ const useBookShipmentCount = ({ filters }) => {
 		},
 		{ manual: true },
 	);
-	console.log(filters, 'filters');
+	const [{ loading:bookShipmentConfirmLoading }, bookShipmentTrigger] = useRequestBf(
+		{
+			url     : '/pnl/accrual/book-billed-shipments',
+			method  : 'post',
+			authKey : 'post_pnl_accrual_book_billed_shipments',
+		},
+		{ manual: true },
+	);
 
 	const { year, month } = filters || {};
 	const getShipmentCount = useCallback(async () => {
 		try {
-			await trigger({
+			const res = await trigger({
 				params: {
 					year          : year || undefined,
 					month         : month || undefined,
@@ -34,6 +38,7 @@ const useBookShipmentCount = ({ filters }) => {
 
 				},
 			});
+			setBookShipmentValue(res?.data);
 		} catch (error) {
 			if (error?.response?.data?.message) {
 				Toast.error(error?.response?.data?.message);
@@ -41,6 +46,29 @@ const useBookShipmentCount = ({ filters }) => {
 		}
 	}, [year, month, trigger]);
 
+	const bookShipmentConfirmData = async () => {
+		try {
+			const res = await bookShipmentTrigger({
+				data: {
+					jobListRequest: {
+						year          : year || undefined,
+						month         : month || undefined,
+						archiveStatus : 'BILLED',
+					},
+					totalJobs   : bookShipmentValue,
+					performedBy : userId,
+				},
+			});
+			if (res?.data) {
+				Toast.success(res?.data || 'Succesfully Booked');
+			}
+			setShowBookShipment(false);
+		} catch (err) {
+			if (err?.response?.data?.message) {
+				Toast.error(err?.response?.data?.message);
+			}
+		}
+	};
 	useEffect(() => {
 		getShipmentCount();
 	}, [getShipmentCount]);
@@ -49,6 +77,8 @@ const useBookShipmentCount = ({ filters }) => {
 		getShipmentCount,
 		data,
 		loading,
+		bookShipmentConfirmLoading,
+		bookShipmentConfirmData,
 	};
 };
 export default useBookShipmentCount;
