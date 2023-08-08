@@ -10,9 +10,12 @@ const getParams = ({ orgId = '' }) => ({
 
 const formatData = ({
 	data = {}, loading = false,
-	orgId = '', activeConversationTab = '', activeCardId = '', partnerId = '',
+	orgId = '',
+	activeConversationTab = '',
+	activeCardId = '',
+	partnerId = '',
 }) => {
-	const { data:orgDetails = {} } = data || {};
+	const { data: orgDetails = {} } = data || {};
 	const { tags = [], twin_partner = {}, account_type = '' } = orgDetails || {};
 
 	const isChannelPartner = loading ? false : tags?.includes('partner') || false;
@@ -60,7 +63,7 @@ const formatData = ({
 	};
 };
 
-const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab:activeConversationTab = '' }) => {
+const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab: activeConversationTab = '' }) => {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
 	const [{ data, loading }, trigger] = useRequest(
@@ -71,6 +74,10 @@ const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab:a
 		{ manual: true },
 	);
 	const getOrgDetails = useCallback(async () => {
+		if (!orgId) {
+			return;
+		}
+
 		try {
 			trigger({
 				params: getParams({ orgId }),
@@ -81,10 +88,8 @@ const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab:a
 	}, [orgId, trigger]);
 
 	useEffect(() => {
-		if (orgId) {
-			getOrgDetails();
-		}
-	}, [getOrgDetails, orgId]);
+		getOrgDetails();
+	}, [getOrgDetails]);
 
 	const {
 		openNewTab, hideCpButton, disableQuickActions,
