@@ -1,46 +1,35 @@
 import { Button } from '@cogoport/components';
-import { IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowRight, IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useMemo } from 'react';
 
 import StyledTable from '../../../commons/StyledTable';
 
 import styles from './styles.module.css';
 
-const data = [
-	{
-		firstName : 'tandy',
-		lastName  : 'miller',
-
-	},
-	{
-		firstName : 'tandy',
-		lastName  : 'miller',
-
-	},
-	{
-		firstName : 'joe',
-		lastName  : 'dirte',
-	},
-	{
-		firstName : 'joe',
-		lastName  : 'dirte',
-	},
-];
-
-function List({ source = '' }) {
+function List({ data = [] }) {
 	const router = useRouter();
 
-	const columns = useMemo(() => [
+	const columns = [
 		{
 			id       : 'origin',
 			Header   : 'ORIGIN',
-			accessor : (item) => item.firstName,
+			accessor : ({ origin_location }) => (
+				<div>{ origin_location?.display_name}</div>
+			),
+		},
+		{
+
+			id       : 'icon',
+			Header   : '',
+			accessor : () => <IcMPortArrow width={30} height={30} />,
+
 		},
 		{
 			id       : 'destination',
 			Header   : 'DESTINATION',
-			accessor : (item) => item.lastName,
+			accessor : ({ destination_location }) => (
+				<div>{ destination_location?.display_name}</div>
+			),
 		},
 		{
 			id       : 'avg_profitability',
@@ -67,18 +56,16 @@ function List({ source = '' }) {
 						router.push('/supply-allocation/view');
 					}}
 				>
-
-					{source === 'add' ? 'Add to List' : 'View'}
-					{' '}
+					View
 					<IcMArrowRight />
 				</Button>
 			),
 		},
-	], [source, router]);
+	];
 
 	return (
 		<div className={styles.container}>
-			<StyledTable data={data} columns={columns} />
+			<StyledTable data={data?.list} columns={columns} />
 		</div>
 	);
 }

@@ -165,7 +165,7 @@ const apis = {
 	ftl_field_service_ops_apis,
 	...schedules,
 	igm_desk,
-	...supply_allocation,
+	supply_allocation,
 	centralised_customer_service,
 };
 

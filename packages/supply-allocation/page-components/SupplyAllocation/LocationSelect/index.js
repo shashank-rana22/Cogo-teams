@@ -1,6 +1,7 @@
-import { Button, Chips } from '@cogoport/components';
-import { AsyncSelectController, useForm } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
+import { AsyncSelectController } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import RenderLabelNew from '../../../commons/RenderLabelNew';
 
@@ -23,8 +24,14 @@ const commonLocationProps = {
 	placeholder : 'Search via port name/code...',
 };
 
-function LocationSelect() {
-	const { control } = useForm({});
+function LocationSelect({ control, createSupplySearch }) {
+	const [originDetails, setOriginDetails] = useState({});
+	const [destinationDetails, setDestinationDetails] = useState({});
+
+	const onClickAllocate = () => {
+		const payload = { ...originDetails, ...destinationDetails };
+		createSupplySearch({ payload });
+	};
 
 	return (
 		<div className={styles.location_container}>
@@ -37,6 +44,9 @@ function LocationSelect() {
 					isClearable
 					label="Select Origin SeaPort"
 					{...commonLocationProps}
+					onChange={(id, item) => {
+						setOriginDetails({ origin_location_id: id, origin_location_type: item?.type });
+					}}
 				/>
 			</div>
 
@@ -52,11 +62,14 @@ function LocationSelect() {
 					isClearable
 					label="Select Origin SeaPort"
 					{...commonLocationProps}
+					onChange={(id, item) => {
+						setDestinationDetails({ destination_location_id: id, destination_location_type: item?.type });
+					}}
 				/>
 			</div>
 
 			<div className={styles.port_arrow_icon}>
-				<Button themeType="accent">+ Allocation</Button>
+				<Button onClick={() => onClickAllocate()} themeType="accent">+ Allocation</Button>
 			</div>
 		</div>
 	);

@@ -64,8 +64,8 @@ import shipmentLclFreight from './config/shipment-lcl-freight';
 import shipmentLtlFreight from './config/shipment-ltl-freight';
 import shipmentRailDomesticFreight from './config/shipment-rail-domestic-freight';
 import so2Surface from './config/so2-surface';
+import supplyAllocation from './config/supply-allocation';
 import supplyDashboard from './config/supply-dashboards';
-import supplyForecast from './config/supply-allocation';
 import ticketManagement from './config/ticket-management';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
@@ -92,7 +92,7 @@ const routeConfig = {
 	...inventory_management,
 	...kamMonitoring,
 	...PERFORMANCE_MANAGEMENT,
-	...supplyForecast,
+	...supplyAllocation,
 	...employeePortal,
 	...shipmentFclFreight,
 	...shipmentFclCfs,

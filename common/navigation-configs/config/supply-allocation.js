@@ -1,6 +1,6 @@
 const supplyAllocation = {
-	'/[partner_id]/forecast/supply-allocation': {
-		navigation: 'Forecast',
+	'/[partner_id]/supply-allocation': {
+		navigation: 'forecast-supply_allocation',
 	},
 };
 
