@@ -41,6 +41,9 @@ function ShipmentDetails() {
 			}
 			return <DKam get={get} activeStakeholder="consignee_shipper_booking_agent" />;
 
+		case 'sales_agent':
+			return <Kam get={get} activeStakeholder={activeStakeholder} />;
+
 		case 'booking_desk':
 			return <BookingDesk get={get} activeStakeholder={activeStakeholder} />;
 		case 'booking_desk_manager':
