@@ -2212,6 +2212,7 @@ importers:
       file-saver: ^2.0.5
       prop-types: ^15.8.1
       react: 18.2.0
+      react-to-print: ^2.14.13
       uuid: ^9.0.0
     dependencies:
       '@cogoport/components': 1.0.437_jbkdfmwn4pruupygfcv3deyn7u
@@ -2234,6 +2235,7 @@ importers:
       file-saver: 2.0.5
       prop-types: 15.8.1
       react: 18.2.0
+      react-to-print: 2.14.13_biqbaboplfbrettd7655fr4n2y
       uuid: 9.0.0
 
   packages/shipment-fcl-freight-local:
@@ -11885,6 +11887,16 @@ packages:
       react: ^16.8.3 || ^17.0.0-0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /react-to-print/2.14.13_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-PqUGgTRZvkyBzWgaZHVBECWPX2nGEc3HOUy6WNXof6HT4yTFI92wtIkqQtr4jfvHbadqjwTgzgh6vgN8KXlWWw==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react/18.2.0:
