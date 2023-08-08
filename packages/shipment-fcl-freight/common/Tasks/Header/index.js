@@ -30,12 +30,7 @@ function Header({
 	const showSupplyRemarks = SUPPLY_REMARKS_ROLES.includes(activeStakeholder);
 	const showOthersTasks = !!stakeholderConfig?.tasks?.show_others_tasks;
 
-	let showToogle = true;
-	SHOW_ALL_TASKS.forEach((item) => {
-		if (activeStakeholder?.includes(item)) {
-			showToogle = false;
-		}
-	});
+	const showToogle = SHOW_ALL_TASKS.some((item) => activeStakeholder?.includes(item));
 
 	const supplyRemarks = primary_service?.booking_preferences?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
