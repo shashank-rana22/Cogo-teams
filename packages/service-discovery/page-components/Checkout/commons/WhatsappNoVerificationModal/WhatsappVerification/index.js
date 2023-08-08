@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 
 import getElementController from '../../forms/getElementController';
 
@@ -11,10 +11,10 @@ const OTP_LENGTH = 6;
 function WhatsappVerification({
 	selectedUser = {},
 	type = '',
-	handleWhatsappVerification,
-	source,
-	refetchUsers,
-	source_id,
+	handleWhatsappVerification = () => {},
+	source = '',
+	refetchUsers = () => {},
+	source_id = '',
 }) {
 	const {
 		control:controlItem = {},
@@ -45,12 +45,12 @@ function WhatsappVerification({
 
 	return (
 		<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-			<div key={name} className={`${styles.form_group} ${styles[name]}`}>
+			<div key={name} className={cl`${styles.form_group} ${styles[name]}`}>
 				<div className={styles.label}>
 					{label}
 				</div>
 
-				<div className={`${styles.input_group} ${styles[name]}`}>
+				<div className={cl`${styles.input_group} ${styles[name]}`}>
 					<DynamicController
 						{...controlItem}
 						control={control}
@@ -91,7 +91,7 @@ function WhatsappVerification({
 				<Button
 					className={styles.submit_button}
 					onClick={verifyOtpNumber}
-					disabled={verifyWhatsappNumberLoading || otpNumber?.length !== 6}
+					disabled={verifyWhatsappNumberLoading || otpNumber?.length !== OTP_LENGTH}
 				>
 					Submit
 				</Button>

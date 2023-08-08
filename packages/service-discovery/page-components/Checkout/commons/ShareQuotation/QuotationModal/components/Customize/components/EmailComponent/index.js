@@ -1,4 +1,4 @@
-import { Toggle, Button } from '@cogoport/components';
+import { Toggle, Button, cl } from '@cogoport/components';
 import { IcMEmail } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -14,14 +14,14 @@ const removeTypeField = (controlItem) => {
 };
 
 function EmailComponent({
-	detail,
+	detail = {},
 	organization = {},
 	billing_addresses = [],
 	setSelected = () => {},
-	selected,
-	emailContent,
-	emailControl: control,
-	emailErrors: errors,
+	selected = '',
+	emailContent = {},
+	emailControl: control = () => {},
+	emailErrors: errors = {},
 	buttonDisabled = false,
 	handleNext = () => {},
 }) {
@@ -64,8 +64,8 @@ function EmailComponent({
 
 				if (name === 'terms_and_conditions') {
 					return (
-						<div key={name} className={`${styles.form_group} ${styles[name]}`}>
-							<div className={`${styles.label} ${styles[name]}`}>
+						<div key={name} className={cl`${styles.form_group} ${styles[name]}`}>
+							<div className={cl`${styles.label} ${styles[name]}`}>
 								{label}
 
 								<Toggle
@@ -79,7 +79,7 @@ function EmailComponent({
 								/>
 							</div>
 
-							<div className={`${styles.input_group} ${styles[name]}`}>
+							<div className={cl`${styles.input_group} ${styles[name]}`}>
 								<Element
 									{...(type === 'file-uploader'
 										? removeTypeField(controlItem)
@@ -101,7 +101,7 @@ function EmailComponent({
 				}
 
 				return (
-					<div key={name} className={`${styles.form_group} ${styles[name]}`}>
+					<div key={name} className={cl`${styles.form_group} ${styles[name]}`}>
 						<div className={styles.label}>{label}</div>
 
 						{name === 'body' ? (
@@ -112,7 +112,7 @@ function EmailComponent({
 							</div>
 						) : null}
 
-						<div className={`${styles.input_group} ${styles[name]}`}>
+						<div className={cl`${styles.input_group} ${styles[name]}`}>
 							<Element
 								{...(type === 'file-uploader'
 									? removeTypeField(controlItem)

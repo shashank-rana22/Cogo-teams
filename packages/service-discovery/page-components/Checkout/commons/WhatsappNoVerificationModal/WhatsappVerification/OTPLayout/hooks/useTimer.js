@@ -1,7 +1,17 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+const MILLISECONDS_PER_SECOND = 1000;
+const SECONDS_PER_MINUTE = 60;
+const MINUTES_PER_HOUR = 60;
+const HOURS_PER_DAY = 24;
+const SECONDS_PER_DAY = HOURS_PER_DAY * SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
+const SECONDS_PER_HOUR = MINUTES_PER_HOUR * SECONDS_PER_MINUTE;
+const TEN = 10;
+const DEFAULT_VALUE = 0;
+const ONE = 1;
+
 const useTimer = ({ durationInSeconds = 0 }) => {
-	const [seconds, setSeconds] = useState(0);
+	const [seconds, setSeconds] = useState(DEFAULT_VALUE);
 	const [isActive, setIsActive] = useState(true);
 
 	const timerIntervalRef = useRef();
@@ -11,16 +21,16 @@ const useTimer = ({ durationInSeconds = 0 }) => {
 	}, [durationInSeconds]);
 
 	useEffect(() => {
-		if (seconds === 0) {
+		if (!seconds) {
 			if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
 
 			setIsActive(false);
 		}
 
-		if (isActive && seconds > 0) {
+		if (isActive && seconds) {
 			timerIntervalRef.current = setInterval(() => {
-				setSeconds((previousState) => previousState - 1);
-			}, 1000);
+				setSeconds((previousState) => previousState - ONE);
+			}, MILLISECONDS_PER_SECOND);
 		}
 
 		return () => {
@@ -29,9 +39,9 @@ const useTimer = ({ durationInSeconds = 0 }) => {
 	}, [isActive, seconds]);
 
 	const start = useCallback(() => {
-		setSeconds((previousState) => (previousState === 0 ? durationInSeconds : previousState));
+		setSeconds((previousState) => (!previousState ? durationInSeconds : previousState));
 		setIsActive(true);
-	}, []);
+	}, [durationInSeconds]);
 
 	const pause = useCallback(() => {
 		setIsActive(false);
@@ -40,33 +50,28 @@ const useTimer = ({ durationInSeconds = 0 }) => {
 	const restart = useCallback(() => {
 		setSeconds(durationInSeconds);
 		setIsActive(true);
-	}, []);
+	}, [durationInSeconds]);
 
 	const reset = useCallback(() => {
 		setSeconds(durationInSeconds);
 		setIsActive(false);
-	}, []);
+	}, [durationInSeconds]);
 
 	const getRemainingTime = (duration) => {
-		const days = Math.floor(duration / (3600 * 24));
-		const hours = Math.floor((duration - days * 3600 * 24) / 3600);
+		const days = Math.floor(duration / SECONDS_PER_DAY);
+		const hours = Math.floor((duration - days * SECONDS_PER_DAY) / SECONDS_PER_HOUR);
 		const minutes = Math.floor(
-			(duration - days * 3600 * 24 - hours * 3600) / 60,
+			(duration - days * SECONDS_PER_DAY - hours * SECONDS_PER_HOUR) / MINUTES_PER_HOUR,
 		);
-		const secs = duration - days * 3600 * 24 - hours * 3600 - minutes * 60;
+		const secs = duration - days * SECONDS_PER_DAY - hours * SECONDS_PER_HOUR - minutes * SECONDS_PER_MINUTE;
 
-		const isTimeRemaining = !(
-			days === 0
-			&& hours === 0
-			&& minutes === 0
-			&& secs === 0
-		);
+		const isTimeRemaining = !(!days && !hours && !minutes && !secs);
 
 		return {
-			days    : days < 10 ? `0${days}` : `${days}`,
-			hours   : hours < 10 ? `0${hours}` : `${hours}`,
-			minutes : minutes < 10 ? `0${minutes}` : `${minutes}`,
-			seconds : secs < 10 ? `0${secs}` : `${secs}`,
+			days    : days < TEN ? `0${days}` : `${days}`,
+			hours   : hours < TEN ? `0${hours}` : `${hours}`,
+			minutes : minutes < TEN ? `0${minutes}` : `${minutes}`,
+			seconds : secs < TEN ? `0${secs}` : `${secs}`,
 
 			isTimeRemaining,
 		};

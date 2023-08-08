@@ -1,5 +1,5 @@
+import { cl } from '@cogoport/components';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
-import React from 'react';
 
 import getElementController from '../../../../../../configs/getElementController';
 import getErrorMessage from '../../../../../../configs/getErrorMessage';
@@ -15,8 +15,8 @@ const FLEX_OFFSET = 1;
 
 function FilterItem({
 	controls = {},
-	control,
-	watch,
+	control = () => {},
+	watch = () => {},
 	errors = {},
 	handleSubmit = () => {},
 	setValue = () => {},
@@ -57,7 +57,7 @@ function FilterItem({
 				if (innerControls) {
 					return (
 						<div className={styles.form_item} key={`${name}_${label}`} style={{ width: `${flex}%` }}>
-							<div className={`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
+							<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
 								{newControl?.boldLabel || label || ''}
 								{' '}
 								{newControl?.rules?.required ? (
@@ -106,7 +106,7 @@ function FilterItem({
 				return (
 					<div key={`${name}_${label}`} className={styles.form_item} style={{ width: `${flex}%` }}>
 						{isSubControl ? null : (
-							<div className={`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
+							<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
 								{newControl?.boldLabel || label || ''}
 								{' '}
 								{newControl?.rules?.required ? (

@@ -14,6 +14,11 @@ const useCreateNewUser = ({
 	onUpdate,
 	setAddExecutive = () => {},
 }) => {
+	const [{ loading = false }, trigger] = useRequest({
+		url    : '/onboard_organization_user',
+		method : 'post',
+	}, { manual: true });
+
 	const {
 		control,
 		handleSubmit,
@@ -21,11 +26,6 @@ const useCreateNewUser = ({
 	} = useForm();
 
 	const controls = getControls({ geo });
-
-	const [{ loading = false }, trigger] = useRequest({
-		url    : '/onboard_organization_user',
-		method : 'post',
-	}, { manual: true });
 
 	const createUser = async (values) => {
 		try {

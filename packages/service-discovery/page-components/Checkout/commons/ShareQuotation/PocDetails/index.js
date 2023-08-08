@@ -9,13 +9,13 @@ import WhatsappNoVerificationModal from '../../WhatsappNoVerificationModal';
 import styles from './styles.module.css';
 
 function PocDetails({
-	detail,
-	bookingConfirmationMode,
-	showWhatsappVerificationModal,
-	setShowWhatsappVerificationModal,
-	isChannelPartner,
+	detail = {},
+	bookingConfirmationMode = '',
+	showWhatsappVerificationModal = false,
+	setShowWhatsappVerificationModal = () => {},
+	isChannelPartner = false,
 	updateCheckout = () => {},
-	updateLoading,
+	updateLoading = false,
 }) {
 	const [showEditContact, setShowEditContact] = useState(false);
 

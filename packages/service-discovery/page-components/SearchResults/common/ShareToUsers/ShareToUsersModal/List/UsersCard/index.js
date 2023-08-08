@@ -1,9 +1,10 @@
 import { Avatar, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFtick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function UserCard({ user, onClick, isSelected }) {
+function UserCard({ user = {}, onClick = () => {}, isSelected = false }) {
 	return (
 		<div
 			role="presentation"
@@ -12,8 +13,7 @@ function UserCard({ user, onClick, isSelected }) {
 		>
 			<div className={styles.content}>
 				<Avatar
-					src={`https://cogoport-production.sgp1.digitaloceanspaces.com/
-					b17e97c0185eb584ed0227f8f630ebac/avatar.svg`}
+					src={GLOBAL_CONSTANTS.image_url.user_avatar}
 					alt="img"
 					size="40px"
 					style={{ width: 34, height: 34 }}

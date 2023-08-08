@@ -1,17 +1,26 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+const HIDDEN_PREFIX_LENGTH = 2;
+const HIDDEN_SUFFIX_LENGTH = 2;
+const EMAIL_PREFIX_LENGTH = 3;
+
+const ONE = 1;
+
 const hideDetails = (data = '', type = '') => {
 	let finalString = '';
 	if (type === 'number') {
-		finalString = `${data.substring(0, 2)}****${data.substring(
-			data.length - 2,
-			data.length,
-		)}`;
+		finalString = `${data.substring(
+			GLOBAL_CONSTANTS.zeroth_index,
+			HIDDEN_PREFIX_LENGTH,
+		)}****${data.substring(data.length - HIDDEN_SUFFIX_LENGTH, data.length)}`;
 	}
 
 	if (type === 'mail') {
 		const strings = data.split('@');
-		finalString = `${strings[0].substring(0, 3)}****@${
-			strings[strings.length - 1]
-		}`;
+		finalString = `${strings[GLOBAL_CONSTANTS.zeroth_index].substring(
+			GLOBAL_CONSTANTS.zeroth_index,
+			EMAIL_PREFIX_LENGTH,
+		)}****@${strings[strings.length - ONE]}`;
 	}
 
 	return finalString;

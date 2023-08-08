@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import styles from './styles.module.css';
@@ -5,7 +6,7 @@ import styles from './styles.module.css';
 function EmptyState({ heading = 'data', placement = 'center' }) {
 	return (
 		<div className={styles.container}>
-			<div className={`${styles.wrapper} ${styles[placement]}`}>
+			<div className={cl`${styles.wrapper} ${styles[placement]}`}>
 				<div className={styles.heading}>
 					No
 					{' '}

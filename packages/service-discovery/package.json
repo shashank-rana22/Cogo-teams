@@ -4,14 +4,6 @@
 	"version": "0.1.0",
 	"main": "index.js",
 	"sideEffects": false,
-	"scripts": {
-		"eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
-		"eslint_file": "eslint",
-		"stylelint": "stylelint \"**/*.css\"",
-		"clean": "turbo run clean",
-		"lint": "eslint",
-		"precommit": "lint-staged"
-	  },
 	"dependencies": {
 		"@cogoport/components": "^1.0.359",
 		"@cogoport/forms": "workspace:*",

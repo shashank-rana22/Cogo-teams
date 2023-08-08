@@ -50,7 +50,7 @@ function BookingProof({
 	}, [file]);
 
 	return (
-		<div className={`${styles.wrapper} ${length > ONE && styles.multiple}`}>
+		<div className={cl`${styles.wrapper} ${length > ONE && styles.multiple}`}>
 			<div className={styles.header_text}>Booking Proof</div>
 
 			<div className={cl`${styles.container} ${file && styles.uploaded}`}>

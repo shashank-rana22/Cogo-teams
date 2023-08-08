@@ -1,3 +1,5 @@
+const DEFAULT_VALUE = 0;
+
 export const getDetentionDemurrageDays = ({
 	services,
 	detailedServices,
@@ -34,10 +36,10 @@ export const getDetentionDemurrageDays = ({
 			const HASH = {};
 
 			keys.forEach((key) => {
-				HASH[key] = curr[key] || 0;
+				HASH[key] = curr[key] || DEFAULT_VALUE;
 			});
 
-			if (index === 0) {
+			if (!index) {
 				return HASH;
 			}
 
@@ -79,10 +81,10 @@ export const getDetentionDemurrageDays = ({
 
 			const HASH = {};
 			keys.forEach((key) => {
-				HASH[key] = (curr[key]?.free_limit || 0) + (curr[key]?.additional_days || 0);
+				HASH[key] = (curr[key]?.free_limit || DEFAULT_VALUE) + (curr[key]?.additional_days || DEFAULT_VALUE);
 			});
 
-			if (index === 0) {
+			if (!index) {
 				return HASH;
 			}
 

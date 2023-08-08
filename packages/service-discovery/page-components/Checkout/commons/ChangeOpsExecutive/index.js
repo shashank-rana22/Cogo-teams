@@ -11,12 +11,12 @@ function ChangeOpsExecutive({
 	show = false,
 	onClose = () => {},
 	data = {},
-	user_id,
-	onUpdate,
+	user_id = '',
+	onUpdate = () => {},
 	loading = false,
 	branch_id = '',
-	isChannelPartner,
-	setShowEditContact,
+	isChannelPartner = false,
+	setShowEditContact = () => {},
 }) {
 	const [addExecutive, setAddExecutive] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);

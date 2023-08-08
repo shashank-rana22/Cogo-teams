@@ -4,6 +4,8 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useMemo, useState } from 'react';
 
+const ONE = 1;
+
 const control = 	{
 	name        : 'whatsappNumber',
 	label       : 'Whatsapp Number',
@@ -24,7 +26,7 @@ const useWhatsappNoVerification = ({
 }) => {
 	const [showEnterOtpComponent, setShowEnterOtpComponent] = useState(false);
 	const [otpNumber, setOtpNumber] = useState('');
-	const [count, setCount] = useState(1);
+	const [count, setCount] = useState(ONE);
 
 	const [{ verifyWhatsappNumberLoading }, verifyWhatsappNumberTrigger] = useRequest({
 		method : 'post',
@@ -92,9 +94,9 @@ const useWhatsappNoVerification = ({
 				payload = { ...payload, to_be_verified: true };
 				await sendVerificationOtpTrigger({ data: payload });
 				setShowEnterOtpComponent(true);
-				Toast.success(`OTP ${count !== 1 ? 're' : ''}sent successfully`);
+				Toast.success(`OTP ${count !== ONE ? 're' : ''}sent successfully`);
 				restProps?.timer?.restart?.();
-				setCount((prev) => prev + 1);
+				setCount((prev) => prev + ONE);
 			}
 
 			if (actionType === 'VERIFY_OTP') {

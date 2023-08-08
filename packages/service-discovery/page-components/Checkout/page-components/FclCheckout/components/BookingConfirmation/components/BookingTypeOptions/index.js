@@ -1,4 +1,5 @@
 import { RadioGroup, Button } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
 import PocDetails from '../../../../../../commons/ShareQuotation/PocDetails';
@@ -41,7 +42,13 @@ function BookingTypeOptions({
 							onChange={(item) => setBookingConfirmationMode(item)}
 						/>
 					</div>
-				) : null}
+				) : (
+					<div className={styles.radio_wrapper}>
+						<div className={styles.title}>Booking Confirmation Through</div>
+
+						<div className={styles.type}>{startCase(bookingConfirmationMode)}</div>
+					</div>
+				)}
 
 				{bookingConfirmationMode === 'booking_proof' ? (
 					<BookingProof

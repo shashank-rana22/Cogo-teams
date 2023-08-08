@@ -1,7 +1,6 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
 
 import getDetails from './getDetails';
 import styles from './styles.module.css';

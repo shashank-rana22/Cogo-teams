@@ -63,7 +63,8 @@ const GLOBAL_CONSTANTS = {
 		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
 						a3072d28df04315514414abe46a8c2f0/new_employee_bulk_upload_sample_sheet.csv`,
 	},
-	flash_booking_charge_codes: [
+	cogoport_agent_email_id    : 'agentid@cogoport.com',
+	flash_booking_charge_codes : [
 		'OTC',
 		'BAS',
 		'BASNO',
@@ -428,6 +429,7 @@ const GLOBAL_CONSTANTS = {
 		amount_seperator       : /\D/g,
 		white_space_characters : /\s/g,
 		gst_number             : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
+		otp                    : /[^0-9]/g,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,

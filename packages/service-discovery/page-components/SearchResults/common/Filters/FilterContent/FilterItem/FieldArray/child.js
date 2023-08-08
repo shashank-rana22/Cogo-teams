@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
@@ -17,17 +17,17 @@ const FIRST_INDEX = 1;
 const TWO_VALUE = 2;
 
 function Child({
-	controls,
-	control,
-	index,
-	name,
-	remove,
+	controls = [],
+	control = () => {},
+	index = 0,
+	name = 0,
+	remove = () => {},
 	disabled = false,
 	showLabelOnce = false,
 	lowerlabel = '',
 	error = {},
 	length = 0,
-	setValue,
+	setValue = () => {},
 	isSubControl = false,
 	fieldArrayValues = {},
 }) {
@@ -61,7 +61,7 @@ function Child({
 						return (
 							<div
 								key={name}
-								className={`${styles.form_item} ${isSubControl && styles.sub_control}`}
+								className={cl`${styles.form_item} ${isSubControl && styles.sub_control}`}
 								style={{ width: `${flex}%` }}
 							>
 								{newControl?.showTopLabelOnly ? (

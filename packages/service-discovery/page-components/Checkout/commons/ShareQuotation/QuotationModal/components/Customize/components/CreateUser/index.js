@@ -1,4 +1,4 @@
-import { Popover, Button } from '@cogoport/components';
+import { Popover, Button, cl } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import useCreateNewUser from '../../../../../../../hooks/useCreateNewUser';
@@ -7,13 +7,13 @@ import getElementController from '../../../../../../forms/getElementController';
 import styles from './styles.module.css';
 
 function PopoverContent({
-	control,
-	createUser,
-	handleSubmit,
-	errors,
-	controls,
-	loading,
-	setShow,
+	control = () => {},
+	createUser = () => {},
+	handleSubmit = () => {},
+	errors = {},
+	controls = [],
+	loading = false,
+	setShow = () => {},
 }) {
 	return (
 		<div style={{ width: '300px', padding: 8 }}>
@@ -24,7 +24,7 @@ function PopoverContent({
 					const Element = getElementController(type);
 
 					return (
-						<div key={name} className={`${styles.form_group} ${styles[name]}`}>
+						<div key={name} className={cl`${styles.form_group} ${styles[name]}`}>
 							<div className={styles.label}>{label}</div>
 
 							{name === 'body' ? (
@@ -35,7 +35,7 @@ function PopoverContent({
 								</div>
 							) : null}
 
-							<div className={`${styles.input_group} ${styles[name]}`}>
+							<div className={cl`${styles.input_group} ${styles[name]}`}>
 								<Element
 									{...controlItem}
 									key={name}

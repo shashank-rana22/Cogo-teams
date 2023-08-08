@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 function RequestRate({ details = {}, className = {} }) {
 	const [showFeedbackModal, setShowFeedBackModal] = useState(false);
 
-	const addedAdditionalService = [];
+	const ADDITIONAL_SERVICES = [];
 
 	Object.keys(details?.service_details || {}).forEach((service) => {
 		if (
@@ -16,7 +16,7 @@ function RequestRate({ details = {}, className = {} }) {
 				details?.service_details?.[service]?.service_type,
 			)
 		) {
-			addedAdditionalService.push(
+			ADDITIONAL_SERVICES.push(
 				`${details?.service_details?.[service]?.trade_type}_
 				${details?.service_details?.[service]?.service_type}`,
 			);
@@ -30,12 +30,12 @@ function RequestRate({ details = {}, className = {} }) {
 
 	if (['fcl_freight', 'air_freight'].includes(details?.service_type)) {
 		if (
-			(addedAdditionalService.includes('export_ftl_freight')
-				|| addedAdditionalService.includes('export_ltl_freight')
-				|| addedAdditionalService.includes('export_haulage_freight')
-				|| addedAdditionalService.includes('export_trailer_freight'))
-			&& (addedAdditionalService.includes('export_fcl_customs')
-				|| addedAdditionalService.includes('export_air_customs'))
+			(ADDITIONAL_SERVICES.includes('export_ftl_freight')
+				|| ADDITIONAL_SERVICES.includes('export_ltl_freight')
+				|| ADDITIONAL_SERVICES.includes('export_haulage_freight')
+				|| ADDITIONAL_SERVICES.includes('export_trailer_freight'))
+			&& (ADDITIONAL_SERVICES.includes('export_fcl_customs')
+				|| ADDITIONAL_SERVICES.includes('export_air_customs'))
 		) {
 			proceeedWithFeedback = true;
 		}
@@ -46,7 +46,7 @@ function RequestRate({ details = {}, className = {} }) {
 	};
 
 	return (
-		<div className={`${styles.container} ${className}`}>
+		<div className={cl`${styles.container} ${className}`}>
 			<div className={styles.left_section}>
 				<p className={styles.label}>Missing Rate Feedback</p>
 

@@ -1,14 +1,16 @@
+import { cl } from '@cogoport/components';
+
 import styles from './styles.module.css';
 
 const INDEX_TO_VALUE_DIFF = 1;
 
 function ToEmailList({
 	billing_addresses = [],
-	organization,
-	detail,
+	organization = {},
+	detail = {},
 	setSelected = () => {},
-	selected,
-	emailContent,
+	selected = '',
+	emailContent = {},
 }) {
 	const isSelf = detail?.importer_exporter_id === organization?.id;
 
@@ -21,7 +23,7 @@ function ToEmailList({
 				role="presentation"
 				onClick={() => setSelected('main')}
 				id="checkout_ip_main"
-				className={`${styles.item_container} ${selected === 'main' ? styles.active : null}`}
+				className={cl`${styles.item_container} ${selected === 'main' ? styles.active : null}`}
 			>
 				<div>
 					<div className={styles.bold_content}>
@@ -53,7 +55,7 @@ function ToEmailList({
 						<div
 							role="presentation"
 							onClick={() => setSelected(ba)}
-							className={`${styles.item_container} ${active ? styles.active : null}`}
+							className={cl`${styles.item_container} ${active ? styles.active : null}`}
 							key={ba?.tax_number}
 							id={`checkout_ip_${index}`}
 						>

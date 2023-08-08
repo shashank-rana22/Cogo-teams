@@ -47,7 +47,7 @@ function SelectRecipients({
 		query        : general.query || {},
 		agent_id     : profile?.id,
 		user_profile : profile,
-		agent_email  : profile.email || 'agentid@cogoport.com',
+		agent_email  : profile.email || GLOBAL_CONSTANTS.cogoport_agent_email_id,
 	}));
 
 	const user_ids = [organization?.agent_id, agent_id];

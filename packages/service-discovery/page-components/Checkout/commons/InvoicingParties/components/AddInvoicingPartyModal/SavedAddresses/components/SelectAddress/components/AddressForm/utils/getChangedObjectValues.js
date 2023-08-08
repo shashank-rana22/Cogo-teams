@@ -3,18 +3,18 @@ import { isEmpty } from '@cogoport/utils';
 import getValue from './getValue';
 
 const getChangedObjectValues = ({ values, previousValues }) => {
-	const newValues = {};
+	const VALUES = {};
 	Object.entries(values || {}).forEach(([key, value]) => {
 		if (['string', 'number', 'boolean'].includes(typeof value)) {
 			if (value !== getValue(previousValues, key)) {
-				newValues[key] = value;
+				VALUES[key] = value;
 			}
 
 			return;
 		}
 
 		if (Array.isArray(value)) {
-			const newArrayValues = [];
+			const ARRAY_VALUES = [];
 			value.forEach((valueObj, index) => {
 				const newObjValues = getChangedObjectValues({
 					values         : valueObj,
@@ -22,12 +22,12 @@ const getChangedObjectValues = ({ values, previousValues }) => {
 				});
 
 				if (!isEmpty(newObjValues)) {
-					newArrayValues.push(newObjValues);
+					ARRAY_VALUES.push(newObjValues);
 				}
 			});
 
-			if (!isEmpty(newArrayValues)) {
-				newValues[key] = value;
+			if (!isEmpty(ARRAY_VALUES)) {
+				VALUES[key] = value;
 			}
 
 			return;
@@ -39,11 +39,11 @@ const getChangedObjectValues = ({ values, previousValues }) => {
 		});
 
 		if (!isEmpty(newObjectValues)) {
-			newValues[key] = value;
+			VALUES[key] = value;
 		}
 	});
 
-	return newValues;
+	return VALUES;
 };
 
 export default getChangedObjectValues;

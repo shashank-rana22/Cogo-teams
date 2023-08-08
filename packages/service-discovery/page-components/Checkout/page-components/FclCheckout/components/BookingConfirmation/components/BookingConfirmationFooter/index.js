@@ -208,7 +208,10 @@ function BookingConfirmationFooter({
 
 		if (disableConditionForFcl) {
 			setEror('please select document preferences in Invoicing party that contains FCL freight');
+			return;
 		}
+
+		setEror('');
 	}, [disableConditionForFcl, invoicingParties, quotation_email_sent_at, setEror]);
 
 	const {
