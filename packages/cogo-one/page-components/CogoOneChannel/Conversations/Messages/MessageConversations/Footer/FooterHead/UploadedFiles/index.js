@@ -3,9 +3,9 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function deletefile({
+function deleteFile({
 	uploadedFiles,
-	fileUrl,
+	fileLink,
 	uploaderRef = {},
 }) {
 	if (typeof uploadedFiles === 'string') {
@@ -13,7 +13,7 @@ function deletefile({
 		return null;
 	}
 
-	const filteredFiles = uploadedFiles.filter((eachFile) => eachFile !== fileUrl);
+	const filteredFiles = uploadedFiles.filter((eachFile) => eachFile !== fileLink);
 
 	uploaderRef.current?.externalHandleDelete(filteredFiles);
 
@@ -21,32 +21,32 @@ function deletefile({
 }
 
 function UploadedFiles({
-	id = '',
+	roomId = '',
 	setDraftUploadedFiles = () => {},
 	uploaderRef = {},
 	eachFileData = {},
 }) {
-	const handleDelete = ({ event, fileUrl }) => {
-		event.stopPropagation();
-
-		setDraftUploadedFiles(
-			(prev) => ({
-				...prev,
-				[id]: deletefile({
-					fileUrl,
-					uploadedFiles: prev?.[id],
-					uploaderRef,
-				}),
-			}),
-		);
-	};
-
 	const {
 		fileName,
 		fileIcon = null,
 		fileUrl = '',
 		fileExtension = '',
 	} = eachFileData || {};
+
+	const handleDelete = ({ event, fileLink }) => {
+		event.stopPropagation();
+
+		setDraftUploadedFiles(
+			(prev) => ({
+				...prev,
+				[roomId]: deleteFile({
+					fileLink,
+					uploadedFiles: prev?.[roomId],
+					uploaderRef,
+				}),
+			}),
+		);
+	};
 
 	return (
 		<div
@@ -69,7 +69,7 @@ function UploadedFiles({
 
 			<IcMDelete
 				className={styles.delete_icon}
-				onClick={(event) => handleDelete({ event, fileUrl })}
+				onClick={(event) => handleDelete({ event, fileLink: fileUrl })}
 			/>
 		</div>
 

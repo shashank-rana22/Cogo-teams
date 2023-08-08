@@ -15,6 +15,7 @@ const HEADER_TEXT_MAPPING = {
 	forward : 'Forwarding',
 	reply   : 'Replying to',
 };
+
 const DEFAULT_HEIGHT = 34;
 
 function FooterHead({
@@ -27,7 +28,7 @@ function FooterHead({
 	setEmailState = () => {},
 	errorValue = '',
 	uploading = {},
-	id = '',
+	roomId = '',
 	fileMetaData = [],
 	setDraftUploadedFiles = () => {},
 	hasUploadedFiles = false,
@@ -56,7 +57,7 @@ function FooterHead({
 				<>
 					<div className={styles.header_email}>
 						<div className={styles.reply_header_text}>
-							{HEADER_TEXT_MAPPING[actionType]}
+							{HEADER_TEXT_MAPPING[actionType] || ''}
 							:
 							<span>{subject}</span>
 						</div>
@@ -135,13 +136,13 @@ function FooterHead({
 			)}
 			<div
 				className={cl`${styles.nofile_container}
-				${((hasUploadedFiles) || uploading?.[id]) ? styles.upload_file_container : ''}`}
+				${((hasUploadedFiles) || uploading?.[roomId]) ? styles.upload_file_container : ''}`}
 			>
-				{(hasUploadedFiles) && !uploading?.[id] && (
+				{(hasUploadedFiles) && !uploading?.[roomId] && (
 					fileMetaData?.map(
 						(eachFileData) => (
 							<UploadedFiles
-								id={id}
+								roomId={roomId}
 								key={eachFileData?.fileUrl}
 								setDraftUploadedFiles={setDraftUploadedFiles}
 								uploaderRef={uploaderRef}
@@ -150,7 +151,7 @@ function FooterHead({
 						),
 					)
 				)}
-				{uploading?.[id] && (
+				{uploading?.[roomId] && (
 					<div className={styles.uploading}>
 						uploading.....
 					</div>

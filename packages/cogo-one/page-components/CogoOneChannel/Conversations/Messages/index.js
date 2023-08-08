@@ -109,6 +109,20 @@ function Messages({
 
 	const { actionType = '' } = mailActions || {};
 
+	const commonProps = {
+		firestore,
+		formattedData,
+		hasPermissionToEdit,
+		closeModal,
+		canMessageOnBotSession,
+		viewType,
+		hasNoFireBaseRoom,
+		assignLoading,
+		setOpenModal,
+		assignChat,
+		activeMessageCard: activeTab?.data,
+	};
+
 	useEffect(() => {
 		mountActiveRoomSnapShot({
 			activeRoomSnapshotListener,
@@ -131,16 +145,10 @@ function Messages({
 			<div className={styles.container}>
 				<div className={styles.header}>
 					<Header
-						setOpenModal={setOpenModal}
-						assignChat={assignChat}
-						formattedData={formattedData}
+						{...commonProps}
 						updateChat={updateChat}
 						loading={loading}
-						activeMessageCard={activeTab?.data}
-						closeModal={closeModal}
-						assignLoading={assignLoading}
 						activeAgentName={activeAgentName}
-						hasPermissionToEdit={hasPermissionToEdit}
 						filteredSpectators={filteredSpectators}
 						tagOptions={tagOptions}
 						supportAgentId={supportAgentId}
@@ -148,38 +156,24 @@ function Messages({
 						userId={userId}
 						requestForAssignChat={requestForAssignChat}
 						requestAssignLoading={requestAssignLoading}
-						canMessageOnBotSession={canMessageOnBotSession}
-						viewType={viewType}
-						firestore={firestore}
 						escalateToSupplyRm={escalateToSupplyRm}
 						supplierLoading={supplierLoading}
-						hasNoFireBaseRoom={hasNoFireBaseRoom}
 						setActiveTab={setActiveTab}
 					/>
 				</div>
 				<div className={styles.message_container}>
 					<MessageConversations
-						formattedData={formattedData}
-						activeMessageCard={activeTab?.data}
+						{...commonProps}
 						suggestions={suggestions}
-						hasPermissionToEdit={hasPermissionToEdit}
-						closeModal={closeModal}
 						setRaiseTicketModal={setRaiseTicketModal}
-						canMessageOnBotSession={canMessageOnBotSession}
-						viewType={viewType}
-						hasNoFireBaseRoom={hasNoFireBaseRoom}
 						setModalType={setModalType}
 						activeTab={activeTab}
 						activeChatCollection={activeChatCollection}
 						newUserRoomLoading={newUserRoomLoading}
-						firestore={firestore}
 						setMailActions={setMailActions}
 						mailActions={mailActions}
 						actionType={actionType}
 						communicationLoading={communicationLoading}
-						assignLoading={assignLoading}
-						setOpenModal={setOpenModal}
-						assignChat={assignChat}
 						mailProps={mailProps}
 						sendCommunicationTemplate={sendCommunicationTemplate}
 					/>

@@ -9,7 +9,7 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTyp
 import useGetEmojiList from '../../../../../../../hooks/useGetEmojis';
 import useSendPromotionalRate from '../../../../../../../hooks/useSendPromotionalRate';
 import EmojisBody from '../../EmojisBody';
-import { getCanSendMessage } from '../footerHelpers';
+import { getCanSendMessage } from '../footerFunctions';
 
 import styles from './styles.module.css';
 

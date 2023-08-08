@@ -9,34 +9,14 @@ import useSendOmnichannelMail from '../../../../../../hooks/useSendOmnichannelMa
 import { formatFileAttributes } from '../../../../../../utils/getFileAttributes';
 import styles from '../styles.module.css';
 
+import { getPlaceHolder, setEmailStateFunc } from './footerFunctions';
 import FooterHead from './FooterHead';
 import SendActions from './SendActions';
 
-const getPlaceHolder = ({ hasPermissionToEdit, canMessageOnBotSession }) => {
-	if (canMessageOnBotSession) {
-		return 'This chat is currently in bot session, send a message to talk with customer';
-	}
-	if (hasPermissionToEdit) {
-		return 'Type your message...';
-	}
-	return 'You do not have permission to chat';
-};
-
-const setEmailStateFunc = ({ mailActions, email = '' }) => {
-	const { data, actionType = '' } = mailActions || {};
-	const { response, conversation_type } = data || {};
-	const { sender = '', subject = '', to_mails = [] } = response || {};
-
-	let toEmail = [sender || email];
-
-	if (conversation_type === 'received') {
-		toEmail = to_mails;
-	}
-
-	return {
-		toUserEmail: actionType === 'reply' ? toEmail : [],
-		subject,
-	};
+const TEXTBOX_COMPONENT_MAPPING = {
+	email    : RTE,
+	whatsapp : Textarea,
+	default  : Textarea,
 };
 
 function Footer({
@@ -177,12 +157,6 @@ function Footer({
 
 	const isEmail = channel_type === 'email';
 
-	const TEXTBOX_COMPONENT_MAPPING = {
-		email    : RTE,
-		whatsapp : Textarea,
-		default  : Textarea,
-	};
-
 	const TextAreaComponent = TEXTBOX_COMPONENT_MAPPING[channel_type] || TEXTBOX_COMPONENT_MAPPING.default;
 
 	useEffect(() => {
@@ -202,7 +176,7 @@ function Footer({
 					setEmailState={setEmailState}
 					errorValue={errorValue}
 					uploading={uploading}
-					id={id}
+					roomId={id}
 					fileMetaData={fileMetaData}
 					setDraftUploadedFiles={setDraftUploadedFiles}
 					hasUploadedFiles={hasUploadedFiles}
