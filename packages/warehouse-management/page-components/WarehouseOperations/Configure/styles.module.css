@@ -4,11 +4,6 @@
 	border-radius: 4px;
 }
 
-.pagination_container {
-	display: flex;
-	justify-content: flex-end;
-}
-
 .details_list {
 	:global {
 		.line_division {
