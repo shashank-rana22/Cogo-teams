@@ -10492,6 +10492,11 @@ const partner = {
 			service_name : 'communication_control',
 		},
 		{
+			api          : 'bulk_update_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
 			api          : 'list_communication_channel_controls',
 			access_type  : 'private',
 			service_name : 'communication_control',
@@ -13281,6 +13286,11 @@ const partner = {
 			api          : 'update_shipment_sell_quotations',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api          : 'list_rate_charge_codes',
+			access_type  : 'private',
+			service_name : 'rate_sheet',
 		},
 
 	],

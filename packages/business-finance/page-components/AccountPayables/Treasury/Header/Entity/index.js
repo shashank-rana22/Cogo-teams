@@ -11,7 +11,7 @@ function Entity({ entityCode = '' }) {
 				{entityCode}
 			</div>
 
-			{ENTITY_MAPPING[entityCode].icon()}
+			{ENTITY_MAPPING[entityCode]?.icon()}
 		</div>
 	);
 }

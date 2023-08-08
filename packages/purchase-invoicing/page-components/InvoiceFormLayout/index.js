@@ -1,12 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useForm, RadioGroupController } from '@cogoport/forms';
+import { useForm, RadioGroupController, SelectController, CheckboxController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useContext, useImperativeHandle, forwardRef, useState } from 'react';
 
 import AccordianView from '../../common/Accordianview';
-import { EMPTY_LINE_ITEMS, INVOICE_TYPE_OPTIONS, INVOICE_TYPE_OPTIONS_CN, OPTIONSCN } from '../../constants';
+import {
+	EMPTY_LINE_ITEMS,
+	INVOICE_TYPE_OPTIONS,
+	INVOICE_TYPE_OPTIONS_CN,
+	OPTIONSCN,
+	URGENCY_TAG_OPTIONS,
+} from '../../constants';
 import useCalculateTotalPrice from '../../helpers/useCalculateTotalPrice';
 import useResetErrors from '../../helpers/useResetErrors';
 import useGetEntities from '../../hooks/useGetEntities';
@@ -124,6 +130,12 @@ function InvoiceFormLayout({
 		JSON.stringify(formValues?.line_items),
 	]);
 
+	useEffect(() => {
+		if (formValues?.invoice_type === 'credit_note') {
+			setValue('advance_bill', '');
+		}
+	}, [formValues?.invoice_type]);
+
 	const calculatedValues = useCalculateTotalPrice({
 		baseCurrency : formValues?.invoice_currency,
 		lineItems    : formValues?.line_items,
@@ -180,6 +192,10 @@ function InvoiceFormLayout({
 				/>
 			</div>
 			<div className={styles.formlayout}>
+				<div className={styles.select}>
+					<SelectController name="urgency_tag" control={control} options={URGENCY_TAG_OPTIONS} isClearable />
+				</div>
+
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
 					<div className={`${styles.flex} ${styles.justifiy}`}>
 						<div className={styles.flex}>
@@ -201,6 +217,17 @@ function InvoiceFormLayout({
 									Invoice type is Required
 								</div>
 							) : null}
+
+							{billCatogory === 'purchase' ? (
+								<CheckboxController
+									control={control}
+									name="advance_bill"
+									label="Advance Bill"
+									value="advance_bill"
+									disabled={formValues.invoice_type === 'credit_note'}
+								/>
+							) : null}
+
 						</div>
 						<Button
 							className={styles.margintop}
