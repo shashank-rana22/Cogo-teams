@@ -19,7 +19,7 @@
 
 .arrow_down_icon {
 	position: sticky;
-	bottom: 0;
+	bottom: 16px;
 	left: 95%;
 	display: flex;
 	align-items: center;

@@ -126,7 +126,7 @@ function FooterHead({
 							</div>
 							<Input
 								value={emailState?.subject}
-								onChange={(e) => setEmailState((prev) => ({ ...prev, subject: e }))}
+								onChange={(val) => setEmailState((prev) => ({ ...prev, subject: val }))}
 								size="xs"
 								className={styles.styled_input}
 							/>

@@ -38,5 +38,6 @@
 }
 
 .upload_icon {
+	cursor: pointer;
 	fill: #000;
 }

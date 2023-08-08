@@ -223,7 +223,7 @@ function Footer({
 					placeholder={getPlaceHolder({ hasPermissionToEdit, canMessageOnBotSession })}
 					className={styles.text_area}
 					value={draftMessage || ''}
-					onChange={(e) => setDraftMessages((p) => ({ ...p, [id]: e }))}
+					onChange={(val) => setDraftMessages((prev) => ({ ...prev, [id]: val }))}
 					disabled={!hasPermissionToEdit}
 					style={{ cursor: hasPermissionToEdit ? 'text' : 'not-allowed' }}
 					onKeyDown={handleKeyPress}
@@ -241,7 +241,7 @@ function Footer({
 						formattedData={formattedData}
 						viewType={viewType}
 						uploading={uploading}
-						id={id}
+						roomId={id}
 						handleProgress={handleProgress}
 						setDraftUploadedFiles={setDraftUploadedFiles}
 						setDraftMessages={setDraftMessages}

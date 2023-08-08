@@ -78,7 +78,7 @@ const useSendOmnichannelMail = ({
 	source = '',
 }) => {
 	const {
-		user: { id, name = '' },
+		user: { id: userId, name = '' },
 	} = useSelector(({ profile }) => profile);
 
 	const [{ loading }, trigger] = useRequest(
@@ -93,7 +93,7 @@ const useSendOmnichannelMail = ({
 		try {
 			await trigger({
 				data: getCommunicationPayload({
-					userId: id,
+					userId,
 					formattedData,
 					draftMessage,
 					uploadedFiles,
@@ -115,4 +115,5 @@ const useSendOmnichannelMail = ({
 		sendMail, mailLoading: loading,
 	};
 };
+
 export default useSendOmnichannelMail;

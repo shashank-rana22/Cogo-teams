@@ -22,7 +22,7 @@ function SendActions({
 	formattedData = {},
 	viewType = '',
 	uploading = {},
-	id = '',
+	roomId = '',
 	handleProgress = () => {},
 	setDraftUploadedFiles = () => {},
 	setDraftMessages = () => {},
@@ -33,8 +33,11 @@ function SendActions({
 }, ref) {
 	const { channel_type = '' } = formattedData;
 
-	const hasNoPermissionToSend = !hasPermissionToEdit || messageLoading
-	|| (isEmpty(draftMessage?.trim()) && !hasUploadedFiles);
+	const hasNoPermissionToSend = (
+		!hasPermissionToEdit
+		|| messageLoading
+		|| (isEmpty(draftMessage?.trim()) && !hasUploadedFiles)
+	);
 
 	const canSendMessage = !hasNoPermissionToSend && getCanSendMessage({ emailState, channelType: channel_type });
 
@@ -49,32 +52,38 @@ function SendActions({
 		onClicked = false,
 	} = useGetEmojiList();
 
-	const isSendPromotionalRate = !isEmail && hasPermissionToEdit
-	&& channel_type === 'whatsapp' && VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.send_promotional_rate;
+	const isSendPromotionalRate = (
+		!isEmail
+		&& hasPermissionToEdit
+		&& channel_type === 'whatsapp'
+		&& VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.send_promotional_rate
+	);
+
+	const handleUpdateMessage = (val) => {
+		setDraftMessages(
+			(prev) => ({
+				...prev,
+				[roomId]: prev?.[roomId] ? prev?.[roomId]?.concat(val) : val,
+			}),
+		);
+	};
 
 	return (
 		<>
 			<div className={styles.icon_tools}>
 				{hasPermissionToEdit && (
 					<CustomFileUploader
-						disabled={uploading?.[id]}
+						disabled={uploading?.[roomId]}
 						handleProgress={handleProgress}
 						showProgress={false}
 						draggable
 						multiple={channel_type === 'email'}
 						accept={ACCEPT_FILE_MAPPING[channel_type] || ACCEPT_FILE_MAPPING.default}
 						className="file_uploader"
-						uploadIcon={(
-							<IcMAttach
-								className={styles.upload_icon}
-								style={{ cursor: 'pointer' }}
-							/>
-						)}
+						uploadIcon={<IcMAttach className={styles.upload_icon} />}
 						draftUploadedFiles={draftUploadedFiles}
 						channel={channel_type}
-						onChange={(val) => {
-							setDraftUploadedFiles((prev) => ({ ...prev, [id]: val }));
-						}}
+						onChange={(val) => setDraftUploadedFiles((prev) => ({ ...prev, [roomId]: val }))}
 						ref={ref}
 					/>
 				)}
@@ -85,11 +94,7 @@ function SendActions({
 							<EmojisBody
 								emojisList={emojisList}
 								setOnClicked={setOnClicked}
-								updateMessage={(val) => setDraftMessages((p) => ({
-									...p,
-									[id]: !p?.[id] ? val
-										: p?.[id]?.concat(val),
-								}))}
+								updateMessage={handleUpdateMessage}
 							/>
 						)}
 						visible={onClicked}
@@ -102,12 +107,12 @@ function SendActions({
 					>
 						<IcMHappy
 							fill="#828282"
+							cursor={hasPermissionToEdit ? 'pointer' : 'not-allowed'}
 							onClick={() => {
 								if (hasPermissionToEdit) {
-									setOnClicked((p) => !p);
+									setOnClicked((prev) => !prev);
 								}
 							}}
-							style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer' }}
 						/>
 					</Popover>
 				)}
@@ -120,7 +125,7 @@ function SendActions({
 						className={styles.promotional_rate}
 						loading={loading}
 						onClick={sendPromotionalRate}
-						style={{ cursor: !isSendPromotionalRate ? 'not-allowed' : 'pointer' }}
+						cursor={isSendPromotionalRate ? 'pointer' : 'not-allowed'}
 					>
 						Send Promotional Rate
 					</Button>
@@ -129,22 +134,22 @@ function SendActions({
 				{!isEmail && (
 					<IcMQuickreply
 						fill="#828282"
+						cursor={hasPermissionToEdit ? 'pointer' : 'not-allowed'}
 						onClick={() => {
 							if (hasPermissionToEdit) {
 								openInstantMessages();
 							}
 						}}
-						style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer' }}
 					/>
 				)}
 				<IcMSend
 					fill="#EE3425"
+					cursor={canSendMessage ? 'pointer' : 'not-allowed'}
 					onClick={() => {
 						if (canSendMessage) {
 							sendMessage();
 						}
 					}}
-					style={{ cursor: !canSendMessage ? 'not-allowed' : 'pointer' }}
 				/>
 			</div>
 		</>
