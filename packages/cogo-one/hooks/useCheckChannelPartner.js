@@ -3,14 +3,65 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-import { ACCOUNT_TYPE_MAPPING } from '../constants';
+const getParams = ({ orgId = '' }) => ({
+	id                 : orgId,
+	user_data_required : true,
+});
 
-import useListPartners from './useListPartners';
+const formatData = ({
+	data = {}, loading = false,
+	orgId = '', activeConversationTab = '', activeCardId = '', partnerId = '',
+}) => {
+	const { data:orgDetails = {} } = data || {};
+	const { tags = [], twin_partner = {}, account_type = '' } = orgDetails || {};
+
+	const isChannelPartner = loading ? false : tags?.includes('partner') || false;
+
+	const isTwinIE = account_type === 'importer_exporter';
+
+	const userPartnerId = twin_partner?.id;
+
+	const ORGID = orgId || GLOBAL_CONSTANTS.uuid.paramount_org_id;
+
+	const disableQuickActions = isChannelPartner && (!isTwinIE || !userPartnerId);
+
+	const hideCpButton = isChannelPartner || loading;
+
+	const openNewTab = (activeTab) => {
+		if (disableQuickActions) {
+			return;
+		}
+
+		const { crm = '', prm = '' } = activeTab || {};
+
+		const linkSuffix = activeConversationTab === 'message'
+			? `source=communication&active_chat=${activeCardId}` : 'source=communication';
+
+		if (isChannelPartner) {
+			let redirectionLink = `/${partnerId}/prm/${userPartnerId}?${linkSuffix}`;
+			redirectionLink = prm
+				? `${redirectionLink}&omniChannelActiveTab=${prm}`
+				: redirectionLink;
+			window.open(redirectionLink, '_blank');
+			return;
+		}
+
+		let crmRedirect = `/${partnerId}/details/demand/${ORGID}?${linkSuffix}`;
+
+		crmRedirect = crm
+			? `${crmRedirect}&omniChannelActiveTab=${crm}`
+			: crmRedirect;
+
+		window.open(crmRedirect, '_blank');
+	};
+
+	return {
+		openNewTab, hideCpButton, disableQuickActions,
+	};
+};
 
 const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab:activeConversationTab = '' }) => {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
-
-	const { fetchPartnerId = () => {}, partnersLoading = false, channelPartnerId = '' } = useListPartners();
 
 	const [{ data, loading }, trigger] = useRequest(
 		{
@@ -21,22 +72,13 @@ const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab:a
 	);
 	const getOrgDetails = useCallback(async () => {
 		try {
-			const res = await trigger({
-				params: {
-					id                 : orgId,
-					user_data_required : true,
-				},
+			trigger({
+				params: getParams({ orgId }),
 			});
-			if (res?.data) {
-				const { tags = [], account_type = '' } = res?.data?.data || {};
-				if (tags?.includes('partner')) {
-					await fetchPartnerId({ [ACCOUNT_TYPE_MAPPING[account_type]]: orgId });
-				}
-			}
 		} catch (error) {
-			// console.log(error);
+			console.error(error);
 		}
-	}, [fetchPartnerId, orgId, trigger]);
+	}, [orgId, trigger]);
 
 	useEffect(() => {
 		if (orgId) {
@@ -44,48 +86,19 @@ const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab:a
 		}
 	}, [getOrgDetails, orgId]);
 
-	const { data:orgDetails = {} } = data || {};
-	const { tags = [] } = orgDetails || {};
-
-	let isChannelPartner = loading ? false : tags?.includes('partner') || false;
-
-	if (!orgId) {
-		isChannelPartner = false;
-	}
-
-	const ORGID = orgId || GLOBAL_CONSTANTS.uuid.paramount_org_id;
-
-	let ORG_PAGE_URL = '';
-
-	const disableQuickActions = isChannelPartner && !channelPartnerId;
-	const hideCpButton = isChannelPartner || loading;
-	const openNewTab = (activeTab) => {
-		const { crm = undefined, prm = undefined } = activeTab || {};
-
-		const linkSuffix = activeConversationTab === 'message'
-			? `source=communication&active_chat=${activeCardId}` : 'source=communication';
-
-		if (isChannelPartner && channelPartnerId) {
-			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerId}?${linkSuffix}`;
-
-			const PRM_ROUTE_PAGE = prm
-				? `${ORG_PAGE_URL}&omniChannelActiveTab=${prm}`
-				: ORG_PAGE_URL;
-
-			window.open(PRM_ROUTE_PAGE, '_blank');
-		} else if (!isChannelPartner) {
-			ORG_PAGE_URL = `/${partnerId}/details/demand/${ORGID}?${linkSuffix}`;
-
-			const CRM_ROUTE_PAGE = crm
-				? `${ORG_PAGE_URL}&omniChannelActiveTab=${crm}`
-				: ORG_PAGE_URL;
-
-			window.open(CRM_ROUTE_PAGE, '_blank');
-		}
-	};
+	const {
+		openNewTab, hideCpButton, disableQuickActions,
+	} = formatData({
+		data,
+		loading,
+		orgId,
+		activeConversationTab,
+		activeCardId,
+		partnerId,
+	});
 
 	return {
-		openNewTab, loading: partnersLoading || loading, disableQuickActions, hideCpButton, getOrgDetails,
+		openNewTab, loading, disableQuickActions, hideCpButton, getOrgDetails,
 	};
 };
 export default useCheckChannelPartner;
