@@ -17,7 +17,7 @@ interface ShipmentInterface {
 	bulkAction?:string
 }
 
-const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection, bulkAction }:ShipmentInterface) => {
+const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection }:ShipmentInterface) => {
 	const didMountRef = useRef(false);
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -62,9 +62,9 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		addToSelectedTrigger,
 	] = useRequestBf(
 		{
-			url     : 'pnl/accrual/add-to-selected',
+			url     : '/pnl/accrual/book-unbilled-shipments',
 			method  : 'post',
-			authKey : 'post_pnl_accrual_add_to_selected',
+			authKey : 'post_pnl_accrual_book_unbilled_shipments',
 		},
 		{ manual: true },
 	);
@@ -284,7 +284,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 				data: {
 					shipmentList   : newPayload,
 					performedBy    : userId,
-					archivedStatus : bulkAction || 'BOOK',
+					archivedStatus : 'UNBILLED',
 					selectionMode  : 'SINGLE',
 					jobListRequest : {
 						query                : query || undefined,

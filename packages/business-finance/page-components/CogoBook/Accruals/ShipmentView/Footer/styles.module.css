@@ -105,5 +105,7 @@
 }
 
 .margin_not {
-	margin: 20px 20px 0;
+	margin: 40px 0 40px 20%;
+	font-size: 14px;
+	font-weight: 600;
 }
