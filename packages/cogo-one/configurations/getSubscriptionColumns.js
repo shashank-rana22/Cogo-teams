@@ -7,10 +7,10 @@ const MINIMUM_ADD_ON_QUOTA_LIMIT = 1;
 
 export const getSubscriptionColumns = (props) => {
 	const {
-		isEdit = false, setIsEdit = () => {}, quota = {},
+		editable = false, setEditable = () => {}, quota = {},
 		setQuota = () => {},
 	} = props || {};
-	const { show = false, data = {} } = isEdit || {};
+	const { show = false, data = {} } = editable || {};
 
 	const handleAddQuantity = ({ item = {} }) => {
 		const enteredQuota = quota[item.id];
@@ -18,18 +18,20 @@ export const getSubscriptionColumns = (props) => {
 		if (enteredQuota < MINIMUM_ADD_ON_QUOTA_LIMIT) {
 			Toast.error('Add minimum 1 quantity');
 		} else {
-			setIsEdit((previous) => ({ ...previous, show: false }));
+			setEditable((previous) => ({ ...previous, show: false }));
 		}
 	};
 
 	return [
 		{
+			id       : 1,
 			Header   : 'Products',
 			accessor : (item) => (
 				<div style={{ fontSize: '14px' }}>{item?.product}</div>
 			),
 		},
 		{
+			id       : 2,
 			Header   : 'Quota',
 			accessor : (item) => {
 				const { id = '', left_quota = 0 } = item || {};
@@ -64,6 +66,7 @@ export const getSubscriptionColumns = (props) => {
 			},
 		},
 		{
+			id       : 3,
 			Header   : 'Rate/qty',
 			accessor : (item) => (
 				<div style={{ fontSize: '14px' }}>
@@ -82,6 +85,7 @@ export const getSubscriptionColumns = (props) => {
 			),
 		},
 		{
+			id       : 4,
 			Header   : 'Total',
 			accessor : (item) => (
 				<div style={{ fontSize: '14px' }}>
@@ -100,6 +104,7 @@ export const getSubscriptionColumns = (props) => {
 			),
 		},
 		{
+			id       : 5,
 			Header   : ' ',
 			accessor : (item) => (
 				<div>
@@ -109,7 +114,7 @@ export const getSubscriptionColumns = (props) => {
 							height={18}
 							cursor="pointer"
 							fill="#221F20"
-							onClick={() => setIsEdit((previous) => ({ ...previous, data: item, show: true }))}
+							onClick={() => setEditable((previous) => ({ ...previous, data: item, show: true }))}
 						/>
 					) : (
 						<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -125,7 +130,7 @@ export const getSubscriptionColumns = (props) => {
 								height={18}
 								cursor="pointer"
 								fill="#EE3425"
-								onClick={() => setIsEdit((previous) => ({ ...previous, show: false }))}
+								onClick={() => setEditable((previous) => ({ ...previous, show: false }))}
 							/>
 						</div>
 					)}

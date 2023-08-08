@@ -4,6 +4,7 @@ import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { MANDENTORY_BILLING_ITEMS, POC_BILLING_ITEMS } from '../../../../../../../../constants/addOnServices';
+import RenderElement from '../RenderElement';
 import styles from '../styles.module.css';
 
 const getSpecifiedControls = ({
@@ -13,8 +14,9 @@ const getSpecifiedControls = ({
 
 function Form({
 	addAddressControls = [],
-	returnFieldFunction = () => {},
 	isIncludeTaxNumber = false,
+	control = {},
+	errors = {},
 }) {
 	const [showPoc, setShowPoc] = useState(false);
 
@@ -31,7 +33,14 @@ function Form({
 			<div className={styles.element_row}>
 				{(addAddressControls || []).map((item) => {
 					if ((MANDENTORY_BILLING_ITEMS || []).includes(item.name)) {
-						return returnFieldFunction({ item });
+						return (
+							<RenderElement
+								key={item.name}
+								item={item}
+								control={control}
+								errors={errors}
+							/>
+						);
 					}
 					return null;
 				})}
@@ -39,7 +48,12 @@ function Form({
 
 			{taxNumber && isIncludeTaxNumber && (
 				<>
-					{returnFieldFunction({ item: taxNumber })}
+					<RenderElement
+						key={taxNumber.name}
+						item={taxNumber}
+						control={control}
+						errors={errors}
+					/>
 					{!showPoc && (
 						<Button
 							themeType="accent"
@@ -55,7 +69,14 @@ function Form({
 			<div className={styles.element_row}>
 				{(addAddressControls || []).map((item) => {
 					if ((POC_BILLING_ITEMS || []).includes(item.name) && showPoc && isIncludeTaxNumber) {
-						return <>{returnFieldFunction({ item })}</>;
+						return (
+							<RenderElement
+								key={taxNumber.name}
+								item={item}
+								control={control}
+								errors={errors}
+							/>
+						);
 					}
 					return null;
 				})}
@@ -66,7 +87,12 @@ function Form({
 					<div className={styles.address_save_label}>
 						Save address as
 					</div>
-					{returnFieldFunction({ item: addressTypeChips })}
+					<RenderElement
+						key={addressTypeChips.name}
+						item={addressTypeChips}
+						control={control}
+						errors={errors}
+					/>
 				</div>
 			)}
 		</div>

@@ -127,7 +127,7 @@ const addAddressControls = () => {
 	];
 };
 
-export const useGetControls = ({ setCityState = () => {} }) => {
+const useGetControls = ({ setCityState = () => {} }) => {
 	const [country, setCountry] = useState({});
 
 	const controls = addAddressControls();
@@ -165,8 +165,8 @@ export const useGetControls = ({ setCityState = () => {} }) => {
 			};
 		}
 
-		return {
-			...control,
-		};
+		return control;
 	});
 };
+
+export default useGetControls;

@@ -1,35 +1,35 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_PAGE_LIMIT = 100;
 
-const useGetBillingAdresses = ({ orgId = '', setBillingAddresses = () => {} }) => {
-	const [{ loading }, trigger] = useRequest({
+const getParam = ({ orgId = '' }) => ({
+	filters    : { organization_id: orgId, trade_party_type: 'self' },
+	page_limit : DEFAULT_PAGE_LIMIT,
+	page       : DEFAULT_PAGE,
+});
+
+const useGetBillingAdresses = ({ orgId = '' }) => {
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_organization_billing_addresses',
 		method : 'get',
 	}, { manual: true });
 
-	const params = useMemo(() => ({
-		filters    : { organization_id: orgId, trade_party_type: 'self' },
-		page_limit : DEFAULT_PAGE_LIMIT,
-		page       : DEFAULT_PAGE,
-	}), [orgId]);
-
 	const getOrgBillingAddresses = useCallback(async () => {
 		try {
-			const response = await trigger({
-				params,
+			await trigger({
+				params: getParam({ orgId }),
 			});
-			setBillingAddresses((previous) => [...previous, ...(response?.data?.list || [])]);
 		} catch (error) {
-			// console.error(error, 'error');
+			console.error(error, 'error');
 		}
-	}, [params, setBillingAddresses, trigger]);
+	}, [orgId, trigger]);
 
 	return {
-		billingAddressesLoading: loading,
 		getOrgBillingAddresses,
+		billingAddressesLoading : loading,
+		billingAddressesData    : data?.list,
 	};
 };
 export default useGetBillingAdresses;

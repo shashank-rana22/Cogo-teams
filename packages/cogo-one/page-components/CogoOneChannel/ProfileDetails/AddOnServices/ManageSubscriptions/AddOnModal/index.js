@@ -20,7 +20,7 @@ function AddOnModal({
 	showAddOn = false, setShowAddOn = () => {},
 	organizationData = {}, saasSubscriptionCustomerId = '',
 }) {
-	const [isEdit, setIsEdit] = useState({ show: false, data: {} });
+	const [editable, setEditable] = useState({ show: false, data: {} });
 	const [quota, setQuota] = useState({});
 
 	const { createLink = () => {}, createLinkloading = false } = useCreatePaymentLink({ organizationData });
@@ -28,7 +28,7 @@ function AddOnModal({
 	const { subscriptionData = {}, loading = false } = useGetSaasSubscriptionProfile({ saasSubscriptionCustomerId });
 	const { quotas = [] } = subscriptionData || {};
 
-	const columns = getSubscriptionColumns({ isEdit, setIsEdit, quota, setQuota });
+	const columns = getSubscriptionColumns({ editable, setEditable, quota, setQuota });
 
 	return (
 		<Modal show={showAddOn} placement="top" size="lg" closeOnOuterClick={false} onClose={() => setShowAddOn(false)}>
@@ -66,13 +66,13 @@ function AddOnModal({
 					size="md"
 					className={styles.cancel_button}
 					onClick={() => setShowAddOn(false)}
+					disabled={createLinkloading}
 				>
 					Cancel
 				</Button>
 				<Button
 					size="md"
 					loading={createLinkloading}
-					disabled={createLinkloading}
 					onClick={() => createLink({ values: {} })}
 				>
 					Generate Link

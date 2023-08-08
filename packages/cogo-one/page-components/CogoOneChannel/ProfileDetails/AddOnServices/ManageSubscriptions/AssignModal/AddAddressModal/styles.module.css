@@ -1,11 +1,11 @@
-.element_column {
+/* .element_column {
 	width: 45%;
-}
+} */
 
-.error_text {
+/* .error_text {
 	font-size: 10px;
 	color: #ee3425;
-}
+} */
 
 .header {
 	display: flex;
@@ -50,9 +50,9 @@
 	margin-left: 15px;
 }
 
-.form_item_styled {
+/* .form_item_styled {
 	margin-bottom: 10px;
-}
+} */
 
 .address_type {
 	display: flex;

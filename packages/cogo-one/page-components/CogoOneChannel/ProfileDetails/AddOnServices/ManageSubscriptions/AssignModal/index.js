@@ -21,7 +21,7 @@ const renderName = ({ pocDetail = [] }) => {
 		isEmpty(pocDetail)
 		|| !pocDetail[GLOBAL_CONSTANTS.zeroth_index]?.name
 	) {
-		return null;
+		return '';
 	}
 
 	return ` (${pocDetail[GLOBAL_CONSTANTS.zeroth_index]?.name})`;
@@ -40,25 +40,22 @@ function AssignModal({
 	const geo = getGeoConstants();
 	const REGISTRATION_LABEL = geo.others.registration_number.label;
 
-	const [billingAddresses, setBillingAddresses] = useState([]);
 	const [selectedAddress, setSelectedAddress] = useState({});
 	const [addAddressModal, setAddAddressModal] = useState(false);
 
 	const {
 		getOrgBillingAddresses = () => {},
 		billingAddressesLoading = false,
-	} = useGetBillingAdresses({
-		orgId,
-		setBillingAddresses,
-	});
+		billingAddressesData = [],
+	} = useGetBillingAdresses({ orgId });
 
 	const {
 		getOrganizationAddresses = () => {},
 		addressesLoading = false,
-	} = useGetOrganizationAddresses({
-		orgId,
-		setBillingAddresses,
-	});
+		orgAddressesData = [],
+	} = useGetOrganizationAddresses({ orgId });
+
+	const billingAddresses = billingAddressesData?.concat(orgAddressesData);
 
 	const {
 		createSubscriptionInvoice = () => {},
@@ -192,10 +189,11 @@ function AssignModal({
 						size="md"
 						className={styles.cancel_button}
 						onClick={() => setShowAssign(false)}
+						disabled={loading}
 					>
 						Cancel
 					</Button>
-					<Button size="md" disabled={loading} onClick={createSubscriptionInvoice}>Assign</Button>
+					<Button size="md" loading={loading} onClick={createSubscriptionInvoice}>Assign</Button>
 				</Modal.Footer>
 			</Modal>
 

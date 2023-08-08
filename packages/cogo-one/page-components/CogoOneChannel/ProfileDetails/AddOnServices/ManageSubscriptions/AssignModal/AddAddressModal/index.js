@@ -2,11 +2,10 @@ import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { useGetControls } from '../../../../../../../configurations/billing-controls';
+import useGetControls from '../../../../../../../configurations/billing-controls';
 import useCreateBillingAddres from '../../../../../../../hooks/useCreateBillingAddres';
-import { getFieldController } from '../../../../../../../utils/getFieldController';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -42,36 +41,11 @@ function AddAddressModal({
 		reset,
 	});
 
-	const returnFieldFunction = ({ item = {} }) => {
-		const { label = '', name = '', type = '' } = item || {};
-		const Element = getFieldController(type);
-
-		if (!Element) {
-			return null;
-		}
-
-		return (
-			<div className={styles.element_column} key={label}>
-				<div className={styles.form_item_styled}>
-					{type !== 'checkbox' && <div>{label}</div>}
-					<Element
-						{...item}
-						control={control}
-						error={errors?.[item.name]}
-					/>
-				</div>
-				<div className={styles.error_text}>
-					{(errors?.[name] && (errors[name]?.message || 'required'))}
-				</div>
-			</div>
-		);
-	};
-
 	const onSubmit = (data) => {
 		createBillingAddress({ data });
 	};
 
-	useMemo(() => {
+	useEffect(() => {
 		setValue('city', city);
 		setValue('state', state);
 	}, [city, setValue, state]);
@@ -99,21 +73,22 @@ function AddAddressModal({
 			<Modal.Body className={styles.modal_body_resolution}>
 				<Form
 					addAddressControls={addAddressControls}
-					returnFieldFunction={returnFieldFunction}
 					isIncludeTaxNumber={isIncludeTaxNumber}
+					control={control}
+					errors={errors}
 				/>
 			</Modal.Body>
 
 			<Modal.Footer>
 				<Button
 					themeType="tertiary"
+					disabled={loading}
 					onClick={() => setAddAddressModal(false)}
 				>
 					Cancel
 				</Button>
 				<Button
 					onClick={handleSubmit(onSubmit)}
-					disabled={loading}
 					loading={loading}
 					className={styles.add_new_address_button}
 				>
