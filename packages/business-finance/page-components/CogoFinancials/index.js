@@ -79,6 +79,7 @@ function CogoFinancials() {
 
 	const handleClick = () => {
 		setShowShipmentList(false);
+		setActiveBar('');
 		setActiveShipmentCard('');
 	};
 

@@ -17,7 +17,7 @@ function useStepExecution({
 
 	options,
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {}, primary_service = {} } = useContext(ShipmentDetailContext);
 	const [restrictTask, setRestrictTask] = useState(false);
 	const [toastMessage, setToastMessage] = useState('');
 	const [commodityUnit, setCommodityUnit] = useState({});
@@ -31,6 +31,7 @@ function useStepExecution({
 		shipment_data,
 		stepConfig,
 		setCommodityUnit,
+		primary_service,
 	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);

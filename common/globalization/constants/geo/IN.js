@@ -103,6 +103,8 @@ export default {
 			'd9c490f9-afcc-467e-a86d-2a02edf81959',
 			'568c5939-3721-4444-a0ff-4c0298bc948d',
 		],
+		supplier_relations_head_id: '0a623fc0-bd23-4990-b2ec-0115d3f1095b',
+
 		supply_relation_manager_role_id: '568c5939-3721-4444-a0ff-4c0298bc948d',
 
 		cogo_freight_supplier      : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
