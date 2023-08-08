@@ -55,7 +55,10 @@ const injectValues = ({
 
 			if (control.name === 'truck_details_count') {
 				const TRUCK_DETAILS_COUNT = [];
-				(servicesList || []).forEach((item) => {
+				const updatedServicesList = (servicesList || []).filter(
+					(item) => item?.service_type !== 'subsidiary_service',
+				);
+				(updatedServicesList || []).forEach((item) => {
 					const ind = TRUCK_DETAILS_COUNT.findIndex(
 						(i) => i.truck_type === item.truck_type,
 					);
