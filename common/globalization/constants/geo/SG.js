@@ -220,7 +220,7 @@ export default {
 		cogo_one_admin_ids    : [
 			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
-			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
+			'101739b8-9803-455d-b0a4-3ccb6712c05d', // SuperAdmin
 		],
 		cogo_one_admin_user_ids     : [], // todo
 		cogo_one_shipment_agent_ids : [
