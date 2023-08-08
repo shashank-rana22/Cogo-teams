@@ -91,7 +91,7 @@ const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCou
 							is_mandatory : (values.mandatory_audiences || []).includes(audience_id),
 						})),
 						...(values?.mandatory_audiences_user === 'custom'
-							? { file_url: values.upload_excel.finalUrl }
+							? { file_url: values.upload_excel.finalUrl || values.upload_excel }
 							: {}),
 						...(state !== 'published' ? { state: CURRENT_TO_NEXT_MAPPING[activeTab] } : {}),
 						generate_sheet : false,

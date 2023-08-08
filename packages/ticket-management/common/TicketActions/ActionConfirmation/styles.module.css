@@ -1,0 +1,13 @@
+.cancel_button {
+	margin-right: 12px;
+}
+
+.modal_body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding-block: 20px;
+	font-size: 16px;
+	font-weight: 600;
+}

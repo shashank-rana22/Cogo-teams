@@ -17,8 +17,9 @@ function Services() {
 			<div className={styles.container}>
 				<div className={styles.services_container}>
 					<div className={styles.header}>Main Services</div>
+
 					<div className={styles.trade_services}>
-						{ (servicesList || []).map((service) => (
+						{(servicesList || []).map((service) => (
 							<ServiceDetails
 								servicesData={service}
 								key={service?.id}

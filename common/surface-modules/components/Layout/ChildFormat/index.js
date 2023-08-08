@@ -1,24 +1,35 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import Child from './child';
 import styles from './styles.module.css';
 
 function FieldArray({
-	name,
-	control,
-	showElements,
-	controls,
-	buttonText,
+	name = '',
+	control = {},
+	showElements = false,
+	controls = [],
+	buttonText = '',
 	showButtons = true,
 	disabled = false,
-	value,
-	error,
-	formValues,
+	error = {},
+	formValues = {},
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({ control, name });
+
+	const controlledItems = useMemo(() => {
+		let item = {};
+		controls.forEach((defaultControl) => {
+			item = {
+				...item,
+				[defaultControl.name]: defaultControl.name !== 'url' ? '' : undefined,
+			};
+		});
+		return item;
+	}, [controls]);
+
 	return (
 		<div className={styles.child}>
 			{fields.map((field, index) => (
@@ -35,6 +46,8 @@ function FieldArray({
 					disabled={disabled}
 					error={error?.[index]}
 					formValues={formValues}
+					id={field.id}
+					length={fields.length}
 				/>
 			))}
 
@@ -43,10 +56,10 @@ function FieldArray({
 					<Button
 						size="sm"
 						themeType="accent"
-						onClick={() => append()}
+						onClick={() => append(controlledItems)}
 					>
 						<div className={styles.add_button_text}>
-							+&nbsp;
+							{' '}
 							{buttonText || 'Add Items'}
 						</div>
 					</Button>

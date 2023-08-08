@@ -2,9 +2,10 @@ import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
 
+import useUpdateShipmentService from '../../../../../hooks/useUpdateShipmentService';
 import getDefaultValues from '../../utils/get-default-values';
 import Step3 from '../UploadBookingNote/components/Step3';
-import useGetStep3Data from '../UploadBookingNote/helpers/useGetStep3Data';
+import useGetStepThreeData from '../UploadBookingNote/helpers/useGetStep3Data';
 
 import getControls from './helper/getControls';
 import styles from './styles.module.css';
@@ -17,13 +18,18 @@ function EditRate({
 	refetch = () => {},
 	formattedRate = {},
 }) {
-	const editQuote = useGetStep3Data({
-		servicesList    : servicesList.filter((item) => item.id === task.service_id),
+	const filterServicesList = (servicesList.filter((item) => item?.id === task?.service_id));
+
+	const editQuote = useGetStepThreeData({
+		servicesList    : filterServicesList,
 		shipment_data,
 		onCancel,
 		task,
 		taskListRefetch : refetch,
+		formattedRate,
 	});
+
+	const { apiTrigger } = useUpdateShipmentService({});
 
 	const subsidiaryService = (servicesList || []).find(
 		(service) => service.service_type === 'subsidiary_service'
@@ -39,7 +45,7 @@ function EditRate({
 	const requiredControls = requiredRawControls.map((ctrl) => ({
 		...ctrl,
 		value:
-				formattedRate?.[formattedRate?.primary_service?.id]?.[ctrl.name]
+				formattedRate?.[task?.service_id]?.[ctrl.name]
 				|| ctrl.value,
 	}));
 
@@ -47,7 +53,29 @@ function EditRate({
 
 	const formProps = useForm({ defaultValues });
 
-	const { control, formState: { errors } } = formProps || {};
+	const { control, formState: { errors }, handleSubmit } = formProps || {};
+
+	const updateServiceFunc = async () => {
+		let formData = {};
+
+		await handleSubmit(
+			(val) => {
+				formData = val;
+			},
+		)();
+
+		const service = servicesList.find((serviceObj) => serviceObj.id === task?.service_id);
+
+		const payloadForUpdateShipment = {
+			data                : { ...(formData || {}) },
+			ids                 : [service?.id],
+			service_type        : task?.service_type,
+			shipment_id         : task?.shipment_id,
+			performed_by_org_id : task?.organization_id,
+		};
+
+		await apiTrigger(payloadForUpdateShipment);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -65,7 +93,7 @@ function EditRate({
 					<Loader themeType="primary" className={styles.loader_icon} />
 				</div>
 			) : (
-				<Step3 data={editQuote} shipment_id={task?.shipment_id} />
+				<Step3 data={editQuote} shipment_id={task?.shipment_id} updateServiceFunc={updateServiceFunc} />
 			)}
 		</div>
 	);

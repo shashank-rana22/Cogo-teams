@@ -11,12 +11,12 @@ import useGetJvList from '../../hooks/useGetJvList';
 import CreateJvModal from './CreateJvModal';
 import styles from './styles.module.css';
 
-function JournalVoucher() {
+function JournalVoucher({ entityCode }) {
 	const { query } = useRouter();
 	const [filters, setFilters] = useState({});
 	const [show, setShow] = useState(false);
 
-	const { data, loading, refetch } = useGetJvList({ filters });
+	const { data, loading, refetch } = useGetJvList({ filters, entityCode });
 
 	const handleVersionChange = () => {
 		window.location.href = `/${query.partner_id}/business-finance/settlement/JournalVoucher`;

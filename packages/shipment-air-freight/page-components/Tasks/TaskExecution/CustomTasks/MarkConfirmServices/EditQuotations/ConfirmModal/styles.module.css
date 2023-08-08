@@ -44,7 +44,7 @@
 .description {
 	display: flex;
 	justify-content: flex-start;
-	width: 70%;
+	margin-right: 16px;
 	font-size: 12px;
 }
 
@@ -63,6 +63,7 @@
 }
 
 .controller {
+	width: 60%;
 	margin-top: 8px;
 
 	:global {

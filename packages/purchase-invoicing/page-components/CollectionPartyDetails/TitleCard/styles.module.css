@@ -1,0 +1,52 @@
+.servicename {
+	display: flex;
+	font-size: var(--font-size-sm);
+	font-weight: 500;
+}
+
+.heading {
+	margin-bottom: 6px;
+}
+
+.container_title {
+	display: flex;
+	align-items: center;
+}
+
+.customer {
+	flex: 2.5;
+	margin-right: 26px;
+	border-right: 2px solid var(--color-accent-orange-2);
+}
+
+.invoices {
+	display: flex;
+	flex: 3.5;
+}
+
+.lineitems {
+	display: flex;
+	flex: 3;
+}
+
+.value {
+	display: flex;
+	padding: 0 6px;
+	color: var(--color-accent-orange-2);
+}
+
+.mode {
+	flex: 1.5;
+	max-width: fit-content;
+	padding: 6px;
+	background-color: var(--color-tertiary-blue-5);
+	border-radius: 8px;
+}
+
+.spankey {
+	padding-right: 4px;
+}
+
+.party_count {
+	padding-left: 4px;
+}

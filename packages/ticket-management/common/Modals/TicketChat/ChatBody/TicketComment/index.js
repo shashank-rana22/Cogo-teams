@@ -16,18 +16,23 @@ function TicketComment({
 	ticketType = '',
 	name = '',
 	userType = '',
+	agentName = '',
 	oldReviewerName = '',
 	reviewerName = '',
 	restData = {},
-	activityUserId,
-	currentAgentName = '',
+	rating = 0,
+	activityUserId = '',
+	isInternal = false,
 }) {
 	const isCurrentUser = activityUserId === userId;
 	const isAgent = userType === 'user';
 
 	if (type === 'respond') {
 		return (
-			<div className={cl`${!isCurrentUser ? styles.agent_message_flex : ''}`}>
+			<div
+				className={cl`${styles.default_message} ${!isCurrentUser ? styles.agent_message_flex : ''} 
+				${isInternal ? styles.internal_message : ''}`}
+			>
 				{!isCurrentUser && (
 					<Image
 						src={GLOBAL_CONSTANTS.image_url?.[isAgent ? 'bot_icon' : 'user_avatar']}
@@ -37,14 +42,10 @@ function TicketComment({
 						className={styles.agent_profile_pic}
 					/>
 				)}
-				<div
-					className={cl`${
-						!isCurrentUser ? styles.message_div : styles.user_message_flex
-					}`}
-				>
+				<div className={cl`${isCurrentUser ? styles.user_message_flex : ''}`}>
 					<div className={styles.header_flex}>
 						<div className={styles.name_div}>
-							{isCurrentUser ? currentAgentName : name}
+							{agentName}
 							,
 						</div>
 						<div className={styles.time}>
@@ -73,6 +74,7 @@ function TicketComment({
 		<TimeLine
 			type={type}
 			name={name}
+			rating={rating}
 			userType={userType}
 			oldReviewerName={oldReviewerName}
 			reviewerName={reviewerName}

@@ -6,7 +6,7 @@ import { INVOICE_STATUS } from '../constants';
 
 import styles from './styles.module.css';
 
-const SettlementKnockOffList = () => [
+const settlementKnockOffList = [
 	{
 		Header   : <div className={styles.name}>Document No.</div>,
 		id       : 'name',
@@ -38,7 +38,7 @@ const SettlementKnockOffList = () => [
 				<div>
 					{formatAmount({
 						amount   :	getByKey(row, 'documentAmount') as any,
-						currency :	getByKey(row, 'currency'),
+						currency :	getByKey(row, 'currency') as string,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -57,7 +57,7 @@ const SettlementKnockOffList = () => [
 				<div>
 					{formatAmount({
 						amount   :	getByKey(row, 'settledAmount') as any,
-						currency :	getByKey(row, 'currency'),
+						currency :	getByKey(row, 'currency') as string,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -77,7 +77,7 @@ const SettlementKnockOffList = () => [
 				<div>
 					{formatAmount({
 						amount   :	getByKey(row, 'tds') as any,
-						currency :	getByKey(row, 'currency'),
+						currency :	getByKey(row, 'currency') as string,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -97,7 +97,7 @@ const SettlementKnockOffList = () => [
 				<div>
 					{formatAmount({
 						amount   :	getByKey(row, 'nostroAmount') as any,
-						currency :	getByKey(row, 'currency'),
+						currency :	getByKey(row, 'currency') as string,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -117,7 +117,7 @@ const SettlementKnockOffList = () => [
 				<div>
 					{formatAmount({
 						amount   :	getByKey(row, 'balanceAmount') as any,
-						currency :	getByKey(row, 'currency'),
+						currency :	getByKey(row, 'currency') as string,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -139,7 +139,7 @@ const SettlementKnockOffList = () => [
 		),
 	},
 	{
-		Header   : 'LAST EDITED ON',
+		Header   : 'Last edited on',
 		accessor : (row) => (
 			<div className={styles.amount}>
 				<div>{format(getByKey(row, 'lastEditedDate') as Date, 'dd MMM yy', {}, false)}</div>
@@ -160,4 +160,4 @@ const SettlementKnockOffList = () => [
 
 ];
 
-export default SettlementKnockOffList;
+export default settlementKnockOffList;

@@ -1,8 +1,8 @@
 import CONTROLS_CONFIG from '../configs/CONTROLS_CONFIG.json';
-import TabContainer from '../configs/TAB_CONFIG';
+import tabContainer from '../configs/tabContainer';
 
 const getLocalStorageVal = () => {
-	const TABS_CONFIG = TabContainer();
+	const TABS_CONFIG = tabContainer();
 	const storedValues = JSON.parse(localStorage?.getItem('document_desk_values'));
 	const documentDeskVersion = localStorage.getItem('document_desk_version');
 
@@ -19,7 +19,7 @@ const getLocalStorageVal = () => {
 	const stepperConfig = TABS_CONFIG[stepperTab];
 
 	if (!stepperConfig.some((tab) => tab.value === activeTab)) {
-		const tabConfig = stepperConfig?.[0];
+		const [tabConfig] = stepperConfig || [];
 		activeTab = tabConfig?.value || '';
 	}
 

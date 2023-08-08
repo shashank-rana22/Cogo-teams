@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/surface-modules';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
@@ -38,7 +39,7 @@ function UploadIndent({
 	});
 
 	useEffect(() => {
-		if (indentURL?.length > 0) {
+		if (!isEmpty(indentURL)) {
 			setValue('documents.0.url', {
 				fileName : `indent_note_${Date.now()}.pdf`,
 				finalUrl : indentURL,
@@ -54,15 +55,29 @@ function UploadIndent({
 			data : {},
 		};
 
-		const documents = (values.documents || []).map((documentItem) => ({
-			document_type : 'indent',
-			document_url  : documentItem?.url?.url,
-			file_name     : documentItem?.url?.name,
-			data          : {
-				url         : documentItem?.url?.url,
-				description : documentItem?.description,
-			},
-		}));
+		const documents = (values?.documents || []).map((documentItem) => {
+			if (typeof documentItem?.url === 'object') {
+				return {
+					document_type : 'indent',
+					document_url  : documentItem?.url?.finalUrl,
+					file_name     : documentItem?.url?.fileName,
+					data          : {
+						url         : documentItem?.url?.finalUrl,
+						description : documentItem?.description,
+					},
+				};
+			}
+			const file_name = (decodeURI(documentItem?.url) || '').split('/').pop();
+			return {
+				document_type : 'indent',
+				document_url  : documentItem?.url,
+				file_name,
+				data          : {
+					url         : documentItem?.url,
+					description : documentItem?.description,
+				},
+			};
+		});
 
 		payload.data.documents = documents;
 

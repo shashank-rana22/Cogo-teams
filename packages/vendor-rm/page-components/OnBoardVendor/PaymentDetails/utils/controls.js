@@ -1,5 +1,6 @@
 import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 import { IcMCloudUpload } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 const getControls = ({ country_id }) => {
 	const taxLabel = getCountrySpecificData({
@@ -9,14 +10,58 @@ const getControls = ({ country_id }) => {
 		isDefaultData : true,
 	});
 
-	const patternValue = getCountrySpecificData({
+	const patternValueRegistration = getCountrySpecificData({
 		country_id,
 		accessorType  : 'registration_number',
 		accessor      : 'pattern',
 		isDefaultData : true,
 	});
 
-	return [
+	const bankingCode = getCountrySpecificData({
+		country_id,
+		accessorType  : 'banking_code',
+		accessor      : 'financial_system_code',
+		isDefaultData : true,
+	});
+
+	const patternValueBankingCode = getCountrySpecificData({
+		country_id,
+		accessorType  : 'banking_code',
+		accessor      : 'pattern',
+		isDefaultData : true,
+	});
+
+	const controls = [
+		{
+			name        : `${bankingCode}_code`,
+			label       : `${startCase(bankingCode)} Code`,
+			type        : 'text',
+			style       : { flexBasis: '30%' },
+			maxLength   : 11,
+			placeholder : 'Select Organization Type',
+			rules       : {
+				pattern: {
+					value   : patternValueBankingCode,
+					message : `Enter a valid ${bankingCode} number`,
+				},
+			},
+		},
+		{
+			name        : 'bank_name',
+			label       : 'Bank Name',
+			style       : { flexBasis: '30%' },
+			placeholder : 'Name of the Bank',
+			rules       : { required: 'Bank Name is required' },
+
+		},
+		{
+			name        : 'branch_name',
+			label       : 'Branch Name',
+			style       : { flexBasis: '30%' },
+			placeholder : 'Type here to search',
+			rules       : { required: 'Branch Name is required' },
+
+		},
 		{
 			name        : 'account_holder_name',
 			label       : 'Account Holder Name',
@@ -43,31 +88,6 @@ const getControls = ({ country_id }) => {
 				{ label: 'Current', value: 'current' }],
 			placeholder : 'Select Account Type',
 			rules       : { required: 'Account Type is required' },
-		},
-		{
-			name        : 'ifsc_code',
-			label       : 'IFSC Code',
-			type        : 'text',
-			style       : { flexBasis: '30%' },
-			maxLength   : 11,
-			placeholder : 'Select Organization Type',
-			rules       : { required: 'Organization Type is required' },
-		},
-		{
-			name        : 'bank_name',
-			label       : 'Bank Name',
-			style       : { flexBasis: '30%' },
-			placeholder : 'Name of the Bank',
-			rules       : { required: 'Bank Name is required' },
-
-		},
-		{
-			name        : 'branch_name',
-			label       : 'Branch Name',
-			style       : { flexBasis: '30%' },
-			placeholder : 'Type here to search',
-			rules       : { required: 'Branch Name is required' },
-
 		},
 		{
 			name            : 'bank_document_url',
@@ -115,7 +135,7 @@ const getControls = ({ country_id }) => {
 			placeholder : `Enter ${taxLabel}`,
 			rules       : {
 				pattern: {
-					value   : patternValue,
+					value   : patternValueRegistration,
 					message : `Enter a valid ${taxLabel} number`,
 				},
 			},
@@ -134,6 +154,11 @@ const getControls = ({ country_id }) => {
 			uploadType      : 'aws',
 		},
 	];
+
+	return {
+		bankingCode,
+		controls,
+	};
 };
 
 export default getControls;

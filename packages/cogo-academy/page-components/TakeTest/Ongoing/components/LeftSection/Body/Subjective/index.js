@@ -1,4 +1,5 @@
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -27,7 +28,10 @@ function Subjective({
 		allow_file_upload,
 	} = question;
 
-	const { subjective_answer_text = '', subjective_file_url = null } = test_question_answers[0] || {};
+	const {
+		subjective_answer_text = '',
+		subjective_file_url = null,
+	} = test_question_answers[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	useEffect(() => {
 		setSubjectiveAnswer(
@@ -65,7 +69,7 @@ function Subjective({
 
 			<div className={styles.subjective_part}>
 				<div className={styles.question_01}>
-					<div className={styles.text}>{question_text}</div>
+					<div className={styles.text} dangerouslySetInnerHTML={{ __html: question_text }} />
 				</div>
 
 				<div>

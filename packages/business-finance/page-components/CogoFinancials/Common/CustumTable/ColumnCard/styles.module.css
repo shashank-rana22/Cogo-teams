@@ -1,0 +1,34 @@
+.flex {
+	display: flex;
+	padding-left: 12px;
+}
+
+.form {
+	display: flex;
+}
+
+.container {
+	padding: 8px 0 0 12px;
+}
+
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 16px;
+}
+
+.paddingbottom {
+	padding-bottom: 12px;
+}
+
+.background {
+	background-color: #fff;
+}
+
+.edit {
+	cursor: pointer;
+}
+
+.marginbottom {
+	margin-bottom: 10px;
+}

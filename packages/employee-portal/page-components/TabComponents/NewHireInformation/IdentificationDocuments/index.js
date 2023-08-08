@@ -81,7 +81,7 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 	});
 
 	const onSubmit = (values) => {
-		const doc = Object.keys(component).map((item) => {
+		const doc = Object.keys(values).map((item) => {
 			const docNumber = `${item}_number`;
 
 			const checkDocument = (documents || []).find((element) => (element.document_type === item));
@@ -121,11 +121,13 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 							<div className={styles.label}>
 								{label}
 
-								{status ? (
-									<Pill size="md" color={COLOR_MAPPING[status] || 'green'}>
-										{MAPPING[status]}
-									</Pill>
-								) : null}
+								<span className={styles.span}>
+									{status ? (
+										<Pill size="md" color={COLOR_MAPPING[status] || 'green'}>
+											{MAPPING[status]}
+										</Pill>
+									) : null}
+								</span>
 
 								{DOC_ARRAY.includes(controlName) && status !== 'approved' ? (
 									<sup className={styles.sup}>*</sup>

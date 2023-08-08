@@ -1,11 +1,14 @@
-import { Button, Input, ButtonIcon, Popover } from '@cogoport/components';
+import { Button, Input, ButtonIcon, Popover, Modal } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useImperativeHandle, forwardRef } from 'react';
 
 import FilterContent from './FilterContent';
+import RecordedSessions from './RecordedSessions';
 import styles from './styles.module.css';
 import useHandleSearchFilter from './useHandleSearchFilter';
+
+const DEFAULT_PAGE = 1;
 
 function SearchFilter({
 	debounceQuery, input, setInput, setParams, params, setFilters, filters, activeTab,
@@ -19,6 +22,8 @@ function SearchFilter({
 		onClickReset,
 		reset,
 		onClickCreate,
+		showRecordedSession,
+		setShowRecordedSession,
 	} = useHandleSearchFilter({ setFilters });
 
 	useImperativeHandle(ref, () => ({ reset }));
@@ -40,7 +45,7 @@ function SearchFilter({
 				onChange={(value) => {
 					setInput(value);
 					debounceQuery(value);
-					if (params.page !== 1) {
+					if (params.page !== DEFAULT_PAGE) {
 						setParams((prev) => ({ ...prev, page: 1 }));
 					}
 				}}
@@ -52,6 +57,15 @@ function SearchFilter({
 					<Button
 						type="button"
 						style={{ marginLeft: 8 }}
+						themeType="secondary"
+						onClick={() => setShowRecordedSession(true)}
+					>
+						Manage Recorded Sessions
+					</Button>
+
+					<Button
+						type="button"
+						style={{ marginLeft: 20 }}
 						themeType="primary"
 						onClick={onClickCreate}
 					>
@@ -89,6 +103,20 @@ function SearchFilter({
 					</Popover>
 				) : null}
 			</div>
+
+			<Modal
+				size="lg"
+				show={showRecordedSession}
+				onClose={() => setShowRecordedSession(false)}
+			>
+				<Modal.Header title="Manage Recorded Sessions" />
+				<Modal.Body>
+					<RecordedSessions showRecordedSession={showRecordedSession} />
+				</Modal.Body>
+				<Modal.Footer>
+					NOTE: These courses will only be visible to the following role: New Joinee Tech
+				</Modal.Footer>
+			</Modal>
 		</div>
 	);
 }

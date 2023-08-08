@@ -1,11 +1,11 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, cl } from '@cogoport/components';
 import { DatepickerController } from '@cogoport/forms';
 
 import useEditServiceSchedule from '../hooks/useEditServiceSchedule';
 
 import styles from './styles.module.css';
 
-function FormItem({ finalControl = {}, control, errors = {} }) {
+function FormItem({ finalControl = {}, control = {}, errors = {} }) {
 	const { name, label, lowerlabel, ...rest } = finalControl;
 
 	const { message: errorMessage } = errors[name] || {};
@@ -14,7 +14,7 @@ function FormItem({ finalControl = {}, control, errors = {} }) {
 
 	return (
 		<div className={styles.form_item}>
-			<div className={`${styles.label} ${required ? styles.required : ''}`}>
+			<div className={cl`${styles.label} ${required ? styles.required : ''}`}>
 				{label}
 			</div>
 
@@ -31,7 +31,7 @@ function FormItem({ finalControl = {}, control, errors = {} }) {
 	);
 }
 
-export default function EditSchedule({ setShow = () => {} }) {
+export default function EditSchedule({ setShow = () => {}, stakeholderConfig = {} }) {
 	const {
 		loading,
 		updateData,
@@ -39,7 +39,7 @@ export default function EditSchedule({ setShow = () => {} }) {
 		formSubmit,
 		errors,
 		control,
-	} = useEditServiceSchedule({ setShow });
+	} = useEditServiceSchedule({ setShow, stakeholderConfig });
 
 	const closeModal = () => setShow(false);
 

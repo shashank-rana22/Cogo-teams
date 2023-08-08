@@ -33,6 +33,7 @@ interface LineItemCardInterface {
 		billCurrency: string;
 		grandTotal: any;
 		subTotal: string | number;
+		tdsAmount: string | number;
 	};
 	setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	lineItemsRemarks: object;
@@ -40,17 +41,35 @@ interface LineItemCardInterface {
 	invoiceType?: string;
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	isInvoiceApproved: boolean;
+	shipmentType: string;
+	tdsRate: string | number;
+	paidTds: string | number;
+	subTotal: string | number;
 }
 
+const PERCENTAGE_FACTOR = 100;
+const MAX_DECIMAL_PLACES = 2;
+const DEFAULT_GRAND_TOTAL = 1;
+const DEFAULT_ZERO_VALUE = 0;
 function LineItemCard({
-	lineItems,
-	bill,
+	lineItems = [],
+	bill = {
+		taxTotal     : 0,
+		billCurrency : '',
+		grandTotal   : 0,
+		subTotal     : '' || 0,
+		tdsAmount    : 0,
+	},
 	setShowLineItem = () => {},
-	lineItemsRemarks,
-	setLineItemsRemarks,
+	lineItemsRemarks = {},
+	setLineItemsRemarks = () => {},
 	invoiceType = '',
-	setLineItem,
-	isInvoiceApproved,
+	setLineItem = () => {},
+	isInvoiceApproved = false,
+	shipmentType = '',
+	tdsRate = 0,
+	paidTds = 0,
+	subTotal = 0,
 }: LineItemCardInterface) {
 	const [approvedItems, setApprovedItems] = useState({});
 	const [popover, setPopover] = useState(false);
@@ -178,6 +197,9 @@ function LineItemCard({
 		setLineItemsRemarks({ ...lineItemsRemarks, [activeLineItem]: val });
 	};
 
+	const paidTdsPercentage = +((+paidTds / (+subTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
+		.toFixed(MAX_DECIMAL_PLACES);
+
 	return (
 		<div>
 			<div className={styles.main_header}>
@@ -248,6 +270,33 @@ function LineItemCard({
 										currencyDisplay : 'code',
 									},
 								})}
+								{shipmentType === 'ftl_freight'
+								&& (
+									<div>
+										<div className={styles.tds_amount}>
+											(Applicable  TDS
+											{' '}
+											{tdsRate}
+											% -
+											{' '}
+											{startCase(bill?.billCurrency)}
+											{' '}
+											{bill?.tdsAmount || DEFAULT_ZERO_VALUE}
+											)
+										</div>
+										<div className={styles.tds_amount}>
+											(Ded. TDS
+											{' '}
+											{paidTdsPercentage}
+											% -
+											{' '}
+											{startCase(bill?.billCurrency)}
+											{' '}
+											{paidTds || DEFAULT_ZERO_VALUE}
+											)
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>

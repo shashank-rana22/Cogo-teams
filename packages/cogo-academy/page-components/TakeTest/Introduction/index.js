@@ -1,21 +1,13 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { Image, useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 import useUpdateTestUserMapping from './useUpdateTestUserMapping';
 
 function Introduction({ setActiveState, testData = {} }) {
-	const {
-		query: { test_id },
-		user: { id: user_id },
-	} = useSelector(({ general, profile }) => ({
-		query : general.query,
-		user  : profile.user,
-	}));
-
 	const router = useRouter();
 
 	const {
@@ -28,7 +20,7 @@ function Introduction({ setActiveState, testData = {} }) {
 		guidelines = [],
 	} = testData || {};
 
-	const { passStartTime } = useUpdateTestUserMapping();
+	const { handleStartExam } = useUpdateTestUserMapping({ setActiveState });
 
 	const formatArrayValues = useMemo(
 		() => {
@@ -37,27 +29,6 @@ function Introduction({ setActiveState, testData = {} }) {
 		},
 		[set_data],
 	);
-
-	const handleStartExam = async () => {
-		await passStartTime();
-
-		setActiveState('ongoing');
-		localStorage.setItem('visibilityChangeCount', 1);
-		localStorage.setItem(
-			`current_question_${test_id}_${user_id}`,
-			1,
-		);
-
-		// const elem = document.getElementById('maincontainer');
-
-		// if (elem?.requestFullscreen) {
-		// 	elem?.requestFullscreen();
-		// } else if (elem?.webkitRequestFullscreen) { /* Safari */
-		// 	elem?.webkitRequestFullscreen();
-		// } else if (elem?.msRequestFullscreen) { /* IE11 */
-		// 	elem?.msRequestFullscreen();
-		// }
-	};
 
 	const items = [
 		`Opening test instructions during the test will lead to wastage of test time, 
@@ -92,21 +63,19 @@ function Introduction({ setActiveState, testData = {} }) {
 				</div>
 
 				<div className={styles.content}>
-					<div className={styles.content_container}>
-						<Image
-							width={18}
-							height={22}
-							className={styles.image}
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/document-svg.svg"
-							alt=""
-						/>
-
-						<div className={styles.content_text}>
+					<div className={styles.content_container_topicscovered}>
+						<div className={styles.topics_covered_container}>
+							<Image
+								width={18}
+								height={22}
+								className={styles.image}
+								src={GLOBAL_CONSTANTS.image_url.document_icon_dark_svg}
+								alt=""
+							/>
 							<div className={styles.label}>Topics Covered</div>
-							<div className={styles.value}>{formatArrayValues}</div>
 						</div>
+						<div className={styles.value}>{formatArrayValues}</div>
 					</div>
-
 					<div className={`${styles.right_content} ${styles.content_container}`}>
 						<div className={styles.content_text}>
 							<div className={styles.label}>No. of questions</div>
@@ -124,22 +93,22 @@ function Introduction({ setActiveState, testData = {} }) {
 								Subjective Questions
 							</div>
 						</div>
-						<div className={styles.content_container}>
-							<Image
-								width={18}
-								height={22}
-								className={styles.image}
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/timer-icon1.svg"
-								alt=""
-							/>
+					</div>
+					<div className={styles.content_container_duration}>
+						<Image
+							width={18}
+							height={22}
+							className={styles.image}
+							src={GLOBAL_CONSTANTS.image_url.timer}
+							alt=""
+						/>
 
-							<div className={styles.content_text}>
-								<div className={styles.label}>Duration</div>
-								<div className={styles.value}>
-									{test_duration}
-									{' '}
-									min
-								</div>
+						<div className={styles.content_text_duration}>
+							<div className={styles.label}>Duration</div>
+							<div className={styles.value_duration}>
+								{test_duration}
+								{' '}
+								min
 							</div>
 						</div>
 					</div>
@@ -183,7 +152,7 @@ function Introduction({ setActiveState, testData = {} }) {
 					Go Back
 				</Button>
 
-				<Button type="button" size="md" onClick={() => handleStartExam()}>
+				<Button type="button" size="md" onClick={handleStartExam}>
 					Begin test
 					<IcMArrowRight />
 				</Button>

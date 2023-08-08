@@ -1,0 +1,39 @@
+.buttons_container {
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+}
+
+.choose_from_wallet {
+	display: flex;
+	align-items: center;
+	padding: 10px 45px;
+	color: var(--color-secondary-2);
+	border: 1px dashed var(--color-secondary-4);
+	border-radius: 8px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.upload_wrapper {
+	padding: 0 16px;
+}
+
+.separator {
+	width: max-content;
+	margin: 16px auto;
+	font-weight: 500;
+	color: #393f70;
+}
+
+.styled_button {
+	display: flex;
+	justify-content: center;
+}
+
+.label {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}

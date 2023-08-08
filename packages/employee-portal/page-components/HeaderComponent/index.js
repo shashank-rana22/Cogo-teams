@@ -10,30 +10,50 @@ function HeaderComponent({ name }) {
 				, Welcome to Cogoport
 			</div>
 
-			<div className={styles.sub_text}>
-				Partners, Our Network is Yours!
-			</div>
+			<div className={styles.sub_text}>Partners, Our Network is Yours!</div>
 
-			<div className={styles.main_text}>
-				By partnering with Cogoport, you have invested in your growth,
-				and we will do everything in our power to support you on this journey.
-				In return, we need your
-				engagement and your judgement of the logistics industry to do better,
-				run faster and achieve big milestones. Let’s begin the journey towards improved efficiencies,
-				higher profitability and a better industry together!
-			</div>
+			<div className={styles.text_container}>
+				<div className={styles.text}>
+					I want to congratulate each and every one of you on your selection to join
+					our team! Generally, we hire only 1 out of every 100 applications; so congrats
+					once again for being a part of the selected few.
+				</div>
 
-			<div className={styles.sub_text}>
-				We are as excited as you are to grow your business multifold by next year.
-				We are solving numerous challenges associated with growing business
-				internationally such as procuring quotations from right agents,
-				recruiting experienced talent, and getting instant solutions. We bring Cogoport Partner Platform to you!
-			</div>
+				<div className={styles.text}>
+					People at Cogoport have a saying that
+					<strong>
+						<i>
+							{' '}
+							‘it is a high-paced environment with 50 different start-ups within the organization’.
+						</i>
+					</strong>
+					{' '}
+					To succeed in this environment, you must equip yourselves with the knowledge and background of
+					how global trade works, demonstrate perseverance and be a life-long learner. I urge you all to
+					focus on learning and self-training during the next two weeks, so that we can make the most of
+					our time together and engage in a high-intensity and meaningful conversation about your role at
+					Cogoport. I am certain that the team will be sending you all the necessary learning materials
+					and help you to self-assess your learnings.
+				</div>
 
-			<div className={styles.main_text}>
-				<div>Amitabh Shankar</div>
+				<div className={styles.text}>
+					To ensure that I can spend quality time with you all,
+					I am cancelling all my travel plans and meetings during the
+					first 2 days of your joining. It is up to you to make the most
+					of this time and ask me anything related to Cogoport.
+				</div>
 
-				<div>CEO - Logistics Cogoport</div>
+				<div className={styles.text}>
+					Whether we &apos;ve met or not, I&apos; m positive that you all possess
+					what it takes to succeed at Cogoport and to help us achieve our goals and grow
+					as a company. I wish you all the best in creating an impactful journey for yourself and
+					I look forward to seeing you all on Day-1.
+				</div>
+
+				<div className={styles.regards}>
+					<span>Best regards,</span>
+					<span>Amitabh Shankar</span>
+				</div>
 			</div>
 		</div>
 	);

@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import {
 	updateDoc,
@@ -15,6 +16,9 @@ import {
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
+const QUERY_LIMIT = 1;
+const DEFAULT_TIMEOUT_VALUE = 10000;
+
 const updateClaimKey = async ({ id, channel_type, firestore, value }) => {
 	const userDocument = doc(
 		firestore,
@@ -27,7 +31,7 @@ const updateClaimKey = async ({ id, channel_type, firestore, value }) => {
 	}
 };
 
-const toggleCarouselState = async ({ firestore, setShowCarousel }) => {
+const toggleCarouselState = async ({ firestore, setCarouselState }) => {
 	const omniChannelCollection = collectionGroup(firestore, 'rooms');
 	const newChatsQuery = query(
 		omniChannelCollection,
@@ -36,54 +40,63 @@ const toggleCarouselState = async ({ firestore, setShowCarousel }) => {
 		orderBy('updated_at', 'desc'),
 	);
 	const getFlashMessages = await getDocs(newChatsQuery);
-	setShowCarousel(!!getFlashMessages?.size);
+	setCarouselState(getFlashMessages?.size ? 'show' : 'hide');
 };
 
 const getTimeoutConstant = async (firestore) => {
 	const constantCollection = collection(firestore, FIRESTORE_PATH.cogoone_constants);
 
-	const constantsQuery = query(constantCollection, limit(1));
+	const constantsQuery = query(constantCollection, limit(QUERY_LIMIT));
 	const cogoOneConstants = await getDocs(constantsQuery);
 
-	const cogoOneConstantsDocs = cogoOneConstants?.docs?.[0];
-	const { flash_messages_timeout = 0 } = cogoOneConstantsDocs.data() || {};
+	const cogoOneConstantsDocs = cogoOneConstants?.docs?.[GLOBAL_CONSTANTS.zeroth_index];
+
+	const { flash_messages_timeout = 0 } = cogoOneConstantsDocs?.data?.() || {};
 
 	return flash_messages_timeout;
 };
 
-function useClaimChat({ userId, setShowCarousel, firestore }) {
+const getPayload = ({ payload, userId }) => {
+	const { user_id, lead_user_id, organization_id, mobile_no, sender = null, channel_type, id } = payload || {};
+	return {
+		channel                 : channel_type,
+		channel_chat_id         : id,
+		user_id,
+		lead_user_id,
+		whatsapp_number_eformat : mobile_no,
+		organization_id,
+		sender,
+		agent_id                : userId,
+		is_chat_claimed         : true,
+	};
+};
+
+function useClaimChat({ userId, setCarouselState, firestore }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/assign_chat',
 		method : 'post',
 	}, { manual: true, autoCancel: false });
 
 	const claimChat = async (payload) => {
-		const { user_id, lead_user_id, organization_id, mobile_no, sender = null, channel_type, id } = payload || {};
+		const { channel_type, id } = payload || {};
 		try {
-			setShowCarousel('in_timeout');
+			setCarouselState('in_timeout');
+
 			await updateClaimKey({ id, channel_type, firestore, value: false });
 			await trigger({
-				data: {
-					channel                 : channel_type,
-					channel_chat_id         : id,
-					user_id,
-					lead_user_id,
-					whatsapp_number_eformat : mobile_no,
-					organization_id,
-					sender,
-					agent_id                : userId,
-					is_chat_claimed         : true,
-				},
+				data: getPayload({ payload, userId }),
 			});
+
 			Toast.success('Claim successful! The chat has been assigned to you.');
 			const timeoutValue = await getTimeoutConstant(firestore);
+
 			setTimeout(() => {
-				toggleCarouselState({ firestore, setShowCarousel });
-			}, (timeoutValue || 10000));
+				toggleCarouselState({ firestore, setCarouselState });
+			}, (timeoutValue || DEFAULT_TIMEOUT_VALUE));
 		} catch (error) {
 			Toast.error('something went wrong');
 			await updateClaimKey({ id, channel_type, firestore, value: true });
-			toggleCarouselState({ firestore, setShowCarousel });
+			toggleCarouselState({ firestore, setCarouselState });
 		}
 	};
 	return {

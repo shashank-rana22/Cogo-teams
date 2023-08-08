@@ -9,9 +9,20 @@ const businessFinance = {
 	'/[partner_id]/business-finance/coe-finance/[active_tab]/[view]': {
 		navigation: 'business_finance-coe_finance',
 	},
-
 	'/[partner_id]/business-finance/coe-finance/cost-sheet': {
 		navigation: 'business_finance-coe_finance',
+	},
+	'/[partner_id]/business-finance/compliance/[active_tab]': {
+		navigation : 'business_finance-compliance',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/compliance/[sub_active_tab]': {
+		navigation : 'business_finance-compliance',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/compliance/view': {
+		navigation : 'business_finance-compliance',
+		isMainNav  : true,
 	},
 	'/[partner_id]/business-finance/account-receivables/[active_tab]': {
 		navigation : 'business_finance-account_receivables',
@@ -62,6 +73,10 @@ const businessFinance = {
 		navigation : 'business_finance-overheads',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/overheads/expenses': {
+		navigation : 'business_finance-overheads',
+		isMainNav  : true,
+	},
 	'/[partner_id]/business-finance/overheads/[active_tab]': {
 		navigation : 'business_finance-overheads',
 		isMainNav  : true,
@@ -75,6 +90,10 @@ const businessFinance = {
 	},
 	'/[partner_id]/business-finance/dunnings/[active_tab]': {
 		navigation : 'business_finance-dunnings',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/cogo-financials': {
+		navigation : 'business_finance-cogo_financials',
 		isMainNav  : true,
 	},
 };

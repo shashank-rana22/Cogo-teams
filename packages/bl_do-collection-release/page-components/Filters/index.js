@@ -6,12 +6,29 @@ import TAB_CONFIG from '../../configs/TAB_CONFIG.json';
 
 import styles from './styles.module.css';
 
-const trade_type_options = [
+const TRADE_TYPE_OPTIONS = [
 	{ label: 'Export', value: 'export' },
 	{ label: 'Import', value: 'import' },
 ];
 
-export default function Filters({ setStateProps, stateProps }) {
+const DOCUMENT_STATUS_OPTIONS = {
+	released:
+	[{ label: 'Released', value: 'released' },
+		{ label: 'Delivered', value: 'delivered' }],
+	surrendered:
+	[{ label: 'Pending', value: 'surrender_pending' },
+		{ label: 'Surrendered', value: 'surrendered' }],
+};
+
+const DOCUMENT_FILTER_TABS = ['surrendered', 'released'];
+
+export default function Filters({ setStateProps = () => {}, stateProps = {} }) {
+	const { inner_tab, activeTab, shipment_type, trade_type } = stateProps || {};
+
+	const showDocumentFilter = DOCUMENT_FILTER_TABS.includes(inner_tab)
+
+    && activeTab === 'bl' && shipment_type === 'fcl_freight' && trade_type === 'export';
+
 	const {
 		readyToReleaseVisible,
 		readyToCollectVisible,
@@ -24,7 +41,12 @@ export default function Filters({ setStateProps, stateProps }) {
 				{
 				TAB_CONFIG.SHIPMENT_TYPES.map((item) => (
 					<ClickableDiv
-						onClick={() => setStateProps({ ...stateProps, shipment_type: item.value, page: 1 })}
+						onClick={() => setStateProps({
+							...stateProps,
+							shipment_type   : item.value,
+							page            : 1,
+							document_status : undefined,
+						})}
 						key={item?.value}
 					>
 						<div className={cl`${stateProps.shipment_type === item.value ? styles.active : ''} 
@@ -38,11 +60,26 @@ export default function Filters({ setStateProps, stateProps }) {
 				<Select
 					value={stateProps.trade_type}
 					size="sm"
-					options={trade_type_options}
-					onChange={(val) => setStateProps({ ...stateProps, trade_type: val, page: 1 })}
+					options={TRADE_TYPE_OPTIONS}
+					onChange={(val) => setStateProps({
+						...stateProps,
+						trade_type      : val,
+						page            : 1,
+						document_status : undefined,
+					})}
 					placeholder="Trade Type"
 					className={styles.select_filter}
 				/>
+				{ showDocumentFilter ? (
+					<Select
+						value={stateProps.document_status}
+						options={DOCUMENT_STATUS_OPTIONS[inner_tab]}
+						isClearable
+						onChange={(val) => setStateProps({ ...stateProps, document_status: val, page: 1 })}
+						placeholder="Document Status"
+						className={styles.document_filter}
+					/>
+				) : null}
 
 				{readyToCollectVisible
 					? (

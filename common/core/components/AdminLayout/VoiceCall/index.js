@@ -9,7 +9,7 @@ import useOutgoingStatusCall from './hooks/useOutgoingStatusCall';
 import useUpdateLiveCallStatus from './hooks/useUpdateLiveCallStatus';
 import MinimizeCallModal from './MinimizeModal';
 
-function VoiceCall({ voice_call_recipient_data = {}, inCall = false }) {
+function VoiceCall({ voice_call_recipient_data = {}, inCall = false, firestore = {} }) {
 	const [localCallState, setLocalCallState] = useState({
 		showCallModalType    : '',
 		status               : '',
@@ -43,7 +43,7 @@ function VoiceCall({ voice_call_recipient_data = {}, inCall = false }) {
 		startSecsCounter,
 		stopSecsCounter,
 		counter,
-	} = useCloseVoiceCall({ localStateReducer, voice_call_recipient_data });
+	} = useCloseVoiceCall({ localStateReducer, voice_call_recipient_data, firestore });
 
 	const { fetchCallStatus = () => {} } = useOutgoingStatusCall({
 		setLocalCallState,

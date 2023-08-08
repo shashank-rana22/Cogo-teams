@@ -7,11 +7,19 @@ import FilterTicketsSection from '../../common/FilterTicketsSection';
 import Dashboard from './Dashboard';
 import styles from './styles.module.css';
 
+const SUBTRACT_DAYS = 6;
+
 function SuperAdmin() {
 	const [activeTab, setActiveTab] = useState('dashboard');
+	const [refreshList, setRefreshList] = useState({
+		Open      : false,
+		Pending   : false,
+		Escalated : false,
+		Closed    : false,
+	});
 	const [date, setDate] = useState({
-		startDate : subtractDays(new Date(), 7),
-		endate    : new Date(),
+		startDate : subtractDays(new Date(), SUBTRACT_DAYS),
+		endDate   : new Date(),
 	});
 
 	return (
@@ -19,7 +27,7 @@ function SuperAdmin() {
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"
-				onChange={setActiveTab}
+				onChange={(val) => setActiveTab(val)}
 				className={styles.tab_panel}
 			>
 				<TabPanel
@@ -32,15 +40,24 @@ function SuperAdmin() {
 					name="all_tickets"
 					title="All Tickets"
 				>
-					<FilterTicketsSection type="admin" />
+					<FilterTicketsSection
+						type="admin"
+						date={date}
+						refreshList={refreshList}
+						setRefreshList={setRefreshList}
+					/>
 				</TabPanel>
 			</Tabs>
 
-			{activeTab === 'dashboard' ?	(
-				<div className={styles.date_filter}>
-					<DateRangepicker name="date" onChange={setDate} value={date} isPreviousDaysAllowed />
-				</div>
-			) : null}
+			<div className={styles.date_filter}>
+				<DateRangepicker
+					name="date"
+					value={date}
+					onChange={setDate}
+					maxDate={new Date()}
+					isPreviousDaysAllowed
+				/>
+			</div>
 		</div>
 
 	);

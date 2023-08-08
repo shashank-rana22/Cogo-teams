@@ -32,7 +32,7 @@ function Header({
 						<Toggle
 							checked={showMyTasks}
 							onChange={() => {
-								setShowMyTasks(!showMyTasks);
+								setShowMyTasks((prev) => !prev);
 							}}
 						/>
 					</div>

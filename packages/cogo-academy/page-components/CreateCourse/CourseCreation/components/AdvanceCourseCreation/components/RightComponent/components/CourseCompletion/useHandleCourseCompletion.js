@@ -63,7 +63,8 @@ const useHandleCourseCompletion = ({ data, ref, state, id, activeTab }) => {
 						},
 						certificate_params: {
 							signing_authority_user_id,
-							signing_authority_sign_url: signing_authority_sign_url.finalUrl,
+							signing_authority_sign_url:
+							signing_authority_sign_url.finalUrl || signing_authority_sign_url,
 							certificate_name,
 						},
 						completion_criteria,

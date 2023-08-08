@@ -2,6 +2,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import checkErrors from './checkErrors';
 
+const START_INDEX = 0;
+
 const getStandAlonePayload = ({
 	values,
 	action,
@@ -9,30 +11,41 @@ const getStandAlonePayload = ({
 	questionSetId,
 	editDetails = {},
 	editorValue = {},
+	questionState,
+	setQuestionState,
 }) => {
 	const { question = [], topic } = values || {};
 
 	const {
 		question_type,
 		difficulty_level,
-		question_text,
 		options = [],
-	} = question?.[0] || {};
+	} = question?.[START_INDEX] || {};
 
 	if (action === 'delete') {
 		return { id: testQuestionId, status: 'inactive' };
 	}
 
-	const hasError = [];
+	const HAS_ERROR = [];
 
-	const checkError = checkErrors({ options, question_type });
+	const checkError = checkErrors({
+		options,
+		question_type,
+		hasText: questionState?.editorValue?.question_0?.getEditorState().getCurrentContent().hasText(),
+	});
 
 	if (checkError !== 'noError') {
-		hasError.push(checkError);
+		if (checkError === 'Question is required') {
+			setQuestionState((prev) => ({
+				...prev,
+				error: { question_0: true },
+			}));
+		}
+		HAS_ERROR.push(checkError);
 	}
 
-	if (!isEmpty(hasError)) {
-		return { hasError };
+	if (!isEmpty(HAS_ERROR)) {
+		return { hasError: HAS_ERROR };
 	}
 
 	const { test_question_answers = [] } = editDetails || {};
@@ -54,7 +67,8 @@ const getStandAlonePayload = ({
 		question_type,
 		topic,
 		difficulty_level,
-		question_text,
+		...(!isEmpty(questionState?.editorValue)
+			? { question_text: questionState?.editorValue?.question_0?.toString('html') } : {}),
 		...(!isEmpty(editorValue) ? { explanation: [editorValue?.question_0_explanation.toString('html')] } : {}),
 		answers,
 	};

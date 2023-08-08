@@ -4,20 +4,23 @@ import { useRouter } from '@cogoport/next';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { getCookie, setCookie } from '@cogoport/utils';
+import { getCookie, setCookie, isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import redirections from '../utils/redirections';
 
+const EMPTY_PATH = '/empty';
+
+const COOKIE_EXPIRY = -1;
+
 const useLoginAuthenticate = () => {
 	const router = useRouter();
-	const dispatch = useDispatch();
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
-	const { source = '' } = router.query || {};
+
+	const dispatch = useDispatch();
+	const { source = '', redirect_path = '' } = router.query || {};
 
 	const cogo_admin_auth_token = getCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME);
-
-	const emptyPath = '/empty';
 
 	const [{ loading: loginLoading }, trigger] = useRequest({
 		url    : '/login_user',
@@ -45,9 +48,9 @@ const useLoginAuthenticate = () => {
 				params: { parent_user_session_id: cogo_admin_auth_token },
 			});
 			if (!sessionData.hasError) {
-				if (sessionData?.data?.list?.length === 0) {
-					setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', -1);
-					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
+				if (isEmpty(sessionData?.data?.list)) {
+					setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', COOKIE_EXPIRY);
+					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', COOKIE_EXPIRY);
 				}
 			}
 		} catch (error) {
@@ -64,21 +67,24 @@ const useLoginAuthenticate = () => {
 
 	const redirectFunction = async () => {
 		const configs = redirections(profile);
+		const redirectPath = decodeURIComponent(redirect_path);
 
-		if (configs?.href?.includes('/v2')) {
+		if (redirectPath) {
+			await router.push(`${redirectPath}`);
+		} else if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
 			const replaceAs = configs?.as?.replace('/v2', '');
 			await router.push(replaceHref, replaceAs);
 		} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 			// eslint-disable-next-line no-undef
-			window.location.href = `/${profile?.partner?.id}${configs?.href || emptyPath}`;
+			window.location.href = `/${profile?.partner?.id}${configs?.href || EMPTY_PATH}`;
 		} else {
-			await router.push(configs?.href || emptyPath, configs?.as || emptyPath);
+			await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH);
 		}
 	};
 
 	useEffect(() => {
-		if (Object.keys(profile).length > 0 && source !== 'add_account') {
+		if (!isEmpty(profile) && source !== 'add_account') {
 			redirectFunction();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -143,7 +149,11 @@ const useLoginAuthenticate = () => {
 			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token);
 
 			const res = await triggerSession();
+
+			const { partner = {} } = res.data || {};
+
 			dispatch(setProfileState(res.data));
+			setCookie('parent_entity_id', partner.id);
 
 			if (source === 'add_account') {
 				// eslint-disable-next-line no-undef

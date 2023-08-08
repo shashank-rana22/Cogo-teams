@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 
 import useInvoiceDetails from '../../hooks/useGetinvoiceTimeline';
 
+import CancellationAgreement from './CancellationAgreement';
 import Poc from './POC';
 import styles from './styles.module.css';
 import Timeline from './Timeline';
@@ -201,6 +202,9 @@ function InvoiceDetails({ item }) {
 															)}
 															{label === 'UTR Number' && (
 																<UtrNumber eventData={data} />
+															)}
+															{label === 'Cancellation Agreement' && (
+																<CancellationAgreement data={data} />
 															)}
 														</div>
 													</div>

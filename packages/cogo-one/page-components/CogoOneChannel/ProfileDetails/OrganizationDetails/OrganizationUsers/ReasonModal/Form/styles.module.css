@@ -1,0 +1,11 @@
+.container {
+	:global {
+		.ui_radiogroup_container {
+			display: block;
+		}
+	}
+}
+
+.each_element {
+	width: 100%;
+}

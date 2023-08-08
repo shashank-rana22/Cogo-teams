@@ -1,10 +1,18 @@
 import { Popover, Accordion, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 import toFixed from '../../../../CreateModule/utils/toFixed';
 import QuestionCard from '../CaseStudy/QuestionCard';
 
 import styles from './styles.module.css';
+
+const MAX_ALLOWED_STRING_LENGTH = 10;
+const DECIMAL_PLACES = 2;
+
+const truncate = (str) => (str?.length > MAX_ALLOWED_STRING_LENGTH
+	? `${startCase(str.substring(GLOBAL_CONSTANTS.zeroth_index, MAX_ALLOWED_STRING_LENGTH))}...`
+	: startCase(str));
 
 function TitleComponent({
 	user_appeared_percent,
@@ -15,7 +23,6 @@ function TitleComponent({
 	question,
 	question_type,
 }) {
-	const truncate = (str) => (str?.length > 10 ? `${startCase(str.substring(0, 10))}...` : startCase(str));
 	return (
 		<div role="presentation" className={styles.container}>
 			<div className={styles.small_section}>
@@ -28,9 +35,7 @@ function TitleComponent({
 
 			</div>
 
-			<div className={styles.section}>
-				{question}
-			</div>
+			<div className={styles.section} dangerouslySetInnerHTML={{ __html: question }} />
 
 			<div className={styles.small_section}>
 				{startCase(question_type)}
@@ -44,7 +49,7 @@ function TitleComponent({
 				{students_appeared}
 				{' '}
 				(
-				{toFixed(user_appeared_percent, 2)}
+				{toFixed(user_appeared_percent, DECIMAL_PLACES)}
 				%
 				)
 			</div>

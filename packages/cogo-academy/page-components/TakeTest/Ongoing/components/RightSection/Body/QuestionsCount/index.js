@@ -1,9 +1,11 @@
-import { useSelector } from '@cogoport/store';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useContext } from 'react';
 
 import { QuestionStatsContext } from '../../../QuestionStatsContext';
 
 import styles from './styles.module.css';
+
+const FIRST_INDEX = 1;
 
 const STATS_MAPPING = {
 	answered          : '#DDEBC0',
@@ -13,14 +15,6 @@ const STATS_MAPPING = {
 };
 
 function QuestionsCount() {
-	const {
-		query: { test_id },
-		user: { id: user_id },
-	} = useSelector(({ general, profile }) => ({
-		query : general.query,
-		user  : profile.user,
-	}));
-
 	const {
 		total_question_count,
 		user_appearance = [],
@@ -32,12 +26,12 @@ function QuestionsCount() {
 	} = useContext(QuestionStatsContext);
 
 	const handleChangeQuestion = ({ index }) => {
-		if (index === 0 || data?.data?.[index - 1].answer_state !== 'not_viewed') {
-			localStorage.setItem(`current_question_${test_id}_${user_id}`, index + 1);
-			setCurrentQuestion(index + 1);
+		if (index === GLOBAL_CONSTANTS?.zeroth_index
+			|| data?.data?.[index - FIRST_INDEX].answer_state !== 'not_viewed') {
+			setCurrentQuestion(index + FIRST_INDEX);
 		}
 
-		setSubQuestion(1);
+		setSubQuestion(FIRST_INDEX);
 
 		fetchQuestions({ question_id: user_appearance?.[index]?.test_question_id });
 	};
@@ -56,12 +50,14 @@ function QuestionsCount() {
 						onClick={() => handleChangeQuestion({ index })}
 						style={{
 							backgroundColor : STATS_MAPPING[answer_state],
-							cursor          : `${(index === 0 || question?.answer_state !== 'not_viewed')
+							cursor          : `${(index === GLOBAL_CONSTANTS?.zeroth_index
+								|| question?.answer_state !== 'not_viewed')
 								? 'pointer' : 'not-allowed'}`,
 						}}
-						className={`${styles.question_count} ${Number(currentQuestion) === index + 1 && styles.active}`}
+						className={`${styles.question_count} 
+						${Number(currentQuestion) === index + FIRST_INDEX && styles.active}`}
 					>
-						{index + 1}
+						{index + FIRST_INDEX}
 					</div>
 				);
 			})}
@@ -71,9 +67,10 @@ function QuestionsCount() {
 					role="presentation"
 					style={{ backgroundColor: '#FDFBF6', cursor: 'not-allowed' }}
 					className={`${styles.question_count} ${Number(currentQuestion) - user_appearance.length
-						=== index + 1 && styles.active}`}
+						=== index + FIRST_INDEX && styles.active}`}
+					key={item}
 				>
-					{user_appearance.length + index + 1}
+					{user_appearance.length + index + FIRST_INDEX}
 				</div>
 			)) : null}
 		</div>

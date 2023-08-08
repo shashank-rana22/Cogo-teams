@@ -1,7 +1,15 @@
 import { useTicketsRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-const useGetTicketStats = () => {
+const getParams = ({ id, spectatorType }) => ({
+	PerformedByID : id,
+	SpectatorType : spectatorType,
+});
+
+const useGetTicketStats = ({ spectatorType = '' }) => {
+	const { id = '' } = useSelector((state) => state?.profile?.user);
+
 	const [{ data, loading }, trigger] = useTicketsRequest({
 		url     : '/stats',
 		method  : 'get',
@@ -10,11 +18,13 @@ const useGetTicketStats = () => {
 
 	const ticketStats = useCallback(() => {
 		try {
-			trigger();
+			trigger({
+				params: getParams({ id, spectatorType }),
+			});
 		} catch (error) {
-			console.log('error', error);
+			console.error('error', error);
 		}
-	}, [trigger]);
+	}, [id, trigger, spectatorType]);
 
 	useEffect(() => {
 		ticketStats();

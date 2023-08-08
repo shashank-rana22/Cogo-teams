@@ -1,0 +1,23 @@
+.form_container {
+	padding-left: 12px;
+	margin-top: 26px;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	margin: 20px 0;
+
+	.flex_item {
+		margin-right: 20px;
+	}
+}
+
+.item_container {
+	width: 300px;
+	margin-right: 16px;
+}
+
+.service_details {
+	font-size: var(--font-size-md);
+}

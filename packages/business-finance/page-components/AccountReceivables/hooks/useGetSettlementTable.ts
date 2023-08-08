@@ -11,7 +11,10 @@ function useGetSettlementTable(organizationId:string, entityCode?: string) {
 		query       : '',
 		accountType : 'All',
 	});
-
+	const [sort, setSort] = useState({
+		sortType : 'Desc',
+		sortBy   : 'settlementDate',
+	});
 	const { query, accountType, pageLimit, page, orgId } = settlementFilters || {};
 
 	const { debounceQuery } = useDebounceQuery();
@@ -25,9 +28,9 @@ function useGetSettlementTable(organizationId:string, entityCode?: string) {
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/payments/settlement/history',
+			url     : '/payments/settlement/list',
 			method  : 'get',
-			authKey : 'get_payments_settlement_history',
+			authKey : 'get_payments_settlement_list',
 		},
 		{ manual: true },
 	);
@@ -44,6 +47,8 @@ function useGetSettlementTable(organizationId:string, entityCode?: string) {
 							accountType : accountType || undefined,
 							query       : query || undefined,
 							entityCode  : entityCode || undefined,
+							sortBy      : sort?.sortBy || undefined,
+							sortType    : sort?.sortType || undefined,
 						},
 					});
 				} catch (e) {
@@ -52,7 +57,7 @@ function useGetSettlementTable(organizationId:string, entityCode?: string) {
 			};
 			refetch();
 		},
-		[accountType, orgId, page, pageLimit, query, trigger, entityCode],
+		[accountType, orgId, page, pageLimit, query, trigger, entityCode, sort?.sortBy, sort?.sortType],
 	);
 
 	return {
@@ -60,6 +65,8 @@ function useGetSettlementTable(organizationId:string, entityCode?: string) {
 		loading,
 		settlementFilters,
 		setSettlementFilters,
+		sort,
+		setSort,
 	};
 }
 

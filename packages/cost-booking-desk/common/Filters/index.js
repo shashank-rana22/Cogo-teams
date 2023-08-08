@@ -1,4 +1,4 @@
-import { Toggle, Popover, Button } from '@cogoport/components';
+import { Popover, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select';
 import { useState, useContext } from 'react';
@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 function Filters() {
 	const {
 		filters = {}, scopeFilters,
-		handleVersionChange = () => {}, shipmentType, stepperTab,
+		shipmentType, stepperTab,
 	} = useContext(CostBookingDeskContext);
 
 	const [popoverFilter, setPopoverFilter] = useState({ ...(filters || {}) });
@@ -52,15 +52,6 @@ function Filters() {
 					</Popover>
 				</div>
 			) : null}
-
-			<div className={styles.version}>
-				<Toggle
-					size="md"
-					onLabel="Old"
-					offLabel="New"
-					onChange={handleVersionChange}
-				/>
-			</div>
 
 			<ScopeSelect size="md" defaultValues={scopeFilters} />
 		</div>

@@ -231,7 +231,7 @@ function ChapterContent({
 								src={
 									name === 'upload_video'
 										? uploadVideoWatch.replace('/watch?v=', '/embed/')
-										: uploadDocumentWatch?.finalUrl
+										: uploadDocumentWatch?.finalUrl || uploadDocumentWatch
 								}
 								title="YouTube video player"
 								allow="accelerometer; clipboard-write;

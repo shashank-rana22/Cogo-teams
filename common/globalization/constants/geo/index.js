@@ -8,7 +8,7 @@ import VN from './VN';
 
 const { country_entity_ids } = GLOBAL_CONSTANTS;
 
-const MAPPING = {
+export const ENTITY_IDS_MAPPING = {
 	[country_entity_ids.IN] : IN,
 	[country_entity_ids.VN] : VN,
 };
@@ -18,8 +18,8 @@ const COUNTRY_ID_MAPPING = {
 	VN,
 };
 
-export const getCountryConstants = ({ country_id, isDefaultData = true }) => {
-	const countryData = getCountryDetails({ country_id });
+export const getCountryConstants = ({ country_id, country_code, isDefaultData = true }) => {
+	const countryData = getCountryDetails({ country_id, country_code });
 
 	const { country_code: countryCode } = countryData || {};
 
@@ -39,8 +39,8 @@ const getGeoConstants = () => {
 
 	const parent_entity_id = getCookie('parent_entity_id');
 
-	return MAPPING[
-		parent_entity_id in MAPPING ? parent_entity_id : country_entity_ids.IN
+	return ENTITY_IDS_MAPPING[
+		parent_entity_id in ENTITY_IDS_MAPPING ? parent_entity_id : country_entity_ids.IN
 	];
 };
 

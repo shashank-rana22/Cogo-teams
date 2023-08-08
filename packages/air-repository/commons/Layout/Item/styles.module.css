@@ -19,7 +19,7 @@
 
 			.ui_input_control::placeholder {
 				font-size: 12px;
-				color: #333;
+				color: var(--color-secondary-greyscale-3);
 			}
 		}
 
@@ -48,7 +48,7 @@
 
 					.ui_select_input_placeholder {
 						font-size: 12px;
-						color: #333;
+						color: var(--color-secondary-greyscale-3);
 					}
 				}
 			}

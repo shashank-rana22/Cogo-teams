@@ -1,0 +1,21 @@
+.styled_modal_body {
+	height: 450px;
+	max-height: unset !important;
+}
+
+.title {
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+}
+
+.message {
+	font-size: 11px;
+}
+
+.subject_name {
+	margin: 4px 4px 4px 0;
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+}

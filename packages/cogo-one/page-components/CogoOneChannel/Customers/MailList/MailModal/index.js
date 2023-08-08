@@ -1,54 +1,52 @@
-import { Toast, Modal, RTE, Input } from '@cogoport/components';
+import { Toast, Modal, RTE, Input, Select } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
-import MailRecipientType from '../../../../../common/MailRecipientType';
+import { getUserActiveMails } from '../../../../../configurations/mail-configuration';
 import { TOOLBARCONFIG } from '../../../../../constants';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
 import mailFunction from '../../../../../utils/mailFunctions';
 
 import RenderHeader from './Header';
+import Recipients from './Recipients';
 import styles from './styles.module.css';
 
 function MailModal({
-	mailProps,
+	mailProps = {},
 	userId = '',
-	attachments = [],
-	setAttachments = () => {},
 	activeMail = {},
 	replyMailApi = () => {},
-	replyLoading,
+	replyLoading = false,
 }) {
 	const {
 		buttonType,
-		emailAddress,
-		recipientArray,
+		activeMailAddress,
 		emailState,
-		bccArray,
 		setEmailState,
+		viewType,
+		userEmailAddress,
 	} = mailProps;
 
+	const uploaderRef = useRef(null);
+
 	const [showControl, setShowControl] = useState(null);
-	const [value, setValue] = useState('');
 	const [errorValue, setErrorValue] = useState('');
 	const [uploading, setUploading] = useState(false);
-
-	const uploaderRef = useRef(null);
+	const [attachments, setAttachments] = useState([]);
 
 	const {
 		handleKeyPress = () => {},
 		handleEdit = () => {},
 		handleChange = () => {},
 		handleDelete = () => {},
-		handleError = () => {},
+		handleCancel = () => {},
 		handleClose = () => {},
 		handleAttachmentDelete = () => {},
-		decode = () => {},
+		getDecodedData = () => {},
 	} = mailFunction({
 		...mailProps,
 		setErrorValue,
-		value,
-		setValue,
 		setShowControl,
 		showControl,
 		setAttachments,
@@ -56,21 +54,38 @@ function MailModal({
 		uploaderRef,
 	});
 
+	const userActiveMails = getUserActiveMails({ userEmailAddress, viewType }).map(
+		(curr) => ({ label: curr, value: curr }),
+	);
+
 	const handleSend = () => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
+
+		if (uploading) {
+			Toast.error('Files are uploading...');
+			return;
+		}
+
+		if (isEmpty(emailState?.toUserEmail)) {
+			Toast.error('To Mail is Required');
+			return;
+		}
+
 		if (isEmptyMail || !emailState?.subject) {
 			Toast.error('Both Subject and Body are Requied');
 			return;
 		}
+
 		const payload = {
-			sender       : emailAddress,
-			toUserEmail  : recipientArray,
-			ccrecipients : bccArray,
-			subject      : emailState?.subject,
-			content      : emailState?.body,
+			sender        : emailState?.from_mail || activeMailAddress,
+			toUserEmail   : emailState?.toUserEmail,
+			ccrecipients  : emailState?.ccrecipients,
+			bccrecipients : emailState?.bccrecipients,
+			subject       : emailState?.subject,
+			content       : emailState?.body,
+			msgId         : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
 			userId,
-			msgId        : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 
 		};
 		replyMailApi(payload);
@@ -92,51 +107,44 @@ function MailModal({
 					handleSend={handleSend}
 					setUploading={setUploading}
 					uploading={uploading}
+					attachments={attachments}
 					setAttachments={setAttachments}
 					handleClose={handleClose}
 					uploaderRef={uploaderRef}
+					buttonType={buttonType}
 				/>
 			)}
 			/>
 			<Modal.Body>
 				<div className={styles.type_to}>
 					<div className={styles.sub_text}>
-						To:
+						From:
 					</div>
-					<MailRecipientType
-						emailRecipientType={recipientArray}
-						handleDelete={handleDelete}
-						showControl={showControl}
-						type="recipient"
-						value={value}
-						errorValue={errorValue}
-						handleChange={handleChange}
-						handleKeyPress={handleKeyPress}
-						handleError={handleError}
-						handleEdit={handleEdit}
-					/>
-				</div>
-				<div className={styles.type_to}>
-					<div className={styles.sub_text}>
-						Cc/Bcc, From:
+					<div className={styles.select_container}>
+						<Select
+							value={emailState?.from_mail || activeMailAddress}
+							onChange={(val) => setEmailState((prev) => ({ ...prev, from_mail: val }))}
+							disabled={buttonType !== 'send_mail'}
+							options={userActiveMails}
+							size="sm"
+						/>
 					</div>
-					<MailRecipientType
-						emailRecipientType={bccArray}
-						handleDelete={handleDelete}
-						showControl={showControl}
-						type="cc_bcc"
-						value={value}
-						errorValue={errorValue}
-						handleChange={handleChange}
-						handleKeyPress={handleKeyPress}
-						handleError={handleError}
-						handleEdit={handleEdit}
-					/>
 				</div>
+				<Recipients
+					emailState={emailState}
+					handleChange={handleChange}
+					handleDelete={handleDelete}
+					handleKeyPress={handleKeyPress}
+					handleCancel={handleCancel}
+					handleEdit={handleEdit}
+					showControl={showControl}
+					errorValue={errorValue}
+					setEmailState={setEmailState}
+				/>
+
 				<div className={styles.type_to}>
 					<div className={styles.sub_text}>
 						Sub:
-						{' '}
 					</div>
 					<Input
 						value={emailState?.subject}
@@ -156,32 +164,46 @@ function MailModal({
 					/>
 
 					<div className={styles.attachments_scroll}>
-						{uploading && <div className={styles.uploading}>{uploading && 'Uploading...'}</div>}
-						{(attachments || []).map((data) => {
-							const { fileIcon = {}, uploadedFileName = '' } = decode(data) || {};
-							return (
-								<div className={styles.uploaded_files} key={uploadedFileName}>
-									<div className={styles.uploaded_files_content}>
-										{fileIcon}
-										<div className={styles.content_div}>
-											{uploadedFileName}
-										</div>
-									</div>
-									<IcMCross
-										className={styles.cross_svg}
-										onClick={(e) => {
-											e.stopPropagation();
-											handleAttachmentDelete(data);
-										}}
-									/>
-								</div>
-							);
-						})}
-					</div>
+						{uploading && (
+							<div className={styles.uploading}>
+								{uploading && 'Uploading...'}
+							</div>
+						)}
 
+						{(attachments || []).map(
+							(data) => {
+								const {
+									fileIcon = {},
+									uploadedFileName = '',
+								} = getDecodedData(data) || {};
+
+								return (
+									<div
+										className={styles.uploaded_files}
+										key={uploadedFileName}
+									>
+										<div className={styles.uploaded_files_content}>
+											{fileIcon}
+											<div className={styles.content_div}>
+												{uploadedFileName}
+											</div>
+										</div>
+										<IcMCross
+											className={styles.cross_svg}
+											onClick={(e) => {
+												e.stopPropagation();
+												handleAttachmentDelete(data);
+											}}
+										/>
+									</div>
+								);
+							},
+						)}
+					</div>
 				</div>
 			</Modal.Body>
 		</Modal>
 	);
 }
+
 export default MailModal;

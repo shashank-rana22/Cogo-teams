@@ -1,9 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import CONTROLS_CONFIG from '../config/CONTROLS_CONFIG.json';
 import TABS from '../config/TABS_CONFIG';
 
 export default function getLocalStorageVal() {
 	const storedValues = JSON.parse(localStorage?.getItem('cost_booking_desk_values' || '{}'));
-	const costBookingDeskVersion = localStorage.getItem('cost_booking_desk_version');
 
 	const { scopeFilters = {}, filters = {} } = storedValues || {};
 
@@ -17,8 +18,8 @@ export default function getLocalStorageVal() {
 	}
 
 	if (!Object.keys(TABS[shipmentType] || {})?.includes(stepperTab)) {
-		stepperTab = Object.keys(TABS[shipmentType])?.[0] || '';
-		const tabConfig = TABS[shipmentType]?.[stepperTab]?.[0];
+		stepperTab = Object.keys(TABS[shipmentType])?.[GLOBAL_CONSTANTS.zeroth_index] || '';
+		const tabConfig = TABS[shipmentType]?.[stepperTab]?.[GLOBAL_CONSTANTS.zeroth_index];
 
 		activeTab = tabConfig?.value || '';
 		filters.criticalOn = filters.criticalOn && tabConfig?.isCriticalVisible;
@@ -27,6 +28,6 @@ export default function getLocalStorageVal() {
 	if (typeof filters?.page !== 'number') filters.page = 1;
 
 	return {
-		filters, shipmentType, stepperTab, scopeFilters, costBookingDeskVersion, activeTab,
+		filters, shipmentType, stepperTab, scopeFilters, activeTab,
 	};
 }

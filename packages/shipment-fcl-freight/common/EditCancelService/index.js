@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -12,47 +12,53 @@ import styles from './styles.module.css';
 import getCanCancelService from './utils/getCanCancelService';
 import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
-
-const actionButtons = [
-	{ label: 'Edit', value: 'supplier_reallocation' },
-	{ label: 'Edit Params', value: 'edit_params' },
-	{ label: 'Cancel', value: 'cancel' },
-];
+import { getSideEffectsServices } from './utils/getSideEffectsServices';
 
 function EditCancelService({ serviceData = {} }) {
+	const user_data = useSelector((({ profile }) => profile?.user));
+	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
+
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
 	const { state, trade_type, service_type } = serviceData || {};
 
-	const user_data = useSelector((({ profile }) => profile?.user));
-	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
+	const actionButtons = [
+		{
+			label : 'Edit',
+			value : 'supplier_reallocation',
+			show  : getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder }),
+		},
+		{
+			label : 'Edit Params',
+			value : 'edit_params',
+			show  : getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder }),
+		},
+		{
+			label : 'Cancel',
+			value : 'cancel',
+			show  : getCanCancelService({ state, activeStakeholder }),
+		},
+	];
 
-	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
+	const servicesData = getSideEffectsServices({ servicesList, service_type, trade_type });
 
 	const openModal = (modalKey) => {
 		setShowModal(modalKey);
 		setShowPopover(false);
 	};
 
-	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
-	actionButtons[2].show = getCanCancelService({ state, activeStakeholder });
-
-	if (!actionButtons.some((actionButton) => actionButton.show)) {
-		return null;
-	}
+	if (!actionButtons.some((actionButton) => actionButton.show)) { return null; }
 
 	const content = actionButtons.map(({ label, value, show }) => (show ? (
-		<div
+		<Button
 			key={value}
-			role="button"
-			tabIndex={0}
+			themeType="tertiary"
 			className={styles.action_button}
 			onClick={() => openModal(value)}
 		>
 			{label}
-		</div>
+		</Button>
 	) : null));
 
 	return (

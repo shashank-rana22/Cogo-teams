@@ -5,7 +5,7 @@
 }
 
 .list_container {
-	height: 80vh;
+	height: 76vh;
 	margin-top: 10px;
 	overflow-y: auto;
 
@@ -52,7 +52,7 @@
 }
 
 .card {
-	padding: 8px 8px 8px 15px;
+	padding: 8px 8px 8px 10px;
 	margin: 5px 5px 15px;
 	background: #fff;
 	border-radius: 12px;
@@ -115,4 +115,19 @@
 .wrong_document_type {
 	font-size: 10px;
 	color: #bf291e;
+}
+
+.card_footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 3px;
+}
+
+.tag_action {
+	justify-content: space-between;
+}
+
+.shipment_id {
+	color: #6fa5ab;
 }

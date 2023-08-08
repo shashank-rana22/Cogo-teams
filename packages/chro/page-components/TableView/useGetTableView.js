@@ -23,8 +23,9 @@ function useGetTableView({ search, activeTab }) {
 		setParams((previousParams) => ({
 			...previousParams,
 			filters: {
-				q      : search,
-				status : activeTab,
+				q                          : search,
+				status                     : activeTab,
+				is_offer_letter_applicable : true,
 			},
 		}));
 	}, [activeTab, search]);

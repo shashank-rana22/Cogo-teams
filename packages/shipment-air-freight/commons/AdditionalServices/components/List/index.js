@@ -1,5 +1,6 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
@@ -14,6 +15,7 @@ import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
+import ConfirmTerminalChargeModal from './TerminalChargeModal';
 
 const LESS_PAGE_LIMIT = 8;
 const MORE_PAGE_LIMIT = 100;
@@ -23,9 +25,12 @@ function List({ isSeller = false }) {
 		ShipmentDetailContext,
 	);
 
+	const tradeType = GLOBAL_CONSTANTS.options.inco_term?.[shipment_data?.inco_term]?.trade_type;
+
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(LESS_PAGE_LIMIT);
+	const [terminalChargeModal, setTerminalChargeModal] = useState(false);
 
 	const { list: additionalServiceList, refetch, loading, totalCount } = useListShipmentAdditionalServices({
 		shipment_data,
@@ -114,6 +119,15 @@ function List({ isSeller = false }) {
 			) : null}
 
 			<div className={styles.not_added}>
+				{tradeType === 'export' ? (
+					<Button
+						onClick={() => setTerminalChargeModal(true)}
+						className={styles.terminal_charges}
+					>
+						<div className={styles.add_icon}>+</div>
+						Add Terminal Charge
+					</Button>
+				) : null}
 				<Button
 					onClick={() => setShowModal('charge_code')}
 					disabled={shipment_data?.is_job_closed}
@@ -152,8 +166,17 @@ function List({ isSeller = false }) {
 					refetch={refetch}
 					setItem={setItem}
 					closeModal={closeModal}
+					tradeType={tradeType}
 				/>
 			)}
+			{terminalChargeModal
+				? (
+					<ConfirmTerminalChargeModal
+						terminalChargeModal={terminalChargeModal}
+						setTerminalChargeModal={setTerminalChargeModal}
+						shipment_id={shipment_data?.id}
+					/>
+				) : null}
 
 		</div>
 	);

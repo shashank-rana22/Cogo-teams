@@ -11,8 +11,6 @@ import TimelineItem from './TimelineItem';
 const ADD_INDEX_TO_TIMELINE = 1;
 
 function Timeline() {
-	const [showEditSchedule, setShowEditSchedule] = useState(false);
-
 	const {
 		shipment_data,
 		primary_service,
@@ -21,6 +19,8 @@ function Timeline() {
 		timelineLoading: loading,
 		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
+
+	const [showEditSchedule, setShowEditSchedule] = useState(false);
 
 	const showEditScheduleIcon = canEditSchedule({ primary_service, stakeholderConfig });
 
@@ -33,10 +33,10 @@ function Timeline() {
 	let consecutivelyCompleted = true;
 
 	useEffect(() => {
-		if (shipment_data?.id) {
+		if (shipment_data?.id && !showEditSchedule) {
 			getShipmentTimeline();
 		}
-	}, [getShipmentTimeline, shipment_data?.id]);
+	}, [getShipmentTimeline, shipment_data?.id, showEditSchedule]);
 
 	if (loading) {
 		return (
@@ -69,7 +69,7 @@ function Timeline() {
 			) : null}
 
 			{showEditSchedule ? (
-				<EditSchedule setShow={setShowEditSchedule} />
+				<EditSchedule setShow={setShowEditSchedule} stakeholderConfig={stakeholderConfig} />
 			) : null}
 		</div>
 	);

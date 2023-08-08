@@ -1,5 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 
+const INDEX_TO_VALUE_DIFF = 1;
+
 const getChapterContent = ({ values, editorValue, assessmentValue }) => {
 	const {
 		content_type = '',
@@ -21,10 +23,10 @@ const getChapterContent = ({ values, editorValue, assessmentValue }) => {
 	}
 
 	if (content_type === 'document') {
-		return upload_document.finalUrl;
+		return upload_document.finalUrl || upload_document;
 	}
 
-	return upload_presentation.finalUrl;
+	return upload_presentation.finalUrl || upload_presentation;
 };
 
 const getModulePayload = ({ values, course_id, isNew, nodeIndex, moduleId, action_type }) => {
@@ -38,7 +40,7 @@ const getModulePayload = ({ values, course_id, isNew, nodeIndex, moduleId, actio
 	return {
 		...values,
 		...(isNew ? { course_id } : { cogo_academy_course_id: course_id, id: moduleId }),
-		sequence_order: nodeIndex + 1,
+		sequence_order: nodeIndex + INDEX_TO_VALUE_DIFF,
 	};
 };
 
@@ -53,7 +55,7 @@ const getSubModulePayload = ({ values, course_id, isNew, nodeIndex, subModuleId,
 	return {
 		...values,
 		...(isNew ? { course_module_id } : { cogo_academy_course_id: course_id, id: subModuleId }),
-		sequence_order: nodeIndex + 1,
+		sequence_order: nodeIndex + INDEX_TO_VALUE_DIFF,
 	};
 };
 
@@ -87,7 +89,7 @@ const getChapterPayload = ({
 	if (!additionalResourcesWatch && upload_file) {
 		chapter_attachments = [
 			{
-				media_url : upload_file.finalUrl,
+				media_url : upload_file.finalUrl || upload_file,
 				type      : 'downloadable_resource',
 				name      : upload_file.fileName,
 				status    : 'active',
@@ -108,7 +110,7 @@ const getChapterPayload = ({
 	return {
 		...values,
 		course_sub_module_id,
-		sequence_order            : index + 1,
+		sequence_order            : index + INDEX_TO_VALUE_DIFF,
 		chapter_content           : getChapterContent({ values, editorValue, assessmentValue }),
 		completion_duration_value : Number(completion_duration_value),
 		additional_resources      : undefined,

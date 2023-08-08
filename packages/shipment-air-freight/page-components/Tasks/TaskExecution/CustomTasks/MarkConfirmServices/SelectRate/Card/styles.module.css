@@ -30,7 +30,6 @@
 .heading {
 	margin: 0;
 	margin-bottom: 4px;
-	font-size: 14px;
 	font-weight: 500;
 	line-height: 16px;
 	color: #333;
@@ -38,11 +37,17 @@
 
 .sub_heading {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	margin: 0;
 	font-size: 12px;
-	line-height: 14px;
 	color: #333;
+
+	:global {
+		.ui_button_container {
+			height: 20px;
+			padding: 0;
+		}
+	}
 }
 
 .space_between {
@@ -64,4 +69,12 @@
 
 .custom_button {
 	width: 100px;
+}
+
+.secondary_heading {
+	max-width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
 }

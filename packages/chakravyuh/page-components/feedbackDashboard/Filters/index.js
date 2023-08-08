@@ -31,12 +31,12 @@ const getCommodityOptions = (container_type) => {
 
 function Filters({ filters, setFilters }) {
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type:TYPE } },
+		params   : { filters: { type: TYPE } },
 		includes : { default_params_required: true },
 		labelKey : 'display_name',
 	}));
 	const originDestinationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type:TYPE } },
+		params   : { filters: { type: TYPE } },
 		labelKey : 'display_name',
 	}));
 

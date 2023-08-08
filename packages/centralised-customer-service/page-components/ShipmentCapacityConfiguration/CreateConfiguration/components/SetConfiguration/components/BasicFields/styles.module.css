@@ -1,0 +1,19 @@
+.control_item {
+	width: 50%;
+	margin-bottom: 30px;
+}
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.label {
+	margin-bottom: 4px;
+}
+
+.sup {
+	color: #f00;
+}

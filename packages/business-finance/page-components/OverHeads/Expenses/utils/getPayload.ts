@@ -1,4 +1,5 @@
-import { formatDate } from '../../../commons/utils/formatDate';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 const getPayload = ({
 	vendorID,
@@ -45,7 +46,6 @@ const getPayload = ({
 	vendorCountryId,
 	vendorRegistrationNumber,
 	expenseCategory,
-	expenseSubCategory,
 	stakeholderEmail,
 	stakeholderId,
 	stakeholderName,
@@ -53,12 +53,14 @@ const getPayload = ({
 	lineItemsList,
 	expenseType,
 	expenseConfigurationId,
+	remarks,
+	categoryName,
 }) => {
-	const lineItemsData = (lineItemsList || []).map((lineItem:any) => {
+	const lineItemsData = (lineItemsList || []).map((lineItem: any) => {
 		if (lineItem?.tax) {
-			const { code, serviceName, productCode } = JSON.parse(lineItem?.tax) || {};
+			const { code, serviceName, productCode } =				JSON.parse(lineItem?.tax) || {};
 
-			return ({
+			return {
 				unit                : '',
 				price               : lineItem?.amount_before_tax,
 				name                : lineItem?.itemName,
@@ -73,11 +75,11 @@ const getPayload = ({
 				currencyCode        : invoiceCurrency,
 				lineItemAdditional  : {
 					taxPercent : JSON.parse(lineItem?.tax || '{}')?.taxPercent,
-					totalPrice : '',
-					tdsAmount  : lineItem?.tds,
+					tdsAmount  : lineItem?.tdsAmount,
+					tdsPercent : lineItem?.tds,
 				},
 				createdBy: profile?.user?.id,
-			});
+			};
 		}
 		return null;
 	});
@@ -103,7 +105,13 @@ const getPayload = ({
 				serviceProviderType : 'vendor',
 				createdBy           : profile?.user?.id,
 				bill                : {
-					billDate           : formatDate(invoiceDate, 'yyyy-MM-dd hh:mm:ss', {}, false),
+					billDate: formatDate({
+						date       : invoiceDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+						formatType : 'dateTime',
+						separator  : ' ',
+					}),
 					remarks            : '',
 					ledgerExchangeRate : null,
 					billType           : 'EXPENSE',
@@ -118,27 +126,32 @@ const getPayload = ({
 					billDocumentUrl    : uploadedInvoice,
 					billNumber         : invoiceNumber,
 				},
-				sellerDetail: { // tradeParty
+				sellerDetail: {
+					// tradeParty
 					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
 					entityCode           : entityCodeTradeParty,
 					entityCodeId         : entityIdTradeParty,
 					organizationId       : orgIdTradeParty,
 					organizationSerialId : sidTradeParty,
-					isTaxApplicable      : isTaxApplicable === null ? true : isTaxApplicable,
-					isSez                : false,
-					organizationName     : nameTradeParty,
+					isTaxApplicable:
+						isTaxApplicable === null ? true : isTaxApplicable,
+					isSez              : false,
+					organizationName   : nameTradeParty,
 					pincode,
-					address              : cityName,
+					address            : cityName,
 					cityName,
-					supplyAgent          : nameTradeParty,
-					zone                 : 'EAST',
-					countryName          : countryNameTradeParty,
-					countryCode          : countryCodeTradeParty,
-					countryId            : countryIdTradeParty,
-					registrationNumber   : registrationType === 'pan' ? registrationNumberTradeParty : null,
-					taxNumber            : registrationType === 'tax' ? registrationNumberTradeParty : null,
-					tdsRate              : tdsTradeParty || 1,
-					bankDetail           : {
+					supplyAgent        : nameTradeParty,
+					zone               : 'EAST',
+					countryName        : countryNameTradeParty,
+					countryCode        : countryCodeTradeParty,
+					countryId          : countryIdTradeParty,
+					registrationNumber : registrationNumberTradeParty,
+					taxNumber:
+						registrationType === 'tax'
+							? registrationNumberTradeParty
+							: null,
+					tdsRate    : tdsTradeParty || 1,
+					bankDetail : {
 						bankName,
 						beneficiaryName: bankName,
 						ifscCode,
@@ -147,7 +160,8 @@ const getPayload = ({
 						collectionPartyId,
 					},
 				},
-				buyerDetails: { // cogo entity
+				buyerDetails: {
+					// cogo entity
 					entityCode,
 					organizationId          : id,
 					organizationSerialId    : serialId,
@@ -166,7 +180,8 @@ const getPayload = ({
 					corporateIdentityNumber : cin,
 					tdsRate                 : 0,
 				},
-				serviceProviderDetail: { // vendor
+				serviceProviderDetail: {
+					// vendor
 					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
 					entityCode,
 					entityCodeId         : vendorCogoEntityId,
@@ -190,18 +205,22 @@ const getPayload = ({
 			createdBy           : profile?.user?.id,
 			performedByUserType : 'AGENT',
 		},
-		category       : expenseCategory?.toUpperCase(),
-		subCategory    : expenseSubCategory?.toUpperCase(),
+		categoryId     : expenseCategory,
 		approvedByUser : {
 			userEmail : stakeholderEmail,
 			userId    : stakeholderId,
 			userName  : stakeholderName,
 		},
 		expenseType,
-		branchId  : addressData?.branchId,
-		kycStatus : kycStatus?.toUpperCase(),
-		pan       : vendorRegistrationNumber,
-		createdBy : profile?.user?.id,
+		branchName,
+		categoryName,
+		incidentSubType : categoryName,
+		branchId        : addressData?.branchId,
+		kycStatus       : kycStatus?.toUpperCase(),
+		pan             : vendorRegistrationNumber,
+		remarks,
+		documents       : uploadedInvoice,
+		createdBy       : profile?.user?.id,
 	};
 };
 

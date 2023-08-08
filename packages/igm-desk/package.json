@@ -1,0 +1,19 @@
+{
+  "name": "@cogoport/igm-desk",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Package for IGM Desk for all shipment types",
+  "main": "index.js",
+  "dependencies": {
+    "@cogoport/components": "^1.0.390",
+    "@cogoport/core": "workspace:^0.1.0",
+    "@cogoport/globalization": "workspace:^0.0.1",
+    "@cogoport/icons-react": "^1.0.61",
+    "@cogoport/next": "workspace:^0.1.0",
+    "@cogoport/request": "workspace:^0.1.0",
+    "@cogoport/store": "workspace:^0.1.0",
+    "@cogoport/utils": "^1.2.6",
+    "react": "18.2.0",
+    "@cogoport/ocean-modules": "workspace:^0.1.0"
+  }
+}

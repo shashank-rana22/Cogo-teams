@@ -1,4 +1,5 @@
 import { Placeholder, Tooltip, Select } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -18,6 +19,8 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 		setDateFilter, optionsVal,
 	} = useGetInvoiceJourney({ filterValue, entityCode });
 
+	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+
 	const {
 		draftInvoicesCount, financeAcceptedInvoiceCount,
 		irnGeneratedInvoicesCount, settledInvoicesCount, tatHoursFromDraftToFinanceAccepted,
@@ -26,28 +29,28 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 	} = journeyData || {};
 
 	const getCircleData = [
-		{
-			number : draftInvoicesCount || 0,
-			label  : 'Draft',
-		},
-		{ number: financeAcceptedInvoiceCount || 0, label: 'Finance Accepted' },
-		{ number: irnGeneratedInvoicesCount || 0, label: 'IRN Generated' },
-		{ number: settledInvoicesCount || 0, label: 'Settled' },
+		{ id: 1, number: draftInvoicesCount || 0, label: 'Draft' },
+		{ id: 2, number: financeAcceptedInvoiceCount || 0, label: 'Finance Accepted' },
+		{ id: 3, number: irnGeneratedInvoicesCount || 0, label: `${irnLabel} Generated` },
+		{ id: 4, number: settledInvoicesCount || 0, label: 'Settled' },
 	];
 
 	const getTatData = [
 		{
+			id    : 1,
 			label : 'Draft - Finance Accepted',
 			TAT   : `${tatHoursFromDraftToFinanceAccepted || 0} Hours `,
 			Count : financeAcceptedInvoiceEventCount || 0,
 		},
 		{
-			label : 'Finance Accepted - IRN Generated',
+			id    : 2,
+			label : `Finance Accepted - ${irnLabel} Generated`,
 			TAT   : `${tatHoursFromFinanceAcceptedToIrnGenerated || 0} Hours `,
 			Count : irnGeneratedInvoiceEventCount || 0,
 		},
 		{
-			label : 'IRN Generated - Settled ',
+			id    : 3,
+			label : `${irnLabel} Generated - Settled `,
 			TAT   : `${tatHoursFromIrnGeneratedToSettled || 0} Hours `,
 			Count : settledInvoiceEventCount || 0,
 		},
@@ -89,9 +92,9 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 						<div className={styles.invoice_journey_loader}>
 
-							{	[1, 2, 3, 4].map(() => (
+							{	[1, 2, 3, 4].map((item) => (
 
-								<Placeholder className={styles.invoice_loader} />
+								<Placeholder key={item} className={styles.invoice_loader} />
 
 							))}
 
@@ -103,7 +106,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 						<div className={styles.sub_container}>
 
 							{ getCircleData.map((item) => (
-								<div className={styles.column_flex}>
+								<div key={item.id} className={styles.column_flex}>
 									<div className={styles.circle}>
 										<div className={styles.number}>{item?.number}</div>
 									</div>
@@ -143,9 +146,9 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 						<div className={styles.invoice_tat_loader}>
 
-							{	[1, 2, 3].map(() => (
+							{	[1, 2, 3].map((item) => (
 
-								<Placeholder className={styles.invoice_tat_placeholder} />
+								<Placeholder key={item} className={styles.invoice_tat_placeholder} />
 
 							))}
 
@@ -156,7 +159,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 					: (
 						<div className={styles.sub_tat_container}>
 							{getTatData.map((item) => (
-								<div className={styles.tat_data}>
+								<div key={item.id} className={styles.tat_data}>
 									<div className={styles.text_padding}>{item?.label}</div>
 									<div className={styles.tat_flex}>
 										<div className={styles.border_tat} />

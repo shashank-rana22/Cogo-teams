@@ -1,15 +1,23 @@
 import { cl, Placeholder, Pagination } from '@cogoport/components';
-import { IcMPlusInCircle, IcMDefault, IcMRefresh } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMPlusInCircle, IcMTicket, IcMRefresh } from '@cogoport/icons-react';
+import { useRouter, Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import useCreateTicketActivity from '../../../../hooks/useCreateTicketActivity';
 
 import EachTicket from './EachTicket';
 import styles from './styles.module.css';
+import TicketLoader from './TicketLoader';
+
+const PAGE_LIMIT = 10;
+const DEFAULT_STAT_COUNT = 0;
+const PAGE_COUNT = 1;
 
 function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
-	const router = useRouter();
+	const { query } = useRouter();
+	const { partner_id: partnerId = '' } = query || {};
+
 	const {
 		statsLoading,
 		ticketData,
@@ -37,7 +45,7 @@ function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
 			title     : 'Tickets to Follow up',
 			value     : Unresolved,
 			key       : 'unresolved',
-			iconColor : '#FEF199',
+			iconColor : '#fcdc00',
 		},
 		{
 			title     : 'Tickets Closed',
@@ -55,44 +63,41 @@ function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
 	const { items = [], page = 0, size = 0, total = 0	} = ticketData || {};
 
 	const handleCardClick = (id) => {
-		const URL = `${window.location.origin}/${router?.query?.partner_id}/ticket-management/dashboard/${id}`;
-		window.open(URL, '_blank');
+		const redirectUrl = `${window.location.origin}/v2/${partnerId}/ticket-management/my-tickets?ticket_id=${id}`;
+		window.open(redirectUrl, '_blank');
 	};
+
 	const refetchLoading = statsLoading || listLoading;
 	if (!isUserOnboarded) {
 		return (
 			<div className={styles.loader}>
-				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png"
-					size="180px"
-					alt="anonymous"
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.ticket_not_created}
+					width={200}
+					height={200}
+					alt="ticket not created"
 				/>
 				<div className={styles.anonymous_user}>
 					Ticket cannot be created as this user is not onboarded
-					<span tabIndex={0} role="button" onClick={() => setActiveSelect('profile')}>Click here</span>
+					<span role="presentation" onClick={() => setActiveSelect('profile')}>Click here</span>
 				</div>
 			</div>
 		);
 	}
+
 	const renderTickets = () => {
 		if (listLoading) {
-			return (
-				<div className={styles.loader}>
-					<img
-						className={styles.loader_styles}
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg"
-						alt="load"
-					/>
-				</div>
-			);
+			return <TicketLoader />;
 		}
 		if (isEmpty(items)) {
 			return (
 				<div className={styles.loader}>
-					<img
+					<Image
 						className={styles.empty_state}
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/docs_empty_state.png"
+						src={GLOBAL_CONSTANTS.image_url.ticket_not_found}
 						alt="empty state"
+						width={150}
+						height={100}
 
 					/>
 					<div className={styles.no_tickets}>No Tickets Found</div>
@@ -101,6 +106,7 @@ function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
 		}
 		return items?.map((eachTicket) => (
 			<EachTicket
+				key={eachTicket.ID}
 				eachTicket={eachTicket}
 				loading={listLoading}
 				createTicketActivity={createTicketActivity}
@@ -130,40 +136,43 @@ function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
 			<div className={styles.stats_div}>
 				{STATS_MAPPING.map((eachStat) => (
 					<div
+						role="presentation"
 						className={
 							cl`${styles.individual_stats} 
 							${eachStat?.key === filter ? styles.selected_tab : ''}`
 						}
 						key={eachStat?.key}
+						onClick={() => setFilter(eachStat?.key)}
 					>
-						{!statsLoading ? (
-							<div
-								tabIndex={0}
-								role="button"
-								onClick={() => setFilter(eachStat?.key)}
-								className={styles.stats_container_styles}
-							>
-								<IcMDefault className={styles.tag_container} fill={eachStat?.iconColor} />
-								<div className={styles.ticket_count}>
-									{eachStat.value || 0}
-								</div>
-								<div className={styles.lower_title}>
-									{eachStat.title || '-'}
-								</div>
-							</div>
-						) : <Placeholder height="90px" width="100%" />}
+						{statsLoading ? (
+							<Placeholder width="100%" height="70px" className={styles.placeholder_container} />
+						)
+							: (
+								<>
+									<IcMTicket className={styles.tag_container} fill={eachStat?.iconColor} />
+									<div className={styles.ticket_count}>
+										{eachStat.value || DEFAULT_STAT_COUNT}
+									</div>
+									<div className={styles.lower_title}>
+										{eachStat.title || '-'}
+									</div>
+								</>
+							)}
 					</div>
 				))}
 			</div>
 			<div className={styles.list_container}>{renderTickets()}</div>
-			<Pagination
-				className={styles.pagination_container}
-				type="page"
-				currentPage={page + 1}
-				totalItems={total}
-				pageSize={size}
-				onPageChange={setPagination}
-			/>
+
+			{total > PAGE_LIMIT && (
+				<Pagination
+					className={styles.pagination_container}
+					type="page"
+					currentPage={page + PAGE_COUNT}
+					totalItems={total}
+					pageSize={size}
+					onPageChange={setPagination}
+				/>
+			)}
 		</div>
 	);
 }
