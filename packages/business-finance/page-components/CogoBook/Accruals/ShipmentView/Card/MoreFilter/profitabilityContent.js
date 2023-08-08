@@ -1,21 +1,14 @@
-import { Button, Select, RadioGroup, Input } from '@cogoport/components';
+import { Select, RadioGroup, Input } from '@cogoport/components';
 
-import { FilterInterface } from '../../../interface';
-import { optionsData, optionsJobData, optionsRadio } from '../../constant';
+import { optionsData, optionsRadio } from '../../constant.tsx';
 
 import styles from './styles.module.css';
 
-interface MoreFilterInterface {
-	filters:FilterInterface
-	setFilters: React.Dispatch<React.SetStateAction<FilterInterface>>
-	profitNumber?:string
-	setProfitNumber: React.Dispatch<React.SetStateAction<string>>
-	setMoreFilter: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMoreFilter }:MoreFilterInterface) {
+function ProfitabilityContent({
+	setFilters, filters,
+	setProfitNumber, profitNumber,
+}) {
 	const { profitType = '', range = '' } = filters || {};
-
 	const getPlaceHolder = () => {
 		if (profitType === 'percentage' && range === '<=x=<') {
 			return 'To Percentage';
@@ -38,21 +31,20 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 				<RadioGroup
 					options={optionsRadio}
 					value={profitType}
-					onChange={(item:string) => {
+					onChange={(item) => {
 						setFilters((prev) => ({ ...prev, profitType: item }));
 						setProfitNumber('');
 					}}
 				/>
 			</div>
 
-			<div>
+			<div style={{ maxWidth: '80%' }}>
 				<Select
 					value={range}
-					onChange={(val:string) => { setFilters((prev) => ({ ...prev, range: val })); }}
+					onChange={(val) => { setFilters((prev) => ({ ...prev, range: val })); }}
 					placeholder="All"
 					options={optionsData}
 					isClearable
-					style={{ width: '300px' }}
 					size="sm"
 				/>
 			</div>
@@ -63,7 +55,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 						className="primary md"
 						placeholder={profitType === 'amount' ? 'From Amount' : 'From Percentage'}
 						value={filters?.profitAmountUpper || filters?.profitPercentUpper || ''}
-						onChange={(e:string) => {
+						onChange={(e) => {
 							if (profitType === 'amount') {
 								setFilters((prev) => ({
 									...prev,
@@ -90,7 +82,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 					className="primary md"
 					placeholder={getPlaceHolder()}
 					value={profitNumber || ''}
-					onChange={(e:string) => {
+					onChange={(e) => {
 						setProfitNumber(e);
 						if (profitType === 'amount') {
 							setFilters((prev) => ({
@@ -113,52 +105,8 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 
 		</div>
 	);
-
 	return (
-		<div>
-			<div className={styles.select_container}>
-				<Select
-					size="sm"
-					value={filters?.jobState}
-					onChange={(val:string) => { setFilters((prev) => ({ ...prev, jobState: val })); }}
-					placeholder="Job Type"
-					options={optionsJobData}
-					isClearable
-				/>
-			</div>
-
-			<div className={styles.profit_hr}>
-				{' '}
-				<div className={styles.profit}> Profitability</div>
-
-				{' '}
-				<div className={styles.hr} />
-			</div>
-
-			{content()}
-
-			<div className={styles.button_container}>
-				<Button
-					size="md"
-					themeType="secondary"
-					onClick={() => {
-						setFilters((prev) => ({
-							...prev,
-							range         : '',
-							profitAmount  : '',
-							profitPercent : '',
-							profitType    : '',
-							jobState      : '',
-						}));
-						setProfitNumber('');
-					}}
-				>
-					Reset
-
-				</Button>
-				<Button size="md" onClick={() => { setMoreFilter(false); }}>Apply</Button>
-			</div>
-		</div>
+		content()
 	);
 }
-export default MoreFilter;
+export default ProfitabilityContent;

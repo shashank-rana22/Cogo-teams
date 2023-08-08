@@ -153,9 +153,9 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			return;
 		}
 		if (year && month && viewSelected === false) {
-			refetch();
+			// refetch();
 		}
-	}, [refetch, query, page, sortType, sortBy, year, month, viewSelected]);
+	}, [query, page, sortType, sortBy, year, month, viewSelected]);
 
 	const {
 		pageNo: pageNos = 0,

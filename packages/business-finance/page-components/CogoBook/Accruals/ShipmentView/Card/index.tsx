@@ -1,22 +1,16 @@
 import { SingleDateRange, Button, Popover, Select, Tooltip, Input } from '@cogoport/components';
-// Chips
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
-// import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-// import SelectAccrual from '../../../../commons/SelectAccrual';
 import { CHANNEL_OPTIONS } from '../../constant';
-// getEntityOptions
 import { FilterInterface } from '../../interface';
 import { optionsMonth, optionsYear } from '../constant';
 
-// optionsShipment optionsPills optionSelect
-import MoreFilter from './MoreFilter';
-// import OptionSelect from './OptionSelect';
+import MoreFilter from './MoreFilter/index';
 import styles from './styles.module.css';
 
 interface CardInterface {
-	refetch:()=>{ }
+	refetch:Function
 	filters:FilterInterface
 	shipmentLoading?:boolean
 	setFilters: React.Dispatch<React.SetStateAction<FilterInterface>>
@@ -28,23 +22,16 @@ interface CardInterface {
 }
 
 function Card({
-	refetch, filters, setFilters, shipmentLoading, setViewSelected,
-	setShowBtn, setCheckedRows, setPayload, isApplyEnable,
+	refetch = () => {}, filters = {}, setFilters = () => {},
+	shipmentLoading = false, setViewSelected = () => {},
+	setShowBtn = () => {}, setCheckedRows = () => {},
+	setPayload = () => {},
+	isApplyEnable = false,
 }:CardInterface) {
-	const [selectFilter, setSelectFilter] = useState(false);
-
 	const [moreFilter, setMoreFilter] = useState(false);
 	const [profitNumber, setProfitNumber] = useState('');
 
 	const { jobState, range, profitPercent, query, channel } = filters || {};
-
-	// const handleSelectChange = (val:string) => {
-	// 	setFilters((prev) => ({ ...prev, service: val }));
-	// 	setSelectFilter(false);
-	// };
-
-	// const entityOptions = getEntityOptions() as any;
-	console.log(selectFilter, 'selectFilter');
 
 	useEffect(() => {
 		let count = 0;
@@ -67,36 +54,16 @@ function Card({
 		});
 	}, [filters, setShowBtn, setViewSelected]);
 
-	// const content = () => (
-	// 	<div className={styles.content_container}>
-	// 		<div className={styles.chips}>
-	// 			<Chips
-	// 				size="md"
-	// 				items={optionsPills}
-	// 				selectedItems={filters?.tradeType}
-	// 				onItemChange={(val) => { setFilters((prev) => ({ ...prev, tradeType: val })); }}
-	// 			/>
-	// 		</div>
-	// 		{(optionSelect || []).map((option) => (
-	// 			<OptionSelect
-	// 				key={option.label}
-	// 				data={option}
-	// 				handleSelectChange={handleSelectChange}
-	// 			/>
-	// 		))}
-	// 	</div>
-	// );
-
 	const contentMoreFilter = () => (
 		<MoreFilter
 			profitNumber={profitNumber}
 			setProfitNumber={setProfitNumber}
-			setFilters={setFilters}
-			setMoreFilter={setMoreFilter}
 			filters={filters}
+			setFilters={setFilters}
 		/>
+
 	);
-	const rest = { onClickOutside: () => { setSelectFilter(false); setMoreFilter(false); } };
+	const rest = { onClickOutside: () => { setMoreFilter(false); } };
 
 	const onSubmit = () => {
 		setPayload([]);
@@ -112,7 +79,6 @@ function Card({
 	const isDateRangeEnabled =	monthYear[0]?.length > 0 && typeof monthYear[1] === 'string';
 	const maxDate = new Date(monthYear[0], monthYear[1], 10);
 	const minDate = new Date(monthYear[0], monthYear[1] - 1, 1);
-	console.log(filters, 'filtercardx');
 
 	return (
 		<div className={styles.container}>
@@ -244,47 +210,6 @@ function Card({
 							style={{ padding: '4px' }}
 						/>
 					</div>
-					{/* <Select
-						value={filters?.entity}
-						onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
-						placeholder="Entity"
-						options={entityOptions}
-						isClearable
-						style={{ width: '100px' }}
-						size="sm"
-					/> */}
-
-					{/* <Popover
-						placement="bottom"
-						caret={false}
-						render={content()}
-						visible={selectFilter}
-						{...rest}
-					>
-						<div
-							className={styles.select_popover}
-							onClick={() => { setSelectFilter(!selectFilter); }}
-							role="presentation"
-						>
-							<SelectAccrual
-								value={startCase(filters?.service)}
-								placeholder="Service"
-								setFilters={setFilters}
-							/>
-						</div>
-
-					</Popover> */}
-
-					{/* <Select
-						value={filters?.shipmentType}
-						onChange={(val:string) => { setFilters((prev) => ({ ...prev, shipmentType: val })); }}
-						placeholder="Shipment Type"
-						options={optionsShipment}
-						isClearable
-						style={{ width: '176px' }}
-						size="sm"
-					/> */}
-
 				</div>
 			</div>
 			<div className={styles.more_filter}>
