@@ -107,8 +107,6 @@ function Messages({
 	const activeCardId = activeTab?.data?.id;
 	const activeChannelType = activeTab?.data?.channel_type;
 
-	const { actionType = '' } = mailActions || {};
-
 	const commonProps = {
 		firestore,
 		formattedData,
@@ -122,6 +120,8 @@ function Messages({
 		assignChat,
 		activeMessageCard: activeTab?.data,
 	};
+
+	const { actionType = '' } = mailActions || {};
 
 	useEffect(() => {
 		mountActiveRoomSnapShot({
