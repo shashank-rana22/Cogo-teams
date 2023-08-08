@@ -21,32 +21,6 @@ export const optionsMonth = (getMonth || [{}]).map((item: string, index: number)
 	return options;
 });
 
-export const optionsShipment = [
-	{ value: 'SHIPMENT', label: 'Shipment' },
-	{ value: 'MANUAL', label: 'Manual' },
-];
-
-export const optionsPills = [
-	{ key: 'IMPORT', children: 'Import' },
-	{ key: 'EXPORT', children: 'Export' },
-	{ key: 'LOCAL', children: 'Local' },
-	{ key: 'DOMESTIC', children: 'Domestic' },
-];
-export const optionSelect = [
-	{ value: 'FCL_FREIGHT', label: 'FCL Freight' },
-	{ value: 'LCL_FREIGHT', label: 'LCL Freight' },
-	{ value: 'AIR_FREIGHT', label: 'AIR Freight' },
-	{
-		value : 'TRAILER_FREIGHT',
-		label : 'Container Transportation',
-	},
-	{ value: 'FTL_FREIGHT', label: 'FTL Freight' },
-	{ value: 'LTL_FREIGHT', label: 'LTL Freight' },
-	{ value: 'HAULAGE_FREIGHT', label: 'Rail Haulage' },
-	{ value: 'FCL_CUSTOMS', label: 'FCL Customs' },
-	{ value: 'LCL_CUSTOMS', label: 'LCL Customs' },
-	{ value: 'AIR_CUSTOMS', label: 'AIR Customs' },
-];
 export const optionsRadio = [
 	{
 		label : 'By Amount',
@@ -83,20 +57,6 @@ export const optionsData = [
 	},
 ];
 
-export const optionsJobData = [
-	{
-		label : 'Open',
-		value : 'OPEN',
-	},
-	{
-		label : ' Operationally Closed ',
-		value : 'OPERATIONALLY_CLOSED',
-	},
-	{
-		label : 'Financially Closed',
-		value : 'FINANCIALLY_CLOSED',
-	},
-];
 const content = (purchaseInvoicesCount, salesInvoicesCount) => {
 	const { creditNoteCount = '', invoiceCount = '', proformaCount = ''	} = purchaseInvoicesCount || {};
 	const {
@@ -228,19 +188,19 @@ export const accrualColumn = (
 		id       : 'purchase_invoice_amount',
 		Cell     : ({ row: { original } }) => {
 			const {
-				expenseBooked = '',
+				expenseBilled = '',
 				expenseCurrency = '',
 				buyQuotation = '',
 				buyQuotationCurrency = '',
 			} = original || {};
-			const quotationDiff = buyQuotation - expenseBooked || 0;
+			const quotationDiff = buyQuotation - expenseBilled || 0;
 			const quotationDiffProfit = buyQuotation !== 0 ? (((quotationDiff / buyQuotation) * 100) || 0) : 0;
 			return (
 				<div className={styles.quotation_styles}>
 					<div>
 						<span>
 							{formatAmount({
-								amount   :	expenseBooked,
+								amount   :	expenseBilled,
 								currency : expenseCurrency,
 								options  : {
 									style           : 'currency',
