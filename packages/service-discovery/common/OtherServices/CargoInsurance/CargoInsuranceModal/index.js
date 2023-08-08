@@ -57,7 +57,7 @@ function CargoInsuranceModal({
 		url    : 'saas/insurance/list-commodities',
 		method : 'GET',
 		params : {},
-	}, { manual: true });
+	}, { manual: false });
 
 	const { list = [] } = data;
 
