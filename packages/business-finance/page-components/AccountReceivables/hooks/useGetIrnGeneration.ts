@@ -58,7 +58,8 @@ const useGetIrnGeneration = ({ id, refetch, entityCode }: IrnGenerationProps) =>
 	const generateIrn = async () => {
 		try {
 			const resp = await generateIrnTrigger({
-				params: {
+				data   : {},
+				params : {
 					updatedBy: userId,
 				},
 			});
