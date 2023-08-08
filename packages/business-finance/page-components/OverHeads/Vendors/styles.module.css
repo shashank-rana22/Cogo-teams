@@ -82,3 +82,9 @@
 	color: white !important;
 	background: #ed3726 !important;
 }
+
+.vendorcontainer {
+	display: flex;
+	align-items: center;
+	width: 120px;
+}

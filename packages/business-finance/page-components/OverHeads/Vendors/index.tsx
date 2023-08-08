@@ -121,13 +121,7 @@ function VenderComponent() {
 
 		const { kycStatus = '' } = itemData;
 		return (
-			<div
-				style={{
-					display    : 'flex',
-					alignItems : 'center',
-					width      : '120px',
-				}}
-			>
+			<div className={styles.vendorcontainer}>
 				{kycStatus === 'VERIFIED' && (
 					<div className={styles.verified}>
 						<div>
