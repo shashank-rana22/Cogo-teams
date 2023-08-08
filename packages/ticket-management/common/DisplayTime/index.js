@@ -3,6 +3,8 @@ import getFormattedTime from '../../utils/getFormattedTime';
 import styles from './styles.module.css';
 
 const MIN_SECONDS = 0;
+const NULL_RETURN = '0h 0m 0s';
+const PAD_START_COUNT = 2;
 
 const TIME_MAPPING = [
 	{
@@ -26,7 +28,7 @@ const TIME_MAPPING = [
 function DisplayTime({ sec = 0 }) {
 	const time = getFormattedTime(sec);
 
-	if (!sec) { return sec; }
+	if (!sec || sec === '0') { return NULL_RETURN; }
 
 	return (
 		<div className={styles.container}>
@@ -37,8 +39,8 @@ function DisplayTime({ sec = 0 }) {
 
 				return (
 					<span className={styles.state} key={key}>
-						{time[key]}
-						{label}
+						<span className={styles.count}>{time[key].toString().padStart(PAD_START_COUNT, '0')}</span>
+						<span className={styles.label}>{label}</span>
 					</span>
 				);
 			})}

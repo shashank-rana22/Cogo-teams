@@ -62,7 +62,23 @@ function InvoiceDetail({
 		});
 	};
 
+	const {
+		einvoicePdfUrl,
+		invoicePdfUrl,
+		proformaPdfUrl,
+		proformaNumber,
+		invoiceNumber,
+		einvoiceNumber,
+	} = bfInvoice || {};
+
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
+
+	const invoiceUrl = einvoicePdfUrl || invoicePdfUrl || proformaPdfUrl || '';
+
+	let invoiceNo = invoiceNumber || proformaNumber || live_invoice_number;
+	if (einvoicePdfUrl) {
+		invoiceNo = einvoiceNumber;
+	}
 
 	return (
 		<div className={styles.invoice_info}>
@@ -72,14 +88,10 @@ function InvoiceDetail({
 					role="button"
 					tabIndex={0}
 					onClick={() => (!isEmpty(bfInvoice)
-						? handleDownload(
-							bfInvoice?.invoicePdfUrl || bfInvoice?.proformaPdfUrl,
-						)
+						? handleDownload(invoiceUrl)
 						: null)}
 				>
-					{bfInvoice?.invoiceNumber
-								|| bfInvoice?.proformaNumber
-								|| live_invoice_number}
+					{invoiceNo}
 				</div>
 
 				<div className={styles.status_container}>
