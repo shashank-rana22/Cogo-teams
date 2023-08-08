@@ -5,11 +5,11 @@ import styles from './styles.module.css';
 
 const FIRST_INDEX = 1;
 
-function ErrorMessage({ message }) {
+function ErrorMessage({ message = '' }) {
 	return <div className={styles.error_container}>{message || ''}</div>;
 }
 
-function InviteUser({ errors = {}, control, newControls: controls }) {
+function InviteUser({ errors = {}, control = () => {}, newControls: controls = [] }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.section}>

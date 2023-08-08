@@ -1,13 +1,12 @@
 import { Button } from '@cogoport/components';
-// import { IcMFtick } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useState } from 'react';
 
 import FilterModal from './FilterModal';
 import styles from './styles.module.css';
 
 function Filters({ data = {}, filters = {}, setFilters = () => {} }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
-	// const [filtersApplied, setFiltersApplied] = useState(false);
 
 	return (
 		<>
@@ -19,14 +18,13 @@ function Filters({ data = {}, filters = {}, setFilters = () => {} }) {
 				className={styles.filter_button}
 			>
 				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_228.svg"
+					src={GLOBAL_CONSTANTS.image_url.filter_icon}
 					alt="filter-icon"
 					width={20}
 					height={20}
 					style={{ marginRight: 12 }}
 				/>
 				Filters
-				{/* {filtersApplied && <IcMFtick width={20} height={20} fill="#ee3425" />} */}
 			</Button>
 
 			{showFilterModal ? (
@@ -37,7 +35,6 @@ function Filters({ data = {}, filters = {}, setFilters = () => {} }) {
 					filters={filters}
 					setFilters={setFilters}
 					showFiltersOnly
-					// setFiltersApplied={setFiltersApplied}
 				/>
 			) : null}
 		</>

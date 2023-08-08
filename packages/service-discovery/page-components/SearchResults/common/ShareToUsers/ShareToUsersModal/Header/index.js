@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function ModalContent({ modalType, onClick }) {
+function ModalContent({ modalType = '', onClick = () => {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>

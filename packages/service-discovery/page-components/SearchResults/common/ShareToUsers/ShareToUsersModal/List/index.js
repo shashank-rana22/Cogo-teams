@@ -6,7 +6,7 @@ import useGetShareUserList from '../../../../hooks/getShareUserList';
 import styles from './styles.module.css';
 import UsersCard from './UsersCard';
 
-function ShareInviteUsers({ selectedId, setSelectedUser, org_id }) {
+function ShareInviteUsers({ selectedId = '', setSelectedUser = () => {}, org_id = '' }) {
 	const {
 		loading,
 		list,

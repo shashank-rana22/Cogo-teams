@@ -11,8 +11,8 @@ const SERVICE_TYPE_MAPPING = {
 
 function RenderTruckShipments({
 	itemData = {},
-	commodityKey,
-	shipment_type,
+	commodityKey = '',
+	shipment_type = '',
 }) {
 	const services = itemData[SERVICE_TYPE_MAPPING[shipment_type]];
 

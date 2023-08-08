@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import Table from './Table';
 
 function List({
-	importer_exporter_id,
+	importer_exporter_id = '',
 	service_type = '',
 	heading = '',
 	fields = [],

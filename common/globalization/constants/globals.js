@@ -311,6 +311,7 @@ const GLOBAL_CONSTANTS = {
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg',
 		cogo_assured_banner  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_assured_banner',
 		cogo_contract_banner : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogocontract-tag.svg',
+		filter_icon          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_228.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'

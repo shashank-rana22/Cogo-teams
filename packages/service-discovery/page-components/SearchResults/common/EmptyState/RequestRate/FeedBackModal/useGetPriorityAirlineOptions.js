@@ -24,43 +24,41 @@ const useGetPriorityAirlineOptions = () => {
 		}
 	};
 
-	const airlineOptions = [];
+	const AIRLINE_OPTIONS = [];
 
 	if (!loading) {
 		(data?.list || []).forEach((option) => {
-			const label = (
-				<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-					<span>
-						{option?.airline?.logo_url ? (
-							<img
-								alt="logo"
-								src={option?.airline?.logo_url}
-								style={{ maxWidth: '16px', marginRight: '20px' }}
-							/>
-						) : (
-							<IcMAirport
-								width={16}
-								height={16}
-								fill="#888888"
-								style={{ marginRight: '20px' }}
-							/>
-						)}
+			AIRLINE_OPTIONS.push({
+				label: (
+					<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+						<span>
+							{option?.airline?.logo_url ? (
+								<img
+									alt="logo"
+									src={option?.airline?.logo_url}
+									style={{ maxWidth: '16px', marginRight: '20px' }}
+								/>
+							) : (
+								<IcMAirport
+									width={16}
+									height={16}
+									fill="#888888"
+									style={{ marginRight: '20px' }}
+								/>
+							)}
 
-						<p>{option?.airline?.business_name || ''}</p>
-					</span>
-					<p>{option?.airline?.iata_code}</p>
-				</div>
-			);
-
-			airlineOptions.push({
-				label,
+							<p>{option?.airline?.business_name || ''}</p>
+						</span>
+						<p>{option?.airline?.iata_code}</p>
+					</div>
+				),
 				id: option?.airline?.id,
 			});
 		});
 	}
 	return {
 		priorityAirlineOptions,
-		airlineOptions,
+		AIRLINE_OPTIONS,
 	};
 };
 export default useGetPriorityAirlineOptions;
