@@ -3,26 +3,17 @@ import { useDebounceQuery } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRequestBf } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 const geo = getGeoConstants();
 
-const useGetEntityList = () => {
+const useGetEntityList = ({ currentEntity }) => {
 	const getCurrenyCode = geo.country.currency.code;
-	const profile = useSelector((state) => state);
-	const {
-		profile: { partner },
-	} = profile || {};
-	const { id: partnerId } = partner || {};
-
-	const entity = getDefaultEntityCode(partnerId);
 
 	const [entityFilters, setEntityFilters] = useState({
-		activeEntity   : entity,
+		activeEntity   : currentEntity,
 		entityRequest  : 'all',
 		entityCurrency : '',
 		reportTime     : 'day',
