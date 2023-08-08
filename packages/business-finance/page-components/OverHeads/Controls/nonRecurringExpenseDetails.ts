@@ -36,14 +36,6 @@ interface Props {
 	handleCategoryChange?: (obj: any, val: object) => void;
 }
 
-const getMonthOptions = (minMonth) => {
-	const date = minMonth ? new Date(minMonth) : new Date();
-	const options = MONTH_OPTIONS.filter(
-		(option) => option.key > date.getMonth(),
-	);
-	return options;
-};
-
 export const nonRecurringExpenseDetails = ({
 	formData,
 	setFormData,
@@ -110,7 +102,7 @@ export const nonRecurringExpenseDetails = ({
 						...formData,
 						periodOfTransaction: month,
 					}),
-					options   : getMonthOptions(formData.transactionDate),
+					options   : MONTH_OPTIONS,
 					className : styles.input_width,
 				},
 				{
@@ -175,6 +167,13 @@ export const nonRecurringExpenseDetails = ({
 					defaultOptions : false,
 					span           : 2.2,
 					options        : [{ label: 'Pay Run', value: 'payrun' }],
+				},
+				{
+					name      : 'dueDate',
+					label     : 'due Date',
+					type      : 'datepicker',
+					clearable : true,
+					span      : 2.2,
 				},
 			],
 		},

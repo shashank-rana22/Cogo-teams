@@ -7,6 +7,7 @@ import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
+import ViewRecurringSummery from '../CreateExpenseModal/ViewRecurringSummery';
 import useListExpense from '../hooks/useListExpense';
 import useSendEmail from '../hooks/useSendEmail';
 
@@ -293,6 +294,9 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 														)}
 													</div>
 												</div>
+											</div>
+											<div className={styles.view}>
+												<ViewRecurringSummery itemData={bill} />
 											</div>
 										</div>
 									);
