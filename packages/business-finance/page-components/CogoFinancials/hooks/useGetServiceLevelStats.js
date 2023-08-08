@@ -60,7 +60,8 @@ const useGetServiceLevelStats = ({
 		}
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
-		filter, customDate, specificServiceLevel, DEFAULT_CURRENCY]);
+		filter, customDate, specificServiceLevel, DEFAULT_CURRENCY,
+	]);
 
 	useEffect(() => {
 		getServiceLevelData();

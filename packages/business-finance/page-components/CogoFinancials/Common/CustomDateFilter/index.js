@@ -11,8 +11,8 @@ function CustomDateFilter({ customDate = new Date(), setCustomDate = () => {} })
 				name="date"
 				onChange={setCustomDate}
 				value={customDate}
+				isPreviousDaysAllowed
 			/>
-
 		</div>
 	);
 }
