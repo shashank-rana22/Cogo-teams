@@ -18,7 +18,7 @@ const MEDIUM_FONT_WEIGHT = 500;
 
 const ZERO = 0;
 
-function DetailFooter({ rateCardData, detail, refetchSearch, isCogoAssured }) {
+function DetailFooter({ rateCardData = {}, detail = {}, refetchSearch = () => {}, isCogoAssured = false }) {
 	const [activeTab, setActiveTab] = useState('');
 	const [showDnD, setShowDnD] = useState(false);
 

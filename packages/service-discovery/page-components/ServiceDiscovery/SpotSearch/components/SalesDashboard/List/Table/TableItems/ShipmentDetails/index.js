@@ -41,7 +41,7 @@ const renderShipment = (itemData, field) => {
 					</Pill>
 				) : null}
 
-				{data?.containers_count > 0 ? (
+				{data?.containers_count ? (
 					<Pill size="md" color="#F9F9F9">
 						{`${data.containers_count} Container`}
 					</Pill>

@@ -81,7 +81,13 @@ function getAllLineItems(staticLineItems = {}, dynamicLineItems = {}) {
 	return combinedLineItems;
 }
 
-function HandleBookValue({ item, apiLoading, service_type, setSelectedCard, setShowContract }) {
+function HandleBookValue({
+	item = {},
+	apiLoading = false,
+	service_type = '',
+	setSelectedCard = () => {},
+	setShowContract = () => {},
+}) {
 	const service_rates = Object.values(item.service_rates);
 	const primaryServiceRates = service_rates.filter(
 		(service) => service.service_type === service_type,
@@ -253,10 +259,6 @@ function Comparison({
 	});
 
 	const allLineItems = getAllLineItems(STATIC_LINE_ITEMS, DYNMAIC_LINE_ITEMS);
-
-	console.log('STATIC_LINE_ITEMS', STATIC_LINE_ITEMS);
-	console.log('DYNMAIC_LINE_ITEMS', DYNMAIC_LINE_ITEMS);
-	console.log('allLineItems', allLineItems);
 
 	const handleBack = () => setScreen('listRateCard');
 

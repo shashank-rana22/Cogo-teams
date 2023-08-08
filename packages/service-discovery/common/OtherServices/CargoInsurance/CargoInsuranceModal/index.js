@@ -1,7 +1,8 @@
 import { Button, Modal } from '@cogoport/components';
 import { useDebounceQuery, useForm } from '@cogoport/forms';
+import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import controls from './controls';
 import EmptyState from './EmptyState';
@@ -9,7 +10,6 @@ import Form from './Form';
 import isCargoInsuranceApplicable from './helpers/isCargoInsuranceApplicable';
 import useAddCargoInsurance from './hooks/useAddCargoInsurance';
 import useGetInsuranceCountrySupported from './hooks/useGetInsuranceCountrySupported';
-import useGetInsuranceListCommodities from './hooks/useGetInsuranceListCommodities';
 import useGetInsuranceRate from './hooks/useGetInsuranceRate';
 import InvalidInvoicingPartyEmptyState from './InvalidInvoicingPartyEmptyState';
 import Loading from './Loading';
@@ -44,8 +44,6 @@ function CargoInsuranceModal({
 
 	const { isEligible, loading: countrySupportedLoading } = useGetInsuranceCountrySupported(cargoInsuranceCountryId);
 
-	const { list = [] } = useGetInsuranceListCommodities();
-
 	const { getCargoInsruanceRate, loading = '' } = useGetInsuranceRate({ setRateData });
 
 	const transitMode = TRANSIT_MODE_MAPPING[service_type] || 'ROAD';
@@ -53,6 +51,15 @@ function CargoInsuranceModal({
 	const importer_exporter_country_id = importer_exporter?.country_id || importer_exporter?.country?.id;
 
 	const { control, watch, formState:{ errors }, setValue, handleSubmit } = useForm({ defaultValues });
+
+	const [{ data = {} }] = useRequestBf({
+		auth   : 'get_saas_insurance_list_commodities',
+		url    : 'saas/insurance/list-commodities',
+		method : 'GET',
+		params : {},
+	}, { manual: true });
+
+	const { list = [] } = data;
 
 	const {
 		cargo_value: cargoValue,
@@ -66,6 +73,10 @@ function CargoInsuranceModal({
 	}, [cargoValue, debounceQuery]);
 
 	useEffect(() => {
+		if (isEmpty(list)) {
+			return;
+		}
+
 		const optionselected = (list || []).find(
 			(option) => option.id === cargoInsuranceCommodity,
 		);
@@ -76,8 +87,7 @@ function CargoInsuranceModal({
 			'cargo_insurance_commodity_description',
 			optionselected?.cargoDescription,
 		);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [cargoInsuranceCommodity, setValue]);
+	}, [cargoInsuranceCommodity, list, setValue]);
 
 	useEffect(() => {
 		if (query && !isEmpty(cargoInsuranceCommodity)) {

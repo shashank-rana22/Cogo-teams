@@ -1,7 +1,7 @@
 import { IcMAppCfs, IcMAppCustoms, IcMAppTruck } from '@cogoport/icons-react';
 
 const getMapping = ({ primaryService = {}, otherServices = {} }) => {
-	const hash = {};
+	const HASH = {};
 
 	const selectedServices = (Object.values(otherServices) || []).map(
 		(per_service) => {
@@ -10,7 +10,7 @@ const getMapping = ({ primaryService = {}, otherServices = {} }) => {
 					per_service?.service_type === 'trailer_freight'
 					|| per_service?.service_type === 'ftl_freight'
 				) {
-					hash[`origin_${per_service?.service_type}`] = per_service?.origin_location?.display_name;
+					HASH[`origin_${per_service?.service_type}`] = per_service?.origin_location?.display_name;
 				}
 				return `origin_${per_service?.service_type}`;
 			}
@@ -19,7 +19,7 @@ const getMapping = ({ primaryService = {}, otherServices = {} }) => {
 					per_service?.service_type === 'trailer_freight'
 					|| per_service?.service_type === 'ftl_freight'
 				) {
-					hash[`destination_${per_service?.service_type}`] = per_service?.destination_location?.display_name;
+					HASH[`destination_${per_service?.service_type}`] = per_service?.destination_location?.display_name;
 				}
 				return `destination_${per_service?.service_type}`;
 			}
@@ -30,7 +30,7 @@ const getMapping = ({ primaryService = {}, otherServices = {} }) => {
 	const servicesMapping = [
 		{
 			icon : IcMAppTruck,
-			key  : Object.keys(hash).includes('origin_ftl_freight')
+			key  : Object.keys(HASH).includes('origin_ftl_freight')
 				? 'origin_ftl_freight'
 				: 'origin_trailer_freight',
 		},
@@ -69,7 +69,7 @@ const getMapping = ({ primaryService = {}, otherServices = {} }) => {
 		},
 		primaryService?.destination_port?.name && {
 			icon : IcMAppTruck,
-			key  : Object.keys(hash).includes('destination_ftl_freight')
+			key  : Object.keys(HASH).includes('destination_ftl_freight')
 				? 'destination_ftl_freight'
 				: 'destination_trailer_freight',
 		},

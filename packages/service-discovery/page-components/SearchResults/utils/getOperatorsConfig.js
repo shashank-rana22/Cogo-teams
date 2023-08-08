@@ -1,33 +1,27 @@
 import { useState } from 'react';
 
-const GetOperatorsConfig = ({ formValues, formType = 'rfq' }) => {
-	const [prefferedCache, setPrefferedCache] = useState(false);
-	const [excludedCache, setExcludedCache] = useState(false);
-
-	const rfqMapping = {
+const OPTIONS_MAPPING = {
+	contract: {
+		exclude_operator_ids   : 'preferred_operator_ids',
+		preferred_operator_ids : 'exclude_operator_ids',
+	},
+	lock_rate: {
+		exclude_shipping_line_ids   : 'preferred_shipping_line_ids',
+		preferred_shipping_line_ids : 'exclude_shipping_line_ids',
+	},
+	rfq: {
 		preferred_shipping_lines : 'excluded_shipping_lines',
 		excluded_shipping_lines  : 'preferred_shipping_lines',
 		excluded_air_lines       : 'preferred_air_lines',
 		preferred_air_lines      : 'excluded_air_lines',
-	};
+	},
+};
 
-	const contractMapping = {
-		exclude_operator_ids   : 'preferred_operator_ids',
-		preferred_operator_ids : 'exclude_operator_ids',
-	};
+const GetOperatorsConfig = ({ formValues, formType = 'rfq' }) => {
+	const [prefferedCache, setPrefferedCache] = useState(false);
+	const [excludedCache, setExcludedCache] = useState(false);
 
-	const lockRateMapping = {
-		exclude_shipping_line_ids   : 'preferred_shipping_line_ids',
-		preferred_shipping_line_ids : 'exclude_shipping_line_ids',
-	};
-
-	const optionsMapping = {
-		contract  : contractMapping,
-		lock_rate : lockRateMapping,
-		rfq       : rfqMapping,
-	};
-
-	const keysMapping = optionsMapping[formType] || rfqMapping;
+	const keysMapping = OPTIONS_MAPPING[formType] || OPTIONS_MAPPING.rfq;
 
 	const updateCache = async (itemName) => {
 		if (

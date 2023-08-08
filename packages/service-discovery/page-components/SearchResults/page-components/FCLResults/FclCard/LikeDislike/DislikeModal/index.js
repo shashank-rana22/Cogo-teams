@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function DislikeModal({
 	details = {},
-	rate,
+	rate = {},
 	show = false,
 	onClose = () => {},
 	setLikeState = () => {},
