@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function ShipmentInfo() {
 	const { shipment_data, primary_service, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);
-	const { bl_type } = primary_service || {};
+	const { bl_type = '' } = primary_service || {};
 
 	const { handleShipmentsClick } = useShipmentBack();
 
@@ -42,7 +42,7 @@ function ShipmentInfo() {
 				bl_type === 'seaway'
 					? (
 						<Pill size="sm" color="green" className={styles.pill}>
-							{startCase(bl_type)}
+							{startCase(bl_type || '_')}
 						</Pill>
 					) : null
 			}

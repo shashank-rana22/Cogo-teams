@@ -9,9 +9,11 @@ const getCreateInstructionParams = ({
 	orgPocData,
 	watchModeOfExecution,
 }) => {
-	const orgPocForCourier = (billingAddressData || []).find(
+	const billingAddressObject = (billingAddressData || []).find(
 		(item) => item?.address === formValues?.address,
-	)?.organization_pocs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
+	)?.organization_pocs?.[GLOBAL_CONSTANTS.zeroth_index];
+
+	const orgPocForCourier = billingAddressObject?.id;
 
 	const orgPocForPickup = (orgPocData || []).find(
 		(item) => item?.name === formValues?.name,
@@ -19,16 +21,12 @@ const getCreateInstructionParams = ({
 
 	const orgPoc = watchModeOfExecution === 'pickup' ? orgPocForPickup : orgPocForCourier;
 
-	const billingAddressesId = (billingAddressData || []).find(
-		(item) => item?.address === formValues?.address,
-	)?.id;
-
 	const userDetailsArr = [
 		{
 			is_primary                      : !isEmpty(formValues?.is_primary) ? formValues?.is_primary : false,
 			poc_id                          : orgPoc,
 			pincode                         : formValues?.pincode,
-			organization_billing_address_id : billingAddressesId,
+			organization_billing_address_id : orgPoc,
 		},
 	];
 

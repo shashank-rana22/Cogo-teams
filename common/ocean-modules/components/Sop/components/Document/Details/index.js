@@ -45,15 +45,13 @@ function Details({
 				)}
 
 			{!isDraftBlUploaded ? (
-				<div>
-					<Button
-						themeType="accent"
-						size="sm"
-						onClick={() => setShowForm(isAddOrEdit)}
-					>
-						{startCase(isAddOrEdit)}
-					</Button>
-				</div>
+				<Button
+					themeType="accent"
+					size="sm"
+					onClick={() => setShowForm(isAddOrEdit)}
+				>
+					{startCase(isAddOrEdit)}
+				</Button>
 			) : null}
 		</div>
 	);
