@@ -45,7 +45,7 @@ function MailStatus({ list = [] }) {
 	return (
 		<div
 			className={styles.container}
-			style={{ color: isSuccess ? '--color-tertiary-success-green-1' : '--color-primary-error-red-1' }}
+			style={{ color: isSuccess ? 'var(--color-tertiary-success-green-1)' : 'var(--color-primary-error-red-1)' }}
 		>
 			{`This email has been ${STATUS.key} on 
             ${formatDate({
