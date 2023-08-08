@@ -51,11 +51,11 @@ const useListExpense = ({
 	pageSizeVal,
 }: Filter) => {
 	const {
-		paymentStatus,
-		expenseCategory,
-		searchValue,
-		pageSize,
-		pageIndex,
+		paymentStatus = '',
+		expenseCategory = '',
+		searchValue = '',
+		pageSize = 10,
+		pageIndex = 1,
 		uploadDate,
 		dueDate,
 		billDate,

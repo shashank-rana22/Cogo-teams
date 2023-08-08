@@ -142,14 +142,14 @@ function VenderComponent() {
 						<div>Rejected</div>
 					</div>
 				)}
-				{kycStatus !== 'VERIFIED' && kycStatus !== 'REJECTED' && (
+				{!['VERIFIED', 'REJECTED'].includes(kycStatus) ? (
 					<div className={styles.pending}>
 						<div className={styles.icm_info}>
 							<IcMInfo color="#e10d1f" height={14} width={14} />
 						</div>
 						<div>Pending</div>
 					</div>
-				)}
+				) : null}
 			</div>
 		);
 	}

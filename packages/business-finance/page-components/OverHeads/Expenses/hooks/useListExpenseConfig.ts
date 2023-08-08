@@ -14,18 +14,18 @@ const formatedDate = (date) => formatDate({
 const useListExpenseConfig = ({ expenseFilters, sort }) => {
 	const { createdDateSortBy, amountSortBy } = sort || {};
 	const {
-		paymentStatus,
-		expenseCategory,
-		repeatsEvery,
-		searchValue,
-		pageSize,
-		pageIndex,
+		paymentStatus = '',
+		expenseCategory = '',
+		repeatsEvery = '',
+		searchValue = '',
+		pageSize = 10,
+		pageIndex = 1,
 		uploadDate,
 		dueDate,
 		billDate,
 	} = expenseFilters || {};
 	const { startDate, endDate } = dueDate || {};
-	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } =		uploadDate || {};
+	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } =	uploadDate || {};
 	const { startDate: fromBillDate, endDate: toBillDate } = billDate || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
