@@ -13117,6 +13117,13 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 	],
+	demand_forecast: [
+		{
+			api          : 'list_rolling_forecast_fcl_freight_clusters',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+	],
 };
 
 export default partner;

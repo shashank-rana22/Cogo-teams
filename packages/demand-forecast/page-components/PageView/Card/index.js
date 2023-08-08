@@ -12,24 +12,24 @@ function Card({ card = {} }) {
 		sethowDetails(!showDetails);
 	};
 
-	const { orgin_port, destination_port, forecasted_demand } = card;
+	const { origin = {}, destination = {}, forecasted_demand, high_demand_port_pairs } = card;
 
 	return (
 		<div>
 			<div className={styles.row}>
 				<dv className={styles.orgin_port}>
-					{orgin_port}
+					{origin?.name}
 				</dv>
 				<div className={styles.arrow_logo}>
 					<IcMPortArrow />
 				</div>
 
 				<div className={styles.destination_port}>
-					{destination_port}
+					{destination?.name}
 				</div>
 
 				<div className={styles.high_demand_port_pairs}>
-					NA
+					{high_demand_port_pairs}
 				</div>
 
 				<div className={styles.rated_acquired}>

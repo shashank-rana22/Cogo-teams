@@ -3,7 +3,8 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	padding: 8px 12px;
+	height: 50px;
+	padding: 10px 12px;
 	font-size: 16px;
 	background: #fff;
 	border: 1px solid #f8f2e7;
@@ -30,6 +31,7 @@
 
 .orgin_port {
 	width: 22%;
+	color: #f68b21;
 	text-align: center;
 }
 
@@ -39,6 +41,7 @@
 
 .destination_port {
 	width: 22%;
+	color: #f68b21;
 	text-align: center;
 }
 

@@ -1,9 +1,11 @@
 import { Pagination } from '@cogoport/components';
-import { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React from 'react';
 
-// import EmptyState from '../../../common/EmptyState/EmptyState';
-import getDataConfig from '../../../configurations/data-config';
+import EmptyState from '../../../common/EmptyState/EmptyState';
+import ListLoading from '../../../common/EmptyState/ListLoading';
 import getTableConfig from '../../../configurations/table-config';
+import useGetForecastFclFreightClusters from '../../../hooks/useGetForecastResults';
 import Card from '../Card';
 
 import styles from './styles.module.css';
@@ -11,28 +13,32 @@ import styles from './styles.module.css';
 const DEFAULT_PAGE_SIZE = 0;
 const DEFAULT_TOTAL_ITEM = 0;
 const DEFAULT_CURRENT_PAGE = 1;
-const DEFAULT_PAGE = 1;
 
-function ForecastList() {
+function ForecastList({ filters = {} }) {
 	const tableConfig = getTableConfig();
-	const [page, setPage] = useState(DEFAULT_PAGE);
-	// if (dataList) {
-	// 	return (
-	// 		<div>
-	// 			<EmptyState
-	// 				height="250"
-	// 				width="400"
-	// 				flexDirection="column"
-	// 				alignItems="center"
-	// 				emptyText="Data Not Found"
-	// 				textSize="20"
-	// 				marginTop="100px"
-	// 			/>
-	// 		</div>
-	// 	);
-	// }
 
-	const dataList = getDataConfig();
+	const {
+		loading, list: dataList, page, setPage, pageData,
+	} = useGetForecastFclFreightClusters({ filters });
+
+	console.log('dataList::', dataList);
+
+	if (isEmpty(dataList) && !loading) {
+		return (
+			<div>
+				<EmptyState
+					height="250"
+					width="400"
+					flexDirection="column"
+					alignItems="center"
+					emptyText="Data Not Found"
+					textSize="20"
+					marginTop="100px"
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<>
 			<div className={styles.row}>
@@ -42,7 +48,7 @@ function ForecastList() {
 				})}
 			</div>
 			{
-				dataList.map((card) => (
+				loading ? <ListLoading /> : dataList?.map((card) => (
 					<Card key={card?.id} card={card} />
 				))
 			}
@@ -51,7 +57,7 @@ function ForecastList() {
 					className="md"
 					totalItems={dataList?.total_count || DEFAULT_TOTAL_ITEM}
 					currentPage={page || DEFAULT_CURRENT_PAGE}
-					pageSize={dataList?.page_limit || DEFAULT_PAGE_SIZE}
+					pageSize={pageData?.page_limit || DEFAULT_PAGE_SIZE}
 					onPageChange={setPage}
 					type="table"
 				/>

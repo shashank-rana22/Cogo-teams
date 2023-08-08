@@ -2425,12 +2425,13 @@ const navigationMappingAdmin = {
 		possible_apis : apis.ftl_admin,
 	},
 	demand_forecast: {
-		key         : 'demand_forecast',
-		title       : 'Demand Forecast',
-		type        : 'link',
-		module_type : 'dashboards',
-		href        : '/v2/demand-forecast',
-		as          : '/v2/demand-forecast',
+		key           : 'demand_forecast',
+		title         : 'Demand Forecast',
+		type          : 'link',
+		module_type   : 'dashboards',
+		href          : '/v2/demand-forecast',
+		as            : '/v2/demand-forecast',
+		possible_apis : apis.demand_forecast,
 	},
 };
 

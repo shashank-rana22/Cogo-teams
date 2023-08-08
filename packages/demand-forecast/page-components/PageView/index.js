@@ -9,14 +9,18 @@ import Tab from './Tab';
 function PageView() {
 	const [activeTab, setActiveTab] = useState('fcl_freight');
 
+	const [filters, setFilters] = useState({});
+
+	console.log('filters::', filters);
+
 	return (
 		<div>
 			<Header />
 			<div className={styles.secondary_header}>
 				<Tab activeTab={activeTab} setActiveTab={setActiveTab} />
-				<Filters />
+				<Filters setFilters={setFilters} filters={filters} />
 			</div>
-			<ForecastList activeTab={activeTab} />
+			<ForecastList filters={filters} />
 		</div>
 	);
 }

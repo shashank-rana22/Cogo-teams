@@ -1,41 +1,27 @@
 const getControls = () => {
 	const filterControls = [
 		{
-			name        : 'origin',
-			label       : 'Origin',
+			name        : 'origin_location_id',
+			label       : 'Origin Port',
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
 			placeholder : 'Origin Port',
+			params      : {
+				filters: {
+					type: ['seaport'],
+				},
+			},
 			initialCall : true,
 			isClearable : true,
 		},
 		{
-			name        : 'destination',
+			name        : 'destination_location_id',
 			label       : 'Destination Port',
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
 			placeholder : 'Destination Port',
 			initialCall : true,
 			isClearable : true,
-		},
-		{
-			name    : 'service_type',
-			label   : 'Service Type',
-			type    : 'chips',
-			options : [
-				{
-					label : 'FCL',
-					value : 'fcl_freight',
-				},
-				{
-					label : 'LCL',
-					value : 'lcl_freight',
-				},
-				{
-					label : 'AIR',
-					value : 'air_freight',
-				},
-			],
 		},
 	];
 
