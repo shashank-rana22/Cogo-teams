@@ -35,7 +35,7 @@ function SupplierReallocation({
 	const { shipment_data, refetch, refetchServices, primary_service = {} } = useContext(ShipmentDetailContext);
 	const { service_provider = {} } = primary_service;
 
-	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
+	const { documents, shipment_type, payment_term = '' } = shipment_data || {};
 
 	const serviceObj = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
@@ -45,7 +45,6 @@ function SupplierReallocation({
 		shipment_type,
 		documents,
 		isAdditional,
-		trade_type,
 		payment_term,
 	});
 
