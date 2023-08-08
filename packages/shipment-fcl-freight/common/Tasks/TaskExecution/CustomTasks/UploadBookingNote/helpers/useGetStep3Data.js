@@ -154,7 +154,7 @@ const useGetStepThreeData = ({
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS, is_source_so1: true });
 
 				if (res?.status === HTTP_SUCCESS_CODE) {
 					await updateTask({ id: task?.id });
