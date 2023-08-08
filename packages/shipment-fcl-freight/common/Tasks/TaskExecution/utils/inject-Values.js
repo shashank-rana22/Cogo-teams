@@ -13,6 +13,7 @@ const injectValues = ({
 	shipment_data,
 	stepConfig,
 	setCommodityUnit = () => {},
+	primary_service,
 }) => {
 	const controls = populatedControls || [];
 
@@ -125,6 +126,15 @@ const injectValues = ({
 				controls[index].value = containersCount;
 				controls[index].rules.max = containersCount;
 			}
+		});
+	} else if (task?.task === 'mark_haulage_container_picked_up') {
+		(controls || []).forEach((control) => {
+			if (control.name === 'cargo_readiness_date') {
+				const newControl = control;
+				newControl.value = new Date(primary_service?.cargo_readiness_date);
+				return newControl;
+			}
+			return control;
 		});
 	} else if (task?.task === 'mark_confirmed') {
 		(controls || []).forEach((ctrl, index) => {
