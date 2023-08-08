@@ -88,6 +88,7 @@
 
 .filtercont {
 	margin-left: 24px;
+
 	.react-datepicker__input-container {
 		height: 34px !important;
 	}
