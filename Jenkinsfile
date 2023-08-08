@@ -46,7 +46,8 @@ pipeline {
 				cache(caches: [arbitraryFileCache(path: 'node_modules')], defaultBranch: 'feat/jenkinsfile', maxCacheSize: 3000) {
 					nodejs(nodeJSInstallationName: 'node-18') {
                         sh "scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}/.env.admin .env"
-						sh (script: "echo ${NPMRC} >> .npmrc")
+						sh "sed -i '/NODE_ENV=production/d' .env"
+                        sh (script: "echo ${NPMRC} >> .npmrc")
 						sh 'pnpm i --frozen-lockfile'
 					}
 				}
