@@ -36,7 +36,6 @@ const useRaiseTicketcontrols = ({
 			controllerType : 'select',
 			placeholder    : 'Select service',
 			rules          : { required: true },
-			defaultOptions : true,
 			options        : GLOBAL_CONSTANTS.shipment_types,
 			onChange       : () => resetField('issue_type'),
 		},
