@@ -12,6 +12,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'post_to_sage',
 			'dunning',
 			'ftl_task_date_validation',
+			'refresh',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/Pan Number',
@@ -49,6 +50,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'dunning',
 			'ftl_task_date_validation',
 			'terminal_charge',
+			'refresh',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/Pan Number',
