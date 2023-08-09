@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -8,7 +10,15 @@ interface Props {
 	pageSize?:number,
 }
 
-const useListExpense = () => {
+const formatedDate = (date) => formatDate({
+	date,
+	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+	formatType : 'dateTime',
+	separator  : 'T',
+});
+
+const useListExpense = ({ filters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense/list',
@@ -18,6 +28,11 @@ const useListExpense = () => {
 		{ manual: true },
 	);
 
+	const { dueDate, uploadDate, billDate	} = filters;
+	const { startDate, endDate } = dueDate || {};
+	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = uploadDate || {};
+	const { startDate: fromBillDate, endDate: toBillDate } = billDate || {};
+
 	const getList = useCallback(async ({ vendorId, expenseType, pageIndex, pageSize }:Props) => {
 		try {
 			await trigger({
@@ -25,13 +40,19 @@ const useListExpense = () => {
 					expenseType,
 					pageSize,
 					pageIndex,
-					organizationId: vendorId,
+					organizationId     : vendorId,
+					startDate          : startDate ? formatedDate(startDate) : undefined,
+					endDate            : endDate ? formatedDate(endDate) : undefined,
+					fromUploadBillDate : fromUploadBillDate ? formatedDate(fromUploadBillDate) : undefined,
+					toUploadBillDate   : toUploadBillDate ? formatedDate(toUploadBillDate) : undefined,
+					fromBillDate       : fromBillDate ? formatedDate(fromBillDate) : undefined,
+					toBillDate         : toBillDate ? formatedDate(toBillDate) : undefined,
 				},
 			});
 		} catch (err) {
 			console.log(err);
 		}
-	}, [trigger]);
+	}, [trigger, startDate, endDate, fromUploadBillDate, toUploadBillDate, fromBillDate, toBillDate]);
 
 	return {
 		getList,
