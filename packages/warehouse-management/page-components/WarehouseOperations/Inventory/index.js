@@ -24,14 +24,19 @@ function Inventory({
 	const functions = {
 		handleWarehouseLocation: (singleItem) => {
 			let locations = [];
-			singleItem?.details.forEach((item) => {
+			singleItem?.details?.forEach((item) => {
 				locations.push(item?.warehouseLocation?.zoneNumber);
 			});
 			locations = [...new Set(locations)];
+			return (
+				<div>
+					-
+				</div>
+			);
 		},
 		handleServices: (singleItem) => {
 			let services = [];
-			singleItem?.details.forEach((item) => {
+			singleItem?.details?.forEach((item) => {
 				services.push(item?.service);
 			});
 			services = [...new Set(services)];
@@ -44,8 +49,8 @@ function Inventory({
 		},
 		handleStatus: (singleItem) => {
 			let flag = true;
-			singleItem?.details.forEach((item) => {
-				if (item?.status === 'not_recieved') {
+			singleItem?.details?.forEach((item) => {
+				if (item?.serviceStatus === 'not_recieved') {
 					flag = false;
 				}
 			});

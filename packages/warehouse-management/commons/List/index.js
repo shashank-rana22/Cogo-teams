@@ -26,14 +26,14 @@ function List({
 	page = 1,
 	setPage = () => {},
 }) {
-	const { list = {} } = data;
+	const { list = [] } = data;
 	if (activeTab === 'inventory') {
 		Object.keys(data).forEach((key) => {
-			const mp = new Map();
-			mp.set('shipmentId', key);
-			mp.set('details', data[key]);
-			mp.set('noOfBoxes', data[key].length);
-			list.push(mp);
+			const MP = {};
+			MP.shipmentId = key;
+			MP.details = data[key];
+			MP.noOfBoxes = data[key].length;
+			list.push(MP);
 		});
 	}
 
@@ -59,7 +59,7 @@ function List({
 							style={{ '--length': isOpen ? ZERO : '-20px' }}
 							className={styles.amaendment_accordian_style}
 						>
-							{isOpen === item.warehouseTransferId ? (
+							{(isOpen === item?.warehouseTransferId || isOpen === item?.shipmentId) ? (
 								<Button
 									themeType="linkUi"
 									onClick={() => {

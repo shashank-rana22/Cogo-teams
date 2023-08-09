@@ -1,4 +1,7 @@
 /* eslint-disable max-len */
+
+import { startCase } from '@cogoport/utils';
+
 /* eslint-disable react/jsx-one-expression-per-line */
 const inventoryFields = {
 	fields: [
@@ -68,7 +71,7 @@ const inventoryFields = {
 			span   : 2.2,
 			render : (item) => (
 				<div>
-					{`${item?.dimensions?.length} x ${item?.dimensions?.width} x ${item?.dimensions?.height} `}
+					{`${item?.dimensions?.length ?? '0'} x ${item?.dimensions?.width ?? '0'} x ${item?.dimensions?.height ?? '0'} `}
 				</div>
 			),
 		},
@@ -88,12 +91,12 @@ const inventoryFields = {
 			span   : 2.2,
 			render : (item) => (
 				<div>
-					{item?.status}
+					{startCase(item?.serviceStatus)}
 				</div>
 			),
 		},
 		{
-			key   : '',
+			key   : 'update',
 			label : 'Actions',
 			span  : 2.1,
 			func  : 'handleUpdateStatus',

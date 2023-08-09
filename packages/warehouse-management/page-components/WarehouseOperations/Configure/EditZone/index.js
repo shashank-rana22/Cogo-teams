@@ -35,7 +35,7 @@ function EditZoneModal({
 	const {
 		loading = false,
 		onSubmit = () => {},
-	} = useUpdateConfiguration({ formValues, listAPI, setEditZone });
+	} = useUpdateConfiguration({ id: item?.id, formValues, listAPI, setEditZone });
 	return (
 		<Modal
 			show={editZone}

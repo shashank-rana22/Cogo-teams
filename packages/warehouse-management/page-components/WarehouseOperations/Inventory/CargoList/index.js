@@ -35,7 +35,7 @@ function CargoList({
 					style={{ fontSize: 12 }}
 					onClick={() => setShowUpdateStatusModal(singleItem)}
 				>
-					Truck-in
+					Update Status
 				</Button>
 				{handleInventoryUpdate({ singleItem })}
 			</>;

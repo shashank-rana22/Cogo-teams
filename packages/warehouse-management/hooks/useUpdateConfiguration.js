@@ -3,6 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 
 function useUpdateConfiguration({
+	id = '',
 	formValues = {},
 	listAPI = () => {},
 	setEditZone = () => {},
@@ -23,9 +24,9 @@ function useUpdateConfiguration({
 		try {
 			await trigger({
 				data: {
-					commodityType       : formValues.commodity,
-					commodity           : formValues.commodity,
-					aisles              : formValues.aisles,
+					id,
+					commodity           : formValues?.commodity,
+					aisles              : formValues?.aisles,
 					warehouseLocationId : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
 					warehouseManagerId  : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
 					status              : 'active',
