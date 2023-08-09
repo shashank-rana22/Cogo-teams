@@ -8,6 +8,10 @@
 	align-items: center;
 	margin: 20px;
 
+	&.first {
+		margin-top: 10px;
+	}
+
 	&:hover {
 		box-shadow: 0 0 8px #b7dbff;
 	}
@@ -45,19 +49,6 @@
 .total_display {
 	font-size: 14px;
 	font-weight: 600;
-}
-
-.heading {
-	font-size: 24px;
-	font-weight: 500;
-}
-
-.header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 20px;
-	margin-top: 4px;
 }
 
 .add_line_item {
