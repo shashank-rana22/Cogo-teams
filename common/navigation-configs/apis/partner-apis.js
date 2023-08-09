@@ -10492,6 +10492,11 @@ const partner = {
 			service_name : 'communication_control',
 		},
 		{
+			api          : 'bulk_update_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
 			api          : 'list_communication_channel_controls',
 			access_type  : 'private',
 			service_name : 'communication_control',
@@ -12419,6 +12424,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'submit_omnichannel_kyc',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'create_agent_feedback',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -12654,11 +12664,6 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'get_tickets_default_types',
-			access_type  : 'private',
-			service_name : 'tickets',
-		},
-		{
 			api          : 'post_tickets_activity',
 			access_type  : 'private',
 			service_name : 'tickets',
@@ -12818,6 +12823,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'lead',
 		},
+		{
+			api          : 'get_omnichannel_agent_stats',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -12892,6 +12902,26 @@ const partner = {
 		},
 	],
 	ticket_management: [
+		{
+			api          : 'post_tickets_category',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'delete_tickets_category',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'put_tickets_category',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
 		{
 			api          : 'get_tickets_configuration_categories',
 			access_type  : 'private',
@@ -13016,6 +13046,38 @@ const partner = {
 			api          : 'delete_tickets_default_type',
 			access_type  : 'private',
 			service_name : 'tickets',
+		},
+	],
+	cogo_one_dashboard: [
+		{
+			api          : 'get_omnichannel_agent_stats',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_omnichannel_agent_rankings',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_chat_agents',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_assigned_chats',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_user_call_details',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'list_checkouts',
+			access_type  : 'private',
+			service_name : 'checkout',
 		},
 	],
 
@@ -13256,6 +13318,11 @@ const partner = {
 			api          : 'update_shipment_sell_quotations',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api          : 'list_rate_charge_codes',
+			access_type  : 'private',
+			service_name : 'rate_sheet',
 		},
 
 	],

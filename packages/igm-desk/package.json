@@ -9,6 +9,7 @@
     "@cogoport/core": "workspace:^0.1.0",
     "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/icons-react": "^1.0.61",
+    "@cogoport/scope-select": "workspace:0.1.0",
     "@cogoport/next": "workspace:^0.1.0",
     "@cogoport/request": "workspace:^0.1.0",
     "@cogoport/store": "workspace:^0.1.0",

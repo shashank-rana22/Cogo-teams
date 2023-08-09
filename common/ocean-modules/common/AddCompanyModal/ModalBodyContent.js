@@ -1,10 +1,11 @@
 import { RadioGroup, Select } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import { forwardRef } from 'react';
 
 import Form from './Form';
 import styles from './styles.module.css';
 
-export function ModalBodyContent({
+function ModalBodyContent({
 	trade_party_type = '',
 	options = [],
 	tradePartyOptions = [],
@@ -13,13 +14,12 @@ export function ModalBodyContent({
 	setCompanyType = () => {},
 	companyType = '',
 	tradePartnersData = {},
-	formRef = {},
 	importer_exporter_id = '',
 	shipment_id = '',
 	organization_id = '',
 	shipment_data = {},
 	primary_service = {},
-}) {
+}, formRef) {
 	return (
 		<div className={styles.modal_body_container}>
 			{trade_party_type ? (
@@ -63,3 +63,5 @@ export function ModalBodyContent({
 		</div>
 	);
 }
+
+export default forwardRef(ModalBodyContent);
