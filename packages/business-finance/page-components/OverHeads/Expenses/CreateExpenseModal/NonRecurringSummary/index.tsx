@@ -45,6 +45,7 @@ interface Data {
 	payableAmount?: number;
 	remarks?: string;
 	categoryName?: string;
+	dueDate?: Date;
 }
 
 interface Props {
@@ -139,7 +140,7 @@ const summaryDataTwo = ({
 		),
 	},
 ];
-const summaryDataThree = ({ uploadedInvoice, filename, paymentMode }) => [
+const summaryDataThree = ({ uploadedInvoice, filename, paymentMode, dueDate }) => [
 	{
 		title : 'Uploaded Documents',
 		value : (
@@ -166,6 +167,15 @@ const summaryDataThree = ({ uploadedInvoice, filename, paymentMode }) => [
 	{
 		title : 'Payment Mode ',
 		value : startCase(paymentMode || '') || '-',
+	},
+	{
+		title : 'Due Date ',
+		value : formatDate({
+			date: dueDate,
+			dateFormat:
+					GLOBAL_CONSTANTS.formats.date['dd/MMM/yy'],
+			formatType: 'date',
+		}) || '-',
 	},
 ];
 
@@ -196,6 +206,7 @@ function NonRecurringSummary({
 		payableAmount,
 		invoiceCurrency,
 		categoryName,
+		dueDate,
 	} = nonRecurringData || {};
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
@@ -228,6 +239,7 @@ function NonRecurringSummary({
 		uploadedInvoice,
 		filename,
 		paymentMode,
+		dueDate,
 	});
 
 	const summeryMapping = summeryMappings({
