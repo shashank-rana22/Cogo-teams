@@ -46,4 +46,5 @@ export const DATES_MAPPING = {
 	last_month    : getLastMonth(),
 	current_month : getCurrentMonth(),
 	today         : getToday(),
+	custom        : getToday(),
 };
