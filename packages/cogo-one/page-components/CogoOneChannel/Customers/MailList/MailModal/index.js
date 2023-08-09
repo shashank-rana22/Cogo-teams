@@ -3,7 +3,6 @@ import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
-import { getUserActiveMails } from '../../../../../configurations/mail-configuration';
 import { TOOLBARCONFIG } from '../../../../../constants';
 import getFormatedEmailBody from '../../../../../helpers/getFormatedEmailBody';
 import mailFunction from '../../../../../utils/mailFunctions';
@@ -24,7 +23,7 @@ function MailModal({
 		activeMailAddress,
 		emailState,
 		setEmailState,
-		viewType,
+		userMails,
 		userEmailAddress,
 	} = mailProps;
 
@@ -54,7 +53,7 @@ function MailModal({
 		uploaderRef,
 	});
 
-	const userActiveMails = getUserActiveMails({ userEmailAddress, viewType }).map(
+	const userActiveMails = ([userEmailAddress, ...userMails]).map(
 		(curr) => ({ label: curr, value: curr }),
 	);
 
