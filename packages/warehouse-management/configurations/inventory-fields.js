@@ -81,7 +81,7 @@ const inventoryFields = {
 			span   : 2.2,
 			render : (item) => (
 				<div>
-					{item?.service}
+					{startCase(item?.serviceName)}
 				</div>
 			),
 		},

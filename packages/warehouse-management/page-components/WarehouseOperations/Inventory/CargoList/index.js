@@ -29,17 +29,18 @@ function CargoList({
 	);
 
 	const functions = {
-		handleUpdateStatus: (singleItem) => {
+		handleUpdateStatus: (singleItem) => (
 			<>
 				<Button
+					themeType="primary"
 					style={{ fontSize: 12 }}
 					onClick={() => setShowUpdateStatusModal(singleItem)}
 				>
 					Update Status
 				</Button>
 				{handleInventoryUpdate({ singleItem })}
-			</>;
-		},
+			</>
+		),
 	};
 	return (
 		<div className={styles.cargo_list_container}>

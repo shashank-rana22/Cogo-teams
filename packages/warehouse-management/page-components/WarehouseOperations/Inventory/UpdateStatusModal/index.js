@@ -15,12 +15,16 @@ function UpdateStatusModal({
 }) {
 	const { control, formState:{ errors = {} }, watch } = useForm();
 	const formValues = watch();
-	const { handleUpdate } = useUpdateInventory({ id: item?.id, formValues, setShowUpdateStatusModal, listAPI });
+	const {
+		loading,
+		handleUpdate,
+	} = useUpdateInventory({ id: item?.id, formValues, setShowUpdateStatusModal, listAPI });
 	return (
 		<Modal
 			show={showUpdateStatusModal}
+			onClose={() => setShowUpdateStatusModal(false)}
 		>
-			<Modal.Header title="Add new Zone" />
+			<Modal.Header title="Update Inventory Status" />
 			<Modal.Body>
 				<Layout
 					fields={controls}
@@ -37,7 +41,7 @@ function UpdateStatusModal({
 					Cancel
 				</Button>
 				<Button
-					// disabled={loading}
+					disabled={loading}
 					onClick={handleUpdate}
 				>
 					Apply

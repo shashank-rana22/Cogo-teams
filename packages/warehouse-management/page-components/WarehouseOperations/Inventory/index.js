@@ -1,3 +1,5 @@
+import { startCase } from '@cogoport/utils';
+
 import List from '../../../commons/List';
 import inventoryFields from '../../../configurations/inventory-fields';
 import useListInventory from '../../../hooks/useListInventory';
@@ -37,13 +39,13 @@ function Inventory({
 		handleServices: (singleItem) => {
 			let services = [];
 			singleItem?.details?.forEach((item) => {
-				services.push(item?.service);
+				services.push(item?.serviceName);
 			});
 			services = [...new Set(services)];
 			services.join(', ');
 			return (
 				<div>
-					{services}
+					{startCase(services)}
 				</div>
 			);
 		},

@@ -14,16 +14,17 @@ const getParams = ({ shipmentId, warehouseLocationId, warehouseTransferId, truck
 		req = {
 			...req,
 			truckInStatus : true,
-			truckInProof  : fileValue?.finalUrl,
+			truckInProof  : fileValue,
 		};
 	} else {
 		req = {
 			...req,
 			truckOutStatus : true,
-			truckOutProof  : fileValue?.finalUrl,
+			truckOutProof  : fileValue,
 			truckOutEta    : new Date(),
 		};
 	}
+
 	return {
 		req,
 	};

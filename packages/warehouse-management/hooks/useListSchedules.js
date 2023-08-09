@@ -14,6 +14,11 @@ const getParams = (truckStatus) => {
 			truckInStatus : false,
 			truckInEta    : '2023-01-27 09:25:26',
 		};
+	} else {
+		req = {
+			...req,
+			truckInStatus: true,
+		};
 	}
 	return req;
 };
