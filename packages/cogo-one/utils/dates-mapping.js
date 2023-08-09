@@ -1,8 +1,8 @@
 import { subtractDays } from '@cogoport/utils';
 
 const SUBSTRACT_ONE_DAY = 1;
-const SUBSTRACT_SIX_DAY = 1;
-const SUBSTRACT_THIRTEEN_DAY = 1;
+const SUBSTRACT_SIX_DAY = 6;
+const SUBSTRACT_THIRTEEN_DAY = 13;
 const LAST_DAY = 0;
 const LAST_AND_FIRST_MONTH = 1;
 
