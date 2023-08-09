@@ -32,6 +32,8 @@ function PurchaseInvoiceDates({
 						name="invoice_date"
 						placeholder="Select Invoice Date"
 						rules={{ required: true }}
+						isPreviousDaysAllowed
+						maxDate={new Date()}
 						value={purchaseInvoiceValues?.invoice_date
 							? new Date(purchaseInvoiceValues?.invoice_date) : null}
 					/>
@@ -48,6 +50,7 @@ function PurchaseInvoiceDates({
 						name="due_date"
 						placeholder="Select Invoice Due Date"
 						rules={{ required: true }}
+						minDate={new Date()}
 						value={(purchaseInvoiceValues?.due_date || purchaseInvoiceValues?.invoice_due_date)
 							? new Date(purchaseInvoiceValues?.due_date
 								|| purchaseInvoiceValues?.invoice_due_date) : null}

@@ -788,9 +788,18 @@ const getAsyncFields = (key) => {
 			},
 		},
 		insurance_commodities: {
+			valueKey      : 'id',
+			lableKey      : 'commodity',
+			asyncKey      : 'insurance_commodities',
+			authkey       : 'get_saas_insurance_list_commodities',
+			endpoint      : 'saas/insurance/list-commodities',
+			defaultParams : {},
+			microService  : 'business_finance',
+		},
+		'hscode-list': {
 			valueKey : 'id',
-			labelKey : 'name',
-			asyncKey : 'insurance_commodities',
+			lableKey : 'name',
+			asyncKey : 'hs_code_list',
 		},
 
 	};

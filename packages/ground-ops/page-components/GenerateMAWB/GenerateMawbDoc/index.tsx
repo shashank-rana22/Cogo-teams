@@ -18,7 +18,6 @@ import SelectDocumentCopies from './SelectDocumentCopies';
 import styles from './styles.module.css';
 import useCreateShipmentDocument from './useCreateShipmentDocument';
 import useGetMediaUrl from './useGetMediaUrl';
-import Watermark from './watermark';
 
 interface NestedObj {
 	[key: string]: ReactFragment;
@@ -246,7 +245,7 @@ function GenerateMawb({
 						pdf.addPage();
 					}
 				});
-				pdf.save(activeCategory === 'hawb' ? documentNumber : awbNumber);
+				pdf.save(category === 'hawb' ? documentNumber : awbNumber);
 			});
 		} else {
 			html2canvas(document.getElementById('mawb')).then((canvas) => {
@@ -255,7 +254,7 @@ function GenerateMawb({
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 				pdf.addImage(imgData, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
-				pdf.save(activeCategory === 'hawb' ? documentNumber : awbNumber);
+				pdf.save(category === 'hawb' ? documentNumber : awbNumber);
 			});
 		}
 		setSaveDocument(false);
@@ -381,8 +380,6 @@ function GenerateMawb({
 					background : '#fff',
 				}}
 			>
-				{((viewDoc && documentState !== 'document_accepted') || (!viewDoc && editCopies === null))
-				&& <Watermark text="draft" rotateAngle="315deg" />}
 
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails

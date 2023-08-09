@@ -91,7 +91,13 @@ function MessageCardData({
 
 			<div
 				role="presentation"
-				onClick={() => setActiveMessage(item)}
+				onClick={() => {
+					if (source === 'flash_messages') {
+						return;
+					}
+
+					setActiveMessage(item);
+				}}
 				className={cl`
 						${styles.card_container} 
 						${autoAssignChats ? '' : styles.card_with_checkbox}

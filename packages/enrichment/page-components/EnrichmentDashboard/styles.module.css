@@ -1,3 +1,8 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+}
+
 .title_container {
 	display: flex;
 	justify-content: space-between;
@@ -5,7 +10,7 @@
 }
 
 .title {
-	font-size: 28px;
+	font-size: 20px;
 	font-weight: 600;
 	color: #221f20;
 }
@@ -40,6 +45,17 @@
 
 .value_container {
 	min-width: 200px;
+}
+
+.toottip_content {
+	word-break: initial;
+}
+
+.business_name {
+	width: fit-content;
+	max-width: 300px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .email_id {

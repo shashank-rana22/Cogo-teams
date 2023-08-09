@@ -24,6 +24,7 @@ function ProfileDetails({
 	setActiveTab = () => {},
 	formattedMessageData = {},
 	orgId = '',
+	mailProps = {},
 }) {
 	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
 
@@ -91,6 +92,7 @@ function ProfileDetails({
 						firestore={firestore}
 						userId={userId}
 						setActiveTab={setActiveTab}
+						mailProps={mailProps}
 					/>
 				)}
 			</div>

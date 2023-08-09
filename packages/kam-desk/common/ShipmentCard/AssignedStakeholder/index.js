@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -10,24 +11,29 @@ const KAM_MAPPING = {
 
 function AssignedStakeholder({ data = {} }) {
 	const { booking_agents = [] } = data;
-	return (booking_agents?.length
+
+	const [firstBookingAgent, secondBookingAgent] = booking_agents || [];
+
+	return (firstBookingAgent
 		? (
 			<div className={styles.container}>
 
 				<div className={styles.stakeholder}>
-					{KAM_MAPPING?.[booking_agents?.[0]?.stakeholder_type]}
-					:&nbsp;
-					{booking_agents?.[0]?.name}
+					{KAM_MAPPING?.[firstBookingAgent?.stakeholder_type]}
+					:
+					{' '}
+					{startCase(firstBookingAgent?.name)}
 				</div>
 
-				{booking_agents?.length > 1 ? (
+				{secondBookingAgent ? (
 					<Tooltip
 						interactive
 						content={(
 							<div className={styles.stakeholder}>
-								{KAM_MAPPING?.[booking_agents?.[1]?.stakeholder_type]}
-								:&nbsp;
-								{booking_agents?.[1]?.name}
+								{KAM_MAPPING?.[secondBookingAgent?.stakeholder_type]}
+								:
+								{' '}
+								{startCase(secondBookingAgent?.name)}
 							</div>
 						)}
 						placement="bottom"

@@ -67,5 +67,9 @@
 			background: none !important;
 			border-right: none;
 		}
+
+		.react-datepicker__aria-live {
+			display: none;
+		}
 	}
 }

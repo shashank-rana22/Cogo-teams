@@ -1,0 +1,126 @@
+.container {
+	padding: 16px;
+}
+
+.text {
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}
+
+.header {
+	display: flex;
+	align-items: center;
+}
+
+.icon_container {
+	margin-right: 10px;
+
+	svg {
+		vertical-align: middle;
+	}
+}
+
+.title {
+	margin: 0;
+	font-weight: 500;
+}
+
+.section {
+	padding: 20px;
+	padding-bottom: 0;
+	font-size: 13px;
+}
+
+.section_title {
+	display: flex;
+	align-items: center;
+
+	.title {
+		padding-right: 20px;
+		font-size: var(--font-size-md);
+		font-weight: 400;
+	}
+}
+
+.row {
+	display: grid;
+	grid-template-columns: 45% 45%;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.col {
+	width: 100% !important;
+
+	.taxNumber {
+		width: 50% !important;
+	}
+}
+
+.check_box_wrapper {
+	display: flex;
+	align-items: center;
+	margin: 10px 0;
+	font-size: var(--font-size-lg);
+
+	.gst {
+		margin: 0 3px;
+	}
+
+	.addressSave {
+		font-size: var(--font-size-lg);
+		font-weight: 500;
+	}
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
+.inactive {
+	:global {
+		.ui_button_container {
+			background-color: var(--color-tertiary-blue-5);
+		}
+	}
+}
+
+.active {
+	:global {
+		.ui_button_container {
+			background-color: var(--color-tertiary-blue-4);
+		}
+	}
+}
+
+.filter_by_buttons {
+	:global {
+		.ui_button_container {
+			margin: 4px;
+			margin-left: 0;
+			color: var(--color-secondary-greyscale-2);
+
+			&:hover {
+				background-color: var(--color-tertiary-blue-4);
+			}
+		}
+	}
+}
+
+.addresses {
+	display: flex;
+}
+
+.addressType {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.btn_div {
+	padding: 10px;
+	margin-left: 16px;
+}

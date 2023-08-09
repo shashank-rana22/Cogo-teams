@@ -22,7 +22,7 @@ const RenderSkills = ({ skills }) => (skills || []).map((skill) => (
 
 const EmploymentDetails = ({ employee_experience_details }) => (employee_experience_details || []).map((element) => {
 	const {
-		skills = [], description = '', started_at, ended_at, company_name,
+		skills = [], description = '', started_at, ended_at, company_name, offer_letter, payslip,
 	} = element || {};
 
 	return (
@@ -63,34 +63,13 @@ const EmploymentDetails = ({ employee_experience_details }) => (employee_experie
 					{!isEmpty(skills) ? <RenderSkills skills={skills} /> : null}
 				</div>
 			</div>
-		</div>
-	);
-});
-
-function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
-	const { detail, offer_letter, payslip } = profileData || {};
-	const { employee_experience_details = [] } = detail || {};
-
-	if (getEmployeeDetailsLoading) return <CommonLoader />;
-
-	if (isEmpty(employee_experience_details)) {
-		return <EmptyState emptyText="Employment history not found" />;
-	}
-
-	return (
-		<>
-			<div className={styles.container}>
-				<EmploymentDetails employee_experience_details={employee_experience_details} />
-				{' '}
-			</div>
-
 			<div
 				className={styles.extra_docs}
 			>
 				<div>
 					<div className={styles.extra_header}>Last Offer</div>
 					<PreviewDocumet
-						document_url={offer_letter?.document_url}
+						document_url={offer_letter}
 						preview="true"
 					/>
 				</div>
@@ -102,7 +81,24 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 					/>
 				</div>
 			</div>
-		</>
+		</div>
+	);
+});
+
+function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
+	const { detail } = profileData || {};
+	const { employee_experience_details = [] } = detail || {};
+	if (getEmployeeDetailsLoading) return <CommonLoader />;
+
+	if (isEmpty(employee_experience_details)) {
+		return <EmptyState emptyText="Employment history not found" />;
+	}
+
+	return (
+		<div className={styles.container}>
+			<EmploymentDetails employee_experience_details={employee_experience_details} />
+			{' '}
+		</div>
 	);
 }
 

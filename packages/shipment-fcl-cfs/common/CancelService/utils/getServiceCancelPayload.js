@@ -1,26 +1,14 @@
-const COMPLETE_OR_CANCEL = ['complete', 'cancelled'];
+import { getSideEffectsServices } from '../../EditCancelService/utils/getSideEffectsServices';
 
 export default function getServiceCancelPayload({
 	controls = {}, servicesList = [], service_type = '', trade_type = '', formData = {}, shipment_data = {},
 }) {
-	let cancellation_services = [];
+	const cancelIds = (
+		getSideEffectsServices({ servicesList, service_type, trade_type }) || []
+	).map((service) => service?.id);
 
-	if (service_type === 'fcl_cfs_service') {
-		cancellation_services = (servicesList || []).filter(
-			(item) => item?.service_type === service_type,
-		);
-	} else {
-		cancellation_services = (servicesList || []).filter(
-			(item) => item?.service_type === service_type && item?.trade_type === trade_type,
-		);
-	}
-
-	const cancelIds = cancellation_services
-		.filter((service) => !COMPLETE_OR_CANCEL.includes(service.status))
-		.map((service) => service?.id);
-
-	const formValues = {};
-	controls.forEach((ctrl) => { formValues[ctrl.name] = formData[ctrl.name]; });
+	const FORM_VALUES = {};
+	controls.forEach((ctrl) => { FORM_VALUES[ctrl.name] = formData[ctrl.name]; });
 
 	const payload = {
 		ids                 : cancelIds,
@@ -28,7 +16,7 @@ export default function getServiceCancelPayload({
 		service_type,
 		data                : {
 			state: 'cancelled',
-			...formValues,
+			...FORM_VALUES,
 		},
 	};
 

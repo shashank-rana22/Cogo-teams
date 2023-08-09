@@ -21,3 +21,45 @@
 .title {
 	font-size: 14px;
 }
+
+.flexwrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.name {
+	min-width: 240px;
+	margin: 10px 20px 10px 0;
+}
+
+.label {
+	padding-left: 4px;
+	font-weight: 600;
+}
+
+.textarea {
+	:global {
+		.ui_text_area_container {
+			height: 100px;
+		}
+	}
+}
+
+.approved {
+	margin-top: 12px;
+}
+
+.steeper {
+	margin-top: 16px;
+
+	:global {
+		.ui_stepper_step_wrapper,
+		.ui_stepper_text {
+			color: #000;
+		}
+
+		.ui_stepper_container {
+			margin: 10px;
+		}
+	}
+}
