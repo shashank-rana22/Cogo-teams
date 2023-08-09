@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPdf, IcMDelete } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
@@ -16,6 +17,8 @@ function TemplateDocument({
 	const [uploading, setUploading] = useState(false);
 
 	const { fileName: uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: fileValue });
+
+	const file = fileName.split('.')?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	return (
 		<div className={styles.container}>
@@ -48,7 +51,7 @@ function TemplateDocument({
 							window.open(fileValue, '_blank', 'noreferrer');
 						}}
 					>
-						{uploadedFileName}
+						{file || uploadedFileName}
 					</div>
 					<div className={styles.delete_icon_container}>
 						<IcMDelete

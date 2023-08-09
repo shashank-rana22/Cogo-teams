@@ -1,0 +1,18 @@
+.select_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.pill_container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 58%;
+	max-height: 34px;
+	overflow-y: auto;
+	border: 1px solid #fdebe9;
+	border-radius: 6px;
+
+	/* background: #e0e; */
+}

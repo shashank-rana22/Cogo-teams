@@ -1,5 +1,4 @@
 import { Input, Button } from '@cogoport/components';
-import { AsyncSelect } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -13,10 +12,10 @@ import CreateTemplateForm from './CreateTemplateForm';
 import { Header } from './headerHelpers';
 import styles from './styles.module.css';
 import { Preview, Loader, ListItem } from './templatesHelpers';
+import TemplateSidHeader from './TemplateSidHeader';
 
 const DEFAULT_OPTIONS = ['whatsapp_new_message_modal', 'bulk_communication'];
 const LAST_VALUE = 1;
-const SHIPMENT_STATE = ['completed', 'in_progress', 'confirmed_by_importer_exporter', 'shipment_received'];
 
 function Templates({
 	openCreateReply = false,
@@ -158,25 +157,11 @@ function Templates({
 			{activeCard?.show && !openCreateReply && (
 				<div className={styles.create_container}>
 					{tags.includes('shipment') && orgId && (
-						<div className={styles.select_section}>
-							<AsyncSelect
-								asyncKey="list_shipments"
-								valueKey="serial_id"
-								labelKey="serial_id"
-								placeholder="Select SID"
-								value={shipmentData?.serial_id}
-								onChange={(_, obj) => {
-									setShipmentData(obj);
-								}}
-								isClearable
-								params={{
-									filters: {
-										importer_exporter_id : orgId,
-										state                : SHIPMENT_STATE,
-									},
-								}}
-							/>
-						</div>
+						<TemplateSidHeader
+							orgId={orgId}
+							shipmentData={shipmentData}
+							setShipmentData={setShipmentData}
+						/>
 					)}
 					<div className={styles.preview}>
 						<div className={styles.whatsapp}>
