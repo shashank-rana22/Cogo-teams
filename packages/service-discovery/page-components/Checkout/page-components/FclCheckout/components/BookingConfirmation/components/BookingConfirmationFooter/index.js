@@ -102,8 +102,9 @@ function BookingConfirmationFooter({
 	isVeryRisky = false,
 	setIsShipmentCreated = () => {},
 	earnable_cogopoints = {},
-	setEror = () => {},
+	setError = () => {},
 	error = '',
+	isAssistedBookingNotAllowed = false,
 }) {
 	const {
 		query: { shipment_id },
@@ -196,23 +197,28 @@ function BookingConfirmationFooter({
 	}, [hasExpired, validity_end]);
 
 	useEffect(() => {
+		if (isAssistedBookingNotAllowed) {
+			setError(`You are not allowed to book this shipment. 
+			Kindly ask the customer to book from Partners Platform`);
+			return;
+		}
 		if (!quotation_email_sent_at) {
-			setEror('please send quotation Email to continue');
+			setError('please send quotation Email to continue');
 			return;
 		}
 
 		if (isEmpty(invoicingParties)) {
-			setEror('Ther should be atleast 1 invoicing party');
+			setError('Ther should be atleast 1 invoicing party');
 			return;
 		}
 
 		if (disableConditionForFcl) {
-			setEror('please select document preferences in Invoicing party that contains FCL freight');
+			setError('please select document preferences in Invoicing party that contains FCL freight');
 			return;
 		}
 
-		setEror('');
-	}, [disableConditionForFcl, invoicingParties, quotation_email_sent_at, setEror]);
+		setError('');
+	}, [disableConditionForFcl, invoicingParties, isAssistedBookingNotAllowed, quotation_email_sent_at, setError]);
 
 	const {
 		booking_status = '',
@@ -259,8 +265,8 @@ function BookingConfirmationFooter({
 						themeType="accent"
 						onClick={handleSubmit}
 						loading={submitButtonLoading}
-						disabled={
-							!quotation_email_sent_at
+						disabled={isAssistedBookingNotAllowed
+							|| !quotation_email_sent_at
 							|| disableConditionForFcl
 							|| disableCondition
 							|| isVeryRisky
@@ -272,8 +278,7 @@ function BookingConfirmationFooter({
 								isControlBookingDetailsFilled,
 								bookingConfirmationMode,
 								detail,
-							})
-						}
+							})}
 					>
 						<div className={styles.flex_column}>
 							<div className={styles.button}>

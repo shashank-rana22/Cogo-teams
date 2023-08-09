@@ -43,7 +43,8 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		isVeryRisky = false,
 		setIsVeryRisky = () => {},
 		error = '',
-		setEror = () => {},
+		setError = () => {},
+		isAssistedBookingNotAllowed = false,
 	} = useHandleBookingConfirmation();
 
 	const { services = {} } = detail || {};
@@ -107,8 +108,9 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				isVeryRisky={isVeryRisky && is_any_invoice_on_credit}
 				setIsShipmentCreated={setIsShipmentCreated}
 				earnable_cogopoints={earnable_cogopoints}
-				setEror={setEror}
+				setError={setError}
 				error={error}
+				isAssistedBookingNotAllowed={isAssistedBookingNotAllowed}
 			/>
 		</div>
 	);
