@@ -1,38 +1,53 @@
+import { cl } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 
-import CargoDetails from '../../ShipmentsCard/CargoDetails';
+import { LABELS, SHIPMENT_STATE } from '../../../constants/flashRatesMapping';
+import { RENDER_VALUE_MAPPING, serviceDetails } from '../../../utils/detailsHelperFuncs';
 
 import styles from './styles.module.css';
-
-const SHIPMENT_STATE = ['completed', 'in_progress', 'confirmed_by_importer_exporter', 'shipment_received'];
 
 function TemplateSidHeader({
 	shipmentData = {},
 	setShipmentData = () => {},
 	orgId = '',
 }) {
-	const { shipment_type = '' } = shipmentData || {};
+	const { shipment_type = '', serial_id } = shipmentData || {};
+
+	const details = serviceDetails({ detail: shipmentData, service: shipment_type });
 
 	return (
 		<div className={styles.select_section}>
-			<div className={styles.pill_container}>
-				<CargoDetails
-					detail={shipmentData}
-					service={shipment_type}
-				/>
-			</div>
+			{serial_id ? (
+				<div className={styles.pill_container}>
+					<div className={styles.shipment_details}>
+						{(LABELS || []).map((label) => {
+							const value = RENDER_VALUE_MAPPING[label]?.(details) || details[label] || '';
+
+							if (!value || !shipmentData?.[label]) {
+								return null;
+							}
+
+							return (
+								<div className={styles.chips} key={label}>
+									{value}
+								</div>
+							);
+						})}
+					</div>
+				</div>
+			) : null}
 			<AsyncSelect
 				asyncKey="list_shipments"
 				valueKey="serial_id"
 				labelKey="serial_id"
 				placeholder="Select SID"
-				value={shipmentData?.serial_id}
+				value={serial_id}
 				size="sm"
-				style={{ width: 130 }}
+				isClearable
+				className={cl`${shipment_type ? styles.small_select_container : styles.select}`}
 				onChange={(_, obj) => {
 					setShipmentData(obj);
 				}}
-				isClearable
 				params={{
 					filters: {
 						importer_exporter_id : orgId,
