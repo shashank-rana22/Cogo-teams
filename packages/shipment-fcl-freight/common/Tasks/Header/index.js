@@ -6,6 +6,7 @@ import { useContext, useState } from 'react';
 import BookingRequirements from './BookingRequirements';
 import styles from './styles.module.css';
 
+const SHOW_ALL_TASKS = ['manager', 'admin'];
 const BOOKING_REQUIREMENTS_ROLES = ['superadmin', 'booking_desk', 'booking_desk_manager', 'so1_so2_ops'];
 const SUPPLY_REMARKS_ROLES = ['superadmin', 'admin', 'prod_process_owner', 'document_desk', 'document_desk_manager'];
 
@@ -27,7 +28,9 @@ function Header({
 		.includes(activeStakeholder) && shipment_data?.state !== 'shipment_received';
 
 	const showSupplyRemarks = SUPPLY_REMARKS_ROLES.includes(activeStakeholder);
-	const show_others_tasks = !!stakeholderConfig?.tasks?.show_others_tasks;
+	const showOthersTasks = !!stakeholderConfig?.tasks?.show_others_tasks;
+
+	const showToogle = SHOW_ALL_TASKS.some((item) => activeStakeholder?.includes(item));
 
 	const supplyRemarks = primary_service?.booking_preferences?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
@@ -51,7 +54,7 @@ function Header({
 						</Tooltip>
 					) : null }
 
-					{show_others_tasks ? (
+					{showOthersTasks ? (
 						<div className={styles.toggle_container}>
 							<span>Hide completed tasks</span>
 							<Toggle
@@ -61,7 +64,7 @@ function Header({
 						</div>
 					) : null}
 
-					{show_others_tasks ? (
+					{showOthersTasks && showToogle ? (
 						<div className={styles.toggle_container}>
 							<span>Show only my tasks</span>
 							<Toggle
