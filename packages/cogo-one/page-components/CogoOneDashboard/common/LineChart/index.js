@@ -55,7 +55,7 @@ function LineChart({
 				) : (
 					<ResponsiveLine
 						data={data}
-						margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
+						margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
 						xScale={{ type: 'point' }}
 						yFormat=" >-.2f"
 						axisTop={null}
@@ -64,9 +64,9 @@ function LineChart({
 							orient         : 'bottom',
 							tickSize       : 5,
 							tickPadding    : 5,
-							tickRotation   : 0,
+							tickRotation   : timeline === 'day' ? '-25' : '0',
 							legend         : LABLE_TYPE[timeline]?.label,
-							legendOffset   : 36,
+							legendOffset   : 50,
 							legendPosition : 'middle',
 						}}
 						axisLeft={{
