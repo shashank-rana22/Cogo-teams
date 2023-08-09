@@ -1,26 +1,24 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 
 function useHangUpCall({
 	callRecordId,
-	checkToOpenFeedBack,
-	hasAgentPickedCall,
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/hang_up_outgoing_call',
 		method : 'post',
 	}, { manual: true });
 
-	const hangUpCall = async () => {
+	const hangUpCall = () => {
 		try {
-			await trigger({
+			trigger({
 				data: {
 					call_record_id: callRecordId,
 				},
 			});
-			checkToOpenFeedBack({ hasAgentPickedCall });
 		} catch (error) {
-			Toast.error(error?.response?.data?.message[0]);
+			Toast.error(error?.response?.data?.message?.[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	};
 

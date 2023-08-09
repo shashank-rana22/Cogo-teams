@@ -1,6 +1,8 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
 
+import formatCount from '../../utils/formatCount';
+
 import styles from './styles.module.css';
 
 const DEFAULT_INDEX = 1;
@@ -17,7 +19,10 @@ function StatCard({
 		<div
 			key={service}
 			className={cl`${styles.statscontainer} ${!isMain && styles.border}`}
-			style={{ cursor: !isMain ? 'pointer' : null }}
+			style={{
+				cursor : !isMain ? 'pointer' : null,
+				width  : !isMain ? '47%' : null,
+			}}
 			role="presentation"
 			onClick={() => setActiveService(service)}
 		>
@@ -48,7 +53,8 @@ function StatCard({
 						<div className={cl`${styles.statval}
 					${!isMain && styles.fontstatval}`}
 						>
-							{isMain ? item.stats : `${invoiceCount} Invoices | ${jobCount} Shimpents`}
+							{isMain ? item.stats
+								: `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shimpents`}
 						</div>
 					</div>
 				))}
