@@ -108,6 +108,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 
 	const id = content?.detail?.id;
 	const status = content?.detail?.status;
+	const cogo_mail = content?.detail?.cogoport_email;
 	const additional_information_id = content?.detail?.additional_information[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails, SOURCE, status });
@@ -117,7 +118,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 			permanent_city, permanent_state,
 			permanent_country, permanent_pincode, permanent_address, current_address,
 			current_city, current_state, current_country, current_pincode,
-			attendance, learning_indicator, predictive_index, ...rest
+			attendance, learning_indicator, predictive_index, cogoport_email, ...rest
 		} = values || {};
 
 		const permanent_final_address = {
@@ -142,12 +143,18 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 				predictive_index,
 			},
 		];
-		const final_params = {
+		let final_params = {
 			...rest,
 			permanent_address      : permanent_final_address || {},
 			present_address        : current_final_address || {},
 			additional_information : additional_information_attributes || [],
 		};
+		if (cogoport_email !== cogo_mail) {
+			final_params = {
+				...final_params,
+				cogoport_email,
+			};
+		}
 		updateEmployeeDetails({ data: final_params, formType: PERSONAL_INFO });
 	};
 
