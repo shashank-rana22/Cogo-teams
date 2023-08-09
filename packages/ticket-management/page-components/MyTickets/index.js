@@ -1,16 +1,13 @@
-import { Button, Modal } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import FilterTicketsSection from '../../common/FilterTicketsSection';
-import useRaiseTicket from '../../hooks/useRaiseTicket';
 
 import RaiseTickets from './RaiseTickets';
 import StatsSection from './StatsSection';
 import styles from './styles.module.css';
 
 function MyTickets() {
-	const [additionalInfo, setAdditionalInfo] = useState([]);
 	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
 	const [spectatorType, setSpectatorType] = useState('reviewer');
 	const [refreshList, setRefreshList] = useState({
@@ -19,16 +16,6 @@ function MyTickets() {
 		Escalated : false,
 		Closed    : false,
 	});
-
-	const formProps = useForm();
-	const { handleSubmit, reset } = formProps;
-
-	const { raiseTickets, loading } = useRaiseTicket({ setShowRaiseTicket, additionalInfo, setRefreshList });
-
-	const handleClose = () => {
-		reset();
-		setShowRaiseTicket(false);
-	};
 
 	return (
 		<div>
@@ -44,32 +31,13 @@ function MyTickets() {
 				setSpectatorType={setSpectatorType}
 			/>
 
-			<Modal
-				placement="right"
-				size="sm"
-				show={showRaiseTicket}
-				className={styles.styled_ui_modal_dialog}
-				closeOnOuterClick={handleClose}
-				onClose={handleClose}
-			>
-				<form onSubmit={handleSubmit(raiseTickets)}>
-					<Modal.Header title="Raise Ticket" style={{ padding: 8 }} />
-
-					<Modal.Body className={styles.preview_modal_body}>
-						<RaiseTickets
-							{...formProps}
-							additionalInfo={additionalInfo}
-							setAdditionalInfo={setAdditionalInfo}
-						/>
-					</Modal.Body>
-
-					<Modal.Footer style={{ padding: 12 }}>
-						<Button size="md" type="submit" loading={loading}>
-							Submit
-						</Button>
-					</Modal.Footer>
-				</form>
-			</Modal>
+			{showRaiseTicket && (
+				<RaiseTickets
+					setShowRaiseTicket={setShowRaiseTicket}
+					showRaiseTicket={showRaiseTicket}
+					setRefreshList={setRefreshList}
+				/>
+			)}
 		</div>
 	);
 }
