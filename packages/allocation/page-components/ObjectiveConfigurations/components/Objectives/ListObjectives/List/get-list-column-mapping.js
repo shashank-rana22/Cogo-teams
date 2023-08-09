@@ -1,7 +1,7 @@
-import { Button, Pill, Tooltip } from '@cogoport/components';
+import { Button, Pill, Tooltip, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMEdit } from '@cogoport/icons-react';
+import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../configurations/objective-status-color-mapping';
@@ -143,6 +143,17 @@ const getListColumnMapping = (props) => {
 					<IcMEdit style={{ marginRight: '4px' }} />
 					<strong>Edit</strong>
 				</Button>
+			),
+		},
+		{
+			key      : 'delete',
+			flex     : 0.5,
+			Header   : <div />,
+			accessor : ({ id }) => (
+				<ButtonIcon
+					icon={<IcMDelete />}
+					onClick={() => setShowActionModal({ mode: 'deactivation', objectiveId: id })}
+				/>
 			),
 		},
 		{
