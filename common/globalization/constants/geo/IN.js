@@ -709,6 +709,14 @@ export default {
 					},
 				},
 			},
+			partner: {
+				bookings: {
+					invoicing: {
+						request_cancel_invoice : false,
+						request_credit_note    : true,
+					},
+				},
+			},
 		},
 	},
 };
