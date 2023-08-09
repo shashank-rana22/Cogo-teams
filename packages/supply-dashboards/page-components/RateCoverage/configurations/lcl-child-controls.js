@@ -1,7 +1,7 @@
 import currencies from './helpers/currencies';
 
 const NAMEMAPPING = {
-	freights_charge_codes          : 'freights',
+	freights_charge_codes          : 'line_items',
 	destination_local_charge_codes : 'destination_local',
 	origin_local_charge_codes      : 'origin_local',
 	customs_charge_codes           : 'freights',
@@ -9,12 +9,12 @@ const NAMEMAPPING = {
 const CONSTANT_TWO = 2;
 const CONSTANT_ZERO = 0;
 const CONSTANT_ONE_HALF = 1.5;
-
-const childControls = ({ heading = '', charge_code_name, line_item_data }) => {
+const UNITS = [{ label: 'Per kg', value: 'Per kg' }];
+const childControls = ({ heading = '', charge_code_name, line_item_data = [] }) => {
 	const name = NAMEMAPPING[charge_code_name];
-	console.log(name, 'kkkkk');
+	console.log(line_item_data, 'kkkkk');
 	const option = line_item_data?.map((item) => ({ label: item?.code, value: item?.code }));
-	console.log(option, 'dddddddd');
+	console.log(option);
 	const controls = {
 		type        : 'fieldArray',
 		showButtons : true,
@@ -43,7 +43,7 @@ const childControls = ({ heading = '', charge_code_name, line_item_data }) => {
 				label          : 'Charge Code',
 				placeholder    : 'Charge Name',
 				value          : option[CONSTANT_ZERO]?.value,
-				rules          : { required: 'This is required' },
+
 			},
 			{
 				name        : 'price',
@@ -85,6 +85,7 @@ const childControls = ({ heading = '', charge_code_name, line_item_data }) => {
 				type        : 'select',
 				span        : CONSTANT_ONE_HALF,
 				className   : 'primary lg',
+				options     : UNITS,
 				rules       : { required: 'This is required' },
 			},
 		],

@@ -1,9 +1,11 @@
 import { Placeholder, ButtonIcon, Pagination, Table } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
+import useGetPartnerUser from '../../../../../RfqEnquiries/hooks/useGetPartneruser';
 import useListRateChargeCodes from '../../../../hooks/useGetChargeCodes';
 import useListFreightRateRequest from '../../../../hooks/useListFreightRateRequest';
 import AddRateModel from '../AddRateModel';
@@ -13,9 +15,16 @@ const ONE = 1;
 const ZERO = 0;
 const MINUS_ONE = -1;
 function MissingRates({ setIndex, value, filter }) {
+	const { user_profile } = useSelector(({ profile }) => ({
+		user_profile: profile,
+	}));
+
+	const { partner_user } = useGetPartnerUser({
+		user_id: user_profile.id,
+	});
 	const [currentPage, setCurrentPage] = useState(ONE);
 	const [show, setShow] = useState(false);
-	const { loading, data = {} } = useListFreightRateRequest({ filter, currentPage });
+	const { loading, data = {} } = useListFreightRateRequest({ filter, currentPage, partner_user });
 
 	const { total_count = ZERO } = data;
 	const { page_limit = ZERO } = data;

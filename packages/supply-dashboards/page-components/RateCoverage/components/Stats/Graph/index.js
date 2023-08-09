@@ -35,8 +35,8 @@ function Graph({ data }) {
 				legendPosition : 'middle',
 			}}
 			colors={{ scheme: 'nivo' }}
-			lineWidth={3}
-			pointSize={10}
+			lineWidth={1}
+			pointSize={3}
 			pointColor={{ theme: 'background' }}
 			pointBorderWidth={2}
 			pointBorderColor={{ from: 'serieColor' }}

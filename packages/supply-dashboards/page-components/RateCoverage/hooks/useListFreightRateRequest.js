@@ -1,17 +1,27 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const api = {
-	fcl_freight : 'list_fcl_freight_rate_requests',
-	lcl_freight : 'list_lcl_freight_rate_requests',
-	air_freight : 'list_air_freight_rate_requests',
+const API = {
+	fcl_freight          : 'list_fcl_freight_rate_requests',
+	ftl_freight          : 'list_ftl_freight_rate_requests',
+	air_freight          : 'list_air_freight_rate_requests',
+	ltl_freight          : 'list_ltl_freight_rate_requests',
+	lcl_freight          : 'list_lcl_freight_rate_requests',
+	fcl_customs          : 'list_fcl_customs_rate_requests',
+	lcl_customs          : 'list_lcl_customs_rate_requests',
+	air_customs          : 'list_air_customs_rate_requests',
+	haulage_freight      : 'list_haulage_freight_rate_requests',
+	domestic_air_freight : 'list_domestic_air_freight_rate_requests',
+	trailer_freight      : 'list_trailer_freight_rate_requests',
+	fcl_freight_local    : 'list_fcl_freight_rate_local_requests',
+	fcl_cfs              : 'list_fcl_cfs_rate_requests',
 };
 
 const useListFreightRateRequest = ({ filter, currentPage }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : api[filter.service],
+		url    : API[filter.service],
 		method : 'GET',
-	}, { manual: true });
+	}, { manual: false });
 
 	const listFreightRateRequest = useCallback(async () => {
 		const finalFilter = Object.fromEntries(
@@ -21,9 +31,8 @@ const useListFreightRateRequest = ({ filter, currentPage }) => {
 			await trigger({
 				params: {
 					filters: {
-						validity_start_greater_than : '2023-01-25T00:00:00+05:30',
-						validity_end_less_than      : '2023-04-24T12:51:22+05:30',
-						status                      : 'active',
+						// relevant_supply_agent:undefined,
+						status: 'active',
 						...finalFilter,
 					},
 					page: currentPage,

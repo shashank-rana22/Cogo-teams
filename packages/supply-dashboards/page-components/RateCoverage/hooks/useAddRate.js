@@ -1,6 +1,8 @@
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
+
 // const nameMapping = {
 // 	freights_charge_codes          : 'freights',
 // 	destination_local_charge_codes : 'destination_local',
@@ -8,6 +10,9 @@ import { useState } from 'react';
 // 	customs_charge_codes           : 'freights',
 // };
 const useAddRate = () => {
+	const { user_profile } = useSelector(({ profile }) => ({
+		user_profile: profile,
+	}));
 	const { control, handleSubmit, watch } = useForm({
 		freights: {
 			code             : '',
@@ -27,7 +32,7 @@ const useAddRate = () => {
 
 	const postApi = async (values) => {
 		await trigger({
-			params: { ...values },
+			params: { ...values, commodity: 'general', procured_by_id: user_profile?.user?.id },
 		});
 	};
 

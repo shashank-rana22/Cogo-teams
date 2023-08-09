@@ -1,16 +1,16 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const apiName = {
-	fcl_freight : 'get_fcl_freight_rate_stats',
-	ltl_freight : 'get_ltl_freight_rate_stats',
-	lcl_freight : 'get_lcl_freight_rate_stats',
-	air_freight : 'get_air_freight_rate_dashboard_stats',
-};
+// const apiName = {
+// 	fcl_freight : 'get_fcl_freight_rate_coverage_stats',
+// 	ltl_freight : 'get_ltl_freight_rate_stats',
+// 	lcl_freight : 'get_lcl_freight_rate_stats',
+// 	air_freight : 'get_air_freight_rate_dashboard_stats',
+// };
 
 const useGetStats = (service) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : apiName[service],
+		url    : '/fcl_freight_rate/get_fcl_freight_rate_coverage_stats',
 		method : 'GET',
 	}, { manual: true });
 
@@ -20,12 +20,12 @@ const useGetStats = (service) => {
 		);
 		try {
 			await trigger({
-				params: { filters: { ...finalFilter } },
+				params: { filters: { ...finalFilter }, service },
 			});
 		} catch (err) {
 			console.log(err);
 		}
-	}, [trigger]);
+	}, [service, trigger]);
 
 	useEffect(() => {
 		getStats();

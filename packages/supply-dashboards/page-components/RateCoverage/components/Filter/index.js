@@ -1,4 +1,4 @@
-import { Button, Select } from '@cogoport/components';
+import { Button, Datepicker, Select } from '@cogoport/components';
 import { useEffect } from 'react';
 
 import Controls from '../../configurations/filter';
@@ -33,8 +33,36 @@ function Filter({ getStats, filter = {}, setFilter = () => {}, defaultFilterData
 							{...control}
 							isClearable
 						/>
+
 					</div>
 				))}
+				<div>
+					<div style={{ marginBottom: '5px' }}>Validity Start Date</div>
+
+					<Datepicker
+						placeholder="Enter Date"
+						isPreviousDaysAllowed
+						dateFormat="MM/dd/yyyy HH:mm"
+						name="validity_end_less_than"
+						onChange={(val) => {
+							setFilter({ ...filter, validity_start_greater_than: val });
+						}}
+						value={filter.validity_start_greater_than}
+					/>
+				</div>
+				<div>
+					<div style={{ marginBottom: '5px' }}>Validity End Date</div>
+					<Datepicker
+						placeholder="Enter Date"
+						isPreviousDaysAllowed
+						dateFormat="MM/dd/yyyy HH:mm"
+						name="validity_end_less_than"
+						onChange={(val) => {
+							setFilter({ ...filter, validity_end_less_than: val });
+						}}
+						value={filter.validity_end_less_than}
+					/>
+				</div>
 
 				<Button
 					size="md"
@@ -42,11 +70,13 @@ function Filter({ getStats, filter = {}, setFilter = () => {}, defaultFilterData
 					onClick={() => {
 						setFilter(defaultFilterData);
 					}}
+					style={{ marginLeft: '-15px', float: 'right' }}
 				>
 					Clear All Filters
 				</Button>
 
 			</div>
+
 		</div>
 	);
 }
