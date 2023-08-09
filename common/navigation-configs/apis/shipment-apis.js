@@ -1526,7 +1526,7 @@ const apis = [
 	{
 		api          : 'list_partner_addresses',
 		access_type  : 'private',
-		service_name : 'organization',
+		service_name : 'partner',
 	},
 	{
 		api          : 'generate_bluetide_hbl',

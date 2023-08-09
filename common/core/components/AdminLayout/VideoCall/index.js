@@ -10,12 +10,14 @@ import VideoCallScreen from './components/VideoCallScreen';
 import { FIREBASE_CONFIG } from './configurations/firebase-config';
 import { CALL_RING_TIME_LIMIT } from './constants';
 import useComingCall from './hooks/useComingCall';
+import useUpdateVideoCallTimeline from './hooks/useUpdateVideoCallTimeline';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
 import { callUpdate } from './utils/callFunctions';
 
 function VideoCall({
 	videoCallRecipientData = {},
 	inVideoCall = false,
+	videoCallId = '',
 }) {
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
@@ -48,6 +50,7 @@ function VideoCall({
 
 	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
+	const { updateVideoCallTimeline = () => {} } = useUpdateVideoCallTimeline({ callDetails });
 
 	const { handleOutgoingCall, handleCallEnd } = useVideoCallFirebase({
 		firestore,
@@ -58,6 +61,8 @@ function VideoCall({
 		callDetails,
 		setStreams,
 		peerRef,
+		videoCallId,
+		updateVideoCallTimeline,
 	});
 
 	const { rejectCall, answerCall } = useComingCall({
@@ -80,21 +85,21 @@ function VideoCall({
 				firestore,
 				callingRoomId : callDetails?.callingRoomId,
 			});
-			handleCallEnd();
+			handleCallEnd({ callActivity: 'missed', description: 'user does not pick up the call' });
 		}
 	}, [callDetails?.callingRoomId, callDetails?.callingRoomDetails?.call_status, handleCallEnd, firestore]);
 
 	useEffect(
 		() => {
 			if (inVideoCall && videoCallRecipientData?.user_id) {
-				handleOutgoingCall(videoCallRecipientData);
+				handleOutgoingCall({ peerDetails: videoCallRecipientData, videoCallIdFirebase: videoCallId });
 			}
 
 			const timeoutMissCallId = setTimeout(missCallHandle, CALL_RING_TIME_LIMIT);
 
 			return () => clearTimeout(timeoutMissCallId);
 		},
-		[inVideoCall, videoCallRecipientData, handleOutgoingCall, missCallHandle],
+		[inVideoCall, videoCallRecipientData, handleOutgoingCall, missCallHandle, videoCallId],
 	);
 
 	useEffect(() => {

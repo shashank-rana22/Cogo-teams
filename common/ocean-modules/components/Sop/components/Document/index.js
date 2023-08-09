@@ -10,6 +10,7 @@ function Document({
 	getProcedureTrigger = () => {},
 	auditsTrigger = () => {},
 	primary_service = {},
+	documents = [],
 }) {
 	const { sop_detail = {}, id:instruction_id } = data[GLOBAL_CONSTANTS.zeroth_index] || {};
 
@@ -28,6 +29,13 @@ function Document({
 				primary_service={primary_service}
 			/>
 		)
-		: <Details sop_detail={sop_detail} setShowForm={setShowForm} instruction_id={instruction_id} />;
+		: (
+			<Details
+				sop_detail={sop_detail}
+				setShowForm={setShowForm}
+				instruction_id={instruction_id}
+				documents={documents}
+			/>
+		);
 }
 export default Document;

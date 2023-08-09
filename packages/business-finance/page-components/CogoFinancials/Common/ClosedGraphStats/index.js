@@ -66,7 +66,7 @@ function ClosedGraphStats({
 					</div>
 
 					<div style={{ display: 'flex' }}>
-						<div style={{ width: '28%' }}>
+						<div style={{ width: '25vw' }}>
 							<ClosedShipmentCard
 								showHeading={false}
 								isAdditonalView

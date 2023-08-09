@@ -15,26 +15,29 @@ const NOT_CALLING_CALL_STATUS = ['rejected', 'end_call', 'miss_call', 'technical
 const STOP_CALL_STATUS = ['rejected', 'end_call', 'technical_error'];
 
 function useComingCall({
-	firestore,
-	setCallDetails,
-	callDetails,
-	inVideoCall,
-	setCallComing,
-	setStreams,
-	peerRef,
-	webrtcToken,
-	setWebrtcToken,
-	handleCallEnd,
+	firestore = {},
+	setCallDetails = () => {},
+	callDetails = {},
+	inVideoCall = false,
+	setCallComing = () => {},
+	setStreams = () => {},
+	peerRef = {},
+	webrtcToken = {},
+	setWebrtcToken = () => {},
+	handleCallEnd = () => {},
 }) {
+	const { callingRoomId = '', webrtcTokenRoomId = '', callingRoomDetails = {} } = callDetails || {};
+	const { call_status: callStatus = '', my_details: peerDetails = {} } = callingRoomDetails || {};
+
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
 	}));
 	const { id: userId } = user_data || {};
-	const { callingRoomId = '', webrtcTokenRoomId = '', peerDetails = {} } = callDetails || {};
 
-	const { saveInACallStatus } = useSetInACall();
 	const callComingSnapshotRef = useRef(null);
 	const tokenSnapshotRef = useRef(null);
+
+	const { saveInACallStatus = () => {} } = useSetInACall();
 
 	const getWebrtcToken = useCallback(async () => {
 		if (!webrtcTokenRoomId || !callingRoomId) {
@@ -99,7 +102,17 @@ function useComingCall({
 					firestore,
 					callingRoomId,
 				});
+				handleCallEnd({ callActivity: 'answered', description: 'peer js technical error' });
+			});
+			peer.on('close', () => {
 				handleCallEnd();
+				callUpdate({
+					data: {
+						call_status: 'call_end',
+					},
+					callingRoomId,
+					firestore,
+				});
 			});
 		} catch (error) {
 			console.error('user stream is not working', error);
@@ -112,14 +125,14 @@ function useComingCall({
 				callingRoomId,
 				firestore,
 			});
-			handleCallEnd();
+			handleCallEnd({ callActivity: 'missed', description: 'peer video audio is not working' });
 		}
 	}, [setStreams, peerRef, webrtcToken?.token, peerDetails?.user_id, callingRoomId,
 		webrtcTokenRoomId, firestore, handleCallEnd]);
 
 	const answerCall = useCallback(async () => {
 		await getWebrtcToken();
-		saveInACallStatus(true);
+		saveInACallStatus({ inACallStatus: true });
 		setCallComing(false);
 
 		callUpdate({
@@ -172,20 +185,22 @@ function useComingCall({
 	}, [callingRoomId, firestore, setWebrtcToken, webrtcTokenRoomId]);
 
 	useEffect(() => {
-		const room_data = callDetails?.callingRoomDetails;
-
 		if (
-			room_data?.call_status
-			&& STOP_CALL_STATUS.includes(room_data?.call_status)
+			callStatus
+			&& STOP_CALL_STATUS.includes(callStatus)
 			&& callingRoomId
 		) {
-			handleCallEnd();
+			if (callStatus === 'rejected') {
+				handleCallEnd({ callActivity: 'not_connected', description: 'user rejected the call' });
+			} else {
+				handleCallEnd({ callActivity: 'answered' });
+			}
 		}
 
-		if (NOT_CALLING_CALL_STATUS.includes(room_data?.call_status)) {
+		if (NOT_CALLING_CALL_STATUS.includes(callStatus)) {
 			setCallComing(false);
 		}
-	}, [callDetails?.callingRoomDetails, handleCallEnd, setCallComing, callingRoomId]);
+	}, [callStatus, handleCallEnd, setCallComing, callingRoomId]);
 
 	return {
 		answerCall,
