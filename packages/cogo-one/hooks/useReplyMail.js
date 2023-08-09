@@ -24,10 +24,26 @@ const getCommunicationPayload = ({ payload, userId, userName }) => ({
 });
 
 const API_MAPPING = {
-	reply     : { endPoint: 'reply_mail', requestFunc: useLensRequest, payloadFunc: getLensPayload },
-	reply_all : { endPoint: 'reply_all', requestFunc: useLensRequest, payloadFunc: getLensPayload },
-	forward   : { endPoint: 'forward_mail', requestFunc: useLensRequest, payloadFunc: getLensPayload },
-	send_mail : { endPoint: 'create_communication', requestFunc: useRequest, payloadFunc: getCommunicationPayload },
+	reply: {
+		endPoint    : 'reply_mail',
+		requestFunc : useLensRequest,
+		payloadFunc : getLensPayload,
+	},
+	reply_all: {
+		endPoint    : 'reply_all',
+		requestFunc : useLensRequest,
+		payloadFunc : getLensPayload,
+	},
+	forward: {
+		endPoint    : 'forward_mail',
+		requestFunc : useLensRequest,
+		payloadFunc : getLensPayload,
+	},
+	send_mail: {
+		endPoint    : 'create_communication',
+		requestFunc : useRequest,
+		payloadFunc : getCommunicationPayload,
+	},
 };
 
 function useReplyMail(mailProps) {
@@ -48,7 +64,6 @@ function useReplyMail(mailProps) {
 	const [{ loading } = {}, trigger] = requestFunc({
 		url    : `/${endPoint}`,
 		method : 'POST',
-
 	}, { manual: true }) || [];
 
 	const replyMailApi = async (payload) => {

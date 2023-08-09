@@ -56,7 +56,7 @@ function MailHeader({ eachMessage = {}, setMailActions = () => {}, hasPermission
 				<div className={styles.icon_flex}>
 					{BUTTON_MAPPING.map(
 						(item) => {
-							const { key, icon: Icon } = item || {};
+							const { key, icon: Icon = null } = item || {};
 
 							if (!Icon || !hasPermissionToEdit) {
 								return null;

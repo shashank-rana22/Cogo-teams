@@ -15,7 +15,7 @@ const COMPONENT_MAPPING = {
 
 const renderContent = (showPreview) => `data:${showPreview?.contentType};base64,${showPreview?.contentBytes}`;
 
-function RenderTitle({ item = '', handleDownload = () => {} }) {
+function RenderTitle({ item = {}, handleDownload = () => {} }) {
 	return (
 		<div className={styles.title}>
 			<div>{decodeURI(item?.fileName)}</div>

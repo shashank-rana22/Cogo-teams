@@ -61,8 +61,8 @@ function mailFunction({
 	};
 
 	const handleEdit = ({ type, setNewEmailInput }) => {
-		setShowControl((p) => {
-			if (p === type) {
+		setShowControl((prev) => {
+			if (prev === type) {
 				return null;
 			}
 			return type;

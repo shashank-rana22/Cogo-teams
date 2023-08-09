@@ -1,6 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMSend } from '@cogoport/icons-react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
+
 export const GMAIL_OPTIONS_CONFIG = [
 	{
 		label      : 'Inbox',
@@ -33,3 +35,12 @@ export const GMAIL_OPTIONS_CONFIG = [
 		hoverImage : GLOBAL_CONSTANTS.image_url.spam_flag_icon,
 	},
 ];
+
+export const getUserActiveMails = ({ userEmailAddress, viewType }) => {
+	const mailsToBeShown = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.mails_to_be_shown;
+
+	return [
+		userEmailAddress,
+		...mailsToBeShown,
+	];
+};

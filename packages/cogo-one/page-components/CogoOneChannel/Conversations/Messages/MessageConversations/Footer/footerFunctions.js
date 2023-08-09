@@ -13,7 +13,7 @@ export const getCanSendMessage = ({
 	return (!isEmpty(subject) && !isEmpty(toUserEmail));
 };
 
-export const getPlaceHolder = ({ hasPermissionToEdit, canMessageOnBotSession }) => {
+export const getPlaceHolder = ({ hasPermissionToEdit = false, canMessageOnBotSession = false }) => {
 	if (canMessageOnBotSession) {
 		return 'This chat is currently in bot session, send a message to talk with customer';
 	}
@@ -23,7 +23,7 @@ export const getPlaceHolder = ({ hasPermissionToEdit, canMessageOnBotSession }) 
 	return 'You do not have permission to chat';
 };
 
-export const setEmailStateFunc = ({ mailActions, email = '' }) => {
+export const getEmailState = ({ mailActions = {}, email = '' }) => {
 	const { data, actionType = '' } = mailActions || {};
 	const { response, conversation_type } = data || {};
 	const { sender = '', subject = '', to_mails = [] } = response || {};

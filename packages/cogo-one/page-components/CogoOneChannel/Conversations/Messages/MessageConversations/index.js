@@ -13,28 +13,28 @@ const DISTANCE_FROM_TOP = 10;
 const TIMEOUT_FOR_SCROLL = 200;
 
 function MessageConversations({
+	firestore = {},
+	setOpenModal = () => {},
 	activeMessageCard = {},
+	suggestions = [],
+	hasPermissionToEdit = false,
+	sendCommunicationTemplate = () => {},
+	communicationLoading = false,
 	formattedData = {},
 	setRaiseTicketModal = () => {},
+	canMessageOnBotSession = false,
 	viewType = '',
 	hasNoFireBaseRoom = false,
 	setModalType = () => {},
 	activeTab = {},
+	mailProps = {},
 	activeChatCollection = {},
 	newUserRoomLoading = false,
 	setMailActions = () => {},
 	mailActions = {},
-	firestore = {},
-	hasPermissionToEdit = false,
 	actionType = '',
-	canMessageOnBotSession = false,
-	communicationLoading = false,
 	assignLoading = false,
-	suggestions = [],
-	setOpenModal = () => {},
 	assignChat = () => {},
-	sendCommunicationTemplate = () => {},
-	mailProps = {},
 }) {
 	const conversationsDivRef = useRef(null);
 
@@ -97,11 +97,11 @@ function MessageConversations({
 						hasNoFireBaseRoom={hasNoFireBaseRoom}
 						setModalType={setModalType}
 						activeTab={activeTab}
+						viewType={viewType}
 						setMailActions={setMailActions}
 						mailActions={mailActions}
 						firestore={firestore}
 						scrollToBottom={scrollToLastMessage}
-						viewType={viewType}
 						hasPermissionToEdit={hasPermissionToEdit}
 						ref={conversationsDivRef}
 						mailProps={mailProps}

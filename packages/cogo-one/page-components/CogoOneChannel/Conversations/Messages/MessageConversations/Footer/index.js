@@ -9,7 +9,7 @@ import useSendOmnichannelMail from '../../../../../../hooks/useSendOmnichannelMa
 import { formatFileAttributes } from '../../../../../../utils/getFileAttributes';
 import styles from '../styles.module.css';
 
-import { getPlaceHolder, setEmailStateFunc } from './footerFunctions';
+import { getPlaceHolder, getEmailState } from './footerFunctions';
 import FooterHead from './FooterHead';
 import SendActions from './SendActions';
 
@@ -43,7 +43,7 @@ function Footer({
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-	const [emailState, setEmailState] = useState(() => setEmailStateFunc({ mailActions }));
+	const [emailState, setEmailState] = useState(() => getEmailState({ mailActions }));
 	const [showControl, setShowControl] = useState('');
 	const [errorValue, setErrorValue] = useState('');
 
@@ -160,7 +160,7 @@ function Footer({
 	const TextAreaComponent = TEXTBOX_COMPONENT_MAPPING[channel_type] || TEXTBOX_COMPONENT_MAPPING.default;
 
 	useEffect(() => {
-		setEmailState(setEmailStateFunc({ mailActions, email }));
+		setEmailState(getEmailState({ mailActions, email }));
 	}, [mailActions, email]);
 
 	return (

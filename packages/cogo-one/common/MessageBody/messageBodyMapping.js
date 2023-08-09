@@ -134,19 +134,25 @@ function CustomContacts({ message = '' }) {
 
 	return (
 		<div className={styles.contact_card}>
-			<IcMUserAllocations height="30px" width="30px" fill="#7278AD" className={styles.user_allocation} />
+			<IcMUserAllocations
+				className={styles.user_allocation}
+			/>
+
 			<div>
 				<div className={styles.contact_name}>
 					{formatted_name}
 				</div>
-				{(phones || []).map(({ phone = '' }) => (
-					<div
-						key={phone}
-						className={styles.mobile_no}
-					>
-						{phone}
-					</div>
-				))}
+
+				{(phones || []).map(
+					({ phone = '' }) => (
+						<div
+							key={phone}
+							className={styles.mobile_no}
+						>
+							{phone}
+						</div>
+					),
+				)}
 			</div>
 		</div>
 	);

@@ -29,21 +29,22 @@ function MailAttachments({ mediaUrls = [] }) {
 							onClick={() => setActiveAttachmentData(file)}
 						>
 							<div className={styles.file_name}>
-								{file.fileName}
+								{file?.fileName || ''}
 							</div>
 							.
 							<div>
-								{file.fileExtension}
+								{file?.fileExtension || ''}
 							</div>
 						</div>
 
 						<IcMDownload
 							className={styles.download_icon}
-							onClick={() => getDownloadFiles({ imgUrl: file.fileUrl })}
+							onClick={() => getDownloadFiles({ imgUrl: file?.fileUrl })}
 						/>
 					</div>
 				),
 			)}
+
 			<ViewAttachmentsModal
 				activeAttachmentData={activeAttachmentData}
 				setActiveAttachmentData={setActiveAttachmentData}

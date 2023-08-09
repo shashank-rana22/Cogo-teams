@@ -68,9 +68,7 @@ export function getFileAttributes({ fileName = '', finalUrl = '' }) {
 	};
 }
 
-export const formatFileAttributes = ({
-	uploadedFiles = '',
-}) => {
+export const formatFileAttributes = ({ uploadedFiles = '' }) => {
 	const flattenFilesArray = [uploadedFiles].flat();
 
 	return flattenFilesArray?.map(
