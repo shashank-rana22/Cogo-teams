@@ -11,8 +11,6 @@ const useGetServiceLevelStats = ({
 	entity = '', timeRange = '',
 	statsType = '',
 	filter = {},
-	activeBar = '',
-	activeShipmentCard = '',
 	customDate = new Date(),
 	specificServiceLevel = null,
 	serviceLevel,
@@ -59,16 +57,15 @@ const useGetServiceLevelStats = ({
 		} catch (error) {
 			toastApiError(error);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
 		filter, customDate, specificServiceLevel, DEFAULT_CURRENCY,
-		activeBar,
+		serviceLevel,
 	]);
 
 	useEffect(() => {
 		getServiceLevelData();
-	}, [getServiceLevelData, entity, timeRange, activeBar, activeShipmentCard, serviceLevel]);
+	}, [getServiceLevelData]);
 
 	return {
 		serviceLevelData,
