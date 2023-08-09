@@ -1,5 +1,4 @@
 import { Button, Accordion, cl, Pill } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useContext } from 'react';
@@ -8,6 +7,7 @@ import { CheckoutContext } from '../../context';
 import { displayTotal, convertCurrencyValue } from '../../helpers/dynamic-values';
 
 import AddLineItemModal from './components/AddLineItemModal';
+import BreakdownDetailsHeader from './components/BreakdownDetailsHeader';
 import ContainerDetails from './components/ContainerDetails';
 import ConvenienceDetails from './components/ConvenienceDetails';
 import EditLineItemModal from './components/EditLineItemModal';
@@ -46,7 +46,10 @@ function BreakdownDetails({
 		editLineItemData,
 		setEditLineItemData,
 		resetMargins = () => {},
+		otherCharges = [],
 	} = useHandleBreakdownDetails({ rate, setRateDetails, setNoRatesPresent });
+
+	console.log('rateDetails', rateDetails);
 
 	let total = 0;
 
@@ -54,29 +57,9 @@ function BreakdownDetails({
 
 	const { primary_service = '' } = detail || {};
 
-	const { booking_charges = {} } = rate;
-
-	const otherCharges = Object.entries(booking_charges)
-		.filter(([key]) => key !== 'convenience_rate')
-		.map(([, item]) => ({
-			...item.line_items[GLOBAL_CONSTANTS.zeroth_index],
-		}));
-
 	return (
 		<div>
-			{!disableForm ? (
-				<div className={styles.header}>
-					<div className={styles.heading}>Add or Edit Margin </div>
-					<Button
-						type="button"
-						themeType="secondary"
-						size="xl"
-						onClick={resetMargins}
-					>
-						Reset
-					</Button>
-				</div>
-			) : null}
+			<BreakdownDetailsHeader disableForm={disableForm} resetMargins={resetMargins} rateDetails={rateDetails} />
 
 			{rateDetails.map((item, index) => {
 				const { id = '' } = item || {};
@@ -128,7 +111,7 @@ function BreakdownDetails({
 
 				return (
 					<Accordion
-						className={cl`${styles.container} ${styles[source]}`}
+						className={cl`${styles.container} ${styles[source]} ${!index && styles.first}`}
 						key={id}
 						isOpen={!index}
 						animate

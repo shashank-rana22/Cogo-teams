@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -6,6 +7,14 @@ const DEFAULT_VALUE = 0;
 const useHandleBreakdownDetails = ({ rate, setRateDetails, setNoRatesPresent = () => {} }) => {
 	const [addLineItemData, setAddLineItemData] = useState({});
 	const [editLineItemData, setEditLineItemData] = useState({});
+
+	const { booking_charges = {} } = rate;
+
+	const otherCharges = Object.entries(booking_charges)
+		.filter(([key]) => key !== 'convenience_rate')
+		.map(([, item]) => ({
+			...item.line_items[GLOBAL_CONSTANTS.zeroth_index],
+		}));
 
 	const getUpdatedLineItems = ({ line_items, presentLineItems, reset = false }) => line_items.map((lineItem) => {
 		const presentPrefillValues = presentLineItems.find((item) => item.code === lineItem.code);
@@ -98,6 +107,7 @@ const useHandleBreakdownDetails = ({ rate, setRateDetails, setNoRatesPresent = (
 		editLineItemData,
 		setEditLineItemData,
 		resetMargins,
+		otherCharges,
 	};
 };
 
