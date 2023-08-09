@@ -1,33 +1,28 @@
 import { SingleDateRange, Button, Popover, Select, Tooltip, Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { CHANNEL_OPTIONS } from '../../constant';
-import { FilterInterface } from '../../interface';
-import { optionsMonth, optionsYear } from '../constant';
+import { CHANNEL_OPTIONS } from '../../constant.tsx';
+import { optionsMonth, optionsYear } from '../constant.tsx';
 
 import MoreFilter from './MoreFilter/index';
 import styles from './styles.module.css';
 
-interface CardInterface {
-	refetch:Function
-	filters:FilterInterface
-	shipmentLoading?:boolean
-	setFilters: React.Dispatch<React.SetStateAction<FilterInterface>>
-	setViewSelected: React.Dispatch<React.SetStateAction<boolean>>
-	setShowBtn: React.Dispatch<React.SetStateAction<boolean>>
-	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
-	setPayload: React.Dispatch<React.SetStateAction<any[]>>
-	isApplyEnable?:boolean
-}
-
+const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
+const FIRST_MONTH_INDEX = 1;
+const FIRST_PAGE = 1;
+const ALLOW_BUTTON_ON_COUNT = 2;
+const MAX_DAY_ALLOWED = 10;
+const FILTER_COUNT_INCREMENT = 1;
 function Card({
 	refetch = () => {}, filters = {}, setFilters = () => {},
 	shipmentLoading = false, setViewSelected = () => {},
 	setShowBtn = () => {}, setCheckedRows = () => {},
 	setPayload = () => {},
 	isApplyEnable = false,
-}:CardInterface) {
+}) {
 	const [moreFilter, setMoreFilter] = useState(false);
 	const [profitNumber, setProfitNumber] = useState('');
 
@@ -37,11 +32,11 @@ function Card({
 		let count = 0;
 		Object.values(filters).forEach((e) => {
 			if (e !== undefined) {
-				count += 1;
+				count += FILTER_COUNT_INCREMENT;
 			}
 		});
 
-		if (count > 2) {
+		if (count > ALLOW_BUTTON_ON_COUNT) {
 			setShowBtn(true);
 		} else {
 			setShowBtn(false);
@@ -71,14 +66,18 @@ function Card({
 		setFilters((prev) => ({ ...prev, page: 1 }));
 		setViewSelected(false);
 
-		if (filters.page === 1) {
+		if (filters.page === FIRST_PAGE) {
 			refetch();
 		}
 	};
 	const monthYear = [filters?.year, filters?.month];
-	const isDateRangeEnabled =	monthYear[0]?.length > 0 && typeof monthYear[1] === 'string';
-	const maxDate = new Date(monthYear[0], monthYear[1], 10);
-	const minDate = new Date(monthYear[0], monthYear[1] - 1, 1);
+	const isDateRangeEnabled =	isEmpty(monthYear[ZEROTH_INDEX]) && typeof monthYear[FIRST_MONTH_INDEX] === 'string';
+	const maxDate = new Date(monthYear[ZEROTH_INDEX], monthYear[FIRST_MONTH_INDEX], MAX_DAY_ALLOWED);
+	const minDate = new Date(
+		monthYear[ZEROTH_INDEX],
+		monthYear[FIRST_MONTH_INDEX] - FIRST_MONTH_INDEX,
+		FIRST_MONTH_INDEX,
+	);
 
 	return (
 		<div className={styles.container}>
@@ -107,7 +106,7 @@ function Card({
 					<div style={{ marginRight: '20px' }}>
 						<Select
 							value={filters?.year}
-							onChange={(val:string) => { setFilters((prev) => ({ ...prev, year: val })); }}
+							onChange={(val) => { setFilters((prev) => ({ ...prev, year: val })); }}
 							placeholder="Year"
 							options={optionsYear}
 							isClearable
@@ -117,7 +116,7 @@ function Card({
 					</div>
 					<Select
 						value={filters?.month}
-						onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
+						onChange={(val) => { setFilters((prev) => ({ ...prev, month: val })); }}
 						placeholder="Month"
 						options={optionsMonth}
 						isClearable
@@ -154,7 +153,7 @@ function Card({
 						dateFormat="MM/dd/yyyy"
 						name="date"
 						disable={!isDateRangeEnabled}
-						onChange={(val:any) => { setFilters((prev) => ({ ...prev, date: val })); }}
+						onChange={(val) => { setFilters((prev) => ({ ...prev, date: val })); }}
 						value={filters?.date}
 						style={{ width: '184px' }}
 					/>

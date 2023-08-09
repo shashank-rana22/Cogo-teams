@@ -102,7 +102,6 @@ function ProfitabilityContent({
 					prefix={profitType === 'amount' && 'INR'}
 				/>
 			</div>
-
 		</div>
 	);
 	return (
