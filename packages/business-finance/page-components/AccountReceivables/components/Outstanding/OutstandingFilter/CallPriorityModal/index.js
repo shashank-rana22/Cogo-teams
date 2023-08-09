@@ -86,7 +86,13 @@ function CallPriorityModal({ showCallPriority = false, setShowCallPriority = () 
 
 	return (
 		<div className={styles.container}>
-			<Modal placement="center" size="xl" show={showCallPriority} onClose={() => setShowCallPriority(false)}>
+			<Modal
+				placement="center"
+				size="xl"
+				show={showCallPriority}
+				onClose={() => setShowCallPriority(false)}
+				className={styles.modalcontainer}
+			>
 				<Modal.Body>
 					<div className={styles.container}>
 						<div className={styles.sub_org_name_conatiner}>

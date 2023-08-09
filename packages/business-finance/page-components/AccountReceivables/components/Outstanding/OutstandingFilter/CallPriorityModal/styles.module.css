@@ -1,14 +1,12 @@
 .container {
 	display: flex;
 	justify-content: space-between;
+}
 
+.modalcontainer {
 	:global {
-		.ui_modal_dialog {
-			max-height: 200px !important;
-		}
-
 		.ui_modal_body_container {
-			max-height: 200px !important;
+			max-height: 95vh !important;
 		}
 	}
 }
