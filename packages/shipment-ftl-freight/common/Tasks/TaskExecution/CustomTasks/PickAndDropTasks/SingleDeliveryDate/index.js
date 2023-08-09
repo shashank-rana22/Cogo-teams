@@ -1,8 +1,10 @@
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/surface-modules';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 
+import useListFieldServiceOpsDetails from '../../../../../FieldExecutive/hooks/useListFieldServiceOpsDetails';
 import getControls from '../configs/deliveryControls';
 import {
 	datesChecker,
@@ -30,7 +32,12 @@ function SingleDeliveryDate(props, ref) {
 		formState: { errors },
 		watch,
 		handleSubmit,
+		setValue,
 	} = useForm();
+
+	const { list } = useListFieldServiceOpsDetails({
+		shipment_id: shipment_data?.id,
+	});
 
 	const formValues = watch();
 
@@ -79,6 +86,28 @@ function SingleDeliveryDate(props, ref) {
 			item?.estimated_arrival,
 		),
 	};
+
+	useEffect(() => {
+		if (!isEmpty(list)) {
+			const truckValues = (list || []).reduce((acc, itm) => {
+				if (itm?.service_type !== 'subsidiary_service') {
+					const truckExist = list.find(
+						(listItem) => itm?.truck_number === listItem?.truck_number,
+					) || {};
+					if (isEmpty(truckExist)) {
+						acc.push({ truck_number: itm?.id });
+					} else {
+						truckExist?.end_kilometer_images?.forEach((end_kilometer_image) => {
+							acc.push(end_kilometer_image);
+						});
+					}
+				}
+				return acc;
+			}, []);
+
+			setValue('image', truckValues);
+		}
+	}, [list, setValue]);
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit,

@@ -4,6 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import useListFieldServiceOpsDetails from '../../../../../FieldExecutive/hooks/useListFieldServiceOpsDetails';
 import getDefaultValues from '../../../utils/get-default-values';
 import getControl from '../controls';
 
@@ -39,6 +40,10 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 		}
 		return null;
 	};
+
+	const { list, loading } = useListFieldServiceOpsDetails({
+		shipment_id: shipment_data?.id,
+	});
 
 	const {
 		control,
@@ -103,7 +108,32 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 		});
 	}
 
+	useEffect(() => {
+		if (!isEmpty(list)) {
+			const truckValues = (services || []).reduce((acc, item) => {
+				if (item?.service_type !== 'subsidiary_service') {
+					const truckExist = list.find(
+						(listItem) => item?.truck_number === listItem?.truck_number,
+					) || {};
+					if (isEmpty(truckExist)) {
+						acc.push({ truck_number: item?.id });
+					} else {
+						truckExist?.eway_bill_images?.forEach((eway_bill_item) => {
+							acc.push({
+								truck_number : item?.id,
+								url          : eway_bill_item,
+							});
+						});
+					}
+				}
+				return acc;
+			}, []);
+			setValue('documents', truckValues);
+		}
+	}, [list, services, setValue]);
+
 	return {
+		loading,
 		finalDoc,
 		ewayBillData,
 		fields,

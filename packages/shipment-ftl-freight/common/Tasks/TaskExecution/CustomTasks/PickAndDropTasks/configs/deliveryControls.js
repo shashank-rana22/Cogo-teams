@@ -72,6 +72,18 @@ const getControls = (item, dateObj) => {
 			label : 'Remark',
 			rules : dateObj?.DELAYED_DELIVERY_REMARK_RULES,
 		},
+		{
+			name          : 'image',
+			type          : 'file',
+			span          : 4,
+			label         : 'Upload End Kilometers Image',
+			size          : 'sm',
+			document_type : 'end_km_image',
+			multiple      : true,
+			accept:
+				'image/*,.pdf,.doc,.docx,.xlsx,application/msword,'
+				+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+		},
 	];
 	return controls;
 };

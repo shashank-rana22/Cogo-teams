@@ -1,21 +1,36 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 import injectCustomFormValidations from './inject-custom-form-validations';
 
 const TRUCK_NUM_TASKS = [
 	'upload_lorry_receipt',
-	'upload_ftl_commercial_invoice',
+	'upload_trucking_incidental_charge',
+	'upload_advance_payment',
 	'upload_commercial_invoice',
+	'upload_ftl_commercial_invoice',
 	'upload_weight_note',
+	'upload_fleet_authorization_letter',
 	'upload_load_truck_image',
+	'upload_broker_slip',
+	'upload_invoice_submission_acknowledgement',
 ];
+
+const TRUCK_DOCS_PREFILL_KEYS_MAPPING = {
+	upload_weight_note                        : 'weight_note_image',
+	upload_fleet_authorization_letter         : 'fleet_owner_letter',
+	upload_invoice_submission_acknowledgement : 'invoice_submission',
+	upload_load_truck_image                   : 'selfie_with_loaded_truck',
+	upload_ftl_commercial_invoice             : 'commercial_invoice_images',
+};
 
 const TRUCK_EXCEED_NUMBER = -1;
 
 const injectValues = ({
-	selectedMail,
+	selectedMail = [],
 	populatedControls,
 	task,
+	getApisData = {},
 	servicesList,
 }) => {
 	const controls = populatedControls || [];
@@ -145,7 +160,51 @@ const injectValues = ({
 	}
 
 	if (TRUCK_NUM_TASKS.includes(task.task)) {
+		const getData = getApisData?.list_shipment_services?.filter(
+			(obj) => obj.service_type !== 'subsidiary_service',
+		);
+
+		const documentObjectControl = controls?.find(
+			(control) => control?.name === 'documents' && control?.type === 'fieldArray',
+		) || {};
+
+		const isMultipleUrlAllowed = documentObjectControl?.controls?.some(
+			(control) => control?.name === 'url' && control?.multiple,
+		);
+
+		const filteredData = getData?.reduce((acc, item) => {
+			const requiredTruck = getApisData?.list_shipment_field_service_ops_details?.find(
+				(singleItem) => singleItem?.truck_number === item?.truck_number,
+			) || {};
+			acc[item?.id] = isEmpty(requiredTruck) ? {} : requiredTruck;
+			return acc;
+		}, {});
+
+		let customValues = [];
+		if (task.task in TRUCK_DOCS_PREFILL_KEYS_MAPPING) {
+			customValues = Object.entries(filteredData || {}).reduce(
+				(acc, [service_id, docData]) => {
+					if (isMultipleUrlAllowed) {
+						const customValueUrls = docData[
+							TRUCK_DOCS_PREFILL_KEYS_MAPPING[task.task]
+						]?.map((url) => url);
+
+						acc.push({ service_id, url: customValueUrls });
+					} else {
+						docData[TRUCK_DOCS_PREFILL_KEYS_MAPPING[task.task]]?.forEach(
+							(url) => {
+								acc.push({ service_id, url });
+							},
+						);
+					}
+					return acc;
+				},
+				[],
+			);
+		}
+
 		(controls || []).forEach((control, index) => {
+			const tempControl = control;
 			if (control.type === 'fieldArray') {
 				(control.controls || []).forEach((controlObj, ind) => {
 					if (controlObj.name === 'service_id') {
@@ -157,6 +216,7 @@ const injectValues = ({
 						);
 					}
 				});
+				tempControl.value = customValues;
 			}
 		});
 	}
@@ -167,7 +227,7 @@ const injectValues = ({
 				control?.controls?.forEach((singleItem) => {
 					const newFieldItem = singleItem;
 					if (singleItem?.name === 'truck_number') {
-						const truckNumberOptions =	(servicesList || []).reduce((acc, item) => {
+						const truckNumberOptions = (servicesList || []).reduce((acc, item) => {
 							if (item?.truck_number) {
 								acc.push({ label: item?.truck_number, value: item?.id });
 							}
