@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { setDoc, doc } from 'firebase/firestore';
 
-const updateRoom = async ({ agentId, firestore }) => {
+const updateRoom = ({ agentId = '', firestore = {} }) => {
 	const docRef = doc(firestore, `/users/${agentId}`);
 
 	setDoc(
@@ -18,9 +18,9 @@ const updateRoom = async ({ agentId, firestore }) => {
 };
 
 function useHangUpCall({
-	callRecordId,
-	firestore,
-	loggedInAgentId,
+	callRecordId = '',
+	firestore = {},
+	loggedInAgentId = '',
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/hang_up_outgoing_call',
