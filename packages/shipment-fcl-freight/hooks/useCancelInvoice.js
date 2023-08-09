@@ -31,8 +31,9 @@ const useCancelInvoice = () => {
 		try {
 			const response = await trigger({
 				data: {
-					type : 'REVOKE_INVOICE',
-					data : {
+					type            : 'REVOKE_INVOICE',
+					incidentSubType : 'CANCEL_INVOICE',
+					data            : {
 						revokeInvoiceRequest: {
 							invoiceNumber : proformaNumber,
 							documentUrls  : [values?.documentUrls?.finalUrl],
