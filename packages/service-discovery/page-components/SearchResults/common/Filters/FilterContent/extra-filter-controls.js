@@ -1,4 +1,18 @@
-const EXTRA_FILTERS = {
+import { addDays } from '@cogoport/utils';
+
+const ONE = 1;
+
+export const FILTERS_DEFAULT_VALUES = {
+	shipping_line_id     : [],
+	operator_type        : null,
+	cargo_readiness_date : addDays(new Date(), ONE),
+	source               : null,
+	payment_term         : null,
+	offers               : null,
+	schedule_type        : '',
+};
+
+export const EXTRA_FILTERS = {
 	shipping_line_id: {
 		name     : 'shipping_line_id',
 		label    : 'Shipping Line',
@@ -165,5 +179,3 @@ const EXTRA_FILTERS = {
 		],
 	},
 };
-
-export default EXTRA_FILTERS;

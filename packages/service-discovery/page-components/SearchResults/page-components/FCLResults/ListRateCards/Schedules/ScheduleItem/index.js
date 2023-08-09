@@ -41,7 +41,6 @@ function ScheduleItem({
 			...prev,
 			departure_before : !isExistingSchedule ? end_date : undefined,
 			departure_after  : !isExistingSchedule ? start_date : undefined,
-			page             : 1,
 		}));
 	};
 

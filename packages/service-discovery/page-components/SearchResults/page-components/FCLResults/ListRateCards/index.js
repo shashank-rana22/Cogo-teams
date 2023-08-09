@@ -7,6 +7,7 @@ import RequestRate from '../../../common/EmptyState/RequestRate';
 import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
 
+import AppliedFilters from './AppliedFilters';
 import ComparisonHeader from './ComparisonHeader';
 import ContractAd from './ContractAd';
 import Header from './Header';
@@ -155,6 +156,8 @@ function ListRateCards({
 				selectedWeek={selectedWeek}
 				loading={loading}
 			/>
+
+			<AppliedFilters filters={filters} setFilters={setFilters} />
 
 			{loading || isEmpty(cogoAssuredRates) ? null : (
 				<CogoAssuredCard
