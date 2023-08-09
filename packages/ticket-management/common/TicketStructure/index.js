@@ -14,10 +14,6 @@ function TicketStructure({
 	updateTicketActivity = () => {},
 	listLoading = false,
 }) {
-	if (listLoading) {
-		return <TicketStructureLoader />;
-	}
-
 	if (isEmpty(data)) {
 		return <EmptyTicket emptyText={`No ${label} Tickets`} />;
 	}
@@ -43,6 +39,9 @@ function TicketStructure({
 						updateTicketActivity={updateTicketActivity}
 					/>
 				))
+			}
+			{
+				listLoading && <TicketStructureLoader />
 			}
 		</div>
 	);
