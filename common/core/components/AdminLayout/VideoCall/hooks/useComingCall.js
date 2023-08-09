@@ -105,7 +105,10 @@ function useComingCall({
 				handleCallEnd({ callActivity: 'answered', description: 'peer js technical error' });
 			});
 			peer.on('close', () => {
-				handleCallEnd();
+				handleCallEnd({
+					callActivity : 'answered',
+					description  : 'call is closed',
+				});
 				callUpdate({
 					data: {
 						call_status: 'call_end',

@@ -3,7 +3,6 @@ import { isEmpty } from '@cogoport/utils';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { v1 as uuid } from 'uuid';
 
 import IncomingCall from './components/IncomingCall';
 import VideoCallScreen from './components/VideoCallScreen';
@@ -33,7 +32,7 @@ function VideoCall({
 		myDetails          : {},
 		peerDetails        : {},
 		callingRoomDetails : {},
-		callingRoomId      : uuid(),
+		callingRoomId      : '',
 		webrtcTokenRoomId  : '',
 		callingType        : '',
 	});
@@ -83,15 +82,15 @@ function VideoCall({
 			callUpdate({
 				data          : { call_status: 'miss_call' },
 				firestore,
-				callingRoomId : callDetails?.callingRoomId,
+				callingRoomId : videoCallId,
 			});
 			handleCallEnd({ callActivity: 'missed', description: 'user does not pick up the call' });
 		}
-	}, [callDetails?.callingRoomId, callDetails?.callingRoomDetails?.call_status, handleCallEnd, firestore]);
+	}, [videoCallId, callDetails?.callingRoomDetails?.call_status, handleCallEnd, firestore]);
 
 	useEffect(
 		() => {
-			if (inVideoCall && videoCallRecipientData?.user_id) {
+			if (inVideoCall && videoCallRecipientData?.user_id && videoCallId) {
 				handleOutgoingCall({ peerDetails: videoCallRecipientData, videoCallIdFirebase: videoCallId });
 			}
 
@@ -99,7 +98,7 @@ function VideoCall({
 
 			return () => clearTimeout(timeoutMissCallId);
 		},
-		[inVideoCall, videoCallRecipientData, handleOutgoingCall, missCallHandle, videoCallId],
+		[inVideoCall, videoCallRecipientData, videoCallId, missCallHandle, handleOutgoingCall],
 	);
 
 	useEffect(() => {
