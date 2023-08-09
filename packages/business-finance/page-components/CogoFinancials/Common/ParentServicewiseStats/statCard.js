@@ -5,8 +5,6 @@ import formatCount from '../../utils/formatCount';
 
 import styles from './styles.module.css';
 
-const DEFAULT_INDEX = 1;
-
 function StatCard({
 	mappingCards = [], service = '', isMain = false,
 	setActiveService = () => {},
@@ -38,14 +36,16 @@ function StatCard({
 					flexDirection: isMain ? 'column' : 'row',
 				}}
 			>
-				{mappingCards.map((item, index) => (
+				{mappingCards.map((item) => (
 					<div className={cl`${styles.stats} ${isMain && styles.margin}`} key={item.label}>
 						<div className={cl`${styles.stathead} ${!isMain && styles.fontlabel}`}>
 							{item.label}
 						</div>
-						<div className={cl`${styles.value}
+						<div
+							className={cl`${styles.value}
 					${!isMain && styles.fontvalue} 
-					${mappingCards?.length === index + DEFAULT_INDEX && styles.color}`}
+					`}
+							style={{ color: item?.profitColor || '#000' }}
 						>
 							{isMain ? item?.value
 								: displayAmount(singleServiceData[`${item.name}${taxType}`], currency)}

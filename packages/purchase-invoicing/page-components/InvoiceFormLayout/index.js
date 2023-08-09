@@ -296,6 +296,7 @@ function InvoiceFormLayout({
 					errors={errors}
 					errMszs={errMszs}
 					open={isEdit}
+					shipment_data={shipment_data}
 				/>
 
 				<AdditionalDetails

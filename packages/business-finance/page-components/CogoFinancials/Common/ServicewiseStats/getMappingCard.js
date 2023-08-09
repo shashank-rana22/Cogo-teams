@@ -1,5 +1,7 @@
 import formatCount from '../../utils/formatCount';
 
+const DEFAULT_VALUE = 0;
+
 const getMappingCard = ({
 	displayAmount = () => {},
 	mainCardData = {}, taxType = '',
@@ -19,10 +21,12 @@ const getMappingCard = ({
 		stats : `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shipments`,
 	},
 	{
-		label : 'Estimated Profit',
-		key   : 'estimatedProfit',
-		value : displayAmount(mainCardData[`estimatedProfit${taxType}`], currency),
-		stats : `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shipments`,
+		label       : 'Estimated Profit',
+		key         : 'estimatedProfit',
+		value       : displayAmount(mainCardData[`estimatedProfit${taxType}`], currency),
+		stats       : `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shipments`,
+		profitColor : Number(mainCardData[`estimatedProfit${taxType}`] || DEFAULT_VALUE) > DEFAULT_VALUE
+			? '#abcd62' : '#ee3425',
 	},
 ];
 

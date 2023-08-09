@@ -47,7 +47,7 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 				airline_id          : rate?.airline_id,
 				line_items:
 					rate && rate?.origin_locals?.line_items
-						? rate.line_items.map((item) => ({
+						? rate?.origin_locals?.line_items.map((item) => ({
 							code     : item.code,
 							name     : item.name,
 							currency : item.currency,
@@ -62,7 +62,7 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 				airline_id          : rate?.airline_id,
 				line_items:
 					rate && rate?.destination_locals?.line_items
-						? rate.line_items.map((item) => ({
+						? rate?.destination_locals?.line_items.map((item) => ({
 							code     : item.code,
 							name     : item.name,
 							currency : item.currency,
