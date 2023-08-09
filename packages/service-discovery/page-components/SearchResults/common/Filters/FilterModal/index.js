@@ -3,45 +3,20 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { EXTRA_FILTERS_DEFAULT_VALUES } from '../../../utils/getPrefillForm';
 import FilterContent from '../FilterContent';
-import getFilterControls from '../FilterContent/getControls';
 
 import styles from './styles.module.css';
 
-const SERVICE_KEY = 'search_type';
-
-const checkIfFiltersChanged = (defaultValues, finalValues) => {
-	let isApplied = false;
-
-	Object.entries(finalValues).forEach(([key, value]) => {
-		if (key === 'shipping_line_id') {
-			value.forEach((shipping_line) => {
-				if (!defaultValues[key].includes(shipping_line)) {
-					isApplied = true;
-				}
-			});
-		} else if ((value && !defaultValues[key]) || (!value && defaultValues[key])
-		|| (value && value !== defaultValues[key])) {
-			isApplied = true;
-		}
-	});
-
-	return isApplied;
-};
-
 function FilterModal({
-	data = {},
 	show = false,
 	setShow = () => {},
 	filters = {},
 	setFilters = () => {},
-	setFiltersApplied = () => {},
 	loading = false,
+	DEFAULT_VALUES = {},
+	controls = [],
 }) {
-	const controls = getFilterControls(data, SERVICE_KEY, false, true);
-
-	const defaultValues = { ...EXTRA_FILTERS_DEFAULT_VALUES, ...filters };
+	const defaultValues = { ...DEFAULT_VALUES, ...filters };
 
 	const {
 		control,
@@ -58,12 +33,7 @@ function FilterModal({
 
 		const finalValues = { ...values };
 
-		delete finalValues.container;
-
-		const isChanged = checkIfFiltersChanged(EXTRA_FILTERS_DEFAULT_VALUES, finalValues);
-
 		setFilters({ ...filters, ...finalValues });
-		setFiltersApplied(isChanged);
 		setShow(false);
 	};
 
@@ -84,6 +54,7 @@ function FilterModal({
 					errors={errors}
 					setValue={setValue}
 					handleSubmit={handleSubmit}
+					filters={filters}
 				/>
 			</Modal.Body>
 

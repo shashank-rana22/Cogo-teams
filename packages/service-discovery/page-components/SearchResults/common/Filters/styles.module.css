@@ -4,3 +4,10 @@
 	margin-right: 10px;
 	margin-left: 20px;
 }
+
+.tick_icon {
+	width: 20px;
+	height: 20px;
+	margin-left: 2px;
+	color: #ee3425;
+}

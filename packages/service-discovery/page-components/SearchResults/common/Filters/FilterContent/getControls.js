@@ -3,7 +3,7 @@ import haulageControls from '../../../configurations/haulage-freight/form-contro
 import lclControls from '../../../configurations/lcl/form-controls';
 import trailerControls from '../../../configurations/trailer/form-controls';
 
-import EXTRA_FILTERS from './extra-filter-controls';
+import { EXTRA_FILTERS } from './extra-filter-controls';
 
 export const MAIN_CONTROLS_MAPPING = {
 	fcl_freight: {
@@ -11,7 +11,6 @@ export const MAIN_CONTROLS_MAPPING = {
 		mainControls  : fclControls,
 		extraControls : [
 			'shipping_line_id',
-			// 'detention_demurrage',
 			'source',
 			'schedule_type',
 			'payment_term',
@@ -58,14 +57,16 @@ export const MAIN_CONTROLS_MAPPING = {
 };
 
 const getFilterControls = (
-	data,
+	data = {},
 	service_key = 'primary_service',
 	showLoadControlsOnly = false,
 	showFiltersOnly = false,
 ) => {
 	const service_type = data[service_key];
 
-	const { label, mainControls, extraControls } = MAIN_CONTROLS_MAPPING[service_type];
+	if (!service_type) return [];
+
+	const { label, mainControls, extraControls } = MAIN_CONTROLS_MAPPING[service_type] || {};
 
 	const ifShowMainControlsOnly = (y, n) => (showLoadControlsOnly ? y : n);
 	const ifShowFiltersOnly = (y, n) => (showFiltersOnly ? y : n);
