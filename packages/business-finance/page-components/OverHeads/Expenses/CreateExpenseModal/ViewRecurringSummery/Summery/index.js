@@ -46,19 +46,8 @@ const summaryDataOne = ({ organizationName, category, entityCode, branchName }) 
 	},
 ];
 
-const summaryDataTwo = ({ payableAmount, billCurrency, billDate, createdDate, billNumber }) => [
-	{
-		title : 'Payable Amount',
-		value : formatAmount({
-			amount   : payableAmount,
-			currency : billCurrency,
-			options  : {
-				style           : 'currency',
-				currencyDisplay : 'code',
-			},
-		}),
+const summaryDataTwo = ({ billDocumentUrl, filename, billDate, createdDate, billNumber }) => [
 
-	},
 	{
 		title : 'Expense Date',
 		value : (
@@ -91,22 +80,6 @@ const summaryDataTwo = ({ payableAmount, billCurrency, billDate, createdDate, bi
 		title : 'Invoice Number',
 		value : billNumber || '-',
 	},
-];
-
-const summaryDataThree = ({ ledgerTotal, ledgerCurrency, billDocumentUrl, filename }) => [
-	{
-		title : 'Ledger Amount',
-		value : formatAmount({
-			amount   : ledgerTotal,
-			currency : ledgerCurrency,
-			options  : {
-				style           : 'currency',
-				currencyDisplay : 'code',
-			},
-		})
-			|| '-',
-	},
-
 	{
 		title : 'Uploaded Documents',
 		value : (
@@ -131,14 +104,109 @@ const summaryDataThree = ({ ledgerTotal, ledgerCurrency, billDocumentUrl, filena
 	},
 ];
 
+const summaryDataThree = ({ ledgerTotal, grandTotal, paidAmount, ledgerCurrency, payableAmount, billCurrency }) => [
+	{
+		title : 'Invoice Amount',
+		value : formatAmount({
+			amount   : grandTotal,
+			currency : billCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+
+	},
+
+	{
+		title : 'Ledger Amount',
+		value : formatAmount({
+			amount   : ledgerTotal,
+			currency : ledgerCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		})
+			|| '-',
+	},
+	{
+		title : 'Payable Amount',
+		value : formatAmount({
+			amount   : payableAmount,
+			currency : billCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+
+	},
+	{
+		title : 'Paid Amount',
+		value : formatAmount({
+			amount   : paidAmount,
+			currency : billCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+
+	},
+
+];
+
+const summaryDataFourth = ({ paidTds, payableTds, billCurrency, tdsAmount, paymentStatus }) => [
+	{
+		title : 'Tds Amount',
+		value : formatAmount({
+			amount   : tdsAmount,
+			currency : billCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+	{
+		title : 'Paid Tds Amount',
+		value : formatAmount({
+			amount   : paidTds,
+			currency : billCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+	{
+		title : 'Payable Tds Amount',
+		value : formatAmount({
+			amount   : payableTds,
+			currency : billCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+	{
+		title : 'Payment Status',
+		value : paymentStatus,
+	},
+];
+
 const summeryMappings = ({
 	summaryDataFirst,
 	summaryDataSecond,
 	summaryDataThird,
+	summaryDataFour,
 }) => [
 	{ key: '1', val: summaryDataFirst },
 	{ key: '2', val: summaryDataSecond },
 	{ key: '3', val: summaryDataThird },
+	{ key: '4', val: summaryDataFour },
 ];
 
 function Summery({
@@ -158,6 +226,11 @@ function Summery({
 		ledgerTotal,
 		ledgerCurrency,
 		billId,
+		grandTotal,
+		paidAmount,
+		paidTds = 0,
+		payableTds,
+		tdsAmount, paymentStatus,
 	} = itemData || {};
 	const { stakeholders } = useGetStakeholder({ billId });
 
@@ -169,12 +242,27 @@ function Summery({
 	const filename = splitArray[splitArray.length - FIRST_INDEX];
 
 	const summaryDataFirst = summaryDataOne({ organizationName, category, entityCode, branchName });
-	const summaryDataSecond = summaryDataTwo({ payableAmount, billCurrency, billDate, createdDate, billNumber });
-	const summaryDataThird = summaryDataThree({ ledgerTotal, ledgerCurrency, billDocumentUrl, filename });
+	const summaryDataSecond = summaryDataTwo({
+		billDate,
+		createdDate,
+		billDocumentUrl,
+		filename,
+		billNumber,
+	});
+	const summaryDataThird = summaryDataThree({
+		payableAmount,
+		billCurrency,
+		ledgerTotal,
+		ledgerCurrency,
+		paidAmount,
+		grandTotal,
+	});
+	const summaryDataFour = summaryDataFourth({ paidTds, payableTds, billCurrency, tdsAmount, paymentStatus });
 	const summeryMapping = summeryMappings({
 		summaryDataFirst,
 		summaryDataSecond,
 		summaryDataThird,
+		summaryDataFour,
 	});
 	return (
 		<div className={styles.container}>
