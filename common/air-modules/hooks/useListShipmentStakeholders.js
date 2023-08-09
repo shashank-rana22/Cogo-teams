@@ -7,7 +7,7 @@ const useListStakeholders = ({ shipment_id = '', stakeholder_type = '' }) => {
 	const [apiData, setApiData] = useState([]);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'list_shipment_stakeholders',
+		url    : '/list_shipment_stakeholders',
 		params : {
 			filters: {
 				shipment_id,

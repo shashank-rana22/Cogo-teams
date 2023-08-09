@@ -19,7 +19,7 @@ const useGetShipmentFaultAlarmDescription = (alarmId, reload) => {
 	const getShipmentFaultAlarmDescription = useCallback(async () => {
 		try {
 			const res = await trigger();
-			setApiData(res.data || {});
+			setApiData(res?.data || {});
 		} catch (err) {
 			setApiData({});
 			toastApiError(err);

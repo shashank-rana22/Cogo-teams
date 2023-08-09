@@ -17,13 +17,12 @@ import ViewSelect from '../ViewSelect';
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 function RaiseAlarmModal({
 	setShow = () => {},
 	alarmId = '',
 	setAlarmId = () => {},
 }) {
+	const geo = getGeoConstants();
 	const { partner } = useSelector(({ profile }) => ({
 		partner: profile?.partner,
 	}));
@@ -87,7 +86,7 @@ function RaiseAlarmModal({
 	let showAll = false;
 	if (
 		(partner?.user_role_ids || []).some(
-			(id) => id.includes(geo.uuid.super_admin_id) || id.includes(geo.uuid.admin_id),
+			(id) => [geo.uuid.super_admin_id, geo.uuid.admin_id].includes(id),
 		)
 	) {
 		showAll = true;

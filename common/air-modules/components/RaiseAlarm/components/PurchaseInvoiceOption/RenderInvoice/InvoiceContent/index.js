@@ -8,7 +8,7 @@ function InvoiceContent({
 	return (
 		<div>
 			{lineItems?.map((lineItem) => (
-				<div key={lineItem.id}>
+				<div key={lineItem?.id}>
 					<Content
 						lineItem={lineItem}
 						checkedLineItem={checkedLineItem}

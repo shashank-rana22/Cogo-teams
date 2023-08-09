@@ -85,8 +85,7 @@ const useCreateShipmentFaultAlarm = ({
 		if (stakeholder_types?.includes('service_ops2')) {
 			setVal('service_ops2');
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [stakeholder_types?.includes('service_ops2')]);
+	}, [setVal, stakeholder_types]);
 
 	let controls = [];
 	if (stakeholder_types?.includes('booking_agent') || val === 'okam') {
@@ -95,11 +94,11 @@ const useCreateShipmentFaultAlarm = ({
 		stakeholder_types?.includes('service_ops2')
 		|| val === 'service_ops2'
 	) {
-		controls = so2Controls(
+		controls = so2Controls({
 			supplierOptions,
 			SUPPLY_AGENT,
 			serviceDocsOptions,
-		);
+		});
 	}
 
 	const { control, watch, handleSubmit, setValue, reset } = useForm();
@@ -149,8 +148,7 @@ const useCreateShipmentFaultAlarm = ({
 				return null;
 			});
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [formValues?.fraud_reason]);
+	}, [formValues?.fraud_reason, stakeholder_types, val]);
 
 	const handleOnClose = () => {
 		handleClose();
@@ -163,7 +161,7 @@ const useCreateShipmentFaultAlarm = ({
 
 		const criticality_value = values?.fraud_reason?.split('-')[FIRST_INDEX];
 
-		Object.keys(values).forEach((value) => {
+		Object.keys(values || {}).forEach((value) => {
 			const hasValue = values[value];
 			if (hasValue) {
 				PAYLOAD[value] = hasValue;

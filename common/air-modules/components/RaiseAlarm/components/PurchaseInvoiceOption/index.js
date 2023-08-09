@@ -27,7 +27,7 @@ const PurchaseInvoices = ({
 				);
 				setCheckedLineItem(remainingChecked);
 			} else {
-				setCheckedLineItem([...checkedLineItem, item]);
+				setCheckedLineItem([...(checkedLineItem || []), item]);
 			}
 		}
 	};

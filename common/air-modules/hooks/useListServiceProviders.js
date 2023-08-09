@@ -5,7 +5,7 @@ import toastApiError from '../utils/toastApiError';
 
 const useListServiceProviders = ({ id = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'list_shipment_service_providers',
+		url    : '/list_shipment_service_providers',
 		params : {
 			filters: {
 				shipment_id: id,

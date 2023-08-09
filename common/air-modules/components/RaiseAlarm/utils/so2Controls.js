@@ -1,10 +1,10 @@
 import sop2Options from './so2Options.json';
 
-const so2Controls = (
-	supplierOptions,
-	supplyAgent,
-	serviceDocsOptions,
-) => [
+const so2Controls = ({
+	supplierOptions = [],
+	SUPPLY_AGENT = [],
+	serviceDocsOptions = [],
+}) => [
 	{
 		label       : 'Choose Supplier',
 		name        : 'supplier_id',
@@ -146,7 +146,7 @@ const so2Controls = (
 		label       : 'Who did you escalate it to?',
 		name        : 'who_escalate',
 		type        : 'select',
-		options     : supplyAgent,
+		options     : SUPPLY_AGENT,
 		span        : 7,
 		placeholder : 'Select Supply Agent',
 	},

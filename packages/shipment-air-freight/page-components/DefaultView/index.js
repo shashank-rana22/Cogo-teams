@@ -34,7 +34,7 @@ function DefaultView() {
 
 	const {
 		shipment_data = {}, stakeholderConfig = {},
-		servicesList = [], getShipmentStatusCode, isGettingShipment = false,
+		servicesList = [], getShipmentStatusCode = 0, isGettingShipment = false,
 		refetchServices = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
@@ -44,7 +44,7 @@ function DefaultView() {
 	const [alarmId, setAlarmId] = useState('');
 	const [reload, setReload] = useState(false);
 
-	const { data: alarmData } = useGetShipmentFaultAlarmDescription(alarmId, reload);
+	const { data: alarmData = {} } = useGetShipmentFaultAlarmDescription(alarmId, reload);
 	const handleVersionChange = useCallback(() => {
 		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data.id}`;
 		window.location.replace(newHref);
@@ -106,7 +106,7 @@ function DefaultView() {
 	}
 
 	const handleRaiseContainer = () => {
-		const isTrue = shipment_data.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
+		const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
 
 		if (!shipment_data?.is_job_closed && isTrue) {
 			return (

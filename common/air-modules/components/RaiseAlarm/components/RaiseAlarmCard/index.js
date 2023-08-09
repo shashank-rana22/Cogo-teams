@@ -115,7 +115,7 @@ function RaiseAlarmCard({ data = {}, reload = false, setReload = () => {} }) {
 				</Button>
 			</div>
 
-			{resolve && (
+			{resolve ? (
 				<Modal
 					className={styles.styled_modal}
 					show={resolve}
@@ -132,9 +132,9 @@ function RaiseAlarmCard({ data = {}, reload = false, setReload = () => {} }) {
 						onError={onError}
 					/>
 				</Modal>
-			)}
+			) : undefined}
 
-			{showAlarmCard && (
+			{showAlarmCard ? (
 				<Modal
 					className={styles.styled_modal}
 					show={showAlarmCard}
@@ -142,7 +142,7 @@ function RaiseAlarmCard({ data = {}, reload = false, setReload = () => {} }) {
 				>
 					<ModalContent content={data} />
 				</Modal>
-			)}
+			) : undefined}
 		</div>
 	);
 }

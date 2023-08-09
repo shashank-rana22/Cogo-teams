@@ -7,7 +7,7 @@ import toastApiError from '../utils/toastApiError';
 
 const useUpdateShipmentFaultAlarm = ({
 	setResolve = () => {},
-	reload,
+	reload = false,
 	setReload = () => {},
 }) => {
 	const [errors, setErrors] = useState({});
@@ -17,7 +17,6 @@ const useUpdateShipmentFaultAlarm = ({
 	}, { manual: true });
 	const { control, watch, reset, handleSubmit } = useForm();
 	const formValues = watch();
-	const date = new Date();
 
 	const onError = (err) => {
 		setErrors(err);
@@ -28,7 +27,7 @@ const useUpdateShipmentFaultAlarm = ({
 			await trigger({
 				data: {
 					id         : val?.id,
-					snoozed_at : date,
+					snoozed_at : new Date(),
 				},
 			});
 

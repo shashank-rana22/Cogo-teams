@@ -3,7 +3,7 @@ import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useListShipmentCollectionParty = (allParams, formValues) => {
+const useListShipmentCollectionParty = ({ allParams, formValues }) => {
 	const { ...params } = allParams || {};
 
 	const [{ data }, trigger] = useRequest({
@@ -29,8 +29,7 @@ const useListShipmentCollectionParty = (allParams, formValues) => {
 		if (formValues?.fraud_reason === 'irrelevant_charges-4') {
 			apiTrigger();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [formValues?.fraud_reason]);
+	}, [apiTrigger, formValues?.fraud_reason]);
 
 	return {
 		list: { data },

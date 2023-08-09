@@ -23,7 +23,7 @@ function RenderInvoice({
 		return (
 			<div className={styles.container} key={ele.id}>
 				<div>
-					{ele?.invoice_no ? ele?.invoice_no : ele?.proforma_invoice_no}
+					{ele?.invoice_no || ele?.proforma_invoice_no}
 				</div>
 
 				<Popover
