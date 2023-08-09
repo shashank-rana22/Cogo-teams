@@ -87,11 +87,15 @@ const GLOBAL_CONSTANTS = {
 			'yyyy-MM-dd'        : 'yyyy-MM-dd',
 			'MMM yyyy'          : 'MMM yyyy',
 			'dd MMM'            : 'dd MMM',
+			dd                  : 'dd',
+			MMM                 : 'MMM',
+			yyyy                : 'yyyy',
 		},
 		time: {
 			'hh:mm aaa' : 'hh:mm aaa',
 			'HH:mm'     : 'HH:mm',
 			'hh:mm:ss'  : 'hh:mm:ss',
+			'hh aaa'    : 'hh aaa',
 			'HH:mm:ss'  : 'HH:mm:ss',
 			'HH:mm a'   : 'HH:mm a',
 			hh          : 'hh',
@@ -354,6 +358,8 @@ const GLOBAL_CONSTANTS = {
 		message_reply        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/message_reply.png',
 		cargo_ship_vector    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargoShipsVector.png',
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
+		increasing_arrow     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg',
+		agent_avatar_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
 		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',
@@ -619,6 +625,8 @@ const GLOBAL_CONSTANTS = {
 		import_rates : 'Import.rates@cogoport.com',
 		export_rates : 'Export.rates@cogoport.com',
 	},
+
+	days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
 };
 
 export default GLOBAL_CONSTANTS;

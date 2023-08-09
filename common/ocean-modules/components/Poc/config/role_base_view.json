@@ -22,6 +22,12 @@
         "can_edit":["notifying_party","collection_party"],
         "can_add_service_provider_poc":true
     },
+    "supplier_relations_head":{
+        "trade_parties":["collection_party"],
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party","shipper", "consignee"],
+        "can_edit":["notifying_party","collection_party"],
+        "can_add_service_provider_poc":true
+    },
     "document_desk_manager":{
         "trade_parties":["collection_party"],
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party","shipper", "consignee","self"],
@@ -39,7 +45,7 @@
         "edit_internal_poc":["service_ops1","service_ops2","service_ops3","booking_agent","origin_booking_agent","destination_booking_agent",
         "document_desk","document_desk_manager","booking_desk","booking_desk_manager","consignee_shipper_booking_agent","costbooking_ops",
          "costbooking_manager","lastmile_ops","lastmile_ops_manager","so1_so2_ops","release_desk","collection_desk",
-        "document_control_lead","document_control_manager"],
+        "document_control_lead","document_control_manager","portfolio_manager","entity_manager"],
         "can_add_service_provider_poc":true
     },
     "admin":{
@@ -53,7 +59,7 @@
         "document_desk","document_desk_manager","booking_desk","booking_desk_manager","consignee_shipper_booking_agent","costbooking_ops",
         "origin_booking_agent", "destination_booking_agent","costbooking_manager","lastmile_ops","lastmile_ops_manager","so1_so2_ops",
         "release_desk","collection_desk",
-        "document_control_lead","document_control_manager"],
+        "document_control_lead","document_control_manager","portfolio_manager","entity_manager"],
         "can_add_service_provider_poc":true
     }, 
     "document_control_lead":{
@@ -91,7 +97,7 @@
         "edit_internal_poc":["service_ops1","service_ops2","service_ops3","booking_agent",
         "document_desk","document_desk_manager","booking_desk","booking_desk_manager","consignee_shipper_booking_agent","costbooking_ops",
          "costbooking_manager","lastmile_ops","lastmile_ops_manager","so1_so2_ops","release_desk","collection_desk",
-        "document_control_lead","document_control_manager"],
+        "document_control_lead","document_control_manager","portfolio_manager","entity_manager"],
         "can_add_service_provider_poc":true
     },
     "credit_control":{
@@ -104,7 +110,7 @@
         "edit_internal_poc":["service_ops1","service_ops2","service_ops3","booking_agent",
         "document_desk","document_desk_manager","booking_desk","booking_desk_manager","consignee_shipper_booking_agent","costbooking_ops",
          "costbooking_manager","lastmile_ops","lastmile_ops_manager","so1_so2_ops","release_desk","collection_desk",
-        "document_control_lead","document_control_manager"],
+        "document_control_lead","document_control_manager","portfolio_manager","entity_manager"],
         "can_add_service_provider_poc":true
     },
     "costbooking_ops":{
@@ -150,7 +156,7 @@
         "edit_internal_poc":["service_ops1","service_ops2","service_ops3","booking_agent",
         "document_desk","document_desk_manager","booking_desk","booking_desk_manager","consignee_shipper_booking_agent","costbooking_ops",
          "costbooking_manager","lastmile_ops","lastmile_ops_manager","so1_so2_ops","release_desk","collection_desk",
-        "document_control_lead","document_control_manager"],
+        "document_control_lead","document_control_manager","portfolio_manager","entity_manager"],
         "can_add_service_provider_poc":true
     },
     "coe_head":{
@@ -160,7 +166,7 @@
         "edit_internal_poc":["service_ops1","service_ops2","service_ops3","booking_agent","origin_booking_agent","destination_booking_agent",
         "document_desk","document_desk_manager","booking_desk","booking_desk_manager","consignee_shipper_booking_agent","costbooking_ops",
          "costbooking_manager","lastmile_ops","lastmile_ops_manager","so1_so2_ops","release_desk","collection_desk",
-        "document_control_lead","document_control_manager"]
+        "document_control_lead","document_control_manager","portfolio_manager","entity_manager"]
     },
     "tech_super_admin":{
         "trade_parties":["self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
@@ -172,7 +178,7 @@
         "edit_internal_poc":["service_ops1","service_ops2","service_ops3","booking_agent","origin_booking_agent","destination_booking_agent",
         "document_desk","document_desk_manager","booking_desk","booking_desk_manager","consignee_shipper_booking_agent","costbooking_ops",
          "costbooking_manager","lastmile_ops","lastmile_ops_manager","so1_so2_ops","release_desk","collection_desk",
-        "document_control_lead","document_control_manager"],
+        "document_control_lead","document_control_manager","portfolio_manager","entity_manager"],
         "can_add_service_provider_poc":true
     } 
 }

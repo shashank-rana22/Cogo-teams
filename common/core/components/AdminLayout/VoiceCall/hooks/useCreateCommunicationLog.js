@@ -3,35 +3,57 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function useCreateCommunicationLog({ callEndAt = '', voice_call_recipient_data, unmountVoiceCall }) {
+const getPayload = ({
+	receiverUserDetails = {},
+	extraPayload = {},
+	partnerId = '',
+	loggedInAgentId = '',
+	callStartAt = '',
+	callEndAt = '',
+}) => {
+	const {
+		organization_id = '',
+		user_id = '',
+	} = receiverUserDetails || {};
+
+	return {
+		communication_type       : 'call',
+		is_reminder              : 'true',
+		agent_id                 : loggedInAgentId,
+		user_id,
+		organization_id,
+		partner_id               : partnerId,
+		communication_start_time : new Date(callStartAt),
+		communication_end_time   : callEndAt,
+		...(extraPayload || {}),
+	};
+};
+
+function useCreateCommunicationLog({
+	receiverUserDetails = {},
+	unmountVoiceCall,
+	loggedInAgentId = '',
+	callStartAt = '',
+	callEndAt = '',
+}) {
+	const partnerId = useSelector((state) => state?.profile?.partner?.id);
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_organization_communication_log',
 		method : 'post',
 	}, { manual: true });
 
-	const partnerId = useSelector((s) => s?.profile?.partner?.id);
-	const {
-		orgId = '',
-		userId = '',
-		loggedInAgentId = '',
-		startTime = '',
-	} = voice_call_recipient_data || {};
-
 	const createCommunicationLog = async (extraPayload = {}) => {
-		const payload = {
-			communication_type       : 'call',
-			is_reminder              : 'true',
-			agent_id                 : loggedInAgentId,
-			user_id                  : userId,
-			organization_id          : orgId,
-			partner_id               : partnerId,
-			communication_start_time : startTime,
-			communication_end_time   : callEndAt,
-			...extraPayload,
-		};
 		try {
 			await trigger({
-				data: payload,
+				data: getPayload({
+					receiverUserDetails,
+					extraPayload,
+					partnerId,
+					loggedInAgentId,
+					callStartAt,
+					callEndAt,
+				}),
 			});
 			Toast.success('Saved Successfully');
 			unmountVoiceCall();

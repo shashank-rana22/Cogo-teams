@@ -20,6 +20,15 @@ const displayAmount = (amount, currency) => formatAmount({
 	options: {
 		style                 : 'currency',
 		currencyDisplay       : 'code',
+		notation              : 'compact',
+		maximumFractionDigits : 2,
+	},
+});
+
+const formatDeviationPercentage = (value) => formatAmount({
+	amount  : String(value),
+	options : {
+		style                 : 'decimal',
 		maximumFractionDigits : 2,
 	},
 });
@@ -56,11 +65,11 @@ function ClosedShipmentCard({
 	const data = getData({ taxType, type, cardData, totalCost, totalRevenue });
 
 	const revenueDeviation = `${displayAmount(cardData[`actualRevenueDeviation${taxType}`], currency)}
-	(${cardData[`actualRevenueDeviationPercentage${taxType}`] || DEFAULT_VALUE}%)
+	(${formatDeviationPercentage(cardData[`actualRevenueDeviationPercentage${taxType}`]) || DEFAULT_VALUE}%)
 	`;
 
 	const costDeviation = `${displayAmount(cardData[`actualCostDeviation${taxType}`], currency)}
-   (${cardData[`actualCostDeviationPercentage${taxType}`] || DEFAULT_VALUE}%)
+   (${formatDeviationPercentage(cardData[`actualCostDeviationPercentage${taxType}`]) || DEFAULT_VALUE}%)
    `;
 
 	const graphData = getGraphData({
@@ -126,7 +135,7 @@ function ClosedShipmentCard({
 							enableRadialGrid={false}
 							enableCircularGrid={false}
 							layers={['tracks', 'bars']}
-							colors={['#f8aea8', '#ee3425', '#cfeaed', '#6fa5ab']}
+							colors={['#ee3425', '#f8aea8', '#6fa5ab', '#cfeaed']}
 						/>
 
 					</div>
