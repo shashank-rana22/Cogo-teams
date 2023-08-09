@@ -91,11 +91,21 @@
 	min-height: 450px;
 }
 
-.card_placeholder {
-	display: flex;
-	align-items: center;
-}
-
 .square_shape_placeholder {
 	border-radius: 10px;
+}
+
+.address_type {
+	width: fit-content;
+	height: fit-content;
+	padding: 2px 6px;
+	font-size: 12px;
+	background: #e7f0ff;
+	border-radius: 6px 0;
+}
+
+.card_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }

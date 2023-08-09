@@ -56,6 +56,7 @@ function AssignModal({
 	} = useGetOrganizationAddresses({ orgId });
 
 	const billingAddresses = billingAddressesData?.concat(orgAddressesData);
+	const addressLoading = billingAddressesLoading || addressesLoading;
 
 	const {
 		createSubscriptionInvoice = () => {},
@@ -67,24 +68,8 @@ function AssignModal({
 		getOrganizationAddresses();
 	}, [getOrgBillingAddresses, getOrganizationAddresses]);
 
-	if (isEmpty(billingAddresses)) {
-		return (
-			<div className={styles.empty_state_container}>
-				<Image
-					src={GLOBAL_CONSTANTS.image_url.nodata_image}
-					width={300}
-					height={300}
-					alt="address unavailable"
-				/>
-				<div className={styles.note_for_address_unavailable}>
-					There are no existing addresses available. Create a new an address.
-				</div>
-			</div>
-		);
-	}
-
 	return (
-		<div>
+		<>
 			<Modal
 				show={showAssign}
 				size="md"
@@ -94,6 +79,20 @@ function AssignModal({
 				<Modal.Header title="Assign" />
 
 				<Modal.Body className={styles.assign_modal_resolution}>
+					{isEmpty(billingAddresses) && !addressLoading ? (
+						<div className={styles.empty_state_container}>
+							<Image
+								src={GLOBAL_CONSTANTS.image_url.nodata_image}
+								width={300}
+								height={300}
+								alt="address unavailable"
+							/>
+							<div className={styles.note_for_address_unavailable}>
+								There are no existing addresses available. Create a new an address.
+							</div>
+						</div>
+					) : null}
+
 					<div className={styles.header}>
 						<div>Billing Address</div>
 						<Button
@@ -110,9 +109,9 @@ function AssignModal({
 						<div className={styles.heading}>
 							Select Address
 						</div>
-						{billingAddressesLoading || addressesLoading ? (
+						{addressLoading ? (
 							(ADDRESS_PLACEHODER.map((item) => (
-								<div className={styles.card_placeholder} key={item}>
+								<div className={styles.card_row} key={item}>
 									<Placeholder type="circle" radius="50px" margin="0px 0px 20px 0px" />
 									<Placeholder
 										height="90px"
@@ -131,6 +130,7 @@ function AssignModal({
 										address = '',
 										pincode = '',
 										tax_number = '',
+										address_type : addressType = '',
 										organization_pocs = [],
 									} = item || {};
 
@@ -153,6 +153,11 @@ function AssignModal({
 													setSelectedAddress(item);
 												}}
 											>
+												{addressType && (
+													<div className={styles.address_type}>
+														{addressType}
+													</div>
+												)}
 												<div className={cl`${styles.card_row} ${styles.name}`}>
 													{name}
 													{renderName({ pocDetail: organization_pocs })}
@@ -180,7 +185,6 @@ function AssignModal({
 							</div>
 						)}
 					</div>
-
 				</Modal.Body>
 
 				<Modal.Footer>
@@ -202,8 +206,9 @@ function AssignModal({
 				setAddAddressModal={setAddAddressModal}
 				getOrganizationAddresses={getOrganizationAddresses}
 				orgId={orgId}
+				setSelectedAddress={setSelectedAddress}
 			/>
-		</div>
+		</>
 	);
 }
 

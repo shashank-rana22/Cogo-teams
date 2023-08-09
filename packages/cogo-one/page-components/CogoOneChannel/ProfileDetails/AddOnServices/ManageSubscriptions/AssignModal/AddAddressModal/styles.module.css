@@ -1,12 +1,3 @@
-/* .element_column {
-	width: 45%;
-} */
-
-/* .error_text {
-	font-size: 10px;
-	color: #ee3425;
-} */
-
 .header {
 	display: flex;
 	align-items: center;
@@ -49,10 +40,6 @@
 .add_new_address_button {
 	margin-left: 15px;
 }
-
-/* .form_item_styled {
-	margin-bottom: 10px;
-} */
 
 .address_type {
 	display: flex;

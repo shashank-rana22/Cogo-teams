@@ -27,6 +27,7 @@ const useCreateBillingAddres = ({
 	getOrganizationAddresses = () => {},
 	setAddAddressModal = () => {},
 	reset = () => {},
+	setSelectedAddress = () => {},
 }) => {
 	const apiEndpoint = isIncludeTaxNumber ? '/create_organization_billing_address' : '/create_organization_address';
 
@@ -37,9 +38,12 @@ const useCreateBillingAddres = ({
 
 	const createBillingAddress = async ({ data = {} }) => {
 		try {
-			await trigger({
+			const response = await trigger({
 				data: getPayload({ data, isIncludeTaxNumber, orgId }),
 			});
+
+			const { id = '' } = response?.data || {};
+			await setSelectedAddress({ id });
 			await reset();
 			await setAddAddressModal(false);
 			await getOrganizationAddresses();

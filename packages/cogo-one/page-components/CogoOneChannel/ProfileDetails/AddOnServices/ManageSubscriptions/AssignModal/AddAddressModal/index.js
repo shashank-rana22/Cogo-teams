@@ -11,7 +11,7 @@ import Form from './Form';
 import styles from './styles.module.css';
 
 function AddAddressModal({
-	addAddressModal = false, setAddAddressModal = () => {},
+	addAddressModal = false, setAddAddressModal = () => {}, setSelectedAddress = () => {},
 	getOrganizationAddresses = () => {}, orgId = '',
 }) {
 	const [cityState, setCityState] = useState({});
@@ -33,12 +33,13 @@ function AddAddressModal({
 
 	const isIncludeTaxNumber = watch('include_tax_number');
 
-	const { createBillingAddress = () => {}, loading } = useCreateBillingAddres({
+	const { createBillingAddress = () => {}, loading = false } = useCreateBillingAddres({
 		isIncludeTaxNumber,
 		getOrganizationAddresses,
 		orgId,
 		setAddAddressModal,
 		reset,
+		setSelectedAddress,
 	});
 
 	const onSubmit = (data) => {

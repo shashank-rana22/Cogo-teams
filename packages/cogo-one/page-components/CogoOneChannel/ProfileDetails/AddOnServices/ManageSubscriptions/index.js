@@ -23,7 +23,7 @@ function EmptyState() {
 	return (
 		<div className={styles.empty_state_container}>
 			<Image src={GLOBAL_CONSTANTS.image_url.empty_state} width={250} height={200} alt="plans unavailable" />
-			<div className={styles.empty_state_label}>Plans unavailable</div>
+			<div className={styles.empty_state_label}>Plans are not available</div>
 		</div>
 	);
 }
@@ -73,10 +73,13 @@ function ManageSubscriptions(props) {
 	return (
 		<div>
 			<div className={styles.intelligence_container}>
-				<div className={styles.intelligence_title}>The Right Plan for Your Business</div>
+				<div className={styles.intelligence_title}>
+					Empowering Dreams: Ignite Success Through Subscription Sales!
+				</div>
 				<div className={styles.intelligence_content}>
-					We have several powerful plans to showcase your business and
-					get discovered as a creative entrepreneurs. Everything you need.
+					Empowering dreams, one subscription at a time.
+					Let&apos;s inspire growth, ignite visions, and fuel the journey of creative entrepreneurs together.
+					Transform potential into reality and turn subscriptions into success stories!
 				</div>
 			</div>
 

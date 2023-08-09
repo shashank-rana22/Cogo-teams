@@ -110,7 +110,7 @@ const ICON_MAPPING = [
 	},
 	{
 		name    : 'add_on_services',
-		content : 'Add On Services',
+		content : 'Additional Services',
 		icon    : <IcMServices width={20} height={20} />,
 	},
 	{
