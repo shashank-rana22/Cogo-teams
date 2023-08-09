@@ -6,7 +6,7 @@ import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-const CHILD_NODE = 3;
+const CHILD_NODE = 5;
 
 function RaiseTickets({
 	watch = () => {}, control = {}, formState = {}, additionalInfo = [], resetField = () => {},
@@ -21,6 +21,8 @@ function RaiseTickets({
 	const watchCategory = watch('category');
 	const watchSubCategory = watch('sub_category');
 	const watchIssueType = watch('issue_type');
+	const watchService = watch('service');
+	const watchTradeType = watch('trade_type');
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : item,
@@ -40,16 +42,25 @@ function RaiseTickets({
 		setAdditionalInfo,
 		setSubCategories,
 		watchSubCategory,
+		watchTradeType,
 		watchCategory,
+		watchService,
 		watchOrgId,
 		resetField,
 	});
 
 	const controls = defaultControls.concat(additionalControls);
 
+	const DISABLE_MAPPING = {
+		// trade_type   : [watchService],
+		// category     : [watchTradeType, watchService],
+		sub_category : [watchCategory, watchTradeType, watchService],
+		issue_type   : [watchCategory, watchSubCategory, watchTradeType, watchService],
+	};
+
 	useEffect(() => {
 		if (!isEmpty(watchIssueType)) {
-			formRef.current?.childNodes?.[CHILD_NODE].scrollIntoView({ behavior: 'smooth' });
+			formRef.current?.childNodes?.[CHILD_NODE].scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}
 	}, [watchIssueType]);
 
@@ -59,9 +70,6 @@ function RaiseTickets({
 				const elementItem = { ...controlItem };
 				const { name, label, controllerType } = elementItem || {};
 				const Element = getFieldController(controllerType);
-
-				const isDisabled = (name === 'sub_category' && isEmpty(watchCategory))
-				|| (name === 'issue_type' && (isEmpty(watchCategory) || isEmpty(watchSubCategory)));
 
 				if (!Element) { return null; }
 
@@ -86,7 +94,7 @@ function RaiseTickets({
 							key={name}
 							control={control}
 							id={`${name}_input`}
-							disabled={isDisabled}
+							disabled={DISABLE_MAPPING[name]?.some(isEmpty)}
 						/>
 						<div className={styles.error}>{errors?.[controlItem.name] && 'Required'}</div>
 					</div>

@@ -4,10 +4,11 @@ import {
 } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const useRaiseTicketcontrols = ({
 	watchOrgId, setAdditionalInfo, formattedSubCategories, setSubCategories, watchCategory,
-	watchSubCategory, resetField,
+	watchSubCategory, watchService, watchTradeType, resetField,
 }) => {
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
 	const categoryOptions = useGetAsyncTicketOptions({ ...asyncTicketsCategory() });
@@ -16,6 +17,8 @@ const useRaiseTicketcontrols = ({
 		params: {
 			Category    : watchCategory,
 			Subcategory : watchSubCategory,
+			Service     : watchService,
+			TradeType   : watchTradeType,
 		},
 	});
 	const organizationUserOptions = useGetAsyncOptions({
@@ -27,6 +30,28 @@ const useRaiseTicketcontrols = ({
 	});
 
 	return [
+		{
+			label          : 'Select Service',
+			name           : 'service',
+			controllerType : 'select',
+			placeholder    : 'Select service',
+			rules          : { required: true },
+			defaultOptions : true,
+			options        : GLOBAL_CONSTANTS.shipment_types,
+			onChange       : () => resetField('issue_type'),
+		},
+		{
+			label          : 'Select Trade Type',
+			name           : 'trade_type',
+			controllerType : 'select',
+			placeholder    : 'Select Trade Type',
+			rules          : { required: true },
+			options        : [
+				{ label: 'Import', value: 'import' },
+				{ label: 'Export', value: 'export' },
+			],
+			onChange: () => resetField('issue_type'),
+		},
 		{
 			...(categoryOptions || {}),
 			label          : 'Select category',
