@@ -52,6 +52,7 @@ function ClosedShipmentCard({
 	cardData = [],
 	loading = false,
 	taxType = '',
+	setActiveBar = () => {},
 }) {
 	const {
 		currency,
@@ -83,6 +84,11 @@ function ClosedShipmentCard({
 		costDeviation,
 	});
 
+	const onCardClick = () => {
+		setActiveShipmentCard(cardId);
+		setActiveBar('');
+	};
+
 	return (
 		<div className={styles.financially_closed_container}>
 			{showHeading && (
@@ -99,7 +105,7 @@ function ClosedShipmentCard({
 					className={cl`${styles.chart_data_combine} 
 					${!isDeviationVisible ? styles.additional_margin : null}`}
 					role="presentation"
-					onClick={() => setActiveShipmentCard(cardId)}
+					onClick={onCardClick}
 					style={{ flexWrap: wrapElement ? 'wrap' : 'nowrap' }}
 				>
 					<div

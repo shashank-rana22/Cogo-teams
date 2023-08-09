@@ -15,8 +15,7 @@ export default function useEditServiceSchedule({
 	const [departureDate, setDepartureDate] = useState(getDate(primary_service?.schedule_departure));
 
 	const { apiTrigger: updateShipmentService, loading } = useUpdateShipmentService({
-		successMessage : 'Booking Note Updated Successfully !',
-		refetch        : () => {
+		refetch: () => {
 			setShow(false);
 			shipmentRefetch();
 		},

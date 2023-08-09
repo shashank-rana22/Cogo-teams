@@ -66,6 +66,7 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 	const sortStyleDueDateDesc = sortType === 'desc' && sortBy === 'dueDate' ? ORANGE : GREY;
 
 	const columns = completedColumn({
+		entityCode,
 		refetch   : getOrganizationInvoices,
 		showName,
 		setSort,
