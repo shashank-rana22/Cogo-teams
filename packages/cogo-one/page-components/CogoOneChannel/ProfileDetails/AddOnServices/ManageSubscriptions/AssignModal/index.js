@@ -3,7 +3,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useCreateSubscriptionInvoice from '../../../../../../hooks/useCreateSubscriptionInvoice';
@@ -154,8 +154,10 @@ function AssignModal({
 												}}
 											>
 												{addressType && (
-													<div className={styles.address_type}>
-														{addressType}
+													<div className={cl`${styles.address_type} 
+													${isChecked ? styles.checked_address_type : ''}`}
+													>
+														{startCase(addressType)}
 													</div>
 												)}
 												<div className={cl`${styles.card_row} ${styles.name}`}>

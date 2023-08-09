@@ -1,8 +1,10 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useState } from 'react';
 
-const addAddressControls = () => {
+const useGetControls = ({ setCityState = () => {} }) => {
 	const geo = getGeoConstants();
+
+	const [country, setCountry] = useState({});
 
 	return [
 		{
@@ -32,6 +34,9 @@ const addAddressControls = () => {
 			span        : 6,
 			params      : { filters: { type: ['country'] } },
 			asyncKey    : 'list_locations',
+			onChange    : (_, obj) => {
+				setCountry(obj);
+			},
 		},
 		{
 			label       : 'Pincode',
@@ -40,10 +45,27 @@ const addAddressControls = () => {
 			placeholder : 'Enter Pincode',
 			rules       : { required: 'required *' },
 			span        : 6,
-			params      : { filters: { type: ['pincode'] } },
 			asyncKey    : 'list_locations',
 			valueKey    : 'postal_code',
 			labelKey    : 'display_name',
+			params      : {
+				filters: {
+					type       : 'pincode',
+					country_id : country?.id,
+				},
+				includes: {
+					country                 : '',
+					region                  : '',
+					city                    : '',
+					default_params_required : true,
+				},
+			},
+			onChange: (_, obj) => {
+				setCityState({
+					city  : obj?.city?.name,
+					state : obj?.region?.name,
+				});
+			},
 		},
 		{
 			label       : 'State',
@@ -125,48 +147,6 @@ const addAddressControls = () => {
 			span        : 6,
 		},
 	];
-};
-
-const useGetControls = ({ setCityState = () => {} }) => {
-	const [country, setCountry] = useState({});
-
-	const controls = addAddressControls();
-
-	return (controls || []).map((control) => {
-		if (control.name === 'country_id') {
-			return {
-				...control,
-				onChange: (_, obj) => {
-					setCountry(obj);
-				},
-			};
-		}
-		if (control.name === 'pincode') {
-			return {
-				...control,
-				params: {
-					filters: {
-						type       : 'pincode',
-						country_id : country?.id,
-					},
-					includes: {
-						country                 : '',
-						region                  : '',
-						city                    : '',
-						default_params_required : true,
-					},
-				},
-				onChange: (_, obj) => {
-					setCityState({
-						city  : obj?.city?.name,
-						state : obj?.region?.name,
-					});
-				},
-			};
-		}
-
-		return control;
-	});
 };
 
 export default useGetControls;
