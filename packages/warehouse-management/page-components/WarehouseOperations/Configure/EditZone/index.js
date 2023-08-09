@@ -1,6 +1,8 @@
 import { Layout } from '@cogoport/air-modules';
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import useUpdateConfiguration from '../../../../hooks/useUpdateConfiguration';
 import controls from '../AddZone/controls';
@@ -8,7 +10,8 @@ import controls from '../AddZone/controls';
 import styles from './styles.module.css';
 
 function EditZoneModal({
-	editZone = true,
+	item = {},
+	editZone = {},
 	setEditZone = () => {},
 	listAPI = () => {},
 }) {
@@ -16,11 +19,19 @@ function EditZoneModal({
 		control,
 		watch,
 		formState:{ errors = {} },
+		setValue,
 		handleSubmit,
 	} = useForm();
 
-	const formValues = watch(); // Here we have to prefill the values
-	console.log('formValueees', formValues);
+	const formValues = watch();
+	useEffect(() => {
+		if (!isEmpty(editZone)) {
+			setValue('zoneName', item?.zoneName);
+			setValue('commodity', item?.commodity);
+			setValue('aisles', item?.aisles);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [editZone, setValue]);
 	const {
 		loading = false,
 		onSubmit = () => {},

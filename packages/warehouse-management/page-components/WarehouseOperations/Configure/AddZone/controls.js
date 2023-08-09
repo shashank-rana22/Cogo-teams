@@ -9,7 +9,7 @@ const controls = [
 		},
 	},
 	{
-		name    : 'commodityType',
+		name    : 'commodity',
 		label   : 'Select Commodity type',
 		type    : 'select',
 		span    : 6,

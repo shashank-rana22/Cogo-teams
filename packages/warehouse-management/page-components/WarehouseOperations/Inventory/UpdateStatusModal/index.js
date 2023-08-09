@@ -15,7 +15,7 @@ function UpdateStatusModal({
 }) {
 	const { control, formState:{ errors = {} }, watch } = useForm();
 	const formValues = watch();
-	const { handleUpdate } = useUpdateInventory({ item, formValues, setShowUpdateStatusModal, listAPI });
+	const { handleUpdate } = useUpdateInventory({ id: item?.id, formValues, setShowUpdateStatusModal, listAPI });
 	return (
 		<Modal
 			show={showUpdateStatusModal}

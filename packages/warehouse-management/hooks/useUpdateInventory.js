@@ -3,6 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 
 function useUpdateInventory({
+	id = '',
 	formValues = {},
 	setShowUpdateStatusModal = () => {},
 	listAPI = () => {},
@@ -22,13 +23,9 @@ function useUpdateInventory({
 		try {
 			await trigger({
 				data: {
-					zoneName            : formValues.zoneName,
-					commodityType       : formValues.commodityType,
-					commodity           : formValues.commodityType,
-					aisles              : formValues.aisles,
-					warehouseLocationId : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-					warehouseManagerId  : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-					status              : 'active',
+					id,
+					services   : formValues?.services,
+					dimensions : formValues?.dimensions,
 				},
 			});
 			Toast.success('Zone changed');

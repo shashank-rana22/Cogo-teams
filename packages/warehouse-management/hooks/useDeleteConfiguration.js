@@ -22,7 +22,7 @@ function useDeleteConfiguration({
 	const handleDelete = async () => {
 		try {
 			await trigger({
-				data: {
+				params: {
 					id,
 				},
 			});

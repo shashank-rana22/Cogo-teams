@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { ButtonIcon } from '@cogoport/components';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -59,23 +59,23 @@ function Configure({
 	const functions = {
 		handleEdit: (singleItem) => (
 			<>
-				<Button
-					style={{ fontSize: 12 }}
+				<ButtonIcon
+					size="md"
 					onClick={() => setEditZone(singleItem)}
-				>
-					<IcMEdit />
-				</Button>
+					icon={<IcMEdit />}
+					themeType="primary"
+				/>
 				{handleButtonClicks({ singleItem, clickedButton: 'edit' })}
 			</>
 		),
 		handleDelete: (singleItem) => (
 			<>
-				<Button
-					style={{ fontSize: 12 }}
+				<ButtonIcon
+					size="md"
 					onClick={() => setDeleteZone(singleItem)}
-				>
-					<IcMDelete width={15} height={15} />
-				</Button>
+					icon={<IcMDelete />}
+					themeType="primary"
+				/>
 				{handleButtonClicks({ singleItem, clickedButton: 'delete' })}
 			</>
 		),
