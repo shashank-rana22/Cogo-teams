@@ -239,7 +239,7 @@ function AttendanceData() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
-				<div className={styles.employee_name}>
+				<div className={styles.header_employee_name}>
 					Employee Name
 				</div>
 				{attendanceDates.map((val) => (
@@ -247,34 +247,42 @@ function AttendanceData() {
 						<div>
 							{val.date}
 						</div>
-						{val.day}
+						<div style={{ fontSize: 12 }}>
+							{val.day}
+						</div>
 					</div>
 				))}
 			</div>
 
 			{dataArr.map((val, index) => (
-				<div className={styles.header_container} key={val.employee_code}>
+				<div className={styles.attendace_time_container} key={val.employee_code}>
 					<div className={styles.employee_name}>
 						{val.employee_name}
 						{' '}
+						(
 						{val.employee_code}
-						<div>
+						)
+						<div style={{ fontSize: 12 }}>
 							Marketing
 						</div>
 					</div>
 
 					{val.days.map((item) => (
 						<div className={styles.attendance_date} key={`${index + index}`}>
-							{item.day_status}
-							<div>
+							<div style={{ fontWeight: 600 }}>
+								{item.day_status}
+							</div>
+							<div style={{ fontSize: 12 }}>
 								{item.check_in}
+								{' '}
+								-
+								{' '}
 								{item.checkout}
 							</div>
 						</div>
 					))}
 				</div>
 			))}
-
 		</div>
 	);
 }
