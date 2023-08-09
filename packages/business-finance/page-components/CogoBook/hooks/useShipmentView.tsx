@@ -1,4 +1,5 @@
 import { Toast, Checkbox } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -22,6 +23,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
+	const [searchValue, setSearchValue] = useState('');
 	const [checkedRowsSerialId, setCheckedRowsSerialId] = useState([]);
 	const [viewSelected, setViewSelected] = useState(true);
 	const [tempCheckedData, setTempCheckedData] = useState([]);
@@ -33,7 +35,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 	const {
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
-		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
+		jobState = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
 		sortType = '', sortBy = '', entity = '', channel = '', milestone = '',
 	} = filters || {};
 
@@ -44,6 +46,11 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 	const { startDate, endDate } = date || {};
 
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
+	const { query = '', debounceQuery } = useDebounceQuery();
+
+	useEffect(() => {
+		debounceQuery(searchValue);
+	}, [searchValue, debounceQuery]);
 
 	const [
 		{ data:shipmentViewData, loading:shipmentLoading },
@@ -150,12 +157,11 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 	useEffect(() => {
 		if (didMountRef.current === false) {
 			didMountRef.current = true;
-			return;
 		}
-		if (year && month && viewSelected === false) {
-			// refetch();
+		if (query) {
+			refetch();
 		}
-	}, [query, page, sortType, sortBy, year, month, viewSelected]);
+	}, [query, refetch, page, sortType, sortBy, year, month, viewSelected]);
 
 	const {
 		pageNo: pageNos = 0,
@@ -433,6 +439,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 		checkedData,
 		viewSelected,
 		setViewSelected,
+		setSearchValue,
+		searchValue,
 	};
 };
 export default useShipmentView;

@@ -22,11 +22,13 @@ function Card({
 	setShowBtn = () => {}, setCheckedRows = () => {},
 	setPayload = () => {},
 	isApplyEnable = false,
+	setSearchValue = () => {},
+	searchValue = '',
 }) {
 	const [moreFilter, setMoreFilter] = useState(false);
 	const [profitNumber, setProfitNumber] = useState('');
 
-	const { jobState, range, profitPercent, query, channel } = filters || {};
+	const { jobState, range, profitPercent, channel } = filters || {};
 
 	useEffect(() => {
 		let count = 0;
@@ -71,7 +73,7 @@ function Card({
 		}
 	};
 	const monthYear = [filters?.year, filters?.month];
-	const isDateRangeEnabled =	isEmpty(monthYear[ZEROTH_INDEX]) && typeof monthYear[FIRST_MONTH_INDEX] === 'string';
+	const isDateRangeEnabled =	!isEmpty(monthYear[ZEROTH_INDEX]) && typeof monthYear[FIRST_MONTH_INDEX] === 'string';
 	const maxDate = new Date(monthYear[ZEROTH_INDEX], monthYear[FIRST_MONTH_INDEX], MAX_DAY_ALLOWED);
 	const minDate = new Date(
 		monthYear[ZEROTH_INDEX],
@@ -201,8 +203,8 @@ function Card({
 					<div className={styles.input_container}>
 						<Input
 							size="sm"
-							value={query}
-							onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
+							value={searchValue}
+							onChange={(val) => { setSearchValue(val); }}
 							placeholder="Search by SID"
 							disabled={!isApplyEnable}
 							suffix={<IcMSearchlight height="15px" width="15px" style={{ marginRight: '8px' }} />}

@@ -62,6 +62,8 @@ function ShipmentView() {
 		profit:profitData,
 		viewSelected,
 		setViewSelected,
+		setSearchValue,
+		searchValue,
 	} =	 useShipmentView({ filters, checkedRows, setBulkSection, bulkAction, setCheckedRows });
 
 	const {
@@ -104,6 +106,8 @@ function ShipmentView() {
 				setShowBtn={setShowBtn}
 				filters={filters}
 				isApplyEnable={isApplyEnable}
+				setSearchValue={setSearchValue}
+				searchValue={searchValue}
 			/>
 
 			<div className={styles.flex}>
