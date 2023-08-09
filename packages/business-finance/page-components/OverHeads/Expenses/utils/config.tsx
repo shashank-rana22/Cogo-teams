@@ -137,7 +137,7 @@ export const expenseNonRecurringConfig = () => ({
 			sorting : { name: 'payableSortType' },
 		},
 		{
-			label   : 'Paid',
+			label   : 'PaidAmount',
 			func    : 'renderPaid',
 			span    : 1.2,
 			sorting : { name: 'paidAmountSortType' },

@@ -10,6 +10,7 @@ import EditBookingParams from './EditBookingParams';
 import { getCanShipmentRollover } from './helpers/getCanShipmentRollover';
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
+import RestrictTask from './RestrictTask';
 import styles from './styles.module.css';
 
 function ExecuteStep({
@@ -29,6 +30,9 @@ function ExecuteStep({
 		formProps,
 		fields,
 		showElements,
+		restrictTask,
+		setRestrictTask,
+		toastMessage,
 	} = useStepExecution({
 		task,
 		stepConfig,
@@ -84,6 +88,18 @@ function ExecuteStep({
 			handleSubmit(onSubmit)();
 		}
 	};
+
+	if (restrictTask) {
+		return (
+			<RestrictTask
+				task={task}
+				restrict={restrictTask}
+				setRestrictTask={setRestrictTask}
+				onCancel={onCancel}
+				toastMessage={toastMessage}
+			/>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

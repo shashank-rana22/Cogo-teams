@@ -1,14 +1,22 @@
 import { ResponsiveBar } from '@cogoport/charts/bar';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import formatData from '../../../../../../../helpers/formatGraphData';
 
 import GraphLoader from './GraphLoader';
 import styles from './styles.module.css';
 
-function AgentActivityGraph({ loading = false, bookingCount = 0, callData = {}, statsData = {} }) {
+function AgentActivityGraph({ loading = false, bookingCount = 0, callData = [], statsData = {} }) {
 	const { chat_stats = {} } = statsData || {};
 	const { active = 0 } = chat_stats || {};
-	const { total_count: callCount = 0 } = callData || {};
+	const {
+		incoming_answered = 0,
+		incoming_missed = 0,
+		outgoing_answered = 0,
+		outgoing_missed = 0,
+	} = callData[GLOBAL_CONSTANTS.zeroth_index] || [];
+
+	const callCount = incoming_answered + outgoing_answered + incoming_missed + outgoing_missed;
 
 	const data = formatData({ bookingCount, active, callCount });
 
