@@ -1,9 +1,9 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
 
-import styles from './styles.module.css';
+import formatCount from '../../utils/formatCount';
 
-const DEFAULT_INDEX = 1;
+import styles from './styles.module.css';
 
 function StatCard({
 	mappingCards = [], service = '', isMain = false,
@@ -17,7 +17,10 @@ function StatCard({
 		<div
 			key={service}
 			className={cl`${styles.statscontainer} ${!isMain && styles.border}`}
-			style={{ cursor: !isMain ? 'pointer' : null }}
+			style={{
+				cursor : !isMain ? 'pointer' : null,
+				width  : !isMain ? '47%' : null,
+			}}
 			role="presentation"
 			onClick={() => setActiveService(service)}
 		>
@@ -33,14 +36,16 @@ function StatCard({
 					flexDirection: isMain ? 'column' : 'row',
 				}}
 			>
-				{mappingCards.map((item, index) => (
+				{mappingCards.map((item) => (
 					<div className={cl`${styles.stats} ${isMain && styles.margin}`} key={item.label}>
 						<div className={cl`${styles.stathead} ${!isMain && styles.fontlabel}`}>
 							{item.label}
 						</div>
-						<div className={cl`${styles.value}
+						<div
+							className={cl`${styles.value}
 					${!isMain && styles.fontvalue} 
-					${mappingCards?.length === index + DEFAULT_INDEX && styles.color}`}
+					`}
+							style={{ color: item?.profitColor || '#000' }}
 						>
 							{isMain ? item?.value
 								: displayAmount(singleServiceData[`${item.name}${taxType}`], currency)}
@@ -48,7 +53,8 @@ function StatCard({
 						<div className={cl`${styles.statval}
 					${!isMain && styles.fontstatval}`}
 						>
-							{isMain ? item.stats : `${invoiceCount} Invoices | ${jobCount} Shimpents`}
+							{isMain ? item.stats
+								: `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shimpents`}
 						</div>
 					</div>
 				))}

@@ -9,8 +9,6 @@ import styles from './styles.module.css';
 
 function Header({
 	activeTab = 'confirmed', setFilters = () => {}, data = {},
-	setSearchText = '',
-	setSortType = '',
 	totalEmployeeCount = 0,
 	employeeFilters = {},
 	getEmployeeList = () => {},
@@ -18,8 +16,6 @@ function Header({
 }) {
 	const handleTabChange = (e) => {
 		setFilters({ page: 1, employee_status: e });
-		setSearchText('');
-		setSortType('');
 		setSelectedIds([]);
 	};
 

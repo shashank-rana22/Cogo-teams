@@ -60,6 +60,9 @@ function MailModal({
 
 	const handleSend = () => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
+		if (replyLoading) {
+			return;
+		}
 
 		if (uploading) {
 			Toast.error('Files are uploading...');

@@ -8,6 +8,10 @@ import ShowLineItems from '../../ServiceWiseDetails/RatesCard/Card/ShowLineItems
 
 import styles from './styles.module.css';
 
+const LOCATION_TYPE_MAPPING = {
+	air_freight_service: 'Freight',
+};
+
 function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profitCurrency, itemData, servicesList }) {
 	const columns = [
 		{ Header: 'Services', accessor: 'service_type' },
@@ -23,7 +27,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 		.map(({ service_type, total_price_discounted, source, currency, service_id, line_items }) => ({
 			service_type: `${startCase(service_type)} (${(servicesList || [])
 				.find((service) => service?.id === service_id)?.trade_type === 'export'
-				? 'Origin' : 'Destination'})`,
+				? 'Origin' : LOCATION_TYPE_MAPPING[service_type] || 'Destination'})`,
 			total_price_discounted: formatAmount({
 				amount  : total_price_discounted,
 				currency,
@@ -245,7 +249,6 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 				</div>
 
 			</div>
-
 			<Table columns={columns} data={chargesData} loading={loading} className={styles.table_container} />
 		</>
 	);

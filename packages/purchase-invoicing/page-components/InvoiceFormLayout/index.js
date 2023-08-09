@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useForm, RadioGroupController, SelectController } from '@cogoport/forms';
+import { useForm, RadioGroupController, SelectController, CheckboxController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useContext, useImperativeHandle, forwardRef, useState } from 'react';
 
@@ -130,6 +130,12 @@ function InvoiceFormLayout({
 		JSON.stringify(formValues?.line_items),
 	]);
 
+	useEffect(() => {
+		if (formValues?.invoice_type === 'credit_note') {
+			setValue('advance_bill', '');
+		}
+	}, [formValues?.invoice_type]);
+
 	const calculatedValues = useCalculateTotalPrice({
 		baseCurrency : formValues?.invoice_currency,
 		lineItems    : formValues?.line_items,
@@ -211,6 +217,17 @@ function InvoiceFormLayout({
 									Invoice type is Required
 								</div>
 							) : null}
+
+							{billCatogory === 'purchase' ? (
+								<CheckboxController
+									control={control}
+									name="advance_bill"
+									label="Advance Bill"
+									value="advance_bill"
+									disabled={formValues.invoice_type === 'credit_note'}
+								/>
+							) : null}
+
 						</div>
 						<Button
 							className={styles.margintop}
@@ -275,6 +292,7 @@ function InvoiceFormLayout({
 					errors={errors}
 					errMszs={errMszs}
 					open={isEdit}
+					shipment_data={shipment_data}
 				/>
 
 				<AdditionalDetails
