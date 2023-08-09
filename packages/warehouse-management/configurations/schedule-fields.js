@@ -1,4 +1,4 @@
-const scheduleFields = {
+const scheduleFields = (truckStatus = 'truck_in') => ({
 	fields: [
 		{
 			key    : 'wh_transfer_id',
@@ -6,7 +6,7 @@ const scheduleFields = {
 			span   : 1.5,
 			render : (item) => (
 				<div>
-					{item?.warehouseTransferId}
+					{item?.warehouseTransferSerialId}
 				</div>
 			),
 		},
@@ -21,12 +21,12 @@ const scheduleFields = {
 			),
 		},
 		{
-			key    : 'truck_in_eta',
-			label  : 'Truck-in ETA',
+			key    : truckStatus === 'truck_in' ? 'truck_in_eta' : 'truck_out_eta',
+			label  : truckStatus === 'truck_in' ? 'Truck-in ETA' : 'Truck-out ETA',
 			span   : 1.5,
 			render : (item) => (
 				<div>
-					{item?.truckInEta}
+					{truckStatus === 'truck_in' ? item?.truckInEta : item?.truckOutEta}
 				</div>
 			),
 		},
@@ -72,7 +72,7 @@ const scheduleFields = {
 		},
 		{
 			key   : 'action',
-			label : 'Action',
+			label : 'Actions',
 			span  : 2.2,
 			func  : 'handleTruckStatus',
 		},
@@ -83,6 +83,12 @@ const scheduleFields = {
 			label : 'SID No.',
 			span  : 2.2,
 			func  : 'handleSID',
+		},
+		{
+			key   : 'boxCount',
+			label : 'Boxes',
+			span  : 2.2,
+			func  : 'handleBoxCount',
 		},
 		{
 			key   : 'boxDimensions',
@@ -112,9 +118,9 @@ const scheduleFields = {
 			key   : 'expectedDepartureTime',
 			label : 'Expected dept. Time',
 			span  : 2.1,
-			func  : 'handleDepartureTime',
+			func  : 'handleExpectedDeparture',
 		},
 	],
-};
+});
 
 export default scheduleFields;

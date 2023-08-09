@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-one-expression-per-line */
 const inventoryFields = {
 	fields: [
 		{
@@ -6,69 +8,95 @@ const inventoryFields = {
 			span   : 1.5,
 			render : (item) => (
 				<div>
-					{item?.warehouseTransferId}
+					{item?.shipmentId}
 				</div>
 			),
 		},
 		{
-			key    : 'sid_count',
-			label  : 'No. of SIDs',
-			span   : 2.5,
-			render : (item) => (
-				<div>
-					{item?.shipmentDetails?.length}
-				</div>
-			),
+			key   : 'warehouseLocation',
+			label : 'Warehouse Location',
+			span  : 2.5,
+			func  : 'handleWarehouseLocation',
 		},
 		{
-			key    : 'truck_in_eta',
-			label  : 'Truck-in ETA',
+			key    : 'noOfBoxes',
+			label  : 'No. of Boxes',
 			span   : 1.5,
 			render : (item) => (
 				<div>
-					{item?.truckInEta}
+					{item?.noOfBoxes}
 				</div>
 			),
 		},
 		{
-			key    : 'truck_type',
-			label  : 'Truck type',
-			span   : 2.5,
-			render : (item) => (
-				<div>
-					{item?.truckDetails?.truckType}
-				</div>
-			),
+			key   : 'services',
+			label : 'Services',
+			span  : 1,
+			func  : 'handleServices',
 		},
 		{
-			key    : 'truck_number',
-			label  : 'Truck Number',
-			span   : 1,
-			render : (item) => (
-				<div>
-					{item?.truckDetails?.truckNumber}
-				</div>
-			),
+			key   : 'status',
+			label : 'Status',
+			span  : 1,
+			func  : 'handleStatus',
 		},
+	],
+	showMoreFields: [
 		{
-			key    : 'truck_size',
-			label  : 'Truck Size',
-			span   : 1,
-			render : (item) => (
-				<div>
-					{item.truckDetails?.truckSize}
-				</div>
-			),
-		},
-		{
-			key    : 'driver_contact_number',
-			label  : 'Driver Contact Number',
+			key    : 'cargoNumber',
+			label  : 'Cargo Number',
 			span   : 2.2,
 			render : (item) => (
 				<div>
-					{item?.truckDetails?.driverContactNumber}
+					{item?.cargoNumber}
 				</div>
 			),
+		},
+		{
+			key    : 'warehouseLocation',
+			label  : 'Warehouse Location',
+			span   : 2.2,
+			render : (item) => (
+				<div>
+					{item?.warehouseLocation?.zoneNumber}-{item?.warehouseLocation?.aisleNumber}-{item?.warehouseLocation?.rackNumber}-{item?.warehouseLocation?.shelfNumber}-{item?.warehouseLocation?.binNumber}
+				</div>
+			),
+		},
+		{
+			key    : 'dimensions',
+			label  : 'Dimensions',
+			span   : 2.2,
+			render : (item) => (
+				<div>
+					{`${item?.dimensions?.length} x ${item?.dimensions?.width} x ${item?.dimensions?.height} `}
+				</div>
+			),
+		},
+		{
+			key    : 'service',
+			label  : 'Services',
+			span   : 2.2,
+			render : (item) => (
+				<div>
+					{item?.service}
+				</div>
+			),
+		},
+		{
+			key    : 'status',
+			label  : 'Status',
+			span   : 2.2,
+			render : (item) => (
+				<div>
+					{item?.status}
+				</div>
+			),
+		},
+		{
+			key   : '',
+			label : 'Actions',
+			span  : 2.1,
+			func  : 'handleUpdateStatus',
 		},
 	],
 };

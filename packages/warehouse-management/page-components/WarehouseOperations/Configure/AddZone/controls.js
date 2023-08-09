@@ -9,18 +9,30 @@ const controls = [
 		},
 	},
 	{
-		name        : 'commodityType',
-		label       : 'Select Commodity type',
-		type        : 'select',
-		span        : 6,
-		value       : 'general',
-		initialCall : true,
-		params      : {
-			service: 'AIR',
-		},
-		asyncKey    : 'list_hs_code_commodities',
-		renderLabel : (item) => (item?.commodityDisplayName),
-		rules       : { required: 'This is required' },
+		name    : 'commodityType',
+		label   : 'Select Commodity type',
+		type    : 'select',
+		span    : 6,
+		value   : 'general',
+		options : [
+			{
+				label : 'General',
+				value : 'general',
+			},
+			{
+				label : 'Dangerous',
+				value : 'dangerous',
+			},
+			{
+				label : 'Special Commodity',
+				value : 'special_commodity',
+			},
+			{
+				label : 'Temperature controlled pharma',
+				value : 'temperature_controlled_pharma',
+			},
+		],
+		rules: { required: 'This is required' },
 	},
 	{
 		name               : 'aisles',

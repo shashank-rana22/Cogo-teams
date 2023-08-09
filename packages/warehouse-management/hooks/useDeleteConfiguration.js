@@ -9,9 +9,9 @@ function useDeleteConfiguration({
 }) {
 	const [{ loading }, trigger] = useRequestAir(
 		{
-			url      : 'air-coe/warehouse-management/configuration',
-			method   : 'DELETE',
-			auth_key : 'delete_air_coe_warehouse_management_configuration',
+			url     : 'air-coe/warehouse-management/configuration',
+			method  : 'DELETE',
+			authKey : 'delete_air_coe_warehouse_management_configuration',
 		},
 	);
 

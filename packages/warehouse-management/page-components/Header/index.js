@@ -2,7 +2,6 @@ import { Tabs, TabPanel, Input, ButtonIcon, Button, Datepicker, Select } from '@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMAppSearch, IcMCross, IcMCalendar, IcMProfile } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 import TRUCK_STATUS_MAPPINGS from '../../constants/truck-status-mappings';
 import WAREHOUSE_TABS_MAPPINGS from '../../constants/warehouse-tabs-mappings';
@@ -10,9 +9,9 @@ import WAREHOUSE_TABS_MAPPINGS from '../../constants/warehouse-tabs-mappings';
 import styles from './styles.module.css';
 
 const SEARCH_BAR_PLACEHOLDER_MAPPING = {
-	schedules : '',
-	inventory : '',
-	configure : '',
+	schedules : 'Search via Transfer ID/Truck number',
+	inventory : 'Search via SID',
+	configure : 'Search via Zone name/Commodity Type',
 };
 
 function Header({
@@ -20,7 +19,6 @@ function Header({
 	setActiveTab = () => {},
 	truckStatus = 'truck_in',
 	setTruckStatus = () => {},
-	debounceQuery = () => {},
 	searchValue = '',
 	setSearchValue = () => {},
 	date = new Date(),
@@ -31,11 +29,6 @@ function Header({
 	selectedWarehouseLocation = 'delhi',
 	setSelectedWarehouseLocation = () => {},
 }) {
-	// const [dateFilterPopover, setDateFilterPopover] = useState(false);
-	useEffect(() => {
-		debounceQuery(searchValue);
-	}, [debounceQuery, searchValue]);
-
 	const COMPONENT_MAPPING = {
 		schedules: (
 			<Tabs
@@ -103,7 +96,9 @@ function Header({
 						prefix={<IcMAppSearch />}
 						placeholder={SEARCH_BAR_PLACEHOLDER_MAPPING[activeTab]}
 						className={styles.search_text}
-						onChange={setSearchValue}
+						onChange={(val) => {
+							setSearchValue(val);
+						}}
 						value={searchValue}
 						suffix={(
 							<ButtonIcon

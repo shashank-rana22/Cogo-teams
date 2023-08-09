@@ -7,14 +7,14 @@ const NO_MARGIN = 0;
 const SPAN_ONE = 1;
 
 function ListItem({
+	activeTab = '',
 	fields = {},
 	item = [],
 	functions = {},
 	loading = false,
 	isMobile = false,
 	isOpen = '',
-	Child = () => {},
-	setItem = () => {},
+	Child = <div />,
 	listAPI = () => {},
 }) {
 	return (
@@ -51,7 +51,7 @@ function ListItem({
 											item,
 											field,
 											functions,
-											'',
+											'-',
 										)}
 									</div>
 								)}
@@ -59,10 +59,17 @@ function ListItem({
 					))}
 				</div>
 			</section>
-			{isOpen === item.warehouseTransferId && (
+			{activeTab === 'schedules' && isOpen === item?.warehouseTransferId && (
 				<Child
-					data={item}
-					setItem={setItem}
+					boxCount={item?.box}
+					packageDetails={item?.packageDetails}
+					shipmentDetails={item?.shipmentDetails}
+					listAPI={listAPI}
+				/>
+			)}
+			{activeTab === 'inventory' && isOpen === item?.shipmentId && (
+				<Child
+					data={item?.details}
 					listAPI={listAPI}
 				/>
 			)}

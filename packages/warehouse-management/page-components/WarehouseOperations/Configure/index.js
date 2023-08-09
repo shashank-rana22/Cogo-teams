@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
-import { IcMEdit, IcmDelete } from '@cogoport/icons-react';
+import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import List from '../../../commons/List';
@@ -15,40 +16,70 @@ function Configure({
 	activeTab = 'configure',
 	addNewZone = false,
 	setAddNewZone = () => {},
+	searchValue = '',
 }) {
 	const { fields } = configureFields;
-	const [item, setItem] = useState({});
-	const [editZone, setEditZone] = useState(false);
-	const [deleteZone, setDeleteZone] = useState(false);
+	const [editZone, setEditZone] = useState({});
+	const [deleteZone, setDeleteZone] = useState({});
 
-	const { data, listAPI } = useListConfiguration();
+	const { loading, data, listAPI } = useListConfiguration({ searchValue });
 
-	const { loading, page, setPage, total_count } = data;
+	const { page, setPage } = data;
 	const handlePageChange = (pageVal) => {
 		setPage(pageVal);
 	};
 
+	const handleButtonClicks = ({
+		singleItem = {},
+		clickedButton = '',
+	}) => {
+		if (clickedButton === 'edit' && !isEmpty(editZone) && editZone.id === singleItem.id) {
+			return (
+				<EditZoneModal
+					item={singleItem}
+					editZone={editZone}
+					setEditZone={setEditZone}
+					listAPI={listAPI}
+				/>
+			);
+		}
+		if (clickedButton === 'delete' && !isEmpty(deleteZone) && deleteZone.id === singleItem.id) {
+			return (
+				<DeleteZoneModal
+					id={singleItem.id}
+					listAPI={listAPI}
+					deleteZone={deleteZone}
+					setDeleteZone={setDeleteZone}
+				/>
+			);
+		}
+		return <div />;
+	};
+
 	const functions = {
-		handleEdit: () => (
-			<Button
-				themeType="linkUi"
-				disabled={loading}
-				style={{ fontSize: 12 }}
-				onClick={() => setEditZone(true)}
-			>
-				<IcMEdit fill="#8B8B8B" />
-			</Button>
+		handleEdit: (singleItem) => (
+			<>
+				<Button
+					style={{ fontSize: 12 }}
+					onClick={() => setEditZone(singleItem)}
+				>
+					<IcMEdit />
+				</Button>
+				{handleButtonClicks({ singleItem, clickedButton: 'edit' })}
+			</>
 		),
-		handleDelete: () => (
-			<Button
-				themeType="linkUi"
-				disabled={loading}
-				style={{ fontSize: 12 }}
-				onClick={() => setDeleteZone(true)}
-			>
-				<IcmDelete fill="#8B8B8B" />
-			</Button>
+		handleDelete: (singleItem) => (
+			<>
+				<Button
+					style={{ fontSize: 12 }}
+					onClick={() => setDeleteZone(singleItem)}
+				>
+					<IcMDelete width={15} height={15} />
+				</Button>
+				{handleButtonClicks({ singleItem, clickedButton: 'delete' })}
+			</>
 		),
+
 	};
 
 	return (
@@ -59,11 +90,9 @@ function Configure({
 					activeTab={activeTab}
 					data={data}
 					loading={loading}
-					total_count={total_count}
 					page={page}
 					setPage={setPage}
 					listAPI={listAPI}
-					setItem={setItem}
 					functions={functions}
 					handlePageChange={handlePageChange}
 				/>
@@ -75,21 +104,7 @@ function Configure({
 					listAPI={listAPI}
 				/>
 			)}
-			{editZone && (
-				<EditZoneModal
-					item={item}
-					editZone={editZone}
-					setEditZone={setEditZone}
-					listAPI={listAPI}
-				/>
-			)}
-			{deleteZone && (
-				<DeleteZoneModal
-					id={item.id}
-					listAPI={listAPI}
-					setDeleteZone={setDeleteZone}
-				/>
-			)}
+
 		</div>
 	);
 }

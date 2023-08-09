@@ -2,36 +2,23 @@ import { Layout } from '@cogoport/air-modules';
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import useCreateConfiguration from '../../../../hooks/useCreateConfiguration';
+import useUpdateInventory from '../../../../hooks/useUpdateInventory';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function AddNewZoneModal({
-	addNewZone = false,
-	setAddNewZone = () => {},
+function UpdateStatusModal({
+	item = {},
+	showUpdateStatusModal = '',
+	setShowUpdateStatusModal = () => {},
 	listAPI = () => {},
 }) {
-	const {
-		control,
-		watch,
-		formState:{ errors = {} },
-		handleSubmit,
-	} = useForm();
-
+	const { control, formState:{ errors = {} }, watch } = useForm();
 	const formValues = watch();
-	const {
-		loading = false,
-		onSubmit = () => {},
-	} = useCreateConfiguration({ formValues, listAPI, setAddNewZone });
-
+	const { handleUpdate } = useUpdateInventory({ item, formValues, setShowUpdateStatusModal, listAPI });
 	return (
 		<Modal
-			show={addNewZone}
-			className={styles.modal_styled}
-			placement="center"
-			onClose={() => setAddNewZone(false)}
-			closeOnOuterClick
+			show={showUpdateStatusModal}
 		>
 			<Modal.Header title="Add new Zone" />
 			<Modal.Body>
@@ -44,14 +31,14 @@ function AddNewZoneModal({
 			<Modal.Footer>
 				<Button
 					className={styles.cancel_button}
-					onClick={() => setAddNewZone(false)}
+					onClick={() => setShowUpdateStatusModal(false)}
 					themeType="secondary"
 				>
 					Cancel
 				</Button>
 				<Button
-					disabled={loading}
-					onClick={handleSubmit(onSubmit)}
+					// disabled={loading}
+					onClick={handleUpdate}
 				>
 					Apply
 				</Button>
@@ -60,4 +47,4 @@ function AddNewZoneModal({
 	);
 }
 
-export default AddNewZoneModal;
+export default UpdateStatusModal;

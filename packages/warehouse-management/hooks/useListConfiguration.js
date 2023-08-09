@@ -5,23 +5,25 @@ import { useState, useEffect, useCallback } from 'react';
 
 import CONSTANTS from '../constants/constants';
 
-const useListInventory = ({
+const useListConfiguration = ({
 	searchValue = '',
 }) => {
-	const { query = '', debounceQuery } = useDebounceQuery();
 	const [page, setPage] = useState(CONSTANTS.START_PAGE);
+
+	const { query = '', debounceQuery } = useDebounceQuery();
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url     : '/air-coe/warehouse-management/warehouse-inventory',
+			url     : '/air-coe/warehouse-management/warehouse-configurations',
 			method  : 'get',
-			authKey : 'get_air_coe_warehouse_management_warehouse_inventory',
+			authKey : 'get_air_coe_warehouse_management_warehouse_configurations',
 		},
 		{ manual: true },
 	);
 
 	const listAPI = useCallback(async () => {
 		const PAYLOAD = {
-			status: ['received'],
+			warehouseLocationId : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+			status              : 'active',
 		};
 
 		try {
@@ -48,10 +50,12 @@ const useListInventory = ({
 	}, [listAPI, page, query]);
 
 	return {
-		data: data?.data || {},
+		data,
 		loading,
 		listAPI,
+		setPage,
+		page,
 	};
 };
 
-export default useListInventory;
+export default useListConfiguration;

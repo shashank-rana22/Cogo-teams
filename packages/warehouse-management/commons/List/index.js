@@ -9,9 +9,8 @@ import ListItem from './ListItem/index';
 import styles from './styles.module.css';
 
 const INITIAL_PAGE = 1;
-const TOTAL_COUNT_FOR_PAGINATION = 0;
 const SIZE_FOR_SHIPMENT_PAGE = 10;
-const SIX = 6;
+const SHOW_LIST_SIZE = 6;
 const ONE = 1;
 const ZERO = 0;
 
@@ -21,26 +20,33 @@ function List({
 	loading = false,
 	listAPI = () => {},
 	functions = {},
-	Child = () => {},
+	Child = <div />,
 	total_count = 0,
 	activeTab = '',
 	page = 1,
 	setPage = () => {},
 }) {
 	const { list = {} } = data;
-	const [isOpen, setIsOpen] = useState(null);
+	if (activeTab === 'inventory') {
+		Object.keys(data).forEach((key) => {
+			const mp = new Map();
+			mp.set('shipmentId', key);
+			mp.set('details', data[key]);
+			mp.set('noOfBoxes', data[key].length);
+			list.push(mp);
+		});
+	}
 
-	const handleScheduleInfo = (item) => {
-		setIsOpen(item.warehouseTransferId);
-	};
+	const [isOpen, setIsOpen] = useState('');
 
 	const render = () => {
-		const showList = list.length ? list : Array(SIX).fill(ONE);
+		const showList = list.length ? list : Array(SHOW_LIST_SIZE).fill(ONE);
 		if (loading || list.length) {
 			return (showList).map((item) => (
 				<div key={item.warehouseTransferId}>
 					<ListItem
 						item={item}
+						activeTab={activeTab}
 						loading={loading}
 						fields={fields}
 						functions={functions}
@@ -65,19 +71,22 @@ function List({
 										style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
 									/>
 								</Button>
-							) : (
-								<Button
-									size="md"
-									themeType="linkUi"
-									onClick={() => {
-										handleScheduleInfo(item);
-									}}
-								>
-									<span>Show More</span>
-									<IcMArrowDown
-										style={{ cursor: 'pointer' }}
-									/>
-								</Button>
+							) : (!loading
+								&& (
+									<Button
+										size="md"
+										themeType="linkUi"
+										onClick={() => {
+											setIsOpen(activeTab === 'schedules'
+												? item?.warehouseTransferId : item?.shipmentId);
+										}}
+									>
+										<span>Show More</span>
+										<IcMArrowDown
+											style={{ cursor: 'pointer' }}
+										/>
+									</Button>
+								)
 							)}
 						</div>
 					)}
@@ -102,8 +111,8 @@ function List({
 				{!loading && !isEmpty(data) && (
 					<div className={styles.pagination_container}>
 						<Pagination
-							type="number"
-							totalItems={total_count || TOTAL_COUNT_FOR_PAGINATION}
+							type="table"
+							totalItems={total_count || data?.totalRecords}
 							currentPage={page || INITIAL_PAGE}
 							pageSize={SIZE_FOR_SHIPMENT_PAGE}
 							onPageChange={(pageVal) => setPage(pageVal)}

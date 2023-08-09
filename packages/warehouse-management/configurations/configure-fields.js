@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 
 const configureFields = {
 	fields: [
@@ -13,12 +14,12 @@ const configureFields = {
 			),
 		},
 		{
-			key    : 'commodityType',
-			label  : 'Commodity Type',
+			key    : 'commodity',
+			label  : 'Commodity',
 			span   : 1.2,
 			render : (item) => (
 				<div>
-					{item?.commodityType}
+					{startCase(item?.commodity)}
 				</div>
 			),
 		},
@@ -58,7 +59,7 @@ const configureFields = {
 			span   : 1,
 			render : (item) => (
 				<div>
-					{`x${item.aisles[GLOBAL_CONSTANTS.zeroth_index].totalBinsInShelf} 
+					{`${item.aisles[GLOBAL_CONSTANTS.zeroth_index].totalBinsInShelf} 
 					(${item.aisles[GLOBAL_CONSTANTS.zeroth_index].binLength} 
 						x ${item.aisles[GLOBAL_CONSTANTS.zeroth_index].binWidth} x 
 						${item.aisles[GLOBAL_CONSTANTS.zeroth_index].binHeight})`}
@@ -66,16 +67,16 @@ const configureFields = {
 			),
 		},
 		{
-			key   : 'delete',
+			key   : 'edit',
 			label : 'Actions',
 			span  : 0.4,
-			func  : 'handleDelete',
+			func  : 'handleEdit',
 		},
 		{
-			key   : 'edit',
+			key   : 'delete',
 			label : '',
 			span  : 0.4,
-			func  : 'handleEdit',
+			func  : 'handleDelete',
 		},
 	],
 };

@@ -2,28 +2,27 @@ import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 
-const useCreateConfiguration = ({
+function useUpdateConfiguration({
 	formValues = {},
 	listAPI = () => {},
-	setAddNewZone = () => {},
-}) => {
+	setEditZone = () => {},
+}) {
 	const [{ loading }, trigger] = useRequestAir(
 		{
 			url     : 'air-coe/warehouse-management/configuration',
-			method  : 'POST',
-			authKey : 'post_air_coe_warehouse_management_configuration',
+			method  : 'PUT',
+			authKey : 'put_air_coe_warehouse_management_configuration',
 		},
 	);
 
 	const handleOnClose = () => {
-		setAddNewZone(false);
+		setEditZone(false);
 	};
 
 	const onSubmit = async () => {
 		try {
 			await trigger({
 				data: {
-					zoneName            : formValues.zoneName,
 					commodityType       : formValues.commodityType,
 					commodity           : formValues.commodityType,
 					aisles              : formValues.aisles,
@@ -32,7 +31,7 @@ const useCreateConfiguration = ({
 					status              : 'active',
 				},
 			});
-			Toast.success('New Zone added');
+			Toast.success('Zone changed');
 			listAPI();
 			handleOnClose();
 		} catch (err) {
@@ -44,6 +43,6 @@ const useCreateConfiguration = ({
 		onSubmit,
 		loading,
 	};
-};
+}
 
-export default useCreateConfiguration;
+export default useUpdateConfiguration;

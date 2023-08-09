@@ -1,51 +1,50 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcCError } from '@cogoport/icons-react';
 
+import useDeleteConfiguration from '../../../../hooks/useDeleteConfiguration';
+
 import styles from './styles.module.css';
 
 function DeleteZoneModal({
-	item = {},
+	id = '',
 	deleteZone = false,
 	setDeleteZone = () => {},
-	handleDelete = () => {},
+	listAPI = () => {},
 }) {
+	const { loading = false, handleDelete = () => {} } = useDeleteConfiguration({ id, setDeleteZone, listAPI });
+
 	return (
-		<div>
-			<Modal
-				size="md"
-				show={deleteZone}
-				onClose={() => setDeleteZone(false)}
-			/>
-			<Modal.Header title={(
+		<Modal
+			className={styles.modal_styled}
+			placement="center"
+			show={deleteZone}
+			onClose={() => setDeleteZone(false)}
+			closeOnOuterClick
+		>
+			<Modal.Footer className={styles.modal_footer}>
 				<h4 className={styles.warning_icon}>
 					<IcCError />
 				</h4>
-			)}
-			/>
-			<Modal.Body>
 				<div className={styles.sure_delete}>
 					Are you sure you want to delete this Zone ?
 				</div>
-			</Modal.Body>
-			<Modal.Footer>
-				<Button
-					className={styles.cancel_button}
-					style={{ }}
-					size="md"
-					onClick={() => setDeleteZone(false)}
-					themeType="secondary"
-				>
-					Cancel
-				</Button>
-				<Button
-					size="md"
-					themeType="accent"
-					onClick={() => { handleDelete(item); }}
-				>
-					Confirm
-				</Button>
+				<div className={styles.footer_buttons}>
+					<Button
+						className={styles.cancel_button}
+						onClick={() => setDeleteZone(false)}
+						themeType="secondary"
+					>
+						Cancel
+					</Button>
+					<Button
+						disabled={loading}
+						onClick={handleDelete}
+					>
+						Confirm
+					</Button>
+				</div>
 			</Modal.Footer>
-		</div>
+		</Modal>
 	);
 }
 

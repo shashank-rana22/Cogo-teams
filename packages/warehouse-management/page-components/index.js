@@ -1,4 +1,3 @@
-import { useDebounceQuery } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
 import Header from './Header';
@@ -18,8 +17,6 @@ function WarehouseManagement() {
 
 	const [searchValue, setSearchValue] = useState('');
 
-	const { debounceQuery, query: searchQuery } = useDebounceQuery();
-
 	useEffect(() => {
 		setSearchValue('');
 	}, [activeTab, setSearchValue]);
@@ -27,14 +24,13 @@ function WarehouseManagement() {
 	return (
 		<div className={styles.container}>
 			<h1>
-				Warehouse management Dashboard
+				Warehouse Management Dashboard
 			</h1>
 			<Header
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
 				truckStatus={truckStatus}
 				setTruckStatus={setTruckStatus}
-				debounceQuery={debounceQuery}
 				addNewZone={addNewZone}
 				setAddNewZone={setAddNewZone}
 				searchValue={searchValue}
@@ -55,7 +51,6 @@ function WarehouseManagement() {
 				setAddNewZone={setAddNewZone}
 				date={date}
 				selectedWarehouse={selectedWarehouseLocation}
-				searchQuery={searchQuery}
 			/>
 		</div>
 

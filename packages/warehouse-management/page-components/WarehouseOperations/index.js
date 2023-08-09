@@ -1,8 +1,8 @@
+import { useState } from 'react';
+
 import Configure from './Configure';
 import Inventory from './Inventory';
 import Schedules from './Schedules';
-
-// import Loader from '../../commons/Loader';
 
 const TABS_COMPONENT_MAPPING = {
 	schedules : Schedules,
@@ -15,13 +15,13 @@ function WarehouseOperations({
 	truckStatus = 'truck_in',
 	selectedTimeInterval = 'daily',
 	searchValue = '',
-	setSearchValue = () => {},
 	addNewZone = false,
 	setAddNewZone = () => {},
 	date = new Date(),
 	selectedWarehouse = 'delhi',
 }) {
 	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
+	const [item, setItem] = useState({});
 
 	return (
 		<div>
@@ -31,11 +31,12 @@ function WarehouseOperations({
 					truckStatus={truckStatus}
 					selectedTimeInterval={selectedTimeInterval}
 					searchValue={searchValue}
-					setSearchValue={setSearchValue}
 					addNewZone={addNewZone}
 					setAddNewZone={setAddNewZone}
 					date={date}
 					selectedWarehouse={selectedWarehouse}
+					setItem={setItem}
+					item={item}
 				/>
 			)}
 		</div>
