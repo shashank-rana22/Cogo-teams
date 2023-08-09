@@ -6,7 +6,7 @@ const SUBSTRACT_THIRTEEN_DAY = 13;
 const LAST_DAY = 0;
 const LAST_AND_FIRST_MONTH = 1;
 
-const datesMapping = (range) => {
+const datesMapping = ({ range }) => {
 	const date = new Date();
 	let startDate = date;
 	let endDate = date;

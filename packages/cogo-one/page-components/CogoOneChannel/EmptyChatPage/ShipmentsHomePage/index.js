@@ -53,7 +53,7 @@ function ListShipmentCards({
 function ShipmentsHomePage({ setActiveTab = () => {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
 	const [range, setRange] = useState('current_month');
-	const [filters, setFilters] = useState({ ...getDefaultFilters(range) });
+	const [filters, setFilters] = useState({ ...getDefaultFilters({ range }) });
 
 	const {
 		listLoading,

@@ -14,7 +14,7 @@ function DateFilter({ setFilters = () => {}, range = 'current_month', setRange =
 	const [date, setDate] = useState({});
 
 	const handleApplyFilters = () => {
-		const dates = startDateOfMonth(date);
+		const dates = startDateOfMonth({ date });
 		setFilters((prevFilters) => ({
 			...prevFilters,
 			...dates,

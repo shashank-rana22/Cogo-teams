@@ -20,7 +20,7 @@ function DatesFilterContent({
 	};
 
 	useEffect(() => {
-		const minMax = datesMapping(range);
+		const minMax = datesMapping({ range });
 		setDate({ ...minMax });
 	}, [range, setDate]);
 
