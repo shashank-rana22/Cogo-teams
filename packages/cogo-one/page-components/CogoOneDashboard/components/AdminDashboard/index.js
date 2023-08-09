@@ -81,7 +81,7 @@ function AdminDashboard({ isRolePresent = false }) {
 						<CallAnalytics callsAnalytics={calls} loading={loading} />
 					</div>
 					<div className={styles.four_characterisctics_container}>
-						<ChatStatistics isAdminView timeline={timeline} />
+						<ChatStatistics isAdminView timeline={timeline} agentId="" />
 					</div>
 				</div>
 			</div>
