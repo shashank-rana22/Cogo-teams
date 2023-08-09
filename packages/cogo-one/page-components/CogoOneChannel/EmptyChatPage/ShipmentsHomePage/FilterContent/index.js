@@ -1,13 +1,12 @@
-import { Popover, Button } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 
 import DatesFilterContent from './DatesFilterContent';
 
-function Filters({
+function FilterContent({
 	children = null,
 	applyFilters = () => {},
 	open = false,
 	setOpen = () => {},
-	name = 'APPLY',
 	date = {},
 	setDate = () => {},
 	range = '',
@@ -30,12 +29,8 @@ function Filters({
 			)}
 			visible={open}
 		>
-			{children || (
-				<Button onClick={() => setOpen(!open)}>
-					{name}
-				</Button>
-			)}
+			{children}
 		</Popover>
 	);
 }
-export default Filters;
+export default FilterContent;

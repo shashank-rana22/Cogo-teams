@@ -7,7 +7,7 @@ today.setMonth(today.getMonth() - PREVIOUS_MONTH);
 
 const previousMonth = today.toLocaleString('default', { month: 'long' });
 
-const DateRanges = [
+const DATE_RANGES = [
 	{ label: 'Today', value: 'today' },
 	{ label: 'Yesterday', value: 'yesterday' },
 	{ label: 'Last 7 days', value: 'last_7_days' },
@@ -17,4 +17,4 @@ const DateRanges = [
 	{ label: 'Custom', value: 'custom' },
 ];
 
-export default DateRanges;
+export default DATE_RANGES;
