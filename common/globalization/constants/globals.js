@@ -543,7 +543,10 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'domestic_air_freight', label: 'Domestic Air Freight' },
 		{ value: 'rail_domestic_freight', label: 'Rail Domestic Freight' },
 		{ value: 'trailer_freight', label: 'Container Transportation' },
-
+	],
+	trade_types: [
+		{ value: 'import', label: 'Import' },
+		{ value: 'export', label: 'Export' },
 	],
 	service_supported_countries: {
 		feature_supported_service: {

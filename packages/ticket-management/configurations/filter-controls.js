@@ -46,11 +46,8 @@ const useRaiseTicketcontrols = ({
 			controllerType : 'select',
 			placeholder    : 'Select Trade Type',
 			rules          : { required: true },
-			options        : [
-				{ label: 'Import', value: 'import' },
-				{ label: 'Export', value: 'export' },
-			],
-			onChange: () => resetField('issue_type'),
+			options        : GLOBAL_CONSTANTS.trade_types,
+			onChange       : () => resetField('issue_type'),
 		},
 		{
 			...(categoryOptions || {}),
