@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { Toast } from '@cogoport/components';
 import { AsyncSelectController, SelectController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -8,7 +7,9 @@ import React, { useEffect } from 'react';
 
 import AccordianView from '../../../common/Accordianview';
 
+import RenderLabel from './RenderLabel';
 import styles from './styles.module.css';
+import collectionPartyBankDetails from './utils/collectionPartyBankDetails';
 
 const ONE_OPTION = 1;
 
@@ -70,27 +71,6 @@ function CollectionPartyDetails({
 
 	const stringifycollectionPartyAddresses = JSON.stringify(collectionPartyAddresses || []);
 
-	useEffect(() => {
-		setValue('collection_party_bank_details', purchaseInvoiceValues?.collection_party_bank_details);
-	}, [bankOptions, setValue, purchaseInvoiceValues]);
-
-	useEffect(() => {
-		const parseOptions = JSON.parse(bankOptions || []);
-		if (parseOptions?.length === ONE_OPTION) {
-			setValue(
-				'collection_party_bank_details',
-				parseOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.data?.bank_account_number,
-			);
-		}
-	}, [bankOptions, setValue]);
-
-	useEffect(() => {
-		const parseOptions = JSON.parse(stringifycollectionPartyAddresses || []);
-		if (parseOptions?.length === ONE_OPTION) {
-			setValue('collection_party_address', parseOptions?.[GLOBAL_CONSTANTS.zeroth_index].id);
-		}
-	}, [stringifycollectionPartyAddresses, setValue]);
-
 	const handleModifiedOptions = ({ options }) => options.map((option) => ({
 		...option,
 		display_name:
@@ -111,6 +91,10 @@ function CollectionPartyDetails({
 
 	const collectionPartyBank = COLLECTION_PARTY_BANK_OPTIONS?.find(
 		(item) => item?.value === bankAccountNumber,
+	);
+
+	const COLLECTION_PARTY_BANK_DETAILS = collectionPartyBankDetails(
+		{ collectionPartyAddress, collectionPartyBank, collectionParty },
 	);
 
 	const handleOption = (option) => {
@@ -167,45 +151,26 @@ function CollectionPartyDetails({
 		}
 	};
 
-	const renderLabel = (bank) => (
-		<div className={styles.flex}>
-			{bank?.data?.bank_name}
-			{' '}
-			/
-			{' '}
-			{bank?.data?.branch_name}
-			<div className={styles.verification_status}>
-				{startCase(bank.verification_status)}
-			</div>
-		</div>
-	);
+	useEffect(() => {
+		setValue('collection_party_bank_details', purchaseInvoiceValues?.collection_party_bank_details);
+	}, [bankOptions, setValue, purchaseInvoiceValues]);
 
-	const collectionPartyBankDetails = [
-		{
-			label : 'BankDetails:',
-			value : `${collectionPartyBank?.data?.bank_name || '-'} / ${collectionPartyBank?.data?.branch_name || '-'}`,
-		},
-		{
-			label : 'AccountNumber :',
-			value : `${collectionPartyBank?.data?.bank_account_number || '-'}`,
-		},
-		{
-			label : 'IFSC :',
-			value : `${collectionPartyBank?.data?.ifsc_number || '-'}`,
-		},
-		{
-			label : 'PAN Number :',
-			value : `${collectionParty?.registration_number || '-'}`,
-		},
-		{
-			label : 'GST Number :',
-			value : `${collectionPartyAddress?.tax_number || '-'}`,
-		},
-		{
-			label : 'Beneficiary Name :',
-			value : `${collectionPartyBank?.data?.account_holder_name || '-'}`,
-		},
-	];
+	useEffect(() => {
+		const parseOptions = JSON.parse(bankOptions || []);
+		if (parseOptions?.length === ONE_OPTION) {
+			setValue(
+				'collection_party_bank_details',
+				parseOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.data?.bank_account_number,
+			);
+		}
+	}, [bankOptions, setValue]);
+
+	useEffect(() => {
+		const parseOptions = JSON.parse(stringifycollectionPartyAddresses || []);
+		if (parseOptions?.length === ONE_OPTION) {
+			setValue('collection_party_address', parseOptions?.[GLOBAL_CONSTANTS.zeroth_index].id);
+		}
+	}, [stringifycollectionPartyAddresses, setValue]);
 
 	return (
 		<AccordianView title="Collection Party Details" fullwidth showerror={errMszs.collectionPartyErr} open={open}>
@@ -257,7 +222,7 @@ function CollectionPartyDetails({
 								name="collection_party_bank_details"
 								placeholder="Select Bank Details"
 								options={COLLECTION_PARTY_BANK_OPTIONS}
-								renderLabel={(bank) => renderLabel(bank)}
+								renderLabel={(bank) => <RenderLabel bank={bank} />}
 								rules={{ required: true }}
 							/>
 							{errors?.collection_party_bank_details ? (
@@ -283,7 +248,7 @@ function CollectionPartyDetails({
 			</div>
 			{collectionPartyBank ? (
 				<div className={styles.address}>
-					{collectionPartyBankDetails.map(({ label = '', value = '' }) => (
+					{COLLECTION_PARTY_BANK_DETAILS.map(({ label = '', value = '' }) => (
 						<div className={styles.flex} key={label}>
 							<span className={styles.key}>{label}</span>
 							<span className={styles.value}>

@@ -5,19 +5,19 @@ export const billingAddressControlForSelf = () => {
 
 	const controls = [
 		{
-			label       : `${geo.others.identification_number.label} Number`,
+			label       : `${geo?.others?.identification_number?.label} Number`,
 			name        : 'panNumber',
 			type        : 'text',
-			placeholder : `Enter ${geo.others.identification_number.label} Number`,
+			placeholder : `Enter ${geo?.others?.identification_number?.label} Number`,
 			showLabel   : false,
 			span        : 3,
 			disabled    : false,
 			rules       : {
 				pattern: {
-					value   : geo.others.identification_number.pattern,
-					message : `Enter a valid ${geo.others.identification_number.label}`,
+					value   : geo?.others?.identification_number?.pattern,
+					message : `Enter a valid ${geo?.others?.identification_number?.label}`,
 				},
-				required: { value: true, message: `${geo.others.identification_number.label} Number is required` },
+				required: { value: true, message: `${geo?.others?.identification_number?.label} Number is required` },
 			},
 		},
 	];

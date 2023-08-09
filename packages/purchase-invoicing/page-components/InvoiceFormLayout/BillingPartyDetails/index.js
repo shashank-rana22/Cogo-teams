@@ -8,7 +8,7 @@ import AccordianView from '../../../common/Accordianview';
 
 import styles from './styles.module.css';
 
-const INDEX = 1;
+const PARSE_OPTIONS_INDEX = 1;
 
 function BillingPartyDetails({
 	control,
@@ -47,7 +47,7 @@ function BillingPartyDetails({
 
 	useEffect(() => {
 		const parseOptions = JSON.parse(billingOptionsStringifiy || '[]');
-		if (parseOptions?.length === INDEX) {
+		if (parseOptions?.length === PARSE_OPTIONS_INDEX) {
 			setValue('billing_party_address', parseOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.gst_number);
 		} else {
 			setValue('billing_party_address', (purchaseInvoiceValues.billing_party_address || ''));

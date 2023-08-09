@@ -168,7 +168,7 @@ function ExpenseComponent() {
 					<div className={styles.input_container}>
 						<Input
 							size="lg"
-							placeholder={`Search by Vendor Name/${geo.others.identification_number.label}/Organization ID/Sage ID`}
+							placeholder={`Search by Vendor Name/${geo?.others?.identification_number?.label}/Organization ID/Sage ID`}
 							suffix={<IcMSearchlight />}
 							value={expenseFilters.searchValue}
 							onChange={(e: any) => handleChange(e)}
