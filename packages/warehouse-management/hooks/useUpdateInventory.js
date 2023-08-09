@@ -24,8 +24,8 @@ function useUpdateInventory({
 			await trigger({
 				data: {
 					id,
-					services   : formValues?.services,
-					dimensions : formValues?.dimensions,
+					services   : { serviceName: formValues?.servicesSelected },
+					dimensions : { length: formValues?.length, width: formValues?.width, height: formValues?.height },
 				},
 			});
 			Toast.success('Zone changed');
