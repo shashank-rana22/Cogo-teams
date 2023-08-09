@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startOfWeek } from '@cogoport/utils';
 
 import formatDateTime from './timezoneSpecificTime';
 
@@ -33,7 +34,7 @@ const DATE_MAPPING = {
 		endDate   : formatDateTime({ date: new Date(), dateformat: 'isoUtcDateTime' }),
 	},
 	week: {
-		startDate : formatDateTime({ date: new Date(), dateformat: 'isoUtcDateTime' }),
+		startDate : formatDateTime({ date: startOfWeek(new Date()), dateformat: 'isoUtcDateTime' }),
 		endDate   : formatDateTime({ date: WEEK_END_DATE, dateformat: 'isoUtcDateTime' }),
 	},
 	month: {
