@@ -26,7 +26,7 @@ const formatRates = (selectedRate, service_type_prop) => {
 							}))
 							: undefined,
 				},
-				[rate?.origin_locals?.service_id]: {
+				[rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.origin_locals?.service_id]: {
 					service_provider_id : rate.id,
 					shipping_line_id    : rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.shipping_line_id,
 					line_items:
@@ -41,7 +41,7 @@ const formatRates = (selectedRate, service_type_prop) => {
 							}))
 							: undefined,
 				},
-				[rate?.destination_local?.service_id]: {
+				[rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.destination_locals?.service_id]: {
 					service_provider_id : rate.id,
 					shipping_line_id    : rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.shipping_line_id,
 					line_items:
