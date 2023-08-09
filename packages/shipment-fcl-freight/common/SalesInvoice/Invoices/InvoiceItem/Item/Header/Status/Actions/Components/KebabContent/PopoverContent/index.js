@@ -54,16 +54,17 @@ export default function PopoverContent({
 							Change Payment Mode
 						</Button>
 					) : null}
-					{ showCancel ? (
-						<Button
-							themeType="tertiary"
-							className={styles.text}
-							onClick={() => handleClick('cancel_e_invoice')}
-						>
-							Request Cancel E Invoice
-						</Button>
-					) : null}
 				</>
+			) : null}
+
+			{ showCancel ? (
+				<Button
+					themeType="tertiary"
+					className={styles.text}
+					onClick={() => handleClick('cancel_e_invoice')}
+				>
+					Request Cancel E Invoice
+				</Button>
 			) : null}
 
 			{(invoice.exchange_rate_document || []).map((url) => (

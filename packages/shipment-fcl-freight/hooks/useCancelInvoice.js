@@ -17,7 +17,7 @@ const useCancelInvoice = () => {
 	);
 
 	const { user_id } = useSelector(({ profile }) => ({
-		user_id: profile.id,
+		user_id: profile?.user?.id,
 	}));
 
 	const geo = getGeoConstants();
@@ -35,7 +35,7 @@ const useCancelInvoice = () => {
 					data : {
 						revokeInvoiceRequest: {
 							invoiceNumber : proformaNumber,
-							documentUrls  : [values?.documentUrls?.url],
+							documentUrls  : [values?.documentUrls?.finalUrl],
 							cancelReason  : values?.cancelReason,
 							invoiceCombinationId,
 							invoiceId,
