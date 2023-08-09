@@ -59,6 +59,7 @@ function Actions({
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < INVOICE_SERIAL_ID_LESS_THAN;
 
 	const showCancel = CANCEL_ALLOWED_STATUSES.includes(bfInvoice.status)
+	&& new Date().getMonth() === new Date(bfInvoice.invoiceDate).getMonth()
 	&& geo.others.navigations.partner.bookings.invoicing.request_cancel_invoice;
 
 	let disableMarkAsReviewed = disableAction;
