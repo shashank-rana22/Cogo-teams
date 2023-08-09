@@ -12,10 +12,11 @@ const getDateString = (date) => formatDate({
 }) || '';
 
 const getParams = ({ value }) => ({
-	data_required : false,
-	filters       : {
-		is_converted_to_booking        : true,
-		quotation_sent_at_greater_than : getDateString(DATE_FILTER_MAPPING[value](new Date())),
+	data_required                  : false,
+	sales_dashboard_stats_required : true,
+	pagination_data_required       : false,
+	filters                        : {
+		created_at_greater_than: getDateString(DATE_FILTER_MAPPING[value](new Date())),
 	},
 });
 
