@@ -47,11 +47,12 @@ export const renderValue = (label, detail = {}) => {
 					content={(
 						<div style={{ fontSize: '10px' }}>
 							{(packages || []).map((item) => {
+								const itemKey = JSON.stringify(item);
 								const values = item
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div key={JSON.stringify(item)}>{values}</div>;
+								return <div key={itemKey}>{values}</div>;
 							})}
 						</div>
 					)}
@@ -119,11 +120,11 @@ export const renderValue = (label, detail = {}) => {
 				? 'Sell Without Buy'
 				: startCase(source || '');
 		case 'cargo_readiness_date':
-			return formatDate({
+			return `Cargo Red. Date: ${formatDate({
 				date       : cargo_readiness_date,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			});
+			})}`;
 		case 'is_minimum_price_shipment':
 			return 'Min. Price';
 		case 'master_airway_bill_number':
@@ -146,17 +147,17 @@ export const renderValue = (label, detail = {}) => {
 		case 'house_airway_bill_number':
 			return `HAWB Number: ${house_airway_bill_number || ''}`;
 		case 'schedule_departure':
-			return formatDate({
+			return `${detail?.schedule_departure ? 'Actual' : 'Expected'} Departure Date: ${formatDate({
 				date       : detail?.schedule_departure || detail?.selected_schedule_departure,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			});
+			})}`;
 		case 'schedule_arrival':
-			return formatDate({
+			return `${detail?.schedule_departure ? 'Actual' : 'Expected'} Arrival Date: ${formatDate({
 				date       : detail?.schedule_arrival || detail?.selected_schedule_arrival,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			});
+			})}`;
 		case 'awb_execution_date':
 			return `AWB Exe. Date: ${formatDate({
 				date       : awb_execution_date || awb_execution_date,

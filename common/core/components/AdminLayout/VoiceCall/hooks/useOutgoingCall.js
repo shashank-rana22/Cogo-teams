@@ -70,7 +70,7 @@ function useOutgoingCall({
 		userName = '',
 	} = voiceCallData || {};
 
-	const makeCallApi = useCallback(() => {
+	const makeCallApi = useCallback(async () => {
 		try {
 			setCallStateData({
 				mobile_number,
@@ -80,7 +80,7 @@ function useOutgoingCall({
 				setCallState,
 			});
 
-			trigger({
+			await trigger({
 				data: getPayload({
 					isUnkownUser,
 					mobile_country_code,

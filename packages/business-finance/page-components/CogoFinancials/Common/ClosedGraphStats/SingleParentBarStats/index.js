@@ -1,5 +1,5 @@
 import { startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { LABEL_MAPPING } from '../../../constants';
 import RenderCardHeader from '../../RenderCardHeader';
@@ -16,16 +16,10 @@ function SingleParentBarStats({
 	type = '',
 	serviceLevelData = [],
 	serviceLevelLoading = false,
-	getServiceLevelData = () => {},
 }) {
 	const onViewDetails = () => {
 		setShowShipmentList(true);
 	};
-
-	useEffect(() => {
-		getServiceLevelData(activeBar);
-	}, [activeBar, getServiceLevelData]);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_combine}>

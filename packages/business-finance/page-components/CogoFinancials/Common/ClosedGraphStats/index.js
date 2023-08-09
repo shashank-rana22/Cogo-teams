@@ -27,13 +27,14 @@ function ClosedGraphStats({
 	setActiveBar = () => {},
 	defaultWidth = '400',
 }) {
-	const { getServiceLevelData, serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
+	const { serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
 		entity,
 		timeRange,
 		statsType,
 		filter,
 		activeBar,
 		customDate,
+		serviceLevel: activeBar,
 	});
 
 	return (
@@ -105,7 +106,6 @@ function ClosedGraphStats({
 					type={type}
 					serviceLevelData={serviceLevelData}
 					serviceLevelLoading={serviceLevelLoading}
-					getServiceLevelData={getServiceLevelData}
 				/>
 			)}
 		</div>
