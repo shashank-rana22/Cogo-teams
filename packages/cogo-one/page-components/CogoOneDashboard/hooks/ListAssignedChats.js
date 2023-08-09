@@ -6,7 +6,6 @@ const DATE_FILTER_MAPPING = {
 	day   : startOfDay,
 	week  : startOfWeek,
 	month : startOfMonth,
-
 };
 
 const getParams = ({ timeline, agentId }) => ({

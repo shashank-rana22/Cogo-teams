@@ -12,6 +12,9 @@ import Header from './Header';
 import LineChartLoader from './LoaderLineChart';
 import styles from './styles.module.css';
 
+const MIN_TEXT_ROTATION = 0;
+const TEXT_ROTATION = -25;
+
 function CustomToolTip({ point = {}, timeline = '' }) {
 	return (
 		<div className={styles.tooltip_box}>
@@ -64,7 +67,7 @@ function LineChart({
 							orient         : 'bottom',
 							tickSize       : 5,
 							tickPadding    : 5,
-							tickRotation   : timeline === 'day' ? '-25' : '0',
+							tickRotation   : timeline === 'day' ? TEXT_ROTATION : MIN_TEXT_ROTATION,
 							legend         : LABLE_TYPE[timeline]?.label,
 							legendOffset   : 50,
 							legendPosition : 'middle',
