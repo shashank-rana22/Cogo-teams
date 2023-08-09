@@ -8,6 +8,7 @@ export default function PopoverContent({
 	invoice = {},
 	commonActions = false,
 	editInvoicesVisiblity = false,
+	showCancel = false,
 }) {
 	const handleClick = (modalName) => {
 		setShowModal(modalName);
@@ -51,6 +52,15 @@ export default function PopoverContent({
 							onClick={() => handleClick('change_payment_mode')}
 						>
 							Change Payment Mode
+						</Button>
+					) : null}
+					{ showCancel ? (
+						<Button
+							themeType="tertiary"
+							className={styles.text}
+							onClick={() => handleClick('cancel_e_invoice')}
+						>
+							Request Cancel E Invoice
 						</Button>
 					) : null}
 				</>

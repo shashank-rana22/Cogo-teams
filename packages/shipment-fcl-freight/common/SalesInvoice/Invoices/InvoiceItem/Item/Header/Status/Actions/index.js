@@ -1,10 +1,12 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError, IcMInfo } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import CancelEInvoice from './CancelEInvoice';
 import EmailInfo from './Components/EmailInfo';
 import KebabContent from './Components/KebabContent';
 import styles from './styles.module.css';
@@ -19,6 +21,7 @@ const AmendmentReasons = dynamic(() => import('./AmendmentReasons'), { ssr: fals
 const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
+const CANCEL_ALLOWED_STATUSES = ['IRN_GENERATED'];
 
 const INVOICE_SERIAL_ID_LESS_THAN = 8;
 
@@ -28,6 +31,7 @@ function Actions({
 	shipment_data = {},
 	invoiceData = {},
 	isIRNGenerated = false,
+	bfInvoice = {},
 }) {
 	const [showModal, setShowModal] = useState('');
 
@@ -46,12 +50,16 @@ function Actions({
 	}
 
 	const onModalClose = () => setShowModal('');
+	const geo = getGeoConstants();
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[GLOBAL_CONSTANTS.zeroth_index];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < INVOICE_SERIAL_ID_LESS_THAN;
+
+	const showCancel = CANCEL_ALLOWED_STATUSES.includes(bfInvoice.status)
+	&& geo.others.navigations.partner.bookings.invoicing.request_cancel_invoice;
 
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {
@@ -126,6 +134,7 @@ function Actions({
 						invoiceData={invoiceData}
 						isIRNGenerated={isIRNGenerated}
 						setShowModal={setShowModal}
+						showCancel={showCancel}
 					/>
 				</div>
 			</div>
@@ -185,6 +194,15 @@ function Actions({
 					shipment_data={shipment_data}
 				/>
 			) : null}
+			{(showModal === 'cancel_e_invoice') && showCancel && (
+				<CancelEInvoice
+					bfInvoice={bfInvoice}
+					show={showModal === 'cancel_e_invoice'}
+					onClose={onModalClose}
+					invoice={invoice}
+					refetch={refetch}
+				/>
+			)}
 
 			{showModal === 'send_invoice_email' ? (
 				<SendInvoiceEmail
