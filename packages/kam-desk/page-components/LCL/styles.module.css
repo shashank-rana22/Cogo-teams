@@ -4,6 +4,11 @@
 	margin-left: 16px;
 }
 
+.right_box {
+	display: flex;
+	align-items: center;
+}
+
 .stepper_container {
 	display: flex;
 	justify-content: space-between;

@@ -32,6 +32,7 @@ function Messages({
 	setActiveTab = () => {},
 	newUserRoomLoading = false,
 	setModalType = () => {},
+	mailProps = {},
 }) {
 	const activeRoomSnapshotListener = useRef(null);
 
@@ -230,6 +231,7 @@ function Messages({
 					hasNoFireBaseRoom={hasNoFireBaseRoom}
 					setModalType={setModalType}
 					activeTab={activeTab}
+					mailProps={mailProps}
 				/>
 			</div>
 

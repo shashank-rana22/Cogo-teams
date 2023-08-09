@@ -43,6 +43,7 @@ function MessageConversations({
 	hasNoFireBaseRoom = false,
 	setModalType = () => {},
 	activeTab = {},
+	mailProps = {},
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;
@@ -144,6 +145,7 @@ function MessageConversations({
 						scrollToBottom={scrollToBottom}
 						firestore={firestore}
 						ref={messageRef}
+						mailProps={mailProps}
 					/>
 				) }
 			</div>

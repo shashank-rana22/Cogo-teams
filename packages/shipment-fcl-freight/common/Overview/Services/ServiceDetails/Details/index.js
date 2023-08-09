@@ -1,26 +1,31 @@
 import { cl, Button } from '@cogoport/components';
+import ShipmentDetailContext from '@cogoport/context/page-components/ShipmentDetailContext';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, getByKey, omit } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import getConfigs from '../../configurations/get-configs';
 
 import Item from './Item';
 import styles from './styles.module.css';
 
-const SERVICES_COUNT = 1;
+const INITIAL_LENGTH = 1;
+const SLICE_VALUE = 1;
 
-function Details({ serviceData = [] }) {
+function Details({ serviceData = [], containerDetails = [] }) {
+	const { primary_service } = useContext(ShipmentDetailContext);
+
+	const { service_type, state, documents } = serviceData[GLOBAL_CONSTANTS.zeroth_index];
+
 	const {
-		service_type, state, free_days_demurrage_destination,
-		free_days_demurrage_origin, free_days_detention_destination, free_days_detention_origin,
-		documents,
-	} = serviceData[GLOBAL_CONSTANTS.zeroth_index];
+		free_days_demurrage_destination, free_days_demurrage_origin,
+		free_days_detention_destination, free_days_detention_origin,
+	} = primary_service || {};
 
 	const SERVICE_INITIAL_KEYS = {};
 
-	(serviceData || []).forEach((data) => {
-		SERVICE_INITIAL_KEYS[data?.container_size] = {
+	(serviceData || []).forEach((data, i) => {
+		SERVICE_INITIAL_KEYS[i] = {
 			container_size             : data?.container_size,
 			commodity                  : data?.commodity,
 			containers_count           : data?.containers_count,
@@ -30,9 +35,8 @@ function Details({ serviceData = [] }) {
 		};
 	});
 
-	const [multiServiceType, setMultiServiceType] =	useState(
-		Object.keys(SERVICE_INITIAL_KEYS)?.[GLOBAL_CONSTANTS.zeroth_index],
-	);
+	const [multiServiceType, setMultiServiceType] = useState(Object.keys(SERVICE_INITIAL_KEYS)
+		?.[GLOBAL_CONSTANTS.zeroth_index]);
 
 	const service_items_key = getConfigs(service_type).details || {};
 
@@ -49,23 +53,38 @@ function Details({ serviceData = [] }) {
 	...Object.keys(freeDays),
 	'documents'];
 
-	const remainingServiceData = omit(serviceData?.[GLOBAL_CONSTANTS.zeroth_index], excludedKeys);
+	const remainingServiceData = {
+		...omit(serviceData?.[GLOBAL_CONSTANTS.zeroth_index], excludedKeys),
+		...containerDetails?.[GLOBAL_CONSTANTS.zeroth_index],
+	};
 
 	return (
 		<div className={cl`${styles.container} ${styles[state]}`}>
-			{Object.keys(SERVICE_INITIAL_KEYS).length > SERVICES_COUNT ?	(
+
+			{Object.keys(SERVICE_INITIAL_KEYS).length > INITIAL_LENGTH ? (
 				<div className={cl`${styles.multiservices_heading} ${styles[state]}`}>
-					{(Object.keys(SERVICE_INITIAL_KEYS)).map((key) => (
-						<div
-							key={key}
-							className={cl`${styles.mainservice_tabs} 
-							${multiServiceType === key ? styles.active : null} 
-							${styles[state]}`}
-							role="presentation"
-							onClick={() => setMultiServiceType(key)}
+					{(Object.keys(SERVICE_INITIAL_KEYS)).map((val) => (
+						<Button
+							key={val}
+							themeType="none"
+							className={cl`${styles.mainservice_tabs}
+                                        ${multiServiceType === val ? styles.active : null}
+                                        ${styles[state]}`}
+							onClick={() => setMultiServiceType(val)}
 						>
-							{`${key} ft`}
-						</div>
+							{`${SERVICE_INITIAL_KEYS[val].container_size} ft`}
+							{' '}
+							|
+							{' '}
+							{SERVICE_INITIAL_KEYS[val].container_type
+								.charAt(GLOBAL_CONSTANTS.zeroth_index).toUpperCase()
+                            + SERVICE_INITIAL_KEYS[val].container_type.slice(SLICE_VALUE)}
+							{' '}
+							|
+							{' '}
+							{SERVICE_INITIAL_KEYS[val].commodity.charAt(GLOBAL_CONSTANTS.zeroth_index).toUpperCase()
+                            + SERVICE_INITIAL_KEYS[val].commodity.slice(SLICE_VALUE)}
+						</Button>
 					))}
 				</div>
 			) : null}
@@ -76,7 +95,7 @@ function Details({ serviceData = [] }) {
 					element?.key,
 				) ? (
 					<Item
-						key={element?.key}
+						key={element.key}
 						state={state}
 						label={element}
 						detail={SERVICE_INITIAL_KEYS[multiServiceType]}
@@ -85,13 +104,13 @@ function Details({ serviceData = [] }) {
 			</div>
 
 			<div className={styles.remaining_keys}>
-				{(service_items_key || {}).map((element) => (getByKey(remainingServiceData, element.key) ? (
+				{(service_items_key || []).map((element) => (getByKey(remainingServiceData, element.key) ? (
 					<Item key={element.key} state={state} label={element} detail={remainingServiceData} />
 				) : null))}
 			</div>
 
 			<div className={styles.free_days}>
-				{(service_items_key || {}).map((element) => (getByKey(freeDays, element.key) ? (
+				{(service_items_key || []).map((element) => (getByKey(freeDays, element.key) ? (
 					<Item key={element.key} state={state} label={element} detail={freeDays} />
 				) : null))}
 			</div>

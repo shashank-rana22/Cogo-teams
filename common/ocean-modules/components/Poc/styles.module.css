@@ -1,9 +1,10 @@
 .container {
 	padding: 10px 0;
-	overflow: "scroll";
+	overflow: auto;
 }
 
-.loader {
+.loader_wrapper {
 	display: flex;
 	justify-content: center;
+	height: 70vh;
 }

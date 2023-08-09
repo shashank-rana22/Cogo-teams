@@ -12,11 +12,12 @@ import ViewPrice from './ViewPrice';
 
 const FILTERS_SPLIT_FIRST = 0;
 function AddService({
-	shipmentId,
+	shipmentId = '',
 	services,
 	isSeller,
 	refetch = () => {},
 	setShowChargeCodes = () => {},
+	source = '',
 }) {
 	const [showAddRate, setAddRate] = useState(null);
 	const [showPrice, setShowPrice] = useState(null);
@@ -89,7 +90,7 @@ function AddService({
 							setShowChargeCodes={setShowChargeCodes}
 							refetch={refetch}
 							filters={filters}
-							source="overview"
+							source={source}
 						/>
 					) : null}
 

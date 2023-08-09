@@ -16,9 +16,13 @@ const PAGE_ONE = 1;
 const EMPTY_DATA = { list: [], total: 0, total_page: 0 };
 
 export default function useListIGMDeskShipments() {
-	const { partner_id } = useSelector(({ general }) => ({
-		partner_id: general?.query?.partner_id,
+	const { partner_id, authParams = {}, selected_agent_id = '' } = useSelector(({ general, profile }) => ({
+		partner_id        : general?.query?.partner_id,
+		authParams        : profile.authParams || {},
+		selected_agent_id : profile.selected_agent_id || '',
 	}));
+
+	const [, scope, view_type] = (authParams || '').split(':');
 
 	const { filters, setFilters, tabState } = useContext(IGMDeskContext) || {};
 	const [data, setData] = useState(EMPTY_DATA);
@@ -39,11 +43,15 @@ export default function useListIGMDeskShipments() {
 			} else {
 				setData(res.data || {});
 			}
+
+			localStorage.setItem('igm_desk_stored_values', JSON.stringify({
+				scopeFilters: { scope, view_type, selected_agent_id },
+			}));
 		} catch (err) {
 			toastApiError(err);
 			setData(EMPTY_DATA);
 		}
-	}, [filters, setFilters, tabState, trigger, partner_id]);
+	}, [selected_agent_id, trigger, filters, tabState, partner_id, setFilters, scope, view_type]);
 
 	useCallApi({ listShipments, filters, tabState });
 

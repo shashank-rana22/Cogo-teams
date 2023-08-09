@@ -17,8 +17,15 @@ import getCriticalShipment from '../../../helpers/getCriticalShipment';
 
 import styles from './styles.module.css';
 
+const SHIPMENT_TYPE = {
+	fcl_freight: 'fcl',
+};
+
+const STEPPER_TAB = ['import', 'export'];
+
 function Card({ data = {} }) {
 	const router = useRouter();
+	const { partner_id = '' } = router.query || {};
 
 	const { shipmentType, stepperTab, activeTab } = useContext(KamDeskContext);
 
@@ -28,8 +35,9 @@ function Card({ data = {} }) {
 
 	const isShipmentCritical = !!getCriticalShipment({ shipment: data, shipmentType, activeTab, stepperTab });
 
-	let href = `${window.location.origin}/${router?.query?.partner_id}/shipments`;
-	href += `/${data?.id}?${CONSTANTS.url_navigation_params}`;
+	const hrefPrefix = Object.keys(SHIPMENT_TYPE).includes(shipmentType) && STEPPER_TAB.includes(stepperTab)
+		? `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE[shipmentType]}/`
+		: `${window.location.origin}/${partner_id}/shipments/`;
 
 	const handleCardClick = (e) => {
 		const newUrl = e.currentTarget.href;
@@ -38,7 +46,7 @@ function Card({ data = {} }) {
 
 	return (
 		<a
-			href={href}
+			href={`${hrefPrefix}${data?.id}?${CONSTANTS.url_navigation_params}`}
 			onClick={handleCardClick}
 			className={cl`${styles.container} ${isShipmentCritical ? styles.animate_card : ''}`}
 		>

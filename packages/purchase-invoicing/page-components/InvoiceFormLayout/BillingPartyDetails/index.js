@@ -18,6 +18,7 @@ function BillingPartyDetails({
 	open,
 	purchaseInvoiceValues = {},
 	listEntities = {},
+	entitiesLoading = false,
 }) {
 	const billingPartyOpts = listEntities?.list?.map((item) => ({
 		...item,
@@ -52,7 +53,7 @@ function BillingPartyDetails({
 
 	return (
 		<AccordianView title="Billing Party Details" fullwidth showerror={errMszs?.billingPartyErr} open={open}>
-			{isEmpty(billingPartiesExcept101)
+			{isEmpty(billingPartiesExcept101) && entitiesLoading
 				? <Placeholder width="100%" height="80px" /> : (
 					<>
 						<div className={styles.flex}>
