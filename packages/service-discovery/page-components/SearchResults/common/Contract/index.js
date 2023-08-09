@@ -7,7 +7,7 @@ import RequestContract from './RequestContract';
 import styles from './styles.module.css';
 import Submitted from './SubmittedPage';
 
-const SCREENS_TO_SHOW_CROSS_IN = ['landing', 'request_contract'];
+const SCREENS_TO_SHOW_CROSS_IN = ['landing', 'request_contract', 'submitted'];
 
 function Contract({
 	data = {},
@@ -50,7 +50,13 @@ function Contract({
 	const onClose = () => setShow(false);
 
 	return (
-		<Modal size="lg" show={show} onClose={onClose} placement="top">
+		<Modal
+			size="lg"
+			show={show}
+			onClose={onClose}
+			placement="top"
+			closeOnOuterClick={false}
+		>
 			<div className={styles.container}>
 				{SCREENS_TO_SHOW_CROSS_IN.includes(screen) ? (
 					<IcMCross

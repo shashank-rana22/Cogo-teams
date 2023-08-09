@@ -2,6 +2,7 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMCross } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -52,6 +53,9 @@ function ScheduleItem({
 			}`}
 			onClick={handleChange}
 		>
+
+			<IcMCross className={cl`${styles.cross_icon} ${styles.show_cross_icon}`} />
+
 			<span
 				className={cl`${styles.week} ${
 					getKey(selectedWeek) === getKey(data) ? styles.selected_week : {}

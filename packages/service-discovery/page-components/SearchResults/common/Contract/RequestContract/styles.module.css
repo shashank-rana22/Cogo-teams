@@ -56,6 +56,10 @@
 	margin-bottom: 26px;
 
 	:global {
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+
 		.react-datepicker__aria-live {
 			display: none;
 		}

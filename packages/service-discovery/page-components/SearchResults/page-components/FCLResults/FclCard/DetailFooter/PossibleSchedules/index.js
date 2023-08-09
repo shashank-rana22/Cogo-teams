@@ -23,7 +23,7 @@ function PossibleSchedules({ rateCardData = {}, service_type = '' }) {
 	if (isEmpty(schedules)) {
 		return (
 			<div className={styles.container}>
-				Nothing to show here!
+				<b>Nothing to show here!</b>
 			</div>
 		);
 	}

@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
 const SHIPPING_LINE_MAPPING = {
 	fcl_freight : 'shipping_line_id',
@@ -10,16 +10,11 @@ const SHIPPING_LINE_MAPPING = {
 const useGetSchedules = (service) => {
 	const { spot_search_id = '' } = useSelector(({ general }) => general.query);
 
-	const [{ loading, data }, trigger] = useRequest({
+	const [{ loading, data }] = useRequest({
 		method : 'GET',
 		url    : '/get_spot_search_schedules',
-	}, { manual: true });
-
-	const getSchedules = useCallback(async () => {
-		await trigger({
-			params: { spot_search_id },
-		});
-	}, [spot_search_id, trigger]);
+		params : { spot_search_id },
+	}, { manual: false });
 
 	const scheduleObject = useMemo(() => {
 		const key = SHIPPING_LINE_MAPPING[service || 'fcl_freight'];
@@ -35,15 +30,7 @@ const useGetSchedules = (service) => {
 		return OBJECT;
 	}, [data, service]);
 
-	useEffect(() => {
-		getSchedules();
-	}, [getSchedules]);
-
-	const refetch = () => {
-		getSchedules();
-	};
-
-	return { refetch, loading, scheduleObject };
+	return { loading, scheduleObject };
 };
 
 export default useGetSchedules;
