@@ -22,6 +22,7 @@ function Content({
 			size="md"
 			show={cargoModal === 'progress'}
 			onClose={onClose}
+			showCloseIcon={false}
 			closeOnOuterClick={false}
 		>
 			<Modal.Header title="Do you want to add Cargo Insurance?" />

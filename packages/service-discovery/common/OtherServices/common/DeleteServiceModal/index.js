@@ -25,7 +25,7 @@ function DeleteServiceModal({
 			<Modal.Footer>
 				<Button
 					type="button"
-					themeType="primary"
+					themeType="secondary"
 					onClick={(event) => { event.stopPropagation(); setShow(false); }}
 					disabled={loading}
 				>
@@ -35,7 +35,7 @@ function DeleteServiceModal({
 				<Button
 					type="button"
 					style={{ marginLeft: 12 }}
-					themeType="secondary"
+					themeType="primary"
 					disabled={loading}
 					loading={loading}
 					onClick={async (event) => {
