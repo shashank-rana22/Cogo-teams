@@ -58,7 +58,7 @@ function StatCard({ mappingCards = [], service = '', isMain = false, singleServi
 								color: getProfitColor(
 									{
 										amount   : singleServiceData[`${item.key}${taxType}`],
-										isProfit : (item.label).includes('Profit'),
+										isProfit : (item?.label)?.includes('Profit'),
 									},
 								),
 							}}
