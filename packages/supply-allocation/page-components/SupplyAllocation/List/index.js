@@ -52,18 +52,21 @@ function List({ data = [] }) {
 		{
 			id       : 'actions',
 			Header   : '',
-			accessor : () => (
+			accessor : (item) => (
 				<Button
 					themeType="secondary"
 					onClick={() => {
-						router.push('/supply-allocation/view');
+						router.push(
+							`/supply-allocation/view/${item.id}`,
+						);
 					}}
-				>
+    >
 					View
 					<IcMArrowRight />
 				</Button>
 			),
 		},
+
 	];
 
 	return (

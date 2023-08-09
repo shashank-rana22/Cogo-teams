@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useListFclSearches = () => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -21,10 +22,24 @@ const useListFclSearches = () => {
 		}
 	};
 
+	const findFclSearch = useCallback(async (id) => {
+		try {
+			await trigger({
+				params: {
+					service_data_required : true,
+					filters               : { id },
+				},
+			});
+		} catch (err) {
+			console.error(err);
+		}
+	}, [trigger]);
+
 	return {
 		data,
 		loading,
 		refetchListFclSearches,
+		findFclSearch,
 	};
 };
 
