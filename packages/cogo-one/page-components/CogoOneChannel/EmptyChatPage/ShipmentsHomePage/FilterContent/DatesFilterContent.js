@@ -41,7 +41,7 @@ function DatesFilterContent({
 					<SingleDateRange
 						value={date}
 						isPreviousDaysAllowed
-						onChange={(val) => setDate(val)}
+						onChange={setDate}
 						maxDate={new Date()}
 					/>
 				</div>
