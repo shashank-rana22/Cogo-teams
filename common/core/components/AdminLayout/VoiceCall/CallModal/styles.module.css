@@ -50,7 +50,7 @@
 	font-size: 12px;
 
 	>span {
-		margin-left: 5px;
+		margin-left: 0;
 	}
 }
 
@@ -82,7 +82,6 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	height: var(--height);
 	overflow: hidden;
 	background: radial-gradient(50% 67.94% at 50% 50%, rgb(242 243 250 / 50%) 8.17%, rgb(206 209 237 / 50%) 100%);
 	border-radius: 10px;
@@ -92,9 +91,11 @@
 .end_call {
 	display: flex;
 	flex-basis: 10%;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 10px;
+	width: 73%;
+	padding: 4px 8px;
 	margin-bottom: 15px;
 	cursor: pointer;
 	background-color: #bf291e;
@@ -135,4 +136,17 @@
 	height: 15px;
 	cursor: pointer;
 	fill: #4f4f4f;
+}
+
+.call_text {
+	height: 54%;
+	font-size: var(--font-size-md);
+	color: #864c12;
+	text-align: center;
+}
+
+.warn_text {
+	font-size: var(--font-size-sm);
+	color: var(--color-secondary-5);
+	text-align: center;
 }
