@@ -104,6 +104,7 @@ function useComingCall({
 				});
 				handleCallEnd({ callActivity: 'answered', description: 'peer js technical error' });
 			});
+
 			peer.on('close', () => {
 				handleCallEnd({
 					callActivity : 'answered',

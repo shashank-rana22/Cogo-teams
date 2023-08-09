@@ -45,18 +45,7 @@ function useVideocallOptions({
 		}
 	}, [toggleState.isMicActive, setToggleState, streams]);
 
-	const toggleVideo = useCallback(({ e, clickType }) => {
-		if (clickType === 'mini_screen') {
-			e.stopPropagation();
-		}
-		setToggleState((prev) => ({ ...prev, isVideoActive: !prev.isVideoActive }));
-		const localStream = streams;
-		if (localStream?.userStream) {
-			localStream.userStream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !toggleState.isVideoActive;
-		}
-	}, [toggleState.isVideoActive, setToggleState, streams]);
-
-	return { stopCall, toggleMic, toggleVideo };
+	return { stopCall, toggleMic };
 }
 
 export default useVideocallOptions;
