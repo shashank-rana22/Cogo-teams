@@ -58,7 +58,7 @@ function useCreateCommunicationLog({
 			Toast.success('Saved Successfully');
 			unmountVoiceCall();
 		} catch (error) {
-			Toast.error(getApiErrorString(error.data || 'something went wrong'));
+			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
 		}
 	};
 
