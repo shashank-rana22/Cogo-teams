@@ -98,7 +98,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 						value={params?.shipmentType}
 						className={styles.select_field}
 						onChange={(val) => setParams((prev) => ({ ...prev, shipmentType: val }))}
-						placeholder="Select Shipment Type"
+						placeholder="Shipment Type"
 						options={SHIPMENT_TYPE_OPTIONS}
 						isClearable
 					/>
