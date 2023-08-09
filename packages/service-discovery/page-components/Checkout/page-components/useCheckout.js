@@ -5,14 +5,10 @@ import useGetCheckout from '../hooks/useGetCheckout';
 import useGetOrganization from '../hooks/useGetOrganization';
 import useUpdateCheckout from '../hooks/useUpdateCheckout';
 
-import AirCheckout from './AirCheckout';
 import FclCheckout from './FclCheckout';
-import LclCheckout from './LclCheckout';
 
 const MAPPING = {
-	fcl_freight : FclCheckout,
-	lcl_freight : LclCheckout,
-	air_freight : AirCheckout,
+	fcl_freight: FclCheckout,
 };
 
 const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_type = '' }) => {

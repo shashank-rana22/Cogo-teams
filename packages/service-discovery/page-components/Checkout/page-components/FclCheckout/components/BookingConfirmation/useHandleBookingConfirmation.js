@@ -18,7 +18,7 @@ const useHandleBookingConfirmation = () => {
 		checkoutMethod,
 	} = useContext(CheckoutContext);
 
-	const { services = {}, checkout_approvals = [] } = detail;
+	const { services = {}, checkout_approvals = [], primary_service = '' } = detail;
 
 	const controlledBookingServices = Object.values(services).filter(
 		(service) => (
@@ -35,7 +35,7 @@ const useHandleBookingConfirmation = () => {
 	const [isControlBookingDetailsFilled, setIsControlBookingDetailsFilled] = useState(iscommercialInvoicePresent);
 	const [invoicingParties, setInvoicingParties] = useState([]);
 	const [isVeryRisky, setIsVeryRisky] = useState(false);
-	const [error, setEror] = useState('');
+	const [error, setError] = useState('');
 
 	const { importer_exporter = {} } = detail;
 
@@ -46,6 +46,16 @@ const useHandleBookingConfirmation = () => {
 	const excludeWhatsapp = checkoutType === 'rfq' || rfq_id;
 
 	const isOrgCP = tags.includes('partner');
+
+	const checkout_settings = organization_settings.filter(
+		(setting) => setting.setting_type === 'checkout',
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
+
+	const { setting_config: { assisted_booking_services = [] } = {} } = checkout_settings || {};
+
+	const isAssistedBookingNotAllowed =	!isEmpty(assisted_booking_services)
+	&& (assisted_booking_services.includes('none')
+		|| !assisted_booking_services.includes(primary_service));
 
 	useEffect(() => {
 		if (bookingConfirmationMode) {
@@ -97,7 +107,8 @@ const useHandleBookingConfirmation = () => {
 		isVeryRisky,
 		setIsVeryRisky,
 		error,
-		setEror,
+		setError,
+		isAssistedBookingNotAllowed,
 	};
 };
 

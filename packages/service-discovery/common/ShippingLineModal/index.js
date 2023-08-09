@@ -13,7 +13,8 @@ import SailingWeek from '../../page-components/SearchResults/page-components/FCL
 import styles from './styles.module.css';
 
 const ZERO = 0;
-
+const MIN_PERCENTAGE = 25;
+const RANGE = 25;
 const TWO = 2;
 
 const format = (date) => formatDate({
@@ -64,11 +65,11 @@ function ShippingLineModal({
 
 	const onClose = () => setShow(false);
 
-	const { short_name } = shipping_line;
+	const { short_name } = shipping_line || {};
 
 	const selectedRateData = cogoAssuredRates.find((item) => item.id === selectedCard);
 
-	const { service_rates = {} } = selectedRateData;
+	const { service_rates = {} } = selectedRateData || {};
 
 	const { service_type = '' } = detail;
 
@@ -106,7 +107,12 @@ function ShippingLineModal({
 
 					<div className={styles.wrapper}>
 						We have seen
-						<strong> 40% </strong>
+						<strong>
+							{' '}
+							{MIN_PERCENTAGE + Math.ceil(Math.random() * RANGE)}
+							%
+							{' '}
+						</strong>
 						cancellations in the past for
 						<span className={styles.shipping_line_name}>{short_name}</span>
 						. Why not try
