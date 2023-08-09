@@ -2,6 +2,7 @@ import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
+import { getSubject } from '../../helpers/getRecipientData';
 import useGetMailContent from '../../hooks/useGetMailContent';
 
 import MailActions from './mailActions';
@@ -45,6 +46,24 @@ function MailBody({
 		separator  : ' ',
 	});
 
+	const handleClick = ({ buttonType }) => {
+		setMailActions({
+			actionType : buttonType,
+			data       : {
+				...eachMessage,
+				response: {
+					...eachMessage?.response,
+					subject: getSubject(
+						{
+							subject : eachMessage?.response?.subject,
+							val     : buttonType,
+						},
+					),
+				},
+			},
+		});
+	};
+
 	return (
 		<div>
 			<div className={styles.send_by_name}>
@@ -60,7 +79,7 @@ function MailBody({
 			>
 				<MailHeader
 					eachMessage={eachMessage}
-					setMailActions={setMailActions}
+					handleClick={handleClick}
 					hasPermissionToEdit={hasPermissionToEdit}
 				/>
 
@@ -88,8 +107,7 @@ function MailBody({
 
 				{hasPermissionToEdit && (
 					<MailActions
-						eachMessage={eachMessage}
-						setMailActions={setMailActions}
+						handleClick={handleClick}
 					/>
 				)}
 				<MailAttachments mediaUrls={media_url} />

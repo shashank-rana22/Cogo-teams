@@ -9,7 +9,7 @@ import getUserNameFromEmail from '../../../helpers/getUserNameFromEmail';
 import ReceipientComp from './receipientComp';
 import styles from './styles.module.css';
 
-function MailHeader({ eachMessage = {}, setMailActions = () => {}, hasPermissionToEdit = false }) {
+function MailHeader({ eachMessage = {}, handleClick = () => {}, hasPermissionToEdit = false }) {
 	const { response, send_by = '', conversation_type = '' } = eachMessage || {};
 
 	const {
@@ -66,10 +66,7 @@ function MailHeader({ eachMessage = {}, setMailActions = () => {}, hasPermission
 								<Icon
 									key={key}
 									className={styles.icon_styles}
-									onClick={() => setMailActions({
-										actionType : key,
-										data       : eachMessage,
-									})}
+									onClick={() => handleClick({ buttonType: key })}
 								/>
 							);
 						},

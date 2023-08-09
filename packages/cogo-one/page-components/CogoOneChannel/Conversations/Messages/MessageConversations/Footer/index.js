@@ -250,6 +250,7 @@ function Footer({
 						ref={uploaderRef}
 						emailState={emailState}
 						isEmail={isEmail}
+						mailActions={mailActions}
 					/>
 				</div>
 			</div>

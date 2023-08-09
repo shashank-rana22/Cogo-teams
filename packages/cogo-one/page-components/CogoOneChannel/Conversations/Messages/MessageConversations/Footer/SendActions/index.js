@@ -30,6 +30,7 @@ function SendActions({
 	draftUploadedFiles = {},
 	emailState = {},
 	isEmail = false,
+	mailActions = {},
 }, ref) {
 	const { channel_type = '' } = formattedData;
 
@@ -67,20 +68,26 @@ function SendActions({
 			}),
 		);
 	};
+	const isUploadDisabled = uploading?.[roomId] || (isEmail && mailActions?.actionType === 'forward');
 
 	return (
 		<>
 			<div className={styles.icon_tools}>
 				{hasPermissionToEdit && (
 					<CustomFileUploader
-						disabled={uploading?.[roomId]}
+						disabled={isUploadDisabled}
 						handleProgress={handleProgress}
 						showProgress={false}
 						draggable
 						multiple={channel_type === 'email'}
 						accept={ACCEPT_FILE_MAPPING[channel_type] || ACCEPT_FILE_MAPPING.default}
 						className="file_uploader"
-						uploadIcon={<IcMAttach className={styles.upload_icon} />}
+						uploadIcon={(
+							<IcMAttach
+								className={styles.upload_icon}
+								style={{ cursor: isUploadDisabled ? 'not-allowed' : 'pointer' }}
+							/>
+						)}
 						draftUploadedFiles={draftUploadedFiles}
 						channel={channel_type}
 						onChange={(val) => setDraftUploadedFiles((prev) => ({ ...prev, [roomId]: val }))}
