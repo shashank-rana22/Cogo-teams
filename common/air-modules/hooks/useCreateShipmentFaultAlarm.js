@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import getShowElements from '../components/RaiseAlarm/helpers/getShowElements';
 import getSupplierDocuments from '../components/RaiseAlarm/helpers/getSupplierDocuments';
@@ -54,17 +54,20 @@ const useCreateShipmentFaultAlarm = ({
 
 	const uniqueServiceProvider = getUnique(serviceProviderList);
 
-	const supplierOptions = loadingServiceProvider
-		? [
-			{
-				label : '',
-				value : '',
-			},
-		]
-		: uniqueServiceProvider?.map((item) => ({
-			label : item?.service_provider?.business_name,
-			value : item?.service_provider?.id,
-		}));
+	const supplierOptions = useMemo(
+		() => (loadingServiceProvider
+			? [
+				{
+					label : '',
+					value : '',
+				},
+			]
+			: uniqueServiceProvider?.map((item) => ({
+				label : item?.service_provider?.business_name,
+				value : item?.service_provider?.id,
+			}))),
+		[loadingServiceProvider, uniqueServiceProvider],
+	);
 
 	const SUPPLY_AGENT = [];
 
@@ -112,8 +115,7 @@ const useCreateShipmentFaultAlarm = ({
 		if (supplierOptions.length === SUPPLIER_OPTION_LENGTH_ONE) {
 			setValue('supplier_id', supplierOptions[GLOBAL_CONSTANTS.zeroth_index]?.value);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [val]);
+	}, [setValue, supplierOptions, val]);
 
 	const profile =		stakeholder_types?.includes('booking_agent') || val === 'okam'
 		? 'okam'
