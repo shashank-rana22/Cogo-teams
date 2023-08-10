@@ -4,11 +4,26 @@ import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { CHANNEL_OPTIONS } from '../../constant.tsx';
-import { optionsMonth, optionsYear } from '../constant.tsx';
+import { CHANNEL_OPTIONS } from '../../constant';
+import { FilterInterface } from '../../interface';
+import { optionsMonth, optionsYear } from '../constant';
 
 import MoreFilter from './MoreFilter/index';
 import styles from './styles.module.css';
+
+interface CardInterface {
+	refetch?: Function;
+	filters?: FilterInterface;
+	shipmentLoading?: boolean;
+	setFilters?: React.Dispatch<React.SetStateAction<FilterInterface>>;
+	setViewSelected?: React.Dispatch<React.SetStateAction<boolean>>;
+	setShowBtn?: React.Dispatch<React.SetStateAction<boolean>>;
+	setCheckedRows?: React.Dispatch<React.SetStateAction<{}>>;
+	setPayload?: React.Dispatch<React.SetStateAction<any[]>>;
+	isApplyEnable?: boolean;
+	searchValue?: string;
+	setSearchValue?: React.Dispatch<React.SetStateAction<string>>;
+}
 
 const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 const FIRST_MONTH_INDEX = 1;
@@ -16,15 +31,16 @@ const FIRST_PAGE = 1;
 const ALLOW_BUTTON_ON_COUNT = 2;
 const MAX_DAY_ALLOWED = 10;
 const FILTER_COUNT_INCREMENT = 1;
+
 function Card({
 	refetch = () => {}, filters = {}, setFilters = () => {},
 	shipmentLoading = false, setViewSelected = () => {},
 	setShowBtn = () => {}, setCheckedRows = () => {},
-	setPayload = () => {},
+	setPayload = () => [],
 	isApplyEnable = false,
 	setSearchValue = () => {},
 	searchValue = '',
-}) {
+}:CardInterface) {
 	const [moreFilter, setMoreFilter] = useState(false);
 	const [profitNumber, setProfitNumber] = useState('');
 
@@ -51,15 +67,16 @@ function Card({
 		});
 	}, [filters, setShowBtn, setViewSelected]);
 
-	const contentMoreFilter = () => (
-		<MoreFilter
-			profitNumber={profitNumber}
-			setProfitNumber={setProfitNumber}
-			filters={filters}
-			setFilters={setFilters}
-		/>
-
-	);
+	function ContentMoreFilter() {
+		return (
+			<MoreFilter
+				profitNumber={profitNumber}
+				setProfitNumber={setProfitNumber}
+				filters={filters}
+				setFilters={setFilters}
+			/>
+		);
+	}
 	const rest = { onClickOutside: () => { setMoreFilter(false); } };
 
 	const onSubmit = () => {
@@ -216,7 +233,7 @@ function Card({
 			<div className={styles.more_filter}>
 				<Popover
 					placement="bottom"
-					render={contentMoreFilter()}
+					render={ContentMoreFilter()}
 					visible={moreFilter}
 					{...rest}
 				>

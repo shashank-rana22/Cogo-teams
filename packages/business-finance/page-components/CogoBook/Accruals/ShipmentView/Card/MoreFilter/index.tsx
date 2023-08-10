@@ -8,15 +8,22 @@ import {
 	JOB_TYPE_OPTIONS, SHIPMENTS_TYPES,
 	SERVICE_CATEGORY, MILESTONE_TYPES, SHIPMENT_TYPES,
 	getEntityOptions,
-} from '../../../../constants/accruals-more-filters.ts';
+} from '../../../../constants/accruals-more-filters';
+import { FilterInterface } from '../../../interface';
 
 import ProfitabilityContent from './profitabilityContent';
 import styles from './styles.module.css';
 
+interface MoreFilterInterface {
+	filters:FilterInterface
+	setFilters: React.Dispatch<React.SetStateAction<FilterInterface>>
+	profitNumber?:string
+	setProfitNumber: React.Dispatch<React.SetStateAction<string>>
+}
 function MoreFilter({
 	setFilters = () => {}, filters = {},
 	setProfitNumber = () => {}, profitNumber = '',
-}) {
+}:MoreFilterInterface) {
 	const entityOptions = getEntityOptions();
 	const [activeFilter, setActiveFilter] = useState('jobState');
 
