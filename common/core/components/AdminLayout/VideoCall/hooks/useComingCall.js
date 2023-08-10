@@ -58,7 +58,7 @@ function useComingCall({
 		}
 	}, [webrtcTokenRoomId, callingRoomId, firestore, setWebrtcToken]);
 
-	const accepteCallMedia = useCallback(async () => {
+	const acceptCallMedia = useCallback(async () => {
 		try {
 			const userStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
 
@@ -119,38 +119,34 @@ function useComingCall({
 					firestore,
 				});
 			});
+
+			return true;
 		} catch (error) {
 			Toast.error('Please provide your Mic permission');
 			console.error('user stream is not working', error);
 
-			callUpdate({
-				data: {
-					call_status   : 'technical_error',
-					error_message : 'peer video audio is not working',
-				},
-				callingRoomId,
-				firestore,
-			});
-			handleCallEnd({ callActivity: 'missed', description: 'peer video audio is not working' });
+			return false;
 		}
 	}, [setStreams, peerRef, webrtcToken?.token, peerDetails?.user_id, callingRoomId,
 		webrtcTokenRoomId, firestore, handleCallEnd]);
 
 	const answerCall = useCallback(async () => {
 		await getWebrtcToken();
-		saveInACallStatus({ inACallStatus: true });
-		setCallComing(false);
+		const isStreamActive = await acceptCallMedia();
 
-		callUpdate({
-			data: {
-				call_status: 'accepted',
-			},
-			firestore,
-			callingRoomId,
-		});
+		if (isStreamActive) {
+			saveInACallStatus({ inACallStatus: true });
+			setCallComing(false);
 
-		accepteCallMedia();
-	}, [accepteCallMedia, callingRoomId, firestore, getWebrtcToken, saveInACallStatus, setCallComing]);
+			callUpdate({
+				data: {
+					call_status: 'accepted',
+				},
+				firestore,
+				callingRoomId,
+			});
+		}
+	}, [acceptCallMedia, callingRoomId, firestore, getWebrtcToken, saveInACallStatus, setCallComing]);
 
 	const rejectCall = useCallback(() => {
 		callUpdate({
