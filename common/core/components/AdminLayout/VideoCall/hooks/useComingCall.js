@@ -33,7 +33,7 @@ function useComingCall({
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
 	}));
-	const { id: userId } = user_data || {};
+	const { id: userId = '' } = user_data || {};
 
 	const callComingSnapshotRef = useRef(null);
 	const tokenSnapshotRef = useRef(null);

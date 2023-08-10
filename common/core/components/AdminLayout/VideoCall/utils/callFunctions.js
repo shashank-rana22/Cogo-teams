@@ -2,7 +2,7 @@ import { doc, setDoc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-export const stopStream = ({ streamType, currentStream }) => {
+export const stopStream = ({ streamType = '', currentStream = {} }) => {
 	if (!currentStream || !currentStream[streamType]) {
 		return;
 	}
@@ -14,7 +14,7 @@ export const stopStream = ({ streamType, currentStream }) => {
 	});
 };
 
-export const callUpdate = ({ data, firestore, callingRoomId }) => {
+export const callUpdate = ({ data = {}, firestore = {}, callingRoomId = '' }) => {
 	if (!callingRoomId) {
 		return;
 	}
@@ -35,7 +35,7 @@ export const callUpdate = ({ data, firestore, callingRoomId }) => {
 	}
 };
 
-export const saveCallData = async ({ data, callingRoomId, callBackFunc, firestore }) => {
+export const saveCallData = async ({ data = {}, callingRoomId = '', callBackFunc = () => {}, firestore = {} }) => {
 	const videoCallRoomCollection = doc(
 		firestore,
 		`${FIRESTORE_PATH.video_calls}/${callingRoomId}`,
@@ -54,7 +54,7 @@ export const saveCallData = async ({ data, callingRoomId, callBackFunc, firestor
 	}
 };
 
-export const saveWebrtcToken = ({ data, callingRoomId, tokenId, firestore }) => {
+export const saveWebrtcToken = ({ data = {}, callingRoomId = '', tokenId = '', firestore = {} }) => {
 	const savingData = data;
 
 	if (data?.token?.type === 'transceiverRequest') {

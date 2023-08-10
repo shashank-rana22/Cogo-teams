@@ -51,7 +51,7 @@ function VideoCall({
 	const firestore = getFirestore(app);
 	const { updateVideoCallTimeline = () => {} } = useUpdateVideoCallTimeline({ callDetails });
 
-	const { handleOutgoingCall, handleCallEnd } = useVideoCallFirebase({
+	const { handleOutgoingCall = () => {}, handleCallEnd = () => {} } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
 		setCallDetails,
@@ -64,7 +64,7 @@ function VideoCall({
 		updateVideoCallTimeline,
 	});
 
-	const { rejectCall, answerCall } = useComingCall({
+	const { rejectCall = () => {}, answerCall = () => {} } = useComingCall({
 		firestore,
 		setCallDetails,
 		callDetails,
