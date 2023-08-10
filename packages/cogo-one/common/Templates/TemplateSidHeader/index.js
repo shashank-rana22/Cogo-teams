@@ -1,19 +1,25 @@
-import { cl, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { LABELS, SHIPMENT_STATE } from '../../../constants/flashRatesMapping';
 import { RENDER_VALUE_MAPPING, serviceDetails } from '../../../utils/detailsHelperFuncs';
 
 import styles from './styles.module.css';
 
-const MIN_SLICE_INDEX = 0;
 const SHIPMENT_ARR_MIN_LENGTH = 2;
 
-const ShipmentDetails = ({ shipmentArr }) => (shipmentArr || []).map((itm) => (
-	<div className={cl`${!itm ? '' : styles.chips}`} key={itm}>
-		{itm}
-	</div>
-));
+const ShipmentDetails = ({ shipmentArr }) => (shipmentArr || []).map((itm) => {
+	if (!itm) {
+		return null;
+	}
+
+	return (
+		<div className={styles.chips} key={itm}>
+			{itm}
+		</div>
+	);
+});
 
 function TemplateSidHeader({
 	shipmentData = {},
@@ -30,30 +36,31 @@ function TemplateSidHeader({
 			{serial_id ? (
 				<div className={styles.pill_container}>
 					<div className={styles.shipment_details}>
-						{(shipmentArr || []).slice(MIN_SLICE_INDEX, SHIPMENT_ARR_MIN_LENGTH).map((itm) => {
-							if (!itm) {
-								return null;
-							}
-
-							return (
-								<div className={styles.chips} key={itm}>
-									{itm}
-								</div>
-							);
-						})}
+						<ShipmentDetails shipmentArr={shipmentArr.slice(
+							GLOBAL_CONSTANTS.zeroth_index,
+							SHIPMENT_ARR_MIN_LENGTH,
+						)}
+						/>
 					</div>
 
-					<Tooltip
-						content={<ShipmentDetails shipmentArr={shipmentArr} />}
-						interactive
-						placement="left"
-					>
-						<div className={styles.show_more}>
-							+
-							{(shipmentArr || []).length - SHIPMENT_ARR_MIN_LENGTH}
-							More
-						</div>
-					</Tooltip>
+					{shipmentArr.length > SHIPMENT_ARR_MIN_LENGTH && (
+						<Tooltip
+							content={(
+								<ShipmentDetails shipmentArr={shipmentArr.slice(
+									SHIPMENT_ARR_MIN_LENGTH,
+								)}
+								/>
+							)}
+							interactive
+							placement="left"
+						>
+							<div className={styles.show_more}>
+								+
+								<span>{(shipmentArr || []).length - SHIPMENT_ARR_MIN_LENGTH}</span>
+								More
+							</div>
+						</Tooltip>
+					)}
 				</div>
 			) : null}
 			<AsyncSelect
@@ -64,7 +71,7 @@ function TemplateSidHeader({
 				value={serial_id}
 				size="sm"
 				isClearable
-				className={cl`${shipment_type ? styles.small_select_container : styles.select}`}
+				className={shipment_type ? styles.small_select_container : styles.select}
 				onChange={(_, obj) => {
 					setShipmentData(obj);
 				}}

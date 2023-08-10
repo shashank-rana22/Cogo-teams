@@ -1,7 +1,7 @@
 import { Placeholder, Pill, Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
 import { STATUS_MAPPING } from '../../constants';
 import { formatRouteData } from '../../utils/routeDataHelpers';
@@ -52,25 +52,31 @@ export function Preview({
 		}));
 	};
 
-	const getVariablesDetails = useCallback(() => {
-		variables.map((itm) => (
-			setCustomizableData((prev) => ({
-				...prev,
-				[itm]            : shipmentData?.[itm] || '',
-				origin_port      : originDisplay || originMainDisplay,
-				destination_port : destinationDisplay || destinationMainDisplay,
-				shipment_id      : serial_id,
-			}))
-		));
-	}, [variables,
-		setCustomizableData,
-		shipmentData, originDisplay, originMainDisplay, destinationDisplay, destinationMainDisplay, serial_id]);
-
 	useEffect(() => {
 		if (!isEmpty(shipmentData)) {
-			getVariablesDetails();
+			variables.map((itm) => (
+				setCustomizableData((prev) => ({
+					...prev,
+					[itm]            : shipmentData?.[itm] || '',
+					origin_port      : originDisplay || originMainDisplay,
+					destination_port : destinationDisplay || destinationMainDisplay,
+					shipment_id      : serial_id,
+				}))
+			));
 		}
-	}, [getVariablesDetails, shipmentData]);
+	}, [destinationDisplay,
+		destinationMainDisplay,
+		originDisplay, originMainDisplay, serial_id, setCustomizableData, shipmentData, variables]);
+
+	useEffect(() => {
+		if (!serial_id) {
+			setCustomizableData({
+				origin_port      : '',
+				destination_port : '',
+				shipment_id      : '',
+			});
+		}
+	}, [setCustomizableData, serial_id]);
 
 	return (
 		<>
