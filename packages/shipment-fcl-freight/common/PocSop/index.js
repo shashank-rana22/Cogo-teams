@@ -12,6 +12,7 @@ function SopAndPoc() {
 		servicesList,
 		primary_service,
 		activeStakeholder,
+		documents,
 		refetch,
 	} = useContext(ShipmentDetailContext);
 
@@ -79,7 +80,11 @@ function SopAndPoc() {
 								</TabPanel>
 								<TabPanel name="sop" title="SOP">
 									<div style={{ height: '80vh', overflow: 'auto' }}>
-										<Sop shipment_data={shipment_data} primary_service={primary_service} />
+										<Sop
+											shipment_data={shipment_data}
+											primary_service={primary_service}
+											documents={documents}
+										/>
 									</div>
 								</TabPanel>
 							</Tabs>
