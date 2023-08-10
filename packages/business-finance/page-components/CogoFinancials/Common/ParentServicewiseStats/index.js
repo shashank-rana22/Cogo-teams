@@ -1,19 +1,19 @@
 import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMArrowBack, IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { MAPPING_CARDS_DATA } from '../../constants';
+import { INFO_CONTENT, MAPPING_CARDS_DATA } from '../../constants';
 import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
+import RenderCardHeader from '../RenderCardHeader';
 import ServiceWiseStats from '../ServicewiseStats';
 
 import getCardData from './getCardData';
 import StatCard from './statCard';
 import styles from './styles.module.css';
 
-const PLACEHOLDER_COUNT = 3;
+const PLACEHOLDER_COUNT = 4;
 
 const displayAmount = (amount, currency) => formatAmount({
 	amount,
@@ -53,22 +53,27 @@ function ParentServicewiseStats({
 			{isEmpty(activeService) ? (
 				<div className={styles.container}>
 					<div className={styles.justifiy}>
-						<div className={styles.header}>
-							<IcMArrowBack
-								onClick={() => setActiveShipmentCard('')}
-								style={{ cursor: 'pointer', marginRight: '8px' }}
-							/>
-							<div>
-								<div>Ongoing Shipments</div>
-								<div className={styles.bottom_line} />
-							</div>
-							<div className={styles.info}><IcMInfo /></div>
-						</div>
+						<RenderCardHeader
+							title="Ongoing Shipments"
+							showInfo
+							showBack
+							onBack={() => setActiveShipmentCard('')}
+							infoContent={INFO_CONTENT.ongoingShipments}
+						/>
+
 					</div>
 
 					<div className={styles.flex}>
 						<div className={styles.maincard}>
-							<StatCard mappingCards={cardData} isMain />
+							{!serviceLevelLoading ? (
+								<StatCard mappingCards={cardData} isMain />
+							) : (
+								<Placeholder
+									height={324}
+									width="100%"
+								/>
+							)}
+
 						</div>
 						{!serviceLevelLoading ? (
 							<div className={styles.sidestats}>
@@ -92,7 +97,11 @@ function ParentServicewiseStats({
 						) : (
 							<div className={styles.placeholder_container}>
 								{[...Array(PLACEHOLDER_COUNT).keys()].map((item) => (
-									<Placeholder key={item} height={250} width="29%" />
+									<Placeholder
+										key={item}
+										height={156}
+										width="49%"
+									/>
 								))}
 
 							</div>

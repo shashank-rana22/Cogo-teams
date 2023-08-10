@@ -4,7 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { LABEL_MAPPING } from '../../constants';
+import { INFO_CONTENT, LABEL_MAPPING } from '../../constants';
 import RenderCardHeader from '../RenderCardHeader';
 import MyResponsiveBar from '../ResponsiveBar';
 
@@ -36,7 +36,7 @@ function SingleGraphCard({
 	const isLastView = isViewDetailsVisible; // last view of graph cards
 
 	const graphCurrency = serviceLevelData?.[GLOBAL_CONSTANTS.zeroth_index]?.currency || '';
-	const verticalLabel = (heading === 'Operational Profitability') ? 'Percentage'
+	const verticalLabel = (heading === 'Operational Profitability') ? 'Percentage ( % )'
 		: `Amount ( ${graphCurrency} )`;
 
 	const onBarClick = (e) => {
@@ -59,7 +59,11 @@ function SingleGraphCard({
 	return (
 		<div className={styles.container}>
 			<div className={styles.flexhead}>
-				<RenderCardHeader title={heading} />
+				<RenderCardHeader
+					title={heading}
+					showInfo
+					infoContent={INFO_CONTENT.closedShipmentsBar}
+				/>
 				{isViewDetailsVisible && (
 					<Button
 						themeType="secondary"
@@ -109,7 +113,7 @@ function SingleGraphCard({
 									} = props || {};
 
 									let displayLabel;
-									if (label?.includes('financial')) {
+									if (label?.includes('financial') || label?.includes('actual')) {
 										displayLabel = 'Actual';
 									} else if (label?.includes('operational')) {
 										displayLabel = 'Operational';

@@ -2,6 +2,7 @@ import React from 'react';
 
 import ClosedGraphStats from '../Common/ClosedGraphStats';
 import ParentServicewiseStats from '../Common/ParentServicewiseStats';
+import { INFO_CONTENT } from '../constants';
 
 import styles from './styles.module.css';
 
@@ -54,6 +55,7 @@ function ActiveShipmentCard({
 			setActiveBar,
 			defaultWidth : '360',
 			setTableFilters,
+			infoContent  : INFO_CONTENT.operationallyClosed,
 		},
 		financial: {
 			title        : 'Financially Closed',
@@ -72,6 +74,7 @@ function ActiveShipmentCard({
 			setActiveBar,
 			defaultWidth : '360',
 			setTableFilters,
+			infoContent  : INFO_CONTENT.financiallyClosed,
 		},
 	};
 

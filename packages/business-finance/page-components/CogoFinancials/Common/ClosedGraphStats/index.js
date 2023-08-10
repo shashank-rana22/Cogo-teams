@@ -27,6 +27,7 @@ function ClosedGraphStats({
 	setActiveBar = () => {},
 	defaultWidth = '400',
 	setTableFilters = () => {},
+	infoContent = '',
 }) {
 	const { serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
 		entity,
@@ -48,6 +49,7 @@ function ClosedGraphStats({
 							showInfo
 							showBack
 							onBack={() => setActiveShipmentCard('')}
+							infoContent={infoContent}
 						/>
 						<div className={styles.graph_label_container}>
 							<div

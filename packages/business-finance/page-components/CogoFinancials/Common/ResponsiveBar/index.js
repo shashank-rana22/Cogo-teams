@@ -3,6 +3,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const LESS_DATA_LIMIT = 3;
+
 function MyResponsiveBar({
 	data = [],
 	height = '385px',
@@ -44,7 +46,7 @@ function MyResponsiveBar({
 				keys={keys}
 				indexBy={indexBy}
 				margin={margin}
-				padding={0.3}
+				padding={data?.length < LESS_DATA_LIMIT ? '0.6 ' : '0.3'}
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
 				colors={colors}

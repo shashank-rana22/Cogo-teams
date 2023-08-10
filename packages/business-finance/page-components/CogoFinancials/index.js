@@ -10,6 +10,7 @@ import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
 import CustomDateFilter from './Common/CustomDateFilter';
 import StatsCard from './Common/StatsCard';
+import { INFO_CONTENT } from './constants';
 import Filters from './Filters';
 import useGetProfitabilityStats from './hooks/useGetProfitabilityStats';
 import MultipleFilters from './MultipleFilters';
@@ -142,6 +143,7 @@ function CogoFinancials() {
 							cardData={ongoingData}
 							loading={ongoingLoading}
 							taxType={taxType}
+							infoContent={INFO_CONTENT.ongoingShipments}
 						/>
 						<ClosedShipmentCard
 							isDeviationVisible={false}
@@ -151,6 +153,7 @@ function CogoFinancials() {
 							cardData={operationalData}
 							loading={operationalLoading}
 							taxType={taxType}
+							infoContent={INFO_CONTENT.operationallyClosed}
 						/>
 					</div>
 					<ClosedShipmentCard
@@ -160,6 +163,7 @@ function CogoFinancials() {
 						cardData={financialData}
 						loading={financialLoading}
 						taxType={taxType}
+						infoContent={INFO_CONTENT.financiallyClosed}
 					/>
 				</div>
 			) : (
@@ -192,6 +196,8 @@ function CogoFinancials() {
 									cardData={ongoingData}
 									loading={ongoingLoading}
 									taxType={taxType}
+									infoContent={INFO_CONTENT.ongoingShipments}
+									isAdditonalView
 								/>
 							</div>
 						)}
@@ -208,6 +214,7 @@ function CogoFinancials() {
 									loading={operationalLoading}
 									taxType={taxType}
 									setActiveBar={setActiveBar}
+									infoContent={INFO_CONTENT.operationallyClosed}
 								/>
 							</div>
 						)}
@@ -223,6 +230,7 @@ function CogoFinancials() {
 									loading={financialLoading}
 									taxType={taxType}
 									setActiveBar={setActiveBar}
+									infoContent={INFO_CONTENT.financiallyClosed}
 								/>
 							</div>
 						)}

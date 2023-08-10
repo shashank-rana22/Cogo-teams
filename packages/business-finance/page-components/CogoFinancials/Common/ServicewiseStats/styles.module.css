@@ -46,7 +46,7 @@
 .statscontainer {
 	display: flex;
 	flex-direction: column;
-	min-width: 236px;
+	min-width: 200px;
 	margin: 12px 0;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .border {
-	padding: 16px 26px 36px;
+	padding: 4px 26px 36px;
 	margin: 0 12px;
 	border: 1px solid #cfcfcf;
 	border-radius: 6px;
@@ -97,7 +97,7 @@
 .sidestats {
 	display: flex;
 	width: 80%;
-	overflow-x: scroll;
+	overflow-x: auto;
 }
 
 .color {
@@ -113,4 +113,24 @@
 	display: flex;
 	justify-content: space-between;
 	width: 98%;
+}
+
+.placeholder_area {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 220px;
+	height: 100%;
+	margin-right: 12px;
+	color: var(--color-secondary-greyscale-3);
+	cursor: not-allowed;
+	border: 1px solid #cfcfcf;
+	border-radius: 8px;
+}
+
+.mapped_card_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-left: 24px;
 }

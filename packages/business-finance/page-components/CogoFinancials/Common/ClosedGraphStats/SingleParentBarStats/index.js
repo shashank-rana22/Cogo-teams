@@ -26,7 +26,6 @@ function SingleParentBarStats({
 			<div className={styles.header_combine}>
 				<RenderCardHeader
 					title={`${activeBar} Profitability`}
-					showInfo
 					showBack
 					onBack={() => {
 						setActiveBar('');

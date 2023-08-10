@@ -26,7 +26,7 @@
 .stats {
 	display: flex;
 	flex-direction: column;
-	margin-top: 24px;
+	margin-top: 12px;
 }
 
 .stathead {
@@ -48,18 +48,25 @@
 	display: flex;
 	flex-direction: column;
 	min-width: 200px;
-	margin: 32px;
+	margin: 0 32px;
 }
 
 .margin {
 	margin-bottom: 8px;
 }
 
-.border {
-	padding: 16px 26px 36px;
+.child_styles {
+	padding: 0 26px 36px;
 	margin: 6px 12px;
-	border: 1px solid #cfcfcf;
+	border: 1px solid #ededed;
 	border-radius: 6px;
+}
+
+.child_styles:hover {
+	background: var(--color-tertiary-blue-5);
+	border: 1px solid #fff;
+	box-shadow: rgb(99 99 99 / 20%) 0 2px 8px 0;
+	transition: box-shadow 0.2s, border 0.2s;
 }
 
 .service {
@@ -95,6 +102,21 @@
 .maincard {
 	width: 20%;
 	margin-right: 40px;
+
+	:global {
+		.ui_placeholder_skeleton_loader {
+			margin: 2px 0 12px;
+			border-radius: 10px;
+		}
+	}
+
+	/* .statscontainer {
+		height: 100%;
+	}
+
+	.mapping_cards_group {
+		height: 100%;
+	} */
 }
 
 .sidestats {
@@ -102,7 +124,7 @@
 	flex-flow: column wrap;
 	width: 78%;
 	max-height: 400px;
-	overflow-x: scroll;
+	overflow-x: auto;
 }
 
 .select {
@@ -124,8 +146,15 @@
 
 .placeholder_container {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
-	width: 98%;
+	width: 80%;
+
+	:global {
+		.ui_placeholder_skeleton_loader {
+			border-radius: 10px;
+		}
+	}
 }
 
 .mapping_cards_group {

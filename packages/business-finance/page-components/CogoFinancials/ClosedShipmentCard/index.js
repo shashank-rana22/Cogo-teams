@@ -1,5 +1,5 @@
 import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar';
-import { Placeholder, cl } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
@@ -52,6 +52,7 @@ function ClosedShipmentCard({
 	loading = false,
 	taxType = '',
 	setActiveBar = () => {},
+	infoContent = '',
 }) {
 	const {
 		currency,
@@ -93,14 +94,14 @@ function ClosedShipmentCard({
 					<RenderCardHeader
 						title={`${type} Closed Shipments`}
 						showInfo
+						infoContent={infoContent}
 					/>
 				</div>
 			)}
 
 			{!loading ? (
 				<div
-					className={cl`${styles.chart_data_combine} 
-					${!isDeviationVisible ? styles.additional_margin : null}`}
+					className={styles.chart_data_combine}
 					role="presentation"
 					onClick={onCardClick}
 					style={{ flexWrap: wrapElement ? 'wrap' : 'nowrap' }}
@@ -176,8 +177,8 @@ function ClosedShipmentCard({
 					</div>
 				</div>
 			) : (
-				<div style={{ margin: '8px 0px' }}>
-					<Placeholder height={200} width="100%" />
+				<div style={{ margin: '8px 0px', height: '70%' }}>
+					<Placeholder height="100%" width="100%" />
 				</div>
 			)}
 
