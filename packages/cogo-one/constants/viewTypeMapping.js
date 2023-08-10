@@ -404,9 +404,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 	cp_support: {
 		all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 		observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
-		teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
-		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
-		contacts_base_query       : () => [where('user_details.account_type', '==', 'service_provider')],
 		session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
 		chat_sub_tabs_access      : ['all', 'observer'],
 		default_side_nav          : 'profile',
@@ -444,7 +441,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 		observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 		teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
-		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		session_type_query        : getSalesSessionQuery,
 		kam_contacts_base_query   : ({ agentId }) => [where('user_details.agent_ids', 'array-contains', agentId)],
 		chat_sub_tabs_access      : ['all', 'observer', 'teams', 'kamContacts'],
