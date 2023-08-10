@@ -38,6 +38,9 @@ function StyledSelect({ defaultValue = '', onChange = () => {}, options = [], di
 			<div
 				className={styles.flex}
 				role="presentation"
+				onClick={() => {
+					setShowPopover(!showPopover);
+				}}
 			>
 				<div className={cl`${styles.styled_text}
 				 ${styles[size]} ${disabled && styles.disabled}`}
@@ -48,9 +51,6 @@ function StyledSelect({ defaultValue = '', onChange = () => {}, options = [], di
 
 				{!disabled ? (
 					<IcMArrowDown
-						onClick={() => {
-							setShowPopover(!showPopover);
-						}}
 						style={{ margin: '2px 0px 0px 4px', cursor: 'pointer', ...ICON_MAPPING[size] }}
 					/>
 				) : null}

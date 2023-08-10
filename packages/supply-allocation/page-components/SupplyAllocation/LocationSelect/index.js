@@ -1,10 +1,18 @@
 import { Button } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import RenderLabelNew from '../../../commons/RenderLabelNew';
+import StyledSelect from '../../../commons/StyledSelect';
 
 import styles from './styles.module.css';
+
+const OPTIONS = [
+	{ label: 'All Regions', value: 'all_regions' },
+	{ label: 'your favorites', value: 'your_favorite' },
+	{ label: 'attention required', value: 'attention_required' },
+];
 
 const commonLocationProps = {
 	asyncKey : 'list_locations',
@@ -28,6 +36,8 @@ function LocationSelect({ control, createSupplySearch, locationDetails, setLocat
 		const payload = { ...locationDetails };
 		createSupplySearch({ payload });
 	};
+
+	const [region, setRegion] = useState('all_regions');
 
 	return (
 		<div className={styles.location_container}>
@@ -72,10 +82,21 @@ function LocationSelect({ control, createSupplySearch, locationDetails, setLocat
 					}}
 				/>
 			</div>
+			<div style={{ width: 150, display: 'flex', alignItems: 'flex-end', marginTop: '36px' }}>
+				<StyledSelect
+					defaultValue={region}
+					onChange={({ selectedValue }) => {
+						setRegion(selectedValue);
+					}}
+					options={OPTIONS}
+					size="sm"
+				/>
+			</div>
 
 			<div className={styles.port_arrow_icon}>
 				<Button onClick={() => onClickAllocate()} themeType="accent">+ Allocation</Button>
 			</div>
+
 		</div>
 	);
 }
