@@ -1,12 +1,12 @@
 import { Button, RadioGroup, SingleDateRange } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
-import dateRangesFilter from '../../../../../../../constants/dateRangesFilter';
+import getDateRangeFilterMapping from '../../../../../../../constants/getDateRangeFilterMapping';
 import { DATES_MAPPING } from '../../../../../../../utils/datesMapping';
 
 import styles from './styles.module.css';
 
-function DatesFilterContent({
+function DatesContentFilter({
 	applyFilters = () => {},
 	setOpen = () => {},
 	date = {},
@@ -14,6 +14,8 @@ function DatesFilterContent({
 	range = '',
 	setRange = () => {},
 }) {
+	const dateRanges = getDateRangeFilterMapping();
+
 	const handleClick = () => {
 		applyFilters();
 		setOpen(false);
@@ -23,8 +25,6 @@ function DatesFilterContent({
 		const minMax = DATES_MAPPING[range]?.(new Date());
 		setDate({ ...minMax });
 	}, [range, setDate]);
-
-	const dateRanges = dateRangesFilter();
 
 	return (
 		<div className={styles.container}>
@@ -72,4 +72,4 @@ function DatesFilterContent({
 		</div>
 	);
 }
-export default DatesFilterContent;
+export default DatesContentFilter;

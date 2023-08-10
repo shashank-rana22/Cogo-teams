@@ -1,6 +1,6 @@
 const PREVIOUS_MONTH = 1;
 
-const dateRangesFilter = () => {
+const getDateRangeFilterMapping = () => {
 	const today = new Date();
 
 	const currentMonth = today.toLocaleString('default', { month: 'long' });
@@ -20,4 +20,4 @@ const dateRangesFilter = () => {
 	];
 };
 
-export default dateRangesFilter;
+export default getDateRangeFilterMapping;

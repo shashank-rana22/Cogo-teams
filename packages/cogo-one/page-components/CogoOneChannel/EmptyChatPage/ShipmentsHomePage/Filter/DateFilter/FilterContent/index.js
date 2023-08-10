@@ -1,6 +1,6 @@
 import { Popover } from '@cogoport/components';
 
-import DatesFilterContent from './datesFilterContent';
+import DatesFilterContent from './datesContentFilter';
 import styles from './styles.module.css';
 
 function FilterContent({
