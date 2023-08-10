@@ -19,7 +19,7 @@ const SEGMENT_OPTIONS = [
 const CHANNEL_OPTIONS = [
 	{ label: 'SME', value: 'SME' },
 	{ label: 'Enterprise', value: 'enterprise' },
-	{ label: 'Channel Partners', value: 'channelPartners' },
+	{ label: 'Channel Partners', value: 'CP' },
 	{ label: 'Cogoverse', value: 'cogoverse' },
 	{ label: 'Longtail', value: 'longtail' },
 	{ label: 'FTL/LTL', value: 'ftl-ltl' },

@@ -5,7 +5,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import RenderCardHeader from '../Common/RenderCardHeader';
-import { LABEL_MAPPING } from '../constants';
 
 import { getData } from './getData';
 import { getGraphData } from './getGraphData';
@@ -58,10 +57,8 @@ function ClosedShipmentCard({
 		currency,
 	} = cardData;
 
-	const totalCost = Number(cardData[`estimatedCost${taxType}`] || DEFAULT_VALUE)
-		+ Number(cardData[`${LABEL_MAPPING[type]}Cost${taxType}`] || DEFAULT_VALUE);
-	const totalRevenue = Number(cardData[`estimatedRevenue${taxType}`] || DEFAULT_VALUE)
-		+ Number(cardData[`${LABEL_MAPPING[type]}Revenue${taxType}`] || DEFAULT_VALUE);
+	const totalCost = Number(cardData[`estimatedCost${taxType}`] || DEFAULT_VALUE);
+	const totalRevenue = Number(cardData[`estimatedRevenue${taxType}`] || DEFAULT_VALUE);
 
 	const data = getData({ taxType, type, cardData, totalCost, totalRevenue });
 

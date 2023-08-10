@@ -1,5 +1,7 @@
 .container {
 	display: flex;
+	justify-content: space-between;
+	padding: 20px 28px 0 20px;
 
 	:global {
 		.ui_select_container {

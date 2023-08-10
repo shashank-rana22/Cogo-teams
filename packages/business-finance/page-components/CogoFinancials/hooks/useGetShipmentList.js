@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { upperCase } from '@cogoport/utils';
@@ -17,6 +18,7 @@ const useGetShipmentList = ({
 	tableFilters,
 }) => {
 	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity]?.currency;
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [
 		{ data: serviceLevelData, loading: serviceLevelLoading },
@@ -30,7 +32,7 @@ const useGetShipmentList = ({
 		{ manual: true },
 	);
 
-	const { pageIndex, serviceLevel:serviceLevelFilter } = tableFilters;
+	const { pageIndex, serviceLevel:serviceLevelFilter, query:searchQuery } = tableFilters;
 
 	const getShipmentList = useCallback((serviceLevel) => {
 		const { channel, service, serviceCategory, segment } = filter;
@@ -49,6 +51,7 @@ const useGetShipmentList = ({
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,
 			channel,
 			pageIndex,
+			query         : query || undefined,
 		};
 
 		// no api call if no custom date & range selected
@@ -64,11 +67,15 @@ const useGetShipmentList = ({
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
 		filter, customDate, pageIndex, activeBar, serviceLevelFilter,
-		DEFAULT_CURRENCY]);
+		DEFAULT_CURRENCY, query]);
 
 	useEffect(() => {
 		getShipmentList();
 	}, [getShipmentList]);
+
+	useEffect(() => {
+		debounceQuery(searchQuery);
+	}, [debounceQuery, searchQuery]);
 
 	return {
 		serviceLevelData,

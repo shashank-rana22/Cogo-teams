@@ -230,7 +230,7 @@ function CogoFinancials() {
 			)}
 
 			{showShipmentList && (
-				<div>
+				<div style={{ background: '#fff' }}>
 					<Filters setTableFilters={setTableFilters} tableFilters={tableFilters} />
 					<TableComp
 						activeShipmentCard={activeShipmentCard}
