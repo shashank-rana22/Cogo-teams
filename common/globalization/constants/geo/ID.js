@@ -43,7 +43,7 @@ export default {
 	office_locations : [''],
 	uuid             : {
 		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
-		super_admin_id                   : '9d940453-bcfc-47c1-9cc7-be1996e89dc0',
+		super_admin_id                   : '8aeb7cd5-e3d3-44a4-b445-c778f58dbdcb',
 		admin_id                         : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
 		parent_entity_id                 : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
@@ -237,7 +237,12 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
-		igm_desk: '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager : '123951fe-78aa-4ad1-b2da-fa6191e3a876',
+		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
+		so1_revenue_desk         : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
 	},
 	options: {
 		registration_types: [
