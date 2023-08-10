@@ -21,7 +21,7 @@ const getPayload = ({
 	...additionalData,
 });
 
-const useRaiseTicket = ({ handleClose, additionalInfo, setRefreshList }) => {
+const useRaiseTicket = ({ handleClose = () => {}, additionalInfo = [], setRefreshList = () => {} }) => {
 	const { profile } = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useTicketsRequest({

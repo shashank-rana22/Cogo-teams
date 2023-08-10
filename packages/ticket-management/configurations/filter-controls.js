@@ -7,18 +7,18 @@ import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOpt
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const useRaiseTicketcontrols = ({
-	watchOrgId, setAdditionalInfo, formattedSubCategories, setSubCategories, watchCategory,
-	watchSubCategory, watchService, watchTradeType, resetField,
+	watchOrgId = '', setAdditionalInfo = () => {}, formattedSubCategories = [], setSubCategories = () => {},
+	watchCategory = '', watchSubCategory = '', watchService = '', watchTradeType = '', resetField = () => {},
 }) => {
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
 	const categoryOptions = useGetAsyncTicketOptions({ ...asyncTicketsCategory() });
 	const ticketTypeOptions = useGetAsyncTicketOptions({
 		...asyncFieldsTicketTypes(),
 		params: {
-			Category    : watchCategory,
-			Subcategory : watchSubCategory,
-			Service     : watchService,
-			TradeType   : watchTradeType,
+			Service     : watchService || undefined,
+			Category    : watchCategory || undefined,
+			TradeType   : watchTradeType || undefined,
+			Subcategory : watchSubCategory || undefined,
 		},
 	});
 	const organizationUserOptions = useGetAsyncOptions({

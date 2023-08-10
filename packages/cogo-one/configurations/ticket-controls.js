@@ -6,8 +6,8 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
 
 const useRaiseTicketControls = ({
-	watchOrgId, setSubCategories, setAdditionalInfo, formattedSubCategories, resetField,
-	watchCategory, watchSubCategory, service, trade_type,
+	watchOrgId = '', setSubCategories = () => {}, setAdditionalInfo = () => {}, formattedSubCategories = [],
+	resetField = () => {}, watchCategory = '', watchSubCategory = '', service = '', trade_type = '',
 }) => {
 	const ticketTypeOptions = useGetAsyncTicketOptions({
 		...asyncFieldsTicketTypes(),
