@@ -1,0 +1,31 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+	font-weight: 600;
+	background: var(--greyscale-secondary-white, #fff);
+}
+
+.location_info {
+	display: flex;
+	flex: 3;
+	justify-content: space-between;
+	padding: 0 80px;
+	margin: 10px;
+	border-right: 1px dashed #bdbdbd;
+	border-left: 1px dashed #bdbdbd;
+}
+
+.port_pair_count {
+	flex: 2;
+	margin-left: 20px;
+}
+
+.forecasted_demand {
+	flex: 2;
+}
+
+.back {
+	flex: 1;
+}

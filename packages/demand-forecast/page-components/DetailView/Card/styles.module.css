@@ -1,0 +1,36 @@
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 8px 12px;
+	font-size: 16px;
+	background: #fff;
+	border: 1px solid #f8f2e7;
+}
+
+.supplier_name {
+	width: 40%;
+	text-align: center;
+}
+
+.potential {
+	width: 15%;
+	text-align: center;
+}
+
+.capability {
+	width: 15%;
+	text-align: center;
+}
+
+.rates_added {
+	width: 15%;
+	text-align: center;
+}
+
+.ask_for_rates {
+	display: flex;
+	justify-content: center;
+	width: 15%;
+}

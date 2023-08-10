@@ -18,6 +18,7 @@ import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
+import demandForecast from './config/demand-forecast';
 import documentDesk from './config/document-desk';
 import employeeDashboard from './config/employee-dashboard';
 import employeeDirectory from './config/employee-directory';
@@ -141,6 +142,7 @@ const routeConfig = {
 	...igmDesk,
 	...airlinePluginBooking,
 	...bookingDeskSurface,
+	...demandForecast,
 	...employeeDirectory,
 	...ftlFieldSreviceOps,
 	...notifications,

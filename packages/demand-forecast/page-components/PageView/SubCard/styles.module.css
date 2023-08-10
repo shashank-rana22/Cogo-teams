@@ -1,0 +1,18 @@
+.card {
+	margin: 8px 0;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
+}
+
+.title {
+	padding: 12px;
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.sub_card {
+	padding: 12px;
+	background-color: #fdfbf6;
+}
