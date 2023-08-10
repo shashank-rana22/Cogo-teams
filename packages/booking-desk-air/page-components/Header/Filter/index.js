@@ -10,6 +10,22 @@ import getFilterControls from '../../../utils/getControls';
 
 import styles from './styles.module.css';
 
+const applyFilterValues = ({
+	filter = {},
+	prevServiceActiveTab = 'air_freight',
+	setValue = () => {},
+}) => {
+	Object.keys(filter || {}).forEach((item) => {
+		if (item !== prevServiceActiveTab) {
+			setValue(item, filter?.[item]);
+		} else {
+			Object.keys(filter[item] || {}).forEach((itm) => {
+				setValue(itm, filter?.[item]?.[itm]);
+			});
+		}
+	});
+};
+
 function Filter({
 	serviceActiveTab = 'air_freight',
 	setFilters = () => {},
@@ -69,14 +85,12 @@ function Filter({
 
 	useEffect(() => {
 		const storageData = JSON.parse(sessionStorage.getItem('air_booking_desk'));
-		const prevNav = sessionStorage.getItem('air_booking_desk_nav') || '';
-
 		const {
 			serviceActiveTab: storageServiceActiveTab = 'air_freight',
 			filters: filter = {},
 		} = storageData || {};
 
-		if (serviceActiveTab !== storageServiceActiveTab || isEmpty(prevNav)) {
+		if (serviceActiveTab !== storageServiceActiveTab) {
 			reset({
 				tags                       : '',
 				fault_alarms_raised        : '',
@@ -90,24 +104,14 @@ function Filter({
 			});
 			setFilters({});
 			sessionStorage.setItem('air_booking_desk', JSON.stringify({ serviceActiveTab, filters: {} }));
-		} else {
-			const prevServiceActiveTab = serviceActiveTab.concat('_service');
-
-			Object.keys(filter || {}).forEach((item) => {
-				if (item !== prevServiceActiveTab) {
-					setValue(item, filter?.[item]);
-				} else {
-					Object.keys(filter[item] || {}).forEach((itm) => {
-						setValue(itm, filter?.[item]?.[itm]);
-					});
-				}
-			});
-			setValue('tags', filter?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
-			setFilters(filter);
-			sessionStorage.setItem('air_booking_desk', JSON.stringify({ serviceActiveTab, filters: filter }));
-			sessionStorage.setItem('air_booking_desk_nav', '');
+			return;
 		}
-	}, [serviceActiveTab, reset, setFilters, setValue]);
+		const prevServiceActiveTab = serviceActiveTab.concat('_service');
+		applyFilterValues({ filter, prevServiceActiveTab, setValue });
+		setValue('tags', filter?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
+		setFilters(filter);
+		sessionStorage.setItem('air_booking_desk', JSON.stringify({ serviceActiveTab, filters: filter }));
+	}, [reset, serviceActiveTab, setFilters, setValue]);
 
 	return (
 		<div className={styles.filter_container}>
