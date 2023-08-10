@@ -46,9 +46,9 @@ export function Preview({
 	useEffect(
 		() => {
 			let newCustomData = {
-				origin_port      : '',
-				destination_port : '',
-				shipment_id      : '',
+				origin_port      : undefined,
+				destination_port : undefined,
+				shipment_id      : undefined,
 			};
 
 			if (!isEmpty(shipmentData)) {
