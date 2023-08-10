@@ -1627,6 +1627,16 @@ const navigationMappingAdmin = {
 				main_apis: [],
 			},
 			{
+				key           : 'cogo_assured-rate_sheets',
+				title         : 'Rate Sheets',
+				href          : '/cogo-assured/rate_sheets',
+				as            : '/cogo-assured/rate_sheets',
+				type          : 'link',
+				possible_apis : apis.cogo_assured,
+
+				main_apis: [],
+			},
+			{
 				key           : 'cogo_assured-feedbacks',
 				title         : 'Feedbacks',
 				href          : '/cogo-assured/feedbacks',
