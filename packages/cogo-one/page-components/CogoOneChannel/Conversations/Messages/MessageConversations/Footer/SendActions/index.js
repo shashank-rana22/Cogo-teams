@@ -41,6 +41,7 @@ function SendActions({
 	);
 
 	const canSendMessage = !hasNoPermissionToSend && getCanSendMessage({ emailState, channelType: channel_type });
+	console.log('canSendMessage', canSendMessage);
 
 	const {
 		sendPromotionalRate = () => {},
@@ -114,7 +115,7 @@ function SendActions({
 					>
 						<IcMHappy
 							fill="#828282"
-							cursor={hasPermissionToEdit ? 'pointer' : 'not-allowed'}
+							style={{ cursor: hasPermissionToEdit ? 'pointer' : 'not-allowed' }}
 							onClick={() => {
 								if (hasPermissionToEdit) {
 									setOnClicked((prev) => !prev);
@@ -132,7 +133,7 @@ function SendActions({
 						className={styles.promotional_rate}
 						loading={loading}
 						onClick={sendPromotionalRate}
-						cursor={isSendPromotionalRate ? 'pointer' : 'not-allowed'}
+						style={{ cursor: isSendPromotionalRate ? 'pointer' : 'not-allowed' }}
 					>
 						Send Promotional Rate
 					</Button>
@@ -141,7 +142,7 @@ function SendActions({
 				{!isEmail && (
 					<IcMQuickreply
 						fill="#828282"
-						cursor={hasPermissionToEdit ? 'pointer' : 'not-allowed'}
+						style={{ cursor: hasPermissionToEdit ? 'pointer' : 'not-allowed' }}
 						onClick={() => {
 							if (hasPermissionToEdit) {
 								openInstantMessages();
@@ -151,7 +152,7 @@ function SendActions({
 				)}
 				<IcMSend
 					fill="#EE3425"
-					cursor={canSendMessage ? 'pointer' : 'not-allowed'}
+					style={{ cursor: canSendMessage ? 'pointer' : 'not-allowed' }}
 					onClick={() => {
 						if (canSendMessage) {
 							sendMessage();
