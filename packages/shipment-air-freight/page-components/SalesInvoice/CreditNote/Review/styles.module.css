@@ -1,0 +1,23 @@
+.button_wrapper {
+	display: flex;
+	justify-content: center;
+
+	> button:not(:last-of-type) {
+		margin-right: 16px;
+	}
+}
+
+.form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.custom_modal {
+	:global {
+		.ui_modal_body_container {
+			height: 200px;
+		}
+	}
+}

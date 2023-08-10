@@ -63,6 +63,20 @@ function Header({ data, filters }) {
 						</Pill>
 
 					) : null}
+					{data?.is_organic_booking ? (
+						<Pill
+							size="md"
+							color="#e6fae8"
+						>
+							Organic Booking
+						</Pill>
+
+					) : null}
+					{data?.is_saas_subscribed ? (
+						<Pill size="md" color="#e6fae8">
+							Saas Subscribed
+						</Pill>
+					) : null}
 				</div>
 			</div>
 

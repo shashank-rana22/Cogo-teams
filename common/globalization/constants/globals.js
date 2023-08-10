@@ -87,11 +87,15 @@ const GLOBAL_CONSTANTS = {
 			'yyyy-MM-dd'        : 'yyyy-MM-dd',
 			'MMM yyyy'          : 'MMM yyyy',
 			'dd MMM'            : 'dd MMM',
+			dd                  : 'dd',
+			MMM                 : 'MMM',
+			yyyy                : 'yyyy',
 		},
 		time: {
 			'hh:mm aaa' : 'hh:mm aaa',
 			'HH:mm'     : 'HH:mm',
 			'hh:mm:ss'  : 'hh:mm:ss',
+			'hh aaa'    : 'hh aaa',
 			'HH:mm:ss'  : 'HH:mm:ss',
 			'HH:mm a'   : 'HH:mm a',
 			hh          : 'hh',
@@ -201,6 +205,7 @@ const GLOBAL_CONSTANTS = {
 		hk_user_id              : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
 		sachin_mehra_user_id    : '68c7e272-0c66-43a9-9537-eedb4e543194',
 		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
+		linh_nguyen_user_id   		: 'cf2c9d24-e1e0-4223-a228-69ebbdc349c1',
 		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		local_charge_providers  : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -310,6 +315,7 @@ const GLOBAL_CONSTANTS = {
 		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
 		cogo_one_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
 		cogo_one_loader    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif',
+		address_icon       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/address-icon.svg',
 		bluetide_hbl_logo:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/6f67ac5379afb6694a75e573407899f2/bluetidelogo.png',
 		cogoport_admin_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
@@ -349,11 +355,14 @@ const GLOBAL_CONSTANTS = {
 			copy_12:
 			'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
 		},
+		alarm_snooze: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-snooze.svg',
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
 		message_reply        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/message_reply.png',
 		cargo_ship_vector    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargoShipsVector.png',
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
+		increasing_arrow     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg',
+		agent_avatar_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
 		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',
@@ -490,6 +499,7 @@ const GLOBAL_CONSTANTS = {
 		empty_spaces_before_tab_character : / +(?=\t)/g,
 		mime                              : /:(.*?);/m,
 		double_curly_braces_pattern       : /\{\{([^{}]+)\}\}/g,
+		number_pattern                    : /[^0-9]/g,
 		occurrences_of_paragraphs_tag     : /<p>\s+(<[/]p>)/g,
 		enclosed_within_forward_slashes   : /<p>(<[/]p>)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
@@ -620,6 +630,8 @@ const GLOBAL_CONSTANTS = {
 		import_rates : 'Import.rates@cogoport.com',
 		export_rates : 'Export.rates@cogoport.com',
 	},
+
+	days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
 };
 
 export default GLOBAL_CONSTANTS;

@@ -6,6 +6,8 @@ import useGenerateAndSubmitCertificate from '../helpers/useGenerateAndSubmitCert
 
 import styles from './styles.module.css';
 
+const DEFAULT_FREIGHT_PRICE = 0;
+
 function FreightRate({
 	task = {},
 	containersData = [],
@@ -81,7 +83,7 @@ function FreightRate({
 								control={control}
 								{...register(`freight_declaration.${index}.currency`)}
 								size="sm"
-								valueKey="id"
+								valueKey="iso_code"
 								lableKey="iso_code"
 								asyncKey="list_exchange_rate_currencies"
 								rules={{ required: { value: true, message: 'Currency is required' } }}
@@ -136,8 +138,8 @@ function FreightRate({
 							<label>Total</label>
 
 							<div>
-								{Number(formValues?.freight_declaration[index]?.freight_price || 0)
-								+ Number(formValues?.freight_declaration[index]?.origin_price || 0)}
+								{Number(formValues?.freight_declaration[index]?.freight_price || DEFAULT_FREIGHT_PRICE)
+								+ Number(formValues?.freight_declaration[index]?.origin_price || DEFAULT_FREIGHT_PRICE)}
 							</div>
 						</div>
 					</div>
