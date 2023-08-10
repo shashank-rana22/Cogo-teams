@@ -2,8 +2,8 @@ import { Button } from '@cogoport/components';
 
 import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../../constants/create-form-stepper-keys-mapping';
 
+import getModeWiseButtons from './get-mode-wise-buttons';
 import ListObjectiveUserMappings from './ListObjectiveUserMappings';
-import ModeWiseButtons from './ModeWiseButton';
 import styles from './styles.module.css';
 import useCreateObjective from './useCreateObjective';
 import useGetObjectiveUserMappings from './useGetObjectiveUserMappings';
@@ -61,12 +61,7 @@ function SetObjectiveWeightage(props) {
 				</Button>
 
 				<div className={styles.button_container}>
-					<ModeWiseButtons
-						activeMode={activeMode}
-						onCreate={onCreate}
-						createLoading={createLoading}
-						createDisabled={createDisabled}
-					/>
+					{getModeWiseButtons({ activeMode, onCreate, createLoading, createDisabled })}
 				</div>
 			</div>
 		</div>

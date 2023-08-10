@@ -1,10 +1,10 @@
 import { Button } from '@cogoport/components';
 
-import ACTIVE_MODE_KEYS_MAPPING from '../../../../../constants/active-mode-keys-mapping';
+import ACTIVE_MODE_KEYS_MAPPING from '../../../../constants/active-mode-keys-mapping';
 
 const { CREATE, EDIT } = ACTIVE_MODE_KEYS_MAPPING;
 
-function ModeWiseButtons(props) {
+function getModeWiseButtons(props) {
 	const {
 		activeMode,
 		onCreate = () => {},
@@ -39,20 +39,34 @@ function ModeWiseButtons(props) {
 			</>
 		),
 		[EDIT]: (
-			<Button
-				size="lg"
-				type="button"
-				themeType="primary"
-				loading={createLoading}
-				disabled={createDisabled}
-				onClick={() => onCreate({ distribute_equally: false })}
-			>
-				Duplicate & Send For Verification
-			</Button>
+			<>
+				<Button
+					size="lg"
+					type="button"
+					themeType="secondary"
+					style={{ marginRight: '12px' }}
+					onClick={() => onCreate({ distribute_equally: true })}
+					loading={createLoading}
+				>
+					Duplicate, Equally Distribute & Send For Verification
+				</Button>
+
+				<Button
+					size="lg"
+					type="button"
+					themeType="primary"
+					loading={createLoading}
+					disabled={createDisabled}
+					onClick={() => onCreate({ distribute_equally: false })}
+				>
+					Duplicate & Send For Verification
+				</Button>
+			</>
+
 		),
 	};
 
 	return MODE_BASIS_BUTTON_MAPPING[activeMode] || null;
 }
 
-export default ModeWiseButtons;
+export default getModeWiseButtons;
