@@ -1,25 +1,37 @@
-import { Modal, Input, Pagination, Select, Toggle } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { Modal, Pagination, cl } from '@cogoport/components';
+import { IcMAgentManagement, IcMLock } from '@cogoport/icons-react';
+import { useState } from 'react';
 
-import { getIsActive, updateCogooneConstants } from '../../../../../helpers/configurationHelpers';
-import { formatAgentList } from '../../../../../helpers/groupAgentsHelpers';
-import useGetOmnichannelAgentTypes from '../../../../../hooks/useGetOmnichannelAgentTypes';
 import useListChatAgents from '../../../../../hooks/useListChatAgents';
-import useUpdateAgentPreference from '../../../../../hooks/useUpdateAgentPreference';
 
-import GroupedAgents from './GroupedAgents';
+import AgentWiseLockScreen from './AgentWiseLockScreen';
+import RoleWiseLockScreen from './RoleWiseLockScreen';
 import styles from './styles.module.css';
 
-const LOADER_COUNT = 8;
+const SCREEN_LOCK_MAPPING = [
+	{
+		label : 'Agent',
+		name  : 'agent',
+		icon  : <IcMAgentManagement width={40} height={40} />,
+	},
+	{
+		label : 'Lock Screen',
+		name  : 'lock_screen',
+		icon  : <IcMLock width={40} height={40} />,
+	},
+];
+
+const COMPONENT_MAPPING = {
+	agent       : AgentWiseLockScreen,
+	lock_screen : RoleWiseLockScreen,
+};
 
 function AgentModal({
 	showAgentDetails = false,
 	setShowAgentDetails = () => {},
 	firestore = {},
 }) {
-	const [isLockedToggle, setIsLockedToggle] = useState(false);
+	const [activeCard, setActiveCard] = useState('');
 
 	const {
 		getListChatAgents = () => { },
@@ -32,30 +44,31 @@ function AgentModal({
 	} = useListChatAgents();
 
 	const {
-		updateAgentPreference,
-		createLoading = false,
-	} = useUpdateAgentPreference({ getListChatAgents });
-
-	const { options = [] } = useGetOmnichannelAgentTypes();
-
-	const {
 		list = [],
 		page_limit = 10,
 		total_count = 0,
 		page = 0,
 	} = listAgentStatus;
 
-	const onToggle = (e) => {
-		setIsLockedToggle(e?.target?.checked);
-		updateCogooneConstants({ firestore, value: e?.target?.checked });
+	const COMPONENT_PROPS = {
+		agent: {
+			firestore,
+			getListChatAgents,
+			loading,
+			list,
+			setSearch,
+			paramsState,
+			setAgentType,
+			setActiveCard,
+		},
+
+		lock_screen: {
+			firestore,
+			setActiveCard,
+		},
 	};
 
-	const modifiedGroupedAgents = loading
-		? { load: [...Array(LOADER_COUNT).fill({})] } : formatAgentList({ list }) || {};
-
-	useEffect(() => {
-		getIsActive({ firestore, setIsLockedToggle });
-	}, [firestore]);
+	const Component = COMPONENT_MAPPING[activeCard] || null;
 
 	return (
 		<Modal
@@ -64,49 +77,45 @@ function AgentModal({
 			onClose={() => setShowAgentDetails(false)}
 			placement="center"
 		>
-			<Modal.Header title="Agent Status" />
+			<Modal.Header title="Configuration" />
 			<Modal.Body className={styles.modal_body}>
-				<div className={styles.search_switch_toggle_space}>
-					Screen Lock
-					<Toggle
-						onChange={onToggle}
-						checked={isLockedToggle}
-					/>
-				</div>
-				<div className={styles.header_filters}>
-					<Input
-						size="sm"
-						placeholder="Search here"
-						className={styles.search}
-						prefix={<IcMSearchlight />}
-						onChange={setSearch}
-					/>
-					<Select
-						size="sm"
-						placeholder="Select agent type"
-						className={styles.select_styles}
-						prefix={<IcMSearchlight />}
-						onChange={setAgentType}
-						options={options}
-						value={paramsState?.agentType}
-						isClearable
-					/>
-				</div>
-				{!isEmpty(modifiedGroupedAgents)
-					? Object.keys(modifiedGroupedAgents).map((eachType) => (
-						<GroupedAgents
-							key={eachType}
-							groupedList={modifiedGroupedAgents[eachType]}
-							groupName={eachType}
-							createLoading={createLoading}
-							updateAgentPreference={updateAgentPreference}
-							loading={loading}
-						/>
-					))
-					: <div className={styles.empty_state}>No data found</div>}
+				{!activeCard ? (
+					<div className={styles.screen_container}>
+						{SCREEN_LOCK_MAPPING.map((item) => {
+							const { label, name, icon } = item || {};
+
+							return (
+								<div
+									key={name}
+									role="presentation"
+									onClick={() => setActiveCard(name)}
+									className={cl`
+									${activeCard === name ? styles.active_card : ''} ${styles.card_section}`}
+								>
+									{icon}
+									<div className={styles.card_label}>{label}</div>
+								</div>
+							);
+						})}
+					</div>
+
+				) : (
+					<Component key={activeCard} {...COMPONENT_PROPS[activeCard]} />
+				) }
+				{/* <AgentWiseLockScreen
+					firestore={firestore}
+					getListChatAgents={getListChatAgents}
+					loading={loading}
+					list={list}
+					setSearch={setSearch}
+					paramsState={paramsState}
+					setAgentType={setAgentType}
+				/>
+
+				<RoleWiseLockScreen /> */}
 			</Modal.Body>
 			<Modal.Footer className={styles.footer_styles}>
-				{!loading && (
+				{!loading && activeCard === 'agent' && (
 					<Pagination
 						className={styles.pagination}
 						type="table"

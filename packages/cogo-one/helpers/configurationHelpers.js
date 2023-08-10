@@ -37,3 +37,32 @@ export const updateCogooneConstants = async ({ firestore, value }) => {
 
 	updateDoc(docRef, { is_locked_screen: value });
 };
+
+export const getRolesIsActive = async ({ firestore, setRoleValue }) => {
+	const cogoOneConstantsDocs = await getConstantsDoc({ firestore });
+
+	const {
+		enable_for_roles = [],
+		is_roles_lock_screen = false,
+		screen_lock_timeout = 1000000,
+	} = cogoOneConstantsDocs?.data() || {};
+
+	setRoleValue({
+		roles       : enable_for_roles,
+		time        : screen_lock_timeout,
+		toggleState : is_roles_lock_screen,
+	});
+};
+
+export const updateRoleCogooneConstants = async ({ firestore, value, roleIds = [], time = '' }) => {
+	const cogoOneConstantsDocs = await getConstantsDoc({ firestore });
+
+	const roomId = cogoOneConstantsDocs?.id;
+
+	const docRef = doc(
+		firestore,
+		`${FIRESTORE_PATH.cogoone_constants}/${roomId}`,
+	);
+
+	updateDoc(docRef, { is_roles_lock_screen: value, enable_for_roles: roleIds, screen_lock_timeout: time });
+};
