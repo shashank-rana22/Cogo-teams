@@ -1,4 +1,6 @@
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
 const DEFAULT_PAGE_VALUE = 1;
@@ -11,7 +13,7 @@ const useListOrganizationAssets = ({ id, assetIds = [] }) => {
 	});
 
 	const getData = useCallback(async () => {
-		if (!assetIds?.length) return;
+		if (isEmpty(assetIds)) return;
 		try {
 			await trigger({
 				params: {
@@ -25,7 +27,7 @@ const useListOrganizationAssets = ({ id, assetIds = [] }) => {
 				},
 			});
 		} catch (e) {
-			console.error(e);
+			toastApiError(e);
 		}
 	}, [assetIds, id, page, trigger]);
 

@@ -1,8 +1,9 @@
-import { Button, ButtonIcon, Modal, Popover, Toast } from '@cogoport/components';
+import { Button, ButtonIcon, Modal, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { Layout } from '@cogoport/surface-modules';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import React, { useState, useEffect } from 'react';
 
 import getDefaultValues from '../../../../../../utils/get-default-values';
@@ -45,7 +46,7 @@ function SplitAthAmount({ item = {}, setFinalGetHookData = () => {} }) {
 		const { checked, err } = checkForAth(val?.split_advanced_amount, item);
 
 		if (!checked) {
-			Toast.error(err);
+			toastApiError(err);
 			return;
 		}
 

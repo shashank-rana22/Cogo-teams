@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useEffect, useCallback } from 'react';
 
 const useGetRevenueDeskPreferedRates = ({
@@ -28,7 +29,7 @@ const useGetRevenueDeskPreferedRates = ({
 			};
 			trigger({ params });
 		} catch (err) {
-			console.error(err);
+			toastApiError(err);
 		}
 	}, [trigger, shipment_id, service_type]);
 

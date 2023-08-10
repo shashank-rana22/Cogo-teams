@@ -1,6 +1,6 @@
 const DEFAULT_VALUE = 0;
 
-export const generateDefaultValues = ({ values }) => {
+export const generateDefaultValues = ({ values = [] }) => {
 	const INITIAL_STATE = {};
 	const FIELD_VALUE = {};
 	const DEFAULT_VALUES = {};
