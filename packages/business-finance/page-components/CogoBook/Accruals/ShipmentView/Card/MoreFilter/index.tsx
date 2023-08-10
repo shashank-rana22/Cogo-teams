@@ -11,7 +11,7 @@ import {
 } from '../../../../constants/accruals-more-filters';
 import { FilterInterface } from '../../../interface';
 
-import ProfitabilityContent from './profitabilityContent';
+import ProfitabilityContent from './ProfitabilityContent';
 import styles from './styles.module.css';
 
 interface MoreFilterInterface {
