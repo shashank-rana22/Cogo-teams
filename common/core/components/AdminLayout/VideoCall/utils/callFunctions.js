@@ -78,7 +78,6 @@ export const saveWebrtcToken = ({ data, callingRoomId, tokenId, firestore }) => 
 				...savingData,
 				updated_at: Date.now(),
 			},
-			// { merge: true },
 		);
 	} catch (error) {
 		console.error(error);
