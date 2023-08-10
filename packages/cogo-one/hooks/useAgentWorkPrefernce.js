@@ -6,7 +6,7 @@ import getViewType from '../helpers/getViewType';
 import getViewTypeFromWorkPreferences from '../utils/getViewTypeFromWorkPreferences';
 
 function useAgentWorkPrefernce() {
-	const { userRoleIds, userId, authRoleData } = useSelector(({ profile }) => ({
+	const { userRoleIds = [], userId = '', authRoleData = {} } = useSelector(({ profile }) => ({
 		userRoleIds  : profile.partner?.user_role_ids || [],
 		userId       : profile?.user?.id,
 		authRoleData : profile?.auth_role_data,

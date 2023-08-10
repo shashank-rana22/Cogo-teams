@@ -1,9 +1,26 @@
 const COGOVERSE_AGENT_MAPPINGS = {
-	supply: ['supply', 'supply_nvocc',
-		'supply_freight_forwarder', 'supply_shipping_line', 'supply_relation'],
-	support: ['internal_support', 'internal_support_admin', 'support', 'closed_loop'],
-	sales:
-    ['sales', 'sales_admin', 'business_consultant', 'marketing', 'trade_finance', 'cogo_academy', 'kyc_demo'],
+	supply: [
+		'supply',
+		'supply_nvocc',
+		'supply_freight_forwarder',
+		'supply_shipping_line',
+		'supply_relation',
+	],
+	support: [
+		'internal_support',
+		'internal_support_admin',
+		'support',
+		'closed_loop',
+	],
+	sales: [
+		'sales',
+		'sales_admin',
+		'business_consultant',
+		'marketing',
+		'trade_finance',
+		'cogo_academy',
+		'kyc_demo',
+	],
 	shipment_specialist : ['shipment_specialist'],
 	cp_support          : ['cp_support'],
 	support_admin       : ['support_admin'],
@@ -13,7 +30,7 @@ const COGOVERSE_AGENT_MAPPINGS = {
 
 const DEFAULT_VIEW_TYPE = 'sales';
 
-const getViewTypeFromWorkPreferences = ({ viewTypeFromRoleIds, agentType }) => {
+const getViewTypeFromWorkPreferences = ({ viewTypeFromRoleIds = '', agentType = '' }) => {
 	if (viewTypeFromRoleIds === 'cogoone_admin') {
 		return viewTypeFromRoleIds;
 	}

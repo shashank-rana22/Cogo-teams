@@ -41,14 +41,14 @@ function dataFormatter(list) {
 }
 
 export function mountFlashChats({
-	setLoadingState,
-	setFlashMessagesData,
-	omniChannelCollection,
-	flashMessagesSnapShotListener,
-	viewType,
-	setCarouselState,
-	updateLoadingState,
-	workPrefernceLoading,
+	setLoadingState = () => {},
+	setFlashMessagesData = () => {},
+	omniChannelCollection = {},
+	flashMessagesSnapShotListener = {},
+	viewType = '',
+	setCarouselState = () => {},
+	updateLoadingState = () => {},
+	workPrefernceLoading = false,
 }) {
 	const snapshotRef = flashMessagesSnapShotListener;
 	snapshotCleaner({ ref: flashMessagesSnapShotListener });
