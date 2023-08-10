@@ -12,6 +12,7 @@ const CONTROL_MAPPING = {
 				label       : 'Milestone',
 				placeholder : '0',
 				rules       : { required: 'Milestone is required' },
+				min         : 0,
 			},
 			{
 				name        : 'score',
@@ -19,6 +20,7 @@ const CONTROL_MAPPING = {
 				label       : 'Score',
 				placeholder : '0',
 				rules       : { required: 'Score is required' },
+				min         : 0,
 			},
 		],
 	}],
@@ -35,6 +37,7 @@ const CONTROL_MAPPING = {
 				label       : 'From',
 				placeholder : '0',
 				rules       : { required: 'From is required' },
+				min         : 0,
 			},
 			{
 				name        : 'upper',
@@ -42,6 +45,7 @@ const CONTROL_MAPPING = {
 				label       : 'To',
 				placeholder : '0',
 				rules       : { required: 'To is required' },
+				min         : 0,
 			},
 			{
 				name        : 'score',
@@ -49,6 +53,7 @@ const CONTROL_MAPPING = {
 				label       : 'Score',
 				placeholder : '0',
 				rules       : { required: 'Score is required' },
+				min         : 0,
 			},
 		],
 	}],
@@ -58,6 +63,7 @@ const CONTROL_MAPPING = {
 		label       : 'Score on Completion',
 		placeholder : '0',
 		rules       : { required: 'Score on Completion is required' },
+		min         : 0,
 	},
 	{
 		name        : 'second_completion',
@@ -65,6 +71,7 @@ const CONTROL_MAPPING = {
 		label       : 'Score on Repetition',
 		placeholder : '0',
 		rules       : { required: 'Score on Repetition is required' },
+		min         : 0,
 	},
 	],
 };
