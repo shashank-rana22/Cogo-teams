@@ -41,7 +41,6 @@ function SendActions({
 	);
 
 	const canSendMessage = !hasNoPermissionToSend && getCanSendMessage({ emailState, channelType: channel_type });
-	console.log('canSendMessage', canSendMessage);
 
 	const {
 		sendPromotionalRate = () => {},
