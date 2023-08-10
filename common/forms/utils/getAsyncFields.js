@@ -812,6 +812,17 @@ function asyncListAllManagers() {
 	};
 }
 
+function asyncListAllocationObjectives() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/objectives',
+		authkey      : 'get_allocation_objectives',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
 function asyncListExpenseCategories() {
 	return {
 		labelKey     : 'categoryName',
@@ -891,5 +902,6 @@ export {
 	asyncListShipmentPendingTasks,
 	asyncListShipments,
 	asyncListShipmentServices,
+	asyncListAllocationObjectives,
 	asyncIncidentSubtypeList,
 };
