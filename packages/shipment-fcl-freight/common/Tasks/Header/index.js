@@ -64,7 +64,7 @@ function Header({
 						</div>
 					) : null}
 
-					{showOthersTasks && showToogle ? (
+					{showOthersTasks && !showToogle ? (
 						<div className={styles.toggle_container}>
 							<span>Show only my tasks</span>
 							<Toggle
