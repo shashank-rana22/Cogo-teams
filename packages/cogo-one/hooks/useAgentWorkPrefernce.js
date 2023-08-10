@@ -3,32 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useState } from 'react';
 
 import getViewType from '../helpers/getViewType';
-
-const PERSONA_KEYS_MAPPING = ['sales', 'supply', 'support', 'shipment_specialist'];
-
-const DEFAULT_VIEW_TYPE = 'sales';
-
-const SALES_VIEW_AGENT_TYPES = ['sales', 'business_consultant'];
-
-const getViewTypeFromWorkPreferences = ({ viewTypeFromRoleIds, agentType }) => {
-	if (viewTypeFromRoleIds === 'cogoone_admin') {
-		return viewTypeFromRoleIds;
-	}
-
-	if (!agentType) {
-		return DEFAULT_VIEW_TYPE;
-	}
-
-	if (agentType.includes('admin')) {
-		return agentType;
-	}
-
-	if (SALES_VIEW_AGENT_TYPES.includes(agentType)) {
-		return 'sales';
-	}
-
-	return PERSONA_KEYS_MAPPING.find((eachPersona) => agentType.includes(eachPersona)) || '';
-};
+import getViewTypeFromWorkPreferences from '../utils/getViewTypeFromWorkPreferences';
 
 function useAgentWorkPrefernce() {
 	const { userRoleIds, userId, authRoleData } = useSelector(({ profile }) => ({

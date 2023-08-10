@@ -48,11 +48,12 @@ export function mountFlashChats({
 	viewType,
 	setCarouselState,
 	updateLoadingState,
+	workPrefernceLoading,
 }) {
 	const snapshotRef = flashMessagesSnapShotListener;
 	snapshotCleaner({ ref: flashMessagesSnapShotListener });
 
-	if (!VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.claim_chats) {
+	if (!VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.claim_chats || workPrefernceLoading) {
 		return;
 	}
 

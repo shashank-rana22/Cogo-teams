@@ -1,4 +1,5 @@
 import { Carousel } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import useClaimChat from '../../../../../hooks/useClaimChat';
 
@@ -6,18 +7,18 @@ import getCarouselData from './getCarouselData';
 import styles from './styles.module.css';
 
 function FlashUserChats({
-	flashMessagesList,
-	activeTab,
-	userId,
-	setActiveMessage,
-	firestore,
-	carouselState,
-	setCarouselState,
-	viewType,
+	flashMessagesList = [],
+	activeTab = '',
+	userId = '',
+	setActiveMessage = '',
+	firestore = {},
+	carouselState = '',
+	setCarouselState = () => {},
+	viewType = '',
 }) {
 	const { claimChat, claimLoading = false } = useClaimChat({ userId, setCarouselState, firestore });
 
-	const canShowCarousel = carouselState === 'show';
+	const canShowCarousel = carouselState === 'show' && !isEmpty(flashMessagesList);
 
 	const carouselData = canShowCarousel ? getCarouselData({
 		flashMessagesList,
