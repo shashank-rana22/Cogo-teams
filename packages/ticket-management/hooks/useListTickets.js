@@ -18,7 +18,7 @@ const MIN_TICKET_COUNT = 1;
 const WINDOW_VIEW = 20;
 const DEFAULT_COUNT = 0;
 const INCREMENT_COUNT = 1;
-const TWO_SECONSDS_STOP = 2000;
+const TWO_SECONDS_STOP = 2000;
 
 const getPayload = ({
 	performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate,
@@ -128,7 +128,7 @@ const useListTickets = ({
 			setReachedBottomCount((prev) => prev + INCREMENT_COUNT);
 			setTimeout(() => {
 				setReachedBottomCount((prev) => prev + INCREMENT_COUNT);
-			}, TWO_SECONSDS_STOP);
+			}, TWO_SECONDS_STOP);
 		} else if (!reachBottom) {
 			if (reachedBottomCount) {
 				setReachedBottomCount(DEFAULT_COUNT);

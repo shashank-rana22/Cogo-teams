@@ -11,8 +11,8 @@ function TicketsSectionPart({
 	isAdmin = false, setModalData = () => {}, isUpdated = false, setIsUpdated = () => {}, date = {},
 }) {
 	const {
-		tickets,
-		listLoading,
+		tickets = {},
+		listLoading = false,
 		handleScroll = () => {}, fetchTickets = () => {}, reachedBottomCount = 0,
 	} = useListTickets({
 		searchParams,
