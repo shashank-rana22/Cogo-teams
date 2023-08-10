@@ -29,7 +29,7 @@ const useCreateRDAutomationParameters = ({ filter }) => {
 				},
 			});
 			if (!res.hasError) {
-				Toast.success('Applied Successfully');
+				Toast.success('Saved Successfully');
 			}
 		} catch (err) {
 			toastApiError(err);

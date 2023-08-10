@@ -3,7 +3,7 @@ const revenueDesk = {
 		navigation: 'revenue_desk-bookings',
 	},
 	'/[partner_id]/revenue-desk/control-panel': {
-		navigation: 'revenue_desk-booking',
+		navigation: 'revenue_desk-bookings',
 	},
 };
 
