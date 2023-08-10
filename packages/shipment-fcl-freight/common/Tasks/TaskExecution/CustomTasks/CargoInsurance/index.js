@@ -4,9 +4,9 @@ import { useState, useContext, useMemo } from 'react';
 
 import useGetInsuranceDraftDetails from '../../../../../hooks/useGetInsuranceDraftDetails';
 
-import Step1 from './step1';
-import Step2 from './step2';
-import Step3 from './step3';
+import StepOne from './step1';
+import StepTwo from './step2';
+import StepThree from './step3';
 import getDefaultValues from './utils/getDefaultValues';
 
 const FIRST_STEP = 1;
@@ -23,6 +23,7 @@ function CargoInsurance({
 
 	const [step, setStep] = useState(FIRST_STEP);
 	const [addressId, setAddressId] = useState('');
+	const [premiumData, setPremiumData] = useState({});
 
 	const policyDetails = (servicesList || []).find(
 		(item) => item?.service_type === 'cargo_insurance_service',
@@ -58,7 +59,7 @@ function CargoInsurance({
 
 	if (step === FIRST_STEP) {
 		return (
-			<Step1
+			<StepOne
 				setStep={setStep}
 				step={step}
 				insuranceDetails={insuranceDetails}
@@ -75,7 +76,7 @@ function CargoInsurance({
 
 	if (step === SECOND_STEP) {
 		return (
-			<Step2
+			<StepTwo
 				setStep={setStep}
 				step={step}
 				insuranceDetails={insuranceDetails}
@@ -84,12 +85,13 @@ function CargoInsurance({
 				addressId={addressId}
 				billingData={billingData}
 				formProps={formProps}
+				setPremiumData={setPremiumData}
 			/>
 		);
 	}
 
 	return (
-		<Step3
+		<StepThree
 			setStep={setStep}
 			step={step}
 			insuranceDetails={insuranceDetails}
@@ -102,6 +104,7 @@ function CargoInsurance({
 			addressId={addressId}
 			billingData={billingData}
 			formProps={formProps}
+			premiumData={premiumData}
 		/>
 	);
 }

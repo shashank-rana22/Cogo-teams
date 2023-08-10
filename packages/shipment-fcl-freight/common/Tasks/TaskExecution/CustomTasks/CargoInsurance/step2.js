@@ -1,5 +1,6 @@
 import { Button, cl } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
+import { isEmpty } from '@cogoport/utils';
 
 import useGetInsuranceRate from '../../../../../hooks/useGetInsuranceRate';
 import useSaveDraft from '../../../../../hooks/useSaveDraft';
@@ -14,7 +15,7 @@ const BACK_STEP = 1;
 const LAST_STEP = 3;
 const INCREMENT_FACTOR = 1;
 
-function Step2({
+function StepTwo({
 	setStep = () => {},
 	step,
 	insuranceDetails = {},
@@ -23,6 +24,7 @@ function Step2({
 	addressId = '',
 	billingData = {},
 	formProps = {},
+	setPremiumData = () => {},
 }) {
 	const {
 		handleSubmit = () => {},
@@ -59,6 +61,7 @@ function Step2({
 	});
 
 	const handleNextStep = (key) => {
+		setPremiumData(isEmpty(premiumData) ? {} : premiumData);
 		handleSubmit((values) => {
 			const newFormValues = { ...insuranceDetails, ...values };
 			const payload = getPayload({
@@ -125,4 +128,4 @@ function Step2({
 	);
 }
 
-export default Step2;
+export default StepTwo;

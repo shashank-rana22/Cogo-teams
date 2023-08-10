@@ -14,7 +14,7 @@ import getPayloadForUpdateShipment from './utils/getPayloadForUpdateShipment';
 
 const BACK_STEP = 2;
 
-function Step3({
+function StepThree({
 	setStep = () => {},
 	step,
 	policyId = '',
@@ -27,6 +27,7 @@ function Step3({
 	task = {},
 	addressId = '',
 	billingData = {},
+	premiumData = {},
 }) {
 	const [uploadProof, setUploadProof] = useState(null);
 
@@ -64,15 +65,23 @@ function Step3({
 	const formData = watch();
 	const showLoading =	loading || sendCustomerEmailLoading || policyGenerationLoading;
 
-	const isDisableForCustomerConfirmation = () => (
-		showLoading
-			|| isEmpty(formData.invoiceNo)
-			|| !formData.invoiceDate
-			|| isEmpty(formData.gstDoc)
-			|| isEmpty(formData.invoiceDoc)
-			|| isEmpty(formData.panDoc)
-	);
-
+	const handleMail = () => {
+		const serviceChargeList = premiumData?.serviceChargeList || [];
+		const payload = {
+			cargo_value          : formData?.cargoAmount,
+			cargo_value_currency : formData?.policyCurrency,
+			net_convenience      : serviceChargeList.find(
+				(i) => i?.serviceName === 'convenience_charges',
+			)?.netCharges,
+			net_platform: serviceChargeList.find(
+				(i) => i?.serviceName === 'platform_charges',
+			)?.netCharges,
+			net_premium: serviceChargeList.find(
+				(i) => i?.serviceName === 'premium',
+			)?.netCharges,
+		};
+		sendCustomerEmail(payload);
+	};
 	const handleNextStep = ({ submit = false }) => {
 		handleSubmit((values) => {
 			const newFormValues = { ...insuranceDetails, ...values };
@@ -124,8 +133,7 @@ function Step3({
 
 				<Button
 					size="md"
-					onClick={sendCustomerEmail}
-					disabled={isDisableForCustomerConfirmation()}
+					onClick={handleMail}
 					className={styles.btn_div}
 				>
 					Send email for Customer confirmation
@@ -153,4 +161,4 @@ function Step3({
 	);
 }
 
-export default Step3;
+export default StepThree;
