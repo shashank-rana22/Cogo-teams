@@ -17,14 +17,14 @@ function Read({
 					{children.map(({ childrenLabel, childrenKey, className }) => (
 						<div className={styles[className]} key={childrenKey}>
 							<p>{childrenLabel}</p>
-							<p>{values?.[childrenKey] || ''}</p>
+							<p className={styles.value_text}>{(values?.[childrenKey] || '')}</p>
 						</div>
 					))}
 				</div>
 			) : (
 				<div key={key} className={styles[`section_one_child_1-${key}`]}>
 					<p>{label}</p>
-					<p>{values?.[key] || ''}</p>
+					<p className={styles.value_text}>{(values?.[key] || '')}</p>
 				</div>
 			)))
 		);
@@ -36,7 +36,7 @@ function Read({
 				{SECTION_THREE_MAPPINGSS.map(({ label, key }) => (
 					<div className={styles['section_three-element']} key={key}>
 						<span>{label}</span>
-						<p>{values?.[key] || ''}</p>
+						<p className={styles.value_text}>{(values?.[key] || '')}</p>
 					</div>
 				))}
 			</div>
@@ -141,11 +141,11 @@ function Read({
 
 						<tbody>
 							<tr>
-								<td>{container_number}</td>
-								<td>{marks_and_number}</td>
-								<td>{package_description}</td>
-								<td>{gross_weight}</td>
-								<td>{measurement}</td>
+								<td className={styles.value_text}>{container_number}</td>
+								<td className={styles.value_text}>{marks_and_number}</td>
+								<td className={styles.value_text}>{package_description}</td>
+								<td className={styles.value_text}>{gross_weight}</td>
+								<td className={styles.value_text}>{measurement}</td>
 							</tr>
 						</tbody>
 					</table>

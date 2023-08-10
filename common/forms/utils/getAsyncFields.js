@@ -360,6 +360,20 @@ function asyncFieldsTicketTypes() {
 	};
 }
 
+function asyncTicketsCategory() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'configuration_categories',
+		authkey      : 'get_tickets_configuration_categories',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+		searchByq    : true,
+	};
+}
+
 function asyncListHsCodes() {
 	return {
 		labelKey    : 'name',
@@ -868,6 +882,7 @@ export {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncTicketsCategory,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,

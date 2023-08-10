@@ -85,7 +85,7 @@ function TicketSummary({
 					</div>
 					<div className={styles.updated_at}>
 						{formatDate({
-							date       : updatedAt,
+							date       : createdAt,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/mm/yyyy'],
 							separator  : ', ',
 							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
