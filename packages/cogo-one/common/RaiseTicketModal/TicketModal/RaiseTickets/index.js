@@ -1,4 +1,5 @@
 import { isEmpty, upperCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import useRaiseTicketControls from '../../../../configurations/ticket-controls';
 import { getFieldController } from '../../../../utils/getFieldController';
@@ -6,10 +7,16 @@ import { getFieldController } from '../../../../utils/getFieldController';
 import styles from './styles.module.css';
 
 function RaiseTickets({
-	shipmentData = {}, watchOrgId = '',
-	control = {}, errors = {}, additionalInfo = [],
+	watch = () => {}, shipmentData = {}, control = {}, errors = {}, additionalInfo = [],
+	resetField = () => {}, setAdditionalInfo = () => {},
 }) {
-	const { importer_exporter_id: organizationId = '' } = shipmentData || {};
+	const { importer_exporter_id: organizationId = '', service = '', trade_type = '' } = shipmentData || {};
+
+	const [subCategories, setSubCategories] = useState([]);
+
+	const watchOrgId = watch('organization_id');
+	const watchCategory = watch('category');
+	const watchSubCategory = watch('sub_category');
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : upperCase(item),
@@ -20,8 +27,21 @@ function RaiseTickets({
 		disabled       : true,
 	}));
 
+	const formattedSubCategories = (subCategories || []).map((item) => ({
+		label : item?.name,
+		value : item?.name,
+	}));
+
 	const controls = useRaiseTicketControls({
 		watchOrgId,
+		watchSubCategory,
+		setSubCategories,
+		watchCategory,
+		service,
+		trade_type,
+		setAdditionalInfo,
+		formattedSubCategories,
+		resetField,
 	}).concat(additionalControls);
 
 	return (

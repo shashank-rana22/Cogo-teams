@@ -1,9 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
-import useListDefaultTypes from '../../../hooks/useListDefaultTypes';
 import useRaiseTicket from '../../../hooks/useRaiseTicket';
 
 import RaiseTickets from './RaiseTickets';
@@ -16,30 +14,20 @@ const getDefaultValues = ({ shipmentData = {} }) => ({
 });
 
 function TicketModal({ shipmentData = {}, setShowRaiseTicket = () => {} }) {
-	const { ticketDefaultTypeData = {} } = useListDefaultTypes({ shipmentData });
-	const {
-		TicketType: ticketType = '',
-		AdditionalInfo: additionalInfo = '',
-	} = ticketDefaultTypeData[GLOBAL_CONSTANTS.zeroth_index] || {};
-
+	const [additionalInfo, setAdditionalInfo] = useState([]);
 	const defaultFormValues = getDefaultValues({ shipmentData });
-
-	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({ setShowRaiseTicket, additionalInfo });
 
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
+		resetField,
 		watch,
-		setValue = () => {},
 	} = useForm({
 		defaultValues: defaultFormValues,
 	});
-	const watchOrgId = watch('organization_id');
 
-	useEffect(() => {
-		setValue('issue_type', ticketType);
-	}, [setValue, ticketType]);
+	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({ setShowRaiseTicket, additionalInfo });
 
 	return (
 		<form onSubmit={handleSubmit(raiseTickets)}>
@@ -47,11 +35,12 @@ function TicketModal({ shipmentData = {}, setShowRaiseTicket = () => {} }) {
 
 			<Modal.Body className={styles.preview_modal_body}>
 				<RaiseTickets
+					watch={watch}
 					errors={errors}
 					control={control}
-					additionalInfo={additionalInfo}
+					resetField={resetField}
 					shipmentData={shipmentData}
-					watchOrgId={watchOrgId}
+					setAdditionalInfo={setAdditionalInfo}
 				/>
 			</Modal.Body>
 

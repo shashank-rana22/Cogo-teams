@@ -1,10 +1,24 @@
-import { asyncFieldsTicketTypes, asyncFieldsOrganizations, asyncFieldsOrganizationUser } from '@cogoport/forms';
+import {
+	asyncFieldsTicketTypes, asyncFieldsOrganizations, asyncFieldsOrganizationUser,
+	asyncTicketsCategory,
+} from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
-import { merge } from '@cogoport/utils';
 
-const useRaiseTicketControls = ({ watchOrgId }) => {
-	const ticketTypeOptions = useGetAsyncTicketOptions(merge(asyncFieldsTicketTypes(), { initialCall: false }));
+const useRaiseTicketControls = ({
+	watchOrgId, setSubCategories, setAdditionalInfo, formattedSubCategories, resetField,
+	watchCategory, watchSubCategory, service, trade_type,
+}) => {
+	const ticketTypeOptions = useGetAsyncTicketOptions({
+		...asyncFieldsTicketTypes(),
+		params: {
+			Service     : service || undefined,
+			TradeType   : trade_type || undefined,
+			Category    : watchCategory || undefined,
+			Subcategory : watchSubCategory || undefined,
+		},
+	});
+	const categoryOptions = useGetAsyncTicketOptions({ ...asyncTicketsCategory() });
 
 	const organizationOptions = useGetAsyncOptions({
 		...asyncFieldsOrganizations(),
@@ -19,6 +33,31 @@ const useRaiseTicketControls = ({ watchOrgId }) => {
 
 	return [
 		{
+			...(categoryOptions || {}),
+			label          : 'Select category',
+			name           : 'category',
+			controllerType : 'select',
+			placeholder    : 'Select Type',
+			isClearable    : true,
+			rules          : { required: true },
+			defaultOptions : true,
+			onChange       : (_, val) => {
+				setSubCategories(val?.subcategories);
+				resetField('sub_category');
+				resetField('issue_type');
+			},
+		},
+		{
+			label          : 'Select Sub-category',
+			name           : 'sub_category',
+			controllerType : 'select',
+			placeholder    : 'Select sub category',
+			rules          : { required: true },
+			isClearable    : true,
+			options        : formattedSubCategories,
+			onChange       : () => resetField('issue_type'),
+		},
+		{
 			...(ticketTypeOptions || {}),
 			label          : 'Select issue type',
 			name           : 'issue_type',
@@ -27,8 +66,7 @@ const useRaiseTicketControls = ({ watchOrgId }) => {
 			isClearable    : true,
 			rules          : { required: true },
 			defaultOptions : true,
-			showOptional   : false,
-			disabled       : true,
+			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
 		},
 		{
 			label          : 'Describe Issue',
