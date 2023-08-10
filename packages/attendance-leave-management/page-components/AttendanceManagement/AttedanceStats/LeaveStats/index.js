@@ -18,7 +18,7 @@ function LeaveStats() {
 					</div>
 				</div>
 				<div className={styles.leave_stats_data}>
-					<div>
+					<div className={styles.leave_data}>
 						<div className={styles.leave_stats_data_item}>
 							Privilege Leaves
 						</div>
@@ -26,7 +26,7 @@ function LeaveStats() {
 							3
 						</div>
 					</div>
-					<div>
+					<div className={styles.leave_data}>
 						<div className={styles.leave_stats_data_item}>
 							Casual Leaves
 						</div>
@@ -34,7 +34,7 @@ function LeaveStats() {
 							3
 						</div>
 					</div>
-					<div>
+					<div className={styles.leave_data}>
 						<div className={styles.leave_stats_data_item}>
 							Sick Leaves
 						</div>

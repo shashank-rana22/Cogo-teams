@@ -34,7 +34,7 @@ function Header({ selectMonth, setSelectMonth }) {
 					/>
 				</div>
 
-				<Button themeType="secondary" size="lg">
+				<Button className={styles.donwload_btn} themeType="secondary" size="lg">
 					<span style={{ paddingRight: 10 }}>
 						Download Report
 					</span>

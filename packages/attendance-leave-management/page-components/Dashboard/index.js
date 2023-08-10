@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function AttendanceLeaveDashboard() {
 	const [activeTab, setActiveTab] = useState('attendance');
 	return (
-		<div>
+		<div className={styles.container}>
 			<h1>
 				Attendance & Leaves
 			</h1>

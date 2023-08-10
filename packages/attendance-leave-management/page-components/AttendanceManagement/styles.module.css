@@ -2,6 +2,11 @@
 	display: flex;
 	width: 100%;
 	padding-top: 24px;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+		width: 100%;
+	}
 }
 
 .check_in_style {
@@ -11,6 +16,11 @@
 	margin-right: 24px;
 	background-color: #f9f9f9;
 	border-radius: 16px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-right: 0;
+	}
 }
 
 .attendance_stats {
@@ -18,4 +28,9 @@
 	padding: 14px;
 	background-color: #f9f9f9;
 	border-radius: 16px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-top: 16px;
+	}
 }
