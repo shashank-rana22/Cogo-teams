@@ -1,22 +1,23 @@
 .location_name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	max-width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .location_name_tooltip {
-    word-break: normal;
+	word-break: normal;
 }
 
 .bold {
-    font-weight: 600;
+	font-weight: 600;
 }
 
 .volume {
-    font-weight: 600;
-    color: #849e4c;
+	font-weight: 600;
+	color: #849e4c;
 }
 
 .sub_heading {
-    color: #4f4f4f;
+	color: #4f4f4f;
 }
