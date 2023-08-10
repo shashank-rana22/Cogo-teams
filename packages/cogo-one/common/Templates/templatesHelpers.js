@@ -27,19 +27,10 @@ export function Preview({
 	fileValue = '',
 	setFileValue = () => {},
 	fileName = '',
-	shipmentData = {},
+	shipmentData = null,
 	customizableData = {},
 	orgId = '',
 }) {
-	const { serial_id } = shipmentData || {};
-
-	const {
-		originDisplay = {},
-		destinationDisplay = {},
-		originMainDisplay = {},
-		destinationMainDisplay = {},
-	} = formatRouteData({ item: shipmentData });
-
 	const formattedPreview = PREVIEW_REPLACE_MAPPING.reduce(
 		(accumulator, currentValue) => accumulator?.replaceAll(currentValue?.find, currentValue?.replace),
 		previewData,
@@ -52,31 +43,44 @@ export function Preview({
 		}));
 	};
 
-	useEffect(() => {
-		if (!isEmpty(shipmentData)) {
-			variables.map((itm) => (
-				setCustomizableData((prev) => ({
-					...prev,
-					[itm]            : shipmentData?.[itm] || '',
-					origin_port      : originDisplay || originMainDisplay,
-					destination_port : destinationDisplay || destinationMainDisplay,
-					shipment_id      : serial_id,
-				}))
-			));
-		}
-	}, [destinationDisplay,
-		destinationMainDisplay,
-		originDisplay, originMainDisplay, serial_id, setCustomizableData, shipmentData, variables]);
-
-	useEffect(() => {
-		if (!serial_id) {
-			setCustomizableData({
+	useEffect(
+		() => {
+			let newCustomData = {
 				origin_port      : '',
 				destination_port : '',
 				shipment_id      : '',
-			});
-		}
-	}, [setCustomizableData, serial_id]);
+			};
+
+			if (!isEmpty(shipmentData)) {
+				const { serial_id } = shipmentData || {};
+
+				const {
+					originDisplay = {},
+					destinationDisplay = {},
+					originMainDisplay = {},
+					destinationMainDisplay = {},
+				} = formatRouteData({ item: shipmentData || {} });
+
+				newCustomData = {
+					origin_port      : originDisplay || originMainDisplay,
+					destination_port : destinationDisplay || destinationMainDisplay,
+					shipment_id      : serial_id,
+				};
+
+				const variabledData = variables.filter(
+					(itm) => !['origin_port', 'destination_port', 'shipment_id'].includes(itm),
+				);
+
+				variabledData.map((itm) => ({
+					...(newCustomData || {}),
+					[itm]: shipmentData?.[itm] || '',
+				}));
+			}
+
+			setCustomizableData(newCustomData);
+		},
+		[setCustomizableData, shipmentData, variables],
+	);
 
 	return (
 		<>

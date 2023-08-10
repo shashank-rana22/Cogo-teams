@@ -28,7 +28,7 @@ function Templates({
 	userName = '',
 	orgId = '',
 }) {
-	const [shipmentData, setShipmentData] = useState({});
+	const [shipmentData, setShipmentData] = useState(null);
 	const [customizableData, setCustomizableData] = useState({});
 	const [activeCard, setActiveCard] = useState({
 		show : DEFAULT_OPTIONS.includes(type),

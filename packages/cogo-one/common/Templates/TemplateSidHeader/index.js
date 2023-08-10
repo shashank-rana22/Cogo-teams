@@ -9,17 +9,11 @@ import styles from './styles.module.css';
 
 const SHIPMENT_ARR_MIN_LENGTH = 2;
 
-const ShipmentDetails = ({ shipmentArr }) => (shipmentArr || []).map((itm) => {
-	if (!itm) {
-		return null;
-	}
-
-	return (
-		<div className={styles.chips} key={itm}>
-			{itm}
-		</div>
-	);
-});
+const ShipmentDetails = ({ shipmentArr }) => (shipmentArr || []).map((itm) => (
+	<div className={styles.chips} key={itm}>
+		{itm}
+	</div>
+));
 
 function TemplateSidHeader({
 	shipmentData = {},
@@ -27,9 +21,20 @@ function TemplateSidHeader({
 	orgId = '',
 }) {
 	const { shipment_type = '', serial_id } = shipmentData || {};
-	const details = serviceDetails({ detail: shipmentData, service: shipment_type });
+	const details = serviceDetails({ detail: shipmentData || {}, service: shipment_type });
 
-	const shipmentArr = LABELS.map((item) => RENDER_VALUE_MAPPING[item]?.(details) || details[item] || '');
+	const shipmentArr = LABELS.reduce(
+		(acc, item) => {
+			const val = RENDER_VALUE_MAPPING[item]?.(details) || details[item] || '';
+
+			if (val?.trim()) {
+				return [...acc, val];
+			}
+
+			return acc;
+		},
+		[],
+	);
 
 	return (
 		<div className={styles.select_section}>
