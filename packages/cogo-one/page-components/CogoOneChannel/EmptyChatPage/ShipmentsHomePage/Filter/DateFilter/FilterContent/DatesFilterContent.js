@@ -28,28 +28,33 @@ function DatesFilterContent({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.radio_container}>
-				<RadioGroup
-					options={dateRanges}
-					value={range}
-					onChange={setRange}
-				/>
+			<div className={styles.title}>
+				Filters
 			</div>
-
-			{range === 'custom' ? (
-				<div>
-					<SingleDateRange
-						value={date}
-						isPreviousDaysAllowed
-						onChange={setDate}
-						maxDate={new Date()}
+			<div className={styles.child_container}>
+				<div className={styles.radio_container}>
+					<RadioGroup
+						options={dateRanges}
+						value={range}
+						onChange={setRange}
 					/>
 				</div>
-			) : null}
 
+				{range === 'custom' ? (
+					<div>
+						<SingleDateRange
+							value={date}
+							isPreviousDaysAllowed
+							onChange={setDate}
+							maxDate={new Date()}
+							placeholder="Select Date Range"
+						/>
+					</div>
+				) : null}
+			</div>
 			<div className={styles.button_wrap}>
 				<Button
-					themeType="secondary"
+					themeType="tertiary"
 					className={styles.cancel_btn}
 					onClick={() => setOpen(false)}
 				>

@@ -77,14 +77,6 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 					Bookings
 				</div>
 				<div className={styles.filter_container}>
-					<div className={styles.custom_date_filter}>
-						<Filter
-							setDateFilters={setDateFilters}
-							range={range}
-							setRange={setRange}
-						/>
-					</div>
-
 					<Input
 						size="sm"
 						value={params?.value}
@@ -102,6 +94,14 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 						options={SHIPMENT_TYPE_OPTIONS}
 						isClearable
 					/>
+					<div className={styles.custom_date_filter}>
+						<Filter
+							setDateFilters={setDateFilters}
+							range={range}
+							setRange={setRange}
+						/>
+					</div>
+
 				</div>
 			</div>
 			<div className={styles.shipments_cards_container}>
