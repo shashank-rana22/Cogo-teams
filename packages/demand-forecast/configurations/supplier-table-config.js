@@ -6,8 +6,8 @@ const getSupplierTableConfig = () => {
 			width : '40%',
 		},
 		{
-			key   : 'potential',
-			title : 'Potential',
+			key   : 'win_probability',
+			title : 'Win Probability',
 			width : '15%',
 		},
 		{

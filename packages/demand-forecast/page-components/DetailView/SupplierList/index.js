@@ -1,8 +1,7 @@
 import { Pagination } from '@cogoport/components';
-import { useState } from 'react';
 
 import getSupplierTableConfig from '../../../configurations/supplier-table-config';
-import SupplierDataConfig from '../../../configurations/suppliers-data-config';
+import useGetRollingFclFreightSuppliers from '../../../hooks/useGetRollingFclFreightSuppliers';
 import Card from '../Card';
 
 import styles from './styles.module.css';
@@ -10,11 +9,13 @@ import styles from './styles.module.css';
 const DEFAULT_PAGE_SIZE = 0;
 const DEFAULT_TOTAL_ITEM = 0;
 const DEFAULT_CURRENT_PAGE = 1;
-const DEFAULT_PAGE = 1;
 
-function SupplierList() {
-	const dataList = SupplierDataConfig();
-	const [page, setPage] = useState(DEFAULT_PAGE);
+function SupplierList({ origin_location_id = '', destination_location_id = '' }) {
+	const {
+		list:dataList = [], pageData, page, setPage,
+	} =	 useGetRollingFclFreightSuppliers({ origin_location_id, destination_location_id });
+
+	// const dataList = SupplierDataConfig();
 
 	const tableConfig = getSupplierTableConfig();
 
@@ -34,9 +35,9 @@ function SupplierList() {
 			<div className={styles.pagination_container}>
 				<Pagination
 					className="md"
-					totalItems={dataList?.total_count || DEFAULT_TOTAL_ITEM}
+					totalItems={pageData?.total_count || DEFAULT_TOTAL_ITEM}
 					currentPage={page || DEFAULT_CURRENT_PAGE}
-					pageSize={dataList?.page_limit || DEFAULT_PAGE_SIZE}
+					pageSize={pageData?.page_limit || DEFAULT_PAGE_SIZE}
 					onPageChange={setPage}
 					type="table"
 				/>
