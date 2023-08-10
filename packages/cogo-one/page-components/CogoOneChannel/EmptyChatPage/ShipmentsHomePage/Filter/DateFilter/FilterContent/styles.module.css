@@ -4,21 +4,15 @@
 
 	:global {
 		.react-datepicker__input-container input {
-			width: 220px !important;
+			width: 200px !important;
 			height: 32px;
 		}
 	}
 }
 
-.radio {
-	display: block;
-	flex: 1;
-	padding: 12px;
-}
-
 .button_wrap {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	padding-top: 10px;
 }
 
@@ -31,7 +25,7 @@
 }
 
 .apply_btn {
-	margin: 0 5px;
+	margin: 0 4px;
 	color: #fff;
 	background: #000;
 }
@@ -40,6 +34,7 @@
 	:global {
 		.ui_radiogroup_container {
 			display: block;
+			padding: 0;
 		}
 	}
 }

@@ -5,8 +5,8 @@ import { useCallback, useEffect, useState } from 'react';
 const DEFAULT_PAGE = 1;
 const FILTERS_STATES = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'];
 
-const getParams = ({ pagination, serialId, shipmentType = '', filters = {} }) => {
-	const { start_date = '', end_date = '' } = filters;
+const getParams = ({ pagination, serialId, shipmentType = '', dateFilters = {} }) => {
+	const { start_date = '', end_date = '' } = dateFilters;
 	return {
 		filters: {
 			state                   : FILTERS_STATES,
@@ -22,7 +22,7 @@ const getParams = ({ pagination, serialId, shipmentType = '', filters = {} }) =>
 	};
 };
 
-function useListShipments({ filters = {} }) {
+function useListShipments({ dateFilters = {} }) {
 	const [params, setParams] = useState({
 		query        : '',
 		pagination   : DEFAULT_PAGE,
@@ -40,14 +40,14 @@ function useListShipments({ filters = {} }) {
 		async ({ pagination, serialId, shipmentType }) => {
 			try {
 				await trigger({
-					params: getParams({ pagination, serialId, shipmentType, filters }),
+					params: getParams({ pagination, serialId, shipmentType, dateFilters }),
 				});
 				setParams((prev) => ({ ...prev, pagination }));
 			} catch (e) {
 				console.error('e:', e);
 			}
 		},
-		[filters, trigger],
+		[dateFilters, trigger],
 	);
 
 	const handlePageChange = (val) => {

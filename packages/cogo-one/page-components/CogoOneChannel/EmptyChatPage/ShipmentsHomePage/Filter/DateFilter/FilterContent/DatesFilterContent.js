@@ -1,8 +1,8 @@
 import { Button, RadioGroup, SingleDateRange } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
-import dateRangesFilter from '../../../../../constants/dateRangesFilter';
-import { DATES_MAPPING } from '../../../../../utils/datesMapping';
+import dateRangesFilter from '../../../../../../../constants/dateRangesFilter';
+import { DATES_MAPPING } from '../../../../../../../utils/datesMapping';
 
 import styles from './styles.module.css';
 
@@ -49,6 +49,7 @@ function DatesFilterContent({
 
 			<div className={styles.button_wrap}>
 				<Button
+					themeType="secondary"
 					className={styles.cancel_btn}
 					onClick={() => setOpen(false)}
 				>
@@ -56,6 +57,7 @@ function DatesFilterContent({
 				</Button>
 
 				<Button
+					themeType="accent"
 					onClick={handleClick}
 					className={styles.apply_btn}
 				>

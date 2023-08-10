@@ -53,7 +53,7 @@ function ListShipmentCards({
 function ShipmentsHomePage({ setActiveTab = () => {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
 	const [range, setRange] = useState('current_month');
-	const [filters, setFilters] = useState({ ...getDefaultFilters({ range }) });
+	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
 
 	const {
 		listLoading,
@@ -61,7 +61,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 		setParams,
 		params,
 		handlePageChange = () => {},
-	} = useListShipments({ filters });
+	} = useListShipments({ dateFilters });
 
 	const {
 		list = [],
@@ -79,7 +79,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 				<div className={styles.filter_container}>
 					<div className={styles.custom_date_filter}>
 						<Filter
-							setFilters={setFilters}
+							setDateFilters={setDateFilters}
 							range={range}
 							setRange={setRange}
 						/>

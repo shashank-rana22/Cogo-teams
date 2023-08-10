@@ -5,17 +5,17 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { startDateOfMonth } from '../../../../../../utils/startDateOfMonth';
-import FilterContent from '../../FilterContent';
 
+import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 
-function DateFilter({ setFilters = () => {}, range = 'current_month', setRange = () => {} }) {
+function DateFilter({ setDateFilters = () => {}, range = 'current_month', setRange = () => {} }) {
 	const [openCalendar, setOpenCalendar] = useState(false);
 	const [date, setDate] = useState({});
 
 	const handleApplyFilters = () => {
 		const dates = startDateOfMonth({ date });
-		setFilters((prevFilters) => ({
+		setDateFilters((prevFilters) => ({
 			...prevFilters,
 			...dates,
 		}));
