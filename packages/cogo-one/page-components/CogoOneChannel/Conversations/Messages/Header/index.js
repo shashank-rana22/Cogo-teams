@@ -45,8 +45,8 @@ function Header({
 	hasNoFireBaseRoom = false,
 }) {
 	const {
-		updateRoomLoading,
-		updateUserRoom,
+		updateRoomLoading = false,
+		updateUserRoom = () => {},
 	} = useUpdateUserRoom();
 
 	const { requestToJoinGroup, dissmissTransferRequest } = useTransferChat({ firestore, activeMessageCard });

@@ -12,7 +12,7 @@ const formatBody = ({ mailResData = {}, attachmentResData = {} }) => {
 	const { value: allAttachements } = attachmentResData?.data || {};
 
 	return allAttachements?.reduce(
-		(prevContent, attachment) => prevContent.replaceAll(
+		(prevContent, attachment) => prevContent?.replaceAll(
 			`cid:${attachment.contentId}`,
 			`data:${attachment.contentType};base64,${attachment.contentBytes}`,
 		),

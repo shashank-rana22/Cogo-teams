@@ -28,7 +28,7 @@ function MailBody({
 	} = response || {};
 
 	const {
-		getEmailBody,
+		getEmailBody = () => {},
 		message: bodyMessage = '',
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source });

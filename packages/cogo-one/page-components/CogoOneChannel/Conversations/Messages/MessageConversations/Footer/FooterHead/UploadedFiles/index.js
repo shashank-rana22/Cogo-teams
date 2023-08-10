@@ -2,23 +2,7 @@ import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
-
-function deleteFile({
-	uploadedFiles,
-	fileLink,
-	uploaderRef = {},
-}) {
-	if (typeof uploadedFiles === 'string') {
-		uploaderRef.current?.externalHandleDelete(null);
-		return null;
-	}
-
-	const filteredFiles = uploadedFiles.filter((eachFile) => eachFile !== fileLink);
-
-	uploaderRef.current?.externalHandleDelete(filteredFiles);
-
-	return filteredFiles;
-}
+import { deleteFile } from './uploadFileHelpers';
 
 function UploadedFiles({
 	roomId = '',

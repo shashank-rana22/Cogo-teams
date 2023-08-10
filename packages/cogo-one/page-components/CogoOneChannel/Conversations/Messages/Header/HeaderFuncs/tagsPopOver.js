@@ -1,48 +1,10 @@
-import { Popover, Select, Button } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import PopoverContent from './popoverContent';
 import styles from './styles.module.css';
-
-function PopoverContent({
-	loading = false,
-	filteredOptions = [],
-	prevTags = [],
-	setIsVisible = () => {},
-	updateChat = () => {},
-}) {
-	const [headertags, setheaderTags] = useState('');
-
-	return (
-		<div>
-			<div className={styles.input_container}>
-				<Select
-					onChange={setheaderTags}
-					value={loading ? '' : headertags}
-					options={filteredOptions}
-					placeholder="Select Tags"
-				/>
-			</div>
-			<div className={styles.buttons_container}>
-				<Button size="sm" themeType="tertiary" onClick={() => setIsVisible(false)}>
-					reset
-				</Button>
-				<Button
-					size="sm"
-					themeType="accent"
-					loading={loading}
-					onClick={() => {
-						updateChat({ tags: [headertags, ...(prevTags || [])] });
-						setIsVisible(false);
-					}}
-				>
-					submit
-				</Button>
-			</div>
-		</div>
-	);
-}
 
 function TagsPopOver({
 	prevTags = [],

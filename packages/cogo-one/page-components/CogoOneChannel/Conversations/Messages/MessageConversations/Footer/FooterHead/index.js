@@ -74,7 +74,7 @@ function FooterHead({
 								To:
 							</div>
 							<MailRecipientType
-								{...emailReceipientProps}
+								{...(emailReceipientProps || {})}
 								emailRecipientType={emailState?.toUserEmail}
 								type="toUserEmail"
 								errorValue={errorValue}
@@ -109,7 +109,7 @@ function FooterHead({
 											:
 										</div>
 										<MailRecipientType
-											{...emailReceipientProps}
+											{...(emailReceipientProps || {})}
 											emailRecipientType={emailState?.[eachItem.value]}
 											type={eachItem.value}
 											errorValue={errorValue}

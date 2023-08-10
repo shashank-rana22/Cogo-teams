@@ -35,7 +35,7 @@ function CogoOne() {
 		},
 	} = useRouter();
 
-	const { userId, token, userEmailAddress, userName } = useSelector(({ profile, general }) => ({
+	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile, general }) => ({
 		userId           : profile?.user?.id,
 		userName         : profile?.user?.name,
 		token            : general.firestoreToken,

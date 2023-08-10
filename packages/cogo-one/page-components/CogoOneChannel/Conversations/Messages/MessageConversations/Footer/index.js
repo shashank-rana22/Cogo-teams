@@ -63,7 +63,7 @@ function Footer({
 			ccrecipients  : [],
 			bccrecipients : [],
 		});
-		uploaderRef?.current?.externalHandleDelete?.();
+		uploaderRef?.current?.externalHandleDelete?.(channel_type === 'email' ? [] : '');
 		setMailActions({ actionType: '', data: {} });
 	};
 
@@ -161,7 +161,14 @@ function Footer({
 
 	useEffect(() => {
 		setEmailState(getEmailState({ mailActions, email }));
-	}, [mailActions, email]);
+
+		const defaultValue = channel_type === 'email' ? [] : '';
+
+		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
+		setDraftUploadedFiles((prev) => ({ ...prev, [id]: defaultValue }));
+
+		uploaderRef?.current?.externalHandleDelete?.(defaultValue);
+	}, [mailActions, email, id, channel_type]);
 
 	return (
 		<>
@@ -219,6 +226,7 @@ function Footer({
 					</div>
 				)}
 				<TextAreaComponent
+					key={mailActions?.actionType}
 					rows={5}
 					placeholder={getPlaceHolder({ hasPermissionToEdit, canMessageOnBotSession })}
 					className={styles.text_area}

@@ -11,14 +11,14 @@ const ENDPOINT_MAPPING = {
 };
 
 const getCommunicationPayload = ({
-	userId,
-	formattedData,
-	draftMessage,
-	uploadedFiles,
-	emailState,
-	mailActions,
-	name,
-	source,
+	userId = '',
+	formattedData = {},
+	draftMessage = '',
+	uploadedFiles = [],
+	emailState = {},
+	mailActions = {},
+	name = '',
+	source = '',
 }) => {
 	const { actionType = '', data = {} } = mailActions || {};
 

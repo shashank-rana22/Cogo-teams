@@ -20,8 +20,8 @@ function MailAttachments({ mediaUrls = [] }) {
 	return (
 		<div className={styles.container}>
 			{(formatedFiles || []).map(
-				(file) => (
-					<div className={styles.preview_wrapper} key={file.fileUrl}>
+				(file = {}) => (
+					<div className={styles.preview_wrapper} key={file?.fileUrl}>
 						{file?.fileIcon || null}
 						<div
 							role="presentation"
