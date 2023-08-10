@@ -17,7 +17,7 @@ import styles from './styles.module.css';
 
 function Edit({
 	setOpen = () => { },
-	CN_STATUS_MAPPING,
+	CN_STATUS_MAPPING = {},
 	prevData = {},
 	item = {},
 	cnRefetch = () => { },
@@ -86,7 +86,7 @@ function Edit({
 				});
 			});
 
-			checkError[key].forEach((t) => {
+			checkError?.[key]?.forEach((t) => {
 				if (!isEmpty(t)) {
 					isError = true;
 				}
@@ -137,7 +137,8 @@ function Edit({
 				<div>
 					<b>Date</b>
 					<span>
-						&nbsp; -
+						{' '}
+						-
 						{formatDate({
 							date       : item?.created_at,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],

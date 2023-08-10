@@ -57,7 +57,7 @@ const useCreateShipmentCreditNote = ({
 				});
 			});
 
-			checkError[key].forEach((t) => {
+			checkError?.[key]?.forEach((t) => {
 				if (!isEmpty(t)) {
 					isError = true;
 				}
