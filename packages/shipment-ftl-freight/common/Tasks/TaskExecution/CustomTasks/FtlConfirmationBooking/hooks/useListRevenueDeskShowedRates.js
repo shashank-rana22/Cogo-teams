@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useEffect, useCallback } from 'react';
 
 const useListRevenueDeskShowedRates = ({
@@ -22,7 +23,7 @@ const useListRevenueDeskShowedRates = ({
 			};
 			await trigger({ params });
 		} catch (err) {
-			console.error(err);
+			toastApiError(err);
 		}
 	}, [trigger, shipment_id, service_type, service_ids]);
 
