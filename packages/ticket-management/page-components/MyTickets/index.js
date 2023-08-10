@@ -10,8 +10,9 @@ import StatsSection from './StatsSection';
 import styles from './styles.module.css';
 
 function MyTickets() {
-	const [additionalInfo, setAdditionalInfo] = useState();
+	const [additionalInfo, setAdditionalInfo] = useState([]);
 	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
+	const [spectatorType, setSpectatorType] = useState('reviewer');
 	const [refreshList, setRefreshList] = useState({
 		Open      : false,
 		Pending   : false,
@@ -36,8 +37,13 @@ function MyTickets() {
 				<span className={styles.title}>My Tickets</span>
 				<Button onClick={() => setShowRaiseTicket(true)}>Raise Ticket</Button>
 			</div>
-			<StatsSection />
-			<FilterTicketsSection refreshList={refreshList} setRefreshList={setRefreshList} />
+			<StatsSection spectatorType={spectatorType} />
+			<FilterTicketsSection
+				refreshList={refreshList}
+				setRefreshList={setRefreshList}
+				spectatorType={spectatorType}
+				setSpectatorType={setSpectatorType}
+			/>
 
 			<Modal
 				placement="right"

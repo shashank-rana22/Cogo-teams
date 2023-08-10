@@ -1,0 +1,10 @@
+.container {
+	background-color: var(--color-secondary-5);
+}
+
+.pagination_container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	margin: 30px 26px 16px 0;
+}

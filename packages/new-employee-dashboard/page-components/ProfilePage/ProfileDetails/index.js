@@ -1,7 +1,10 @@
-import { Accordion, Pill } from '@cogoport/components';
+import { Accordion, Pill, Button, Modal } from '@cogoport/components';
+import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
+import EditIdentificationDocuments from './EditIdentificationDocuments';
+import PersonalDetails from './EditPersonalInformation';
 import IdentificationDocuments from './IdentificationDocuments';
 import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
@@ -22,6 +25,9 @@ function RenderPills({ name = '', isCompleted = false, isDocsApproved }) {
 
 function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeDetailsLoading }) {
 	const { progress_stats = {}, documents } = profileData || {};
+
+	const [show, setShow] = useState('');
+
 	const {
 		personal_details = {},
 	} = progress_stats;
@@ -37,11 +43,13 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 			name        : 'personal_information',
 			content     : PersonalInformation,
 			isCompleted : address_details && personal_information,
+			component   : PersonalDetails,
 		},
 		{
 			name        : 'identification_documents',
 			content     : IdentificationDocuments,
 			isCompleted : identification_documents,
+			component   : EditIdentificationDocuments,
 		},
 	];
 
@@ -51,7 +59,7 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 	return (
 		<div className={styles.container}>
 			{(MAPPING || []).map((item) => {
-				const { content: Component = null, isCompleted, name } = item || {};
+				const { content: Component = null, isCompleted, name, component : ModalComponent } = item || {};
 
 				return (
 					<div
@@ -70,7 +78,34 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 										name={name}
 										isCompleted={isCompleted}
 									/>
+									<Button
+										className={styles.styled_button}
+										themeType="secondary"
+										onClick={() => setShow(name)}
+									>
+										<IcMEdit style={{ marginRight: '8px' }} />
+										Edit
+									</Button>
+									{show === name ? (
+										<Modal
+											size="xl"
+											show={show}
+											onClose={() => setShow('')}
+											placement="top"
+											closeOnOuterClick
+										>
+											<Modal.Header title={name} />
+											<div className={styles.styled_body}>
+												<Modal.Body>
+													<ModalComponent
+														data={profileData}
+														getEmployeeDetails={getEmployeeDetails}
+													/>
+												</Modal.Body>
+											</div>
 
+										</Modal>
+									) : null}
 								</div>
 							)}
 							animate={false}

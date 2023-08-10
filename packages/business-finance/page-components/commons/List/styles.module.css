@@ -105,3 +105,12 @@
 	display: flex;
 	justify-content: center;
 }
+
+.accordian_style {
+	display: flex;
+	align-items: center;
+	min-height: 40px;
+	padding-left: 10px;
+	background-color: #f3fafa;
+	border-top: 1px solid #f8f2e7;
+}

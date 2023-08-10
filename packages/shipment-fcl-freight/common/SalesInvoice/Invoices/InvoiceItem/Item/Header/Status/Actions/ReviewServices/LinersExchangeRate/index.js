@@ -10,12 +10,12 @@ const FIRST_PARAMETER = 1;
 
 function LinersExchangeRateConfirm({
 	invoice = {},
-	setShowExchangeRateConfirmation = () => {},
+	show = false,
+	onClose = () => {},
 	setShow = () => {},
-	showExchangeRateConfirmation = '',
 }) {
 	return (
-		<Modal show={showExchangeRateConfirmation} onClose={() => setShow(false)} width={800} closeOnOuterClick={false}>
+		<Modal show={show} onClose={onClose} width={800} closeOnOuterClick={false}>
 			<Modal.Header title="MARK AS REVIEWED - WARNING" />
 			<Modal.Body>
 				<div className={styles.form}>
@@ -52,13 +52,13 @@ function LinersExchangeRateConfirm({
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => setShow(false)}
+					onClick={onClose}
 				>
 					Close
 				</Button>
 				<Button
 					size="md"
-					onClick={() => setShowExchangeRateConfirmation(false)}
+					onClick={() => setShow(false)}
 				>
 					Proceed
 				</Button>

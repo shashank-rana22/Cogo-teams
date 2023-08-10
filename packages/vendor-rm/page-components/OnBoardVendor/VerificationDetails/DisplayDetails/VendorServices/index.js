@@ -5,9 +5,8 @@ import getOfficeLocation from '../../../../../utils/getOfficeLocation';
 
 import styles from './styles.module.css';
 
-const fieldsToShow = {
+const FIELDS_TO_SHOW = {
 	category           : 'Service category',
-	sub_category       : 'Service Sub-Category',
 	cogoport_office_id : 'Cogoport Office',
 };
 
@@ -22,14 +21,14 @@ function VendorServices({
 
 			<div className={styles.body}>
 				{(detail || []).map((item) => (
-					<div className={styles.single_record}>
-						{Object.keys(fieldsToShow).map((wantedField) => {
+					<div className={styles.single_record} key={item.id}>
+						{Object.keys(FIELDS_TO_SHOW).map((wantedField) => {
 							const val = item[wantedField];
 
 							return (
 								<div key={wantedField} className={styles.fields_to_show}>
 									<div className={styles.label}>
-										{fieldsToShow[wantedField]}
+										{FIELDS_TO_SHOW[wantedField]}
 									</div>
 
 									<div className={styles.value}>

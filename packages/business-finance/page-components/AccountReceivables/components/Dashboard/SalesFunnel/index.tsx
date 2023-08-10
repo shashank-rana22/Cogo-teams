@@ -1,4 +1,5 @@
 import { Tooltip, Placeholder, Select } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -21,9 +22,13 @@ interface SalesFunnelProps {
 	salesFunnelMonth?: string,
 	setSalesFunnelMonth?: (p:string)=>void,
 	salesFunnelLoading?: boolean
+	entityCode?: string
 }
 
-function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, salesFunnelLoading }: SalesFunnelProps) {
+function SalesFunnel({
+	salesFunnelData, salesFunnelMonth, setSalesFunnelMonth,
+	salesFunnelLoading, entityCode,
+}: SalesFunnelProps) {
 	const {
 		draftInvoicesCount = '',
 		draftToFinanceAcceptedPercentage = '',
@@ -33,6 +38,8 @@ function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, s
 		settledInvoicesCount = '',
 		settledPercentage = '',
 	} = salesFunnelData || {};
+
+	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
 	const salesFunnel = [
 		{
@@ -49,7 +56,7 @@ function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, s
 		},
 		{
 			id         : 3,
-			name       : 'IRN Generated',
+			name       : `${irnLabel} Generated`,
 			count      : irnGeneratedInvoicesCount || 0,
 			percentage : settledPercentage || 0,
 		},

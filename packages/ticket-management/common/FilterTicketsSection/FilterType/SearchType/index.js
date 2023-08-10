@@ -5,9 +5,9 @@ import { SPECTATOR_TYPE_OPTIONS } from '../../../../constants';
 
 import styles from './styles.module.css';
 
-function SearchType(props) {
-	const { searchParams, setSearchParams, isAdmin } = props;
-
+function SearchType({
+	searchParams = {}, setSearchParams = () => {}, isAdmin = false, spectatorType = '', setSpectatorType = () => {},
+}) {
 	return (
 		<div className={styles.search_container}>
 			<Input
@@ -30,12 +30,9 @@ function SearchType(props) {
 				<Select
 					size="sm"
 					placeholder="Select view"
-					value={searchParams.spectatorType}
+					value={spectatorType}
 					options={SPECTATOR_TYPE_OPTIONS}
-					onChange={(val) => setSearchParams((prev) => ({
-						...prev,
-						spectatorType: val,
-					}))}
+					onChange={(val) => setSpectatorType(val)}
 					isClearable
 				/>
 			)}

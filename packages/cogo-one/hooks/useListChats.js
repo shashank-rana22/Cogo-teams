@@ -77,7 +77,7 @@ function useListChats({
 
 	), [searchQuery]);
 
-	const setActiveMessage = useCallback(async (val) => {
+	const setActiveMessage = useCallback((val) => {
 		const { channel_type, id } = val || {};
 		if (channel_type && id) {
 			try {
@@ -85,7 +85,7 @@ function useListChats({
 					firestore,
 					`${FIRESTORE_PATH[channel_type]}/${id}`,
 				);
-				await updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_messages: false });
+				updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_messages: false });
 				setActiveTab((prev) => ({ ...prev, hasNoFireBaseRoom: false, data: val }));
 			} catch (e) {
 				Toast.error('Chat Not Found');

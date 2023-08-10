@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { AsyncSelectController, SelectController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useEffect } from 'react';
@@ -7,6 +8,8 @@ import React, { useEffect } from 'react';
 import AccordianView from '../../../common/Accordianview';
 
 import styles from './styles.module.css';
+
+const ONE_OPTION = 1;
 
 function CollectionPartyDetails({
 	control,
@@ -41,7 +44,7 @@ function CollectionPartyDetails({
 	const bilingAddressGst = watch('collection_party_address');
 
 	const collectionPartyAddress = collectionPartyAddresses?.find(
-		(item) => item?.tax_number === bilingAddressGst,
+		(item) => item?.id === bilingAddressGst,
 	);
 
 	const collectionPartyBankOptions = [];
@@ -80,7 +83,7 @@ function CollectionPartyDetails({
 	useEffect(() => {
 		const parseOptions = JSON.parse(stringifycollectionPartyAddresses || []);
 		if (parseOptions?.length === 1) {
-			setValue('collection_party_address', parseOptions?.[0].tax_number);
+			setValue('collection_party_address', parseOptions?.[GLOBAL_CONSTANTS.zeroth_index].id);
 		}
 	}, [stringifycollectionPartyAddresses, setValue]);
 
@@ -118,7 +121,7 @@ function CollectionPartyDetails({
 				if (
 					address?.address
 					=== purchaseInvoiceValues?.collection_party_address
-					|| address?.tax_number === purchaseInvoiceValues?.collection_party_address
+					|| address?.id === purchaseInvoiceValues?.collection_party_address
 				) {
 					newCollectionParty = cp;
 					collectionPartyAdd = address;
@@ -127,11 +130,11 @@ function CollectionPartyDetails({
 		});
 
 		if (newCollectionParty) {
-			setValue('collection_party_address', collectionPartyAdd?.tax_number);
+			setValue('collection_party_address', collectionPartyAdd?.id);
 			setValue('collection_party_bank_details', purchaseInvoiceValues?.collection_party_bank_details);
 			setCollectionParty({
 				...newCollectionParty,
-				collection_party_address      : collectionPartyAdd?.tax_number,
+				collection_party_address      : collectionPartyAdd?.id,
 				collection_party_bank_details : purchaseInvoiceValues?.collection_party_bank_details,
 			});
 		}
@@ -145,13 +148,13 @@ function CollectionPartyDetails({
 			setCollectionParty(obj);
 			setValue('collection_party', v);
 		}
-		if (collectionPartyAddresses?.length === 1) {
-			setValue('collection_party_address', collectionPartyAddresses?.[0].tax_number);
+		if (collectionPartyAddresses?.length === ONE_OPTION) {
+			setValue('collection_party_address', collectionPartyAddresses?.[GLOBAL_CONSTANTS.zeroth_index].id);
 		} else {
 			setValue('collection_party_address', '');
 		}
-		if (collectionPartyBankOptions?.length === 1) {
-			setValue('collection_party_bank_details', collectionPartyBankOptions?.[0]?.data?.bank_account_number);
+		if (collectionPartyBankOptions?.length === ONE_OPTION) {
+			setValue('collection_party_bank_details', collectionPartyBankOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.data?.bank_account_number);
 		} else {
 			setValue('collection_party_bank_details', '');
 		}
@@ -190,6 +193,10 @@ function CollectionPartyDetails({
 		{
 			label : 'GST Number :',
 			value : `${collectionPartyAddress?.tax_number || '-'}`,
+		},
+		{
+			label : 'Beneficiary Name :',
+			value : `${collectionPartyBank?.data?.account_holder_name || '-'}`,
 		},
 	];
 

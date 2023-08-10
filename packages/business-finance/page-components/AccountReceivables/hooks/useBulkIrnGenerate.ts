@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 interface Props {
 	getOrganizationInvoices?:Function,
@@ -13,7 +14,15 @@ interface Props {
 const useBulkIrnGenerate = (
 	{ entityCode, getOrganizationInvoices, checkedRows, setCheckedRows, setIsHeaderChecked }:Props,
 ) => {
-	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].labels.irn_label;
+	const { user_profile: userProfile = {} } = useSelector(({ profile }) => ({
+		user_profile: profile,
+	}));
+
+	const { user = {} } = userProfile;
+
+	const { id: userId = '' } = user;
+
+	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 	const [
 		{ loading:bulkIrnLoading },
 		bulkIrnTrigger,
@@ -30,7 +39,8 @@ const useBulkIrnGenerate = (
 		try {
 			const resp = await bulkIrnTrigger({
 				data: {
-					invoiceIds: checkedRows,
+					invoiceIds : checkedRows,
+					updatedBy  : userId,
 				},
 			});
 			if (resp.status === 200) {

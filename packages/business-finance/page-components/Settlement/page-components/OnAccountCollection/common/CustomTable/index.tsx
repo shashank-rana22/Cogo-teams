@@ -1,5 +1,5 @@
 import { Checkbox, Pagination } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -53,8 +53,8 @@ function CustomTable(
 ) {
 	const GET_STATUS = ['POSTED', 'CREATED', 'APPROVED', 'POSTING_FAILED'];
 
-	const GET_ENTITY = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).filter(
-		(key) => GLOBAL_CONSTANTS.cogoport_entities?.[key]?.feature_supported?.includes('post_to_sage'),
+	const GET_ENTITY = Object.keys(ENTITY_FEATURE_MAPPING).filter(
+		(key) => ENTITY_FEATURE_MAPPING[key]?.feature_supported?.includes('post_to_sage'),
 	);
 
 	const isCheckBoxAllowed = (item) => GET_STATUS.includes(item?.paymentDocumentStatus)

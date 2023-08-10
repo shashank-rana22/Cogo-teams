@@ -42,6 +42,7 @@ const getElementController = (type = 'text') => {
 			return DepartureDateSelectController;
 
 		case 'textArea':
+		case 'textarea':
 			return TextAreaController;
 
 		case 'checkbox':
@@ -60,7 +61,7 @@ const getElementController = (type = 'text') => {
 			return RadioGroupController;
 
 		default:
-			return InputController;
+			return null;
 	}
 };
 

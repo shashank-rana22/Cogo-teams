@@ -25,6 +25,7 @@ function UpdateContainerDetails({
 			pendingTask={pendingTask}
 			onCancel={onCancel}
 			services={services}
+			taskLoading={loading}
 			taskListRefetch={taskListRefetch}
 		/>
 	);

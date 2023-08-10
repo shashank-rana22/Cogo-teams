@@ -1,4 +1,5 @@
 import { Modal, Button, RadioGroup, Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -10,12 +11,11 @@ import OtpInput from './OtpInput';
 import styles from './styles.module.css';
 
 const USER_MOBILE_NUMBER_INDEX = 1;
-const USER_ID_INDEX = 0;
 const OTP_LENGTH = 4;
 
 function OTPVerification({
-	showOtpModal = false,
-	setShowOTPModal = () => {},
+	show = false,
+	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
@@ -27,7 +27,7 @@ function OTPVerification({
 
 	const refetchAfterVerifydOtpApiCall = () => {
 		setModalIsOpen(false);
-		setShowOTPModal(false);
+		onClose();
 		refetch();
 	};
 
@@ -61,7 +61,7 @@ function OTPVerification({
 		if (!isEmpty(selectedUser)) {
 			const payload = {
 				invoice_id : invoice?.id,
-				user_id    : selectedUser?.split('_')?.[USER_ID_INDEX],
+				user_id    : selectedUser?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
 			};
 			await sendOtpForInvoiceApproval(payload);
 		}
@@ -91,10 +91,10 @@ function OTPVerification({
 
 	return (
 		<div>
-			{showOtpModal ? (
+			{show ? (
 				<Modal
-					show={showOtpModal}
-					onClose={() => setShowOTPModal(false)}
+					show={show}
+					onClose={onClose}
 					closeOnOuterClick={false}
 				>
 					<Modal.Header title="Select user to send OTP" />
@@ -105,15 +105,13 @@ function OTPVerification({
 
 					<Modal.Footer className={styles.modal_footer}>
 						<Button
-							size="md"
 							themeType="secondary"
-							onClick={() => setShowOTPModal(false)}
+							onClick={onClose}
 						>
 							Cancel
 						</Button>
 
 						<Button
-							size="md"
 							onClick={handleClick}
 							disabled={isEmpty(userList) || isEmpty(selectedUser)}
 						>
@@ -147,21 +145,27 @@ function OTPVerification({
 
 					<Modal.Footer className={styles.modal_footer}>
 						<Button
-							size="md"
+							themeType="secondary"
+							onClick={onClose}
+						>
+							Cancel
+						</Button>
+
+						<Button
+							themeType="accent"
+							onClick={() => sendOtpForInvoiceApproval()}
+						>
+							Resend OTP
+						</Button>
+
+						<Button
 							disabled={verifyInvoiceLoader || isEmpty(otpValue)}
 							onClick={() => onClickSubmitOtp({
 								mobile_otp : otpValue,
 								invoice_id : invoice?.id,
 							})}
 						>
-							SUBMIT
-						</Button>
-
-						<Button
-							size="md"
-							onClick={() => sendOtpForInvoiceApproval()}
-						>
-							Resend OTP
+							Submit
 						</Button>
 					</Modal.Footer>
 				</Modal>

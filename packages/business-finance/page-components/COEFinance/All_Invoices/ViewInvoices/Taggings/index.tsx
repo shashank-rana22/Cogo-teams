@@ -5,13 +5,13 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 import TagMap from './TagMap';
 
-function Tagging({ billId, setRemarksVal, status }:
+function Tagging({ billId = '', setRemarksVal = () => {}, status = '' }:
 {
 	billId: string, status: string, setRemarksVal: React.Dispatch<React.SetStateAction<{
-		collectionPartyRemark: string;
-		billingPartyRemark: string;
-		invoiceDetailsRemark: string;
-		taggingRemark: string;
+		collectionPartyRemark: string[];
+		billingPartyRemark: string[];
+		invoiceDetailsRemark: string[];
+		taggingRemark: string[];
 
 	}>> }) {
 	const [value, setValue] = useState({ approve: '', reject: '', undo: '', remark: '' });

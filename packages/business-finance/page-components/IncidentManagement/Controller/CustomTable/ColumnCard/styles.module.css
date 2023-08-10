@@ -1,0 +1,29 @@
+.flex {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 10px;
+}
+
+.edit {
+	color: #f68b21;
+	cursor: pointer;
+}
+
+.background {
+	background-color: #f3fafa;
+}
+
+.marginbottom {
+	padding-top: 12px;
+	margin-bottom: 6px;
+}
+
+.cancel {
+	margin-right: 8px;
+}

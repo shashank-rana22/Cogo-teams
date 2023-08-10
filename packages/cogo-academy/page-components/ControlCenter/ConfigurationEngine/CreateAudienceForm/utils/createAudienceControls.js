@@ -16,7 +16,7 @@ const AUTH_FUNCTION_OPTIONS = [{ label: 'Sales', value: 'sales' },
 ];
 
 const PERSONA_OPTIONS = [
-	{ label: 'Channel Partner', value: 'channel_partner' },
+	{ label: 'Importer Exporter', value: 'importer_exporter' },
 	{ label: 'Service Provider', value: 'service_provider' },
 	{ label: 'All', value: 'all' },
 ];

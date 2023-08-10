@@ -98,6 +98,7 @@ function Dashboard({ entityCode }) {
 					</div>
 
 					<SalesFunnel
+						entityCode={entityCode}
 						salesFunnelMonth={salesFunnelMonth}
 						setSalesFunnelMonth={setSalesFunnelMonth}
 						salesFunnelData={salesFunnelData}

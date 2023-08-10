@@ -31,6 +31,7 @@ function EachTicket({
 		TicketActivity:{ Description:ticketActivityDescription = '' } = {},
 		Priority = '',
 		Status = '',
+		TicketStatus = '',
 		ID = '',
 		Type = '',
 		Description = '',
@@ -69,7 +70,7 @@ function EachTicket({
 		canPerformActions = '',
 		iconUrl = '',
 	} = getTicketActivityMapping({
-		status                  : Status,
+		status                  : TicketStatus,
 		canPerformRequestAction : agentId === TicketReviewerID,
 	}) || [];
 

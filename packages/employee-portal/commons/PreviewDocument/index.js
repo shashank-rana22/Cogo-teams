@@ -2,7 +2,6 @@ import FullView from './FullView';
 import styles from './styles.module.css';
 
 function PreviewDocument({
-	document_header,
 	height = '200px', width = '200px',
 	preview = false,
 	document_url = '',
@@ -12,41 +11,38 @@ function PreviewDocument({
 	employeeId,
 }) {
 	return (
-		<div className={styles.container}>
-			<div
-				className={styles.pdf}
-				style={{
-					minWidth  : '200px',
-					minHeight : '200px',
-				}}
+		<div className={styles.pdf}>
+			<object
+				data={document_url}
+				type="application/pdf"
+				style={{ height, width }}
 			>
-				<object
-					data={document_url}
-					type="application/pdf"
-					style={{ height, width }}
-				>
+				<p>
+					Your web browser doesn&apos;t have a PDF plugin.
+					Instead you can
+					{' '}
 					<a href={document_url}>
-						{document_header}
+						click here to
+						download the PDF file.
 					</a>
-				</object>
-				{
-					preview && (
-						<FullView
-							containerStyle={{
-								position : 'absolute',
-								bottom   : 8,
-								left     : 16,
-								right    : 16,
-							}}
-							url={document_url}
-							id={id}
-							policy_data={policy_data}
-							getEmployeeDetails={getEmployeeDetails}
-							employeeId={employeeId}
-						/>
-					)
-				}
-			</div>
+				</p>
+			</object>
+
+			{preview && (
+				<FullView
+					containerStyle={{
+						position : 'absolute',
+						bottom   : 8,
+						left     : 16,
+						right    : 16,
+					}}
+					url={document_url}
+					id={id}
+					policy_data={policy_data}
+					getEmployeeDetails={getEmployeeDetails}
+					employeeId={employeeId}
+				/>
+			)}
 		</div>
 	);
 }

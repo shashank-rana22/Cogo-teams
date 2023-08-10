@@ -1,0 +1,39 @@
+.box_div {
+	display: flex;
+	align-items: center;
+
+	& > div:nth-child(2) {
+		display: flex;
+		margin-left: 4px;
+	}
+}
+
+.btn_wrap {
+	display: flex;
+	justify-content: center;
+}
+
+.text {
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.rate {
+	display: flex;
+	justify-content: space-between;
+
+	&.final {
+		border-bottom: 1px solid #f2e2c3;
+	}
+}
+
+.tooltip_container {
+	max-width: 250px;
+	font-size: var(--font-size-sm);
+	font-weight: 300;
+}
+
+.btn_div {
+	margin-left: 16px;
+}

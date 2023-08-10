@@ -47,7 +47,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 								/>
 							)}
 						>
-							<div className={styles.tooltip_container}>Click Here To View</div>
+							<div className={styles.tooltip_container}>View Here</div>
 						</Tooltip>
 
 					</div>
@@ -80,7 +80,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 											caret={false}
 											content={(
 												<BLPopver
-													blDetails={item?.bill_of_ladings}
+													blDoDetails={docs}
 													bl_do={stateProps.activeTab}
 												/>
 											)}
