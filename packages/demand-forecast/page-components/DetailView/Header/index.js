@@ -1,8 +1,81 @@
+import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowBack, IcMPortArrow } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Header() {
+const NEGATIVE_INDEX = 1;
+const START_INDEX = 0;
+const MAX_LENGTH = 16;
+
+function RenderPortName({ portName = '' }) {
+	return (
+		<Tooltip content={<div style={{ color: 'grey' }}>{portName}</div>}>
+			<div>
+				{portName}
+				{portName?.substring(START_INDEX, MAX_LENGTH) || ''}
+				...
+			</div>
+		</Tooltip>
+	);
+}
+
+function PortNames({ locationInfo = {} }) {
+	const splitDisplayName = (locationInfo?.display_name || '').split(',');
+
+	const displayNameLength = splitDisplayName?.length;
+
+	const countryName = (locationInfo?.country || {}).name
+        || splitDisplayName[displayNameLength - NEGATIVE_INDEX]
+        || '';
+
+	const portCode = locationInfo?.port_code || '';
+	const portName = locationInfo?.name?.split('(')[GLOBAL_CONSTANTS.zeroth_index].split('-')[
+		GLOBAL_CONSTANTS.zeroth_index
+	] || '';
+
+	return (
+		<div className={styles.port_info_container}>
+			<div className={styles.port_info}>
+				<span>
+					<RenderPortName portName={portName} />
+				</span>
+				{portCode ? (
+					<span className={styles.port_code}>
+						(
+						{portCode}
+
+						)
+					</span>
+				) : null}
+			</div>
+			<div className={styles.country_name}>
+				,
+				{' '}
+				{countryName}
+			</div>
+		</div>
+	);
+}
+
+function Header({ origin_location = {}, destination_location = {}, week_info = {}, total_estimated_demand = '' }) {
+	const startDate = formatDate({
+		date       : week_info?.start_date,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		formatType : 'date',
+		separator  : ' | ',
+	});
+
+	const endDate = formatDate({
+		date       : week_info?.end_date,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		formatType : 'date',
+		separator  : ' | ',
+	});
+
+	console.log('origin_location::', origin_location);
+
 	return (
 		<div className={styles.header}>
 			<div className={styles.back}>
@@ -10,24 +83,28 @@ function Header() {
 			</div>
 
 			<div className={styles.location_info}>
-				<div>
-					<div>Jawaharlal Nehru (INNSA), India</div>
-				</div>
+				<PortNames locationInfo={origin_location} />
 				<div>
 					<IcMPortArrow />
 				</div>
+				<PortNames locationInfo={destination_location} />
+			</div>
+
+			<div className={styles.forecasted_demand}>
+				<div>Forecasted Demands</div>
 				<div>
-					<div>Jebel Ali (INNSA), Dubai</div>
+					{total_estimated_demand}
 				</div>
 			</div>
 
-			<div className={styles.port_pair_count}>
-				<div>Port Pair Count</div>
-				<div>-</div>
-			</div>
-			<div className={styles.forecasted_demand}>
-				<div>Forecasted Demand</div>
-				<div>500 TEUs</div>
+			<div className={styles.forecasted_dates}>
+				<div>Forecasted Dates</div>
+				<div>
+					{startDate}
+					{' '}
+					-
+					{endDate}
+				</div>
 			</div>
 		</div>
 	);

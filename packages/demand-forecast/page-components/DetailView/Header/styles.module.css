@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	height: 80px;
 	padding: 10px;
 	font-weight: 600;
 	background: var(--greyscale-secondary-white, #fff);
@@ -9,23 +10,37 @@
 
 .location_info {
 	display: flex;
-	flex: 3;
+	flex: 5;
 	justify-content: space-between;
 	padding: 0 80px;
 	margin: 10px;
+	font-size: 16px;
 	border-right: 1px dashed #bdbdbd;
 	border-left: 1px dashed #bdbdbd;
 }
 
-.port_pair_count {
-	flex: 2;
-	margin-left: 20px;
-}
-
 .forecasted_demand {
 	flex: 2;
+	margin-left: 30px;
+}
+
+.forecasted_dates {
+	flex: 2;
+	margin-left: 30px;
 }
 
 .back {
-	flex: 1;
+	flex: 0.5;
+}
+
+.port_info_container {
+	display: flex;
+}
+
+.port_info {
+	display: flex;
+}
+
+.port_code {
+	color: #f68b21;
 }
