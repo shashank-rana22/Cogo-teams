@@ -22,11 +22,11 @@ const getCollectionPartyParams = ({
 	const { partner:{ user_role_ids = [] } = {} } = profile_data || {};
 
 	if (isFcl && isImport) {
-		if (user_role_ids.includes(geo.uuid.document_control_manager) && stakeholder_wise_invoice_required) {
+		if (user_role_ids?.includes(geo.uuid.document_control_manager) && stakeholder_wise_invoice_required) {
 			return { required_bl_do_quotations: true };
 		}
 
-		if (user_role_ids.some((i) => geo.uuid.service_ops2_role_id.includes(i))) {
+		if (user_role_ids?.some((i) => geo.uuid.service_ops2_role_id.includes(i))) {
 			return { service_ops2_id: profile_data?.user?.id };
 		}
 	}
