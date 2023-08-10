@@ -1,39 +1,52 @@
-import getSubTableConfig from '../../../configurations/sub-table-config';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
+
+// import getSubTableConfig from '../../../configurations/sub-table-config';
+import useGetRollingForecastPortPairs from '../../../hooks/useGetRollingForecastPortPairs';
 
 import styles from './styles.module.css';
 import SubCardInfo from './SubCardInfo';
 
 const KEYS_MAPPING = {
-	port_pairs    : 'High Demand Port Pairs',
-	mini_clusters : 'Remining Clusters',
-
+	high_demanding_port_pairs : 'High Demand Port Pairs',
+	remaining_clusters        : 'Remining Clusters',
 };
 
-function SubCard({ showDetails = false }) {
+function SubCard({ showDetails = false, origin_cluster_id = '', destination_cluster_id = '' }) {
+	const { getRollingForecastPortPairs, data:portPairData } = useGetRollingForecastPortPairs();
+
+	useEffect(() => {
+		getRollingForecastPortPairs({ origin_cluster_id, destination_cluster_id });
+	}, [origin_cluster_id, destination_cluster_id, getRollingForecastPortPairs]);
+
+	console.log('portPairData::', portPairData);
+
 	if (!showDetails) {
 		return null;
 	}
 
-	const subConfig = getSubTableConfig();
+	if (isEmpty(portPairData)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.sub_card}>
-			{
-				Object.keys(subConfig).map((key) => (
-					<div key="123" className={styles.card}>
+			{Object.keys(portPairData).map((key) => (
+				!isEmpty(portPairData[key]) && (
+					<div key={key} className={styles.card}>
 						<div className={styles.title}>
 							{KEYS_MAPPING[key]}
 							{' '}
 							:
 						</div>
 						<div>
-							{(subConfig[key] || []).map((port_info) => (
-								<SubCardInfo portInfo={port_info} key="1234" />
+							{portPairData[key].map((port_info) => (
+								<SubCardInfo portInfo={port_info} key="123" />
 							))}
 						</div>
 					</div>
-				))
-			}
+				)
+			))}
 		</div>
 
 	);

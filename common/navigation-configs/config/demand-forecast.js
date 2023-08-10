@@ -3,7 +3,7 @@ const demandForecast = {
 		navigation : 'demand_forecast',
 		isMainNav  : true,
 	},
-	'/[partner_id]/demand-forecast/details': {
+	'/[partner_id]/demand-forecast/[origin_id]/[destination_id]': {
 		navigation : 'demand_forecast',
 		isMainNav  : true,
 	},

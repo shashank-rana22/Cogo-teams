@@ -1,26 +1,33 @@
 import { Button } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
 function SubCardInfo({ portInfo = {} }) {
+	const router = useRouter();
+
 	const {
-		orgin_port = '', destination_port = '', high_demand_port_pairs = 'NA',
-		rates_added = '', forecasted_demand = '',
+		origin_location = {}, destination_location = {}, high_demand_port_pairs = 'NA',
+		rates_added = '-', total_estimated_demand = '-',
 	} = portInfo;
+
+	const onView = () => {
+		router.push(`/demand-forecast/${origin_location?.id}/${destination_location?.id}`);
+	};
 
 	return (
 
 		<div className={styles.row}>
 			<dv className={styles.orgin_port}>
-				{orgin_port}
+				{origin_location?.display_name}
 			</dv>
 			<div className={styles.arrow_logo}>
 				<IcMPortArrow />
 			</div>
 
 			<div className={styles.destination_port}>
-				{destination_port}
+				{destination_location?.display_name}
 			</div>
 
 			<div className={styles.high_demand_port_pairs}>
@@ -32,10 +39,10 @@ function SubCardInfo({ portInfo = {} }) {
 			</div>
 
 			<div className={styles.forecasted_demand}>
-				{forecasted_demand}
+				{total_estimated_demand}
 			</div>
 
-			<Button size="md" themeType="secondary">View</Button>
+			<Button size="md" themeType="secondary" onClick={onView}>View</Button>
 		</div>
 	);
 }

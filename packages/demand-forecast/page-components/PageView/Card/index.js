@@ -48,7 +48,13 @@ function Card({ card = {} }) {
 					{showDetails ? <IcMArrowRotateUp /> : <IcMArrowRotateDown /> }
 				</div>
 			</div>
-			{showDetails && <SubCard showDetails={showDetails} />}
+			{showDetails && (
+				<SubCard
+					showDetails={showDetails}
+					origin_cluster_id={origin?.id}
+					destination_cluster_id={destination?.id}
+				/>
+			)}
 		</div>
 
 	);
