@@ -46,7 +46,6 @@ request.interceptors.request.use((oldConfig) => {
 	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
 
 	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
-	console.log('authorizationparameters:', authorizationparameters);
 
 	const apiPath = newConfig.url.split('/').pop();
 
