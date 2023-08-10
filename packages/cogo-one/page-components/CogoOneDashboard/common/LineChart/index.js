@@ -12,6 +12,9 @@ import Header from './Header';
 import LineChartLoader from './LoaderLineChart';
 import styles from './styles.module.css';
 
+const MIN_TEXT_ROTATION = 0;
+const TEXT_ROTATION = -25;
+
 function CustomToolTip({ point = {}, timeline = '' }) {
 	return (
 		<div className={styles.tooltip_box}>
@@ -55,7 +58,7 @@ function LineChart({
 				) : (
 					<ResponsiveLine
 						data={data}
-						margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
+						margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
 						xScale={{ type: 'point' }}
 						yFormat=" >-.2f"
 						axisTop={null}
@@ -64,9 +67,9 @@ function LineChart({
 							orient         : 'bottom',
 							tickSize       : 5,
 							tickPadding    : 5,
-							tickRotation   : 0,
+							tickRotation   : timeline === 'day' ? TEXT_ROTATION : MIN_TEXT_ROTATION,
 							legend         : LABLE_TYPE[timeline]?.label,
-							legendOffset   : 36,
+							legendOffset   : 50,
 							legendPosition : 'middle',
 						}}
 						axisLeft={{
