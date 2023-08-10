@@ -1,4 +1,11 @@
+.table {
+	display: flex;
+	flex-direction: column;
+	padding: 0 16px;
+}
+
 .row {
 	display: flex;
-	justify-content: space-around;
+	align-items: center;
+	padding: 24px 0;
 }

@@ -3,7 +3,15 @@
 	background: #fff;
 }
 
-.header {
+.tableheader {
 	display: flex;
-	justify-content: space-around;
+	padding: 16px;
+	background: #fdfbf7;
+}
+
+.tableheader_item {
+	width: 25%;
+	font-weight: 700;
+	color: #4f4f4f;
+	text-transform: uppercase;
 }

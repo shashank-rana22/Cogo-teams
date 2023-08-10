@@ -276,6 +276,12 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'revenue_desk',
 	},
+	{
+		api          : 'create_revenue_desk_automation_parameters',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+
 ];
 
 export default apis;

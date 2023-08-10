@@ -1,3 +1,70 @@
 .outerContainer {
 	padding: 20px 40px;
 }
+
+.filter {
+	display: flex;
+	align-items: center;
+}
+
+.fieldContainer {
+	display: flex;
+	align-items: center;
+	margin: 0 8px;
+}
+
+.buttonContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 30px;
+	margin: 0 8px;
+
+	:global {
+		.ui_button_container {
+			height: 30px;
+			margin: 0 4px;
+		}
+	}
+}
+
+.booking_label {
+	display: flex;
+	align-items: center;
+}
+
+.popover {
+	display: flex;
+	align-items: center;
+	margin: 0 8px;
+
+	:global {
+		.ui_button_container {
+			&.grouped_filter_button {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				min-height: 32px;
+				font-size: 16px;
+				color: #bdbdbd;
+
+				&:hover {
+					background: #fff;
+					border: 1px solid #88cad1;
+				}
+			}
+		}
+
+		.ui_pill_container {
+			max-width: 80px;
+		}
+
+		.ui_pill_text {
+			overflow: hidden;
+			font-size: 12px;
+			color: #211f20;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+}
