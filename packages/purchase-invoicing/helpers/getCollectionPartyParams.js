@@ -8,7 +8,7 @@ const getCollectionPartyParams = ({
 }) => {
 	const geo = getGeoConstants();
 
-	const { stakeholder_wise_invoice_required } = geo.others.navigations.bookings.invoicing;
+	const { stakeholder_wise_invoice_required = false } = geo.others.navigations.bookings.invoicing;
 
 	const primary_service = servicesData?.find((i) => i.main_service_id === null);
 
