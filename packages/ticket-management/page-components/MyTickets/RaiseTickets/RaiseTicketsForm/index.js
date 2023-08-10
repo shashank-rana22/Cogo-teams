@@ -49,7 +49,7 @@ function RaiseTicketsForm({
 		resetField,
 	});
 
-	const controls = defaultControls.concat(additionalControls);
+	const controls = defaultControls?.concat(additionalControls);
 
 	const DISABLE_MAPPING = {
 		sub_category : [watchCategory],
