@@ -92,7 +92,7 @@ function SingleDeliveryDate(props, ref) {
 			const truckValues = (list || []).reduce((acc, itm) => {
 				if (itm?.service_type !== 'subsidiary_service') {
 					const truckExist = list.find(
-						(listItem) => itm?.truck_number === listItem?.truck_number,
+						(listItem) => (itm?.truck_number)?.toLowerCase() === (listItem?.truck_number)?.toLowerCase(),
 					) || {};
 					if (isEmpty(truckExist)) {
 						acc.push({ truck_number: itm?.id });

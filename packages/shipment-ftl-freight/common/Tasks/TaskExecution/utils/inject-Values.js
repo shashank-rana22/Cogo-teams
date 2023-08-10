@@ -174,7 +174,7 @@ const injectValues = ({
 
 		const filteredData = getData?.reduce((acc, item) => {
 			const requiredTruck = getApisData?.list_shipment_field_service_ops_details?.find(
-				(singleItem) => singleItem?.truck_number === item?.truck_number,
+				(singleItem) => (singleItem?.truck_number)?.toLowerCase() === (item?.truck_number)?.toLowerCase(),
 			) || {};
 			acc[item?.id] = isEmpty(requiredTruck) ? {} : requiredTruck;
 			return acc;

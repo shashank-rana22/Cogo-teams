@@ -113,7 +113,7 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 			const truckValues = (services || []).reduce((acc, item) => {
 				if (item?.service_type !== 'subsidiary_service') {
 					const truckExist = list.find(
-						(listItem) => item?.truck_number === listItem?.truck_number,
+						(listItem) => (item?.truck_number)?.toLowerCase() === (listItem?.truck_number)?.toLowerCase(),
 					) || {};
 					if (isEmpty(truckExist)) {
 						acc.push({ truck_number: item?.id });
