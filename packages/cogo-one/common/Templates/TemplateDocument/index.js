@@ -26,7 +26,7 @@ function TemplateDocument({
 				disabled={uploading}
 				handleProgress={setUploading}
 				className="file_uploader"
-						// accept=".png, .pdf, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx"
+				accept=".png, .pdf, .doc, .docx, .csv, .svg, .jpg, .jpeg"
 				uploadIcon={(
 					<div className={styles.upload_content}>
 						<IcMPdf />
@@ -37,6 +37,7 @@ function TemplateDocument({
 				onChange={setFileValue}
 				showProgress={false}
 				ref={uploaderRef}
+				channel="whatsapp_sid"
 			/>
 
 			{(fileValue && !uploading) && (
