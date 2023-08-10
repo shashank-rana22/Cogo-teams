@@ -704,8 +704,9 @@ export default {
 			},
 			bookings: {
 				invoicing: {
-					is_invoice_mergeable : false,
-					disable_edit_invoice : true,
+					is_invoice_mergeable              : false,
+					disable_edit_invoice              : true,
+					stakeholder_wise_invoice_required : true,
 				},
 			},
 			business_finance: {

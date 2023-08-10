@@ -71,6 +71,8 @@ function VoiceCall({ firestore = {} }) {
 		hangUpLoading,
 	} = useHangUpCall({
 		callRecordId,
+		firestore,
+		loggedInAgentId,
 	});
 
 	useEffect(() => {
