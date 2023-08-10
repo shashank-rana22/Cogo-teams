@@ -3,12 +3,13 @@ import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 const DEFAULT_PAGE = 1;
+const FILTERS_STATES = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'];
 
 const getParams = ({ pagination, serialId, shipmentType = '', filters = {} }) => {
 	const { start_date = '', end_date = '' } = filters;
 	return {
 		filters: {
-			state                   : ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
+			state                   : FILTERS_STATES,
 			serial_id               : serialId || undefined,
 			shipment_type           : shipmentType || undefined,
 			created_at_greater_than : start_date || undefined,

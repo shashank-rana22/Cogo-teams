@@ -1,16 +1,25 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { format, addDays } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { addDays } from '@cogoport/utils';
 
-import { DATES_MAPPING } from './dates-mapping';
+import { DATES_MAPPING } from './datesMapping';
 
 const ADD_ONE_DAY = 1;
 
-export const startDateOfMonth = ({ date = {}, dateformat = GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'] }) => ({
-	start_date : format(date.startDate || new Date(), dateformat),
-	end_date   : format(addDays(date.endDate || new Date(), ADD_ONE_DAY), dateformat),
+export const startDateOfMonth = ({ date = {} }) => ({
+	start_date: formatDate({
+		date       : date.startDate || new Date(),
+		formatType : 'date',
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	}),
+	end_date: formatDate({
+		date       : addDays(date.endDate || new Date(), ADD_ONE_DAY),
+		formatType : 'date',
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	}),
 });
 
 export const getDefaultFilters = ({ range }) => {
-	const defaultDate = DATES_MAPPING[range];
+	const defaultDate = DATES_MAPPING[range]?.(new Date());
 	return startDateOfMonth({ date: defaultDate });
 };

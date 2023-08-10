@@ -1,6 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { startDateOfMonth } from '../../../../../../utils/startDateOfMonth';
@@ -34,12 +35,19 @@ function DateFilter({ setFilters = () => {}, range = 'current_month', setRange =
 			<div
 				className={styles.date_filter_wrap}
 				role="presentation"
-				onClick={() => setOpenCalendar(!openCalendar)}
+				onClick={() => setOpenCalendar((prev) => !prev)}
 			>
 				<div className={styles.pill}>{startCase(range)}</div>
 				<div className={styles.border_right} />
-				{`${format(date.startDate, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])} - 
-				${format(date.endDate, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}`}
+				{`${formatDate({
+					date       : date.startDate || new Date(),
+					formatType : 'date',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				})} - ${formatDate({
+					date       : date.endDate || new Date(),
+					formatType : 'date',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				})}`}
 				<IcMArrowRotateDown />
 			</div>
 		</FilterContent>

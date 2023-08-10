@@ -1,8 +1,8 @@
 import { Button, RadioGroup, SingleDateRange } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
-import DATE_RANGES from '../../../../../constants/date-ranges-filter';
-import { DATES_MAPPING } from '../../../../../utils/dates-mapping';
+import dateRangesFilter from '../../../../../constants/dateRangesFilter';
+import { DATES_MAPPING } from '../../../../../utils/datesMapping';
 
 import styles from './styles.module.css';
 
@@ -20,19 +20,19 @@ function DatesFilterContent({
 	};
 
 	useEffect(() => {
-		const minMax = DATES_MAPPING[range];
+		const minMax = DATES_MAPPING[range]?.(new Date());
 		setDate({ ...minMax });
 	}, [range, setDate]);
+
+	const dateRanges = dateRangesFilter();
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.radio_container}>
 				<RadioGroup
-					options={DATE_RANGES}
+					options={dateRanges}
 					value={range}
-					onChange={(item) => {
-						setRange(item);
-					}}
+					onChange={setRange}
 				/>
 			</div>
 
