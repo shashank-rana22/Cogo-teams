@@ -11,6 +11,7 @@ import {
 	ApprovePurchaseDeduction,
 	UploadEWB,
 	PickAndDropTasks,
+	FtlConfirmationBooking,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -73,6 +74,19 @@ function ExecuteTask({
 				primaryService={primary_service}
 				shipment_data={shipment_data}
 				servicesList={servicesList}
+			/>
+		);
+	}
+
+	if (task.task === 'confirmation_of_booking_with_service_provider') {
+		return (
+			<FtlConfirmationBooking
+				onCancel={onCancel}
+				services={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
 			/>
 		);
 	}
