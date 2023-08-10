@@ -12,6 +12,7 @@ function ListCard({ item = {} }) {
 	const onRowClick = () => {
 		if (shipment_type === 'air_freight') {
 			Router.push(`/booking/air-freight/${id}`);
+			sessionStorage.setItem('air_booking_desk_nav', '/booking/air-freight/');
 		} else {
 			const newHref = `${window.location.origin}/${Router?.query?.partner_id}/shipments/${id}`;
 			window.location.replace(newHref);

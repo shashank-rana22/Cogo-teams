@@ -29,6 +29,7 @@ function Filter({
 			airport_id                 : '',
 			importer_exporter_id       : '',
 			triggered_pending_invoices : '',
+			state                      : '',
 		});
 		setFilters({});
 		sessionStorage.setItem('air_booking_desk', JSON.stringify({ serviceActiveTab, filters: {} }));
@@ -68,27 +69,29 @@ function Filter({
 
 	useEffect(() => {
 		const storageData = JSON.parse(sessionStorage.getItem('air_booking_desk'));
+		const prevNav = sessionStorage.getItem('air_booking_desk_nav') || '';
 
 		const {
 			serviceActiveTab: storageServiceActiveTab = 'air_freight',
 			filters: filter = {},
 		} = storageData || {};
 
-		if (serviceActiveTab !== storageServiceActiveTab) {
+		if (serviceActiveTab !== storageServiceActiveTab || isEmpty(prevNav)) {
 			reset({
-				tags                   : '',
-				fault_alarms_raised    : '',
-				origin_airport_id      : '',
-				destination_airport_id : '',
-				trade_type             : '',
-				airport_id             : '',
-				importer_exporter_id   : '',
-				state                  : '',
+				tags                       : '',
+				fault_alarms_raised        : '',
+				origin_airport_id          : '',
+				destination_airport_id     : '',
+				trade_type                 : '',
+				airport_id                 : '',
+				importer_exporter_id       : '',
+				triggered_pending_invoices : '',
+				state                      : '',
 			});
 			setFilters({});
 			sessionStorage.setItem('air_booking_desk', JSON.stringify({ serviceActiveTab, filters: {} }));
 		} else {
-			const prevServiceActiveTab = `${storageServiceActiveTab}_service`;
+			const prevServiceActiveTab = serviceActiveTab.concat('_service');
 
 			Object.keys(filter || {}).forEach((item) => {
 				if (item !== prevServiceActiveTab) {
@@ -100,9 +103,9 @@ function Filter({
 				}
 			});
 			setValue('tags', filter?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
-
 			setFilters(filter);
 			sessionStorage.setItem('air_booking_desk', JSON.stringify({ serviceActiveTab, filters: filter }));
+			sessionStorage.setItem('air_booking_desk_nav', '');
 		}
 	}, [serviceActiveTab, reset, setFilters, setValue]);
 
