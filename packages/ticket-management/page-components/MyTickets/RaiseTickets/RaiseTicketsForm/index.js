@@ -52,9 +52,7 @@ function RaiseTicketsForm({
 	const controls = defaultControls.concat(additionalControls);
 
 	const DISABLE_MAPPING = {
-		// trade_type   : [watchService],
-		// category     : [watchTradeType, watchService],
-		sub_category : [watchCategory, watchTradeType, watchService],
+		sub_category : [watchCategory],
 		issue_type   : [watchCategory, watchSubCategory, watchTradeType, watchService],
 	};
 

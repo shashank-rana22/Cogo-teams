@@ -18,6 +18,11 @@ function RaiseTickets({
 	const watchCategory = watch('category');
 	const watchSubCategory = watch('sub_category');
 
+	const DISABLE_MAPPING = {
+		sub_category : [watchCategory],
+		issue_type   : [watchCategory, watchSubCategory],
+	};
+
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : upperCase(item),
 		name           : item,
@@ -66,6 +71,7 @@ function RaiseTickets({
 							key={name}
 							control={control}
 							id={`${name}_input`}
+							disabled={DISABLE_MAPPING[name]?.some(isEmpty)}
 						/>
 						<div className={styles.error}>{errors?.[controlItem.name] && 'Required'}</div>
 					</div>

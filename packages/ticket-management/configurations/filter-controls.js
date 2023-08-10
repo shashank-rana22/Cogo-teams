@@ -37,6 +37,7 @@ const useRaiseTicketcontrols = ({
 			placeholder    : 'Select service',
 			rules          : { required: true },
 			options        : GLOBAL_CONSTANTS.shipment_types,
+			isClearable    : true,
 			onChange       : () => resetField('issue_type'),
 		},
 		{
@@ -46,6 +47,7 @@ const useRaiseTicketcontrols = ({
 			placeholder    : 'Select Trade Type',
 			rules          : { required: true },
 			options        : GLOBAL_CONSTANTS.trade_types,
+			isClearable    : true,
 			onChange       : () => resetField('issue_type'),
 		},
 		{
