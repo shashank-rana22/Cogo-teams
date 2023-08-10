@@ -36,7 +36,10 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 	const isLast = getFields.length - EXTRA_LENGTH;
 	const amount = ({ field }) => (item?.[`${mappings[field]}${taxType}`]
 	|| item?.[`${mappings[field]}`] || DEFAULT_AMOUNT);
-	const isNegative = amount < DEFAULT_AMOUNT;
+
+	const deviationPercent = item?.[`${LABEL_MAPPING[type]}${mappings.deviationPercent}${taxType}`];
+	const isDeviationPercentPositive = Number(deviationPercent) > DEFAULT_AMOUNT;
+
 	return (
 		<div className={styles.card}>
 			<div className={styles.head}>
@@ -56,10 +59,10 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 							},
 						})}
 						<span className={cl`${styles.percent} ${styles.value} ${isLast === index ? styles.isLast : ''} 
-					${isNegative ? styles.negative : styles.positive}`}
+					${isDeviationPercentPositive ? styles.positive : styles.negative}`}
 						>
 							{isLast === index
-								? `(${item?.[`${LABEL_MAPPING[type]}${mappings.deviationPercent}${taxType}`]} %)`
+								? `(${deviationPercent} %)`
 								: null}
 						</span>
 					</div>

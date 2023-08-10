@@ -7,23 +7,24 @@ import styles from './styles.module.css';
 
 const SERVICE_CATEGORY = ['Import', 'Export', 'Local', 'Domestic'];
 
-const SHIPMENT_TYPES = GLOBAL_CONSTANTS.shipment_types;
+const SHIPMENT_TYPES_OPTIONS = GLOBAL_CONSTANTS.shipment_types.map((item) => ({
+	label : item?.label,
+	value : (item.value).toUpperCase(),
+}));
 
 const SEGMENT_OPTIONS = [
-	{ label: 'Air', value: 'air' },
-	{ label: 'Ocean', value: 'ocean' },
-	{ label: 'Surface', value: 'surface' },
-	{ label: 'Rail', value: 'rail' },
+	{ label: 'Air', value: 'AIR' },
+	{ label: 'Ocean', value: 'OCEAN' },
+	{ label: 'Surface', value: 'SURFACE' },
+	{ label: 'Rail', value: 'RAIL' },
 ];
 
 const CHANNEL_OPTIONS = [
-	{ label: 'SME', value: 'SME' },
+	{ label: 'SME', value: 'mid_size' },
 	{ label: 'Enterprise', value: 'enterprise' },
-	{ label: 'Channel Partners', value: 'CP' },
-	{ label: 'Cogoverse', value: 'cogoverse' },
-	{ label: 'Longtail', value: 'longtail' },
-	{ label: 'FTL/LTL', value: 'ftl-ltl' },
-	{ label: 'Others', value: 'others' },
+	{ label: 'Channel Partners', value: 'channel_partner' },
+	{ label: 'Longtail', value: 'long_tail' },
+	{ label: 'Others', value: 'other' },
 ];
 
 function RenderFilters({
@@ -102,7 +103,7 @@ function RenderFilters({
 
 							</div>
 							<RadioGroup
-								options={SHIPMENT_TYPES}
+								options={SHIPMENT_TYPES_OPTIONS}
 								onChange={(val) => setFilter((prev) => ({
 									...prev,
 									[activeFilter]: val,
