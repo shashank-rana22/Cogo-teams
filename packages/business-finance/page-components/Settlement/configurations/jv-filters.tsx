@@ -31,4 +31,11 @@ export const jvFilters = [
 			{ label: 'POSTING FAILED', value: 'POSTING_FAILED' },
 		],
 	},
+	{
+		name                  : 'accountingDate',
+		type                  : 'singleDateRange',
+		span                  : 3.5,
+		placeholder           : 'Accounting Date',
+		isPreviousDaysAllowed : true,
+	},
 ];
