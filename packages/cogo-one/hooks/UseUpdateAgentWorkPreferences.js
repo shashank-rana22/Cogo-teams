@@ -21,7 +21,11 @@ const getPayload = ({ type }) => {
 	};
 };
 
-function useUpdateAgentWorkPreferences({ fetchworkPrefernce = () => {}, agentTimeline = () => {} }) {
+function useUpdateAgentWorkPreferences({
+	fetchworkPrefernce = () => {},
+	agentTimeline = () => {},
+	setIsShaking = () => {},
+}) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/update_agent_work_preference',
 		method : 'post',
@@ -34,10 +38,11 @@ function useUpdateAgentWorkPreferences({ fetchworkPrefernce = () => {}, agentTim
 			});
 			agentTimeline();
 			fetchworkPrefernce();
+			setIsShaking(false);
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
 		}
-	}, [trigger, fetchworkPrefernce, agentTimeline]);
+	}, [trigger, fetchworkPrefernce, agentTimeline, setIsShaking]);
 
 	return {
 		updateWorkPreference,

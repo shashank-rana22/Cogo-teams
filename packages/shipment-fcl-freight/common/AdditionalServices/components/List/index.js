@@ -2,7 +2,7 @@ import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
@@ -25,13 +25,11 @@ const SHOW_MORE_PAGE_LIMIT = 16;
 const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent',
 	'superadmin', 'admin'];
 
-function List({ isSeller = false }) {
+function List({ isSeller = false, source = '' }) {
 	const {
-		servicesList, refetchServices = () => {},
-		shipment_data, activeStakeholder, primary_service, stakeholderConfig,
-	} = useContext(
-		ShipmentDetailContext,
-	);
+		servicesList = [], refetchServices = () => {},
+		shipment_data = {}, activeStakeholder = '', primary_service = {}, stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
 
 	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
 		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
@@ -42,7 +40,10 @@ function List({ isSeller = false }) {
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
 
-	const { list: additionalServiceList, refetch = () => {}, loading, totalCount } = useListAdditionalServices();
+	const {
+		list: additionalServiceList = [],
+		refetch = () => {}, loading, totalCount,
+	} = useListAdditionalServices({ pageLimit });
 
 	const handleRefetch = () => {
 		refetchServices();
@@ -52,6 +53,7 @@ function List({ isSeller = false }) {
 	const refetchForUpdateSubService = () => {
 		setShowModal(false);
 		refetch();
+		refetchServices();
 	};
 
 	const updateResponse = useUpdateShipmentAdditionalService({
@@ -173,7 +175,9 @@ function List({ isSeller = false }) {
 								status={item?.status}
 								setAddSellPrice={setShowModal}
 								updateResponse={updateResponse}
+								refetch={refetch}
 								source="add_sell_price"
+								refetchServices={refetchServices}
 							/>
 						</Modal.Body>
 					</Modal>
@@ -199,6 +203,7 @@ function List({ isSeller = false }) {
 						refetch={refetch}
 						setItem={setItem}
 						setShowChargeCodes={setShowModal}
+						source={source}
 					/>
 				)
 				: null}

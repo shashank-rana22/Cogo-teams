@@ -58,14 +58,9 @@ function AdditionalDetails({
 							control={control}
 							name="irn_number"
 							placeholder="IRN Number"
-							rules={{ required: true }}
 							value={purchaseInvoiceValues?.irn_number}
 						/>
-						{errors?.irn_number ? (
-							<div className={styles.errors}>
-								Irn Number is Required
-							</div>
-						) : null}
+
 					</div>
 				</div>
 				{formValues?.invoice_type === 'credit_note' ? (
@@ -166,14 +161,8 @@ function AdditionalDetails({
 									control={control}
 									name="mawb_no"
 									placeholder="MAWB No"
-									rules={{ required: true }}
 									value={purchaseInvoiceValues?.mawb_no}
 								/>
-								{errors?.mawb_no ? (
-									<div className={styles.errors}>
-										Mawb No is Required
-									</div>
-								) : null}
 							</div>
 						</div>
 						<div className={styles.inputcontainer}>
@@ -183,15 +172,9 @@ function AdditionalDetails({
 									control={control}
 									name="package_count"
 									placeholder="Package Count"
-									rules={{ required: true }}
 									value={purchaseInvoiceValues?.package_count}
 									type="number"
 								/>
-								{errors?.package_count ? (
-									<div className={styles.errors}>
-										Package Count is Required
-									</div>
-								) : null}
 							</div>
 						</div>
 						<div className={styles.inputcontainer}>
@@ -201,14 +184,8 @@ function AdditionalDetails({
 									control={control}
 									name="weight"
 									placeholder="Chargeable Weight"
-									rules={{ required: true }}
 									value={purchaseInvoiceValues?.weight}
 								/>
-								{errors?.weight ? (
-									<div className={styles.errors}>
-										Weight is Required
-									</div>
-								) : null}
 							</div>
 						</div>
 					</>

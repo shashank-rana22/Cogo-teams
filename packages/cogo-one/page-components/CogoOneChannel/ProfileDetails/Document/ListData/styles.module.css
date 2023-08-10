@@ -120,8 +120,12 @@
 .card_footer {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 	margin-top: 3px;
+}
+
+.tag_action {
+	justify-content: space-between;
 }
 
 .shipment_id {

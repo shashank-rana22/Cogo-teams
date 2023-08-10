@@ -21,15 +21,15 @@ import TransactionInsights from './TransactionInsights';
 
 const IMAGE_SRC = 'https://cogoport-production.sgp1.digitaloceanspaces.com/1b40f946b221e5c1c03e3563ded91913/Vector.png';
 function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipments }) {
-	const [isPillSelected, setIsPillSelected] = useState(false);
+	const [isPillSelected, setIsPillSelected] = useState({ origin: false, destination: false });
 	const [showDetail, setShowDetail] = useState(true);
 	const [activeTabPanel, setActiveTabPanel] = useState('view_quotation');
 	const [priceData, setPriceData] = useState(null);
 	const { data:revenueDeskDecisionsData } = useListRevenueDeskDecisions({ shipmentId: itemData?.id });
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
 	const shipment_services = servicesData?.list || [];
-	const handlePillSelected = () => {
-		setIsPillSelected((prev) => !prev);
+	const handlePillSelected = (trade_type) => {
+		setIsPillSelected((prev) => ({ ...prev, [trade_type]: !prev?.[trade_type] }));
 	};
 
 	return (
@@ -48,14 +48,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 						<div className={styles.text}>
 							{serviceLabelMapping[itemData?.shipment_type]}
 						</div>
-						<div style={{
-							fontSize   : '14px',
-							fontWeight : '400',
-							color      : '#221F20',
-							marginLeft : '4px',
-							cursor     : 'pointer',
-						}}
-						>
+						<div className={styles.sid_tag}>
 							SID :
 							{' '}
 							{itemData?.serial_id}
@@ -75,6 +68,16 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 								color="#e6fae8"
 							>
 								Cogoport Assured
+							</Pill>
+						) : null}
+						{itemData?.is_organic_booking ? (
+							<Pill size="md" color="#e6fae8">
+								Organic Booking
+							</Pill>
+						) : null}
+						{itemData?.is_saas_subscribed ? (
+							<Pill size="md" color="#e6fae8">
+								Saas Subscribed
 							</Pill>
 						) : null}
 					</div>
@@ -173,14 +176,23 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 					{['air_freight', 'fcl_freight'].includes(itemData?.shipment_type)
 					&& (
 						<TabPanel name="last_shipment_detail" title="Customer Last Shipment Details">
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.custom_pill}
-								onClick={handlePillSelected}
-							>
-								view customers last shipment with same configuration&nbsp;
-								{isPillSelected ? <IcMTick /> : ''}
+							<div className={styles.last_shipment}>
+								<div
+									role="presentation"
+									className={styles.custom_pill}
+									onClick={() => handlePillSelected('origin')}
+								>
+									Same Origin
+									{isPillSelected?.origin ? <IcMTick /> : ''}
+								</div>
+								<div
+									role="presentation"
+									className={styles.custom_pill}
+									onClick={() => handlePillSelected('destination')}
+								>
+									Same Destination
+									{isPillSelected?.destination ? <IcMTick /> : ''}
+								</div>
 							</div>
 							{showDetail === true ? (
 								<div>

@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import hideNumber from '../../../../helpers/hideNumber';
 import { useGetControls } from '../configurations/group-call-controls';
+import getConferenceText from '../helpers/getConferenceText';
 import secsToDurationConverter from '../utils/secsToDurationConverter';
 
 import Attendees from './Attendees';
@@ -12,25 +13,29 @@ import ConferenceForm from './ConferenceForm';
 import styles from './styles.module.css';
 
 function CallModal({
-	voice_call_recipient_data = {},
+	receiverUserDetails = {},
 	status = '',
 	callLoading = false,
 	updateLiveCallStatusLoading = false,
-	updateLiveCallStatus,
-	localStateReducer,
-	counter,
-	hangUpCall,
+	updateLiveCallStatus = () => {},
+	setCallState = () => {},
+	counter = 0,
+	hangUpCall = () => {},
 	hangUpLoading = false,
 	attendees = [],
+	conferenceType = '',
+	callState = {},
 }) {
 	const { handleSubmit, control, formState: { errors }, watch, reset } = useForm();
-	const controls = useGetControls({ localStateReducer });
+
+	const controls = useGetControls();
+
 	const { live_call_action_type = '' } = watch();
 	const {
 		mobile_number = '',
 		mobile_country_code = '',
 		userName = '',
-	} = voice_call_recipient_data || {};
+	} = receiverUserDetails || {};
 
 	const isInConferenceCall = !isEmpty(attendees) || false;
 
@@ -39,6 +44,7 @@ function CallModal({
 			hangUpCall();
 		}
 	};
+
 	return (
 		<Modal
 			show
@@ -50,7 +56,7 @@ function CallModal({
 				<div className={styles.minus_div}>
 					<IcMMinus
 						className={styles.minus_sign}
-						onClick={() => localStateReducer({ showCallModalType: 'minimizedModal' })}
+						onClick={() => setCallState((p) => ({ ...p, showCallModalType: 'minimizedModal' }))}
 					/>
 				</div>
 				<div className={styles.content}>
@@ -72,8 +78,10 @@ function CallModal({
 							<div className={styles.timer}>{secsToDurationConverter(status, counter)}</div>
 						</div>
 					</div>
-					{isInConferenceCall &&	<Attendees attendees={attendees} />}
-					<div className={styles.footer} style={{ '--height': status ? '56%' : '30%' }}>
+					{!status && conferenceType
+					&& <div className={styles.call_text}>{getConferenceText({ callState })}</div>}
+					{status && isInConferenceCall && <Attendees attendees={attendees} />}
+					<div className={styles.footer} style={{ height: status ? '56%' : '30%' }}>
 						{status
 							? (
 								<ConferenceForm {...{
@@ -89,15 +97,15 @@ function CallModal({
 								/>
 							)
 							: <div className={styles.connecting}>Connecting...</div>}
-						{!live_call_action_type && (
+						{!live_call_action_type && (status || !conferenceType) && (
 							<div
 								className={cl`${styles.end_call} 
 								${(hangUpLoading || callLoading) ? styles.disable : ''}`}
-								tabIndex={0}
-								role="button"
+								role="presentation"
 								onClick={hangUpFunc}
 							>
 								<IcMCall className={styles.end_call_icon} />
+								<div className={styles.warn_text}>End Complete Call</div>
 							</div>
 						)}
 					</div>
