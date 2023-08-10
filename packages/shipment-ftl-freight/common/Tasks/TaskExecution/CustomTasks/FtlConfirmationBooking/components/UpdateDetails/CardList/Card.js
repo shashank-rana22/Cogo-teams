@@ -44,9 +44,6 @@ function Card(props) {
 			</div>
 			{show ? <TruckDetailForm {...props} show={show} /> : null}
 			<div className={styles.footer}>
-				{/* <Button className={styles.card_bottom} onClick={() => setShow(!show)}>
-					{!show ? <IcMArrowRotateDown color="#000" /> : <IcMArrowRotateUp color="#000" />}
-				</Button> */}
 				<ButtonIcon
 					className={styles.card_bottom}
 					icon={!show ? <IcMArrowRotateDown color="#000" /> : <IcMArrowRotateUp color="#000" />}
