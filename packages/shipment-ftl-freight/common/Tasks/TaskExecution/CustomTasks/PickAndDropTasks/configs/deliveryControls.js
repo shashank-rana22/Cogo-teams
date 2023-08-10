@@ -76,7 +76,7 @@ const getControls = (item, dateObj) => {
 			name          : 'image',
 			type          : 'file',
 			span          : 4,
-			label         : 'Upload End Kilometers Image',
+			label         : 'Upload End Kilometers Image/s',
 			size          : 'sm',
 			document_type : 'end_km_image',
 			multiple      : true,
