@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { doc, getDoc } from 'firebase/firestore';
@@ -119,6 +120,7 @@ function useComingCall({
 				});
 			});
 		} catch (error) {
+			Toast.error('Please provide your Mic permission');
 			console.error('user stream is not working', error);
 
 			callUpdate({

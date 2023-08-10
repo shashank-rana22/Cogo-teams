@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useRef } from 'react';
 import Peer from 'simple-peer';
@@ -165,6 +166,7 @@ function useVideoCallFirebase({
 				});
 			});
 		} catch (err) {
+			Toast.error('Please provide your Mic permission');
 			console.error('my user stream error', err);
 			callUpdate({
 				data: {
