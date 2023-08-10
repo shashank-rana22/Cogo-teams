@@ -59,21 +59,19 @@ function TruckDetailForm({
 
 	const submitForm = (values) => {
 		const temp = { ...allTruckDetails };
-		const tempFormValues = { ...values };
+		const TEMP_FORM_VALUES = {};
+		TEMP_FORM_VALUES.truck_detail = values?.truck_detail?.map((item) => ({
+			...item,
+			truck_type,
+			service_provider_id,
+			line_items,
+			transit_time,
+			priority,
+			preference_id,
+			detention_free_time: updated_detention_free_time || detention_free_time,
+		}));
 
-		tempFormValues?.truck_detail?.forEach((item, index) => {
-			const newTemp = { ...item };
-			newTemp.truck_type = truck_type;
-			newTemp.service_provider_id = service_provider_id;
-			newTemp.line_items = line_items;
-			newTemp.transit_time = transit_time;
-			newTemp.priority = priority;
-			newTemp.preference_id = preference_id;
-			newTemp.detention_free_time = updated_detention_free_time || detention_free_time;
-			tempFormValues.truck_detail[index] = newTemp;
-		});
-
-		temp[keyName] = tempFormValues;
+		temp[keyName] = TEMP_FORM_VALUES;
 		const VALID_ATH = {};
 
 		const isValid = isATHAmountValid({

@@ -4,10 +4,10 @@
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	background: #fef3e9 !important;
+	background: var(--color-accent-orange-5) !important;
 	border-radius: 4px;
 }
 
 .pop_btn:hover {
-	background: #fbd1a6 !important;
+	background: var(--color-accent-orange-4) !important;
 }

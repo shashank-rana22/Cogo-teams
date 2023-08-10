@@ -21,12 +21,12 @@ export const fieldColumns = ({
 	const setAdvancedAmount = (item) => {
 		const tempItem = item;
 		tempItem.updated_advance_amount = tempItem?.advanced_amount;
-		setIsEdit(!isEdit);
+		setIsEdit((prev) => !prev);
 	};
 	const setDetentionFreeTime = (item) => {
 		const tempItem = item;
 		tempItem.updated_detention_free_time = tempItem?.detention_free_time;
-		setIsEditTime(!isEditTime);
+		setIsEditTime((prev) => !prev);
 	};
 
 	const basLineItem =	singleServiceProvider?.line_items?.find(
@@ -135,7 +135,7 @@ export const fieldColumns = ({
 			<div className={styles.edit}>
 				<IcMEdit
 					style={{ marginBottom: 5, cursor: 'pointer' }}
-					onClick={() => setIsEditTime(!isEditTime)}
+					onClick={() => setIsEditTime((prev) => !prev)}
 				/>
 				<IcMUndo
 					style={{ cursor: 'pointer' }}
@@ -204,7 +204,7 @@ export const fieldColumns = ({
 			<div className={styles.edit}>
 				<IcMEdit
 					style={{ marginBottom: 5, cursor: 'pointer' }}
-					onClick={() => setIsEdit(!isEdit)}
+					onClick={() => setIsEdit((prev) => !prev)}
 				/>
 				<IcMUndo
 					style={{ cursor: 'pointer' }}

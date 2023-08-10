@@ -1,5 +1,6 @@
-import { Button, Modal, Popover, Toast } from '@cogoport/components';
+import { Button, ButtonIcon, Modal, Popover, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { Layout } from '@cogoport/surface-modules';
 import React, { useState, useEffect } from 'react';
@@ -10,12 +11,10 @@ import { checkForAth } from '../../../../utils/helperFunctions';
 
 import styles from './styles.module.css';
 
-const DEFAULT_VALUE = 0;
-
 function SplitAthAmount({ item = {}, setFinalGetHookData = () => {} }) {
 	const [visible, setVisible] = useState(false);
 	const [showModal, setShowModal] = useState(false);
-	const [idx, setIdx] = useState(DEFAULT_VALUE);
+	const [idx, setIdx] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
 	const controls = splitAmountControls();
 	const defaultValues = getDefaultValues(controls);
@@ -89,9 +88,13 @@ function SplitAthAmount({ item = {}, setFinalGetHookData = () => {} }) {
 				)}
 				interactive
 			>
-				<Button onClick={() => setVisible(!visible)} themeType="accent" size="sm" className={styles.pop_btn}>
-					<IcMOverflowDot height={21} width={21} color="#C26D1A" />
-				</Button>
+				<ButtonIcon
+					onClick={() => setVisible((prev) => !prev)}
+					themeType="accent"
+					icon={<IcMOverflowDot height={21} width={21} color="#C26D1A" />}
+					size="md"
+					className={styles.pop_btn}
+				/>
 			</Popover>
 			{showModal ? (
 				<Modal show={showModal} onClose={() => setShowModal(false)}>

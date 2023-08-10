@@ -68,7 +68,7 @@ const useEditQuote = ({
 
 	const handleChange = (obj) => {
 		if (!selectedCodes[obj.code]) {
-			setSelectedCodes({ ...selectedCodes, [obj.code]: obj });
+			setSelectedCodes((prev) => ({ ...prev, [obj.code]: obj }));
 		}
 	};
 

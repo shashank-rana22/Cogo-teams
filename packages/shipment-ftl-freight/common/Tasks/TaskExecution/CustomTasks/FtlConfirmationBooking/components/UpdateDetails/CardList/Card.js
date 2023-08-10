@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { ButtonIcon, cl } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -44,9 +44,14 @@ function Card(props) {
 			</div>
 			{show ? <TruckDetailForm {...props} show={show} /> : null}
 			<div className={styles.footer}>
-				<Button className={styles.card_bottom} onClick={() => setShow(!show)}>
+				{/* <Button className={styles.card_bottom} onClick={() => setShow(!show)}>
 					{!show ? <IcMArrowRotateDown color="#000" /> : <IcMArrowRotateUp color="#000" />}
-				</Button>
+				</Button> */}
+				<ButtonIcon
+					className={styles.card_bottom}
+					icon={!show ? <IcMArrowRotateDown color="#000" /> : <IcMArrowRotateUp color="#000" />}
+					onClick={() => setShow((prev) => !prev)}
+				/>
 			</div>
 
 		</div>

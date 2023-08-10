@@ -1,12 +1,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
+import Image from 'next/image';
 import React from 'react';
 
 import useListRevenueDeskShowedRates from '../../hooks/useListRevenueDeskShowedRates';
 
 import styles from './styles.module.css';
 
-const APPROVAL = 'You will see rates once RD Approves your shipment.';
+const FLASH_MSG = 'Your booking is being reviewed by Revenue Desk. You will see rates once RD Approves your shipment.';
 
 function Empty({
 	source = '',
@@ -22,20 +22,20 @@ function Empty({
 
 	let message = 'Please wait while we get reverts from supply.';
 	if (!loading) {
-		const flashedRates = (data || []).filter(
+		const flashedRates = (data || []).some(
 			(item) => item.source === 'flashed',
 		);
-		if (!isEmpty(flashedRates)) {
-			message = `Your booking is being reviewed by Revenue Desk. ${APPROVAL}`;
+		if (flashedRates) {
+			message = FLASH_MSG;
 		}
 	}
 	return (
 		<div className={styles.container}>
-			<img
+			<Image
 				src={GLOBAL_CONSTANTS.image_url.empty_data_image}
 				alt="No results"
-				width="300px"
-				height="200px"
+				width={300}
+				height={200}
 			/>
 			{source === 'contract' ? (
 				<>

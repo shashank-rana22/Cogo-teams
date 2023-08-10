@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 const useGetDistance = ({ destination_location_id, origin_location_id }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'https://api.cogoport.com/location/get_distance_matrix_valhalla',
+		url    : '/get_distance_matrix_valhalla',
 		method : 'GET',
 	});
 

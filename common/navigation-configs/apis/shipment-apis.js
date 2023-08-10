@@ -1680,6 +1680,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_distance_matrix_valhalla',
+		access_type  : 'private',
+		service_name : 'location',
+	},
+	{
 		api          : 'send_rail_domestic_indent_email',
 		access_type  : 'private',
 		service_name : 'shipment',
