@@ -52,7 +52,11 @@
 		}
 
 		.ui_table_body_cell:first-child {
-			width: 50%;
+			width: 40%;
+		}
+
+		.ui_table_body_cell:nth-child(3) {
+			width: 28%;
 		}
 
 		.ui_table_body_row {
@@ -72,6 +76,14 @@
 			color: #333;
 			text-align: left;
 		}
+
+		.ui_pill_container {
+			font-size: 10px;
+			color: rgb(102 172 247);
+			background-color: #fff;
+			border: 1px solid rgb(102 172 247);
+			border-radius: 10px;
+		}
 	}
 }
 
@@ -82,4 +94,8 @@
 	padding: 8px;
 	margin-top: 24px;
 	margin-right: 60px;
+}
+
+.column {
+	height: 100%;
 }
