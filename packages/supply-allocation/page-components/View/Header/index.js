@@ -5,25 +5,25 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import PieChart from '../../../commons/PieChart';
-import RenderLabelNew from '../../../commons/RenderLabelNew';
 
 import styles from './styles.module.css';
 
 const list = ['Persona Distribution', 'Weeky Distribution', 'Container Type'];
 
 const commonLocationProps = {
-	asyncKey : 'list_locations',
+	asyncKey : 'supply_fcl_searches',
 	params   : {
-		filters: {
-			type: 'seaport',
-		},
-		page_limit : 10,
-		sort_by    : 'name',
-		sort_type  : 'asc',
-		includes   : { default_params_required: true },
+		service_data_required: true,
 	},
-	labelKey    : 'display_name',
-	renderLabel : (item) => <RenderLabelNew data={item} />,
+	getModifiedOptions: ({ options }) => (
+		options.map((option) => ({
+			...option,
+			origin_display_name      : option.origin_location.display_name,
+			destination_display_name : option.destination_location.display_name,
+
+		}))
+	),
+	renderLabel : (item) => item.origin_location.display_name,
 	initialCall : true,
 	placeholder : 'Search via port name/code...',
 };
@@ -38,7 +38,10 @@ function Graph({ graphData, count }) {
 	);
 }
 
-function RenderLocation({ name, editMode, control }) {
+function RenderLocation({
+	name, editMode, control, type,	locationSearchId, setLocationSearchId,
+}) {
+	console.log('locationSearchId:', locationSearchId);
 	return (
 		<div style={{ width: '180px' }}>
 			{editMode ? (
@@ -47,7 +50,12 @@ function RenderLocation({ name, editMode, control }) {
 					control={control}
 					isClearable
 					label={`Select ${name} SeaPort`}
+					labelKey={`${type}_display_name`}
+					valueKey={`${type}_location_id`}
 					{...commonLocationProps}
+					onChange={(_, item) => {
+						setLocationSearchId(item.id);
+					}}
 				/>
 			) : (
 				<Tooltip
@@ -66,6 +74,7 @@ function RenderLocation({ name, editMode, control }) {
 function Header({ graphData, count, originName, destinationName }) {
 	const router = useRouter();
 	const [editMode, setEditMode] = useState(false);
+	const [locationSearchId, setLocationSearchId] = useState('');
 	const { control } = useForm();
 
 	const onClickBack = () => {
@@ -90,6 +99,10 @@ function Header({ graphData, count, originName, destinationName }) {
 					name={originName}
 					editMode={editMode}
 					control={control}
+					type="origin"
+					locationSearchId={locationSearchId}
+					setLocationSearchId={setLocationSearchId}
+
 				/>
 
 				<div>
@@ -100,6 +113,9 @@ function Header({ graphData, count, originName, destinationName }) {
 					name={destinationName}
 					editMode={editMode}
 					control={control}
+					type="destination"
+					locationSearchId={locationSearchId}
+					setLocationSearchId={setLocationSearchId}
 				/>
 
 				<div style={{ display: 'flex', flexDirection: 'column' }}>

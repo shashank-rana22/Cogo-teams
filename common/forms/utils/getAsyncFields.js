@@ -811,6 +811,17 @@ function asyncListExpenseCategories() {
 	};
 }
 
+function asyncListSupplyFclSearches() {
+	return {
+		labelKey    : '',
+		valueKey    : 'id',
+		endpoint    : 'list_supply_fcl_freight_searches',
+		initialCall : true,
+		searchByq   : true,
+		params      : { pageSize: 10000 },
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -877,4 +888,5 @@ export {
 	asyncListShipments,
 	asyncListShipmentServices,
 	asyncIncidentSubtypeList,
+	asyncListSupplyFclSearches,
 };
