@@ -21,8 +21,8 @@ const getCollectionPartyParams = ({
 
 	const { partner:{ user_role_ids = [] } = {} } = profile_data || {};
 
-	if (isFcl && isImport && stakeholder_wise_invoice_required) {
-		if (user_role_ids.includes(geo.uuid.document_control_manager)) {
+	if (isFcl && isImport) {
+		if (user_role_ids.includes(geo.uuid.document_control_manager) && stakeholder_wise_invoice_required) {
 			return { required_bl_do_quotations: true };
 		}
 
