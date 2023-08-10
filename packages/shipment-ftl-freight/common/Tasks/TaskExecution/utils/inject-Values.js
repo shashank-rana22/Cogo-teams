@@ -22,6 +22,7 @@ const TRUCK_DOCS_PREFILL_KEYS_MAPPING = {
 	upload_invoice_submission_acknowledgement : 'invoice_submission',
 	upload_load_truck_image                   : 'selfie_with_loaded_truck',
 	upload_ftl_commercial_invoice             : 'commercial_invoice_images',
+	upload_lorry_receipt                      : 'lr_images',
 };
 
 const TRUCK_EXCEED_NUMBER = -1;
