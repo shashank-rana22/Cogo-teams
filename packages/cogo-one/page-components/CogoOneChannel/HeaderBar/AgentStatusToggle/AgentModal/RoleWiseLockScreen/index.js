@@ -45,7 +45,7 @@ function RoleWiseLockScreen({
 						name="a4"
 						size="md"
 						disabled={false}
-						value={toggleState}
+						checked={toggleState}
 						onChange={onToggleChange}
 					/>
 				</div>
