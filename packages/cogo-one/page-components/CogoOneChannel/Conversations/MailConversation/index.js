@@ -60,7 +60,7 @@ function MailConversation({ mailProps = {} }) {
 		<div className={styles.container}>
 			<Header
 				subject={subject}
-				loading={loading || attachmentLoading}
+				loading={loading}
 				setButtonType={setButtonType}
 				setEmailState={setEmailState}
 				senderAddress={senderAddress}
@@ -76,11 +76,11 @@ function MailConversation({ mailProps = {} }) {
 				recipientData={recipientData}
 				ccData={ccData}
 				bccData={bccData}
-				loading={loading || attachmentLoading}
+				loading={loading}
 			/>
 
 			<div className={styles.message_div}>
-				{(loading || attachmentLoading) ? (
+				{(loading) ? (
 					<>
 						<div className={styles.time_stamp}>
 							<Placeholder width="80px" height="10px" />

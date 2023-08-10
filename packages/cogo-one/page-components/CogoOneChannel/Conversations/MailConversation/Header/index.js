@@ -27,6 +27,7 @@ function Header({
 		bccData,
 		activeMailAddress,
 		isDraft,
+		subject,
 	});
 
 	return (

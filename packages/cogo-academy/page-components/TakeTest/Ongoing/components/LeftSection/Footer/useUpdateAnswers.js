@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 // import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
@@ -11,6 +10,9 @@ if (typeof window !== 'undefined') {
 	// eslint-disable-next-line global-require
 	RichTextEditor = require('react-rte').default;
 }
+
+const API_SUCCESS_STATUS = 200;
+const INCREMENTAL_ELEMENT = 1;
 
 const getAnswerState = ({ type, answer, subjectiveAnswer, question_type }) => {
 	let answerState = 'answered';
@@ -42,14 +44,6 @@ function useUpdateAnswers({
 	setUploadValue,
 	setSubjectiveAnswer = () => {},
 }) {
-	const {
-		query: { test_id },
-		user: { id: user_id },
-	} = useSelector(({ general, profile }) => ({
-		query : general.query,
-		user  : profile.user,
-	}));
-
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_test_user_question_response',
@@ -72,7 +66,7 @@ function useUpdateAnswers({
 			answer_state     : answerState,
 			question_type,
 			...(question_type === 'case_study'
-				? { test_case_study_question_id: sub_questions?.[subQuestion - 1]?.id } : null),
+				? { test_case_study_question_id: sub_questions?.[subQuestion - INCREMENTAL_ELEMENT]?.id } : null),
 
 			...(question_type === 'subjective'
 				? {
@@ -86,14 +80,14 @@ function useUpdateAnswers({
 			data: payload,
 		});
 
-		if (res?.status !== 200) {
+		if (res?.status !== API_SUCCESS_STATUS) {
 			// handleMinimizeTest();
 			Toast.error('Something is wrong');
 			return;
 		}
 
 		if (question_type === 'case_study' && sub_questions.length > subQuestion) {
-			setSubQuestion((prev) => prev + 1);
+			setSubQuestion((prev) => prev + INCREMENTAL_ELEMENT);
 			fetchQuestions({ question_id: data?.id });
 			return;
 		}
@@ -105,12 +99,8 @@ function useUpdateAnswers({
 
 		const num = Number(currentQuestion);
 
-		localStorage.setItem(
-			`current_question_${test_id}_${user_id}`,
-			total_question > currentQuestion ? num + 1 : num,
-		);
-
-		if (['answered', 'marked_for_review', 'viewed'].includes((user_appearance?.[num - 1] || {}).answer_state)) {
+		if (['answered', 'marked_for_review', 'viewed']
+			.includes((user_appearance?.[num - INCREMENTAL_ELEMENT] || {}).answer_state)) {
 			await fetchQuestions({ question_id: (user_appearance?.[num] || {})?.test_question_id || '' });
 		} else {
 			await fetchQuestions({});
@@ -118,11 +108,11 @@ function useUpdateAnswers({
 
 		setCurrentQuestion((pv) => {
 			if (total_question !== pv) {
-				return Number(pv) + 1;
+				return Number(pv) + INCREMENTAL_ELEMENT;
 			}
 			return pv;
 		});
-		setSubQuestion(1);
+		setSubQuestion(INCREMENTAL_ELEMENT);
 		setSubjectiveAnswer(RichTextEditor.createEmptyValue());
 		setUploadValue('');
 	};

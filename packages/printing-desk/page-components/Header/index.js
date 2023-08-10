@@ -15,6 +15,10 @@ const TABS = [
 		key   : 'handed_over',
 		label : 'Handed Over',
 	},
+	{
+		key   : 'final_awb',
+		label : 'Final AWB',
+	},
 ];
 
 function Header({

@@ -10,10 +10,11 @@ const EXCLUDED_KEYS = ['container_number',
 
 function HBLCreate({
 	onSave = () => {},
-	hblData,
+	hblData = {},
 	completed = false,
 	shipmentData = {},
 	primaryService = {},
+	initHblDataObj = {},
 }) {
 	const [show, setShow] = useState(false);
 	const [mode, setMode] = useState('write');
@@ -21,17 +22,34 @@ function HBLCreate({
 
 	const movement_details = primaryService?.movement_details;
 
+	const CONTAINERS_TEMP = [];
+	initHblDataObj?.data?.container_details?.forEach((res) => {
+		const temp = {
+			container_number    : res?.container_no || '',
+			gross_weight        : res?.quantity || '',
+			marks_and_number    : '',
+			measurement         : '',
+			package_description : res?.container_size || res?.description || '',
+		};
+		CONTAINERS_TEMP.push(temp);
+	});
+
 	const templateInitialValues = {
-		port_of_loading   : primaryService?.origin_port?.display_name,
-		port_of_discharge : primaryService?.destination_port?.display_name,
-		consigner         : shipmentData?.importer_exporter?.business_name,
-		consignee         : shipmentData?.consignee_shipper?.business_name,
+		port_of_loading   : primaryService?.origin_port?.display_name || initHblDataObj?.data?.origin_port,
+		port_of_discharge : primaryService?.destination_port?.display_name || initHblDataObj?.data?.destination_port,
+		consigner         : shipmentData?.importer_exporter?.business_name || initHblDataObj?.data?.shipper,
+		consignee         : shipmentData?.consignee_shipper?.business_name || initHblDataObj?.data?.consignee,
 		vessel_number     : (movement_details || [])
-			.map((movment) => `${movment?.vessel}, ${movment?.voyage}`).join(','),
+			.map((movment) => `${movment?.vessel}, ${movment?.voyage}`).join(',')
+			|| initHblDataObj?.data?.vessel_voyage,
 		annexure_vessel_number: (movement_details || [])
 			.map((movment) => `${movment?.voyage}`).join(','),
 		annexure_vessel: (movement_details || [])
 			.map((movment) => `${movment?.vessel}`).join(','),
+		place_and_date_of_issue:
+		`${initHblDataObj?.data?.issuing_date || ''},${initHblDataObj?.data?.issuing_place || ''}`,
+		notify_address : initHblDataObj?.data?.notify_party || '',
+		containers     : hblData?.containers || CONTAINERS_TEMP,
 		...hblData,
 	};
 

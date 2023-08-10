@@ -1,7 +1,7 @@
 .upload_invoice {
 	flex: 1;
 	height: calc(100vh - 178px);
-	overflow: scroll;
+	overflow: auto;
 	border: 1px solid black;
 	border-radius: 8px;
 }
@@ -35,4 +35,18 @@
 
 .justifiy {
 	justify-content: space-between;
+}
+
+.select {
+	margin-top: 16px;
+
+	:global {
+		.ui_select_container {
+			max-width: 200px;
+		}
+
+		.ui_select_options_container {
+			width: 240px;
+		}
+	}
 }

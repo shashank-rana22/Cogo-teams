@@ -10,7 +10,7 @@
 
 .created_at {
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	font-size: 12px;
 	font-weight: 400;
 	color: #4f4f4f;

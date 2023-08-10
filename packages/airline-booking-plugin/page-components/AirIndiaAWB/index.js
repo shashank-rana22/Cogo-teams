@@ -140,7 +140,7 @@ function AirIndiaAWB({
 				<Button
 					size="md"
 					themeType="secondary"
-					className={`${status === 'active' && 'active'}`}
+					className={status === 'active' && 'active'}
 					onClick={() => setStatus('active')}
 				>
 					New Bookings |
@@ -150,7 +150,7 @@ function AirIndiaAWB({
 				<Button
 					size="md"
 					themeType="secondary"
-					className={`${status === 'inactive' && 'active'}`}
+					className={status === 'inactive' && 'active'}
 					onClick={() => setStatus('inactive')}
 				>
 					Completed |

@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 import VerticleLine from '../VerticleLine';
 
+import PrintDocument from './PrintDocument';
 import ReviewSiDocument from './ReviewSiDocument';
 import styles from './styles.module.css';
 
@@ -29,6 +30,8 @@ const BL_SHOW_STATUS = [
 	'release_pending',
 ];
 
+const PRINTABLE_DOCS = ['draft_house_bill_of_lading'];
+
 function Content({
 	uploadedItem = {},
 	idx = 0,
@@ -40,7 +43,8 @@ function Content({
 	handleView = () => {},
 	primary_service = {},
 	receivedViaEmail = false,
-	showUploadText = '',
+	showUploadText = false,
+	canEditDocuments = true,
 	setShowDoc = () => {},
 	setShowApproved = () => {},
 	docType = '',
@@ -49,6 +53,7 @@ function Content({
 	bl_details = [],
 }) {
 	const [siReviewState, setSiReviewState] = useState(false);
+	const [printDoc, setPrintDoc] = useState(false);
 
 	const { data:bl_data } = uploadedItem || {};
 	const isBlUploaded = bl_details?.find((i) => i?.id === bl_data?.bl_detail_id);
@@ -59,8 +64,8 @@ function Content({
 
 	const { document_type, state } = uploadedItem;
 
-	const getUploadButton = () => {
-		if (showUploadText.length) {
+	function GetUploadButton() {
+		if (showUploadText.length && canEditDocuments) {
 			return (
 				<Button
 					themeType="link"
@@ -85,7 +90,7 @@ function Content({
 			);
 		}
 		return null;
-	};
+	}
 
 	const SI_REVIEW_CONDITION = document_type === 'si' && state === 'document_accepted';
 
@@ -162,6 +167,16 @@ function Content({
 					</Button>
 				) : null}
 
+				{PRINTABLE_DOCS.includes(document_type)
+					&& (
+						<Button
+							themeType="link"
+							onClick={() => setPrintDoc(true)}
+						>
+							Print
+						</Button>
+					)}
+
 				{isChecked ? (
 					<div className={styles.action_container}>
 						{(!(
@@ -189,7 +204,7 @@ function Content({
 							) : null}
 
 					</div>
-				) : getUploadButton()}
+				) : <GetUploadButton />}
 
 			</div>
 
@@ -199,6 +214,16 @@ function Content({
 					setSiReviewState={setSiReviewState}
 					uploadedItem={uploadedItem}
 					shipmentDocumentRefetch={shipmentDocumentRefetch}
+				/>
+			) : null}
+
+			{printDoc ? (
+				<PrintDocument
+					shipment_data={shipment_data}
+					primary_service={primary_service}
+					data={bl_data}
+					show={printDoc}
+					setShow={setPrintDoc}
 				/>
 			) : null}
 

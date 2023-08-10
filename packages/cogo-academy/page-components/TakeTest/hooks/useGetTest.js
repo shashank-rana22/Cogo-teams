@@ -4,10 +4,10 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 function useGetTest({ id, user_id }) {
-	const [{ loading = false, data = {} }, trigger] = useRequest({
+	const [{ data = {}, loading = false }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_test',
-	}, { manual: false });
+	}, { manual: true });
 
 	const getTest = useCallback(({ test_id, userId }) => {
 		try {

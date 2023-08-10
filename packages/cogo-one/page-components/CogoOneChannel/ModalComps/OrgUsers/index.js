@@ -1,16 +1,30 @@
-import { Modal } from '@cogoport/components';
-import { AsyncSelect } from '@cogoport/forms';
+import { Modal, Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
-import OrgUsersList from './OrgUserList';
+import LeadOrganizations from './LeadOrganizations';
+import Leads from './Leads';
+import Organizations from './Organizations';
 import styles from './styles.module.css';
+
+const TABS_MAPPING = [
+	{ name: 'leads', title: 'Leads' },
+	{ name: 'organization', title: 'Organizations' },
+];
+
+const TABS_COMPONENT_MAPPING = {
+	organization      : Organizations,
+	lead_organization : LeadOrganizations,
+	leads             : Leads,
+};
 
 function OrgUsers({
 	openKamContacts = false,
 	setOpenKamContacts = () => {},
 	setActiveTab = () => {},
 }) {
-	const [orgId, setOrgId] = useState('');
+	const [activeOrg, setActiveOrg] = useState('leads');
+
+	const Component = TABS_COMPONENT_MAPPING[activeOrg];
 
 	return (
 		<Modal
@@ -22,27 +36,28 @@ function OrgUsers({
 		>
 			<Modal.Header
 				className={styles.header_styles}
-				title="Organizaton Users"
+				title="Contacts"
 			/>
 			<Modal.Body className={styles.body_styles}>
-				<AsyncSelect
-					asyncKey="organizations"
-					initialCall
-					onChange={setOrgId}
-					value={orgId}
-					placeholder="Search by serial id / business name"
-					size="md"
-					isClearable
+				<Tabs
+					activeTab={activeOrg}
+					themeType="tertiary"
+					onChange={setActiveOrg}
+				>
+					{(TABS_MAPPING || []).map((item) => {
+						const { name = '', title = '' } = item || {};
+
+						return (
+							<TabPanel key={name} name={name} title={title} />
+						);
+					})}
+				</Tabs>
+				<Component
+					setActiveTab={setActiveTab}
+					setOpenKamContacts={setOpenKamContacts}
+					activeOrg={activeOrg}
+					key={activeOrg}
 				/>
-				<div className={styles.org_users_styles}>
-					<OrgUsersList
-						orgId={orgId}
-						setActiveTab={setActiveTab}
-						setOpenKamContacts={setOpenKamContacts}
-						setOrgId={setOrgId}
-						key={orgId}
-					/>
-				</div>
 			</Modal.Body>
 		</Modal>
 	);

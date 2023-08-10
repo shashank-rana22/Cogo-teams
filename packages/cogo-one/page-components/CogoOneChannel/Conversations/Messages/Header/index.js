@@ -1,14 +1,18 @@
-import { Button, cl } from '@cogoport/components';
-import { IcMProfile, IcMRefresh, IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
+import {
+	IcMProfile,
+	IcMRefresh,
+	IcMHome,
+} from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
-import HeaderName from '../../../../../common/HeaderName';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
 import useTransferChat from '../../../../../hooks/useTransferChat';
 
 import Assignes from './Assignes';
+import ChatControls from './ChatControls';
+import ChatTransfer from './ChatTransfer';
 import TagsPopOver from './HeaderFuncs';
 import RightButton from './RightButton';
 import ShowContent from './ShowContent';
@@ -29,7 +33,7 @@ function Header({
 	filteredSpectators = [],
 	activeMessageCard = {},
 	tagOptions = [],
-	support_agent_id = null,
+	supportAgentId = null,
 	showBotMessages = false,
 	userId = '',
 	updateRoomLoading = false,
@@ -40,6 +44,7 @@ function Header({
 	viewType = '',
 	firestore = {},
 	escalateToSupplyRm = () => {},
+	setActiveTab = () => {},
 	supplierLoading = false,
 	hasNoFireBaseRoom = false,
 }) {
@@ -54,7 +59,7 @@ function Header({
 				closeModal,
 				assignLoading,
 				assignChat,
-				support_agent_id,
+				supportAgentId,
 				accountType: formattedData?.account_type,
 			},
 		});
@@ -65,25 +70,10 @@ function Header({
 	const {
 		mobile_no = '',
 		channel_type,
-		has_requested_by = {},
 		group_members = [],
-		organization_id = '',
-		user_id,
 		account_type = '',
 		managers_ids = [],
-		id,
 	} = formattedData || {};
-
-	const handleEsclateClick = () => {
-		escalateToSupplyRm({
-			payload: {
-				organization_id,
-				organization_user_id : user_id,
-				channel              : channel_type,
-				channel_chat_id      : id,
-			},
-		});
-	};
 
 	const handleUpdateUser = () => {
 		if (!updateRoomLoading || !hasNoFireBaseRoom) {
@@ -91,16 +81,7 @@ function Header({
 		}
 	};
 
-	const { agent_id = '', agent_name = '' } = has_requested_by || {};
-
-	const hasAccessToApprove = (support_agent_id === userId
-		|| VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit);
-
-	const hasRequests = !!agent_id;
-
 	const isGroupFormed = !isEmpty(group_members);
-
-	const showApprovePanel = (hasRequests && hasAccessToApprove);
 
 	const isPartOfGroup = group_members?.includes(userId);
 	const isManager = managers_ids?.includes(userId);
@@ -110,6 +91,10 @@ function Header({
 			<div className={styles.container}>
 				<div className={styles.flex_space_between}>
 					<div className={styles.flex}>
+						<IcMHome
+							className={styles.home_button}
+							onClick={() => setActiveTab((prev) => ({ ...prev, data: {} }))}
+						/>
 						<TagsPopOver
 							prevtags={chat_tags}
 							headertags={headertags}
@@ -121,15 +106,15 @@ function Header({
 							tagOptions={tagOptions}
 							hasPermissionToEdit={hasPermissionToEdit}
 						/>
+
 						<ShowContent
 							list={chat_tags}
 							showMorePlacement="right"
 							hasPermissionToEdit={hasPermissionToEdit}
 						/>
 					</div>
-					<div
-						className={styles.flex}
-					>
+
+					<div className={styles.flex}>
 						{!isEmpty(filteredSpectators) && (
 							<Assignes filteredSpectators={filteredSpectators} />
 						)}
@@ -153,7 +138,7 @@ function Header({
 							requestAssignLoading={requestAssignLoading}
 							showBotMessages={showBotMessages}
 							viewType={viewType}
-							supportAgentId={support_agent_id}
+							supportAgentId={supportAgentId}
 							isGroupFormed={isGroupFormed}
 							accountType={account_type}
 							isPartOfGroup={isPartOfGroup}
@@ -179,62 +164,28 @@ function Header({
 						)}
 					</div>
 				</div>
-				<div className={styles.flex_space_between}>
-					<HeaderName formattedData={formattedData} />
-					<div className={styles.button_flex}>
-						{account_type === 'service_provider' && (
-							<Button
-								themeType="secondary"
-								size="sm"
-								disabled={!hasPermissionToEdit || canMessageOnBotSession}
-								onClick={handleEsclateClick}
-								loading={supplierLoading}
-								className={styles.escalate_button}
-							>
-								escalate
-							</Button>
-						)}
-						<Button
-							themeType="primary"
-							size="sm"
-							disabled={!hasPermissionToEdit || canMessageOnBotSession}
-							onClick={() => setOpenModal({
-								type : 'mark_as_closed',
-								data : {
-									updateChat,
-									loading,
-								},
-							})}
-						>
-							Mark as Closed
-						</Button>
-					</div>
-				</div>
+
+				<ChatControls
+					formattedData={formattedData}
+					escalateToSupplyRm={escalateToSupplyRm}
+					setOpenModal={setOpenModal}
+					updateChat={updateChat}
+					loading={loading}
+					supplierLoading={supplierLoading}
+					hasPermissionToEdit={hasPermissionToEdit}
+					canMessageOnBotSession={canMessageOnBotSession}
+				/>
 			</div>
-			<div className={styles.approve_req} style={{ height: showApprovePanel ? '30px' : '0' }}>
-				{showApprovePanel && (
-					<>
-						<text className={styles.agent_name}>
-							{`${agent_name || 'A agent'} 
-						has requested you to transfer chat`}
-						</text>
-						<IcCFtick
-							className={styles.icon_styles}
-							cursor={assignLoading ? 'disabled' : 'pointer'}
-							onClick={() => {
-								if (!assignLoading) {
-									assignChat({ payload: { agent_id, is_allowed_to_chat: true } });
-								}
-							}}
-						/>
-						<IcCFcrossInCircle
-							className={styles.icon_styles}
-							cursor="pointer"
-							onClick={dissmissTransferRequest}
-						/>
-					</>
-				)}
-			</div>
+
+			<ChatTransfer
+				hasRequestedBy={formattedData?.has_requested_by}
+				dissmissTransferRequest={dissmissTransferRequest}
+				viewType={viewType}
+				supportAgentId={supportAgentId}
+				userId={userId}
+				assignLoading={assignLoading}
+				assignChat={assignChat}
+			/>
 		</div>
 	);
 }

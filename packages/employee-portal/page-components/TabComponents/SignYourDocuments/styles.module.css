@@ -2,6 +2,10 @@
 	display: flex;
 	align-items: center;
 	margin: 6px 0 16px;
+
+	@media (max-width: 800px) {
+		margin: 38px 16px 16px;
+	}
 }
 
 .title {
@@ -29,6 +33,10 @@
 
 .signed_document_container {
 	display: flex;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .refresh_container {
@@ -63,5 +71,20 @@
 		100% {
 			transform: rotate(-360deg);
 		}
+	}
+}
+
+.signed_documents_display {
+	padding: 0 12px;
+
+	@media (max-width: 768px) {
+		margin-top: 14px;
+	}
+}
+
+.signed_document_status {
+	@media (max-width: 768px) {
+		display: flex;
+		margin-left: 10%;
 	}
 }

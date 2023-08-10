@@ -36,7 +36,7 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return false;
 	}
 
-	if (user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
+	if (user_data?.id && user_data.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
 		return true;
 	}
 
@@ -46,11 +46,9 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		userCanEdit = idToMatch === serviceData?.importer_exporter?.id;
 	}
 
-	const showEditParamsKey = serviceData?.show_edit_params;
-
 	const isControlsEditable = CONTROLS_EDITABLE_CONDITIONS.some(
 		(conditions) => getShowCondition({ trade_type: shipment_data?.trade_type, ...serviceData }, conditions),
 	);
 
-	return userCanEdit && showEditParamsKey && isControlsEditable;
+	return userCanEdit && isControlsEditable;
 }

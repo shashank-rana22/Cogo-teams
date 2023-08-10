@@ -1,4 +1,6 @@
-import { format, getByKey, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { getByKey, startCase } from '@cogoport/utils';
 
 import CompanyName from '../accessorComponent/CompanyName';
 import DateName from '../accessorComponent/DateName';
@@ -9,13 +11,18 @@ import SortData from './SortData.tsx';
 import styles from './styles.module.css';
 
 interface PropsType {
-	isSortActive:string;
-	setIsSortActive:Function;
-	setGlobalFilters:Function;
-	refetch:Function;
+	isSortActive: string;
+	setIsSortActive: Function;
+	setGlobalFilters: Function;
+	refetch: () => void;
 }
 
-const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refetch }:PropsType) => [
+const approvedColumn = ({
+	isSortActive,
+	setIsSortActive,
+	setGlobalFilters,
+	refetch,
+}: PropsType) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
@@ -40,25 +47,46 @@ const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refet
 		Header   : <div>REQUEST TYPE</div>,
 		id       : 'type',
 		accessor : (row) => (
-
 			<div className={styles.request_type}>
 				{startCase(getByKey(row, 'type') as string)}
 			</div>
-
 		),
 	},
 	{
-		Header:
-	<div>
-		<SortData isSortActive={isSortActive} setIsSortActive={setIsSortActive} setGlobalFilters={setGlobalFilters} />
-	</div>,
+		Header   : 'REQUEST SUB TYPE',
+		accessor : 'incidentSubtype',
+		id       : 'request_sub_type',
+	},
+	{
+		Header: (
+			<div>
+				<SortData
+					isSortActive={isSortActive}
+					setIsSortActive={setIsSortActive}
+					setGlobalFilters={setGlobalFilters}
+				/>
+			</div>
+		),
 		id       : 'createdAt',
 		accessor : (row) => {
 			const { createdAt } = row;
 			return (
 				<div>
-					{format(createdAt, 'dd MMM YYYY', {}, false)}
-					<div>{format(createdAt, 'hh:mm a', {}, false)}</div>
+					{formatDate({
+						date: createdAt,
+						dateFormat:
+							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'date',
+					})}
+					<div>
+						{formatDate({
+							date: createdAt,
+							timeFormat:
+								GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType: 'time',
+						})}
+					</div>
 				</div>
 			);
 		},
@@ -90,9 +118,7 @@ const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refet
 			<div>
 				<ViewRequested itemData={row} name="" refetch={refetch} />
 			</div>
-
 		),
 	},
-
 ];
 export default approvedColumn;

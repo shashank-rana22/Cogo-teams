@@ -1,8 +1,9 @@
 import { useSelector } from '@cogoport/store';
 
-import DEFAULT_VIEW from '../stakeholderConfig/defaultView.json';
+import config from '../stakeholderConfig/index';
 
 const TYPE_API_PERMISSION_NOT_GIVEN = ['none'];
+const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 const findWhetherApiPermissionIsGiven = ({ api_permission_array = [] }) => {
 	const permission_array = api_permission_array.filter((p) => !TYPE_API_PERMISSION_NOT_GIVEN.includes(p?.type));
@@ -80,7 +81,7 @@ const useGetDefaultViewValues = () => {
 
 	const permissions = user_profile?.permissions_navigations?.[navigation];
 
-	const { features = [], main_api, ...restConfig } = DEFAULT_VIEW;
+	const { features = [], main_api, ...restConfig } = stakeholderConfig;
 
 	const main_api_permission = apiConditionCheck({ api_permission: main_api, permissions });
 
@@ -97,7 +98,7 @@ const useGetDefaultViewValues = () => {
 		} = eachFeatureCheck({ feature: restConfig[key], permissions });
 
 		if (isFeatureFormatted) {
-			DEFAULT_VIEW[key] = formatted_feature;
+			stakeholderConfig[key] = formatted_feature;
 
 			final_features = [...final_features, ...finalFeatures];
 		} else if (showFeature) {
@@ -107,7 +108,7 @@ const useGetDefaultViewValues = () => {
 
 	final_features = [...new Set(final_features)];
 
-	return { ...DEFAULT_VIEW, features: final_features };
+	return { ...stakeholderConfig, features: final_features };
 };
 
 export default useGetDefaultViewValues;

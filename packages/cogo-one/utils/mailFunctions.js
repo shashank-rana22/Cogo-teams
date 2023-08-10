@@ -9,8 +9,6 @@ const LAST_INDEX = 1;
 function mailFunction({
 	setErrorValue = () => {},
 	emailState = {},
-	value = '',
-	setValue = () => {},
 	setShowControl = () => {},
 	showControl,
 	setAttachments = () => {},
@@ -30,10 +28,12 @@ function mailFunction({
 		event = {},
 		type = '',
 		email = '',
+		newEmailInput = '',
+		setNewEmailInput = () => {},
 	}) => {
 		if (event?.key === 'Enter' || email) {
 			event?.preventDefault?.();
-			const newEmail = email || value;
+			const newEmail = email || newEmailInput;
 
 			if (!validateEmail(newEmail)) {
 				setErrorValue('Enter valid id');
@@ -55,19 +55,20 @@ function mailFunction({
 				...prev,
 				[type]: [...(prev?.[type] || []), newEmail],
 			}));
+			setNewEmailInput('');
 			setShowControl(null);
 		}
 	};
 
-	const handleEdit = (type) => {
+	const handleEdit = ({ type, setNewEmailInput }) => {
 		setShowControl(type);
 		setErrorValue(null);
-		setValue('');
+		setNewEmailInput('');
 	};
 
-	const handleChange = ({ val, type }) => {
+	const handleChange = ({ val, type, setNewEmailInput }) => {
 		if (showControl === type) {
-			setValue(val);
+			setNewEmailInput(val);
 		}
 	};
 
@@ -80,9 +81,9 @@ function mailFunction({
 		}));
 	};
 
-	const handleError = (type) => {
+	const handleCancel = ({ type, setNewEmailInput }) => {
 		if (showControl === type) {
-			setValue('');
+			setNewEmailInput('');
 			setShowControl(null);
 		}
 	};
@@ -90,7 +91,6 @@ function mailFunction({
 	const handleClose = () => {
 		setAttachments([]);
 		setEmailState(DEFAULT_EMAIL_STATE);
-		setValue('');
 		setButtonType('');
 	};
 
@@ -111,7 +111,7 @@ function mailFunction({
 		handleEdit,
 		handleChange,
 		handleDelete,
-		handleError,
+		handleCancel,
 		handleClose,
 		handleAttachmentDelete,
 		getDecodedData,

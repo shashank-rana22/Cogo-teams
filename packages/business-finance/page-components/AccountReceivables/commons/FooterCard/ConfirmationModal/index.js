@@ -1,18 +1,20 @@
 import { Button, Modal } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function ConfirmationModal(
 	{
+		entityCode,
 		checkedRows = [],
 		bulkIrnGenerate = () => {},
 		bulkIrnLoading = false,
 		confirmation = false,
 		setConfirmation = () => {},
-		IrnLabel = '',
 	},
 ) {
+	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 	return (
 		<Modal
 			show={confirmation}
@@ -23,7 +25,7 @@ function ConfirmationModal(
 			}}
 		>
 
-			<Modal.Header title="Bulk IRN Generate" />
+			<Modal.Header title={`Bulk ${irnLabel} Generate`} />
 			<div className={styles.heading}>
 				You have Selected
 				{' '}
@@ -31,7 +33,7 @@ function ConfirmationModal(
 				{' '}
 				Invoices. Are you sure you want to Generate
 				{' '}
-				{IrnLabel}
+				{irnLabel}
 				?
 			</div>
 			<div className={styles.buttons}>
@@ -51,7 +53,7 @@ function ConfirmationModal(
 					className={styles.post}
 					disabled={bulkIrnLoading}
 				>
-					{IrnLabel}
+					{irnLabel}
 					{' '}
 					Generate
 				</Button>

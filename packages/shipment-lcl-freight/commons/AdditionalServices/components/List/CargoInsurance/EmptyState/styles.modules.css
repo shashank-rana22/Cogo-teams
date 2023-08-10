@@ -1,0 +1,28 @@
+.no_support {
+	display: flex;
+	padding: 20px;
+}
+
+.sad_text {
+	width: 70%;
+	margin: 10px 0;
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+	color: #b6bfd4;
+	text-align: center;
+}
+
+.sad_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	background-color: var(--color-secondary-5);
+	border-radius: 4px;
+	box-shadow: 0 0 6px rgb(0 0 0 / 15%);
+}
+
+.icon {
+	margin-top: 10px;
+}

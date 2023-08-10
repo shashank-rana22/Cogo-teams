@@ -1,3 +1,4 @@
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const DEFAULT_TIME = 0;
@@ -32,11 +33,9 @@ export const dateCheckerShipment = (leftDate, rightDate) => {
 
 const FTL_TASK_DATE_VALIDATION = 'ftl_task_date_validation';
 
-export const ENTITY_CODES = Object.values(
-	GLOBAL_CONSTANTS.cogoport_entities,
-).reduce((acc, entity) => {
-	if (entity.feature_supported.includes(FTL_TASK_DATE_VALIDATION)) {
-		acc.push(entity?.id);
-	}
-	return acc;
-}, []);
+const ENTITY_IDS = [];
+
+export const ENTITY_CODES = Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]) => {
+	ENTITY_FEATURE_MAPPING[key].feature_supported.includes(FTL_TASK_DATE_VALIDATION);
+	return ENTITY_IDS.push(value.id);
+});

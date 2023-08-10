@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { useRequestBf } from '@cogoport/request';
 import { useState } from 'react';
 
@@ -47,9 +47,11 @@ const useGetIrnCancellation = ({
 		{ manual: true },
 	);
 
-	const CANCEL_IRN = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('cancel_irn');
+	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
-	const CANCEL_EINVOICE =	 GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
+	const CANCEL_IRN = ENTITY_FEATURE_MAPPING[entityCode]?.feature_supported?.includes('cancel_irn');
+
+	const CANCEL_EINVOICE =	 ENTITY_FEATURE_MAPPING[entityCode]
 		?.feature_supported?.includes('cancel_e_invoice');
 
 	const onSubmit = async () => {
@@ -75,7 +77,7 @@ const useGetIrnCancellation = ({
 			});
 
 			if (resp.status === 200) {
-				Toast.success('IRN Cancelled Successfully');
+				Toast.success(`${irnLabel} Cancelled Successfully`);
 				setShowCancellationModal(false);
 			}
 			refetch();

@@ -1,0 +1,63 @@
+.container {
+	padding: 12px;
+	margin-left: 12px;
+	background-color: #fff;
+	border: 1px solid #cfcfcf;
+	border-radius: 6px;
+}
+
+.flexhead {
+	display: flex;
+	justify-content: space-between;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+}
+
+.graph {
+	margin-top: 24px;
+}
+
+.bottom_line {
+	float: left;
+	width: 80%;
+	margin: 0;
+	border-bottom: 2px solid var(--color-primary-error-red-2);
+}
+
+.info {
+	margin: 4px 0 0 8px;
+	cursor: pointer;
+}
+
+.empty_section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 300px;
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-3);
+}
+
+.custom_tooltip {
+	display: flex;
+	align-items: center;
+	padding: 8px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.value {
+	margin-left: 8px;
+	font-weight: bold;
+}
+
+.color_indicator {
+	width: 16px;
+	height: 16px;
+	margin: 0 4px;
+}

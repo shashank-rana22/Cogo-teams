@@ -12,12 +12,12 @@ const TRUCK_NUM_TASKS = [
 
 const TRUCK_EXCEED_NUMBER = -1;
 
-const injectValues = (
+const injectValues = ({
 	selectedMail,
 	populatedControls,
 	task,
 	servicesList,
-) => {
+}) => {
 	const controls = populatedControls || [];
 	const ftlServices = (servicesList || []).filter(
 		(obj) => obj.service_type !== 'subsidiary_service',

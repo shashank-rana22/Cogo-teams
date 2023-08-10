@@ -5,24 +5,26 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
 import useCheckCustomerCheckoutQuotationConflict from '../../../hooks/useCheckCustomerCheckoutQuotationConflict';
 import useListOmnichannelDocuments from '../../../hooks/useListOmnichannelDocuments';
-import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 
 import RightSideNav from './RightSideNav';
 import styles from './styles.module.css';
 
 function ProfileDetails({
-	activeMessageCard,
-	activeTab,
-	activeVoiceCard,
-	activeCardId,
+	activeMessageCard = {},
+	activeTab = '',
+	activeVoiceCard = {},
+	activeCardId = '',
 	setModalType = () => {},
-	activeRoomLoading,
+	activeRoomLoading = false,
 	setRaiseTicketModal = () => {},
 	zippedTicketsData = {},
 	viewType = '',
-	firestore,
+	firestore = {},
 	userId = '',
-	setActiveTab,
+	setActiveTab = () => {},
+	formattedMessageData = {},
+	orgId = '',
+	mailProps = {},
 }) {
 	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
 
@@ -31,10 +33,6 @@ function ProfileDetails({
 	);
 	const [showMore, setShowMore] = useState(false);
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
-	const formattedMessageData = getActiveCardDetails(activeMessageCard) || {};
-	const orgId = activeTab === 'message'
-		? formattedMessageData?.organization_id
-		: activeVoiceCard?.organization_id;
 
 	const {
 		openNewTab,
@@ -94,6 +92,7 @@ function ProfileDetails({
 						firestore={firestore}
 						userId={userId}
 						setActiveTab={setActiveTab}
+						mailProps={mailProps}
 					/>
 				)}
 			</div>

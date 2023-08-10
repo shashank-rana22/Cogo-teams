@@ -5,6 +5,13 @@ import getBuyPrice from '../../../utils/getBuyPrice';
 
 import styles from './styles.module.css';
 
+const PROCEED_CTA_LABEL = {
+	email              : 'Proceed With Mail',
+	e_booking          : 'Place Booking',
+	platform           : 'Proceed With Platform',
+	email_and_platform : 'Proceed With Platform',
+};
+
 const LIST_PREFERENCE_RATE_STEP = 1;
 function ListItem({
 	data = {},
@@ -14,8 +21,11 @@ function ListItem({
 	step = 1,
 	bookingMode = '',
 	primary_service = {},
+	createBookingLoading = false,
+	eBookingAvailableData = '',
 }) {
 	const { hs_code, commodity_description } = primary_service;
+
 	return (
 		<div className={styles.body}>
 			<div className={styles.space_between}>
@@ -131,14 +141,13 @@ function ListItem({
 							<Button
 								className="secondary sm"
 								disabled={
-								item?.booking_confirmation_status === 'not_booked'
-								|| isEmpty(data?.repository_data)
+									createBookingLoading || item?.booking_confirmation_status === 'not_booked'
+								|| (isEmpty(data?.repository_data)
+								|| (bookingMode === 'e_booking' && eBookingAvailableData === 'not_available'))
 							}
 								onClick={handleSubmit(handleProceed)}
 							>
-								{bookingMode === 'email'
-									? 'Proceed With Mail'
-									: 'Proceed With Platform'}
+								{PROCEED_CTA_LABEL[bookingMode] || 'Proceed With Platform'}
 							</Button>
 						</div>
 					</>

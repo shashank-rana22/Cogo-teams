@@ -31,6 +31,9 @@ const getShowElements = (formValues) => {
 	SHOW_ELEMENTS.remarks = [
 		'customer_unreachable',
 		'shipment_parameters_changed',
+		'preferred_airline_unavailable',
+		'truck_type_changed',
+		'cargo_weight_changed',
 	].includes(formValues.cancellation_reason);
 
 	SHOW_ELEMENTS.exploring_remark = formValues.cancellation_reason === 'i_was_just_exploring';

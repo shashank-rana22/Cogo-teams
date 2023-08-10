@@ -22,3 +22,8 @@
 	flex-direction: "column";
 	margin-bottom: 8px;
 }
+
+.container {
+	max-height: 400px;
+	overflow: scroll;
+}
