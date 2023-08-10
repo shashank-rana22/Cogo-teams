@@ -37,7 +37,7 @@ function TableVisualization({
 				<span className={styles.sub_heading}>
 					(
 					{`${startCase(selectedPieData.type)} > ${startCase(
-						selectedPieData.barId,
+						selectedPieData.category,
 					)} > ${startCase(selectedPieData.apiKey)} > ${startCase(
 						selectedPieData.label,
 					)} `}

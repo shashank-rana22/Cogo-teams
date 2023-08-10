@@ -1,0 +1,44 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 8rem 5rem 3rem;
+	margin: 1rem;
+	border-radius: 5px;
+}
+
+.tooltip_content {
+	font-size: var(--font-size-sm);
+}
+
+.without_summary {
+	padding: 2rem 5rem 3rem;
+}
+
+.route_item {
+	position: relative;
+	display: flex;
+	flex: 1;
+	align-items: center;
+}
+
+.line {
+	width: 100%;
+	height: 0.5px;
+	background-color: #f8f2e7;
+}
+
+.dotted {
+	color: #fff;
+	background-color: #fff;
+	border: 1px dotted #f00;
+	border-style: none none dotted;
+}
+
+.label {
+	position: absolute;
+	bottom: -25px;
+	white-space: nowrap;
+	transform: translateX(-35%);
+}

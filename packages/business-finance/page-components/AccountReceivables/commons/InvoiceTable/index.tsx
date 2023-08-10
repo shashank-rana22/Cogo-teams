@@ -1,11 +1,13 @@
 import { Pagination } from '@cogoport/components';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters';
 import completedColumn from '../../configs/Completed_table';
+import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
 import { INVOICE_FILTER } from '../../Utils/invoicelistFilter';
 import FilterModal from '../FilterModal';
+import FooterCard from '../FooterCard';
 import SearchInput from '../searchInput';
 import StyledTable from '../styledTable';
 
@@ -20,7 +22,10 @@ interface Props {
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
-function InvoiceTable({ organizationId, entityCode, showName }: Props) {
+function InvoiceTable({ organizationId = '', entityCode = '', showName = false }: Props) {
+	const [checkedRows, setCheckedRows] = useState([]);
+	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
+
 	const {
 		listData,
 		clearInvoiceFilters,
@@ -32,6 +37,17 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		sort,
 		setSort,
 	} = useGetOutstandingCard(organizationId, entityCode);
+
+	const {
+		bulkIrnGenerate,
+		bulkIrnLoading,
+	} = useBulkIrnGenerate({
+		entityCode,
+		getOrganizationInvoices,
+		checkedRows,
+		setCheckedRows,
+		setIsHeaderChecked,
+	});
 
 	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
 
@@ -50,7 +66,8 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 	const sortStyleDueDateDesc = sortType === 'desc' && sortBy === 'dueDate' ? ORANGE : GREY;
 
 	const columns = completedColumn({
-		refetch: getOrganizationInvoices,
+		entityCode,
+		refetch   : getOrganizationInvoices,
 		showName,
 		setSort,
 		sortStyleGrandTotalAsc,
@@ -61,7 +78,13 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		sortStyleDueDateDesc,
 		invoiceFilters,
 		setinvoiceFilters,
+		checkedRows,
+		setCheckedRows,
+		totalRows : listData?.list || [],
+		isHeaderChecked,
+		setIsHeaderChecked,
 	});
+
 	return (
 		<div>
 			{' '}
@@ -85,7 +108,6 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 					/>
 				</div>
 				<div className={styles.filter_container}>
-
 					<div
 						className={styles.send_report}
 						onClick={() => { sendReport(); }}
@@ -99,7 +121,8 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 						value={invoiceFilters.search || ''}
 						onChange={(value) => setinvoiceFilters({
 							...invoiceFilters,
-							search: value || undefined,
+							search : value || undefined,
+							page   : 1,
 						})}
 						size="md"
 						placeholder="Search by /Invoice number /SID"
@@ -118,7 +141,12 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 				/>
 
 			</div>
-
+			<FooterCard
+				entityCode={entityCode}
+				bulkIrnGenerate={bulkIrnGenerate}
+				bulkIrnLoading={bulkIrnLoading}
+				checkedRows={checkedRows}
+			/>
 		</div>
 	);
 }

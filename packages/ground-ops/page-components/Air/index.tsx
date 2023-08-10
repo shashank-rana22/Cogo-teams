@@ -1,12 +1,13 @@
-import { Input, Toggle, Placeholder } from '@cogoport/components';
+import { Input, Toggle, Placeholder, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
 import Filters from '../Filters';
 
+import Amendment from './components/Amendment';
 import ApprovalPending from './components/ApprovalPending';
 import ApprovedAWB from './components/ApprovedAWB';
-import FinalAWB from './components/FinalAWB';
 import NewAWB from './components/NewAWB';
 import useListShipmentPendingTasks from './hooks/useListShipmentPendingTasks';
 import styles from './styles.module.css';
@@ -28,28 +29,28 @@ const tabs = [
 		count : 'approvedAwbCount',
 	},
 	{
-		key   : 'final_awb',
-		label : 'Final AWB',
-		count : 'finalAwbCount',
+		key   : 'amendment',
+		label : 'Amendment',
+		count : 'amendmentCount',
 	},
 ];
 
-const tabsStatsMapping = {
+const TABS_STATS_MAPPING = {
 	newAwbCount          : 'new_awb',
 	approvalPendingCount : 'approval_pending',
 	approvedAwbCount     : 'approved_awb',
-	finalAwbCount        : 'final_awb',
+	amendmentCount       : 'amendment',
 };
 
 const tabsComponentMapping = {
 	new_awb          : NewAWB,
 	approval_pending : ApprovalPending,
 	approved_awb     : ApprovedAWB,
-	final_awb        : FinalAWB,
+	amendment        : Amendment,
 };
 
-function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
-	const [activeTab, setActiveTab] = useState(tabs[0].key);
+function Air({ setGenerate = () => {}, setItem = () => {}, setViewDoc = () => {}, edit = false, setEdit = () => {} }) {
+	const [activeTab, setActiveTab] = useState(tabs[GLOBAL_CONSTANTS.zeroth_index].key);
 	const [filters, setFilters] = useState({});
 	const [relevantToMe, setRelevantToMe] = useState(false);
 
@@ -74,7 +75,7 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 			const statsObjValues:Array<number> = Object.values(statsObj) || [];
 			const maxStats = Math.max(...statsObjValues);
 			const maxStatsKey = Object.keys(statsObj).find((key) => statsObj[key] === maxStats);
-			setActiveTab(tabsStatsMapping[maxStatsKey]);
+			setActiveTab(TABS_STATS_MAPPING[maxStatsKey]);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
@@ -94,7 +95,7 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 						>
 							{' '}
 							<div
-								className={`${styles.container_click} 
+								className={cl`${styles.container_click} 
 								${tab.key === activeTab ? styles.sub_container_click : styles.sub_container}`}
 							>
 								{tab.label}

@@ -25,10 +25,10 @@ export default function getControls({ service }) {
 	];
 
 	const defaultValues = {
-		service_id: id,
+		service_id                 : id,
 		service_type,
-		containers_count,
-		cargo_weight_per_container,
+		containers_count           : Number(containers_count || 1),
+		cargo_weight_per_container : Number(cargo_weight_per_container || 1),
 	};
 
 	return { controls, defaultValues };

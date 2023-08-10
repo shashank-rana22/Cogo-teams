@@ -1,13 +1,16 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
-import { entityMappingData } from '../P&L/PLStatement/constant';
-
 const useSaveCustom = ({ filters }) => {
 	const { profile } = useSelector((state) => state || {});
 	const { date = '', entity = '', category = '', colCheck, rowCheck, chip = '', radio = '' } = filters || {};
+
+	const entityDetails = GLOBAL_CONSTANTS.cogoport_entities[entity] || {};
+
+	const { id: entityId } = entityDetails;
 
 	const [
 		{ data, loading:saveLoading },
@@ -27,7 +30,7 @@ const useSaveCustom = ({ filters }) => {
 				data: {
 					filters: {
 						month        : date || undefined,
-						cogoEntityId : entityMappingData[entity],
+						cogoEntityId : entityId,
 						category,
 						colCheck,
 						rowCheck,
@@ -41,7 +44,7 @@ const useSaveCustom = ({ filters }) => {
 		} catch (error) {
 			Toast.error(error?.response?.data?.message);
 		}
-	}, [category, chip, colCheck, entity, date, profile.partner?.id, radio, rowCheck, saveTrigger]);
+	}, [category, chip, colCheck, entityId, date, profile.partner?.id, radio, rowCheck, saveTrigger]);
 	return {
 		refetch,
 		saveData: data?.data,

@@ -1,12 +1,14 @@
 import { Button, TabPanel, Tabs } from '@cogoport/components';
-import { useState } from 'react';
+import { Layout } from '@cogoport/ocean-modules';
+import { useState, useMemo } from 'react';
 
-import Layout from '../../../../helpers/Layout';
 import { mainControls, bookingNoteNumberControls, movementDetailsControls } from '../../helpers/getStep2Controls';
 
 import styles from './styles.module.css';
 
-function Step2({ data, setStep, step1_data }) {
+const FIRST_INDEX = 1;
+
+function StepTwo({ data = {}, step1_data = {} }) {
 	const [currentBookingNote, setCurrentBookingNote] = useState('0');
 
 	const { formProps, handleFinalSubmit, departureDate = '' } = data || {};
@@ -14,43 +16,51 @@ function Step2({ data, setStep, step1_data }) {
 	const { control, formState:{ errors = {} } = {}, handleSubmit } = formProps || {};
 
 	const step1Files = step1Watch('url');
+	const keysForRows = useMemo(
+		() => Array(step1Files.length).fill(null).map(() => Math.random()),
+		[step1Files.length],
+	);
 
 	return (
 		<div>
 			<div className={styles.container}>
 
-				<div className={styles.tabs_container}>
-					<Tabs
-						activeTab={currentBookingNote}
-						onChange={setCurrentBookingNote}
-					>
-						{step1Files?.map((file, index) => {
-							const currentUrl = typeof file === 'object' ? file?.finalUrl : file;
-							const splitUrl = currentUrl.split('.');
-							const fileType = splitUrl?.[(splitUrl?.length || 1) - 1];
-							let type = '';
+				<Tabs
+					activeTab={currentBookingNote?.toString()}
+					onChange={setCurrentBookingNote}
+					className={styles.tabs_container}
+				>
+					{Array.isArray(step1Files) && step1Files.map((file, index) => {
+						const currentUrl = typeof file === 'object' ? file?.finalUrl : file;
+						const splitUrl = currentUrl.split('.');
+						const fileType = splitUrl?.[(splitUrl?.length || FIRST_INDEX) - FIRST_INDEX];
+						let type = '';
 
-							if (['png', 'jpeg'].includes(fileType)) {
-								type = `image/${fileType}`;
-							} else {
-								type = 'application/pdf';
-							}
+						if (['png', 'jpeg'].includes(fileType)) {
+							type = `image/${fileType}`;
+						} else {
+							type = 'application/pdf';
+						}
 
-							return (
-								<TabPanel name={`${index}`} title={`Booking Note ${index + 1}`}>
-									<div>
-										<object
-											title="Booking Note"
-											width="100%"
-											type={type}
-											data={currentUrl}
-										/>
-									</div>
-								</TabPanel>
-							);
-						})}
-					</Tabs>
-				</div>
+						return (
+							<TabPanel
+								name={index?.toString()}
+								title={`Booking Note ${index + FIRST_INDEX}`}
+								key={keysForRows[index]}
+							>
+								<div>
+									<object
+										title="Booking Note"
+										width="100%"
+										type={type}
+										data={currentUrl}
+									/>
+								</div>
+							</TabPanel>
+						);
+					})}
+				</Tabs>
+
 				<div className={styles.form_container}>
 					<div className={styles.heading}>Review Details</div>
 
@@ -74,7 +84,7 @@ function Step2({ data, setStep, step1_data }) {
 			</div>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => setStep(1)}>Back</Button>
+				{/* <Button themeType="secondary" onClick={() => setStep(FIRST_INDEX)}>Back</Button> */}
 
 				<Button themeType="primary" onClick={handleSubmit(handleFinalSubmit)}>Next</Button>
 			</div>
@@ -82,4 +92,4 @@ function Step2({ data, setStep, step1_data }) {
 	);
 }
 
-export default Step2;
+export default StepTwo;

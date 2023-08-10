@@ -1,0 +1,38 @@
+{
+  "fcl_freight": [
+    {
+      "value": "export",
+      "label": "Export"
+    },
+    {
+      "value": "import",
+      "label": "Import"
+    },
+    {
+      "value": "fcl_cfs",
+      "label": "CFS"
+    },
+    {
+      "value": "fcl_customs",
+      "label": "Customs"
+    },
+    {
+      "value": "fcl_local",
+      "label": "Local"
+    }
+  ],
+  "lcl_freight": [
+    {
+      "value": "export",
+      "label": "Export"
+    },
+    {
+      "value": "import",
+      "label": "Import"
+    },
+    {
+      "value": "lcl_customs",
+      "label": "Customs"
+    }
+  ]
+}

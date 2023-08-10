@@ -1,4 +1,4 @@
-import { IcCCountryNetherland, IcCCountrySingapore, IcCCountryIndia, IcCCountryVietnam } from '@cogoport/icons-react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -7,13 +7,8 @@ interface ItemProps {
 	entityCode:string;
 }
 function Entity({ entityCode }:ItemProps) {
-	const ICON_MAPPING = {
-		101 : <IcCCountryIndia height={20} width={20} />,
-		201 : <IcCCountryNetherland height={20} width={20} />,
-		301 : <IcCCountryIndia height={20} width={20} />,
-		401 : <IcCCountrySingapore height={20} width={20} />,
-		501 : <IcCCountryVietnam height={20} width={20} />,
-	};
+	const { icon : Icon } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.text}>
@@ -25,7 +20,7 @@ function Entity({ entityCode }:ItemProps) {
 						</>
 					)}
 			</div>
-			{ICON_MAPPING[entityCode]}
+			<Icon height={20} width={20} />
 		</div>
 	);
 }

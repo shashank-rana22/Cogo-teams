@@ -1,0 +1,31 @@
+.rollover_details {
+	display: flex;
+	align-self: center;
+	padding: 4px;
+	margin-left: auto;
+	font-size: var(--font-size-md);
+	background-color: #f3fafa;
+	border: 1px solid var(--color-tertiary-blue-2);
+	border-radius: 4px;
+}
+
+.rollover_tag {
+	display: flex;
+	margin-bottom: 0;
+}
+
+.link {
+	margin-left: 4px;
+	text-decoration: underline;
+}
+
+.vertical_line {
+	align-self: stretch;
+	width: 1px;
+	margin: 0 4px;
+	background-color: var(--color-tertiary-blue-2);
+}
+
+.label {
+	margin: 0 4px;
+}

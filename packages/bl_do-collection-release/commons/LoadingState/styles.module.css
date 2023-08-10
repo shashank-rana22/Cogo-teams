@@ -1,0 +1,26 @@
+.main_container {
+	padding-bottom: 16px;
+	margin: 16px 8px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
+}
+
+.container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.first_column {
+	margin-top: 12px;
+	margin-left: 52px;
+}
+
+.second_column {
+	margin-top: 6px;
+	margin-left: 52px;
+}
+
+.loader_style {
+	margin-left: 52px;
+}

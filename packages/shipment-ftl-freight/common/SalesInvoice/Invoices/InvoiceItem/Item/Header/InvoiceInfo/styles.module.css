@@ -1,0 +1,146 @@
+.invoice_value_container {
+	display: flex;
+	align-items: center;
+	width: 46%;
+	font-size: var(--font-size-xl);
+	font-size: var(--font-size-lg);
+	font-weight: 500;
+	text-transform: capitalize;
+}
+
+.invoice_value_title {
+	color: var(--color-secondary-greyscale-2);
+
+	@media (max-width: 768px) {
+		width: 90px;
+		font-size: var(--font-size-md);
+	}
+}
+
+.invoice_value {
+	margin-left: 4px;
+	color: var(--color-accent-orange-2);
+
+	@media (max-width: 768px) {
+		font-size: var(--font-size-md);
+	}
+}
+
+.invoice_info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 50%;
+	margin: 0 30px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 0;
+	}
+}
+
+.so_number {
+	font-size: var(--font-size-md);
+	font-weight: 500;
+	color: #000;
+
+	&.active {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
+.so_container {
+	width: 33%;
+
+	.core-ui-button-root {
+		padding: 0;
+		margin-top: 4px;
+		color: var(--color-secondary-greyscale-2);
+		text-transform: capitalize;
+		letter-spacing: 0;
+		background-color: none;
+		border: none;
+
+		&:hover {
+			text-decoration: underline;
+			box-shadow: none !important;
+		}
+	}
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.payment_method {
+	width: fit-content;
+	padding: 4px 12px;
+	font-size: var(--font-size-sm);
+	color: var(--color-secondary-greyscale-2);
+	text-align: center;
+	text-transform: capitalize;
+	white-space: nowrap;
+	background-color: #ddebc0;
+	border-radius: 4px;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.info_container {
+	width: fit-content;
+	padding: 4px 7px;
+	margin-bottom: 6px;
+	font-size: var(--font-size-sm);
+	line-height: 16px;
+	color: var(--color-secondary-greyscale-2);
+	white-space: nowrap;
+	background-color: #fbe6e6;
+	border-radius: 4px;
+}
+
+.invoice_container {
+	width: 26%;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.invoice_status {
+	width: max-content;
+	padding: 4px 7px;
+	margin-bottom: 6px;
+	font-size: var(--font-size-sm);
+	line-height: 16px;
+	color: var(--color-secondary-greyscale-2);
+	white-space: nowrap;
+	background-color: #fbe6e6;
+}
+
+.payment_mode_status {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 35%;
+	margin-right: 10px;
+
+	.reviewed {
+		color: #393f70;
+		background-color: #e6fbe9;
+	}
+}
+
+.status_style {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.status_container {
+	margin-top: 2px;
+	font-size: var(--font-size-sm);
+	color: var(--color-secondary-greyscale-2);
+}

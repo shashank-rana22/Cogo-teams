@@ -1,0 +1,7 @@
+.list_container {
+	padding: 0 10px;
+
+	> a:not(:last-of-type) {
+		margin-bottom: 20px;
+	}
+}

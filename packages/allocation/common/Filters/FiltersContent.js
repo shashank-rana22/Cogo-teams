@@ -48,7 +48,7 @@ function FilterContent(props) {
 				if (!Element) return null;
 
 				return (
-					<div className={styles.field_container}>
+					<div key={control.name} className={styles.field_container}>
 						<span className={styles.label}>{control.label}</span>
 
 						<Element

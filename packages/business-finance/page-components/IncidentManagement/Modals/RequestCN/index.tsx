@@ -1,5 +1,5 @@
 import { Tooltip, Select, Popover, Textarea, Modal, Button, Pill } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMEyeopen } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
@@ -14,6 +14,8 @@ import {
 	requestCreditNoteColumns, REVENUE_OPTIONS,
 } from './credit-note-config';
 import styles from './style.module.css';
+
+const MAX_LEN = 40;
 
 function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
@@ -259,7 +261,14 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									SubTotal
 								</div>
 								<div className={styles.date_value}>
-									{getFormattedPrice(subTotal, currency) || '-'}
+									{formatAmount({
+										amount  :	subTotal,
+										currency,
+										options : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || '-'}
 								</div>
 							</div>
 
@@ -268,7 +277,14 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									TaxAmount
 								</div>
 								<div className={styles.date_value}>
-									{getFormattedPrice(taxAmount, currency) || '-'}
+									{formatAmount({
+										amount  :	taxAmount,
+										currency,
+										options : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || '-'}
 								</div>
 							</div>
 
@@ -277,7 +293,15 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									GrandTotal
 								</div>
 								<div className={styles.date_value}>
-									{getFormattedPrice(grandTotal, currency) || '-'}
+
+									{formatAmount({
+										amount  :	grandTotal,
+										currency,
+										options : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || '-'}
 								</div>
 							</div>
 
@@ -285,7 +309,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 						<div className={styles.document_flex}>
 							<div className={styles.document}>Remarks -</div>
-							{remark.length > 40 ? (
+							{remark?.length > MAX_LEN ? (
 								<Tooltip
 									className={styles.tooltip}
 									interactive
@@ -299,7 +323,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						<div className={styles.document_flex}>
 							<div className={styles.document}>Document -</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
-								<a href={url} target="_blank" rel="noreferrer">
+								<a href={url} target="_blank" rel="noreferrer" key={url}>
 									<div className={styles.view_flex}>
 										<div className={styles.view}>View Document</div>
 										<IcMEyeopen />
@@ -307,7 +331,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 								</a>
 							) : (
-								<div> No document available</div>
+								<div key={url}> No document available</div>
 							)))}
 
 						</div>

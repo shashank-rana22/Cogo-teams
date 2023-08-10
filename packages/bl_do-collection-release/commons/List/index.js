@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import Card from '../Card';
@@ -28,26 +29,29 @@ export default function List({
 		</div>
 	);
 
+	if (isEmpty(list)) {
+		return (
+			<EmptyState />
+		);
+	}
 	return (
-		list.length === 0 ? <EmptyState /> : (
-			<div className={styles.container}>
+		<div className={styles.container}>
+			{renderPagination}
+			<div className={styles.list_container}>
+				{list.map((item) => (
+					<Card
+						key={item?.id}
+						item={item}
+						stateProps={stateProps}
+						setStateProps={setStateProps}
+						couldBeCardsCritical={couldBeCardsCritical}
+						openItem={openItem}
+						refetch={refetch}
+						setOpenItem={setOpenItem}
+					/>
+				))}
 				{renderPagination}
-				<div className={styles.list_container}>
-					{list.map((item) => (
-						<Card
-							key={item?.id}
-							item={item}
-							stateProps={stateProps}
-							setStateProps={setStateProps}
-							couldBeCardsCritical={couldBeCardsCritical}
-							openItem={openItem}
-							refetch={refetch}
-							setOpenItem={setOpenItem}
-						/>
-					))}
-					{renderPagination}
-				</div>
 			</div>
-		)
+		</div>
 	);
 }

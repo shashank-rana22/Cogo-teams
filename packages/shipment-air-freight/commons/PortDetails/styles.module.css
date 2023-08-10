@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 0 20px;
+}
+
+.icons_and_service {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	font-weight: 700;
+	color: var(--color-primary-error-red-3);
+	letter-spacing: 0;
+	white-space: nowrap;
+
+	& > svg {
+		width: 24px;
+		height: 24px;
+
+		& > path {
+			fill: var(--color-primary-error-red-3);
+		}
+	}
+}

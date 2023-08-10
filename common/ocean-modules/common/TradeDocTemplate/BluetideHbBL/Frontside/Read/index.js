@@ -1,3 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+
 import Watermark from '../../../commons/Watermark';
 
 import styles from './styles.module.css';
@@ -5,8 +8,9 @@ import { SECTION_THREE_MAPPINGSS, SECTION_ONE_CHILD_1_MAPPINGS } from './templat
 
 function Read({
 	defaultValues = {},
+	watermark = null,
 }) {
-	function SectionOneChild1(values) {
+	function SectionOneChild({ values = {} }) {
 		return (
 			SECTION_ONE_CHILD_1_MAPPINGS.map(({ label, key, children }) => (children ? (
 				<div className={styles[`section_one_child_1-${key}`]} key={key}>
@@ -39,13 +43,21 @@ function Read({
 		);
 	}
 
+	const {
+		container_number = '',
+		marks_and_number = '',
+		package_description = '',
+		gross_weight = '',
+		measurement = '',
+	} = defaultValues?.containers?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
 	return (
 		<main className={styles.main}>
-			<Watermark text="draft" />
+			<Watermark text={watermark || 'draft'} />
 			<section className={styles.section}>
 				<div className={styles.section_one}>
 					<div className={styles.section_one_child_1}>
-						{SectionOneChild1(defaultValues)}
+						<SectionOneChild values={defaultValues} />
 					</div>
 
 					<div className={styles.section_one_child_2}>
@@ -60,40 +72,38 @@ function Read({
 								FMC NO: 028985
 							</p>
 						</div>
+
 						<div className={styles['section_one_child_2-bl_number']}>
 							<p>Bill of Lading No.</p>
-							<b> BL0423003182</b>
+							<b>{defaultValues?.bl_number}</b>
 						</div>
+
 						<div className={styles['section_one_child_2-details']}>
-							<img
-								// eslint-disable-next-line max-len
-								src="https://cogoport-production.sgp1.digitaloceanspaces.com/6f67ac5379afb6694a75e573407899f2/bluetidelogo.png"
+							<Image
+								src={GLOBAL_CONSTANTS.image_url.bluetide_hbl_logo}
 								alt="Bluetide Logo"
+								height={20}
+								width={180}
 							/>
 							<span className={styles.details_text_lg}>
 								BLUETIDE ESERVICES PVT. LTD.
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Complex, Old Delhi Gurgaon Road, Gurgaon
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Building No. 1, Shop No 7, Natraj
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Haryana - 122001
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Tel No: 43708987 Fax No: 43708988
-
 							</span>
 							<span className={styles.details_text_md}>
 								Rge No:MTO/DGS/2274/DEC/2023
-
 							</span>
+
 							<p>
 								Taken in Charge in apparently good condition,herein at the place of receipt,
 								for transport anddelivery as mentioned above, unless otherwisestated.The MTO,
@@ -107,6 +117,7 @@ function Read({
 
 							</p>
 						</div>
+
 						<div className={styles['section_one_child_2-goods_delivery_contact']}>
 							<p>For delivery of goods please apply to:</p>
 							<p>{defaultValues?.goods_delivery_contact || ''}</p>
@@ -127,13 +138,14 @@ function Read({
 								<th>Measurement</th>
 							</tr>
 						</thead>
+
 						<tbody>
 							<tr>
-								<td>{defaultValues?.containers?.[0]?.container_number || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.marks_and_number || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.package_description || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.gross_weight || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.measurement || ''}</td>
+								<td>{container_number}</td>
+								<td>{marks_and_number}</td>
+								<td>{package_description}</td>
+								<td>{gross_weight}</td>
+								<td>{measurement}</td>
 							</tr>
 						</tbody>
 					</table>

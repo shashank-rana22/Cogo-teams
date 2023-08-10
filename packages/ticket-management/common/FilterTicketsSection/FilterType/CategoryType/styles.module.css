@@ -1,0 +1,16 @@
+.category_container {
+	display: flex;
+	justify-content: flex-end;
+	width: 50%;
+
+	:global {
+		.ui_select_container:first-child {
+			width: 30%;
+		}
+
+		.ui_select_container:last-child {
+			width: 70%;
+			margin-left: 8px;
+		}
+	}
+}

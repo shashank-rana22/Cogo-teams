@@ -9,27 +9,27 @@ import FillContainer from './FillContainer';
 import PercentageDiv from './PercentageDiv';
 import styles from './styles.module.css';
 
-function ReminderModal({ firestore, agentId, getAssignedChats }) {
+const DEFAULT_NO_OF_CHATS_ASSIGNED = 0;
+
+function ReminderModal({ firestore = {}, agentId = '' }) {
 	const [reminderModal, setReminderModal] = useState(false);
 
-	const { mountReminderSnapShot, cleanUpTimeout, shipmentData } = useShipmentReminder(
-		{ setReminderModal, firestore, agentId, getAssignedChats },
-	);
-
-	useEffect(() => {
-		let addSnapShotAfterfewSeconds = '';
-		clearTimeout(addSnapShotAfterfewSeconds);
-		addSnapShotAfterfewSeconds = setTimeout(
-			mountReminderSnapShot,
-			100,
-		);
-		return () => {
-			cleanUpTimeout();
-			clearTimeout(addSnapShotAfterfewSeconds);
-		};
-	}, [cleanUpTimeout, mountReminderSnapShot]);
+	const {
+		mountReminderSnapShot,
+		cleanUpTimeout,
+		shipmentData,
+	} = useShipmentReminder({
+		setReminderModal,
+		firestore,
+		agentId,
+	});
 
 	const statsMapping = getShipmentReminderStats(shipmentData);
+
+	useEffect(() => {
+		mountReminderSnapShot();
+		return cleanUpTimeout;
+	}, [cleanUpTimeout, mountReminderSnapShot]);
 
 	return (
 		<Modal
@@ -44,7 +44,7 @@ function ReminderModal({ firestore, agentId, getAssignedChats }) {
 			<Modal.Body>
 				<div className={styles.header}>
 					No. of Chats Assigned
-					<span>{shipmentData.assignedChatsCount || 0}</span>
+					<span>{shipmentData.assignedChatsCount || DEFAULT_NO_OF_CHATS_ASSIGNED}</span>
 				</div>
 				<div className={styles.header}>
 					Shipments Booked

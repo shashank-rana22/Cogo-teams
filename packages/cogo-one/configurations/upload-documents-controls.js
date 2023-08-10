@@ -1,23 +1,10 @@
-import PATTERNS from '@cogoport/constants/patterns';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getCountryOptions from '@cogoport/globalization/utils/getCountryOptions';
 
-// eslint-disable-next-line
-import countries from '../../../.data-store/constants/countries.json';
+const countryOptions = getCountryOptions();
 
 const getControls = (fileType = '') => {
-	const indiaOption = countries.find(
-		(country) => country.country_code === 'IN',
-	);
-
-	const countryOptions = [{
-		label : indiaOption?.name,
-		value : indiaOption?.id,
-	}];
-
-	countries.filter((country) => country.country_code !== 'IN').map((country) => {
-		const option = { label: country.name, value: country.id };
-		countryOptions.push(option);
-		return countryOptions;
-	});
+	const geo = getGeoConstants();
 
 	const controls = {
 		utility_bill_document_url: {
@@ -42,7 +29,7 @@ const getControls = (fileType = '') => {
 			rules : {
 				required : `${fileType === 'pan' ? 'PAN' : 'GST'} Number is required`,
 				pattern  : {
-					value   : fileType === 'pan' ? PATTERNS.PAN_NUMBER : PATTERNS.GST_NUMBER,
+					value   : fileType === 'pan' ? geo.regex.PAN : geo.regex.GST,
 					message : `Enter a valid ${fileType === 'pan' ? 'PAN' : 'GST'} number`,
 				},
 			},

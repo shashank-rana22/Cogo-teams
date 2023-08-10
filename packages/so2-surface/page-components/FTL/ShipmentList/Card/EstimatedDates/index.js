@@ -1,48 +1,119 @@
+import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
+const getDisplayDate = (date) => (date ? formatDate({
+	date,
+	dateFormat:
+			GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+	formatType: 'date',
+}) : null);
+
+const getDisplayDateTime = (date) => (date ? formatDate({
+	date,
+	dateFormat:
+			GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+	timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+	formatType : 'dateTime',
+	separator  : ' ',
+}) : null);
 
 function EstimatedDates({ data = {} }) {
-	const { estimated_arrival = '', estimated_departure = '' } = data.ftl_freight_services[0] || {};
+	const {
+		estimated_arrival = '',
+		estimated_departure = '',
+		pickup_date = '',
+		delivery_date = '',
+	} =	 data.ftl_freight_services?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	return (
-		<div className={`${styles.container} core_ui_port_conatiner`}>
-
-			<div className={styles.date_detail}>
-				{estimated_departure ? (
-					<>
-						<div className={styles.heading}>
-							ETD:
+		<div>
+			<div className={styles.container}>
+				<div className={styles.date_detail}>
+					<div className={styles.heading}>
+						ETD :
+					</div>
+					{estimated_departure ? (
+						<div className={styles.eta_etd}>
+							<Tooltip
+								placement="bottom"
+								theme="light"
+								content={getDisplayDateTime(estimated_departure)}
+							>
+								{getDisplayDate(estimated_departure)}
+							</Tooltip>
 						</div>
+					) : 'TBD'}
+				</div>
+
+				<div className={styles.icon_wrapper}>
+					<IcMPortArrow />
+				</div>
+				<div className={styles.date_detail}>
+					<div className={styles.heading}>
+						ETA :
+					</div>
+					{estimated_arrival ? (
 
 						<div className={styles.eta_etd}>
-							{' '}
-							{getDisplayDate(estimated_departure)}
-						</div>
-					</>
-				) : 'TBD'}
-			</div>
+							<Tooltip
+								placement="bottom"
+								theme="light"
+								content={getDisplayDateTime(estimated_arrival)}
+							>
+								{getDisplayDate(estimated_arrival)}
+							</Tooltip>
 
-			<div className={styles.icon_wrapper}>
-				<IcMPortArrow className="core_ui_icon" />
+						</div>
+
+					) : 'TBD'}
+				</div>
 			</div>
-			{estimated_arrival ? (
+			<div className={styles.container}>
 
 				<div className={styles.date_detail}>
 					<div className={styles.heading}>
-						ETA:
+						ATD :
 					</div>
-					<div className={styles.eta_etd}>
-						{'  '}
-						{getDisplayDate(estimated_arrival)}
-
-					</div>
+					{pickup_date ? (
+						<div className={styles.eta_etd}>
+							<Tooltip
+								placement="bottom"
+								theme="light"
+								content={getDisplayDateTime(pickup_date)}
+							>
+								{getDisplayDate(pickup_date)}
+							</Tooltip>
+						</div>
+					) : 'TBD'}
 				</div>
 
-			) : 'TBD'}
+				<div className={styles.icon_wrapper}>
+					<IcMPortArrow />
+				</div>
+				<div className={styles.date_detail}>
+					<div className={styles.heading}>
+						ATA :
+					</div>
+					{delivery_date ? (
+
+						<div className={styles.eta_etd}>
+							<Tooltip
+								placement="bottom"
+								theme="light"
+								content={getDisplayDateTime(delivery_date)}
+							>
+								{getDisplayDate(delivery_date)}
+							</Tooltip>
+
+						</div>
+
+					) : 'TBD'}
+				</div>
+			</div>
 		</div>
 	);
 }

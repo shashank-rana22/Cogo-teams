@@ -1,0 +1,79 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	margin: 24px;
+	background-color: var(--color-tertiary-blue-5);
+	border: 1px solid var(--color-tertiary-blue-2);
+	border-radius: 8px;
+}
+
+.header_container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 18px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid var(--color-tertiary-blue-2);
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.invoice_party_details {
+	display: flex;
+	flex-direction: row;
+	margin-left: 8px;
+	line-height: 20px;
+	color: var(--color-secondary-greyscale-2);
+}
+
+.invoice_party_name {
+	margin-right: 10px;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+}
+
+.label {
+	font-size: var(--font-size-md);
+}
+
+.invoice_value_container {
+	display: flex;
+	align-items: center;
+	margin-left: 2.5%;
+	font-size: var(--font-size-xl);
+	font-weight: 500;
+	line-height: 16px;
+	white-space: nowrap;
+
+	@media (max-width: 768px) {
+		margin-left: 0;
+		font-size: var(--font-size-xl);
+	}
+}
+
+.invoice_value_title {
+	font-size: var(--font-size-xl);
+	font-weight: 500;
+	color: var(--color-secondary-greyscale-2);
+
+	@media (max-width: 768px) {
+		font-size: var(--font-size-md);
+	}
+}
+
+.invoice_value {
+	margin-left: 4px;
+	color: var(--color-accent-orange-2);
+
+	@media (max-width: 768px) {
+		font-size: var(--font-size-md);
+	}
+}
+
+.invoice_list_wrapper {
+	padding: 22px;
+}

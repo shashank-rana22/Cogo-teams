@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { InputController, SelectController, AsyncSelectController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useContext } from 'react';
 
 import useUpdateShipmentService from '../../hooks/useUpdateShipmentService';
@@ -17,7 +18,7 @@ function FormElement(props) {
 	if (type in controlsMapping) {
 		return (
 			<div>
-				<div className={styles.label}>{label}</div>
+				<h4>{label}</h4>
 				<Element {...props} />
 				{errors[name] && (<span className={styles.errors}>{errors[name].message}</span>)}
 			</div>
@@ -34,17 +35,16 @@ function SupplierReallocation({
 	const { shipment_data, refetch, refetchServices, primary_service = {} } = useContext(ShipmentDetailContext);
 	const { service_provider = {} } = primary_service;
 
-	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
+	const { documents, shipment_type, payment_term = '' } = shipment_data || {};
 
-	const serviceObj = serviceData?.[0] || {};
-	const { service_type } = serviceObj || {};
+	const serviceObj = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { defaultValues, controls, showAllControls } = getControls({
+		primary_service,
 		serviceObj,
 		shipment_type,
 		documents,
 		isAdditional,
-		trade_type,
 		payment_term,
 	});
 
@@ -60,14 +60,14 @@ function SupplierReallocation({
 		apiTrigger, loading,
 	} = useUpdateShipmentService({
 		refetch        : afterUpdateRefetch,
-		successMessage : 'Service updated successfully!',
+		successMessage : 'Service Updated successfully!',
 	});
 
 	const onUpdate = (values) => {
 		const payload = {
 			ids                 : serviceData?.map((item) => item?.id),
 			data                : { ...values },
-			service_type,
+			service_type        : serviceObj?.service_type,
 			performed_by_org_id : service_provider?.id,
 		};
 		apiTrigger(payload);
@@ -83,15 +83,9 @@ function SupplierReallocation({
 			closeOnOuterClick={false}
 			showCloseIcon={!loading}
 		>
-			<Modal.Body>
-				<Modal.Header title={(
-					<div className={styles.header}>
-						Supplier Reallocation
-						{showAllControls ? ' & BL Details' : null}
-					</div>
-				)}
-				/>
+			<Modal.Header title={`Supplier Reallocation${showAllControls ? ' & BL Details' : ''}`} />
 
+			<Modal.Body>
 				<div className={styles.form_wrapper}>
 					{controls.map((ctrl) => (
 						<FormElement
@@ -114,7 +108,7 @@ function SupplierReallocation({
 				</Button>
 
 				<Button
-					className="reviewed"
+					className={styles.primary_button}
 					onClick={handleSubmit(onUpdate)}
 					disabled={loading}
 				>

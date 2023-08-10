@@ -8,6 +8,7 @@ function Card({
 	handleClick = () => {},
 	selectedTaskId = '',
 	isTaskOpen = false,
+	tasksList = [],
 }) {
 	const handleChange = (newMails) => {
 		handleClick(task, newMails);
@@ -27,6 +28,7 @@ function Card({
 						handleClick={handleClick}
 						handleChange={handleChange}
 						hideButton={task.status === 'completed' || selectedTaskId.length}
+						tasksList={tasksList}
 					/>
 				)}
 

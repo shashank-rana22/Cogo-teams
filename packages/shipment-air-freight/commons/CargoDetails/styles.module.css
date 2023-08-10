@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+
+	:global {
+		.bl_category {
+			background: var(--color-accent-orange-4);
+			border: 1px solid var(--color-accent-orange-3);
+		}
+	}
+}
+
+.cargo_detail_pill {
+	height: fit-content;
+	font-weight: 500;
+	color: #4f4f4f;
+	text-transform: capitalize;
+}
+
+.shipment_cargo_details_root {
+	justify-content: start;
+}
+
+.multi_service {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.more_details_popover_text {
+	color: #f68b21;
+	cursor: pointer;
+}

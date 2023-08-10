@@ -1,5 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
@@ -25,7 +25,7 @@ function ResultColumns({ columns = [] }) {
 			accessor : (item) => {
 				if (column === 'organization_name') {
 					return (
-						<Tooltip content={item?.[`${column}`]} animation="shift-toward">
+						<Tooltip content={item?.[`${column}`]} placement="bottom">
 							<div>
 								<div className={styles.data}>{startCase(item?.[`${column}`])}</div>
 							</div>

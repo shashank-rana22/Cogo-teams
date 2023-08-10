@@ -27,7 +27,7 @@ function useGetTestList({ filters:cogoEntityFilter, activeTab }) {
 						...params.filters,
 						q      : query,
 						...cogoEntityFilter,
-						status : ['active', 'draft', 'published'],
+						status : ['active', 'draft', 'published', 'retest'],
 					},
 				},
 			});

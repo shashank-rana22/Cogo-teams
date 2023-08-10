@@ -151,6 +151,42 @@ const apis = [
 		feature      : 'rfq',
 		service_name : 'rfq',
 	},
+	{
+		api          : 'create_rfq_rate_card',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
+	{
+		api          : 'update_rfq_rate_card',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
+	{
+		api          : 'create_rfq_approval',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
+	{
+		api          : 'create_approval_rate_card',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
+	{
+		api          : 'list_rfq_rate_cards',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
+	{
+		api          : 'get_rfq_logs',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
 ];
 
 export default apis;

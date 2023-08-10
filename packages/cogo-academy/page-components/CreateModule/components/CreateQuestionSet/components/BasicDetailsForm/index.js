@@ -13,6 +13,8 @@ import styles from './styles.module.css';
 
 const constants = ['name', 'topic', 'question_count', 'cogo_entity'];
 
+const DEFAULT_VALUE = 0;
+
 const getValue = ({ item, data }) => {
 	const { cogo_entity_object } = data || {};
 
@@ -22,7 +24,7 @@ const getValue = ({ item, data }) => {
 		return <Pill size="lg" color="#F3FAFA">{data?.[item]}</Pill>;
 	}
 
-	return data?.[item] || 0;
+	return data?.[item] || DEFAULT_VALUE;
 };
 
 function BasicDetailsForm({
@@ -72,7 +74,7 @@ function BasicDetailsForm({
 			setValue(item, data?.[item]);
 		});
 
-		setValue('cogo_entity_id', cogo_entity_object.id);
+		setValue('cogo_entity_id', cogo_entity_object?.id);
 
 		setShowForm(true);
 	};

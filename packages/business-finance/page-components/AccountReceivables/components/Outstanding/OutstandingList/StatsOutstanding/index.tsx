@@ -1,4 +1,5 @@
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import { StatsKeyMapping, StatsKeyMappingPayment } from '../../../../constants/index';
 
@@ -16,13 +17,7 @@ function StatsOutstanding({ item }) {
 		entityCode = '',
 	} = item || {};
 
-	const keyValue = {
-		101 : 'INR',
-		201 : 'EUR',
-		301 : 'INR',
-		401 : 'SGD',
-		501 : 'VND',
-	};
+	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	const invoiceContainer = [{
 		name         : 'OPEN INVOICES',
@@ -46,27 +41,28 @@ function StatsOutstanding({ item }) {
 	},
 
 	];
+
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.invoices_wrapper}>
 				{invoiceContainer.map((invoiceObject) => (
-					<div className={styles.invoices_card}>
+					<div className={styles.invoices_card} key={invoiceObject.name}>
 						<div className={styles.left_container}>
 							<div className={styles.styled_heading}>
 								{invoiceObject.name}
 								{' '}
 							</div>
 							<div className={styles.amount_open}>
-								{getFormattedPrice(
-									invoiceObject.LedgerAmount?.ledgerAmount || 0,
-									invoiceObject.LedgerAmount?.ledgerCurrency || keyValue[entityCode],
-									{
+								{formatAmount({
+									amount   : invoiceObject.LedgerAmount?.ledgerAmount || 0,
+									currency : invoiceObject.LedgerAmount?.ledgerCurrency || currency,
+									options  : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
 										maximumFractionDigits : 0,
 									},
-								)}
+								})}
 								<div className={styles.count}>
 									(
 									{invoiceObject.LedgerAmount?.ledgerCount}
@@ -76,7 +72,7 @@ function StatsOutstanding({ item }) {
 						</div>
 						<div className={styles.right_container}>
 							{(invoiceObject.statsKey || []).map((val) => (
-								<div>
+								<div key={val.label}>
 									<div className={styles.label}>
 										{val.label}
 										<div className={styles.count}>
@@ -88,16 +84,16 @@ function StatsOutstanding({ item }) {
 									<div
 										className={styles.amount}
 									>
-										{getFormattedPrice(
-											invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount || 0,
-											invoiceObject.ageingBucket[val.valueKey]?.ledgerCurrency
-											|| keyValue[entityCode],
-											{
+										{formatAmount({
+											amount   : invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount || 0,
+											currency : invoiceObject.ageingBucket[val.valueKey]?.ledgerCurrency
+																	|| currency,
+											options: {
 												style                 : 'currency',
 												currencyDisplay       : 'code',
 												maximumFractionDigits : 0,
 											},
-										)}
+										})}
 									</div>
 								</div>
 							))}
@@ -112,15 +108,15 @@ function StatsOutstanding({ item }) {
 					<div
 						className={styles.amount}
 					>
-						{getFormattedPrice(
-							totalOutstanding.ledgerAmount || 0,
-							totalOutstanding.ledgerCurrency || keyValue[entityCode],
-							{
+						{formatAmount({
+							amount   : totalOutstanding.ledgerAmount || 0,
+							currency : totalOutstanding.ledgerCurrency || currency,
+							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',
 								maximumFractionDigits : 0,
 							},
-						)}
+						})}
 					</div>
 				</div>
 			</div>

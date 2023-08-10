@@ -5,16 +5,17 @@ import {
 	Toggle,
 	Button, RadioGroup, Chips, CheckboxGroup, Popover, Tooltip, Select,
 } from '@cogoport/components';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { IcMDelete, IcMInfo } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
-import { optionsEntity } from '../../../Accruals/constant';
+import { getEntityOptions } from '../../../Accruals/constant';
 import useSaveCustom from '../../../hooks/useSaveCustom';
 import useSaveCustomList from '../../../hooks/useSaveCustomList';
 import { OptionMonth } from '../../SourceFile/utils';
-import { entityMapping, optionsCheck, optionsPeriod, optionsPills, optionsRadio } from '../constant';
+import { optionsCheck, optionsPeriod, optionsPills, optionsRadio } from '../constant';
 
 import ModalMonth from './ModalMonth';
 import styles from './styles.module.css';
@@ -39,6 +40,8 @@ function Card({
 		refetch:refetchSave, saveData, loading, LoadingDelete,
 		refetchDelete,
 	} = useSaveCustomList({ setCustomModal });
+
+	const entityOptions = getEntityOptions() as any;
 
 	const content = () => (
 		<div className={styles.content_container}>
@@ -119,7 +122,7 @@ function Card({
 								value={filters?.entity}
 								onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 								placeholder="Entity"
-								options={optionsEntity}
+								options={entityOptions}
 								isClearable
 								style={{ width: '150px' }}
 							/>
@@ -226,7 +229,7 @@ function Card({
 										} = JSON.parse(filtersItem) || {};
 
 										return (
-											<div className={styles.filters}>
+											<div key={cogoEntityId} className={styles.filters}>
 												<div className={styles.radio_filters}>
 													<div>
 														<Radio
@@ -245,7 +248,7 @@ function Card({
 												<div>
 													Entity
 													<div className={styles.bold_font}>
-														{entityMapping[cogoEntityId] || '--'}
+														{ getEntityCode(cogoEntityId) || '--'}
 
 													</div>
 												</div>

@@ -1,0 +1,10 @@
+.container {
+	padding: 10px 30px;
+	background-color: #fff;
+}
+
+.date_display {
+	display: flex;
+	align-items: center;
+	margin: 40px 10px;
+}

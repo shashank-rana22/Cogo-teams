@@ -1,3 +1,7 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+import validateMobileNumber from '../utils/validateMobileNumber';
+
 const repositoryControls = () => ({
 	basic: [
 		{
@@ -6,6 +10,34 @@ const repositoryControls = () => ({
 			asyncKey    : 'list_operators',
 			label       : 'Select Airline',
 			placeholder : 'Select Airline...',
+			params      : {
+				filters    : { operator_type: 'airline', status: 'active' },
+				page_limit : 10,
+				sort_by    : 'short_name',
+				sort_type  : 'asc',
+			},
+			initialCall : true,
+			span        : 6,
+			rules       : {
+				required: true,
+			},
+		},
+		{
+			name     : 'airport_id',
+			type     : 'async-select',
+			asyncKey : 'list_locations',
+			params   : {
+				filters: {
+					type: 'airport',
+				},
+				page_limit : 10,
+				sort_by    : 'name',
+				sort_type  : 'asc',
+				includes   : { default_params_required: true },
+			},
+			initialCall : true,
+			label       : 'Select Airport',
+			placeholder : 'Select Airport...',
 			span        : 6,
 			rules       : {
 				required: true,
@@ -26,28 +58,114 @@ const repositoryControls = () => ({
 				required: true,
 			},
 		},
+		{
+			name    : 'e_booking_availability',
+			type    : 'select',
+			options : [
+				{
+					label : 'Available',
+					value : 'available',
+				},
+				{
+					label : 'Not Available',
+					value : 'not_available',
+				},
+			],
+			value : 'not_available',
+			label : 'Is E Booking Available',
+			span  : 6,
+			rules : {
+				required: true,
+			},
+		},
+		{
+			name        : 'inventory_stock_availability',
+			type        : 'select',
+			placeholder : 'Select Before/After Booking',
+			options     : [
+				{
+					label : 'Before Booking',
+					value : 'before_booking',
+				},
+				{
+					label : 'After Booking',
+					value : 'after_booking',
+				},
+			],
+			label : 'When is Airway Bill Procured?',
+			span  : 6,
+			rules : {
+				required: true,
+			},
+		},
 	],
 	email: [
 		{
-			name        : 'poc_name',
-			type        : 'text',
-			label       : 'Airline Person(POC)',
-			placeholder : 'Enter name',
-			span        : 6,
-			rules       : {
-				required: true,
-			},
+			name               : 'pocs_data',
+			type               : 'fieldArray',
+			span               : 12,
+			showButtons        : true,
+			noDeleteButtonTill : 1,
+			buttonText         : 'Add POC Details',
+			controls           : [
+				{
+					name        : 'name',
+					type        : 'text',
+					label       : 'Airline Person(POC)',
+					placeholder : 'Enter name',
+					span        : 6,
+					rules       : {
+						required: true,
+					},
+				},
+				{
+					name        : 'email',
+					type        : 'text',
+					label       : 'Airline E-mail ID',
+					placeholder : 'Enter email',
+					span        : 6,
+					rules       : {
+						required : true,
+						pattern  : {
+							value   : GLOBAL_CONSTANTS.regex_patterns.email,
+							message : 'Email is invalid',
+						},
+					},
+				},
+				{
+					name        : 'mobile',
+					type        : 'mobile',
+					inputType   : 'number',
+					label       : 'Contact Number',
+					placeholder : 'Enter contact number',
+					span        : 8,
+					rules       : {
+						validate: validateMobileNumber,
+					},
+				},
+			],
 		},
 		{
-			name        : 'poc_email',
-			type        : 'text',
-			label       : 'Airline E-mail ID',
-			placeholder : 'Enter email',
-			span        : 6,
-			rules       : {
+			name    : 'rate_required',
+			type    : 'select',
+			options : [
+				{
+					label : 'Yes',
+					value : 'yes',
+				},
+				{
+					label : 'No',
+					value : 'no',
+				},
+			],
+			value : 'yes',
+			label : 'Do we send Agreed Rate in Email for this Airline?',
+			span  : 6,
+			rules : {
 				required: true,
 			},
 		},
+
 	],
 	platform: [
 		{
@@ -57,7 +175,11 @@ const repositoryControls = () => ({
 			placeholder : 'Enter URL',
 			span        : 6,
 			rules       : {
-				required: true,
+				required : true,
+				pattern  : {
+					value   : GLOBAL_CONSTANTS.regex_patterns.url_match,
+					message : 'URL is invalid',
+				},
 			},
 		},
 		{

@@ -1,0 +1,44 @@
+.header {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 16px;
+
+	@media (max-width: 800px) {
+		margin: 38px 16px 16px;
+	}
+}
+
+.title {
+	margin-left: 6px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.back_icon {
+	color: #221f20;
+	cursor: pointer;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex_wrapper {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.header_wrapper {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 4px;
+	font-weight: 700;
+}
+
+.submit {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 16px;
+}

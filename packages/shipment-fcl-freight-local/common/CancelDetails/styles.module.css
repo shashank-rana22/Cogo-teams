@@ -1,0 +1,20 @@
+.container {
+	display: flex;
+	padding: 16px;
+	margin-top: 16px;
+	color: var(--color-primary-error-red-2);
+	background-color: var(--color-primary-error-red-5);
+	border-radius: 4px;
+
+	h2,
+	h3,
+	p {
+		margin: 0;
+	}
+
+	svg {
+		width: 26px;
+		height: 26px;
+		margin: 6px 10px 0 0;
+	}
+}

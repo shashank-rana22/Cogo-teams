@@ -1,10 +1,21 @@
-import TIMELINE_EDITABLE from '../config/timelineEditable.json';
-import { getDate } from '../utils/getDate';
+import { getDate } from '../../../utils/getDate';
+import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
-const controls = ({ primary_service, departureDate, timelineData = [] }) => {
-	const disabledState = primary_service?.state === 'vessel_arrived'
-		|| !TIMELINE_EDITABLE.primary_service.state.includes(primary_service?.state);
+const controls = ({
+	primary_service = {},
+	departureDate = '',
+	timelineData = [],
+	defaultEditable = false,
+}) => {
+	const modifiedPrimaryService = {
+		...primary_service || {},
+		schedule_departure : getDepartureArrivalDate(primary_service, 'departure'),
+		schedule_arrival   : getDepartureArrivalDate(primary_service, 'arrival'),
+	};
+	const { origin_port, destination_port, is_containers_gated_out } = modifiedPrimaryService || {};
+
+	const disabledState = !defaultEditable;
 
 	let deviated_departure;
 	let deviated_arrival;
@@ -29,35 +40,58 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		{
 			name       : 'schedule_departure',
 			label      : 'Actual time of departure',
-			lowerlabel : deviated_departure ? `Fluctuated time of departure: ${deviated_departure}` : '',
+			lowerLabel : deviated_departure ? `Fluctuated time of departure: ${deviated_departure}` : '',
 			maxDate    : null,
 		},
 		{
 			name       : 'schedule_arrival',
 			label      : 'Actual time of arrival',
-			lowerlabel : deviated_arrival && deviated_departure
+			lowerLabel : deviated_arrival && deviated_departure
 				&& new Date(deviated_arrival) > new Date(deviated_departure)
 				? `Fluctuated time of arrival: ${deviated_arrival}` : '',
 			maxDate : null,
 			minDate : departureDate,
 			disable : false,
 		},
+		...(origin_port?.is_icd ? [{
+			name  : 'origin_icd_departed_at',
+			label : 'Departure from ICD Port Date',
+		}] : []),
+		...(destination_port?.is_icd ? [{
+			name    : 'arrived_at_destination_icd_at',
+			label   : 'Arrived At ICD Port Date',
+			disable : !!is_containers_gated_out,
+			maxDate : null,
+			minDate : departureDate,
+		}] : []),
 	];
 
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
 	finalControls.forEach((control, index) => {
-		const { name, maxDate = departureDate, disable = disabledState } = control;
-		finalControls[index].maxDate = maxDate;
-		finalControls[index].disable = disable;
-		finalControls[index].dateFormat = 'MMM dd, yyyy, hh:mm:ss aaa';
-		finalControls[index].placeholder = 'Select Date';
-		finalControls[index].isPreviousDaysAllowed = true;
-		finalControls[index].showTimeSelect = true;
-		defaultValues[name] = getDate(primary_service?.[name]);
+		const { name, label, maxDate = departureDate, disable = disabledState } = control || {};
+		const prefillValue = getDate(modifiedPrimaryService[name]);
+
+		finalControls[index] = {
+			...finalControls[index],
+			maxDate,
+			disable,
+			dateFormat            : 'MMM dd, yyyy, hh:mm:ss aaa',
+			placeholder           : 'Select Date',
+			isPreviousDaysAllowed : true,
+			showTimeSelect        : true,
+			rules                 : {
+				required: {
+					value   : !!prefillValue,
+					message : `${label} is required`,
+				},
+			},
+		};
+
+		DEFAULT_VALUES[name] = prefillValue;
 	});
 
-	return { finalControls, defaultValues };
+	return { finalControls, defaultValues: DEFAULT_VALUES };
 };
 
 export default controls;

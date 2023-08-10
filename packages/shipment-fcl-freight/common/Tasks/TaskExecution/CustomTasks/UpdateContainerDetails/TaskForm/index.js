@@ -1,16 +1,19 @@
 import { Button, Checkbox, Input } from '@cogoport/components';
+import { Layout } from '@cogoport/ocean-modules';
 import React, { useState } from 'react';
 
 import useContainerDetails from '../../../../../../hooks/useContainerDetails';
-import Layout from '../../../helpers/Layout';
 import TaskContainer from '../../common/TaskContainer';
 
 import styles from './styles.module.css';
+
+const VALID_DATE_FORMATS = '03/21/2000, 2000/03/21, 3/21/2000-09:05:00, 3-21-2000-09:05:00';
 
 function TaskForm({
 	apis_data = {},
 	pendingTask = {},
 	onCancel = () => {},
+	taskLoading = false,
 	services = [],
 	taskListRefetch = () => {},
 }) {
@@ -31,14 +34,12 @@ function TaskForm({
 		modifiedControls,
 		showElements,
 		errors,
-		onSubmit,
-		handleSubmit,
+		onSubmit = () => {},
+		handleSubmit = () => {},
 	} = formProps || {};
 
-	const validDateFormats = '03/21/2000, 2000/03/21, 3/21/2000-09:05:00, 3-21-2000-09:05:00';
-
 	return (
-		<TaskContainer pendingTask={pendingTask}>
+		<TaskContainer pendingTask={pendingTask} loading={taskLoading}>
 			<div className={styles.control_container}>
 				<div className={styles.input}>
 					<Input
@@ -71,8 +72,8 @@ function TaskForm({
 
 				<div className={styles.info}>
 					Other valid date formats:
-					{' '}
-					{validDateFormats}
+					&nbsp;
+					{VALID_DATE_FORMATS}
 				</div>
 			</div>
 
@@ -86,8 +87,8 @@ function TaskForm({
 			</div>
 
 			<div className={styles.button_wrap}>
-				<Button className="secondary md" onClick={() => onCancel()} disabled={loading}>
-					cancel
+				<Button themeType="secondary" onClick={onCancel} disabled={loading}>
+					Cancel
 				</Button>
 
 				<Button disabled={loading} onClick={handleSubmit(onSubmit)}>

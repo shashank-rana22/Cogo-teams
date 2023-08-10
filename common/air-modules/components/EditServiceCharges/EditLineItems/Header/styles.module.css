@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	margin: 0;
+	font-weight: 600;
+	color: #333;
+}

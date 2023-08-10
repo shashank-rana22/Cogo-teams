@@ -1,0 +1,71 @@
+.container {
+	margin-top: -24px;
+
+	:global {
+		.ui_text_area_container {
+			width: auto;
+			margin-left: 30px;
+		}
+	}
+}
+
+.rating {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 16px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	background: #f2f3fa;
+	border-radius: 6px;
+
+	:global {
+		.ui_star_rating_container,
+		.ui_star_rating {
+			background-color: #f2f3fa;
+		}
+
+		.ui_star_rating {
+			padding: 0;
+			margin: 0;
+		}
+	}
+}
+
+.rating_text {
+	font-weight: 600;
+	color: #221f20;
+}
+
+.rating_text span {
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.btn {
+	float: right;
+	margin-top: 20px;
+}
+
+.congrats img {
+	display: block;
+	width: 80%;
+	margin: auto;
+}
+
+.congrats_text {
+	position: absolute;
+	top: 120px;
+	right: 200px;
+	width: 580px;
+	text-align: center;
+}
+
+.congrats {
+	margin-bottom: 40px;
+}
+
+.remarks {
+	margin-bottom: 6px;
+	margin-left: 30px;
+}

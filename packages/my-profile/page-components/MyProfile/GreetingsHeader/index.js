@@ -54,6 +54,7 @@ function Greetings({
 		refetch: setRefetch,
 		detailsData,
 		setShowModal,
+		editNameModal,
 		setEditNameModal,
 		partner_user_id,
 	});
@@ -139,7 +140,9 @@ function Greetings({
 
 						<IcMEdit
 							size={1.8}
-							onClick={() => setEditNameModal(true)}
+							onClick={() => setEditNameModal(
+								(prev) => ({ ...prev, from: 'name', state: true }),
+							)}
 							style={{ cursor: 'pointer' }}
 						/>
 
@@ -148,8 +151,8 @@ function Greetings({
 			</div>
 
 			<Modal
-				show={editNameModal}
-				onClose={() => setEditNameModal(false)}
+				show={editNameModal.state}
+				onClose={() => setEditNameModal((prev) => ({ ...prev, state: false }))}
 				onOuterClick={onOuterClick}
 				size="md"
 			>
@@ -160,6 +163,8 @@ function Greetings({
 						control={control}
 						errors={errors}
 						detailsData={detailsData}
+						editNameModal={editNameModal}
+
 					/>
 				</Modal.Body>
 				<Modal.Footer>
@@ -188,6 +193,8 @@ function Greetings({
 				detailsData={detailsData}
 				showMobileVerificationModal={showMobileVerificationModal}
 				setShowMobileVerificationModal={setShowMobileVerificationModal}
+				editNameModal={editNameModal}
+				setEditNameModal={setEditNameModal}
 			/>
 
 			<Modal
@@ -220,7 +227,7 @@ function Greetings({
 							{picture || watchProfilePicture ? (
 								<div className={styles.image_container}>
 									<img
-										src={watchProfilePicture?.fileUrl || picture}
+										src={watchProfilePicture?.finalUrl || picture}
 										alt="loading"
 										className={styles.avatar_container}
 									/>

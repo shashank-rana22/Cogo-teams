@@ -21,7 +21,12 @@ function InputController(props) {
 					key={rest.id}
 					onChange={onChange}
 					value={newValue || ''}
-					onBlur={onBlur}
+					onBlur={(event) => {
+						onBlur(event);
+						if (typeof rest?.onBlur === 'function') {
+							rest?.onBlur(event);
+						}
+					}}
 				/>
 			)}
 		/>

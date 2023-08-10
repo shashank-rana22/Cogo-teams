@@ -68,5 +68,7 @@ const app_apis = {
 	saas_cogostore                  : apis.app_saas_cogostore,
 	saas_import_export_doc          : apis.app_saas_import_export_doc,
 	saas_import_export_controls     : apis.app_saas_import_export_controls,
+	saas_live_vessel_tracking       : apis.app_saas_live_vessel_tracking,
+	saas_air_ocean_tracking         : apis.app_saas_air_ocean_tracking,
 };
 export default app_apis;

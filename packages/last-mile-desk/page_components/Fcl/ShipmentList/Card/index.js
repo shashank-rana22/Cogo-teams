@@ -2,6 +2,7 @@ import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useContext } from 'react';
 
+import CONSTANTS from '../../../../configs/constants.json';
 import LastMileDeskContext from '../../../../context/LastMileDeskContext';
 import getCriticalShipment from '../../../../helpers/getCriticalShipment';
 
@@ -16,7 +17,7 @@ function Card({ item = {} }) {
 	const router = useRouter();
 
 	const handleCardClick = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}?${CONSTANTS.url_navigation_params}`);
 	};
 
 	return (

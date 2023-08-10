@@ -1,0 +1,20 @@
+.upload_container {
+	display: inline-block;
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.text_truncate {
+	width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.flex {
+	display: flex;
+	flex-direction: column;
+}

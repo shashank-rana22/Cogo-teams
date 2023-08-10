@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+
+	:global {
+		.ui_tab_container {
+			justify-content: space-between !important;
+		}
+	}
+}
+
+.left_container {
+	display: flex;
+	align-items: center;
+	width: 83%;
+}
+
+.tabs_container {
+	display: flex;
+	border-radius: 6px 0 6px 6px;
+
+	:global {
+		.ui_tab_container {
+			padding: 15px !important;
+		}
+	}
+}
+
+.graph_div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 51%;
+	min-width: 650px;
+	height: 204px;
+	margin-right: 16px;
+	background: #fff;
+	border-radius: 0 6px 6px 0;
+}

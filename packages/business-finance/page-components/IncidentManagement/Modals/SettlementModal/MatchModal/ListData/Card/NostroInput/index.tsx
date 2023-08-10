@@ -1,5 +1,6 @@
 import { Button, Input, Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCError, IcMTick, IcMUndo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -14,7 +15,7 @@ function NostroInput({
 	types,
 }) {
 	const {
-		currency = 'INR',
+		currency = GLOBAL_CONSTANTS.currency_code.INR,
 		nostroEditable = false,
 		nostroAmount = 0,
 		tds = 0,
@@ -28,7 +29,16 @@ function NostroInput({
 	const lessValue = Number.parseInt(changedValue, 10) < 0;
 	const isError = lessValue || maxValue;
 	let errorMessege = '';
-	const formatted = (field, curr) => getFormattedPrice(field, curr) || '';
+
+	const formatted = (field, curr) => formatAmount({
+		amount   :	field,
+		currency : curr,
+		options  : {
+			style           : 'currency',
+			currencyDisplay : 'code',
+		},
+	}) || '';
+
 	if (lessValue) {
 		errorMessege = 'Nostro cannot be less than 0';
 	} else if (maxValue) {
@@ -127,9 +137,30 @@ function NostroInput({
 							)}
 							placement="top"
 						>
-							<div className={styles.wrapper}>{getFormattedPrice(nostroChangeAmount, currency)}</div>
+							<div className={styles.wrapper}>
+								{formatAmount({
+									amount  :	nostroChangeAmount,
+									currency,
+									options : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
+
+							</div>
 						</Tooltip>
-					) : <div>{getFormattedPrice(nostroChangeAmount, currency)}</div>}
+					) : (
+						<div>
+							{formatAmount({
+								amount  :	nostroChangeAmount,
+								currency,
+								options : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
+						</div>
+					)}
 				</div>
 
 			)}

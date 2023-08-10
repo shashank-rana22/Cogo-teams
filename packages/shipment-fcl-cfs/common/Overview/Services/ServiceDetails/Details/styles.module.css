@@ -1,0 +1,69 @@
+.container {
+	padding: 12px 24px;
+	border-top: 1px solid #f68b21;
+}
+
+.container.confirmed_by_service_provider {
+	border-top: 1px solid #abcd62;
+}
+
+.container.confirmed_by_importer_exporter {
+	border-top: 1px solid #abcd62;
+}
+
+.container.completed {
+	border-top: 1px solid #abcd62;
+}
+
+.remaining_keys {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.multiservice {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.mainservice_tabs {
+	width: fit-content;
+	padding: 6px 12px;
+	margin-right: 12px;
+	font-family: Poppins, sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.mainservice_tabs.active {
+	color: #ee3425;
+	background-color: #fdebe9;
+}
+
+.mainservice_tabs.active.confirmed_by_importer_exporter {
+	color: #768d44;
+	background-color: #f5faeb;
+}
+
+.mainservice_tabs.active.confirmed_by_service_provider {
+	color: #768d44;
+	background-color: #f5faeb;
+}
+
+.mainservice_tabs.active.completed {
+	color: #768d44;
+	background-color: #f5faeb;
+}
+
+.multiservices_heading {
+	display: flex;
+	align-items: center;
+}
+
+.free_days {
+	display: flex;
+	flex-wrap: wrap;
+}

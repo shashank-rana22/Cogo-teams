@@ -1,5 +1,5 @@
 import { Button, Popover } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowBack, IcMUnlock, IcMLock, IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import ValuePercentage from '../ValuePercentage';
@@ -45,7 +45,14 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 					Amount :
 					{' '}
 					<span className={styles.amount}>
-						{getFormattedPrice((expenseBooked - actualExpense), expenseCurrency)}
+						{formatAmount({
+							amount   :	(expenseBooked - actualExpense) as any,
+							currency : expenseCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</span>
 				</div>
 			</div>
@@ -55,7 +62,14 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 					Amount :
 					{' '}
 					<span className={styles.amount}>
-						{getFormattedPrice((incomeBooked - actualIncome), expenseCurrency)}
+						{formatAmount({
+							amount   :	(incomeBooked - actualIncome) as any,
+							currency : expenseCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</span>
 				</div>
 			</div>
@@ -90,14 +104,28 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 					<div>
 						<div className={styles.para_data}>Expense Booked</div>
 						<div className={styles.para}>
-							{getFormattedPrice(expenseBooked || actualExpense, expenseCurrency)}
+							{formatAmount({
+								amount   :	(expenseBooked || actualExpense) as any,
+								currency : expenseCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 
 					<div>
 						<div className={styles.para_data}>Expense Accrued</div>
 						<div className={styles.para}>
-							{getFormattedPrice(expenseAccrued, expenseCurrency)}
+							{formatAmount({
+								amount   :	expenseAccrued,
+								currency : expenseCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 				</div>
@@ -106,14 +134,28 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 					<div>
 						<div className={styles.para_data}>Income Booked</div>
 						<div className={styles.para}>
-							{getFormattedPrice(incomeBooked || actualIncome, incomeCurrency)}
+							{formatAmount({
+								amount   :	(incomeBooked || actualIncome) as any,
+								currency : incomeCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 
 					<div>
 						<div className={styles.para_data}>Income Accrued</div>
 						<div className={styles.para}>
-							{getFormattedPrice(incomeAccrued, incomeCurrency)}
+							{formatAmount({
+								amount   :	incomeAccrued,
+								currency : incomeCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 				</div>

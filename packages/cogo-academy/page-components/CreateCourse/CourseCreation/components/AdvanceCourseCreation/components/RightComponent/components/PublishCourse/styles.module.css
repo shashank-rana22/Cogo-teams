@@ -1,0 +1,49 @@
+.container {
+	margin: 32px 40px;
+}
+
+.input_group {
+	margin-top: 6px;
+}
+
+.form_group {
+	margin-bottom: 32px;
+
+	&.name {
+		width: 100%;
+	}
+
+	&.instructor_ids {
+		width: 50%;
+	}
+
+	&.level {
+		width: 50%;
+		margin-left: 12px;
+	}
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.label {
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.group_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.sub_label {
+	margin-top: 4px;
+	color: #828282;
+}
+
+.superscipt {
+	color: #ee3425;
+}

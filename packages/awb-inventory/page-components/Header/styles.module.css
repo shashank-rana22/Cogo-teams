@@ -1,0 +1,32 @@
+.header_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.heading {
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 30px;
+}
+
+.heading::after {
+	display: block;
+	width: 100px;
+	height: 4px;
+	content: "";
+	background: #ed3726;
+}
+
+.button_head {
+	display: flex;
+}
+
+.button_style {
+	padding: 6px 14px;
+	margin: 4px 2px;
+	border-radius: 4px;
+}
+
+.plus_icon {
+	margin-right: 2px;
+}

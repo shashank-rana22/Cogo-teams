@@ -1,0 +1,24 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: max-content;
+	background: #fff;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.text {
+	color: var(--color-secondary-greyscale-4);
+}
+
+.image {
+	margin: 10px;
+}

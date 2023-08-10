@@ -50,7 +50,7 @@ const useGetProfitabillityShipmentList = (
 			try {
 				trigger({
 					params: {
-						entityCode   : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
+						entityCode   : entityTabFilters,
 						serviceTypes : tabs === 'shipment' ? globalFilters?.serviceType : undefined,
 						startDate    : tabs === 'shipment' ? startDateFilter : undefined,
 						endDate      : tabs === 'shipment' ? endDateFilters : undefined,

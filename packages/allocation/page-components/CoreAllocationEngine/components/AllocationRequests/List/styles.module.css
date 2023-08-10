@@ -42,6 +42,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	cursor: pointer;
 }
 
 .value_container {
@@ -54,6 +55,14 @@
 
 .email_id {
 	color: #888fd1;
+}
+
+.role_name {
+	color: var(--color-tertiary-lavendar-2);
+}
+
+.sub_type {
+	min-width: 100px;
 }
 
 .created_date {
@@ -93,4 +102,8 @@
 		margin-bottom: 0;
 		word-break: break-word;
 	}
+}
+
+.rejection_container {
+	height: 160px;
 }

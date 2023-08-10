@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0 16px;
+	margin: 0 -15px;
+}
+
+.button_wrapper {
+	margin-left: 12px;
+}
+
+.first_button {
+	margin-right: 6px;
+}

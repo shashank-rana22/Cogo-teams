@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
-
-import Layout from '../../Layout';
+import { Layout } from '@cogoport/ocean-modules';
 
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
@@ -12,6 +11,7 @@ function ExecuteStep({
 	onCancel = () => {},
 	refetch = () => {},
 	primary_service = {},
+	shipment_data = {},
 	currentStep = 0,
 	isLastStep = false,
 	getApisData = {},
@@ -25,6 +25,8 @@ function ExecuteStep({
 		task,
 		stepConfig,
 		getApisData,
+		shipment_data,
+		primary_service,
 	});
 
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;

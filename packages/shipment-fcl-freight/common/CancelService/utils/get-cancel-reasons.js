@@ -11,7 +11,7 @@ const checkCondition = (reason, service) => {
 
 const getCancelReasons = (type, service = 'fcl_freight_service') => {
 	const allReasons = cancelReasons[type] || {};
-	const finalReasons = [];
+	const CANCEL_REASONS = [];
 
 	Object.entries(allReasons).forEach(([reasonKey, reasonObj]) => {
 		const isConditionSatisfied = checkCondition(reasonObj, service);
@@ -19,7 +19,7 @@ const getCancelReasons = (type, service = 'fcl_freight_service') => {
 		if (reasonObj.applicable_to.includes(service) && isConditionSatisfied) {
 			const { subreasons, free_text } = reasonObj;
 
-			finalReasons.push({
+			CANCEL_REASONS.push({
 				free_text,
 				label      : reasonKey,
 				value      : reasonKey.toLowerCase().replace(/ /g, '_'),
@@ -31,6 +31,6 @@ const getCancelReasons = (type, service = 'fcl_freight_service') => {
 		}
 	});
 
-	return finalReasons;
+	return CANCEL_REASONS;
 };
 export default getCancelReasons;

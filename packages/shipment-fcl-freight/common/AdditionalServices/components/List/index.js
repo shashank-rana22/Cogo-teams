@@ -1,34 +1,49 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
-import AddIp from '../AddIp';
-import AddRate from '../AddRate';
 import Loader from '../Loader';
 
-import AddService from './AddService';
 import Info from './Info';
 import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
-function List({ isSeller = false }) {
-	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(
-		ShipmentDetailContext,
-	);
+const AddIp = dynamic(() => import('../AddIp'), { ssr: false });
+const AddRate = dynamic(() => import('../AddRate'), { ssr: false });
+const AddService = dynamic(() => import('./AddService'), { ssr: false });
+const CargoInsurance = dynamic(() => import('./CargoInsurance'), { ssr: false });
+
+const DEFAULT_PAGE_LIMIT = 8;
+const SHOW_MORE_PAGE_LIMIT = 16;
+
+const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent',
+	'superadmin', 'admin'];
+
+function List({ isSeller = false, source = '' }) {
+	const {
+		servicesList = [], refetchServices = () => {},
+		shipment_data = {}, activeStakeholder = '', primary_service = {}, stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
+
+	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
+		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
+
+	const canEditCancelService = !!stakeholderConfig?.overview?.can_edit_cancel_service;
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
-	const [pageLimit, setPageLimit] = useState(8);
+	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
 
-	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
-		shipment_data,
-		pageLimit,
-	});
+	const {
+		list: additionalServiceList = [],
+		refetch = () => {}, loading, totalCount,
+	} = useListAdditionalServices({ pageLimit });
 
 	const handleRefetch = () => {
 		refetchServices();
@@ -38,6 +53,7 @@ function List({ isSeller = false }) {
 	const refetchForUpdateSubService = () => {
 		setShowModal(false);
 		refetch();
+		refetchServices();
 	};
 
 	const updateResponse = useUpdateShipmentAdditionalService({
@@ -46,9 +62,10 @@ function List({ isSeller = false }) {
 		showIp  : showModal === 'ip',
 	});
 
-	return (
-		<div className={styles.container}>
+	const isCargoInsured = servicesList?.some((service) => service?.service_type === 'cargo_insurance_service');
 
+	return (
+		<section className={styles.container}>
 			{loading ? <Loader /> : null}
 
 			{!isEmpty(additionalServiceList) && !loading ? (
@@ -58,6 +75,7 @@ function List({ isSeller = false }) {
 
 						return (
 							<ItemAdded
+								key={serviceListItem}
 								item={serviceListItem}
 								status={status}
 								showIp={showModal === 'ip'}
@@ -68,6 +86,7 @@ function List({ isSeller = false }) {
 									setItem,
 									shipment_data,
 									activeStakeholder,
+									canEditCancelService,
 								})}
 								refetch={handleRefetch}
 								services={servicesList}
@@ -78,15 +97,15 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
-			{totalCount > 8
+			{totalCount > DEFAULT_PAGE_LIMIT
 				? (
 					<div className={styles.show_more}>
-						{pageLimit > 8
+						{pageLimit > DEFAULT_PAGE_LIMIT
 							? 	(
 								<Button
 									size="md"
 									themeType="link"
-									onClick={() => setPageLimit(8)}
+									onClick={() => setPageLimit(DEFAULT_PAGE_LIMIT)}
 								>
 									Show Less
 								</Button>
@@ -94,7 +113,7 @@ function List({ isSeller = false }) {
 								<Button
 									size="md"
 									themeType="link"
-									onClick={() => setPageLimit(16)}
+									onClick={() => setPageLimit(SHOW_MORE_PAGE_LIMIT)}
 								>
 									Show More
 								</Button>
@@ -106,24 +125,41 @@ function List({ isSeller = false }) {
 			{additionalServiceList?.length ? (
 				<div className={styles.info_container}>
 					<div className={styles.circle} />
-					<div className={styles.service_name}>Incidental Services</div>
+					<span className={styles.service_name}>Incidental Services</span>
 					<div className={cl` ${styles.circle} ${styles.upsell}`} />
-					<div className={styles.service_name}>Upselling Services</div>
+					<span className={styles.service_name}>Upselling Services</span>
 					<Info />
 				</div>
 			) : null}
+
 			<div className={styles.not_added}>
-				<Button
-					onClick={() => setShowModal('charge_code')}
-					disabled={shipment_data?.is_job_closed}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Additional Services
-				</Button>
+
+				{isAdditionalServiceAllowed
+					? (
+						<Button
+							onClick={() => setShowModal('charge_code')}
+							disabled={shipment_data?.is_job_closed}
+						>
+							<span className={styles.add_icon}>+</span>
+							Add Additional Services
+						</Button>
+					)
+					: null }
+
+				{canEditCancelService ? (
+					<Button
+						onClick={() => setShowModal('cargo_insurance_service')}
+						className={styles.btn_div}
+						disabled={!!isCargoInsured}
+					>
+						<span className={styles.add_icon}>+</span>
+						Add Cargo Insurance
+					</Button>
+				) : null }
 			</div>
 
 			{showModal === 'add_sell_price'
-				&& (
+				? (
 					<Modal
 						size="lg"
 						show
@@ -132,29 +168,34 @@ function List({ isSeller = false }) {
 						showCloseIcon={!updateResponse.loading}
 					>
 						<Modal.Header title="Add Sell Price" />
+
 						<Modal.Body>
 							<AddRate
 								item={item?.serviceListItem}
 								status={item?.status}
 								setAddSellPrice={setShowModal}
 								updateResponse={updateResponse}
+								refetch={refetch}
 								source="add_sell_price"
+								refetchServices={refetchServices}
 							/>
 						</Modal.Body>
 					</Modal>
-				)}
+				)
+				: null}
 
 			{showModal === 'ip'
-				&& (
+				? (
 					<AddIp
 						shipmentData={shipment_data}
 						setShowIp={setShowModal}
 						updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
 					/>
-				)}
+				)
+				: null}
 
 			{showModal === 'charge_code'
-				&& (
+				? (
 					<AddService
 						shipmentId={shipment_data?.id}
 						services={servicesList}
@@ -162,10 +203,20 @@ function List({ isSeller = false }) {
 						refetch={refetch}
 						setItem={setItem}
 						setShowChargeCodes={setShowModal}
+						source={source}
 					/>
-				)}
+				)
+				: null}
 
-		</div>
+			{showModal === 'cargo_insurance_service' ? (
+				<CargoInsurance
+					data={shipment_data}
+					refetch={refetch}
+					setShowModal={setShowModal}
+					primary_service={primary_service}
+				/>
+			) : null}
+		</section>
 	);
 }
 

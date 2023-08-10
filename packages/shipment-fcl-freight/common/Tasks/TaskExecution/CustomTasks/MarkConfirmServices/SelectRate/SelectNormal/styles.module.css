@@ -16,7 +16,7 @@
 .label {
 	margin-bottom: 10px;
 	margin-left: 5px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 	line-height: 16px;
 	color: #333;
@@ -24,7 +24,7 @@
 
 .value {
 	margin-left: 5px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 400;
 }
 

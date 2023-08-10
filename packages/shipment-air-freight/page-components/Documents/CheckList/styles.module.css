@@ -1,0 +1,18 @@
+.wrapper {
+	width: 100%;
+	max-height: 80vh;
+	padding: 16px;
+	overflow-y: auto;
+}
+
+.action {
+	padding: 12px 24px;
+	font-size: var(--font-size-sm);
+	color: var(--color-secondary-3);
+	border-bottom: none;
+
+	&:hover {
+		cursor: pointer;
+		background: var(--color-tertiary-beige-2);
+	}
+}

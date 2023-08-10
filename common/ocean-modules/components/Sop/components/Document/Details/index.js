@@ -15,6 +15,7 @@ function LabelValue({ label, value }) {
 function Details({
 	sop_detail = {},
 	setShowForm = () => {},
+	documents = [],
 }) {
 	const mapping = {
 		'BL Category'      : upperCase(sop_detail?.bl_category || ''),
@@ -25,6 +26,7 @@ function Details({
 		Address            : sop_detail?.address,
 	};
 
+	const isDraftBlUploaded = !isEmpty(documents);
 	const isAddOrEdit = isEmpty(sop_detail) ? 'add' : 'edit';
 
 	return (
@@ -32,20 +34,25 @@ function Details({
 			{isEmpty(sop_detail) ? <div className={styles.no_data}>No Data Available</div>
 				: (
 					<div>
-						{Object.keys(mapping).map((key) => <LabelValue label={key} value={mapping[key]} />)}
+						{Object.keys(mapping).map((key) => (
+							<LabelValue
+								label={key}
+								value={mapping[key]}
+								KEY={key}
+							/>
+						))}
 					</div>
 				)}
 
-			<div>
+			{!isDraftBlUploaded ? (
 				<Button
 					themeType="accent"
 					size="sm"
 					onClick={() => setShowForm(isAddOrEdit)}
 				>
 					{startCase(isAddOrEdit)}
-
 				</Button>
-			</div>
+			) : null}
 		</div>
 	);
 }

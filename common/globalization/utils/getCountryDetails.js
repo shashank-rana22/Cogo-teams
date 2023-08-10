@@ -1,11 +1,13 @@
-// eslint-disable-next-line
-import countries from '@/data-store/constants/countries.json';
+import { countriesHash, countrieCodeHash } from './getCountriesHash';
 
-const countriesHash = countries.reduce(
-	(pv, acc) => ({ ...pv, [acc.id]: acc }),
-	{},
-);
+const getCountryDetails = ({ country_id, country_code }) => {
+	const countryDetails = countriesHash[country_id] || countrieCodeHash[country_code] || {};
 
-const getCountryDetails = ({ country_id }) => countriesHash[country_id] || {};
+	if (country_id && country_code) {
+		return countryDetails.country_code === country_code ? countryDetails : {};
+	}
+
+	return countryDetails;
+};
 
 export default getCountryDetails;

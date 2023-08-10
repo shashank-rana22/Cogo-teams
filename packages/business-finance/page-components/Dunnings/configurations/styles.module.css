@@ -1,0 +1,34 @@
+.tooltip_text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	word-break: break-word;
+	word-wrap: break-word;
+}
+
+.text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.frequency {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.customer_name {
+	max-width: 150px;
+	margin: 0 24px;
+	overflow: hidden;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.border {
+	border-right: 2px solid #333;
+}
+
+.frequency_value {
+	margin-right: 4px;
+}

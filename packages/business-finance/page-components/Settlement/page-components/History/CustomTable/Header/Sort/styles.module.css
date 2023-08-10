@@ -1,0 +1,5 @@
+.sorticons {
+	display: flex;
+	flex-direction: column;
+	margin-left: 4px;
+}

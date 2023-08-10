@@ -21,6 +21,10 @@
 	cursor: pointer;
 }
 
+.tab {
+	margin-bottom: 20px;
+}
+
 .tabs_container {
 	width: 100%;
 }

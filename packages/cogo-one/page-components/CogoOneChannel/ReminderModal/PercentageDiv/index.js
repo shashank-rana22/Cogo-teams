@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 function PercentageDiv({ eachStat = {} }) {
 	const { label, value = 0, target } = eachStat;
 
-	const offset = CIRCUMFERENCE - (Number(value / target) || 0) * CIRCUMFERENCE;
+	const offset = value - target >= 0 ? 0 : CIRCUMFERENCE - (Number(value / target) || 0) * CIRCUMFERENCE;
 	return (
 		<div className={styles.container}>
 			<svg width={SVG_SIZE} height={SVG_SIZE} viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}>
@@ -29,10 +29,10 @@ function PercentageDiv({ eachStat = {} }) {
 					strokeLinecap="round"
 					strokeLinejoin="round"
 				/>
-				<text className={styles.text_styles} x="50%" y="55%" textAnchor="middle">
-					{`${value}/${target}`}
-				</text>
 			</svg>
+			<div className={styles.text_styles}>
+				{`${value}/${target}`}
+			</div>
 			<div className={styles.label_text}>{label}</div>
 		</div>
 	);

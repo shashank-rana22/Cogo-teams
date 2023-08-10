@@ -1,0 +1,16 @@
+.actions {
+	display: flex;
+}
+
+.cancel {
+	margin-right: 8px;
+}
+
+.modal_header {
+	display: flex;
+	font-weight: 700;
+
+	& > div:first-child {
+		margin-right: 4px;
+	}
+}

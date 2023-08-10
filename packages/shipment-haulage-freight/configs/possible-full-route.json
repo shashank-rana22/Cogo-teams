@@ -1,0 +1,8 @@
+[
+	{
+		"service_type"  : "haulage_freight_service",
+		"display_label" : "Haulage",
+		"trade_type"    : "domestic",
+		"is_main"       : true
+	}
+]

@@ -1,8 +1,7 @@
 import { Placeholder } from '@cogoport/components';
-import { IcMArrowDown } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import Banner from './Banner';
 import CaseStudy from './CaseStudy';
@@ -10,23 +9,22 @@ import StandAlone from './StandAlone';
 import styles from './styles.module.css';
 import Subjective from './Subjective';
 
-function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, status }) {
-	const ref = useRef();
+const INCREMENTAL_ELEMENT = 1;
 
-	const [animation, setAnimation] = useState(false);
+function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, status, activeAttempt }) {
+	const ref = useRef();
 
 	const scrollToSubjective = () => {
 		ref.current.scrollIntoView({ behavior: 'smooth' });
-		setTimeout(() => {
-			setAnimation(false);
-		}, 800);
 	};
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
 		url    : '/get_questions_analysis',
 		params : {
-			user_id, test_id,
+			user_id,
+			test_id,
+			active_questions_required: activeAttempt === 'attempt1',
 		},
 	}, { manual: false });
 
@@ -53,7 +51,7 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, sta
 			</div>
 
 			{showBanner ? (
-				<Banner scrollToSubjective={scrollToSubjective} setAnimation={setAnimation} />
+				<Banner scrollToSubjective={scrollToSubjective} />
 			) : null}
 
 			<div className={styles.question_cards_container}>
@@ -64,10 +62,11 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, sta
 				{!isEmpty(case_study_questions) ? (
 					case_study_questions.map((item, index) => (
 						<CaseStudy
+							key={item?.questions_description?.id}
 							case_study={item}
 							index={index}
 							user_name={user_name}
-							question_index={stand_alone_questions.length + index + 1}
+							question_index={stand_alone_questions.length + index + INCREMENTAL_ELEMENT}
 						/>
 					))
 				) : null}
@@ -81,21 +80,11 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, sta
 							count_till_now={stand_alone_questions.length + case_study_questions.length}
 							view={view}
 							status={status}
+							activeAttempt={activeAttempt}
 						/>
 					</div>
 				) : null}
 			</div>
-
-			{animation && (
-				<div className={styles.arrow_container}>
-					<IcMArrowDown
-						className={styles.animated_arrow}
-						width={60}
-						height={60}
-					/>
-					<IcMArrowDown width={60} height={60} />
-				</div>
-			)}
 		</div>
 	);
 }

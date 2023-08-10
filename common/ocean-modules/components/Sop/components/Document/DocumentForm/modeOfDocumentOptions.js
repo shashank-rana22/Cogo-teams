@@ -1,4 +1,4 @@
-const modeOfDocumentOptions = [{
+export default [{
 	label : 'Courier',
 	value : 'courier',
 },
@@ -9,6 +9,13 @@ const modeOfDocumentOptions = [{
 {
 	label : 'Telex',
 	value : 'telex',
-}];
-
-export default modeOfDocumentOptions;
+},
+{
+	label : 'Physical Handover',
+	value : 'physical_handover',
+},
+{
+	label : 'Email',
+	value : 'email',
+},
+];

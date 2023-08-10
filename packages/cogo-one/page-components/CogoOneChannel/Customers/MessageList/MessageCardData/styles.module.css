@@ -13,6 +13,15 @@
 	}
 }
 
+.flash_messages_padding {
+	padding: 0 4px !important;
+
+	@media (max-width: 1280px) {
+		padding: 2px 8px !important;
+		overflow: hidden;
+	}
+}
+
 .card_container {
 	position: relative;
 	width: 100%;
@@ -38,16 +47,21 @@
 	cursor: pointer;
 }
 
+.flash_height {
+	height: 100%;
+}
+
 .user_information {
 	display: flex;
 	justify-content: space-between;
 }
 
 .activity_duration {
-	margin-top: 2px;
+	margin: 2px 0 0 2px;
 	font-size: 10px;
 	font-weight: 500;
 	color: #4f4f4f;
+	white-space: nowrap;
 }
 
 .user_details {
@@ -188,10 +202,17 @@
 .ship_icon_container {
 	width: 100%;
 	height: 100%;
-	fill: #849e4c;
+	fill: #849e4c !important;
 }
 
 .flex_div {
 	display: flex;
 	align-items: center;
+}
+
+.claim_button_styles {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 5px 10px 0 0;
 }

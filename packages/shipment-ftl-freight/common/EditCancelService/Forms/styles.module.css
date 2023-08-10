@@ -1,0 +1,49 @@
+.container {
+	align-items: left;
+
+	:global {
+		.ui_popover_container {
+			justify-content: center;
+			min-height: initial;
+			padding: 0;
+
+			> div {
+				padding: 0;
+			}
+		}
+	}
+}
+
+.text {
+	padding-bottom: 12px;
+	margin: 0 auto;
+	margin-top: 30px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #393f70;
+}
+
+.header {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 15px;
+	color: #393f70;
+	text-transform: uppercase;
+}
+
+.form_div {
+	height: calc(100vh - 33.5vh);
+	overflow: auto;
+}
+
+.line {
+	width: 100%;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+.btn {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding-top: 10%;
+}

@@ -1,9 +1,9 @@
 import { Input, Pagination, Tooltip, Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
-import { GENERAL_ICON } from '../../../../constants';
 import IconMapping from '../../../../constants/HELP_DESK_ICON_MAPPING';
 import useTopicList from '../../../../hooks/useTopicList';
 
@@ -27,7 +27,7 @@ function HelpDesk() {
 
 	const generalIcon = (
 		<img
-			src={GENERAL_ICON}
+			src={GLOBAL_CONSTANTS.image_url.general_icon}
 			alt="logo cogoport"
 			style={{ width: 40, height: 40 }}
 		/>
@@ -70,6 +70,7 @@ function HelpDesk() {
 				<div className={styles.display_topics}>
 					{(list || []).map((item) => (
 						<div
+							key={item?.id}
 							role="presentation"
 							className={styles.square_div}
 							onClick={() => setTopic(item)}

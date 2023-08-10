@@ -1,0 +1,112 @@
+.container {
+	.buttonWrapper {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		margin-top: 10px;
+
+		.right {
+			margin-left: 10px;
+		}
+	}
+}
+
+.outerCard {
+	width: 90%;
+	margin: 15px 0 0 60px;
+	border: 1px solid #e1e1e1;
+	border-radius: 4px;
+}
+
+.upperCard {
+	height: 50px;
+	padding: 20px 20px 20px 50px;
+	background: #f7f7f7;
+	border: 1px solid #e1e1e1;
+	box-shadow: #0000000a;
+}
+
+.cNCard {
+	height: 50px;
+	padding: 15px 36px 20px 80px;
+	margin-bottom: 20px;
+	background-color: #eafbea;
+	box-shadow: #0000000a;
+}
+
+.cardItems {
+	display: flex;
+	justify-content: space-between;
+	height: 50px;
+	padding: 12px 20px 15px 30px;
+	margin: 0 15px 10px 10px;
+	box-shadow: #0000000a;
+}
+
+.items {
+	flex: 1;
+	max-width: 200px;
+	margin-right: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.inputContainer {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 0 15px 10px;
+}
+
+.inputField {
+	display: flex;
+	flex: 1;
+	margin-right: 10px;
+}
+
+.inputFieldCN {
+	flex: 1;
+	margin-right: 10px;
+}
+
+.label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: #c26d1a;
+}
+
+.cNLabel {
+	display: block;
+	margin: 0 5px 5px 0;
+	font-weight: bold;
+	color: #828282;
+}
+
+.selectControllerDiv {
+	display: flex;
+	flex-direction: column;
+	margin-left: 43px;
+
+	.core-ui-select__control {
+		width: 320px;
+		height: 45px;
+		margin-left: 16px;
+	}
+
+	.core-ui-input-root {
+		width: 320px;
+		height: 45px;
+		margin-left: 16px;
+	}
+}
+
+.title {
+	margin: 0 0 5px 16px;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.tooltip_text {
+	word-break: break-word;
+}

@@ -1,9 +1,10 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../constants/POC_WORKSCOPE_MAPPING';
 import Card from '../../Card';
 
 import LabelValue from './LabelValue';
@@ -15,15 +16,12 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 	const editPermission = rolesPermission?.can_edit || [];
 
 	const {
-		trade_partner_details:{
-			business_name = '',
-			poc_data = {},
-		} = {},
+		trade_partner_details:{ business_name = '', poc_data = {} } = {},
 		address = [],
 		trade_party_type = '',
 		trade_party_id = '',
 	} = data;
-	const { address:first_address = '' } = address[0] || {};
+	const { address:first_address = '' } = address[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const mapping = {
 		Name         : poc_data?.name || '',
@@ -37,6 +35,15 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 		setAddCompany({ trade_party_type });
 	};
 
+	const handleAddPoc = () => {
+		setAddPoc({
+			poc_type: 'tradeParty',
+			business_name,
+			trade_party_type,
+			trade_party_id,
+		});
+	};
+
 	return (
 		<Card
 			title={title}
@@ -45,20 +52,13 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 		>
 			<div>
 				<div className={styles.header}>
-					<div className={styles.business_name}>{business_name}</div>
+					<div className={styles.business_name}>{startCase(business_name)}</div>
 					<div>
 						{isEmpty(poc_data)
 							? (
 								<Button
 									size="sm"
-									onClick={() => {
-										setAddPoc({
-											poc_type: 'tradeParty',
-											business_name,
-											trade_party_type,
-											trade_party_id,
-										});
-									}}
+									onClick={handleAddPoc}
 									themeType="accent"
 								>
 									+ ADD POC
@@ -80,7 +80,13 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 				{!isEmpty(poc_data) && show[title]
 					? (
 						<div className={styles.detail_card}>
-							{Object.keys(mapping).map((key) => <LabelValue label={key} value={mapping[key]} />)}
+							{Object.keys(mapping).map((key) => (
+								<LabelValue
+									label={key}
+									value={mapping[key]}
+									key={key}
+								/>
+							))}
 						</div>
 					) : null}
 			</div>

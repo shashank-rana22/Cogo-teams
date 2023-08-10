@@ -1,0 +1,60 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	max-height: 134px;
+	padding: 12px;
+	margin: 8px;
+	background-color: #ffff;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.heading {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.trade {
+	padding: 4px 11px;
+	background: #cfeaed;
+	border-radius: 4px;
+}
+
+.details {
+	display: flex;
+	gap: 10px;
+	justify-content: flex-start;
+}
+
+.body {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 2px;
+	margin-left: 12px;
+}
+
+.port_pair {
+	display: flex;
+	gap: 8px;
+}
+
+.extra {
+	padding: 8px 12px;
+	border-right: 1px solid #f2f2f2;
+	border-radius: 4px;
+}
+
+.last {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}

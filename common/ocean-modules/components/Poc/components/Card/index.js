@@ -3,6 +3,8 @@ import { IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
+const ICONS_DIMENSIONS = 14;
+
 function Card({ title = '', showEdit = false, editAction = () => {}, children = null }) {
 	return (
 		<div className={styles.container}>
@@ -11,8 +13,8 @@ function Card({ title = '', showEdit = false, editAction = () => {}, children = 
 				{showEdit ? (
 					<Button themeType="link" onClick={editAction}>
 						<IcMEdit
-							height={14}
-							width={14}
+							height={ICONS_DIMENSIONS}
+							width={ICONS_DIMENSIONS}
 						/>
 					</Button>
 				) : null}

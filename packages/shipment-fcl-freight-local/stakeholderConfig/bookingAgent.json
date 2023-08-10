@@ -1,0 +1,30 @@
+{
+    "features":["shipment_info", "shipment_header","sales_invoice", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails"],  
+    "shipment_info":{},
+    "shipment_header": {
+        "add_po_number": true
+    },
+    "timeline": {
+        "can_edit": false
+    },
+    "default_tab":"tasks",
+    "overview":{
+        "tab_title":"Overview"
+    },
+    "tasks":{
+        "tab_title":"Timeline and Tasks"
+    },
+    "sales_invoice":{
+        "tab_title":"Sales Invoice"
+    },
+    "documents":{
+        "tab_title":"Documents"
+    },
+    "emails":{
+        "tab_title":"Emails"
+    },
+    "cancel_shipment": {
+        "can_cancel": true,
+        "role": "sales"
+    }
+}

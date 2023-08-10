@@ -2,7 +2,7 @@ import { Button, Pagination, Modal } from '@cogoport/components';
 import React from 'react';
 
 import StyledTable from '../../../../../commons/styledTable';
-import SettlementKnockOffList from '../../../../../configs/SettlementKnockOffList';
+import settlementKnockOffList from '../../../../../configs/SettlementKnockOffList';
 
 import styles from './styles.module.css';
 
@@ -22,13 +22,17 @@ interface MoreDetail {
 	singleListLoading?: boolean,
 	globalFilters?: GlobalFilter,
 	setGlobalFilters?: (p:object)=> void,
+	entityCode?: String
 }
 
 function MoreDetailsModal({
 	active, setActive, singleData,
 	singleListLoading, globalFilters, setGlobalFilters,
+	entityCode,
 }: MoreDetail) {
 	const { list: singleList = [], pageNo, totalRecords } = singleData || {};
+
+	const filterTableColumns = settlementKnockOffList.filter((item) => entityCode !== '501' || item.Header !== 'TDS');
 
 	return (
 		<div>
@@ -47,7 +51,7 @@ function MoreDetailsModal({
 
 					<StyledTable
 						data={singleList}
-						columns={SettlementKnockOffList()}
+						columns={filterTableColumns}
 						loading={singleListLoading}
 					/>
 					<div className={styles.pagination_container}>

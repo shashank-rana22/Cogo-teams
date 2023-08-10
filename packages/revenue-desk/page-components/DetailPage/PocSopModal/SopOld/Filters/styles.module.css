@@ -1,0 +1,49 @@
+.container {
+	padding: 10px;
+	background: linear-gradient(0deg, #fff, #fff), #fff;
+	border-radius: 4px;
+	box-shadow: 0 2px 20px rgb(0 0 0 / 10%);
+}
+
+.button_clear_text {
+	font-size: 10px;
+	font-weight: 500;
+	color: #393f70;
+	text-align: center;
+	cursor: pointer;
+}
+
+.select_container {
+	width: 240px;
+
+	.core-ui-select__placeholder {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+		color: #cbcff5 !important;
+	}
+
+	.core-ui-select__control {
+		border-color: #cbcff5 !important;
+
+		&:hover {
+			border-color: #cbcff5 !important;
+		}
+
+		&:focus-within {
+			border-color: #cbcff5 !important;
+			box-shadow: 0 0 0 1px #cbcff5 !important;
+		}
+	}
+}
+
+.actions_row {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 40px;
+
+	.core-ui-button-root {
+		margin-left: 8px;
+		text-transform: capitalize;
+	}
+}

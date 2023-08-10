@@ -1,6 +1,8 @@
 import mapKeyValues from './generic-formatted';
 
-const defaultKeyMappings = {
+const FILE_URL_OFFSET = 1;
+
+const KEY_MAPPINGS = {
 	yard_details     : 'empty_container-depot_cogo_id',
 	movement_details : {
 		from_port_id       : 'from_cogo_id',
@@ -23,29 +25,29 @@ const defaultKeyMappings = {
 };
 
 const formatBookingNote = ({ mailData = [] }) => {
-	const formattedData = [];
-	const fileUrls = [];
+	const FORMATTED_DATA = [];
+	const FILE_URLS = [];
 
 	mailData.forEach((booking_note) => {
 		const rpaData = booking_note.ocr_data || {};
 
 		const formatted_bn = mapKeyValues({
-			keyMappings: defaultKeyMappings,
+			keyMappings: KEY_MAPPINGS,
 			rpaData,
 		});
 
-		formattedData.push(formatted_bn);
+		FORMATTED_DATA.push(formatted_bn);
 
 		const file_url_ar = booking_note?.file_url?.split('/');
 
-		fileUrls.push({
-			name    : file_url_ar[file_url_ar.length - 1],
+		FILE_URLS.push({
+			name    : file_url_ar[file_url_ar.length - FILE_URL_OFFSET],
 			url     : booking_note.file_url,
 			success : true,
 		});
 	});
 
-	return { formattedData, fileUrls };
+	return { formattedData: FORMATTED_DATA, fileUrls: FILE_URLS };
 };
 
 export default formatBookingNote;

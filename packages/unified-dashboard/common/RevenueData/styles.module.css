@@ -84,7 +84,7 @@
 .pie_data {
 	display: flex;
 	flex: 2;
-	justify-content: start;
+	justify-content: flex-start;
 }
 
 .revenue_data {

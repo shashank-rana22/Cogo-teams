@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-const actionButtonMapping = {
+const ACTION_BUTTON_MAPPING = {
 	knockoff_pending   : 'Knock Off',
 	collection_pending : 'Collect Document',
 	under_collection   : 'Mark Collected',
@@ -10,21 +10,22 @@ const actionButtonMapping = {
 };
 
 const conditionMapping = {
-	fcl_freight_import : ['fcl_freight_local'],
-	fcl_freight_export : ['fcl_freight', 'fcl_freight_local'],
-	lcl_freight_import : ['lcl_freight_local'],
-	lcl_freight_export : ['lcl_freight', 'lcl_freight_local'],
-	fcl_local_import   : ['fcl_freight_local'],
-	fcl_local_export   : ['fcl_freight_local'],
+	fcl_freight_import : ['fcl_freight_local_service'],
+	fcl_freight_export : ['fcl_freight', 'fcl_freight_local_service'],
+	lcl_freight_import : ['lcl_freight_local_service'],
+	lcl_freight_export : ['lcl_freight_service', 'lcl_freight_local_service'],
+	fcl_local_import   : ['fcl_freight_local_service'],
+	fcl_local_export   : ['fcl_freight_local_service'],
 };
 
 const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) => {
 	let showAccordion = true;
 	let showInvoiceAndTask = false;
+	let showTask = false;
 	let showDeliveryOrderTask = false;
 	const actionButton = {
 		show     : activeTab !== 'knockoff_pending',
-		text     : actionButtonMapping[activeTab],
+		text     : ACTION_BUTTON_MAPPING[activeTab],
 		disabled : false,
 	};
 
@@ -44,9 +45,9 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 
 	if (!isOldCollectionParty) {
 		const filteredInvoiceData = invoice_data?.filter(
-			(inv) => inv?.service_name?.some((e) => conditionMapping[
+			(inv) => inv?.services?.some((e) => conditionMapping[
 				`${stateProps.shipment_type}_${item?.trade_type}`
-			]?.includes(e))
+			]?.includes(e?.service_type))
 				&& !['reimbursement', 'credit_note'].includes(inv?.invoice_type)
 				&& inv.status !== 'init',
 		);
@@ -56,7 +57,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 				&& ['FULL', 'OVERPAID'].includes(ele?.payment_status),
 		);
 
-		showKnockOff = invoice_data && checkInvoices && !isEmpty(filteredInvoiceData);
+		showKnockOff = !isEmpty(invoice_data) && checkInvoices && !isEmpty(filteredInvoiceData);
 	}
 
 	switch (activeTab) {
@@ -93,27 +94,29 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 				actionButton.class = 'awaiting';
 			}
 			if (bldoDoc.some((doc) => doc.status === 'release_pending')) {
-				if (item?.trade_type !== 'import') {
+				if (stateProps?.activeTab === 'bl') {
 					showAccordion = true;
 				}
-				if (item?.trade_type === 'import') {
+				if (stateProps?.activeTab === 'do') {
 					showDeliveryOrderTask = true;
 				}
 				actionButton.disabled = false;
 				actionButton.text = 'Release';
 				actionButton.class = 'release';
+				showTask = true;
 			}
 
 			break;
 		}
 		case 'released': {
 			if (
-				item?.trade_type === 'import'
+				stateProps?.activeTab === 'do'
 				|| (item?.status || []).includes('delivered')
 			) {
 				showAccordion = false;
 				actionButton.show = false;
 			}
+			showTask = true;
 			break;
 		}
 		case 'surrendered': {
@@ -123,6 +126,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 				actionButton.text = 'BL SURRENDERED';
 				actionButton.class = 'surrendered';
 			}
+			showTask = true;
 			break;
 		}
 		case 'on_hold': {
@@ -140,6 +144,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 		actionButton,
 		showInvoiceAndTask,
 		showDeliveryOrderTask,
+		showTask,
 	};
 };
 

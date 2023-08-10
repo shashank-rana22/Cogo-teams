@@ -1,0 +1,20 @@
+.col {
+	padding: 0 8px;
+}
+
+.icon_container {
+	padding: 6px;
+	margin-left: 10px;
+	cursor: pointer;
+	background: #fff4f2;
+	border-radius: 5px;
+}
+
+.delete_icon {
+	vertical-align: bottom;
+}
+
+.error {
+	font-size: 12px;
+	color: red;
+}

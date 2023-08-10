@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
@@ -44,7 +45,19 @@ function PortDetails({ data, showDate = false }: Props) {
 				<div className={styles.country}>{location?.country}</div>
 			</div>
 
-			<div className={styles.value}>{location?.name}</div>
+			<div className={styles.sub_div}>
+				<Tooltip
+					interactive
+					content={(
+						<div className={styles.location_text}>
+							{location?.name}
+						</div>
+					)}
+				>
+					<div className={styles.value}>{location?.name}</div>
+				</Tooltip>
+			</div>
+
 			{icdInfo?.name ? <div className={styles.icd}>{icdInfo?.name}</div> : null}
 		</>
 	);

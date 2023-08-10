@@ -1,0 +1,26 @@
+.footer_div {
+	position: fixed;
+	bottom: 0;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 95%;
+	margin-left: -12px;
+	background: var(--color-secondary-5);
+	box-shadow: 0 0 33px rgb(0 0 0 / 25%);
+}
+
+.button_style {
+	padding: 20px;
+	margin: 0 32px;
+}
+
+.count_ref {
+	color: var(--color-primary-error-red-2);
+}
+
+.heading_style {
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+}

@@ -1,17 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-interface PartnerObject {
-	id?: string
-}
 interface UploadInterface {
-	id?: string,
-	setUploadInvoice?: (p: boolean)=> void,
-	partner?: PartnerObject
+	id?: string;
+	setUploadInvoice?: (p: boolean)=> void;
+	partnerId?: string;
 }
 
-const useUploadeInvoice = ({ id, setUploadInvoice, partner }: UploadInterface) => {
-	const { id: partnerId = '' } = partner || {};
+const useUploadeInvoice = ({ id, setUploadInvoice, partnerId }: UploadInterface) => {
 	const [{ loading }, trigger] = useRequestBf(
 		{
 			url     : '/sales/invoice/einvoice',

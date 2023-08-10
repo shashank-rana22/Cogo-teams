@@ -1,20 +1,23 @@
 import { Placeholder, Breadcrumb, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useShipmentBack } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
-import React, { useContext } from 'react';
-
-import useShipmentBack from '../../hooks/useShipmentBack';
+import { useContext } from 'react';
 
 import styles from './styles.module.css';
 
 function ShipmentInfo() {
-	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);
+	const { bl_type = '' } = primary_service || {};
 
 	const { handleShipmentsClick } = useShipmentBack();
 
 	const sourceText = shipment_data?.source === 'direct'
 		? 'Sell Without Buy'
 		: startCase(shipment_data?.source);
+
+	const showSource = !!stakeholderConfig?.shipment_info?.show_source;
 
 	return (
 		<div className={styles.container}>
@@ -28,11 +31,25 @@ function ShipmentInfo() {
 				/>
 			</Breadcrumb>
 
-			{shipment_data?.source ? <Pill size="sm" color="blue" className={styles.pill}>{sourceText}</Pill> : null}
+			{showSource && shipment_data?.source
+				? (
+					<Pill size="sm" color="blue" className={styles.pill}>
+						{sourceText}
+					</Pill>
+				) : null}
 
-			{shipment_data?.is_cogo_assured ? (
+			{
+				bl_type === 'seaway'
+					? (
+						<Pill size="sm" color="green" className={styles.pill}>
+							{startCase(bl_type || '_')}
+						</Pill>
+					) : null
+			}
+
+			{showSource && shipment_data?.is_cogo_assured ? (
 				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg"
+					src={GLOBAL_CONSTANTS.image_url.cogo_assured_svg}
 					alt="cogo-assured"
 					height={16}
 				/>

@@ -1,52 +1,55 @@
-import { Button, Modal, Select } from '@cogoport/components';
-import { asyncFieldsPartnerUsers, useGetAsyncOptions } from '@cogoport/forms';
+import { Button, Modal } from '@cogoport/components';
+import { useFieldArray, useForm } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
 
-import useUpdateShipmentStakeholders from '../../../../../hooks/useUpdateShipmentStakeholders';
+import useBulkReallocateShipmentStakeholders from '../../../../../hooks/useBulkReallocateShipmentStakeholders';
+import getBulkUpdateStakeholdersPayload from '../../../helpers/getBulkUpdateStakeholdersPayload';
+import getEditBulkStakeholdersDefaultValues from '../../../helpers/getEditBulkStakeholdersDefaultValues';
+import getServicesWithStakeholder from '../../../helpers/getServicesWithStakeholder';
+import EditBulkStakeholders from '../../EditBulkStakeholders';
 
 import styles from './styles.module.css';
 
-function EditInternalPoc({ setAddPoc = () => {}, addPoc, shipment_id, stakeholdersTrigger = () => {} }) {
-	const { stakeholder_type = '', service_type = '', stakeholder_id:current_stakeholder_id = '', service_id } = addPoc;
+function EditInternalPoc({
+	setAddPoc = () => {},
+	addPoc,
+	shipment_id,
+	stakeholdersTrigger = () => {},
+	listStakeholdersData = [],
+	servicesList = {},
+}) {
+	const { stakeholder_type = '', service_type = '' } = addPoc;
 
-	const [stakeholder_id, set_stakeholder_id] = useState('');
+	const { modifiedServicesList } = getServicesWithStakeholder({ listStakeholdersData, addPoc, servicesList });
+
+	const { DEFAULT_VALUES, fieldArrayKey } = getEditBulkStakeholdersDefaultValues({
+		modifiedServicesList,
+		...addPoc,
+	});
+
+	const formProps = useForm({ defaultValues: DEFAULT_VALUES });
+	const { control, handleSubmit } = formProps;
+	const { fields } = useFieldArray({ control, name: fieldArrayKey });
 
 	const refetch = () => {
 		setAddPoc(null);
 		stakeholdersTrigger();
 	};
 
-	const { apiTrigger, loading } = useUpdateShipmentStakeholders({ shipment_id, refetch });
+	const { loading, apiTrigger: updateBulkStakeholders } = useBulkReallocateShipmentStakeholders({ refetch });
 
-	const onClose = () => {
-		setAddPoc(null);
+	const onClose = () => setAddPoc(null);
+
+	const onSubmit = (formValues) => {
+		const payload = getBulkUpdateStakeholdersPayload({ addPoc, shipment_id, formValues, fieldArrayKey });
+
+		updateBulkStakeholders(payload);
 	};
-
-	const onSubmit = () => {
-		const params = {
-			stakeholder_id,
-			stakeholder_type,
-			...(service_type && { service_type }),
-			...(service_id && { service_id }),
-		};
-
-		apiTrigger(params);
-	};
-
-	const stakeholderOptions = useGetAsyncOptions({
-		...asyncFieldsPartnerUsers(),
-		valueKey    : 'user_id',
-		initialCall : false,
-	});
-
-	useEffect(() => {
-		set_stakeholder_id(current_stakeholder_id);
-	}, [current_stakeholder_id]);
 
 	return (
-		<Modal show={!isEmpty(addPoc)} onClose={onClose} placement="top">
+		<Modal show={!isEmpty(addPoc)} onClose={onClose} placement="top" size="lg">
 			<Modal.Header title="POC - Internal" />
+
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '200px' }}>
 				<div>
 					<div>
@@ -60,40 +63,31 @@ function EditInternalPoc({ setAddPoc = () => {}, addPoc, shipment_id, stakeholde
 							<span className={styles.content}>{startCase(service_type)}</span>
 						</div>
 					) : null}
-					<div className={styles.form_item_container}>
-						<div>Stakeholder Name</div>
-						<Select
-							value={stakeholder_id}
-							onChange={set_stakeholder_id}
-							size="sm"
-							{...stakeholderOptions}
-						/>
-					</div>
+
+					<EditBulkStakeholders
+						fields={fields}
+						formProps={formProps}
+						fieldArrayKey={fieldArrayKey}
+					/>
 				</div>
 			</Modal.Body>
-			<Modal.Footer>
-				<div className={styles.actions}>
-					<div className={styles.cancel}>
-						<Button
-							themeType="secondary"
-							onClick={onClose}
-							disabled={loading}
-						>
-							Cancel
-						</Button>
 
-					</div>
-					<div>
-						<Button
-							themeType="accent"
-							onClick={onSubmit}
-							disabled={loading}
-						>
-							Submit
-						</Button>
+			<Modal.Footer className={styles.actions}>
+				<Button
+					themeType="secondary"
+					onClick={onClose}
+					disabled={loading}
+				>
+					Cancel
+				</Button>
 
-					</div>
-				</div>
+				<Button
+					themeType="accent"
+					onClick={handleSubmit(onSubmit)}
+					disabled={loading}
+				>
+					Submit
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

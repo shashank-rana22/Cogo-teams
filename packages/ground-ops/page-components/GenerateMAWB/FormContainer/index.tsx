@@ -1,9 +1,11 @@
-import { Button, Stepper, RadioGroup, Toast } from '@cogoport/components';
+import { Button, Stepper, RadioGroup, Toast, Toggle, Badge } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import Layout from '../../Air/commons/Layout';
+import useGetAirFreightSurcharges from '../../Air/hooks/useGetAirFreightSurcharges';
 import useCreateShipmentDocument from '../GenerateMawbDoc/useCreateShipmentDocument';
 import UploadMAWB from '../UploadMAWB';
 
@@ -21,11 +23,71 @@ const options = [
 	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
+const DECIMAL_PLACE = 2;
+interface NestedObj {
+	[key: string]: string | number ;
+}
+
+interface FieldType {
+	basic?: Array<object>;
+	handling?: Array<object>;
+	hawb_controls?: Array<object>;
+	package?: Array<object>;
+}
+
+interface Props {
+	back: boolean;
+	setBack?:Function;
+	setEdit?:Function;
+	edit?: boolean | string;
+	activeCategory?: string;
+	hawbDetails?: Array<NestedObj>;
+	setHawbDetails?: Function;
+	setActiveHawb?: Function;
+	setActiveKey?: (key: string) => void;
+	activeHawb?: { [key: string]: boolean | string };
+	packingData?:{ [key: string]: Array<string> | Array<URL> };
+	fields?:FieldType;
+	control?:object;
+	errors?:object;
+	setValue?:Function;
+	item?: NestedObj;
+	setGenerate?:Function;
+	handleSubmit?: Function;
+	category?: string;
+	activeKey?: string;
+	taskItem?: NestedObj;
+	formValues?: { [key: string]: Array<NestedObj> };
+	setCustomHawbNumber?: Function;
+	cogoSeriesNumber?: Array<number>
+}
+
 function FormContainer({
-	back, setBack, edit, setEdit, packingData, fields,
-	control, errors, setValue, item, setGenerate, handleSubmit, category, activeCategory, hawbDetails,
-	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem, formValues,
-}) {
+	back = false,
+	setBack = () => {},
+	edit = false,
+	setEdit = () => {},
+	packingData = {},
+	fields = {},
+	control = {},
+	errors = {},
+	setValue = () => {},
+	item = {},
+	setGenerate = () => {},
+	handleSubmit = () => {},
+	category = '',
+	activeCategory = '',
+	hawbDetails = [],
+	setHawbDetails = () => {},
+	activeHawb = {},
+	setActiveHawb = () => {},
+	activeKey = '',
+	setActiveKey = () => {},
+	taskItem = {},
+	formValues = {},
+	setCustomHawbNumber = () => {},
+	cogoSeriesNumber = [],
+}:Props) {
 	const [value, onChange] = useState('manual');
 	const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -36,6 +98,8 @@ function FormContainer({
 			}
 		});
 	};
+
+	const { data, getAirFreightSurcharges } = useGetAirFreightSurcharges(taskItem);
 
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
@@ -58,6 +122,9 @@ function FormContainer({
 			state               : 'document_rejected',
 			id                  : taskItem?.id,
 			performed_by_org_id : taskItem?.serviceProviderId,
+			shipment_id         : taskItem?.shipmentId,
+			service_id          : taskItem?.serviceId,
+			document_type       : 'draft_house_airway_bill',
 		};
 		if (edit) {
 			if (activeHawb.isNew === false) {
@@ -70,14 +137,6 @@ function FormContainer({
 		}
 		setConfirmDelete(false);
 	};
-
-	useEffect(() => {
-		if (taskItem?.status === 'uploaded') {
-			onChange('upload');
-		} else {
-			onChange('manual');
-		}
-	}, [taskItem?.status]);
 
 	function RemoveHawb() {
 		return (
@@ -94,18 +153,46 @@ function FormContainer({
 
 	const calculateCharges = () => {
 		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
-			let price = 0;
-			if (charge.chargeType === 'chargeable_wt') {
-				price = formValues.chargeableWeight * charge.chargeUnit;
-			} else if (charge.chargeType === 'gross_wt') {
-				price = formValues.weight * charge.chargeUnit;
-			} else if (charge.chargeType === 'rate_per_kg') {
-				price = formValues.ratePerKg * charge.chargeUnit;
-			}
+			let price:number = 0;
+			price = Number(
+				(Number(charge.chargeUnit) * Number(charge.quantity))
+					.toFixed(DECIMAL_PLACE),
+			);
 			return { ...charge, price };
 		});
 		setValue('carrierOtherCharges', updatedCharges);
 	};
+
+	useEffect(() => {
+		if (taskItem?.status === 'uploaded') {
+			onChange('upload');
+		} else {
+			onChange('manual');
+		}
+	}, [taskItem?.status]);
+
+	useEffect(() => {
+		if (!isEmpty(taskItem)) {
+			getAirFreightSurcharges();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		const { line_items: lineItems } = data?.surcharge || {};
+		if (lineItems && !edit) {
+			const carrierChargesData = (lineItems || []).map((lineItem) => (
+				{
+					code       : lineItem?.code,
+					unit       : lineItem?.unit,
+					chargeUnit : lineItem?.price,
+				}
+			));
+
+			setValue('carrierOtherCharges', carrierChargesData);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data?.surcharge]);
 
 	return (
 		<div className={styles.form_container}>
@@ -129,13 +216,23 @@ function FormContainer({
 									&& `HAWB - ${hawbItem.id}`}
 									{' '}
 									{hawbItem?.documentNo}
+									{' '}
+									{hawbItem.isNew && <Badge color="#ee3425" size="md" text="NOT SAVED" />}
 								</div>
 							</div>
 						))}
 
 						<Button
 							onClick={() => {
-								setHawbDetails((prev) => ([...prev, { id: uuid(), documentNo: null, isNew: true }]));
+								setHawbDetails((prev) => ([...prev, {
+									id: uuid(),
+									documentNo:
+									!isEmpty(cogoSeriesNumber)
+										? `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`
+										: `COGO-${taskItem.serialId}${
+											(hawbDetails.length + 1).toString().padStart(2, '0')}`,
+									isNew: true,
+								}]));
 							}}
 							themeType="secondary"
 						>
@@ -211,11 +308,21 @@ function FormContainer({
 					{activeKey === 'basic' && (
 						<>
 							{activeCategory === 'hawb' && (
-								<Layout
-									fields={fields?.hawb_controls}
-									errors={errors}
-									control={control}
-								/>
+								<>
+									<Toggle
+										name="document_number"
+										size="sm"
+										disabled={!activeHawb.isNew}
+										onLabel="Custom Series"
+										offLabel="COGO Series"
+										onChange={() => setCustomHawbNumber((prev) => !prev)}
+									/>
+									<Layout
+										fields={fields?.hawb_controls}
+										errors={errors}
+										control={control}
+									/>
+								</>
 							)}
 							<Layout fields={fields?.basic} control={control} errors={errors} />
 							<div className={styles.button_container}>

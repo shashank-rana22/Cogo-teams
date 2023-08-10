@@ -5,7 +5,7 @@ const LABELS = ['truck_type',	'trucks_count'];
 
 function CargoPills({ item = {} }) {
 	const { ftl_freight_services = [] } = item || {};
-	const detail = ftl_freight_services?.[0];
+	const [detail] = ftl_freight_services || [];
 
 	return (
 		<>

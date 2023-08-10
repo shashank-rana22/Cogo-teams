@@ -1,9 +1,10 @@
-import { Loader } from '@cogoport/components';
-
 import List from '../../commons/List';
+import LoadingState from '../../commons/LoadingState';
 import useListBlDOShipments from '../../hooks/useListBlDOShipment';
 
 import styles from './styles.module.css';
+
+const LOADER_ARRAY_SIZE = 6;
 
 function LCL({ stateProps = {}, setStateProps = () => {} }) {
 	const { data, loading, refetch } = useListBlDOShipments({ prefix: 'lcl_freight', stateProps });
@@ -11,8 +12,11 @@ function LCL({ stateProps = {}, setStateProps = () => {} }) {
 	if (loading) {
 		return (
 			<div className={styles.loader}>
-				<div>Loading Shipments...</div>
-				<Loader />
+				{[...Array(LOADER_ARRAY_SIZE).keys()].map((item) => (
+					<div key={item}>
+						<LoadingState />
+					</div>
+				))}
 			</div>
 		);
 	}

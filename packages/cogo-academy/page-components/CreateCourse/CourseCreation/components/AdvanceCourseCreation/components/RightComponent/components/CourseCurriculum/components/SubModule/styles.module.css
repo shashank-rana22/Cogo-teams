@@ -1,0 +1,42 @@
+.node_container {
+	margin-bottom: 12px;
+	border-radius: 4px;
+
+	&.new {
+		padding: 16px 20px;
+		border: 1px solid #e0e0e0;
+		box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+	}
+}
+
+.node {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.accordian_item {
+	display: flex;
+	align-items: center;
+	padding: 12px 24px;
+}
+
+.left {
+	margin-left: 20px;
+}
+
+.flex {
+	display: flex;
+}
+
+.name {
+	margin-left: 4px;
+}
+
+.button {
+	margin-top: 20px;
+}
+
+.icon {
+	cursor: pointer;
+}

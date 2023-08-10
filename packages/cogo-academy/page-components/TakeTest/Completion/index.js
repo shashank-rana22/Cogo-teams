@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter, Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 
@@ -7,9 +7,13 @@ import useGetUserSubmissionStats from '../hooks/useGetUserSubmissionStats';
 
 import styles from './styles.module.css';
 
+const TIME_UNIT = 60;
+
+const TIME_MAX_LENGTH = 2;
+
 function Completion() {
 	const {
-		query: { test_id },
+		query: { test_id, from },
 		user: { id: user_id },
 	} = useSelector(({ general, profile }) => ({
 		query : general.query,
@@ -29,11 +33,15 @@ function Completion() {
 		total_questions,
 	} = data?.data || {};
 
-	const hours = Math.floor(parseInt(time_taken, 10) / 60);
+	const hours = Math.floor(parseInt(time_taken, 10) / TIME_UNIT);
 
-	const remainingMinutes = parseInt(time_taken, 10) % 60;
+	const remainingMinutes = parseInt(time_taken, 10) % TIME_UNIT;
 
-	const formattedTime = `${hours.toString().padStart(2, '0')} : ${remainingMinutes.toString().padStart(2, '0')} hr`;
+	const formattedTime = `${hours
+		.toString()
+		.padStart(TIME_MAX_LENGTH, '0')} : ${remainingMinutes
+		.toString()
+		.padStart(TIME_MAX_LENGTH, '0')} hr`;
 
 	const STATS_MAPPING = {
 		answered: {
@@ -60,6 +68,14 @@ function Completion() {
 		// document.getElementById('container').innerHTML = 'redirecting ...'; TODO
 	};
 
+	const handleGoToCourse = () => {
+		push(
+			`/learning/course/${from}`,
+			`/learning/course/${from}`,
+			'_blank',
+		);
+	};
+
 	return (
 		<div id="container" className={styles.container}>
 			<div className={styles.header}>
@@ -81,7 +97,7 @@ function Completion() {
 						const { title, value } = stats_data;
 
 						return (
-							<div className={styles.content}>
+							<div key={title} className={styles.content}>
 								<div className={styles.label}>
 									{title}
 								</div>
@@ -115,10 +131,19 @@ function Completion() {
 			<div className={styles.bottom_text}>Dashboard will be updated as soon as Results have been Published!</div>
 
 			<div className={styles.button_container}>
-				<Button type="button" onClick={handleGoToDashboard}>
-					<IcMArrowBack style={{ marginRight: 4 }} />
-					Dashboard
-				</Button>
+				{ from
+					? (
+						<Button type="button" onClick={handleGoToCourse}>
+							Go Back To Course
+							<IcMArrowRight style={{ marginLeft: 4 }} />
+						</Button>
+					)
+					: (
+						<Button type="button" onClick={handleGoToDashboard}>
+							<IcMArrowBack style={{ marginRight: 4 }} />
+							Dashboard
+						</Button>
+					)}
 			</div>
 		</div>
 	);

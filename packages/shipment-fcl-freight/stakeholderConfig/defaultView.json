@@ -1,0 +1,91 @@
+{
+    "features":["shipment_info", "shipment_header", "cancel_details", "document_hold_details", "timeline", "overview","add_service","add_rate","emails"],
+    "main_api":["get_shipment", "get_services", "get_timeline"],
+
+    "shipment_info":{
+        "show_source": true
+    },
+
+    "shipment_header" : {
+        "can_add_po_number": false,
+        "can_cancel_shipment": false,
+        "feature_permission":{ "api_permission":["list_tasks"],"add_key_in_feature":"test_case"},
+        "show_po_number": true,
+        "show_cfs_details": false,
+        "show_poc_details": true
+    },
+
+    "timeline": {
+        "can_edit_schedule":false
+    },
+
+    "default_tab":"tasks",
+
+    "overview":{
+        "tab_title":"Overview",
+        "can_upsell": true,
+        "can_edit_cancel_service": true,
+        "can_edit_container_details": true,
+        "show_terms_and_conditions": true
+    },
+
+    "tasks":{
+        "feature_permission" : { "api_permission":["list_tasks"]  },
+        "tab_title":"Timeline and Tasks",
+        "show_others_tasks": true,
+        "show_igm_tasks": false
+    },
+
+    "purchase":{
+        "tab_title":"Purchase Invoice",
+        "feature_permission": { "api_permission":["list_shipment_collection_party"]}
+    },
+
+    "sales":{
+        "feature_permission": { "api_permission":["list_sage_invoices_v2", "get_shipment_invoice_preference"]}
+    },
+
+    "documents":{
+        "tab_title":"Documents",
+        "default_wallet":"trade_documents",
+        "feature_permission": { "api_permission":["list_documents", "list_tasks", "get_process"]},
+        "can_edit_documents": true,
+        "show_igm_docs": false
+    },
+
+    "emails":{
+        "tab_title":"Emails"
+    },
+    
+    "manage_services":{
+        "feature_permission":true,
+        "services":{
+            "feature_permission":true,
+            "add_new_service":{
+                "feature_permission": { 
+                    "api_permission": ["get_buyers"]
+                }
+            }
+        }
+    },
+    
+    
+    "additional_services": {
+        "feature_permission":{
+            "api_permission": ["list_additional_services", "update_shipment_additional_service"]
+        },
+        "add_ip":{
+            "feature_permission":{
+                "api_permission":["list_organization_invoicing_parties"]
+            }
+        },
+        "cancel_additional_service":{
+            "feature_permission": false
+        }
+    },
+
+    "supplier_reallocation":{
+        "feature_permission":false
+    }
+}
+

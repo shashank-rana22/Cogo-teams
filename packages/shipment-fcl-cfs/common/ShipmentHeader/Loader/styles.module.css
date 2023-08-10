@@ -1,0 +1,25 @@
+.container {
+	display: flex;
+	width: 100%;
+	border-radius: 10px;
+}
+
+.details {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	padding: 10px 14px;
+	margin-right: 12px;
+	background: #fff;
+}
+
+.ports {
+	display: flex;
+	flex-direction: column;
+	margin: 0 20px;
+
+	&.destination {
+		margin: 0 30px 0 60px;
+	}
+}

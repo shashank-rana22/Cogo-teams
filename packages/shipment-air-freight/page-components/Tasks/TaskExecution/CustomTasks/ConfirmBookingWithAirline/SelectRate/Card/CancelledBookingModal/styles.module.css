@@ -1,0 +1,38 @@
+.container {
+	padding: 4px;
+
+	.core-ui-radio-root {
+		width: 48%;
+		margin-bottom: 14px;
+
+		@media (max-width: 768px) {
+			width: 100%;
+		}
+	}
+
+	.core-ui-radiogroup-container {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		width: 100%;
+		margin-bottom: 16px;
+	}
+
+	.core-ui-radio-label {
+		margin-left: 16px;
+		font-size: 14px;
+		color: #333;
+	}
+}
+
+.heading {
+	font-size: 18px;
+	font-weight: 500;
+	color: #333;
+}
+
+.button_container {
+	display: flex;
+	justify-content: right;
+	margin-top: 4px;
+}

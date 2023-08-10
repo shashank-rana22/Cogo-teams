@@ -10,6 +10,7 @@ const actions = ({
 	setShowModal = () => {},
 	setItem = () => {},
 	activeStakeholder = '',
+	canEditCancelService = false,
 }) => {
 	const isSameItem = serviceListItem.id === addRate?.item?.id;
 
@@ -45,7 +46,7 @@ const actions = ({
 	}
 
 	if (status.status === 'cancelled_by_supplier'
-		&& ['booking_desk', 'booking_desk_manager'].includes(activeStakeholder)) {
+		&& ['booking_desk', 'booking_desk_manager', 'so1_so2_ops'].includes(activeStakeholder)) {
 		return (
 			<Button
 				themeType="secondary"
@@ -76,7 +77,7 @@ const actions = ({
 
 	if (
 		(!IP_STATE_CONDITONS.includes(serviceListItem.state)
-			|| !serviceListItem.invoice_preference)
+			|| !serviceListItem.invoice_preference) && canEditCancelService
 	) {
 		return (
 			<Button

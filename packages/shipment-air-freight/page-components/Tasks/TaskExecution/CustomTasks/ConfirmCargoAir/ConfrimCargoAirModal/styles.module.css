@@ -1,0 +1,91 @@
+.container {
+	padding: 12px;
+
+	.ui-single-date-picker-input-container {
+		width: 92%;
+		height: 44px;
+		border: 1px solid #cbcff5;
+		border-radius: 4px;
+
+		.core-ui-input-root {
+			border: none;
+
+			input {
+				margin-top: 8px;
+				margin-left: 2px;
+				font-size: 14px;
+				color: #333;
+			}
+		}
+	}
+
+	.form-item-label {
+		font-weight: 500;
+	}
+
+	.custom-select-input-container {
+		width: 92%;
+
+		.custom-select-input-subcontainer {
+			height: 44px;
+			border: 1px solid #cbcff5;
+			border-radius: 4px;
+
+			.custom-select-input-select-placeholder {
+				color: #cbcff5;
+			}
+
+			.custom-select-input-select-value {
+				color: #333;
+			}
+		}
+	}
+}
+
+.upper_radio {
+	display: flex;
+	justify-content: space-between;
+	width: 25%;
+	margin-top: 40px;
+
+	.core-ui-radiogroup-container {
+		display: flex;
+		width: 150px;
+	}
+}
+
+.radio_label {
+	font-size: 15px;
+	font-weight: 500;
+	color: #333;
+}
+
+.button_div {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 30px;
+}
+
+.div1 {
+	margin-right: 10px;
+}
+
+.div_middle {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.heading_div {
+	margin-top: 32px;
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #333;
+}
+
+.layout_div {
+	.Line_row {
+		margin-top: 0;
+		border-bottom: none;
+	}
+}

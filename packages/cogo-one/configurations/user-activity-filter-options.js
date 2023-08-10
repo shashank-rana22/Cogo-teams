@@ -30,6 +30,10 @@ function filterOptions() {
 			label : 'Voice Call',
 			value : 'voice_call',
 		},
+		{
+			label : 'Zalo',
+			value : 'zalo',
+		},
 	];
 
 	const FILTERS_MAPPING = {

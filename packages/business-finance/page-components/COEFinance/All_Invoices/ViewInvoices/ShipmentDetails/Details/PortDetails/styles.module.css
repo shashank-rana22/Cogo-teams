@@ -24,9 +24,18 @@
 }
 
 .value {
-	width: 100%;
+	width: 150px;
+	overflow: hidden;
 	font-size: 12px;
 	font-weight: 700;
+	color: #333;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.location_text {
+	font-size: 12px;
+	font-weight: 600;
 	color: #333;
 }
 

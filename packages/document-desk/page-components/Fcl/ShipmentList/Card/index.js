@@ -2,6 +2,7 @@ import { IcMFfcl, IcMFlocalCharges, IcMFcustoms, IcMFcfs } from '@cogoport/icons
 import { useRouter } from '@cogoport/next';
 import { useContext } from 'react';
 
+import CONSTANTS from '../../../../configs/constants.json';
 import DocumentDeskContext from '../../../../context/DocumentDeskContext';
 import getCriticalShipment from '../../../../helpers/getCriticalShipment';
 
@@ -27,10 +28,15 @@ export default function Card({ item = {} }) {
 	const isShipmentCritical = getCriticalShipment({ tab: activeTab, shipment: item });
 
 	const clickCard = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+		if (item?.shipment_type === 'fcl_freight') {
+			router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}?${CONSTANTS.url_navigation_params}`);
+		} else {
+			const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}
+		?${CONSTANTS.url_navigation_params}`;
 
-		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
+			window.sessionStorage.setItem('prev_nav', newUrl);
+			window.location.href = newUrl;
+		}
 	};
 
 	const iconProps = iconMapping[item?.shipment_type];

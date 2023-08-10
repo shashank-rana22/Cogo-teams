@@ -1,0 +1,25 @@
+.main_div {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.div_style {
+	width: 60%;
+}
+
+.div_search {
+	display: flex;
+	justify-content: space-between;
+	width: 35%;
+}
+
+.search {
+	display: flex;
+	margin: 4px;
+}
+
+.list {
+	display: flex;
+	justify-content: flex-end;
+}

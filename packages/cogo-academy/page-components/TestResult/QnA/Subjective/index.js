@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 import SubjectiveItem from './SubjectiveItem';
 
-function Subjective({ questions, user_id = '', test_id = '', count_till_now, view = '', status }) {
+function Subjective({ questions, user_id = '', test_id = '', count_till_now, view = '', status, activeAttempt }) {
 	return (
 		<div className={styles.container}>
 			{(questions || []).map((question, index) => (
@@ -13,6 +13,7 @@ function Subjective({ questions, user_id = '', test_id = '', count_till_now, vie
 						user_id={user_id}
 						test_id={test_id}
 						status={status}
+						activeAttempt={activeAttempt}
 					/>
 				</div>
 			))}

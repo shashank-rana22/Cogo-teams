@@ -21,7 +21,7 @@
 	width: 100%;
 	margin: 10px 0 0;
 	margin-bottom: 8px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 700;
 }
 

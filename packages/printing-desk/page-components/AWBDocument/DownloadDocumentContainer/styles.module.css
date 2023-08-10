@@ -1,0 +1,26 @@
+.download_button_div {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 8px;
+	background: var(--color-secondary-5);
+}
+
+.flex {
+	display: flex;
+}
+
+.button_flex {
+	display: flex;
+	align-items: center;
+	margin-right: 36px;
+}
+
+.whiteout {
+	align-items: center;
+	margin: 0 8px;
+}

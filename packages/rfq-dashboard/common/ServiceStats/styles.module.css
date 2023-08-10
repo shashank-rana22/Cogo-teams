@@ -1,0 +1,74 @@
+.green {
+	color: #47ea47;
+}
+
+.red {
+	color: #b91e1e;
+}
+
+.black {
+	color: #060606;
+}
+
+.revenue_profitability_utilisation_section {
+	display: flex;
+	gap: 25px;
+	padding-top: 10px;
+
+	.green {
+		color: green;
+	}
+
+	.red {
+		color: red;
+	}
+
+	.black {
+		color: #333;
+	}
+}
+
+.service_stats_ports_section {
+	display: flex;
+	justify-content: space-evenly;
+	padding-top: 0;
+}
+
+.revenyue_profitability_utilization_name {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.revenyue_profitability_utilization_value {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.stats_value {
+	display: flex;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.revenue {
+	color: #221f20;
+}
+
+.profitability {
+	color: #849e4c;
+}
+
+.utilization {
+	color: #221f20;
+}
+
+.individual_section {
+	display: flex;
+	align-items: center;
+}
+
+.individual_section .revenyue_profitability_utilization_value {
+	padding-left: 3px;
+	font-size: 16px;
+}

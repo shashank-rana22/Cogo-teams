@@ -1,0 +1,26 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	margin: 0 10px 10px;
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+	}
+
+	:global {
+		.ui_button_container {
+			min-width: 140px;
+		}
+	}
+}
+
+.view_button {
+	margin-right: 20px;
+	font-weight: 600;
+}

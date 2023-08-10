@@ -1,9 +1,12 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import React from 'react';
 
 import useCreateUpsell from '../../../../../hooks/useCreateUpsell';
 
 import styles from './styles.module.css';
+
+const FIRST_STEP = 1;
+const SECOND_STEP = 2;
 
 function Footer({
 	onClose = () => {},
@@ -18,7 +21,7 @@ function Footer({
 	user = {},
 
 }) {
-	const { handleSubmit = () => {} } = formProps;
+	const { handleSubmit = () => {}, trigger } = formProps;
 
 	const { onAddService = () => {}, loading } = useCreateUpsell({
 		primary_service,
@@ -28,21 +31,33 @@ function Footer({
 		user,
 	});
 
+	const goToSecondStep = async () => {
+		const formValid = await trigger();
+		if (formValid) {
+			setStep(SECOND_STEP);
+		} else {
+			Toast.error('Some form fields are empty or invalid');
+		}
+	};
+
 	return (
 		<div className={styles.container}>
-			<Button
-				onClick={onClose}
-				disabled={loading || haveToUpsell}
-				themeType="secondary"
-				id="shipment_form_header_cancel"
-			>
-				Cancel
-			</Button>
-
-			{step === 1
+			{ !haveToUpsell
 				? (
 					<Button
-						onClick={() => setStep(2)}
+						onClick={onClose}
+						disabled={loading || haveToUpsell}
+						themeType="secondary"
+						id="shipment_form_header_cancel"
+					>
+						Cancel
+					</Button>
+				) : null}
+
+			{step === FIRST_STEP
+				? (
+					<Button
+						onClick={goToSecondStep}
 						disabled={loading}
 						className={styles.button_wrapper}
 					>

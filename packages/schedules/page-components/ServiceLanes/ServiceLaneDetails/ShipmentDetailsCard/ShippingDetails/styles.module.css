@@ -1,0 +1,31 @@
+.container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 32%;
+	margin: 12px 24px 0;
+}
+
+.company_logo_name {
+	position: absolute;
+	left: 50%;
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--black-80, #4f4f4f);
+	text-align: center;
+	letter-spacing: 0.28px;
+}
+
+.date_type {
+	display: flex;
+}
+
+.shipping_line {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--black-80, #4f4f4f);
+	letter-spacing: 0.32px;
+}

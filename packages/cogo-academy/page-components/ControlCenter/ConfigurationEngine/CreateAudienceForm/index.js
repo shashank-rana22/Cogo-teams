@@ -1,9 +1,7 @@
 import { Button } from '@cogoport/components';
-import { SelectController, InputController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
-/* eslint-disable */
-import countries from '../../../../../../.data-store/constants/countries.json';
+import getElementController from '../../../../configs/getElementController';
 import useListCogoEntity from '../hooks/useListCogoEntities';
 
 import styles from './styles.module.css';
@@ -19,7 +17,6 @@ function CreateAudienceForm(props) {
 		customStyle,
 		fetchAudiences = () => {},
 	} = props;
-
 
 	const {
 		createAudience,
@@ -41,47 +38,48 @@ function CreateAudienceForm(props) {
 		control,
 		handleSubmit,
 		errors,
-		controls
-	} =  useGetAudienceOptions({
-			entity_data,
-			countries,
-			setConfigurationPage,
-			setShowCreateAudienceModal,
-			source
-		})
+		controls,
+	} = useGetAudienceOptions({
+		entity_data,
+		setConfigurationPage,
+		setShowCreateAudienceModal,
+		source,
+	});
 
-	const renderFields = () => {
-		return (Object.keys(controls) || []).map((controlItem) => {
-			const { name = '', label = '' } = controls[controlItem] || {};
+	const renderFields = () => (Object.keys(controls) || []).map((controlItem) => {
+		const { name = '', label = '', type = '' } = controls[controlItem] || {};
 
-			const DynamicController = name === 'name' ? InputController : SelectController;
+		if (!type) return null;
 
-			if (showElements[name]) {
-				return (
-					<div key={name}>
-						<div className={styles.label}>
-							{label}
-						</div>
-						<div className={styles.controller_wrapper} style={customStyle?.controllerStyle || {}}>
-							<DynamicController
-								{...controls[controlItem]}
-								control={control}
-								name={name}
-							/>
-						</div>
+		const DynamicController = getElementController(type);
 
-						{errors[name]
+		if (!DynamicController) return null;
+
+		if (showElements[name]) {
+			return (
+				<div key={name}>
+					<div className={styles.label}>
+						{label}
+					</div>
+					<div className={styles.controller_wrapper} style={customStyle?.controllerStyle || {}}>
+						<DynamicController
+							{...controls[controlItem]}
+							control={control}
+							name={name}
+						/>
+					</div>
+
+					{errors[name]
 						&& (
 							<div className={styles.error_message}>
 								{errors[name]?.message}
 							</div>
 						)}
-					</div>
-				);
-			}
-			return null;
-	}
-	)}
+				</div>
+			);
+		}
+		return null;
+	});
 
 	return (
 		<div className={styles.container}>

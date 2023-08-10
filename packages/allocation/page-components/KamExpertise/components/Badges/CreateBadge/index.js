@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 
@@ -71,7 +71,7 @@ function CreateBadge(props) {
 						if (!Element) return null;
 
 						return (
-							<div className={styles.form_group}>
+							<div key={el.name} className={styles.form_group}>
 								<span className={styles.label}>{el.label}</span>
 
 								<div className={styles.input_group}>

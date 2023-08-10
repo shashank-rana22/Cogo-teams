@@ -1,0 +1,67 @@
+.back_button {
+	display: flex;
+	align-items: center;
+	margin: 8px 0;
+	cursor: pointer;
+}
+
+.go_back {
+	margin-left: 8px;
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.supplier_card {
+	display: flex;
+	align-items: center;
+	padding: 16px 24px;
+	margin: 16px 0;
+	background: var(--color-tertiary-blue-5);
+	border: 1px solid var(--color-tertiary-blue-2);
+	border-radius: 8px;
+}
+
+.name_value {
+	display: flex;
+	width: 40%;
+}
+
+.value_data {
+	margin-left: 8px;
+	font-weight: 600;
+}
+
+.filters_data {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.table_body {
+	margin: 16px 0;
+
+	:global {
+		.ui_table_head_row {
+			.ui_table_head_cell:nth-child(5) {
+				border-right: 1px solid #d9d9d9;
+			}
+
+			.ui_table_head_cell:nth-child(7) {
+				border-left: 1px solid #d9d9d9;
+			}
+
+			.ui_table_head_cell:first-child {
+				padding: 0 0 0 10px;
+			}
+		}
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 20px;
+	padding-bottom: 12px;
+	font-size: var(--font-size-lg);
+	cursor: pointer;
+}

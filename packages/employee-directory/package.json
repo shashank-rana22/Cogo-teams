@@ -1,0 +1,16 @@
+{
+	"name": "@cogoport/employee-directory",
+	"description": "Employee Directory",
+	"version": "0.1.0",
+	"dependencies": {
+		"@cogoport/components": "^1.0.432",
+		"@cogoport/forms": "workspace:^0.1.0",
+		"@cogoport/globalization": "workspace:^0.0.1",
+		"@cogoport/icons-react": "^1.0.85",
+		"@cogoport/next": "workspace:0.1.0",
+		"@cogoport/request": "workspace:^0.1.0",
+		"@cogoport/store": "workspace:^0.1.0",
+		"@cogoport/utils": "^1.2.10",
+		"react": "18.2.0"
+	}
+}

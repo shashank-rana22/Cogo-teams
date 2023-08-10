@@ -1,0 +1,49 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	background: #f4f4f4;
+	border-top: 1px solid #e0e0e0;
+}
+
+.rating_container {
+	width: 100%;
+	height: 50px;
+
+	:global {
+		.ui_star_rating_container {
+			display: flex;
+			justify-content: center;
+		}
+
+		.ui_star_rating {
+			background: #f4f4f4;
+		}
+	}
+}
+
+.rating_text {
+	width: 100%;
+	margin: 10px 0 4px;
+	color: #828282;
+	text-align: center;
+}
+
+.button_container {
+	height: 32px;
+	margin: 4px 0 15px;
+}
+
+.feedback_text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin: 20px 0;
+	color: #828282;
+}
+
+.ticket_star {
+	margin-left: 4px;
+}

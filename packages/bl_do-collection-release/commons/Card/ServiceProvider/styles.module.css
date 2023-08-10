@@ -1,9 +1,8 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: center;
 	width: 50%;
-	padding: 0 26px;
 
 	* {
 		font-size: 12px;
@@ -15,7 +14,6 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	margin: 8px 0;
 }
 
 .grey {
@@ -23,13 +21,12 @@
 }
 
 .left {
-	width: 50%;
-	padding: 8px 16px 8px 8px;
+	width: 56%;
+	padding: 0 16px 4px 8px;
 }
 
 .right {
-	width: 50%;
-	padding: 16px;
+	width: 44%;
 }
 
 .lower_left {
@@ -48,13 +45,24 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	cursor: pointer;
 }
 
 .tooltip_container {
+	display: flex;
 	color: var(--color-accent-orange-2);
 	text-decoration: underline;
 }
 
 .tooltip {
 	max-width: none !important;
+}
+
+.more_item {
+	width: fit-content;
+	padding: 0 4px;
+	margin-left: 4px;
+	color: #000;
+	background: #fdebe9;
+	border-radius: 4px;
 }

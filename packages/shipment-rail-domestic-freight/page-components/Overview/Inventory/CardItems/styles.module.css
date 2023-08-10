@@ -1,0 +1,38 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 15px;
+	background: #fff;
+	border-radius: 4px;
+}
+
+.container_number {
+	margin-left: 10px;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.container_number_container {
+	flex: 1;
+}
+
+.route {
+	flex: 3;
+}
+
+.status {
+	flex: 1;
+	justify-content: center;
+	width: 100%;
+}
+
+.status > * {
+	display: block;
+	width: 50%;
+}

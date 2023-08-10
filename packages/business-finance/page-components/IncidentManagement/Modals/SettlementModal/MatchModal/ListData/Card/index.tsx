@@ -1,5 +1,5 @@
 import { Button, Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMGrid } from '@cogoport/icons-react';
 
 import { statusColor } from './constant';
@@ -67,9 +67,30 @@ function Card({
 						)}
 						placement="top"
 					>
-						<div className={styles.wrapper}>{getFormattedPrice(documentAmount, currency)}</div>
+						<div className={styles.wrapper}>
+							{formatAmount({
+								amount  :	documentAmount,
+								currency,
+								options : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
+
+						</div>
 					</Tooltip>
-				) : <div>{getFormattedPrice(documentAmount, currency)}</div>}
+				) : (
+					<div>
+						{formatAmount({
+							amount  :	documentAmount,
+							currency,
+							options : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+					</div>
+				)}
 			</div>
 
 			<div className={styles.item_exchange}>{exchangeRate}</div>
@@ -136,9 +157,30 @@ function Card({
 						)}
 						placement="top"
 					>
-						<div className={styles.wrapper}>{getFormattedPrice(settledTds, currency)}</div>
+						<div className={styles.wrapper}>
+							{formatAmount({
+								amount  :	settledTds,
+								currency,
+								options : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
+
+						</div>
 					</Tooltip>
-				) : <div>{getFormattedPrice(settledTds, currency)}</div>}
+				) : (
+					<div>
+						{formatAmount({
+							amount  :	settledTds,
+							currency,
+							options : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+					</div>
+				)}
 			</div>
 
 			<div className={styles.item}>
@@ -151,9 +193,30 @@ function Card({
 						)}
 						placement="top"
 					>
-						<div className={styles.wrapper}>{getFormattedPrice(balanceAmount, currency)}</div>
+						<div className={styles.wrapper}>
+							{formatAmount({
+								amount  :	balanceAmount,
+								currency,
+								options : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
+
+						</div>
 					</Tooltip>
-				) : <div>{getFormattedPrice(balanceAmount, currency)}</div>}
+				) : (
+					<div>
+						{formatAmount({
+							amount  :	balanceAmount,
+							currency,
+							options : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+					</div>
+				)}
 			</div>
 
 			<div style={{ display: 'flex', alignItems: 'center', width: '10%' }}>
@@ -192,9 +255,30 @@ function Card({
 						)}
 						placement="top"
 					>
-						<div className={styles.wrapper}>{getFormattedPrice(balanceAfterAllocation, currency)}</div>
+						<div className={styles.wrapper}>
+							{formatAmount({
+								amount  :	balanceAfterAllocation,
+								currency,
+								options : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
+
+						</div>
 					</Tooltip>
-				) : <div>{getFormattedPrice(balanceAfterAllocation, currency)}</div>}
+				) : (
+					<div>
+						{formatAmount({
+							amount  :	balanceAfterAllocation,
+							currency,
+							options : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+					</div>
+				)}
 			</div>
 
 		</>

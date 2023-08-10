@@ -1,24 +1,36 @@
 import { getCookie } from '@cogoport/utils';
 
-import GLOBAL_CONSTANTS from '../globals.json';
+import getCountryDetails from '../../utils/getCountryDetails';
+import GLOBAL_CONSTANTS from '../globals';
 
 import IN from './IN';
 import VN from './VN';
 
-const { country_entity_ids, country_ids } = GLOBAL_CONSTANTS;
+const { country_entity_ids } = GLOBAL_CONSTANTS;
 
-const MAPPING = {
+export const ENTITY_IDS_MAPPING = {
 	[country_entity_ids.IN] : IN,
 	[country_entity_ids.VN] : VN,
 };
 
 const COUNTRY_ID_MAPPING = {
-	[country_ids.IN] : IN,
-	[country_ids.VN] : VN,
+	IN,
+	VN,
 };
 
-export const getConstantsByCountryCode = ({ country_id }) => COUNTRY_ID_MAPPING[country_id]
-|| COUNTRY_ID_MAPPING[country_ids.IN];
+export const getCountryConstants = ({ country_id, country_code, isDefaultData = true }) => {
+	const countryData = getCountryDetails({ country_id, country_code });
+
+	const { country_code: countryCode } = countryData || {};
+
+	const isCountryCodeValid = countryCode in COUNTRY_ID_MAPPING;
+
+	if (isDefaultData) {
+		return COUNTRY_ID_MAPPING[isCountryCodeValid ? countryCode : 'IN'];
+	}
+
+	return isCountryCodeValid ? COUNTRY_ID_MAPPING[countryCode] : {};
+};
 
 const getGeoConstants = () => {
 	if (typeof window === 'undefined') {
@@ -27,8 +39,8 @@ const getGeoConstants = () => {
 
 	const parent_entity_id = getCookie('parent_entity_id');
 
-	return MAPPING[
-		parent_entity_id in MAPPING ? parent_entity_id : country_entity_ids.IN
+	return ENTITY_IDS_MAPPING[
+		parent_entity_id in ENTITY_IDS_MAPPING ? parent_entity_id : country_entity_ids.IN
 	];
 };
 

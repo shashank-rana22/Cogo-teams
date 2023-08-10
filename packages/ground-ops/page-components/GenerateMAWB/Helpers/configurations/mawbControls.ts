@@ -1,6 +1,21 @@
 import currencies from '../currencies';
 
-const mawbControls = (disableClass, editHawbNumberCondition) => ({
+const UNITS = {
+	per_kg         : 'Per Kg',
+	per_kg_gross   : 'Per Kg Gross',
+	per_shipment   : 'Per Shipment',
+	per_awb        : 'Per Awb',
+	per_document   : 'Per Document',
+	per_package    : 'Per Package',
+	per_kg_per_day : 'Per Kg Per Day',
+};
+
+const convertObjectMappingToArray = (obj) => Object.keys(obj).map((item) => ({
+	value : item,
+	label : obj[item],
+}));
+
+const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) => ({
 	hawb_controls: [
 		{
 			name        : 'document_number',
@@ -27,12 +42,11 @@ const mawbControls = (disableClass, editHawbNumberCondition) => ({
 		},
 		{
 			name        : 'shipperAddress',
-			className   : 'textarea',
 			label       : "Shipper's Address",
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 200,
-			row         : 4,
+			rows        : 6,
 			placeholder : 'Enter Address',
 			rules       : {
 				required: 'Shippers Address is Required',
@@ -53,12 +67,11 @@ const mawbControls = (disableClass, editHawbNumberCondition) => ({
 		},
 		{
 			name        : 'consigneeAddress',
-			className   : 'textarea',
 			label       : "Consignee's Address",
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 200,
-			row         : 4,
+			rows        : 6,
 			placeholder : 'Enter Address',
 			rules       : {
 				required: 'Consignees Address is Required',
@@ -245,6 +258,7 @@ const mawbControls = (disableClass, editHawbNumberCondition) => ({
 						{ label: 'Cm', value: 'cms' },
 						{ label: 'Inch', value: 'inch' },
 					],
+					value: unitDefaultValue,
 				},
 
 			],
@@ -353,13 +367,12 @@ const mawbControls = (disableClass, editHawbNumberCondition) => ({
 		},
 		{
 			name        : 'remark',
-			className   : 'textarea',
 			label       : 'Remarks',
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 500,
 			placeholder : 'Remarks',
-			rows        : 3,
+			rows        : 6,
 		},
 		{
 			name               : 'agentOtherCharges',
@@ -416,6 +429,7 @@ const mawbControls = (disableClass, editHawbNumberCondition) => ({
 			controls: [
 				{
 					name        : 'code',
+					label       : 'Charge Code',
 					type        : 'text',
 					className   : 'primary lg',
 					span        : 2,
@@ -425,25 +439,29 @@ const mawbControls = (disableClass, editHawbNumberCondition) => ({
 					},
 				},
 				{
-					name        : 'chargeType',
-					type        : 'select',
-					className   : 'primary lg',
-					span        : 3,
-					placeholder : 'Enter Charge Type',
-					options     : [
-						{ value: 'chargeable_wt', label: 'Chargeable Weight' },
-						{ value: 'gross_wt', label: 'Gross Weight' },
-					],
+					type    : 'select',
+					label   : 'Unit',
+					name    : 'unit',
+					options : convertObjectMappingToArray(UNITS),
+					span    : 3,
 				},
 				{
 					name        : 'chargeUnit',
+					label       : 'Price/Unit',
 					type        : 'text',
 					className   : 'primary lg',
 					span        : 2,
 					placeholder : 'Enter Charge Unit',
 				},
 				{
+					name  : 'quantity',
+					label : 'Quantity',
+					type  : 'number',
+					span  : 2,
+				},
+				{
 					name        : 'price',
+					label       : 'Total Price',
 					placeholder : 'Enter Price',
 					type        : 'text',
 					span        : 2,
@@ -467,12 +485,12 @@ const mawbControls = (disableClass, editHawbNumberCondition) => ({
 			},
 		},
 		{
-			name      : 'accountingInformation',
-			type      : 'textarea',
-			className : 'textarea',
-			label     : 'Accounting Information:',
-			span      : 7,
-			rules     : {
+			name  : 'accountingInformation',
+			type  : 'textarea',
+			label : 'Accounting Information:',
+			span  : 7,
+			rows  : 6,
+			rules : {
 				required: 'Accounting Information is Required',
 			},
 		},
@@ -506,10 +524,10 @@ const mawbControls = (disableClass, editHawbNumberCondition) => ({
 		{
 			name         : 'handlingInformation',
 			type         : 'textarea',
-			className    : 'textarea',
 			label        : 'Handling Information:',
 			showOptional : false,
 			span         : 5,
+			rows         : 6,
 			placeholder  : 'Handling Information...*',
 			maxLength    : 300,
 		},
@@ -517,11 +535,10 @@ const mawbControls = (disableClass, editHawbNumberCondition) => ({
 			name        : 'commodity',
 			label       : 'Commodity Details:',
 			type        : 'textarea',
-			className   : 'textarea',
 			span        : 5,
 			maxLength   : 300,
 			placeholder : 'Commodity...',
-			rows        : 3,
+			rows        : 6,
 			rules       : {
 				required: 'Commodity is Required',
 			},

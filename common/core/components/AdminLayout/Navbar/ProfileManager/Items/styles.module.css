@@ -68,6 +68,13 @@
 		white-space: nowrap;
 		user-select: none;
 	}
+
+	:global {
+		.ui_badge_container {
+			left: 50%;
+			padding: 2px;
+		}
+	}
 }
 
 .active_item {

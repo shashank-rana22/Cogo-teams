@@ -1,0 +1,68 @@
+.container {
+	width: 100%;
+}
+
+.chapter_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 12px 0;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.active {
+	background: #fffce6;
+}
+
+.number {
+	position: relative;
+	width: 20px;
+	height: 20px;
+	margin-right: 12px;
+	background: #4f4f4f;
+	border-radius: 50%;
+}
+
+.wrapper {
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	justify-content: flex-start;
+	width: 70%;
+}
+
+.icon {
+	margin-right: 6px;
+}
+
+.tooltip {
+	max-width: 60%;
+}
+
+.name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.duration {
+	margin: 0 8px;
+	font-size: 10px;
+	color: #4f4f4f;
+	white-space: nowrap;
+}
+
+.databox_image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	margin-right: 10px;
+	background-color: #000;
+	border-radius: 50%;
+}

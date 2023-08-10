@@ -1,9 +1,9 @@
 .key {
 	margin: 9px 0 5px 24px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 400;
 	line-height: 20px;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 	white-space: nowrap;
 }
 
@@ -11,7 +11,7 @@
 	max-width: 200px;
 	margin: 8px 24px 4px;
 	overflow: hidden;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	line-height: 20px;
 	color: #333;

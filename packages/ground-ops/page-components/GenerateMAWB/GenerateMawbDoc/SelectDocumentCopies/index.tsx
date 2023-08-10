@@ -13,7 +13,7 @@ function SelectDocumentCopies({
 }) {
 	const { data } = useGetMultipleCopiesList(taskItem);
 
-	const OPTIONS = multipleCopies({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem });
+	const options = multipleCopies({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem });
 
 	const onChangeTableHeaderCheckbox = (event) => {
 		copiesOnChange(event.currentTarget.checked ? [
@@ -65,7 +65,7 @@ function SelectDocumentCopies({
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				{getSelectAllCheckbox()}
 				<CheckboxGroup
-					options={OPTIONS}
+					options={options}
 					onChange={copiesOnChange}
 					value={copiesValue}
 				/>

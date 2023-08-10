@@ -1,0 +1,59 @@
+.modal_container {
+	max-height: 600px;
+	padding: 20px;
+	overflow: scroll;
+
+	:global {
+		.form_layout_row {
+			padding: 0;
+		}
+
+		.ui_input_container {
+			max-height: 32px;
+			border: 1px solid var(--color-secondary-greyscale-2);
+
+			.ui_input_control {
+				font-size: var(--font-size-md);
+			}
+
+			.ui_input_control::placeholder {
+				font-size: var(--font-size-md);
+				color: var(--color-secondary-greyscale-3);
+			}
+		}
+
+		.ui_select_container {
+			.ui_select_display_container {
+				max-height: 32px;
+				border: 1px solid var(--color-secondary-greyscale-2);
+
+				.ui_select_input_control {
+					font-size: var(--font-size-md);
+
+					.ui_select_input_placeholder {
+						font-size: var(--font-size-md);
+						color: var(--color-secondary-greyscale-3);
+					}
+				}
+			}
+		}
+
+		.ui_modal_header_container {
+			padding: 0 0 8px;
+
+			.ui_modal_header_title::after {
+				display: block;
+				width: 10%;
+				height: 2px;
+				content: "";
+				background: var(--color-accent-orange-2);
+			}
+		}
+	}
+}
+
+.modal_footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}

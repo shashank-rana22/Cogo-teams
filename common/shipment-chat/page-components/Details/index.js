@@ -1,5 +1,6 @@
 import { Textarea, Popover, Toast } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSend, IcMAttach, IcMDocument } from '@cogoport/icons-react';
 import React, { useRef, useState } from 'react';
 
@@ -12,6 +13,13 @@ import MessageContainer from './MessageContainer';
 import SendTo from './SendTo';
 import styles from './styles.module.css';
 
+const INITIAL_STATE_ROWS = 1;
+const TOTAL_STAKEHOLDERS_LENGTH = 2;
+const TOTAL_ROWS = 5;
+const ENTER_KEY = 13;
+const DELETE_KEY_1 = 46;
+const DELETE_KEY_2 = 8;
+
 const shipmentChatStakeholders = [
 	'service_ops1',
 	'service_ops2',
@@ -21,12 +29,12 @@ const shipmentChatStakeholders = [
 ];
 
 function Details({
-	id,
-	activeId,
-	sourceId,
-	source,
+	id = '',
+	activeId = '',
+	sourceId = '',
+	source = '',
 	subscribedUsers = [],
-	setShow = () => { },
+	setShow = () => {},
 	get = {},
 	personalData = {},
 }) {
@@ -35,15 +43,17 @@ function Details({
 	const [textContent, setTextContent] = useState('');
 	const [showImpMsg, setShowImpMsg] = useState(false);
 	const [selectedFile, setSelectedFile] = useState([]);
-	const [rows, setRows] = useState(1);
+	const [rows, setRows] = useState(INITIAL_STATE_ROWS);
 
 	const { data, loadingChannel } = get;
 	const { channelData, primaryService } = data || {};
 	const { msgContent } = useFireBase({ id });
 
-	const isStakeholder = shipmentChatStakeholders.includes(
-		channelData?.stakeholder_types?.[0],
-	);
+	let isStakeholder = false;
+
+	channelData?.stakeholder_types?.forEach((stakeholder) => {
+		isStakeholder = shipmentChatStakeholders.includes(stakeholder);
+	});
 
 	const formValues = {
 		message : textContent,
@@ -57,7 +67,8 @@ function Details({
 	// formatting Data for hooks
 	const stakeholder = stakeHolderView.split(' ');
 	const stakeholderArray = (stakeholder || []).map((item) => item.replace('@', ''));
-	const conditionArr = stakeholderArray.length && stakeholderArray[0] !== '' ? [...stakeholderArray] : [];
+	const conditionArr = stakeholderArray.length && stakeholderArray[GLOBAL_CONSTANTS.zeroth_index]
+	!== '' ? [...stakeholderArray] : [];
 	const filteredArr = (conditionArr || []).map((item) => {
 		if (item === '') {
 			return null;
@@ -73,17 +84,19 @@ function Details({
 	};
 
 	let visible_to_stakeholders = isStakeholder
-		? [...filteredArr, channelData?.stakeholder_types?.[0]]
+		? [...filteredArr, ...channelData.stakeholder_types]
 		: [...filteredArr];
 
-	visible_to_stakeholders = visible_to_stakeholders?.filter((item) => shipmentChatStakeholders.includes(item));
+	visible_to_stakeholders = Array.from(new Set(visible_to_stakeholders?.filter((item) => item !== null)));
 
 	const GroupChannel = filteredArr.length
 		? {
-			created_by_stakeholder: channelData?.stakeholder_types?.[0], source_id: sourceId, visible_to_stakeholders,
+			created_by_stakeholder : channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index],
+			source_id              : sourceId,
+			visible_to_stakeholders,
 		}
 		: {
-			created_by_stakeholder : channelData?.stakeholder_types?.[0],
+			created_by_stakeholder : channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index],
 			source_id              : sourceId,
 			visible_to_user_ids    : subscribedUsers,
 		};
@@ -106,7 +119,7 @@ function Details({
 	const { loading, handleSendMsg } = useCreateMessage({ payload: createMsgPayload, refetch });
 
 	const onCreateMessage = () => {
-		if (payloadData?.visible_to_stakeholders?.length < 2) {
+		if (payloadData?.visible_to_stakeholders?.length < TOTAL_STAKEHOLDERS_LENGTH) {
 			Toast.error('Please tag appropriate stakeholder');
 		} else {
 			handleSendMsg();
@@ -119,16 +132,16 @@ function Details({
 
 	const contentData = formValues?.message?.split('\n').length;
 	const handleClick = (e) => {
-		if (e.keyCode === 13 && e.shiftKey && rows < 5) {
-			setRows(contentData + 1);
+		if (e.keyCode === ENTER_KEY && e.shiftKey && rows < TOTAL_ROWS) {
+			setRows(contentData + INITIAL_STATE_ROWS);
 		}
-		if (e.keyCode === 13 && !e.shiftKey) {
+		if (e.keyCode === ENTER_KEY && !e.shiftKey) {
 			onCreateMessage();
 			reset();
-			setRows(1);
+			setRows(INITIAL_STATE_ROWS);
 		}
-		if (contentData > 1 && (e.keyCode === 8 || e.keyCode === 46)) {
-			setRows(contentData - 1);
+		if (contentData > INITIAL_STATE_ROWS && (e.keyCode === DELETE_KEY_2 || e.keyCode === DELETE_KEY_1)) {
+			setRows(contentData - INITIAL_STATE_ROWS);
 		}
 	};
 
@@ -189,7 +202,7 @@ function Details({
 
 						<div className={styles.attached_container}>
 							{(formValues?.file || []).map((url) => (
-								<div className={styles.attached_doc}>
+								<div className={styles.attached_doc} key={url}>
 									<IcMDocument style={{ marginRight: '4px' }} />
 									{url?.split('/').pop()}
 								</div>

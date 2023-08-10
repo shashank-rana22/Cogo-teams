@@ -62,7 +62,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };
 
-		if (newControl.name === 'agent' && ingestion_partner_id) {
+		if (newControl.name === 'agent_id' && ingestion_partner_id) {
 			newControl = {
 				...newControl,
 				params: {

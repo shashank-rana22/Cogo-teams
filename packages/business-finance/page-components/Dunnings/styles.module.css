@@ -1,0 +1,12 @@
+.header {
+	flex-direction: column;
+	margin-bottom: 20px;
+	margin-left: 4px;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+}
+
+.tab_panel_dashboard {
+	background-color: var(--color-primary-error-red-1);
+}

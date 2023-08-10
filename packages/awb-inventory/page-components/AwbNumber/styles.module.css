@@ -1,0 +1,20 @@
+.awbnumber_container {
+	padding: 10px 0;
+	background-color: #fff;
+}
+
+.airline {
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.button_group {
+	display: flex;
+}
+
+.modal_container {
+	padding: 20px;
+}

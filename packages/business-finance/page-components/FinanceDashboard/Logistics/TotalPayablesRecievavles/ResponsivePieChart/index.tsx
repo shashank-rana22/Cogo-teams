@@ -1,6 +1,6 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index';
-
-import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
@@ -34,7 +34,14 @@ function ResponsivePieChart({ pieData }) {
 						{label}
 						:
 						<div className={styles.toolTip_amount}>
-							{getFormattedPrice(value, 'INR')}
+							{formatAmount({
+								amount   :	value as any,
+								currency : GLOBAL_CONSTANTS.currency_code.INR,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 				</div>

@@ -1,0 +1,25 @@
+.task_container {
+	margin-left: 8px;
+
+	.core-ui-select__menu {
+		width: 100% !important;
+		min-width: 100% !important;
+	}
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	padding-bottom: 8px;
+
+	:global {
+		.ui_button_container {
+			margin-right: 8px;
+		}
+	}
+}
+
+.form {
+	max-height: 60.5vh;
+	overflow-y: auto;
+}

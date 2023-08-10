@@ -1,0 +1,22 @@
+.form_item_container {
+	margin: 6px 0;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.row > div {
+	width: 49%;
+}
+
+.email {
+	width: 49%;
+	margin: 6px 0;
+}
+
+.errors {
+	font-size: 12px;
+	color: red;
+}

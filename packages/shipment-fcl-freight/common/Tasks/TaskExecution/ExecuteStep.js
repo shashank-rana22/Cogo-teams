@@ -1,8 +1,16 @@
 import { Button } from '@cogoport/components';
+import { Layout } from '@cogoport/ocean-modules';
+import { isEmpty } from '@cogoport/utils';
+import { useRef } from 'react';
 
-import Layout from './helpers/Layout';
+import useGetCommodityOptions from '../../../hooks/useGetCommodityOptions';
+
+import BookingPreferenceCard from './CustomTasks/UploadBookingNote/components/Step0/BookingPreferenceCard';
+import EditBookingParams from './EditBookingParams';
+import { getCanShipmentRollover } from './helpers/getCanShipmentRollover';
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
+import RestrictTask from './RestrictTask';
 import styles from './styles.module.css';
 
 function ExecuteStep({
@@ -16,19 +24,45 @@ function ExecuteStep({
 	selectedMail = [],
 	serviceIdMapping = [],
 }) {
+	const { options, allCommodity } = useGetCommodityOptions({ task });
+
 	const {
 		formProps,
 		fields,
 		showElements,
+		restrictTask,
+		setRestrictTask,
+		toastMessage,
 	} = useStepExecution({
 		task,
 		stepConfig,
 		getApisData,
 		selectedMail,
+		options,
+		allCommodity,
 	});
+
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 
-	const { loading: isLoading, onSubmit } = useHandleSubmit({
+	const { editBookingParams } = showElements || {};
+
+	const editParams = useRef(null);
+
+	const { state = '', service_type = '', task: taskName = '' } = task;
+
+	const showBookingPreference = (
+		state === 'awaiting_service_provider_confirmation'
+		&& service_type === 'fcl_freight_service'
+		&& taskName === 'mark_confirmed'
+	);
+
+	const { list_shipment_booking_confirmation_preferences: list = [] } = getApisData;
+
+	const selectedPriority = list?.find((item) => item?.priority === item?.selected_priority);
+
+	const isShipmentRolloverable = getCanShipmentRollover(getApisData);
+
+	const { loading: isLoading, setIsLoading, onSubmit } = useHandleSubmit({
 		finalConfig: stepConfig,
 		task,
 		onCancel,
@@ -40,8 +74,39 @@ function ExecuteStep({
 		showElements,
 	});
 
+	const handleTaskSubmit = async () => {
+		if (isShipmentRolloverable && editBookingParams) {
+			setIsLoading(true);
+
+			try {
+				await editParams.current?.handleSubmit();
+				handleSubmit(onSubmit)();
+			} finally {
+				setIsLoading(false);
+			}
+		} else {
+			handleSubmit(onSubmit)();
+		}
+	};
+
+	if (restrictTask) {
+		return (
+			<RestrictTask
+				task={task}
+				restrict={restrictTask}
+				setRestrictTask={setRestrictTask}
+				onCancel={onCancel}
+				toastMessage={toastMessage}
+			/>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
+			{showBookingPreference && !isEmpty(selectedPriority) ? (
+				<BookingPreferenceCard item={selectedPriority} isProceedEnabled={false} />
+			) : null }
+
 			<div className={styles.form}>
 				<Layout
 					fields={fields}
@@ -49,7 +114,17 @@ function ExecuteStep({
 					errors={errors}
 					showElements={showElements}
 					formValues={watch()}
+					shipment_id={task?.shipment_id}
 				/>
+
+				{isShipmentRolloverable && editBookingParams ? (
+					<EditBookingParams
+						task={task}
+						getApisData={getApisData}
+						formProps={formProps}
+						ref={editParams}
+					/>
+				) : null}
 			</div>
 
 			<div className={styles.button_container}>
@@ -61,7 +136,7 @@ function ExecuteStep({
 					CANCEL
 				</Button>
 
-				<Button themeType="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+				<Button themeType="primary" disabled={isLoading} onClick={handleTaskSubmit}>
 					{isLastStep ? 'SUBMIT' : 'NEXT'}
 				</Button>
 			</div>

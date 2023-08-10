@@ -1,0 +1,28 @@
+.cell {
+	padding: 16px;
+	margin-bottom: 20px;
+	background-color: #fff;
+	border-radius: 6px;
+}
+
+.flex_box {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+
+	.feature {
+		width: 48%;
+	}
+}
+
+.header {
+	display: flex;
+
+	.back_icon {
+		padding: 3px;
+		margin: 4px 10px 0 0;
+		cursor: pointer;
+		border: 0.5px solid #333;
+		border-radius: 50%;
+	}
+}

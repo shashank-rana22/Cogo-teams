@@ -1,4 +1,4 @@
-import { IcCFtick, IcMCall, IcMEmail } from '@cogoport/icons-react';
+import { IcCFtick, IcMCall, IcMEmail, IcMLiveChat, IcMEdit } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -12,6 +12,7 @@ function PersonDetails({
 	detailsData,
 	setShowMobileVerificationModal = () => {},
 	showMobileVerificationModal,
+	setEditNameModal,
 }) {
 	const {
 		profile: { mobile_verified = false },
@@ -45,20 +46,31 @@ function PersonDetails({
 		<>
 			<div className={styles.card_container}>
 
-				<div className={styles.label_value_container}>
-					<div className={styles.value_text}>
+				<div>
 
-						<div className={styles.flex}>
-							{preferred_languages?.map(
-								(lang) => <div className={styles.languge_tag}>{startCase(lang)}</div>,
-							)}
+					<div className={styles.label_value_container}>
+						<div className={styles.label_text}>
+							<IcMLiveChat fill="#000000" style={{ marginTop: '4px' }} />
+						</div>
+						<div className={styles.value_text}>
+
+							<div className={styles.flex}>
+								{(preferred_languages || [])?.map(
+									(lang) => <div key={lang} className={styles.languge_tag}>{startCase(lang)}</div>,
+								)}
+
+							</div>
 
 						</div>
+						<div className={styles.label_text}>
+							<IcMEdit
+								fill="#000000"
+								style={{ marginTop: '4px', cursor: 'pointer' }}
+								onClick={() => setEditNameModal((prev) => ({ ...prev, from: 'language', state: true }))}
 
+							/>
+						</div>
 					</div>
-				</div>
-
-				<div>
 
 					<div className={styles.label_value_container}>
 						<div className={styles.label_text}>

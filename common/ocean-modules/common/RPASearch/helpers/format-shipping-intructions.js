@@ -1,19 +1,19 @@
 import mapKeyValues from './generic-formatted';
 
-const defaultKeyMappings = {
+const KEY_MAPPINGS = {
 	formatted_body_data : 'formatted_body_data',
 	url                 : 'file_url',
 	email_received_at   : 'email_received_at',
 };
 
 const formatShippingInstructions = ({ mailData = [] }) => {
-	const formattedData = [];
+	const FORMATTED_DATA = [];
 
 	mailData.forEach((shipping_instructions) => {
 		const rpaData = shipping_instructions || {};
 
 		const formatted_si = mapKeyValues({
-			keyMappings: defaultKeyMappings,
+			keyMappings: KEY_MAPPINGS,
 			rpaData,
 		});
 
@@ -24,10 +24,10 @@ const formatShippingInstructions = ({ mailData = [] }) => {
 				|| formatted_si.email_received_at,
 		};
 
-		formattedData.push(newFormatted);
+		FORMATTED_DATA.push(newFormatted);
 	});
 
-	return formattedData;
+	return FORMATTED_DATA;
 };
 
 export default formatShippingInstructions;

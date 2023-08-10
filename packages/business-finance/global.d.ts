@@ -1,4 +1,5 @@
 declare module '@cogoport/*';
+declare module 'react'
 declare module 'file-saver'
 declare module 'number-to-words'
 declare module '*.module.css' {

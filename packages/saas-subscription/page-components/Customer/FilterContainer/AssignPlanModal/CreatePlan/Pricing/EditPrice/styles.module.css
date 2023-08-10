@@ -1,0 +1,24 @@
+.input_box_container {
+	display: flex;
+	align-items: center;
+
+	.input_box {
+		width: 40%;
+		margin-right: 12px;
+	}
+
+	:global {
+		.ui_input_container.ui_ps_size_sm {
+			height: 28px;
+		}
+
+		.ui_input_container.ui_ps_size_sm .ui_input_control {
+			font-size: 12px;
+		}
+	}
+}
+
+.icon {
+	margin-left: 6px;
+	cursor: pointer;
+}

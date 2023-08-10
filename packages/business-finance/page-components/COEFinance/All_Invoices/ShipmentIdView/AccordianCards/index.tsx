@@ -1,9 +1,10 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 // eslint-disable-next-line import/no-cycle
 import { ItemDataProps } from '../index';
 
@@ -92,10 +93,14 @@ function AccordianCards({
 									<div className={styles.small_vr} />
 								</div>
 								<div className={styles.expense_value_text}>
-									{getFormattedPrice(
-										expenseTotalAmount,
-										'INR',
-									)}
+									{formatAmount({
+										amount   :	expenseTotalAmount as string,
+										currency :	GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									})}
 								</div>
 							</div>
 							<div className={styles.urgent}>
@@ -108,10 +113,14 @@ function AccordianCards({
 									<div className={styles.urgent_vr} />
 								</div>
 								<div className={styles.urgent_value_text}>
-									{getFormattedPrice(
-										urgentTotalAmount!,
-										'INR',
-									)}
+									{formatAmount({
+										amount   : urgentTotalAmount! as any,
+										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									})}
 								</div>
 							</div>
 						</div>
@@ -126,9 +135,15 @@ function AccordianCards({
 									<div className={styles.small_vr} />
 								</div>
 								<div className={styles.expense_value_text}>
-									{getFormattedPrice(
-										incomeTotalAmount,
-										'INR',
+									{formatAmount(
+										{
+											amount   :	incomeTotalAmount as any,
+											currency :	GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										},
 									)}
 								</div>
 							</div>
@@ -142,10 +157,14 @@ function AccordianCards({
 									<div className={styles.small_vr} />
 								</div>
 								<div className={styles.expense_value_text}>
-									{getFormattedPrice(
-										creditNoteTotalAmount,
-										'INR',
-									)}
+									{formatAmount({
+										amount   :	creditNoteTotalAmount as any,
+										currency :	GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									})}
 								</div>
 							</div>
 						</div>

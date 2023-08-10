@@ -1,16 +1,19 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useContext, useState, useEffect, useCallback } from 'react';
 
 import payloadMapping from '../../configs/payloadMapping';
 import DashboardContext from '../../context/DashboardContext';
 
+const MIN_PAGE_VALUE = 1;
+
 const useListDocumentDesk = () => {
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const dashboardContextValues = useContext(DashboardContext);
 	const { filters, setFilters, activeTab, stepperTab } = dashboardContextValues || {};
 
-	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const { page = 1, ...restFilters } = filters || {};
 
 	const { startDate:from_created_at, endDate:to_created_at } = filters || {};
@@ -37,7 +40,7 @@ const useListDocumentDesk = () => {
 		try {
 			const res = await trigger();
 
-			if (res?.data?.list?.length === 0 && page > 1) setFilters({ ...filters, page: 1 });
+			if (isEmpty(res?.data?.list) && page > MIN_PAGE_VALUE) setFilters({ ...filters, page: 1 });
 
 			setApiData(res?.data || {});
 		} catch (err) {

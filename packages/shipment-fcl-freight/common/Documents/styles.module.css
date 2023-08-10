@@ -3,10 +3,11 @@
 	flex-direction: column;
 	width: 100%;
 	padding: 16px 12px 14px;
-	background: #fff;
+	background-color: var(--color-secondary-5);
 	border-radius: 4px;
 }
 
 .modal_container {
+	max-height: 500px;
 	overflow: auto;
 }

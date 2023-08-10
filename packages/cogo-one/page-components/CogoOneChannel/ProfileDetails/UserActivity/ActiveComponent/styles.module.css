@@ -1,0 +1,20 @@
+.empty {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+}
+
+.list_container {
+	height: 75vh;
+	padding-bottom: 28px;
+	overflow-y: auto;
+
+	@media (max-width: 1280px) {
+		padding-bottom: 28px;
+	}
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}

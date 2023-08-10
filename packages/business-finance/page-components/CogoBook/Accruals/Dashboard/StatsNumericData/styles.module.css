@@ -1,0 +1,70 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	background: var(--color-secondary-5);
+	border: 1px solid var(--color-secondary-greyscale-5);
+	border-radius: 8px;
+}
+
+.numeric_data {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 24px;
+	border-bottom: 1px solid var(--color-secondary-greyscale-5);
+}
+
+.item {
+	display: flex;
+}
+
+.value_data {
+	font-size: 34px;
+	font-weight: 600;
+}
+
+.label {
+	margin-left: 20px;
+	font-size: var(--font-size-xl);
+}
+
+.percentage {
+	margin: 0 4px;
+	color: #29cc6a;
+}
+
+.sorting_data {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 24px;
+}
+
+.profit_bar {
+	display: flex;
+	align-items: center;
+}
+
+.icon_arrow {
+	padding-top: 8px;
+	cursor: pointer;
+}
+
+.booked {
+	margin-bottom: 4px;
+	text-decoration: underline;
+}
+
+.amount {
+	margin-left: 2px;
+	font-weight: 600;
+}
+
+.flex_data {
+	display: flex;
+	margin: 0 0 8px;
+}
+
+.profit {
+	display: flex;
+	flex-direction: column;
+}

@@ -16,6 +16,7 @@ const SUPPLIER_STAKEHOLDERS = [
 	'costbooking_manager',
 	'lastmile_ops',
 	'lastmile_ops_manager',
+	'so1_so2_ops',
 ];
 
 function GenericUpload({

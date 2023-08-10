@@ -3,7 +3,7 @@ import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select';
 import { useState, useContext } from 'react';
 
-import tabsConfig from '../../../configs/TAB_CONFIG.json';
+import tabsConfig from '../../../configs/FCL/TAB_CONFIG.json';
 import DocumentDeskContext from '../../../context/DocumentDeskContext';
 
 import FilterBy from './FilterBy';
@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 function Filters() {
 	const {
 		stepperTab, activeTab, filters = {}, setFilters = () => {},
-		scopeFilters, handleVersionChange = () => {},
+		scopeFilters,
 	} = useContext(DocumentDeskContext);
 
 	const { isCriticalOn, q = '' } = filters || {};
@@ -73,15 +73,6 @@ function Filters() {
 						</div>
 					</Button>
 				</Popover>
-			</div>
-
-			<div className={styles.version}>
-				<Toggle
-					size="md"
-					onLabel="Old"
-					offLabel="New"
-					onChange={handleVersionChange}
-				/>
 			</div>
 
 			<ScopeSelect size="md" defaultValues={scopeFilters} />

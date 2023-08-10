@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
@@ -83,7 +83,7 @@ function ConfigurationCard(props) {
 								{audit_data?.updated_at
 									? formatDate({
 										date       : audit_data.updated_at,
-										dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 										formatType : 'date',
 									}) : ''}
 

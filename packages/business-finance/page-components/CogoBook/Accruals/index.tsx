@@ -2,10 +2,15 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import Archive from './Archive';
+import Dashboard from './Dashboard';
 import ShipmentView from './ShipmentView';
 import styles from './styles.module.css';
 
-const tabs = [
+const TABS = [
+	{
+		key   : 'dashboard',
+		label : 'Dashboard',
+	},
 	{
 		key   : 'shipment_view',
 		label : 'Shipment View',
@@ -19,16 +24,18 @@ const tabs = [
 const tabsKeyComponentMapping = {
 	shipment_view : ShipmentView,
 	archive       : Archive,
+	dashboard     : Dashboard,
 };
 
 function Accruals() {
 	const { push } = useRouter();
 
-	const [subActiveTab, setSubActiveTab] = useState<string>('shipment_view');
+	const [subActiveTab, setSubActiveTab] = useState<string>('dashboard');
 	const [showTab, setShowTab] = useState(true);
 	const tabComponentProps = {
 		shipment_view : {},
 		archive       : { setShowTab },
+		dashboard     : {},
 	};
 
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
@@ -49,7 +56,7 @@ function Accruals() {
 
 					<div className={styles.flex}>
 
-						{tabs.map((tab) => (
+						{TABS.map((tab) => (
 							<div
 								key={tab.key}
 								onClick={() => {

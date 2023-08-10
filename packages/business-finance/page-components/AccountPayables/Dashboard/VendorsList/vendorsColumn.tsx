@@ -1,12 +1,10 @@
 import { Tooltip } from '@cogoport/components';
-import getPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { getByKey } from '@cogoport/utils';
-
-import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
-const VendorsColumn = [
+const VendorsColumn = (currency) => ([
 	{
 		Header   : <div>Vendor Name</div>,
 		id       : 'businessName',
@@ -45,12 +43,29 @@ const VendorsColumn = [
 			return (
 				<div>
 					<Tooltip
-						content={getPrice(getByKey(row, 'openInvoiceLedgerAmount') as number, 'INR')}
+						content={formatAmount({
+							amount  : getByKey(row, 'openInvoiceLedgerAmount') as any,
+							currency,
+							options : {
+								currencyDisplay : 'code',
+								style           : 'currency',
+
+							},
+						})}
 						interactive
 						placement="top"
 					>
 						<div>
-							{getAmountInLakhCrK(openInvoiceLedgerAmount)}
+							{formatAmount({
+								amount  : openInvoiceLedgerAmount,
+								currency,
+								options : {
+									currencyDisplay : 'code',
+									style           : 'currency',
+									notation        : 'compact',
+									compactDisplay  : 'short',
+								},
+							})}
 						</div>
 					</Tooltip>
 
@@ -69,5 +84,5 @@ const VendorsColumn = [
 		),
 	},
 
-];
+]);
 export default VendorsColumn;

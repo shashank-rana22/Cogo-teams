@@ -11,13 +11,21 @@ import {
 	Header,
 	SingleLocation,
 } from '../../../common/ShipmentCard';
+import CONSTANTS from '../../../config/constants.json';
 import KamDeskContext from '../../../context/KamDeskContext';
 import getCriticalShipment from '../../../helpers/getCriticalShipment';
 
 import styles from './styles.module.css';
 
+const SHIPMENT_TYPE = {
+	fcl_freight: 'fcl',
+};
+
+const STEPPER_TAB = ['import', 'export'];
+
 function Card({ data = {} }) {
 	const router = useRouter();
+	const { partner_id = '' } = router.query || {};
 
 	const { shipmentType, stepperTab, activeTab } = useContext(KamDeskContext);
 
@@ -27,19 +35,20 @@ function Card({ data = {} }) {
 
 	const isShipmentCritical = !!getCriticalShipment({ shipment: data, shipmentType, activeTab, stepperTab });
 
-	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}`;
+	const hrefPrefix = Object.keys(SHIPMENT_TYPE).includes(shipmentType) && STEPPER_TAB.includes(stepperTab)
+		? `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE[shipmentType]}/`
+		: `${window.location.origin}/${partner_id}/shipments/`;
 
+	const handleCardClick = (e) => {
+		const newUrl = e.currentTarget.href;
 		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
 	};
 
 	return (
-		<div
+		<a
+			href={`${hrefPrefix}${data?.id}?${CONSTANTS.url_navigation_params}`}
 			onClick={handleCardClick}
 			className={cl`${styles.container} ${isShipmentCritical ? styles.animate_card : ''}`}
-			role="button"
-			tabIndex={0}
 		>
 			<div className={styles.header}>
 				<Header data={data} />
@@ -72,7 +81,7 @@ function Card({ data = {} }) {
 					<CargoPills data={data} />
 				</div>
 			</div>
-		</div>
+		</a>
 	);
 }
 

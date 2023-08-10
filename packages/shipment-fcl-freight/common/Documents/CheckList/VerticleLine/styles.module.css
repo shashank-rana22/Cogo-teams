@@ -15,11 +15,11 @@
 	justify-content: center;
 	width: 20px;
 	height: 20px;
-	background: #dfe1ef;
+	background-color: #dfe1ef;
 	border-radius: 50%;
 
 	> svg {
-		font-size: 16px;
+		font-size: var(--font-size-xl);
 		color: #fff;
 	}
 }
@@ -32,19 +32,18 @@
 	justify-content: center;
 	width: 20px;
 	height: 20px;
-	background: #5936f0;
-	background: var(--color-accent-orange-2);
+	background-color: var(--color-accent-orange-2);
 	border-radius: 50%;
 }
 
 .line {
-	height: 50px;
+	height: 64px;
 	border: 1px dashed #dfe1ef;
 	transform: translateY(22px);
 }
 
 .checked_line {
-	height: 45px;
+	height: 60px;
 	border: 1px solid var(--color-accent-orange-2);
 	transform: translateY(22px);
 }

@@ -83,9 +83,36 @@
 	justify-content: space-between;
 	max-width: 30%;
 	padding: 12px 16px;
+	margin-top: 12px;
 	margin-right: 4px;
 	background-color: #fff;
 	border-radius: 4px;
+}
+
+.show_consolidated {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 8px;
+}
+
+.consolidated_shipment_details {
+	margin-top: 12px;
+}
+
+.consolidated_text {
+	padding: 12px;
+}
+
+.consolidated_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 48px;
+	color: #333;
+	cursor: pointer;
+	background: #fdde01;
+	border-radius: 0 8px 8px 0;
 }
 
 .view_more {
@@ -101,4 +128,15 @@
 
 .serial_id {
 	color: #ed3726;
+}
+
+.sid_div {
+	display: flex;
+	justify-content: space-around;
+	min-width: 130px;
+}
+
+.line {
+	margin-bottom: 12px;
+	border: 1px solid #333;
 }

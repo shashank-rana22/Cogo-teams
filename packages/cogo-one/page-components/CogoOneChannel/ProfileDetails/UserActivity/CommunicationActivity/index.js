@@ -1,6 +1,7 @@
-/* eslint-disable max-len */
 import { Modal, Avatar } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { SOURCE_ICON_MAPPING } from '../../../../../constants';
@@ -10,7 +11,7 @@ import styles from './styles.module.css';
 import VoiceTimeLine from './VoiceTimeLine';
 
 function CommunicationActivity({ communication = {} }) {
-	const [showDetails, setShowDetails] = useState();
+	const [showDetails, setShowDetails] = useState('');
 	const [showModal, setShowModal] = useState(false);
 	const [title, setTitle] = useState('');
 	const { list = [] } = communication;
@@ -20,7 +21,6 @@ function CommunicationActivity({ communication = {} }) {
 		setShowModal(true);
 		setTitle(sub);
 	};
-
 	const onCloseModal = () => {
 		setShowDetails();
 		setTitle('');
@@ -38,12 +38,18 @@ function CommunicationActivity({ communication = {} }) {
 						{!type && (
 							<VoiceTimeLine item={item} />
 						) }
-						{template_id && (['email', 'whatsapp', 'telegram'].includes(type)) && (
+						{template_id && (['email', 'whatsapp', 'telegram', 'zalo'].includes(type)) && (
 							<>
 								<div className={styles.activity_date}>
 									<div className={styles.dot} />
 									<div className={styles.durations}>
-										{format(created_at, 'HH:mm a dd MMM')}
+										{formatDate({
+											date       : new Date(created_at),
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+											formatType : 'dateTime',
+											separator  : ', ',
+										})}
 									</div>
 								</div>
 								<div className={styles.main_card}>
@@ -54,7 +60,11 @@ function CommunicationActivity({ communication = {} }) {
 													{startCase(subject)}
 												</div>
 											)}
-											<div role="presentation" className={styles.icon_type} onClick={() => handleContent(body, subject)}>
+											<div
+												role="presentation"
+												className={styles.icon_type}
+												onClick={() => handleContent(body, subject)}
+											>
 												{SOURCE_ICON_MAPPING[type]}
 											</div>
 										</div>
@@ -64,7 +74,11 @@ function CommunicationActivity({ communication = {} }) {
 													<div className={styles.user_message}>
 														You have a message On
 														<span>
-															{format(created_at, 'dd MMM YYYY')}
+															{formatDate({
+																date: new Date(created_at),
+																dateFormat:
+																GLOBAL_CONSTANTS.formats.date['dd MMM YYYY'],
+															})}
 															{sender && (
 																<div>
 																	from
@@ -81,7 +95,7 @@ function CommunicationActivity({ communication = {} }) {
 										</div>
 										<div className={styles.user_avatar}>
 											<Avatar
-												src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
+												src={GLOBAL_CONSTANTS.image_url.empty_data}
 												alt="agent-image"
 												disabled={false}
 												size="30px"

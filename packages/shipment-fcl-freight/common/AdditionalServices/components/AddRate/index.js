@@ -1,6 +1,7 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
@@ -14,7 +15,7 @@ import SecondStep from './SecondStep';
 import STAKE_HOLDER_SPECIFIC_PROPS from './stakeHolderCongifs';
 import styles from './styles.module.css';
 
-const showRemarksStatus = [
+const SHOW_REMARKS_STATUS = [
 	'amendment_requested_by_importer_exporter',
 	'requested_for_service_provider',
 	'cancelled_by_supplier',
@@ -23,17 +24,18 @@ const showRemarksStatus = [
 ];
 
 function AddRate({
-	item,
-	setAddRate,
-	status,
+	item = {},
+	setAddRate = () => {},
+	status = {},
 	setAddSellPrice = () => {},
-	refetch,
+	refetch = () => {},
 	onCancel = () => {},
-	filters,
+	filters = {},
 	setShowChargeCodes = () => {},
 	source = '',
 	isSeller = false,
 	task = {},
+	refetchServices = () => {},
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setSecondStep] = useState(false);
@@ -41,6 +43,7 @@ function AddRate({
 	const refetchForUpdateSubService = () => {
 		refetch();
 		onCancel();
+		refetchServices();
 	};
 
 	const updateResponse = useUpdateShipmentAdditionalService({
@@ -61,14 +64,7 @@ function AddRate({
 		handleSubmit,
 		control,
 		formState: { errors },
-		setValue,
-	} = useForm();
-
-	useEffect(() => {
-		['currency', 'quantity', 'unit', 'price', 'alias', 'buy_price'].forEach((key) => {
-			setValue(key, item?.[key]);
-		});
-	}, [item, setValue]);
+	} = useForm({ defaultValues: item });
 
 	const afterAddRate = () => {
 		setAddRate(false);
@@ -88,9 +84,9 @@ function AddRate({
 	const { handleAddSellPrice: apiTriggerUpdate } = useUpdateShipmentAdditionalService({ refetch: afterAddRate });
 
 	const onAddRate = (data) => {
-		const payload = getPayload(data, item, preProps, filters, billToCustomer);
+		const payload = getPayload({ data, item, preProps, filters, billToCustomer, whoIsAddingRate });
 
-		if (preProps.api === '/create_shipment_additional_service') {
+		if (preProps?.api === '/create_shipment_additional_service') {
 			apiTriggerCreate(payload);
 		} else {
 			apiTriggerUpdate(payload);
@@ -125,22 +121,18 @@ function AddRate({
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
-				{startCase(item?.name)}
-				(
-				{startCase(item?.service_type || item.service_type)}
-				)
+				{`${startCase(item?.name)} (${startCase(item?.service_type || item.service_type)})`}
 			</div>
-			{showRemarksStatus.includes(status?.status) ? (
-				<p style={{ marginTop: '8px' }}>
+
+			{SHOW_REMARKS_STATUS.includes(status?.status) ? (
+				<p className={styles.mt_8}>
 					<strong> Comment:</strong>
 					&nbsp;
-					{item?.remarks[0]}
+					{item?.remarks[GLOBAL_CONSTANTS.zeroth_index]}
 				</p>
 			) : null}
 
 			<RenderAddRateForm
-				handleSubmit={handleSubmit}
-				onSubmit={onAddRate}
 				control={control}
 				errors={errors}
 				serviceData={item}
@@ -154,7 +146,7 @@ function AddRate({
 				status={status}
 				updateResponse={updateResponse}
 				loading={loading || updateResponse.loading}
-				onCancel={() => onCancel()}
+				onCancel={onCancel}
 				setAddSellPrice={setAddSellPrice}
 				setSecondStep={setSecondStep}
 			/>

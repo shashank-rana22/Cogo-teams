@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useShipmentDocument = (shipmentId) => {
 	const [{ data, loading }, trigger] = useRequest(
@@ -10,22 +10,31 @@ const useShipmentDocument = (shipmentId) => {
 		{ autoCancel: false },
 	);
 
-	useEffect(() => {
-		trigger({
-			params: {
-				created_by_user_details_required : true,
-				filters                          : {
-					shipment_id: shipmentId,
+	const refetch = useCallback(async () => {
+		try {
+			await trigger({
+				params: {
+					created_by_user_details_required : true,
+					filters                          : {
+						shipment_id: shipmentId,
+					},
+					page       : 1,
+					page_limit : 50,
 				},
-				page       : 1,
-				page_limit : 50,
-			},
-		});
+			});
+		} catch (e) {
+			console.log(e);
+		}
 	}, [shipmentId, trigger]);
+
+	useEffect(() => {
+		refetch();
+	}, [shipmentId, trigger, refetch]);
 
 	return {
 		data,
 		loading,
+		refetchShipmentDocument: refetch,
 	};
 };
 

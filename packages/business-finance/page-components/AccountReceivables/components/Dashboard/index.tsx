@@ -90,6 +90,7 @@ function Dashboard({ entityCode }) {
                             }
 						/>
 						<OutStandingKam
+							entityCode={entityCode}
 							kamOutstandingData={kamOutstandingData}
 							kamOutstandingLoading={kamOutstandingLoading}
 
@@ -97,6 +98,7 @@ function Dashboard({ entityCode }) {
 					</div>
 
 					<SalesFunnel
+						entityCode={entityCode}
 						salesFunnelMonth={salesFunnelMonth}
 						setSalesFunnelMonth={setSalesFunnelMonth}
 						salesFunnelData={salesFunnelData}

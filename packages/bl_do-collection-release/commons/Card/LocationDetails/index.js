@@ -1,5 +1,5 @@
 import { cl, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import styles from './styles.module.css';
@@ -11,9 +11,10 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 		<div className={styles.container}>
 			<div className={styles.col}>
 				<div className={styles.left}>
-					<div className={styles.grey}>{isFclLocal && item?.trade_type === 'import' ? 'POD' : 'POL'}</div>
+					<div className={styles.grey}>{isFclLocal && stateProps?.activeTab === 'do' ? 'POD' : 'POL'}</div>
 					<Tooltip
 						interactive
+						maxWidth={500}
 						content={
 							isFclLocal ? item.local_service?.port?.display_name
 								: item.freight_service?.origin_port?.display_name
@@ -41,6 +42,7 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 						<div className={styles.left}>
 							<div className={styles.grey}>POD</div>
 							<Tooltip
+								maxWidth={500}
 								interactive
 								content={item.freight_service?.destination_port?.display_name}
 							>

@@ -40,10 +40,9 @@
 }
 
 .send_input {
-	width: 250px;
-
 	:global {
 		.ui_input_container.ui_ps_size_md {
+			width: 500px;
 			height: 20px;
 			border: none;
 		}

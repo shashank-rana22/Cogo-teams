@@ -1,7 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
-
-import { months } from '../constants';
 
 const useReceivablesDashboard = (entityCode: string) => {
 	const [filterValue, setFilterValue] = useState({
@@ -12,7 +11,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 	const { serviceType = '', companyType = '' } = filterValue || {};
 
 	const d = new Date();
-	const currentMonth = months[d.getMonth()];
+	const currentMonth = GLOBAL_CONSTANTS.months[d.getMonth()];
 
 	const [salesFunnelMonth, setSalesFunnelMonth] = useState(currentMonth);
 
@@ -24,7 +23,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/outstanding-by-age',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_outstanding_by_age',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -48,7 +47,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/quarterly-outstanding',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_quarterly_outstanding',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -72,7 +71,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/kam-wise-outstanding',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_kam_wise_outstanding',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -84,7 +83,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/daily-sales-outstanding',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_daily_sales_outstanding',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -108,7 +107,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/sales-funnel',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_sales_funnel',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -132,7 +131,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/outstanding',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_outstanding',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -151,8 +150,14 @@ const useReceivablesDashboard = (entityCode: string) => {
 	}, [ageingBucketData, dailySalesOutstandingApi, quaterlyDataApi]);
 
 	useEffect(() => {
-		kamOutstandingTrigger();
-	}, [kamOutstandingTrigger]);
+		kamOutstandingTrigger({
+			params: {
+				entityCode  : entityCode || undefined,
+				serviceType : serviceType || undefined,
+				companyType : companyType !== 'All' ? companyType : undefined,
+			},
+		});
+	}, [kamOutstandingTrigger, entityCode, companyType, serviceType]);
 
 	useEffect(() => { outstandingApi(); }, [outstandingApi]);
 

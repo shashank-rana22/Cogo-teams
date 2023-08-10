@@ -1,0 +1,33 @@
+.container {
+	flex: 1;
+	padding: 12px;
+	margin-right: 12px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
+
+	&:last-child {
+		margin-right: 0;
+	}
+
+	&:nth-child(2) .stats_icon {
+		padding-top: 4px;
+	}
+}
+
+.stats_count {
+	font-size: 16px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.stats_label {
+	padding-top: 5px;
+	font-size: 12px;
+	color: #4f4f4f;
+	white-space: nowrap;
+}
+
+.loading_skeleton {
+	border-radius: 4px;
+}

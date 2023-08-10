@@ -17,14 +17,13 @@ function AddNewService({
 	activeStakeholder = '',
 	setShowTradeHeading = () => {},
 	showTradeHeading = {},
-	userServicesData = {},
 }) {
-	const { consignee_shipper_id = '' } = shipmentData;
+	const is_end_to_end = !!shipmentData?.end_to_end_shipment?.is_possible;
 
-	const haveToUpsell = !shipmentData?.end_to_end_shipment?.is_possible
-		? false : (upsellableService.service_type === 'fcl_freight_local_service'
+	const haveToUpsell = is_end_to_end ? (upsellableService.service_type === 'fcl_freight_local_service'
+		&& upsellableService?.trade_type !== primary_service?.trade_type
 		&& primary_service?.bl_category === 'hbl' && activeStakeholder === 'consignee_shipper_booking_agent'
-		&& !isEmpty(userServicesData?.[consignee_shipper_id]));
+		&& isEmpty(servicesList)) : false;
 
 	const [upsellModal, setUpsellModal] = useState(haveToUpsell);
 
@@ -50,7 +49,7 @@ function AddNewService({
 	/* user can only upsell services for the location to which its org is tagged */
 	let canUpsellForTradeType = true;
 
-	if (shipmentData?.end_to_end_shipment?.is_possible) {
+	if (is_end_to_end) {
 		if (activeStakeholder === 'booking_agent' && ((primary_service?.trade_type !== upsellableService?.trade_type
 			&& INCO_TERM_CANNOT_UPSELL.includes(primary_service?.inco_term))
 		)) {
@@ -65,7 +64,8 @@ function AddNewService({
 		setUpsellModal(!upsellModal);
 	};
 
-	const showAddServiceBox = !cancelUpsell && isUpsellable && canUpsellForTradeType;
+	const showAddServiceBox = !cancelUpsell
+	&& isUpsellable && canUpsellForTradeType && upsellableService?.service_type !== 'fcl_freight_service';
 
 	const { origin, destination, main } = showTradeHeading;
 

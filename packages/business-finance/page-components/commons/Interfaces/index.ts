@@ -66,6 +66,13 @@ export interface Options {
 	name?:string;
 }
 
+export interface RadioOptions {
+	label?: string;
+	name: string;
+	disabled?: boolean;
+	value: string;
+}
+
 export interface ControlProps {
 	span?: number,
 	name?: string,
@@ -74,7 +81,8 @@ export interface ControlProps {
 	groupBy?:ControlProps[];
 	style?: React.CSSProperties;
 	show?: boolean;
-	[key:string]: string | number | undefined | boolean | Options[] | object[] | React.CSSProperties | Date;
+	renderLabel?: Function;
+	[key: string]: string | number | undefined | boolean | Options[] | object[] | React.CSSProperties | Date | Function;
 }
 
 interface PortInterface {
@@ -169,9 +177,9 @@ export interface DetailInterface {
 	destinationmainport?: PortDetailsInt
 }
 export interface RemarksValInterface {
-	collectionPartyRemark?:string,
-	billingPartyRemark?:string,
-	invoiceDetailsRemark?:string,
-	overallRemark?: string
-	taggingRemark?:string
+	collectionPartyRemark?: string[];
+	billingPartyRemark?: string[];
+	invoiceDetailsRemark?: string[];
+	overallRemark?: string;
+	taggingRemark?: string[];
 }

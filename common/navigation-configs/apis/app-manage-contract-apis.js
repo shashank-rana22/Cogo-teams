@@ -101,6 +101,24 @@ const app_contract_management = [
 		feature      : 'contract_rates',
 		service_name : 'contract',
 	},
+	{
+		api          : 'list_organization_branches',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_users',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_contract_trade_requirements_draft',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+
 ];
 
 export default app_contract_management;

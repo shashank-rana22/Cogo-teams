@@ -9,6 +9,7 @@ import {
 	Header,
 	SingleLocation,
 } from '../../../common/ShipmentCard';
+import CONSTANTS from '../../../config/constants.json';
 import isSingleLocation from '../../../utils/checkSingleLocation';
 
 import styles from './styles.module.css';
@@ -16,19 +17,21 @@ import styles from './styles.module.css';
 function Card({ data = {} }) {
 	const router = useRouter();
 
-	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}`;
+	let href = data?.shipment_type === 'air_freight'
+		? `${window.location.origin}/v2/${router?.query?.partner_id}/booking/air-freight`
+		: `${window.location.origin}/${router?.query?.partner_id}/shipments`;
+	href += `/${data?.id}?${CONSTANTS.url_navigation_params}`;
 
+	const handleCardClick = (e) => {
+		const newUrl = e.currentTarget.href;
 		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
 	};
 
 	return (
-		<div
+		<a
+			href={href}
 			className={styles.container}
 			onClick={handleCardClick}
-			role="button"
-			tabIndex={0}
 		>
 			<div className={styles.header}>
 				<Header data={data} />
@@ -61,7 +64,7 @@ function Card({ data = {} }) {
 					<CargoPills data={data} />
 				</div>
 			</div>
-		</div>
+		</a>
 	);
 }
 

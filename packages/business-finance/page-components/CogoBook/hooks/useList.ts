@@ -1,8 +1,7 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
-
-import { entityMappingData } from '../P&L/PLStatement/constant';
 
 interface FilterInterface {
 	filters?:{
@@ -25,13 +24,17 @@ const useList = ({ filters }:FilterInterface) => {
 		{ manual: true },
 	);
 
+	const entityDetails = GLOBAL_CONSTANTS.cogoport_entities[filters?.entity] || {};
+
+	const { id: entityId } = entityDetails;
+
 	const refetch = useCallback(async () => {
 		try {
 			await listTrigger({
 				params: {
 					q            : filters?.query || undefined,
 					period       : filters?.month || undefined,
-					cogoEntityId : entityMappingData[filters?.entity] || undefined,
+					cogoEntityId : entityId || undefined,
 					pageIndex    : 1,
 					pageSize     : 10,
 
@@ -42,7 +45,7 @@ const useList = ({ filters }:FilterInterface) => {
 				Toast.error(error?.response?.data?.message);
 			}
 		}
-	}, [filters?.entity, filters?.month, filters?.query, listTrigger]);
+	}, [entityId, filters?.month, filters?.query, listTrigger]);
 
 	return {
 		refetch,

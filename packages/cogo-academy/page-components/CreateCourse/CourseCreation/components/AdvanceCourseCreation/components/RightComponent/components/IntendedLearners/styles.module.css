@@ -1,0 +1,61 @@
+.container {
+	margin: 32px 40px;
+
+	:global {
+		.ui_multiselect_container {
+			width: 72%;
+		}
+	}
+}
+
+.input_group {
+	margin-top: 6px;
+
+	&.mandatory_audiences_user {
+		margin-top: unset;
+		margin-left: 32px;
+	}
+}
+
+.form_group {
+	margin-top: 32px;
+
+	&.mandatory_audiences_user {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.superscipt {
+	color: #ee3425;
+}
+
+.save_and_generate_button {
+	animation: pulse 0.83s infinite;
+}
+
+.generate_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 32px;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.1);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}

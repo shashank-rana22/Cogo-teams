@@ -1,0 +1,23 @@
+{
+  "name": "@cogoport/chro",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cogoport/components": "^1.0.345",
+    "@cogoport/forms": "workspace:^0.1.0",
+    "@cogoport/globalization": "workspace:^0.0.1",
+    "@cogoport/icons-react": "^1.0.52",
+    "@cogoport/next": "workspace:^0.1.0",
+    "@cogoport/request": "workspace:^0.1.0",
+    "@cogoport/store": "workspace:^0.1.0",
+    "@cogoport/utils": "^1.2.2",
+    "react": "18.2.0"
+  }
+}

@@ -1,3 +1,48 @@
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
+
+export const getTaxLabels = (entityCode) => [
+	{
+		label    : ENTITY_FEATURE_MAPPING[entityCode].labels.tax_label,
+		valueKey : 'registrationNumber',
+	},
+	{
+		label    : ENTITY_FEATURE_MAPPING[entityCode].labels.sage_label,
+		valueKey : 'sageId',
+	},
+	{
+		label           : 'Company Type',
+		valueKey        : 'companyType',
+		defaultValueKey : '-',
+	},
+	{
+		label           : 'Credit Days',
+		valueKey        : 'creditDays',
+		defaultValueKey : '0',
+	},
+];
+export const getSearchOptionsLabels = (entityCode) => [
+	{
+		label : 'Trade Party Serial Id',
+		value : 'tradePartySerialId',
+		name  : 'tradePartySerialId',
+	},
+	{
+		label : ENTITY_FEATURE_MAPPING[entityCode].labels.search_options_label_sage,
+		value : 'sageId',
+		name  : 'sageId',
+	},
+	{
+		label : 'Serial Id',
+		value : 'organizationSerialId',
+		name  : 'organizationSerialId',
+	},
+	{
+		label : ENTITY_FEATURE_MAPPING[entityCode].labels.search_options_label_pan,
+		value : 'q',
+		name  : 'q',
+	},
+];
+
 export const companyType = [
 	{
 		label : 'Private Limited',
@@ -125,27 +170,6 @@ export const SORTBY_OPTION = [
 	},
 ];
 
-export const CARD_DETAILS = [
-	{
-		label    : 'Pan Number',
-		valueKey : 'registrationNumber',
-	},
-	{
-		label    : 'Sage ID',
-		valueKey : 'sageId',
-	},
-	{
-		label           : 'Company Type',
-		valueKey        : 'companyType',
-		defaultValueKey : '-',
-	},
-	{
-		label           : 'Credit Days',
-		valueKey        : 'creditDays',
-		defaultValueKey : '0',
-	},
-];
-
 export const IRN_CANCEL_OPTIONS = [
 	{
 		label : 'Duplicate',
@@ -258,15 +282,6 @@ export const ACCOUNT_TYPE = [
 	{ label: 'Invoice', value: 'SINV' },
 ];
 
-export const ENTITY_TYPE = [
-
-	{ label: '501 Cogoport Vietnam', value: '501' },
-	{ label: '401 Cogo Universe Pte. Ltd', value: '401' },
-	{ label: '301 Cogoport Private Limited', value: '301' },
-	{ label: '201 Cogoport Netherlands', value: '201' },
-	{ label: '101 Cogo Freight PVT Limited', value: '101' },
-];
-
 export const INVOICE_STATUS = {
 	Unpaid               : '#FEF1DF',
 	Unutilized           : '#FEF1DF',
@@ -282,6 +297,7 @@ export const SERVICE_PROVIDER = [
 	{ value: 'ENTERPRISE', label: 'ES' },
 	{ value: 'IE', label: 'IE' },
 	{ value: 'CP', label: 'CP' },
+	{ value: 'OTHERS', label: 'OTHERS' },
 ];
 
 export const SHIPMENT_TYPE_OPTIONS = [
@@ -312,14 +328,3 @@ export const SALES_FUNNEL_OPTIONS = [
 	{ value: 'DEC', label: 'December' },
 
 ];
-
-export const months = ['JAN', 'FEB', 'MAR',
-	'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-export const keyValue = {
-	101 : 'INR',
-	201 : 'EUR',
-	301 : 'INR',
-	401 : 'SGD',
-	501 : 'VND',
-};

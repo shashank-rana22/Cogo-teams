@@ -1,0 +1,18 @@
+.container {
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+}
+
+.loading_skeleton {
+	width: 150px;
+	height: 50px;
+	margin: 10px 0;
+	border-radius: 8px;
+}
+
+.right_align {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}

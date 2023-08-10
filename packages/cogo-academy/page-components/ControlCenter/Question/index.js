@@ -264,7 +264,6 @@ function CreateFAQ() {
 						</div>
 
 						<div className={styles.select_topic_container}>
-
 							<div className={styles.label_container}>
 								<div className={styles.input_label}>
 									Select Topics or

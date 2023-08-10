@@ -1,0 +1,30 @@
+.container {
+	width: 100%;
+}
+
+.flex_box {
+	display: flex;
+	align-items: center;
+	padding: 14px 16px;
+
+	&.item_row {
+		border-bottom: 1px solid #fbd1a6;
+	}
+}
+
+.header_container {
+	justify-content: space-between;
+	padding: 5px 8px 10px;
+}
+
+.card_header {
+	font-weight: 600;
+	color: #f68b21;
+	background-color: #fffaee;
+	border: 1px solid #ffead4;
+	border-radius: 9px;
+}
+
+.col {
+	padding: 0 8px;
+}

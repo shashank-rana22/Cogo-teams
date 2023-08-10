@@ -1,5 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
 
@@ -72,9 +72,10 @@ function ModalComponent({
 
 						{question_type === 'case_study' ? (
 							<>
-								<div className={styles.case_study_question}>
-									{question_text}
-								</div>
+								<div
+									className={styles.case_study_question}
+									dangerouslySetInnerHTML={{ __html: question_text }}
+								/>
 
 								{test_case_study_questions.map((question, index) => (
 									<SingleQuestion

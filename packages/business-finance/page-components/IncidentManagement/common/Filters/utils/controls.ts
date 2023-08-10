@@ -12,6 +12,7 @@ export const requestControls = (isSettlementExecutive = false) => {
 			{ value: 'BANK_DETAIL_APPROVAL', label: 'Bank Account Add/Edit' },
 			{ value: 'SETTLEMENT_APPROVAL', label: 'Settlement' },
 			{ value: 'JOURNAL_VOUCHER_APPROVAL', label: 'Journal Voucher' },
+			{ value: 'REVOKE_INVOICE', label: 'Revoke invoice' },
 			{ value: 'ISSUE_CREDIT_NOTE', label: 'Request credit note' },
 			{
 				value : 'CONSOLIDATED_CREDIT_NOTE',
@@ -36,6 +37,18 @@ export const requestControls = (isSettlementExecutive = false) => {
 			{
 				value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
 				label : 'Advance Container Security Deposit Refund',
+			},
+			{
+				value : 'PAYMENT_CONFIRMATION_APPROVAL',
+				label : 'Payment Confirmation Approval',
+			},
+			{
+				value : 'RECURRING_EXPENSE_APPROVAL',
+				label : 'Expense Configuration Approval',
+			},
+			{
+				value : 'OVERHEAD_APPROVAL',
+				label : 'Expense Approval',
 			},
 		];
 	}
@@ -85,6 +98,7 @@ export const remainControls = (isSettlementExecutive = false) => {
 			{ value: 'SETTLEMENT_APPROVAL', label: 'Settlement' },
 			{ value: 'JOURNAL_VOUCHER_APPROVAL', label: 'Journal Voucher' },
 			{ value: 'ISSUE_CREDIT_NOTE', label: 'Request credit note' },
+			{ value: 'REVOKE_INVOICE', label: 'Revoke invoice' },
 			{
 				value : 'CONSOLIDATED_CREDIT_NOTE',
 				label : 'Request Consolidated Credit Note',
@@ -108,6 +122,18 @@ export const remainControls = (isSettlementExecutive = false) => {
 			{
 				value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
 				label : 'Advance Container Security Deposit Refund',
+			},
+			{
+				value : 'PAYMENT_CONFIRMATION_APPROVAL',
+				label : 'Payment Confirmation Approval',
+			},
+			{
+				value : 'RECURRING_EXPENSE_APPROVAL',
+				label : 'EXPENSE APPROVAL',
+			},
+			{
+				value : 'OVERHEAD_APPROVAL',
+				label : 'NON Recurring EXpense Approval',
 			},
 		];
 	}

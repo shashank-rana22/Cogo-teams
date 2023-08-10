@@ -6,7 +6,7 @@ export default function useListShipmentCancellationReasons() {
 	const [apiData, setApiData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'list_shipment_cancellation_reasons',
+		url    : '/list_shipment_cancellation_reasons',
 		method : 'GET',
 	}, { manual: true });
 

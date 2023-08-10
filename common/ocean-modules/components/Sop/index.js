@@ -10,9 +10,10 @@ import History from './components/History';
 function Sop({
 	shipment_data = {},
 	primary_service = {},
+	documents = [],
 }) {
 	const { id:shipment_id, importer_exporter_id:organization_id, services = [] } = shipment_data || {};
-	const { trade_type } = primary_service || {};
+	const { trade_type = '' } = primary_service || {};
 
 	const [showHistory, setShowHistory] = useState(false);
 
@@ -40,7 +41,6 @@ function Sop({
 
 	return (
 		<div>
-
 			<Header
 				setShowHistory={setShowHistory}
 				showHistory={showHistory}
@@ -65,9 +65,9 @@ function Sop({
 					auditsTrigger={auditsTrigger}
 					loading={loading}
 					primary_service={primary_service}
+					documents={documents}
 				/>
 			)}
-
 		</div>
 	);
 }

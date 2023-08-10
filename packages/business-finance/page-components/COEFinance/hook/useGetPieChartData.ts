@@ -1,12 +1,12 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import toastApiError from '../../commons/toastApiError';
+import { getFormatDate } from '../utils/getFormatDate';
+
 interface FilterInterface {
-	zone?:string
 	serviceType?:string
-	days?:string
+	timePeriod?:string
 	dateRange?:DateInterface
 	rest?:any
 }
@@ -26,35 +26,34 @@ const useGetPieChartData = (filters :FilterInterface) => {
 		{ autoCancel: false },
 	);
 
-	const { zone = '', serviceType = '', dateRange, rest } = filters || {};
+	const { serviceType = '', dateRange, timePeriod } = filters || {};
+	const { startDate, endDate } = dateRange || {};
 
 	const billDatesStart = (dateRange?.startDate === undefined
 		|| dateRange?.startDate === null)
-		? null : format(dateRange?.startDate, "yyyy-MM-dd'T'HH:mm:sso", {}, false);
+		? null : getFormatDate(startDate);
 
 	const billDatesEnd = (dateRange?.startDate === undefined
             || dateRange?.startDate === null)
-		? null : format(dateRange?.endDate, "yyyy-MM-dd'T'HH:mm:sso", {}, false);
+		? null : getFormatDate(endDate);
 
 	useEffect(() => {
 		const getData = async () => {
 			try {
 				await trigger({
 					params: {
-						...rest,
-						zone     : zone || undefined,
-						service  : serviceType || undefined,
-						fromDate : billDatesStart || undefined,
-						toDate   : billDatesEnd || undefined,
+						service    : serviceType || undefined,
+						fromDate   : billDatesStart || undefined,
+						toDate     : billDatesEnd || undefined,
+						timePeriod : timePeriod || undefined,
 					},
 				});
 			} catch (err) {
-				Toast.error(err?.response?.data?.message);
+				toastApiError(err);
 			}
 		};
 		getData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger, filters]);
+	}, [trigger, billDatesEnd, billDatesStart, serviceType, timePeriod]);
 
 	return { pieData, loading };
 };

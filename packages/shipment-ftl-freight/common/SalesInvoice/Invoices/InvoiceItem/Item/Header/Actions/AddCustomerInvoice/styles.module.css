@@ -1,0 +1,19 @@
+.custom_modal {
+	:global {
+		.ui_modal_body_container {
+			height: calc(100vh - 64px);
+			max-height: 100%;
+		}
+	}
+}
+
+.heading {
+	margin: 6px 0 16px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #333;
+}
+
+.download_link {
+	color: #5936f0;
+}

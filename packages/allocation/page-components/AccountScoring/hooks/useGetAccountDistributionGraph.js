@@ -12,7 +12,7 @@ function useGetAccountDistributionGraph() {
 	}, { manual: false });
 
 	return {
-		graphData      : data,
+		graphData      : data || [],
 		graphLoading   : loading,
 		setGraphParams : setParams,
 	};

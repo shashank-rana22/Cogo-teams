@@ -1,0 +1,22 @@
+.card_title {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	line-height: 16px;
+	color: #000;
+
+	&.icon {
+		justify-content: center;
+		width: 100%;
+	}
+}
+
+.caret {
+	max-width: 12px;
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.caret_up {
+	transform: rotate(180deg);
+}

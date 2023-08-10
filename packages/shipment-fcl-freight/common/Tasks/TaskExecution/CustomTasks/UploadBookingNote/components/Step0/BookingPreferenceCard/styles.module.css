@@ -6,6 +6,7 @@
 
 .sub_container {
 	display: flex;
+	align-items: center;
 	padding: 12px 22px;
 }
 
@@ -14,7 +15,7 @@
 }
 
 .heading_text {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }
 
@@ -26,13 +27,17 @@
 	margin-left: 10px;
 }
 
+.selected_priority {
+	margin-left: 12px;
+}
+
 .label {
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 600;
 }
 
 .value {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 400;
 }
 

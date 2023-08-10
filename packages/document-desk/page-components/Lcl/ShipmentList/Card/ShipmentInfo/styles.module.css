@@ -1,0 +1,53 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	width: 100%;
+	padding: 6px 20px 0;
+}
+
+.ellipsis_text {
+	width: fit-content;
+	max-width: 220px;
+	margin-left: 5px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-primary-error-red-2);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	&.so2 {
+		font-weight: 900;
+		color: #333;
+	}
+
+	&.pointer {
+		cursor: pointer;
+	}
+}
+
+.heading {
+	display: flex;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+
+	&.shipment_id {
+		font-size: 14px;
+		font-weight: 700;
+	}
+}
+
+.business_name {
+	width: fit-content;
+	max-width: 250px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}

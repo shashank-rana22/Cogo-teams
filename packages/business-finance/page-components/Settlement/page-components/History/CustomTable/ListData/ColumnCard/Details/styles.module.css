@@ -1,0 +1,148 @@
+.details {
+	margin-top: 16px;
+}
+
+.table {
+	padding: 16px;
+	background-color: var(--color-tertiary-beige-5);
+	border: 1px solid var(--color-tertiary-beige-2);
+}
+
+.col {
+	display: flex;
+	padding: 16px 4px;
+	font-size: var(--font-size-md);
+	border-bottom: 1px solid var(--color-tertiary-beige-2);
+}
+
+.islast {
+	border: none;
+}
+
+.line {
+	margin-bottom: 16px;
+	border-top: 2px solid var(--color-tertiary-beige-2);
+}
+
+.doc_number {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.sid {
+	flex: 0.6;
+	width: calc(0.6*(100 / 12));
+}
+
+.settled_amount {
+	flex: 0.8;
+	width: calc(0.8*(100 / 12));
+}
+
+.doc_amount {
+	flex: 1.2;
+	width: calc(1.2*(100 / 12));
+}
+
+.tds {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.nostro {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.current_balance {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.doc_date {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.status {
+	flex: 1.2;
+	width: calc(1.2*(100 / 12));
+}
+
+.settlemet_status {
+	flex: 0.8;
+	width: calc(0.8*(100 / 12));
+}
+
+.ribbon_red {
+	--f: 6px; /* control the folded part */
+	--r: 16px; /* control the ribbon shape */
+	--t: -7px; /* the top offset */
+
+	top: 3px;
+	right: -30px;
+	padding: 0 10px var(--f) calc(10px + var(--r));
+	clip-path:
+		polygon(
+			0 0,
+			100% 0,
+			100% calc(100% - var(--f)),
+			calc(100% - var(--f)) 100%,
+			calc(100% - var(--f)) calc(100% - var(--f)),
+			0 calc(100% - var(--f)),
+			var(--r) calc(50% - var(--f) / 2)
+		);
+	font-size: 10px;
+	color: black;
+	background: var(--color-primary-error-red-2);
+}
+
+.ribbon_orange {
+	--f: 6px; /* control the folded part */
+	--r: 16px; /* control the ribbon shape */
+	--t: -7px; /* the top offset */
+
+	top: 3px;
+	right: -30px;
+	padding: 0 10px var(--f) calc(10px + var(--r));
+	clip-path:
+		polygon(
+			0 0,
+			100% 0,
+			100% calc(100% - var(--f)),
+			calc(100% - var(--f)) 100%,
+			calc(100% - var(--f)) calc(100% - var(--f)),
+			0 calc(100% - var(--f)),
+			var(--r) calc(50% - var(--f) / 2)
+		);
+	font-size: 10px;
+	color: black;
+	background: var(--color-accent-orange-2);
+}
+
+.ribbon_render {
+	flex: 0.2;
+	width: calc(0.2*(100 / 12));
+}
+
+.actions_container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 12px 0;
+}
+
+.margin_left {
+	margin-left: 12px;
+}
+
+.action_button {
+	flex: 0.6;
+	width: calc(0.6*(100 / 12));
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	padding: 12px 26px;
+	margin-bottom: 40px;
+}

@@ -1,0 +1,41 @@
+.content {
+	display: flex;
+	width: 100%;
+
+	:global {
+		.ui_avatar_container {
+			width: 18% !important;
+			height: 50px !important;
+			padding: 4px 6px !important;
+		}
+	}
+}
+
+.details {
+	display: flex;
+	flex-direction: column;
+	width: 77%;
+}
+
+.name {
+	width: 100%;
+	overflow: hidden;
+	font-size: 15px;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	text-transform: capitalize;
+	white-space: nowrap;
+}
+
+.email {
+	display: flex;
+	width: 100%;
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.user_div {
+	z-index: 1;
+	background: #fffce6;
+	border-radius: 10px;
+}

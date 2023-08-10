@@ -8,11 +8,13 @@ import useCreateShipmentTradePartner from '../../../../../hooks/useCreateShipmen
 import styles from './styles.module.css';
 
 const removeEmptyKeyValuePair = (obj) => {
-	const newObj = {};
+	const NEW_OBJ = {};
+
 	Object.keys(obj || {}).forEach((k) => {
-		if (obj[k])newObj[k] = obj[k];
+		if (obj[k])NEW_OBJ[k] = obj[k];
 	});
-	return newObj;
+
+	return NEW_OBJ;
 };
 
 function CreateNotifyingPary({
@@ -31,15 +33,15 @@ function CreateNotifyingPary({
 		refetch: createRefetch,
 	});
 
-	const disabled_mapping = {};
+	const DISABLED_MAPPING = {};
 
 	tradePartnerList.forEach((item) => {
-		if (!Object.keys(disabled_mapping).includes(item.trade_party_type)) {
-			disabled_mapping[item.trade_party_type] = !isEmpty(item?.trade_partner_details?.poc_data);
+		if (!Object.keys(DISABLED_MAPPING).includes(item.trade_party_type)) {
+			DISABLED_MAPPING[item.trade_party_type] = !isEmpty(item?.trade_partner_details?.poc_data);
 		}
 	});
 
-	const { control, handleSubmit, watch } = useForm({ defaultValues: { ...disabled_mapping } });
+	const { control, handleSubmit, watch } = useForm({ defaultValues: { ...DISABLED_MAPPING } });
 	const formValues = watch();
 
 	const onSubmit = (val) => {
@@ -64,7 +66,7 @@ function CreateNotifyingPary({
 					<CheckboxController
 						name="self"
 						control={control}
-						disabled={!disabled_mapping.self}
+						disabled={!DISABLED_MAPPING.self}
 					/>
 					<label>Booking Party</label>
 				</div>
@@ -72,7 +74,7 @@ function CreateNotifyingPary({
 					<CheckboxController
 						name="shipper"
 						control={control}
-						disabled={!disabled_mapping.shipper}
+						disabled={!DISABLED_MAPPING.shipper}
 					/>
 					<label>Shipper</label>
 				</div>
@@ -81,7 +83,7 @@ function CreateNotifyingPary({
 					<CheckboxController
 						name="consignee"
 						control={control}
-						disabled={!disabled_mapping.consignee}
+						disabled={!DISABLED_MAPPING.consignee}
 					/>
 					<label>Consignee</label>
 				</div>

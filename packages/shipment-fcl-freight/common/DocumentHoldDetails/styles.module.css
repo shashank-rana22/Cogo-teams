@@ -18,7 +18,7 @@
 
 	&.yellow {
 		color: #9c8440;
-		background: var(--color-primary-yellow-5);
+		background-color: var(--color-primary-yellow-5);
 
 		svg {
 			path {
@@ -33,7 +33,7 @@
 
 	&.green {
 		color: #4f9e3f;
-		background: #cafcdc96;
+		background-color: #cafcdc96;
 
 		svg {
 			path {

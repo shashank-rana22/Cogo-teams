@@ -7,7 +7,7 @@ import {
 	Tooltip,
 	Modal,
 } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcADocumentTemplates,
 	IcCFtick,
@@ -206,7 +206,14 @@ function SupplierDetails({
 						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
-									{showOverflowingNumber(getFormattedPrice(payables, payablesCurrency) || 0, 10)}
+									{showOverflowingNumber(formatAmount({
+										amount   :	payables,
+										currency : payablesCurrency,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || 0, 10)}
 								</div>
 							) : (
 								<div>
@@ -233,10 +240,14 @@ function SupplierDetails({
 						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
-									{showOverflowingNumber(getFormattedPrice(
-										receivables,
-										receivablesCurrency,
-									) || 0, 10)}
+									{showOverflowingNumber(formatAmount({
+										amount   :	receivables,
+										currency :	receivablesCurrency,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || 0, 10)}
 								</div>
 							) : (
 								<div>

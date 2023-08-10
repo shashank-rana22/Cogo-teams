@@ -1,25 +1,29 @@
 import { Tabs, TabPanel, Pagination, Table } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import Image from 'next/image';
 
 import tableTabs from '../../../configurations/table-tabs';
-import { LIST_EMPTY_STATE } from '../../../constants';
 
 import styles from './styles.module.css';
 import TableColumns from './TableColumns';
 
-const func = () => {};
+const PAGINATION_DATA = {
+	currentPage : 0,
+	totalItem   : 10,
+	pageLimit   : 10,
+};
 
 function ListTables({
-	setActiveTab = func,
+	setActiveTab = () => {},
 	activeTab = '',
 	listReferals = {},
-	setListPagination = func,
+	setListPagination = () => {},
 	listLoading = false,
 	showPopover = {},
-	setShowPopover = func,
-	setActivityModal = func,
-	setUserData = func,
+	setShowPopover = () => {},
+	setActivityModal = () => {},
+	setUserData = () => {},
 
 }) {
 	const { tabs = [] } = tableTabs();
@@ -59,7 +63,7 @@ function ListTables({
 								{isEmpty(list) && !listLoading && (
 									<figure className={styles.empty_state}>
 										<Image
-											src={LIST_EMPTY_STATE}
+											src={GLOBAL_CONSTANTS.image_url.list_empty}
 											alt="Empty State"
 											width={300}
 											height={250}
@@ -74,9 +78,9 @@ function ListTables({
 								<Pagination
 									type="table"
 									className={styles.pagination_container}
-									currentPage={page || 0}
-									totalItems={total_count || 0}
-									pageSize={page_limit || 10}
+									currentPage={page || PAGINATION_DATA.currentPage}
+									totalItems={total_count || PAGINATION_DATA.totalItem}
+									pageSize={page_limit || PAGINATION_DATA.pageLimit}
 									onPageChange={setListPagination}
 								/>
 							</TabPanel>

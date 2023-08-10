@@ -7,7 +7,7 @@ import EventLoadingState from './EventLoadingState';
 import styles from './styles.module.css';
 
 function EventList(props) {
-	const { list, setEventListData, loading } = props;
+	const { list, setEventListData, loading, listRefetch } = props;
 
 	if (loading) {
 		return (
@@ -37,6 +37,7 @@ function EventList(props) {
 					data={data}
 					index={index}
 					setEventListData={setEventListData}
+					listRefetch={listRefetch}
 				/>
 			))}
 		</div>

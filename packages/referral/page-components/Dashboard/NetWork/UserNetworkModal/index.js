@@ -1,15 +1,19 @@
 import { Avatar, Modal, Loader, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCall, IcMEmail, IcCCogoCoin } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 import React from 'react';
 
 import TooltipContent from '../../../../common/TooltipContent';
 import userProfile from '../../../../configurations/user-profile';
-import { USER_STATUS_COLOUR, USER_STATUS_MAPPING, USER_AVATAR } from '../../../../constants';
+import { USER_STATUS_COLOUR, USER_STATUS_MAPPING } from '../../../../constants';
 import useGetReferrerNetworkNode from '../../../../hooks/useGetReferrerNetworkNode';
 
 import NetWorkCommission from './NetWorkCommission';
 import styles from './styles.module.css';
+
+const UNIQUE_USER_ID = -6;
+const MIN_ORGNIZATION_LIST_LENGTH = 1;
 
 function UserNetworkModal({
 	setUserModal = () => {},
@@ -50,9 +54,9 @@ function UserNetworkModal({
 		networkCogopointEstimated,
 	});
 
-	const lastUserId = id.slice(-6).toUpperCase();
+	const lastUserId = id.slice(UNIQUE_USER_ID).toUpperCase();
 
-	const orgCount = organization.length - 1;
+	const orgCount = organization.length - MIN_ORGNIZATION_LIST_LENGTH;
 
 	return (
 
@@ -68,7 +72,7 @@ function UserNetworkModal({
 
 					<div className={styles.user_profile}>
 						<Avatar
-							src={USER_AVATAR}
+							src={GLOBAL_CONSTANTS.image_url.user_avatar}
 							alt="user-avatar"
 							disabled={false}
 							size="50px"
@@ -93,10 +97,10 @@ function UserNetworkModal({
 						placement="bottom"
 					>
 						<div className={styles.user_details}>
-							{startCase(organization?.[0])}
+							{startCase(organization?.[GLOBAL_CONSTANTS.zeroth_index])}
 
 							<span className={styles.more}>
-								{organization.length > 1 && `+${orgCount} More`}
+								{organization.length > MIN_ORGNIZATION_LIST_LENGTH && `+${orgCount} More`}
 							</span>
 						</div>
 					</Tooltip>

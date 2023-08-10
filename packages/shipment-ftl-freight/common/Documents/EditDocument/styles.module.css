@@ -1,0 +1,18 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.button_wrap {
+	display: flex;
+	justify-content: flex-end;
+	margin: 18px 0 8px;
+}
+
+.heading {
+	margin: 14px 0;
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 18px;
+	color: #393f70;
+}

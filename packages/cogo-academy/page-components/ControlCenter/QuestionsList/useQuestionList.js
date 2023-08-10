@@ -1,6 +1,6 @@
 import { Pill, Button, Popover } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -100,14 +100,9 @@ const addedQuestionsColumns = ({
 						{formatDate({
 							date,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-						})}
-						,
-						{' '}
-						{formatDate({
-							date,
 							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
-							formatType : 'time',
+							formatType : 'date',
+							separator  : ', ',
 						})}
 					</div>
 				);

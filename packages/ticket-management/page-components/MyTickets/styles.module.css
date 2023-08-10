@@ -1,0 +1,20 @@
+.head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.styled_ui_modal_dialog {
+	:global {
+		.ui_modal_body_container {
+			max-height: 80vh;
+		}
+	}
+}

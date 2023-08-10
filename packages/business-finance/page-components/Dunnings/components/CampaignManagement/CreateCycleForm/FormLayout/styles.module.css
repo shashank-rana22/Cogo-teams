@@ -1,0 +1,67 @@
+.frequency {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 80%;
+}
+
+.date {
+	width: 160px;
+	margin-top: 12px;
+}
+
+.timezone {
+	width: 92px;
+	margin: 0 8px;
+}
+
+.empty_space {
+	height: 98px;
+}
+
+.chips_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-between;
+	width: 80%;
+	height: 54px;
+	margin-top: 12px;
+}
+
+.timezone_container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_select_options_container {
+			top: auto;
+			bottom: 42px;
+			box-shadow: 0 1px 10px -2px;
+		}
+	}
+}
+
+.filter_container {
+	margin: 4px 20px;
+}
+
+.cycleName {
+	width: 500px;
+	margin-bottom: 12px;
+}
+
+.cycleType div {
+	padding: 8px 44px;
+}
+
+.cogoEntityId div {
+	padding: 8px 44px;
+}
+
+.dueOutstandingCurrency > div {
+	margin-right: 32px;
+}
+
+.triggerType div {
+	padding: 8px 44px;
+}

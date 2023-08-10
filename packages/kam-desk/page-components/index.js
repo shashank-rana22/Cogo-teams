@@ -1,5 +1,5 @@
-import { dynamic, useRouter } from '@cogoport/next';
-import { useState, useMemo, useCallback } from 'react';
+import { dynamic } from '@cogoport/next';
+import { useState, useMemo } from 'react';
 
 import KamDeskContext from '../context/KamDeskContext';
 import getLocalStorageVal from '../helpers/getLocalStorageVal';
@@ -13,8 +13,6 @@ const ResolveKamDesk = {
 };
 
 function KamDesk() {
-	const router = useRouter();
-
 	const defaultValues = getLocalStorageVal();
 
 	const [filters, setFilters] = useState(defaultValues?.filters);
@@ -27,31 +25,24 @@ function KamDesk() {
 
 	const [stepperTab, setStepperTab] = useState(defaultValues?.stepperTab);
 
-	const handleVersionChange = useCallback(() => {
-		const newPathname = `${router.asPath}`;
-		window.location.replace(newPathname);
-		localStorage.setItem('kam_desk_version', 'v1');
-	}, [router.asPath]);
-
 	const contextValues = useMemo(() => ({
 		shipmentType,
 		setShipmentType,
 		filters,
 		setFilters,
 		scopeFilters,
-		handleVersionChange,
 		activeTab,
 		setActiveTab,
 		stepperTab,
 		setStepperTab,
 	}), [shipmentType, setShipmentType, filters, setFilters, scopeFilters,
-		handleVersionChange, activeTab, setActiveTab, stepperTab, setStepperTab]);
+		activeTab, setActiveTab, stepperTab, setStepperTab]);
 
 	const RenderDesk = shipmentType in ResolveKamDesk ? ResolveKamDesk[shipmentType] : null;
 
 	return (
 		<KamDeskContext.Provider value={contextValues}>
-			{shipmentType ? <RenderDesk /> : null}
+			{shipmentType ? <RenderDesk activeTab={activeTab} /> : null}
 		</KamDeskContext.Provider>
 	);
 }

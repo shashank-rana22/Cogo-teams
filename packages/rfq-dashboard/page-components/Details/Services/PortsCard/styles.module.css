@@ -1,0 +1,99 @@
+.main_container {
+	display: flex;
+	align-items: flex-start;
+	margin-top: 30px;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0 10px 0 0;
+			margin-top: 20px;
+		}
+	}
+}
+
+.port_container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.container {
+	z-index: 0;
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	margin-bottom: -4px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.service {
+	display: flex;
+	flex-direction: column;
+	width: 5%;
+	padding: 0 15px;
+	border-right: 1px solid #e0e0e0;
+
+	svg {
+		width: 25px;
+		height: 25px;
+	}
+}
+
+.FCL {
+	font-size: 14px;
+	font-weight: 600;
+	color: #356efd;
+}
+
+.LCL {
+	font-size: 14px;
+	font-weight: 600;
+	color: #65acf7;
+}
+
+.AIR {
+	font-size: 14px;
+	font-weight: 600;
+	color: #ef9b9b;
+}
+
+.ports_tags_container {
+	display: flex;
+	flex-direction: column;
+	width: 40%;
+	min-width: 300px;
+	padding: 0 15px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.location_box {
+	display: flex;
+	align-items: center;
+}
+
+.icmportarrow_icon {
+	margin: 0 10px;
+}
+
+.service_stats {
+	width: 30%;
+	min-width: 400px;
+	padding: 0 15px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.price_fright_ctr_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 20%;
+	min-width: 200px;
+}
+
+.down_card_button {
+	cursor: pointer;
+	background-color: #fff;
+	border: none;
+}
