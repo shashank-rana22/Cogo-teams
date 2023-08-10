@@ -10,9 +10,11 @@ import getFilterControls from '../../../utils/getControls';
 
 import styles from './styles.module.css';
 
+const STORAGE_KEY = 'air_booking_desk';
+
 const applyFilterValues = ({
 	filter = {},
-	prevServiceActiveTab = 'air_freight',
+	prevServiceActiveTab = 'air_freight_service',
 	setValue = () => {},
 }) => {
 	Object.keys(filter || {}).forEach((item) => {
@@ -48,7 +50,7 @@ function Filter({
 			state                      : '',
 		});
 		setFilters({});
-		sessionStorage.setItem('air_booking_desk', JSON.stringify({ serviceActiveTab, filters: {} }));
+		sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ serviceActiveTab, filters: {} }));
 		setFilterPopover(false);
 	};
 
@@ -79,12 +81,12 @@ function Filter({
 
 		} : {});
 		setFilters(filteredFilters);
-		sessionStorage.setItem('air_booking_desk', JSON.stringify({ serviceActiveTab, filters: filteredFilters }));
+		sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ serviceActiveTab, filters: filteredFilters }));
 		setFilterPopover(false);
 	};
 
 	useEffect(() => {
-		const storageData = JSON.parse(sessionStorage.getItem('air_booking_desk'));
+		const storageData = JSON.parse(sessionStorage.getItem(STORAGE_KEY));
 		const {
 			serviceActiveTab: storageServiceActiveTab = 'air_freight',
 			filters: filter = {},
@@ -103,14 +105,14 @@ function Filter({
 				state                      : '',
 			});
 			setFilters({});
-			sessionStorage.setItem('air_booking_desk', JSON.stringify({ serviceActiveTab, filters: {} }));
+			sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ serviceActiveTab, filters: {} }));
 			return;
 		}
 		const prevServiceActiveTab = serviceActiveTab.concat('_service');
 		applyFilterValues({ filter, prevServiceActiveTab, setValue });
 		setValue('tags', filter?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
 		setFilters(filter);
-		sessionStorage.setItem('air_booking_desk', JSON.stringify({ serviceActiveTab, filters: filter }));
+		sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ serviceActiveTab, filters: filter }));
 	}, [reset, serviceActiveTab, setFilters, setValue]);
 
 	return (
