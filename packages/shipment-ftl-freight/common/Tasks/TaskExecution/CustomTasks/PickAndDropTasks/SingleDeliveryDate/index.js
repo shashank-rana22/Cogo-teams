@@ -89,25 +89,17 @@ function SingleDeliveryDate(props, ref) {
 
 	useEffect(() => {
 		if (!isEmpty(list)) {
-			const truckValues = (list || []).reduce((acc, itm) => {
-				if (itm?.service_type !== 'subsidiary_service') {
-					const truckExist = list.find(
-						(listItem) => (itm?.truck_number)?.toLowerCase() === (listItem?.truck_number)?.toLowerCase(),
-					) || {};
-					if (isEmpty(truckExist)) {
-						acc.push({ truck_number: itm?.id });
-					} else {
-						truckExist?.end_kilometer_images?.forEach((end_kilometer_image) => {
-							acc.push(end_kilometer_image);
-						});
-					}
-				}
-				return acc;
-			}, []);
+			const truckExist = list.find(
+				(listItem) => listItem?.truck_number?.toLowerCase() === item?.truck_number?.toLowerCase(),
+			) || {};
 
-			setValue('image', truckValues);
+			let endKmImages = [];
+			if (!isEmpty(truckExist)) {
+				endKmImages = truckExist?.end_kilometer_images || [];
+			}
+			setValue('image', endKmImages);
 		}
-	}, [list, setValue]);
+	}, [list, setValue, item?.truck_number]);
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit,

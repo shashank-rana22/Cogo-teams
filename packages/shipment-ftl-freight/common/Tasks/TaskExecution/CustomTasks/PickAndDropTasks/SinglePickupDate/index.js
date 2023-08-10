@@ -102,25 +102,17 @@ function SinglePickupDate(props, ref) {
 
 	useEffect(() => {
 		if (!isEmpty(list)) {
-			const truckValues = (list || []).reduce((acc, itm) => {
-				if (itm?.service_type !== 'subsidiary_service') {
-					const truckExist = list.find(
-						(listItem) => (itm?.truck_number)?.toLowerCase() === (listItem?.truck_number)?.toLowerCase(),
-					) || {};
-					if (isEmpty(truckExist)) {
-						acc.push({ truck_number: itm?.id });
-					} else {
-						truckExist?.start_kilometer_images?.forEach((start_kilometer_image) => {
-							acc.push(start_kilometer_image);
-						});
-					}
-				}
-				return acc;
-			}, []);
+			const truckExist = list.find(
+				(listItem) => listItem?.truck_number?.toLowerCase() === item?.truck_number?.toLowerCase(),
+			) || {};
 
-			setValue('image', truckValues);
+			let startKmImages = [];
+			if (!isEmpty(truckExist)) {
+				startKmImages = truckExist?.start_kilometer_images || [];
+			}
+			setValue('image', startKmImages);
 		}
-	}, [list, setValue]);
+	}, [list, setValue, item?.truck_number]);
 
 	const showElements = {
 		delayed_pickup_reason: datesChecker(
