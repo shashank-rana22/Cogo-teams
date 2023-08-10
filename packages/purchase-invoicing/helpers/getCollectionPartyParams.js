@@ -1,12 +1,14 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
+// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const getCollectionPartyParams = ({
 	profile_data = {}, servicesData = [],
 	//  shipmentData = {}
 }) => {
 	const geo = getGeoConstants();
+
+	const { stakeholder_wise_invoice_required } = geo.others.navigations.bookings.invoicing;
 
 	const primary_service = servicesData?.find((i) => i.main_service_id === null);
 
@@ -19,7 +21,7 @@ const getCollectionPartyParams = ({
 
 	const { partner:{ user_role_ids = [] } = {} } = profile_data || {};
 
-	if (isFcl && isImport) {
+	if (isFcl && isImport && stakeholder_wise_invoice_required) {
 		if (user_role_ids.includes(geo.uuid.document_control_manager)) {
 			return { required_bl_do_quotations: true };
 		}
