@@ -101,6 +101,18 @@ function CargoInsurance({
 	}, [premiumRate, query]);
 
 	useEffect(() => {
+		const newList = (list || []).map((item) => ({
+			...item,
+			commodity: `${item?.commodity}(${item?.subCommodity})`,
+		}));
+		(controls || []).forEach((item, index) => {
+			if (item.name === 'cargo_insurance_commodity') {
+				controls[index].options = newList;
+			}
+		});
+	}, [list]);
+
+	useEffect(() => {
 		const optionselected = (list || []).find(
 			(option) => option.id === formValues?.cargo_insurance_commodity,
 		);

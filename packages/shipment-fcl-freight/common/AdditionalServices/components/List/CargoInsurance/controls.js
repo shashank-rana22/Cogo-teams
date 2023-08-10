@@ -6,9 +6,11 @@ const controls = [
 	{
 		label          : 'Commodity',
 		name           : 'cargo_insurance_commodity',
+		labelKey       : 'commodity',
+		valueKey       : 'id',
 		type           : 'select',
-		span           : 12,
 		optionsListKey : 'insurance_commodities',
+		span           : 12,
 		defaultOptions : true,
 		options        : [],
 		placeholder    : 'Select Commodity',
