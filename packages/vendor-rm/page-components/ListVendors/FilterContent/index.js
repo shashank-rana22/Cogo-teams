@@ -1,7 +1,6 @@
-import { Input, Select, Button } from '@cogoport/components';
+import { Input, Button } from '@cogoport/components';
+import { AsyncSelect } from '@cogoport/forms';
 import { useState } from 'react';
-
-import CATEGORY_OPTIONS from '../../utils/category-options';
 
 import styles from './styles.module.css';
 
@@ -39,11 +38,13 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 
 			<div className={styles.select_container}>
 				<div className={styles.label}>Category</div>
-				<Select
+				<AsyncSelect
 					value={filters?.category || ''}
 					onChange={(value) => setFilters((prev) => ({ ...prev, category: value }))}
 					placeholder="Choose Category..."
-					options={CATEGORY_OPTIONS}
+					asyncKey="list_expense_category"
+					valueKey="categoryName"
+					initialCall
 				/>
 			</div>
 

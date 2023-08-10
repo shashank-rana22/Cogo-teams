@@ -41,6 +41,9 @@ function ShipmentDetails() {
 			}
 			return <DKam get={get} activeStakeholder="consignee_shipper_booking_agent" />;
 
+		case 'sales_agent':
+			return <Kam get={get} activeStakeholder={activeStakeholder} />;
+
 		case 'booking_desk':
 			return <BookingDesk get={get} activeStakeholder={activeStakeholder} />;
 		case 'booking_desk_manager':
@@ -59,6 +62,7 @@ function ShipmentDetails() {
 		case 'document_desk_manager':
 		case 'document_control_manager':
 		case 'document_control_lead':
+		case 'supplier_relations_head':
 			return <DocumentDesk get={get} activeStakeholder={activeStakeholder} />;
 		case 'so1_so2_ops':
 			return <So1So2Ops get={get} activeStakeholder={activeStakeholder} />;
@@ -73,6 +77,7 @@ function ShipmentDetails() {
 		case 'coe_head':
 		case 'finance_superadmin':
 		case 'finops_manager':
+		case 'so1_revenue_desk':
 			return <Superadmin get={get} activeStakeholder={activeStakeholder} />;
 		default:
 			return (
