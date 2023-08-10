@@ -17,7 +17,7 @@ import styles from './styles.module.css';
 
 function Edit({
 	setOpen = () => { },
-	CN_STATUS_MAPPING,
+	CN_STATUS_MAPPING = {},
 	prevData = {},
 	item = {},
 	cnRefetch = () => { },
@@ -67,7 +67,7 @@ function Edit({
 			isEdit  : true,
 		});
 
-		if (submit_data?.line_items?.length === 0) {
+		if (submit_data?.line_items?.length) {
 			Toast.error('Line Items is required');
 			return;
 		}
@@ -112,7 +112,7 @@ function Edit({
 			<Modal.Body>
 				<div className={styles.title}>
 					<b>
-						{`SID ${shipment_data?.serial_id} - Invoice number -`}
+						{`SID ${shipment_data?.serial_id} - Invoice Number -`}
 						<u>{live_invoice_number}</u>
 					</b>
 				</div>
@@ -125,7 +125,8 @@ function Edit({
 				<div>
 					<b>Date</b>
 					<span>
-						&nbsp; -
+						{' '}
+						-
 						{formatDate({
 							date       : item?.created_at,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
