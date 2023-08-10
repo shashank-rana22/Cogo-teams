@@ -179,6 +179,7 @@ function CogoFinancials() {
 						customDate={customDate}
 						activeBar={activeBar}
 						setActiveBar={setActiveBar}
+						setTableFilters={setTableFilters}
 					/>
 					<div className={styles.remaining_shipment_cards}>
 
@@ -231,7 +232,11 @@ function CogoFinancials() {
 
 			{showShipmentList && (
 				<div style={{ background: '#fff' }}>
-					<Filters setTableFilters={setTableFilters} tableFilters={tableFilters} />
+					<Filters
+						setTableFilters={setTableFilters}
+						tableFilters={tableFilters}
+						activeBar={activeBar}
+					/>
 					<TableComp
 						activeShipmentCard={activeShipmentCard}
 						entity={entity}

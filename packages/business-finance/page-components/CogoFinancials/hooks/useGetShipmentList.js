@@ -34,7 +34,7 @@ const useGetShipmentList = ({
 
 	const { pageIndex, serviceLevel:serviceLevelFilter, query:searchQuery } = tableFilters;
 
-	const getShipmentList = useCallback((serviceLevel) => {
+	const getShipmentList = useCallback(() => {
 		const { channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
 		const { startDate: customStartDate, endDate: customEndDate } = customDate || {};
@@ -45,7 +45,7 @@ const useGetShipmentList = ({
 			currency      : DEFAULT_CURRENCY,
 			startDate     : timeRange === 'custom' ? getFormattedDate(customStartDate) : startDate,
 			endDate       : timeRange === 'custom' ? getFormattedDate(customEndDate) : endDate,
-			serviceLevel  : serviceLevel || serviceLevelFilter || activeBar || 'OVERALL',
+			serviceLevel  : serviceLevelFilter || activeBar || undefined,
 			parentService : segment,
 			service,
 			tradeType     : serviceCategory ? upperCase(serviceCategory) : undefined,

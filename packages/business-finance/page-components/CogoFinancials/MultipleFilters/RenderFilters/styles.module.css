@@ -33,7 +33,7 @@
 
 		.ui_tabs_tabpanel {
 			height: 268px;
-			overflow-y: scroll;
+			overflow-y: auto;
 		}
 	}
 }

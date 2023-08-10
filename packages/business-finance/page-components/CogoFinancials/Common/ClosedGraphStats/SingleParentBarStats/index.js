@@ -16,6 +16,7 @@ function SingleParentBarStats({
 	type = '',
 	serviceLevelData = [],
 	serviceLevelLoading = false,
+	setTableFilters = () => {},
 }) {
 	const onViewDetails = () => {
 		setShowShipmentList(true);
@@ -30,6 +31,10 @@ function SingleParentBarStats({
 					onBack={() => {
 						setActiveBar('');
 						setShowShipmentList(false);
+						setTableFilters((prev) => ({
+							...prev,
+							serviceLevel: null,
+						}));
 					}}
 				/>
 				<div className={styles.graph_label_container}>

@@ -25,6 +25,7 @@ function ActiveShipmentCard({
 	customDate = new Date(),
 	activeBar = '',
 	setActiveBar = () => {},
+	setTableFilters = () => {},
 }) {
 	const PROPS_KEY_MAPPING = {
 		ongoing: {
@@ -52,6 +53,7 @@ function ActiveShipmentCard({
 			activeBar,
 			setActiveBar,
 			defaultWidth : '360',
+			setTableFilters,
 		},
 		financial: {
 			title        : 'Financially Closed',
@@ -69,6 +71,7 @@ function ActiveShipmentCard({
 			activeBar,
 			setActiveBar,
 			defaultWidth : '360',
+			setTableFilters,
 		},
 	};
 

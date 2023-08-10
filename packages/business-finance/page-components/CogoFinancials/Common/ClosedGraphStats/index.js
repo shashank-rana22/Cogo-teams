@@ -26,6 +26,7 @@ function ClosedGraphStats({
 	activeBar = '',
 	setActiveBar = () => {},
 	defaultWidth = '400',
+	setTableFilters = () => {},
 }) {
 	const { serviceLevelData, serviceLevelLoading } = useGetServiceLevelStats({
 		entity,
@@ -106,6 +107,7 @@ function ClosedGraphStats({
 					type={type}
 					serviceLevelData={serviceLevelData}
 					serviceLevelLoading={serviceLevelLoading}
+					setTableFilters={setTableFilters}
 				/>
 			)}
 		</div>

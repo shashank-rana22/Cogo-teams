@@ -10,7 +10,7 @@ import MyResponsiveBar from '../ResponsiveBar';
 
 import styles from './styles.module.css';
 
-const BOTTOM_AXIS_ROTATION = 14;
+const BOTTOM_AXIS_ROTATION = 20;
 const DEFAULT_ROTATION = 0;
 
 const KEY_MAPPINGS = {

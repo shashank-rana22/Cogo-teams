@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Filters({ setTableFilters = () => { }, tableFilters = {} }) {
+function Filters({ setTableFilters = () => { }, tableFilters = {}, activeBar = '' }) {
 	return (
 		<div className={styles.container}>
 			<Select
@@ -16,7 +16,7 @@ function Filters({ setTableFilters = () => { }, tableFilters = {} }) {
 					{ label: 'SURFACE', value: 'SURFACE' },
 				]}
 				onChange={(val) => setTableFilters({ ...tableFilters, serviceLevel: val, pageIndex: 1 })}
-				value={tableFilters?.serviceLevel}
+				value={tableFilters?.serviceLevel || activeBar}
 				placeholder="Service Level"
 			/>
 
