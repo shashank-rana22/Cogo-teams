@@ -27,19 +27,6 @@ const useFilterContent = (props) => {
 		return FILTER_VALUES;
 	};
 
-	useEffect(() => {
-		if (!isEmpty(filters)) {
-			setParams((previousParams) => ({
-				...previousParams,
-				page    : 1,
-				filters : {
-					...(previousParams.filters || {}),
-					...filters,
-				},
-			}));
-		}
-	}, [filters, setParams]);
-
 	const applyFilters = () => {
 		const data = getValues();
 
@@ -68,6 +55,19 @@ const useFilterContent = (props) => {
 
 		setShowFilters(false);
 	};
+
+	useEffect(() => {
+		if (!isEmpty(filters)) {
+			setParams((previousParams) => ({
+				...previousParams,
+				page    : 1,
+				filters : {
+					...(previousParams.filters || {}),
+					...filters,
+				},
+			}));
+		}
+	}, [filters, setParams]);
 
 	const filtersApplied = Object.keys(filters).length !== MIN_LENGTH;
 

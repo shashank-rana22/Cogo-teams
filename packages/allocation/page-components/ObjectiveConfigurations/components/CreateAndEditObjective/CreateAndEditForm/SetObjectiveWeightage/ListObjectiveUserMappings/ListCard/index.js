@@ -54,12 +54,6 @@ function ListCard(props) {
 						{' '}
 						{partner?.business_name}
 					</Pill>
-
-					{/* <Pill size="md">
-						Channel:
-						{' '}
-						{role.role_sub_function}
-					</Pill> */}
 				</div>
 
 				<Button

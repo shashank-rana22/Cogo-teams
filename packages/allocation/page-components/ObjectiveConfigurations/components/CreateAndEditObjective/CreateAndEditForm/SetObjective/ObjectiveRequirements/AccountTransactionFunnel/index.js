@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 function AccountTransactionFunnel(props) {
 	const { lifecycleStage, control, disabled } = props;
 
-	return 		(
+	return (
 		<div className={styles.container}>
 			<h4>3. Account Transaction Funnel</h4>
 

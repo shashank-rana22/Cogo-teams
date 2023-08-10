@@ -45,33 +45,6 @@ const useSetObjectiveRequirements = (props) => {
 		},
 	});
 
-	// const resetForm = () => {
-	// 	setValue('service_requirements', [{
-	// 		shipment_mode        : '',
-	// 		service_type         : '',
-	// 		trade_type           : '',
-	// 		origin_location      : '',
-	// 		destination_location : '',
-	// 		inco_terms           : [],
-	// 		hs_codes             : [],
-	// 		container_count      : '',
-	// 		weight               : '',
-	// 		volume               : '',
-	// 		container_size       : [],
-	// 		container_type       : [],
-	// 		truck_type           : [],
-	// 	}]);
-	// 	setValue('country', []);
-	// 	setValue('state', []);
-	// 	setValue('city', []);
-	// 	setValue('pincode', []);
-	// 	setValue('segments', []);
-	// 	setValue('date_range', {});
-	// 	setValue('shipment_count', '');
-	// 	setValue('quotation_count', '');
-	// 	setValue('search_count', '');
-	// };
-
 	const onSubmit = (values) => {
 		const {
 			country,

@@ -23,10 +23,6 @@ const getObjectiveFilterControls = () => {
 			label    : 'Lead Objective Status',
 			multiple : true,
 			options  : [
-				// {
-				// 	label : 'Live',
-				// 	value : 'live',
-				// },
 				{
 					label : 'Verified',
 					value : 'verified',

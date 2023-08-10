@@ -39,36 +39,16 @@ function ModeWiseButtons(props) {
 			</>
 		),
 		[EDIT]: (
-			<>
-				{/* <Button
-					size="lg"
-					type="button"
-					themeType="tertiary"
-					style={{ marginRight: '12px' }}
-				>
-					Equally Distribute
-				</Button> */}
-
-				{/* <Button
-					size="lg"
-					type="button"
-					themeType="secondary"
-					style={{ marginRight: '12px' }}
-				>
-					Replace & Send For Verification
-				</Button> */}
-
-				<Button
-					size="lg"
-					type="button"
-					themeType="primary"
-					loading={createLoading}
-					disabled={createDisabled}
-					onClick={() => onCreate({ distribute_equally: false })}
-				>
-					Duplicate & Send For Verification
-				</Button>
-			</>
+			<Button
+				size="lg"
+				type="button"
+				themeType="primary"
+				loading={createLoading}
+				disabled={createDisabled}
+				onClick={() => onCreate({ distribute_equally: false })}
+			>
+				Duplicate & Send For Verification
+			</Button>
 		),
 	};
 
