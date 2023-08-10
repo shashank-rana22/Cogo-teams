@@ -27,6 +27,11 @@ const schedules_apis = {
 			access_type  : 'private',
 			service_name : 'location',
 		},
+		{
+			api          : 'list_service_lanes',
+			access_type  : 'private',
+			service_name : 'location',
+		},
 	],
 	service_lanes: [
 		{

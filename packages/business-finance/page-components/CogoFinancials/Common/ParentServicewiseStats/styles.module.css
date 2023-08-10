@@ -105,10 +105,6 @@
 	overflow-x: scroll;
 }
 
-.color {
-	color: var(--color-tertiary-success-green-2);
-}
-
 .select {
 	:global {
 		.ui_select_container {

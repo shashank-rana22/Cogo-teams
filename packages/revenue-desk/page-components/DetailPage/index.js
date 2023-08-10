@@ -29,10 +29,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
 	const shipment_services = servicesData?.list || [];
 	const handlePillSelected = (trade_type) => {
-		setIsPillSelected((prev) => ({
-			...prev,
-			[trade_type]: !prev?.[trade_type],
-		}));
+		setIsPillSelected((prev) => ({ ...prev, [trade_type]: !prev?.[trade_type] }));
 	};
 
 	return (
@@ -51,14 +48,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 						<div className={styles.text}>
 							{serviceLabelMapping[itemData?.shipment_type]}
 						</div>
-						<div style={{
-							fontSize   : '14px',
-							fontWeight : '400',
-							color      : '#221F20',
-							marginLeft : '4px',
-							cursor     : 'pointer',
-						}}
-						>
+						<div className={styles.sid_tag}>
 							SID :
 							{' '}
 							{itemData?.serial_id}
@@ -78,6 +68,16 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 								color="#e6fae8"
 							>
 								Cogoport Assured
+							</Pill>
+						) : null}
+						{itemData?.is_organic_booking ? (
+							<Pill size="md" color="#e6fae8">
+								Organic Booking
+							</Pill>
+						) : null}
+						{itemData?.is_saas_subscribed ? (
+							<Pill size="md" color="#e6fae8">
+								Saas Subscribed
 							</Pill>
 						) : null}
 					</div>

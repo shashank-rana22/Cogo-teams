@@ -41,6 +41,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		tradeParty,
 		remarks,
 		categoryName,
+		dueDate,
 	} = formData || {};
 
 	const {
@@ -111,6 +112,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 
 	const {
 		bank_name: bankName,
+		account_holder_name: accountHolderName,
 		ifsc_code: ifscCode,
 		account_number: accountNumber,
 		id: bankId,
@@ -180,6 +182,8 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		expenseConfigurationId : null,
 		remarks,
 		categoryName,
+		dueDate,
+		accountHolderName,
 	});
 
 	const submitData = async () => {

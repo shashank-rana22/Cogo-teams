@@ -1,7 +1,8 @@
-import { Select, Input } from '@cogoport/components';
+import { Select, Input, Button } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
+import useFilters from './useFilters';
 
 const options = [
 	{ label: 'Passed', value: 'passed' },
@@ -16,6 +17,8 @@ function Filters({
 	searchValue,
 	activeTab = '',
 }) {
+	const { loading = false, onClickDownloadResults } = useFilters();
+
 	const handleSearchValue = (search) => {
 		setSearchValue(search);
 		debounceQuery(search);
@@ -38,6 +41,15 @@ function Filters({
 
 			{activeTab === 'appeared' ? (
 				<div className={styles.filters}>
+					<Button
+						themeType="secondary"
+						style={{ marginRight: 12 }}
+						onClick={onClickDownloadResults}
+						loading={loading}
+					>
+						Download Results
+					</Button>
+
 					<Select
 						prefix={(<IcMFilter />)}
 						value={filter}
@@ -48,7 +60,6 @@ function Filters({
 					/>
 				</div>
 			) : null}
-
 		</div>
 	);
 }
