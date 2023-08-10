@@ -88,17 +88,18 @@ function SingleDeliveryDate(props, ref) {
 	};
 
 	useEffect(() => {
-		if (!isEmpty(list)) {
-			const truckExist = list.find(
-				(listItem) => listItem?.truck_number?.toLowerCase() === item?.truck_number?.toLowerCase(),
-			) || {};
-
-			let endKmImages = [];
-			if (!isEmpty(truckExist)) {
-				endKmImages = truckExist?.end_kilometer_images || [];
-			}
-			setValue('image', endKmImages);
+		if (isEmpty(list)) {
+			return;
 		}
+		const truckExist = list.find(
+			(listItem) => listItem?.truck_number?.toLowerCase() === item?.truck_number?.toLowerCase(),
+		) || {};
+
+		let endKmImages = [];
+		if (!isEmpty(truckExist)) {
+			endKmImages = truckExist?.end_kilometer_images || [];
+		}
+		setValue('image', endKmImages);
 	}, [list, setValue, item?.truck_number]);
 
 	useImperativeHandle(ref, () => ({

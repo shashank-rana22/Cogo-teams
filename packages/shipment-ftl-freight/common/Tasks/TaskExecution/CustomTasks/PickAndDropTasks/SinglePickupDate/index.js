@@ -101,17 +101,18 @@ function SinglePickupDate(props, ref) {
 		formValues?.loading_date, isDateAllowed, is_backdate_applicable, item, shipment_data]);
 
 	useEffect(() => {
-		if (!isEmpty(list)) {
-			const truckExist = list.find(
-				(listItem) => listItem?.truck_number?.toLowerCase() === item?.truck_number?.toLowerCase(),
-			) || {};
-
-			let startKmImages = [];
-			if (!isEmpty(truckExist)) {
-				startKmImages = truckExist?.start_kilometer_images || [];
-			}
-			setValue('image', startKmImages);
+		if (isEmpty(list)) {
+			return;
 		}
+		const truckExist = list.find(
+			(listItem) => listItem?.truck_number?.toLowerCase() === item?.truck_number?.toLowerCase(),
+		) || {};
+
+		let startKmImages = [];
+		if (!isEmpty(truckExist)) {
+			startKmImages = truckExist?.start_kilometer_images || [];
+		}
+		setValue('image', startKmImages);
 	}, [list, setValue, item?.truck_number]);
 
 	const showElements = {

@@ -188,7 +188,7 @@ const injectValues = ({
 					if (isMultipleUrlAllowed) {
 						const customValueUrls = docData[
 							TRUCK_DOCS_PREFILL_KEYS_MAPPING[task.task]
-						]?.map((url) => url);
+						] || [];
 
 						acc.push({ service_id, url: customValueUrls });
 					} else {

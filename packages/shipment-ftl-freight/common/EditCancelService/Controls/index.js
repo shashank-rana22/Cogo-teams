@@ -28,9 +28,8 @@ export const EditTruckNumberControls = [
 			{
 				name        : 'truck_number',
 				type        : 'text',
-				label       : 'Enter Truck Number',
-				placeholder : 'Create or Select Truck Number',
-				lowerlabel  : 'Create or Select Truck Number',
+				label       : 'Updated Truck Number',
+				placeholder : 'Edit Truck Number',
 				span        : 6,
 				rules       : { required: 'This is required' },
 			},
