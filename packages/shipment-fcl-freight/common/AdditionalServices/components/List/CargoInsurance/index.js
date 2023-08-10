@@ -27,6 +27,7 @@ function CargoInsurance({
 	primary_service = {},
 }) {
 	const [commodity, setCommodity] = useState('');
+	const [premiumData, setPremiumData] = useState({});
 	const [currentCargoInsurance, setCurrentCargoInsurance] = useState('');
 
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -40,9 +41,9 @@ function CargoInsurance({
 	};
 
 	const {
-		premiumLoading: loading, premiumData,
+		premiumLoading: loading,
 		premiumRate,
-	} = useGetInsuranceRate();
+	} = useGetInsuranceRate({ setPremiumData });
 
 	const cargoInsuranceCountryId =	primary_service?.trade_type === 'export'
 		? primary_service?.destination_port?.country_id : primary_service?.origin_port?.country_id;
@@ -156,6 +157,7 @@ function CargoInsurance({
 				{!isEmpty(premiumData) && !loading ? (
 					<PremiumRate rateData={premiumData} />
 				) : null}
+
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
