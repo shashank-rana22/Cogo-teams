@@ -4,6 +4,8 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
+import useGetOrgUsers from './useGetOrgUsers';
+
 const getParams = ({ orgId = '' }) => ({
 	id                 : orgId,
 	user_data_required : true,
@@ -15,10 +17,9 @@ const formatData = ({
 	activeConversationTab = '',
 	activeCardId = '',
 	partnerId = '',
-	formattedMessageData = {},
+	userId = '',
+	isSendUserIdInPath,
 }) => {
-	const userId = formattedMessageData?.user_id;
-
 	const { data: orgDetails = {} } = data || {};
 	const { tags = [], twin_partner = {} } = orgDetails || {};
 
@@ -29,9 +30,9 @@ const formatData = ({
 		twin_importer_exporter_id = '',
 	} = twin_partner || {};
 
-	const ORGID = orgId || GLOBAL_CONSTANTS.uuid.paramount_org_id;
+	const sendPartnerUserId = orgId === userPartnerId;
 
-	const isSendUserIdInPath = !isEmpty(orgId) && !isEmpty(userId);
+	const ORGID = orgId || GLOBAL_CONSTANTS.uuid.paramount_org_id;
 
 	const disableQuickActions = isChannelPartner && !(twin_importer_exporter_id);
 
@@ -49,7 +50,7 @@ const formatData = ({
 
 		if (isChannelPartner) {
 			let redirectionLink = `/${partnerId}/prm/
-			${userPartnerId}?${linkSuffix}${isSendUserIdInPath ? `&user_id=${userId}` : ''}`;
+			${userPartnerId}?${linkSuffix}${sendPartnerUserId ? `&user_id=${userId}` : ''}`;
 			redirectionLink = prm
 				? `${redirectionLink}&omniChannelActiveTab=${prm}`
 				: redirectionLink;
@@ -77,6 +78,11 @@ const useCheckChannelPartner = ({
 	activeTab: activeConversationTab = '', formattedMessageData = {},
 }) => {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
+	const userId = formattedMessageData?.user_id;
+
+	const { orgLoading = false, isOrgUserIdPresent = false } = useGetOrgUsers({ orgId, userId });
+
+	const isSendUserIdInPath = !isEmpty(orgId) && !isEmpty(userId) && isOrgUserIdPresent && !orgLoading;
 
 	const [{ data, loading }, trigger] = useRequest(
 		{
@@ -113,7 +119,8 @@ const useCheckChannelPartner = ({
 		activeConversationTab,
 		activeCardId,
 		partnerId,
-		formattedMessageData,
+		userId,
+		isSendUserIdInPath,
 	});
 
 	return {
