@@ -175,7 +175,7 @@ function ConfirmCargoAirModal({
 				/>
 				<div className={styles.button_div}>
 					<div className={styles.div1}>
-						<Button className="secondary md" onClick={() => onCancel()} disabled={loading}>
+						<Button className="secondary md" onClick={onCancel} disabled={loading}>
 							Cancel
 						</Button>
 					</div>

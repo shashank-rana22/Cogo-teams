@@ -150,7 +150,7 @@ function UpdateCargo({
 				{render()}
 				<div className={styles.button}>
 					<div style={{ margin: '0 10px 0 0' }}>
-						<Button onClick={() => onCancel()} disabled={loading}>
+						<Button onClick={onCancel} disabled={loading}>
 							Cancel
 						</Button>
 					</div>
