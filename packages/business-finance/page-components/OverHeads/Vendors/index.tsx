@@ -72,49 +72,51 @@ function VenderComponent() {
 		);
 	};
 
-	const renderHeaders = () => (
-		<div className={styles.header_container}>
-			<div className={styles.left_container}>
-				{Object.keys(Controls).map((key) => {
-					const {
-						options = [],
-						placeholder = '',
-						value = '',
-					} = Controls[key];
-					return (
-						<Select
-							key={key}
-							value={filters?.[key]}
-							onChange={(e: any) => handleChange(e, value)}
-							placeholder={placeholder}
-							options={options}
-							className={styles.select}
-							size="sm"
-							isClearable
-						/>
-					);
-				})}
+	function RenderHeaders() {
+		return (
+			<div className={styles.header_container}>
+				<div className={styles.left_container}>
+					{Object.keys(Controls).map((key) => {
+						const {
+							options = [],
+							placeholder = '',
+							value = '',
+						} = Controls[key];
+						return (
+							<Select
+								key={key}
+								value={filters?.[key]}
+								onChange={(e: any) => handleChange(e, value)}
+								placeholder={placeholder}
+								options={options}
+								className={styles.select}
+								size="sm"
+								isClearable
+							/>
+						);
+					})}
+				</div>
+				<div className={styles.right_container}>
+					<Input
+						size="sm"
+						placeholder={`Search by Vendor Name/${val}/Organization ID/Sage ID`}
+						suffix={<IcMSearchlight />}
+						value={filters.searchValue}
+						onChange={(e: any) => handleChange(e, 'searchValue')}
+						className={styles.search}
+					/>
+					<Button
+						size="lg"
+						themeType="secondary"
+						onClick={handleClick}
+						className={styles.cta_button}
+					>
+						Create Vendor
+					</Button>
+				</div>
 			</div>
-			<div className={styles.right_container}>
-				<Input
-					size="sm"
-					placeholder={`Search by Vendor Name/${val}/Organization ID/Sage ID`}
-					suffix={<IcMSearchlight />}
-					value={filters.searchValue}
-					onChange={(e: any) => handleChange(e, 'searchValue')}
-					className={styles.search}
-				/>
-				<Button
-					size="lg"
-					themeType="secondary"
-					onClick={handleClick}
-					className={styles.cta_button}
-				>
-					Create Vendor
-				</Button>
-			</div>
-		</div>
-	);
+		);
+	}
 
 	function RenderKYCStatus(item: any) {
 		const { item: itemData = {} } = item;
@@ -211,9 +213,9 @@ function VenderComponent() {
 		);
 	}
 
-	const renderDropdown = (vendorId: number | string) => (
-		<ShowMore vendorId={vendorId} />
-	);
+	function RenderDropdown(vendorId: number | string) {
+		return <ShowMore vendorId={vendorId} />;
+	}
 
 	const functions: any = {
 		renderKYCStatus: (itemData: ItemProps) => (
@@ -245,7 +247,7 @@ function VenderComponent() {
 
 	return (
 		<div className={styles.vendor_container}>
-			{renderHeaders()}
+			{RenderHeaders()}
 
 			<List
 				config={VENDOR_CONFIG}
@@ -258,7 +260,7 @@ function VenderComponent() {
 					setFilters((p) => ({ ...p, page: pageValue }));
 				}}
 				showPagination
-				renderDropdown={({ vendorId }) => renderDropdown(vendorId)}
+				renderDropdown={({ vendorId }) => RenderDropdown(vendorId)}
 			/>
 
 			{showModal && (

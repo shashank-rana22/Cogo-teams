@@ -10,6 +10,7 @@ import populateControls from '../utils/populate-controls';
 function useStepExecution({
 	task = {},
 	stepConfig = {},
+	getApisData = {},
 	selectedMail = {},
 }) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
@@ -20,6 +21,7 @@ function useStepExecution({
 		selectedMail,
 		populatedControls,
 		task,
+		getApisData,
 		servicesList,
 	});
 

@@ -9629,6 +9629,11 @@ const partner = {
 
 	campaign_dashboard: [
 		{
+			api          : 'create_campaign_duplicate',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
 			api          : 'get_segment_verification_stats',
 			access_type  : 'private',
 			service_name : 'segmentation',
@@ -12447,6 +12452,11 @@ const partner = {
 			api          : 'list_checkouts',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'get_tickets_configuration_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
 		},
 		{
 			api          : 'get_user',
