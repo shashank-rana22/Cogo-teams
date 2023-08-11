@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@cogoport/maps':
         specifier: ^1.0.3
-        version: 1.0.3(@cogoport/icons-react@1.0.86)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.3(@cogoport/icons-react@1.0.90)(react-dom@18.2.0)(react@18.2.0)
       '@sentry/nextjs':
         specifier: ^7.54.0
         version: 7.54.0(next@13.1.6)(react@18.2.0)
@@ -505,8 +505,8 @@ importers:
   common/globalization:
     dependencies:
       '@cogoport/icons-react':
-        specifier: ^1.0.72
-        version: 1.0.79(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.0.90
+        version: 1.0.90(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/utils':
         specifier: ^1.2.2
         version: 1.2.10
@@ -5304,6 +5304,17 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /@cogoport/icons-react@1.0.90(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Mbz4G6XgYH/G91TtjS0OaPAfdisPseMuW0LBfcANWCJV3TsGdIkU2IM80WsEUvzwanP6CCqrf++Vbd4cqxS5Fg==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.90
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /@cogoport/icons@1.0.79:
     resolution: {integrity: sha512-H09ulr+sVqqwHCjY49o5P/ksMLcSQrsICJId6mfwGw3nqWKA0I9d8qsk5IU5GzW6/sUmhRnI4IsW5w0bGRtSuw==}
     dev: false
@@ -5314,6 +5325,10 @@ packages:
 
   /@cogoport/icons@1.0.86:
     resolution: {integrity: sha512-FRPjFYghq+wAtdx5g6vRuai+bScXD7yKSSr8a5eYT3QzP+F573zWBhMaim28p2r6W/aJzz2tjQDMMrtCROJJeg==}
+    dev: false
+
+  /@cogoport/icons@1.0.90:
+    resolution: {integrity: sha512-YqzWKAjq5NAOgIcVSkMhPz+wKk90euViwbQ/4qNk4lAbm3wbvwn01BrGOamivE7M1OLeR4Rii7Gb1YDU57L7Jw==}
     dev: false
 
   /@cogoport/maps@1.0.3(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0):
@@ -5352,6 +5367,20 @@ packages:
       react-dom: ^18.2.0
     dependencies:
       '@cogoport/icons-react': 1.0.86(react-dom@18.2.0)(react@18.2.0)
+      leaflet: 1.9.4
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-leaflet: 4.2.1(leaflet@1.9.4)(react-dom@18.2.0)(react@18.2.0)
+    dev: false
+
+  /@cogoport/maps@1.0.3(@cogoport/icons-react@1.0.90)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-nWNhGesbEQNqBGy1KO9O85eU04zcVaIVvuHXcq7CKa+pij74yU3BKB4PTBvoSrbLHAgIctxe8KOQVzBVgTLl/w==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.90(react-dom@18.2.0)(react@18.2.0)
       leaflet: 1.9.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
