@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -26,9 +25,6 @@ function ViewAllConfigurations() {
 	if (configCardLoading) 	{
 		return (<LoadingState />);
 	}
-	// const handleClick = () => (
-	// 	router.push('/allocation/kam-expertise/components/ExpertiseConfigurations/viewConfigurations')
-	// );
 
 	return (
 		<div>
@@ -59,7 +55,7 @@ function ViewAllConfigurations() {
 				) : (
 					<>
 						{ list.map((item) => (
-							<ConfigurationCard {...item} />
+							<ConfigurationCard key={item?.id} {...item} />
 						))}
 					</>
 				)}

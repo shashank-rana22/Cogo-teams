@@ -1,15 +1,23 @@
-const controls = [
+const getControls = (partnerId) => [
 	{
 		name        : 'manager_ids',
 		label       : 'By Manager Name',
 		placeholder : 'select',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users',
+		asyncKey    : 'partner_users_ids',
 		valueKey    : 'user_id',
 		initialCall : true,
 		caret       : true,
 		multiple    : true,
 		isClearable : true,
+		params      : {
+			filters: {
+				status               : 'active',
+				partner_id           : partnerId,
+				partner_entity_types : ['cogoport'],
+			},
+			page_limit: 10,
+		},
 	},
 	{
 		name        : 'role_ids',
@@ -74,4 +82,4 @@ const controls = [
 	},
 ];
 
-export default controls;
+export default getControls;

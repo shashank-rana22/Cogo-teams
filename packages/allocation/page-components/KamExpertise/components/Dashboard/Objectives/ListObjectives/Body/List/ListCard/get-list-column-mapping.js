@@ -10,8 +10,7 @@ import {
 } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-// import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../../configurations/objective-status-color-mapping';
-
+import getActionMapping from './action-mapping';
 import styles from './styles.module.css';
 
 const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
@@ -24,41 +23,10 @@ const getListColumnMapping = (props) => {
 		setListObjectivesParams = () => { },
 	} = props;
 
-	const handleGenerateList = (id) => {
-		setShowModal(() => ({
-			id,
-			action: 'generate',
-		}));
-	};
-
-	const handleViewList = (id, name) => {
-		setShowModal(() => ({
-			id,
-			action          : 'view',
-			objective_title : name,
-		}));
-	};
-
-	const handleDeleteList = (id) => {
-		setShowModal(() => ({
-			id,
-			action: 'delete',
-		}));
-	};
-
-	const handleSortAsc = () => {
-		setListObjectivesParams((pv) => ({
-			...pv,
-			sort_type: 'asc',
-		}));
-	};
-
-	const handleSortDesc = () => {
-		setListObjectivesParams((pv) => ({
-			...pv,
-			sort_type: 'desc',
-		}));
-	};
+	const actionsMapping = getActionMapping({
+		setShowModal,
+		setListObjectivesParams,
+	});
 
 	const LIST_COLUMN_MAPPING = [
 		{
@@ -92,8 +60,8 @@ const getListColumnMapping = (props) => {
 			),
 			accessor: ({ name, objective_type }) => (
 				<>
-					<div>{name || '___'}</div>
-					<Pill color="#CFEAED" size="md">{startCase(objective_type || '___')}</Pill>
+					<div>{name || '--'}</div>
+					<Pill color="#CFEAED" size="md">{startCase(objective_type || '--')}</Pill>
 				</>
 			),
 		},
@@ -165,13 +133,13 @@ const getListColumnMapping = (props) => {
 				<div className={styles.created_at}>
 					<div className={styles.top_heading}> CREATION</div>
 					<div className={styles.icon_container}>
-						<IcMArrowRotateUp fill="#CECECE" onClick={handleSortAsc} />
-						<IcMArrowRotateDown fill="#CECECE" onClick={handleSortDesc} />
+						<IcMArrowRotateUp fill="#CECECE" onClick={() => actionsMapping?.handleSortAsc()} />
+						<IcMArrowRotateDown fill="#CECECE" onClick={() => actionsMapping?.handleSortDesc()} />
 					</div>
 				</div>
 			),
-			accessor: ({ updated_at }) => (updated_at ? formatDate({
-				date       : updated_at,
+			accessor: ({ created_at }) => (created_at ? formatDate({
+				date       : created_at,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
 			}) : '___'),
@@ -185,7 +153,7 @@ const getListColumnMapping = (props) => {
 					<Button
 						onClick={(e) => {
 							e.stopPropagation();
-							handleGenerateList(id);
+							actionsMapping?.handleGenerateList(id);
 						}}
 						type="button"
 						themeType="secondary"
@@ -199,7 +167,7 @@ const getListColumnMapping = (props) => {
 							<Button
 								onClick={(e) => {
 									e.stopPropagation();
-									handleViewList(id, name);
+									actionsMapping?.handleViewList(id, name);
 								}}
 								type="button"
 								themeType="secondary"
@@ -209,7 +177,7 @@ const getListColumnMapping = (props) => {
 							<Button
 								onClick={(e) => {
 									e.stopPropagation();
-									handleDeleteList(id);
+									actionsMapping?.handleDeleteList(id);
 								}}
 								type="button"
 								themeType="secondary"

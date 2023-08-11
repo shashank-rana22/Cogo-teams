@@ -1,8 +1,9 @@
 import { Button } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import { getFieldController } from '../../../../../../../../../../../../common/Form/getFieldController';
-import controls from '../../../../../../../../../../configurations/get-kam-list-filter-controls';
+import getControls from '../../../../../../../../../../configurations/get-kam-list-filter-controls';
 
 import styles from './styles.module.css';
 
@@ -14,6 +15,8 @@ function FilterForm({
 	setShowFilterPopover = () => { },
 	setValue = () => { },
 }) {
+	const { id: partnerId = '' } = useSelector((state) => state.profile.partner);
+
 	const onSubmit = async (values) => {
 		setParams((pv) => ({
 			...pv,
@@ -28,8 +31,10 @@ function FilterForm({
 		setShowFilterPopover(false);
 	};
 
+	const newControls = getControls(partnerId);
+
 	const onClickCancel = () => {
-		controls.forEach((item) => {
+		newControls.forEach((item) => {
 			setValue(`${item.name}`, '');
 		});
 
@@ -44,7 +49,7 @@ function FilterForm({
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			{controls.map((element) => {
+			{newControls.map((element) => {
 				const Element = getFieldController(element.type);
 
 				return (

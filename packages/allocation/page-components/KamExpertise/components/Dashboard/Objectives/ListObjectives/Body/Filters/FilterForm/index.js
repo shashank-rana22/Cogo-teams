@@ -12,6 +12,7 @@ function FilterForm({
 	errors = {},
 	setParams = () => { },
 	setShowFilterPopover = () => { },
+	setValue = () => { },
 }) {
 	const onSubmit = async (values) => {
 		setParams((pv) => ({
@@ -25,10 +26,17 @@ function FilterForm({
 	};
 
 	const onClickCancel = () => {
+		controls.forEach((item) => {
+			setValue(`${item.name}`, '');
+		});
+
 		setParams((pv) => ({
 			...pv,
-			filters: {},
+			filters: {
+				status: pv?.filters?.status,
+			},
 		}));
+
 		setShowFilterPopover(false);
 	};
 

@@ -1,16 +1,35 @@
 import { Button, Input, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
+
+import controls from '../../../../../../configurations/get-list-objectives-filter-controls';
 
 import FilterForm from './FilterForm';
 import styles from './styles.module.css';
+
+const isFiltersEmpty = ({ filterVals, controls: newControls }) => {
+	let show = false;
+
+	const controlNames = newControls.map((item) => item?.name);
+
+	controlNames.forEach((elem) => {
+		if (!isEmpty(filterVals[elem])) {
+			show = true;
+		}
+	});
+
+	return show;
+};
 
 function Filters({
 	params = {},
 	setParams = () => { },
 	debounceQuery = () => { },
 }) {
+	const showRedDot = isFiltersEmpty({ filterVals: params?.filters, controls });
+
 	const [showFilterPopover, setShowFilterPopover] = useState(false);
 
 	const [searchKey, setsearchKey] = useState('');
@@ -20,6 +39,7 @@ function Filters({
 		handleSubmit = () => { },
 		formState: { errors = {} },
 		reset,
+		setValue,
 	} = useForm();
 
 	const handleChange = (v) => {
@@ -53,6 +73,7 @@ function Filters({
 						params={params}
 						setParams={setParams}
 						setShowFilterPopover={setShowFilterPopover}
+						setValue={setValue}
 					/>
 				)}
 			>
@@ -65,9 +86,9 @@ function Filters({
 					>
 						Filter
 						<IcMFilter style={{ marginLeft: '8px' }} />
-						{/* {!isEmpty(formValues) ? (
+						{showRedDot ? (
 							<div className={styles.red_dot} />
-						) : null} */}
+						) : null}
 					</Button>
 				</div>
 			</Popover>

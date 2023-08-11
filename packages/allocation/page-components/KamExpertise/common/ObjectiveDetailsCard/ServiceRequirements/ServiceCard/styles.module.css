@@ -13,7 +13,7 @@
 }
 
 .loader {
-	width: "50%";
+	width: 50%;
 	height: 200px;
 }
 
@@ -49,7 +49,6 @@
 
 .sub_title {
 	font-size: 14px;
-	font-style: normal;
 	font-weight: 600;
 	color: #4f4f4f;
 	text-decoration-line: underline;

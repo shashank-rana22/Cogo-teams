@@ -1,15 +1,35 @@
 import { Button, Input, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
+
+import getControls from '../../../../../../../../../configurations/get-kam-list-filter-controls';
 
 import FilterForm from './FilterForm';
 import styles from './styles.module.css';
 
+const isFiltersEmpty = ({ filterVals, controls }) => {
+	let show = false;
+
+	const controlNames = controls.map((item) => item?.name);
+
+	controlNames.forEach((elem) => {
+		if (!isEmpty(filterVals[elem])) {
+			show = true;
+		}
+	});
+
+	return show;
+};
+
 function Filters({
+	params = {},
 	setParams = () => { },
 	debounceQuery = () => { },
 }) {
+	const showRedDot = isFiltersEmpty({ filterVals: params?.filters, controls: getControls() });
+
 	const [showFilterPopover, setShowFilterPopover] = useState(false);
 
 	const [searchKey, setsearchKey] = useState('');
@@ -52,6 +72,9 @@ function Filters({
 				>
 					Filter
 					<IcMFilter style={{ marginLeft: '8px' }} />
+					{showRedDot ? (
+						<div className={styles.red_dot} />
+					) : null}
 				</Button>
 			</Popover>
 

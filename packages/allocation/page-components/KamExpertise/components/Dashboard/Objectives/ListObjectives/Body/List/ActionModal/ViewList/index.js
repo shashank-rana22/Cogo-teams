@@ -25,14 +25,14 @@ function ViewList({
 	});
 
 	const {
-		list: KAMsList = [],
+		list: kamsList = [],
 		total_count,
 		page_limit,
 	} = data || {};
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({
 		loading,
-		KAMsList,
+		kamsList,
 	});
 
 	return (
@@ -75,7 +75,7 @@ function ViewList({
 				debounceQuery={debounceQuery}
 			/>
 
-			{isEmpty(KAMsList) ? (
+			{isEmpty(kamsList) ? (
 				<div className={styles.empty_state}>
 					<EmptyState />
 				</div>
@@ -85,7 +85,7 @@ function ViewList({
 						LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
 					/>
 
-					{(KAMsList || []).map((item) => (
+					{(kamsList || []).map((item) => (
 						<List
 							key={item}
 							item={item}

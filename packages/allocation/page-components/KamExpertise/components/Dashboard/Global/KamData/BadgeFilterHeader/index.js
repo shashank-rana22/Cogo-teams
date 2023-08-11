@@ -35,8 +35,9 @@ function BadgeFilterHeader(props) {
 						disabled={leaderboardLoading}
 						params={{
 							filters: {
-								status     : 'active',
-								partner_id : id,
+								status               : 'active',
+								partner_id           : id,
+								partner_entity_types : ['cogoport'],
 							},
 							page_limit: 10,
 						}}
@@ -98,14 +99,9 @@ function BadgeFilterHeader(props) {
 						debounceQuery={debounceQuery}
 					/>
 				</div>
-				{/* <Tooltip
-					placement="bottom"
-					content="Csv download"
-				> */}
 				<div className={styles.download_container}>
 					<IcMDownload width="20px" height="20px" />
 				</div>
-				{/* </Tooltip> */}
 			</div>
 		</div>
 	);

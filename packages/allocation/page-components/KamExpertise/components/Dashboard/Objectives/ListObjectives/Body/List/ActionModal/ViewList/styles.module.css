@@ -6,15 +6,12 @@
 
 .header_text {
 	font-size: 18px;
-	font-style: normal;
 	font-weight: 500;
 	color: #221f20;
 }
 
 .description_text {
 	font-size: 12px;
-	font-style: normal;
-	font-weight: 400;
 	color: #221f20;
 }
 
@@ -83,8 +80,6 @@
 
 .kam_role {
 	font-size: 12px;
-	font-style: normal;
-	font-weight: 400;
 	color: #828282;
 }
 

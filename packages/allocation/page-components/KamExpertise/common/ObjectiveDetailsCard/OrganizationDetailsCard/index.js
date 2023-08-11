@@ -35,8 +35,6 @@ function OrganizationDetailsCard(props) {
 
 					const locationItem = organizationDetails[key];
 
-					// if (isEmpty(locationItem)) return null;
-
 					return (
 						<div key={key} className={styles.label_value_cotainer}>
 							<div className={styles.label}>

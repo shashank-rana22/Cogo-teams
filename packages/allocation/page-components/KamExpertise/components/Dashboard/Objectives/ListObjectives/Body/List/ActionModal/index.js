@@ -1,5 +1,4 @@
 import { Button, Modal } from '@cogoport/components';
-import { IcMDownload } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
 import useDeleteObjectivesKAMList from '../../../../../../../hooks/useDeleteObjectivesKAMList';
@@ -9,7 +8,7 @@ import Generate from './Generate';
 import styles from './styles.module.css';
 import ViewList from './ViewList';
 
-const MODAL_COMPONENT_MAPPING = ({
+const modalComponentMapping = ({
 	handleCloseActionModal = () => { },
 	loader,
 	handleDeleteKAMsList = () => { },
@@ -32,12 +31,6 @@ const MODAL_COMPONENT_MAPPING = ({
 		Component        : ViewList,
 		customModalStyle : { minHeight: '400px' },
 		actionButtons    : [
-			{
-				prefix    : <IcMDownload height={16} width={16} />,
-				text      : 'Download List',
-				themeType : 'secondary',
-				// onClickFun : handleClose,
-			},
 			{
 				text       : 'Close List',
 				themeType  : 'accent',
@@ -99,7 +92,7 @@ function ActionModal({
 		modalSize = 'lg',
 		actionButtons = [],
 		customModalStyle = {},
-	} = MODAL_COMPONENT_MAPPING({
+	} = modalComponentMapping({
 		handleCloseActionModal,
 		loader,
 		handleDeleteKAMsList,

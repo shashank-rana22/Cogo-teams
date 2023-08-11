@@ -1,9 +1,9 @@
-/* eslint-disable no-magic-numbers */
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 function useGetKamExpertiseDashboard() {
-	const [kamLevel, setKamLevel] = useState(0);
+	const [kamLevel, setKamLevel] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
 	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : '/kam_expertise_dashboard',
