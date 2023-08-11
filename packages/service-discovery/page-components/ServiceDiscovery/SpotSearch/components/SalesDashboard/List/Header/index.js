@@ -46,7 +46,6 @@ function Header({
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.search_bar}>
 				{searchBar}
 			</div>

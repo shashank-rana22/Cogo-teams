@@ -9,9 +9,6 @@ import TermsConditions from './BottomTabs/TermsConditions';
 import DetentionDemurrage from './DetentionDemurrage';
 import styles from './styles.module.css';
 
-const BOLD_FONT_WEIGHT = 700;
-const MEDIUM_FONT_WEIGHT = 500;
-
 function DetailFooter({ rateCardData = {}, detail = {}, refetchSearch = () => {}, isCogoAssured = false }) {
 	const [activeTab, setActiveTab] = useState('');
 
@@ -62,8 +59,8 @@ function DetailFooter({ rateCardData = {}, detail = {}, refetchSearch = () => {}
 							<span
 								role="presentation"
 								key={item}
-								className={styles.other_details_tag}
-								style={{ fontWeight: activeTab === item ? BOLD_FONT_WEIGHT : MEDIUM_FONT_WEIGHT }}
+								className={cl`${styles.other_details_tag} 
+								${activeTab === item ? styles.selected : {}}`}
 								onClick={() => {
 									if (activeTab === item) {
 										setActiveTab('');

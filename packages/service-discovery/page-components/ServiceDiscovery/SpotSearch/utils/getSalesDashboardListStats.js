@@ -2,6 +2,7 @@ const DEFAULT_VALUE = 0;
 
 const getSalesDashboardListStats = ({ data, rest, stats }) => {
 	let totalListCount = 0;
+
 	Object.keys(data?.[rest?.stats_key] || {}).forEach((key) => {
 		const tempObj = data?.[rest?.stats_key] || {};
 		totalListCount += tempObj[key];

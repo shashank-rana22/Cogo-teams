@@ -22,27 +22,23 @@ function ExtraFilters({
 	serviceType = '',
 	setFilters = () => {},
 	setServiceType = () => {},
-	type = '',
 }) {
 	return (
 		<div className={styles.container}>
-			{type !== 'allocation_requests' ? (
-				<div className={styles.service_select}>
-					<Select
-						placeholder="Select Service"
-						style={{ marginRight: 8 }}
-						size="sm"
-						value={serviceType}
-						onChange={(val) => {
-							setServiceType(val);
-							setFilters((previousFilters) => ({ ...previousFilters, page: 1 }));
-						}}
-						options={SERVICES}
-						isClearable
-					/>
-				</div>
-			) : null}
-
+			<div className={styles.service_select}>
+				<Select
+					placeholder="Select Service"
+					style={{ marginRight: 8 }}
+					size="sm"
+					value={serviceType}
+					onChange={(val) => {
+						setServiceType(val);
+						setFilters((previousFilters) => ({ ...previousFilters, page: 1 }));
+					}}
+					options={SERVICES}
+					isClearable
+				/>
+			</div>
 		</div>
 	);
 }

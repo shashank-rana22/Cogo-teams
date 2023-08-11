@@ -25,6 +25,10 @@ function Schedules({
 		setSelectedWeek,
 	});
 
+	if (isEmpty(schedules)) {
+		return null;
+	}
+
 	return (
 		<div className={styles.container}>
 			<span className={styles.heading}>Available Schedules for your search</span>
