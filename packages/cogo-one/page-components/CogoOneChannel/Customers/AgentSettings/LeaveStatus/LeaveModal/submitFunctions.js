@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { addHours } from '@cogoport/utils';
 
-import getWeekDates from '../../../../utils/getWeekDates';
+import getWeekDates from '../../../../../../utils/getWeekDates';
 
 const ADD_HOURS_BY_ONE = 1;
 const ADD_HOURS_BY_FOUR = 4;

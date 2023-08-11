@@ -10,7 +10,7 @@ import { IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { OFFLINE_STATUS_OPTIONS, OFFLINE_REASONS_OPTIONS } from '../../../../constants';
+import { OFFLINE_STATUS_OPTIONS, OFFLINE_REASONS_OPTIONS } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 import { createSubmit, getEndDayTime } from './submitFunctions';
@@ -133,7 +133,7 @@ function InactiveModal({
 						size="md"
 						themeType="tertiary"
 						onClick={reset}
-						disabled={loading || checks}
+						disabled={loading}
 					>
 						<IcMRefresh
 							width={16}
