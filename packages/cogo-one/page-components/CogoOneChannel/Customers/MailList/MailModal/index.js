@@ -24,7 +24,7 @@ function MailModal({
 		activeMailAddress,
 		emailState,
 		setEmailState,
-		userMails,
+		userMails = [],
 		viewType,
 		userEmailAddress,
 	} = mailProps;
@@ -56,10 +56,10 @@ function MailModal({
 	});
 
 	const userActiveMails = (
-		[
+		[...new Set([
 			...getUserActiveMails({ userEmailAddress, viewType }),
-			...userMails,
-		]
+			...(userMails || []),
+		])]
 	).map(
 		(curr) => ({ label: curr, value: curr }),
 	);

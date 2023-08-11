@@ -9,14 +9,10 @@ import mailFunction from '../../../../../../../utils/mailFunctions';
 import styles from './styles.module.css';
 import UploadedFiles from './UploadedFiles';
 
-const DEFAULT_VISIBLE_RECIEPIENTS = 1;
-
 const HEADER_TEXT_MAPPING = {
 	forward : 'Forwarding',
 	reply   : 'Replying to',
 };
-
-const DEFAULT_HEIGHT = 34;
 
 function FooterHead({
 	isEmail = false,
@@ -36,8 +32,6 @@ function FooterHead({
 	setMailActions = () => {},
 }) {
 	const [openReceipients, setOpenReceipents] = useState(false);
-
-	const visibleReceipients = MAIL_RECIEPIENTS_MAPPING.length * DEFAULT_VISIBLE_RECIEPIENTS;
 
 	const emailReceipientProps = mailFunction({
 		setErrorValue,
@@ -81,7 +75,6 @@ function FooterHead({
 								showControl={showControl}
 								key={mailActions?.type}
 							/>
-
 						</div>
 						<Button
 							size="md"
@@ -96,7 +89,7 @@ function FooterHead({
 							className={styles.reciepents}
 							style={{
 								height: openReceipients
-									? `${visibleReceipients * DEFAULT_HEIGHT}px` : '0',
+									? 'fit-content' : '0',
 							}}
 						>
 							{MAIL_RECIEPIENTS_MAPPING.map((eachItem) => {
