@@ -24,21 +24,20 @@ function Card({ data = {}, activeTab = '' }) {
 
 	const { stepperTab } = useContext(KamDeskContext);
 
-	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}
-		?${CONSTANTS.url_navigation_params}`;
+	let href = `${window.location.origin}/${router?.query?.partner_id}/shipments`;
+	href += `/${data?.id}?${CONSTANTS.url_navigation_params}`;
 
+	const handleCardClick = (e) => {
+		const newUrl = e.currentTarget.href;
 		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
 	};
 
 	return (
 		<>
-			<div
+			<a
+				href={href}
 				className={styles.container}
 				onClick={handleCardClick}
-				role="button"
-				tabIndex={0}
 			>
 				<div className={styles.header}>
 					<Header data={data} />
@@ -89,7 +88,7 @@ function Card({ data = {}, activeTab = '' }) {
 						)}
 					</div>
 				</div>
-			</div>
+			</a>
 			{(data?.shipment_type === 'rail_domestic_freight' && activeTab === 'eway_bill_extension') ? (
 				<Accordian data={data} />
 			) : null}

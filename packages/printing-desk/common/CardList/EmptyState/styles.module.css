@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 500px;
+	background: var(--color-secondary-5);
+	border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+	.container {
+		flex-direction: column;
+	}
+}
+
+.text {
+	color: var(--color-secondary-greyscale-4);
+}
+
+.image {
+	margin: 10px;
+}

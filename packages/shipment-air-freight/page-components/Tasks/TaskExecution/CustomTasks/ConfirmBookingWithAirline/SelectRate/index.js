@@ -1,6 +1,6 @@
 import EmptyState from '@cogoport/air-modules/common/EmptyState';
 import Layout from '@cogoport/air-modules/components/Layout';
-import { Button, Modal, Skeleton } from '@cogoport/components';
+import { Button, Modal, Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -17,7 +17,7 @@ import ConfirmModal from './ConfirmModal';
 import styles from './styles.module.css';
 
 const SHOW_CONTENT = 'Please Revert Rate First';
-const NUMBER_OF_SKELETON = 6;
+const NUMBER_OF_PLACEHOLDER = 6;
 const LIST_PREFERENCE_RATE_STEP = 1;
 const CONFIRM_PREFERENCE_STEP = 2;
 function SelectRate({
@@ -25,11 +25,16 @@ function SelectRate({
 	onCancel = () => {},
 	refetch = () => {},
 	shipmentData = {},
+	primary_service = {},
 }) {
 	const [step, setStep] = useState(LIST_PREFERENCE_RATE_STEP);
 	const [selectedCard, setSelectedCard] = useState(null);
 
 	const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+	const mainServiceData = (shipmentData?.all_services || []).find((service) => (
+		service?.service_type === 'air_freight_service'
+	));
 
 	const {
 		control,
@@ -64,7 +69,6 @@ function SelectRate({
 		(item) => item?.booking_confirmation_status === 'pending' && item?.is_email_sent,
 	);
 
-	// const serviceProvidersData = [];
 	const SERVICE_PROVIDERS_DATA = [];
 	(list || []).forEach((itm) => {
 		const {
@@ -118,18 +122,20 @@ function SelectRate({
 							serviceProvidersData={SERVICE_PROVIDERS_DATA}
 							refetchList={getList}
 							setStep={setStep}
+							primary_service={primary_service}
+							mainServiceData={mainServiceData}
 						/>
 					) : (
 						<>
 							<div>
 								{loading ? (
-									<div className={styles.skeleton_wrap}>
-										{Array.from(Array(NUMBER_OF_SKELETON).keys()).map((index) => (
-											<Skeleton
+									<div className={styles.placeholder_wrap}>
+										{Array.from(Array(NUMBER_OF_PLACEHOLDER).keys()).map((index) => (
+											<Placeholder
 												key={index}
 												width="100%"
 												height="20px"
-												style={{ marginBottom: '10px' }}
+												margin="0px 0px 20px 0px"
 											/>
 										))}
 									</div>
@@ -152,6 +158,8 @@ function SelectRate({
 												serviceProvidersData={SERVICE_PROVIDERS_DATA}
 												refetchList={getList}
 												setStep={setStep}
+												primary_service={primary_service}
+												mainServiceData={mainServiceData}
 											/>
 										))}
 									</>

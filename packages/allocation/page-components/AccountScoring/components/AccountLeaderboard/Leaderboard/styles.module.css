@@ -4,6 +4,21 @@
 	color: #4f4f4f;
 }
 
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 16px;
+}
+
+.table_container {
+	margin: 16px 0;
+}
+
+.bulk_container {
+	display: flex;
+	justify-content: space-between;
+}
+
 .table {
 	background-color: #fff;
 
@@ -27,4 +42,9 @@
 .pagination_container {
 	display: flex;
 	justify-content: flex-end;
+}
+
+.bulk_deallocate_toggle {
+	display: flex;
+	align-items: center;
 }

@@ -274,6 +274,7 @@ function Element({
 						className={className}
 						style={style as CSSProperties}
 						value={value}
+						name={name}
 						{...rest}
 					/>
 				);

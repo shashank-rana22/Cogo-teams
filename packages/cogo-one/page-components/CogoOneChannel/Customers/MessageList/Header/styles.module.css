@@ -1,0 +1,137 @@
+.each_tab_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 16%;
+	padding: 5px 7px;
+	margin-right: 4px;
+	overflow-x: hidden;
+	cursor: pointer;
+	border: 1px solid #b0b0b0;
+	border-radius: 4px;
+	transition: width 0.3s ease-in-out;
+
+	.label {
+		display: none;
+	}
+
+	&:hover {
+		width: 34%;
+
+		text {
+			display: block;
+		}
+	}
+}
+
+.active_tab_styles {
+	width: 34%;
+	border: 1px solid #ee3425;
+
+	.label {
+		display: block;
+		margin-left: 5px;
+		font-size: 12px;
+		color: #ee3425;
+	}
+
+	svg {
+		fill: #ee3425;
+	}
+}
+
+.container {
+	width: 100%;
+}
+
+.parent_tab_div {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.filters_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 10px;
+
+	:global {
+		.ui_toggle_container.ui_ps_size_md .ui_switch {
+			right: 51px;
+		}
+
+		.ui_toggle_container.ui_toggle_inside .ui_inner::before {
+			display: flex;
+			align-items: center;
+			font-size: 12px;
+			content: "Active";
+			background-color: #ee3425;
+		}
+
+		.ui_toggle_container.ui_toggle_inside .ui_inner::after {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			float: right;
+			font-size: 12px;
+			color: #fff;
+			content: "Inactive";
+			background-color: #f8aea8;
+		}
+
+		.ui_toggle_container.ui_ps_size_md .ui_toggle_switch {
+			width: 75px;
+		}
+
+		input[type="checkbox"]:checked + .ui_label_radius .ui_switch {
+			right: 0;
+		}
+	}
+}
+
+.filter_icon {
+	position: relative;
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+}
+
+.source_types {
+	display: flex;
+	align-items: center;
+	width: calc(100% - 44px);
+}
+
+.styled_popover {
+	padding: 0;
+
+	:global {
+		.tippy-content {
+			width: 260px;
+			height: 450px;
+			padding: 0;
+
+			>div {
+				height: 100%;
+			}
+		}
+	}
+}
+
+.filters_applied {
+	position: absolute;
+	top: -2px;
+	right: -2px;
+	width: 10px;
+	height: 10px;
+	margin-left: 3px;
+	background: #f68b21;
+	border-radius: 8px;
+}
+
+.icon_styles {
+	width: 20px;
+	height: 20px;
+}

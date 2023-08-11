@@ -1,0 +1,18 @@
+.text {
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}
+
+.element {
+	margin-bottom: 8px;
+
+	:global {
+		.ui_select_display_container {
+			margin-right: 8px;
+		}
+	}
+}
+
+.label {
+	margin-bottom: 2px;
+}

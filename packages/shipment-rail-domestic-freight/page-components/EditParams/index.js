@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 import checkValuesChanged from './utils/checkValuesChanged';
 import getUpdateBookingParameterPaylaod from './utils/getUpdateBookingParameterPayload';
 
-export default function EditParams({ setShow, serviceData }) {
+export default function EditParams({ setShow = () => {}, serviceData = {} }) {
 	const { servicesList, shipment_data, refetch, refetchServices } = useContext(ShipmentDetailContext);
 	const closeModal = () => setShow(false);
 

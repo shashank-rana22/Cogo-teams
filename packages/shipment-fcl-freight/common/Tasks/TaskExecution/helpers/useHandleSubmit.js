@@ -7,6 +7,7 @@ import { useContext, useState } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../hooks/useUpdateShipmentCogoid';
 import extraApiPayload from '../utils/extra-api-payload';
+import formatDataForCargoDetail from '../utils/format-cargo-data-payload';
 import formatRawValues from '../utils/format-raw-payload';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
@@ -18,6 +19,8 @@ const SHIPMENT_REFETCH_TASKS = [
 	'mark_confirmed',
 	'upload_draft_bill_of_lading',
 	'update_airway_bill_number',
+	'mark_vessel_departed',
+	'mark_vessel_arrived',
 	...ROLLOVER_TASKS,
 ];
 
@@ -28,10 +31,10 @@ function useHandleSubmit({
 	onCancel = () => {},
 	refetch = () => {},
 	currentStep = 0,
-	isLastStep = 0,
+	isLastStep = false,
 	getApisData,
 }) {
-	const [isLoading, setIsLoading] = useState();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const {
 		shipment_data,
@@ -40,8 +43,14 @@ function useHandleSubmit({
 		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
 
+	let endPoint = finalConfig.end_point ?? 'update_shipment_pending_task';
+
+	if (endPoint === 'create_shipment_document') {
+		endPoint = 'fcl_freight/create_document';
+	}
+
 	const [{ loading }, trigger] = useRequest({
-		url    : finalConfig.end_point || 'update_shipment_pending_task',
+		url    : endPoint,
 		method : 'POST',
 	}, { manual: true });
 
@@ -85,10 +94,15 @@ function useHandleSubmit({
 
 		let finalPayload = { id: task?.id, data: payload };
 
+		if (task?.task === 'mark_confirmed' && task?.state === 'shipment_received') {
+			finalPayload = { ...finalPayload, cargo_detail: formatDataForCargoDetail({ dataToSend, rawValues }) };
+		}
+
 		if (finalConfig?.end_point) {
 			finalPayload = extraApiPayload(
 				rawValues,
-				finalConfig?.end_point,
+				endPoint,
+				task,
 			);
 
 			finalPayload = {

@@ -3,7 +3,7 @@ import React from 'react';
 
 import ViewCtcBreakupContent from './ViewCtcBreakupContent';
 
-function ViewCtcBreakup({ viewCtcBreakupModal, setViewCtcBreakupModal }) {
+function ViewCtcBreakup({ viewCtcBreakupModal, setViewCtcBreakupModal, is_offer_letter_applicable }) {
 	const { metadata } = viewCtcBreakupModal || {};
 
 	const onClose = () => {
@@ -21,6 +21,7 @@ function ViewCtcBreakup({ viewCtcBreakupModal, setViewCtcBreakupModal }) {
 			<Modal.Body>
 				<ViewCtcBreakupContent
 					metadata={metadata}
+					is_offer_letter_applicable={is_offer_letter_applicable}
 				/>
 			</Modal.Body>
 			<Modal.Footer>

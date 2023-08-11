@@ -5,10 +5,14 @@ import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
 import getColumns from './getColumns';
+import useGetZipFile from './useGetZipFile';
 
 const INITIAL_PAGE = 1;
 
-const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
+const useTableView = ({
+	search, btnloading, updateEmployeeStatus, bulkAction,
+	pageLimit, selectedIds, setSelectedIds,
+}) => {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('active');
 	const [page, setPage] = useState(INITIAL_PAGE);
@@ -33,13 +37,34 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 						joining_before : filters?.joining_date?.endDate || undefined,
 						designation    : filters?.roles || undefined,
 					},
-					page,
+					page       : search ? INITIAL_PAGE : page,
+					page_limit : pageLimit,
 				},
 			});
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
-	}, [activeTab, search, trigger, page, filters]);
+	}, [activeTab, search, trigger, page, filters, pageLimit]);
+	const { list } = data || {};
+
+	const handleAllSelect = (e) => {
+		const { checked } = e.target;
+		if (checked) {
+			const ids = list.map((val) => val.id);
+			return setSelectedIds(ids);
+		}
+
+		return setSelectedIds([]);
+	};
+
+	const handleSelectId = (e, id) => {
+		const { checked } = e.target;
+		if (checked) { return setSelectedIds((prev) => ([...prev, id])); }
+		const filterArr = selectedIds.filter((val) => val !== id);
+		return setSelectedIds(filterArr);
+	};
 
 	useEffect(() => {
 		fetch();
@@ -52,11 +77,20 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 		);
 	};
 
+	const { downloadDocuments, loading:documentLoading } = useGetZipFile();
+
 	let columns = getColumns({
 		onClickNewJoinerColumn,
 		btnloading,
 		updateEmployeeStatus,
 		fetch,
+		downloadDocuments,
+		documentLoading,
+		bulkAction,
+		handleAllSelect,
+		handleSelectId,
+		selectedIds,
+		dataArr: list,
 	});
 
 	if (activeTab !== 'rejected_by_user') {

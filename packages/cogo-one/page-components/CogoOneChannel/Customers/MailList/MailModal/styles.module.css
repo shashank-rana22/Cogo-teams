@@ -1,7 +1,8 @@
 .styled_ui_modal_dialog {
+	top: 40px !important;
 	display: flex;
 	flex-direction: column;
-	max-height: 650px;
+	height: 80vh;
 	border-top: none !important;
 
 	:global {
@@ -12,14 +13,18 @@
 			width: 100%;
 		}
 
+		.ui_modal_header_container {
+			padding-bottom: 5px;
+		}
+
 		.ui_modal_close_button {
 			display: none !important;
 		}
 
 		.ui_modal_body_container {
 			max-height: unset !important;
+			padding-top: 0;
 			border-top: none !important;
-			border-bottom: none !important;
 		}
 	}
 }
@@ -29,7 +34,6 @@
 	align-items: center;
 	width: 100%;
 	padding: 10px 0;
-	margin-bottom: 6px;
 	border-bottom: 1px solid #e0e0e0;
 }
 
@@ -96,4 +100,19 @@
 	margin: 5px;
 	font-size: 13px;
 	font-weight: 500;
+}
+
+.select_container {
+	width: 80%;
+	margin-left: 10px;
+
+	:global {
+		.ui_select_container {
+			width: 100%;
+		}
+
+		.ui_select_options_container {
+			z-index: 9999;
+		}
+	}
 }

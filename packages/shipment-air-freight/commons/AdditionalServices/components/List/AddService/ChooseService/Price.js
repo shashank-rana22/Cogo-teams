@@ -11,7 +11,6 @@ function Price({
 	setAddRate,
 	refetch = () => {},
 	closeModal = () => {},
-	setShowPrice,
 }) {
 	const afterRequestRate = () => {
 		closeModal();
@@ -69,15 +68,6 @@ function Price({
 				disabled={loading}
 			>
 				{isSeller ? 'Add Rate' : 'Request Rate'}
-			</Button>
-			<Button
-				themeType="secondary"
-				onClick={async (e) => {
-					e.stopPropagation();
-					setShowPrice({ item });
-				}}
-			>
-				View Rates
 			</Button>
 		</div>
 	);

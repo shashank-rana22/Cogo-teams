@@ -27,10 +27,9 @@ function Status({
 	isIRNGenerated = false,
 	setAskNullify = () => {},
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
-
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,

@@ -18,7 +18,8 @@ import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
 function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) {
-	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
+	const { id:shipment_id, importer_exporter_id, importer_exporter, services, shipment_type } = shipment_data || {};
+	const { country_id } = importer_exporter || {};
 
 	const [addCompany, setAddCompany] = useState(null);
 	const [addPoc, setAddPoc] = useState(null);
@@ -108,6 +109,8 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 								setAddCompany={setAddCompany}
 								tradePartnerTrigger={tradePartnerTrigger}
 								shipment_id={shipment_id}
+								shipment_type={shipment_type}
+								country_id={country_id}
 								importer_exporter_id={importer_exporter_id}
 							/>
 						)}

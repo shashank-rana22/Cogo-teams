@@ -11,7 +11,7 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 		<div className={styles.container}>
 			<div className={styles.col}>
 				<div className={styles.left}>
-					<div className={styles.grey}>{isFclLocal && item?.trade_type === 'import' ? 'POD' : 'POL'}</div>
+					<div className={styles.grey}>{isFclLocal && stateProps?.activeTab === 'do' ? 'POD' : 'POL'}</div>
 					<Tooltip
 						interactive
 						maxWidth={500}

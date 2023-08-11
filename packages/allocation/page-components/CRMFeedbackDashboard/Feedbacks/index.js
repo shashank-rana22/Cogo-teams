@@ -8,6 +8,8 @@ import PrimaryTabs from './components/PrimaryTabs';
 import styles from './styles.module.css';
 
 function Feedbacks() {
+	const router = useRouter();
+
 	const {
 		general: {
 			query: {
@@ -24,8 +26,6 @@ function Feedbacks() {
 		organization_id,
 		status,
 	});
-
-	const router = useRouter();
 
 	return (
 		<>

@@ -3,37 +3,34 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 const EDUCATION_LEVEL_OPTIONS = [
 	{ label: '10th', value: '10th' },
 	{ label: '12th', value: '12th' },
-	{ label: 'B.Tech', value: 'B.Tech' },
-	{ label: 'M.Tech', value: 'M.Tech' },
-	{ label: 'MBA', value: 'MBA' },
-	{ label: 'B.Sc', value: 'B.Sc' },
-	{ label: 'M.Sc', value: 'M.Sc' },
-	{ label: 'B.Com', value: 'M.Com' },
-	{ label: 'BCA', value: 'BCA' },
-	{ label: 'MCA', value: 'MCA' },
 	{ label: 'Diploma', value: 'Diploma' },
+	{ label: 'Graduate degree', value: 'graduate_degree' },
+	{ label: 'Post Graduates degree', value: 'post_graduates_degree' },
+	{ label: 'Doctorate degree', value: 'doctorate_degree' },
 ];
 
-const getControls = [{
+const getControls = () => [{
 	name     : 'education_qualifications',
 	type     : 'fieldArray',
 	controls : [
 		{
-			name        : 'type',
-			label       : 'Education Level',
+			name        : 'education_level',
+			label       : 'Education Level*',
 			type        : 'createselect',
 			options     : EDUCATION_LEVEL_OPTIONS,
 			placeholder : 'Degree',
+			rules       : { required: 'This is required' },
 		},
 		{
 			name        : 'school_name',
-			label       : 'School Name',
+			label       : 'School Name*',
 			type        : 'input',
 			placeholder : 'Institution Name',
+			rules       : { required: 'This is required' },
 		},
 		{
 			name                  : 'started_at',
-			label                 : 'Start Date',
+			label                 : 'Start Date*',
 			type                  : 'date-select',
 			placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
@@ -41,7 +38,7 @@ const getControls = [{
 		},
 		{
 			name                  : 'ended_at',
-			label                 : 'End Date',
+			label                 : 'End Date*',
 			type                  : 'date-select',
 			placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
@@ -49,7 +46,7 @@ const getControls = [{
 		},
 		{
 			name        : 'score_type',
-			label       : 'CGPA/Percentage',
+			label       : 'CGPA/Percentage*',
 			type        : 'select',
 			placeholder : 'Select Mode',
 			rules       : { required: 'This is required' },
@@ -60,7 +57,7 @@ const getControls = [{
 		},
 		{
 			name        : 'score',
-			label       : 'Enter Score',
+			label       : 'Enter Score*',
 			type        : 'number',
 			placeholder : 'Enter your score',
 			rules       : { required: 'This is required' },
@@ -68,8 +65,8 @@ const getControls = [{
 		{
 			name        : 'degree',
 			label       : 'Degree',
-			type        : 'input',
-			placeholder : 'Enter Courses',
+			type        : 'select',
+			placeholder : 'Enter Degree',
 		},
 		{
 			name        : 'specialization',
@@ -79,7 +76,7 @@ const getControls = [{
 		},
 		{
 			name    : 'degree_proof',
-			label   : 'Upload Degree Proof',
+			label   : 'Upload Degree Proof/Passing Certificate*',
 			type    : 'fileUpload',
 			accept  : '.pdf',
 			maxSize : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],

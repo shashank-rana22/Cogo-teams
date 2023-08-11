@@ -1,0 +1,22 @@
+.uploader {
+	margin-top: 10px;
+}
+
+.error_msg {
+	color: #ee3425;
+}
+
+.btn_row {
+	display: flex;
+	margin-top: 24px;
+}
+
+.container {
+	padding: 30px 30px 0;
+}
+
+.upload_new_hire {
+	font-size: 15px;
+	font-weight: 100;
+	color: #6d6d6d;
+}

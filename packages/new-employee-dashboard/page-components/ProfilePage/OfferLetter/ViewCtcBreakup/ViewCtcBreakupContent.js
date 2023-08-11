@@ -1,3 +1,4 @@
+import { RadioGroup } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -8,17 +9,26 @@ import styles from './styles.module.css';
 const TOFIXED_NUMBER = 2;
 const DEFAULT_VALUE = 0;
 
-function ViewCtcBreakupContent({ metadata }) {
+const OPTIONS = [
+	{ value: 'yes', label: 'Yes', disabled: true },
+	{ value: 'no', label: 'No', disabled: true },
+];
+
+function ViewCtcBreakupContent({ metadata, is_offer_letter_applicable }) {
 	const {
 		joining_bonus_yearly,
 		joining_bonus_monthly,
 		performance_linked_variable_yearly,
 		performance_linked_variable_monthly,
 		retention_bonus_yearly,
+		retention_bonus_twice_yearly,
+		retention_bonus_thrice_yearly,
 		retention_bonus_monthly,
 		sign_on_bonus_monthly,
 		sign_on_bonus_yearly,
 	} = metadata || {};
+
+	const shareOfferLetter = (is_offer_letter_applicable) ? 'yes' : 'no';
 
 	const MAPPING = {
 		joining_bonus_monthly: {
@@ -32,9 +42,17 @@ function ViewCtcBreakupContent({ metadata }) {
 			monthlyValue : performance_linked_variable_monthly,
 		},
 		retention_bonus_monthly: {
-			heading      : 'Retention Bonus',
+			heading      : 'Retention Bonus after 1 year',
 			yearlyValue  : retention_bonus_yearly,
 			monthlyValue : retention_bonus_monthly,
+		},
+		retention_bonus_twiceyearly: {
+			heading     : 'Retention Bonus after 2 years',
+			yearlyValue : retention_bonus_twice_yearly,
+		},
+		retention_bonus_thriceyearly: {
+			heading     : 'Retention Bonus after 3 years',
+			yearlyValue : retention_bonus_thrice_yearly,
 		},
 		sign_on_bonus_monthly: {
 			heading      : 'Sign On Bonus',
@@ -46,6 +64,13 @@ function ViewCtcBreakupContent({ metadata }) {
 
 	return (
 		<div className={styles.table_container}>
+			<div className={styles.text_container}>
+				Share offer letter?
+				<RadioGroup
+					options={OPTIONS}
+					value={shareOfferLetter}
+				/>
+			</div>
 			<div className={styles.heading}>
 				<h4 style={{ width: '60%' }}>Components</h4>
 				<h4 style={{ width: '20%' }}>Annual Salary</h4>

@@ -1,0 +1,10 @@
+.action_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.cta_text {
+	position: relative;
+	display: flex;
+	cursor: pointer;
+}

@@ -1,5 +1,5 @@
-import { Popover } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
+import { Popover, Pagination } from '@cogoport/components';
+import { IcMFilter, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -12,12 +12,15 @@ import ListData from './ListData';
 import styles from './styles.module.css';
 import UploadDetailsModal from './UploadDetailsModal';
 
+const INIT_CNT = 0;
+
 function Documents({
-	activeMessageCard,
-	activeVoiceCard,
-	activeTab,
-	customerId,
-	documents_count,
+	activeMessageCard = {},
+	activeVoiceCard = {},
+	activeTab = 'message',
+	customerId = '',
+	documentsCount = 0,
+	formattedMessageData = {},
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState('');
@@ -32,13 +35,16 @@ function Documents({
 	const {
 		list = [],
 		loading = false,
-		documentsList = () => {},
+		getDocumentsList = () => {},
 		orgId = '',
 		userId = '',
 		userMobile = '',
 		leadUserId = '',
 		is_pan_uploaded = false,
 		is_gst_uploaded = false,
+		setPagination = () => {},
+		pagination,
+		totalDocumentCount = 0,
 	} = useListOmnichannelDocuments({
 		activeMessageCard,
 		activeVoiceCard,
@@ -50,25 +56,31 @@ function Documents({
 
 	useEffect(() => {
 		const listIds = list.map((i) => i.id);
-		if (!isEmpty(listIds) && documents_count > 0) {
+		if (!isEmpty(listIds) && documentsCount > INIT_CNT) {
 			documentCountUpdates({ listIds });
 		}
-	}, [documentCountUpdates, documents_count, list]);
+	}, [documentCountUpdates, documentsCount, list]);
 
 	const handleFilters = () => {
-		documentsList(filters);
+		getDocumentsList(filters);
 	};
 
 	const handleReset = () => {
 		setFilters('');
-		documentsList();
+		getDocumentsList();
 	};
 
 	return (
 		<>
 			<div className={styles.header}>
-				<div className={styles.title}>Documents</div>
-				<div className={styles.filter_icon}>
+				<div className={styles.title}>
+					Documents
+				</div>
+				<div className={styles.icons_container}>
+					<IcMRefresh
+						className={styles.refresh_icon}
+						onClick={() => getDocumentsList(filters)}
+					/>
 					<Popover
 						placement="left"
 						disabled={loading}
@@ -85,12 +97,12 @@ function Documents({
 						onClickOutside={() => setFilterVisible(false)}
 					>
 						<IcMFilter
-							width={20}
-							height={20}
+							className={styles.filter_icon}
 							onClick={() => setFilterVisible(!filterVisible)}
 						/>
+
 					</Popover>
-					{!isEmpty(filters) && <div className={styles.filters_applied} />}
+					{filters && <div className={styles.filters_applied} />}
 				</div>
 			</div>
 
@@ -107,16 +119,28 @@ function Documents({
 					userId={userId}
 					userMobile={userMobile}
 					leadUserId={leadUserId}
+					formattedMessageData={formattedMessageData}
+					getDocumentsList={getDocumentsList}
 				/>
 
 			)}
+			{(!isEmpty(list)) ? (
+				<div className={styles.pagination}>
+					<Pagination
+						currentPage={pagination}
+						totalItems={totalDocumentCount}
+						pageSize={10}
+						onPageChange={(val) => setPagination(val)}
+					/>
+				</div>
+			) : null}
 
 			{showModal && (
 				<UploadDetailsModal
 					setShowModal={setShowModal}
 					orgId={orgId}
 					documentType={showModal}
-					documentsList={documentsList}
+					getDocumentsList={getDocumentsList}
 					singleItem={singleItem}
 					setSingleItem={setSingleItem}
 					isPanUploaded={is_pan_uploaded}

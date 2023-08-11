@@ -456,7 +456,78 @@ const allocation = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
-
+		{
+			api          : 'get_allocation_engagement_scoring_score_graph',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'post_allocation_engagement_scoring_account_bulk_deallocation',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+	],
+	objective_configurations: [
+		{
+			api          : 'get_allocation_objectives',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_objective_details',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_objective_user_mappings',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_objective_non_overlapping_mappings',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_objective_attributes',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_objective_weightages',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_objective_activation_date',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_objective_status',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_locations',
+			access_type  : 'public',
+			service_name : 'location',
+		},
 	],
 };
 

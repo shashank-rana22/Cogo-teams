@@ -34,7 +34,7 @@
           "label": "Cancelled"
         }
       ],
-      "possible_filters":["importer_exporter_id","pending_invoice","date_type","source","tags"]
+      "possible_filters":["importer_exporter_id","triggered_pending_invoices","date_type","source","tags"]
     },
     "import": {
       "tabs": [
@@ -71,7 +71,7 @@
           "label": "Cancelled"
         }
       ],
-      "possible_filters":["importer_exporter_id","pending_invoice","date_type","source","tags"]
+      "possible_filters":["importer_exporter_id","triggered_pending_invoices","date_type","source","tags"]
     },
     "lcl_customs": {
       "tabs": [
@@ -92,6 +92,6 @@
           "value": "cancelled"
         }
       ],
-      "possible_filters":["importer_exporter_id","pending_invoice","source","tags"]
+      "possible_filters":["importer_exporter_id","triggered_pending_invoices","source","tags"]
     }
   }

@@ -14,16 +14,54 @@ import styles from './styles.module.css';
 import UploadForm from './UploadForm';
 import Wallet from './Wallet';
 
+function RenderContent({
+	loading = true, activeToggle = true, canEditDocuments = true, filteredTaskList = [], emailList = [],
+	completedDocs = {}, setShowDoc = () => {}, setShowApproved = () => {},
+	showIgmDocs = false, refetch = () => {}, activeStakeholder = '',
+	bl_details = [], activeWallet = '', orgDocService = '',
+}) {
+	if (loading) {
+		return <LoadingState />;
+	}
+	if (!activeToggle) {
+		return (
+			<CheckList
+				taskList={filteredTaskList}
+				emailDocs={emailList}
+				completedDocs={completedDocs?.list}
+				setShowDoc={setShowDoc}
+				setShowApproved={setShowApproved}
+				canEditDocuments={canEditDocuments}
+				showIgmDocs={showIgmDocs}
+				shipmentDocumentRefetch={refetch}
+				activeStakeholder={activeStakeholder}
+				bl_details={bl_details}
+			/>
+		);
+	}
+	if (canEditDocuments) {
+		return (
+			<Wallet
+				activeWallet={activeWallet}
+				orgDocService={orgDocService}
+			/>
+		);
+	}
+	return null;
+}
+
 function Documents() {
+	const { shipment_data, primary_service, stakeholderConfig, activeStakeholder } = useContext(ShipmentDetailContext);
+
 	const [showDoc, setShowDoc] = useState(null);
 	const [showApproved, setShowApproved] = useState(false);
 	const [activeToggle, setActiveToggle] = useState(false);
 	const [activeWallet, setActiveWallet] = useState('trade_documents');
 	const [addToWallet, setAddToWallet] = useState(true);
 	const [searchValue, setSearchValue] = useState('');
+	const [orgDocService, setOrgDocService] = useState('');
 
 	const { updateDocument } = useUpdateDocument({});
-	const { shipment_data, primary_service, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const {
 		loading,
@@ -33,6 +71,7 @@ function Documents() {
 		filters,
 		setFilters,
 		refetch,
+		bl_details,
 	} = useCreateTaskList({ shipment_data, primary_service });
 
 	const emailPayload = {
@@ -61,40 +100,28 @@ function Documents() {
 	const filteredTaskList = taskList?.filter((item) => item?.label?.toLowerCase().includes(searchValue)
 	|| item?.document_type?.toLowerCase().includes(searchValue));
 
-	const renderContent = () => {
-		if (loading) {
-			return <LoadingState />;
-		}
-		if (!activeToggle) {
-			return (
-				<CheckList
-					taskList={filteredTaskList}
-					emailDocs={emailList}
-					completedDocs={completedDocs?.list}
-					setShowDoc={setShowDoc}
-					setShowApproved={setShowApproved}
-				/>
-			);
-		}
-		return <Wallet activeWallet={activeWallet} />;
-	};
+	const canEditDocuments = !!stakeholderConfig?.documents?.can_edit_documents;
+	const showIgmDocs = !!stakeholderConfig?.documents?.show_igm_docs;
 
 	return (
-		<div className={styles.main_container}>
-			<HeaderComponent
-				activeToggle={activeToggle}
-				setActiveToggle={setActiveToggle}
-				shipment_data={shipment_data}
-				data={completedDocs?.organizations}
-				filters={filters}
-				setFilters={setFilters}
-				setSearchValue={setSearchValue}
-				searchValue={searchValue}
-				activeWallet={activeWallet}
-				setActiveWallet={setActiveWallet}
-				activeStakeholder={activeStakeholder}
-				refetch={refetch}
-			/>
+		<section className={styles.main_container}>
+			{!showIgmDocs ? (
+				<HeaderComponent
+					activeToggle={activeToggle}
+					setActiveToggle={setActiveToggle}
+					data={completedDocs?.organizations}
+					filters={filters}
+					setFilters={setFilters}
+					setSearchValue={setSearchValue}
+					searchValue={searchValue}
+					activeWallet={activeWallet}
+					setActiveWallet={setActiveWallet}
+					refetch={refetch}
+					setOrgDocService={setOrgDocService}
+					orgDocService={orgDocService}
+				/>
+			) : null}
+
 			<Modal
 				className={styles.modal_container}
 				show={showDoc}
@@ -112,17 +139,34 @@ function Documents() {
 				/>
 			</Modal>
 
-			{renderContent()}
-
-			<Approve
-				showApproved={showApproved}
-				setShowApproved={setShowApproved}
-				addToWallet={addToWallet}
-				setAddToWallet={setAddToWallet}
-				handleApprove={handleApprove}
+			<RenderContent
+				loading={loading}
+				activeToggle={activeToggle}
+				canEditDocuments={canEditDocuments}
+				filteredTaskList={filteredTaskList}
+				emailList={emailList}
 				setShowDoc={setShowDoc}
+				setShowApproved={setShowApproved}
+				activeStakeholder={activeStakeholder}
+				showIgmDocs={showIgmDocs}
+				completedDocs={completedDocs}
+				refetch={refetch}
+				bl_details={bl_details}
+				activeWallet={activeWallet}
+				orgDocService={orgDocService}
 			/>
-		</div>
+
+			{canEditDocuments ? (
+				<Approve
+					showApproved={showApproved}
+					setShowApproved={setShowApproved}
+					addToWallet={addToWallet}
+					setAddToWallet={setAddToWallet}
+					handleApprove={handleApprove}
+					setShowDoc={setShowDoc}
+				/>
+			) : null }
+		</section>
 	);
 }
 

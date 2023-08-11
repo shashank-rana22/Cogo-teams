@@ -1,0 +1,39 @@
+.container {
+	padding: 20px;
+}
+
+.truck_number {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 5px;
+}
+
+.edit_heading {
+	display: flex;
+	margin-top: 20px;
+}
+
+.edit_btn {
+	margin-top: 20px;
+}
+
+.select {
+	width: 18%;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+	.select {
+		width: 30%;
+	}
+}
+@media (max-width: 767px) {
+	.select {
+		width: 50%;
+	}
+}

@@ -1,5 +1,7 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 const geo = getGeoConstants();
 
@@ -34,6 +36,7 @@ const useGetActiveStakeholder = () => {
 		{ role_ids: [geo.uuid.lastmile_ops_id], stakeholder: 'lastmile_ops' },
 		{ role_ids: geo.uuid.lastmile_ops_manager_id, stakeholder: 'lastmile_ops_manager' },
 		{ role_ids: geo.uuid.prod_process_owner, stakeholder: 'prod_process_owner' },
+		{ role_ids: geo.uuid.coe_head, stakeholder: 'coe_head' },
 		{
 			role_ids: [geo.uuid.coe_finance_head,
 				geo.uuid.super_admin_id,
@@ -47,7 +50,8 @@ const useGetActiveStakeholder = () => {
 		.filter(({ role_ids: ids }) => (role_ids || [])
 			.some((item) => ids.includes(item)));
 
-	const activeStakeholder = matchingStakeholders.length > 0 ? matchingStakeholders[0].stakeholder : '';
+	const activeStakeholder = 	!isEmpty(matchingStakeholders)
+		? matchingStakeholders[GLOBAL_CONSTANTS.zeroth_index].stakeholder : '';
 
 	return 	activeStakeholder;
 };

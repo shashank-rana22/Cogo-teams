@@ -98,11 +98,20 @@ function PersonalInformation({ data: content, getEmployeeDetails }) {
 	const controlsvalue = controls({ content });
 
 	const id = content?.detail?.id;
+	const cogo_email = content?.detail?.cogoport_email;
 
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
 	const onSubmit = (values) => {
-		updateEmployeeDetails({ data: values, formType: PERSONAL_INFO });
+		const { cogoport_email, ...rest } = values || {};
+		let final_params = { ...rest };
+		if (cogoport_email !== cogo_email) {
+			final_params = {
+				...final_params,
+				cogoport_email,
+			};
+		}
+		updateEmployeeDetails({ data: final_params, formType: PERSONAL_INFO });
 	};
 
 	useEffect(() => {
@@ -147,7 +156,8 @@ function PersonalInformation({ data: content, getEmployeeDetails }) {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}
 		});
-	}, [controlsvalue, content?.detail, setValue]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [content?.detail, setValue]);
 
 	return (
 		<div className={styles.whole_container}>

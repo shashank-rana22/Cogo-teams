@@ -1,4 +1,4 @@
-import { Pill, Placeholder } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
@@ -7,7 +7,6 @@ import React, { useContext } from 'react';
 import FilterService from './FilterServices';
 import Price from './Price';
 import ServicesList from './ServicesList';
-import styles from './styles.module.css';
 import tableFields from './tableFields';
 
 function ChooseService({
@@ -47,7 +46,10 @@ function ChooseService({
 
 	const fields = tableFields(priceRequest, countObj, tagDisplay);
 
-	const serviceOptions = (shipment_data?.services || []
+	const services = (shipment_data?.services || []
+	).filter((e) => e !== 'cargo_insurance_service');
+
+	const serviceOptions = (services || []
 	).map((service) => ({ label: startCase(service), value: service }));
 
 	return (
@@ -58,17 +60,7 @@ function ChooseService({
 				uniqueServices={serviceOptions}
 			/>
 
-			{loading ? (
-				<div className={styles.loading_container}>
-					<Placeholder height="50px" width="100%" />
-					<Placeholder height="50px" width="100%" margin="8px 0" />
-					<Placeholder height="50px" width="100%" margin="8px 0" />
-					<Placeholder height="50px" width="100%" margin="8px 0" />
-					<Placeholder height="50px" width="100%" />
-				</div>
-			) : (
-				<ServicesList fields={fields} data={list} loading={loading} />
-			)}
+			<ServicesList fields={fields} data={list} loading={loading} />
 		</div>
 	);
 }

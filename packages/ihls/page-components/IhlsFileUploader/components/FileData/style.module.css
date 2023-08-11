@@ -1,0 +1,7 @@
+.empty_container {
+	display: flex;
+	justify-content: center;
+	height: 40vh;
+	padding: 24px;
+	background: #fff;
+}

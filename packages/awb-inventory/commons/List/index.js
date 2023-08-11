@@ -18,11 +18,11 @@ function List({
 	fields = [],
 	data:listData = {},
 	loading = false,
-	page,
-	setPage,
-	functions,
-	finalList,
-	setFinalList,
+	page = 1,
+	setPage = () => {},
+	functions = {},
+	finalList = [],
+	setFinalList = () => {},
 }) {
 	const [isMobile, setIsMobile] = useState(false);
 	const { list = [], total_count:totalCount } = listData;
@@ -75,7 +75,8 @@ function List({
 				setFinalList((prev) => prev.concat(list));
 			}
 		}
-	}, [list, page, setFinalList]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [list]);
 
 	return (
 		<section>

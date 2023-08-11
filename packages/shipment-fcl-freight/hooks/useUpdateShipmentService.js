@@ -13,13 +13,15 @@ const useUpdateShipmentService = ({
 
 	const apiTrigger = async (payload) => {
 		try {
-			await trigger({ data: payload });
+			const res = await trigger({ data: payload });
 
 			Toast.success(successMessage);
 
 			refetch();
+			return res;
 		} catch (err) {
 			toastApiError(err);
+			return err;
 		}
 	};
 

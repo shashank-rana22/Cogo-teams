@@ -1,0 +1,66 @@
+.row {
+	display: flex;
+	width: 100%;
+	margin-left: 20px;
+}
+
+.fieldarray {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.child {
+	width: 100%;
+}
+
+.font_style {
+	padding-left: 4px;
+	margin: 0;
+	font-size: 12px;
+	color: #cb6464;
+}
+
+.element {
+	padding: 4px;
+
+	:global {
+		.ui_select_input_placeholder {
+			font-size: 14px;
+			color: #bdbdbd;
+		}
+
+		.ui_input_control::placeholder {
+			font-size: 14px;
+			color: #bdbdbd;
+		}
+	}
+}
+
+.delete_icon {
+	width: 28px;
+	max-height: 28px;
+	margin-top: 8px;
+	cursor: pointer;
+}
+
+.child_label {
+	max-height: 16px;
+	margin-bottom: 6px;
+	font-size: 12px;
+}
+
+.number_icon {
+	width: 16px;
+	height: 16px;
+	margin-bottom: -10px;
+	color: rgb(0 0 0);
+	fill: rgb(0 0 0);
+}
+
+.vertical_line {
+	height: 140px;
+	margin-bottom: -100px;
+	margin-left: 6px;
+	border-left: 1px solid black;
+}

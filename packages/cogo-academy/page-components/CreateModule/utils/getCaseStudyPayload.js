@@ -11,25 +11,42 @@ const getCaseStudyPayload = ({
 	questionSetId,
 	editDetails = {},
 	index: questionIndex = '',
+	questionState = {},
+	setQuestionState,
+	caseStudyQuestionEditorValue = {},
 	editorValue = {},
 }) => {
 	if (editType === 'case_question') {
-		const { question_text, options = [], question_type } = values || {};
+		const { options = [], question_type } = values || {};
 
 		if (action === 'delete') {
 			return { id: caseStudyQuestionId, status: 'inactive', answers: [] };
 		}
 
-		const hasError = [];
+		const HAS_ERROR = [];
 
-		const checkError = checkErrors({ options, question_type });
+		const checkError = checkErrors({
+			options,
+			question_type,
+			hasText: questionState?.editorValue?.
+				[`case_questions_${questionIndex}`]?.getEditorState()?.getCurrentContent()?.hasText(),
+		});
 
 		if (checkError !== 'noError') {
-			hasError.push(checkError);
+			if (checkError === 'Question is required') {
+				setQuestionState((prev) => ({
+					...prev,
+					error: {
+						...prev.error,
+						[`case_questions_${questionIndex}`]: true,
+					},
+				}));
+			}
+			HAS_ERROR.push(checkError);
 		}
 
-		if (!isEmpty(hasError)) {
-			return { hasError };
+		if (!isEmpty(HAS_ERROR)) {
+			return { hasError: HAS_ERROR };
 		}
 
 		const { test_case_study_questions = {} } = editDetails || {};
@@ -50,14 +67,13 @@ const getCaseStudyPayload = ({
 
 		return {
 			...(action === 'update' ? { id: caseStudyQuestionId } : { test_question_id: testQuestionId }),
-			question_text,
+			question_text : questionState?.editorValue?.[`case_questions_${questionIndex}`].toString('html'),
 			question_type,
 			answers,
-			explanation: [editorValue?.[`case_questions_${questionIndex}_explanation`].toString('html')],
+			explanation   : [editorValue?.[`case_questions_${questionIndex}_explanation`].toString('html')],
 		};
 	}
 	const {
-		question_text,
 		case_questions = [],
 		topic,
 		question_type,
@@ -67,7 +83,6 @@ const getCaseStudyPayload = ({
 	const questions = case_questions.map((item, caseQuestionIndex) => {
 		const {
 			question_type: indQuestionType,
-			question_text: indQuestionText,
 			options,
 		} = item || {};
 
@@ -84,30 +99,44 @@ const getCaseStudyPayload = ({
 
 		return {
 			question_type : indQuestionType,
-			question_text : indQuestionText,
+			question_text : questionState?.editorValue?.[`case_questions_${caseQuestionIndex}`].toString('html'),
 			answers,
 			explanation   : [editorValue?.[`case_questions_${caseQuestionIndex}_explanation`].toString('html')],
 		};
 	});
 
-	const hasError = [];
+	const HAS_ERROR = [];
 
-	case_questions.forEach((item) => {
+	case_questions.forEach((item, index) => {
 		const { options, question_type:indQuestionType } = item || {};
-		const checkError = checkErrors({ options, question_type: indQuestionType });
+		const checkError = checkErrors({
+			options,
+			question_type : indQuestionType,
+			hasText       : questionState?.editorValue?.
+				[`case_questions_${index}`]?.getEditorState()?.getCurrentContent()?.hasText(),
+		});
 
 		if (checkError !== 'noError') {
-			hasError.push(checkError);
+			if (checkError === 'Question is required') {
+				setQuestionState((prev) => ({
+					...prev,
+					error: {
+						...prev.error,
+						[`case_questions_${index}`]: true,
+					},
+				}));
+			}
+			HAS_ERROR.push(checkError);
 		}
 	});
 
-	if (!isEmpty(hasError) && action !== 'delete') {
-		return { hasError };
+	if (!isEmpty(HAS_ERROR) && action !== 'delete') {
+		return { hasError: HAS_ERROR };
 	}
 
 	return {
-		test_question_set_id: questionSetId,
-		question_text,
+		test_question_set_id : questionSetId,
+		question_text        : caseStudyQuestionEditorValue.toString('html'),
 		topic,
 		question_type,
 		difficulty_level,

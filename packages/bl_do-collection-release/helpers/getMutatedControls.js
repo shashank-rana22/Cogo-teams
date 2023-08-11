@@ -1,54 +1,57 @@
-const statusMapping = {
+const STATUS_MAPPING = {
 	surrendered : 'surrender_pending',
 	released    : 'released',
 	collected   : 'release_pending',
 };
+
 const getMutatedControls = ({ item, stateProps, controls = [] }) => {
+	const BL_OPTIONS = [];
+	const MUTATED_CONTROLS = [];
+
+	const { inner_tab, activeTab } = stateProps || {};
+
 	const { bill_of_ladings, delivery_orders } = item || {};
-	const blOptions = [];
-	const mutatedControls = [];
 
 	let docs;
+	let bl_do_number_key = '';
 
-	if (stateProps.activeTab === 'do') {
+	if (activeTab === 'do') {
 		docs = delivery_orders || [];
+		bl_do_number_key = 'do_number';
 	} else {
 		docs = bill_of_ladings || [];
+		bl_do_number_key = 'bl_number';
 	}
 
-	if (
-		['collection_pending', 'surrendered', 'released', 'collected'].includes(
-			stateProps.inner_tab,
-		)
-	) {
+	if (['collection_pending', 'surrendered', 'released', 'collected'].includes(inner_tab)) {
 		const availableDocs = (docs || []).filter((ele) => {
-			if (stateProps.inner_tab === 'collection_pending') {
+			if (inner_tab === 'collection_pending') {
 				return ele.collection_mode === null;
 			}
 
-			return ele.status === statusMapping[stateProps.inner_tab];
+			return ele.status === STATUS_MAPPING[inner_tab];
 		});
 
 		availableDocs.forEach((doc) => {
-			blOptions.push({
-				label : doc?.bl_number,
+			BL_OPTIONS.push({
+				label : doc?.[bl_do_number_key],
 				value : doc?.id,
-				name  : doc?.bl_number,
+				name  : doc?.[bl_do_number_key],
 			});
 		});
 
 		controls.forEach((ctrl) => {
 			const newObj = { ...ctrl };
 			if (ctrl.name === 'ids') {
-				newObj.options = [...ctrl.options, ...blOptions];
+				newObj.options = [...ctrl.options, ...BL_OPTIONS];
 			}
-			mutatedControls.push(newObj);
+			MUTATED_CONTROLS.push(newObj);
 		});
 	} else {
-		mutatedControls.push(...controls);
+		MUTATED_CONTROLS.push(...controls);
 	}
 	return {
-		mutatedControls,
+		MUTATED_CONTROLS,
 	};
 };
 

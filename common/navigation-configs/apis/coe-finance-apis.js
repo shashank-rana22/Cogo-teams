@@ -66,16 +66,14 @@ const apis = [
 		feature     : 'coe_finance',
 	},
 	{
-		api          : 'create_chat_message',
-		access_type  : 'private',
-		feature      : 'coe_finance',
-		service_name : 'chat',
+		api         : 'create_chat_message',
+		access_type : 'private',
+		feature     : 'coe_finance',
 	},
 	{
-		api          : 'list_chat_channels',
-		access_type  : 'private',
-		feature      : 'coe_finance',
-		service_name : 'chat',
+		api         : 'list_chat_channels',
+		access_type : 'private',
+		feature     : 'coe_finance',
 	},
 	{
 		api         : 'delete_chat_message',
@@ -83,10 +81,9 @@ const apis = [
 		feature     : 'coe_finance',
 	},
 	{
-		api          : 'update_chat_message',
-		access_type  : 'private',
-		feature      : 'coe_finance',
-		service_name : 'chat',
+		api         : 'update_chat_message',
+		access_type : 'private',
+		feature     : 'coe_finance',
 	},
 	{
 		api         : 'get_chat_channel',
@@ -99,10 +96,9 @@ const apis = [
 		feature     : 'coe_finance',
 	},
 	{
-		api          : 'update_chat_channel_seen',
-		access_type  : 'private',
-		feature      : 'coe_finance',
-		service_name : 'chat',
+		api         : 'update_chat_channel_seen',
+		access_type : 'private',
+		feature     : 'coe_finance',
 
 	},
 	{

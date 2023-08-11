@@ -1,0 +1,41 @@
+const SHIPMENT_WISE_LABELS = {
+	air_freight: [
+		'inco_term',
+		'trade_type',
+		'price_type',
+		'payment_term',
+		'weight',
+		'volume',
+		'packages',
+		'bl_category',
+		'commodity',
+		'awb_execution_date',
+	],
+	air_customs: [
+		'commodity',
+		'trade_type',
+		'packages',
+		'volume',
+		'weight',
+	],
+	air_freight_local: [
+		'commodity',
+		'trade_type',
+		'packages',
+		'volume',
+		'weight',
+	],
+	domestic_air_freight: [
+		'airline',
+		'commodity',
+		'inco_term',
+		'trade_type',
+		'packages',
+		'volume',
+		'weight',
+		'price_type',
+		'payment_term',
+		'awb_execution_date',
+	],
+};
+export default SHIPMENT_WISE_LABELS;

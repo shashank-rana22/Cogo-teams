@@ -3,24 +3,28 @@ import { IcMListView } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { getOptionsMapping, ACCESSABLE_BUTTON_FUNC_MAPPING } from './rightButtonHelpers';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../constants/viewTypeMapping';
+
+import { getOptionsMapping } from './rightButtonHelpers';
 import styles from './styles.module.css';
 
 function RightButton({
-	assignChat,
-	openAssignModal,
-	requestToJoinGroup,
-	formattedData,
-	requestForAssignChat,
-	userId,
-	assignLoading,
-	requestAssignLoading,
-	viewType,
-	supportAgentId,
-	isGroupFormed,
-	showBotMessages,
-	accountType,
-	isPartOfGroup,
+	assignChat = () => {},
+	openAssignModal = () => {},
+	requestToJoinGroup = () => {},
+	formattedData = {},
+	requestForAssignChat = () => {},
+	userId = '',
+	assignLoading = false,
+	requestAssignLoading = false,
+	viewType = '',
+	supportAgentId = '',
+	isGroupFormed = false,
+	showBotMessages = false,
+	accountType = '',
+	isPartOfGroup = false,
+	isManager = false,
+	hasNoFireBaseRoom = false,
 }) {
 	const [popoverProps, setPopoverProps] = useState({ isOpen: false, clickedButton: '' });
 
@@ -34,7 +38,9 @@ function RightButton({
 		setPopoverProps,
 	});
 
-	const accessableButtons = ACCESSABLE_BUTTON_FUNC_MAPPING[viewType]?.({
+	const getViewTypeAccessibleButtons = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.get_accesible_assign_buttons;
+
+	const accessableButtons = getViewTypeAccessibleButtons?.({
 		viewType,
 		showBotMessages,
 		supportAgentId,
@@ -42,11 +48,12 @@ function RightButton({
 		isGroupFormed,
 		isServiceProvider: accountType === 'service_provider',
 		isPartOfGroup,
+		isManager,
 	}) || [];
 
 	const loading = assignLoading || requestAssignLoading;
 
-	if (isEmpty(accessableButtons)) {
+	if (hasNoFireBaseRoom || isEmpty(accessableButtons)) {
 		return (
 			<Button
 				themeType="secondary"
@@ -92,7 +99,7 @@ function RightButton({
 				onClick={() => setPopoverProps({ isOpen: true, clickedButton: '' })}
 			>
 				<IcMListView height={15} width={15} />
-				&nbsp;
+				{' '}
 				Assign
 			</Button>
 		</Popover>

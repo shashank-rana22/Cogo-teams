@@ -43,6 +43,10 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 		{ label: 'Booking Desk', value: 'booking_desk' },
 		{ label: 'Post Shipment', value: 'post_shipment' },
 		{ label: 'FINOPS', value: 'finops' },
+		{ label: 'Common Customer Operations', value: 'common_customer_operations' },
+		{ label: 'CP Customer Operations', value: 'cp_customer_operations' },
+		{ label: 'Mid Size Customer Operations', value: 'mid_size_customer_operations' },
+		{ label: 'Enterprise Customer Operations', value: 'enterprise_customer_operations' },
 	],
 	finance  : [{ label: 'Credit Controller', value: 'credit_controller' }],
 	training : [

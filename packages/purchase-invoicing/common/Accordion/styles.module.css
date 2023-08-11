@@ -3,7 +3,8 @@
 	align-items: center;
 	min-height: 66px;
 	padding: 16px;
-	overflow-y: scroll;
+	overflow-y: auto;
+	border-radius: 4px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 }
 
@@ -14,9 +15,10 @@
 .accordion_active {
 	padding: 16px;
 	margin: 0;
-	overflow-y: scroll;
+	overflow-y: auto;
 	background-color: white;
 	border-bottom: 2px solid #d9d9d9;
+	border-radius: 4px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 }
 

@@ -438,6 +438,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'download_test_results',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'create_duplicate_test',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
@@ -456,6 +461,21 @@ const faq = {
 		},
 		{
 			api          : 'update_cogo_academy_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_course_videos',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_course_video',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_course_video',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
@@ -579,6 +599,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'list_course_videos',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'list_course_categories',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
@@ -628,6 +653,11 @@ const faq = {
 			api          : 'create_communication',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'update_course_feedback',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
 		},
 	],
 };

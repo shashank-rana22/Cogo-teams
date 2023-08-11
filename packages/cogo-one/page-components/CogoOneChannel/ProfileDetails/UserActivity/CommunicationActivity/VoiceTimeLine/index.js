@@ -1,12 +1,14 @@
 import { Avatar } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import { VOICE_ICON_MAPPING } from '../../../../../../constants';
 import timeLineFunctions from '../../../../../../utils/timeLineFunctions';
 
 import styles from './styles.module.css';
 
-function VoiceTimeLine({ item }) {
+function VoiceTimeLine({ item = {} }) {
 	const {
 		agent_data = {},
 		created_at = '',
@@ -28,7 +30,13 @@ function VoiceTimeLine({ item }) {
 			>
 				<div className={styles.dot} />
 				<div className={styles.durations}>
-					{format(created_at, 'HH:mm a dd MMM')}
+					{formatDate({
+						date       : new Date(created_at),
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'dateTime',
+						separator  : ', ',
+					})}
 				</div>
 			</div>
 			<div className={styles.main_card}>
@@ -62,7 +70,7 @@ function VoiceTimeLine({ item }) {
 					</div>
 					<div className={styles.user_avatar}>
 						<Avatar
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
+							src={GLOBAL_CONSTANTS.image_url.empty_data}
 							alt="agent-img"
 							disabled={false}
 							size="30px"

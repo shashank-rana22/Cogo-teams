@@ -1,4 +1,5 @@
 import { CheckboxGroup, RadioGroup, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
 
@@ -7,6 +8,8 @@ import getAlphabets from '../../../../../../CreateModule/utils/getAlphabets';
 import styles from './styles.module.css';
 
 const alphabets = getAlphabets('A', 'Z');
+
+const OFFSET = 1;
 
 function SingleQuestion({
 	question = {},
@@ -36,7 +39,7 @@ function SingleQuestion({
 
 	useEffect(() => {
 		if (question_type !== 'multi_correct') {
-			setAnswer(correctAnswerIds?.[0] || '');
+			setAnswer(correctAnswerIds?.[GLOBAL_CONSTANTS.zeroth_index] || '');
 		} else {
 			setAnswer(correctAnswerIds || []);
 		}
@@ -53,7 +56,7 @@ function SingleQuestion({
 					Question
 					{' '}
 					{from === 'case_study'
-						? `${currentQuestion}${alphabets[subQuestion - 1].toLowerCase()}` : currentQuestion}
+						? `${currentQuestion}${alphabets[subQuestion - OFFSET].toLowerCase()}` : currentQuestion}
 					{' '}
 					of
 					{' '}
@@ -71,9 +74,7 @@ function SingleQuestion({
 					overflowY: 'scroll',
 				} : {}}
 			>
-				<div className={styles.question}>
-					{question_text}
-				</div>
+				<div className={styles.question} dangerouslySetInnerHTML={{ __html: question_text }} />
 
 				<Element
 					options={answerOptions}

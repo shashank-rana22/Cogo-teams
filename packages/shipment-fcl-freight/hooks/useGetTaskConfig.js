@@ -2,6 +2,8 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
+const EXCLUDE_TASK_TYPES = ['approve_document', 'amend_document'];
+
 function useGetTaskConfig({ task = {} }) {
 	const [apiData, setApiData] = useState({});
 
@@ -25,8 +27,12 @@ function useGetTaskConfig({ task = {} }) {
 	}, [trigger, task.id]);
 
 	useEffect(() => {
+		if (EXCLUDE_TASK_TYPES.includes(task?.task_type) || task?.task === 'upload_compliance_documents') {
+			return;
+		}
+
 		getTaskConfigTrigger();
-	}, [getTaskConfigTrigger]);
+	}, [getTaskConfigTrigger, task]);
 
 	return {
 		loading,

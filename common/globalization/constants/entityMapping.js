@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/uuid-check */
 import {
 	IcCCountryIndia,
 	IcCCountryNetherland,
@@ -8,16 +9,13 @@ import {
 const ENTITY_MAPPING = {
 	101: {
 		country_code        : 'IN',
-		name                : 'COGO FREIGHT PVT LTD',
+		name                : 'COGO FREIGHT PVT LTD.',
 		id                  : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['compliance', 'post_to_sage'],
-		labels              : {
-			irn_label: 'IRN',
-		},
-		GSTIN: ['27AAGCC4470P1Z5', 'MUMC22090F', 'MUMC26454B'],
+		feature_supported   : ['compliance', 'post_to_sage', 'dunning'],
+		GSTIN               : ['27AAGCC4470P1Z5', 'MUMC22090F', 'MUMC26454B'],
 	},
 	201: {
 		country_code        : 'NL',
@@ -27,10 +25,7 @@ const ENTITY_MAPPING = {
 		currency            : 'EUR',
 		default_entity_code : '201',
 		feature_supported   : ['cogo_books', 'post_to_sage'],
-		labels              : {
-			irn_label: 'IRN',
-		},
-		GSTIN: [],
+		GSTIN               : [],
 	},
 	301: {
 		country_code        : 'IN',
@@ -51,10 +46,7 @@ const ENTITY_MAPPING = {
 		currency            : 'SGD',
 		default_entity_code : '401',
 		feature_supported   : ['cogo_books', 'post_to_sage'],
-		labels              : {
-			irn_label: 'IRN',
-		},
-		GSTIN: [],
+		GSTIN               : [],
 	},
 	501: {
 		country_code        : 'VN',
@@ -67,10 +59,8 @@ const ENTITY_MAPPING = {
 			'freight_sales_invoice_restricted_enitity',
 			'cancel_e_invoice',
 			'upload_invoice',
-			'is_revoked'],
-		labels: {
-			irn_label: 'E-invoice',
-		},
+			'dunning',
+		],
 		GSTIN: [],
 	},
 };

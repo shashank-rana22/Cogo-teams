@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
@@ -14,10 +14,14 @@ const CONTROL_TYPE_FILE_UPLOAD = 'fileUpload';
 const BANK_DETAILS_MAPPING = [
 	'ifsc_code',
 	'account_holder_name',
-	'bank_name', 'bank_branch_name', 'account_number', 'cancelled_check_url'];
+	'bank_name', 'bank_branch_name', 'account_number', 'account_number_confirmation', 'cancelled_check_url'];
 
 function BankDetails({ getEmployeeDetails, data: info }) {
-	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
+	const { handleSubmit, control, formState: { errors }, setValue, watch } = useForm();
+
+	const bankAccountDetails = watch('account_number');
+
+	const reenteredBankAccountDetails = watch('account_number_confirmation');
 
 	const { bank_details = [], detail } = info || {};
 
@@ -31,19 +35,28 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 	};
 
 	const onSubmit = (values) => {
-		createEmployeeBankDetails({ values, id });
+		if (bankAccountDetails === reenteredBankAccountDetails) {
+			createEmployeeBankDetails({ values, id });
+		} else {
+			Toast.error('Bank Account Number in both the fields should be same');
+		}
 	};
 
 	useEffect(() => {
-		(BANK_DETAILS_MAPPING || []).map((element) => (
-			setValue(element, bank_details?.[DEFAULT_INDEX]?.[element])
-		));
+		(BANK_DETAILS_MAPPING || []).forEach((element) => {
+			if (element === 'account_number_confirmation') {
+				setValue(element, bank_details?.[DEFAULT_INDEX]?.account_number);
+			} else {
+				setValue(element, bank_details?.[DEFAULT_INDEX]?.[element]);
+			}
+		});
 	}, [bank_details, setValue]);
 
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.introductory_text}>
-				Please update your bank details here !
+				Please make sure to enter accurate bank details so that your salary can be credited to this account.
+				Cogoport will not be held responsible if the salary is deposited into an incorrect bank account.
 			</div>
 
 			<div className={styles.container}>
@@ -55,7 +68,6 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 						<div key={controlName} className={styles.control_container}>
 							<div className={styles.label}>
 								{label}
-								<sup className={styles.sup}>*</sup>
 							</div>
 
 							<div className={styles.control}>

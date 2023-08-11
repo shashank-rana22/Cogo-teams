@@ -10,15 +10,19 @@ function useStepExecution({
 	stepConfig = {},
 	getApisData = {},
 	selectedMail = [],
+	shipment_data = {},
+	primary_service = {},
 }) {
 	const populatedControls = populateControls(stepConfig.controls);
 
-	const valueInjectedControls = injectValues(
+	const valueInjectedControls = injectValues({
 		populatedControls,
 		task,
 		getApisData,
 		selectedMail,
-	);
+		shipment_data,
+		primary_service,
+	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);
 
