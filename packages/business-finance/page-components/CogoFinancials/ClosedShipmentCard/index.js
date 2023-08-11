@@ -90,7 +90,7 @@ function ClosedShipmentCard({
 	return (
 		<div className={styles.financially_closed_container}>
 			{showHeading && (
-				<div style={{ marginBottom: '16px' }}>
+				<div style={{ margin: '16px 32px' }}>
 					<RenderCardHeader
 						title={`${type} Closed Shipments`}
 						showInfo

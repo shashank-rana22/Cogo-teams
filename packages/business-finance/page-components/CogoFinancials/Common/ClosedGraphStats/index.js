@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -25,7 +26,7 @@ function ClosedGraphStats({
 	customDate = new Date(),
 	activeBar = '',
 	setActiveBar = () => {},
-	defaultWidth = '400',
+	defaultWidth = '252',
 	setTableFilters = () => {},
 	infoContent = '',
 }) {
@@ -71,15 +72,20 @@ function ClosedGraphStats({
 
 					<div style={{ display: 'flex' }}>
 						<div style={{ width: '25vw' }}>
-							<ClosedShipmentCard
-								showHeading={false}
-								isAdditonalView
-								wrapElement
-								isDeviationVisible={false}
-								cardData={cardData}
-								type={type}
-								taxType={taxType}
-							/>
+							{
+								!serviceLevelLoading ? (
+									<ClosedShipmentCard
+										showHeading={false}
+										isAdditonalView
+										wrapElement
+										isDeviationVisible={false}
+										cardData={cardData}
+										type={type}
+										taxType={taxType}
+									/>
+
+								) : (<Placeholder height="100%" width="100%" />)
+							}
 						</div>
 
 						<div className={styles.graphs}>

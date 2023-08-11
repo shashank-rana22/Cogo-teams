@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 
 const BOTTOM_AXIS_ROTATION = 20;
 const DEFAULT_ROTATION = 0;
+const STRAIGHT_AXIS_LIMIT = 2;
 
 const KEY_MAPPINGS = {
 	'Operational Profitability' : 'Profitability',
@@ -19,8 +20,23 @@ const KEY_MAPPINGS = {
 	Expense                     : 'Cost',
 };
 
-const DEFAULT_LENGTH = 1;
-const STD_WIDTH = 80;
+const defaultAmountFormat = (value) => formatAmount({
+	amount  : String(value),
+	options : {
+		style                 : 'decimal',
+		notation              : 'compact',
+		maximumFractionDigits : 2,
+	},
+});
+
+const formatPercentageLabel = (value) => `${formatAmount({
+	amount  : String(value),
+	options : {
+		style                 : 'decimal',
+		notation              : 'compact',
+		maximumFractionDigits : 0,
+	},
+})}%`;
 
 function SingleGraphCard({
 	heading = '',
@@ -31,7 +47,7 @@ function SingleGraphCard({
 	type = '',
 	serviceLevelData = [],
 	serviceLevelLoading = false,
-	defaultWidth = '400',
+	defaultWidth = '300',
 }) {
 	const isLastView = isViewDetailsVisible; // last view of graph cards
 
@@ -77,8 +93,7 @@ function SingleGraphCard({
 
 			<div
 				style={{
-					minWidth: `${(serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH > defaultWidth
-						? (serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH : defaultWidth}px`,
+					minWidth: `${defaultWidth}px`,
 
 				}}
 				className={styles.graph}
@@ -141,17 +156,14 @@ function SingleGraphCard({
 									tickRotation   : 0,
 									legend         : verticalLabel,
 									legendPosition : 'middle',
-									legendOffset   : -40,
+									legendOffset   : -50,
 									ariaHidden     : true,
-									format         : (value) => formatAmount({
-										amount  : String(value),
-										options : {
-											style    : 'decimal',
-											notation : 'compact',
-										},
-									}),
+									format         : (verticalLabel?.includes('Percentage'))
+										? formatPercentageLabel : defaultAmountFormat,
 								}}
-								axisBottomRotation={isLastView ? BOTTOM_AXIS_ROTATION : DEFAULT_ROTATION}
+								axisBottomRotation={(isLastView
+									&& (formattedServiceLevelData?.length > STRAIGHT_AXIS_LIMIT))
+									? BOTTOM_AXIS_ROTATION : DEFAULT_ROTATION}
 								valueFormat={(value) => formatAmount({
 									amount  : String(value),
 									options : {
@@ -168,7 +180,7 @@ function SingleGraphCard({
 					</div>
 				) : (
 					<div>
-						<Placeholder height={380} width="100%" />
+						<Placeholder height={300} width="100%" />
 					</div>
 				)}
 			</div>

@@ -65,7 +65,7 @@
 .child_styles:hover {
 	background: var(--color-tertiary-blue-5);
 	border: 1px solid #fff;
-	box-shadow: rgb(99 99 99 / 20%) 0 2px 8px 0;
+	box-shadow: rgb(99 99 99 / 30%) 0 2px 8px 0;
 	transition: box-shadow 0.2s, border 0.2s;
 }
 
