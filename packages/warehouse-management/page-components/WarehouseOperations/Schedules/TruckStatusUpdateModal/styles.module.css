@@ -16,10 +16,6 @@
 	margin-top: 30px;
 }
 
-.warning_icon {
-	margin-bottom: 15px;
-}
-
 .upload_title {
 	margin: 0 0 1% 13%;
 }
@@ -37,4 +33,8 @@
 
 .modal_span {
 	text-align: center;
+}
+
+.upload_container {
+	margin-left: 60px !important;
 }
