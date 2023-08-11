@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useAuthRequest } from '@cogoport/request';
 import { getCookie, setCookie } from '@cogoport/utils';
 
 const useSessionTimeout = ({
@@ -9,7 +9,7 @@ const useSessionTimeout = ({
 }) => {
 	const profile_name = user?.user_data?.name?.split(' ');
 
-	const [{ loading = false }, trigger] = useRequest({
+	const [{ loading = false }, trigger] = useAuthRequest({
 		url    : '/update_parent_and_child_user_session_mappings',
 		method : 'post',
 	}, { manual: true });
