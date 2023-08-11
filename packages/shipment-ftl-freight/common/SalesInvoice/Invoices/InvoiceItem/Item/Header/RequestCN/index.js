@@ -79,7 +79,7 @@ function RequestCN({
 			<Modal.Body>
 				<div className={styles.div}>
 					<div className={styles.bold_text}>
-						{`SID ${shipment_data?.serial_id} - Invoice number -`}
+						{`SID ${shipment_data?.serial_id} - Invoice Number -`}
 						<div className={styles.underLined_text}>{invoice?.live_invoice_number}</div>
 					</div>
 				</div>
