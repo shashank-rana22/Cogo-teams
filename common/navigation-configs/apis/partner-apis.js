@@ -12454,6 +12454,11 @@ const partner = {
 			service_name : 'checkout',
 		},
 		{
+			api          : 'get_tickets_configuration_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
 			api          : 'get_user',
 			access_type  : 'private',
 			service_name : 'user',
