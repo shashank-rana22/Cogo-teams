@@ -29,8 +29,16 @@ const getFormData = ({ item, taxType, show, setShow, type }) => ({
 			maximumFractionDigits : 2,
 		},
 	}),
-	deviation : item?.[`${LABEL_MAPPING[type]}ProfitAmountDeviation${taxType}`] || '_',
-	action    : (
+	deviation: formatAmount({
+		amount   : item?.[`${LABEL_MAPPING[type]}ProfitAmountDeviation${taxType}`] || DEFAULT_AMOUNT,
+		currency : item?.currency,
+		options  : {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 2,
+		},
+	}),
+	action: (
 		<div className={styles.flex}>
 			{!show ? (
 				<IcMArrowRotateDown

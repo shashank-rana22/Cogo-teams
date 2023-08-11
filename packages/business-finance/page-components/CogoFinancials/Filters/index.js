@@ -25,7 +25,7 @@ function Filters({ setTableFilters = () => { }, tableFilters = {}, activeBar = '
 				onChange={(val) => setTableFilters({ ...tableFilters, query: val, pageIndex: 1 })}
 				placeholder="Search by SID/Customer Name"
 				suffix={<IcMSearchlight style={{ margin: '0px 8px' }} />}
-				style={{ width: '20%' }}
+				className={styles.search_input}
 			/>
 		</div>
 	);
