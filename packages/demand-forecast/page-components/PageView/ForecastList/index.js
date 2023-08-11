@@ -21,8 +21,6 @@ function ForecastList({ filters = {} }) {
 		loading, list: dataList, page, setPage, pageData,
 	} = useGetForecastFclFreightClusters({ filters });
 
-	console.log('dataList::', dataList);
-
 	if (isEmpty(dataList) && !loading) {
 		return (
 			<div>
