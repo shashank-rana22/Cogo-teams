@@ -16,6 +16,8 @@ const useGetShipmentList = ({
 	activeBar = '',
 	customDate = new Date(),
 	tableFilters,
+	sort = {},
+	taxType = '',
 }) => {
 	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity]?.currency;
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -38,6 +40,7 @@ const useGetShipmentList = ({
 		const { channel, service, serviceCategory, segment } = filter;
 		const { startDate, endDate } = getDuration({ timeRange });
 		const { startDate: customStartDate, endDate: customEndDate } = customDate || {};
+		const { sortBy, sortType } = sort;
 
 		const params = {
 			statsType,
@@ -52,6 +55,8 @@ const useGetShipmentList = ({
 			channel,
 			pageIndex,
 			query         : query || undefined,
+			sortBy        : sortBy ? `${sortBy}${taxType}` : undefined,
+			sortType      : sortType || undefined,
 		};
 
 		// no api call if no custom date & range selected
@@ -67,7 +72,7 @@ const useGetShipmentList = ({
 	}, [entity, serviceLevelApiTrigger,
 		statsType, timeRange,
 		filter, customDate, pageIndex, activeBar, serviceLevelFilter,
-		DEFAULT_CURRENCY, query]);
+		DEFAULT_CURRENCY, query, sort, taxType]);
 
 	useEffect(() => {
 		getShipmentList();

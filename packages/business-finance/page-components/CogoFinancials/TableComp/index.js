@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import ColumnCard from '../Common/CustumTable/ColumnCard';
 import Header from '../Common/CustumTable/Header';
@@ -26,6 +26,7 @@ function TableComp({
 	tableFilters = {},
 	setTableFilters = () => { },
 }) {
+	const [sort, setSort] = useState({});
 	const config = customersConfig({ activeShipmentCard });
 	const {
 		serviceLevelData,
@@ -38,11 +39,13 @@ function TableComp({
 		activeBar,
 		customDate,
 		tableFilters,
+		sort,
+		taxType,
 	});
 
 	return (
 		<div className={styles.table}>
-			<Header config={config} />
+			<Header config={config} setSort={setSort} sort={sort} />
 			{isEmpty(serviceLevelData?.list) && !serviceLevelLoading && <EmptyState />}
 			{(!isEmpty(serviceLevelData?.list) || serviceLevelLoading)
 				? (serviceLevelData?.list || Array(EMPTY_STATE).fill(null)).map((item) => (

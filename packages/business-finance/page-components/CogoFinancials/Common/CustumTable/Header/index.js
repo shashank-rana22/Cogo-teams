@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -9,7 +10,8 @@ const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
 
-function Header({ config = {} }) {
+function Header({ config = {}, setSort = () => {}, sort = {} }) {
+	const { sortType, sortBy } = sort;
 	const { fields, headerClass } = config;
 	return (
 		<section className={cl`${styles.header} ${headerClass === 'border' ? styles.border : ''}`}>
@@ -23,6 +25,29 @@ function Header({ config = {} }) {
 					}}
 				>
 					{field.label}
+					{field.sortingKey && (
+						<div className={styles.sort}>
+							{
+								(sortBy === field.sortingKey && sortType === 'Asc') ? (
+									<IcMArrowRotateUp
+										onClick={() => setSort({
+											sortBy   : field.sortingKey,
+											sortType : 'Desc',
+										})}
+										color={(sortBy === field.sortingKey) ? '#f68b21' : '#000'}
+									/>
+								) : (
+									<IcMArrowRotateDown
+										onClick={() => setSort({
+											sortBy   : field.sortingKey,
+											sortType : 'Asc',
+										})}
+										color={(sortBy === field.sortingKey) ? '#f68b21' : '#000'}
+									/>
+								)
+							}
+						</div>
+					)}
 				</div>
 			))}
 		</section>
