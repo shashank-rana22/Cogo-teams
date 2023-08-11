@@ -4,7 +4,7 @@
 
 .fileName {
 	width: 100px;
-	margin-left: 14px;
+	margin-left: 16px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -98,7 +98,7 @@
 }
 
 .tooltip_value_style {
-	font-weight: 600;
+	font-size: 12px;
 	word-break: break-word;
 	word-wrap: break-word;
 }

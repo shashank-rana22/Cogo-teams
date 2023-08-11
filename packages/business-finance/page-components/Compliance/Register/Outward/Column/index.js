@@ -47,7 +47,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div>GSTIN</div>,
+			Header   : <div style={{ marginLeft: '4px' }}>GSTIN</div>,
 			id       : 'GSTIN',
 			accessor : ({ gstIn }) => (
 				<div className={styles.gstin}>
@@ -56,7 +56,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div>File Status</div>,
+			Header   : <div style={{ marginLeft: '10px' }}>File Status</div>,
 			id       : 'fileStatus',
 			accessor : ({ fileStatus, id, ackNumber, errorReportFile }) => (
 				fileStatus && 	(
@@ -99,7 +99,11 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 							>
 								<Tooltip
 									placement="top"
-									content="Download Report"
+									content={(
+										<div className={styles.tooltip_value_style}>
+											Download Report
+										</div>
+									)}
 								>
 									<IcMDownload height={15} width={15} className={styles.download_icon} />
 								</Tooltip>
@@ -110,7 +114,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div>Enable Status</div>,
+			Header   : <div style={{ marginLeft: '6px' }}>Enable Status</div>,
 			id       : 'enableStatus',
 			accessor : ({ status }) => (
 				status && (
@@ -155,33 +159,32 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 				return (
 					!isEmpty(total) ? (
 						<div className={styles.main_summary}>
-							<div
-								style={{
-									color: `${status === 'DISABLE' ? '#E0E0E0' : '#abcd62'}`,
-								}}
-							>
-								{ status !== 'DISABLE' ? (
-									<span>
-										{`${Number((successPer || DEFAULT_AMOUNT)?.toFixed(
-											DECIMAL_UPTO_SECOND_PLACE,
-										))}% Successful`}
-									</span>
-								) : '-'}
-							</div>
-							<div
-								className={styles.failure}
-								style={{
-									color: `${status === 'DISABLE' ? '#e0e0e0' : '#ee3425'}`,
-								}}
-							>
-								{ status !== 'DISABLE' ? (
-									<span className={styles.tooltip_text}>
-										{ `${Number((failurePer || DEFAULT_AMOUNT)?.toFixed(
-											DECIMAL_UPTO_SECOND_PLACE,
-										))}% Failed`}
-									</span>
-								) : '-'}
-							</div>
+							{ status !== 'DISABLE' ? (
+								<div>
+									{successPer === PERCENTAGE_FACTOR ? (
+										<div style={{ color: '#abcd62' }}>
+											<span>
+												{`${Number((successPer || DEFAULT_AMOUNT)?.toFixed(
+													DECIMAL_UPTO_SECOND_PLACE,
+												))}% Successful`}
+											</span>
+
+										</div>
+									) : (
+										<div
+											className={styles.failure}
+											style={{ color: '#ee3425' }}
+										>
+											<span>
+												{ `${Number(failurePer || DEFAULT_AMOUNT)?.toFixed(
+													DECIMAL_UPTO_SECOND_PLACE,
+												)}% Failed`}
+											</span>
+
+										</div>
+									)}
+								</div>
+							) : '-'}
 						</div>
 					) : 'N/A'
 				);
