@@ -1,12 +1,15 @@
-import { Pagination, Input } from '@cogoport/components';
+import { Pagination, Input, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
+import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
 
+import Filter from './Filter';
 import LoadingState from './LoadingState';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
@@ -49,6 +52,8 @@ function ListShipmentCards({
 
 function ShipmentsHomePage({ setActiveTab = () => {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
+	const [range, setRange] = useState('current_month');
+	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
 
 	const {
 		listLoading,
@@ -56,7 +61,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 		setParams,
 		params,
 		handlePageChange = () => {},
-	} = useListShipments();
+	} = useListShipments({ dateFilters });
 
 	const {
 		list = [],
@@ -80,6 +85,23 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 						placeholder="Search SID..."
 						type="number"
 					/>
+					<Select
+						size="sm"
+						value={params?.shipmentType}
+						className={styles.select_field}
+						onChange={(val) => setParams((prev) => ({ ...prev, shipmentType: val }))}
+						placeholder="Shipment Type"
+						options={SHIPMENT_TYPE_OPTIONS}
+						isClearable
+					/>
+					<div className={styles.custom_date_filter}>
+						<Filter
+							setDateFilters={setDateFilters}
+							range={range}
+							setRange={setRange}
+						/>
+					</div>
+
 				</div>
 			</div>
 			<div className={styles.shipments_cards_container}>
