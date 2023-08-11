@@ -8,6 +8,18 @@ import styles from './styles.module.css';
 const EXCLUDED_KEYS = ['container_number',
 	'marks_and_number', 'package_description', 'gross_weight', 'measurement'];
 
+function HeaderAction({ setShow = () => {}, handleSave = () => {}, mode = '' }) {
+	return (
+		<header className={styles.header_action}>
+			<p>Trade Document Template</p>
+			<div>
+				<Button themeType="secondary" onClick={() => setShow(false)}>Close</Button>
+				{mode === 'write' && <Button onClick={handleSave}>Save</Button>}
+			</div>
+		</header>
+	);
+}
+
 function HBLCreate({
 	onSave = () => {},
 	hblData = {},
@@ -62,7 +74,7 @@ function HBLCreate({
 				gross_weight        : data.gross_weight,
 				measurement         : data.measurement,
 			};
-			data.containers.push(containerDetails);
+			data.containers.unshift(containerDetails);
 
 			const finalData = omit(data, EXCLUDED_KEYS);
 
@@ -70,17 +82,6 @@ function HBLCreate({
 		})();
 		setShow(false);
 	};
-
-	const headerAction = () => (
-		<header className={styles.header_action}>
-			<p>Trade Document Template</p>
-			<div>
-				<Button themeType="secondary" onClick={() => setShow(false)}>Close</Button>
-				{mode === 'write' && <Button onClick={handleSave}>Save</Button>}
-			</div>
-		</header>
-
-	);
 
 	return (
 		<div className={styles.container}>
@@ -120,7 +121,7 @@ function HBLCreate({
 				className={styles.custom_modal}
 				showCloseIcon={false}
 			>
-				<Modal.Header title={headerAction()} />
+				<Modal.Header title={<HeaderAction setShow={setShow} mode={mode} handleSave={handleSave} />} />
 				<Modal.Body>
 					<TradeDocTemplate
 						documentType="bluetide_hbl"
