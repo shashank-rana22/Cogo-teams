@@ -2,6 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowBack, IcMPortArrow } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
@@ -60,6 +61,7 @@ function PortNames({ locationInfo = {} }) {
 }
 
 function Header({ origin_location = {}, destination_location = {}, week_info = {}, total_estimated_demand = '' }) {
+	const router = useRouter();
 	const startDate = formatDate({
 		date       : week_info?.start_date,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -74,12 +76,14 @@ function Header({ origin_location = {}, destination_location = {}, week_info = {
 		separator  : ' | ',
 	});
 
-	console.log('origin_location::', origin_location);
+	const onBack = () => {
+		router.back();
+	};
 
 	return (
 		<div className={styles.header}>
 			<div className={styles.back}>
-				<IcMArrowBack height={24} width={24} />
+				<IcMArrowBack height={24} width={24} onClick={onBack} />
 			</div>
 
 			<div className={styles.location_info}>
