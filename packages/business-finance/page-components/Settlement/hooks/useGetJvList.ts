@@ -4,6 +4,41 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
+const getPayload = ({
+	page,
+	category,
+	status,
+	query,
+	sortBy,
+	sortType,
+	entityCode,
+	startDate,
+	endDate,
+}) => ({
+	page,
+	pageLimit : 10,
+	category  : category || undefined,
+	status    : status || undefined,
+	query     : query || undefined,
+	sortBy    : sortBy || undefined,
+	sortType  : sortType || undefined,
+	entityCode,
+	startDate : startDate
+		? formatDate({
+			date       : startDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			formatType : 'date',
+		})
+		: undefined,
+	endDate: endDate
+		? formatDate({
+			date       : endDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			formatType : 'date',
+		})
+		: undefined,
+});
+
 const useGetJvList = ({ filters, entityCode }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -34,51 +69,33 @@ const useGetJvList = ({ filters, entityCode }) => {
 
 	const refetch = () => {
 		trigger({
-			params: {
+			params: getPayload({
 				page,
-				pageLimit : 10,
-				category  : category || undefined,
-				status    : status || undefined,
-				query     : query || undefined,
-				sortBy    : sortBy || undefined,
-				sortType  : sortType || undefined,
+				category,
+				status,
+				query,
+				sortBy,
+				sortType,
 				entityCode,
-				startDate : startDate ? formatDate({
-					date       : startDate,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					formatType : 'date',
-				}) : undefined,
-				endDate: endDate ? formatDate({
-					date       : endDate,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					formatType : 'date',
-				}) : undefined,
-			},
+				startDate,
+				endDate,
+			}),
 		});
 	};
 
 	useEffect(() => {
 		trigger({
-			params: {
+			params: getPayload({
 				page,
-				pageLimit : 10,
-				category  : category || undefined,
-				status    : status || undefined,
-				query     : query || undefined,
-				sortBy    : sortBy || undefined,
-				sortType  : sortType || undefined,
+				category,
+				status,
+				query,
+				sortBy,
+				sortType,
 				entityCode,
-				startDate : startDate ? formatDate({
-					date       : startDate,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					formatType : 'date',
-				}) : undefined,
-				endDate: endDate ? formatDate({
-					date       : endDate,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					formatType : 'date',
-				}) : undefined,
-			},
+				startDate,
+				endDate,
+			}),
 		});
 	}, [
 		trigger,

@@ -21,9 +21,11 @@ export const jvFilters = [
 	{
 		name        : 'status',
 		type        : 'select',
-		span        : 1,
 		placeholder : 'Status',
 		isClearable : true,
+		size        : 'md',
+		selectWidth : '180px',
+		span        : 1,
 		options     : [
 			{ label: 'APPROVED', value: 'APPROVED' },
 			{ label: 'POSTED', value: 'POSTED' },
@@ -33,7 +35,6 @@ export const jvFilters = [
 	{
 		name                  : 'accountingDate',
 		type                  : 'singleDateRange',
-		span                  : 1,
 		placeholder           : 'Accounting Date',
 		style                 : { width: '200px' },
 		isPreviousDaysAllowed : true,
