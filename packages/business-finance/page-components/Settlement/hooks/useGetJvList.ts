@@ -15,16 +15,16 @@ const useGetJvList = ({ filters, entityCode }) => {
 	);
 
 	const {
-		category,
-		status,
+		category = '',
+		status = '',
 		query: search,
 		page = 1,
-		sortType,
-		sortBy,
-		accountingDate,
+		sortType = 'Desc',
+		sortBy = 'transactionDate',
+		accountingDate = '',
 	} = filters || {};
 
-	const { startDate, endDate } = accountingDate || {};
+	const { startDate = '', endDate = '' } = accountingDate || {};
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -46,16 +46,12 @@ const useGetJvList = ({ filters, entityCode }) => {
 				startDate : startDate ? formatDate({
 					date       : startDate,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-					formatType : 'dateTime',
-					separator  : ' ',
+					formatType : 'date',
 				}) : undefined,
 				endDate: endDate ? formatDate({
 					date       : endDate,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-					formatType : 'dateTime',
-					separator  : ' ',
+					formatType : 'date',
 				}) : undefined,
 			},
 		});
@@ -73,20 +69,14 @@ const useGetJvList = ({ filters, entityCode }) => {
 				sortType  : sortType || undefined,
 				entityCode,
 				startDate : startDate ? formatDate({
-					date: startDate,
-					dateFormat:
-								GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-					formatType : 'dateTime',
-					separator  : ' ',
+					date       : startDate,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+					formatType : 'date',
 				}) : undefined,
 				endDate: endDate ? formatDate({
-					date: endDate,
-					dateFormat:
-								GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-					formatType : 'dateTime',
-					separator  : ' ',
+					date       : endDate,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+					formatType : 'date',
 				}) : undefined,
 			},
 		});
