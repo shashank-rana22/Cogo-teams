@@ -50,7 +50,7 @@ function LeaveModal({
 
 					<TextAreaController
 						control={control}
-						name="comment"
+						name="reason"
 						size="sm"
 						rows={3}
 						placeholder="Enter the specific reason"
