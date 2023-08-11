@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
+import ListLoading from '../../../common/EmptyState/ListLoading';
 import getSupplierTableConfig from '../../../configurations/supplier-table-config';
 import useGetRollingFclFreightSuppliers from '../../../hooks/useGetRollingFclFreightSuppliers';
 import Card from '../Card';
@@ -12,10 +13,8 @@ const DEFAULT_CURRENT_PAGE = 1;
 
 function SupplierList({ origin_location_id = '', destination_location_id = '' }) {
 	const {
-		list:dataList = [], pageData, page, setPage,
+		list:dataList = [], pageData, page, setPage, loading,
 	} =	 useGetRollingFclFreightSuppliers({ origin_location_id, destination_location_id });
-
-	// const dataList = SupplierDataConfig();
 
 	const tableConfig = getSupplierTableConfig();
 
@@ -28,7 +27,7 @@ function SupplierList({ origin_location_id = '', destination_location_id = '' })
 				})}
 			</div>
 			{
-				dataList.map((card) => (
+				loading ? <ListLoading /> : dataList.map((card) => (
 					<Card key={card?.id} card={card} />
 				))
 			}

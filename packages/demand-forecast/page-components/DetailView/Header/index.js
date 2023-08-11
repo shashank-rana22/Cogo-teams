@@ -4,6 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowBack, IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
+import HeaderLoading from '../../../common/EmptyState/HeaderLoading';
+
 import styles from './styles.module.css';
 
 const NEGATIVE_INDEX = 1;
@@ -60,7 +62,11 @@ function PortNames({ locationInfo = {} }) {
 	);
 }
 
-function Header({ origin_location = {}, destination_location = {}, week_info = {}, total_estimated_demand = '' }) {
+function Header({
+	origin_location = {}, destination_location = {},
+	week_info = {}, total_estimated_demand = '',
+	loading = true,
+}) {
 	const router = useRouter();
 	const startDate = formatDate({
 		date       : week_info?.start_date,
@@ -81,37 +87,39 @@ function Header({ origin_location = {}, destination_location = {}, week_info = {
 	};
 
 	return (
-		<div className={styles.header}>
-			<div className={styles.back}>
-				<IcMArrowBack height={24} width={24} onClick={onBack} />
-			</div>
+		loading ? <HeaderLoading />
+			: (
+				<div className={styles.header}>
+					<div className={styles.back}>
+						<IcMArrowBack height={24} width={24} onClick={onBack} />
+					</div>
 
-			<div className={styles.location_info}>
-				<PortNames locationInfo={origin_location} />
-				<div>
-					<IcMPortArrow />
-				</div>
-				<PortNames locationInfo={destination_location} />
-			</div>
+					<div className={styles.location_info}>
+						<PortNames locationInfo={origin_location} />
+						<div>
+							<IcMPortArrow />
+						</div>
+						<PortNames locationInfo={destination_location} />
+					</div>
 
-			<div className={styles.forecasted_demand}>
-				<div>Forecasted Demands</div>
-				<div>
-					{total_estimated_demand}
-				</div>
-			</div>
+					<div className={styles.forecasted_demand}>
+						<div>Forecasted Demands</div>
+						<div>
+							{total_estimated_demand}
+						</div>
+					</div>
 
-			<div className={styles.forecasted_dates}>
-				<div>Forecasted Dates</div>
-				<div>
-					{startDate}
-					{' '}
-					-
-					{endDate}
+					<div className={styles.forecasted_dates}>
+						<div>Forecasted Dates</div>
+						<div>
+							{startDate}
+							{' '}
+							-
+							{endDate}
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	);
+			));
 }
 
 export default Header;

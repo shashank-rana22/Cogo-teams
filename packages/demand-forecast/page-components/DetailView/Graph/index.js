@@ -58,7 +58,10 @@ const GRAPH_COLOR_MAPPING = {
 	persona_forecasts        : ['#ABB0DE', '#CED1ED', '#9BA0CB', '#7278AD', '#F2F3FA'],
 };
 
-function Graph({ data = {} }) {
+function Graph({
+	data = {},
+	loading = true,
+}) {
 	return (
 		<div className={styles.container}>
 			{
@@ -73,7 +76,7 @@ function Graph({ data = {} }) {
 						</div>
 						<div className={styles.graph}>
 							<ResponsivePie
-								loading={false}
+								loading={loading}
 								data={graphicalData}
 								innerRadius={0.5}
 								activeOuterRadiusOffset={6}
