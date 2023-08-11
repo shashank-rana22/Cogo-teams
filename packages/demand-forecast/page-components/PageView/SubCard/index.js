@@ -1,7 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-// import getSubTableConfig from '../../../configurations/sub-table-config';
+import EmptyState from '../../../common/EmptyState/EmptyState';
+import ListLoading from '../../../common/EmptyState/ListLoading';
 import useGetRollingForecastPortPairs from '../../../hooks/useGetRollingForecastPortPairs';
 
 import styles from './styles.module.css';
@@ -13,25 +14,35 @@ const KEYS_MAPPING = {
 };
 
 function SubCard({ showDetails = false, origin_cluster_id = '', destination_cluster_id = '' }) {
-	const { getRollingForecastPortPairs, data:portPairData } = useGetRollingForecastPortPairs();
+	const { getRollingForecastPortPairs, data:portPairData, loading } = useGetRollingForecastPortPairs();
 
 	useEffect(() => {
 		getRollingForecastPortPairs({ origin_cluster_id, destination_cluster_id });
 	}, [origin_cluster_id, destination_cluster_id, getRollingForecastPortPairs]);
 
-	console.log('portPairData::', portPairData);
-
 	if (!showDetails) {
 		return null;
 	}
 
-	if (isEmpty(portPairData)) {
-		return null;
+	if (isEmpty(portPairData) && !loading) {
+		return (
+			<div>
+				<EmptyState
+					height="250"
+					width="400"
+					flexDirection="column"
+					alignItems="center"
+					emptyText="Data Not Found"
+					textSize="20"
+					marginTop="100px"
+				/>
+			</div>
+		);
 	}
 
 	return (
 		<div className={styles.sub_card}>
-			{Object.keys(portPairData).map((key) => (
+			{	loading ? <ListLoading /> : Object.keys(portPairData).map((key) => (
 				!isEmpty(portPairData[key]) && (
 					<div key={key} className={styles.card}>
 						<div className={styles.title}>

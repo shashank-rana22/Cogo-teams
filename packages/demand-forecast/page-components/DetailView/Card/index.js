@@ -5,8 +5,10 @@ import EmailPreview from '../EmailPreview';
 
 import styles from './styles.module.css';
 
+const NUMBER_FIXED_TO_DECIMAL = 3;
+
 function Card({ card = {} }) {
-	const { supplier_name, potential, capability, rates_added } = card;
+	const { capability, rates_added, service_provider = {}, winning_profitability } = card;
 
 	const [isEmail, setIsEmail] = useState(false);
 
@@ -17,8 +19,12 @@ function Card({ card = {} }) {
 	return (
 		<>
 			<div className={styles.row}>
-				<div className={styles.supplier_name}>{supplier_name}</div>
-				<div className={styles.potential}>{potential}</div>
+				<div className={styles.supplier_name}>{service_provider?.business_name}</div>
+				<div
+					className={styles.winning_profitability}
+				>
+					{winning_profitability.toFixed(NUMBER_FIXED_TO_DECIMAL)}
+				</div>
 				<div className={styles.capability}>{capability}</div>
 				<div className={styles.rates_added}>{rates_added}</div>
 				<div className={styles.ask_for_rates}>

@@ -1,7 +1,7 @@
 .single_chart_container {
 	align-items: center;
-	width: 25%;
-	margin-top: 12px;
+	width: 24%;
+	padding: 4px;
 	background: #fff;
 }
 
@@ -45,4 +45,10 @@
 
 .legend_value {
 	margin-left: 24px;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0;
 }

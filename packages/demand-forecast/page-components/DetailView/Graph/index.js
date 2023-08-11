@@ -1,78 +1,116 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function Graph({ title = 'Weekly Distribution' }) {
-	const data = [
-		{
-			id    : 'haskell',
-			label : 'Aug 1st Week',
-			value : '112',
-		},
-		{
-			id    : 'php',
-			label : 'Aug 2st Week',
-			value : '243',
-		},
-		{
-			id    : 'python',
-			label : 'Aug 3st Week',
-			value : '289',
-		},
-		{
-			id    : 'java',
-			label : 'Aug 4st Week',
-			value : '310',
-		},
-		{
-			id    : 'java',
-			label : 'Aug 4st Week',
-			value : '310',
-		},
-	];
+const DEFAULT_LENGTH = 1;
 
-	const colors = ['#ACDADF', '#F3FAFA', '#CFEAED', '#63BEC8', '#ACDADF'];
+const GRAPH_TTTLE = {
+	container_size_forecasts : 'Container Size Distribution',
+	container_type_forecasts : 'Container Type Distribution',
+	persona_forecasts        : 'Persona Distribution',
+	weekly_forecasts         : 'Weekly Distribution',
+};
+const getDateLabel = (dates = []) => {
+	let label = '';
+
+	dates.forEach((date, index) => {
+		const dateValue = formatDate({
+			date,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+			formatType : 'date',
+		});
+
+		label += dateValue;
+
+		if (index < dates.length - DEFAULT_LENGTH) {
+			label += ' - ';
+		}
+	});
+
+	return label;
+};
+
+const getGraphData = ({ graphInfo = {}, key }) => {
+	const graphData = Object.keys(graphInfo).map((graphInfoKey) => {
+		if (key === 'weekly_forecasts') {
+			return {
+				id    : graphInfoKey,
+				label : getDateLabel(JSON.parse(graphInfoKey)),
+				value : graphInfo[graphInfoKey],
+			};
+		}
+		return {
+			id    : graphInfoKey,
+			label : startCase(graphInfoKey),
+			value : graphInfo[graphInfoKey],
+		};
+	});
+	return graphData;
+};
+
+const GRAPH_COLOR_MAPPING = {
+	weekly_forecasts         : ['#ACDADF', '#F3FAFA', '#CFEAED', '#63BEC8', '#ACDADF'],
+	container_type_forecasts : ['#C26D1A', '#E8BE95', '#A87441', '#F9AE64', '#FEF3E9', '#FBD1A6'],
+	container_size_forecasts : ['#DDEBC0', '#C4DC91', '#ABCD62', '#F7FAEF'],
+	persona_forecasts        : ['#ABB0DE', '#CED1ED', '#9BA0CB', '#7278AD', '#F2F3FA'],
+};
+
+function Graph({ data = {} }) {
 	return (
-		<div>
-			<div className={styles.single_chart_container}>
-				<div className={styles.title}>
-					{title}
-				</div>
-				<div className={styles.graph}>
-					<ResponsivePie
-						loading={false}
-						data={data}
-						innerRadius={0.5}
-						activeOuterRadiusOffset={4}
-						enableArcLinkLabels={false}
-						enableArcLabels={false}
-						colors={colors}
-						colorBy="index"
-					/>
-				</div>
-				<div className={styles.legends}>
-					{
-						data.map((legend, index) => (
-							<div key="123" className={styles.legend_info}>
-								<div className={styles.legend_title}>
-									<Logo backgroundColor={colors[index]} />
-									<div>{legend?.label}</div>
-								</div>
+		<div className={styles.container}>
+			{
+			Object.keys(GRAPH_TTTLE).map((key) => {
+				const graphicalData = getGraphData({ graphInfo: data[key], key });
+				const colors = GRAPH_COLOR_MAPPING[key];
 
-								<div className={styles.legend_value}>
-									{legend?.value}
-									{' '}
-									Containers
-								</div>
-							</div>
-						))
-					}
+				return (
+					<div key={key} className={styles.single_chart_container}>
+						<div className={styles.title}>
+							{GRAPH_TTTLE[key]}
+						</div>
+						<div className={styles.graph}>
+							<ResponsivePie
+								loading={false}
+								data={graphicalData}
+								innerRadius={0.5}
+								activeOuterRadiusOffset={6}
+								enableArcLinkLabels={false}
+								enableArcLabels={false}
+								colors={colors}
+								colorBy="index"
+							/>
+						</div>
+						<div className={styles.legends}>
+							{
+							graphicalData.map((legend, index) => (
+								<div key="123" className={styles.legend_info}>
+									<div className={styles.legend_title}>
+										<Logo backgroundColor={colors[index]} />
+										<div>{legend?.label}</div>
+									</div>
 
-				</div>
-			</div>
+									<div className={styles.legend_value}>
+										{legend?.value}
+										{' '}
+										TEUs
+									</div>
+								</div>
+							))
+}
+						</div>
+					</div>
+				);
+			})
+			}
+
 		</div>
 	);
 }
+
+export default Graph;
 
 function Logo({ backgroundColor = '' }) {
 	const logoStyle = {
@@ -85,4 +123,3 @@ function Logo({ backgroundColor = '' }) {
 
 	return <div className={styles.logo} style={logoStyle} />;
 }
-export default Graph;

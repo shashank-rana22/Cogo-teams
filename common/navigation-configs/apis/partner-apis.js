@@ -13418,6 +13418,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
 		},
+		{
+			api          : 'get_rolling_fcl_freight_suppliers',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
 	],
 };
 

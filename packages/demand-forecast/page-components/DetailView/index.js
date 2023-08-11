@@ -17,13 +17,24 @@ function DetailView() {
 		getRollingForecastPortPairs({ origin_location_id: origin_id, destination_location_id: destination_id });
 	}, [destination_id, getRollingForecastPortPairs, origin_id]);
 
-	console.log('data', data);
+	const {
+		origin_location = {}, destination_location = {}, week_info = {}, total_estimated_demand
+		= '',
+	} = data || {};
 
 	return (
 		<div>
-			<Header />
-			<Graph />
-			<SupplierList />
+			<Header
+				origin_location={origin_location}
+				destination_location={destination_location}
+				week_info={week_info}
+				total_estimated_demand={total_estimated_demand}
+			/>
+			<Graph data={data} />
+			<SupplierList
+				origin_location_id={origin_id}
+				destination_location_id={destination_id}
+			/>
 		</div>
 	);
 }
