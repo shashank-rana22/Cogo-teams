@@ -28,7 +28,12 @@ function SupplierList({ origin_location_id = '', destination_location_id = '' })
 			</div>
 			{
 				loading ? <ListLoading /> : dataList.map((card) => (
-					<Card key={card?.id} card={card} />
+					<Card
+						key={card?.id}
+						card={card}
+						origin_location_id={origin_location_id}
+						destination_location_id={destination_location_id}
+					/>
 				))
 			}
 			<div className={styles.pagination_container}>

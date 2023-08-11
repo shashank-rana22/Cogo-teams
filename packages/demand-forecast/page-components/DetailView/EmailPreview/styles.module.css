@@ -19,7 +19,8 @@
 
 .multi_select {
 	width: 400px;
-	margin-bottom: 12px;
+
+	/* margin-bottom: 12px; */
 }
 
 .email {
@@ -59,4 +60,25 @@
 
 .cancel {
 	margin-right: 8px;
+}
+
+.email_name {
+	margin-left: 8px;
+}
+
+.subject_info {
+	margin-left: 8px;
+}
+
+.error {
+	color: red;
+}
+
+.tags {
+	margin-top: 12px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
 }

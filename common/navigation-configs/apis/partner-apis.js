@@ -13423,6 +13423,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rolling_forecast',
 		},
+		{
+			api          : 'get_email_preview',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
+		{
+			api          : 'send_requirement_email',
+			access_type  : 'private',
+			service_name : 'rolling_forecast',
+		},
 	],
 };
 

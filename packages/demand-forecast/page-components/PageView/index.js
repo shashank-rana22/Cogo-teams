@@ -11,8 +11,6 @@ function PageView() {
 
 	const [filters, setFilters] = useState({});
 
-	console.log('filters::', filters);
-
 	return (
 		<div>
 			<Header />
