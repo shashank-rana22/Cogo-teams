@@ -6,7 +6,7 @@ import useOutwardFileList from '../../hooks/useOutwardFileList';
 import useRefreshData from '../../hooks/useRefreshData';
 import useUploadAndDelete from '../../hooks/useUploadAndDelete';
 
-import Column from './Column';
+import column from './Column';
 import HeaderOutward from './HeaderOutward';
 import styles from './styles.module.css';
 
@@ -50,7 +50,7 @@ function Outward({ filters, setFilters }) {
 			<div>
 				<StyledTable
 					data={list}
-					columns={Column(refresh, deleteId, statusId, uploadId)}
+					columns={column(refresh, deleteId, statusId, uploadId)}
 					imageFind={EMPTY_STATE_IMG}
 					loading={
             listLoading

@@ -7,12 +7,12 @@ export const MAPPING_FILE_STATUS_COLOR = {
 	ERROR_IN_EXPORT    : '#F8AEA8',
 };
 export const MAPPING_FILE_STATUS = {
-	READY              : 'READY TO UPLOAD ',
-	UPLOADED           : 'UPLOADED',
-	UPLOAD_IN_PROGRESS : 'UPLOAD IN PROGRESS',
-	PROCESSING         : 'EXPORT IN PROGRESS',
-	ERROR              : 'ERROR',
-	ERROR_IN_EXPORT    : 'ERROR IN EXPORT',
+	READY              : 'Ready To Upload ',
+	UPLOADED           : 'Uploaded',
+	UPLOAD_IN_PROGRESS : 'Upload In Progress',
+	PROCESSING         : 'Export In Progress',
+	ERROR              : 'Error',
+	ERROR_IN_EXPORT    : 'Error In Export',
 };
 
 export const MAPPING_ENABLE_STATUS = {

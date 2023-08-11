@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 const PERCENTAGE_FACTOR = 100;
 const DECIMAL_UPTO_SECOND_PLACE = 2;
 const DEFAULT_AMOUNT = 0;
-const Column = (refresh, deleteId, statusId, uploadId) => {
+const column = (refresh, deleteId, statusId, uploadId) => {
 	const handleErrorReport = (errorReportFile) => {
 		if (errorReportFile !== 'ERROR') {
 			window.open(errorReportFile, '_blank');
@@ -115,7 +115,7 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 			accessor : ({ status }) => (
 				status && (
 					<div className={styles.enable_status}>
-						<Pill size="md" color={MAPPING_ENABLE_STATUS[status]}>{startCase(status)}</Pill>
+						<Pill size="md" color={MAPPING_ENABLE_STATUS[status]}>{startCase(status.toLowerCase())}</Pill>
 					</div>
 				)
 			),
@@ -206,7 +206,7 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 						>
 							<Tooltip
 								placement="top"
-								content="Go to DegeGST Portal ->"
+								content="Redirect DigiGST Portal ->"
 							>
 								<IcMOpenlink height="20px" width="20px" />
 							</Tooltip>
@@ -242,4 +242,4 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 		},
 	];
 };
-export default Column;
+export default column;
