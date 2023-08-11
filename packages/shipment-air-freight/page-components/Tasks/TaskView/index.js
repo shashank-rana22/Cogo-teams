@@ -24,7 +24,6 @@ function TaskView() {
 		shipment_data,
 		primary_service,
 		servicesList,
-		refetch: getShipment = () => {},
 		getShipmentTimeline = () => {},
 		isGettingShipment,
 	} = useContext(ShipmentDetailContext);
@@ -153,7 +152,6 @@ function TaskView() {
 								setSelectedMail={setSelectedMail}
 								shipment_data={shipment_data}
 								primary_service={primary_service}
-								getShipment={getShipment}
 								getShipmentTimeline={getShipmentTimeline}
 							/>
 						</>

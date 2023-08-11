@@ -1,7 +1,7 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useRequest } from '@cogoport/request';
+import { useRequest, useRequestAir } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
@@ -53,6 +53,14 @@ function useHandleSubmit({
 		url    : '/create_awb_inventory',
 		method : 'POST',
 	}, { manual: true });
+
+	const [{ loading:warehouseScheduleLoading }, createWarehouseSchedule] = useRequestAir(
+		{
+			url     : 'air-coe/warehouse-management/schedule',
+			method  : 'POST',
+			authKey : 'post_air_coe_warehouse_management_schedule',
+		},
+	);
 
 	const { submitShipmentMapping } = useUpdateShipmentCogoid();
 
@@ -128,6 +136,21 @@ function useHandleSubmit({
 				}
 			}
 
+			if (task.task === 'update_truck_details') {
+				const warehouseService = services.find(
+					(service) => service?.service_type === 'warehouse_service',
+				);
+
+				await createWarehouseSchedule({
+					data: {
+						shipmentId          : warehouseService.shipment_id,
+						truckDetails        : transformedRawValues.truck_details,
+						truckInEta          : warehouseService.cargo_gated_in,
+						warehouseLocationId : warehouseService.location_id,
+					},
+				});
+			}
+
 			const res = await trigger({ data: finalPayload });
 
 			if (!res.hasError) {
@@ -189,7 +212,7 @@ function useHandleSubmit({
 
 	return {
 		onSubmit,
-		loading: loading || loadingTask || isLoading || awbLoading,
+		loading: loading || loadingTask || isLoading || awbLoading || warehouseScheduleLoading,
 	};
 }
 export default useHandleSubmit;
