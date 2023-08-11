@@ -25,12 +25,33 @@ interface CardInterface {
 	setSearchValue?: React.Dispatch<React.SetStateAction<string>>;
 }
 
+interface ContentInterface {
+	setProfitNumber?: React.Dispatch<React.SetStateAction<string>>;
+	profitNumber?: string;
+	filters?: FilterInterface;
+	setFilters?: React.Dispatch<React.SetStateAction<FilterInterface>>;
+}
+
 const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 const FIRST_MONTH_INDEX = 1;
 const FIRST_PAGE = 1;
 const ALLOW_BUTTON_ON_COUNT = 2;
 const MAX_DAY_ALLOWED = 10;
 const FILTER_COUNT_INCREMENT = 1;
+
+function ContentMoreFilter({
+	setProfitNumber = () => {}, profitNumber = '',
+	filters = {}, setFilters = () => {},
+}:ContentInterface) {
+	return (
+		<MoreFilter
+			profitNumber={profitNumber}
+			setProfitNumber={setProfitNumber}
+			filters={filters}
+			setFilters={setFilters}
+		/>
+	);
+}
 
 function Card({
 	refetch = () => {}, filters = {}, setFilters = () => {},
@@ -67,16 +88,6 @@ function Card({
 		});
 	}, [filters, setShowBtn, setViewSelected]);
 
-	function ContentMoreFilter() {
-		return (
-			<MoreFilter
-				profitNumber={profitNumber}
-				setProfitNumber={setProfitNumber}
-				filters={filters}
-				setFilters={setFilters}
-			/>
-		);
-	}
 	const rest = { onClickOutside: () => { setMoreFilter(false); } };
 
 	const onSubmit = () => {
@@ -85,7 +96,7 @@ function Card({
 		setFilters((prev) => ({ ...prev, page: 1 }));
 		setViewSelected(false);
 
-		if (filters.page === FIRST_PAGE) {
+		if (filters?.page === FIRST_PAGE) {
 			refetch();
 		}
 	};
@@ -233,7 +244,14 @@ function Card({
 			<div className={styles.more_filter}>
 				<Popover
 					placement="bottom"
-					render={ContentMoreFilter()}
+					render={(
+						<ContentMoreFilter
+							profitNumber={profitNumber}
+							setProfitNumber={setProfitNumber}
+							filters={filters}
+							setFilters={setFilters}
+						/>
+					)}
 					visible={moreFilter}
 					{...rest}
 				>

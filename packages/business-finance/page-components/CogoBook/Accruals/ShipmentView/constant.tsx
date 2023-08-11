@@ -57,7 +57,7 @@ export const optionsData = [
 	},
 ];
 
-const content = (purchaseInvoicesCount, salesInvoicesCount) => {
+function Content(purchaseInvoicesCount, salesInvoicesCount) {
 	const { creditNoteCount = '', invoiceCount = '', proformaCount = ''	} = purchaseInvoicesCount || {};
 	const {
 		creditNoteCount:salesCreditNoteCount = '',
@@ -104,10 +104,10 @@ const content = (purchaseInvoicesCount, salesInvoicesCount) => {
 		</div>
 
 	);
-};
+}
 export const accrualColumn = (
-	getTableBodyCheckbox,
-	getTableHeaderCheckbox,
+	GetTableBodyCheckbox,
+	GetTableHeaderCheckbox,
 	editProfitHandler,
 	changeProfitHandler,
 	crossProfitHandler,
@@ -118,10 +118,10 @@ export const accrualColumn = (
 	setFilters,
 ) => [
 	{
-		Header   : <div className={styles.header_checkbox}>{getTableHeaderCheckbox()}</div>,
+		Header   : <div className={styles.header_checkbox}>{GetTableHeaderCheckbox()}</div>,
 		accessor : 'getCheckbox',
 		id       : 'getCheckbox',
-		Cell     : ({ row: { original } }) => getTableBodyCheckbox(original),
+		Cell     : ({ row: { original } }) => GetTableBodyCheckbox(original),
 	},
 	{
 		Header: () => (
@@ -140,7 +140,7 @@ export const accrualColumn = (
 			const { jobNumber = '', serviceType = '', purchaseInvoicesCount, salesInvoicesCount		} = original || {};
 			return (
 				<Tooltip
-					content={content(purchaseInvoicesCount, salesInvoicesCount)}
+					content={Content(purchaseInvoicesCount, salesInvoicesCount)}
 					placement="top"
 					trigger="mouseenter"
 					interactive

@@ -45,9 +45,9 @@ function ShipmentView() {
 	const {
 		refetch,
 		shipmentLoading,
-		getTableBodyCheckbox,
+		GetTableBodyCheckbox,
 		checkedData,
-		getTableHeaderCheckbox,
+		GetTableHeaderCheckbox,
 		payload,
 		setPayload,
 		addSelect,
@@ -86,15 +86,13 @@ function ShipmentView() {
 
 				</Button>
 			</div>
-			{showBookShipment
-				? (
-					<BookShipmentModal
-						showBookShipment={showBookShipment}
-						setShowBookShipment={setShowBookShipment}
-						filters={filters}
-					/>
-				)
-				: ''}
+			{showBookShipment && (
+				<BookShipmentModal
+					showBookShipment={showBookShipment}
+					setShowBookShipment={setShowBookShipment}
+					filters={filters}
+				/>
+			)}
 
 			<Card
 				refetch={refetch}
@@ -150,8 +148,8 @@ function ShipmentView() {
 					pageSize={10}
 					data={list}
 					columns={accrualColumn(
-						getTableBodyCheckbox,
-						getTableHeaderCheckbox,
+						GetTableBodyCheckbox,
+						GetTableHeaderCheckbox,
 						editProfitHandler,
 						changeProfitHandler,
 						crossProfitHandler,

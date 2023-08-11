@@ -97,7 +97,7 @@ function MoreFilter({
 										<Pill
 											size="sm"
 											color={filters.tradeType === item?.value ? '#cfeaed'
-												: 'white'}
+												: '#fff'}
 										>
 											{item?.label}
 

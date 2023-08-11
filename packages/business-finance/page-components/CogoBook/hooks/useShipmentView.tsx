@@ -17,8 +17,18 @@ interface ShipmentInterface {
 	checkedRows?:object
 	bulkAction?:string
 }
-
-const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection }:ShipmentInterface) => {
+const RANGE_MAPPING = {
+	''      : '',
+	'>'     : 'gt',
+	'>='    : 'gte',
+	'<'     : 'lt',
+	'<='    : 'lte',
+	'<=x=<' : 'btw',
+};
+const useShipmentView = ({
+	filters = {}, checkedRows = {}, setCheckedRows = () => {},
+	setBulkSection = () => {},
+}:ShipmentInterface) => {
 	const didMountRef = useRef(false);
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -77,14 +87,6 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 	);
 
 	const refetch = useCallback(async () => {
-		const RANGE_MAPPING = {
-			''      : '',
-			'>'     : 'gt',
-			'>='    : 'gte',
-			'<'     : 'lt',
-			'<='    : 'lte',
-			'<=x=<' : 'btw',
-		};
 		try {
 			const resp = await shipmentTrigger({
 				params: {
@@ -219,7 +221,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 			setPayload([]);
 		}
 	};
-	const getTableHeaderCheckbox = () => {
+	function GetTableHeaderCheckbox() {
 		const { page: pages = 0 } = paginationData;
 		const isAllRowsChecked = !isEmpty(groupListData)
 		&& (checkedRows?.[`page-${pages}`] || []).length === (groupListData || []).length;
@@ -231,7 +233,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 				onChange={onChangeTableHeaderCheckbox}
 			/>
 		);
-	};
+	}
 
 	const onChangeTableBodyCheckbox = (event, item) => {
 		const { page: pages = 0 } = paginationData;
@@ -257,7 +259,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 		}
 	};
 
-	const getTableBodyCheckbox = (item) => {
+	function GetTableBodyCheckbox(item) {
 		const { page: pages = 0 } = paginationData;
 		const isChecked = (checkedRows?.[`page-${pages}`] || []).includes(
 			`${item?.jobId || ''}`,
@@ -269,21 +271,12 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 				onChange={(event) => onChangeTableBodyCheckbox(event, item)}
 			/>
 		);
-	};
+	}
 
 	const addSelect = async (setOpenModal) => {
 		const newPayload = payload.map((item) => ({
 			...item,
 		}));
-
-		const RANGE_MAPPING = {
-			''      : '',
-			'>'     : 'gt',
-			'>='    : 'gte',
-			'<'     : 'lt',
-			'<='    : 'lte',
-			'<=x=<' : 'btw',
-		};
 
 		try {
 			const res = await addToSelectedTrigger({
@@ -424,7 +417,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 		changeProfitHandler,
 		crossProfitHandler,
 		tickProfitHandler,
-		getTableBodyCheckbox,
+		GetTableBodyCheckbox,
 		setPayload,
 		selectedData,
 		editProfitHandler,
@@ -435,7 +428,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection 
 		checkedRowsSerialId,
 		payload,
 		selectedDataLoading,
-		getTableHeaderCheckbox,
+		GetTableHeaderCheckbox,
 		checkedData,
 		viewSelected,
 		setViewSelected,
