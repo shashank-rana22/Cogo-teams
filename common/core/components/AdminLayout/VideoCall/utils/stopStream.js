@@ -8,6 +8,6 @@ export const stopStream = ({ streamType = '', currentStream = {} }) => {
 	const tracks = currentStream[streamType]?.getTracks();
 
 	tracks?.forEach((track) => {
-		track.stop();
+		track?.stop();
 	});
 };
