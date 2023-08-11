@@ -1,6 +1,6 @@
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, Fragment } from 'react';
 
 import useGetRollingForecastData from '../../hooks/useGetRollingForecastData';
 import useListFclSearches from '../../hooks/useListFclSearches';
@@ -66,10 +66,16 @@ function View() {
 	const { graphData, count } = generateData({ container_type_forecasts });
 
 	return (
-		<>
-			<Header graphData={graphData} count={count} originName={originName} destinationName={destinationName} />
+		<Fragment key={search_id}>
+			<Header
+				graphData={graphData}
+				count={count}
+				originName={originName}
+				destinationName={destinationName}
+				key={search_id}
+			/>
 			<List />
-		</>
+		</Fragment>
 	);
 }
 
