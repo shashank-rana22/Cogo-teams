@@ -45,7 +45,8 @@ const formatData = ({
 			? `source=communication&active_chat=${activeCardId}` : 'source=communication';
 
 		if (isChannelPartner) {
-			let redirectionLink = `/${partnerId}/prm/${userPartnerId}?${linkSuffix}${userId ? `&${userId}` : ''}`;
+			let redirectionLink = `/${partnerId}/prm/
+			${userPartnerId}?${linkSuffix}${userId ? `&user_id=${userId}` : ''}`;
 			redirectionLink = prm
 				? `${redirectionLink}&omniChannelActiveTab=${prm}`
 				: redirectionLink;
@@ -53,7 +54,7 @@ const formatData = ({
 			return;
 		}
 
-		let crmRedirect = `/${partnerId}/details/demand/${ORGID}?${linkSuffix}${userId ? `&${userId}` : ''}`;
+		let crmRedirect = `/${partnerId}/details/demand/${ORGID}?${linkSuffix}${userId ? `&user_id=${userId}` : ''}`;
 
 		crmRedirect = crm
 			? `${crmRedirect}&omniChannelActiveTab=${crm}`
