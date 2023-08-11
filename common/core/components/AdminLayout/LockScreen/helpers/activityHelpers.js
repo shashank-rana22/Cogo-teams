@@ -26,6 +26,7 @@ export const getTimeoutConstant = async (firestore) => {
 	const cogoOneConstantsDocs = cogoOneConstants?.docs[GLOBAL_CONSTANTS.zeroth_index];
 
 	const {
+		enable_for_roles = [],
 		screen_lock_timeout = DEFAULT_TIMEOUT,
 		is_locked_screen = false,
 	} = cogoOneConstantsDocs?.data() || {};
@@ -33,6 +34,7 @@ export const getTimeoutConstant = async (firestore) => {
 	return {
 		timeoutValue : screen_lock_timeout,
 		isLockedBool : is_locked_screen,
+		enableRole   : enable_for_roles,
 	};
 };
 
@@ -79,4 +81,10 @@ export async function unMountActivityTracker({ FUNC_MAPPING, firestore, isRolePr
 			true,
 		);
 	});
+}
+
+export async function getRolesIsLocked({ firestore }) {
+	const { enableRole = [] } = await getTimeoutConstant(firestore);
+
+	return enableRole;
 }

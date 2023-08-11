@@ -2,8 +2,9 @@ import { Modal, Button } from '@cogoport/components';
 import OTPInput from '@cogoport/forms/page-components/Business/OTPInput';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
+import { useState, useEffect } from 'react';
 
-import getViewTypeMapping from '../../constants/index';
+import { getRolesIsLocked } from '../../helpers/activityHelpers';
 import useGetActivity from '../../hooks/useGetActivity';
 import useGetGenerateOtp from '../../hooks/useGetGenerateOtp';
 import useSubmitOtp from '../../hooks/useSubmitOtp';
@@ -20,9 +21,9 @@ function LockScreen({
 	firestore = {},
 	inCall = false,
 }) {
-	const { ROLE_IDS_CHECK } = getViewTypeMapping();
+	const [enableRole, setEnableRole] = useState([]);
 
-	const isRolePresent = userRoleIds.some((itm) => ROLE_IDS_CHECK.kam_view.includes(itm));
+	const isRolePresent = userRoleIds.some((itm) => enableRole.includes(itm));
 
 	const { showModal, setShowModal } = useGetActivity({
 		firestore,
@@ -30,11 +31,20 @@ function LockScreen({
 		isRolePresent,
 		inCall,
 	});
+
 	const { apiTrigger, loading, otpNumber, setOtpNumber } = useSubmitOtp({ agentId, firestore, setShowModal });
 
 	const { generateOtp } = useGetGenerateOtp({ agentId, firestore, setShowModal });
 
 	const showLockScreen = isRolePresent && showModal;
+
+	useEffect(() => {
+		async function fetchData() {
+			const response = await getRolesIsLocked({ firestore });
+			setEnableRole(response);
+		}
+		fetchData();
+	}, [firestore]);
 
 	return (
 		<Modal
