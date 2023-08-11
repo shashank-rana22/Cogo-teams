@@ -1878,6 +1878,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/account-scoring',
 				possible_apis : apis.account_scoring,
 			},
+			{
+				key           : 'allocations-objective_configurations',
+				title         : 'Objective Configurations',
+				href          : '/v2/allocation/objective-configurations',
+				as            : '/v2/allocation/objective-configurations',
+				possible_apis : apis.objective_configurations,
+			},
 		],
 	},
 	kam_monitoring: {
