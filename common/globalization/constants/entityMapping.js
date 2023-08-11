@@ -9,7 +9,7 @@ import {
 const ENTITY_MAPPING = {
 	101: {
 		country_code        : 'IN',
-		name                : 'COGO FREIGHT PVT LTD',
+		name                : 'COGO FREIGHT PVT LTD.',
 		id                  : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		icon                : IcCCountryIndia,
 		currency            : 'INR',

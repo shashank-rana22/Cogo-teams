@@ -1,0 +1,12 @@
+.card_container {
+	padding: 24px;
+	margin: 16px 0;
+	border: 1px solid #ebebeb;
+	border-radius: 4px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 8px 0;
+}
