@@ -73,7 +73,8 @@ function AdminLayout({
 		<div className={cl`
 			${styles.container} 
 			${showTopbar ? styles.has_topbar : ''} 
-			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}`}
+			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg} 
+			${showNavbar ? styles.has_navbar : ''}`}
 		>
 			<main className={styles.children_container}>{children}</main>
 			{showTopbar ? (
