@@ -18,8 +18,8 @@ const mutateControls = (
 		const newControl = control;
 
 		let dateTimeControl = {};
-		if (newControl.type === 'fieldArray') {
-			dateTimeControl = control?.controls.find((item) => item?.type === 'datepicker');
+		if (newControl?.type === 'fieldArray') {
+			dateTimeControl = control?.controls?.find((item) => item?.type === 'datepicker');
 		}
 
 		if (TIME_BASED_TASKS.includes(task?.task) && dateTimeControl?.withTimePicker) {

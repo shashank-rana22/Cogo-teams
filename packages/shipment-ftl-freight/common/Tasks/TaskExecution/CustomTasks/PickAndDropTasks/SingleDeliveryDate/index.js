@@ -4,7 +4,7 @@ import { Layout } from '@cogoport/surface-modules';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 
-import useListFieldServiceOpsDetails from '../../../../../FieldExecutive/hooks/useListFieldServiceOpsDetails';
+import useListFieldServiceOpsDetails from '../../../../../../hooks/useListFieldServiceOpsDetails';
 import getControls from '../configs/deliveryControls';
 import {
 	datesChecker,
@@ -35,7 +35,7 @@ function SingleDeliveryDate(props, ref) {
 		setValue,
 	} = useForm();
 
-	const { list } = useListFieldServiceOpsDetails({
+	const { list = [] } = useListFieldServiceOpsDetails({
 		shipment_id: shipment_data?.id,
 	});
 
@@ -91,7 +91,7 @@ function SingleDeliveryDate(props, ref) {
 		if (isEmpty(list)) {
 			return;
 		}
-		const truckExist = list.find(
+		const truckExist = (list || [])?.find(
 			(listItem) => listItem?.truck_number?.toLowerCase() === item?.truck_number?.toLowerCase(),
 		) || {};
 

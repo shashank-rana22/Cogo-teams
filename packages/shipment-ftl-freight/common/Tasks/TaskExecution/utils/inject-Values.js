@@ -29,10 +29,10 @@ const TRUCK_EXCEED_NUMBER = -1;
 
 const injectValues = ({
 	selectedMail = [],
-	populatedControls,
-	task,
+	populatedControls = [],
+	task = {},
 	getApisData = {},
-	servicesList,
+	servicesList = [],
 }) => {
 	const controls = populatedControls || [];
 	const ftlServices = (servicesList || []).filter(

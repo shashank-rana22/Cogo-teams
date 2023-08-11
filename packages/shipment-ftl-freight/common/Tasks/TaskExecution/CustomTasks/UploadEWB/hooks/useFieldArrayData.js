@@ -4,7 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import useListFieldServiceOpsDetails from '../../../../../FieldExecutive/hooks/useListFieldServiceOpsDetails';
+import useListFieldServiceOpsDetails from '../../../../../../hooks/useListFieldServiceOpsDetails';
 import getDefaultValues from '../../../utils/get-default-values';
 import getControl from '../controls';
 
@@ -41,7 +41,7 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 		return null;
 	};
 
-	const { list, loading } = useListFieldServiceOpsDetails({
+	const { list = [], loading = false } = useListFieldServiceOpsDetails({
 		shipment_id: shipment_data?.id,
 	});
 
@@ -112,7 +112,7 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 		if (!isEmpty(list)) {
 			const truckValues = (services || []).reduce((acc, item) => {
 				if (item?.service_type !== 'subsidiary_service') {
-					const truckExist = list.find(
+					const truckExist = list?.find(
 						(listItem) => (item?.truck_number)?.toLowerCase() === (listItem?.truck_number)?.toLowerCase(),
 					) || {};
 					if (isEmpty(truckExist)) {
