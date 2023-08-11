@@ -16,7 +16,7 @@ function ShipmentList({
 	loading = false,
 	setShowModal = () => {},
 }) {
-	const { list = [], page, total_count, page_limit } = data || {};
+	const { list = [], page = 0, total_count = 0, page_limit = 0 } = data || {};
 
 	return !loading && isEmpty(list) ? <EmptyState /> : (
 		<div>
