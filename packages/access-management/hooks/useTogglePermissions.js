@@ -2,21 +2,23 @@ import { useState, useEffect } from 'react';
 
 import getFormValues from '../utils/get-form-values';
 
+const FIRST_INDEX = 1;
+
 const getScopes = (navigation, api) => {
 	const { selectedDepartments } = navigation || {};
 	const { scopes, through_criteria } = selectedDepartments || {};
-	const eligibleScopes = (api.scopes || []).filter((scope) => scopes.includes(scope.type));
-	const newScopes = [];
+	const eligibleScopes = (api.scopes || []).filter((scope) => scopes.includes(scope.view_type));
+	const NEW_SCOPES = [];
 	eligibleScopes.forEach((scope) => {
-		const eligibleTC = (scope.through_criteria || []).filter((tc) => (through_criteria || []).includes(tc.type));
+		const eligibleTC = (scope.through_criteria || []).filter((tc) => (through_criteria || []).includes(tc));
 		if (!(scope.through_criteria || []).length || eligibleTC.length) {
-			newScopes.push({
-				type             : scope.type,
-				through_criteria : eligibleTC.map((tc) => tc.type),
+			NEW_SCOPES.push({
+				view_type        : scope.view_type,
+				through_criteria : eligibleTC,
 			});
 		}
 	});
-	return newScopes;
+	return NEW_SCOPES;
 };
 
 const pushPermValues = (
@@ -28,15 +30,15 @@ const pushPermValues = (
 	const { possible_apis = [], ...rest } = apiGroup || {};
 	possible_apis.forEach((api) => {
 		const scopes =			type === 'none'
-			? [{ type: 'none', through_criteria: [], is_default_params_required: true }]
+			? [{ view_type: 'none', through_criteria: [], is_default_params_required: true }]
 			: getScopes(navigation, api);
 		groupedPermissions.push({
-			resource_name              : api.value,
+			resource                   : api.value,
 			navigation                 : navigation?.key,
-			all_scope_types            : scopes.map((scope) => scope.type),
+			all_scope_types            : scopes.map((scope) => scope.view_type),
 			all_scope_through_criteria : [],
 			id                         : `${api.value}_${navigation?.key}`,
-			scopes,
+			role_permission_details    : scopes,
 		});
 	});
 	Object.keys(rest || {}).forEach((key) => {
@@ -49,42 +51,42 @@ const formatValues = (apiGroup, selectedDepartments, navigation, roleData) => {
 		return roleData.importedPermissions;
 	}
 	if (!navigation?.isActive) {
-		const groupedPermissions = [];
+		const GROUPED_PERMISSIONS = [];
 		pushPermValues(
 			apiGroup,
 			{ ...navigation, selectedDepartments },
-			groupedPermissions,
+			GROUPED_PERMISSIONS,
 			'generic',
 		);
-		return groupedPermissions;
+		return GROUPED_PERMISSIONS;
 	}
 	return roleData?.permissions || [];
 };
 
 const pushNoneToAllValues = (apiGroup, navigation) => {
-	const groupedPermissions = [];
-	pushPermValues(apiGroup, navigation, groupedPermissions, 'none');
-	return groupedPermissions;
+	const GROUPED_PERMISSIONS = [];
+	pushPermValues(apiGroup, navigation, GROUPED_PERMISSIONS, 'none');
+	return GROUPED_PERMISSIONS;
 };
 
 const pushAllowedToAll = (apiGroup, navigation) => {
-	const groupedPermissions = [];
+	const GROUPED_PERMISSIONS = [];
 	pushPermValues(
 		apiGroup,
 		{
 			...navigation,
 			selectedDepartments: { scopes: ['all', 'allowed'], through_criteria: [] },
 		},
-		groupedPermissions,
+		GROUPED_PERMISSIONS,
 		'generic',
 	);
-	return groupedPermissions;
+	return GROUPED_PERMISSIONS;
 };
 
 const isAnyApiSelectedFunc = (initilaFormValues) => {
 	let isAnyApiSelected = false;
 	Object.keys(initilaFormValues).forEach((key) => {
-		const api = key.split(':')[1];
+		const api = key.split(':')[FIRST_INDEX];
 		const apiScopes = initilaFormValues?.[key]?.values?.[api] || [];
 		if (apiScopes.length && !apiScopes.includes('none')) {
 			isAnyApiSelected = true;
