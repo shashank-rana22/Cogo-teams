@@ -38,7 +38,7 @@ function Schedules({
 					{[...Array(LOADING_ARRAY_LENGTH).keys()].map((item) => (
 						<Placeholder
 							key={item}
-							height="66px"
+							height="64px"
 							width="136px"
 							margin="0px 20px 0px 0px"
 							style={{ borderRadius: 8 }}
@@ -60,15 +60,13 @@ function Schedules({
 						))}
 					</div>
 
-					<div className={styles.footer}>
-						<Footer
-							paginationProps={paginationProps}
-							setPage={setPage}
-							selectedWeek={selectedWeek}
-							loading={loading}
-							schedules={schedules}
-						/>
-					</div>
+					<Footer
+						paginationProps={paginationProps}
+						setPage={setPage}
+						selectedWeek={selectedWeek}
+						loading={loading}
+						schedules={schedules}
+					/>
 				</div>
 			)}
 		</div>

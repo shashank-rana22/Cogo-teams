@@ -51,8 +51,9 @@ function Table({
 			<div className={styles.header_column} />
 
 			{itemsKeys.map((key) => {
-				const columnHeader = key === 'cogo_line' ? 'Cogo Assured' : startCase(key);
-				const imageUrl = LOGO_MAPPING[key];
+				const formattedKey = key.split('-')?.[GLOBAL_CONSTANTS.zeroth_index];
+				const columnHeader = formattedKey === 'cogo_line' ? 'Cogo Assured' : startCase(formattedKey);
+				const imageUrl = LOGO_MAPPING[formattedKey];
 
 				return (
 					<div key={key} className={styles.header_column}>
@@ -92,12 +93,12 @@ function Table({
 					</div>
 				</div>
 
-				{Object.values(values).map((lineItem) => {
+				{Object.entries(values).map(([shipping_line, lineItem]) => {
 					const lineItemObj =	lineItem.find((childItem) => {
 						if (!isEmpty(childItem.serviceObj)) {
 							return (
 								childItem?.code === getStringBeforeAndAfterUnderscore(key).before
-				&& childItem?.serviceObj?.id === getStringBeforeAndAfterUnderscore(key).after
+								&& childItem?.serviceObj?.id === getStringBeforeAndAfterUnderscore(key).after
 							);
 						}
 						return childItem?.code === key;
@@ -105,7 +106,7 @@ function Table({
 
 					if (key.includes('THC')) {
 						return (
-							<div key={key} className={styles.column}>
+							<div key={`${key}_${shipping_line}`} className={styles.column}>
 								{lineItemObj.value || '*At actuals'}
 							</div>
 						);
@@ -114,7 +115,7 @@ function Table({
 					if (key === 'total_landed_price') {
 						return (
 							<div
-								key={key}
+								key={`${key}_${shipping_line}`}
 								className={cl`${styles.column} ${styles.bold}`}
 							>
 								{lineItemObj.value}
@@ -123,7 +124,7 @@ function Table({
 					}
 
 					return (
-						<div key={key} className={styles.column}>
+						<div key={`${key}_${shipping_line}`} className={styles.column}>
 							{lineItemObj.value || '-'}
 						</div>
 					);

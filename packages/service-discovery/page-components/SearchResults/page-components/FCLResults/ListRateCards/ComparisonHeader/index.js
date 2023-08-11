@@ -55,7 +55,7 @@ function ComparisonHeader({
 						const { short_name = '', id: shipping_line_id = '' } = shipping_line || {};
 
 						return (
-							<div key={shipping_line_id} className={styles.pill}>
+							<div key={`${shipping_line_id}_${cardItem.id}`} className={styles.pill}>
 								{renderName(short_name)}
 
 								{source === 'cogo_assured_rate' ? null : (

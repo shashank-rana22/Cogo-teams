@@ -1,21 +1,23 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 const LABEL_MAPPING = {
-	seller : 'Seller Responsibilities',
-	buyer  : 'Buyer Responsibilities',
+	seller       : 'Seller Responsibilities',
+	buyer        : 'Buyer Responsibilities',
+	main_service : 'Main Service',
 };
 
 function ListHeader({ type = '', currency = '', totalPrice = 0 }) {
 	return (
 		<div className={styles.header}>
-			<span>{LABEL_MAPPING[type]}</span>
+			<span>{LABEL_MAPPING[type] || startCase(type)}</span>
 
 			<div className={styles.total_price}>
 				<span className={styles.cost_label}>Total landed Cost:</span>
-
+				{' '}
 				<strong>
 					{totalPrice ? formatAmount({
 						amount  : totalPrice,

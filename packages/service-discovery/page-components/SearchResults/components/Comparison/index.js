@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Contract from '../../common/Contract';
 import ShareToUsers from '../../common/ShareToUsers';
@@ -254,13 +254,17 @@ function Comparison({
 
 		LOGO_MAPPING[toSnakeCase(shipping_line.short_name)] = logo;
 
-		STATIC_LINE_ITEMS[toSnakeCase(shipping_line.short_name)] = staticLineItems;
-		DYNMAIC_LINE_ITEMS[toSnakeCase(shipping_line.short_name)] = dynamicLineItems;
+		STATIC_LINE_ITEMS[`${toSnakeCase(shipping_line.short_name)}-${cardItem.id}`] = staticLineItems;
+		DYNMAIC_LINE_ITEMS[`${toSnakeCase(shipping_line.short_name)}-${cardItem.id}`] = dynamicLineItems;
 	});
 
 	const allLineItems = getAllLineItems(STATIC_LINE_ITEMS, DYNMAIC_LINE_ITEMS);
 
 	const handleBack = () => setScreen('listRateCard');
+
+	useEffect(() => {
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+	}, []);
 
 	return (
 		<div className={styles.container}>

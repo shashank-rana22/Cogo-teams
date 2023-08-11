@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -26,8 +27,8 @@ const controls = () => [
 const getModifiedPayload = (rateData = {}) => {
 	const payload = Object.entries(rateData).map(([shipping_line, lineItemsArray]) => {
 		const obj = {
-			shipping_line,
-			code_pair_mappings: (lineItemsArray || [])
+			shipping_line      : shipping_line.split('-')?.[GLOBAL_CONSTANTS.zeroth_index],
+			code_pair_mappings : (lineItemsArray || [])
 				.filter((ele) => ele.code !== 'book_and_lock'),
 		};
 
@@ -95,8 +96,6 @@ const useShareModal = ({
 						user_id       : selectedUser.id,
 					};
 				}
-
-				console.log('payload', payload);
 
 				await trigger({ data: payload });
 				onSuccess();

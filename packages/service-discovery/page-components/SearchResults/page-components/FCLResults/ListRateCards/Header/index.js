@@ -22,7 +22,6 @@ function Header({
 			<div className={styles.count}>{`${total_rates_count} Results Found for your search`}</div>
 
 			<div className={styles.filters_container}>
-
 				<DetentionDemurrage details={details} refetch={refetch} />
 
 				<Filters

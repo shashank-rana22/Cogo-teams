@@ -13,6 +13,8 @@ function RefreshRate({ refetch = () => {} }) {
 	}, { manual: true });
 
 	const refresh = async () => {
+		if (loading) return;
+
 		const params = {
 			only_rates_update_required : true,
 			id                         : query.spot_search_id,

@@ -19,10 +19,8 @@ function CopyUrl({ details = {} }) {
 	return (
 		<Tooltip placement="top" content="Copy results link">
 			<IcMCopy
-				style={{
-					margin : '4px 12px 0 16px',
-					cursor : 'pointer',
-				}}
+				style={{ margin: '4px 12px 0 16px' }}
+				cursor="pointer"
 				width={18}
 				height={18}
 				onClick={handleCopy}

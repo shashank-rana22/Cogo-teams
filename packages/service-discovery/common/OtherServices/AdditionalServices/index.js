@@ -153,13 +153,14 @@ function AdditionalServices({ // used in search results and checkout
 
 	const SHIPPER_SIDE_SERVICES = [];
 	const CONSIGNEE_SIDE_SERVICES = [];
+	const MAIN_SERVICES = [];
 
 	(source === 'checkout' ? filteredAllServices : ALL_SERVICES).forEach((item) => {
 		if (item.name.includes('import')) {
 			CONSIGNEE_SIDE_SERVICES.push(item);
-		} else {
+		} else if (item.name.includes('export')) {
 			SHIPPER_SIDE_SERVICES.push(item);
-		}
+		} else MAIN_SERVICES.push(item);
 	});
 
 	const incoTermOptions = getTradeTypeWiseIncoTerms(trade_type);
@@ -189,6 +190,21 @@ function AdditionalServices({ // used in search results and checkout
 					<List
 						list={SHIPPER_SIDE_SERVICES}
 						type="seller"
+						detail={detail}
+						rateCardData={rateCardData}
+						setHeaderProps={setHeaderProps}
+						refetch={refetchSearch}
+						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
+						startingPrices={startingPrices}
+						startingPriceLoading={startingPriceLoading}
+						refetchLoading={refetchLoading}
+					/>
+				)}
+
+				{isEmpty(MAIN_SERVICES) ? null : (
+					<List
+						list={MAIN_SERVICES}
+						type="main_service"
 						detail={detail}
 						rateCardData={rateCardData}
 						setHeaderProps={setHeaderProps}
