@@ -30,8 +30,6 @@ const formatData = ({
 		twin_importer_exporter_id = '',
 	} = twin_partner || {};
 
-	const sendPartnerUserId = orgId === userPartnerId;
-
 	const ORGID = orgId || GLOBAL_CONSTANTS.uuid.paramount_org_id;
 
 	const disableQuickActions = isChannelPartner && !(twin_importer_exporter_id);
@@ -50,7 +48,7 @@ const formatData = ({
 
 		if (isChannelPartner) {
 			let redirectionLink = `/${partnerId}/prm/
-			${userPartnerId}?${linkSuffix}${sendPartnerUserId ? `&user_id=${userId}` : ''}`;
+			${userPartnerId}?${linkSuffix}${isSendUserIdInPath ? `&user_id=${userId}` : ''}`;
 			redirectionLink = prm
 				? `${redirectionLink}&omniChannelActiveTab=${prm}`
 				: redirectionLink;
