@@ -1,7 +1,7 @@
 export const MAPPING_FILE_STATUS_COLOR = {
-	READY              : '#DDEBC0',
-	UPLOADED           : '#CED1ED',
-	UPLOAD_IN_PROGRESS : '#FBD1A6',
+	READY              : '#CFEAED',
+	UPLOADED           : '#C4DC91',
+	UPLOAD_IN_PROGRESS : '#FEF199',
 	PROCESSING         : '#FEF199',
 	ERROR              : '#F8AEA8',
 	ERROR_IN_EXPORT    : '#F8AEA8',
@@ -31,4 +31,9 @@ export const MAPPING_IRN_STATUS = {
 	POSTED        : 'SUCCESS',
 	FAILED        : 'SUCCESS',
 	IRN_FAILED    : 'FAIL',
+};
+export const MAPPING_TOOLTIP_DATA_STATUS = {
+	ERROR              : 'Please reach out to tech support',
+	PROCESSING         : 'It might take some time',
+	UPLOAD_IN_PROGRESS : 'Upload might take some time',
 };

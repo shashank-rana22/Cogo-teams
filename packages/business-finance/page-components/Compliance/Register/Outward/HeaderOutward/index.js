@@ -13,7 +13,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 				<Select
 					value={entity}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, entity: val })); }}
-					placeholder="Select Entity"
+					placeholder="Select Cogo Entity"
 					options={optionEntity}
 					isClearable
 					style={{ width: '250px' }}
@@ -27,7 +27,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 					value={gstIn}
 					disabled={!entity}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, gstIn: val })); }}
-					placeholder="Choose"
+					placeholder="Select Cogo GSTIN"
 					options={optionsGSTIN(entity)}
 					isClearable
 					style={{ width: '250px' }}
@@ -40,7 +40,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 				<Select
 					value={month}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, month: val })); }}
-					placeholder="Period"
+					placeholder="Month"
 					options={optionsMonth}
 					isClearable
 					style={{ width: '120px' }}

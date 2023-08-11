@@ -4,6 +4,7 @@
 
 .fileName {
 	width: 100px;
+	margin-left: 14px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -94,4 +95,10 @@
 	margin: 4px 0 0 4px;
 	color: var(--color-primary-error-red-3);
 	cursor: pointer;
+}
+
+.tooltip_value_style {
+	font-weight: 600;
+	word-break: break-word;
+	word-wrap: break-word;
 }
