@@ -49,8 +49,6 @@ function BreakdownDetails({
 		otherCharges = [],
 	} = useHandleBreakdownDetails({ rate, setRateDetails, setNoRatesPresent });
 
-	console.log('rateDetails', rateDetails);
-
 	let total = 0;
 
 	const disableForm = ['preview_booking', 'booking_confirmation'].includes(source);

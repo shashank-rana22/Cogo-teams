@@ -28,7 +28,7 @@ function ChangeIncoTermModal({
 
 			<Modal.Body>
 				<div>
-					You have changed the Incoterm from
+					You are changing the Incoterm from
 					{' '}
 					<b>{upperCase(incoterm)}</b>
 					{' '}
