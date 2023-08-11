@@ -48,6 +48,7 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 		setFirstTimeLineLoading(true);
 		const chatCollectionQuery = query(
 			activeChatCollection,
+			...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_agent_types_query || []),
 			orderBy('created_at', 'desc'),
 			limit(PAGE_LIMIT),
 		);

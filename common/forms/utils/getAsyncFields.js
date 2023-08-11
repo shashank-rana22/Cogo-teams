@@ -360,6 +360,20 @@ function asyncFieldsTicketTypes() {
 	};
 }
 
+function asyncTicketsCategory() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'configuration_categories',
+		authkey      : 'get_tickets_configuration_categories',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+		searchByq    : true,
+	};
+}
+
 function asyncListHsCodes() {
 	return {
 		labelKey    : 'name',
@@ -798,6 +812,17 @@ function asyncListAllManagers() {
 	};
 }
 
+function asyncListAllocationObjectives() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/objectives',
+		authkey      : 'get_allocation_objectives',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
 function asyncListExpenseCategories() {
 	return {
 		labelKey     : 'categoryName',
@@ -868,6 +893,7 @@ export {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncTicketsCategory,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
@@ -876,5 +902,6 @@ export {
 	asyncListShipmentPendingTasks,
 	asyncListShipments,
 	asyncListShipmentServices,
+	asyncListAllocationObjectives,
 	asyncIncidentSubtypeList,
 };

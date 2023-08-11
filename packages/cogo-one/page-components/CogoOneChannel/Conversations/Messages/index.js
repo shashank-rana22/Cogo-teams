@@ -186,6 +186,7 @@ function Messages({
 				loading={loading}
 				assignLoading={assignLoading}
 				viewType={viewType}
+				formattedData={formattedData}
 			/>
 		</>
 	);
