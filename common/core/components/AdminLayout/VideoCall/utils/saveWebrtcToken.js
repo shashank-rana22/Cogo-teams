@@ -1,16 +1,17 @@
+import { isEmpty } from '@cogoport/utils';
 import { doc, setDoc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 export const saveWebrtcToken = ({ data = {}, callingRoomId = '', tokenId = '', firestore = {} }) => {
-	const savingData = (data || {});
-
-	if (data?.token?.type === 'transceiverRequest') {
-		savingData.token.transceiverRequest.init = {};
-	}
-
 	if (!callingRoomId) {
 		return;
+	}
+
+	const savingData = data;
+
+	if (savingData?.token?.type === 'transceiverRequest' && isEmpty(savingData?.token?.transceiverRequest?.init)) {
+		savingData.token.transceiverRequest.init = {};
 	}
 
 	const webrtcTokenRoomDoc = doc(
@@ -23,7 +24,7 @@ export const saveWebrtcToken = ({ data = {}, callingRoomId = '', tokenId = '', f
 		setDoc(
 			webrtcTokenRoomDoc,
 			{
-				...savingData,
+				...(savingData || {}),
 				updated_at: Date.now(),
 			},
 		);
