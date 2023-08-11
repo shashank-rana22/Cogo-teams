@@ -1,22 +1,19 @@
-import { Loader } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
-import useListBookingPreferences
-	from '../../../../../../hooks/useListBookingPreferences';
+import useListBookingPreferences from '../../../../../../hooks/useListBookingPreferences';
 
-import Card from './Card';
 import styles from './styles.module.css';
 
 const CONFIRM_RATE_STEP = 2;
+const TEXT_MESSAGE = 'Please revert the rate first!';
+
 function SelectRate({
-	setStep,
-	setSelectedCard,
-	updateConfirmation,
+	setStep = () => {},
+	setSelectedCard = () => {},
 	step = {},
 	task = {},
-	primaryService = {},
 }) {
-	const { data, loading } = useListBookingPreferences({
+	const { data } = useListBookingPreferences({
 		shipment_id    : task.shipment_id,
 		defaultFilters : { service_id: task.service_id },
 		step,
@@ -57,28 +54,7 @@ function SelectRate({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.selection_div}>
-				{loading ? (
-					<div className={styles.loader}>
-						<Loader />
-						{' '}
-						Loading Task...
-					</div>
-				) : null}
-				{(data?.list || []).map((item) => (
-					<Card
-						item={item}
-						key={item?.id}
-						priority={item.priority}
-						setStep={setStep}
-						setSelectedCard={setSelectedCard}
-						updateConfirmation={updateConfirmation}
-						serviceProvidersData={SERVICE_PROVIDERS_DATA}
-						task={task}
-						primaryService={primaryService}
-					/>
-				))}
-			</div>
+			{TEXT_MESSAGE}
 		</div>
 	);
 }
