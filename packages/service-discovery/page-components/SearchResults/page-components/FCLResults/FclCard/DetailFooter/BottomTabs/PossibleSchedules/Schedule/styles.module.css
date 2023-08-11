@@ -85,3 +85,12 @@
 		line-height: 16px;
 	}
 }
+
+.reliability_score_value {
+	display: flex;
+	align-items: center;
+}
+
+.more_icon {
+	margin-left: 16px;
+}

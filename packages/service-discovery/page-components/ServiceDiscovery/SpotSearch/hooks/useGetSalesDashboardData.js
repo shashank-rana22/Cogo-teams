@@ -4,7 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import FILTER_SERVICE_MAPPING from '../configurations/filter-service-mapping.json';
 import getSalesDashboardListParams from '../utils/getSalesDashboardListParams';
@@ -55,37 +55,41 @@ const useGetSalesDashboardData = ({
 
 	const { page, page_limit, activeStat, ...restFilters } = filters || {};
 
-	const statsData = getSalesDashboardListStats({
+	const statsData = useMemo(() => getSalesDashboardListStats({
 		data,
 		rest,
 		stats,
-	});
+	}), [data, rest, stats]);
+
+	const salesDashboardParams = useMemo(() => getSalesDashboardListParams(
+		rest.type,
+		{
+			...(rest.defaultFilters || {}),
+			...(restFilters || {}),
+			...(activeStat?.filter || {}),
+			importer_exporter_id    : importer_exporter_id || undefined,
+			origin_location_id      : origin_location_id || undefined,
+			destination_location_id : destination_location_id || undefined,
+			...getKeyName({ type: rest.type, serviceType }),
+		},
+		{
+			...(extraParams || {}),
+			...(bucketParams || {}),
+			page_limit,
+			page,
+		},
+		api,
+		user_id,
+		user_profile,
+	), [activeStat?.filter, api, bucketParams, destination_location_id, extraParams,
+		importer_exporter_id, origin_location_id, page, page_limit, rest.defaultFilters,
+		rest.type, restFilters, serviceType, user_id, user_profile]);
 
 	const getList = async () => {
 		try {
 			await trigger({
 				params: {
-					...getSalesDashboardListParams(
-						rest.type,
-						{
-							...(rest.defaultFilters || {}),
-							...(restFilters || {}),
-							...(activeStat?.filter || {}),
-							importer_exporter_id,
-							origin_location_id,
-							destination_location_id,
-							...getKeyName({ type: rest.type, serviceType }),
-						},
-						{
-							...(extraParams || {}),
-							...(bucketParams || {}),
-							page_limit,
-							page,
-						},
-						api,
-						user_id,
-						user_profile,
-					),
+					...salesDashboardParams,
 				},
 			});
 		} catch (err) {

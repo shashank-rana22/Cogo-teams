@@ -28,7 +28,7 @@ const getModifiedPayload = (rateData = {}) => {
 		const obj = {
 			shipping_line,
 			code_pair_mappings: (lineItemsArray || [])
-				.filter((ele) => ele.code !== 'book'),
+				.filter((ele) => ele.code !== 'book_and_lock'),
 		};
 
 		return obj;
@@ -96,6 +96,8 @@ const useShareModal = ({
 					};
 				}
 
+				console.log('payload', payload);
+
 				await trigger({ data: payload });
 				onSuccess();
 			} else {
@@ -103,7 +105,7 @@ const useShareModal = ({
 			}
 		} catch (error) {
 			if (error?.response?.data) {
-				Toast.error(getApiErrorString(error.response?.data));
+				Toast.error(getApiErrorString(error?.response?.data));
 			}
 		}
 	};
@@ -131,6 +133,7 @@ const useShareModal = ({
 						],
 					},
 				};
+
 				await trigger({ data: params });
 				onSuccess();
 			} catch (error) {

@@ -4,7 +4,7 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import useGetShareUserList from '../../../../hooks/getShareUserList';
 
 import styles from './styles.module.css';
-import UsersCard from './UsersCard';
+import UsersList from './UsersList';
 
 function ShareInviteUsers({ selectedId = '', setSelectedUser = () => {}, org_id = '' }) {
 	const {
@@ -21,7 +21,7 @@ function ShareInviteUsers({ selectedId = '', setSelectedUser = () => {}, org_id 
 	};
 
 	return (
-		<>
+		<div className={styles.container}>
 			<Input
 				prefix={<IcMSearchlight height="14px" width="14px" />}
 				value={search}
@@ -31,35 +31,24 @@ function ShareInviteUsers({ selectedId = '', setSelectedUser = () => {}, org_id 
 
 			<div className={styles.toggle_container}>
 				<Toggle
-					offLabel="Inactive"
-					onLabel="Active"
+					offLabel="Active"
+					onLabel="Invited"
 					value={typeOfUsers}
 					name="toggle"
 					onChange={(e) => {
 						setTypeOfUsers(e.target.checked ? 'invited' : 'active');
+						setSelectedUser({});
 					}}
 				/>
 			</div>
 
-			<div className={styles.container}>
-
-				{!loading
-					&& list.map((user) => (
-						<UsersCard
-							key={user.id}
-							isSelected={selectedId === user.id}
-							onClick={setSelectedUser}
-							user={user}
-						/>
-					))}
-
-				{!list.length && !loading ? (
-					<div className={styles.empty_text}>
-						No Users Found
-					</div>
-				) : null}
-			</div>
-		</>
+			<UsersList
+				loading={loading}
+				list={list}
+				selectedId={selectedId}
+				setSelectedUser={setSelectedUser}
+			/>
+		</div>
 	);
 }
 

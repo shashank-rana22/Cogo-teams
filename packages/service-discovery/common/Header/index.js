@@ -9,7 +9,6 @@ import Back from './Back';
 import LoadOverview from './LoadOverview';
 import SearchDetails from './SearchDetails';
 import styles from './styles.module.css';
-// import useScrollDirection from './useScrollDirection';
 import Wallet from './Wallet';
 
 const SUB_HEADER_COMPONENT_MAPPING = {
@@ -31,26 +30,14 @@ function Header({
 	isGuideViewed = false,
 	...rest
 }) {
-	// const { scrollDirection } = useScrollDirection();
-
 	const headerRef = useRef(null);
-
-	// const handleClickOutside = (event) => {
-	// 	if (headerRef.current && !headerRef.current.contains(event.target)) {
-	// 		setHeaderProps({});
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	document.addEventListener('click', handleClickOutside);
-
-	// 	return () => {
-	// 		document.removeEventListener('click', handleClickOutside);
-	// 	};
-	// }, []);
 
 	const SubHeaderComponent = SUB_HEADER_COMPONENT_MAPPING[headerProps?.key] || null;
 	const isAllowedToEdit = activePage === 'search_results';
+
+	if (isEmpty(data)) {
+		return null;
+	}
 
 	return (
 		<div ref={headerRef} className={cl`${styles.container} ${showAdditionalHeader ? styles.show : {}}`}>

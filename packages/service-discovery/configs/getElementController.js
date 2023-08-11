@@ -22,6 +22,7 @@ const CONTROLLER_MAPPING = {
 	'async-select'   : AsyncSelectController,
 	datepicker       : DatepickerController,
 	upload           : UploadController,
+	file             : UploadController,
 	textarea         : TextAreaController,
 	checkbox         : CheckboxController,
 	'checkbox-group' : CheckboxGroupController,

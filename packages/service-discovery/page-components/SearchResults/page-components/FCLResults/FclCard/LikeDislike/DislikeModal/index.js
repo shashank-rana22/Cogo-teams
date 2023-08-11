@@ -13,6 +13,7 @@ function DislikeModal({
 	show = false,
 	onClose = () => {},
 	setLikeState = () => {},
+	setShowSuccessModal = () => {},
 	likeState = {},
 }) {
 	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
@@ -21,8 +22,9 @@ function DislikeModal({
 
 	const formValues = watch();
 
-	const onSubmit = (values) => {
-		onSubmitFeedback(values);
+	const onSubmit = async (values) => {
+		await onSubmitFeedback(values);
+		setShowSuccessModal(true);
 	};
 
 	const renderButton = ({

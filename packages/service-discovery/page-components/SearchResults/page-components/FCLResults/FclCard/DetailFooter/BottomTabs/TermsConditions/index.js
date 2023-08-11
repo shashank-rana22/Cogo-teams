@@ -12,12 +12,20 @@ function TermsConditions({ rateCardData = {}, detail = {} }) {
 		return searchTerms;
 	}, [rateTerms, searchTerms]);
 
+	if (isEmpty(terms)) {
+		return (
+			<div className={styles.container}>
+				<b>Nothing to show here!</b>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Please note:</div>
 
 			<ul className={styles.list}>
-				{terms.map((term) => (
+				{(terms || []).map((term) => (
 					<li className={styles.item} key={term.message || term}>
 						{term.message || term}
 					</li>

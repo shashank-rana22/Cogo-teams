@@ -51,7 +51,7 @@ function Table({
 			<div className={styles.header_column} />
 
 			{itemsKeys.map((key) => {
-				const columnHeader = key.includes('COGO') ? 'Cogo Assured' : startCase(key);
+				const columnHeader = key === 'cogo_line' ? 'Cogo Assured' : startCase(key);
 				const imageUrl = LOGO_MAPPING[key];
 
 				return (

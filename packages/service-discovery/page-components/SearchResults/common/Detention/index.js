@@ -30,6 +30,8 @@ function Detention({
 	setShow = () => {},
 	detail = {},
 	alreadyAddedServicesCodes = [],
+	showDnd = true,
+	minDays = {},
 	...rest
 }) {
 	const { service_details = {} } = detail || {};
@@ -48,7 +50,7 @@ function Detention({
 		services: alreadyAddedServicesCodes,
 	});
 
-	const { control, handleSubmit, setValue } = useForm({ defaultValues });
+	const { control, handleSubmit, setValue, formState:{ errors } } = useForm({ defaultValues });
 
 	const SUBMIT_BUTTON_FUNCTION_MAPPING = {
 		update : onSubmit,
@@ -79,10 +81,23 @@ function Detention({
 			) : null}
 
 			<div className={styles.form}>
+				<FormItem
+					name="detention"
+					control={control}
+					howMuchToShowInDnD={howMuchToShowInDnD}
+					errors={errors}
+					minDays={minDays}
+					source={rest.source}
+				/>
 
-				<FormItem name="detention" control={control} howMuchToShowInDnD={howMuchToShowInDnD} />
-
-				<FormItem name="demurrage" control={control} howMuchToShowInDnD={howMuchToShowInDnD} />
+				<FormItem
+					name="demurrage"
+					control={control}
+					howMuchToShowInDnD={howMuchToShowInDnD}
+					errors={errors}
+					minDays={minDays}
+					source={rest.source}
+				/>
 
 				{action === 'filter' ? (
 					<CheckboxController
@@ -102,6 +117,7 @@ function Detention({
 						className={styles.button}
 						onClick={handleDeleteService}
 						loading={removeLoading}
+						disabled={updateLoading || loading}
 					>
 						Reset
 					</Button>
@@ -113,6 +129,7 @@ function Detention({
 					themeType="accent"
 					onClick={handleSubmit(onClickSave)}
 					loading={updateLoading || loading}
+					disabled={!showDnd || removeLoading}
 				>
 					{rest.buttonTitle || 'Save'}
 				</Button>

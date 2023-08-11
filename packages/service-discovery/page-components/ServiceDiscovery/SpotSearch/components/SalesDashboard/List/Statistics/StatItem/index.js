@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Tooltip } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -20,7 +20,12 @@ function StatItem({
 			{isActive ? <IcMTick fontSize={20} /> : null}
 
 			<div className={cl`${newClass} ${styles.text}`}>
-				{text}
+				<Tooltip
+					content={text}
+					placement="top"
+				>
+					<div className={styles.label}>{text}</div>
+				</Tooltip>
 				{' '}
 				{subText && (
 					<span className={styles.sub}>
