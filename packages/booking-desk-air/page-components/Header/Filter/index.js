@@ -6,27 +6,12 @@ import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import { applyFilterValues } from '../../../helpers/applyFilterValues';
 import getFilterControls from '../../../utils/getControls';
 
 import styles from './styles.module.css';
 
 const STORAGE_KEY = 'air_booking_desk';
-
-const applyFilterValues = ({
-	filter = {},
-	prevServiceActiveTab = 'air_freight_service',
-	setValue = () => {},
-}) => {
-	Object.keys(filter || {}).forEach((item) => {
-		if (item !== prevServiceActiveTab) {
-			setValue(item, filter?.[item]);
-		} else {
-			Object.keys(filter[item] || {}).forEach((itm) => {
-				setValue(itm, filter?.[item]?.[itm]);
-			});
-		}
-	});
-};
 
 function Filter({
 	serviceActiveTab = 'air_freight',
