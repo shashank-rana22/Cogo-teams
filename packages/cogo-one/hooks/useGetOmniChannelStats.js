@@ -12,15 +12,13 @@ const getDateString = ({ date }) => formatDate({
 	formatType : 'date',
 }) || '';
 
-const getParams = ({ value }) => ({
-	duration_type : value,
-	start_date    : getDateString({ date: DATE_FILTER_MAPPING[value]?.(new Date()) }),
+const getParams = ({ timePeriodValue }) => ({
+	duration_type : timePeriodValue,
+	start_date    : getDateString({ date: DATE_FILTER_MAPPING[timePeriodValue]?.(new Date()) }),
 	end_date      : getDateString({ date: new Date() }),
 });
 
-function useGetCogoOneAgentStats({
-	value = '',
-}) {
+function useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue = '' }) {
 	const { userId } = useSelector(({ profile }) => ({
 		userId: profile?.user?.id,
 	}));
@@ -33,21 +31,23 @@ function useGetCogoOneAgentStats({
 	const getCogoOneDashboard = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ value, userId }),
+				params: getParams({ timePeriodValue, userId }),
 			});
 		} catch (error) {
 			console.error(error, 'err');
 		}
-	}, [value, trigger, userId]);
+	}, [trigger, userId, timePeriodValue]);
 
 	useEffect(() => {
-		getCogoOneDashboard();
-	}, [getCogoOneDashboard]);
+		if (isPunchPresent) {
+			getCogoOneDashboard();
+		}
+	}, [getCogoOneDashboard, isPunchPresent]);
 
 	return {
-		loading,
+		AgentStatsLoading : loading,
 		getCogoOneDashboard,
-		data,
+		AgentStatsData    : data,
 	};
 }
 export default useGetCogoOneAgentStats;

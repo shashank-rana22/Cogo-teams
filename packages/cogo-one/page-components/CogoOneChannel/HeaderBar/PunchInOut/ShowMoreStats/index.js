@@ -12,6 +12,12 @@ function ShowMoreStats({
 	punchedTime = '',
 	status = '',
 	handlePunchIn = () => {},
+	viewType = '',
+	getCogoOneDashboard = () => {},
+	AgentStatsLoading = false,
+	AgentStatsData = {},
+	timePeriodValue = '',
+	setTimePeriodValue = () => {},
 }) {
 	const {
 		profile: { user = {} },
@@ -38,6 +44,12 @@ function ShowMoreStats({
 					setShowDetails={setShowDetails}
 					showDetails={showDetails}
 					name={name}
+					viewType={viewType}
+					getCogoOneDashboard={getCogoOneDashboard}
+					AgentStatsLoading={AgentStatsLoading}
+					AgentStatsData={AgentStatsData}
+					timePeriodValue={timePeriodValue}
+					setTimePeriodValue={setTimePeriodValue}
 				/>
 			</div>
 		</>

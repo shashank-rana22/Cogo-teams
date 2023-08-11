@@ -36,6 +36,12 @@ function PunchInOut({
 	agentTimeline = () => {},
 	timelineLoading = false,
 	preferenceLoading = false,
+	viewType = '',
+	getCogoOneDashboard = () => {},
+	AgentStatsLoading = false,
+	AgentStatsData = {},
+	timePeriodValue = '',
+	setTimePeriodValue = () => {},
 }) {
 	const { status = '' } = agentStatus || {};
 	const { list = [] } = data || {};
@@ -127,6 +133,12 @@ function PunchInOut({
 						punchedTime={lastBreakTime}
 						status={status}
 						handlePunchIn={handlePunchIn}
+						viewType={viewType}
+						getCogoOneDashboard={getCogoOneDashboard}
+						AgentStatsLoading={AgentStatsLoading}
+						AgentStatsData={AgentStatsData}
+						timePeriodValue={timePeriodValue}
+						setTimePeriodValue={setTimePeriodValue}
 					/>
 				)}
 			</div>

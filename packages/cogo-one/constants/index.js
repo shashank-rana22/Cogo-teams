@@ -7,6 +7,8 @@ import {
 	IcMFftl,
 	IcMFltl, IcCTelegram, IcCZalo,
 	IcMVideoCall, IcMVideoCallMute,
+	IcMUp,
+	IcMDown,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -356,6 +358,37 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
+
+export const RATING_ELEMENTS = {
+	happy: {
+		image: <Image
+			src={GLOBAL_CONSTANTS.image_url.happy_icon}
+			alt="happy-emoji"
+			width={30}
+			height={30}
+		/>,
+		arrow: <IcMUp fill="#ee3425" />,
+
+	},
+	sad: {
+		image: <Image
+			src={GLOBAL_CONSTANTS.image_url.sad_icon}
+			alt="sad-emoji"
+			width={30}
+			height={30}
+		/>,
+		arrow: <IcMDown fill="#ee3425" />,
+	},
+	default: {
+		image: <Image
+			src={GLOBAL_CONSTANTS.image_url.sad_icon}
+			alt="sad-emoji"
+			width={30}
+			height={30}
+		/>,
+		arrow: <IcMDown fill="#ee3425" />,
+	},
+};
 
 export const OFFLINE_REASONS_OPTIONS = [
 	{

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
+import useGetCogoOneAgentStats from '../../../hooks/useGetOmniChannelStats';
 
 import AgentStatusToggle from './AgentStatusToggle';
 import FlashRevertLogs from './FlashRevertLogs';
@@ -22,6 +23,16 @@ function HeaderBar({
 		toggle_agent_status = false,
 	} = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions || {};
 
+	const [timePeriodValue, setTimePeriodValue] = useState('day');
+
+	const isPunchPresent = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out;
+
+	/// function call
+	const {
+		AgentStatsLoading = false,
+		AgentStatsData = {},
+	} = useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue });
+
 	return (
 		<>
 			<div className={styles.container}>
@@ -34,7 +45,7 @@ function HeaderBar({
 					/>
 				) : null}
 			</div>
-			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out && (
+			{isPunchPresent && (
 				<PunchInOut
 					fetchworkPrefernce={fetchWorkStatus}
 					agentStatus={agentStatus}
@@ -42,6 +53,12 @@ function HeaderBar({
 					agentTimeline={agentTimeline}
 					preferenceLoading={preferenceLoading}
 					timelineLoading={timelineLoading}
+					viewType={viewType}
+					// getCogoOneDashboard={getCogoOneDashboard}
+					AgentStatsLoading={AgentStatsLoading}
+					AgentStatsData={AgentStatsData}
+					timePeriodValue={timePeriodValue}
+					setTimePeriodValue={setTimePeriodValue}
 				/>
 			)}
 		</>

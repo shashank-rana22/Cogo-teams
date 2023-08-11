@@ -1,17 +1,16 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDown } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 
-import {
-	AGENT_WISE_FEEDACK_MAPPING,
-	AGENT_WISE_STATS_MAPPING,
-} from '../../../../../../../configurations/agent-wise-feedback-mapping';
+import { RATING_ELEMENTS } from '../../../../../../../constants';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTypeMapping';
 import { getFormattedNumber } from '../../../../../../../helpers/getFormattedNumber';
 
 import styles from './styles.module.css';
 
 const MIN_COUNT = 0;
+const MIN_COUNT_FOUR = 5;
+const MIN_RATING = 3;
 
 function Stats({
 	totalQuotationSend = 0,
@@ -19,8 +18,12 @@ function Stats({
 	booked = 0,
 	calls = [],
 	loading = false,
+	viewType = '',
+	rating = [],
 }) {
 	const { chat_stats = {} } = statsData || {};
+	const { avg_rating: averageRating = '' } = rating || [];
+
 	const { active = 0, escalated = 0, warning = 0 } = chat_stats || {};
 
 	const {
@@ -34,65 +37,47 @@ function Stats({
 	const totalCallReceive = incoming_answered + incoming_missed;
 	const totalChatAssigne = active + escalated + warning;
 
-	const FEEDBACK_COUNT_MAPPING = {
-		no_of_bookings       : booked,
-		no_of_quotation_send : totalQuotationSend,
+	const STATS_FEEDBACK_COUNT = {
+		no_of_bookings              : booked,
+		no_of_quotation_send        : totalQuotationSend,
+		chats_assigned              : totalChatAssigne,
+		calls_made                  : totalCallMade,
+		calls_received              : totalCallReceive,
+		customer_satisfaction_score : averageRating,
 	};
 
-	const STATS_COUNT_MAPPING = {
-		chats_assigned : totalChatAssigne,
-		calls_made     : totalCallMade,
-		calls_received : totalCallReceive,
-	};
+	const STATS_FEEDBACK_MAPPING = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.stats_feedback_count;
 
 	return (
-		<>
-			<div className={styles.top_stats_content}>
-				{AGENT_WISE_FEEDACK_MAPPING.map((item) => {
-					const { label, name, hasIcon } = item;
-
-					return (
-						<div className={styles.each_stats_div} key={name}>
-							<div className={styles.title}>{label}</div>
-							<div className={styles.count_with_icon}>
-								{hasIcon
-									? (
-										<Image
-											src={GLOBAL_CONSTANTS.image_url.sad_icon}
-											alt="sad-emoji"
-											width={30}
-											height={30}
-											className={styles.emoji_icon}
-										/>
-									) : null}
-								<div className={styles.count}>
-									{loading ? <Placeholder width="80px" height="40px" /> : (
-										<div>{getFormattedNumber(FEEDBACK_COUNT_MAPPING[name] || MIN_COUNT)}</div>
-									)}
+		<div className={styles.stats_container}>
+			{(STATS_FEEDBACK_MAPPING || []).map((item) => (
+				<div
+					className={cl`${styles.each_stats_div} 
+				${(STATS_FEEDBACK_MAPPING.length >= MIN_COUNT_FOUR) ? styles.stat_box : ''}`}
+					key={item}
+				>
+					<div className={styles.title}>{startCase(item)}</div>
+					<div className={styles.count_with_icon}>
+						{item === 'customer_satisfaction_score' ? (
+							RATING_ELEMENTS[averageRating >= MIN_RATING ? 'happy' : 'sad'].image
+							|| RATING_ELEMENTS.default.image
+						) : null}
+						<div className={styles.count}>
+							{loading ? <Placeholder width="80px" height="40px" /> : (
+								<div>{getFormattedNumber(STATS_FEEDBACK_COUNT[item] || MIN_COUNT)}</div>
+							)}
+						</div>
+						{(item === 'customer_satisfaction_score')
+							? (
+								<div className={styles.arrow_icon}>
+									{RATING_ELEMENTS[averageRating >= MIN_RATING ? 'happy' : 'sad'].arrow
+									|| RATING_ELEMENTS.default.arrow}
 								</div>
-								{hasIcon ? <IcMDown className={styles.arrow_icon} /> : null}
-							</div>
-						</div>
-					);
-				})}
-			</div>
-			<div className={styles.bottom_stats_content}>
-				{AGENT_WISE_STATS_MAPPING.map((item) => {
-					const { label, name } = item;
-
-					return (
-						<div className={styles.each_div} key={name}>
-							<div className={styles.title}>{label}</div>
-							<div className={styles.count}>
-								{loading ? <Placeholder width="80px" height="40px" /> : (
-									<div>{getFormattedNumber(STATS_COUNT_MAPPING[name] || MIN_COUNT)}</div>
-								)}
-							</div>
-						</div>
-					);
-				})}
-			</div>
-		</>
+							) : null}
+					</div>
+				</div>
+			))}
+		</div>
 	);
 }
 
