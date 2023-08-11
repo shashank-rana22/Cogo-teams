@@ -24,17 +24,19 @@ const BODY_STYLES = {
 };
 
 export const expenseRecurringConfig = () => {
-	const renderExpensePeriod = () => (
-		<div style={{ display: 'flex', alignItems: 'center' }}>
-			Expense Period
-			<Tooltip content="Start to End Date" placement="top">
-				<div style={{ cursor: 'pointer', paddingTop: '3px' }}>
-					{' '}
-					<IcMInfo />
-				</div>
-			</Tooltip>
-		</div>
-	);
+	function RenderExpensePeriod() {
+		return (
+			<div style={{ display: 'flex', alignItems: 'center' }}>
+				Expense Period
+				<Tooltip content="Start to End Date" placement="top">
+					<div style={{ cursor: 'pointer', paddingTop: '3px' }}>
+						{' '}
+						<IcMInfo />
+					</div>
+				</Tooltip>
+			</div>
+		);
+	}
 	return {
 		showHeader   : true,
 		headerStyles : HEADER_STYLES,
@@ -62,7 +64,7 @@ export const expenseRecurringConfig = () => {
 				sorting : { name: 'createdDateSortBy' },
 			},
 			{
-				label : renderExpensePeriod(),
+				label : RenderExpensePeriod(),
 				span  : 1.4,
 				func  : 'renderExpensePeriod',
 			},
