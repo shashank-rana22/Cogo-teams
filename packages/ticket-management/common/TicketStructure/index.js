@@ -42,13 +42,13 @@ function TicketStructure({
 				))
 			}
 
-			{reachedBottom && (
+			{reachedBottom ? (
 				<div className={styles.footer_no_data}>
 					No more tickets are available
 				</div>
-			)}
+			) : null}
 
-			{listLoading && !reachedBottom && <TicketStructureLoader />}
+			{(listLoading && !reachedBottom) ? <TicketStructureLoader /> : null}
 		</div>
 	);
 }
