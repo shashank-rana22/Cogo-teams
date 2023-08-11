@@ -67,7 +67,7 @@ export function Preview({
 					shipment_id      : serial_id,
 				};
 
-				const variabledData = variables.filter(
+				const variabledData = variables?.filter(
 					(itm) => !['origin_port', 'destination_port', 'shipment_id'].includes(itm),
 				);
 
@@ -86,7 +86,7 @@ export function Preview({
 		<>
 			<div dangerouslySetInnerHTML={{ __html: formattedPreview }} />
 			<div className={styles.user_work_scope}>
-				{tags.includes('document') && orgId && (
+				{tags?.includes('document') && orgId && (
 					<TemplateDocument
 						setFileValue={setFileValue}
 						fileValue={fileValue}

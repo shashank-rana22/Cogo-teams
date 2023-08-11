@@ -54,7 +54,7 @@ function Templates({
 
 	const urlArray = decodeURI(fileValue)?.split('/');
 	const fileName = urlArray?.[(urlArray.length || GLOBAL_CONSTANTS.zeroth_index) - LAST_VALUE] || '';
-	const formatFileName = fileName.split('.')[GLOBAL_CONSTANTS.zeroth_index];
+	const formatFileName = fileName?.split('.')[GLOBAL_CONSTANTS.zeroth_index];
 
 	const {
 		setQfilter,

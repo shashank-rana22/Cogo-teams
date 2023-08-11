@@ -48,7 +48,7 @@ function TemplateSidHeader({
 						/>
 					</div>
 
-					{shipmentArr.length > SHIPMENT_ARR_MIN_LENGTH && (
+					{shipmentArr.length > SHIPMENT_ARR_MIN_LENGTH ? (
 						<Tooltip
 							content={(
 								<ShipmentDetails shipmentArr={shipmentArr.slice(
@@ -65,7 +65,7 @@ function TemplateSidHeader({
 								More
 							</div>
 						</Tooltip>
-					)}
+					) : null}
 				</div>
 			) : null}
 			<AsyncSelect

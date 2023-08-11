@@ -37,7 +37,7 @@ function TemplateDocument({
 				channel="whatsapp_sid"
 			/>
 
-			{(fileValue && !uploading) && (
+			{(fileValue && !uploading) ? (
 				<div className={styles.files_view}>
 					<div className={styles.file_icon_container}>
 						{fileIcon}
@@ -58,10 +58,10 @@ function TemplateDocument({
 						/>
 					</div>
 				</div>
-			)}
-			{uploading && (
+			) : null}
+			{uploading ? (
 				<div className={styles.uploading}>uploading.....</div>
-			)}
+			) : null}
 		</div>
 	);
 }
