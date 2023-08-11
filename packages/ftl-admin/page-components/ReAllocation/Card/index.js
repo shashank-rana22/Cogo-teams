@@ -32,8 +32,7 @@ function Card({
 		<div
 			className={styles.container}
 			onClick={handleCardClick}
-			role="button"
-			tabIndex={0}
+			role="presentation"
 		>
 			<div className={styles.header}>
 				<Header data={data} />
