@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import {
 	onSnapshot,
 	query,
@@ -39,7 +40,7 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 	const mountSnapShot = () => {
 		snapshotCleaner();
 
-		if (!activeChatCollection) {
+		if (isEmpty(activeChatCollection)) {
 			return;
 		}
 
@@ -78,7 +79,7 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 	const getNextData = async () => {
 		const prevTimeStamp = Number(messagesState?.[id]?.lastDocumentTimeStamp);
 
-		if (!activeChatCollection) {
+		if (isEmpty(activeChatCollection)) {
 			return;
 		}
 
