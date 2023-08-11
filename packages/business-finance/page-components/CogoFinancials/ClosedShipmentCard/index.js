@@ -88,9 +88,12 @@ function ClosedShipmentCard({
 	};
 
 	return (
-		<div className={styles.financially_closed_container}>
+		<div
+			className={styles.financially_closed_container}
+			style={{ height: isAdditonalView ? '100%' : null }}
+		>
 			{showHeading && (
-				<div style={{ margin: '16px 32px' }}>
+				<div style={{ padding: '16px 32px' }}>
 					<RenderCardHeader
 						title={`${type} Closed Shipments`}
 						showInfo
@@ -177,8 +180,8 @@ function ClosedShipmentCard({
 					</div>
 				</div>
 			) : (
-				<div style={{ margin: '8px 0px', height: '70%' }}>
-					<Placeholder height="100%" width="100%" />
+				<div className={styles.placeholder_container}>
+					<Placeholder height="90%" width="96%" />
 				</div>
 			)}
 

@@ -69,9 +69,12 @@ function ServiceWiseStats({
 
 			</div>
 			<div className={styles.flex}>
-				<div className={styles.maincard}>
-					<StatCard mappingCards={mappingCard} isMain />
-				</div>
+				{!serviceLevelLoading ? (
+					<div className={styles.maincard}>
+						<StatCard mappingCards={mappingCard} isMain />
+					</div>
+				)
+					: <Placeholder height={340} width="300px" style={{ margin: '0px 30px' }} />}
 				{!serviceLevelLoading ? (
 					<div
 						className={styles.sidestats}
@@ -103,7 +106,7 @@ function ServiceWiseStats({
 				) : (
 					<div className={styles.placeholder_container}>
 						{[...Array(PLACEHOLDER_COUNT).keys()].map((item) => (
-							<Placeholder key={item} height={250} width="29%" />
+							<Placeholder key={item} height="100%" width="25%" />
 						))}
 
 					</div>

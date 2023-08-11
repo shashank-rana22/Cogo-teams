@@ -14,6 +14,7 @@
 .responsive_graph_circular {
 	width: 50%;
 	height: 86%;
+	padding-bottom: 10px;
 	margin: 10px 0;
 
 	& > div:first-of-type {
@@ -26,7 +27,6 @@
 	display: flex;
 	justify-content: space-around;
 	width: 100%;
-	height: 100%;
 }
 
 .label_circle {
@@ -84,4 +84,13 @@
 	min-width: 100px;
 	margin-right: 4px;
 	font-size: 12px;
+}
+
+.placeholder_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 70%;
+	padding-bottom: 8px;
+	margin: 8px 0;
 }

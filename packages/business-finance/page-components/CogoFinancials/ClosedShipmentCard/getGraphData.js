@@ -1,6 +1,9 @@
 import { startCase } from '@cogoport/utils';
 
 import { LABEL_MAPPING } from '../constants';
+import formatCount from '../utils/formatCount';
+
+const DEFAULT_COUNT = 0;
 
 export const getGraphData = ({
 	cardData, taxType, currency, type, displayAmount, isDeviationVisible,
@@ -27,6 +30,12 @@ export const getGraphData = ({
 				color : 'inherit',
 				show  : isDeviationVisible,
 			},
+			{
+				label : 'No. of Invoices',
+				value : formatCount(cardData?.invoiceCount || DEFAULT_COUNT),
+				color : 'inherit',
+				show  : true,
+			},
 		],
 	},
 	{
@@ -49,6 +58,12 @@ export const getGraphData = ({
 				value : costDeviation,
 				color : 'inherit',
 				show  : isDeviationVisible,
+			},
+			{
+				label : 'No. of Shipments',
+				value : formatCount(cardData?.jobCount || DEFAULT_COUNT),
+				color : 'inherit',
+				show  : true,
 			},
 		],
 	},
