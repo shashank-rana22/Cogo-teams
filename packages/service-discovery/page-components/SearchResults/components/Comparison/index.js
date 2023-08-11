@@ -37,6 +37,12 @@ const STATIC_COMPARISON_KEY = {
 	default: {},
 };
 
+const toSnakeCase = (str) => str
+	&& str
+		.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+		.map((x) => x.toLowerCase())
+		.join('_');
+
 function flattenArray(arr) {
 	return arr.reduce(
 		(flat, toFlatten) => flat.concat(
@@ -211,7 +217,7 @@ function Comparison({
 }) {
 	const [showShare, setShowShare] = useState(false);
 	const [showContract, setShowContract] = useState(false);
-	const [selectedCard, setSelectedCard] = useState(false);
+	const [selectedCard, setSelectedCard] = useState({});
 
 	const selectedCards = Object.values(comparisonRates);
 
@@ -246,10 +252,10 @@ function Comparison({
 		const logo = source === 'cogo_assured_rate'
 			? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : shipping_line.logo_url;
 
-		LOGO_MAPPING[shipping_line.short_name] = logo;
+		LOGO_MAPPING[toSnakeCase(shipping_line.short_name)] = logo;
 
-		STATIC_LINE_ITEMS[shipping_line.short_name] = staticLineItems;
-		DYNMAIC_LINE_ITEMS[shipping_line.short_name] = dynamicLineItems;
+		STATIC_LINE_ITEMS[toSnakeCase(shipping_line.short_name)] = staticLineItems;
+		DYNMAIC_LINE_ITEMS[toSnakeCase(shipping_line.short_name)] = dynamicLineItems;
 	});
 
 	const allLineItems = getAllLineItems(STATIC_LINE_ITEMS, DYNMAIC_LINE_ITEMS);

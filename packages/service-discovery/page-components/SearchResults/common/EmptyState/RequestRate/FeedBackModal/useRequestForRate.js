@@ -53,7 +53,7 @@ const useRequestForRate = ({
 			commodity_description = undefined,
 		} = values;
 
-		const attachment_file_urls = (file || []).map((item) => item.url);
+		const attachment_file_urls = (file || []).map((item) => item.url || item.finalUrl || item);
 
 		const reefer_commodity_description = values?.temperature
 			? `temperature: ${values.temperature}C | humidity: 

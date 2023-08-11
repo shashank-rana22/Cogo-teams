@@ -6,6 +6,7 @@ import useLikeFeedback from '../../../../hooks/useLikeFeedback';
 
 import DislikeModal from './DislikeModal';
 import styles from './styles.module.css';
+import SuccessModal from './SuccessModal';
 
 const LIKE_DISLIKE_ALLOWED = [
 	'fcl_freight',
@@ -22,6 +23,7 @@ const LIKE_DISLIKE_ALLOWED = [
 
 function LikeDislike({ rateCardData = {}, detail = {} }) {
 	const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+	const [showSuccessModal, setShowSuccessModal] = useState(false);
 
 	const { service_type = '' } = detail;
 
@@ -96,13 +98,18 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 
 			{showFeedbackModal ? (
 				<DislikeModal
-					details={detail}
-					rate={rateCardData}
 					show={showFeedbackModal}
+					rate={rateCardData}
+					details={detail}
 					likeState={likeState}
 					setLikeState={setLikeState}
+					setShowSuccessModal={setShowSuccessModal}
 					onClose={onCloseFeedbackModal}
 				/>
+			) : null}
+
+			{showSuccessModal ? (
+				<SuccessModal show={showSuccessModal} setShow={setShowSuccessModal} />
 			) : null}
 		</div>
 	);

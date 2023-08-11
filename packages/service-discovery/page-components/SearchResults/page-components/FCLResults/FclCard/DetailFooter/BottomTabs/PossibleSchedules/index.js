@@ -2,7 +2,7 @@ import { Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-import useGetSchedules from '../../../../../hooks/useGetSchedules';
+import useGetSchedules from '../../../../../../hooks/useGetSchedules';
 
 import Schedule from './Schedule';
 import styles from './styles.module.css';

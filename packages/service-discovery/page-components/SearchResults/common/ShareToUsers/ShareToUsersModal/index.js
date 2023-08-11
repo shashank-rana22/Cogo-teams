@@ -41,8 +41,9 @@ function ShareToUsersModal({
 			show={show}
 			onClose={onClose}
 			onOuterClick={onClose}
+			scroll={false}
 		>
-			<Modal.Header title="Share Rate within your Company" />
+			<Modal.Header title="Share Rate Cards" />
 
 			<Modal.Body>
 				<Header modalType={modalType} onClick={handleModalType} />

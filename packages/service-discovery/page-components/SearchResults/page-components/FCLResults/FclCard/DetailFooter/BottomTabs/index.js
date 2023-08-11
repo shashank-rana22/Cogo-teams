@@ -3,10 +3,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function RateCardDetails({ TABS_MAPPING = {}, activeTab = '', setActiveTab = () => {} }) {
+function BottomTabs({
+	TABS_MAPPING = {},
+	activeTab = '',
+	setActiveTab = () => {},
+}) {
 	return (
-		<div className={styles.containerDetails}>
-
+		<div className={styles.container}>
 			<Tabs
 				activeTab={activeTab}
 				onChange={setActiveTab}
@@ -27,4 +30,4 @@ function RateCardDetails({ TABS_MAPPING = {}, activeTab = '', setActiveTab = () 
 	);
 }
 
-export default RateCardDetails;
+export default BottomTabs;
