@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useCallback } from 'react';
 
-import { callUpdate } from '../utils/callFunctions';
+import { callUpdate } from '../utils/callUpdate';
 
 function useVideocallOptions({
 	toggleState = {},

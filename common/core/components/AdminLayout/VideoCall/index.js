@@ -11,7 +11,7 @@ import { CALL_RING_TIME_LIMIT } from './constants';
 import useComingCall from './hooks/useComingCall';
 import useUpdateVideoCallTimeline from './hooks/useUpdateVideoCallTimeline';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
-import { callUpdate } from './utils/callFunctions';
+import { callUpdate } from './utils/callUpdate';
 
 function VideoCall({
 	videoCallRecipientData = {},
@@ -19,7 +19,7 @@ function VideoCall({
 	videoCallId = '',
 }) {
 	const { user_data } = useSelector((state) => ({
-		user_data: state.profile.user,
+		user_data: state?.profile?.user,
 	}));
 	const { id: userId } = user_data || {};
 

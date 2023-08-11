@@ -5,7 +5,10 @@ import Peer from 'simple-peer';
 
 import { ICESERVER } from '../constants';
 import { updateCallDetails } from '../helpers/snapshortHelpers';
-import { callUpdate, saveCallData, saveWebrtcToken, stopStream } from '../utils/callFunctions';
+import { callUpdate } from '../utils/callUpdate';
+import { saveCallData } from '../utils/savecallData';
+import { saveWebrtcToken } from '../utils/saveWebrtcToken';
+import { stopStream } from '../utils/stopStream';
 
 import { useSetInACall } from './useSetInACall';
 
@@ -22,7 +25,7 @@ function useVideoCallFirebase({
 	updateVideoCallTimeline = () => {},
 }) {
 	const { user_data = {} } = useSelector((state) => ({
-		user_data: state.profile.user,
+		user_data: state?.profile?.user,
 	}));
 
 	const newRoomRef = useRef(null);

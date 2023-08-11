@@ -8,7 +8,8 @@ import Peer from 'simple-peer';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { ICESERVER } from '../constants';
 import { getCallingRoomData, getTokenData } from '../helpers/snapshortHelpers';
-import { callUpdate, saveWebrtcToken } from '../utils/callFunctions';
+import { callUpdate } from '../utils/callUpdate';
+import { saveWebrtcToken } from '../utils/saveWebrtcToken';
 
 import { useSetInACall } from './useSetInACall';
 
@@ -31,7 +32,7 @@ function useComingCall({
 	const { call_status: callStatus = '', my_details: peerDetails = {} } = callingRoomDetails || {};
 
 	const { user_data } = useSelector((state) => ({
-		user_data: state.profile.user,
+		user_data: state?.profile?.user,
 	}));
 	const { id: userId = '' } = user_data || {};
 
