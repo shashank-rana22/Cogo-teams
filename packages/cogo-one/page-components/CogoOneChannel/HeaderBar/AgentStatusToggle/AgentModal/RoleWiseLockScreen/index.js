@@ -1,4 +1,4 @@
-import { Toggle, Input, Button } from '@cogoport/components';
+import { Toggle, Input, Button, Toast } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
@@ -30,6 +30,7 @@ function RoleWiseLockScreen({
 
 	const handleSubmit = () => {
 		updateRoleCogooneConstants({ firestore, value: toggleState, roleIds: roles, time: timeInMilliSecond });
+		Toast.success('Successfully Save !');
 	};
 
 	const handleBack = () => {
