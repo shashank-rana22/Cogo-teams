@@ -360,6 +360,20 @@ function asyncFieldsTicketTypes() {
 	};
 }
 
+function asyncTicketsCategory() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'configuration_categories',
+		authkey      : 'get_tickets_configuration_categories',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+		searchByq    : true,
+	};
+}
+
 function asyncListHsCodes() {
 	return {
 		labelKey    : 'name',
@@ -669,7 +683,7 @@ function asyncListRoles() {
 	return {
 		labelKey    : 'role_name',
 		valueKey    : 'id',
-		endpoint    : 'list_roles',
+		endpoint    : 'list_employee_roles',
 		initialCall : true,
 		params      : {
 			filters: {
@@ -798,13 +812,24 @@ function asyncListAllManagers() {
 	};
 }
 
+function asyncListAllocationObjectives() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/objectives',
+		authkey      : 'get_allocation_objectives',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
 function asyncListExpenseCategories() {
 	return {
 		labelKey     : 'categoryName',
 		valueKey     : 'id',
 		endpoint     : 'purchase/expense/expense-category',
 		microService : 'business_finance',
-		authKey      : 'get_purchase_expense_expense_category',
+		authkey      : 'get_purchase_expense_expense_category',
 		initialCall  : true,
 		searchByq    : true,
 		params       : { pageSize: 10000 },
@@ -868,6 +893,7 @@ export {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncTicketsCategory,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
@@ -876,5 +902,6 @@ export {
 	asyncListShipmentPendingTasks,
 	asyncListShipments,
 	asyncListShipmentServices,
+	asyncListAllocationObjectives,
 	asyncIncidentSubtypeList,
 };

@@ -26,7 +26,10 @@ function Timeline() {
 
 	const [showEditSchedule, setShowEditSchedule] = useState(false);
 
-	const showEditScheduleIcon = canEditSchedule({ primary_service, activeStakeholder });
+	const {
+		isEditable,
+		defaultEditable,
+	} = canEditSchedule({ primary_service, activeStakeholder });
 
 	const filteredTimelineData = (timelineData || []).filter(
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
@@ -65,7 +68,7 @@ function Timeline() {
 				})}
 			</div>
 
-			{showEditScheduleIcon ? (
+			{isEditable ? (
 				<IcMEdit onClick={() => setShowEditSchedule((p) => !p)} className={styles.edit_icon} />
 			) : null}
 
@@ -73,6 +76,7 @@ function Timeline() {
 				<EditSchedule
 					setShow={setShowEditSchedule}
 					timelineData={timelineData}
+					defaultEditable={defaultEditable}
 				/>
 			) : null}
 		</div>

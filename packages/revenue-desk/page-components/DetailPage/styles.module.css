@@ -140,3 +140,11 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+.sid_tag {
+	margin-left: 4px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #221f20;
+	cursor: pointer;
+}

@@ -42,7 +42,7 @@ function NotificationPage({
 				>
 					<TabPanel
 						name="notifications"
-						title="Notifications"
+						title="Notification"
 						className={styles.tab_panel}
 					>
 						<Header
@@ -66,7 +66,7 @@ function NotificationPage({
 							))
 						)}
 					</TabPanel>
-					<TabPanel name="mails" title="Mails" className={styles.tab_panel}>
+					<TabPanel name="mails" title="Mail" className={styles.tab_panel}>
 						<Header
 							onMarkAllAsRead={onMarkAllAsRead}
 							formattedData={formattedmailData}

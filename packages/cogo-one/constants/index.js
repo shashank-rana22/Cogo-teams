@@ -6,6 +6,7 @@ import {
 	IcCAir,
 	IcMFftl,
 	IcMFltl, IcCTelegram, IcCZalo,
+	IcMVideoCall, IcMVideoCallMute,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -205,6 +206,12 @@ export const PLACEHOLDER_MAPPING = {
 	onboarding_kyc : 'Enter Pan No',
 };
 
+export const SHOW_LOG_STATUS_ICON_MAPPING = {
+	answered      : { icon: IcMVideoCall, fill: '#b0cc64' },
+	not_connected : { icon: IcMVideoCallMute, fill: '#828282' },
+	missed        : { icon: IcMVideoCallMute, fill: '#f37166' },
+};
+
 export const DISLIKE_OPTIONS = [
 	{
 		label : 'Question not satisfactory',
@@ -333,6 +340,8 @@ export const ICON_MAPPING = {
 };
 
 export const STRING_TO_ARRAY_REGEX = GLOBAL_CONSTANTS.regex_patterns.string_to_array;
+
+export const CHANNEL_TYPE = ['voice_call', 'video_call'];
 
 export const API_MAPPING = {
 	whatsapp      : '/create_communication',

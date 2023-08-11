@@ -59,6 +59,8 @@ interface ItemDataInterface {
 	payableTds?: number;
 	incidentId?: string;
 	categoryName?: string;
+	payableAmount?: string;
+	paymentStatus?: string;
 }
 
 const MIN_AMOUNT = 0;
@@ -92,7 +94,7 @@ function ExpenseComponent() {
 		expenseFilters,
 		sort,
 	});
-	const { getRecurringList, recurringListData, recurringListLoading } =		useListExpenseConfig({ expenseFilters, sort });
+	const { getRecurringList, recurringListData, recurringListLoading } =	useListExpenseConfig({ expenseFilters, sort });
 	const { sendMail, loading: mailLoading } = useSendEmail();
 
 	useEffect(() => {
@@ -139,7 +141,7 @@ function ExpenseComponent() {
 	};
 
 	const BUTTON_TEXT = {
-		recurring    : 'Create Expense Record',
+		recurring    : 'Create',
 		nonRecurring : 'Create Expense',
 	};
 
@@ -164,7 +166,7 @@ function ExpenseComponent() {
 			<div className={styles.right_container}>
 				<div className={styles.input_container}>
 					<Input
-						size="md"
+						size="lg"
 						placeholder={`Search by Vendor Name/${geo.others.identification_number.label}/Organization ID/Sage ID`}
 						suffix={<IcMSearchlight />}
 						value={expenseFilters.searchValue}
@@ -312,12 +314,12 @@ function ExpenseComponent() {
 			const {
 				grandTotal,
 				paidAmount,
+				payableAmount,
 				billCurrency = '',
 			} = itemData || {};
-			const value = grandTotal - paidAmount;
 
 			const amount = formatAmount({
-				amount   : value as any,
+				amount   : payableAmount,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',
@@ -537,7 +539,11 @@ function ExpenseComponent() {
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
 		renderPaid: (itemData: ItemDataInterface) => {
-			const { paidAmount, billCurrency = '' } = itemData || {};
+			const {
+				paidAmount,
+				billCurrency = '',
+				paymentStatus,
+			} = itemData || {};
 			const amount = formatAmount({
 				amount   : paidAmount as any,
 				currency : billCurrency,
@@ -546,7 +552,16 @@ function ExpenseComponent() {
 					currencyDisplay : 'code',
 				},
 			});
-			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
+			return (
+				<div>
+					<div>{showOverflowingNumber(amount || '', 12)}</div>
+					<div
+						className={styles.paidstatus}
+					>
+						{paymentStatus === 'full' ? 'Paid' : paymentStatus}
+					</div>
+				</div>
+			);
 		},
 		renderView: (itemData) => (
 			<div>

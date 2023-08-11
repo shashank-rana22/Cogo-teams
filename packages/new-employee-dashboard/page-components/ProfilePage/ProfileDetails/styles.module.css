@@ -28,3 +28,17 @@
 .styled_radio_group_container {
 	margin-left: 10px;
 }
+
+.styled_button {
+	height: 30px !important;
+	padding: 10px !important;
+	margin-left: 10px;
+}
+
+.styled_body {
+	:global {
+		.ui_modal_body_container {
+			max-height: 60vh !important;
+		}
+	}
+}

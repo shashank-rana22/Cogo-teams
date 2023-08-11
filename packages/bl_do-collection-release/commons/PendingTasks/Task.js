@@ -3,11 +3,11 @@ import useListServices from '../../hooks/useListServices';
 import ExecuteTask from './TaskExecution/ExecuteTask';
 
 function Task({
+	shipment_data = {},
 	task = {},
 	onCancel = () => {},
 	refetch = () => {},
 	shipment_type = '',
-	shipment_data,
 }) {
 	const { servicesList, servicesLoading } = useListServices({ shipment_id: task?.shipment_id, shipment_type });
 
