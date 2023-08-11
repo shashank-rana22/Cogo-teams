@@ -5,8 +5,6 @@ import ObjectiveDetailsCard from '../../../../../../common/ObjectiveDetailsCard'
 import ListCard from './ListCard';
 import getListColumnMapping from './ListCard/get-list-column-mapping';
 
-const ONE = 1;
-
 function useList(props) {
 	const {
 		setActionMode = () => { },
@@ -50,7 +48,7 @@ function useList(props) {
 	const handlePageChange = (pg) => {
 		setListObjectivesParams((pv) => ({
 			...pv,
-			page: pg + ONE,
+			page: pg,
 		}));
 	};
 
