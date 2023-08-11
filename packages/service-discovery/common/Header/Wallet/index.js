@@ -25,23 +25,19 @@ function Wallet({ data = {}, service_key = 'search_type' }) {
 		loading: getLoading,
 	} = useGetKamPromotionStats();
 
-	const {
-		generatePromotion,
-		loading: createLoading,
-		promotionData,
-	} = useCreateKamPromotion();
-
 	const onClose = () => {
 		setShowModal(false);
 		reset();
 	};
 
-	const handleGenerateCode = async (values) => {
-		await generatePromotion(values);
-		onClose();
-		setShowSuccessModal(true);
-		refetchStats();
-		reset();
+	const {
+		generatePromotion,
+		loading: createLoading,
+		promotionData,
+	} = useCreateKamPromotion({ setShowSuccessModal, refetchStats, onClose });
+
+	const handleGenerateCode = (values) => {
+		generatePromotion(values);
 	};
 
 	return (

@@ -7,7 +7,7 @@ import usePublishKamPromotion from './usePublishKamPromotion';
 
 const FIRST_INDEX = 1;
 
-const useCreateKamPromotion = () => {
+const useCreateKamPromotion = ({ setShowSuccessModal = () => {}, refetchStats = () => {}, onClose = () => {} }) => {
 	const [{ data: promotionData, loading }, trigger] = useRequest({
 		method : 'POST',
 		url    : '/create_kam_promotion',
@@ -51,6 +51,10 @@ const useCreateKamPromotion = () => {
 			const res = await trigger({ data: payload });
 
 			publishPromotion(res?.data?.id);
+
+			onClose();
+			setShowSuccessModal(true);
+			refetchStats();
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));

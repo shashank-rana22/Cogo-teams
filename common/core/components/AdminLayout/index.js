@@ -44,7 +44,6 @@ function AdminLayout({
 		user: { id: user_id = '' },
 		partner: partnerData,
 		is_in_voice_call:inCall = false, voice_call_recipient_data = {},
-		platformTheme = 'light',
 	} = user_data;
 
 	const {
@@ -74,8 +73,7 @@ function AdminLayout({
 		<div className={cl`
 			${styles.container} 
 			${showTopbar ? styles.has_topbar : ''} 
-			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}
-			${showNavbar ? styles.has_navbar : ''} ${styles[platformTheme]}`}
+			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}`}
 		>
 			<main className={styles.children_container}>{children}</main>
 			{showTopbar ? (
