@@ -1,25 +1,12 @@
 import { Modal, Pagination, cl } from '@cogoport/components';
-import { IcMAgentManagement, IcMLock } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import { SCREEN_LOCK_MAPPING } from '../../../../../constants/PLATFORM_ACTIVITY_KEYS_MAPPING';
 import useListChatAgents from '../../../../../hooks/useListChatAgents';
 
 import AgentWiseLockScreen from './AgentWiseLockScreen';
 import RoleWiseLockScreen from './RoleWiseLockScreen';
 import styles from './styles.module.css';
-
-const SCREEN_LOCK_MAPPING = [
-	{
-		label : 'Agent',
-		name  : 'agent',
-		icon  : <IcMAgentManagement width={40} height={40} />,
-	},
-	{
-		label : 'Lock Screen',
-		name  : 'lock_screen',
-		icon  : <IcMLock width={40} height={40} />,
-	},
-];
 
 const COMPONENT_MAPPING = {
 	agent       : AgentWiseLockScreen,
@@ -70,11 +57,16 @@ function AgentModal({
 
 	const Component = COMPONENT_MAPPING[activeCard] || null;
 
+	const handleClose = () => {
+		setActiveCard('');
+		setShowAgentDetails(false);
+	};
+
 	return (
 		<Modal
 			size="md"
 			show={showAgentDetails}
-			onClose={() => setShowAgentDetails(false)}
+			onClose={handleClose}
 			placement="center"
 		>
 			<Modal.Header title="Configuration" />
@@ -98,21 +90,9 @@ function AgentModal({
 							);
 						})}
 					</div>
-
 				) : (
 					<Component key={activeCard} {...COMPONENT_PROPS[activeCard]} />
 				) }
-				{/* <AgentWiseLockScreen
-					firestore={firestore}
-					getListChatAgents={getListChatAgents}
-					loading={loading}
-					list={list}
-					setSearch={setSearch}
-					paramsState={paramsState}
-					setAgentType={setAgentType}
-				/>
-
-				<RoleWiseLockScreen /> */}
 			</Modal.Body>
 			<Modal.Footer className={styles.footer_styles}>
 				{!loading && activeCard === 'agent' && (

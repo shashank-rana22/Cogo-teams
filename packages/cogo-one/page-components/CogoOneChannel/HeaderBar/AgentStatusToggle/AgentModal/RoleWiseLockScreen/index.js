@@ -1,12 +1,14 @@
 import { Toggle, Input, Button } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import { getRolesIsActive, updateRoleCogooneConstants } from '../../../../../../helpers/configurationHelpers';
 
 import styles from './styles.module.css';
+
+const ONE_MILLI_SECOND = 60000;
+const TIME_DELAY_IN_MINUTE = 1;
 
 function RoleWiseLockScreen({
 	setActiveCard = () => {},
@@ -14,30 +16,33 @@ function RoleWiseLockScreen({
 }) {
 	const [roleValue, setRoleValue] = useState({
 		roles       : [],
-		time        : '',
+		time        : TIME_DELAY_IN_MINUTE,
 		toggleState : false,
 	});
 
 	const { roles = [], time = '', toggleState = false } = roleValue || {};
+	const timeInMilliSecond = Number(time) * ONE_MILLI_SECOND;
 
 	const onToggleChange = (e) => {
 		setRoleValue((prev) => ({ ...prev, toggleState: e?.target?.checked }));
-		updateRoleCogooneConstants({ firestore, value: e?.target?.checked, roleIds: roles, time });
+		updateRoleCogooneConstants({ firestore, value: e?.target?.checked, roleIds: roles, time: timeInMilliSecond });
 	};
 
 	const handleSubmit = () => {
-		updateRoleCogooneConstants({ firestore, value: toggleState, roleIds: roles, time });
+		updateRoleCogooneConstants({ firestore, value: toggleState, roleIds: roles, time: timeInMilliSecond });
+	};
+
+	const handleBack = () => {
+		setActiveCard('');
 	};
 
 	useEffect(() => {
 		getRolesIsActive({ firestore, setRoleValue });
 	}, [firestore]);
 
-	console.log(roleValue, 'roleValue');
-
 	return (
 		<>
-			<IcMArrowBack className={styles.back_icon} onClick={() => setActiveCard('')} />
+			<IcMArrowBack className={styles.back_icon} onClick={handleBack} />
 			<div className={styles.container}>
 				<div className={styles.wrapper}>
 					Screen Lock
@@ -82,7 +87,6 @@ function RoleWiseLockScreen({
 								size="md"
 								themeType="primary"
 								onClick={handleSubmit}
-								disabled={!time || isEmpty(roles)}
 							>
 								Submit
 
