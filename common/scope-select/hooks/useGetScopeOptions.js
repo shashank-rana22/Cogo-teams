@@ -20,7 +20,7 @@ export default function useGetScopeOptions({ defaultValues = {}, apisToConsider 
 		main_apis = apisToConsider?.length > ZEROTH_INDEX ? apisToConsider : main_apis;
 
 		let scopes = [];
-		const VIEW_TYPES = {};
+		const viewTypes = {};
 		let defaultScope = null;
 		let defaultView = null;
 		const defaultAgentId = defaultValues?.selected_agent_id || '';
@@ -31,12 +31,12 @@ export default function useGetScopeOptions({ defaultValues = {}, apisToConsider 
 
 				if (view_type !== 'none') {
 					scopes.push(view_type);
-					VIEW_TYPES[view_type] = Array.from(new Set(through_criteria)) || [];
+					viewTypes[view_type] = Array.from(new Set(through_criteria)) || [];
 
 					if ((!defaultScope && is_default) || defaultValues.scope === view_type) {
 						defaultScope = view_type;
 
-						defaultView = VIEW_TYPES[view_type]?.includes(defaultValues?.view_type)
+						defaultView = viewTypes[view_type]?.includes(defaultValues?.view_type)
 							? defaultValues?.view_type
 							: (through_criteria || [])[ZEROTH_INDEX];
 					}
@@ -45,7 +45,7 @@ export default function useGetScopeOptions({ defaultValues = {}, apisToConsider 
 		});
 		scopes = Array.from(new Set(scopes));
 
-		return { scopes, VIEW_TYPES, defaultScope, defaultView, defaultAgentId };
+		return { scopes, viewTypes, defaultScope, defaultView, defaultAgentId };
 	}, [navigation, permissions_navigations, defaultValues, apisToConsider]);
 
 	return {
