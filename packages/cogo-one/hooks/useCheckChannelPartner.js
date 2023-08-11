@@ -1,6 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 const getParams = ({ orgId = '' }) => ({
@@ -30,6 +31,8 @@ const formatData = ({
 
 	const ORGID = orgId || GLOBAL_CONSTANTS.uuid.paramount_org_id;
 
+	const isSendUserIdInPath = !isEmpty(orgId) && !isEmpty(userId);
+
 	const disableQuickActions = isChannelPartner && !(twin_importer_exporter_id);
 
 	const hideCpButton = isChannelPartner || loading;
@@ -46,7 +49,7 @@ const formatData = ({
 
 		if (isChannelPartner) {
 			let redirectionLink = `/${partnerId}/prm/
-			${userPartnerId}?${linkSuffix}${userId ? `&user_id=${userId}` : ''}`;
+			${userPartnerId}?${linkSuffix}${isSendUserIdInPath ? `&user_id=${userId}` : ''}`;
 			redirectionLink = prm
 				? `${redirectionLink}&omniChannelActiveTab=${prm}`
 				: redirectionLink;
@@ -54,7 +57,8 @@ const formatData = ({
 			return;
 		}
 
-		let crmRedirect = `/${partnerId}/details/demand/${ORGID}?${linkSuffix}${userId ? `&user_id=${userId}` : ''}`;
+		let crmRedirect = `/${partnerId}/details/demand/${ORGID}?
+		${linkSuffix}${isSendUserIdInPath ? `&user_id=${userId}` : ''}`;
 
 		crmRedirect = crm
 			? `${crmRedirect}&omniChannelActiveTab=${crm}`
