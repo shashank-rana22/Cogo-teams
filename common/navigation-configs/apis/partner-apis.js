@@ -12833,6 +12833,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'auth',
 		},
+		{
+			api          : 'sync_agent_work_preference',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{

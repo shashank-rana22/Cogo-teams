@@ -1,11 +1,10 @@
-import { Input, Select, Toggle } from '@cogoport/components';
-import { IcMSearchlight, IcMArrowBack } from '@cogoport/icons-react';
+import { Input, Select } from '@cogoport/components';
+import { IcMSearchlight, IcMArrowBack, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
 
-import { getIsActive, updateCogooneConstants } from '../../../../../../helpers/configurationHelpers';
 import { formatAgentList } from '../../../../../../helpers/groupAgentsHelpers';
 import useGetOmnichannelAgentTypes from '../../../../../../hooks/useGetOmnichannelAgentTypes';
+import useSyncAgentWorkPreference from '../../../../../../hooks/useSyncAgentWorkPreference';
 import useUpdateAgentPreference from '../../../../../../hooks/useUpdateAgentPreference';
 
 import GroupedAgents from './GroupedAgents';
@@ -14,7 +13,6 @@ import styles from './styles.module.css';
 const LOADER_COUNT = 8;
 
 function AgentWiseLockScreen({
-	firestore = {},
 	getListChatAgents = () => {},
 	loading = false,
 	list = [],
@@ -23,37 +21,24 @@ function AgentWiseLockScreen({
 	setAgentType = () => {},
 	setActiveCard = () => {},
 }) {
-	const [isLockedToggle, setIsLockedToggle] = useState(false);
-
 	const {
 		updateAgentPreference,
 		createLoading = false,
 	} = useUpdateAgentPreference({ getListChatAgents });
 
-	const { options = [] } = useGetOmnichannelAgentTypes();
+	const { syncWorkPreference = () => {} } = useSyncAgentWorkPreference();
 
-	const onToggle = (e) => {
-		setIsLockedToggle(e?.target?.checked);
-		updateCogooneConstants({ firestore, value: e?.target?.checked });
-	};
+	const { options = [] } = useGetOmnichannelAgentTypes();
 
 	const modifiedGroupedAgents = loading
 		? { load: [...Array(LOADER_COUNT).fill({})] } : formatAgentList({ list }) || {};
-
-	useEffect(() => {
-		getIsActive({ firestore, setIsLockedToggle });
-	}, [firestore]);
 
 	return (
 		<>
 			<div className={styles.search_switch_toggle_space}>
 				<div><IcMArrowBack className={styles.back_icon} onClick={() => setActiveCard('')} /></div>
 				<div className={styles.toogle_section}>
-					Screen Lock
-					<Toggle
-						onChange={onToggle}
-						checked={isLockedToggle}
-					/>
+					<IcMRefresh className={styles.refresh_icon} onClick={() => syncWorkPreference()} />
 				</div>
 			</div>
 			<div className={styles.header_filters}>

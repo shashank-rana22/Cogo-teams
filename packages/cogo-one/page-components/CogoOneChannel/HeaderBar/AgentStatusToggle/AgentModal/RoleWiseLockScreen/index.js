@@ -1,14 +1,15 @@
 import { Toggle, Input, Button, Toast } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import { getRolesIsActive, updateRoleCogooneConstants } from '../../../../../../helpers/configurationHelpers';
+import { getIsActive, updateCogooneConstants } from '../../../../../../helpers/configurationHelpers';
 
 import styles from './styles.module.css';
 
 const ONE_MILLI_SECOND = 60000;
-const TIME_DELAY_IN_MINUTE = 1;
+const TIME_DELAY_IN_MINUTE = 15;
 
 function RoleWiseLockScreen({
 	setActiveCard = () => {},
@@ -25,11 +26,11 @@ function RoleWiseLockScreen({
 
 	const onToggleChange = (e) => {
 		setRoleValue((prev) => ({ ...prev, toggleState: e?.target?.checked }));
-		updateRoleCogooneConstants({ firestore, value: e?.target?.checked, roleIds: roles, time: timeInMilliSecond });
+		updateCogooneConstants({ firestore, value: e?.target?.checked, roleIds: roles, time: timeInMilliSecond });
 	};
 
 	const handleSubmit = () => {
-		updateRoleCogooneConstants({ firestore, value: toggleState, roleIds: roles, time: timeInMilliSecond });
+		updateCogooneConstants({ firestore, value: toggleState, roleIds: roles, time: timeInMilliSecond });
 		Toast.success('Successfully Save !');
 	};
 
@@ -38,7 +39,7 @@ function RoleWiseLockScreen({
 	};
 
 	useEffect(() => {
-		getRolesIsActive({ firestore, setRoleValue });
+		getIsActive({ firestore, setRoleValue });
 	}, [firestore]);
 
 	return (
@@ -69,6 +70,14 @@ function RoleWiseLockScreen({
 							multiple
 							asyncKey="partner_roles"
 							initialCall
+							params={{
+								permissions_data_required    : false,
+								add_service_objects_required : false,
+								filters                      : {
+									stakeholder_type : 'partner',
+									entity_types     : ['cogoport'],
+								},
+							}}
 						/>
 
 						<div className={styles.label}>
@@ -88,6 +97,7 @@ function RoleWiseLockScreen({
 								size="md"
 								themeType="primary"
 								onClick={handleSubmit}
+								disabled={!time || isEmpty(roles)}
 							>
 								Submit
 

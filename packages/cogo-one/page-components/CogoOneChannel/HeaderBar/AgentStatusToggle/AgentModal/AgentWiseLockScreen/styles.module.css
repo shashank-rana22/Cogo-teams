@@ -38,4 +38,11 @@
 .toogle_section {
 	display: flex;
 	align-items: center;
+	margin-right: 12px;
+}
+
+.refresh_icon {
+	width: 20px;
+	height: 18px;
+	cursor: pointer;
 }

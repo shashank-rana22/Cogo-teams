@@ -18,33 +18,12 @@ async function getConstantsDoc({ firestore }) {
 	return cogoOneConstantsDocs;
 }
 
-export const getIsActive = async ({ firestore, setIsLockedToggle }) => {
-	const cogoOneConstantsDocs = await getConstantsDoc({ firestore });
-
-	const { is_locked_screen = false } = cogoOneConstantsDocs?.data() || {};
-
-	setIsLockedToggle(is_locked_screen);
-};
-
-export const updateCogooneConstants = async ({ firestore, value }) => {
-	const cogoOneConstantsDocs = await getConstantsDoc({ firestore });
-
-	const roomId = cogoOneConstantsDocs?.id;
-
-	const docRef = doc(
-		firestore,
-		`${FIRESTORE_PATH.cogoone_constants}/${roomId}`,
-	);
-
-	updateDoc(docRef, { is_locked_screen: value });
-};
-
-export const getRolesIsActive = async ({ firestore, setRoleValue }) => {
+export const getIsActive = async ({ firestore = {}, setRoleValue = () => {} }) => {
 	const cogoOneConstantsDocs = await getConstantsDoc({ firestore });
 
 	const {
+		is_locked_screen = false,
 		enable_for_roles = [],
-		is_roles_lock_screen = false,
 		screen_lock_timeout,
 	} = cogoOneConstantsDocs?.data() || {};
 
@@ -53,11 +32,11 @@ export const getRolesIsActive = async ({ firestore, setRoleValue }) => {
 	setRoleValue({
 		roles       : enable_for_roles,
 		time        : timeInMinute,
-		toggleState : is_roles_lock_screen,
+		toggleState : is_locked_screen,
 	});
 };
 
-export const updateRoleCogooneConstants = async ({ firestore, value, roleIds = [], time = '' }) => {
+export const updateCogooneConstants = async ({ firestore = {}, value = false, roleIds = [], time = '' }) => {
 	const cogoOneConstantsDocs = await getConstantsDoc({ firestore });
 
 	const roomId = cogoOneConstantsDocs?.id;
@@ -67,5 +46,5 @@ export const updateRoleCogooneConstants = async ({ firestore, value, roleIds = [
 		`${FIRESTORE_PATH.cogoone_constants}/${roomId}`,
 	);
 
-	updateDoc(docRef, { is_roles_lock_screen: value, enable_for_roles: roleIds, screen_lock_timeout: time });
+	updateDoc(docRef, { is_locked_screen: value, enable_for_roles: roleIds, screen_lock_timeout: time });
 };
