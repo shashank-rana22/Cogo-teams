@@ -3,6 +3,12 @@
 	margin: 16px 0;
 }
 
+.error {
+	margin: 4px;
+	font-size: 10px;
+	color: red;
+}
+
 .communication_details {
 	margin: 24px 0 0;
 }
