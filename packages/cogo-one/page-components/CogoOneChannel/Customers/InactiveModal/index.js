@@ -1,144 +1,99 @@
-import { Modal, Button, Select, Datepicker, Timepicker, Textarea } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Modal, Button } from '@cogoport/components';
+import {
+	DatepickerController,
+	SelectController,
+	TextAreaController,
+	TimepickerController,
+	useForm,
+} from '@cogoport/forms';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { isEmpty, addHours } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React from 'react';
 
 import { OFFLINE_STATUS_OPTIONS, OFFLINE_REASONS_OPTIONS } from '../../../../constants';
-import getWeekDates from '../../../../utils/getWeekDates';
 
 import styles from './styles.module.css';
-
-const ADD_HOURS_BY_ONE = 1;
-const ADD_HOURS_BY_FOUR = 4;
-const MIN_START_HOURS = 0;
-const MAX_START_HOURS = 23;
-const MIN_SECOND = 59;
-const MIN_MILLI_SECOND = 999;
+import { createSubmit, getEndDayTime } from './submitFunctions';
 
 function InactiveModal({
 	updateUserStatus = () => {},
 	setOpenModal = () => {},
 	loading = false,
-
 }) {
-	const [offlineStatus, setOfflineStatus] = useState('');
-	const [date, setDate] = useState(new Date());
-	const [ofTime, setOfTime] = useState(new Date());
-	const [offlineReason, setOfflineReason] = useState({
-		reason  : '',
-		comment : '',
+	const {
+		control,
+		watch,
+		reset,
+		setValue,
+	} = useForm({
+		defaultValues: {
+			reason        : '',
+			comment       : '',
+			ofTime        : '',
+			date          : '',
+			offlineStatus : '',
+		},
 	});
 
-	const { reason = '', comment = '' } = offlineReason || {};
-
-	const customEndTime = date.setHours(
-		ofTime.getHours(),
-		ofTime.getMinutes(),
-		ofTime.getSeconds(),
-	);
-
-	const resetReasons = () => {
-		setOfflineStatus('');
-		setDate(new Date());
-		setOfTime(new Date());
-		setOfflineReason({
-			reason  : '',
-			comment : '',
-		});
-	};
+	const {
+		reason = '',
+		comment = '',
+		date = '',
+		offlineStatus = '',
+	} = watch();
 
 	const handleClose = () => {
 		setOpenModal(false);
 	};
-
-	useEffect(() => {
-		setDate(new Date());
-		setOfTime(new Date());
-	}, [offlineStatus]);
 
 	const emptyStateCheck = isEmpty(offlineStatus) || !reason;
 	const customEmptyCheck = date === '';
 
 	const checks = offlineStatus !== 'custom' ? emptyStateCheck : customEmptyCheck;
 
-	const createSubmit = () => {
-		let validity_start = '';
-		let validity_end = '';
-
-		if (offlineStatus === '1_hour') {
-			validity_start = new Date();
-			validity_end = addHours(new Date(), ADD_HOURS_BY_ONE);
-		} else if (offlineStatus === '4_hour') {
-			validity_start = new Date();
-			validity_end = addHours(new Date(), ADD_HOURS_BY_FOUR);
-		} else if (offlineStatus === 'today') {
-			validity_start = new Date((new Date()).setHours(
-				MIN_START_HOURS,
-				MIN_START_HOURS,
-				MIN_START_HOURS,
-				MIN_START_HOURS,
-			));
-			validity_end = new Date((new Date()).setHours(MAX_START_HOURS, MIN_SECOND, MIN_SECOND, MIN_MILLI_SECOND));
-		} else if (offlineStatus === 'this_week') {
-			const {
-				startDate,
-				endDate,
-			} = getWeekDates();
-			validity_start = startDate;
-			validity_end = endDate;
-		} else {
-			validity_start = new Date();
-			validity_end = customEndTime;
+	const handleChangeStatus = (_, val) => {
+		if (val) {
+			setValue('date', new Date());
+			setValue('ofTime', getEndDayTime());
 		}
-
-		const data = {
-			status         : 'break',
-			validity_start : formatDate({
-				date       : validity_start,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-				timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
-				formatType : 'dateTime',
-				separator  : ' ',
-			}),
-			validity_end: formatDate({
-				date       : validity_end,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-				timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
-				formatType : 'dateTime',
-				separator  : ' ',
-			}),
-			reason: reason === 'others' ? comment : reason,
-		};
-
-		updateUserStatus(data);
 	};
 
 	return (
-		<Modal size="sm" show onClose={handleClose} placement="top">
+		<Modal
+			size="sm"
+			show
+			onClose={handleClose}
+			placement="top"
+			className={styles.styled_modal}
+		>
 			<Modal.Header title="Offline Status" />
 
 			<div className={styles.duration_section}>
 				<div className={styles.time_title}>
 					Select offline reason *
 				</div>
-				<Select
-					value={reason}
-					onChange={(val) => setOfflineReason((prev) => ({ ...prev, reason: val }))}
+
+				<SelectController
+					control={control}
+					name="reason"
 					placeholder="Select reason"
 					options={OFFLINE_REASONS_OPTIONS}
-					isClearable
 				/>
+
 				{reason === 'others' && (
 					<>
-						<Textarea
+						<TextAreaController
+							control={control}
+							name="comment"
 							size="sm"
 							placeholder="Enter the specific reason"
-							value={comment}
-							onChange={(val) => setOfflineReason((prev) => ({ ...prev, comment: val }))}
 						/>
-						{!comment && <div className={styles.error_text}>required*</div>}
+
+						{!comment && (
+							<div className={styles.error_text}>
+								required*
+							</div>
+						)}
 					</>
 				)}
 
@@ -146,32 +101,29 @@ function InactiveModal({
 					Set offline status till *
 				</div>
 
-				<Select
-					value={offlineStatus}
-					onChange={setOfflineStatus}
+				<SelectController
+					name="offlineStatus"
+					control={control}
 					placeholder="Select here..."
 					options={OFFLINE_STATUS_OPTIONS}
+					onChange={handleChangeStatus}
 				/>
+
 				{offlineStatus === 'custom' && (
 					<>
-						<div className={styles.time_title}>
-							Date
-						</div>
-						<Datepicker
+						<div className={styles.time_title}>Date</div>
+						<DatepickerController
 							placeholder="Select date"
-							dateFormat="MM/dd/yyyy HH:mm"
+							dateFormat="MM/dd/yyyy"
 							name="date"
-							onChange={setDate}
-							value={date}
+							control={control}
 						/>
 
-						<div className={styles.time_title}>
-							Time
-						</div>
-
-						<Timepicker
-							onChange={setOfTime}
-							value={ofTime}
+						<div className={styles.time_title}>Time</div>
+						<TimepickerController
+							placeholder="Select time"
+							control={control}
+							name="ofTime"
 						/>
 					</>
 				)}
@@ -180,27 +132,32 @@ function InactiveModal({
 					<Button
 						size="md"
 						themeType="tertiary"
-						onClick={resetReasons}
+						onClick={reset}
+						disabled={loading || checks}
 					>
-						<div className={styles.refresh_icon}>
-							<IcMRefresh width={16} height={16} />
-						</div>
+						<IcMRefresh
+							width={16}
+							height={16}
+							className={styles.refresh_icon}
+						/>
 						Reset Status
 					</Button>
+
 					<Button
 						loading={loading}
 						disabled={checks}
 						size="md"
 						themeType="accent"
-						onClick={createSubmit}
 						className={styles.last_button}
+						onClick={() => createSubmit({
+							watch,
+							updateUserStatus,
+						})}
 					>
 						Apply
-
 					</Button>
 				</div>
 			</div>
-
 		</Modal>
 
 	);

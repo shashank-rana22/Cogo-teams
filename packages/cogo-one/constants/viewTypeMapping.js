@@ -133,6 +133,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			team_agents_status_view     : false,
 		},
 	},
 	sales_admin: {
@@ -171,6 +172,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			team_agents_status_view     : false,
 		},
 	},
 	support: {
@@ -210,6 +212,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : true,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			team_agents_status_view     : false,
 		},
 	},
 	support_admin: {
@@ -247,7 +250,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-
+			team_agents_status_view     : false,
 		},
 	},
 	supply: {
@@ -289,6 +292,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			team_agents_status_view     : false,
 		},
 	},
 	supply_admin: {
@@ -329,6 +333,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			team_agents_status_view     : false,
 		},
 	},
 	shipment_specialist: {
@@ -362,6 +367,41 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : true,
 			customer_org_users          : true,
+			team_agents_status_view     : false,
+		},
+	},
+	shipment_specialis_admin: {
+		all_chats_base_query          : ({ agentId }) => [where('support_agent_id', '==', agentId)],
+		session_type_query            : () => [where('session_type', '==', 'admin')],
+		chat_sub_tabs_access          : ['all', 'teams'],
+		teams_chats_base_query        : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
+		extra_side_bar_navs_access    : [],
+		default_side_nav              : 'user_activity',
+		get_accesible_assign_buttons  : getShipmentSpecialistButtons,
+		accesible_agent_types_query   : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
+		show_relevant_templates       : ['quick_reply'],
+		mails_to_be_shown             : [],
+		bulk_assign_features          : [],
+		accessible_new_communications : ['new_mail'],
+		permissions                   : {
+			auto_assign                 : false,
+			bot_message_toggle          : false,
+			organization_users_contacts : false,
+			bulk_auto_assign            : false,
+			claim_chats                 : false,
+			toggle_agent_status         : false,
+			toggle_self_status          : true,
+			has_group_access            : true,
+			can_message_on_bot_session  : true,
+			has_permission_to_edit      : false,
+			show_organization_users     : false,
+			send_promotional_rate       : false,
+			agent_type_filter           : false,
+			flash_revert_logs           : false,
+			punch_in_out                : false,
+			show_shipments_home_page    : true,
+			customer_org_users          : true,
+			team_agents_status_view     : true,
 		},
 	},
 	cogoone_admin: {
@@ -399,6 +439,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			team_agents_status_view     : true,
 		},
 	},
 	cp_support: {
@@ -435,6 +476,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : true,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			team_agents_status_view     : false,
 		},
 	},
 	marketing: {
@@ -473,6 +515,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			team_agents_status_view     : false,
 		},
 	},
 };
