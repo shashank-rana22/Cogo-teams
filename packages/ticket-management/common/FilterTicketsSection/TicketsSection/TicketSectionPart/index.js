@@ -13,7 +13,7 @@ function TicketsSectionPart({
 	const {
 		tickets = {},
 		listLoading = false,
-		handleScroll = () => {}, fetchTickets = () => {}, reachedBottomCount = 0,
+		handleScroll = () => {}, fetchTickets = () => {}, reachedBottom = false,
 	} = useListTickets({
 		searchParams,
 		spectatorType,
@@ -56,7 +56,7 @@ function TicketsSectionPart({
 				setModalData={setModalData}
 				handleScroll={handleScroll}
 				updateTicketActivity={updateTicketActivity}
-				reachedBottomCount={reachedBottomCount}
+				reachedBottom={reachedBottom}
 			/>
 		</div>
 	);

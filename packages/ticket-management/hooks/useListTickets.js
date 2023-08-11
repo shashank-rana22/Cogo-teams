@@ -16,9 +16,6 @@ const PAGE_DECREMENT = 1;
 const PAGE_INCREMENT = 1;
 const MIN_TICKET_COUNT = 1;
 const WINDOW_VIEW = 20;
-const DEFAULT_COUNT = 0;
-const INCREMENT_COUNT = 1;
-const TWO_SECONDS_STOP = 2000;
 
 const getPayload = ({
 	performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate,
@@ -60,7 +57,7 @@ const useListTickets = ({
 
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
-	const [reachedBottomCount, setReachedBottomCount] = useState(DEFAULT_COUNT);
+	const [reachedBottom, setReachedBottom] = useState(false);
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
@@ -124,15 +121,8 @@ const useListTickets = ({
 		const hasMoreData = pagination <= (data?.total_pages || DEFAULT_PAGE);
 		if (reachBottom && hasMoreData && !loading) {
 			fetchTickets(pagination);
-		} else if (reachBottom && !loading && reachedBottomCount === DEFAULT_COUNT) {
-			setReachedBottomCount((prev) => prev + INCREMENT_COUNT);
-			setTimeout(() => {
-				setReachedBottomCount((prev) => prev + INCREMENT_COUNT);
-			}, TWO_SECONDS_STOP);
-		} else if (!reachBottom) {
-			if (reachedBottomCount) {
-				setReachedBottomCount(DEFAULT_COUNT);
-			}
+		} else if (reachBottom && !loading && !reachedBottom) {
+			setReachedBottom(true);
 		}
 	};
 
@@ -141,7 +131,7 @@ const useListTickets = ({
 		listLoading: loading,
 		fetchTickets,
 		handleScroll,
-		reachedBottomCount,
+		reachedBottom,
 	};
 };
 

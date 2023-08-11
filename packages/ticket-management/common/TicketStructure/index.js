@@ -6,8 +6,6 @@ import styles from './styles.module.css';
 import TicketStructureBody from './TicketStructureBody';
 import TicketStructureLoader from './TicketStructureLoader';
 
-const COUNT_ONE = 1;
-
 function TicketStructure({
 	data = [],
 	handleScroll = () => {},
@@ -15,7 +13,7 @@ function TicketStructure({
 	label = '',
 	updateTicketActivity = () => {},
 	listLoading = false,
-	reachedBottomCount = 0,
+	reachedBottom = false,
 }) {
 	if (!listLoading && isEmpty(data)) {
 		return <EmptyTicket emptyText={`No ${label} Tickets`} />;
@@ -44,13 +42,13 @@ function TicketStructure({
 				))
 			}
 
-			{reachedBottomCount === COUNT_ONE && (
+			{reachedBottom && (
 				<div className={styles.footer_no_data}>
 					No more tickets are available
 				</div>
 			)}
 
-			{listLoading && !reachedBottomCount && <TicketStructureLoader />}
+			{listLoading && !reachedBottom && <TicketStructureLoader />}
 		</div>
 	);
 }
