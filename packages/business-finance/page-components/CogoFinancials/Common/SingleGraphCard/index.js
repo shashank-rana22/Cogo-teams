@@ -74,22 +74,24 @@ function SingleGraphCard({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.flexhead}>
-				<RenderCardHeader
-					title={heading}
-					showInfo
-					infoContent={INFO_CONTENT.closedShipmentsBar}
-				/>
-				{isViewDetailsVisible && (
-					<Button
-						themeType="secondary"
-						onClick={onViewDetails}
-					>
-						View Details
+			{!serviceLevelLoading && (
+				<div className={styles.flexhead}>
+					<RenderCardHeader
+						title={heading}
+						showInfo
+						infoContent={INFO_CONTENT.closedShipmentsBar}
+					/>
+					{isViewDetailsVisible && (
+						<Button
+							themeType="secondary"
+							onClick={onViewDetails}
+						>
+							View Details
 
-					</Button>
-				)}
-			</div>
+						</Button>
+					)}
+				</div>
+			)}
 
 			<div
 				style={{

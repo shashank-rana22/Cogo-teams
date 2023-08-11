@@ -184,7 +184,7 @@ function ClosedShipmentCard({
 					className={styles.placeholder_container}
 					style={{ height: type === 'Financially' ? '90%' : '60%' }}
 				>
-					<Placeholder height="90%" width="96%" />
+					<Placeholder height="80%" width="96%" />
 				</div>
 			)}
 
