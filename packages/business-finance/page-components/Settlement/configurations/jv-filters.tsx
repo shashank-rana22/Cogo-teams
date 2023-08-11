@@ -2,7 +2,6 @@ import styles from './styles.module.css';
 
 export const jvFilters = [
 	{
-
 		name        : 'category',
 		placeholder : 'JV Category',
 		span        : 1,
@@ -34,8 +33,9 @@ export const jvFilters = [
 	{
 		name                  : 'accountingDate',
 		type                  : 'singleDateRange',
-		span                  : 3.5,
+		span                  : 1,
 		placeholder           : 'Accounting Date',
+		style                 : { width: '200px' },
 		isPreviousDaysAllowed : true,
 	},
 ];
