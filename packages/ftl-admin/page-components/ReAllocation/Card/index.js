@@ -43,11 +43,11 @@ function Card({
 				<div className={styles.details_container}>
 					{!!isSelectable && (
 						<Checkbox
-							checked={selectedShipments.has(data?.serial_id)}
+							checked={selectedShipments.has(data?.id)}
 							onChange={(e) => {
 								if (e?.target?.checked) {
-									selectedShipments.add(data?.serial_id);
-								} else selectedShipments.delete(data?.serial_id);
+									selectedShipments.add(data?.id);
+								} else selectedShipments.delete(data?.id);
 								setSelectedShipments(new Set(selectedShipments));
 							}}
 						/>

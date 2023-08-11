@@ -6,7 +6,7 @@ import ToastApiError from '../common/ToastApiError';
 const DEFAULT_PAGE = 1;
 const MAX_ITEMS_PER_PAGE = 10;
 
-function useListKamDeskSurfaceShipment() {
+function useListKamDeskSurfaceShipment({ activeTab = '' }) {
 	const [filters, setFilters] = useState({});
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -15,12 +15,22 @@ function useListKamDeskSurfaceShipment() {
 	}, { manual: true });
 
 	const getShipment = useCallback(async () => {
+		let conditionalFilters = {
+			state                        : ['confirmed_by_importer_exporter', 'in_progress'],
+			edit_quotation_ftl_shipments : true,
+		};
+
+		if (activeTab === 'STAKEHOLDER_RE_ALLOCATION') {
+			conditionalFilters = {
+				state: ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
+			};
+		}
+
 		try {
 			await trigger({
 				params: {
 					filters: {
-						state                        : ['confirmed_by_importer_exporter', 'in_progress'],
-						edit_quotation_ftl_shipments : true,
+						...conditionalFilters,
 						...filters,
 					},
 					shipment_type : 'ftl_freight',
@@ -31,7 +41,7 @@ function useListKamDeskSurfaceShipment() {
 		} catch (err) {
 			ToastApiError(err);
 		}
-	}, [trigger, filters]);
+	}, [trigger, filters, activeTab]);
 
 	useEffect(() => {
 		getShipment();
@@ -42,6 +52,7 @@ function useListKamDeskSurfaceShipment() {
 		loading,
 		filters,
 		setFilters,
+		refetch: getShipment,
 	};
 }
 
