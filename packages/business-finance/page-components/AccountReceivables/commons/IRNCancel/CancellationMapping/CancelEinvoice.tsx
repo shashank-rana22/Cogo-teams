@@ -19,7 +19,7 @@ function CancelEinvoice({
 		formState: { errors: errorVal },
 	} = useForm();
 
-	const { id, invoiceNumber, invoiceDate } = itemData || {};
+	const { id = '', invoiceNumber = '', invoiceDate = '' } = itemData || {};
 
 	const { onSubmit, loading, response, setResponse } = useGetIrnCancellation({
 		id,
