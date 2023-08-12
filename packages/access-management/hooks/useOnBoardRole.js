@@ -1,8 +1,9 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
 import navigationMappingSeller from '@cogoport/navigation-configs/navigation-mapping-seller';
 import navigationMappingShipper from '@cogoport/navigation-configs/navigation-mapping-shipper';
 import { useRouter } from '@cogoport/next';
-import { useRequest } from '@cogoport/request';
+import { useAuthRequest } from '@cogoport/request';
 import getNavData from '@cogoport/request/helpers/get-nav-data';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
@@ -23,17 +24,24 @@ const useOnBoardRole = () => {
 	}));
 	const router = useRouter();
 
-	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_auth_roles',
+	const [{ loading, data }, trigger] = useAuthRequest({
+		url    : '/list_roles',
 		method : 'get',
 	});
 
-	const [{ data: possiblePermissionsData }] = useRequest({
-		url    : '/get_auth_possible_permissions',
+	const [{ data: possiblePermissionsData }, getPossibleNavsData] = useAuthRequest({
+		url    : '/get_possible_permissions',
 		method : 'get',
-	}, { manual: false });
+	});
 
-	const roleData = data?.list?.[0] || {};
+	const [{ data: activeNavsData, loading: activeNavsLoading = false }, getActiveNavs] = useAuthRequest({
+		url    : '/get_role_active_navigations',
+		method : 'get',
+	});
+
+	const roleData = data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+	const { navigations: activeNavs = [] } = activeNavsData || {};
 
 	const { permissions } = possiblePermissionsData || {};
 
@@ -53,17 +61,14 @@ const useOnBoardRole = () => {
 	 * @param {boolean} [load=true]
 	 */
 
-	const getRole = async (id = null, load = true) => {
+	const getRole = (id = null, load = true) => {
 		if (initialLoading && !load) {
 			setInitialLoad(false);
 		}
-		try {
-			await trigger({
-				params: { filters: { id: id || role_id }, partner_data_required: true },
-			});
-		} catch (err) {
-			// console.log(err);
-		}
+
+		trigger({ params: { filters: { id: id || role_id }, partner_data_required: true } });
+		getPossibleNavsData({ params: { role_id: id || role_id } });
+		getActiveNavs({ params: { role_id: id || role_id } });
 	};
 
 	/**
@@ -113,6 +118,8 @@ const useOnBoardRole = () => {
 		showImportRole,
 		handleRoleImport,
 		onImport,
+		activeNavs,
+		activeNavsLoading,
 	};
 };
 

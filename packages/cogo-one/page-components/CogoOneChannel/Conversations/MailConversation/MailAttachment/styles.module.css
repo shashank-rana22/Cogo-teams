@@ -54,11 +54,6 @@
 	}
 }
 
-.media_styles {
-	max-width: 1000px;
-	max-height: 610px;
-}
-
 .download_icon {
 	cursor: pointer;
 	transition: 0.4s;

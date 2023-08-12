@@ -52,7 +52,7 @@ export const useStakeholderCheck = () => {
 	];
 
 	const matchingStakeholders = stakeholderMap
-		.filter(({ role_ids: ids }) => (role_ids || []).some((item) => ids.includes(item)));
+		.filter(({ role_ids: ids }) => (role_ids || []).some((item) => ids?.includes(item)));
 
 	const activeStakeholder = !isEmpty(matchingStakeholders)
 		? matchingStakeholders[GLOBAL_CONSTANTS.zeroth_index].stakeholder : '';
