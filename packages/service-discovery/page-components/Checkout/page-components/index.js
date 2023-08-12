@@ -32,8 +32,6 @@ function Checkout({ checkout_type = '' }) {
 		primary_service = '',
 		detail = {},
 		headerProps = {},
-		search_id = '',
-		importer_exporter_id = '',
 		isShipmentCreated = false,
 		setIsShipmentCreated = () => {},
 		redirect_required,
@@ -59,8 +57,6 @@ function Checkout({ checkout_type = '' }) {
 		const { url = '', message = '' } = getRedirectionDetails({
 			isCheckoutApiSuccess,
 			partner_id,
-			search_id,
-			importer_exporter_id,
 			tags,
 			checkout_id: detail.id,
 			shipment_id,

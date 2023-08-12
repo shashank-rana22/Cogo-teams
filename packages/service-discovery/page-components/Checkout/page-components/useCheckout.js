@@ -199,8 +199,6 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 		primary_service,
 		detail,
 		headerProps,
-		search_id,
-		importer_exporter_id,
 		isShipmentCreated,
 		setIsShipmentCreated,
 		redirect_required,

@@ -1,19 +1,26 @@
 import { Loader, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import DotLoader from '../../common/DotLoader';
 import Header from '../../common/Header';
 import TryOldBanner from '../../common/TryOldBanner';
 
+import getRedirectionDetails from './getRedirectionDetails';
 import useGetSpotSearch from './hooks/useGetSpotSearch';
 import FCLResults from './page-components/FCLResults';
 import styles from './styles.module.css';
 
 function SearchResults() {
-	const { user:{ id } } = useSelector(({ profile }) => ({
-		user: profile.user,
+	const { user:{ id }, query, partner_id = '' } = useSelector(({ profile, general }) => ({
+		user       : profile.user,
+		query      : general?.query,
+		partner_id : profile?.partner?.id,
 	}));
+
+	const { redirect_required = 'true' } = query;
 
 	const [headerProps, setHeaderProps] = useState({});
 	const [comparisonRates, setComparisonRates] = useState([]);
@@ -105,6 +112,32 @@ function SearchResults() {
 			<div className={styles.loading}>
 				<span className={styles.loading_text}>Looking for Rates</span>
 				<Loader themeType="primary" className={styles.loader} background="#000" />
+			</div>
+		);
+	}
+
+	const isServiceSupported = GLOBAL_CONSTANTS.s2c_supported_services.includes(detail?.service_type);
+
+	if (
+		!isEmpty(detail)
+		&& redirect_required === 'true'
+		&& (!detail?.tags?.includes('new_admin') || !isServiceSupported)
+	) {
+		const { url = '', message = '' } = getRedirectionDetails({
+			tags                 : detail.tags,
+			redirect_required,
+			id                   : detail.id,
+			importer_exporter_id : detail.importer_exporter_id,
+			partner_id,
+			shipment_id          : detail.shipment_id,
+		});
+
+		window.location.replace(url);
+
+		return (
+			<div className={styles.spinner_container}>
+				<DotLoader />
+				<div className={styles.text}>{message}</div>
 			</div>
 		);
 	}

@@ -1,8 +1,6 @@
 const getRedirectionDetails = ({
 	isCheckoutApiSuccess = false,
 	partner_id = '',
-	search_id = '',
-	importer_exporter_id = '',
 	tags = [],
 	checkout_id = '',
 	shipment_id = '',
@@ -33,7 +31,7 @@ const getRedirectionDetails = ({
 	}
 
 	return {
-		url     : `/${partner_id}/book/${search_id}/${importer_exporter_id}`,
+		url     : `/${partner_id}/checkout/${checkout_id}`,
 		message : 'new admin supports only FCL, redirecting to old admin',
 	};
 };
