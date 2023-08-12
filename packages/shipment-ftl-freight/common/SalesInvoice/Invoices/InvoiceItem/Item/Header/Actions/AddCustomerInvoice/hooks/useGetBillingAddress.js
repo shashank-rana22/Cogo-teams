@@ -1,3 +1,4 @@
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -23,8 +24,8 @@ const useGetBillingAddress = ({
 }) => {
 	const initBillingAddress = { ...(invoice?.billing_address || {}) };
 
-	const supportedEntities = Object.values(GLOBAL_CONSTANTS.cogoport_entities).filter(
-		(item) => item.feature_supported.includes('ftl_customer_invoice'),
+	const supportedEntities = Object.values(ENTITY_FEATURE_MAPPING).filter(
+		(item) => item?.feature_supported?.includes('ftl_customer_invoice'),
 	);
 
 	const {

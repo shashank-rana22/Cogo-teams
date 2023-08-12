@@ -34,9 +34,8 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance', 'dunning',
-			'ftl_customer_invoice'],
-		GSTIN: ['06AAICC8838P1ZV', '07AAACF2136K1ZT',
+		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance', 'dunning'],
+		GSTIN               : ['06AAICC8838P1ZV', '07AAACF2136K1ZT',
 			'27AAACF2136K1ZR', '27AAICC8838P1ZR', 'MUMC26454B'],
 	},
 	401: {

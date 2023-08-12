@@ -51,6 +51,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'ftl_task_date_validation',
 			'terminal_charge',
 			'refresh',
+			'ftl_customer_invoice',
 		],
 		placeholder: {
 			tax_number: 'Search By Business Name/Pan Number',
