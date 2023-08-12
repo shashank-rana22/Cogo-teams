@@ -45,8 +45,7 @@ function AddOnServices(props) {
 								role="presentation"
 								key={key}
 								onClick={() => handleTabChange({ item })}
-								className={cl`${styles.card}  ${isActiveCard ? styles.active_card : ''}
-							${!isEnabled ? styles.disabled_card : ''}`}
+								className={cl`${styles.card} ${!isEnabled ? styles.disabled_card : ''}`}
 							>
 								{ServiceIcon ? <ServiceIcon width={25} height={25} /> : null}
 

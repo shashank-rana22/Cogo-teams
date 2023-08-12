@@ -6,12 +6,12 @@ const getPayload = ({
 	performedById = '', userType = '', saasSubscriptionCustomerId = '',
 	planPricingId = '', selectedUserId = '',
 }) => ({
-	saas_subscription_customer_id : saasSubscriptionCustomerId,
-	plan_pricing_id               : planPricingId,
-	user_id                       : selectedUserId,
-	platform                      : 'cogoone',
-	performed_by_id               : performedById,
-	performed_by_type             : userType === 'partner' ? 'user' : 'agent',
+	customer_id       : saasSubscriptionCustomerId,
+	plan_pricing_id   : planPricingId,
+	user_id           : selectedUserId,
+	source            : 'cogoone',
+	performed_by_id   : performedById,
+	performed_by_type : userType === 'partner' ? 'user' : 'agent',
 });
 
 function useCreatePaymentLink({ saasSubscriptionCustomerId = '', getUserActivePlans = () => {}, selectedUserId = '' }) {
