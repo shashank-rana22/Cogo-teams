@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import getDefaultValues from '../../../../../utils/get-default-values';
-import { truckDetailsControls } from '../../../configs/truckDetailsControls';
+import { truckDetailsControls as controls } from '../../../configs/truckDetailsControls';
 import useListConstantConfigurations from '../../../hooks/useListConstantConfigurations';
 import { isATHAmountValid } from '../../../utils/validateAth';
 
@@ -21,7 +21,6 @@ function TruckDetailForm({
 	truckDetailsList = [],
 	tripDistance = 1,
 }) {
-	const controls = truckDetailsControls();
 	const defaultValues = getDefaultValues(controls);
 	const { control, formState : { errors }, handleSubmit, setValue, reset } = useForm({ defaultValues });
 
@@ -31,8 +30,8 @@ function TruckDetailForm({
 		transit_time = '',
 		detention_free_time = '',
 		updated_detention_free_time = '',
-		priority,
-		preference_id,
+		priority = '',
+		preference_id = '',
 	} = singleServiceProvider || {};
 
 	const isFleetContractBooking = !isEmpty(services[GLOBAL_CONSTANTS.zeroth_index]?.asset_ids);
@@ -53,7 +52,7 @@ function TruckDetailForm({
 		});
 	}
 
-	const { data: fuelCostResp } = useListConstantConfigurations();
+	const { data: fuelCostResp = {} } = useListConstantConfigurations();
 
 	const keyName = `${truck_type}:${service_provider_id}:${transit_time}:${detention_free_time}:${priority}`;
 
@@ -103,8 +102,7 @@ function TruckDetailForm({
 		} else {
 			reset();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [truck_type]);
+	}, [keyName, allTruckDetails, setValue, reset]);
 
 	return (
 		<div className={styles.form_container}>

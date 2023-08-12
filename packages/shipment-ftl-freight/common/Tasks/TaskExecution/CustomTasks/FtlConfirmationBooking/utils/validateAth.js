@@ -26,7 +26,6 @@ export const isATHAmountValid = ({
 }) => {
 	const {
 		line_items = [],
-		buy_rate = '',
 		updated_advance_amount = MIN_DEFAULT_VALUE,
 		price = MIN_DEFAULT_VALUE,
 		advance_amount = MIN_DEFAULT_VALUE,
@@ -43,7 +42,7 @@ export const isATHAmountValid = ({
      *  petrol: 15.37
      * }
      */
-	const costOfFuel =	fuelCostResp?.list?.[GLOBAL_CONSTANTS.zeroth_index]
+	const costOfFuel = fuelCostResp?.list?.[GLOBAL_CONSTANTS.zeroth_index]
 		?.platform_config_constant_mappings?.[GLOBAL_CONSTANTS.zeroth_index]?.value
         || {};
 
@@ -54,7 +53,7 @@ export const isATHAmountValid = ({
      *  2. 0.9% of cost per truck
      * 		this applies for all other types of bookings
      */
-	let tempFinalAmount = Number(buy_rate);
+	let tempFinalAmount = Number(price);
 	const basLineItem = line_items?.find(
 		(lineItem) => lineItem?.code === 'BAS',
 	) || {};

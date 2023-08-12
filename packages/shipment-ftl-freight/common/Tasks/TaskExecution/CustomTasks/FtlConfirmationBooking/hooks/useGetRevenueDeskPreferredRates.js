@@ -38,15 +38,15 @@ const useGetRevenueDeskPreferedRates = ({
 	}, [getRates]);
 
 	const newRates = (preferences?.list || []).map((item) => {
-		const { data, ...rest } = item;
+		const { data = [], ...rest } = item || {};
 		const price_details = data?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-		delete price_details.id;
+		delete price_details?.id;
 
 		return {
 			...price_details,
 			...rest,
-			preference_id: item.preference_id,
+			preference_id: item?.preference_id,
 		};
 	});
 

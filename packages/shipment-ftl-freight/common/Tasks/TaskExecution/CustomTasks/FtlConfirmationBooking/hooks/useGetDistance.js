@@ -6,7 +6,7 @@ const useGetDistance = ({ destination_location_id, origin_location_id }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_distance_matrix_valhalla',
 		method : 'GET',
-	});
+	}, { manual: true });
 
 	const getDistance = useCallback(async () => {
 		try {

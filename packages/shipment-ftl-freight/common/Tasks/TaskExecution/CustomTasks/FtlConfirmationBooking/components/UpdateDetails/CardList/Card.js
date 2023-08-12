@@ -24,21 +24,21 @@ function Card(props) {
 		singleServiceProvider,
 	});
 
-	const dynamicFractions = fields.reduce((acc, field) => `${acc} ${field.span}fr`, '');
+	const dynamicFractions = fields.reduce((acc, field) => `${acc} ${field?.span}fr`, '');
 
 	return (
 		<div className={styles.card_container}>
 			<div className={cl`${styles.row} ${styles.card_header}`} style={{ gridTemplateColumns: dynamicFractions }}>
 				{fields.map((field) => (
-					<div key={`${field.key}_header`}>
-						{field.label}
+					<div key={`${field?.key}_header`}>
+						{field?.label}
 					</div>
 				))}
 			</div>
 			<div className={cl`${styles.row} ${styles.card_body}`} style={{ gridTemplateColumns: dynamicFractions }}>
 				{fields.map((field) => (
-					<div key={`${field.key}_value`}>
-						{field.render(singleServiceProvider) || ''}
+					<div key={`${field?.key}_value`}>
+						{field?.render(singleServiceProvider) || ''}
 					</div>
 				))}
 			</div>

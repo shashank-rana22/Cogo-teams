@@ -6,7 +6,7 @@ const useListConstantConfigurations = () => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_platform_config_constants',
 		method : 'GET',
-	});
+	}, { manual: true });
 
 	const fetchCostOfFuel = useCallback(async () => {
 		try {

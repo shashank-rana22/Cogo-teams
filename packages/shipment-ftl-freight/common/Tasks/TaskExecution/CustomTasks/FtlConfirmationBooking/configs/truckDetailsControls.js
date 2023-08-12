@@ -1,4 +1,4 @@
-export const truckDetailsControls = () => [{
+export const truckDetailsControls = [{
 	name             : 'truck_detail',
 	type             : 'fieldArray',
 	showButtons      : true,
@@ -16,7 +16,7 @@ export const truckDetailsControls = () => [{
 			type  : 'text',
 			label : 'Driver Name',
 			span  : 3,
-			rules : { reuired: 'Driver Name is required' },
+			rules : { required: 'Driver Name is required' },
 		},
 		{
 			name  : 'contact_number',

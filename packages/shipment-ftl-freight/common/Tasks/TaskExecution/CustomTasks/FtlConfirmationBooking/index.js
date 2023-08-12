@@ -14,7 +14,12 @@ function FtlConfirmationBooking(props) {
 
 	const stepsHookData = useStepsData({ ...props, setStep });
 
-	const { handleNext = () => {}, handleFinalSubmit = () => {} } = stepsHookData;
+	const {
+		handleNext = () => {},
+		handleFinalSubmit = () => {},
+		confirmationLoading = false,
+		editQuoteData = {},
+	} = stepsHookData || {};
 
 	const stepsItems = Object.values(STEPS_MAPPINGS);
 	const Component = STEPS_MAPPINGS[step]?.component;
@@ -26,7 +31,8 @@ function FtlConfirmationBooking(props) {
 		<div>
 			<Stepper items={stepsItems} active={step} setActive={setStep} />
 			<div className={styles.container}>
-				<Component {...props} step={step} setStep={setStep} {...stepsHookData} />
+				{Component ? <Component {...props} step={step} setStep={setStep} {...stepsHookData} />
+					: null}
 			</div>
 			<div className={styles.button_wrapper}>
 				<Button themeType="accent" onClick={() => onCancel()}>Cancel</Button>
@@ -39,8 +45,24 @@ function FtlConfirmationBooking(props) {
 					</Button>
 				) : null}
 				{!isLast
-					? <Button themeType="primary" onClick={() => handleNext()}>Next</Button>
-					: <Button themeType="primary" onClick={() => handleFinalSubmit()}>Submit</Button>}
+					? (
+						<Button
+							themeType="primary"
+							onClick={() => handleNext()}
+							loading={confirmationLoading}
+						>
+							Next
+						</Button>
+					)
+					: (
+						<Button
+							themeType="primary"
+							onClick={() => handleFinalSubmit()}
+							loading={editQuoteData?.loading}
+						>
+							Submit
+						</Button>
+					)}
 
 			</div>
 		</div>

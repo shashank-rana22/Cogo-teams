@@ -2,8 +2,8 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useState, useMemo } from 'react';
 
-import { handleTruckServices, handleServiceIdForTruck } from '../utils/helperFunctions';
 import { STEPS_MAPPINGS } from '../utils/stepsMappings';
+import { handleTruckServices, handleServiceIdForTruck } from '../utils/truckServiceHelper';
 
 import useBulkUpdate from './useBulkUpdate';
 import useBulkUpdatePreference from './useBulkUpdatePreference';
@@ -25,7 +25,7 @@ const useStepsData = (propsData) => {
 	} = useFtlFreightRateCards({ services, shipment_data });
 
 	const { loading: bulkLoading, bulkUpdate, trigger: bulkTrigger } = useBulkUpdate();
-	const { updateConfirmation } = useBulkUpdatePreference();
+	const { updateConfirmation, loading: confirmationLoading } = useBulkUpdatePreference();
 
 	const allTrucks = useMemo(() => handleTruckServices(allTruckDetails), [allTruckDetails]);
 
@@ -56,11 +56,11 @@ const useStepsData = (propsData) => {
 
 		newData.forEach((dataItem) => {
 			const tempItem = dataItem;
-			SELECTED_PRIORITIES[dataItem.service_id] = JSON.parse(
-				JSON.stringify(dataItem),
+			SELECTED_PRIORITIES[dataItem?.service_id] = JSON.parse(
+				JSON.stringify(dataItem || {}),
 			);
-			delete tempItem.priority;
-			delete tempItem.preference_id;
+			delete tempItem?.priority;
+			delete tempItem?.preference_id;
 		});
 
 		updateConfirmation({
@@ -95,6 +95,7 @@ const useStepsData = (propsData) => {
 		handleFinalSubmit,
 		bulkLoading,
 		newRates,
+		confirmationLoading,
 		...rest,
 	};
 };

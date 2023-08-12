@@ -6,7 +6,7 @@ const useFtlFreightRateCards = ({ shipment_data = {}, services = [] }) => {
 	const [allTruckDetails, setAllTruckDetails] = useState({});
 	const [finalGetHookData, setFinalGetHookData] = useState({});
 
-	const { groupedRates, loading, getRates, newRates } =	useGetRevenueDeskPreferedRates({
+	const { groupedRates, loading, getRates, newRates } = useGetRevenueDeskPreferedRates({
 		shipment_id  : shipment_data?.id,
 		service_type : 'ftl_freight_service',
 		group_by     : 'truck_type',
@@ -39,12 +39,13 @@ const useFtlFreightRateCards = ({ shipment_data = {}, services = [] }) => {
 	}, [loading]);
 
 	return {
-		serviceProviderData: finalGetHookData,
+		serviceProviderData : finalGetHookData,
 		allTruckDetails,
 		setAllTruckDetails,
 		getRates,
 		newRates,
 		setFinalGetHookData,
+		ratesLoading        : loading,
 	};
 };
 

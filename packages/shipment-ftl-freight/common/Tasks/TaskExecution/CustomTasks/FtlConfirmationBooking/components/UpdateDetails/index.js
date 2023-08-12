@@ -15,16 +15,21 @@ const INCREAMENT_VALUE = 1;
 function UpdateDetails(props) {
 	const { services = [] } = props;
 	const initialTruckType = services?.[GLOBAL_CONSTANTS.zeroth_index]?.truck_type;
-
 	const [currentTab, setCurrentTab] = useState(initialTruckType);
-	const { data } = useListOrganizationAssets({
-		id       : services?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id,
-		assetIds : services?.[GLOBAL_CONSTANTS.zeroth_index]?.asset_ids || [],
+
+	const {
+		destination_location_id = '',
+		origin_location_id = '',
+		service_provider_id = '',
+		asset_ids = [],
+	} = services?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+	const { data, loading: assetsLoading } = useListOrganizationAssets({
+		id       : service_provider_id,
+		assetIds : asset_ids,
 	});
 
-	const { destination_location_id, origin_location_id } = services?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	const { data: distanceResp } = useGetDistance({
+	const { data: distanceResp, loading: distanceLoading } = useGetDistance({
 		destination_location_id,
 		origin_location_id,
 	});
@@ -59,6 +64,7 @@ function UpdateDetails(props) {
 							truckDetailsList={data?.list || []}
 							tripDistance={distanceResp?.distance || INCREAMENT_VALUE}
 							similarServiceIds={similarServiceIds}
+							otherLoading={assetsLoading || distanceLoading}
 						/>
 					</TabPanel>
 				))}

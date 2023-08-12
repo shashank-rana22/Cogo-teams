@@ -5,12 +5,12 @@ import { useEffect, useState, useCallback } from 'react';
 
 const DEFAULT_PAGE_VALUE = 1;
 
-const useListOrganizationAssets = ({ id, assetIds = [] }) => {
+const useListOrganizationAssets = ({ id = '', assetIds = [] }) => {
 	const [page, setPage] = useState(DEFAULT_PAGE_VALUE);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_organization_assets',
 		method : 'GET',
-	});
+	}, { manual: true });
 
 	const getData = useCallback(async () => {
 		if (isEmpty(assetIds)) return;

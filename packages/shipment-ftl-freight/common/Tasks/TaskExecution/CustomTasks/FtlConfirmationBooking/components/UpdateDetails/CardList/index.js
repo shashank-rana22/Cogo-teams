@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -12,14 +13,24 @@ function CardList(props) {
 		currentTab = '',
 		shipment_data = {},
 		similarServiceIds = {},
+		otherLoading = false,
+		ratesLoading = false,
 	} = props;
 	const { source = '', id = '' } = shipment_data || {};
 
 	const ratesData = serviceProviderData[currentTab] || [];
 
+	if (otherLoading || ratesLoading) {
+		return (
+			<div className={styles.loader_container}>
+				<Loader className={styles.loader} />
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
-			{!isEmpty(ratesData) ? (
+			{!isEmpty(ratesData) && !(otherLoading || ratesLoading) ? (
 				<div>
 					{ratesData.map((rate) => (
 						<Card

@@ -6,7 +6,10 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
 import { rawControls } from '../configs/rawControls';
-import { generateDefaultValues, prepareFormValues } from '../utils/helperFunctions';
+import { generateDefaultValues, prepareFormValues } from '../utils/formHelpers';
+
+import useGetServicesQuotation from './useGetServiceQuotation';
+import useUpdateTask from './useUpdateTask';
 
 const setValues = ({ valuesObj, setValue }) => {
 	Object.entries(valuesObj || {}).forEach(([key, value]) => {
@@ -29,6 +32,11 @@ const useEditQuote = ({
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 
+	const [{ loading: quoteLoading }, trigger] = useRequest({
+		url    : '/update_shipment_buy_quotations',
+		method : 'POST',
+	}, { manual: true });
+
 	const requiredServiceIds = services.reduce((acc, serviceObj) => {
 		if (serviceObj?.service_type === 'ftl_freight_service') {
 			acc.push(serviceObj?.id);
@@ -36,32 +44,20 @@ const useEditQuote = ({
 		return acc;
 	}, []);
 
-	const [{ data: serviceChargesData, loading: chargeLoading }, quotationTrigger] = useRequest({
-		url    : '/get_shipment_services_quotation',
-		method : 'GET',
-		params : {
-			shipment_id : shipmentData.id,
-			service_ids : requiredServiceIds,
-		},
-	}, { manual: true });
+	const {
+		serviceChargesData = {},
+		chargeLoading = false,
+	} = useGetServicesQuotation({ shipmentData, requiredServiceIds });
 
-	const [{ loading: taskLoading }, taskTrigger] = useRequest({
-		url    : '/update_shipment_pending_task',
-		method : 'POST',
-	}, { manual: true });
-
-	const [{ loading: quoteLoading }, trigger] = useRequest({
-		url    : '/update_shipment_buy_quotations',
-		method : 'POST',
-	}, { manual: true });
+	const { taskLoading = false, updateTask = () => {} } = useUpdateTask();
 
 	const service_charges =	JSON.parse(
 		JSON.stringify(serviceChargesData?.service_charges || []),
 	) || [];
-	service_charges.forEach((initialService, initailIndex) => {
+	service_charges.forEach((initialService, initialIndex) => {
 		newServiceCharges.forEach((newService) => {
 			if (newService.service_id === initialService.service_id) {
-				service_charges[initailIndex] = { ...initialService, ...newService };
+				service_charges[initialIndex] = { ...initialService, ...newService };
 			}
 		});
 	});
@@ -163,32 +159,19 @@ const useEditQuote = ({
 				},
 			});
 
-			await taskTrigger({
-				data: {
-					id: task?.id,
+			updateTask({
+				task_id  : task?.id,
+				callback : () => {
+					Toast.success('Line Items updated successfully!');
+					refetch();
+					onCancel();
+					timeLineRefetch();
 				},
 			});
-
-			Toast.success('Line Items updated successfully!');
-			refetch();
-			onCancel();
-			timeLineRefetch();
 		} catch (error) {
 			toastApiError(error);
 		}
 	};
-
-	const getServiceCharges = useCallback(async () => {
-		try {
-			await quotationTrigger();
-		} catch (error) {
-			toastApiError(error);
-		}
-	}, [quotationTrigger]);
-
-	useEffect(() => {
-		getServiceCharges();
-	}, [getServiceCharges]);
 
 	useEffect(() => {
 		if (!isEmpty(service_charges)) {
@@ -209,7 +192,7 @@ const useEditQuote = ({
 			setValues({ valuesObj: newValues, setValue });
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [service_charges.length, newServiceCharges.length]);
+	}, [service_charges?.length, newServiceCharges?.length]);
 
 	return {
 		control,

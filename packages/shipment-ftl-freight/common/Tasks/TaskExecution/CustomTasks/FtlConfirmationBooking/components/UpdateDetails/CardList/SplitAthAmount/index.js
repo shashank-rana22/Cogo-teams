@@ -7,8 +7,8 @@ import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import React, { useState, useEffect } from 'react';
 
 import getDefaultValues from '../../../../../../utils/get-default-values';
-import splitAmountControls from '../../../../configs/splitAmountControls';
-import { checkForAth } from '../../../../utils/helperFunctions';
+import controls from '../../../../configs/splitAmountControls';
+import { checkForAth } from '../../../../utils/athHelper';
 
 import styles from './styles.module.css';
 
@@ -17,7 +17,6 @@ function SplitAthAmount({ item = {}, setFinalGetHookData = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [idx, setIdx] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
-	const controls = splitAmountControls();
 	const defaultValues = getDefaultValues(controls);
 	const { control, formState: { errors }, watch, handleSubmit } = useForm({ defaultValues });
 

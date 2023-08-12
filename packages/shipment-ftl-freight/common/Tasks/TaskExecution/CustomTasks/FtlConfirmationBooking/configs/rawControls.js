@@ -1,4 +1,4 @@
-export const rawControls = ({ handleChange, charge, shipment_id }) => ({
+export const rawControls = ({ handleChange = () => {}, charge = {}, shipment_id = '' }) => ({
 	type             : 'edit_service_charges',
 	name             : charge.id,
 	service_name     : charge.service_type,

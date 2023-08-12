@@ -10,12 +10,12 @@ const FLASH_MSG = 'Your booking is being reviewed by Revenue Desk. You will see 
 
 function Empty({
 	source = '',
-	shipment_id = '',
+	id = '',
 	service_type = 'ftl_freight_service',
 	service_ids = [],
 }) {
-	const { data, loading } = useListRevenueDeskShowedRates({
-		shipment_id,
+	const { data = [], loading = false } = useListRevenueDeskShowedRates({
+		shipment_id: id,
 		service_type,
 		service_ids,
 	});
@@ -23,7 +23,7 @@ function Empty({
 	let message = 'Please wait while we get reverts from supply.';
 	if (!loading) {
 		const flashedRates = (data || []).some(
-			(item) => item.source === 'flashed',
+			(item) => item?.source === 'flashed',
 		);
 		if (flashedRates) {
 			message = FLASH_MSG;
