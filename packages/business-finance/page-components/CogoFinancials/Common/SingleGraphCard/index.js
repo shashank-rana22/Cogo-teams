@@ -153,8 +153,9 @@ function SingleGraphCard({
 									);
 								}}
 								axisLeft={{
+									tickValues     : 10,
 									tickSize       : 0,
-									tickPadding    : 0,
+									tickPadding    : 4,
 									tickRotation   : 0,
 									legend         : verticalLabel,
 									legendPosition : 'middle',
