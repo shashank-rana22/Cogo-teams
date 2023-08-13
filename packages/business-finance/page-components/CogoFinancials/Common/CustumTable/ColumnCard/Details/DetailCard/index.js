@@ -3,6 +3,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import showOverflowingNumber from '../../../../../../commons/showOverflowingNumber.tsx';
+
 import styles from './styles.module.css';
 
 const fields = ({ heading, LABEL_MAPPING, type }) => ['Pre Checkout', `${heading === 'Revenue' ? 'KAM' : 'RD'} Wallet`,
@@ -11,6 +13,7 @@ const fields = ({ heading, LABEL_MAPPING, type }) => ['Pre Checkout', `${heading
 
 const EXTRA_LENGTH = 1;
 const DEFAULT_AMOUNT = 0;
+const MAX_DEVIATION_LENGTH = 15;
 
 function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [], type = '' }) {
 	const KEY_MAPPINGS_REVENUE = {
@@ -61,13 +64,16 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 				{heading}
 			</div>
 			{getFields?.map((field, index) => (
-				<div key={field} className={styles.singlefield}>
+				<div
+					key={field}
+					className={styles.singlefield}
+				>
 					<div className={styles.key}>{field}</div>
 					<div
 						className={styles.value}
 						style={{ color: getDeviationColor({ value: amount({ field }), field }) }}
 					>
-						{formatAmount({
+						{showOverflowingNumber(formatAmount({
 							amount   : amount({ field }),
 							currency : item?.currency,
 							options  : {
@@ -75,12 +81,12 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 								currencyDisplay       : 'code',
 								maximumFractionDigits : 2,
 							},
-						})}
-						<span className={cl`${styles.percent} ${styles.value}}`}>
+						}), MAX_DEVIATION_LENGTH)}
+						<div className={cl`${styles.percent} ${styles.value}}`}>
 							{isLast === index
 								? `(${deviationPercent} %)`
 								: null}
-						</span>
+						</div>
 					</div>
 				</div>
 			))}
