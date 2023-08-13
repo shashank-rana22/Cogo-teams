@@ -10,7 +10,15 @@ import RaiseTicketModal from '../../RaiseTicketModal';
 
 import styles from './styles.module.css';
 
-const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
+const getButtonOptions = ({
+	partnerId,
+	shipmentId,
+	setShowRaiseTicket,
+	setShowBookingNote = () => {},
+	taskStatus = '',
+	documents = [],
+	setPopoverVisible = () => {},
+}) => [
 	{
 		children : 'View Shipments',
 		onClick  : (e) => {
@@ -37,15 +45,31 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 		},
 		condition: ['user_shipments'],
 	},
+	{
+		children : 'Show Booking Note',
+		onClick  : (e) => {
+			e.stopPropagation();
+			setShowBookingNote({ show: true, data: { documents, shipmentId } });
+			setPopoverVisible(false);
+		},
+		condition : ['all_shipments'],
+		hide      : taskStatus !== 'approve_booking_note',
+	},
 ];
 
-function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '' }) {
+function HeaderBlock({
+	shipmentItem = {},
+	setShowPocDetails = () => {},
+	type = '',
+	setShowBookingNote = () => {},
+}) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
 		userId    : profile.user.id,
 	}));
 
 	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
+	const [popoverVisible, setPopoverVisible] = useState(false);
 
 	const {
 		serial_id = '',
@@ -54,6 +78,8 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 		shipment_type = '',
 		trade_type = '',
 		importer_exporter_id = '',
+		documents = [],
+		task_status = '',
 	} = shipmentItem || {};
 
 	const { business_name = '' } = importer_exporter || {};
@@ -66,9 +92,17 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 		importer_exporter_id,
 	};
 
-	const buttons = getButtonOptions({ shipmentId, partnerId, setShowRaiseTicket });
+	const buttons = getButtonOptions({
+		shipmentId,
+		partnerId,
+		setShowRaiseTicket,
+		setShowBookingNote,
+		taskStatus: task_status,
+		documents,
+		setPopoverVisible,
+	});
 
-	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
+	const filteredButtons = buttons.filter((itm) => !itm?.hide && itm?.condition.includes(type));
 
 	const handleSidClick = (e) => {
 		e.stopPropagation();
@@ -123,6 +157,7 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 				<Popover
 					placement="bottom-end"
 					caret={false}
+					visible={popoverVisible}
 					render={(
 						<ButtonGroup
 							size="sm"
@@ -133,7 +168,10 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 				>
 					<IcMOverflowDot
 						className={styles.overflow_container}
-						onClick={(e) => e.stopPropagation()}
+						onClick={(e) => {
+							e.stopPropagation();
+							setPopoverVisible((p) => !p);
+						}}
 					/>
 				</Popover>
 			</div>

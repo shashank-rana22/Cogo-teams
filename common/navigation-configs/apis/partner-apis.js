@@ -12439,6 +12439,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'send_booking_note_on_whatsapp',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'submit_omnichannel_kyc',
 			access_type  : 'private',
 			service_name : 'communication',

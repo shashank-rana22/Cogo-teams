@@ -8,7 +8,12 @@ import { ICONS_MAPPING } from './iconsMapping';
 import ShippingRoute from './ShippingRoute';
 import styles from './styles.module.css';
 
-function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type = '' }) {
+function ShipmentsCard({
+	setShowPocDetails = () => {},
+	shipmentItem = {},
+	type = '',
+	setShowBookingNote = () => {},
+}) {
 	const {
 		shipment_type = '',
 		net_total = 0,
@@ -27,6 +32,7 @@ function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type =
 					shipmentItem={shipmentItem}
 					setShowPocDetails={setShowPocDetails}
 					type={type}
+					setShowBookingNote={setShowBookingNote}
 				/>
 
 				<ShippingRoute
