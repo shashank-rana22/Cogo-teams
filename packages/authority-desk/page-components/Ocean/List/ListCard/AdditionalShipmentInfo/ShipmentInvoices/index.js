@@ -1,6 +1,6 @@
 import { Loader, Pagination } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase, format, upperCase } from '@cogoport/utils';
+import { startCase, format, upperCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../../../commons/EmptyState';
@@ -8,13 +8,20 @@ import useListInvoiceWrapper from '../../../../../../hooks/useListInvoiceWrapper
 
 import styles from './styles.module.css';
 
-function ShipmentInvoices({ item = {} }) {
-	const [page, setPage] = useState(1);
+const PAGE_INDEX = 1;
+const RECORDS_THRESHOLD = 10;
 
-	const { data, loading } = useListInvoiceWrapper({ serial_id: item?.serial_id, page });
+function ShipmentInvoices({ item = {}, tradeParty = {} }) {
+	const [page, setPage] = useState(PAGE_INDEX);
+
+	const { data, loading } = useListInvoiceWrapper({
+		serial_id           : item?.serial_id,
+		page,
+		registerationNumber : tradeParty?.registration_number,
+	});
 
 	const renderPagination = (
-		data?.totalRecords > 10 && !loading ? (
+		data?.totalRecords > RECORDS_THRESHOLD && !loading ? (
 			<Pagination
 				type="table"
 				totalItems={data?.totalRecords}
@@ -26,7 +33,7 @@ function ShipmentInvoices({ item = {} }) {
 		) : null
 	);
 
-	if (data?.list?.length === 0 && !loading) {
+	if (isEmpty(data?.list) && !loading) {
 		return <EmptyState />;
 	}
 
@@ -58,9 +65,8 @@ function ShipmentInvoices({ item = {} }) {
 				<tbody>
 
 					{(data?.list || []).map((val) => (
-						<tr className={styles.row}>
+						<tr className={styles.row} key={val?.invoiceNumber}>
 							<td
-								role="presentation"
 								onClick={() => {
 									window.open(
 										val?.status !== 'DRAFT'

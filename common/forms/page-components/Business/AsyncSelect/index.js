@@ -53,15 +53,15 @@ import {
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
-	asyncListEmployeeDetails,
-	asyncListAllSquads,
-	asyncListAllTribes,
-	asyncListAllChapters,
+	asyncListExpenseCategories,
 	asyncListAllManagers,
 	asyncFieldsListAgents,
 	asyncListShipmentServices,
 	asyncListShipments,
 	asyncListShipmentPendingTasks,
+	asyncIncidentSubtypeList,
+	asyncFieldsLeadOrganization,
+	asyncListResources,
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
 } from '../../../utils/getAsyncFields';
@@ -130,23 +130,25 @@ const keyAsyncFieldsParamsMapping = {
 	list_sub_chapters                    : asyncListSubChapters,
 	list_tribes                          : asyncListTribes,
 	list_chapters                        : asyncListChapter,
-	list_roles                           : asyncListRoles,
+	list_employee_roles                  : asyncListRoles,
 	default_types                        : asyncFieldsTicketTypes,
 	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
-	list_employee_details                : asyncListEmployeeDetails,
-	list_all_squads                      : asyncListAllSquads,
-	list_all_tribes                      : asyncListAllTribes,
-	list_all_chapters                    : asyncListAllChapters,
+	list_expense_category                : asyncListExpenseCategories,
 	list_all_managers                    : asyncListAllManagers,
 	list_chat_agents                     : asyncFieldsListAgents,
 	list_shipment_services               : asyncListShipmentServices,
 	list_shipments                       : asyncListShipments,
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
+	list_incident_subtype                : asyncIncidentSubtypeList,
+	list_lead_organizations              : asyncFieldsLeadOrganization,
+	resources                            : asyncListResources,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
 };
+
+const SINGLE_ENTITY = 1;
 
 function AsyncSelect(props) {
 	const {
@@ -158,6 +160,7 @@ function AsyncSelect(props) {
 		getSelectedOption,
 		microService = '',
 		onOptionsChange,
+		isSingleEntity,
 		...rest
 	} = props;
 
@@ -178,6 +181,9 @@ function AsyncSelect(props) {
 		microService : microService || defaultParams.microService,
 	});
 
+	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'
+	&& getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
+
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
 		if (multiple) {
@@ -197,8 +203,10 @@ function AsyncSelect(props) {
 
 	return (
 		<Element
-			{...rest}
+			disabled={disabled}
 			{...getAsyncOptionsProps}
+			{...rest}
+
 		/>
 	);
 }

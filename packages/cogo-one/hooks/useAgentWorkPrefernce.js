@@ -3,35 +3,17 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useState } from 'react';
 
 import getViewType from '../helpers/getViewType';
-
-const PERSONA_KEYS_MAPPING = ['sales', 'supply', 'support', 'shipment_specialist'];
-
-const DEFAULT_VIEW_TYPE = 'support';
-
-const getViewTypeFromWorkPreferences = ({ viewTypeFromRoleIds, agentType }) => {
-	if (viewTypeFromRoleIds === 'cogoone_admin') {
-		return viewTypeFromRoleIds;
-	}
-
-	if (!agentType) {
-		return DEFAULT_VIEW_TYPE;
-	}
-
-	if (agentType.includes('admin')) {
-		return agentType;
-	}
-
-	return PERSONA_KEYS_MAPPING.find((eachPersona) => agentType.includes(eachPersona)) || '';
-};
+import getViewTypeFromWorkPreferences from '../utils/getViewTypeFromWorkPreferences';
 
 function useAgentWorkPrefernce() {
-	const { userRoleIds, userId, authRoleData } = useSelector(({ profile }) => ({
+	const { userRoleIds = [], userId = '', authRoleData = {} } = useSelector(({ profile }) => ({
 		userRoleIds  : profile.partner?.user_role_ids || [],
 		userId       : profile?.user?.id,
 		authRoleData : profile?.auth_role_data,
 	}));
 
 	const [viewType, setViewType] = useState('');
+	const [userMails, setUserMails] = useState([]);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_agent_work_preference',
@@ -50,6 +32,7 @@ function useAgentWorkPrefernce() {
 			const viewTypeValue = getViewTypeFromWorkPreferences(
 				{ viewTypeFromRoleIds, agentType: res?.data?.agent_type },
 			);
+			setUserMails(res?.data?.emails || []);
 			setViewType(viewTypeValue);
 		}
 	}, [trigger, viewTypeFromRoleIds]);
@@ -61,6 +44,7 @@ function useAgentWorkPrefernce() {
 	return {
 		viewType,
 		loading,
+		userMails,
 		fetchworkPrefernce,
 		agentStatus: data,
 	};

@@ -10,7 +10,7 @@ import useListTasks from '../../hooks/useListTasks';
 import useUpdateTask from '../../hooks/useUpdateTask';
 import Accordion from '../Accordion';
 
-import { assigned_stakeholder_mapping, taskFilter, successMsg, stakeholderMappings }
+import { ASSIGNED_STAKEHOLDER_MAPPING, TASK_FILTER, SUCCESS_MSG, STAKEHOLDER_MAPPING }
 	from './cardConstants';
 import LocationDetails from './LocationDetails';
 import ServiceProvider from './ServiceProvider';
@@ -32,16 +32,16 @@ export default function Card({
 	});
 
 	const restFilters = {
-		assigned_stakeholder : assigned_stakeholder_mapping[stateProps.inner_tab],
-		task                 : taskFilter[stateProps.inner_tab],
+		assigned_stakeholder : ASSIGNED_STAKEHOLDER_MAPPING[stateProps.inner_tab],
+		task                 : TASK_FILTER[stateProps.inner_tab],
 		shipment_id          : item?.id,
-		status         					 : 'pending',
+		status             		: 'pending',
 	};
 
 	if (
-		['under_collection', 'collected', 'knockoff_pending'].includes(stateProps.inner_tab)
+		['under_collection', 'collected', 'knockoff_pending', 'collection_pending'].includes(stateProps.inner_tab)
 	) {
-		restFilters.task = taskFilter[stateProps.inner_tab][item?.trade_type];
+		restFilters.task = TASK_FILTER?.[stateProps.inner_tab]?.[stateProps.activeTab]?.[item?.trade_type];
 	}
 
 	const {
@@ -90,14 +90,14 @@ export default function Card({
 			listTasks();
 		} else if (
 			stateProps.inner_tab === 'collected'
-			&& item?.trade_type === 'import'
-			&& isEmpty(item?.do_documents)
+			&& stateProps?.activeTab === 'do'
+			&& isEmpty(item?.delivery_orders)
 		) {
 			Toast.error('DO document has not been uploaded');
 		} else if (
 			stateProps.inner_tab === 'collected'
-			&& item?.trade_type === 'import'
-			&& !isEmpty(item?.do_documents)
+			&& stateProps?.activeTab === 'do'
+			&& !isEmpty(item?.delivery_orders)
 		) {
 			setConfirmationModal({
 				show      : true,
@@ -109,7 +109,7 @@ export default function Card({
 	};
 
 	const taskRefetch = () => {
-		Toast.success(successMsg[stateProps.inner_tab]);
+		Toast.success(SUCCESS_MSG[stateProps.inner_tab]);
 		closeModal();
 		refetch();
 		handleAccordionOpen();
@@ -119,14 +119,14 @@ export default function Card({
 
 	const handleSubmit = ({ formValues = {}, taskConfig = {} }) => {
 		const payload = getFormattedPayload({
-			inner_tab    : stateProps.inner_tab,
+			stateProps,
 			item,
 			formValues,
 			taskConfig,
-			pendingTasks : list,
+			pendingTasks: list,
 		});
 
-		if (payload) {
+		if (!isEmpty(payload)) {
 			updateTask(payload);
 		}
 	};
@@ -137,7 +137,7 @@ export default function Card({
 
 	let cardClassName = !showAccordion ? 'no-accordion' : '';
 	cardClassName
-		+= isCriticalVisible && isCardCritical({ item }) ? ' card-critical' : '';
+		+= isCriticalVisible && isCardCritical({ item, activeTab: stateProps?.activeTab }) ? ' card-critical' : '';
 
 	if (stateProps.inner_tab === 'knockoff_awaiting') {
 		actionButton.show = false;
@@ -174,7 +174,7 @@ export default function Card({
 					<div className={styles.stakeholders}>
 						{(stakeholders || []).map((stakeholder) => (
 							<div className={cl`${styles.text} ${styles.thin} ${styles.small}`} key={uuid()}>
-								{stakeholderMappings[stakeholder?.stakeholder_type]}
+								{STAKEHOLDER_MAPPING[stakeholder?.stakeholder_type]}
 								{' '}
 								<div className={cl`${styles.text} ${styles.bold} ${styles.inline}`}>
 									{stakeholder?.name}

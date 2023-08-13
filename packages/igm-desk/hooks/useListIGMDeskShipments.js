@@ -1,4 +1,4 @@
-import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -16,9 +16,15 @@ const PAGE_ONE = 1;
 const EMPTY_DATA = { list: [], total: 0, total_page: 0 };
 
 export default function useListIGMDeskShipments() {
-	const { authParams, selected_agent_id, user } = useSelector(({ profile }) => profile) || {};
-	const { filters, setFilters, tabState } = useContext(IGMDeskContext) || {};
+	const { partner_id, authParams = {}, selected_agent_id = '' } = useSelector(({ general, profile }) => ({
+		partner_id        : general?.query?.partner_id,
+		authParams        : profile.authParams || {},
+		selected_agent_id : profile.selected_agent_id || '',
+	}));
 
+	const [, scope, view_type] = (authParams || '').split(':');
+
+	const { filters, setFilters, tabState } = useContext(IGMDeskContext) || {};
 	const [data, setData] = useState(EMPTY_DATA);
 
 	const [{ loading }, trigger] = useRequest({
@@ -29,22 +35,25 @@ export default function useListIGMDeskShipments() {
 	const listShipments = useCallback(async () => {
 		try {
 			const res = await trigger({
-				params: getPayload({ filters, tabState, selected_agent_id, userId: user?.id }),
+				params: getPayload({ filters, tabState, partner_id }),
 			});
 
-			if (isEmpty(res.data?.list) && filters.page > PAGE_ONE) {
+			if (isEmpty(res.data?.list) && filters?.page > PAGE_ONE) {
 				setFilters({ ...filters, page: 1 });
 			} else {
 				setData(res.data || {});
 			}
+
+			localStorage.setItem('igm_desk_stored_values', JSON.stringify({
+				scopeFilters: { scope, view_type, selected_agent_id },
+			}));
 		} catch (err) {
-			const message = err?.response?.data?.message || err?.message || 'Something went wrong !!';
-			Toast.error(message);
+			toastApiError(err);
 			setData(EMPTY_DATA);
 		}
-	}, [filters, selected_agent_id, setFilters, tabState, trigger, user?.id]);
+	}, [selected_agent_id, trigger, filters, tabState, partner_id, setFilters, scope, view_type]);
 
-	useCallApi({ listShipments, filters, authParams, tabState, userId: user?.id });
+	useCallApi({ listShipments, filters, tabState });
 
 	return {
 		data: {

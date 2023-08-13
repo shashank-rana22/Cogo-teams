@@ -1,4 +1,5 @@
 import { Input, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -11,6 +12,10 @@ import CreateTemplateForm from './CreateTemplateForm';
 import { Header } from './headerHelpers';
 import styles from './styles.module.css';
 import { Preview, Loader, ListItem } from './templatesHelpers';
+import TemplateSidHeader from './TemplateSidHeader';
+
+const DEFAULT_OPTIONS = ['whatsapp_new_message_modal', 'bulk_communication'];
+const LAST_VALUE = 1;
 
 function Templates({
 	openCreateReply = false,
@@ -21,25 +26,35 @@ function Templates({
 	setDialNumber = () => {},
 	viewType = '',
 	userName = '',
+	orgId = '',
 }) {
+	const [shipmentData, setShipmentData] = useState(null);
 	const [customizableData, setCustomizableData] = useState({});
-	const [activeCard, setActiveCard] = useState({ show: type === 'whatsapp_new_message_modal', data: {} });
+	const [activeCard, setActiveCard] = useState({
+		show : DEFAULT_OPTIONS.includes(type),
+		data : {},
+	});
+	const [fileValue, setFileValue] = useState('');
 
 	const {
 		sendCommunicationTemplate = () => {},
 		communicationLoading = false,
 	} = data || {};
 
-	const { name, html_template, variables = [] } = activeCard?.data || {};
+	const { name, html_template, variables = [], tags = [] } = activeCard?.data || {};
 
 	const isAllKeysAndValuesPresent = variables.every(
 		(key) => (key in customizableData) && customizableData[key],
 	);
 
-	const isDefaultOpen = type === 'whatsapp_new_message_modal';
+	const isDefaultOpen = DEFAULT_OPTIONS.includes(type);
 
 	const maskedMobileNumber = `${dialNumber?.country_code}
 	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
+
+	const urlArray = decodeURI(fileValue)?.split('/');
+	const fileName = urlArray?.[(urlArray.length || GLOBAL_CONSTANTS.zeroth_index) - LAST_VALUE] || '';
+	const formatFileName = fileName?.split('.')[GLOBAL_CONSTANTS.zeroth_index];
 
 	const {
 		setQfilter,
@@ -52,18 +67,21 @@ function Templates({
 
 	const { createTemplate, loading: createLoading } = useCreateCommunicationTemplate();
 
+	const documentDetails = {
+		filename : formatFileName || undefined,
+		link     : fileValue || undefined,
+	};
+
 	const handleClick = () => {
 		sendCommunicationTemplate({
 			template_name : name,
 			type          : 'whatsapp',
 			tags          : ['update_time'],
-			variables     : customizableData,
+			variables     : {
+				...customizableData,
+				document: tags.includes('document') ? documentDetails : undefined,
+			},
 		});
-	};
-
-	const onCreateClick = () => {
-		setOpenCreateReply(true);
-		setActiveCard({ show: false, data: {} });
 	};
 
 	const handleTemplateSelect = (val) => {
@@ -92,6 +110,7 @@ function Templates({
 							onChange={(e) => setQfilter(e)}
 							placeholder="Search saved template here..."
 							prefix={<IcMSearchlight />}
+							className={styles.search_input}
 						/>
 						<div
 							className={styles.message_container}
@@ -121,16 +140,6 @@ function Templates({
 						</div>
 					</div>
 				</div>
-				<div className={styles.footer}>
-					<Button
-						themeType="accent"
-						size="md"
-						disabled={openCreateReply}
-						onClick={onCreateClick}
-					>
-						+ Create Template
-					</Button>
-				</div>
 			</div>
 			{openCreateReply && !activeCard?.show && (
 				<div className={styles.create_container}>
@@ -147,6 +156,13 @@ function Templates({
 
 			{activeCard?.show && !openCreateReply && (
 				<div className={styles.create_container}>
+					{tags.includes('shipment') && orgId && (
+						<TemplateSidHeader
+							orgId={orgId}
+							shipmentData={shipmentData}
+							setShipmentData={setShipmentData}
+						/>
+					)}
 					<div className={styles.preview}>
 						<div className={styles.whatsapp}>
 							<div className={styles.overflow_div}>
@@ -156,6 +172,12 @@ function Templates({
 										variables={variables}
 										customizableData={customizableData}
 										setCustomizableData={setCustomizableData}
+										tags={tags}
+										setFileValue={setFileValue}
+										fileValue={fileValue}
+										fileName={fileName}
+										shipmentData={shipmentData}
+										orgId={orgId}
 									/>
 								</div>
 							</div>

@@ -5,7 +5,9 @@ const DEFAULT_PAGE_NUMBER = 1;
 export default function getValidatedStoredValues() {
 	const storedValues = JSON.parse(localStorage.getItem('igm_desk_stored_values'));
 
-	let { page, q, fileType, sort_by, sort_type, trade_type } = storedValues?.filters || {};
+	let { page, q, fileType, sort_by, sort_type, trade_type, current_filter } = storedValues?.filters || {};
+
+	const { scopeFilters = {} } = storedValues || {};
 
 	let { activeTab } = storedValues?.tabState || {};
 
@@ -37,6 +39,10 @@ export default function getValidatedStoredValues() {
 		sort_by = 'schedule_arrival';
 	}
 
+	if (typeof current_filter !== 'string') {
+		current_filter = 'schedule_arrival';
+	}
+
 	if (typeof fileType !== 'boolean') {
 		fileType = true;
 	}
@@ -47,9 +53,13 @@ export default function getValidatedStoredValues() {
 			page,
 			fileType,
 			trade_type,
+			sort_by,
+			sort_type,
+			current_filter,
 		},
 		tabState: {
 			activeTab,
 		},
+		scopeFilters,
 	};
 }

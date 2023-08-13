@@ -15,7 +15,7 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab, update
 		accessor : (item) => (
 			<div className={styles.name_and_email}>
 				<div className={styles.name}>{item?.employee_detail?.name || '-'}</div>
-				{item?.employee_detail?.personal_email || null}
+				{item?.employee_detail?.cogoport_email || item?.employee_detail?.personal_email || null}
 			</div>
 		),
 	},

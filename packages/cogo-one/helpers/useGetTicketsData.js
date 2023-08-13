@@ -35,7 +35,7 @@ const useGetTicketsData = ({
 		statsData = {},
 		statsLoading = false,
 		fetchTicketsStats = () => {},
-	} = useGetTicketStats({ UserID: userId || leadUserId, activeTab });
+	} = useGetTicketStats({ userId: userId || leadUserId, activeTab });
 
 	const {
 		ticketData = {},
@@ -44,7 +44,7 @@ const useGetTicketsData = ({
 		setFilter = () => {},
 		filter = '',
 		setPagination = () => {},
-	} = useListTickets({ UserID: userId || leadUserId, activeTab, fetchTicketsStats });
+	} = useListTickets({ userId: userId || leadUserId, activeTab, fetchTicketsStats });
 
 	const refetchTickets = () => {
 		fetchTicketsStats();

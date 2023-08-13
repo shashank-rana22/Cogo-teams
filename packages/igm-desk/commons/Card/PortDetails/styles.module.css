@@ -43,7 +43,7 @@
 
 .ellipsis_text {
 	width: fit-content;
-	max-width: 100%;
+	max-width: 200px;
 	overflow: hidden;
 	font-size: 12px;
 	font-weight: 600;

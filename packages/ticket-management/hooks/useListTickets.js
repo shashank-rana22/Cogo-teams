@@ -1,4 +1,6 @@
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import {
@@ -15,18 +17,47 @@ const PAGE_INCREMENT = 1;
 const MIN_TICKET_COUNT = 1;
 const WINDOW_VIEW = 20;
 
+const getPayload = ({
+	performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate,
+}) => ({
+	PerformedByID : performerId,
+	size          : 10,
+	page          : pageIndex - PAGE_DECREMENT,
+	AgentID       : agent || undefined,
+	QFilter       : searchQuery || undefined,
+	Type          : category || undefined,
+	SpectatorType : spectatorType || undefined,
+	StartDate     : formatDate({
+		date       : startDate,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		formatType : 'date',
+	}) || undefined,
+	EndDate: formatDate({
+		date       : endDate,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		formatType : 'date',
+	}) || undefined,
+});
+
 const useListTickets = ({
 	searchParams,
+	spectatorType,
 	status,
 	label,
+	date,
 	refreshList,
 	setRefreshList,
 	isUpdated,
 	setIsUpdated,
 }) => {
-	const { agent, category, spectatorType } = searchParams || {};
+	const { startDate, endDate } = date || {};
+	const { agent, category } = searchParams || {};
+
+	const { id : performerId = '' } = useSelector((state) => state?.profile?.user);
+
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
+	const [reachedBottom, setReachedBottom] = useState(false);
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
@@ -36,25 +67,17 @@ const useListTickets = ({
 		authkey : 'get_tickets_list',
 	}, { manual: true });
 
-	const { profile } = useSelector((state) => state);
-
-	const getPayload = useCallback((pageIndex) => {
-		const payload = {
-			PerformedByID : profile?.user?.id,
-			size          : 10,
-			page          : pageIndex - PAGE_DECREMENT,
-			AgentID       : agent || undefined,
-			QFilter       : searchQuery || undefined,
-			Type          : category || undefined,
-			SpectatorType : spectatorType || undefined,
-		};
+	const formattedPayload = useCallback((pageIndex) => {
+		const payload = getPayload({
+			performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate,
+		});
 		return { ...payload, ...(TICKET_SECTION_MAPPING?.[status] || {}) };
-	}, [profile?.user?.id, category, searchQuery, agent, status, spectatorType]);
+	}, [performerId, agent, searchQuery, category, spectatorType, startDate, endDate, status]);
 
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {
 			const response = await trigger({
-				params: getPayload(pageIndex),
+				params: formattedPayload(pageIndex),
 			});
 
 			if (response?.data?.items) {
@@ -68,7 +91,7 @@ const useListTickets = ({
 		} catch (error) {
 			console.error('error:', error);
 		}
-	}, [getPayload, trigger]);
+	}, [formattedPayload, trigger]);
 
 	useEffect(() => {
 		setTickets({ list: [], total: 0 });
@@ -98,6 +121,8 @@ const useListTickets = ({
 		const hasMoreData = pagination <= (data?.total_pages || DEFAULT_PAGE);
 		if (reachBottom && hasMoreData && !loading) {
 			fetchTickets(pagination);
+		} else if (reachBottom && !loading && !reachedBottom) {
+			setReachedBottom(true);
 		}
 	};
 
@@ -106,6 +131,7 @@ const useListTickets = ({
 		listLoading: loading,
 		fetchTickets,
 		handleScroll,
+		reachedBottom,
 	};
 };
 

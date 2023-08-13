@@ -9,6 +9,9 @@ import Ongoing from '../Ongoing';
 
 import styles from './styles.module.css';
 
+const VISIBILITY_CHANGE_COUNT = 1;
+const LAST_ELEMENT_OF_ARRAY = 1;
+
 const COMPONENT_MAPPING = {
 	introduction: {
 		key       : 'introduction',
@@ -24,7 +27,7 @@ const COMPONENT_MAPPING = {
 	},
 };
 
-function Eligible({ currentQuestionId }) {
+function Eligible() {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -35,14 +38,18 @@ function Eligible({ currentQuestionId }) {
 
 	const [activeState, setActiveState] = useState('');
 
-	const page = localStorage.getItem(`current_question_${test_id}_${user_id}`);
-
 	const {
 		loading = false,
 		data,
 	} = useGetTest({ id: test_id, user_id });
 
-	const { test_user_mapping_state = 'introduction' } = data || {};
+	const { test_user_mapping_state = 'introduction', user_appearance = [] } = data || {};
+
+	const page = (user_appearance || []).length;
+
+	const currentQuestion = user_appearance[page - LAST_ELEMENT_OF_ARRAY];
+
+	const { test_question_id: currentQuestionId } = currentQuestion || {};
 
 	useEffect(() => {
 		setActiveState(test_user_mapping_state);
@@ -63,7 +70,7 @@ function Eligible({ currentQuestionId }) {
 			// }
 		}
 
-		localStorage.setItem('visibilityChangeCount', 1);
+		localStorage.setItem('visibilityChangeCount', VISIBILITY_CHANGE_COUNT);
 	}, [currentQuestionId, page, test_id, user_id]);
 
 	const Component = COMPONENT_MAPPING?.[activeState]?.component || Introduction;

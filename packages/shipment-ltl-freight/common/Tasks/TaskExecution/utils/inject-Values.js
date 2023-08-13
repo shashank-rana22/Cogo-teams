@@ -1,11 +1,13 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import injectCustomFormValidations from './inject-custom-form-validations';
 
-const injectValues = (
+const injectValues = ({
 	selectedMail,
 	populatedControls,
 	task,
 	servicesList,
-) => {
+}) => {
 	const controls = populatedControls || [];
 	const ltlService = (servicesList || []).find(
 		(obj) => obj.service_type === 'ltl_freight_service' && ['first', 'mid', 'last'].includes(obj?.mile_number),
@@ -16,7 +18,7 @@ const injectValues = (
 		(controls || []).forEach((control, index) => {
 			if (control.type === 'fieldArray') {
 				controls[index].value = controls[index]?.value?.length
-					? controls[index]?.value : [{ url: selectedMail?.formatted?.[0]?.url }];
+					? controls[index]?.value : [{ url: selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.url }];
 			}
 		});
 	}

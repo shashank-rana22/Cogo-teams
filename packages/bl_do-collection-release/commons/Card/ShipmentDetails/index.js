@@ -9,7 +9,9 @@ import ClickableDiv from '../../ClickableDiv';
 
 import styles from './styles.module.css';
 
-const PARTNER_ID_INDEX_IN_PATH = 1;
+const SHIPMENT_TYPE_PATH = {
+	fcl_freight: 'fcl',
+};
 
 const iconMapping = {
 	fcl_freight : IcMFfcl,
@@ -19,17 +21,20 @@ const iconMapping = {
 
 export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 	const router = useRouter();
+	const { partner_id = '' } = router?.query || {};
 
 	const handleClick = useCallback(() => {
-		const path = router.asPath.split('/');
+		let href = stateProps?.shipment_type in SHIPMENT_TYPE_PATH
+			? `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE_PATH[stateProps?.shipment_type]}/`
+			: `${window.location.origin}/${partner_id}/shipments/`;
 
-		const newPathname = `/${path[PARTNER_ID_INDEX_IN_PATH]}/shipments/${item.id}
-		?${CONSTANTS.url_navigation_params}`;
+		href += `${item?.id}?${CONSTANTS.url_navigation_params}`;
 
-		window.location.replace(newPathname);
-	}, [router.asPath, item.id]);
+		window.sessionStorage.setItem('prev_nav', href);
+		window.location.href = href;
+	}, [item?.id, partner_id, stateProps?.shipment_type]);
 
-	const Element = iconMapping[stateProps.shipment_type || 'fcl_freight'];
+	const Element = iconMapping[stateProps?.shipment_type || 'fcl_freight'];
 
 	return (
 		<div className={cl`${styles.container} ${styles.shipment_details}`}>

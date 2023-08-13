@@ -172,7 +172,7 @@ function ShipmentDetails() {
 							<ShipmentMails
 								source="cogo_rpa"
 								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={`${shipment_data?.serial_id}`}
+								pre_subject_text={shipment_data?.serial_id}
 							/>
 						</TabPanel>
 

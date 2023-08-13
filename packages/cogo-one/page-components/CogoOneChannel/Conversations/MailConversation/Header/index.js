@@ -2,7 +2,7 @@ import { Placeholder, Tooltip } from '@cogoport/components';
 import React from 'react';
 
 import { MAIL_REPLY_TYPE } from '../../../../../constants';
-import getRecipientData from '../../../../../helpers/getRecipientData';
+import { getRecipientData } from '../../../../../helpers/getRecipientData';
 
 import styles from './styles.module.css';
 
@@ -27,6 +27,7 @@ function Header({
 		bccData,
 		activeMailAddress,
 		isDraft,
+		subject,
 	});
 
 	return (

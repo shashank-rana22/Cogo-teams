@@ -29,11 +29,11 @@ function CfsDetails({ showPocDetails = true, primary_service = {} }) {
 		<div className={styles.heading}>
 			<span>CFS Address:</span>
 			<div className={styles.cfs_details}>
-				NA
+				{primary_service?.cfs_address ?? 'NA'}
 			</div>
-			{showPocDetails && primary_service?.cfs_service ? (
+			{showPocDetails && primary_service?.cfs_address ? (
 				<IcMCopy
-					onClick={() => handleCopy(primary_service?.cfs_service)}
+					onClick={() => handleCopy(primary_service?.cfs_address)}
 					style={STYLE_ICON}
 				/>
 			) : null }
@@ -132,15 +132,16 @@ function ShipmentHeader() {
 					<Popover
 						visible={showPopover}
 						render={(
-							<div
-								role="presentation"
-								className={styles.cancel_button}
+							<Button
+								themeType="tertiary"
+								className={styles.popover_text_button}
 								onClick={() => { setShowModal('cancel_shipment'); setShowPopover(false); }}
 							>
 								Cancel Shipment
-							</div>
+							</Button>
 						)}
 						onClickOutside={() => setShowPopover(false)}
+						className={styles.cancel_popover}
 						placement="bottom"
 					>
 						<IcMOverflowDot className={styles.three_dot_icon} onClick={() => setShowPopover((p) => !p)} />

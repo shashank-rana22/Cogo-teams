@@ -19,6 +19,7 @@ const getFormatedPreferenceSetData = ({ allPreferenceCardsData }) => {
 			fulfillment_ratio_15              : data?.fulfillment_data?.day_15 || data?.day_15,
 			fulfillment_ratio_30              : data?.fulfillment_data?.day_30 || data?.day_30,
 			active_booking                    : data?.active_bookings || DEFAULT_VALUE,
+			agent                             : data?.procured_by?.name,
 			priority                          : element?.priority,
 			sell_price_per_container          : element?.sell_rate_preferences?.basic_freight_rate || DEFAULT_VALUE,
 			sell_price_currency               : element?.sell_rate_preferences?.currency,

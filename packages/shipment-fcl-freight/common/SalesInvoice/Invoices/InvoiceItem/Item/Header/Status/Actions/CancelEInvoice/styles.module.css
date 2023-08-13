@@ -1,0 +1,18 @@
+.heading {
+	font-size: 16px;
+	font-weight: 500;
+	color: #393f70;
+	text-transform: uppercase;
+}
+
+.buttonDiv {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.content {
+	.upload-area {
+		max-height: 100px;
+	}
+}

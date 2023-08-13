@@ -8,6 +8,10 @@ import ShowLineItems from '../../ServiceWiseDetails/RatesCard/Card/ShowLineItems
 
 import styles from './styles.module.css';
 
+const LOCATION_TYPE_MAPPING = {
+	air_freight_service: 'Freight',
+};
+
 function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemData, servicesList }) {
 	const columns = [
 		{ Header: 'Services', accessor: 'service_type' },
@@ -23,7 +27,7 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 			({ service_type, total_price, source, currency, service_id, line_items }) => ({
 				service_type: `${startCase(service_type)} (${(servicesList || [])
 					.find((service) => service?.id === service_id)?.trade_type === 'export'
-					? 'Origin' : 'Destination'})`,
+					? 'Origin' : LOCATION_TYPE_MAPPING[service_type] || 'Destination'})`,
 				total_price_discounted: formatAmount({
 					amount  : total_price,
 					currency,
@@ -33,7 +37,8 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 						maximumFractionDigits : 2,
 					},
 				}),
-				source: startCase(source),
+				source : source === 'cogo_assured_rate' ? 'Cogo Assured' : startCase(source),
+				key    : service_id,
 				details:
 	<Popover
 		placement="top"
@@ -51,7 +56,7 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 			role="button"
 			tabIndex={0}
 		>
-			view more
+			view
 		</div>
 	</Popover>,
 			}),

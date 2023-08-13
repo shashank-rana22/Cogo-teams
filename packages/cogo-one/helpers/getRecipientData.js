@@ -1,7 +1,25 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 const CHECK_ONE_OR_MORE_ELEMENTS = 1;
+const NULL_SUBJECT_LENGTH = 0;
+const MAXIMUM_ALLOWED_SUBJECT_LENGTH = 250;
+
+const EMAIL_SUBJECT_PREFIX_MAPPING = {
+	reply     : 'RE',
+	reply_all : 'RE',
+	forward   : 'FW',
+};
+
+export function getSubject({ subject = '', val = '' }) {
+	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
+
+	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[val] || '';
+
+	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
+		? subject : `${emailPrefix}: ${formatedSubject}`;
+}
 
 const getReplyMails = ({
 	filteredRecipientData = [],
@@ -44,7 +62,7 @@ const getReplyAllMails = ({
 	};
 };
 
-const getRecipientData = ({
+export function getRecipientData({
 	setButtonType = () => {},
 	setEmailState = () => {},
 	senderAddress = '',
@@ -54,7 +72,7 @@ const getRecipientData = ({
 	activeMailAddress = '',
 	subject = '',
 	isDraft = false,
-}) => {
+}) {
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
@@ -83,12 +101,13 @@ const getRecipientData = ({
 				filteredBccData,
 			});
 		}
+		const newSubject = getSubject({ subject, val });
 
 		setEmailState(
 			(prev) => ({
 				...prev,
-				subject,
 				body          : '',
+				subject       : newSubject || subject,
 				toUserEmail   : mailData?.toUserEmail || [],
 				ccrecipients  : mailData?.ccrecipients || [],
 				bccrecipients : mailData?.bccrecipients || [],
@@ -97,6 +116,4 @@ const getRecipientData = ({
 	};
 
 	return { handleClick, filteredCcData, filteredBccData, filteredRecipientData };
-};
-
-export default getRecipientData;
+}

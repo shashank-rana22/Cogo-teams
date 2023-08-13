@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
+import useGetBill from '../../../hooks/useGetBill';
 import ClickableDiv from '../../ClickableDiv';
 import PendingTasks from '../../PendingTasks/TaskList';
 import { columns } from '../Invoices/tableColumn';
@@ -21,11 +22,14 @@ function PendingKnockOff({
 	refetchList = () => {},
 	getShipmentPendingTask = () => {},
 	taskLoading = false,
+	stateProps = {},
 }) {
 	const [tab, setTab] = useState('invoice');
 	const list_of_invoices = item?.invoice_data || [];
 
-	const tableData = getTableFormatedData(list_of_invoices);
+	const accordionOpen = tab === 'invoice';
+	const { data } = useGetBill({ serial_id: item?.serial_id, accordionOpen });
+	const tableData = getTableFormatedData({ list_of_invoices, data });
 
 	const refetchForTask = () => {
 		refetchList();
@@ -65,6 +69,7 @@ function PendingKnockOff({
 							handleAccordionOpen={handleAccordionOpen}
 							refetchForTask={refetchForTask}
 							tasksLoading={taskLoading}
+							shipment_type={stateProps.shipment_type}
 						/>
 					)
 			}

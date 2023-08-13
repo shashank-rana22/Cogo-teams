@@ -1,0 +1,20 @@
+.container {
+	display: flex;
+}
+
+.amount_container {
+	display: flex;
+	align-items: center;
+	min-width: 124px;
+}
+
+.details_text {
+	margin-left: 4px;
+	font-size: var(--font-size-sm);
+	font-weight: 500;
+	color: var(--color-secondary-greyscale-4);
+}
+
+.text {
+	color: var(--color-secondary-greyscale-4);
+}

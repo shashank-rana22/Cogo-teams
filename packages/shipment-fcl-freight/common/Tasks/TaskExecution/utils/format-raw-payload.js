@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import { containerIncludingTasks } from '../controls/containerTasks';
 
 const flatten = (reqObj) => {
@@ -11,7 +13,7 @@ const flatten = (reqObj) => {
 		if (
 			typeof reqObj[key] === 'string'
 			|| Array.isArray(reqObj[key])
-			|| Object.keys(reqObj[key] || {})?.length === 0
+			|| Object.keys(reqObj[key] || {})?.length === GLOBAL_CONSTANTS.zeroth_index
 		) {
 			finalObj = {
 				...finalObj,
@@ -29,17 +31,17 @@ const flatten = (reqObj) => {
 };
 
 const formatRawValues = (rawValues, task, getApisData) => {
-	const values = {};
+	const VALUES = {};
 
 	Object.keys(rawValues || {}).forEach((key) => {
 		if (typeof rawValues[key] === 'string') {
-			if (rawValues[key]?.length) values[key] = rawValues[key];
+			if (rawValues[key]?.length) VALUES[key] = rawValues[key];
 		} else {
-			values[key] = rawValues[key];
+			VALUES[key] = rawValues[key];
 		}
 	});
 
-	const formattedObj = flatten(values);
+	const formattedObj = flatten(VALUES);
 
 	if (task?.task === 'add_importer_exporter_poc') {
 		return { importer_exporter_poc: formattedObj };
@@ -49,8 +51,8 @@ const formatRawValues = (rawValues, task, getApisData) => {
 		return { service_provider_poc: formattedObj };
 	}
 
-	if ('booking_ref_status' in values) {
-		const newValues = JSON.parse(JSON.stringify(values));
+	if ('booking_ref_status' in VALUES) {
+		const newValues = JSON.parse(JSON.stringify(VALUES));
 
 		delete newValues?.booking_ref_status;
 
@@ -68,37 +70,25 @@ const formatRawValues = (rawValues, task, getApisData) => {
 					id   : item?.id,
 					data : {
 						container_number: item?.container_number,
-						...(values || {}),
+						...(VALUES || {}),
 					},
 				}),
 			),
 		};
 	}
-	if (
-		task?.task === 'update_container_details'
-		&& task?.shipment_type === 'fcl_freight_local'
-	) {
-		return {
-			update_data: (rawValues?.update_data || []).map((item) => ({
-				id   : item?.id,
-				data : {
-					...item,
-				},
-			})),
-		};
-	}
 
-	if (values?.authorize_letter_and_dpd_code) {
-		const newRawValues = JSON.parse(JSON.stringify(values));
+	if (VALUES?.authorize_letter_and_dpd_code) {
+		const newRawValues = JSON.parse(JSON.stringify(VALUES));
 
 		delete newRawValues?.authorize_letter_and_dpd_code;
 
 		return {
 			...newRawValues,
-			dpd_code  : values?.authorize_letter_and_dpd_code?.[0]?.dpd_code,
-			documents : (values?.authorize_letter_and_dpd_code || []).map(() => ({
-				document_type : 'authorize_letter',
-				url           : values?.authorize_letter_and_dpd_code?.[0]?.authority_letter_custom,
+			dpd_code  : VALUES?.authorize_letter_and_dpd_code?.[GLOBAL_CONSTANTS.zeroth_index]?.dpd_code,
+			documents : (VALUES?.authorize_letter_and_dpd_code || []).map(() => ({
+				document_type: 'authorize_letter',
+				url:
+				VALUES?.authorize_letter_and_dpd_code?.[GLOBAL_CONSTANTS.zeroth_index]?.authority_letter_custom,
 			})),
 		};
 	}
@@ -114,7 +104,7 @@ const formatRawValues = (rawValues, task, getApisData) => {
 		};
 	}
 
-	return values;
+	return VALUES;
 };
 
 export default formatRawValues;

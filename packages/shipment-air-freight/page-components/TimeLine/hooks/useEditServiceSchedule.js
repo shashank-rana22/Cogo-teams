@@ -6,20 +6,22 @@ import useUpdateShipmentService from '../../../hooks/useUpdateShipmentService';
 import controls from '../EditSchedule/controls';
 import { getDate } from '../utils/getDate';
 
-export default function useEditServiceSchedule({ setShow = () => {} }) {
+export default function useEditServiceSchedule({
+	setShow = () => {},
+	stakeholderConfig = {},
+}) {
 	const { servicesList, primary_service, refetch: shipmentRefetch = () => {} } = useContext(ShipmentDetailContext);
 
 	const [departureDate, setDepartureDate] = useState(getDate(primary_service?.schedule_departure));
 
 	const { apiTrigger: updateShipmentService, loading } = useUpdateShipmentService({
-		successMessage : 'Booking Note Updated Successfully !',
-		refetch        : () => {
+		refetch: () => {
 			setShow(false);
 			shipmentRefetch();
 		},
 	});
 
-	const { finalControls, defaultValues } = controls({ primary_service, departureDate });
+	const { finalControls, defaultValues } = controls({ primary_service, departureDate, stakeholderConfig });
 
 	const { handleSubmit: formSubmit, formState: { errors }, watch, reset, control } = useForm({ defaultValues });
 
@@ -52,10 +54,8 @@ export default function useEditServiceSchedule({ setShow = () => {} }) {
 		const payloadForUpdateShipment = {
 			ids                 : mainServiceIds,
 			performed_by_org_id : primary_service?.service_provider?.id,
-			data                : ['flight_arrived'].includes(primary_service?.state)
-				? { schedule_arrival: values?.schedule_arrival }
-				: { ...values },
-			service_type: primary_service?.service_type,
+			data                : values,
+			service_type        : primary_service?.service_type,
 		};
 
 		updateShipmentService(payloadForUpdateShipment);

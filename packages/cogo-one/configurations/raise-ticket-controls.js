@@ -7,6 +7,8 @@ const TICKET_DATA_KEYWORDS_MAPPING = [
 	{ keyword: 'invoice', datakey: 'InvoiceNumber', validation: 'number' },
 ];
 
+const MINIMUM_VALUE = 0;
+
 const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
 	const loadOptions = useGetAsyncTicketOptions({ ...asyncFieldsTicketTypes() });
 
@@ -32,7 +34,7 @@ const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
 			size        : 'md',
 			type        : validation === 'number' ? 'number' : 'text',
 			rules       : {
-				validate: (value) => ((validation === 'number' && value < 0) ? 'Cannot be Negative' : true),
+				validate: (value) => ((validation === 'number' && value < MINIMUM_VALUE) ? 'Cannot be Negative' : true),
 			},
 		},
 		{
@@ -44,6 +46,11 @@ const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
 			rules       : {
 				required: source !== 'message' && 'This is Required',
 			},
+		},
+		{
+			label       : 'Notify customer',
+			name        : 'notify_customer',
+			controlType : 'checkbox',
 		},
 	];
 	return { controls, ticketDataKey: datakey };

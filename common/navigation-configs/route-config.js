@@ -9,6 +9,7 @@ import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
 import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
+import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
@@ -19,9 +20,11 @@ import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
 import employeeDashboard from './config/employee-dashboard';
+import employeeDirectory from './config/employee-directory';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
+import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import groundOps from './config/ground-ops';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
@@ -36,15 +39,18 @@ import managerDashboard from './config/manager-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
+import notifications from './config/notifications';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
 import referral from './config/referral';
+import resource from './config/resources';
 import revenueDesk from './config/revenue-desk';
 import rfqDashboard from './config/rfq-dashboard';
 import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
+import schedules from './config/schedules';
 import serviceDiscovery from './config/service-discovery';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
@@ -131,9 +137,15 @@ const routeConfig = {
 	...managerDashboard,
 	...printingDesk,
 	...ftlAdmin,
+	...schedules,
 	...igmDesk,
 	...airlinePluginBooking,
 	...bookingDeskSurface,
+	...employeeDirectory,
+	...ftlFieldSreviceOps,
+	...notifications,
+	...centralisedCustomerService,
+	...resource,
 	...serviceDiscovery,
 };
 
