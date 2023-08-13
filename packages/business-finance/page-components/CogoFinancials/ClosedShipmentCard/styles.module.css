@@ -33,12 +33,12 @@
 	display: inline-block;
 	width: 12px;
 	height: 12px;
-	margin: 0 4px;
+	margin-right: 4px;
 	border-radius: 50%;
 }
 
 .graph_value {
-	margin: 0 0 8px 20px;
+	margin: 0 0 8px;
 	font-size: var(--font-size-xl);
 	font-weight: 600;
 }

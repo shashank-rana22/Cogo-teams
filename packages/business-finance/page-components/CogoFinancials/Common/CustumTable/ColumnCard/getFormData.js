@@ -39,7 +39,7 @@ const getFormData = ({ item, taxType, show, setShow, type }) => ({
 		},
 	}),
 	action: (
-		<div className={styles.flex}>
+		<div className={styles.arrow_container}>
 			{!show ? (
 				<IcMArrowRotateDown
 					className={styles.edit}

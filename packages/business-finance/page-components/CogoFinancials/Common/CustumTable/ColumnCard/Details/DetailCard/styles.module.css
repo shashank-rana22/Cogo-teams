@@ -34,11 +34,3 @@
 .percent {
 	margin-left: 12px;
 }
-
-.negative {
-	color: var(--color-primary-error-red-2);
-}
-
-.positive {
-	color: var(--color-tertiary-success-green-2);
-}

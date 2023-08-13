@@ -25,8 +25,18 @@ function ColumnCard({
 
 	const formData = getFormData({ item, taxType, show, setShow, type });
 
+	const getDeviationColor = ({ label, value }) => {
+		if (label === 'Deviation') {
+			if (value?.includes('-')) {
+				return '#ee3425'; // negative red
+			}
+			return '#abcd62'; // positive green
+		}
+		return null;
+	};
+
 	return (
-		<div className={styles.marginbottom}>
+		<div>
 			<div className={cl`${styles.flex} ${show ? styles.background : ''}`}>
 				{fields.map((field) => (
 					<div
@@ -34,6 +44,7 @@ function ColumnCard({
 						style={{
 							'--span' : field.span || DEFAULT_SPAN,
 							width    : `${((field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN))}px`,
+							color    : getDeviationColor({ label: field?.label, value: formData?.[field?.key] }),
 						}}
 						className={styles.col}
 					>

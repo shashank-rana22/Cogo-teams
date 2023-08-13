@@ -27,13 +27,11 @@ export const getGraphData = ({
 			{
 				label : 'Deviation (Revenue)',
 				value : revenueDeviation,
-				color : 'inherit',
 				show  : isDeviationVisible,
 			},
 			{
 				label : 'No. of Invoices',
 				value : formatCount(cardData?.invoiceCount || DEFAULT_COUNT),
-				color : 'inherit',
 				show  : true,
 			},
 		],
@@ -56,13 +54,11 @@ export const getGraphData = ({
 			{
 				label : 'Deviation (Cost)',
 				value : costDeviation,
-				color : 'inherit',
 				show  : isDeviationVisible,
 			},
 			{
 				label : 'No. of Shipments',
 				value : formatCount(cardData?.jobCount || DEFAULT_COUNT),
-				color : 'inherit',
 				show  : true,
 			},
 		],
