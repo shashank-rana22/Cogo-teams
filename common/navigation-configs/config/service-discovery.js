@@ -1,5 +1,5 @@
 const serviceDiscovery = {
-	'/[partner_id]/service_discovery': {
+	'/[partner_id]/service-discovery': {
 		navigation : 'service_discovery',
 		isMainNav  : true,
 	},

@@ -8,7 +8,7 @@ const getRedirectionDetails = ({
 }) => {
 	if (!isCheckoutApiSuccess) {
 		return {
-			url: `/v2/${partner_id}/service_discovery`,
+			url: `/v2/${partner_id}/service-discovery`,
 			message:
 				'There is some issue in checkout, redirecting to service discovery',
 		};

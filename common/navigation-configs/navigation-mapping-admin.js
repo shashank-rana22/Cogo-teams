@@ -280,8 +280,8 @@ const navigationMappingAdmin = {
 	service_discovery: {
 		key           : 'service_discovery',
 		title         : 'Service Discovery',
-		href          : '/v2/service_discovery',
-		as            : '/v2/service_discovery',
+		href          : '/v2/service-discovery',
+		as            : '/v2/service-discovery',
 		type          : 'link',
 		icon          : IcMFinanceDashboard,
 		possible_apis : [

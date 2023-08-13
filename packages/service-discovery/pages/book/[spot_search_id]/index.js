@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/service_discovery/page-components/SearchResults';
+export { default } from '@cogoport/service-discovery/page-components/SearchResults';

@@ -185,7 +185,7 @@ const useCheckout = ({ query = {}, entity_types = [], partner_id = '', checkout_
 		return `/v2/${partner_id}/book/${search_id}`;
 	}, [importer_exporter_id, partner_id, search_id, shipment_id]);
 
-	const serviceDiscoveryUrl = useMemo(() => `/v2/${partner_id}/service_discovery`, [partner_id]);
+	const serviceDiscoveryUrl = useMemo(() => `/v2/${partner_id}/service-discovery`, [partner_id]);
 
 	return {
 		resultsUrl,

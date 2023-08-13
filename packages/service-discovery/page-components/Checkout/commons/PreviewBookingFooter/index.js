@@ -140,8 +140,8 @@ function PreviewBookingFooter({
 		updateCheckout({ values: { id, state: 'save_for_later' }, refetchRequired: false });
 
 		push(
-			'/service_discovery',
-			'/service_discovery',
+			'/service-discovery',
+			'/service-discovery',
 		);
 	};
 

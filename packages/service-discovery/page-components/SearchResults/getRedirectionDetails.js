@@ -8,7 +8,7 @@ const getRedirectionDetails = ({
 }) => {
 	if (shipment_id && redirect_required === 'true') {
 		return {
-			url     : `/${partner_id}/service_discovery`,
+			url     : `/${partner_id}/service-discovery`,
 			message : 'The Shipment is already booked',
 		};
 	}

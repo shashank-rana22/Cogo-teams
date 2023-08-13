@@ -2,14 +2,16 @@ import { Controller } from 'react-hook-form';
 
 import PriceSelect from '../Business/PriceSelect';
 
-function PriceSelectController({
-	key,
-	name,
-	value,
-	control,
-	priceSelectRef,
-	...rest
-}) {
+function PriceSelectController(props) {
+	const {
+		key = '',
+		name = '',
+		value = {},
+		control,
+		priceSelectRef,
+		...rest
+	} = props;
+
 	return (
 		<Controller
 			key={key}

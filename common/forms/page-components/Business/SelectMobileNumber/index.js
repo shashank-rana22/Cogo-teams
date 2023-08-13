@@ -7,10 +7,10 @@ import styles from './styles.module.css';
 
 function SelectMobileNumber({
 	value = {},
-	onChange,
+	onChange = () => {},
 	codeKey = 'country_code',
 	numberKey = 'number',
-	width,
+	width = '',
 	id = 'select_phone',
 	inputType = 'text',
 	type = 'text',
