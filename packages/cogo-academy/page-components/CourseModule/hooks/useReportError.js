@@ -6,7 +6,7 @@ import { request } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useReportError = ({ setShowErrorModal = () => {} }) => {
-	const { profile:{ user = {} } } = useSelector((state) => ({
+	const { profile:{ user = {} } = {} } = useSelector((state) => ({
 		profile: state?.profile,
 	}));
 
