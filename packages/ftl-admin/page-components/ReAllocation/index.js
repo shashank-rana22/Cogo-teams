@@ -6,7 +6,7 @@ import Loader from '../../common/Loader';
 import SearchShipment from '../../common/SearchShipment';
 import useBulkReallocate from '../../hooks/useBulkReallocate';
 import useListKamDeskSurfaceShipment from '../../hooks/useListKamDeskSurfaceShipment';
-import { getRoleIds, stakeHolderOptions } from '../../utils/stakeHolderMapping';
+import { getRoleIds, STAKEHOLDER_OPTIONS } from '../../utils/stakeHolderMapping';
 
 import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
@@ -64,7 +64,7 @@ function ReAllocation({ activeTab = '' }) {
 							<div>Staker Holder Type</div>
 							<Select
 								className={styles.select}
-								options={stakeHolderOptions}
+								options={STAKEHOLDER_OPTIONS}
 								value={stakeholderData?.stakeholder_type}
 								onChange={(val) => setStakeholderData({ stakeholder_type: val, stakeholder: '' })}
 							/>
