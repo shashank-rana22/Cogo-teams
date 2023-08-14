@@ -1,7 +1,8 @@
-// import { ShipmentDetailContext } from '@cogoport/context';
-import { useState, useEffect, useMemo } from 'react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import { useState, useEffect, useMemo, useContext } from 'react';
 
 import useListFieldServiceOpsDetails from '../../../hooks/useListFieldServiceOpsDetails';
+import getStakeholderConfig from '../../../stakeholderConfig';
 import {
 	DEFAULT_TRUCK_SELECTION_STATE,
 	TRUCK_STATE_KEYS,
@@ -12,16 +13,16 @@ import useGetFieldServiceOpsDetails from './useGetFieldServiceOpsDetails';
 import useUpdateFieldServiceOpsDetails from './useUpdateFieldServiceOpsDetails';
 
 const useFieldServiceOpsHelper = ({ shipment_data = {} }) => {
-	// const { activeStakeholder } = useContext(ShipmentDetailContext);
+	const { activeStakeholder } = useContext(ShipmentDetailContext);
 	const [viewType, setViewType] = useState(VIEW_TYPES.VIEW);
 	const [initFormattedData, setInitFormattedData] = useState({});
 	const [otherFormattedData, setOtherFormattedData] = useState({});
 	const [isEdit, setIsEdit] = useState(false);
 	const [truckNumber, setTruckNumber] = useState(DEFAULT_TRUCK_SELECTION_STATE);
 
-	// const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
+	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
 
-	// const fieldExecTabConfig = stakeholderConfig?.field_executive;
+	const fieldExecTabConfig = stakeholderConfig?.field_executive;
 
 	const {
 		list,
@@ -90,7 +91,7 @@ const useFieldServiceOpsHelper = ({ shipment_data = {} }) => {
 		setTruckNumber,
 		truckLoading,
 		listLoading,
-		// fieldExecTabConfig,
+		fieldExecTabConfig,
 	};
 };
 
