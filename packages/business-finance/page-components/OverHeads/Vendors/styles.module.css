@@ -16,7 +16,13 @@
 
 .right_container {
 	display: flex;
-	gap: 8px;
+
+	:global {
+		.ui_input_container {
+			width: 240px;
+			margin-right: 4px;
+		}
+	}
 }
 
 .select {
@@ -75,4 +81,10 @@
 	font-size: 14px !important;
 	color: white !important;
 	background: #ed3726 !important;
+}
+
+.vendorcontainer {
+	display: flex;
+	align-items: center;
+	width: 120px;
 }
