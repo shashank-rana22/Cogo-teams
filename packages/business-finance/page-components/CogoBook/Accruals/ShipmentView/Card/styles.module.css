@@ -180,3 +180,13 @@
 	width: 200px;
 	margin-right: 20px;
 }
+
+.heading_bold {
+	font-weight: 600;
+}
+
+.content_tooltip {
+	display: flex;
+	flex-direction: column;
+	font-size: 12px;
+}

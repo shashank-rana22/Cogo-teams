@@ -36,7 +36,7 @@ function ProfitabilityContent({
 	};
 
 	return (
-		<div className={styles.content_container}>
+		<div>
 			<div className={styles.radio}>
 				<RadioGroup
 					options={optionsRadio}
@@ -45,10 +45,11 @@ function ProfitabilityContent({
 						setFilters((prev) => ({ ...prev, profitType: item }));
 						setProfitNumber('');
 					}}
+					className={styles.radio_group_section}
 				/>
 			</div>
 
-			<div style={{ maxWidth: '80%' }}>
+			<div className={styles.profitability_text_style}>
 				<Select
 					value={range}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, range: val })); }}
