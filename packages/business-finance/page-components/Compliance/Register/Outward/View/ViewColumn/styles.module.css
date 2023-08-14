@@ -3,7 +3,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 86%;
-	margin-top: 12px;
+	margin-bottom: 16px;
 }
 
 .combine_tax {
@@ -32,14 +32,19 @@
 }
 
 .invoice_value {
-	margin-left: 16px;
+	margin: 14px 0 0 16px;
 }
 
 .tax_value {
+	margin-bottom: 10px;
 	text-decoration: underline;
 }
 
 .delete_invoice {
 	color: var(--color-primary-error-red-2);
 	cursor: pointer;
+}
+
+.header {
+	margin-top: 14px;
 }

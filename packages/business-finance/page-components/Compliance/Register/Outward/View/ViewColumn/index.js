@@ -16,7 +16,7 @@ function openPDF(event) {
 
 const viewColumn = (deleteInvoice) => [
 	{
-		Header   : <div>Invoice No</div>,
+		Header   : <div className={styles.header}>Invoice No</div>,
 		id       : 'invoiceNo',
 		accessor : ({ invoiceNumber, invoicePdfUrl }) => (
 			<div className={invoicePdfUrl ? styles.invoice_number : styles.invoice_number_val}>
@@ -29,7 +29,7 @@ const viewColumn = (deleteInvoice) => [
 		),
 	},
 	{
-		Header   : <div>Trade party’s GST</div>,
+		Header   : <div className={styles.header}>Trade party’s GST</div>,
 		id       : 'tradePartyGst',
 		accessor : ({ tradePartyGst }) => (
 			<div className={styles.trade_party}>
@@ -38,7 +38,7 @@ const viewColumn = (deleteInvoice) => [
 		),
 	},
 	{
-		Header   : <div>Type</div>,
+		Header   : <div className={styles.header}>Type</div>,
 		id       : 'type',
 		accessor : ({ invoiceType }) => (
 			<div>
@@ -47,7 +47,7 @@ const viewColumn = (deleteInvoice) => [
 		),
 	},
 	{
-		Header   : <div>Taxable Value</div>,
+		Header   : <div className={styles.header}>Taxable Value</div>,
 		id       : 'taxableValue',
 		accessor : ({ taxableValue, invoiceCurrency }) => (
 			<div>
@@ -59,7 +59,7 @@ const viewColumn = (deleteInvoice) => [
 		),
 	},
 	{
-		Header   : <div>Line Count</div>,
+		Header   : <div className={styles.header}>Line Count</div>,
 		id       : 'lineCount',
 		accessor : ({ lineCount }) => (
 			lineCount &&	(
@@ -117,7 +117,7 @@ const viewColumn = (deleteInvoice) => [
 		),
 	},
 	{
-		Header   : <div>IRN Status</div>,
+		Header   : <div className={styles.header}>IRN Status</div>,
 		id       : 'irnStatus',
 		accessor : ({ irnStatus }) => (
 			irnStatus && (
