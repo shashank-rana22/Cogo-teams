@@ -17,6 +17,8 @@ function RoleList() {
 		onChangeFilters = () => {},
 		onChangeParams = () => {},
 		listAuthRolesApi = {},
+		searchString = '',
+		setSearchString = () => {},
 		redirect = () => {},
 		stakeHolderType,
 		setStakeHolderType,
@@ -39,6 +41,8 @@ function RoleList() {
 				<Filters
 					filters={filters}
 					onChangeFilters={onChangeFilters}
+					searchString={searchString}
+					setSearchString={setSearchString}
 					stakeHolderType={stakeHolderType}
 				/>
 
