@@ -53,11 +53,11 @@ function ButtonContainer({ handleView = () => {}, uploadedItem = {}, handleSave 
 }
 
 function CheckAWBDoStatus({
-	docType,
-	item,
-	uploadedItem,
-	handleView,
-	handleSave,
+	docType = '',
+	item = {},
+	uploadedItem = {},
+	handleView = () => {},
+	handleSave = () => {},
 }) {
 	if (
 		INCLUDE_DOCUMENT.includes(docType) && item?.trade_type === 'export'
