@@ -17,8 +17,11 @@ function OrganisationForm({
 	...rest
 }) {
 	const ORG_PARAMS = {
-		branches_data_required : true,
-		filters                : {
+		branches_data_required   : true,
+		setting_data_required    : false,
+		pagination_data_required : false,
+		agent_data_required      : false,
+		filters                  : {
 			status       : 'active',
 			account_type : 'importer_exporter',
 		},
@@ -26,7 +29,8 @@ function OrganisationForm({
 
 	const USER_PARAMS = useMemo(() => (
 		{
-			filters: {
+			pagination_data_required : false,
+			filters                  : {
 				status                 : 'active',
 				organization_id        : organization?.organization_id,
 				organization_branch_id : organization?.organization_branch_id,

@@ -36,7 +36,15 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		asyncKey    : 'list_locations',
 		caret       : true,
 		grouped     : ['city'],
-		params      : { filters: { status: 'active', type: ['pincode', 'city'], country_id: [origin_country_id] } },
+		params      : {
+			fields  : ['country', 'display_name', 'type', 'is_icd', 'postal_code', 'name', 'port_code'],
+			filters : {
+				status     : 'active',
+				type       : ['seaport', 'airport', 'pincode'],
+				country_id : [origin_country_id],
+			},
+			pagination_data_required: false,
+		},
 		condition   : { services: ['export_transportation'] },
 		rules       : { required: 'Pincode is required' },
 		prefix      : <IcMLocation fontSize={16} />,
@@ -67,7 +75,6 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		},
 		rules: { required: 'Trucks count is required', min: 0 },
 	},
-
 	{
 		name    : 'destination_cargo_handling_type',
 		label   : 'Destination Cargo Handling',
@@ -166,11 +173,13 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		style       : { width: 250 },
 		grouped     : ['city'],
 		params      : {
-			filters: {
+			fields  : ['country', 'display_name', 'type', 'is_icd', 'postal_code', 'name', 'port_code'],
+			filters : {
 				status     : 'active',
-				type       : ['pincode', 'city'],
+				type       : ['seaport', 'airport', 'pincode'],
 				country_id : [destination_country_id],
 			},
+			pagination_data_required: false,
 		},
 		condition   : { services: ['import_transportation'] },
 		rules       : { required: 'Pincode is required' },

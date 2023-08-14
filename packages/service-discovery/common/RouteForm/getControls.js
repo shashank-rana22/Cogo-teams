@@ -20,10 +20,11 @@ function LocationLabel(option) {
 	);
 }
 const LOCATION_PARAMS = {
-	page_limit      : 20,
-	includes        : { default_params_required: true },
-	filters         : { status: 'active' },
-	recommendations : true,
+	page_limit               : 20,
+	filters                  : { status: 'active' },
+	recommendations          : true,
+	pagination_data_required : false,
+	fields                   : ['country', 'display_name', 'type', 'is_icd', 'postal_code', 'name', 'port_code'],
 };
 
 const ROUTE_CONTROLS_MAPPING = {
@@ -56,7 +57,7 @@ const getControls = (service) => {
 			newRouteItem.params = {
 				...LOCATION_PARAMS,
 				...newRouteItem.params,
-				filters: { ...LOCATION_PARAMS.filters, type: locationTypeFilter, ...newRouteItem.params?.filters },
+				filters: { ...LOCATION_PARAMS.filters, type: locationTypeFilter, ...newRouteItem?.params?.filters },
 			};
 		}
 		return newRouteItem || {};

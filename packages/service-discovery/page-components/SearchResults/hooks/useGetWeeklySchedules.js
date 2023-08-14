@@ -25,7 +25,21 @@ const useGetWeeklySchedules = ({ filters = {}, setSelectedWeek = () => {} }) => 
 		try {
 			if (!spot_search_id) return;
 
-			const res = await trigger({ params: { spot_search_id } });
+			let finalFilters = {};
+
+			Object.keys(filters).forEach((key) => {
+				finalFilters = {
+					...finalFilters,
+					[key]: filters[key] || undefined,
+				};
+			});
+
+			const res = await trigger({
+				params: {
+					spot_search_id,
+					filters: finalFilters,
+				},
+			});
 			const { data = {} } = res;
 
 			const alreadyPresent = isAlreadyApplied(filters, data);
