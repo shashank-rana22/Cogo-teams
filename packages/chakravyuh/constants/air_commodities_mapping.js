@@ -23,7 +23,7 @@ export const AIR_COMMODITIES = [
 
 export const MODE_OPTIONS = [
 	{
-		value : 'supply_rates',
+		value : 'supply',
 		label : 'Supply Rates',
 	},
 	{

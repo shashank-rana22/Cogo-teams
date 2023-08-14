@@ -48,7 +48,7 @@ const EXPLORED_VIEW_DATA = [
 
 export const COLOR_MAPPINGS = {
 	predicted         : ['#F9AE64', '#FCD7B2', '#FBC28B', '#E09D5A'],
-	supply_rates      : ['#63BEC8', '#B1DFE4', '#8ACED6', '#59ABB4'],
+	supply            : ['#63BEC8', '#B1DFE4', '#8ACED6', '#59ABB4'],
 	rate_extension    : ['#9BA0CB', '#CDD0E5', '#B4B8D8', '#8C90B7'],
 	cluster_extension : ['#f37166', '#F9B8B3', '#F5867D', '#CF6057'],
 };
