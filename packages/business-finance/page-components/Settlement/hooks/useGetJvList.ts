@@ -1,6 +1,43 @@
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
+
+const getPayload = ({
+	page,
+	category,
+	status,
+	query,
+	sortBy,
+	sortType,
+	entityCode,
+	startDate,
+	endDate,
+}) => ({
+	page,
+	pageLimit : 10,
+	category  : category || undefined,
+	status    : status || undefined,
+	query     : query || undefined,
+	sortBy    : sortBy || undefined,
+	sortType  : sortType || undefined,
+	entityCode,
+	startDate : startDate
+		? formatDate({
+			date       : startDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			formatType : 'date',
+		})
+		: undefined,
+	endDate: endDate
+		? formatDate({
+			date       : endDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			formatType : 'date',
+		})
+		: undefined,
+});
 
 const useGetJvList = ({ filters, entityCode }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -12,7 +49,17 @@ const useGetJvList = ({ filters, entityCode }) => {
 		{ manual: true },
 	);
 
-	const { category, status, query: search, page = 1, sortType, sortBy } = filters || {};
+	const {
+		category = '',
+		status = '',
+		query: search,
+		page = 1,
+		sortType = 'Desc',
+		sortBy = 'transactionDate',
+		accountingDate = '',
+	} = filters || {};
+
+	const { startDate = '', endDate = '' } = accountingDate || {};
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -22,33 +69,46 @@ const useGetJvList = ({ filters, entityCode }) => {
 
 	const refetch = () => {
 		trigger({
-			params: {
+			params: getPayload({
 				page,
-				pageLimit : 10,
-				category  : category || undefined,
-				status    : status || undefined,
-				query     : query || undefined,
-				sortBy    : sortBy || undefined,
-				sortType  : sortType || undefined,
+				category,
+				status,
+				query,
+				sortBy,
+				sortType,
 				entityCode,
-			},
+				startDate,
+				endDate,
+			}),
 		});
 	};
 
 	useEffect(() => {
 		trigger({
-			params: {
+			params: getPayload({
 				page,
-				pageLimit : 10,
-				category  : category || undefined,
-				status    : status || undefined,
-				query     : query || undefined,
-				sortBy    : sortBy || undefined,
-				sortType  : sortType || undefined,
+				category,
+				status,
+				query,
+				sortBy,
+				sortType,
 				entityCode,
-			},
+				startDate,
+				endDate,
+			}),
 		});
-	}, [trigger, status, category, query, page, sortType, sortBy, entityCode]);
+	}, [
+		trigger,
+		status,
+		category,
+		query,
+		page,
+		sortType,
+		sortBy,
+		entityCode,
+		startDate,
+		endDate,
+	]);
 
 	return {
 		data,
