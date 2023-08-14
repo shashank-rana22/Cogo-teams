@@ -14,8 +14,10 @@ const getParam = ({ user_id, lead_user_id, filters, activityTab, pagination }) =
 		serial_id: filters.toString(),
 	} : undefined,
 	extra_params: activityTab === 'transactional' ? {
-		milestone_data_required     : true,
-		get_shipment_quotation_data : true,
+		milestone_data_required      : true,
+		get_shipment_quotation_data  : true,
+		current_task_status_required : true,
+		last_completed_task_required : true,
 	} : undefined,
 
 });
