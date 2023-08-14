@@ -34,6 +34,7 @@ function ReAllocation({ activeTab = '' }) {
 			},
 		};
 	}, [stakeholderData?.stakeholder_type]);
+
 	return (
 		<div>
 			<SearchShipment

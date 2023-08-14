@@ -48,16 +48,14 @@
 .header {
 	:global {
 		.customize_trade_type {
-			margin-top: 0;
-			margin-left: 0;
+			margin: 0;
 			line-height: 1.8;
 			border-top-right-radius: 0;
 			border-bottom-left-radius: 0;
 		}
 
 		.customize_source {
-			margin-top: 0;
-			margin-right: 0;
+			margin: 0;
 			line-height: 1.8;
 			border-top-left-radius: 0;
 			border-bottom-right-radius: 0;
