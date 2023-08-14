@@ -1399,9 +1399,6 @@ importers:
       '@amcharts/amcharts5':
         specifier: ^5.4.1
         version: 5.4.1
-      '@cogoport/air-modules':
-        specifier: workspace:^1.0.0
-        version: link:../../common/air-modules
       '@cogoport/charts':
         specifier: ^1.0.1
         version: 1.0.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
