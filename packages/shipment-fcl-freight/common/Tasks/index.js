@@ -68,7 +68,7 @@ function List() {
 			) : null }
 
 			{isEmpty(updatedTaskList)
-				? <EmptyState width={500} height={300} />
+				? <EmptyState title="No Tasks Found" subtitle="Looks like you have no remaining tasks" />
 				: (
 					<>
 

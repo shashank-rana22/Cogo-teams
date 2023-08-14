@@ -21,11 +21,14 @@ function PartialCN({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [servicesIDs, setServicesIDs] = useState([]);
 
-	const controls = creditNoteControls({ services: invoice?.services });
+	const controls = creditNoteControls({ services: invoice?.services, shipmentId: shipment_data?.id });
 
 	const defaultValues = generateDefaultValues({ values: controls });
 
-	const { handleSubmit, control, watch, formState:{ errors = {} } } =	useForm({ defaultValues });
+	const {
+		handleSubmit, control, watch, formState:{ errors = {} },
+		setError,
+	} =	useForm({ defaultValues });
 	const formValues = watch();
 
 	const updatedObj = updateFormValueOfCreditNote({ formValues });
@@ -39,6 +42,7 @@ function PartialCN({
 		servicesIDs,
 		invoice,
 		invoiceData,
+		setError,
 	});
 
 	useEffect(() => {
@@ -52,7 +56,7 @@ function PartialCN({
 			<Modal.Body>
 				<div className={styles.div}>
 					<div className={styles.bold_text}>
-						{`SID ${shipment_data?.serial_id} - Invoice number -`}
+						{`SID ${shipment_data?.serial_id} - Invoice Number -`}
 						<div className={styles.underLined_text}>{invoice?.live_invoice_number}</div>
 					</div>
 				</div>

@@ -9,16 +9,16 @@ function MinimizeModal({
 	status = '',
 	callLoading = false,
 	counter = 0,
-	voice_call_recipient_data,
-	hangUpCall,
+	receiverUserDetails = {},
+	hangUpCall = () => {},
 	hangUpLoading = false,
-	localStateReducer,
+	setCallState = () => {},
 }) {
 	const {
 		mobile_number = '',
 		mobile_country_code = '',
 		userName = '',
-	} = voice_call_recipient_data || {};
+	} = receiverUserDetails || {};
 
 	const handleEndClick = (e) => {
 		e.stopPropagation();
@@ -30,17 +30,15 @@ function MinimizeModal({
 	return (
 		<div
 			className={styles.container}
-			role="button"
-			tabIndex={0}
-			onClick={() => localStateReducer({ showCallModalType: 'fullCallModal' })}
+			role="presentation"
+			onClick={() => setCallState((p) => ({ ...p, showCallModalType: 'fullCallModal' }))}
 		>
 			<div className={styles.avatar}>
 				<IcMProfile width={20} height={20} />
 			</div>
 			<div
 				className={styles.details}
-				role="button"
-				tabIndex={0}
+				role="presentation"
 			>
 				<div className={styles.min_number}>
 					{userName || `${mobile_country_code} ${mobile_number}`
@@ -53,11 +51,10 @@ function MinimizeModal({
 				</div>
 			</div>
 
-			{!callLoading && (
+			{!callLoading && status && (
 				<div
-					onClick={(e) => handleEndClick(e)}
-					role="button"
-					tabIndex={0}
+					onClick={handleEndClick}
+					role="presentation"
 					className={styles.end_call}
 					style={{ cursor: (hangUpLoading || callLoading) ? 'not-allowed' : 'pointer' }}
 				>

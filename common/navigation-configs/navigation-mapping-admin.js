@@ -61,6 +61,7 @@ import {
 	IcMAppMissions,
 	IcMFsoppoc,
 	IcMBookingDesk,
+	IcASecureCloudStorage,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -779,7 +780,7 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		icon          : IcMOverview,
 		possible_apis : apis.cms,
-		main_apis     : ['list_auth_roles'],
+		main_apis     : ['list_roles'],
 		module_type   : 'dashboards',
 	},
 	user: {
@@ -940,7 +941,6 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
 			},
-
 			{
 				key           : 'business_finance-reports',
 				title         : 'Reports',
@@ -949,6 +949,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.reports,
+			},
+			{
+				key           : 'business_finance-cogo_financials',
+				title         : 'Cogo Financials',
+				href          : '/v2/business-finance/cogo-financials',
+				as            : '/v2/business-finance/cogo-financials',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_financials,
 			},
 		],
 		module_type: 'dashboards',
@@ -1112,6 +1121,17 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		icon          : IcMDashboard,
 		possible_apis : apis.unified_dashboard,
+		main_apis     : [],
+		module_type   : 'dashboards',
+	},
+	employee_directory: {
+		key           : 'employee_directory',
+		title         : 'Employee Directory',
+		href          : '/v2/employee-directory',
+		as            : '/v2/employee-directory',
+		type          : 'link',
+		icon          : IcMDashboard,
+		possible_apis : apis.employee_directory_hrms,
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
@@ -1292,11 +1312,11 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-cost_booking_desk',
 				title         : 'Cost Booking Desk',
-				href          : '/cost-booking-desk',
-				as            : '/cost-booking-desk',
+				href          : '/v2/cost-booking-desk',
+				as            : '/v2/cost-booking-desk',
 				type          : 'link',
 				main_apis     : ['list_cost_booking_desk_shipments'],
-				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens],
+				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-cancellation_policies',
@@ -1359,7 +1379,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
+				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -1869,6 +1889,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/account-scoring',
 				possible_apis : apis.account_scoring,
 			},
+			{
+				key           : 'allocations-objective_configurations',
+				title         : 'Objective Configurations',
+				href          : '/v2/allocation/objective-configurations',
+				as            : '/v2/allocation/objective-configurations',
+				possible_apis : apis.objective_configurations,
+			},
 		],
 	},
 	kam_monitoring: {
@@ -1983,8 +2010,8 @@ const navigationMappingAdmin = {
 		href          : '/v2/list-roles',
 		as            : '/v2/list-roles',
 		type          : 'link',
-		main_apis     : ['list_auth_roles'],
-		possible_apis : apis.roles_permissions,
+		main_apis     : ['list_roles'],
+		possible_apis : apis.roleApis,
 		module_type   : 'crm',
 	},
 	vendor_rm: {
@@ -2065,6 +2092,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.cogo_one,
+			},
+			{
+				key           : 'cogo_one-dashboard',
+				title         : 'Dashboard',
+				href          : '/v2/cogo-one/dashboard',
+				as            : '/v2/cogo-one/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_one_dashboard,
 			},
 		],
 		module_type: 'dashboards',
@@ -2505,6 +2541,17 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		possible_apis : apis.centralised_customer_service,
 		icon          : IcMDashboard,
+	},
+	resources: {
+		key           : 'resources',
+		title         : 'Api Resource',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : [],
+		href          : '/v2/resources',
+		as            : '/v2/resources',
+		possible_apis : apis.resourceApis,
+		icon          : IcASecureCloudStorage,
 	},
 };
 

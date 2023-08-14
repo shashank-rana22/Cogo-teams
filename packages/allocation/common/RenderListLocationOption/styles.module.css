@@ -1,0 +1,30 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.left_container {
+	display: flex;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	margin-right: 8px;
+
+	svg {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+.subheading {
+	font-size: 10px;
+	color: #8b8b8b;
+}
+
+.code {
+	margin-left: 8px;
+	color: #8b8b8b;
+}

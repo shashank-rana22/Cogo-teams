@@ -61,7 +61,7 @@ const controls = [
 	},
 	{
 		name        : 'agent_id',
-		label       : 'Agent',
+		label       : 'Reporting Manager',
 		type        : 'async-select',
 		initialCall : true,
 		asyncKey    : 'partner_users',

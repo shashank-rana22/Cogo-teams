@@ -26,12 +26,12 @@ const formatRates = (selectedRate, service_type_prop) => {
 							}))
 							: undefined,
 				},
-				[rate?.origin_locals?.service_id]: {
-					service_provider_id : rate.service_provider_id,
-					airline_id          : rate.airline_id,
+				[rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.origin_locals?.service_id]: {
+					service_provider_id : rate.id,
+					shipping_line_id    : rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.shipping_line_id,
 					line_items:
-						rate && rate?.origin_locals?.line_items
-							? rate.line_items.map((item) => ({
+						rate && rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.origin_locals?.line_items
+							? rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.origin_locals?.line_items.map((item) => ({
 								code     : item.code,
 								name     : item.name,
 								currency : item.currency,
@@ -41,19 +41,20 @@ const formatRates = (selectedRate, service_type_prop) => {
 							}))
 							: undefined,
 				},
-				[rate?.destination_local?.service_id]: {
-					service_provider_id : rate.service_provider_id,
-					airline_id          : rate.airline_id,
+				[rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.destination_locals?.service_id]: {
+					service_provider_id : rate.id,
+					shipping_line_id    : rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.shipping_line_id,
 					line_items:
-						rate && rate?.destination_locals?.line_items
-							? rate.line_items.map((item) => ({
-								code     : item.code,
-								name     : item.name,
-								currency : item.currency,
-								price    : item.price,
-								unit     : item.unit,
-								quantity : item.quantity,
-							}))
+						rate && rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.destination_locals?.line_items
+							? rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.destination_locals
+								?.line_items.map((item) => ({
+									code     : item.code,
+									name     : item.name,
+									currency : item.currency,
+									price    : item.price,
+									unit     : item.unit,
+									quantity : item.quantity,
+								}))
 							: undefined,
 				},
 			};

@@ -1,12 +1,14 @@
-import { format, startCase, upperCase, isEmpty } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase, upperCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import ClickableDiv from '../../../../../../commons/ClickableDiv';
 
 import styles from './styles.module.css';
 
-function BlDetails({ item = {} }) {
-	const docsList = isEmpty(item?.bill_of_ladings) ? item?.delivery_orders : item?.bill_of_ladings;
+function BlDetails({ item = {}, activeTab = '' }) {
+	const docsList = activeTab === 'do' ? item?.delivery_orders : item?.bill_of_ladings;
 
 	const blDoText = isEmpty(item?.bill_of_ladings) ? 'DO' : 'BL';
 
@@ -23,11 +25,11 @@ function BlDetails({ item = {} }) {
 					<tr className={styles.row}>
 						<th>
 							{blDoText}
-							&nbsp;
+							{' '}
 							(
 							{docsList?.length || ' '}
 							)
-							&nbsp;
+							{' '}
 						</th>
 						<th>Document Number</th>
 						<th>Status</th>
@@ -45,7 +47,15 @@ function BlDetails({ item = {} }) {
 							<td>{upperCase(val?.bl_number || val?.do_number)}</td>
 							<td>{startCase(val?.status) || '--'}</td>
 							<td>{upperCase(item?.freight_service?.bl_type || item?.local_service?.bl_type) }</td>
-							<td>{format(item?.expected_release_date, 'dd MMM yyyy', null, true)}</td>
+							<td>
+								{' '}
+								{formatDate({
+									date       : item?.expected_release_date,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})}
+							</td>
+
 							<td>{startCase(val?.delivery_mode)}</td>
 							<td>{docUrl(val)}</td>
 						</tr>
