@@ -11,15 +11,13 @@
           "export": {
             "filters": {
             "service_state": ["containers_gated_in", "vessel_departed", "vessel_arrived", "containers_gated_out"],
-            "task_attributes": [{"task": "upload_igm_document", "status": "completed"},
-            {"task": "knockoff_do_invoices", "status": "pending"}]
+            "task_attributes": [{"task": "knockoff_do_invoices", "status": "pending"}]
             }
           },
           "import": {
             "filters": {
               "service_state": ["vessel_departed", "vessel_arrived", "containers_gated_out"],
-              "task_attributes": [{"task": "upload_igm_document", "status": "completed"},
-               {"task": "knockoff_invoices", "status": "pending"}]
+              "task_attributes": [{"task": "knockoff_invoices", "status": "pending"}]
               }
           }
         },
