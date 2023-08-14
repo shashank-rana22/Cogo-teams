@@ -2,6 +2,11 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
+const TOAST_MESSAGE = {
+	accept : 'Offer Letter accepted successfully',
+	reject : 'Offer Letter rejected successfully',
+};
+
 const useUpdateOfferLetter = ({ document_url, id, getEmployeeDetails, setInformationPage }) => {
 	const [{ loading = false }, trigger] = useHarbourRequest({
 		method : 'post',
@@ -13,14 +18,14 @@ const useUpdateOfferLetter = ({ document_url, id, getEmployeeDetails, setInforma
 			await trigger({
 				data: {
 					id,
-					document_url,
+					...((status !== 'accept') ? { document_url } : {}),
 					status,
 
 				},
 			});
 
 			getEmployeeDetails();
-			Toast.success('Offer Letter rejected successfully');
+			Toast.success(TOAST_MESSAGE[status]);
 			setInformationPage('');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');

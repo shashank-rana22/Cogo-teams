@@ -5,6 +5,7 @@ import { useState } from 'react';
 import PreviewDocumet from '../../../commons/PreviewDocument';
 import useGetDocumentSigningUrl from '../../../hooks/useGetDocumentSigningUrl';
 
+import AcceptOfferModal from './acceptOfferModal';
 import styles from './styles.module.css';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
@@ -14,8 +15,9 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployee
 	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails, setInformationPage });
 
 	const [showModal, setShowModal] = useState(false);
+	const [showAcceptModal, setShowAcceptModal] = useState(false);
 
-	const { onClickSignDocument, data: docData, loading } = useGetDocumentSigningUrl(
+	const { data: docData, loading } = useGetDocumentSigningUrl(
 		{ getEmployeeDetails, document_type: 'offer_letter' },
 	);
 
@@ -46,15 +48,23 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployee
 							Reject
 						</Button>
 					</div>
-
 					<Button
 						themeType="primary"
 						size="md"
-						onClick={() => onClickSignDocument(id)}
+						// onClick={() => onClickSignDocument(id)}
+						onClick={() => setShowAcceptModal(true)}
 						loading={getEmployeeDetailsLoading || loading}
 					>
 						Accept
 					</Button>
+					{showAcceptModal && (
+						<AcceptOfferModal
+							AcceptOfferModal={AcceptOfferModal}
+							setShowAcceptModal={setShowAcceptModal}
+							id={id}
+						/>
+					)}
+
 				</div>
 			) : null}
 
