@@ -1,8 +1,10 @@
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/surface-modules';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 
+import useListFieldServiceOpsDetails from '../../../../../../hooks/useListFieldServiceOpsDetails';
 import getControls from '../configs/pickupControls';
 import {
 	dateCheckerShipment,
@@ -30,9 +32,14 @@ function SinglePickupDate(props, ref) {
 		formState: { errors },
 		watch,
 		handleSubmit,
+		setValue,
 	} = useForm();
 
 	const formValues = watch();
+
+	const { list = [] } = useListFieldServiceOpsDetails({
+		shipment_id: shipment_data?.id,
+	});
 
 	const {
 		entity_id = '',
@@ -92,6 +99,21 @@ function SinglePickupDate(props, ref) {
 		}));
 	}, [entity_id, eway_bill_details, formValues?.delayed_pickup_reason,
 		formValues?.loading_date, isDateAllowed, is_backdate_applicable, item, shipment_data]);
+
+	useEffect(() => {
+		if (isEmpty(list)) {
+			return;
+		}
+		const truckExist = list.find(
+			(listItem) => listItem?.truck_number?.toLowerCase() === item?.truck_number?.toLowerCase(),
+		) || {};
+
+		let startKmImages = [];
+		if (!isEmpty(truckExist)) {
+			startKmImages = truckExist?.start_kilometer_images || [];
+		}
+		setValue('image', startKmImages);
+	}, [list, setValue, item?.truck_number]);
 
 	const showElements = {
 		delayed_pickup_reason: datesChecker(

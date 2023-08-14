@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable custom-eslint/regex-check, custom-eslint/uuid-check */
 export default {
 	country: {
@@ -30,9 +31,9 @@ export default {
 		},
 	},
 	regex: {
-		PAN                                : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
-		// eslint-disable-next-line max-len
+		TAX                                : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g, // PAN Regular Expression
 		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		ECN                                : '',
 		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL                              : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,
@@ -498,6 +499,18 @@ export default {
 				label : '501 Cogoport Vietnam',
 				value : '501',
 			},
+			{
+				label : '601 Cogoport Thailand',
+				value : '601',
+			},
+			{
+				label : '701 Cogoport Indonesia',
+				value : '701',
+			},
+			{
+				label : '801 Cogoport China',
+				value : '801',
+			},
 		],
 		migration_status: [
 			{ label: 'True', value: true },
@@ -662,24 +675,20 @@ export default {
 			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 			max_length : 15,
 		},
-
-		identification_number: {
-			label   : 'PAN Number',
-			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
-		},
-
 		banking_code: {
 			financial_system_code : 'ifsc',
 			pattern               : /^[A-Za-z]{4}\d{7}$/,
 		},
-
 		pan_number: {
 			label   : 'PAN',
-			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
 		},
-
 		economic_zone: {
 			label: 'SEZ',
+		},
+		identification_number: {
+			label   : 'PAN Number',
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
 		},
 
 		ask_gst_details: true,
@@ -696,8 +705,9 @@ export default {
 			},
 			bookings: {
 				invoicing: {
-					is_invoice_mergeable : false,
-					disable_edit_invoice : true,
+					is_invoice_mergeable              : false,
+					disable_edit_invoice              : true,
+					stakeholder_wise_invoice_required : true,
 				},
 			},
 			business_finance: {

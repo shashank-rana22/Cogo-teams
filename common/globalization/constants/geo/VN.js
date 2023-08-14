@@ -30,11 +30,14 @@ export default {
 		},
 	},
 	regex: {
-		PAN              : '',
-		GST              : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
-		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL            : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
+		TAX                                : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		// eslint-disable-next-line max-len
+		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		ECN                                : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL                              : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,
+		MOBILE_NUMBER_WITHOUT_COUNTRY_CODE : '',
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
@@ -377,8 +380,8 @@ export default {
 				value : 'ecn',
 			},
 			{
-				label : 'Tax',
-				value : 'tax',
+				label : 'VAT',
+				value : 'vat',
 			},
 		],
 		invoice_status: [
@@ -507,7 +510,7 @@ export default {
 	others: {
 		registration_number: {
 			label      : 'VAT',
-			pattern    : /^[0-3]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+			pattern    : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 			max_length : 15,
 		},
 
@@ -515,19 +518,16 @@ export default {
 			financial_system_code : 'swift',
 			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
 		},
-
-		identification_number: {
-			label   : 'VAT',
-			pattern : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
-		},
-
 		pan_number: {
 			label   : 'PAN',
 			pattern : undefined,
 		},
-
 		economic_zone: {
 			label: 'Non-Tariff Zone',
+		},
+		identification_number: {
+			label   : 'VAT',
+			pattern : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		},
 
 		ask_gst_details: false,
@@ -544,8 +544,9 @@ export default {
 			},
 			bookings: {
 				invoicing: {
-					is_invoice_mergeable : true,
-					disable_edit_invoice : false,
+					is_invoice_mergeable              : true,
+					disable_edit_invoice              : false,
+					stakeholder_wise_invoice_required : false,
 				},
 			},
 

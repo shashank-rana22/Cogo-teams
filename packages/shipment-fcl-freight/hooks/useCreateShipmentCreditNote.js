@@ -12,6 +12,7 @@ const useCreateShipmentCreditNote = ({
 	servicesIDs = [],
 	invoice = {},
 	invoiceData = {},
+	setError = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_credit_note',
@@ -39,11 +40,24 @@ const useCreateShipmentCreditNote = ({
 		});
 
 		if (submit_data?.line_items?.length === EMPTY_LINE_ITEMS_LENGTH) {
-			Toast.error('Line Items is required');
+			Toast.error('Atleast one line item is required');
 		}
+
 		let isError = false;
-		Object.keys(checkError).forEach((key) => {
-			checkError[key].forEach((t) => {
+		Object.entries(checkError).filter(Boolean).forEach(([key, val]) => {
+			(val || []).forEach((errorObj, ind) => {
+				Object.entries(errorObj || {}).forEach(([fieldName, fieldObj]) => {
+					const errorFieldKey = `${key}.${ind}.${fieldName}`;
+
+					setError(errorFieldKey, {
+						type    : fieldObj?.type || 'custom',
+						message : fieldObj?.message || 'Error',
+						ref     : errorFieldKey,
+					});
+				});
+			});
+
+			checkError?.[key]?.forEach((t) => {
 				if (!isEmpty(t)) {
 					isError = true;
 				}

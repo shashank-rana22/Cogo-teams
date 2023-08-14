@@ -61,6 +61,7 @@ import {
 	IcMAppMissions,
 	IcMFsoppoc,
 	IcMBookingDesk,
+	IcASecureCloudStorage,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -779,7 +780,7 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		icon          : IcMOverview,
 		possible_apis : apis.cms,
-		main_apis     : ['list_auth_roles'],
+		main_apis     : ['list_roles'],
 		module_type   : 'dashboards',
 	},
 	user: {
@@ -1878,6 +1879,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/account-scoring',
 				possible_apis : apis.account_scoring,
 			},
+			{
+				key           : 'allocations-objective_configurations',
+				title         : 'Objective Configurations',
+				href          : '/v2/allocation/objective-configurations',
+				as            : '/v2/allocation/objective-configurations',
+				possible_apis : apis.objective_configurations,
+			},
 		],
 	},
 	kam_monitoring: {
@@ -1992,8 +2000,8 @@ const navigationMappingAdmin = {
 		href          : '/v2/list-roles',
 		as            : '/v2/list-roles',
 		type          : 'link',
-		main_apis     : ['list_auth_roles'],
-		possible_apis : apis.roles_permissions,
+		main_apis     : ['list_roles'],
+		possible_apis : apis.roleApis,
 		module_type   : 'crm',
 	},
 	vendor_rm: {
@@ -2559,6 +2567,17 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		possible_apis : apis.centralised_customer_service,
 		icon          : IcMDashboard,
+	},
+	resources: {
+		key           : 'resources',
+		title         : 'Api Resource',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : [],
+		href          : '/v2/resources',
+		as            : '/v2/resources',
+		possible_apis : apis.resourceApis,
+		icon          : IcASecureCloudStorage,
 	},
 };
 

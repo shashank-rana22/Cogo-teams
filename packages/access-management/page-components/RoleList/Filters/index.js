@@ -1,6 +1,7 @@
 import { Select, MultiSelect } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsPartner } from '@cogoport/forms/utils/getAsyncFields';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import SearchInput from '../../../common/SearchInput';
@@ -11,6 +12,8 @@ import { controls } from './utils/controls';
 function Filters({
 	filters = {},
 	onChangeFilters = () => {},
+	searchString = '',
+	setSearchString = () => {},
 	stakeHolderType = '',
 }) {
 	const partnerOptions = useGetAsyncOptions({
@@ -41,8 +44,8 @@ function Filters({
 	return (
 		<section className={styles.container} id="rnp_role_list_filters_container">
 			<SearchInput
-				value={filters?.q || ''}
-				onChange={(value) => onChangeFilters({ q: value || undefined })}
+				value={searchString || ''}
+				onChange={(value) => setSearchString(value || '')}
 				size="md"
 				placeholder="Search Role"
 			/>
@@ -60,7 +63,10 @@ function Filters({
 							key={control.name}
 							className={styles.select}
 							value={filters?.[control?.name]}
-							onChange={(value) => onChangeFilters({ [control?.name]: value || undefined })}
+							onChange={(value) => onChangeFilters({
+								[control?.name]: !isEmpty(value)
+									? value : undefined,
+							})}
 							{...control}
 						/>
 					);

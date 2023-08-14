@@ -1,3 +1,4 @@
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
@@ -10,21 +11,23 @@ import { CALL_RING_TIME_LIMIT } from './constants';
 import useComingCall from './hooks/useComingCall';
 import useUpdateVideoCallTimeline from './hooks/useUpdateVideoCallTimeline';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
-import { callUpdate } from './utils/callFunctions';
+import { callUpdate } from './utils/callUpdate';
 
 function VideoCall({
 	videoCallRecipientData = {},
 	inVideoCall = false,
 	videoCallId = '',
 }) {
+	const { user_data } = useSelector((state) => ({
+		user_data: state?.profile?.user,
+	}));
+	const { id: userId } = user_data || {};
+
 	const streamRef = useRef(null);
 	const peerRef = useRef(null);
 
 	const [callComing, setCallComing] = useState(false);
-	const [webrtcToken, setWebrtcToken] = useState({
-		userToken : {},
-		peerToken : {},
-	});
+	const [webrtcToken, setWebrtcToken] = useState({});
 	const [callDetails, setCallDetails] = useState({
 		myDetails          : {},
 		peerDetails        : {},
@@ -48,7 +51,7 @@ function VideoCall({
 	const firestore = getFirestore(app);
 	const { updateVideoCallTimeline = () => {} } = useUpdateVideoCallTimeline({ callDetails });
 
-	const { handleOutgoingCall, handleCallEnd } = useVideoCallFirebase({
+	const { handleOutgoingCall = () => {}, handleCallEnd = () => {} } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
 		setCallDetails,
@@ -61,7 +64,7 @@ function VideoCall({
 		updateVideoCallTimeline,
 	});
 
-	const { rejectCall, answerCall } = useComingCall({
+	const { rejectCall = () => {}, answerCall = () => {} } = useComingCall({
 		firestore,
 		setCallDetails,
 		callDetails,
@@ -79,15 +82,15 @@ function VideoCall({
 			callUpdate({
 				data          : { call_status: 'miss_call' },
 				firestore,
-				callingRoomId : callDetails?.callingRoomId,
+				callingRoomId : videoCallId,
 			});
 			handleCallEnd({ callActivity: 'missed', description: 'user does not pick up the call' });
 		}
-	}, [callDetails?.callingRoomId, callDetails?.callingRoomDetails?.call_status, handleCallEnd, firestore]);
+	}, [videoCallId, callDetails?.callingRoomDetails?.call_status, handleCallEnd, firestore]);
 
 	useEffect(
 		() => {
-			if (inVideoCall && videoCallRecipientData?.user_id) {
+			if (inVideoCall && videoCallRecipientData?.user_id && videoCallId) {
 				handleOutgoingCall({ peerDetails: videoCallRecipientData, videoCallIdFirebase: videoCallId });
 			}
 
@@ -95,7 +98,7 @@ function VideoCall({
 
 			return () => clearTimeout(timeoutMissCallId);
 		},
-		[inVideoCall, videoCallRecipientData, handleOutgoingCall, missCallHandle, videoCallId],
+		[inVideoCall, videoCallRecipientData, videoCallId, missCallHandle, handleOutgoingCall],
 	);
 
 	useEffect(() => {
@@ -106,18 +109,18 @@ function VideoCall({
 
 	useEffect(() => {
 		if (
-			!webrtcToken.peerToken || !peerRef.current
-			|| callDetails?.callingType !== 'outgoing'
+			isEmpty(webrtcToken) || !peerRef.current
+			|| webrtcToken?.token_for !== userId
 		) {
 			return;
 		}
 
 		try {
-			peerRef.current?.signal?.(webrtcToken?.peerToken);
+			peerRef.current?.signal?.(webrtcToken?.token);
 		} catch (error) {
 			console.error('not able to load signal', error);
 		}
-	}, [callDetails?.callingType, webrtcToken?.peerToken]);
+	}, [userId, webrtcToken]);
 
 	if (callComing) {
 		return (
