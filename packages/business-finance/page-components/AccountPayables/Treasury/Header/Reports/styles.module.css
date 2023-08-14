@@ -1,0 +1,9 @@
+.container {
+	display: flex;
+}
+
+.text {
+	padding: 4px;
+	font-size: var(--font-size-lg);
+	font-weight: 400;
+}

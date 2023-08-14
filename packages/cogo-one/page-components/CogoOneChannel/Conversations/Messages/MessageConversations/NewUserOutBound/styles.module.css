@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.suggested_actions {
+	margin-right: 18px;
+	color: #000;
+}
+
+.pills_styled {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 8px;
+}
+
+.each_pill {
+	margin-right: 6px;
+	border-radius: 20px;
+	transition: 0.3s ease-in-out;
+
+	&:hover {
+		transition: 0.3s ease;
+		transform: scale(0.9);
+	}
+}

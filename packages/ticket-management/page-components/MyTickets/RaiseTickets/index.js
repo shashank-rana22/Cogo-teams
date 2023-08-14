@@ -5,7 +5,10 @@ import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-function RaiseTickets({ control, errors, watchOrgId, additionalInfo, setAdditionalInfo }) {
+function RaiseTickets({
+	control = {}, errors = {}, watchOrgId = '', additionalInfo = [],
+	setAdditionalInfo = () => {},
+}) {
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : item,
 		name           : item,
@@ -32,7 +35,14 @@ function RaiseTickets({ control, errors, watchOrgId, additionalInfo, setAddition
 						key={controlItem.name}
 						className={styles.field}
 					>
-						{(label && controllerType !== 'checkbox') && <div className={styles.label}>{label}</div>}
+						{label && controllerType !== 'checkbox'
+							&& (
+								<div className={styles.label}>
+									<div className={styles.sub_label}>{label}</div>
+									{controlItem.name === 'additional_information'
+									&& <div className={styles.info_label}>(max 200 characters)</div>}
+								</div>
+							)}
 						<Element
 							{...elementItem}
 							size="sm"

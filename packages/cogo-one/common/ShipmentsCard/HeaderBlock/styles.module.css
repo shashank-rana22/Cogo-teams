@@ -1,0 +1,62 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+.icons_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 30%;
+}
+
+.shipper_details {
+	width: 68%;
+}
+
+.sid_id {
+	font-weight: 600;
+	color: #4f4f4f;
+	cursor: pointer;
+
+	&:hover {
+		color: #f68b21;
+	}
+}
+
+.importer_exporter_styles {
+	width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	color: #000;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.overflow_container {
+	width: 18px;
+	height: 18px;
+	margin-left: 4px;
+	cursor: pointer;
+}
+
+.message_icon_styles {
+	margin-left: 6px;
+	cursor: pointer;
+}
+
+.copy_icon {
+	width: 23px;
+	height: 23px;
+	cursor: pointer;
+	fill: #9f9f9f;
+}
+
+.user_activity_copy_icon {
+	width: 21px;
+	height: 21px;
+	margin-bottom: 4px;
+}

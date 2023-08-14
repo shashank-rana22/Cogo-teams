@@ -58,7 +58,6 @@
 	display: flex;
 	gap: 4px;
 	align-items: center;
-	width: 34%;
 	height: 40px;
 	padding-right: 24px;
 	border-right: 2px solid red;

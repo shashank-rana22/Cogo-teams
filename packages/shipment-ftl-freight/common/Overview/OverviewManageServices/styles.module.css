@@ -8,3 +8,13 @@
 	line-height: 19px;
 	color: #4f4f4f;
 }
+
+.tags {
+	color: white;
+
+	:global {
+		.ui_tag_container.ui_ps_size_lg {
+			max-width: 260px;
+		}
+	}
+}

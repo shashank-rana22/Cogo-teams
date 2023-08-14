@@ -1,0 +1,43 @@
+.container {
+	display: flex;
+	margin-top: 10px;
+	margin-left: 30px;
+}
+
+.line {
+	width: 300px;
+	margin: 10px;
+	border-top: 2px solid #fcdc00;
+}
+
+.faded_text {
+	margin-left: -40px;
+}
+
+.circle {
+	width: 24px;
+	color: #000;
+	text-align: center;
+	background: #fcdc00;
+	border-radius: 50%;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	padding-left: 10px;
+}
+
+.inner_div {
+	display: flex;
+	width: 100%;
+}
+
+.status {
+	width: max-content;
+	padding: 2px 4px;
+	margin-left: -40px;
+	font-size: 12px;
+	background-color: #ffe69b;
+	border-radius: 4px;
+}

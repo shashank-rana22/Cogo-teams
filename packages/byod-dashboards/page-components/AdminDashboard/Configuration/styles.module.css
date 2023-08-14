@@ -1,0 +1,65 @@
+.main_container {
+	@media (max-width: 768px) {
+		margin-top: 50px;
+	}
+}
+
+.title_container {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.body_container {
+    background-color: #fff;
+    padding-bottom: 20px;
+}
+
+.reimbursement_container {
+    margin: 10px;
+    padding: 10px 10px 0px 20px;
+}
+
+.device_info{
+    padding-left: 20px;
+}
+
+.title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 10px;
+    font-size: large;
+}
+
+.header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.text_container {
+    margin: 10px; 
+}
+
+.footer_container {
+    padding: 20px 10px;
+    margin-top: 30px;
+    background-color: #fff;
+
+}
+
+.set_combined_reimbusement {
+    display: flex;
+}
+
+.combined_reimbusement_body {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-bottom: 26px;
+}
+
+.select_categories {
+    display: flex;
+    flex-direction: column;
+}

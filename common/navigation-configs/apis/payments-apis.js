@@ -144,5 +144,9 @@ const payments = [
 		access_type  : 'private',
 		service_name : 'sage',
 	},
+	{
+		api         : 'get_sales_invoice_list',
+		access_type : 'private',
+	},
 ];
 export default payments;

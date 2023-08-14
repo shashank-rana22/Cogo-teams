@@ -7,6 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback, useEffect } from 'react';
 
+import AddService from '../../commons/AdditionalServices/components/List/AddService';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -18,6 +19,7 @@ import styles from './styles.module.css';
 const TAB_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
 	tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
+	sales  	  : dynamic(() => import('../SalesInvoice'), { ssr: false }),
 	purchase  : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
@@ -47,8 +49,8 @@ function DefaultView() {
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
 	const conditionMapping = {
-		shipment_info       : !!features.includes('shipment_info'),
 		shipment_header     : !!features.includes('shipment_header'),
+		sales              	: !!features.includes('sales'),
 		purchase            : !!features.includes('purchase'),
 		poc_sop             : !!(features.includes('poc') || features.includes('sop')),
 		chat                : !!features.includes('chat'),
@@ -67,6 +69,7 @@ function DefaultView() {
 		purchase: {
 			shipmentData : shipment_data,
 			servicesData : servicesList,
+			AddService,
 		},
 		tracking: {
 			shipmentData: shipment_data,
@@ -80,7 +83,7 @@ function DefaultView() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
-	if (isEmpty(shipment_data) && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
+	if (isEmpty(shipment_data) && ![UNAUTHORIZED_STATUS_CODE, undefined, ''].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<h2 className={styles.error_heading}>Something Went Wrong!</h2>

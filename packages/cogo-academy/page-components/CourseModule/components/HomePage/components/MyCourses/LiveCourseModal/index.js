@@ -1,36 +1,41 @@
-import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
+import { Pagination } from '@cogoport/components';
 import React from 'react';
 
-import styles from './styles.module.css';
+import StyledTable from '../../../../../../../commons/StyledTable';
 
-const LIVE_COURSES = {
-	introduction_to_cogoport           : GLOBAL_CONSTANTS.drive_link.introduction_to_cogoport_link,
-	git_course                         : GLOBAL_CONSTANTS.drive_link.git_course_link,
-	html_css_course                    : GLOBAL_CONSTANTS.drive_link.html_css_course_link,
-	html_css_assessment                : GLOBAL_CONSTANTS.drive_link.html_css_assessment,
-	responsive_web_design              : GLOBAL_CONSTANTS.drive_link.responsive_web_design,
-	responsive_web_design_assessment   : GLOBAL_CONSTANTS.drive_link.responsive_web_design_assessment,
-	javascript_basics_game_development : GLOBAL_CONSTANTS.drive_link.javascript_basics_game_development,
-};
+import getColumns from './getColumns';
+import useListCourseVideos from './useListCourseVideos';
 
 const onClickOpen = (url) => {
 	window.open(url, '_blank');
 };
 
 function LiveCourseModal() {
-	return Object.keys(LIVE_COURSES).map((key) => (
-		<div key={key} className={styles.course_list}>
-			{startCase(key).toUpperCase()}
-			<Button
-				size="sm"
-				onClick={() => onClickOpen(LIVE_COURSES[key])}
-			>
-				OPEN
-			</Button>
+	const {
+		loading,
+		list,
+		page,
+		setPage,
+		paginationData,
+	} = useListCourseVideos();
+
+	const { total_count, page_limit } = paginationData || {};
+	const columns = getColumns({ onClickOpen });
+
+	return (
+		<div>
+			<StyledTable columns={columns} data={list} loading={loading} />
+			{total_count > page_limit ? (
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={setPage}
+				/>
+			) : null}
 		</div>
-	));
+	);
 }
 
 export default LiveCourseModal;

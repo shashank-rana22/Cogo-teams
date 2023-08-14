@@ -23,7 +23,7 @@ export default function AccordionText({
 	handleAccordionOpen = () => {},
 	showDeliveryOrderTask = false,
 	showInvoiceAndTask = false,
-	showTask,
+	showTask = false,
 }) {
 	return (
 		<div className={styles.container}>

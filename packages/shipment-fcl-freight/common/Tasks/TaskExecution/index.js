@@ -1,4 +1,5 @@
 import AdditionsServicesTasks from './AdditionalServicesTasks';
+import { UploadComplianceDocs } from './CustomTasks';
 import ExecuteTask from './ExecuteTask';
 import ReviewDoc from './ReviewDoc';
 import UploadAmendDoc from './UploadAmendDoc';
@@ -9,7 +10,20 @@ function TaskExecution({
 	taskListRefetch = () => {},
 	selectedMail = [],
 	setSelectedMail = () => {},
+	tasksList = [],
 }) {
+	if (['approve_document', 'amend_document'].includes(task?.task_type)
+	&& ['approve_compliance_documents', 'amend_compliance_documents'].includes(task?.task)) {
+		return (
+			<UploadComplianceDocs
+				task={task}
+				onCancel={onCancel}
+				taskListRefetch={taskListRefetch}
+				tasksList={tasksList}
+			/>
+		);
+	}
+
 	if (task?.task_type === 'approve_document') {
 		return (
 			<ReviewDoc
@@ -53,6 +67,7 @@ function TaskExecution({
 			taskListRefetch={taskListRefetch}
 			selectedMail={selectedMail}
 			setSelectedMail={setSelectedMail}
+			tasksList={tasksList}
 		/>
 	);
 }

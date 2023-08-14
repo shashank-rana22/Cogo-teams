@@ -13,7 +13,11 @@ function ShowMessage({ message = '', restData = {} }) {
 	let newMessage = message.replace('<', '&lt;');
 
 	Object.keys(restData || {}).forEach((itm) => {
-		newMessage += `<br/>${startCase(itm)}: ${restData[itm]}`;
+		if (itm === 'MessageData') {
+			newMessage += '';
+		} else {
+			newMessage += `<br/>${startCase(itm)}: ${restData[itm]}`;
+		}
 	});
 
 	return (
@@ -21,7 +25,7 @@ function ShowMessage({ message = '', restData = {} }) {
 	);
 }
 
-function MessageBody({ message = '', mediaUrls = [], restData }) {
+function MessageBody({ message = '', mediaUrls = [], restData = {} }) {
 	return (
 		<>
 			<div>

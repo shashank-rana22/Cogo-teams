@@ -41,7 +41,7 @@ function useGetCustomerList({ filters, setFilters }:Props) {
 				},
 			});
 		} catch (err) {
-			console.error('err-', err);
+			console.error(err);
 		}
 	}, [trigger, query, pageIndex, entity, service]);
 

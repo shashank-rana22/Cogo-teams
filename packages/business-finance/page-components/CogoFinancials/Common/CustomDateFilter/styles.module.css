@@ -1,0 +1,9 @@
+.single_date_range {
+	min-width: 212px;
+
+	:global {
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+	}
+}

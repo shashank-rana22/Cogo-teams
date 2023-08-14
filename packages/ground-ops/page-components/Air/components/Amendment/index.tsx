@@ -8,7 +8,17 @@ import UploadModal from '../UploadModal';
 import styles from './styles.module.css';
 
 function Amendment({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPI, activeTab,
+	data = {},
+	loading = false,
+	page = 1,
+	setPage = () => {},
+	setGenerate = () => {},
+	setItem = () => {},
+	setViewDoc = () => {},
+	edit = false,
+	setEdit = () => {},
+	listAPI = () => {},
+	activeTab = '',
 }) {
 	const [showUpload, setShowUpload] = useState(null);
 	const { fields } = AmendmentFields;
@@ -29,6 +39,9 @@ function Amendment({
 			<div className={styles.status}>
 				Amend Requested
 			</div>
+		),
+		handleStakeholder: (singleItem) => (
+			singleItem?.stakeholderName
 		),
 	};
 

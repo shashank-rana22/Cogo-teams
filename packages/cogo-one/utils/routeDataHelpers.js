@@ -1,26 +1,28 @@
-const FIRST_ELEMENT = 0;
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const splitByBrackets = (name) => name?.split('(')[FIRST_ELEMENT] || '';
+const splitByBrackets = (name) => name?.split('(')[GLOBAL_CONSTANTS.zeroth_index] || '';
 
 const popLastName = (name) => name?.split(' ').pop() || '';
 
 const getAppendedString = ({ code, name, country }) => `${code ? `${code},` : ''} 
 ${name} ${country ? `(${country})` : ''}`;
 
-export function formatRouteData({ item }) {
+export function formatRouteData({ item = {} }) {
 	const originlocationData = (
 		item.origin_port
 		|| item.origin_airport
 		|| item.port
 		|| item.origin_location
 		|| item.location
+		|| item.airport
+		|| item.pickup
 		|| {}
 	);
 
 	const {
-		port_code:originCode,
-		name:originName,
-		display_name:originDisplayName,
+		port_code: originCode,
+		name: originName,
+		display_name: originDisplayName,
 	} = originlocationData;
 
 	const destinationLocationData = (
@@ -29,6 +31,8 @@ export function formatRouteData({ item }) {
 		|| item.port
 		|| item.destination_location
 		|| item.location
+		|| item.airport
+		|| item.drop
 		|| {}
 	);
 
@@ -73,5 +77,25 @@ export function formatRouteData({ item }) {
 			country : popLastName(destinationMainPortDisplayName),
 			name    : splitByBrackets(destinationMainPortName),
 		}),
+		originDetails: {
+			code    : originCode,
+			country : popLastName(originDisplayName),
+			name    : originDisplayName,
+		},
+		destinationDetails: {
+			code    : destinationCode,
+			country : popLastName(destinationDisplayName),
+			name    : destinationDisplayName,
+		},
+		singleOriginDisplay: {
+			code    : originMainPortCode || originCode,
+			country : popLastName(originMainPortDisplayName || originDisplayName),
+			name    : originMainPortDisplayName || originDisplayName,
+		},
+		singleDestinationDisplay: {
+			code    : destinationMainPortCode || destinationCode,
+			country : popLastName(destinationMainPortDisplayName || destinationDisplayName),
+			name    : destinationMainPortDisplayName || destinationDisplayName,
+		},
 	};
 }

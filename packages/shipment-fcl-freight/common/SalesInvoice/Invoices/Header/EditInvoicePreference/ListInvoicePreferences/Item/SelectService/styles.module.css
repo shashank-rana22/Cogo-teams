@@ -38,3 +38,15 @@
 .service_details {
 	font-size: var(--font-size-sm);
 }
+
+.checkbox_container {
+	:global {
+		.ui_checkbox_group_container {
+			flex-wrap: wrap;
+		}
+
+		.ui_checkbox_container {
+			width: 50%;
+		}
+	}
+}

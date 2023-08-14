@@ -42,6 +42,7 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 		bulkIrnGenerate,
 		bulkIrnLoading,
 	} = useBulkIrnGenerate({
+		entityCode,
 		getOrganizationInvoices,
 		checkedRows,
 		setCheckedRows,
@@ -65,6 +66,7 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 	const sortStyleDueDateDesc = sortType === 'desc' && sortBy === 'dueDate' ? ORANGE : GREY;
 
 	const columns = completedColumn({
+		entityCode,
 		refetch   : getOrganizationInvoices,
 		showName,
 		setSort,
@@ -119,7 +121,8 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 						value={invoiceFilters.search || ''}
 						onChange={(value) => setinvoiceFilters({
 							...invoiceFilters,
-							search: value || undefined,
+							search : value || undefined,
+							page   : 1,
 						})}
 						size="md"
 						placeholder="Search by /Invoice number /SID"
@@ -139,6 +142,7 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 
 			</div>
 			<FooterCard
+				entityCode={entityCode}
 				bulkIrnGenerate={bulkIrnGenerate}
 				bulkIrnLoading={bulkIrnLoading}
 				checkedRows={checkedRows}

@@ -83,6 +83,7 @@ const useSendMessage = ({ channelType = '', activeChatCollection, formattedData 
 				new_message_sent_at       : Date.now(),
 				new_user_message_count    : old_count + INCREASE_MESSAGE_COUNT_BY_ONE,
 				previous_tag              : 'talk_to_agent',
+				waiting_user_message      : 0,
 			});
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

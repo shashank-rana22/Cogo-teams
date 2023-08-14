@@ -15,6 +15,7 @@ const cycleWiseExceptionTable = ({
 	exceptionFilter,
 	setExceptionFilter,
 	setCycleListId,
+	setEntityId,
 }) => (
 	[
 		{
@@ -67,11 +68,7 @@ const cycleWiseExceptionTable = ({
 							? (
 								<>
 									<span className={styles.frequency_value}>
-										{formatDate({
-											date       : oneTimeDate,
-											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-											formatType : 'date',
-										})}
+										{oneTimeDate}
 									</span>
 									<span className={styles.border} />
 
@@ -166,7 +163,11 @@ const cycleWiseExceptionTable = ({
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => { setCycleListId(row?.id); setShowCycleExceptions(true); }}
+						onClick={() => {
+							setCycleListId(row?.id);
+							setShowCycleExceptions(true);
+							setEntityId(row?.filters?.cogoEntityId);
+						}}
 					>
 						Manage Exceptions
 

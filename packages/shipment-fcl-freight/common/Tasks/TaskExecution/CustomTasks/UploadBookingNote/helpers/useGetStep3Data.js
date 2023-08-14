@@ -6,6 +6,7 @@ import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotatio
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import checkLineItemsSum from './checkLineItemSum';
+import end2EndCheck from './end2EndCheck';
 import getStep3Controls from './getStep3Controls';
 
 const TRADE_MAPPING = {
@@ -16,31 +17,38 @@ const TRADE_MAPPING = {
 
 const HTTP_SUCCESS_CODE = 200;
 
-const useGetStep3Data = ({
+const useGetStepThreeData = ({
 	servicesList = [],
 	shipment_data = {},
 	onCancel = () => {},
 	task = {},
 	taskListRefetch = () => {},
-	primary_service = {},
+	formattedRate = {},
 }) => {
-	const { trade_type } = primary_service || {};
-
 	let notMainService = false;
 	const SERVICE_IDS = [];
+	let trade_type;
+
+	const incoTerm = (servicesList || []).find(
+		(serviceObj) => serviceObj.service_type === 'fcl_freight_service',
+	)?.inco_term;
 
 	(servicesList || []).forEach((serviceObj) => {
-		if (serviceObj.service_type === 'fcl_freight_service'
-			|| (serviceObj.service_type === 'fcl_freight_local_service'
-			&& trade_type === 'import' && serviceObj.trade_type === 'export')
-		) {
+		if ((serviceObj.service_type === 'fcl_freight_service'
+			|| serviceObj.service_type === 'fcl_freight_local_service')
+			&& task.service_type === 'fcl_freight_service') {
 			notMainService = true;
-			SERVICE_IDS.push(serviceObj.id);
+			if (end2EndCheck({ serviceObj, shipment_data, incoTerm })) {
+				SERVICE_IDS.push(serviceObj.id);
+			}
+		}
+		if (serviceObj.id === task.service_id) {
+			trade_type = serviceObj?.trade_type;
 		}
 	});
 
 	(servicesList || []).forEach((serviceObj) => {
-		if (!notMainService) {
+		if (!notMainService && task.service_type === serviceObj.service_type && trade_type === serviceObj?.trade_type) {
 			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
@@ -52,9 +60,9 @@ const useGetStep3Data = ({
 			service_detail_required : true,
 		},
 	});
-	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({});
+	const { apiTrigger:updateBuyQuotationTrigger, loading: quotationLoading } = useUpdateBuyQuotations({});
 
-	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({
+	const { apiTrigger:updateTask, loading } = useUpdateShipmentPendingTask({
 		refetch: () => {
 			onCancel();
 			taskListRefetch();
@@ -91,30 +99,43 @@ const useGetStep3Data = ({
 		handleChange,
 
 	}));
-
 	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		DEFAULT_VALUES[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
-			code     : line_item?.code,
-			currency : line_item?.currency,
-			price    : line_item?.price,
-			quantity : line_item?.quantity,
-			unit     : line_item?.unit,
-			total    : line_item?.total,
-		}));
+		if (Object.keys(formattedRate).includes(service_charge?.service_id)
+		&& (formattedRate?.[service_charge?.service_id]?.line_items || []).length) {
+			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
+				?.line_items?.map((line_item) => ({
+					code     : line_item?.code,
+					currency : line_item?.currency,
+					price    : line_item?.price,
+					quantity : line_item?.quantity,
+					unit     : line_item?.unit,
+					total    : line_item?.total,
+				}));
+		} else {
+			DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+				code     : line_item?.code,
+				currency : line_item?.currency,
+				price    : line_item?.price,
+				quantity : line_item?.quantity,
+				unit     : line_item?.unit,
+				total    : line_item?.total,
+			}));
+		}
 	});
 
 	const onSubmit = async (values) => {
-		let quotation = {};
-		Object.keys(values).forEach((key) => {
-			const items = values[key];
+		const QUOTATIONS = [];
 
-			quotation = {
-				id         : key,
-				service_id : (service_charges || []).find((charge) => charge?.id === key)
-					?.service_id,
-				line_items: items.map((line_item) => ({
+		Object.keys(values || {}).forEach((key) => {
+			const items = values[key] || [];
+
+			const newQuote = {
+				id: (service_charges || []).find((charge) => charge?.service_id === key)
+					?.id,
+				service_id : key,
+				line_items : items?.map((line_item) => ({
 					code     : line_item.code,
 					currency : line_item.currency,
 					name     : chargeCodes?.[line_item?.code] || '',
@@ -123,15 +144,17 @@ const useGetStep3Data = ({
 					unit     : line_item.unit,
 				})),
 			};
+
+			QUOTATIONS.push(newQuote);
 		});
 
-		const checkSum = checkLineItemsSum(quotation);
+		const checkSum = checkLineItemsSum(QUOTATIONS);
 
 		if (!checkSum.check) {
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ ...quotation });
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
 
 				if (res?.status === HTTP_SUCCESS_CODE) {
 					await updateTask({ id: task?.id });
@@ -148,8 +171,9 @@ const useGetStep3Data = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		defaultValues: DEFAULT_VALUES,
+		loading       : quotationLoading || loading,
+		defaultValues : DEFAULT_VALUES,
 	};
 };
 
-export default useGetStep3Data;
+export default useGetStepThreeData;

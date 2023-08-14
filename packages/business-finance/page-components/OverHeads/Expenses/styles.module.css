@@ -11,12 +11,43 @@
 
 .left_container {
 	display: flex;
-	gap: 8px;
+
+	:global {
+		.ui_select_display_container {
+			height: 32px !important;
+		}
+
+		.ui_select_input_placeholder {
+			font-size: 12px;
+		}
+
+		.react-datepicker__input-container {
+			height: 32px !important;
+		}
+
+		.react-datepicker-wrapper {
+			height: 32px !important;
+		}
+
+		input {
+			height: 32px !important;
+			font-size: 10px !important;
+		}
+	}
 }
 
 .right_container {
 	display: flex;
-	gap: 8px;
+
+	:global {
+		.ui_input_container {
+			width: 240px;
+		}
+	}
+}
+
+.input_container {
+	margin-right: 8px;
 }
 
 .select {
@@ -63,6 +94,16 @@
 
 .data_container {
 	display: flex;
+}
+
+.paidstatus {
+	width: max-content;
+	padding: 4px;
+	margin-top: 4px;
+	font-size: 10px;
+	font-weight: 500;
+	background-color: #fef199;
+	border-radius: 4px;
 }
 
 .expense_period_data {

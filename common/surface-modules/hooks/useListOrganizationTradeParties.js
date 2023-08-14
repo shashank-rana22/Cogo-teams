@@ -3,10 +3,12 @@ import { useState, useEffect, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
+const PAGE_LIMIT = 10;
 const useListOrganizationTradeParties = ({
 	defaultFilters = {},
 	organization_id = '',
 	defaultParams = {},
+	query = '',
 }) => {
 	const [apiData, setApiData] = useState({});
 	const [filters, setFilters] = useState({});
@@ -20,9 +22,10 @@ const useListOrganizationTradeParties = ({
 				organization_id,
 				...defaultFilters,
 				...restFilters,
+				address_query: query,
 			},
 			page,
-			page_limit: 10,
+			page_limit: PAGE_LIMIT,
 			...defaultParams,
 		},
 

@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.value {
+	font-size: var(--font-size-md);
+	color: var(--color-accent-orange-2);
+}
+
+.text {
+	font-size: var(--font-size-md);
+}
+
+.label {
+	font-size: var(--font-size-md);
+}
+
+.field_pair {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.details_text {
+	margin-left: 12px;
+	font-size: var(--font-size-sm);
+	font-weight: 500;
+	color: var(--color-secondary-greyscale-3);
+}
+
+.flex_column {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

@@ -130,10 +130,6 @@
 			border-top: 1px solid black;
 			border-bottom: 1px solid black;
 
-			img {
-				height: 20px;
-			}
-
 			& .details_text_lg {
 				font-weight: 14px;
 				font-weight: 700;

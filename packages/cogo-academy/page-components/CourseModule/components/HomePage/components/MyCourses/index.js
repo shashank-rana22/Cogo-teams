@@ -58,7 +58,7 @@ function MyCourses({ user_id, setOngoingCategories, ongoingCategories }) {
 				</Tabs>
 			</div>
 
-			<Modal size="md" show={liveCourseModal} onClose={() => setLiveCourseModal(false)}>
+			<Modal size="lg" show={liveCourseModal} onClose={() => setLiveCourseModal(false)}>
 				<Modal.Header title="Live Course Recordings" />
 
 				<Modal.Body>

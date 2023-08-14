@@ -8,10 +8,16 @@ import {
 	MarkConfirmServices,
 	CustomerInvoiceDetails,
 	ApproveTruck,
+	ApprovePurchaseDeduction,
+	UploadEWB,
+	PickAndDropTasks,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 import styles from './styles.module.css';
+
+const FIND_LAST_INDEX = 1;
+const TASK_STATE = ['cargo_dropped', 'cargo_picked_up'];
 
 function ExecuteTask({
 	task = {},
@@ -31,7 +37,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - 1]
+		? steps[currentStep] || steps[steps.length - FIND_LAST_INDEX]
 		: {};
 
 	if (loading) {
@@ -83,6 +89,52 @@ function ExecuteTask({
 			/>
 		);
 	}
+	if (
+		task.task === 'approve_purchase_deduction'
+	) {
+		return (
+			<ApprovePurchaseDeduction
+				onCancel={onCancel}
+				services={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (
+		task?.task === 'upload_ftl_eway_bill_copy'
+	) {
+		return (
+			<UploadEWB
+				onCancel={onCancel}
+				services={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (
+		(task.task === 'mark_completed'
+			&& TASK_STATE.includes(task.state))
+			|| task.task === 'cargo_picked_up_at'
+	) {
+		return (
+			<PickAndDropTasks
+				onCancel={onCancel}
+				services={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
 
 	return (
 		<ExecuteStep
@@ -90,7 +142,7 @@ function ExecuteTask({
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - FIND_LAST_INDEX}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

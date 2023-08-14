@@ -1,0 +1,7 @@
+.container {
+	:global {
+		.ui_modal_body_container {
+			border: none;
+		}
+	}
+}

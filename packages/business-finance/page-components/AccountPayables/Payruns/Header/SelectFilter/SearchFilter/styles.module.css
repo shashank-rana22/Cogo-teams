@@ -1,0 +1,10 @@
+.search_filter {
+	width: 360px;
+}
+
+.right_filter {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-end;
+}

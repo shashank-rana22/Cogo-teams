@@ -1,126 +1,115 @@
-import { cl } from '@cogoport/components';
-import { IcMArrowLeft, IcMArrowRight, IcMRefresh } from '@cogoport/icons-react';
-import { isEmpty, format, startCase } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMRefresh, IcMSearchlight } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
+import { isEmpty, startCase } from '@cogoport/utils';
+import { useEffect, useState } from 'react';
 
-import { replySvg } from '../../constants/MAIL_CONSTANT';
+import { DEFAULT_LIST_MAILS_TIMEOUT } from '../../constants/mailConstants';
+import getFiltersCount from '../../helpers/getFiltersCount';
 import useListMail from '../../hooks/useListMail';
 
-import MailLoading from './MailLoading';
+import FilterComponent from './FilterComponent';
+import ListMails from './ListMails';
 import styles from './styles.module.css';
 
 function MailDetails({
-	activeSelect = '',
-	setActiveSelect = () => {},
+	activeFolder = '',
 	setActiveMail = () => {},
 	activeMail = {},
-	senderMail = '',
+	appliedFilters = {},
+	setAppliedFilters = () => {},
+	activeMailAddress = '',
 }) {
+	const [searchQuery, setSearchQuety] = useState('');
+
 	const {
 		listData = {},
 		loading,
-		getEmails = () => {},
 		handleScroll = () => {},
-		setPagination = () => {},
-		setListData = () => {},
-	} = useListMail({ activeSelect, senderMail });
+		handleRefresh = () => {},
+		pagination,
+	} = useListMail({ activeFolder, activeMailAddress, searchQuery, appliedFilters });
 
-	const handleRefresh = useCallback(() => {
-		setListData({ value: [], isLastPage: false });
-		setPagination(1);
-		getEmails();
-	}, [setListData, setPagination, getEmails]);
+	const { value: list = [] } = listData || {};
+
+	const appliedFiltersCount = getFiltersCount({ filters: appliedFilters });
 
 	useEffect(() => {
 		let interval = '';
-		if (activeSelect) {
-			interval = setInterval(() => {
-				handleRefresh();
-			}, 60000);
+
+		if (activeFolder) {
+			interval = setInterval(
+				handleRefresh,
+				DEFAULT_LIST_MAILS_TIMEOUT,
+			);
 		}
+
 		return () => clearInterval(interval);
-	}, [handleRefresh, activeSelect]);
-
-	const {
-		value: list = [],
-	} = listData || {};
-
-	const handleClick = () => {
-		setActiveSelect(null);
-		setActiveMail({});
-	};
+	}, [handleRefresh, activeFolder, pagination]);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<div
-					role="button"
-					tabIndex={0}
-					className={styles.left_div}
-					onClick={handleClick}
-				>
-					<IcMArrowLeft className={styles.arrow_left} />
-					<div className={styles.title}>{startCase(activeSelect)}</div>
+			<div className={styles.header_container}>
+				<div className={styles.header}>
+					<div className={styles.title}>
+						{startCase(activeFolder)}
+					</div>
+
+					{loading
+						? (
+							<Image
+								src={GLOBAL_CONSTANTS.image_url.colored_loading}
+								width={20}
+								height={20}
+								alt="uploading"
+							/>
+						) : (
+							<IcMRefresh
+								className={styles.refresh_icon}
+								onClick={handleRefresh}
+							/>
+						)}
 				</div>
-				<IcMRefresh className={styles.filter_icon} onClick={handleRefresh} />
+				<div className={styles.search_container}>
+					<Input
+						size="sm"
+						placeholder="Search"
+						value={searchQuery}
+						onChange={setSearchQuety}
+						disabled={!!appliedFiltersCount}
+						prefix={(
+							<IcMSearchlight
+								height={20}
+								width={20}
+								fill="#9f9f9f"
+							/>
+						)}
+					/>
+					<FilterComponent
+						searchQuery={searchQuery}
+						appliedFilters={appliedFilters}
+						setAppliedFilters={setAppliedFilters}
+						appliedFiltersCount={appliedFiltersCount}
+					/>
+				</div>
 			</div>
+
 			{isEmpty(list || []) && !loading ? (
 				<div className={styles.empty_div}>
-					No Data Found...
+					No Mails Found...
 				</div>
 			) : (
-				<div
-					className={styles.list_container}
-					onScroll={(e) => {
-						handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight);
-					}}
-				>
-					{(list || []).map((itm) => {
-						const {
-							subject = '',
-							sentDateTime = '', sender, bodyPreview = '', id = '',
-						} = itm || {};
-						const { emailAddress: { name = '' } } = sender || {};
-						return (
-							<div
-								role="button"
-								tabIndex={0}
-								className={cl`
-									${activeMail?.id === id ? styles.active_content : ''} ${styles.content}`}
-								onClick={() => setActiveMail(itm)}
-								key={id}
-							>
-								<div className={styles.recipient_div}>
-									<div className={styles.recipient_left}>
-										<img
-											src={replySvg}
-											alt="reply"
-											className={styles.reply_back}
-										/>
-										<div className={styles.recipient_name}>{name}</div>
-									</div>
-									<div className={styles.recipient_right}>
-										<div className={styles.time}>{format(sentDateTime, 'HH:mm a')}</div>
-										<div className={styles.right_arrow}><IcMArrowRight fill="#BDBDBD" /></div>
-									</div>
-								</div>
-								<div className={styles.message_div}>
-									<div className={styles.subject_container}>{subject}</div>
-									<div
-										className={styles.message_content}
-										dangerouslySetInnerHTML={{ __html: bodyPreview }}
-									/>
-								</div>
-							</div>
-
-						);
-					})}
-					{loading && <MailLoading />}
-				</div>
-
+				<ListMails
+					list={list}
+					loading={loading}
+					activeMail={activeMail}
+					handleScroll={handleScroll}
+					setActiveMail={setActiveMail}
+				/>
 			)}
 		</div>
-
 	);
 }
+
 export default MailDetails;

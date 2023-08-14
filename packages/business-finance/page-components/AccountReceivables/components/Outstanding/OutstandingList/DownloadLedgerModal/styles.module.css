@@ -1,3 +1,11 @@
+.modal {
+	:global {
+		.ui_modal_body_container {
+			overflow-x: visible;
+		}
+	}
+}
+
 .container {
 	display: flex;
 	justify-content: space-around;

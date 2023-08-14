@@ -68,6 +68,7 @@ function TaskExecution({
 					primary_service={primary_service}
 					getShipmentTimeline={getShipmentTimeline}
 					getShipment={getShipment}
+					servicesLoading={services?.servicesLoading}
 				/>
 			);
 	}

@@ -18,8 +18,6 @@ function useStepExecution({
 	shipment_data = {},
 	primary_service = {},
 	services = [],
-	onCancel = () => {},
-	refetch = () => {},
 	tradeType = '',
 }) {
 	const mainAirFreight = (services || []).find(
@@ -31,11 +29,7 @@ function useStepExecution({
 		getApisData,
 		task,
 		primary_service,
-		shipment_data,
-		stepConfig,
 		mainAirFreight,
-		onCancel,
-		refetch,
 		tradeType,
 	});
 
@@ -43,10 +37,6 @@ function useStepExecution({
 		selectedMail,
 		populatedControls,
 		task,
-		getApisData,
-		stepConfig,
-		shipment_data,
-		primary_service,
 	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);

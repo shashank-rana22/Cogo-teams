@@ -1,0 +1,28 @@
+import {
+	InputController,
+	PillsController,
+	SelectController,
+	DatepickerController,
+	SingleDateRangeController,
+	TextAreaController,
+	AsyncSelectController,
+	CheckboxController,
+	UploadController,
+} from '@cogoport/forms';
+
+const ELEMENT_CONTROLLER = {
+	text           : InputController,
+	textarea       : TextAreaController,
+	number         : InputController,
+	select         : SelectController,
+	file           : UploadController,
+	pills          : PillsController,
+	checkbox       : CheckboxController,
+	date_picker    : DatepickerController,
+	date_range     : SingleDateRangeController,
+	'async-select' : AsyncSelectController,
+};
+
+const getElementController = (type = 'text') => ELEMENT_CONTROLLER[type];
+
+export default getElementController;

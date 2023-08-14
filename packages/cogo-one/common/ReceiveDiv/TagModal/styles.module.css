@@ -1,0 +1,14 @@
+.body_styles {
+	max-height: unset !important;
+	overflow-y: hidden;
+}
+
+.styled_modal {
+	width: 300px !important;
+	height: 350px !important;
+}
+
+.header_styles {
+	padding: 16px;
+	border-bottom: solid #dedede;
+}

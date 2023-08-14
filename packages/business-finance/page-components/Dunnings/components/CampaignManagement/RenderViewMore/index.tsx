@@ -3,21 +3,22 @@ import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 
 interface Props {
 	id?: string;
-	dropdown?: string[];
+	dropdown?: string;
 	setDropdown?: Function;
 }
 
-const POSITION_LIMIT = -1;
-
-function RenderViewMore({ id, dropdown, setDropdown }:Props) {
+function RenderViewMore({ id = '', dropdown = '', setDropdown = () => {} }:Props) {
+	const handleViewExecutions = () => {
+		setDropdown(id);
+	};
 	return 		(
 		<div>
-			{!dropdown.includes(id) ? (
+			{dropdown !== id ? (
 				<Button
 					themeType="secondary"
-					onClick={() => setDropdown([...dropdown, id])}
+					onClick={handleViewExecutions}
 				>
-					View More
+					View Executions
 					{' '}
 					<IcMArrowDown style={{ margin: '0px 4px' }} />
 				</Button>
@@ -26,11 +27,7 @@ function RenderViewMore({ id, dropdown, setDropdown }:Props) {
 					<Button
 						themeType="secondary"
 						onClick={() => {
-							const index = dropdown.indexOf(id);
-							if (index > POSITION_LIMIT) {
-								dropdown.splice(index, 1);
-							}
-							setDropdown((prev: string[]) => [...prev]);
+							setDropdown(null);
 						}}
 					>
 						View Less

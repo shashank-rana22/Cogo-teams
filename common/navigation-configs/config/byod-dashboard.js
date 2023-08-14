@@ -13,5 +13,15 @@ const byodDashboard = {
 		layoutType : 'no_header',
 		navigation : 'byod_dashboard-employee_list',
 	},
+	'/[partner_id]/byod/admin-dashboard': {
+		layoutType : 'no_header',
+		navigation : 'byod_dashboard-admin_dashboard',
+		isMainNav  : true,
+	},
+	'/[partner_id]/byod/admin-dashboard/configuration': {
+		layoutType : 'no_header',
+		navigation : 'byod_dashboard-admin_dashboard_configuration',
+		isMainNav  : false,
+	},
 };
 module.exports = byodDashboard;

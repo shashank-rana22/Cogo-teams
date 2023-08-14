@@ -6,12 +6,17 @@ export function getHasPermissionToEdit({
 	formattedData = {},
 	canMessageOnBotSession,
 	viewType,
+	hasNoFireBaseRoom = false,
 }) {
 	const {
 		support_agent_id = '',
 		group_members = [],
 		managers_ids = [],
 	} = formattedData || {};
+
+	if (hasNoFireBaseRoom) {
+		return false;
+	}
 
 	return (
 		canMessageOnBotSession || (
