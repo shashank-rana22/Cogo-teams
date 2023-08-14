@@ -560,6 +560,16 @@ const HRMS = {
 			service_name : 'hrms',
 
 		},
+		{
+			api          : 'get_employee_device_reimbursement_group',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_department_role_reimbursement_group_mapping',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

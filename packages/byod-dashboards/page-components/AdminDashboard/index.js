@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useCreateGroupDetails from '../../hooks/useCreateGroupDetails';
+import useGetEmployeeReimbursementGroup from '../../hooks/useGetEmployeeReimbursementGroup';
 
 import styles from './styles.module.css';
 
@@ -16,9 +17,12 @@ function AdminDashboard() {
 	const [employeeName, setEmployeeName] = useState('');
 	const [configurationName, setConfigurationName] = useState('');
 
-	const router = useRouter();
+	const { getEmployeeReimbursementGroup } = useGetEmployeeReimbursementGroup();
 
-	const { createConfigurationGroup, btnloading } = useCreateGroupDetails({ configurationName });
+	const { createConfigurationGroup, btnloading } = 	useCreateGroupDetails({
+		configurationName,
+		getEmployeeReimbursementGroup,
+	});
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.header_container}>
@@ -44,7 +48,6 @@ function AdminDashboard() {
 						style={{ marginLeft: '20px', width: '120px', marginTop: '4px' }}
 						loading={btnloading}
 						onClick={() => {
-							router.push('/byod/admin-dashboard/configuration');
 							createConfigurationGroup();
 						}}
 					>

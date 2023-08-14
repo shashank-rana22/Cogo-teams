@@ -3,23 +3,24 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useCreateGroupDetails = ({ configurationName, getEmployeeReimbursementGroup = () => {} }) => {
+const useCreateDepartmentRole = ({ departmentValue, designationValue, id }) => {
 	const router = useRouter();
 
 	const [{ btnloading, data }, trigger] = useHarbourRequest({
-		url    : '/create_employee_device_reimbursement_group',
+		url    : '/create_department_role_reimbursement_group_mapping',
 		method : 'POST',
 	}, { manual: true });
 
-	const createConfigurationGroup = async () => {
+	const createDepartmentRoleReimbursement = async () => {
 		const payload = {
-			name: configurationName,
+			department_master_id                   : departmentValue,
+			role_master_id                         : designationValue,
+			employee_device_reimbursement_group_id : id,
 		};
 		try {
 			await trigger({
 				data: payload,
 			});
-			getEmployeeReimbursementGroup(data.id);
 			router.push('/byod/admin-dashboard/configuration');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
@@ -29,8 +30,8 @@ const useCreateGroupDetails = ({ configurationName, getEmployeeReimbursementGrou
 	return {
 		btnloading,
 		data,
-		createConfigurationGroup,
+		createDepartmentRoleReimbursement,
 	};
 };
 
-export default useCreateGroupDetails;
+export default useCreateDepartmentRole;

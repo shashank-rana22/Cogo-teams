@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import StyledTable from '../../../common/StyledTable';
+import useGetEmployeeReimbursementGroup from '../../../hooks/useGetEmployeeReimbursementGroup';
 import EmptyState from '../EmptyState';
 
 import AccessoriesModal from './AccessoriesModal';
@@ -49,6 +50,8 @@ function Configuration() {
 	const [accessoriesValue, setAccessoriesValue] = useState('');
 
 	const [combinedValue, setCombinedValue] = useState('');
+	const { data } = useGetEmployeeReimbursementGroup();
+	const { id } = data || {};
 
 	const deviceInfoColumns = getDeviceInfoColumns({
 		showModal,
@@ -88,11 +91,14 @@ function Configuration() {
 						<div className={styles.title}>
 							<strong>Reimbursement Brackets</strong>
 						</div>
-
 						<Button
 							themeType="secondary"
 							style={{ marginTop: '10px' }}
-							onClick={() => setShowAddDept(true)}
+							onClick={() => {
+								setShowAddDept(true);
+								setDepartmentValue('');
+								setDesignationValue('');
+							}}
 						>
 							Add Department
 						</Button>
@@ -106,6 +112,7 @@ function Configuration() {
 								designationValue={designationValue}
 								setDesignationValue={setDesignationValue}
 								source="Add Department"
+								id={id}
 							/>
 						)}
 					</div>

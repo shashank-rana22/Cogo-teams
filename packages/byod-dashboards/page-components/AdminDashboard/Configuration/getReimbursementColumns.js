@@ -1,5 +1,5 @@
-import { Button } from '@cogoport/components';
-// import { IcMEyeopen } from '@cogoport/icons-react';
+import { Button, ButtonIcon } from '@cogoport/components';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 const getReimbursementColumns = () => [
@@ -23,6 +23,13 @@ const getReimbursementColumns = () => [
 			<Button themeType="secondary">
 				View Employees
 			</Button>
+		),
+	},
+	{
+		id       : 'delete',
+		Header   : '',
+		accessor : (item) => (
+			<ButtonIcon size="md" icon={<IcMDelete />} themeType="primary" />
 		),
 	},
 

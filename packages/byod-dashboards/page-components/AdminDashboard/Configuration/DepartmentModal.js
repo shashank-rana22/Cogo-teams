@@ -1,6 +1,8 @@
 import { Modal, Select, Button, MultiSelect } from '@cogoport/components';
 import React from 'react';
 
+import useCreateDepartmentRole from '../../../hooks/useCreateDepartmentRole';
+
 import styles from './styles.module.css';
 
 const DEPARTMENT_OPTIONS = [
@@ -23,7 +25,13 @@ function DepartmentModal({
 	designationValue,
 	setDepartmentValue,
 	setDesignationValue,
+	id,
 }) {
+	const { createDepartmentRoleReimbursement, btnloading } = useCreateDepartmentRole({
+		departmentValue,
+		designationValue,
+		id,
+	});
 	return (
 		<Modal
 			size="md"
@@ -57,7 +65,7 @@ function DepartmentModal({
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button>save</Button>
+				<Button loading={btnloading} onClick={() => createDepartmentRoleReimbursement()}>save</Button>
 			</Modal.Footer>
 		</Modal>
 	);

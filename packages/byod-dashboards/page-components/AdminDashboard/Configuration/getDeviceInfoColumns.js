@@ -1,4 +1,5 @@
-import { Button } from '@cogoport/components';
+import { Button, ButtonIcon } from '@cogoport/components';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import DeviceModal from './DeviceModal';
@@ -71,6 +72,13 @@ const getDeviceInfoColumns = ({
 				)}
 
 			</div>
+		),
+	},
+	{
+		id       : 'delete',
+		Header   : '',
+		accessor : (item) => (
+			<ButtonIcon size="md" icon={<IcMDelete />} themeType="primary" />
 		),
 	},
 

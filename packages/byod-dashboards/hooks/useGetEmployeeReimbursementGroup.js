@@ -2,13 +2,13 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useGetEmployeeReimbursementGroup = (id) => {
+const useGetEmployeeReimbursementGroup = () => {
 	const [{ btnloading, data }, trigger] = useHarbourRequest({
 		url    : '/get_employee_device_reimbursement_group',
 		method : 'GET',
 	}, { manual: true });
 
-	const getEmployeeReimbursementGroup = async () => {
+	const getEmployeeReimbursementGroup = async (id) => {
 		const payload = {
 			id,
 		};
