@@ -17,7 +17,6 @@ const getButtonOptions = ({
 	setShowBookingNote = () => {},
 	taskStatus = '',
 	documents = [],
-	setPopoverVisible = () => {},
 }) => [
 	{
 		children : 'View Shipments',
@@ -50,9 +49,8 @@ const getButtonOptions = ({
 		onClick  : (e) => {
 			e.stopPropagation();
 			setShowBookingNote({ show: true, data: { documents, shipmentId } });
-			setPopoverVisible(false);
 		},
-		condition : ['all_shipments'],
+		condition : ['all_shipments', 'user_shipments'],
 		hide      : taskStatus !== 'approve_booking_note',
 	},
 ];
@@ -155,7 +153,6 @@ function HeaderBlock({
 				<Popover
 					placement="bottom-end"
 					caret={false}
-					// visible={popoverVisible}
 					render={(
 						<ButtonGroup
 							size="sm"
@@ -168,7 +165,6 @@ function HeaderBlock({
 						className={styles.overflow_container}
 						onClick={(e) => {
 							e.stopPropagation();
-							// setPopoverVisible((p) => !p);
 						}}
 					/>
 				</Popover>
