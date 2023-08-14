@@ -9,6 +9,8 @@ import useGetTaggingBills from '../../hooks/useGetMappings';
 
 import styles from './styles.module.css';
 
+const STEP = 2;
+
 function InvoicesUploaded({
 	invoicesdata = {},
 	collectionParty = {},
@@ -24,7 +26,7 @@ function InvoicesUploaded({
 			<div
 				className={styles.value}
 				onClick={() => {
-					setStep(2);
+					setStep(STEP);
 					setOpenComparision(item);
 				}}
 				role="presentation"
@@ -43,24 +45,26 @@ function InvoicesUploaded({
 		<div className={styles.invoicescontainer}>
 			<span className={styles.headings}>Invoices Uploaded</span>
 			<AccordianView title={titleCard} fullwidth>
-				<Tabs
-					activeTab={activeTab}
-					themeType="tertiary"
-					onChange={setActiveTab}
-				>
-					<TabPanel name="uploaded_invoices" title="Uploaded Invoices">
-						<div className={styles.tablecontainer}>
-							<InvoicesTable
-								columns={[...invoiceconfiguration, viewDetails]}
-								data={invoicesdata}
-								showPagination={false}
-							/>
-						</div>
-					</TabPanel>
-					<TabPanel name="tagging_map" title="Tagging Map">
-						<TagMap loading={loading} mappingsData={mappingsData} />
-					</TabPanel>
-				</Tabs>
+				<div className={styles.tabscontainer}>
+					<Tabs
+						activeTab={activeTab}
+						themeType="tertiary"
+						onChange={setActiveTab}
+					>
+						<TabPanel name="uploaded_invoices" title="Uploaded Invoices">
+							<div className={styles.tablecontainer}>
+								<InvoicesTable
+									columns={[...invoiceconfiguration, viewDetails]}
+									data={invoicesdata}
+									showPagination={false}
+								/>
+							</div>
+						</TabPanel>
+						<TabPanel name="tagging_map" title="Tagging Map">
+							<TagMap loading={loading} mappingsData={mappingsData} />
+						</TabPanel>
+					</Tabs>
+				</div>
 			</AccordianView>
 		</div>
 	);

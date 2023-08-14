@@ -10,6 +10,9 @@ import MyResponsiveBar from '../ResponsiveBar';
 
 import styles from './styles.module.css';
 
+const BOTTOM_AXIS_ROTATION = 14;
+const DEFAULT_ROTATION = 0;
+
 const KEY_MAPPINGS = {
 	'Operational Profitability' : 'Profitability',
 	Revenue                     : 'Revenue',
@@ -144,7 +147,7 @@ function SingleGraphCard({
 										},
 									}),
 								}}
-								axisBottomRotation={0}
+								axisBottomRotation={isLastView ? BOTTOM_AXIS_ROTATION : DEFAULT_ROTATION}
 								valueFormat={(value) => formatAmount({
 									amount  : String(value),
 									options : {

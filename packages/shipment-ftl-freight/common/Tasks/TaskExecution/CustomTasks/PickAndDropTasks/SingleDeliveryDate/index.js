@@ -1,8 +1,10 @@
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/surface-modules';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 
+import useListFieldServiceOpsDetails from '../../../../../../hooks/useListFieldServiceOpsDetails';
 import getControls from '../configs/deliveryControls';
 import {
 	datesChecker,
@@ -30,7 +32,12 @@ function SingleDeliveryDate(props, ref) {
 		formState: { errors },
 		watch,
 		handleSubmit,
+		setValue,
 	} = useForm();
+
+	const { list = [] } = useListFieldServiceOpsDetails({
+		shipment_id: shipment_data?.id,
+	});
 
 	const formValues = watch();
 
@@ -79,6 +86,21 @@ function SingleDeliveryDate(props, ref) {
 			item?.estimated_arrival,
 		),
 	};
+
+	useEffect(() => {
+		if (isEmpty(list)) {
+			return;
+		}
+		const truckExist = (list || [])?.find(
+			(listItem) => listItem?.truck_number?.toLowerCase() === item?.truck_number?.toLowerCase(),
+		) || {};
+
+		let endKmImages = [];
+		if (!isEmpty(truckExist)) {
+			endKmImages = truckExist?.end_kilometer_images || [];
+		}
+		setValue('image', endKmImages);
+	}, [list, setValue, item?.truck_number]);
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit,

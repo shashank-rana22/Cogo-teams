@@ -59,6 +59,8 @@ interface ItemDataInterface {
 	payableTds?: number;
 	incidentId?: string;
 	categoryName?: string;
+	payableAmount?: string;
+	paymentStatus?: string;
 }
 
 const MIN_AMOUNT = 0;
@@ -92,7 +94,7 @@ function ExpenseComponent() {
 		expenseFilters,
 		sort,
 	});
-	const { getRecurringList, recurringListData, recurringListLoading } =		useListExpenseConfig({ expenseFilters, sort });
+	const { getRecurringList, recurringListData, recurringListLoading } =	useListExpenseConfig({ expenseFilters, sort });
 	const { sendMail, loading: mailLoading } = useSendEmail();
 
 	useEffect(() => {
@@ -139,55 +141,57 @@ function ExpenseComponent() {
 	};
 
 	const BUTTON_TEXT = {
-		recurring    : 'Create Expense Record',
+		recurring    : 'Create',
 		nonRecurring : 'Create Expense',
 	};
 
-	const renderHeaders = () => (
-		<div className={styles.header_container}>
-			<div className={styles.left_container}>
-				{recurringState === 'nonRecurring' && (
-					<Filter
-						controls={nonRecurringFilters}
-						filters={expenseFilters}
-						setFilters={setExpenseFilters}
-					/>
-				)}
-				{recurringState === 'recurring' && (
-					<Filter
-						controls={recurringFilters}
-						filters={expenseFilters}
-						setFilters={setExpenseFilters}
-					/>
-				)}
-			</div>
-			<div className={styles.right_container}>
-				<div className={styles.input_container}>
-					<Input
-						size="md"
-						placeholder={`Search by Vendor Name/${geo.others.identification_number.label}/Organization ID/Sage ID`}
-						suffix={<IcMSearchlight />}
-						value={expenseFilters.searchValue}
-						onChange={(e: any) => handleChange(e)}
-						className={styles.search}
-					/>
+	function RenderHeaders() {
+		return (
+			<div className={styles.header_container}>
+				<div className={styles.left_container}>
+					{recurringState === 'nonRecurring' && (
+						<Filter
+							controls={nonRecurringFilters}
+							filters={expenseFilters}
+							setFilters={setExpenseFilters}
+						/>
+					)}
+					{recurringState === 'recurring' && (
+						<Filter
+							controls={recurringFilters}
+							filters={expenseFilters}
+							setFilters={setExpenseFilters}
+						/>
+					)}
 				</div>
-				<div>
-					<Button
-						size="lg"
-						themeType="secondary"
-						onClick={() => {
-							setCreateExpenseType(recurringState);
-							setShowModal(true);
-						}}
-						className={styles.cta_button}
-					>
-						{BUTTON_TEXT[recurringState]}
-					</Button>
+				<div className={styles.right_container}>
+					<div className={styles.input_container}>
+						<Input
+							size="lg"
+							placeholder={`Search by Vendor Name/${geo?.others?.identification_number?.label}/Organization ID/Sage ID`}
+							suffix={<IcMSearchlight />}
+							value={expenseFilters.searchValue}
+							onChange={(e: any) => handleChange(e)}
+							className={styles.search}
+						/>
+					</div>
+					<div>
+						<Button
+							size="lg"
+							themeType="secondary"
+							onClick={() => {
+								setCreateExpenseType(recurringState);
+								setShowModal(true);
+							}}
+							className={styles.cta_button}
+						>
+							{BUTTON_TEXT[recurringState]}
+						</Button>
+					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 
 	const functions = {
 		addExpense: (itemData: ItemDataInterface) => (
@@ -312,12 +316,12 @@ function ExpenseComponent() {
 			const {
 				grandTotal,
 				paidAmount,
+				payableAmount,
 				billCurrency = '',
 			} = itemData || {};
-			const value = grandTotal - paidAmount;
 
 			const amount = formatAmount({
-				amount   : value as any,
+				amount   : payableAmount,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',
@@ -442,28 +446,30 @@ function ExpenseComponent() {
 					</a>
 				);
 			}
-			const showDocuments = () => (
-				<div>
-					{proofDocuments.map((proof: string) => (
-						<div key={proof}>
-							{proof && (
-								<a
-									href={proof}
-									className={styles.multiple_proof}
-									target="_blank"
-									rel="noreferrer"
-								>
-									{proof}
-								</a>
-							)}
-						</div>
-					))}
-				</div>
-			);
+			function ShowDocuments() {
+				return (
+					<div>
+						{proofDocuments.map((proof: string) => (
+							<div key={proof}>
+								{proof && (
+									<a
+										href={proof}
+										className={styles.multiple_proof}
+										target="_blank"
+										rel="noreferrer"
+									>
+										{proof}
+									</a>
+								)}
+							</div>
+						))}
+					</div>
+				);
+			}
 			return (
 				<div>
 					<div>
-						<Popover placement="top" render={showDocuments()}>
+						<Popover placement="top" render={ShowDocuments()}>
 							<div className={styles.multiple_proof}>
 								{proofCount}
 								{' '}
@@ -537,7 +543,11 @@ function ExpenseComponent() {
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
 		renderPaid: (itemData: ItemDataInterface) => {
-			const { paidAmount, billCurrency = '' } = itemData || {};
+			const {
+				paidAmount,
+				billCurrency = '',
+				paymentStatus,
+			} = itemData || {};
 			const amount = formatAmount({
 				amount   : paidAmount as any,
 				currency : billCurrency,
@@ -546,7 +556,16 @@ function ExpenseComponent() {
 					currencyDisplay : 'code',
 				},
 			});
-			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
+			return (
+				<div>
+					<div>{showOverflowingNumber(amount || '', 12)}</div>
+					<div
+						className={styles.paidstatus}
+					>
+						{paymentStatus === 'full' ? 'Paid' : paymentStatus}
+					</div>
+				</div>
+			);
 		},
 		renderView: (itemData) => (
 			<div>
@@ -558,7 +577,7 @@ function ExpenseComponent() {
 		),
 	};
 
-	const showDropDown = (singleItem: { id?: string; incidentId?: string }) => {
+	function ShowDropDown(singleItem: { id?: string; incidentId?: string }) {
 		const { id, incidentId } = singleItem || {};
 
 		if (recurringState === 'recurring') {
@@ -571,7 +590,7 @@ function ExpenseComponent() {
 			);
 		}
 		return null;
-	};
+	}
 
 	let listConfig: any;
 	let listItemData: ListDataProps;
@@ -599,7 +618,7 @@ function ExpenseComponent() {
 				/>
 			</div>
 			<div className={styles.styled_div}>
-				{renderHeaders()}
+				{RenderHeaders()}
 				<List
 					config={listConfig()}
 					itemData={listItemData}
@@ -616,7 +635,7 @@ function ExpenseComponent() {
 						}));
 					}}
 					showPagination
-					renderDropdown={showDropDown}
+					renderDropdown={({ singleItem }) => ShowDropDown(singleItem)}
 					showRibbon
 				/>
 			</div>

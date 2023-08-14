@@ -76,7 +76,6 @@ const rawControls = ({
 					</>
 				),
 				placeholder : 'Enter alias name/code',
-				disabled    : handleDisableCond(charge, isAdminSuperAdmin),
 				span        : 2,
 				rules       : {
 					validate: (v) => {

@@ -3,11 +3,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMDownload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import ViewAttachmentsModal from '../../../../../common/ViewAttachmentsModal';
 import saveByteArray from '../../../../../utils/mailAttachment';
 import base64ToArrayBuffer from '../../../../../utils/mailAttachmentToBytes';
 
 import styles from './styles.module.css';
-import ViewModal from './ViewModal';
 
 const INCREASE_COUNT_BY_ONE = 1;
 
@@ -74,7 +74,7 @@ function MailAttachments({
 			)}
 
 			{activeAttachmentData && (
-				<ViewModal
+				<ViewAttachmentsModal
 					handleDownload={handleDownload}
 					activeAttachmentData={activeAttachmentData}
 					setActiveAttachmentData={setActiveAttachmentData}

@@ -46,6 +46,7 @@ function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {}, re
 
 								<Element
 									{...el}
+									{...(el.component && { type: el.component })}
 									size="md"
 									key={el.name}
 									control={control}

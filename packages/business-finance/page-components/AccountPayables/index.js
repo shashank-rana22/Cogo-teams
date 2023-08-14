@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 import Treasury from './Treasury';
 
 const ENTITY_CODE_LENGTH = 1;
-const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment'];
+const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment', 'treasury-chest'];
 
 function AccountPayables() {
 	const { query, push } = useRouter();
@@ -108,7 +108,7 @@ function AccountPayables() {
 						<h1>Outstandings</h1>
 					</TabPanel>
 					<TabPanel name="treasury-chest" title="TREASURY">
-						<Treasury />
+						<Treasury currentEntity={activeEntity} setActiveEntity={setActiveEntity} />
 					</TabPanel>
 				</Tabs>
 			</div>

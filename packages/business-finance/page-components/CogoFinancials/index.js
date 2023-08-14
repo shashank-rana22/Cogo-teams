@@ -79,6 +79,7 @@ function CogoFinancials() {
 
 	const handleClick = () => {
 		setShowShipmentList(false);
+		setActiveBar('');
 		setActiveShipmentCard('');
 	};
 
@@ -205,6 +206,7 @@ function CogoFinancials() {
 									cardData={operationalData}
 									loading={operationalLoading}
 									taxType={taxType}
+									setActiveBar={setActiveBar}
 								/>
 							</div>
 						)}
@@ -219,6 +221,7 @@ function CogoFinancials() {
 									cardData={financialData}
 									loading={financialLoading}
 									taxType={taxType}
+									setActiveBar={setActiveBar}
 								/>
 							</div>
 						)}
