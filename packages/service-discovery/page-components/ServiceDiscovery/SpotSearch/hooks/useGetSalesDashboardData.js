@@ -93,8 +93,8 @@ const useGetSalesDashboardData = ({
 				},
 			});
 		} catch (err) {
-			if (err.response?.data) {
-				Toast.error(getApiErrorString(err.response?.data));
+			if (err?.response?.data) {
+				Toast.error(getApiErrorString(err?.response?.data));
 			}
 		}
 	};
