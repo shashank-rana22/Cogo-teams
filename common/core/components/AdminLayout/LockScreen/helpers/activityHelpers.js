@@ -83,7 +83,7 @@ export async function unMountActivityTracker({ FUNC_MAPPING, firestore, isRolePr
 	});
 }
 
-export async function getRolesIsLocked({ firestore }) {
+export async function getRolesIsLocked({ firestore = {} }) {
 	const { enableRole = [] } = await getTimeoutConstant(firestore);
 
 	return enableRole;

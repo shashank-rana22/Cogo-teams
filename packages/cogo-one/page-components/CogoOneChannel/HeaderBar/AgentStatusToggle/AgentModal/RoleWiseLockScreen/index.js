@@ -57,7 +57,7 @@ function RoleWiseLockScreen({
 					/>
 				</div>
 
-				{toggleState && (
+				{toggleState ? (
 					<>
 						<div className={styles.label}>Select Roles to enable Lock Screen</div>
 						<AsyncSelect
@@ -104,7 +104,7 @@ function RoleWiseLockScreen({
 							</Button>
 						</div>
 					</>
-				)}
+				) : null}
 			</div>
 		</>
 	);

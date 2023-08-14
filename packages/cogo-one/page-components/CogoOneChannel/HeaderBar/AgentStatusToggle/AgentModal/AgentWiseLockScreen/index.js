@@ -21,10 +21,7 @@ function AgentWiseLockScreen({
 	setAgentType = () => {},
 	setActiveCard = () => {},
 }) {
-	const {
-		updateAgentPreference,
-		createLoading = false,
-	} = useUpdateAgentPreference({ getListChatAgents });
+	const { updateAgentPreference = () => {}, createLoading = false } = useUpdateAgentPreference({ getListChatAgents });
 
 	const { syncWorkPreference = () => {} } = useSyncAgentWorkPreference();
 

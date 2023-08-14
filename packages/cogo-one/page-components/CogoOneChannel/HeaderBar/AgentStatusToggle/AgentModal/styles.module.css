@@ -41,8 +41,6 @@
 	background: #fef3e9;
 	border-radius: 6px;
 
-	/* box-shadow: 0 0 4px 0 #627fac33; */
-
 	&:last-child {
 		margin-right: 0;
 	}

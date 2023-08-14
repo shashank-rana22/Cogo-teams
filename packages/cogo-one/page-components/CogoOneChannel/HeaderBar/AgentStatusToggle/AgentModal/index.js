@@ -74,7 +74,7 @@ function AgentModal({
 				{!activeCard ? (
 					<div className={styles.screen_container}>
 						{SCREEN_LOCK_MAPPING.map((item) => {
-							const { label, name, icon } = item || {};
+							const { label = '', name = '', icon = {} } = item || {};
 
 							return (
 								<div
@@ -95,7 +95,7 @@ function AgentModal({
 				) }
 			</Modal.Body>
 			<Modal.Footer className={styles.footer_styles}>
-				{!loading && activeCard === 'agent' && (
+				{!loading && activeCard === 'agent' ? (
 					<Pagination
 						className={styles.pagination}
 						type="table"
@@ -104,7 +104,7 @@ function AgentModal({
 						pageSize={page_limit}
 						onPageChange={setPagination}
 					/>
-				)}
+				) : null}
 			</Modal.Footer>
 		</Modal>
 	);
