@@ -1,60 +1,37 @@
 import { Pill, Tooltip, Button } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useRequest } from '@cogoport/request';
+import { useAuthRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
+import { changeFilters, getFilter, onResetFilters } from '../page-components/RoleList/Filters/utils/controls';
 import styles from '../page-components/RoleList/styles.module.css';
 import { API } from '../utils/api';
 
-const getFilter = (val) => {
-	if (val === 'cogoport') {
-		return {
-			entity_types            : ['cogoport'],
-			stakeholder_type        : 'partner',
-			exclude_stakeholder_ids : undefined,
-		};
-	}
-	if (val === 'channel_partner') {
-		return {
-			entity_types     : ['channel_partner'],
-			stakeholder_id   : undefined,
-			stakeholder_type : 'partner',
-		};
-	}
-	if (val === 'customer') {
-		return {
-			stakeholder_type        : 'organization',
-			exclude_stakeholder_ids : undefined,
-			stakeholder_id          : undefined,
-			entity_types            : undefined,
-		};
-	}
-	return {
-		stakeholder_type        : undefined,
-		exclude_stakeholder_ids : undefined,
-		stakeholder_id          : undefined,
-		entity_types            : undefined,
-	};
-};
+const FIRST_INDEX = 1;
 
 const useRoleList = () => {
 	const router = useRouter();
 	const [showCreateRoleModal, setShowCreateRoleModal] = useState(false);
 	const [stakeHolderType, setStakeHolderType] = useState('all');
 	const [filters, setFilters] = useState({});
+	const [searchString, setSearchString] = useState('');
 	const [params, setParams] = useState({
 		partner_data_required     : true,
 		permissions_data_required : false,
 		page                      : 1,
-		filters                   : { stakeholder_type: 'partner' },
+		filters                   : {},
 		role_stats_required       : true,
 	});
 
 	const { apiMethod, apiUri } = API.LIST_AUTH_ROLES;
 
-	const [{ data, loading, error }, trigger] = useRequest({
+	const { query = '', debounceQuery } = useDebounceQuery();
+
+	const [{ data, loading, error }, trigger] = useAuthRequest({
 		method : apiMethod,
 		url    : apiUri,
 	}, { manual: true });
@@ -66,47 +43,24 @@ const useRoleList = () => {
 		}));
 	}, []);
 
+	const onChangeFilters = (values) => changeFilters({ values, setFilters });
+
 	const getListAuthRoles = useCallback(() => {
 		trigger({
 			params: {
 				...params,
-				filters: { ...params?.filters, ...filters },
+				filters: { ...params?.filters, ...filters, q: query || undefined },
 			},
 		});
-	}, [filters, params, trigger]);
+	}, [filters, params, query, trigger]);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => onChangeParams({ page: 1 }), [filters]);
+	useEffect(() => onChangeParams({ page: 1 }), [query, filters]);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => getListAuthRoles(), [params]);
 
 	const onChangeShowCreateRoleModal = useCallback((value = false) => {
 		setShowCreateRoleModal(!!value);
 	}, []);
-
-	const resetFilters = {
-		hierarchy_level    : undefined,
-		navigation         : undefined,
-		q                  : undefined,
-		role_functions     : undefined,
-		role_sub_functions : undefined,
-		stakeholder_id     : undefined,
-	};
-
-	const onChangeFilters = (values) => {
-		setFilters((previousState) => ({
-			...getFilter(null),
-			...previousState,
-			...values,
-		}));
-	};
-
-	const onResetFilters = () => {
-		setFilters((previousState) => ({
-			...getFilter(undefined),
-			...previousState,
-			...resetFilters,
-		}));
-	};
 
 	const handleSTChange = (val) => {
 		setStakeHolderType(val);
@@ -165,12 +119,13 @@ const useRoleList = () => {
 		},
 		{
 			Header   : 'Functions',
-			accessor : ({ role_functions }) => {
+			accessor : ({ role_functions = [] }) => {
 				const totalFunctionPills = role_functions.length;
 
-				if (totalFunctionPills <= 1) {
+				if (totalFunctionPills <= FIRST_INDEX) {
 					(role_functions).map((item) => (
 						<Pill
+							key={item}
 							className={styles.function_head}
 							color="red"
 						>
@@ -179,8 +134,9 @@ const useRoleList = () => {
 					));
 				}
 
-				const renderTooltip = role_functions.slice(1).map((item) => (
+				const renderTooltip = role_functions.slice(FIRST_INDEX).map((item) => (
 					<Pill
+						key={item}
 						className={styles.function_head}
 						color="red"
 					>
@@ -191,17 +147,17 @@ const useRoleList = () => {
 				return (
 					<section>
 						<div className={styles.sub_functions_container}>
-							{role_functions[0] && (
+							{role_functions[GLOBAL_CONSTANTS.zeroth_index] && (
 								<Pill className={styles.function_head} color="red">
-									{role_functions[0]}
+									{role_functions[GLOBAL_CONSTANTS.zeroth_index]}
 								</Pill>
 							)}
 
-							{totalFunctionPills > 1 && (
+							{totalFunctionPills > FIRST_INDEX && (
 								<Tooltip content={renderTooltip} placement="top">
 									<strong>
 										(+
-										{totalFunctionPills - 1}
+										{totalFunctionPills - FIRST_INDEX}
 										)
 									</strong>
 								</Tooltip>
@@ -214,12 +170,13 @@ const useRoleList = () => {
 		},
 		{
 			Header   : 'Sub Functions',
-			accessor : ({ role_sub_functions }) => {
+			accessor : ({ role_sub_functions = [] }) => {
 				const totalSubFunctionPills = role_sub_functions.length;
 
-				if (totalSubFunctionPills <= 1) {
+				if (totalSubFunctionPills <= FIRST_INDEX) {
 					(role_sub_functions).map((item) => (
 						<Pill
+							key={item}
 							className={styles.function_head}
 							color="green"
 						>
@@ -228,8 +185,9 @@ const useRoleList = () => {
 					));
 				}
 
-				const renderTooltip = role_sub_functions.slice(1).map((item) => (
+				const renderTooltip = role_sub_functions.slice(FIRST_INDEX).map((item) => (
 					<Pill
+						key={item}
 						className={styles.function_head}
 						color="green"
 					>
@@ -240,17 +198,17 @@ const useRoleList = () => {
 				return (
 					<section>
 						<div className={styles.sub_functions_container}>
-							{role_sub_functions[0] && (
+							{role_sub_functions[GLOBAL_CONSTANTS.zeroth_index] && (
 								<Pill className={styles.function_head} color="green">
-									{role_sub_functions[0]}
+									{role_sub_functions[GLOBAL_CONSTANTS.zeroth_index]}
 								</Pill>
 							)}
 
-							{totalSubFunctionPills > 1 && (
+							{totalSubFunctionPills > FIRST_INDEX && (
 								<Tooltip content={renderTooltip} placement="top">
 									<strong>
 										(+
-										{totalSubFunctionPills - 1}
+										{totalSubFunctionPills - FIRST_INDEX}
 										)
 									</strong>
 								</Tooltip>
@@ -274,6 +232,8 @@ const useRoleList = () => {
 		},
 	];
 
+	useEffect(() => debounceQuery(searchString), [searchString, debounceQuery]);
+
 	return {
 		showCreateRoleModal,
 		onChangeShowCreateRoleModal,
@@ -283,6 +243,8 @@ const useRoleList = () => {
 		listAuthRolesApi: {
 			data, trigger, loading, error,
 		},
+		searchString,
+		setSearchString,
 		onResetFilters,
 		redirect,
 		stakeHolderType,
