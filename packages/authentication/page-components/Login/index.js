@@ -58,7 +58,7 @@ function Login() {
 								control={control}
 								name="password"
 								type={showPassword ? 'text' : 'password'}
-								suffix={RenderSuffix()}
+								suffix={<RenderSuffix />}
 								placeholder={t('login:password_placeholder')}
 								rules={{ required: t('login:password_rules_required') }}
 							/>

@@ -17,7 +17,7 @@ const getUserLocationData = async ({ ip }) => {
 		const response = await fetch(apiUrl);
 		data = await response.json();
 	} catch (err) {
-		console.log(err);
+		console.error(err);
 	}
 	return data;
 };
