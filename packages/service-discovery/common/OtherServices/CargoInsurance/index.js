@@ -87,8 +87,9 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 						setShowModal={setShowModal}
 					/>
 				)}
-				content={<AccordianContent data={cargoInsuranceAlreadyTaken} />}
-			/>
+			>
+				<AccordianContent data={cargoInsuranceAlreadyTaken} />
+			</AccordianView>
 
 			{showModal && (
 				<CargoInsuranceModal
