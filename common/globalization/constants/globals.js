@@ -52,13 +52,21 @@ const GLOBAL_CONSTANTS = {
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
+		SG : '04bd1037-c110-4aad-8ecc-fc43e9d4069d',
+		ID : 'ef9a7145-b1b6-46ff-8de7-a348de635574',
+		TH : '6d92cf58-3392-44c3-8e1b-09192f98f8be',
+		CN : 'd39c9a59-93e3-4823-b85f-c72139cf138f',
 	},
 	country_ids: {
 		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
 		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
+		SG : '6e18d508-87b9-4e7e-a785-b47edc76b0b7',
+		ID : '2693fa76-6539-410d-a0b0-551d9e620ba3',
+		TH : '61a683f3-128b-4193-98f7-dd72f68db03d',
+		CN : '1b94734e-7d51-4e94-9dd2-ef96aee64a8f',
 	},
 
-	platform_supported_country_codes: ['IN', 'VN'],
+	platform_supported_country_codes: ['IN', 'VN', 'SG', 'ID', 'TH', 'CN'],
 
 	currency_code   : CURRENCY_CODE,
 	currency_locale : {
@@ -67,7 +75,9 @@ const GLOBAL_CONSTANTS = {
 		VND : 'vi-VN',
 		AED : 'en-AE',
 		SGD : 'en-SG',
-
+		IDR : 'id-ID',
+		THB : 'th-TH',
+		CNY : 'zh-CN',
 	},
 	currency_symbol: {
 		USD : '$',
@@ -75,6 +85,9 @@ const GLOBAL_CONSTANTS = {
 		VND : '₫',
 		AED : 'AED',
 		SGD : '$',
+		IDR : 'Rp',
+		THB : '฿',
+		CNY : '¥',
 
 	},
 
@@ -359,6 +372,7 @@ const GLOBAL_CONSTANTS = {
 			copy_12:
 			'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
 		},
+		alarm_snooze: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-snooze.svg',
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
 		message_reply     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/message_reply.png',
@@ -584,14 +598,23 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'fcl_freight', label: 'FCL' },
 		{ value: 'lcl_freight', label: 'LCL' },
 		{ value: 'air_freight', label: 'AIR' },
-		{ value: 'trailer_freight', label: 'Container Transportation' },
 		{ value: 'ftl_freight', label: 'FTL' },
 		{ value: 'ltl_freight', label: 'LTL' },
+		{ value: 'fcl_cfs', label: 'Fcl Cfs' },
 		{ value: 'haulage_freight', label: 'Rail Haulage' },
 		{ value: 'fcl_customs', label: 'FCL Customs' },
 		{ value: 'lcl_customs', label: 'LCL Customs' },
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
+		{ value: 'lcl_freight_local', label: 'Lcl Freight Local' },
+		{ value: 'air_freight_local', label: 'Air Freight Local' },
+		{ value: 'domestic_air_freight', label: 'Domestic Air Freight' },
+		{ value: 'rail_domestic_freight', label: 'Rail Domestic Freight' },
+		{ value: 'trailer_freight', label: 'Container Transportation' },
+	],
+	trade_types: [
+		{ value: 'import', label: 'Import' },
+		{ value: 'export', label: 'Export' },
 	],
 	service_supported_countries: {
 		feature_supported_service: {

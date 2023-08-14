@@ -57,6 +57,7 @@ const useListTickets = ({
 
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
+	const [reachedBottom, setReachedBottom] = useState(false);
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
@@ -120,6 +121,8 @@ const useListTickets = ({
 		const hasMoreData = pagination <= (data?.total_pages || DEFAULT_PAGE);
 		if (reachBottom && hasMoreData && !loading) {
 			fetchTickets(pagination);
+		} else if (reachBottom && !loading && !reachedBottom) {
+			setReachedBottom(true);
 		}
 	};
 
@@ -128,6 +131,7 @@ const useListTickets = ({
 		listLoading: loading,
 		fetchTickets,
 		handleScroll,
+		reachedBottom,
 	};
 };
 

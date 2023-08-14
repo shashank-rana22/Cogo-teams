@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
+import { useAuthRequest } from '@cogoport/request';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
@@ -27,20 +27,20 @@ const useLoginAuthenticate = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const [{ loading: sessionLoading }, triggerSession] = useRequest({
+	const [{ loading: sessionLoading }, triggerSession] = useAuthRequest({
 		url    : '/get_user_session',
 		method : 'get',
 	}, { manual: true });
 
-	const [{ loading: userSessionMappingLoading }, triggerUserSessionMapping] = useRequest({
+	const [{ loading: userSessionMappingLoading }, triggerUserSessionMapping] = useAuthRequest({
 		url    : '/get_user_session_mappings',
 		method : 'get',
-	});
+	}, { manual: true });
 
-	const [{ loading: updateSessionMappingLoading }, triggerUpdateSessionMapping] = useRequest({
+	const [{ loading: updateSessionMappingLoading }, triggerUpdateSessionMapping] = useAuthRequest({
 		url    : '/update_parent_and_child_user_session_mappings',
 		method : 'post',
-	});
+	}, { manual: true });
 
 	const getUserSessionMappings = async () => {
 		try {
@@ -160,7 +160,7 @@ const useLoginAuthenticate = () => {
 				window.location.href = '/';
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
+			Toast.error(err?.response?.data.error || 'Failed to login, please try again...');
 		}
 	};
 

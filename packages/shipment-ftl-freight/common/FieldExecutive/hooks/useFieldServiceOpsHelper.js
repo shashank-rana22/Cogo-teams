@@ -1,6 +1,7 @@
 // import { ShipmentDetailContext } from '@cogoport/context';
 import { useState, useEffect, useMemo } from 'react';
 
+import useListFieldServiceOpsDetails from '../../../hooks/useListFieldServiceOpsDetails';
 import {
 	DEFAULT_TRUCK_SELECTION_STATE,
 	TRUCK_STATE_KEYS,
@@ -8,7 +9,6 @@ import {
 } from '../utils/pageMappings';
 
 import useGetFieldServiceOpsDetails from './useGetFieldServiceOpsDetails';
-import useListFieldServiceOpsDetails from './useListFieldServiceOpsDetails';
 import useUpdateFieldServiceOpsDetails from './useUpdateFieldServiceOpsDetails';
 
 const useFieldServiceOpsHelper = ({ shipment_data = {} }) => {

@@ -166,7 +166,7 @@ function MessageList(messageProps) {
 							onScroll={handleScroll}
 							className={styles.list_container}
 							style={{
-								height: carouselState === 'show'
+								height: (carouselState === 'show' && !isEmpty(flashMessagesList))
 									? 'calc(100% - 330px)' : 'calc(100% - 220px)',
 							}}
 						>

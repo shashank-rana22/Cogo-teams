@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import useUpdateEmployeeDetails from '../../../hooks/useUpdateEmployeeDetails';
 import { CONTROL_MAPPING } from '../../utils/filterControls';
@@ -41,35 +41,45 @@ function HROPSView({
 
 	const { lwp, absconding, is_resigned } = employee_tags || {};
 
+	const formValues = useMemo(() => ({
+		name,
+		employee_code,
+		cogoport_email,
+		designation,
+		department,
+		reporting_manager_id,
+		office_location,
+		squad_id,
+		tribe_id,
+		sub_chapter_id,
+		hrbp_id,
+		chapter_id,
+		payroll_country_id,
+		li,
+		pi,
+		date_of_joining,
+		resignation_date,
+		absconding,
+		cfpl_joining_date,
+		lwp,
+		employee_status: is_resigned ? 'notice' : employee_status?.toLowerCase(),
+	}), [absconding, cfpl_joining_date, chapter_id, cogoport_email,
+		date_of_joining, department, designation, employee_code,
+		employee_status, hrbp_id, is_resigned, li, lwp, name, office_location,
+		payroll_country_id, pi, reporting_manager_id, resignation_date, squad_id,
+		sub_chapter_id, tribe_id]);
+
 	useEffect(() => {
 		setValues({
-			name,
-			employee_code,
-			cogoport_email,
-			designation,
-			department,
-			reporting_manager_id,
-			office_location,
-			squad_id,
-			tribe_id,
-			sub_chapter_id,
-			hrbp_id,
-			chapter_id,
-			payroll_country_id,
-			li,
-			pi,
+			...formValues,
 			date_of_joining   : date_of_joining && new Date(date_of_joining),
 			resignation_date  : resignation_date && new Date(resignation_date),
 			absconding        : absconding ? 'true' : 'false',
 			cfpl_joining_date : cfpl_joining_date && new Date(cfpl_joining_date),
 			cogo_freight      : cfpl_joining_date ? 'true' : 'false',
 			lwp               : lwp ? 'true' : 'false',
-			employee_status   : is_resigned ? 'notice' : employee_status?.toLowerCase(),
 		});
-	}, [absconding, cfpl_joining_date, chapter_id, cogoport_email, date_of_joining,
-		department, designation, employeeDetails, employee_code, li, name, office_location, pi, reporting_manager_id,
-		resignation_date, setValues, squad_id, sub_chapter_id, tribe_id, lwp, employee_status,
-		is_resigned, payroll_country_id, hrbp_id]);
+	}, [absconding, cfpl_joining_date, date_of_joining, formValues, lwp, resignation_date, setValues]);
 
 	const onSubmit = (values) => {
 		const { employee_status : employeeStatus } = values;
@@ -80,7 +90,7 @@ function HROPSView({
 			is_resigned     : employeeStatus === 'notice',
 		};
 
-		updateEmployeeDetails(dataObj, id);
+		updateEmployeeDetails({ values: dataObj, id, formValues });
 	};
 
 	return (
