@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -6,6 +7,8 @@ import getFormValues from '../../../../../../../utils/get-form-values';
 
 import Option from './Option';
 import styled from './styles.module.css';
+
+const NEGATIVE_INDEX = -1;
 
 function Permission({
 	permission = {},
@@ -23,28 +26,28 @@ function Permission({
 			value    : formValues[permission?.value],
 			type     : 'select',
 			options  : permission?.options,
-			valueKey : 'type',
+			valueKey : 'view_type',
 			multiple : true,
 			disabled : creatingNavs,
 			rules    : { required: 'Permission value is required' },
 		},
 	];
-	const otherControls = [];
+	const OTHER_CONTROLS = [];
 	(permission?.options || []).forEach((option) => {
-		if (option.options.length > 0) {
-			otherControls.push({
-				name        : `${permission?.value}-${option.type}`,
+		if (option.options.length > GLOBAL_CONSTANTS.zeroth_index) {
+			OTHER_CONTROLS.push({
+				name        : `${permission?.value}-${option.view_type}`,
 				options     : option.options,
 				type        : 'select',
 				placeholder : 'View',
 				caret       : true,
 				multiple    : true,
 				disabled    : creatingNavs,
-				value       : formValues[`${permission?.value}-${option.type}`],
+				value       : formValues[`${permission?.value}-${option.view_type}`],
 			});
 		}
 	});
-	const allControls = [...controls, ...otherControls];
+	const allControls = [...controls, ...OTHER_CONTROLS];
 	const { handleSubmit, control, setValue, watch } = useForm();
 
 	const newFormValues = watch();
@@ -55,7 +58,7 @@ function Permission({
 		const index = permissionValue.indexOf(selectedOption);
 		if (selectedOption === 'none') {
 			setValue(permission?.value, [selectedOption]);
-		} else if (index > -1) {
+		} else if (index > NEGATIVE_INDEX) {
 			const newVal = permissionValue.filter(
 				(item) => item !== selectedOption && item !== 'none',
 			);
@@ -113,6 +116,7 @@ function Permission({
 			<div className={styled.container_options}>
 				{permission.options.map((option) => (
 					<Option
+						key={option.criteria}
 						control={control}
 						option={option}
 						controls={allControls}

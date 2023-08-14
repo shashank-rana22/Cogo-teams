@@ -29,9 +29,10 @@ const apis = [
 		feature     : 'risk_management',
 	},
 	{
-		api         : 'list_locations',
-		access_type : 'private',
-		feature     : 'risk_management',
+		api          : 'list_locations',
+		access_type  : 'private',
+		feature      : 'risk_management',
+		service_name : 'location',
 	},
 ];
 

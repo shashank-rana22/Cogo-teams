@@ -26,7 +26,7 @@ const getPayload = (data = {}, item = {}, preProps = {}, filters = {}, billToCus
 			price                 : Number(price) || undefined,
 			service_provider_id   : service_provider_id || undefined,
 			pending_task_id       : pending_task_id || undefined,
-			add_to_sell_quotation : null,
+			add_to_sell_quotation : preProps.add_to_sell_quotation || undefined,
 			alias                 : alias || undefined,
 			state                 : preProps.state,
 		}

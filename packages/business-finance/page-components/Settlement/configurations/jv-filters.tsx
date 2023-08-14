@@ -2,7 +2,6 @@ import styles from './styles.module.css';
 
 export const jvFilters = [
 	{
-
 		name        : 'category',
 		placeholder : 'JV Category',
 		span        : 1,
@@ -22,13 +21,22 @@ export const jvFilters = [
 	{
 		name        : 'status',
 		type        : 'select',
-		span        : 1,
 		placeholder : 'Status',
 		isClearable : true,
+		size        : 'md',
+		selectWidth : '180px',
+		span        : 1,
 		options     : [
 			{ label: 'APPROVED', value: 'APPROVED' },
 			{ label: 'POSTED', value: 'POSTED' },
 			{ label: 'POSTING FAILED', value: 'POSTING_FAILED' },
 		],
+	},
+	{
+		name                  : 'accountingDate',
+		type                  : 'singleDateRange',
+		placeholder           : 'Accounting Date',
+		style                 : { width: '200px' },
+		isPreviousDaysAllowed : true,
 	},
 ];
