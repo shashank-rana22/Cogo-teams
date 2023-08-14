@@ -48,6 +48,7 @@
 	width: 20px;
 	height: 20px;
 	margin-left: 4px;
+	cursor: pointer;
 	fill: #bdbdbd;
 }
 
@@ -56,4 +57,14 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.already_sent_file_name {
+	color: #c26d1a;
+}
+
+.already_sent_text {
+	font-style: italic;
+	font-weight: 600;
+	color: #c26d1a;
 }

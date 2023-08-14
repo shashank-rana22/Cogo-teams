@@ -15,13 +15,16 @@ function BookingNoteModal({ setShowBookingNote = () => {}, showBookingNote = {} 
 	};
 
 	const {
-		triggerBookingNote,
-		bnLoading,
+		triggerBookingNote = () => {},
+		bnLoading = false,
+		alreadySentData = [],
 	} = useSendBookingNoteOnWhatsapp({ onClose });
 
 	const { data = {} } = showBookingNote;
 
-	const options = getCheckboxOptions({ documents: data?.documents || [] });
+	const options = getCheckboxOptions({ documents: data?.documents || [], alreadySentData });
+
+	const isAlreadySentSelected = documentsSelected?.some((selectedDoc) => alreadySentData?.includes(selectedDoc));
 
 	return (
 		<Modal
@@ -40,6 +43,8 @@ function BookingNoteModal({ setShowBookingNote = () => {}, showBookingNote = {} 
 						className={styles.docs_div}
 					/>
 				</div>
+				{!isEmpty(alreadySentData)
+				&& <div className={styles.already_sent_text}>*Highlighted documents are already sent</div>}
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.footer_styles}>
@@ -60,8 +65,7 @@ function BookingNoteModal({ setShowBookingNote = () => {}, showBookingNote = {} 
 						}}
 						disabled={isEmpty(documentsSelected)}
 					>
-						Send
-
+						{isAlreadySentSelected ? 'Send Anyway' : 'Send'}
 					</Button>
 				</div>
 			</Modal.Footer>
