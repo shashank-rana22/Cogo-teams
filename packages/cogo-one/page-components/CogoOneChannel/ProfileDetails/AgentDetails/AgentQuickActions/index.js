@@ -1,6 +1,5 @@
 import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useRouter } from '@cogoport/next';
 
 import useSubmitOmniChannelKyc from '../../../../../hooks/useSubmitOmniChannelKyc';
 
@@ -15,10 +14,9 @@ function AgentQuickActions({
 	leadUserId = '',
 	organizationData = {},
 	fetchOrganization = () => {},
+	partnerId = '',
 }) {
 	const { email = '', mobile_number = '', mobile_country_code = '' } = userData || {};
-
-	const { push } = useRouter();
 
 	const { submitKyc = () => {}, loading = false } = useSubmitOmniChannelKyc();
 
@@ -29,7 +27,10 @@ function AgentQuickActions({
 	const countryCode = mobile_country_code?.replace(countryCodeRegex, COUNTRY_CODE_PREFIX);
 
 	const queryParams = `?mobile=${mobile_number}&mobile_country_code=${countryCode}${emailParams}`;
-	const redirectionUrl = `/create-importer-exporter${queryParams}`;
+
+	const handleRoute = () => {
+		window.open(`/${partnerId}/create-importer-exporter${queryParams}`, '_blank');
+	};
 
 	return (
 
@@ -60,15 +61,17 @@ function AgentQuickActions({
 				</div>
 
 			) : (
-				<Button
-					size="sm"
-					themeType="secondary"
-					onClick={() => push(redirectionUrl)}
-				>
-					Onboard User
-				</Button>
+				((userId || leadUserId) && (
+					<Button
+						size="sm"
+						themeType="secondary"
+						onClick={handleRoute}
+					>
+						Onboard User
+					</Button>
+				))
 			)
-				}
+			}
 
 		</div>
 

@@ -9,3 +9,8 @@
 	display: flex;
 	margin: 0 8px;
 }
+
+.filters {
+	display: flex;
+	align-items: center;
+}

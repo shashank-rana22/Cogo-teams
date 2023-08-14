@@ -50,8 +50,6 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 		paymentStatusList : ['unpaid'],
 	});
 
-	console.log('invoiceFilters', invoiceFilters);
-
 	const [sort, setSort] = useState({
 		sortType : 'desc',
 		sortBy   : 'invoiceDate',

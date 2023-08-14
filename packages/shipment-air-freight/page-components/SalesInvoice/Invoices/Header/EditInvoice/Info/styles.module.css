@@ -1,0 +1,17 @@
+.container {
+	.tippy-box {
+		max-width: fit-content !important;
+	}
+}
+
+.info_div {
+	display: flex;
+	align-items: center;
+	margin-left: 6px;
+}
+
+.content_div {
+	width: 160px;
+	font-size: 11px;
+	background: #fff;
+}

@@ -120,12 +120,13 @@ function asyncFieldsPartnerUsers() {
 
 function asyncFieldsPartnerRoles() {
 	return {
-		labelKey    : 'name',
-		valueKey    : 'id',
-		endpoint    : 'list_auth_roles',
-		initialCall : true,
-		params      : {
-			filters    : { status: 'active' },
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'list_roles',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {
+			filters    : { status: true },
 			page_limit : 100,
 			sort_by    : 'short_name',
 			sort_type  : 'asc',
@@ -352,6 +353,20 @@ function asyncFieldsTicketTypes() {
 		valueKey     : 'TicketType',
 		endpoint     : 'default_types',
 		authkey      : 'get_tickets_default_types',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+		searchByq    : true,
+	};
+}
+
+function asyncTicketsCategory() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'configuration_categories',
+		authkey      : 'get_tickets_configuration_categories',
 		microService : 'tickets',
 		initialCall  : true,
 		qFilterKey   : 'QFilter',
@@ -809,6 +824,17 @@ function asyncListAllManagers() {
 	};
 }
 
+function asyncListAllocationObjectives() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/objectives',
+		authkey      : 'get_allocation_objectives',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
 function asyncListExpenseCategories() {
 	return {
 		labelKey     : 'categoryName',
@@ -819,6 +845,17 @@ function asyncListExpenseCategories() {
 		initialCall  : true,
 		searchByq    : true,
 		params       : { pageSize: 10000 },
+	};
+}
+
+function asyncListResources() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'list_resources',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {},
 	};
 }
 
@@ -879,6 +916,7 @@ export {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncTicketsCategory,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
@@ -887,6 +925,8 @@ export {
 	asyncListShipmentPendingTasks,
 	asyncListShipments,
 	asyncListShipmentServices,
+	asyncListAllocationObjectives,
 	asyncIncidentSubtypeList,
+	asyncListResources,
 	asyncFieldsLocationsMapping,
 };

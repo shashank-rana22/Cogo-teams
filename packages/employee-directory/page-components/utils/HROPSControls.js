@@ -97,7 +97,11 @@ function getHROPSControls(isCogoFreight, isEditable) {
 			placeholder : 'Search Reporting Manager',
 			asyncKey    : 'list_all_managers',
 			initialCall : true,
-			rules       : {
+			params      : {
+				filters    : { status: 'active' },
+				page_limit : 100,
+			},
+			rules: {
 				required: {
 					value   : true,
 					message : 'Reporting Manager is required',
@@ -140,24 +144,28 @@ function getHROPSControls(isCogoFreight, isEditable) {
 					type: ['country'],
 				},
 			},
-			initialCall : true,
+			initialCall : false,
 			disabled    : true,
 		},
 		{
 			name        : 'hrbp_id',
+			label       : 'Select HRBP',
 			controlType : 'asyncSelect',
-			asyncKey    : 'partner_users_ids',
-			label       : 'HRBP',
-			placeholder : 'HRBP',
-			params      : {
-				filters: {
-					status               : 'active',
-					partner_entity_types : ['cogoport'],
-				},
-				page_limit: 100,
-			},
+			placeholder : 'Select HRBP',
+			asyncKey    : 'list_all_managers',
 			initialCall : true,
-			disabled    : !isEditable,
+			params      : {
+				filters         : { status: 'active' },
+				fetch_hrbp_only : true,
+				page_limit      : 100,
+			},
+			rules: {
+				required: {
+					value   : true,
+					message : 'HRBP is required',
+				},
+			},
+			disabled: !isEditable,
 		},
 		{
 			name        : 'squad_id',
@@ -238,7 +246,7 @@ function getHROPSControls(isCogoFreight, isEditable) {
 					message : 'DOJ is required',
 				},
 			},
-			disabled: !isEditable,
+			disabled: true,
 		},
 		{
 			label                 : 'Enter Resignation Date',

@@ -109,6 +109,14 @@ function MyResponsiveBar({
 				enableGridX={enableGridX}
 				role="application"
 				ariaLabel="bar chart"
+				markers={[{
+					axis      : 'y',
+					value     : 0,
+					lineStyle : {
+						stroke      : 'rgba(0, 0, 0, .25)',
+						strokeWidth : 1,
+					},
+				}]}
 			/>
 		</div>
 

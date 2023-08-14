@@ -12,10 +12,10 @@ const EMAIL_SUBJECT_PREFIX_MAPPING = {
 	forward   : 'FW',
 };
 
-function getSubject({ subject = '', val = '' }) {
+export function getSubject({ subject = '', val = '' }) {
 	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
 
-	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[val];
+	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[val] || '';
 
 	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
 		? subject : `${emailPrefix}: ${formatedSubject}`;
@@ -62,7 +62,7 @@ const getReplyAllMails = ({
 	};
 };
 
-const getRecipientData = ({
+export function getRecipientData({
 	setButtonType = () => {},
 	setEmailState = () => {},
 	senderAddress = '',
@@ -72,7 +72,7 @@ const getRecipientData = ({
 	activeMailAddress = '',
 	subject = '',
 	isDraft = false,
-}) => {
+}) {
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
@@ -116,6 +116,4 @@ const getRecipientData = ({
 	};
 
 	return { handleClick, filteredCcData, filteredBccData, filteredRecipientData };
-};
-
-export default getRecipientData;
+}
