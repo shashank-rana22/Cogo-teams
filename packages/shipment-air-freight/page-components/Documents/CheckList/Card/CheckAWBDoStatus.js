@@ -15,14 +15,10 @@ const INCLUDE_STATUS = ['generated', 'uploaded'];
 
 const INCLUDE_DOCUMENT = ['draft_airway_bill', 'hawb_freight_certificate'];
 
-function CheckAWBDoStatus({
-	docType,
-	item,
-	uploadedItem,
-	handleView,
-	handleSave,
-}) {
-	const buttonContainer = () => (
+const BL_AMEND_DOCUMENT = ['draft_airway_bill', 'delivery_order', 'hawb_freight_certificate'];
+
+function ButtonContainer({ handleView = () => {}, uploadedItem = {}, handleSave = () => {} }) {
+	return (
 		<>
 			<div className={styles.tooltip_container}>
 				<Tooltip
@@ -54,26 +50,41 @@ function CheckAWBDoStatus({
 			</div>
 		</>
 	);
+}
 
+function CheckAWBDoStatus({
+	docType,
+	item,
+	uploadedItem,
+	handleView,
+	handleSave,
+}) {
 	if (
 		INCLUDE_DOCUMENT.includes(docType) && item?.trade_type === 'export'
 	) {
 		if (INCLUDE_STATUS.includes(JSON.parse(uploadedItem?.data)?.status)) {
 			if (uploadedItem?.bl_detail_status === 'approved') {
-				return buttonContainer();
+				return <ButtonContainer handleView={handleView} handleSave={handleSave} uploadedItem={uploadedItem} />;
 			} return (
 				<h4 className={styles.hold_document}>
 					{DOCUMENT_STATUS_MAPPING[uploadedItem?.bl_detail_status]}
 				</h4>
 			);
 		}
+	} else if (!BL_AMEND_DOCUMENT?.includes(docType)) {
+		return <ButtonContainer handleView={handleView} handleSave={handleSave} uploadedItem={uploadedItem} />;
 	} else if (
-		uploadedItem?.do_detail_status !== 'approved'
+		!['approved', null]?.includes(uploadedItem?.do_detail_status)
 		&& item?.trade_type === 'import'
 	) {
-		return <h4 className={styles.hold_document}>{DOCUMENT_STATUS_MAPPING[uploadedItem?.bl_detail_status]}</h4>;
+		return (
+			<h4 className={styles.hold_document}>
+				{DOCUMENT_STATUS_MAPPING[uploadedItem?.bl_detail_status
+			|| uploadedItem?.do_detail_status]}
+			</h4>
+		);
 	} else {
-		return buttonContainer();
+		return <ButtonContainer handleView={handleView} handleSave={handleSave} uploadedItem={uploadedItem} />;
 	}
 
 	return null;
