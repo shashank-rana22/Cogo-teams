@@ -35,14 +35,12 @@ function BookingNoteModal({ setShowBookingNote = () => {}, showBookingNote = {} 
 		>
 			<Modal.Header title="Send Booking Notes" className={styles.title} />
 			<Modal.Body>
-				<div>
-					<CheckboxGroup
-						onChange={setDocumentsSelected}
-						value={documentsSelected}
-						options={options}
-						className={styles.docs_div}
-					/>
-				</div>
+				<CheckboxGroup
+					onChange={setDocumentsSelected}
+					value={documentsSelected}
+					options={options}
+					className={styles.docs_div}
+				/>
 				{!isEmpty(alreadySentData)
 				&& <div className={styles.already_sent_text}>*Highlighted documents are already sent</div>}
 			</Modal.Body>
@@ -54,8 +52,7 @@ function BookingNoteModal({ setShowBookingNote = () => {}, showBookingNote = {} 
 						disabled={bnLoading}
 						onClick={onClose}
 					>
-						cancel
-
+						Cancel
 					</Button>
 					<Button
 						className={styles.button_styles}
@@ -64,6 +61,7 @@ function BookingNoteModal({ setShowBookingNote = () => {}, showBookingNote = {} 
 							triggerBookingNote({ documentIds: documentsSelected, shipmentId: data?.shipmentId });
 						}}
 						disabled={isEmpty(documentsSelected)}
+						size="sm"
 					>
 						{isAlreadySentSelected ? 'Send Anyway' : 'Send'}
 					</Button>

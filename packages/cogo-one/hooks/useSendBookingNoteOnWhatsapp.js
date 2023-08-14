@@ -24,20 +24,21 @@ const useSendBookingNoteOnWhatsapp = (
 
 	const triggerBookingNote = async ({ documentIds, shipmentId }) => {
 		try {
-			const res = await trigger({ data: getPayload({ documentIds, shipmentId, isAlreadySent }) });
-			const { data = {} } = res || {};
-			const { not_sent = false, booking_note_ids = [] } = data || {};
-
-			if (not_sent) {
-				setAlreadySentData(booking_note_ids);
-				return;
-			}
+			await trigger({ data: getPayload({ documentIds, shipmentId, isAlreadySent }) });
 
 			Toast.success('Sent Sucessfully');
 			setAlreadySentData([]);
 			onClose();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
+			const { response } = error || {};
+			const { data = {} } = response || {};
+			const { booking_note_ids = [] } = data || {};
+
+			if (isEmpty(booking_note_ids)) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
+				return;
+			}
+			setAlreadySentData(booking_note_ids?.flat() || []);
 		}
 	};
 

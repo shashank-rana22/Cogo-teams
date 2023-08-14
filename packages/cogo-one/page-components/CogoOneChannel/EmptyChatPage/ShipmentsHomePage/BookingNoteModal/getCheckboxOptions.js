@@ -41,7 +41,7 @@ export const getCheckboxOptions = ({ documents = [], alreadySentData = [] }) => 
 			documentUrl={eachDocument?.document_url}
 			isAlreadySent={isAlreadySent}
 		/>,
-		value : eachDocument?.id,
-		style : isAlreadySent ? { border: '1px solid #C26D1A' } : {},
+		value         : eachDocument?.id,
+		checkboxStyle : isAlreadySent ? { border: '1.5px solid #C26D1A' } : {},
 	};
 });

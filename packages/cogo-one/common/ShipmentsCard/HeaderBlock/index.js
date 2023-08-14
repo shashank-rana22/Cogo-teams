@@ -11,9 +11,9 @@ import RaiseTicketModal from '../../RaiseTicketModal';
 import styles from './styles.module.css';
 
 const getButtonOptions = ({
-	partnerId,
-	shipmentId,
-	setShowRaiseTicket,
+	partnerId = '',
+	shipmentId = '',
+	setShowRaiseTicket = () => {},
 	setShowBookingNote = () => {},
 	taskStatus = '',
 	documents = [],
@@ -46,7 +46,7 @@ const getButtonOptions = ({
 		condition: ['user_shipments'],
 	},
 	{
-		children : 'Show Booking Note',
+		children : 'Send Booking Note',
 		onClick  : (e) => {
 			e.stopPropagation();
 			setShowBookingNote({ show: true, data: { documents, shipmentId } });
@@ -69,7 +69,6 @@ function HeaderBlock({
 	}));
 
 	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
-	const [popoverVisible, setPopoverVisible] = useState(false);
 
 	const {
 		serial_id = '',
@@ -99,7 +98,6 @@ function HeaderBlock({
 		setShowBookingNote,
 		taskStatus: task_status,
 		documents,
-		setPopoverVisible,
 	});
 
 	const filteredButtons = buttons.filter((itm) => !itm?.hide && itm?.condition.includes(type));
@@ -157,7 +155,7 @@ function HeaderBlock({
 				<Popover
 					placement="bottom-end"
 					caret={false}
-					visible={popoverVisible}
+					// visible={popoverVisible}
 					render={(
 						<ButtonGroup
 							size="sm"
@@ -170,7 +168,7 @@ function HeaderBlock({
 						className={styles.overflow_container}
 						onClick={(e) => {
 							e.stopPropagation();
-							setPopoverVisible((p) => !p);
+							// setPopoverVisible((p) => !p);
 						}}
 					/>
 				</Popover>
