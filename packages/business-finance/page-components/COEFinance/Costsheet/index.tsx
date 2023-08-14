@@ -43,7 +43,7 @@ function CostSheet() {
 	};
 	const { profile = {} }: RootState = useSelector((state) => state);
 	const { permissions_navigations:permissionsNavigation = {} } = profile || {};
-	const { type = '' } = permissionsNavigation['business_finance-coe_finance']
+	const { view_type:viewType } = permissionsNavigation['business_finance-coe_finance']
 		?.update_shipment[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const [showButton, setShowButton] = useState(getStatus());
@@ -84,7 +84,7 @@ function CostSheet() {
 		getData(data);
 	};
 
-	const getPills = () => {
+	function GetPills() {
 		if (loadingShipment) {
 			return <Placeholder height="20px" width="80px" />;
 		}
@@ -95,7 +95,7 @@ function CostSheet() {
 			return <Pill color="yellow">{startCase(tradeType)}</Pill>;
 		}
 		return <div>No Data Found</div>;
-	};
+	}
 	return (
 		<div>
 			<div className={styles.flex}>
@@ -111,7 +111,7 @@ function CostSheet() {
 				>
 					Go Back
 				</Button>
-				{type === 'allowed' ? (
+				{viewType === 'allowed' ? (
 					<div className={styles.flexwidth}>
 						{showButton ? (
 							<>
@@ -218,7 +218,7 @@ function CostSheet() {
 						<span className={styles.details}>
 							Shipment Details
 							<div className={styles.tags_container}>
-								{getPills()}
+								{GetPills()}
 							</div>
 
 							<div className={styles.sid}>
