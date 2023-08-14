@@ -74,7 +74,6 @@ function Routes({
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.route_form}>
 				<div className={styles.heading}>{`Enter ${mode?.mode_label} Details`}</div>
 
