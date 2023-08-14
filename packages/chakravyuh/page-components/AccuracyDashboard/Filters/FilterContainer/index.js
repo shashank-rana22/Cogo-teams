@@ -1,8 +1,8 @@
-import Layout from '@cogoport/air-modules/components/Layout';
 import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useEffect } from 'react';
 
+import Layout from '../../../../common/Layout';
 import airControls from '../../../../configurations/air-freight-filters';
 import fclControls from '../../../../configurations/fcl-freight-filters';
 import mutateFields from '../../../../utils/mutate-fields';

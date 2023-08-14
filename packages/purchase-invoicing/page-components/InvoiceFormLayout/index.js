@@ -1,7 +1,9 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useForm, RadioGroupController, SelectController } from '@cogoport/forms';
+import { useForm, RadioGroupController, SelectController, CheckboxController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useContext, useImperativeHandle, forwardRef, useState } from 'react';
 
@@ -27,6 +29,8 @@ import PurchaseInvoiceDates from './PurchaseInvoiceDates';
 import Segmented from './Segmented';
 import styles from './styles.module.css';
 import Taggings from './Taggings';
+
+const IS_SAME = 1;
 
 function InvoiceFormLayout({
 	uploadInvoiceUrl = '',
@@ -66,7 +70,7 @@ function InvoiceFormLayout({
 	const defaultLineItems = purchaseInvoiceValues?.line_items?.map((item) => ({
 		...item,
 		rate    : item?.price,
-		tax_amt : item?.tax_price || 0,
+		tax_amt : item?.tax_price || GLOBAL_CONSTANTS.zeroth_index,
 		cost    : item?.tax_total_price,
 	}));
 
@@ -90,7 +94,7 @@ function InvoiceFormLayout({
 	);
 
 	useEffect(() => {
-		if (initialValueBP && Object.keys(billingParty || {}).length === 0) {
+		if (initialValueBP && Object.keys(billingParty || {}).length === GLOBAL_CONSTANTS.zeroth_index) {
 			setBillingParty({
 				...initialValueBP,
 				billing_party_address:
@@ -107,7 +111,7 @@ function InvoiceFormLayout({
 				return {
 					...item,
 					to_currency : formValues?.invoice_currency,
-					rate        : isSame ? 1 : item?.rate,
+					rate        : isSame ? IS_SAME : item?.rate,
 				};
 			});
 			setValue('exchange_rate', declaredExcRate);
@@ -118,9 +122,9 @@ function InvoiceFormLayout({
 		formValues?.line_items?.forEach((item, index) => {
 			const exchRate = formValues?.exchange_rate?.filter(
 				(ex) => ex?.from_currency === item?.currency,
-			)?.[0]?.rate;
+			)?.[GLOBAL_CONSTANTS.zeroth_index]?.rate;
 
-			const newExcRate = item?.currency === formValues?.invoice_currency ? 1 : exchRate || '';
+			const newExcRate = item?.currency === formValues?.invoice_currency ? IS_SAME : exchRate || '';
 
 			setValue(`line_items.${index}.exchange_rate`, newExcRate);
 		});
@@ -129,6 +133,12 @@ function InvoiceFormLayout({
 		JSON.stringify(formValues?.exchange_rate),
 		JSON.stringify(formValues?.line_items),
 	]);
+
+	useEffect(() => {
+		if (formValues?.invoice_type === 'credit_note') {
+			setValue('advance_bill', '');
+		}
+	}, [formValues?.invoice_type]);
 
 	const calculatedValues = useCalculateTotalPrice({
 		baseCurrency : formValues?.invoice_currency,
@@ -211,6 +221,17 @@ function InvoiceFormLayout({
 									Invoice type is Required
 								</div>
 							) : null}
+
+							{billCatogory === 'purchase' ? (
+								<CheckboxController
+									control={control}
+									name="advance_bill"
+									label="Advance Bill"
+									value="advance_bill"
+									disabled={formValues.invoice_type === 'credit_note'}
+								/>
+							) : null}
+
 						</div>
 						<Button
 							className={styles.margintop}
@@ -275,6 +296,7 @@ function InvoiceFormLayout({
 					errors={errors}
 					errMszs={errMszs}
 					open={isEdit}
+					shipment_data={shipment_data}
 				/>
 
 				<AdditionalDetails

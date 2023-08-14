@@ -1,10 +1,26 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
+import { setDoc, doc } from 'firebase/firestore';
+
+const updateRoom = ({ agentId = '', firestore = {} }) => {
+	const docRef = doc(firestore, `/users/${agentId}`);
+
+	setDoc(
+		docRef,
+		{
+			call_details            : {},
+			last_activity_timestamp : Date.now(),
+			last_activity           : 'call_end',
+		},
+		{ merge: true },
+	);
+};
 
 function useHangUpCall({
-	callRecordId,
-	checkToOpenFeedBack,
-	hasAgentPickedCall,
+	callRecordId = '',
+	firestore = {},
+	loggedInAgentId = '',
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/hang_up_outgoing_call',
@@ -18,9 +34,9 @@ function useHangUpCall({
 					call_record_id: callRecordId,
 				},
 			});
-			checkToOpenFeedBack({ hasAgentPickedCall });
+			updateRoom({ agentId: loggedInAgentId, firestore });
 		} catch (error) {
-			Toast.error(error?.response?.data?.message[0]);
+			Toast.error(error?.response?.data?.message?.[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	};
 

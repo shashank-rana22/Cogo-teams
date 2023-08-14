@@ -1,0 +1,8 @@
+.content {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 30%;
+	height: 8%;
+	background-color: var(--color-secondary-5);
+}

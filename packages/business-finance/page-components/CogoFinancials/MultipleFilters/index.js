@@ -1,5 +1,6 @@
 import { Popover } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import RenderFilters from './RenderFilters';
@@ -29,6 +30,11 @@ function MultipleFilters({ filter = {}, setFilter = () => {}, entity = '' }) {
 					onClick={() => setVisible(!visible)}
 				>
 					<IcMFilter color="#fff" height="80%" width="100%" />
+					{!isEmpty(filter) && (
+						<div className={styles.dot_container}>
+							<div className={styles.dot} />
+						</div>
+					)}
 				</div>
 			</Popover>
 		</div>

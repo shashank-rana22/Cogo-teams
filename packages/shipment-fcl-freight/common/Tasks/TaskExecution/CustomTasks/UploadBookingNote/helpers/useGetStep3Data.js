@@ -38,7 +38,7 @@ const useGetStepThreeData = ({
 			|| serviceObj.service_type === 'fcl_freight_local_service')
 			&& task.service_type === 'fcl_freight_service') {
 			notMainService = true;
-			if (end2EndCheck(serviceObj, shipment_data, incoTerm)) {
+			if (end2EndCheck({ serviceObj, shipment_data, incoTerm })) {
 				SERVICE_IDS.push(serviceObj.id);
 			}
 		}
@@ -154,7 +154,7 @@ const useGetStepThreeData = ({
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS, is_source_so1: true });
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS, quotation_updated_by: 'so1' });
 
 				if (res?.status === HTTP_SUCCESS_CODE) {
 					await updateTask({ id: task?.id });

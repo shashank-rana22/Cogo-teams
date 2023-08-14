@@ -6,16 +6,25 @@ import useCreateCommunicationLog from '../hooks/useCreateCommunicationLog';
 
 import styles from './styles.module.css';
 
-function FeedbackModal({ voice_call_recipient_data, callEndAt = '', unmountVoiceCall }) {
+function FeedbackModal({
+	receiverUserDetails = {},
+	unmountVoiceCall = () => {},
+	loggedInAgentId = '',
+	callStartAt = '',
+	callEndAt = '',
+}) {
 	const { handleSubmit, control, formState: { errors } } = useForm();
 	const {
 		createCommunicationLog,
 		loading,
 	} = useCreateCommunicationLog({
-		voice_call_recipient_data,
-		callEndAt,
+		receiverUserDetails,
 		unmountVoiceCall,
+		loggedInAgentId,
+		callStartAt,
+		callEndAt,
 	});
+
 	const { feedbackType, feedbackDesc } = controls;
 
 	return (

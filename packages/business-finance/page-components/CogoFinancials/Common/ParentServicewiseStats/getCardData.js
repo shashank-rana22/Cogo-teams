@@ -1,5 +1,7 @@
 import formatCount from '../../utils/formatCount';
 
+const DEFAULT_VALUE = 0;
+
 const getCardData = ({
 	displayAmount = () => {}, mainCardData = {},
 	invoiceCount = 0, taxType = '', currency = '', jobCount = 0,
@@ -15,9 +17,11 @@ const getCardData = ({
 		stats : `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shipments`,
 	},
 	{
-		label : 'Estimated Profit',
-		value : displayAmount(mainCardData[`estimatedProfit${taxType}`], currency),
-		stats : `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shipments`,
+		label       : 'Estimated Profit',
+		value       : displayAmount(mainCardData[`estimatedProfit${taxType}`], currency),
+		stats       : `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shipments`,
+		profitColor : Number(mainCardData[`estimatedProfit${taxType}`] || DEFAULT_VALUE) > DEFAULT_VALUE
+			? '#abcd62' : '#ee3425',
 	},
 ];
 
