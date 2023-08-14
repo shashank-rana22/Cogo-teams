@@ -4,7 +4,7 @@
 
 .input_container {
 	width: 80%;
-	margin-top: 16px;
+	margin: 16px 0 0 20px;
 
 	:global {
 		.ui_input_container {
@@ -90,7 +90,8 @@
 .radio_group_section {
 	display: flex;
 	flex-direction: column;
-	margin-left: 16px;
+
+	/* margin-left: 16px; */
 	font-size: var(--font-size-md);
 }
 
@@ -112,6 +113,9 @@
 	width: 100%;
 }
 
-.content_container {
+.profitability_text_style {
+	max-width: 80%;
 	margin-left: 20px;
+	word-break: break-word;
+	word-wrap: break-word;
 }
