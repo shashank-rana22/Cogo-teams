@@ -27,7 +27,7 @@ function AccuracyDashboard() {
 	const [view, setView] = useState('dashboard');
 	const [globalFilters, setGlobalFilters] = useState({
 		service_type : 'fcl',
-		mode         : null,
+		parent_mode  : null,
 		end_date     : new Date(),
 		date_diff    : 30,
 	});

@@ -91,7 +91,7 @@ function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
 			series.data.processor = am5.DataProcessor.new(root, {
 				numericFields: [
 					'day',
-					'supply_rates',
+					'supply',
 					'rate_extension',
 					'predicted',
 					'cluster_extension',

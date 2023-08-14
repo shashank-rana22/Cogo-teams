@@ -11,15 +11,15 @@ import { section_container, section_header } from '../styles.module.css';
 import SeriesChart from './SeriesChart';
 import styles from './styles.module.css';
 
-const VALID_IDS = ['supply_rates', 'rate_extension', 'predicted', 'cluster_extension'];
+const VALID_IDS = ['supply', 'rate_extension', 'predicted', 'cluster_extension'];
 const TIME_LIMIT = 200;
 function ScallableAccuracy({
 	accuracy = [],
-	loading = false, mode = null,
+	loading = false, parent_mode = null,
 	setIsHighlighted = () => {},
 	isHighlighted = false,
 }) {
-	const IDS = mode ? [mode] : VALID_IDS;
+	const IDS = parent_mode ? [parent_mode] : VALID_IDS;
 	const [isAnimating, setIsAnimating] = useState(false);
 
 	useEffect(() => {
