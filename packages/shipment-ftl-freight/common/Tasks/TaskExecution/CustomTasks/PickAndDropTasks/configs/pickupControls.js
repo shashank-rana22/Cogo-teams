@@ -48,9 +48,10 @@ const getControls = (item, dateObj) => {
 			name          : 'image',
 			type          : 'file',
 			span          : 4,
-			label         : 'Upload Starting Kilometers Image',
+			label         : 'Upload Starting Kilometers Image/s',
 			size          : 'sm',
 			document_type : 'starting_km_image',
+			multiple      : true,
 			accept:
 				'image/*,.pdf,.doc,.docx,.xlsx,application/msword,'
 				+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
