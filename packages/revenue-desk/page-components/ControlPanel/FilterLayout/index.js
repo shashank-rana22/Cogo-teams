@@ -44,7 +44,7 @@ function FilterLayout() {
 		return str.toUpperCase();
 	};
 	return (
-		<div className={styles.outerContainer}>
+		<div>
 			<div className={styles.filter}>
 				<div className={styles.fieldContainer}>
 					<Select
