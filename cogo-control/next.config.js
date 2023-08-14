@@ -9,6 +9,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const isProd = process.env.NODE_ENV === 'production';
 
+// eslint-disable-next-line import/extensions
+const { i18n } = require('./next-i18next.config.js');
+
 // eslint-disable-next-line
 const fs = require('fs-extra');
 
@@ -31,6 +34,7 @@ module.exports = withBundleAnalyzer({
 	swcMinify         : true,
 	basePath          : '/v2',
 	transpilePackages : modulesToTranspile,
+	i18n,
 	images            : {
 		remotePatterns: [
 			{

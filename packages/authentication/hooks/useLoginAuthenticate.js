@@ -5,6 +5,7 @@ import useRequest from '@cogoport/request/hooks/useRequest';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { getCookie, setCookie, isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
 import redirections from '../utils/redirections';
@@ -15,6 +16,9 @@ const COOKIE_EXPIRY = -1;
 
 const useLoginAuthenticate = () => {
 	const router = useRouter();
+
+	const { t } = useTranslation(['login']);
+
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
 	const dispatch = useDispatch();
@@ -118,7 +122,7 @@ const useLoginAuthenticate = () => {
 			}
 
 			if (is_already_added_email && source === 'add_account') {
-				Toast.error('Cannot login with already active account');
+				Toast.error(t('login:already_login_toast_error'));
 
 				return;
 			}
@@ -160,7 +164,7 @@ const useLoginAuthenticate = () => {
 				window.location.href = '/';
 			}
 		} catch (err) {
-			Toast.error(err?.response?.data.error || 'Failed to login, please try again...');
+			Toast.error(err?.response?.data.error || t('login:failed_to_login_toast_error'));
 		}
 	};
 
