@@ -10,6 +10,7 @@ const AIR_UNITS = {
 	per_ton               : 'Per Ton',
 	percentage_of_freight : 'Percentage of Freight',
 	per_wm                : 'Per Wm',
+	per_kg_gross          : 'Per Kg Gross',
 };
 
 export default AIR_UNITS;

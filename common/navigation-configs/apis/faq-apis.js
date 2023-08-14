@@ -438,6 +438,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'download_test_results',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'create_duplicate_test',
 			access_type  : 'private',
 			service_name : 'cogo_academy',

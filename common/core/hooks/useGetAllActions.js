@@ -1,9 +1,13 @@
 /* eslint-disable no-undef */
 
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useAuthRequest, useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { getCookie, setCookie } from '@cogoport/utils';
+
+const FIRST_INDEX = 1;
+const NEGATIVE_INDEX = -1;
 
 const useGetAllActions = ({
 	user = {},
@@ -23,14 +27,14 @@ const useGetAllActions = ({
 		method : 'get',
 	}, { manual: true });
 
-	const [{ loading: updateParentAndChildSessionLoading }, updateParentAndChildSessionTrigger] = useRequest({
+	const [{ loading: updateParentAndChildSessionLoading }, updateParentAndChildSessionTrigger] = useAuthRequest({
 		url    : '/update_parent_and_child_user_session_mappings',
 		method : 'post',
 	}, { manual: true });
 
 	const api = profile === 'default' ? '/delete_user_session' : '/remove_user_sessions';
 
-	const [{ loading: deleteUserSessionsLoading }, trigger] = useRequest({
+	const [{ loading: deleteUserSessionsLoading }, trigger] = useAuthRequest({
 		url    : api,
 		method : 'delete',
 	}, { manual: true });
@@ -67,9 +71,10 @@ const useGetAllActions = ({
 				);
 
 				const response = await updateParentAndChildSessionTrigger({
-					params: {
+					data: {
 						active_user_session_id:
-							profile === 'default' ? token : random_uid?.[0]?.user_session_id,
+							profile === 'default' ? token : random_uid
+								?.[GLOBAL_CONSTANTS.zeroth_index]?.user_session_id,
 						parent_user_session_id: cogo_admin_auth_token || undefined,
 					},
 				});
@@ -77,7 +82,7 @@ const useGetAllActions = ({
 				if (!response.hasError) {
 					if (
 						profile === 'default'
-						&& profileData?.user_session_mappings?.length > 1
+						&& profileData?.user_session_mappings?.length > FIRST_INDEX
 					) {
 						setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, response?.data?.parent_token);
 						setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, response?.data?.parent_token);
@@ -87,10 +92,10 @@ const useGetAllActions = ({
 
 					if (
 						profile === 'default'
-						&& profileData?.user_session_mappings?.length === 1
+						&& profileData?.user_session_mappings?.length === FIRST_INDEX
 					) {
-						setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
-						setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', -1);
+						setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', NEGATIVE_INDEX);
+						setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', NEGATIVE_INDEX);
 						window.location.href = '/v2/login';
 						Toast.success(
 							'User logged out successfully! Redirecting to Login Page',
@@ -99,7 +104,7 @@ const useGetAllActions = ({
 
 					if (
 						profile === 'non-default'
-						&& profileData?.user_session_mappings?.length > 1
+						&& profileData?.user_session_mappings?.length > FIRST_INDEX
 					) {
 						setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, response?.data?.parent_token);
 						refetch();

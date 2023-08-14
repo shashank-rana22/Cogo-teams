@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useRequest, useRequestBf, useAllocationRequest, useTicketsRequest } from '@cogoport/request';
+import { useRequest, useRequestBf, useAllocationRequest, useTicketsRequest, useAuthRequest } from '@cogoport/request';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -9,6 +9,7 @@ const REQUEST_HOOK_MAPPING = {
 	business_finance : useRequestBf,
 	allocation       : useAllocationRequest,
 	tickets          : useTicketsRequest,
+	auth             : useAuthRequest,
 };
 
 function useGetAsyncOptionsMicroservice({
