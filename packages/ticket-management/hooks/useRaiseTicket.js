@@ -21,7 +21,7 @@ const getPayload = ({
 	...additionalData,
 });
 
-const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo, setRefreshList }) => {
+const useRaiseTicket = ({ handleClose = () => {}, additionalInfo = [], setRefreshList = () => {} }) => {
 	const { profile } = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -77,7 +77,8 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo, setRefreshList }) 
 				Escalated : false,
 				Closed    : false,
 			}));
-			setShowRaiseTicket(false);
+
+			handleClose();
 		} catch (error) {
 			Toast.error(error?.response?.data);
 		}

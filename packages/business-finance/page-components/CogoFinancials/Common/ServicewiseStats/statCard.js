@@ -2,9 +2,12 @@ import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
+import formatCount from '../../utils/formatCount';
+
 import styles from './styles.module.css';
 
 const DEFAULT_INDEX = 1;
+const MINIMUM_PROFIT = 0;
 
 const displayAmount = (amount, currency) => formatAmount({
 	amount,
@@ -12,12 +15,23 @@ const displayAmount = (amount, currency) => formatAmount({
 	options: {
 		style                 : 'currency',
 		currencyDisplay       : 'code',
+		notation              : 'compact',
 		maximumFractionDigits : 2,
 	},
 });
 
 function StatCard({ mappingCards = [], service = '', isMain = false, singleServiceData = [], taxType = '' }) {
 	const { currency, invoiceCount, jobCount } = singleServiceData;
+
+	const getProfitColor = ({ amount, isProfit }) => {
+		if (!isProfit) return '#000';
+
+		if (amount > MINIMUM_PROFIT) {
+			return '#abcd62';
+		}
+		return '#ee3425';
+	};
+
 	return (
 		<div className={cl`${styles.statscontainer} ${!isMain && styles.border}`}>
 			{isMain ? null : (
@@ -35,12 +49,29 @@ function StatCard({ mappingCards = [], service = '', isMain = false, singleServi
 					${!isMain && styles.fontvalue} 
 					${mappingCards?.length === index + DEFAULT_INDEX && styles.color}`}
 					>
-						{isMain ? item.value : displayAmount(singleServiceData[`${item.key}${taxType}`], currency)}
+						{isMain ? (
+							<div style={{ color: item?.profitColor || null }}>
+								{item.value}
+							</div>
+						) : (
+							<div style={{
+								color: getProfitColor(
+									{
+										amount   : singleServiceData[`${item.key}${taxType}`],
+										isProfit : (item?.label)?.includes('Profit'),
+									},
+								),
+							}}
+							>
+								{displayAmount(singleServiceData[`${item.key}${taxType}`], currency)}
+							</div>
+						)}
 					</div>
 					<div className={cl`${styles.statval}
 					${!isMain && styles.fontstatval}`}
 					>
-						{isMain ? item.stats : `${invoiceCount} Invoices | ${jobCount} Shipments`}
+						{isMain ? item.stats
+							: `${formatCount(invoiceCount)} Invoices | ${formatCount(jobCount)} Shipments`}
 					</div>
 				</div>
 			))}

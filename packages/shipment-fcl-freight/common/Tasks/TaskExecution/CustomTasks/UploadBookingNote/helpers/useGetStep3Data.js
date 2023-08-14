@@ -38,7 +38,7 @@ const useGetStepThreeData = ({
 			|| serviceObj.service_type === 'fcl_freight_local_service')
 			&& task.service_type === 'fcl_freight_service') {
 			notMainService = true;
-			if (end2EndCheck(serviceObj, shipment_data, incoTerm)) {
+			if (end2EndCheck({ serviceObj, shipment_data, incoTerm })) {
 				SERVICE_IDS.push(serviceObj.id);
 			}
 		}

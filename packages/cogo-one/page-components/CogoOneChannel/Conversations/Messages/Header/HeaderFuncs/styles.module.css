@@ -10,7 +10,7 @@
 	box-shadow: 0 4px 16px 0 #627fac33;
 }
 
-.flex {
+.flex_container_add {
 	display: flex;
 	align-items: center;
 

@@ -47,7 +47,6 @@
 .statscontainer {
 	display: flex;
 	flex-direction: column;
-	width: 47%;
 	min-width: 200px;
 	margin: 32px;
 }
@@ -104,10 +103,6 @@
 	width: 78%;
 	max-height: 400px;
 	overflow-x: scroll;
-}
-
-.color {
-	color: var(--color-tertiary-success-green-2);
 }
 
 .select {

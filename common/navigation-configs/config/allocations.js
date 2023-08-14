@@ -44,6 +44,10 @@ const allocations = {
 		navigation : 'allocations-account_scoring',
 		isMainNav  : true,
 	},
+	'/[partner_id]/allocation/objective-configurations': {
+		navigation : 'allocations-objective_configurations',
+		isMainNav  : true,
+	},
 };
 
 module.exports = allocations;

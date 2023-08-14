@@ -4,7 +4,7 @@ import uploadControls from '../../../../../utils/upload-controls';
 import styles from './styles.module.css';
 
 function UploadModal({
-	uploadData, formProps = {},
+	uploadData = {}, formProps = {},
 
 }) {
 	const { control, formState: { errors } } = formProps;
@@ -33,6 +33,7 @@ function UploadModal({
 							</span>
 							<Element
 								{...el}
+								{...(el.component && { type: el.component })}
 								size="md"
 								key={el.name}
 								control={control}

@@ -77,3 +77,9 @@
 	display: flex;
 	flex-direction: row-reverse;
 }
+
+.view {
+	display: flex;
+	align-items: center;
+	margin-right: 12px;
+}

@@ -29,8 +29,11 @@ function useListTasks({
 
 	const stakeholder = STAKEHOLDER_MAPPINGS[activeStakeholder] || '';
 
-	const showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
+	let showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 
+	if (activeStakeholder === 'lastmile_ops' && !showOnlyMyTasks) {
+		showTaskFilters = {};
+	}
 	SHOW_ALL_TASKS.forEach((item) => {
 		if (activeStakeholder?.includes(item)) {
 			showOnlyMyTasks = false;
