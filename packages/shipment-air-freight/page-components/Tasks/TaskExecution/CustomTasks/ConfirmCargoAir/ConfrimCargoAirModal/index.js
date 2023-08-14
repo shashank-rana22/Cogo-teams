@@ -175,17 +175,12 @@ function ConfirmCargoAirModal({
 				/>
 				<div className={styles.button_div}>
 					<div className={styles.div1}>
-						<Button className="secondary md" onClick={() => onCancel()}>
+						<Button className="secondary md" onClick={onCancel} disabled={loading}>
 							Cancel
 						</Button>
 					</div>
-					{task?.task === 'update_flight_departure_and_flight_arrival' ? (
-						<div className={styles.div_middle}>
-							<Button className="secondary md">Edit</Button>
-						</div>
-					) : null}
 					<div>
-						<Button onClick={handleSubmit(onSubmit)}>
+						<Button onClick={handleSubmit(onSubmit)} disabled={loading}>
 							{loading ? 'Submitting...' : 'Submit'}
 						</Button>
 					</div>
