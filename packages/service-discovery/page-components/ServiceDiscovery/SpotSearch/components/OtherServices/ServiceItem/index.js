@@ -1,6 +1,8 @@
-import { Pill, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
+
+import ComingSoon from '../../../common/ComingSoonTag';
 
 import styles from './styles.module.css';
 
@@ -44,7 +46,6 @@ function ServiceItem({
 			role="presentation"
 		>
 			<div className={styles.img_container}>
-
 				{selectedService?.mode_value === value ? null : (
 					<div className={styles.yellow_circle} />
 				)}
@@ -53,6 +54,7 @@ function ServiceItem({
 					className={cl`${styles.icon} ${selectedService?.mode_value !== value && styles.icon_hover}`}
 				/>
 			</div>
+
 			<div
 				className={styles.label}
 				style={{
@@ -64,11 +66,7 @@ function ServiceItem({
 			</div>
 
 			{!is_available ? (
-				<div
-					className={cl`${styles.pill} ${bouncing ? styles.bounce : {}}`}
-				>
-					<Pill size="sm" color="yellow">Coming Soon</Pill>
-				</div>
+				<ComingSoon bouncing={bouncing} />
 			) : null}
 		</div>
 	);

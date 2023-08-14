@@ -32,7 +32,13 @@ export const MAIN_CONTROLS_MAPPING = {
 	air_freight: {
 		label         : 'Container Details',
 		mainControls  : fclControls,
-		extraControls : [],
+		extraControls : [
+			'shipping_line_id',
+			'source',
+			'schedule_type',
+			'payment_term',
+			'offers',
+		],
 	},
 	trailer_freight: {
 		label         : 'Container Details',

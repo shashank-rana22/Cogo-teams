@@ -94,7 +94,6 @@ function SpotSearch() {
 					/>
 				</div>
 			)}
-
 		</div>
 	);
 }

@@ -7,18 +7,18 @@
 		"type":["seaport"]
 	},
 	{ 
+		"value": "air_freight", 
+		"label": "AIR", 
+		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png",
+		"is_available": true,
+		"type": ["airport"] 
+	},
+	{ 
 		"value": "lcl_freight", 
 		"label": "LCL", 
 		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/3f7e67408b987cff893ec755108978b9.png",
 		"is_available": false,
 		"type":["seaport"] 
-	},
-	{ 
-		"value": "air_freight", 
-		"label": "AIR", 
-		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png",
-		"is_available": false,
-		"type": ["airport"] 
 	},
 	{ 
 		"value": "ftl_freight", 
