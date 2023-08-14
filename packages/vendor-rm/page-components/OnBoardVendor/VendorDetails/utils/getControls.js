@@ -82,7 +82,7 @@ const getControls = ({ country_id = '', entityOptions = [] }) => {
 			placeholder    : 'Entity',
 			style          : { flexBasis: '30%' },
 			options        : filteredOptions,
-			rules          : { required: 'City is Required' },
+			rules          : { required: 'Cogo Entity is Required' },
 		},
 	]);
 };
