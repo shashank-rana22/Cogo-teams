@@ -22,7 +22,7 @@ function Item(props) {
 		className = '',
 		formValues = {},
 		source = '',
-	} = props || {};
+	} = props;
 	const errorOriginal = getErrorMessage({
 		error,
 		rules,
@@ -32,16 +32,16 @@ function Item(props) {
 	let newProps = { ...props };
 
 	const isAsyncSelect = ['select', 'creatable-select', 'location-select'].includes(type)
-		&& Object.keys(props).includes('optionsListKey');
+		&& !!props?.optionsListKey;
 
 	if (isAsyncSelect) {
-		const asyncKey = props?.optionsListKey;
+		const { optionsListKey: asyncKey } = props;
 
 		const asyncFields = getAsyncFields(asyncKey) || {};
 
 		const finalParams = props?.params || asyncFields?.defaultParams;
 
-		if (Object.keys(asyncFields)?.includes('defaultParams')) { delete asyncFields?.defaultParams; }
+		if (asyncFields?.defaultParams) { delete asyncFields.defaultParams; }
 
 		newProps = {
 			...newProps,

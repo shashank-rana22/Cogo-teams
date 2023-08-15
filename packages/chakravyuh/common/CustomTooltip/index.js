@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 function CustomTooltip(props) {
 	const { bar = {}, point = {} } = props;
 	const headingText = bar?.key
-		? `${(bar.key || '').split('%')[GLOBAL_CONSTANTS.zeroth_index]} % Daviation`
+		? `${(bar.key || '').split('%')[GLOBAL_CONSTANTS.zeroth_index]} % Deviation`
 		: point?.data?.x;
 
 	const value = bar?.key ? `${bar?.value} Rates` : `${point?.data?.y}% Accuracy`;
