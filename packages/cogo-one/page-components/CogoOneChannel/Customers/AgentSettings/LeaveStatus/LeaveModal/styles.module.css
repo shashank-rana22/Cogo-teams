@@ -27,6 +27,10 @@
 				height: 100px;
 			}
 		}
+
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
 	}
 }
 
