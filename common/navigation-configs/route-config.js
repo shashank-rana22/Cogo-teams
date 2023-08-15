@@ -20,6 +20,7 @@ import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
 import employeeDashboard from './config/employee-dashboard';
+import employeeDirectory from './config/employee-directory';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
@@ -42,6 +43,7 @@ import notifications from './config/notifications';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
 import referral from './config/referral';
+import resource from './config/resources';
 import revenueDesk from './config/revenue-desk';
 import rfqDashboard from './config/rfq-dashboard';
 import riskManagement from './config/risk-management';
@@ -138,9 +140,11 @@ const routeConfig = {
 	...igmDesk,
 	...airlinePluginBooking,
 	...bookingDeskSurface,
+	...employeeDirectory,
 	...ftlFieldSreviceOps,
 	...notifications,
 	...centralisedCustomerService,
+	...resource,
 };
 
 export default routeConfig;

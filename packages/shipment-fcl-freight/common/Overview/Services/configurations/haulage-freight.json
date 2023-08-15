@@ -78,6 +78,21 @@
       "type": "date",
       "key": "departed_from_port_to_icd_at",
       "label": "Departed From Port to ICD At"
+    },
+    {
+      "type": "date",
+      "label": "Cargo Readiness Date",
+      "key": "cargo_readiness_date"
+    },
+    {
+      "type": "date",
+      "label": "Cargo Picked Date",
+      "key": "cargo_pick_up_date"
+    },
+    {
+      "type": "date",
+      "label": "Departed from Factory At",
+      "key": "departed_from_factory_at"
     }
   ],
   "commnets": { "emptyContent": "" }

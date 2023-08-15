@@ -41,6 +41,10 @@
 		.ui_table_head_cell:last-child {
 			border-radius: 0 6px 6px 0;
 		}
+
+		.ui_table_head_container {
+			height: 65px;
+		}
 	}
 
 	@media (max-width: 1010px) {

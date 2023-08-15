@@ -61,6 +61,7 @@ import {
 	asyncListShipmentPendingTasks,
 	asyncIncidentSubtypeList,
 	asyncFieldsLeadOrganization,
+	asyncListResources,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -127,7 +128,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_sub_chapters                    : asyncListSubChapters,
 	list_tribes                          : asyncListTribes,
 	list_chapters                        : asyncListChapter,
-	list_roles                           : asyncListRoles,
+	list_employee_roles                  : asyncListRoles,
 	default_types                        : asyncFieldsTicketTypes,
 	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
@@ -140,6 +141,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 	list_incident_subtype                : asyncIncidentSubtypeList,
 	list_lead_organizations              : asyncFieldsLeadOrganization,
+	resources                            : asyncListResources,
 };
 
 const SINGLE_ENTITY = 1;

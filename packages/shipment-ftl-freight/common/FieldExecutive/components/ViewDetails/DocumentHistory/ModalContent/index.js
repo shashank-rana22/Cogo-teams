@@ -1,4 +1,4 @@
-import { Button, Input, ToolTip, cl } from '@cogoport/components';
+import { Button, Input, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -78,7 +78,7 @@ function ModalContent(props) {
 							<div className={cl`${styles.grid_table} ${styles.single_row}`} key={item?.id}>
 								<div>
 									{!isEmpty(item?.documents) ? (
-										<ToolTip
+										<Tooltip
 											placement="bottom"
 											content={<ToolTipContent documents={item?.documents} />}
 										>
@@ -91,7 +91,7 @@ function ModalContent(props) {
 												{item?.docs_length > SINGLE_VALUE ? 'Files' : 'File'}
 												{' '}
 											</div>
-										</ToolTip>
+										</Tooltip>
 									) : (
 										'No Files'
 									)}

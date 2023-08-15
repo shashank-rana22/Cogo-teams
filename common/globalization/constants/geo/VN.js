@@ -30,11 +30,14 @@ export default {
 		},
 	},
 	regex: {
-		PAN              : '',
-		GST              : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
-		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL            : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
+		TAX                                : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		// eslint-disable-next-line max-len
+		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		ECN                                : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL                              : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,
+		MOBILE_NUMBER_WITHOUT_COUNTRY_CODE : '',
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
@@ -85,7 +88,8 @@ export default {
 			'd9c490f9-afcc-467e-a86d-2a02edf81959',
 			'568c5939-3721-4444-a0ff-4c0298bc948d',
 		],
-		supply_relation_manager_role_id: '568c5939-3721-4444-a0ff-4c0298bc948d',
+		supply_relation_manager_role_id : '568c5939-3721-4444-a0ff-4c0298bc948d',
+		supplier_relations_head_id      : 'c9489b96-44ac-4919-9e21-1f67277d331d',	// Vietnam
 
 		prod_process_owner         : 'ae80297f-e30d-45fb-845c-61c302523476',
 		air_prod_process_owner     : '9e6dad55-dc0c-42b4-a7d1-9908204cdca7',
@@ -111,6 +115,14 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
+			'69013c68-2d1b-4332-91fb-ada1a6471240', // business consultant
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5',
+			'5f79d531-50e0-4843-995f-71057e659e0f',
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',
+			'264a83ab-d438-48c3-8095-bb503f5b619c',
+			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
+			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -155,7 +167,6 @@ export default {
 		prod_es_sales           : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 		entity_manager_id       : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
 		service_ops1_role_ids   : [
-			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
@@ -210,14 +221,20 @@ export default {
 			'2acd7cb8-a986-45f3-8e14-391075d50daf',
 			'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		],
-		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
-		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
-		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
-		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
-		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
-		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
-		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
-		cogo_one_admin_ids    : [
+		prod_coe_finance_head        : '7b1fc916-6984-4179-aee5-c23f9871085d',
+		so_1_manager                 : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		air_so_1_manager             : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
+		cogoverse_kam                : 'f041b303-3239-42c5-a386-03e787900bcd',
+		cogoverse_admin              : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+		so_2_manager                 : ['1665784f-6e58-4299-8a33-4b7487f61188',
+			'eff02645-cb9c-44bf-8f5a-4d273b36e52d'], // Prod_SO-2 Manager
+		centralised_customer_support : [
+			'264a83ab-d438-48c3-8095-bb503f5b619c',	// Common Pool
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5', // SME
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
+			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
+		],
+		cogo_one_admin_ids: [
 			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
@@ -239,7 +256,11 @@ export default {
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
 		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
-		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
+		document_control_manager : '123951fe-78aa-4ad1-b2da-fa6191e3a876',
+		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
+		so1_revenue_desk         : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
 	},
 	options: {
 		registration_types: [
@@ -359,8 +380,8 @@ export default {
 				value : 'ecn',
 			},
 			{
-				label : 'Tax',
-				value : 'tax',
+				label : 'VAT',
+				value : 'vat',
 			},
 		],
 		invoice_status: [
@@ -443,69 +464,33 @@ export default {
 			},
 		},
 		enrichment: {
-			whatsapp_number_label                 : 'Zalo Number',
-			allowed_to_create_enrichment_requests : true,
-			tabs                                  : ['manual_enrichment'],
-			manual_enrichment                     : {
-				columns: {
-					relationship_manager_view: {
-						active: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'requested_agent',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
-					agent_view: {
-						active: [
-							'id',
-							'business_name',
-							'created_at',
-							'action',
-						],
-						responded: [
-							'id',
-							'business_name',
-							'created_at',
-							'action',
-						],
-						success: [
-							'id',
-							'business_name',
-							'created_at',
-							'status',
-							'action',
-						],
-					},
+			whatsapp_number_label            : 'Zalo Number',
+			is_allowed_for_enrichment_sheets : false,
+			hide_columns                     : {
+				relationship_manager_view: {
+					active    : ['registration_number', 'status'],
+					responded : ['registration_number', 'status'],
+					success   : ['registration_number', 'status'],
+					failed    : ['registration_number', 'action'],
 				},
-				actions: {
-					active: {
-						add    : 'Add Details',
-						failed : 'Mark as Failed',
-					},
-					responded:	{
-						edit    : 'Edit Details',
-						success : 'Mark as Completed',
-					},
-					success: {
-						view: 'View Details',
-					},
+				agent_view: {
+					active    : ['registration_number', 'requested_agent', 'status'],
+					responded : ['registration_number', 'requested_agent', 'status'],
+					success   : ['registration_number', 'requested_agent', 'status'],
+					failed    : ['registration_number', 'requested_agent', 'action'],
+				},
+			},
+			actions: {
+				active: {
+					add    : 'Add Details',
+					failed : 'Mark as Failed',
+				},
+				responded:	{
+					edit    : 'Edit Details',
+					success : 'Mark as Completed',
+				},
+				success: {
+					view: 'View Details',
 				},
 			},
 		},
@@ -525,7 +510,7 @@ export default {
 	others: {
 		registration_number: {
 			label      : 'VAT',
-			pattern    : /^[0-3]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+			pattern    : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 			max_length : 15,
 		},
 
@@ -533,20 +518,19 @@ export default {
 			financial_system_code : 'swift',
 			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
 		},
-
+		pan_number: {
+			label   : 'PAN',
+			pattern : undefined,
+		},
+		economic_zone: {
+			label: 'Non-Tariff Zone',
+		},
 		identification_number: {
 			label   : 'VAT',
 			pattern : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		},
 
-		pan_number: {
-			label   : 'PAN',
-			pattern : undefined,
-		},
-
-		economic_zone: {
-			label: 'Non-Tariff Zone',
-		},
+		ask_gst_details: false,
 
 		navigations: {
 			onboard_vendor: {
@@ -558,6 +542,13 @@ export default {
 				template_default_language   : 'vietnamese',
 				supply_sender_mobile_number : '918069195980',
 			},
+			bookings: {
+				invoicing: {
+					is_invoice_mergeable              : true,
+					disable_edit_invoice              : false,
+					stakeholder_wise_invoice_required : false,
+				},
+			},
 
 			business_finance: {
 				ar: {
@@ -566,6 +557,14 @@ export default {
 							document_key : 'destinationIrnNumber',
 							irn_key      : 'destinationDocumentValue',
 						},
+					},
+				},
+			},
+			partner: {
+				bookings: {
+					invoicing: {
+						request_cancel_invoice : true,
+						request_credit_note    : false,
 					},
 				},
 			},

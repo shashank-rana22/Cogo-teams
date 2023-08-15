@@ -1,37 +1,41 @@
+import { Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useRef } from 'react';
 import Peer from 'simple-peer';
 
 import { ICESERVER } from '../constants';
 import { updateCallDetails } from '../helpers/snapshortHelpers';
-import { callUpdate, saveCallData, saveWebrtcToken, stopStream } from '../utils/callFunctions';
+import { callUpdate } from '../utils/callUpdate';
+import { saveCallData } from '../utils/savecallData';
+import { saveWebrtcToken } from '../utils/saveWebrtcToken';
+import { stopStream } from '../utils/stopStream';
 
 import { useSetInACall } from './useSetInACall';
 
 function useVideoCallFirebase({
-	firestore,
-	setCallComing,
-	setCallDetails,
-	setWebrtcToken,
-	setToggleState,
-	callDetails,
-	setStreams,
-	peerRef,
+	firestore = {},
+	setCallComing = () => {},
+	setCallDetails = () => {},
+	setWebrtcToken = () => {},
+	setToggleState = () => {},
+	callDetails = {},
+	setStreams = () => {},
+	peerRef = {},
+	videoCallId = '',
+	updateVideoCallTimeline = () => {},
 }) {
-	const { user_data } = useSelector((state) => ({
-		user_data: state.profile.user,
+	const { user_data = {} } = useSelector((state) => ({
+		user_data: state?.profile?.user,
 	}));
 
 	const newRoomRef = useRef(null);
 
-	const { saveInACallStatus } = useSetInACall();
-
-	const { callingRoomId = '' } = callDetails || {};
+	const { saveInACallStatus = () => {} } = useSetInACall();
 
 	const { id: userId, name: userName } = user_data || {};
+	const { callingRoomId = '' } = callDetails || {};
 
-	const handleCallEnd = useCallback(() => {
-		saveInACallStatus(false);
+	const handleCallEnd = useCallback(async ({ callActivity = '', duration = 0, description = '' }) => {
 		setCallComing(false);
 
 		const localPeerRef = peerRef;
@@ -49,10 +53,7 @@ function useVideoCallFirebase({
 			callingType        : '',
 		});
 
-		setWebrtcToken({
-			userToken : {},
-			peerToken : {},
-		});
+		setWebrtcToken({});
 
 		setToggleState({
 			isMicActive         : true,
@@ -68,13 +69,22 @@ function useVideoCallFirebase({
 				peerStream : null,
 			};
 		});
-	}, [saveInACallStatus, setCallComing, peerRef, setCallDetails, setWebrtcToken, setToggleState, setStreams]);
 
-	const callingToMediaStream = useCallback(async (peerDetails) => {
+		if (videoCallId) {
+			await updateVideoCallTimeline({ callActivity, duration, description, videoCallId });
+		}
+
+		saveInACallStatus({ inACallStatus: false });
+	}, [saveInACallStatus,
+		setCallComing,
+		peerRef,
+		setCallDetails, setWebrtcToken, setToggleState, setStreams, updateVideoCallTimeline, videoCallId]);
+
+	const callingToMediaStream = useCallback(async ({ peerDetails = {}, videoCallIdFirebase = '' }) => {
 		try {
-			const myStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+			const myStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
 
-			saveInACallStatus(true);
+			saveInACallStatus({ inACallStatus: true });
 			setStreams((prev) => ({ ...prev, userStream: myStream }));
 
 			const peer = new Peer({
@@ -88,35 +98,44 @@ function useVideoCallFirebase({
 
 			const localPeerRef = peerRef;
 			localPeerRef.current = peer;
+			let callOneTimeSaveInitialToken = true;
 
 			peer.on('signal', (data) => {
-				saveCallData({
-					data: {
-						call_status : 'calling',
-						calling_by  : 'admin',
-						my_details  : {
-							user_name : userName,
-							user_id   : userId,
-							user_type : 'admin',
+				if (callOneTimeSaveInitialToken) {
+					saveCallData({
+						data: {
+							call_status : 'calling',
+							calling_by  : 'admin',
+							my_details  : {
+								user_name : userName,
+								user_id   : userId,
+								user_type : 'admin',
+							},
+							peer_details         : peerDetails,
+							peer_id              : peerDetails?.user_id,
+							webrtc_token_room_id : userId,
+							video_call_id        : videoCallIdFirebase,
 						},
-						peer_details         : peerDetails,
-						peer_id              : peerDetails?.user_id,
-						webrtc_token_room_id : userId,
-					},
-					callBackFunc: (getCallingRoomId) => {
-						saveWebrtcToken({
-							data          : { user_token: data },
-							callingRoomId : getCallingRoomId,
-							tokenId       : userId,
-							firestore,
-						});
-						setCallDetails((prev) => ({
-							...prev,
-							callingRoomId: getCallingRoomId,
-						}));
-					},
-					firestore,
-				});
+						callingRoomId : videoCallIdFirebase,
+						callBackFunc  : (getCallingRoomId) => {
+							saveWebrtcToken({
+								data          : { token: data, token_for: peerDetails?.user_id },
+								callingRoomId : getCallingRoomId,
+								tokenId       : userId,
+								firestore,
+							});
+						},
+						firestore,
+					});
+					callOneTimeSaveInitialToken = false;
+				} else {
+					saveWebrtcToken({
+						data          : { token: data, token_for: peerDetails?.user_id },
+						callingRoomId : videoCallIdFirebase,
+						tokenId       : userId,
+						firestore,
+					});
+				}
 			});
 
 			peer.on('stream', (peerStream) => {
@@ -124,33 +143,47 @@ function useVideoCallFirebase({
 			});
 
 			peer.on('error', () => {
-				handleCallEnd();
 				callUpdate({
 					data: {
 						call_status   : 'technical_error',
 						error_message : 'peer js technical error',
 					},
-					callingRoomId,
+					callingRoomId: videoCallIdFirebase,
+					firestore,
+				});
+				handleCallEnd({ callActivity: 'answered', description: 'peer js technical error' });
+			});
+
+			peer.on('close', () => {
+				handleCallEnd({
+					callActivity : 'answered',
+					description  : 'call is closed',
+				});
+				callUpdate({
+					data: {
+						call_status: 'call_end',
+					},
+					callingRoomId: videoCallIdFirebase,
 					firestore,
 				});
 			});
 		} catch (err) {
+			Toast.error('Please provide your Mic permission');
 			console.error('my user stream error', err);
 			callUpdate({
 				data: {
 					call_status   : 'technical_error',
-					error_message : 'peer video audio is not working',
+					error_message : 'peer audio is not working',
 				},
-				callingRoomId,
+				callingRoomId: videoCallIdFirebase,
 				firestore,
 			});
-			handleCallEnd();
+			handleCallEnd({ callActivity: 'missed', description: 'peer video audio is not working' });
 		}
-	}, [callingRoomId, handleCallEnd, firestore,
-		peerRef, saveInACallStatus, setCallDetails, setStreams, userId, userName]);
+	}, [saveInACallStatus, setStreams, peerRef, userName, userId, firestore, handleCallEnd]);
 
 	const handleOutgoingCall = useCallback(
-		(peerDetails = {}) => {
+		({ peerDetails = {}, videoCallIdFirebase = '' }) => {
 			if (!peerDetails?.user_id) {
 				return;
 			}
@@ -168,8 +201,9 @@ function useVideoCallFirebase({
 				peerId            : peerDetails.user_id,
 				webrtcTokenRoomId : userId,
 				callingType       : 'outgoing',
+				callingRoomId     : videoCallIdFirebase,
 			}));
-			callingToMediaStream(peerDetails);
+			callingToMediaStream({ peerDetails, videoCallIdFirebase });
 		},
 		[setCallDetails, callingToMediaStream, userName, userId],
 	);

@@ -1,0 +1,12 @@
+.custom_modal {
+	:global {
+		.ui_input_container {
+			position: fixed;
+			width: 92%;
+		}
+	}
+
+	main {
+		margin-top: 40px;
+	}
+}

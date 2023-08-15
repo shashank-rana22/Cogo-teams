@@ -1,17 +1,18 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCRedCircle, IcCYelloCircle, IcMLiveChat } from '@cogoport/icons-react';
-import { startCase, format, upperCase, isEmpty } from '@cogoport/utils';
+import { upperCase } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyState from '../../../../../commons/EmptyState';
-
+import { BlContent } from './BlContent';
 import DetentionAndDemurrage from './DetentionAndDemurrage';
 import styles from './styles.module.css';
 
-function ShipmentExtraDetails({ item = {} }) {
+function ShipmentExtraDetails({ item = {}, tabsState = {} }) {
 	const { bill_of_ladings = [], delivery_orders = [] } = item;
 
-	const docsList = isEmpty(bill_of_ladings) ? delivery_orders : bill_of_ladings;
+	const docsList = tabsState?.activeTab === 'do' ? delivery_orders : bill_of_ladings;
 
 	const IconMapping = {
 		red    : <IcCRedCircle height={12} width={12} />,
@@ -26,37 +27,6 @@ function ShipmentExtraDetails({ item = {} }) {
 		),
 	);
 
-	const blContent = (
-		<div className={styles.bl_remark_detail}>
-			<table>
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Status</th>
-						<th>Comment</th>
-						<th>Date and time</th>
-						<th>Bl/DO Number</th>
-					</tr>
-				</thead>
-				<tbody>
-					{remarks.length === 0 ? (
-						<td colSpan={5}>
-							<EmptyState customClass={styles.customized_empty_state} />
-						</td>
-					) : remarks.map((rm) => (
-						<tr>
-							<td>{rm?.name}</td>
-							<td>{startCase(rm?.status)}</td>
-							<td>{rm?.comment}</td>
-							<td>{format(rm?.created_at, 'dd MMM yyyy - hh:mm a', null, true)}</td>
-							<td>{rm?.bl_number}</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
-		</div>
-	);
-
 	return (
 		<div className={styles.shipment_extra_details}>
 
@@ -67,13 +37,14 @@ function ShipmentExtraDetails({ item = {} }) {
 					{item?.invoice_status?.is_payment_validated
 						? IconMapping.yellow
 						: IconMapping.red}
-					&nbsp;
-					Sales Invoice Status: &nbsp;
+					{' '}
+					Sales Invoice Status:
+					{' '}
 					<span className={styles.text}>
 						{item?.invoice_status?.is_invoice_validated
 							? 'System Validated'
 							: 'Validation Pending'}
-									&nbsp;
+						{' '}
 					</span>
 				</div>
 			</div>
@@ -81,26 +52,26 @@ function ShipmentExtraDetails({ item = {} }) {
 			<div className={styles.bl_details}>
 				<div>
 					<div>
-						BL Type: &nbsp;
+						BL Type:
+						{' '}
 						{upperCase(
 							item?.freight_service?.bl_category || item?.local_service?.bl_category,
 						)}
 					</div>
 					<div>
-						Expected Release Date: &nbsp;
-						{format(
-							item?.bill_of_ladings
-								?.expected_release_date,
-							'dd MMM yyyy',
-							null,
-							true,
-						)}
+						Expected Release Date:
+						{' '}
+						{formatDate({
+							date       : docsList?.expected_release_date,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						})}
 					</div>
 				</div>
 				<div>
 					<Tooltip
 						placement="top"
-						content={blContent}
+						content={<BlContent remarks={remarks} />}
 						interactive
 						className={styles.all_remarks}
 					>

@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
+	padding-right: 50px;
 }
 
 .header {
@@ -10,19 +11,25 @@
 }
 
 .container {
-	padding-top: 10px;
 	margin-top: 20px;
 	background-color: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
-}
-
-.toggle_chat {
-	display: flex;
 
 	:global {
-		.ui_toggle_container {
-			margin-right: 62px;
+		.ui_tab_container {
+			padding: 16px 0 12px;
+		}
+	}
+}
+
+.job_close_pill {
+	font-weight: 600;
+	background-color: var(--color-primary-error-red-4);
+
+	:global {
+		.ui_pill_text {
+			color: #000;
 		}
 	}
 }
