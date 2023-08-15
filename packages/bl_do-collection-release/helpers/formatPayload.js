@@ -203,12 +203,12 @@ export default function getFormattedPayload({
 		} else if (finalPayload && data?.key === 'data') {
 			finalPayload.data = fillData(data?.value, item, formValues);
 
-			if (activeTab === 'bl'
+			if ((activeTab === 'bl'
 				? isEmpty(finalPayload.data?.bl_detail?.id)
-				: isEmpty(finalPayload.data?.do_detail?.id)
+				: isEmpty(finalPayload.data?.do_detail?.id)) && finalPayload?.data !== null
 			) {
 				Toast.error(`${activeTab === 'bl' ? 'BL' : 'DO'} ID not found`);
-				finalPayload = {};
+				delete finalPayload?.data;
 			}
 
 			if (
