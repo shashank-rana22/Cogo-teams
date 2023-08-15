@@ -13,6 +13,7 @@ import styles from './styles.module.css';
 const BOTTOM_AXIS_ROTATION = 20;
 const DEFAULT_ROTATION = 0;
 const STRAIGHT_AXIS_LIMIT = 2;
+const MINIMUM_POSITIVE = 0;
 
 const KEY_MAPPINGS = {
 	'Operational Profitability' : 'Profitability',
@@ -50,6 +51,7 @@ function SingleGraphCard({
 	defaultWidth = '300',
 }) {
 	const isLastView = isViewDetailsVisible; // last view of graph cards
+	const graphKey = heading;
 
 	const graphCurrency = serviceLevelData?.[GLOBAL_CONSTANTS.zeroth_index]?.currency || '';
 	const verticalLabel = (heading === 'Operational Profitability') ? 'Percentage ( % )'
@@ -71,6 +73,19 @@ function SingleGraphCard({
 			serviceName: newServiceName,
 		};
 	});
+
+	const getColors = ({ id, value }) => {
+		if (id?.includes('estimated')) {
+			if (value > MINIMUM_POSITIVE) {
+				return '#cfeaed'; // light blue
+			}
+			return '#f8aea8'; // light red
+		}
+		if (value > MINIMUM_POSITIVE) {
+			return '#6fa5ab'; // dark blue
+		}
+		return '#f37166'; // dark red
+	};
 
 	return (
 		<div className={styles.container}>
@@ -106,15 +121,15 @@ function SingleGraphCard({
 							<MyResponsiveBar
 								data={formattedServiceLevelData}
 								keys={[
-									`estimated${KEY_MAPPINGS?.[heading]}${taxType}`,
-									`${LABEL_MAPPING[type]}${KEY_MAPPINGS?.[heading]}${taxType}`,
+									`estimated${KEY_MAPPINGS?.[graphKey]}${taxType}`,
+									`${LABEL_MAPPING[type]}${KEY_MAPPINGS?.[graphKey]}${taxType}`,
 								]}
 								groupMode="grouped"
 								legendX=""
 								legendY=""
 								width="100%"
 								height="300px"
-								colors={['#cfeaed', '#6fa5ab']}
+								colors={getColors}
 								colorBy="id"
 								indexBy="serviceName"
 								enableGridY
