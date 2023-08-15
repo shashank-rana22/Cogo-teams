@@ -5,6 +5,7 @@ import React from 'react';
 import useCancelInvoice from '../../../../../../../../../hooks/useCancelInvoice';
 
 import controls from './controls';
+import styles from './styles.module.css';
 
 function CancelEInvoice({
 	bfInvoice = {},
@@ -42,38 +43,44 @@ function CancelEInvoice({
 			className="secondary sm"
 			onOuterClick={onClose}
 		>
-			<Modal.Header>Cancel E-Invoice</Modal.Header>
+			<Modal.Header
+				title="Cancel E-Invoice"
+				className={styles.heading}
+			/>
 			<Modal.Body>
 				{controls?.map((c) => {
 					const Element = getElement(c?.type);
 					return (Element
 						? (
-							<Element
-								{...c}
-								control={control}
-								key={c?.name}
-							/>
+							<div className={styles.controls}>
+								<div className={styles.label}>
+									{' '}
+									{c?.label}
+								</div>
+								<Element
+									{...c}
+									control={control}
+									key={c?.name}
+								/>
+							</div>
 						)
 						: null);
 				})}
 			</Modal.Body>
 			<Modal.Footer>
-				<div>
-					<Button
-						className="secondary md"
-						style={{ marginRight: '10px' }}
-						onClick={onClose}
-					>
-						Cancel
-					</Button>
-				</div>
-				<div>
-					<Button className="primary md" onClick={handleSubmit(handleCancel)} disabled={!loading}>
-						{
-                            loading ? 'Submit' : 'Submiting'
-                        }
-					</Button>
-				</div>
+				<Button
+					className="secondary md"
+					style={{ marginRight: '10px' }}
+					onClick={onClose}
+				>
+					Cancel
+				</Button>
+				<Button
+					className="primary md"
+					onClick={handleSubmit(handleCancel)}
+				>
+					{loading ? 'Submit' : 'Submiting'}
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);
