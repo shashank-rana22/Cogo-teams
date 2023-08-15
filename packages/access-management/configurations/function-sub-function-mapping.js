@@ -7,6 +7,7 @@ const functionSubFunctionMapping = {
 		{ label: 'Acquisition', value: 'acquisition' },
 		{ label: 'CP Portfolio', value: 'cp_portfolio' },
 		{ label: 'Customer Operations', value: 'customer_operations' },
+		{ label: 'Lead Convertor', value: 'lead_convertor' },
 	],
 	supply: [
 		{ label: 'Shipping Line', value: 'shipping_line' },

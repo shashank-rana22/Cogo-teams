@@ -3,6 +3,7 @@ import app_contract_management from './app-manage-contract-apis';
 import app_manage_rfq from './app-manage-rfq-apis';
 import app_settings from './app-settings';
 import athena_dashboard from './athena-apis';
+import authApis from './auth-apis';
 import bl_do from './bl-do-apis';
 import bl_do_collection_release from './bl_do-collection-release-apis';
 import bn_salvage from './bn-salvage-apis';
@@ -165,6 +166,7 @@ const apis = {
 	...schedules,
 	igm_desk,
 	centralised_customer_service,
+	...authApis,
 };
 
 export default apis;
