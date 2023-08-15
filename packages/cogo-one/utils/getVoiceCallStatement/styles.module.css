@@ -1,9 +1,12 @@
 .img_styles {
-	width: 15px;
 	margin-right: 6px;
 }
 
 .flex {
 	display: flex;
 	align-items: center;
+}
+
+.video_call_icon {
+	margin-right: 4px;
 }

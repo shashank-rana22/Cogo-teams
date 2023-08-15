@@ -7,13 +7,14 @@ const formatForPayload = (
 	taskData,
 	dataToSend,
 	serviceIdMapping,
+	finalConfig,
 	primaryService = {},
 ) => {
-	const finalPayload = {};
+	const FINAL_PAYLOAD = {};
 
 	Object.keys(dataToSend || {}).forEach((key) => {
 		if (key?.includes('service')) {
-			finalPayload[key] = formatDataForService(
+			FINAL_PAYLOAD[key] = formatDataForService(
 				dataToSend[key],
 				rawValues,
 				taskData,
@@ -23,14 +24,15 @@ const formatForPayload = (
 		}
 
 		if (key === 'documents') {
-			finalPayload[key] = formatDataForDocuments(
+			FINAL_PAYLOAD[key] = formatDataForDocuments(
 				rawValues,
 				taskData,
+				finalConfig,
 			);
 		}
 
 		if (key === 'shipment') {
-			finalPayload[key] = formatDataForShipment(
+			FINAL_PAYLOAD[key] = formatDataForShipment(
 				dataToSend[key],
 				rawValues,
 				taskData,
@@ -38,11 +40,11 @@ const formatForPayload = (
 		}
 
 		if (key === 'container_detail') {
-			finalPayload[key] = rawValues;
+			FINAL_PAYLOAD[key] = rawValues;
 		}
 	});
 
-	return finalPayload;
+	return FINAL_PAYLOAD;
 };
 
 export default formatForPayload;

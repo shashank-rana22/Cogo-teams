@@ -2,12 +2,13 @@ import {
 	Checkbox, Tooltip, Radio,
 } from '@cogoport/components';
 import { MultiselectController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const nameMappings = { allowed: 'Allow' };
+const NAME_MAPPINGS = { allowed: 'Allow' };
 
 function Option({
 	option,
@@ -19,7 +20,7 @@ function Option({
 	errors = {},
 	formValues = {},
 }) {
-	const selectKey = `${permission?.value}-${option.type}`;
+	const selectKey = `${permission?.value}-${option.view_type}`;
 	const controls = allControls.reduce((acc, c) => {
 		acc[c.name] = c;
 		return acc;
@@ -31,15 +32,15 @@ function Option({
 				{...controls[selectKey]}
 				control={control}
 				disabled={
-					!(permissionValue || []).includes(option.type)
+					!(permissionValue || []).includes(option.view_type)
 					|| controls[selectKey]?.disabled
 				}
 				style={{ width: '80%' }}
-				rules={{ required: (permissionValue || []).includes(option.type) }}
+				rules={{ required: (permissionValue || []).includes(option.view_type) }}
 				valueKey="type"
 				labelKey="type_display_name"
 			/>
-			{errors?.[selectKey] && (permissionValue || []).includes(option.type) ? (
+			{errors?.[selectKey] && (permissionValue || []).includes(option.view_type) ? (
 				<p style={{ fontSize: 10, color: 'crimson', margin: 0 }}>
 					This is required
 				</p>
@@ -47,28 +48,28 @@ function Option({
 		</>
 	);
 
-	const optionsLength = (option?.options || []).length > 0;
+	const optionsLength = (option?.options || []).length > GLOBAL_CONSTANTS.zeroth_index;
 	const selectComp = optionsLength ? select : null;
 	const checkStyles = optionsLength ? styles.options : '';
 
 	return (
 		<div className={`${styles.option_container} ${checkStyles}`}>
-			{(option?.options || []).length > 0 ? (
+			{(option?.options || []).length > GLOBAL_CONSTANTS.zeroth_index ? (
 				<span className="option">
-					{nameMappings[option.type] || startCase(option.type || '')}
+					{NAME_MAPPINGS[option.view_type] || startCase(option.view_type || '')}
 				</span>
 			) : null}
 			<div className={styles.row}>
-				{option.type === 'none' || option.type === 'allowed' ? (
+				{option.view_type === 'none' || option.view_type === 'allowed' ? (
 					<Radio
-						onChange={() => handleOptionChange(option.type, option)}
-						checked={(permissionValue || []).includes(option.type)}
+						onChange={() => handleOptionChange(option.view_type, option)}
+						checked={(permissionValue || []).includes(option.view_type)}
 						disabled={controls[permission.value]?.disabled}
 					/>
 				) : (
 					<Checkbox
-						onChange={() => handleOptionChange(option.type, option)}
-						checked={(permissionValue || []).includes(option.type)}
+						onChange={() => handleOptionChange(option.view_type, option)}
+						checked={(permissionValue || []).includes(option.view_type)}
 						disabled={controls[permission.value]?.disabled}
 					/>
 				)}
@@ -96,9 +97,9 @@ function Option({
 					</Tooltip>
 				) : null}
 			</div>
-			{(option?.options || []).length === 0 ? (
+			{(option?.options || []).length === GLOBAL_CONSTANTS.zeroth_index ? (
 				<span className="option no-option">
-					{nameMappings[option.type] || startCase(option.type || '')}
+					{NAME_MAPPINGS[option.view_type] || startCase(option.view_type || '')}
 				</span>
 			) : null}
 

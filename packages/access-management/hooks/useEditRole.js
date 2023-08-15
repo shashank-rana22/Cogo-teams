@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAuthRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const controls = [
@@ -125,8 +124,8 @@ const useEditRole = ({ roleData, setShow, getRole }) => {
 		});
 	}, [setValue, roleData]);
 
-	const [{ loading, error }, trigger] = useRequest({
-		url    : '/update_auth_role',
+	const [{ loading, error }, trigger] = useAuthRequest({
+		url    : '/update_role',
 		method : 'post',
 	}, { manual: true });
 
@@ -153,7 +152,7 @@ const useEditRole = ({ roleData, setShow, getRole }) => {
 			}
 		} catch (err) {
 			Toast.error(
-				getApiErrorString(err?.data)
+				err.response?.data.error
 					|| 'Unable to Edit role Please try again!!',
 			);
 		}

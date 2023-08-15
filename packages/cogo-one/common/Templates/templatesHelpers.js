@@ -1,10 +1,13 @@
 import { Placeholder, Pill, Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import { STATUS_MAPPING } from '../../constants';
+import { formatRouteData } from '../../utils/routeDataHelpers';
 
 import styles from './styles.module.css';
+import TemplateDocument from './TemplateDocument';
 
 const PREVIEW_REPLACE_MAPPING = [
 	{ find: GLOBAL_CONSTANTS.regex_patterns.occurrences_of_paragraphs_tag, replace: '<br>' },
@@ -20,6 +23,13 @@ export function Preview({
 	previewData = '',
 	variables = [],
 	setCustomizableData = () => {},
+	tags = [],
+	fileValue = '',
+	setFileValue = () => {},
+	fileName = '',
+	shipmentData = null,
+	customizableData = {},
+	orgId = '',
 }) {
 	const formattedPreview = PREVIEW_REPLACE_MAPPING.reduce(
 		(accumulator, currentValue) => accumulator?.replaceAll(currentValue?.find, currentValue?.replace),
@@ -33,16 +43,64 @@ export function Preview({
 		}));
 	};
 
+	useEffect(
+		() => {
+			let newCustomData = {
+				origin_port      : undefined,
+				destination_port : undefined,
+				shipment_id      : undefined,
+			};
+
+			if (!isEmpty(shipmentData)) {
+				const { serial_id } = shipmentData || {};
+
+				const {
+					originDisplay = {},
+					destinationDisplay = {},
+					originMainDisplay = {},
+					destinationMainDisplay = {},
+				} = formatRouteData({ item: shipmentData || {} });
+
+				newCustomData = {
+					origin_port      : originDisplay || originMainDisplay,
+					destination_port : destinationDisplay || destinationMainDisplay,
+					shipment_id      : serial_id,
+				};
+
+				const variabledData = variables?.filter(
+					(itm) => !['origin_port', 'destination_port', 'shipment_id'].includes(itm),
+				);
+
+				variabledData.map((itm) => ({
+					...(newCustomData || {}),
+					[itm]: shipmentData?.[itm] || '',
+				}));
+			}
+
+			setCustomizableData(newCustomData);
+		},
+		[setCustomizableData, shipmentData, variables],
+	);
+
 	return (
 		<>
 			<div dangerouslySetInnerHTML={{ __html: formattedPreview }} />
 			<div className={styles.user_work_scope}>
+				{tags?.includes('document') && orgId && (
+					<TemplateDocument
+						setFileValue={setFileValue}
+						fileValue={fileValue}
+						fileName={fileName}
+					/>
+				)}
+
 				{(variables || []).map((item) => (
 					<div className={styles.scope_name} key={item}>
 						{startCase(item)}
 						<Input
 							className={styles.value_field}
 							size="xs"
+							value={customizableData?.[item]}
 							placeholder="value"
 							onChange={(val) => handleInputChange({ variable: item, value: val })}
 						/>

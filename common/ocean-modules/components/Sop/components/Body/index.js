@@ -16,6 +16,7 @@ function Body({
 	services = [],
 	loading = false,
 	primary_service = {},
+	documents = [],
 }) {
 	const { operating_procedure:{ id:procedure_id = '' } = {} } = data;
 
@@ -42,6 +43,7 @@ function Body({
 						getProcedureTrigger={getProcedureTrigger}
 						auditsTrigger={auditsTrigger}
 						primary_service={primary_service}
+						documents={documents}
 					/>
 				</Card>
 

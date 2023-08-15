@@ -1,0 +1,25 @@
+.container {
+	padding: 16px 12px 14px;
+
+	:global {
+		.ui_accordion_content {
+			background-color: var(--color-secondary-5) !important;
+			border-top: 1px solid var(--color-secondary-greyscale-5) !important;
+			border-radius: initial;
+		}
+	}
+}
+
+.loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: calc(100vh - 350px);
+	padding-bottom: 4px;
+	margin: 20px;
+
+	& > div {
+		width: 50px;
+		height: 50px;
+	}
+}

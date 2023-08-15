@@ -8,22 +8,23 @@ import { SECTION_THREE_MAPPINGSS, SECTION_ONE_CHILD_1_MAPPINGS } from './templat
 
 function Read({
 	defaultValues = {},
+	watermark = null,
 }) {
-	function SectionOneChild1(values) {
+	function SectionOneChild({ values = {} }) {
 		return (
 			SECTION_ONE_CHILD_1_MAPPINGS.map(({ label, key, children }) => (children ? (
 				<div className={styles[`section_one_child_1-${key}`]} key={key}>
 					{children.map(({ childrenLabel, childrenKey, className }) => (
 						<div className={styles[className]} key={childrenKey}>
 							<p>{childrenLabel}</p>
-							<p>{values?.[childrenKey] || ''}</p>
+							<p className={styles.value_text}>{(values?.[childrenKey] || '')}</p>
 						</div>
 					))}
 				</div>
 			) : (
 				<div key={key} className={styles[`section_one_child_1-${key}`]}>
 					<p>{label}</p>
-					<p>{values?.[key] || ''}</p>
+					<p className={styles.value_text}>{(values?.[key] || '')}</p>
 				</div>
 			)))
 		);
@@ -35,7 +36,7 @@ function Read({
 				{SECTION_THREE_MAPPINGSS.map(({ label, key }) => (
 					<div className={styles['section_three-element']} key={key}>
 						<span>{label}</span>
-						<p>{values?.[key] || ''}</p>
+						<p className={styles.value_text}>{(values?.[key] || '')}</p>
 					</div>
 				))}
 			</div>
@@ -52,11 +53,11 @@ function Read({
 
 	return (
 		<main className={styles.main}>
-			<Watermark text="draft" />
+			<Watermark text={watermark || 'draft'} />
 			<section className={styles.section}>
 				<div className={styles.section_one}>
 					<div className={styles.section_one_child_1}>
-						{SectionOneChild1(defaultValues)}
+						<SectionOneChild values={defaultValues} />
 					</div>
 
 					<div className={styles.section_one_child_2}>
@@ -140,11 +141,11 @@ function Read({
 
 						<tbody>
 							<tr>
-								<td>{container_number}</td>
-								<td>{marks_and_number}</td>
-								<td>{package_description}</td>
-								<td>{gross_weight}</td>
-								<td>{measurement}</td>
+								<td className={styles.value_text}>{container_number}</td>
+								<td className={styles.value_text}>{marks_and_number}</td>
+								<td className={styles.value_text}>{package_description}</td>
+								<td className={styles.value_text}>{gross_weight}</td>
+								<td className={styles.value_text}>{measurement}</td>
 							</tr>
 						</tbody>
 					</table>
