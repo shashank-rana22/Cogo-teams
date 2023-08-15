@@ -21,10 +21,6 @@
 	margin: 0 8px;
 	font-weight: 700;
 	white-space: nowrap;
-
-	> span {
-		margin-left: 4px;
-	}
 }
 
 .name {
@@ -86,16 +82,21 @@
 }
 
 .close_icon {
-	min-width: fit-content !important;
-	height: fit-content !important;
-	padding: 4px !important;
 	margin-right: 6px;
-	font-size: 16px !important;
-	color: #ee3425 !important;
 	border-radius: 50%;
 
 	&:hover {
 		background: white;
 		box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+	}
+
+	:global {
+		.ui_button_container {
+			min-width: fit-content;
+			height: fit-content;
+			padding: 4px;
+			font-size: var(--font-size-xl);
+			color: var(--color-primary-error-red-2);
+		}
 	}
 }

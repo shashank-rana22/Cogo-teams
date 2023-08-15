@@ -18,7 +18,10 @@ function Frontside({
 	const { bl_number } = initialValues || {};
 
 	return isReadonly ? (
-		<Read defaultValues={initialValues} />
+		<Read
+			defaultValues={initialValues}
+			watermark={watermark}
+		/>
 	) : (
 		<Write
 			isReadonly={isReadonly}

@@ -29,7 +29,7 @@ function ListBody({
 	listData = {},
 	setFilters = () => {},
 }) {
-	const { page } = filters;
+	const { page } = filters || {};
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
@@ -48,7 +48,7 @@ function ListBody({
 			return <EmptyState isMobile />;
 		}
 
-		return channelList?.map((item) => (
+		return (channelList || []).map((item) => (
 			<Button
 				key={item?.id}
 				className={cl` ${styles.card} ${id === item?.id ? styles.colored : ''}`}
