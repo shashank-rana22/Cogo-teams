@@ -208,7 +208,7 @@ export default function getFormattedPayload({
 				: isEmpty(finalPayload.data?.do_detail?.id)) && !isEmpty(finalPayload.data)
 			) {
 				Toast.error(`${activeTab === 'bl' ? 'BL' : 'DO'} ID not found`);
-				delete finalPayload?.data;
+				finalPayload.data = undefined;
 			}
 
 			if (
