@@ -7,7 +7,13 @@ const TOAST_MESSAGE = {
 	reject : 'Offer Letter rejected successfully',
 };
 
-const useUpdateOfferLetter = ({ document_url, id, getEmployeeDetails, setInformationPage }) => {
+const useUpdateOfferLetter = ({
+	document_url = '',
+	id = '',
+	getEmployeeDetails = () => {},
+	setInformationPage = () => {},
+	setShowAcceptModal = () => {},
+}) => {
 	const [{ loading = false }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/update_employee_offer_letter',
@@ -27,6 +33,7 @@ const useUpdateOfferLetter = ({ document_url, id, getEmployeeDetails, setInforma
 			getEmployeeDetails();
 			Toast.success(TOAST_MESSAGE[status]);
 			setInformationPage('');
+			setShowAcceptModal(false);
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 			getEmployeeDetails();

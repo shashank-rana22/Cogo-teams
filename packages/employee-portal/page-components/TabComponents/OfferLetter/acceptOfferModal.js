@@ -4,23 +4,21 @@ import React from 'react';
 import styles from './styles.module.css';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
-function AcceptOfferModal({ setShowAcceptModal, showAcceptModal, id }) {
-	const { updateData } = useUpdateOfferLetter({ id });
+function AcceptOfferModal({
+	setShowAcceptModal = () => {},
+	showAcceptModal = false,
+	id = '',
+	getEmployeeDetails = () => {},
+}) {
+	const { updateData } = useUpdateOfferLetter({ id, setShowAcceptModal, getEmployeeDetails });
+
+	if (!showAcceptModal) return null;
+
 	return (
-		<Modal size="md" show={showAcceptModal} onClose={setShowAcceptModal(false)}>
+		<Modal size="md" show={showAcceptModal} onClose={() => setShowAcceptModal(false)}>
 			<Modal.Header title="Are you sure you want to Accept this Offer Letter?" />
 			<Modal.Body>
 				<div className={styles.btn_container}>
-					<Button
-						type="button"
-						style={{ marginLeft: '8px' }}
-						onClick={() => {
-							updateData({ status: 'accept' });
-							setShowAcceptModal(false);
-						}}
-					>
-						Yes
-					</Button>
 					<Button
 						type="button"
 						themeType="secondary"
@@ -28,6 +26,14 @@ function AcceptOfferModal({ setShowAcceptModal, showAcceptModal, id }) {
 						className={styles.btn_container}
 					>
 						No
+					</Button>
+
+					<Button
+						type="button"
+						style={{ marginLeft: '8px' }}
+						onClick={() => updateData({ status: 'accept' })}
+					>
+						Yes
 					</Button>
 				</div>
 			</Modal.Body>

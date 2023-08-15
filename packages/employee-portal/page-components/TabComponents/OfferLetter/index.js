@@ -57,13 +57,13 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployee
 					>
 						Accept
 					</Button>
-					{showAcceptModal && (
-						<AcceptOfferModal
-							AcceptOfferModal={AcceptOfferModal}
-							setShowAcceptModal={setShowAcceptModal}
-							id={id}
-						/>
-					)}
+
+					<AcceptOfferModal
+						showAcceptModal={showAcceptModal}
+						setShowAcceptModal={setShowAcceptModal}
+						id={id}
+						getEmployeeDetails={getEmployeeDetails}
+					/>
 
 				</div>
 			) : null}
