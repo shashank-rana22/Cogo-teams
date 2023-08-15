@@ -31,7 +31,7 @@ const generateRedirectionUrl = ({ request, locale, isOldLocalePresent }) => {
 	}
 	url.pathname = pathname;
 
-	const targetUrl = `${url.origin}/${locale}${
+	const targetUrl = `${url.origin}/v2/${locale}${
 		pathname === '/' ? '' : pathname
 	}${url.search}`;
 
