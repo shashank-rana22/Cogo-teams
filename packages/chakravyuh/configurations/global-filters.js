@@ -3,7 +3,7 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 export const LOCATIONS_PROPS = {
 	asyncKey    : 'list_locations',
 	initialCall : false,
-	placeholder : 'Port / Country',
+	placeholder : 'Port/Country',
 	prefix      : <IcMSearchlight style={{
 		width  : ' 24px',
 		height : '16px',

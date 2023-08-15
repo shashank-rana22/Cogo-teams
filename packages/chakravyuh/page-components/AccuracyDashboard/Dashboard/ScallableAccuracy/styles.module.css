@@ -11,12 +11,12 @@
 	.chart_container {
 		position: relative;
 		width: 100%;
-		height: calc(100% - 75px);
+		height: calc(100% - 74px);
 		transition: all 0.1s ease;
 		transition-delay: 0.2s;
 
 		&.blur {
-			filter: blur(5px);
+			filter: blur(4px);
 		}
 	}
 }

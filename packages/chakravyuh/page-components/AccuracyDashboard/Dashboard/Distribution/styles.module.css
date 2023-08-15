@@ -69,12 +69,12 @@
 .legend_text_row {
 	display: flex;
 	flex-wrap: wrap;
-	max-width: calc(100% - 15px);
+	max-width: calc(100% - 16px);
 }
 
 .legend_symbol {
-	width: 15px;
-	height: 15px;
+	width: 16px;
+	height: 16px;
 	margin-top: 2px;
 	background-color: #221f20;
 	border-radius: 50%;

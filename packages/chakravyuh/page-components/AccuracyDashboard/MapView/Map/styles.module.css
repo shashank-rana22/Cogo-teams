@@ -16,7 +16,7 @@
 	box-shadow: 0 0 8px rgb(44 62 80 / 30%);
 
 	.loader {
-		padding: 3px;
+		padding: 4px;
 		scale: 1.2;
 	}
 }

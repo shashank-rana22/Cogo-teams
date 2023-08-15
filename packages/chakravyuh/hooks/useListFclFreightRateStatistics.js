@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import getFormattedPayload from '../utils/getFormattedPayload';
 
@@ -13,39 +13,32 @@ const KEY_TO_SEND = {
 
 const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 	const [page, setPage] = useState(START_PAGE);
-	const [data, setData] = useState(null);
 
 	const [{ data:rateData, loading:rateLoading }, trigger] = useRequest({
 		url    : 'list_fcl_freight_rate_statistics',
 		method : 'GET',
 	}, { manual: true });
 
-	const [{ daat:rateRequestData, loading:rateRequestLoading }, rateRequestTrigger] = useRequest({
+	const [{ data:rateRequestData, loading:rateRequestLoading }, rateRequestTrigger] = useRequest({
 		url    : 'list_fcl_freight_rate_request_statistics',
 		method : 'GET',
 	}, { manual: true });
 
-	const getRatesData = useCallback(
-		async (params) => {
-			try {
-				await trigger({ params });
-			} catch (err) {
-				// console.error(err);
-			}
-		},
-		[trigger],
-	);
+	const getRatesData = async (params) => {
+		try {
+			await trigger({ params });
+		} catch (err) {
+			// console.error(err);
+		}
+	};
 
-	const getRateRequestsData = useCallback(
-		async (params) => {
-			try {
-				await rateRequestTrigger({ params });
-			} catch (err) {
-				// console.error(err);
-			}
-		},
-		[rateRequestTrigger],
-	);
+	const getRateRequestsData = async (params) => {
+		try {
+			await rateRequestTrigger({ params });
+		} catch (err) {
+			// console.error(err);
+		}
+	};
 
 	useEffect(() => {
 		const params = getFormattedPayload(filters);
@@ -55,15 +48,10 @@ const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 		} else {
 			getRatesData(merge({ ...params, page }, extraFilters));
 		}
-	}, [filters, page, activeParent, getRateRequestsData, getRatesData]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(filters), page, activeParent]);
 
-	useEffect(() => {
-		if (activeParent === 'missing_rates') {
-			setData(rateRequestData);
-		} else {
-			setData(rateData);
-		}
-	}, [activeParent, rateData, rateRequestData]);
+	const data = activeParent === 'missing_rates' ? rateData : rateRequestData;
 
 	return { data, loading: rateLoading || rateRequestLoading, page, setPage };
 };

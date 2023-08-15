@@ -28,18 +28,6 @@ const COMMON_START_COLUMNS = [
 			);
 		},
 	},
-	// {
-	// 	Header   : 'CLUSTER',
-	// 	accessor : ({ cluster }) => {
-	// 		const { mf = '', name = '' } = cluster;
-	// 		return (
-	// 			<div className={styles.row_default_cell}>
-	// 				<div>{name}</div>
-	// 				<div className={styles.row_cell_subtitle}>{mf}</div>
-	// 			</div>
-	// 		);
-	// 	},
-	// },
 ];
 
 const SEA_COLUMNS = [
@@ -76,7 +64,7 @@ const SEA_COLUMNS = [
 
 const AIR_COLUMNS = [
 	{
-		Header   : 'SHIPPING LINE',
+		Header   : 'AIR LINE',
 		accessor : ({ airline }) => {
 			const { name = '' } = airline;
 			return (

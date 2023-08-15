@@ -4,7 +4,7 @@
 
 .main_card {
 	position: absolute;
-	top: 303px !important;
+	top: 302px !important;
 	left: 320px !important;
 	display: flex;
 	flex-direction: column;
@@ -42,7 +42,7 @@
 	transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 
 	.source_card:nth-child(1) {
-		top: 295px;
+		top: 294px;
 	}
 
 	.source_card:nth-child(2) {
@@ -67,7 +67,7 @@
 .tree_branch {
 	position: absolute;
 	top: 80px;
-	left: 565px;
+	left: 564px;
 	display: flex;
 	transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 
@@ -76,7 +76,7 @@
 	}
 
 	&.branch_2 {
-		top: 355px;
+		top: 356px;
 	}
 
 	&.branch_3 {
@@ -92,7 +92,7 @@
 .tree_icon {
 	position: absolute;
 	top: -60px;
-	left: 155px;
+	left: 156px;
 	overflow: hidden;
 	transform: scale(1.1, 1.3);
 }

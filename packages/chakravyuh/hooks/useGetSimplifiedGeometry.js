@@ -6,7 +6,8 @@ const REGION_ZOOM = 20;
 
 const useGetSimplifiedGeometry = ({
 	country_id = null,
-	continent_id = null, type = null,
+	continent_id = null,
+	type = null,
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'get_simplified_geometry',
