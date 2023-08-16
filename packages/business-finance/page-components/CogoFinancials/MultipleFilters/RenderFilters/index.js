@@ -28,15 +28,26 @@ const CHANNEL_OPTIONS = [
 ];
 
 function RenderFilters({
-	filter = {}, setFilter = () => {}, entity = '',
+	setFilter = () => {}, entity = '', setVisible = () => {},
 }) {
+	const [internalFilter, setInternalFilter] = useState({});
 	const [activeFilter, setActiveFilter] = useState('channel');
 
 	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity].currency;
 
 	const handleReset = () => {
 		setFilter({});
+		setInternalFilter({});
 		setActiveFilter('channel');
+		setVisible(false);
+	};
+
+	const handleApply = () => {
+		setFilter((prev) => ({
+			...prev,
+			...internalFilter,
+		}));
+		setVisible(false);
 	};
 
 	return (
@@ -47,9 +58,17 @@ function RenderFilters({
 					<Button
 						themeType="secondary"
 						onClick={handleReset}
-						disabled={isEmpty(filter)}
+						disabled={isEmpty(internalFilter)}
+						style={{ marginRight: '8px' }}
 					>
 						Reset
+					</Button>
+
+					<Button
+						onClick={handleApply}
+						disabled={isEmpty(internalFilter)}
+					>
+						Apply
 
 					</Button>
 
@@ -69,11 +88,11 @@ function RenderFilters({
 						<TabPanel name="channel" title="Channel">
 							<RadioGroup
 								options={CHANNEL_OPTIONS}
-								onChange={(val) => setFilter((prev) => ({
+								onChange={(val) => setInternalFilter((prev) => ({
 									...prev,
 									[activeFilter]: val,
 								}))}
-								value={filter[activeFilter]}
+								value={internalFilter[activeFilter]}
 								className={styles.radio_group_section}
 								style={{ flexDirection: 'column' }}
 							/>
@@ -85,14 +104,14 @@ function RenderFilters({
 									<div
 										key={item}
 										role="presentation"
-										onClick={() => setFilter((prev) => ({
+										onClick={() => setInternalFilter((prev) => ({
 											...prev,
 											serviceCategory: item,
 										}))}
 									>
 										<Pill
 											size="sm"
-											color={filter.serviceCategory === item ? '#cfeaed'
+											color={internalFilter.serviceCategory === item ? '#cfeaed'
 												: 'white'}
 										>
 											{item}
@@ -104,11 +123,11 @@ function RenderFilters({
 							</div>
 							<RadioGroup
 								options={SHIPMENT_TYPES_OPTIONS}
-								onChange={(val) => setFilter((prev) => ({
+								onChange={(val) => setInternalFilter((prev) => ({
 									...prev,
 									[activeFilter]: val,
 								}))}
-								value={filter[activeFilter]}
+								value={internalFilter[activeFilter]}
 								className={styles.radio_group_section}
 								style={{ margin: 0 }}
 							/>
@@ -116,11 +135,11 @@ function RenderFilters({
 						<TabPanel name="segment" title="Segment">
 							<RadioGroup
 								options={SEGMENT_OPTIONS}
-								onChange={(val) => setFilter((prev) => ({
+								onChange={(val) => setInternalFilter((prev) => ({
 									...prev,
 									[activeFilter]: val,
 								}))}
-								value={filter[activeFilter]}
+								value={internalFilter[activeFilter]}
 								className={styles.radio_group_section}
 								style={{ flexDirection: 'column' }}
 							/>
