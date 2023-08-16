@@ -35,7 +35,8 @@ function AdditionalServicesForm({
 	const WATCH_MAP = {};
 
 	service.controls.forEach((singleControl) => {
-		const condition = { ...(singleControl.condition || {}), services: undefined };
+		const condition = { ...(singleControl.condition || {}) };
+		delete condition.services;
 
 		Object.keys(condition).forEach((conditionRule) => {
 			if (!WATCH_MAP[conditionRule]) {
