@@ -4,7 +4,7 @@ export const checkHangupStatus = ({ setCallState, openFeedbackform, timeoutId = 
 		const { receiverUserDetails, isSelfIntiated = false } = prev || {};
 		const { user_id = '', organization_id = '' } = receiverUserDetails || {};
 
-		if (!isSelfIntiated || (!user_id && !organization_id)) {
+		if (!isSelfIntiated || !user_id || !organization_id) {
 			unmountVoiceCall();
 			return {};
 		}

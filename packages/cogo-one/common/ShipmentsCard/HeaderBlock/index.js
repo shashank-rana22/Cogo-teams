@@ -59,10 +59,10 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 	const { business_name = '' } = importer_exporter || {};
 
 	const SHIPMENT_FORMATTED_DATA = {
-		category     : shipment_type,
-		sub_category : trade_type,
-		shipment_id  : serial_id,
-		user_id      : userId,
+		service     : shipment_type,
+		shipment_id : serial_id,
+		user_id     : userId,
+		trade_type,
 		importer_exporter_id,
 	};
 

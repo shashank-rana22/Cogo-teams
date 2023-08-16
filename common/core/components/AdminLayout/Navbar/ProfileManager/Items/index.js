@@ -1,6 +1,6 @@
-import { Button, Badge } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRotateDown, IcMNotifications } from '@cogoport/icons-react';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useEffect, useState } from 'react';
 
@@ -31,7 +31,6 @@ function SingleNav({
 	name = '',
 	setShowSubNav = () => {},
 	showSubNav = false,
-	notificationCount = ZERO_COUNT,
 	picture = '',
 }) {
 	return (
@@ -40,18 +39,7 @@ function SingleNav({
 			role="presentation"
 			onClick={() => setShowSubNav(!showSubNav)}
 		>
-			{notificationCount > ZERO_COUNT ? (
-				<Badge
-					placement="right"
-					color="red"
-					size="md"
-					text={<IcMNotifications />}
-				>
-					<ProfileAvatar picture={picture} />
-				</Badge>
-			) : (
-				<ProfileAvatar picture={picture} />
-			)}
+			<ProfileAvatar picture={picture} />
 
 			<span className={styles.profile_name}>{name}</span>
 			<IcMArrowRotateDown
@@ -75,21 +63,23 @@ function Items({
 	checkIfSessionExpiring,
 	notificationCount = ZERO_COUNT,
 }) {
-	const { user_data, userSessionMappings } = useSelector(({ profile }) => ({
+	const { user_data, userSessionMappings, query } = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
 		userSessionMappings : profile?.user_session_mappings || [],
+		query               : general?.query || {},
 	}));
-	const [showSubNav, setShowSubNav] = useState(false);
 
-	useEffect(() => {
-		setShowSubNav(false);
-		setOpenPopover(false);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [resetSubnavs]);
+	const { partner_id = '' } = query || {};
+
+	const [showSubNav, setShowSubNav] = useState(false);
 
 	const redirect = () => {
 		// eslint-disable-next-line no-undef
 		window.location.href = '/v2/login?source=add_account';
+	};
+
+	const notificationRedirect = () => {
+		window.location.href = `/v2/${partner_id}/notifications`;
 	};
 
 	const { picture = '', name = '' } = user_data;
@@ -111,6 +101,12 @@ function Items({
 	const lessThan30Seconds = Number(timeLeft) >= Number(expire_time / TOTAL_TIME - THIRTY_SECONDS);
 
 	const loadingState = checkIfSessionExpiring || lessThan30Seconds || loading;
+
+	useEffect(() => {
+		setShowSubNav(false);
+		setOpenPopover(false);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [resetSubnavs]);
 
 	return (
 		<>
@@ -175,14 +171,6 @@ function Items({
 								>
 									{singleOption.icon()}
 									<span>{singleOption.title}</span>
-									{singleOption?.name === 'notifications' && notificationCount > ZERO_COUNT && (
-										<Badge
-											placement="right"
-											color="red"
-											size="md"
-											text={notificationCount}
-										/>
-									)}
 								</div>
 							)}
 							{openPopover && singleOption?.name === 'switch_account' && (
@@ -203,6 +191,26 @@ function Items({
 					);
 				})}
 			</div>
+
+			{(notificationCount > ZERO_COUNT && showSubNav) && (
+				<div className={styles.button_container}>
+					<Button
+						size="md"
+						style={{ width: '100%', marginTop: 10 }}
+						themeType="primary"
+						onClick={notificationRedirect}
+						disabled={loadingState}
+					>
+						You have
+						{' '}
+						{notificationCount}
+						{' '}
+						new
+						{' '}
+						{notificationCount > ONE ? 'notifications' : 'notification'}
+					</Button>
+				</div>
+			)}
 
 			{showSubNav && (
 				<div className={styles.button_container}>

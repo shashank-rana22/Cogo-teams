@@ -16,7 +16,7 @@ const getParams = ({ timeline, agentId }) => ({
 	filters       : {
 		is_email_quotation_sent : true,
 		is_converted_to_booking : true,
-		sales_agent_id          : agentId,
+		sales_agent_id          : agentId || undefined,
 		created_at_greater_than : getDateString(DATE_FILTER_MAPPING[timeline](new Date())),
 	},
 });

@@ -41,18 +41,19 @@ function dataFormatter(list) {
 }
 
 export function mountFlashChats({
-	setLoadingState,
-	setFlashMessagesData,
-	omniChannelCollection,
-	flashMessagesSnapShotListener,
-	viewType,
-	setCarouselState,
-	updateLoadingState,
+	setLoadingState = () => {},
+	setFlashMessagesData = () => {},
+	omniChannelCollection = {},
+	flashMessagesSnapShotListener = {},
+	viewType = '',
+	setCarouselState = () => {},
+	updateLoadingState = () => {},
+	workPrefernceLoading = false,
 }) {
 	const snapshotRef = flashMessagesSnapShotListener;
 	snapshotCleaner({ ref: flashMessagesSnapShotListener });
 
-	if (!VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.claim_chats) {
+	if (!VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.claim_chats || workPrefernceLoading) {
 		return;
 	}
 
