@@ -22,7 +22,7 @@ function ReAllocation({ activeTab = '' }) {
 		setFilters = () => {},
 		refetch = () => {},
 	} = useListKamDeskSurfaceShipment({ activeTab });
-	const { loading: reallocateLoading, bulkReallocate = () => {} } = useBulkReallocate({ list: data?.list });
+	const { loading: reallocateLoading = false, bulkReallocate = () => {} } = useBulkReallocate({ list: data?.list });
 
 	const getStakeHolderParams = useCallback(() => {
 		const stakeholder = stakeholderData?.stakeholder_type || '';

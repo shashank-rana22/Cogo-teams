@@ -36,7 +36,7 @@ function ShipmentList({
 						onClick={() => setShowModal(true)}
 						disabled={isEmpty(selectedShipments)}
 					>
-						Update Shipment
+						Reallocate Stakeholder
 
 					</Button>
 				</div>
