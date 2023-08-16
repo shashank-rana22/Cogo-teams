@@ -69,7 +69,7 @@ function ShipmentsCard({
 			</div>
 
 			<div className={styles.footer_block}>
-				{last_completed_task?.task && (
+				{last_completed_task?.task ? (
 					<div className={styles.footer_right_block}>
 						<div className={styles.current_task_color}>
 							Prev Task
@@ -78,7 +78,7 @@ function ShipmentsCard({
 							{startCase(last_completed_task?.task)}
 						</div>
 					</div>
-				)}
+				) : null}
 				{task_status === 'approve_booking_note' ? (
 					<div className={styles.footer_left_block}>
 						<Button
