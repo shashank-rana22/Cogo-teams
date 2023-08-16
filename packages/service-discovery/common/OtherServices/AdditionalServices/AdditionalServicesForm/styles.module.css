@@ -21,10 +21,10 @@
 }
 
 .control_style {
-	margin: 16px;
+	margin: 16px 16px 16px 0;
 }
 
-.primaryButtton {
+.primary_buttton {
 	margin-top: 20px;
 	margin-left: 20px;
 }

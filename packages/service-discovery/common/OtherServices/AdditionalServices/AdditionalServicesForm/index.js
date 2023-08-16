@@ -120,7 +120,7 @@ function AdditionalServicesForm({
 					onClick={handleSubmit(onSubmit)}
 					size="md"
 					themeType="accent"
-					className={styles.primaryButtton}
+					className={styles.primary_buttton}
 					disabled={loading}
 					loading={loading}
 				>

@@ -110,11 +110,9 @@ function SelectedRateCard({
 		} else handleBook();
 	};
 
-	if (loading && isEmpty(data)) {
-		return (
-			<LoadingState />
-		);
-	}
+	if (loading) return <LoadingState />;
+
+	if (isEmpty(data)) return null;
 
 	return (
 		<div className={styles.parent}>

@@ -24,6 +24,7 @@ const WHITE_BACKGROUND_MAPPING = [
 	'/[partner_id]/learning/course/preview',
 	'/[partner_id]/checkout/[checkout_id]',
 	'/[partner_id]/book/[spot_search_id]',
+	'/[partner_id]/service-discovery',
 ];
 
 function AdminLayout({
