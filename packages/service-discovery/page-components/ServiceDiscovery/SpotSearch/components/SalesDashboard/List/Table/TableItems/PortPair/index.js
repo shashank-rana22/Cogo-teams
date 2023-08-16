@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 
-import SearchType from './SearchType';
+import SearchType from '../SearchType';
 
 const LOCATION_KEY_MAPPING = {
 	origin      : 'pickup',
@@ -82,7 +82,7 @@ const getLocationName = (data, pair_type, type, key) => {
 	return location;
 };
 
-const renderPortPair = (item, field) => {
+function PortPair({ item = {}, field = {} }) {
 	const { pair_type = 'fcl_freight', key = '-', props = {} } = field || {};
 	const { setLocation = () => {} } = props;
 	const service_type = item[pair_type];
@@ -157,5 +157,6 @@ const renderPortPair = (item, field) => {
 			)}
 		</div>
 	);
-};
-export default renderPortPair;
+}
+
+export default PortPair;

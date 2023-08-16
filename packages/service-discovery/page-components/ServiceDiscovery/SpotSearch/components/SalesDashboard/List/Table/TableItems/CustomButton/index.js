@@ -2,36 +2,36 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-const renderButton = (itemData, field, router) => {
+function CustomButton({ item = {}, field = {}, router = {} }) {
 	const { query = {} } = router;
 
-	const isNewS2C = itemData?.tags?.[GLOBAL_CONSTANTS.zeroth_index]?.includes('new_admin');
+	const isNewS2C = item?.tags?.[GLOBAL_CONSTANTS.zeroth_index]?.includes('new_admin');
 
-	const searchUrl = `/book/${itemData?.latest_spot_search_id || itemData?.id}${isNewS2C
-		? '' : `/${itemData?.importer_exporter_id}`}`;
-	const shipmentsUrl = `/shipments/${itemData?.shipment_id}`;
-	const checkoutUrl = `/checkout/${itemData?.checkout_id}`;
+	const searchUrl = `/book/${item?.latest_spot_search_id || item?.id}${isNewS2C
+		? '' : `/${item?.importer_exporter_id}`}`;
+	const shipmentsUrl = `/shipments/${item?.shipment_id}`;
+	const checkoutUrl = `/checkout/${item?.checkout_id}`;
 
 	const URL_MAPPING = {
 		most_searched   : searchUrl,
 		most_booked     : searchUrl,
 		spot_search     : searchUrl,
-		quotations      : itemData?.shipment_id ? shipmentsUrl : checkoutUrl,
-		saved_for_later : itemData?.shipment_id ? shipmentsUrl : checkoutUrl,
+		quotations      : item?.shipment_id ? shipmentsUrl : checkoutUrl,
+		saved_for_later : item?.shipment_id ? shipmentsUrl : checkoutUrl,
 	};
 
 	const BUTTON_LABEL_MAPPING = {
 		most_searched   : field?.btnLabel,
 		most_booked     : field?.btnLabel,
 		spot_search     : field?.btnLabel,
-		quotations      : itemData?.shipment_id ? 'See Booking' : 'View Quote',
-		saved_for_later : itemData?.shipment_id ? 'See Booking' : 'View Quote',
+		quotations      : item?.shipment_id ? 'See Booking' : 'View Quote',
+		saved_for_later : item?.shipment_id ? 'See Booking' : 'View Quote',
 	};
 
 	const onClick = (relativeUrl) => {
 		if (field.inDifferentWindow) {
 			const url = `/${query.partner_id}${relativeUrl}`;
-			const redirectToNewS2c = isNewS2C && !itemData?.shipment_id;
+			const redirectToNewS2c = isNewS2C && !item?.shipment_id;
 			const finalUrl = redirectToNewS2c ? `/v2${url}` : url;
 
 			return window.open(finalUrl, '_blank');
@@ -55,8 +55,8 @@ const renderButton = (itemData, field, router) => {
 			{field.showPrice ? (
 				<span style={{ fontSize: 12, fontWeight: 500 }}>
 					{formatAmount({
-						amount   : itemData?.total_price || GLOBAL_CONSTANTS.zeroth_index,
-						currency : itemData?.total_price_currency,
+						amount   : item?.total_price || GLOBAL_CONSTANTS.zeroth_index,
+						currency : item?.total_price_currency,
 						options  : {
 							style                 : 'currency',
 							currencyDisplay       : 'symbol',
@@ -67,6 +67,6 @@ const renderButton = (itemData, field, router) => {
 			) : null}
 		</div>
 	);
-};
+}
 
-export default renderButton;
+export default CustomButton;

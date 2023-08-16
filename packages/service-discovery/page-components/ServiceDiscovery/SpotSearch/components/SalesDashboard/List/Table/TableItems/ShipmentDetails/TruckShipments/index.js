@@ -9,7 +9,7 @@ const SERVICE_TYPE_MAPPING = {
 	ltl_freight : 'ltl_freight_services',
 };
 
-function RenderTruckShipments({
+function TruckShipments({
 	itemData = {},
 	commodityKey = '',
 	shipment_type = '',
@@ -98,4 +98,4 @@ function RenderTruckShipments({
 		</Tooltip>
 	);
 }
-export default RenderTruckShipments;
+export default TruckShipments;

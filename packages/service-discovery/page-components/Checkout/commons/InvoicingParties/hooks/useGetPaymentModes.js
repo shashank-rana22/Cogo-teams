@@ -1,9 +1,9 @@
-/* eslint-disable max-lines-per-function */
 import { Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
+
+import getPaymentModes from '../utils/getPaymentModes';
 
 let finalPaymentTerms = {};
 
@@ -31,8 +31,6 @@ const CREDIT_PAYMENT_TERMS_SHORT_FORM = {
 	pre_approved_rolling_credit : 'Pre Approved Rolling Deferred Payment',
 };
 
-const DEFAULT_DOCUMENT_CATEGORY = 'mbl';
-
 const getPaymentModeLabel = ({ mode }) => {
 	if (mode === 'cash') {
 		return startCase(mode);
@@ -52,7 +50,7 @@ const getOptionsArray = (obj) => {
 
 const getCreditPaymentTermsLabel = ({ payment_term }) => startCase(CREDIT_PAYMENT_TERMS_SHORT_FORM[payment_term]);
 
-const getCreditLabel = ({ credit_data = {}, paymentTerm = '' }) => {
+function CreditLabel({ credit_data = {}, paymentTerm = '' }) {
 	const { available_credit_currency, available_credit } = credit_data || {};
 
 	return (
@@ -84,15 +82,15 @@ const getCreditLabel = ({ credit_data = {}, paymentTerm = '' }) => {
 			</span>
 		</Tooltip>
 	);
-};
+}
 
-const getPaymentTermsLabel = ({ paymentTerm, detail }) => {
+function PaymentTermsLabel({ paymentTerm = '', detail = {} }) {
 	const DOMESTIC_MAPPING = {
 		prepaid : 'Pay at Origin',
 		collect : 'Pay at Destination',
 	};
 	const CROSS_BORDER_MAPPING = {
-		prepaid : ' Pay at origin by shipper',
+		prepaid : 'Pay at origin by shipper',
 		collect : 'Pay at destination by consignee',
 	};
 
@@ -114,7 +112,7 @@ const getPaymentTermsLabel = ({ paymentTerm, detail }) => {
 			</span>
 		</Tooltip>
 	);
-};
+}
 
 const useGetPaymentModes = ({
 	invoicingParties,
@@ -223,8 +221,8 @@ const useGetPaymentModes = ({
 			(payment_terms || []).forEach((paymentTerm) => {
 				const newObj = {
 					label: Object.keys(PAYMENT_MODE_SHORT_FORM).includes(paymentTerm)
-						? getCreditLabel({ credit_data: credit_details, paymentTerm })
-						: getPaymentTermsLabel({ paymentTerm, detail }),
+						? <CreditLabel credit_data={credit_details} paymentTerm={paymentTerm} />
+						: <PaymentTermsLabel paymentTerm={paymentTerm} detail={detail} />,
 					value: paymentTerm,
 				};
 
@@ -333,138 +331,21 @@ const useGetPaymentModes = ({
 		};
 	}, {});
 
-	const PAYMENT_MODES = invoicingParties.reduce((acc, { id = '', organization_trade_party_id = '' }) => {
-		const {
-			paymentMode = 'cash',
-			paymentTerms = '',
-			paymentMethods = '',
-		} = editInvoiceDetails.paymentModes || {};
-
-		const { creditDetails = {}, options = [] } = optionsObj[organization_trade_party_id] || {};
-
-		return {
-			...acc,
-			[id]: [
-				{
-					label    : 'Mode of Payment',
-					options,
-					value    : paymentMode,
-					style    : { flexBasis: '16%', paddingRight: '20px' },
-					name     : 'paymentMode',
-					onChange : (i) => {
-						setEditInvoiceDetails((pv = {}) => ({
-							...pv,
-							paymentModes: {
-								...(pv.paymentModes || {}),
-								...creditDetails,
-								paymentMode  : i,
-								paymentTerms : finalPaymentTerms?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
-							},
-						}));
-					},
-				},
-				{
-					label    : 'Terms of Payment',
-					options  : finalPaymentTerms[paymentMode] || [],
-					value    : paymentTerms,
-					name     : 'paymentTerms',
-					style    : { flexBasis: '16%', paddingRight: '20px' },
-					onChange : (i) => {
-						setEditInvoiceDetails((pv = {}) => ({
-							...pv,
-							paymentModes: {
-								...(pv.paymentModes || {}),
-								...creditDetails,
-								paymentTerms     : i,
-								paymentMethods   : finalPaymentMethods?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
-								documentCategory : payLaterStatus?.paylater_eligibility
-								&& !isEmpty(documentCategoryPreference?.[i])
-									? documentCategoryPreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value
-								|| DEFAULT_DOCUMENT_CATEGORY
-									: undefined,
-							},
-						}));
-					},
-				},
-				{
-					label    : 'Methods of payment',
-					options  : finalPaymentMethods[paymentTerms] || [],
-					value    : paymentMethods,
-					name     : 'paymentMethods',
-					style    : { flexBasis: '16%', paddingRight: '20px' },
-					onChange : (i) => {
-						setEditInvoiceDetails((pv = {}) => ({
-							...pv,
-							paymentModes: {
-								...(pv.paymentModes || {}),
-								...creditDetails,
-								paymentMethods: i,
-								documentCategory:
-								documentCategoryPreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
-							},
-							documentCategory: documentCategoryPreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
-						}));
-					},
-				},
-				{
-					label    : 'Document Category',
-					options  : documentCategoryPreference[paymentMethods] || [],
-					value    : documentCategory,
-					name     : 'documentCategory',
-					style    : { flexBasis: '16%', paddingRight: '20px' },
-					onChange : (i) => {
-						setEditInvoiceDetails((pv = {}) => ({
-							...pv,
-							paymentModes: {
-								...(pv.paymentModes || {}),
-								documentType:
-										documentTypePreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
-							},
-							documentCategory : i,
-							documentType     : documentTypePreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
-						}));
-					},
-				},
-				{
-					label    : 'Document Type',
-					options  : documentTypePreference[documentCategory] || [],
-					value    : documentType,
-					name     : 'documentType',
-					style    : { flexBasis: '16%', paddingRight: '20px' },
-					onChange : (i) => {
-						setEditInvoiceDetails((pv = {}) => ({
-							...pv,
-							paymentModes: {
-								...(pv.paymentModes || {}),
-								documentDeliveryMode:
-										documentDeliveryPreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
-							},
-							documentType: i,
-							documentDeliveryMode:
-									documentDeliveryPreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
-						}));
-					},
-				},
-				{
-					label    : 'Document Delivery Preference',
-					options  : documentDeliveryPreference[documentType] || [],
-					value    : documentDeliveryMode,
-					name     : 'documentDeliveryMode',
-					style    : { flexBasis: '20%' },
-					span     : 4,
-					onChange : (i) => {
-						setEditInvoiceDetails((pv = {}) => ({
-							...pv,
-							paymentModes: {
-								...(pv.paymentModes || {}),
-							},
-							documentDeliveryMode: i,
-						}));
-					},
-				},
-			],
-		};
-	}, {});
+	const PAYMENT_MODES = getPaymentModes({
+		editInvoiceDetails,
+		invoicingParties,
+		optionsObj,
+		setEditInvoiceDetails,
+		finalPaymentTerms,
+		finalPaymentMethods,
+		documentCategoryPreference,
+		payLaterStatus,
+		documentCategory,
+		documentTypePreference,
+		documentType,
+		documentDeliveryPreference,
+		documentDeliveryMode,
+	});
 
 	return {
 		loading,

@@ -1,8 +1,7 @@
 import { Checkbox, Popover, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import { IcMShare } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import InfoBannerContent from '../../../../../../common/InfoBannerContent';
 import ShareToUsers from '../../../../common/ShareToUsers';
@@ -35,6 +34,60 @@ function ShareRate({ showShareModal, rateCardData, detail, setShowShareModal }) 
 	return null;
 }
 
+function RenderCheckbox({
+	isSelectedCard = false,
+	popoverComponentData = {},
+	totalBanners = 1,
+	setInfoBanner = () => {},
+	index = 0,
+	card_id = '',
+	setComparisonRates = () => {},
+	selectedCardIDs = [],
+	rateCardData = {},
+	showPopover = false,
+}) {
+	const handleCheckbox = () => {
+		if (!selectedCardIDs.includes(card_id)) {
+			setComparisonRates((pv) => ({
+				...pv,
+				[card_id]: rateCardData,
+			}));
+		} else {
+			setComparisonRates((pv) => {
+				const temp = { ...pv };
+				delete temp[card_id];
+				return temp;
+			});
+		}
+	};
+
+	if (isSelectedCard) return null;
+
+	return (
+		<Popover
+			placement="bottom"
+			caret
+			render={(
+				<InfoBannerContent
+					popoverComponentData={popoverComponentData}
+					totalBanners={totalBanners}
+					setInfoBanner={setInfoBanner}
+				/>
+			)}
+			visible={showPopover && !index}
+		>
+			<Checkbox
+				checked={selectedCardIDs.includes(card_id)}
+				onChange={handleCheckbox}
+				disabled={
+					selectedCardIDs.length >= MAX_COMPARABLE_RATE_CARD_INDEX
+					&& !selectedCardIDs.includes(card_id)
+				}
+			/>
+		</Popover>
+	);
+}
+
 function RateCardTop({
 	rateCardData = {},
 	detail = {},
@@ -53,21 +106,6 @@ function RateCardTop({
 
 	const selectedCardIDs = Object.keys(comparisonRates);
 	const selectedCardValues = Object.values(comparisonRates);
-
-	const handleCheckbox = () => {
-		if (!selectedCardIDs.includes(card_id)) {
-			setComparisonRates((pv) => ({
-				...pv,
-				[card_id]: rateCardData,
-			}));
-		} else {
-			setComparisonRates((pv) => {
-				const temp = { ...pv };
-				delete temp[card_id];
-				return temp;
-			});
-		}
-	};
 
 	useEffect(() => {
 		const selectedCogoAssuredRate = selectedCardValues.find(
@@ -88,42 +126,6 @@ function RateCardTop({
 
 	const popoverComponentData = buttonProps.comparision_button || {};
 
-	const renderCheckbox = () => {
-		if (isSelectedCard) return null;
-
-		return (
-			<Popover
-				placement="bottom"
-				caret
-				render={(
-					<InfoBannerContent
-						popoverComponentData={popoverComponentData}
-						totalBanners={totalBanners}
-						setInfoBanner={setInfoBanner}
-					/>
-				)}
-				visible={showPopover && !index}
-			>
-				<Checkbox
-					checked={selectedCardIDs.includes(card_id)}
-					onChange={() => {
-						handleCheckbox();
-					}}
-					disabled={
-					selectedCardIDs.length >= MAX_COMPARABLE_RATE_CARD_INDEX
-					&& !selectedCardIDs.includes(card_id)
-				}
-				/>
-			</Popover>
-		);
-	};
-
-	const renderLikeDislike = () => <LikeDislike rateCardData={rateCardData} detail={detail} />;
-
-	// const handleShareIconClick = () => {
-	// 	setShowShareModal(!showShareModal);
-	// };
-
 	const imageUrl = isCogoAssured ? GLOBAL_CONSTANTS.image_url.cogo_assured_banner : shipping_line?.logo_url;
 
 	return (
@@ -135,7 +137,18 @@ function RateCardTop({
 			)}
 
 			<div className={cl`${styles.logo_container} ${styles[source]}`}>
-				{renderCheckbox()}
+				<RenderCheckbox
+					isSelectedCard={isSelectedCard}
+					popoverComponentData={popoverComponentData}
+					totalBanners={totalBanners}
+					setInfoBanner={setInfoBanner}
+					index={index}
+					card_id={card_id}
+					setComparisonRates={setComparisonRates}
+					selectedCardIDs={selectedCardIDs}
+					rateCardData={rateCardData}
+					showPopover={showPopover}
+				/>
 
 				{imageUrl ? (
 					<img
@@ -147,14 +160,7 @@ function RateCardTop({
 			</div>
 
 			<div style={{ display: 'flex', marginRight: 20, alignItems: 'center' }}>
-				{renderLikeDislike()}
-
-				{/* <IcMShare
-					className={styles.share_icon}
-					width="20px"
-					height="16px"
-					onClick={handleShareIconClick}
-				/> */}
+				<LikeDislike rateCardData={rateCardData} detail={detail} />
 			</div>
 
 			<ShareRate

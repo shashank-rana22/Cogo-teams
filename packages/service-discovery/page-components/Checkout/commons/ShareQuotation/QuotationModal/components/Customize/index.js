@@ -1,5 +1,4 @@
 import EmailComponent from './components/EmailComponent';
-import MessageComponent from './components/MessageComponent';
 import styles from './styles.module.css';
 
 function Customize({
@@ -15,7 +14,10 @@ function Customize({
 	emailErrors = {},
 	handleNext = () => {},
 }) {
-	const { email, message } = widths;
+	const {
+		email,
+		// message,
+	} = widths;
 
 	return (
 		<div className={styles.container}>
@@ -35,11 +37,11 @@ function Customize({
 				</div>
 			) : null}
 
-			{selectedModes.some((item) => ['sms', 'whatsapp'].includes(item)) ? (
+			{/* {selectedModes.some((item) => ['sms', 'whatsapp'].includes(item)) ? (
 				<div className={styles.message_component} style={{ width: message }}>
 					<MessageComponent />
 				</div>
-			) : null}
+			) : null} */}
 		</div>
 	);
 }

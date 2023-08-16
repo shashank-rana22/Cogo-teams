@@ -90,62 +90,66 @@ const handleServicesNames = (item) => {
 		: `${formattedTradeType} ${formattedService}`;
 };
 
+function IndividualPriceBreakup({ service = {}, service_type = '', restServiceDetail = {} }) {
+	const {
+		line_items = [],
+	} = service;
+
+	const containerDetail = getDetails({ primary_service: service_type, item: restServiceDetail });
+
+	return (
+		<>
+			<div className={styles.service_div}>
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<span className={styles.service}>{handleServicesNames(service)}</span>
+
+					{service?.service_type === 'cargo_insurance' ? null : (
+						containerDetail || []).map((item) => (
+							<Pill
+								key={item}
+								size="md"
+								style={{ border: '1px solid #24C7D9', background: '#ffffff' }}
+							>
+								{item}
+							</Pill>
+					))}
+
+				</div>
+				{isEmpty(line_items) ? (
+					<span className={styles.service}>
+						No Rates
+					</span>
+				) : null}
+
+			</div>
+			{!isEmpty(line_items) ? (
+				<div>
+					<Table
+						className={styles.table_container}
+						columns={getPriceBreakUpColumn}
+						data={line_items}
+					/>
+				</div>
+			) : null}
+
+		</>
+	);
+}
+
 function PriceBreakup({ rateCardData = {}, detail = {} }) {
 	const { service_rates, total_price_discounted = 0, total_price_currency = '' } = rateCardData;
 	const { service_details, service_type } = detail;
 
-	const getIndividualPriceBreakup = ({ service, restServiceDetail }) => {
-		const {
-			line_items = [],
-		} = service;
-
-		const containerDetail = getDetails({ primary_service: service_type, item: restServiceDetail });
-
-		return (
-			<>
-				<div className={styles.service_div}>
-					<div style={{ display: 'flex', alignItems: 'center' }}>
-						<span className={styles.service}>{handleServicesNames(service)}</span>
-
-						{service?.service_type === 'cargo_insurance' ? null : (
-							containerDetail || []).map((item) => (
-								<Pill
-									key={item}
-									size="md"
-									style={{ border: '1px solid #24C7D9', background: '#ffffff' }}
-								>
-									{item}
-								</Pill>
-						))}
-
-					</div>
-					{isEmpty(line_items) ? (
-						<span className={styles.service}>
-							No Rates
-						</span>
-					) : null}
-
-				</div>
-				{!isEmpty(line_items) ? (
-					<div>
-						<Table
-							className={styles.table_container}
-							columns={getPriceBreakUpColumn}
-							data={line_items}
-						/>
-					</div>
-				) : null}
-
-			</>
-		);
-	};
-
 	return (
 		<div className={styles.container}>
-			{Object.entries(service_rates).map(([key, value]) => getIndividualPriceBreakup({
-				service           : value,
-				restServiceDetail : service_details[key],
-			}))}
+			{Object.entries(service_rates).map(([key, value]) => (
+				<IndividualPriceBreakup
+					key={key}
+					service={value}
+					service_type={service_type}
+					restServiceDetail={service_details[key]}
+				/>
+			))}
 
 			<div className={styles.total_price}>
 				Total:

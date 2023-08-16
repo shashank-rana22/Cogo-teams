@@ -36,17 +36,8 @@ const getFinalLineItems = (lineItems) => {
 	return { finalLineItems, COMPARISON_KEY };
 };
 
-function Table({
-	staticKeys = {},
-	dynamicKeys = {},
-	staticLineItems = {},
-	dynamicLineitems = {},
-	LOGO_MAPPING = {},
-	mode = '',
-}) {
-	const itemsKeys = Object.keys({ ...staticLineItems, ...dynamicLineitems });
-
-	const renderTableHeader = () => (
+function TableHeader({ itemsKeys = [], LOGO_MAPPING = {} }) {
+	return (
 		<div className={styles.table_header}>
 			<div className={styles.header_column} />
 
@@ -65,8 +56,10 @@ function Table({
 			})}
 		</div>
 	);
+}
 
-	const renderTableBody = (keys, values) => Object.entries(keys).map(([key, value], index) => {
+function TableBody({ keys = {}, values = {}, mode = '' }) {
+	return Object.entries(keys).map(([key, value], index) => {
 		const rowClass = index % EVEN_NUMBER_CONDITION === EVEN_CONDITION_REMAINDER ? styles.even : styles.odd;
 		const { serviceObj = {} } = value;
 
@@ -132,14 +125,25 @@ function Table({
 			</div>
 		);
 	});
+}
+
+function Table({
+	staticKeys = {},
+	dynamicKeys = {},
+	staticLineItems = {},
+	dynamicLineitems = {},
+	LOGO_MAPPING = {},
+	mode = '',
+}) {
+	const itemsKeys = Object.keys({ ...staticLineItems, ...dynamicLineitems });
 
 	return (
 		<div className={styles.table}>
-			{renderTableHeader()}
+			<TableHeader itemsKeys={itemsKeys} LOGO_MAPPING={LOGO_MAPPING} />
 
 			<div className={styles.table_body}>
-				{renderTableBody(dynamicKeys, dynamicLineitems)}
-				{renderTableBody(staticKeys, staticLineItems)}
+				<TableBody keys={dynamicKeys} values={dynamicLineitems} mode={mode} />
+				<TableBody keys={staticKeys} values={staticLineItems} mode={mode} />
 			</div>
 		</div>
 	);
