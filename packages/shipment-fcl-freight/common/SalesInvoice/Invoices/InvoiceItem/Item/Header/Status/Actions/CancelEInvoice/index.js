@@ -32,7 +32,7 @@ function CancelEInvoice({
 
 	const handleCancel = (values) => {
 		submit({
-			values,
+			cancelReason         : values?.cancelReason,
 			proformaNumber       : bfInvoice?.proformaNumber,
 			closeModal           : onClose,
 			invoiceCombinationId : invoice?.id,

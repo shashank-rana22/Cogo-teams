@@ -28,8 +28,8 @@ const useCancelInvoice = () => {
 		: undefined;
 
 	const submit = async ({
-		values, proformaNumber, closeModal,
-		invoiceId, invoiceCombinationId, refetch, documentUrls,
+		cancelReason = '', proformaNumber = '', closeModal = () => {},
+		invoiceId = '', invoiceCombinationId = '', refetch = () => {}, documentUrls = '',
 	}) => {
 		try {
 			await trigger({
@@ -38,12 +38,12 @@ const useCancelInvoice = () => {
 					incidentSubType : 'CANCEL_INVOICE',
 					data            : {
 						revokeInvoiceRequest: {
-							invoiceNumber : proformaNumber,
-							documentUrls,
-							cancelReason  : values?.cancelReason,
-							invoiceCombinationId,
-							invoiceId,
-							revokedBy     : user_id,
+							invoiceNumber        : proformaNumber || undefined,
+							documentUrls         : documentUrls || undefined,
+							cancelReason         : cancelReason || undefined,
+							invoiceCombinationId : invoiceCombinationId || undefined,
+							invoiceId            : invoiceId || undefined,
+							revokedBy            : user_id,
 						},
 					},
 					source    : 'BOOKINGS',
