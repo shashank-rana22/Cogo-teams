@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import { getEventTitle } from '../../../utils/getEventTitle';
 
 import EmailClicked from './EmailClicked';
+import KycEvent from './KycEvent';
 import LoginFailed from './LoginFailed';
 import Shipments from './Shipments';
 import SignUpEvents from './SignUpEvents';
@@ -29,6 +30,7 @@ const COMPONENT_MAPPING = {
 	default       : Default,
 	spot_search   : Shipments,
 	lead_user     : SignUpEvents,
+	organization  : KycEvent,
 };
 
 const IMAGE_URL_MAPPING = {
@@ -36,9 +38,10 @@ const IMAGE_URL_MAPPING = {
 	shipment      : GLOBAL_CONSTANTS.image_url.abandon_shipmemts,
 	user          : GLOBAL_CONSTANTS.image_url.login_failed,
 	communication : GLOBAL_CONSTANTS.image_url.email_clicked,
-	default       : GLOBAL_CONSTANTS.image_url.login_failed,
+	default       : GLOBAL_CONSTANTS.image_url.default_event,
 	spot_search   : GLOBAL_CONSTANTS.image_url.abandon_shipmemts,
 	lead_user     : GLOBAL_CONSTANTS.image_url.sign_up_failed,
+	organization  : GLOBAL_CONSTANTS.image_url.kyc_event,
 };
 
 function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
@@ -48,6 +51,7 @@ function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
 		source = '',
 		data = {},
 		scope = '',
+		event_name = '',
 	} = eachMessage;
 
 	const ActiveModalComp = COMPONENT_MAPPING[source] || COMPONENT_MAPPING.default;
@@ -70,6 +74,7 @@ function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
 					formattedData={formattedData}
 					data={data}
 					scope={scope}
+					eventName={event_name}
 				/>
 			)}
 

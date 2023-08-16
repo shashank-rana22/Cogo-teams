@@ -9,7 +9,6 @@ import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
@@ -26,7 +25,6 @@ import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
 import PortPairOrgFilters from './PortPairOrgFilters';
 import ProfileDetails from './ProfileDetails';
-import PunchInOut from './PunchInOut';
 import styles from './styles.module.css';
 
 function CogoOne() {
@@ -37,8 +35,9 @@ function CogoOne() {
 		},
 	} = useRouter();
 
-	const { userId, token, userEmailAddress } = useSelector(({ profile, general }) => ({
+	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile, general }) => ({
 		userId           : profile?.user?.id,
+		userName         : profile?.user?.name,
 		token            : general.firestoreToken,
 		userEmailAddress : profile?.user?.email,
 	}));
@@ -72,7 +71,7 @@ function CogoOne() {
 		agentId           : userId,
 	});
 
-	const { viewType, loading: workPrefernceLoading = false } = useAgentWorkPrefernce();
+	const { viewType, loading: workPrefernceLoading = false, userMails = [] } = useAgentWorkPrefernce();
 
 	const {
 		fetchWorkStatus = () => {},
@@ -80,7 +79,7 @@ function CogoOne() {
 		preferenceLoading = false,
 	} = useGetAgentPreference();
 
-	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline();
+	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
@@ -98,10 +97,13 @@ function CogoOne() {
 		activeMailAddress,
 		setActiveMailAddress,
 		viewType,
+		userMails,
 		activeMail    : activeTab?.data,
 		setActiveMail : (val) => {
 			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
+		userId,
+		userName,
 	};
 
 	const commonProps = {
@@ -111,7 +113,9 @@ function CogoOne() {
 		setAutoAssignChats,
 	};
 
-	const { hasNoFireBaseRoom = false } = activeTab || {};
+	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
+
+	const { user_id = '', lead_user_id = '' } = tabData || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
 	const orgId = activeTab?.tab === 'message'
@@ -133,6 +137,12 @@ function CogoOne() {
 			<HeaderBar
 				firestore={firestore}
 				viewType={viewType}
+				fetchWorkStatus={fetchWorkStatus}
+				agentStatus={agentWorkStatus}
+				data={data}
+				agentTimeline={agentTimeline}
+				preferenceLoading={preferenceLoading}
+				timelineLoading={timelineLoading}
 			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
@@ -168,7 +178,11 @@ function CogoOne() {
 				{isEmpty(activeTab?.data)
 					? (
 						<div className={styles.empty_page}>
-							<EmptyChatPage activeTab={activeTab} />
+							<EmptyChatPage
+								activeTab={activeTab}
+								viewType={viewType}
+								setActiveTab={setActiveTab}
+							/>
 						</div>
 					) : (
 						<>
@@ -192,7 +206,7 @@ function CogoOne() {
 
 							{activeTab?.tab !== 'mail' && (
 								<div className={cl`${styles.user_profile_layout} 
-								${hasNoFireBaseRoom ? styles.disable_user_profile : ''}`}
+								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}`}
 								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
@@ -209,8 +223,10 @@ function CogoOne() {
 										setActiveTab={setActiveTab}
 										formattedMessageData={formattedMessageData}
 										orgId={orgId}
+										mailProps={mailProps}
 									/>
-									{hasNoFireBaseRoom && <div className={styles.overlay_div} />}
+									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
+									&& <div className={styles.overlay_div} />}
 								</div>
 							)}
 						</>
@@ -229,18 +245,6 @@ function CogoOne() {
 				setActiveTab={setActiveTab}
 				orgId={orgId}
 			/>
-
-			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out && (
-				<PunchInOut
-					fetchworkPrefernce={fetchWorkStatus}
-					agentStatus={agentWorkStatus}
-					data={data}
-					agentTimeline={agentTimeline}
-					preferenceLoading={preferenceLoading}
-					timelineLoading={timelineLoading}
-
-				/>
-			)}
 		</>
 	);
 }

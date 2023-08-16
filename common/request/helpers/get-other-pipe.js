@@ -1,6 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { routeConfig } from '@cogoport/navigation-configs';
 
 import getNavData from './get-nav-data';
+
+const FIRST_INDEX = 1;
+const SECOND_INDEX = 2;
 
 const getOtherApiPipe = (url, authorizationparameters, getStoreState) => {
 	try {
@@ -9,21 +13,21 @@ const getOtherApiPipe = (url, authorizationparameters, getStoreState) => {
 
 		const fallback_navigation = routeConfig?.[general?.pathname]?.navigation || '';
 		const authParams = authorizationparameters?.split(':');
-		const navigation = authParams?.[0] || fallback_navigation;
-		const globalDefaultScope = authParams?.[1];
-		const globalDefaultView = authParams?.[2];
+		const navigation = authParams?.[GLOBAL_CONSTANTS.zeroth_index] || fallback_navigation;
+		const globalDefaultScope = authParams?.[FIRST_INDEX];
+		const globalDefaultView = authParams?.[SECOND_INDEX];
 
 		const navigationData = getNavData(navigation);
 
 		const { main_apis } = navigationData || {};
-		const actualApi = url?.split('/')?.[1] || url?.split('/')?.[0];
+		const actualApi = url?.split('/')?.[FIRST_INDEX] || url?.split('/')?.[GLOBAL_CONSTANTS.zeroth_index];
 		const userNavigationPermissions = profile?.permissions_navigations?.[navigation];
 		if (!(main_apis || []).includes(actualApi)) {
 			const apiData = userNavigationPermissions?.[actualApi];
 			let defaultScope = null;
 			let defaultView = null;
 			const scopeMatchingGlobalApi = (apiData || []).find(
-				(scope) => scope?.type === globalDefaultScope
+				(scope) => scope?.view_type === globalDefaultScope
 					&& scope?.through_criteria?.includes(globalDefaultView),
 			);
 			if (scopeMatchingGlobalApi) {
@@ -31,9 +35,9 @@ const getOtherApiPipe = (url, authorizationparameters, getStoreState) => {
 				defaultView = globalDefaultView;
 			} else {
 				(apiData || []).forEach((scope) => {
-					if (scope?.is_default && scope.type !== 'none') {
-						defaultScope = scope?.type;
-						defaultView = scope?.through_criteria?.[0] || null;
+					if (scope?.is_default && scope.view_type !== 'none') {
+						defaultScope = scope?.view_type;
+						defaultView = scope?.through_criteria?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 					}
 				});
 			}

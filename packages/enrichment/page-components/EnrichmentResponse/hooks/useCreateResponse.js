@@ -4,16 +4,18 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
-import getMutatedControls from '../utils/get-mutated-address-controls';
+import FEEDBACK_RESPONSE_API_MAPPING from '../configurations/post-feedback-response-api-mapping';
+import getMutatedControls from '../utils/get-mutated-controls';
 import getPayload from '../utils/get-payload';
 import getResponseControls from '../utils/get-response-controls';
 
 const useCreateResponse = ({
-	setShowForm = () => {},
+	setDetailsForm = () => {},
 	refetchResponses = () => {},
 	activeTab = '',
+	detailsForm = {},
 }) => {
 	const router = useRouter();
 
@@ -23,71 +25,72 @@ const useCreateResponse = ({
 		control,
 		formState: { errors },
 		handleSubmit,
-		getValues,
 		setValue,
-		resetField,
-		reset,
 	} = useForm();
 
 	const { query = {} } = router;
 
+	const actionType = detailsForm?.type;
+
 	const [{ loading }, trigger] = useAllocationRequest({
 
-		url     : '/feedback_response',
+		url     : FEEDBACK_RESPONSE_API_MAPPING[actionType]?.api,
 		method  : 'POST',
-		authkey : 'post_allocation_feedback_response',
+		authkey : FEEDBACK_RESPONSE_API_MAPPING[actionType]?.authkey,
 
 	}, { manual: true });
 
-	const controls = getResponseControls({ activeTab, responseData });
+	const controls = getResponseControls({ activeTab, responseData, detailsForm });
 
-	const { country_id } = responseData || {};
-
-	const mutatedControls = getMutatedControls({ controls, setResponseData, activeTab });
-
-	const onClose = () => {
-		reset();
-		setShowForm(false);
-
-		['mobile_number', 'alternate_mobile_number', 'whatsapp_number'].map((field) => setValue(field, {
-			country_code : undefined,
-			number       : '',
-		}));
-	};
-
-	const onSubmit = async () => {
-		const values = getValues();
-
-		const payload = getPayload({ values, activeTab });
-
-		try {
-			await trigger({
-				data: {
-					...payload,
-					source              : 'manual',
-					feedback_request_id : query.id,
-
-				},
-			});
-
-			Toast.success(`${startCase(activeTab)} Added Successfully`);
-
-			onClose();
-
-			refetchResponses();
-		} catch (err) {
-			Toast.error(getApiErrorString(err?.response?.data)
-			|| `Failed to add new ${startCase(activeTab)}, please try again...`);
-		}
-	};
-
-	const resetMultipleFields = useCallback((fields = []) => {
-		fields?.map((field) => resetField(field));
-	}, [resetField]);
+	const mutatedControls = getMutatedControls({
+		controls,
+		setResponseData,
+		activeTab,
+		detailsForm,
+		setValue,
+	});
 
 	useEffect(() => {
-		resetMultipleFields(['state', 'pincode', 'city']);
-	}, [country_id, resetMultipleFields]);
+		setValue('work_scopes', detailsForm?.initialData?.work_scopes);
+	}, [detailsForm?.initialData?.work_scopes, setValue]);
+
+	const onSubmit = async (values = {}) => {
+		const payload = getPayload({ values, activeTab, responseData });
+
+		const isPayloadEmpty = Object.keys(payload).every(
+			(key) => key === 'response_type' || payload[key] === undefined,
+		);
+
+		if (!isPayloadEmpty) {
+			try {
+				await trigger({
+					data: {
+						...payload,
+						...(actionType === 'edit' && {
+							id            : detailsForm?.initialData?.id,
+							response_type : undefined,
+						}),
+						...(actionType === 'create' && {
+							source              : 'manual',
+							feedback_request_id : query.id,
+						}),
+
+					},
+				});
+
+				Toast.success(`${startCase(activeTab)} Added Successfully`);
+
+				setDetailsForm({});
+
+				refetchResponses();
+			} catch (err) {
+				Toast.error(getApiErrorString(err?.response?.data)
+				|| `Failed to add new ${startCase(activeTab)}, please try again...`);
+			}
+		} else {
+			Toast.error('At least one field should be present');
+		}
+	};
 
 	return {
 		loading,
@@ -96,7 +99,6 @@ const useCreateResponse = ({
 		control,
 		handleSubmit,
 		onSubmit,
-		onClose,
 	};
 };
 

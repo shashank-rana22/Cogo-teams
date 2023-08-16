@@ -7,10 +7,13 @@ import { FieldType, FunctionObjects, ConfigType } from '../Interfaces/index';
 import getValue from './getValue';
 import styles from './styles.module.css';
 
+interface ItemTypes {
+	objectId?: string;
+}
 export interface Props {
 	fields: FieldType[];
 	itemStyles?: React.CSSProperties;
-	singleitem?: number | object;
+	singleitem?: ItemTypes;
 	functions?: FunctionObjects;
 	config: ConfigType;
 	isMobile?: boolean;
@@ -18,6 +21,7 @@ export interface Props {
 	subActiveTab?: string;
 	width?: string;
 	rowStyle?:string;
+	viewId?:null
 }
 
 function CardColumn({
@@ -31,13 +35,20 @@ function CardColumn({
 	subActiveTab,
 	width,
 	rowStyle,
+	viewId,
 }: Props) {
 	const { clickable } = config;
 	const tableWidth = { minWidth: width } || {};
+	let className = styles.row;
+	if (rowStyle === 'border') {
+		className = styles.row_style;
+	} else if (viewId === singleitem?.objectId) {
+		className = styles.accordian_style;
+	}
 	return (
 		<section style={{ ...itemStyles, position: 'relative', ...tableWidth }}>
 			<div
-				className={`${rowStyle === 'border' ? styles.row_style : styles.row} 
+				className={`${className} 
 				${clickable ? styles.clickable : ''} ${
 					isMobile ? styles.is_mobile : ''
 				}`}

@@ -3,10 +3,12 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
 function invoiceDetailsRejectCheckboxList(
-	billNumber,
-	billDate,
-	status,
-	placeOfSupply,
+	{
+		billNumber,
+		billDate,
+		status,
+		placeOfSupply,
+	},
 ) {
 	return [
 		{ name: 'Invoice Number', value: 'Invoice Number', label: `Invoice Number - ${billNumber}` },

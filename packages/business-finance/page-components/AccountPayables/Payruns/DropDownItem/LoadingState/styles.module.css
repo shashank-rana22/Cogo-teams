@@ -1,0 +1,21 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px;
+	background-color: #f3fafa;
+	border-bottom: 1px solid #fef3e9;
+	border-radius: 4px;
+}
+
+.main {
+	margin-bottom: 8px;
+}
+
+.right {
+	margin: 0 20px 8px 0;
+}
+
+.left {
+	margin-left: 12px;
+}

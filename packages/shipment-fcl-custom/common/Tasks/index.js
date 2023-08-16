@@ -1,6 +1,8 @@
-import { Button, Loader } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
+import { isEmpty } from '@cogoport/utils';
 
 import Card from './Card';
 import Header from './Header';
@@ -29,8 +31,7 @@ function List() {
 	if (loading) {
 		return (
 			<div className={styles.loading_container}>
-				Loading Tasks....
-				<Loader themeType="primary" className={styles.loader_icon} />
+				<ThreeDotLoader message="Loading Tasks" fontSize={16} size={30} />
 			</div>
 		);
 	}
@@ -46,7 +47,7 @@ function List() {
 				setShowMyTasks={setShowMyTasks}
 			/>
 
-			{tasksList?.length === 0 ? <EmptyState width={500} height={300} />
+			{isEmpty(tasksList) ? <EmptyState width={500} height={300} />
 				: (
 					<>
 

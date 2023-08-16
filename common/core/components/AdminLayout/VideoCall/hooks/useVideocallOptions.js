@@ -1,21 +1,30 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useCallback } from 'react';
 
-import { callUpdate } from '../utils/callFunctions';
+import { callUpdate } from '../utils/callUpdate';
 
 function useVideocallOptions({
-	toggleState,
-	setToggleState,
-	streams,
-	handleCallEnd,
-	callDetails,
-	firestore,
+	toggleState = {},
+	setToggleState = () => {},
+	streams = {},
+	handleCallEnd = () => {},
+	callDetails = {},
+	firestore = {},
 }) {
-	const stopCall = useCallback(({ e, clickType }) => {
+	const { callingRoomDetails } = callDetails || {};
+	const { call_status: callStatus = '' } = callingRoomDetails || {};
+
+	const stopCall = useCallback(({ e, clickType, duration = 0 }) => {
 		if (clickType === 'mini_screen') {
 			e.stopPropagation();
 		}
-		handleCallEnd();
+
+		if (callStatus === 'accepted') {
+			handleCallEnd({ callActivity: 'answered', duration });
+		} else {
+			handleCallEnd({ callActivity: 'missed' });
+		}
+
 		callUpdate({
 			data: {
 				call_status: 'end_call',
@@ -23,7 +32,7 @@ function useVideocallOptions({
 			firestore,
 			callingRoomId: callDetails?.callingRoomId,
 		});
-	}, [callDetails?.callingRoomId, handleCallEnd, firestore]);
+	}, [callStatus, firestore, callDetails?.callingRoomId, handleCallEnd]);
 
 	const toggleMic = useCallback(({ e, clickType }) => {
 		if (clickType === 'mini_screen') {
@@ -36,18 +45,7 @@ function useVideocallOptions({
 		}
 	}, [toggleState.isMicActive, setToggleState, streams]);
 
-	const toggleVideo = useCallback(({ e, clickType }) => {
-		if (clickType === 'mini_screen') {
-			e.stopPropagation();
-		}
-		setToggleState((prev) => ({ ...prev, isVideoActive: !prev.isVideoActive }));
-		const localStream = streams;
-		if (localStream?.userStream) {
-			localStream.userStream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !toggleState.isVideoActive;
-		}
-	}, [toggleState.isVideoActive, setToggleState, streams]);
-
-	return { stopCall, toggleMic, toggleVideo };
+	return { stopCall, toggleMic };
 }
 
 export default useVideocallOptions;

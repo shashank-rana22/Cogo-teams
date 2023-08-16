@@ -314,11 +314,12 @@ const getAsyncFields = (key) => {
 		'partner-roles': {
 			valueKey       : 'id',
 			labelKey       : 'name',
-			asyncKey       : 'list_auth_roles',
+			asyncKey       : 'list_roles',
+			microService   : 'auth',
 			defaultOptions : true,
 			defaultParams  : {
 				filters: {
-					status: 'active',
+					status: true,
 				},
 				page_limit: 200,
 			},
@@ -795,6 +796,11 @@ const getAsyncFields = (key) => {
 			endpoint      : 'saas/insurance/list-commodities',
 			defaultParams : {},
 			microService  : 'business_finance',
+		},
+		'hscode-list': {
+			valueKey : 'id',
+			lableKey : 'name',
+			asyncKey : 'hs_code_list',
 		},
 
 	};

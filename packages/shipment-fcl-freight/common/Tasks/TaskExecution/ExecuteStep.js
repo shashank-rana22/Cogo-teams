@@ -3,11 +3,14 @@ import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 import { useRef } from 'react';
 
+import useGetCommodityOptions from '../../../hooks/useGetCommodityOptions';
+
 import BookingPreferenceCard from './CustomTasks/UploadBookingNote/components/Step0/BookingPreferenceCard';
 import EditBookingParams from './EditBookingParams';
 import { getCanShipmentRollover } from './helpers/getCanShipmentRollover';
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
+import RestrictTask from './RestrictTask';
 import styles from './styles.module.css';
 
 function ExecuteStep({
@@ -21,16 +24,24 @@ function ExecuteStep({
 	selectedMail = [],
 	serviceIdMapping = [],
 }) {
+	const { options, allCommodity } = useGetCommodityOptions({ task });
+
 	const {
 		formProps,
 		fields,
 		showElements,
+		restrictTask,
+		setRestrictTask,
+		toastMessage,
 	} = useStepExecution({
 		task,
 		stepConfig,
 		getApisData,
 		selectedMail,
+		options,
+		allCommodity,
 	});
+
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 
 	const { editBookingParams } = showElements || {};
@@ -77,6 +88,18 @@ function ExecuteStep({
 			handleSubmit(onSubmit)();
 		}
 	};
+
+	if (restrictTask) {
+		return (
+			<RestrictTask
+				task={task}
+				restrict={restrictTask}
+				setRestrictTask={setRestrictTask}
+				onCancel={onCancel}
+				toastMessage={toastMessage}
+			/>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

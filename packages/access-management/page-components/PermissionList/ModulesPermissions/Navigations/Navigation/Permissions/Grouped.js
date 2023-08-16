@@ -9,6 +9,8 @@ import useTogglePermissions from '../../../../../../hooks/useTogglePermissions';
 import Permission from './Permission';
 import styles from './styles.module.css';
 
+const SECOND_INDEX = 2;
+
 const OPTIONS = [
 	{
 		label : 'Yes',
@@ -26,8 +28,8 @@ const OPTIONS = [
  */
 
 const allignAPis = (ps = []) => {
-	const viewApis = ps.filter((api) => (api?.options || []).length > 2);
-	const normalApis = ps.filter((api) => (api?.options || []).length <= 2);
+	const viewApis = ps.filter((api) => (api?.options || []).length > SECOND_INDEX);
+	const normalApis = ps.filter((api) => (api?.options || []).length <= SECOND_INDEX);
 	return [...viewApis, ...normalApis];
 };
 
@@ -90,12 +92,12 @@ function Grouped(props) {
 							navigation={navigation}
 							creatingNavs={creatingNavs}
 							setNavigationRefs={(r) => handleSetNavRef(r, api)}
-							data={roleData}
 							customPermissions={newApiPermissions}
 						/>
 					))}
 					{Object.keys(rest || {}).map((key) => (
 						<Grouped
+							key={key}
 							apiGroup={rest[key]}
 							setNavigationRefs={setNavigationRefs}
 							roleData={roleData}
