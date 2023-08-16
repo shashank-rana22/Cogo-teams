@@ -1,12 +1,14 @@
-import VALID_PASSWORD_MAPPINGS from './getValidPasswordMapping';
+import getValidPasswordMappings from './getValidPasswordMapping';
 
-const validatePassword = ({ value, errorMessage }) => {
-	const isPasswordValid = Object.keys(VALID_PASSWORD_MAPPINGS).every((key) => {
+const validatePassword = ({ value, errorMessage, t }) => {
+	const validPasswordMappings = getValidPasswordMappings(t);
+
+	const isPasswordValid = Object.keys(validPasswordMappings).every((key) => {
 		let isValid = false;
 		if (key === 'minLength') {
-			isValid = value.length >= VALID_PASSWORD_MAPPINGS[key].length;
+			isValid = value.length >= validPasswordMappings[key].length;
 		} else {
-			isValid = value.split('').some((char) => VALID_PASSWORD_MAPPINGS[key].characters.includes(char));
+			isValid = value.split('').some((char) => validPasswordMappings[key].characters.includes(char));
 		}
 
 		return isValid;

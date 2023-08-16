@@ -1,37 +1,41 @@
+const ZEROTH_INDEX = 0;
+
+const FIRST_INDEX = 1;
+
 function range(start, stop) {
-	const startCharCode = start.charCodeAt(0);
-	const endCharCode = stop.charCodeAt(0);
+	const startCharCode = start.charCodeAt(ZEROTH_INDEX);
+	const endCharCode = stop.charCodeAt(ZEROTH_INDEX);
 
-	const result = [];
+	const RESULT = [];
 
-	for (let charCode = startCharCode; charCode <= endCharCode; charCode += 1) {
-		result.push(String.fromCharCode(charCode));
+	for (let charCode = startCharCode; charCode <= endCharCode; charCode += FIRST_INDEX) {
+		RESULT.push(String.fromCharCode(charCode));
 	}
 
-	return result;
+	return RESULT;
 }
 
-const VALID_PASSWORD_MAPPINGS = {
+const getValidPasswordMappings = (t) => ({
 	lowercase: {
 		characters : range('a', 'z'),
-		message    : 'at least one lowercase character.',
+		message    : t('profile:lowercase_validation_message'),
 	},
 	uppercase: {
 		characters : range('A', 'Z'),
-		message    : 'at least one uppercase character.',
+		message    : t('profile:uppercase_validation_message'),
 	},
 	digit: {
 		characters : range('0', '9'),
-		message    : 'at least one digit.',
+		message    : t('profile:digit_validation_message'),
 	},
 	special: {
 		characters : '!@#$%^&*'.split(''),
-		message    : 'at least one special character.',
+		message    : t('profile:special_validation_message'),
 	},
 	minLength: {
 		length  : 8,
-		message : 'minimum 8 characters.',
+		message : t('profile:min_length_validation_message'),
 	},
-};
+});
 
-export default VALID_PASSWORD_MAPPINGS;
+export default getValidPasswordMappings;

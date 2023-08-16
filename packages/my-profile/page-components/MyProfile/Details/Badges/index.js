@@ -3,13 +3,25 @@ import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcMStarfull } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import BADGE_STARS_CLASSNAME_MAPPING from '../../../../constants/badge-stars-mapping';
 import usePostProfileMasteryBadge from '../../../../hooks/usePostProfileMasteryBadge';
 
 import styles from './styles.module.css';
 
+const ONE = 1;
+const TWO = 2;
+const THREE = 3;
+const FOUR = 4;
+const FIVE = 5;
+const SIX = 6;
+
+const TOOLTIP_ARRAY = [ONE, TWO, THREE, FOUR, FIVE];
+
 function Badges(props) {
+	const { t } = useTranslation(['profile']);
+
 	const {
 		profile: { partner = {} },
 	} = useSelector((state) => state);
@@ -52,7 +64,7 @@ function Badges(props) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<p className={styles.heading}>Badges</p>
+					<p className={styles.heading}>{t('profile:badges')}</p>
 
 					<Button
 						size="md"
@@ -60,17 +72,17 @@ function Badges(props) {
 						disabled
 						style={{ border: '0' }}
 					>
-						<b>Select Badges To Preview</b>
+						<b>{t('profile:badges_to_preview')}</b>
 					</Button>
 				</div>
 
 				<Tooltip
-					content="No Badges Have Been Created Yet!"
+					content={t('profile:empty_badges_message')}
 					placement="top"
 					className={styles.tooltip}
 				>
 					<div className={styles.empty}>
-						{[1, 2, 3, 4, 5].map((item) => (
+						{TOOLTIP_ARRAY.map((item) => (
 							<div key={item} className={styles.empty_boxes} />
 						))}
 					</div>
@@ -82,14 +94,14 @@ function Badges(props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<p className={styles.heading}>Badges</p>
+				<p className={styles.heading}>{t('profile:badges')}</p>
 
 				<Button
 					size="md"
 					themeType="secondary"
 					onClick={() => 	setShowModal(true)}
 				>
-					<b>Select Badges To Preview</b>
+					<b>{t('profile:badges_to_preview')}</b>
 				</Button>
 			</div>
 
@@ -100,10 +112,10 @@ function Badges(props) {
 
 						const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[medal]?.upper_limit;
 
-						max_badges += 1;
+						max_badges += ONE;
 
 						return (
-							(index < 5 && max_badges < 6)
+							(index < FIVE && max_badges < SIX)
 								? (
 									<div key={id}>
 										<Tooltip content={`${badge_name} ${startCase(medal || '')}`}>
@@ -112,7 +124,7 @@ function Badges(props) {
 											</div>
 
 											<div className={styles.stars}>
-												{[1, 2, 3].map((itm) => (
+												{[ONE, TWO, THREE].map((itm) => (
 													<div key={itm}>
 														<IcMStarfull
 															width={10}
@@ -132,10 +144,10 @@ function Badges(props) {
 
 						const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[medal]?.upper_limit;
 
-						max_badges += 1;
+						max_badges += ONE;
 
 						return (
-							(index < 5 && max_badges < 6)
+							(index < FIVE && max_badges < SIX)
 								? (
 									<div key={id} style={{ opacity: 0.2 }}>
 										<Tooltip content={`${badge_name} ${startCase(medal || '')}`}>
@@ -144,7 +156,7 @@ function Badges(props) {
 											</div>
 
 											<div className={styles.stars}>
-												{[1, 2, 3].map((itm) => (
+												{[ONE, TWO, THREE].map((itm) => (
 													<div key={itm}>
 														<IcMStarfull
 															width={10}
@@ -165,7 +177,7 @@ function Badges(props) {
 					onClick={onRedirectingToProfile}
 					className={styles.view_more}
 				>
-					View More
+					{t('profile:view_more_label')}
 				</div>
 			</div>
 
@@ -176,15 +188,15 @@ function Badges(props) {
 				placement="center"
 				closeOnOuterClick
 			>
-				<Modal.Header title="Preview Badges" />
+				<Modal.Header title={t('profile:preview_badges_label')} />
 
 				<Modal.Body className={styles.modal_body}>
 					<p className={styles.lable}>
-						Select the mastery badge to preview on your profile
+						{t('profile:preview_badge_on_profile')}
 					</p>
 
 					<AsyncSelect
-						placeholder="Select Mastery"
+						placeholder={t('profile:select_mastery_placeholder')}
 						size="sm"
 						value={masteryId}
 						onChange={(value) => setMasteryId(value)}
@@ -208,7 +220,7 @@ function Badges(props) {
 						onClick={onCloseModal}
 						style={{ marginRight: '4px' }}
 					>
-						Cancel
+						{t('profile:cancel_badge_button')}
 					</Button>
 
 					<Button
@@ -216,7 +228,7 @@ function Badges(props) {
 						disabled={!masteryId}
 
 					>
-						Save
+						{t('profile:save_badge_button')}
 					</Button>
 				</Modal.Footer>
 			</Modal>
