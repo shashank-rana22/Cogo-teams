@@ -676,7 +676,7 @@ export default {
 		},
 		banking_code: {
 			financial_system_code : 'ifsc',
-			pattern               : /^[A-Za-z]{4}\d{7}$/,
+			pattern               : /^[A-Z]{4}0[A-Z0-9]{6}$/,
 		},
 		pan_number: {
 			label   : 'PAN',
