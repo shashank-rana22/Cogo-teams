@@ -1,0 +1,33 @@
+.mainDiv {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	align-items: flex-start;
+	padding: 16px 12px;
+	background: #f9f9f9;
+	border-radius: 16px;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	align-self: stretch;
+}
+
+.header1 {
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%; /* 21px */
+	color: var(--black, #221f20);
+	text-transform: uppercase;
+}
+
+.header2 {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 150%; /* 18px */
+	color: var(--black-80, #4f4f4f);
+}

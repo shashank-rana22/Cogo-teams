@@ -68,7 +68,7 @@
 	justify-content: center;
 	padding: 8px;
 	color: #ee3425;
-	background: #fdebe9;
+	background: var(--20, #fdebe9);
 	border-radius: 8px;
 }
 
@@ -264,6 +264,7 @@
 	align-self: flex-end;
 	justify-content: flex-end;
 	width: 100%;
+	padding: 4px;
 }
 
 .editIcon {
@@ -288,6 +289,7 @@
 	gap: 2px;
 	align-items: center;
 	padding: 7px 12px;
+	margin-left: 4px;
 	background: var(--greyscale-secondary-white, #fff);
 	border: 1px solid var(--black-20, #e0e0e0);
 	border-radius: 6px;
@@ -334,5 +336,13 @@
 		border-radius: 8px;
 		box-shadow: -2px 2px 25px rgb(0 0 0 / 15%);
 		transition: all 0.3s;
+	}
+
+	.parentDiv {
+		padding: 16px 0;
+	}
+
+	.leaveReqHeading {
+		padding: 8px 0;
 	}
 } */
