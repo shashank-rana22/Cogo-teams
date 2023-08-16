@@ -12,6 +12,7 @@ const GRAPHS = ['Operational Profitability', 'Revenue', 'Expense'];
 function SingleParentBarStats({
 	activeBar = '', setActiveBar = () => {}, isFullWidth = false,
 	setShowShipmentList = () => {},
+	showShipmentList = false,
 	taxType = '',
 	type = '',
 	serviceLevelData = [],
@@ -68,6 +69,7 @@ function SingleParentBarStats({
 						type={type}
 						serviceLevelData={serviceLevelData}
 						serviceLevelLoading={serviceLevelLoading}
+						showShipmentList={showShipmentList}
 					/>
 				))}
 			</div>

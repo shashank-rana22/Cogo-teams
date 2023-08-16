@@ -16,6 +16,7 @@ const GRAPH = ['Operational Profitability', 'Revenue', 'Expense'];
 function ClosedGraphStats({
 	title = '', setActiveShipmentCard = () => { },
 	setShowShipmentList = () => { },
+	showShipmentList = false,
 	entity = '',
 	timeRange = '',
 	statsType = '',
@@ -111,6 +112,7 @@ function ClosedGraphStats({
 					setActiveBar={setActiveBar}
 					isFullWidth
 					setShowShipmentList={setShowShipmentList}
+					showShipmentList={showShipmentList}
 					taxType={taxType}
 					type={type}
 					serviceLevelData={serviceLevelData}

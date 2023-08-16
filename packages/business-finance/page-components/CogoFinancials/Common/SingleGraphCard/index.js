@@ -49,6 +49,7 @@ function SingleGraphCard({
 	serviceLevelData = [],
 	serviceLevelLoading = false,
 	defaultWidth = '300',
+	showShipmentList = false,
 }) {
 	const isLastView = isViewDetailsVisible; // last view of graph cards
 	const graphKey = heading;
@@ -96,7 +97,7 @@ function SingleGraphCard({
 						showInfo
 						infoContent={INFO_CONTENT.closedShipmentsBar}
 					/>
-					{isViewDetailsVisible && (
+					{isViewDetailsVisible && !showShipmentList && (
 						<Button
 							themeType="secondary"
 							onClick={onViewDetails}

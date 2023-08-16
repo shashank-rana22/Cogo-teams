@@ -173,6 +173,7 @@ function CogoFinancials() {
 						activeShipmentCard={activeShipmentCard}
 						isPreTax={isPreTax}
 						setShowShipmentList={setShowShipmentList}
+						showShipmentList={showShipmentList}
 						entity={entity}
 						timeRange={timeRange}
 						filter={filter}
