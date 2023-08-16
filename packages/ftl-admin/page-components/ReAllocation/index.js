@@ -42,7 +42,7 @@ function ReAllocation({ activeTab = '' }) {
 				isMultiSelect={false}
 				lowerLabel=""
 				placeholder="Search SID"
-				upperLabel="Serach SID"
+				upperLabel="Search SID"
 				setFilters={setFilters}
 			/>
 			{loading ? <Loader /> : (
@@ -61,7 +61,7 @@ function ReAllocation({ activeTab = '' }) {
 					<Modal.Header title="Re-Allocate StakeHolders" />
 					<Modal.Body className={styles.modal_body}>
 						<div className={styles.stakeholder_div}>
-							<div>Staker Holder Type</div>
+							<div>Stakeholder Type</div>
 							<Select
 								className={styles.select}
 								options={STAKEHOLDER_OPTIONS}
