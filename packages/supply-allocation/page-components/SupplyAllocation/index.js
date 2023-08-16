@@ -10,8 +10,9 @@ import LocationSelect from './LocationSelect';
 
 function SupplyAllocation() {
 	const [locationDetails, setLocationDetails] = useState({});
+	const [filters, setFilters] = useState({});
 
-	const { data, loading, refetchListFclSearches } = useListFclSearches();
+	const { data, refetchListFclSearches } = useListFclSearches({ filters });
 
 	const { control, reset } = useForm({});
 
@@ -31,6 +32,7 @@ function SupplyAllocation() {
 				refetchListFclSearches={refetchListFclSearches}
 				locationDetails={locationDetails}
 				setLocationDetails={setLocationDetails}
+				setFilters={setFilters}
 			/>
 
 			<List data={data} />

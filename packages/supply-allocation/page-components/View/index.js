@@ -4,7 +4,7 @@ import { useEffect, Fragment } from 'react';
 
 import useGetRollingForecastBucketsData from '../../hooks/useGetRollingForeCastBucketsData';
 import useGetRollingForecastData from '../../hooks/useGetRollingForecastData';
-import useListFclSearches from '../../hooks/useListFclSearches';
+import useListFclSearchesView from '../../hooks/useListFclSearchesView';
 
 import Header from './Header';
 import List from './List';
@@ -42,7 +42,7 @@ function View() {
 	const { general = {} } = useSelector((state) => state);
 	const { query = {} } = general;
 	const { search_id } = query;
-	const { data, findFclSearch, loading } = useListFclSearches();
+	const { data, findFclSearch } = useListFclSearchesView({});
 
 	useEffect(() => {
 		findFclSearch(search_id);

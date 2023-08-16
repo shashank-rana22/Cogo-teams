@@ -36,6 +36,7 @@ function LocationSelect({
 	createSupplySearch = () => { },
 	locationDetails = {},
 	setLocationDetails = () => { },
+	setFilters = () => {},
 }) {
 	const onClickAllocate = () => {
 		const payload = { ...locationDetails };
@@ -61,6 +62,11 @@ function LocationSelect({
 							origin_location_id   : id,
 							origin_location_type : item?.type,
 						}));
+
+						setFilters((prev) => ({
+							...prev,
+							origin_location_id: id || undefined,
+						}));
 					}}
 
 				/>
@@ -83,6 +89,10 @@ function LocationSelect({
 							...prev,
 							destination_location_id   : id,
 							destination_location_type : item?.type,
+						}));
+						setFilters((prev) => ({
+							...prev,
+							destination_location_id: id || undefined,
 						}));
 					}}
 				/>
