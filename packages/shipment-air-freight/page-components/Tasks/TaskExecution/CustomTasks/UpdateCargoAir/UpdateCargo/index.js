@@ -150,13 +150,14 @@ function UpdateCargo({
 				{render()}
 				<div className={styles.button}>
 					<div style={{ margin: '0 10px 0 0' }}>
-						<Button onClick={() => onCancel()}>
+						<Button onClick={onCancel} disabled={loading}>
 							Cancel
 						</Button>
 					</div>
 					<div style={{ margin: '0 16px 0 10px' }}>
 						<Button
 							onClick={() => setDisabled((prev) => !prev)}
+							disabled={loading}
 						>
 							<EditSvg style={{ marginRight: '8px' }} />
 							Edit

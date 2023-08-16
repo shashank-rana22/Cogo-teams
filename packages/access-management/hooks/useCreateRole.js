@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { asyncFieldsPartner, useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { useRequest } from '@cogoport/request';
+import { useAuthRequest } from '@cogoport/request';
 
 import { controls } from '../configurations/create-controls';
 
@@ -11,10 +11,10 @@ const useCreateRole = ({
 }) => {
 	const formProps = useForm();
 
-	const [{ loading }, trigger] = useRequest({
-		url    : '/create_auth_role',
+	const [{ loading }, trigger] = useAuthRequest({
+		url    : '/create_role',
 		method : 'POST',
-	});
+	}, { manual: true });
 
 	const onSubmit = async (values) => {
 		if (!values) return;
@@ -38,7 +38,7 @@ const useCreateRole = ({
 
 			redirect(response?.data?.id);
 		} catch (error) {
-			Toast.error(error?.message || 'Something went wrong');
+			Toast.error(error.response?.data.error || 'Something went wrong');
 		}
 	};
 
