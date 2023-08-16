@@ -1,12 +1,7 @@
-import { Placeholder, Select, TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
-import { upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
-
-import useListCogoEntities from '../AccountPayables/Dashboard/hooks/useListCogoEntities';
 
 import useGetIncidentData from './common/hooks/useGetIncidentData';
 import { IncidentDataInterface } from './common/interface';
@@ -40,42 +35,8 @@ const tabsKeyComponentMapping = {
 	controller : Controller,
 };
 
-interface ItemProps {
-	business_name: string;
-	entity_code: string;
-}
-interface Profile {
-	profile?: { partner: { id: string } };
-}
-
 function IncidentManagement() {
 	const { query, push } = useRouter();
-
-	const { profile }:Profile = useSelector((state) => state);
-
-	const { partner } = profile || {};
-
-	const { id: partnerId } = partner || {};
-
-	const entity = getDefaultEntityCode(partnerId);
-
-	const { loading, entityData = [] } = useListCogoEntities();
-
-	const [entityCode, setEntityCode] = useState(entity);
-
-	const entityDataCount = entityData.length;
-
-	const entityOptions = (entityData || []).map((item: ItemProps) => {
-		const {
-			business_name: companyName = '',
-			entity_code: listEntityCode = '',
-		} = item || {};
-		return {
-			label : `${upperCase(companyName)} (${listEntityCode})`,
-			value : listEntityCode,
-		};
-	});
-
 	const [activeTab, setActiveTab] = useState<string>(
 		query.activeTab || tabs[GLOBAL_CONSTANTS.zeroth_index].key,
 	);
@@ -89,7 +50,6 @@ function IncidentManagement() {
 	}: IncidentDataInterface = useGetIncidentData({
 		activeTab,
 		incidentId: query?.incidentId,
-		entityCode,
 	});
 
 	const { statsData } = incidentData || {};
@@ -156,22 +116,6 @@ function IncidentManagement() {
 		<div>
 			<div className={styles.header}>
 				<div className={styles.header_style}>Incident Management</div>
-
-				{loading ? (
-					<Placeholder width="200px" height="30px" />
-				) : (
-					<div className={styles.input}>
-						<Select
-							name="business_name"
-							onChange={(entityVal: string) => setEntityCode(entityVal)}
-							value={entityCode}
-							options={entityOptions}
-							placeholder="Select Entity Code"
-							size="sm"
-							disabled={entityDataCount <= 1}
-						/>
-					</div>
-				)}
 			</div>
 			<div className={styles.tabs_container}>
 				<Tabs
