@@ -156,7 +156,7 @@ const useCreateRole = () => {
 						trigger({
 							data: {
 								...payload,
-								PERMISSION_ARRAY,
+								permissions: PERMISSION_ARRAY,
 							},
 						}),
 					);
