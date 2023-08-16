@@ -10,6 +10,7 @@ import StyledTable from '../../StyledTable';
 import { toTitleCase } from '../../utils/titleCase';
 
 import {
+	CREDIT_NOTE_APPROVAL_TYPE_OPTIONS,
 	CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS,
 	requestCreditNoteColumns, REVENUE_OPTIONS,
 } from './credit-note-config';
@@ -24,6 +25,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		CNValues : null,
 		remarks  : null,
 	});
+
+	const [creditNoteApprovalType, setCreditNoteApprovalType] = useState('');
 
 	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
@@ -55,6 +58,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		remark,
 		CNCategoryValues,
 		isConsolidated,
+		creditNoteApprovalType,
 	});
 
 	const { businessName } = organization || {};
@@ -208,6 +212,14 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 										</div>
 									</Button>
 								</Popover>
+								<Select
+									value={creditNoteApprovalType}
+									onChange={(e) => setCreditNoteApprovalType(e)}
+									placeholder="CN Approval Type"
+									options={CREDIT_NOTE_APPROVAL_TYPE_OPTIONS}
+									size="sm"
+									style={{ paddingLeft: '12px' }}
+								/>
 							</div>
 
 							{typeof (revoked) === 'boolean' && (
@@ -366,7 +378,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									size="md"
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length) || loading}
+									disabled={!(remarks.length) || loading || creditNoteApprovalType === ''}
 									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
@@ -378,7 +390,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								<Button
 									size="md"
 									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length) || loading}
+									disabled={!(remarks.length) || loading || creditNoteApprovalType === ''}
 									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');

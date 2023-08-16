@@ -7,6 +7,7 @@ const useGetTdsData = ({
 	CNCategoryValues = { CNType: '', CNValues: '', remarks: '' },
 	remark,
 	isConsolidated = false,
+	creditNoteApprovalType,
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -39,6 +40,8 @@ const useGetTdsData = ({
 						...row.data?.[payloadKey],
 						creditNoteType: CNType,
 						creditNoteRemarks,
+						creditNoteApprovalType,
+
 					},
 				},
 			}
