@@ -3,8 +3,8 @@ import React from 'react';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 
 import AgentStatusToggle from './AgentStatusToggle';
-import AgentStatusView from './AgentStatusView';
 import FlashRevertLogs from './FlashRevertLogs';
+import LeaveStatusView from './LeaveStatusView';
 import PunchInOut from './PunchInOut';
 import styles from './styles.module.css';
 
@@ -33,8 +33,9 @@ function HeaderBar({
 				) : null}
 
 				{team_agents_status_view ? (
-					<AgentStatusView
+					<LeaveStatusView
 						firestore={firestore}
+						viewType={viewType}
 					/>
 				) : null}
 

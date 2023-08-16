@@ -368,10 +368,10 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : true,
 			customer_org_users          : true,
-			team_agents_status_view     : false,
+			team_agents_status_view     : true,
 		},
 	},
-	shipment_specialis_admin: {
+	shipment_specialist_admin: {
 		all_chats_base_query          : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 		session_type_query            : () => [where('session_type', '==', 'admin')],
 		chat_sub_tabs_access          : ['all', 'teams'],
@@ -391,7 +391,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			bulk_auto_assign            : false,
 			claim_chats                 : false,
 			toggle_agent_status         : false,
-			toggle_self_status          : true,
+			toggle_self_status          : false,
+			on_leave_status_toggle      : true,
 			has_group_access            : true,
 			can_message_on_bot_session  : true,
 			has_permission_to_edit      : false,
