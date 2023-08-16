@@ -34,7 +34,7 @@ function SearchSpotModal({
 			className={styles.modal_container}
 			scroll={false}
 		>
-			<Modal.Header />
+			<Modal.Header title="Warning" />
 			<Modal.Body>
 				<div>
 					This customer has not completed the onboarding process.
