@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { TAB_CONFIG } from '../utils/tabConfig';
 
 function FtlEditShipment() {
-	const [activeTab, setActiveTab] = useState(TAB_CONFIG.SID_BEFORE_DEPARTURE.key);
+	const [activeTab, setActiveTab] = useState(TAB_CONFIG.sid_before_departure.key);
 
 	return (
 		<div style={{ margin: '0 20px 20px' }}>

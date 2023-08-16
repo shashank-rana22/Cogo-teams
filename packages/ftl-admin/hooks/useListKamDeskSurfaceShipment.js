@@ -20,7 +20,7 @@ function useListKamDeskSurfaceShipment({ activeTab = '' }) {
 			edit_quotation_ftl_shipments : true,
 		};
 
-		if (activeTab === 'STAKEHOLDER_RE_ALLOCATION') {
+		if (activeTab === 'stakeholder_reallocation') {
 			conditionalFilters = {
 				state: ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
 			};

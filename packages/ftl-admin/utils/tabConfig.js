@@ -5,28 +5,28 @@ import ReopenTasks from '../page-components/ReopenTasks';
 import SIDBeforeDeparture from '../page-components/SIDBeforeDeparture';
 
 export const TAB_CONFIG = {
-	SID_BEFORE_DEPARTURE: {
-		key       : 'SID_BEFORE_DEPARTURE',
+	sid_before_departure: {
+		key       : 'sid_before_departure',
 		title     : 'SID Before Departure',
 		component : (val) => <SIDBeforeDeparture {...val} />,
 	},
-	EDIT_INVOICE: {
-		key       : 'EDIT_INVOICE',
+	edit_invoice: {
+		key       : 'edit_invoice',
 		title     : 'Edit Invoice',
 		component : (val) => <EditInvoice {...val} />,
 	},
-	REOPEN_TASK: {
-		key       : 'REOPEN_TASK',
+	reopen_task: {
+		key       : 'reopen_task',
 		title     : 'Reopen Tasks',
 		component : (val) => <ReopenTasks {...val} />,
 	},
-	EDIT_SELL_QUOTATION: {
-		key       : 'EDIT_SELL_QUOTATION',
+	edit_sell_quotation: {
+		key       : 'edit_sell_quotation',
 		title     : 'Edit Sell Quotaion',
 		component : (val) => <EditSellQuotation {...val} />,
 	},
-	STAKEHOLDER_RE_ALLOCATION: {
-		key       : 'STAKEHOLDER_RE_ALLOCATION',
+	stakeholder_reallocation: {
+		key       : 'stakeholder_reallocation',
 		title     : 'Reallocate Stakeholders',
 		component : (val) => <ReAllocation {...val} />,
 	},

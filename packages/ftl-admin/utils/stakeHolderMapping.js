@@ -1,6 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-export const stakeHolderOptions = [
+export const STAKEHOLDER_OPTIONS = [
 	{ label: 'KAM', value: 'booking_agent' },
 	{ label: 'Booking Desk', value: 'service_ops1' },
 	{ label: 'Field Service Ops', value: 'field_service_ops' },
