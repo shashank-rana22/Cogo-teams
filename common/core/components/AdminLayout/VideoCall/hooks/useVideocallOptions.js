@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useCallback } from 'react';
 
-import { callUpdate } from '../utils/callFunctions';
+import { callUpdate } from '../utils/callUpdate';
 
 function useVideocallOptions({
 	toggleState = {},
@@ -45,18 +45,7 @@ function useVideocallOptions({
 		}
 	}, [toggleState.isMicActive, setToggleState, streams]);
 
-	const toggleVideo = useCallback(({ e, clickType }) => {
-		if (clickType === 'mini_screen') {
-			e.stopPropagation();
-		}
-		setToggleState((prev) => ({ ...prev, isVideoActive: !prev.isVideoActive }));
-		const localStream = streams;
-		if (localStream?.userStream) {
-			localStream.userStream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !toggleState.isVideoActive;
-		}
-	}, [toggleState.isVideoActive, setToggleState, streams]);
-
-	return { stopCall, toggleMic, toggleVideo };
+	return { stopCall, toggleMic };
 }
 
 export default useVideocallOptions;

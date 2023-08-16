@@ -29,7 +29,7 @@
     "purchase":{
         "tab_title": "Live Invoices"
     },
-    "edit_supplier": false,
+    "edit_supplier": true,
     "cancel_service": false,
     "edit_params": {
         "can_edit": false

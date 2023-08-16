@@ -29,8 +29,8 @@ const getAuthParam = (permissions_navigations, pathname) => {
 	(navigationData?.main_apis || []).forEach((api) => {
 		const apiData = userNavigationPermissions?.[api];
 		(apiData || []).forEach((scope) => {
-			if (scope?.is_default && scope.type !== 'none') {
-				defaultScope = scope?.type;
+			if (scope?.is_default && scope.view_type !== 'none') {
+				defaultScope = scope?.view_type;
 				defaultView = scope?.through_criteria?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 			}
 		});

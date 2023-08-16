@@ -4,8 +4,6 @@ import { useRequestBf } from '@cogoport/request';
 import { useState } from 'react';
 
 interface InvoiceAdditionals {
-	reqAgreementDate?: string
-	reqAgreementNumber?: string
 	reqCancelReason?: string
 	reqDocumentUrl?: string
 }
@@ -32,8 +30,8 @@ const useGetIrnCancellation = ({
 		remarks           : itemData?.invoiceAdditionals?.reqCancelReason,
 		value             : '',
 		agreementDocument : itemData?.invoiceAdditionals?.reqDocumentUrl,
-		agreementNumber   : itemData?.invoiceAdditionals?.reqAgreementNumber,
-		agreementDate     : new Date(itemData?.invoiceAdditionals?.reqAgreementDate),
+		agreementNumber   : '',
+		agreementDate     : new Date(),
 	});
 	const [
 		{ loading },
@@ -82,7 +80,7 @@ const useGetIrnCancellation = ({
 			}
 			refetch();
 		} catch (err) {
-			Toast.error(err?.error?.message || 'Something went wrong');
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
 	};
 

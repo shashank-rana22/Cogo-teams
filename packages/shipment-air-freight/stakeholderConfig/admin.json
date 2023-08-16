@@ -31,10 +31,10 @@
     "purchase":{
         "tab_title": "Purchase Live Invoices"
     },
-    "edit_supplier": false,
+    "edit_supplier": true,
     "cancel_service": false,
     "edit_params": {
-        "can_edit": false
+        "can_edit": true
     },
     "additional_services": {
         "action_buttons": {
