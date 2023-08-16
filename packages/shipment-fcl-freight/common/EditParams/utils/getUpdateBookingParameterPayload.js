@@ -1,4 +1,4 @@
-import getDependentServices from '../../Utils/getDependentServices';
+import getDependentServices from '../../Helpers/getDependentServices';
 
 export default function getUpdateBookingParameterPaylaod({ formValues, shipment_data, serviceData, servicesList }) {
 	const payload = {
