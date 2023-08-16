@@ -10,10 +10,10 @@ export const stakeHolderOptions = [
 export const getRoleIds = (stakeHolder) => {
 	const geo = getGeoConstants();
 	switch (stakeHolder) {
-		case 'booking_agent': return [...geo.uuid.kam_ids, ...geo.uuid.kam_service_ops1_role_ids];
-		case 'service_ops1': return [...geo.uuid.service_ops1_role_ids, ...geo.uuid.kam_service_ops1_role_ids];
-		case 'field_service_ops': return geo.uuid.field_service_ops_role_ids;
-		case 'ftl_ground_ops': return geo.uuid.ftl_ground_ops_role_ids;
+		case 'booking_agent': return [...geo.uuid.kam_ids, geo.uuid.kam_service_ops1_role_id];
+		case 'service_ops1': return [...geo.uuid.service_ops1_role_ids, geo.uuid.kam_service_ops1_role_id];
+		case 'field_service_ops': return [geo.uuid.field_service_ops_role_id];
+		case 'ftl_ground_ops': return [geo.uuid.ftl_ground_ops_role_id];
 		default: return undefined;
 	}
 };
