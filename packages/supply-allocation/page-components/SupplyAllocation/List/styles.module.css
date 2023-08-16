@@ -48,3 +48,22 @@
 	font-size: 13px;
 	cursor: pointer;
 }
+
+.origin_container {
+	position: relative;
+}
+
+.relative_container {
+	position: absolute;
+	top: -21px;
+	left: -24px;
+	display: flex;
+	align-items: center;
+	height: 20px;
+	padding: 0  2px;
+	font-size: 10px;
+	color: #bf291e;
+	text-align: center;
+	background: var(--20, #fdebe9);
+	border-radius: 0 0 6px;
+}

@@ -1,13 +1,19 @@
-import { Button, Pagination } from '@cogoport/components';
-import { IcMArrowRight, IcMPortArrow } from '@cogoport/icons-react';
+import { Button, Pagination, Tooltip } from '@cogoport/components';
+import { IcMArrowRight, IcMInfo, IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
 import StyledTable from '../../../commons/StyledTable';
 
 import styles from './styles.module.css';
 
-function List({ data = [], pagination = 0, setPagination = () => {}, loading }) {
-	const { list = [], page_limit = 10, total_count = 4 } = data;
+function List({
+	data = [],
+	pagination = 0,
+	setPagination = () => {},
+	loading = false,
+}) {
+	const { list = [], page_limit = 10, total_count = 0 } = data || {};
+
 	const router = useRouter();
 
 	const columns = [
@@ -15,17 +21,32 @@ function List({ data = [], pagination = 0, setPagination = () => {}, loading }) 
 			id       : 'origin',
 			Header   : 'ORIGIN',
 			accessor : ({ origin_location }) => (
-				<div>
-					{ origin_location?.display_name}
+				<div className={styles.origin_container}>
+					<Tooltip
+						content={(
+							<div
+								style={{ wordBreak: 'break-word' }}
+							>
+								Reallocation required due to a change in forecasted demand
+							</div>
+						)}
+						placement="right"
+					>
+						<div className={styles.relative_container}>
+							Attention Required!
+							{' '}
+							<IcMInfo height={8} width={8} style={{ marginLeft: '2px' }} />
+						</div>
+					</Tooltip>
+
+					{origin_location?.display_name}
 				</div>
 			),
 		},
 		{
-
 			id       : 'icon',
-			Header   : <IcMPortArrow width={30} height={30} />,
-			accessor : () => <IcMPortArrow width={30} height={30} />,
-
+			Header   : <IcMPortArrow width={20} height={20} />,
+			accessor : () => <IcMPortArrow width={20} height={20} />,
 		},
 		{
 			id       : 'destination',
@@ -40,9 +61,18 @@ function List({ data = [], pagination = 0, setPagination = () => {}, loading }) 
 			accessor : (item) => item.firstName,
 		},
 		{
-			id       : 'percent_fulfillment',
-			Header   : '% FULFILLMENT (ON BEST RATE)',
-			accessor : (item) => item.firstName,
+			id     : 'percent_fulfillment',
+			Header : (
+				<div>
+					% FULFILLMENT
+					<div style={{ fontSize: '10px', fontWeight: '400' }}>
+						{' '}
+						(ON BEST RATE)
+						{' '}
+					</div>
+				</div>
+			),
+			accessor: (item) => item.firstName,
 		},
 		{
 			id       : 'forecasted_volume',
@@ -56,35 +86,32 @@ function List({ data = [], pagination = 0, setPagination = () => {}, loading }) 
 				<Button
 					themeType="secondary"
 					onClick={() => {
-						router.push(
-							`/supply-allocation/view/${item.id}`,
-						);
+						router.push(`/supply-allocation/view/${item.id}`);
 					}}
-    >
+				>
 					View
 					<IcMArrowRight />
 				</Button>
 			),
 		},
-
 	];
 
 	return (
 		<div className={styles.container}>
-
 			<StyledTable data={list} columns={columns} loading={loading} />
 
-			<div className={styles.pagination_container}>
-				<Pagination
-					className="md"
-					totalItems={total_count}
-					currentPage={pagination}
-					pageSize={page_limit}
-					onPageChange={setPagination}
-					type="table"
-				/>
-			</div>
-
+			{total_count ? (
+				<div className={styles.pagination_container}>
+					<Pagination
+						className="md"
+						totalItems={total_count}
+						currentPage={pagination}
+						pageSize={page_limit}
+						onPageChange={setPagination}
+						type="table"
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }
