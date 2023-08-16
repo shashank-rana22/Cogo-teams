@@ -65,6 +65,7 @@ function Header({
 	};
 
 	const { chat_tags = [], channel_type: channelType = '' } = activeMessageCard || {};
+	console.log('activeMessageCard:', activeMessageCard);
 
 	const {
 		mobile_no = '',
@@ -106,6 +107,7 @@ function Header({
 							list={chat_tags}
 							showMorePlacement="right"
 							hasPermissionToEdit={hasPermissionToEdit}
+							updateChat={updateChat}
 						/>
 					</div>
 
