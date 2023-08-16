@@ -1,4 +1,4 @@
-import { Toggle, Input, Button, Toast } from '@cogoport/components';
+import { Toggle, InputNumber, Button, Toast } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -84,10 +84,12 @@ function RoleWiseLockScreen({
 							Time Delay
 							<span>(in minutes)</span>
 						</div>
-						<Input
+						<InputNumber
 							size="md"
 							placeholder="Enter time"
+							min={0}
 							value={time}
+							arrow={false}
 							className={styles.styled_select}
 							onChange={(value) => setRoleValue((prev) => ({ ...prev, time: value }))}
 						/>
