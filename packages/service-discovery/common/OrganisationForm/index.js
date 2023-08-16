@@ -10,23 +10,23 @@ import CustomSelectOption from '../CustomSelectOption';
 
 import styles from './styles.module.css';
 
+const ORG_PARAMS = {
+	branches_data_required   : true,
+	setting_data_required    : false,
+	pagination_data_required : false,
+	agent_data_required      : false,
+	filters                  : {
+		status       : 'active',
+		account_type : 'importer_exporter',
+	},
+};
+
 function OrganisationForm({
 	organization = {},
 	setOrganization = () => {},
 	errors = {},
 	...rest
 }) {
-	const ORG_PARAMS = {
-		branches_data_required   : true,
-		setting_data_required    : false,
-		pagination_data_required : false,
-		agent_data_required      : false,
-		filters                  : {
-			status       : 'active',
-			account_type : 'importer_exporter',
-		},
-	};
-
 	const USER_PARAMS = useMemo(() => (
 		{
 			pagination_data_required : false,
