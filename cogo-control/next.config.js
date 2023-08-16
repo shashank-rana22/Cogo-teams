@@ -29,13 +29,14 @@ const removeConsole = {
 };
 
 module.exports = withBundleAnalyzer({
-	env               : { ...loadEnvConfig.parsed },
-	reactStrictMode   : true,
-	swcMinify         : true,
-	basePath          : '/v2',
-	transpilePackages : modulesToTranspile,
+	env                        : { ...loadEnvConfig.parsed },
+	reactStrictMode            : true,
+	swcMinify                  : true,
+	basePath                   : '/v2',
+	transpilePackages          : modulesToTranspile,
 	i18n,
-	images            : {
+	skipMiddlewareUrlNormalize : true,
+	images                     : {
 		remotePatterns: [
 			{
 				protocol : 'https',
