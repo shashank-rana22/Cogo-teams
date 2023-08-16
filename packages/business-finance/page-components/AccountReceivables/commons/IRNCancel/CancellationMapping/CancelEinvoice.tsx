@@ -19,7 +19,7 @@ function CancelEinvoice({
 		formState: { errors: errorVal },
 	} = useForm();
 
-	const { id, invoiceNumber, invoiceDate } = itemData || {};
+	const { id = '', invoiceNumber = '', invoiceDate = '' } = itemData || {};
 
 	const { onSubmit, loading, response, setResponse } = useGetIrnCancellation({
 		id,
@@ -32,7 +32,6 @@ function CancelEinvoice({
 	return (
 		<Modal show={showCancellationModal} onClose={() => setShowCancellationModal(false)} size="lg">
 			<div className={styles.cancel_modal}>
-
 				<Modal.Header
 					title={(
 						<div className={styles.cancel_invoice}>
@@ -83,6 +82,7 @@ function CancelEinvoice({
 										type="datepicker"
 										value={response?.agreementDate}
 										isPreviousDaysAllowed
+										minDate={new Date(invoiceDate)}
 										onChange={(e) => setResponse((resp) => ({ ...resp, agreementDate: e }))}
 										placeholder="Agreement Date"
 										rules={{ required: 'Agreement Date is required' }}
@@ -101,6 +101,7 @@ function CancelEinvoice({
 										value={new Date(invoiceDate)}
 										type="datepicker"
 										isPreviousDaysAllowed
+										disabled
 										placeholder="E-invoice Date"
 										rules={{ required: 'E invoice Date is required.' }}
 									/>
@@ -120,7 +121,7 @@ function CancelEinvoice({
 										name="agreementDocument"
 										value={response?.agreementDocument}
 										defaultValues={response?.agreementDocument}
-										onChange={(e) => setResponse((resp) => ({ ...resp, agreementDocument: e }))}
+										disabled
 										rules={{ required: 'Agreement file is required' }}
 									/>
 									{(response?.agreementDocument === '') ? (

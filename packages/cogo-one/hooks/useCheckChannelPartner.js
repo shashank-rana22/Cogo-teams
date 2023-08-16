@@ -1,7 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
+
+import useGetOrgUsers from './useGetOrgUsers';
 
 const getParams = ({ orgId = '' }) => ({
 	id                 : orgId,
@@ -14,6 +17,8 @@ const formatData = ({
 	activeConversationTab = '',
 	activeCardId = '',
 	partnerId = '',
+	userId = '',
+	isSendUserIdInPath,
 }) => {
 	const { data: orgDetails = {} } = data || {};
 	const { tags = [], twin_partner = {} } = orgDetails || {};
@@ -42,7 +47,8 @@ const formatData = ({
 			? `source=communication&active_chat=${activeCardId}` : 'source=communication';
 
 		if (isChannelPartner) {
-			let redirectionLink = `/${partnerId}/prm/${userPartnerId}?${linkSuffix}`;
+			let redirectionLink = `/${partnerId}/prm/
+			${userPartnerId}?${linkSuffix}${isSendUserIdInPath ? `&user_id=${userId}` : ''}`;
 			redirectionLink = prm
 				? `${redirectionLink}&omniChannelActiveTab=${prm}`
 				: redirectionLink;
@@ -50,7 +56,8 @@ const formatData = ({
 			return;
 		}
 
-		let crmRedirect = `/${partnerId}/details/demand/${ORGID}?${linkSuffix}`;
+		let crmRedirect = `/${partnerId}/details/demand/${ORGID}?
+		${linkSuffix}${isSendUserIdInPath ? `&user_id=${userId}` : ''}`;
 
 		crmRedirect = crm
 			? `${crmRedirect}&omniChannelActiveTab=${crm}`
@@ -64,8 +71,16 @@ const formatData = ({
 	};
 };
 
-const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab: activeConversationTab = '' }) => {
+const useCheckChannelPartner = ({
+	orgId = null, activeCardId = null,
+	activeTab: activeConversationTab = '', formattedMessageData = {},
+}) => {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
+	const userId = formattedMessageData?.user_id;
+
+	const { orgLoading = false, isOrgUserIdPresent = false } = useGetOrgUsers({ orgId, userId });
+
+	const isSendUserIdInPath = !isEmpty(orgId) && !isEmpty(userId) && isOrgUserIdPresent && !orgLoading;
 
 	const [{ data, loading }, trigger] = useRequest(
 		{
@@ -102,6 +117,8 @@ const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab: 
 		activeConversationTab,
 		activeCardId,
 		partnerId,
+		userId,
+		isSendUserIdInPath,
 	});
 
 	return {

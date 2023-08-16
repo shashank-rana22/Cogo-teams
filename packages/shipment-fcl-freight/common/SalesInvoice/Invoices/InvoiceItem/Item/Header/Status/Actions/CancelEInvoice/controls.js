@@ -9,18 +9,17 @@ const controls = [
 		span        : 12,
 		theme       : 'admin',
 		className   : 'primary md',
-		rules       : { required: true },
+		rules       : { required: 'Reason is required' },
 	},
 	{
 		name       : 'documentUrls',
 		label      : 'Cancel Agreement file',
 		type       : 'file',
-		drag       : true,
+		drag       : 'true',
 		span       : 12,
-		uploadType : 'aws',
+		uploadtype : 'aws',
 		accept     : '.png,.pdf,.jpg,.jpeg,.doc,.docx',
-		maxSize    : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
-		rules      : { required: true },
+		maxsize    : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
 	},
 ];
 

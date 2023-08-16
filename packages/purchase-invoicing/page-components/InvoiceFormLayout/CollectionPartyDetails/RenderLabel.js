@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function RenderLabel(bank) {
+function RenderLabel({ bank = {} }) {
 	return (
 		<div className={styles.flex}>
 			{bank?.data?.bank_name}

@@ -47,7 +47,6 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'supply', label: 'Supply' },
 		{ value: 'supply_management', label: 'Supply Management' },
 		{ value: 'technology', label: 'Technology' },
-
 	],
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
@@ -218,7 +217,6 @@ const GLOBAL_CONSTANTS = {
 		hk_user_id              : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
 		sachin_mehra_user_id    : '68c7e272-0c66-43a9-9537-eedb4e543194',
 		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
-		linh_nguyen_user_id   		: 'cf2c9d24-e1e0-4223-a228-69ebbdc349c1',
 		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		local_charge_providers  : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
