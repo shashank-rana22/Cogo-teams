@@ -10,8 +10,8 @@ import styles from './styles.module.css';
 
 const OPTIONS = [
 	{ label: 'All Regions', value: 'all_regions' },
-	{ label: 'your favorites', value: 'your_favorite' },
-	{ label: 'attention required', value: 'attention_required' },
+	{ label: 'Your Favorites', value: 'your_favorite' },
+	{ label: 'Attention Required', value: 'attention_required' },
 ];
 
 const commonLocationProps = {
@@ -31,7 +31,12 @@ const commonLocationProps = {
 	placeholder : 'Search via port name/code...',
 };
 
-function LocationSelect({ control, createSupplySearch, locationDetails, setLocationDetails }) {
+function LocationSelect({
+	control = {},
+	createSupplySearch = () => { },
+	locationDetails = {},
+	setLocationDetails = () => { },
+}) {
 	const onClickAllocate = () => {
 		const payload = { ...locationDetails };
 		createSupplySearch({ payload });
