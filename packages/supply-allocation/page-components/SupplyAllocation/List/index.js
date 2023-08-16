@@ -17,7 +17,6 @@ function List({ data = [], pagination = 0, setPagination = () => {} }) {
 			accessor : ({ origin_location }) => (
 				<div>
 					{ origin_location?.display_name}
-
 				</div>
 			),
 		},
@@ -32,7 +31,7 @@ function List({ data = [], pagination = 0, setPagination = () => {} }) {
 			id       : 'destination',
 			Header   : 'DESTINATION',
 			accessor : ({ destination_location }) => (
-				<div>{ destination_location?.display_name}</div>
+				<div>{destination_location?.display_name}</div>
 			),
 		},
 		{
@@ -72,6 +71,7 @@ function List({ data = [], pagination = 0, setPagination = () => {} }) {
 
 	return (
 		<div className={styles.container}>
+
 			<StyledTable data={list} columns={columns} />
 
 			<div className={styles.pagination_container}>

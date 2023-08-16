@@ -14,6 +14,8 @@ const OPTIONS = [
 	{ label: 'Attention Required', value: 'attention_required' },
 ];
 
+const DEFAULT_PAGE = 1;
+
 const commonLocationProps = {
 	asyncKey : 'list_locations',
 	params   : {
@@ -69,7 +71,7 @@ function LocationSelect({
 							origin_location_id: id || undefined,
 						}));
 
-						setPagination(1);
+						setPagination(DEFAULT_PAGE);
 					}}
 
 				/>
@@ -97,7 +99,7 @@ function LocationSelect({
 							...prev,
 							destination_location_id: id || undefined,
 						}));
-						setPagination(1);
+						setPagination(DEFAULT_PAGE);
 					}}
 				/>
 			</div>
