@@ -46,7 +46,7 @@ export default {
 		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		super_admin_id                   : '010ea56f-cbc1-468f-93cf-ecb20e350c3f',
 		admin_id                         : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
-		parent_entity_id                 : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
+		parent_entity_id                 : '04bd1037-c110-4aad-8ecc-fc43e9d4069d',
 		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',

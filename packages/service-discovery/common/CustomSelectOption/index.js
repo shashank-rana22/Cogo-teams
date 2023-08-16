@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Airlines from './Airlines';
 import Location from './Location';
 import Organization from './Organization';
