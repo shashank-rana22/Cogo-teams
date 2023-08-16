@@ -10,6 +10,7 @@ import { FilterProps } from '../interface';
 interface Tab {
 	activeTab?: string;
 	incidentId?: string;
+	entityCode? : string
 }
 
 const getParams = ({
@@ -24,6 +25,7 @@ const getParams = ({
 	startDate,
 	urgency,
 	endDate,
+	entityId,
 }) => ({
 	...rest,
 	status          : activeTab.toUpperCase(),
@@ -35,6 +37,7 @@ const getParams = ({
 	pageIndex       : page,
 	pageSize        : pageLimit,
 	id              : incidentId,
+	entityId,
 	createdFrom     : startDate
 		? formatDate({
 			date       : startDate,
@@ -55,7 +58,7 @@ const getParams = ({
 		: undefined,
 });
 
-const useGetIncidentData = ({ activeTab, incidentId }: Tab) => {
+const useGetIncidentData = ({ activeTab, incidentId, entityCode }: Tab) => {
 	const { user_profile: userProfile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
@@ -120,6 +123,7 @@ const useGetIncidentData = ({ activeTab, incidentId }: Tab) => {
 					startDate,
 					urgency,
 					endDate,
+					entityId: entityCode,
 				}),
 			});
 		} catch (err) {
@@ -141,6 +145,7 @@ const useGetIncidentData = ({ activeTab, incidentId }: Tab) => {
 		urgency,
 		incidentId,
 		activeTab,
+		entityCode,
 	]);
 
 	useEffect(() => {

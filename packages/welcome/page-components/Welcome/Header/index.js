@@ -1,11 +1,13 @@
 // import { Button, ProgressBar } from '@cogoport/components';
 import { IcMUserAllocations } from '@cogoport/icons-react';
 // import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function Header({ name = '', picture = '' }) {
+	const { t } = useTranslation(['welcome']);
 	// const [progress, setProgress] = useState('60');
 
 	// const { push } = useRouter();
@@ -26,14 +28,17 @@ function Header({ name = '', picture = '' }) {
 				<div className={styles.name_details}>
 
 					<div className={styles.name_text}>
-						Hello
+						{t('welcome:hello_text')}
 						{' '}
 						<strong>{name}</strong>
 						,
 						{' '}
 					</div>
 
-					<div className={styles.welcome_text}>Welcome to Cogoport Family. </div>
+					<div className={styles.welcome_text}>
+						{t('welcome:welcome_message')}
+						{' '}
+					</div>
 				</div>
 			</div>
 			{/* <div className={styles.profile_container}>
