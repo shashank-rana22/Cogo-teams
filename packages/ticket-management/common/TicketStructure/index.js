@@ -13,12 +13,9 @@ function TicketStructure({
 	label = '',
 	updateTicketActivity = () => {},
 	listLoading = false,
+	reachedBottom = false,
 }) {
-	if (listLoading) {
-		return <TicketStructureLoader />;
-	}
-
-	if (isEmpty(data)) {
+	if (!listLoading && isEmpty(data)) {
 		return <EmptyTicket emptyText={`No ${label} Tickets`} />;
 	}
 
@@ -44,6 +41,14 @@ function TicketStructure({
 					/>
 				))
 			}
+
+			{reachedBottom ? (
+				<div className={styles.footer_no_data}>
+					No more tickets are available
+				</div>
+			) : null}
+
+			{(listLoading && !reachedBottom) ? <TicketStructureLoader /> : null}
 		</div>
 	);
 }

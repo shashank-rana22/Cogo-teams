@@ -52,13 +52,21 @@ const GLOBAL_CONSTANTS = {
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
+		SG : '04bd1037-c110-4aad-8ecc-fc43e9d4069d',
+		ID : 'ef9a7145-b1b6-46ff-8de7-a348de635574',
+		TH : '6d92cf58-3392-44c3-8e1b-09192f98f8be',
+		CN : 'd39c9a59-93e3-4823-b85f-c72139cf138f',
 	},
 	country_ids: {
 		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
 		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
+		SG : '6e18d508-87b9-4e7e-a785-b47edc76b0b7',
+		ID : '2693fa76-6539-410d-a0b0-551d9e620ba3',
+		TH : '61a683f3-128b-4193-98f7-dd72f68db03d',
+		CN : '1b94734e-7d51-4e94-9dd2-ef96aee64a8f',
 	},
 
-	platform_supported_country_codes: ['IN', 'VN'],
+	platform_supported_country_codes: ['IN', 'VN', 'SG', 'ID', 'TH', 'CN'],
 
 	currency_code   : CURRENCY_CODE,
 	currency_locale : {
@@ -67,7 +75,9 @@ const GLOBAL_CONSTANTS = {
 		VND : 'vi-VN',
 		AED : 'en-AE',
 		SGD : 'en-SG',
-
+		IDR : 'id-ID',
+		THB : 'th-TH',
+		CNY : 'zh-CN',
 	},
 	currency_symbol: {
 		USD : '$',
@@ -75,6 +85,9 @@ const GLOBAL_CONSTANTS = {
 		VND : '₫',
 		AED : 'AED',
 		SGD : '$',
+		IDR : 'Rp',
+		THB : '฿',
+		CNY : '¥',
 
 	},
 
@@ -205,7 +218,6 @@ const GLOBAL_CONSTANTS = {
 		hk_user_id              : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
 		sachin_mehra_user_id    : '68c7e272-0c66-43a9-9537-eedb4e543194',
 		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
-		linh_nguyen_user_id   		: 'cf2c9d24-e1e0-4223-a228-69ebbdc349c1',
 		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		local_charge_providers  : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
