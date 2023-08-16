@@ -7,11 +7,18 @@ import TicketStructure from '../../../TicketStructure';
 import styles from './styles.module.css';
 
 function TicketsSectionPart({
-	label, status, searchParams, refreshList, setRefreshList, isAdmin, setModalData, isUpdated, setIsUpdated,
+	label = '', status = '', searchParams = {}, spectatorType = '', refreshList = {}, setRefreshList = () => {},
+	isAdmin = false, setModalData = () => {}, isUpdated = false, setIsUpdated = () => {}, date = {},
 }) {
-	const { tickets, listLoading, handleScroll, fetchTickets = () => {} } = useListTickets({
+	const {
+		tickets = {},
+		listLoading = false,
+		handleScroll = () => {}, fetchTickets = () => {}, reachedBottom = false,
+	} = useListTickets({
 		searchParams,
+		spectatorType,
 		status,
+		date,
 		label,
 		refreshList,
 		setRefreshList,
@@ -49,6 +56,7 @@ function TicketsSectionPart({
 				setModalData={setModalData}
 				handleScroll={handleScroll}
 				updateTicketActivity={updateTicketActivity}
+				reachedBottom={reachedBottom}
 			/>
 		</div>
 	);

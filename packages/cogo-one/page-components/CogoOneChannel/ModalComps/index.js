@@ -1,7 +1,7 @@
 import RaiseTicket from '../../../common/RaiseTicket';
-import FeedbackModal from '../FeedbackModal';
 import ReminderModal from '../ReminderModal';
 
+import FeedbackModal from './FeedbackModal';
 import OrgUsers from './OrgUsers';
 
 function ModalComp({
@@ -13,6 +13,7 @@ function ModalComp({
 	setOpenKamContacts = () => {},
 	openKamContacts = false,
 	setActiveTab = () => {},
+	orgId = '',
 }) {
 	return (
 		<>
@@ -23,6 +24,7 @@ function ModalComp({
 					setRaiseTicketModal={setRaiseTicketModal}
 					raiseTicketModal={raiseTicketModal}
 					refetchTickets={refetchTickets}
+					orgId={orgId}
 				/>
 			)}
 

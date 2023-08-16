@@ -25,7 +25,7 @@ function ChatBody({
 	modalData = {},
 	detailsLoading = false,
 }) {
-	const { user: { id: userId = '', name: currentAgentName = '' } } = useSelector(({ profile }) => profile);
+	const { user: { id: userId = '' } } = useSelector(({ profile }) => profile);
 	const { items = [], last, page } = listData;
 	const { TicketReviewer: ticketReviewer = {} } = ticketData || {};
 	const { User: user = {} } = ticketReviewer || {};
@@ -93,8 +93,8 @@ function ChatBody({
 						userId={userId}
 						name={name}
 						rating={rating}
+						agentName={name}
 						userType={userType}
-						currentAgentName={currentAgentName}
 						activityUserId={activityUserId}
 						oldReviewerName={oldReviewerName}
 						reviewerName={reviewerName}

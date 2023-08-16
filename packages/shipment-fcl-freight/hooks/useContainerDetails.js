@@ -168,19 +168,13 @@ const useContainerDetails = ({
 		);
 
 		try {
-			const res = await trigger({
+			await trigger({
 				data: formattedData,
 			});
 
-			if (!res.hasError) {
-				Toast.success('Task updated successfully');
-
-				onCancel();
-
-				taskListRefetch();
-			} else {
-				Toast.error('Something went wrong');
-			}
+			Toast.success('Task Completed Successfully');
+			onCancel();
+			taskListRefetch();
 		} catch (err) {
 			toastApiError(err);
 		}

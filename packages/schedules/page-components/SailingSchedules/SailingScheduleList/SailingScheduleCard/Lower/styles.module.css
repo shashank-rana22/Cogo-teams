@@ -1,0 +1,30 @@
+.lower {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.lower_left {
+	display: flex;
+	gap: 36px;
+	align-items: center;
+	padding: 16px 12px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+	background-color: #fdfbf6;
+	border-radius: 8px;
+}
+
+.feature_name {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+	opacity: 0.6;
+}
+
+.feature_value {
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
+}

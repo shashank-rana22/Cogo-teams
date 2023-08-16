@@ -40,7 +40,7 @@ export const renderValue = (label, detail, primary_service) => {
 	const formatCertificate = (certificates) => (
 		<div className={styles.certificate_container}>
 			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer" key={`${key + KEY_INCREMENTOR}`}>
+				<a href={item} target="_blank" rel="noreferrer" key={item}>
 					`Click to view certificate
 					{' '}
 					$
@@ -231,6 +231,16 @@ export const renderValue = (label, detail, primary_service) => {
 		case 'remarks':
 			return primary_service?.booking_preferences?.
 				[GLOBAL_CONSTANTS.zeroth_index].remarks || 'NA';
+		case 'pre_alert_shared_at':
+			return format(
+				detail?.pre_alert_shared_at,
+				GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+			);
+		case 'departed_from_port_to_icd_at':
+			return format(
+				detail?.departed_from_port_to_icd_at,
+				GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+			);
 		default:
 			return detail[label] || null;
 	}

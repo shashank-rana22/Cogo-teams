@@ -1,7 +1,9 @@
 // import logout from '@cogoport/authentication/utils/getLogout';
 import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React from 'react';
+import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+import React, { useState, useEffect } from 'react';
 
 import useGetAllActions from '../../../../hooks/useGetAllActions';
 import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
@@ -19,6 +21,25 @@ function ProfileManager({
 	checkIfSessionExpiring,
 }) {
 	const router = useRouter();
+
+	const { general } = useSelector((state) => state);
+	const { scope } = general;
+
+	const [notificationPopover, setNotificationPopover] = useState(false);
+
+	const [{ data }, trigger] = useRequest({
+		url    : '/list_communications',
+		method : 'get',
+		params : {
+			data_required                  : true,
+			not_seen_count_required        : true,
+			pagination_data_required       : true,
+			page                           : 1,
+			communication_content_required : true,
+			filters                        : { type: 'platform_notification' },
+		},
+		scope,
+	}, { manual: false });
 
 	const routerFunction = () => {
 		router.push('/my-profile');
@@ -62,6 +83,10 @@ function ProfileManager({
 
 	];
 
+	useEffect(() => {
+		trigger();
+	}, [trigger]);
+
 	return (
 		<ul className={styles.list_container}>
 			<Items
@@ -73,6 +98,9 @@ function ProfileManager({
 				setOpenPopover={setOpenPopover}
 				checkIfSessionExpiring={checkIfSessionExpiring}
 				openPopover={openPopover}
+				notificationPopover={notificationPopover}
+				setNotificationPopover={setNotificationPopover}
+				notificationCount={data?.is_not_seen_count}
 			/>
 		</ul>
 	);

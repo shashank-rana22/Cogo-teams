@@ -2,13 +2,18 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
+const SUGGESTIONS_TO_BE_FETCHED = 10;
+const DEFAULT_PAGE = 1;
+
 const getParams = ({ search }) => ({
-	sender: search,
+	sender                   : search,
+	page_limit               : SUGGESTIONS_TO_BE_FETCHED,
+	page_no                  : DEFAULT_PAGE,
+	pagination_data_required : true,
 });
 
 function useGetListEmailSuggestions({
 	searchQuery = '',
-	shouldShowSuggestions = false,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
@@ -35,13 +40,13 @@ function useGetListEmailSuggestions({
 	}, [debounceQuery, searchQuery]);
 
 	useEffect(() => {
-		if (shouldShowSuggestions) {
+		if (query) {
 			getEmailSuggestions({ search: query });
 		}
-	}, [getEmailSuggestions, query, shouldShowSuggestions]);
+	}, [getEmailSuggestions, query]);
 
 	return {
-		emailSuggestions: data,
+		emailSuggestionsData: data || {},
 		getEmailSuggestions,
 		loading,
 	};

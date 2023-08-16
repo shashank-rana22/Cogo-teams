@@ -120,12 +120,13 @@ function asyncFieldsPartnerUsers() {
 
 function asyncFieldsPartnerRoles() {
 	return {
-		labelKey    : 'name',
-		valueKey    : 'id',
-		endpoint    : 'list_auth_roles',
-		initialCall : true,
-		params      : {
-			filters    : { status: 'active' },
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'list_roles',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {
+			filters    : { status: true },
 			page_limit : 100,
 			sort_by    : 'short_name',
 			sort_type  : 'asc',
@@ -360,6 +361,20 @@ function asyncFieldsTicketTypes() {
 	};
 }
 
+function asyncTicketsCategory() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'configuration_categories',
+		authkey      : 'get_tickets_configuration_categories',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+		searchByq    : true,
+	};
+}
+
 function asyncListHsCodes() {
 	return {
 		labelKey    : 'name',
@@ -430,6 +445,18 @@ function asyncAccMode() {
 		endpoint     : 'payments/parent-jv/acc-mode',
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_acc_mode',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncIncidentSubtypeList() {
+	return {
+		labelKey     : 'incidentSubtype',
+		valueKey     : 'incidentSubtype',
+		endpoint     : 'incident-management/incident/incident-sub-type',
+		initialCall  : true,
+		authkey      : 'get_incident_management_incident_incident_sub_type',
 		microService : 'business_finance',
 		searchByq    : true,
 	};
@@ -583,6 +610,90 @@ function asyncListTests() {
 	};
 }
 
+function asyncListEmployees() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_employee_details',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListSquad() {
+	return {
+		labelKey    : 'squad_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_squads',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListSubChapters() {
+	return {
+		labelKey    : 'sub_chapter_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_sub_chapters',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListTribes() {
+	return {
+		labelKey    : 'tribe_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_tribes',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListChapter() {
+	return {
+		labelKey    : 'chapter_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_chapters',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListRoles() {
+	return {
+		labelKey    : 'role_name',
+		valueKey    : 'id',
+		endpoint    : 'list_employee_roles',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 function asyncListPromotions() {
 	return {
 		labelKey    : 'name',
@@ -594,6 +705,30 @@ function asyncListPromotions() {
 				status: 'published',
 			},
 			page_limit: 100,
+		},
+	};
+}
+function asyncListServiceLanes() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_service_lanes',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+		},
+	};
+}
+function asyncListVessels() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_vessels',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
 		},
 	};
 }
@@ -663,6 +798,56 @@ function asyncListShipmentServices() {
 	};
 }
 
+function asyncListAllManagers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_managers',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 20,
+		},
+	};
+}
+
+function asyncListAllocationObjectives() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/objectives',
+		authkey      : 'get_allocation_objectives',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
+function asyncListExpenseCategories() {
+	return {
+		labelKey     : 'categoryName',
+		valueKey     : 'id',
+		endpoint     : 'purchase/expense/expense-category',
+		microService : 'business_finance',
+		authkey      : 'get_purchase_expense_expense_category',
+		initialCall  : true,
+		searchByq    : true,
+		params       : { pageSize: 10000 },
+	};
+}
+
+function asyncListResources() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'list_resources',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -712,10 +897,24 @@ export {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncListServiceLanes,
+	asyncListVessels,
+	asyncListEmployees,
+	asyncListSquad,
+	asyncListSubChapters,
+	asyncListTribes,
+	asyncListChapter,
+	asyncListRoles,
+	asyncTicketsCategory,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncListExpenseCategories,
+	asyncListAllManagers,
 	asyncListShipmentPendingTasks,
 	asyncListShipments,
 	asyncListShipmentServices,
+	asyncListAllocationObjectives,
+	asyncIncidentSubtypeList,
+	asyncListResources,
 };

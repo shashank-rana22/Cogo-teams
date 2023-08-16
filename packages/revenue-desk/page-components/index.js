@@ -1,4 +1,4 @@
-import { Select, Input, Pagination, Button, Placeholder } from '@cogoport/components';
+import { Select, Input, Pagination, Button, Placeholder, Chips } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -13,6 +13,12 @@ import styles from './styles.module.css';
 
 function RevenueDesk() {
 	const [showDetailPage, setShowDetailPage] = useState(null);
+
+	const options = [{
+		key      : 'reverted',
+		disabled : false,
+		children : 'Reverts Available',
+	}];
 	const {
 		loading,
 		shipmentList,
@@ -61,6 +67,17 @@ function RevenueDesk() {
 								/>
 							</div>
 							<div className={styles.select_container}>
+								<Chips
+									size="md"
+									items={options}
+									selectedItems={filters?.reverts_recieved ? 'reverted' : null}
+									onItemChange={(val) => {
+										setFilters({
+											...filters,
+											reverts_recieved: val === 'reverted',
+										});
+									}}
+								/>
 								<Input
 									prefix={<IcMSearchlight />}
 									placeholder="Search SID"

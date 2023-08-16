@@ -1,9 +1,11 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useGetIncidentData from './common/hooks/useGetIncidentData';
 import { IncidentDataInterface } from './common/interface';
+import Controller from './Controller';
 import styles from './styles.module.css';
 import TabComponent from './TabComponent';
 
@@ -20,17 +22,24 @@ const tabs = [
 		key   : 'rejected',
 		label : 'Rejected',
 	},
+	{
+		key   : 'controller',
+		label : 'Approval Management',
+	},
 ];
 
 const tabsKeyComponentMapping = {
-	requested : TabComponent,
-	approved  : TabComponent,
-	rejected  : TabComponent,
+	requested  : TabComponent,
+	approved   : TabComponent,
+	rejected   : TabComponent,
+	controller : Controller,
 };
 
 function IncidentManagement() {
 	const { query, push } = useRouter();
-	const [activeTab, setActiveTab] = useState<string>(query.view || tabs[0].key);
+	const [activeTab, setActiveTab] = useState<string>(
+		query.activeTab || tabs[GLOBAL_CONSTANTS.zeroth_index].key,
+	);
 	const {
 		incidentData,
 		setFilters,
@@ -38,7 +47,10 @@ function IncidentManagement() {
 		isSettlementExecutive,
 		incidentLoading,
 		getIncidentData,
-	}:IncidentDataInterface = useGetIncidentData({ activeTab });
+	}: IncidentDataInterface = useGetIncidentData({
+		activeTab,
+		incidentId: query?.incidentId,
+	});
 
 	const { statsData } = incidentData || {};
 
@@ -72,7 +84,7 @@ function IncidentManagement() {
 		},
 	};
 	const ActiveTabComponent = tabsKeyComponentMapping[activeTab] || null;
-	const onChange = (view:string) => {
+	const onChange = (view: string) => {
 		setActiveTab(view);
 		push(
 			'/business-finance/incident-management/[activeTab]',
@@ -80,7 +92,7 @@ function IncidentManagement() {
 		);
 	};
 
-	const getStatsData = (key:string) => {
+	const getStatsData = (key: string) => {
 		if (key === 'requested') {
 			return statsData?.REQUESTED;
 		}
@@ -93,17 +105,22 @@ function IncidentManagement() {
 		return 0;
 	};
 
+	const statProps = (key) => {
+		if (key === 'controller') {
+			return {};
+		}
+		return { badge: getStatsData(key) };
+	};
+
 	return (
 		<div>
 			<div className={styles.header}>
-				<div className={styles.header_style}>
-					Incident Management
-				</div>
+				<div className={styles.header_style}>Incident Management</div>
 			</div>
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
-					onChange={(tab:string) => onChange(tab)}
+					onChange={(tab: string) => onChange(tab)}
 					fullWidth
 					themeType="primary"
 				>
@@ -112,7 +129,7 @@ function IncidentManagement() {
 							name={key}
 							key={key}
 							title={label}
-							badge={getStatsData(key)}
+							{...statProps(key)}
 						>
 							{ActiveTabComponent && (
 								<ActiveTabComponent

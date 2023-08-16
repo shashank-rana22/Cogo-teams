@@ -24,27 +24,6 @@ export const exceptionMasterFilters = [
 
 	},
 	{
-		name        : 'creditDays',
-		type        : 'select',
-		span        : 1,
-		placeholder : 'Credit Days',
-		isClearable : true,
-		options     : [
-			{
-				label : 'Upto 30 days',
-				value : '30',
-			},
-			{
-				label : '30 to 60 days',
-				value : '60',
-			},
-			{
-				label : '60 to 90 days',
-				value : '90',
-			},
-		],
-	},
-	{
 		name        : 'entities',
 		type        : 'multiSelect',
 		span        : 1,

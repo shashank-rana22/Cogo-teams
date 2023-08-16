@@ -59,8 +59,14 @@
 }
 
 .heading {
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: 600;
+	color: #000;
+}
+
+.sub_heading {
+	font-size: 10px;
+	font-weight: 400;
 	color: #000;
 }
 

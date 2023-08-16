@@ -8,12 +8,16 @@ function useGetKamExpertiseStatsList() {
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [badgeName, setBadgeName] = useState([]);
+	const [conditionName, setConditionName] = useState([]);
+	const [roleName, setRoleName] = useState([]);
+	const [managerName, setManagerName] = useState([]);
 
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			q     : searchQuery || undefined,
-			badge : badgeName || undefined,
+			q                       : searchQuery || undefined,
+			badge                   : badgeName || undefined,
+			event_configuration_ids : conditionName || undefined,
 		},
 	});
 
@@ -22,11 +26,14 @@ function useGetKamExpertiseStatsList() {
 			...pv,
 			filters: {
 				...pv.filters,
-				q     : searchQuery || undefined,
-				badge : badgeName || undefined,
+				q           : searchQuery || undefined,
+				badge       : badgeName || undefined,
+				event_ids   : conditionName || undefined,
+				role_ids    : roleName || undefined,
+				manager_ids : managerName || undefined,
 			},
 		}));
-	}, [searchQuery, badgeName]);
+	}, [searchQuery, badgeName, conditionName, roleName, managerName]);
 
 	const [{ loading, data }] = useAllocationRequest({
 		url     : '/kam_expertise_stats_list',
@@ -52,6 +59,12 @@ function useGetKamExpertiseStatsList() {
 		setSearchKAM,
 		badgeName,
 		setBadgeName,
+		conditionName,
+		setConditionName,
+		roleName,
+		setRoleName,
+		setManagerName,
+		managerName,
 		debounceQuery,
 		paginationData,
 		getNextPage,

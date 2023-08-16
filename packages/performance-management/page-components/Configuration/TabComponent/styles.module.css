@@ -1,0 +1,60 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 12px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.active {
+	width: fit-content;
+	padding: 0 6px;
+	background: var(--color-tertiary-success-green-3);
+	border-radius: 4px;
+}
+
+.inactive {
+	width: fit-content;
+	padding: 0 6px;
+	background: var(--color-primary-error-red-4);
+	border-radius: 4px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-start;
+	width: 100%;
+	padding: 10px 20px 20px 0;
+}
+
+.pill_box {
+	display: flex;
+	flex-flow: row wrap;
+	width: 300px;
+
+	:global {
+		.tippy-box {
+			max-height: 400px;
+			overflow-y: scroll;
+		}
+	}
+}
+
+.button {
+	display: flex;
+	align-items: center;
+	margin-left: 20px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 12px 0;
+
+	:global {
+		.ui_input_container {
+			height: 42px;
+		}
+	}
+}

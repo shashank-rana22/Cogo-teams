@@ -24,6 +24,7 @@ function MailModal({
 		activeMailAddress,
 		emailState,
 		setEmailState,
+		userMails = [],
 		viewType,
 		userEmailAddress,
 	} = mailProps;
@@ -31,7 +32,6 @@ function MailModal({
 	const uploaderRef = useRef(null);
 
 	const [showControl, setShowControl] = useState(null);
-	const [value, setValue] = useState('');
 	const [errorValue, setErrorValue] = useState('');
 	const [uploading, setUploading] = useState(false);
 	const [attachments, setAttachments] = useState([]);
@@ -41,15 +41,13 @@ function MailModal({
 		handleEdit = () => {},
 		handleChange = () => {},
 		handleDelete = () => {},
-		handleError = () => {},
+		handleCancel = () => {},
 		handleClose = () => {},
 		handleAttachmentDelete = () => {},
 		getDecodedData = () => {},
 	} = mailFunction({
 		...mailProps,
 		setErrorValue,
-		value,
-		setValue,
 		setShowControl,
 		showControl,
 		setAttachments,
@@ -57,12 +55,20 @@ function MailModal({
 		uploaderRef,
 	});
 
-	const userActiveMails = getUserActiveMails({ userEmailAddress, viewType }).map(
+	const userActiveMails = (
+		[...new Set([
+			...getUserActiveMails({ userEmailAddress, viewType }),
+			...(userMails || []),
+		])]
+	).map(
 		(curr) => ({ label: curr, value: curr }),
 	);
 
 	const handleSend = () => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
+		if (replyLoading) {
+			return;
+		}
 
 		if (uploading) {
 			Toast.error('Files are uploading...');
@@ -138,10 +144,9 @@ function MailModal({
 					handleChange={handleChange}
 					handleDelete={handleDelete}
 					handleKeyPress={handleKeyPress}
-					handleError={handleError}
+					handleCancel={handleCancel}
 					handleEdit={handleEdit}
 					showControl={showControl}
-					value={value}
 					errorValue={errorValue}
 					setEmailState={setEmailState}
 				/>
@@ -176,20 +181,17 @@ function MailModal({
 
 						{(attachments || []).map(
 							(data) => {
-								const {
-									fileIcon = {},
-									uploadedFileName = '',
-								} = getDecodedData(data) || {};
+								const { fileIcon = {}, fileName = '' } = getDecodedData(data) || {};
 
 								return (
 									<div
 										className={styles.uploaded_files}
-										key={uploadedFileName}
+										key={fileName}
 									>
 										<div className={styles.uploaded_files_content}>
 											{fileIcon}
 											<div className={styles.content_div}>
-												{uploadedFileName}
+												{fileName}
 											</div>
 										</div>
 										<IcMCross

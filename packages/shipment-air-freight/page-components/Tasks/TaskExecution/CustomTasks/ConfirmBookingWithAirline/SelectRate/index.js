@@ -32,6 +32,10 @@ function SelectRate({
 
 	const [showConfirmModal, setShowConfirmModal] = useState(false);
 
+	const mainServiceData = (shipmentData?.all_services || []).find((service) => (
+		service?.service_type === 'air_freight_service'
+	));
+
 	const {
 		control,
 		formState: { errors },
@@ -65,7 +69,6 @@ function SelectRate({
 		(item) => item?.booking_confirmation_status === 'pending' && item?.is_email_sent,
 	);
 
-	// const serviceProvidersData = [];
 	const SERVICE_PROVIDERS_DATA = [];
 	(list || []).forEach((itm) => {
 		const {
@@ -120,6 +123,7 @@ function SelectRate({
 							refetchList={getList}
 							setStep={setStep}
 							primary_service={primary_service}
+							mainServiceData={mainServiceData}
 						/>
 					) : (
 						<>
@@ -155,6 +159,7 @@ function SelectRate({
 												refetchList={getList}
 												setStep={setStep}
 												primary_service={primary_service}
+												mainServiceData={mainServiceData}
 											/>
 										))}
 									</>

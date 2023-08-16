@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 import VerticleLine from '../VerticleLine';
 
+import PrintDocument from './PrintDocument';
 import ReviewSiDocument from './ReviewSiDocument';
 import styles from './styles.module.css';
 
@@ -20,14 +21,7 @@ const SUPPLIER_STAKEHOLDERS = [
 	'superadmin',
 ];
 
-const BL_SHOW_STATUS = [
-	'approved',
-	'released',
-	'surrendered',
-	'delivered',
-	'surrender_pending',
-	'release_pending',
-];
+const PRINTABLE_DOCS = ['draft_house_bill_of_lading'];
 
 function Content({
 	uploadedItem = {},
@@ -40,27 +34,36 @@ function Content({
 	handleView = () => {},
 	primary_service = {},
 	receivedViaEmail = false,
-	showUploadText = '',
+	showUploadText = false,
+	canEditDocuments = true,
 	setShowDoc = () => {},
 	setShowApproved = () => {},
 	docType = '',
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
-	bl_details = [],
 }) {
 	const [siReviewState, setSiReviewState] = useState(false);
+	const [printDoc, setPrintDoc] = useState(false);
 
 	const { data:bl_data } = uploadedItem || {};
-	const isBlUploaded = bl_details?.find((i) => i?.id === bl_data?.bl_detail_id);
-
-	const isBlReleased = BL_SHOW_STATUS.includes(isBlUploaded?.status);
 
 	const tradeType = primary_service?.trade_type;
 
+	const isSeaway = primary_service?.bl_type === 'seaway';
+
+	const isHBLMBL = [
+		'house_bill_of_lading',
+		'bill_of_lading',
+	].includes(uploadedItem?.document_type);
+
+	const restrictBLDocumentCondition = (
+		(isHBLMBL && tradeType === 'export' && isSeaway) || (isHBLMBL && tradeType === 'import')
+	);
+
 	const { document_type, state } = uploadedItem;
 
-	const getUploadButton = () => {
-		if (showUploadText.length) {
+	function GetUploadButton() {
+		if (showUploadText.length && canEditDocuments) {
 			return (
 				<Button
 					themeType="link"
@@ -85,7 +88,7 @@ function Content({
 			);
 		}
 		return null;
-	};
+	}
 
 	const SI_REVIEW_CONDITION = document_type === 'si' && state === 'document_accepted';
 
@@ -162,15 +165,19 @@ function Content({
 					</Button>
 				) : null}
 
+				{PRINTABLE_DOCS.includes(document_type)
+					&& (
+						<Button
+							themeType="link"
+							onClick={() => setPrintDoc(true)}
+						>
+							Print
+						</Button>
+					)}
+
 				{isChecked ? (
 					<div className={styles.action_container}>
-						{(!(
-							[
-								'house_bill_of_lading',
-								'bill_of_lading',
-							].includes(uploadedItem?.document_type) && tradeType === 'export'
-						)
-						|| isBlReleased)
+						{!restrictBLDocumentCondition
 							? (
 								<>
 									<Button
@@ -189,7 +196,7 @@ function Content({
 							) : null}
 
 					</div>
-				) : getUploadButton()}
+				) : <GetUploadButton />}
 
 			</div>
 
@@ -199,6 +206,16 @@ function Content({
 					setSiReviewState={setSiReviewState}
 					uploadedItem={uploadedItem}
 					shipmentDocumentRefetch={shipmentDocumentRefetch}
+				/>
+			) : null}
+
+			{printDoc ? (
+				<PrintDocument
+					shipment_data={shipment_data}
+					primary_service={primary_service}
+					data={bl_data}
+					show={printDoc}
+					setShow={setPrintDoc}
 				/>
 			) : null}
 
