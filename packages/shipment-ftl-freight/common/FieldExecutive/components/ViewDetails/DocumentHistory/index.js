@@ -4,7 +4,7 @@ import React from 'react';
 import ModalContent from './ModalContent';
 
 function DocumentHistory(props) {
-	const { showHistory, setShowHistory } = props;
+	const { showHistory = false, setShowHistory = () => {} } = props;
 	return (
 		<div>
 			<Modal

@@ -48,3 +48,28 @@ export const ACTION_BUTTON = {
 		visibilityFunction : getEnableConsolidation,
 	},
 };
+
+export const getActionButtons = ({
+	shipment_data = {},
+	user_data = {},
+	state = '',
+	activeStakeholder = '',
+	isTruckPresent = false,
+	enableConsolidations = false,
+	stakeholderConfig = {},
+}) => {
+	const actionButtons = Object.values(ACTION_BUTTON).map((btnObj) => ({
+		...btnObj,
+		show: btnObj?.visibilityFunction({
+			shipment_data,
+			user_data,
+			state,
+			activeStakeholder,
+			isTruckPresent,
+			enableConsolidations,
+			stakeholderConfig,
+		}),
+	}));
+
+	return actionButtons;
+};

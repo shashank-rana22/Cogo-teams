@@ -86,7 +86,7 @@ function ViewDetails({
 										placeholder="Select Mobile No."
 										options={mobileOptions}
 										value={mobileNumber}
-										onChange={(e) => setMobileNumber(e)}
+										onChange={setMobileNumber}
 									/>
 								) : (
 									<Input
@@ -95,7 +95,7 @@ function ViewDetails({
 										type="number"
 										size="md"
 										value={mobileNumber}
-										onChange={(val) => setMobileNumber(val)}
+										onChange={setMobileNumber}
 									/>
 								)}
 							</div>
@@ -105,7 +105,7 @@ function ViewDetails({
 								disabled={isEmpty(mobileNumber)
 							|| loading
 							|| isEmpty(selectedTruckNumber)
-							|| !filterOptions.some((fil) => fil.value === selectedTruckNumber)}
+							|| !filterOptions.some((fil) => fil?.value === selectedTruckNumber)}
 								onClick={() => createTracking({
 									truck_number  : selectedTruckNumber,
 									mobile_number : mobileNumber,

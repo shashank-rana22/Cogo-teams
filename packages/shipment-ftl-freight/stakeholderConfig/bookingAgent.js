@@ -18,7 +18,8 @@ export default {
 	shipment_info : {},
 	default_tab   : 'overview',
 	overview      : {
-		tab_title: 'Overview',
+		tab_title            : 'Overview',
+		enable_consolidation : true,
 	},
 	tasks: {
 		tab_title: 'Timeline and Tasks',

@@ -23,7 +23,11 @@ export default {
 	},
 	default_tab : 'overview',
 	overview    : {
-		tab_title: 'Overview',
+		tab_title            : 'Overview',
+		edit_supplier        : true,
+		cancel_service       : true,
+		edit_service_details : true,
+		enable_consolidation : true,
 	},
 	tasks: {
 		tab_title             : 'Timeline and Tasks',

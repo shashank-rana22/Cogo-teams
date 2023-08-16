@@ -22,8 +22,6 @@ const useFieldServiceOpsHelper = ({ shipment_data = {} }) => {
 
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
 
-	const fieldExecTabConfig = stakeholderConfig?.field_executive;
-
 	const {
 		list,
 		refetchList,
@@ -91,7 +89,7 @@ const useFieldServiceOpsHelper = ({ shipment_data = {} }) => {
 		setTruckNumber,
 		truckLoading,
 		listLoading,
-		fieldExecTabConfig,
+		fieldExecTabConfig: stakeholderConfig?.field_executive,
 	};
 };
 

@@ -29,13 +29,13 @@ const useGetBillingAddress = ({
 	);
 
 	const {
-		fortigo_collections,
-		fortigo_support,
 		cogoport_ftl_collections,
 		cogoport_support,
 	} = GLOBAL_CONSTANTS.emails;
 
-	const { fortigo_website, cogoport_website } = GLOBAL_CONSTANTS.others;
+	const { fortigo_support, fortigo_collections } = GLOBAL_CONSTANTS?.others?.fortigo_details?.emails || {};
+
+	const { fortigo, cogoport } = GLOBAL_CONSTANTS.websites || {};
 
 	if (Object.values(GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping).includes(importerExporterId)) {
 		return {
@@ -43,7 +43,7 @@ const useGetBillingAddress = ({
 				...initBillingAddress,
 				cin                     : CUSTOMER_TO_CIN[importerExporterId],
 				email                   : fortigo_support,
-				website                 : fortigo_website,
+				website                 : fortigo,
 				service_description     : CUSTOMER_TO_SERVICE_DESCRIPTION[importerExporterId],
 				payment_email           : fortigo_collections,
 				branch_city             : FORTIGO_BRANCH_CITY,
@@ -54,7 +54,7 @@ const useGetBillingAddress = ({
 	}
 
 	if (
-		Object.values(GLOBAL_CONSTANTS.others.fortigo_company_pan_mappings).includes(
+		Object.values(GLOBAL_CONSTANTS.others.fortigo_details.fortigo_company_pan_mappings).includes(
 			initBillingAddress?.registration_number,
 		)
 	) {
@@ -65,7 +65,7 @@ const useGetBillingAddress = ({
 				service_description:
 					PAN_TO_SERVICE_DESCRIPTION[initBillingAddress?.registration_number],
 				email                   : fortigo_support,
-				website                 : fortigo_website,
+				website                 : fortigo,
 				payment_email           : fortigo_collections,
 				branch_city             : FORTIGO_BRANCH_CITY,
 				is_required_for_fortigo : true,
@@ -76,9 +76,9 @@ const useGetBillingAddress = ({
 	}
 
 	if (
-		!isEmpty(customData?.cogo_entity_id)
-		&& !isEmpty(customData?.cogo_entity_address_id)
-		&& !isEmpty(customData?.business_mode)
+		[customData?.cogo_entity_id,
+			customData?.cogo_entity_address_id,
+			customData?.business_mode].every((ele) => !isEmpty(ele))
 	) {
 		const entity =	entityList.find((item) => item?.id === customData?.cogo_entity_id) || {};
 		const entityAddress = entity?.addresses?.find(
@@ -95,7 +95,7 @@ const useGetBillingAddress = ({
 				pin_code            : entityAddress?.pin_code || '',
 				address             : entityAddress?.address,
 				email               : cogoport_support,
-				website             : cogoport_website,
+				website             : cogoport,
 				service_description:
 					BUSINESS_TO_SERVICE_DESCRIPTION[customData?.business_mode],
 				payment_email           : cogoport_ftl_collections,
@@ -108,7 +108,7 @@ const useGetBillingAddress = ({
 
 	if (supportedEntities?.length === SINGLE_VALUE) {
 		const cogo_entity_id = supportedEntities[GLOBAL_CONSTANTS.zeroth_index]?.id;
-		const entity = entityList.find((item) => item?.id === cogo_entity_id) || {};
+		const entity = entityList?.find((item) => item?.id === cogo_entity_id) || {};
 		let entityAddress =	 {};
 		let taxMechanism = '';
 
@@ -134,7 +134,7 @@ const useGetBillingAddress = ({
 				pin_code                : entityAddress?.pin_code || '',
 				address                 : entityAddress?.address,
 				email                   : cogoport_support,
-				website                 : cogoport_website,
+				website                 : cogoport,
 				service_description     : BUSINESS_TO_SERVICE_DESCRIPTION[taxMechanism],
 				payment_email           : cogoport_ftl_collections,
 				branch_city             : entityAddress?.city?.name,

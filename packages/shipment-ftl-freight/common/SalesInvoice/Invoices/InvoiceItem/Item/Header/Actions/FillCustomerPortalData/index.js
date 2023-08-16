@@ -47,9 +47,9 @@ function FillCustomerPortalData({
 			add_service_objects_required: true,
 		},
 	});
-	const { entityList, loading: entityLoading } = useListCogoEntities();
+	const { entityList = {}, loading: entityLoading = false } = useListCogoEntities();
 
-	const { data: customData, loading: customLoading } = useGetShipmentFortigoTripDetail({
+	const { data: customData = {}, loading: customLoading = false } = useGetShipmentFortigoTripDetail({
 		defaultParams: {
 			shipment_id            : shipmentData?.serial_id,
 			invoice_combination_id : invoice?.id,
@@ -57,7 +57,7 @@ function FillCustomerPortalData({
 		},
 	});
 
-	const { loading, apiTrigger } = useCreateShipmentFortigoTripDetail({
+	const { loading = false, apiTrigger = () => {} } = useCreateShipmentFortigoTripDetail({
 		refetch: () => {
 			handleRefetch();
 			setShowModal(false);
@@ -76,9 +76,10 @@ function FillCustomerPortalData({
 	const isFortigoCustomer = Object.values(GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping).includes(
 		shipmentData?.importer_exporter_id,
 	);
-	const isFortigoInvoicingParty = Object.values(GLOBAL_CONSTANTS.others.fortigo_company_pan_mappings).includes(
-		invoice?.billing_address?.registration_number,
-	);
+	const isFortigoInvoicingParty = Object.values(GLOBAL_CONSTANTS.others.fortigo_details.fortigo_company_pan_mappings)
+		.includes(
+			invoice?.billing_address?.registration_number,
+		);
 	const formValues = watch();
 
 	const fieldsLikeControls = getFieldLikeControls({
@@ -104,7 +105,7 @@ function FillCustomerPortalData({
 			&& !isFortigoInvoicingParty,
 	};
 
-	const basCharges =		formValues?.rate_type === RATE_TYPES.FIXED
+	const basCharges = formValues?.rate_type === RATE_TYPES.FIXED
 		? +formValues.rate || DEFAULT_VALUE
 		: (+formValues.rate || DEFAULT_VALUE) * (+formValues.charged_weight || DEFAULT_VALUE);
 
@@ -143,7 +144,7 @@ function FillCustomerPortalData({
 		}
 		setValues({ obj, setValue });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data, customData]);
+	}, [JSON.stringify(data), JSON.stringify(customData)]);
 
 	return (
 		<Modal
@@ -163,11 +164,11 @@ function FillCustomerPortalData({
 				<div className={styles.extra}>
 					Terms and Conditions
 				</div>
-				<RTEditor value={termsAndConditions} onChange={(val) => setTermsAndConditions(val)} />
+				<RTEditor value={termsAndConditions} onChange={setTermsAndConditions} />
 				<div className={styles.extra}>
 					Bank Details
 				</div>
-				<RTEditor value={bankDetails} onChange={(val) => setBankDetails(val)} />
+				<RTEditor value={bankDetails} onChange={setBankDetails} />
 			</Modal.Body>
 			<Modal.Footer className={styles.footer}>
 				<div>

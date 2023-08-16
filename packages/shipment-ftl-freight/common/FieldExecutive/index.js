@@ -60,7 +60,7 @@ function FieldExecutive(props) {
 						size="md"
 					/>
 				</div>
-				{fieldExecTabConfig.edit_details_visible ? (
+				{fieldExecTabConfig?.edit_details_visible ? (
 					<div>
 						<Button
 							themeType="secondary"

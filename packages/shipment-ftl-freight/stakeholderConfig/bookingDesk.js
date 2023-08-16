@@ -17,7 +17,10 @@ export default {
 	shipment_info : {},
 	default_tab   : 'overview',
 	overview      : {
-		tab_title: 'Overview',
+		tab_title            : 'Overview',
+		edit_supplier        : true,
+		cancel_service       : true,
+		edit_service_details : true,
 	},
 	field_executive: {
 		tab_title                : 'Field Executive',

@@ -27,7 +27,7 @@ const getFinalUrls = ({
 
 	if (
 		Object.values(GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping).includes(importerExporterId)
-		|| Object.values(GLOBAL_CONSTANTS.others.fortigo_company_pan_mappings).includes(
+		|| Object.values(GLOBAL_CONSTANTS.others.fortigo_details.fortigo_company_pan_mappings).includes(
 			billing_address?.registration_number,
 		)
 	) {

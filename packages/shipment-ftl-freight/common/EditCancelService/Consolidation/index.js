@@ -17,19 +17,18 @@ const CONSOLIDATION_OPTIONS = [
 	},
 ];
 
-function Consolidation(props) {
-	const {
-		shipment_data = {},
-		setShowModal = () => {},
-		servicesList = [],
-		refetch = () => {},
-	} = props;
+function Consolidation({
+	shipment_data = {},
+	setShowModal = () => {},
+	servicesList = [],
+	refetch = () => {},
+}) {
 	const approvalType = shipment_data?.all_services?.[GLOBAL_CONSTANTS.zeroth_index]
 		?.invoice_approval_type;
 
 	const [invoiceApprovalType, setInvoiceApprovalType] = useState(approvalType);
 
-	const { loading, updateDetails } = useUpdateConsolidation({
+	const { loading = false, updateDetails = () => {} } = useUpdateConsolidation({
 		allServices : servicesList,
 		callback    : () => {
 			refetch();
@@ -42,7 +41,7 @@ function Consolidation(props) {
 			<Select
 				options={CONSOLIDATION_OPTIONS}
 				value={invoiceApprovalType}
-				onChange={(val) => setInvoiceApprovalType(val)}
+				onChange={setInvoiceApprovalType}
 				size="sm"
 			/>
 			<div className={styles.button_wrapper}>

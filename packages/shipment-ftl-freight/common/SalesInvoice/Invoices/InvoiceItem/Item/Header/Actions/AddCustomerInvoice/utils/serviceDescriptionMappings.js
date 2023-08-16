@@ -1,13 +1,17 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const {
-	fortigo_registration_number_mappings,
-	fortigo_company_pan_mappings,
-	fortigo_cin_mappings,
-	fortigo_bank_details_mappings,
-	cogo_bank_details,
-	customer_pan_mappings,
+	fortigo_details = {},
+	cogo_bank_details = {},
+	ftl_customer_pan_mappings = {},
 } = GLOBAL_CONSTANTS.others;
+
+const {
+	fortigo_registration_number_mappings = {},
+	fortigo_company_pan_mappings = {},
+	fortigo_cin_mappings = {},
+	fortigo_bank_details_mappings = {},
+} = fortigo_details || {};
 
 export const CUSTOMER_TO_SERVICE_DESCRIPTION = {
 	[GLOBAL_CONSTANTS.uuid.fortigo_agencies_mapping.fortigo_network_logistics]:
@@ -91,15 +95,15 @@ export const BUSINESS_TO_SERVICE_DESCRIPTION = {
 };
 
 export const SHIPPER_TO_PAN_MAPPINGS = {
-	exide_industries : customer_pan_mappings.exide_industries,
-	adani_wilmar     : customer_pan_mappings.adani_wilmar,
-	gujarat_milk     : customer_pan_mappings.gujarat_milk,
-	hil_limited      : customer_pan_mappings.hil_limited,
-	itc_limited      : customer_pan_mappings.itc_limited,
-	ivl_dhunseri     : customer_pan_mappings.ivl_dhunseri,
-	kansai_nerolac   : customer_pan_mappings.kansai_nerolac,
-	orissa_metaliks  : customer_pan_mappings.orissa_metaliks,
-	varun_beverages  : customer_pan_mappings.varun_beverages,
+	exide_industries : ftl_customer_pan_mappings.exide_industries,
+	adani_wilmar     : ftl_customer_pan_mappings.adani_wilmar,
+	gujarat_milk     : ftl_customer_pan_mappings.gujarat_milk,
+	hil_limited      : ftl_customer_pan_mappings.hil_limited,
+	itc_limited      : ftl_customer_pan_mappings.itc_limited,
+	ivl_dhunseri     : ftl_customer_pan_mappings.ivl_dhunseri,
+	kansai_nerolac   : ftl_customer_pan_mappings.kansai_nerolac,
+	orissa_metaliks  : ftl_customer_pan_mappings.orissa_metaliks,
+	varun_beverages  : ftl_customer_pan_mappings.varun_beverages,
 };
 
 export const INVOICE_SOURCES = {

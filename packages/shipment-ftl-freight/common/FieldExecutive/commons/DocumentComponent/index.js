@@ -8,14 +8,13 @@ import MovePopOver from './MovePopOver';
 import ReUploadPopOver from './ReUploadPopOver';
 import styles from './styles.module.css';
 
-function DocumentComponent(props) {
+function DocumentComponent({
+	item = {},
+	formattedData = {},
+	setInitFormattedData = () => {},
+	fieldExecTabConfig = {},
+}) {
 	const [selectedFiles, setSelectedFiles] = useState(new Set());
-	const {
-		item = {},
-		formattedData = {},
-		setInitFormattedData = () => {},
-		fieldExecTabConfig = {},
-	} = props || {};
 
 	const handleCheck = (id) => {
 		if (!selectedFiles.has(id)) {

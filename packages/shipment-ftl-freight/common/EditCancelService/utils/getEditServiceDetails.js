@@ -1,9 +1,7 @@
-const NOT_ALLOWED_STAKEHOLDERS = ['booking_agent', 'ground_ops', 'ftl_ground_ops', 'field_service_ops'];
-
-export default function getEditServiceDetails({ state, activeStakeholder, isTruckPresent }) {
+export default function getEditServiceDetails({ state = '', stakeholderConfig = {}, isTruckPresent = false }) {
 	const serviceInCancellationState = state !== 'completed';
 
-	const disableEdit = NOT_ALLOWED_STAKEHOLDERS.includes(activeStakeholder);
+	const enableEdit = stakeholderConfig?.overview?.edit_service_details || false;
 
-	return serviceInCancellationState && !disableEdit && isTruckPresent;
+	return serviceInCancellationState && enableEdit && isTruckPresent;
 }

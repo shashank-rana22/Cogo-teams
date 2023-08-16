@@ -156,7 +156,7 @@ function AddressRow({
 				</p>
 				<p style={{ fontSize: '12px', margin: 'revert' }}>
 					<b>Value of Goods: </b>
-					{geo.country.currency.code}
+					{geo?.country?.currency?.code}
 					{' '}
 					{value_of_goods}
 				</p>

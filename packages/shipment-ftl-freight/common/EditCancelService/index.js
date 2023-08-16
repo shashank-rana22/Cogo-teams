@@ -19,7 +19,7 @@ import {
 } from './Controls';
 import Form from './Forms';
 import styles from './styles.module.css';
-import { ACTION_BUTTON } from './utils/actions';
+import { getActionButtons } from './utils/actions';
 
 const DEFAULT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 
@@ -85,7 +85,9 @@ function EditCancelService({ serviceData = {}, invoicing_parties = [] }) {
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 	const {
-		shipment_data, servicesList, activeStakeholder, refetchServices, refetch,
+		shipment_data = {},
+		stakeholderConfig = {},
+		servicesList = [], activeStakeholder = '', refetchServices = () => {}, refetch = () => {},
 	} = useContext(ShipmentDetailContext);
 
 	const [showModal, setShowModal] = useState(false);
@@ -114,25 +116,24 @@ function EditCancelService({ serviceData = {}, invoicing_parties = [] }) {
 		enableConsolidations =	filteredInvoices?.every((invoice) => INVOICE_REQUIRED_STATES.includes(invoice?.status));
 	}
 
-	Object.entries(ACTION_BUTTON).forEach(([btnKey, butObj]) => {
-		ACTION_BUTTON[btnKey].show = butObj.visibilityFunction({
-			shipment_data,
-			user_data,
-			state,
-			activeStakeholder,
-			isTruckPresent,
-			enableConsolidations,
-		});
+	const actionButtons = getActionButtons({
+		shipment_data,
+		user_data,
+		state,
+		activeStakeholder,
+		isTruckPresent,
+		enableConsolidations,
+		stakeholderConfig,
 	});
 
-	if (!Object.values(ACTION_BUTTON).some((actionButton) => actionButton.show)) {
+	if (!(actionButtons || []).some((actionButton) => actionButton.show)) {
 		return null;
 	}
 
 	const showEdit = isTruckPresent || enableConsolidations;
 
-	const content = Object.values(ACTION_BUTTON).map((action) => {
-		const { label, value, show } = action || {};
+	const content = (actionButtons || []).map((action) => {
+		const { label = '', value = '', show = false } = action || {};
 		return (
 			show ? (
 				<Button
