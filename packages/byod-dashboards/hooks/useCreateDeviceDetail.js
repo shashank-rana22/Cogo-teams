@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 
-const useCreateDeviceDetail = (refetch) => {
+const FORMAT_TIME = `${GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']} 00:00:00`;
+
+const useCreateDeviceDetail = () => {
 	const { profile = {} } = useSelector((state) => state);
 
 	const { user = {} } = profile;
@@ -11,10 +14,9 @@ const useCreateDeviceDetail = (refetch) => {
 	const { id:user_id } = user;
 
 	const [{ loading }, trigger] = useHarbourRequest({
-		url    : 'create_employee_device_detail',
+		url    : '/create_employee_device_detail',
 		method : 'POST',
 		params : {},
-
 	}, { manual: true });
 
 	const removeEmptyStringKeys = (obj) => {
@@ -25,21 +27,34 @@ const useCreateDeviceDetail = (refetch) => {
 	const createDeviceDetail = async (values) => {
 		const objValues = removeEmptyStringKeys(values);
 
-		const { invoice_date, vendor_name, other_vendor_name, invoice_url, ...rest } = objValues;
+		const {
+			invoice_date,
+			vendor_name,
+			other_vendor_name,
+			invoice_url,
+			device_type,
+			serial_id,
+			invoice_amount,
+		} = objValues;
 
 		try {
+			const payload = {
+				invoice_url    : invoice_url.finalUrl,
+				user_id,
+				device_details : [
+					{
+						device_type,
+						serial_id,
+						invoice_date   : format(invoice_date, FORMAT_TIME),
+						invoice_amount : Number(invoice_amount),
+						vendor_name    : vendor_name === 'other' ? other_vendor_name : vendor_name,
+					},
+				],
+			};
+
 			await trigger({
-				data: {
-					...rest,
-					invoice_date      : format(invoice_date, 'yyyy-MM-dd 00:00:00'),
-					vendor_name       : vendor_name === 'other' ? other_vendor_name : vendor_name,
-					invoice_url       : invoice_url.finalUrl,
-					performed_by_id   : user_id,
-					performed_by_type : 'user',
-					user_id,
-				},
+				data: payload,
 			});
-			refetch();
 		} catch (error) {
 			console.log('error', error);
 		}

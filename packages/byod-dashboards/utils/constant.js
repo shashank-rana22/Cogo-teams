@@ -130,53 +130,35 @@ export const SURRENDER_OPTIONS = [
 	},
 ];
 
-export const WARRANTY = [
-	{
-		label : 'Yes',
-		value : 'yes',
-	},
-	{
-		label : 'No',
-		value : 'no',
-	},
-];
-
 export const DEVICE_OPTIONS = [
 	{
-		label : 'Existing Laptop',
-		value : 'existing_laptop',
+		label : 'Macbook',
+		value : 'macbook',
 	},
 	{
-		label : 'New Laptop',
-		value : 'new_laptop',
+		label : 'Windows',
+		value : 'windows',
 	},
 ];
 
-export const getVendorNameOptions = (deviceType) => {
-	if (deviceType === 'existing_laptop') {
-		return [{
-			label : 'Micron Computers',
-			value : 'micron_computers',
-		},
-		{
-			label : 'Global System',
-			value : 'global_systems',
-		}];
-	}
-
-	if (deviceType === 'new_laptop') {
-		return [{
-			label : 'Team Computer',
-			value : 'team_computer',
-		},
-		{
-			label : 'Other',
-			value : 'other',
-		}];
-	}
-
-	return [];
-};
+export const VENDOR_NAME_OPTIONS = [
+	{
+		label : 'Micron Computers',
+		value : 'micron_computers',
+	},
+	{
+		label : 'Global System',
+		value : 'global_systems',
+	},
+	{
+		label : 'Team Computer',
+		value : 'team_computer',
+	},
+	{
+		label : 'Other',
+		value : 'other',
+	},
+];
 
 export const HRBP_TAB_OPTIONS = [
 	{

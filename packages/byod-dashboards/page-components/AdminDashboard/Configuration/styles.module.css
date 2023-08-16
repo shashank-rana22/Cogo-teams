@@ -5,61 +5,60 @@
 }
 
 .title_container {
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: 700;
+	margin-bottom: 20px;
+	font-size: 24px;
+	font-weight: 700;
 }
 
 .body_container {
-    background-color: #fff;
-    padding-bottom: 20px;
+	padding-bottom: 20px;
+	background-color: #fff;
 }
 
 .reimbursement_container {
-    margin: 10px;
-    padding: 10px 10px 0px 20px;
+	padding: 10px 10px 0 20px;
+	margin: 10px;
 }
 
-.device_info{
-    padding-left: 20px;
+.device_info {
+	padding-left: 20px;
 }
 
 .title {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-left: 10px;
-    font-size: large;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-left: 10px;
+	font-size: large;
 }
 
 .header_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
 }
 
 .text_container {
-    margin: 10px; 
+	margin: 10px;
 }
 
 .footer_container {
-    padding: 20px 10px;
-    margin-top: 30px;
-    background-color: #fff;
-
+	padding: 20px 10px;
+	margin-top: 30px;
+	background-color: #fff;
 }
 
 .set_combined_reimbusement {
-    display: flex;
+	display: flex;
 }
 
 .combined_reimbusement_body {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 20px;
-    margin-bottom: 26px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 26px;
+	margin-left: 20px;
 }
 
 .select_categories {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }

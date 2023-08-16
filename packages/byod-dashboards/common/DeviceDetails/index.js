@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 1;
 
-function DeviceDetails({ deviceData, className }) {
+function DeviceDetails({ deviceData = {}, className = '' }) {
 	const employeeDeviceData = deviceData[deviceData.length - DEFAULT_VALUE] || [];
 
 	return (

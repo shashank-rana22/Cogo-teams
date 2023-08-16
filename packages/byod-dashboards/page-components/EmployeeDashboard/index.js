@@ -2,39 +2,26 @@ import { Button } from '@cogoport/components';
 import {
 	useForm, InputController, SelectController, DatepickerController, UploadController,
 } from '@cogoport/forms';
-import { useSelector } from '@cogoport/store';
+// import { useSelector } from '@cogoport/store';
 import React, { useEffect } from 'react';
 
-import DeviceDetails from '../../common/DeviceDetails';
 import EmployeeData from '../../common/EmployeeData';
 import Spinner from '../../common/Spinner';
 import useCreateInvoice from '../../hooks/useCreateDeviceDetail';
 import useGetEmployeeData from '../../hooks/useGetEmployeeData';
-import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
-import {
-	DEVICE_OPTIONS, WARRANTY, getVendorNameOptions,
-} from '../../utils/constant';
+// import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
+import { DEVICE_OPTIONS, VENDOR_NAME_OPTIONS } from '../../utils/constant';
 
 import styles from './styles.module.css';
 
-const DEFAULT_VALUE = 1;
-
 function EmployeeDashboard() {
-	const { profile = {} } = useSelector((state) => state);
+	// const { user = {} } = useSelector((state) => state.profile);
 
-	const { user = {} } = profile;
+	// const { id: user_id } = user;
 
-	const { id:user_id } = user;
-
-	const { data, loading : dataLoading, refetch } = useGetEmployeeDetails(user_id, true);
-	const { createDeviceDetail, loading } = useCreateInvoice(refetch);
+	// const { loading : dataLoading } = useGetEmployeeDetails(user_id, true);
+	const { createDeviceDetail, loading } = useCreateInvoice();
 	const { data : employeeData, loading : employeeDataLoading } = useGetEmployeeData();
-
-	const { employee_device_detail = [] } = data || {};
-
-	const lastData = employee_device_detail[employee_device_detail.length - DEFAULT_VALUE];
-
-	const { status } = lastData || {};
 
 	const {
 		control,
@@ -54,44 +41,26 @@ function EmployeeDashboard() {
 		createDeviceDetail(values);
 	};
 
-	const { vendor_name, device_type, warranty } = formValues;
+	const { vendor_name, device_type } = formValues;
 
 	useEffect(() => {
 		setValue('vendor_name', '');
 		setValue('other_vendor_name', '');
 	}, [device_type, setValue]);
 
-	useEffect(() => {
-		setValue('warranty_amount', '0');
-	}, [warranty, setValue]);
-
-	if (dataLoading || employeeDataLoading) {
-		return (
-			<div className={styles.spinner_container}>
-				<Spinner />
-			</div>
-		);
-	}
-
-	if (data && !status.includes('rejected')) {
-		return (
-			<>
-				<div className={styles.title}>Employee BYOD Form</div>
-				<EmployeeData data={employeeData} />
-				<DeviceDetails deviceData={employee_device_detail} className="device_details" />
-			</>
-		);
-	}
+	if (employeeDataLoading) return <div className={styles.spinner_container}><Spinner /></div>;
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.title}>Employee BYOD Form</div>
+
 			<EmployeeData data={employeeData} />
+
 			<form onSubmit={handleSubmit(handleForm)}>
 				<div className={styles.heading}>Apply for Device :</div>
 				<div className={styles.container}>
 					<div className={styles.controller}>
-						<div className={styles.label}>Device type</div>
+						<div className={styles.label}>Device Type</div>
 						<SelectController
 							control={control}
 							name="device_type"
@@ -108,72 +77,12 @@ function EmployeeDashboard() {
 						<div className={styles.label}>Serial ID Number</div>
 						<InputController
 							control={control}
-							name="device_serial_id"
+							name="serial_id"
 							size="md"
 							placeholder="Serial ID"
 							rules={{ required: true }}
 						/>
-						{errors.device_serial_id && (
-							<div className={styles.error}>Required</div>
-						)}
-					</div>
-					<div className={styles.controller}>
-						<div className={styles.label}>Warranty</div>
-						<SelectController
-							control={control}
-							name="warranty"
-							size="md"
-							placeholder="Warranty"
-							rules={{ required: true }}
-							options={WARRANTY}
-						/>
-						{errors.warranty && (
-							<div className={styles.error}>Required</div>
-						)}
-					</div>
-					<div className={styles.controller}>
-						<div className={styles.label}>Invoice Amount - GST in INR</div>
-						<InputController
-							control={control}
-							name="invoice_amount"
-							size="md"
-							type="number"
-							placeholder="Invoice Amount or 0"
-							prefix="INR"
-							rules={{ required: true }}
-						/>
-						{errors.invoice_amount && (
-							<div className={styles.error}>Required</div>
-						)}
-					</div>
-					<div className={styles.controller}>
-						<div className={styles.label}>GST Amount in INR</div>
-						<InputController
-							control={control}
-							name="tax_amount"
-							size="md"
-							type="number"
-							placeholder="GST Amount or 0"
-							prefix="INR"
-							rules={{ required: true }}
-						/>
-						{errors.tax_amount && (
-							<div className={styles.error}>Required</div>
-						)}
-					</div>
-					<div className={styles.controller}>
-						<div className={styles.label}>Warranty Amount in INR</div>
-						<InputController
-							control={control}
-							name="warranty_amount"
-							size="md"
-							type="number"
-							disabled={warranty === 'no'}
-							placeholder="Warranty Amount or 0"
-							prefix="INR"
-							rules={{ required: true }}
-						/>
-						{errors.warranty_amount && (
+						{errors.serial_id && (
 							<div className={styles.error}>Required</div>
 						)}
 					</div>
@@ -198,7 +107,7 @@ function EmployeeDashboard() {
 							size="md"
 							placeholder="Vendor Name"
 							rules={{ required: true }}
-							options={getVendorNameOptions(device_type)}
+							options={VENDOR_NAME_OPTIONS}
 						/>
 						{errors.vendor_name && (
 							<div className={styles.error}>Required</div>
@@ -219,7 +128,27 @@ function EmployeeDashboard() {
 							)}
 						</div>
 					)}
-					<div className={styles.controller}>
+				</div>
+
+				<div className={styles.amount_heading}>Amount :</div>
+
+				<div className={styles.amount_container}>
+					<div className={styles.amount_sub_container}>
+						<div className={styles.label}>Invoice Amount - GST in INR</div>
+						<InputController
+							control={control}
+							name="invoice_amount"
+							size="md"
+							type="number"
+							placeholder="Invoice Amount or 0"
+							prefix="INR"
+							rules={{ required: true }}
+						/>
+						{errors.invoice_amount && (
+							<div className={styles.error}>Required</div>
+						)}
+					</div>
+					<div className={styles.amount_sub_container}>
 						<div className={styles.label}>Invoice</div>
 						<UploadController
 							name="invoice_url"
@@ -232,7 +161,8 @@ function EmployeeDashboard() {
 						)}
 					</div>
 				</div>
-				<Button type="submit" disabled={loading} size="lg">Submit</Button>
+
+				<Button type="submit" disabled={loading} size="md">Submit</Button>
 			</form>
 		</div>
 	);
