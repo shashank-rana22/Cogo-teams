@@ -7,7 +7,7 @@ function AccordianView({
 	active = '',
 	title = null,
 	isOpen = true,
-	content = null,
+	children = null,
 	setActive = () => {},
 }) {
 	const handleClick = () => {
@@ -28,7 +28,7 @@ function AccordianView({
 
 			{(active === itemKey && isOpen) ? (
 				<div className={cl`${styles.content} custom_accordian_content_container`}>
-					{content}
+					{children}
 				</div>
 			) : null}
 		</div>

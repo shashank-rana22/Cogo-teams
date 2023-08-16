@@ -1,12 +1,12 @@
 import { cl } from '@cogoport/components';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 
+import FieldArray from '../../../../../../common/FieldArray';
 import getElementController from '../../../../../../configs/getElementController';
 import getErrorMessage from '../../../../../../configs/getErrorMessage';
 import getOptions from '../../../../utils/getOptions';
 import Detention from '../../../Detention';
 
-import FieldArray from './FieldArray';
 import styles from './styles.module.css';
 
 const DEFAULT_SPAN = 12;
@@ -127,7 +127,6 @@ function FilterItem({
 								{errorMessage}
 							</div>
 						)}
-
 					</div>
 				);
 			})}

@@ -1,5 +1,7 @@
-import { Pill, cl } from '@cogoport/components';
-import React, { useState } from 'react';
+import { cl } from '@cogoport/components';
+import { useState } from 'react';
+
+import ComingSoon from '../../../common/ComingSoonTag';
 
 import styles from './styles.module.css';
 
@@ -65,11 +67,7 @@ function ModeItem({
 			</div>
 
 			{!is_available ? (
-				<div
-					className={cl`${styles.pill} ${bouncing ? styles.bounce : {}}`}
-				>
-					<Pill size="sm" color="yellow">Coming Soon</Pill>
-				</div>
+				<ComingSoon bouncing={bouncing} />
 			) : null}
 		</div>
 	);

@@ -71,14 +71,13 @@ function List({
 								refetchLoading={refetchLoading}
 							/>
 						)}
-						content={(
-							<ItemContent
-								serviceItem={serviceItem}
-								detail={detail}
-								rateCardData={rateCardData}
-							/>
-						)}
-					/>
+					>
+						<ItemContent
+							serviceItem={serviceItem}
+							detail={detail}
+							rateCardData={rateCardData}
+						/>
+					</AccordianView>
 				))}
 			</div>
 		</div>

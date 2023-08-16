@@ -159,6 +159,7 @@ function SearchResults() {
 				infoBanner={infoBanner}
 				setInfoBanner={setInfoBanner}
 				isGuideViewed={isGuideViewed}
+				service_key="service_type"
 			/>
 
 			<div
