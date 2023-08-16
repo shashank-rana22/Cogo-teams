@@ -25,6 +25,11 @@ function CancelEInvoice({
 		};
 		return ELEMENT_MAPPING[type];
 	};
+
+	const getDocumentUrl = (values) => (values?.documentUrls?.finalUrl
+		? [values?.documentUrls?.finalUrl]
+		: undefined);
+
 	const handleCancel = (values) => {
 		submit({
 			values,
@@ -33,6 +38,7 @@ function CancelEInvoice({
 			invoiceCombinationId : invoice?.id,
 			invoiceId            : bfInvoice?.id,
 			refetch,
+			documentUrls         : getDocumentUrl(values),
 		});
 	};
 

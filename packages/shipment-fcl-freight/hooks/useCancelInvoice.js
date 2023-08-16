@@ -27,7 +27,10 @@ const useCancelInvoice = () => {
 		? geo.parent_entity_id
 		: undefined;
 
-	const submit = async ({ values, proformaNumber, closeModal, invoiceId, invoiceCombinationId, refetch }) => {
+	const submit = async ({
+		values, proformaNumber, closeModal,
+		invoiceId, invoiceCombinationId, refetch, documentUrls,
+	}) => {
 		try {
 			await trigger({
 				data: {
@@ -36,7 +39,7 @@ const useCancelInvoice = () => {
 					data            : {
 						revokeInvoiceRequest: {
 							invoiceNumber : proformaNumber,
-							documentUrls  : [values?.documentUrls?.finalUrl],
+							documentUrls,
 							cancelReason  : values?.cancelReason,
 							invoiceCombinationId,
 							invoiceId,
