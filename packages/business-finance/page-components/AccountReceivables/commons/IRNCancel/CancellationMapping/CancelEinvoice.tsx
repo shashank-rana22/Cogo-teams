@@ -61,7 +61,7 @@ function CancelEinvoice({
 									{(response?.remarks === '') ? (
 										<span className={styles.errors}>
 											{' '}
-											{errorVal?.remarks?.message.toString()}
+											{errorVal?.remarks?.message}
 										</span>
 									) : null}
 								</div>
@@ -80,7 +80,7 @@ function CancelEinvoice({
 									{(invoiceDate === '') ? (
 										<span className={styles.errors}>
 											{' '}
-											{errorVal?.invoiceDate?.message.toString()}
+											{errorVal?.invoiceDate?.message}
 										</span>
 									) : null}
 								</div>
@@ -101,7 +101,7 @@ function CancelEinvoice({
 											{(response?.agreementDocument === '') ? (
 												<span className={styles.errors}>
 													{' '}
-													{errorVal?.agreementDocument?.message.toString()}
+													{errorVal?.agreementDocument?.message}
 												</span>
 											) : null}
 										</div>
@@ -123,7 +123,7 @@ function CancelEinvoice({
 											{(response?.agreementNumber === '') && (
 												<span className={styles.errors}>
 													{' '}
-													{errorVal?.agreementNumber?.message.toString()}
+													{errorVal?.agreementNumber?.message}
 												</span>
 											)}
 										</div>
@@ -145,7 +145,7 @@ function CancelEinvoice({
 											/>
 											{response?.agreementDate ? (
 												<span className={styles.errors}>
-													{errorVal?.agreementDate?.message.toString()}
+													{errorVal?.agreementDate?.message}
 												</span>
 											) : null}
 										</div>
