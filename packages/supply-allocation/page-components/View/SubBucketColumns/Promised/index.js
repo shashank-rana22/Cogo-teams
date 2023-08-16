@@ -1,11 +1,12 @@
-import { Input, Checkbox } from '@cogoport/components';
-import { IcMEdit } from '@cogoport/icons-react';
+import { InputNumberController } from '@cogoport/forms';
+import { IcMCross, IcMEdit } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-function Promised({ item = {} }) {
+import styles from './styles.module.css';
+
+function Promised({ item = {}, control, unregister }) {
 	const [editPromised, setEditPromised] = useState(false);
-	const [promisedQuantity, setPromisedQuantity] = useState(item.promised);
-	const [isHardLimit, setIsHardLimit] = useState(true);
+	const onClickCancel = (controlName) => { setEditPromised(false); unregister(controlName); };
 
 	return !editPromised
 		? (
@@ -14,20 +15,19 @@ function Promised({ item = {} }) {
 				<IcMEdit onClick={() => setEditPromised(true)} />
 			</div>
 		) : (
-			<>
-				<Input
+			<div className={styles.edit_container}>
+				<InputNumberController
 					size="xs"
 					placeholder="Extra small"
-					value={promisedQuantity}
-					onChange={(e) => setPromisedQuantity(e)}
+					control={control}
+					name={`new_promised_quantity_${item.id}`}
+					value={item.promised}
 				/>
-				<Checkbox
-					label="set hard limit"
-					value={isHardLimit}
-					setIsHardLimit={setIsHardLimit}
-					onChange={() => setIsHardLimit((prev) => !prev)}
-				/>
-			</>
+				<div className={styles.cancel_container}>
+					<IcMCross onClick={() => onClickCancel(`new_promised_quantity_${item.id}`)} />
+				</div>
+
+			</div>
 		);
 }
 export default Promised;

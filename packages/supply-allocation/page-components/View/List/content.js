@@ -1,3 +1,4 @@
+import { useForm } from '@cogoport/forms';
 import { IcMArrowRotateRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -5,7 +6,7 @@ import { useState } from 'react';
 import CustomProgressBar from '../../../commons/CustomProgressBar';
 import StyledTable from '../../../commons/StyledTable';
 import subBucketDummyData from '../../../Dummy Data/sub-bucket-data.json';
-import subBucketColumns from '../SubBucketColumns';
+import getSubBucketColumns from '../SubBucketColumns';
 
 function Content({
 	item = {},
@@ -21,6 +22,12 @@ function Content({
 	} = item;
 
 	const [show, setShow] = useState(false);
+	const formProps = useForm();
+	const { control, watch, unregister } = formProps;
+
+	console.log('watch:', watch());
+
+	const { subBucketColumns } = getSubBucketColumns({ control, unregister });
 
 	const bucketControls = [
 		{
