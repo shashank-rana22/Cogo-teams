@@ -6,7 +6,7 @@ import StyledTable from '../../../commons/StyledTable';
 
 import styles from './styles.module.css';
 
-function List({ data = [], pagination = 0, setPagination = () => {} }) {
+function List({ data = [], pagination = 0, setPagination = () => {}, loading }) {
 	const { list = [], page_limit = 10, total_count = 4 } = data;
 	const router = useRouter();
 
@@ -72,7 +72,7 @@ function List({ data = [], pagination = 0, setPagination = () => {} }) {
 	return (
 		<div className={styles.container}>
 
-			<StyledTable data={list} columns={columns} />
+			<StyledTable data={list} columns={columns} loading={loading} />
 
 			<div className={styles.pagination_container}>
 				<Pagination

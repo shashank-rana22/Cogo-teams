@@ -3,8 +3,10 @@ import { useCallback, useEffect, useState } from 'react';
 
 const INITIAL_PAGE = 1;
 
-const useListFclSearches = ({ filters = {} }) => {
+const useListFclSearches = () => {
 	const [pagination, setPagination] = useState(INITIAL_PAGE);
+	const [filters, setFilters] = useState({});
+
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_supply_fcl_freight_searches',
 		method : 'get',
@@ -33,7 +35,6 @@ const useListFclSearches = ({ filters = {} }) => {
 					service_data_required : true,
 					filters,
 					page                  : pagination,
-
 				},
 			});
 		} catch (err) {
@@ -51,6 +52,8 @@ const useListFclSearches = ({ filters = {} }) => {
 		refetchListFclSearches,
 		pagination,
 		setPagination,
+		filters,
+		setFilters,
 	};
 };
 

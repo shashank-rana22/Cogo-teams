@@ -10,9 +10,8 @@ import LocationSelect from './LocationSelect';
 
 function SupplyAllocation() {
 	const [locationDetails, setLocationDetails] = useState({});
-	const [filters, setFilters] = useState({});
 
-	const { data, refetchListFclSearches, pagination, setPagination } = useListFclSearches({ filters });
+	const { data, refetchListFclSearches, pagination, setPagination, loading, setFilters } = useListFclSearches();
 
 	const { control, reset } = useForm({});
 
@@ -32,7 +31,7 @@ function SupplyAllocation() {
 				setPagination={setPagination}
 			/>
 
-			<List data={data} pagination={pagination} setPagination={setPagination} />
+			<List data={data} pagination={pagination} loading={loading} setPagination={setPagination} />
 
 		</>
 	);
