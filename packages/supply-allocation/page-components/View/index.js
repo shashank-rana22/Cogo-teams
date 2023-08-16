@@ -2,6 +2,7 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import { useEffect, Fragment } from 'react';
 
+import useGetRollingForecastBucketsData from '../../hooks/useGetRollingForeCastBucketsData';
 import useGetRollingForecastData from '../../hooks/useGetRollingForecastData';
 import useListFclSearches from '../../hooks/useListFclSearches';
 
@@ -65,6 +66,9 @@ function View() {
 	const { container_type_forecasts = {} } = rollingForecastData || {};
 	const { graphData, count } = generateData({ container_type_forecasts });
 
+	const { data:bucketData } = useGetRollingForecastBucketsData({ supply_fcl_freight_search_id: search_id });
+	console.log('ff:', bucketData);
+
 	return (
 		<Fragment key={search_id}>
 			<Header
@@ -74,7 +78,7 @@ function View() {
 				destinationName={destinationName}
 				key={search_id}
 			/>
-			<List />
+			<List bucketData={bucketData} />
 		</Fragment>
 	);
 }

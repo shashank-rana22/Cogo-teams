@@ -17,9 +17,9 @@ function SupplyAllocation() {
 
 	const { createSupplySearch } = useCreateSupplySearch({ refetchListFclSearches, reset, setLocationDetails });
 
-	if (loading) {
-		return null;
-	}
+	// if (loading) {
+	// 	return null;
+	// }
 
 	return (
 		<>

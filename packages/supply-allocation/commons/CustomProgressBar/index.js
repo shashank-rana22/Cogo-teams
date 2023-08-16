@@ -7,8 +7,10 @@ function CustomProgressBar({
 	id = '',
 	className = '',
 	style = {},
-	progress = '',
+	allocatedCount = 0,
+	promisedCount = 0,
 }) {
+	const progress = (promisedCount / allocatedCount) * 100;
 	return (
 		<div
 			id={id}
@@ -19,8 +21,17 @@ function CustomProgressBar({
 			style={style}
 		>
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-				<div>90 TEU FULFILLED</div>
-				<div>100 TEU ALLOCATED</div>
+				<div>
+					{promisedCount}
+					{' '}
+					TEU ALLOCATED
+				</div>
+
+				<div>
+					{allocatedCount}
+					{' '}
+					TEU FULFILLED
+				</div>
 
 			</div>
 			<div className={cl`
