@@ -8,9 +8,9 @@ import styles from './styles.module.css';
 
 const colorArr = ['#DCE1D8', '#FCE4BF', '#CFDAE8', '#DED7FC', '#E1DEEC'];
 
-const SECOND_INDEX = 2;
-
 const FIRST_INDEX = 1;
+
+const SECOND_INDEX = 2;
 
 const getInitials = (name = '') => {
 	if (!name) {

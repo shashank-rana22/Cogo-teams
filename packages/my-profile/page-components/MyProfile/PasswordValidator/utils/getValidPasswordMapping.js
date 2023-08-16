@@ -1,10 +1,10 @@
-const ZEROTH_INDEX = 0;
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const FIRST_INDEX = 1;
 
 function range(start, stop) {
-	const startCharCode = start.charCodeAt(ZEROTH_INDEX);
-	const endCharCode = stop.charCodeAt(ZEROTH_INDEX);
+	const startCharCode = start.charCodeAt(GLOBAL_CONSTANTS.zeroth_index);
+	const endCharCode = stop.charCodeAt(GLOBAL_CONSTANTS.zeroth_index);
 
 	const RESULT = [];
 

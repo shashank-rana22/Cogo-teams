@@ -7,9 +7,8 @@ import EmptyState from '../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
-const FIRST_INDEX = 1;
-const SECOND_INDEX = 2;
-const THIRD_INDEX = 3;
+const PLACEHOLDER_COUNT = 2;
+const BADGE_LENGTH = 3;
 const PROGRESS_PERCENT = 100;
 
 function BadgeDescription(props) {
@@ -41,7 +40,7 @@ function BadgeDescription(props) {
 						</div>
 
 						{
-							[FIRST_INDEX, SECOND_INDEX].map((item) => (
+							[...Array(PLACEHOLDER_COUNT).keys()].map((item) => (
 								<div key={item} className={styles.label_value}>
 									<Placeholder width="100%" height="32px" />
 									<Placeholder width="100%" height="32px" margin="8px 0px 0px 0px" />
@@ -153,7 +152,7 @@ function BadgeDescription(props) {
 						badge_details.map((item, i) => {
 							const progress = (PROGRESS_PERCENT - item.percentage_score_required);
 							return (
-								i < THIRD_INDEX
+								i < BADGE_LENGTH
 									? (
 										<ProgressBar
 											className={styles.progressbar}

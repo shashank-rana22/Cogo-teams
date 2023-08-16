@@ -8,9 +8,8 @@ import EmptyState from '../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
-const FIRST_INDEX = 1;
-const SECOND_INDEX = 2;
-const THIRD_INDEX = 3;
+const PLACEHOLDER_COUNT = 2;
+const STAR_COUNT = 3;
 
 function MasteryDescription(props) {
 	const { t } = useTranslation(['profile']);
@@ -37,7 +36,7 @@ function MasteryDescription(props) {
 						</div>
 
 						{
-							[FIRST_INDEX, SECOND_INDEX].map((item) => (
+							[...Array(PLACEHOLDER_COUNT).keys()].map((item) => (
 								<div className={styles.label_value} key={item}>
 									<Placeholder width="100%" height="32px" />
 									<Placeholder width="100%" height="32px" style={{ marginTop: '8px' }} />
@@ -141,7 +140,7 @@ function MasteryDescription(props) {
 								</div>
 
 								<div className={styles.stars_container}>
-									{[FIRST_INDEX, SECOND_INDEX, THIRD_INDEX].map((itm) => (
+									{[...Array(STAR_COUNT).keys()].map((itm) => (
 										<div key={itm}>
 											<IcCStar width={20} height={20} stroke="#FFDF33" />
 										</div>

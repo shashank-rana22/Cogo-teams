@@ -1,6 +1,6 @@
 import getValidPasswordMappings from './getValidPasswordMapping';
 
-const validatePassword = ({ value, errorMessage, t }) => {
+const validatePassword = ({ value, errorMessage, t = () => {} }) => {
 	const validPasswordMappings = getValidPasswordMappings(t);
 
 	const isPasswordValid = Object.keys(validPasswordMappings).every((key) => {

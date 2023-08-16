@@ -17,7 +17,7 @@ const getControls = (detailsData = {}, t = () => {}) => [
 		label           : t('profile:profile_picture_url_label'),
 		drag            : true,
 		height          : 72,
-		uploadIcon      : UploadIcon(),
+		uploadIcon      : UploadIcon,
 		defaultValue    : detailsData?.picture,
 		rules           : {
 			required: t('profile:profile_picture_url_rules_required'),

@@ -10,14 +10,11 @@ import usePostProfileMasteryBadge from '../../../../hooks/usePostProfileMasteryB
 
 import styles from './styles.module.css';
 
-const ONE = 1;
-const TWO = 2;
-const THREE = 3;
-const FOUR = 4;
-const FIVE = 5;
-const SIX = 6;
-
-const TOOLTIP_ARRAY = [ONE, TWO, THREE, FOUR, FIVE];
+const BADGE_LENGTH_ONE = 1;
+const BADGE_LENGTH_TWO = 2;
+const BADGE_LENGTH_THREE = 3;
+const BADGE_LENGTH_FIVE = 5;
+const BADGE_LENGTH_SIX = 6;
 
 function Badges(props) {
 	const { t } = useTranslation(['profile']);
@@ -82,7 +79,7 @@ function Badges(props) {
 					className={styles.tooltip}
 				>
 					<div className={styles.empty}>
-						{TOOLTIP_ARRAY.map((item) => (
+						{[...Array(BADGE_LENGTH_FIVE).keys()].map((item) => (
 							<div key={item} className={styles.empty_boxes} />
 						))}
 					</div>
@@ -112,10 +109,10 @@ function Badges(props) {
 
 						const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[medal]?.upper_limit;
 
-						max_badges += ONE;
+						max_badges += BADGE_LENGTH_ONE;
 
 						return (
-							(index < FIVE && max_badges < SIX)
+							(index < BADGE_LENGTH_FIVE && max_badges < BADGE_LENGTH_SIX)
 								? (
 									<div key={id}>
 										<Tooltip content={`${badge_name} ${startCase(medal || '')}`}>
@@ -124,7 +121,7 @@ function Badges(props) {
 											</div>
 
 											<div className={styles.stars}>
-												{[ONE, TWO, THREE].map((itm) => (
+												{[BADGE_LENGTH_ONE, BADGE_LENGTH_TWO, BADGE_LENGTH_THREE].map((itm) => (
 													<div key={itm}>
 														<IcMStarfull
 															width={10}
@@ -144,10 +141,10 @@ function Badges(props) {
 
 						const badgeClassName = BADGE_STARS_CLASSNAME_MAPPING[medal]?.upper_limit;
 
-						max_badges += ONE;
+						max_badges += BADGE_LENGTH_ONE;
 
 						return (
-							(index < FIVE && max_badges < SIX)
+							(index < BADGE_LENGTH_FIVE && max_badges < BADGE_LENGTH_SIX)
 								? (
 									<div key={id} style={{ opacity: 0.2 }}>
 										<Tooltip content={`${badge_name} ${startCase(medal || '')}`}>
@@ -156,7 +153,7 @@ function Badges(props) {
 											</div>
 
 											<div className={styles.stars}>
-												{[ONE, TWO, THREE].map((itm) => (
+												{[BADGE_LENGTH_ONE, BADGE_LENGTH_TWO, BADGE_LENGTH_THREE].map((itm) => (
 													<div key={itm}>
 														<IcMStarfull
 															width={10}
