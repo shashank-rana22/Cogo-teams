@@ -51,7 +51,7 @@ const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(filters), page, activeParent]);
 
-	const data = activeParent === 'missing_rates' ? rateData : rateRequestData;
+	const data = activeParent === 'missing_rates' ? rateRequestData : rateData;
 
 	return { data, loading: rateLoading || rateRequestLoading, page, setPage };
 };
