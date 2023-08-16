@@ -16,7 +16,7 @@ function SupplyRates({
 	const { service_type = 'fcl' } = globalFilters;
 	const { data, page, setPage, loading } = useListFclFreightRateStatistics({ filters: globalFilters, activeParent });
 	const { total_count = 0, list = [] } = data || {};
-	const { columns } = getListConfig(service_type);
+	const { columns } = getListConfig(service_type, activeParent);
 	const loadingColumns = columns.map(({ accessor, ...rest }) => ({
 		accessor: () => <Placeholder height="30px" width="70%" margin="16px 12px" />,
 		...rest,

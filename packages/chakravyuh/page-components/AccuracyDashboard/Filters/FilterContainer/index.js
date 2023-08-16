@@ -50,7 +50,7 @@ function FilterContainer({
 	};
 
 	const onSumbit = () => {
-		setGlobalFilters((prev) => ({ ...prev, ...values }));
+		setGlobalFilters((prev) => ({ ...prev, ...values, parent_mode: values?.mode }));
 		setVisible(false);
 	};
 

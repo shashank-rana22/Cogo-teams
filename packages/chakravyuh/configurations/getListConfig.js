@@ -29,8 +29,7 @@ const COMMON_START_COLUMNS = [
 		},
 	},
 ];
-
-const SEA_COLUMNS = [
+const SHIPPING_LINES = [
 	{
 		Header   : 'SHIPPING LINE',
 		accessor : ({ shipping_line = {} }) => {
@@ -43,6 +42,9 @@ const SEA_COLUMNS = [
 			);
 		},
 	},
+];
+
+const SEA_COLUMNS = [
 	{
 		Header   : 'COMMODITY',
 		accessor : ({ commodity = '' }) => (
@@ -111,13 +113,14 @@ const COMMON_END_COLUMNS = [
 		),
 	},
 ];
-function getListConfig(rate_type) {
+function getListConfig(rate_type = 'fcl', activeParent = '') {
 	if (rate_type === 'fcl') {
 		return {
 			columns: [
 				...COMMON_START_COLUMNS,
+				...activeParent !== 'missing_rates' ? SHIPPING_LINES : [],
 				...SEA_COLUMNS,
-				...COMMON_END_COLUMNS,
+				...activeParent !== 'missing_rates' ? COMMON_END_COLUMNS : [],
 			],
 		};
 	}
@@ -125,7 +128,7 @@ function getListConfig(rate_type) {
 		columns: [
 			...COMMON_START_COLUMNS,
 			...AIR_COLUMNS,
-			...COMMON_END_COLUMNS,
+			...activeParent !== 'missing_rates' ? COMMON_END_COLUMNS : [],
 		],
 	};
 }

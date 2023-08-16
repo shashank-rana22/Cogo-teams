@@ -99,7 +99,7 @@ function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
 			});
 
 			if (typeof data !== 'string') {
-				series.data.setAll(data);
+				series?.data?.setAll(data);
 			}
 		}
 
@@ -110,7 +110,7 @@ function SeriesChart({ loading = false, data = [], seriesIds = [] }) {
 		function dataLoaded(result) {
 			const resp = am5.JSONParser.parse(result.response);
 			result.target.series.each((series) => {
-				series.data.setAll(resp);
+				series?.data?.setAll(resp);
 			});
 		}
 
