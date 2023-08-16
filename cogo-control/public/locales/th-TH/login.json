@@ -1,0 +1,14 @@
+{
+    "title": "โปรดให้อีเมลและรหัสผ่านของคุณเพื่อเข้าสู่ระบบ",
+    "email_placeholder": "อีเมล",
+    "email_rules_required": "จำเป็นต้องใส่อีเมล",
+    "password_placeholder": "รหัสผ่าน",
+    "password_rules_required": "จำเป็นต้องใส่รหัสผ่าน",
+    "forgot_your_password": "ลืมรหัสผ่านของคุณหรือ?",
+    "login_button": "เข้าสู่ระบบ",
+    "go_back_button": "ย้อนกลับ",
+    "or_label": "หรือ",
+    "continue_with_microsoft": "ดำเนินการต่อด้วย Microsoft",
+    "already_login_toast_error": "ไม่สามารถเข้าสู่ระบบด้วยบัญชีที่มีอยู่แล้ว",
+    "failed_to_login_toast_error": "ไม่สามารถเข้าสู่ระบบได้ โปรดลองอีกครั้ง..."
+}
