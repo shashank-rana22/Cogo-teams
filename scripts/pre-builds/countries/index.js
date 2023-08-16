@@ -17,7 +17,7 @@ const setCountries = async () => {
 	await getCountries(
 		fs.writeFileSync,
 		countriesPath,
-		process.env.NEXT_PUBLIC_REST_BASE_API_URL,
+		`${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/`,
 	);
 	// eslint-disable-next-line no-console
 	console.log('Successfully Built Countries ...');
