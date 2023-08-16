@@ -19,8 +19,10 @@ function ShipmentsCard({
 		net_total = 0,
 		net_total_price_currency = '',
 		payment_term : paymentTerm = '',
-		last_milestone = '',
-		current_milestone = '',
+		task_status = '',
+		documents = [],
+		id:shipmentId = '',
+		last_completed_task = {},
 	} = shipmentItem;
 
 	const ShipmentIcon = ICONS_MAPPING[shipment_type] || null;
@@ -68,16 +70,39 @@ function ShipmentsCard({
 
 			<div className={styles.footer_block}>
 				<div className={styles.footer_right_block}>
-					prev:
-					{' '}
-					{last_milestone}
-				</div>
-
-				<div className={styles.footer_left_block}>
-					<div className={styles.custom_pill_styles}>
-						{current_milestone}
+					<div className={styles.current_task_color}>
+						Current Task:
+					</div>
+					<div className={styles.overflow_div}>
+						{startCase(task_status)}
 					</div>
 				</div>
+
+				{task_status === 'approve_booking_note' ? (
+					<div className={styles.footer_left_block}>
+						<div
+							className={styles.custom_pill_styles}
+							role="presentation"
+							onClick={(e) => {
+								e.stopPropagation();
+								setShowBookingNote({ show: true, data: { documents, shipmentId } });
+							}}
+						>
+							Send BN
+						</div>
+					</div>
+				) : (
+					<div className={styles.footer_right_block}>
+						{last_completed_task?.task && (
+							<div className={styles.current_task_color}>
+								Last Task:
+							</div>
+						)}
+						<div className={styles.overflow_div}>
+							{startCase(last_completed_task?.task)}
+						</div>
+					</div>
+				)}
 			</div>
 
 			<div className={styles.shipment_type_container}>

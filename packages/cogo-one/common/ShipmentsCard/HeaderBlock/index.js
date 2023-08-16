@@ -10,14 +10,7 @@ import RaiseTicketModal from '../../RaiseTicketModal';
 
 import styles from './styles.module.css';
 
-const getButtonOptions = ({
-	partnerId = '',
-	shipmentId = '',
-	setShowRaiseTicket = () => {},
-	setShowBookingNote = () => {},
-	taskStatus = '',
-	documents = [],
-}) => [
+const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 	{
 		children : 'View Shipments',
 		onClick  : (e) => {
@@ -44,23 +37,9 @@ const getButtonOptions = ({
 		},
 		condition: ['user_shipments'],
 	},
-	{
-		children : 'Send Booking Note',
-		onClick  : (e) => {
-			e.stopPropagation();
-			setShowBookingNote({ show: true, data: { documents, shipmentId } });
-		},
-		condition : ['all_shipments', 'user_shipments'],
-		hide      : taskStatus !== 'approve_booking_note',
-	},
 ];
 
-function HeaderBlock({
-	shipmentItem = {},
-	setShowPocDetails = () => {},
-	type = '',
-	setShowBookingNote = () => {},
-}) {
+function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '' }) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
 		userId    : profile.user.id,
@@ -75,8 +54,6 @@ function HeaderBlock({
 		shipment_type = '',
 		trade_type = '',
 		importer_exporter_id = '',
-		documents = [],
-		task_status = '',
 	} = shipmentItem || {};
 
 	const { business_name = '' } = importer_exporter || {};
@@ -89,16 +66,9 @@ function HeaderBlock({
 		importer_exporter_id,
 	};
 
-	const buttons = getButtonOptions({
-		shipmentId,
-		partnerId,
-		setShowRaiseTicket,
-		setShowBookingNote,
-		taskStatus: task_status,
-		documents,
-	});
+	const buttons = getButtonOptions({ shipmentId, partnerId, setShowRaiseTicket });
 
-	const filteredButtons = buttons.filter((itm) => !itm?.hide && itm?.condition.includes(type));
+	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
 
 	const handleSidClick = (e) => {
 		e.stopPropagation();
@@ -163,9 +133,7 @@ function HeaderBlock({
 				>
 					<IcMOverflowDot
 						className={styles.overflow_container}
-						onClick={(e) => {
-							e.stopPropagation();
-						}}
+						onClick={(e) => e.stopPropagation()}
 					/>
 				</Popover>
 			</div>
