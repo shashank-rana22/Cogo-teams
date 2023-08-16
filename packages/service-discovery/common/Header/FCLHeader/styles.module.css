@@ -18,6 +18,10 @@
 
 .left_section {
 	width: 60%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .right_section {

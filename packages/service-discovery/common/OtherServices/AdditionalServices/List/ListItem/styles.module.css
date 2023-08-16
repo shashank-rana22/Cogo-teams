@@ -79,3 +79,12 @@
 	font-size: 12px;
 	font-weight: 400;
 }
+
+.remove_service_button {
+	margin-left: 8px;
+}
+
+.remove_heading {
+	font-size: 10px;
+	color: #ee3425;
+}

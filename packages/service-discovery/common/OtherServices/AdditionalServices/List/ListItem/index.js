@@ -1,9 +1,9 @@
-import { Toast, Loader, cl, Tooltip, Placeholder } from '@cogoport/components';
+import { Toast, Loader, cl, Tooltip, Placeholder, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMInfo, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useSpotSearchService from '../../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 import DeleteServiceModal from '../../../common/DeleteServiceModal';
@@ -113,11 +113,29 @@ function ListItem({
 			);
 		}
 
-		const { rateData = [] } = serviceItem;
+		const { rateData = [], source:rateCardSource = '' } = serviceItem;
 
 		if (!rateData || isEmpty(rateData) || !rateData[GLOBAL_CONSTANTS.zeroth_index]?.total_price_discounted) {
 			if (serviceItem.service_type === 'fcl_freight_local') {
-				return 'At Actuals';
+				if (rateCardSource === 'cogo_assured_rate') {
+					return (
+						<div>
+							<div className={styles.rate_not_available_for_all}>
+								<strong>No Rates</strong>
+
+								<Button
+									size="sm"
+									themeType="accent"
+									className={styles.remove_service_button}
+									onClick={handleDelete}
+								>
+									Remove service
+								</Button>
+							</div>
+							<span className={styles.remove_heading}>* Remove this service to continue</span>
+						</div>
+					);
+				} return 'At Actuals';
 			}
 			return 'No Rates';
 		}
