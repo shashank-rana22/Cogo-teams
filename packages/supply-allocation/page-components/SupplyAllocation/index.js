@@ -12,15 +12,11 @@ function SupplyAllocation() {
 	const [locationDetails, setLocationDetails] = useState({});
 	const [filters, setFilters] = useState({});
 
-	const { data, refetchListFclSearches } = useListFclSearches({ filters });
+	const { data, refetchListFclSearches, pagination, setPagination } = useListFclSearches({ filters });
 
 	const { control, reset } = useForm({});
 
 	const { createSupplySearch } = useCreateSupplySearch({ refetchListFclSearches, reset, setLocationDetails });
-
-	// if (loading) {
-	// 	return null;
-	// }
 
 	return (
 		<>
@@ -33,9 +29,10 @@ function SupplyAllocation() {
 				locationDetails={locationDetails}
 				setLocationDetails={setLocationDetails}
 				setFilters={setFilters}
+				setPagination={setPagination}
 			/>
 
-			<List data={data} />
+			<List data={data} pagination={pagination} setPagination={setPagination} />
 
 		</>
 	);

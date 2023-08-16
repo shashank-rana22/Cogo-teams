@@ -62,7 +62,7 @@ function Header({ graphData, count, originName, destinationName }) {
 							marginBottom   : '10px',
 						}}
 					>
-						<IcMArrowBack height={30} width={30} onClick={onClickBack} />
+						<IcMArrowBack height={30} width={30} style={{ cursor: 'pointer' }} onClick={onClickBack} />
 
 						<Tooltip
 							content={<div className={styles.location_name_tooltip}>{originName}</div>}

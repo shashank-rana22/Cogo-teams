@@ -37,6 +37,7 @@ function LocationSelect({
 	locationDetails = {},
 	setLocationDetails = () => { },
 	setFilters = () => {},
+	setPagination = () => {},
 }) {
 	const onClickAllocate = () => {
 		const payload = { ...locationDetails };
@@ -67,6 +68,8 @@ function LocationSelect({
 							...prev,
 							origin_location_id: id || undefined,
 						}));
+
+						setPagination(1);
 					}}
 
 				/>
@@ -94,9 +97,11 @@ function LocationSelect({
 							...prev,
 							destination_location_id: id || undefined,
 						}));
+						setPagination(1);
 					}}
 				/>
 			</div>
+
 			<div style={{ width: 150, display: 'flex', alignItems: 'flex-end', marginTop: '36px' }}>
 				<StyledSelect
 					defaultValue={region}

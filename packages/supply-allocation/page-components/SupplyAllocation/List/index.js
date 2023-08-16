@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Pagination } from '@cogoport/components';
 import { IcMArrowRight, IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
@@ -6,7 +6,8 @@ import StyledTable from '../../../commons/StyledTable';
 
 import styles from './styles.module.css';
 
-function List({ data = [] }) {
+function List({ data = [], pagination = 0, setPagination = () => {} }) {
+	const { list = [], page_limit = 10, total_count = 4 } = data;
 	const router = useRouter();
 
 	const columns = [
@@ -71,7 +72,19 @@ function List({ data = [] }) {
 
 	return (
 		<div className={styles.container}>
-			<StyledTable data={data?.list} columns={columns} />
+			<StyledTable data={list} columns={columns} />
+
+			<div className={styles.pagination_container}>
+				<Pagination
+					className="md"
+					totalItems={total_count}
+					currentPage={pagination}
+					pageSize={page_limit}
+					onPageChange={setPagination}
+					type="table"
+				/>
+			</div>
+
 		</div>
 	);
 }

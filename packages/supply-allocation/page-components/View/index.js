@@ -67,7 +67,6 @@ function View() {
 	const { graphData, count } = generateData({ container_type_forecasts });
 
 	const { data:bucketData } = useGetRollingForecastBucketsData({ supply_fcl_freight_search_id: search_id });
-	console.log('ff:', bucketData);
 
 	return (
 		<Fragment key={search_id}>
