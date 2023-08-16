@@ -8,7 +8,6 @@ import ContainerItem from './ContainerItem';
 import EditContainerModal from './EditContainerModal';
 import styles from './styles.module.css';
 
-const ZERO_VALUE = 0;
 const SERVICE = 'fcl_freight';
 
 function ContainerDetails({
@@ -62,7 +61,7 @@ function ContainerDetails({
 					content={(
 						<div className={styles.content}>
 							{load.map((loadItem, index) => {
-								const margin = !index ? ZERO_VALUE : '8px 0 0 0';
+								const margin = !index ? index : '8px 0 0 0';
 
 								return (
 									<ContainerItem

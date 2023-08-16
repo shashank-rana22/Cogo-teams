@@ -1,6 +1,5 @@
 import { cl } from '@cogoport/components';
 import { IcMCross, IcMEdit } from '@cogoport/icons-react';
-import React from 'react';
 
 import LocationDetails from '../../../LocationDetails';
 import SelectedOrgInfo from '../../../SelectedOrgInfo';
