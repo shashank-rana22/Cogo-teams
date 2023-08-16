@@ -1,5 +1,5 @@
 import { useRouter } from '@cogoport/next';
-import { request } from '@cogoport/request';
+import { authRequest } from '@cogoport/request/helpers/auth-request';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setGeneralState } from '@cogoport/store/reducers/general';
 import { setProfileState } from '@cogoport/store/reducers/profile';
@@ -19,9 +19,7 @@ const UNAUTHENTICATED_PATHS = [
 ];
 
 const useGetAuthorizationChecked = ({ firestoreToken }) => {
-	const {
-		pathname, query, locale, locales, route, push, asPath,
-	} = useRouter();
+	const { pathname, query, locale, locales, route, push, asPath } = useRouter();
 
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
@@ -39,14 +37,14 @@ const useGetAuthorizationChecked = ({ firestoreToken }) => {
 		(async () => {
 			if (!_initialized) {
 				try {
-					const res = await request.get('get_user_session');
+					const res = await authRequest.get('get_user_session');
 
 					const { partner = {} } = res.data || {};
 					setCookie('parent_entity_id', partner.id);
 
 					dispatch(setProfileState({ _initialized: true, ...res.data }));
 				} catch (err) {
-					console.error(err);
+					console.error(err.response?.data.error);
 				}
 			}
 		})();

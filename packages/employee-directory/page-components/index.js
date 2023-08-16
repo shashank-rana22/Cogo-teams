@@ -96,6 +96,7 @@ function EmployeeDirectory() {
 					setemployeeFilters={setemployeeFilters}
 					employeeFilters={employeeFilters}
 					bulkActions={bulkActions}
+					isHRAdmin={is_hr_admin}
 				/>
 				<EmployeeList
 					selectedIds={selectedIds}

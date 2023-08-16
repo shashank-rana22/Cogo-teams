@@ -6,7 +6,7 @@
 
 	.row {
 		display: grid;
-		grid-template-columns: repeat(9, 1fr);
+		grid-template-columns: 2fr repeat(8, 1fr);
 		padding-block: 5px;
 		padding-inline: 10px;
 		font-size: 12px;

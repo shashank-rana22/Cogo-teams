@@ -3,7 +3,7 @@ import { IcMCall } from '@cogoport/icons-react';
 import { useEffect } from 'react';
 
 import getVideoControls from '../../../configurations/videoControls';
-import { callUpdate } from '../../../utils/callFunctions';
+import { callUpdate } from '../../../utils/callUpdate';
 
 import styles from './styles.module.css';
 
@@ -35,6 +35,7 @@ function VideoCallOptions({
 	toggleMic = () => {},
 	callingRoomDetails = {},
 	type = '',
+	time = 0,
 }) {
 	const { isScreenShareActive = false, isMicActive = false } = toggleState || {};
 	const { request_screen_share: requestScreenShare = false } = callingRoomDetails || {};
@@ -94,7 +95,7 @@ function VideoCallOptions({
 
 			<div
 				role="presentation"
-				onClick={(e) => stopCall({ e, clickType: type })}
+				onClick={(e) => stopCall({ e, clickType: type, duration: time })}
 				className={styles.hangup_icon}
 			>
 				<IcMCall className={styles.end_call_icon} />
