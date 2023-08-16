@@ -22,7 +22,10 @@ function AgentWiseLockScreen({
 	setActiveCard = () => {},
 	firestore = {},
 }) {
-	const { updateAgentPreference = () => {}, createLoading = false } = useUpdateAgentPreference({ getListChatAgents });
+	const {
+		updateAgentPreference = () => {},
+		createLoading = false,
+	} = useUpdateAgentPreference({ getListChatAgents, firestore });
 
 	const { syncWorkPreference = () => {} } = useSyncAgentWorkPreference();
 
@@ -67,7 +70,6 @@ function AgentWiseLockScreen({
 						createLoading={createLoading}
 						updateAgentPreference={updateAgentPreference}
 						loading={loading}
-						firestore={firestore}
 					/>
 				))
 				: <div className={styles.empty_state}>No data found</div>}
