@@ -9,62 +9,82 @@ interface DataInterface {
 }
 
 interface AggreementFile {
-	agreementNumber?: string;
-	agreementDate?: string;
-	agreementDocument?: string;
-	einvoiceForm04?: string;
+	cancelledAgreementNumber?: string;
+	cancelledAgreementDate?: string;
+	cancelledAgreementDocument?: string;
+	cancelledEInvoiceForm04?: string;
 }
 
 function CancellationAgreement({ data }: DataInterface) {
-	const { cancelledEInvoiceDetails } = data || {};
-
-	if (cancelledEInvoiceDetails === undefined) {
-		return (
-			<div>Cancellation Aggreement Does Not Exist</div>
-		);
-	}
-
 	const {
-		agreementNumber = '',
-		agreementDate = '',
-		agreementDocument = '',
-		einvoiceForm04 = '',
-	} = cancelledEInvoiceDetails || {};
+		cancelledEInvoiceDetails: {
+			cancelledAgreementNumber = '',
+			cancelledAgreementDate = '',
+			cancelledAgreementDocument = '',
+			cancelledEInvoiceForm04 = '',
+		},
+	} = data || {};
 
-	const dynamicDataVariables = [
-		{ label: 'Agreement No. -', value: agreementNumber },
-		{ label: 'Agreement Date -', value: agreementDate },
-	];
+	const dataMap = [
+		{
+			label : 'Agreement No. -',
+			value : cancelledAgreementNumber
+				? <span className={styles.span_style_label}>{cancelledAgreementNumber}</span>
+				: undefined,
+		},
+		{
+			label : 'Agreement Date -',
+			value : cancelledAgreementDate
+				? <span className={styles.span_style_label}>{cancelledAgreementDate}</span>
+				: undefined,
+		},
+		{
+			label : 'Agreement Proof -',
+			value : (cancelledAgreementDocument
+				? (
+					<Button
+						className={styles.span_style_value}
+						themeType="link"
+						onClick={() => window.open(cancelledAgreementDocument)}
+					>
+						View Documnet
 
-	const dynamicDataUrl = [
-		{ label: 'Agreement Proof -', value: agreementDocument },
-		{ label: 'Form 04 -', value: einvoiceForm04 },
+					</Button>
+				) : undefined
+			),
+		},
+		{
+			label : 'Form 04 -',
+			value : (cancelledEInvoiceForm04
+				? (
+					<Button
+						className={styles.span_style_value}
+						themeType="link"
+						onClick={() => window.open(cancelledEInvoiceForm04)}
+					>
+						View Documnet
+					</Button>
+				) : undefined
+			),
+		},
 	];
 
 	return (
-		<div className={styles.container}>
-			{dynamicDataVariables.map(({ label, value }) => (
-				<div key={label} className={styles.sub_container}>
-					{label}
-					<span className={styles.span_style_label}>{value}</span>
+		cancelledEInvoiceForm04
+			? (
+				<div className={styles.container}>
+					{dataMap.map(({ label, value }) => (
+						value
+							? (
+								<div key={label} className={styles.sub_container}>
+									{label}
+									{value}
+								</div>
+							)
+							: null
+					))}
 				</div>
-			))}
-			{dynamicDataUrl.map(({ label, value }) => (
-				<div key={label} className={styles.sub_container}>
-					{label}
-					{ value
-						&& (
-							<Button
-								className={styles.span_style_value}
-								themeType="link"
-								onClick={() => window.open(value)}
-							>
-								View Documnet
-							</Button>
-						) }
-				</div>
-			))}
-		</div>
+			) : null
 	);
 }
 
