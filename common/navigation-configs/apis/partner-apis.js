@@ -10587,11 +10587,6 @@ const partner = {
 			service_name : 'promotion',
 		},
 		{
-			api          : 'deactivate_promotion_rule',
-			access_type  : 'private',
-			service_name : 'promotion',
-		},
-		{
 			api          : 'update_budget_amount',
 			access_type  : 'private',
 			service_name : 'budget',
