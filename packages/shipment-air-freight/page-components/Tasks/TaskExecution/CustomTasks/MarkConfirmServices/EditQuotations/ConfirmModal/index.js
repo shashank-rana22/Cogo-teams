@@ -19,10 +19,10 @@ function ConfirmModal({
 	watchServiceProvider = {},
 }) {
 	const geo = getGeoConstants();
-	const isCogoXpress =		watchServiceProvider?.normal_service_provider === geo.uuid.cogoxpress_id
+	const isCogoXpress = watchServiceProvider?.normal_service_provider === geo.uuid.cogoxpress_id
 		|| watchServiceProvider?.local_service_provider === geo.uuid.cogoxpress_id;
 
-	const isAnyCarrier =		watchServiceProvider?.normal_airline === geo.uuid.any_carrier_airline_id
+	const isAnyCarrier = watchServiceProvider?.normal_airline === geo.uuid.any_carrier_airline_id
 		|| watchServiceProvider?.local_airline === geo.uuid.any_carrier_airline_id;
 
 	const handleFinalSubmit = async () => {
@@ -36,6 +36,8 @@ function ConfirmModal({
 		}
 		setConfirmModal(false);
 	};
+
+	const priceLimitCheck = handlePriceLimitCheck();
 
 	return (
 		<>
@@ -155,8 +157,7 @@ function ConfirmModal({
 								</div>
 							</>
 						)}
-						{handlePriceLimitCheck()
-						&& (
+						{priceLimitCheck && (
 							<div className={styles.check_price}>
 								Your line item price exceeds 5000 USD. Are you sure you want to proceed?
 							</div>
