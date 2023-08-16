@@ -35,7 +35,6 @@
 
 .select_container {
 	display: flex;
-	width: fit-content;
 	margin-top: 16px;
 }
 
@@ -174,6 +173,7 @@
 	display: flex;
 	align-items: center;
 	width: 300px;
+	margin-right: 20px;
 }
 
 .channel_info {
