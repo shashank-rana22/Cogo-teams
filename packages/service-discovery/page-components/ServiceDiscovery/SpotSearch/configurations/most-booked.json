@@ -29,8 +29,7 @@
 			"label": "",
 			"btnLabel":"Show Rates",
 			"inDifferentWindow": true,
-			"func": "renderButton",
-			"disabled":true
+			"func": "renderButton"
 		}
 	]
 }

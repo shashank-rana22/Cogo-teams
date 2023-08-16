@@ -30,9 +30,7 @@
 .wrapper {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 12px;
 	max-height: 180px;
-	margin-top: 20px;
 	overflow-y: auto;
 }
 

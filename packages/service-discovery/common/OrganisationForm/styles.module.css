@@ -2,17 +2,31 @@
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .form_item {
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
 	width: 48%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+
+	&.user {
+		@media (max-width: 768px) {
+			margin-top: 12px;
+		}
+	}
 }
 
 .label {
 	display: flex;
+	margin-bottom: 8px;
 	font-size: 14px;
 	font-weight: 400;
 	color: #000;
@@ -24,6 +38,7 @@
 }
 
 .error_message {
+	margin-top: 8px;
 	font-size: 12px;
 	color: #cb6464;
 }

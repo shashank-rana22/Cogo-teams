@@ -1,4 +1,4 @@
-import { Select, Toast } from '@cogoport/components';
+import { Select, Toast, cl } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -133,7 +133,7 @@ function OrganisationForm({
 				)}
 			</div>
 
-			<div className={styles.form_item}>
+			<div className={cl`${styles.form_item} ${styles.user}`}>
 				<div className={styles.label}>
 					Select an User
 					{' '}

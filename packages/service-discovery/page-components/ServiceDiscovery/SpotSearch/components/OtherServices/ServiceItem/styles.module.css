@@ -6,6 +6,7 @@
 	width: 160px;
 	height: 150px;
 	padding: 24px 16px;
+	margin-right: 20px;
 	cursor: pointer;
 	background: #fff;
 	border: 1px solid #e8f3f3;
@@ -30,6 +31,12 @@
 			opacity: 1;
 			transition: 0.4s;
 		}
+	}
+
+	@media (max-width: 768px) {
+		width: 130px;
+		height: fit-content;
+		padding: 14px 12px;
 	}
 }
 

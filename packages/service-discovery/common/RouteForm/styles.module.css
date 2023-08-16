@@ -9,12 +9,12 @@
 .form_item {
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
 	width: 48%;
 }
 
 .label {
 	display: flex;
+	margin-bottom: 8px;
 	font-size: 14px;
 	font-weight: 400;
 	color: #000;

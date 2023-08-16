@@ -27,16 +27,14 @@ function Back({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.back_button}>
-				<IcMArrowBack
-					height={20}
-					width={20}
-					style={{ cursor: 'pointer' }}
-					onClick={onBack}
-				/>
+			<IcMArrowBack
+				height={20}
+				width={20}
+				className={styles.back_icon}
+				onClick={onBack}
+			/>
 
-				<span>{heading || 'Back'}</span>
-			</div>
+			<span>{heading || 'Back'}</span>
 		</div>
 	);
 }
