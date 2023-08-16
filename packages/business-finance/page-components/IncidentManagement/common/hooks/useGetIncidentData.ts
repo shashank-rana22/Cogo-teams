@@ -25,7 +25,7 @@ const getParams = ({
 	startDate,
 	urgency,
 	endDate,
-	entityId,
+	entityCode,
 }) => ({
 	...rest,
 	status          : activeTab.toUpperCase(),
@@ -37,7 +37,7 @@ const getParams = ({
 	pageIndex       : page,
 	pageSize        : pageLimit,
 	id              : incidentId,
-	entityId,
+	entityCode,
 	createdFrom     : startDate
 		? formatDate({
 			date       : startDate,
@@ -123,7 +123,7 @@ const useGetIncidentData = ({ activeTab, incidentId, entityCode }: Tab) => {
 					startDate,
 					urgency,
 					endDate,
-					entityId: entityCode,
+					entityCode,
 				}),
 			});
 		} catch (err) {
