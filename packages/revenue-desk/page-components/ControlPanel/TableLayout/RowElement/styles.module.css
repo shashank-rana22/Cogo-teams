@@ -9,3 +9,9 @@
 	align-items: center;
 	padding: 24px 0;
 }
+
+.button {
+	display: flex;
+	justify-content: end;
+	margin-bottom: 10px;
+}

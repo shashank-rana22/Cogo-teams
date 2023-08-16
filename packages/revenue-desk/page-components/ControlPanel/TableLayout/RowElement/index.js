@@ -1,8 +1,15 @@
-import { InputNumber } from '@cogoport/components';
+import { Button, InputNumber } from '@cogoport/components';
+
+import useCreateRDWeightages from '../../hooks/useCreateRDWeightages';
 
 import styles from './styles.module.css';
 
 function RowElement({ list, column_width }) {
+	const { createRDWeightages, loading } = useCreateRDWeightages();
+
+	const handelWeightages = () => {
+		createRDWeightages();
+	};
 	return (
 		<div className={styles.table}>
 			{list.map((item) => (
@@ -21,6 +28,9 @@ function RowElement({ list, column_width }) {
 					</div>
 				</div>
 			))}
+			<div className={styles.button}>
+				<Button onClick={() => handelWeightages()} loading={loading}>Save</Button>
+			</div>
 		</div>
 	);
 }

@@ -44,9 +44,9 @@ function FilterLayout() {
 		return str.toUpperCase();
 	};
 	return (
-		<div>
-			<div className={styles.filter}>
-				<div className={styles.fieldContainer}>
+		<div className={styles.filter}>
+			<div className={styles.fieldContainer}>
+				<div>
 					<Select
 						placeholder="Service Type"
 						options={serviceOptions}
@@ -56,7 +56,7 @@ function FilterLayout() {
 						style={{ width: '150px' }}
 					/>
 				</div>
-				<div className={styles.fieldContainer}>
+				<div>
 					<Select
 						placeholder="Trade Type"
 						options={tradeOptions}
@@ -66,7 +66,7 @@ function FilterLayout() {
 						style={{ width: '140px' }}
 					/>
 				</div>
-				<div className={styles.fieldContainer}>
+				<div>
 					<Select
 						placeholder="Customer Segment"
 						options={[{ label: 'FCL Freight', value: 'fcl_freight' }]}
@@ -76,58 +76,59 @@ function FilterLayout() {
 						style={{ width: '200px' }}
 					/>
 				</div>
-				{enable ? (
-					<div className={styles.popover}>
-						<Popover
-							placement="bottom"
-							style={{ minWidth: '320px !important' }}
-							render={<BookingParams filter={filter} setFilter={setFilter} />}
-						>
-							<Button
-								themeType="secondary"
-								className="grouped_filter_button"
-								size="sm"
-								disabled={isEmpty(filter?.trade_type)}
-							>
-								<div>
-									{allBookingParamsEmpty ? (
-										<div className={styles.booking_label}>
-											Booking Parameters
-											{' '}
-											<IcMArrowDown style={{ marginLeft: '10px' }} width="16px" height="16px" />
-										</div>
-									) : (
-										<div>
-											{booking_params_list.map((item) => (filter?.[item] ? (
-												<Pill color="#c6ffbf" key={item}>
-													{getFormattedContent(filter?.[item])}
-												</Pill>
-											) : null))}
-										</div>
-									)}
+			</div>
 
-								</div>
-							</Button>
-						</Popover>
-					</div>
-				) : null}
-				<div className={styles.buttonContainer}>
-					<Button
-						themeType="accent"
-						size="sm"
-						disabled={isEmpty(filter?.trade_type)}
-						onClick={apiTrigger}
+			{enable ? (
+				<div className={styles.popover}>
+					<Popover
+						placement="bottom"
+						style={{ minWidth: '320px !important' }}
+						render={<BookingParams filter={filter} setFilter={setFilter} />}
 					>
-						Apply Changes
-					</Button>
-					<Button
-						themeType="secondary"
-						size="sm"
-						onClick={onResetFilter}
-					>
-						Reset Filters
-					</Button>
+						<Button
+							themeType="secondary"
+							className="grouped_filter_button"
+							size="sm"
+							disabled={isEmpty(filter?.trade_type)}
+						>
+							<div>
+								{allBookingParamsEmpty ? (
+									<div className={styles.booking_label}>
+										Booking Parameters
+										{' '}
+										<IcMArrowDown style={{ marginLeft: '10px' }} width="16px" height="16px" />
+									</div>
+								) : (
+									<div>
+										{booking_params_list.map((item) => (filter?.[item] ? (
+											<Pill color="#c6ffbf" key={item}>
+												{getFormattedContent(filter?.[item])}
+											</Pill>
+										) : null))}
+									</div>
+								)}
+
+							</div>
+						</Button>
+					</Popover>
 				</div>
+			) : null}
+			<div className={styles.buttonContainer}>
+				<Button
+					themeType="accent"
+					size="sm"
+					disabled={isEmpty(filter?.trade_type)}
+					onClick={apiTrigger}
+				>
+					Apply Changes
+				</Button>
+				<Button
+					themeType="secondary"
+					size="sm"
+					onClick={onResetFilter}
+				>
+					Reset Filters
+				</Button>
 			</div>
 		</div>
 	);

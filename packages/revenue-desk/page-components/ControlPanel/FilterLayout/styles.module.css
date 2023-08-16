@@ -1,20 +1,19 @@
 .filter {
 	display: flex;
 	align-items: center;
+	margin: 10px;
 }
 
 .fieldContainer {
 	display: flex;
 	align-items: center;
-	margin: 0 8px;
+	justify-content: space-around;
 }
 
 .buttonContainer {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 30px;
-	margin: 0 8px;
 
 	:global {
 		.ui_button_container {
