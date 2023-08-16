@@ -11,6 +11,7 @@ function GroupedAgents({
 	createLoading = false,
 	updateAgentPreference = () => {},
 	loading = false,
+	firestore = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -30,6 +31,7 @@ function GroupedAgents({
 							status={status}
 							agent_id={agent_id}
 							key={agent_id}
+							firestore={firestore}
 						/>
 					);
 				})}

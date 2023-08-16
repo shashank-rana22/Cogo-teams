@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { collection, query, limit, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { collection, query, limit, getDocs, updateDoc, setDoc, doc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
@@ -47,4 +47,20 @@ export const updateCogooneConstants = async ({ firestore = {}, value = false, ro
 	);
 
 	updateDoc(docRef, { is_locked_screen: value, enable_for_roles: roleIds, screen_lock_timeout: time });
+};
+
+export const updateUserLastActivity = async ({ firestore = {}, agent_id = '', updated_status = '' }) => {
+	const roomDoc = doc(
+		firestore,
+		`${FIRESTORE_PATH.agent_data}/${agent_id}`,
+	);
+
+	await setDoc(
+		roomDoc,
+		{
+			last_activity_timestamp : Date.now(),
+			last_activity           : updated_status,
+		},
+		{ merge: true },
+	);
 };

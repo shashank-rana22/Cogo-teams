@@ -14,7 +14,7 @@ const DEFAULT_TIMEOUT = 900000;
 const LIMIT = 1;
 const EVENTS = ['click', 'keypress', 'scroll', 'pointermove'];
 
-const STOP_TRACK_ACTIVITY = ['locked_screen', 'in_call'];
+const STOP_TRACK_ACTIVITY = ['locked_screen', 'in_call', 'inactive', 'break', 'punched_out', 'on_leave'];
 const DEBOUNCE_LIMIT = 60000;
 
 export const getTimeoutConstant = async (firestore) => {

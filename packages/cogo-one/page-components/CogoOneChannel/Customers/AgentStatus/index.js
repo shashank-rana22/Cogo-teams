@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useState } from 'react';
 
+import { updateUserLastActivity } from '../../../../helpers/configurationHelpers';
 import useCreateUserInactiveStatus from '../../../../hooks/useCreateUserInactiveStatus';
 import InactiveModal from '../InactiveModal';
 
@@ -10,6 +11,8 @@ function AgentStatus({
 	agentStatus = {},
 	fetchworkPrefernce = () => {},
 	agentTimeline = () => {},
+	userId = '',
+	firestore = {},
 }) {
 	const { status = '' } = agentStatus || {};
 
@@ -29,8 +32,10 @@ function AgentStatus({
 	const onChangeToggle = () => {
 		if (isAgentActive) {
 			setOpenInactiveModal(true);
+			updateUserLastActivity({ firestore, agent_id: userId, updated_status: 'break' });
 		} else {
 			updateUserStatus({ status: 'active' });
+			updateUserLastActivity({ firestore, agent_id: userId, updated_status: 'active' });
 		}
 	};
 

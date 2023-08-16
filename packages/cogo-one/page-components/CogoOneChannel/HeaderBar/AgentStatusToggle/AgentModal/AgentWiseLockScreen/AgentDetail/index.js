@@ -1,21 +1,25 @@
 import { Toggle, Placeholder, cl } from '@cogoport/components';
 
+import { updateUserLastActivity } from '../../../../../../../helpers/configurationHelpers';
+
 import styles from './styles.module.css';
 
 function AgentDetail({
 	createLoading = false,
 	updateAgentPreference = () => {},
 	loading = false,
-	agent,
-	status,
-	agent_id,
+	agent = '',
+	status = '',
+	agent_id = '',
+	firestore = {},
 }) {
-	const onToggle = () => {
+	const onToggle = async () => {
 		let updated_status = 'inactive';
 		if (status === 'inactive') {
 			updated_status = 'active';
 		}
-		updateAgentPreference(agent_id, updated_status);
+		await updateAgentPreference(agent_id, updated_status);
+		updateUserLastActivity({ firestore, agent_id, updated_status });
 	};
 
 	return (
