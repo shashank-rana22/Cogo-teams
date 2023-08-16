@@ -39,7 +39,7 @@ function List({
 						</div>
 					</Tooltip>
 
-					{origin_location?.display_name}
+					{origin_location.display_name}
 				</div>
 			),
 		},
