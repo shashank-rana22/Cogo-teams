@@ -98,7 +98,7 @@ function FilterButton({ controls = [], filters = {}, setFilters = () => {} }) {
 						</div>
 					) : null}
 
-					<IcMFilter height={18} width={18} />
+					<IcMFilter height={18} width={18} className={styles.filter_icon} />
 					Filter
 				</Button>
 			</Popover>

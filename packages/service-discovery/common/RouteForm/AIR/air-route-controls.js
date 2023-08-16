@@ -1,9 +1,9 @@
-const fclRouteControls = [
+const airRouteControls = [
 	{
-		name        : 'origin_location_id',
+		name        : 'origin_airport_id',
 		type        : 'async-select',
 		label       : 'Origin Point',
-		placeholder : 'City, Port or Pin',
+		placeholder : 'Airport or Pin',
 		asyncKey    : 'list_locations',
 		initialCall : false,
 		span        : 6,
@@ -11,10 +11,10 @@ const fclRouteControls = [
 		rules       : { required: 'Origin is required' },
 	},
 	{
-		name        : 'destination_location_id',
+		name        : 'destination_airport_id',
 		type        : 'async-select',
 		label       : 'Destination Point',
-		placeholder : 'City, Port or Pin',
+		placeholder : 'Airport or Pin',
 		asyncKey    : 'list_locations',
 		initialCall : false,
 		span        : 6,
@@ -24,4 +24,4 @@ const fclRouteControls = [
 
 ];
 
-export default fclRouteControls;
+export default airRouteControls;

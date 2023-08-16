@@ -1,9 +1,9 @@
-const ltlRouteControls = [
+const lclRouteControls = [
 	{
 		name        : 'origin_location_id',
 		type        : 'async-select',
 		label       : 'Origin Point',
-		placeholder : 'City, Port or Pin',
+		placeholder : 'Port or Pin',
 		asyncKey    : 'list_locations',
 		initialCall : false,
 		span        : 6,
@@ -14,7 +14,7 @@ const ltlRouteControls = [
 		name        : 'destination_location_id',
 		type        : 'async-select',
 		label       : 'Destination Point',
-		placeholder : 'City, Port or Pin',
+		placeholder : 'Port or Pin',
 		asyncKey    : 'list_locations',
 		initialCall : false,
 		span        : 6,
@@ -24,4 +24,4 @@ const ltlRouteControls = [
 
 ];
 
-export default ltlRouteControls;
+export default lclRouteControls;

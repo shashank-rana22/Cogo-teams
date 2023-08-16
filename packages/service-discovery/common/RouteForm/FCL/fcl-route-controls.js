@@ -1,9 +1,9 @@
-const lclRouteControls = [
+const fclRouteControls = [
 	{
 		name        : 'origin_location_id',
 		type        : 'async-select',
 		label       : 'Origin Point',
-		placeholder : 'City, Port or Pin',
+		placeholder : 'Port or Pin',
 		asyncKey    : 'list_locations',
 		initialCall : false,
 		span        : 6,
@@ -14,7 +14,7 @@ const lclRouteControls = [
 		name        : 'destination_location_id',
 		type        : 'async-select',
 		label       : 'Destination Point',
-		placeholder : 'City, Port or Pin',
+		placeholder : 'Port or Pin',
 		asyncKey    : 'list_locations',
 		initialCall : false,
 		span        : 6,
@@ -24,4 +24,4 @@ const lclRouteControls = [
 
 ];
 
-export default lclRouteControls;
+export default fclRouteControls;

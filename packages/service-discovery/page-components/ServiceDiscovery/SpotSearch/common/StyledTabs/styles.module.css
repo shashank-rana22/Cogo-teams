@@ -4,6 +4,7 @@
 	:global {
 		.ui_tab_list_container {
 			padding-top: 14px;
+			overflow-x: scroll;
 			background-color: #fcfcfc;
 
 			.ui_tabs_list_title {
