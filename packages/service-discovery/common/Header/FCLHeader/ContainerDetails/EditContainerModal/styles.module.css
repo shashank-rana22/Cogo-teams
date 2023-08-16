@@ -4,7 +4,6 @@
 	:global {
 		.ui_modal_body_container {
 			min-height: 90vh !important;
-			padding: 0;
 		}
 
 		.ui_accordion_title {

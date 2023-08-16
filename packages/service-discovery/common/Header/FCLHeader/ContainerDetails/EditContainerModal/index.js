@@ -1,31 +1,28 @@
 import { Toast, Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
 
-import FilterContent from '../../../../page-components/SearchResults/common/Filters/FilterContent';
-import getFilterControls from '../../../../page-components/SearchResults/common/Filters/FilterContent/getControls';
-import getPrefillForm from '../../../../page-components/SearchResults/utils/getPrefillForm';
-import getLocationInfo from '../../../../page-components/SearchResults/utils/locations-search';
-import useCreateSearch from '../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
+import fclControls from '../../../../../page-components/SearchResults/configurations/fcl/form-controls';
+import getPrefillForm from '../../../../../page-components/SearchResults/utils/getPrefillForm';
+import getLocationInfo from '../../../../../page-components/SearchResults/utils/locations-search';
+import useCreateSearch from '../../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 
+import Form from './Form';
 import styles from './styles.module.css';
 
 const SERVICE_KEY = 'search_type';
+const SERVICE = 'fcl_freight';
 
-function EditLoadModal({
-	data = {},
+function EditContainerModal({
 	show = false,
 	setShow = () => {},
-	showLoadControlsOnly = true,
+	data = {},
 }) {
 	const { createSearch, loading } = useCreateSearch();
 
 	const router = useRouter();
 
-	const service_type = data[SERVICE_KEY];
-
-	const controls = getFilterControls(data, SERVICE_KEY, showLoadControlsOnly);
+	const controls = fclControls();
 
 	const defaultValues = getPrefillForm(data, SERVICE_KEY);
 
@@ -48,10 +45,6 @@ function EditLoadModal({
 	};
 
 	const handleApply = async (finalValues) => {
-		if (!isEmpty(errors)) {
-			return;
-		}
-
 		const hasChanges = JSON.stringify(finalValues) !== JSON.stringify(defaultValues);
 
 		if (!hasChanges) {
@@ -61,7 +54,7 @@ function EditLoadModal({
 
 		const spot_search_id = await createSearch({
 			action : 'edit',
-			values : { service_type, ...requiredParams, formValues: finalValues },
+			values : { service_type: SERVICE, ...requiredParams, formValues: finalValues },
 		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {
@@ -84,13 +77,13 @@ function EditLoadModal({
 			className={styles.modal}
 		>
 			<Modal.Body>
-				<FilterContent
-					controls={controls}
+				<Form
 					control={control}
-					watch={watch}
-					errors={errors}
-					setValue={setValue}
+					controls={controls}
 					handleSubmit={handleSubmit}
+					errors={errors}
+					watch={watch}
+					setValue={setValue}
 				/>
 			</Modal.Body>
 
@@ -107,9 +100,8 @@ function EditLoadModal({
 					Apply Changes
 				</Button>
 			</Modal.Footer>
-
 		</Modal>
 	);
 }
 
-export default EditLoadModal;
+export default EditContainerModal;

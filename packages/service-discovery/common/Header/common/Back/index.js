@@ -4,25 +4,19 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const backScreen = (currentScreen) => {
-	const MAPPING = {
-		listRateCard       : 'back',
-		selectedCardScreen : 'back',
-		comparison         : 'listRateCard',
-		bookCheckout       : 'selectedCardScreen',
-	};
-	return MAPPING[currentScreen] || 'back';
+const BACK_SCREEN_MAPPING = {
+	comparison: 'listRateCard',
 };
 
 function Back({
 	heading = 'Back',
-	...rest
+	currentScreen = '',
+	setCurrentScreen = () => {},
 }) {
 	const router = useRouter();
 
 	const onBack = () => {
-		const { currentScreen = '', setCurrentScreen = () => {} } = rest;
-		const backscreen = backScreen(currentScreen);
+		const backscreen = BACK_SCREEN_MAPPING[currentScreen] || 'back';
 
 		if (backscreen !== 'back') {
 			setCurrentScreen(() => backscreen);

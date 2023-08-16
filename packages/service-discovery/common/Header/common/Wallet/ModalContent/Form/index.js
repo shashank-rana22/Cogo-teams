@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 
-import getElementController from '../../../../../configs/getElementController';
-import getErrorMessage from '../../../../../configs/getErrorMessage';
+import getElementController from '../../../../../../configs/getElementController';
+import getErrorMessage from '../../../../../../configs/getErrorMessage';
 import FieldArray from '../FieldArray';
 
 import styles from './styles.module.css';

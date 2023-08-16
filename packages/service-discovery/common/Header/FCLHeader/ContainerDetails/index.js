@@ -2,30 +2,29 @@ import { Tooltip, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import getLoadArray from '../../../page-components/SearchResults/utils/getLoadArray';
+import getLoadArray from '../../../../page-components/SearchResults/utils/getLoadArray';
 
-import EditLoadModal from './EditLoadModal';
-import RenderLoadItem from './RenderLoadItem';
+import ContainerItem from './ContainerItem';
+import EditContainerModal from './EditContainerModal';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
+const SERVICE = 'fcl_freight';
 
-function LoadOverview({
+function ContainerDetails({
 	data = {},
-	service_key = 'search_type',
 	loading = false,
 	isAllowedToEdit = true,
 	infoBanner = {},
-	showSmall = false,
 	setInfoBanner = () => {},
 	isGuideViewed = false,
 }) {
 	const [showModal, setShowModal] = useState(false);
 
-	const service = data[service_key];
 	const { service_details, services } = data || {};
 
-	const load = getLoadArray(service, service_details || services || []);
+	const load = getLoadArray(SERVICE, service_details || services || []);
+
 	const firstLoadObject = load.shift();
 
 	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
@@ -45,10 +44,8 @@ function LoadOverview({
 
 	return (
 		<div className={styles.container}>
-			<RenderLoadItem
-				service={service}
+			<ContainerItem
 				isAllowedToEdit={isAllowedToEdit}
-				showSmall={showSmall}
 				setInfoBanner={setInfoBanner}
 				isFirst
 				loadItem={firstLoadObject}
@@ -68,11 +65,9 @@ function LoadOverview({
 								const margin = !index ? ZERO_VALUE : '8px 0 0 0';
 
 								return (
-									<RenderLoadItem
-										key={JSON.stringify(loadItem)}
-										service={service}
+									<ContainerItem
+										key={`${loadItem.container_size}_${loadItem.container_type}`}
 										isAllowedToEdit={isAllowedToEdit}
-										showSmall={showSmall}
 										setInfoBanner={setInfoBanner}
 										margin={margin}
 										loadItem={loadItem}
@@ -91,7 +86,7 @@ function LoadOverview({
 			)}
 
 			{showModal ? (
-				<EditLoadModal
+				<EditContainerModal
 					show={showModal}
 					data={data}
 					setShow={setShowModal}
@@ -101,4 +96,4 @@ function LoadOverview({
 	);
 }
 
-export default LoadOverview;
+export default ContainerDetails;

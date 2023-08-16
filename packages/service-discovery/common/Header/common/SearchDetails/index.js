@@ -1,8 +1,9 @@
+import { cl } from '@cogoport/components';
 import { IcMCross, IcMEdit } from '@cogoport/icons-react';
 import React from 'react';
 
-import LocationDetails from '../../LocationDetails';
-import SelectedOrgInfo from '../../SelectedOrgInfo';
+import LocationDetails from '../../../LocationDetails';
+import SelectedOrgInfo from '../../../SelectedOrgInfo';
 
 import styles from './styles.module.css';
 
@@ -26,7 +27,7 @@ function SearchDetails({
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${rest.className}`}>
 			<SelectedOrgInfo
 				{...rest}
 				orgName={business_name}

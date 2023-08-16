@@ -1,8 +1,8 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
-import getElementController from '../../../../../configs/getElementController';
-import getErrorMessage from '../../../../../configs/getErrorMessage';
+import getElementController from '../../../../../../configs/getElementController';
+import getErrorMessage from '../../../../../../configs/getErrorMessage';
 
 import styles from './styles.module.css';
 

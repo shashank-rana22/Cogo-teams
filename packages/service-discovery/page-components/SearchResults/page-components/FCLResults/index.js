@@ -5,13 +5,11 @@ import Comparison from '../../components/Comparison';
 
 import ListRateCards from './ListRateCards';
 import SelectedCardScreen from './SelectedCardScreen';
-import BookCheckout from './SelectedCardScreen/BookToCheckout';
 
 const SCREEN_MAPPING = {
 	listRateCard       : ListRateCards,
 	selectedCardScreen : SelectedCardScreen,
 	comparison         : Comparison,
-	bookCheckout       : BookCheckout,
 };
 
 function FCLResults({
