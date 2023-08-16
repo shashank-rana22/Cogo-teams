@@ -21,7 +21,7 @@ function Stats({
 	loading = false,
 }) {
 	const { chat_stats = {} } = statsData || {};
-	const { active = 0 } = chat_stats || {};
+	const { active = 0, escalated = 0, warning = 0 } = chat_stats || {};
 
 	const {
 		incoming_answered = 0,
@@ -32,6 +32,7 @@ function Stats({
 
 	const totalCallMade = outgoing_answered + outgoing_missed;
 	const totalCallReceive = incoming_answered + incoming_missed;
+	const totalChatAssigne = active + escalated + warning;
 
 	const FEEDBACK_COUNT_MAPPING = {
 		no_of_bookings       : booked,
@@ -39,7 +40,7 @@ function Stats({
 	};
 
 	const STATS_COUNT_MAPPING = {
-		chats_assigned : active,
+		chats_assigned : totalChatAssigne,
 		calls_made     : totalCallMade,
 		calls_received : totalCallReceive,
 	};

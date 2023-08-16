@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 const handlePartyDetails = ({
@@ -8,17 +9,17 @@ const handlePartyDetails = ({
 }) => {
 	const addressDetails = (billingPartyObj?.addresses || []).filter(
 		(item) => item?.gst_number === purchaseInvoiceValues?.billing_party_address,
-	)?.[0];
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	let bankDetails = {};
 	if (!isEmpty(collectionPartyObj?.bank_details)) {
 		bankDetails = (collectionPartyObj?.bank_details || []).filter(
 			(item) => item?.bank_account_number === purchaseInvoiceValues?.collection_party_bank_details,
-		)?.[0];
+		)?.[GLOBAL_CONSTANTS.zeroth_index];
 	} else if (!isEmpty(collectionPartyObj?.documents)) {
 		bankDetails = (collectionPartyObj?.documents || []).filter(
 			(item) => item?.data?.bank_account_number === purchaseInvoiceValues?.collection_party_bank_details,
-		)?.[0]?.data;
+		)?.[GLOBAL_CONSTANTS.zeroth_index]?.data;
 	}
 
 	const allBillingAddresses = [
@@ -56,12 +57,12 @@ const handlePartyDetails = ({
             collectionPartyObj?.company_name
             || collectionPartyObj?.business_name
             || editData?.business_name,
-		bank_name: bankDetails?.bank_name || editData?.bank_details?.[0]?.bank_name,
+		bank_name: bankDetails?.bank_name || editData?.bank_details?.[GLOBAL_CONSTANTS.zeroth_index]?.bank_name,
 		bank_account_number:
             bankDetails?.bank_account_number
-            || editData?.bank_details?.[0]?.bank_account_number,
+            || editData?.bank_details?.[GLOBAL_CONSTANTS.zeroth_index]?.bank_account_number,
 		ifsc_number:
-            bankDetails?.ifsc_number || editData?.bank_details?.[0]?.ifsc_number,
+            bankDetails?.ifsc_number || editData?.bank_details?.[GLOBAL_CONSTANTS.zeroth_index]?.ifsc_number,
 	};
 
 	return {

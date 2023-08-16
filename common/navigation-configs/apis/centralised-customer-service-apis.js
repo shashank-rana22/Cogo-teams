@@ -5,7 +5,7 @@ const centralised_customer_service = [
 		service_name : 'allocation',
 	},
 	{
-		api          : 'list_auth_roles',
+		api          : 'list_roles',
 		access_type  : 'private',
 		service_name : 'auth',
 	},
