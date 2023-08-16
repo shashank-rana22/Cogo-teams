@@ -9,6 +9,8 @@ import useGetTaggingBills from '../../hooks/useGetMappings';
 
 import styles from './styles.module.css';
 
+const STEP = 2;
+
 function InvoicesUploaded({
 	invoicesdata = {},
 	collectionParty = {},
@@ -24,7 +26,7 @@ function InvoicesUploaded({
 			<div
 				className={styles.value}
 				onClick={() => {
-					setStep(2);
+					setStep(STEP);
 					setOpenComparision(item);
 				}}
 				role="presentation"

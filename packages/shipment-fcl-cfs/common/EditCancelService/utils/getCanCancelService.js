@@ -7,7 +7,10 @@ const SHOW_CANCELLATION_STAKEHOLDERS = ['superadmin', 'booking_agent'];
 const EXCLUDED_SERVICE_STATES = ['completed', 'cancelled'];
 
 export default function getCanCancelService({ shipment_data, user_data, state, activeStakeholder }) {
-	if (user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
+	if (user_data?.id
+		&& [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
+			GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id,
+		].includes(user_data?.id)) {
 		return true;
 	}
 	if (shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id

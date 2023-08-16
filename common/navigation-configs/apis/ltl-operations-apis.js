@@ -40,7 +40,7 @@ const apis = [
 		service_name : 'ltl_warehouse_ops',
 	},
 	{
-		api          : 'list_auth_roles',
+		api          : 'list_roles',
 		access_type  : 'private',
 		service_name : 'auth',
 	},

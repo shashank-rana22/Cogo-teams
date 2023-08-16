@@ -21,15 +21,6 @@ const SUPPLIER_STAKEHOLDERS = [
 	'superadmin',
 ];
 
-const BL_SHOW_STATUS = [
-	'approved',
-	'released',
-	'surrendered',
-	'delivered',
-	'surrender_pending',
-	'release_pending',
-];
-
 const PRINTABLE_DOCS = ['draft_house_bill_of_lading'];
 
 function Content({
@@ -50,17 +41,24 @@ function Content({
 	docType = '',
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
-	bl_details = [],
 }) {
 	const [siReviewState, setSiReviewState] = useState(false);
 	const [printDoc, setPrintDoc] = useState(false);
 
 	const { data:bl_data } = uploadedItem || {};
-	const isBlUploaded = bl_details?.find((i) => i?.id === bl_data?.bl_detail_id);
-
-	const isBlReleased = BL_SHOW_STATUS.includes(isBlUploaded?.status);
 
 	const tradeType = primary_service?.trade_type;
+
+	const isSeaway = primary_service?.bl_type === 'seaway';
+
+	const isHBLMBL = [
+		'house_bill_of_lading',
+		'bill_of_lading',
+	].includes(uploadedItem?.document_type);
+
+	const restrictBLDocumentCondition = (
+		(isHBLMBL && tradeType === 'export' && isSeaway) || (isHBLMBL && tradeType === 'import')
+	);
 
 	const { document_type, state } = uploadedItem;
 
@@ -179,13 +177,7 @@ function Content({
 
 				{isChecked ? (
 					<div className={styles.action_container}>
-						{(!(
-							[
-								'house_bill_of_lading',
-								'bill_of_lading',
-							].includes(uploadedItem?.document_type) && tradeType === 'export'
-						)
-						|| isBlReleased)
+						{!restrictBLDocumentCondition
 							? (
 								<>
 									<Button

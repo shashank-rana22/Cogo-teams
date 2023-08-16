@@ -1,7 +1,7 @@
 import { IcMPdf, IcMDelete } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
-import getFileAttributes from '../../../utils/getFileAttributes';
+import { getFileAttributes } from '../../../utils/getFileAttributes';
 import CustomFileUploader from '../../CustomFileUploader';
 
 import styles from './styles.module.css';
