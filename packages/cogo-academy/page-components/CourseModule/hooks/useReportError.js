@@ -3,8 +3,13 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { request } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useReportError = ({ setShowErrorModal = () => {} }) => {
+	const { profile:{ user = {} } = {} } = useSelector((state) => ({
+		profile: state?.profile,
+	}));
+
 	const { handleSubmit, control, formState: { errors } } = useForm();
 
 	const onSubmit = async (values) => {
@@ -26,7 +31,7 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 					description,
 					image_url         : finalUrl || error_screenshot_url,
 					status_code       : 1,
-					session_data      : '',
+					session_data      : user,
 					requested_payload : '',
 					api_response      : '',
 					api_curl          : '',

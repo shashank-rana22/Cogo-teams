@@ -57,6 +57,7 @@
     "@cogoport/notifications": "workspace:0.1.0",
     "@cogoport/ocean-modules": "workspace:0.1.0",
     "@cogoport/performance-management": "workspace:1.0.0",
+    "@cogoport/resources": "workspace:1.0.0",
     "@cogoport/referral": "workspace:0.1.0",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/rfq-dashboard": "workspace:0.1.0",

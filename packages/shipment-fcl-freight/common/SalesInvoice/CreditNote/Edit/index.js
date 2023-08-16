@@ -17,7 +17,7 @@ import styles from './styles.module.css';
 
 function Edit({
 	setOpen = () => { },
-	CN_STATUS_MAPPING,
+	CN_STATUS_MAPPING = {},
 	prevData = {},
 	item = {},
 	cnRefetch = () => { },
@@ -42,6 +42,7 @@ function Edit({
 		control,
 		setValue,
 		watch,
+		setError,
 		formState: { errors = {} },
 	} = useForm({ defaultValues });
 
@@ -53,7 +54,6 @@ function Edit({
 		cnRefetch();
 		setOpen(false);
 	};
-
 	const { apiTrigger = () => { }, loading } = useUpdateShipmentCreditNote({
 		refetch: afterRefetch,
 	});
@@ -68,14 +68,25 @@ function Edit({
 		});
 
 		if (isEmpty(submit_data?.line_items)) {
-			Toast.error('Line Items is required');
+			Toast.error('Atleast one line item is required');
 			return;
 		}
 
 		let isError = false;
+		Object.entries(checkError).filter(Boolean).forEach(([key, val]) => {
+			(val || []).forEach((errorObj, ind) => {
+				Object.entries(errorObj || {}).forEach(([fieldName, fieldObj]) => {
+					const errorFieldKey = `${key}.${ind}.${fieldName}`;
 
-		Object.keys(checkError).forEach((key) => {
-			checkError[key]?.forEach((t) => {
+					setError(errorFieldKey, {
+						type    : fieldObj?.type || 'custom',
+						message : fieldObj?.message || 'Error',
+						ref     : errorFieldKey,
+					});
+				});
+			});
+
+			checkError?.[key]?.forEach((t) => {
 				if (!isEmpty(t)) {
 					isError = true;
 				}
@@ -113,7 +124,7 @@ function Edit({
 				<div />
 				<div className={styles.title}>
 					<b>
-						{`SID ${shipment_data?.serial_id} - Invoice number -`}
+						{`SID ${shipment_data?.serial_id} - Invoice Number -`}
 						<u>{live_invoice_number}</u>
 					</b>
 				</div>
@@ -126,7 +137,8 @@ function Edit({
 				<div>
 					<b>Date</b>
 					<span>
-						&nbsp; -
+						{' '}
+						-
 						{formatDate({
 							date       : item?.created_at,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],

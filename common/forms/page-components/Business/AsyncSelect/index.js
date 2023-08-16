@@ -61,6 +61,7 @@ import {
 	asyncListShipmentPendingTasks,
 	asyncIncidentSubtypeList,
 	asyncFieldsLeadOrganization,
+	asyncListResources,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -140,6 +141,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 	list_incident_subtype                : asyncIncidentSubtypeList,
 	list_lead_organizations              : asyncFieldsLeadOrganization,
+	resources                            : asyncListResources,
 };
 
 const SINGLE_ENTITY = 1;

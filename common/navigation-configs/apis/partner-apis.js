@@ -6,7 +6,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -780,7 +780,7 @@ const partner = {
 	],
 	roles_permissions: [
 		{
-			api          : 'create_auth_role',
+			api          : 'create_role',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -790,27 +790,27 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'get_auth_possible_permissions',
+			api          : 'get_possible_permissions',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
-			api          : 'onboard_auth_role',
+			api          : 'onboard_role',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
-			api          : 'update_auth_role',
+			api          : 'update_role',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
-			api          : 'update_auth_role_permission_mapping',
+			api          : 'update_role_permission',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -859,7 +859,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -916,7 +916,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -1980,6 +1980,16 @@ const partner = {
 			api          : 'send_checkout_for_approval',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'get_transacting_organization_shipment_data',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_commodities_on_trade_port_pair',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
 		},
 	],
 	supply_crm: [
@@ -3365,7 +3375,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -5159,12 +5169,12 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
-			api          : 'get_auth_possible_permissions',
+			api          : 'get_possible_permissions',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -6179,6 +6189,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'create_spot_search_demo',
+			access_type  : 'private',
+			service_name : 'spot_search',
+		},
 	],
 	bl_desk: [
 		{
@@ -6363,7 +6378,7 @@ const partner = {
 			service_name : 'incentive',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -6650,7 +6665,7 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -9624,6 +9639,11 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
+			api          : 'create_campaign_duplicate',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
 			api          : 'get_segment_verification_stats',
 			access_type  : 'private',
 			service_name : 'segmentation',
@@ -10010,7 +10030,7 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -10432,7 +10452,7 @@ const partner = {
 	],
 	communication_control: [
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -10634,7 +10654,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -12124,7 +12144,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -12442,6 +12462,11 @@ const partner = {
 			api          : 'list_checkouts',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'get_tickets_configuration_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
 		},
 		{
 			api          : 'get_user',
@@ -12901,7 +12926,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -12948,7 +12973,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
