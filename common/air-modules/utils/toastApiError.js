@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 export default function toastApiError(err) {
@@ -15,6 +16,8 @@ export default function toastApiError(err) {
 			message = data.message;
 		} else if (data?.error) {
 			message = data.error;
+		} else {
+			message = getApiErrorString(data);
 		}
 	} else if (msg) {
 		message = msg;

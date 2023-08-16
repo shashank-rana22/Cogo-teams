@@ -1,0 +1,14 @@
+.radio_group {
+	display: flex;
+	flex-direction: column;
+
+	:global {
+		.ui_radio_label {
+			> input {
+				flex-shrink: 0;
+				align-self: flex-start;
+				margin: 4px 8px 0 0;
+			}
+		}
+	}
+}

@@ -171,18 +171,19 @@ function useListChats({
 			viewType,
 			setCarouselState,
 			updateLoadingState,
+			workPrefernceLoading,
 		});
 		return () => {
 			snapshotCleaner({ ref: flashMessagesSnapShotListener });
 		};
-	}, [omniChannelCollection, viewType, setCarouselState, updateLoadingState]);
+	}, [omniChannelCollection, viewType, setCarouselState, updateLoadingState, workPrefernceLoading]);
 
 	return {
 		chatsData: {
 			messagesList      : sortedUnpinnedList || [],
 			unReadChatsCount  : listData?.unReadChatsCount,
 			sortedPinnedChatList,
-			flashMessagesList : filterAndSortFlashMessages({ flashMessagesData }) || [],
+			flashMessagesList : filterAndSortFlashMessages({ flashMessagesData, viewType }) || [],
 		},
 		setActiveMessage,
 		setAppliedFilters,

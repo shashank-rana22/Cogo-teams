@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable custom-eslint/regex-check, custom-eslint/uuid-check */
 export default {
 	country: {
@@ -30,9 +31,9 @@ export default {
 		},
 	},
 	regex: {
-		PAN                                : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
-		// eslint-disable-next-line max-len
+		TAX                                : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g, // PAN Regular Expression
 		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		ECN                                : '',
 		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL                              : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,
@@ -191,7 +192,6 @@ export default {
 		prod_es_sales         : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 		entity_manager_id     : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
 		service_ops1_role_ids : [
-			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
@@ -239,7 +239,6 @@ export default {
 			'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		],
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
-		finance_head          : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
 		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
@@ -280,6 +279,8 @@ export default {
 		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
 		corporate_owner_demand   : '14fe1423-3c2d-4f66-bc33-89bed08b92ee',
 		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
+		so1_revenue_desk         : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
 	},
 	options: {
 		registration_types: [
@@ -497,6 +498,18 @@ export default {
 				label : '501 Cogoport Vietnam',
 				value : '501',
 			},
+			{
+				label : '601 Cogoport Thailand',
+				value : '601',
+			},
+			{
+				label : '701 Cogoport Indonesia',
+				value : '701',
+			},
+			{
+				label : '801 Cogoport China',
+				value : '801',
+			},
 		],
 		migration_status: [
 			{ label: 'True', value: true },
@@ -661,24 +674,20 @@ export default {
 			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 			max_length : 15,
 		},
-
+		banking_code: {
+			financial_system_code : 'ifsc',
+			pattern               : /^[A-Z]{4}0[A-Z0-9]{6}$/,
+		},
+		pan_number: {
+			label   : 'PAN',
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
+		},
+		economic_zone: {
+			label: 'SEZ',
+		},
 		identification_number: {
 			label   : 'PAN Number',
 			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
-		},
-
-		banking_code: {
-			financial_system_code : 'ifsc',
-			pattern               : /^[A-Za-z]{4}\d{7}$/,
-		},
-
-		pan_number: {
-			label   : 'PAN',
-			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
-		},
-
-		economic_zone: {
-			label: 'SEZ',
 		},
 
 		ask_gst_details: true,
@@ -695,8 +704,9 @@ export default {
 			},
 			bookings: {
 				invoicing: {
-					is_invoice_mergeable : false,
-					disable_edit_invoice : true,
+					is_invoice_mergeable              : false,
+					disable_edit_invoice              : true,
+					stakeholder_wise_invoice_required : true,
 				},
 			},
 			business_finance: {
@@ -706,6 +716,14 @@ export default {
 							document_key : 'destinationDocumentValue',
 							irn_key      : 'destinationIrnNumber',
 						},
+					},
+				},
+			},
+			partner: {
+				bookings: {
+					invoicing: {
+						request_cancel_invoice : false,
+						request_credit_note    : true,
 					},
 				},
 			},

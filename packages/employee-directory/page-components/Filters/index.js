@@ -23,6 +23,7 @@ function Filters({
 	setemployeeFilters = () => {},
 	employeeFilters = {},
 	bulkActions = {},
+	isHRAdmin = false,
 }) {
 	const [openFilterPopover, setOpenFilterPopover] = useState(false);
 
@@ -141,25 +142,27 @@ function Filters({
 					</div>
 				</div>
 
-				<Popover
-					placement="bottom"
-					render={(
-						<BulkAction
-							setBulkActions={setBulkActions}
-							setSelectedIds={setSelectedIds}
-							bulkActions={bulkActions}
-						/>
-					)}
-				>
-					<Button size="lg" themeType="secondary">
-						<div className={styles.flex}>
-							<span className={styles.filter_text}>
-								Bulk Action
-							</span>
-							<IcMArrowRotateDown />
-						</div>
-					</Button>
-				</Popover>
+				{isHRAdmin && (
+					<Popover
+						placement="bottom"
+						render={(
+							<BulkAction
+								setBulkActions={setBulkActions}
+								setSelectedIds={setSelectedIds}
+								bulkActions={bulkActions}
+							/>
+						)}
+					>
+						<Button size="lg" themeType="secondary">
+							<div className={styles.flex}>
+								<span className={styles.filter_text}>
+									Bulk Action
+								</span>
+								<IcMArrowRotateDown />
+							</div>
+						</Button>
+					</Popover>
+				)}
 			</div>
 		</div>
 	);

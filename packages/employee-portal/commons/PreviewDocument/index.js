@@ -2,7 +2,6 @@ import FullView from './FullView';
 import styles from './styles.module.css';
 
 function PreviewDocument({
-	document_header,
 	height = '200px', width = '200px',
 	preview = false,
 	document_url = '',
@@ -18,9 +17,15 @@ function PreviewDocument({
 				type="application/pdf"
 				style={{ height, width }}
 			>
-				<a href={document_url}>
-					{document_header}
-				</a>
+				<p>
+					Your web browser doesn&apos;t have a PDF plugin.
+					Instead you can
+					{' '}
+					<a href={document_url}>
+						click here to
+						download the PDF file.
+					</a>
+				</p>
 			</object>
 
 			{preview && (
