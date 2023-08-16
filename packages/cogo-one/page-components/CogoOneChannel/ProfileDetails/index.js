@@ -39,7 +39,7 @@ function ProfileDetails({
 		loading,
 		ORG_PAGE_URL = '',
 		disableQuickActions, hideCpButton, getOrgDetails,
-	} = useCheckChannelPartner({ orgId, activeCardId, activeTab });
+	} = useCheckChannelPartner({ orgId, activeCardId, activeTab, formattedMessageData });
 
 	const {
 		documents_count = 0,

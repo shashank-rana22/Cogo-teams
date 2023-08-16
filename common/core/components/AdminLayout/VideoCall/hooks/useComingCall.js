@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { doc, getDoc } from 'firebase/firestore';
@@ -5,8 +6,10 @@ import { useEffect, useCallback, useRef } from 'react';
 import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import { ICESERVER } from '../constants';
 import { getCallingRoomData, getTokenData } from '../helpers/snapshortHelpers';
-import { callUpdate, saveWebrtcToken } from '../utils/callFunctions';
+import { callUpdate } from '../utils/callUpdate';
+import { saveWebrtcToken } from '../utils/saveWebrtcToken';
 
 import { useSetInACall } from './useSetInACall';
 
@@ -26,12 +29,12 @@ function useComingCall({
 	handleCallEnd = () => {},
 }) {
 	const { callingRoomId = '', webrtcTokenRoomId = '', callingRoomDetails = {} } = callDetails || {};
-	const { call_status: callStatus = '' } = callingRoomDetails || {};
+	const { call_status: callStatus = '', my_details: peerDetails = {} } = callingRoomDetails || {};
 
 	const { user_data } = useSelector((state) => ({
-		user_data: state.profile.user,
+		user_data: state?.profile?.user,
 	}));
-	const { id: userId } = user_data || {};
+	const { id: userId = '' } = user_data || {};
 
 	const callComingSnapshotRef = useRef(null);
 	const tokenSnapshotRef = useRef(null);
@@ -52,32 +55,35 @@ function useComingCall({
 
 		if (docSnap.exists()) {
 			const token = docSnap.data();
-			setWebrtcToken((prev) => ({ ...prev, userToken: token?.user_token }));
+			setWebrtcToken(token);
 		}
 	}, [webrtcTokenRoomId, callingRoomId, firestore, setWebrtcToken]);
 
-	const accepteCallMedia = useCallback(async () => {
+	const acceptCallMedia = useCallback(async () => {
 		try {
-			const userStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+			const userStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
 
 			setStreams((prev) => ({ ...prev, userStream }));
 			const peer = new Peer({
 				initiator : false,
 				trickle   : false,
 				stream    : userStream,
+				config    : {
+					iceServers: ICESERVER,
+				},
 			});
 
 			const localPeerRef = peerRef;
 			localPeerRef.current = peer;
 
-			if (!isEmpty(webrtcToken.userToken)) {
-				peer.signal(webrtcToken.userToken);
+			if (!isEmpty(webrtcToken?.token)) {
+				peer.signal(webrtcToken.token);
 			}
 
 			peer.on('signal', (data) => {
 				saveWebrtcToken(
 					{
-						data    : { peer_token: data },
+						data    : { token: data, token_for: peerDetails?.user_id },
 						callingRoomId,
 						tokenId : webrtcTokenRoomId,
 						firestore,
@@ -100,8 +106,12 @@ function useComingCall({
 				});
 				handleCallEnd({ callActivity: 'answered', description: 'peer js technical error' });
 			});
+
 			peer.on('close', () => {
-				handleCallEnd();
+				handleCallEnd({
+					callActivity : 'answered',
+					description  : 'call is closed',
+				});
 				callUpdate({
 					data: {
 						call_status: 'call_end',
@@ -110,36 +120,34 @@ function useComingCall({
 					firestore,
 				});
 			});
+
+			return true;
 		} catch (error) {
+			Toast.error('Please provide your Mic permission');
 			console.error('user stream is not working', error);
 
-			callUpdate({
-				data: {
-					call_status   : 'technical_error',
-					error_message : 'peer video audio is not working',
-				},
-				callingRoomId,
-				firestore,
-			});
-			handleCallEnd({ callActivity: 'missed', description: 'peer video audio is not working' });
+			return false;
 		}
-	}, [setStreams, peerRef, webrtcToken.userToken, callingRoomId, webrtcTokenRoomId, firestore, handleCallEnd]);
+	}, [setStreams, peerRef, webrtcToken?.token, peerDetails?.user_id, callingRoomId,
+		webrtcTokenRoomId, firestore, handleCallEnd]);
 
 	const answerCall = useCallback(async () => {
 		await getWebrtcToken();
-		saveInACallStatus({ inACallStatus: true });
-		setCallComing(false);
+		const isStreamActive = await acceptCallMedia();
 
-		callUpdate({
-			data: {
-				call_status: 'accepted',
-			},
-			firestore,
-			callingRoomId,
-		});
+		if (isStreamActive) {
+			saveInACallStatus({ inACallStatus: true });
+			setCallComing(false);
 
-		accepteCallMedia();
-	}, [accepteCallMedia, callingRoomId, firestore, getWebrtcToken, saveInACallStatus, setCallComing]);
+			callUpdate({
+				data: {
+					call_status: 'accepted',
+				},
+				firestore,
+				callingRoomId,
+			});
+		}
+	}, [acceptCallMedia, callingRoomId, firestore, getWebrtcToken, saveInACallStatus, setCallComing]);
 
 	const rejectCall = useCallback(() => {
 		callUpdate({

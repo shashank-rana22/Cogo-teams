@@ -44,7 +44,10 @@
 }
 
 .user_allocation {
+	width: 30px;
+	height: 30px;
 	margin-right: 10px;
+	fill: #7278ad;
 }
 
 .sensitive_content {

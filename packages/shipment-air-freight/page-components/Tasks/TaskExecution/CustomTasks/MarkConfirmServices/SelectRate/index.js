@@ -8,10 +8,11 @@ import Card from './Card';
 import styles from './styles.module.css';
 
 const CONFIRM_RATE_STEP = 2;
+
 function SelectRate({
-	setStep,
-	setSelectedCard,
-	updateConfirmation,
+	setStep = () => {},
+	setSelectedCard = () => {},
+	updateConfirmation = '',
 	step = {},
 	task = {},
 	primaryService = {},
@@ -23,6 +24,7 @@ function SelectRate({
 	});
 
 	const list = data?.list || [];
+	const textMessage = (list || []).length ? '' : 'Please revert rate first!';
 
 	const selected_priority = (list || []).find(
 		(item) => item.priority === item.selected_priority,
@@ -64,20 +66,25 @@ function SelectRate({
 						{' '}
 						Loading Task...
 					</div>
-				) : null}
-				{(data?.list || []).map((item) => (
-					<Card
-						item={item}
-						key={item?.id}
-						priority={item.priority}
-						setStep={setStep}
-						setSelectedCard={setSelectedCard}
-						updateConfirmation={updateConfirmation}
-						serviceProvidersData={SERVICE_PROVIDERS_DATA}
-						task={task}
-						primaryService={primaryService}
-					/>
-				))}
+				)
+					: (
+						<>
+							{(list || []).map((item) => (
+								<Card
+									item={item}
+									key={item?.id}
+									priority={item.priority}
+									setStep={setStep}
+									setSelectedCard={setSelectedCard}
+									updateConfirmation={updateConfirmation}
+									serviceProvidersData={SERVICE_PROVIDERS_DATA}
+									task={task}
+									primaryService={primaryService}
+								/>
+							))}
+							{textMessage}
+						</>
+					)}
 			</div>
 		</div>
 	);
