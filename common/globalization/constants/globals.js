@@ -47,7 +47,6 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'supply', label: 'Supply' },
 		{ value: 'supply_management', label: 'Supply Management' },
 		{ value: 'technology', label: 'Technology' },
-
 	],
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
