@@ -14,10 +14,18 @@ import isSingleLocation from '../../../utils/checkSingleLocation';
 
 import styles from './styles.module.css';
 
+const SHIPMENT_TYPE = {
+	fcl_freight: 'fcl',
+};
+
 function Card({ data = {} }) {
 	const router = useRouter();
+	const { partner_id = '' } = router.query || {};
+	const { shipment_type = '' } = data;
 
-	let href = `${window.location.origin}/${router?.query?.partner_id}/shipments`;
+	let href = Object.keys(SHIPMENT_TYPE).includes(shipment_type)
+		? `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE[shipment_type]}/`
+		: `${window.location.origin}/${partner_id}/shipments/`;
 	href += `/${data?.id}?${CONSTANTS.url_navigation_params}`;
 
 	const handleCardClick = (e) => {
@@ -45,11 +53,11 @@ function Card({ data = {} }) {
 				<div className={styles.divider} />
 
 				<div className={styles.icon_container}>
-					<ShipmentIcon shipment_type={data?.shipment_type} />
+					<ShipmentIcon shipment_type={shipment_type} />
 				</div>
 
 				<div className={styles.location_container}>
-					{isSingleLocation(data?.shipment_type) ? (
+					{isSingleLocation(shipment_type) ? (
 						<SingleLocation data={data} />
 					) : (
 						<DualLocation data={data} />

@@ -13,6 +13,7 @@ function MessageModals({
 	loading = false,
 	assignLoading = false,
 	viewType = '',
+	formattedData = {},
 }) {
 	const {
 		comp: ActiveModalComp = null,
@@ -50,6 +51,7 @@ function MessageModals({
 				assignLoading={assignLoading}
 				loading={loading}
 				viewType={viewType}
+				formattedData={formattedData}
 			/>
 		</Modal>
 

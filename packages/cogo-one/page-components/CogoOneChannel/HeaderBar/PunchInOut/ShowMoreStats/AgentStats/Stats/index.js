@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
@@ -12,28 +13,36 @@ import styles from './styles.module.css';
 
 const MIN_COUNT = 0;
 
-const getCallCountByType = ({ list, callType }) => list.filter((call) => call?.call_type === callType).length;
-
 function Stats({
-	bookingCount = 0,
+	totalQuotationSend = 0,
 	statsData = {},
-	callData = {},
-	quotationData = {},
+	booked = 0,
+	calls = [],
+	loading = false,
 }) {
 	const { chat_stats = {} } = statsData || {};
-	const { active = 0 } = chat_stats || {};
-	const { list = [] } = callData || {};
-	const { total_count: quotationCount = 0 } = quotationData || {};
+	const { active = 0, escalated = 0, warning = 0 } = chat_stats || {};
+
+	const {
+		incoming_answered = 0,
+		incoming_missed = 0,
+		outgoing_answered = 0,
+		outgoing_missed = 0,
+	} = calls[GLOBAL_CONSTANTS.zeroth_index] || [];
+
+	const totalCallMade = outgoing_answered + outgoing_missed;
+	const totalCallReceive = incoming_answered + incoming_missed;
+	const totalChatAssigne = active + escalated + warning;
 
 	const FEEDBACK_COUNT_MAPPING = {
-		no_of_bookings       : bookingCount,
-		no_of_quotation_send : quotationCount,
+		no_of_bookings       : booked,
+		no_of_quotation_send : totalQuotationSend,
 	};
 
 	const STATS_COUNT_MAPPING = {
-		chats_assigned : active,
-		calls_made     : getCallCountByType({ list, callType: 'outgoing' }),
-		calls_received : getCallCountByType({ list, callType: 'incoming' }),
+		chats_assigned : totalChatAssigne,
+		calls_made     : totalCallMade,
+		calls_received : totalCallReceive,
 	};
 
 	return (
@@ -53,10 +62,13 @@ function Stats({
 											alt="sad-emoji"
 											width={30}
 											height={30}
+											className={styles.emoji_icon}
 										/>
 									) : null}
 								<div className={styles.count}>
-									{getFormattedNumber(FEEDBACK_COUNT_MAPPING[name] || MIN_COUNT)}
+									{loading ? <Placeholder width="80px" height="40px" /> : (
+										<div>{getFormattedNumber(FEEDBACK_COUNT_MAPPING[name] || MIN_COUNT)}</div>
+									)}
 								</div>
 								{hasIcon ? <IcMDown className={styles.arrow_icon} /> : null}
 							</div>
@@ -72,7 +84,9 @@ function Stats({
 						<div className={styles.each_div} key={name}>
 							<div className={styles.title}>{label}</div>
 							<div className={styles.count}>
-								{getFormattedNumber(STATS_COUNT_MAPPING[name] || MIN_COUNT)}
+								{loading ? <Placeholder width="80px" height="40px" /> : (
+									<div>{getFormattedNumber(STATS_COUNT_MAPPING[name] || MIN_COUNT)}</div>
+								)}
 							</div>
 						</div>
 					);
