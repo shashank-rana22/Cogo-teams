@@ -144,7 +144,10 @@ function Item({
 					<ButtonIcon
 						className={styles.rotate_icon}
 						onClick={() => setOpen(open !== 'line_items' ? 'line_items' : false)}
-						style={{ height: `${billingPartyHeightRef.current?.offsetHeight}px` }}
+						style={{
+							height : `${billingPartyHeightRef.current?.offsetHeight}px`,
+							width  : `${billingPartyHeightRef.current?.offsetHeight}px`,
+						}}
 						icon={<IcMArrowRotateDown className={open ? styles.rotate : null} />}
 					/>
 				</div>

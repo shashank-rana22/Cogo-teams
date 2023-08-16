@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { authRequest } from '@cogoport/request/helpers/auth-request';
-import { setCookie, getCookie } from 'cookies-next';
+import { setCookie, getCookie } from '@cogoport/utils';
 
 const NEGATIVE_INDEX = -1;
 

@@ -6,9 +6,9 @@ function AgentDetail({
 	createLoading = false,
 	updateAgentPreference = () => {},
 	loading = false,
-	agent,
-	status,
-	agent_id,
+	agent = '',
+	status = '',
+	agent_id = '',
 }) {
 	const onToggle = () => {
 		let updated_status = 'inactive';
