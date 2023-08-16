@@ -17,6 +17,7 @@
 .footer_block {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	width: 100%;
 	padding: 10px 6px;
 	background: #f3fafa;
@@ -24,6 +25,7 @@
 
 .footer_right_block {
 	width: 50%;
+	margin-right: 4px;
 	overflow: hidden;
 	font-size: 10px;
 	color: #000;
@@ -90,21 +92,21 @@
 	overflow: hidden;
 	font-size: 12px;
 	font-weight: 600;
-	color: #6fa5ab;
 	text-align: center;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	background: #cfeaed;
 	border-radius: 4px;
 }
 
 .current_task_color {
 	color: #4f4f4f;
+	text-align: center;
 }
 
 .overflow_div {
 	overflow: hidden;
 	font-weight: 600;
+	text-align: center;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }

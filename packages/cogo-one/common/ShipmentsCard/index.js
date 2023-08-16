@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
@@ -69,37 +69,37 @@ function ShipmentsCard({
 			</div>
 
 			<div className={styles.footer_block}>
-				<div className={styles.footer_right_block}>
-					<div className={styles.current_task_color}>
-						Current Task:
+				{last_completed_task?.task && (
+					<div className={styles.footer_right_block}>
+						<div className={styles.current_task_color}>
+							Prev Task
+						</div>
+						<div className={styles.overflow_div}>
+							{startCase(last_completed_task?.task)}
+						</div>
 					</div>
-					<div className={styles.overflow_div}>
-						{startCase(task_status)}
-					</div>
-				</div>
-
+				)}
 				{task_status === 'approve_booking_note' ? (
 					<div className={styles.footer_left_block}>
-						<div
+						<Button
+							size="md"
+							themeType="primary"
 							className={styles.custom_pill_styles}
-							role="presentation"
 							onClick={(e) => {
 								e.stopPropagation();
 								setShowBookingNote({ show: true, data: { documents, shipmentId } });
 							}}
 						>
-							Send BN
-						</div>
+							Send Booking Note
+						</Button>
 					</div>
 				) : (
 					<div className={styles.footer_right_block}>
-						{last_completed_task?.task && (
-							<div className={styles.current_task_color}>
-								Last Task:
-							</div>
-						)}
+						<div className={styles.current_task_color}>
+							Current Task
+						</div>
 						<div className={styles.overflow_div}>
-							{startCase(last_completed_task?.task)}
+							{startCase(task_status)}
 						</div>
 					</div>
 				)}
