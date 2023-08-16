@@ -11,6 +11,7 @@ import { getSupplierData } from '../helper';
 import filterControls from './filterControls';
 import styles from './styles.module.css';
 import viewColumn from './ViewColumn';
+import DeleteComfirmationModal from './ViewColumn/DeleteComfirmationModal';
 
 const EMPTY_STATE_IMAGE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
 const PAGE_INDEX = 1;
@@ -19,6 +20,9 @@ const PAGE_SIZE = 10;
 
 function View() {
 	const [filters, setFilters] = useState({});
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [outWardId, setOutWardId] = useState(null);
+	const [dontShowCheckbox, setDontShowCheckbox] = useState(false);
 	const { push, query } = useRouter();
 	const goBack = () => {
 		push(
@@ -34,9 +38,23 @@ function View() {
 		docType       : filters?.docType,
 		irnStatus     : filters?.irnStatus,
 		tradePartyGst : filters?.tradePartyGst,
+		setShowDeleteModal,
+		dontShowCheckbox,
 	});
 
 	const { supplierName = '', suppGstIn = '', entity:entityCode = '', list, totalRecord } = data || {};
+
+	const isChecked = window.sessionStorage.getItem('isChecked');
+	const outWardViewColumn = viewColumn(
+		{
+			deleteInvoice,
+			showDeleteModal,
+			setShowDeleteModal,
+			setOutWardId,
+			dontShowCheckbox,
+			isChecked,
+		},
+	);
 
 	return (
 		<div>
@@ -82,7 +100,7 @@ function View() {
 			<div className={styles.table_body}>
 				<StyledTable
 					data={list}
-					columns={viewColumn(deleteInvoice)}
+					columns={outWardViewColumn}
 					loading={loading}
 					imageFind={EMPTY_STATE_IMAGE}
 				/>
@@ -97,6 +115,16 @@ function View() {
 					onPageChange={setPage}
 				/>
 			</div>
+			{showDeleteModal && !isChecked && (
+				<DeleteComfirmationModal
+					showDeleteModal={showDeleteModal}
+					setShowDeleteModal={setShowDeleteModal}
+					deleteInvoice={deleteInvoice}
+					outWardId={outWardId}
+					setDontShowCheckbox={setDontShowCheckbox}
+					dontShowCheckbox={dontShowCheckbox}
+				/>
+			)}
 
 		</div>
 	);

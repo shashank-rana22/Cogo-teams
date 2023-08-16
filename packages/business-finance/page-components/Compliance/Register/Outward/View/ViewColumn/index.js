@@ -14,7 +14,13 @@ function openPDF(event) {
 	window.open(pdfLink, '_blank');
 }
 
-const viewColumn = (deleteInvoice) => [
+const viewColumn = ({
+	deleteInvoice,
+	showDeleteModal,
+	setShowDeleteModal,
+	setOutWardId,
+	isChecked,
+}) => [
 	{
 		Header   : <div className={styles.header}>Invoice No</div>,
 		id       : 'invoiceNo',
@@ -133,13 +139,27 @@ const viewColumn = (deleteInvoice) => [
 		id       : 'deleteInvoice',
 		accessor : ({ outwardInvoiceId }) => (
 			outwardInvoiceId &&	(
-				<div
-					onClick={() => { deleteInvoice(outwardInvoiceId); }}
-					role="presentation"
-					className={styles.delete_invoice}
-				>
-					<IcMDelete height={20} width={20} />
-				</div>
+				(showDeleteModal === true && isChecked) ? (
+					<div
+						onClick={() => { deleteInvoice(outwardInvoiceId); }}
+						role="presentation"
+						className={styles.delete_invoice}
+					>
+						<IcMDelete height={20} width={20} />
+
+					</div>
+				) : (
+					<div
+						onClick={() => { setShowDeleteModal(true); setOutWardId(outwardInvoiceId); }}
+						role="presentation"
+						className={styles.delete_invoice}
+					>
+						<IcMDelete height={20} width={20} />
+
+					</div>
+
+				)
+
 			)
 
 		),
