@@ -12,7 +12,7 @@ const data = {
 	isManager : true,
 	list      : [
 		{
-			requestType  : 'Leave Request',
+			request_type : 'Leave Request',
 			pendingCount : 5,
 			leaveData    : [
 				{
@@ -42,7 +42,7 @@ const data = {
 			],
 		},
 		{
-			requestType  : 'Reimbursement Request',
+			request_type : 'Reimbursement Request',
 			pendingCount : 5,
 			leaveData    : [
 				{
@@ -86,11 +86,12 @@ function RequestModal({ onClose }) {
 				<IcMCross />
 			</div>
 			{isManager && (
-				<div style={{ margin: 20 }}>
+				<div className={styles.tab_switch}>
 					<Tabs
 						activeTab={activeTab}
 						themeType="tertiary"
 						onChange={setActiveTab}
+
 					>
 						<TabPanel name="employee_requests" title="Employee Requests" badge={3} />
 						<TabPanel name="my_requests" title="My Requests" badge={5} />

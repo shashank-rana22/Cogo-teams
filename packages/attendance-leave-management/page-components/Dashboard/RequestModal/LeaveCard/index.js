@@ -8,14 +8,14 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 
 function LeaveCard({ isManager, data }) {
-	const { leaveData, pendingCount, requestType } = data;
+	const { leaveData, pendingCount, request_type } = data;
 	const [accordion, setAccordion] = useState(false);
 	return (
 		<>
-			<div className={styles.leaveReqHeading} onClick={() => setAccordion(!accordion)}>
+			<div className={styles.leave_req_reading} onClick={() => setAccordion(!accordion)}>
 				<div>
-					<div className={styles.headingSp1}>{requestType}</div>
-					<div className={styles.headingSp2}>
+					<div className={styles.heading_sp1}>{request_type}</div>
+					<div className={styles.heading_sp2}>
 						{pendingCount}
 						{' '}
 						Pending
@@ -26,7 +26,7 @@ function LeaveCard({ isManager, data }) {
 			{accordion && (
 				<div>
 					{leaveData.map((val) => (
-						<div className={styles.parentDiv}>
+						<div className={styles.parent_div}>
 							<div className={styles.details}>
 								<div className={styles.design}>
 									<div className={styles.img}><IcMPlus width={18} height={18} /></div>
@@ -43,7 +43,7 @@ function LeaveCard({ isManager, data }) {
 											{' '}
 											{val.endDate}
 										</div>
-										<div className={styles.leaveDetails}>
+										<div className={styles.leave_details}>
 											<div className={styles.name}>
 												{val.name}
 											</div>
@@ -67,12 +67,12 @@ function LeaveCard({ isManager, data }) {
 							</div>
 
 							{isManager ?	(
-								<div className={styles.yesNo}>
+								<div className={styles.yes_no}>
 									<Button size="md" themeType="secondary">
 										<div className={styles.reject}>
 
 											<IcMCross width={16} height={22} />
-											<span className={styles.rejContent}>Reject</span>
+											<span className={styles.rej_content}>Reject</span>
 
 										</div>
 
@@ -82,19 +82,19 @@ function LeaveCard({ isManager, data }) {
 										<div className={styles.accept}>
 
 											<IcMTick width={25} height={22} />
-											<span className={styles.accContent}>Approve</span>
+											<span className={styles.acc_content}>Approve</span>
 
 										</div>
 
 									</Button>
 								</div>
 							) : (
-								<div className={styles.editDel}>
+								<div className={styles.edit_del}>
 									<IcMWasteScrap />
 
 									<Button size="md" themeType="secondary" className={styles.del}>
-										<IcMEdit className={styles.editIcon} />
-										<span className={styles.editText}>Edit</span>
+										<IcMEdit className={styles.edit_icon} />
+										<span className={styles.edit_text}>Edit</span>
 
 									</Button>
 								</div>

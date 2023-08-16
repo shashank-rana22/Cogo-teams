@@ -28,7 +28,7 @@ function AttendanceLeaveDashboard() {
 					<Button
 						size="md"
 						themeType="primary"
-						className={styles.requestBtn}
+						className={styles.request_btn}
 						onClick={() => { setShow(true); }}
 					>
 						My Requests
@@ -39,7 +39,7 @@ function AttendanceLeaveDashboard() {
 					<Button
 						size="md"
 						themeType="primary"
-						className={styles.requestBtn}
+						className={styles.request_btn}
 						onClick={() => { setShow(true); }}
 					>
 						My Inbox
