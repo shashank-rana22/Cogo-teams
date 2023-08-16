@@ -21,7 +21,7 @@ function ShipmentsCard({
 		payment_term : paymentTerm = '',
 		task_status = '',
 		documents = [],
-		id:shipmentId = '',
+		id: shipmentId = '',
 		last_completed_task = {},
 	} = shipmentItem;
 
