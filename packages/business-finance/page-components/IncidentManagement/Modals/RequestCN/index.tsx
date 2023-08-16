@@ -1,6 +1,7 @@
 import { Tooltip, Select, Popover, Textarea, Modal, Button, Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMEyeopen } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
@@ -378,7 +379,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									size="md"
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length) || loading || creditNoteApprovalType === ''}
+									disabled={!(remarks.length) || loading || isEmpty(creditNoteApprovalType)}
 									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
@@ -390,7 +391,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								<Button
 									size="md"
 									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length) || loading || creditNoteApprovalType === ''}
+									disabled={!(remarks.length) || loading || isEmpty(creditNoteApprovalType)}
 									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');
