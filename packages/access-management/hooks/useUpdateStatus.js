@@ -1,26 +1,28 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAuthRequest } from '@cogoport/request';
+
+const ERROR_CODE = 403;
 
 const useUpdateStatus = ({
 	navigation, auth_role_id, getList, onClose = () => {}, type = '',
 }) => {
-	const api =	type === 'active' ? '/onboard_auth_role' : '/update_auth_role_permission_mapping';
+	const api =	type === 'active' ? '/onboard_role' : '/update_role_permission';
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useAuthRequest({
 		url    : api,
 		method : 'POST',
-	});
+	}, { manual: true });
 
 	const activePayload = {
-		auth_role_id,
-		navigation_permission_pairs: [{ navigation, permissions: [] }],
+		role_id     : auth_role_id,
+		navigation,
+		permissions : [],
 	};
 
 	const onBoardPayload = {
-		status: type,
+		status  : type === 'active',
 		navigation,
-		auth_role_id,
+		role_id : auth_role_id,
 	};
 
 	const handleSubmit = async () => {
@@ -33,8 +35,8 @@ const useUpdateStatus = ({
 				onClose();
 			}
 		} catch (err) {
-			if (err.status !== 403) {
-				Toast.error(getApiErrorString(err.message));
+			if (err.response?.status !== ERROR_CODE) {
+				Toast.error(err.response?.data.error || 'Something went wrong!!!, please try again.');
 			}
 		}
 	};

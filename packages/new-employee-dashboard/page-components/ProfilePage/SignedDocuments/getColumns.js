@@ -79,7 +79,7 @@ const getColumns = ({ onClickViewDocument, setShowUploaderModal }) => [
 				<div className={styles.button}>
 					<Button
 						size="sm"
-						onClick={() => downloadFileAtUrl({ url: item?.document_url })}
+						onClick={() => downloadFileAtUrl({ url: item?.signed_document_url || item?.document_url })}
 						themeType="accent"
 					>
 						DOWNLOAD

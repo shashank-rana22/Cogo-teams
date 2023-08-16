@@ -7,9 +7,7 @@ import styles from './styles.module.css';
 function LeavesManagement() {
 	return (
 		<div className={styles.container}>
-			<div>
-				<Header />
-			</div>
+			<Header />
 			<div className={styles.body_container}>
 				<div className={styles.leave_balance_style}>
 					<LeaveBalancesComponent />

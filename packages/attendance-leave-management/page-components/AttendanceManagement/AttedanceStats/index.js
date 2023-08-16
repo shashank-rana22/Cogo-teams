@@ -20,7 +20,7 @@ function AttendanceStats() {
 	return (
 		<div>
 			<div className={styles.flex}>
-				<div>
+				<div className={styles.title}>
 					<div className={styles.header}>
 						THIS MONTH
 					</div>

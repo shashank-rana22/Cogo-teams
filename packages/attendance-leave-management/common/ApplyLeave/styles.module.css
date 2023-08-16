@@ -1,0 +1,30 @@
+.container {
+	font-size: 10px;
+}
+
+.label {
+	margin-bottom: 12px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #000;
+}
+
+.control_container {
+	margin-bottom: 16px;
+
+	:global {
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+	}
+}
+
+.cancel_btn {
+	margin-right: 12px;
+}
+
+.error_msg {
+	margin-top: 4px;
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}

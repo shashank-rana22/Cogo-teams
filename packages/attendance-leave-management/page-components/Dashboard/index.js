@@ -90,4 +90,3 @@ function AttendanceLeaveDashboard() {
 }
 
 export default AttendanceLeaveDashboard;
-// Attendance Leaves

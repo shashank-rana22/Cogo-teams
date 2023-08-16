@@ -24,6 +24,10 @@
 	justify-content: space-between;
 	padding-top: 20px;
 	color: #bdbdbd;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 }
 
 .month_dates {

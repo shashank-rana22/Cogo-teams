@@ -1,4 +1,4 @@
-function getPropsByType(type, data) {
+function getPropsByType({ type, data, referenceId }) {
 	const {
 		tdsRequest,
 		bankRequest,
@@ -20,7 +20,7 @@ function getPropsByType(type, data) {
 		ISSUE_CREDIT_NOTE                      : {},
 		JOURNAL_VOUCHER_APPROVAL               : { journalVoucherRequest },
 		INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : { interCompanyJournalVoucherRequest },
-		CONCOR_PDA_APPROVAL                    : { concorData: concorPdaApprovalRequest },
+		CONCOR_PDA_APPROVAL                    : { concorData: concorPdaApprovalRequest, referenceId },
 		SEZ_APPROVAL                           : { sezRequest },
 		ADVANCE_SECURITY_DEPOSIT_REFUND        : { advanceSecurityDepositRefund },
 		PAYMENT_CONFIRMATION_APPROVAL          : { paymentConfirmationRequest },

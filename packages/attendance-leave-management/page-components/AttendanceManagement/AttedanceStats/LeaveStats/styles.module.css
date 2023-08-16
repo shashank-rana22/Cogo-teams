@@ -3,18 +3,32 @@
 	padding: 20px;
 	background-color: #fff;
 	border-radius: 6px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		padding: 12px;
+	}
 }
 
 .header_flex {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
 }
 
 .title {
 	font-size: 16px;
 	font-weight: 600;
 	color: #221f20;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-bottom: 12px;
+	}
 }
 
 .pending_approval {
@@ -24,6 +38,10 @@
 	color: #c26d1a;
 	background: #fef3e9;
 	border-radius: 100px;
+
+	@media (max-width: 768px) {
+		padding: 4px 12px;
+	}
 }
 
 .pending_dot {

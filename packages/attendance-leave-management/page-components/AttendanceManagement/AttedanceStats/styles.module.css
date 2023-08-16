@@ -1,6 +1,10 @@
 .sub_header {
 	font-size: 12px;
 	color: #4f4f4f;
+
+	@media (max-width: 768px) {
+		margin-bottom: 12px;
+	}
 }
 
 .header {
@@ -47,6 +51,20 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+
+		.title {
+			width: 100%;
+		}
+
+		:global {
+			.ui_button_container {
+				padding: 0;
+			}
+		}
+	}
 }
 
 .arrow_icon {
@@ -63,6 +81,10 @@
 	flex-wrap: wrap;
 	gap: 32px;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		gap: 16px;
+	}
 }
 
 .attendance_dot {
@@ -100,7 +122,10 @@
 
 .leave_team_stats {
 	display: flex;
-
-	/* align-items: center; */
 	gap: 12px;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+		gap: 0;
+	}
 }

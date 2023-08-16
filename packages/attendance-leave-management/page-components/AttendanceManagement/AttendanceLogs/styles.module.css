@@ -9,6 +9,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
 }
 
 .title {
@@ -29,6 +33,17 @@
 			width: 200px;
 		}
 	}
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-top: 12px;
+
+		:global {
+			.ui_select_container {
+				width: 100%;
+			}
+		}
+	}
 }
 
 .table_container {
@@ -36,4 +51,17 @@
 	margin-top: 20px;
 	background-color: #fff;
 	border-radius: 16px;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.mobile_view {
+	display: none;
+
+	@media (max-width: 768px) {
+		display: block;
+		margin-top: 20px;
+	}
 }

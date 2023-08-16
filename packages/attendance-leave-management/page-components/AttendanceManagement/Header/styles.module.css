@@ -10,6 +10,11 @@
 .select_button {
 	display: flex;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+		width: 100%;
+	}
 }
 
 .main_container {
@@ -17,6 +22,10 @@
 	align-items: center;
 	justify-content: space-between;
 	font-weight: 550;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
 }
 
 .select_wrapper {
@@ -26,5 +35,23 @@
 		.ui_select_container {
 			width: 150px;
 		}
+	}
+
+	@media (max-width: 768px) {
+		width: 100%;
+		padding-right: 0;
+		margin: 12px 0;
+
+		:global {
+			.ui_select_container {
+				width: 100%;
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.donwload_btn {
+		width: 100%;
 	}
 }

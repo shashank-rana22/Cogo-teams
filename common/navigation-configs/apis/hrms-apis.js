@@ -6,6 +6,11 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 		{
+			api          : 'create_employee_document',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
 			api          : 'list_employee_details',
 			access_type  : 'private',
 			service_name : 'hrms',
@@ -512,16 +517,6 @@ const HRMS = {
 			api          : 'update_bulk_employee_details',
 			access_type  : 'private',
 			service_name : 'hrms',
-		},
-		{
-			api          : 'list_partner_users',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-		{
-			api          : 'list_locations',
-			access_type  : 'private',
-			service_name : 'location',
 		},
 	],
 };
