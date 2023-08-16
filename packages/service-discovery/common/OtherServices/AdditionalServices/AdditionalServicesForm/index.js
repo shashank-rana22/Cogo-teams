@@ -61,9 +61,7 @@ function AdditionalServicesForm({
 			<div className={styles.text}>
 				We need the following details to give you an accurate estimation and discount
 				<IcMCross
-					onClick={() => {
-						setHeaderProps({});
-					}}
+					onClick={() => setHeaderProps({})}
 					style={{ cursor: 'pointer' }}
 				/>
 			</div>
