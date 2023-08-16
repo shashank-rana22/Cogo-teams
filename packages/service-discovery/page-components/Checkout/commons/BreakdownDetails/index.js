@@ -55,6 +55,8 @@ function BreakdownDetails({
 
 	const { primary_service = '' } = detail || {};
 
+	const { source: rateSource = '' } = rate;
+
 	return (
 		<div>
 			<BreakdownDetailsHeader disableForm={disableForm} resetMargins={resetMargins} rateDetails={rateDetails} />
@@ -95,11 +97,13 @@ function BreakdownDetails({
 					},
 				});
 
-				if (fclLocalEmpty) {
+				if (fclLocalEmpty && rateSource !== 'cogo_assured_rate') {
 					totalDisplayString = 'Billed at actual';
 				}
 
-				const noRatesFound = !item?.total_price_discounted && !fclLocalEmpty;
+				const noRatesFound = !item?.total_price_discounted
+				&& !(fclLocalEmpty && rateSource !== 'cogo_assured_rate')
+				&& item?.service_type !== primary_service;
 
 				if (noRatesFound) {
 					setNoRatesPresent(true);
