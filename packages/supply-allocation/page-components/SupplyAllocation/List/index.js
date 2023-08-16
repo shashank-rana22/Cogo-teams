@@ -1,5 +1,5 @@
 import { Button, Pagination, Tooltip } from '@cogoport/components';
-import { IcMArrowRight, IcMInfo, IcMPortArrow } from '@cogoport/icons-react';
+import { IcCBookmark, IcMArrowRight, IcMBookmark, IcMInfo, IcMPortArrow } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
 import StyledTable from '../../../commons/StyledTable';
@@ -78,6 +78,22 @@ function List({
 			id       : 'forecasted_volume',
 			Header   : 'FORECASTED VOLUME',
 			accessor : (item) => item.firstName,
+		},
+		{
+			id       : 'bookmark',
+			Header   : '',
+			accessor : (item) => {
+				const { is_favourite } = item;
+				return (
+					<span
+						role="presentation"
+						style={{ cursor: 'pointer' }}
+						onClick={() => { console.log('Bookmark clicked!'); }}
+					>
+						{is_favourite ? <IcMBookmark /> : <IcCBookmark />}
+					</span>
+				);
+			},
 		},
 		{
 			id       : 'actions',
