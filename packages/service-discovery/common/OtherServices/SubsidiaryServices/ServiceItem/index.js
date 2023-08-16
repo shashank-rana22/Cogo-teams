@@ -9,6 +9,49 @@ import useDeleteSubsidiaryService from '../hooks/useDeleteSubsidiaryService';
 
 import styles from './styles.module.css';
 
+function IconComponent({
+	addServiceLoading = false,
+	selectedServices = [],
+	value = '',
+	setShowDelete = () => {},
+	onClickAdd = () => {},
+	disabled = false,
+}) {
+	const [isHovered, setIsHovered] = useState(false);
+
+	const handleMouseEnter = () => { setIsHovered(true); };
+	const handleMouseLeave = () => { setIsHovered(false); };
+
+	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
+
+	if (addServiceLoading) {
+		return <Loader themeType="primary" />;
+	}
+
+	if (selectedServices.some((item) => item.value === value)) {
+		return (
+			<SelectedIcon
+				className={styles.selected_icon}
+				onMouseEnter={handleMouseEnter}
+				onMouseLeave={handleMouseLeave}
+				height={22}
+				width={22}
+				onClick={() => setShowDelete(true)}
+			/>
+		);
+	}
+
+	return (
+		<IcMPlus
+			height={22}
+			width={22}
+			className={cl`${styles.add_icon} ${disabled ? styles.disabled : {}}`}
+			fill="black"
+			onClick={onClickAdd}
+		/>
+	);
+}
+
 function ServiceItem({
 	itemData = {},
 	data = {},
@@ -21,7 +64,6 @@ function ServiceItem({
 	setIsDisabled = () => {},
 	checkout_id = '',
 }) {
-	const [isHovered, setIsHovered] = useState(false);
 	const [showDelete, setShowDelete] = useState(false);
 
 	const {
@@ -61,40 +103,6 @@ function ServiceItem({
 		setPopularServices((prev) => (prev.filter((item) => item.value !== value)));
 	};
 
-	const handleMouseEnter = () => { setIsHovered(true); };
-	const handleMouseLeave = () => { setIsHovered(false); };
-
-	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
-
-	const renderIcon = () => {
-		if (addServiceLoading) {
-			return <Loader themeType="primary" />;
-		}
-
-		if (selectedServices.some((item) => item.value === value)) {
-			return (
-				<SelectedIcon
-					className={styles.selected_icon}
-					onMouseEnter={handleMouseEnter}
-					onMouseLeave={handleMouseLeave}
-					height={22}
-					width={22}
-					onClick={() => setShowDelete(true)}
-				/>
-			);
-		}
-
-		return (
-			<IcMPlus
-				height={22}
-				width={22}
-				className={cl`${styles.add_icon} ${disabled ? styles.disabled : {}}`}
-				fill="black"
-				onClick={onClickAdd}
-			/>
-		);
-	};
-
 	return (
 		<div className={styles.container}>
 			<Tooltip
@@ -104,7 +112,14 @@ function ServiceItem({
 				<div className={styles.text}>{label}</div>
 			</Tooltip>
 
-			{renderIcon()}
+			<IconComponent
+				onClickAdd={onClickAdd}
+				addServiceLoading={addServiceLoading}
+				selectedServices={selectedServices}
+				disabled={disabled}
+				value={value}
+				setShowDelete={setShowDelete}
+			/>
 
 			{showDelete ? (
 				<DeleteServiceModal

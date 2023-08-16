@@ -24,7 +24,7 @@ function ConsignmentValueLabel() {
 	);
 }
 
-const renderLabel = (option) => {
+function CustomLabel({ option = {} }) {
 	const { commodity = '', subCommodity = '' } = option || {};
 
 	return (
@@ -34,7 +34,7 @@ const renderLabel = (option) => {
 			{`(${subCommodity})`}
 		</span>
 	);
-};
+}
 
 const controls = [
 	{
@@ -46,7 +46,7 @@ const controls = [
 		initialCall : true,
 		valueKey    : 'id',
 		lableKey    : 'commodity',
-		renderLabel,
+		renderLabel : (option) => <CustomLabel option={option} />,
 		span        : 12,
 		rules       : { required: true },
 	},

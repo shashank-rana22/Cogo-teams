@@ -1,4 +1,4 @@
-const LINE_PARAMS = ({ status, operator_type }) => ({
+const getParams = ({ status, operator_type }) => ({
 	filters    : { operator_type, status },
 	page_limit : 100,
 	sort_by    : 'short_name',
@@ -64,7 +64,7 @@ const createContracts = () => [
 		type        : 'async-select',
 		asyncKey    : 'list_operators',
 		initialCall : true,
-		params      : LINE_PARAMS({
+		params      : getParams({
 			status        : 'active',
 			operator_type : 'shipping_line',
 		}),
@@ -82,7 +82,7 @@ const createContracts = () => [
 		type        : 'async-select',
 		asyncKey    : 'list_operators',
 		initialCall : true,
-		params      : LINE_PARAMS({
+		params      : getParams({
 			status        : 'active',
 			operator_type : 'airline',
 		}),
@@ -103,7 +103,7 @@ const createContracts = () => [
 		initialCall    : true,
 		labelKey       : 'short_name',
 		defaultOptions : false,
-		params         : LINE_PARAMS({
+		params         : getParams({
 			status        : 'inactive',
 			operator_type : 'shipping_line',
 		}),
@@ -121,7 +121,7 @@ const createContracts = () => [
 		className      : 'primary lg shipping-line',
 		labelKey       : 'short_name',
 		defaultOptions : false,
-		params         : LINE_PARAMS({
+		params         : getParams({
 			status        : 'inactive',
 			operator_type : 'shipping_line',
 		}),

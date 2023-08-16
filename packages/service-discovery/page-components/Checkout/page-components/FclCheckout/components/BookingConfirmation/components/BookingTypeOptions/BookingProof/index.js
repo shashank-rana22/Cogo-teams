@@ -51,7 +51,7 @@ function BookingProof({
 
 	return (
 		<div className={cl`${styles.wrapper} ${length > ONE && styles.multiple}`}>
-			<div className={styles.header_text}>Booking Proof</div>
+			{length > ONE ? <div className={styles.header_text}>Booking Proof</div> : null}
 
 			<div className={cl`${styles.container} ${file && styles.uploaded}`}>
 				<FileUploader

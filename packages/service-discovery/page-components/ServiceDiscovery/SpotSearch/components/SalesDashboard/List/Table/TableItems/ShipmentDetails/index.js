@@ -3,11 +3,49 @@ import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 
 import getLoadArray from '../../../../../../../../SearchResults/utils/getLoadArray';
 
-import RenderTruckShipments from './renderTruckShipments';
 import styles from './styles.module.css';
+import TruckShipments from './TruckShipments';
 
-const renderShipment = (itemData, field) => {
-	const { shipment_type = '-', service_type = '-', service_details, services } = itemData || {};
+function LoadDetails({ data = {}, item = {} }) {
+	return (
+		<>
+			{data?.container_size ? (
+				<Pill size="md" color="#F9F9F9">
+					{data.container_size === '20' || data.container_size === '40'
+						? `${data.container_size}ft`
+						: data.container_size}
+				</Pill>
+			) : null}
+
+			{data?.containers_count ? (
+				<Pill size="md" color="#F9F9F9">
+					{`${data.containers_count} Container`}
+				</Pill>
+			) : null}
+
+			{data?.container_type ? (
+				<Pill size="md" color="#F9F9F9">{startCase(data.container_type)}</Pill>
+			) : null}
+
+			{(startCase(data.container_type)
+								|| data.container_size
+								|| data.containers_count) && <br />}
+
+			<Pill size="md" color="#F9F9F9">
+				{startCase(data.commodity) || 'All Commodities'}
+			</Pill>
+
+			{item?.inco_term ? (
+				<Pill size="md" color="#FDEBE9">
+					{`Inco: ${upperCase(item.inco_term)}`}
+				</Pill>
+			) : null}
+		</>
+	);
+}
+
+function ShipmentDetails({ item = {}, field = {} }) {
+	const { shipment_type = '-', service_type = '-', service_details, services } = item || {};
 	const { commodityKey = '' } = field || {};
 
 	const isTruckType =	['ftl_freight', 'ltl_freight'].includes(shipment_type)
@@ -20,8 +58,8 @@ const renderShipment = (itemData, field) => {
 			.includes(commodityKey) && isTruckType
 	) {
 		return (
-			<RenderTruckShipments
-				itemData={itemData}
+			<TruckShipments
+				item={item}
 				commodityKey={commodityKey}
 				shipment_type={shipment_type}
 			/>
@@ -30,49 +68,9 @@ const renderShipment = (itemData, field) => {
 
 	const firstLoadObject = load.shift();
 
-	const renderLoadDetails = (data = {}) => (
-		(
-			<>
-				{data?.container_size ? (
-					<Pill size="md" color="#F9F9F9">
-						{data.container_size === '20' || data.container_size === '40'
-							? `${data.container_size}ft`
-							: data.container_size}
-					</Pill>
-				) : null}
-
-				{data?.containers_count ? (
-					<Pill size="md" color="#F9F9F9">
-						{`${data.containers_count} Container`}
-					</Pill>
-				) : null}
-
-				{data?.container_type ? (
-					<Pill size="md" color="#F9F9F9">{startCase(data.container_type)}</Pill>
-				) : null}
-
-				{(startCase(data.container_type)
-								|| data.container_size
-								|| data.containers_count) && <br />}
-
-				<Pill size="md" color="#F9F9F9">
-					{startCase(data.commodity) || 'All Commodities'}
-				</Pill>
-
-				{itemData?.inco_term ? (
-					<Pill size="md" color="#FDEBE9">
-						{`Inco: ${upperCase(itemData.inco_term)}`}
-					</Pill>
-				) : null}
-			</>
-		)
-	);
-
 	return (
-
 		<div className={styles.container}>
-
-			{renderLoadDetails(firstLoadObject)}
+			<LoadDetails data={firstLoadObject} item={item} />
 
 			{!isEmpty(load) ? (
 				<Pill size="md" color="#F9F9F9">
@@ -80,7 +78,13 @@ const renderShipment = (itemData, field) => {
 						placement="top"
 						content={(
 							<div className={styles.content}>
-								{load.map((loadItem) => renderLoadDetails(loadItem))}
+								{load.map((loadItem) => (
+									<LoadDetails
+										key={loadItem?.id}
+										data={loadItem}
+										item={item}
+									/>
+								))}
 							</div>
 						)}
 					>
@@ -91,6 +95,6 @@ const renderShipment = (itemData, field) => {
 		</div>
 
 	);
-};
+}
 
-export default renderShipment;
+export default ShipmentDetails;

@@ -135,20 +135,20 @@ const useGetPermission = () => {
 		});
 		return matches;
 	};
-	function AuthorizedToSee({
+
+	const authorizedToSee = ({
 		conditions = [],
 		type = 'and',
 		children = null,
-	}) {
-		return isConditionMatches(conditions, type) ? children : null;
-	}
+	}) => (isConditionMatches(conditions, type) ? children : null);
+
 	return {
 		authorizationparameters,
 		scope,
 		permissions_navigations,
 		entity_types,
 		isConditionMatches,
-		AuthorizedToSee,
+		authorizedToSee,
 		isChannelPartner,
 	};
 };
