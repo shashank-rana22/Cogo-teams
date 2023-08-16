@@ -1,8 +1,10 @@
+/* eslint-disable custom-eslint/import-from-react */
 import '@cogoport/components/dist/themes/base.css';
 import '@cogoport/components/dist/themes/dawn.css';
 import { Router } from '@cogoport/next';
 import store, { Provider } from '@cogoport/store';
 import * as Sentry from '@sentry/nextjs';
+import { appWithTranslation } from 'next-i18next';
 import pageProgessBar from 'nprogress';
 import './global.css';
 import 'nprogress/nprogress.css';
@@ -35,11 +37,13 @@ if (process.env.NODE_ENV === 'production') {
 	}
 }
 
+const PROGRESS_PERCENTAGE = 0.4;
+
 function MyApp({ Component, pageProps, firestoreCustomToken = '' }) {
 	useEffect(() => {
 		Router.events.on('routeChangeStart', () => {
 			pageProgessBar.start();
-			pageProgessBar.set(0.4);
+			pageProgessBar.set(PROGRESS_PERCENTAGE);
 		});
 
 		Router.events.on('routeChangeComplete', () => {
@@ -106,4 +110,4 @@ MyApp.getInitialProps = async () => {
 	return { pageProps: { layout: 'none' } };
 };
 
-export default MyApp;
+export default appWithTranslation(MyApp);

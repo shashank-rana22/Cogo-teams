@@ -30,7 +30,8 @@ const getControls = (partnerId) => [
 		params      : {
 			permissions_data_required : false,
 			filters                   : {
-				partner_entity_types: ['cogoport'],
+				status               : true,
+				partner_entity_types : ['cogoport'],
 			},
 		},
 		multiple    : true,

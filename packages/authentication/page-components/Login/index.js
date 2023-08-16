@@ -2,6 +2,7 @@ import { FluidContainer, Button } from '@cogoport/components';
 import { useForm, InputController } from '@cogoport/forms';
 import { IcCMicrosoft, IcMEyeopen, IcMEyeclose } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useFormLoginwithMS from '../../hooks/useFormLoginwithMS';
@@ -12,17 +13,19 @@ import styles from './styles.module.css';
 function Login() {
 	const router = useRouter();
 
+	const { t } = useTranslation(['login']);
+
 	const { onSubmit = () => {}, loading = false, source = '' } = useLoginAuthenticate();
 	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
-	const { handleSubmit, formState: { errors }, control } = useForm();
 	const [showPassword, setShowPassword] = useState(false);
+	const { handleSubmit, formState: { errors }, control } = useForm();
 
-	const renderSuffix = () => {
+	function RenderSuffix() {
 		if (!showPassword) {
 			return <IcMEyeopen className={styles.show_password} onClick={() => setShowPassword(!showPassword)} />;
 		}
 		return <IcMEyeclose className={styles.show_password} onClick={() => setShowPassword(!showPassword)} />;
-	};
+	}
 
 	return (
 		<FluidContainer className={styles.container}>
@@ -33,7 +36,7 @@ function Login() {
 					className={styles.logo}
 				/>
 				<div className={styles.input_label}>
-					Please provide your email and password to login
+					{t('login:title')}
 				</div>
 				<form className={styles.form_container} onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
 					<div className={styles.input_container}>
@@ -41,8 +44,8 @@ function Login() {
 							control={control}
 							name="email"
 							type="email"
-							placeholder="Email"
-							rules={{ required: 'Email is required.' }}
+							placeholder={t('login:email_placeholder')}
+							rules={{ required: t('login:email_rules_required') }}
 						/>
 						{errors.email && (
 							<span className={styles.errors}>
@@ -55,9 +58,9 @@ function Login() {
 								control={control}
 								name="password"
 								type={showPassword ? 'text' : 'password'}
-								suffix={renderSuffix()}
-								placeholder="Password"
-								rules={{ required: 'Password is required.' }}
+								suffix={<RenderSuffix />}
+								placeholder={t('login:password_placeholder')}
+								rules={{ required: t('login:password_rules_required') }}
 							/>
 						</div>
 						{errors.password && (
@@ -67,7 +70,7 @@ function Login() {
 						)}
 
 						<div className={styles.forgot}>
-							<a href="/forgot-password">Forgot your password?</a>
+							<a href="/forgot-password">{t('login:forgot_your_password')}</a>
 						</div>
 
 						<Button
@@ -75,7 +78,7 @@ function Login() {
 							className={styles.submit_button}
 							type="submit"
 						>
-							LOGIN
+							{t('login:login_button')}
 						</Button>
 
 						{source === 'add_account'
@@ -86,13 +89,13 @@ function Login() {
 								className={styles.go_back}
 								type="button"
 							>
-								GO BACK
+								{t('login:go_back_button')}
 							</Button>
 						)}
 
 						<div className={styles.or}>
 							<hr className={styles.line} />
-							OR
+							{t('login:or_label')}
 							<hr className={styles.line} />
 						</div>
 
@@ -104,7 +107,7 @@ function Login() {
 							onClick={onLogin}
 						>
 							<IcCMicrosoft />
-							<p className={styles.micro}>CONTINUE WITH MICROSOFT</p>
+							<p className={styles.micro}>{t('login:continue_with_microsoft')}</p>
 						</Button>
 					</div>
 				</form>
