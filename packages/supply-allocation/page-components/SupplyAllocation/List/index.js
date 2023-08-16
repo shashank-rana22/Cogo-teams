@@ -83,14 +83,14 @@ function List({
 			id       : 'bookmark',
 			Header   : '',
 			accessor : (item) => {
-				const { is_favourite } = item;
+				const { is_bookmarked = false } = item;
 				return (
 					<span
 						role="presentation"
 						style={{ cursor: 'pointer' }}
 						onClick={() => { console.log('Bookmark clicked!'); }}
 					>
-						{is_favourite ? <IcMBookmark /> : <IcCBookmark />}
+						{is_bookmarked ? <IcCBookmark /> : <IcMBookmark />}
 					</span>
 				);
 			},

@@ -841,7 +841,7 @@ function asyncListSupplyFclSearches() {
 	return {
 		labelKey    : '',
 		valueKey    : 'id',
-		endpoint    : 'list_supply_fcl_freight_searches',
+		endpoint    : 'list_rolling_fcl_freight_searches',
 		initialCall : true,
 		searchByq   : true,
 		params      : { pageSize: 10000 },

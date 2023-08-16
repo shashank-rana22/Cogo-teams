@@ -8,7 +8,7 @@ const useListFclSearches = () => {
 	const [filters, setFilters] = useState({});
 
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/list_supply_fcl_freight_searches',
+		url    : '/list_rolling_fcl_freight_searches',
 		method : 'get',
 		params : {
 			service_data_required: true,
