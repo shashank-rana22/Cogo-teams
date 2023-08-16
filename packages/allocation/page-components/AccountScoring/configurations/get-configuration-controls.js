@@ -23,6 +23,7 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 				name        : 'diy_score',
 				type        : 'number',
 				placeholder : 'score',
+				min         : 0,
 				style       : {
 					width      : '74px',
 					marginLeft : '16px',
@@ -32,6 +33,7 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 				name        : 'diy_warmth_duration',
 				type        : 'number',
 				placeholder : 'days',
+				min         : 0,
 				style       : {
 					width: '74px',
 				},
@@ -40,6 +42,7 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 				name        : 'assisted_score',
 				type        : 'number',
 				placeholder : 'score',
+				min         : 0,
 				style       : {
 					width      : '74px',
 					marginLeft : '90px',
@@ -49,6 +52,7 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 				name        : 'assisted_warmth_duration',
 				type        : 'number',
 				placeholder : 'days',
+				min         : 0,
 				style       : {
 					width: '74px',
 				},
@@ -57,6 +61,7 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 				name        : 'system_score',
 				type        : 'number',
 				placeholder : 'score',
+				min         : 0,
 				style       : {
 					width      : '74px',
 					marginLeft : '90px',
@@ -66,6 +71,7 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 				name        : 'system_warmth_duration',
 				type        : 'number',
 				placeholder : 'days',
+				min         : 0,
 				style       : {
 					width: '74px',
 				},
@@ -74,6 +80,7 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 				name        : 'cogoverse_score',
 				type        : 'number',
 				placeholder : 'score',
+				min         : 0,
 				style       : {
 					width      : '74px',
 					marginLeft : '90px',
@@ -83,6 +90,7 @@ const getControls = ({ eventsToExclude, engagementType }) => {
 				name        : 'cogoverse_warmth_duration',
 				type        : 'number',
 				placeholder : 'days',
+				min         : 0,
 				style       : {
 					width       : '74px',
 					marginRight : '30px',

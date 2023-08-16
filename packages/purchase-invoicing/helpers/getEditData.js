@@ -3,10 +3,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { BILL_MAPPINGS } from '../constants';
 
 const getEditData = (editData) => {
-	const codes = {};
+	const CODES = {};
 
 	(editData?.line_items || []).forEach((item) => {
-		codes[item?.code] = {
+		CODES[item?.code] = {
 			...item,
 			actualname: item?.name,
 		};
@@ -25,7 +25,7 @@ const getEditData = (editData) => {
 		line_items               : editData?.line_items || [],
 		invoice_currency         : editData?.invoice_currency,
 		exchange_rate            : editData?.exchange_rates,
-		codes,
+		codes                    : CODES,
 		id                       : editData?.finance_job_number,
 		billType                 : BILL_MAPPINGS[editData?.invoice_type],
 		irn_number               : editData?.shipment_detail?.irn_number,

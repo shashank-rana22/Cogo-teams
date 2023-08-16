@@ -15,6 +15,7 @@ function ChatControls({
 	supplierLoading = false,
 	hasPermissionToEdit = false,
 	canMessageOnBotSession = false,
+	channelType = '',
 }) {
 	const {
 		channel_type,
@@ -59,20 +60,22 @@ function ChatControls({
 					</Button>
 				)}
 
-				<Button
-					themeType="primary"
-					size="sm"
-					disabled={!hasPermissionToEdit || canMessageOnBotSession}
-					onClick={() => setOpenModal({
-						type : 'mark_as_closed',
-						data : {
-							updateChat,
-							loading,
-						},
-					})}
-				>
-					Mark as Closed
-				</Button>
+				{channelType !== 'email' && (
+					<Button
+						themeType="primary"
+						size="sm"
+						disabled={!hasPermissionToEdit || canMessageOnBotSession}
+						onClick={() => setOpenModal({
+							type : 'mark_as_closed',
+							data : {
+								updateChat,
+								loading,
+							},
+						})}
+					>
+						Mark as Closed
+					</Button>
+				)}
 			</div>
 		</div>
 	);

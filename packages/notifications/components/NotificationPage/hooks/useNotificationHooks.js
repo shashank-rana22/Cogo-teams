@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
 const PAGE = 1;
 const INCREMENT = 1;
 
 const useNotificationHooks = () => {
-	const [activeTab, setActiveTab] = useState('notifications');
-	const [formattedmailData, setFormattedMailData] = useState({});
-	const [pagination, setPagination] = useState(PAGE);
 	const {
 		general: { scope = '' },
 	} = useSelector((state) => state);
+	const [activeTab, setActiveTab] = useState('notifications');
+	const [formattedmailData, setFormattedMailData] = useState({});
+	const [pagination, setPagination] = useState(PAGE);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/recent_notification',

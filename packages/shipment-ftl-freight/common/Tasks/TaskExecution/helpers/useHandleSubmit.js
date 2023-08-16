@@ -87,6 +87,7 @@ function useHandleSubmit({
 			dataToSend,
 			serviceIdMapping,
 			primary_service,
+			finalConfig,
 		);
 
 		let finalPayload = { id: task?.id, data: payload };
