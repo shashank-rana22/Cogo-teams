@@ -65,7 +65,6 @@ function Header({
 	};
 
 	const { chat_tags = [], channel_type: channelType = '' } = activeMessageCard || {};
-	console.log('activeMessageCard:', activeMessageCard);
 
 	const {
 		mobile_no = '',

@@ -8,7 +8,6 @@ import { TAGS_COLORS } from '../../../../../../constants';
 import styles from './styles.module.css';
 
 const MAX_SHOW_LENGTH = 2;
-// const ONLY_ONE_TAG = 1;
 
 function ToolTipContent({ moreList = [], handleRemoveTags = () => {} }) {
 	return (
@@ -59,7 +58,6 @@ function ShowContent({
 
 	const handleRemoveTags = ({ item }) => {
 		const updatedList = (list || []).filter((value) => value !== item);
-		// const isOneTag = (list || []).length === ONLY_ONE_TAG;
 		updateChat({ tags: (updatedList || []) });
 	};
 
