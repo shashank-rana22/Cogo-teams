@@ -140,7 +140,7 @@ function Card({
 							placeholder="Year"
 							options={optionsYear}
 							isClearable
-							style={{ width: '110px' }}
+							style={{ width: '150px' }}
 							size="sm"
 						/>
 					</div>
@@ -155,7 +155,7 @@ function Card({
 					/>
 				</div>
 			</div>
-			<div style={{ marginLeft: '24px' }}>
+			<div style={{ marginLeft: '20px' }}>
 				<div className={styles.period}>
 					Choose ETA/ETD
 					<Tooltip
@@ -259,6 +259,7 @@ function Card({
 						onClick={() => { setMoreFilter(!moreFilter); }}
 						size="md"
 						themeType="secondary"
+						style={{ marginRight: '16px' }}
 					>
 						+ More Filters
 						{ jobState || range || profitPercent ? <div className={styles.dot} /> : null}
