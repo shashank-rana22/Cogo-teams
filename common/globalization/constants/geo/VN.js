@@ -256,6 +256,10 @@ export default {
 		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
 		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
+		so1_revenue_desk         : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
+		supply_fulfillment       : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
 	},
 	options: {
 		registration_types: [
