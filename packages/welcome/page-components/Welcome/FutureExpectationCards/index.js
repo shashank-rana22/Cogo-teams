@@ -11,9 +11,9 @@ const DATA_LENGTH = 4;
 const SCROLL_DIVISOR = 2;
 
 function FutureExpectationCards() {
-	const scrollRef = useRef('');
-
 	const { t } = useTranslation(['welcome']);
+
+	const scrollRef = useRef('');
 
 	const scrollWidth = window.innerWidth / SCROLL_DIVISOR;
 

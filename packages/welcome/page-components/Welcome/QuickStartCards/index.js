@@ -2,13 +2,13 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import CardItem from './CardItem';
-import getCogoAcademyData from './quickStartData';
+import getQuickStartCardsData from './quickStartData';
 import styles from './styles.module.css';
 
 function QuickStartCards() {
 	const { t } = useTranslation(['welcome']);
 
-	const data = getCogoAcademyData(t);
+	const data = getQuickStartCardsData(t);
 
 	return (
 		<div className={styles.container}>

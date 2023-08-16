@@ -2,13 +2,13 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import CardItem from './CardItem';
-import getPlatformCardData from './platformCardsData';
+import getPlatformCardsData from './platformCardsData';
 import styles from './styles.module.css';
 
 function PlatformCards() {
 	const { t } = useTranslation(['welcome']);
 
-	const data = getPlatformCardData(t);
+	const data = getPlatformCardsData(t);
 
 	return (
 		<div className={styles.container}>

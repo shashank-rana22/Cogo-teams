@@ -1,4 +1,4 @@
-const getCogoAcademyData = (t) => [
+const getQuickStartCardsData = (t) => [
 	{
 		icon_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/5e55951dc5c767209d2a814ab67513ed.png',
 		heading  : t('welcome:courses_and_reading_heading'),
@@ -42,4 +42,4 @@ const getCogoAcademyData = (t) => [
 		},
 	},
 ];
-export default getCogoAcademyData;
+export default getQuickStartCardsData;
