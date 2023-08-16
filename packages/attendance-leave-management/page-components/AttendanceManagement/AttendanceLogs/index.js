@@ -1,9 +1,8 @@
 import { Select } from '@cogoport/components';
 import React from 'react';
 
-import StyledTable from '../../../common/StyledTable';
-import useGetAttendanceColumns from '../../../common/useGetAttendanceColumns';
-
+import DesktopView from './DesktopView';
+import MobileView from './MobileView';
 import styles from './styles.module.css';
 
 const OPTIONS = [
@@ -94,10 +93,7 @@ const dataArr = [
 	},
 ];
 
-console.log(dataArr);
-
 function AttendanceLogs() {
-	const columns = useGetAttendanceColumns();
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
@@ -119,7 +115,10 @@ function AttendanceLogs() {
 				</div>
 			</div>
 			<div className={styles.table_container}>
-				<StyledTable columns={columns} data={dataArr} />
+				<DesktopView dataArr={dataArr} />
+			</div>
+			<div className={styles.mobile_view}>
+				<MobileView dataArr={dataArr} />
 			</div>
 		</div>
 	);

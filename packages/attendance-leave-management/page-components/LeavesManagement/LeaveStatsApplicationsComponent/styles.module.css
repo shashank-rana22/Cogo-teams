@@ -1,7 +1,5 @@
 .container {
 	width: 100%;
-
-	/* min-height: 30vh; */
 	padding: 16px 12px;
 	background: #f9f9f9;
 	border-radius: 16px;
@@ -27,5 +25,5 @@
 }
 
 .leave_stats_style {
-	padding-top: 16px;
+	margin-top: 16px;
 }

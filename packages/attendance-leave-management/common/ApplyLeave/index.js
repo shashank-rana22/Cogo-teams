@@ -1,20 +1,44 @@
 import { Modal, Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-function ApplyLeave({ show, onClose }) {
+import { controlMapping, getLeaveControls } from '../../utils/leaveControls';
+
+import styles from './styles.module.css';
+
+function ApplyLeave({ show = false, onClose = () => {} }) {
+	const { handleSubmit, control, formState : { errors }, watch } = useForm();
+
+	const isHalfDay = watch('half_day');
+
+	const controls = getLeaveControls(isHalfDay);
+
+	const onSubmit = (values) => {
+		console.log('handleSubmit', values);
+	};
+
 	return (
 		<Modal size="md" show={show} onClose={onClose} placement="top">
 			<Modal.Header title="Apply Leave" />
 			<Modal.Body>
-				et consectetur adipisicing elit. Quis, assumenda. Hic ipsam doloremque assumenda et soluta expedita
-				consequuntur, voluptates tenetur rem obcaecati sapiente aliquam animi voluptas. Pariatur eaque aut sunt?
-				Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis,
-				assumenda. Hic ipsam doloremque assumenda
-				et soluta expedita consequuntur, voluptates tenetur rem obcaecati sapiente aliquam animi voluptas.
-				Pariatur eaque aut sunt?
+				{controls.map((val) => {
+					const Element = controlMapping[val.controlType];
+					return (
+						<div key={val.name} className={styles.control_container}>
+							<div className={styles.label}>{val.controlLabel}</div>
+							<Element control={control} key={val.name} {...val} />
+							{errors[val.name] && <div className={styles.error_msg}>{errors[val.name].message}</div>}
+						</div>
+					);
+				})}
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={onClose}>OK</Button>
+				<Button themeType="secondary" className={styles.cancel_btn} onClick={onClose}>
+					Cancel
+				</Button>
+				<Button onClick={handleSubmit(onSubmit)}>
+					Submit Request
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

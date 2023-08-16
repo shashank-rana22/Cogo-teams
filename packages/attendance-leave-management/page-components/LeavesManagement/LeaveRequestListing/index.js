@@ -1,9 +1,6 @@
-import StyledTable from '../../../common/StyledTable';
-
-import getColumns from './getColumns';
+import DesktopView from './DesktopView';
+import MobileView from './MobileView';
 import styles from './styles.module.css';
-
-const TABLE_EMPTY_TEXT = 'No data to show';
 
 const dataArr = [
 	{
@@ -99,7 +96,6 @@ const dataArr = [
 ];
 
 function LeaveRequestListing() {
-	const columns = getColumns();
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_container}>
@@ -108,14 +104,11 @@ function LeaveRequestListing() {
 					Status of all leaves applied
 				</div>
 			</div>
-
-			<div>
-				<StyledTable
-					columns={columns}
-					data={dataArr}
-					emptyText={TABLE_EMPTY_TEXT}
-					loading={false}
-				/>
+			<div className={styles.desktop_view}>
+				<DesktopView dataArr={dataArr} />
+			</div>
+			<div className={styles.mobile_view}>
+				<MobileView dataArr={dataArr} />
 			</div>
 		</div>
 	);

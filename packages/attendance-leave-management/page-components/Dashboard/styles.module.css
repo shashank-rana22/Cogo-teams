@@ -1,8 +1,15 @@
 .container {
+	:global {
+		.children_container > div:first-child {
+			padding: 0;
+		}
+	}
+
 	@media (max-width: 768px) {
 		:global {
 			.ui_tab_list_container {
-				flex-wrap: wrap;
+				width: auto;
+				overflow-x: auto;
 			}
 
 			.ui_tab_container {
@@ -21,7 +28,8 @@
 	border-radius: 50px 50px 0 0;
 
 	@media (max-width: 768px) {
-		padding: 16px 12px;
+		padding: 0;
+		background-color: transparent;
 		border-radius: 12px 12px 0 0;
 	}
 }

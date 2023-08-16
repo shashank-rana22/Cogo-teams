@@ -21,3 +21,17 @@
 .heading_container {
 	margin-bottom: 16px;
 }
+
+.desktop_view {
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.mobile_view {
+	display: none;
+
+	@media (max-width: 768px) {
+		display: block;
+	}
+}
