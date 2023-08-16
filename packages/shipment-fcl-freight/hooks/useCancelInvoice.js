@@ -29,7 +29,7 @@ const useCancelInvoice = () => {
 
 	const submit = async ({ values, proformaNumber, closeModal, invoiceId, invoiceCombinationId, refetch }) => {
 		try {
-			const response = await trigger({
+			await trigger({
 				data: {
 					type            : 'REVOKE_INVOICE',
 					incidentSubType : 'CANCEL_INVOICE',
@@ -48,10 +48,7 @@ const useCancelInvoice = () => {
 					entityId  : entity_id,
 				},
 			});
-			const {
-				data: { message },
-			} = response;
-			Toast.success(message);
+			Toast.success('Requested Cancel E invoice');
 			closeModal();
 			refetch();
 		} catch (error) {

@@ -1,0 +1,17 @@
+{
+    "roles_and_permission_header_title": "Roles and Permission",
+    "roles_and_permission_subheader_title": "Manage and create new roles and their permissions",
+    "roles_and_permission_pills_all_roles": "All Roles",
+    "roles_and_permission_pills_cogoport": "Cogoport",
+    "roles_and_permission_pills_channel_partner": "Channel Partner",
+    "roles_and_permission_pills_customer": "Customer",
+
+    "roles_and_permission_select_sales_customer_success": "Customer Success",
+    "roles_and_permission_select_sales_field_sales": "Field Sales",
+    "roles_and_permission_select_sales_strategic_sales": "Strategic Sales",
+    "roles_and_permission_select_sales_cp_sales": "CP Sales",
+    "roles_and_permission_select_sales_acquisition": "Acquisition",
+    "roles_and_permission_select_cp_portfolio": "CP Portfolio",
+    "roles_and_permmission_select_customer_operations": "Customer Operations"
+
+}

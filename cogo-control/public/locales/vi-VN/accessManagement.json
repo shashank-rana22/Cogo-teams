@@ -1,0 +1,16 @@
+{
+    "roles_and_permission_header_title":"Vai trò và quyền",
+    "roles_and_permission_subheader_title":"Quản lý và tạo vai trò mới và quyền của họ",
+    "roles_and_permission_pills_all_roles":"Tất cả vai trò",
+    "roles_and_permission_pills_cogoport":"Cogoport",
+    "roles_and_permission_pills_channel_partner":"Kênh đối tác",
+    "roles_and_permission_pills_customer":"Khách hàng",
+
+    "roles_and_permission_select_sales_customer_success": "khách hàng thành công",
+    "roles_and_permission_select_sales_field_sales": "Lĩnh vực bán hàng",
+    "roles_and_permission_select_sales_strategic_sales": "Bán hàng chiến lược",
+    "roles_and_permission_select_sales_cp_sales": "CP bán hàng",
+    "roles_and_permission_select_sales_acquisition": "Sự mua lại",
+    "roles_and_permission_select_cp_portfolio": "danh mục đầu tư CP",
+    "roles_and_permmission_select_customer_operations": "Hoạt động khách hàng"
+}
