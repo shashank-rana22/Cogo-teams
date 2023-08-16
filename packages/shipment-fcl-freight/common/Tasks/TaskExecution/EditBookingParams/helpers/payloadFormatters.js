@@ -1,4 +1,4 @@
-import getDependentServices from '../../../../utils/getDependentServices';
+import getDependentServices from '../../../../Utils/getDependentServices';
 
 const ROLLOVER_STATUS = {
 	true  : { rollover_status: 'requested' },

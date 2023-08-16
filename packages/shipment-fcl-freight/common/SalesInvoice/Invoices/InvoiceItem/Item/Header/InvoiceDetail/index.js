@@ -5,7 +5,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import { getDocumentInfo } from '../../../../../../utils/getDocumentInfo';
+import { getDocumentInfo } from '../../../../../../Utils/getDocumentInfo';
 import styles from '../styles.module.css';
 
 const API_SUCCESS_MESSAGE = {

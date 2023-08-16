@@ -46,6 +46,7 @@ function CancellationAgreement({ data }: DataInterface) {
 						className={styles.span_style_value}
 						themeType="link"
 						onClick={() => window.open(cancelledAgreementDocument)}
+						type="button"
 					>
 						View Documnet
 
@@ -61,6 +62,7 @@ function CancellationAgreement({ data }: DataInterface) {
 						className={styles.span_style_value}
 						themeType="link"
 						onClick={() => window.open(cancelledEInvoiceForm04)}
+						type="button"
 					>
 						View Documnet
 					</Button>
