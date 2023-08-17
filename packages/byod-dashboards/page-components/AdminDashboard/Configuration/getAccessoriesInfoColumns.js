@@ -7,9 +7,6 @@ import useUpdateDeviceDetails from '../../../hooks/useUpdateDeviceDetails';
 const SOURCE = 'AddonDetails';
 
 const getAccessoriesInfoColumns = ({
-	setReimbusableValue,
-	setMaxAmount,
-	setAccessoriesValue,
 	setShowAccessories,
 	id,
 	addon_details,
@@ -57,9 +54,6 @@ const getAccessoriesInfoColumns = ({
 					<ButtonIcon
 						size="md"
 						onClick={() => {
-							setReimbusableValue(item?.reimbursement_percentage);
-							setAccessoriesValue(item?.addon_type);
-							setMaxAmount(item?.max_reimbursement_amount);
 							handleDelete({ item });
 						}}
 						icon={<IcMDelete />}

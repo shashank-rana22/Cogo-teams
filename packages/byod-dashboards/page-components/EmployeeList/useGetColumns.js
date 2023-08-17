@@ -15,7 +15,7 @@ const useGetColumns = (isAdmin) => {
 		router.push(`/byod/employee/${id}`);
 	};
 
-	const getStatus = (item) => {
+	function GetStatus(item) {
 		const { status } = item;
 		if (status === 'active') {
 			return (
@@ -41,9 +41,9 @@ const useGetColumns = (isAdmin) => {
 				Verified
 			</Button>
 		);
-	};
+	}
 
-	const getAdminStatus = (item) => {
+	function GetAdminStatus(item) {
 		const { status } = item;
 		if (isAdmin && status === 'verified') {
 			return (
@@ -92,7 +92,7 @@ const useGetColumns = (isAdmin) => {
 				Approve
 			</Button>
 		);
-	};
+	}
 
 	return [
 		{
@@ -112,13 +112,13 @@ const useGetColumns = (isAdmin) => {
 			Header   : 'Verified',
 			accessor : (item) => (
 				<div className="hr_btn_status">
-					{getStatus(item)}
+					{GetStatus(item)}
 				</div>
 			),
 		},
 		{
 			Header   : 'Approval Status',
-			accessor : (item) => getAdminStatus(item),
+			accessor : (item) => GetAdminStatus(item),
 		},
 	];
 };

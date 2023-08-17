@@ -7,9 +7,6 @@ import useUpdateDeviceDetails from '../../../hooks/useUpdateDeviceDetails';
 const SOURCE = 'DeviceDetails';
 
 const getDeviceInfoColumns = ({
-	setReimbusableValue,
-	setMaxAmount,
-	setDeviceValue,
 	setShowDevice,
 	id,
 	device_details,
@@ -55,9 +52,6 @@ const getDeviceInfoColumns = ({
 				<div>
 					<ButtonIcon
 						onClick={() => {
-							setReimbusableValue(item?.reimbursement_percentage);
-							setMaxAmount(item?.max_reimbursement_amount);
-							setDeviceValue(item?.device_type);
 							handleDelete({ item });
 						}}
 						size="md"
