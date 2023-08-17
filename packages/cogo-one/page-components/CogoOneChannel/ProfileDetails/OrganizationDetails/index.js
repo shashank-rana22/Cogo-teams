@@ -91,6 +91,8 @@ function OrganizationDetails({
 		window.open(`/${partnerId}/lead-organization/${leadOrganizationId}`, '_blank');
 	};
 
+	const isCpSupportTeam = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.convert_account_to_cp;
+
 	if (isEmpty(organizationId || leadOrganizationId)) {
 		return (
 			<div className={styles.container}>
@@ -170,7 +172,7 @@ function OrganizationDetails({
 							</Pill>
 						) : null }
 
-						{!hideCpButton && !orgLoading && organizationId ? (
+						{!hideCpButton && !orgLoading && organizationId && isCpSupportTeam ? (
 							<Button
 								size="sm"
 								themeType="primary"
