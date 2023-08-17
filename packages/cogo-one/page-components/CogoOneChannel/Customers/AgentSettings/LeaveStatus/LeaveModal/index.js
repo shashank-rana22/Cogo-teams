@@ -45,7 +45,7 @@ function LeaveModal({
 			<Modal.Body>
 				<div className={styles.duration_section}>
 					<div className={styles.time_title}>
-						Enter Leave reason *
+						Enter Leave Reason *
 					</div>
 
 					<TextAreaController
@@ -57,7 +57,7 @@ function LeaveModal({
 					/>
 
 					<div className={styles.time_title}>
-						On Leave till Date *
+						On Leave Till Date *
 					</div>
 
 					<DatepickerController
@@ -86,7 +86,6 @@ function LeaveModal({
 				</div>
 			</Modal.Body>
 		</Modal>
-
 	);
 }
 

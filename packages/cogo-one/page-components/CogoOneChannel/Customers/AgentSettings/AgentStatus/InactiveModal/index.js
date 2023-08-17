@@ -21,10 +21,10 @@ function InactiveModal({
 	loading = false,
 }) {
 	const {
-		control,
-		watch,
-		reset,
-		setValue,
+		control = {},
+		watch = () => {},
+		reset = () => {},
+		setValue = () => {},
 	} = useForm({
 		defaultValues: {
 			reason        : '',
@@ -91,7 +91,7 @@ function InactiveModal({
 
 						{!comment && (
 							<div className={styles.error_text}>
-								required*
+								required *
 							</div>
 						)}
 					</>

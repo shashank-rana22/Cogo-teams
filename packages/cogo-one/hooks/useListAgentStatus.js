@@ -62,6 +62,7 @@ function useListAgentStatus({ agentType = '' }) {
 		setPagination : (val) => setParamsState((prev) => ({ ...prev, page: val })),
 		setSearch     : (val) => setParamsState((prev) => ({ ...prev, query: val })),
 		paramsState,
+		getAgentsStatus,
 	};
 }
 

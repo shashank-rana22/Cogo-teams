@@ -21,11 +21,12 @@ const COGOVERSE_AGENT_MAPPINGS = {
 		'cogo_academy',
 		'kyc_demo',
 	],
-	shipment_specialist : ['shipment_specialist'],
-	cp_support          : ['cp_support'],
-	support_admin       : ['support_admin'],
-	supply_admin        : ['supply_admin'],
-	sales_admin         : ['sales_admin'],
+	shipment_specialist       : ['shipment_specialist'],
+	cp_support                : ['cp_support'],
+	support_admin             : ['support_admin'],
+	supply_admin              : ['supply_admin'],
+	sales_admin               : ['sales_admin'],
+	shipment_specialist_admin : ['shipment_specialist_admin'],
 };
 
 const DEFAULT_VIEW_TYPE = 'sales';
