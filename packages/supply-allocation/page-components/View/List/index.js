@@ -76,7 +76,7 @@ function List({ bucketData = [] }) {
 
 			</div>
 
-			{itemsArray.map((item, index) => <Content key={item.bucket_type} item={item} index={index} />)}
+			{generateBucketTableData.map((item, index) => <Content key={item.bucket_type} item={item} index={index} />)}
 
 		</>
 	);
