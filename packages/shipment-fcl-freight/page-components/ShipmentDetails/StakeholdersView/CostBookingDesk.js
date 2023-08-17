@@ -23,7 +23,7 @@ import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
-const SERVICES_ADDITIONAL_MTDS = ['stakeholder', 'service_objects'];
+const SERVICES_ADDITIONAL_MTDS = ['stakeholder', 'service_objects', 'can_edit_params'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
