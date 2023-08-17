@@ -2,7 +2,7 @@ import { Button, Popover, Select, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
@@ -83,6 +83,10 @@ function CogoFinancials() {
 		setActiveBar('');
 		setActiveShipmentCard('');
 	};
+
+	useEffect(() => {
+		if (!showShipmentList) { setTableFilters({}); }
+	}, [showShipmentList]);
 
 	return (
 		<div>

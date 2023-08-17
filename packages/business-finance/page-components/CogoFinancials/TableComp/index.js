@@ -45,7 +45,7 @@ function TableComp({
 
 	return (
 		<div className={styles.table}>
-			<Header config={config} setSort={setSort} sort={sort} />
+			<Header config={config} setSort={setSort} sort={sort} setTableFilters={setTableFilters} />
 			{isEmpty(serviceLevelData?.list) && !serviceLevelLoading && <EmptyState />}
 			{(!isEmpty(serviceLevelData?.list) || serviceLevelLoading)
 				? (serviceLevelData?.list || Array(EMPTY_STATE).fill(null)).map((item) => (

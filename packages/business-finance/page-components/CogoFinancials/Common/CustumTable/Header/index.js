@@ -10,9 +10,18 @@ const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
 
-function Header({ config = {}, setSort = () => {}, sort = {} }) {
+function Header({ config = {}, setSort = () => {}, sort = {}, setTableFilters = () => {} }) {
 	const { sortType, sortBy } = sort;
 	const { fields, headerClass } = config;
+
+	const handleClick = ({ field, type }) => {
+		setSort({
+			sortBy   : field.sortingKey,
+			sortType : type,
+		});
+		setTableFilters((prev) => ({ ...prev, pageIndex: 1 }));
+	};
+
 	return (
 		<section className={cl`${styles.header} ${headerClass === 'border' ? styles.border : ''}`}>
 			{fields.map((field) => (
@@ -30,18 +39,12 @@ function Header({ config = {}, setSort = () => {}, sort = {} }) {
 							{
 								(sortBy === field.sortingKey && sortType === 'Asc') ? (
 									<IcMArrowRotateUp
-										onClick={() => setSort({
-											sortBy   : field.sortingKey,
-											sortType : 'Desc',
-										})}
+										onClick={() => handleClick({ field, type: 'Desc' })}
 										color={(sortBy === field.sortingKey) ? '#f68b21' : '#000'}
 									/>
 								) : (
 									<IcMArrowRotateDown
-										onClick={() => setSort({
-											sortBy   : field.sortingKey,
-											sortType : 'Asc',
-										})}
+										onClick={() => handleClick({ field, type: 'Asc' })}
 										color={(sortBy === field.sortingKey) ? '#f68b21' : '#000'}
 									/>
 								)

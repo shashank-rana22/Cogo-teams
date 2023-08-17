@@ -47,9 +47,7 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 	const getDeviationColor = ({ value, field }) => {
 		if (field === 'Deviation') {
 			const valueNum = Number(value || DEFAULT_AMOUNT);
-			if (valueNum === DEFAULT_AMOUNT) {
-				return null;
-			} if (valueNum > DEFAULT_AMOUNT) {
+			if (valueNum > DEFAULT_AMOUNT) {
 				return '#abcd62'; // positive green
 			} if (valueNum < DEFAULT_AMOUNT) {
 				return '#ee3425'; // negative red
