@@ -27,20 +27,23 @@ const useCancelInvoice = () => {
 		? geo.parent_entity_id
 		: undefined;
 
-	const submit = async ({ values, proformaNumber, closeModal, invoiceId, invoiceCombinationId, refetch }) => {
+	const submit = async ({
+		cancelReason = '', proformaNumber = '', closeModal = () => {},
+		invoiceId = '', invoiceCombinationId = '', refetch = () => {}, documentUrls = '',
+	}) => {
 		try {
-			const response = await trigger({
+			await trigger({
 				data: {
 					type            : 'REVOKE_INVOICE',
 					incidentSubType : 'CANCEL_INVOICE',
 					data            : {
 						revokeInvoiceRequest: {
-							invoiceNumber : proformaNumber,
-							documentUrls  : [values?.documentUrls?.finalUrl],
-							cancelReason  : values?.cancelReason,
-							invoiceCombinationId,
-							invoiceId,
-							revokedBy     : user_id,
+							invoiceNumber        : proformaNumber || undefined,
+							documentUrls         : documentUrls || undefined,
+							cancelReason         : cancelReason || undefined,
+							invoiceCombinationId : invoiceCombinationId || undefined,
+							invoiceId            : invoiceId || undefined,
+							revokedBy            : user_id,
 						},
 					},
 					source    : 'BOOKINGS',
@@ -48,10 +51,7 @@ const useCancelInvoice = () => {
 					entityId  : entity_id,
 				},
 			});
-			const {
-				data: { message },
-			} = response;
-			Toast.success(message);
+			Toast.success('Requested Cancel E invoice');
 			closeModal();
 			refetch();
 		} catch (error) {

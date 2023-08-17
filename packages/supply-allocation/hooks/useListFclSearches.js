@@ -1,9 +1,14 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+
+const INITIAL_PAGE = 1;
 
 const useListFclSearches = () => {
+	const [pagination, setPagination] = useState(INITIAL_PAGE);
+	const [filters, setFilters] = useState({});
+
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/list_supply_fcl_freight_searches',
+		url    : '/list_rolling_fcl_freight_searches',
 		method : 'get',
 		params : {
 			service_data_required: true,
@@ -15,6 +20,7 @@ const useListFclSearches = () => {
 			await trigger({
 				params: {
 					service_data_required: true,
+					filters,
 				},
 			});
 		} catch (err) {
@@ -22,24 +28,32 @@ const useListFclSearches = () => {
 		}
 	};
 
-	const findFclSearch = useCallback(async (id) => {
+	const listFclSearchesApi = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
 					service_data_required : true,
-					filters               : { id },
+					filters,
+					page                  : pagination,
 				},
 			});
 		} catch (err) {
 			console.error(err);
 		}
-	}, [trigger]);
+	}, [filters, trigger, pagination]);
+
+	useEffect(() => {
+		listFclSearchesApi();
+	}, [filters, listFclSearchesApi]);
 
 	return {
 		data,
 		loading,
 		refetchListFclSearches,
-		findFclSearch,
+		pagination,
+		setPagination,
+		filters,
+		setFilters,
 	};
 };
 

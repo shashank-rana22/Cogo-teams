@@ -1,25 +1,33 @@
+import { useForm } from '@cogoport/forms';
 import { IcMArrowRotateRight } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CustomProgressBar from '../../../commons/CustomProgressBar';
 import StyledTable from '../../../commons/StyledTable';
 import subBucketDummyData from '../../../Dummy Data/sub-bucket-data.json';
-import subBucketColumns from '../SubBucketColumns';
+import getSubBucketColumns from '../SubBucketColumns';
 
 function Content({
 	item = {},
-	// index = 0
 }) {
 	const {
-		bucket_name = 'default_bucket_name',
-		supplier_count = 0,
-		allocation_percent = 0.0,
-		// current_container_allocation = null,
-		// past_container_allocation = [],
+		bucket_type,
+		allocation_percentage,
+		suppliers_count,
+		current_promised_containers,
+		current_allocated_containers,
+		past_fulfilled_containers,
+		past_allocated_containers,
 	} = item;
 
 	const [show, setShow] = useState(false);
-	// const [edit, setEdit] = useState(false);
+	const formProps = useForm();
+	const { control, watch, unregister } = formProps;
+
+	console.log('watch:', watch());
+
+	const { subBucketColumns } = getSubBucketColumns({ control, unregister });
 
 	const bucketControls = [
 		{
@@ -28,27 +36,35 @@ function Content({
 			key       : 'actions',
 		},
 		{
-			component : <div>{bucket_name}</div>,
+			component : <div>{startCase(bucket_type)}</div>,
 			flexBasis : '15%',
 			key       : 'bucket_name',
 		},
 		{
-			component : <div>{supplier_count}</div>,
+			component : <div>{suppliers_count}</div>,
 			flexBasis : '10%',
 			key       : 'supplier_count',
 		},
 		{
-			component : <div>{allocation_percent}</div>,
+			component : <div>{allocation_percentage}</div>,
 			flexBasis : '10%',
 			key       : 'allocation_percent',
 		},
 		{
-			component : <CustomProgressBar progress="60" uploadText=" done" />,
+			component: <CustomProgressBar
+				allocatedCount={current_promised_containers}
+				promisedCount={current_allocated_containers}
+				uploadText=" done"
+			/>,
 			flexBasis : '30%',
 			key       : 'current_container_allocation',
 		},
 		{
-			component : <CustomProgressBar progress="60" uploadText=" done" />,
+			component: <CustomProgressBar
+				promisedCount={past_fulfilled_containers}
+				allocatedCount={past_allocated_containers}
+				uploadText=" done"
+			/>,
 			flexBasis : '30%',
 			key       : 'past_container_allocation',
 		},

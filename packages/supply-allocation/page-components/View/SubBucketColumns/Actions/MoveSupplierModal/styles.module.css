@@ -2,7 +2,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	margin-top: 44px;
 }
 
 .date_container {
@@ -18,7 +17,9 @@
 }
 
 .container {
+	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	padding: 8px;
 }
 

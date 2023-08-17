@@ -4,18 +4,19 @@ import {
 	IcMOverflowDot,
 	IcMInfo,
 } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
-const RemarkRender = ({ remarks = '' }) => {
-	<div className={styles.remark_container}>
-		<div className={styles.title}>Invoice Remarks</div>
-		<div className={styles.value}>{remarks}</div>
-	</div>;
-};
+function RemarkRender({ remarks = '' }) {
+	return (
+		<div className={styles.remark_container}>
+			<div className={styles.title}>Invoice Remarks</div>
+			<div className={styles.value}>{remarks}</div>
+		</div>
+	);
+}
 
 function Content({
 	commonActions = false,
@@ -99,7 +100,6 @@ function Actions({
 	setShowChangePaymentMode = () => {},
 	setIsEditInvoice = () => {},
 }) {
-	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
 	const showForOldShipments =	shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
@@ -122,8 +122,7 @@ function Actions({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-		|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.linh_nguyen_user_id;
+	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst);
 
 	return (
 		<div className={styles.actions_wrap}>

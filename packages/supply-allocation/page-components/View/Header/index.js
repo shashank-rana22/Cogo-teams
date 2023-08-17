@@ -62,7 +62,7 @@ function Header({ graphData, count, originName, destinationName }) {
 							marginBottom   : '10px',
 						}}
 					>
-						<IcMArrowBack height={30} width={30} onClick={onClickBack} />
+						<IcMArrowBack height={30} width={30} style={{ cursor: 'pointer' }} onClick={onClickBack} />
 
 						<Tooltip
 							content={<div className={styles.location_name_tooltip}>{originName}</div>}
@@ -145,7 +145,7 @@ function Header({ graphData, count, originName, destinationName }) {
 									}}
 									params={{
 										service_data_required: true,
-										...(origin_location_id ? { filters: { origin_location_id } } : {}),
+										...(destination_location_id ? { filters: { destination_location_id } } : {}),
 									}}
 									renderLabel={(item) => item.origin_location.display_name}
 								/>
@@ -167,7 +167,7 @@ function Header({ graphData, count, originName, destinationName }) {
 									renderLabel={(item) => item.destination_location.display_name}
 									params={{
 										service_data_required: true,
-										...(destination_location_id ? { filters: { destination_location_id } } : {}),
+										...(origin_location_id ? { filters: { origin_location_id } } : {}),
 									}}
 								/>
 

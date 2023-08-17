@@ -1,19 +1,18 @@
 import {
 	Button, Modal,
-	// Toast
 } from '@cogoport/components';
-// import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { AsyncSelectController, InputController, useForm } from '@cogoport/forms';
+import { IcMArrowNext } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 
 import styles from './styles.module.css';
 
 function MoveSupplierModal({
 	showMoveSupplierModal = false,
-	setShowMoveSupplierModal = () => {},
+	setShowMoveSupplierModal = () => { },
+	item = {},
 }) {
 	const [{ loading },
-		// trigger
 	] = useRequest(
 		{
 			method : 'POST',
@@ -21,73 +20,83 @@ function MoveSupplierModal({
 		},
 		{ manual: true },
 	);
-	// const handleUpdateSupplier = async () => {
-	// 	try {
-	// 		await trigger({ });
-
-	// 		setShowMoveSupplierModal(false);
-	// 	} catch (error) {
-	// 		Toast.error(getApiErrorString(error.response?.data));
-	// 	}
-	// };
-
 	const { control } = useForm({});
 
 	return (
 		<Modal
-			size="sm"
+			size="md"
 			show={showMoveSupplierModal}
 			onClose={() => setShowMoveSupplierModal(false)}
 			placement="top"
 			className={styles.modal_container}
 		>
-			<Modal.Header title="Change Supplier" />
+			<Modal.Header title={item.service_provider} />
 
 			<Modal.Body>
 				<div className={styles.container}>
+					<div>
+						<div>
+							Current Bucket :
+							<div style={{ height: '32px' }}>Alaska </div>
+						</div>
 
-					<div>Current Supplier : Alaska </div>
-
-					<div>Allocated: 122 TEU </div>
-
-					<div> New Bucket </div>
-
-					<AsyncSelectController
-						name="destination_location_id"
-						isClearable
-						label="Select Origin SeaPort"
-						control={control}
-					/>
-
-					<div>New Allocated</div>
-
-					<InputController
-						name="destination_location_id"
-						isClearable
-						label="Select Origin SeaPort"
-						control={control}
-					/>
-
-					<div className={styles.btn_container}>
-						<Button
-							type="button"
-							themeType="secondary"
-							disabled={loading}
-							onClick={() => setShowMoveSupplierModal(false)}
-						>
-							No, Don&apos;t
-						</Button>
-
-						<Button
-							type="button"
-							className={styles.extend_button}
-							loading={loading}
-						>
-							Yes, Change
-						</Button>
+						<div>
+							Current Promised:
+							<div style={{ height: '32px' }}>Alaska </div>
+						</div>
 					</div>
+
+					<div style={{ alignItems: 'center', display: 'flex' }}>
+						Move To
+						{' '}
+						<IcMArrowNext style={{ marginLeft: '4px' }} />
+					</div>
+
+					<div>
+						<div> New Bucket </div>
+						<AsyncSelectController
+							name="new_bucket"
+							isClearable
+							label="Select Origin SeaPort"
+							control={control}
+							placeholder="Select Below"
+							size="sm"
+						/>
+
+						<div>New Promised</div>
+						<InputController
+							name="new_promised"
+							isClearable
+							label="Select Origin SeaPort"
+							size="sm"
+							control={control}
+							placeholder="Type Here"
+						/>
+					</div>
+
 				</div>
 			</Modal.Body>
+
+			<Modal.Footer>
+				<div className={styles.btn_container}>
+					<Button
+						type="button"
+						themeType="secondary"
+						disabled={loading}
+						onClick={() => setShowMoveSupplierModal(false)}
+					>
+						No, Don&apos;t
+					</Button>
+
+					<Button
+						type="button"
+						className={styles.extend_button}
+						loading={loading}
+					>
+						Yes, Change
+					</Button>
+				</div>
+			</Modal.Footer>
 		</Modal>
 	);
 }

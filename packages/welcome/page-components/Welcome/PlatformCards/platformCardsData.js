@@ -1,29 +1,27 @@
-const data = [
+const getPlatformCardsData = (t) => [
 	{
 		icon_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/f74a76fc45de3258e88066a982649371.png',
-		heading  : 'For Channel Partners/Suppliers',
-		desc     : 'Use the following account details to login.',
+		heading  : t('welcome:for_channel_partners_suppliers_heading'),
+		desc     : t('welcome:for_channel_partners_suppliers_desc'),
 		login_id : 'testing@cogoport-partners.com',
 		password : 'CogoDemo@123',
 		href     : {
-			label : "Visit Channel Partner's Demo Portal",
+			label : t('welcome:for_channel_partners_suppliers_label'),
 			url   : 'https://partners.stage.cogoport.io',
 		},
-		eye_button_text: `Our platform for channel partners and supply partners. Check out how Cogoport helps 
-		its partners and supplier leverage the power of technology.`,
+		eye_button_text: t('welcome:for_channel_partners_suppliers_eye_button_text'),
 	},
 	{
 		icon_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/7d3e116621f46e0a8ab259f281c42650.png',
-		heading  : 'For Customers',
-		desc     : 'Use the following account details to login.',
+		heading  : t('welcome:for_customers_heading'),
+		desc     : t('welcome:for_customers_desc'),
 		login_id : 'testing@cogoport-customers.com',
 		password : 'CogoDemo@123',
 		href     : {
-			label : "Visit Customer's Demo Portal",
+			label : t('welcome:for_customers_label'),
 			url   : 'https://app.stage.cogoport.io',
 		},
-		eye_button_text: `Our platform for customers (importers, exporters and domestics players). Check out how 
-		Cogoport simplifies all of their supply chain and logistics requirements.`,
+		eye_button_text: t('welcome:for_customers_eye_button_text'),
 	},
 ];
-export default data;
+export default getPlatformCardsData;

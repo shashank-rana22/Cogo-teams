@@ -3,7 +3,7 @@ import { IcMCall } from '@cogoport/icons-react';
 import { useEffect } from 'react';
 
 import getVideoControls from '../../../configurations/videoControls';
-import { callUpdate } from '../../../utils/callFunctions';
+import { callUpdate } from '../../../utils/callUpdate';
 
 import styles from './styles.module.css';
 

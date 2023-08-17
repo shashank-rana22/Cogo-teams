@@ -4,6 +4,12 @@
 	"version": "0.1.0",
 	"main": "index.js",
 	"sideEffects": false,
+	  "scripts": {
+    "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "eslint_file": "eslint",
+    "stylelint": "stylelint \"**/*.css\"",
+    "lint": "eslint"
+  },
 	"dependencies": {
 		"@cogoport/charts": "^1.0.1",
 		"@cogoport/components": "^1.0.359",

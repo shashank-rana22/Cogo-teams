@@ -1,0 +1,12 @@
+.container {
+	margin: 24px 0;
+}
+
+.loading_state_container {
+	margin: 24px 0;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}
