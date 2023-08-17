@@ -1,12 +1,20 @@
 import { getByKey } from '@cogoport/utils';
 
+import CN from '../../constants/geo/CN';
+import ID from '../../constants/geo/ID';
 import IN from '../../constants/geo/IN';
+import SG from '../../constants/geo/SG';
+import TH from '../../constants/geo/TH';
 import VN from '../../constants/geo/VN';
 import getCountryDetails from '../getCountryDetails';
 
 const COUNTRY_SPECIFIC_DATA = {
 	IN : IN.others,
 	VN : VN.others,
+	SG : SG.others,
+	TH : TH.others,
+	ID : ID.others,
+	CN : CN.others,
 };
 
 const getCountrySpecificData = ({
@@ -33,10 +41,10 @@ const getCountrySpecificData = ({
 };
 
 function CountrySpecificData({
-	country_id,
+	country_id = '',
 	accessor = '',
 	accessorType = '',
-	isDefaultData,
+	isDefaultData = true,
 }) {
 	return (
 		<>

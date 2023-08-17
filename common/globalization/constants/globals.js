@@ -47,18 +47,25 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'supply', label: 'Supply' },
 		{ value: 'supply_management', label: 'Supply Management' },
 		{ value: 'technology', label: 'Technology' },
-
 	],
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
+		SG : '04bd1037-c110-4aad-8ecc-fc43e9d4069d',
+		ID : 'ef9a7145-b1b6-46ff-8de7-a348de635574',
+		TH : '6d92cf58-3392-44c3-8e1b-09192f98f8be',
+		CN : 'd39c9a59-93e3-4823-b85f-c72139cf138f',
 	},
 	country_ids: {
 		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
 		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
+		SG : '6e18d508-87b9-4e7e-a785-b47edc76b0b7',
+		ID : '2693fa76-6539-410d-a0b0-551d9e620ba3',
+		TH : '61a683f3-128b-4193-98f7-dd72f68db03d',
+		CN : '1b94734e-7d51-4e94-9dd2-ef96aee64a8f',
 	},
 
-	platform_supported_country_codes: ['IN', 'VN'],
+	platform_supported_country_codes: ['IN', 'VN', 'SG', 'ID', 'TH', 'CN'],
 
 	currency_code   : CURRENCY_CODE,
 	currency_locale : {
@@ -67,7 +74,9 @@ const GLOBAL_CONSTANTS = {
 		VND : 'vi-VN',
 		AED : 'en-AE',
 		SGD : 'en-SG',
-
+		IDR : 'id-ID',
+		THB : 'th-TH',
+		CNY : 'zh-CN',
 	},
 	currency_symbol: {
 		USD : '$',
@@ -75,8 +84,12 @@ const GLOBAL_CONSTANTS = {
 		VND : '₫',
 		AED : 'AED',
 		SGD : '$',
+		IDR : 'Rp',
+		THB : '฿',
+		CNY : '¥',
 
 	},
+
 	formats: {
 		date: {
 			'dd/MM/yyyy'        : 'dd/MM/yyyy',
@@ -86,11 +99,15 @@ const GLOBAL_CONSTANTS = {
 			'yyyy-MM-dd'        : 'yyyy-MM-dd',
 			'MMM yyyy'          : 'MMM yyyy',
 			'dd MMM'            : 'dd MMM',
+			dd                  : 'dd',
+			MMM                 : 'MMM',
+			yyyy                : 'yyyy',
 		},
 		time: {
 			'hh:mm aaa' : 'hh:mm aaa',
 			'HH:mm'     : 'HH:mm',
 			'hh:mm:ss'  : 'hh:mm:ss',
+			'hh aaa'    : 'hh aaa',
 			'HH:mm:ss'  : 'HH:mm:ss',
 			'HH:mm a'   : 'HH:mm a',
 			hh          : 'hh',
@@ -309,6 +326,7 @@ const GLOBAL_CONSTANTS = {
 		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
 		cogo_one_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
 		cogo_one_loader    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif',
+		address_icon       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/address-icon.svg',
 		bluetide_hbl_logo:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/6f67ac5379afb6694a75e573407899f2/bluetidelogo.png',
 		cogoport_admin_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
@@ -348,11 +366,14 @@ const GLOBAL_CONSTANTS = {
 			copy_12:
 			'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
 		},
+		alarm_snooze: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-snooze.svg',
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
 		message_reply        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/message_reply.png',
 		cargo_ship_vector    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargoShipsVector.png',
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
+		increasing_arrow     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg',
+		agent_avatar_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
 		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',
@@ -463,6 +484,14 @@ const GLOBAL_CONSTANTS = {
 				label: 'VNM', value: 'VNM',
 			},
 		],
+		educational_level_options: [
+			{ label: '10th', value: '10th' },
+			{ label: '12th', value: '12th' },
+			{ label: 'Diploma', value: 'Diploma' },
+			{ label: 'Graduate degree', value: 'graduate_degree' },
+			{ label: 'Post Graduates degree', value: 'post_graduates_degree' },
+			{ label: 'Doctorate degree', value: 'doctorate_degree' },
+		],
 	},
 
 	regex_patterns: {
@@ -480,25 +509,27 @@ const GLOBAL_CONSTANTS = {
 		empty_spaces_before_tab_character : / +(?=\t)/g,
 		mime                              : /:(.*?);/m,
 		double_curly_braces_pattern       : /\{\{([^{}]+)\}\}/g,
+		number_pattern                    : /[^0-9]/g,
 		occurrences_of_paragraphs_tag     : /<p>\s+(<[/]p>)/g,
 		enclosed_within_forward_slashes   : /<p>(<[/]p>)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
 		occurrences_of_line_breaks        : /(\r\n|\r|\n)/g,
 		url_match_regex:
 		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/,
-		ends_with_star_space   : /\* /,
-		ends_with_star_char    : /\*[^0-9a-zA-Z]/,
-		string_to_array        : /'/g,
-		file_upload_url        : /:finalUrl=>"([^"]*)"/,
-		four_characters_pin    : /^.{4}$/,
-		amount_seperator       : /\D/g,
-		white_space_characters : /\s/g,
-		email_subject_prefix   : /^(re|fwd|fw):\s*/i,
-		para_html_tag_text     : /<p>([\s\S]*?)<\/p>/gm,
-		h1_html_tag_text       : /<h1>([\s\S]*?)<\/h1>/gm,
-		h2_html_tag_text       : /<h2>([\s\S]*?)<\/h2>/gm,
-		h3_html_tag_text       : /<h3>([\s\S]*?)<\/h3>/gm,
-		li_html_tag_text       : /<li>([\s\S]*?)<\/li>/gm,
+		ends_with_star_space       : /\* /,
+		ends_with_star_char        : /\*[^0-9a-zA-Z]/,
+		string_to_array            : /'/g,
+		file_upload_url            : /:finalUrl=>"([^"]*)"/,
+		four_characters_pin        : /^.{4}$/,
+		amount_seperator           : /\D/g,
+		white_space_characters     : /\s/g,
+		mobile_country_code_format : /^./,
+		email_subject_prefix       : /^(re|fwd|fw):\s*/i,
+		para_html_tag_text         : /<p>([\s\S]*?)<\/p>/gm,
+		h1_html_tag_text           : /<h1>([\s\S]*?)<\/h1>/gm,
+		h2_html_tag_text           : /<h2>([\s\S]*?)<\/h2>/gm,
+		h3_html_tag_text           : /<h3>([\s\S]*?)<\/h3>/gm,
+		li_html_tag_text           : /<li>([\s\S]*?)<\/li>/gm,
 	},
 	zeroth_index                 : 0,
 	milliseconds_in_one_day      : 86400000,
@@ -514,14 +545,23 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'fcl_freight', label: 'FCL' },
 		{ value: 'lcl_freight', label: 'LCL' },
 		{ value: 'air_freight', label: 'AIR' },
-		{ value: 'trailer_freight', label: 'Container Transportation' },
 		{ value: 'ftl_freight', label: 'FTL' },
 		{ value: 'ltl_freight', label: 'LTL' },
+		{ value: 'fcl_cfs', label: 'Fcl Cfs' },
 		{ value: 'haulage_freight', label: 'Rail Haulage' },
 		{ value: 'fcl_customs', label: 'FCL Customs' },
 		{ value: 'lcl_customs', label: 'LCL Customs' },
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
+		{ value: 'lcl_freight_local', label: 'Lcl Freight Local' },
+		{ value: 'air_freight_local', label: 'Air Freight Local' },
+		{ value: 'domestic_air_freight', label: 'Domestic Air Freight' },
+		{ value: 'rail_domestic_freight', label: 'Rail Domestic Freight' },
+		{ value: 'trailer_freight', label: 'Container Transportation' },
+	],
+	trade_types: [
+		{ value: 'import', label: 'Import' },
+		{ value: 'export', label: 'Export' },
 	],
 	service_supported_countries: {
 		feature_supported_service: {
@@ -609,6 +649,8 @@ const GLOBAL_CONSTANTS = {
 		import_rates : 'Import.rates@cogoport.com',
 		export_rates : 'Export.rates@cogoport.com',
 	},
+
+	days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
 };
 
 export default GLOBAL_CONSTANTS;

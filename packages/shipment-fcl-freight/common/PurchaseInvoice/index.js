@@ -6,12 +6,12 @@ import OverviewManageServices from '../Overview/OverviewManageServices';
 
 import styles from './styles.module.css';
 
-function PurchaseInvoice() {
+function PurchaseInvoice({ activeTab = '' }) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
 	return (
 		<main className={styles.main}>
-			<OverviewManageServices isOpen={false} />
+			<OverviewManageServices isOpen={false} activeTab={activeTab} source="purchase" isSeller />
 			<PurchaseInvoicing
 				shipmentData={shipment_data}
 				servicesData={servicesList}

@@ -1360,9 +1360,19 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'update_shipment_invoice_currency',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'update_invoice_payment_mode',
 		access_type  : 'private',
 		service_name : 'bookings',
+	},
+	{
+		api          : 'update_shipment_invoice_payment_mode',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'update_invoice_remarks',
@@ -1435,7 +1445,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_checkout_applicable_promocodes',
+		api          : 'get_checkout_applicable_promocodes',
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
@@ -1516,7 +1526,7 @@ const apis = [
 	{
 		api          : 'list_partner_addresses',
 		access_type  : 'private',
-		service_name : 'organization',
+		service_name : 'partner',
 	},
 	{
 		api          : 'generate_bluetide_hbl',
@@ -1678,6 +1688,11 @@ const apis = [
 		api          : 'create_shipment_ftl_freight_fuel_payment',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'get_distance_matrix_valhalla',
+		access_type  : 'private',
+		service_name : 'location',
 	},
 	{
 		api          : 'send_rail_domestic_indent_email',

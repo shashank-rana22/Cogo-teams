@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable custom-eslint/regex-check, custom-eslint/uuid-check */
 export default {
 	country: {
@@ -30,9 +31,9 @@ export default {
 		},
 	},
 	regex: {
-		PAN                                : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
-		// eslint-disable-next-line max-len
+		TAX                                : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g, // PAN Regular Expression
 		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		ECN                                : '',
 		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL                              : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,
@@ -93,7 +94,7 @@ export default {
 		cogo_demo_account_shipper_user: '7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
 		cogo_demo_account_shipper_user_branch:
 			'2c72817c-c663-48ea-b8ef-cd92397842a1',
-		business_owner_ids : ['0f9ddc9b-e2d7-4fee-83f6-08fb8bed6d11'],
+		business_owner_ids : ['0f9ddc9b-e2d7-4fee-83f6-08fb8bed6d11', '8ecf37e5-4605-4c4c-9f8f-77183101317'],
 		supply_role_ids    : [
 			'e31c6d7b-e62e-4fd5-a2e1-106e037ac03c',
 			'70710ab2-0f80-4e12-a4f5-d75660c05315',
@@ -103,6 +104,8 @@ export default {
 			'd9c490f9-afcc-467e-a86d-2a02edf81959',
 			'568c5939-3721-4444-a0ff-4c0298bc948d',
 		],
+		supplier_relations_head_id: '0a623fc0-bd23-4990-b2ec-0115d3f1095b',
+
 		supply_relation_manager_role_id: '568c5939-3721-4444-a0ff-4c0298bc948d',
 
 		cogo_freight_supplier      : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -138,6 +141,8 @@ export default {
 			'5f79d531-50e0-4843-995f-71057e659e0f',
 			'447c2b70-90c9-4e9d-a0df-49bb803b0314',
 			'264a83ab-d438-48c3-8095-bb503f5b619c',
+			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
+			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
@@ -187,7 +192,6 @@ export default {
 		prod_es_sales         : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 		entity_manager_id     : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
 		service_ops1_role_ids : [
-			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
@@ -235,13 +239,15 @@ export default {
 			'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		],
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
-		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
 		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
-		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
-		cogo_one_admin_ids    : [
+		so_2_manager          : [
+			'1665784f-6e58-4299-8a33-4b7487f61188',
+			'eff02645-cb9c-44bf-8f5a-4d273b36e52d', // Prod_SO-2 Manager
+		],
+		cogo_one_admin_ids: [
 			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
@@ -262,8 +268,20 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
-		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
-		document_control_manager : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
+		igm_desk                     : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager     : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
+		centralised_customer_support : [
+			'264a83ab-d438-48c3-8095-bb503f5b619c',	// Common Pool
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5', // SME
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
+			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
+		],
+		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		corporate_owner_demand   : '14fe1423-3c2d-4f66-bc33-89bed08b92ee',
+		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
+		so1_revenue_desk         : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
+		supply_fulfillment       : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
 	},
 	options: {
 		registration_types: [
@@ -481,6 +499,18 @@ export default {
 				label : '501 Cogoport Vietnam',
 				value : '501',
 			},
+			{
+				label : '601 Cogoport Thailand',
+				value : '601',
+			},
+			{
+				label : '701 Cogoport Indonesia',
+				value : '701',
+			},
+			{
+				label : '801 Cogoport China',
+				value : '801',
+			},
 		],
 		migration_status: [
 			{ label: 'True', value: true },
@@ -645,24 +675,20 @@ export default {
 			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 			max_length : 15,
 		},
-
+		banking_code: {
+			financial_system_code : 'ifsc',
+			pattern               : /^[A-Z]{4}0[A-Z0-9]{6}$/,
+		},
+		pan_number: {
+			label   : 'PAN',
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
+		},
+		economic_zone: {
+			label: 'SEZ',
+		},
 		identification_number: {
 			label   : 'PAN Number',
 			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
-		},
-
-		banking_code: {
-			financial_system_code : 'ifsc',
-			pattern               : /^[A-Za-z]{4}\d{7}$/,
-		},
-
-		pan_number: {
-			label   : 'PAN',
-			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
-		},
-
-		economic_zone: {
-			label: 'SEZ',
 		},
 
 		ask_gst_details: true,
@@ -679,8 +705,9 @@ export default {
 			},
 			bookings: {
 				invoicing: {
-					is_invoice_mergeable : false,
-					disable_edit_invoice : true,
+					is_invoice_mergeable              : false,
+					disable_edit_invoice              : true,
+					stakeholder_wise_invoice_required : true,
 				},
 			},
 			business_finance: {
@@ -690,6 +717,14 @@ export default {
 							document_key : 'destinationDocumentValue',
 							irn_key      : 'destinationIrnNumber',
 						},
+					},
+				},
+			},
+			partner: {
+				bookings: {
+					invoicing: {
+						request_cancel_invoice : false,
+						request_credit_note    : true,
 					},
 				},
 			},

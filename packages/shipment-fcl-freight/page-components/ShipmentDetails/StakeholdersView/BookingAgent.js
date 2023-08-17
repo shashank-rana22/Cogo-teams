@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
@@ -25,7 +25,7 @@ import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
-const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement', 'can_edit_params'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
@@ -60,69 +60,70 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 			shipmentData={shipment_data}
 		>
 			<ShipmentDetailContext.Provider value={contextValues}>
-				<div>
-					<div className={styles.top_header}>
-						<ShipmentInfo />
+				<div className={styles.top_header}>
+					<ShipmentInfo />
 
-						<div className={styles.toggle_chat}>
-							<RolloverDetails />
-							<ShipmentChat />
-						</div>
-					</div>
+					<RolloverDetails />
 
-					{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
+					{shipment_data?.is_job_closed
+						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
+						: null}
 
-					<DocumentHoldDetails />
-
-					<div className={styles.header}>
-						<ShipmentHeader />
-
-						<PocSop />
-					</div>
-
-					<Timeline />
-
-					<div className={styles.container}>
-						<Tabs
-							activeTab={activeTab}
-							fullWidth
-							themeType="secondary"
-							onChange={setActiveTab}
-						>
-							<TabPanel name="overview" title="Overview">
-								<Overview shipmentData={shipment_data} />
-							</TabPanel>
-
-							<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-								<Tasks />
-							</TabPanel>
-
-							<TabPanel name="invoice" title="Sales Invoice">
-								<SalesInvoice />
-							</TabPanel>
-
-							<TabPanel name="documents" title="Documents">
-								<Documents />
-							</TabPanel>
-
-							<TabPanel name="emails" title="Emails">
-								<ShipmentMails
-									source="cogo_rpa"
-									filters={{ q: shipment_data?.serial_id }}
-									pre_subject_text={shipment_data?.serial_id?.toString() || ''}
-								/>
-							</TabPanel>
-
-							<TabPanel name="tracking" title="Tracking">
-								<Tracking shipmentData={shipment_data} />
-							</TabPanel>
-						</Tabs>
-					</div>
-
-					{!isEmpty(rollover_containers) ? (
-						<RolloverActionModal rollover_containers={rollover_containers} />
-					) : null}
+					<ShipmentChat />
 				</div>
+
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
+
+				<DocumentHoldDetails />
+
+				<div className={styles.header}>
+					<ShipmentHeader />
+
+					<PocSop />
+				</div>
+
+				<Timeline />
+
+				<div className={styles.container}>
+					<Tabs
+						activeTab={activeTab}
+						fullWidth
+						themeType="secondary"
+						onChange={setActiveTab}
+					>
+						<TabPanel name="overview" title="Overview">
+							<Overview shipmentData={shipment_data} />
+						</TabPanel>
+
+						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
+							<Tasks />
+						</TabPanel>
+
+						<TabPanel name="invoice" title="Sales Invoice">
+							<SalesInvoice />
+						</TabPanel>
+
+						<TabPanel name="documents" title="Documents">
+							<Documents />
+						</TabPanel>
+
+						<TabPanel name="emails" title="Emails">
+							<ShipmentMails
+								source="cogo_rpa"
+								filters={{ q: shipment_data?.serial_id }}
+								pre_subject_text={shipment_data?.serial_id?.toString() || ''}
+							/>
+						</TabPanel>
+
+						<TabPanel name="tracking" title="Tracking">
+							<Tracking shipmentData={shipment_data} />
+						</TabPanel>
+					</Tabs>
+				</div>
+
+				{!isEmpty(rollover_containers) ? (
+					<RolloverActionModal rollover_containers={rollover_containers} />
+				) : null}
 			</ShipmentDetailContext.Provider>
 		</ShipmentPageContainer>
 	);

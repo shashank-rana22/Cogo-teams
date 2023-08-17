@@ -8,10 +8,14 @@ const getDefaultValues = (oldfields) => {
 			const CHILD_DEFAULT_VALUES = {};
 
 			controls?.forEach((ctrl) => {
-				CHILD_DEFAULT_VALUES[ctrl?.name] = DEFAULT_VALUES?.[ctrl?.name];
+				if (ctrl.type === 'datepicker') {
+					CHILD_DEFAULT_VALUES[ctrl?.name] = null;
+				} else {
+					CHILD_DEFAULT_VALUES[ctrl?.name] = '';
+				}
 			});
 
-			DEFAULT_VALUES[name] = value || CHILD_DEFAULT_VALUES;
+			DEFAULT_VALUES[name] = value || [CHILD_DEFAULT_VALUES];
 		} else {
 			DEFAULT_VALUES[name] = value || '';
 		}

@@ -3,6 +3,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 const PARTNER_OPTIONS = [
 	{ label: 'Cogoport India', value: GLOBAL_CONSTANTS.country_entity_ids.IN },
 	{ label: 'Cogoport Vietnam', value: GLOBAL_CONSTANTS.country_entity_ids.VN },
+	{ label: 'Cogoport Singapore', value: GLOBAL_CONSTANTS.country_entity_ids.SG },
+	{ label: 'Cogoport Indonesia', value: GLOBAL_CONSTANTS.country_entity_ids.ID },
+	{ label: 'Cogoport Thailand', value: GLOBAL_CONSTANTS.country_entity_ids.TH },
 ];
 
 const controls = [

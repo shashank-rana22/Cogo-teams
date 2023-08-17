@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
@@ -8,14 +8,21 @@ import { ICONS_MAPPING } from './iconsMapping';
 import ShippingRoute from './ShippingRoute';
 import styles from './styles.module.css';
 
-function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type = '' }) {
+function ShipmentsCard({
+	setShowPocDetails = () => {},
+	shipmentItem = {},
+	type = '',
+	setShowBookingNote = () => {},
+}) {
 	const {
 		shipment_type = '',
 		net_total = 0,
 		net_total_price_currency = '',
 		payment_term : paymentTerm = '',
-		last_milestone = '',
-		current_milestone = '',
+		task_status = '',
+		documents = [],
+		id: shipmentId = '',
+		last_completed_task = {},
 	} = shipmentItem;
 
 	const ShipmentIcon = ICONS_MAPPING[shipment_type] || null;
@@ -27,6 +34,7 @@ function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type =
 					shipmentItem={shipmentItem}
 					setShowPocDetails={setShowPocDetails}
 					type={type}
+					setShowBookingNote={setShowBookingNote}
 				/>
 
 				<ShippingRoute
@@ -61,17 +69,40 @@ function ShipmentsCard({ setShowPocDetails = () => {}, shipmentItem = {}, type =
 			</div>
 
 			<div className={styles.footer_block}>
-				<div className={styles.footer_right_block}>
-					prev:
-					{' '}
-					{last_milestone}
-				</div>
-
-				<div className={styles.footer_left_block}>
-					<div className={styles.custom_pill_styles}>
-						{current_milestone}
+				{last_completed_task?.task ? (
+					<div className={styles.footer_right_block}>
+						<div className={styles.current_task_color}>
+							Prev Task
+						</div>
+						<div className={styles.overflow_div}>
+							{startCase(last_completed_task?.task)}
+						</div>
 					</div>
-				</div>
+				) : null}
+				{task_status === 'approve_booking_note' ? (
+					<div className={styles.footer_left_block}>
+						<Button
+							size="md"
+							themeType="primary"
+							className={styles.custom_pill_styles}
+							onClick={(e) => {
+								e.stopPropagation();
+								setShowBookingNote({ show: true, data: { documents, shipmentId } });
+							}}
+						>
+							Send Booking Note
+						</Button>
+					</div>
+				) : (
+					<div className={styles.footer_right_block}>
+						<div className={styles.current_task_color}>
+							Current Task
+						</div>
+						<div className={styles.overflow_div}>
+							{startCase(task_status)}
+						</div>
+					</div>
+				)}
 			</div>
 
 			<div className={styles.shipment_type_container}>

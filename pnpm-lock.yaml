@@ -8,6 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@cogoport/maps': 1.0.3_jbkdfmwn4pruupygfcv3deyn7u
+      '@sentry/nextjs': 7.63.0_next@13.1.6+react@18.2.0
+      accept-language: 3.0.18
+      axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
+      i18next: 22.5.1
+      next: 13.1.6_w4exofnty45araakomg6jes2wu
+      next-i18next: 13.3.0_dnozh3q3bjyroxvzw5b5ijchja
+      react-dom: 18.2.0_react@18.2.0
+      react-i18next: 12.3.1_spyi3zqm3bqfobczid2f6jym6y
       '@cogoport/maps':
         specifier: ^1.0.3
         version: 1.0.3(@cogoport/icons-react@1.0.90)(react-dom@18.2.0)(react@18.2.0)
@@ -24,6 +33,22 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
     devDependencies:
+      '@cogoport/eslint-config': 2.0.9_eslint@8.46.0
+      '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
+      '@svgr/webpack': 6.5.1
+      eslint: 8.46.0
+      eslint-plugin-custom-eslint: link:node_modules/@cogoport/eslint-config/packages/custom-eslint
+      fs-extra: 11.1.1
+      git-precommit-checks: 3.1.0
+      husky: 8.0.3
+      lint-staged: 13.2.3
+      postcss: 8.4.27
+      postcss-flexbugs-fixes: 5.0.2_postcss@8.4.27
+      postcss-nested: 6.0.1_postcss@8.4.27
+      postcss-preset-env: 8.5.1_postcss@8.4.27
+      stylelint: 14.16.1
+      turbo: 1.10.12
+      turbo-darwin-64: 1.10.12
       '@cogoport/eslint-config':
         specifier: 2.0.9
         version: 2.0.9(eslint@8.47.0)
@@ -74,7 +99,200 @@ importers:
         version: 1.10.12
 
   cogo-control:
+    specifiers:
+      '@cogoport/access-management': workspace:0.1.0
+      '@cogoport/air-modules': workspace:1.0.0
+      '@cogoport/air-repository': workspace:0.1.0
+      '@cogoport/airline-booking-plugin': workspace:1.0.0
+      '@cogoport/allocation': workspace:0.1.0
+      '@cogoport/athena-dashboard': workspace:0.1.0
+      '@cogoport/authentication': workspace:0.1.0
+      '@cogoport/authority-desk': workspace:0.1.0
+      '@cogoport/awb-inventory': workspace:1.0.0
+      '@cogoport/bl_do-collection-release': workspace:0.1.0
+      '@cogoport/bn-salvage': workspace:0.1.0
+      '@cogoport/booking-desk': workspace:0.1.0
+      '@cogoport/booking-desk-air': workspace:1.0.0
+      '@cogoport/booking-desk-surface': workspace:1.0.0
+      '@cogoport/business-finance': workspace:0.1.0
+      '@cogoport/centralised-customer-service': workspace:0.1.0
+      '@cogoport/chakravyuh': workspace:0.1.0
+      '@cogoport/chro': workspace:0.1.0
+      '@cogoport/cogo-academy': workspace:0.1.0
+      '@cogoport/cogo-one': workspace:0.1.1
+      '@cogoport/cogo-verse-analytics': workspace:0.1.0
+      '@cogoport/components': ^1.0.359
+      '@cogoport/contracts': workspace:0.1.0
+      '@cogoport/controlled-booking': workspace:0.1.0
+      '@cogoport/core': workspace:0.1.0
+      '@cogoport/cost-booking-desk': workspace:0.1.0
+      '@cogoport/document-desk': workspace:0.1.0
+      '@cogoport/employee-dashboard': workspace:0.1.0
+      '@cogoport/employee-directory': workspace:0.1.0
+      '@cogoport/employee-portal': workspace:0.1.0
+      '@cogoport/enrichment': workspace:0.1.0
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/ftl-admin': workspace:1.0.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/ground-ops': workspace:0.1.0
+      '@cogoport/icons-react': ^1.0.58
+      '@cogoport/igm-desk': workspace:0.1.0
+      '@cogoport/ihls': workspace:0.1.0
+      '@cogoport/ingestion': workspace:0.1.0
+      '@cogoport/kam-desk': workspace:0.1.0
+      '@cogoport/last-mile-desk': workspace:0.1.0
+      '@cogoport/liability-dashboard': workspace:0.1.0
+      '@cogoport/locations': workspace:0.1.0
+      '@cogoport/manager-dashboard': workspace:0.1.0
+      '@cogoport/my-incident': workspace:0.1.0
+      '@cogoport/my-profile': workspace:0.1.0
+      '@cogoport/navigation-configs': workspace:0.1.0
+      '@cogoport/new-employee-dashboard': workspace:0.1.0
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/notifications': workspace:0.1.0
+      '@cogoport/ocean-modules': workspace:0.1.0
+      '@cogoport/operators': workspace:1.0.0
+      '@cogoport/performance-management': workspace:1.0.0
+      '@cogoport/printing-desk': workspace:1.0.0
+      '@cogoport/referral': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/resources': workspace:1.0.0
+      '@cogoport/revenue-desk': workspace:0.1.0
+      '@cogoport/rfq-dashboard': workspace:0.1.0
+      '@cogoport/risk-management': workspace:0.1.0
+      '@cogoport/saas-subscription': workspace:0.1.0
+      '@cogoport/saas-tools': workspace:0.1.0
+      '@cogoport/schedules': workspace:^0.1.0
+      '@cogoport/scope-select': workspace:0.1.0
+      '@cogoport/shipment-air-customs': workspace:1.0.0
+      '@cogoport/shipment-air-freight': workspace:1.0.0
+      '@cogoport/shipment-air-freight-local': workspace:1.0.0
+      '@cogoport/shipment-chat': workspace:0.1.0
+      '@cogoport/shipment-domestic-air-freight': workspace:1.0.0
+      '@cogoport/shipment-fcl-cfs': workspace:0.1.0
+      '@cogoport/shipment-fcl-custom': workspace:0.1.0
+      '@cogoport/shipment-fcl-freight': workspace:0.1.0
+      '@cogoport/shipment-fcl-freight-local': workspace:0.1.0
+      '@cogoport/shipment-ftl-freight': workspace:0.1.0
+      '@cogoport/shipment-haulage-freight': workspace:0.1.0
+      '@cogoport/shipment-lcl-freight': workspace:0.1.0
+      '@cogoport/shipment-ltl-freight': workspace:0.1.0
+      '@cogoport/shipment-mails': workspace:0.1.0
+      '@cogoport/shipment-rail-domestic-freight': workspace:0.1.0
+      '@cogoport/so2-surface': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/supply-dashboards': workspace:0.1.0
+      '@cogoport/surface-modules': workspace:0.1.0
+      '@cogoport/ticket-management': workspace:0.1.1
+      '@cogoport/translate': workspace:0.1.0
+      '@cogoport/unified-dashboard': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      '@cogoport/vendor-rm': workspace:0.1.0
+      '@cogoport/welcome': workspace:0.1.0
+      '@next/bundle-analyzer': ^13.2.3
+      '@types/node': ^18.16.18
+      '@types/react': ^18.2.12
+      next: 13.1.6
+      react: 18.2.0
+      react-dom: 18.2.0
+      react-redux: ^8.0.5
+      typescript: ^4.9.5
     dependencies:
+      '@cogoport/access-management': link:../packages/access-management
+      '@cogoport/air-modules': link:../common/air-modules
+      '@cogoport/air-repository': link:../packages/air-repository
+      '@cogoport/airline-booking-plugin': link:../packages/airline-booking-plugin
+      '@cogoport/allocation': link:../packages/allocation
+      '@cogoport/athena-dashboard': link:../packages/athena-dashboard
+      '@cogoport/authentication': link:../packages/authentication
+      '@cogoport/authority-desk': link:../packages/authority-desk
+      '@cogoport/awb-inventory': link:../packages/awb-inventory
+      '@cogoport/bl_do-collection-release': link:../packages/bl_do-collection-release
+      '@cogoport/bn-salvage': link:../packages/bn-salvage
+      '@cogoport/booking-desk': link:../packages/booking-desk
+      '@cogoport/booking-desk-air': link:../packages/booking-desk-air
+      '@cogoport/booking-desk-surface': link:../packages/booking-desk-surface
+      '@cogoport/business-finance': link:../packages/business-finance
+      '@cogoport/centralised-customer-service': link:../packages/centralised-customer-service
+      '@cogoport/chakravyuh': link:../packages/chakravyuh
+      '@cogoport/chro': link:../packages/chro
+      '@cogoport/cogo-academy': link:../packages/cogo-academy
+      '@cogoport/cogo-one': link:../packages/cogo-one
+      '@cogoport/cogo-verse-analytics': link:../packages/cogo-verse-analytics
+      '@cogoport/components': 1.0.437_jbkdfmwn4pruupygfcv3deyn7u
+      '@cogoport/contracts': link:../packages/contracts
+      '@cogoport/controlled-booking': link:../packages/controlled-booking
+      '@cogoport/core': link:../common/core
+      '@cogoport/cost-booking-desk': link:../packages/cost-booking-desk
+      '@cogoport/document-desk': link:../packages/document-desk
+      '@cogoport/employee-dashboard': link:../packages/employee-dashboard
+      '@cogoport/employee-directory': link:../packages/employee-directory
+      '@cogoport/employee-portal': link:../packages/employee-portal
+      '@cogoport/enrichment': link:../packages/enrichment
+      '@cogoport/forms': link:../common/forms
+      '@cogoport/ftl-admin': link:../packages/ftl-admin
+      '@cogoport/globalization': link:../common/globalization
+      '@cogoport/ground-ops': link:../packages/ground-ops
+      '@cogoport/icons-react': 1.0.90_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/igm-desk': link:../packages/igm-desk
+      '@cogoport/ihls': link:../packages/ihls
+      '@cogoport/ingestion': link:../packages/ingestion
+      '@cogoport/kam-desk': link:../packages/kam-desk
+      '@cogoport/last-mile-desk': link:../packages/last-mile-desk
+      '@cogoport/liability-dashboard': link:../packages/liability-dashboard
+      '@cogoport/locations': link:../packages/locations
+      '@cogoport/manager-dashboard': link:../packages/manager-dashboard
+      '@cogoport/my-incident': link:../packages/my-incident
+      '@cogoport/my-profile': link:../packages/my-profile
+      '@cogoport/navigation-configs': link:../common/navigation-configs
+      '@cogoport/new-employee-dashboard': link:../packages/new-employee-dashboard
+      '@cogoport/next': link:../common/next
+      '@cogoport/notifications': link:../packages/notifications
+      '@cogoport/ocean-modules': link:../common/ocean-modules
+      '@cogoport/operators': link:../packages/operators
+      '@cogoport/performance-management': link:../packages/performance-management
+      '@cogoport/printing-desk': link:../packages/printing-desk
+      '@cogoport/referral': link:../packages/referral
+      '@cogoport/request': link:../common/request
+      '@cogoport/resources': link:../packages/resources
+      '@cogoport/revenue-desk': link:../packages/revenue-desk
+      '@cogoport/rfq-dashboard': link:../packages/rfq-dashboard
+      '@cogoport/risk-management': link:../packages/risk-management
+      '@cogoport/saas-subscription': link:../packages/saas-subscription
+      '@cogoport/saas-tools': link:../packages/saas-tools
+      '@cogoport/schedules': link:../packages/schedules
+      '@cogoport/scope-select': link:../common/scope-select
+      '@cogoport/shipment-air-customs': link:../packages/shipment-air-customs
+      '@cogoport/shipment-air-freight': link:../packages/shipment-air-freight
+      '@cogoport/shipment-air-freight-local': link:../packages/shipment-air-freight-local
+      '@cogoport/shipment-chat': link:../common/shipment-chat
+      '@cogoport/shipment-domestic-air-freight': link:../packages/shipment-domestic-air-freight
+      '@cogoport/shipment-fcl-cfs': link:../packages/shipment-fcl-cfs
+      '@cogoport/shipment-fcl-custom': link:../packages/shipment-fcl-custom
+      '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
+      '@cogoport/shipment-fcl-freight-local': link:../packages/shipment-fcl-freight-local
+      '@cogoport/shipment-ftl-freight': link:../packages/shipment-ftl-freight
+      '@cogoport/shipment-haulage-freight': link:../packages/shipment-haulage-freight
+      '@cogoport/shipment-lcl-freight': link:../packages/shipment-lcl-freight
+      '@cogoport/shipment-ltl-freight': link:../packages/shipment-ltl-freight
+      '@cogoport/shipment-mails': link:../common/shipment-mails
+      '@cogoport/shipment-rail-domestic-freight': link:../packages/shipment-rail-domestic-freight
+      '@cogoport/so2-surface': link:../packages/so2-surface
+      '@cogoport/store': link:../common/store
+      '@cogoport/supply-dashboards': link:../packages/supply-dashboards
+      '@cogoport/surface-modules': link:../common/surface-modules
+      '@cogoport/ticket-management': link:../packages/ticket-management
+      '@cogoport/translate': link:../packages/Translation
+      '@cogoport/unified-dashboard': link:../packages/unified-dashboard
+      '@cogoport/utils': 1.2.10
+      '@cogoport/vendor-rm': link:../packages/vendor-rm
+      '@cogoport/welcome': link:../packages/welcome
+      '@next/bundle-analyzer': 13.4.13
+      next: 13.1.6_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-redux: 8.1.2_qflmzdebv2ewfrqz6op6ohcc2q
+      typescript: 4.9.5
       '@cogoport/access-management':
         specifier: workspace:0.1.0
         version: link:../packages/access-management
@@ -841,11 +1059,23 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
     devDependencies:
+      '@types/react': 18.2.20
       '@types/react':
         specifier: ^18.0.28
         version: 18.2.20
 
   packages/access-management:
+    specifiers:
+      '@cogoport/components': ^1.0.359
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': ^0.0.1
+      '@cogoport/icons-react': ^1.0.58
+      '@cogoport/navigation-configs': workspace:0.1.0
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.6
+      react: 18.2.0
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.359
@@ -942,6 +1172,19 @@ importers:
         version: 1.2.6(react@18.2.0)
 
   packages/allocation:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.431
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': ^0.0.1
+      '@cogoport/icons-react': ^1.0.65
+      '@cogoport/navigation-configs': workspace:0.1.0
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/scope-select': workspace:*
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.6
+      react: 18.2.0
     dependencies:
       '@cogoport/charts':
         specifier: ^1.0.1
@@ -1513,6 +1756,20 @@ importers:
         version: 0.16.5(react-dom@18.2.0)(react@18.2.0)
 
   packages/cogo-one:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.439
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.86
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.6
+      firebase: ^9.17.2
+      react: 18.2.0
+      stylelint: ^14.16.1
+      uuid: ^9.0.0
     dependencies:
       '@cogoport/charts':
         specifier: ^1.0.1
@@ -1954,6 +2211,18 @@ importers:
         version: 9.0.0
 
   packages/igm-desk:
+    specifiers:
+      '@cogoport/components': ^1.0.390
+      '@cogoport/core': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.61
+      '@cogoport/next': workspace:^0.1.0
+      '@cogoport/ocean-modules': workspace:^0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/scope-select': workspace:0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      react: 18.2.0
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.390
@@ -3052,6 +3321,29 @@ importers:
         version: 9.0.0
 
   packages/shipment-fcl-freight:
+    specifiers:
+      '@cogoport/components': ^1.0.395
+      '@cogoport/context': workspace:^0.1.0
+      '@cogoport/core': workspace:^0.1.0
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.60
+      '@cogoport/maps': ^1.0.2
+      '@cogoport/navigation-configs': workspace:^0.1.0
+      '@cogoport/next': workspace:^0.1.0
+      '@cogoport/ocean-modules': workspace:^0.1.0
+      '@cogoport/purchase-invoicing': workspace:^0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/scope-select': workspace:^0.1.0
+      '@cogoport/shipment-chat': workspace:^0.1.0
+      '@cogoport/shipment-mails': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      file-saver: ^2.0.5
+      prop-types: ^15.8.1
+      react: 18.2.0
+      react-to-print: ^2.14.13
+      uuid: ^9.0.0
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.395
@@ -3712,11 +4004,14 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.19
+      '@jridgewell/trace-mapping': 0.3.19
 
   /@babel/code-frame@7.22.10:
     resolution: {integrity: sha512-/KKIMG4UEL35WmI9OlvMhurwtytjvXoFcGNrOvyG9zIzA8YmPjVtIZUf7b05+TPO7G7/GEmLHDaoCgACHl9hhA==}
     engines: {node: '>=6.9.0'}
     dependencies:
+      '@babel/highlight': 7.22.10
+      chalk: 2.4.2
       '@babel/highlight': 7.22.10
       chalk: 2.4.2
 
@@ -3738,6 +4033,8 @@ packages:
       '@babel/template': 7.22.5
       '@babel/traverse': 7.22.10
       '@babel/types': 7.22.10
+      '@babel/traverse': 7.22.10
+      '@babel/types': 7.22.10
       convert-source-map: 1.9.0
       debug: 4.3.4
       gensync: 1.0.0-beta.2
@@ -3751,7 +4048,9 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/types': 7.22.10
+      '@babel/types': 7.22.10
       '@jridgewell/gen-mapping': 0.3.3
+      '@jridgewell/trace-mapping': 0.3.19
       '@jridgewell/trace-mapping': 0.3.19
       jsesc: 2.5.2
 
@@ -3760,12 +4059,14 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/types': 7.22.10
+      '@babel/types': 7.22.10
     dev: true
 
   /@babel/helper-builder-binary-assignment-operator-visitor@7.22.10:
     resolution: {integrity: sha512-Av0qubwDQxC56DoUReVDeLfMEjYYSN1nZrTUrWkXd7hpU73ymRANkbuDm3yni9npkn+RXy9nNbEJZEzXr7xrfQ==}
     engines: {node: '>=6.9.0'}
     dependencies:
+      '@babel/types': 7.22.10
       '@babel/types': 7.22.10
     dev: true
 
@@ -3776,6 +4077,7 @@ packages:
       '@babel/compat-data': 7.22.9
       '@babel/helper-validator-option': 7.22.5
       browserslist: 4.21.10
+      browserslist: 4.21.10
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -3785,6 +4087,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-annotate-as-pure': 7.22.5
       '@babel/helper-environment-visitor': 7.22.5
@@ -3804,6 +4107,7 @@ packages:
       '@babel/core': ^7.0.0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-annotate-as-pure': 7.22.5
       regexpu-core: 5.3.2
       semver: 6.3.1
@@ -3816,9 +4120,12 @@ packages:
     dependencies:
       '@babel/core': 7.22.10
       '@babel/helper-compilation-targets': 7.22.10
+      '@babel/core': 7.22.10
+      '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       debug: 4.3.4
       lodash.debounce: 4.0.8
+      resolve: 1.22.4
       resolve: 1.22.4
     transitivePeerDependencies:
       - supports-color
@@ -3834,17 +4141,20 @@ packages:
     dependencies:
       '@babel/template': 7.22.5
       '@babel/types': 7.22.10
+      '@babel/types': 7.22.10
 
   /@babel/helper-hoist-variables@7.22.5:
     resolution: {integrity: sha512-wGjk9QZVzvknA6yKIUURb8zY3grXCcOZt+/7Wcy8O2uctxhplmUPkOdlgoNhmdVee2c92JXbf1xpMtVNbfoxRw==}
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/types': 7.22.10
+      '@babel/types': 7.22.10
 
   /@babel/helper-member-expression-to-functions@7.22.5:
     resolution: {integrity: sha512-aBiH1NKMG0H2cGZqspNvsaBe6wNGjbJjuLy29aU+eDZjSbbN53BaxlpB02xm9v34pLTZ1nIQPFYn2qMZoa5BQQ==}
     engines: {node: '>=6.9.0'}
     dependencies:
+      '@babel/types': 7.22.10
       '@babel/types': 7.22.10
     dev: true
 
@@ -3853,6 +4163,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/types': 7.22.10
+      '@babel/types': 7.22.10
 
   /@babel/helper-module-transforms@7.22.9(@babel/core@7.22.10):
     resolution: {integrity: sha512-t+WA2Xn5K+rTeGtC8jCsdAH52bjggG5TKRuRrAGNM/mjIbO4GxvlLMFOEz9wXY5I2XQ60PMFsAG2WIcG82dQMQ==}
@@ -3860,6 +4171,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-environment-visitor': 7.22.5
       '@babel/helper-module-imports': 7.22.5
@@ -3871,6 +4183,7 @@ packages:
     resolution: {integrity: sha512-HBwaojN0xFRx4yIvpwGqxiV2tUfl7401jlok564NgB9EHS1y6QT17FmKWm4ztqjeVdXLuC4fSvHc5ePpQjoTbw==}
     engines: {node: '>=6.9.0'}
     dependencies:
+      '@babel/types': 7.22.10
       '@babel/types': 7.22.10
     dev: true
 
@@ -3886,8 +4199,10 @@ packages:
       '@babel/core': ^7.0.0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-annotate-as-pure': 7.22.5
       '@babel/helper-environment-visitor': 7.22.5
+      '@babel/helper-wrap-function': 7.22.10
       '@babel/helper-wrap-function': 7.22.10
     dev: true
 
@@ -3897,6 +4212,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-environment-visitor': 7.22.5
       '@babel/helper-member-expression-to-functions': 7.22.5
@@ -3908,11 +4224,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/types': 7.22.10
+      '@babel/types': 7.22.10
 
   /@babel/helper-skip-transparent-expression-wrappers@7.22.5:
     resolution: {integrity: sha512-tK14r66JZKiC43p8Ki33yLBVJKlQDFoA8GYN67lWCDCqoL6EMMSuM9b+Iff2jHaM/RRFYl7K+iiru7hbRqNx8Q==}
     engines: {node: '>=6.9.0'}
     dependencies:
+      '@babel/types': 7.22.10
       '@babel/types': 7.22.10
     dev: true
 
@@ -3920,6 +4238,7 @@ packages:
     resolution: {integrity: sha512-AsUnxuLhRYsisFiaJwvp1QF+I3KjD5FOxut14q/GzovUe6orHLesW2C7d754kRm53h5gqrz6sFl6sxc4BVtE/g==}
     engines: {node: '>=6.9.0'}
     dependencies:
+      '@babel/types': 7.22.10
       '@babel/types': 7.22.10
 
   /@babel/helper-string-parser@7.22.5:
@@ -3941,6 +4260,7 @@ packages:
       '@babel/helper-function-name': 7.22.5
       '@babel/template': 7.22.5
       '@babel/types': 7.22.10
+      '@babel/types': 7.22.10
     dev: true
 
   /@babel/helpers@7.22.10:
@@ -3948,6 +4268,8 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/template': 7.22.5
+      '@babel/traverse': 7.22.10
+      '@babel/types': 7.22.10
       '@babel/traverse': 7.22.10
       '@babel/types': 7.22.10
     transitivePeerDependencies:
@@ -3967,6 +4289,7 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.22.10
+      '@babel/types': 7.22.10
 
   /@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression@7.22.5(@babel/core@7.22.10):
     resolution: {integrity: sha512-NP1M5Rf+u2Gw9qfSO4ihjcTGW5zXTi36ITLd4/EoAcEhIZ0yjMqmftDNl3QC19CX7olhrjpyU454g/2W7X0jvQ==}
@@ -3974,6 +4297,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -3984,6 +4308,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.13.0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/helper-skip-transparent-expression-wrappers': 7.22.5
@@ -3997,6 +4322,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
     dev: true
 
   /@babel/plugin-syntax-async-generators@7.8.4(@babel/core@7.22.10):
@@ -4004,6 +4330,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4013,6 +4340,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4024,6 +4352,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4033,6 +4362,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4041,6 +4371,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4052,6 +4383,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4062,6 +4394,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4071,6 +4404,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4079,6 +4413,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4090,6 +4425,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4098,6 +4434,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4108,6 +4445,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4116,6 +4454,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4126,6 +4465,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4135,6 +4475,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4143,6 +4484,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4154,6 +4496,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4164,6 +4507,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4173,6 +4517,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4195,6 +4540,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4204,6 +4550,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-environment-visitor': 7.22.5
       '@babel/helper-plugin-utils': 7.22.5
@@ -4218,6 +4565,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-module-imports': 7.22.5
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/helper-remap-async-to-generator': 7.22.9(@babel/core@7.22.10)
@@ -4230,6 +4578,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4239,6 +4588,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4273,7 +4623,9 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-annotate-as-pure': 7.22.5
+      '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-environment-visitor': 7.22.5
       '@babel/helper-function-name': 7.22.5
@@ -4291,6 +4643,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/template': 7.22.5
     dev: true
@@ -4301,6 +4654,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4323,6 +4677,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4332,6 +4687,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-dynamic-import': 7.8.3(@babel/core@7.22.10)
@@ -4345,6 +4701,8 @@ packages:
     dependencies:
       '@babel/core': 7.22.10
       '@babel/helper-builder-binary-assignment-operator-visitor': 7.22.10
+      '@babel/core': 7.22.10
+      '@babel/helper-builder-binary-assignment-operator-visitor': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4354,6 +4712,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-export-namespace-from': 7.8.3(@babel/core@7.22.10)
@@ -4366,6 +4725,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4375,6 +4735,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
+      '@babel/helper-compilation-targets': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-function-name': 7.22.5
@@ -4388,6 +4750,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-json-strings': 7.8.3(@babel/core@7.22.10)
     dev: true
@@ -4399,6 +4762,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4408,6 +4772,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-logical-assignment-operators': 7.10.4(@babel/core@7.22.10)
@@ -4419,6 +4784,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4452,6 +4818,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-hoist-variables': 7.22.5
       '@babel/helper-module-transforms': 7.22.9(@babel/core@7.22.10)
@@ -4488,6 +4855,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4497,6 +4865,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3(@babel/core@7.22.10)
@@ -4508,6 +4877,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-numeric-separator': 7.10.4(@babel/core@7.22.10)
@@ -4522,6 +4892,8 @@ packages:
       '@babel/compat-data': 7.22.9
       '@babel/core': 7.22.10
       '@babel/helper-compilation-targets': 7.22.10
+      '@babel/core': 7.22.10
+      '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.22.10)
       '@babel/plugin-transform-parameters': 7.22.5(@babel/core@7.22.10)
@@ -4534,6 +4906,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/helper-replace-supers': 7.22.9(@babel/core@7.22.10)
     dev: true
@@ -4544,6 +4917,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-optional-catch-binding': 7.8.3(@babel/core@7.22.10)
@@ -4556,6 +4930,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/helper-skip-transparent-expression-wrappers': 7.22.5
       '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.22.10)
@@ -4567,6 +4942,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4589,6 +4965,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-annotate-as-pure': 7.22.5
       '@babel/helper-create-class-features-plugin': 7.22.10(@babel/core@7.22.10)
       '@babel/helper-plugin-utils': 7.22.5
@@ -4602,6 +4979,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4612,6 +4990,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4621,6 +5000,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4642,6 +5022,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-annotate-as-pure': 7.22.5
       '@babel/helper-module-imports': 7.22.5
       '@babel/helper-plugin-utils': 7.22.5
@@ -4656,6 +5037,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-annotate-as-pure': 7.22.5
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4667,7 +5049,9 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
+      regenerator-transform: 0.15.2
       regenerator-transform: 0.15.2
     dev: true
 
@@ -4677,6 +5061,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4688,6 +5073,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4697,6 +5083,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/helper-skip-transparent-expression-wrappers': 7.22.5
@@ -4709,6 +5096,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4718,6 +5106,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4729,6 +5118,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -4738,6 +5128,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-annotate-as-pure': 7.22.5
       '@babel/helper-create-class-features-plugin': 7.22.10(@babel/core@7.22.10)
@@ -4751,6 +5142,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
@@ -4795,6 +5187,8 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/compat-data': 7.22.9
+      '@babel/core': 7.22.10
+      '@babel/helper-compilation-targets': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
@@ -4885,7 +5279,9 @@ packages:
       '@babel/core': ^7.0.0-0 || ^8.0.0-0 <8.0.0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
+      '@babel/types': 7.22.10
       '@babel/types': 7.22.10
       esutils: 2.0.3
     dev: true
@@ -4896,6 +5292,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/helper-validator-option': 7.22.5
@@ -4911,6 +5308,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/helper-validator-option': 7.22.5
@@ -4935,11 +5333,15 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+      regenerator-runtime: 0.14.0
 
   /@babel/template@7.22.5:
     resolution: {integrity: sha512-X7yV7eiwAxdj9k94NEylvbVHLiVG1nvzCV2EAowhxLTwODV1jl9UzZ48leOC0sH7OnuHrIkllaBgneUykIcZaw==}
     engines: {node: '>=6.9.0'}
     dependencies:
+      '@babel/code-frame': 7.22.10
+      '@babel/parser': 7.22.10
+      '@babel/types': 7.22.10
       '@babel/code-frame': 7.22.10
       '@babel/parser': 7.22.10
       '@babel/types': 7.22.10
@@ -4950,10 +5352,14 @@ packages:
     dependencies:
       '@babel/code-frame': 7.22.10
       '@babel/generator': 7.22.10
+      '@babel/code-frame': 7.22.10
+      '@babel/generator': 7.22.10
       '@babel/helper-environment-visitor': 7.22.5
       '@babel/helper-function-name': 7.22.5
       '@babel/helper-hoist-variables': 7.22.5
       '@babel/helper-split-export-declaration': 7.22.6
+      '@babel/parser': 7.22.10
+      '@babel/types': 7.22.10
       '@babel/parser': 7.22.10
       '@babel/types': 7.22.10
       debug: 4.3.4
@@ -5029,6 +5435,12 @@ packages:
       date-fns: 2.30.0
       fs: 0.0.1-security
       react: 18.2.0
+      react-date-range: 1.4.0_kzhlcyde2l6xjiirkbg7jzhosa
+      react-dom: 18.2.0_react@18.2.0
+      react-hook-form: 7.45.4_react@18.2.0
+      react-quill: 2.0.0_biqbaboplfbrettd7655fr4n2y
+      react-rte: 0.16.5_biqbaboplfbrettd7655fr4n2y
+      react-table: 7.8.0_react@18.2.0
       react-date-range: 1.4.0(date-fns@2.30.0)(react@18.2.0)
       react-dom: 18.2.0(react@18.2.0)
       react-hook-form: 7.45.4(react@18.2.0)
@@ -5997,6 +6409,7 @@ packages:
       ent: 2.2.0
       extend: 3.0.2
       fast-xml-parser: 4.2.7
+      fast-xml-parser: 4.2.7
       gaxios: 5.1.3
       google-auth-library: 8.9.0
       mime: 3.0.0
@@ -6079,6 +6492,7 @@ packages:
       '@jridgewell/set-array': 1.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
       '@jridgewell/trace-mapping': 0.3.19
+      '@jridgewell/trace-mapping': 0.3.19
 
   /@jridgewell/resolve-uri@3.1.1:
     resolution: {integrity: sha512-dSYZh7HhCDtCKm4QakX0xFpsRDqjjtZf/kjI/v3T3Nwt5r8/qz/M19F9ySyOqU94SXBmeG9ttTul+YnR4LOxFA==}
@@ -6094,6 +6508,8 @@ packages:
   /@jridgewell/trace-mapping@0.3.19:
     resolution: {integrity: sha512-kf37QtfW+Hwx/buWGMPcR60iF9ziHa6r/CZJIHbmcm4+0qrXiVdxegAH0F6yddEVQ7zdkjcGCgCzUu+BcbhQxw==}
     dependencies:
+      '@jridgewell/resolve-uri': 3.1.1
+      '@jridgewell/sourcemap-codec': 1.4.15
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
@@ -7164,6 +7580,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
     dev: true
 
   /@svgr/babel-plugin-remove-jsx-attribute@8.0.0(@babel/core@7.22.10):
@@ -7172,6 +7589,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
     dev: true
 
@@ -7182,6 +7600,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
     dev: true
 
   /@svgr/babel-plugin-replace-jsx-attribute-value@6.5.1(@babel/core@7.22.10):
@@ -7190,6 +7609,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
     dev: true
 
@@ -7200,6 +7620,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
     dev: true
 
   /@svgr/babel-plugin-svg-em-dimensions@6.5.1(@babel/core@7.22.10):
@@ -7208,6 +7629,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
     dev: true
 
@@ -7218,6 +7640,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.10
+      '@babel/core': 7.22.10
     dev: true
 
   /@svgr/babel-plugin-transform-svg-component@6.5.1(@babel/core@7.22.10):
@@ -7226,6 +7649,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': 7.22.10
       '@babel/core': 7.22.10
     dev: true
 
@@ -7263,6 +7687,7 @@ packages:
     resolution: {integrity: sha512-1hnUxxjd83EAxbL4a0JDJoD3Dao3hmjvyvyEV8PzWmLK3B9m9NPlW7GKjFyoWE8nM7HnXzPcmmSyOW8yOddSXw==}
     engines: {node: '>=10'}
     dependencies:
+      '@babel/types': 7.22.10
       '@babel/types': 7.22.10
       entities: 4.5.0
     dev: true
@@ -7391,6 +7816,7 @@ packages:
     resolution: {integrity: sha512-J/e4QYz8wCXvPpiCaiKcJrtLo65px4nnfFVZ/0EKHoKnQ4nWdzXwGHOQLIePAJM+Ho4V9/mb4Nhw4v/08y98jQ==}
     dependencies:
       '@types/react': 18.2.20
+      '@types/react': 18.2.20
       immutable: 3.7.6
     dev: false
 
@@ -7431,6 +7857,7 @@ packages:
   /@types/hoist-non-react-statics@3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
+      '@types/react': 18.2.20
       '@types/react': 18.2.20
       hoist-non-react-statics: 3.3.2
     dev: false
@@ -7537,6 +7964,7 @@ packages:
     resolution: {integrity: sha512-BD3+c2d5gLPToD9urec1oWOBFh9QTfHvgkuD7uwomdEHUNGPimSIh6V/PpFrRbbyFJRzioWaohVbRdMu1PRKsw==}
     dependencies:
       '@types/draft-js': 0.11.12
+      '@types/react': 18.2.20
       '@types/react': 18.2.20
     dev: false
 
@@ -8137,6 +8565,7 @@ packages:
     requiresBuild: true
     dependencies:
       '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.22.10
       '@types/raf': 3.4.0
       core-js: 3.32.0
       raf: 3.4.1
@@ -8325,12 +8754,14 @@ packages:
     dependencies:
       '@types/cookie': 0.4.1
       '@types/node': 16.18.40
+      '@types/node': 16.18.40
       cookie: 0.4.2
     dev: false
 
   /core-js-compat@3.32.0:
     resolution: {integrity: sha512-7a9a3D1k4UCVKnLhrgALyFcP7YCsLOQIxPd0dKjf/6GuPcgyiGP70ewWdCGrSK7evyhymi0qO4EqCmSJofDeYw==}
     dependencies:
+      browserslist: 4.21.10
       browserslist: 4.21.10
     dev: true
 
@@ -8612,6 +9043,7 @@ packages:
     resolution: {integrity: sha512-UXJh6EKsHBTjopVqZBhFysQcoXSv/5yLONZvkQ5Kk3qbwiUYkdX17Xa1PT6U1ZWXGGfB1ey5L8dKMlFq2DO0Ag==}
     dependencies:
       d3-time: 1.1.0
+      d3-time: 1.1.0
     dev: false
 
   /d3-time-format@4.1.0:
@@ -8691,6 +9123,7 @@ packages:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
     dependencies:
+      '@babel/runtime': 7.22.10
       '@babel/runtime': 7.22.10
     dev: false
 
@@ -8795,6 +9228,7 @@ packages:
   /dom-helpers@3.4.0:
     resolution: {integrity: sha512-LnuPJ+dwqKDIyotW1VzmOZ5TONUN7CwkCR5hrgawTUbkBGYdeoNLZo6nNfGkCrjtE1nXXaj7iMMpDa8/d9WoIA==}
     dependencies:
+      '@babel/runtime': 7.22.10
       '@babel/runtime': 7.22.10
     dev: false
 
@@ -9171,12 +9605,15 @@ packages:
       eslint-plugin-import: 2.28.0(@typescript-eslint/parser@5.62.0)(eslint@8.47.0)
       glob-parent: 6.0.2
       resolve: 1.22.4
+      resolve: 1.22.4
     dev: true
 
   /eslint-import-resolver-node@0.3.9:
     resolution: {integrity: sha512-WFj2isz22JahUv+B788TlO3N6zL3nNJGU8CcZbPZvVEkBPaJdCV4vy5wyghty5ROFbCRnm132v8BScu5/1BQ8g==}
     dependencies:
       debug: 3.2.7
+      is-core-module: 2.13.0
+      resolve: 1.22.4
       is-core-module: 2.13.0
       resolve: 1.22.4
     transitivePeerDependencies:
@@ -9243,11 +9680,13 @@ packages:
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@5.62.0)(eslint-import-resolver-node@0.3.9)(eslint@8.47.0)
       has: 1.0.3
       is-core-module: 2.13.0
+      is-core-module: 2.13.0
       is-glob: 4.0.3
       minimatch: 3.1.2
       object.fromentries: 2.0.6
       object.groupby: 1.0.0
       object.values: 1.1.6
+      resolve: 1.22.4
       resolve: 1.22.4
       semver: 6.3.1
       tsconfig-paths: 3.14.2
@@ -9263,6 +9702,7 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
     dependencies:
+      '@babel/runtime': 7.22.10
       '@babel/runtime': 7.22.10
       aria-query: 5.3.0
       array-includes: 3.1.6
@@ -10442,6 +10882,7 @@ packages:
     hasBin: true
     dependencies:
       '@babel/parser': 7.22.10
+      '@babel/parser': 7.22.10
       '@jsdoc/salty': 0.2.5
       '@types/markdown-it': 12.2.3
       bluebird: 3.7.2
@@ -10523,6 +10964,7 @@ packages:
   /jspdf@2.5.1:
     resolution: {integrity: sha512-hXObxz7ZqoyhxET78+XR34Xu2qFGrJJ2I2bE5w4SM8eFaFEkW2xcGRVUss360fYelwRSid/jT078kbNvmoW0QA==}
     dependencies:
+      '@babel/runtime': 7.22.10
       '@babel/runtime': 7.22.10
       atob: 2.1.2
       btoa: 1.2.1
@@ -11153,6 +11595,7 @@ packages:
     dependencies:
       hosted-git-info: 2.8.9
       resolve: 1.22.4
+      resolve: 1.22.4
       semver: 5.7.2
       validate-npm-package-license: 3.0.4
 
@@ -11161,6 +11604,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       hosted-git-info: 4.1.0
+      is-core-module: 2.13.0
       is-core-module: 2.13.0
       semver: 7.5.4
       validate-npm-package-license: 3.0.4
@@ -11373,6 +11817,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       '@babel/code-frame': 7.22.10
+      '@babel/code-frame': 7.22.10
       error-ex: 1.3.2
       json-parse-even-better-errors: 2.3.1
       lines-and-columns: 1.2.4
@@ -11429,6 +11874,7 @@ packages:
     resolution: {integrity: sha512-Sz2Lkdxz6F2Pgnpi9U5Ng/WdWAUZxmHrNPoVlm3aAemxoy2Qy7LGjQg4uf8qKelDAUW94F4np3iH2YPf2qefcQ==}
     engines: {node: '>=10'}
     dependencies:
+      '@babel/runtime': 7.22.10
       '@babel/runtime': 7.22.10
     dev: false
 
@@ -12054,6 +12500,7 @@ packages:
       react: '*'
     dependencies:
       globe.gl: 2.29.0
+      globe.gl: 2.29.0
       prop-types: 15.8.1
       react: 18.2.0
       react-kapsule: 2.4.0(react@18.2.0)
@@ -12171,6 +12618,7 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.22.10
       '@types/hoist-non-react-statics': 3.3.1
       '@types/react': 18.2.20
       '@types/use-sync-external-store': 0.0.3
@@ -12203,12 +12651,14 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.22.10
       '@types/hoist-non-react-statics': 3.3.1
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-is: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
       redux: 4.2.1
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
@@ -12250,9 +12700,11 @@ packages:
   /react-table@7.8.0(react@18.2.0):
     resolution: {integrity: sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==}
     peerDependencies:
-      react: ^16.8.3 || ^17.0.0-0 || ^18.0.0
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react@18.2.0:
@@ -12314,6 +12766,7 @@ packages:
     resolution: {integrity: sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==}
     dependencies:
       '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.22.10
     dev: false
 
   /reflect.getprototypeof@1.0.3:
@@ -12346,6 +12799,7 @@ packages:
   /regenerator-runtime@0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
     dev: false
+    dev: false
 
   /regenerator-runtime@0.14.0:
     resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
@@ -12353,6 +12807,7 @@ packages:
   /regenerator-transform@0.15.2:
     resolution: {integrity: sha512-hfMp2BoF0qOk3uc5V20ALGDS2ddjQaLrdl7xrGXvAIow7qeWRM2VA2HuCHkUKk9slq3VwEwLNK3DFBqDfPGYtg==}
     dependencies:
+      '@babel/runtime': 7.22.10
       '@babel/runtime': 7.22.10
     dev: true
 
@@ -12416,6 +12871,7 @@ packages:
     hasBin: true
     dependencies:
       is-core-module: 2.13.0
+      is-core-module: 2.13.0
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
@@ -12423,6 +12879,7 @@ packages:
     resolution: {integrity: sha512-iMDbmAWtfU+MHpxt/I5iWI7cY6YVEZUQ3MBgPQ++XD1PELuJHIl82xBmObyP2KyQmkNB2dsqF7seoQQiAn5yDQ==}
     hasBin: true
     dependencies:
+      is-core-module: 2.13.0
       is-core-module: 2.13.0
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
@@ -12642,7 +13099,6 @@ packages:
   /stable@0.1.8:
     resolution: {integrity: sha512-ji9qxRnOVfcuLDySj9qzhGSEFVobyt1kIOSkj1qZzYLzq7Tos/oUUWvotUPQLlrsidqsK6tBH89Bc9kL5zHA6w==}
     deprecated: 'Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility'
-    dev: true
 
   /stackblur-canvas@2.6.0:
     resolution: {integrity: sha512-8S1aIA+UoF6erJYnglGPug6MaHYGo1Ot7h5fuXx4fUPvcvQfcdw2o/ppCse63+eZf8PPidSu4v1JnmEVtEDnpg==}
@@ -13350,6 +13806,7 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:
+      browserslist: 4.21.10
       browserslist: 4.21.10
       escalade: 3.1.1
       picocolors: 1.0.0
