@@ -3,7 +3,7 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function PieData({ data, COLORS, filedCount, LoadingGstr1 }) {
+function PieData({ data, COLORS, filedCount, loadingGstr1 }) {
 	function CenteredMetric({ centerX, centerY }) {
 		return (
 			<text
@@ -23,7 +23,7 @@ function PieData({ data, COLORS, filedCount, LoadingGstr1 }) {
 	}
 
 	return (
-		LoadingGstr1 ? <Placeholder type="circle" radius="100px" margin="20px 0px 20px 0px" />
+		loadingGstr1 ? <Placeholder type="circle" radius="100px" margin="20px 0px 20px 0px" />
 			: (
 				<div className={styles.pie_chart}>
 					<ResponsivePie

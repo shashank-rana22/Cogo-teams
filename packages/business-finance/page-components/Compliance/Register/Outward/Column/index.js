@@ -15,6 +15,7 @@ import styles from './styles.module.css';
 const PERCENTAGE_FACTOR = 100;
 const DECIMAL_UPTO_SECOND_PLACE = 2;
 const DEFAULT_AMOUNT = 0;
+const STATUS_KEYS = ['PROCESSING', 'UPLOAD_IN_PROGRESS', 'ERROR'];
 const column = (refresh, deleteId, statusId, uploadId) => {
 	const handleErrorReport = (errorReportFile) => {
 		if (errorReportFile !== 'ERROR') {
@@ -76,7 +77,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 							)}
 						</div>
 						<div style={{ marginTop: '7px' }}>
-							{['PROCESSING', 'UPLOAD_IN_PROGRESS', 'ERROR']?.includes(fileStatus) ? (
+							{STATUS_KEYS?.includes(fileStatus) ? (
 								<Tooltip
 									placement="top"
 									content={(
@@ -119,7 +120,7 @@ const column = (refresh, deleteId, statusId, uploadId) => {
 			accessor : ({ status }) => (
 				status && (
 					<div className={styles.enable_status}>
-						<Pill size="md" color={MAPPING_ENABLE_STATUS[status]}>{startCase(status.toLowerCase())}</Pill>
+						<Pill size="md" color={MAPPING_ENABLE_STATUS[status]}>{startCase(status?.toLowerCase())}</Pill>
 					</div>
 				)
 			),

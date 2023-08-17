@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import toastApiError from '../../commons/toastApiError.ts';
 
 const PAGE = 1;
-const useViewDataList = ({ id, docType, irnStatus, tradePartyGst, setShowDeleteModal, dontShowCheckbox }) => {
+const useViewDataList = ({ id, docType, irnStatus, tradePartyGst, setShowDeleteModal, isModalOnetime }) => {
 	const [page, setPage] = useState(PAGE);
 	const [{ data, loading }, listTrigger] = useRequestBf(
 		{
@@ -55,8 +55,8 @@ const useViewDataList = ({ id, docType, irnStatus, tradePartyGst, setShowDeleteM
 				},
 			});
 			refetch();
-			if (dontShowCheckbox) {
-				window.sessionStorage.setItem('isChecked', dontShowCheckbox);
+			if (isModalOnetime) {
+				window.sessionStorage.setItem('isChecked', isModalOnetime);
 			}
 			setShowDeleteModal(false);
 		} catch (error) {

@@ -9,8 +9,8 @@ function DeleteComfirmationModal({
 	outWardId = '',
 	showDeleteModal = false,
 	setShowDeleteModal = () => {},
-	setDontShowCheckbox = () => {},
-	dontShowCheckbox = false,
+	setIsModalOnetime = () => {},
+	isModalOnetime = false,
 }) {
 	return (
 		<Modal size="md" show={showDeleteModal} onClose={() => setShowDeleteModal(false)} placement="top">
@@ -29,9 +29,9 @@ function DeleteComfirmationModal({
 			<Modal.Footer>
 				<Checkbox
 					label="Don’t show this again"
-					checked={dontShowCheckbox}
+					checked={isModalOnetime}
 					onChange={() => {
-						setDontShowCheckbox(!dontShowCheckbox);
+						setIsModalOnetime(!isModalOnetime);
 					}}
 					style={{ marginRight: '285px' }}
 				/>

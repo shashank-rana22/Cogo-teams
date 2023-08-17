@@ -16,7 +16,7 @@ function Dashboard() {
 	const [year, setYear] = useState('');
 	const {
 		data, loading, Gstr1Data,
-		LoadingGstr1,
+		loadingGstr1,
 	} = useDashboard(year, lastThreeFinancialYears);
 	const {
 		totalUploaded,
@@ -40,12 +40,12 @@ function Dashboard() {
 							data={dataValue(filedCount, remainCount)}
 							COLORS={COLORS}
 							filedCount={filedCount}
-							LoadingGstr1={LoadingGstr1}
+							loadingGstr1={loadingGstr1}
 						/>
 						<div className={styles.data_show}>
 							Out of
 							{' '}
-							{LoadingGstr1 ? <Placeholder height="15px" width="80px" /> : totalCount}
+							{loadingGstr1 ? <Placeholder height="15px" width="80px" /> : totalCount}
 						</div>
 					</div>
 					<div className={styles.date_data}>
@@ -53,7 +53,7 @@ function Dashboard() {
 							<span className={styles.date_label}>Last Filed on :</span>
 							{' '}
 							<span className={styles.date_show}>
-								{LoadingGstr1 ? <Placeholder height="15px" width="80px" /> : formatDate({
+								{loadingGstr1 ? <Placeholder height="15px" width="80px" /> : formatDate({
 									date       : lastFiledDate,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 									formatType : 'date',
@@ -66,7 +66,7 @@ function Dashboard() {
 							{' '}
 							<span className={styles.date_due_show}>
 								{' '}
-								{ LoadingGstr1 ? <Placeholder height="15px" width="80px" /> : formatDate({
+								{ loadingGstr1 ? <Placeholder height="15px" width="80px" /> : formatDate({
 									date       : dueDate,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 									formatType : 'date',

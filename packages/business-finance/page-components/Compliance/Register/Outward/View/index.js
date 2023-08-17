@@ -22,7 +22,7 @@ function View() {
 	const [filters, setFilters] = useState({});
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [outWardId, setOutWardId] = useState(null);
-	const [dontShowCheckbox, setDontShowCheckbox] = useState(false);
+	const [isModalOnetime, setIsModalOnetime] = useState(false);
 	const { push, query } = useRouter();
 	const goBack = () => {
 		push(
@@ -39,7 +39,7 @@ function View() {
 		irnStatus     : filters?.irnStatus,
 		tradePartyGst : filters?.tradePartyGst,
 		setShowDeleteModal,
-		dontShowCheckbox,
+		isModalOnetime,
 	});
 
 	const { supplierName = '', suppGstIn = '', entity:entityCode = '', list, totalRecord } = data || {};
@@ -51,7 +51,6 @@ function View() {
 			showDeleteModal,
 			setShowDeleteModal,
 			setOutWardId,
-			dontShowCheckbox,
 			isChecked,
 		},
 	);
@@ -121,8 +120,8 @@ function View() {
 					setShowDeleteModal={setShowDeleteModal}
 					deleteInvoice={deleteInvoice}
 					outWardId={outWardId}
-					setDontShowCheckbox={setDontShowCheckbox}
-					dontShowCheckbox={dontShowCheckbox}
+					setIsModalOnetime={setIsModalOnetime}
+					isModalOnetime={isModalOnetime}
 				/>
 			)}
 
