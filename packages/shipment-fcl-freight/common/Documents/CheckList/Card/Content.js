@@ -58,10 +58,9 @@ function Content({
 		'bill_of_lading',
 	].includes(uploadedItem?.document_type);
 
-	const restrictBLDocumentCondition = (
-		(isHBLMBL && tradeType === 'export' && isSeaway && isEmpty(bl_details))
-		|| (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import' && isEmpty(do_details))
-	);
+	const isRestrictedExportBlDo = (isHBLMBL && tradeType === 'export' && isSeaway && isEmpty(bl_details));
+	const isRestrictedImportBlDo = (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import'
+	&& isEmpty(do_details));
 
 	const { document_type, state } = uploadedItem;
 
@@ -180,8 +179,9 @@ function Content({
 
 				{isChecked ? (
 					<div className={styles.action_container}>
-						{!restrictBLDocumentCondition
-							? (
+						{isRestrictedExportBlDo || isRestrictedImportBlDo
+							? null : (
+
 								<>
 									<Button
 										themeType="link"
@@ -196,7 +196,7 @@ function Content({
 										Download
 									</Button>
 								</>
-							) : null}
+							) }
 
 					</div>
 				) : <GetUploadButton />}
