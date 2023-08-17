@@ -60,7 +60,7 @@ function Content({
 
 	const restrictBLDocumentCondition = (
 		(isHBLMBL && tradeType === 'export' && isSeaway && isEmpty(bl_details))
-		|| (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import' && !isEmpty(do_details))
+		|| (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import' && isEmpty(do_details))
 	);
 
 	const { document_type, state } = uploadedItem;
