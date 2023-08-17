@@ -17,12 +17,12 @@ function useCreateUserInactiveStatus({
 
 	const updateUserStatus = async (data = {}) => {
 		try {
-			const { userId, status } = data || {};
+			const { userId } = data || {};
 
 			await trigger({
 				data: {
-					status,
 					agent_id: userId,
+					...data,
 				},
 			});
 

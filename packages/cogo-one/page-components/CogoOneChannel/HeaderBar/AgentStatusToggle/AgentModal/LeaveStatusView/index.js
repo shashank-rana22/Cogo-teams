@@ -35,7 +35,7 @@ function LeaveAgentModal({
 		if (!isAgentOnLeave) {
 			setOpenLeaveModal(agent_id);
 		} else {
-			updateUserStatus({ status: 'active', userId: agent_id, agentId: agent_id });
+			updateUserStatus({ status: 'active', userId: agent_id });
 		}
 	};
 

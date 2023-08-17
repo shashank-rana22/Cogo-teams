@@ -19,7 +19,7 @@ function InactiveModal({
 	updateUserStatus = () => {},
 	setOpenModal = () => {},
 	loading = false,
-	userId,
+	userId = '',
 }) {
 	const {
 		control = {},

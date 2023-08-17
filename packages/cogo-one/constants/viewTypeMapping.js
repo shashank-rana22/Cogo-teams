@@ -391,7 +391,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			bulk_auto_assign            : false,
 			claim_chats                 : false,
 			toggle_self_status          : false,
-			on_leave_status_toggle      : false,
+			on_leave_status_toggle      : true,
 			has_group_access            : true,
 			can_message_on_bot_session  : true,
 			has_permission_to_edit      : false,

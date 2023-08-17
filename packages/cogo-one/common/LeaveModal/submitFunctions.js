@@ -46,7 +46,6 @@ export const createSubmit = ({
 			formatType : 'dateTime',
 			separator  : ' ',
 		}),
-		agentId: userId || undefined,
 		reason,
 	});
 };
