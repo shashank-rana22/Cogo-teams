@@ -60,7 +60,7 @@ function Child({
 							<div
 								key={name}
 								className={cl`${styles.form_item} ${isSubControl && styles.sub_control}`}
-								style={{ width: `${flex}%` }}
+								style={{ width: `${flex}%`, marginBottom: '12px' }}
 							>
 								{newControl?.showTopLabelOnly ? (
 									<div className={styles.heading}>{newControl.label || lowerlabel}</div>
@@ -113,14 +113,14 @@ function Child({
 					return (
 						<div
 							className={styles.form_item}
-							style={{ width: `${flex}%` }}
+							style={{ width: `${flex}%`, marginBottom: isSubControl ? '12px' : '24px' }}
 							key={`create_form_${newControl.name}_${index}`}
 						>
-							{(showLabelOnce && !index && newControl.label && !isSubControl)
-							|| (!showLabelOnce && newControl.label && !isSubControl) ? (
+							{(showLabelOnce && !index && !isSubControl)
+							|| (!showLabelOnce && !isSubControl) ? (
 								<div className={styles.heading}>
 									{newControl.label || lowerlabel}
-									{newControl?.rules?.required ? (
+									{newControl?.rules?.required && (newControl.label || lowerlabel) ? (
 										<div className={styles.required_mark}>*</div>
 									) : null}
 								</div>
@@ -140,9 +140,12 @@ function Child({
 							{subLabel ? (
 								<div className={styles.sub_label}>{subLabel}</div>
 							) : null}
-							<div className={styles.error_message}>
-								{errorOriginal}
-							</div>
+
+							{errorOriginal ? (
+								<div className={styles.error_message}>
+									{errorOriginal}
+								</div>
+							) : null}
 						</div>
 					);
 				})}

@@ -32,7 +32,7 @@
 
 .heading {
 	display: flex;
-	margin-bottom: 12px;
+	height: 24px;
 	font-size: 12px;
 	font-weight: 600;
 	line-height: 14px;
@@ -42,7 +42,7 @@
 .add_button {
 	display: flex;
 	align-items: center;
-	margin-bottom: 12px;
+	margin-bottom: 32px;
 }
 
 .remove_button {
@@ -74,7 +74,6 @@
 .form_item {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 24px;
 
 	&.sub_control {
 		margin-bottom: 0;
@@ -86,9 +85,13 @@
 			border: none;
 		}
 
+		.ui_select_input_control {
+			font-size: 12px !important;
+		}
+
 		.ui_input_control {
 			padding: 4px 8px;
-			font-size: 14px !important;
+			font-size: 12px !important;
 			border: 1px solid #dedede;
 			border-radius: 4px;
 		}

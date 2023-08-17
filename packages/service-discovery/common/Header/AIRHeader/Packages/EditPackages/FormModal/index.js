@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
 import airControls from '../../../../../../page-components/SearchResults/configurations/air/form-controls';
+import Layout from '../../../../common/Layout';
 
-import Form from './Form';
 import Header from './Header';
+import styles from './styles.module.css';
 
 function FormModal({
 	control = () => {},
@@ -12,7 +13,7 @@ function FormModal({
 	setValue = () => {},
 	errors = {},
 }) {
-	const [activeTab, setActiveTab] = useState('local_rates');
+	const [activeTab, setActiveTab] = useState('by_gross');
 
 	const controls = airControls(activeTab);
 
@@ -20,14 +21,16 @@ function FormModal({
 		<div>
 			<Header activeTab={activeTab} setActiveTab={setActiveTab} />
 
-			<Form
-				controls={controls}
-				control={control}
-				handleSubmit={handleSubmit}
-				errors={errors}
-				watch={watch}
-				setValue={setValue}
-			/>
+			<div className={styles.form}>
+				<Layout
+					controls={controls}
+					control={control}
+					handleSubmit={handleSubmit}
+					errors={errors}
+					watch={watch}
+					setValue={setValue}
+				/>
+			</div>
 		</div>
 	);
 }

@@ -1,10 +1,10 @@
 import { cl } from '@cogoport/components';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 
-import getElementController from '../../../../../../../configs/getElementController';
-import getErrorMessage from '../../../../../../../configs/getErrorMessage';
-import getOptions from '../../../../../../../page-components/SearchResults/utils/getOptions';
-import FieldArray from '../../../../../../FieldArray';
+import getElementController from '../../../../configs/getElementController';
+import getErrorMessage from '../../../../configs/getErrorMessage';
+import getOptions from '../../../../page-components/SearchResults/utils/getOptions';
+import FieldArray from '../../../FieldArray';
 
 import styles from './styles.module.css';
 
@@ -12,7 +12,7 @@ const DEFAULT_SPAN = 12;
 const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 1;
 
-function Form({
+function Layout({
 	controls = [],
 	control = () => {},
 	watch = () => {},
@@ -51,12 +51,12 @@ function Form({
 							<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
 								{newControl?.boldLabel || label || ''}
 								{' '}
-								{newControl?.rules?.required ? (
+								{newControl?.rules?.required && (label || newControl?.boldLabel) ? (
 									<div className={styles.required_mark}>*</div>
 								) : null}
 							</div>
 
-							<Form
+							<Layout
 								key={`${name}_${label}`}
 								controls={innerControls}
 								control={control}
@@ -95,12 +95,16 @@ function Form({
 				});
 
 				return (
-					<div key={`${name}_${label}`} className={styles.form_item} style={{ width: `${flex}%` }}>
+					<div
+						key={`${name}_${label}`}
+						className={styles.form_item}
+						style={{ width: `${flex}%`, marginBottom: isSubControl ? '12px' : '24px' }}
+					>
 						{isSubControl ? null : (
 							<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
 								{newControl?.boldLabel || label || ''}
 								{' '}
-								{newControl?.rules?.required ? (
+								{newControl?.rules?.required && (label || newControl?.boldLabel) ? (
 									<div className={styles.required_mark}>*</div>
 								) : null}
 							</div>
@@ -125,4 +129,4 @@ function Form({
 	);
 }
 
-export default Form;
+export default Layout;

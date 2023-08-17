@@ -17,7 +17,7 @@ function Header({
 }) {
 	return (
 		<div className={styles.container}>
-			<span className={styles.heading}>Cargo Details</span>
+			<div className={styles.heading}>Cargo Details</div>
 
 			<div className={styles.tabs}>
 				<Tabs
@@ -29,9 +29,7 @@ function Header({
 						const { label = '' } = value;
 
 						return (
-							<TabPanel key={key} name={key} title={label}>
-								<div>This is local search</div>
-							</TabPanel>
+							<TabPanel key={key} name={key} title={label} />
 						);
 					})}
 				</Tabs>

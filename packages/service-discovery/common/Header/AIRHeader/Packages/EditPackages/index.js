@@ -10,7 +10,7 @@ import FormModal from './FormModal';
 import styles from './styles.module.css';
 
 const SERVICE_KEY = 'search_type';
-const SERVICE = 'fcl_freight';
+const SERVICE = 'air_freight';
 
 function EditPackages({
 	show = false,
