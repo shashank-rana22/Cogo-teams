@@ -4,6 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
 import controls from '../utils/controls';
@@ -24,6 +25,7 @@ function useCreateVendorContact({
 		formState: { errors },
 		handleSubmit,
 		getValues,
+		setValue,
 	} = useForm();
 
 	const isUpdateAction = !isEmpty(contact_details);
@@ -67,6 +69,33 @@ function useCreateVendorContact({
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
+
+	useEffect(() => {
+		const {
+			contact_details: contactDetails = {},
+		} = vendorInformation;
+
+		const mapping = {
+			mobile_number: {
+				number: contactDetails?.mobile_number?.number
+								|| contactDetails?.mobile_number || undefined,
+				country_code: contactDetails?.mobile_number?.country_code
+								|| contactDetails?.mobile_country_code || undefined,
+			},
+			email    : contactDetails?.email || undefined,
+			name     : contactDetails?.name || undefined,
+			poc_role : contactDetails?.poc_role || undefined,
+		};
+
+		controls.forEach((field) => {
+			if (field.name === 'contact_proof_url') {
+				setValue(`${field.name}`, contactDetails?.[field.name]?.finalUrl
+						|| contact_details?.[field.name] || undefined);
+			} else {
+				setValue(`${field.name}`, mapping[field.name]);
+			}
+		});
+	}, [setValue, contact_details, vendorInformation]);
 
 	return {
 		fields: controls,

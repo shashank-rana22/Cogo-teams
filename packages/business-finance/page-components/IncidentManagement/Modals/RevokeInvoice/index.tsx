@@ -3,15 +3,15 @@ import { IcMEyeopen } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useGetRevokeInvoiceData from '../../apisModal/useGetRevokeInvoiceData';
+import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
 import styles from './style.module.css';
 
 function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
-	const { data = {} } = row || {};
-	const { revokeInvoiceRequest = {} } = data;
-	const { agreementNumber, documentUrls, agreementDate, invoiceNumber } = revokeInvoiceRequest;
-	const agreementDocument = (documentUrls || [])[0];
+	const { data: { revokeInvoiceRequest = {} } } = row || {};
+	const { documentUrls = [], invoiceNumber = '' } = revokeInvoiceRequest;
+	const agreementDocument = documentUrls[0] || '';
 	const [showModal, setShowModal] = useState(false);
 	const [remarks, setRemarks] = useState(remark);
 	const [reqRevokeInvoiceRequest, setReqRevokeInvoiceRequest] = useState(revokeInvoiceRequest);
@@ -37,35 +37,17 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 				>
 					<Modal.Header title="Revoke Invoice" />
 					<Modal.Body>
-						<div className={styles.flex}>
-							<div className={styles.value_data}>
-								<div className={styles.label_value}>
-									Agreement Number
-								</div>
-								<div className={styles.date_value}>
-									#
-									{agreementNumber || '-'}
-								</div>
-							</div>
-							<div className={styles.value_data}>
-								<div className={styles.label_value}>
-									Agreement Date
-								</div>
-								<div className={styles.date_value}>
-									{(new Date(agreementDate)).toDateString() || '-'}
-								</div>
-							</div>
-							<div className={styles.value_data}>
-								<div className={styles.label_value}>
-									Invoice Number
-								</div>
-								<div className={styles.date_value}>
-									{invoiceNumber || '-'}
-								</div>
-							</div>
+						{!isEditable && <ApproveAndReject row={row} />}
 
+						<div>
+							<div className={styles.label_flex}>
+								Invoice Number
+							</div>
+							<div className={styles.date_value}>
+								{invoiceNumber || '-'}
+							</div>
 						</div>
-						<div className={styles.document_flex}>
+						<div className={styles.label_flex}>
 							<div className={styles.document}>
 								Document -
 							</div>

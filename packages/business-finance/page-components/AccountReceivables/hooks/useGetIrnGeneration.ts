@@ -1,14 +1,19 @@
 import { Toast } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 interface IrnGenerationProps {
 	id?: string,
 	refetch?: Function
+	entityCode: string
+
 }
 
-const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
+const useGetIrnGeneration = ({ id, refetch, entityCode }: IrnGenerationProps) => {
 	const { profile = {} } = useSelector((state) => state || {});
+
+	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
 	const { user = {} } = profile;
 
@@ -22,6 +27,7 @@ const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
 			url     : `/sales/invoice/${id}/irn-generate`,
 			method  : 'post',
 			authKey : 'post_sales_invoice_by_id_irn_generate',
+			data    : {},
 		},
 		{ manual: true },
 	);
@@ -52,11 +58,15 @@ const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
 
 	const generateIrn = async () => {
 		try {
-			const resp = await generateIrnTrigger({ data: {} });
+			const resp = await generateIrnTrigger({
+				params: {
+					updatedBy: userId,
+				},
+			});
 			if (resp.status === 200) {
-				Toast.success('IRN Generated Successfully');
+				Toast.success(`${irnLabel} Generated Successfully`);
 			} else {
-				Toast.error('IRN Generated Failed');
+				Toast.error(`${irnLabel} Generated Failed`);
 			}
 			refetch();
 		} catch (err) {

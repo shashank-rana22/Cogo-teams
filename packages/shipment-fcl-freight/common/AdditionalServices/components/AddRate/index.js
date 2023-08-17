@@ -1,7 +1,7 @@
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
@@ -24,17 +24,18 @@ const SHOW_REMARKS_STATUS = [
 ];
 
 function AddRate({
-	item,
-	setAddRate,
-	status,
+	item = {},
+	setAddRate = () => {},
+	status = {},
 	setAddSellPrice = () => {},
-	refetch,
+	refetch = () => {},
 	onCancel = () => {},
-	filters,
+	filters = {},
 	setShowChargeCodes = () => {},
 	source = '',
 	isSeller = false,
 	task = {},
+	refetchServices = () => {},
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setSecondStep] = useState(false);
@@ -42,6 +43,7 @@ function AddRate({
 	const refetchForUpdateSubService = () => {
 		refetch();
 		onCancel();
+		refetchServices();
 	};
 
 	const updateResponse = useUpdateShipmentAdditionalService({
@@ -62,14 +64,7 @@ function AddRate({
 		handleSubmit,
 		control,
 		formState: { errors },
-		setValue,
-	} = useForm();
-
-	useEffect(() => {
-		['currency', 'quantity', 'unit', 'price', 'alias', 'buy_price'].forEach((key) => {
-			setValue(key, item?.[key]);
-		});
-	}, [item, setValue]);
+	} = useForm({ defaultValues: item });
 
 	const afterAddRate = () => {
 		setAddRate(false);
@@ -89,9 +84,9 @@ function AddRate({
 	const { handleAddSellPrice: apiTriggerUpdate } = useUpdateShipmentAdditionalService({ refetch: afterAddRate });
 
 	const onAddRate = (data) => {
-		const payload = getPayload(data, item, preProps, filters, billToCustomer);
+		const payload = getPayload({ data, item, preProps, filters, billToCustomer, whoIsAddingRate });
 
-		if (preProps.api === '/create_shipment_additional_service') {
+		if (preProps?.api === '/create_shipment_additional_service') {
 			apiTriggerCreate(payload);
 		} else {
 			apiTriggerUpdate(payload);

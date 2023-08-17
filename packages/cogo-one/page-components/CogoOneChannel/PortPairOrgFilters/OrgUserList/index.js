@@ -66,7 +66,7 @@ function OrgUsersList({
 				countryCode,
 				mobile_no,
 			},
-			activeTab: 'message',
+			tab: 'message',
 		}));
 		setSendBulkTemplates(false);
 		setListServiceProviders([]);

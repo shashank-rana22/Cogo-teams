@@ -1,7 +1,6 @@
 import { Button, Modal, Select } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateCurrency from '../../../../../../../../../hooks/useUpdateCurrency';
@@ -9,20 +8,19 @@ import useUpdateCurrency from '../../../../../../../../../hooks/useUpdateCurrenc
 import styles from './styles.module.css';
 
 function ChangeCurrency({
-	isChangeCurrency = false,
-	setIsChangeCurrency = () => {},
+	show = false,
+	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
-	const onClose = () => {
-		setIsChangeCurrency(false);
-	};
-	const [value, setValue] = useState('');
-
 	const geo = getGeoConstants();
 
-	const currencyOptionsOld =	GLOBAL_CONSTANTS.options.freight_invoice_currency?.[
-		invoice?.country_code || geo.country.currency.code
+	const { id, shipment_id, invoice_currency, country_code } = invoice || {};
+
+	const [value, setValue] = useState(invoice_currency);
+
+	const currencyOptionsOld = GLOBAL_CONSTANTS.options.freight_invoice_currency?.[
+		country_code || geo.country.currency.code
 	] || GLOBAL_CONSTANTS.options.freight_invoice_currency.OTHERS;
 
 	const currencyOptions = currencyOptionsOld.map((item) => ({
@@ -30,57 +28,55 @@ function ChangeCurrency({
 		value : item,
 	}));
 
-	const payload = {
-		id               : invoice?.id,
-		invoice_currency : value,
-		shipment_id      : invoice.shipment_id,
-	};
+	const isCurrencyChanged = value !== invoice_currency;
 
 	const refetchAfterCall = () => {
-		if (onClose) {
-			onClose();
-		}
+		onClose();
 		refetch();
 	};
 
 	const { onCreate, loading } = useUpdateCurrency({
 		refetch  : refetchAfterCall,
-		currency : invoice?.invoice_currency,
+		currency : invoice_currency,
 	});
 
 	return (
 		<Modal
 			className={styles.form}
-			show={isChangeCurrency}
+			show={show}
 			closeOnOuterClick={false}
 			onClose={onClose}
 		>
 			<Modal.Header title="CHANGE CURRENCY" />
+
 			<Modal.Body>
-				<div>Select Currency</div>
+				<label>Select Currency</label>
 				<Select
 					value={value}
 					onChange={setValue}
 					placeholder="Select Currency"
 					options={currencyOptions}
-					size="md"
 					className={styles.select_div}
+					size="sm"
 				/>
 			</Modal.Body>
+
 			<Modal.Footer className={styles.button_div}>
 				<Button
-					size="md"
 					themeType="secondary"
-					onClick={() => setIsChangeCurrency(false)}
+					onClick={onClose}
 					disabled={loading}
 				>
 					Cancel
 				</Button>
+
 				<Button
-					size="md"
-					themeType="primary"
-					onClick={() => onCreate(payload)}
-					disabled={loading || isEmpty(value)}
+					onClick={() => onCreate({
+						id,
+						invoice_currency: value,
+						shipment_id,
+					})}
+					disabled={loading || !isCurrencyChanged}
 				>
 					Confirm
 				</Button>

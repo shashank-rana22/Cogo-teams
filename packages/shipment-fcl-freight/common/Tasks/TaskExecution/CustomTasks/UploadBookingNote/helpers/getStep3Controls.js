@@ -40,7 +40,7 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 				type    : 'select',
 				options : currencyCodeOptions,
 				size    : 'sm',
-				span    : 1,
+				span    : 2,
 			},
 			{
 				label : 'Rate',
@@ -69,7 +69,7 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 				type   : 'static',
 				name   : 'total',
 				size   : 'sm',
-				span   : 2,
+				span   : 1,
 				render : (item) => <p>{item?.total}</p>,
 			},
 		],

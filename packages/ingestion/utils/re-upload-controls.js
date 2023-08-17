@@ -15,6 +15,7 @@ const reUploadControls = [
 		rules       : { required: 'File is Required' },
 		uploadType  : 'aws',
 		accept      : '.csv',
+		component   : 'card',
 	},
 
 ];

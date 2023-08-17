@@ -13,7 +13,7 @@ function AddressListPopover({
 	checked = [],
 	setChecked = () => {},
 	loading = false,
-	setshowFilters = () => {},
+	setShowFilters = () => {},
 	policyForSelf = false,
 	setAddAddressModal = () => {},
 	setProsporerAddress = () => {},
@@ -36,7 +36,7 @@ function AddressListPopover({
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => setshowFilters(false)}
+						onClick={() => setShowFilters(false)}
 					>
 						<IcMCrossInCircle />
 					</Button>

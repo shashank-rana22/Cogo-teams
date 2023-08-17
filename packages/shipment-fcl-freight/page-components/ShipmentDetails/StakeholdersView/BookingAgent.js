@@ -1,20 +1,20 @@
-import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
+import { Tabs, TabPanel, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
+import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
-import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
-import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
+import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -25,13 +25,11 @@ import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
-const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
-const UNAUTHORIZED_STATUS_CODE = 403;
+const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement', 'can_edit_params'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
-	const router = useRouter();
-	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
+	const [activeTab, setActiveTab] = useState('overview');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
@@ -55,79 +53,21 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
-	useEffect(() => {
-		router.prefetch(router.asPath);
-	}, [router]);
-
-	if (isGettingShipment || getShipmentStatusCode === undefined) {
-		return (
-			<div className={styles.loader}>
-				Loading Shipment Data....
-				<Loader themeType="primary" className={styles.loader_icon} />
-			</div>
-		);
-	}
-
-	if (!shipment_data && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
-		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.section}>
-					<h2 className={styles.error}>Something Went Wrong!</h2>
-
-					<div className={styles.page}>We are looking into it.</div>
-
-					<Button
-						onClick={() => router.reload()}
-						className={styles.refresh}
-					>
-						<IcMRefresh />
-						{' '}
-						Refresh
-					</Button>
-				</div>
-			</div>
-		);
-	}
-
-	if (getShipmentStatusCode === UNAUTHORIZED_STATUS_CODE && getShipmentStatusCode !== undefined) {
-		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.page}>
-					You don&apos;t have permission to visit this page.
-					Please contact at +91 7208083747
-				</div>
-			</div>
-		);
-	}
-
-	if (!shipment_data) {
-		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.section}>
-					<h1 className={styles.error}>404</h1>
-
-					<div className={styles.page}>Ooops!!! The page you are looking for is not found</div>
-
-					<Button
-						onClick={() => router.reload()}
-						className={styles.refresh}
-					>
-						<IcMRefresh />
-						{' '}
-						Refresh
-					</Button>
-				</div>
-			</div>
-		);
-	}
-
 	return (
-		<ShipmentDetailContext.Provider value={contextValues}>
-			<div>
+		<ShipmentPageContainer
+			isGettingShipment={isGettingShipment}
+			shipmentStatusCode={getShipmentStatusCode}
+			shipmentData={shipment_data}
+		>
+			<ShipmentDetailContext.Provider value={contextValues}>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 
-					<RolloveDetails />
+					<RolloverDetails />
+
+					{shipment_data?.is_job_closed
+						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
+						: null}
 
 					<ShipmentChat />
 				</div>
@@ -159,6 +99,10 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 							<Tasks />
 						</TabPanel>
 
+						<TabPanel name="invoice" title="Sales Invoice">
+							<SalesInvoice />
+						</TabPanel>
+
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>
@@ -167,7 +111,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 							<ShipmentMails
 								source="cogo_rpa"
 								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={shipment_data?.serial_id}
+								pre_subject_text={shipment_data?.serial_id?.toString() || ''}
 							/>
 						</TabPanel>
 
@@ -180,8 +124,8 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 				{!isEmpty(rollover_containers) ? (
 					<RolloverActionModal rollover_containers={rollover_containers} />
 				) : null}
-			</div>
-		</ShipmentDetailContext.Provider>
+			</ShipmentDetailContext.Provider>
+		</ShipmentPageContainer>
 	);
 }
 

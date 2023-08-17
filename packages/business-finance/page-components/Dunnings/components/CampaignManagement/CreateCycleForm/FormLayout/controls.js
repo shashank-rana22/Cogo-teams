@@ -1,3 +1,4 @@
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
@@ -11,7 +12,8 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
 
 	const entityOptions = Object.keys(entityData).map((entity) => {
-		const isEligible = entityData[entity].feature_supported.includes('dunning');
+		const isEligible = ENTITY_FEATURE_MAPPING[entity].feature_supported.includes('dunning');
+
 		return ({
 			label    : `${entity} (${entityData[entity].currency})`,
 			name     : String(entity),

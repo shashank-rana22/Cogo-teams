@@ -3,10 +3,12 @@ import app_contract_management from './app-manage-contract-apis';
 import app_manage_rfq from './app-manage-rfq-apis';
 import app_settings from './app-settings';
 import athena_dashboard from './athena-apis';
+import authApis from './auth-apis';
 import bl_do from './bl-do-apis';
 import bl_do_collection_release from './bl_do-collection-release-apis';
 import bn_salvage from './bn-salvage-apis';
 import booking_desk from './booking-desk-apis';
+import centralised_customer_service from './centralised-customer-service-apis';
 import chakravyuh from './chakravyuh-apis';
 import chro from './chro';
 import coe_finance from './coe-finance-apis';
@@ -22,6 +24,7 @@ import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
 import ff_cost_booking from './ff-cost-booking-apis';
+import ftl_field_service_ops_apis from './ftl_field_service_ops_app_apis';
 import HRMS from './hrms-apis';
 import igm_desk from './igm-desk-apis';
 import igm_shipment from './igm-shipment-apis';
@@ -159,8 +162,11 @@ const apis = {
 	...saas_subscription,
 	...chakravyuh,
 	risk_management,
+	ftl_field_service_ops_apis,
 	...schedules,
 	igm_desk,
+	centralised_customer_service,
+	...authApis,
 };
 
 export default apis;

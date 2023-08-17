@@ -1,0 +1,28 @@
+.fields_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+
+	:global {
+		.ui_is_open {
+			word-break: break-word;
+			white-space: pre-wrap;
+		}
+	}
+}
+
+.item {
+	flex-basis: 48%;
+}
+
+.title {
+	margin: 12px 0 4px 4px;
+	font-size: 12px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 32px;
+}

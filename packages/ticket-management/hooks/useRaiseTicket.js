@@ -13,7 +13,7 @@ const getPayload = ({
 	Category       : '',
 	Subcategory    : '',
 	Priority       : priority,
-	Usertype       : 'ticket_user',
+	UserType       : 'ticket_user',
 	Data           : { Attachment: [finalUrl] || [], ...selectedServices },
 	Type           : issue_type,
 	Description    : additional_information,
@@ -21,7 +21,7 @@ const getPayload = ({
 	...additionalData,
 });
 
-const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo, setRefreshList }) => {
+const useRaiseTicket = ({ handleClose = () => {}, additionalInfo = [], setRefreshList = () => {} }) => {
 	const { profile } = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -77,9 +77,10 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo, setRefreshList }) 
 				Escalated : false,
 				Closed    : false,
 			}));
-			setShowRaiseTicket(false);
+
+			handleClose();
 		} catch (error) {
-			console.error(error?.response?.data);
+			Toast.error(error?.response?.data);
 		}
 	};
 

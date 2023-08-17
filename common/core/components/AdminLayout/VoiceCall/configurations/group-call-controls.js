@@ -9,20 +9,19 @@ export const ICON_MAPPING = {
 	transfer : IcMCalltransfer,
 };
 
-export const useGetControls = ({ localStateReducer }) => {
+export const useGetControls = () => {
 	const servetelAgentOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(), valueKey: 'user_id',
 	});
 
 	const controls = {
 		agent: {
-			name         : 'agent_id',
-			type         : 'select',
-			label        : 'Agent',
-			placeholder  : 'select agent',
+			name        : 'agent_id',
+			type        : 'select',
+			label       : 'Agent',
+			placeholder : 'select agent',
 			...servetelAgentOptions,
-			rules        : { required: 'this is required' },
-			handleChange : (obj) => localStateReducer({ latestAddedAgentName: obj?.name }),
+			rules       : { required: 'this is required' },
 		},
 		actionType: {
 			name    : 'live_call_action_type',
@@ -31,7 +30,7 @@ export const useGetControls = ({ localStateReducer }) => {
 			options : [
 				{ label: 'monitor', value: 'monitor', icon: IcMCallmonitor },
 				{ label: 'whisper', value: 'whisper', icon: IcMCallwhisper },
-				{ label: 'barge', value: 'barge', icon: IcMCallbarge },
+				{ label: 'Add to Call', value: 'barge', icon: IcMCallbarge },
 				{ label: 'transfer', value: 'transfer', icon: IcMCalltransfer },
 			],
 		},

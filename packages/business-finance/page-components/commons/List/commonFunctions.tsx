@@ -13,7 +13,7 @@ const getFormattedAmount = ({ amount, currency }) => (
 		options: {
 			style                 : 'currency',
 			currencyDisplay       : 'code',
-			maximumFractionDigits : 4,
+			maximumFractionDigits : 2,
 		},
 	})
 );

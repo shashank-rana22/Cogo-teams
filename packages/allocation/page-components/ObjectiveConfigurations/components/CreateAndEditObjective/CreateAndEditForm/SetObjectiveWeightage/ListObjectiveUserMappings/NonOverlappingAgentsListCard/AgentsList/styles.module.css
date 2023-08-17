@@ -1,0 +1,14 @@
+.agents_list {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 20px 0;
+}
+
+.list_item {
+	flex-basis: 50%;
+	margin: 4px 0;
+}
+
+.agent {
+	margin: 0;
+}

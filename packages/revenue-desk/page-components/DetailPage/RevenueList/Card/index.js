@@ -28,7 +28,7 @@ function Card({ item }) {
 						: null}
 				</div>
 				<div className={styles.created_at}>
-					Created At:
+					SID Created At :
 					{' '}
 					{format(item?.created_at, 'dd MMM YYYY')}
 				</div>
@@ -36,9 +36,12 @@ function Card({ item }) {
 			</div>
 			<div className={styles.body_section}>
 				<div className={styles.body_name}>
-
+					<Tooltip content={item?.service_provider_id?.business_name}>
+						<div className={styles.detail_name}>
+							{item?.service_provider_id?.business_name}
+						</div>
+					</Tooltip>
 					<Tooltip content={item?.shipping_line_id?.business_name}>
-
 						<div className={styles.detail_name}>
 							{item?.shipping_line_id?.business_name}
 						</div>

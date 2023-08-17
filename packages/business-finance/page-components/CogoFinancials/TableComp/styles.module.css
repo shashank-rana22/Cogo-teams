@@ -1,0 +1,10 @@
+.table {
+	padding: 12px;
+	margin-top: 12px;
+	background-color: #fff;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}

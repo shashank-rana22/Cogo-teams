@@ -6,7 +6,7 @@ const MAX_DATE_LIMIT = 31;
 const MAX_CONSIGNMENT_VALUE = 400000000;
 
 const INCO_TERMS = Object.entries(GLOBAL_CONSTANTS.options.inco_term)
-	.forEach(([key, value]) => ({ label: value.label, value: key }));
+	.map(([key, value]) => ({ label: value.label, value: key.toUpperCase() }));
 
 export const cargoControls = ({ insuranceDetails = {} }) => [
 	{

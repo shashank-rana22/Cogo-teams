@@ -24,6 +24,7 @@ function ProfileDetails({
 	setActiveTab = () => {},
 	formattedMessageData = {},
 	orgId = '',
+	mailProps = {},
 }) {
 	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
 
@@ -38,7 +39,7 @@ function ProfileDetails({
 		loading,
 		ORG_PAGE_URL = '',
 		disableQuickActions, hideCpButton, getOrgDetails,
-	} = useCheckChannelPartner({ orgId, activeCardId, activeTab });
+	} = useCheckChannelPartner({ orgId, activeCardId, activeTab, formattedMessageData });
 
 	const {
 		documents_count = 0,
@@ -91,6 +92,7 @@ function ProfileDetails({
 						firestore={firestore}
 						userId={userId}
 						setActiveTab={setActiveTab}
+						mailProps={mailProps}
 					/>
 				)}
 			</div>

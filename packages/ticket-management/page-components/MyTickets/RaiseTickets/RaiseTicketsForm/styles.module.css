@@ -1,0 +1,37 @@
+.label {
+	display: flex;
+	align-items: center;
+}
+
+.sub_label {
+	margin-bottom: 8px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.info_label {
+	margin: 0 0 8px 8px;
+	font-size: 10px;
+	color: #4f4f4f;
+}
+
+.field {
+	padding-block: 12px;
+	border-bottom: 1px solid #e0e0e0;
+
+	&:last-child {
+		border-bottom: 0;
+	}
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
+.error {
+	margin-top: 4px;
+	font-size: 12px;
+	color: #f33;
+}
