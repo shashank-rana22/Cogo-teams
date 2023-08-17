@@ -52,7 +52,6 @@ export const useStakeholderCheck = () => {
 				geo.uuid.vietnam_business_heads, geo.uuid.business_heads],
 			stakeholder: 'superadmin',
 		},
-
 	];
 
 	const matchingStakeholders = stakeholderMap
