@@ -1,11 +1,12 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCError } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import VerticleLine from '../VerticleLine';
+import { GenerateFreightCertificate } from '../../../Tasks/TaskExecution/CustomTasks';
+import VerticalLine from '../VerticleLine';
 
 import PrintDocument from './PrintDocument';
 import ReviewSiDocument from './ReviewSiDocument';
@@ -44,8 +45,18 @@ function Content({
 }) {
 	const [siReviewState, setSiReviewState] = useState(false);
 	const [printDoc, setPrintDoc] = useState(false);
+	const [updateFreightCertificate, setUpdateFreightCertificate] = useState(false);
 
 	const { data:bl_data } = uploadedItem || {};
+	// if (uploadedItem?.document_type === 'freight_certificate') {
+	// 	console.log({ uploadedItem });
+	// 	taskList?.map((task) => {
+	// 		if (task?.label?.includes('Certificate')) {
+	// 			console.log({ task });
+	// 		}
+	// 		return null;
+	// 	});
+	// }
 
 	const tradeType = primary_service?.trade_type;
 
@@ -94,7 +105,7 @@ function Content({
 
 	return (
 		<div className={styles.single_item}>
-			<VerticleLine
+			<VerticalLine
 				checked={isChecked}
 				isLast={taskList.length === idx + INCREMENT_BY_ONE}
 			/>
@@ -148,7 +159,7 @@ function Content({
 							{receivedViaEmail && (
 								<div className={styles.message_text}>
 									<IcCError width={14} height={14} />
-									Document recieved - Please confirm
+									Document received - Please confirm
 								</div>
 							)}
 
@@ -174,6 +185,16 @@ function Content({
 							Print
 						</Button>
 					)}
+
+				{docType === 'freight_certificate' && document_type === 'freight_certificate' && (
+					<Button
+						themeType="link"
+						onClick={() => setUpdateFreightCertificate(true)}
+						disabled={uploadedItem?.state === 'document_rejected'}
+					>
+						Update
+					</Button>
+				)}
 
 				{isChecked ? (
 					<div className={styles.action_container}>
@@ -218,6 +239,21 @@ function Content({
 					setShow={setPrintDoc}
 				/>
 			) : null}
+
+			<Modal
+				size="xl"
+				show={updateFreightCertificate}
+				onClose={() => setUpdateFreightCertificate(false)}
+			>
+				<Modal.Header title="Update Freight Certificate" />
+				<Modal.Body>
+					<GenerateFreightCertificate
+						task={taskList?.filter((task) => task?.document_type === document_type)}
+						refetch={shipmentDocumentRefetch}
+						onCancel={() => setUpdateFreightCertificate(false)}
+					/>
+				</Modal.Body>
+			</Modal>
 
 		</div>
 	);
