@@ -19,6 +19,7 @@ function InactiveModal({
 	updateUserStatus = () => {},
 	setOpenModal = () => {},
 	loading = false,
+	userId,
 }) {
 	const {
 		control = {},
@@ -152,6 +153,7 @@ function InactiveModal({
 						onClick={() => createSubmit({
 							watch,
 							updateUserStatus,
+							userId,
 						})}
 					>
 						Apply

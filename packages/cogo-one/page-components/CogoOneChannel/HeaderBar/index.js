@@ -34,8 +34,8 @@ function HeaderBar({
 
 				{team_agents_status_view ? (
 					<LeaveStatusView
-						firestore={firestore}
 						viewType={viewType}
+						firestore={firestore}
 					/>
 				) : null}
 

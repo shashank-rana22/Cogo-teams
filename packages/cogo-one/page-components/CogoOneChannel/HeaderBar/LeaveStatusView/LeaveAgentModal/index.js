@@ -2,10 +2,11 @@ import { Modal, Input, Pagination, Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-import React from 'react';
+import React, { useState } from 'react';
 
+import LeaveModal from '../../../../../common/LeaveModal';
+import useCreateUserInactiveStatus from '../../../../../hooks/useCreateUserInactiveStatus';
 import useListAgentStatus from '../../../../../hooks/useListAgentStatus';
-import useUpdateAgentPreference from '../../../../../hooks/useUpdateAgentPreference';
 import getCommonAgentType from '../../../../../utils/getCommonAgentType';
 
 import styles from './styles.module.css';
@@ -13,7 +14,10 @@ import styles from './styles.module.css';
 function LeaveAgentModal({
 	setShowLeaveAgentModal = () => {},
 	viewType = '',
+	firestore = {},
 }) {
+	const [openLeaveModal, setOpenLeaveModal] = useState(false);
+
 	const {
 		isLoading = false,
 		listAgentStatus = {},
@@ -23,15 +27,24 @@ function LeaveAgentModal({
 		getAgentsStatus,
 	} = useListAgentStatus({ agentType: getCommonAgentType({ viewType }) });
 
-	const { createLoading, updateAgentPreference } = useUpdateAgentPreference({ getListChatAgents: getAgentsStatus });
-
 	const { list = [], page = 0, page_limit = 0, total_count = 0 } = listAgentStatus || {};
 
-	const onToggle = ({ status, agent_id }) => {
-		const updated_status = status === 'on_leave'
-			? 'active' : 'on_leave';
+	const {
+		loading: statusLoading = false,
+		updateUserStatus = () => {},
+	} = useCreateUserInactiveStatus({
+		fetchworkPrefernce : getAgentsStatus,
+		setOpenModal       : setOpenLeaveModal,
+		firestore,
+	});
 
-		updateAgentPreference(agent_id, updated_status);
+	const onChangeToggle = ({ status, agent_id }) => {
+		const isAgentOnLeave = status === 'on_leave';
+		if (!isAgentOnLeave) {
+			setOpenLeaveModal(agent_id);
+		} else {
+			updateUserStatus({ status: 'active', userId: agent_id, agentId: agent_id });
+		}
 	};
 
 	return (
@@ -67,6 +80,7 @@ function LeaveAgentModal({
 							src={GLOBAL_CONSTANTS.image_url.cargo_insurance_loader}
 							height={210}
 							width={210}
+							alt="loader"
 						/>
 					) : list.map((itm) => {
 						const { id = '', name = '', status = '', agent_id = '' } = itm;
@@ -85,8 +99,8 @@ function LeaveAgentModal({
 										size="md"
 										checked={status !== 'on_leave'}
 										value={status}
-										onChange={() => onToggle({ agent_id, status })}
-										disabled={createLoading}
+										onChange={() => onChangeToggle({ agent_id, status })}
+										disabled={statusLoading}
 										className={styles.toggle}
 									/>
 								</div>
@@ -105,6 +119,15 @@ function LeaveAgentModal({
 					/>
 				</div>
 			</Modal.Body>
+
+			{openLeaveModal && (
+				<LeaveModal
+					setOpenLeaveModal={setOpenLeaveModal}
+					loading={statusLoading}
+					userId={openLeaveModal}
+					updateUserStatus={updateUserStatus}
+				/>
+			)}
 		</Modal>
 	);
 }

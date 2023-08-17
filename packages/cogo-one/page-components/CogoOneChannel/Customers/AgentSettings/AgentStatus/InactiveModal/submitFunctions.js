@@ -56,6 +56,7 @@ const getValidityEndMapping = ({ date = '', ofTime = '' }) => {
 export const createSubmit = ({
 	watch = () => {},
 	updateUserStatus = () => {},
+	userId,
 }) => {
 	const {
 		reason = '',
@@ -72,6 +73,7 @@ export const createSubmit = ({
 	const validity_end = validityEndMapping[offlineStatus] || validityEndMapping.custom;
 
 	updateUserStatus({
+		userId,
 		status         : 'break',
 		validity_start : formatDate({
 			date       : validity_start,

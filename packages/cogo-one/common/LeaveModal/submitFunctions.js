@@ -18,6 +18,7 @@ export const getEndDayTime = () => new Date(
 export const createSubmit = ({
 	watch = () => {},
 	updateUserStatus = () => {},
+	userId = '',
 }) => {
 	const {
 		reason = '',
@@ -29,6 +30,7 @@ export const createSubmit = ({
 	const validity_end = date || '';
 
 	updateUserStatus({
+		userId,
 		status         : 'on_leave',
 		validity_start : formatDate({
 			date       : validity_start,
@@ -44,6 +46,7 @@ export const createSubmit = ({
 			formatType : 'dateTime',
 			separator  : ' ',
 		}),
+		agentId: userId || undefined,
 		reason,
 	});
 };

@@ -13,6 +13,7 @@ function LeaveModal({
 	updateUserStatus = () => {},
 	setOpenLeaveModal = () => {},
 	loading = false,
+	userId = '',
 }) {
 	const {
 		control,
@@ -78,6 +79,7 @@ function LeaveModal({
 							onClick={() => createSubmit({
 								watch,
 								updateUserStatus,
+								userId,
 							})}
 						>
 							Apply

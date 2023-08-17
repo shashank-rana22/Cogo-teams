@@ -1,15 +1,17 @@
 import { Toggle } from '@cogoport/components';
 import { useState } from 'react';
 
+import LeaveModal from '../../../../../common/LeaveModal';
 import useCreateUserInactiveStatus from '../../../../../hooks/useCreateUserInactiveStatus';
 
-import LeaveModal from './LeaveModal';
 import styles from './styles.module.css';
 
 function LeaveStatus({
 	agentStatus = {},
 	fetchworkPrefernce = () => {},
 	agentTimeline = () => {},
+	userId = '',
+	firestore = {},
 }) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
 
@@ -20,6 +22,7 @@ function LeaveStatus({
 		fetchworkPrefernce,
 		setOpenModal: setOpenLeaveModal,
 		agentTimeline,
+		firestore,
 	});
 
 	const { status = '' } = agentStatus || {};
@@ -30,7 +33,7 @@ function LeaveStatus({
 		if (!isAgentOnLeave) {
 			setOpenLeaveModal(true);
 		} else {
-			updateUserStatus({ status: 'active' });
+			updateUserStatus({ status: 'active', userId });
 		}
 	};
 
@@ -47,10 +50,10 @@ function LeaveStatus({
 
 			{openLeaveModal && (
 				<LeaveModal
-					fetchworkPrefernce={fetchworkPrefernce}
 					setOpenLeaveModal={setOpenLeaveModal}
 					loading={statusLoading}
 					updateUserStatus={updateUserStatus}
+					userId={userId}
 				/>
 			)}
 		</div>

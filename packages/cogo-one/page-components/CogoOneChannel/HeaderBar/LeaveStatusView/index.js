@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import LeaveAgentModal from './LeaveAgentModal';
 import styles from './styles.module.css';
 
-function LeaveStatusView({ viewType = '' }) {
+function LeaveStatusView({ viewType = '', firestore = {} }) {
 	const [showLeaveAgentModal, setShowLeaveAgentModal] = useState(false);
 
 	return (
@@ -15,6 +15,7 @@ function LeaveStatusView({ viewType = '' }) {
 				height={22}
 				width={22}
 				className={styles.leave_agent_icon}
+				alt="agent-status"
 				onClick={() => setShowLeaveAgentModal(true)}
 			/>
 
@@ -22,6 +23,7 @@ function LeaveStatusView({ viewType = '' }) {
 				<LeaveAgentModal
 					setShowLeaveAgentModal={setShowLeaveAgentModal}
 					viewType={viewType}
+					firestore={firestore}
 				/>
 			)}
 		</>

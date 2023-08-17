@@ -24,6 +24,8 @@ function AgentSettings({
 					agentStatus={agentStatus}
 					fetchworkPrefernce={fetchworkPrefernce}
 					agentTimeline={agentTimeline}
+					userId={userId}
+					firestore={firestore}
 				/>
 			)}
 

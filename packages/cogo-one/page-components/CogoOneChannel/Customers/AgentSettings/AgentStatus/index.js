@@ -26,9 +26,7 @@ function AgentStatus({
 		fetchworkPrefernce,
 		setOpenModal: setOpenInactiveModal,
 		agentTimeline,
-		userId,
 		firestore,
-		status,
 	});
 
 	const isAgentActive = status === 'active';
@@ -37,7 +35,7 @@ function AgentStatus({
 		if (isAgentActive) {
 			setOpenInactiveModal(true);
 		} else {
-			updateUserStatus({ status: 'active' });
+			updateUserStatus({ status: 'active', userId });
 		}
 	};
 
@@ -54,6 +52,7 @@ function AgentStatus({
 			status         : 'punched_in',
 			validity_start : todayDateTime,
 			validity_end   : todayDateTime,
+			userId,
 		};
 
 		updateUserStatus(data);
@@ -83,6 +82,7 @@ function AgentStatus({
 
 			{openInactiveModal && (
 				<InactiveModal
+					userId={userId}
 					fetchworkPrefernce={fetchworkPrefernce}
 					setOpenModal={setOpenInactiveModal}
 					loading={statusLoading}
