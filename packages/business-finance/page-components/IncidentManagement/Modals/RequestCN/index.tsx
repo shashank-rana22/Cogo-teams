@@ -7,7 +7,9 @@ import { useEffect, useState } from 'react';
 import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
+import StakeHolderTimeline from '../../StakeHolderTimeline';
 import StyledTable from '../../StyledTable';
+import stakeHolderTimeLineData from '../../utils/formatStakeHolderData';
 import { toTitleCase } from '../../utils/titleCase';
 
 import {
@@ -31,7 +33,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
-	const { data = {}, type } = row || {};
+	const { level3 = {}, level2 = {}, level1 = {}, data = {}, type } = row || {};
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const { creditNoteRequest, consolidatedCreditNoteRequest, organization } = data;
 	const {
@@ -370,6 +372,12 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								/>
 							</>
 						) }
+
+						{
+							(level1 || level2 || level3) && (
+								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
+							)
+						}
 
 					</Modal.Body>
 					{isEditable && (
