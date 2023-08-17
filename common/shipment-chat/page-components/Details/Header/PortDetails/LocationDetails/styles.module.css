@@ -30,7 +30,6 @@
 }
 
 .country {
-	margin: 0;
 	overflow: hidden;
 	font-weight: 400;
 	color: var(--color-secondary-greyscale-3);
