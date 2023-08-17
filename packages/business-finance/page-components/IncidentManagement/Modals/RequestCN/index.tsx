@@ -388,7 +388,9 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									size="md"
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length) || loading || isEmpty(creditNoteApprovalType)}
+									disabled={!(remarks.length) || loading
+										|| (isEmpty(creditNoteApprovalType)
+										&& isEmpty(approvalType))}
 									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
@@ -400,7 +402,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								<Button
 									size="md"
 									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length) || loading || isEmpty(creditNoteApprovalType)}
+									disabled={!(remarks.length) || loading || (isEmpty(creditNoteApprovalType)
+										&& isEmpty(approvalType))}
 									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');

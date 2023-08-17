@@ -1,13 +1,14 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 const useGetTdsData = ({
 	refetch, setShowTdsModal, row, id,
 	CNCategoryValues = { CNType: '', CNValues: '', remarks: '' },
 	remark,
 	isConsolidated = false,
-	creditNoteApprovalType,
+	creditNoteApprovalType = '',
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -38,9 +39,9 @@ const useGetTdsData = ({
 				data: {
 					[payloadKey]: {
 						...row.data?.[payloadKey],
-						creditNoteType: CNType,
+						creditNoteType         : CNType,
 						creditNoteRemarks,
-						creditNoteApprovalType,
+						creditNoteApprovalType : isEmpty(creditNoteApprovalType) ? null : creditNoteApprovalType,
 
 					},
 				},
