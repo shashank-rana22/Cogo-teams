@@ -17,7 +17,7 @@ const setCountries = async () => {
 	await getCountries(
 		fs.writeFileSync,
 		countriesPath,
-		'https://api.cogoport.com/',
+		'https://api-meteora1.dev.cogoport.io/',
 	);
 	// eslint-disable-next-line no-console
 	console.log('Successfully Built Countries ...');
