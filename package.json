@@ -15,7 +15,7 @@
     "deploy": "pnpm run build && (cd cogo-control && pm2 start pm2.config.js)",
     "build": "pnpm run pre-build && NODE_ENV=production NODE_OPTIONS=\"--max-old-space-size=6144\" turbo run build",
     "pre-build": "NODE_ENV=production node scripts/build-pages && node scripts/pre-build",
-    "dev": "npx husky install && node scripts/build-pages && node scripts/pre-build && turbo run dev",
+    "dev": "npx husky install && node scripts/build-pages && node scripts/pre-build && NODE_OPTIONS=\"--max-old-space-size=6144\" turbo run dev",
     "start": "turbo run start",
     "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
     "eslint_file": "eslint",
