@@ -11,7 +11,8 @@ const getParams = ({ agentType, page, query }) => ({
 		agent_type : agentType || undefined,
 	},
 	page,
-	page_limit: PAGE_LIMIT,
+	remove_inactive_agents : true,
+	page_limit             : PAGE_LIMIT,
 });
 
 function useListAgentStatus({ agentType = '' }) {
@@ -30,7 +31,7 @@ function useListAgentStatus({ agentType = '' }) {
 		{ manual: true },
 	);
 
-	const getAgentsStatus = useCallback(async () => {
+	const getListChatAgents = useCallback(async () => {
 		try {
 			await trigger({
 				params: getParams({
@@ -53,16 +54,16 @@ function useListAgentStatus({ agentType = '' }) {
 	}, [debounceSearchQuery]);
 
 	useEffect(() => {
-		getAgentsStatus();
-	}, [getAgentsStatus]);
+		getListChatAgents();
+	}, [getListChatAgents]);
 
 	return {
-		isLoading     : loading,
+		loading,
 		listAgentStatus,
 		setPagination : (val) => setParamsState((prev) => ({ ...prev, page: val })),
 		setSearch     : (val) => setParamsState((prev) => ({ ...prev, query: val })),
 		paramsState,
-		getAgentsStatus,
+		getListChatAgents,
 	};
 }
 

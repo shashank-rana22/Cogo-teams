@@ -1,10 +1,10 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 
 import AgentStatusToggle from './AgentStatusToggle';
 import FlashRevertLogs from './FlashRevertLogs';
-import LeaveStatusView from './LeaveStatusView';
 import PunchInOut from './PunchInOut';
 import styles from './styles.module.css';
 
@@ -20,10 +20,10 @@ function HeaderBar({
 }) {
 	const {
 		flash_revert_logs = false,
-		toggle_agent_status = false,
 		punch_in_out = false,
-		team_agents_status_view = false,
 	} = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions || {};
+
+	const configurationsToBeShown = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.configurations_to_be_shown;
 
 	return (
 		<>
@@ -32,18 +32,13 @@ function HeaderBar({
 					<FlashRevertLogs />
 				) : null}
 
-				{team_agents_status_view ? (
-					<LeaveStatusView
-						viewType={viewType}
-						firestore={firestore}
-					/>
-				) : null}
-
-				{toggle_agent_status ? (
+				{!isEmpty(configurationsToBeShown) && (
 					<AgentStatusToggle
 						firestore={firestore}
+						configurationsToBeShown={configurationsToBeShown}
+						viewType={viewType}
 					/>
-				) : null}
+				)}
 			</div>
 
 			{punch_in_out && (

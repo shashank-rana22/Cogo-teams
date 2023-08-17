@@ -115,6 +115,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
+		configurations_to_be_shown    : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
@@ -122,7 +123,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : false,
 			bulk_auto_assign            : false,
 			claim_chats                 : false,
-			toggle_agent_status         : false,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
 			has_group_access            : false,
@@ -134,7 +134,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-			team_agents_status_view     : false,
 		},
 	},
 	sales_admin: {
@@ -155,6 +154,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
+		configurations_to_be_shown    : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
@@ -162,7 +162,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : false,
 			bulk_auto_assign            : false,
 			claim_chats                 : false,
-			toggle_agent_status         : false,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
 			has_group_access            : false,
@@ -174,7 +173,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-			team_agents_status_view     : false,
 		},
 	},
 	support: {
@@ -196,6 +194,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
+		configurations_to_be_shown    : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
@@ -203,7 +202,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : false,
 			bulk_auto_assign            : false,
 			claim_chats                 : true,
-			toggle_agent_status         : false,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
 			has_group_access            : false,
@@ -215,7 +213,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : true,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-			team_agents_status_view     : false,
 		},
 	},
 	support_admin: {
@@ -235,6 +232,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
+		configurations_to_be_shown    : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
@@ -242,7 +240,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : false,
 			bulk_auto_assign            : false,
 			claim_chats                 : true,
-			toggle_agent_status         : false,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
 			has_group_access            : false,
@@ -254,7 +251,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-			team_agents_status_view     : false,
 		},
 	},
 	supply: {
@@ -278,6 +274,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['supply'],
 		mails_to_be_shown             : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
 		bulk_assign_features          : ['bulk_send_templates'],
+		configurations_to_be_shown    : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
@@ -285,7 +282,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : false,
 			bulk_auto_assign            : false,
 			claim_chats                 : true,
-			toggle_agent_status         : false,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
 			has_group_access            : true,
@@ -297,7 +293,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-			team_agents_status_view     : false,
 		},
 	},
 	supply_admin: {
@@ -320,6 +315,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['supply'],
 		mails_to_be_shown             : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
 		bulk_assign_features          : ['bulk_send_templates'],
+		configurations_to_be_shown    : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
@@ -327,7 +323,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : false,
 			bulk_auto_assign            : false,
 			claim_chats                 : false,
-			toggle_agent_status         : false,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
 			has_group_access            : true,
@@ -339,7 +334,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-			team_agents_status_view     : false,
 		},
 	},
 	shipment_specialist: {
@@ -354,6 +348,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
+		configurations_to_be_shown    : [],
 		accessible_new_communications : ['new_mail'],
 		permissions                   : {
 			auto_assign                 : false,
@@ -361,7 +356,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : false,
 			bulk_auto_assign            : false,
 			claim_chats                 : false,
-			toggle_agent_status         : true,
 			toggle_self_status          : false,
 			on_leave_status_toggle      : true,
 			has_group_access            : true,
@@ -374,7 +368,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : true,
 			customer_org_users          : true,
-			team_agents_status_view     : true,
 		},
 	},
 	shipment_specialist_admin: {
@@ -389,6 +382,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
+		configurations_to_be_shown    : ['agents_status'],
 		accessible_new_communications : ['new_mail'],
 		permissions                   : {
 			auto_assign                 : false,
@@ -396,9 +390,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : false,
 			bulk_auto_assign            : false,
 			claim_chats                 : false,
-			toggle_agent_status         : false,
 			toggle_self_status          : false,
-			on_leave_status_toggle      : true,
+			on_leave_status_toggle      : false,
 			has_group_access            : true,
 			can_message_on_bot_session  : true,
 			has_permission_to_edit      : false,
@@ -409,7 +402,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : true,
 			customer_org_users          : true,
-			team_agents_status_view     : true,
 		},
 	},
 	cogoone_admin: {
@@ -429,6 +421,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply', 'supply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : ['bulk_auto_assign', 'bulk_send_templates'],
+		configurations_to_be_shown    : ['lock_configuration', 'list_agents'],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],
 		permissions                   : {
 			auto_assign                 : true,
@@ -436,7 +429,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : true,
 			bulk_auto_assign            : true,
 			claim_chats                 : true,
-			toggle_agent_status         : true,
 			toggle_self_status          : false,
 			on_leave_status_toggle      : false,
 			has_group_access            : true,
@@ -448,7 +440,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-			team_agents_status_view     : false,
 		},
 	},
 	cp_support: {
@@ -467,6 +458,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
+		configurations_to_be_shown    : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
@@ -474,7 +466,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : false,
 			bulk_auto_assign            : false,
 			claim_chats                 : true,
-			toggle_agent_status         : false,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
 			has_group_access            : false,
@@ -486,7 +477,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : true,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-			team_agents_status_view     : false,
 		},
 	},
 	marketing: {
@@ -507,6 +497,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		show_relevant_templates       : ['quick_reply'],
 		mails_to_be_shown             : [],
 		bulk_assign_features          : [],
+		configurations_to_be_shown    : [],
 		accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 		permissions                   : {
 			auto_assign                 : false,
@@ -514,7 +505,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			organization_users_contacts : false,
 			bulk_auto_assign            : false,
 			claim_chats                 : false,
-			toggle_agent_status         : false,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
 			has_group_access            : false,
@@ -526,7 +516,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-			team_agents_status_view     : false,
 		},
 	},
 };

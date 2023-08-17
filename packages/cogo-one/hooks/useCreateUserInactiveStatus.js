@@ -17,10 +17,13 @@ function useCreateUserInactiveStatus({
 
 	const updateUserStatus = async (data = {}) => {
 		try {
-			const { userId } = data || {};
+			const { userId, status } = data || {};
 
 			await trigger({
-				data,
+				data: {
+					status,
+					agent_id: userId,
+				},
 			});
 
 			setOpenModal(false);
