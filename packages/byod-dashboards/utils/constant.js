@@ -130,17 +130,6 @@ export const SURRENDER_OPTIONS = [
 	},
 ];
 
-export const DEVICE_OPTIONS = [
-	{
-		label : 'Macbook',
-		value : 'macbook',
-	},
-	{
-		label : 'Windows',
-		value : 'windows',
-	},
-];
-
 export const VENDOR_NAME_OPTIONS = [
 	{
 		label : 'Micron Computers',

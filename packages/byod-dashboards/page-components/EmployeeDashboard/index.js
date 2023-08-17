@@ -2,26 +2,25 @@ import { Button } from '@cogoport/components';
 import {
 	useForm, InputController, SelectController, DatepickerController, UploadController,
 } from '@cogoport/forms';
-// import { useSelector } from '@cogoport/store';
+import { useSelector } from '@cogoport/store';
+import { startCase } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import EmployeeData from '../../common/EmployeeData';
 import Spinner from '../../common/Spinner';
 import useCreateInvoice from '../../hooks/useCreateDeviceDetail';
-import useGetEmployeeData from '../../hooks/useGetEmployeeData';
-// import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
-import { DEVICE_OPTIONS, VENDOR_NAME_OPTIONS } from '../../utils/constant';
+import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
+import { VENDOR_NAME_OPTIONS } from '../../utils/constant';
 
 import styles from './styles.module.css';
 
 function EmployeeDashboard() {
-	// const { user = {} } = useSelector((state) => state.profile);
+	const { user = {} } = useSelector((state) => state.profile);
 
-	// const { id: user_id } = user;
+	const { id: user_id } = user;
 
-	// const { loading : dataLoading } = useGetEmployeeDetails(user_id, true);
+	const { data : employeeData, loading : employeeDataLoading } = useGetEmployeeDetails(user_id, true);
 	const { createDeviceDetail, loading } = useCreateInvoice();
-	const { data : employeeData, loading : employeeDataLoading } = useGetEmployeeData();
 
 	const {
 		control,
@@ -29,11 +28,7 @@ function EmployeeDashboard() {
 		handleSubmit,
 		watch,
 		setValue,
-	} = useForm({
-		defaultValues: {
-			current_device_status: 'retain',
-		},
-	});
+	} = useForm();
 
 	const formValues = watch();
 
@@ -47,6 +42,14 @@ function EmployeeDashboard() {
 		setValue('vendor_name', '');
 		setValue('other_vendor_name', '');
 	}, [device_type, setValue]);
+
+	const { reimbursement_group_details = {} } = employeeData || {};
+	const { device_details = [] } = reimbursement_group_details || {};
+
+	const DEVICE_OPTIONS = (device_details || []).map((device_detail) => ({
+		label : startCase(device_detail?.device_type),
+		value : device_detail?.device_type,
+	}));
 
 	if (employeeDataLoading) return <div className={styles.spinner_container}><Spinner /></div>;
 
