@@ -54,6 +54,10 @@ function UpdateButton({
 
 	let disableTask = DISABLE_TASK_FOR_STAKEHOLDERS.includes(task?.assigned_stakeholder);
 
+	if (task?.task === 'upload_igm_document') {
+		disableTask = false;
+	}
+
 	if (task.task === 'upload_si'
 	&& task.status === 'pending'
 	&& primary_service?.trade_type === 'export') {

@@ -15,7 +15,7 @@ export const useStakeholderCheck = () => {
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
 		{ role_ids: geo.uuid.so_1_manager, stakeholder: 'booking_desk_manager' },
 		{ role_ids: geo.uuid.supplier_relations_head_id, stakeholder: 'supplier_relations_head' },
-		{ role_ids: geo.uuid.service_ops2_role_id, stakeholder: 'document_desk' },
+		{ role_ids: [...geo.uuid.service_ops2_role_id, geo.uuid.supply_fulfillment], stakeholder: 'document_desk' },
 		{ role_ids: geo.uuid.so_2_manager, stakeholder: 'document_desk_manager' },
 		{ role_ids: [...geo.uuid.sales_role, geo.uuid.entity_manager_id], stakeholder: 'sales_agent' },
 		{ role_ids: geo.uuid.costbooking_ops_role_ids, stakeholder: 'costbooking_ops' },
@@ -48,10 +48,11 @@ export const useStakeholderCheck = () => {
 		{ role_ids: geo.uuid.corporate_owner_id, stakeholder: 'corporate_owner' },
 		{ role_ids: geo.uuid.operation_manager, stakeholder: 'operation_manager' },
 		{ role_ids: [...geo.uuid.finance_head, geo.uuid.finops_credit_controller], stakeholder: 'finance_superadmin' },
+		{ role_ids: geo.uuid.so1_revenue_desk, stakeholder: 'so1_revenue_desk' },
 	];
 
 	const matchingStakeholders = stakeholderMap
-		.filter(({ role_ids: ids }) => (role_ids || []).some((item) => ids.includes(item)));
+		.filter(({ role_ids: ids }) => (role_ids || []).some((item) => ids?.includes(item)));
 
 	const activeStakeholder = !isEmpty(matchingStakeholders)
 		? matchingStakeholders[GLOBAL_CONSTANTS.zeroth_index].stakeholder : '';

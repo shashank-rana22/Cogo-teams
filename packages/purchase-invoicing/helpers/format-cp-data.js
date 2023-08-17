@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty, format } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 
 import { BILL_MAPPINGS, VERIFICATION_STATUS } from '../constants';
 
@@ -239,12 +240,13 @@ export const formatCollectionPartyPayload = (data, extraData) => {
                 extraData?.invoiceStatus === 'init' ? 'INITIATED' : extraData?.invoiceStatus?.toUpperCase(),
 			isProforma : formValues?.invoice_type === 'proforma_invoice',
 			isTaxable  : collectionPartyObj?.is_tax_applicable,
-			billDate   : format(
-				data.invoice_date || formValues?.invoice_date,
-				`${GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']} ${GLOBAL_CONSTANTS.formats.time['hh:mm:ss']}`,
-				{},
-				true,
-			),
+			billDate   : formatDate({
+				date       : data?.invoice_date || formValues?.invoice_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+				formatType : 'dateTime',
+				separator  : ' ',
+			}),
 			placeOfSupply : formValues?.place_of_supply,
 			billCurrency  : formValues?.invoice_currency || ocrData?.invoice_currency,
 			creditDays:
@@ -348,11 +350,13 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			signatureUrl            : serviceProviderOrg?.signature_url,
 		},
 		billAdditional: {
-			shipperId            : invoiceData?.service_provider.id || undefined,
-			shipmentType         : shipment_data?.shipment_type || undefined,
-			noOfContainers       : shipment_data?.containers_count || undefined,
-			collectionPartyId    : partyId || undefined,
-			urgencyTag           : formValues?.urgency_tag || undefined,
+			shipperId         : invoiceData?.service_provider.id || undefined,
+			shipmentType      : shipment_data?.shipment_type || undefined,
+			noOfContainers    : shipment_data?.containers_count || undefined,
+			collectionPartyId : partyId || undefined,
+			urgencyTag        : formValues?.urgency_tag || undefined,
+			advanceBill:
+			formValues?.advance_bill === 'advance_bill' ? 'true' : undefined,
 			exchangeRateDocument : uploadProof || undefined,
 			isDeviationAccepted  : data?.is_deviation_accepted || undefined,
 			serviceProviderType  : 'freight_forwarder',

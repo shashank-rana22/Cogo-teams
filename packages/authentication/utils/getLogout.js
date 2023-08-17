@@ -1,13 +1,15 @@
 import { Toast } from '@cogoport/components';
-import { request } from '@cogoport/request/helpers/request';
-import { setCookie, getCookie } from 'cookies-next';
+import { authRequest } from '@cogoport/request/helpers/auth-request';
+import { setCookie, getCookie } from '@cogoport/utils';
+
+const NEGATIVE_INDEX = -1;
 
 const logout = () => {
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
-	request.delete('/delete_user_session', { params: { token } })
+	authRequest.delete('/delete_user_session', { params: { token } })
 		.then((res) => {
 			if (!res.hasError) {
-				setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
+				setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', NEGATIVE_INDEX);
 				// eslint-disable-next-line no-undef
 				window.location.href = '/v2/login';
 			} else {

@@ -24,6 +24,7 @@ function LineItemDetails({
 	errMszs = {},
 	open = false,
 	shipmentId = '',
+	shipment_data = {},
 }) {
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -98,7 +99,7 @@ function LineItemDetails({
 												organization_trade_party_detail_id:
 													collectionParty?.organization_trade_party_detail_id,
 												serviceNames,
-												shipment_type: serviceProvider?.shipment_type,
+												shipment_type: shipment_data?.shipment_type,
 											},
 											errors,
 											setCodes,
@@ -117,24 +118,24 @@ function LineItemDetails({
 						</Button>
 					</div>
 					<div className={`${styles.flex} ${styles.spacebetween}`}>
-						<div className={`${styles.padding}`}>
+						<div className={styles.padding}>
 							<div>T: Taxable P: Pure Agent E: Exempted N: Nil Rated</div>
 							<div>NG: Non GST R: Reverse Charge</div>
 						</div>
 						<div className={`${styles.flex} ${styles.label}`}>
 							<div className={styles.amount}>
-								<div className={`${styles.label}`}>
+								<div className={styles.label}>
 									Total Tax
 								</div>
-								<div className={`${styles.label}`}>
+								<div className={styles.label}>
 									{getFormattedAmount(calculatedValues?.total_tax_amount || 0, invoiceCurrency)}
 								</div>
 							</div>
 							<div className={styles.amount}>
-								<div className={`${styles.label}`}>
+								<div className={styles.label}>
 									Total Cost
 								</div>
-								<div className={`${styles.label}`}>
+								<div className={styles.label}>
 									{getFormattedAmount(calculatedValues?.sub_total_amount || 0, invoiceCurrency)}
 								</div>
 							</div>

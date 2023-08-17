@@ -13,6 +13,7 @@ function PermissionList() {
 	const props = useOnBoardRole();
 	const {
 		loading,
+		activeNavsLoading,
 		roleData,
 		setShowImportRole,
 		showImportRole,
@@ -21,6 +22,7 @@ function PermissionList() {
 		permissions,
 		onImport,
 		getRole,
+		activeNavs = [],
 	} = props || {};
 
 	return (
@@ -35,6 +37,8 @@ function PermissionList() {
 				loading={loading}
 				onImport={onImport}
 				getRole={getRole}
+				activeNavs={activeNavs}
+				activeNavsLoading={activeNavsLoading}
 			/>
 
 			<ModulesPermissions {...props} />

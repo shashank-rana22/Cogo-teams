@@ -5,7 +5,10 @@ export default function getCanEditContainerDetails({ shipment_data, user_data, s
 		return false;
 	}
 
-	if ([GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id, GLOBAL_CONSTANTS.uuid.hk_user_id].includes(user_data?.id)) {
+	if (user_data?.id
+		&& [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
+			GLOBAL_CONSTANTS.uuid.hk_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id,
+		].includes(user_data?.id)) {
 		return true;
 	}
 

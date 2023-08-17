@@ -1,11 +1,14 @@
 import { Placeholder } from '@cogoport/components';
 import { SelectController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import AccordianView from '../../../common/Accordianview';
 
 import styles from './styles.module.css';
+
+const PARSE_OPTIONS_INDEX = 1;
 
 function BillingPartyDetails({
 	control,
@@ -44,8 +47,8 @@ function BillingPartyDetails({
 
 	useEffect(() => {
 		const parseOptions = JSON.parse(billingOptionsStringifiy || '[]');
-		if (parseOptions?.length === 1) {
-			setValue('billing_party_address', parseOptions?.[0]?.gst_number);
+		if (parseOptions?.length === PARSE_OPTIONS_INDEX) {
+			setValue('billing_party_address', parseOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.gst_number);
 		} else {
 			setValue('billing_party_address', (purchaseInvoiceValues.billing_party_address || ''));
 		}

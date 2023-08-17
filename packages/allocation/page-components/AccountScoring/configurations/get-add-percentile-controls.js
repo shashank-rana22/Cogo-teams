@@ -1,3 +1,6 @@
+const MIN = 0;
+const MAX = 100;
+
 const controls = (item) => {
 	const { id = '', lower_limit = 0, upper_limit = 0, score = 0 } = item || {};
 
@@ -7,24 +10,28 @@ const controls = (item) => {
 			label       : 'PERCENTILE FROM',
 			placeholder : '0',
 			type        : 'number',
-			value       : `${lower_limit}`,
+			value       : lower_limit,
 			rules       : {
 				required : 'Required',
-				validate : (value) => ((value < 0 || value > 100) ? 'invalid' : true),
+				validate : (value) => ((value < MIN || value > MAX) ? 'invalid' : true),
 			},
-			isClearable: true,
+			isClearable : true,
+			min         : 0,
+			max         : 100,
 		},
 		{
 			name        : `${id}_percentile_to`,
 			label       : 'PERCENTILE TO',
 			placeholder : '0',
 			type        : 'number',
-			value       : `${upper_limit}`,
+			value       : upper_limit,
 			rules       : {
 				required : 'Required',
-				validate : (value) => ((value < 0 || value > 100) ? 'invalid' : true),
+				validate : (value) => ((value < MIN || value > MAX) ? 'invalid' : true),
 			},
-			isClearable: true,
+			isClearable : true,
+			min         : 0,
+			max         : 100,
 		},
 		{
 			name        : `${id}_bias_score`,
@@ -35,7 +42,8 @@ const controls = (item) => {
 			rules       : {
 				required: 'Required',
 			},
-			isClearable: true,
+			isClearable : true,
+			min         : 0,
 		},
 	]);
 };

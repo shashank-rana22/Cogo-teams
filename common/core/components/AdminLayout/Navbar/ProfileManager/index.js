@@ -1,5 +1,5 @@
 // import logout from '@cogoport/authentication/utils/getLogout';
-import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp, IcMNotifications } from '@cogoport/icons-react';
+import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -45,10 +45,6 @@ function ProfileManager({
 		router.push('/my-profile');
 	};
 
-	const notificationRedirect = () => {
-		router.push('/notifications');
-	};
-
 	const { logoutOfAllAccounts = () => {} } = useRemoveUserSessions();
 
 	const { removeProfile = () => {} } = useGetAllActions({ refetch, profile: 'default' });
@@ -60,12 +56,6 @@ function ProfileManager({
 			name  : 'my_profile',
 			fun   : routerFunction,
 			icon  : IcMProfile,
-		},
-		{
-			title : 'Notifications',
-			name  : 'notifications',
-			fun   : notificationRedirect,
-			icon  : IcMNotifications,
 		},
 		{
 			title : 'Switch Account',
