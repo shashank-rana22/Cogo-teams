@@ -1,5 +1,5 @@
 const MIN = 0;
-const MAX = 90;
+const MAX = 100;
 
 const controls = (item) => {
 	const { id = '', lower_limit = 0, upper_limit = 0, score = 0 } = item || {};
