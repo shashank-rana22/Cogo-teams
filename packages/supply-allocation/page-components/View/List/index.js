@@ -59,7 +59,14 @@ function List({ bucketData = [] }) {
 
 	return (
 		<>
-			<div style={{ display: 'flex', alignItems: 'center', background: '#FDFBF6', padding: '20px 5px' }}>
+			<div style={{
+				display    : 'flex',
+				alignItems : 'center',
+				background : '#FDFBF6',
+				padding    : '20px 5px',
+				marginTop  : '20px',
+			}}
+			>
 				{ bucketControls.map(({ title, flexBasis }) => (
 					<div key={title} style={{ flexBasis, display: 'flex', justifyContent: 'center' }}>
 
@@ -69,7 +76,7 @@ function List({ bucketData = [] }) {
 
 			</div>
 
-			{itemsArray.map((item, index) => <Content key={item.bucket_type} item={item} index={index} />)}
+			{generateBucketTableData.map((item, index) => <Content key={item.bucket_type} item={item} index={index} />)}
 
 		</>
 	);

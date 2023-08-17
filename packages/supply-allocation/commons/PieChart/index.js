@@ -1,23 +1,35 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 
-function PieChart({ data = [], count = 300, type = 'Predicted' }) {
+const BORDER_COLOR_MODIFIERS = 0.2;
+const ARC_LABELS_TEXT_COLOR_MODIFIERS = 2;
+
+function PieChart({ data = [], count = 0, heading = '' }) {
 	const colors = data.map((item) => item.color);
-	const BORDER_COLOR_MODIFIERS = 0.2;
-	const ARC_LABELS_TEXT_COLOR_MODIFIERS = 2;
+	console.log('data', data);
 
 	return (
-		<div style={{ display: 'flex', flexBasis: '33%', height: '350px', background: '#fff', padding: '0' }}>
+		<div style={{
+			display       : 'flex',
+			flexDirection : 'column',
+			flexBasis     : '33%',
+			height        : '350px',
+			background    : '#fff',
+			padding       : '0',
+
+		}}
+		>
+			<div style={{ fontWeight: 600, paddingLeft: '20px' }}>{heading}</div>
 
 			<ResponsivePie
 				colors={colors}
 				data={data}
 				margin={{
-					top    : 40,
-					right  : 80,
-					bottom : 40,
-					// left   : 80,
+					top    : 20,
+					right  : 200,
+					bottom : 20,
+					left   : 20,
 				}}
-				innerRadius={0.6}
+				innerRadius={0.8}
 				padAngle={0.7}
 				cornerRadius={3}
 				activeOuterRadiusOffset={8}
@@ -36,82 +48,12 @@ function PieChart({ data = [], count = 300, type = 'Predicted' }) {
 					from      : 'color',
 					modifiers : [['darker', ARC_LABELS_TEXT_COLOR_MODIFIERS]],
 				}}
-				// defs={[
-				// 	{
-				// 		id         : 'dots',
-				// 		type       : 'patternDots',
-				// 		background : 'inherit',
-				// 		color      : 'rgba(255, 255, 255, 0.3)',
-				// 		size       : 4,
-				// 		padding    : 1,
-				// 		stagger    : true,
-				// 	},
-				// 	{
-				// 		id         : 'lines',
-				// 		type       : 'patternLines',
-				// 		background : 'inherit',
-				// 		color      : 'rgba(255, 255, 255, 0.3)',
-				// 		rotation   : -45,
-				// 		lineWidth  : 6,
-				// 		spacing    : 10,
-				// 	},
-				// ]}
-				// fill={[
-				// 	{
-				// 		match: {
-				// 			id: 'ruby',
-				// 		},
-				// 		id: 'dots',
-				// 	},
-				// 	{
-				// 		match: {
-				// 			id: 'c',
-				// 		},
-				// 		id: 'dots',
-				// 	},
-				// 	{
-				// 		match: {
-				// 			id: 'go',
-				// 		},
-				// 		id: 'dots',
-				// 	},
-				// 	{
-				// 		match: {
-				// 			id: 'python',
-				// 		},
-				// 		id: 'dots',
-				// 	},
-				// 	{
-				// 		match: {
-				// 			id: 'scala',
-				// 		},
-				// 		id: 'lines',
-				// 	},
-				// 	{
-				// 		match: {
-				// 			id: 'lisp',
-				// 		},
-				// 		id: 'lines',
-				// 	},
-				// 	{
-				// 		match: {
-				// 			id: 'elixir',
-				// 		},
-				// 		id: 'lines',
-				// 	},
-				// 	{
-				// 		match: {
-				// 			id: 'javascript',
-				// 		},
-				// 		id: 'lines',
-				// 	},
-				// ]}
 				legends={[
 					{
 						anchor        : 'right',
 						direction     : 'column',
 						justify       : false,
-						translateX    : 50,
+						translateX    : 100,
 						translateY    : 17,
 						itemsSpacing  : 0,
 						itemWidth     : 69,
@@ -136,14 +78,14 @@ function PieChart({ data = [], count = 300, type = 'Predicted' }) {
 			{count
 				? (
 					<div style={{
-						marginLeft    : '-290px',
+						marginLeft    : '-183px',
 						display       : 'flex',
 						flexDirection : 'column',
 						alignItems    : 'center',
-						marginTop     : '160px',
+						marginTop     : '-190px',
 					}}
 					>
-						<div style={{ fontSize: '10px' }}>{type}</div>
+						<div style={{ fontSize: '10px' }}>Predicted</div>
 						<div style={{ fontSize: '16px' }}>
 							{count}
 							{' '}

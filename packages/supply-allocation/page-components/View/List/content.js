@@ -1,6 +1,7 @@
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowRotateRight } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CustomProgressBar from '../../../commons/CustomProgressBar';
@@ -23,9 +24,9 @@ function Content({
 
 	const [show, setShow] = useState(false);
 	const formProps = useForm();
-	const { control, watch, unregister } = formProps;
 
-	console.log('watch:', watch());
+	const { control, unregister, formState, handleSubmit } = formProps;
+	const { dirtyFields = {} } = formState;
 
 	const { subBucketColumns } = getSubBucketColumns({ control, unregister });
 
@@ -55,6 +56,7 @@ function Content({
 				allocatedCount={current_promised_containers}
 				promisedCount={current_allocated_containers}
 				uploadText=" done"
+				view="current_container_allocation"
 			/>,
 			flexBasis : '30%',
 			key       : 'current_container_allocation',
@@ -64,12 +66,16 @@ function Content({
 				promisedCount={past_fulfilled_containers}
 				allocatedCount={past_allocated_containers}
 				uploadText=" done"
+				view="past_container_allocation"
 			/>,
 			flexBasis : '30%',
 			key       : 'past_container_allocation',
 		},
 	];
 
+	const onClickSaveChanges = (values) => {
+		const payload = Object.entries(values).map(([key, value]) => ({ [key.split('_')[0]]: value }));
+	};
 	return (
 		<>
 			<div style={{ display: 'flex' }}>
@@ -82,7 +88,7 @@ function Content({
 							display        : 'flex',
 							justifyContent : 'center',
 							alignItems     : 'center',
-							borderBottom   : '1px solid var(--balck-10, #F9F9F9)',
+							borderBottom   : '1px solid #F9F9F9',
 							background     : ' #FFF',
 						}}
 					>
@@ -90,6 +96,9 @@ function Content({
 					</div>
 				))}
 			</div>
+
+			{!isEmpty(dirtyFields)
+				? <Button onClick={handleSubmit(onClickSaveChanges)} themeType="secondary">Save Changes</Button> : null}
 
 			{show
 				? (

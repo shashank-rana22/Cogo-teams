@@ -8,11 +8,11 @@ import StyledSelect from '../../../commons/StyledSelect';
 
 import styles from './styles.module.css';
 
-const OPTIONS = [
-	{ label: 'All Regions', value: 'all_regions' },
-	{ label: 'Your Favorites', value: 'your_favorite' },
-	{ label: 'Attention Required', value: 'attention_required' },
-];
+const OBJECT_OPTIONS = {
+	all                : 'All Regions',
+	is_bookmarked      : 'Your Favorites',
+	attention_required : 'Attention Required',
+};
 
 const DEFAULT_PAGE = 1;
 
@@ -20,7 +20,7 @@ const commonLocationProps = {
 	asyncKey : 'list_locations',
 	params   : {
 		filters: {
-			type: 'seaport',
+			type: ['seaport', 'country', 'continent'],
 		},
 		page_limit : 10,
 		sort_by    : 'name',
@@ -46,7 +46,7 @@ function LocationSelect({
 		createSupplySearch({ payload });
 	};
 
-	const [region, setRegion] = useState('all_regions');
+	const [region, setRegion] = useState('all');
 
 	return (
 		<div className={styles.location_container}>
@@ -110,8 +110,8 @@ function LocationSelect({
 					onChange={({ selectedValue }) => {
 						setRegion(selectedValue);
 					}}
-					options={OPTIONS}
 					size="sm"
+					options={OBJECT_OPTIONS}
 				/>
 			</div>
 
