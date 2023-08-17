@@ -14,7 +14,7 @@ export const WEEKY_DISTRIBUTION_COLORS = {
 
 export const CONTAINER_TYPE_DISTRIBUTION_COLORS = {
 	standard  : '#FBD1A6',
-	reefer    : '#FFDAB5',
+	refer     : '#FFDAB5',
 	flat_rack : '#FFC790',
 	iso_tank  : '#E49E58',
 	open_size : '#F3BA81',

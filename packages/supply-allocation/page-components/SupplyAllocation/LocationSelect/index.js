@@ -20,7 +20,7 @@ const commonLocationProps = {
 	asyncKey : 'list_locations',
 	params   : {
 		filters: {
-			type: 'seaport',
+			type: ['seaport', 'country', 'continent'],
 		},
 		page_limit : 10,
 		sort_by    : 'name',

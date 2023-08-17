@@ -42,7 +42,7 @@ function List({
 						</div>
 					</Tooltip>
 
-					{origin_location.display_name}
+					<span className={styles.origin}>{origin_location.display_name}</span>
 				</div>
 			),
 		},

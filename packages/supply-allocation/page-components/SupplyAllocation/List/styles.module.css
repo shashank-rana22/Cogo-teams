@@ -1,5 +1,11 @@
 .container {
 	margin-top: 20px;
+
+	:global {
+		.ui_table_body_cell {
+			max-width: 200px;
+		}
+	}
 }
 
 .table_container {
@@ -64,6 +70,13 @@
 	font-size: 10px;
 	color: #bf291e;
 	text-align: center;
-	background: var(--20, #fdebe9);
+	background: #fdebe9;
 	border-radius: 0 0 6px;
+}
+
+.origin {
+	max-width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
