@@ -1,6 +1,8 @@
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import { ONE, TWO } from '../../utils/constants';
+
 export const getDocumentInfo = ({ bfInvoice }) => {
 	const {
 		einvoiceNumber = '', invoiceNumber = '', proformaNumber = '',
@@ -17,14 +19,14 @@ export const getDocumentInfo = ({ bfInvoice }) => {
 		[invoiceNumber, invoicePdfUrl, bfInvoice?.invoiceType],
 		[proformaNumber, proformaPdfUrl, bfInvoice?.invoiceType],
 	].filter((item) => (
-		item[1] || undefined
+		item[ONE] || undefined
 	) !== undefined)[GLOBAL_CONSTANTS.zeroth_index]
 	|| [undefined, undefined, undefined];
 
 	return {
 		invoice_number : invoiceNumberPriority[GLOBAL_CONSTANTS.zeroth_index],
-		invoice_pdf    : invoiceNumberPriority[1],
-		invoice_type   : invoiceNumberPriority[2],
+		invoice_pdf    : invoiceNumberPriority[ONE],
+		invoice_type   : invoiceNumberPriority[TWO],
 	};
 };
 
