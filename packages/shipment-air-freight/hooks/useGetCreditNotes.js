@@ -34,7 +34,7 @@ const useGetCreditNotes = () => {
 
 	return {
 		loading,
-		list      : data?.data || [],
+		list      : data?.list || [],
 		cnRefetch : getCreditNoteList,
 	};
 };
