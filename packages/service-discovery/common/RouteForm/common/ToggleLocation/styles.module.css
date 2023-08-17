@@ -1,0 +1,31 @@
+.container {
+	padding: 6px 6px 0;
+	margin-bottom: 6px;
+	color: #c9cfdb;
+	cursor: pointer;
+	border: 0.5px solid #fdebe9;
+	border-radius: 8px;
+	box-shadow: 0 4px 15px rgb(58 112 191 / 10%);
+	transition: all 0.36s ease;
+
+	&:hover {
+		background: rgb(252 220 0);
+		transform: rotate(180deg) scale(1.1);
+	}
+
+	&.disabled {
+		cursor: not-allowed;
+		background-color: var(--color-secondary-greyscale-5);
+		border: none;
+		transform: none;
+	}
+}
+
+.arrow_icon {
+	color: black;
+	transform: rotate(270deg) scaleX(-1);
+
+	&.disabled {
+		color: var(--color-secondary-greyscale-4);
+	}
+}
