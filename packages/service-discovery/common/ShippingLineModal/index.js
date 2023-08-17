@@ -86,6 +86,8 @@ function ShippingLineModal({
 
 	const remainingRates = primaryServiceRates.slice(TWO);
 
+	const randomValue = useMemo(() => MIN_PERCENTAGE + Math.ceil(Math.random() * RANGE), []);
+
 	return (
 		<Modal
 			size="lg"
@@ -109,7 +111,7 @@ function ShippingLineModal({
 						We have seen
 						<strong>
 							{' '}
-							{MIN_PERCENTAGE + Math.ceil(Math.random() * RANGE)}
+							{randomValue}
 							%
 							{' '}
 						</strong>

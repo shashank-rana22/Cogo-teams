@@ -1,6 +1,5 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMCross } from '@cogoport/icons-react';
-import React from 'react';
 
 import getControls from './controls';
 import Form from './Form';
