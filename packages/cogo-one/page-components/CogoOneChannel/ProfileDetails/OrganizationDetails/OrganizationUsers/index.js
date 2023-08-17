@@ -29,7 +29,9 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false, setActiveTab
 
 	const {
 		user_id = '', email = '', mobile_country_code = '', mobile_number = '', name = '',
-		organization_id = '', work_scopes = [],
+		organization_id = '', work_scopes = [], whatsapp_number_eformat = '',
+		whatsapp_country_code = '',
+		whatsapp_number = '',
 	} = user || {};
 
 	const lessList = (work_scopes || []).slice(MIN_PREVIEW_LIMIT, MAX_PREVIEW_LIMIT);
@@ -72,7 +74,7 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false, setActiveTab
 		);
 	};
 
-	const whatsappMobileNumber = `${mobile_country_code.slice(REMOVE_PLUS_SIGN)}${mobile_number}`;
+	const whatsappMobileNumber = `${whatsapp_country_code.slice(REMOVE_PLUS_SIGN)}${whatsapp_number}`;
 
 	const onCardClick = () => {
 		setActiveTab((prev) => ({
@@ -83,7 +85,7 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false, setActiveTab
 				lead_user_id            : null,
 				user_name               : name,
 				user_id,
-				whatsapp_number_eformat : whatsappMobileNumber,
+				whatsapp_number_eformat : whatsapp_number_eformat || whatsappMobileNumber,
 				email,
 				channel_type            : 'whatsapp',
 				countryCode             : mobile_country_code,
