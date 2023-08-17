@@ -106,6 +106,7 @@ function Header({
 							list={chat_tags}
 							showMorePlacement="right"
 							hasPermissionToEdit={hasPermissionToEdit}
+							updateChat={updateChat}
 						/>
 					</div>
 

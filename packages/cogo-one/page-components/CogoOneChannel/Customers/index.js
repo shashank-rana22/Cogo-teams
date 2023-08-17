@@ -104,6 +104,8 @@ function Customers({
 					agentTimeline={agentTimeline}
 					setIsBotSession={setIsBotSession}
 					isBotSession={isBotSession}
+					userId={userId}
+					firestore={firestore}
 				/>
 			</div>
 

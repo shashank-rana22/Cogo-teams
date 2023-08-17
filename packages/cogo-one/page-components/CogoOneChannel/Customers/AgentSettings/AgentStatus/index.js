@@ -12,6 +12,8 @@ function AgentStatus({
 	agentStatus = {},
 	fetchworkPrefernce = () => {},
 	agentTimeline = () => {},
+	userId = '',
+	firestore = {},
 }) {
 	const { status = '' } = agentStatus || {};
 
@@ -24,6 +26,9 @@ function AgentStatus({
 		fetchworkPrefernce,
 		setOpenModal: setOpenInactiveModal,
 		agentTimeline,
+		userId,
+		firestore,
+		status,
 	});
 
 	const isAgentActive = status === 'active';

@@ -14,6 +14,8 @@ function AgentSettings({
 	agentTimeline = () => {},
 	setIsBotSession = () => {},
 	isBotSession = false,
+	userId = '',
+	firestore = {},
 }) {
 	return (
 		<>
@@ -30,6 +32,8 @@ function AgentSettings({
 					agentStatus={agentStatus}
 					fetchworkPrefernce={fetchworkPrefernce}
 					agentTimeline={agentTimeline}
+					userId={userId}
+					firestore={firestore}
 				/>
 			)}
 
