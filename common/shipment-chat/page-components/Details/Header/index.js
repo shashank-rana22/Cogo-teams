@@ -21,7 +21,7 @@ function Header({
 	const { push } = useRouter();
 
 	const { serial_id, shipment_type, id: shipment_id } = channelData || {};
-	const shipmentType = shipment_type?.split('_')[GLOBAL_CONSTANTS.zeroth_index];
+	const shipmentType = shipment_type?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const handleClick = () => {
 		push(`/booking/${shipmentType}/[shipment_id]`, `/booking/${shipmentType}/${shipment_id}`);
@@ -32,16 +32,6 @@ function Header({
 		? stakeholderMappings[channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index] || 'default']
 		|| []
 		: stakeholderMappings.default;
-
-	function Content() {
-		return (
-			<div className={styles.chat_users}>
-				{(groupChatUsers || []).map((item) => (
-					<div key={item} className={styles.user_name}>{startCase(item)}</div>
-				))}
-			</div>
-		);
-	}
 
 	return (
 		<div className={styles.container}>
@@ -65,12 +55,18 @@ function Header({
 				<Popover
 					placement="bottom"
 					interactive
-					render={<Content />}
+					render={(
+						<div className={styles.chat_users}>
+							{(groupChatUsers || []).map((item) => (
+								<div key={item} className={styles.user_name}>{startCase(item)}</div>
+							))}
+						</div>
+					)}
 					className={styles.popover_container}
 				>
 					<div className={styles.button}>
 						<IcMProfile width={12} height={12} className={styles.profile_img} />
-						{`${groupChatUsers?.length} Contacts`}
+						{`${groupChatUsers?.length || GLOBAL_CONSTANTS.zeroth_index} Contacts`}
 					</div>
 				</Popover>
 
