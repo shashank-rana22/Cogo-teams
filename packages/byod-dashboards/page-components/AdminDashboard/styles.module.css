@@ -11,8 +11,9 @@
 }
 
 .header_container {
-	display: flex;
-	justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+	margin-bottom: 40px;
 }
 
 .configuration_container {
@@ -36,4 +37,46 @@
 .error {
 	margin-top: 4px;
 	color: #fc0101;
+}
+
+.table_container {
+	width: 40%;
+	display: flex;
+	margin-top: 20px;
+}
+
+.body_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.styled_button {
+	margin-left: 20px;
+}
+
+.display_content {
+	width: '60%';
+	background-color: #fff;
+	padding: 20px;
+	margin: 20px;
+	border-radius: 10px;
+}
+
+.devices_content {
+	display:flex;
+	flex-direction: column;
+	margin-top: 4px;
+}
+
+.specifications_container {
+	margin-top: 10px;
+}
+
+.accordian_title_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.title_accordian {
+	margin-top: 6px;
 }

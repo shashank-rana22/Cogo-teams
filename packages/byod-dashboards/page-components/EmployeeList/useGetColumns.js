@@ -8,11 +8,11 @@ const useGetColumns = (isAdmin) => {
 	const router = useRouter();
 
 	const handleVerification = (item) => {
-		const { employee_detail_id, status } = item;
+		const { id, status } = item;
 		if (status === 'approved') {
 			return;
 		}
-		router.push(`/byod/employee/${employee_detail_id}`);
+		router.push(`/byod/employee/${id}`);
 	};
 
 	const getStatus = (item) => {

@@ -20,7 +20,7 @@ const byodDashboard = {
 	},
 	'/[partner_id]/byod/admin-dashboard/configuration': {
 		layoutType : 'no_header',
-		navigation : 'byod_dashboard-admin_dashboard_configuration',
+		navigation : 'byod_dashboard-admin_dashboard',
 		isMainNav  : false,
 	},
 };

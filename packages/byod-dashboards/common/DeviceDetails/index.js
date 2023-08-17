@@ -9,8 +9,9 @@ import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 1;
 
-function DeviceDetails({ deviceData = {}, className = '' }) {
-	const employeeDeviceData = deviceData[deviceData.length - DEFAULT_VALUE] || [];
+function DeviceDetails({ deviceData, className }) {
+	const deviceDetails = deviceData.device_details;
+	const employeeDeviceData = deviceDetails?.[(deviceDetails || []).length - DEFAULT_VALUE] || [];
 
 	return (
 		<>

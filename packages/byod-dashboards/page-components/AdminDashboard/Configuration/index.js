@@ -1,9 +1,10 @@
 import { Button, RadioGroup, Input } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import StyledTable from '../../../common/StyledTable';
 import useGetEmployeeReimbursementGroup from '../../../hooks/useGetEmployeeReimbursementGroup';
+import useUpdateDeviceDetails from '../../../hooks/useUpdateDeviceDetails';
 import EmptyState from '../EmptyState';
 
 import AccessoriesModal from './AccessoriesModal';
@@ -12,6 +13,7 @@ import DeviceModal from './DeviceModal';
 import getAccessoriesInfoColumns from './getAccessoriesInfoColumns';
 import getDeviceInfoColumns from './getDeviceInfoColumns';
 import getReimbursementColumns from './getReimbursementColumns';
+import SetReimbursement from './SetMaxReimbursement';
 import styles from './styles.module.css';
 
 const OPTIONS = [
@@ -19,27 +21,10 @@ const OPTIONS = [
 	{ value: 'no', label: 'No' },
 ];
 
-const REIMBURSEMENT_DATA = [
-	{ department: 'Technology', designation: 'SDE1' },
-	{ department: 'Product', designation: 'APM' },
-	{ department: 'Design', designation: 'X' },
-];
-
-const DEVICE_INFO_DATA = [
-	{ name: 'macbook', reimbursement_percentage: 75, max_amount: 60000 },
-	{ name: 'windows_laptop', reimbursement_percentage: 65, max_amount: 50000 },
-];
-
-const ACCESSORIES_INFO_DATA = [
-	{ name: 'printer', reimbursement_percentage: 75, max_amount: 6000 },
-	{ name: 'headset', reimbursement_percentage: 65, max_amount: 5000 },
-];
-
 function Configuration() {
 	const [showAddDept, setShowAddDept] = useState(false);
 	const [showAccessories, setShowAccessories] = useState(false);
 	const [showDevice, setShowDevice] = useState(false);
-	const [showModal, setShowModal] = useState('');
 
 	const [departmentValue, setDepartmentValue] = useState('');
 	const [designationValue, setDesignationValue] = useState([]);
@@ -50,40 +35,48 @@ function Configuration() {
 	const [accessoriesValue, setAccessoriesValue] = useState('');
 
 	const [combinedValue, setCombinedValue] = useState('');
-	const { data } = useGetEmployeeReimbursementGroup();
-	const { id } = data || {};
+	const [maxReimbursementAmount, setMaxReimbursementAmount] = useState('');
+
+	const { data:getData = {}, getEmployeeReimbursementGroup } = useGetEmployeeReimbursementGroup();
+	const { detail, mappings } = getData || {};
+	const { id, addon_details, device_details, maximum_reimbursement_amount } = detail || {};
+
+	const { updateDeviceDetails } = useUpdateDeviceDetails({ SOURCE: 'maxreimbursement', id });
 
 	const deviceInfoColumns = getDeviceInfoColumns({
-		showModal,
-		setShowModal,
 		setReimbusableValue,
-		reimbusableValue,
 		setMaxAmount,
-		maxAmount,
-		deviceValue,
 		setDeviceValue,
 		setShowDevice,
-		showDevice,
+		id,
+		device_details,
+		getEmployeeReimbursementGroup,
 	});
 	const accessoriesInfoColumns = getAccessoriesInfoColumns({
-		showModal,
-		setShowModal,
 		setReimbusableValue,
-		reimbusableValue,
 		setMaxAmount,
-		maxAmount,
-		accessoriesValue,
 		setAccessoriesValue,
 		setShowAccessories,
-		showAccessories,
+		id,
+		addon_details,
+		getEmployeeReimbursementGroup,
 	});
 
-	const reimbursementColumns = getReimbursementColumns();
+	const reimbursementColumns = getReimbursementColumns({ mappings, id, getEmployeeReimbursementGroup });
+
+	useEffect(() => {
+		setMaxReimbursementAmount(maximum_reimbursement_amount);
+		if (maximum_reimbursement_amount !== null) {
+			setCombinedValue('yes');
+		}
+	}, [maximum_reimbursement_amount]);
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.title_container}>
-				Configuration
+				Configuration -
+				{' '}
+				{detail?.name}
 			</div>
 			<div className={styles.body_container}>
 				<div className={styles.reimbursement_container}>
@@ -113,12 +106,13 @@ function Configuration() {
 								setDesignationValue={setDesignationValue}
 								source="Add Department"
 								id={id}
+								mappings={mappings}
 							/>
 						)}
 					</div>
 
-					{isEmpty(REIMBURSEMENT_DATA) ? (<EmptyState emptyText="No Reimbursement Data Found" />)
-						: (<StyledTable data={REIMBURSEMENT_DATA} columns={reimbursementColumns} />)}
+					{isEmpty(mappings) ? (<EmptyState emptyText="No Reimbursement Data Found" />)
+						: (<StyledTable data={mappings} columns={reimbursementColumns} />)}
 					<hr />
 				</div>
 				<div className={styles.device_info}>
@@ -154,13 +148,16 @@ function Configuration() {
 								source="Add Device"
 								showDevice={showDevice}
 								setShowDevice={setShowDevice}
+								id={id}
+								device_details={device_details}
+								getEmployeeReimbursementGroup={getEmployeeReimbursementGroup}
 							/>
 						)}
 					</div>
 
 					<div style={{ margin: '10px' }}>
-						{isEmpty(DEVICE_INFO_DATA) ? (<EmptyState emptyText="No Device Data Found" />)
-							: (<StyledTable data={DEVICE_INFO_DATA} columns={deviceInfoColumns} />)}
+						{isEmpty(device_details) ? (<EmptyState emptyText="No Device Data Found" />)
+							: (<StyledTable data={device_details} columns={deviceInfoColumns} />)}
 					</div>
 
 					<div className={styles.header_container}>
@@ -192,17 +189,27 @@ function Configuration() {
 								accessoriesValue={accessoriesValue}
 								setAccessoriesValue={setAccessoriesValue}
 								source="Add Accessories"
+								id={id}
+								addon_details={addon_details}
+								getEmployeeReimbursementGroup={getEmployeeReimbursementGroup}
 							/>
 						)}
 					</div>
 
 					<div style={{ margin: '10px' }}>
-						{isEmpty(ACCESSORIES_INFO_DATA) ? (<EmptyState emptyText="No Accessories Data Found" />)
-							: (<StyledTable data={ACCESSORIES_INFO_DATA} columns={accessoriesInfoColumns} />)}
+						{isEmpty(addon_details) ? (<EmptyState emptyText="No Accessories Data Found" />)
+							: (<StyledTable data={addon_details} columns={accessoriesInfoColumns} />)}
 					</div>
 				</div>
 			</div>
-			<div className={styles.footer_container}>
+			<SetReimbursement
+				setCombinedValue={setCombinedValue}
+				combinedValue={combinedValue}
+				maxReimbursementAmount={maxReimbursementAmount}
+				setMaxReimbursementAmount={setMaxReimbursementAmount}
+				id={id}
+			/>
+			{/* <div className={styles.footer_container}>
 				<div className={styles.set_combined_reimbusement}>
 					<div className={styles.text_container}>
 						Do you want to set combined maximum reimbursement ?
@@ -215,39 +222,33 @@ function Configuration() {
 						value={combinedValue}
 					/>
 				</div>
-				{combinedValue === 'yes' && (
+				{(combinedValue === 'yes') && (
 					<div className={styles.combined_reimbusement}>
 						<div className={styles.combined_reimbusement_body}>
-							{/* <div className={styles.select_categories}>
-								<div className={styles.text_container}>
-									Select subcategories
-								</div>
-
-								<Select />
-							</div>
-
-							<div className={styles.select_categories}>
-								<div className={styles.text_container}>
-									% Reimbursable
-								</div>
-
-								<Input placeholder="% Reimbursable" />
-							</div> */}
 
 							<div className={styles.select_categories}>
 								<div className={styles.text_container}>
 									Max Reimbursement
 								</div>
-
-								<Input placeholder="Max Reimbursement" />
+								<Input
+									placeholder="Max Reimbursement"
+									onChange={(val) => setMaxReimbursementAmount(parseFloat(val))}
+									value={maxReimbursementAmount}
+									type="number"
+								/>
 							</div>
 						</div>
-
-						{/* <StyledTable data={DEVICE_INFO_DATA} columns={deviceInfoColumns} /> */}
 					</div>
 				)}
-				<Button style={{ marginLeft: '10px' }}> Save</Button>
-			</div>
+				<Button
+					style={{ marginLeft: '10px' }}
+					onClick={() => updateDeviceDetails({ maxReimbursementAmount })}
+				>
+					{' '}
+					Save
+
+				</Button>
+			</div> */}
 		</div>
 	);
 }

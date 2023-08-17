@@ -1,87 +1,73 @@
-import { Button, ButtonIcon } from '@cogoport/components';
+import { ButtonIcon } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import DeviceModal from './DeviceModal';
+import useUpdateDeviceDetails from '../../../hooks/useUpdateDeviceDetails';
+
+const SOURCE = 'DeviceDetails';
 
 const getDeviceInfoColumns = ({
 	setReimbusableValue,
-	reimbusableValue,
 	setMaxAmount,
-	maxAmount,
-	deviceValue,
 	setDeviceValue,
-	setShowModal,
-	showModal,
 	setShowDevice,
-	showDevice,
-}) => [
-	{
-		Header   : 'Name',
-		accessor : (item) => (
-			<div>{startCase(item?.name) || '-'}</div>
-		),
-	},
+	id,
+	device_details,
+	getEmployeeReimbursementGroup = () => {},
+}) => {
+	const {	 updateDeviceDetails } = useUpdateDeviceDetails(
+		{ id, SOURCE, setShowDevice, getEmployeeReimbursementGroup },
+	);
 
-	{
-		Header   : '% Reimbursable',
-		accessor : (item) => (
-			<div>{startCase(item?.reimbursement_percentage) || '-'}</div>
-		),
-	},
+	const handleDelete = ({ item }) => {
+		const filteredData = device_details.filter((d) => d.device_type !== item.device_type
+				|| d.max_reimbursement_amount !== item.max_reimbursement_amount
+				|| d.reimbursement_percentage !== item.reimbursement_percentage);
 
-	{
-		Header   : 'Max Amount',
-		accessor : (item) => (
-			<div>{startCase(item?.max_amount) || '-'}</div>
-		),
-	},
+		updateDeviceDetails({ device_details: filteredData });
+	};
 
-	{
-		id       : 'edit',
-		Header   : '',
-		accessor : (item) => (
-			<div>
-				<Button
-					themeType="secondary"
-					onClick={() => {
-						setShowModal(item?.name);
-						setShowDevice(true);
-						setMaxAmount(item?.max_amount);
-						setReimbusableValue(item?.reimbursement_percentage);
-						setDeviceValue(item?.name);
-					}}
-				>
-					Edit
-				</Button>
-				{showModal === item?.name && showDevice && (
-					<DeviceModal
-						setShowDevice={setShowDevice}
-						showDevice={showDevice}
-						setReimbusableValue={setReimbusableValue}
-						reimbusableValue={reimbusableValue}
-						setMaxAmount={setMaxAmount}
-						maxAmount={maxAmount}
-						deviceValue={deviceValue}
-						setDeviceValue={setDeviceValue}
-						source="Edit Devices"
-						showModal={showModal}
-						setShowModal={setShowModal}
+	return ([
+		{
+			Header   : 'Name',
+			accessor : (item) => (
+				<div>{startCase(item?.device_type) || '-'}</div>
+			),
+		},
+
+		{
+			Header   : '% Reimbursable',
+			accessor : (item) => (
+				<div>{startCase(item?.reimbursement_percentage) || '-'}</div>
+			),
+		},
+
+		{
+			Header   : 'Max Amount',
+			accessor : (item) => (
+				<div>{startCase(item?.max_reimbursement_amount) || '-'}</div>
+			),
+		},
+
+		{
+			Header   : 'Actions',
+			accessor : (item) => (
+				<div>
+					<ButtonIcon
+						onClick={() => {
+							setReimbusableValue(item?.reimbursement_percentage);
+							setMaxAmount(item?.max_reimbursement_amount);
+							setDeviceValue(item?.device_type);
+							handleDelete({ item });
+						}}
+						size="md"
+						icon={<IcMDelete />}
+						themeType="primary"
 					/>
-
-				)}
-
-			</div>
-		),
-	},
-	{
-		id       : 'delete',
-		Header   : '',
-		accessor : (item) => (
-			<ButtonIcon size="md" icon={<IcMDelete />} themeType="primary" />
-		),
-	},
-
-];
+				</div>
+			),
+		},
+	]);
+};
 
 export default getDeviceInfoColumns;

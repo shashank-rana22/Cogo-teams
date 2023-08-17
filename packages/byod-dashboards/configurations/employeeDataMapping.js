@@ -38,7 +38,7 @@ export const EMPLOYEE_DEVICE_DETAILS = [
 	},
 	{
 		label : 'Serial ID',
-		key   : 'device_serial_id',
+		key   : 'serial_id',
 	},
 	{
 		label  : 'Invoice Amount - GST in INR',
@@ -47,10 +47,8 @@ export const EMPLOYEE_DEVICE_DETAILS = [
 		type   : 'amount',
 	},
 	{
-		label  : 'GST Amount (Amount in INR)',
-		key    : 'tax_amount',
-		prefix : 'INR',
-		type   : 'amount',
+		label : 'Invoice Date',
+		key   : 'invoice_date',
 	},
 	{
 		label : 'Vendor Name',

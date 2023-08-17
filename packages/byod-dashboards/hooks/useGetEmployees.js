@@ -2,10 +2,11 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-const useGetEmployees = (isAdmin) => {
+// const useGetEmployees = (isAdmin) => {
+const useGetEmployees = () => {
 	const [filters, setFilters] = useState({
 		page   : 1,
-		status : isAdmin ? 'verified' : 'active',
+		status : 'active',
 	});
 
 	const { query = '', debounceQuery } = useDebounceQuery();

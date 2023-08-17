@@ -1,37 +1,28 @@
-import { Modal, Select, Button, MultiSelect } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
+import { AsyncSelect } from '@cogoport/forms';
 import React from 'react';
 
 import useCreateDepartmentRole from '../../../hooks/useCreateDepartmentRole';
 
 import styles from './styles.module.css';
 
-const DEPARTMENT_OPTIONS = [
-	{ value: 'technology', label: 'Technology' },
-	{ value: 'product', label: 'Product' },
-	{ value: 'bussiness', label: 'Bussiness' },
-];
-
-const DESIGNATION_OPTIONS = [
-	{ value: 'sde1', label: 'SDE1' },
-	{ value: 'sde2', label: 'SDE2' },
-	{ value: 'lead_engineer', label: 'LEAD ENGINEER' },
-];
-
 function DepartmentModal({
-	setShowAddDept,
+	setShowAddDept = () => {},
 	source,
 	showAddDept,
 	departmentValue,
 	designationValue,
-	setDepartmentValue,
-	setDesignationValue,
+	setDepartmentValue = () => {},
+	setDesignationValue = () => {},
 	id,
 }) {
 	const { createDepartmentRoleReimbursement, btnloading } = useCreateDepartmentRole({
 		departmentValue,
 		designationValue,
 		id,
+		setShowAddDept,
 	});
+
 	return (
 		<Modal
 			size="md"
@@ -46,20 +37,26 @@ function DepartmentModal({
 					<div>
 						<div className={styles.text_container}>Select Department</div>
 
-						<Select
-							options={DEPARTMENT_OPTIONS}
+						<AsyncSelect
+							placeholder="Select Department"
 							value={departmentValue}
 							onChange={(val) => setDepartmentValue(val)}
+							isClearable
+							initialCall
+							asyncKey="list_employee_departments"
 						/>
 					</div>
 
 					<div>
 						<div className={styles.text_container}>Select Designation</div>
 
-						<MultiSelect
-							options={DESIGNATION_OPTIONS}
+						<AsyncSelect
+							placeholder="Select Role"
 							value={designationValue}
 							onChange={(val) => setDesignationValue(val)}
+							isClearable
+							initialCall
+							asyncKey="list_employee_roles"
 						/>
 					</div>
 				</div>

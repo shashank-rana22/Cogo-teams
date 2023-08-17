@@ -1,87 +1,76 @@
-import { Button, ButtonIcon } from '@cogoport/components';
+import { ButtonIcon } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import AccessoriesModal from './AccessoriesModal';
+import useUpdateDeviceDetails from '../../../hooks/useUpdateDeviceDetails';
+
+const SOURCE = 'AddonDetails';
 
 const getAccessoriesInfoColumns = ({
 	setReimbusableValue,
-	reimbusableValue,
 	setMaxAmount,
-	maxAmount,
-	accessoriesValue,
 	setAccessoriesValue,
-	setShowModal,
-	showModal,
 	setShowAccessories,
-	showAccessories,
-}) => [
-	{
-		Header   : 'Name',
-		accessor : (item) => (
-			<div>{startCase(item?.name) || '-'}</div>
-		),
-	},
+	id,
+	addon_details,
+	getEmployeeReimbursementGroup = () => {},
+}) => {
+	const {	 updateDeviceDetails } = useUpdateDeviceDetails(
+		{ id, SOURCE, setShowAccessories, getEmployeeReimbursementGroup },
+	);
 
-	{
-		Header   : '% Reimbursable',
-		accessor : (item) => (
-			<div>{startCase(item?.reimbursement_percentage) || '-'}</div>
-		),
-	},
+	const handleDelete = ({ item }) => {
+		const filteredData = addon_details.filter((d) => d.addon_type !== item.addon_type
+				|| d.max_reimbursement_amount !== item.max_reimbursement_amount
+				|| d.reimbursement_percentage !== item.reimbursement_percentage);
 
-	{
-		Header   : 'Max Amount',
-		accessor : (item) => (
-			<div>{startCase(item?.max_amount) || '-'}</div>
-		),
-	},
+		updateDeviceDetails({ addon_details: filteredData });
+	};
 
-	{
-		id       : 'edit',
-		Header   : '',
-		accessor : (item) => (
-			<div>
-				<Button
-					themeType="secondary"
-					onClick={() => {
-						setShowModal(item?.name);
-						setShowAccessories(true);
-						setMaxAmount(item?.max_amount);
-						setReimbusableValue(item?.reimbursement_percentage);
-						setAccessoriesValue(item?.name);
-					}}
-				>
-					Edit
-				</Button>
-				{showModal === item?.name && showAccessories && (
-					<AccessoriesModal
-						setShowAccessories={setShowAccessories}
-						showAccessories={showAccessories}
-						setReimbusableValue={setReimbusableValue}
-						reimbusableValue={reimbusableValue}
-						setMaxAmount={setMaxAmount}
-						maxAmount={maxAmount}
-						accessoriesValue={accessoriesValue}
-						setAccessoriesValue={setAccessoriesValue}
-						source="Edit Accessories"
-						showModal={showModal}
-						setShowModal={setShowModal}
+	return ([
+		{
+			Header   : 'Name',
+			accessor : (item) => (
+				<div>{startCase(item?.addon_type) || '-'}</div>
+			),
+		},
+
+		{
+			Header   : '% Reimbursable',
+			accessor : (item) => (
+				<div>{startCase(item?.reimbursement_percentage) || '-'}</div>
+			),
+		},
+
+		{
+			Header   : 'Max Amount',
+			accessor : (item) => (
+				<div>{startCase(item?.max_reimbursement_amount) || '-'}</div>
+			),
+		},
+
+		{
+			Header   : 'Actions',
+			accessor : (item) => (
+				<div>
+
+					<ButtonIcon
+						size="md"
+						onClick={() => {
+							setReimbusableValue(item?.reimbursement_percentage);
+							setAccessoriesValue(item?.addon_type);
+							setMaxAmount(item?.max_reimbursement_amount);
+							handleDelete({ item });
+						}}
+						icon={<IcMDelete />}
+						themeType="primary"
 					/>
 
-				)}
+				</div>
+			),
+		},
 
-			</div>
-		),
-	},
-	{
-		id       : 'delete',
-		Header   : '',
-		accessor : (item) => (
-			<ButtonIcon size="md" icon={<IcMDelete />} themeType="primary" />
-		),
-	},
-
-];
+	]);
+};
 
 export default getAccessoriesInfoColumns;

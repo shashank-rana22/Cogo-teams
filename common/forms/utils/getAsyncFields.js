@@ -693,6 +693,19 @@ function asyncListRoles() {
 		},
 	};
 }
+function asyncListDepartment() {
+	return {
+		labelKey    : 'department_name',
+		valueKey    : 'id',
+		endpoint    : 'list_employee_departments',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
 
 function asyncListPromotions() {
 	return {
@@ -905,6 +918,7 @@ export {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncListDepartment,
 	asyncTicketsCategory,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,

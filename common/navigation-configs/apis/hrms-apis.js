@@ -548,7 +548,12 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 		{
-			api          : 'get_employee_device_detail',
+			api          : 'get_employee_device_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_details',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
@@ -563,7 +568,6 @@ const HRMS = {
 			api          : 'create_employee_device_reimbursement_group',
 			access_type  : 'private',
 			service_name : 'hrms',
-
 		},
 		{
 			api          : 'get_employee_device_reimbursement_group',
@@ -574,6 +578,39 @@ const HRMS = {
 			api          : 'create_department_role_reimbursement_group_mapping',
 			access_type  : 'private',
 			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_device_reimbursement_group',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_roles',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_departments',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_department_role_reimbursement_group_mapping',
+			access_type  : 'private',
+			service_name : 'hrms',
+
+		},
+		{
+			api          : 'update_department_role_reimbursement_group_mapping',
+			access_type  : 'private',
+			service_name : 'hrms',
+
+		},
+		{
+			api          : 'list_employee_device_reimbursement_groups',
+			access_type  : 'private',
+			service_name : 'hrms',
+
 		},
 	],
 };

@@ -39,14 +39,14 @@ function EmployeeDetails() {
 	const { data, loading, refetch } = useGetEmployeeDetails(employee_id);
 	const { updateDetail, loading : detailLoading } = useUpdateDetail(refetch);
 
-	const { employee_detail, employee_device_detail = [] } = data || {};
+	const { employee_details, employee_device_details = [] } = data || {};
 
-	const employeeDeviceData = employee_device_detail[employee_device_detail.length - DEFAULT_VALUE] || [];
+	const employeeDeviceData = employee_device_details[employee_device_details.length - DEFAULT_VALUE] || [];
 
 	const { invoice_url, status } = employeeDeviceData || {};
 
 	const getData = (key, type, isNumber) => {
-		const payloadType = type ? employeeDeviceData : employee_detail;
+		const payloadType = type ? employeeDeviceData : employee_details;
 		const payloadValue = payloadType?.[key];
 
 		if (typeof payloadValue === 'string') {
@@ -63,7 +63,7 @@ function EmployeeDetails() {
 		return payloadValue?.toString()?.replace(/\.?0+$/, '') || '-';
 	};
 
-	const handleTags = (text, color) => {
+	function HandleTags({ text = '', color = '' }) {
 		const options = [
 			{
 				key      : '1',
@@ -75,19 +75,19 @@ function EmployeeDetails() {
 		];
 
 		return <Tags items={options} size="xl" />;
-	};
+	}
 
-	const getButtonType = () => {
+	function GetButtonType() {
 		if (isAdmin && status === 'active') {
-			return handleTags('Verification pending from HRBP', 'blue');
+			return <HandleTags text="Verification pending from HRBP" color="blue" />;
 		}
 
 		if (['rejected_by_hr', 'rejected_by_admin'].includes(status)) {
-			return handleTags(startCase(status), 'red');
+			return <HandleTags text={startCase(status)} color="red" />;
 		}
 
 		if (((isAdmin && status === 'approved') || (!isAdmin && ['approved', 'verified'].includes(status)))) {
-			return handleTags(startCase(status));
+			return <HandleTags text={startCase(status)} />;
 		}
 
 		return (
@@ -115,7 +115,7 @@ function EmployeeDetails() {
 				</Button>
 			</div>
 		);
-	};
+	}
 
 	const handleReject = () => {
 		if (rejectionReason.trim() === '') {
@@ -186,8 +186,8 @@ function EmployeeDetails() {
 							</div>
 						))}
 					</div>
-					<DeviceDetails deviceData={employee_device_detail} />
-					{getButtonType()}
+					<DeviceDetails deviceData={employee_device_details} />
+					<GetButtonType />
 				</div>
 			</div>
 			{rejectModal

@@ -2,37 +2,57 @@ import { Button, ButtonIcon } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-const getReimbursementColumns = () => [
-	{
-		Header   : 'Department',
-		accessor : (item) => (
-			<div>{startCase(item?.department) || '-'}</div>
-		),
-	},
+import useUpdateDepartmentRole from '../../../hooks/useUpdateDepartmentRole';
 
-	{
-		Header   : 'Designation',
-		accessor : (item) => (
-			<div>{startCase(item?.designation) || '-'}</div>
-		),
-	},
+const getReimbursementColumns = ({ mappings, id:groupId, getEmployeeReimbursementGroup = () => {} }) => {
+	const { updateDepartmentRoleReimbursement } = useUpdateDepartmentRole({ groupId, getEmployeeReimbursementGroup });
 
-	{
-		Header   : 'Action',
-		accessor : () => (
-			<Button themeType="secondary">
-				View Employees
-			</Button>
-		),
-	},
-	{
-		id       : 'delete',
-		Header   : '',
-		accessor : (item) => (
-			<ButtonIcon size="md" icon={<IcMDelete />} themeType="primary" />
-		),
-	},
+	const handleDelete = ({ item }) => {
+		const foundItem = mappings.find((val) => val?.department?.department_name === item?.department?.department_name
+			&& val?.role?.role_name === item?.role?.role_name);
 
-];
+		updateDepartmentRoleReimbursement({ id: foundItem.id });
+	};
+
+	return ([
+		{
+			Header   : 'Department',
+			accessor : (item) => (
+				<div>{startCase(item?.department?.department_name) || '-'}</div>
+			),
+		},
+
+		{
+			Header   : 'Designation',
+			accessor : (item) => (
+				<div>{startCase(item?.role?.role_name) || '-'}</div>
+			),
+		},
+
+		{
+			Header   : 'Action',
+			accessor : () => (
+				<Button themeType="secondary">
+					View Employees
+				</Button>
+			),
+		},
+		{
+			id       : 'delete',
+			Header   : '',
+			accessor : (item) => (
+				<ButtonIcon
+					onClick={() => {
+						handleDelete({ item });
+					}}
+					size="md"
+					icon={<IcMDelete />}
+					themeType="primary"
+				/>
+			),
+		},
+
+	]);
+};
 
 export default getReimbursementColumns;

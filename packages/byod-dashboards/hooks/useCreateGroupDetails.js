@@ -3,24 +3,27 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useCreateGroupDetails = ({ configurationName, getEmployeeReimbursementGroup = () => {} }) => {
+const useCreateGroupDetails = ({ configurationName }) => {
 	const router = useRouter();
 
 	const [{ btnloading, data }, trigger] = useHarbourRequest({
-		url    : '/create_employee_device_reimbursement_group',
+		url    : 'create_employee_device_reimbursement_group',
 		method : 'POST',
 	}, { manual: true });
 
 	const createConfigurationGroup = async () => {
-		const payload = {
-			name: configurationName,
-		};
 		try {
-			await trigger({
+			const payload = {
+				name: configurationName,
+			};
+
+			const res = await trigger({
 				data: payload,
 			});
-			getEmployeeReimbursementGroup(data.id);
-			router.push('/byod/admin-dashboard/configuration');
+
+			const id = res?.data?.id;
+
+			router.push(`/byod/admin-dashboard/configuration?id=${id}`);
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
