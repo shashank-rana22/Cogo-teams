@@ -2,7 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-function useUpdateAgentPreference({ getListChatAgents }) {
+import { updateUserLastActivity } from '../helpers/configurationHelpers';
+
+function useUpdateAgentPreference({ getListChatAgents = () => {}, firestore = {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_agent_work_preference',
 		method : 'post',
@@ -16,6 +18,7 @@ function useUpdateAgentPreference({ getListChatAgents }) {
 			});
 			Toast.success('Successfully Updated');
 			getListChatAgents();
+			updateUserLastActivity({ firestore, agent_id, updated_status: status });
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
