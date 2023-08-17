@@ -19,6 +19,7 @@ const VIEW_MAPPING = {
 	},
 	map_view: {
 		Component : MapView,
+		heading   : 'Map View',
 		backView  : 'dashboard',
 	},
 };

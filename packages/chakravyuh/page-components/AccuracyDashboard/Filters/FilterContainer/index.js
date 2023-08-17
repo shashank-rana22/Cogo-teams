@@ -22,9 +22,10 @@ function FilterContainer({
 		watch,
 		setValue,
 		handleSubmit,
-	} = useForm();
+	} = useForm({ defaultValues: { service_type: 'fcl' } });
 
-	const controls = service_type === 'fcl' ? fclControls : airControls;
+	const controls = service_type === 'air' ? airControls : fclControls;
+
 	const values = watch();
 
 	const { newFields } = mutateFields({
@@ -68,7 +69,6 @@ function FilterContainer({
 				</div>
 			</div>
 			<Layout
-				key={service_type}
 				className={styles.layout_container}
 				fields={newFields}
 				errors={errors}

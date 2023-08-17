@@ -91,61 +91,63 @@ function Deviation({ data = [], loading = false }) {
 
 							</div>
 							<div className={styles.graph_container}>
-								<ResponsiveMarimekko
-									data={formatedData}
-									id="deviation"
-									value="participation"
-									dimensions={DIMENSIONS}
-									innerPadding={0}
-									outerPadding={-0.75}
-									axisTop={null}
-									axisBottom={{
-										orient       : 'bottom',
-										tickSize     : 5,
-										tickPadding  : 5,
-										tickRotation : 0,
-										format       : (value) => `${value - TOTAL_DEVIATION}%`,
-									}}
-									margin={{ top: 10, right: 22, bottom: 25, left: 23 }}
-									borderWidth={1}
-									enableGridY={false}
-									enableGridX={false}
-									colors={['#f2f3fa', '#FDFBF6']}
-									defs={[
-										{
-											id         : 'positive',
-											type       : 'patternDots',
-											background : '#FDFBF6',
-											color      : '#FDFBF6',
-											size       : 4,
-											padding    : 1,
-											stagger    : true,
-										},
-										{
-											id         : 'negative',
-											type       : 'patternDots',
-											background : '#CED1ED',
-											color      : '#CED1ED',
-											size       : 4,
-											padding    : 1,
-											stagger    : true,
-										},
-									]}
-									fill={[
-										{
-											match : { id: 'negative' },
-											id    : 'negative',
-										},
-										{
-											match : { id: 'positive' },
-											id    : 'positive',
-										},
-									]}
-									borderColor={{
-										from: 'colors',
-									}}
-									tooltip={CustomTooltip}
-								/>
+								{!loading && (
+									<ResponsiveMarimekko
+										data={formatedData}
+										id="deviation"
+										value="participation"
+										dimensions={DIMENSIONS}
+										innerPadding={0}
+										outerPadding={-0.75}
+										axisTop={null}
+										axisBottom={{
+											orient       : 'bottom',
+											tickSize     : 5,
+											tickPadding  : 5,
+											tickRotation : 0,
+											format       : (value) => `${value - TOTAL_DEVIATION}%`,
+										}}
+										margin={{ top: 10, right: 22, bottom: 25, left: 23 }}
+										borderWidth={1}
+										enableGridY={false}
+										enableGridX={false}
+										colors={['#f2f3fa', '#FDFBF6']}
+										defs={[
+											{
+												id         : 'positive',
+												type       : 'patternDots',
+												background : '#FDFBF6',
+												color      : '#FDFBF6',
+												size       : 4,
+												padding    : 1,
+												stagger    : true,
+											},
+											{
+												id         : 'negative',
+												type       : 'patternDots',
+												background : '#CED1ED',
+												color      : '#CED1ED',
+												size       : 4,
+												padding    : 1,
+												stagger    : true,
+											},
+										]}
+										fill={[
+											{
+												match : { id: 'negative' },
+												id    : 'negative',
+											},
+											{
+												match : { id: 'positive' },
+												id    : 'positive',
+											},
+										]}
+										borderColor={{
+											from: 'colors',
+										}}
+										tooltip={CustomTooltip}
+									/>
+								)}
 								<ResponsiveBump
 									data={loading ? loadingData : lineData}
 									margin={{ top: 10, right: 20, bottom: 25, left: 20 }}
