@@ -72,7 +72,8 @@ function PreviewBookingFooter({
 
 		const {
 			sailing_range = {},
-			max_price, min_price,
+			max_price,
+			min_price,
 			agreed_for_partial_shipment = false,
 			...restValues
 		} = getValues();

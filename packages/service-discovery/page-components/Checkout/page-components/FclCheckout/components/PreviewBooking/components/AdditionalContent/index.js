@@ -11,8 +11,35 @@ import ServiceTerms from '../../../../../../commons/ServiceTerms';
 import { CheckoutContext } from '../../../../../../context';
 import AdditionalServices from '../../../EditMargin/AdditionalContent/AdditionalServices';
 import ShippingPreferences from '../ShippingPreferences';
+import UnpreferredShippingLines from '../UnpreferredShippingLines';
 
 import styles from './styles.module.css';
+
+function ActiveComponent({
+	formProps = {},
+	primaryService = {},
+	search_id = '',
+	updateLoading = false,
+	source = '',
+}) {
+	if (source === 'cogo_assured_rate') {
+		return (
+			<UnpreferredShippingLines
+				formProps={formProps}
+				primaryService={primaryService}
+			/>
+		);
+	}
+
+	return (
+		<ShippingPreferences
+			formProps={formProps}
+			primaryService={primaryService}
+			search_id={search_id}
+			updateLoading={updateLoading}
+		/>
+	);
+}
 
 function AdditionalContent({
 	cargoDetails = {},
@@ -39,6 +66,8 @@ function AdditionalContent({
 
 	const { primary_service = '', services = {}, trade_type = '', source_id: search_id } = detail || {};
 
+	const { source = '' } = rate;
+
 	return (
 		<div className={styles.container}>
 			<CargoDetails
@@ -48,11 +77,12 @@ function AdditionalContent({
 				primaryService={primaryService}
 			/>
 
-			<ShippingPreferences
+			<ActiveComponent
 				formProps={formProps}
 				primaryService={primaryService}
 				search_id={search_id}
 				updateLoading={updateLoading}
+				source={source}
 			/>
 
 			<AdditionalServices
