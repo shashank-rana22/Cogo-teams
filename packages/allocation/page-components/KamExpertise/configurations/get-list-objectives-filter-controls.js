@@ -12,7 +12,7 @@ const controls = [
 			permissions_data_required : false,
 			filters                   : {
 				partner_entity_types : ['cogoport'],
-				status               : 'active',
+				status               : true,
 			},
 		},
 		caret       : true,

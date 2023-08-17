@@ -136,6 +136,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			convert_account_to_cp       : false,
 		},
 	},
 	sales_admin: {
@@ -177,6 +178,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			convert_account_to_cp       : false,
 		},
 	},
 	support: {
@@ -219,6 +221,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : true,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			convert_account_to_cp       : false,
 		},
 	},
 	support_admin: {
@@ -259,7 +262,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
-
+			convert_account_to_cp       : false,
 		},
 	},
 	supply: {
@@ -304,6 +307,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			convert_account_to_cp       : false,
 		},
 	},
 	supply_admin: {
@@ -347,6 +351,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			convert_account_to_cp       : false,
 		},
 	},
 	shipment_specialist: {
@@ -383,6 +388,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : true,
 			customer_org_users          : true,
+			convert_account_to_cp       : false,
 		},
 	},
 	cogoone_admin: {
@@ -423,6 +429,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			convert_account_to_cp       : false,
 		},
 	},
 	cp_support: {
@@ -462,6 +469,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : true,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			convert_account_to_cp       : true,
 		},
 	},
 	marketing: {
@@ -503,6 +511,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			punch_in_out                : false,
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
+			convert_account_to_cp       : false,
 		},
 	},
 };

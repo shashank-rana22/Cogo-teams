@@ -3,6 +3,7 @@ import { IcMEyeopen } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useGetRevokeInvoiceData from '../../apisModal/useGetRevokeInvoiceData';
+import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
 import styles from './style.module.css';
@@ -36,6 +37,8 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 				>
 					<Modal.Header title="Revoke Invoice" />
 					<Modal.Body>
+						{!isEditable && <ApproveAndReject row={row} />}
+
 						<div>
 							<div className={styles.label_flex}>
 								Invoice Number
