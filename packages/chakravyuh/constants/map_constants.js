@@ -19,7 +19,7 @@ export const COLORS = [
 
 export const SORT_OPTIONS = [
 	{ label: 'Accuracy', value: 'accuracy' },
-	{ label: 'Count', value: 'count' },
+	{ label: 'Count', value: 'total_rates' },
 ];
 
 export const MAX_BOUNDS = [

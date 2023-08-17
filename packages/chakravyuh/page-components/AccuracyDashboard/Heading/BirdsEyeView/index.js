@@ -53,7 +53,7 @@ function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0 }) {
 		<CogoMaps
 			style={{ height: '550px', width: '100%' }}
 			setMap={setMap}
-			zoom={5}
+			zoom={1}
 			key={data?.length}
 			baseLayer={BASE_LAYER}
 			maxBounds={MAX_BOUNDS}

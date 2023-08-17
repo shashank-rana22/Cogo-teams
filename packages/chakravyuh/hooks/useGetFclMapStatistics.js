@@ -50,7 +50,7 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 	useEffect(() => {
 		const params = getFormattedPayload(globalFilters, ['origin', 'destination']);
 		setPage(START_PAGE);
-		getStats(merge(params, { filters, sort, page: 1 }));
+		getStats(merge(params, { filters: { ...filters, ...sort }, page: 1 }));
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dependency, globalFilters, sort, getStats]);
 
