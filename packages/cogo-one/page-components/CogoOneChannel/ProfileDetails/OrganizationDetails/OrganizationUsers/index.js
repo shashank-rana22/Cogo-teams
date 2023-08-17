@@ -90,6 +90,7 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false, setActiveTab
 				channel_type            : 'whatsapp',
 				countryCode             : whatsapp_country_code || mobile_country_code,
 				whatsapp_number_eformat : whatsapp_number || mobile_number,
+				organization_id,
 			},
 			tab: 'message',
 		}));
