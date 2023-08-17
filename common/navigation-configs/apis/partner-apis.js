@@ -745,6 +745,22 @@ const partner = {
 			feature      : 'credit',
 			service_name : 'credit',
 		},
+		{
+			api          : 'get_shipment_report_schedule',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'demand_crm_new',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_shipments_for_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1950,6 +1966,22 @@ const partner = {
 			api          : 'send_checkout_for_approval',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'list_shipments_for_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'demand_crm',
+		},
+		{
+			api          : 'get_shipment_report_schedule',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 	supply_crm: [
