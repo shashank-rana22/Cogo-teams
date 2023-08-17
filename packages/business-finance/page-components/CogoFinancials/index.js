@@ -164,6 +164,7 @@ function CogoFinancials() {
 						loading={financialLoading}
 						taxType={taxType}
 						infoContent={INFO_CONTENT.financiallyClosed}
+						isHomeCard
 					/>
 				</div>
 			) : (

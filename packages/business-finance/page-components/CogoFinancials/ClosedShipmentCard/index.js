@@ -53,6 +53,7 @@ function ClosedShipmentCard({
 	taxType = '',
 	setActiveBar = () => {},
 	infoContent = '',
+	isHomeCard = false,
 }) {
 	const {
 		currency,
@@ -146,7 +147,7 @@ function ClosedShipmentCard({
 						/>
 
 					</div>
-					<div className={styles.show_graph_data}>
+					<div className={styles.show_graph_data} style={{ height: isHomeCard ? '100%' : null }}>
 						{(graphData || []).map((item) => (
 							<div
 								key={item?.id}
