@@ -79,6 +79,7 @@ export const FILTERS : ControlProps[] = [
 					{ label: 'Credit Note', value: 'CREDIT_NOTE' },
 					{ label: 'Consolidated', value: 'CONSOLIDATED' },
 					{ label: 'Reimbursement', value: 'REIMBURSEMENT' },
+					{ label: 'Expense', value: 'EXPENSE' },
 				],
 			},
 		],

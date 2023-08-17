@@ -17,8 +17,8 @@ function Login() {
 
 	const { onSubmit = () => {}, loading = false, source = '' } = useLoginAuthenticate();
 	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
-	const { handleSubmit, formState: { errors }, control } = useForm();
 	const [showPassword, setShowPassword] = useState(false);
+	const { handleSubmit, formState: { errors }, control } = useForm();
 
 	function RenderSuffix() {
 		if (!showPassword) {
@@ -58,7 +58,7 @@ function Login() {
 								control={control}
 								name="password"
 								type={showPassword ? 'text' : 'password'}
-								suffix={RenderSuffix()}
+								suffix={<RenderSuffix />}
 								placeholder={t('login:password_placeholder')}
 								rules={{ required: t('login:password_rules_required') }}
 							/>
