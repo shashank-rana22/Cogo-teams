@@ -15,6 +15,7 @@ function BookShipmentModal({ showBookShipment = false, setShowBookShipment = () 
 	const {
 		data, loading, bookShipmentConfirmData,
 		bookShipmentConfirmLoading,
+		bookShipmentValue,
 	} =	 useBookShipmentCount({ filters, setShowBookShipment });
 	return (
 		<Modal size="md" show={showBookShipment} onClose={() => setShowBookShipment(false)} placement="top">
@@ -44,7 +45,7 @@ function BookShipmentModal({ showBookShipment = false, setShowBookShipment = () 
 				<Button size="md" themeType="secondary" onClick={() => setShowBookShipment(false)}>Cancel</Button>
 				<Button
 					onClick={bookShipmentConfirmData}
-					disabled={bookShipmentConfirmLoading}
+					disabled={bookShipmentConfirmLoading || bookShipmentValue === 0}
 					style={{ marginLeft: '10px' }}
 				>
 					Confirm

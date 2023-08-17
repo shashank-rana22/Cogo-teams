@@ -90,8 +90,6 @@
 .radio_group_section {
 	display: flex;
 	flex-direction: column;
-
-	/* margin-left: 16px; */
 	font-size: var(--font-size-md);
 }
 

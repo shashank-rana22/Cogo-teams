@@ -75,6 +75,7 @@ const useBookShipmentCount = ({ filters, setShowBookShipment }) => {
 
 	return {
 		getShipmentCount,
+		bookShipmentValue,
 		data,
 		loading,
 		bookShipmentConfirmLoading,
