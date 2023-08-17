@@ -1,6 +1,5 @@
 import { Popover, cl } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import StyledOptions from './StyledOptions';
@@ -17,7 +16,10 @@ const ICON_MAPPING = {
 	},
 };
 
-function StyledSelect({ defaultValue = '', onChange = () => {}, options = [], disabled = false, size = 'sm' }) {
+function StyledSelect({
+	defaultValue = '', onChange = () => { }, options = {}, disabled = false, size = 'sm',
+
+}) {
 	const [showPopover, setShowPopover] = useState(false);
 
 	return (
@@ -45,7 +47,7 @@ function StyledSelect({ defaultValue = '', onChange = () => {}, options = [], di
 				<div className={cl`${styles.styled_text}
 				 ${styles[size]} ${disabled && styles.disabled}`}
 				>
-					{startCase(defaultValue)}
+					{options[defaultValue]}
 
 				</div>
 

@@ -31,7 +31,13 @@ function SupplyAllocation() {
 				setPagination={setPagination}
 			/>
 
-			<List data={data} pagination={pagination} loading={loading} setPagination={setPagination} />
+			<List
+				refetchListFclSearches={refetchListFclSearches}
+				data={data}
+				pagination={pagination}
+				loading={loading}
+				setPagination={setPagination}
+			/>
 
 		</>
 	);

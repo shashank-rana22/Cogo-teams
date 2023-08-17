@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 
-const useUpdateRollingFclFreightSearch = () => {
+const useUpdateRollingFclFreightSearch = ({ refetchListFclSearches }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/update_rolling_fcl_freight_search',
 		method : 'POST',
@@ -9,6 +9,7 @@ const useUpdateRollingFclFreightSearch = () => {
 	const updateRollingFclFreightSearch = async ({ payload }) => {
 		try {
 			await trigger({ data: payload });
+			refetchListFclSearches();
 		} catch (err) {
 			console.error(err);
 		}
