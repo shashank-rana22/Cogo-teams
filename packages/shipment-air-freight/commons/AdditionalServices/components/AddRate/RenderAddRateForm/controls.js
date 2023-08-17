@@ -1,10 +1,6 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
-const CURRENCY_OPTIONS = Object.values(GLOBAL_CONSTANTS?.currency_code || []).map((currency) => ({
-	label : currency,
-	value : currency,
-}));
+import currencies from '../../../../../helpers/currencies';
 
 const controls = ({ serviceData = {}, source = '' }) => {
 	const UNIT_OPTIONS = [];
@@ -17,7 +13,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			name    : 'currency',
 			label   : 'Currency',
 			type    : 'select',
-			options : CURRENCY_OPTIONS,
+			options : currencies,
 			rules   : { required: 'Currency is required' },
 			show    : ['task', 'overview'].includes(source),
 			size    : 'sm',
