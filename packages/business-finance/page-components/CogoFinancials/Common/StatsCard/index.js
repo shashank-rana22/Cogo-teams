@@ -41,7 +41,7 @@ function StatsCard({
 	return (
 		<div className={styles.container}>
 			<div className={styles.flexhead}>
-				<div>
+				<div data-tour="second-step">
 					<RenderCardHeader
 						title={heading}
 						showInfo

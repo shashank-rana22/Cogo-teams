@@ -2,6 +2,7 @@ import { Button, Popover, Select, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
+import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
@@ -21,6 +22,11 @@ const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((ite
 	label : `${item} - ${GLOBAL_CONSTANTS.cogoport_entities[item].name}`,
 }));
 
+const Tour = dynamic(
+	() => import('reactour'),
+	{ ssr: false },
+);
+
 function CogoFinancials() {
 	const [isPreTax, setIsPreTax] = useState(true);
 	const [timeRange, setTimeRange] = useState('1D');
@@ -30,6 +36,7 @@ function CogoFinancials() {
 	const [filter, setFilter] = useState({});
 	const [activeBar, setActiveBar] = useState('');
 	const [tableFilters, setTableFilters] = useState({});
+	const [tour, setTour] = useState(false);
 
 	const geo = getGeoConstants();
 	const countryCode = geo?.country.code;
@@ -83,14 +90,31 @@ function CogoFinancials() {
 		setActiveShipmentCard('');
 	};
 
+	const steps = [
+		{
+			selector : '[data-tour="first-step"]',
+			content  : 'This is my first Step',
+		},
+		{
+			selector : '[data-tour="second-step"]',
+			content  : 'This is my second Step',
+		},
+	];
+
 	return (
 		<div>
+			<Button onClick={() => setTour(true)}>Start Tour</Button>
+			<Tour
+				steps={steps}
+				isOpen={tour}
+				onRequestClose={() => setTour(false)}
+			/>
 			<div className={styles.header}>
 				<div
 					role="presentation"
 					onClick={handleClick}
 				>
-					<h2 className={styles.main_heading}>COGO Financials</h2>
+					<h2 className={styles.main_heading} data-tour="first-step">COGO Financials</h2>
 
 				</div>
 				<div style={{ display: 'flex' }}>
@@ -111,7 +135,6 @@ function CogoFinancials() {
 							color="#ED3726"
 							background="#FFE69D"
 							style={{ overflow: 'visible' }}
-
 						/>
 					</div>
 					<MultipleFilters
