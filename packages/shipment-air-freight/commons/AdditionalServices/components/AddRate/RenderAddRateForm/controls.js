@@ -1,6 +1,5 @@
+import currencies from '@cogoport/air-modules/helpers/currencies';
 import { startCase } from '@cogoport/utils';
-
-import currencies from '../../../../../helpers/currencies';
 
 const controls = ({ serviceData = {}, source = '' }) => {
 	const UNIT_OPTIONS = [];

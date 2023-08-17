@@ -5,6 +5,8 @@ import sort from './sortTable';
 const PREVIOUS_CURRENCIES = [];
 const OPTIONS_ALL = [];
 
+const PREFERRED_CURRENCIES = ['INR', 'USD', 'GBP', 'EUR'];
+
 (Object.values(countriesHash) || []).forEach((country) => {
 	if (
 		country?.currency_code
@@ -19,11 +21,10 @@ const OPTIONS_ALL = [];
 	}
 });
 
-const preferredCurrencies = ['INR', 'USD', 'GBP', 'EUR'];
-const preferredOptons = OPTIONS_ALL?.filter((option) => preferredCurrencies.includes(option?.key));
+const preferredOptons = OPTIONS_ALL?.filter((option) => PREFERRED_CURRENCIES.includes(option?.key));
 
 const restOptionsList = OPTIONS_ALL?.filter(
-	(option) => !preferredCurrencies.includes(option?.key),
+	(option) => !PREFERRED_CURRENCIES.includes(option?.key),
 );
 const restOptions = sort(restOptionsList, { key: 'label' });
 
