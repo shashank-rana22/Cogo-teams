@@ -51,6 +51,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		currency,
 		documentUrls,
 		revoked,
+		creditNoteApprovalType: approvalType,
 	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
 
 	const { useOnAction:OnAction, loading } = useGetTdsData({
@@ -216,7 +217,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									</Button>
 								</Popover>
 								<Select
-									value={creditNoteApprovalType}
+									value={approvalType || creditNoteApprovalType}
 									onChange={(e) => setCreditNoteApprovalType(e)}
 									placeholder="CN Approval Type"
 									options={CREDIT_NOTE_APPROVAL_TYPE_OPTIONS}
