@@ -32,3 +32,9 @@
 .employee_detail {
 	font-size: 16px;
 }
+
+.view_text {
+	width: fit-content;
+	text-decoration: underline;
+	cursor: pointer;
+}

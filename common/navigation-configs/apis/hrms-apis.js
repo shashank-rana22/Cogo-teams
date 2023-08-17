@@ -535,6 +535,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_employee_device_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_list: [
 		{

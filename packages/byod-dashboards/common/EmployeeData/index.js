@@ -2,11 +2,15 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { EMPLOYEE_DATA } from '../../configurations/employeeDataMapping';
+import StyledTable from '../StyledTable';
 
 import styles from './styles.module.css';
+import useEmployeeData from './useEmployeeData';
 
-function EmployeeData({ data }) {
+function EmployeeData({ data = {} }) {
 	const { detail } = data || {};
+
+	const { loading, NEW_LIST, columns } = useEmployeeData({ detail });
 
 	return (
 		<div className={styles.container}>
@@ -26,6 +30,9 @@ function EmployeeData({ data }) {
 					</div>
 				))}
 			</div>
+
+			<div className={styles.heading}>Previous Requests :</div>
+			<StyledTable columns={columns} data={NEW_LIST} loading={loading} />
 		</div>
 	);
 }
