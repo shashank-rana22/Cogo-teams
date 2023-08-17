@@ -1,13 +1,20 @@
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
-import data from './termsAndConditionsData';
+import getTermsAndConditionsData from './termsAndConditionsData';
+
+const ADDITION_NUMBER = 1;
 
 function TermsAndConditions() {
+	const { t } = useTranslation(['welcome']);
+
+	const data = getTermsAndConditionsData(t);
+
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.heading}>Terms of Use and Privacy Policy </div>
+			<div className={styles.heading}>{t('welcome:terms_and_conditions')}</div>
 
 			<div className={styles.content_container}>
 
@@ -18,7 +25,7 @@ function TermsAndConditions() {
 						<div className={styles.text_item} key={item.title}>
 							<div className={styles.title}>
 								<u>
-									{index + 1}
+									{index + ADDITION_NUMBER}
 									{' - '}
 									{title}
 								</u>
