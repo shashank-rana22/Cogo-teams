@@ -68,6 +68,7 @@ function FilterComponents({
 	const resetForm = () => {
 		filterControls.forEach((item) => {
 			setValue(item.name, item.name === 'channels' ? [] : '');
+			setValue('chat_tags', []);
 		});
 	};
 
