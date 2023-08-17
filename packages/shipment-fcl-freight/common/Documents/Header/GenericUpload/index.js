@@ -20,14 +20,14 @@ const SUPPLIER_STAKEHOLDERS = [
 ];
 
 function GenericUpload({
-	showModal,
-	setShowModal,
-	data,
-	shipment_data,
-	activeStakeholder,
+	showModal = false,
+	setShowModal = () => {},
+	data = [],
+	shipment_data = {},
+	activeStakeholder = '',
 	refetch = () => {},
 }) {
-	const [orgId, setOrgId] = useState();
+	const [orgId, setOrgId] = useState('');
 	const [selectSource, setSelectSource] = useState('');
 
 	const { control, watch, formState : { errors }, handleSubmit } = useForm();
@@ -49,13 +49,17 @@ function GenericUpload({
 				file_name    : formValues?.upload_document?.fileName,
 			},
 		];
-		const params = [...getCreateDocumentParams({
-			shipmentData: shipment_data,
-			formValues,
-			activeStakeholder,
-			selectSource,
-			orgId,
-		}), documents];
+
+		const params = {
+			...getCreateDocumentParams({
+				shipmentData: shipment_data,
+				formValues,
+				activeStakeholder,
+				selectSource,
+				orgId,
+			}),
+			documents,
+		};
 
 		apiTrigger(params);
 	};
