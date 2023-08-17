@@ -17,6 +17,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 94%;
+	height: 10%;
 }
 
 .search_icon {
@@ -27,20 +28,21 @@
 .list_container {
 	display: flex;
 	flex-wrap: wrap;
-	height: 90%;
-	overflow: hidden;
+	height: 84%;
+	overflow: scroll;
 }
 
 .loader {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 90%;
+	height: 84%;
 }
 
 .pagination_container {
 	display: flex;
 	justify-content: flex-start;
+	height: 6%;
 	margin-left: 8px;
 }
 

@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	width: 100%;
 	padding: 8px 16px;
 }
 
@@ -11,9 +12,34 @@
 }
 
 .name {
-	margin-left: 8px;
-	font-size: 16px;
+	margin: 0 8px;
+	font-size: 14px;
 	font-weight: 600;
 	color: #4f4f4f;
 	text-decoration: underline;
+}
+
+.tick_icon {
+	width: 20px;
+	height: 20px;
+}
+
+.call_icon_border {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px 8px;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+}
+
+.call_icon {
+	width: 18px;
+	height: 18px;
+	fill: #849e4c;
+}
+
+.container {
+	width: 100%;
+	height: 60%;
 }
