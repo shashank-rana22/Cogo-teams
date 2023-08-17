@@ -8,6 +8,10 @@ import SortComponent from '../../../commons/SortComponent';
 import IsEvaluated from './IsEvaluated';
 import styles from './styles.module.css';
 
+const ROUND_OFF_DIGITS = 2;
+const PERCENT = 100;
+const SINGULAR_VALUE = 1;
+
 const handleRedirectToDashboard = ({ router, user, test_id, is_evaluated, status }) => {
 	const { id, name } = user || {};
 
@@ -43,7 +47,6 @@ const getAppearedColumns = ({
 	activeAttempt,
 	retest,
 }) => [
-
 	{
 		Header: (
 			<div className={styles.container}>
@@ -53,18 +56,15 @@ const getAppearedColumns = ({
 		id       : 'user',
 		accessor : ({ user = {} }) => <section className={styles.section}>{user?.name}</section>,
 	},
-
 	{
 		Header   : <div className={styles.container}>PASSED/FAILED</div>,
 		id       : 'passed_failed',
-		accessor : ({ result_status = '', is_evaluated = false }) => (
+		accessor : ({ result_status = '' }) => (
 			<section className={`${styles.section} ${styles[result_status]}`}>
-				{showResult(is_evaluated, activeAttempt, status, retest)
-					? (startCase(result_status) || '-') : <IsEvaluated is_evaluated={is_evaluated} />}
+				{startCase(result_status) || '-'}
 			</section>
 		),
 	},
-
 	{
 		Header: (
 			<div className={styles.container}>
@@ -78,11 +78,28 @@ const getAppearedColumns = ({
 			</div>
 		),
 		id       : 'score_achieved',
-		accessor : ({ final_score = '', test = {}, is_evaluated = false }) => (
+		accessor : ({ final_score = '', test = {} }) => (
 			<section className={styles.section}>
-				{showResult(is_evaluated, activeAttempt, status, retest)
-					? `${toFixed(final_score, 2)}/${toFixed(test.total_marks, 2)}`
-					: <IsEvaluated is_evaluated={is_evaluated} />}
+				{`${toFixed(final_score, ROUND_OFF_DIGITS)}/${toFixed(test.total_marks, ROUND_OFF_DIGITS)}`}
+			</section>
+		),
+	},
+	{
+		Header: (
+			<div className={styles.container}>
+				<div className={styles.item}>PERCENTAGE</div>
+
+				<SortComponent
+					value="final_score"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
+				/>
+			</div>
+		),
+		id       : 'percentage',
+		accessor : ({ final_score = '', test = {} }) => (
+			<section className={styles.section}>
+				{toFixed((final_score / test.total_marks) * PERCENT, ROUND_OFF_DIGITS)}
 			</section>
 		),
 	},
@@ -99,10 +116,10 @@ const getAppearedColumns = ({
 			</div>
 		),
 		id       : 'percentile',
-		accessor : ({ percentile = '', is_evaluated = false }) => (
+		accessor : ({ percentile = 0, is_evaluated = false }) => (
 			<div className={styles.section}>
 				{showResult(is_evaluated, activeAttempt, status, retest)
-					? (toFixed(percentile || 0, 2) || '-') : <IsEvaluated is_evaluated={is_evaluated} />}
+					? (toFixed(percentile, ROUND_OFF_DIGITS) || '-') : <IsEvaluated is_evaluated={is_evaluated} />}
 			</div>
 		),
 	},
@@ -121,15 +138,14 @@ const getAppearedColumns = ({
 		id       : 'time_taken',
 		accessor : ({ time_taken = '' }) => {
 			const timeTaken = Math.ceil(time_taken);
-			return (
-				(time_taken > 0) ? (
-					<div className={styles.section}>
-						{timeTaken}
-						{' '}
-						{timeTaken > 1 ? 'mins' : 'min'}
-					</div>
-				) : (<div className={styles.section}> - </div>)
-			);
+
+			return time_taken ? (
+				<div className={styles.section}>
+					{timeTaken}
+					{' '}
+					{timeTaken > SINGULAR_VALUE ? 'mins' : 'min'}
+				</div>
+			) : <div className={styles.section}> - </div>;
 		},
 	},
 	{

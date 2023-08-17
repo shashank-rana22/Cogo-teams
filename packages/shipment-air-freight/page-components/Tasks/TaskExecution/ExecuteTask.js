@@ -5,8 +5,12 @@ import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import LoadingState from '../LoadingState';
 
 import {
-	MarkConfirmServices, GenerateMawb, ConfirmBookingWithAirline, ConfirmSellPrice, ConfirmCargoAir,
+	MarkConfirmServices,
+	GenerateMawb,
+	ConfirmBookingWithAirline,
+	ConfirmSellPrice, ConfirmCargoAir, TerminalChargeReceipt,
 } from './CustomTasks';
+import UpdateCargoAir from './CustomTasks/UpdateCargoAir';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -21,6 +25,7 @@ function ExecuteTask({
 	primary_service = {},
 	getShipment = () => {},
 	getShipmentTimeline = () => {},
+	servicesLoading = false,
 
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
@@ -29,6 +34,37 @@ function ExecuteTask({
 
 	const tradeType = incoTermArray.find((x) => x.value === incoTerm)?.tradeType
 		|| primary_service.trade_type;
+
+	const awbExecutionDate =		(shipment_data.documents || []).find(
+		(item) => item?.document_type === 'draft_airway_bill'
+				&& item?.state === 'document_accepted',
+	) || {};
+
+	const service_names = (services || []).map((serviceObj) => (serviceObj?.trade_type === 'export'
+		? `origin_${serviceObj?.service_type}`
+		: `destination_${serviceObj?.service_type}`));
+
+	(services || []).forEach((serviceObj) => {
+		service_names.push(serviceObj.service_type);
+	});
+
+	const { serial_id, commodity_category, shipment_type } = shipment_data;
+
+	const modifiedDataForConfig = {
+		...(primary_service || {}),
+		trade_type: tradeType,
+		schedule_arrival:
+				primary_service?.schedule_arrival
+				|| primary_service?.selected_schedule_arrival,
+		schedule_departure:
+				primary_service?.schedule_departure
+				|| primary_service?.selected_schedule_departure,
+		service_names,
+		serial_id,
+		awbExecutionDate,
+		commodity_category,
+		shipment_type,
+	};
 
 	const {
 		steps = [],
@@ -40,7 +76,7 @@ function ExecuteTask({
 			task,
 			taskConfigData,
 			servicesList   : services,
-			primaryService : primary_service,
+			primaryService : modifiedDataForConfig,
 			onCancel,
 			refetch        : taskListRefetch,
 		},
@@ -48,7 +84,7 @@ function ExecuteTask({
 
 	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - DEFAULT_STEP_VALUE] : {};
 
-	if (loading) {
+	if (loading || servicesLoading) {
 		return <div><LoadingState /></div>;
 	}
 
@@ -69,7 +105,7 @@ function ExecuteTask({
 				task={task}
 				onCancel={onCancel}
 				refetch={taskListRefetch}
-				primaryService={primary_service}
+				primaryService={modifiedDataForConfig}
 				shipment_data={shipment_data}
 				servicesList={[...requiredService, ...requiredLocalService]}
 			/>
@@ -83,7 +119,7 @@ function ExecuteTask({
 				refetch={taskListRefetch}
 				clearTask={onCancel}
 				services={services}
-				primary_service={primary_service}
+				primary_service={modifiedDataForConfig}
 				tradeType="export"
 			/>
 
@@ -99,6 +135,7 @@ function ExecuteTask({
 				shipmentData={shipment_data}
 				onCancel={onCancel}
 				refetch={taskListRefetch}
+				primary_service={primary_service}
 			/>
 
 		);
@@ -128,8 +165,34 @@ function ExecuteTask({
 				refetch={taskListRefetch}
 				timeLineRefetch={getShipmentTimeline}
 				services={services}
-				primary_service={primary_service}
+				primary_service={modifiedDataForConfig}
 				shipment_data={shipment_data}
+			/>
+		);
+	}
+	if (
+		task.task === 'update_flight_departure_and_flight_arrival'
+		&& tradeType === 'import'
+	) {
+		return (
+			<UpdateCargoAir
+				task={task}
+				services={services}
+				primary_service={primary_service}
+				onCancel={onCancel}
+				refetch={taskListRefetch}
+				timeLineRefetch={getShipmentTimeline}
+				shipment_data={shipment_data}
+			/>
+		);
+	}
+	if (task.task === 'upload_terminal_handling_charge_receipt') {
+		return (
+			<TerminalChargeReceipt
+				shipmentData={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
 			/>
 		);
 	}
@@ -138,7 +201,7 @@ function ExecuteTask({
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
-			primary_service={primary_service}
+			primary_service={modifiedDataForConfig}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
 			isLastStep={currentStep === steps.length - DEFAULT_STEP_VALUE}

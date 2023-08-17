@@ -1,0 +1,15 @@
+.div_container {
+	margin: 16px 0;
+	background: #ffff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+}
+
+.container {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 122px;
+	padding: 0 44px;
+}

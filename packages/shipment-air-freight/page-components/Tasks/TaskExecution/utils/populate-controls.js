@@ -9,8 +9,9 @@ const populateControls = ({
 	controls,
 	getApisData,
 	task,
-	shipment_data,
+	primary_service,
 	mainAirFreight,
+	tradeType,
 }) => {
 	const finalControls = controls;
 
@@ -20,25 +21,25 @@ const populateControls = ({
 				const awbNumber = mainAirFreight?.service_provider_id === geo.uuid.freight_force_org_id
 					? getApisData?.get_awb_inventory_data?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.awb_number
 					: '';
-				finalControls[index].value = mainAirFreight?.master_airway_bill_number || awbNumber || '';
+				finalControls[index].value = mainAirFreight?.booking_reference_number || awbNumber || '';
 				if (
 					mainAirFreight?.service_provider_id === geo.uuid.freight_force_org_id
 				) {
 					finalControls[index].disabled =	!getApisData
 						?.list_platform_config_constants?.[GLOBAL_CONSTANTS.zeroth_index]
 						?.platform_config_constant_mappings[GLOBAL_CONSTANTS.zeroth_index]?.value[
-							shipment_data?.airline_id
+							primary_service?.airline_id
 						];
 				}
-
 				finalControls[index].rules.validate = (value) => checkAWBValidation(value);
 			}
 		});
 		return finalControls;
 	}
+
 	if (
 		task.task === 'update_flight_details'
-		&& shipment_data?.trade_type === 'export'
+		&& tradeType === 'export'
 		&& getApisData?.get_shipment_air_movement_details?.list
 	) {
 		const values = (
@@ -46,18 +47,20 @@ const populateControls = ({
 		).map((item) => ({
 			flight_number      : item.flight_number,
 			from_airport_id    : item.origin_id,
-			schedule_arrival   : item.schedule_arrival,
-			schedule_departure : item.schedule_departure,
+			schedule_arrival   : new Date(item.schedule_arrival),
+			schedule_departure : new Date(item.schedule_departure),
 			service_type       : item.service_type,
 			to_airport_id      : item.destination_id,
 		}));
 
 		(finalControls || []).forEach((control, index) => {
 			if (control.name === 'schedule_departure') {
-				finalControls[index].value = getApisData.get_shipment_air_movement_details.final_departure_time;
+				finalControls[index].value = new Date(
+					getApisData.get_shipment_air_movement_details.final_departure_time,
+				);
 			}
 			if (control.name === 'schedule_arrival') {
-				finalControls[index].value = getApisData.get_shipment_air_movement_details.final_arrival_time;
+				finalControls[index].value = new Date(getApisData.get_shipment_air_movement_details.final_arrival_time);
 			}
 			if (control.name === 'movement_details') {
 				finalControls[index].value = values;
@@ -73,7 +76,7 @@ const populateControls = ({
 				control.type === 'fieldArray'
 				&& control.document_type !== 'manifest_copy'
 			) {
-				finalControls[index].noDeleteButtonTill = shipment_data.bls_count || DEFAULT_BL_COUNT_VALUE;
+				finalControls[index].noDeleteButtonTill = primary_service?.bls_count || DEFAULT_BL_COUNT_VALUE;
 				finalControls[index].value = (
 					getApisData?.list_shipment_bl_details || []
 				)

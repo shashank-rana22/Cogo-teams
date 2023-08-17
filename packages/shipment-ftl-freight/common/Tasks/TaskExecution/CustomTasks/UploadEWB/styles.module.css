@@ -1,0 +1,12 @@
+.container {
+	:global {
+		.react-datepicker__aria-live {
+			display: none;
+		}
+	}
+}
+
+.button_wrap {
+	display: flex;
+	justify-content: flex-end;
+}

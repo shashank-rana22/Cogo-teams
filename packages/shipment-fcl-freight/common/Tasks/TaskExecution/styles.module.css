@@ -21,4 +21,11 @@
 .form {
 	max-height: 60.5vh;
 	overflow-y: auto;
+
+	:global {
+		div.react-datepicker__input-container input {
+			height: 32px;
+			padding-left: 8px;
+		}
+	}
 }

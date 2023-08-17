@@ -1,4 +1,5 @@
 import { Carousel } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import useClaimChat from '../../../../../hooks/useClaimChat';
 
@@ -6,29 +7,35 @@ import getCarouselData from './getCarouselData';
 import styles from './styles.module.css';
 
 function FlashUserChats({
-	flashMessagesList,
-	activeCardId,
-	userId,
-	setActiveMessage,
-	firestore,
-	showCarousel,
-	setShowCarousel,
-	canShowCarousel,
+	flashMessagesList = [],
+	activeTab = '',
+	userId = '',
+	setActiveMessage = '',
+	firestore = {},
+	carouselState = '',
+	setCarouselState = () => {},
+	viewType = '',
 }) {
-	const { claimChat, claimLoading = false } = useClaimChat({ userId, setShowCarousel, firestore });
+	const { claimChat = () => {}, claimLoading = false } = useClaimChat({ userId, setCarouselState, firestore });
 
-	const carouselData = showCarousel ? getCarouselData({
+	const canShowCarousel = carouselState === 'show' && !isEmpty(flashMessagesList);
+
+	const carouselData = canShowCarousel ? getCarouselData({
 		flashMessagesList,
-		activeCardId,
+		activeTab,
 		userId,
 		setActiveMessage,
 		firestore,
 		claimChat,
 		claimLoading,
+		viewType,
 	}) : [];
 
 	return (
-		<div className={styles.flash_messages_div} style={{ '--height': !canShowCarousel ? '0' : '16%' }}>
+		<div
+			className={styles.flash_messages_div}
+			style={{ height: canShowCarousel ? '16%' : '0' }}
+		>
 			{canShowCarousel && (
 				<Carousel
 					id="flash_messages"

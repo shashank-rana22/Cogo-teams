@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable custom-eslint/regex-check, custom-eslint/uuid-check */
 export default {
 	country: {
 		id   : '541d1232-58ce-4d64-83d6-556a42209eb7',
@@ -29,15 +31,38 @@ export default {
 		},
 	},
 	regex: {
-		PAN              : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
-		// eslint-disable-next-line max-len
-		GST              : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
-		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL            : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
+		TAX                                : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g, // PAN Regular Expression
+		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		ECN                                : '',
+		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL                              : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,
+		MOBILE_NUMBER_WITHOUT_COUNTRY_CODE : /^[0-9]{10}$/,
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
+	office_locations: [
+		'gurgaon',
+		'mumbai',
+		'delhi',
+		'coimbatore',
+		'bangalore',
+		'chennai',
+		'kolkata',
+		'noida',
+		'ambala',
+		'haldia',
+		'ludhiana',
+		'kochi',
+		'hyderabad',
+		'pune',
+		'jaipur',
+		'raipur',
+		'ahmedabad',
+		'vadodara',
+		'rudrapur',
+		'bagdogra',
+	],
 	uuid: {
 		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
 		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
@@ -56,10 +81,12 @@ export default {
 			'9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d',
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
-		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
-		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
-		customer_service_role_ids : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
-		sales_role_ids            : [
+		third_party_enrichment_agencies_role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+		third_party_enrichment_agencies_rm_ids   : [],
+		cogoxpress_id                            : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
+		any_carrier_airline_id                   : '30798ff1-992c-48f0-aabd-eb92e98df747',
+		customer_service_role_ids                : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
+		sales_role_ids                           : [
 			'fdf55227-a433-4450-aab0-5e4c215ea72c',
 			'95113dbb-43bf-4434-958c-3fe8063657e7',
 			'0461c31b-4761-40b6-ac2a-59a4e9d4e23f',
@@ -67,7 +94,7 @@ export default {
 		cogo_demo_account_shipper_user: '7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
 		cogo_demo_account_shipper_user_branch:
 			'2c72817c-c663-48ea-b8ef-cd92397842a1',
-		business_owner_ids : ['0f9ddc9b-e2d7-4fee-83f6-08fb8bed6d11'],
+		business_owner_ids : ['0f9ddc9b-e2d7-4fee-83f6-08fb8bed6d11', '8ecf37e5-4605-4c4c-9f8f-77183101317'],
 		supply_role_ids    : [
 			'e31c6d7b-e62e-4fd5-a2e1-106e037ac03c',
 			'70710ab2-0f80-4e12-a4f5-d75660c05315',
@@ -77,17 +104,20 @@ export default {
 			'd9c490f9-afcc-467e-a86d-2a02edf81959',
 			'568c5939-3721-4444-a0ff-4c0298bc948d',
 		],
+		supplier_relations_head_id: '0a623fc0-bd23-4990-b2ec-0115d3f1095b',
+
 		supply_relation_manager_role_id: '568c5939-3721-4444-a0ff-4c0298bc948d',
 
 		cogo_freight_supplier      : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 		prod_process_owner         : 'ae80297f-e30d-45fb-845c-61c302523476',
+		air_prod_process_owner     : '9e6dad55-dc0c-42b4-a7d1-9908204cdca7',
 		corporate_owner_id         : '89184155-1f77-4265-826a-e997d140002f',
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
-			'0bc8c199-09ed-4a85-b3a3-a855f05a2716', // Prod_KAM IE
-			'f9905d33-24d7-48ca-99cd-eeca13a90d5a', // Prod_KAM IE Manager
+			'0bc8c199-09ed-4a85-b3a3-a855f05a2716', // KAM - SME Demand
+			'f9905d33-24d7-48ca-99cd-eeca13a90d5a', // KAM Manager - SME Demand
 			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager
 			'a35fbbbe-38ea-4ee8-82a8-06d1245a23a4', // Prod_KAM ES
 			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // Prod_KAM CP Manager
@@ -100,6 +130,19 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'594be53f-e39a-45d1-a705-57660a4a4a00', // IE Owner - SME Demand
+			'a35fbbbe-38ea-4ee8-82a8-06d1245a23a4', // KAM - Enterprise Demand
+			'4c6f6036-2383-4c40-9b84-fa2b598031e1', // KAM SO1
+			'eb292d80-a05f-4a56-a0f7-ef51255583aa', // Prod_KAM_Transport_Supply
+			'b5dd96b2-11a2-4655-8319-040614262f3d', // OKAM (Operational Key Account Manager)
+			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
+			'69013c68-2d1b-4332-91fb-ada1a6471240', // business consultant
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5',
+			'5f79d531-50e0-4843-995f-71057e659e0f',
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',
+			'264a83ab-d438-48c3-8095-bb503f5b619c',
+			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
+			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
@@ -123,8 +166,10 @@ export default {
 			'b69344b8-f00c-4870-be0f-3233413edccf',
 		],
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
+		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		finops_manager            : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
+		ff_cost_booking_executive : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		service_ops2_role_id      : [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
@@ -147,12 +192,12 @@ export default {
 		prod_es_sales         : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 		entity_manager_id     : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
 		service_ops1_role_ids : [
-			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
+			'30e7e3e4-5d6d-456d-af50-56896d4ea6aa', // Air S01
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -160,6 +205,7 @@ export default {
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
 		],
+		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		sales_role                       : [
@@ -193,12 +239,15 @@ export default {
 			'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		],
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
-		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
-		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
-		cogo_one_admin_ids    : [
+		so_2_manager          : [
+			'1665784f-6e58-4299-8a33-4b7487f61188',
+			'eff02645-cb9c-44bf-8f5a-4d273b36e52d', // Prod_SO-2 Manager
+		],
+		cogo_one_admin_ids: [
 			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
@@ -219,6 +268,20 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
+		igm_desk                     : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager     : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
+		centralised_customer_support : [
+			'264a83ab-d438-48c3-8095-bb503f5b619c',	// Common Pool
+			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5', // SME
+			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
+			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
+		],
+		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		corporate_owner_demand   : '14fe1423-3c2d-4f66-bc33-89bed08b92ee',
+		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
+		so1_revenue_desk         : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
+		supply_fulfillment       : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
 	},
 	options: {
 		registration_types: [
@@ -436,21 +499,22 @@ export default {
 				label : '501 Cogoport Vietnam',
 				value : '501',
 			},
+			{
+				label : '601 Cogoport Thailand',
+				value : '601',
+			},
+			{
+				label : '701 Cogoport Indonesia',
+				value : '701',
+			},
+			{
+				label : '801 Cogoport China',
+				value : '801',
+			},
 		],
 		migration_status: [
 			{ label: 'True', value: true },
 			{ label: 'False', value: false },
-		],
-		timezone: [
-			{
-				label: 'IST', value: 'IST',
-			},
-			{
-				label: 'GMT', value: 'GMT',
-			},
-			{
-				label: 'VNM', value: 'VNM',
-			},
 		],
 		services: [
 			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
@@ -460,8 +524,96 @@ export default {
 			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
 			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
 		],
+		education_level: {
+			post_graduates_degree: [
+				{
+					label : 'Master of Business Administration (M.B.A)',
+					value : 'master_of_business_administration_(M.B.A)',
+				},
+				{ label: 'Master of Technology (M.Tech)', value: 'master_of_technology_(M.Tech)' },
+				{ label: 'Master of Commerce (M.Com)', value: 'master_of_commerce_(M.Com)' },
+				{ label: 'Master of Arts (M.A)', value: 'master_of_arts_(M.A)' },
+				{ label: 'Master of Science (M.Sc)', value: 'master_of_science_(M.Sc)' },
+				{ label: 'Master of Architecture (M.Arch)', value: 'master_of_architecture_(M.Arch)' },
+				{ label: 'Master of Law (LL.M)', value: 'master_of_law_(LL.M)' },
+				{ label: 'Master of Computer Applications (M.C.A)', value: 'master_of_computer_applications_(M.C.A)' },
+				{ label: 'Master of Business Management (M.B.M)', value: 'master_of_business_management_(M.B.M)' },
+				{
+					label : 'Master of International Business (M.I.B)',
+					value : 'master_of_international_business_(M.I.B)',
+				},
+				{ label: 'Masters in Design (M.Des)', value: 'masters_in_design_(M.Des)' },
+				{
+					label : 'Masters Programme in International Business (M.P.I.B)',
+					value : 'masters_rogramme_in_international_business_(M.P.I.B)',
+				},
+				{ label: 'Master of Business Laws (M.B.L)', value: 'master_of_business_laws_(M.B.L)' },
+				{ label: 'Master of Philosophy (M.Phil)', value: 'master_of_philosophy_(M.Phil)' },
+				{ label: 'Master of Management Program (M.M.P)', value: 'master_of_management_program_(M.M.P)' },
+				{ label: 'Master of Journalism (M.J)', value: 'master_of_journalism_(M.J)' },
+				{
+					label : 'Master of International Business (M.I.B)',
+					value : 'master_of_international_business_(M.I.B)',
+				},
+				{ label: 'Others', value: 'others' },
+			],
+			graduate_degree: [
+				{
+					label : 'Bachelor of Engineering/Tech (BE/B.Tech)',
+					value : 'bachelor_of_engineering/tech_(BE/B.Tech)',
+				},
+				{ label: 'Bachelor of Science', value: 'bachelor_of_science' },
+				{ label: 'Bachelor of Arts', value: 'bachelor_of_arts' },
+				{ label: 'Bachelor of Law (B.L)', value: 'bachelor_of_law_(B.L)' },
+				{ label: 'Bachelor of Commerce', value: 'bachelor_of_commerce' },
+				{ label: 'Bachelor of Design (B.Des)', value: 'bachelor_of_design_(B.Des)' },
+				{ label: 'Bachelor of Visual Arts (B.V.A)', value: 'bachelor_of_visual_arts_(B.V.A)' },
+				{ label: 'Bachelor of Architecture (B.Arch)', value: 'bachelor_of_architecture_(B.Arch)' },
+				{ label: 'Bachelor of Applied Sciences (B.A.S)', value: 'bachelor_of_applied_sciences_(B.A.S)' },
+				{
+					label : 'Bachelor of Computer Applications (B.C.A)',
+					value : 'bachelor_of_computer_applications_(B.C.A)',
+				},
+				{ label: 'BMS/BBA/BBS', value: 'BMS/BBA/BBS' },
+				{ label: 'Bachelor of Business Studies (B.B.S)', value: 'bachelor_of_business_studies_(B.B.S)' },
+				{ label: 'Bachelor of Business Management (B.B.M)', value: 'bachelor_of_business_management_(B.B.M)' },
+				{
+					label : 'Bachelor of Business Administration (B.B.A)',
+					value : 'bachelor_of_business_administration_(B.B.A)',
+				},
+				{
+					label : 'Bachelor of Fashion Technology (B.F.Tech)',
+					value : 'bachelor_of_fashion_technology_(B.F.Tech)',
+				},
+				{
+					label : 'Bachelor of Medicine Bachelor of Surgery (M.B.B.S)',
+					value : 'bachelor_of_medicine_bachelor_of_surgery_(M.B.B.S)',
+				},
+				{ label: 'Bachelor of Pharmacy (B.Pharma)', value: 'bachelor_of_pharmacy_(B.Pharma)' },
+				{ label: 'IIM 5-year Integrated Mgmt. Program', value: 'iim_5_year_integrated_mgmt._program' },
+				{ label: 'Others', value: 'others' },
+			],
+			doctorate_degree: [
+				{ label: 'Doctor of Medicine (M.D.)', value: 'doctor_of_medicine_(M.D.)' },
+				{ label: 'Doctor of Philosophy (Ph.D)', value: 'doctor_of_philosophy_(Ph.D)' },
+				{ label: 'Master of Dental Surgery (M.D.S)', value: 'master_of_dental_surgery_(M.D.S)' },
+				{ label: 'Phd in management', value: 'phd_in_management' },
+				{ label: 'Others', value: 'others' },
+			],
+		},
+		disable_options: ['10th', '12th', 'Diploma'],
 	},
 	navigations: {
+
+		settlement_onAccountCollection: {
+			tabs: [
+				'ap-ar-settlement',
+				'tds-settlement',
+				'history',
+				'onAccountCollection',
+				'JournalVoucher',
+			],
+		},
 		supply_dashboard: {
 			rfq_enquiries: {
 				tabs: [
@@ -475,12 +627,46 @@ export default {
 				],
 			},
 		},
+
+		enrichment: {
+			whatsapp_number_label            : 'Whatsapp Number',
+			is_allowed_for_enrichment_sheets : true,
+			hide_columns                     : {
+				relationship_manager_view: {
+					active    : ['status'],
+					responded : ['status'],
+					success   : ['status'],
+					failed    : ['action'],
+				},
+				agent_view: {
+					active    : ['requested_agent', 'status'],
+					responded : ['requested_agent', 'status'],
+					success   : ['requested_agent', 'status'],
+					failed    : ['requested_agent', 'action'],
+				},
+			},
+			actions: {
+				active: {
+					add: 'Add Details',
+				},
+				responded:	{
+					edit: 'Edit Details',
+				},
+				success: {
+					view: 'View Details',
+				},
+			},
+		},
 		account_receivables: {
 			defaulters: {
 				migration_status: {
 					show_filter: true,
 				},
 			},
+		},
+		over_heads: {
+			region_specific_cogo_entities            : false,
+			expense_non_recurring_upload_invoice_tds : false,
 		},
 	},
 	others: {
@@ -489,24 +675,58 @@ export default {
 			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 			max_length : 15,
 		},
-
+		banking_code: {
+			financial_system_code : 'ifsc',
+			pattern               : /^[A-Z]{4}0[A-Z0-9]{6}$/,
+		},
 		pan_number: {
 			label   : 'PAN',
-			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
 		},
-
 		economic_zone: {
 			label: 'SEZ',
 		},
+		identification_number: {
+			label   : 'PAN Number',
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
+		},
+
+		ask_gst_details: true,
 
 		navigations: {
 			onboard_vendor: {
-				validate_registration: true,
+				validate_registration : true,
+				registration_types    : false,
 			},
 			cogo_one: {
-				has_voice_call_access     : true,
-				default_country_code      : 'IN',
-				template_default_language : 'english',
+				has_voice_call_access       : true,
+				template_default_language   : 'english',
+				supply_sender_mobile_number : '918069195980',
+			},
+			bookings: {
+				invoicing: {
+					is_invoice_mergeable              : false,
+					disable_edit_invoice              : true,
+					stakeholder_wise_invoice_required : true,
+				},
+			},
+			business_finance: {
+				ar: {
+					settlement: {
+						invoice_number: {
+							document_key : 'destinationDocumentValue',
+							irn_key      : 'destinationIrnNumber',
+						},
+					},
+				},
+			},
+			partner: {
+				bookings: {
+					invoicing: {
+						request_cancel_invoice : false,
+						request_credit_note    : true,
+					},
+				},
 			},
 		},
 	},

@@ -67,7 +67,7 @@ const consolidated_invoices = {
 		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'organization',
 		},
 		{
 			api          : 'get_shipment_fortigo_consolidated_sell_invoice',

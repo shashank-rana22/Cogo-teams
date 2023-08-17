@@ -1,0 +1,14 @@
+.button_wrap {
+	display: flex;
+	justify-content: flex-end;
+	margin: 24px 16px 16px 12px;
+}
+
+.text {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.container {
+	padding: 18px;
+}

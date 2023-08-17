@@ -1,6 +1,13 @@
 .container {
 	display: flex;
 	flex-wrap: wrap;
+
+	:global {
+		.bl_category {
+			background: var(--color-accent-orange-4);
+			border: 1px solid var(--color-accent-orange-3);
+		}
+	}
 }
 
 .cargo_detail_pill {

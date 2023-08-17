@@ -5,10 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useStudentWiseTestResult = ({ test_id = '', activeAttempt = '' }) => {
-	const [{ loading: reAttemptLoading }, trigger] = useRequest({
-		method : 'post',
-		url    : '/update_test_mapping_responses',
-	}, { manual: true });
+	const { debounceQuery, query } = useDebounceQuery();
 
 	const [showReAttemptModal, setShowReAttemptModal] = useState(false);
 
@@ -21,8 +18,6 @@ const useStudentWiseTestResult = ({ test_id = '', activeAttempt = '' }) => {
 	const [sortFilter, setSortFilter] = useState({});
 
 	const [searchValue, setSearchValue] = useState('');
-
-	const { debounceQuery, query } = useDebounceQuery();
 
 	const { sortBy, sortType } = sortFilter || {};
 
@@ -79,6 +74,11 @@ const useStudentWiseTestResult = ({ test_id = '', activeAttempt = '' }) => {
 		params : { ...payload },
 	}, { manual: false });
 
+	const [{ loading: reAttemptLoading }, trigger] = useRequest({
+		method : 'post',
+		url    : '/update_test_mapping_responses',
+	}, { manual: true });
+
 	const handleReAttempt = async () => {
 		try {
 			await trigger({
@@ -87,6 +87,8 @@ const useStudentWiseTestResult = ({ test_id = '', activeAttempt = '' }) => {
 					test_id,
 				},
 			});
+
+			localStorage.removeItem('visibilityChangeCount');
 
 			refetch();
 		} catch (err) {

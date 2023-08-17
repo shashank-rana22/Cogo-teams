@@ -6,6 +6,7 @@ import {
 	MarkConfirmServices,
 	UploadDraftBL,
 } from './CustomTasks';
+import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -24,6 +25,7 @@ function ExecuteTask({
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
+	const STEPS_LENGTH = 1;
 
 	const {
 		steps = [],
@@ -32,7 +34,7 @@ function ExecuteTask({
 		serviceIdMapping = [],
 	} = useTaskExecution({ task, taskConfigData, servicesList: services, primaryService: primary_service });
 
-	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - 1] : {};
+	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - STEPS_LENGTH] : {};
 
 	if (loading) {
 		return <div><LoadingState /></div>;
@@ -81,13 +83,18 @@ function ExecuteTask({
 		);
 	}
 
+	if (
+		task?.task === 'generate_cargo_insurance') {
+		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+	}
+
 	return (
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - STEPS_LENGTH}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

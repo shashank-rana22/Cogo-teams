@@ -107,3 +107,18 @@ export const REVERT_STATUS_LABEL_MAPPING = {
 };
 
 export const REVERTABLE_SERVICES = ['fcl_freight_service', 'lcl_freight_service', 'air_freight_service'];
+
+export const SHIPMENT_STATE = ['completed', 'in_progress', 'confirmed_by_importer_exporter', 'shipment_received'];
+
+export const LABELS = [
+	'container_size',
+	'containers_count',
+	'container_type',
+	'commodity',
+	'inco_term',
+	'trucks_count',
+	'trade_type',
+	'cargo_weight_per_container',
+	'volume',
+	'weight',
+];

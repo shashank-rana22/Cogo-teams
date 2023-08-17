@@ -42,7 +42,7 @@ const FF_COST_BOOKING_APIS = [
 	{
 		api          : 'list_organization_trade_parties',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'organization',
 	},
 	{
 		api          : 'get_shipment_air_csr_ocr_data',

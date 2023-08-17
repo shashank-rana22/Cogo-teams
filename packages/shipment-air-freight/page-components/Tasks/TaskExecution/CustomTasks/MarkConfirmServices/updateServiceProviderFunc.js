@@ -65,7 +65,7 @@ const useUpdateServiceProvider = ({
 		if (formData || formDataLocal) {
 			servicesList.forEach((serviceObj) => {
 				let data = {};
-				if (serviceObj?.service_type === 'air_freight_local') {
+				if (serviceObj?.service_type === 'air_freight_local_service') {
 					if (serviceObj?.trade_type === 'export') {
 						data = {
 							service_provider_id : formDataLocal?.origin_service_provider_id,

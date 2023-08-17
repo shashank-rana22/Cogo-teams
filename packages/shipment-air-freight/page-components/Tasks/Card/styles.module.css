@@ -12,9 +12,15 @@
 		align-items: flex-start;
 		justify-content: center;
 	}
+
+	:global {
+		.ui_button_container {
+			min-width: 140px;
+		}
+	}
 }
 
-.action {
-	display: flex;
-	justify-content: space-between;
+.view_button {
+	margin-right: 20px;
+	font-weight: 600;
 }

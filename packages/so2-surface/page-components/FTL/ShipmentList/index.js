@@ -1,5 +1,7 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Checkbox } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/geo/IN';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useContext, useEffect } from 'react';
 
@@ -11,13 +13,18 @@ import Card from './Card';
 import ListPagination from './ListPagination';
 import styles from './styles.module.css';
 
-function ShipmentList({ loading, data = {} }) {
+const isSelectable = (activeTab) => !['completed_shipment', 'cancelled_shipment'].includes(activeTab);
+const REALLOCATE_ELIGIBLE_PERSONS = [GLOBAL_CONSTANTS.uuid.super_admin_id,
+	GLOBAL_CONSTANTS.uuid.corporate_owner_id, GLOBAL_CONSTANTS.uuid.prod_process_owner];
+
+function ShipmentList({ loading = false, data = {} }) {
+	const role_id = useSelector((state) => state?.profile?.auth_role_data?.id);
 	const { activeTab, setFilters, filters } = useContext(DashboardContext);
 	const { apiTrigger, loading: reallocateLoading } = useBulkUpdateSO2();
 
 	const { list = [] } = data || {};
 	const [checkedRows, setCheckedRows] = useState(new Set());
-	const [allocatedSo2, setAllocatedSo2] = useState();
+	const [allocatedSo2, setAllocatedSo2] = useState('');
 	const [show, setShow] = useState(false);
 
 	const handAllocate = async () => {
@@ -42,13 +49,29 @@ function ShipmentList({ loading, data = {} }) {
 		setCheckedRows(new Set());
 	}, [activeTab, setCheckedRows]);
 
+	const isCardSelectable = !!isSelectable(activeTab);
+
 	return (
 		<div>
 			{!loading && isEmpty(list)
 				? <EmptyState />
 				: (
 					<>
-						<Pagination />
+						<div className={styles.list_controller}>
+							{isCardSelectable ? (
+								<div>
+									<Checkbox
+										label="Select All"
+										checked={!isEmpty(list)
+								&& checkedRows?.size === list?.length}
+										onChange={(e) => (e?.target?.checked ? setCheckedRows(
+											new Set(list?.map((item) => item?.id)),
+										) : setCheckedRows(new Set()))}
+									/>
+								</div>
+							) : <div />}
+							<Pagination />
+						</div>
 
 						{(list || [])?.map((item) => (
 							<Card
@@ -57,24 +80,29 @@ function ShipmentList({ loading, data = {} }) {
 								setCheckedRows={setCheckedRows}
 								key={item.id}
 								activeTab={activeTab}
+								isSelectable={isCardSelectable}
 							/>
 						))}
-						<div className={styles.action_buttons}>
-							<Button
-								size="lg"
-								onClick={() => { setCheckedRows(new Set()); }}
-								themeType="tertiary"
-							>
-								<div className={styles.action_text}>Clear</div>
-							</Button>
+						{
+						REALLOCATE_ELIGIBLE_PERSONS.includes(role_id) && isCardSelectable && 	(
+							<div className={styles.action_buttons}>
+								<Button
+									size="lg"
+									onClick={() => { setCheckedRows(new Set()); }}
+									themeType="tertiary"
+								>
+									<div className={styles.action_text}>Clear</div>
+								</Button>
 
-							<Button
-								size="lg"
-								onClick={() => { setShow(true); }}
-							>
-								<div className={styles.action_text}>Reallocate</div>
-							</Button>
-						</div>
+								<Button
+									size="lg"
+									onClick={() => { setShow(true); }}
+								>
+									<div className={styles.action_text}>Reallocate</div>
+								</Button>
+							</div>
+						)
+						}
 
 						<Pagination />
 						{show

@@ -1,20 +1,7 @@
-.label {
-	margin-bottom: 8px;
-	font-weight: 600;
-	color: #221f20;
-}
-
-.field {
-	padding-block: 12px;
-	border-bottom: 1px solid #e0e0e0;
-
-	&:last-child {
-		border-bottom: 0;
+.styled_ui_modal_dialog {
+	:global {
+		.ui_modal_body_container {
+			max-height: 80vh;
+		}
 	}
-}
-
-.error {
-	margin-top: 4px;
-	font-size: 12px;
-	color: #f33;
 }

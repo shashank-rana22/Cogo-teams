@@ -1,0 +1,39 @@
+.post_facto {
+	display: flex;
+	width: 100%;
+	padding: 14px;
+	margin-bottom: 14px;
+	font-size: 22px;
+	font-weight: 600;
+	color: #6a6464;
+	background: #ffbcbc;
+	border-radius: 4px;
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	margin: 0;
+	font-size: 24px;
+	font-weight: 600;
+	color: #cb6464;
+	text-transform: capitalize;
+
+	svg {
+		margin-right: 12px;
+	}
+}
+
+.sub_heading {
+	margin: 0;
+	font-size: 18px;
+	color: #cb6464;
+}
+
+.cancelled {
+	width: 100%;
+	padding: 16px;
+	margin-bottom: 16px;
+	background: #fff0f0;
+	border-radius: 4px;
+}

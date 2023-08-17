@@ -21,11 +21,11 @@ function ChatBody({
 	getTicketActivity = () => {},
 	messageRef = {},
 	ticketData = {},
-	ticketExists = false,
+	doesTicketsExists = false,
 	modalData = {},
 	detailsLoading = false,
 }) {
-	const { user: { id: userId = '', name: currentAgentName = '' } } = useSelector(({ profile }) => profile);
+	const { user: { id: userId = '' } } = useSelector(({ profile }) => profile);
 	const { items = [], last, page } = listData;
 	const { TicketReviewer: ticketReviewer = {} } = ticketData || {};
 	const { User: user = {} } = ticketReviewer || {};
@@ -38,7 +38,7 @@ function ChatBody({
 		}
 	};
 
-	if (!ticketExists && !chatLoading) {
+	if (!doesTicketsExists && !chatLoading) {
 		const emptyText = `No records for ticket #${
 			modalData?.ticketId
 		} found`;
@@ -74,11 +74,14 @@ function ChatBody({
 					Data: data = {},
 					UserID : activityUserId = '',
 					UserType : userType,
+					TicketFeedback: ticketFeedback = {},
+					IsInternal: isInternal,
 				} = itm || {};
 
 				const { Url: mediaUrls = [], TicketType: ticketType = '', User: reviewer = {} } = data || {};
 				const { SystemUserID: systemUserID = '', Name: name = '' } = ticketUser || {};
 				const { Name: oldReviewerName = '' } = reviewer || {};
+				const { Rating: rating } = ticketFeedback || {};
 
 				return (
 					<TicketComment
@@ -89,13 +92,15 @@ function ChatBody({
 						mediaUrls={mediaUrls}
 						userId={userId}
 						name={name}
+						rating={rating}
+						agentName={name}
 						userType={userType}
-						currentAgentName={currentAgentName}
 						activityUserId={activityUserId}
 						oldReviewerName={oldReviewerName}
 						reviewerName={reviewerName}
 						systemUserID={systemUserID}
 						ticketType={ticketType}
+						isInternal={isInternal}
 					/>
 				);
 			})}

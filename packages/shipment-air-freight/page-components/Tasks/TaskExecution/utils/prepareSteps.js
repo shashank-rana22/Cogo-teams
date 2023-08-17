@@ -2,20 +2,34 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { subtractDays } from '@cogoport/utils';
 
 const INDEX_VALUE = 1;
-const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
-const dataExtractionFunc = (obj, index, arr) => {
-	if (index === (arr?.length || DEFAULT_VALUE_FOR_NULL_HANDLING) - INDEX_VALUE) {
+const dataExtractionFunc = ({
+	obj = {},
+	index,
+	arr = [],
+	fieldTypeMapping = {},
+	fieldName = '',
+}) => {
+	if (index === ((arr || []).length) - INDEX_VALUE) {
 		if (obj === undefined) {
 			return undefined;
 		}
-		return new Date(obj?.[arr?.[index]]);
+		if (fieldTypeMapping[fieldName] === 'datepicker') {
+			return obj?.[arr?.[index]] ? new Date(obj?.[arr?.[index]]) : undefined;
+		}
+		return obj?.[arr?.[index]];
 	}
 
 	if (obj?.[arr?.[index]] === undefined) {
 		return undefined;
 	}
 
-	return dataExtractionFunc(obj?.[arr?.[index]], index + INDEX_VALUE, arr);
+	return dataExtractionFunc({
+		obj   : obj?.[arr?.[index]],
+		index : index + INDEX_VALUE,
+		arr,
+		fieldTypeMapping,
+		fieldName,
+	});
 };
 
 const evalAdhocConditions = (requiredCondition) => {
@@ -30,24 +44,40 @@ const evalAdhocConditions = (requiredCondition) => {
 	return comingKeyMap[key_to_eval](requiredCondition[key_to_eval]);
 };
 
-const splitAndGet = (value_to_insert, data) => {
+const splitAndGet = ({
+	value_to_insert = '',
+	data = {},
+	fieldTypeMapping = {},
+	fieldName = '',
+}) => {
 	const splitArr = value_to_insert.split('.').map((element, index) => {
 		if (index === GLOBAL_CONSTANTS.zeroth_index) {
 			return data;
 		}
 		return element;
 	});
-	const finalVal = dataExtractionFunc(splitArr[GLOBAL_CONSTANTS.zeroth_index], INDEX_VALUE, splitArr);
+	const finalVal = dataExtractionFunc({
+		obj   : splitArr[GLOBAL_CONSTANTS.zeroth_index],
+		index : INDEX_VALUE,
+		arr   : splitArr,
+		fieldTypeMapping,
+		fieldName,
+	});
 
 	return finalVal;
 };
 
-const evaluateVal = (value_to_insert, data) => {
+const evaluateVal = ({
+	value_to_insert = '',
+	data = {},
+	fieldTypeMapping = {},
+	fieldName = '',
+}) => {
 	if (
 		typeof value_to_insert === 'string'
     && value_to_insert?.includes('data')
 	) {
-		return splitAndGet(value_to_insert, data);
+		return splitAndGet({ value_to_insert, data, fieldTypeMapping, fieldName });
 	}
 	if (Array.isArray(value_to_insert)) {
 		const NEW_VALUE_TO_INSERT = [];
@@ -56,7 +86,7 @@ const evaluateVal = (value_to_insert, data) => {
 			const NEW_OBJ = {};
 			Object.keys(valObj || {}).forEach((key) => {
 				NEW_OBJ[key] = typeof valObj[key] === 'string' && valObj[key]?.includes('data')
-					? splitAndGet(valObj[key], data)
+					? splitAndGet({ value_to_insert: valObj[key], data, fieldTypeMapping, fieldName: key })
 					: valObj[key];
 			});
 			NEW_VALUE_TO_INSERT.push(NEW_OBJ);
@@ -68,13 +98,39 @@ const evaluateVal = (value_to_insert, data) => {
 	return value_to_insert;
 };
 
-const getConditionalParams = (condition, shipment_data, obj) => {
-	const leftHandSide = evaluateVal(condition?.leftValue, shipment_data);
-	const rightHandSide = evaluateVal(condition?.rightValue, shipment_data);
+const getConditionalParams = ({
+	condition = {},
+	shipment_data = {},
+	obj = {},
+	fieldTypeMapping = {},
+	fieldName = '',
+}) => {
+	const leftHandSide = evaluateVal({
+		value_to_insert : condition?.leftValue,
+		data            : shipment_data,
+		fieldTypeMapping,
+		fieldName,
+	});
+	const rightHandSide = evaluateVal({
+		value_to_insert : condition?.rightValue,
+		data            : shipment_data,
+		fieldTypeMapping,
+		fieldName,
+	});
 
-	const value = evaluateVal(obj.value, shipment_data);
+	const value = evaluateVal({
+		value_to_insert : obj.value,
+		data            : shipment_data,
+		fieldTypeMapping,
+		fieldName,
+	});
 
-	const elseValue = evaluateVal(obj.elseValue, shipment_data);
+	const elseValue = evaluateVal({
+		value_to_insert : obj.elseValue,
+		data            : shipment_data,
+		fieldTypeMapping,
+		fieldName,
+	});
 
 	return {
 		leftHandSide,
@@ -103,7 +159,7 @@ const evaluateExpression = (operator, lhs, rhs) => {
 	return true;
 };
 
-const evaluateObject = (control, task, shipment_data) => {
+const evaluateObject = ({ control = {}, task = {}, shipment_data = {}, fieldTypeMapping = {}, fieldName = '' }) => {
 	const finalControl = control;
 
 	if (control.conditions) {
@@ -111,15 +167,17 @@ const evaluateObject = (control, task, shipment_data) => {
 			const { condition, value: value_to_insert } = obj || {};
 
 			if (!condition) {
-				finalControl[obj.key_to_add] = evaluateVal(
+				finalControl[obj.key_to_add] = evaluateVal({
 					value_to_insert,
-					shipment_data,
-				);
+					data: shipment_data,
+					fieldTypeMapping,
+					fieldName,
+				});
 			} else {
 				const {
 					leftHandSide, rightHandSide,
 					value, elseValue,
-				} = getConditionalParams(condition, shipment_data, obj);
+				} = getConditionalParams({ condition, shipment_data, obj, fieldTypeMapping, fieldName });
 				const addConditionsValue = evaluateExpression(
 					condition?.operator,
 					leftHandSide,
@@ -144,7 +202,14 @@ const evaluateObject = (control, task, shipment_data) => {
 		});
 	}
 	if (control?.type === 'fieldArray') {
-		finalControl.controls = (control.controls || []).map((ctrl) => evaluateObject(ctrl, task, shipment_data));
+		finalControl.controls = (control.controls || [])
+			.map((ctrl) => evaluateObject({
+				control   : ctrl,
+				task,
+				shipment_data,
+				fieldTypeMapping,
+				fieldName : ctrl.name,
+			}));
 	}
 
 	return finalControl;
@@ -209,11 +274,27 @@ const conditionalAddition = (step, shipment_data) => {
 	return modifiedStep;
 };
 
-const injectDataIntoValues = (step, task, shipment_data) => {
+const injectDataIntoValues = ({ step = {}, task = {}, shipment_data = {}, fieldTypeMapping = {} }) => {
+	const updatedFieldTypeMapping = { ...fieldTypeMapping };
+	(step?.controls || []).forEach((ctrl) => {
+		if (ctrl.type === 'fieldArray') {
+			(ctrl?.controls || []).forEach((item) => {
+				updatedFieldTypeMapping[item.name] = item.type;
+			});
+		} else {
+			updatedFieldTypeMapping[ctrl.name] = ctrl.type;
+		}
+	});
 	const newStep = {
 		...step,
-		controls: (step.controls || []).map((ctrl) => ({
-			...evaluateObject(ctrl, task, shipment_data),
+		controls: (step?.controls || []).map((ctrl) => ({
+			...evaluateObject({
+				control          : ctrl,
+				task,
+				shipment_data,
+				fieldTypeMapping : updatedFieldTypeMapping,
+				fieldName        : ctrl.name,
+			}),
 		})),
 	};
 
@@ -221,11 +302,18 @@ const injectDataIntoValues = (step, task, shipment_data) => {
 };
 
 const prepareSteps = (steps, task, primary_service = {}) => {
+	const FIELD_TYPE_MAPPING = {};
 	const filteredSteps = steps
 		?.filter((step) => evaluateCondition(step, primary_service, task))
 		?.map((step) => conditionalAddition(step, primary_service));
 
-	const dataRichUi = filteredSteps?.map((step) => injectDataIntoValues(step, task, primary_service));
+	const dataRichUi = filteredSteps
+		?.map((step) => injectDataIntoValues({
+			step,
+			task,
+			shipment_data    : primary_service,
+			fieldTypeMapping : FIELD_TYPE_MAPPING,
+		}));
 	return dataRichUi;
 };
 

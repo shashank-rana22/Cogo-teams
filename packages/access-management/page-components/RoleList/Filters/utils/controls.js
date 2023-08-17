@@ -1,5 +1,14 @@
 import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
 
+const resetFilters = {
+	hierarchy_level    : undefined,
+	navigation         : undefined,
+	q                  : undefined,
+	role_functions     : undefined,
+	role_sub_functions : undefined,
+	stakeholder_id     : undefined,
+};
+
 const MIN_ARRAY_LENGTH = 0;
 
 const getAllNavigations = () => {
@@ -43,6 +52,10 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 		{ label: 'Booking Desk', value: 'booking_desk' },
 		{ label: 'Post Shipment', value: 'post_shipment' },
 		{ label: 'FINOPS', value: 'finops' },
+		{ label: 'Common Customer Operations', value: 'common_customer_operations' },
+		{ label: 'CP Customer Operations', value: 'cp_customer_operations' },
+		{ label: 'Mid Size Customer Operations', value: 'mid_size_customer_operations' },
+		{ label: 'Enterprise Customer Operations', value: 'enterprise_customer_operations' },
 	],
 	finance  : [{ label: 'Credit Controller', value: 'credit_controller' }],
 	training : [
@@ -181,3 +194,50 @@ export const controls = (role_functions, partnerOptions) => [
 		params: { filters: { status: 'active' } },
 	},
 ];
+
+export const getFilter = (val) => {
+	if (val === 'cogoport') {
+		return {
+			entity_types            : ['cogoport'],
+			stakeholder_type        : 'partner',
+			exclude_stakeholder_ids : undefined,
+		};
+	}
+	if (val === 'channel_partner') {
+		return {
+			entity_types     : ['channel_partner'],
+			stakeholder_id   : undefined,
+			stakeholder_type : 'partner',
+		};
+	}
+	if (val === 'customer') {
+		return {
+			stakeholder_type        : 'organization',
+			exclude_stakeholder_ids : undefined,
+			stakeholder_id          : undefined,
+			entity_types            : undefined,
+		};
+	}
+	return {
+		stakeholder_type        : undefined,
+		exclude_stakeholder_ids : undefined,
+		stakeholder_id          : undefined,
+		entity_types            : undefined,
+	};
+};
+
+export const changeFilters = ({ values, setFilters = () => {} }) => {
+	setFilters((previousState) => ({
+		...getFilter(null),
+		...previousState,
+		...values,
+	}));
+};
+
+export const onResetFilters = ({ setFilters = () => {} }) => {
+	setFilters((previousState) => ({
+		...getFilter(undefined),
+		...previousState,
+		...resetFilters,
+	}));
+};

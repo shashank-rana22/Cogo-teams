@@ -2,9 +2,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 100%;
 	padding: 16px;
-	margin-bottom: 10px;
+	margin: 16px;
 	border-radius: 4px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 
@@ -18,4 +17,36 @@
 .action {
 	display: flex;
 	justify-content: space-between;
+}
+
+.field {
+	width: 50%;
+
+	&:last-child {
+		margin-left: 3%;
+	}
+}
+
+.flex {
+	display: flex;
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+
+	:global {
+		.ui_button_container:first-child {
+			margin-right: 8px;
+		}
+	}
+}
+
+.label {
+	font-weight: 600;
+}
+
+.error {
+	color: #f00;
 }

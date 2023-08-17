@@ -1,8 +1,6 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import usePostCreateEmployeeOfferLetter from '../../usePostCreateEmployeeOfferLetter';
-
 import styles from './styles.module.css';
 
 export default function SubmitSection({
@@ -10,18 +8,13 @@ export default function SubmitSection({
 	ctcStructure = {},
 	setVisible = () => {},
 	detail,
-	setShowCtcBreakupModal = () => {},
 	setInitialQuestion = () => {},
-	offerLetterApiRefetch,
 	handleSubmit,
 	reset,
 	setError,
+	loading,
+	onFinalSubmit,
 }) {
-	const {
-		loading,
-		onFinalSubmit,
-	} = usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch });
-
 	const onSubmit = (values) => {
 		if (initialQuestion) {
 			onFinalSubmit(values, ctcStructure, initialQuestion, detail?.id);

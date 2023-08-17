@@ -76,8 +76,8 @@ function BarChart({
 						{' '}
 						<tspan color="#000">
 							{formatAmount({
-								amount   : value as any,
-								currency : currencyType,
+								amount   : value,
+								currency : currencyType as string,
 								options  : {
 									currencyDisplay       : 'code',
 									compactDisplay        : 'short',
@@ -104,7 +104,7 @@ function BarChart({
 								{' '}
 								{formatAmount({
 									amount   : bar.data.value as any,
-									currency : currencyType,
+									currency : currencyType as string,
 									options  : {
 										notation              : 'compact',
 										currencyDisplay       : 'code',

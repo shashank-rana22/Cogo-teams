@@ -1,0 +1,25 @@
+.remark_wrapper {
+	display: flex;
+	align-items: center;
+
+	.serial_id {
+		margin-right: 1rem;
+	}
+
+	.bold {
+		font-weight: 600;
+	}
+}
+
+.remark_wrapper:not(:last-of-type) {
+	margin-bottom: 0.5rem;
+}
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+
+	.cancel {
+		margin-right: 1rem;
+	}
+}

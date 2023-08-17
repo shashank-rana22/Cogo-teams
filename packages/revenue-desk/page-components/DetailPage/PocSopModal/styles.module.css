@@ -1,0 +1,12 @@
+.modal_container {
+	:global {
+		.ui_modal_header_title {
+			display: flex;
+			justify-content: center;
+		}
+	}
+}
+
+.indicator {
+	background: #f00 !important;
+}

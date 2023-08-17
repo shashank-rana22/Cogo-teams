@@ -1,6 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
 
-import useUpdateTicketActivity from '../../hooks/useUpdateTicketActivity';
 import EmptyTicket from '../EmptyTicket';
 
 import styles from './styles.module.css';
@@ -10,16 +9,15 @@ import TicketStructureLoader from './TicketStructureLoader';
 function TicketStructure({
 	data = [],
 	handleScroll = () => {},
-	loading = false,
-	refreshTickets = () => {},
 	setModalData = () => {},
-	label,
+	label = '',
+	updateTicketActivity = () => {},
+	listLoading = false,
+	reachedBottom = false,
 }) {
-	const { updateTicketActivity } = useUpdateTicketActivity({
-		refreshTickets,
-	});
-
-	if (isEmpty(data) && !loading) return <EmptyTicket emptyText={`No ${label} Tickets`} />;
+	if (!listLoading && isEmpty(data)) {
+		return <EmptyTicket emptyText={`No ${label} Tickets`} />;
+	}
 
 	return (
 		<div
@@ -33,7 +31,7 @@ function TicketStructure({
 			)}
 		>
 			{
-				data.map((item = {}) => (
+				(data || []).map((item = {}) => (
 					<TicketStructureBody
 						data={item}
 						key={item.id}
@@ -44,9 +42,13 @@ function TicketStructure({
 				))
 			}
 
-			{loading && (
-				<TicketStructureLoader />
-			)}
+			{reachedBottom ? (
+				<div className={styles.footer_no_data}>
+					No more tickets are available
+				</div>
+			) : null}
+
+			{(listLoading && !reachedBottom) ? <TicketStructureLoader /> : null}
 		</div>
 	);
 }

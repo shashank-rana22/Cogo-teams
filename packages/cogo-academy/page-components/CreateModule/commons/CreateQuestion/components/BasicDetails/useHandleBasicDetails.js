@@ -4,6 +4,12 @@ import useUpdateCaseStudy from '../../../../hooks/useUpdateCaseStudy';
 
 import getControls from './controls';
 
+let RichTextEditor;
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
+
 const useHandleBasicDetails = ({
 	setEditDetails,
 	setAllKeysSaved,
@@ -16,6 +22,8 @@ const useHandleBasicDetails = ({
 	setValue,
 	setShowForm,
 	listSetQuestions,
+	caseStudyQuestionEditorValue,
+	setCaseStudyQuestionEditorValue,
 }) => {
 	const controls = useMemo(() => getControls({ mode }), [mode]);
 
@@ -33,12 +41,12 @@ const useHandleBasicDetails = ({
 
 	const handleUpdateCaseStudy = () => {
 		const formValues = getValues();
-		const { topic, question_text, question_type, difficulty_level } = formValues || {};
+		const { topic, question_type, difficulty_level } = formValues || {};
 
 		updateCaseStudy({
 			values: {
 				topic,
-				question_text,
+				question_text: caseStudyQuestionEditorValue.toString('html'),
 				question_type,
 				difficulty_level,
 			},
@@ -52,7 +60,7 @@ const useHandleBasicDetails = ({
 
 		setValue('topic', topic);
 		setValue('difficulty_level', difficulty_level);
-		setValue('question_text', question_text);
+		setCaseStudyQuestionEditorValue(RichTextEditor?.createValueFromString((question_text || ''), 'html'));
 
 		setValue(
 			'question_type',
@@ -67,6 +75,7 @@ const useHandleBasicDetails = ({
 		loading,
 		controls,
 		closeForm,
+		RichTextEditor,
 	};
 };
 

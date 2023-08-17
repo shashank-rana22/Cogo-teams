@@ -5,6 +5,7 @@ function ConfirmBookingWithAirline({
 	onCancel,
 	refetch,
 	shipmentData,
+	primary_service = {},
 }) {
 	return (
 		<SelectRate
@@ -12,6 +13,7 @@ function ConfirmBookingWithAirline({
 			onCancel={onCancel}
 			refetch={refetch}
 			shipmentData={shipmentData}
+			primary_service={primary_service}
 		/>
 	);
 }

@@ -1,0 +1,11 @@
+.search_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.email_cta {
+	color: var(--color-accent-orange-2);
+	text-decoration: underline;
+	background: none;
+	border: none;
+}

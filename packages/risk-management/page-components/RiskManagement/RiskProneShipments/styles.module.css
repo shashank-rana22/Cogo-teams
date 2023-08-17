@@ -1,0 +1,28 @@
+.container {
+	padding: 24px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.header {
+	font-size: 16px;
+	font-weight: 600;
+	color: #333;
+}
+
+.hr {
+	width: 48px;
+	height: 2px;
+	background: #ed3726;
+	border-radius: 12px;
+}
+
+.header_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.tab {
+	margin-top: 16px;
+}

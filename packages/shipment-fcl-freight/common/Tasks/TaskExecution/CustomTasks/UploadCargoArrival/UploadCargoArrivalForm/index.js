@@ -39,9 +39,10 @@ function UploadCargoArrivalForm({
 
 			<div className={styles.btn_wrapper}>
 				<Button
+					themeType="secondary"
 					onClick={() => setShow(false)}
 				>
-					cancel
+					Cancel
 				</Button>
 				<Button
 					style={{ marginLeft: 8 }}

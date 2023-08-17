@@ -1,44 +1,82 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useLensRequest } from '@cogoport/request';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useLensRequest, useRequest } from '@cogoport/request';
+
+import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
+
+const getLensPayload = ({ payload }) => payload;
+
+const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', userMails = [] }) => ({
+	type             : 'rpa_email',
+	recipient        : payload?.toUserEmail?.[GLOBAL_CONSTANTS.zeroth_index],
+	message_metadata : {
+		endpoint            : '/send_mail',
+		body                : payload,
+		send_to_omnichannel : !!userMails?.includes(payload?.sender),
+		sender_user_id      : userId,
+		send_by             : userName,
+	},
+	sender_user_id : userId,
+	service        : 'user',
+	service_id     : userId,
+	sender         : payload?.sender,
+});
+
+const API_MAPPING = {
+	reply: {
+		endPoint    : 'reply_mail',
+		requestFunc : useLensRequest,
+		payloadFunc : getLensPayload,
+	},
+	reply_all: {
+		endPoint    : 'reply_all',
+		requestFunc : useLensRequest,
+		payloadFunc : getLensPayload,
+	},
+	forward: {
+		endPoint    : 'forward_mail',
+		requestFunc : useLensRequest,
+		payloadFunc : getLensPayload,
+	},
+	send_mail: {
+		endPoint    : 'create_communication',
+		requestFunc : useRequest,
+		payloadFunc : getCommunicationPayload,
+	},
+};
 
 function useReplyMail(mailProps) {
 	const {
 		setEmailState = () => {},
-		setRecipientArray = () => {},
-		setBccArray = () => {},
-		buttonType = '',
+		buttonType = 'send_mail',
 		setButtonType = () => {},
+		userId = '',
+		userName = '',
+		userMails = [],
 	} = mailProps;
 
-	const apiName = {
-		reply     : 'reply_mail',
-		reply_all : 'reply_all',
-		forward   : 'forward_mail',
-		send_mail : 'send_mail',
-	};
-	const [{ loading }, trigger] = useLensRequest({
-		url    : `/${apiName[buttonType]}`,
-		method : 'POST',
+	const {
+		endPoint = '',
+		requestFunc = () => {},
+		payloadFunc: getPayload = () => {},
+	} = API_MAPPING[buttonType] || API_MAPPING.send_mail;
 
-	}, { manual: true });
+	const [{ loading } = {}, trigger] = requestFunc({
+		url    : `/${endPoint}`,
+		method : 'POST',
+	}, { manual: true }) || [];
 
 	const replyMailApi = async (payload) => {
 		try {
 			await trigger({
-				data: payload,
+				data: getPayload({ payload, userId, userName, userMails }),
 			});
 			Toast.success('Mail Sent Successfully.');
-		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
-		} finally {
-			setEmailState({
-				body    : '',
-				subject : '',
-			});
-			setRecipientArray([]);
-			setBccArray([]);
+			setEmailState(DEFAULT_EMAIL_STATE);
 			setButtonType('');
+		} catch (error) {
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

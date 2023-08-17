@@ -23,9 +23,11 @@ function AddNewJoinee() {
 	const Component = COMPONENT_MAPPING[activePage === 'form' ? 'form' : 'success'] || null;
 
 	return (
-
 		Component && (
-			<Component key={activePage} {...(componentProps[activePage] || {})} />
+			<Component
+				key={activePage}
+				{...(componentProps[activePage === 'form' ? 'form' : 'success'] || {})}
+			/>
 		)
 	);
 }

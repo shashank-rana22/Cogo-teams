@@ -1,0 +1,17 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.input_container {
+	width: 20%;
+}
+
+.search_icon {
+	width: 18px;
+	height: 18px;
+	fill: #4f4f4f;
+}

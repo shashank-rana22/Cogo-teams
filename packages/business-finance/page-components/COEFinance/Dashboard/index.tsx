@@ -1,4 +1,4 @@
-import { Tooltip, Button, Modal } from '@cogoport/components';
+import { Tooltip, Button, Modal, Loader, Placeholder } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -8,6 +8,7 @@ import MyResponsivePie from '../Components/PieChart';
 import { PieChartData } from '../Components/PieChart/PieChartData';
 import MyResponsiveBar from '../Components/ResponsiveBar';
 import BarData from '../Components/ResponsiveBar/BarData';
+import useGetDashboardData from '../hook/useGetDashboardData';
 import useJobStats from '../hook/useJobStats';
 import useServiceOpsStats from '../hook/useServiceOpsStats';
 
@@ -16,32 +17,44 @@ import { filterControls, reportControls } from './controls';
 import JobStats from './JobStats';
 import styles from './styles.module.css';
 
-function Dashboard({ statsData }) {
-	const [filters, setFilters] = useState({ zone: '', serviceType: '', days: '' });
+interface StatsDataInterface {
+	LOCKED?: number,
+	ALL_APPROVED_BILLS?: number,
+	COE_REJECTED?: number,
+	FINANCE_REJECTED?: number,
+}
+interface Props {
+	statsData?: StatsDataInterface;
+	statsCOEApprovedData?: { PAYRUN_BILL_APPROVED?:number }
+	filters?: object;
+	setFilters?:React.Dispatch<React.SetStateAction<object>>;
+	statsLoading?: boolean;
+}
+
+function Dashboard({
+	statsData = {},
+	statsCOEApprovedData = {},
+	filters = {},
+	setFilters = () => {},
+	statsLoading = false,
+}:Props) {
 	const [reportModal, setReportModal] = useState(false);
 	const { So2statsData } = useServiceOpsStats(filters);
 	const { jobStatsData } = useJobStats(filters);
-	const { LOCKED = '', FINANCE_ACCEPTED = '', COE_REJECTED = '', FINANCE_REJECTED = '' } = statsData || {};
+	const { dashboardData = [{}], loading } = useGetDashboardData(filters);
+	const { LOCKED = 0, ALL_APPROVED_BILLS = 0, COE_REJECTED = 0, FINANCE_REJECTED = 0 } = statsData || {};
+	const { PAYRUN_BILL_APPROVED = 0	} = statsCOEApprovedData || {};
 
 	const Status = [
-		{ id: 1, label: 'Pending', value: LOCKED || '-' },
-		{ id: 2, label: 'Approved', value: FINANCE_ACCEPTED || '-' },
-		{ id: 3, label: 'Rejected', value: COE_REJECTED || '-' },
-		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED || '-' },
+		{ id: 1, label: 'Pending', value: LOCKED },
+		{ id: 2, label: 'COE Approved', value: ALL_APPROVED_BILLS },
+		{ id: 3, label: 'COE Rejected', value: COE_REJECTED },
+		{ id: 2, label: 'Finance Approved', value: PAYRUN_BILL_APPROVED },
+		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED },
 	];
 
 	return (
 		<>
-			<div className={styles.card_flex}>
-				{Status.map((item) => (
-					<div key={item.id} className={styles.card}>
-						<div className={styles.card_label}>{item?.label}</div>
-						<div className={styles.border} />
-						<div className={styles.card_value}>{item?.value}</div>
-					</div>
-				))}
-			</div>
-
 			<div className={styles.filter_flex}>
 				<Filter
 					controls={filterControls}
@@ -56,9 +69,31 @@ function Dashboard({ statsData }) {
 					Request Report
 				</div>
 			</div>
+			<div className={styles.card_flex}>
+				{Status.map((item) => (
+					<div key={item.id} className={styles.card}>
+
+						<div className={styles.card_label}>{item?.label}</div>
+						<div className={styles.border} />
+						{statsLoading ? (
+							<div style={{ alignItems: 'center' }}>
+								<Placeholder height="30px" width="50px" margin="16px 10px 10px 10px" />
+							</div>
+						) : (
+							<div className={styles.card_value}>{item?.value}</div>
+						)}
+					</div>
+				))}
+			</div>
 
 			<div className={styles.responsive}>
-				<MyResponsiveBar data={BarData()} />
+				{loading ? (
+					<div className={styles.bar_chart_loader}>
+						<Loader style={{ width: '80px' }} />
+					</div>
+				) : (
+					<MyResponsiveBar data={BarData({ dashboardData })} />
+				)}
 			</div>
 
 			<div className={styles.space_between}>

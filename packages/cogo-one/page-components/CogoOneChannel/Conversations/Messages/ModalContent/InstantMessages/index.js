@@ -6,7 +6,9 @@ import Templates from '../../../../../../common/Templates';
 import InstantReplies from './InstantReplies';
 import styles from './styles.module.css';
 
-function InstantRepliesModal({ data = {} }) {
+function InstantRepliesModal({ data = {}, viewType = '', formattedData = {} }) {
+	const { organization_id = '' } = formattedData || {};
+
 	const [activeTab, setActiveTab] = useState('quick_reply');
 	const [openCreateReply, setOpenCreateReply] = useState(false);
 
@@ -49,10 +51,12 @@ function InstantRepliesModal({ data = {} }) {
 				</TabPanel>
 				<TabPanel name="template" title="Template">
 					<Templates
+						viewType={viewType}
 						data={data}
 						activeTab={activeTab}
 						openCreateReply={openCreateReply}
 						setOpenCreateReply={setOpenCreateReply}
+						orgId={organization_id}
 					/>
 				</TabPanel>
 			</Tabs>

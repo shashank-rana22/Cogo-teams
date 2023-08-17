@@ -7,8 +7,7 @@
             "containers_gated_in",
             "vessel_departed",
             "vessel_arrived"
-        ],
-        "key_present_check": ["vessel_arrived_at"]
+        ]
     },
     "stakeholders_not_allowed": [
         "booking_agent",

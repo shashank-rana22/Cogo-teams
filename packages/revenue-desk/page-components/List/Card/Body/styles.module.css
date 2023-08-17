@@ -1,0 +1,60 @@
+.container {
+	display: flex;
+	border-bottom: 1px dashed #bdbdbd;
+}
+
+.left_section {
+	width: 50%;
+	border-right: 1px dashed #bdbdbd;
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	padding: 18px 0;
+}
+
+.text {
+	font-size: 12px;
+	font-weight: 500;
+	color: #333;
+}
+
+.text1 {
+	margin-right: 12px;
+}
+
+.port_pair_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 20px;
+}
+
+.origin_code,
+.destination_code {
+	font-size: 16px;
+	font-weight: 400;
+	color: #f68b21;
+}
+
+.origin_country,
+.destination_country {
+	display: flex;
+}
+
+.port_name {
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.country_name {
+	font-size: 16px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.right_section {
+	flex: 1;
+}

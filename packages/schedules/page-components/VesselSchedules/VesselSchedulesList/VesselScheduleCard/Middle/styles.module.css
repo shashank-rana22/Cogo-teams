@@ -1,0 +1,52 @@
+.middle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 24px 0;
+}
+
+.port > * {
+	margin-bottom: 4px;
+}
+
+.port_name {
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.date {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.voyage_number {
+	font-size: 12px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.hr_line_box {
+	display: flex;
+	align-items: center;
+	width: calc(100% - 300px);
+}
+
+.hr_line {
+	width: 100%;
+	border: 1px dotted rgb(187 187 187);
+}
+
+.port_count {
+	width: 160px;
+	padding: 4px 10px;
+	margin: 0 10px;
+	font-size: 14px;
+	font-weight: 500;
+	color: black;
+	text-align: center;
+	background-color: #f3fafa;
+	border: 1px solid #6fa5ab;
+	border-radius: 4px;
+}

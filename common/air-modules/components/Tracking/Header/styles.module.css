@@ -1,0 +1,42 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 15px 0;
+	margin-bottom: 20px;
+}
+
+.row_container {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	margin-left: 40px;
+	font-size: var(--font-size-xl);
+
+	&.heading {
+		font-size: var(--font-size-md);
+	}
+}
+
+.modal_styles {
+	width: 600px !important;
+}
+
+.airway_bill_no_head {
+	display: flex;
+	align-items: center;
+	font-size: var(--font-size-md);
+}
+
+.airway_bill_no {
+	display: flex;
+	align-items: center;
+	margin-left: 5px;
+	font-size: var(--font-size-lg);
+	font-weight: 500;
+}

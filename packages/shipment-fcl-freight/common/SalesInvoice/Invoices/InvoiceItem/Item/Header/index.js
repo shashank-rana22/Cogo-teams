@@ -51,7 +51,7 @@ function Header({
 				{invoice?.source === 'pass_through' ? (
 					<div className={styles.invoice_source}>
 						Source -
-						&nbsp;
+						{' '}
 						{startCase(invoice?.source)}
 					</div>
 				) : null}
@@ -85,8 +85,7 @@ function Header({
 
 				<div
 					className={styles.icon_wrapper}
-					role="button"
-					tabIndex={0}
+					role="presentation"
 					onClick={() => setOpen(!open)}
 					style={{ height: `${invoicePartyDetailsRef.current?.offsetHeight}px` }}
 				>

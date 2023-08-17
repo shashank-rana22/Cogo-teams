@@ -3,6 +3,7 @@ import React from 'react';
 
 import EditInvoicePreference from './EditInvoicePreference';
 import styles from './styles.module.css';
+import UpdateQuotation from './UpdateQuotation';
 
 function Header({
 	invoiceData = {},
@@ -55,6 +56,10 @@ function Header({
 						bfInvoiceRefetch={bfInvoiceRefetch}
 						disableAction={disableAction}
 						salesInvoicesRefetch={salesInvoicesRefetch}
+					/>
+					<UpdateQuotation
+						refetch={salesInvoicesRefetch}
+						invoiceData={invoiceData}
 					/>
 				</div>
 			</div>

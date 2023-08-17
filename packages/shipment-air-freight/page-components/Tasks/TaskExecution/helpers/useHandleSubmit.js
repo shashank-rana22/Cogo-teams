@@ -1,8 +1,9 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../hooks/useUpdateShipmentCogoid';
 import createAwbInventory from '../utils/createAwbInventory';
@@ -15,7 +16,7 @@ import getRpaMappings from '../utils/get-rpa-mappings';
 const REFETCH_SHIPMENT = [
 	'confirm_booking',
 	'mark_confirmed',
-	'update_airway_bil_number',
+	'update_airway_bill_number',
 	'upload_airway_bill',
 	'upload_export_cargo_tracking_slip',
 ];
@@ -31,11 +32,12 @@ function useHandleSubmit({
 	getApisData,
 	shipment_data = {},
 	primary_service = {},
-	getShipment = () => {},
 	getShipmentTimeline = () => {},
 	services = {},
 }) {
-	const [isLoading, setIsLoading] = useState();
+	const { refetch: getShipmentRefetch } = useContext(ShipmentDetailContext);
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : finalConfig.end_point || 'update_shipment_pending_task',
@@ -166,7 +168,7 @@ function useHandleSubmit({
 				getShipmentTimeline();
 
 				if (REFETCH_SHIPMENT.includes(task?.task)) {
-					getShipment();
+					getShipmentRefetch();
 				}
 			} else {
 				Toast.error('Something went wrong');

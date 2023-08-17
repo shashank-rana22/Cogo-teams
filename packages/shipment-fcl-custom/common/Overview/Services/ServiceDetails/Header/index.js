@@ -24,14 +24,23 @@ function Header({ serviceData = {} }) {
 		<div className={cl`${styles[state]} ${styles.main_container}`}>
 			<div className={cl` ${styles.container}`}>
 				<div className={cl`${styles[state]} ${styles.service_details}`}>
-					<div className={styles.service_name}>{startCase(service_type)}</div>
-					<div className={styles.service_provider}>{service_provider?.business_name}</div>
+					<div className={styles.service_name}>
+						{startCase(service_type)}
+					</div>
+
+					<div className={styles.service_provider}>
+						{service_provider?.business_name}
+					</div>
 				</div>
 
 				<div className={styles.secondary_details}>
 					<div>
-						{ payment_term ? <div className={styles.payment_term}>{payment_term}</div> : null }
-						<div className={styles.state}>{ statusText}</div>
+						{payment_term ? (
+							<div className={styles.payment_term}>
+								{payment_term}
+							</div>
+						) : null}
+						<div className={styles.state}>{statusText}</div>
 					</div>
 
 					<div className={styles.extra_details}>
@@ -44,9 +53,9 @@ function Header({ serviceData = {} }) {
 							})}
 							className={styles.details_cta}
 						>
-
-							{ showDetails[serviceData?.id] ? 'Hide Details' : 'View Details'}
+							{showDetails[serviceData?.id] ? 'Hide Details' : 'View Details'}
 						</div>
+
 						<div className={styles.edit_cancel}>
 							<EditCancelService serviceData={serviceData} />
 						</div>
@@ -54,9 +63,8 @@ function Header({ serviceData = {} }) {
 				</div>
 			</div>
 
-			{ showDetails[serviceData?.id] ? 	<Details serviceData={serviceData} /> : null}
+			{showDetails[serviceData?.id] ? <Details serviceData={serviceData} /> : null}
 		</div>
-
 	);
 }
 

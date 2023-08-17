@@ -1,10 +1,23 @@
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
+
+const india_country_id = GLOBAL_CONSTANTS.country_ids.IN;
+const vietnam_country_id = GLOBAL_CONSTANTS.country_ids.VN;
+
+const india_constants = getCountryConstants({ country_id: india_country_id });
+const vietnam_constants = getCountryConstants({ country_id: vietnam_country_id });
+
+const OFFICE_LOCATIONS = [...india_constants.office_locations, ...vietnam_constants.office_locations];
+
+const REPORTING_CITY_OPTIONS = OFFICE_LOCATIONS.map((location) => (
+	{ label: startCase(location), value: location }));
 
 const controls = [
 	{
 		name        : 'name',
 		type        : 'text',
-		label       : 'Name',
+		label       : 'Name*',
 		placeholder : 'Name of the employee',
 		rules       : {
 			required: 'name is required',
@@ -12,7 +25,7 @@ const controls = [
 	},
 	{
 		name        : 'personal_email',
-		label       : 'Personal Email ID',
+		label       : 'Personal Email ID*',
 		placeholder : 'Enter a valid email id',
 		type        : 'text',
 		rules       : {
@@ -25,7 +38,7 @@ const controls = [
 	},
 	{
 		name        : 'mobile_number',
-		label       : 'Contact Details',
+		label       : 'Contact Details*',
 		type        : 'mobile-number-select',
 		inputType   : 'number',
 		placeholder : 'Mobile Number*',
@@ -42,7 +55,7 @@ const controls = [
 	{
 		name        : 'designation',
 		type        : 'select',
-		label       : 'Role',
+		label       : 'Designation*',
 		placeholder : 'Role',
 		options     : GLOBAL_CONSTANTS.options.role_options,
 		rules       : {
@@ -58,15 +71,25 @@ const controls = [
 		isClearable           : true,
 	},
 	{
-		name        : 'office_location',
+		name        : 'office_location_country',
 		type        : 'select',
-		label       : 'Location Details',
+		label       : 'Reporting Country*',
 		placeholder : 'Select Location',
 		options     : [
-			{ value: 'mumbai', label: 'Mumbai' },
-			{ value: 'gurgaon', label: 'Gurgaon' },
+			{ value: 'india', label: 'India' },
+			{ value: 'vietnam', label: 'Vietnam' },
 		],
 		rules: {
+			required: 'Reporting Country is required',
+		},
+	},
+	{
+		name        : 'office_location',
+		type        : 'select',
+		label       : 'Reporting City*',
+		placeholder : 'Select Location',
+		options     : REPORTING_CITY_OPTIONS,
+		rules       : {
 			required: 'Location is required',
 		},
 	},
@@ -83,15 +106,71 @@ const controls = [
 		},
 	},
 	{
+		name        : 'attendance',
+		type        : 'select',
+		label       : 'Attendence*',
+		placeholder : 'Select Attendence',
+		options     : GLOBAL_CONSTANTS.attendence_options,
+		rules       : {
+			required: 'Attendence is required',
+		},
+	},
+	{
+		name        : 'learning_indicator',
+		type        : 'select',
+		label       : 'Learning Indicator',
+		placeholder : 'select LI',
+		options     : GLOBAL_CONSTANTS.li_options,
+
+	},
+	{
+		name        : 'predictive_index',
+		type        : 'number',
+		label       : 'Predictive Index',
+		placeholder : 'Enter PI',
+
+	},
+	{
+		name        : 'department',
+		type        : 'select',
+		label       : 'Department*',
+		placeholder : 'Select Department',
+		options     : GLOBAL_CONSTANTS.department_options,
+		rules       : {
+			required: 'Department is required',
+		},
+
+	},
+	{
 		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
-		label       : 'Hiring Manager',
+		label       : 'Hiring Manager*',
 		placeholder : 'Hiring Manager',
 		rules       : {
 			required: 'Hiring Manager is required',
 		},
-		params: {
+		initialCall : true,
+		params      : {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+
+			},
+			page_limit: 100,
+		},
+	},
+	{
+		name        : 'reporting_manager_id',
+		type        : 'asyncSelect',
+		asyncKey    : 'partner_users_ids',
+		label       : 'Reporting Manager',
+		placeholder : 'Reporting Manager',
+		rules       : {
+			required: 'Reporting Manager is required',
+		},
+		initialCall : true,
+		params      : {
 			filters: {
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
@@ -104,12 +183,13 @@ const controls = [
 		name        : 'hr_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
-		label       : 'HR Name',
+		label       : 'HR Name*',
 		placeholder : 'Enter Name',
 		rules       : {
 			required: 'name is required',
 		},
-		params: {
+		initialCall : true,
+		params      : {
 			filters: {
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
@@ -121,7 +201,7 @@ const controls = [
 		name        : 'hrbp_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
-		label       : 'HRBP',
+		label       : 'HRBP*',
 		placeholder : 'HRBP',
 		rules       : {
 			required: 'HRBP is required',
@@ -130,7 +210,6 @@ const controls = [
 			filters: {
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
-
 			},
 			page_limit: 100,
 		},

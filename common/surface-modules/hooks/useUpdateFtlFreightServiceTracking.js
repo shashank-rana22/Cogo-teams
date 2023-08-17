@@ -4,10 +4,12 @@ import { useState } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
+const STATUS_CODE = 200;
+
 const useUpdateFtlFreightServiceTracking = () => {
 	const [data, setData] = useState([]);
 
-	const [loading, trigger] = useLensRequest({
+	const [{ loading }, trigger] = useLensRequest({
 		url    : 'create_saas_surface_shipment_detail',
 		method : 'POST',
 	}, { manual: true });
@@ -28,7 +30,7 @@ const useUpdateFtlFreightServiceTracking = () => {
 					serial_id               : serialId ? serialId.toString() : undefined,
 					origin_location_id      : servicesData?.origin_location_id,
 					destination_location_id : servicesData.destination_location_id,
-					mobile_number           : values.mobile_number,
+					mobile_number           : values.mobile_number ? values.mobile_number.toString() : undefined,
 					service_provider_id     : servicesData.service_provider_id,
 					refresh,
 					trip_id                 : servicesData.trip_id ? servicesData.trip_id : undefined,
@@ -39,7 +41,7 @@ const useUpdateFtlFreightServiceTracking = () => {
 			}
 			setData(res?.data);
 			setStartTruckTracker(false);
-			if (res?.status === 200) {
+			if (res?.status === STATUS_CODE) {
 				listShipments();
 				if (!refresh) refetch();
 			}

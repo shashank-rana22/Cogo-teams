@@ -1,0 +1,32 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+	font-size: 20px;
+	font-weight: 500;
+
+	@media (max-width: 576px) {
+		margin-top: 56px;
+	}
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+}
+
+.header {
+	margin-left: 4px;
+	font-weight: 600;
+}
+
+@keyframes sweep {
+	0% {
+		background-position: 0 0;
+	}
+
+	100% {
+		background-position: 100% 100%;
+	}
+}

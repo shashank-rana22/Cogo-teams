@@ -18,14 +18,15 @@ export interface FieldType {
 	render?: Function;
 }
 
-export interface ListDataType {
-	data?: NestedObj;
-}
-
 export interface DataType {
 	airlineIds?: Array<string>;
 	airportIds?: Array<string>;
 	importerExporterIds?: Array<string>;
-	shipmentPendingTasks?: Array<object>;
+	shipmentPendingTasks?: Array<NestedObj>;
+	stakeholderIds?: Array<object>;
 	totalRecords?: number;
+}
+
+export interface ListDataType {
+	data?: DataType;
 }

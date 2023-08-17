@@ -6,14 +6,14 @@ const getControls = [{
 	controls : [
 		{
 			name        : 'company_name',
-			label       : 'Company Name',
+			label       : 'Company Name*',
 			type        : 'input',
 			placeholder : 'Company Name',
 			rules       : { required: 'This is required' },
 		},
 		{
 			name                  : 'started_at',
-			label                 : 'Start Date',
+			label                 : 'Start Date*',
 			type                  : 'date-select',
 			placeholder           : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'].toUpperCase(),
 			isPreviousDaysAllowed : true,
@@ -21,7 +21,7 @@ const getControls = [{
 		},
 		{
 			name                  : 'ended_at',
-			label                 : 'End Date',
+			label                 : 'End Date*',
 			type                  : 'date-select',
 			placeholder           : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'].toUpperCase(),
 			isPreviousDaysAllowed : true,
@@ -35,7 +35,7 @@ const getControls = [{
 		},
 		{
 			name        : 'skills',
-			label       : 'Skills',
+			label       : 'Skills*',
 			type        : 'createmultiselect',
 			placeholder : 'Skills',
 			rules       : { required: 'This is required' },
