@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
+import { isEmpty } from '@cogoport/utils';
 
 import getElementController from '../../../../configs/getElementController';
 import getErrorMessage from '../../../../configs/getErrorMessage';
@@ -45,7 +46,7 @@ function Layout({
 					);
 				}
 
-				if (innerControls) {
+				if (innerControls && !isEmpty(innerControls)) {
 					return (
 						<div className={styles.form_item} key={`${name}_${label}`} style={{ width: `${flex}%` }}>
 							<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
@@ -100,7 +101,7 @@ function Layout({
 						className={styles.form_item}
 						style={{ width: `${flex}%`, marginBottom: isSubControl ? '12px' : '24px' }}
 					>
-						{isSubControl ? null : (
+						{isSubControl || type === 'checkbox' ? null : (
 							<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
 								{newControl?.boldLabel || label || ''}
 								{' '}
@@ -115,6 +116,8 @@ function Layout({
 							name={name}
 							label={label}
 							control={control}
+							type={newControl?.uploaderType}
+							uploaderType={null}
 						/>
 
 						{errors[name] && (

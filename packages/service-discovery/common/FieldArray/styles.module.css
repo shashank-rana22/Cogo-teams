@@ -99,6 +99,10 @@
 		.ui_chips_container {
 			flex-wrap: wrap;
 		}
+
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
 	}
 }
 
