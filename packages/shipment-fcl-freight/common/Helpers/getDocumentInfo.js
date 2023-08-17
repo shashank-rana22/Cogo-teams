@@ -6,15 +6,19 @@ export const getDocumentInfo = ({ bfInvoice }) => {
 		einvoiceNumber = '', invoiceNumber = '', proformaNumber = '',
 		invoiceAdditional = {},
 		proformaPdfUrl = '', invoicePdfUrl = '', eInvoicePdfUrl = '',
+		einvoicePdfUrl = '',
 	} = bfInvoice || {};
+	const eInvoice = eInvoicePdfUrl || einvoicePdfUrl;
 	const { cancelledEInvoicePdfUrl = '', cancelledIrnNumber = '' } = invoiceAdditional || {};
 
 	const invoiceNumberPriority = [
 		[cancelledIrnNumber, cancelledEInvoicePdfUrl, 'CANCELLED E Invoice'],
-		[einvoiceNumber, eInvoicePdfUrl, 'E INVOICE'],
+		[einvoiceNumber, eInvoice, 'E INVOICE'],
 		[invoiceNumber, invoicePdfUrl, bfInvoice?.invoiceType],
 		[proformaNumber, proformaPdfUrl, bfInvoice?.invoiceType],
-	].filter((item) => (item[GLOBAL_CONSTANTS.zeroth_index] || undefined) !== undefined)[GLOBAL_CONSTANTS.zeroth_index]
+	].filter((item) => (
+		item[1] || undefined
+	) !== undefined)[GLOBAL_CONSTANTS.zeroth_index]
 	|| [undefined, undefined, undefined];
 
 	return {
