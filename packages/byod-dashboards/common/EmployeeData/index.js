@@ -7,10 +7,14 @@ import StyledTable from '../StyledTable';
 import styles from './styles.module.css';
 import useEmployeeData from './useEmployeeData';
 
-function EmployeeData({ data = {} }) {
+function EmployeeData({ data = {}, refetchReimbursementList = false, setRefetchReimbursementList = () => {} }) {
 	const { detail } = data || {};
 
-	const { loading, NEW_LIST, columns } = useEmployeeData({ detail });
+	const { loading, NEW_LIST, columns } = useEmployeeData({
+		detail,
+		refetchReimbursementList,
+		setRefetchReimbursementList,
+	});
 
 	return (
 		<div className={styles.container}>

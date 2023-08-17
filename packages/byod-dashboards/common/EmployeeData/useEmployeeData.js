@@ -7,28 +7,30 @@ const onClickOpen = (url) => {
 	window.open(url, '_blank');
 };
 
-const useEmployeeData = ({ detail }) => {
+const useEmployeeData = ({ detail, refetchReimbursementList, setRefetchReimbursementList }) => {
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/list_employee_device_details',
 	}, { manual: true });
 
 	const fetch = useCallback(
-		() => {
-			trigger({
+		async () => {
+			await trigger({
 				filters: {
 					employee_detail_id : detail?.id,
 					status             : 'active',
 				},
 				page: 1,
 			});
+
+			setRefetchReimbursementList(false);
 		},
-		[detail?.id, trigger],
+		[detail?.id, setRefetchReimbursementList, trigger],
 	);
 
 	useEffect(() => {
-		fetch();
-	}, [fetch]);
+		if (refetchReimbursementList) fetch();
+	}, [fetch, refetchReimbursementList]);
 
 	const columns = getColumns({ onClickOpen });
 

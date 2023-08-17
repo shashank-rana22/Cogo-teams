@@ -6,7 +6,7 @@ import { format } from '@cogoport/utils';
 
 const FORMAT_TIME = `${GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']} 00:00:00`;
 
-const useCreateDeviceDetail = () => {
+const useCreateDeviceDetail = ({ setRefetchReimbursementList = () => {}, reset = () => {} }) => {
 	const { profile = {} } = useSelector((state) => state);
 
 	const { user = {} } = profile;
@@ -55,6 +55,9 @@ const useCreateDeviceDetail = () => {
 			await trigger({
 				data: payload,
 			});
+
+			setRefetchReimbursementList(true);
+			reset();
 		} catch (error) {
 			console.log('error', error);
 		}
