@@ -1,36 +1,43 @@
-import { cl } from '@cogoport/components';
+import { cl, ButtonIcon } from '@cogoport/components';
 import { IcMSort } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
+
+const TIMEOUT_TIME = 800;
 
 function ToggleLocation({
 	formValues = {},
 	setFormValues = () => {},
 }) {
+	const [active, setActive] = useState(false);
+
 	const { origin = {}, destination = {} } = formValues || {};
 
 	const handleToggle = () => {
+		setActive(true);
+
 		setFormValues((prev) => ({
 			...prev,
 			origin      : { ...(destination || {}) },
 			destination : { ...(origin || {}) },
 		}));
+
+		setTimeout(() => {
+			setActive(false);
+		}, TIMEOUT_TIME);
 	};
 
-	const isDisabled = isEmpty(origin) && isEmpty(destination);
-
 	return (
-		<div
-			role="presentation"
-			className={cl`${styles.container} ${isDisabled ? styles.disabled : {}}`}
-			onClick={handleToggle}
-			disabled
-		>
-			<IcMSort
-				className={cl`${styles.arrow_icon} ${isDisabled ? styles.disabled : {}}`}
-				width="14px"
-				height="14px"
+		<div className={styles.container}>
+			<ButtonIcon
+				className={cl`${styles.button} ${active ? styles.active : {}}`}
+				size="sm"
+				icon={<IcMSort className={styles.arrow_icon} />}
+				themeType="primary"
+				disabled={isEmpty(origin) && isEmpty(destination)}
+				onClick={handleToggle}
 			/>
 		</div>
 	);
