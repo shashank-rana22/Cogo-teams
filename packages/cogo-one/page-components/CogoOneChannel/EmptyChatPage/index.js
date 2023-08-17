@@ -4,6 +4,7 @@ import React from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 
+import LeadVoiceCalls from './LeadVoiceCalls';
 import ShipmentsHomePage from './ShipmentsHomePage';
 import styles from './styles.module.css';
 
@@ -22,9 +23,19 @@ function EmptyChatPage({
 
 	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
 
+	const showLeadVoiceCalls = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_lead_voice_calls;
+
 	if (showShipments) {
 		return (
 			<ShipmentsHomePage
+				setActiveTab={setActiveTab}
+			/>
+		);
+	}
+
+	if (showLeadVoiceCalls) {
+		return (
+			<LeadVoiceCalls
 				setActiveTab={setActiveTab}
 			/>
 		);

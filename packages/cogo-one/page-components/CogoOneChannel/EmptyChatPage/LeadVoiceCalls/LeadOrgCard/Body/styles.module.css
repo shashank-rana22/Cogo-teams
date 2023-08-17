@@ -1,0 +1,19 @@
+.body {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 16px;
+}
+
+.name_flex {
+	display: flex;
+	align-items: center;
+}
+
+.name {
+	margin-left: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
+	text-decoration: underline;
+}

@@ -1,0 +1,43 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 12px 16px 0;
+}
+
+.message_icon_styles {
+	cursor: pointer;
+}
+
+.org_id {
+	font-weight: 600;
+	color: #4f4f4f;
+	cursor: pointer;
+
+	&:hover {
+		color: #f68b21;
+	}
+}
+
+.business_name {
+	width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	color: #000;
+	text-decoration: underline;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.header_name {
+	width: 90%;
+}
+
+.overflow_container {
+	width: 18px;
+	height: 18px;
+	margin-left: 4px;
+	cursor: pointer;
+	fill: #a7a7a7;
+}

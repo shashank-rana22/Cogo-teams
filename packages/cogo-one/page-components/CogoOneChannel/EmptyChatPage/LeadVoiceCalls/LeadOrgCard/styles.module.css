@@ -1,0 +1,11 @@
+.each_container {
+	position: relative;
+	width: 30%;
+	height: 300px;
+	padding: 4px 6px;
+	margin: 4px 8px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #e7e7e7;
+	border-radius: 8px;
+}
