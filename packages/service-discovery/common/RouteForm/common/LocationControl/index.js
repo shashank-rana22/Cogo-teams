@@ -16,8 +16,8 @@ function LocationControl({ controlItem = {}, formValues = {}, setFormValues = ()
 
 	return (
 		<section
-			key={`${name}_input_control`}
-			id={`${name}_input_control`}
+			key={`${name}_select_control`}
+			id={`${name}_select_control`}
 			className={styles.form_item}
 			style={{ width: `${flex}%` }}
 		>

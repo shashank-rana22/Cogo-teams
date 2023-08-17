@@ -1,6 +1,7 @@
 .container {
+	align-self: end;
 	padding: 6px 6px 0;
-	margin-bottom: 6px;
+	margin-bottom: 8px;
 	color: #c9cfdb;
 	cursor: pointer;
 	border: 0.5px solid #fdebe9;
