@@ -1,5 +1,4 @@
 import { differenceInDays } from '@cogoport/utils';
-import React from 'react';
 
 import getValue from '../../../../../../utils/getValue';
 

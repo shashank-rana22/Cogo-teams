@@ -2,7 +2,6 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import formatDateToString from '../../../ServiceDiscovery/SpotSearch/utils/formatDateToString';
 import handleCopy from '../../helpers/handleCopyUrl';
 
 const ONE = 1;
@@ -44,7 +43,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {} }) => 
 		updateCheckout({
 			values: {
 				id                      : checkout_id,
-				quotation_email_sent_at : formatDateToString(new Date()),
+				quotation_email_sent_at : new Date(),
 			},
 			type: 'copy_link',
 		});

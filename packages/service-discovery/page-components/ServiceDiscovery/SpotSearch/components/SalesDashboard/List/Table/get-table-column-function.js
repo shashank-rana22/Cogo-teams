@@ -5,18 +5,20 @@ import { startCase } from '@cogoport/utils';
 import { differenceInSeconds } from 'date-fns';
 
 import styles from './styles.module.css';
+import CustomButton from './TableItems/CustomButton';
 import FieldPair from './TableItems/FieldPair';
-import renderButton from './TableItems/renderButton';
-import renderPortPair from './TableItems/renderPortPair';
+import PortPair from './TableItems/PortPair';
 import SearchType from './TableItems/SearchType';
-import renderShipment from './TableItems/ShipmentDetails';
+import ShipmentDetails from './TableItems/ShipmentDetails';
 
 const TO_FIXED_DECIMAL_COUNT = 2;
 const PERCENTAGE_FACTOR = 100;
 
 const getTableColumnFunction = (key) => {
 	const newFunction = {
-		renderButton,
+		renderButton: (data, field, router) => (
+			<CustomButton item={data} field={field} router={router} />
+		),
 		renderSerialId: (itemData) => {
 			const { serial_id = '-', performed_by_type } = itemData || {};
 
@@ -35,8 +37,12 @@ const getTableColumnFunction = (key) => {
 		renderFieldPair: (itemData, field) => (
 			<FieldPair item={itemData} field={field} />
 		),
-		renderPortPair,
-		renderShipment,
+		renderPortPair: (item, field) => (
+			<PortPair item={item} field={field} />
+		),
+		renderShipment: (item, field) => (
+			<ShipmentDetails item={item} field={field} />
+		),
 		renderCreated: (itemData) => (
 			<Tooltip
 				content={(

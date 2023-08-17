@@ -31,7 +31,10 @@
 
 .button {
 	position: relative;
-	gap: 8px;
+}
+
+.filter_icon {
+	margin-right: 8px;
 }
 
 .form_item {

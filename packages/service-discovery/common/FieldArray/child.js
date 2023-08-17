@@ -1,7 +1,6 @@
 import { Button, cl } from '@cogoport/components';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { IcMDelete } from '@cogoport/icons-react';
-import React from 'react';
 
 import getElementController from '../../configs/getElementController';
 import getErrorMessage from '../../configs/getErrorMessage';
@@ -12,7 +11,6 @@ import styles from './styles.module.css';
 const DEFAULT_SPAN = 12;
 const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 1;
-const ZEROTH_INDEX = 0;
 const FIRST_INDEX = 1;
 const TWO_VALUE = 2;
 
@@ -118,7 +116,7 @@ function Child({
 							style={{ width: `${flex}%` }}
 							key={`create_form_${newControl.name}_${index}`}
 						>
-							{(showLabelOnce && index === ZEROTH_INDEX && newControl.label && !isSubControl)
+							{(showLabelOnce && !index && newControl.label && !isSubControl)
 							|| (!showLabelOnce && newControl.label && !isSubControl) ? (
 								<div className={styles.heading}>
 									{newControl.label || lowerlabel}

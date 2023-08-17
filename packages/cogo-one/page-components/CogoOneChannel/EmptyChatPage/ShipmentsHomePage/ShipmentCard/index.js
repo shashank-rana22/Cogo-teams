@@ -41,6 +41,7 @@ function ShipmentCard({
 	showPocDetails = {},
 	setShowPocDetails = () => {},
 	setActiveTab = () => {},
+	setShowBookingNote = () => {},
 }) {
 	const {
 		serial_id = '',
@@ -69,6 +70,7 @@ function ShipmentCard({
 				setShowPocDetails={setShowPocDetails}
 				shipmentItem={shipmentItem}
 				type="all_shipments"
+				setShowBookingNote={setShowBookingNote}
 			/>
 		</div>
 	);

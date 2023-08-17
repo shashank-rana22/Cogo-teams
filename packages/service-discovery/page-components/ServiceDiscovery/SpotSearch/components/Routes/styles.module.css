@@ -17,6 +17,10 @@
 
 .route_form {
 	width: 70%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .search_button {
@@ -25,10 +29,17 @@
 	@media (max-width: 1000px) {
 		margin-top: 16px;
 	}
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 
 	:global {
 		.ui_button_container {
 			width: 200px;
+
+			@media (max-width: 768px) {
+				width: 100%;
+			}
 		}
 	}
 }

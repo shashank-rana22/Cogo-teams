@@ -32,27 +32,20 @@ function FeedBackModal({
 	});
 
 	const onSubmit = (values) => { onSubmitFeedback(values); };
-
-	const renderButton = ({
-		btnText = '',
-		isFirstBtn = false,
-		onClick = () => {},
-		themeType,
-		size,
-		isSubmitBtn = false,
-	}) => (
-		<Button
-			type="button"
-			size={size || 'md'}
-			themeType={themeType || 'primary'}
-			onClick={onClick}
-			style={{ marginRight: isFirstBtn ? MARGIN_FIRST_BUTTON : ZERO_MARGIN }}
-			disabled={loading}
-			loading={isSubmitBtn && loading}
-		>
-			{btnText}
-		</Button>
-	);
+	const BUTTON_MAPPING = [
+		{
+			label     : 'Cancel',
+			onClick   : onClose,
+			themeType : 'secondary',
+			disabled  : loading,
+		},
+		{
+			label     : 'Submit',
+			onClick   : handleSubmit(onSubmit),
+			themeType : 'secondary',
+			loading,
+		},
+	];
 
 	return (
 		<Modal
@@ -71,20 +64,21 @@ function FeedBackModal({
 							errors={errors}
 						/>
 					</Modal.Body>
+
 					<Modal.Footer>
 						<div className={styles.buttons_container}>
+							{BUTTON_MAPPING.map((buttonItem, index) => {
+								const { label, ...restProps } = buttonItem;
 
-							{renderButton({
-								btnText    : 'Cancel',
-								onClick    : onClose,
-								isFirstBtn : true,
-								themeType  : 'secondary',
-							})}
-
-							{renderButton({
-								btnText     : 'Submit',
-								onClick     : handleSubmit(onSubmit),
-								isSubmitBtn : true,
+								return (
+									<Button
+										key={label}
+										style={{ marginRight: !index ? MARGIN_FIRST_BUTTON : ZERO_MARGIN }}
+										{...restProps}
+									>
+										{label}
+									</Button>
+								);
 							})}
 						</div>
 					</Modal.Footer>

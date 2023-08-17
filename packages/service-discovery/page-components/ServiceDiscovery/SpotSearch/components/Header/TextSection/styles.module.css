@@ -11,4 +11,8 @@
 .text {
 	font-size: 44px;
 	color: #221f20;
+
+	@media (max-width: 450px) {
+		font-size: 36px;
+	}
 }

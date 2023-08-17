@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
-import React from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 import useSpotSearchService from '../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
@@ -38,6 +37,7 @@ function AdditionalServicesForm({
 	service.controls.forEach((singleControl) => {
 		const condition = { ...(singleControl.condition || {}) };
 		delete condition.services;
+
 		Object.keys(condition).forEach((conditionRule) => {
 			if (!WATCH_MAP[conditionRule]) {
 				WATCH_MAP[conditionRule] = watch(conditionRule) || findKey(detail, conditionRule);
@@ -61,9 +61,7 @@ function AdditionalServicesForm({
 			<div className={styles.text}>
 				We need the following details to give you an accurate estimation and discount
 				<IcMCross
-					onClick={() => {
-						setHeaderProps({});
-					}}
+					onClick={() => setHeaderProps({})}
 					style={{ cursor: 'pointer' }}
 				/>
 			</div>
@@ -122,7 +120,7 @@ function AdditionalServicesForm({
 					onClick={handleSubmit(onSubmit)}
 					size="md"
 					themeType="accent"
-					className={styles.primaryButtton}
+					className={styles.primary_buttton}
 					disabled={loading}
 					loading={loading}
 				>

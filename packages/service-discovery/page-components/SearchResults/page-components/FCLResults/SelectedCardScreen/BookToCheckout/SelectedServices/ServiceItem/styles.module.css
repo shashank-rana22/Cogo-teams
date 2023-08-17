@@ -5,6 +5,7 @@
 	width: 140px;
 	height: 150px;
 	padding: 8px;
+	margin-right: 24px;
 	background: #fffffc;
 	border: 1px solid #eff2f2;
 	border-radius: 8px;
@@ -45,7 +46,6 @@
 
 .shipping_line {
 	display: flex;
-	gap: 8px;
 	align-items: center;
 }
 

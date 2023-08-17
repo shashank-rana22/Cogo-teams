@@ -2,7 +2,6 @@ import { COMMODITY_NAME_MAPPING } from '@cogoport/globalization/constants/commod
 import { getByKey, isEmpty, startCase } from '@cogoport/utils';
 
 import { CONTAINER_SIZE, CONTAINER_TYPE } from './container';
-import formatDateToString from './formatDateToString';
 
 const ZERO_VALUE = 0;
 const ONE_VALUE = 1;
@@ -39,13 +38,6 @@ const getValue = (
 	}
 
 	switch (itemField.type) {
-		case 'datetime': {
-			return val ? (
-				formatDateToString(val, itemField.formatType || 'dd MMM yy | hh:mm a')
-			) : (
-				<div className="core-date-dash">-</div>
-			);
-		}
 		case 'commodity':
 			return (
 				(COMMODITY_NAME_MAPPING[val] || {}).name
@@ -55,17 +47,6 @@ const getValue = (
 
 		case 'shipping-line':
 			return (val || {}).short_name || (val || {}).name;
-
-		case 'range':
-			if (itemField.subType === 'date') {
-				return `${formatDateToString(itemData[itemField.startKey], 'PP')} 
-				- ${formatDateToString(itemData[itemField.endKey], 'PP')}`;
-			}
-			if (itemField.subType === 'short-date') {
-				return `${formatDateToString(itemData[itemField.startKey], 'd MMM')} 
-				- ${formatDateToString(itemData[itemField.endKey], 'd MMM')}`;
-			}
-			return `${itemData[itemField.startKey]} - ${itemData[itemField.endKey]}`;
 
 		case 'price':
 			return `${itemData.currency} ${(

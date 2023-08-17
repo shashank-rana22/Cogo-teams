@@ -139,6 +139,7 @@ function AdditionalServices({ // used in search results and checkout
 					return getServiceName(serviceItem) === service.name;
 				},
 			),
+			source: rateCardData.source,
 		});
 	});
 
@@ -167,8 +168,26 @@ function AdditionalServices({ // used in search results and checkout
 
 	const SERVICES_CANNOT_BE_REMOVED = ['fcl_freight', SERVICES_CANNOT_BE_REMOVED_MAPPING[trade_type]];
 
+	const SERVICES_LIST_MAPPING = {
+		shipper_side_services: {
+			key  : 'shipper_side_services',
+			type : 'seller',
+			list : SHIPPER_SIDE_SERVICES,
+		},
+		main_service: {
+			key  : 'main_service',
+			type : 'main_service',
+			list : MAIN_SERVICES,
+		},
+		buyer_side_services: {
+			key  : 'buyer_side_services',
+			type : 'buyer',
+			list : CONSIGNEE_SIDE_SERVICES,
+		},
+	};
+
 	return (
-		<>
+		<div>
 			<div className={styles.heading}>
 				You may need these services
 				{source === 'checkout' ? (
@@ -186,50 +205,27 @@ function AdditionalServices({ // used in search results and checkout
 			</div>
 
 			<div className={styles.additional_services}>
-				{isEmpty(SHIPPER_SIDE_SERVICES) ? null : (
-					<List
-						list={SHIPPER_SIDE_SERVICES}
-						type="seller"
-						detail={detail}
-						rateCardData={rateCardData}
-						setHeaderProps={setHeaderProps}
-						refetch={refetchSearch}
-						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
-						startingPrices={startingPrices}
-						startingPriceLoading={startingPriceLoading}
-						refetchLoading={refetchLoading}
-					/>
-				)}
+				{Object.values(SERVICES_LIST_MAPPING).map((servicesObj) => {
+					const { key = '', type = '', list = [] } = servicesObj;
 
-				{isEmpty(MAIN_SERVICES) ? null : (
-					<List
-						list={MAIN_SERVICES}
-						type="main_service"
-						detail={detail}
-						rateCardData={rateCardData}
-						setHeaderProps={setHeaderProps}
-						refetch={refetchSearch}
-						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
-						startingPrices={startingPrices}
-						startingPriceLoading={startingPriceLoading}
-						refetchLoading={refetchLoading}
-					/>
-				)}
+					if (isEmpty(list)) return null;
 
-				{isEmpty(CONSIGNEE_SIDE_SERVICES) ? null : (
-					<List
-						list={CONSIGNEE_SIDE_SERVICES}
-						type="buyer"
-						detail={detail}
-						rateCardData={rateCardData}
-						setHeaderProps={setHeaderProps}
-						refetch={refetchSearch}
-						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
-						startingPrices={startingPrices}
-						startingPriceLoading={startingPriceLoading}
-						refetchLoading={refetchLoading}
-					/>
-				)}
+					return (
+						<List
+							key={key}
+							list={list}
+							type={type}
+							detail={detail}
+							rateCardData={rateCardData}
+							setHeaderProps={setHeaderProps}
+							refetch={refetchSearch}
+							SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
+							startingPrices={startingPrices}
+							startingPriceLoading={startingPriceLoading}
+							refetchLoading={refetchLoading}
+						/>
+					);
+				})}
 			</div>
 
 			{!isEmpty(incoTermModalData) ? (
@@ -242,7 +238,7 @@ function AdditionalServices({ // used in search results and checkout
 					checkout_id={detail?.checkout_id}
 				/>
 			) : null}
-		</>
+		</div>
 	);
 }
 

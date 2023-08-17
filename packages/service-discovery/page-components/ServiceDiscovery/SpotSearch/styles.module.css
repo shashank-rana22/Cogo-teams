@@ -12,6 +12,9 @@
 	@media (max-width: 950px) {
 		min-height: 320px;
 	}
+	@media (max-width: 768px) {
+		min-height: 400px;
+	}
 }
 
 .mode_selection {
@@ -26,7 +29,6 @@
 
 .locations {
 	padding: 24px 40px;
-	margin-left: 20px;
 }
 
 .sales_dashboard {

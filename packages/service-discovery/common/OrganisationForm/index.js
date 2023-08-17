@@ -1,4 +1,4 @@
-import { Select, Toast } from '@cogoport/components';
+import { Select, Toast, cl } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -10,23 +10,23 @@ import CustomSelectOption from '../CustomSelectOption';
 
 import styles from './styles.module.css';
 
+const ORG_PARAMS = {
+	branches_data_required   : true,
+	setting_data_required    : false,
+	pagination_data_required : false,
+	agent_data_required      : false,
+	filters                  : {
+		status       : 'active',
+		account_type : 'importer_exporter',
+	},
+};
+
 function OrganisationForm({
 	organization = {},
 	setOrganization = () => {},
 	errors = {},
 	...rest
 }) {
-	const ORG_PARAMS = {
-		branches_data_required   : true,
-		setting_data_required    : false,
-		pagination_data_required : false,
-		agent_data_required      : false,
-		filters                  : {
-			status       : 'active',
-			account_type : 'importer_exporter',
-		},
-	};
-
 	const USER_PARAMS = useMemo(() => (
 		{
 			pagination_data_required : false,
@@ -133,7 +133,7 @@ function OrganisationForm({
 				)}
 			</div>
 
-			<div className={styles.form_item}>
+			<div className={cl`${styles.form_item} ${styles.user}`}>
 				<div className={styles.label}>
 					Select an User
 					{' '}

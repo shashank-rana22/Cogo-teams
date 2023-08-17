@@ -68,7 +68,9 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 
 			if (conditionToRequestRate) {
 				if (serviceItem.service_type === 'fcl_freight_local') {
-					return 'At Actuals';
+					if (serviceItem.source === 'cogo_assured_rate') {
+						return 'No Rates';
+					} return 'At Actuals';
 				}
 				return (
 					<div className={styles.no_rates_found}>

@@ -47,7 +47,6 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'supply', label: 'Supply' },
 		{ value: 'supply_management', label: 'Supply Management' },
 		{ value: 'technology', label: 'Technology' },
-
 	],
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
@@ -418,6 +417,7 @@ const GLOBAL_CONSTANTS = {
 		guarenteed_booking_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/guarenteed_booking',
 		filter_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_228.svg',
 		no_rates_found_emoji    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
+		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
 	},
 
 	video_call_ring_tone_url:

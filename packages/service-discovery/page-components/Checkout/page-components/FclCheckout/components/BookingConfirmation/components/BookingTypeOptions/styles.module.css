@@ -22,11 +22,12 @@
 }
 
 .title {
-	font-weight: 600;
+	font-weight: 500;
+	color: #393f70;
 }
 
 .type {
-	margin-top: 6px;
+	margin-top: 4px;
 	font-size: 18px;
 	font-weight: 700;
 }

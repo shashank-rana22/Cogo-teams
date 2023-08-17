@@ -1,6 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React from 'react';
 
 import useDislikeFeedback from '../../../../../hooks/useDislikeFeedback';
 
@@ -27,26 +26,20 @@ function DislikeModal({
 		setShowSuccessModal(true);
 	};
 
-	const renderButton = ({
-		btnText = '',
-		isFirstBtn = false,
-		onClick = () => {},
-		themeType,
-		size,
-		isSubmitBtn = false,
-	}) => (
-		<Button
-			type="button"
-			size={size || 'md'}
-			themeType={themeType || 'primary'}
-			onClick={onClick}
-			style={{ marginRight: isFirstBtn ? '12px' : '0px' }}
-			disabled={loading}
-			loading={isSubmitBtn && loading}
-		>
-			{btnText}
-		</Button>
-	);
+	const BUTTONS_MAPPING = [
+		{
+			label     : 'Cancel',
+			onClick   : onClose,
+			themeType : 'secondary',
+			disabled  : loading,
+		},
+		{
+			label     : 'Submit',
+			onClick   : handleSubmit(onSubmit),
+			themeType : 'primary',
+			loading,
+		},
+	];
 
 	return (
 		<Modal size="md" show={show} onClose={onClose} placement="right">
@@ -66,10 +59,20 @@ function DislikeModal({
 
 			<Modal.Footer>
 				<div className={styles.buttons_container}>
+					{BUTTONS_MAPPING.map((buttonItem, index) => {
+						const { label, ...restProps } = buttonItem;
 
-					{renderButton({ btnText: 'Cancel', onClick: onClose, isFirstBtn: true, themeType: 'secondary' })}
-
-					{renderButton({ btnText: 'Submit', onClick: handleSubmit(onSubmit), isSubmitBtn: true })}
+						return (
+							<Button
+								key={label}
+								type="button"
+								style={{ marginRight: !index ? '12px' : '0px' }}
+								{...restProps}
+							>
+								{label}
+							</Button>
+						);
+					})}
 				</div>
 			</Modal.Footer>
 		</Modal>

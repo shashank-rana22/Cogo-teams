@@ -35,6 +35,21 @@ const ifToShowCargoInsurance = ({ services = {}, service_type = '', importer_exp
 	return !isAlreadyPresent && isCountrySupported;
 };
 
+const ifServiceValid = (rates = {}, source = '') => {
+	if (source !== 'cogo_assured_rate') return true;
+
+	let isValid = true;
+
+	Object.values(rates || {}).forEach((rate) => {
+		const { total_price_discounted, service_type } = rate;
+		if (service_type === 'fcl_freight_local') {
+			if (!total_price_discounted) isValid = false;
+		}
+	});
+
+	return isValid;
+};
+
 function TotalLandedCost({ total_price_discounted = '', total_price_currency = '' }) {
 	return (
 		<div>
@@ -81,6 +96,8 @@ function SelectedRateCard({
 		spot_search_id,
 	});
 
+	const proceedToCheckoutIsValid = ifServiceValid(rateCardData?.service_rates, source);
+
 	const handleProceedToCheckout = () => {
 		const showCargoInsurance = ifToShowCargoInsurance({
 			services: service_details,
@@ -93,11 +110,9 @@ function SelectedRateCard({
 		} else handleBook();
 	};
 
-	if (loading && isEmpty(data)) {
-		return (
-			<LoadingState />
-		);
-	}
+	if (loading) return <LoadingState />;
+
+	if (isEmpty(data)) return null;
 
 	return (
 		<div className={styles.parent}>
@@ -161,6 +176,7 @@ function SelectedRateCard({
 									style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 16, paddingBottom: 16 }}
 									className={styles.proceed_button}
 									loading={createCheckoutLoading}
+									disabled={!proceedToCheckoutIsValid}
 								>
 									Proceed to checkout
 								</Button>

@@ -17,7 +17,7 @@ function ContainerItem({
 	isFirst = false,
 }) {
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ marginTop: isFirst ? '0px' : '12px' }}>
 			<div className={styles.load_item}>
 				<span className={styles.text}>
 					{`${loadItem.containers_count} X ${

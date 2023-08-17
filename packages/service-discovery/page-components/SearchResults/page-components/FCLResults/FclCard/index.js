@@ -71,7 +71,6 @@ function MiddleSection({
 
 	return (
 		<div className={styles.middle}>
-
 			<Route
 				detail={detail}
 				scheduleData={scheduleData}
@@ -267,7 +266,6 @@ function FclCard({
 				isSelectedCard={isSelectedCard}
 				isCogoAssured={isCogoAssured}
 			/>
-
 		</div>
 	);
 }
