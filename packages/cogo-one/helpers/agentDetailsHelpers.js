@@ -7,7 +7,6 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 export function getHasAccessToEditGroup({ formattedMessageData, agentId, viewType }) {
 	const {
 		session_type,
-		account_type,
 		group_members,
 		support_agent_id,
 		managers_ids = [],
@@ -15,7 +14,7 @@ export function getHasAccessToEditGroup({ formattedMessageData, agentId, viewTyp
 
 	return (
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_group_access
-		&& (session_type === 'admin' && account_type === 'service_provider')
+		&& (session_type === 'admin')
 		&& (
 			VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit
 			|| group_members?.includes(agentId)

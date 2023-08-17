@@ -29,7 +29,7 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 					params={{
 						rm_mappings_data_required : false,
 						partner_data_required     : false,
-						filters                   : { role_functions: ['supply'] },
+						filters                   : { role_functions: ['supply', 'operations', 'sales'] },
 					}}
 					className={styles.select}
 					isClearable

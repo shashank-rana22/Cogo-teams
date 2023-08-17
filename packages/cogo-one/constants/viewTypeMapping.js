@@ -46,18 +46,13 @@ function getSalesAgentButtons({
 }
 
 function getSupplyAgentButtons({
-	showBotMessages,
-	supportAgentId,
-	userId,
-	isGroupFormed,
-	isServiceProvider,
-	isPartOfGroup,
-	isManager,
+	showBotMessages = false,
+	supportAgentId = '',
+	userId = '',
+	isGroupFormed = false,
+	isPartOfGroup = false,
+	isManager = false,
 }) {
-	if (!isServiceProvider) {
-		return [];
-	}
-
 	if (showBotMessages) {
 		return ['assign_to_me'];
 	}
@@ -70,7 +65,7 @@ function getSupplyAgentButtons({
 		return ['add_me_to_group'];
 	}
 
-	return ['request_for_assign', 'add_me_to_group'];
+	return ['request_for_assign'];
 }
 
 function getSalesSessionQuery({ sessionType, activeSubTab = '' }) {
@@ -80,16 +75,23 @@ function getSalesSessionQuery({ sessionType, activeSubTab = '' }) {
 }
 
 function getShipmentSpecialistButtons({
-	supportAgentId,
-	userId,
-	showBotMessages,
+	supportAgentId = '',
+	userId = '',
+	showBotMessages = false,
+	isGroupFormed = false,
+	isPartOfGroup = false,
+	isManager = false,
 }) {
-	if (supportAgentId === userId) {
+	if (showBotMessages) {
+		return ['assign_to_me'];
+	}
+
+	if ((supportAgentId === userId) || isPartOfGroup || isManager) {
 		return ['assign_modal'];
 	}
 
-	if (showBotMessages) {
-		return ['assign_to_me'];
+	if (isGroupFormed) {
+		return ['add_me_to_group'];
 	}
 
 	return ['request_for_assign'];
@@ -338,8 +340,9 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 	},
 	shipment_specialist: {
 		all_chats_base_query          : ({ agentId }) => [where('support_agent_id', '==', agentId)],
+		group_chats_query             : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		session_type_query            : () => [where('session_type', '==', 'admin')],
-		chat_sub_tabs_access          : ['all', 'teams'],
+		chat_sub_tabs_access          : ['all', 'teams', 'groups'],
 		teams_chats_base_query        : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		extra_side_bar_navs_access    : [],
 		default_side_nav              : 'user_activity',
