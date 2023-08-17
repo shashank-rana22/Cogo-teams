@@ -12,7 +12,7 @@ const createContracts = () => [
 		type        : 'text',
 		placeholder : 'Name of Contract',
 		span        : 12,
-		showIn      : ['fcl_freight', 'air_frieght', 'lcl_frieght'],
+		showIn      : ['fcl_freight', 'air_freight', 'lcl_freight'],
 		rules       : { required: 'Contract name is required' },
 	},
 	{
@@ -21,7 +21,7 @@ const createContracts = () => [
 		type        : 'datepicker',
 		placeholder : 'Start Date ',
 		span        : 6,
-		showIn      : ['fcl_freight', 'air_frieght', 'lcl_frieght'],
+		showIn      : ['fcl_freight', 'air_freight', 'lcl_freight'],
 		rules       : { required: 'Start date required' },
 	},
 	{
@@ -30,7 +30,7 @@ const createContracts = () => [
 		placeholder           : ' End Date',
 		isPreviousDaysAllowed : true,
 		span                  : 6,
-		showIn                : ['fcl_freight', 'air_frieght', 'lcl_frieght'],
+		showIn                : ['fcl_freight', 'air_freight', 'lcl_freight'],
 		rules                 : { required: 'End date required' },
 	},
 	{
@@ -39,7 +39,7 @@ const createContracts = () => [
 		type        : 'number',
 		placeholder : 'Count',
 		span        : 4,
-		showIn      : ['fcl_freight', 'air_frieght', 'lcl_frieght'],
+		showIn      : ['fcl_freight', 'air_freight', 'lcl_freight'],
 		rules       : { required: 'Container count is required', min: 50 },
 	},
 	{
@@ -47,7 +47,7 @@ const createContracts = () => [
 		label  : 'Maximum Volume',
 		type   : 'number',
 		span   : 4,
-		showIn : ['air_frieght', 'lcl_frieght'],
+		showIn : ['air_freight', 'lcl_freight'],
 		rules  : { required: 'Maximum volume is required', min: 50 },
 	},
 	{
@@ -55,7 +55,7 @@ const createContracts = () => [
 		label  : 'Maximum Weight',
 		type   : 'number',
 		span   : 4,
-		showIn : ['air_frieght', 'lcl_frieght'],
+		showIn : ['air_freight', 'lcl_freight'],
 		rules  : { required: 'Maximum weight is required', min: 50 },
 	},
 	{
@@ -93,7 +93,7 @@ const createContracts = () => [
 		multiple       : true,
 		theme          : 'admin',
 		span           : 4,
-		showIn         : ['air_frieght'],
+		showIn         : ['air_freight'],
 	},
 	{
 		name           : 'exclude_airline_ids',

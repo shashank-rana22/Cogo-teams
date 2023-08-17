@@ -1,7 +1,6 @@
 import { Tooltip, Toast } from '@cogoport/components';
 import { IcMCopy } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import React from 'react';
 
 function CopyUrl({ details = {} }) {
 	const { spot_search_id } = useSelector(({ general }) => ({

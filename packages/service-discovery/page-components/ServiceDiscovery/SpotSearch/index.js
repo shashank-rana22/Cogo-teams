@@ -12,13 +12,33 @@ import useCreateSearch from './hooks/useCreateSearch';
 import styles from './styles.module.css';
 
 function SpotSearch() {
-	const [organization, setOrganization] = useState({});
+	const [organization, setOrganization] = useState(() => {
+		if (typeof window !== 'undefined') {
+			const organization_id = new URLSearchParams(window?.location?.search)?.get('organization_id') || undefined;
+			const user_id = new URLSearchParams(window?.location?.search)?.get('user_id') || undefined;
+			const organization_branch_id = new URLSearchParams(window?.location?.search)?.get('organization_branch_id')
+			|| undefined;
+
+			return { organization_id, user_id, organization_branch_id };
+		}
+
+		return {};
+	});
 	const [selectedMode, setSelectedMode] = useState({
 		mode_label : 'FCL',
 		mode_value : 'fcl_freight',
 	});
 	const [selectedService, setSelectedService] = useState({});
-	const [location, setLocation] = useState({});
+	const [location, setLocation] = useState(() => {
+		if (typeof window !== 'undefined') {
+			const origin = new URLSearchParams(window?.location?.search)?.get('origin') || undefined;
+			const destination = new URLSearchParams(window?.location?.search)?.get('destination') || undefined;
+
+			return { origin: { id: origin }, destination: { id: destination } };
+		}
+
+		return {};
+	});
 	const [errors, setErrors] = useState({});
 
 	const { createSearch, loading } = useCreateSearch();

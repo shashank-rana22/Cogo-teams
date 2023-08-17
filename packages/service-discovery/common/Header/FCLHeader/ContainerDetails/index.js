@@ -54,7 +54,7 @@ function ContainerDetails({
 				setShowModal={setShowModal}
 			/>
 
-			{isEmpty(load) ? null : (
+			{!isEmpty(load) ? (
 				<Tooltip
 					maxWidth="max-content"
 					placement="top"
@@ -82,7 +82,7 @@ function ContainerDetails({
 				>
 					<div className={styles.more_tag}>{`+${load.length} More`}</div>
 				</Tooltip>
-			)}
+			) : null}
 
 			{showModal ? (
 				<EditContainerModal

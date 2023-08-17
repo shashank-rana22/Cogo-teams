@@ -6,6 +6,7 @@ import { IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import React, { useMemo, useEffect, useCallback } from 'react';
 
+import setItemInQuery from '../../helpers/setItemInQuery';
 import CustomSelectOption from '../CustomSelectOption';
 
 import styles from './styles.module.css';
@@ -57,12 +58,17 @@ function OrganisationForm({
 
 	const renderOrgLabel = (data) => CustomSelectOption({ data, key: 'organizations' });
 
-	const handleOrgChange = (val, obj = {}) => {
+	const handleOrgChange = (obj = {}) => {
 		const {
 			id = '',
 			organization_branch_ids = '',
 			business_name = '',
 		} = obj;
+
+		setItemInQuery({
+			key   : 'organization_branch_id',
+			value : organization_branch_ids?.[GLOBAL_CONSTANTS.zeroth_index],
+		});
 
 		setOrganization({
 			organization_id        : id,
@@ -100,9 +106,9 @@ function OrganisationForm({
 	useEffect(() => {
 		setOrganization((prev) => ({
 			...prev,
-			user_id: userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
+			user_id: organization?.user_id || userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
 		}));
-	}, [setOrganization, userOptions]);
+	}, [organization?.user_id, setOrganization, userOptions]);
 
 	return (
 		<div className={styles.container} style={rest.style}>
@@ -121,7 +127,11 @@ function OrganisationForm({
 					isClearable
 					params={ORG_PARAMS}
 					value={organization?.organization_id}
-					onChange={handleOrgChange}
+					onChange={(_, obj) => {
+						handleOrgChange(obj);
+
+						setItemInQuery({ key: 'organization_id', value: obj?.id });
+					}}
 					renderLabel={renderOrgLabel}
 					prefix={<IcMManufacturing fontSize={16} />}
 				/>
@@ -133,7 +143,7 @@ function OrganisationForm({
 				)}
 			</div>
 
-			<div className={cl`${styles.form_item} ${styles.user}`}>
+			<div key={loading} className={cl`${styles.form_item} ${styles.user}`}>
 				<div className={styles.label}>
 					Select an User
 					{' '}
@@ -145,7 +155,11 @@ function OrganisationForm({
 					placeholder="Select User"
 					value={organization?.user_id}
 					options={organization?.organization_id ? userOptions : []}
-					onChange={handleUserChange}
+					onChange={(val) => {
+						handleUserChange(val);
+
+						setItemInQuery({ key: 'user_id', value: val });
+					}}
 					prefix={<IcMProfile fontSize={16} />}
 					loading={loading}
 				/>

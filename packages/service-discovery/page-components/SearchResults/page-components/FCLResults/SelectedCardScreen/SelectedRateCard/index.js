@@ -78,6 +78,7 @@ function SelectedRateCard({
 	cogoAssuredRates = [],
 	showShippingLineModal = false,
 	setShowShippingLineModal = () => {},
+	setMainScreen = () => {},
 }) {
 	const [cargoModal, setCargoModal] = useState('pending'); // pending,progress,success
 
@@ -133,6 +134,7 @@ function SelectedRateCard({
 					detail={detail}
 					isSelectedCard
 					setScreen={setScreen}
+					setMainScreen={setMainScreen}
 				/>
 
 				{source === 'cogo_assured_rate' ? (
