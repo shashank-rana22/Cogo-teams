@@ -1,14 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
-const useCreateRDAutomationParameters = ({ filter }) => {
-	const [{ loading }, trigger] = useRequest({
+const useCreateRDAutomationParameters = ({ setData = () => {} }) => {
+	const [{ loading, data: list }, trigger] = useRequest({
 		url    : '/create_revenue_desk_automation_parameters',
 		method : 'POST',
 	}, { manual: true });
 
-	const apiTrigger = async () => {
+	const apiTrigger = async ({ filter = {}, refetched = false }) => {
 		try {
 			const {
 				trade_type, service_type, customer_segment = '',
@@ -25,20 +27,25 @@ const useCreateRDAutomationParameters = ({ filter }) => {
 						container_type : commodity_type,
 						commodity      : commodity_item,
 						inco_term,
-					},
+					} || undefined,
 				},
 			});
 			if (!res.hasError) {
-				Toast.success('Saved Successfully');
+				if (!refetched) { Toast.success('Saved Successfully'); }
 			}
 		} catch (err) {
 			toastApiError(err);
 		}
 	};
 
+	useEffect(() => {
+		setData(list);
+	}, [list]);
+
 	return {
 		apiTrigger,
 		loading,
+		list,
 	};
 };
 
