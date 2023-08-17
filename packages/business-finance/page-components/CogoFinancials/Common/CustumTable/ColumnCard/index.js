@@ -32,7 +32,7 @@ function ColumnCard({
 			}
 			return '#abcd62'; // positive green
 		}
-		return null;
+		return 'unset';
 	};
 
 	return (

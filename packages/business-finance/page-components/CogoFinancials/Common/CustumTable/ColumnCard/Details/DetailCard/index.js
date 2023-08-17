@@ -53,7 +53,7 @@ function DetailCard({ heading = '', item = {}, taxType = '', LABEL_MAPPING = [],
 				return '#ee3425'; // negative red
 			}
 		}
-		return null;
+		return 'unset';
 	};
 
 	return (

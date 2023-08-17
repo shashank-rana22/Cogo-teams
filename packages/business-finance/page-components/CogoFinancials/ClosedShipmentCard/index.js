@@ -91,7 +91,7 @@ function ClosedShipmentCard({
 	return (
 		<div
 			className={styles.financially_closed_container}
-			style={{ height: isAdditonalView ? '100%' : null }}
+			style={{ height: isAdditonalView ? '100%' : 'auto' }}
 		>
 			{showHeading && (
 				<div style={{ padding: '16px 32px' }}>
@@ -147,7 +147,7 @@ function ClosedShipmentCard({
 						/>
 
 					</div>
-					<div className={styles.show_graph_data} style={{ height: isHomeCard ? '100%' : null }}>
+					<div className={styles.show_graph_data} style={{ height: isHomeCard ? '100%' : 'auto' }}>
 						{(graphData || []).map((item) => (
 							<div
 								key={item?.id}

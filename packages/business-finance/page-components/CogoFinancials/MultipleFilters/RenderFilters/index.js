@@ -112,7 +112,8 @@ function RenderFilters({
 										<Pill
 											size="sm"
 											color={internalFilter.serviceCategory === item ? '#cfeaed'
-												: 'white'}
+												: '#fff'}
+											style={{ cursor: 'pointer' }}
 										>
 											{item}
 

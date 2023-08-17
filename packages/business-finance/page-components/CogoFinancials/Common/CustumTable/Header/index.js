@@ -16,7 +16,7 @@ function Header({ config = {}, setSort = () => {}, sort = {}, setTableFilters = 
 
 	const handleClick = ({ field, type }) => {
 		setSort({
-			sortBy   : field.sortingKey,
+			sortBy   : field?.sortingKey,
 			sortType : type,
 		});
 		setTableFilters((prev) => ({ ...prev, pageIndex: 1 }));
@@ -33,8 +33,8 @@ function Header({ config = {}, setSort = () => {}, sort = {}, setTableFilters = 
 						width    : `${((field.span || DEFAULT_SPAN) * (HUNDERED_PERCENT / TOTAL_SPAN))}px`,
 					}}
 				>
-					{field.label}
-					{field.sortingKey && (
+					{field?.label}
+					{field?.sortingKey ? (
 						<div className={styles.sort}>
 							{
 								(sortBy === field.sortingKey && sortType === 'Asc') ? (
@@ -50,7 +50,7 @@ function Header({ config = {}, setSort = () => {}, sort = {}, setTableFilters = 
 								)
 							}
 						</div>
-					)}
+					) : null}
 				</div>
 			))}
 		</section>
