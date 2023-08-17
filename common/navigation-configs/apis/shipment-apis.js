@@ -1445,7 +1445,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_checkout_applicable_promocodes',
+		api          : 'get_checkout_applicable_promocodes',
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
@@ -1688,6 +1688,11 @@ const apis = [
 		api          : 'create_shipment_ftl_freight_fuel_payment',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'get_distance_matrix_valhalla',
+		access_type  : 'private',
+		service_name : 'location',
 	},
 	{
 		api          : 'send_rail_domestic_indent_email',

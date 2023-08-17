@@ -31,7 +31,7 @@ function AcceptOfferModal({
 					<Button
 						type="button"
 						style={{ marginLeft: '8px' }}
-						onClick={() => updateData({ status: 'accept' })}
+						onClick={() => updateData({ status: 'accepted' })}
 					>
 						Yes
 					</Button>
