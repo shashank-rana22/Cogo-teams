@@ -15,8 +15,8 @@ const commonLocationProps = {
 	getModifiedOptions : ({ options }) => (
 		options.map((option) => ({
 			...option,
-			origin_display_name      : option.origin_location.display_name,
-			destination_display_name : option.destination_location.display_name,
+			origin_display_name      : option?.origin_location?.display_name,
+			destination_display_name : option?.destination_location?.display_name,
 
 		}))
 	),
@@ -141,13 +141,13 @@ function Header({ graphData, count, originName, destinationName }) {
 									valueKey="origin_location_id"
 									{...commonLocationProps}
 									onChange={(_, item) => {
-										setLocationSearchId(item.id);
+										setLocationSearchId(item?.id);
 									}}
 									params={{
 										service_data_required: true,
 										...(destination_location_id ? { filters: { destination_location_id } } : {}),
 									}}
-									renderLabel={(item) => item.origin_location.display_name}
+									renderLabel={(item) => item?.origin_location?.display_name}
 								/>
 							</div>
 							<div style={{ marginRight: '20px' }}>
@@ -162,9 +162,9 @@ function Header({ graphData, count, originName, destinationName }) {
 									valueKey="destination_location_id"
 									{...commonLocationProps}
 									onChange={(_, item) => {
-										setLocationSearchId(item.id);
+										setLocationSearchId(item?.id);
 									}}
-									renderLabel={(item) => item.destination_location.display_name}
+									renderLabel={(item) => item?.destination_location?.display_name}
 									params={{
 										service_data_required: true,
 										...(origin_location_id ? { filters: { origin_location_id } } : {}),
