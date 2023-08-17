@@ -25,7 +25,6 @@ importers:
       postcss-flexbugs-fixes: ^5.0.2
       postcss-nested: ^6.0.1
       postcss-preset-env: ^8.4.2
-      react-dom: 18.2.0
       react-i18next: ^12.1.4
       stylelint: ^14.16.1
       turbo: ^1.10.2
@@ -35,16 +34,15 @@ importers:
       '@sentry/nextjs': 7.63.0_next@13.1.6+react@18.2.0
       accept-language: 3.0.18
       axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
-      dotenv: 16.3.1
       i18next: 22.5.1
       next: 13.1.6_w4exofnty45araakomg6jes2wu
       next-i18next: 13.3.0_dnozh3q3bjyroxvzw5b5ijchja
-      react-dom: 18.2.0_react@18.2.0
       react-i18next: 12.3.1_spyi3zqm3bqfobczid2f6jym6y
     devDependencies:
       '@cogoport/eslint-config': 2.0.9_eslint@8.46.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
+      dotenv: 16.3.1
       eslint: 8.46.0
       eslint-plugin-custom-eslint: link:node_modules/@cogoport/eslint-config/packages/custom-eslint
       fs-extra: 11.1.1
@@ -856,10 +854,10 @@ importers:
       '@cogoport/utils': ^1.2.10
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.437_alnqrvxi5nmaicyhvladaiksvm
+      '@cogoport/components': 1.0.437_jbkdfmwn4pruupygfcv3deyn7u
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.90_react@18.2.0
+      '@cogoport/icons-react': 1.0.90_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
       '@cogoport/utils': 1.2.10
       react: 18.2.0
@@ -876,9 +874,9 @@ importers:
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.437_alnqrvxi5nmaicyhvladaiksvm
+      '@cogoport/components': 1.0.437_jbkdfmwn4pruupygfcv3deyn7u
       '@cogoport/core': link:../../common/core
-      '@cogoport/icons-react': 1.0.90_react@18.2.0
+      '@cogoport/icons-react': 1.0.90_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/scope-select': link:../../common/scope-select
@@ -8616,7 +8614,6 @@ packages:
   /dotenv/16.3.1:
     resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
     engines: {node: '>=12'}
-    dev: false
 
   /draft-js-export-html/1.4.1_qnm4pu3vwlglikbjqrpcmxoiem:
     resolution: {integrity: sha512-G4VGBSalPowktIE4wp3rFbhjs+Ln9IZ2FhXeHjsZDSw0a2+h+BjKu5Enq+mcsyVb51RW740GBK8Xbf7Iic51tw==}
@@ -8624,7 +8621,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -8635,7 +8632,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -8646,7 +8643,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -8658,7 +8655,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -8669,7 +8666,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -8681,7 +8678,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       immutable: 3.8.2
     dev: false
 
