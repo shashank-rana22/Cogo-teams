@@ -18,6 +18,8 @@ import useUpdateAgentStatus from './useUpdateAgentStatus';
 const EVENTS = ['click', 'keypress', 'scroll', 'pointermove'];
 const DEFAULT_TIMEOUT_VALUE = 0;
 
+const DISABLE_SCREEN_LOCK = ['in_call', 'inactive', 'break', 'punched_out', 'on_leave'];
+
 function useGetActivity({
 	firestore = {},
 	agentId = '',
@@ -64,17 +66,6 @@ function useGetActivity({
 			`${FIRESTORE_PATH.users_path}/${agentId}`,
 		);
 
-		if (inCall) {
-			await setDoc(
-				roomDoc,
-				{
-					last_activity_timestamp : Date.now(),
-					last_activity           : 'in_call',
-				},
-				{ merge: true },
-			);
-		}
-
 		try {
 			mountActivityTracker({ FUNC_MAPPING });
 
@@ -88,7 +79,7 @@ function useGetActivity({
 					return;
 				}
 
-				if (last_activity === 'in_call') {
+				if (DISABLE_SCREEN_LOCK.includes(last_activity)) {
 					return;
 				}
 
@@ -110,7 +101,7 @@ function useGetActivity({
 		} catch (e) {
 			console.error('error:', e);
 		}
-	}, [firestore, isRolePresent, agentId, inCall, FUNC_MAPPING, updateAgentStatus]);
+	}, [firestore, isRolePresent, agentId, FUNC_MAPPING, updateAgentStatus]);
 
 	useEffect(() => {
 		mountActivityTrackerSnapShotRef();
