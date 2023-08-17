@@ -10,6 +10,8 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping'
 import Item from './Item';
 import styles from './styles.module.css';
 
+const FILTER_TYPE = ['channels', 'chat_tags'];
+
 function getDefaultValues({ filters, filterControls }) {
 	let defaultValues = {};
 
@@ -67,8 +69,7 @@ function FilterComponents({
 
 	const resetForm = () => {
 		filterControls.forEach((item) => {
-			setValue(item.name, item.name === 'channels' ? [] : '');
-			setValue('chat_tags', []);
+			setValue(item.name, FILTER_TYPE.includes(item.name) ? [] : '');
 		});
 	};
 
