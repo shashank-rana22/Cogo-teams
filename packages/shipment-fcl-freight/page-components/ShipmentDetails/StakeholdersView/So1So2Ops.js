@@ -24,7 +24,7 @@ import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
-const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
+const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'can_edit_params'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function SoOneSoTwoOps({ get = {}, activeStakeholder = '' }) {
