@@ -29,10 +29,10 @@ function Configure({
 		setPage(pageVal);
 	};
 
-	const handleButtonClicks = ({
+	function HandleButtonClicks({
 		singleItem = {},
 		clickedButton = '',
-	}) => {
+	}) {
 		if (clickedButton === 'edit' && !isEmpty(editZone) && editZone.id === singleItem.id) {
 			return (
 				<EditZoneModal
@@ -54,7 +54,7 @@ function Configure({
 			);
 		}
 		return <div />;
-	};
+	}
 
 	const functions = {
 		handleEdit: (singleItem) => (
@@ -65,7 +65,7 @@ function Configure({
 					icon={<IcMEdit />}
 					themeType="primary"
 				/>
-				{handleButtonClicks({ singleItem, clickedButton: 'edit' })}
+				<HandleButtonClicks singleItem={singleItem} clickedButton="edit" />
 			</>
 		),
 		handleDelete: (singleItem) => (
@@ -76,7 +76,7 @@ function Configure({
 					icon={<IcMDelete />}
 					themeType="primary"
 				/>
-				{handleButtonClicks({ singleItem, clickedButton: 'delete' })}
+				<HandleButtonClicks singleItem={singleItem} clickedButton="delete" />
 			</>
 		),
 

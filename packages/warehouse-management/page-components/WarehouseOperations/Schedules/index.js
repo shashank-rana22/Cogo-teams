@@ -13,7 +13,6 @@ import TruckStatusUpdateModal from './TruckStatusUpdateModal';
 function Schedules({
 	activeTab = 'configure',
 	truckStatus = 'truck_in',
-	setTruckStatus = () => {},
 	searchValue = '',
 }) {
 	const { fields } = scheduleFields(truckStatus);
@@ -32,9 +31,9 @@ function Schedules({
 		&& singleItem?.warehouseTransferId === showTruckStatusModal?.warehouseTransferId && (
 			<TruckStatusUpdateModal
 				item={singleItem}
+				showTruckStatusModal={showTruckStatusModal}
 				setShowTruckStatusModal={setShowTruckStatusModal}
 				truckStatus={truckStatus}
-				setTruckStatus={setTruckStatus}
 				listAPI={listAPI}
 			/>
 		)

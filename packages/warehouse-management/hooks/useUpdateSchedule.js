@@ -34,9 +34,10 @@ const useUpdateSchedule = ({
 	truckStatus = 'truck_in',
 	listAPI = () => {},
 	setShowTruckStatusModal = () => {},
+	setShowCargoAcknowledgmentModal = () => {},
 
 }) => {
-	const [{ loading }, trigger] = useRequestAir(
+	const [{ loading, data }, trigger] = useRequestAir(
 		{
 			url     : 'air-coe/warehouse-management/schedule',
 			method  : 'PUT',
@@ -45,12 +46,13 @@ const useUpdateSchedule = ({
 	);
 
 	const handleOnClose = () => {
-		setShowTruckStatusModal(false);
+		setShowTruckStatusModal({});
+		setShowCargoAcknowledgmentModal(true);
 	};
 
 	const handleUpdate = async () => {
 		try {
-			const res = await trigger({
+			await trigger({
 				data: {
 					...getParams({
 						shipmentId          : item?.shipmentDetails[GLOBAL_CONSTANTS.zeroth_index]?.shipmentId,
@@ -62,7 +64,7 @@ const useUpdateSchedule = ({
 				},
 			});
 			Toast.success(`Trucked ${(truckStatus === 'truck_in') ? 'in' : 'out'} successfully`);
-			handleOnClose(res);
+			handleOnClose();
 			listAPI();
 		} catch (err) {
 			toastApiError(err);
@@ -72,6 +74,7 @@ const useUpdateSchedule = ({
 	return ({
 		loading,
 		handleUpdate,
+		data,
 	});
 };
 

@@ -39,7 +39,7 @@ function List({
 
 	const [isOpen, setIsOpen] = useState('');
 
-	const render = () => {
+	function Render() {
 		const showList = list.length ? list : Array(SHOW_LIST_SIZE).fill(ONE);
 		if (loading || list.length) {
 			return (showList).map((item) => (
@@ -101,13 +101,13 @@ function List({
 				subEmptyText="Looks like no results were found..."
 			/>
 		);
-	};
+	}
 
 	return (
 		<section>
 			<ListHeader fields={fields} />
 			<div className={styles.scroll}>
-				{render()}
+				<Render />
 				{!loading && !isEmpty(data) && (
 					<div className={styles.pagination_container}>
 						<Pagination
