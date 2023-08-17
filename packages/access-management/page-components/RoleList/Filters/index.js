@@ -3,6 +3,7 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsPartner } from '@cogoport/forms/utils/getAsyncFields';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import SearchInput from '../../../common/SearchInput';
 
@@ -16,6 +17,7 @@ function Filters({
 	setSearchString = () => {},
 	stakeHolderType = '',
 }) {
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const partnerOptions = useGetAsyncOptions({
 		...asyncFieldsPartner(),
 		initialCall : false,
@@ -28,7 +30,7 @@ function Filters({
 		},
 	});
 
-	const modifiedControls = controls(filters?.role_functions || [], partnerOptions);
+	const modifiedControls = controls(filters?.role_functions || [], partnerOptions, t);
 
 	const getElements = (type) => {
 		switch (type) {

@@ -1,6 +1,7 @@
-import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
+import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
 import { dynamic } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import AdminLayout from '../AdminLayout';
@@ -14,11 +15,15 @@ const FAQ_BUBBLE_EXCLUSION_LIST = ['external'];
 function Layout({ children, layout }) {
 	const hideLayout = layout === 'hidden';
 
+	const { t } = useTranslation(['common']);
+
 	const profile = useSelector((state) => state.profile || {});
 
 	const { auth_role_data = [] } = profile;
 
 	const { role_functions = [] } = auth_role_data || {};
+
+	const navigationMappingAdmin = navigationMapping({ t });
 
 	const {
 		faqNotificationApiLoading,

@@ -1,7 +1,8 @@
-import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
+import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import NotificationsPage from '../components/NotificationPage';
@@ -24,9 +25,7 @@ const extractNavLinks = (obj) => {
 	return NAV_LINKS.filter((item) => item);
 };
 
-const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
-
-const notificationRedirect = ({ link, push, partner_id }) => {
+const notificationRedirect = ({ link, push, partner_id, NAVIGATION_LINKS }) => {
 	let isVersionTwo = false;
 	let redirectLink = null;
 
@@ -77,6 +76,12 @@ function Notifications() {
 	const [disabled, setDisabled] = useState(false);
 
 	const { scope, query: { partner_id } = {} } = general;
+
+	const { t } = useTranslation(['common']);
+
+	const navigationMappingAdmin = navigationMapping({ t });
+
+	const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_communications',
@@ -140,7 +145,7 @@ function Notifications() {
 
 	const handleNotificationClick = async (item) => {
 		if (item.is_rpa && item.content.redirect_url) {
-			notificationRedirect({ link: item.content.redirect_url, push, partner_id });
+			notificationRedirect({ link: item.content.redirect_url, push, partner_id, NAVIGATION_LINKS });
 
 			return;
 		}
@@ -161,7 +166,7 @@ function Notifications() {
 			}
 
 			if (item?.content?.link) {
-				notificationRedirect({ link: item?.content?.link, push, partner_id });
+				notificationRedirect({ link: item?.content?.link, push, partner_id, NAVIGATION_LINKS });
 				return;
 			}
 

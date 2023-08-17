@@ -1,11 +1,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
+import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
 import navigationMappingSeller from '@cogoport/navigation-configs/navigation-mapping-seller';
 import navigationMappingShipper from '@cogoport/navigation-configs/navigation-mapping-shipper';
 import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
 import getNavData from '@cogoport/request/helpers/get-nav-data';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useState, useCallback } from 'react';
 
 import getNavigationOptions from '../utils/get-navigation-options';
@@ -45,6 +46,10 @@ const useOnBoardRole = () => {
 
 	const { permissions } = possiblePermissionsData || {};
 
+	const { t } = useTranslation(['common']);
+
+	const navigationMappingAdmin = navigationMapping({ t });
+
 	let navigationMappings = navigationMappingAdmin;
 
 	if (roleData?.stakeholder_type === 'organization') {
@@ -76,7 +81,7 @@ const useOnBoardRole = () => {
 	 * @param {string} [navigation='']
 	 */
 	const getNavOptions = (navigation = '') => {
-		const navObj = getNavData(navigation, navigationMappings);
+		const navObj = getNavData({ navigation, navigationMappings, t });
 		return getNavigationOptions(permissions, navObj || {});
 	};
 	// eslint-disable-next-line react-hooks/exhaustive-deps

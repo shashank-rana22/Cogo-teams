@@ -4,5 +4,69 @@
     "roles_and_permission_pills_all_roles": "บทบาททั้งหมด",
     "roles_and_permission_pills_cogoport": "Cogoport",
     "roles_and_permission_pills_channel_partner": "พันธมิตรช่องทาง",
-    "roles_and_permission_pills_customer": "ลูกค้า"
+    "roles_and_permission_pills_customer": "ลูกค้า",
+
+    "roles_and_permission_select_stakeholder_id_placeholder": "เลือกคู่ค้า",
+    "roles_and_permission_select_navigation_placeholder": "เลือกโมดูล",
+    
+
+    "roles_and_permission_select_role_functions_placeholder": "เลือกฟังก์ชัน",
+    "roles_and_permission_select_role_functions_select_sales": "การขาย",
+    "roles_and_permission_select_role_functions_select_supply": "การจัดหา",
+    "roles_and_permission_select_role_functions_select_operations": "การดำเนินงาน",
+    "roles_and_permission_select_role_functions_select_finance": "การเงิน",
+    "roles_and_permission_select_role_functions_select_external": "ภายนอก",
+    
+
+    "roles_and_permission_select_sub_function_placeholder": "เลือกฟังก์ชั่นย่อย",
+
+    "roles_and_permission_select_sales_customer_success": "ความสำเร็จของลูกค้า",
+    "roles_and_permission_select_sales_field_sales": "ฝ่ายขายสนาม",
+    "roles_and_permission_select_sales_strategic_sales": "ฝ่ายขายกลยุทธ์",
+    "roles_and_permission_select_sales_cp_sales": "ฝ่ายขาย CP",
+    "roles_and_permission_select_sales_acquisition": "ฝ่ายจัดหา",
+    "roles_and_permission_select_cp_portfolio": "พอร์ตการจัดหา CP",
+    "roles_and_permission_select_customer_operations": "การดำเนินงานลูกค้า",
+
+    "roles_and_permission_select_supply_shippling_line": "บริษัทเรือ",
+    "roles_and_permission_select_supply_freight_forwarder": "บริษัทส่งสินค้า",
+    "roles_and_permission_select_supply_transportation": "การขนส่ง",
+    "roles_and_permission_select_supply_cfs": "CFS",
+    "roles_and_permission_select_supply_customs": "ศุลกากร",
+    "roles_and_permission_select_supply_nvocc": "NVOCC",
+    "roles_and_permission_select_supply_overseas": "ต่างประเทศ",
+    "roles_and_permission_select_supply_iata_agents": "ตัวแทน IATA",
+
+    "roles_and_permission_select_operations_booking_desk": "โต๊ะจองสินค้า",
+    "roles_and_permission_select_operations_post_shipment": "โพสต์การส่งสินค้า",
+    "roles_and_permission_select_operations_finops": "การดำเนินงานทางการเงิน",
+    "roles_and_permission_select_operations_common_customer_operations": "การดำเนินงานลูกค้าทั่วไป",
+    "roles_and_permission_select_operations_cp_customer_operations": "ฝ่ายปฏิบัติการลูกค้าซีพี",
+    "roles_and_permission_select_operations_mid_size_customer_operations": "การดำเนินงานลูกค้าขนาดกลาง",
+    "roles_and_permission_select_operations_enterprise_customer_operations": "การดำเนินงานลูกค้าองค์กร",
+
+    "roles_and_permission_select_finance_credit_controller": "ผู้ควบคุมสินเชื่อ",
+
+    "roles_and_permission_select_training_training_general": "การฝึกอบรมทั่วไป",
+    "roles_and_permission_select_training_tech": "เทคโนโลยี",
+    "roles_and_permission_select_training_product": "ผลิตภัณฑ์",
+
+    "roles_and_permission_select_hr_admin": "ผู้ดูแลทรัพยากรบุคคล",
+    "roles_and_permission_select_hrbp": "HRBP",
+    "roles_and_permission_select_talent_acquisition": "การสรรหาบุคคลที่มีความสามารถ",
+
+    "roles_and_permission_select_enrichment": "การเพิ่มคุณค่า",
+
+
+    "roles_and_permission_select_hierarchy_level_placeholder": "เลือกระดับ",
+
+    "roles_and_permission_select_hierarchy_level_owner": "เจ้าของ",
+    "roles_and_permission_select_hierarchy_level_manager": "ผู้จัดการ",
+    "roles_and_permission_select_hierarchy_level_function_head": "หัวหน้าฟังก์ชั่น",
+    "roles_and_permission_select_hierarchy_level_head": "หัวหน้า",
+    "roles_and_permission_select_hierarchy_level_zone_head": "หัวหน้าเขต",
+    "roles_and_permission_select_hierarchy_level_region_head": "หัวหน้าภูมิภาค",
+    "roles_and_permission_select_hierarchy_level_cluster_head": "หัวหน้าคลัสเตอร์"
+    
+    
 }

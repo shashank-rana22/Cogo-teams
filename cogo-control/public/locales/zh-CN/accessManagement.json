@@ -1,0 +1,73 @@
+{
+    "roles_and_permission_header_title": "角色和权限",
+    "roles_and_permission_subheader_title": "管理和创建新角色及其权限",
+    "roles_and_permission_pills_all_roles": "所有角色",
+    "roles_and_permission_pills_cogoport": "Cogoport",
+    "roles_and_permission_pills_channel_partner": "渠道合作伙伴",
+    "roles_and_permission_pills_customer": "客户",
+
+    "roles_and_permission_select_stakeholder_id_placeholder": "选择合作伙伴",
+    "roles_and_permission_select_navigation_placeholder": "选择模块",
+    
+
+    "roles_and_permission_select_role_functions_placeholder": "选择功能",
+    "roles_and_permission_select_role_functions_select_sales": "销售",
+    "roles_and_permission_select_role_functions_select_supply": "供应",
+    "roles_and_permission_select_role_functions_select_operations": "运营",
+    "roles_and_permission_select_role_functions_select_finance": "财务",
+    "roles_and_permission_select_role_functions_select_external": "外部",
+    
+
+    "roles_and_permission_select_sub_function_placeholder": "选择子功能",
+
+    "roles_and_permission_select_sales_customer_success": "客户成功",
+    "roles_and_permission_select_sales_field_sales": "外勤销售",
+    "roles_and_permission_select_sales_strategic_sales": "战略销售",
+    "roles_and_permission_select_sales_cp_sales": "CP 销售",
+    "roles_and_permission_select_sales_acquisition": "业务收购",
+    "roles_and_permission_select_cp_portfolio": "CP 作品集",
+    "roles_and_permission_select_customer_operations": "客户运营",
+
+    "roles_and_permission_select_supply_shippling_line": "航运公司",
+    "roles_and_permission_select_supply_freight_forwarder": "货运代理",
+    "roles_and_permission_select_supply_transportation": "运输",
+    "roles_and_permission_select_supply_cfs": "CFS",
+    "roles_and_permission_select_supply_customs": "海关",
+    "roles_and_permission_select_supply_nvocc": "NVOCC",
+    "roles_and_permission_select_supply_overseas": "海外",
+    "roles_and_permission_select_supply_iata_agents": "IATA 代理",
+
+    "roles_and_permission_select_operations_booking_desk": "预订台",
+    "roles_and_permission_select_operations_post_shipment": "货物发运后处理",
+    "roles_and_permission_select_operations_finops": "财务操作",
+    "roles_and_permission_select_operations_common_customer_operations": "普通客户运营",
+    "roles_and_permission_select_operations_cp_customer_operations": "CP 客户运营",
+    "roles_and_permission_select_operations_mid_size_customer_operations": "中型客户运营",
+    "roles_and_permission_select_operations_enterprise_customer_operations": "企业客户运营",
+
+    "roles_and_permission_select_finance_credit_controller": "信用控制员",
+
+    "roles_and_permission_select_training_training_general": "通用培训",
+    "roles_and_permission_select_training_tech": "技术",
+    "roles_and_permission_select_training_product": "产品",
+
+    "roles_and_permission_select_hr_admin": "人力资源管理员",
+    "roles_and_permission_select_hrbp": "人力资源业务伙伴",
+    "roles_and_permission_select_talent_acquisition": "人才招聘",
+
+    "roles_and_permission_select_enrichment": "丰富",
+
+
+    "roles_and_permission_select_hierarchy_level_placeholder": "选择级别",
+
+    "roles_and_permission_select_hierarchy_level_owner": "所有者",
+    "roles_and_permission_select_hierarchy_level_manager": "经理",
+    "roles_and_permission_select_hierarchy_level_function_head": "部门负责人",
+    "roles_and_permission_select_hierarchy_level_head": "负责人",
+    "roles_and_permission_select_hierarchy_level_zone_head": "区域负责人",
+    "roles_and_permission_select_hierarchy_level_region_head": "地区负责人",
+    "roles_and_permission_select_hierarchy_level_cluster_head": "集群负责人"
+    
+    
+    
+}

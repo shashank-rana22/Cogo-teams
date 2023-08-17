@@ -6,11 +6,64 @@
     "roles_and_permission_pills_channel_partner": "Channel Partner",
     "roles_and_permission_pills_customer": "Customer",
 
+    "roles_and_permission_select_stakeholder_id_placeholder": "Select partner",
+    "roles_and_permission_select_navigation_placeholder": "Select module",
+
+    "roles_and_permission_select_role_functions_placeholder": "Select Function",
+    "roles_and_permission_select_role_functions_select_sales": "Sales",
+    "roles_and_permission_select_role_functions_select_supply": "Supply",
+    "roles_and_permission_select_role_functions_select_operations": "Operations",
+    "roles_and_permission_select_role_functions_select_finance": "Finance",
+    "roles_and_permission_select_role_functions_select_external": "External",
+
+    "roles_and_permission_select_sub_function_placeholder": "Select Sub-function",
+
     "roles_and_permission_select_sales_customer_success": "Customer Success",
     "roles_and_permission_select_sales_field_sales": "Field Sales",
     "roles_and_permission_select_sales_strategic_sales": "Strategic Sales",
     "roles_and_permission_select_sales_cp_sales": "CP Sales",
     "roles_and_permission_select_sales_acquisition": "Acquisition",
     "roles_and_permission_select_cp_portfolio": "CP Portfolio",
-    "roles_and_permmission_select_customer_operations": "Customer Operations"
+    "roles_and_permission_select_customer_operations": "Customer Operations",
+
+    "roles_and_permission_select_supply_shippling_line": "Shipping Line",
+    "roles_and_permission_select_supply_freight_forwarder": "Freight Forwarder",
+    "roles_and_permission_select_supply_transportation": "Transportation",
+    "roles_and_permission_select_supply_cfs": "CFS",
+    "roles_and_permission_select_supply_customs": "Customs",
+    "roles_and_permission_select_supply_nvocc": "NVOCC",
+    "roles_and_permission_select_supply_overseas": "Overseas",
+    "roles_and_permission_select_supply_iata_agents": "IATA AGENTS",
+
+    "roles_and_permission_select_operations_booking_desk": "Booking Desk",
+    "roles_and_permission_select_operations_post_shipment": "Post Shipment",
+    "roles_and_permission_select_operations_finops": "FINOPS",
+    "roles_and_permission_select_operations_common_customer_operations": "Common Customer Operations",
+    "roles_and_permission_select_operations_cp_customer_operations": "CP Customer Operations",
+    "roles_and_permission_select_operations_mid_size_customer_operations": "Mid Size Customer Operations",
+    "roles_and_permission_select_operations_enterprise_customer_operations": "Enterprise Customer Operations",
+
+    "roles_and_permission_select_finance_credit_controller": "Credit Controller",
+
+    "roles_and_permission_select_training_training_general": "Training General",
+    "roles_and_permission_select_training_tech": "Tech",
+    "roles_and_permission_select_training_product": "Product",
+
+    "roles_and_permission_select_hr_admin": "HR Admin",
+    "roles_and_permission_select_hrbp": "HRBP",
+    "roles_and_permission_select_talent_acquisition": "Talent Acquisition",
+
+    "roles_and_permission_select_enrichment": "Enrichment",
+
+
+    "roles_and_permission_select_hierarchy_level_placeholder": "Select Level",
+
+    "roles_and_permission_select_hierarchy_level_owner": "Owner",
+    "roles_and_permission_select_hierarchy_level_manager": "Manager",
+    "roles_and_permission_select_hierarchy_level_function_head": "Function Head",
+    "roles_and_permission_select_hierarchy_level_head": "Head",
+    "roles_and_permission_select_hierarchy_level_zone_head": "Zone Head",
+    "roles_and_permission_select_hierarchy_level_region_head": "Region Head",
+    "roles_and_permission_select_hierarchy_level_cluster_head": "Cluster Head" 
+    
 }
