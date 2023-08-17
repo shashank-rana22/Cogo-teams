@@ -50,6 +50,7 @@ import {
 	IcMEnquiriesReceived,
 	IcMDunning,
 	IcMDashboard,
+	IcAWarehouse,
 	IcMCreditRequest,
 	IcCCogoassured,
 	IcMOverview,
@@ -2529,6 +2530,7 @@ const navigationMappingAdmin = {
 		href          : '/v2/warehouse-management',
 		as            : '/v2/warehouse-management',
 		possible_apis : apis.warehouse_management,
+		icon          : IcAWarehouse,
 	},
 	centralised_customer_service: {
 		key           : 'centralised_customer_service',
