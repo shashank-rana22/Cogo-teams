@@ -16,6 +16,7 @@ function PromocodeThumbnail({
 	setShowCoupons = () => {},
 	setCouponApplied = () => {},
 	disableCursor = false,
+	is_applicable = false,
 	promotion = {},
 	refetch = () => {},
 	bgColor = '',
@@ -32,17 +33,24 @@ function PromocodeThumbnail({
 		}
 	};
 
+	const backgroundStyle = !is_applicable ? { background: '#f2f2f2' } : {};
+
+	const textStyle = !is_applicable
+		? { color: '#888' } : {};
+
 	return (
 		<div
 			role="presentation"
 			className={styles.container}
-			style={{ cursor: disableCursor, background: bgColor }}
-			onClick={applyPromocode}
+			style={{ cursor: (is_applicable && disableCursor), background: bgColor, ...backgroundStyle }}
+			onClick={() => {
+				if (is_applicable) applyPromocode();
+			}}
 		>
 			{promotion.category === 'business' && (
 				<div className={styles.discount_amount_percent}>
-					<span className={styles.flat_text}>FLAT</span>
-					<span className={styles.amount}>
+					<span className={styles.flat_text} style={textStyle}>FLAT</span>
+					<span className={styles.amount} style={textStyle}>
 						{formatAmount({
 							amount: promotion.promotion_discounts[GLOBAL_CONSTANTS.zeroth_index].value || DEFAULT_VALUE,
 							currency:
@@ -62,11 +70,11 @@ function PromocodeThumbnail({
 					<>
 						<div
 							className={styles.banner_image}
-							style={{ backgroundImage: `url(${promotion.thumbnail_image})` }}
+							style={{ backgroundImage: `url(${promotion.thumbnail_image})`, ...backgroundStyle }}
 
 						/>
 						<div className={styles.circle_icon}>
-							<div className={styles.discount}>
+							<div className={styles.discount} style={textStyle}>
 								{Math.round(promotion.promotion_discounts[GLOBAL_CONSTANTS.zeroth_index].value)}
 								%
 								{' '}
@@ -122,7 +130,13 @@ function PromocodeThumbnail({
 					placement="left"
 					animation="shift-away"
 				>
-					<div className={styles.text}>Terms and Conditions Apply</div>
+					<div
+						className={styles.text}
+						style={textStyle}
+					>
+						Terms and Conditions Apply
+
+					</div>
 				</Tooltip>
 			</div>
 
@@ -131,8 +145,9 @@ function PromocodeThumbnail({
 			<div className={styles.promo_code}>
 				<div
 					className={styles.promo_code_name}
+					style={{ ...backgroundStyle, ...(!is_applicable) ? { color: '#828282' } : {} }}
 				>
-					{promotion.promocodes[GLOBAL_CONSTANTS.zeroth_index].promocode}
+					{promotion.codes[GLOBAL_CONSTANTS.zeroth_index].promocode}
 				</div>
 			</div>
 		</div>
