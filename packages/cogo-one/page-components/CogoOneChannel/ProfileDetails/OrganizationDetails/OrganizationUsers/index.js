@@ -13,8 +13,9 @@ import styles from './styles.module.css';
 
 const MAX_PREVIEW_LIMIT = 2;
 const MIN_PREVIEW_LIMIT = 0;
+const REMOVE_PLUS_SIGN = 1;
 
-function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
+function OrganizationUsers({ user = {}, hasVoiceCallAccess = false, setActiveTab = () => {} }) {
 	const dispatch = useDispatch();
 
 	const [maskConfig, setMaskConfig] = useState({
@@ -40,7 +41,8 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 		reset();
 	};
 
-	const handleViewNumber = () => {
+	const handleViewNumber = (e) => {
+		e.stopPropagation();
 		if (showNumber) {
 			setMaskConfig((prev) => ({ ...prev, showNumber: false }));
 		} else {
@@ -48,7 +50,8 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 		}
 	};
 
-	const handleCall = () => {
+	const handleCall = (e) => {
+		e.stopPropagation();
 		if (!mobile_number || !hasVoiceCallAccess) {
 			return;
 		}
@@ -69,9 +72,30 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 		);
 	};
 
+	const whatsappMobileNumber = `${mobile_country_code.slice(REMOVE_PLUS_SIGN)}${mobile_number}`;
+
+	const onCardClick = () => {
+		setActiveTab((prev) => ({
+			...prev,
+			hasNoFireBaseRoom : true,
+			data              : {
+				lead_organization_id    : null,
+				lead_user_id            : null,
+				user_name               : name,
+				user_id,
+				whatsapp_number_eformat : whatsappMobileNumber,
+				email,
+				channel_type            : 'whatsapp',
+				countryCode             : mobile_country_code,
+				mobile_no               : mobile_number,
+			},
+			tab: 'message',
+		}));
+	};
+
 	return (
 		<>
-			<div className={styles.container}>
+			<div role="presentation" className={styles.container} onClick={onCardClick}>
 				<div className={styles.dialer_icon_div} role="presentation" onClick={handleCall}>
 					<IcMCall
 						className={cl`${styles.call_icon} ${
