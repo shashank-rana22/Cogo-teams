@@ -35,7 +35,7 @@ function ManageSubscriptions(props) {
 
 	const [activeTab, setActiveTab] = useState('monthly');
 	const [showAddOn, setShowAddOn] = useState(false);
-	const [showAssign, setShowAssign] = useState(false);
+	const [isAssignModal, setIsAssignModal] = useState(false);
 	const [selectedPlan, setSelectedPlan] = useState({});
 
 	const { payment_link : paymentLink = '', checkout = {} } = selectedPlan || {};
@@ -118,7 +118,7 @@ function ManageSubscriptions(props) {
 							setSelectedPlan={setSelectedPlan}
 							selectedPlan={selectedPlan}
 							paymentStatus={paymentStatus}
-							setShowAssign={setShowAssign}
+							setIsAssignModal={setIsAssignModal}
 						/>
 					))}
 				</div>
@@ -132,7 +132,7 @@ function ManageSubscriptions(props) {
 							<div
 								role="presentation"
 								className={styles.payment_link_status}
-								onClick={() => window.open(paymentLink, '_blank') || '#'}
+								onClick={() => window.open(paymentLink, '_blank')}
 							>
 								{paymentLink}
 							</div>
@@ -163,10 +163,10 @@ function ManageSubscriptions(props) {
 				/>
 			)}
 
-			{showAssign && (
+			{isAssignModal && (
 				<AssignModal
-					showAssign={showAssign}
-					setShowAssign={setShowAssign}
+					isAssignModal={isAssignModal}
+					setIsAssignModal={setIsAssignModal}
 					orgId={orgId}
 					selectedPlan={selectedPlan}
 					getUserActivePlans={getUserActivePlans}

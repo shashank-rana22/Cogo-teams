@@ -10,7 +10,7 @@ const GENERATE_LINK_AGAIN_STATUSES = ['CANCELLED', 'REFUNDED', 'EXPIRED', 'FAILE
 function Footer(props) {
 	const {
 		item = {}, activeTab = '', createLink = () => {}, createLinkloading = false, hover = false,
-		selectedPlan, setSelectedPlan = () => {}, paymentStatus = '', setShowAssign = () => {},
+		selectedPlan, setSelectedPlan = () => {}, paymentStatus = '', setIsAssignModal = () => {},
 	} = props || {};
 
 	const {
@@ -79,7 +79,7 @@ function Footer(props) {
 					className={styles.call_to_action}
 					onClick={() => handleGenerateLink({ plan: item })}
 					loading={isLoading}
-					disabled={isLoading}
+					disabled // will be removed when subscription enabled to users
 				>
 					Generate Link
 				</Button>
@@ -87,7 +87,7 @@ function Footer(props) {
 				<Button
 					themeType={hover ? 'primary' : 'accent'}
 					size="md"
-					onClick={() => setShowAssign(true)}
+					onClick={() => setIsAssignModal(true)}
 					disabled={paymentStatus !== 'PAID'}
 				>
 					Assign

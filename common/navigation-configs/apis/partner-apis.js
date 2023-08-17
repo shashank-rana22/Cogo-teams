@@ -12879,11 +12879,6 @@ const partner = {
 			access_type  : 'private',
 		},
 		{
-			api          : 'create_saas_subscription',
-			service_name : 'saas_subscriptions_v2',
-			access_type  : 'private',
-		},
-		{
 			api          : 'saas_get_active_plan_checkout_details',
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',

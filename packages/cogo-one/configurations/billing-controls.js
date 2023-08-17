@@ -13,7 +13,6 @@ const useGetControls = ({ setCityState = () => {} }) => {
 			type        : 'input',
 			placeholder : 'Enter Billing Party Name',
 			rules       : { required: 'required *' },
-			span        : 6,
 		},
 		{
 			label       : 'Address',
@@ -23,7 +22,6 @@ const useGetControls = ({ setCityState = () => {} }) => {
 			rules       : {
 				required: 'required *',
 			},
-			span: 6,
 		},
 		{
 			label       : 'Country',
@@ -31,7 +29,6 @@ const useGetControls = ({ setCityState = () => {} }) => {
 			type        : 'asyncSelect',
 			placeholder : 'Enter Country',
 			rules       : { required: 'required *' },
-			span        : 6,
 			params      : { filters: { type: ['country'] } },
 			asyncKey    : 'list_locations',
 			onChange    : (_, obj) => {
@@ -44,7 +41,6 @@ const useGetControls = ({ setCityState = () => {} }) => {
 			type        : 'asyncSelect',
 			placeholder : 'Enter Pincode',
 			rules       : { required: 'required *' },
-			span        : 6,
 			asyncKey    : 'list_locations',
 			valueKey    : 'postal_code',
 			labelKey    : 'display_name',
@@ -72,7 +68,6 @@ const useGetControls = ({ setCityState = () => {} }) => {
 			name        : 'state',
 			type        : 'input',
 			placeholder : 'Enter State',
-			span        : 6,
 			disabled    : true,
 		},
 		{
@@ -80,7 +75,6 @@ const useGetControls = ({ setCityState = () => {} }) => {
 			name        : 'city',
 			type        : 'input',
 			placeholder : 'Enter City',
-			span        : 6,
 			disabled    : true,
 		},
 		{
@@ -88,7 +82,6 @@ const useGetControls = ({ setCityState = () => {} }) => {
 			name        : 'tax_number',
 			type        : 'input',
 			placeholder : 'Enter Tax Number',
-			span        : 6,
 			rules       : {
 				required: true,
 			},
@@ -116,7 +109,6 @@ const useGetControls = ({ setCityState = () => {} }) => {
 					key      : 'warehouse',
 				},
 			],
-			span: 6,
 		},
 		{
 			label       : 'POC Name',
@@ -124,14 +116,12 @@ const useGetControls = ({ setCityState = () => {} }) => {
 			type        : 'input',
 			placeholder : 'Enter POC Name',
 			valueKey    : 'business_name',
-			span        : 6,
 		},
 		{
 			label       : 'Email Id',
 			name        : 'email',
 			type        : 'input',
 			placeholder : 'Enter Email Id',
-			span        : 6,
 			rules       : {
 				pattern: {
 					value   : geo.regex.EMAIL,
@@ -144,7 +134,6 @@ const useGetControls = ({ setCityState = () => {} }) => {
 			name        : 'phone_number',
 			type        : 'mobile_number',
 			placeholder : 'Enter Phone Number',
-			span        : 6,
 		},
 	];
 };

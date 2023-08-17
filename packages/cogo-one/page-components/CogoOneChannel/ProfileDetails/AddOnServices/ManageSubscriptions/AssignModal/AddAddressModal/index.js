@@ -5,13 +5,13 @@ import { Image } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
 
 import useGetControls from '../../../../../../../configurations/billing-controls';
-import useCreateBillingAddres from '../../../../../../../hooks/useCreateBillingAddres';
+import useCreateBillingAddress from '../../../../../../../hooks/useCreateBillingAddress';
 
 import Form from './Form';
 import styles from './styles.module.css';
 
 function AddAddressModal({
-	addAddressModal = false, setAddAddressModal = () => {}, setSelectedAddress = () => {},
+	isAddressModal = false, setIsAddressModal = () => {}, setSelectedAddress = () => {},
 	getOrganizationAddresses = () => {}, orgId = '',
 }) {
 	const [cityState, setCityState] = useState({});
@@ -33,11 +33,11 @@ function AddAddressModal({
 
 	const isIncludeTaxNumber = watch('include_tax_number');
 
-	const { createBillingAddress = () => {}, loading = false } = useCreateBillingAddres({
+	const { createBillingAddress = () => {}, loading = false } = useCreateBillingAddress({
 		isIncludeTaxNumber,
 		getOrganizationAddresses,
 		orgId,
-		setAddAddressModal,
+		setIsAddressModal,
 		reset,
 		setSelectedAddress,
 	});
@@ -53,11 +53,11 @@ function AddAddressModal({
 
 	return (
 		<Modal
-			show={addAddressModal}
+			show={isAddressModal}
 			placement="top"
 			size="md"
 			closeOnOuterClick={false}
-			onClose={() => setAddAddressModal(false)}
+			onClose={() => setIsAddressModal(false)}
 		>
 			<Modal.Header title={(
 				<div className={styles.icon_container}>
@@ -84,7 +84,7 @@ function AddAddressModal({
 				<Button
 					themeType="tertiary"
 					disabled={loading}
-					onClick={() => setAddAddressModal(false)}
+					onClick={() => setIsAddressModal(false)}
 				>
 					Cancel
 				</Button>

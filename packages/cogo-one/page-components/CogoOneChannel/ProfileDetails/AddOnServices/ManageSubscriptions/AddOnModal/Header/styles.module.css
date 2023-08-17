@@ -8,18 +8,17 @@
 .section_card {
 	display: flex;
 	flex: 1;
-	flex-direction: column;
 	flex-direction: flex-start;
 }
 
 .card_title {
 	font-size: 14px;
-	font-size: 500;
+	font-weight: 500;
 	color: #828282;
 
 	span {
 		margin-left: 4px;
-		font-size: 700;
+		font-weight: 700;
 		color: #000;
 	}
 }

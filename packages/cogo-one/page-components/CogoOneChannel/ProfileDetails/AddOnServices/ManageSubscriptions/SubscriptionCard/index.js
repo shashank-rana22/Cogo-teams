@@ -46,10 +46,10 @@ function SubscriptionCard(props) {
 			className={styles.plans_container}
 			style={{
 				backgroundImage: `url(${hover || isActive
-					? GLOBAL_CONSTANTS.image_url.subscription_bg : 'none'})`,
+					? GLOBAL_CONSTANTS.image_url.subscription_bg : ''})`,
 			}}
 		>
-			<div className={cl`${styles.header}`}>
+			<div className={styles.header}>
 				<div>
 					<div className={cl`${styles.plans_header}
 					${isActive || hover ? styles.change_color_on_hover : ''}`}

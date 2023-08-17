@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const getPayload = ({ data = {}, isIncludeTaxNumber = false, orgId = '' }) => {
-	const { poc_name = '', phone_number : phoneNumber = '', address_type: addressType = '', ...rest } = data || {};
+	const { poc_name = '', phone_number : phoneNumber = {}, address_type: addressType = '', ...rest } = data || {};
 	const { number = '', country_code = '' } = phoneNumber || {};
 
 	return {
@@ -21,11 +21,11 @@ const getPayload = ({ data = {}, isIncludeTaxNumber = false, orgId = '' }) => {
 	};
 };
 
-const useCreateBillingAddres = ({
+const useCreateBillingAddress = ({
 	orgId = '',
 	isIncludeTaxNumber = false,
 	getOrganizationAddresses = () => {},
-	setAddAddressModal = () => {},
+	setIsAddressModal = () => {},
 	reset = () => {},
 	setSelectedAddress = () => {},
 }) => {
@@ -45,7 +45,7 @@ const useCreateBillingAddres = ({
 			const { id = '' } = response?.data || {};
 			await setSelectedAddress({ id });
 			await reset();
-			await setAddAddressModal(false);
+			await setIsAddressModal(false);
 			await getOrganizationAddresses();
 			Toast.success('Address added successfully');
 		} catch (error) {
@@ -58,4 +58,5 @@ const useCreateBillingAddres = ({
 		loading,
 	};
 };
-export default useCreateBillingAddres;
+
+export default useCreateBillingAddress;

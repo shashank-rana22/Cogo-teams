@@ -30,7 +30,7 @@ function AddOnServices(props) {
 	return (
 		<div key={orgId}>
 			<div className={styles.main_container}>
-				<div className={styles.heading}>Add-On Services</div>
+				<div className={styles.heading}>Additional Services</div>
 				<div className={styles.tabs_container}>
 					{(ADD_ON_SERVICES_TAB_MAPPING || []).map((item) => {
 						const {

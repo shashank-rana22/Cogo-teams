@@ -16,9 +16,9 @@ const useGetBillingAdresses = ({ orgId = '' }) => {
 		method : 'get',
 	}, { manual: true });
 
-	const getOrgBillingAddresses = useCallback(async () => {
+	const getOrgBillingAddresses = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: getParam({ orgId }),
 			});
 		} catch (error) {
@@ -32,4 +32,5 @@ const useGetBillingAdresses = ({ orgId = '' }) => {
 		billingAddressesData    : data?.list,
 	};
 };
+
 export default useGetBillingAdresses;

@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const getPayload = ({ performedById = '', userType = '', billingAddressId = '', checkoutId = {} }) => ({
+const getPayload = ({ performedById = '', userType = '', billingAddressId = '', checkoutId = '' }) => ({
 	performed_by_id    : performedById,
 	performed_by_type  : userType === 'partner' ? 'user' : 'agent',
 	checkout_id        : checkoutId,
@@ -11,8 +11,8 @@ const getPayload = ({ performedById = '', userType = '', billingAddressId = '', 
 });
 
 function useCreateSubscriptionInvoice({
-	selectedAddress = {}, checkoutId = {},
-	setShowAssign = () => {}, getUserActivePlans = () => {},
+	selectedAddress = {}, checkoutId = '',
+	setIsAssignModal = () => {}, getUserActivePlans = () => {},
 }) {
 	const { id : billingAddressId = '' } = selectedAddress || {};
 
@@ -39,7 +39,7 @@ function useCreateSubscriptionInvoice({
 					checkoutId,
 				}),
 			});
-			setShowAssign(false);
+			setIsAssignModal(false);
 			getUserActivePlans();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
@@ -51,4 +51,5 @@ function useCreateSubscriptionInvoice({
 		loading,
 	};
 }
+
 export default useCreateSubscriptionInvoice;

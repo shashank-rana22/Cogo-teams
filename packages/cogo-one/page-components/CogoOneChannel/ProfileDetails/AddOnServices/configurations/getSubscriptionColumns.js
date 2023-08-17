@@ -48,7 +48,7 @@ function RenderActions({ show = false, item = {}, setEditable = () => {}, quota 
 
 export const getSubscriptionColumns = (props) => {
 	const {
-		editable = false, setEditable = () => {}, quota = {},
+		editable = {}, setEditable = () => {}, quota = {},
 		setQuota = () => {},
 	} = props || {};
 	const { show = false, data = {} } = editable || {};
