@@ -115,7 +115,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 					stakeholder_id       : !isEmpty(watchPartner)
 						? watchPartner.split('_')[GLOBAL_CONSTANTS.zeroth_index] : undefined,
 					role_sub_functions : getChannelWiseRolesFilters({ channels: watchChannel }),
-					status             : 'active',
+					status             : true,
 				},
 			},
 			rules: {

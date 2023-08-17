@@ -60,8 +60,8 @@ const useGetIrnCancellation = ({
 				payload = {
 					cancelReason      : response?.remarks,
 					agreementDocument : response?.agreementDocument,
-					agreementNumber   : response?.agreementNumber,
-					agreementDate     : response?.agreementDate,
+					agreementNumber   : response?.agreementDocument ? response?.agreementNumber : undefined,
+					agreementDate     : response?.agreementDocument ? response?.agreementDate : undefined,
 				};
 			} else if (CANCEL_IRN) {
 				payload = {
