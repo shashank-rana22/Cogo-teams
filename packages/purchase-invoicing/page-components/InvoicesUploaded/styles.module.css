@@ -12,7 +12,7 @@
 .tablecontainer {
 	max-height: 600px;
 	margin-top: 16px;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .value {
@@ -21,4 +21,12 @@
 	color: var(--color-accent-orange-2);
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+.tabscontainer {
+	:global {
+		.ui_tab_list_container {
+			max-height: 34px;
+		}
+	}
 }

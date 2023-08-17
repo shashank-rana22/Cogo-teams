@@ -29,7 +29,9 @@ function useUpdateCycle({ getDunningList, setActionModal }) {
 			oneTimeDate,
 		} = formData || {};
 
-		const oneTimeDateValue = triggerType !== 'PERIODIC' ? formatDate({
+		const isPeriodic = triggerType === 'PERIODIC';
+
+		const oneTimeDateValue = !isPeriodic ? formatDate({
 			date       : oneTimeDate,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 			formatType : 'date',
@@ -44,9 +46,9 @@ function useUpdateCycle({ getDunningList, setActionModal }) {
 					scheduleRule : {
 						scheduleTime              : `${scheduledHour}:${scheduledMinute}`,
 						scheduleTimeZone          : timezone,
-						dunningExecutionFrequency : triggerType === 'PERIODIC' ? frequency : 'ONE_TIME',
-						week                      : weekDay || undefined,
-						dayOfMonth                : monthDay || undefined,
+						dunningExecutionFrequency : isPeriodic ? frequency : 'ONE_TIME',
+						week                      : isPeriodic ? weekDay : undefined,
+						dayOfMonth                : isPeriodic ? monthDay : undefined,
 						oneTimeDate               : oneTimeDateValue,
 					},
 				},

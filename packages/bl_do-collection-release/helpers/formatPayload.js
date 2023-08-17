@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 const evaluateDate = (val) => {
@@ -6,18 +7,6 @@ const evaluateDate = (val) => {
 		return new Date();
 	}
 	return null;
-};
-
-const formatForBLIds = (item, customVal) => {
-	const bl_ids = item?.bl_ids;
-	const returnBLIdKeys = [];
-
-	(Object.keys(bl_ids) || []).forEach((id_key) => {
-		if (bl_ids[id_key] === customVal) {
-			returnBLIdKeys.push(id_key);
-		}
-	});
-	return returnBLIdKeys;
 };
 
 const evaluateTernary = (val, item, formValues) => {
@@ -60,21 +49,17 @@ const fillData = (value, item, formValues) => {
 		} else if (source === 'formValue') {
 			newValue = formValues?.[valKey] ?? null;
 		} else if (source === 'item') {
-			const [customKey, customVal] = (valKey || '').split(':');
-			if (customKey === 'bl_ids') {
-				newValue = formatForBLIds(item, customVal);
-			} else {
-				newValue = item?.[valKey];
-			}
+			newValue = item?.[valKey];
 		}
 	}
 	return newValue;
 };
 
-const getCurrentReleaseStatus = (item, inner_tab, formValues) => {
-	const docs = item?.trade_type === 'export'
-		? item?.export_bl_details
-		: item?.import_bl_details;
+const getCurrentReleaseStatus = (item, inner_tab, formValues, activeTab) => {
+	const docs = activeTab === 'bl'
+		? item?.bill_of_ladings
+		: item?.delivery_orders;
+
 	const selectedDocsLength = formValues?.ids?.length;
 
 	if (inner_tab === 'collection_pending') {
@@ -121,44 +106,83 @@ const getCurrentReleaseStatus = (item, inner_tab, formValues) => {
 };
 
 export default function getFormattedPayload({
-	inner_tab = '',
+	stateProps = {},
 	item = {},
 	formValues = {},
 	taskConfig = {},
 	pendingTasks = [],
 }) {
+	const { activeTab, inner_tab, trade_type } = stateProps;
+
 	let finalPayload = {};
 
+	const { invoice_data = [] } = item;
+
+	const invoicesToBeKnockedOffInBL = Array.from(
+		new Set(
+			(invoice_data || [])
+				.filter((invoice) => (invoice?.services || []).some((service) => (
+					(service?.service_type === 'fcl_freight_service' && activeTab === 'bl')
+		|| service?.trade_type === 'export'
+				)))
+				.map((invoice) => invoice.id),
+		),
+	);
+
+	const invoicesToBeKnockedOffInDO = Array.from(
+		new Set(
+			(invoice_data || [])
+				.filter((invoice) => (invoice?.services || []).some((service) => (
+					(service?.service_type === 'fcl_freight_service' && activeTab === 'do')
+				|| service?.trade_type === 'import'
+				)))
+				.map((invoice) => invoice.id),
+		),
+	);
+
 	if (inner_tab === 'knockoff_pending') {
-		const knockoffTask = (pendingTasks || []).filter(
+		let knockoffTask = (pendingTasks || []).filter(
 			(task) => task.task === 'knockoff_invoices',
 		);
-		if (knockoffTask.length === 0) {
+
+		if (activeTab === 'bl' && trade_type === 'import') {
+			knockoffTask = (pendingTasks || []).filter(
+				(task) => task.task === 'knockoff_bl_invoices',
+			);
+		}
+
+		if (activeTab === 'do' && trade_type === 'export') {
+			knockoffTask = (pendingTasks || []).filter(
+				(task) => task.task === 'knockoff_do_invoices',
+			);
+		}
+
+		if (isEmpty(knockoffTask)) {
 			Toast.error('Task not found');
-			return false;
+			return {};
 		}
 		finalPayload = {
-			id   : knockoffTask?.[0]?.id,
+			id   : knockoffTask?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
 			data : {
 				collection_party: {
 					is_knocked_off : true,
-					id             : (item?.invoice_data || []).map((invoice) => invoice?.id),
+					id             : activeTab === 'bl' ? invoicesToBeKnockedOffInBL : invoicesToBeKnockedOffInDO,
 				},
 			},
 		};
 		return finalPayload;
 	}
 
-	if (inner_tab === 'collected' && item?.trade_type === 'import') {
+	if (inner_tab === 'collected' && activeTab === 'do') {
 		const doTask = (pendingTasks || []).filter(
 			(task) => task.task === 'mark_do_released',
 		);
-		if (doTask.length === 0) {
+		if (isEmpty(doTask)) {
 			Toast.error('Task not found');
-			return false;
+			return {};
 		}
 		finalPayload = {
-			id   : doTask?.[0]?.id,
+			id   : doTask?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
 			data : {
 				do_detail: {
 					status      : 'released',
@@ -171,24 +195,30 @@ export default function getFormattedPayload({
 
 	(taskConfig?.static_data_to_send || []).forEach((data) => {
 		if (data?.key === 'id') {
-			finalPayload[data.key] = pendingTasks?.[0]?.id;
+			finalPayload[data.key] = pendingTasks?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 			if (finalPayload[data.key] === undefined) {
 				Toast.error('Task not found');
-				finalPayload = false;
+				finalPayload = {};
 			}
 		} else if (finalPayload && data?.key === 'data') {
 			finalPayload.data = fillData(data?.value, item, formValues);
-			if (finalPayload.data?.bl_detail?.id?.length === 0) {
-				Toast.error('BL ID not found');
-				finalPayload = false;
+
+			if ((activeTab === 'bl'
+				? isEmpty(finalPayload.data?.bl_detail?.id)
+				: isEmpty(finalPayload.data?.do_detail?.id)) && !isEmpty(finalPayload.data)
+			) {
+				Toast.error(`${activeTab === 'bl' ? 'BL' : 'DO'} ID not found`);
+				finalPayload.data = undefined;
 			}
+
 			if (
 				['collection_pending', 'collected', 'released', 'surrendered'].includes(
 					inner_tab,
 				)
 			) {
 				const res = getCurrentReleaseStatus(item, inner_tab, formValues);
-				finalPayload.status = res ? 'completed' : 'pending';
+
+				if (res) { finalPayload.status = 'completed'; } else finalPayload.status = 'pending';
 			}
 		}
 	});

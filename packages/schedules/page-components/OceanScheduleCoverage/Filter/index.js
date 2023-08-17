@@ -34,15 +34,15 @@ function Filter({ filters = {}, setFilters = () => {}, setCurrentPage = () => {}
 				className={styles.filter_select}
 				{...originPortOptions}
 				placeholder="Origin Port"
-				value={filters?.origin_port}
-				onChange={(value) => handleFilter(value, 'origin_port')}
+				value={filters?.origin_port_id}
+				onChange={(value) => handleFilter(value, 'origin_port_id')}
 			/>
 			<MultiSelect
 				className={styles.filter_select}
 				{...destinationPortOptions}
 				placeholder="Destination Port"
-				value={filters?.destination_port}
-				onChange={(value) => handleFilter(value, 'destination_port')}
+				value={filters?.destination_port_id}
+				onChange={(value) => handleFilter(value, 'destination_port_id')}
 			/>
 			<Button themeType="tirtery" onClick={clearFilters}>
 				Clear Filter

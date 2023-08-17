@@ -1,4 +1,3 @@
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest } from '@cogoport/request';
@@ -27,7 +26,7 @@ function useUpdateAgentStatus() {
 				data: getPayload({ status }),
 			});
 		} catch (error) {
-			console.error(getApiErrorString(error?.response?.data));
+			console.error(error);
 		}
 	}, [trigger]);
 

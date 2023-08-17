@@ -60,6 +60,7 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 			Type           : ticket_type,
 			Description    : description,
 			NotifyCustomer : notify_customer,
+			UserType       : 'ticket_user',
 			Data           : {
 				MessageData: {
 					Message     : message,

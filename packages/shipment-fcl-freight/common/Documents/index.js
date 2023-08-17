@@ -1,6 +1,6 @@
 import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { React, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 import useCreateTaskList from '../../hooks/useCreateTaskList';
 import useGetShipmentMails from '../../hooks/useListRpaMails';
@@ -18,7 +18,7 @@ function RenderContent({
 	loading = true, activeToggle = true, canEditDocuments = true, filteredTaskList = [], emailList = [],
 	completedDocs = {}, setShowDoc = () => {}, setShowApproved = () => {},
 	showIgmDocs = false, refetch = () => {}, activeStakeholder = '',
-	bl_details = [], activeWallet = '',
+	bl_details = [], do_details = [], activeWallet = '', orgDocService = '',
 }) {
 	if (loading) {
 		return <LoadingState />;
@@ -36,10 +36,18 @@ function RenderContent({
 				shipmentDocumentRefetch={refetch}
 				activeStakeholder={activeStakeholder}
 				bl_details={bl_details}
+				do_details={do_details}
 			/>
 		);
 	}
-	if (canEditDocuments) { return <Wallet activeWallet={activeWallet} />; }
+	if (canEditDocuments) {
+		return (
+			<Wallet
+				activeWallet={activeWallet}
+				orgDocService={orgDocService}
+			/>
+		);
+	}
 	return null;
 }
 
@@ -52,6 +60,7 @@ function Documents() {
 	const [activeWallet, setActiveWallet] = useState('trade_documents');
 	const [addToWallet, setAddToWallet] = useState(true);
 	const [searchValue, setSearchValue] = useState('');
+	const [orgDocService, setOrgDocService] = useState('');
 
 	const { updateDocument } = useUpdateDocument({});
 
@@ -64,6 +73,7 @@ function Documents() {
 		setFilters,
 		refetch,
 		bl_details,
+		do_details,
 	} = useCreateTaskList({ shipment_data, primary_service });
 
 	const emailPayload = {
@@ -109,8 +119,11 @@ function Documents() {
 					activeWallet={activeWallet}
 					setActiveWallet={setActiveWallet}
 					refetch={refetch}
+					setOrgDocService={setOrgDocService}
+					orgDocService={orgDocService}
 				/>
 			) : null}
+
 			<Modal
 				className={styles.modal_container}
 				show={showDoc}
@@ -141,7 +154,9 @@ function Documents() {
 				completedDocs={completedDocs}
 				refetch={refetch}
 				bl_details={bl_details}
+				do_details={do_details}
 				activeWallet={activeWallet}
+				orgDocService={orgDocService}
 			/>
 
 			{canEditDocuments ? (

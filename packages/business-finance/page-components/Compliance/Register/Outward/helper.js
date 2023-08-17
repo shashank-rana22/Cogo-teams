@@ -1,3 +1,4 @@
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
@@ -9,8 +10,8 @@ export const optionsMonth = (getMonth || [{}]).map((item, index) => {
 	return options;
 });
 
-const keysWithCompliance = Object.keys(ENTITY_MAPPING).filter(
-	(key) => ENTITY_MAPPING[key].feature_supported.includes('compliance'),
+const keysWithCompliance = Object.keys(ENTITY_FEATURE_MAPPING).filter(
+	(key) => ENTITY_FEATURE_MAPPING[key].feature_supported.includes('compliance'),
 );
 export const optionEntity = keysWithCompliance.map((item) => ({ value: item, label: item }));
 

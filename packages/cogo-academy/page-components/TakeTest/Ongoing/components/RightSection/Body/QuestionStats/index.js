@@ -4,6 +4,8 @@ import { QuestionStatsContext } from '../../../QuestionStatsContext';
 
 import styles from './styles.module.css';
 
+const NULLVALUE = 0;
+
 const STATS_MAPPING = {
 	answered: {
 		key   : 'answered',
@@ -49,7 +51,7 @@ function QuestionStats() {
 				return (
 					<div key={key} className={styles.stats_container}>
 						<div style={{ backgroundColor: color }} className={styles.stats_count}>
-							{count || 0}
+							{count || NULLVALUE}
 						</div>
 
 						<p className={styles.label}>{label}</p>

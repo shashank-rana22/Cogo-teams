@@ -28,6 +28,7 @@ function CategoryType(props) {
 					...prev,
 					category: val,
 				}))}
+				params={{ Audience: 'cogoport_user' }}
 				asyncKey="default_types"
 				value={searchParams.category}
 				placeholder="Ticket type"

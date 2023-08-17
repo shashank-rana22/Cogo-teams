@@ -4,34 +4,32 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const geo = getGeoConstants();
-
 const useUpdateShipmentAdditionalService = ({
 	item = {},
 	refetch = () => {},
 	showIp = false,
 	task = {},
 }) => {
+	const geo = getGeoConstants();
+
 	const [remarks, setRemarks] = useState(null);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_additional_service',
 		method : 'POST',
-	});
+	}, { autoCancel: false });
 
-	const handleSubmit = async (data) => {
+	const handleSubmit = async (payload) => {
 		try {
 			await trigger({
 				data: {
-					...data,
+					...(payload || {}),
 					pending_task_id: showIp ? undefined : task?.id,
 				},
 			});
 
 			Toast.success('Service Updated successfully');
-
 			setRemarks(null);
-
 			refetch();
 		} catch (err) {
 			toastApiError(err);
@@ -138,11 +136,11 @@ const useUpdateShipmentAdditionalService = ({
 					is_sez,
 					business_name,
 					address,
-					invoice_currency: invoice_currency || geo.country.currency.code,
+					invoice_currency: invoice_currency || geo?.country?.currency?.code,
 					organization_trade_party_id,
 					registration_number,
 				},
-				invoice_currency: invoice_currency || geo.country.currency.code,
+				invoice_currency: invoice_currency || geo?.country?.currency?.code,
 			},
 		};
 
@@ -155,7 +153,7 @@ const useUpdateShipmentAdditionalService = ({
 				add_to_sell_quotation: value === 'bill',
 				state:
 					value === 'not_bill' ? 'accepted_by_importer_exporter' : undefined,
-				id: item.serviceListItem.id,
+				id: item?.serviceListItem?.id || item?.id,
 			};
 
 			await handleSubmit(payload);

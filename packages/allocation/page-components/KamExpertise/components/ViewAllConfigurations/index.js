@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -35,7 +36,11 @@ function ViewAllConfigurations() {
 					Back to Configurations
 				</div>
 			</div>
-
+			<div className={styles.button_container}>
+				<Button size="md" themeType="secondary">
+					View Details
+				</Button>
+			</div>
 			{(isEmpty(list))
 				? (
 					<div className={styles.empty_state_container}>
@@ -50,7 +55,7 @@ function ViewAllConfigurations() {
 				) : (
 					<>
 						{ list.map((item) => (
-							<ConfigurationCard {...item} />
+							<ConfigurationCard key={item?.id} {...item} />
 						))}
 					</>
 				)}

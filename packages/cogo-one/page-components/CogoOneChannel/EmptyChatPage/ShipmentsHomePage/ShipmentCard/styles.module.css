@@ -1,0 +1,89 @@
+.container {
+	position: relative;
+	width: 30%;
+	height: 300px;
+	margin: 4px 10px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #e7e7e7;
+	border-radius: 8px;
+}
+
+.main_block {
+	width: 100%;
+	padding: 10px 16px;
+}
+
+.footer_block {
+	display: flex;
+	align-items: center;
+	padding: 10px 16px;
+	background: #f3fafa;
+}
+
+.footer_right_block {
+	width: 100px;
+	overflow: hidden;
+	font-size: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.footer_left_block {
+	width: 145px;
+
+	:global {
+		.ui_pill_text {
+			font-weight: 600;
+			color: #6fa5ab;
+		}
+	}
+}
+
+.service_provider_details {
+	display: flex;
+	align-items: center;
+}
+
+.service_provider_name {
+	width: calc(100% - 100px);
+	margin-left: 4px;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.logo_styles {
+	margin-right: 10px;
+}
+
+.price_details {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	height: 22px;
+}
+
+.amount {
+	margin-left: 4px;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.shipment_type_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 48px;
+	font-weight: 600;
+
+	svg {
+		width: 28px;
+		height: 28px;
+		margin-right: 6px;
+		fill: #f9ae64;
+	}
+}

@@ -20,9 +20,9 @@ function useGetAgentPreference() {
 	}, [fetchWorkStatus]);
 
 	return {
-		loading,
+		preferenceLoading : loading,
 		fetchWorkStatus,
-		agentWorkStatus: data,
+		agentWorkStatus   : data,
 	};
 }
 export default useGetAgentPreference;

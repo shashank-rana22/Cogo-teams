@@ -26,7 +26,6 @@ function TakeTest() {
 	const {
 		loading,
 		data,
-		currentQuestionId,
 	} = useCheckEligibility();
 
 	const { is_valid_user, is_active, attempts_left } = data || {};
@@ -57,7 +56,7 @@ function TakeTest() {
 		return <NotEligible {...ELIGIBILITY_SCREEN_MAPPING.no_attempts_left} />;
 	}
 
-	return <Eligible currentQuestionId={currentQuestionId} />;
+	return <Eligible />;
 }
 
 export default TakeTest;

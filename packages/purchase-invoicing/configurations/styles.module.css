@@ -137,3 +137,16 @@
 .marginright {
 	margin-right: 10px;
 }
+
+.utr {
+	max-width: 100px;
+	overflow: hidden;
+	font-size: var(--font-size-sm);
+	font-weight: 600;
+	text-overflow: ellipsis;
+}
+
+.utrval {
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+}

@@ -86,9 +86,11 @@
 }
 
 .description {
+	overflow: hidden;
 	font-size: 13px;
 	color: #4f4f4f;
-	word-break: break-all;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .activity_count {

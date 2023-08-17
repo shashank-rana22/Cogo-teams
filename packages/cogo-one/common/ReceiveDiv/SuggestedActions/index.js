@@ -4,6 +4,7 @@ import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUser from '../../../hooks/useGetUser';
 import CommunicationModal from '../../CommunicationModal';
 
@@ -12,7 +13,7 @@ import styles from './styles.module.css';
 const COUNTRY_CODE_START = 0;
 const COUNTRY_CODE_END = 2;
 
-function SuggestedActions({ formattedData = {} }) {
+function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} }) {
 	const dispatch = useDispatch();
 
 	const [modalType, setModalType] = useState('');
@@ -26,6 +27,8 @@ function SuggestedActions({ formattedData = {} }) {
 		mobile_no,
 		organization_id,
 		lead_user_id,
+		lead_user_details = {},
+		user_details = {},
 	} = formattedData;
 
 	const ACTIVE_CARD_DATA = {
@@ -35,14 +38,17 @@ function SuggestedActions({ formattedData = {} }) {
 	};
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
+	const userMobileNumber = mobile_no || user_details?.whatsapp_number_eformat
+	|| user_details?.mobile_number_eformat || lead_user_details?.whatsapp_number_eformat
+	|| lead_user_details?.mobile_number_eformat;
 
-	const code = mobile_no?.slice(COUNTRY_CODE_START, COUNTRY_CODE_END);
-	const number = mobile_no?.slice(COUNTRY_CODE_END);
+	const code = userMobileNumber?.slice(COUNTRY_CODE_START, COUNTRY_CODE_END);
+	const number = userMobileNumber?.slice(COUNTRY_CODE_END);
 
-	const { userData } = useGetUser({ userId: user_id, lead_user_id, customerId: id });
+	const { userData = {} } = useGetUser({ userId: user_id, lead_user_id, customerId: id });
 
 	const handleCall = () => {
-		if (mobile_no && hasVoiceCallAccess) {
+		if (userMobileNumber && hasVoiceCallAccess) {
 			dispatch(
 				setProfileState({
 					is_in_voice_call          : true,
@@ -61,10 +67,28 @@ function SuggestedActions({ formattedData = {} }) {
 	};
 
 	const handleSendEmail = () => {
-		setModalType('email');
+		if (!userData?.email) {
+			return;
+		}
+
+		const { setButtonType, setEmailState } = mailProps;
+		setButtonType('send_mail');
+		setEmailState(
+			(prev) => ({
+				...prev,
+				body          : '',
+				subject       : '',
+				toUserEmail   : [userData?.email],
+				ccrecipients  : [],
+				bccrecipients : [],
+			}),
+		);
 	};
 
 	const handleSendTemplate = () => {
+		if (!userMobileNumber) {
+			return;
+		}
 		setModalType('whatsapp');
 	};
 
@@ -74,29 +98,47 @@ function SuggestedActions({ formattedData = {} }) {
 
 	const ACTIONS = [
 		{
-			label    : 'Call',
-			action   : handleCall,
-			disabled : !mobile_no || !hasVoiceCallAccess,
+			label     : 'Call',
+			action    : handleCall,
+			disabled  : !userMobileNumber || !hasVoiceCallAccess,
+			accessKey : 'new_call',
 		},
-		{ label: 'Message on WhatsApp', action: handleSendTemplate, disabled: false },
-		{ label: 'Send Email', action: handleSendEmail, disabled: false },
+		{
+			label     : 'Message on WhatsApp',
+			action    : handleSendTemplate,
+			disabled  : !userMobileNumber,
+			accessKey : 'new_whatsapp',
+		},
+		{
+			label     : 'Send Email',
+			action    : handleSendEmail,
+			disabled  : !userData?.email,
+			accessKey : 'new_mail',
+		},
 	];
+	const accesibleButtons = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accessible_new_communications;
 
 	return (
 		<>
 			<div className={styles.suggested_actions}>Suggested Actions :</div>
 			<div className={styles.actions}>
-				{(ACTIONS || []).map((item) => (
-					<Button
-						onClick={item?.action}
-						className={cl`${styles.actions_button} ${item?.disabled ? styles.action_disabled : ''}`}
-						key={item}
-						size="sm"
-						themeType="secondary"
-					>
-						{item.label}
-					</Button>
-				))}
+				{(ACTIONS || []).map((item) => {
+					if (!accesibleButtons?.includes(item?.accessKey)) {
+						return null;
+					}
+
+					return (
+						<Button
+							onClick={item?.action}
+							className={cl`${styles.actions_button} ${item?.disabled ? styles.action_disabled : ''}`}
+							key={item?.accessKey}
+							size="sm"
+							themeType="secondary"
+						>
+							{item.label}
+						</Button>
+					);
+				})}
 			</div>
 
 			{modalType && (

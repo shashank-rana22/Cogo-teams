@@ -9,8 +9,10 @@ const emptyData = { list: [], total: 0, total_page: 0, count_stats: {} };
 const shipmentStates = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress', 'completed'];
 const additional_methods = ['pagination', 'count_stats', 'invoice_status', 'ongoing_shipment_stats'];
 
+const DEFAULT_PAGE = 1;
+
 function useListAuthorityDeskShipments({ activeTab, service, bucket, filters, subApprovedBucket }) {
-	const { selected_agent_id } = useSelector(({ profile }) => profile) || {};
+	const { selected_agent_id, authParams } = useSelector(({ profile }) => profile) || {};
 	const [data, setData] = useState(emptyData);
 
 	const [{ loading }, trigger] = useRequest({
@@ -31,7 +33,7 @@ function useListAuthorityDeskShipments({ activeTab, service, bucket, filters, su
 						stakeholder_id  : selected_agent_id || undefined,
 						...restFilters || {},
 					},
-					page       : page || 1,
+					page       : page || DEFAULT_PAGE,
 					page_limit : 10,
 					additional_methods,
 				},
@@ -46,7 +48,7 @@ function useListAuthorityDeskShipments({ activeTab, service, bucket, filters, su
 
 	useEffect(() => {
 		listShipments();
-	}, [listShipments]);
+	}, [listShipments, authParams]);
 
 	return {
 		data,

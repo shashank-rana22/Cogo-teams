@@ -142,7 +142,7 @@ function QuotaModal(props) {
 										params={{
 											permissions_data_required : false,
 											filters                   : {
-												status               : 'active',
+												status               : true,
 												partner_entity_types : ['cogoport'],
 											},
 										}}
@@ -178,7 +178,7 @@ function QuotaModal(props) {
 										if (!Element) return null;
 
 										return (
-											<div className={styles.control_container}>
+											<div key={el.name} className={styles.control_container}>
 												<Element
 													{...el}
 													size="sm"
