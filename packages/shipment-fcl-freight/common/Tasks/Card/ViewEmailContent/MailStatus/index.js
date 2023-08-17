@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -44,8 +45,7 @@ function MailStatus({ list = [] }) {
 
 	return (
 		<div
-			className={styles.container}
-			style={{ color: isSuccess ? 'var(--color-tertiary-success-green-1)' : 'var(--color-primary-error-red-1)' }}
+			className={cl` ${styles.container} ${isSuccess ? styles.success : styles.not_success}`}
 		>
 			{`This email has been ${STATUS.key} on 
             ${formatDate({
