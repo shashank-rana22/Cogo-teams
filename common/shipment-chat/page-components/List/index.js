@@ -32,7 +32,7 @@ function List({
 		total_page : 0,
 	});
 	const [filters, setFilters] = useState({ page: 1 });
-	const { page, q } = filters || {};
+	const { page = 1, q } = filters || {};
 
 	const getListPayload = {
 		page,

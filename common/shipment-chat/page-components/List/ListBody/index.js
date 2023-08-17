@@ -29,7 +29,7 @@ function ListBody({
 	listData = {},
 	setFilters = () => {},
 }) {
-	const { page } = filters || {};
+	const { page = 1 } = filters || {};
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {

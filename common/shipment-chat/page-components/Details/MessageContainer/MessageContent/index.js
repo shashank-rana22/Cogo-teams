@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMStar, IcCStar, IcMDocument } from '@cogoport/icons-react';
@@ -54,10 +54,9 @@ function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
 								</div>
 							</div>
 
-							<button
-								className={cl` ${styles.imp_sign} ${msg?.created_by_user_id === user_id
-									? styles.right : styles.left} `}
+							<Button
 								tabIndex={0}
+								themeType="link"
 								onClick={() => handleClick(msg)}
 							>
 								{msg?.important === true ? (
@@ -65,19 +64,20 @@ function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
 								) : (
 									<IcMStar width="1.3em" height="1.3em" />
 								)}
-							</button>
+							</Button>
 						</div>
 
 						{(msg?.attachment_urls || []).map((url) => (
-							<button
+							<Button
 								key={url}
 								tabIndex={0}
 								className={styles.flex_row}
+								themeType="link"
 								onClick={() => window.open(url, '_blank')}
 							>
 								<IcMDocument width="1.6em" height="1.6em" className={styles.icm_document} />
-								{url?.split('/').pop()}
-							</button>
+								<span>{url?.split('/').pop()}</span>
+							</Button>
 						))}
 
 						{msg?.content ? (

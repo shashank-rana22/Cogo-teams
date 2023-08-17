@@ -137,12 +137,7 @@ function FileUploader(props) {
 	const handleDelete = (values) => {
 		setFileName(values);
 		const files = Array.isArray(values) ? values?.map((item) => item.name) : [];
-		const newUrls = urlStore.filter((item) => {
-			if (typeof (item) === 'string') {
-				return files.some((file) => item.includes(encodeURIComponent(file)));
-			}
-			return files.includes(item.fileName);
-		});
+		const newUrls = urlStore.filter((item) => files.includes(item.fileName));
 		setUrlStore(newUrls);
 	};
 
