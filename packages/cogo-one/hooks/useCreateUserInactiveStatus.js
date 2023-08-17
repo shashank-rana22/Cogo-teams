@@ -21,8 +21,8 @@ function useCreateUserInactiveStatus({
 
 			await trigger({
 				data: {
-					agent_id: userId,
 					...data,
+					agent_id: userId,
 				},
 			});
 

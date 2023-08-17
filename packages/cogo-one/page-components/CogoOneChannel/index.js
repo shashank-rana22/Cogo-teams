@@ -71,7 +71,11 @@ function CogoOne() {
 		agentId           : userId,
 	});
 
-	const { viewType, loading: workPrefernceLoading = false, userMails = [] } = useAgentWorkPrefernce();
+	const {
+		viewType,
+		loading: workPrefernceLoading = false,
+		userMails = [],
+	} = useAgentWorkPrefernce();
 
 	const {
 		fetchWorkStatus = () => {},
