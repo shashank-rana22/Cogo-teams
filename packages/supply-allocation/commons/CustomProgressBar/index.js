@@ -3,14 +3,21 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const COLORS_MAPPING = {
+	current_container_allocation : '#DDEBC0',
+	past_container_allocation    : '#E0E0E0',
+};
+
 function CustomProgressBar({
 	id = '',
 	className = '',
 	style = {},
 	allocatedCount = 0,
 	promisedCount = 0,
+	view = '',
 }) {
 	const progress = (promisedCount / allocatedCount) * 100;
+
 	return (
 		<div
 			id={id}
@@ -42,7 +49,7 @@ function CustomProgressBar({
 					className={cl`
 						${styles.progress} 
 						${cl.ns('progressbar_progress')}`}
-					style={{ width: `${progress}%` }}
+					style={{ width: `${progress}%`, background: `${COLORS_MAPPING[view]}` }}
 				/>
 			</div>
 		</div>

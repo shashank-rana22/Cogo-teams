@@ -28,7 +28,8 @@ const generateData = (data, type) => Object.keys(data || {}).reduce(
 				...graphData,
 				{
 					id    : curr,
-					label : `${startCase(curr)} ${count}`,
+					label : `${startCase(curr)} 
+					${data[curr]}`,
 					value : data[curr],
 					color : COLORS_MAPPING?.[type]?.[curr],
 				},

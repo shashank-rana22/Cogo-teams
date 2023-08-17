@@ -6,6 +6,7 @@ const ARC_LABELS_TEXT_COLOR_MODIFIERS = 2;
 function PieChart({ data = [], count = 0, heading = '' }) {
 	const colors = data.map((item) => item.color);
 	console.log('data', data);
+
 	return (
 		<div style={{
 			display       : 'flex',
@@ -14,7 +15,7 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 			height        : '350px',
 			background    : '#fff',
 			padding       : '0',
-			overflow      : 'scroll',
+
 		}}
 		>
 			<div style={{ fontWeight: 600, paddingLeft: '20px' }}>{heading}</div>
@@ -23,10 +24,10 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 				colors={colors}
 				data={data}
 				margin={{
-					top    : 40,
-					right  : 90,
-					bottom : 40,
-					// left   : 80,
+					top    : 20,
+					right  : 200,
+					bottom : 20,
+					left   : 20,
 				}}
 				innerRadius={0.8}
 				padAngle={0.7}
@@ -52,7 +53,7 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 						anchor        : 'right',
 						direction     : 'column',
 						justify       : false,
-						translateX    : 50,
+						translateX    : 100,
 						translateY    : 17,
 						itemsSpacing  : 0,
 						itemWidth     : 69,
@@ -77,11 +78,11 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 			{count
 				? (
 					<div style={{
-						marginLeft    : '-83px',
+						marginLeft    : '-183px',
 						display       : 'flex',
 						flexDirection : 'column',
 						alignItems    : 'center',
-						marginTop     : '-183px',
+						marginTop     : '-190px',
 					}}
 					>
 						<div style={{ fontSize: '10px' }}>Predicted</div>

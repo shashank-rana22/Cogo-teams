@@ -20,11 +20,11 @@ function Promised({ item = {}, control, unregister }) {
 					size="xs"
 					placeholder="Extra small"
 					control={control}
-					name={`new_promised_quantity_${item.id}`}
+					name={`${item.id}_new_promised_quantity`}
 					value={item.promised}
 				/>
 				<div className={styles.cancel_container}>
-					<IcMCross onClick={() => onClickCancel(`new_promised_quantity_${item.id}`)} />
+					<IcMCross onClick={() => onClickCancel(`${item.id}_new_promised_quantity`)} />
 				</div>
 
 			</div>
