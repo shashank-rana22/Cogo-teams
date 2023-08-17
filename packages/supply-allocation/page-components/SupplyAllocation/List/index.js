@@ -3,6 +3,7 @@ import { IcCBookmark, IcMArrowRight, IcMBookmark, IcMInfo, IcMPortArrow } from '
 import { useRouter } from '@cogoport/next';
 
 import StyledTable from '../../../commons/StyledTable';
+import useUpdateRollingFclFreightSearch from '../../../hooks/useUpdateRollingFclFreightSearch';
 
 import styles from './styles.module.css';
 
@@ -15,6 +16,7 @@ function List({
 	const { list = [], page_limit = 10, total_count = 0 } = data || {};
 
 	const router = useRouter();
+	const { updateRollingFclFreightSearch } = useUpdateRollingFclFreightSearch();
 
 	const columns = [
 		{
@@ -88,7 +90,14 @@ function List({
 					<span
 						role="presentation"
 						style={{ cursor: 'pointer' }}
-						onClick={() => { console.log('Bookmark clicked!'); }}
+						onClick={() => {
+							updateRollingFclFreightSearch({
+								payload: {
+									rolling_fcl_freight_search_id : item.id,
+									is_bookmarked                 : !is_bookmarked,
+								},
+							});
+						}}
 					>
 						{is_bookmarked ? <IcCBookmark /> : <IcMBookmark />}
 					</span>
