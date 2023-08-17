@@ -74,7 +74,7 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false, setActiveTab
 		);
 	};
 
-	const whatsappMobileNumber = `${whatsapp_country_code.slice(REMOVE_PLUS_SIGN)}${whatsapp_number}`;
+	const whatsappMobileNumber = `${whatsapp_country_code?.slice(REMOVE_PLUS_SIGN) || ''}${whatsapp_number}`;
 
 	const onCardClick = () => {
 		setActiveTab((prev) => ({
@@ -85,11 +85,11 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false, setActiveTab
 				lead_user_id            : null,
 				user_name               : name,
 				user_id,
-				whatsapp_number_eformat : whatsapp_number_eformat || whatsappMobileNumber,
+				mobile_no               : whatsapp_number_eformat || whatsappMobileNumber,
 				email,
 				channel_type            : 'whatsapp',
-				countryCode             : mobile_country_code,
-				mobile_no               : mobile_number,
+				countryCode             : whatsapp_country_code || mobile_country_code,
+				whatsapp_number_eformat : whatsapp_number || mobile_number,
 			},
 			tab: 'message',
 		}));
