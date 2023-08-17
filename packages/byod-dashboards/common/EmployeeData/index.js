@@ -20,18 +20,16 @@ function EmployeeData({ data = {} }) {
 					<div className={styles.detail} key={val.key}>
 						<div className={styles.label}>
 							{val.label}
-							{' '}
-							:
 						</div>
 						<div className={styles.employee_detail}>
-							{val.key === 'hrbp'
-								? detail?.[val.key]?.userEmail : startCase(detail?.[val.key]) || '-'}
+							{(val.key === 'hrbp'
+								? detail?.[val.key]?.userEmail : startCase(detail?.[val.key])) || '-'}
 						</div>
 					</div>
 				))}
 			</div>
 
-			<div className={styles.heading}>Previous Requests :</div>
+			<div className={styles.heading}>Previous Reimbursement Requests : </div>
 			<StyledTable columns={columns} data={NEW_LIST} loading={loading} />
 		</div>
 	);

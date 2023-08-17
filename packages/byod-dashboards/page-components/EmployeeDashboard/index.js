@@ -55,7 +55,7 @@ function EmployeeDashboard() {
 
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.title}>Employee BYOD Form</div>
+			<div className={styles.title}>BYOD Form</div>
 
 			<EmployeeData data={employeeData} />
 
