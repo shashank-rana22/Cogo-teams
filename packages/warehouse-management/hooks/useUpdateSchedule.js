@@ -25,17 +25,15 @@ const getParams = ({ shipmentId, warehouseLocationId, warehouseTransferId, truck
 		};
 	}
 
-	return {
-		req,
-	};
+	return req;
 };
 
 const useUpdateSchedule = ({
 	item = {},
 	fileValue = '',
 	truckStatus = 'truck_in',
-	setShowTruckStatusModal = () => {},
 	listAPI = () => {},
+	setShowTruckStatusModal = () => {},
 
 }) => {
 	const [{ loading }, trigger] = useRequestAir(
@@ -52,19 +50,20 @@ const useUpdateSchedule = ({
 
 	const handleUpdate = async () => {
 		try {
-			await trigger({
-				data:
-					getParams({
+			const res = await trigger({
+				data: {
+					...getParams({
 						shipmentId          : item?.shipmentDetails[GLOBAL_CONSTANTS.zeroth_index]?.shipmentId,
 						warehouseLocationId : 'b5068435-0449-4883-bb56-0b9c11343a74',
 						warehouseTransferId : item?.warehouseTransferId,
 						truckStatus,
 						fileValue,
 					}),
+				},
 			});
 			Toast.success(`Trucked ${(truckStatus === 'truck_in') ? 'in' : 'out'} successfully`);
+			handleOnClose(res);
 			listAPI();
-			handleOnClose();
 		} catch (err) {
 			toastApiError(err);
 		}
