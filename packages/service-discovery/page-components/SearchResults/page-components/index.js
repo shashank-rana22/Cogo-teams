@@ -4,14 +4,20 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import DotLoader from '../../common/DotLoader';
-import Header from '../../common/Header';
-import TryOldBanner from '../../common/TryOldBanner';
+import DotLoader from '../../../common/DotLoader';
+import Header from '../../../common/Header';
+import TryOldBanner from '../../../common/TryOldBanner';
+import useGetSpotSearch from '../hooks/useGetSpotSearch';
+import getRedirectionDetails from '../utils/getRedirectionDetails';
 
-import getRedirectionDetails from './getRedirectionDetails';
-import useGetSpotSearch from './hooks/useGetSpotSearch';
-import FCLResults from './page-components/FCLResults';
+import AIRResults from './AirResults';
+import FCLResults from './FCLResults';
 import styles from './styles.module.css';
+
+const COMPONENT_MAPPING = {
+	fcl_freight : FCLResults,
+	air_freight : AIRResults,
+};
 
 function SearchResults() {
 	const { user:{ id }, query, partner_id = '' } = useSelector(({ profile, general }) => ({
@@ -142,6 +148,11 @@ function SearchResults() {
 		);
 	}
 
+	const { service_type = '' } = detail;
+
+	const ActiveComponent = COMPONENT_MAPPING[service_type];
+	if (!ActiveComponent) return null;
+
 	return (
 		<div className={cl`${styles.container} ${
 			(showAdditionalHeader || (infoBanner.current === 'edit_button' && !isGuideViewed))
@@ -172,7 +183,7 @@ function SearchResults() {
 			>
 				<TryOldBanner />
 
-				<FCLResults
+				<ActiveComponent
 					rates={rates}
 					detail={detail}
 					contract_detail={contract_detail}

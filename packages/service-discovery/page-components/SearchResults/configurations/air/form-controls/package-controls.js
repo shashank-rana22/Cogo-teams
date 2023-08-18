@@ -1,5 +1,20 @@
 import validate from '../../../utils/validateNumber';
 
+const DIMENSIONS_OPTIONS = [
+	{ label: 'CM', value: 'cm' },
+	{ label: 'IN', value: 'inch' },
+];
+
+const WEIGHT_OPTIONS = [
+	{ label: 'KG/UNIT', value: 'kg' },
+	{ label: 'LB/UNIT', value: 'lb' },
+];
+
+const STACKABILITY_OPTIONS = [
+	{ label: 'Stackable', value: 'stackable' },
+	{ label: 'Non-stackable', value: 'non_stackable' },
+];
+
 export const PACKAGE_CONTROLS = [
 	{
 		name               : 'package',
@@ -73,16 +88,7 @@ export const PACKAGE_CONTROLS = [
 				name    : 'unit',
 				type    : 'select',
 				span    : 3,
-				options : [
-					{
-						label : 'CM',
-						value : 'cm',
-					},
-					{
-						label : 'IN',
-						value : 'inch',
-					},
-				],
+				options : DIMENSIONS_OPTIONS,
 			},
 			{
 				name        : 'weight',
@@ -102,33 +108,15 @@ export const PACKAGE_CONTROLS = [
 				type    : 'select',
 				span    : 8,
 				value   : 'kg',
-				options : [
-					{
-						label : 'KG/UNIT',
-						value : 'kg',
-					},
-					{
-						label : 'LB/UNIT',
-						value : 'lb',
-					},
-				],
+				options : WEIGHT_OPTIONS,
 			},
 			{
 				name    : 'stackability',
 				type    : 'chips',
 				span    : 10,
 				value   : 'stackable',
-				options : [
-					{
-						label : 'Stackable',
-						value : 'stackable',
-					},
-					{
-						label : 'Non-stackable',
-						value : 'non_stackable',
-					},
-				],
-				rules: { required: 'Container size is required' },
+				options : STACKABILITY_OPTIONS,
+				rules   : { required: 'Container size is required' },
 			},
 		],
 	},

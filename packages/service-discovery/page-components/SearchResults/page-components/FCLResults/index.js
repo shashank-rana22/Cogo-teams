@@ -96,6 +96,8 @@ function FCLResults({
 		);
 	}
 
+	if (!RateCardsComponent) return null;
+
 	return (
 		<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen]} />
 	);

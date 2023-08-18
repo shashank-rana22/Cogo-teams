@@ -1,20 +1,12 @@
 import { Checkbox } from '@cogoport/components';
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 
 import airControls from '../../../../../../page-components/SearchResults/configurations/air/form-controls';
 import Layout from '../../../../common/Layout';
 
 import AdditionalModals from './AdditionalModals';
-import COMMODITY_TYPE_MAPPING from './CommodityMapping';
 import Header from './Header';
 import styles from './styles.module.css';
-
-const MAPPING = {
-	dangerous       : 'Class 1.1',
-	temp_controlled : 'active-general_pharma',
-	other_special   : 'others',
-	general         : 'all',
-};
 
 function FormModal({
 	control = () => {},
@@ -31,38 +23,12 @@ function FormModal({
 	const [dimensionsInfo, setDimensionsInfo] = useState(true);
 	const [commoditySubtypeOptions, setCommoditySubTypeOptions] = useState([]);
 
-	const commodity = watch('commodity');
-
-	const handleCommoditySubtype = useCallback(() => {
-		if (['general', 'dangerous', 'temp_controlled', 'other_special'].includes(commodity)) {
-			setCommoditySubTypeOptions(COMMODITY_TYPE_MAPPING[commodity]);
-
-			setValue('commodity_subtype', MAPPING[commodity]);
-
-			// if (
-			// 	[
-			// 		goodsDetail.commodity_type,
-			// 		goodsDetail?.values?.commodity_type,
-			// 	].includes(watchCommodity)
-			// ) {
-			// 	if (goodsDetail?.values?.commodity_subtype) {
-			// 		setValues({
-			// 			commodity_subtype: goodsDetail?.values?.commodity_subtype,
-			// 		});
-			// 	}
-			// } else {
-			// 	setValues({
-			// 		commodity_subtype: MAPPING[commodity],
-			// 	});
-			// }
-		}
-	}, [commodity, setValue]);
-
-	useEffect(() => {
-		handleCommoditySubtype();
-	}, [commodity, handleCommoditySubtype]);
-
-	const controls = airControls({ activeTab, commoditySubtypeOptions });
+	const controls = airControls({
+		activeTab,
+		commoditySubtypeOptions,
+		setCommoditySubTypeOptions,
+		setValue,
+	});
 
 	return (
 		<div>
@@ -105,8 +71,8 @@ function FormModal({
 				{showModal ? (
 					<AdditionalModals
 						setActiveTab={setActiveTab}
-						show={showModal}
 						setShow={setShowModal}
+						show={showModal}
 						handleApply={handleApply}
 						handleSubmit={handleSubmit}
 					/>

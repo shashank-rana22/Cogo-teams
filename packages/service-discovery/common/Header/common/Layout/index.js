@@ -48,13 +48,18 @@ function Layout({
 
 				if (innerControls && !isEmpty(innerControls)) {
 					return (
-						<div className={styles.form_item} key={`${name}_${label}`} style={{ width: `${flex}%` }}>
+						<div
+							className={styles.form_item}
+							key={`${name}_${label}`}
+							style={{ width: `${flex}%`, marginBottom: '12px' }}
+						>
 							<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
 								{newControl?.boldLabel || label || ''}
 								{' '}
-								{newControl?.rules?.required && (label || newControl?.boldLabel) ? (
+								{(newControl?.rules?.required || newControl?.showRequired)
+								&& (label || newControl?.boldLabel) ? (
 									<div className={styles.required_mark}>*</div>
-								) : null}
+									) : null}
 							</div>
 
 							<Layout

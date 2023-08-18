@@ -1,4 +1,6 @@
-import { addDays } from '@cogoport/utils';
+import { addDays, isEmpty } from '@cogoport/utils';
+
+import COMMODITY_TYPE_MAPPING from '../CommodityMapping';
 
 import { GROSS_CONTROLS } from './gross-controls';
 import { PACKAGE_CONTROLS } from './package-controls';
@@ -14,12 +16,30 @@ const COMMODITY_OPTIONS = [
 	{ label: 'Other Special Commodity Type', value: 'other_special' },
 ];
 
+const COMMODITY_SUBTYPE_DEFAULT_MAPPING = {
+	dangerous       : 'Class 1.1',
+	temp_controlled : 'active-general_pharma',
+	other_special   : 'others',
+	general         : 'all',
+};
+
+const COMMODITY_SUBTYPE_DEFAULT_OPTIONS = [
+	{ label: 'All', value: 'all' },
+];
+
+const COMMODITY_SUBTYPE_DEFAULT_VALUE = 'all';
+
 const CONTROLS_MAPPING = {
 	by_gross   : GROSS_CONTROLS,
 	by_package : PACKAGE_CONTROLS,
 };
 
-const airControls = ({ activeTab = '' }) => {
+const airControls = ({
+	activeTab = '',
+	commoditySubtypeOptions = [],
+	setCommoditySubTypeOptions = () => {},
+	setValue = () => {},
+}) => {
 	const controls = CONTROLS_MAPPING[activeTab] || [];
 
 	const COMMON_CONTROLS = [
@@ -32,32 +52,26 @@ const airControls = ({ activeTab = '' }) => {
 			rules : { required: 'This is required' },
 		},
 		{
-			name    : 'commodity',
-			label   : 'Commodity',
-			type    : 'select',
-			options : COMMODITY_OPTIONS,
-			value   : 'general',
-			span    : 12,
-			rules   : { required: 'Commodity is required' },
+			name     : 'commodity',
+			label    : 'Commodity',
+			type     : 'select',
+			options  : COMMODITY_OPTIONS,
+			value    : 'general',
+			onChange : (val) => {
+				setCommoditySubTypeOptions(COMMODITY_TYPE_MAPPING[val] || []);
+				setValue('commodity_subtype', COMMODITY_SUBTYPE_DEFAULT_MAPPING[val] || '');
+			},
+			span  : 12,
+			rules : { required: 'Commodity is required' },
 		},
 		{
 			name    : 'commodity_subtype',
 			label   : 'Commodity Subtype',
 			type    : 'select',
-			// options : commoditySubtypeOptions,
-			options : [
-				{
-					label   : 'hello',
-					options : [
-						{
-							label : 'first',
-							value : 'first',
-						},
-					],
-				},
-			],
-			span  : 12,
-			rules : { required: 'This is required' },
+			value   : COMMODITY_SUBTYPE_DEFAULT_VALUE,
+			options : !isEmpty(commoditySubtypeOptions) ? commoditySubtypeOptions : COMMODITY_SUBTYPE_DEFAULT_OPTIONS,
+			span    : 12,
+			rules   : { required: 'This is required' },
 		},
 	];
 

@@ -1,4 +1,4 @@
-const OPTIONS = [
+const DANGEROUS_OPTIONS = [
 	{
 		label   : 'Class 1—Explosives',
 		options : [
@@ -61,9 +61,8 @@ const OPTIONS = [
 		label   : 'Class 3—Flammable Liquids',
 		options : [
 			{
-				label: 'Class 3',
-
-				value: 'Class 3',
+				label : 'Class 3',
+				value : 'Class 3',
 			},
 		],
 	},
@@ -211,7 +210,7 @@ const COMMODITY_TYPE_MAPPING = {
 			value : 'all',
 		},
 	],
-	dangerous       : OPTIONS,
+	dangerous       : DANGEROUS_OPTIONS,
 	temp_controlled : TEMP_CONTROLLED_RANGE_OPTIONS,
 	other_special   : OTHER_SPECIAL_OPTIONS,
 };

@@ -9,7 +9,7 @@ import PackageItem from './PackageItem';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
-const SERVICE = 'fcl_freight';
+const SERVICE = 'air_freight';
 
 function Packages({
 	data = {},
