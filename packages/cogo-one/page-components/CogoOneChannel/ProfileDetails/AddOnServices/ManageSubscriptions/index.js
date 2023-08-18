@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCopy, IcMRefresh } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useCreatePaymentLink from '../../../../../hooks/useCreatePaymentLink';
 import useGetPaymentStatus from '../../../../../hooks/useGetPaymentStatus';
@@ -33,18 +33,27 @@ function ManageSubscriptions(props) {
 
 	const selectedUserId = organizationData?.users?.[GLOBAL_CONSTANTS.zeroth_index]?.id || '';
 
-	const [activeTab, setActiveTab] = useState('monthly');
 	const [showAddOn, setShowAddOn] = useState(false);
 	const [isAssignModal, setIsAssignModal] = useState(false);
 	const [selectedPlan, setSelectedPlan] = useState({});
 
+	const { plansData = {}, loading = false, getUserActivePlans = () => {} } = useListSaasPlans({ orgId });
+
+	const {
+		item_plans : itemPlans = [],
+		saas_subscription_customer_id : saasSubscriptionCustomerId = '',
+	} = plansData || {};
+
+	const activePlanAvailableInMonth = (itemPlans || []).filter(
+		(item) => item?.display_pricing?.monthly?.is_active_plan,
+	);
+	const monthlySubscription = isEmpty(activePlanAvailableInMonth) ? 'annual' : 'monthly';
+
+	const [activeTab, setActiveTab] = useState('monthly');
+
 	const { display_pricing = {} } = selectedPlan || {};
 	const { payment_link : paymentLink = '', checkout = {} } = display_pricing[activeTab] || {};
 	const { payment_order_id: paymentOrderId = '', id: checkoutId = '' } = checkout || {};
-
-	const { plansData = {}, loading = false, getUserActivePlans = () => {} } = useListSaasPlans({ orgId });
-
-	const { item_plans = [], saas_subscription_customer_id : saasSubscriptionCustomerId = '' } = plansData || {};
 
 	const {
 		createLink = () => {}, createLinkloading = false,
@@ -57,7 +66,7 @@ function ManageSubscriptions(props) {
 
 	const { status: paymentStatus = '' } = paymentDetails || {};
 
-	const sortedItemPlans = (item_plans || []).sort(
+	const sortedItemPlans = (itemPlans || []).sort(
 		(a, b) => a.priority_sequence - b.priority_sequence,
 	);
 
@@ -74,6 +83,10 @@ function ManageSubscriptions(props) {
 		getUserActivePlans();
 	};
 
+	useEffect(() => {
+		setActiveTab(monthlySubscription);
+	}, [monthlySubscription]);
+
 	return (
 		<div>
 			<div className={styles.intelligence_container}>
@@ -89,6 +102,8 @@ function ManageSubscriptions(props) {
 
 			<div className={styles.toggle_container}>
 				<Toggle
+					checked={activeTab === 'annual'}
+					disabled={loading}
 					size="sm"
 					onLabel="Bill Annually"
 					offLabel="Bill Monthly"
