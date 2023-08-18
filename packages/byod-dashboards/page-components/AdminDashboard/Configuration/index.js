@@ -2,9 +2,9 @@ import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import StyledTable from '../../../common/StyledTable';
 import useGetEmployeeReimbursementGroup from '../../../hooks/useGetEmployeeReimbursementGroup';
 import EmptyState from '../EmptyState';
+import StyledTable from '../StyledTable';
 
 import AccessoriesModal from './AccessoriesModal';
 import DepartmentModal from './DepartmentModal';

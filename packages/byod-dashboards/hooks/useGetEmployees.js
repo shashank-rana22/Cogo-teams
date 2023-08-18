@@ -24,13 +24,13 @@ const useGetEmployees = () => {
 	}, [query, setFilters]);
 
 	const getEmployees = useCallback(() => {
-		const { page, status } = filters || {};
+		const { page } = filters || {};
 		try {
 			trigger({
 				params: {
 					filters: {
-						q: query,
-						status,
+						q      : query,
+						status : 'active',
 					},
 					employee_details_required: true,
 					page,

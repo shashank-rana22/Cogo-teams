@@ -1,10 +1,10 @@
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import StyledTable from '../../common/StyledTable';
 import useGetEmployeeReimbursementGroup from '../../hooks/useGetEmployeeReimbursementGroup';
 
 import getGroupColumns from './getGroupColumns';
+import StyledTable from './StyledTable';
 import styles from './styles.module.css';
 
 function GroupContent({ addon_details, device_details, id }) {
@@ -36,7 +36,6 @@ function GroupContent({ addon_details, device_details, id }) {
 												Percentage Reimbursed :
 												{' '}
 												<b>{device?.reimbursement_percentage}</b>
-
 											</div>
 
 											<div>

@@ -11,8 +11,8 @@
 }
 
 .header_container {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 	margin-bottom: 40px;
 }
 
@@ -40,8 +40,8 @@
 }
 
 .table_container {
-	width: 40%;
 	display: flex;
+	width: 40%;
 	margin-top: 20px;
 }
 
@@ -55,15 +55,15 @@
 }
 
 .display_content {
-	width: '60%';
-	background-color: #fff;
+	width: "60%";
 	padding: 20px;
 	margin: 20px;
+	background-color: #fff;
 	border-radius: 10px;
 }
 
 .devices_content {
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	margin-top: 4px;
 }

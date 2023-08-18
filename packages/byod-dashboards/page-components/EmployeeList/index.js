@@ -4,10 +4,10 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
-import StyledTable from '../../common/StyledTable';
 import useGetEmployees from '../../hooks/useGetEmployees';
 import { ADMIN_TAB_OPTIONS, HRBP_TAB_OPTIONS } from '../../utils/constant';
 
+import StyledTable from './StyledTable';
 import styles from './styles.module.css';
 import getColumns from './useGetColumns';
 

@@ -32,9 +32,9 @@
 }
 
 .header_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: normal;
+	display: flex;
+	align-items: normal;
+	justify-content: space-between;
 }
 
 .text_container {
@@ -59,10 +59,10 @@
 }
 
 .select_categories {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .actions {
-    display: flex;
+	display: flex;
 }
