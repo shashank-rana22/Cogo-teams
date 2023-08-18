@@ -50,15 +50,6 @@ function Content({
 	const [updateFreightCertificate, setUpdateFreightCertificate] = useState(false);
 
 	const { data:bl_data } = uploadedItem || {};
-	// if (uploadedItem?.document_type === 'freight_certificate') {
-	// 	console.log({ uploadedItem });
-	// 	taskList?.map((task) => {
-	// 		if (task?.label?.includes('Certificate')) {
-	// 			console.log({ task });
-	// 		}
-	// 		return null;
-	// 	});
-	// }
 
 	const tradeType = primary_service?.trade_type;
 
@@ -188,7 +179,7 @@ function Content({
 						</Button>
 					)}
 
-				{docType === 'freight_certificate' && document_type === 'freight_certificate' && (
+				{(docType === 'freight_certificate' && document_type === 'freight_certificate') ? (
 					<Button
 						themeType="link"
 						onClick={() => setUpdateFreightCertificate(true)}
@@ -196,7 +187,7 @@ function Content({
 					>
 						Update
 					</Button>
-				)}
+				) : null}
 
 				{isChecked ? (
 					<div className={styles.action_container}>
