@@ -36,9 +36,6 @@ function Navigations(props = {}) {
 
 	const navigationvalues = Object.values(navigationMappings);
 
-	console.log(navigationMappings, 'navigationMappings1');
-	console.log(navigationvalues, 'navigationsValues');
-
 	let navigationOptions = applyRegEx(searchString, navigationvalues, 'title', ['key']);
 
 	if (navStatus === 'assigned') {

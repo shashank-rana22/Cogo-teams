@@ -52,8 +52,6 @@ const useOnBoardRole = () => {
 
 	let navigationMappings = navigationMappingAdmin;
 
-	console.log(navigationMappings, 'navigationMappings2');
-
 	if (roleData?.stakeholder_type === 'organization') {
 		if (roleData?.id === '6fbc5d22-b79b-4db6-aeab-d5db3b58db17') {
 			navigationMappings = navigationMappingSeller;
