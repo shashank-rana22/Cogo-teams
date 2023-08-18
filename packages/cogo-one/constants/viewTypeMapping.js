@@ -451,7 +451,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : true,
-			show_shipment_reminder      : false,
+			show_shipment_reminder      : true,
 		},
 	},
 	marketing: {
@@ -491,7 +491,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
-			show_shipment_reminder      : false,
+			show_shipment_reminder      : true,
 		},
 	},
 };
