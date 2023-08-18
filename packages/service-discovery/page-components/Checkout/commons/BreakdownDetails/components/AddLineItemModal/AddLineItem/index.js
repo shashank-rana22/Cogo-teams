@@ -1,5 +1,5 @@
 import { useForm } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 
 import getElementController from '../../../../forms/getElementController';
@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function AddLineItem({ CHARGE_CODE_DATA = {}, service_id = '', checkout_id = '' }, ref) {
 	const [unitOptions, setUnitOptions] = useState([]);
 
-	const { control, watch, handleSubmit, formState:{ errors } } = useForm();
+	const { control, watch, handleSubmit, formState:{ errors }, setValue } = useForm();
 
 	const { code, unit } = watch();
 
@@ -23,9 +23,10 @@ function AddLineItem({ CHARGE_CODE_DATA = {}, service_id = '', checkout_id = '' 
 		if (!isEmpty(code)) {
 			const { units = [] } = CHARGE_CODE_DATA[code];
 
-			setUnitOptions(units.map((val) => ({ label: `${val}`, value: `${val}` })));
+			setValue('unit', '');
+			setUnitOptions(units.map((val) => ({ label: startCase(val), value: `${val}` })));
 		}
-	}, [CHARGE_CODE_DATA, code]);
+	}, [CHARGE_CODE_DATA, code, setValue]);
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit: () => {

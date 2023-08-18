@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import Contract from '../../../../common/Contract';
@@ -13,8 +14,9 @@ function QuotationDetails({
 	isMultiContainer = false,
 	detail = {},
 	setScreen = () => {},
-	setMainScreen = () => {},
 }) {
+	const router = useRouter();
+
 	const { total_price_discounted, total_price_currency } = rateCardData;
 
 	const [showContract, setShowContract] = useState(false);
@@ -30,23 +32,12 @@ function QuotationDetails({
 	});
 
 	const handleSelectButtonClick = () => {
-		if (typeof window === 'undefined') {
-			return;
-		}
-
 		if (!isSelectedCard) {
-			const newUrl = new URL(window.location);
-			newUrl.searchParams.set('rate_card_id', rateCardData?.id);
-
-			window.history.pushState({ path: newUrl.href }, '', newUrl.href);
+			router.push(`/book/${router.query.spot_search_id}?rate_card_id=${rateCardData?.id}`);
 
 			setScreen('selectedCardScreen');
 		} else {
-			const newUrl = new URL(window.location);
-			newUrl.searchParams.delete('rate_card_id');
-
-			window.history.pushState({ path: newUrl.href }, '', newUrl.href);
-			setMainScreen('listRateCard');
+			router.push(`/book/${router.query.spot_search_id}`);
 		}
 	};
 
