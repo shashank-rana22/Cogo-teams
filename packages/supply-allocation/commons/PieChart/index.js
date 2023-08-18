@@ -5,7 +5,6 @@ const ARC_LABELS_TEXT_COLOR_MODIFIERS = 2;
 
 function PieChart({ data = [], count = 0, heading = '' }) {
 	const colors = data.map((item) => item.color);
-	console.log('data', data);
 
 	return (
 		<div style={{
@@ -25,9 +24,9 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 				data={data}
 				margin={{
 					top    : 20,
-					right  : 200,
+					right  : 110,
 					bottom : 20,
-					left   : 20,
+					left   : 110,
 				}}
 				innerRadius={0.8}
 				padAngle={0.7}
@@ -48,37 +47,12 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 					from      : 'color',
 					modifiers : [['darker', ARC_LABELS_TEXT_COLOR_MODIFIERS]],
 				}}
-				legends={[
-					{
-						anchor        : 'right',
-						direction     : 'column',
-						justify       : false,
-						translateX    : 100,
-						translateY    : 17,
-						itemsSpacing  : 0,
-						itemWidth     : 69,
-						itemHeight    : 33,
-						itemTextColor : '#999',
-						itemDirection : 'left-to-right',
-						itemOpacity   : 1,
-						symbolSize    : 9,
-						symbolShape   : 'circle',
-						effects       : [
-							{
-								on    : 'hover',
-								style : {
-									itemTextColor: '#000',
-								},
-							},
-						],
-					},
-				]}
 			/>
 
 			{count
 				? (
 					<div style={{
-						marginLeft    : '-183px',
+						marginLeft    : '-3px',
 						display       : 'flex',
 						flexDirection : 'column',
 						alignItems    : 'center',

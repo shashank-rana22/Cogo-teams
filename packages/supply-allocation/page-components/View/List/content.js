@@ -5,12 +5,11 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CustomProgressBar from '../../../commons/CustomProgressBar';
-import StyledTable from '../../../commons/StyledTable';
-import subBucketDummyData from '../../../Dummy Data/sub-bucket-data.json';
-import getSubBucketColumns from '../SubBucketColumns';
+import BucketTable from '../BucketsTable';
 
 function Content({
 	item = {},
+	search_id = '',
 }) {
 	const {
 		bucket_type,
@@ -25,11 +24,9 @@ function Content({
 	const [show, setShow] = useState(false);
 	const formProps = useForm();
 
-	const { control, unregister, formState, handleSubmit } = formProps;
+	const { control, unregister, formState, handleSubmit, watch } = formProps;
 	const { dirtyFields = {} } = formState;
-
-	const { subBucketColumns } = getSubBucketColumns({ control, unregister });
-
+	console.log('ff', watch());
 	const bucketControls = [
 		{
 			component : <IcMArrowRotateRight onClick={() => setShow((prev) => !prev)} />,
@@ -75,7 +72,9 @@ function Content({
 
 	const onClickSaveChanges = (values) => {
 		const payload = Object.entries(values).map(([key, value]) => ({ [key.split('_')[0]]: value }));
+		console.log('payload:', payload);
 	};
+
 	return (
 		<>
 			<div style={{ display: 'flex' }}>
@@ -97,15 +96,38 @@ function Content({
 				))}
 			</div>
 
+			{/*
 			{!isEmpty(dirtyFields)
-				? <Button onClick={handleSubmit(onClickSaveChanges)} themeType="secondary">Save Changes</Button> : null}
+				? ( */}
+			<div style={{
+				display        : 'flex',
+				justifyContent : 'space-between',
+				marginTop      : '20px',
+				opacity        : !isEmpty(dirtyFields) ? '1' : '0',
+				...(isEmpty(dirtyFields) ? { pointerEvents: 'none' } : {}),
+			}}
+			>
+				<div>Add New Allocation</div>
+				<Button
+					onClick={handleSubmit(onClickSaveChanges)}
+					themeType="secondary"
+				>
+					Save Changes
+
+				</Button>
+			</div>
+			{/* ) : null} */}
 
 			{show
 				? (
-					<div style={{ padding: '0 20px', background: '#F9F9F9' }}>
-						<StyledTable columns={subBucketColumns} data={subBucketDummyData} />
-					</div>
+					<BucketTable
+						control={control}
+						unregister={unregister}
+						id={search_id}
+						bucket_type={bucket_type}
+					/>
 				) : null}
+
 		</>
 	);
 }

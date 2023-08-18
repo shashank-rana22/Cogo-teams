@@ -21,3 +21,13 @@
 .sub_heading {
 	color: #4f4f4f;
 }
+
+.flex {
+	display: flex;
+}
+
+.cancel_button {
+	display: flex;
+	margin-right: 20px;
+}
+

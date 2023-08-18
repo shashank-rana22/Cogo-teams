@@ -11,7 +11,8 @@ const useListFclSearches = () => {
 		url    : '/list_rolling_fcl_freight_searches',
 		method : 'get',
 		params : {
-			service_data_required: true,
+			service_data_required    : true,
+			allocation_data_required : true,
 		},
 	}, { manual: false });
 
@@ -19,7 +20,8 @@ const useListFclSearches = () => {
 		try {
 			await trigger({
 				params: {
-					service_data_required: true,
+					service_data_required    : true,
+					allocation_data_required : true,
 					filters,
 				},
 			});
@@ -32,9 +34,10 @@ const useListFclSearches = () => {
 		try {
 			await trigger({
 				params: {
-					service_data_required : true,
+					service_data_required    : true,
+					allocation_data_required : true,
 					filters,
-					page                  : pagination,
+					page                     : pagination,
 				},
 			});
 		} catch (err) {
