@@ -1,7 +1,12 @@
 import { Modal, Button } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 
 import MobileVerification from './MobileVerification';
+
+const WIDTH = 400;
+
+const OTP_LENGTH = 4;
 
 function MobileNoVerificationModal({
 	selectedUser = {},
@@ -18,6 +23,8 @@ function MobileNoVerificationModal({
 	handleSubmit = () => {},
 	loading = false,
 }) {
+	const { t } = useTranslation(['profile']);
+
 	const {
 		general: { isMobile = false },
 	} = useSelector((state) => state);
@@ -32,10 +39,10 @@ function MobileNoVerificationModal({
 			show={showMobileVerificationModal}
 			onClose={handleCloseModal}
 			onOuterClick={handleCloseModal}
-			width={isMobile ? 'auto' : 400}
+			width={isMobile ? 'auto' : WIDTH}
 			position={isMobile ? 'bottom' : ''}
 		>
-			<Modal.Header title="Mobile Number Verification" />
+			<Modal.Header title={t('profile:mobile_number_verification')} />
 
 			<Modal.Body>
 				{' '}
@@ -60,7 +67,7 @@ function MobileNoVerificationModal({
 						disabled={loading}
 						onClick={handleSubmit(onSubmit)}
 					>
-						Get OTP
+						{t('profile:get_otp_button')}
 					</Button>
 				)}
 
@@ -70,9 +77,9 @@ function MobileNoVerificationModal({
 						type="submit"
 						className="primary sm"
 						onClick={verifyOtpNumber}
-						disabled={loading || otpNumber?.length !== 4}
+						disabled={loading || otpNumber?.length !== OTP_LENGTH}
 					>
-						Submit
+						{t('profile:submit_button')}
 					</Button>
 				)}
 			</Modal.Footer>

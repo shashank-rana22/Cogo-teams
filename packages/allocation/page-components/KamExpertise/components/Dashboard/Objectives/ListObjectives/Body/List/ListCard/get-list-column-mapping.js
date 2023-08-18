@@ -33,21 +33,25 @@ const getListColumnMapping = (props) => {
 			key      : 'status',
 			flex     : 0.6,
 			Header   : <div className={styles.top_heading} />,
-			accessor : ({ id }) => (activeObjectiveId === id ? (
-				<IcMArrowDown
-					height={24}
-					width={24}
-					fill="#221f20"
-					onClick={() => setActiveObjectiveId('')}
-				/>
-			) : (
-				<IcMArrowRight
-					height={24}
-					width={24}
-					fill="#221f20"
-					onClick={() => setActiveObjectiveId(id)}
-				/>
-			)),
+			accessor : ({ id }) => (
+				<div style={{ cursor: 'pointer' }}>
+					{activeObjectiveId === id ? (
+						<IcMArrowDown
+							height={24}
+							width={24}
+							fill="#221f20"
+							onClick={() => setActiveObjectiveId('')}
+						/>
+					) : (
+						<IcMArrowRight
+							height={24}
+							width={24}
+							fill="#221f20"
+							onClick={() => setActiveObjectiveId(id)}
+						/>
+					)}
+				</div>
+			),
 		},
 		{
 			key    : 'objective_name',
@@ -157,7 +161,7 @@ const getListColumnMapping = (props) => {
 						}}
 						type="button"
 						themeType="secondary"
-						disabled={kam_expertise_status === 'verified'}
+						disabled={['verified', 'verification_inprogress'].includes(kam_expertise_status)}
 					>
 						<strong>Generate List</strong>
 					</Button>

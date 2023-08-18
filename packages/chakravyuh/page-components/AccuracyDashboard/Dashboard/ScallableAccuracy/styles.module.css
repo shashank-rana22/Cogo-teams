@@ -1,0 +1,66 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	height: 314px;
+	padding: 12px 0;
+	margin-bottom: 16px;
+	transition: all 0.1s ease;
+
+	.chart_container {
+		position: relative;
+		width: 100%;
+		height: calc(100% - 74px);
+		transition: all 0.1s ease;
+		transition-delay: 0.2s;
+
+		&.blur {
+			filter: blur(4px);
+		}
+	}
+}
+
+.expand_icon {
+	float: right;
+	margin-top: 8px;
+	transition: all 0.3s ease;
+	scale: 1.3;
+
+	&:hover {
+		scale: 1.5;
+		cursor: pointer;
+	}
+}
+
+.hide_logo {
+	position: absolute;
+	bottom: 8px;
+	left: 4px;
+	width: 52px;
+	height: 24px;
+	background-color: #fff;
+}
+
+.header {
+	padding: 0 24px 16px;
+}
+
+.legends {
+	display: flex;
+	margin: 0 0 12px 24px;
+}
+
+.circle {
+	width: 10px;
+	height: 10px;
+	margin-right: 8px;
+	border-radius: 50%;
+}
+
+.legend_item {
+	display: flex;
+	align-items: center;
+	margin-right: 16px;
+	color: #828282;
+}

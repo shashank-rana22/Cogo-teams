@@ -1,4 +1,4 @@
-const getCommonAgentType = ({ viewType }) => {
+const getCommonAgentType = ({ viewType = '' }) => {
 	if (viewType.includes('supply')) {
 		return 'supply';
 	}
@@ -11,7 +11,7 @@ const getCommonAgentType = ({ viewType }) => {
 		return 'support';
 	}
 
-	if (viewType === 'shipment_specialist') {
+	if (viewType.includes('shipment_specialist')) {
 		return 'shipment_specialist';
 	}
 
