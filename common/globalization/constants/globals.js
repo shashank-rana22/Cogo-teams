@@ -416,6 +416,7 @@ const GLOBAL_CONSTANTS = {
 			'1MB'  : '1048576',
 			'5MB'  : '5242880',
 			'15MB' : '15728640',
+			'20MB' : '20971520',
 		},
 		freight_invoice_currency: {
 			IN     : [CURRENCY_CODE.INR, CURRENCY_CODE.USD],
