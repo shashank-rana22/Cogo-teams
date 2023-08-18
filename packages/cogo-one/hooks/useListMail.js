@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
@@ -9,19 +10,28 @@ const DEFAULT_NO_OF_MAILS = 0;
 const DEFAULT_PAGE_NUMBER = 1;
 const MIN_HEIGHT_FOR_API_CALL = 50;
 
-const getParams = ({ activeMailAddress = '', activeSelect = '', page = '' }) => ({
+const getParams = ({ activeMailAddress = '', activeFolder = '', page = '', query = '', filters = {} }) => ({
 	page,
 	email_address : activeMailAddress,
 	page_limit    : PAGE_LIMIT,
-	foldername    : MAIL_FOLDER_OPTIONS[activeSelect],
+	foldername    : MAIL_FOLDER_OPTIONS[activeFolder],
+	search        : query || undefined,
+	filters       : JSON.stringify({
+		importance : filters?.importance || undefined,
+		is_read    : filters?.mail_type === 'unread' ? false : undefined,
+	}),
 });
 
 function useListMail({
-	activeSelect = '',
+	activeFolder = '',
 	activeMailAddress = '',
+	searchQuery = '',
+	appliedFilters = {},
 }) {
 	const [listData, setListData] = useState({ value: [], isLastPage: false });
 	const [pagination, setPagination] = useState(DEFAULT_PAGE_NUMBER);
+
+	const { query, debounceQuery } = useDebounceQuery();
 
 	const [{ loading }, trigger] = useLensRequest({
 		url    : '/list_mails',
@@ -31,7 +41,13 @@ function useListMail({
 	const getEmails = useCallback(async ({ page }) => {
 		try {
 			const res = await trigger({
-				params: getParams({ activeMailAddress, activeSelect, page }),
+				params: getParams({
+					activeMailAddress,
+					activeFolder,
+					page,
+					query,
+					filters: appliedFilters,
+				}),
 			});
 
 			setPagination(page);
@@ -48,7 +64,7 @@ function useListMail({
 		} catch (err) {
 			console.error(err);
 		}
-	}, [activeSelect, trigger, activeMailAddress]);
+	}, [trigger, activeMailAddress, activeFolder, query, appliedFilters]);
 
 	const handleScroll = (e) => {
 		const { clientHeight, scrollTop, scrollHeight } = e.target;
@@ -64,6 +80,10 @@ function useListMail({
 		setListData({ value: [], isLastPage: false });
 		getEmails({ page: DEFAULT_PAGE_NUMBER });
 	}, [getEmails]);
+
+	useEffect(() => {
+		debounceQuery(searchQuery);
+	}, [debounceQuery, searchQuery]);
 
 	useEffect(() => {
 		handleRefresh();

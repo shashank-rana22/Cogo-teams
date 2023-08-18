@@ -46,8 +46,8 @@ function VoiceCallComponent({
 					is_in_voice_call          : true,
 					voice_call_recipient_data : {
 						startTime           : new Date(),
-						orgId,
-						userId,
+						orgId               : orgId || null,
+						userId              : userId || null,
 						mobile_number       : number,
 						mobile_country_code : `+${code}`,
 						userName,

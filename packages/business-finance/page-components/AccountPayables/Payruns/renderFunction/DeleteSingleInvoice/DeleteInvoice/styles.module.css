@@ -1,0 +1,8 @@
+.header {
+	margin-left: 150px;
+}
+
+.body {
+	display: flex;
+	justify-content: center;
+}

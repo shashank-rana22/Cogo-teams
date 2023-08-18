@@ -35,6 +35,8 @@ export interface Props {
 	showId?: string;
 	RenderAccordianData?: any;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
+	viewId?:null;
+	renderDropDown?:Function;
 }
 
 function List({

@@ -1,11 +1,9 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { useRequestBf } from '@cogoport/request';
 import { useState } from 'react';
 
 interface InvoiceAdditionals {
-	reqAgreementDate?: string
-	reqAgreementNumber?: string
 	reqCancelReason?: string
 	reqDocumentUrl?: string
 }
@@ -32,8 +30,8 @@ const useGetIrnCancellation = ({
 		remarks           : itemData?.invoiceAdditionals?.reqCancelReason,
 		value             : '',
 		agreementDocument : itemData?.invoiceAdditionals?.reqDocumentUrl,
-		agreementNumber   : itemData?.invoiceAdditionals?.reqAgreementNumber,
-		agreementDate     : new Date(itemData?.invoiceAdditionals?.reqAgreementDate),
+		agreementNumber   : '',
+		agreementDate     : new Date(),
 	});
 	const [
 		{ loading },
@@ -47,9 +45,11 @@ const useGetIrnCancellation = ({
 		{ manual: true },
 	);
 
-	const CANCEL_IRN = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('cancel_irn');
+	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
-	const CANCEL_EINVOICE =	 GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
+	const CANCEL_IRN = ENTITY_FEATURE_MAPPING[entityCode]?.feature_supported?.includes('cancel_irn');
+
+	const CANCEL_EINVOICE =	 ENTITY_FEATURE_MAPPING[entityCode]
 		?.feature_supported?.includes('cancel_e_invoice');
 
 	const onSubmit = async () => {
@@ -60,8 +60,8 @@ const useGetIrnCancellation = ({
 				payload = {
 					cancelReason      : response?.remarks,
 					agreementDocument : response?.agreementDocument,
-					agreementNumber   : response?.agreementNumber,
-					agreementDate     : response?.agreementDate,
+					agreementNumber   : response?.agreementDocument ? response?.agreementNumber : undefined,
+					agreementDate     : response?.agreementDocument ? response?.agreementDate : undefined,
 				};
 			} else if (CANCEL_IRN) {
 				payload = {
@@ -75,12 +75,12 @@ const useGetIrnCancellation = ({
 			});
 
 			if (resp.status === 200) {
-				Toast.success('IRN Cancelled Successfully');
+				Toast.success(`${irnLabel} Cancelled Successfully`);
 				setShowCancellationModal(false);
 			}
 			refetch();
 		} catch (err) {
-			Toast.error(err?.error?.message || 'Something went wrong');
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
 	};
 

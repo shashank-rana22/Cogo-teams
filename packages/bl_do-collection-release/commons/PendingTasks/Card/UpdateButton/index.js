@@ -7,6 +7,8 @@ const rpaSupportedTasks = [
 	'upload_bill_of_lading',
 ];
 
+const DISABLE_TASKS = ['knockoff_invoices', 'knockoff_bl_invoices', 'knockoff_do_invoices'];
+
 function UpdateButton({
 	task = {},
 	handleClick = () => {},
@@ -45,6 +47,7 @@ function UpdateButton({
 		<div className={styles.container}>
 			<Button
 				className={styles.upload_button}
+				disabled={DISABLE_TASKS.includes(task.task)}
 				onClick={() => handleClick(task)}
 			>
 				{buttonText}

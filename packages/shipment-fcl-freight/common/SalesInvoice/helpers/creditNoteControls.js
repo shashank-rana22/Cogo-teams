@@ -1,15 +1,15 @@
 import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
+import currencyCodeOptions from '@cogoport/ocean-modules/utils/currencyCode';
 
 import { handleServiceType } from '../CreditNote/helpers/handleServiceType';
 
-const commonControls = (handleChange, charge) => [
+const commonControls = (charge) => [
 	{
 		label    : handleServiceType(charge),
 		type     : 'select',
 		name     : 'code',
 		span     : 3,
-		handleChange,
 		disabled : true,
 		rules    : { required: 'Required' },
 	},
@@ -22,16 +22,16 @@ const commonControls = (handleChange, charge) => [
 		span     : 2,
 	},
 	{
-		name           : 'currency',
-		label          : 'Currency',
-		type           : 'select',
-		showOptional   : false,
-		className      : 'size-sm',
-		optionsListKey : 'exchange-rate-currencies',
-		placeholder    : 'Select Currency',
-		disabled       : true,
-		rules          : { required: 'currency is required' },
-		span           : 2,
+		name         : 'currency',
+		label        : 'Currency',
+		type         : 'select',
+		showOptional : false,
+		className    : 'size-sm',
+		options      : currencyCodeOptions,
+		placeholder  : 'Select Currency',
+		disabled     : true,
+		rules        : { required: 'currency is required' },
+		span         : 2,
 	},
 	{
 		label : 'Price',
@@ -56,13 +56,14 @@ const commonControls = (handleChange, charge) => [
 	},
 ];
 
-const rawControls = (charge, isEdit) => ({
+const rawControls = (charge, isEdit, shipmentId) => ({
 	type             : 'edit_service_charges',
 	name             : charge?.service_id || charge?.id,
 	service_name     : charge?.display_name || charge?.service_type,
 	showHeader       : true,
 	showAddButtons   : false,
 	showDeleteButton : false,
+	shipment_id      : shipmentId,
 	value            : !isEdit
 		? [
 			{
@@ -103,9 +104,9 @@ const rawControls = (charge, isEdit) => ({
 				themeType : 'primary lg',
 				span      : 1,
 			},
-			...commonControls(charge, isEdit),
+			...commonControls(charge),
 		]
-		: [...commonControls(charge, isEdit)],
+		: [...commonControls(charge)],
 });
 
 const controls = [
@@ -130,9 +131,10 @@ const controls = [
 const creditNoteControls = ({
 	services = [],
 	isEdit = false,
+	shipmentId = '',
 }) => {
 	const control = services?.map((service) => ({
-		...rawControls(service, isEdit),
+		...rawControls(service, isEdit, shipmentId),
 		value: service?.line_items?.map((item) => {
 			const {
 				is_checked,

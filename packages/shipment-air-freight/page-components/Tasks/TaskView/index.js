@@ -30,7 +30,7 @@ function TaskView() {
 	} = useContext(ShipmentDetailContext);
 
 	const incoTerm = shipment_data?.inco_term;
-	const tradeType = GLOBAL_CONSTANTS.options.inco_term[incoTerm]?.tradeType
+	const tradeType = GLOBAL_CONSTANTS.options.inco_term[incoTerm]?.trade_type
 		|| primary_service.trade_type;
 
 	const {

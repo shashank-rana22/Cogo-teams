@@ -1,0 +1,21 @@
+.container {
+	width: 100%;
+}
+
+.filter_icon {
+	width: 25px;
+	height: 25px;
+	margin-left: 5px;
+	cursor: pointer;
+	fill: #6f6f6f;
+}
+
+.popover_component {
+	padding: 0;
+
+	:global {
+		.tippy-content {
+			padding: 0;
+		}
+	}
+}

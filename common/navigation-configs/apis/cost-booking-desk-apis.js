@@ -119,13 +119,13 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'partner',
 	},
-	{ api: 'create_chat_message', access_type: 'private', service_name: 'chat' },
-	{ api: 'list_chat_channels', access_type: 'private', service_name: 'chat' },
+	{ api: 'create_chat_message', access_type: 'private' },
+	{ api: 'list_chat_channels', access_type: 'private' },
 	{ api: 'delete_chat_message', access_type: 'private' },
-	{ api: 'update_chat_message', access_type: 'private', service_name: 'chat' },
+	{ api: 'update_chat_message', access_type: 'private' },
 	{ api: 'get_chat_channel', access_type: 'private' },
 	{ api: 'create_chat_channel', access_type: 'private' },
-	{ api: 'update_chat_channel_seen', access_type: 'private', 	service_name: 'chat'	},
+	{ api: 'update_chat_channel_seen', access_type: 'private' },
 	{
 		api          : 'bulk_update_shipment_services',
 		access_type  : 'private',
@@ -268,7 +268,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_checkout_applicable_promocodes',
+		api          : 'get_checkout_applicable_promocodes',
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
@@ -301,6 +301,16 @@ const apis = [
 		api          : 'create_shipment_additional_service',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api         : 'get_purchase_bills_stats',
+		access_type : 'private',
+		feature     : 'coe_finance',
+	},
+	{
+		api          : 'create_document',
+		access_type  : 'private',
+		service_name : 'bookings',
 	},
 ];
 

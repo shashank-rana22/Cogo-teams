@@ -9,21 +9,26 @@ import AdvancePayment from './AdvancePayment/index.tsx';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities.ts';
 import Dashboard from './Dashboard/index.tsx';
 import Invoices from './Invoices';
+import Payruns from './Payruns';
 import styles from './styles.module.css';
+import Treasury from './Treasury';
 
 const ENTITY_CODE_LENGTH = 1;
-const FILTER_TABS = ['invoices', 'dashboard', 'advance-payment'];
+const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment', 'treasury-chest'];
 
 function AccountPayables() {
 	const { query, push } = useRouter();
-	const [activePayables, setActivePayables] = useState(
-		query?.active_tab || 'dashboard',
-	);
+
 	const profile = useSelector((state) => state);
 	const {
 		profile: { partner },
 	} = profile || {};
 	const { id: partnerId } = partner || {};
+
+	const [activePayables, setActivePayables] = useState(
+		query?.active_tab || 'dashboard',
+	);
+
 	const { loading, entityData = [] } = useListCogoEntities();
 	const entityDataCount = entityData.length;
 
@@ -31,7 +36,7 @@ function AccountPayables() {
 
 	const handleTabChange = (v) => {
 		if (
-			['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)
+			['invoices', 'payruns', 'outstanding'].includes(v)
 		) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
 			return;
@@ -97,13 +102,13 @@ function AccountPayables() {
 						<AdvancePayment activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="payruns" title="PAYRUN">
-						<h1>Payruns</h1>
+						<Payruns activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="OUTSTANDING">
 						<h1>Outstandings</h1>
 					</TabPanel>
 					<TabPanel name="treasury-chest" title="TREASURY">
-						<h1>Treasury</h1>
+						<Treasury currentEntity={activeEntity} setActiveEntity={setActiveEntity} />
 					</TabPanel>
 				</Tabs>
 			</div>

@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
 
@@ -129,7 +130,7 @@ const useEditLineItems = ({
 	};
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	Object.keys(controls?.[INITIAL_STATE]).forEach((key) => {
+	Object.keys(controls?.[GLOBAL_CONSTANTS.zeroth_index]).forEach((key) => {
 		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
 			label      : LABELS[key],

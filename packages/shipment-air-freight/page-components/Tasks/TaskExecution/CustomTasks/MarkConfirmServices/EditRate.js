@@ -3,6 +3,8 @@ import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
+import getDefaultValues from '../../utils/get-default-values';
+
 import EditQuotations from './EditQuotations';
 import useEditQuotations from './EditQuotations/useEditQuotations';
 import getControls from './helper/getControls';
@@ -16,7 +18,7 @@ const EXPORT_INCOTERMS = ['ddp', 'dap', 'dat', 'cpt', 'cip', 'cif', 'cfr'];
 const START_INDEX_FOR_ORIGIN_LOCAL = 0;
 const START_INDEX_FOR_DESTINATION_LOCAL = 2;
 
-function CustomLayout({ localControls, controlForLocal, errors, task }) {
+function CustomLayout({ localControls = {}, controlForLocal = {}, errors = {}, task = {} }) {
 	return (
 		<Layout
 			fields={localControls}
@@ -79,6 +81,7 @@ function EditRate({
 		service_type: task?.service_type,
 		servicesList,
 		subsidiaryService,
+		shipment_data,
 	});
 
 	const requiredControls = requiredRawControls.map((ctrl) => ({
@@ -90,21 +93,28 @@ function EditRate({
 	const localRawControls = getLocalControls(
 		task?.service_type,
 		formattedRate,
+		shipment_data,
 	);
 
-	const { control, handleSubmit, watch } = useForm({ requiredControls });
+	const defaultValues = getDefaultValues(requiredControls);
+
+	const { control, handleSubmit, watch } = useForm({ defaultValues });
 
 	const airServiceFormValues = watch();
+
+	const localsDefaultValues = getDefaultValues(localRawControls);
 
 	const {
 		control: controlForLocal,
 		handleSubmit: handleSubmitLocal,
 		watch: watchForLocal,
-	} = useForm({ localRawControls });
+	} = useForm({ localsDefaultValues });
 
 	const airLocalServiceFormValues = watchForLocal();
 
-	const { control: otherFieldControl, handleSubmit: otherHandleSubmit } = useForm({ otherControls });
+	const otherControlsDefaultValues = getDefaultValues(otherControls);
+
+	const { control: otherFieldControl, handleSubmit: otherHandleSubmit } = useForm({ otherControlsDefaultValues });
 
 	const { reallocationFunc } = useUpdateServiceProvider({
 		handleSubmit,
@@ -171,6 +181,7 @@ function EditRate({
 				<EditQuotations
 					data={editQuote}
 					shipment_id={task?.shipment_id}
+					service_type={task?.service_type}
 					onCancel={onCancel}
 					airServiceFormValues={airServiceFormValues}
 					airLocalServiceFormValues={airLocalServiceFormValues}

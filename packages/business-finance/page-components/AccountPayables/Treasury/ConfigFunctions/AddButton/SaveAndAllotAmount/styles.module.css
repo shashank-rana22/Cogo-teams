@@ -1,0 +1,64 @@
+.container {
+	padding: 20px;
+}
+
+.header_text {
+	font-size: var(--font-size-xl);
+	font-weight: 500;
+}
+
+.sub_container {
+	display: flex;
+	gap: 16px;
+	justify-content: space-around;
+	padding: 8px;
+	background: #f3fafa;
+	border: 1px solid #88cad1;
+	border-radius: 8px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.label_text {
+	margin-bottom: 6px;
+	font-size: var(--font-size-md);
+	line-height: 14px;
+}
+
+.value_text {
+	font-size: var(--font-size-lg);
+	line-height: 16px;
+}
+
+.amount_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.text {
+	padding-bottom: 8px;
+	font-size: var(--font-size-lg);
+	line-height: 16px;
+}
+
+.allot_amount {
+	padding-top: 20px;
+}
+
+.bank {
+	display: flex;
+	flex-direction: column;
+	padding: 8px;
+	border-right: 2px solid #cbd1f8;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}

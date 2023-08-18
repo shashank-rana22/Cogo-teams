@@ -191,7 +191,7 @@ function TicketChat({
 							)}
 				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary {...ticketData} />
+						<TicketSummary {...ticketData} detailsLoading={detailsLoading} />
 					</div>
 				)}
 

@@ -17,12 +17,11 @@ export const INVOICE_FILTER = () => [
 		],
 	},
 	{
-		name        : 'status',
+		name        : 'paymentStatusList',
 		placeholder : 'Payment',
 		size        : 'sm',
-		type        : 'select',
-		caret       : true,
 		isClearable : true,
+		type        : 'multiSelect',
 		options     : [
 			{ value: 'paid', label: 'Paid' },
 			{ value: 'unpaid', label: 'Unpaid' },

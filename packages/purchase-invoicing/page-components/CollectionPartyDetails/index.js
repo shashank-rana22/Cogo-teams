@@ -23,7 +23,10 @@ const EMPTY_TRADE_PARTY_LENGTH = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
 
-const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
+const PURCHASE_INVOICE_SHIPMENT_STATES = ['init', 'awaiting_service_provider_confirmation'];
+
+const INVOICE_SHIPMENT_TYPES = ['air_freight', 'ftl_freight'];
+const ADD_SERVICE_MODALS = ['purchase', 'charge_code'];
 
 const STAKE_HOLDER_TYPES = [
 	'superadmin',
@@ -32,12 +35,19 @@ const STAKE_HOLDER_TYPES = [
 	'cost booking executive',
 	'costbooking_ops',
 	'cost booking manager',
+	'ff cost booking executive',
+	'release_desk',
+	'collection_desk',
 ];
 
-function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, servicesData = {}, fullwidth = false }) {
+function CollectionPartyDetails({
+	collectionParty = {}, refetch = () => {}, servicesData = {},
+	fullwidth = false, AddService = () => {},
+}) {
 	const { user } = useSelector(({ profile }) => ({ user: profile }));
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
+	const [showModal, setShowModal] = useState(false);
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
@@ -50,13 +60,16 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 	const geo = getGeoConstants();
 
 	const serviceProviderConfirmation = (collectionParty.service_charges || []).find(
-		(item) => STATE.includes(item?.detail?.state),
+		(item) => PURCHASE_INVOICE_SHIPMENT_STATES.includes(item?.detail?.state),
 	);
 
 	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
 		&& serviceProviderConfirmation;
 
-	const uploadInvoiceAllowed = shipment_data?.stakeholder_types?.some((ele) => STAKE_HOLDER_TYPES.includes(ele))
+	const uploadInvoiceAllowed = shipment_data?.stakeholders
+		?.some((ele) => STAKE_HOLDER_TYPES.includes(ele?.stakeholder_type))
+		|| shipment_data?.stakeholder_types
+			?.some((ele) => STAKE_HOLDER_TYPES.includes(ele))
 		|| [
 			geo.uuid.super_admin_id,
 			geo.uuid.admin_id,
@@ -153,6 +166,21 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 							) : null}
 						</div>
 						) : null}
+					{INVOICE_SHIPMENT_TYPES.includes(shipment_type) && (
+						<div className={styles.not_added}>
+							<Button
+								size="md"
+								themeType="secondary"
+								className={styles.marginright}
+								onClick={() => setShowModal(
+									shipment_type === 'ftl_freight' ? 'purchase' : 'charge_code',
+								)}
+								disabled={shipment_data?.is_job_closed}
+							>
+								Add Incidental Charges
+							</Button>
+						</div>
+					)}
 				</div>
 				<ServiceTables service_charges={collectionParty?.service_charges} shipment_data={shipment_data} />
 				<div className={styles.totalamount}>
@@ -202,6 +230,19 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 						</Modal.Footer>
 					</Modal>
 				) : null}
+
+				{ADD_SERVICE_MODALS.includes(showModal)
+				&& (
+					<AddService
+						shipmentType={shipment_type}
+						shipmentId={shipment_data?.id}
+						services={SERVICES_LIST}
+						refetch={refetch}
+						source={showModal}
+						setShowChargeCodes={setShowModal}
+						closeModal={setShowModal}
+					/>
+				)}
 
 				{openComparision ? (
 					<ComparisionModal

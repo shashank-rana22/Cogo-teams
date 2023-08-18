@@ -1,15 +1,22 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 import toastApiError from '../../commons/toastApiError.ts';
+
+const convertDate = (dateToConvert) => formatDate({
+	date       : dateToConvert,
+	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	formatType : 'date',
+});
 
 const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 	const { profile } = useSelector((state) => state || {});
 
 	const { startDate, endDate } = date || {};
 	const { businessName, organizationId } = item;
-
-	const convertDate = (dateToConvert) => dateToConvert?.toISOString()?.replace('T', ' ');
 
 	const [
 		{ data, loading },
@@ -35,9 +42,14 @@ const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 					entityCodes : entities,
 				},
 			});
-			const { data: downloadUrl } = response || {};
-			window.open(downloadUrl);
-			setShowLedgerModal(false);
+
+			const { data: responseData } = response || {};
+			const downloadUrl = responseData?.toString();
+
+			if (!isEmpty(downloadUrl)) {
+				window.open(downloadUrl);
+				setShowLedgerModal(false);
+			}
 		} catch (err) {
 			toastApiError(err);
 		}

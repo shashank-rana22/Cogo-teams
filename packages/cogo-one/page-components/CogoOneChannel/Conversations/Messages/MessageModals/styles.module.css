@@ -1,0 +1,18 @@
+.styled_ui_modal_container {
+	:global {
+		.ui_modal_header_container {
+			padding: 10px !important;
+		}
+	}
+}
+
+.modal_header_title {
+	display: flex;
+}
+
+.modal_title {
+	margin-left: 5px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}

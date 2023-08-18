@@ -1,12 +1,17 @@
 .row {
 	display: flex;
+	flex-wrap: wrap;
 	width: 100%;
+	max-height: 72px;
 }
 
 .fieldarray {
+	position: relative;
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
+	margin-top: 20px;
 }
 
 .child {
@@ -16,7 +21,7 @@
 .font_style {
 	padding-left: 4px;
 	margin: 0;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	color: #cb6464;
 }
 
@@ -24,27 +29,63 @@
 	padding: 4px;
 
 	:global {
-		.ui_select_input_placeholder {
-			font-size: 14px;
-			color: #bdbdbd;
+		.ui_input_container {
+			max-height: 32px;
+			border: 1px solid #333;
+
+			.ui_input_control {
+				font-size: var(--font-size-md);
+			}
+
+			.ui_input_control::placeholder {
+				font-size: var(--font-size-md);
+				color: var(--color-secondary-greyscale-3);
+			}
 		}
 
-		.ui_input_control::placeholder {
-			font-size: 14px;
-			color: #bdbdbd;
+		.ui_select_container {
+			margin-right: 4px;
+
+			.ui_select_display_container {
+				max-height: 32px;
+				border: 1px solid #333;
+
+				.ui_select_input_control {
+					font-size: var(--font-size-md);
+
+					.ui_select_input_placeholder {
+						font-size: var(--font-size-md);
+						color: var(--color-secondary-greyscale-3);
+					}
+				}
+			}
+		}
+
+		.ui_select_options_relative_container {
+			.ui_select_options_container {
+				padding: 0;
+
+				.ui_select_option_item {
+					font-size: var(--font-size-md);
+				}
+			}
 		}
 	}
 }
 
 .delete_icon {
-	width: 28px;
-	max-height: 28px;
-	margin-top: 8px;
+	position: absolute;
+	top: 136px;
+	right: 0;
+	width: 20px;
+	height: 20px;
 	cursor: pointer;
+	fill: var(--color-primary-error-red-2);
 }
 
 .child_label {
 	max-height: 16px;
 	margin-bottom: 6px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
+	font-weight: 500;
 }

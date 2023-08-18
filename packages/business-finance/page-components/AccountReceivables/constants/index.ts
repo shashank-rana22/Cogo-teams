@@ -297,6 +297,7 @@ export const SERVICE_PROVIDER = [
 	{ value: 'ENTERPRISE', label: 'ES' },
 	{ value: 'IE', label: 'IE' },
 	{ value: 'CP', label: 'CP' },
+	{ value: 'OTHERS', label: 'OTHERS' },
 ];
 
 export const SHIPMENT_TYPE_OPTIONS = [

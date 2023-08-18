@@ -7,6 +7,7 @@ const functionSubFunctionMapping = {
 		{ label: 'Acquisition', value: 'acquisition' },
 		{ label: 'CP Portfolio', value: 'cp_portfolio' },
 		{ label: 'Customer Operations', value: 'customer_operations' },
+		{ label: 'Lead Convertor', value: 'lead_convertor' },
 	],
 	supply: [
 		{ label: 'Shipping Line', value: 'shipping_line' },
@@ -22,6 +23,10 @@ const functionSubFunctionMapping = {
 		{ label: 'Booking Desk', value: 'booking_desk' },
 		{ label: 'Post Shipment', value: 'post_shipment' },
 		{ label: 'FinOps', value: 'finops' },
+		{ label: 'Common Customer Operations', value: 'common_customer_operations' },
+		{ label: 'CP Customer Operations', value: 'cp_customer_operations' },
+		{ label: 'Mid Size Customer Operations', value: 'mid_size_customer_operations' },
+		{ label: 'Enterprise Customer Operations', value: 'enterprise_customer_operations' },
 	],
 	finance  : [],
 	training : [

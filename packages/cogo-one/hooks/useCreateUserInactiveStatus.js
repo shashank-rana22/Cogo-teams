@@ -2,11 +2,22 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-function useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal }) {
+import { updateUserLastActivity } from '../helpers/configurationHelpers';
+
+function useCreateUserInactiveStatus({
+	fetchworkPrefernce = () => {},
+	setOpenModal = () => {},
+	agentTimeline = () => {},
+	firestore = {},
+	userId = '',
+	status = '',
+}) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_agent_work_preference',
 		method : 'post',
 	}, { manual: true });
+
+	const updateStatus = status === 'active' ? 'break' : 'active';
 
 	const updateUserStatus = async (data) => {
 		try {
@@ -16,7 +27,9 @@ function useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal }) {
 				},
 			});
 			setOpenModal(false);
+			updateUserLastActivity({ firestore, agent_id: userId, updated_status: updateStatus });
 			Toast.success('succesfully updated your status');
+			agentTimeline();
 			fetchworkPrefernce();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

@@ -1,117 +1,81 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
-import getFileAttributes from '../../../../../utils/getFileAttributes';
+import useGetMessages from '../../../../../hooks/useGetMessages';
 
 import Footer from './Footer';
 import MessagesThread from './MessagesThread';
 import styles from './styles.module.css';
 
-const SET_TIME_OUT = 200;
-const DISTANCE_FROM_TOP = 0;
-const LAST_VALUE = 1;
+const DISTANCE_FROM_TOP = 10;
+const TIMEOUT_FOR_SCROLL = 200;
 
 function MessageConversations({
-	messagesData = [],
-	draftMessage = '',
-	setDraftMessages = () => {},
-	sendChatMessage,
-	draftUploadedFile : finalUrl = '',
-	setDraftUploadedFiles = () => {},
-	getNextData,
-	setOpenModal,
-	activeMessageCard,
+	firestore = {},
+	setOpenModal = () => {},
+	activeMessageCard = {},
 	suggestions = [],
-	uploading,
-	setUploading,
 	hasPermissionToEdit = false,
-	firstLoadingMessages,
-	loadingPrevMessages,
-	sentQuickSuggestions = () => {},
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
-	lastPage = false,
-	messageLoading = false,
 	formattedData = {},
 	setRaiseTicketModal = () => {},
-	canMessageOnBotSession,
+	canMessageOnBotSession = false,
 	viewType = '',
+	hasNoFireBaseRoom = false,
+	setModalType = () => {},
+	activeTab = {},
+	mailProps = {},
+	activeChatCollection = {},
+	newUserRoomLoading = false,
+	setMailActions = () => {},
+	mailActions = {},
+	actionType = '',
+	assignLoading = false,
+	assignChat = () => {},
 }) {
-	const messageRef = useRef();
-	const { id = '', channel_type = '' } = activeMessageCard;
+	const conversationsDivRef = useRef(null);
 
-	const urlArray = decodeURI(finalUrl)?.split('/');
-	const fileName = urlArray?.[(urlArray.length || GLOBAL_CONSTANTS.zeroth_index) - LAST_VALUE] || '';
+	const { id = '', channel_type = '' } = activeMessageCard || {};
 
-	const { uploadedFileName, fileIcon } = getFileAttributes({ finalUrl, fileName });
-
-	const scrollToBottom = () => {
-		setTimeout(() => {
-			messageRef.current?.scrollTo({
-				top   	  : messageRef.current.scrollHeight,
-				behavior : 'smooth',
-			});
-		}, SET_TIME_OUT);
-	};
-
-	const handleProgress = (val) => {
-		setUploading((prev) => ({ ...prev, [id]: val }));
-	};
+	const {
+		getNextData = () => {}, lastPage, firstLoadingMessages,
+		messagesData, loadingPrevMessages,
+	} = useGetMessages({ activeChatCollection, id, viewType, hasNoFireBaseRoom });
 
 	const handleScroll = (e) => {
-		const bottom = e.target.scrollTop === DISTANCE_FROM_TOP;
+		const bottom = e.target.scrollTop <= DISTANCE_FROM_TOP;
 		if (bottom && !lastPage && !loadingPrevMessages) {
 			getNextData();
 		}
 	};
 
-	const openInstantMessages = () => {
-		setOpenModal({
-			type : 'instant_messages',
-			data : {
-				updateMessage: (val) => {
-					setDraftMessages((p) => ({ ...p, [id]: val }));
-					setOpenModal({ type: null, data: {} });
-				},
-				sendCommunicationTemplate,
-				communicationLoading,
-				channel_type,
-			},
-		});
-	};
-
-	const chatViewConditon = () => {
-		if (
-			((finalUrl) || uploading?.[id])
-			&& !isEmpty(suggestions)
-		) {
-			return 'file_present_suggestions';
-		}
-		if ((finalUrl) || uploading?.[id]) {
-			return 'file_present_nosuggestions';
-		}
-		if (!isEmpty(suggestions)) {
-			return 'suggestions_exist';
-		}
-		return 'no_suggestions';
-	};
+	const scrollToLastMessage = useCallback(() => {
+		setTimeout(() => {
+			conversationsDivRef.current?.scrollTo({
+				top   	  : conversationsDivRef.current.scrollHeight,
+				behavior : 'smooth',
+			});
+		}, TIMEOUT_FOR_SCROLL);
+	}, []);
 
 	useEffect(() => {
-		scrollToBottom();
-	}, [firstLoadingMessages, id]);
+		scrollToLastMessage();
+	}, [scrollToLastMessage, id, firstLoadingMessages]);
 
 	return (
-		<div className={styles.styled_div}>
+		<div
+			key={id}
+			className={cl`${styles.container} ${channel_type === 'email' ? styles.mail_container : ''}`}
+		>
 			<div
-				key={id}
-				className={cl`${styles.container} ${styles[chatViewConditon()]}`}
+				className={styles.message_container}
 				onScroll={handleScroll}
-				ref={messageRef}
+				ref={conversationsDivRef}
 			>
-				{firstLoadingMessages ? (
+				{(newUserRoomLoading || firstLoadingMessages) ? (
 					<div className={styles.flex_div}>
 						<Image
 							src={GLOBAL_CONSTANTS.image_url.cogo_one_loader}
@@ -130,31 +94,41 @@ function MessageConversations({
 						activeMessageCard={activeMessageCard}
 						formattedData={formattedData}
 						setRaiseTicketModal={setRaiseTicketModal}
+						hasNoFireBaseRoom={hasNoFireBaseRoom}
+						setModalType={setModalType}
+						activeTab={activeTab}
+						viewType={viewType}
+						setMailActions={setMailActions}
+						mailActions={mailActions}
+						firestore={firestore}
+						scrollToBottom={scrollToLastMessage}
+						hasPermissionToEdit={hasPermissionToEdit}
+						ref={conversationsDivRef}
+						mailProps={mailProps}
 					/>
-				) }
+				)}
 			</div>
-
-			<Footer
-				draftMessage={draftMessage}
-				sentQuickSuggestions={sentQuickSuggestions}
-				messageLoading={messageLoading}
-				canMessageOnBotSession={canMessageOnBotSession}
-				handleProgress={handleProgress}
-				openInstantMessages={openInstantMessages}
-				hasPermissionToEdit={hasPermissionToEdit}
-				suggestions={suggestions}
-				scrollToBottom={scrollToBottom}
-				setDraftMessages={setDraftMessages}
-				id={id}
-				sendChatMessage={sendChatMessage}
-				setDraftUploadedFiles={setDraftUploadedFiles}
-				uploading={uploading}
-				uploadedFileName={uploadedFileName}
-				fileIcon={fileIcon}
-				finalUrl={finalUrl}
-				formattedData={formattedData}
-				viewType={viewType}
-			/>
+			<div className={styles.omni_channel_text_footer}>
+				{(channel_type !== 'email' || actionType) && (
+					<Footer
+						canMessageOnBotSession={canMessageOnBotSession}
+						hasPermissionToEdit={hasPermissionToEdit}
+						suggestions={suggestions}
+						formattedData={formattedData}
+						viewType={viewType}
+						firestore={firestore}
+						activeChatCollection={activeChatCollection}
+						setOpenModal={setOpenModal}
+						sendCommunicationTemplate={sendCommunicationTemplate}
+						communicationLoading={communicationLoading}
+						assignChat={assignChat}
+						assignLoading={assignLoading}
+						scrollToBottom={scrollToLastMessage}
+						mailActions={mailActions}
+						setMailActions={setMailActions}
+					/>
+				)}
+			</div>
 		</div>
 	);
 }

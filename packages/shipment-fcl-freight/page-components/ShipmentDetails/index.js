@@ -34,48 +34,44 @@ function ShipmentDetails() {
 
 	const { kamLoggedIn } = userLoggedIn({ shipment_data });
 
-	switch (activeStakeholder) {
-		case 'booking_agent':
-			if (kamLoggedIn === 'booking_agent') {
-				return <Kam get={get} activeStakeholder={activeStakeholder} />;
-			}
-			return <DKam get={get} activeStakeholder="consignee_shipper_booking_agent" />;
+	const stakeholdersComponents = {
+		booking_agent            : kamLoggedIn === 'booking_agent' ? Kam : DKam,
+		sales_agent              : Kam,
+		booking_desk             : BookingDesk,
+		booking_desk_manager     : BookingDeskManager,
+		costbooking_ops          : CostBookingDesk,
+		costbooking_manager      : CostBookingDesk,
+		lastmile_ops             : LastMileDesk,
+		lastmile_ops_manager     : LastMileDeskManager,
+		document_desk            : DocumentDesk,
+		document_desk_manager    : DocumentDesk,
+		document_control_manager : DocumentDesk,
+		document_control_lead    : DocumentDesk,
+		supplier_relations_head  : DocumentDesk,
+		so1_so2_ops              : So1So2Ops,
+		admin                    : Superadmin,
+		superadmin               : Superadmin,
+		credit_control           : Superadmin,
+		prod_process_owner       : Superadmin,
+		tech_super_admin         : Superadmin,
+		corporate_owner          : Superadmin,
+		operation_manager        : Superadmin,
+		coe_head                 : Superadmin,
+		finance_superadmin       : Superadmin,
+		finops_manager           : Superadmin,
+		so1_revenue_desk         : Superadmin,
+		default                  : () => (
+			<h1 className={styles.not_allowed}>
+				You are not allowed to visit this page!
+			</h1>
+		),
+	};
 
-		case 'booking_desk':
-			return <BookingDesk get={get} activeStakeholder={activeStakeholder} />;
-		case 'booking_desk_manager':
-			return <BookingDeskManager get={get} activeStakeholder={activeStakeholder} />;
+	const ComponentToRender = stakeholdersComponents[activeStakeholder] || stakeholdersComponents.default;
 
-		case 'costbooking_ops':
-		case 'costbooking_manager':
-			return <CostBookingDesk get={get} activeStakeholder={activeStakeholder} />;
-
-		case 'lastmile_ops':
-			return <LastMileDesk get={get} activeStakeholder={activeStakeholder} />;
-		case 'lastmile_ops_manager':
-			return <LastMileDeskManager get={get} activeStakeholder={activeStakeholder} />;
-
-		case 'document_desk':
-		case 'document_desk_manager':
-			return <DocumentDesk get={get} activeStakeholder={activeStakeholder} />;
-		case 'so1_so2_ops':
-			return <So1So2Ops get={get} activeStakeholder={activeStakeholder} />;
-
-		case 'admin':
-		case 'superadmin':
-		case 'credit_control':
-		case 'prod_process_owner':
-		case 'tech_super_admin':
-		case 'corporate_owner':
-		case 'operation_manager':
-			return <Superadmin get={get} activeStakeholder={activeStakeholder} />;
-		default:
-			return (
-				<h1 className={styles.not_allowed}>
-					You are not allowed to visit this page!
-				</h1>
-			);
-	}
+	return (
+		<ComponentToRender get={get} activeStakeholder={activeStakeholder} />
+	);
 }
 
 export default ShipmentDetails;

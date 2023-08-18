@@ -41,7 +41,8 @@ const quotasCreateControls = [
 		params      : {
 			permissions_data_required : false,
 			filters                   : {
-				partner_entity_types: ['cogoport'],
+				status               : true,
+				partner_entity_types : ['cogoport'],
 			},
 		},
 		rules: {

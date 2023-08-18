@@ -1,62 +1,31 @@
-import { cl, Button, Modal } from '@cogoport/components';
+import Layout from '@cogoport/air-modules/components/Layout';
+import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import {
-	DatepickerController,
-	InputController,
-	SelectController,
-	RadioGroupController,
-	useForm,
-	AsyncSelectController,
-} from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import { useContext } from 'react';
 
 import controls from '../../configurations/shipment-cancel-controls';
+import useCancelEBookingShipment from '../../hooks/useCancelEBookingShipment';
 import useUpdateShipment from '../../hooks/useUpdateShipment';
 
 import getCancelShipmentPayload from './getCancelShipmentPayload';
 import getShowElements from './getShowElements';
 import styles from './styles.module.css';
 
-const CONTROL_TYPE_MAPPING = {
-	radio        : RadioGroupController,
-	datepicker   : DatepickerController,
-	text         : InputController,
-	select       : SelectController,
-	number       : InputController,
-	async_select : AsyncSelectController,
-};
+export default function CancelShipment({ setShow = () => {} }) {
+	const { shipment_data, stakeholderConfig = {} } = useContext(ShipmentDetailContext);
 
-function FormElement({ name, label, show, errors, type, ...rest }) {
-	if (name === 'better_quotation_label' && show) {
-		return (
-			<div className={cl`${styles.form_element} ${styles[rest.className]}`}>
-				{label ? <div className={styles.label}>{label}</div> : null}
-			</div>
-		);
-	}
-
-	const Element = CONTROL_TYPE_MAPPING[type];
-
-	return Element && show ? (
-		<div className={cl`${styles.form_element} ${styles[rest.className]}`}>
-			{label ? <div className={styles.label}>{label}</div> : null}
-
-			<Element name={name} type={type} {...rest} />
-
-			{errors[name] ? <div className={styles.error_msg}>{errors[name].message}</div> : null}
-		</div>
-	) : null;
-}
-
-export default function CancelShipment({ setShow }) {
 	const closeModal = () => setShow(false);
+
+	const { cancelEBooking, loading: cancelEBookingLoading } = useCancelEBookingShipment(shipment_data);
 
 	const { loading: updateShipmentLoading, updateShipment } = useUpdateShipment({
 		refetch        : closeModal,
 		successMessage : 'Shipment has been cancelled!!',
+		cancelEBooking,
+		shipment_data,
 	});
 
-	const { shipment_data, stakeholderConfig = {} } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
 
 	const role = stakeholderConfig?.cancel_shipment?.role || '';
@@ -87,21 +56,20 @@ export default function CancelShipment({ setShow }) {
 
 			<Modal.Body className={styles.form_container}>
 				{modifiedControls?.length
-					? (modifiedControls || []).map((ctrl) => (
-						<FormElement
-							key={ctrl.name}
-							show={showElements[ctrl.name]}
+					?				(
+						<Layout
+							fields={modifiedControls}
 							control={control}
 							errors={errors}
-							{...ctrl}
+							showElements={showElements}
 						/>
-					))
+					)
 					: <div className={styles.no_reasons_found}>No cancellation reasons found...</div> }
 			</Modal.Body>
 
 			<Modal.Footer className={styles.modal_footer}>
 				<Button
-					disabled={updateShipmentLoading}
+					disabled={updateShipmentLoading || cancelEBookingLoading}
 					themeType="secondary"
 					onClick={closeModal}
 				>
@@ -109,7 +77,7 @@ export default function CancelShipment({ setShow }) {
 				</Button>
 
 				<Button
-					disabled={updateShipmentLoading}
+					disabled={updateShipmentLoading || cancelEBookingLoading}
 					onClick={handleSubmit(onSubmit)}
 				>
 					Submit

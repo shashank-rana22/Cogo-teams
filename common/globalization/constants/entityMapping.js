@@ -4,21 +4,20 @@ import {
 	IcCCountryNetherland,
 	IcCCountrySingapore,
 	IcCCountryVietnam,
+	IcCIndonesia,
+	IcCThailand,
+	IcCChina,
 } from '@cogoport/icons-react';
 
 const ENTITY_MAPPING = {
 	101: {
 		country_code        : 'IN',
-		name                : 'COGO FREIGHT PVT LTD',
+		name                : 'COGO FREIGHT PVT LTD.',
 		id                  : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['compliance', 'post_to_sage'],
-		labels              : {
-			irn_label: 'IRN',
-		},
-		GSTIN: ['27AAGCC4470P1Z5', 'MUMC22090F', 'MUMC26454B'],
+		GSTIN               : ['27AAGCC4470P1Z5', 'MUMC22090F', 'MUMC26454B'],
 	},
 	201: {
 		country_code        : 'NL',
@@ -27,11 +26,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryNetherland,
 		currency            : 'EUR',
 		default_entity_code : '201',
-		feature_supported   : ['cogo_books', 'post_to_sage'],
-		labels              : {
-			irn_label: 'IRN',
-		},
-		GSTIN: [],
+		GSTIN               : [],
 	},
 	301: {
 		country_code        : 'IN',
@@ -40,11 +35,8 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance'],
-		labels              : {
-			irn_label: 'IRN',
-		},
-		GSTIN: ['06AAICC8838P1ZV', '07AAACF2136K1ZT', '27AAACF2136K1ZR', '27AAICC8838P1ZR', 'MUMC26454B'],
+		GSTIN               : ['06AAICC8838P1ZV', '07AAACF2136K1ZT',
+			'27AAACF2136K1ZR', '27AAICC8838P1ZR', 'MUMC26454B'],
 	},
 	401: {
 		country_code        : 'SG',
@@ -53,11 +45,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountrySingapore,
 		currency            : 'SGD',
 		default_entity_code : '401',
-		feature_supported   : ['cogo_books', 'post_to_sage'],
-		labels              : {
-			irn_label: 'IRN',
-		},
-		GSTIN: [],
+		GSTIN               : [],
 	},
 	501: {
 		country_code        : 'VN',
@@ -66,15 +54,34 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryVietnam,
 		default_entity_code : '501',
 		currency            : 'VND',
-		feature_supported   : ['cogo_books',
-			'freight_sales_invoice_restricted_enitity',
-			'cancel_e_invoice',
-			'upload_invoice',
-		],
-		labels: {
-			irn_label: 'E-invoice',
-		},
-		GSTIN: [],
+		GSTIN               : [],
+	},
+	601: {
+		country_code        : 'TH',
+		name                : 'Cogoport Thailand',
+		id                  : '6d92cf58-3392-44c3-8e1b-09192f98f8be',
+		icon                : IcCThailand,
+		default_entity_code : '601',
+		currency            : 'THB',
+		GSTIN               : [],
+	},
+	701: {
+		country_code        : 'ID',
+		name                : 'Cogoport Indonesia',
+		id                  : 'ef9a7145-b1b6-46ff-8de7-a348de635574',
+		icon                : IcCIndonesia,
+		default_entity_code : '701',
+		currency            : 'IDR',
+		GSTIN               : [],
+	},
+	801: {
+		country_code        : 'CN',
+		name                : 'Cogoport China',
+		id                  : 'ff9a7145-b1b6-46ff-8de7-a348de635574',
+		icon                : IcCChina,
+		default_entity_code : '81',
+		currency            : 'CNY',
+		GSTIN               : [],
 	},
 };
 

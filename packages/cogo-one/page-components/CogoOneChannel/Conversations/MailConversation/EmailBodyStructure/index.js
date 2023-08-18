@@ -2,9 +2,9 @@ import { Placeholder, Avatar } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import styles from './styles.module.css';
+import getUserNameFromEmail from '../../../../../helpers/getUserNameFromEmail';
 
-const GET_FIRST_TWO_ELEMENTS = 2;
+import styles from './styles.module.css';
 
 function RenderLoader() {
 	return (
@@ -36,9 +36,7 @@ function EmailBodyStructure({
 	const { emailAddress = {} } = sender || {};
 	const { name = '', address = '' } = emailAddress || {};
 
-	const userName = name.replace('.', ' ');
-
-	const avatarName = userName.split(' ', GET_FIRST_TWO_ELEMENTS).join(' ');
+	const { shortName, userName } = getUserNameFromEmail({ query: name });
 
 	const RECIPIENT_MAPPING = [
 		{ label: 'To', value: recipientData },
@@ -61,7 +59,7 @@ function EmailBodyStructure({
 			<div className={styles.body_header}>
 				<div>
 					<Avatar
-						personName={avatarName}
+						personName={shortName}
 						size="46px"
 					/>
 				</div>

@@ -1,8 +1,10 @@
 import { useForm } from '@cogoport/forms';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import useListFieldServiceOpsDetails from '../../../../../../hooks/useListFieldServiceOpsDetails';
 import getDefaultValues from '../../../utils/get-default-values';
 import getControl from '../controls';
 
@@ -15,8 +17,8 @@ const FIRST_INDEX = 1;
 const SECOND_INDEX = 2;
 const EWAY_BILL_LENGTH = 12;
 
-Object.values(GLOBAL_CONSTANTS.cogoport_entities).map((value) => (
-	value.feature_supported.includes('ftl_task_date_validation')
+Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]) => (
+	ENTITY_FEATURE_MAPPING[key].feature_supported.includes('ftl_task_date_validation')
 		&& ENTITY_CODE.push(value.id)
 ));
 
@@ -38,6 +40,10 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 		}
 		return null;
 	};
+
+	const { list = [], loading = false } = useListFieldServiceOpsDetails({
+		shipment_id: shipment_data?.id,
+	});
 
 	const {
 		control,
@@ -102,7 +108,32 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 		});
 	}
 
+	useEffect(() => {
+		if (!isEmpty(list)) {
+			const truckValues = (services || []).reduce((acc, item) => {
+				if (item?.service_type !== 'subsidiary_service') {
+					const truckExist = list?.find(
+						(listItem) => (item?.truck_number)?.toLowerCase() === (listItem?.truck_number)?.toLowerCase(),
+					) || {};
+					if (isEmpty(truckExist)) {
+						acc.push({ truck_number: item?.id });
+					} else {
+						truckExist?.eway_bill_images?.forEach((eway_bill_item) => {
+							acc.push({
+								truck_number : item?.id,
+								url          : eway_bill_item,
+							});
+						});
+					}
+				}
+				return acc;
+			}, []);
+			setValue('documents', truckValues);
+		}
+	}, [list, services, setValue]);
+
 	return {
+		loading,
 		finalDoc,
 		ewayBillData,
 		fields,

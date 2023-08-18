@@ -1,0 +1,10 @@
+.modal_container {
+	top: 50px !important;
+
+	:global {
+		.ui_modal_body_container {
+			height: 70vh;
+			max-height: none !important;
+		}
+	}
+}

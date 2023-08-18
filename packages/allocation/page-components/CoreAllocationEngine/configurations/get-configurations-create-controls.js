@@ -25,7 +25,8 @@ const getCreateConfigurationsControls = ({
 			params      : {
 				permissions_data_required : false,
 				filters                   : {
-					partner_entity_types: ['cogoport'],
+					status               : true,
+					partner_entity_types : ['cogoport'],
 				},
 			},
 			rules: {
@@ -118,6 +119,7 @@ const getCreateConfigurationsControls = ({
 			label       : 'Locking Period (Days)',
 			placeholder : 'Enter Number of Days',
 			type        : 'number',
+			min         : 0,
 			rules       : {
 				required: 'Locking Period is Required',
 			},
@@ -127,6 +129,7 @@ const getCreateConfigurationsControls = ({
 			label       : 'Cooling Period (Days)',
 			placeholder : 'Enter Number of Days',
 			type        : 'number',
+			min         : 0,
 			rules       : {
 				required: 'Cooling Period is Required',
 			},

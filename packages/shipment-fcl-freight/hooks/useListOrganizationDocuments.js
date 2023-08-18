@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useListOrganizationDocuments = ({ defaultFilters = {}, defaultParams = {} }) => {
+const useListOrganizationDocuments = ({ defaultFilters = {}, defaultParams = {}, orgDocService = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_organization_documents',
 		method : 'GET',
@@ -24,7 +24,7 @@ const useListOrganizationDocuments = ({ defaultFilters = {}, defaultParams = {} 
 
 	useEffect(() => {
 		getList();
-	}, [getList]);
+	}, [getList, orgDocService]);
 
 	return {
 		data,

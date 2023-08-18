@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -8,6 +9,8 @@ import Form from '../form';
 import controls from './controls';
 import styles from './styles.module.css';
 
+const INDEX = 1;
+
 function UploadHbl(props) {
 	const { docs, bls_count, primaryService, task, refetchDocs } = props || {};
 
@@ -15,15 +18,15 @@ function UploadHbl(props) {
 	const [urls, setUrls] = useState([]);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_shipment_document',
+		url    : 'fcl_freight/create_document',
 		method : 'POST',
 	}, { manual: true });
 
 	const uploadBills = async (values) => {
-		const documents = [];
+		const DOCUMENTS = [];
 
 		values?.forEach((item) => {
-			documents.push({
+			DOCUMENTS.push({
 				file_name    : item?.url?.fileName,
 				document_url : item?.url?.finalUrl,
 				data         : {
@@ -41,10 +44,8 @@ function UploadHbl(props) {
 			uploaded_by_org_id : task?.organization_id,
 			service_id         : task?.service_id,
 			service_type       : task.service_type,
-			pending_task_id:
-			task?.service_type === 'lcl_freight_service' ? task?.id : undefined,
-			document_type: 'draft_house_bill_of_lading',
-			documents,
+			document_type      : 'draft_house_bill_of_lading',
+			documents          : DOCUMENTS,
 		};
 
 		await trigger({ data: body });
@@ -53,27 +54,27 @@ function UploadHbl(props) {
 	};
 
 	const handleSubmit = async () => {
-		const payload = [];
+		const PAY_LOAD = [];
 		const validationFlags = await Promise.all(formRefs.current.map(({ formTrigger }) => formTrigger()));
 		const isFormValid = validationFlags.every((valid) => valid);
 
 		if (isFormValid) {
 			formRefs.current.forEach(({ getFormValues }) => {
 				const val = getFormValues();
-				payload.push(val);
+				PAY_LOAD.push(val);
 			});
-			uploadBills(payload);
+			uploadBills(PAY_LOAD);
 		}
 	};
 
 	useEffect(() => {
-		const newUrls = [];
+		const NEW_URLS = [];
 
 		docs?.forEach((item, i) => {
-			newUrls[i] = `${item?.document_url}`;
+			NEW_URLS[i] = `${item?.document_url}`;
 		});
 
-		setUrls(newUrls);
+		setUrls(NEW_URLS);
 	}, [docs]);
 
 	return (
@@ -82,17 +83,17 @@ function UploadHbl(props) {
 				.fill(null)
 				.map((n, i) => (
 					<form className={styles.view_and_form} key={uuid()}>
-						{urls?.[i]?.length > 0 ? (
+						{urls?.[i]?.length > GLOBAL_CONSTANTS.zeroth_index ? (
 							<Button
 								onClick={() => {
 									window.open(urls[i], '_blank');
 								}}
 								size="sm"
-								id={`bm_pt_bl_upload_view_bl_${i + 1}`}
+								id={`bm_pt_bl_upload_view_bl_${i + INDEX}`}
 							>
 								View HBL
 								&nbsp;
-								{i + 1}
+								{i + INDEX}
 							</Button>
 						) : (
 							<Form
