@@ -46,14 +46,14 @@ function Card({
 				/>
 			</div>
 
-			{showEmailModal && (
+			{showEmailModal ? (
 				<ViewEmailContent
 					taskId={task?.id}
 					taskName={task?.label}
 					onCancel={() => setShowEmailModal(false)}
 					showEmailModal={showEmailModal}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

@@ -26,7 +26,7 @@ function ViewEmailContent({ taskId = '', taskName = '', onCancel = () => {}, sho
 					</div>
 				) : (
 					<>
-						{!isEmpty(list) && <MailStatus list={list} />}
+						{!isEmpty(list) ? <MailStatus list={list} /> : null}
 
 						<TemplateModalContent list={list} />
 					</>

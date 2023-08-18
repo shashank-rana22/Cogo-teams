@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 const useListCommunications = ({ taskId = '' }) => {
 	const [{ loading = false, data }, trigger] = useRequest({
-		url    : 'list_communications',
+		url    : '/list_communications',
 		method : 'GET',
 		params : {
 			filters: {

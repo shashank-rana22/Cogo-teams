@@ -20,7 +20,7 @@ const PRIORITY_ARRAY = [
 const NOT_SUCCESS = ['spammed', 'blocked'];
 
 function MailStatus({ list = [] }) {
-	const renderTemplate = list[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const renderTemplate = list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const STATUS = {};
 
@@ -37,11 +37,7 @@ function MailStatus({ list = [] }) {
 		return null;
 	}
 
-	let isSuccess = true;
-
-	if (NOT_SUCCESS.includes(STATUS.key)) {
-		isSuccess = false;
-	}
+	const isSuccess = !NOT_SUCCESS.includes(STATUS.key);
 
 	return (
 		<div
