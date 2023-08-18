@@ -1,4 +1,5 @@
 import { Placeholder, Tooltip, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDoubleLeft } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
 
@@ -10,11 +11,12 @@ import styles from './styles.module.css';
 function RoleDetails({
 	loading = false,
 	roleData = {},
+	activeNavsLoading = false,
 	onImport = () => {},
 	getRole = () => {},
+	activeNavs = [],
 }) {
 	const {
-		permissions = [],
 		name = '',
 		remarks: descriptions = '',
 		stakeholder_type = '',
@@ -50,11 +52,11 @@ function RoleDetails({
 	const isImported = !!importedPermissions;
 
 	let importPermissionsButton = null;
-	if (loading) {
+	if (activeNavsLoading) {
 		importPermissionsButton = (
 			<Placeholder height="40px" width="100%" />
 		);
-	} else if (permissions?.length === 0) {
+	} else if ((activeNavs || []).length === GLOBAL_CONSTANTS.zeroth_index) {
 		importPermissionsButton = (
 			<Tooltip
 				placement="top"

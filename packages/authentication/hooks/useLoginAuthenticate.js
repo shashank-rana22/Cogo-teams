@@ -1,10 +1,11 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
+import { useAuthRequest } from '@cogoport/request';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { getCookie, setCookie, isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
 import redirections from '../utils/redirections';
@@ -15,6 +16,9 @@ const COOKIE_EXPIRY = -1;
 
 const useLoginAuthenticate = () => {
 	const router = useRouter();
+
+	const { t } = useTranslation(['login']);
+
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
 	const dispatch = useDispatch();
@@ -27,20 +31,20 @@ const useLoginAuthenticate = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const [{ loading: sessionLoading }, triggerSession] = useRequest({
+	const [{ loading: sessionLoading }, triggerSession] = useAuthRequest({
 		url    : '/get_user_session',
 		method : 'get',
 	}, { manual: true });
 
-	const [{ loading: userSessionMappingLoading }, triggerUserSessionMapping] = useRequest({
+	const [{ loading: userSessionMappingLoading }, triggerUserSessionMapping] = useAuthRequest({
 		url    : '/get_user_session_mappings',
 		method : 'get',
-	});
+	}, { manual: true });
 
-	const [{ loading: updateSessionMappingLoading }, triggerUpdateSessionMapping] = useRequest({
+	const [{ loading: updateSessionMappingLoading }, triggerUpdateSessionMapping] = useAuthRequest({
 		url    : '/update_parent_and_child_user_session_mappings',
 		method : 'post',
-	});
+	}, { manual: true });
 
 	const getUserSessionMappings = async () => {
 		try {
@@ -118,7 +122,7 @@ const useLoginAuthenticate = () => {
 			}
 
 			if (is_already_added_email && source === 'add_account') {
-				Toast.error('Cannot login with already active account');
+				Toast.error(t('login:already_login_toast_error'));
 
 				return;
 			}
@@ -160,7 +164,7 @@ const useLoginAuthenticate = () => {
 				window.location.href = '/';
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
+			Toast.error(err?.response?.data.error || t('login:failed_to_login_toast_error'));
 		}
 	};
 

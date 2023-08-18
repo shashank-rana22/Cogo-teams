@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 const DEFAULT_DATE_OF_MONTH = 1;
-const WEEK_LAST_NUMBER = 6;
+const WEEK_LAST_NUMBER = 7;
 const WEEK_COUNT = 7;
 
 export default function useRenderCalender() {

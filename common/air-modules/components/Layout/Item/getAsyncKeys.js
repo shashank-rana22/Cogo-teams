@@ -294,11 +294,11 @@ const OPTIONS = {
 	'partner-roles': {
 		valueKey       : 'id',
 		labelKey       : 'name',
-		asyncKey       : 'list_auth_roles',
+		asyncKey       : 'list_roles',
 		defaultOptions : true,
 		defaultParams  : {
 			filters: {
-				status: 'active',
+				status: true,
 			},
 			page_limit: 200,
 		},

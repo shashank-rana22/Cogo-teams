@@ -2,7 +2,7 @@ import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCError } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import VerticleLine from '../VerticleLine';
@@ -19,15 +19,6 @@ const SUPPLIER_STAKEHOLDERS = [
 	'booking_desk',
 	'booking_desk_manager',
 	'superadmin',
-];
-
-const BL_SHOW_STATUS = [
-	'approved',
-	'released',
-	'surrendered',
-	'delivered',
-	'surrender_pending',
-	'release_pending',
 ];
 
 const PRINTABLE_DOCS = ['draft_house_bill_of_lading'];
@@ -51,16 +42,25 @@ function Content({
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
 	bl_details = [],
+	do_details = [],
 }) {
 	const [siReviewState, setSiReviewState] = useState(false);
 	const [printDoc, setPrintDoc] = useState(false);
 
 	const { data:bl_data } = uploadedItem || {};
-	const isBlUploaded = bl_details?.find((i) => i?.id === bl_data?.bl_detail_id);
-
-	const isBlReleased = BL_SHOW_STATUS.includes(isBlUploaded?.status);
 
 	const tradeType = primary_service?.trade_type;
+
+	const isSeaway = primary_service?.bl_type === 'seaway';
+
+	const isHBLMBL = [
+		'house_bill_of_lading',
+		'bill_of_lading',
+	].includes(uploadedItem?.document_type);
+
+	const isRestrictedExportBlDo = (isHBLMBL && tradeType === 'export' && isSeaway && isEmpty(bl_details));
+	const isRestrictedImportBlDo = (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import'
+	&& isEmpty(do_details));
 
 	const { document_type, state } = uploadedItem;
 
@@ -179,14 +179,9 @@ function Content({
 
 				{isChecked ? (
 					<div className={styles.action_container}>
-						{(!(
-							[
-								'house_bill_of_lading',
-								'bill_of_lading',
-							].includes(uploadedItem?.document_type) && tradeType === 'export'
-						)
-						|| isBlReleased)
-							? (
+						{isRestrictedExportBlDo || isRestrictedImportBlDo
+							? null : (
+
 								<>
 									<Button
 										themeType="link"
@@ -201,7 +196,7 @@ function Content({
 										Download
 									</Button>
 								</>
-							) : null}
+							) }
 
 					</div>
 				) : <GetUploadButton />}

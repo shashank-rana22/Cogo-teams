@@ -5,24 +5,22 @@ import {
 	IcMHome,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import useTransferChat from '../../../../../hooks/useTransferChat';
+import useUpdateUserRoom from '../../../../../hooks/useUpdateUserRoom';
 
-import Assignes from './Assignes';
 import ChatControls from './ChatControls';
 import ChatTransfer from './ChatTransfer';
-import TagsPopOver from './HeaderFuncs';
+import Assignes from './HeaderFuncs/assignes';
+import ShowContent from './HeaderFuncs/showContent';
+import TagsPopOver from './HeaderFuncs/tagsPopOver';
 import RightButton from './RightButton';
-import ShowContent from './ShowContent';
 import styles from './styles.module.css';
 
 function Header({
 	setOpenModal = () => {},
 	formattedData = {},
-	setheaderTags = () => {},
-	headertags = '',
 	updateChat = () => {},
 	loading = false,
 	closeModal = () => {},
@@ -33,11 +31,9 @@ function Header({
 	filteredSpectators = [],
 	activeMessageCard = {},
 	tagOptions = [],
-	supportAgentId = null,
+	supportAgentId = '',
 	showBotMessages = false,
 	userId = '',
-	updateRoomLoading = false,
-	updateUserRoom = () => {},
 	requestForAssignChat = () => {},
 	requestAssignLoading = false,
 	canMessageOnBotSession = false,
@@ -48,7 +44,10 @@ function Header({
 	supplierLoading = false,
 	hasNoFireBaseRoom = false,
 }) {
-	const [isVisible, setIsVisible] = useState(false);
+	const {
+		updateRoomLoading = false,
+		updateUserRoom = () => {},
+	} = useUpdateUserRoom();
 
 	const { requestToJoinGroup, dissmissTransferRequest } = useTransferChat({ firestore, activeMessageCard });
 
@@ -65,7 +64,7 @@ function Header({
 		});
 	};
 
-	const { chat_tags = [] } = activeMessageCard || {};
+	const { chat_tags = [], channel_type: channelType = '' } = activeMessageCard || {};
 
 	const {
 		mobile_no = '',
@@ -87,7 +86,7 @@ function Header({
 	const isManager = managers_ids?.includes(userId);
 
 	return (
-		<div className={styles.outer_container}>
+		<>
 			<div className={styles.container}>
 				<div className={styles.flex_space_between}>
 					<div className={styles.flex}>
@@ -96,11 +95,7 @@ function Header({
 							onClick={() => setActiveTab((prev) => ({ ...prev, data: {} }))}
 						/>
 						<TagsPopOver
-							prevtags={chat_tags}
-							headertags={headertags}
-							setheaderTags={setheaderTags}
-							isVisible={isVisible}
-							setIsVisible={setIsVisible}
+							prevTags={chat_tags}
 							updateChat={updateChat}
 							loading={loading}
 							tagOptions={tagOptions}
@@ -111,6 +106,7 @@ function Header({
 							list={chat_tags}
 							showMorePlacement="right"
 							hasPermissionToEdit={hasPermissionToEdit}
+							updateChat={updateChat}
 						/>
 					</div>
 
@@ -171,12 +167,12 @@ function Header({
 					setOpenModal={setOpenModal}
 					updateChat={updateChat}
 					loading={loading}
+					channelType={channelType}
 					supplierLoading={supplierLoading}
 					hasPermissionToEdit={hasPermissionToEdit}
 					canMessageOnBotSession={canMessageOnBotSession}
 				/>
 			</div>
-
 			<ChatTransfer
 				hasRequestedBy={formattedData?.has_requested_by}
 				dissmissTransferRequest={dissmissTransferRequest}
@@ -186,7 +182,7 @@ function Header({
 				assignLoading={assignLoading}
 				assignChat={assignChat}
 			/>
-		</div>
+		</>
 	);
 }
 

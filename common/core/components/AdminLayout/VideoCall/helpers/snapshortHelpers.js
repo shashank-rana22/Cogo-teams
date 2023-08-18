@@ -54,17 +54,19 @@ export const getCallingRoomData = ({
 	lacalRef.current = onSnapshot(videoCallComingQuery, (querySnapshot) => {
 		const callingRoom = querySnapshot?.docs?.[GLOBAL_CONSTANTS.zeroth_index];
 
-		if (!isEmpty(callingRoom) && !inVideoCall && !callingRoomId) {
-			setCallDetails((prev) => ({
-				...prev,
-				peer_details       : callingRoom?.peer_details,
-				callingRoomDetails : callingRoom,
-				callingRoomId      : callingRoom?.id,
-				callingType        : 'incoming',
-				webrtcTokenRoomId  : callingRoom?.webrtc_token_room_id,
-			}));
-			setCallComing(true);
+		if (isEmpty(callingRoom) || inVideoCall || callingRoomId) {
+			return;
 		}
+
+		setCallDetails((prev) => ({
+			...prev,
+			peer_details       : callingRoom?.peer_details,
+			callingRoomDetails : callingRoom,
+			callingRoomId      : callingRoom?.id,
+			callingType        : 'incoming',
+			webrtcTokenRoomId  : callingRoom?.webrtc_token_room_id,
+		}));
+		setCallComing(true);
 	});
 };
 
@@ -80,11 +82,7 @@ export const getTokenData = ({ webrtcTokenRoomId, callingRoomId, firestore, setW
 		);
 		localTokenSnapshotRef.current = onSnapshot(tokenDocRef, (docp) => {
 			const roomData = docp.data();
-			setWebrtcToken((prev) => ({
-				...prev,
-				peerToken : roomData?.peer_token,
-				userToken : roomData?.user_token,
-			}));
+			setWebrtcToken(roomData);
 		});
 	}
 };

@@ -44,7 +44,6 @@ function Form({
 		destination_port = {},
 		origin_port = {},
 		cargo_details = [],
-		trade_type = '',
 		inco_term = '',
 	} = primary_service;
 

@@ -13,8 +13,8 @@
 .graphs {
 	display: flex;
 	justify-content: space-between;
-	width: 80%;
-	overflow: scroll;
+	width: 72vw;
+	overflow: auto;
 }
 
 .graph_label {
