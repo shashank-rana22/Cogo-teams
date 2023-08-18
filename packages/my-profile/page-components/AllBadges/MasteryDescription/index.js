@@ -1,12 +1,19 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCStar } from '@cogoport/icons-react';
 import { isEmpty, format } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
+const PLACEHOLDER_COUNT = 2;
+const STAR_COUNT = 3;
+
 function MasteryDescription(props) {
+	const { t } = useTranslation(['profile']);
+
 	const { badgeDetailloading = false, badgeDetail } = props;
 
 	const { badge_details = [], mastery_badge_url : unlockedBadges = [] } = badgeDetail || {};
@@ -29,7 +36,7 @@ function MasteryDescription(props) {
 						</div>
 
 						{
-							[1, 2].map((item) => (
+							[...Array(PLACEHOLDER_COUNT).keys()].map((item) => (
 								<div className={styles.label_value} key={item}>
 									<Placeholder width="100%" height="32px" />
 									<Placeholder width="100%" height="32px" style={{ marginTop: '8px' }} />
@@ -63,7 +70,7 @@ function MasteryDescription(props) {
 					height={220}
 					width={380}
 					flexDirection="column"
-					emptyText="Badge Details not found"
+					emptyText={t('profile:badge_details_empty_text')}
 				/>
 			</div>
 		);
@@ -72,7 +79,7 @@ function MasteryDescription(props) {
 	return (
 		<div className={styles.container}>
 			<p className={styles.heading}>
-				{badge_details?.[0]?.badge_name || ''}
+				{badge_details?.[GLOBAL_CONSTANTS.zeroth_index]?.badge_name || ''}
 			</p>
 
 			<div className={styles.display_flex}>
@@ -86,23 +93,23 @@ function MasteryDescription(props) {
 
 				<div className={styles.details}>
 					<div className={styles.details_header}>
-						<p className={styles.label}>Achievement Date</p>
+						<p className={styles.label}>{t('profile:achievement_date')}</p>
 
 						<p className={styles.value}>
 							{badgeDetail.achievement_date
 								? format(badgeDetail.achievement_date, 'dd MMM YYYY')
-								: 'Not achieved yet'}
+								: t('profile:not_achieved_yet')}
 						</p>
 					</div>
 
 					<div className={styles.label_value}>
-						<p className={styles.label}>Number of KAMs with badge</p>
+						<p className={styles.label}>{t('profile:number_with_badge')}</p>
 
 						<p className={styles.value}>{badgeDetail.kam_badge_count}</p>
 					</div>
 
 					<div className={styles.label_value}>
-						<p className={styles.label}>Rarity</p>
+						<p className={styles.label}>{t('profile:rarity')}</p>
 
 						<p className={styles.value}>
 							{badgeDetail.rarity}
@@ -111,15 +118,15 @@ function MasteryDescription(props) {
 					</div>
 
 					<div className={styles.description_container}>
-						<p className={styles.label}>Description</p>
+						<p className={styles.label}>{t('profile:description')}</p>
 
-						<p className={styles.value}>{badge_details?.[0]?.description}</p>
+						<p className={styles.value}>{badge_details?.[GLOBAL_CONSTANTS.zeroth_index]?.description}</p>
 					</div>
 				</div>
 			</div>
 
 			<div className={styles.badges}>
-				<div className={styles.label}>Badges unlocked for mastery</div>
+				<div className={styles.label}>{t('profile:badges_unlocked_mastery')}</div>
 
 				<div className={styles.unlocked_badges}>
 					{unlockedBadges?.map((item) => (
@@ -133,7 +140,7 @@ function MasteryDescription(props) {
 								</div>
 
 								<div className={styles.stars_container}>
-									{[1, 2, 3].map((itm) => (
+									{[...Array(STAR_COUNT).keys()].map((itm) => (
 										<div key={itm}>
 											<IcCStar width={20} height={20} stroke="#FFDF33" />
 										</div>
