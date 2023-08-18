@@ -16,7 +16,7 @@ const COLOR_MAPPING = {
 const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal, is_offer_letter_applicable }) => {
 	const onClickView = (item) => {
 		if (item?.status === 'accepted') {
-			window.open(item?.signed_document_url, '_blank');
+			window.open(item?.signed_document_url || item?.document_url, '_blank');
 		} else setViewCtcBreakupModal(item);
 	};
 
