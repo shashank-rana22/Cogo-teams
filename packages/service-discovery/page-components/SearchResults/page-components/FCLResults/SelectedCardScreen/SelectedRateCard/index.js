@@ -111,7 +111,7 @@ function SelectedRateCard({
 		} else handleBook();
 	};
 
-	if (loading) return <LoadingState />;
+	if (loading && isEmpty(data)) return <LoadingState />;
 
 	if (isEmpty(data)) return null;
 
