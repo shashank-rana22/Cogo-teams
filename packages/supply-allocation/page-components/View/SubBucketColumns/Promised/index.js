@@ -18,18 +18,19 @@ function Promised({ item = {}, control, unregister }) {
 			<div className={styles.edit_container}>
 				<InputNumberController
 					size="xs"
-					placeholder="Extra small"
 					control={control}
-					name={`${item.id}_new_promised_quantity`}
-					value={item.promised}
+					name={`${item.service_provider?.id}_new_promised_quantity`}
+					value={item.allocated_containers}
 				/>
 				<div className={styles.cancel_container}>
-					<IcMCross onClick={() => onClickCancel(`${item?.servcice_provider?.id}_new_promised_quantity`)} />
+					<IcMCross onClick={() => onClickCancel(`${item?.service_provider?.id}_new_promised_quantity`)} />
 				</div>
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<CheckboxController name={`${item?.service_provider?.id}_is_hard_limit`} control={control} />
+					{' '}
+					<span> is Hard Limit</span>
 
-				<CheckboxController name={`${item?.servcice_provider?.id}_is_hard_limit`} control={control} />
-				{' '}
-				<span> is Hard Limit</span>
+				</div>
 
 			</div>
 		);

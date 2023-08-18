@@ -1,9 +1,9 @@
 .edit_container {
-    position: relative;
+	position: relative;
 }
 
 .cancel_container {
-    position: absolute;
-    top: 4px;
-    right: 24px;
+	position: absolute;
+	top: 4px;
+	right: 24px;
 }
