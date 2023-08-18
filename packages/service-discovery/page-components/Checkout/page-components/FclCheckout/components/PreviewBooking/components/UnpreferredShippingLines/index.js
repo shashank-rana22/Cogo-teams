@@ -1,4 +1,4 @@
-import { ChipsController, SelectController } from '@cogoport/forms';
+import { AsyncSelectController, ChipsController } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -25,35 +25,34 @@ function UnpreferredShippingLines({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>Shipping Preference</div>
+			<div className={styles.header}>Unpreferred shipping lines</div>
 
 			<div className={styles.text}>
-				Alternate shipping preference may be considered when your initial option
-				is not available. This will help us make a booking for you without
-				cancellation
+				Unpreferred shipping lines will not be considered for your shipment.
+				This will help us in getting you a better deal.
 			</div>
 
-			<div className={styles.form_container}>
-				<div className={styles.label}>Unpreferred shipping lines</div>
+			<AsyncSelectController
+				control={control}
+				asyncKey="list_operators"
+				name="unpreferred_shipping_lines"
+				multiple
+				className={styles.select}
+				initialCall
+				params={{
+					filters    : { operator_type: 'shipping_line', status: 'active' },
+					page_limit : 100,
+					sort_by    : 'short_name',
+					sort_type  : 'asc',
+				}}
+				rules={{ required: 'This field is Required' }}
+			/>
 
-				<SelectController
-					control={control}
-					asyncKey="list_operators"
-					name="unpreferred_shipping_lines"
-					params={{
-						filters    : { operator_type: 'shipping_line', status: 'active' },
-						page_limit : 100,
-						sort_by    : 'short_name',
-						sort_type  : 'asc',
-					}}
-				/>
-
-				{errors?.unpreferred_shipping_lines?.message ? (
-					<div className={styles.error_message}>
-						{errors?.unpreferred_shipping_lines?.message}
-					</div>
-				) : null}
-			</div>
+			{errors?.unpreferred_shipping_lines?.message ? (
+				<div className={styles.error_message}>
+					{errors?.unpreferred_shipping_lines?.message}
+				</div>
+			) : null}
 
 			<div className={styles.partial_load}>
 				In some rare occasion, we may break the shipment and

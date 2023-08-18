@@ -39,6 +39,11 @@
 	font-weight: 500;
 }
 
+.error_message {
+	font-weight: 400;
+	color: #cb6464;
+}
+
 .partial_load {
 	display: flex;
 	align-items: center;
