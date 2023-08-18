@@ -14,6 +14,13 @@ export const LABEL_MAPPING = {
 	Operationally : 'operational',
 };
 
+export const INFO_CONTENT = {
+	ongoingShipments    : 'Shipments confirmed by suppliers',
+	operationallyClosed : 'Shipments with Operational journey completed',
+	financiallyClosed   : 'Shipments with Financial journey completed',
+	closedShipmentsBar  : 'Profit earned against revenue',
+};
+
 export const TOUR_STEPS = [
 	{
 		selector : '[data-tour="first-step"]',
