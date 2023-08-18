@@ -30,11 +30,11 @@ const getSubBucketColumns = ({ control = {}, unregister }) => {
 		{
 			id       : 'service_provider',
 			Header   : 'SERVICE PROVIDER',
-			accessor : (item) => item.service_provider,
+			accessor : (item) => item?.service_provider?.short_name,
 		},
 		{
-			id       : 'promised',
-			Header   : 'PROMISED',
+			id       : 'Allocated',
+			Header   : 'Allocated',
 			accessor : (item) => (
 				<Promised item={item} control={control} unregister={unregister} />
 			),
@@ -50,14 +50,19 @@ const getSubBucketColumns = ({ control = {}, unregister }) => {
 			accessor: (item) => item.capability,
 		},
 		{
-			id       : 'allocated',
-			Header   : 'ALLOCATED',
+			id       : 'past_allocated',
+			Header   : 'PAST ALLOCATED',
 			accessor : ({ unit = '', percent = '' }) => <Label unit={unit} percent={percent} type="allocated" />,
 		},
 		{
-			id       : 'fulfilled',
-			Header   : 'FULLFILLED',
-			accessor : ({ unit = '', percent = '' }) => <Label unit={unit} percent={percent} type="fulfilled" />,
+			id: 'fulfilled',
+			Header:
+				(
+					<>
+						<div>FULLFILLED</div>
+						<div>(last 4 weeks)</div>
+					</>),
+			accessor: ({ unit = '', percent = '' }) => <Label unit={unit} percent={percent} type="fulfilled" />,
 		},
 		{
 			id     : 'avg_deviation',
@@ -67,7 +72,22 @@ const getSubBucketColumns = ({ control = {}, unregister }) => {
 					<div>FROM BEST RATE</div>
 				</>
 			),
-			accessor: (item) => item.avg_deviation,
+			accessor: ({ avg_deviation_from_best_rate, rolling_shipments }) => (
+				<>
+					<div className={styles.profitability_container}>
+						{avg_deviation_from_best_rate}
+						{' '}
+						%
+					</div>
+
+					<div className={styles.profitability_sub_container}>
+						(
+						{rolling_shipments}
+						{' '}
+						rolling shipments)
+					</div>
+				</>
+			),
 		},
 		{
 			id     : 'avg_rank',
@@ -77,7 +97,19 @@ const getSubBucketColumns = ({ control = {}, unregister }) => {
 					<div> (Cogoport Profitability)</div>
 				</>
 			),
-			accessor: ({ unit = '', percent = '' }) => <Label unit={unit} percent={percent} type="profitability" />,
+			accessor: ({ avg_rate_rank = '', profitability }) => (
+				<>
+					<div className={styles.profitability_container}>
+						{avg_rate_rank}
+					</div>
+
+					<div className={styles.profitability_sub_container}>
+						(Profitability
+						{profitability}
+						)
+					</div>
+				</>
+			),
 		},
 	];
 	return { subBucketColumns };

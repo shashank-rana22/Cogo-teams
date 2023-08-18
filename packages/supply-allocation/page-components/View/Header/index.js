@@ -174,10 +174,10 @@ function Header({ firstSearch }) {
 
 				</div>
 
-				<div style={{ display: 'flex' }}>
+				<div className={styles.flex}>
 
 					<Button
-						style={{ display: 'flex', marginRight: '20px' }}
+						className={styles.cancel_button}
 						onClick={() => setEditMode((prev) => !prev)}
 						themeType="secondary"
 					>

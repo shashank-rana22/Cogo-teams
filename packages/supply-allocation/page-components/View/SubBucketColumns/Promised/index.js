@@ -11,7 +11,7 @@ function Promised({ item = {}, control, unregister }) {
 	return !editPromised
 		? (
 			<div style={{ display: 'flex', justifyContent: 'space-between', padding: '0 10px' }}>
-				{item.promised}
+				{item.allocated_containers}
 				<IcMEdit onClick={() => setEditPromised(true)} />
 			</div>
 		) : (

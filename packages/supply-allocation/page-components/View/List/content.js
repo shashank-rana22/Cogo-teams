@@ -5,12 +5,12 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CustomProgressBar from '../../../commons/CustomProgressBar';
-import StyledTable from '../../../commons/StyledTable';
-import subBucketDummyData from '../../../Dummy Data/sub-bucket-data.json';
+import BucketTable from '../BucketsTable';
 import getSubBucketColumns from '../SubBucketColumns';
 
 function Content({
 	item = {},
+	search_id = '',
 }) {
 	const {
 		bucket_type,
@@ -77,6 +77,7 @@ function Content({
 		const payload = Object.entries(values).map(([key, value]) => ({ [key.split('_')[0]]: value }));
 		console.log('payload:', payload);
 	};
+
 	return (
 		<>
 			<div style={{ display: 'flex' }}>
@@ -122,9 +123,12 @@ function Content({
 
 			{show
 				? (
-					<div style={{ padding: '0 20px', background: '#F9F9F9' }}>
-						<StyledTable columns={subBucketColumns} data={subBucketDummyData} />
-					</div>
+					<BucketTable
+						control={control}
+						unregister={unregister}
+						id={search_id}
+						bucket_type={bucket_type}
+					/>
 				) : null}
 
 		</>

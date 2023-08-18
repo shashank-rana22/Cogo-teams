@@ -23,8 +23,6 @@ function View() {
 	const [firstSearch = {}] = list || [];
 	const {
 		origin_location_id = '',
-		origin_location = {},
-		destination_location = {},
 		destination_location_id = '',
 	} = firstSearch || {};
 
@@ -42,7 +40,7 @@ function View() {
 
 			<PieChartGraphs rollingForecastData={rollingForecastData} />
 
-			<List bucketData={bucketData} />
+			<List bucketData={bucketData} search_id={search_id} />
 		</Fragment>
 	);
 }
