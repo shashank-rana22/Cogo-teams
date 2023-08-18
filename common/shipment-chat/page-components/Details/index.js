@@ -67,9 +67,9 @@ function Details({
 	};
 
 	// formatting Data for hooks
-	const stakeholder = stakeHolderView.split(' ');
-	const stakeholderArray = (stakeholder || []).map((item) => item.replace('@', ''));
-	const conditionArr = stakeholderArray.length && stakeholderArray[GLOBAL_CONSTANTS.zeroth_index]
+	const stakeholder = stakeHolderView?.split(' ');
+	const stakeholderArray = (stakeholder || []).map((item) => item?.replace('@', ''));
+	const conditionArr = stakeholderArray?.length && stakeholderArray?.[GLOBAL_CONSTANTS.zeroth_index]
 	!== '' ? [...stakeholderArray] : [];
 	const filteredArr = (conditionArr || []).map((item) => {
 		if (item === '') {
@@ -91,7 +91,7 @@ function Details({
 
 	visible_to_stakeholders = Array.from(new Set(visible_to_stakeholders?.filter((item) => item !== null)));
 
-	const GroupChannel = filteredArr.length
+	const GroupChannel = filteredArr?.length
 		? {
 			created_by_stakeholder : channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index],
 			source_id              : sourceId,
@@ -132,19 +132,19 @@ function Details({
 		return null;
 	}
 
-	const text = formValues?.message;
-	const contentData = text?.split('\n').length;
+	const handleClick = (event) => {
+		const text = formValues?.message || '';
+		const contentData = text?.split('\n').length;
 
-	const handleClick = (e) => {
-		if (e.keyCode === ENTER_KEY && e.shiftKey && rows < TOTAL_ROWS) {
+		if (event.keyCode === ENTER_KEY && event.shiftKey && rows < TOTAL_ROWS) {
 			setRows(contentData + INITIAL_STATE_ROWS);
 		}
-		if (e.keyCode === ENTER_KEY && !e.shiftKey) {
+		if (event.keyCode === ENTER_KEY && !event.shiftKey) {
 			onCreateMessage();
 			reset();
 		}
-		if (text[text.length - INITIAL_STATE_ROWS] === '\n'
-		&& (e.keyCode === DELETE_KEY_2 || e.keyCode === DELETE_KEY_1)) {
+		if (text?.[text.length - INITIAL_STATE_ROWS] === '\n'
+		&& (event.keyCode === DELETE_KEY_2 || event.keyCode === DELETE_KEY_1)) {
 			const maxRows = contentData - INITIAL_STATE_ROWS;
 			setRows(maxRows > TOTAL_ROWS ? TOTAL_ROWS : maxRows);
 		}
@@ -185,16 +185,16 @@ function Details({
 					)}
 
 					<div className={styles.text_docs_container}>
-						{!isEmpty(formValues?.file) && (
+						{!isEmpty(formValues?.file) ? (
 							<div className={styles.attached_container}>
 								{(formValues?.file || []).map((url) => (
 									<div className={styles.attached_doc} key={url}>
 										<IcMDocument className={styles.icm_doc} />
-										{decodeURIComponent(url?.split('/').pop())}
+										{decodeURIComponent(url?.split('/')?.pop())}
 									</div>
 								))}
 							</div>
-						)}
+						) : null}
 
 						<div className={styles.typing_container}>
 							<Popover

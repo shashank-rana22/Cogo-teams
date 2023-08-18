@@ -42,7 +42,6 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 			<div className={styles.chat_icon}>
 				<Button
 					themeType="linkUi"
-					tabIndex={0}
 					onClick={() => setShow(true)}
 				>
 					{count > GLOBAL_CONSTANTS.zeroth_index && !show

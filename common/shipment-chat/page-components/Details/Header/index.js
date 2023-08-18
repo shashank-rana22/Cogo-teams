@@ -73,7 +73,6 @@ function Header({
 				<div className={styles.close_icon}>
 					<Button
 						themeType="linkUi"
-						tabIndex={0}
 						onClick={() => setShow(false)}
 					>
 						<IcMCross />

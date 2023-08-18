@@ -16,11 +16,11 @@ const evaluateTernary = (val, item, formValues) => {
 	).split(':');
 
 	let returnVal = '';
-	if (source === 'formValue') {
-		returnVal = formValues[conditionKey] === compareValue ? trueVal : falseVal;
-	}
 	if (source === 'item') {
 		returnVal = item[conditionKey] === compareValue ? trueVal : falseVal;
+	}
+	if (source === 'formValue') {
+		returnVal = formValues[conditionKey] === compareValue ? trueVal : falseVal;
 	}
 
 	return returnVal;

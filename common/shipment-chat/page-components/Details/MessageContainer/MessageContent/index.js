@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
 	const getSplitted = (str) => {
-		const all = str.split('\\n');
+		const all = str?.split('\\n');
 		let res = '';
 		(all || []).forEach((ele) => {
 			res += `${ele}\n`;
@@ -55,11 +55,10 @@ function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
 							</div>
 
 							<Button
-								tabIndex={0}
 								themeType="link"
 								onClick={() => handleClick(msg)}
 							>
-								{msg?.important === true ? (
+								{msg?.important ? (
 									<IcCStar width="1.3em" height="1.3em" />
 								) : (
 									<IcMStar width="1.3em" height="1.3em" />
@@ -70,13 +69,12 @@ function MessageContent({ msg = {}, user_id = '', handleClick = () => {} }) {
 						{(msg?.attachment_urls || []).map((url) => (
 							<Button
 								key={url}
-								tabIndex={0}
 								className={styles.flex_row}
 								themeType="link"
 								onClick={() => window.open(url, '_blank')}
 							>
 								<IcMDocument width="1.6em" height="1.6em" className={styles.icm_document} />
-								<span>{url?.split('/').pop()}</span>
+								<span>{url?.split('/')?.pop()}</span>
 							</Button>
 						))}
 

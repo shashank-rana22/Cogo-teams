@@ -40,7 +40,6 @@ function ListHeader({
 				<Button
 					className={cl` ${styles.filter_box} ${showUnreadChat ? styles.filled : ''}`}
 					themeType="linkUi"
-					tabIndex={0}
 					onClick={() => handleClick()}
 				>
 					<IcMUnread />
