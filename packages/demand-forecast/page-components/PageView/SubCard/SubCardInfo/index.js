@@ -4,30 +4,34 @@ import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-function SubCardInfo({ portInfo = {} }) {
+function SubCardInfo({ portInfo = {}, info_key = 'remaining_clusters' }) {
 	const router = useRouter();
 
 	const {
 		origin_location = {}, destination_location = {}, high_demand_port_pairs = 'NA',
-		rates_added = '-', total_estimated_demand = '-',
+		rates_added = '-', total_estimated_demand = '-', origin_cluster = {}, destination_cluster = {},
 	} = portInfo;
 
 	const onView = () => {
-		router.push(`/demand-forecast/${origin_location?.id}/${destination_location?.id}`);
+		if (info_key === 'remaining_clusters') {
+			router.push(`/demand-forecast/${origin_cluster?.id}/${destination_cluster?.id}/remaining_clusters`);
+		} else {
+			router.push(`/demand-forecast/${origin_location?.id}/${destination_location?.id}`);
+		}
 	};
 
 	return (
 
 		<div className={styles.row}>
 			<dv className={styles.orgin_port}>
-				{origin_location?.display_name}
+				{info_key === 'remaining_clusters' ? origin_cluster?.name : origin_location?.display_name }
 			</dv>
 			<div className={styles.arrow_logo}>
 				<IcMPortArrow />
 			</div>
 
 			<div className={styles.destination_port}>
-				{destination_location?.display_name}
+				{info_key === 'remaining_clusters' ? destination_cluster?.name : destination_location?.display_name}
 			</div>
 
 			<div className={styles.high_demand_port_pairs}>

@@ -31,7 +31,7 @@ function ForecastList({ filters = {} }) {
 					alignItems="center"
 					emptyText="Data Not Found"
 					textSize="20"
-					marginTop="100px"
+					marginTop="10px"
 				/>
 			</div>
 		);
@@ -53,7 +53,7 @@ function ForecastList({ filters = {} }) {
 			<div className={styles.pagination_container}>
 				<Pagination
 					className="md"
-					totalItems={dataList?.total_count || DEFAULT_TOTAL_ITEM}
+					totalItems={pageData?.total_count || DEFAULT_TOTAL_ITEM}
 					currentPage={page || DEFAULT_CURRENT_PAGE}
 					pageSize={pageData?.page_limit || DEFAULT_PAGE_SIZE}
 					onPageChange={setPage}

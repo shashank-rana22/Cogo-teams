@@ -10,9 +10,14 @@ function EmptyState({
 	flexDirection = 'row',
 	textSize = '16px',
 	marginTop = '0px',
+	marginBottom = '0px',
 }) {
 	return (
-		<div className={`${styles.container} ${styles[flexDirection]}`} style={{ marginTop }}>
+		<div
+			className={`${styles.container} 
+		${styles[flexDirection]}`}
+			style={{ marginTop, marginBottom }}
+		>
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.empty_state}
 				width={width}

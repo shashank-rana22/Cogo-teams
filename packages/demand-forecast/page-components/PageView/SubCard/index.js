@@ -34,7 +34,8 @@ function SubCard({ showDetails = false, origin_cluster_id = '', destination_clus
 					alignItems="center"
 					emptyText="Data Not Found"
 					textSize="20"
-					marginTop="100px"
+					marginTop="10px"
+					marginBottom="10px"
 				/>
 			</div>
 		);
@@ -42,7 +43,7 @@ function SubCard({ showDetails = false, origin_cluster_id = '', destination_clus
 
 	return (
 		<div className={styles.sub_card}>
-			{	loading ? <ListLoading /> : Object.keys(portPairData).map((key) => (
+			{	loading ? <ListLoading /> : Object.keys(KEYS_MAPPING).map((key) => (
 				!isEmpty(portPairData[key]) && (
 					<div key={key} className={styles.card}>
 						<div className={styles.title}>
@@ -50,16 +51,22 @@ function SubCard({ showDetails = false, origin_cluster_id = '', destination_clus
 							{' '}
 							:
 						</div>
-						<div>
-							{portPairData[key].map((port_info) => (
-								<SubCardInfo portInfo={port_info} key="123" />
-							))}
-						</div>
+						{key === 'high_demanding_port_pairs' && (
+							<div>
+								{portPairData[key].map((port_info) => (
+									<SubCardInfo portInfo={port_info} key="123" info_key={key} />
+								))}
+							</div>
+						)}
+						{key === 'remaining_clusters' && (
+							<div>
+								<SubCardInfo portInfo={portPairData[key]} info_key={key} />
+							</div>
+						)}
 					</div>
 				)
 			))}
 		</div>
-
 	);
 }
 

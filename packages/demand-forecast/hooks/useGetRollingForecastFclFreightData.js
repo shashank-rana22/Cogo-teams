@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useGetRollingForecastFclFreightData = () => {
+const useGetRollingForecastFclFreightData = ({ isMiniCluster = false }) => {
 	const [{ data, loading = false }, trigger] = useRequest({
 		url    : '/get_rolling_forecast_fcl_freight_data',
 		method : 'GET',
@@ -18,6 +18,7 @@ const useGetRollingForecastFclFreightData = () => {
 				params: {
 					origin_location_id,
 					destination_location_id,
+					mini_clusters_data_required: isMiniCluster,
 				},
 			});
 		} catch (error) {
@@ -25,7 +26,7 @@ const useGetRollingForecastFclFreightData = () => {
 				Toast.error(getApiErrorString(error?.response?.data));
 			}
 		}
-	}, [trigger]);
+	}, [isMiniCluster, trigger]);
 
 	return {
 		getRollingForecastPortPairs,

@@ -7,6 +7,10 @@ const demandForecast = {
 		navigation : 'forecast-demand_forecast',
 		isMainNav  : true,
 	},
+	'/[partner_id]/demand-forecast/[origin_id]/[destination_id]/remaining_clusters': {
+		navigation : 'forecast-demand_forecast',
+		isMainNav  : true,
+	},
 };
 
 export default demandForecast;
