@@ -1,4 +1,4 @@
-import { RatingComponent } from '@cogoport/components';
+import { RatingComponent, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import Actions from '../Actions';
@@ -14,15 +14,19 @@ function ServiceProvider({ item = {} }) {
 
 			<Actions item={item} />
 			<div style={{ display: 'flex', flexDirection: 'column', marginRight: '10px', width: '200px' }}>
-				<div style={{
-					overflow     : 'hidden',
-					textOverflow : 'ellipsis',
-					whiteSpace   : 'nowrap',
-				}}
-				>
-					{service_provider?.short_name}
 
-				</div>
+				<Tooltip content={service_provider?.short_name} placement="top">
+					<div style={{
+						overflow     : 'hidden',
+						textOverflow : 'ellipsis',
+						whiteSpace   : 'nowrap',
+					}}
+					>
+						{service_provider?.short_name}
+
+					</div>
+				</Tooltip>
+
 				<div>
 					<RatingComponent
 						type="star"

@@ -5,6 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CustomProgressBar from '../../../commons/CustomProgressBar';
+import useBulkUpdateRollingForecastFclFreightAllocation from '../../../hooks/useBulkUpdateRollingForecastFclFreightAllocation';
 import BucketTable from '../BucketsTable';
 
 function Content({
@@ -26,6 +27,7 @@ function Content({
 
 	const { control, unregister, formState, handleSubmit, watch } = formProps;
 	const { dirtyFields = {} } = formState;
+	console.log('dirtyFields:', dirtyFields);
 	console.log('ff', watch());
 	const bucketControls = [
 		{
@@ -69,10 +71,12 @@ function Content({
 			key       : 'past_container_allocation',
 		},
 	];
+	const { bulkUpdateRollingForecastFclFreightAllocation } = useBulkUpdateRollingForecastFclFreightAllocation();
 
 	const onClickSaveChanges = (values) => {
-		const payload = Object.entries(values).map(([key, value]) => ({ [key.split('_')[0]]: value }));
-		console.log('payload:', payload);
+		const modifiedValues = Object.entries(values).reduce((acc, [key, obj]) => [...acc, { service_provider_id: key, ...obj }], []);
+		const payload = { rolling_fcl_freight_search_id: search_id, bucket_type, data: modifiedValues };
+		bulkUpdateRollingForecastFclFreightAllocation({ payload });
 	};
 
 	return (
@@ -96,27 +100,26 @@ function Content({
 				))}
 			</div>
 
-			{/*
 			{!isEmpty(dirtyFields)
-				? ( */}
-			{/* <div style={{
-				display        : 'flex',
-				justifyContent : 'space-between',
-				marginTop      : '20px',
-				opacity        : !isEmpty(dirtyFields) ? '1' : '0',
-				...(isEmpty(dirtyFields) ? { pointerEvents: 'none' } : {}),
-			}}
-			>
-				<div>Add New Allocation</div>
-				<Button
-					onClick={handleSubmit(onClickSaveChanges)}
-					themeType="secondary"
-				>
-					Save Changes
+				? (
+					<div style={{
+						display        : 'flex',
+						justifyContent : 'space-between',
+						marginTop      : '20px',
+						opacity        : !isEmpty(dirtyFields) ? '1' : '0',
+						...(isEmpty(dirtyFields) ? { pointerEvents: 'none' } : {}),
+					}}
+					>
+						<div>Add New Allocation</div>
+						<Button
+							onClick={handleSubmit(onClickSaveChanges)}
+							themeType="secondary"
+						>
+							Save Changes
 
-				</Button>
-			</div> */}
-			{/* ) : null} */}
+						</Button>
+					</div>
+				) : null}
 
 			{show
 				? (
