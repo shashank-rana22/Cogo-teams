@@ -394,6 +394,10 @@ const GLOBAL_CONSTANTS = {
 		default_event           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
 		password_validator_tick : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick.svg',
 		password_validator_dot  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dot.svg',
+		ic_tree_multiple        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-branch.svg',
+		ic_tree_single          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic_branch_single.svg',
+		drop_down_red           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dropped-down.svg',
+
 	},
 
 	video_call_ring_tone_url:

@@ -97,6 +97,11 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 		{
+			api          : 'create_employee_bank_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
 			api          : 'bulk_employee_actions',
 			access_type  : 'private',
 			service_name : 'hrms',

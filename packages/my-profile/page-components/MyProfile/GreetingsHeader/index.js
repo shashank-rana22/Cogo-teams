@@ -1,7 +1,10 @@
+/* eslint-disable max-lines-per-function */
 import { Placeholder, Button, Modal, Avatar, Tooltip } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import BadgeGotList from './BadgeGotList';
 import PersonDetails from './PersonalDetails';
@@ -19,6 +22,8 @@ function Greetings({
 	showMobileVerificationModal,
 	setShowMobileVerificationModal = () => {},
 }) {
+	const { t } = useTranslation(['profile']);
+
 	const {
 		name = '',
 		picture = '',
@@ -46,7 +51,9 @@ function Greetings({
 
 	const { badge_configuration = [] } = groupedBadgesGot || {};
 
-	const mastery_element = badge_configuration.filter((item) => item.status === 'profile')?.[0] || {};
+	const mastery_element = badge_configuration.filter((
+		item,
+	) => item.status === 'profile')?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { name: locationName = '' } = lowest_geo_location || {};
 
@@ -156,7 +163,7 @@ function Greetings({
 				onOuterClick={onOuterClick}
 				size="md"
 			>
-				<Modal.Header title="Edit Name" />
+				<Modal.Header title={t('profile:edit_name_title')} />
 
 				<Modal.Body>
 					<EditPersonalDetails
@@ -176,14 +183,14 @@ function Greetings({
 							style={{ marginRight: '6px' }}
 
 						>
-							CANCEL
+							{t('profile:cancel_button')}
 						</Button>
 						<Button
 							themeType="primary"
 							disabled={apiLoading}
 							onClick={handleSubmit(onCreate)}
 						>
-							UPDATE
+							{t('profile:update_button')}
 						</Button>
 					</>
 				</Modal.Footer>
@@ -202,7 +209,7 @@ function Greetings({
 				onClose={onOuterClick}
 				onOuterClick={onOuterClick}
 			>
-				<Modal.Header title="Change your profile picture" />
+				<Modal.Header title={t('profile:change_your_profile_title')} />
 
 				<Modal.Body>
 					<div className={styles.modal_container}>
@@ -210,7 +217,7 @@ function Greetings({
 						<div className={styles.picture_container}>
 							<div>
 								<div className={styles.upload_picture_container}>
-									<div className={styles.upload_picture_text}>Upload picture</div>
+									<div className={styles.upload_picture_text}>{t('profile:upload_picture')}</div>
 
 									<UploadController
 										control={control}
@@ -260,7 +267,7 @@ function Greetings({
 									onClick={onDeleteButton}
 									className={styles.remove_picture_text}
 								>
-									Remove Picture
+									{t('profile:remove_picture')}
 								</div>
 							</div>
 						)}
@@ -271,7 +278,7 @@ function Greetings({
 								themeType="tertiary"
 								disabled={loading}
 							>
-								CANCEL
+								{t('profile:cancel_button')}
 							</Button>
 							<Button
 								onClick={handleSubmit(onSubmit)}
@@ -279,7 +286,7 @@ function Greetings({
 								type="submit"
 								loading={loading}
 							>
-								SAVE
+								{t('profile:save_button')}
 							</Button>
 						</div>
 
