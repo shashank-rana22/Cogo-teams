@@ -4,6 +4,8 @@ import { IcMArrowBack, IcMPortArrow, IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import DotLoader from '../../../commons/DotLoader';
+
 import styles from './styles.module.css';
 
 const commonLocationProps = {
@@ -21,7 +23,7 @@ const commonLocationProps = {
 	placeholder : 'Search via port name/code...',
 };
 
-function Header({ firstSearch }) {
+function Header({ firstSearch, loading }) {
 	const {
 		origin_location = {},
 		destination_location = {},
@@ -43,6 +45,23 @@ function Header({ firstSearch }) {
 		router.push(`/supply-allocation/view/${locationSearchId}`);
 		reset();
 	};
+
+	if (loading) {
+		return 			(
+			<div
+				style={{
+					display        : 'flex',
+					justifyContent : 'center',
+					alignItems     : 'center',
+					background     : '#fff',
+					padding        : '10px',
+					marginBottom   : '10px',
+				}}
+			>
+				<DotLoader />
+			</div>
+		);
+	}
 	return !editMode
 		? (
 			<div

@@ -42,7 +42,22 @@ function List({
 						</div>
 					</Tooltip>
 
-					<span className={styles.origin}>{origin_location.display_name}</span>
+					<Tooltip
+						content={origin_location.display_name}
+						placement="right"
+					>
+						<div style={{
+							overflow     : 'hidden',
+							textOverflow : 'ellipsis',
+							maxWidth     : '180px',
+							whiteSpace   : 'nowrap',
+						}}
+						>
+							{origin_location.display_name}
+
+						</div>
+					</Tooltip>
+
 				</div>
 			),
 		},
@@ -55,7 +70,22 @@ function List({
 			id       : 'destination',
 			Header   : 'DESTINATION',
 			accessor : ({ destination_location }) => (
-				<div>{destination_location?.display_name}</div>
+				<Tooltip
+					content={destination_location?.display_name}
+					placement="right"
+				>
+					<div style={{
+						overflow     : 'hidden',
+						textOverflow : 'ellipsis',
+						maxWidth     : '180px',
+						whiteSpace   : 'nowrap',
+					}}
+					>
+						{destination_location?.display_name}
+
+					</div>
+				</Tooltip>
+
 			),
 		},
 		{

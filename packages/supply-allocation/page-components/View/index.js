@@ -13,7 +13,7 @@ function View() {
 	const { general = {} } = useSelector((state) => state);
 	const { query = {} } = general;
 	const { search_id } = query;
-	const { data, findFclSearch } = useListFclSearchesView({});
+	const { data, findFclSearch, loading } = useListFclSearchesView({});
 
 	useEffect(() => {
 		findFclSearch(search_id);
@@ -37,9 +37,10 @@ function View() {
 		<Fragment key={search_id}>
 			<Header
 				firstSearch={firstSearch}
+				loading={loading}
 			/>
 
-			<PieChartGraphs rollingForecastData={rollingForecastData} />
+			<PieChartGraphs rollingForecastData={rollingForecastData} listApiLoading={loading} />
 
 			<List bucketData={bucketData} search_id={search_id} />
 		</Fragment>
