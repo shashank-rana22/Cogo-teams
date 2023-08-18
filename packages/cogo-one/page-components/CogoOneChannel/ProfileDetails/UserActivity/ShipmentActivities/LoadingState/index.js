@@ -12,6 +12,7 @@ function LoadingState() {
 						src={GLOBAL_CONSTANTS.image_url.cargo_ship_vector}
 						height={120}
 						width={200}
+						alt="ship"
 					/>
 				</div>
 

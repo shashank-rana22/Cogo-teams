@@ -9634,6 +9634,11 @@ const partner = {
 
 	campaign_dashboard: [
 		{
+			api          : 'list_campaign_node_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
 			api          : 'create_campaign_duplicate',
 			access_type  : 'private',
 			service_name : 'campaign',
@@ -10441,6 +10446,21 @@ const partner = {
 		},
 		{
 			api          : 'update_cogostore_product_subcategory',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_banner',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_brand',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_vendor',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -13379,7 +13399,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rate_sheet',
 		},
-
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'bulk_reallocate_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	printing_desk: [
 		{
