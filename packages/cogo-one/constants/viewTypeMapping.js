@@ -135,6 +135,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
+			show_shipment_reminder      : true,
 		},
 	},
 	sales_admin: {
@@ -175,6 +176,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
+			show_shipment_reminder      : true,
 		},
 	},
 	support: {
@@ -216,6 +218,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
+			show_shipment_reminder      : true,
 		},
 	},
 	support_admin: {
@@ -255,6 +258,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
+			show_shipment_reminder      : true,
 		},
 	},
 	supply: {
@@ -298,6 +302,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
+			show_shipment_reminder      : true,
 		},
 	},
 	supply_admin: {
@@ -340,6 +345,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
+			show_shipment_reminder      : true,
 		},
 	},
 	shipment_specialist: {
@@ -409,6 +415,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : true,
 			customer_org_users          : true,
 			convert_account_to_cp       : false,
+			show_shipment_reminder      : false,
 		},
 	},
 	cogoone_admin: {
@@ -448,6 +455,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
+			show_shipment_reminder      : false,
 		},
 	},
 	cp_support: {
@@ -486,6 +494,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : true,
+			show_shipment_reminder      : true,
 		},
 	},
 	marketing: {
@@ -526,6 +535,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
+			show_shipment_reminder      : true,
 		},
 	},
 };
