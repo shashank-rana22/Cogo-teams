@@ -83,7 +83,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						className="primary md"
 						placeholder="CN Category Type.."
 						value={creditNoteType || CNCategoryValues?.CNType}
-						disabled={!isEditable}
+						disabled={!isEditable || level1?.status === 'APPROVED'}
 						onChange={(e:any) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
 						options={CATEGORY_OPTIONS}
 					/>
@@ -101,7 +101,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									className="primary md"
 									placeholder="Type here..."
 									value={creditNoteRemarks || CNCategoryValues?.CNValues}
-									disabled={!isEditable}
+									disabled={!isEditable || level1?.status === 'APPROVED'}
 									onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
 									options={
 									creditNoteRemarks
@@ -122,7 +122,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 										? creditNoteRemarks
 										: creditNoteRemarks || CNCategoryValues?.CNValues
 								}
-									disabled={!isEditable}
+									disabled={!isEditable || level1?.status === 'APPROVED'}
 									onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
 									options={
 									creditNoteRemarks
@@ -218,6 +218,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								</Popover>
 								<Select
 									value={approvalType || creditNoteApprovalType}
+									disabled={level1?.status === 'APPROVED'}
 									onChange={(e) => setCreditNoteApprovalType(e)}
 									placeholder="CN Approval Type"
 									options={CREDIT_NOTE_APPROVAL_TYPE_OPTIONS}
