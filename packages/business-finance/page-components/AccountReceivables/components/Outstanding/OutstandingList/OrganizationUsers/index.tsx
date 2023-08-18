@@ -2,7 +2,7 @@ import { Pagination } from '@cogoport/components';
 import React from 'react';
 
 import StyledTable from '../../../../commons/styledTable';
-import OrganizationColumn from '../../../../configs/OrganizationUserTable';
+import organizationColumn from '../../../../configs/OrganizationUserTable';
 import useGetOrganizationUsers from '../../../../hooks/useGetOrganizationUsers';
 
 import styles from './styles.module.css';
@@ -20,7 +20,7 @@ function Users({ selfOrganizationId }: Props) {
 
 	return (
 		<div>
-			<StyledTable data={list} columns={OrganizationColumn()} loading={loading} />
+			<StyledTable data={list} columns={organizationColumn()} loading={loading} />
 
 			<div className={styles.pagination_container}>
 				<Pagination

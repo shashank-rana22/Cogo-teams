@@ -1,52 +1,30 @@
-import { Button } from '@cogoport/components';
-import { useDispatch, useSelector } from '@cogoport/store';
-import { setProfileState } from '@cogoport/store/reducers/profile';
-import React from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+import React, { useState } from 'react';
 
-interface HandleCallProps {
-	row?: object
-}
+import DialCallModal from '../components/Outstanding/OutstandingList/Communication/DialCallModal';
 
-function HandleCall({ row }: HandleCallProps) {
-	const { profileData } = useSelector(({ profile }) => ({
-		profileData: profile,
-	}));
-	const dispatch = useDispatch();
+function HandleCall({ row }) {
+	const [showDialModal, setShowDialModal] = useState(false);
 
-	const handleVoiceCall = (item) => {
-		dispatch(
-			setProfileState({
-				...profileData,
-				voice_call: {
-					mobile_country_code : item?.mobile_country_code,
-					mobile_number       : item?.mobile_number,
-					name                : item?.name,
-					organization_name   : item?.name,
-					userId              : item?.user_id,
-					orgId:
-						item?.organization_id
-						|| item?.partner?.twin_importer_exporter_id
-						|| item?.partner?.twin_service_provider_id,
-					showCallModal       : true,
-					destTrue            : false,
-					showActiveCallModal : true,
-					showFeedbackModal   : false,
-					minimizeModal       : true,
-					callUser            : true,
-					inCall              : false,
-					endCall             : false,
-				},
-			}),
-		);
-	};
+	const onClick = () => setShowDialModal(true);
+
 	return (
-		<Button
-			size="sm"
-			themeType="primary"
-			onClick={() => handleVoiceCall(row)}
-		>
-			Place Call
-		</Button>
+		<div>
+			<Image
+				onClick={onClick}
+				src={GLOBAL_CONSTANTS.image_url.call_icon}
+				alt="call icon"
+				role="presentation"
+				height={35}
+				width={35}
+			/>
+			<DialCallModal
+				setShowDialModal={setShowDialModal}
+				showDialModal={showDialModal}
+				row={row}
+			/>
+		</div>
 	);
 }
 

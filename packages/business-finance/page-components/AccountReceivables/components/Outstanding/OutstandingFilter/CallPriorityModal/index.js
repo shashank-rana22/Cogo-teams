@@ -21,15 +21,16 @@ const TabsOptions = [
 		component : InvoiceTable,
 	},
 	{
-		key       : 'organization_users',
-		name      : 'Users',
-		component : OrganizationUsers,
-	},
-	{
 		key       : 'communication',
 		name      : 'Communication',
 		component : Communication,
 	},
+	{
+		key       : 'organization_users',
+		name      : 'Users',
+		component : OrganizationUsers,
+	},
+
 ];
 
 function Content({ types = [], head = '' }) {

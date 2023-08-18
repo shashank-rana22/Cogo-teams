@@ -10,6 +10,7 @@ const getPayload = ({
 	orgId = '',
 	userId = '',
 	loggedInAgentId = '',
+	source = 'cogo_one',
 }) => {
 	let payload = {};
 	if (isUnkownUser) {
@@ -26,7 +27,7 @@ const getPayload = ({
 		};
 	}
 
-	return { ...payload, source: 'cogo_one', agent_id: loggedInAgentId };
+	return { ...payload, source, agent_id: loggedInAgentId };
 };
 
 const setCallStateData = ({
@@ -34,7 +35,7 @@ const setCallStateData = ({
 	orgId = '',
 	userId = '',
 	userName = '',
-	setCallState = () => {},
+	setCallState = () => { },
 }) => {
 	const receiverUserDetails = {
 		mobile_number,
@@ -49,8 +50,8 @@ const setCallStateData = ({
 
 function useOutgoingCall({
 	voiceCallData = {},
-	setCallState = () => {},
-	unmountVoiceCall = () => {},
+	setCallState = () => { },
+	unmountVoiceCall = () => { },
 	loggedInAgentId = '',
 }) {
 	const [{ loading }, trigger] = useRequest(
@@ -68,6 +69,7 @@ function useOutgoingCall({
 		mobile_number = '',
 		mobile_country_code = '',
 		userName = '',
+		source = '',
 	} = voiceCallData || {};
 
 	const makeCallApi = useCallback(async () => {
@@ -88,6 +90,7 @@ function useOutgoingCall({
 					orgId,
 					userId,
 					loggedInAgentId,
+					source,
 				}),
 			});
 		} catch (error) {
@@ -95,7 +98,7 @@ function useOutgoingCall({
 			unmountVoiceCall();
 		}
 	}, [isUnkownUser, loggedInAgentId, mobile_country_code,
-		mobile_number, orgId, setCallState, trigger, unmountVoiceCall, userId, userName]);
+		mobile_number, orgId, setCallState, trigger, unmountVoiceCall, userId, userName, source]);
 
 	return {
 		makeCallApi,
