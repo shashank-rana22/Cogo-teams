@@ -1,7 +1,7 @@
-const { buildCountries } = require('./pre-builds');
+// const { buildCountries } = require('./pre-builds');
 
 const buildApp = async () => {
-	await buildCountries();
+	// await buildCountries();
 };
 
 buildApp();
