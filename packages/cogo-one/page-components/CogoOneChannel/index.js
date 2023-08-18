@@ -132,6 +132,8 @@ function CogoOne() {
 		}
 	}, [token]);
 
+	console.log('dsjsdjfbksdj');
+
 	return (
 		<>
 			<HeaderBar
