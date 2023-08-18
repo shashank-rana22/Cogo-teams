@@ -45,7 +45,7 @@ function EmptyChatPage({
 		<div className={styles.container}>
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.empty_chat_jpg}
-				alt="-"
+				alt="No chats"
 				height={350}
 				width={350}
 			/>

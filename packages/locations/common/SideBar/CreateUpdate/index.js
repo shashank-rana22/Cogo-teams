@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import getElementController from '../../../constants/getController';
 import useCreateUpdate from '../../../hooks/useCreateUpdate';
@@ -7,6 +8,8 @@ import FieldArray from '../../FieldArray';
 import styles from './styles.module.css';
 
 function CreateUpdateForm() {
+	const { t } = useTranslation(['locations']);
+
 	const {
 		handleSubmit,
 		errors,
@@ -27,14 +30,14 @@ function CreateUpdateForm() {
 
 					if (rest.type === 'fieldArray') {
 						return (
-							<FieldArray {...rest} control={control} />
+							<FieldArray key={field.name} {...rest} control={control} />
 						);
 					}
 
 					const Element = getElementController(rest.type);
 					if (!('condition' in field) || condition?.type?.includes(watchType?.value)) {
 						return (
-							<div className={styles.list}>
+							<div key={field.name} className={styles.list}>
 								<h4>{field.label}</h4>
 								<Element
 									width="100%"
@@ -50,7 +53,7 @@ function CreateUpdateForm() {
 				})}
 			</div>
 
-			<Button disabled={loading} type="submit">Submit</Button>
+			<Button disabled={loading} type="submit">{t('locations:submit_button')}</Button>
 		</form>
 	);
 }
