@@ -46,6 +46,7 @@ function PocContainer({
 							src={GLOBAL_CONSTANTS.image_url.spinner_loader}
 							height={50}
 							width={50}
+							alt="spinner"
 						/>
 					)
 					: (
