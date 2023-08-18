@@ -1,4 +1,6 @@
 import { Button, Loader } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import Reportees from './Reportees';
@@ -7,6 +9,8 @@ import styles from './styles.module.css';
 import useOrganizationRMMapping from './useOrganizationRMMapping';
 
 function Organization({ personDetails = {}, detailsLoading }) {
+	const { t } = useTranslation(['profile']);
+
 	const {
 		loading = false,
 		handleReset = () => {},
@@ -27,15 +31,13 @@ function Organization({ personDetails = {}, detailsLoading }) {
 		<div className={styles.container}>
 			<div className={styles.button_container}>
 				<div className={styles.primary_button}>
-					<Button onClick={handleReset}>Reset</Button>
-					{' '}
-
+					<Button onClick={handleReset}>{t('profile:reset_button')}</Button>
 				</div>
 
 			</div>
 
-			{(hierarchy?.reporting_managers?.length > 0
-				|| Object.keys(hierarchy?.user).length > 0) && (
+			{(!isEmpty(hierarchy?.reporting_managers)
+				|| (!isEmpty(hierarchy?.user))) && (
 					<Reporting
 						user={hierarchy?.user}
 						reporting_managers={hierarchy?.reporting_managers}
@@ -44,7 +46,7 @@ function Organization({ personDetails = {}, detailsLoading }) {
 					/>
 			)}
 
-			{hierarchy?.reportees?.length > 0 && (
+			{!isEmpty(hierarchy?.reportees) && (
 				<Reportees
 					reportees={hierarchy?.reportees}
 					params={params}

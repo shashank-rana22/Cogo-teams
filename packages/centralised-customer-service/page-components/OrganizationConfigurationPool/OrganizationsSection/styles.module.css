@@ -1,0 +1,22 @@
+.orgs {
+	display: flex;
+	flex-wrap: wrap;
+
+	:global {
+		.ui_pill_container {
+			margin: 4px;
+			margin-left: 0;
+		}
+	}
+}
+
+.org_pill {
+	max-width: 120px;
+	height: 25px;
+}
+
+.org_pill div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

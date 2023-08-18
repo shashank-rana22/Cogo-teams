@@ -69,6 +69,8 @@ function ListData({
 							shipment = {},
 						} = item || {};
 
+						const serialId = shipment?.serial_id || '';
+
 						return (
 							<>
 								<div className={styles.activity_date}>
@@ -124,17 +126,20 @@ function ListData({
 											isPanUploaded={isPanUploaded}
 											isGstUploaded={isGstUploaded}
 										/>
-										<div className={styles.card_footer}>
-											<div className={styles.shipment_id}>
-												SID:
-												{' '}
-												{shipment?.serial_id}
-											</div>
+										<div className={cl`${styles.card_footer}
+										${serialId ? styles.tag_action : ''}`}
+										>
+											{serialId ? (
+												<div className={styles.shipment_id}>
+													SID:
+													{' '}
+													{serialId}
+												</div>
+											) : null}
 											{orgId && (
 												<Button
 													key={document_url}
 													onClick={() => setDocumentTagUrl(document_url)}
-													themeType="accent"
 													size="sm"
 												>
 													Tag to SID

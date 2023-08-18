@@ -1,4 +1,7 @@
-const formatDataForDocuments = (rawValues, taskData) => {
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
+
+const formatDataForDocuments = (rawValues, taskData, finalConfig) => {
 	let modifiedRawValues = {};
 
 	if (taskData?.task === 'upload_commercial_invoice_and_packing_list') {
@@ -8,7 +11,7 @@ const formatDataForDocuments = (rawValues, taskData) => {
 
 		Object.keys(rawValues).forEach((key) => {
 			if (key?.includes('documents')) {
-				modifiedRawValues.documents.push(rawValues[key]?.[0]);
+				modifiedRawValues.documents.push(rawValues[key]?.[GLOBAL_CONSTANTS.zeroth_index]);
 			} else {
 				modifiedRawValues[key] = rawValues[key];
 			}
@@ -17,32 +20,64 @@ const formatDataForDocuments = (rawValues, taskData) => {
 		modifiedRawValues = rawValues;
 	}
 
-	const finalObj = (modifiedRawValues?.documents || []).map(
+	let finalArray = (modifiedRawValues?.documents || []).map(
 		(documentObj, index) => {
-			const formatObj = {};
+			const FORMAT_OBJ = {};
 
-			formatObj.document_type = modifiedRawValues?.document_types?.[index]
+			FORMAT_OBJ.document_type = modifiedRawValues?.document_types?.[index]
 				|| taskData?.document_type
 				|| 'authority_letter_custom';
 
-			formatObj.document_url = documentObj?.url?.finalUrl || documentObj?.url;
+			FORMAT_OBJ.document_url = documentObj?.url?.finalUrl
+				|| documentObj?.url;
 
-			formatObj.file_name = documentObj?.url?.fileName;
+			FORMAT_OBJ.file_name = documentObj?.url?.fileName;
 
 			Object.keys(documentObj || {}).forEach((key) => {
-				if (!Object.keys(formatObj).includes(key)) {
-					formatObj.data = {
-						...(formatObj.data || {}),
+				if (!Object.keys(FORMAT_OBJ).includes(key)) {
+					FORMAT_OBJ.data = {
+						...(FORMAT_OBJ.data || {}),
 						[key]: key === 'url' ? documentObj?.[key]?.finalUrl : documentObj?.[key],
 					};
 				}
 			});
 
-			return formatObj;
+			return FORMAT_OBJ;
 		},
 	);
 
-	return finalObj?.length ? finalObj : undefined;
+	const documentObjectControl = finalConfig?.controls?.find(
+		(control) => control?.name === 'documents' && control?.type === 'fieldArray',
+	) || {};
+
+	const isMultipleUrlAllowed = documentObjectControl?.controls?.some(
+		(control) => control?.name === 'url' && control?.multiple,
+	);
+
+	if (isMultipleUrlAllowed) {
+		const tempFinal = finalArray.reduce((acc, item) => {
+			const urls = item?.document_url;
+			if (Array.isArray(urls)) {
+				urls.forEach((urlObj) => {
+					const singleObj = {
+						...item,
+						document_url : urlObj?.finalUrl || '',
+						file_name    : urlObj?.fileName || '',
+						data         : {
+							...(item?.data || {}),
+							url: urlObj?.finalUrl || '',
+						},
+					};
+					acc.push(singleObj);
+				});
+			}
+			return acc;
+		}, []);
+
+		finalArray = isEmpty(tempFinal) ? finalArray : tempFinal;
+	}
+
+	return finalArray?.length ? finalArray : undefined;
 };
 
 export default formatDataForDocuments;

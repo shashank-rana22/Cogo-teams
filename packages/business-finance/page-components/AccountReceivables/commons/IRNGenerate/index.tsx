@@ -65,7 +65,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const { NAVIGATION_KEY, API_NAME } = PERMISSION_BUTTON.upload_invoice || {};
 
 	const NAVIGATION = PERMISSION_NAVIGATION
-		?.[NAVIGATION_KEY]?.[API_NAME]?.[GLOBAL_CONSTANTS.zeroth_index]?.type !== 'none';
+		?.[NAVIGATION_KEY]?.[API_NAME]?.[GLOBAL_CONSTANTS.zeroth_index]?.view_type !== 'none';
 
 	const { id: partnerId = '' } = partner;
 
@@ -105,6 +105,8 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 
 	const UPLOAD_INVOICE_PERMISSION = ENTITY_FEATURE_MAPPING[entityCode]
 		?.feature_supported.includes('upload_invoice');
+	const REFRESH_ALLOWED = ENTITY_FEATURE_MAPPING[entityCode]
+		?.feature_supported.includes('refresh');
 
 	const handleFinalpost = () => {
 		setFinalPostToSageModal(true);
@@ -133,7 +135,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 							</Button>
 						</div>
 					)}
-				{uploadInvoice
+				{uploadInvoice && !IRN_FAILED_STATUS.includes(invoiceStatus)
 					&& (
 						<InvoiceModal
 							uploadInvoice={uploadInvoice}
@@ -142,7 +144,8 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 							loading={invoiceLoading}
 						/>
 					)}
-				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
+				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost)
+				&& !IRN_FAILED_STATUS.includes(invoiceStatus) && (
 					<div className={styles.button_container}>
 						<Button
 							size="sm"
@@ -150,7 +153,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 							onClick={() => generateIrn()}
 						>
 							<span className={styles.lable_width}>
-								Generate
+								{IRN_FAILED_STATUS.includes(invoiceStatus) ? 'Regenerate' : 'Generate'}
 								{' '}
 								{irnLabel}
 							</span>
@@ -170,7 +173,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 						</Button>
 					</div>
 				)}
-				{IRN_FAILED_STATUS.includes(invoiceStatus) && (
+				{IRN_FAILED_STATUS.includes(invoiceStatus) && REFRESH_ALLOWED && (
 					<div className={styles.button_container}>
 						<Button
 							size="sm"

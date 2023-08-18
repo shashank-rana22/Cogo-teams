@@ -4,12 +4,11 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { forwardRef, useEffect } from 'react';
 
-import ReceiveDiv from '../../../../../../common/ReceiveDiv';
-import SentDiv from '../../../../../../common/SentDiv';
 import { updateUnreadMessagesCount } from '../../../../../../helpers/updateUnreadMessagesCount';
 import NewUserOutBound from '../NewUserOutBound';
 import TimeLine from '../TimeLine';
 
+import { ReceiveDivComponent, SentDivComponent } from './conversationDivMappings';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
@@ -18,8 +17,8 @@ const SCROLL_WHEN_REQUIRED_HEIGHT = 2;
 const MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT = 99;
 
 const CONVERSATION_TYPE_MAPPING = {
-	sent     : ReceiveDiv,
-	received : SentDiv,
+	sent     : ReceiveDivComponent,
+	received : SentDivComponent,
 	default  : TimeLine,
 };
 
@@ -38,6 +37,10 @@ function MessagesThread(
 		scrollToBottom = () => {},
 		firestore = {},
 		viewType = '',
+		setMailActions = () => {},
+		mailActions = {},
+		hasPermissionToEdit = false,
+		mailProps = {},
 	},
 	messageRef,
 ) {
@@ -119,7 +122,11 @@ function MessagesThread(
 						user_name={user_name}
 						setRaiseTicketModal={setRaiseTicketModal}
 						formattedData={formattedData}
+						setMailActions={setMailActions}
+						mailActions={mailActions}
 						viewType={viewType}
+						hasPermissionToEdit={hasPermissionToEdit}
+						mailProps={mailProps}
 					/>
 				);
 			})}

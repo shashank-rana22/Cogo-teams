@@ -1,0 +1,156 @@
+import { Select, cl, Loader } from '@cogoport/components';
+import { countriesHash } from '@cogoport/globalization/utils/getCountriesHash';
+import { IcMArrowLeft } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
+import React, { useCallback, useEffect } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
+
+import SortButton from '../../../../common/SortButton';
+import { SORT_OPTIONS } from '../../../../constants/map_constants';
+import Heading from '../../Heading';
+
+import GeoCoder from './GeoCoder';
+import List from './List';
+import styles from './styles.module.css';
+
+const SCOPE_MAPPING = {
+	continents : 'country',
+	country    : 'region',
+	region     : 'ports',
+};
+
+const TIMEOUT_TIME = 1000;
+const SCROLLING_LIMIT = 30;
+const START_PAGE = 1;
+
+function SidePanel({
+	setView = () => {},
+	backView = () => {},
+	setHierarchy = () => {},
+	mapStatisticsData = {},
+	isFull = false,
+	setIsFull = () => {},
+	locationFilters = {},
+	setLocationFilters = () => {},
+	setGlobalFilters = () => {},
+	activeList = [],
+	globalFilters = {},
+	setActiveId = () => {},
+	page = 1,
+	setPage = () => {},
+	accuracyLoading = false,
+	setActiveList = () => {},
+	setSort = () => {},
+	sort = 'accuracy',
+}) {
+	const { sort_by, sort_type } = sort;
+	const originName = locationFilters.origin?.name || countriesHash?.[locationFilters?.origin?.id]?.name;
+	const destinationType = locationFilters?.destination?.type || '';
+	const destination = destinationType.includes('port')
+		? locationFilters?.destination?.name : SCOPE_MAPPING[destinationType];
+
+	const { list = [], total_count = 0 } = mapStatisticsData;
+	const hasMore = page < Math.ceil(total_count / SCROLLING_LIMIT);
+	const { service_type } = globalFilters;
+
+	const loadMore = useCallback(() => {
+		setTimeout(() => {
+			if (!accuracyLoading) {
+				setPage((prev) => prev + START_PAGE);
+			}
+		}, TIMEOUT_TIME);
+	}, [accuracyLoading, setPage]);
+
+	useEffect(() => {
+		if (!isEmpty(list)) {
+			if (page === START_PAGE) {
+				setActiveList([...list]);
+			} else {
+				setActiveList((prev) => prev.concat(list));
+			}
+		}
+	}, [list, page, setActiveList]);
+
+	return (
+		<>
+			<div className={cl`${styles.side_container} ${isFull && styles.hide}`}>
+				<div className={styles.heading}>
+					<Heading
+						setView={setView}
+						backView={backView}
+						heading="Map View"
+						showFilterText={false}
+						globalFilters={globalFilters}
+						setGlobalFilters={setGlobalFilters}
+						showFilters
+						view="map_view"
+					/>
+				</div>
+				<div className={styles.sticky_container}>
+					<GeoCoder
+						locationFilters={locationFilters}
+						setLocationFilters={setLocationFilters}
+						setHierarchy={setHierarchy}
+						setActiveList={setActiveList}
+						service_type={service_type}
+					/>
+					<div className={styles.horizontal_line} />
+				</div>
+				<div className={styles.list_container}>
+					<div className={styles.list_header}>
+						<h4>
+							{`${startCase(originName)} to 
+							${startCase(destination || 'Countries')}`}
+						</h4>
+						<SortButton
+							type={sort_type}
+							onChange={(val) => setSort(((prev) => ({ ...prev, sort_type: val })))}
+						/>
+						<Select
+							size="sm"
+							placeholder="sort by"
+							options={SORT_OPTIONS}
+							style={{ width: '140px' }}
+							value={sort_by}
+							onChange={(val) => setSort({ sort_by: val, sort_type: 'asc' })}
+						/>
+					</div>
+					<InfiniteScroll
+						pageStart={1}
+						initialLoad={false}
+						loadMore={loadMore}
+						hasMore={hasMore}
+						loader={accuracyLoading ? (
+							<div className={styles.loading_style}>
+								<Loader />
+							</div>
+						) : null}
+						useWindow={false}
+						threshold={600}
+					>
+						<List
+							setActiveId={setActiveId}
+							loading={accuracyLoading}
+							finalList={activeList}
+							originName={originName}
+						/>
+						{!hasMore && !isEmpty(activeList) && !accuracyLoading && (
+							<p className={styles.has_more}>
+								You reached the end!!
+							</p>
+						)}
+
+					</InfiniteScroll>
+				</div>
+			</div>
+			<button
+				onClick={() => setIsFull((s) => !s)}
+				className={cl`${styles.toggle_icon} ${isFull ? styles.rotate_toggle : ''}`}
+			>
+				<IcMArrowLeft />
+			</button>
+		</>
+	);
+}
+
+export default SidePanel;

@@ -1,0 +1,13 @@
+.item_container {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 24px;
+}
+
+.inner_container {
+	width: 30%;
+}
+
+.item {
+	margin-bottom: 30px;
+}

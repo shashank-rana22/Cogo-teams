@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { getByKey } from '@cogoport/utils';
 
 const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
@@ -23,12 +24,13 @@ const extraParamsToMerge = (values) => {
 	return {};
 };
 
-const formatDataForService = (
+const formatDataForService = ({
 	dataToSend,
 	rawValues,
 	taskData,
 	serviceIdMapping,
-) => {
+	primaryService,
+}) => {
 	const PAYLOAD = {};
 
 	(dataToSend || []).forEach((sendKeyObj) => {
@@ -39,10 +41,15 @@ const formatDataForService = (
 		if (sendKeyObj?.source === 'serviceData') {
 			if (sendKeyObj.custom_service_id) {
 				PAYLOAD[sendKeyObj.key] = serviceIdMapping[`${sendKeyObj.custom_service_id}.id`];
+			} else if (taskData?.service_type === 'haulage_freight_service'
+			&& taskData?.service_id === serviceIdMapping?.['trailer_freight_service.id']
+				?.[GLOBAL_CONSTANTS?.zeroth_index]) {
+				PAYLOAD[sendKeyObj?.key] = serviceIdMapping?.['trailer_freight_service.id']
+					?.[GLOBAL_CONSTANTS?.zeroth_index];
 			} else {
 				PAYLOAD[sendKeyObj?.key] = taskData?.service_type
 					? serviceIdMapping?.[`${taskData?.service_type}.id`]
-					: serviceIdMapping?.[`${taskData?.shipment_type}_service.id`];
+					: serviceIdMapping?.[`${primaryService?.service_type}.id`];
 			}
 		}
 

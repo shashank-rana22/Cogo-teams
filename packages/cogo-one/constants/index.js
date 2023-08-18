@@ -6,6 +6,7 @@ import {
 	IcCAir,
 	IcMFftl,
 	IcMFltl, IcCTelegram, IcCZalo,
+	IcMVideoCall, IcMVideoCallMute,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -90,6 +91,19 @@ export const VOICE_ICON_MAPPING = {
 	not_connected : GLOBAL_CONSTANTS.image_url.not_connected_svg,
 	outgoing      : GLOBAL_CONSTANTS.image_url.outgoing_svg,
 	incoming      : GLOBAL_CONSTANTS.image_url.incoming_svg,
+};
+
+export const CALL_HISTORY_AUDIO_ICONS = {
+	user: {
+		start      : GLOBAL_CONSTANTS.image_url.start_user_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_user_audio,
+		compStyles : { borderTopLeftRadius: '0px', background: '#FFFFFF' },
+	},
+	agent: {
+		start      : GLOBAL_CONSTANTS.image_url.start_agent_audio,
+		end        : GLOBAL_CONSTANTS.image_url.end_agent_audio,
+		compStyles : { borderTopRightRadius: '0px', background: '#FFFCE6' },
+	},
 };
 
 export const USER_ACTIVITY_MAPPING = {
@@ -190,6 +204,12 @@ export const PLACEHOLDER_MAPPING = {
 	shipment_id    : 'Select SID',
 	invoice        : 'Enter Invoice No',
 	onboarding_kyc : 'Enter Pan No',
+};
+
+export const SHOW_LOG_STATUS_ICON_MAPPING = {
+	answered      : { icon: IcMVideoCall, fill: '#b0cc64' },
+	not_connected : { icon: IcMVideoCallMute, fill: '#828282' },
+	missed        : { icon: IcMVideoCallMute, fill: '#f37166' },
 };
 
 export const DISLIKE_OPTIONS = [
@@ -320,6 +340,8 @@ export const ICON_MAPPING = {
 };
 
 export const STRING_TO_ARRAY_REGEX = GLOBAL_CONSTANTS.regex_patterns.string_to_array;
+
+export const CHANNEL_TYPE = ['voice_call', 'video_call'];
 
 export const API_MAPPING = {
 	whatsapp      : '/create_communication',

@@ -19,9 +19,9 @@ const useGetSaasComplianceDocs = ({ primary_service = {}, task = {}, servicesLis
 	};
 
 	const [{ loading, data }, trigger] = useRequestBf({
-		auth   : 'get_saas_trade_engine_documents',
-		url    : 'saas/trade-engine/documents',
-		method : 'GET',
+		authKey : 'get_saas_trade_engine_documents',
+		url     : 'saas/trade-engine/documents',
+		method  : 'GET',
 		params,
 	}, { manual: true });
 

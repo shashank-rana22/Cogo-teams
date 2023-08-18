@@ -1,7 +1,9 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useAuthRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { getCookie, setCookie } from '@cogoport/utils';
+
+const NEGATIVE_INDEX = -1;
 
 const useRemoveUserSessions = () => {
 	const {
@@ -12,18 +14,18 @@ const useRemoveUserSessions = () => {
 
 	const cogo_admin_auth_token = getCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME);
 
-	const [{ loading = false }, trigger] = useRequest({
+	const [{ loading = false }, trigger] = useAuthRequest({
 		url    : '/remove_user_sessions',
 		method : 'delete',
 	}, { manual: true });
 
 	const logoutOfAllAccounts = async () => {
 		try {
-			const all_user_ids = [];
+			const ALL_USER_IDS = [];
 
 			(profile?.user_session_mappings || []).forEach((user) => {
 				if (user?.user_session_id) {
-					all_user_ids.push(user?.user_session_id);
+					ALL_USER_IDS.push(user?.user_session_id);
 				}
 				return null;
 			});
@@ -31,14 +33,14 @@ const useRemoveUserSessions = () => {
 			const payload = {
 				active_token     : token,
 				parent_token     : cogo_admin_auth_token,
-				tokens_to_remove : all_user_ids,
+				tokens_to_remove : ALL_USER_IDS,
 			};
 
 			const res = await trigger({ params: payload });
 
 			if (!res.hasError) {
-				setCookie('cogo-admin-token', 'expired', -1);
-				setCookie('cogo-admin-auth-token', 'expired', -1);
+				setCookie('cogo-admin-token', 'expired', NEGATIVE_INDEX);
+				setCookie('cogo-admin-auth-token', 'expired', NEGATIVE_INDEX);
 				Toast.success('Logged out of all accounts');
 				// eslint-disable-next-line no-undef
 				window.location.href = '/v2/login';

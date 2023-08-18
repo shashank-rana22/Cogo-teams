@@ -2,8 +2,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
-const geo = getGeoConstants();
-export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () => {} }) => [
+export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () => {}, geo = {} }) => [
 	{
 		label       : 'Billing Party Name',
 		name        : 'name',
@@ -104,7 +103,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 		placeholder : 'Enter Email Id',
 		rules       : {
 			pattern: {
-				value   : geo.regex.EMAIL,
+				value   : geo?.regex?.EMAIL,
 				message : 'Invalid email address',
 			},
 		},
@@ -131,8 +130,11 @@ export const getModifiedControls = ({
 	checked,
 	setValue = () => {}, setCountryId = () => {}, countryId = '',
 }) => {
+	const geo = getGeoConstants();
+
 	const countryCode = getCountryDetails({ country_id: countryId });
-	const controls = getAddAddressControls({ setValue, setCountryId });
+	const controls = getAddAddressControls({ setValue, setCountryId, geo });
+
 	const updatedControls = (controls || []).map((control) => {
 		if (control.name === 'tax_number') {
 			return {
@@ -145,7 +147,7 @@ export const getModifiedControls = ({
 								.cargo_insurance.countries.includes(
 									countryCode?.country_code,
 								)
-								? geo.regex.GST
+								? geo?.regex?.GST
 								: '',
 						message: 'Invalid Tax Number',
 					},

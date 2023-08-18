@@ -20,20 +20,16 @@ const getBuyPrice = (dataObj) => {
 		},
 	});
 };
+const ONE = 1;
 
 function Card({
 	item = {},
 	priority = 1,
-	setSelectedCard = () => {},
 	similarServiceIds = [],
 	selectedCard = [],
+	handleProceed = () => {},
 }) {
-	const ONE = 1;
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
-
-	const handleProceed = async () => {
-		setSelectedCard([...selectedCard, item]);
-	};
 
 	return (
 		<div className={styles.container}>
@@ -94,7 +90,7 @@ function Card({
 
 				<div className={styles.button_wrap}>
 					<Button
-						onClick={() => handleProceed()}
+						onClick={() => handleProceed(item)}
 						disabled={(selectedCard || []).find((service) => item.service_id === service.service_id)}
 					>
 						{selectedCard.length

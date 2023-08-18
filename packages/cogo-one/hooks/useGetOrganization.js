@@ -1,9 +1,11 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetOrganization = ({ organizationId = '' }) => {
+const useGetOrganization = ({ organizationId = '', leadOrganizationId = '' }) => {
+	const orgApi = organizationId ? 'get_organization' : 'get_lead_organization';
+
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/get_organization',
+		url    : `/${orgApi}`,
 		method : 'get',
 	}, { manual: true });
 
@@ -11,20 +13,20 @@ const useGetOrganization = ({ organizationId = '' }) => {
 		try {
 			await trigger({
 				params: {
-					id                 : organizationId,
-					user_data_required : true,
+					id                 : organizationId || leadOrganizationId,
+					user_data_required : organizationId ? true : undefined,
 				},
 			});
 		} catch (error) {
-			// console.log(error);
+			console.error(error);
 		}
-	}, [organizationId, trigger]);
+	}, [leadOrganizationId, organizationId, trigger]);
 
 	useEffect(() => {
-		if (organizationId) {
+		if (organizationId || leadOrganizationId) {
 			fetchOrganization();
 		}
-	}, [fetchOrganization, organizationId]);
+	}, [fetchOrganization, leadOrganizationId, organizationId]);
 
 	return {
 		organizationData : data?.data,

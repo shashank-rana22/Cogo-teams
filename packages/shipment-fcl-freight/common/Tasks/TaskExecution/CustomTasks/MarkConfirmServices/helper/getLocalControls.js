@@ -4,7 +4,7 @@ const getLocalControls = (service_type, shipment_data) => {
 			{
 				name  : 'service_provider_id',
 				type  : 'select',
-				label : 'Service Provider (Lcl Local)',
+				label : 'Service Provider (LCL Local)',
 				value : (shipment_data?.all_services || []).find(
 					(serviceObj) => serviceObj?.service_type.includes('lcl_freight_local'),
 				)?.service_provider_id,

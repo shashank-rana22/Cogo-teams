@@ -5,6 +5,7 @@
 
 	:global {
 		.ui_pagination_table_container {
+			align-items: flex-start;
 			justify-content: flex-end;
 			padding: 10px 0 4px;
 			font-size: var(--font-size-md);

@@ -1,4 +1,5 @@
-import { Button, Loader } from '@cogoport/components';
+import { Button } from '@cogoport/components';
+import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useState, useEffect } from 'react';
 
@@ -174,8 +175,7 @@ function UploadDraftBL({
 							{createTradeDocLoading
 								? (
 									<div className={styles.create_hbl_loader}>
-										<Loader />
-										Creating Draft HBL Document...
+										<ThreeDotLoader message="Creating Draft HBL Document" />
 									</div>
 								)
 								:	Array(blCount).fill(null).map((n, i) => (

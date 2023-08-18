@@ -6,6 +6,11 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 		{
+			api          : 'create_employee_document',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
 			api          : 'list_employee_details',
 			access_type  : 'private',
 			service_name : 'hrms',
@@ -88,6 +93,16 @@ const HRMS = {
 		},
 		{
 			api          : 'create_employee_signed_document',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_employee_bank_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'bulk_employee_actions',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
@@ -288,7 +303,7 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 		{
-			api          : 'list_roles',
+			api          : 'list_employee_roles',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
@@ -458,6 +473,53 @@ const HRMS = {
 		},
 		{
 			api          : 'list_all_managers',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
+	employee_directory_hrms: [
+		{
+			api          : 'list_all_squads',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_sub_chapters',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_tribes',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_chapters',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_managers',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_stats',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_detail',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_bulk_employee_details',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},

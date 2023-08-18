@@ -104,6 +104,8 @@ function Customers({
 							agentStatus={agentStatus}
 							fetchworkPrefernce={fetchworkPrefernce}
 							agentTimeline={agentTimeline}
+							userId={userId}
+							firestore={firestore}
 						/>
 					</div>
 				)}
