@@ -25,7 +25,7 @@ function Schedules({
 		setSelectedWeek,
 	});
 
-	if (isEmpty(schedules)) {
+	if (!loading && isEmpty(schedules)) {
 		return null;
 	}
 

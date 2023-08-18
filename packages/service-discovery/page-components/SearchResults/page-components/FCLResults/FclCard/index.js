@@ -27,7 +27,6 @@ function RateCardTopSection({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
-	cogoAssuredOptions = [],
 	onChange = () => {},
 	selectedCogoAssuredCard = {},
 	showGuide = false,
@@ -45,7 +44,6 @@ function RateCardTopSection({
 				infoBanner={infoBanner}
 				index={index}
 				setInfoBanner={setInfoBanner}
-				cogoAssuredOptions={cogoAssuredOptions}
 				onChange={onChange}
 				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				showGuide={showGuide}
@@ -173,7 +171,6 @@ function FclCard({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
-	cogoAssuredOptions = [],
 	onChange = () => {},
 	selectedCogoAssuredCard = {},
 	showGuide = false,
@@ -236,7 +233,6 @@ function FclCard({
 				infoBanner={infoBanner}
 				index={index}
 				setInfoBanner={setInfoBanner}
-				cogoAssuredOptions={cogoAssuredOptions}
 				onChange={onChange}
 				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				showGuide={showGuide}
@@ -257,7 +253,7 @@ function FclCard({
 
 			{isCogoAssured && !isSelectedCard ? (
 				<SailingWeek
-					cogoAssuredOptions={cogoAssuredOptions}
+					cogoAssuredRates={cogoAssuredRates}
 					onChange={onChange}
 					selectedCogoAssuredCard={selectedCogoAssuredCard}
 				/>
