@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
 const useChangePassword = ({
@@ -10,6 +11,8 @@ const useChangePassword = ({
 	refetch = () => {},
 	personDetails = {},
 }) => {
+	const { t } = useTranslation(['profile']);
+
 	const {
 		user_data: { auth_role_data },
 	} = useSelector(({ profile }) => ({
@@ -52,7 +55,7 @@ const useChangePassword = ({
 
 			await trigger({ data: payload });
 
-			Toast.success('Password updated successfully!');
+			Toast.success(t('profile:password_updated_successfully'));
 
 			refetch();
 			setShowModal(false);

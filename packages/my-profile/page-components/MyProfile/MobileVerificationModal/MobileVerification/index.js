@@ -1,6 +1,7 @@
 import { Loader } from '@cogoport/components';
 import { MobileNumberController } from '@cogoport/forms';
 import OTPInput from '@cogoport/forms/page-components/Business/OTPInput';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -16,7 +17,6 @@ function MobileVerification({
 	onSubmit,
 	showEnterOtpComponent,
 	loading,
-
 }) {
 	if (loading) {
 		return (
@@ -30,7 +30,7 @@ function MobileVerification({
 
 			<div className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 				<MobileNumberController
-					{...controls[0]}
+					{...controls[GLOBAL_CONSTANTS.zeroth_index]}
 					control={actualControl}
 					name="mobileNumber"
 				/>

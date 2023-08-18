@@ -1,9 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
 const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsData }) => {
+	const { t } = useTranslation(['profile']);
+
 	const [showModal, setShowModal] = useState(false);
 
 	const [editNameModal, setEditNameModal] = useState({
@@ -11,16 +14,16 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 		state : false,
 	});
 
-	const { handleSubmit, formState: { errors }, control, watch, setValue } = useForm();
-
-	const watchProfilePicture = watch('profile_picture_url');
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_partner_user',
 		method : 'post',
 	}, {
 		manual: false,
 	});
+
+	const { handleSubmit, formState: { errors }, control, watch, setValue } = useForm();
+
+	const watchProfilePicture = watch('profile_picture_url');
 
 	const onOuterClick = () => {
 		setShowModal(false);
@@ -44,7 +47,7 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 			window.location.reload();
 
 			setShowModal(false);
-			Toast.success('Image updated successfully!');
+			Toast.success(t('profile:image_updated_success_toast_message'));
 		} catch (e) {
 			Toast.error(e?.data);
 		}
@@ -71,7 +74,7 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 			window.location.reload();
 
 			setShowModal(false);
-			Toast.success('Image updated successfully!');
+			Toast.success(t('profile:image_updated_success_toast_message'));
 		} catch (e) {
 			Toast.error(e?.data);
 		}

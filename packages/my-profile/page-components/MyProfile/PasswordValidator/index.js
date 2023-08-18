@@ -1,19 +1,26 @@
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
-import VALID_PASSWORD_MAPPINGS from './utils/getValidPasswordMapping';
+import getValidPasswordMappings from './utils/getValidPasswordMapping';
 
 function PasswordValidator({ password = '', errorMessage = '' }) {
+	const { t } = useTranslation(['profile']);
+
+	const validPasswordMappings = getValidPasswordMappings(t);
+
 	return (
 		<div>
 			<div className={styles.error_message}>
-				{!isEmpty(errorMessage) ? 'Invalid Password' : null}
+				{!isEmpty(errorMessage) ? t('profile:invalid_password_message') : null}
 			</div>
 			<div className={styles.password_validator}>
-				<div className="title">Password must contain:</div>
+				<div className="title">
+					{t('profile:password_validation_title')}
+				</div>
 
 				<div className="list">
-					{Object.entries(VALID_PASSWORD_MAPPINGS)?.map(([key, value]) => {
+					{Object.entries(validPasswordMappings)?.map(([key, value]) => {
 						const { message = '', length = 0, characters = [] } = value;
 
 						let isValid = false;
@@ -24,7 +31,11 @@ function PasswordValidator({ password = '', errorMessage = '' }) {
 						}
 
 						return (
-							<div className={`item item--${key}}`} style={{ display: 'flex', alignItems: 'center' }}>
+							<div
+								key={key}
+								className={`item item--${key}}`}
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
 								<div className={`icon icon--${isValid ? 'tick' : 'dot'}`}>
 									{isValid ? (
 										<img

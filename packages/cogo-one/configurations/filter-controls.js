@@ -96,8 +96,8 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 		{
 			label          : 'Tags',
 			name           : 'chat_tags',
-			controllerType : 'select',
-			value          : '',
+			controllerType : 'multi-select',
+			value          : [],
 			className      : 'escalation_field_controller',
 			placeholder    : 'Select Tags',
 			isClearable    : true,

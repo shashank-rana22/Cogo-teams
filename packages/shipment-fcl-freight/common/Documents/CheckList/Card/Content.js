@@ -2,7 +2,7 @@ import { Button, Modal, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCError } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { GenerateFreightCertificate } from '../../../Tasks/TaskExecution/CustomTasks';
@@ -42,6 +42,8 @@ function Content({
 	docType = '',
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
+	bl_details = [],
+	do_details = [],
 }) {
 	const [siReviewState, setSiReviewState] = useState(false);
 	const [printDoc, setPrintDoc] = useState(false);
@@ -67,9 +69,9 @@ function Content({
 		'bill_of_lading',
 	].includes(uploadedItem?.document_type);
 
-	const restrictBLDocumentCondition = (
-		(isHBLMBL && tradeType === 'export' && isSeaway) || (isHBLMBL && tradeType === 'import')
-	);
+	const isRestrictedExportBlDo = (isHBLMBL && tradeType === 'export' && isSeaway && isEmpty(bl_details));
+	const isRestrictedImportBlDo = (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import'
+	&& isEmpty(do_details));
 
 	const { document_type, state } = uploadedItem;
 
@@ -198,8 +200,9 @@ function Content({
 
 				{isChecked ? (
 					<div className={styles.action_container}>
-						{!restrictBLDocumentCondition
-							? (
+						{isRestrictedExportBlDo || isRestrictedImportBlDo
+							? null : (
+
 								<>
 									<Button
 										themeType="link"
@@ -214,7 +217,7 @@ function Content({
 										Download
 									</Button>
 								</>
-							) : null}
+							) }
 
 					</div>
 				) : <GetUploadButton />}
