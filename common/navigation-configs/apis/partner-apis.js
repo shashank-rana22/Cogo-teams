@@ -9634,6 +9634,11 @@ const partner = {
 
 	campaign_dashboard: [
 		{
+			api          : 'list_campaign_node_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
 			api          : 'create_campaign_duplicate',
 			access_type  : 'private',
 			service_name : 'campaign',
