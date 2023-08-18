@@ -21,6 +21,7 @@ function View() {
 
 	const { list = [] } = data || {};
 	const [firstSearch = {}] = list || [];
+
 	const {
 		origin_location_id = '',
 		destination_location_id = '',

@@ -1,4 +1,4 @@
-import { InputNumberController } from '@cogoport/forms';
+import { CheckboxController, InputNumberController } from '@cogoport/forms';
 import { IcMCross, IcMEdit } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -24,8 +24,12 @@ function Promised({ item = {}, control, unregister }) {
 					value={item.promised}
 				/>
 				<div className={styles.cancel_container}>
-					<IcMCross onClick={() => onClickCancel(`${item.id}_new_promised_quantity`)} />
+					<IcMCross onClick={() => onClickCancel(`${item?.servcice_provider?.id}_new_promised_quantity`)} />
 				</div>
+
+				<CheckboxController name={`${item?.servcice_provider?.id}_is_hard_limit`} control={control} />
+				{' '}
+				<span> is Hard Limit</span>
 
 			</div>
 		);

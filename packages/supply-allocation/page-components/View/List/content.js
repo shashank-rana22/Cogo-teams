@@ -6,7 +6,6 @@ import { useState } from 'react';
 
 import CustomProgressBar from '../../../commons/CustomProgressBar';
 import BucketTable from '../BucketsTable';
-import getSubBucketColumns from '../SubBucketColumns';
 
 function Content({
 	item = {},
@@ -25,11 +24,9 @@ function Content({
 	const [show, setShow] = useState(false);
 	const formProps = useForm();
 
-	const { control, unregister, formState, handleSubmit } = formProps;
+	const { control, unregister, formState, handleSubmit, watch } = formProps;
 	const { dirtyFields = {} } = formState;
-
-	const { subBucketColumns } = getSubBucketColumns({ control, unregister });
-
+	console.log('ff', watch());
 	const bucketControls = [
 		{
 			component : <IcMArrowRotateRight onClick={() => setShow((prev) => !prev)} />,
