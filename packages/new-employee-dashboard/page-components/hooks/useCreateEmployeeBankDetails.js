@@ -20,7 +20,7 @@ function useCreateEmployeeBankDetails({ bank_details, getEmployeeDetails }) {
 				data: {
 					...values,
 					id                  : bankDetailId || undefined,
-					cancelled_check_url : values?.cancelled_check_url?.finalUrl,
+					cancelled_check_url : values?.cancelled_check_url?.finalUrl || values?.cancelled_check_url,
 					status              : values?.status || 'active',
 					employee_detail_id  : id,
 				},

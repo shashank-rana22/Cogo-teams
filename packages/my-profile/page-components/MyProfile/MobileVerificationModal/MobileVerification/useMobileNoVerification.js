@@ -1,21 +1,24 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useMemo, useState } from 'react';
 
-const controls = [
+const getControls = (t) => [
 	{
 		name        : 'mobileNumber',
-		label       : 'Mobile Number',
+		label       : t('profile:mobile_number_label'),
 		type        : 'mobile-number-select',
 		inputType   : 'number',
-		placeholder : 'Mobile Number*',
+		placeholder : t('profile:mobile_number_placeholder'),
 		span        : 12,
 		rules       : { required: true },
 	},
 ];
 
 const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
+	const { t } = useTranslation(['profile']);
+
 	const [showEnterOtpComponent, setShowEnterOtpComponent] = useState(false);
 	const [otpNumber, setOtpNumber] = useState('');
 
@@ -23,6 +26,8 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 		url    : '/verify_user_mobile',
 		method : 'post',
 	}, { manual: false });
+
+	const controls = getControls(t);
 
 	const newControls = useMemo(() => controls?.map((control) => {
 		if (control?.name === 'mobileNumber' && type === 'verify') {
@@ -74,18 +79,18 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 			if (actionType === 'SEND_OTP') {
 				setShowEnterOtpComponent(true);
 
-				Toast.success('OTP resent successfully');
+				Toast.success(t('profile:otp_resent_successfully'));
 
 				restProps?.timer?.restart?.();
 			}
 
 			if (actionType === 'VERIFY_OTP') {
-				Toast.success('Mobile number verified successfully');
+				Toast.success(t('profile:mobile_number_verified_successfully'));
 				// eslint-disable-next-line no-undef
 				window.location.reload();
 			}
 		} catch (error) {
-			Toast.error('Otp is invalid');
+			Toast.error(t('profile:otp_is_invalid'));
 		}
 	};
 

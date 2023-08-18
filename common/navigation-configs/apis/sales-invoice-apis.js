@@ -45,6 +45,12 @@ const apis = [
 		service_name : 'bookings',
 		feature      : 'sales_invoice',
 	},
+	{
+		api          : 'post_incident_management_incident',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'sales_invoice',
+	},
 ];
 
 export default apis;
