@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
 import PieChart from '../../../../commons/PieChart';
@@ -22,7 +24,20 @@ const HEADINGS_MAPPING = {
 const generateData = (data, type) => Object.keys(data || {}).reduce(
 	(acc, curr) => {
 		const { graphData, count } = acc;
-
+		if (type === 'weekly_forecasts') {
+			console.log('wee', curr, curr[0]);
+			// console.log('ggg', formatDate({
+			// 	date       : curr[0],
+			// 	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+			// 	timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+			// 	formatType : 'dateTime',
+			// 	separator  : ' | ',
+			// }));
+			// formatDate({
+			// 	date       : curr[1],
+			// 	dateFormat : GLOBAL_CONSTANTS.formats.date.default,
+			// });
+		}
 		return {
 			graphData: [
 				...graphData,
