@@ -244,6 +244,7 @@ function CogoOne() {
 				setOpenKamContacts={setOpenKamContacts}
 				setActiveTab={setActiveTab}
 				orgId={orgId}
+				viewType={viewType}
 			/>
 		</>
 	);
