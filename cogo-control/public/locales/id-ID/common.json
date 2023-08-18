@@ -231,5 +231,9 @@
     "simulation": "Simulasi",
     "analytics": "Analitik",
     "pricing_trends": "Tren Harga",
-    "feedback_dashboard": "Dasbor Umpan Balik"
+    "feedback_dashboard": "Dasbor Umpan Balik",
+    "booking_desk": "Meja Pemesanan",
+    "feedbacks": "Umpan balik",
+    "promotions_marketing": "Promosi Pemasaran",
+    "promotions_kam": "Promosi KAM"
 }

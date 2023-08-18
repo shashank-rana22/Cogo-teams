@@ -231,5 +231,9 @@
     "simulation": "Mô phỏng",
     "analytics": "Phân tích",
     "pricing_trends": "Xu hướng giá",
-    "feedback_dashboard": "Bảng điều khiển phản hồi"
+    "feedback_dashboard": "Bảng điều khiển phản hồi",
+    "booking_desk": "Bàn đặt phòng",
+    "feedbacks": "phản hồi",
+    "promotions_marketing": "Khuyến mãi Tiếp thị",
+    "promotions_kam": "Promotions KAM"
 }

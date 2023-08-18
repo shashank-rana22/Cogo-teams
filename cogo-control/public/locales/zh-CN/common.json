@@ -231,5 +231,9 @@
     "simulation": "模拟",
     "analytics": "分析",
     "pricing_trends": "定价趋势",
-    "feedback_dashboard": "反馈仪表板"
+    "feedback_dashboard": "反馈仪表板",
+    "booking_desk": "订票柜台",
+    "feedbacks": "反馈",
+    "promotions_marketing": "促销营销",
+    "promotions_kam": "促销活动 KAM"
 }

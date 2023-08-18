@@ -73,7 +73,7 @@
     "marketing": "Marketing",
     "feedback": "Feedback",
     "cogo_assured": "Cogo Assured",
-    "tracking_job": " Tracking Job",
+    "tracking_job": "Tracking Job",
     "product_code_mapping": "Product Code Mapping ",
     "purchase_consolidated_invoices": "Purchase Consolidated Invoices",
     "sales_consolidated_invoices": "Sales Consolidated Invoices",
@@ -142,7 +142,7 @@
     "locations_view": "Locations View",
     "location_clusters": "Location Clusters",
     "operators": "Operators",
-    "coe_finance": " COE Finance",
+    "coe_finance": "COE Finance",
     "ap": "AP",
     "ar": "AR",
     "settlement": "Settlement",
@@ -231,5 +231,9 @@
     "simulation": "Simulation",
     "analytics": "Analytics",
     "pricing_trends": "Pricing Trends",
-    "feedback_dashboard": "Feedback Dashboard"
+    "feedback_dashboard": "Feedback Dashboard",
+    "booking_desk": "Booking Desk",
+    "feedbacks": "Feedbacks",
+    "promotions_marketing": "Promotions Marketing",
+    "promotions_kam": "Promotions KAM"
 }

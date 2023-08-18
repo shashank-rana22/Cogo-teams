@@ -1,5 +1,6 @@
 import { Pagination, Table } from '@cogoport/components';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import useRoleList from '../../hooks/useRoleList';
 
@@ -9,6 +10,7 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function RoleList() {
+	const { t } = useTranslation(['accessManagement', 'common']);
 	const {
 		showCreateRoleModal = false,
 		onChangeShowCreateRoleModal = () => {},
@@ -35,6 +37,7 @@ function RoleList() {
 				stakeHolderType={stakeHolderType}
 				onResetFilters={onResetFilters}
 				setStakeHolderType={setStakeHolderType}
+				t={t}
 			/>
 
 			<section id="rnp_role_list_filters_and_list_container">
@@ -44,6 +47,7 @@ function RoleList() {
 					searchString={searchString}
 					setSearchString={setSearchString}
 					stakeHolderType={stakeHolderType}
+					t={t}
 				/>
 
 				<section className={styles.list_container} id="rnp_role_list_list_and_pagination_container">

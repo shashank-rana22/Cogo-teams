@@ -231,5 +231,9 @@
     "simulation": "Simulation",
     "analytics": "Analytics",
     "pricing_trends": "Pricing Trends",
-    "feedback_dashboard": "Feedback Dashboard"
+    "feedback_dashboard": "Feedback Dashboard",
+    "booking_desk": "Booking Desk",
+    "feedbacks": "Feedbacks",
+    "promotions_marketing": "Promotions Marketing",
+    "promotions_kam": "Promotions KAM"
 }

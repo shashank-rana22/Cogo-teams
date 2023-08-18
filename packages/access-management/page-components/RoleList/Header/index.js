@@ -1,7 +1,6 @@
 import { Button, Chips } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import Heading from '../../../common/Heading';
 
@@ -10,10 +9,10 @@ import styles from './styles.module.css';
 function Header({
 	onChangeShowCreateRoleModal = () => {},
 	onResetFilters = () => {},
-	stakeHolderType,
-	setStakeHolderType,
+	stakeHolderType = '',
+	setStakeHolderType = '',
+	t = () => {},
 }) {
-	const { t } = useTranslation(['accessManagement']);
 	return (
 		<section className={styles.container} id="rnp_role_list_header_container">
 			<section className={styles.heading_container}>

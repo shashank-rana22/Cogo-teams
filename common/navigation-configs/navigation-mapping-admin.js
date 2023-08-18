@@ -83,7 +83,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		welcome: {
 			key           : 'welcome',
-			title         : 'Welcome',
+			title         : t('common:welcome'),
 			href          : '/v2/welcome',
 			as            : '/v2/welcome',
 			type          : 'link',
@@ -94,7 +94,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		employee_portal: {
 			key           : 'employee_portal',
-			title         : 'Profile Details',
+			title         : t('common:profile_details'),
 			href          : '/v2/employee-portal',
 			as            : '/v2/employee-portal',
 			type          : 'link',
@@ -105,7 +105,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		channel_partner_dashboard: {
 			key           : 'channel_partner_dashboard',
-			title         : 'Dashboard',
+			title         : t('common:dashboard'),
 			href          : '/channel-partner-dashboard',
 			as            : '/channel-partner-dashboard',
 			type          : 'link',
@@ -116,7 +116,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		dashboards: {
 			key           : 'dashboards',
-			title         : 'Dashboards',
+			title         : t('common:dashboards'),
 			main_apis     : [],
 			possible_apis : [],
 			icon          : IcMDashboard,
@@ -124,7 +124,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		business_dashboard: {
 			key           : 'business_dashboard',
-			title         : 'Business Dashboard',
+			title         : t('common:business_dashboard'),
 			href          : '/business-dashboard',
 			as            : '/business-dashboard',
 			type          : 'link',
@@ -146,7 +146,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		partner_application: {
 			key           : 'partner_application',
-			title         : 'Partner Applications',
+			title         : t('common:partner_applications'),
 			href          : '/applications',
 			as            : '/applications',
 			type          : 'link',
@@ -157,7 +157,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		partner: {
 			key           : 'partner',
-			title         : 'Partners - Cogoport',
+			title         : t('common:partners_cogoport'),
 			href          : '/partners',
 			as            : '/partners',
 			type          : 'link',
@@ -168,7 +168,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		user_allocation: {
 			key           : 'user_allocation',
-			title         : 'User Allocations',
+			title         : t('common:user_allocations'),
 			href          : '/partner-user-allocations',
 			as            : '/partner-user-allocations',
 			type          : 'link',
@@ -179,7 +179,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		business: {
 			key           : 'business',
-			title         : 'Business',
+			title         : t('common:business'),
 			href          : '/business',
 			as            : '/business',
 			type          : 'link',
@@ -190,7 +190,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		demand_crm: {
 			key           : 'demand_crm',
-			title         : 'Sales CRM',
+			title         : t('common:sales_crm'),
 			href          : '/lead-management',
 			as            : '/lead-management',
 			type          : 'link',
@@ -222,7 +222,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		supply_crm: {
 			key           : 'supply_crm',
-			title         : 'Supply CRM',
+			title         : t('common:supply_crm'),
 			href          : '/crm/supply',
 			as            : '/crm/supply',
 			type          : 'link',
@@ -238,7 +238,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		support_crm: {
 			key           : 'support_crm',
-			title         : 'Support CRM',
+			title         : t('common:support_crm'),
 			href          : '/crm/support',
 			as            : '/crm/support',
 			type          : 'link',
@@ -249,7 +249,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		onboarding_crm: {
 			key           : 'onboarding_crm',
-			title         : 'Onboarding CRM',
+			title         : t('common:onboarding_crm'),
 			href          : '/crm/onboarding',
 			as            : '/crm/onboarding',
 			type          : 'link',
@@ -260,7 +260,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		lead_dashboard: {
 			key           : 'lead_dashboard',
-			title         : 'Lead Dashboard',
+			title         : t('common:lead_dashboard'),
 			href          : '/lead-dashboard',
 			as            : '/lead-dashboard',
 			type          : 'link',
@@ -271,7 +271,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		finance_crm: {
 			key           : 'finance_crm',
-			title         : 'Finance CRM',
+			title         : t('common:lead_dashboard'),
 			href          : '/crm/finance',
 			as            : '/crm/finance',
 			type          : 'link',
@@ -283,7 +283,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		sales_dashboard: {
 			key           : 'sales_dashboard',
-			title         : 'Sales Dashboard',
+			title         : t('common:sales_dashboard'),
 			href          : '/sales/dashboards',
 			as            : '/sales/dashboards',
 			type          : 'link',
@@ -313,7 +313,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		supply_dashboard: {
 			key           : 'supply_dashboard',
-			title         : 'Supply Dashboard',
+			title         : t('common:supply_dashboard'),
 			href          : '/supply/dashboards',
 			as            : '/supply/dashboards',
 			type          : 'link',
@@ -332,35 +332,35 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		schedules: {
 			key         : 'schedules',
-			title       : 'Schedules',
+			title       : t('common:schedules'),
 			isSubNavs   : true,
 			icon        : IcMDashboard,
 			module_type : 'dashboards',
 			options     : [
 				{
 					key           : 'schedules-ocean_schedule_coverage',
-					title         : 'Ocean Schedule Coverage',
+					title         : t('common:ocean_schedule_coverage'),
 					href          : '/v2/schedules/ocean-schedule-coverage',
 					as            : '/v2/schedules/ocean-schedule-coverage',
 					possible_apis : [...apis.ocean_port_coverage],
 				},
 				{
 					key           : 'schedules-sailing_schedules',
-					title         : 'Sailing Schedules',
+					title         : t('common:sailing_schedules'),
 					href          : '/v2/schedules/sailing-schedules',
 					as            : '/v2/schedules/sailing-schedules',
 					possible_apis : [...apis.sailing_schedule],
 				},
 				{
 					key           : 'schedules-vessel_schedules',
-					title         : 'Vessel Schedules',
+					title         : t('common:vessel_schedules'),
 					href          : '/v2/schedules/vessel-schedules',
 					as            : '/v2/schedules/vessel-schedules',
 					possible_apis : [...apis.vessel_schedules],
 				},
 				{
 					key           : 'schedules-service_lanes',
-					title         : 'Service Lanes',
+					title         : t('common:service_lanes'),
 					href          : '/v2/schedules/service-lanes',
 					as            : '/v2/schedules/service-lanes',
 					possible_apis : [...apis.service_lanes],
@@ -369,7 +369,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		okam_dashboard: {
 			key           : 'okam_dashboard',
-			title         : 'KAM Dashboard',
+			title         : t('common:kam_dashboard'),
 			href          : '/okam/dashboards',
 			as            : '/okam/dashboards',
 			type          : 'link',
@@ -380,7 +380,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		operations_dashboard: {
 			key           : 'operations_dashboard',
-			title         : 'Service Ops 1 Dashboard',
+			title         : t('common:service_ops_1_dashboard'),
 			href          : '/bookingagent/dashboards',
 			as            : '/bookingagent/dashboards',
 			type          : 'link',
@@ -391,7 +391,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		so_two: {
 			key           : 'so_two',
-			title         : 'Service Ops 2 Dashboard',
+			title         : t('common:service_ops_2_dashboard'),
 			href          : '/service-ops-two',
 			as            : '/service-ops-two',
 			type          : 'link',
@@ -402,7 +402,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		logistics_rate: {
 			key       : 'logistics_rate',
-			title     : 'Rate Management',
+			title     : t('common:rate_management'),
 			icon      : IcMRateManagement,
 			main_apis : [
 				'list_fcl_freight_rates',
@@ -430,85 +430,85 @@ const navigationMapping = ({ t = () => {} }) => {
 			],
 			options: [
 				{
-					title : 'Air International',
+					title : t('common:air_international'),
 					href  : '/rate-management/air',
 					as    : '/rate-management/air',
 					type  : 'link',
 				},
 				{
-					title : 'Air Domestic ',
+					title : t('common:air_domestic'),
 					href  : '/rate-management/air-domestic',
 					as    : '/rate-management/air-domestic',
 					type  : 'link',
 				},
 				{
-					title : 'FCL Freight',
+					title : t('common:fcl_freight'),
 					type  : 'link',
 					as    : '/rate-management/fcl-freight',
 					href  : '/rate-management/[service]',
 				},
 				{
-					title : 'LCL Freight',
+					title : t('common:lcl_freight'),
 					type  : 'link',
 					as    : '/rate-management/lcl-freight/freight',
 					href  : '/rate-management/[service]/[module]',
 				},
 				{
-					title : 'FTL Transportation',
+					title : t('common:ftl_transportation'),
 					type  : 'link',
 					href  : '/rate-management/ftl-freight',
 					as    : '/rate-management/ftl-freight',
 				},
 				{
-					title : 'Trailer Freight',
+					title : t('common:trailer_freight'),
 					type  : 'link',
 					href  : '/rate-management/trailer-freight',
 					as    : '/rate-management/trailer-freight',
 				},
 				{
-					title : 'Haulage Freight',
+					title : t('common:haulage_freight'),
 					type  : 'link',
 					as    : '/rate-management/haulage-freight/haulage-charges',
 					href  : '/rate-management/[service]/[module]',
 				},
 				{
-					title   : 'FCL Customs',
+					title   : t('common:fcl_customs'),
 					as      : '/rate-management/fcl-customs/custom-clearance',
 					href    : '/rate-management/[service]/[module]',
 					service : 'fcl-customs',
 				},
 				{
-					title   : 'LCL Customs',
+					title   : t('common:lcl_customs'),
 					as      : '/rate-management/lcl-customs/custom-clearance',
 					href    : '/rate-management/[service]/[module]',
 					service : 'lcl-customs',
 				},
 				{
-					title : 'LTL Transportation',
+					title : t('common:ltl_transportation'),
 					href  : '/rate-management/ltl-freight',
 					as    : '/rate-management/ltl-freight',
 					type  : 'link',
 				},
 				{
-					title : 'FCL CFS',
+					title : t('common:fcl_cfs'),
 					as    : '/rate-management/fcl-cfs/cfs-clearance',
 					href  : '/rate-management/[service]/[module]',
 					type  : 'link',
 				},
 				{
-					title : 'Additional Service',
+					title : t('common:additional_service'),
 					as    : '/rate-management/additional-service/fcl_freight',
 					href  : '/rate-management/[service]/[module]',
 					type  : 'link',
 				},
 				{
-					title : 'Air Customs',
+					title : t('common:air_customs'),
 					href  : '/rate-management/air-customs',
 					as    : '/rate-management/air-customs',
 					type  : 'link',
 				},
 				{
-					title : 'Rails Domestic',
+					title : t('common:rails_domestic'),
 					href  : '/rate-management/rails-domestic',
 					as    : '/rate-management/rails-domestic',
 					type  : 'link',
@@ -518,7 +518,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		port_management: {
 			key       : 'port_management',
-			title     : 'Port Management',
+			title     : t('common:port_management'),
 			main_apis : [
 				'list_fcl_freight_rate_locals',
 				'list_organization_serviceable_ports',
@@ -527,13 +527,13 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.pms,
 			options       : [
 				{
-					title : 'Origin Ports',
+					title : t('common:origin_ports'),
 					href  : '/port-management/[type]',
 					as    : '/port-management/origin',
 					type  : 'link',
 				},
 				{
-					title : 'Destination Ports',
+					title : t('common:destination_ports'),
 					href  : '/port-management/[type]',
 					as    : '/port-management/destination',
 					type  : 'link',
@@ -543,7 +543,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		booking_list: {
 			key           : 'booking_list',
-			title         : 'Booking List',
+			title         : t('common:booking_list'),
 			href          : '/shipment-lsp-management',
 			as            : '/shipment-lsp-management',
 			type          : 'link',
@@ -555,7 +555,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		enquiries: {
 			key           : 'enquiries',
-			title         : 'Enquiries Received',
+			title         : t('common:enquiries_received'),
 			href          : '/enquiries',
 			as            : '/enquiries',
 			type          : 'link',
@@ -567,7 +567,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		special_rate_requests: {
 			key           : 'special_rate_requests',
-			title         : 'Enquiries Placed',
+			title         : t('common:enquiries_placed'),
 			href          : '/enquiries-placed',
 			as            : '/enquiries-placed',
 			type          : 'link',
@@ -579,7 +579,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		quotation_approval: {
 			key           : 'quotation_approval',
-			title         : 'Quotations',
+			title         : t('common:quotations'),
 			href          : '/quotation-approval',
 			as            : '/quotation-approval',
 			type          : 'link',
@@ -597,7 +597,7 @@ const navigationMapping = ({ t = () => {} }) => {
 
 		saas_tracking: {
 			key           : 'saas_tracking',
-			title         : 'Container Tracking',
+			title         : t('common:container_tracking'),
 			href          : '/saas/tracking',
 			as            : '/saas/tracking',
 			type          : 'link',
@@ -607,7 +607,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		saas_schedules: {
 			key           : 'saas_schedules',
-			title         : 'Ocean Schedules',
+			title         : t('common:ocean_schedules'),
 			href          : '/saas/schedules',
 			as            : '/saas/schedules',
 			type          : 'link',
@@ -618,7 +618,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		discount: {
 			key           : 'discount',
-			title         : 'Discounts',
+			title         : t('common:discounts'),
 			href          : '/discounts',
 			as            : '/discounts',
 			type          : 'link',
@@ -628,7 +628,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		margin: {
 			key           : 'margin',
-			title         : 'Margin Management',
+			title         : t('common:margin_management'),
 			href          : '/margins',
 			as            : '/margins',
 			type          : 'link',
@@ -639,7 +639,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		margin_approval: {
 			key           : 'margin_approval',
-			title         : 'Margin Approvals',
+			title         : t('common:margin_approvals'),
 			href          : '/margin-approvals',
 			as            : '/margin-approvals',
 			type          : 'link',
@@ -649,7 +649,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		invoice_approval: {
 			key           : 'invoice_approval',
-			title         : 'Invoice Approvals',
+			title         : t('common:invoice_approvals'),
 			href          : '/invoice-approvals',
 			as            : '/invoice-approvals',
 			type          : 'link',
@@ -660,7 +660,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		condition: {
 			key           : 'condition',
-			title         : 'Conditions',
+			title         : t('common:conditions'),
 			href          : '/conditions',
 			as            : '/conditions',
 			type          : 'link',
@@ -670,7 +670,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		cashflow: {
 			key           : 'cashflow',
-			title         : 'Finance Dashboard',
+			title         : t('common:finance_dashboard'),
 			href          : '/cash-flow',
 			as            : '/cash-flow',
 			type          : 'link',
@@ -681,7 +681,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		credit_request: {
 			key           : 'credit_request',
-			title         : 'Credit Request',
+			title         : t('common:credit_request'),
 			href          : '/credit-requests',
 			as            : '/credit-requests',
 			type          : 'link',
@@ -693,7 +693,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		organization_service_management: {
 			key           : 'organization_service_management',
-			title         : 'Service Management',
+			title         : t('common:service_management'),
 			href          : '/service-management',
 			as            : '/service-management',
 			type          : 'link',
@@ -704,7 +704,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		local_agent_management: {
 			key           : 'local_agent_management',
-			title         : 'Agent Management',
+			title         : t('common:agent_management'),
 			href          : '/agent-management',
 			as            : '/agent-management',
 			icon          : IcMAgentManagement,
@@ -715,25 +715,25 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		locations: {
 			key           : 'locations',
-			title         : 'Locations',
+			title         : t('common:locations'),
 			main_apis     : ['list_locations'],
 			icon          : IcMLocation,
 			possible_apis : apis.locations,
 			options       : [
 				{
-					title : 'Locations View',
+					title : t('common:locations_view'),
 					href  : '/locations',
 					as    : '/locations',
 					type  : 'link',
 				},
 				{
-					title : 'Location Clusters',
+					title : t('common:location_clusters'),
 					href  : '/locations-clusters',
 					as    : '/locations-clusters',
 					type  : 'link',
 				},
 				{
-					title : 'Operators',
+					title : t('common:operators'),
 					href  : '/v2/operators',
 					as    : '/v2/operators',
 					type  : 'link',
@@ -743,7 +743,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		air_port_pair: {
 			key           : 'air_port_pair',
-			title         : 'Air Port Pairs',
+			title         : t('common:air_port_pairs'),
 			href          : '/air-schedules',
 			as            : '/air-schedules',
 			icon          : IcMAirport,
@@ -754,7 +754,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		rate_sheet: {
 			key           : 'rate_sheet',
-			title         : 'Rate Sheets',
+			title         : t('common:rate_sheets'),
 			href          : '/rate-sheets',
 			as            : '/rate-sheets',
 			type          : 'link',
@@ -765,7 +765,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		file_uploader: {
 			key           : 'file_uploader',
-			title         : 'File Uploader',
+			title         : t('common:file_uploader'),
 			href          : '/file-uploader',
 			as            : '/file-uploader',
 			type          : 'link',
@@ -776,7 +776,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		cms: {
 			key           : 'cms',
-			title         : 'CMS',
+			title         : t('common:cms'),
 			href          : '/cms',
 			as            : '/cms',
 			type          : 'link',
@@ -787,7 +787,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		user: {
 			key           : 'user',
-			title         : 'Users (Manage Accounts)',
+			title         : t('common:users_manage_accounts'),
 			href          : '/partner-users',
 			as            : '/partner-users',
 			type          : 'link',
@@ -798,7 +798,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		faqs: {
 			key           : 'faqs',
-			title         : 'FAQs',
+			title         : t('common:faqs'),
 			href          : '/faqs',
 			as            : '/faqs',
 			type          : 'link',
@@ -808,7 +808,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		trade_parties: {
 			key           : 'trade_parties',
-			title         : 'Trade Parties',
+			title         : t('common:trade_parties'),
 			href          : '/trade-parties',
 			as            : '/trade-parties',
 			icon          : IcMTradeparties,
@@ -819,7 +819,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		tech_ops: {
 			key           : 'tech_ops',
-			title         : 'TechOps',
+			title         : t('common:tech_ops'),
 			href          : '/tech-ops/locals',
 			as            : '/tech-ops/locals',
 			type          : 'link',
@@ -830,14 +830,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		business_finance: {
 			key       : 'business_finance',
-			title     : 'Business Finance',
+			title     : t('common:business_finance'),
 			icon      : IcMBusinessFinance,
 			isSubNavs : true,
 			main_apis : ['get_purchase_payment_upload_list'],
 			options   : [
 				{
 					key           : 'business_finance-coe_finance',
-					title         : ' COE Finance',
+					title         : t('common:coe_finance'),
 					href          : '/v2/business-finance/coe-finance/[active_tab]',
 					as            : '/v2/business-finance/coe-finance/dashboard',
 					icon          : IcMProductCodeMapping,
@@ -846,7 +846,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-account_payables',
-					title         : 'AP',
+					title         : t('common:ap'),
 					href          : '/v2/business-finance/account-payables/[active_tab]',
 					as            : '/v2/business-finance/account-payables/dashboard',
 					type          : 'link',
@@ -855,7 +855,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-account_receivables',
-					title         : 'AR',
+					title         : t('common:ar'),
 					href          : '/v2/business-finance/account-receivables/[active_tab]',
 					as            : '/v2/business-finance/account-receivables/dashboard',
 					type          : 'link',
@@ -864,7 +864,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-settlement',
-					title         : 'Settlement',
+					title         : t('common:settlement'),
 					href          : '/v2/business-finance/settlement/[active_tab]',
 					as            : '/v2/business-finance/settlement/JournalVoucher',
 					type          : 'link',
@@ -873,7 +873,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-cogo_book',
-					title         : 'Cogo Books',
+					title         : t('common:cogo_books'),
 					href          : '/business-finance/cogo-book/[active_tab]/[view]',
 					as            : '/business-finance/cogo-book/accruals/dashboard',
 					type          : 'link',
@@ -882,7 +882,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-overheads',
-					title         : 'Overheads',
+					title         : t('common:overheads'),
 					href          : '/v2/business-finance/overheads/[active_tab]',
 					as            : '/v2/business-finance/overheads/vendors',
 					type          : 'link',
@@ -891,7 +891,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-compliance',
-					title         : 'Compliance',
+					title         : t('common:compliance'),
 					href          : '/v2/business-finance/compliance/[active_tab]',
 					as            : '/v2/business-finance/compliance/dashboard',
 					type          : 'link',
@@ -900,7 +900,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-incident_management',
-					title         : 'Incident Management',
+					title         : t('common:incident_management'),
 					href          : '/v2/business-finance/incident-management/[activeTab]',
 					as            : '/v2/business-finance/incident-management/requested',
 					type          : 'link',
@@ -909,7 +909,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-finance_dashboard',
-					title         : 'Finance Dashboard',
+					title         : t('common:finance_dashboard'),
 					href          : '/v2/business-finance/finance-dashboard/[activeTab]',
 					as            : '/v2/business-finance/finance-dashboard/logistics',
 					type          : 'link',
@@ -918,7 +918,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-dunnings',
-					title         : 'Dunnings',
+					title         : t('common:dunnings'),
 					href          : '/v2/business-finance/dunnings/[active_tab]',
 					as            : '/v2/business-finance/dunnings/dashboard',
 					type          : 'link',
@@ -927,7 +927,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-manual_invoice',
-					title         : 'Manual Invoice',
+					title         : t('common:manual_invoice'),
 					href          : '/business-finance/manual-invoice',
 					as            : '/business-finance/manual-invoice',
 					type          : 'link',
@@ -936,7 +936,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-account_receivables_translate',
-					title         : 'AR (Vietnam)',
+					title         : t('common:ar_vietnam'),
 					href          : '/v2/business-finance/translate-account-receivables/[activeTab]',
 					as            : '/v2/business-finance/translate-account-receivables/pending',
 					type          : 'link',
@@ -945,7 +945,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-reports',
-					title         : 'Reports',
+					title         : t('common:reports'),
 					href          : '/v2/business-finance/reports',
 					as            : '/v2/business-finance/reports',
 					type          : 'link',
@@ -954,7 +954,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'business_finance-cogo_financials',
-					title         : 'Cogo Financials',
+					title         : t('common:cogo_financials'),
 					href          : '/v2/business-finance/cogo-financials',
 					as            : '/v2/business-finance/cogo-financials',
 					type          : 'link',
@@ -966,7 +966,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		translate: {
 			key           : 'translate',
-			title         : 'Translation',
+			title         : t('common:translation'),
 			href          : '/v2/translate/[activeTab]',
 			as            : '/v2/translate/Requested',
 			type          : 'link',
@@ -976,7 +976,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		finance: {
 			key           : 'finance',
-			title         : 'Finance',
+			title         : t('common:finance'),
 			href          : '/finance',
 			as            : '/finance',
 			type          : 'link',
@@ -987,7 +987,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		my_incident: {
 			key           : 'my_incident',
-			title         : 'My Incidents',
+			title         : t('common:my_incidents'),
 			href          : '/v2/my-incident/[activeIncidentTab]',
 			as            : '/v2/my-incident/requested',
 			type          : 'link',
@@ -999,13 +999,13 @@ const navigationMapping = ({ t = () => {} }) => {
 
 		incentives: {
 			key       : 'incentives',
-			title     : 'Incentives/KPI',
+			title     : t('common:incentives_kpi'),
 			isSubNavs : true,
 			icon      : IcMIncentives,
 			options   : [
 				{
 					key           : 'incentives-incentive_plans',
-					title         : 'Incentive Plans',
+					title         : t('common:incentive_plans'),
 					href          : '/incentives/plans/[active_tab]',
 					as            : '/incentives/plans/sales',
 					type          : 'link',
@@ -1014,7 +1014,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'incentives-kpi_plans',
-					title         : 'KPI Plans',
+					title         : t('common:kpi_plans'),
 					href          : '/incentives/kpi/plans',
 					as            : '/incentives/kpi/plans',
 					type          : 'link',
@@ -1023,7 +1023,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'incentives-incentive_targets',
-					title         : 'Targets',
+					title         : t('common:targets'),
 					href          : '/incentives/targets',
 					as            : '/incentives/targets',
 					type          : 'link',
@@ -1032,7 +1032,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'incentives-user_incentives',
-					title         : 'User Incentives',
+					title         : t('common:user_incentives'),
 					href          : '/incentives/user-incentives/[active_tab]',
 					as            : '/incentives/user-incentives/sales',
 					main_apis     : [],
@@ -1044,7 +1044,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		live_chat: {
 			key           : 'live_chat',
-			title         : 'Live Chat',
+			title         : t('common:live_chat'),
 			href          : '/live-chat',
 			as            : '/live-chat',
 			type          : 'link',
@@ -1054,7 +1054,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		dunning: {
 			key           : 'dunning',
-			title         : 'Dunning',
+			title         : t('common:dunning'),
 			href          : '/dunning',
 			as            : '/dunning',
 			type          : 'link',
@@ -1065,7 +1065,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		invoice_triggers: {
 			key           : 'invoice_triggers',
-			title         : 'Invoice Triggers',
+			title         : t('common:invoice_triggers'),
 			href          : '/invoice-triggers',
 			as            : '/invoice-triggers',
 			icon          : IcMInvoiceTriggers,
@@ -1075,7 +1075,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		manually_create_shipment: {
 			key           : 'manually_create_shipment',
-			title         : 'Manual shipment',
+			title         : t('common:manual_shipment'),
 			href          : '/manually-create-shipments',
 			as            : '/manually-create-shipments',
 			type          : 'link',
@@ -1086,7 +1086,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		outstanding: {
 			key           : 'outstanding',
-			title         : 'Outstanding',
+			title         : t('common:outstanding'),
 			href          : '/outstanding',
 			as            : '/outstanding',
 			icon          : IcMMoney,
@@ -1096,7 +1096,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		saas_air_schedules: {
 			key           : 'saas_air_schedules',
-			title         : 'Air Schedules',
+			title         : t('common:air_schedules'),
 			href          : '/saas/air-schedules',
 			as            : '/saas/air-schedules',
 			type          : 'link',
@@ -1107,7 +1107,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		saas_air_tracking: {
 			key           : 'saas_air_tracking',
-			title         : 'Air Tracking',
+			title         : t('common:air_tracking'),
 			href          : '/saas/air-tracking',
 			as            : '/saas/air-tracking',
 			type          : 'link',
@@ -1117,7 +1117,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		unified_dashboard: {
 			key           : 'unified_dashboard',
-			title         : 'Unified Dashboard',
+			title         : t('common:unified_dashboard'),
 			href          : '/v2/unified-dashboard',
 			as            : '/v2/unified-dashboard',
 			type          : 'link',
@@ -1128,7 +1128,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		employee_directory: {
 			key           : 'employee_directory',
-			title         : 'Employee Directory',
+			title         : t('common:employee_directory'),
 			href          : '/v2/employee-directory',
 			as            : '/v2/employee-directory',
 			type          : 'link',
@@ -1139,7 +1139,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		lens: {
 			key           : 'lens',
-			title         : 'Lens',
+			title         : t('common:lens'),
 			href          : '/lens',
 			as            : '/lens',
 			type          : 'link',
@@ -1149,7 +1149,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		pay_later: {
 			key           : 'pay_later',
-			title         : 'Pay Later',
+			title         : t('common:pay_later'),
 			href          : '/pay-later',
 			as            : '/pay-later',
 			type          : 'link',
@@ -1160,7 +1160,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		notifications: {
 			key           : 'notifications',
-			title         : 'Notifications',
+			title         : t('common:notifications'),
 			href          : '/notifications',
 			as            : '/notifications',
 			type          : 'link',
@@ -1171,7 +1171,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		tracking: {
 			key           : 'tracking',
-			title         : 'Tracking',
+			title         : t('common:tracking'),
 			href          : '/tracking',
 			as            : '/tracking',
 			icon          : IcMTracking,
@@ -1182,13 +1182,13 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		revenue_desk: {
 			key       : 'revenue_desk',
-			title     : 'Revenue Desk',
+			title     : t('common:revenue_desk'),
 			isSubNavs : true,
 			icon      : IcMCoe,
 			options   : [
 				{
 					key           : 'revenue_desk-bookings',
-					title         : 'Bookings',
+					title         : t('common:bookings'),
 					href          : '/v2/revenue-desk',
 					as            : '/v2/revenue-desk',
 					type          : '',
@@ -1198,7 +1198,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'revenue_desk-contracts',
-					title         : 'Contracts',
+					title         : t('common:contracts'),
 					href          : '/v2/contracts',
 					as            : '/v2/contracts',
 					type          : 'link',
@@ -1209,14 +1209,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		coe: {
 			key         : 'coe',
-			title       : 'Center of Excellence [COE]',
+			title       : t('common:center_of_excellence_coe'),
 			isSubNavs   : true,
 			module_type : 'dashboards',
 			icon        : IcMCoe,
 			options     : [
 				{
 					key           : 'coe-booking_tasks',
-					title         : 'Operations Management',
+					title         : t('common:operations_management'),
 					href          : '/booking-tasks',
 					as            : '/booking-tasks',
 					type          : 'link',
@@ -1225,7 +1225,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-shipments',
-					title         : 'Bookings',
+					title         : t('common:bookings'),
 					href          : '/shipment-management',
 					as            : '/shipment-management',
 					type          : 'link',
@@ -1236,7 +1236,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-shipment_air',
-					title         : 'Air Booking Desk',
+					title         : t('common:air_booking_desk'),
 					href          : '/v2/booking-desk/air',
 					as            : '/v2/booking-desk/air',
 					type          : 'link',
@@ -1245,7 +1245,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-bn_salvage',
-					title         : 'BN Salvage',
+					title         : t('common:bn_salvage'),
 					href          : '/v2/bn-salvage',
 					as            : '/v2/bn-salvage',
 					type          : 'link',
@@ -1254,7 +1254,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-tasks_dashboard',
-					title         : 'Dashboard',
+					title         : t('common:dashboard'),
 					href          : '/coe-tasks',
 					as            : '/coe-tasks',
 					type          : 'link',
@@ -1263,7 +1263,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-finance',
-					title         : 'Finance',
+					title         : t('common:finance'),
 					href          : '/coe-finance',
 					as            : '/coe-finance',
 					type          : 'link',
@@ -1272,7 +1272,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-booking_note_desk',
-					title         : 'Booking Desk',
+					title         : t('common:booking_desk'),
 					href          : '/v2/booking-desk',
 					as            : '/v2/booking-desk',
 					type          : 'link',
@@ -1281,7 +1281,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-cost_booking',
-					title         : 'FF Cost Booking',
+					title         : t('common:ff_cost_booking'),
 					href          : '/cost-booking',
 					as            : '/cost-booking',
 					type          : 'link',
@@ -1290,7 +1290,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-igm_desk',
-					title         : 'IGM Desk',
+					title         : t('common:igm_desk'),
 					href          : '/v2/igm-desk',
 					as            : '/v2/igm-desk',
 					type          : 'link',
@@ -1299,7 +1299,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key       : 'coe-bl_do',
-					title     : 'Authority Desk',
+					title     : t('common:authority_desk'),
 					href      : '/bl-do',
 					as        : '/bl-do',
 					type      : 'link',
@@ -1313,7 +1313,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-cost_booking_desk',
-					title         : 'Cost Booking Desk',
+					title         : t('common:cost_booking_desk'),
 					href          : '/v2/cost-booking-desk',
 					as            : '/v2/cost-booking-desk',
 					type          : 'link',
@@ -1322,7 +1322,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-cancellation_policies',
-					title         : 'Cancellation Policies',
+					title         : t('common:cancellation_policies'),
 					href          : '/cancellation-policies',
 					as            : '/cancellation-policies',
 					type          : 'link',
@@ -1331,7 +1331,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-communication',
-					title         : 'Communcation',
+					title         : t('common:communcation'),
 					href          : '/communication',
 					as            : '/communication',
 					type          : 'link',
@@ -1340,7 +1340,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-ltl_run_sheets',
-					title         : 'LTL Run Sheets',
+					title         : t('common:ltl_run_sheets'),
 					href          : '/ltl-run-sheets',
 					as            : '/ltl-run-sheets',
 					type          : 'link',
@@ -1349,7 +1349,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-kam-payments-dashboard',
-					title         : 'KAM Payments Dashboard',
+					title         : t('common:kam_payments_dashboard'),
 					href          : '/kam-payments-dashboard',
 					as            : '/kam-payments-dashboard',
 					type          : 'link',
@@ -1358,7 +1358,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-ltl_operations',
-					title         : 'LTL Operations',
+					title         : t('common:ltl_operations'),
 					href          : '/ltl-operations',
 					as            : '/ltl-operations',
 					type          : 'link',
@@ -1367,7 +1367,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-bl_do_collection_release',
-					title         : 'BL/DO Collection - Release',
+					title         : t('common:bl_do_collection_release'),
 					href          : '/v2/bl_do-collection-release',
 					as            : '/v2/bl_do-collection-release',
 					type          : 'link',
@@ -1376,7 +1376,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-kam_desk',
-					title         : 'KAM Desk',
+					title         : t('common:kam_desk'),
 					href          : '/v2/kam-desk',
 					as            : '/v2/kam-desk',
 					type          : 'link',
@@ -1385,7 +1385,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-document_desk',
-					title         : 'Document Desk',
+					title         : t('common:document_desk'),
 					href          : '/v2/document-desk',
 					as            : '/v2/document-desk',
 					type          : 'link',
@@ -1394,7 +1394,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-last_mile',
-					title         : 'Last Mile Desk',
+					title         : t('common:last_mile_desk'),
 					href          : '/v2/last-mile',
 					as            : '/v2/last-mile',
 					type          : 'link',
@@ -1407,7 +1407,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-risk-management',
-					title         : 'Risk Management',
+					title         : t('common:risk_management'),
 					href          : '/v2/risk-management',
 					as            : '/v2/risk-management',
 					type          : 'link',
@@ -1416,7 +1416,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-so2_surface',
-					title         : 'SO2 Dashboard',
+					title         : t('common:so2_dashboard'),
 					href          : '/v2/so2-surface',
 					as            : '/v2/so2-surface',
 					type          : 'link',
@@ -1425,7 +1425,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-shipment_surface',
-					title         : 'Surface Booking Desk',
+					title         : t('common:surface_booking_desk'),
 					href          : '/v2/booking-desk/surface',
 					as            : '/v2/booking-desk/surface',
 					type          : 'link',
@@ -1434,7 +1434,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-ftl_field_service_ops',
-					title         : 'FTL Field Service OPS',
+					title         : t('common:ftl_field_service_ops'),
 					href          : '/v2/ftl-field-service-ops',
 					as            : '/v2/ftl-field-service-ops',
 					type          : 'link',
@@ -1445,7 +1445,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		terms_and_conditions: {
 			key           : 'terms_and_conditions',
-			title         : 'Terms And Conditions',
+			title         : t('common:terms_and_conditions'),
 			href          : '/terms-and-conditions',
 			as            : '/terms-and-conditions',
 			type          : 'link',
@@ -1456,7 +1456,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		operations_mails: {
 			key         : 'operations_mails',
-			title       : 'Operations Mails',
+			title       : t('common:operations_mails'),
 			href        : '/operations-mails',
 			as          : '/operations-mails',
 			type        : 'link',
@@ -1464,7 +1464,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		prm: {
 			key       : 'prm',
-			title     : 'PRM',
+			title     : t('common:prm'),
 			href      : '/channel-partner-management',
 			as        : '/channel-partner-management',
 			type      : 'link',
@@ -1492,13 +1492,13 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		marketing: {
 			key       : 'marketing',
-			title     : 'Marketing',
+			title     : t('common:marketing'),
 			isSubNavs : true,
 			icon      : IcMMarketing,
 			options   : [
 				{
 					key           : 'marketing-marketing_segmentation',
-					title         : 'Segmentation',
+					title         : t('common:segmentation'),
 					href          : '/marketing/segmentation',
 					as            : '/marketing/segmentation',
 					type          : 'link',
@@ -1507,7 +1507,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'marketing-marketing_campaign-dashboard',
-					title         : 'Campaign Dashboard',
+					title         : t('common:campaign_dashboard'),
 					href          : '/marketing/campaign-dashboard',
 					as            : '/marketing/campaign-dashboard',
 					icon          : 'ic-campaign',
@@ -1518,7 +1518,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'marketing-marketing_templates',
-					title         : 'Templates',
+					title         : t('common:templates'),
 					href          : '/marketing/templates',
 					as            : '/marketing/templates',
 					type          : 'link',
@@ -1528,7 +1528,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'marketing-marketing_cogo_points',
-					title         : 'CogoPoints',
+					title         : t('common:cogopoints'),
 					href          : '/marketing/cogo-points/[active_tab]',
 					as            : '/marketing/cogo-points/cogopoint_creation',
 					type          : 'link',
@@ -1539,7 +1539,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'marketing-marketing_communication_control',
-					title         : 'Communication Control',
+					title         : t('common:communication_control'),
 					href          : '/marketing/communication-control',
 					as            : '/marketing/communication-control',
 					type          : 'link',
@@ -1550,7 +1550,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'marketing-whatsapp_communication',
-					title         : 'Whatsapp Communication',
+					title         : t('common:whatsapp_communication'),
 					href          : '/marketing/whatsapp-communication',
 					as            : '/marketing/whatsapp-communication',
 					type          : 'link',
@@ -1560,7 +1560,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'marketing-omni_channel',
-					title         : 'Omni Channel',
+					title         : t('common:omni_channel'),
 					href          : '/marketing/omni-channel',
 					as            : '/marketing/omni-channel',
 					type          : 'link',
@@ -1569,7 +1569,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'marketing-utm_parameters',
-					title         : 'UTM Parameters',
+					title         : t('common:utm_parameters'),
 					href          : '/marketing/utm_parameters',
 					as            : '/marketing/utm_parameters',
 					type          : 'link',
@@ -1582,7 +1582,7 @@ const navigationMapping = ({ t = () => {} }) => {
 
 		feedback: {
 			key           : 'feedback',
-			title         : 'Feedback',
+			title         : t('common:feedback'),
 			href          : '/feedback',
 			as            : '/feedback',
 			type          : 'link',
@@ -1595,14 +1595,14 @@ const navigationMapping = ({ t = () => {} }) => {
 
 		cogo_assured: {
 			key         : 'cogo_assured',
-			title       : 'Cogo Assured',
+			title       : t('common:cogo_assured'),
 			isSubNavs   : true,
 			module_type : 'dashboards',
 			icon        : IcCCogoassured,
 			options     : [
 				{
 					key           : 'cogo_assured-fcl_freight',
-					title         : 'FCL Freight',
+					title         : t('common:fcl_freight'),
 					href          : '/cogo-assured/fcl_freight',
 					as            : '/cogo-assured/fcl_freight',
 					type          : 'link',
@@ -1611,7 +1611,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'cogo_assured-fcl_freight_local',
-					title         : 'FCL Freight Local',
+					title         : t('common:fcl_freight_local'),
 					href          : '/cogo-assured/fcl_freight_local',
 					as            : '/cogo-assured/fcl_freight_local',
 					type          : 'link',
@@ -1621,7 +1621,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'cogo_assured-haulage_freight',
-					title         : 'Haulage Freight',
+					title         : t('common:haulage_freight'),
 					href          : '/cogo-assured/haulage_freight',
 					as            : '/cogo-assured/haulage_freight',
 					type          : 'link',
@@ -1631,7 +1631,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'cogo_assured-rate_sheets',
-					title         : 'Rate Sheets',
+					title         : t('common:rate_sheets'),
 					href          : '/cogo-assured/rate_sheets',
 					as            : '/cogo-assured/rate_sheets',
 					type          : 'link',
@@ -1641,7 +1641,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'cogo_assured-feedbacks',
-					title         : 'Feedbacks',
+					title         : t('common:feedbacks'),
 					href          : '/cogo-assured/feedbacks',
 					as            : '/cogo-assured/feedbacks',
 					type          : 'link',
@@ -1653,7 +1653,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		tracking_job: {
 			key           : 'tracking_job',
-			title         : ' Tracking Job',
+			title         : t('common:tracking_job'),
 			href          : '/saas/tracking-job',
 			as            : '/saas/tracking-job',
 			type          : 'link',
@@ -1664,7 +1664,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		product_code_mapping: {
 			key           : 'product_code_mapping',
-			title         : 'Product Code Mapping ',
+			title         : t('common:product_code_mapping'),
 			href          : '/item-tax',
 			as            : '/item-tax',
 			type          : 'link',
@@ -1676,7 +1676,7 @@ const navigationMapping = ({ t = () => {} }) => {
 
 		consolidated_purchase_invoices: {
 			key           : 'consolidated_purchase_invoices',
-			title         : 'Purchase Consolidated Invoices',
+			title         : t('common:purchase_consolidated_invoices'),
 			href          : '/consolidated-invoices/purchase',
 			as            : '/consolidated-invoices/purchase',
 			type          : 'link',
@@ -1687,7 +1687,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		consolidated_sales_invoices: {
 			key           : 'consolidated_sales_invoices',
-			title         : 'Sales Consolidated Invoices',
+			title         : t('common:sales_consolidated_invoices'),
 			href          : '/consolidated-invoices/sales',
 			as            : '/consolidated-invoices/sales',
 			type          : 'link',
@@ -1698,7 +1698,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		liability_dashboard: {
 			key           : 'liability_dashboard',
-			title         : 'Liability Dashboard',
+			title         : t('common:liability_dashboard'),
 			href          : '/liability-dashboard',
 			as            : '/liability-dashboard',
 			possible_apis : apis.liability_dashboard,
@@ -1708,13 +1708,13 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		promotions: {
 			key       : 'promotions',
-			title     : 'Promotions',
+			title     : t('common:promotions'),
 			isSubNavs : true,
 			icon      : IcMPromotions,
 			options   : [
 				{
 					key           : 'promotions-marketing',
-					title         : 'Promotions Marketing',
+					title         : t('common:promotions_marketing'),
 					href          : '/promotions/promotions-marketing',
 					as            : '/promotions/promotions-marketing',
 					type          : 'link',
@@ -1723,7 +1723,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'promotions-promotions_kam',
-					title         : 'Promotions KAM ',
+					title         : t('common:promotions_kam'),
 					href          : '/promotions/promotions-kam',
 					as            : '/promotions/promotions-kam',
 					type          : 'link',
@@ -1732,7 +1732,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'promotions-budget_allocation',
-					title         : 'Budget Allocation',
+					title         : t('common:budget_allocation'),
 					href          : '/promotions/budget-allocation',
 					as            : '/promotions/budget-allocation',
 					type          : 'link',
@@ -1744,7 +1744,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		voiceCall: {
 			key           : 'voiceCall',
-			title         : 'Voice Call',
+			title         : t('common:voice_call'),
 			href          : '/voice-call',
 			as            : '/voice-call',
 			type          : 'link',
@@ -1753,13 +1753,13 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		transaction_setting: {
 			key       : 'transaction_setting',
-			title     : 'Transaction Settings',
+			title     : t('common:transaction_settings'),
 			isSubNavs : true,
 			icon      : IcMTransaction,
 			options   : [
 				{
 					key           : 'transaction_setting-pass_through_customers',
-					title         : 'Pass Through Customers',
+					title         : t('common:pass_through_customers'),
 					href          : '/pass-through-customers',
 					as            : '/pass-through-customers',
 					main_apis     : [],
@@ -1767,7 +1767,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'transaction_setting-convenience_rate',
-					title         : 'Convenience Rates',
+					title         : t('common:convenience_rates'),
 					href          : '/convenience-rates',
 					as            : '/convenience-rates',
 					main_apis     : ['list_convenience_rates'],
@@ -1777,7 +1777,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'transaction_setting-payment_modes_and_methods',
-					title         : 'Payment Modes and Methods',
+					title         : t('common:payment_modes_and_methods'),
 					href          : '/payment-modes-and-methods',
 					as            : '/payment-modes-and-methods',
 					type          : 'link',
@@ -1786,7 +1786,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'transaction_setting-cogo_fx',
-					title         : 'Cogo FX',
+					title         : t('common:cogo_fx'),
 					href          : '/cogo-fx',
 					as            : '/cogo-fx',
 					main_apis     : [],
@@ -1794,7 +1794,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'transaction_setting-controlled_booking',
-					title         : 'Controlled Booking Desk',
+					title         : t('common:controlled_booking_desk'),
 					icon          : IcMBookingDesk,
 					href          : '/v2/controlled-booking',
 					as            : '/v2/controlled-booking',
@@ -1805,28 +1805,28 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		supply_tools: {
 			key           : 'supply_tools',
-			title         : 'Supply Tools',
+			title         : t('common:supply_tools'),
 			icon          : IcMDemurrage,
 			main_apis     : [],
 			possible_apis : apis.supply_tools,
 			options       : [
 				{
-					title : 'Weight Slabs',
+					title : t('common:weight_slabs'),
 					href  : '/supply-tools/weight-slabs',
 					as    : '/supply-tools/weight-slabs',
 				},
 				{
-					title : 'Commodity Cluster',
+					title : t('common:commodity_cluster'),
 					href  : '/supply-tools/commodity-clusters',
 					as    : '/supply-tools/commodity-clusters',
 				},
 				{
-					title : 'Fcl Freight Rate Extension',
+					title : t('common:fcl_freight_rate_extension'),
 					href  : '/supply-tools/fcl-freight-rate-extensions',
 					as    : '/supply-tools/fcl-freight-rate-extensions',
 				},
 				{
-					title : 'Detention Demurrage',
+					title : t('common:detention_demurrage'),
 					href  : '/supply-tools/detention-demurrage',
 					as    : '/supply-tools/detention-demurrage',
 				},
@@ -1835,7 +1835,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		my_profile: {
 			key           : 'my_profile',
-			title         : 'My Profile',
+			title         : t('common:my_profile'),
 			href          : '/my-profile',
 			as            : '/my-profile',
 			icon          : IcMProfile,
@@ -1846,14 +1846,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		allocations: {
 			key         : 'allocations',
-			title       : 'Allocations',
+			title       : t('common:allocations'),
 			isSubNavs   : true,
 			icon        : IcMUserAllocations,
 			module_type : 'dashboards',
 			options     : [
 				{
 					key           : 'allocations-core_engine',
-					title         : 'Core Engine',
+					title         : t('common:core_engine'),
 					href          : '/v2/allocation/core-engine',
 					as            : '/v2/allocation/core-engine',
 					possible_apis : apis.allocation_engine,
@@ -1861,14 +1861,14 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'allocations-kam_expertise',
-					title         : 'Kam Expertise',
+					title         : t('common:kam_expertise'),
 					href          : '/v2/allocation/kam-expertise',
 					as            : '/v2/allocation/kam-expertise',
 					possible_apis : apis.kam_expertise,
 				},
 				{
 					key           : 'allocations-crm_feedback_dashboard',
-					title         : 'CRM Feedback Dashboard',
+					title         : t('common:crm_feedback_dashboard'),
 					href          : '/v2/allocation/crm-feedback-dashboard',
 					as            : '/v2/allocation/crm-feedback-dashboard',
 					possible_apis : apis.crm_feedback_dashboard,
@@ -1876,14 +1876,14 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'allocations-account_scoring',
-					title         : 'Account Scoring',
+					title         : t('common:account_scoring'),
 					href          : '/v2/allocation/account-scoring',
 					as            : '/v2/allocation/account-scoring',
 					possible_apis : apis.account_scoring,
 				},
 				{
 					key           : 'allocations-objective_configurations',
-					title         : 'Objective Configurations',
+					title         : t('common:objective_configurations'),
 					href          : '/v2/allocation/objective-configurations',
 					as            : '/v2/allocation/objective-configurations',
 					possible_apis : apis.objective_configurations,
@@ -1892,7 +1892,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		kam_monitoring: {
 			key         : 'kam_monitoring',
-			title       : 'KAM Monitoring',
+			title       : t('common:kam_monitoring'),
 			module_type : 'dashboards',
 			href        : '/kam-monitoring',
 			as          : '/kam-monitoring',
@@ -1900,7 +1900,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		awb_inventory: {
 			key           : 'awb_inventory',
-			title         : 'AWB Inventory',
+			title         : t('common:awb_inventory'),
 			href          : '/v2/awb-inventory',
 			as            : '/v2/awb-inventory',
 			main_apis     : [],
@@ -1910,7 +1910,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		ground_ops: {
 			key           : 'ground_ops',
-			title         : 'SO2 - Docs Dashboard',
+			title         : t('common:so2_docs_dashboard'),
 			href          : '/v2/ground-ops',
 			as            : '/v2/ground-ops',
 			main_apis     : [],
@@ -1920,7 +1920,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		printing_desk: {
 			key           : 'printing_desk',
-			title         : 'Printing Desk',
+			title         : t('common:printing_desk'),
 			href          : '/v2/printing-desk',
 			as            : '/v2/printing-desk',
 			main_apis     : [],
@@ -1930,7 +1930,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		airline_booking_plugin: {
 			key           : 'airline_booking_plugin',
-			title         : 'Airline Booking Plugin',
+			title         : t('common:airline_booking_plugin'),
 			href          : '/v2/airline-booking-plugin',
 			as            : '/v2/airline-booking-plugin',
 			main_apis     : [],
@@ -1941,7 +1941,7 @@ const navigationMapping = ({ t = () => {} }) => {
 
 		enrichment: {
 			key           : 'enrichment',
-			title         : 'Enrichment',
+			title         : t('common:enrichment'),
 			href          : '/v2/enrichment',
 			as            : '/v2/enrichment',
 			main_apis     : ['get_allocation_feedback_requests'],
@@ -1951,7 +1951,7 @@ const navigationMapping = ({ t = () => {} }) => {
 
 		document_wallet: {
 			key           : 'document_wallet',
-			title         : 'Document Wallet',
+			title         : t('common:document_wallet'),
 			href          : '/document-wallet',
 			as            : '/document-wallet',
 			possible_apis : apis.document_walet,
@@ -1961,13 +1961,13 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		platform_configuration: {
 			key       : 'platform_configuration',
-			title     : 'Platform configuration',
+			title     : t('common:platform_configuration'),
 			isSubNavs : true,
 			icon      : IcMAccountSettings,
 			options   : [
 				{
 					key           : 'platform_configuration-constants',
-					title         : 'Constant Config',
+					title         : t('common:constant_config'),
 					href          : '/constants',
 					icon          : IcMAccountSettings,
 					as            : '/constants',
@@ -1979,7 +1979,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		cogo_verse_analytics: {
 			key   : 'cogo_verse_analytics',
-			title : 'CogoVerse',
+			title : t('common:cogo_verse'),
 			icon  : () => (
 				<img
 					src={GLOBAL_CONSTANTS.image_url.cogo_verse_svg}
@@ -1997,7 +1997,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		roles_permissions: {
 			key           : 'roles_permissions',
-			title         : 'Roles and Permissions',
+			title         : t('common:roles_and_permissions'),
 			icon          : IcMSettings,
 			href          : '/v2/list-roles',
 			as            : '/v2/list-roles',
@@ -2008,7 +2008,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		vendor_rm: {
 			key           : 'vendor_rm',
-			title         : 'VRM',
+			title         : t('common:vrm'),
 			icon          : IcMCrm,
 			href          : '/v2/vendors',
 			as            : '/v2/vendors',
@@ -2019,13 +2019,13 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		ticket_management: {
 			key       : 'ticket_management',
-			title     : 'Ticket Management',
+			title     : t('common:ticket_management'),
 			isSubNavs : true,
 			icon      : IcMDocument,
 			options   : [
 				{
 					key           : 'ticket_management-ticket_management_dashboard',
-					title         : 'Dashboard',
+					title         : t('common:dashboard'),
 					href          : '/ticket-management/dashboard',
 					as            : '/ticket-management/dashboard',
 					type          : 'link',
@@ -2034,7 +2034,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'ticket_management-my_tickets',
-					title         : 'My Tickets',
+					title         : t('common:my_tickets'),
 					href          : '/v2/ticket-management/my-tickets',
 					as            : '/v2/ticket-management/my-tickets',
 					type          : 'link',
@@ -2043,7 +2043,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'ticket_management-super_admin',
-					title         : 'Admin Dashboard',
+					title         : t('common:admin_dashboard'),
 					href          : '/v2/ticket-management/super-admin',
 					as            : '/v2/ticket-management/super-admin',
 					type          : 'link',
@@ -2052,7 +2052,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'ticket_management-ticket_configurations',
-					title         : 'Ticket Configurations',
+					title         : t('common:ticket_configurations'),
 					href          : '/ticket-management/configurations',
 					as            : '/ticket-management/configurations',
 					type          : 'link',
@@ -2063,7 +2063,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		cogo_one: {
 			key   : 'cogo_one',
-			title : 'Cogo One',
+			title : t('common:cogo_one'),
 			icon  : () => (
 				<img
 					src={GLOBAL_CONSTANTS.image_url.cogo_one_svg}
@@ -2078,7 +2078,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			options       : [
 				{
 					key           : 'cogo_one-omni_channel',
-					title         : 'Omni Channel',
+					title         : t('common:omni_channel'),
 					href          : '/v2/cogo-one/omni-channel',
 					as            : '/v2/cogo-one/omni-channel',
 					type          : 'link',
@@ -2087,7 +2087,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'cogo_one-dashboard',
-					title         : 'Dashboard',
+					title         : t('common:dashboard'),
 					href          : '/v2/cogo-one/dashboard',
 					as            : '/v2/cogo-one/dashboard',
 					type          : 'link',
@@ -2099,14 +2099,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		home: {
 			key   : 'home',
-			title : 'Home',
+			title : t('common:home'),
 			href  : '/home',
 			as    : '/home',
 			icon  : IcMSettings,
 		},
 		manage_rfq: {
 			key           : 'manage_rfq',
-			title         : 'Manage RFQ',
+			title         : t('common:manage_rfq'),
 			href          : '/manage-rfq',
 			as            : '/manage-rfq',
 			type          : 'link',
@@ -2116,7 +2116,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		rfq_dashboard: {
 			key           : 'rfq_dashboard',
-			title         : 'RFQ Dashboard',
+			title         : t('common:rfq_dashboard'),
 			href          : '/v2/rfq-dashboard',
 			as            : '/v2/rfq-dashboard',
 			type          : 'link',
@@ -2126,12 +2126,12 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		contract_rates: {
 			key       : 'contract_rates',
-			title     : 'Contract Rates',
+			title     : t('common:contract_rates'),
 			isSubNavs : true,
 			options   : [
 				{
 					key           : 'contract_rates-international_contracts',
-					title         : 'Overseas Contract',
+					title         : t('common:overseas_contract'),
 					href          : '/contract-rates/dashboard/active',
 					as            : '/contract-rates/dashboard/active',
 					type          : 'link',
@@ -2140,7 +2140,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'contract_rates-domestic_contracts',
-					title         : 'Domestic Contracts',
+					title         : t('common:domestic_contracts'),
 					href          : '/contract-rates',
 					as            : '/contract-rates',
 					type          : 'link',
@@ -2152,13 +2152,13 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		cogo_academy: {
 			key       : 'cogo_academy',
-			title     : 'Cogo Academy',
+			title     : t('common:cogo_academy'),
 			isSubNavs : true,
 			icon      : IcMFaq,
 			options   : [
 				{
 					key           : 'cogo_academy-create_faq',
-					title         : 'Control Center',
+					title         : t('common:control_center'),
 					href          : '/v2/learning',
 					as            : '/v2/learning',
 					type          : 'link',
@@ -2171,7 +2171,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'cogo_academy-faq',
-					title         : 'FAQs',
+					title         : t('common:faqs'),
 					href          : '/v2/learning/faq',
 					as            : '/v2/learning/faq',
 					type          : 'link',
@@ -2180,7 +2180,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'cogo_academy-tests',
-					title         : 'Assessment Module',
+					title         : t('common:assessment_module'),
 					href          : '/v2/learning/tests/dashboard',
 					as            : '/v2/learning/tests/dashboard',
 					type          : 'link',
@@ -2189,7 +2189,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'cogo_academy-announcements',
-					title         : 'Announcements',
+					title         : t('common:announcements'),
 					href          : '/v2/announcements',
 					as            : '/v2/announcements',
 					icon          : IcMAnnouncement,
@@ -2199,7 +2199,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'cogo_academy-course',
-					title         : 'Course Module',
+					title         : t('common:course_module'),
 					href          : '/v2/learning/course',
 					as            : '/v2/learning/course',
 					type          : 'link',
@@ -2211,13 +2211,13 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		inventory_management: {
 			key       : 'inventory_management',
-			title     : 'Inventory Management',
+			title     : t('common:inventory_management'),
 			icon      : IcMRateManagement,
 			isSubNavs : true,
 			options   : [
 				{
 					key           : 'inventory_management-rail',
-					title         : 'Rail',
+					title         : t('common:rail'),
 					href          : '/inventory-management/rail',
 					as            : '/inventory-management/rail',
 					type          : 'link',
@@ -2229,14 +2229,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		analytics_dashboard: {
 			key         : 'analytics_dashboard',
-			title       : 'Analytics Dashboard',
+			title       : t('common:analytics_dashboard'),
 			isSubNavs   : true,
 			icon        : IcMDashboard,
 			module_type : 'dashboards',
 			options     : [
 				{
 					key       : 'analytics_dashboard-view',
-					title     : 'Dashboard',
+					title     : t('common:dashboard'),
 					href      : '/analytics-dashboard',
 					as        : '/analytics-dashboard',
 					type      : 'link',
@@ -2250,7 +2250,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		ihls: {
 			key         : 'ihls',
-			title       : 'IHLS',
+			title       : t('common:ihls'),
 			isSubNavs   : true,
 			module_type : 'dashboards',
 			icon        : IcMExportfile,
@@ -2258,7 +2258,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			options     : [
 				{
 					key           : 'ihls-athena_dashboard',
-					title         : 'Market Intelligence',
+					title         : t('common:market_intelligence'),
 					icon          : IcMDashboard,
 					href          : '/v2/ihls/athena-dashboard',
 					as            : '/v2/ihls/athena-dashboard',
@@ -2267,7 +2267,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'ihls-data_pipeline',
-					title         : 'File Processing Dashboard',
+					title         : t('common:file_processing_dashboard'),
 					href          : '/ihls/data-pipeline',
 					as            : '/ihls/data-pipeline',
 					type          : 'link',
@@ -2276,7 +2276,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'ihls-lead_data_pipeline',
-					title         : 'Lead Enrichment Dashboard',
+					title         : t('common:lead_enrichment_dashboard'),
 					href          : '/ihls/lead-data-pipeline',
 					as            : '/ihls/lead-data-pipeline',
 					type          : 'link',
@@ -2286,7 +2286,7 @@ const navigationMapping = ({ t = () => {} }) => {
 
 				{
 					key           : 'ihls-file_upload',
-					title         : 'IHLS File Uploader',
+					title         : t('common:ihls_file_uploader'),
 					href          : '/v2/ihls/file-upload',
 					as            : '/v2/ihls/file-upload',
 					type          : 'link',
@@ -2297,7 +2297,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		air_repository: {
 			key           : 'air_repository',
-			title         : 'Air Repository',
+			title         : t('common:air_repository'),
 			icon          : IcMAirSchedules,
 			href          : '/v2/air-repository',
 			as            : '/v2/air-repository',
@@ -2307,21 +2307,21 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		saas_tools: {
 			key       : 'saas_tools',
-			title     : 'Saas Tools',
+			title     : t('common:saas_tools'),
 			icon      : IcMTechops,
 			isSubNavs : true,
 			main_apis : [],
 			options   : [
 				{
 					key           : 'saas_tools-standard_milestones',
-					title         : 'Standard Milestones',
+					title         : t('common:standard_milestones'),
 					href          : '/v2/saas-tools/standard-milestones',
 					as            : '/v2/saas-tools/standard-milestones',
 					possible_apis : apis.saas_tools_standard_milestones,
 				},
 				{
 					key           : 'saas_tools-vessel_tracking',
-					title         : 'Live Vessel Tracking',
+					title         : t('common:live_vessel_tracking'),
 					href          : '/v2/saas-tools/live-vessel-tracking',
 					as            : '/v2/saas-tools/live-vessel-tracking',
 					possible_apis : apis.saas_live_vessel_tracking,
@@ -2330,7 +2330,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		new_employee_dashboard: {
 			key           : 'new_employee_dashboard',
-			title         : 'New Hire Dashboard',
+			title         : t('common:new_hire_dashboard'),
 			isSubNavs     : false,
 			module_type   : 'dashboards',
 			href          : '/v2/new-employee-dashboard',
@@ -2341,7 +2341,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		ingestion: {
 			key           : 'ingestion',
-			title         : 'Ingestion',
+			title         : t('common:ingestion'),
 			isSubNavs     : false,
 			module_type   : 'dashboards',
 			main_apis     : ['list_ingestion_requests'],
@@ -2352,7 +2352,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		performance_management: {
 			key         : 'performance_management',
-			title       : 'Performance Management',
+			title       : t('common:performance_management'),
 			isSubNavs   : true,
 			module_type : 'dashboards',
 			main_apis   : [],
@@ -2360,7 +2360,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			options     : [
 				{
 					key           : 'performance_management-performance_management_configuration',
-					title         : 'Configuration',
+					title         : t('common:configuration'),
 					href          : '/v2/performance-management/configuration',
 					as            : '/v2/performance-management/configuration',
 					type          : 'link',
@@ -2368,7 +2368,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'performance_management-kra_management',
-					title         : 'KRA Management',
+					title         : t('common:kra_management'),
 					href          : '/v2/performance-management/kra-management',
 					as            : '/v2/performance-management/kra-management',
 					type          : 'link',
@@ -2376,7 +2376,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'performance_management-kra_assignment',
-					title         : 'KRA Assignment',
+					title         : t('common:kra_assignment'),
 					href          : '/v2/performance-management/kra-assignment',
 					as            : '/v2/performance-management/kra-assignment',
 					type          : 'link',
@@ -2384,7 +2384,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'performance_management-performance_rating_review',
-					title         : 'Performance Rating Review',
+					title         : t('common:performance_rating_review'),
 					href          : '/v2/performance-management/rating-review',
 					as            : '/v2/performance-management/rating-review',
 					type          : 'link',
@@ -2394,7 +2394,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		chro: {
 			key           : 'chro',
-			title         : 'CHRO CTC Approvals',
+			title         : t('common:chro_ctc_approvals'),
 			isSubNavs     : false,
 			module_type   : 'dashboards',
 			main_apis     : [],
@@ -2405,14 +2405,14 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		saas_subscription: {
 			key         : 'saas_subscription',
-			title       : 'Saas Subscription',
+			title       : t('common:saas_subscription'),
 			isSubNavs   : true,
 			icon        : IcMExportfile,
 			module_type : 'dashboards',
 			options     : [
 				{
 					key           : 'saas_subscription-customer',
-					title         : 'Customer',
+					title         : t('common:customer'),
 					href          : '/v2/saas-subscription/customer',
 					as            : '/v2/saas-subscription/customer',
 					type          : 'link',
@@ -2421,7 +2421,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'saas_subscription-plan',
-					title         : 'Plan',
+					title         : t('common:plan'),
 					href          : '/v2/saas-subscription/plan',
 					as            : '/v2/saas-subscription/plan',
 					type          : 'link',
@@ -2432,7 +2432,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		referral: {
 			key         : 'referral',
-			title       : 'Referral',
+			title       : t('common:referral'),
 			isSubNavs   : true,
 			icon        : IcMRolesIncluded,
 			module_type : 'dashboards',
@@ -2440,7 +2440,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			options     : [
 				{
 					key           : 'referral-referral_dashboard',
-					title         : 'Dashboard',
+					title         : t('common:dashboard'),
 					href          : '/v2/referral/dashboard',
 					as            : '/v2/referral/dashboard',
 					type          : 'link',
@@ -2448,7 +2448,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'referral-referral_configuration',
-					title         : 'Configuration',
+					title         : t('common:configuration'),
 					href          : '/v2/referral/configuration',
 					as            : '/v2/referral/configuration',
 					type          : 'link',
@@ -2456,7 +2456,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'referral-simulation',
-					title         : 'Simulation',
+					title         : t('common:simulation'),
 					href          : '/v2/referral/simulation',
 					as            : '/v2/referral/simulation',
 					type          : 'link',
@@ -2464,7 +2464,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'referral-referral_analytics',
-					title         : 'Analytics',
+					title         : t('common:analytics'),
 					href          : '/v2/referral/analytics',
 					as            : '/v2/referral/analytics',
 					type          : 'link',
@@ -2474,20 +2474,20 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		chakravyuh: {
 			key         : 'chakravyuh',
-			title       : 'Chakravyuh',
+			title       : t('common:chakravyuh'),
 			isSubNavs   : true,
 			module_type : 'crm',
 			options     : [
 				{
 					key           : 'chakravyuh-trends',
-					title         : 'Pricing Trends',
+					title         : t('common:pricing_trends'),
 					href          : '/v2/pricing/trends',
 					as            : '/v2/pricing/trends',
 					possible_apis : apis.pricing_trends,
 				},
 				{
 					key           : 'chakravyuh-feedback',
-					title         : 'Feedback Dashboard',
+					title         : t('common:feedback_dashboard'),
 					href          : '/v2/chakravyuh/feedback-dashboard',
 					as            : '/v2/chakravyuh/feedback-dashboard',
 					possible_apis : apis.pricing_trends,
@@ -2496,7 +2496,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		manager_dashboard: {
 			key           : 'manager_dashboard',
-			title         : 'Manager Dashboard',
+			title         : t('common:manager_dashboard'),
 			icon          : IcMDashboard,
 			href          : '/v2/manager-dashboard',
 			as            : '/v2/manager-dashboard',
@@ -2505,7 +2505,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		employee_dashboard: {
 			key           : 'employee_dashboard',
-			title         : 'Employee Dashboard',
+			title         : t('common:employee_dashboard'),
 			href          : '/v2/employee-dashboard',
 			as            : '/v2/employee-dashboard',
 			type          : 'link',
@@ -2516,7 +2516,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		ftl_admin: {
 			key           : 'ftl_admin',
-			title         : 'FTL Admin',
+			title         : t('common:ftl_admin'),
 			type          : 'link',
 			module_type   : 'dashboards',
 			href          : '/v2/ftl-admin',
@@ -2525,7 +2525,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		centralised_customer_service: {
 			key           : 'centralised_customer_service',
-			title         : 'Centralised Customer Service Desk',
+			title         : t('common:centralised_customer_service_desk'),
 			isSubNavs     : false,
 			module_type   : 'dashboards',
 			href          : '/v2/centralised-customer-service',
@@ -2536,7 +2536,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		resources: {
 			key           : 'resources',
-			title         : 'Api Resource',
+			title         : t('common:api_resource'),
 			isSubNavs     : false,
 			module_type   : 'dashboards',
 			main_apis     : [],

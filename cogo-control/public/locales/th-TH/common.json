@@ -231,5 +231,9 @@
     "simulation": "จำลอง",
     "analytics": "การวิเคราะห์",
     "pricing_trends": "แนวโน้มราคา",
-    "feedback_dashboard": "แดชบอร์ดคำติชม"
+    "feedback_dashboard": "แดชบอร์ดคำติชม",
+    "booking_desk": "โต๊ะจอง",
+    "feedbacks": "การตอบรับ",
+    "promotions_marketing": "โปรโมชั่น การตลาด",
+    "promotions_kam": "โปรโมชั่น KAM"
 }
