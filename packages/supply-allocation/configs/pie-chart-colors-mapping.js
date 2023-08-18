@@ -7,7 +7,7 @@ export const PERSONA_DISTRIBUTION_COLORS = {
 
 export const WEEKY_DISTRIBUTION_COLORS = {
 	standard  : '#EDFFFF',
-	reefer    : '#ACDADF',
+	refer     : '#ACDADF',
 	flat_rack : '#63BEC8',
 	iso_tank  : '#CFEAED',
 };

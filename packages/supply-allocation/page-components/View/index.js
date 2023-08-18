@@ -28,8 +28,6 @@ function View() {
 		destination_location_id = '',
 	} = firstSearch || {};
 
-	const { display_name: originName } = origin_location;
-	const { display_name: destinationName } = destination_location;
 	const { data: rollingForecastData = {} } = useGetRollingForecastData({
 		origin_location_id, destination_location_id,
 	});
@@ -39,9 +37,7 @@ function View() {
 	return (
 		<Fragment key={search_id}>
 			<Header
-				originName={originName}
-				destinationName={destinationName}
-				key={search_id}
+				firstSearch={firstSearch}
 			/>
 
 			<PieChartGraphs rollingForecastData={rollingForecastData} />

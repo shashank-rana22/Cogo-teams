@@ -75,6 +75,7 @@ function Content({
 
 	const onClickSaveChanges = (values) => {
 		const payload = Object.entries(values).map(([key, value]) => ({ [key.split('_')[0]]: value }));
+		console.log('payload:', payload);
 	};
 	return (
 		<>
@@ -97,8 +98,27 @@ function Content({
 				))}
 			</div>
 
+			{/*
 			{!isEmpty(dirtyFields)
-				? <Button onClick={handleSubmit(onClickSaveChanges)} themeType="secondary">Save Changes</Button> : null}
+				? ( */}
+			<div style={{
+				display        : 'flex',
+				justifyContent : 'space-between',
+				marginTop      : '20px',
+				opacity        : !isEmpty(dirtyFields) ? '1' : '0',
+				...(isEmpty(dirtyFields) ? { pointerEvents: 'none' } : {}),
+			}}
+			>
+				<div>Add New Allocation</div>
+				<Button
+					onClick={handleSubmit(onClickSaveChanges)}
+					themeType="secondary"
+				>
+					Save Changes
+
+				</Button>
+			</div>
+			{/* ) : null} */}
 
 			{show
 				? (
@@ -106,6 +126,7 @@ function Content({
 						<StyledTable columns={subBucketColumns} data={subBucketDummyData} />
 					</div>
 				) : null}
+
 		</>
 	);
 }

@@ -21,7 +21,16 @@ const commonLocationProps = {
 	placeholder : 'Search via port name/code...',
 };
 
-function Header({ originName, destinationName }) {
+function Header({ firstSearch }) {
+	const {
+		origin_location = {},
+		destination_location = {},
+		profitability, forecasted_volume, fulfillment,
+	} = firstSearch || {};
+
+	const { display_name: originName } = origin_location;
+	const { display_name: destinationName } = destination_location;
+
 	const router = useRouter();
 	const [editMode, setEditMode] = useState(false);
 	const [locationSearchId, setLocationSearchId] = useState('');
@@ -76,17 +85,23 @@ function Header({ originName, destinationName }) {
 
 				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					<div className={styles.sub_heading}>Avg Profitability</div>
-					{!editMode ? <div className={styles.bold}>73%</div> : '--'}
+					{!editMode ? <div className={styles.bold}>{profitability}</div> : '--'}
 				</div>
 
 				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					<div className={styles.sub_heading}>% Fulfillment (On best rate)</div>
-					{!editMode ? <div className={styles.bold}>67%</div> : '--'}
+					{!editMode ? <div className={styles.bold}>{ fulfillment}</div> : '--'}
 				</div>
 
 				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					<div className={styles.sub_heading}>Forecasted Vol</div>
-					{!editMode ? <div className={styles.volume}>600 TEU</div> : '--'}
+					{!editMode ? (
+						<div className={styles.volume}>
+							{ forecasted_volume}
+							{' '}
+							TEU
+						</div>
+					) : '--'}
 				</div>
 
 				<div

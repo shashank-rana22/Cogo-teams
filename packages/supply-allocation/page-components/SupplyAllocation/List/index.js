@@ -61,7 +61,7 @@ function List({
 		{
 			id       : 'avg_profitability',
 			Header   : 'AVG PROFITABILITY',
-			accessor : (item) => item.firstName,
+			accessor : (item) => item?.profitability,
 		},
 		{
 			id     : 'percent_fulfillment',
@@ -75,12 +75,12 @@ function List({
 					</div>
 				</div>
 			),
-			accessor: (item) => item.firstName,
+			accessor: (item) => item?.fulfillment,
 		},
 		{
 			id       : 'forecasted_volume',
 			Header   : 'FORECASTED VOLUME',
-			accessor : (item) => item.firstName,
+			accessor : (item) => item?.forecasted_volume,
 		},
 		{
 			id       : 'bookmark',
