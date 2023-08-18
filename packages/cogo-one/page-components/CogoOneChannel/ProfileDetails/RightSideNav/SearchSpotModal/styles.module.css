@@ -7,6 +7,14 @@
 	}
 }
 
+.modal_title {
+	color: #f68b21;
+}
+
+.modal_body {
+	font-style: italic;
+}
+
 .onboard_button {
 	margin-left: 10px;
 }

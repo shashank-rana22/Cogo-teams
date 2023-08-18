@@ -25,6 +25,7 @@ function RightSideNav({
 	quotationEmailSentAt = '',
 	orgId = '',
 	viewType = '',
+	userData = {},
 }) {
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,
@@ -46,7 +47,11 @@ function RightSideNav({
 
 	const handleClick = (val) => {
 		if (val === 'spot_search') {
-			setSearchSpotmodal(true);
+			if (!orgId) {
+				setSearchSpotmodal(true);
+			} else if (!loading) {
+				openNewTab({ crm: 'searches', prm: 'searches' });
+			}
 		} else if (val === 'help_desk') {
 			check();
 		} else {
@@ -112,12 +117,17 @@ function RightSideNav({
 					);
 				})}
 			</div>
-			<SearchSpotModal
-				searchSpotModal={searchSpotModal}
-				setSearchSpotmodal={setSearchSpotmodal}
-				openNewTab={openNewTab}
-				loading={loading}
-			/>
+			{
+				!orgId && (
+					<SearchSpotModal
+						searchSpotModal={searchSpotModal}
+						setSearchSpotmodal={setSearchSpotmodal}
+						openNewTab={openNewTab}
+						loading={loading}
+						userData={userData}
+					/>
+				)
+			}
 		</>
 	);
 }
