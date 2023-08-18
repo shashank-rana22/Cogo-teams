@@ -7,7 +7,6 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { OFFLINE_STATUS_OPTIONS, OFFLINE_REASONS_OPTIONS } from '../../../../../../constants';
@@ -26,11 +25,13 @@ function InactiveModal({
 		watch = () => {},
 		reset = () => {},
 		setValue = () => {},
+		handleSubmit = () => {},
+		formState: { isValid = false },
 	} = useForm({
 		defaultValues: {
 			reason        : '',
 			comment       : '',
-			ofTime        : '',
+			offTime       : '',
 			date          : '',
 			offlineStatus : '',
 		},
@@ -38,8 +39,6 @@ function InactiveModal({
 
 	const {
 		reason = '',
-		comment = '',
-		date = '',
 		offlineStatus = '',
 	} = watch();
 
@@ -47,16 +46,19 @@ function InactiveModal({
 		setOpenModal(false);
 	};
 
-	const emptyStateCheck = isEmpty(offlineStatus) || !reason;
-	const customEmptyCheck = date === '';
-
-	const checks = offlineStatus !== 'custom' ? emptyStateCheck : customEmptyCheck;
-
-	const handleChangeStatus = (_, val) => {
-		if (val) {
+	const handleChangeStatus = (val) => {
+		if (val === 'custom') {
 			setValue('date', new Date());
-			setValue('ofTime', getEndDayTime());
+			setValue('offTime', getEndDayTime());
 		}
+	};
+
+	const handleFormSubmit = (values) => {
+		createSubmit({
+			values,
+			updateUserStatus,
+			userId,
+		});
 	};
 
 	return (
@@ -79,23 +81,17 @@ function InactiveModal({
 					name="reason"
 					placeholder="Select reason"
 					options={OFFLINE_REASONS_OPTIONS}
+					rules={{ required: true }}
 				/>
 
 				{reason === 'others' && (
-					<>
-						<TextAreaController
-							control={control}
-							name="comment"
-							size="sm"
-							placeholder="Enter the specific reason"
-						/>
-
-						{!comment && (
-							<div className={styles.error_text}>
-								required *
-							</div>
-						)}
-					</>
+					<TextAreaController
+						control={control}
+						name="comment"
+						size="sm"
+						placeholder="Enter the specific reason"
+						rules={{ required: true }}
+					/>
 				)}
 
 				<div className={styles.time_title}>
@@ -108,6 +104,7 @@ function InactiveModal({
 					placeholder="Select here..."
 					options={OFFLINE_STATUS_OPTIONS}
 					onChange={handleChangeStatus}
+					rules={{ required: true }}
 				/>
 
 				{offlineStatus === 'custom' && (
@@ -118,13 +115,15 @@ function InactiveModal({
 							dateFormat="MM/dd/yyyy"
 							name="date"
 							control={control}
+							rules={{ required: true }}
 						/>
 
 						<div className={styles.time_title}>Time</div>
 						<TimepickerController
 							placeholder="Select time"
 							control={control}
-							name="ofTime"
+							name="offTime"
+							rules={{ required: true }}
 						/>
 					</>
 				)}
@@ -146,15 +145,11 @@ function InactiveModal({
 
 					<Button
 						loading={loading}
-						disabled={checks}
+						disabled={!isValid}
 						size="md"
 						themeType="accent"
 						className={styles.last_button}
-						onClick={() => createSubmit({
-							watch,
-							updateUserStatus,
-							userId,
-						})}
+						onClick={handleSubmit(handleFormSubmit)}
 					>
 						Apply
 					</Button>

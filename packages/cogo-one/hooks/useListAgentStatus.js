@@ -31,9 +31,9 @@ function useListAgentStatus({ agentType = '' }) {
 		{ manual: true },
 	);
 
-	const getListChatAgents = useCallback(async () => {
+	const getListChatAgents = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: getParams({
 					agentType,
 					page  : paramsState?.page,

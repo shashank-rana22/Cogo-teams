@@ -16,14 +16,14 @@ export const getEndDayTime = () => new Date(
 );
 
 export const createSubmit = ({
-	watch = () => {},
+	values = {},
 	updateUserStatus = () => {},
 	userId = '',
 }) => {
 	const {
 		reason = '',
 		date = '',
-	} = watch();
+	} = values;
 
 	const validity_start = new Date();
 

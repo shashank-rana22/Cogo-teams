@@ -6,7 +6,6 @@ import getWeekDates from '../../../../../../utils/getWeekDates';
 
 const ADD_HOURS_BY_ONE = 1;
 const ADD_HOURS_BY_FOUR = 4;
-const MIN_START_HOURS = 0;
 const MAX_START_HOURS = 23;
 const MIN_SECOND = 59;
 const MIN_MINUTES = 59;
@@ -21,16 +20,7 @@ export const getEndDayTime = () => new Date(
 	),
 );
 
-export const getStartDayTime = () => new Date(
-	(new Date()).setHours(
-		MIN_START_HOURS,
-		MIN_START_HOURS,
-		MIN_START_HOURS,
-		MIN_START_HOURS,
-	),
-);
-
-const getValidityEndMapping = ({ date = '', ofTime = '' }) => {
+const getValidityEndMapping = ({ date = '', offTime = '' }) => {
 	const { endDate } = getWeekDates();
 
 	return {
@@ -44,31 +34,31 @@ const getValidityEndMapping = ({ date = '', ofTime = '' }) => {
 		),
 		today     : getEndDayTime(),
 		this_week : endDate,
-		custom    : (date && ofTime)
+		custom    : (date && offTime)
 			? date.setHours(
-				ofTime.getHours(),
-				ofTime.getMinutes(),
-				ofTime.getSeconds(),
+				offTime.getHours(),
+				offTime.getMinutes(),
+				offTime.getSeconds(),
 			) : '',
 	};
 };
 
 export const createSubmit = ({
-	watch = () => {},
+	values = {},
 	updateUserStatus = () => {},
 	userId,
 }) => {
 	const {
 		reason = '',
 		comment = '',
-		ofTime = '',
+		offTime = '',
 		date = '',
 		offlineStatus = '',
-	} = watch();
+	} = values;
 
 	const validity_start = new Date();
 
-	const validityEndMapping = getValidityEndMapping({ date, ofTime });
+	const validityEndMapping = getValidityEndMapping({ date, offTime });
 
 	const validity_end = validityEndMapping[offlineStatus] || validityEndMapping.custom;
 

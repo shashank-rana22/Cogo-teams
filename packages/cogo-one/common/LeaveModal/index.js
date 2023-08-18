@@ -16,8 +16,9 @@ function LeaveModal({
 	userId = '',
 }) {
 	const {
-		control,
-		watch,
+		control = {},
+		handleSubmit = () => {},
+		formState: { isValid = false },
 	} = useForm({
 		defaultValues: {
 			reason : '',
@@ -25,13 +26,16 @@ function LeaveModal({
 		},
 	});
 
-	const {
-		reason = '',
-		date = '',
-	} = watch();
-
 	const handleClose = () => {
 		setOpenLeaveModal(false);
+	};
+
+	const handleFormSubmit = (values) => {
+		createSubmit({
+			values,
+			updateUserStatus,
+			userId,
+		});
 	};
 
 	return (
@@ -55,6 +59,7 @@ function LeaveModal({
 						size="sm"
 						rows={3}
 						placeholder="Enter the specific reason"
+						rules={{ required: true }}
 					/>
 
 					<div className={styles.time_title}>
@@ -66,21 +71,18 @@ function LeaveModal({
 						dateFormat="MM/dd/yyyy HH:mm"
 						name="date"
 						control={control}
+						rules={{ required: true }}
 						showTimeSelect
 					/>
 
 					<div className={styles.actions}>
 						<Button
 							loading={loading}
-							disabled={!reason || !date}
+							disabled={!isValid}
 							size="md"
 							themeType="accent"
 							className={styles.last_button}
-							onClick={() => createSubmit({
-								watch,
-								updateUserStatus,
-								userId,
-							})}
+							onClick={handleSubmit(handleFormSubmit)}
 						>
 							Apply
 						</Button>
