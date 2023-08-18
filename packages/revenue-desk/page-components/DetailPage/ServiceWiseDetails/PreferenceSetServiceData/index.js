@@ -11,14 +11,18 @@ function PreferenceSetServiceData({ singleServiceData, shipmentData, isPreferenc
 	const { data:allPreferenceCardsData, loading } = useListShipmentBookingConfirmationPreferences({
 		singleServiceData,
 		shipmentData,
+		isPreferenceRequired: isPreferenceSet,
 	});
+
 	const { data:ratesDataNotPrefered, loading:show_rates_loading } = useListRevenueDeskAvailableRates({
 		singleServiceData,
 		shipmentData,
 		isPreferenceSet,
 	});
+
 	const formatedData = getFormatedPreferenceSetData({ allPreferenceCardsData });
 	const formaredAvailableRatesData = getFormatedNotPreferenceData({ ratesDataNotPrefered, singleServiceData });
+
 	return (
 		<div className={styles.container}>
 			<div>

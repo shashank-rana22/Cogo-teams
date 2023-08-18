@@ -19,7 +19,7 @@ function getTableValue({ key, rowItem, priceData, service_id }) {
 			options  : {
 				style                 : 'currency',
 				currencyDisplay       : 'code',
-				maximumFractionDigits : 0,
+				maximumFractionDigits : 2,
 			},
 		}) || '-';
 	}
@@ -33,14 +33,20 @@ function getTableValue({ key, rowItem, priceData, service_id }) {
 			options  : {
 				style                 : 'currency',
 				currencyDisplay       : 'code',
-				maximumFractionDigits : 0,
+				maximumFractionDigits : 2,
 			},
 		}) || '-';
 	}
-	if (key === 'service_provider') { return rowItem?.data?.rowData?.service_provider?.short_name || '-'; }
-	if (key === 'shipping_line') { return rowItem?.data?.rowData?.shipping_line || '-'; }
+	if (key === 'service_provider') {
+		return rowItem?.data?.rowData?.service_provider?.short_name
+		|| rowItem?.data?.rowData?.service_provider?.business_name || '-';
+	}
+	if (key === 'shipping_line_/_airline') {
+		return rowItem?.data?.rowData?.shipping_line
+		|| rowItem?.data?.rowData?.air_line || '-';
+	}
 	if (key === 'active_booking') { return rowItem?.data?.rowData?.active_booking || '0'; }
-	if (key === 'alloc_ratio') { return rowItem?.data?.rowData?.alloc_ratio || '-'; }
+	if (key === 'alloc_ratio') { return rowItem?.data?.rowData?.allocation_ratio || '-'; }
 	if (key === 'fulfill_ratio') {
 		return (
 			<div>

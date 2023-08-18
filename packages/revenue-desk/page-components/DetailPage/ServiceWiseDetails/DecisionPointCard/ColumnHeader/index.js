@@ -14,7 +14,7 @@ const NUMBERS = {
 	HUNDRED : 100,
 };
 const columnTitle = [
-	'profitability', 'buy_price', 'sell_price', 'shipping_line',
+	'profitability', 'buy_price', 'sell_price', 'shipping_line_/_airline',
 	'service_provider', 'active_booking', 'alloc_ratio', 'fulfill_ratio',
 ];
 const getBackGround = (key) => {
@@ -107,7 +107,7 @@ formatAmount({
 	options  : {
 		style                 : 'currency',
 		currencyDisplay       : 'code',
-		maximumFractionDigits : 0,
+		maximumFractionDigits : 2,
 	},
 })
 }
@@ -120,7 +120,7 @@ formatAmount({
 	options  : {
 		style                 : 'currency',
 		currencyDisplay       : 'code',
-		maximumFractionDigits : 0,
+		maximumFractionDigits : 2,
 	},
 })
             }
@@ -172,7 +172,6 @@ formatAmount({
 					);
 				})}
 			</div>
-
 		</div>
 	);
 }
