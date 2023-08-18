@@ -31,7 +31,7 @@ function LocationDetails({ location = {}, icdPortInfo = {} }) {
 					</div>
 				)}
 			>
-				<div className={styles.value}>{location?.name || '---'}</div>
+				<div className={styles.value}>{location?.name}</div>
 			</Tooltip>
 
 		</div>

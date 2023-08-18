@@ -40,7 +40,6 @@ function Header({
 					<Button
 						className={styles.serial_id}
 						themeType="link"
-						tabIndex={0}
 						onClick={() => handleClick()}
 					>
 						{`Shipment ID #${serial_id}`}

@@ -28,7 +28,7 @@
 }
 
 .updated_at {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	line-height: 16px;
 	color: var(--color-secondary-greyscale-1);
 }

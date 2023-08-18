@@ -1,6 +1,5 @@
 import { Button, Placeholder, Loader as ToggleLoader } from '@cogoport/components';
 import { IcMCross, IcMPortArrow } from '@cogoport/icons-react';
-import React from 'react';
 
 import styles from './styles.module.css';
 

@@ -16,6 +16,6 @@
 
 .content {
 	padding: 0 16px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	text-align: center;
 }

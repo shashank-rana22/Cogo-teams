@@ -84,7 +84,7 @@ function FreightRate({
 								{...register(`freight_declaration.${index}.currency`)}
 								size="sm"
 								valueKey="iso_code"
-								lableKey="iso_code"
+								labelKey="iso_code"
 								asyncKey="list_exchange_rate_currencies"
 								rules={{ required: { value: true, message: 'Currency is required' } }}
 							/>

@@ -234,7 +234,6 @@ function Details({
 							<Button
 								themeType="linkUi"
 								className={styles.send}
-								tabIndex={0}
 								onClick={!loading ? onCreateMessage : null}
 							>
 								<IcMSend width="2.8em" height="2.8em" />

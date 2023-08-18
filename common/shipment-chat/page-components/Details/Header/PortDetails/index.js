@@ -1,6 +1,5 @@
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import LocationDetails from './LocationDetails';
 import styles from './styles.module.css';

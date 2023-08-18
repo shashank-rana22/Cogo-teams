@@ -71,14 +71,10 @@
 	align-items: center;
 	justify-content: flex-end;
 	height: 36px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
-	color: #221f20;
-	background: #cfeaed;
-
-	> div {
-		color: #221f20;
-	}
+	color: var(--color-secondary-greyscale-2);
+	background: var(--color-tertiary-blue-4);
 }
 
 .close_icon {
