@@ -1,5 +1,6 @@
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -22,17 +23,22 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 				<AsyncSelect
 					key={agentId}
 					name="agent_id"
-					asyncKey="partner_users"
+					asyncKey="list_chat_agents"
 					value={agentId}
 					valueKey="user_id"
 					onChange={setAgentId}
-					params={{
-						rm_mappings_data_required : false,
-						partner_data_required     : false,
-						filters                   : { role_functions: ['supply', 'operations', 'sales'] },
-					}}
 					className={styles.select}
 					isClearable
+					renderLabel={(item) => (
+						<div>
+							<div className={styles.agent_label}>
+								{startCase(item.name)}
+							</div>
+							<div className={styles.lower_label}>
+								{startCase(item?.agent_type)}
+							</div>
+						</div>
+					)}
 				/>
 				<IcMPlusInCircle
 					className={styles.icon}
