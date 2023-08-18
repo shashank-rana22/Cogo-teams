@@ -85,7 +85,7 @@ const useGetRDShipmentList = () => {
 			setShipmentList([]);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger, JSON.stringfy(filters)]);
+	}, [trigger, JSON.stringify(filters)]);
 
 	useEffect(() => {
 		fetchShipments();
