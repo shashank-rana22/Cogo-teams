@@ -1,11 +1,19 @@
 import { ProgressBar, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase, format } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
+const PLACEHOLDER_COUNT = 2;
+const BADGE_LENGTH = 3;
+const PROGRESS_PERCENT = 100;
+
 function BadgeDescription(props) {
+	const { t } = useTranslation(['profile']);
+
 	const { badgeDetailloading = false, badgeDetail } = props;
 
 	const { badge_details = [], next_badge = [] } = badgeDetail || {};
@@ -32,7 +40,7 @@ function BadgeDescription(props) {
 						</div>
 
 						{
-							[1, 2].map((item) => (
+							[...Array(PLACEHOLDER_COUNT).keys()].map((item) => (
 								<div key={item} className={styles.label_value}>
 									<Placeholder width="100%" height="32px" />
 									<Placeholder width="100%" height="32px" margin="8px 0px 0px 0px" />
@@ -56,7 +64,7 @@ function BadgeDescription(props) {
 					height={220}
 					width={380}
 					flexDirection="column"
-					emptyText="Badge Details not found"
+					emptyText={t('profile:badge_details_empty_text')}
 				/>
 			</div>
 		);
@@ -67,7 +75,7 @@ function BadgeDescription(props) {
 		<section>
 			<div className={styles.container}>
 				<p className={styles.heading}>
-					{badge_details?.[0]?.badge_name}
+					{badge_details?.[GLOBAL_CONSTANTS.zeroth_index]?.badge_name}
 				</p>
 
 				<div className={styles.display_flex}>
@@ -83,18 +91,18 @@ function BadgeDescription(props) {
 					<div className={styles.details}>
 						<div className={styles.details_header}>
 							<div className={styles.label_value}>
-								<p className={styles.label}>Achievement Date</p>
+								<p className={styles.label}>{t('profile:achievement_date')}</p>
 
 								<p className={styles.value}>
 									{badgeDetail.achievement_date
 										? format(badgeDetail.achievement_date, 'dd MMM YYYY')
-										: 'Not achieved yet'}
+										: t('profile:not_achieved_yet')}
 								</p>
 							</div>
 
 							{ !isEmpty(next_badge) && (
 								<div className={styles.next_unlock}>
-									<p className={styles.label}>Next unlock</p>
+									<p className={styles.label}>{t('profile:next_unlock')}</p>
 
 									<div className={styles.next_badge}>
 										<img
@@ -112,13 +120,13 @@ function BadgeDescription(props) {
 						</div>
 
 						<div className={styles.label_value}>
-							<p className={styles.label}>Number of KAMs with badge</p>
+							<p className={styles.label}>{t('profile:number_with_badge')}</p>
 
 							<p className={styles.value}>{badgeDetail.kam_badge_count}</p>
 						</div>
 
 						<div className={styles.label_value}>
-							<p className={styles.label}>Rarity</p>
+							<p className={styles.label}>{t('profile:rarity')}</p>
 
 							<p className={styles.value}>
 								{badgeDetail.rarity}
@@ -127,9 +135,13 @@ function BadgeDescription(props) {
 						</div>
 
 						<div className={styles.description_container}>
-							<p className={styles.label}>Description</p>
+							<p className={styles.label}>{t('profile:description')}</p>
 
-							<p className={styles.value}>{badge_details?.[0]?.description}</p>
+							<p className={styles.value}>
+								{badge_details?.
+									[GLOBAL_CONSTANTS.zeroth_index]?.description}
+
+							</p>
 						</div>
 
 					</div>
@@ -138,13 +150,14 @@ function BadgeDescription(props) {
 				<div className={styles.progressbar_container}>
 					{
 						badge_details.map((item, i) => {
-							const progress = (100 - item.percentage_score_required);
+							const progress = (PROGRESS_PERCENT - item.percentage_score_required);
 							return (
-								i < 3
+								i < BADGE_LENGTH
 									? (
 										<ProgressBar
 											className={styles.progressbar}
-											progress={progress > 0 ? progress : 0}
+											progress={progress > GLOBAL_CONSTANTS.zeroth_index
+												? progress : GLOBAL_CONSTANTS.zeroth_index}
 											uploadText={startCase(item?.medal || '')}
 										/>
 									)
