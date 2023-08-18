@@ -38,7 +38,7 @@ const PERSONAL_DETAILS_MAPPING = ['name_title', 'name', 'gender', 'date_of_birth
 
 const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
 	'cogoport_email', 'hiring_manager_id', 'attendance', 'learning_indicator', 'predictive_index',
-	'department',
+	'department', 'office_location',
 ];
 
 const ADDITIONAL_DETAILS_MAPPING = ['relation_type',
@@ -218,7 +218,7 @@ function PersonalDetails({ data: content, getEmployeeDetails }) {
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.introductory_text}>
-				<div> Edit Employee details here !</div>
+				<div>Edit Employee details here !</div>
 			</div>
 			<div className={styles.container}>
 				<RenderComponents controlsvalue={controlsvalue} control={control} errors={errors} />
