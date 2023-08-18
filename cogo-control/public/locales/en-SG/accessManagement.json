@@ -64,6 +64,14 @@
     "roles_and_permission_select_hierarchy_level_head": "Head",
     "roles_and_permission_select_hierarchy_level_zone_head": "Zone Head",
     "roles_and_permission_select_hierarchy_level_region_head": "Region Head",
-    "roles_and_permission_select_hierarchy_level_cluster_head": "Cluster Head" 
+    "roles_and_permission_select_hierarchy_level_cluster_head": "Cluster Head",
+
+    "roles_and_permission_column_role_description": "Role Description",
+    "roles_and_permission_column_role_type": "Role Type",
+    "roles_and_permission_column_partner": "Partner",
+    "roles_and_permission_column_users": "Users",
+    "roles_and_permission_column_level": "Level",
+    "roles_and_permission_column_functions": "Functions",
+    "roles_and_permission_column_sub_functions": "Sub Functions"
     
 }

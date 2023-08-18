@@ -67,7 +67,15 @@
     "roles_and_permission_select_hierarchy_level_head": "Kepala",
     "roles_and_permission_select_hierarchy_level_zone_head": "Kepala Zona",
     "roles_and_permission_select_hierarchy_level_region_head": "Kepala Wilayah",
-    "roles_and_permission_select_hierarchy_level_cluster_head": "Kepala Kluster"
+    "roles_and_permission_select_hierarchy_level_cluster_head": "Kepala Kluster",
+
+    "roles_and_permission_column_role_description": "Deskripsi Peran",
+    "roles_and_permission_column_role_type": "Tipe Peran",
+    "roles_and_permission_column_partner": "Mitra",
+    "roles_and_permission_column_users": "Pengguna",
+    "roles_and_permission_column_level": "Tingkat",
+    "roles_and_permission_column_functions": "Fungsi",
+    "roles_and_permission_column_sub_functions": "Sub Fungsi"
     
       
 }

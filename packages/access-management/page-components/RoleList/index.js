@@ -25,7 +25,7 @@ function RoleList() {
 		stakeHolderType,
 		setStakeHolderType,
 		columns,
-	} = useRoleList();
+	} = useRoleList({ t });
 
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0 } = listAuthRolesApi.data || {};
 

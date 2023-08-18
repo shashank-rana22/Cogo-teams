@@ -18,7 +18,7 @@ import styles from './styles.module.css';
  * @returns  Navigations UI
  */
 
-function Navigations(props) {
+function Navigations(props = {}) {
 	const {
 		roleData = {},
 		navigationMappings = {},
@@ -35,6 +35,9 @@ function Navigations(props) {
 	const [activeTab, setActiveTab] = React.useState('crm');
 
 	const navigationvalues = Object.values(navigationMappings);
+
+	console.log(navigationMappings, 'navigationMappings1');
+	console.log(navigationvalues, 'navigationsValues');
 
 	let navigationOptions = applyRegEx(searchString, navigationvalues, 'title', ['key']);
 

@@ -66,8 +66,13 @@
     "roles_and_permission_select_hierarchy_level_head": "负责人",
     "roles_and_permission_select_hierarchy_level_zone_head": "区域负责人",
     "roles_and_permission_select_hierarchy_level_region_head": "地区负责人",
-    "roles_and_permission_select_hierarchy_level_cluster_head": "集群负责人"
+    "roles_and_permission_select_hierarchy_level_cluster_head": "集群负责人",
     
-    
-    
+    "roles_and_permission_column_role_description": "角色描述",
+    "roles_and_permission_column_role_type": "角色类型",
+    "roles_and_permission_column_partner": "合作伙伴",
+    "roles_and_permission_column_users": "用户",
+    "roles_and_permission_column_level": "级别",
+    "roles_and_permission_column_functions": "功能",
+    "roles_and_permission_column_sub_functions": "子功能"
 }

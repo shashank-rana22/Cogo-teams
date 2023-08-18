@@ -66,6 +66,14 @@
     "roles_and_permission_select_hierarchy_level_head": "Trưởng",
     "roles_and_permission_select_hierarchy_level_zone_head": "Trưởng Khu vực",
     "roles_and_permission_select_hierarchy_level_region_head": "Trưởng Vùng",
-    "roles_and_permission_select_hierarchy_level_cluster_head": "Trưởng Cụm" 
+    "roles_and_permission_select_hierarchy_level_cluster_head": "Trưởng Cụm",
+
+    "roles_and_permission_column_role_description": "Mô tả Vai trò",
+    "roles_and_permission_column_role_type": "Loại Vai trò",
+    "roles_and_permission_column_partner": "Đối tác",
+    "roles_and_permission_column_users": "Người dùng",
+    "roles_and_permission_column_level": "Cấp độ",
+    "roles_and_permission_column_functions": "Chức năng",
+    "roles_and_permission_column_sub_functions": "Chức năng phụ"
     
 }

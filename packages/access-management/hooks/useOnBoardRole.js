@@ -46,11 +46,13 @@ const useOnBoardRole = () => {
 
 	const { permissions } = possiblePermissionsData || {};
 
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['accessManagement', 'common']);
 
 	const navigationMappingAdmin = navigationMapping({ t });
 
 	let navigationMappings = navigationMappingAdmin;
+
+	console.log(navigationMappings, 'navigationMappings2');
 
 	if (roleData?.stakeholder_type === 'organization') {
 		if (roleData?.id === '6fbc5d22-b79b-4db6-aeab-d5db3b58db17') {
@@ -125,6 +127,7 @@ const useOnBoardRole = () => {
 		onImport,
 		activeNavs,
 		activeNavsLoading,
+		t,
 	};
 };
 

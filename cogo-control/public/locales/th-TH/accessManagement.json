@@ -66,7 +66,15 @@
     "roles_and_permission_select_hierarchy_level_head": "หัวหน้า",
     "roles_and_permission_select_hierarchy_level_zone_head": "หัวหน้าเขต",
     "roles_and_permission_select_hierarchy_level_region_head": "หัวหน้าภูมิภาค",
-    "roles_and_permission_select_hierarchy_level_cluster_head": "หัวหน้าคลัสเตอร์"
+    "roles_and_permission_select_hierarchy_level_cluster_head": "หัวหน้าคลัสเตอร์",
+
+    "roles_and_permission_column_role_description": "คำอธิบายบทบาท",
+    "roles_and_permission_column_role_type": "ประเภทบทบาท",
+    "roles_and_permission_column_partner": "พันธมิตร",
+    "roles_and_permission_column_users": "ผู้ใช้งาน",
+    "roles_and_permission_column_level": "ระดับ",
+    "roles_and_permission_column_functions": "ฟังก์ชัน",
+    "roles_and_permission_column_sub_functions": "ฟังก์ชันย่อย"
     
     
 }

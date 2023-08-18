@@ -13,7 +13,7 @@ import { API } from '../utils/api';
 
 const FIRST_INDEX = 1;
 
-const useRoleList = () => {
+const useRoleList = ({ t }) => {
 	const router = useRouter();
 	const [showCreateRoleModal, setShowCreateRoleModal] = useState(false);
 	const [stakeHolderType, setStakeHolderType] = useState('all');
@@ -74,7 +74,7 @@ const useRoleList = () => {
 
 	const columns = [
 		{
-			Header   : 'Role Description',
+			Header   : t('accessManagement:roles_and_permission_column_role_description'),
 			accessor : ({ name = '', remarks = '' }) => (
 				<section className={styles.role_description_container}>
 					<div className={styles.title}>{name}</div>
@@ -83,7 +83,7 @@ const useRoleList = () => {
 			),
 		},
 		{
-			Header   : 'Role Type',
+			Header   : t('accessManagement:roles_and_permission_column_role_type'),
 			accessor : ({ role_type = '' }) => {
 				const roleType = (role_type).toLowerCase() === 'default';
 				return (
@@ -94,7 +94,7 @@ const useRoleList = () => {
 			},
 		},
 		{
-			Header   : 'Partner',
+			Header   : t('accessManagement:roles_and_permission_column_partner'),
 			accessor : ({ partner = {} }) => (
 				<section className={styles.partner_container}>
 					{partner?.business_name}
@@ -102,7 +102,7 @@ const useRoleList = () => {
 			),
 		},
 		{
-			Header   : 'Users',
+			Header   : t('accessManagement:roles_and_permission_column_users'),
 			accessor : ({ user_count = '' }) => (
 				<section className={styles.partner_container}>
 					{user_count}
@@ -110,7 +110,7 @@ const useRoleList = () => {
 			),
 		},
 		{
-			Header   : 'Level',
+			Header   : t('accessManagement:roles_and_permission_column_level'),
 			accessor : ({ hierarchy_level = '' }) => (
 				<section className={styles.partner_container}>
 					{startCase(hierarchy_level)}
@@ -118,7 +118,7 @@ const useRoleList = () => {
 			),
 		},
 		{
-			Header   : 'Functions',
+			Header   : t('accessManagement:roles_and_permission_column_functions'),
 			accessor : ({ role_functions = [] }) => {
 				const totalFunctionPills = role_functions.length;
 
@@ -169,7 +169,7 @@ const useRoleList = () => {
 			},
 		},
 		{
-			Header   : 'Sub Functions',
+			Header   : t('accessManagement:roles_and_permission_column_sub_functions'),
 			accessor : ({ role_sub_functions = [] }) => {
 				const totalSubFunctionPills = role_sub_functions.length;
 
