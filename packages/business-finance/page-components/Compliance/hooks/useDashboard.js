@@ -13,7 +13,7 @@ const useDashboard = (year, lastThreeFinancialYears) => {
 		},
 		{ manual: true },
 	);
-	const [{ data:Gstr1Data, loading:loadingGstr1 }, triggerGstr1] = useRequestBf(
+	const [{ data:gstr1Data, loading:loadingGstr1 }, triggerGstr1] = useRequestBf(
 		{
 			url     : '/sales/outward/gstr1-stats',
 			method  : 'get',
@@ -46,7 +46,7 @@ const useDashboard = (year, lastThreeFinancialYears) => {
 	return {
 		data,
 		loading,
-		Gstr1Data,
+		gstr1Data,
 		loadingGstr1,
 	};
 };

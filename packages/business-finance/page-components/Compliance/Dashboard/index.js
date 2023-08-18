@@ -15,7 +15,7 @@ const GET_ZERO_INDEX = 0;
 function Dashboard() {
 	const [year, setYear] = useState('');
 	const {
-		data, loading, Gstr1Data,
+		data, loading, gstr1Data,
 		loadingGstr1,
 	} = useDashboard(year, lastThreeFinancialYears);
 	const {
@@ -24,7 +24,7 @@ function Dashboard() {
 		erroredOutTotal,
 	} = data || {};
 
-	const { filedCount, totalCount, lastFiledDate, dueDate } = Gstr1Data || {};
+	const { filedCount, totalCount, lastFiledDate, dueDate } = gstr1Data || {};
 
 	const remainCount = totalCount - filedCount;
 
