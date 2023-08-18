@@ -147,6 +147,7 @@ function CogoOne() {
 				agentTimeline={agentTimeline}
 				preferenceLoading={preferenceLoading}
 				timelineLoading={timelineLoading}
+				userId={userId}
 			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>

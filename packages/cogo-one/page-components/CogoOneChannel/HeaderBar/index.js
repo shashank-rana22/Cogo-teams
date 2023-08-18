@@ -17,6 +17,7 @@ function HeaderBar({
 	agentTimeline = () => {},
 	preferenceLoading = false,
 	timelineLoading = false,
+	userId = '',
 }) {
 	const {
 		flash_revert_logs = false,
@@ -49,6 +50,8 @@ function HeaderBar({
 					agentTimeline={agentTimeline}
 					preferenceLoading={preferenceLoading}
 					timelineLoading={timelineLoading}
+					firestore={firestore}
+					userId={userId}
 				/>
 			)}
 		</>
