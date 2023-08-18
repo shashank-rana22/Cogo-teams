@@ -123,6 +123,7 @@ function List({ isSeller = false }) {
 					<Button
 						onClick={() => setTerminalChargeModal(true)}
 						className={styles.terminal_charges}
+						disabled
 					>
 						<div className={styles.add_icon}>+</div>
 						Add Terminal Charge
