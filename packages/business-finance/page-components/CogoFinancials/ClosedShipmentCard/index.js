@@ -90,11 +90,14 @@ function ClosedShipmentCard({
 
 	return (
 		<div
-			className={styles.financially_closed_container}
+			className={isHomeCard ? styles.financially_closed_container : styles.financially_closed_child}
 			style={{ height: isAdditonalView ? '100%' : 'auto' }}
 		>
 			{showHeading && (
-				<div style={{ padding: '16px 32px' }}>
+				<div
+					style={{ padding: '16px 32px' }}
+					data-tour={type === 'Financially' ? 'third-step' : 'fourth-step'}
+				>
 					<RenderCardHeader
 						title={`${type} Closed Shipments`}
 						showInfo
@@ -108,7 +111,10 @@ function ClosedShipmentCard({
 					className={styles.chart_data_combine}
 					role="presentation"
 					onClick={onCardClick}
-					style={{ flexWrap: wrapElement ? 'wrap' : 'nowrap' }}
+					style={{
+						flexWrap : wrapElement ? 'wrap' : 'nowrap',
+						cursor   : isHomeCard ? 'pointer' : 'auto',
+					}}
 				>
 					<div
 						className={styles.responsive_graph_circular}

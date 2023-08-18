@@ -64,4 +64,16 @@ export const TOUR_STEPS = [
 		selector : '[data-tour="second-step"]',
 		content  : 'Get details of ongoing shipments here.',
 	},
+	{
+		selector : '[data-tour="third-step"]',
+		content  : 'Get details of financially closed shipments here.',
+	},
+	{
+		selector : '[data-tour="fourth-step"]',
+		content  : 'Get details of operationally closed shipments here.',
+	},
+	{
+		selector : '[data-tour="fifth-step"]',
+		content  : 'You can click here to get more details.',
+	},
 ];

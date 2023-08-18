@@ -44,6 +44,7 @@ function StatsCard({
 		<div
 			className={styles.container}
 			style={{ height: isAdditonalView ? '100%' : '49%' }}
+			data-tour="fifth-step"
 		>
 			<div className={styles.flexhead}>
 				<div data-tour="second-step">

@@ -17,6 +17,7 @@ function DemoTour({ tour = false, setTour = () => {} }) {
 			isOpen={tour}
 			onRequestClose={() => setTour(false)}
 			maskClassName={styles.tour_mask}
+			startAt={0}
 		/>
 	);
 }

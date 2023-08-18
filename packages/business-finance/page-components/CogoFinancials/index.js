@@ -137,6 +137,7 @@ function CogoFinancials() {
 							loading={operationalLoading}
 							taxType={taxType}
 							infoContent={INFO_CONTENT.operationallyClosed}
+							isHomeCard
 						/>
 					</div>
 					<ClosedShipmentCard
