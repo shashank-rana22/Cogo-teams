@@ -1,6 +1,13 @@
 .flex_container {
 	display: flex;
 	flex-wrap: wrap;
+	overflow-y: scroll;
+}
+
+.main_container {
+	@media (max-width: 768px) {
+		margin-top: 50px;
+	}
 }
 
 .flex_40 {

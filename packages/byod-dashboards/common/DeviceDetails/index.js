@@ -7,18 +7,16 @@ import { EMPLOYEE_DEVICE_DETAILS } from '../../configurations/employeeDataMappin
 
 import styles from './styles.module.css';
 
-const DEFAULT_VALUE = 1;
-
-function DeviceDetails({ deviceData, className }) {
-	const deviceDetails = deviceData.device_details;
-	const employeeDeviceData = deviceDetails?.[(deviceDetails || []).length - DEFAULT_VALUE] || [];
+function DeviceDetails({ data = {} }) {
+	const { employee_device_details } = data || {};
+	const { device_details:details } = employee_device_details || [];
 
 	return (
-		<>
+		<div className={styles.border_bottom}>
 			<div className={styles.heading}>Device Details :</div>
 			<div className={styles.container}>
 				{EMPLOYEE_DEVICE_DETAILS.map((val) => (
-					<div className={styles[className || 'detail']} key={val.key}>
+					<div className={styles.detail} key={val.key}>
 						<div className={styles.label}>
 							{val.label}
 							{' '}
@@ -28,15 +26,15 @@ function DeviceDetails({ deviceData, className }) {
 							{val.prefix}
 							{' '}
 							{val.type === 'amount' ? formatAmount({
-								amount   : employeeDeviceData?.[val.key],
+								amount   : details?.[val.key],
 								currency : GLOBAL_CONSTANTS.currency_code.INR,
 							})
-								: startCase(employeeDeviceData?.[val.key]) || '-'}
+								: startCase(details?.[val.key]) || '-'}
 						</div>
 					</div>
 				))}
 			</div>
-		</>
+		</div>
 	);
 }
 

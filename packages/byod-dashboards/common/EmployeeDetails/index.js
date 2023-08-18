@@ -8,10 +8,11 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { EMPLOYEE_DETAILS } from '../../configurations/employeeDataMapping';
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
 import useUpdateDetail from '../../hooks/useUpdateDetail';
+import AddonsDetails from '../AddonsDetails';
 import DeviceDetails from '../DeviceDetails';
+import EmployeeData from '../EmployeeData';
 import Spinner from '../Spinner';
 
 import styles from './styles.module.css';
@@ -28,6 +29,7 @@ function EmployeeDetails() {
 
 	const [rejectModal, setRejectModal] = useState(false);
 	const [rejectionReason, setRejectionReason] = useState('');
+	const [refetchReimbursementList, setRefetchReimbursementList] = useState(true);
 
 	const { auth_role_data } = profile || {};
 
@@ -42,8 +44,8 @@ function EmployeeDetails() {
 	const { employee_details, employee_device_details = [] } = data || {};
 
 	const employeeDeviceData = employee_device_details[employee_device_details.length - DEFAULT_VALUE] || [];
-
-	const { invoice_url, status } = employeeDeviceData || {};
+	const { status } = employeeDeviceData || {};
+	const { invoice_url } = employeeDeviceData || {};
 
 	const getData = (key, type, isNumber) => {
 		const payloadType = type ? employeeDeviceData : employee_details;
@@ -126,7 +128,7 @@ function EmployeeDetails() {
 		setRejectModal(false);
 
 		const objValues = {
-			status           : isAdmin ? 'rejected_by_admin' : 'rejected_by_hr',
+			status           : 'rejected',
 			rejection_reason : rejectionReason,
 			id               : employeeDeviceData.id,
 		};
@@ -158,37 +160,15 @@ function EmployeeDetails() {
 				</div>
 			</div>
 
-			<div className={styles.flex_container}>
-				<div className={styles.flex_40}>
-					{invoice_url && (
-						<iframe
-							src={`${invoice_url}#toolbar=0&navpanes=0&scrollbar=0`}
-							title="invoice_url"
-						/>
-					)}
-				</div>
-				<div className={styles.flex_60}>
-					<div className={`${styles.heading}`}>Employee Details :</div>
-					<div className={`${styles.container} ${styles.border_bottom}`}>
-						{EMPLOYEE_DETAILS.map((val) => (
-							<div className={styles.detail} key={val.key}>
-								<div className={styles.label}>
-									{val.label}
-									{' '}
-									:
-								</div>
-								<div className={styles.employee_detail}>
-									{val.prefix}
-									{' '}
-
-									{getData(val.key, val.type, val.objType)}
-								</div>
-							</div>
-						))}
-					</div>
-					<DeviceDetails deviceData={employee_device_details} />
-					<GetButtonType />
-				</div>
+			<div className={styles.main_container}>
+				<EmployeeData
+					data={data}
+					refetchReimbursementList={refetchReimbursementList}
+					setRefetchReimbursementList={setRefetchReimbursementList}
+				/>
+				<DeviceDetails data={data} />
+				<AddonsDetails data={data} />
+				<GetButtonType />
 			</div>
 			{rejectModal
 				&& (

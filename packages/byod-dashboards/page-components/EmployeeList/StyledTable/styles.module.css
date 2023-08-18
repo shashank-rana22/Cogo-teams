@@ -1,6 +1,5 @@
 .container {
 	width: 100%;
-	border: 1px solid #d3d3d3;
 	border-radius: 6px;
 
 	:global {
@@ -14,8 +13,7 @@
 
 		.ui_table_head_cell {
 			padding: 10px;
-			background-color: #faf5ec;
-			border-bottom: 1px solid #ffa43c;
+			background-color: #D8E3F3;
 		}
 
 		.ui_table_body_cell {

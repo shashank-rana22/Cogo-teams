@@ -1,10 +1,10 @@
-import { Button } from '@cogoport/components';
+import { Button, Pill } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const useGetColumns = (isAdmin) => {
+const useGetColumns = () => {
 	const router = useRouter();
 
 	const handleVerification = (item) => {
@@ -28,24 +28,12 @@ const useGetColumns = (isAdmin) => {
 			);
 		}
 
-		if (status === 'rejected_by_hr') {
+		if (status === 'rejected') {
 			return (
-				<Button className={styles.cursor_auto}>
-					Rejected by HR
-				</Button>
+				<Pill size="md" color="#F8AEA8">Rejected</Pill>
 			);
 		}
-
-		return (
-			<Button className={styles.color_green}>
-				Verified
-			</Button>
-		);
-	}
-
-	function GetAdminStatus(item) {
-		const { status } = item;
-		if (isAdmin && status === 'verified') {
+		if (status === 'verified') {
 			return (
 				<Button
 					onClick={() => handleVerification(item)}
@@ -56,41 +44,8 @@ const useGetColumns = (isAdmin) => {
 			);
 		}
 
-		if (status === 'approved') {
-			return (
-				<Button
-					className={styles.color_green}
-				>
-					Approved
-				</Button>
-			);
-		}
-
-		if (status === 'rejected_by_admin') {
-			return (
-				<Button className={styles.cursor_auto}>
-					Rejected by Admin
-				</Button>
-			);
-		}
-
-		if (status === 'rejected_by_hr') {
-			return (
-				<Button
-					className={`${styles.color_blue} ${styles.cursor_auto}`}
-				>
-					-
-				</Button>
-			);
-		}
-
 		return (
-			<Button
-				disabled
-				className={`${styles.color_blue} ${styles.cursor_auto}`}
-			>
-				Approve
-			</Button>
+			<Pill size="md" color="#C4DC91">Approved</Pill>
 		);
 	}
 
@@ -109,16 +64,12 @@ const useGetColumns = (isAdmin) => {
 			),
 		},
 		{
-			Header   : 'Verified',
+			Header   : 'Status',
 			accessor : (item) => (
 				<div className="hr_btn_status">
 					{GetStatus(item)}
 				</div>
 			),
-		},
-		{
-			Header   : 'Approval Status',
-			accessor : (item) => GetAdminStatus(item),
 		},
 	];
 };

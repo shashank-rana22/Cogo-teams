@@ -167,6 +167,10 @@ export const HRBP_TAB_OPTIONS = [
 export const ADMIN_TAB_OPTIONS = [
 	{
 		label : 'Pending',
+		value : 'active',
+	},
+	{
+		label : 'Verified',
 		value : 'verified',
 	},
 	{
@@ -175,6 +179,6 @@ export const ADMIN_TAB_OPTIONS = [
 	},
 	{
 		label : 'Rejected',
-		value : 'rejected_by_admin',
+		value : 'rejected',
 	},
 ];

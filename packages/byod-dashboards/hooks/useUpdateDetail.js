@@ -2,7 +2,7 @@ import { useHarbourRequest } from '@cogoport/request';
 
 const useUpdateDetail = (refetch) => {
 	const [{ loading }, trigger] = useHarbourRequest({
-		url    : 'update_employee_device_details',
+		url    : 'update_employee_device_detail',
 		method : 'POST',
 		params : {},
 

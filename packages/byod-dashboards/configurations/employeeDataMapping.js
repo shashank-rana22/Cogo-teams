@@ -4,22 +4,8 @@ export const EMPLOYEE_DETAILS = [
 		key   : 'name',
 	},
 	{
-		label   : 'Net Invoice Amount',
-		key     : 'net_invoice_amount',
-		type    : 'installment',
-		prefix  : 'INR',
-		objType : 'amount',
-	},
-	{
 		label : 'Employee Id',
 		key   : 'employee_code',
-	},
-	{
-		label   : 'Monthly Installments',
-		key     : 'monthly_installments',
-		type    : 'installment',
-		prefix  : 'INR',
-		objType : 'amount',
 	},
 	{
 		label : 'Team Name',
@@ -41,7 +27,7 @@ export const EMPLOYEE_DEVICE_DETAILS = [
 		key   : 'serial_id',
 	},
 	{
-		label  : 'Invoice Amount - GST in INR',
+		label  : 'Invoice Amount',
 		key    : 'invoice_amount',
 		prefix : 'INR',
 		type   : 'amount',
@@ -55,14 +41,32 @@ export const EMPLOYEE_DEVICE_DETAILS = [
 		key   : 'vendor_name',
 	},
 	{
-		label : 'Warranty',
-		key   : 'warranty',
+		label : 'Reimbursement Amount',
+		key   : 'reimbursement_amount',
+	},
+];
+export const EMPLOYEE_ADDON_DETAILS = [
+	{
+		label : 'Addon Type',
+		key   : 'addon_type',
 	},
 	{
-		label  : 'Warranty Amount (Amount in INR)',
-		key    : 'warranty_amount',
+		label  : 'Invoice Amount',
+		key    : 'invoice_amount',
 		prefix : 'INR',
 		type   : 'amount',
+	},
+	{
+		label : 'Invoice Date',
+		key   : 'invoice_date',
+	},
+	{
+		label : 'Vendor Name',
+		key   : 'vendor_name',
+	},
+	{
+		label : 'Reimbursement Amount',
+		key   : 'reimbursement_amount',
 	},
 ];
 

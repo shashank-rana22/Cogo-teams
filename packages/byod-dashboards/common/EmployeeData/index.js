@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import useEmployeeData from './useEmployeeData';
 
 function EmployeeData({ data = {}, refetchReimbursementList = false, setRefetchReimbursementList = () => {} }) {
-	const { detail } = data || {};
+	const { employee_details: detail } = data || {};
 
 	const { loading, NEW_LIST, columns } = useEmployeeData({
 		detail,

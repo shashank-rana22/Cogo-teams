@@ -1,33 +1,22 @@
 import { Input, Pagination, Tabs, TabPanel } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import useGetEmployees from '../../hooks/useGetEmployees';
-import { ADMIN_TAB_OPTIONS, HRBP_TAB_OPTIONS } from '../../utils/constant';
+import { ADMIN_TAB_OPTIONS } from '../../utils/constant';
 
 import StyledTable from './StyledTable';
 import styles from './styles.module.css';
 import getColumns from './useGetColumns';
 
-const geo = getGeoConstants();
-
 const DEFAULT_ARRAY_LENGTH = 0;
 
 function EmployeeList() {
 	const [searchValue, setSearchValue] = useState('');
-	const profile = useSelector((state) => state.profile || {});
 
-	const { auth_role_data } = profile || {};
+	const { data, loading, setFilters, filters, debounceQuery } = useGetEmployees();
 
-	const { id : adminId } = auth_role_data;
-
-	const isAdmin = adminId === geo.uuid.hrbp_admin_role_id;
-
-	const { data, loading, setFilters, filters, debounceQuery } = useGetEmployees(isAdmin);
-
-	const columns = getColumns(isAdmin);
+	const columns = getColumns();
 	const { list = [], page, page_limit, total_count } = data || {};
 	const { status } = filters;
 
@@ -36,7 +25,7 @@ function EmployeeList() {
 		setSearchValue(e);
 	};
 
-	const TAB_OPTIONS = isAdmin ? ADMIN_TAB_OPTIONS : HRBP_TAB_OPTIONS;
+	const TAB_OPTIONS = ADMIN_TAB_OPTIONS;
 
 	const handleTabChange = (value) => {
 		setFilters((prev) => ({ ...prev, status: value }));
@@ -48,6 +37,7 @@ function EmployeeList() {
 				<div className={styles.title}>
 					Employee List
 				</div>
+
 				<Input
 					size="md"
 					placeholder="Search by Name or Email"
