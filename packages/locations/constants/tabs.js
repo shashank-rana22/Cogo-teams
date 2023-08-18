@@ -1,4 +1,4 @@
-const getTabsMapping = (t = () => {}) => [
+const getTabsMapping = ({ t = () => {} }) => [
 	{ label: t('locations:tabs_continent_label'), value: 'continent' },
 	{ label: t('locations:tabs_trade_label'), value: 'trade' },
 	{ label: t('locations:tabs_country_label'), value: 'country' },

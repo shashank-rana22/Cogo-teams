@@ -1,4 +1,4 @@
-const getDetails = (t = () => {}) => [
+const getDetails = ({ t = () => {} }) => [
 	{
 		key   : 'type',
 		label : t('locations:list_type_label'),

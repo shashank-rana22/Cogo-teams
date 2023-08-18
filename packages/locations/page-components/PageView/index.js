@@ -23,7 +23,7 @@ function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setS
 
 	const columns = getFieldsByTab({ type, t });
 
-	const tabsMapping = getTabsMapping(t);
+	const tabsMapping = getTabsMapping({ t });
 
 	const onTabChange = (val) => {
 		hookSetters.setFilters({ ...filters, type: val, page: 1 });

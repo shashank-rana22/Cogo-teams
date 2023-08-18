@@ -19,7 +19,7 @@ function SideBarComponent({
 		setSelectedLocation({});
 	};
 
-	const header = getHeader(t);
+	const header = getHeader({ t });
 
 	const renderBody = () => {
 		switch (sideBar) {

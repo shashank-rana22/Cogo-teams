@@ -10,7 +10,7 @@ function Details({ activeCard = {} }) {
 
 	const formatDate = (date) => format(date, 'dd MMM yy | hh:mm a');
 
-	const details = getDetails(t);
+	const details = getDetails({ t });
 
 	return (
 		<div style={{ marginTop: 20 }}>
