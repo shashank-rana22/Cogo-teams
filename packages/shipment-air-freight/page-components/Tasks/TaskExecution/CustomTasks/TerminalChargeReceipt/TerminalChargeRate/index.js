@@ -22,10 +22,16 @@ function TerminalChargeRate({
 }) {
 	const [entityData, setEntityData] = useState({});
 	const [irnGenerated, setIRNGenerated] = useState(true);
+	const [lineItemDetails, setLineItemDetails] = useState({});
+
 	const controls = getTerminalChargeRateControl({ setEntityData });
 	const { formState:{ errors }, control, handleSubmit, setValue } = useForm();
 
-	const { createShipmentAdditionalService } =	 useCreateShipmentAdditionalService({ shipmentData, setIRNGenerated });
+	const { createShipmentAdditionalService } =	useCreateShipmentAdditionalService({
+		shipmentData,
+		setIRNGenerated,
+		lineItemDetails,
+	});
 
 	const {
 		createShipmentAirFreightConsolidatedInvoice,
@@ -46,6 +52,10 @@ function TerminalChargeRate({
 
 	const handleCreateProforma = (values) => {
 		createShipmentAirFreightConsolidatedInvoice(values);
+		setLineItemDetails((prev) => ({
+			...prev,
+			...values,
+		}));
 	};
 	const handleIRNGeneration = () => {
 		updateShipmentAirFreightConsolidatedInvoice();
