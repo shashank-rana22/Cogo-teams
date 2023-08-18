@@ -56,7 +56,7 @@ const useUpdateSchedule = ({
 				data: {
 					...getParams({
 						shipmentId          : item?.shipmentDetails[GLOBAL_CONSTANTS.zeroth_index]?.shipmentId,
-						warehouseLocationId : 'b5068435-0449-4883-bb56-0b9c11343a74',
+						warehouseLocationId : 'aa0e7e59-cbb9-43b2-98ce-1f992ae7ab19',
 						warehouseTransferId : item?.warehouseTransferId,
 						truckStatus,
 						fileValue,
