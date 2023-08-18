@@ -35,6 +35,14 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 		});
 	};
 
+	const handleClose = () => {
+		setDialNumber({
+			number       : '',
+			country_code : geo.country.mobile_country_code,
+		});
+		setShowDialModal(false);
+	};
+
 	const handleClick = () => {
 		if (!number) {
 			return;
@@ -51,15 +59,7 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 				},
 			}),
 		);
-		setShowDialModal(false);
-	};
-
-	const handleClose = () => {
-		setDialNumber({
-			number       : '',
-			country_code : geo.country.mobile_country_code,
-		});
-		setShowDialModal(false);
+		handleClose();
 	};
 
 	return (
