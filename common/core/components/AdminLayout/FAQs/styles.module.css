@@ -40,7 +40,7 @@
 	position: fixed;
 	right: 2rem;
 	bottom: 2rem;
-	z-index: 100;
+	z-index: 1010;
 	display: flex;
 	align-items: center;
 	justify-content: center;

@@ -1,5 +1,6 @@
 import { MultiSelect, Button, Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import useGetAutorizationUrl from './hooks/useGetAutorizationUrl';
@@ -8,10 +9,13 @@ import useScopes from './hooks/useScopes';
 import styles from './styles.module.css';
 
 function GrantAccess({ email = '', showAccessUrl = false }) {
-	const [scopes, setScopes] = useState([]);
+	const { t } = useTranslation(['profile']);
+
 	const { query } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
+
+	const [scopes, setScopes] = useState([]);
 
 	const { scopeOptions } = useScopes({ showAccessUrl, scopes });
 	const { getAuthorizationUrl = () => {} } = useGetAutorizationUrl();
@@ -34,7 +38,7 @@ function GrantAccess({ email = '', showAccessUrl = false }) {
 			// eslint-disable-next-line no-undef
 			window.open(url, '_blank');
 		} catch (err) {
-			Toast.error('Errors in getting url');
+			Toast.error(t('profile:grant_access_toast_error'));
 		}
 	};
 
@@ -47,8 +51,7 @@ function GrantAccess({ email = '', showAccessUrl = false }) {
 			</p>
 
 			<p>
-				Select Email permission. (We highly suggest keep all permission for
-				seamless experience)
+				{t('profile:select_email_permission_phrase')}
 			</p>
 
 			<MultiSelect
@@ -67,7 +70,7 @@ function GrantAccess({ email = '', showAccessUrl = false }) {
 					}}
 					className="primary"
 				>
-					Authorise
+					{t('profile:authorise_button')}
 				</Button>
 			</div>
 		</div>

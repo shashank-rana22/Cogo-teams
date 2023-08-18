@@ -1,12 +1,13 @@
 .container {
-	height: 100%;
-	padding: 36px 56px 36px 36px;
+	padding: 16px 56px 12px 36px;
 	margin-bottom: 12px;
 	background-color: #fff;
 }
 
 .container:hover {
 	background: rgb(255 236 236);
+	box-shadow: rgb(99 99 99 / 20%) 0 2px 8px 0;
+	transition: background 0.2s, box-shadow 0.2s;
 }
 
 .header {
@@ -35,11 +36,11 @@
 }
 
 .stathead {
-	font-size: var(--font-size-lg);
+	font-size: var(--font-size-xl);
 }
 
 .value {
-	font-size: 24px;
+	font-size: 32px;
 	font-weight: 500;
 }
 
@@ -51,7 +52,9 @@
 
 .statscontainer {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
+	height: 70%;
 	padding-top: 12px;
 }
 
