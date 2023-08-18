@@ -15,7 +15,12 @@ const HEADER_COMPONENT_MAPPING = {
 };
 
 function Header(props = {}) {
-	const { data = {}, service_key = 'service_type', showAdditionalHeader = false, headerProps = {} } = props || {};
+	const {
+		data = {},
+		service_key = 'service_type',
+		showAdditionalHeader = false,
+		headerProps = {},
+	} = props || {};
 
 	const service_type = data[service_key] || '';
 

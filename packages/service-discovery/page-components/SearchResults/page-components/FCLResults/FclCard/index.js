@@ -64,7 +64,6 @@ function MiddleSection({
 	isCogoAssured = false,
 	isMultiContainer = false,
 	setScreen = () => {},
-	setMainScreen = () => {},
 }) {
 	const firstTwoRates = primaryServiceRates.slice(ZERO, TWO);
 
@@ -132,7 +131,6 @@ function MiddleSection({
 					isCogoAssured={isCogoAssured}
 					isMultiContainer={isMultiContainer}
 					setScreen={setScreen}
-					setMainScreen={setMainScreen}
 				/>
 			</div>
 		</div>
@@ -178,7 +176,6 @@ function FclCard({
 	selectedCogoAssuredCard = {},
 	showGuide = false,
 	cogoAssuredRates = [],
-	setMainScreen = () => {},
 }) {
 	const { service_rates = {}, schedules = {}, transit_time_unit, transit_time, source } = rateCardData;
 	const primaryService = detail?.search_type;
@@ -252,7 +249,6 @@ function FclCard({
 				isMultiContainer={isMultiContainer}
 				isSelectedCard={isSelectedCard}
 				setScreen={setScreen}
-				setMainScreen={setMainScreen}
 			/>
 
 			{isCogoAssured && !isSelectedCard ? (

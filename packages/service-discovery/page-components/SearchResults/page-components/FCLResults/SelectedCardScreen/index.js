@@ -14,7 +14,6 @@ function SelectedCardScreen({
 	setHeaderProps = () => {},
 	headerProps = {},
 	cogoAssuredRates = [],
-	setScreen:setMainScreen = () => {},
 }) {
 	const [screen, setScreen] = useState('selectedCard');
 	const [showShippingLineModal, setShowShippingLineModal] = useState(false);
@@ -44,7 +43,6 @@ function SelectedCardScreen({
 				cogoAssuredRates,
 				showShippingLineModal,
 				setShowShippingLineModal,
-				setMainScreen,
 			},
 		},
 		bookCheckout: {
