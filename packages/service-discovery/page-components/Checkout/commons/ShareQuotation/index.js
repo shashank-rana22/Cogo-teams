@@ -8,7 +8,7 @@ import QuotationModal from './QuotationModal';
 import styles from './styles.module.css';
 import useHandleShareQuotation from './useHandleShareQuotation';
 
-function ShareQuotation() {
+function ShareQuotation({ noRatesPresent = false }) {
 	const {
 		rate,
 		detail,
@@ -33,6 +33,7 @@ function ShareQuotation() {
 	} = useHandleShareQuotation({
 		detail,
 		updateCheckout,
+		noRatesPresent,
 	});
 
 	return (

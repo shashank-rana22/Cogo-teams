@@ -1,11 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 
 import AdditionalConditions from '../../../../commons/AdditionalConditions';
 import ControlledBooking from '../../../../commons/ControlledBooking';
 import InvoicingParties from '../../../../commons/InvoicingParties';
 import ShareQuotation from '../../../../commons/ShareQuotation';
 import { CheckoutContext } from '../../../../context';
-import AdditionalServices from '../EditMargin/AdditionalContent/AdditionalServices';
 
 import BookingConfirmationFooter from './components/BookingConfirmationFooter';
 import BookingTypeOptions from './components/BookingTypeOptions';
@@ -16,7 +15,6 @@ import useHandleBookingConfirmation from './useHandleBookingConfirmation';
 function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 	const {
 		detail,
-		primaryService,
 		getCheckout,
 		showSendTncEmail,
 		showOverallCreditRisk,
@@ -25,10 +23,9 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		loading,
 		checkoutMethod,
 		earnable_cogopoints = {},
-		rate = {},
-		setHeaderProps = () => {},
-		possible_subsidiary_services = [],
 	} = useContext(CheckoutContext);
+
+	const ref = useRef({});
 
 	const {
 		radioOption,
@@ -45,11 +42,13 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		error = '',
 		setError = () => {},
 		isAssistedBookingNotAllowed = false,
+		noRatesPresent = false,
+		setNoRatesPresent = () => {},
 	} = useHandleBookingConfirmation();
 
-	const { services = {} } = detail || {};
-
 	const { is_any_invoice_on_credit = false } = detail?.credit_details || {};
+
+	console.log('ref', ref.current);
 
 	return (
 		<div className={styles.container}>
@@ -64,20 +63,17 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				/>
 			) : null}
 
-			<InvoicingParties invoicingParties={invoicingParties} setInvoicingParties={setInvoicingParties} />
-
-			<AdditionalServices
-				rate={rate}
-				detail={detail}
-				setHeaderProps={setHeaderProps}
-				primaryService={primaryService}
-				getCheckout={getCheckout}
-				loading={loading}
-				possible_subsidiary_services={possible_subsidiary_services}
-				servicesLength={Object.values(services).length}
+			<InvoicingParties
+				invoicingParties={invoicingParties}
+				setInvoicingParties={setInvoicingParties}
+				ref={ref}
 			/>
 
-			<PriceBreakup />
+			<PriceBreakup
+				noRatesPresent={noRatesPresent}
+				setNoRatesPresent={setNoRatesPresent}
+				getCheckoutInvoices={ref?.current?.getCheckoutInvoices}
+			/>
 
 			<AdditionalConditions
 				detail={detail}
@@ -91,7 +87,7 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				source="booking_confirmation"
 			/>
 
-			<ShareQuotation />
+			<ShareQuotation noRatesPresent={noRatesPresent} />
 
 			<BookingTypeOptions
 				radioOption={radioOption}
@@ -111,6 +107,7 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				setError={setError}
 				error={error}
 				isAssistedBookingNotAllowed={isAssistedBookingNotAllowed}
+				noRatesPresent={noRatesPresent}
 			/>
 		</div>
 	);

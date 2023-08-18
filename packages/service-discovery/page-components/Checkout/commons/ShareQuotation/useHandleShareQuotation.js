@@ -6,7 +6,7 @@ import handleCopy from '../../helpers/handleCopyUrl';
 
 const ONE = 1;
 
-const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {} }) => {
+const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRatesPresent = () => {} }) => {
 	const { query } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
@@ -71,6 +71,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {} }) => 
 			style           : {},
 			onClickFunction : () => handleCopyQuoteLink(),
 			loading         : false,
+			disabled        : noRatesPresent,
 		},
 		{
 			key             : 'share_quotation',
@@ -78,7 +79,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {} }) => 
 			themeType       : 'primary',
 			onClickFunction : () => setShowShareQuotationModal(true),
 			style           : { marginLeft: '20px' },
-			disabled        : isEmpty(selectedModes),
+			disabled        : isEmpty(selectedModes) || noRatesPresent,
 			loading         : false,
 		},
 	];

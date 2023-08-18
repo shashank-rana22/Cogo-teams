@@ -26,9 +26,8 @@ function BreakdownDetails({
 	convenienceDetails = {},
 	setConvenienceDetails = () => {},
 	source = '',
-	handleDeleteRate = () => {},
-	deleteRateLoading = false,
 	setNoRatesPresent = () => {},
+	getCheckoutInvoices = () => {},
 }) {
 	const {
 		rate,
@@ -47,7 +46,9 @@ function BreakdownDetails({
 		setEditLineItemData,
 		resetMargins = () => {},
 		otherCharges = [],
-	} = useHandleBreakdownDetails({ rate, setRateDetails, setNoRatesPresent });
+		handleDeleteRate,
+		deleteRateLoading,
+	} = useHandleBreakdownDetails({ rate, setRateDetails, setNoRatesPresent, getCheckoutInvoices });
 
 	let total = 0;
 

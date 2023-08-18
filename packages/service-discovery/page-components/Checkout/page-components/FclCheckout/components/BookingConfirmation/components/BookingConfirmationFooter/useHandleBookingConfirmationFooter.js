@@ -2,7 +2,8 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import useBookShipment from '../../../../../../hooks/useBookShipment';
 import useControlBookingApproval from '../../../../../../hooks/useControlBookingApproval';
@@ -14,6 +15,11 @@ const useHandleBookingConfirmationFooter = ({
 	bookingConfirmationMode = '',
 	checkout_type = '',
 	setIsShipmentCreated = () => {},
+	setError = () => {},
+	isAssistedBookingNotAllowed = false,
+	invoicingParties = [],
+	disableConditionForFcl = false,
+	noRatesPresent = false,
 }) => {
 	const {
 		partner_id,
@@ -30,6 +36,8 @@ const useHandleBookingConfirmationFooter = ({
 		importer_exporter,
 		id,
 		id: checkout_id = '',
+		quotation_email_sent_at = '',
+		booking_proof = '',
 	} = detail;
 
 	const [showOtpModal, setShowOtpModal] = useState(false);
@@ -123,6 +131,50 @@ const useHandleBookingConfirmationFooter = ({
 	};
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
+
+	useEffect(() => {
+		if (isAssistedBookingNotAllowed) {
+			setError(`You are not allowed to book this shipment. 
+			Kindly ask the customer to book from Partners Platform`);
+			return;
+		}
+
+		if (noRatesPresent) {
+			setError('please remove services with no rates');
+			return;
+		}
+
+		if (!quotation_email_sent_at) {
+			setError('please send quotation Email to continue');
+			return;
+		}
+
+		if (isEmpty(invoicingParties)) {
+			setError('Ther should be atleast 1 invoicing party');
+			return;
+		}
+
+		if (disableConditionForFcl) {
+			setError('please select document preferences in Invoicing party that contains FCL freight');
+			return;
+		}
+
+		if (bookingConfirmationMode === 'booking_proof' && isEmpty(booking_proof)) {
+			setError('please select Booking Proof');
+			return;
+		}
+
+		setError('');
+	}, [
+		bookingConfirmationMode,
+		booking_proof,
+		disableConditionForFcl,
+		invoicingParties,
+		isAssistedBookingNotAllowed,
+		quotation_email_sent_at,
+		setError,
+		noRatesPresent,
+	]);
 
 	return {
 		handleSubmit,

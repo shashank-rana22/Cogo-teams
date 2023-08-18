@@ -96,7 +96,6 @@ function BookingConfirmationFooter({
 	detail = {},
 	checkoutMethod = '',
 	isControlBookingDetailsFilled = false,
-	getCheckout = () => {},
 	bookingConfirmationMode = '',
 	invoicingParties = [],
 	isVeryRisky = false,
@@ -105,6 +104,7 @@ function BookingConfirmationFooter({
 	setError = () => {},
 	error = '',
 	isAssistedBookingNotAllowed = false,
+	noRatesPresent = false,
 }) {
 	const {
 		query: { shipment_id },
@@ -170,10 +170,14 @@ function BookingConfirmationFooter({
 	} = useHandleBookingConfirmationFooter({
 		detail,
 		checkoutMethod,
-		getCheckout,
 		bookingConfirmationMode,
 		checkout_type,
 		setIsShipmentCreated,
+		setError,
+		isAssistedBookingNotAllowed,
+		invoicingParties,
+		disableConditionForFcl,
+		noRatesPresent,
 	});
 
 	useEffect(() => {
@@ -195,30 +199,6 @@ function BookingConfirmationFooter({
 		}
 		return () => {};
 	}, [hasExpired, validity_end]);
-
-	useEffect(() => {
-		if (isAssistedBookingNotAllowed) {
-			setError(`You are not allowed to book this shipment. 
-			Kindly ask the customer to book from Partners Platform`);
-			return;
-		}
-		if (!quotation_email_sent_at) {
-			setError('please send quotation Email to continue');
-			return;
-		}
-
-		if (isEmpty(invoicingParties)) {
-			setError('Ther should be atleast 1 invoicing party');
-			return;
-		}
-
-		if (disableConditionForFcl) {
-			setError('please select document preferences in Invoicing party that contains FCL freight');
-			return;
-		}
-
-		setError('');
-	}, [disableConditionForFcl, invoicingParties, isAssistedBookingNotAllowed, quotation_email_sent_at, setError]);
 
 	const {
 		booking_status = '',
@@ -270,6 +250,7 @@ function BookingConfirmationFooter({
 							|| disableConditionForFcl
 							|| disableCondition
 							|| isVeryRisky
+							|| noRatesPresent
 							|| isEmpty(invoicingParties)
 							|| getDisabledCondition({
 								checkoutMethod,

@@ -20,11 +20,11 @@
 		.ui_accordion_content {
 			width: 100%;
 			padding: 8px 0 !important;
-			background-color: #f3f3f3;
+			background-color: #f3f3f3 !important;
 		}
 
 		.ui_accordion_header {
-			background-color: #f3f3f3;
+			background-color: #f3f3f3 !important;
 		}
 
 		.ui_accordion_title {
