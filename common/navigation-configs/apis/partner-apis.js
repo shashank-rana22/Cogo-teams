@@ -3292,7 +3292,7 @@ const partner = {
 	],
 	checkout_promotions: [
 		{
-			api          : 'list_checkout_applicable_promocodes',
+			api          : 'get_checkout_applicable_promocodes',
 			access_type  : 'private',
 			feature      : 'search',
 			service_name : 'checkout',
@@ -9634,6 +9634,11 @@ const partner = {
 
 	campaign_dashboard: [
 		{
+			api          : 'list_campaign_node_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
 			api          : 'create_campaign_duplicate',
 			access_type  : 'private',
 			service_name : 'campaign',
@@ -10174,7 +10179,7 @@ const partner = {
 	],
 	cogopoints: [
 		{
-			api          : 'list_checkout_applicable_promocodes',
+			api          : 'get_checkout_applicable_promocodes',
 			access_type  : 'private',
 			feature      : 'search',
 			service_name : 'checkout',
@@ -10441,6 +10446,21 @@ const partner = {
 		},
 		{
 			api          : 'update_cogostore_product_subcategory',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_banner',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_brand',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_vendor',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -10724,7 +10744,22 @@ const partner = {
 			service_name : 'promotion',
 		},
 		{
-			api          : 'deactivate_promotion_rule',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'create_promotion_agent_rule',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'update_promotion_agent_rule',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'get_promotion_rule',
 			access_type  : 'private',
 			service_name : 'promotion',
 		},
@@ -12444,6 +12479,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'send_booking_note_on_whatsapp',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'submit_omnichannel_kyc',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -12850,6 +12890,16 @@ const partner = {
 		},
 		{
 			api          : 'get_omnichannel_agent_stats',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'sync_agent_work_preference',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
@@ -13349,7 +13399,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rate_sheet',
 		},
-
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'bulk_reallocate_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	printing_desk: [
 		{

@@ -47,7 +47,6 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'supply', label: 'Supply' },
 		{ value: 'supply_management', label: 'Supply Management' },
 		{ value: 'technology', label: 'Technology' },
-
 	],
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
@@ -375,6 +374,7 @@ const GLOBAL_CONSTANTS = {
 		ic_initial_state_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg',
 		increasing_arrow     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg',
 		agent_avatar_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
+		agent_current_status : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/agent_current_status.png',
 		ticket_not_found     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emptyState.svg',
 		ticket_loading       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 		ticket_not_created   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png',
@@ -394,6 +394,10 @@ const GLOBAL_CONSTANTS = {
 		default_event           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
 		password_validator_tick : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick.svg',
 		password_validator_dot  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dot.svg',
+		ic_tree_multiple        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-branch.svg',
+		ic_tree_single          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic_branch_single.svg',
+		drop_down_red           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dropped-down.svg',
+
 	},
 
 	video_call_ring_tone_url:
@@ -413,6 +417,7 @@ const GLOBAL_CONSTANTS = {
 			'1MB'  : '1048576',
 			'5MB'  : '5242880',
 			'15MB' : '15728640',
+			'20MB' : '20971520',
 		},
 		freight_invoice_currency: {
 			IN     : [CURRENCY_CODE.INR, CURRENCY_CODE.USD],

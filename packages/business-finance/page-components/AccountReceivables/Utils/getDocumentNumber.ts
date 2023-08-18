@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, getByKey } from '@cogoport/utils';
 
 import { Object } from '../commons/Interfaces';
@@ -22,4 +23,25 @@ export const getDocumentUrl = ({ itemData }: Object) => {
 		key = itemData?.eInvoicePdfUrl ? 'eInvoicePdfUrl' : 'invoicePdf';
 	}
 	return getByKey(itemData, key);
+};
+
+export const getDocumentInfo = ({ itemData }: Object) => {
+	const {
+		irnNumber = '', invoiceNumber = '', proformaNumber = '',
+		invoiceAdditionals: { cancelledEInvoicePdfUrl = '', cancelledIrnNumber = '' },
+		proformaPdfUrl = '', invoicePdf = '', eInvoicePdfUrl = '',
+	} = itemData;
+
+	const invoiceNumberPriority = [
+		[cancelledIrnNumber, cancelledEInvoicePdfUrl, 'CANCELLED'],
+		[irnNumber, eInvoicePdfUrl, 'E INVOICE'],
+		[invoiceNumber, invoicePdf, itemData?.invoiceType],
+		[proformaNumber, proformaPdfUrl, itemData?.invoiceType],
+	].filter((item) => (item[GLOBAL_CONSTANTS.zeroth_index] || undefined) !== undefined)[GLOBAL_CONSTANTS.zeroth_index];
+
+	return {
+		invoice_number : invoiceNumberPriority[GLOBAL_CONSTANTS.zeroth_index],
+		invoice_pdf    : invoiceNumberPriority[1],
+		invoice_type   : invoiceNumberPriority[2],
+	};
 };

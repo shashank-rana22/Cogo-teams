@@ -1,5 +1,6 @@
 import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import { TAGS_COLORS } from '../../../../../../constants';
@@ -8,7 +9,7 @@ import styles from './styles.module.css';
 
 const MAX_SHOW_LENGTH = 2;
 
-function ToolTipContent({ moreList = [] }) {
+function ToolTipContent({ moreList = [], handleRemoveTags = () => {} }) {
 	return (
 		<div className={styles.overflow_div}>
 			{(moreList || []).map((item) => (
@@ -17,18 +18,20 @@ function ToolTipContent({ moreList = [] }) {
 					key={item}
 				>
 					{startCase(item)}
+					<IcMCross onClick={() => handleRemoveTags({ item })} className={styles.cross_icon} />
 				</div>
 			))}
 		</div>
 	);
 }
 
-function ToolTipComp({ moreList = [] }) {
+function ToolTipComp({ moreList = [], handleRemoveTags = () => {} }) {
 	return (
 		<Tooltip
 			content={(
 				<ToolTipContent
 					moreList={moreList}
+					handleRemoveTags={handleRemoveTags}
 				/>
 			)}
 			theme="light"
@@ -47,10 +50,16 @@ function ShowContent({
 	list = [],
 	showMorePlacement = 'right',
 	hasPermissionToEdit = false,
+	updateChat = () => {},
 }) {
 	const showMoreList = (list || []).length > MAX_SHOW_LENGTH;
 	const lessList = (list || []).slice(GLOBAL_CONSTANTS.zeroth_index, MAX_SHOW_LENGTH);
 	const moreList = (list || []).slice(MAX_SHOW_LENGTH);
+
+	const handleRemoveTags = ({ item }) => {
+		const updatedList = (list || []).filter((value) => value !== item);
+		updateChat({ tags: (updatedList || []) });
+	};
 
 	if (isEmpty(list)) {
 		return (
@@ -63,7 +72,7 @@ function ShowContent({
 	return (
 		<div className={styles.flex_container_add}>
 			{(showMoreList && showMorePlacement !== 'right')
-				? <ToolTipComp moreList={moreList} />
+				? <ToolTipComp moreList={moreList} handleRemoveTags={handleRemoveTags} />
 				: null}
 
 			{(lessList || []).map(
@@ -74,12 +83,13 @@ function ShowContent({
 						key={item}
 					>
 						{startCase(item)}
+						<IcMCross onClick={() => handleRemoveTags({ item })} className={styles.cross_icon} />
 					</div>
 				),
 			)}
 
 			{(showMoreList && showMorePlacement === 'right')
-				? <ToolTipComp moreList={moreList} />
+				? <ToolTipComp moreList={moreList} handleRemoveTags={handleRemoveTags} />
 				: null}
 		</div>
 	);

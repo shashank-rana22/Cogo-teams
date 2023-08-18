@@ -148,9 +148,9 @@ const getLeaderBoardColumns = ({
 		},
 		{
 			Header   : 'WARMTH',
-			accessor : ({ warmth = '' }) => (
+			accessor : ({ average_warmth = '' }) => (
 				<div>
-					{startCase(warmth || '') }
+					{startCase(average_warmth || '') }
 				</div>
 			),
 		},
@@ -197,24 +197,23 @@ const getLeaderBoardColumns = ({
 		},
 		{
 			Header   : 'ALLOCATED KAM',
-			accessor : ({ stakeholder_name = '', role_name = '' }) => {
-				const renderToolTip = () => (
-					<>
-						<div>{startCase(stakeholder_name) || '-'}</div>
-						<div className={styles.tooltip_lower_label}>{role_name || ''}</div>
-					</>
-				);
+			accessor : ({ stakeholder_name = '', role_name = '' }) => (
+				<Tooltip
+					content={(
+						<>
+							<div>{startCase(stakeholder_name) || '-'}</div>
+							<div className={styles.tooltip_lower_label}>{role_name || ''}</div>
+						</>
+					)}
+					placement="bottom"
+				>
+					<div className={styles.stakeholder_name_container}>
+						<div className={styles.stakeholder_name}>{startCase(stakeholder_name) || '-'}</div>
+						<div className={styles.lower_label}>{role_name || ''}</div>
+					</div>
 
-				return (
-					<Tooltip content={renderToolTip()} placement="bottom">
-						<div className={styles.stakeholder_name_container}>
-							<div className={styles.stakeholder_name}>{startCase(stakeholder_name) || '-'}</div>
-							<div className={styles.lower_label}>{role_name || ''}</div>
-						</div>
-
-					</Tooltip>
-				);
-			},
+				</Tooltip>
+			),
 
 		},
 		{

@@ -24,8 +24,8 @@ function Header(props) {
 				className={styles.toggle}
 				size="md"
 				name="active_status"
-				onLabel="Active"
-				offLabel="Inactive"
+				onLabel="Inactive"
+				offLabel="Active"
 				value={params?.filters?.status || ['active', 'live']}
 				onChange={() => handleToggle()}
 			/>

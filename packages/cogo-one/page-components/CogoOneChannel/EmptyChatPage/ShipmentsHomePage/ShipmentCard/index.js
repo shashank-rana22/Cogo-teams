@@ -41,6 +41,8 @@ function ShipmentCard({
 	showPocDetails = {},
 	setShowPocDetails = () => {},
 	setActiveTab = () => {},
+	setShowBookingNote = () => {},
+	key = '',
 }) {
 	const {
 		serial_id = '',
@@ -49,7 +51,7 @@ function ShipmentCard({
 
 	if (!isEmpty(showPocDetails) && showPocDetails?.serial_id === serial_id) {
 		return (
-			<div className={styles.container}>
+			<div className={styles.container} key={key}>
 				<PocContainer
 					showPocDetails={showPocDetails}
 					setShowPocDetails={setShowPocDetails}
@@ -63,12 +65,14 @@ function ShipmentCard({
 		<div
 			role="presentation"
 			className={styles.container}
+			key={key}
 			onClick={() => handleShipmentClick({ importerExporterPoc, setActiveTab })}
 		>
 			<ShipmentsCard
 				setShowPocDetails={setShowPocDetails}
 				shipmentItem={shipmentItem}
 				type="all_shipments"
+				setShowBookingNote={setShowBookingNote}
 			/>
 		</div>
 	);

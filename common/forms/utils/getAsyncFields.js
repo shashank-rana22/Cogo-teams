@@ -797,6 +797,17 @@ function asyncListShipmentServices() {
 		},
 	};
 }
+function asyncFieldsLocationsMapping() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_locations_mapping',
+		initialCall : true,
+		params      : {
+			page_limit: 20,
+		},
+	};
+}
 
 function asyncListAllManagers() {
 	return {
@@ -917,4 +928,5 @@ export {
 	asyncListAllocationObjectives,
 	asyncIncidentSubtypeList,
 	asyncListResources,
+	asyncFieldsLocationsMapping,
 };
