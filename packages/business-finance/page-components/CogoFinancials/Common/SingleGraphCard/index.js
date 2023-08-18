@@ -4,14 +4,16 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { LABEL_MAPPING } from '../../constants';
+import { INFO_CONTENT, LABEL_MAPPING } from '../../constants';
 import RenderCardHeader from '../RenderCardHeader';
 import MyResponsiveBar from '../ResponsiveBar';
 
 import styles from './styles.module.css';
 
-const BOTTOM_AXIS_ROTATION = 14;
+const BOTTOM_AXIS_ROTATION = 20;
 const DEFAULT_ROTATION = 0;
+const STRAIGHT_AXIS_LIMIT = 2;
+const MINIMUM_POSITIVE = 0;
 
 const KEY_MAPPINGS = {
 	'Operational Profitability' : 'Profitability',
@@ -19,8 +21,23 @@ const KEY_MAPPINGS = {
 	Expense                     : 'Cost',
 };
 
-const DEFAULT_LENGTH = 1;
-const STD_WIDTH = 80;
+const defaultAmountFormat = (value) => formatAmount({
+	amount  : String(value),
+	options : {
+		style                 : 'decimal',
+		notation              : 'compact',
+		maximumFractionDigits : 2,
+	},
+});
+
+const formatPercentageLabel = (value) => `${formatAmount({
+	amount  : String(value),
+	options : {
+		style                 : 'decimal',
+		notation              : 'compact',
+		maximumFractionDigits : 0,
+	},
+})}%`;
 
 function SingleGraphCard({
 	heading = '',
@@ -31,12 +48,14 @@ function SingleGraphCard({
 	type = '',
 	serviceLevelData = [],
 	serviceLevelLoading = false,
-	defaultWidth = '400',
+	defaultWidth = '300',
+	showShipmentList = false,
 }) {
 	const isLastView = isViewDetailsVisible; // last view of graph cards
+	const graphKey = heading;
 
 	const graphCurrency = serviceLevelData?.[GLOBAL_CONSTANTS.zeroth_index]?.currency || '';
-	const verticalLabel = (heading === 'Operational Profitability') ? 'Percentage'
+	const verticalLabel = (heading === 'Operational Profitability') ? 'Percentage ( % )'
 		: `Amount ( ${graphCurrency} )`;
 
 	const onBarClick = (e) => {
@@ -56,25 +75,43 @@ function SingleGraphCard({
 		};
 	});
 
+	const getColors = ({ id, value }) => {
+		if (id?.includes('estimated')) {
+			if (value > MINIMUM_POSITIVE) {
+				return '#cfeaed'; // light blue
+			}
+			return '#f8aea8'; // light red
+		}
+		if (value > MINIMUM_POSITIVE) {
+			return '#6fa5ab'; // dark blue
+		}
+		return '#f37166'; // dark red
+	};
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.flexhead}>
-				<RenderCardHeader title={heading} />
-				{isViewDetailsVisible && (
-					<Button
-						themeType="secondary"
-						onClick={onViewDetails}
-					>
-						View Details
+			{!serviceLevelLoading && (
+				<div className={styles.flexhead}>
+					<RenderCardHeader
+						title={heading}
+						showInfo
+						infoContent={INFO_CONTENT.closedShipmentsBar}
+					/>
+					{isViewDetailsVisible && !showShipmentList && (
+						<Button
+							themeType="secondary"
+							onClick={onViewDetails}
+						>
+							View Details
 
-					</Button>
-				)}
-			</div>
+						</Button>
+					)}
+				</div>
+			)}
 
 			<div
 				style={{
-					minWidth: `${(serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH > defaultWidth
-						? (serviceLevelData?.length || DEFAULT_LENGTH) * STD_WIDTH : defaultWidth}px`,
+					minWidth: `${defaultWidth}px`,
 
 				}}
 				className={styles.graph}
@@ -85,15 +122,15 @@ function SingleGraphCard({
 							<MyResponsiveBar
 								data={formattedServiceLevelData}
 								keys={[
-									`estimated${KEY_MAPPINGS?.[heading]}${taxType}`,
-									`${LABEL_MAPPING[type]}${KEY_MAPPINGS?.[heading]}${taxType}`,
+									`estimated${KEY_MAPPINGS?.[graphKey]}${taxType}`,
+									`${LABEL_MAPPING[type]}${KEY_MAPPINGS?.[graphKey]}${taxType}`,
 								]}
 								groupMode="grouped"
 								legendX=""
 								legendY=""
 								width="100%"
 								height="300px"
-								colors={['#cfeaed', '#6fa5ab']}
+								colors={getColors}
 								colorBy="id"
 								indexBy="serviceName"
 								enableGridY
@@ -109,7 +146,7 @@ function SingleGraphCard({
 									} = props || {};
 
 									let displayLabel;
-									if (label?.includes('financial')) {
+									if (label?.includes('financial') || label?.includes('actual')) {
 										displayLabel = 'Actual';
 									} else if (label?.includes('operational')) {
 										displayLabel = 'Operational';
@@ -132,22 +169,20 @@ function SingleGraphCard({
 									);
 								}}
 								axisLeft={{
+									tickValues     : 10,
 									tickSize       : 0,
-									tickPadding    : 0,
+									tickPadding    : 4,
 									tickRotation   : 0,
 									legend         : verticalLabel,
 									legendPosition : 'middle',
-									legendOffset   : -40,
+									legendOffset   : -50,
 									ariaHidden     : true,
-									format         : (value) => formatAmount({
-										amount  : String(value),
-										options : {
-											style    : 'decimal',
-											notation : 'compact',
-										},
-									}),
+									format         : (verticalLabel?.includes('Percentage'))
+										? formatPercentageLabel : defaultAmountFormat,
 								}}
-								axisBottomRotation={isLastView ? BOTTOM_AXIS_ROTATION : DEFAULT_ROTATION}
+								axisBottomRotation={(isLastView
+									&& (formattedServiceLevelData?.length > STRAIGHT_AXIS_LIMIT))
+									? BOTTOM_AXIS_ROTATION : DEFAULT_ROTATION}
 								valueFormat={(value) => formatAmount({
 									amount  : String(value),
 									options : {
@@ -164,7 +199,7 @@ function SingleGraphCard({
 					</div>
 				) : (
 					<div>
-						<Placeholder height={380} width="100%" />
+						<Placeholder height={300} width="100%" />
 					</div>
 				)}
 			</div>

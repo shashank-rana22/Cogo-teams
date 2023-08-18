@@ -30,6 +30,7 @@ function OrganizationDetails({
 	hideCpButton = false,
 	getOrgDetails = () => {},
 	viewType = '',
+	setActiveTab = () => {},
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
@@ -223,6 +224,7 @@ function OrganizationDetails({
 										user={item}
 										key={item.id}
 										hasVoiceCallAccess={hasVoiceCallAccess}
+										setActiveTab={setActiveTab}
 									/>
 								))}
 							</>

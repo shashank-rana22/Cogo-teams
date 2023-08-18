@@ -7,6 +7,10 @@ const chakravyuh = {
 		navigation : 'chakravyuh-feedback',
 		isMainNav  : true,
 	},
+	'/[partner_id]/chakravyuh/accuracy-dashboard': {
+		navigation : 'chakravyuh-accuracy',
+		isMainNav  : true,
+	},
 };
 
 export default chakravyuh;
