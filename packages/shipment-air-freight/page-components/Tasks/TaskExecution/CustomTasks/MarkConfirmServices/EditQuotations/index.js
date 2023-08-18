@@ -7,7 +7,7 @@ import ConfirmModal from './ConfirmModal';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
-const USD_LIMIT = 500;
+const USD_LIMIT = 5000;
 const INR_LIMIT = 500000;
 
 function EditQuotations({

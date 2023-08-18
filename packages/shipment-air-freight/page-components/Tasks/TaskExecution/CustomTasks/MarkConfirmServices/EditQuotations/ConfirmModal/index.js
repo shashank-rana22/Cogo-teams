@@ -159,7 +159,7 @@ function ConfirmModal({
 						)}
 						{priceLimitCheck && (
 							<div className={styles.check_price}>
-								Your line item price exceeds 5000 USD. Are you sure you want to proceed?
+								Your line item price exceeds the base price. Are you sure you want to proceed?
 							</div>
 						)}
 						<div className={styles.button_div}>
