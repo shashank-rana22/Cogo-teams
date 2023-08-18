@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import InvoiceTable from '../../../../commons/InvoiceTable/index.tsx';
 import useGetPartnerRmMapping from '../../../../hooks/useGetPartnerRmMapping.ts';
-import Communication from '../../OutstandingList/Communication/index.tsx';
+import Communication from '../../OutstandingList/Communication';
 import OrganizationUsers from '../../OutstandingList/OrganizationUsers/index.tsx';
 import PopoverTags from '../../OutstandingList/PopoverTags/index.tsx';
 import StatsOutstanding from '../../OutstandingList/StatsOutstanding';
@@ -74,6 +74,7 @@ function CallPriorityModal({ showCallPriority = false, setShowCallPriority = () 
 		organization_users: {
 			selfOrganizationId,
 		},
+		communication: { orgData: data },
 	};
 
 	const handleActiveTabs = (val) => {
