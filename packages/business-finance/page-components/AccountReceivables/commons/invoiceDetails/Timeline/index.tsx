@@ -1,11 +1,12 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
-import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import {
 	IcCFcrossInCircle,
 	IcCFtick,
 	IcCSendEmail,
 } from '@cogoport/icons-react';
 import { format, startCase, upperCase } from '@cogoport/utils';
+
+import getStatus from '../../../Utils/getStatus';
 
 import styles from './styles.module.css';
 
@@ -60,9 +61,7 @@ function Timeline({ data, loading, entityCode }) {
 					<div className={styles.event_data_container}>
 						<div style={{ fontWeight: '500' }}>
 							{' '}
-							{(item?.eventName === 'IRN_GENERATED'
-								? `${upperCase(ENTITY_FEATURE_MAPPING[entityCode]?.labels?.irn_label)} GENERATED`
-								: startCase(item?.eventName))}
+							{upperCase(getStatus({ entityCode, eventName: item.eventName }))}
 						</div>
 						<div>
 							{item?.data?.errorMessage ? (
