@@ -1,0 +1,15 @@
+.single_form_row {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.input {
+	width: 49%;
+	margin: 12px 0;
+}
+
+.label {
+	font-size: 14px;
+	color: var(--color-secondary-greyscale-3);
+}

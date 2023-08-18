@@ -113,3 +113,8 @@
 	word-break: break-word;
 	word-wrap: break-word;
 }
+
+.call_btn {
+	color: var(--color-accent-orange-2) !important;
+	background-color: #fff !important;
+}

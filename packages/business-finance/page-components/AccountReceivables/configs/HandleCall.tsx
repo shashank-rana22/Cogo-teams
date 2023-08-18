@@ -1,7 +1,12 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
+import { IcMCall } from '@cogoport/icons-react';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import React from 'react';
+import React, { useState } from 'react';
+
+import ActivityLog from '../components/Outstanding/ActivityLog';
+
+import styles from './styles.module.css';
 
 interface HandleCallProps {
 	row?: object
@@ -13,7 +18,13 @@ function HandleCall({ row }: HandleCallProps) {
 	}));
 	const dispatch = useDispatch();
 
+	const [showLog, setShowLog] = useState(false);
+	const [formData, setFormData] = useState({});
+
+	console.log({ showLog });
+
 	const handleVoiceCall = (item) => {
+		setShowLog(true);
 		dispatch(
 			setProfileState({
 				...profileData,
@@ -40,13 +51,26 @@ function HandleCall({ row }: HandleCallProps) {
 		);
 	};
 	return (
-		<Button
-			size="sm"
-			themeType="primary"
-			onClick={() => handleVoiceCall(row)}
-		>
-			Place Call
-		</Button>
+		<div>
+			<Button
+				size="sm"
+				themeType="primary"
+				onClick={() => handleVoiceCall(row)}
+				className={styles.call_btn}
+			>
+				<IcMCall height={15} width={15} />
+			</Button>
+
+			<Modal size="lg" show onClose={() => setShowLog(false)} placement="center">
+				<Modal.Header title="Add Activity Log" />
+				<Modal.Body>
+					<ActivityLog formData={formData} setFormData={setFormData} />
+				</Modal.Body>
+				<Modal.Footer>
+					<Button onClick={() => setShowLog(false)}>Add Activity Log</Button>
+				</Modal.Footer>
+			</Modal>
+		</div>
 	);
 }
 
