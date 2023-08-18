@@ -1,4 +1,4 @@
-const getStatusColumns = (t) => [
+const getStatusColumns = (t = () => {}) => [
 	{
 		label : t('locations:list_name_label'),
 		key   : 'name',
@@ -20,7 +20,7 @@ const getStatusColumns = (t) => [
 	},
 ];
 
-const getCountryColumns = (t) => [
+const getCountryColumns = (t = () => {}) => [
 	{
 		label : t('locations:list_name_label'),
 		key   : 'name',
@@ -44,7 +44,7 @@ const getCountryColumns = (t) => [
 	},
 ];
 
-const getDefaultColumns = (t) => [
+const getDefaultColumns = (t = () => {}) => [
 	{
 		label : t('locations:list_name_label'),
 		key   : 'name',
@@ -63,7 +63,7 @@ const getDefaultColumns = (t) => [
 	},
 ];
 
-const getFieldsByTab = (tab, t = () => {}) => {
+const getFieldsByTab = ({ type, t = () => {} }) => {
 	const tabsWithCountry = [
 		'country',
 		'city',
@@ -79,11 +79,11 @@ const getFieldsByTab = (tab, t = () => {}) => {
 	const statusColumns = getStatusColumns(t);
 	const defaultColumns = getDefaultColumns(t);
 
-	if (tabsWithCountry.includes(tab)) {
+	if (tabsWithCountry.includes(type)) {
 		return countryColumns;
 	}
 
-	if (tabsWithStatus.includes(tab)) {
+	if (tabsWithStatus.includes(type)) {
 		return statusColumns;
 	}
 

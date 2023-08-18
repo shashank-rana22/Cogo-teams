@@ -19,9 +19,9 @@ function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setS
 		hookSetters,
 	} = useGetLocationsList();
 
-	const { page, page_limit } = filters || {};
+	const { page, page_limit, type } = filters || {};
 
-	const columns = getFieldsByTab(filters.type, t);
+	const columns = getFieldsByTab({ type, t });
 
 	const tabsMapping = getTabsMapping(t);
 

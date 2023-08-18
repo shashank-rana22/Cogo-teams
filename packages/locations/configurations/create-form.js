@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-const getFields = (t) => [
+const getFields = (t = () => {}) => [
 	{
 		name        : 'name',
 		label       : t('locations:controls_name_label'),
