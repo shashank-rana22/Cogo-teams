@@ -38,7 +38,10 @@ function ManageSubscriptions(props) {
 	const [isAssignModal, setIsAssignModal] = useState(false);
 	const [selectedPlan, setSelectedPlan] = useState({});
 
-	const { payment_link : paymentLink = '', checkout = {} } = selectedPlan || {};
+	const { display_pricing = {} } = selectedPlan || {};
+	const { payment_link : paymentLink = '', checkout = {} } = display_pricing[activeTab] || {};
+	const { payment_order_id: paymentOrderId = '', id: checkoutId = '' } = checkout || {};
+
 	const { plansData = {}, loading = false, getUserActivePlans = () => {} } = useListSaasPlans({ orgId });
 
 	const { item_plans = [], saas_subscription_customer_id : saasSubscriptionCustomerId = '' } = plansData || {};
@@ -50,7 +53,8 @@ function ManageSubscriptions(props) {
 	const {
 		paymentDetails = {},
 		getPaymentStatus = () => {},
-	} = useGetPaymentStatus({ getUserActivePlans, selectedPlan });
+	} = useGetPaymentStatus({ paymentOrderId });
+
 	const { status: paymentStatus = '' } = paymentDetails || {};
 
 	const sortedItemPlans = (item_plans || []).sort(
@@ -119,6 +123,7 @@ function ManageSubscriptions(props) {
 							selectedPlan={selectedPlan}
 							paymentStatus={paymentStatus}
 							setIsAssignModal={setIsAssignModal}
+							setShowAddOn={setShowAddOn}
 						/>
 					))}
 				</div>
@@ -168,7 +173,7 @@ function ManageSubscriptions(props) {
 					isAssignModal={isAssignModal}
 					setIsAssignModal={setIsAssignModal}
 					orgId={orgId}
-					selectedPlan={selectedPlan}
+					checkoutId={checkoutId}
 					getUserActivePlans={getUserActivePlans}
 				/>
 			)}

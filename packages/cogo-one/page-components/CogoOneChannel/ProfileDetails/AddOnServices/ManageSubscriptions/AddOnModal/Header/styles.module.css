@@ -8,7 +8,7 @@
 .section_card {
 	display: flex;
 	flex: 1;
-	flex-direction: flex-start;
+	flex-direction: column;
 }
 
 .card_title {

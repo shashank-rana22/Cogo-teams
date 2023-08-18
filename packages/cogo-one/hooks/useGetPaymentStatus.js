@@ -1,10 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetPaymentStatus = ({ selectedPlan = {} }) => {
-	const { checkout = {} } = selectedPlan || {};
-	const { payment_order_id: paymentOrderId = '' } = checkout || {};
-
+const useGetPaymentStatus = ({ paymentOrderId = '' }) => {
 	const [{ loading, data }, trigger] = useRequestBf({
 		url     : `/payment-gateway/orders/status/${paymentOrderId}`,
 		method  : 'get',

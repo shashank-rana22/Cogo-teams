@@ -44,11 +44,11 @@ function Header({ organizationData = {}, subscriptionData = {} }) {
 			<div className={styles.section}>
 				<div className={styles.section_card}>
 					<div className={styles.card_title}>Plan Details</div>
-					<div>{startCase(name)}</div>
+					<div>{startCase(name) || '-'}</div>
 				</div>
 				<div className={styles.section_card}>
 					<div className={styles.card_title}>Family</div>
-					<div>{startCase(product_family?.product_family_name) || ''}</div>
+					<div>{startCase(product_family?.product_family_name) || '-'}</div>
 				</div>
 			</div>
 

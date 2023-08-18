@@ -30,6 +30,11 @@ function useCreateSubscriptionInvoice({
 	}, { manual: true });
 
 	const createSubscriptionInvoice = async () => {
+		if (!billingAddressId) {
+			Toast.error('Please select a billing address');
+			return;
+		}
+
 		try {
 			await trigger({
 				data: getPayload({

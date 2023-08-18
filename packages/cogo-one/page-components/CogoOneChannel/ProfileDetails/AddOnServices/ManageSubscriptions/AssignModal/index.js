@@ -17,12 +17,9 @@ function AssignModal({
 	isAssignModal = false,
 	setIsAssignModal = () => {},
 	orgId = '',
-	selectedPlan = {},
+	checkoutId = '',
 	getUserActivePlans = () => {},
 }) {
-	const { checkout = {} } = selectedPlan || {};
-	const { id: checkoutId = '' } = checkout || {};
-
 	const [selectedAddress, setSelectedAddress] = useState({});
 	const [isAddressModal, setIsAddressModal] = useState(false);
 

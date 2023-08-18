@@ -23,11 +23,10 @@ function SubscriptionCard(props) {
 		metadata = {},
 		display_pricing = '',
 		category = '',
-		checkout = {},
 	} = item || {};
 
-	const isActive = display_pricing?.[activeTab]?.is_active_plan;
-	const numberOfExpiryDays = display_pricing?.[activeTab]?.expires_in || DEFAULT_EXPIRY_DAYS;
+	const { checkout = {}, is_active_plan: isActive = '', expires_in } = display_pricing?.[activeTab] || {};
+	const numberOfExpiryDays = expires_in || DEFAULT_EXPIRY_DAYS;
 
 	const sortePlans = (metadata?.plan_details || []).sort(
 		(a, b) => a.sequence < b.sequence,
