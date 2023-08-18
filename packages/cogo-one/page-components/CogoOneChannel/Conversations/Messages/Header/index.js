@@ -7,9 +7,11 @@ import {
 import { isEmpty } from '@cogoport/utils';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
+import { getHasAccessToEditGroup } from '../../../../../helpers/agentDetailsHelpers';
 import useTransferChat from '../../../../../hooks/useTransferChat';
 import useUpdateUserRoom from '../../../../../hooks/useUpdateUserRoom';
 
+import AddToGroupRequest from './AddToGroupRequest';
 import ChatControls from './ChatControls';
 import ChatTransfer from './ChatTransfer';
 import Assignes from './HeaderFuncs/assignes';
@@ -50,6 +52,12 @@ function Header({
 	} = useUpdateUserRoom();
 
 	const { requestToJoinGroup, dissmissTransferRequest } = useTransferChat({ firestore, activeMessageCard });
+
+	const hasAccessToEditGroup = getHasAccessToEditGroup({
+		formattedMessageData : formattedData,
+		agentId              : userId,
+		viewType,
+	});
 
 	const openAssignModal = () => {
 		setOpenModal({
@@ -181,6 +189,11 @@ function Header({
 				userId={userId}
 				assignLoading={assignLoading}
 				assignChat={assignChat}
+			/>
+			<AddToGroupRequest
+				firestore={firestore}
+				activeMessageCard={activeMessageCard}
+				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 		</>
 	);

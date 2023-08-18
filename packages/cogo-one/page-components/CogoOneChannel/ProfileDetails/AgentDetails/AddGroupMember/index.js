@@ -25,7 +25,7 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 					name="agent_id"
 					asyncKey="list_chat_agents"
 					value={agentId}
-					valueKey="user_id"
+					valueKey="agent_id"
 					onChange={setAgentId}
 					className={styles.select}
 					isClearable

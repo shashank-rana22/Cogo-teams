@@ -12,17 +12,22 @@ function getSupplySessionQuery({ sessionType, activeSubTab = '' }) {
 }
 
 function getKamButtons({
-	supportAgentId,
-	userId,
-	showBotMessages,
-	isManager,
+	supportAgentId = '',
+	userId = '',
+	showBotMessages = false,
+	isManager = false,
+	isGroupFormed = false,
+	isPartOfGroup = false,
 }) {
-	if (supportAgentId === userId || isManager) {
+	if (supportAgentId === userId || isPartOfGroup || isManager) {
 		return ['assign_modal'];
 	}
 
 	if (showBotMessages) {
 		return ['request_for_assign'];
+	}
+	if (isGroupFormed) {
+		return ['add_me_to_group'];
 	}
 
 	return [];

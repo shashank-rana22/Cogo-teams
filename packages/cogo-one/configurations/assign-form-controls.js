@@ -85,6 +85,18 @@ const controls = {
 				label : 'Support Agent',
 				value : 'support',
 			},
+			{
+				label : 'Sales Agent',
+				value : 'sales',
+			},
+			{
+				label : 'Shipment Specialist',
+				value : 'shipment_specialist',
+			},
+			{
+				label : 'CP Support Agent',
+				value : 'cp_support',
+			},
 		],
 		rules: { required: 'This is required' },
 	},
@@ -119,14 +131,12 @@ const controls = {
 
 export const ASSIGN_TYPE_OPTIONS = [
 	{
-		label       : 'Assign User',
-		value       : 'assign_user',
-		agent_types : ['sales', 'supply'],
+		label : 'Assign User',
+		value : 'assign_user',
 	},
 	{
-		label       : 'Transfer to Team',
-		value       : 'assign_on_entity',
-		agent_types : ['sales', 'supply'],
+		label : 'Transfer to Team',
+		value : 'assign_on_entity',
 	},
 ];
 
