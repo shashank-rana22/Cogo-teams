@@ -140,7 +140,7 @@ function SingleService({
 			});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [recommendationLoading]);
+	}, [recommendationLoading, JSON.stringify(systemFormatedRates), JSON.stringify(currentFormatedrates)]);
 
 	return (
 		<div>
