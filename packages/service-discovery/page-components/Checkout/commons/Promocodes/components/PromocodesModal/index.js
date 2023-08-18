@@ -1,5 +1,7 @@
-import { Modal, Input } from '@cogoport/components';
-import { useState } from 'react';
+import { Modal, Input, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import useGetCheckoutPromocodes from '../../hooks/useGetCheckoutPromocodes';
 import useUpdateCheckoutPromotion from '../../hooks/useUpdateCheckoutPromotion';
@@ -8,6 +10,10 @@ import Empty from './Empty';
 import Loading from './Loading';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
+
+const A_FIRST = -1;
+const B_FIRST = 1;
+const BOTH_EQUAL = 0;
 
 function PromocodesModal({
 	checkout_id = '',
@@ -19,6 +25,7 @@ function PromocodesModal({
 	showCoupons = false,
 }) {
 	const [disableCursor, setDisableCursor] = useState('');
+	const [eligiblePromotions, setEligiblePromotions] = useState([]);
 
 	const promoCodesBgColors = [
 		'linear-gradient(90deg, rgba(204, 197, 249, 0.8) -4.34%, rgba(195, 216, 254, 0.6) 105.7%)',
@@ -34,7 +41,7 @@ function PromocodesModal({
 	];
 
 	const {
-		data,
+		data : { list = [] },
 		loading,
 		setInput = () => {},
 		getCheckoutPromocodes = () => {},
@@ -62,6 +69,25 @@ function PromocodesModal({
 			setDisableCursor('');
 		}
 	};
+
+	useEffect(() => {
+		setEligiblePromotions(
+			list.filter((promotion) => promotion?.eligibility_checks?.is_eligible),
+		);
+	}, [list]);
+
+	const reorderedList = eligiblePromotions?.sort((a, b) => {
+		const aIsApplicable = a?.eligibility_checks?.is_applicable;
+		const bIsApplicable = b?.eligibility_checks?.is_applicable;
+
+		if (aIsApplicable && !bIsApplicable) {
+			return A_FIRST;
+		}
+		if (!aIsApplicable && bIsApplicable) {
+			return B_FIRST;
+		}
+		return BOTH_EQUAL;
+	});
 
 	return (
 		<Modal
@@ -109,29 +135,79 @@ function PromocodesModal({
 					<div className={styles.details_title}>More offers available:</div>
 
 					<div className={styles.flex}>
-						{(data.list || []).map((promotion, index) => (
-							<div className={styles.item} key={promotion?.id}>
-								<PromocodeThumbnail
-									key={promotion}
-									disableCursor={disableCursor}
-									promotion={promotion}
-									setShowCoupons={setShowCoupons}
-									setCouponApplied={setCouponApplied}
-									refetch={refetch}
-									updateCheckoutPromotion={updateCheckoutPromotion}
-									bgColor={
+						{(reorderedList || []).map((promotion, index) => {
+							const {
+								is_applicable,
+								non_applicability_reasons = [],
+							} = promotion?.eligibility_checks || {};
+
+							if (is_applicable) {
+								return (
+									<div className={styles.item} key={promotion?.id}>
+										<PromocodeThumbnail
+											key={promotion}
+											disableCursor={disableCursor}
+											promotion={promotion}
+											setShowCoupons={setShowCoupons}
+											setCouponApplied={setCouponApplied}
+											refetch={refetch}
+											updateCheckoutPromotion={updateCheckoutPromotion}
+											bgColor={
 										promoCodesBgColors[index % promoCodesBgColors.length]
 									}
-									dashedColor={
+											dashedColor={
 										promoCodesDashedBorderColors[
 											index % promoCodesDashedBorderColors.length]
 									}
-								/>
-							</div>
-						))}
+										/>
+									</div>
+								);
+							}
+
+							return (
+								<div className={styles.item} key={promotion?.id}>
+									<Tooltip
+										{...(!isEmpty(non_applicability_reasons)
+											? {
+												content:
+												<div>
+													{non_applicability_reasons?.
+														[GLOBAL_CONSTANTS.zeroth_index] || ''}
+
+												</div>,
+											}
+											: {})}
+										maxWidth={400}
+										interactive
+										key={promotion.id}
+									>
+
+										<PromocodeThumbnail
+											key={promotion}
+											disableCursor={disableCursor}
+											promotion={promotion}
+											setShowCoupons={setShowCoupons}
+											is_applicable={is_applicable}
+											setCouponApplied={setCouponApplied}
+											refetch={refetch}
+											updateCheckoutPromotion={updateCheckoutPromotion}
+											bgColor={
+										promoCodesBgColors[index % promoCodesBgColors.length]
+									}
+											dashedColor={
+										promoCodesDashedBorderColors[
+											index % promoCodesDashedBorderColors.length]
+									}
+										/>
+
+									</Tooltip>
+								</div>
+
+							);
+						})}
 
 						{loading && <Loading />}
-						{!data.list?.length && !loading && <Empty />}
+						{!reorderedList?.length && !loading && <Empty />}
 					</div>
 				</div>
 			</Modal.Body>
