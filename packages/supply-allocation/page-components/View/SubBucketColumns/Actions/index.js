@@ -25,16 +25,6 @@ function Actions({ item = {} }) {
 								<IcMEdit />
 								<div>Move Supplier</div>
 							</Button>
-
-							<Button
-								themeType="secondary"
-								className={styles.btn}
-								type="button"
-							>
-
-								<div>Edit Allocation</div>
-							</Button>
-
 						</div>
 					)}
 				>
