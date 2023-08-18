@@ -2,6 +2,7 @@ import React from 'react';
 
 import ClosedGraphStats from '../Common/ClosedGraphStats';
 import ParentServicewiseStats from '../Common/ParentServicewiseStats';
+import { INFO_CONTENT } from '../constants';
 
 import styles from './styles.module.css';
 
@@ -15,6 +16,7 @@ function ActiveShipmentCard({
 	setActiveShipmentCard = () => {},
 	activeShipmentCard = '',
 	setShowShipmentList = () => {},
+	showShipmentList = false,
 	entity = '',
 	timeRange = '',
 	filter = {},
@@ -25,6 +27,7 @@ function ActiveShipmentCard({
 	customDate = new Date(),
 	activeBar = '',
 	setActiveBar = () => {},
+	setTableFilters = () => {},
 }) {
 	const PROPS_KEY_MAPPING = {
 		ongoing: {
@@ -41,6 +44,7 @@ function ActiveShipmentCard({
 			title        : 'Operationally Closed',
 			setActiveShipmentCard,
 			setShowShipmentList,
+			showShipmentList,
 			entity,
 			timeRange,
 			statsType    : 'OPR_CLOSED',
@@ -51,13 +55,16 @@ function ActiveShipmentCard({
 			customDate,
 			activeBar,
 			setActiveBar,
-			defaultWidth : '360',
+			defaultWidth : '252',
+			setTableFilters,
+			infoContent  : INFO_CONTENT.operationallyClosed,
 		},
 		financial: {
 			title        : 'Financially Closed',
 			status       : 'financial',
 			setActiveShipmentCard,
 			setShowShipmentList,
+			showShipmentList,
 			entity,
 			timeRange,
 			statsType    : 'FINANCE_CLOSED',
@@ -68,7 +75,9 @@ function ActiveShipmentCard({
 			customDate,
 			activeBar,
 			setActiveBar,
-			defaultWidth : '360',
+			defaultWidth : '252',
+			setTableFilters,
+			infoContent  : INFO_CONTENT.financiallyClosed,
 		},
 	};
 
