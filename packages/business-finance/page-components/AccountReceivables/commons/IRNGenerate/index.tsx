@@ -65,7 +65,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const { NAVIGATION_KEY, API_NAME } = PERMISSION_BUTTON.upload_invoice || {};
 
 	const NAVIGATION = PERMISSION_NAVIGATION
-		?.[NAVIGATION_KEY]?.[API_NAME]?.[GLOBAL_CONSTANTS.zeroth_index]?.type !== 'none';
+		?.[NAVIGATION_KEY]?.[API_NAME]?.[GLOBAL_CONSTANTS.zeroth_index]?.view_type !== 'none';
 
 	const { id: partnerId = '' } = partner;
 
@@ -114,6 +114,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 		setVisible(!visible);
 	};
 	const showPost = ['REIMBURSEMENT', 'REIMBURSEMENT_CREDIT_NOTE'].includes(invoiceType);
+	// eslint-disable-next-line custom-eslint/function-name-check
 	const content = () => (
 		<div>
 			<div
@@ -135,7 +136,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 							</Button>
 						</div>
 					)}
-				{uploadInvoice && IRN_FAILED_STATUS.includes(invoiceStatus)
+				{uploadInvoice && !IRN_FAILED_STATUS.includes(invoiceStatus)
 					&& (
 						<InvoiceModal
 							uploadInvoice={uploadInvoice}

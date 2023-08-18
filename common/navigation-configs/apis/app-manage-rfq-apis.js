@@ -80,7 +80,7 @@ const app_manage_rfq = [
 	{
 		api          : 'list_locations',
 		access_type  : 'private',
-		service_name : 'rfq',
+		service_name : 'location',
 	},
 	{
 		api          : 'list_operators',

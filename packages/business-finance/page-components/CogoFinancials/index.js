@@ -1,17 +1,17 @@
-import { Button, Popover, Select, Toggle } from '@cogoport/components';
+import { Button, Select, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlatformDemo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
 import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
-import CustomDateFilter from './Common/CustomDateFilter';
 import DemoTour from './Common/DemoTour/index';
 import StatsCard from './Common/StatsCard';
+import { getTimeRangeOptions, INFO_CONTENT } from './constants';
 import Filters from './Filters';
 import useGetProfitabilityStats from './hooks/useGetProfitabilityStats';
 import MultipleFilters from './MultipleFilters';
@@ -44,36 +44,6 @@ function CogoFinancials() {
 
 	const taxType = isPreTax ? 'PreTax' : 'PostTax';
 
-	const TIME_RANGE_OPTIONS = [
-		{ label: '1D', value: '1D' },
-		{ label: '1W', value: '1W' },
-		{ label: '1M', value: '1M' },
-		{ label: '6M', value: '6M' },
-		{ label: '1Y', value: '1Y' },
-		{
-			label: (
-				<Popover
-					placement="bottom"
-					render={(
-						<CustomDateFilter
-							customDate={customDate}
-							setCustomDate={setCustomDate}
-						/>
-					)}
-				>
-					<Button
-						size="xs"
-						style={{ background: 'none', border: 'none', color: 'black' }}
-					>
-						+
-					</Button>
-
-				</Popover>
-			),
-			value: 'custom',
-		},
-	];
-
 	const {
 		financialData, financialLoading,
 		operationalData, operationalLoading,
@@ -85,6 +55,10 @@ function CogoFinancials() {
 		setActiveBar('');
 		setActiveShipmentCard('');
 	};
+
+	useEffect(() => {
+		if (!showShipmentList) { setTableFilters({}); }
+	}, [showShipmentList]);
 
 	return (
 		<div>
@@ -116,7 +90,7 @@ function CogoFinancials() {
 						className={styles.segmented_section}
 					>
 						<SegmentedControl
-							options={TIME_RANGE_OPTIONS}
+							options={getTimeRangeOptions({ customDate, setCustomDate })}
 							activeTab={timeRange}
 							setActiveTab={setTimeRange}
 							color="#ED3726"
@@ -152,6 +126,7 @@ function CogoFinancials() {
 							cardData={ongoingData}
 							loading={ongoingLoading}
 							taxType={taxType}
+							infoContent={INFO_CONTENT.ongoingShipments}
 						/>
 						<ClosedShipmentCard
 							isDeviationVisible={false}
@@ -161,6 +136,7 @@ function CogoFinancials() {
 							cardData={operationalData}
 							loading={operationalLoading}
 							taxType={taxType}
+							infoContent={INFO_CONTENT.operationallyClosed}
 						/>
 					</div>
 					<ClosedShipmentCard
@@ -170,6 +146,8 @@ function CogoFinancials() {
 						cardData={financialData}
 						loading={financialLoading}
 						taxType={taxType}
+						infoContent={INFO_CONTENT.financiallyClosed}
+						isHomeCard
 					/>
 				</div>
 			) : (
@@ -179,6 +157,7 @@ function CogoFinancials() {
 						activeShipmentCard={activeShipmentCard}
 						isPreTax={isPreTax}
 						setShowShipmentList={setShowShipmentList}
+						showShipmentList={showShipmentList}
 						entity={entity}
 						timeRange={timeRange}
 						filter={filter}
@@ -189,6 +168,7 @@ function CogoFinancials() {
 						customDate={customDate}
 						activeBar={activeBar}
 						setActiveBar={setActiveBar}
+						setTableFilters={setTableFilters}
 					/>
 					<div className={styles.remaining_shipment_cards}>
 
@@ -201,6 +181,8 @@ function CogoFinancials() {
 									cardData={ongoingData}
 									loading={ongoingLoading}
 									taxType={taxType}
+									infoContent={INFO_CONTENT.ongoingShipments}
+									isAdditonalView
 								/>
 							</div>
 						)}
@@ -217,6 +199,7 @@ function CogoFinancials() {
 									loading={operationalLoading}
 									taxType={taxType}
 									setActiveBar={setActiveBar}
+									infoContent={INFO_CONTENT.operationallyClosed}
 								/>
 							</div>
 						)}
@@ -232,6 +215,7 @@ function CogoFinancials() {
 									loading={financialLoading}
 									taxType={taxType}
 									setActiveBar={setActiveBar}
+									infoContent={INFO_CONTENT.financiallyClosed}
 								/>
 							</div>
 						)}
@@ -240,8 +224,12 @@ function CogoFinancials() {
 			)}
 
 			{showShipmentList && (
-				<div>
-					<Filters setTableFilters={setTableFilters} tableFilters={tableFilters} />
+				<div style={{ background: '#fff' }}>
+					<Filters
+						setTableFilters={setTableFilters}
+						tableFilters={tableFilters}
+						activeBar={activeBar}
+					/>
 					<TableComp
 						activeShipmentCard={activeShipmentCard}
 						entity={entity}
