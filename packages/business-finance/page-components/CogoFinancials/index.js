@@ -1,8 +1,8 @@
 import { Button, Popover, Select, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMPlatformDemo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
@@ -10,6 +10,7 @@ import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
 import CustomDateFilter from './Common/CustomDateFilter';
+import DemoTour from './Common/DemoTour/index';
 import StatsCard from './Common/StatsCard';
 import Filters from './Filters';
 import useGetProfitabilityStats from './hooks/useGetProfitabilityStats';
@@ -21,11 +22,6 @@ const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((ite
 	value : String(item),
 	label : `${item} - ${GLOBAL_CONSTANTS.cogoport_entities[item].name}`,
 }));
-
-const Tour = dynamic(
-	() => import('reactour'),
-	{ ssr: false },
-);
 
 function CogoFinancials() {
 	const [isPreTax, setIsPreTax] = useState(true);
@@ -90,25 +86,9 @@ function CogoFinancials() {
 		setActiveShipmentCard('');
 	};
 
-	const steps = [
-		{
-			selector : '[data-tour="first-step"]',
-			content  : 'This is my first Step',
-		},
-		{
-			selector : '[data-tour="second-step"]',
-			content  : 'This is my second Step',
-		},
-	];
-
 	return (
 		<div>
-			<Button onClick={() => setTour(true)}>Start Tour</Button>
-			<Tour
-				steps={steps}
-				isOpen={tour}
-				onRequestClose={() => setTour(false)}
-			/>
+			<DemoTour tour={tour} setTour={setTour} />
 			<div className={styles.header}>
 				<div
 					role="presentation"
@@ -117,7 +97,14 @@ function CogoFinancials() {
 					<h2 className={styles.main_heading} data-tour="first-step">COGO Financials</h2>
 
 				</div>
-				<div style={{ display: 'flex' }}>
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<Button
+						onClick={() => setTour(true)}
+						className={styles.tour_btn}
+					>
+						Start Tour
+						<IcMPlatformDemo height={14} width={14} style={{ marginLeft: '8px' }} />
+					</Button>
 					<Toggle
 						name="taxType"
 						size="md"
