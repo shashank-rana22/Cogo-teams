@@ -19,27 +19,27 @@ const apis = [
 		service_name : 'spot_search',
 	},
 	{
-		api          : 'get_insurance_country_supported',
+		api          : 'get_saas_insurance_country_supported',
 		access_type  : 'private',
 		service_name : 'saas',
 	},
 	{
-		api          : 'get_insurance_list_commodities',
+		api          : 'get_saas_insurance_list_commodities',
 		access_type  : 'private',
 		service_name : 'saas',
 	},
 	{
-		api          : 'post_insurance_checkout_and_generate',
+		api          : 'post_saas_insurance_checkout_and_generate',
 		access_type  : 'private',
 		service_name : 'saas',
 	},
 	{
-		api          : 'get_insurance_draft_details',
+		api          : 'get_saas_insurance_draft_details',
 		access_type  : 'private',
 		service_name : 'saas',
 	},
 	{
-		api          : 'post_insurance_draft',
+		api          : 'post_saas_insurance_draft',
 		access_type  : 'private',
 		service_name : 'saas',
 	},
@@ -49,12 +49,12 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_insurance_rate',
+		api          : 'get_saas_insurance_rate',
 		access_type  : 'private',
 		service_name : 'saas',
 	},
 	{
-		api          : 'get_insurance_list_countries',
+		api          : 'get_saas_insurance_list_countries',
 		access_type  : 'private',
 		service_name : 'saas',
 	},

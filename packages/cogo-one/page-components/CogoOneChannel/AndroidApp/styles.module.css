@@ -1,0 +1,41 @@
+.download_apk {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	width: 74px;
+	height: 74px;
+	cursor: pointer;
+	background: #fcdc00;
+	border-radius: 100% 0 0;
+}
+
+.download_div {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: flex-end;
+	padding-right: 10px;
+}
+
+.bot_icon_styles {
+	margin: 20px 10px 0 0;
+}
+
+.text_styles {
+	margin-top: 4px;
+	font-size: 10px;
+	font-weight: 600;
+	text-align: right;
+}
+
+.flex_container {
+	display: flex;
+	align-items: center;
+}
+
+.download_icon {
+	height: 16px;
+	margin-right: 4px;
+	fill: #ee3425;
+}

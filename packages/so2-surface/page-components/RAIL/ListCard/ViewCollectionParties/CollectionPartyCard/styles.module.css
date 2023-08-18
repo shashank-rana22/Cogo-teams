@@ -1,0 +1,76 @@
+.main {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 16px;
+	overflow-x: auto;
+	color: #333;
+	border: 2px solid #f2f2f2;
+	border-radius: 4px;
+	box-shadow: 0 1px 1px 0 #0000001f;
+}
+
+.section {
+	all: unset;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 22px;
+
+	&:hover {
+		background: #f9f9f9;
+		transition: 0.5s all linear;
+	}
+}
+
+.org_details {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	width: 30%;
+	height: 50px;
+	border-right: 2px solid #f2f2f2;
+}
+
+.org {
+	width: 300px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.services {
+	width: 300px;
+	overflow: hidden;
+	font-size: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.live_invoice {
+	display: flex;
+	align-items: center;
+	margin-left: 24px;
+}
+
+.live_invoice_value {
+	color: #5936f0;
+}
+
+.vertical_line {
+	height: 14px;
+	margin: 0 6px;
+	border-right: 1px solid #333;
+}
+
+.arrow {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	width: 5%;
+}
+
+.tooltip {
+	font-size: 10px;
+}

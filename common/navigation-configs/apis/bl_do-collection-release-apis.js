@@ -107,6 +107,16 @@ const apis = [
 		service_name : 'bookings',
 		feature      : 'inventory_management',
 	},
+	{
+		api          : 'create_document',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api         : 'get_purchase_bills_list',
+		access_type : 'private',
+		feature     : 'bl_do_collection_release',
+	},
 ];
 
 export default apis;

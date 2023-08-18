@@ -1,10 +1,4 @@
 import {
-	collection,
-	addDoc,
-	query,
-	where,
-	limit,
-	getDocs,
 	doc,
 	onSnapshot,
 } from 'firebase/firestore';
@@ -14,63 +8,45 @@ import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 import useListCheckouts from './useListCheckouts';
 
-const THREE_HOURS_IN_MILLISECONDS = 3 * 60 * 60 * 1000;
-
-const createOrGetRoom = async (agentId, firestore, getAgentShipmentNumber) => {
-	let roomId = '';
-	const shipmentReminderRoom = collection(firestore, FIRESTORE_PATH.shipment_reminder);
-
-	const roomsQuery = query(
-		shipmentReminderRoom,
-		where('agent_id', '==', agentId),
-		limit(1),
-	);
-	const docs = await getDocs(roomsQuery);
-	if (!docs.size) {
-		const newRoom = {
-			agent_id      : agentId,
-			last_reminder : Date.now(),
-		};
-		await getAgentShipmentNumber({ type: 'create' });
-		const roomid = await addDoc(shipmentReminderRoom, newRoom);
-		roomId = roomid?.id;
-	} else {
-		roomId = docs?.docs?.[0]?.id;
-	}
-	return doc(
-		firestore,
-		`${FIRESTORE_PATH.shipment_reminder}/${roomId}`,
-	);
-};
+const THREE_HOURS = 3;
+const MINUTES_IN_ONE_HOUR = 60;
+const SECONDS_IN_ONE_MIN = 60;
+const MILLISECS_IN_ONE_SEC = 1000;
+const DEFAULT_TIMER = 0;
+const THREE_HOURS_IN_MILLISECONDS = THREE_HOURS * MINUTES_IN_ONE_HOUR * SECONDS_IN_ONE_MIN * MILLISECS_IN_ONE_SEC;
 
 function useShipmentReminder({
 	firestore,
 	setReminderModal = () => {},
 	agentId = '',
-	getAssignedChats,
 }) {
 	const shipmentReminderSnapShotRef = useRef(null);
 	const remindertimeoutRef = useRef(null);
 	const {
 		shipmentData,
 		getAgentShipmentsCount = () => {},
-	} = useListCheckouts({ setReminderModal, agentId, getAssignedChats });
+	} = useListCheckouts({ setReminderModal, agentId });
 
 	const mountReminderSnapShot = useCallback(async () => {
 		shipmentReminderSnapShotRef?.current?.();
+
 		try {
-			const roomDoc = await createOrGetRoom(agentId, firestore, getAgentShipmentsCount);
+			const roomDoc = doc(
+				firestore,
+				`${FIRESTORE_PATH.agent_data}/${agentId}`,
+			);
+
 			shipmentReminderSnapShotRef.current = onSnapshot(roomDoc, (roomDocData) => {
 				const { last_reminder = 0 } = roomDocData.data() || {};
 
 				const differenceFromLastReminder = Date.now() - last_reminder;
 				const timer = differenceFromLastReminder > THREE_HOURS_IN_MILLISECONDS
-					? 0 : THREE_HOURS_IN_MILLISECONDS - differenceFromLastReminder;
+					? DEFAULT_TIMER : THREE_HOURS_IN_MILLISECONDS - differenceFromLastReminder;
 
 				clearTimeout(remindertimeoutRef?.current);
 
 				remindertimeoutRef.current = setTimeout(() => {
-					getAgentShipmentsCount({ roomDoc, type: 'update' });
+					getAgentShipmentsCount({ roomDoc, type: 'update', firestore });
 				}, timer);
 			});
 		} catch (e) {

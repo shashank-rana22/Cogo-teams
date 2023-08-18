@@ -1,0 +1,25 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	margin: 20px;
+}
+
+.tab_heading {
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.button_select_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.select_container {
+	width: 270px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: space-between;
+	width: 270px;
+}

@@ -12,7 +12,7 @@ const FORM_TYPE_EDUCATIONAL_QUALIFICATION = 'educational_qualification';
 const CONTROL_TYPE_FIELD_ARRAY = 'fieldArray';
 
 function EducationalQualification({ getEmployeeDetails, data }) {
-	const { handleSubmit, control, setValue, watch } = useForm();
+	const { handleSubmit, control, setValue, watch, formState: { errors } } = useForm();
 	const watchValues = watch();
 
 	const controls = getControls();
@@ -30,7 +30,7 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 	useEffect(() => {
 		setValue(FORM_TYPE_EDUCATIONAL_QUALIFICATION, employee_education_details?.map((item) => ({
 			...item,
-			degree_proof : item?.degree_proof?.finalUrl,
+			degree_proof : item?.degree_proof,
 			started_at   : new Date(item?.started_at),
 			ended_at     : new Date(item?.ended_at),
 		})));
@@ -56,6 +56,7 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 								controls={controlItem?.controls}
 								key={controlName}
 								watch={watchValues?.educational_qualification}
+								error={errors?.educational_qualification}
 							/>
 
 						);

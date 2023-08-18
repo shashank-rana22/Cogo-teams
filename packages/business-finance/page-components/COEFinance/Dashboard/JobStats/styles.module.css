@@ -23,13 +23,10 @@
 
 .label {
 	display: flex;
-	gap: 4px;
-	font-size: 16px;
 	font-weight: 600;
 }
 
 .value {
-	padding-left: 14px;
 	font-size: 20px;
 	font-weight: 600;
 	color: #f68b21;
@@ -43,7 +40,6 @@
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
-	padding: 0 40px 0 20px;
 }
 
 .ship_id {

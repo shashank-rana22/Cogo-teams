@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 interface ExceptionFiltersInterface {
@@ -10,6 +10,7 @@ interface ExceptionFiltersInterface {
 	creditDays?: string ;
 	cycleStatus?: string;
 	pageIndex?: number;
+	entities?: string[];
 }
 interface Props {
 	exceptionFilter?: ExceptionFiltersInterface;
@@ -22,10 +23,13 @@ interface Profile {
 	profile?: { user: { id: string } }
 }
 
-const useMasterException = ({ exceptionFilter, subTabsValue, setShowConfirmationModal, setExceptionFilter }:Props) => {
-	const [searchValue, setSearchValue] = useState('');
-	const { category = '', creditDays = 0, cycleStatus = '', pageIndex } = exceptionFilter || {};
+const useMasterException = ({
+	exceptionFilter, subTabsValue = '',
+	setShowConfirmationModal, setExceptionFilter,
+}:Props) => {
 	const profile: Profile = useSelector((state) => state);
+	const [searchValue, setSearchValue] = useState('');
+	const { category = '', cycleStatus = '', pageIndex, entities } = exceptionFilter || {};
 	const { profile: { user } } = profile || {};
 	const PROFILE_ID = user?.id;
 
@@ -71,18 +75,18 @@ const useMasterException = ({ exceptionFilter, subTabsValue, setShowConfirmation
 				await trigger({
 					params: {
 						segmentation : category || undefined,
-						creditDays   : creditDays ? parseInt(creditDays, 10) : undefined,
 						query        : query || undefined,
 						pageIndex,
 						sortBy       : sort?.sortBy || undefined,
 						sortType     : sort?.sortType || undefined,
+						entities     : !isEmpty(entities) ? entities : undefined,
 					},
 				});
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			}
 		})();
-	}, [category, creditDays, query, sort?.sortBy, pageIndex, sort?.sortType, trigger]);
+	}, [category, query, sort?.sortBy, pageIndex, sort?.sortType, trigger, entities]);
 
 	const getCycleWiseList = useCallback(() => {
 		(async () => {
@@ -97,7 +101,7 @@ const useMasterException = ({ exceptionFilter, subTabsValue, setShowConfirmation
 					},
 				});
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			}
 		})();
 	}, [query, pageIndex, sort?.sortBy, sort?.sortType, cycleStatus, cycleWiseApi]);

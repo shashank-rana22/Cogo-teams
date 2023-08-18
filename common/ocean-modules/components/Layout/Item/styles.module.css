@@ -20,12 +20,16 @@
 }
 
 .errors {
-	font-size: var(--font-size-md);
+	font-size: var(--font-size-sm);
 	color: var(--color-primary-error-red-2);
 }
 
 .element {
 	padding: 4px;
+
+	&:first-of-type {
+		padding-left: 0;
+	}
 
 	:global {
 		.react-datepicker__input-container {
@@ -94,6 +98,10 @@
 
 		.ui_chips_container {
 			flex-wrap: wrap;
+		}
+
+		.react-datepicker-wrapper {
+			width: 100%;
 		}
 	}
 }

@@ -23,11 +23,16 @@
 	background: #d8fade;
 }
 
+.post_facto {
+	background: #eecfcf;
+}
+
 .trade_type,
 .importer_exporter_tags,
 .source,
 .cogoverse,
-.cogoport_assured {
+.cogoport_assured,
+.post_facto {
 	width: max-content;
 	padding: 2px 20px;
 	margin-right: 8px;

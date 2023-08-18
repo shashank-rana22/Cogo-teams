@@ -1,11 +1,13 @@
-import { Input } from '@cogoport/components';
+import { Input, Select } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
+
+import { SPECTATOR_TYPE_OPTIONS } from '../../../../constants';
 
 import styles from './styles.module.css';
 
-function SearchType(props) {
-	const { searchParams, setSearchParams } = props;
-
+function SearchType({
+	searchParams = {}, setSearchParams = () => {}, isAdmin = false, spectatorType = '', setSpectatorType = () => {},
+}) {
 	return (
 		<div className={styles.search_container}>
 			<Input
@@ -24,6 +26,16 @@ function SearchType(props) {
 					text: val,
 				}))}
 			/>
+			{!isAdmin &&	(
+				<Select
+					size="sm"
+					placeholder="Select view"
+					value={spectatorType}
+					options={SPECTATOR_TYPE_OPTIONS}
+					onChange={(val) => setSpectatorType(val)}
+					isClearable
+				/>
+			)}
 		</div>
 	);
 }

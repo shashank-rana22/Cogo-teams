@@ -1,0 +1,40 @@
+.card_container {
+	padding: 0 10px 10px;
+	margin: 10px 0;
+	background: #fef199;
+	border: 1px solid #d6b300;
+	border-radius: 5px;
+}
+
+.button_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 10px;
+	margin: 10px 0;
+	font-size: 12px;
+	border-top: 1px solid #d6b300;
+}
+
+.asterisk_mark {
+	color: #ee3425;
+}
+
+.detail_container {
+	display: flex;
+}
+
+.detail_column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 20%;
+	margin-top: 10px;
+}
+
+.detail_label {
+	font-size: 16px;
+	font-weight: 500;
+	color: #ee3425;
+}

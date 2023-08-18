@@ -1,0 +1,20 @@
+.tilte {
+	padding-bottom: 24px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.tabPanelWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.button_container {
+	display: flex;
+	gap: 6px;
+	margin-top: -40px;
+	margin-right: 20px;
+	margin-left: auto;
+}

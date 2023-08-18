@@ -5,4 +5,5 @@ export const columns = [
 	{ Header: 'SERVICE TYPE', accessor: 'service_name' },
 	{ Header: 'Amount', accessor: 'inr_invoice_total' },
 	{ Header: 'Payment Status', accessor: 'payment_status' },
+	{ Header: 'TDS Amount', accessor: 'tdsAmount' },
 ];

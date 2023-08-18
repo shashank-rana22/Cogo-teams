@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
@@ -23,7 +24,9 @@ const useGetStep2Data = ({
 	setStep = () => {},
 	shipment_data = {},
 }) => {
-	const [bookingNote, setBookingNote] = useState(0);
+	const THREE = 3;
+	const ONE = 1;
+	const [bookingNote, setBookingNote] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
 	const [, updateServiceTrigger] = useRequest({
 		url    : '/update_shipment_service',
@@ -39,14 +42,14 @@ const useGetStep2Data = ({
 		method : 'POST',
 	});
 
-	const localServiceIds = [];
-	const fclFreight = [];
+	const LOCAL_SERVICE_IDS = [];
+	const FCL_FREIGHT = [];
 
 	(servicesList || []).forEach((serviceObj) => {
 		if (serviceObj?.service_type?.includes('fcl_freight_local')) {
-			localServiceIds.push(serviceObj?.id);
+			LOCAL_SERVICE_IDS.push(serviceObj?.id);
 		} else if (serviceObj?.service_type?.includes('fcl_freight_service')) {
-			fclFreight.push(serviceObj);
+			FCL_FREIGHT.push(serviceObj);
 		}
 	});
 
@@ -65,17 +68,20 @@ const useGetStep2Data = ({
 
 				},
 			],
-			free_days_demurrage_destination : primary_service?.free_days_demurrage_destination || 0,
-			free_days_demurrage_origin      : primary_service?.free_days_demurrage_origin || 0,
-			free_days_detention_destination : primary_service?.free_days_detention_destination || 0,
-			free_days_detention_origin      : primary_service?.free_days_detention_origin || 0,
+			free_days_demurrage_destination:
+			primary_service?.free_days_demurrage_destination || GLOBAL_CONSTANTS.zeroth_index,
+			free_days_demurrage_origin:
+			primary_service?.free_days_demurrage_origin || GLOBAL_CONSTANTS.zeroth_index,
+			free_days_detention_destination:
+			primary_service?.free_days_detention_destination || GLOBAL_CONSTANTS.zeroth_index,
+			free_days_detention_origin: primary_service?.free_days_detention_origin || GLOBAL_CONSTANTS.zeroth_index,
 		},
 	});
 
 	const { watch } = formProps || {};
 
 	const movementDetails = watch('movement_details');
-	const departureDate = movementDetails?.[0]?.schedule_departure;
+	const departureDate = movementDetails?.[GLOBAL_CONSTANTS.zeroth_index]?.schedule_departure;
 
 	const handleFinalSubmit = async (values) => {
 		const payloadCreateShipmentDocument = {
@@ -91,46 +97,48 @@ const useGetStep2Data = ({
 			uploaded_by_org_id : task.organization_id,
 		};
 
-		const dataObj = {};
+		const DATA_OBJ = {};
 
 		(mainControls({ departureDate }) || []).forEach((obj) => {
 			if (numberKeys.includes(obj.name)) {
-				dataObj[obj.name] = Number(values[obj.name] || 0);
+				DATA_OBJ[obj.name] = Number(values[obj.name] || GLOBAL_CONSTANTS.zeroth_index);
 			} else {
-				dataObj[obj.name] = values[obj.name];
+				DATA_OBJ[obj.name] = values[obj.name];
 			}
 		});
 
 		const mv_details = values?.movement_details || [];
 
-		const formValuesForFcl = {};
-		const formValuesForLocal = {};
+		const FORM_VALUES_FOR_FCL = {};
+		const FORM_VALUES_FOR_LOCALS = {};
 
 		Object.keys(step0_data?.formValues).forEach((key) => {
 			if (key.includes('fcl_main')) {
-				formValuesForFcl[key.split('_fcl_main')[0]] = step0_data?.formValues[key];
+				FORM_VALUES_FOR_FCL[key.split('_fcl_main')[GLOBAL_CONSTANTS.zeroth_index]] = step0_data
+					?.formValues[key];
 			}
 			if (key.includes('fcl_local')) {
-				formValuesForLocal[key.split('_fcl_local')[0]] = step0_data?.formValues[key];
+				FORM_VALUES_FOR_LOCALS[key.split('_fcl_local')[GLOBAL_CONSTANTS.zeroth_index]] = step0_data
+					?.formValues[key];
 			}
 		});
 
 		const importLocalService = shipment_data?.all_services?.filter(
 			(service) => service?.service_type === 'fcl_freight_local_service',
-		)?.[0];
+		)?.[GLOBAL_CONSTANTS.zeroth_index];
 
-		if (formattedRate?.primary_service) {
-			formValuesForFcl.service_provider_id = formattedRate?.[primary_service.id]?.service_provider_id;
+		if (formattedRate?.[primary_service.id]) {
+			FORM_VALUES_FOR_FCL.service_provider_id = formattedRate?.[primary_service.id]?.service_provider_id;
 
-			formValuesForFcl.shipping_line_id =	formattedRate?.[primary_service.id]?.shipping_line_id;
+			FORM_VALUES_FOR_FCL.shipping_line_id =	formattedRate?.[primary_service.id]?.shipping_line_id;
 
-			formValuesForLocal.service_provider_id = shipment_data?.main_service_trade_type === 'import'
+			FORM_VALUES_FOR_LOCALS.service_provider_id = shipment_data?.main_service_trade_type === 'import'
 				? importLocalService?.service_provider_id
-				: formattedRate[primary_service.id]?.service_provider_id;
+				: formattedRate?.[primary_service.id]?.service_provider_id;
 
-			formValuesForLocal.shipping_line_id = shipment_data?.main_service_trade_type === 'import'
+			FORM_VALUES_FOR_LOCALS.shipping_line_id = shipment_data?.main_service_trade_type === 'import'
 				? importLocalService?.shipping_line_id
-				: formattedRate[primary_service.id]?.shipping_line_id;
+				: formattedRate?.[primary_service.id]?.shipping_line_id;
 		}
 
 		const payloadForUpdateShipment = {
@@ -139,10 +147,10 @@ const useGetStep2Data = ({
 					...(obj || {}),
 					service_type: 'fcl_freight_service',
 				})),
-				...(dataObj || {}),
-				...(formValuesForFcl || {}),
-				schedule_departure : mv_details[0]?.schedule_departure,
-				schedule_arrival   : mv_details[mv_details.length - 1]?.schedule_arrival,
+				...(DATA_OBJ || {}),
+				...(FORM_VALUES_FOR_FCL || {}),
+				schedule_departure : mv_details[GLOBAL_CONSTANTS.zeroth_index]?.schedule_departure,
+				schedule_arrival   : mv_details[mv_details.length - ONE]?.schedule_arrival,
 			},
 			ids                 : task?.task_field_ids,
 			service_type        : task?.service_type,
@@ -154,11 +162,11 @@ const useGetStep2Data = ({
 				data: payloadForUpdateShipment,
 			});
 
-			const res2 = localServiceIds.length > 0
+			const res2 = LOCAL_SERVICE_IDS.length > GLOBAL_CONSTANTS.zeroth_index
 				? await updateServiceTrigger({
 					data: {
-						data                : { ...formValuesForLocal },
-						ids                 : localServiceIds,
+						data                : { ...FORM_VALUES_FOR_LOCALS },
+						ids                 : LOCAL_SERVICE_IDS,
 						service_type        : 'fcl_freight_local_service',
 						shipment_id         : task?.shipment_id,
 						performed_by_org_id : task.organization_id,
@@ -182,7 +190,7 @@ const useGetStep2Data = ({
 					if (!finalResponse.hasError) {
 						Toast.success('Step Completed Successfully');
 					}
-					setStep(3);
+					setStep(THREE);
 				} else {
 					Toast.error('Something went wrong !');
 				}

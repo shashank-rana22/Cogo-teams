@@ -23,3 +23,22 @@
 	width: fit-content;
 	cursor: pointer;
 }
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin: 4px;
+}
+
+.button {
+	display: flex;
+	align-items: space-between;
+	justify-content: flex-start;
+	margin: 6px;
+}
+
+.upload_icon {
+	display: flex;
+	align-items: center;
+}

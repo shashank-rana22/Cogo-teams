@@ -88,6 +88,8 @@ function EmploymentHistory({ getEmployeeDetails, data }) {
 										control={control}
 										controls={controlItem?.controls}
 										key={controlName}
+										error={errors?.employment_history}
+
 									/>
 								);
 							}

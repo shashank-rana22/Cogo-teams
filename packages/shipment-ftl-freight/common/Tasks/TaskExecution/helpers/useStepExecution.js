@@ -10,18 +10,20 @@ import populateControls from '../utils/populate-controls';
 function useStepExecution({
 	task = {},
 	stepConfig = {},
+	getApisData = {},
 	selectedMail = {},
 }) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
 	const populatedControls = populateControls(stepConfig.controls);
 
-	const valueInjectedControls = injectValues(
+	const valueInjectedControls = injectValues({
 		selectedMail,
 		populatedControls,
 		task,
+		getApisData,
 		servicesList,
-	);
+	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);
 

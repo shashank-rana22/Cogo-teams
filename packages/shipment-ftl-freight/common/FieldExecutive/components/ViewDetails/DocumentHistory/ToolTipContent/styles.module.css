@@ -1,0 +1,13 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.pills {
+	padding: 3px;
+	margin: 3px 2px;
+	font-size: 10px;
+	background-color: #bdbdbd;
+	border: 1px solid #e6e6e6;
+	border-radius: 5px;
+}

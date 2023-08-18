@@ -5,14 +5,16 @@ import injectCustomFormValidations from './inject-custom-form-validations';
 const MINIMUM_BLS_COUNT = 1;
 const MINIMUM_CONTAINERS_COUNT = 1;
 
-const injectValues = (
+const injectValues = ({
 	selectedMail,
 	populatedControls,
 	task,
 	getApisData,
 	shipment_data,
 	stepConfig,
-) => {
+	setCommodityUnit = () => {},
+	primary_service,
+}) => {
 	const controls = populatedControls || [];
 
 	if (!controls?.length) return controls;
@@ -108,7 +110,7 @@ const injectValues = (
 
 		(controls || []).forEach((control, index) => {
 			if (control.name === 'bl_detail') {
-				const shipment_bl_details =	getApisData?.list_shipment_bl_details?.filter(
+				const shipment_bl_details = getApisData?.list_shipment_bl_details?.filter(
 					(i) => i?.bl_document_type === doc_type,
 				);
 
@@ -123,6 +125,28 @@ const injectValues = (
 			if (control.name === 'containers_count') {
 				controls[index].value = containersCount;
 				controls[index].rules.max = containersCount;
+			}
+		});
+	} else if (task?.task === 'mark_haulage_container_picked_up') {
+		(controls || []).forEach((control, index) => {
+			if (control.name === 'cargo_readiness_date') {
+				controls[index].value = primary_service?.cargo_readiness_date
+					? new Date(primary_service?.cargo_readiness_date) : null;
+			}
+		});
+	} else if (task?.task === 'mark_confirmed') {
+		(controls || []).forEach((ctrl, index) => {
+			if (ctrl?.name === 'commodity_category') {
+				if (shipment_data?.commodity_category) {
+					controls[index].value = shipment_data?.commodity_category;
+					controls[index].disabled = !!shipment_data?.commodity_category;
+				}
+			}
+
+			if (ctrl?.name === 'hs_code') {
+				controls[index].onChange = (val, obj) => {
+					setCommodityUnit(obj);
+				};
 			}
 		});
 	}

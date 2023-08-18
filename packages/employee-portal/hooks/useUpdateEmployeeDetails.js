@@ -20,8 +20,9 @@ const getEducationalQualificationsPayload = (data) => ({
 	employee_education_details: (data?.educational_qualification || []).map(
 		(item) => ({
 			...item,
-			started_at : String(item.started_at),
-			ended_at   : String(item.ended_at),
+			degree_proof : item?.degree_proof?.finalUrl ? item?.degree_proof?.finalUrl : item?.degree_proof,
+			started_at   : String(item.started_at),
+			ended_at     : String(item.ended_at),
 		}),
 	),
 });

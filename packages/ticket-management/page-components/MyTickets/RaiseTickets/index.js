@@ -1,49 +1,52 @@
-import { isEmpty } from '@cogoport/utils';
+import { Button, Modal } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
+import React, { useState } from 'react';
 
-import useRaiseTicketcontrols from '../../../configurations/filter-controls';
-import { getFieldController } from '../../../utils/getFieldController';
+import useRaiseTicket from '../../../hooks/useRaiseTicket';
 
+import RaiseTicketsForm from './RaiseTicketsForm';
 import styles from './styles.module.css';
 
-function RaiseTickets({ control, errors, watchOrgId, additionalInfo, setAdditionalInfo }) {
-	const additionalControls = (additionalInfo || []).map((item) => ({
-		label          : item,
-		name           : item,
-		controllerType : 'text',
-		placeholder    : `add ${item}`,
-		showOptional   : false,
-	}));
+function RaiseTickets({ showRaiseTicket = false, setShowRaiseTicket = () => {}, setRefreshList = () => {} }) {
+	const [additionalInfo, setAdditionalInfo] = useState([]);
 
-	const controls = useRaiseTicketcontrols({ watchOrgId, setAdditionalInfo }).concat(additionalControls);
+	const formProps = useForm();
+	const { handleSubmit, reset } = formProps;
+
+	const handleClose = () => {
+		reset();
+		setShowRaiseTicket(false);
+	};
+
+	const { raiseTickets, loading } = useRaiseTicket({ handleClose, additionalInfo, setRefreshList });
 
 	return (
-		<div>
-			{controls.map((controlItem) => {
-				const elementItem = { ...controlItem };
-				const Element = getFieldController(elementItem.controllerType);
+		<Modal
+			size="sm"
+			placement="right"
+			onClose={handleClose}
+			show={showRaiseTicket}
+			closeOnOuterClick={handleClose}
+			className={styles.styled_ui_modal_dialog}
+		>
+			<form onSubmit={handleSubmit(raiseTickets)}>
+				<Modal.Header title="Raise Ticket" style={{ padding: 8 }} />
 
-				if (!Element) { return null; }
+				<Modal.Body>
+					<RaiseTicketsForm
+						{...formProps}
+						additionalInfo={additionalInfo}
+						setAdditionalInfo={setAdditionalInfo}
+					/>
+				</Modal.Body>
 
-				if (elementItem.name === 'user_id' && isEmpty(watchOrgId)) { return null; }
-
-				return (
-					<div
-						key={controlItem.name}
-						className={styles.field}
-					>
-						{elementItem.label && <div className={styles.label}>{elementItem.label}</div>}
-						<Element
-							{...elementItem}
-							size="sm"
-							key={elementItem.name}
-							control={control}
-							id={`${elementItem.name}_input`}
-						/>
-						<div className={styles.error}>{errors?.[controlItem.name] && 'Required'}</div>
-					</div>
-				);
-			})}
-		</div>
+				<Modal.Footer style={{ padding: 12 }}>
+					<Button size="md" type="submit" loading={loading}>
+						Submit
+					</Button>
+				</Modal.Footer>
+			</form>
+		</Modal>
 	);
 }
 

@@ -8,6 +8,7 @@ import Remarks from '../commons/Remarks';
 import RenderIRNGenerated from '../commons/RenderIRNGenerated';
 import RibbonRender from '../commons/RibbonRender';
 import { getDocumentNumber, getDocumentUrl } from '../Utils/getDocumentNumber';
+import getStatus from '../Utils/getStatus';
 
 import CheckboxItem from './CheckboxItem';
 import HeaderCheckbox from './HeaderCheckbox';
@@ -42,6 +43,7 @@ const INVOICE_STATUS_MAPPING = {
 const IRN_GENERATEABLE_STATUSES = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 
 interface InvoiceTable {
+	entityCode ?: string,
 	refetch?: Function,
 	showName?: boolean,
 	setSort?: (p: object)=>void,
@@ -79,6 +81,7 @@ const completedColumn = ({
 	totalRows,
 	isHeaderChecked,
 	setIsHeaderChecked,
+	entityCode,
 }: InvoiceTable) => [
 	{
 		Header: <HeaderCheckbox
@@ -373,7 +376,10 @@ const completedColumn = ({
 									>
 										{row?.eInvoicePdfUrl
 											? 'E INVOICE GENERATED'
-											: startCase(getByKey(row, 'invoiceStatus') as string)}
+											: startCase(getStatus({
+												entityCode,
+												invoiceStatus: getByKey(row, 'invoiceStatus'),
+											}))}
 
 									</div>
 								)}
@@ -384,7 +390,10 @@ const completedColumn = ({
 											0,
 											10,
 										)}...`
-										: `${startCase(getByKey(row, 'invoiceStatus') as string).substring(
+										: `${startCase(getStatus({
+											entityCode,
+											invoiceStatus: getByKey(row, 'invoiceStatus'),
+										})).substring(
 											0,
 											10,
 										)}...`}
@@ -394,7 +403,10 @@ const completedColumn = ({
 						)
 							: (
 								<div className={styles.style_text}>
-									{startCase(getByKey(row, 'invoiceStatus') as string)}
+									{startCase(getStatus({
+										entityCode,
+										invoiceStatus: getByKey(row, 'invoiceStatus'),
+									}))}
 								</div>
 							)}
 					</div>

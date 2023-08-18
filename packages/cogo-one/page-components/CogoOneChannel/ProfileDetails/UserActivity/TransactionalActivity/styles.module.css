@@ -148,3 +148,8 @@
 .milestone_last_card {
 	border-left: none;
 }
+
+.header {
+	display: flex;
+	justify-content: space-between;
+}

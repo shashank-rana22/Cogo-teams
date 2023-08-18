@@ -1,28 +1,52 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useSelector } from '@cogoport/store';
+import { useEffect, useCallback, useState } from 'react';
+
+import getViewType from '../helpers/getViewType';
+import getViewTypeFromWorkPreferences from '../utils/getViewTypeFromWorkPreferences';
 
 function useAgentWorkPrefernce() {
-	const [{ loading, data: agentStatus }, trigger] = useRequest({
+	const { userRoleIds = [], userId = '', authRoleData = {} } = useSelector(({ profile }) => ({
+		userRoleIds  : profile.partner?.user_role_ids || [],
+		userId       : profile?.user?.id,
+		authRoleData : profile?.auth_role_data,
+	}));
+
+	const [viewType, setViewType] = useState('');
+	const [userMails, setUserMails] = useState([]);
+
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_agent_work_preference',
 		method : 'get',
 	}, { manual: true });
 
+	const viewTypeFromRoleIds = getViewType({ userRoleIds, userId, authRoleData });
+
 	const fetchworkPrefernce = useCallback(async () => {
+		let res;
 		try {
-			await trigger();
+			res = await trigger();
 		} catch (error) {
-			// console.log(error);
+			console.error(error);
+		} finally {
+			const viewTypeValue = getViewTypeFromWorkPreferences(
+				{ viewTypeFromRoleIds, agentType: res?.data?.agent_type },
+			);
+			setUserMails(res?.data?.emails || []);
+			setViewType(viewTypeValue);
 		}
-	}, [trigger]);
+	}, [trigger, viewTypeFromRoleIds]);
 
 	useEffect(() => {
 		fetchworkPrefernce();
 	}, [fetchworkPrefernce]);
 
 	return {
+		viewType,
 		loading,
-		agentStatus,
+		userMails,
 		fetchworkPrefernce,
+		agentStatus: data,
 	};
 }
 export default useAgentWorkPrefernce;

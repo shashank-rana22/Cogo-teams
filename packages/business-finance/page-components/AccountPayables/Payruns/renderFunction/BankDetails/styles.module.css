@@ -1,0 +1,26 @@
+.sub_container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.text {
+	font-size: 12px;
+}
+
+.label {
+	margin-right: 2px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.value {
+	margin-right: 2px;
+	font-size: 12px;
+}
+
+.icon {
+	margin-left: 4px;
+	color: #f68b21;
+	cursor: pointer;
+}

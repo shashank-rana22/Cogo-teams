@@ -1,27 +1,19 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { usePublicRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useGetEmojiList = () => {
 	const [onClicked, setOnClicked] = useState(false);
 
-	const [{ data: emojisList }, trigger] = usePublicRequest({
-		url    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emoji-list.json',
+	const [{ data: emojisList }] = usePublicRequest({
+		url    : GLOBAL_CONSTANTS.urls.list_emojis,
 		method : 'get',
-	}, { manual: true });
-
-	const emojiListFetch = async () => {
-		try {
-			await trigger();
-		} catch (error) {
-			// console.log(error);
-		}
-	};
+	}, { manual: false });
 
 	return {
 		emojisList,
 		setOnClicked,
 		onClicked,
-		emojiListFetch,
 	};
 };
 

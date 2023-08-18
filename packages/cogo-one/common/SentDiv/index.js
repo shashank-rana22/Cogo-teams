@@ -2,9 +2,11 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import { LOGO_URL } from '../../constants';
 import MessageBody from '../MessageBody';
+import MessageTags from '../MessageTags';
 
 import FooterItems from './FooterItems';
 import styles from './styles.module.css';
@@ -30,12 +32,15 @@ function SentDiv({
 		separator  : ' ',
 	});
 	const adminStyles = !!(send_by || session_type === 'admin') || false;
+
+	const hasTags = !isEmpty(response?.tags);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.message_div}>
 				<div className={styles.name}>
 					Replied by
-					&nbsp;
+					{' '}
 					{send_by || (session_type === 'admin' ? 'kam' : 'bot')}
 					,
 					<span className={styles.time_stamp}>{date || ''}</span>
@@ -43,8 +48,10 @@ function SentDiv({
 
 				<div className={styles.styled_div}>
 					<div className={cl`${styles.receive_message_container} 
-						${adminStyles ? styles.admin_message_container : ''}`}
+						${adminStyles ? styles.admin_message_container : ''}
+						${hasTags ? styles.tags_styles : ''}`}
 					>
+						{hasTags && <div className={styles.tags}><MessageTags tags={response.tags || []} /></div>}
 						<MessageBody
 							response={response}
 							message_type={message_type}

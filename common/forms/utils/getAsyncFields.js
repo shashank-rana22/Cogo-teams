@@ -120,12 +120,13 @@ function asyncFieldsPartnerUsers() {
 
 function asyncFieldsPartnerRoles() {
 	return {
-		labelKey    : 'name',
-		valueKey    : 'id',
-		endpoint    : 'list_auth_roles',
-		initialCall : true,
-		params      : {
-			filters    : { status: 'active' },
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'list_roles',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {
+			filters    : { status: true },
 			page_limit : 100,
 			sort_by    : 'short_name',
 			sort_type  : 'asc',
@@ -356,6 +357,21 @@ function asyncFieldsTicketTypes() {
 		initialCall  : true,
 		qFilterKey   : 'QFilter',
 		listKey      : 'items',
+		searchByq    : true,
+	};
+}
+
+function asyncTicketsCategory() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'configuration_categories',
+		authkey      : 'get_tickets_configuration_categories',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+		searchByq    : true,
 	};
 }
 
@@ -434,6 +450,18 @@ function asyncAccMode() {
 	};
 }
 
+function asyncIncidentSubtypeList() {
+	return {
+		labelKey     : 'incidentSubtype',
+		valueKey     : 'incidentSubtype',
+		endpoint     : 'incident-management/incident/incident-sub-type',
+		initialCall  : true,
+		authkey      : 'get_incident_management_incident_incident_sub_type',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
 function asyncCodeMaster() {
 	return {
 		labelKey     : 'accountCode',
@@ -493,6 +521,17 @@ function asyncQuotaList() {
 	};
 }
 
+function asyncCommoditiesList() {
+	return {
+		labelKey     : 'description',
+		valueKey     : 'id',
+		endpoint     : 'saas/hs-code/list',
+		initialCall  : true,
+		authkey      : 'get_saas_hs_code_list',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
 function asyncFortigoLocations() {
 	return {
 		labelKey    : 'location_name',
@@ -571,6 +610,90 @@ function asyncListTests() {
 	};
 }
 
+function asyncListEmployees() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_employee_details',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListSquad() {
+	return {
+		labelKey    : 'squad_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_squads',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListSubChapters() {
+	return {
+		labelKey    : 'sub_chapter_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_sub_chapters',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListTribes() {
+	return {
+		labelKey    : 'tribe_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_tribes',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListChapter() {
+	return {
+		labelKey    : 'chapter_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_chapters',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListRoles() {
+	return {
+		labelKey    : 'role_name',
+		valueKey    : 'id',
+		endpoint    : 'list_employee_roles',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 function asyncListPromotions() {
 	return {
 		labelKey    : 'name',
@@ -582,6 +705,30 @@ function asyncListPromotions() {
 				status: 'published',
 			},
 			page_limit: 100,
+		},
+	};
+}
+function asyncListServiceLanes() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_service_lanes',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+		},
+	};
+}
+function asyncListVessels() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_vessels',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
 		},
 	};
 }
@@ -612,6 +759,92 @@ function asyncListOrganizationStakeholders() {
 		valueKey    : 'id',
 		endpoint    : 'payments/dunning/organization-stakeholders',
 		initialCall : true,
+	};
+}
+
+function asyncListShipmentPendingTasks() {
+	return {
+		labelKey    : 'document_type',
+		valueKey    : 'document_type',
+		endpoint    : 'list_shipment_pending_tasks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListShipments() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_shipments',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListShipmentServices() {
+	return {
+		labelKey    : 'shipment_serial_id',
+		valueKey    : 'shipment_id',
+		endpoint    : 'list_shipment_services',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListAllManagers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_managers',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 20,
+		},
+	};
+}
+
+function asyncListAllocationObjectives() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/objectives',
+		authkey      : 'get_allocation_objectives',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
+function asyncListExpenseCategories() {
+	return {
+		labelKey     : 'categoryName',
+		valueKey     : 'id',
+		endpoint     : 'purchase/expense/expense-category',
+		microService : 'business_finance',
+		authkey      : 'get_purchase_expense_expense_category',
+		initialCall  : true,
+		searchByq    : true,
+		params       : { pageSize: 10000 },
+	};
+}
+
+function asyncListResources() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'list_resources',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {},
 	};
 }
 
@@ -657,13 +890,31 @@ export {
 	asyncPlanPricingList,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncCommoditiesList,
 	asyncFortigoLocations,
 	asyncOrganizationBranches,
 	asyncListFAQTopics,
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncListServiceLanes,
+	asyncListVessels,
+	asyncListEmployees,
+	asyncListSquad,
+	asyncListSubChapters,
+	asyncListTribes,
+	asyncListChapter,
+	asyncListRoles,
+	asyncTicketsCategory,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncListExpenseCategories,
+	asyncListAllManagers,
+	asyncListShipmentPendingTasks,
+	asyncListShipments,
+	asyncListShipmentServices,
+	asyncListAllocationObjectives,
+	asyncIncidentSubtypeList,
+	asyncListResources,
 };

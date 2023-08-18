@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcADocumentTemplates, IcMArrowNext } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -21,10 +22,29 @@ import Line from './Line';
 import StatRect from './StatRect';
 import styles from './styles.module.css';
 
+interface RootState {
+	profile?: {
+		permissions_navigations?: object
+	};
+}
+
+function GetPills({ loadingShipment, sourceText, tradeType }) {
+	if (loadingShipment) {
+		return <Placeholder height="20px" width="80px" />;
+	}
+	if (sourceText) {
+		return <Pill color="blue">{sourceText}</Pill>;
+	}
+	if (tradeType) {
+		return <Pill color="yellow">{startCase(tradeType)}</Pill>;
+	}
+	return <div>No Data Found</div>;
+}
+
 function CostSheet() {
 	const Router = useRouter();
 	const { query } = Router || {};
-	const { shipmentId, jobNumber, orgId, IsJobClose } = query || {};
+	const { shipmentId, jobNumber, IsJobClose } = query || {};
 	const getStatus = () => {
 		if (IsJobClose === 'OPEN') {
 			return false;
@@ -34,6 +54,10 @@ function CostSheet() {
 		}
 		return false;
 	};
+	const { profile = {} }: RootState = useSelector((state) => state);
+	const { permissions_navigations:permissionsNavigation = {} } = profile || {};
+	const { view_type : viewType = '' } = permissionsNavigation['business_finance-coe_finance']
+		?.update_shipment[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const [showButton, setShowButton] = useState(getStatus());
 	const [showFinal, setShowFinal] = useState(IsJobClose === 'CLOSED' || false);
@@ -42,20 +66,23 @@ function CostSheet() {
 		buydata,
 		apiloading,
 		preTaxData,
+		postTaxData,
 		preTaxLoading,
+		postTaxLoading,
 		sellData,
 		buyData,
 	} = useGetShipmentCostSheet({ query });
+	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
 	const { data: shipmentData, loading: loadingShipment } = useListShipment(jobNumber);
-	const dataList = shipmentData?.list[0] || {};
+	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { source, tradeType } = dataList;
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
 	const { data: dataWallet } = useGetWallet(shipmentId);
 	const {
 		agent_data: agentData, agent_role_data: agentRoleData,
 		amount, amount_currency: amountCurrency,
-	} = dataWallet?.list?.[0] || {};
+	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { totalActual: buyTotal } = buyData || {};
 	const { totalActual: sellTotal } = sellData || {};
 	const { getData, getFinalData, FinalLoading, loading } = useUpdateJob({
@@ -70,18 +97,6 @@ function CostSheet() {
 		getData(data);
 	};
 
-	const getPills = () => {
-		if (loadingShipment) {
-			return <Placeholder height="20px" width="80px" />;
-		}
-		if (sourceText) {
-			return <Pill color="blue">{sourceText}</Pill>;
-		}
-		if (tradeType) {
-			return <Pill color="yellow">{startCase(tradeType)}</Pill>;
-		}
-		return <div>No Data Found</div>;
-	};
 	return (
 		<div>
 			<div className={styles.flex}>
@@ -97,41 +112,43 @@ function CostSheet() {
 				>
 					Go Back
 				</Button>
-				<div className={styles.flexwidth}>
-					{showButton ? (
-						<>
-							<div>Status - </div>
-							<div className={styles.tag}>Operationally Closed</div>
-							<div
-								className={styles.link}
+				{viewType === 'allowed' ? (
+					<div className={styles.flexwidth}>
+						{showButton ? (
+							<>
+								<div>Status - </div>
+								<div className={styles.tag}>Operationally Closed</div>
+								<div
+									className={styles.link}
+									onClick={(e) => handleOperationalClose(e)}
+									role="presentation"
+								>
+									Undo
+								</div>
+							</>
+						) : (
+							<Button
+								size="md"
+								themeType="primary"
+								disabled={loading}
 								onClick={(e) => handleOperationalClose(e)}
-								role="presentation"
 							>
-								Undo
-							</div>
-						</>
-					) : (
+								Close Operationally
+							</Button>
+						)}
+
 						<Button
 							size="md"
 							themeType="primary"
-							disabled={loading}
-							onClick={(e) => handleOperationalClose(e)}
+							disabled={!showButton || FinalLoading || showFinal}
+							onClick={() => {
+								getFinalData();
+							}}
 						>
-							Close Operationally
+							{showFinal ? 'Financially Closed' : 'Close Financially'}
 						</Button>
-					)}
-
-					<Button
-						size="md"
-						themeType="primary"
-						disabled={!showButton || FinalLoading || showFinal}
-						onClick={() => {
-							getFinalData();
-						}}
-					>
-						{showFinal ? 'Financially Closed' : 'Close Financially'}
-					</Button>
-				</div>
+					</div>
+				) : null}
 			</div>
 			<Line margin="20px 0px 0px 0px" />
 			<div className={styles.heading}>Profitability</div>
@@ -143,17 +160,23 @@ function CostSheet() {
 					actual={preTaxActual}
 					loading={preTaxLoading}
 				/>
+				<StatRect
+					heading="Profit on Shipment - Post Tax"
+					expected={postTaxExpected}
+					actual={postTaxActual}
+					loading={postTaxLoading}
+				/>
 			</div>
 			<DiscountRect
 				heading="Discount Applied"
 				statvalue={
-					dataWallet?.list?.[0]
+					dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index]
 						? (
 							<div className={styles.discount_data}>
 								<div className={styles.kam_data}>KAM -</div>
 								<div>
 									{agentData?.name}
-									&nbsp;(
+									(
 									{agentRoleData?.name}
 									)
 								</div>
@@ -196,7 +219,7 @@ function CostSheet() {
 						<span className={styles.details}>
 							Shipment Details
 							<div className={styles.tags_container}>
-								{getPills()}
+								{GetPills({ loadingShipment, sourceText, tradeType })}
 							</div>
 
 							<div className={styles.sid}>
@@ -220,8 +243,7 @@ function CostSheet() {
 				}}
 			>
 				<Details
-					orgId={orgId}
-					dataList={shipmentData?.list?.[0]}
+					dataList={shipmentData?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
 					shipmentId={shipmentId}
 				/>
 
@@ -289,10 +311,10 @@ function CostSheet() {
 						<div className={styles.credit}>
 							Quotation Total :
 							<div className={styles.value_text}>
-								{sellData?.totalQuotational
+								{(sellData?.totalQuotational && sellData?.currencyQuotational)
 									? formatAmount({
 										amount   : sellData?.totalQuotational,
-										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										currency : sellData?.currencyQuotational,
 										options  : {
 											style           : 'currency',
 											currencyDisplay : 'code',
@@ -343,10 +365,10 @@ function CostSheet() {
 						<div className={styles.credit}>
 							Quotation Total :
 							<div className={styles.value_text}>
-								{buyData?.totalQuotational
+								{(buyData?.totalQuotational && buyData?.currencyQuotational)
 									? formatAmount({
 										amount   : buyData?.totalQuotational,
-										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										currency : buyData?.currencyQuotational,
 										options  : {
 											style           : 'currency',
 											currencyDisplay : 'code',

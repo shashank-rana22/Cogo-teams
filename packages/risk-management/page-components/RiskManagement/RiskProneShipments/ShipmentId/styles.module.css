@@ -1,0 +1,46 @@
+.container {
+	padding: 16px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.icon_wrapper {
+	padding-right: 8px;
+}
+
+.header_text {
+	font-size: 16px;
+	font-weight: 500;
+	color: #000;
+}
+
+.search {
+	display: flex;
+	align-items: center;
+	width: 300px;
+}
+
+.hr {
+	width: 100%;
+	height: 1px;
+	margin-top: 16px;
+	background: #ee3425;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+}
+
+.no_data {
+	display: flex;
+	justify-content: center;
+}

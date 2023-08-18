@@ -4,67 +4,75 @@ import { doc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import sendUserMessage from '../helpers/sendUserMessage';
-import getFileAttributes from '../utils/getFileAttributes';
 
 import useSendMessage from './useSendMessage';
 
 const useSendChat = ({
-	setDraftMessages,
-	activeChatCollection,
-	draftMessages,
-	firestore,
-	channel_type,
-	draftUploadedFiles,
-	setDraftUploadedFiles,
-	id,
-	formattedData,
+	setDraftMessages = () => {},
+	activeChatCollection = {},
+	draftMessages = {},
+	firestore = {},
+	channelType = '',
+	uploadedFile = {},
+	setDraftUploadedFiles = () => {},
+	id = '',
+	formattedData = {},
+	canMessageOnBotSession = false,
+	assignChat = () => {},
+	scrollToBottom = () => {},
+	hasUploadedFiles = false,
 }) => {
 	const { user_name } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,
 	}));
 
-	const { sendMessage, loading } = useSendMessage({ channel_type, activeChatCollection });
+	const { sendMessage, loading } = useSendMessage({
+		channelType,
+		activeChatCollection,
+		formattedData,
+		assignChat,
+		canMessageOnBotSession,
+	});
 
 	let messageFireBaseDoc;
-	if (id && channel_type) {
+
+	if (id && channelType) {
 		messageFireBaseDoc = doc(
 			firestore,
-			`${FIRESTORE_PATH[channel_type]}/${id}`,
+			`${FIRESTORE_PATH[channelType]}/${id}`,
 		);
 	}
 
-	const sendChatMessage = async (scrollToBottom) => {
+	const sendChatMessage = async () => {
 		const newMessage = draftMessages?.[id]?.trim() || '';
 
-		const urlArray = decodeURI(draftUploadedFiles?.[id])?.split('/');
-		const fileName = urlArray[(urlArray?.length || 0) - 1] || '';
-		const { finalUrl = '', fileType = '' } = getFileAttributes({
-			finalUrl: draftUploadedFiles?.[id], fileName,
-		});
+		const { fileName, fileUrl, fileType } = uploadedFile;
 
-		setDraftMessages((p) => ({ ...p, [id]: '' }));
-		setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
+		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
+		setDraftUploadedFiles((prev) => ({ ...prev, [id]: undefined }));
 
-		if (!isEmpty(newMessage?.trim()) || finalUrl) {
-			await sendUserMessage({
-				fileType,
-				finalUrl,
-				fileName,
-				formattedData,
-				channel_type,
-				messageFireBaseDoc,
-				newMessage,
-				sendMessage,
-				user_name,
-				scrollToBottom,
-			});
+		if (isEmpty(newMessage?.trim()) && !hasUploadedFiles) {
+			return;
 		}
+
+		await sendUserMessage({
+			fileType,
+			finalUrl: fileUrl,
+			fileName,
+			formattedData,
+			channelType,
+			messageFireBaseDoc,
+			newMessage,
+			sendMessage,
+			user_name,
+			scrollToBottom,
+		});
 	};
 
-	const sentQuickSuggestions = async (scrollToBottom, val) => {
+	const sendQuickSuggestions = async ({ val }) => {
 		await sendUserMessage({
 			formattedData,
-			channel_type,
+			channelType,
 			messageFireBaseDoc,
 			newMessage: val,
 			sendMessage,
@@ -75,8 +83,7 @@ const useSendChat = ({
 
 	return {
 		sendChatMessage,
-		messageFireBaseDoc,
-		sentQuickSuggestions,
+		sendQuickSuggestions,
 		messageLoading: loading,
 	};
 };

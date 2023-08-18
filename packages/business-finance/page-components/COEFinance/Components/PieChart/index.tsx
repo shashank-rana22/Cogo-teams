@@ -4,7 +4,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function MyResponsivePie({ data }) {
+function MyResponsivePie({ data = [] }) {
 	return (
 		<>
 			<div className={styles.invoice}>
@@ -12,7 +12,7 @@ function MyResponsivePie({ data }) {
 				<Tooltip
 					content={(
 						<div className={styles.tooltip_text}>
-							Rejection statistics of the Invoices that coe finance rejects
+							Rejection statistics of the invoices that COE finance rejects
 						</div>
 					)}
 					placement="top"

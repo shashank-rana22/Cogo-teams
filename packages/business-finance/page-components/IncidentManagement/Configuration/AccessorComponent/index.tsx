@@ -4,8 +4,11 @@ import BankDetails from '../../Modals/BankDetails';
 import ConcorModal from '../../Modals/ConcorModal';
 import ICJVModal from '../../Modals/ICJV_Modal';
 import JvModal from '../../Modals/JvModal';
+import NonRecuringModal from '../../Modals/NonRecuringModal';
 import PaymentConfirmation from '../../Modals/PaymentConfirmation';
+import RecuringModal from '../../Modals/RecuringModal';
 import RequestCN from '../../Modals/RequestCN';
+import RevokeInvoice from '../../Modals/RevokeInvoice';
 import SettlementModal from '../../Modals/SettlementModal';
 import SezApproval from '../../Modals/SezApproval';
 import TDSModal from '../../Modals/TDSModal';
@@ -22,13 +25,16 @@ const TYPE_COMPONENT_MAPPING = {
 	PAYMENT_CONFIRMATION_APPROVAL          : PaymentConfirmation,
 	ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDeposit,
 	ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefund,
+	RECURRING_EXPENSE_APPROVAL             : RecuringModal,
+	OVERHEAD_APPROVAL                      : NonRecuringModal,
 	SEZ_APPROVAL                           : SezApproval,
 	CONCOR_PDA_APPROVAL                    : ConcorModal,
 	CONSOLIDATED_CREDIT_NOTE               : RequestCN,
+	REVOKE_INVOICE                         : RevokeInvoice,
 };
 
 function AccessorComponent({ row, getIncidentData }) {
-	const { type = '', id = '', data, remark = '', status = '' } = row || {};
+	const { type = '', id = '', data, remark = '', status = '', referenceId = '' } = row || {};
 	const { organization } = data || {};
 
 	const Component = TYPE_COMPONENT_MAPPING[type] || null;
@@ -39,7 +45,7 @@ function AccessorComponent({ row, getIncidentData }) {
 
 	return (
 		<Component
-			{...getPropsByType(type, data)}
+			{...getPropsByType({ type, data, referenceId })}
 			id={id}
 			organization={organization}
 			refetch={getIncidentData}

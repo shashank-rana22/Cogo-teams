@@ -32,6 +32,12 @@ export const NewAWBFields = {
 			span  : 1.5,
 		},
 		{
+			key   : 'stakeholder',
+			label : 'Stakeholder',
+			span  : 3,
+			func  : 'handleStakeholder',
+		},
+		{
 			key    : 'blCategory',
 			label  : 'AWB Category',
 			span   : 1,

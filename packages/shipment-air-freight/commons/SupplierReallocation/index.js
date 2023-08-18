@@ -32,27 +32,23 @@ function FormElement(props) {
 function SupplierReallocation({
 	serviceData = [],
 	closeModal = () => {},
-	isAdditional = false,
 }) {
 	const {
 		shipment_data, refetch = () => {},
 		refetchServices = () => {}, primary_service = {},
 	} = useContext(ShipmentDetailContext);
-	const { service_provider = {} } = primary_service;
+	const { service_provider = {}, service_type: primary_service_type = '' } = primary_service;
 
-	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
+	const { shipment_type } = shipment_data || {};
 
 	const serviceObj = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { service_type } = serviceObj || {};
 
-	const { defaultValues, controls, showAllControls } = getControls({
+	const { defaultValues, controls } = getControls({
+		primary_service_type,
 		serviceObj,
 		shipment_type,
-		documents,
-		isAdditional,
-		trade_type,
-		payment_term,
 	});
 
 	const { handleSubmit, control, formState: { errors } } = useForm({ defaultValues });
@@ -93,7 +89,6 @@ function SupplierReallocation({
 				<Modal.Header title={(
 					<div className={styles.header}>
 						Supplier Reallocation
-						{showAllControls ? ' & AWB Details' : null}
 					</div>
 				)}
 				/>

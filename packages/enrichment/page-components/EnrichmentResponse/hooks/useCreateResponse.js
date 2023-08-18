@@ -3,77 +3,103 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
-import getUserControls from '../../../configurations/get-controls';
+import FEEDBACK_RESPONSE_API_MAPPING from '../configurations/post-feedback-response-api-mapping';
+import getMutatedControls from '../utils/get-mutated-controls';
+import getPayload from '../utils/get-payload';
+import getResponseControls from '../utils/get-response-controls';
 
-function useCreateResponse(props) {
-	const {
-		type,
-		refetch,
-		activeTab,
-		setShowAddPoc,
-	} = props;
-
+const useCreateResponse = ({
+	setDetailsForm = () => {},
+	refetchResponses = () => {},
+	activeTab = '',
+	detailsForm = {},
+}) => {
 	const router = useRouter();
+
+	const [responseData, setResponseData] = useState({});
+
+	const {
+		control,
+		formState: { errors },
+		handleSubmit,
+		setValue,
+	} = useForm();
 
 	const { query = {} } = router;
 
-	const controls = getUserControls({ activeTab });
-
-	const formProps = useForm();
-
-	const { control, handleSubmit, formState: { errors } } = formProps;
+	const actionType = detailsForm?.type;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 
-		url     : '/feedback_response',
+		url     : FEEDBACK_RESPONSE_API_MAPPING[actionType]?.api,
 		method  : 'POST',
-		authkey : 'post_allocation_feedback_response',
+		authkey : FEEDBACK_RESPONSE_API_MAPPING[actionType]?.authkey,
 
 	}, { manual: true });
 
-	const onSave = async (values = {}) => {
-		try {
-			const payload = {
+	const controls = getResponseControls({ activeTab, responseData, detailsForm });
 
-				...values,
-				...(activeTab === 'user' && {
-					mobile_country_code           : values?.mobile_number?.country_code,
-					mobile_number                 : values?.mobile_number?.number,
-					alternate_mobile_country_code : values?.alternate_mobile_number?.country_code,
-					alternate_mobile_number       : values?.alternate_mobile_number?.number,
-					whatsapp_country_code         : values?.whatsapp_number?.country_code,
-					whatsapp_number               : values?.whatsapp_number?.number,
-				}),
-				response_type       : activeTab,
-				source              : 'manual',
-				feedback_request_id : query?.id,
-			};
+	const mutatedControls = getMutatedControls({
+		controls,
+		setResponseData,
+		activeTab,
+		detailsForm,
+		setValue,
+	});
 
-			await trigger({
-				data: payload,
-			});
+	useEffect(() => {
+		setValue('work_scopes', detailsForm?.initialData?.work_scopes);
+	}, [detailsForm?.initialData?.work_scopes, setValue]);
 
-			Toast.success('Response Submitted Successfully');
+	const onSubmit = async (values = {}) => {
+		const payload = getPayload({ values, activeTab, responseData });
 
-			if (type === 'addPoc') {
-				setShowAddPoc(false);
+		const isPayloadEmpty = Object.keys(payload).every(
+			(key) => key === 'response_type' || payload[key] === undefined,
+		);
+
+		if (!isPayloadEmpty) {
+			try {
+				await trigger({
+					data: {
+						...payload,
+						...(actionType === 'edit' && {
+							id            : detailsForm?.initialData?.id,
+							response_type : undefined,
+						}),
+						...(actionType === 'create' && {
+							source              : 'manual',
+							feedback_request_id : query.id,
+						}),
+
+					},
+				});
+
+				Toast.success(`${startCase(activeTab)} Added Successfully`);
+
+				setDetailsForm({});
+
+				refetchResponses();
+			} catch (err) {
+				Toast.error(getApiErrorString(err?.response?.data)
+				|| `Failed to add new ${startCase(activeTab)}, please try again...`);
 			}
-
-			refetch();
-		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+		} else {
+			Toast.error('At least one field should be present');
 		}
 	};
 
 	return {
-		controls,
-		control,
-		errors,
-		onSave,
-		handleSubmit,
 		loading,
+		controls: mutatedControls,
+		errors,
+		control,
+		handleSubmit,
+		onSubmit,
 	};
-}
+};
 
 export default useCreateResponse;

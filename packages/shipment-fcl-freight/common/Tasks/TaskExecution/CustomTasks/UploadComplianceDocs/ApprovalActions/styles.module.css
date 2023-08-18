@@ -1,0 +1,31 @@
+.text {
+	height: fit-content;
+	padding: 2px 4px;
+	font-size: 10px;
+	line-height: 150%;
+	color: #221f20;
+	border-radius: 4px;
+}
+
+.approve {
+	background-color: #c4dc91;
+}
+
+.reject {
+	background-color: #f8aea8;
+}
+
+.action_div {
+	display: flex;
+	align-items: center;
+}
+
+.remarks {
+	margin-right: 16px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #ee3425;
+	text-decoration-line: underline;
+	cursor: pointer;
+}
