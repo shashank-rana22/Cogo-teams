@@ -11,7 +11,7 @@ const useCancelInvoice = () => {
 		{
 			url     : '/incident-management/incident',
 			method  : 'post',
-			authKey : 'create_cancel_e_invoice_incident',
+			authKey : 'post_incident_management_incident',
 		},
 		{ manual: true },
 	);
@@ -27,7 +27,10 @@ const useCancelInvoice = () => {
 		? geo.parent_entity_id
 		: undefined;
 
-	const submit = async ({ values, proformaNumber, closeModal, invoiceId, invoiceCombinationId, refetch }) => {
+	const submit = async ({
+		cancelReason = '', proformaNumber = '', closeModal = () => {},
+		invoiceId = '', invoiceCombinationId = '', refetch = () => {}, documentUrls = '',
+	}) => {
 		try {
 			await trigger({
 				data: {
@@ -35,12 +38,12 @@ const useCancelInvoice = () => {
 					incidentSubType : 'CANCEL_INVOICE',
 					data            : {
 						revokeInvoiceRequest: {
-							invoiceNumber : proformaNumber,
-							documentUrls  : [values?.documentUrls?.finalUrl],
-							cancelReason  : values?.cancelReason,
-							invoiceCombinationId,
-							invoiceId,
-							revokedBy     : user_id,
+							invoiceNumber        : proformaNumber || undefined,
+							documentUrls         : documentUrls || undefined,
+							cancelReason         : cancelReason || undefined,
+							invoiceCombinationId : invoiceCombinationId || undefined,
+							invoiceId            : invoiceId || undefined,
+							revokedBy            : user_id,
 						},
 					},
 					source    : 'BOOKINGS',
