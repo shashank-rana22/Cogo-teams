@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Modal, cl } from '@cogoport/components';
 import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -22,6 +22,8 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 		country_code : geo.country.mobile_country_code,
 	});
 
+	const { number = '' } = dialNumber;
+
 	const handleChange = (val) => {
 		setDialNumber({ ...dialNumber, number: `${dialNumber.number}${val}` });
 	};
@@ -34,6 +36,10 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 	};
 
 	const handleClick = () => {
+		if (!number) {
+			return;
+		}
+
 		dispatch(
 			setProfileState({
 				is_in_voice_call          : true,
@@ -47,12 +53,21 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 		);
 		setShowDialModal(false);
 	};
+
+	const handleClose = () => {
+		setDialNumber({
+			number       : '',
+			country_code : geo.country.mobile_country_code,
+		});
+		setShowDialModal(false);
+	};
+
 	return (
 		<Modal
 			size="sm"
 			show={showDialModal}
-			onClose={() => setShowDialModal(false)}
-			onOuterClick={() => setShowDialModal(false)}
+			onClose={handleClose}
+			onOuterClick={handleClose}
 			className={styles.styled_ui_modal_dialog}
 			scroll={false}
 		>
@@ -93,7 +108,7 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {} }) {
 				</div>
 				<div
 					role="presentation"
-					className={styles.call_div}
+					className={cl`${!number ? styles.disable_icon : ''} ${styles.call_div}`}
 					onClick={handleClick}
 				>
 					<IcMCall />
