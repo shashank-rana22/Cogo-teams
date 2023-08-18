@@ -1,7 +1,7 @@
 import { Tooltip, cl } from '@cogoport/components';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { isEmpty, snakeCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import FormatData from '../../../../utils/formatData';
@@ -47,11 +47,16 @@ function RightSideNav({
 
 	const handleClick = (val) => {
 		if (val === 'spot_search') {
+			if (loading) {
+				return;
+			}
+
 			if (!orgId) {
 				setSearchSpotmodal(true);
-			} else if (!loading) {
-				openNewTab({ crm: 'searches', prm: 'searches' });
+				return;
 			}
+
+			openNewTab({ crm: 'searches', prm: 'searches' });
 		} else if (val === 'help_desk') {
 			check();
 		} else {
@@ -85,12 +90,12 @@ function RightSideNav({
 
 					return (
 						<div
-							key={snakeCase(name)}
+							key={name}
 							className={cl`${styles.icon_div} ${
 								activeSelect === name ? styles.active : ''
 							}
 						 ${
-							disabledSpotSearch && item.name === 'spot_search'
+							(disabledSpotSearch && item.name === 'spot_search')
 								? styles.icon_div_load
 								: ''
 							}`}
@@ -109,7 +114,7 @@ function RightSideNav({
 									<div className={styles.quotation} />
 								)}
 								<div>
-									{icon && icon}
+									{icon || null}
 								</div>
 							</Tooltip>
 
@@ -117,17 +122,15 @@ function RightSideNav({
 					);
 				})}
 			</div>
-			{
-				!orgId && (
-					<SearchSpotModal
-						searchSpotModal={searchSpotModal}
-						setSearchSpotmodal={setSearchSpotmodal}
-						openNewTab={openNewTab}
-						loading={loading}
-						userData={userData}
-					/>
-				)
-			}
+			{!orgId ? (
+				<SearchSpotModal
+					searchSpotModal={searchSpotModal}
+					setSearchSpotmodal={setSearchSpotmodal}
+					openNewTab={openNewTab}
+					loading={loading}
+					userData={userData}
+				/>
+			) : null}
 		</>
 	);
 }
