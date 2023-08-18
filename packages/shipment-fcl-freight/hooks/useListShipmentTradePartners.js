@@ -2,6 +2,8 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
+const ALLOWED_TASKS = ['add_consignee_details', 'add_shipper_details'];
+
 const useListShipmentTradePartners = ({ shipment_id = '', task = {} }) => {
 	const [apiData, setApiData] = useState({});
 
@@ -28,7 +30,7 @@ const useListShipmentTradePartners = ({ shipment_id = '', task = {} }) => {
 	}, [trigger]);
 
 	useEffect(() => {
-		if (['add_consignee_details', 'add_shipper_details'].includes(task?.task)) {
+		if (ALLOWED_TASKS.includes(task?.task)) {
 			apiTrigger();
 		}
 	}, [apiTrigger, task]);
