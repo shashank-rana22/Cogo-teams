@@ -17,7 +17,7 @@ const setCountries = async () => {
 	await getCountries(
 		fs.writeFileSync,
 		countriesPath,
-		'https://api-enigma1.dev.cogoport.io/',
+		'https://api.stage.cogoport.io/',
 	);
 	// eslint-disable-next-line no-console
 	console.log('Successfully Built Countries ...');
