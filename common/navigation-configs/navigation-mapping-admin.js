@@ -2283,7 +2283,6 @@ const navigationMapping = ({ t = () => {} }) => {
 					possible_apis : [],
 					icon          : IcMDataPipeline,
 				},
-
 				{
 					key           : 'ihls-file_upload',
 					title         : t('common:ihls_file_uploader'),
@@ -2491,6 +2490,13 @@ const navigationMapping = ({ t = () => {} }) => {
 					href          : '/v2/chakravyuh/feedback-dashboard',
 					as            : '/v2/chakravyuh/feedback-dashboard',
 					possible_apis : apis.pricing_trends,
+				},
+				{
+					key           : 'chakravyuh-accuracy',
+					title         : 'Pricing Accuracy Dashboard',
+					href          : '/v2/chakravyuh/accuracy-dashboard',
+					as            : '/v2/chakravyuh/accuracy-dashboard',
+					possible_apis : apis.pricing_accuracy_dashboard,
 				},
 			],
 		},
