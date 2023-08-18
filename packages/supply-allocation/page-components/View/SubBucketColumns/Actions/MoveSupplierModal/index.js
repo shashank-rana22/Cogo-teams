@@ -1,6 +1,4 @@
-import {
-	Button, Modal,
-} from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { AsyncSelectController, InputController, useForm } from '@cogoport/forms';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
@@ -30,7 +28,7 @@ function MoveSupplierModal({
 			placement="top"
 			className={styles.modal_container}
 		>
-			<Modal.Header title={item.service_provider} />
+			<Modal.Header title={item?.service_provider?.short_name} />
 
 			<Modal.Body>
 				<div className={styles.container}>
