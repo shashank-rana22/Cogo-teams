@@ -11,7 +11,6 @@ import formatDataForCargoDetail from '../utils/format-cargo-data-payload';
 import formatRawValues from '../utils/format-raw-payload';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
-import validateDocuments from '../utils/validate-documents';
 
 const ROLLOVER_TASKS = ['mark_container_gated_in', 'mark_vessel_departed'];
 
@@ -28,8 +27,6 @@ const SHIPMENT_REFETCH_TASKS = [
 function useHandleSubmit({
 	finalConfig = {},
 	task = {},
-	fields = {},
-	errors = {},
 	serviceIdMapping = {},
 	onCancel = () => {},
 	refetch = () => {},
@@ -67,9 +64,6 @@ function useHandleSubmit({
 	let dataFromApi = {};
 
 	const onSubmit = async (rawValues) => {
-		if ((Object.keys(rawValues) || []).includes('documents')) {
-			validateDocuments({ fields, rawValues, errors });
-		}
 		setIsLoading(true);
 
 		if (finalConfig?.end_point) {

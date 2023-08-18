@@ -65,8 +65,6 @@ function ExecuteStep({
 	const { loading: isLoading, setIsLoading, onSubmit } = useHandleSubmit({
 		finalConfig: stepConfig,
 		task,
-		fields,
-		errors,
 		onCancel,
 		refetch,
 		serviceIdMapping,
