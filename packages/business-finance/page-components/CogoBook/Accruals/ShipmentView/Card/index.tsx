@@ -39,6 +39,8 @@ const ALLOW_BUTTON_ON_COUNT = 2;
 const MAX_DAY_ALLOWED = 10;
 const FILTER_COUNT_INCREMENT = 1;
 
+const FIND_SINGLE_DATE_FORMATE = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
+
 function ContentMoreFilter({
 	setProfitNumber = () => {}, profitNumber = '',
 	filters = {}, setFilters = () => {},
@@ -180,7 +182,7 @@ function Card({
 						maxDate={maxDate}
 						minDate={minDate}
 						isPreviousDaysAllowed
-						dateFormat="MM/dd/yyyy"
+						dateFormat={FIND_SINGLE_DATE_FORMATE}
 						name="date"
 						disable={!isDateRangeEnabled}
 						onChange={(val) => { setFilters((prev) => ({ ...prev, date: val })); }}
