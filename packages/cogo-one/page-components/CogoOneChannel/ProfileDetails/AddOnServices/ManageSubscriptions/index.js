@@ -100,25 +100,6 @@ function ManageSubscriptions(props) {
 				</div>
 			</div>
 
-			<div className={styles.toggle_container}>
-				<Toggle
-					checked={activeTab === 'annual'}
-					disabled={loading}
-					size="sm"
-					onLabel="Bill Annually"
-					offLabel="Bill Monthly"
-					value={activeTab}
-					onChange={handleToggle}
-				/>
-				{activeTab === 'annual' && (
-					<div className={styles.discount}>
-						(Save
-						<div className={styles.annual_discount_percent}>{ANNUAL_SUBSCRIPTION_DISCOUNT_PERCENT}</div>
-						% off)
-					</div>
-				)}
-			</div>
-
 			{isEmpty(sortedItemPlans) && !loading ? <EmptyState /> : (
 				<div>
 					{loading ? (
@@ -127,20 +108,45 @@ function ManageSubscriptions(props) {
 								<Placeholder key={item} height="150px" width="100%" margin="10px 0" />
 							))}
 						</div>
-					) : (sortedItemPlans || []).map((item) => (
-						<SubscriptionCard
-							key={item.id}
-							item={item}
-							activeTab={activeTab}
-							createLink={createLink}
-							createLinkloading={createLinkloading}
-							setSelectedPlan={setSelectedPlan}
-							selectedPlan={selectedPlan}
-							paymentStatus={paymentStatus}
-							setIsAssignModal={setIsAssignModal}
-							setShowAddOn={setShowAddOn}
-						/>
-					))}
+					) : (
+						<>
+							<div className={styles.toggle_container}>
+								<Toggle
+									checked={activeTab === 'annual'}
+									disabled={loading}
+									size="sm"
+									onLabel="Bill Annually"
+									offLabel="Bill Monthly"
+									value={activeTab}
+									onChange={handleToggle}
+								/>
+								{activeTab === 'annual' && (
+									<div className={styles.discount}>
+										(Save
+										<div className={styles.annual_discount_percent}>
+											{ANNUAL_SUBSCRIPTION_DISCOUNT_PERCENT}
+										</div>
+										% off)
+									</div>
+								)}
+							</div>
+
+							{(sortedItemPlans || []).map((item) => (
+								<SubscriptionCard
+									key={item.id}
+									item={item}
+									activeTab={activeTab}
+									createLink={createLink}
+									createLinkloading={createLinkloading}
+									setSelectedPlan={setSelectedPlan}
+									selectedPlan={selectedPlan}
+									paymentStatus={paymentStatus}
+									setIsAssignModal={setIsAssignModal}
+									setShowAddOn={setShowAddOn}
+								/>
+							))}
+						</>
+					)}
 				</div>
 			)}
 			{!isEmpty(checkout) ? (

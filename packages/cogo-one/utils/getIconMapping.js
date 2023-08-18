@@ -18,7 +18,6 @@ const COMMON_ACCESIBLE_NAVIGATIONS = [
 	'documents',
 	'help_desk',
 	'customer_insights',
-	'add_on_services',
 ];
 
 const ICON_MAPPING = [

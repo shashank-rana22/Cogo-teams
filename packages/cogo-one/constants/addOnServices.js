@@ -5,7 +5,7 @@ export const ADD_ON_SERVICES_TAB_MAPPING = [
 		icon       : IcATransactionHistory,
 		key        : 'manage_subscriptions',
 		label      : 'Manage Subscriptions',
-		is_enabled : false,
+		is_enabled : true,
 	},
 	{
 		icon       : IcAInsurance,
