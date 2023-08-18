@@ -168,6 +168,7 @@ function AsyncSelect(props) {
 
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
+		searchByq    : rest.searchByq,
 		getModifiedOptions,
 		initialCall,
 		onOptionsChange,

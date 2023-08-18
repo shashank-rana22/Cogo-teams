@@ -9,7 +9,6 @@ const controls = [
 		labelKey       : 'commodity',
 		valueKey       : 'id',
 		type           : 'select',
-		optionsListKey : 'insurance_commodities',
 		span           : 12,
 		defaultOptions : true,
 		options        : [],
