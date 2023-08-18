@@ -460,6 +460,7 @@ const completedColumn = ({
 				<Remarks itemData={row} />
 				<InvoiceDetails
 					item={row}
+					entityCode={entityCode}
 				/>
 				<RenderIRNGenerated
 					itemData={row}

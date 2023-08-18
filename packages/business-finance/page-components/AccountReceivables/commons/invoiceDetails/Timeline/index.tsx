@@ -1,10 +1,11 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import {
 	IcCFcrossInCircle,
 	IcCFtick,
 	IcCSendEmail,
 } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { format, startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -22,7 +23,7 @@ const getTime = (date) => format(
 	false,
 );
 
-function Timeline({ data, loading }) {
+function Timeline({ data, loading, entityCode }) {
 	const timelineDetails = data?.timelineDetail;
 
 	if (loading) {
@@ -42,10 +43,10 @@ function Timeline({ data, loading }) {
 
 	return (timelineDetails || [])?.map((item) => {
 		const showLine = item.eventName === 'CREATED';
-		const completeLine =			item.eventName === 'POSTED' || item.eventName === 'PAID';
+		const completeLine = item.eventName === 'POSTED' || item.eventName === 'PAID';
 
 		return (
-			<div className={styles.container}>
+			<div className={styles.container} key={item.eventName}>
 				<div className={styles.sub_container}>
 					<div style={{ width: '20%' }}>
 						<div>{getDate(item.occurredAt)}</div>
@@ -59,7 +60,9 @@ function Timeline({ data, loading }) {
 					<div className={styles.event_data_container}>
 						<div style={{ fontWeight: '500' }}>
 							{' '}
-							{startCase(item?.eventName)}
+							{(item?.eventName === 'IRN_GENERATED'
+								? `${upperCase(ENTITY_FEATURE_MAPPING[entityCode]?.labels?.irn_label)} GENERATED`
+								: startCase(item?.eventName))}
 						</div>
 						<div>
 							{item?.data?.errorMessage ? (
