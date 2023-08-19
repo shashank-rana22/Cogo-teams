@@ -1574,6 +1574,16 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.utm_parameters,
 			},
+			{
+				key           : 'marketing-marketing_cogo_store',
+				title         : 'CogoStore',
+				href          : '/marketing/cogo-store/[active_tab]',
+				as            : '/marketing/cogo-store/manage',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogopoints,
+				module_type   : 'crm',
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -1598,25 +1608,6 @@ const navigationMappingAdmin = {
 		module_type : 'dashboards',
 		icon        : IcCCogoassured,
 		options     : [
-			{
-				key           : 'cogo_assured-fcl_freight',
-				title         : 'FCL Freight',
-				href          : '/cogo-assured/fcl_freight',
-				as            : '/cogo-assured/fcl_freight',
-				type          : 'link',
-				possible_apis : apis.cogo_assured,
-				main_apis     : [],
-			},
-			{
-				key           : 'cogo_assured-fcl_freight_local',
-				title         : 'FCL Freight Local',
-				href          : '/cogo-assured/fcl_freight_local',
-				as            : '/cogo-assured/fcl_freight_local',
-				type          : 'link',
-				possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
-
-				main_apis: [],
-			},
 			{
 				key           : 'cogo_assured-haulage_freight',
 				title         : 'Haulage Freight',

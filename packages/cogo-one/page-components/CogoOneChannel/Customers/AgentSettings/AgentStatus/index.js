@@ -3,8 +3,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useState } from 'react';
 
-import useCreateUserInactiveStatus from '../../../../hooks/useCreateUserInactiveStatus';
-import InactiveModal from '../InactiveModal';
+import useCreateUserInactiveStatus from '../../../../../hooks/useCreateUserInactiveStatus';
+
+import InactiveModal from './InactiveModal';
+import styles from './styles.module.css';
 
 function AgentStatus({
 	agentStatus = {},
@@ -24,9 +26,7 @@ function AgentStatus({
 		fetchworkPrefernce,
 		setOpenModal: setOpenInactiveModal,
 		agentTimeline,
-		userId,
 		firestore,
-		status,
 	});
 
 	const isAgentActive = status === 'active';
@@ -35,7 +35,7 @@ function AgentStatus({
 		if (isAgentActive) {
 			setOpenInactiveModal(true);
 		} else {
-			updateUserStatus({ status: 'active' });
+			updateUserStatus({ status: 'active', userId });
 		}
 	};
 
@@ -52,13 +52,14 @@ function AgentStatus({
 			status         : 'punched_in',
 			validity_start : todayDateTime,
 			validity_end   : todayDateTime,
+			userId,
 		};
 
 		updateUserStatus(data);
 	};
 
 	return (
-		<>
+		<div className={styles.container}>
 			{status === 'punched_out'
 				? (
 					<Button
@@ -81,13 +82,14 @@ function AgentStatus({
 
 			{openInactiveModal && (
 				<InactiveModal
+					userId={userId}
 					fetchworkPrefernce={fetchworkPrefernce}
 					setOpenModal={setOpenInactiveModal}
 					loading={statusLoading}
 					updateUserStatus={updateUserStatus}
 				/>
 			)}
-		</>
+		</div>
 	);
 }
 export default AgentStatus;

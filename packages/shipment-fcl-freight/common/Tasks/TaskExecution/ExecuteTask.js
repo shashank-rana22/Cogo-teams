@@ -54,7 +54,7 @@ function ExecuteTask({
 
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
-	const { data } = useListShipmentTradePartners({ shipment_id: shipment_data?.id });
+	const { data } = useListShipmentTradePartners({ shipment_id: shipment_data?.id, task });
 
 	const showIgmTasks = !!stakeholderConfig?.tasks?.show_igm_tasks;
 
