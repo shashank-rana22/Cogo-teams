@@ -1,6 +1,7 @@
 import { Layout } from '@cogoport/air-modules';
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import ConfirmModal from './ConfirmModal';
@@ -59,8 +60,8 @@ function EditQuotations({
 	const handlePriceLimitCheck = () => (
 		Object.values(formValues).some(
 			(keys) => keys.some(
-				(item) => (item?.currency === 'USD' && item?.price >= USD_LIMIT)
-			|| (item?.currency === 'INR' && item?.price >= INR_LIMIT),
+				(item) => (item?.currency === GLOBAL_CONSTANTS.currency_code.USD && item?.price >= USD_LIMIT)
+			|| (item?.currency === GLOBAL_CONSTANTS.currency_code.INR && item?.price >= INR_LIMIT),
 			),
 		)
 	);
