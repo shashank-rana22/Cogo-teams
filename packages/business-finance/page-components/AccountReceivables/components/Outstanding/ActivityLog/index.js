@@ -30,12 +30,12 @@ const communicationOptions = [
 	{ label: 'Busy', value: 'Busy' },
 	{ label: 'Does not exist', value: 'Does not exist' },
 	{
-		label: 'Does not belong to this user',
-		value: 'Does not belong to this user',
+		label : 'Does not belong to this user',
+		value : 'Does not belong to this user',
 	},
 	{
-		label: 'Belongs to the user who has left the company',
-		value: 'Belongs to the user who has left the company',
+		label : 'Belongs to the user who has left the company',
+		value : 'Belongs to the user who has left the company',
 	},
 
 ];
@@ -49,6 +49,7 @@ function ActivityLog({
 	setValue = () => { },
 	errors = {},
 	watch,
+	organizationId = '',
 }) {
 	return (
 		<div>
@@ -78,7 +79,7 @@ function ActivityLog({
 						asyncKey="partner_users_ids"
 						placeholder="Type to search..."
 						control={control}
-						valueKey="id"
+						valueKey="user_id"
 						initialCall={false}
 						size="md"
 						isClearable
@@ -177,13 +178,13 @@ function ActivityLog({
 						name="primaryAttendeeFromOrg"
 						asyncKey="list_organization_users"
 						placeholder="Type to search..."
-						valueKey="id"
+						valueKey="user_id"
 						initialCall={false}
 						control={control}
 						params={{
 							filters: {
-								status: 'active',
-								organization_id: 'demoId',
+								status          : 'active',
+								organization_id : organizationId,
 							},
 						}}
 						size="md"
@@ -202,13 +203,14 @@ function ActivityLog({
 						name="additionalAttendeeFromOrg"
 						asyncKey="list_organization_users"
 						placeholder="Type to search..."
-						valueKey="id"
+						valueKey="user_id"
 						initialCall={false}
 						control={control}
+						multiple
 						params={{
 							filters: {
-								status: 'active',
-								organization_id: 'demoId',
+								status          : 'active',
+								organization_id : organizationId,
 							},
 						}}
 						size="md"

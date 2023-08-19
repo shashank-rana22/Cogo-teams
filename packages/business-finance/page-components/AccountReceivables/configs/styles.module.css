@@ -131,12 +131,11 @@
 }
 
 .nocommitment {
+	width: fit-content;
 	padding: 3px 8px;
 	font-size: 10px;
 	font-weight: 400;
+	color: #393f70;
 	background: #f7cdcd;
 	border-radius: 4px;
-	padding: 3px 8px;
-	width: fit-content;
-	color: #393f70;
 }

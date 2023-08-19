@@ -29,7 +29,11 @@ function Call({ orgData = {} }) {
 					Add Call Feedback
 				</Button>
 			</div>
-			<LogModal showLog={showLog} setShowLog={setShowLog} />
+			<LogModal
+				showLog={showLog}
+				setShowLog={setShowLog}
+				organizationId={orgData?.selfOrganizationId}
+			/>
 			<Table
 				loading={loading}
 				data={data}
