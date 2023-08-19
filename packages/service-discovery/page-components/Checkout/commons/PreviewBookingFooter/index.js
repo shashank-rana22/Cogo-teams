@@ -90,7 +90,7 @@ function PreviewBookingFooter({
 			return;
 		}
 
-		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency) {
+		if (!cargo_readiness_date || !cargo_value || !cargo_value_currency || !commodity_category) {
 			Toast.error('Please select cargo details');
 			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			return;
