@@ -227,12 +227,14 @@ function AgentDetails({
 				approveGroupRequest={approveGroupRequest}
 				groupMembers={activeMessageCard.requested_group_members}
 				partnerUsers={partnerUsers}
+				agentId={agentId}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 			<GroupMembers
 				deleteGroupMember={deleteGroupMember}
 				groupMembers={activeMessageCard?.group_members}
 				partnerUsers={partnerUsers}
+				agentId={agentId}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 			{(mobile_no || user_number) && (

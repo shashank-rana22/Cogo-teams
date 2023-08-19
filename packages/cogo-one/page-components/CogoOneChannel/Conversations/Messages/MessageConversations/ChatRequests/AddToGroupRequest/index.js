@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -19,42 +20,35 @@ function AddToGroupRequest({
 		(eachMember) => groupMembers.includes(eachMember?.agent_id),
 	);
 
+	const recentRequest = filteredMembers?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
 	const {
 		approveGroupRequest = () => {},
 		deleteGroupRequest = () => {},
 	} = useGroupChat({ activeMessageCard, firestore });
 
-	if (isEmpty(filteredMembers)) {
+	if (isEmpty(recentRequest)) {
 		return null;
 	}
 
 	return (
-		<div className={styles.approve_req_container}>
-			{filteredMembers?.map(
-				(user = {}) => (
-					<div
-						className={styles.approve_req}
-						key={user?.agent_id}
-					>
-						<div className={styles.agent_name}>
-							<span>
-								{user?.name || 'A agent'}
-							</span>
-							has requested you to join the group.
-						</div>
+		<div className={styles.approve_req}>
+			<div className={styles.agent_name}>
+				<span>
+					{recentRequest?.name || 'A agent'}
+				</span>
+				has requested you to join the group.
+			</div>
 
-						<IcCFtick
-							className={styles.icon_styles}
-							onClick={() => approveGroupRequest(user?.agent_id)}
-						/>
+			<IcCFtick
+				className={styles.icon_styles}
+				onClick={() => approveGroupRequest(recentRequest?.agent_id)}
+			/>
 
-						<IcCFcrossInCircle
-							className={styles.icon_styles}
-							onClick={() => deleteGroupRequest(user?.agent_id)}
-						/>
-					</div>
-				),
-			)}
+			<IcCFcrossInCircle
+				className={styles.icon_styles}
+				onClick={() => deleteGroupRequest(recentRequest?.agent_id)}
+			/>
 		</div>
 	);
 }

@@ -11,7 +11,6 @@ export function getHasAccessToEditGroup({
 }) {
 	const {
 		session_type = '',
-		group_members = [],
 		support_agent_id = '',
 		managers_ids = [],
 	} = formattedMessageData || {};
@@ -21,7 +20,6 @@ export function getHasAccessToEditGroup({
 		&& session_type === 'admin'
 		&& (
 			VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit
-			|| group_members?.includes(agentId)
 			|| managers_ids?.includes(agentId)
 			|| support_agent_id === agentId
 		)

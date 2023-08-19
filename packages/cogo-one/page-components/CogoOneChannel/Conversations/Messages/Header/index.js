@@ -48,7 +48,7 @@ function Header({
 		updateUserRoom = () => {},
 	} = useUpdateUserRoom();
 
-	const { requestToJoinGroup } = useTransferChat({ firestore, activeMessageCard });
+	const { requestToJoinGroup = () => {} } = useTransferChat({ firestore, activeMessageCard });
 
 	const openAssignModal = () => {
 		setOpenModal({

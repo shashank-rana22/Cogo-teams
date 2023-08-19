@@ -85,18 +85,6 @@ const controls = {
 				label : 'Support Agent',
 				value : 'support',
 			},
-			{
-				label : 'Sales Agent',
-				value : 'sales',
-			},
-			{
-				label : 'Shipment Specialist',
-				value : 'shipment_specialist',
-			},
-			{
-				label : 'CP Support Agent',
-				value : 'cp_support',
-			},
 		],
 		rules: { required: 'This is required' },
 	},
