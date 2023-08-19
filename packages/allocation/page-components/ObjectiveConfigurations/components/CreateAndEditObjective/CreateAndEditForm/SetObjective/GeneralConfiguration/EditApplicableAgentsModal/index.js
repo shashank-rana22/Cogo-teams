@@ -52,6 +52,8 @@ function EditApplicableAgentsModal(props) {
 					By default All agents in the Selected Role will be selected. You may edit it from here.
 				</p>
 
+				<p><b>Note: Only deallocation will run on blocked agents.</b></p>
+
 				<RadioGroup
 					className={styles.radio_group}
 					options={EDIT_AGENTS_RADIO_OPTIONS}
