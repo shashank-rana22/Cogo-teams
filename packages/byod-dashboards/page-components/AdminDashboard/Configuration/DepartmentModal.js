@@ -15,12 +15,15 @@ function DepartmentModal({
 	setDepartmentValue = () => {},
 	setDesignationValue = () => {},
 	id,
+	getEmployeeReimbursementGroup = () => {},
 }) {
 	const { createDepartmentRoleReimbursement, btnloading } = useCreateDepartmentRole({
 		departmentValue,
 		designationValue,
 		id,
 		setShowAddDept,
+		getEmployeeReimbursementGroup,
+
 	});
 
 	return (
@@ -33,7 +36,7 @@ function DepartmentModal({
 		>
 			<Modal.Header title={source} />
 			<Modal.Body>
-				<div>
+				<div className={styles.modal_body}>
 					<div>
 						<div className={styles.text_container}>Select Department</div>
 

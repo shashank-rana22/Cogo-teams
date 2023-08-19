@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
@@ -7,14 +8,22 @@ import { EMPLOYEE_DEVICE_DETAILS } from '../../configurations/employeeDataMappin
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 1;
+
 function DeviceDetails({ data = {} }) {
-	const { employee_device_details } = data || {};
-	const { device_details:details } = employee_device_details || [];
+	const { employee_device_details = {} } = data || {};
+	const { device_details = [], invoice_url } = employee_device_details || [];
+	const details = device_details[device_details.length - DEFAULT_VALUE] || [];
+
+	const onClickOpen = (url) => {
+		window.open(url, '_blank');
+	};
 
 	return (
-		<div className={styles.border_bottom}>
+		<div className={styles.container}>
 			<div className={styles.heading}>Device Details :</div>
-			<div className={styles.container}>
+			<div className={styles.item_container}>
+
 				{EMPLOYEE_DEVICE_DETAILS.map((val) => (
 					<div className={styles.detail} key={val.key}>
 						<div className={styles.label}>
@@ -22,6 +31,7 @@ function DeviceDetails({ data = {} }) {
 							{' '}
 							:
 						</div>
+
 						<div className={styles.employee_detail}>
 							{val.prefix}
 							{' '}
@@ -33,6 +43,18 @@ function DeviceDetails({ data = {} }) {
 						</div>
 					</div>
 				))}
+			</div>
+			<div className={styles.invoice}>
+				<div> Invoice :</div>
+				<Button
+					size="md"
+					type="button"
+					themeType="tertiary"
+					className={styles.employee_detail}
+					onClick={() => onClickOpen(invoice_url)}
+				>
+					View
+				</Button>
 			</div>
 		</div>
 	);

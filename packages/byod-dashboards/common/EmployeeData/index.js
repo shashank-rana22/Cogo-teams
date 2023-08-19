@@ -9,7 +9,6 @@ import useEmployeeData from './useEmployeeData';
 
 function EmployeeData({ data = {}, refetchReimbursementList = false, setRefetchReimbursementList = () => {} }) {
 	const { employee_details: detail } = data || {};
-
 	const { loading, NEW_LIST, columns } = useEmployeeData({
 		detail,
 		refetchReimbursementList,

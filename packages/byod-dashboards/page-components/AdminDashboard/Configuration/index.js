@@ -28,8 +28,8 @@ function Configuration() {
 	const [deviceValue, setDeviceValue] = useState('');
 	const [accessoriesValue, setAccessoriesValue] = useState('');
 
-	const [combinedValue, setCombinedValue] = useState('');
-	const [maxReimbursementAmount, setMaxReimbursementAmount] = useState('');
+	const [combinedValue, setCombinedValue] = useState('no');
+	const [maxReimbursementAmount, setMaxReimbursementAmount] = useState(null);
 
 	const { data:getData = {}, getEmployeeReimbursementGroup } = useGetEmployeeReimbursementGroup();
 	const { detail, mappings } = getData || {};
@@ -46,10 +46,12 @@ function Configuration() {
 
 	useEffect(() => {
 		setMaxReimbursementAmount(maximum_reimbursement_amount);
-		if (maximum_reimbursement_amount !== null) {
+		if (combinedValue === 'no') {
+			setMaxReimbursementAmount(null);
+		} else if (maximum_reimbursement_amount !== null) {
 			setCombinedValue('yes');
 		}
-	}, [maximum_reimbursement_amount]);
+	}, [maximum_reimbursement_amount, combinedValue]);
 
 	return (
 		<div className={styles.main_container}>
@@ -64,6 +66,7 @@ function Configuration() {
 						<div className={styles.title}>
 							<strong>Reimbursement Brackets</strong>
 						</div>
+
 						<Button
 							themeType="secondary"
 							style={{ marginTop: '10px' }}
@@ -87,13 +90,13 @@ function Configuration() {
 								source="Add Department"
 								id={id}
 								mappings={mappings}
+								getEmployeeReimbursementGroup={getEmployeeReimbursementGroup}
 							/>
 						)}
 					</div>
 
 					{isEmpty(mappings) ? (<EmptyState emptyText="No Reimbursement Data Found" />)
 						: (<StyledTable data={mappings} columns={reimbursementColumns} />)}
-					<hr />
 				</div>
 
 				<div className={styles.device_info}>
@@ -141,7 +144,7 @@ function Configuration() {
 							: (<StyledTable data={device_details} columns={deviceInfoColumns} />)}
 					</div>
 
-					<div className={styles.header_container}>
+					<div className={styles.header_container_accessories}>
 						<div className={styles.text_container}>
 							<strong>Computer Accessories</strong>
 						</div>
@@ -189,6 +192,7 @@ function Configuration() {
 				maxReimbursementAmount={maxReimbursementAmount}
 				setMaxReimbursementAmount={setMaxReimbursementAmount}
 				id={id}
+				getEmployeeReimbursementGroup={getEmployeeReimbursementGroup}
 			/>
 		</div>
 	);
