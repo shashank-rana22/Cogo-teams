@@ -9634,6 +9634,11 @@ const partner = {
 
 	campaign_dashboard: [
 		{
+			api          : 'list_campaign_node_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
 			api          : 'create_campaign_duplicate',
 			access_type  : 'private',
 			service_name : 'campaign',
@@ -10444,6 +10449,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
+		{
+			api          : 'update_cogostore_banner',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_brand',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_vendor',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
 	],
 	communication_control: [
 		{
@@ -10824,6 +10844,21 @@ const partner = {
 			api          : 'get_checkout_stats',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'get_fcl_freight_rate_properties',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'update_fcl_freight_rate_properties',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_cogo_assured_suggested_fcl_freight_rates',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'get_cogo_assured_suggested_rates',

@@ -1,24 +1,48 @@
 import { Modal, Pagination, cl } from '@cogoport/components';
-import { useState } from 'react';
 
 import { SCREEN_LOCK_MAPPING } from '../../../../../constants/PLATFORM_ACTIVITY_KEYS_MAPPING';
+import useListAgentStatus from '../../../../../hooks/useListAgentStatus';
 import useListChatAgents from '../../../../../hooks/useListChatAgents';
+import getCommonAgentType from '../../../../../utils/getCommonAgentType';
 
 import AgentWiseLockScreen from './AgentWiseLockScreen';
+import LeaveStatusView from './LeaveStatusView';
 import RoleWiseLockScreen from './RoleWiseLockScreen';
 import styles from './styles.module.css';
 
-const COMPONENT_MAPPING = {
-	agent       : AgentWiseLockScreen,
-	lock_screen : RoleWiseLockScreen,
+const SHOW_PAGINATION_FOR = ['list_agents', 'agents_status'];
+
+const TAB_CONFIG_MAPPING = {
+	list_agents: {
+		Component  : AgentWiseLockScreen,
+		hook       : useListChatAgents,
+		headerText : 'Agents List',
+	},
+	lock_configuration: {
+		Component  : RoleWiseLockScreen,
+		headerText : 'Lock Screen Configuration',
+	},
+	agents_status: {
+		Component  : LeaveStatusView,
+		hook       : useListAgentStatus,
+		headerText : 'Agents Status',
+	},
 };
 
 function AgentModal({
 	showAgentDetails = false,
 	setShowAgentDetails = () => {},
 	firestore = {},
+	configurationsToBeShown = [],
+	viewType = '',
+	activeCard = '',
+	setActiveCard = () => {},
 }) {
-	const [activeCard, setActiveCard] = useState('');
+	const {
+		Component = null,
+		hook: hookToBeUsed = () => {},
+		headerText = '',
+	} = TAB_CONFIG_MAPPING[activeCard] || TAB_CONFIG_MAPPING.list_agents;
 
 	const {
 		getListChatAgents = () => { },
@@ -28,7 +52,9 @@ function AgentModal({
 		setSearch = () => {},
 		paramsState = {},
 		setAgentType = () => {},
-	} = useListChatAgents();
+	} = hookToBeUsed({
+		agentType: getCommonAgentType({ viewType }),
+	}) || {};
 
 	const {
 		list = [],
@@ -38,7 +64,7 @@ function AgentModal({
 	} = listAgentStatus;
 
 	const COMPONENT_PROPS = {
-		agent: {
+		list_agents: {
 			firestore,
 			getListChatAgents,
 			loading,
@@ -48,14 +74,19 @@ function AgentModal({
 			setAgentType,
 			setActiveCard,
 		},
-
-		lock_screen: {
+		lock_configuration: {
 			firestore,
 			setActiveCard,
 		},
+		agents_status: {
+			firestore,
+			isLoading: loading,
+			listAgentStatus,
+			setSearch,
+			paramsState,
+			getListChatAgents,
+		},
 	};
-
-	const Component = COMPONENT_MAPPING[activeCard] || null;
 
 	const handleClose = () => {
 		setActiveCard('');
@@ -67,35 +98,44 @@ function AgentModal({
 			size="md"
 			show={showAgentDetails}
 			onClose={handleClose}
-			placement="center"
+			placement="top"
 		>
-			<Modal.Header title="Configuration" />
+			<Modal.Header title={headerText || 'Configuration'} />
 			<Modal.Body className={styles.modal_body}>
-				{!activeCard ? (
-					<div className={styles.screen_container}>
-						{SCREEN_LOCK_MAPPING.map((item) => {
-							const { label = '', name = '', icon = {} } = item || {};
+				{(activeCard && Component)
+					? (
+						<Component
+							key={activeCard}
+							{...COMPONENT_PROPS[activeCard]}
+						/>
+					) : (
+						<div className={styles.screen_container}>
+							{SCREEN_LOCK_MAPPING.map((item) => {
+								const { label = '', name = '', icon = {} } = item || {};
 
-							return (
-								<div
-									key={name}
-									role="presentation"
-									onClick={() => setActiveCard(name)}
-									className={cl`
-									${activeCard === name ? styles.active_card : ''} ${styles.card_section}`}
-								>
-									{icon}
-									<div className={styles.card_label}>{label}</div>
-								</div>
-							);
-						})}
-					</div>
-				) : (
-					<Component key={activeCard} {...COMPONENT_PROPS[activeCard]} />
-				) }
+								if (!configurationsToBeShown.includes(name)) {
+									return null;
+								}
+
+								return (
+									<div
+										key={name}
+										role="presentation"
+										onClick={() => setActiveCard(name)}
+										className={cl`
+											${activeCard === name ? styles.active_card : ''} 
+											${styles.card_section}`}
+									>
+										{icon}
+										<div className={styles.card_label}>{label}</div>
+									</div>
+								);
+							})}
+						</div>
+					)}
 			</Modal.Body>
 			<Modal.Footer className={styles.footer_styles}>
-				{!loading && activeCard === 'agent' ? (
+				{!loading && SHOW_PAGINATION_FOR.includes(activeCard) ? (
 					<Pagination
 						className={styles.pagination}
 						type="table"
