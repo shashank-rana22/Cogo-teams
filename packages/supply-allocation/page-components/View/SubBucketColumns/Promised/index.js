@@ -20,11 +20,11 @@ function Promised({ item = {}, control, unregister }) {
 				<InputNumberController
 					size="xs"
 					control={control}
-					name={`${item.service_provider?.id}.promised_quantity`}
+					name={`${item.service_provider?.id}.promised_containers`}
 					value={item.allocated_containers}
 				/>
 				<div className={styles.cancel_container}>
-					<IcMCross onClick={() => onClickCancel(`${item?.service_provider?.id}_promised_quantity`)} />
+					<IcMCross onClick={() => onClickCancel(`${item?.service_provider?.id}.promised_containers`)} />
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<CheckboxController
