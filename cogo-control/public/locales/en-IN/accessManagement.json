@@ -62,5 +62,9 @@
     "roles_and_permission_column_users": "Users",
     "roles_and_permission_column_level": "Level",
     "roles_and_permission_column_functions": "Functions",
-    "roles_and_permission_column_sub_functions": "Sub Functions"
+    "roles_and_permission_column_sub_functions": "Sub Functions",
+
+    "roles_and_permission_title_modules": "Module",
+    "roles_and_permission_sub_title_first_part_assign_modules": "Assign modules and it's permissions for",
+    "roles_and_permission_sub_title_second_part_role": "role"
 }

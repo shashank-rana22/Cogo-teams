@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import useOnBoardRole from '../../hooks/useOnBoardRole';
@@ -11,7 +10,7 @@ import RoleDetails from './RoleDetails';
 import styles from './styles.module.css';
 
 function PermissionList() {
-	const { t } = useTranslation(['accessManagement', 'common']);
+	// const { t } = useTranslation(['accessManagement', 'common']);
 	const props = useOnBoardRole();
 	const {
 		loading,
@@ -43,7 +42,7 @@ function PermissionList() {
 				activeNavsLoading={activeNavsLoading}
 			/>
 
-			<ModulesPermissions {...props} t={t} />
+			<ModulesPermissions {...props} />
 			{showImportRole ? (
 				<ImportRoles
 					onSubmit={handleRoleImport}

@@ -7,7 +7,7 @@ import Navigations from './Navigations';
 import styles from './styles.module.css';
 
 function ModulesPermissions(props) {
-	const { roleData = {} } = props || {};
+	const { roleData = {}, t = () => {} } = props || {};
 	const [searchString, setSearchString] = useState('');
 	const [navStatus, setNavStatus] = useState('all');
 
@@ -15,8 +15,10 @@ function ModulesPermissions(props) {
 		<section className={styles.container}>
 			<div className={styles.header_container}>
 				<Heading
-					title="Modules"
-					subTitle={`Assign modules and it's permissions for ${roleData?.name || ''} role`}
+					title={t('accessManagement:roles_and_permission_title_modules')}
+					subTitle={`${t('accessManagement:roles_and_permission_sub_title_first_part_assign_modules')}
+					${roleData?.name || ''} 
+					${t('accessManagement:roles_and_permission_sub_title_second_part_role')}`}
 				/>
 
 				<Filters
