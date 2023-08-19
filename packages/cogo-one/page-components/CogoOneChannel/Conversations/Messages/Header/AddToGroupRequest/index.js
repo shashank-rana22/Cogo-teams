@@ -10,43 +10,51 @@ import styles from './styles.module.css';
 function AddToGroupRequest({
 	firestore = {},
 	activeMessageCard = {},
-	hasAccessToEditGroup = false,
 }) {
 	const { partnerUsers = [] } = useListPartnerUsers({ activeMessageCard });
 
 	const groupMembers = activeMessageCard?.requested_group_members || [];
 
-	const filteredMembers = partnerUsers?.filter((eachMember) => groupMembers.includes(eachMember?.user_id));
+	const filteredMembers = partnerUsers?.filter(
+		(eachMember) => groupMembers.includes(eachMember?.agent_id),
+	);
 
 	const {
-		approveGroupRequest,
-		deleteGroupRequest,
+		approveGroupRequest = () => {},
+		deleteGroupRequest = () => {},
 	} = useGroupChat({ activeMessageCard, firestore });
 
-	if (isEmpty(filteredMembers) || !hasAccessToEditGroup) {
+	if (isEmpty(filteredMembers)) {
 		return null;
 	}
 
 	return (
 		<div className={styles.approve_req_container}>
-			{filteredMembers.map((user = {}) => (
-				<div className={styles.approve_req} key={user?.user_id}>
-					<div className={styles.agent_name}>
-						{`${user.name || 'A agent'} has requested you to join the group.`}
+			{filteredMembers.map(
+				(user = {}) => (
+					<div
+						className={styles.approve_req}
+						key={user?.agent_id}
+					>
+						<div className={styles.agent_name}>
+							<span>
+								{user.name || 'A agent'}
+							</span>
+							has requested you to join the group.
+						</div>
+
+						<IcCFtick
+							className={styles.icon_styles}
+							onClick={() => approveGroupRequest(user?.agent_id)}
+						/>
+
+						<IcCFcrossInCircle
+							className={styles.icon_styles}
+							onClick={() => deleteGroupRequest(user?.agent_id)}
+						/>
 					</div>
-
-					<IcCFtick
-						className={styles.icon_styles}
-						onClick={() => approveGroupRequest(user?.user_id)}
-					/>
-
-					<IcCFcrossInCircle
-						className={styles.icon_styles}
-						cursor="pointer"
-						onClick={() => deleteGroupRequest(user?.user_id)}
-					/>
-				</div>
-			))}
+				),
+			)}
 		</div>
 	);
 }

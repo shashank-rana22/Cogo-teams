@@ -12,6 +12,11 @@
 .agent_name {
 	font-size: 12px;
 	color: #4f4f4f;
+
+	span {
+		margin-right: 4px;
+		font-weight: 500;
+	}
 }
 
 .icon_styles {

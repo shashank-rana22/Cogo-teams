@@ -18,7 +18,9 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 
 	return (
 		<div>
-			<div className={styles.conversation_title}>Add Group Member</div>
+			<div className={styles.conversation_title}>
+				Add Group Member
+			</div>
 			<div className={styles.container}>
 				<AsyncSelect
 					key={agentId}
@@ -34,12 +36,14 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 							<div className={styles.agent_label}>
 								{startCase(item.name)}
 							</div>
+
 							<div className={styles.lower_label}>
 								{startCase(item?.agent_type)}
 							</div>
 						</div>
 					)}
 				/>
+
 				<IcMPlusInCircle
 					className={styles.icon}
 					onClick={addMember}

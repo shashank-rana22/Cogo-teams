@@ -26,6 +26,7 @@ function getKamButtons({
 	if (showBotMessages) {
 		return ['request_for_assign'];
 	}
+
 	if (isGroupFormed) {
 		return ['add_me_to_group'];
 	}
@@ -193,7 +194,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		contacts_base_query       : () => [where('user_details.account_type', '==', 'service_provider')],
 		session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
-		chat_sub_tabs_access      : ['all', 'observer'],
+		chat_sub_tabs_access      : ['all', 'observer', 'groups'],
 		default_side_nav          : 'profile',
 		accesible_filters         : {
 			observer : ['closed_session'],
@@ -215,7 +216,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			claim_chats                 : true,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
-			has_group_access            : false,
+			has_group_access            : true,
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : false,
 			send_promotional_rate       : true,
@@ -233,7 +234,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		session_type_query     : ({ sessionType }) => [where('session_type', '==', sessionType)],
-		chat_sub_tabs_access   : ['all', 'teams'],
+		chat_sub_tabs_access   : ['all', 'teams', 'groups'],
 		default_side_nav       : 'profile',
 		accesible_filters      : {
 			observer : ['closed_session'],
@@ -255,7 +256,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			claim_chats                 : true,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
-			has_group_access            : false,
+			has_group_access            : true,
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : true,
 			send_promotional_rate       : true,
@@ -473,7 +474,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 		observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 		session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
-		chat_sub_tabs_access      : ['all', 'observer'],
+		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
+		chat_sub_tabs_access      : ['all', 'observer', 'groups'],
 		default_side_nav          : 'profile',
 		accesible_filters         : {
 			observer : ['closed_session'],
@@ -495,7 +497,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			claim_chats                 : true,
 			toggle_self_status          : true,
 			on_leave_status_toggle      : false,
-			has_group_access            : false,
+			has_group_access            : true,
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : false,
 			send_promotional_rate       : true,

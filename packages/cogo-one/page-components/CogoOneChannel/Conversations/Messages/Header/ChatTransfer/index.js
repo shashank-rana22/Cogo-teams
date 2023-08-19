@@ -43,7 +43,8 @@ function ChatTransfer({
 	return (
 		<div className={styles.approve_req}>
 			<div className={styles.agent_name}>
-				{`${agent_name || 'A agent'} has requested you to transfer chat`}
+				<span>{agent_name || 'A agent'}</span>
+				has requested you to transfer chat.
 			</div>
 
 			<IcCFtick

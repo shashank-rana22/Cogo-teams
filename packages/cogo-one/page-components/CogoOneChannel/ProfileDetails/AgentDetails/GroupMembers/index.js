@@ -9,7 +9,7 @@ function GroupMembers({
 	groupMembers = [], partnerUsers = [], deleteGroupMember = () => {},
 	hasAccessToEditGroup = false,
 }) {
-	const filteredMembers = partnerUsers.filter((eachPartnerUser) => groupMembers.includes(eachPartnerUser?.user_id));
+	const filteredMembers = partnerUsers.filter((eachPartnerUser) => groupMembers.includes(eachPartnerUser?.agent_id));
 
 	if (isEmpty(filteredMembers)) {
 		return null;
@@ -19,7 +19,7 @@ function GroupMembers({
 		<div>
 			<div className={styles.conversation_title}>Group Members</div>
 			{(filteredMembers || []).map((user) => (
-				<div className={styles.content} key={user?.id}>
+				<div className={styles.content} key={user?.agent_id}>
 					<Avatar
 						src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
 						alt="img"
@@ -38,7 +38,7 @@ function GroupMembers({
 						&& (
 							<IcCFcrossInCircle
 								className={styles.cross_icon}
-								onClick={() => deleteGroupMember(user?.user_id)}
+								onClick={() => deleteGroupMember(user?.agent_id)}
 							/>
 						)}
 				</div>

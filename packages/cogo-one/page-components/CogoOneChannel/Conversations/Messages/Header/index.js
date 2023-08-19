@@ -190,11 +190,12 @@ function Header({
 				assignLoading={assignLoading}
 				assignChat={assignChat}
 			/>
-			<AddToGroupRequest
-				firestore={firestore}
-				activeMessageCard={activeMessageCard}
-				hasAccessToEditGroup={hasAccessToEditGroup}
-			/>
+			{hasAccessToEditGroup && (
+				<AddToGroupRequest
+					firestore={firestore}
+					activeMessageCard={activeMessageCard}
+				/>
+			)}
 		</>
 	);
 }

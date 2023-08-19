@@ -42,6 +42,11 @@ function useGroupChat({
 			return;
 		}
 
+		console.log(
+			'requested_group_members?.filter((x) => x !== userId):',
+			requested_group_members?.filter((x) => x !== userId),
+			[...new Set([...(group_members || []), userId])],
+		);
 		await updateDoc(roomRef, {
 			requested_group_members : requested_group_members?.filter((x) => x !== userId),
 			group_members           : [...new Set([...(group_members || []), userId])],

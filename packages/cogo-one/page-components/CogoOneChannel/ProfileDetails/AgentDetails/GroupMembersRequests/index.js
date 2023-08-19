@@ -12,7 +12,7 @@ function GroupMembersRequests({
 	partnerUsers = [],
 	hasAccessToEditGroup = false,
 }) {
-	const filteredMembers = partnerUsers?.filter((eachMember) => groupMembers.includes(eachMember?.user_id));
+	const filteredMembers = partnerUsers?.filter((eachMember) => groupMembers.includes(eachMember?.agent_id));
 
 	if (isEmpty(filteredMembers)) {
 		return null;
@@ -22,7 +22,7 @@ function GroupMembersRequests({
 		<div>
 			<div className={styles.conversation_title}>Group Requests</div>
 			{filteredMembers.map((user = {}) => (
-				<div className={styles.content} key={user?.user_id}>
+				<div className={styles.content} key={user?.agent_id}>
 					<Avatar
 						src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
 						alt="img"
@@ -37,13 +37,17 @@ function GroupMembersRequests({
 							{user.email}
 						</div>
 					</div>
-					{hasAccessToEditGroup
-					&& (
+
+					{hasAccessToEditGroup && (
 						<div className={styles.mark_status}>
-							<IcCFtick className={styles.icon} onClick={() => approveGroupRequest(user?.user_id)} />
+							<IcCFtick
+								className={styles.icon}
+								onClick={() => approveGroupRequest(user?.agent_id)}
+							/>
+
 							<IcCFcrossInCircle
 								className={styles.icon}
-								onClick={() => deleteGroupRequest(user?.user_id)}
+								onClick={() => deleteGroupRequest(user?.agent_id)}
 							/>
 						</div>
 					)}
