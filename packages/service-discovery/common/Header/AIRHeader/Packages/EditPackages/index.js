@@ -33,6 +33,7 @@ function EditPackages({
 		watch,
 		handleSubmit,
 		setValue,
+		reset,
 	} = useForm({ defaultValues });
 
 	const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
@@ -93,6 +94,7 @@ function EditPackages({
 					showModal={showModal}
 					setShowModal={setShowModal}
 					handleApply={handleApply}
+					reset={reset}
 				/>
 			</Modal.Body>
 

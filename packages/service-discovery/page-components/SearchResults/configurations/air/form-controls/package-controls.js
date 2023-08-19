@@ -1,13 +1,15 @@
 import validate from '../../../utils/validateNumber';
 
+import TooltipLabel from './TooltipLabel';
+
 const DIMENSIONS_OPTIONS = [
 	{ label: 'CM', value: 'cm' },
 	{ label: 'IN', value: 'inch' },
 ];
 
 const WEIGHT_OPTIONS = [
-	{ label: 'KG/UNIT', value: 'kg' },
-	{ label: 'LB/UNIT', value: 'lb' },
+	{ label: 'KG/UNIT', value: 'kg_unit' },
+	{ label: 'LB/UNIT', value: 'lb_unit' },
 ];
 
 const STACKABILITY_OPTIONS = [
@@ -17,7 +19,7 @@ const STACKABILITY_OPTIONS = [
 
 export const PACKAGE_CONTROLS = [
 	{
-		name               : 'package',
+		name               : 'packages',
 		type               : 'field-array',
 		buttonText         : 'Add another Package Type',
 		noDeleteButtonTill : 1,
@@ -28,7 +30,7 @@ export const PACKAGE_CONTROLS = [
 				type           : 'input',
 				optionsListKey : 'container-sizes',
 				span           : 4,
-				value          : '1',
+				value          : 1,
 				rules          : {
 					required : 'Count is required',
 					validate : (val) => validate(val),
@@ -51,11 +53,12 @@ export const PACKAGE_CONTROLS = [
 				type        : 'input',
 				placeholder : 'Enter length',
 				span        : 3,
+				value       : 1,
 				rules       : {
-					required : 'Length is required',
+					required : true,
 					validate : (val) => validate(val),
 					max      : 10000,
-					min      : 1,
+					min      : 0.1,
 				},
 			},
 			{
@@ -64,11 +67,12 @@ export const PACKAGE_CONTROLS = [
 				type        : 'input',
 				placeholder : 'Enter width',
 				span        : 3,
+				value       : 1,
 				rules       : {
-					required : 'Width is required',
+					required : true,
 					validate : (val) => validate(val),
 					max      : 10000,
-					min      : 1,
+					min      : 0.1,
 				},
 			},
 			{
@@ -77,18 +81,25 @@ export const PACKAGE_CONTROLS = [
 				type        : 'input',
 				placeholder : 'Enter height',
 				span        : 3,
+				value       : 1,
 				rules       : {
-					required : 'Height is required',
+					required : true,
 					validate : (val) => validate(val),
 					max      : 10000,
-					min      : 1,
+					min      : 0.1,
 				},
 			},
 			{
-				name    : 'unit',
+				name  : 'dimensions_unit',
+				label : <TooltipLabel
+					labelText="Unit"
+					tooltipText="For rate calculation, volume will be converted to CBM"
+				/>,
 				type    : 'select',
 				span    : 3,
+				value   : 'cm',
 				options : DIMENSIONS_OPTIONS,
+				rules   : { required: true },
 			},
 			{
 				name        : 'weight',
@@ -96,6 +107,7 @@ export const PACKAGE_CONTROLS = [
 				type        : 'input',
 				placeholder : 'Enter weight',
 				span        : 4,
+				value       : 1,
 				rules       : {
 					required : 'Weight is required',
 					validate : (val) => validate(val),
@@ -104,11 +116,16 @@ export const PACKAGE_CONTROLS = [
 				},
 			},
 			{
-				name    : 'weight_unit',
+				name  : 'weight_unit',
+				label : <TooltipLabel
+					labelText="Unit"
+					tooltipText="For rate calculation, weight will be converted to KG"
+				/>,
 				type    : 'select',
 				span    : 8,
-				value   : 'kg',
+				value   : 'kg_unit',
 				options : WEIGHT_OPTIONS,
+				rules   : { required: true },
 			},
 			{
 				name    : 'stackability',
@@ -116,7 +133,6 @@ export const PACKAGE_CONTROLS = [
 				span    : 10,
 				value   : 'stackable',
 				options : STACKABILITY_OPTIONS,
-				rules   : { required: 'Container size is required' },
 			},
 		],
 	},

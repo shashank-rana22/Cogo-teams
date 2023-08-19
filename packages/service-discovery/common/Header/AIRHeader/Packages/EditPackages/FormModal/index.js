@@ -6,6 +6,8 @@ import Layout from '../../../../common/Layout';
 
 import AdditionalModals from './AdditionalModals';
 import Header from './Header';
+import getSinglePackageDetails from './helpers/getSinglePackageDetails';
+import ShipmentTotal from './ShipmentTotal';
 import styles from './styles.module.css';
 
 function FormModal({
@@ -17,10 +19,9 @@ function FormModal({
 	showModal = '',
 	setShowModal = () => {},
 	handleApply = () => {},
+	reset = () => {},
 }) {
 	const [activeTab, setActiveTab] = useState('by_gross'); // by_gross and by_package
-	const [weightInfo, setWeightInfo] = useState(true);
-	const [dimensionsInfo, setDimensionsInfo] = useState(true);
 	const [commoditySubtypeOptions, setCommoditySubTypeOptions] = useState([]);
 
 	const controls = airControls({
@@ -30,9 +31,31 @@ function FormModal({
 		setValue,
 	});
 
+	const {
+		packageQuantity = [],
+		packageWeight = [],
+		packageVolume = [],
+	} = getSinglePackageDetails({ watch });
+
+	const onChangeCheckbox = () => {
+		setShowModal('suggestion');
+	};
+
 	return (
 		<div>
-			<Header activeTab={activeTab} setActiveTab={setActiveTab} />
+			<Header
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				reset={reset}
+			/>
+
+			{activeTab === 'by_package' ? (
+				<ShipmentTotal
+					packageWeight={packageWeight}
+					packageQuantity={packageQuantity}
+					packageVolume={packageVolume}
+				/>
+			) : null}
 
 			<div className={styles.form}>
 				<Layout
@@ -43,41 +66,35 @@ function FormModal({
 					watch={watch}
 					setValue={setValue}
 				/>
-
-				{activeTab === 'by_gross' ? (
-					<div className={styles.checkbox_container}>
-						<Checkbox
-							key="weight_check_checkbox"
-							checked={weightInfo}
-							label="Each unit weighs less than 150 kg (330lbs)"
-							onChange={(item) => {
-								setShowModal('suggestion');
-								setWeightInfo(item);
-							}}
-						/>
-
-						<Checkbox
-							key="dimensions_check_checkbox"
-							checked={dimensionsInfo}
-							label="Each unit dimensions is less than 110 x 65 x 65 cm"
-							onChange={(item) => {
-								setShowModal('suggestion');
-								setDimensionsInfo(item);
-							}}
-						/>
-					</div>
-				) : null}
-
-				{showModal ? (
-					<AdditionalModals
-						setActiveTab={setActiveTab}
-						setShow={setShowModal}
-						show={showModal}
-						handleApply={handleApply}
-						handleSubmit={handleSubmit}
-					/>
-				) : null}
 			</div>
+
+			{activeTab === 'by_gross' ? (
+				<div className={styles.checkbox_container}>
+					<Checkbox
+						key="weight_check_checkbox"
+						checked
+						label="Each unit weighs less than 150 kg (330lbs)"
+						onChange={onChangeCheckbox}
+					/>
+
+					<Checkbox
+						key="dimensions_check_checkbox"
+						checked
+						label="Each unit dimensions is less than 110 x 65 x 65 cm"
+						onChange={onChangeCheckbox}
+					/>
+				</div>
+			) : null}
+
+			{showModal ? (
+				<AdditionalModals
+					setActiveTab={setActiveTab}
+					setShow={setShowModal}
+					show={showModal}
+					handleApply={handleApply}
+					handleSubmit={handleSubmit}
+				/>
+			) : null}
 		</div>
 	);
 }

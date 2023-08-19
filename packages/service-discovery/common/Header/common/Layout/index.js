@@ -60,6 +60,9 @@ function Layout({
 								&& (label || newControl?.boldLabel) ? (
 									<div className={styles.required_mark}>*</div>
 									) : null}
+								{newControl?.showOptional ? (
+									<div className={styles.optional_text}>Optional</div>
+								) : null}
 							</div>
 
 							<Layout
@@ -112,6 +115,9 @@ function Layout({
 								{' '}
 								{newControl?.rules?.required && (label || newControl?.boldLabel) ? (
 									<div className={styles.required_mark}>*</div>
+								) : null}
+								{newControl?.showOptional ? (
+									<div className={styles.optional_text}>(Optional)</div>
 								) : null}
 							</div>
 						)}

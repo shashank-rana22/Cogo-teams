@@ -141,7 +141,7 @@ const DANGEROUS_OPTIONS = [
 
 const TEMP_CONTROLLED_RANGE_OPTIONS = [
 	{
-		label   : 'active',
+		label   : 'Active',
 		options : [
 			{
 				label : 'Active General Pharma',
@@ -162,7 +162,7 @@ const TEMP_CONTROLLED_RANGE_OPTIONS = [
 		],
 	},
 	{
-		label   : 'passive',
+		label   : 'Passive',
 		options : [
 			{
 				label : 'Passive General Pharma',

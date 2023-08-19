@@ -14,7 +14,13 @@ const TAB_PANELS_MAPPING = {
 function Header({
 	activeTab = '',
 	setActiveTab = () => {},
+	reset = () => {},
 }) {
+	const onChange = (val) => {
+		setActiveTab(val);
+		reset();
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Cargo Details</div>
@@ -23,7 +29,7 @@ function Header({
 				<Tabs
 					activeTab={activeTab}
 					themeType="primary"
-					onChange={setActiveTab}
+					onChange={onChange}
 				>
 					{Object.entries(TAB_PANELS_MAPPING).map(([key, value]) => {
 						const { label = '' } = value;

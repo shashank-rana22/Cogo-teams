@@ -1,37 +1,6 @@
-import { Tooltip } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
-
 import validate from '../../../utils/validateNumber';
 
-function VolumeLabel() {
-	return (
-		<div style={{ display: 'flex' }}>
-			<span style={{ marginRight: '8px' }}>Total Volume</span>
-
-			<Tooltip
-				content="For rate calculation, volume will be converted to CBM"
-				placement="top"
-			>
-				<IcMInfo height={12} width={12} />
-			</Tooltip>
-		</div>
-	);
-}
-
-function WeightLabel() {
-	return (
-		<div style={{ display: 'flex' }}>
-			<span style={{ marginRight: '8px' }}>Total Weight</span>
-
-			<Tooltip
-				content="For rate calculation, weight will be converted to KG"
-				placement="top"
-			>
-				<IcMInfo height={12} width={12} />
-			</Tooltip>
-		</div>
-	);
-}
+import TooltipLabel from './TooltipLabel';
 
 export const GROSS_CONTROLS = [
 	{
@@ -58,8 +27,11 @@ export const GROSS_CONTROLS = [
 		rules          : { required: 'Package type is required' },
 	},
 	{
-		name             : 'volume',
-		label            : <VolumeLabel />,
+		name  : 'volume',
+		label : <TooltipLabel
+			labelText="Total Volume"
+			tooltipText="For rate calculation, volume will be converted to CBM"
+		/>,
 		showTopLabelOnly : true,
 		span             : 6,
 		controls         : [
@@ -98,8 +70,11 @@ export const GROSS_CONTROLS = [
 		],
 	},
 	{
-		name             : 'weight',
-		label            : <WeightLabel />,
+		name  : 'weight',
+		label : <TooltipLabel
+			labelText="Total Weight"
+			tooltipText="For rate calculation, weight will be converted to KG"
+		/>,
 		showTopLabelOnly : true,
 		span             : 6,
 		controls         : [
@@ -153,7 +128,8 @@ export const GROSS_CONTROLS = [
 	{
 		name         : 'packing_list',
 		type         : 'upload',
-		label        : 'Packing List (OPTIONAL)',
+		label        : 'Packing List',
+		showOptional : true,
 		accept       : 'image/*,.pdf,.csv,.xlsx,.doc,.docx',
 		uploaderType : 'card',
 	},

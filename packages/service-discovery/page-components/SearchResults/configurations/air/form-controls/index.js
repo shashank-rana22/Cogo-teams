@@ -1,6 +1,6 @@
 import { addDays, isEmpty } from '@cogoport/utils';
 
-import COMMODITY_TYPE_MAPPING from '../CommodityMapping';
+import COMMODITY_SUBTYPE_MAPPING from '../commodity-subtype-mapping';
 
 import { GROSS_CONTROLS } from './gross-controls';
 import { PACKAGE_CONTROLS } from './package-controls';
@@ -58,7 +58,7 @@ const airControls = ({
 			options  : COMMODITY_OPTIONS,
 			value    : 'general',
 			onChange : (val) => {
-				setCommoditySubTypeOptions(COMMODITY_TYPE_MAPPING[val] || []);
+				setCommoditySubTypeOptions(COMMODITY_SUBTYPE_MAPPING[val] || []);
 				setValue('commodity_subtype', COMMODITY_SUBTYPE_DEFAULT_MAPPING[val] || '');
 			},
 			span  : 12,

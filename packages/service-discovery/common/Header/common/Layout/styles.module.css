@@ -87,6 +87,11 @@
 	color: #e74c3c;
 }
 
+.optional_text {
+	margin-left: 4px;
+	text-transform: uppercase;
+}
+
 .error_message {
 	margin-top: 2px;
 	font-size: 12px;
