@@ -88,6 +88,7 @@ function AccessoriesModal({
 							placeHolder="Reimbursable %"
 							onChange={(val) => setReimbusableValue(parseFloat(val))}
 							value={reimbusableValue}
+							type="number"
 						/>
 
 					</div>
@@ -98,6 +99,7 @@ function AccessoriesModal({
 							placeHolder="Max Amount"
 							onChange={(val) => setMaxAmount(parseFloat(val))}
 							value={maxAmount}
+							type="number"
 						/>
 					</div>
 				</div>

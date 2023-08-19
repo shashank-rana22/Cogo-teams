@@ -1,7 +1,7 @@
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetEmployeeDetails = (id, path = false) => {
+const useGetEmployeeDetails = (id) => {
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/get_employee_device_details',
 		method : 'GET',
@@ -11,8 +11,6 @@ const useGetEmployeeDetails = (id, path = false) => {
 		() => {
 			trigger({
 				params: {
-					// user_id            : path ? id : undefined,
-					// employee_detail_id : path ? undefined : id,
 					id,
 					employee_details_required: true,
 				},

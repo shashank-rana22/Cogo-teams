@@ -9,10 +9,17 @@ const useGetColumns = () => {
 
 	const handleVerification = (item) => {
 		const { id, status } = item;
+		let view_type;
 		if (status === 'approved') {
 			return;
 		}
-		router.push(`/byod/employee/${id}`);
+		if (status === 'active') {
+			view_type = 'hr_view';
+		}
+		if (status === 'verified') {
+			view_type = 'admin_view';
+		}
+		router.push(`/byod/employee/${id}?view_type=${view_type}`);
 	};
 
 	function GetStatus(item) {

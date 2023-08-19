@@ -1,11 +1,19 @@
 .container {
+	padding: 16px 32px 16px 20px;
+	margin-bottom: 20px;
+	background: #fff;
+	border-bottom: 1px solid #e0e0e0;
+	border-radius: 4px;
+}
+
+.item_container {
 	display: flex;
 	flex-wrap: wrap;
 }
 
 .detail {
-	flex-basis: calc(50% - 20px);
-	margin: 10px;
+	flex-basis: 15%;
+	margin: 10px 10px 20px;
 
 	@media (max-width: 768px) {
 		flex-basis: 100%;
@@ -14,17 +22,19 @@
 
 .label {
 	margin-bottom: 4px;
-	font-size: 16px;
-	font-weight: 600;
+	font-weight: 400;
+	color: #333;
 }
 
 .employee_detail {
-	font-size: 16px;
+	margin-bottom: 4px;
+	font-weight: 600;
+	color: #333;
 }
 
 .heading {
-	margin-bottom: 4px;
-	font-size: 20px;
+	margin: 16px 0;
+	font-size: 16px;
 	font-weight: 600;
 }
 
@@ -40,4 +50,11 @@
 .border_bottom {
 	margin-bottom: 8px;
 	border-bottom: 1px solid #e0e0e0;
+}
+
+.invoice {
+	display: flex;
+	flex-direction: column;
+	align-items: baseline;
+	padding: 10px;
 }

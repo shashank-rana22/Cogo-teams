@@ -11,9 +11,20 @@ const OPTIONS = [
 ];
 
 function SetMaxReimbursement(
-	{ id, setCombinedValue, combinedValue, setMaxReimbursementAmount, maxReimbursementAmount },
+	{
+		id, setCombinedValue,
+		combinedValue,
+		setMaxReimbursementAmount,
+		maxReimbursementAmount,
+		getEmployeeReimbursementGroup = () => {},
+	},
 ) {
-	const { updateDeviceDetails } = useUpdateDeviceDetails({ SOURCE: 'maxreimbursement', id });
+	const { updateDeviceDetails } = useUpdateDeviceDetails({
+		SOURCE: 'maxreimbursement',
+		id,
+		getEmployeeReimbursementGroup,
+	});
+
 	return (
 		<div className={styles.footer_container}>
 			<div className={styles.set_combined_reimbusement}>
@@ -30,19 +41,17 @@ function SetMaxReimbursement(
 			</div>
 			{(combinedValue === 'yes') && (
 				<div className={styles.combined_reimbusement}>
-					<div className={styles.combined_reimbusement_body}>
-
-						<div className={styles.select_categories}>
-							<div className={styles.text_container}>
-								Max Reimbursement
-							</div>
-							<Input
-								placeholder="Max Reimbursement"
-								onChange={(val) => setMaxReimbursementAmount(parseFloat(val))}
-								value={maxReimbursementAmount}
-								type="number"
-							/>
+					<div className={styles.select_categories}>
+						<div className={styles.text_container_reimbursement}>
+							Max Reimbursement
 						</div>
+						<Input
+							placeholder="Max Reimbursement"
+							onChange={(val) => setMaxReimbursementAmount(parseFloat(val))}
+							value={maxReimbursementAmount}
+							type="number"
+							style={{ width: '190px' }}
+						/>
 					</div>
 				</div>
 			)}

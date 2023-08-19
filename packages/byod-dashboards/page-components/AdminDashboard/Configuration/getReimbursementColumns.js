@@ -1,4 +1,4 @@
-import { Button, ButtonIcon } from '@cogoport/components';
+import { ButtonIcon } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -29,17 +29,17 @@ const getReimbursementColumns = ({ mappings, id:groupId, getEmployeeReimbursemen
 			),
 		},
 
-		{
-			Header   : 'Action',
-			accessor : () => (
-				<Button themeType="secondary">
-					View Employees
-				</Button>
-			),
-		},
+		// {
+		// 	Header   : 'Action',
+		// 	accessor : () => (
+		// 		<Button themeType="secondary">
+		// 			View Employees
+		// 		</Button>
+		// 	),
+		// },
 		{
 			id       : 'delete',
-			Header   : '',
+			Header   : 'Actions',
 			accessor : (item) => (
 				<ButtonIcon
 					onClick={() => {

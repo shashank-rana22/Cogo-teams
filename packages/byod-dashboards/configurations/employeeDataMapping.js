@@ -43,6 +43,7 @@ export const EMPLOYEE_DEVICE_DETAILS = [
 	{
 		label : 'Reimbursement Amount',
 		key   : 'reimbursement_amount',
+		type  : 'amount',
 	},
 ];
 export const EMPLOYEE_ADDON_DETAILS = [
@@ -67,6 +68,7 @@ export const EMPLOYEE_ADDON_DETAILS = [
 	{
 		label : 'Reimbursement Amount',
 		key   : 'reimbursement_amount',
+		type  : 'amount',
 	},
 ];
 

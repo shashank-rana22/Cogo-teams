@@ -39,12 +39,12 @@ const useUpdateDeviceDetails = ({
 				data: payload,
 			});
 
-			getEmployeeReimbursementGroup(id);
 			setShowDevice(false);
 			setShowAccessories(false);
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
+		getEmployeeReimbursementGroup(id);
 	};
 
 	return {

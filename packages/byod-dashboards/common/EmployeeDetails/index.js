@@ -26,6 +26,9 @@ function EmployeeDetails() {
 	const router = useRouter();
 
 	const profile = useSelector((state) => state.profile || {});
+	const { query } = useSelector(({ general }) => ({ query: general?.query || {} }));
+
+	const { id:empId = '', view_type } = query;
 
 	const [rejectModal, setRejectModal] = useState(false);
 	const [rejectionReason, setRejectionReason] = useState('');
@@ -45,7 +48,6 @@ function EmployeeDetails() {
 
 	const employeeDeviceData = employee_device_details[employee_device_details.length - DEFAULT_VALUE] || [];
 	const { status } = employeeDeviceData || {};
-	const { invoice_url } = employeeDeviceData || {};
 
 	const getData = (key, type, isNumber) => {
 		const payloadType = type ? employeeDeviceData : employee_details;
@@ -107,8 +109,9 @@ function EmployeeDetails() {
 					themeType="primary"
 					disabled={detailLoading}
 					onClick={() => updateDetail({
-						status : isAdmin ? 'approved' : 'verified',
-						id     : employeeDeviceData.id,
+						status : (view_type === 'hr_view') ? 'verified' : 'approved',
+						id     : empId,
+						view_type,
 					})}
 					size="lg"
 					style={{ marginLeft: 12 }}
@@ -130,7 +133,7 @@ function EmployeeDetails() {
 		const objValues = {
 			status           : 'rejected',
 			rejection_reason : rejectionReason,
-			id               : employeeDeviceData.id,
+			id               : empId,
 		};
 
 		updateDetail(objValues);
