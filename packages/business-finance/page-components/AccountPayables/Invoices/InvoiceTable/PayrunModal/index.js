@@ -1,26 +1,104 @@
-import { Modal, Button, Radio } from '@cogoport/components';
+import { Modal, Button, Radio, Toggle, RadioGroup, Select } from '@cogoport/components';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
-import { CURRENCY_DATA } from '../../Constants';
+import { CURRENCY_DATA, CATEGORY_OPTIONS, EXPENSE_OPTIONS, SERVICE_TYPE } from '../../Constants';
 import useGetPayrunId from '../../hooks/useGetPayrunId';
 
 import styles from './styles.module.css';
 
 function PayRunModal({ showPayrunModal, setShowPayrunModal, activeEntity }) {
+	const [categoryValue, setCategoryValue] = useState('normal_payrun');
+	const [toggleValue, setToggleValue] = useState(true);
+	const [serviceType, setServiceType] = useState('');
+	const [serviceAgent, setServiceAgent] = useState('');
 	const [currencyValue, setCurrencyValue] = useState(CURRENCY_DATA[GLOBAL_CONSTANTS.zeroth_index]);
 	const { text = '', id = '' } = currencyValue || {};
+
+	const onToggleChange = () => {
+		if (toggleValue === true) {
+			setCategoryValue('overheads');
+		} else {
+			setCategoryValue('normal_payrun');
+		}
+		setServiceAgent('');
+		setServiceType('');
+		setToggleValue((prev) => !prev);
+	};
+
+	const onOptionChange = (item) => {
+		setServiceAgent('');
+		setServiceType('');
+		setCategoryValue(item);
+	};
 
 	const {
 		getPayrunId,
 		loading,
-	} = useGetPayrunId({ activeEntity, currency: text, setShowPayrunModal });
+	} = useGetPayrunId({ activeEntity, currency: text, setShowPayrunModal, serviceType, serviceAgent });
 
 	return (
 		<div>
 			<Modal size="md" show={showPayrunModal} onClose={() => setShowPayrunModal(false)} placement="top">
 				<Modal.Header title="Select Filters" />
 				<Modal.Body>
+					<div className={styles.category}>
+						<div className={styles.header}>
+							Category
+						</div>
+
+						<Toggle
+							onLabel="expense"
+							offLabel="bill"
+							size="sm"
+							value={toggleValue}
+							onChange={(val) => onToggleChange(val)}
+						/>
+					</div>
+
+					<div className="radiogrp">
+						<RadioGroup
+							className="primary lg"
+							options={
+							toggleValue === true ? CATEGORY_OPTIONS : EXPENSE_OPTIONS
+						}
+							value={categoryValue}
+							onChange={(item) => onOptionChange(item)}
+						/>
+
+						{categoryValue === 'overseas_agent' && (
+							<div className={styles.form}>
+								<div className={styles.element}>
+									<div>Select Agent</div>
+
+									<AsyncSelect
+										size="sm"
+										placeholder="Select Agent"
+										valueKey="organizationId"
+										labelKey="organizationName"
+										asyncKey="list_overseas_trade_parties"
+										value={serviceAgent}
+										onChange={(val) => setServiceAgent(val)}
+									/>
+								</div>
+
+								<div className={styles.element}>
+									<div>Select Service</div>
+
+									<Select
+										size="sm"
+										placeholder="Select Service"
+										options={SERVICE_TYPE}
+										value={serviceType}
+										onChange={(val) => setServiceType(val)}
+									/>
+								</div>
+
+							</div>
+						)}
+					</div>
+
 					<div className={styles.header}>
 						Currency
 					</div>
@@ -74,7 +152,12 @@ function PayRunModal({ showPayrunModal, setShowPayrunModal, activeEntity }) {
 				<Modal.Footer>
 					<Button themeType="secondary" onClick={() => setShowPayrunModal(false)}>Cancel</Button>
 					<div className={styles.button}>
-						<Button onClick={getPayrunId} disabled={loading}>
+						<Button
+							onClick={getPayrunId}
+							disabled={loading
+							|| (categoryValue === 'overseas_agent'
+								&& (serviceAgent === '' || serviceType === ''))}
+						>
 							Create
 						</Button>
 					</div>

@@ -19,3 +19,31 @@ export const DETAILS = [
 	{ label: 'Overall Income', key: 'overallIncome' },
 	{ label: 'Total Receivable', key: 'totalReceivable' },
 ];
+
+export const CATEGORY_OPTIONS = [
+	{
+		value : 'normal_payrun',
+		label : 'Domestic Payment',
+	},
+	{
+		value : 'overseas_agent',
+		label : 'Overseas Payment',
+	},
+];
+
+export const EXPENSE_OPTIONS = [
+	{
+		value : 'overheads',
+		label : 'Overheads',
+	},
+];
+
+export const SERVICE_TYPE = [
+	{ value: 'fcl_freight', label: 'FCL' },
+	{ value: 'lcl_freight', label: 'LCL' },
+	{ value: 'air_freight', label: 'AIR' },
+	{ value: 'fcl_customs', label: 'FCL Customs' },
+	{ value: 'lcl_customs', label: 'LCL Customs' },
+	{ value: 'air_customs', label: 'AIR Customs' },
+	{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
+];

@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-const useGetPayrunId = ({ activeEntity, currency, setShowPayrunModal }) => {
+const useGetPayrunId = ({ activeEntity, currency, setShowPayrunModal, serviceType, serviceAgent }) => {
 	const { push } = useRouter();
 	const {
 		user_data: userData,
@@ -36,6 +36,8 @@ const useGetPayrunId = ({ activeEntity, currency, setShowPayrunModal }) => {
 					performedBy     : userId,
 					performedByName : name,
 					performedByType : sessionType,
+					organization_id : serviceAgent || undefined,
+					service_type    : serviceType.toUpperCase() || undefined,
 				},
 			});
 			push(`/business-finance/account-payables/invoices/create-pay-run?payrun=${resp?.data?.id}

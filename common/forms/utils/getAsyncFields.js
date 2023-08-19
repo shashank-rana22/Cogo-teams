@@ -1,3 +1,4 @@
+// eslint-disable-next-line custom-eslint/function-name-check
 function asyncFieldsLocations2() {
 	return {
 		valueKey    : 'id',
@@ -859,6 +860,18 @@ function asyncListResources() {
 	};
 }
 
+function asyncListOverSeasParties() {
+	return {
+		valueKey     : 'organizationId',
+		labelKey     : 'organizationName',
+		endpoint     : '/purchase/bills/list-overseas-trade-parties',
+		authkey      : 'list-overseas-trade-parties',
+		initialCall  : false,
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -929,4 +942,5 @@ export {
 	asyncIncidentSubtypeList,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListOverSeasParties,
 };

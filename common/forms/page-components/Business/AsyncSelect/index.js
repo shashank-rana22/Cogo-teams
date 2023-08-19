@@ -63,6 +63,7 @@ import {
 	asyncFieldsLeadOrganization,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListOverSeasParties,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -144,6 +145,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_incident_subtype                : asyncIncidentSubtypeList,
 	list_lead_organizations              : asyncFieldsLeadOrganization,
 	resources                            : asyncListResources,
+	list_overseas_trade_parties          : asyncListOverSeasParties,
 };
 
 const SINGLE_ENTITY = 1;

@@ -145,11 +145,13 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 					<Breadcrumb.Item label="Select Invoices" />
 				</Breadcrumb>
 			</div>
+
 			<div className={styles.filters}>
 				<div className={styles.filtercontainer}>
 					<Filter controls={invoiceFilters} filters={filters} setFilters={setFilters} />
 					<FilterModal filters={filters} setFilters={setFilters} filterLength={5} />
 				</div>
+
 				<div className={styles.search_filter}>
 					<div className={styles.search}>
 						<Input
@@ -171,6 +173,7 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 					</div>
 				</div>
 			</div>
+
 			<div className={styles.list_container}>
 				<List
 					itemData={apiData}
