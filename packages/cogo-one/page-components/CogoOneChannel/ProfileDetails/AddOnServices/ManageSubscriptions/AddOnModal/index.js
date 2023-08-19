@@ -45,8 +45,7 @@ function AddOnModal({
 						loading={loading}
 					/>
 					<div className={styles.table_footer}>
-						Total add-on price :
-						{' '}
+						<span>Total add-on price :</span>
 						{formatAmount({
 							amount  : getTotalAmount({ quota, quotas }),
 							options : {

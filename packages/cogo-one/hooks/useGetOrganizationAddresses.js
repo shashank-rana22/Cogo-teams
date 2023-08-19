@@ -16,7 +16,7 @@ const useGetOrganizationAddresses = ({ orgId = '' }) => {
 		method : 'get',
 	}, { manual: true });
 
-	const getOrganizationAddresses = useCallback(async () => {
+	const getOrganizationAddresses = useCallback(() => {
 		try {
 			addressApiTrigger({
 				params: getParams({ orgId }),
