@@ -95,8 +95,7 @@ function SubscriptionCard(props) {
 							${isActive || hover ? styles.change_color_on_hover : ''}`}
 							>
 								{value}
-								{' '}
-								{display_name}
+								<span className={styles.display_name}>{display_name}</span>
 							</span>
 						</div>
 					);

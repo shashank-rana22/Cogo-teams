@@ -22,7 +22,7 @@ const ANNUAL_SUBSCRIPTION_DISCOUNT_PERCENT = 20;
 function EmptyState() {
 	return (
 		<div className={styles.empty_state_container}>
-			<Image src={GLOBAL_CONSTANTS.image_url.empty_state} width={250} height={200} alt="plans unavailable" />
+			<Image src={GLOBAL_CONSTANTS.image_url.empty_state} width={250} height={250} alt="plans unavailable" />
 			<div className={styles.empty_state_label}>Plans are not available</div>
 		</div>
 	);
@@ -133,7 +133,7 @@ function ManageSubscriptions(props) {
 
 							{(sortedItemPlans || []).map((item) => (
 								<SubscriptionCard
-									key={item.id}
+									key={item?.id}
 									item={item}
 									activeTab={activeTab}
 									createLink={createLink}
@@ -149,6 +149,7 @@ function ManageSubscriptions(props) {
 					)}
 				</div>
 			)}
+
 			{!isEmpty(checkout) ? (
 				<div className={cl`${styles.plans_fixed_footer}
 				${!isEmpty(paymentLink) ? styles.two_childs_present : ''}`}
