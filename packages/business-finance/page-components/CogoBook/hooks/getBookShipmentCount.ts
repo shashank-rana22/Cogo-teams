@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
 const useBookShipmentCount = ({ filters, setShowBookShipment }) => {
-	const [bookShipmentValue, setBookShipmentValue] = useState('');
+	const [bookShipmentValue, setBookShipmentValue] = useState(0);
 
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
