@@ -10,7 +10,7 @@ import RateCoverageContent from './Content';
 
 function RateCoverage() {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
-	const activeTab = 'rate_density';
+	const ACTIVETAB = 'rate_density';
 	const { push } = useRouter();
 
 	const handleTabChange = (tab) => {
@@ -26,11 +26,11 @@ function RateCoverage() {
 
 	return (
 		<div>
-			<Tabs fullWidth activeTab={activeTab} themeType="primary" onChange={(tab) => { handleTabChange(tab); }}>
+			<Tabs fullWidth activeTab={ACTIVETAB} themeType="primary" onChange={(tab) => { handleTabChange(tab); }}>
 				<TabPanel name="live_bookings" title="Live Bookings"><LiveBookingsView /></TabPanel>
 				<TabPanel name="trade_enquiry" title="Missing Rates">--</TabPanel>
 				<TabPanel name="disliked_rates" title="Disliked Rates">--</TabPanel>
-				<TabPanel name="rate_density" title="Rate Density"><RateCoverageContent /></TabPanel>
+				<TabPanel name="rate_density" title="Rate Coverage"><RateCoverageContent /></TabPanel>
 				<TabPanel name="manage_forecast" title="Manage Forcast">--</TabPanel>
 				<TabPanel name="rfq_enquiries" title="RFQ Enquiries">
 					<RfqEnquiries />
