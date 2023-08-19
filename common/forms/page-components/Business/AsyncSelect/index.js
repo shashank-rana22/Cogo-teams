@@ -61,6 +61,8 @@ import {
 	asyncListShipmentPendingTasks,
 	asyncIncidentSubtypeList,
 	asyncFieldsLeadOrganization,
+	asyncListResources,
+	asyncFieldsLocationsMapping,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -91,6 +93,7 @@ const keyAsyncFieldsParamsMapping = {
 	partner_roles                        : asyncFieldsPartnerRoles,
 	segments                             : asyncFieldsCampaignSegments,
 	list_locations                       : asyncFieldsLocations,
+	list_locations_mapping               : asyncFieldsLocationsMapping,
 	list_operators                       : asyncFieldsListOperators,
 	list_rate_charge_codes               : asyncFieldListRateChargeCodes,
 	allot_bank                           : asyncAllotBanks,
@@ -140,6 +143,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 	list_incident_subtype                : asyncIncidentSubtypeList,
 	list_lead_organizations              : asyncFieldsLeadOrganization,
+	resources                            : asyncListResources,
 };
 
 const SINGLE_ENTITY = 1;

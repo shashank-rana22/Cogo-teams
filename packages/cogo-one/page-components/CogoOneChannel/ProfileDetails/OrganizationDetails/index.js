@@ -30,6 +30,7 @@ function OrganizationDetails({
 	hideCpButton = false,
 	getOrgDetails = () => {},
 	viewType = '',
+	setActiveTab = () => {},
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
@@ -90,6 +91,8 @@ function OrganizationDetails({
 	const handleRoute = () => {
 		window.open(`/${partnerId}/lead-organization/${leadOrganizationId}`, '_blank');
 	};
+
+	const hasAccessToConvertCp = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.convert_account_to_cp;
 
 	if (isEmpty(organizationId || leadOrganizationId)) {
 		return (
@@ -170,7 +173,7 @@ function OrganizationDetails({
 							</Pill>
 						) : null }
 
-						{!hideCpButton && !orgLoading && organizationId ? (
+						{!hideCpButton && !orgLoading && organizationId && hasAccessToConvertCp ? (
 							<Button
 								size="sm"
 								themeType="primary"
@@ -221,6 +224,7 @@ function OrganizationDetails({
 										user={item}
 										key={item.id}
 										hasVoiceCallAccess={hasVoiceCallAccess}
+										setActiveTab={setActiveTab}
 									/>
 								))}
 							</>

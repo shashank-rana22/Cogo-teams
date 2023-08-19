@@ -61,6 +61,7 @@ import {
 	IcMAppMissions,
 	IcMFsoppoc,
 	IcMBookingDesk,
+	IcASecureCloudStorage,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -779,7 +780,7 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		icon          : IcMOverview,
 		possible_apis : apis.cms,
-		main_apis     : ['list_auth_roles'],
+		main_apis     : ['list_roles'],
 		module_type   : 'dashboards',
 	},
 	user: {
@@ -1573,6 +1574,16 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.utm_parameters,
 			},
+			{
+				key           : 'marketing-marketing_cogo_store',
+				title         : 'CogoStore',
+				href          : '/marketing/cogo-store/[active_tab]',
+				as            : '/marketing/cogo-store/manage',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogopoints,
+				module_type   : 'crm',
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -1597,25 +1608,6 @@ const navigationMappingAdmin = {
 		module_type : 'dashboards',
 		icon        : IcCCogoassured,
 		options     : [
-			{
-				key           : 'cogo_assured-fcl_freight',
-				title         : 'FCL Freight',
-				href          : '/cogo-assured/fcl_freight',
-				as            : '/cogo-assured/fcl_freight',
-				type          : 'link',
-				possible_apis : apis.cogo_assured,
-				main_apis     : [],
-			},
-			{
-				key           : 'cogo_assured-fcl_freight_local',
-				title         : 'FCL Freight Local',
-				href          : '/cogo-assured/fcl_freight_local',
-				as            : '/cogo-assured/fcl_freight_local',
-				type          : 'link',
-				possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
-
-				main_apis: [],
-			},
 			{
 				key           : 'cogo_assured-haulage_freight',
 				title         : 'Haulage Freight',
@@ -1999,8 +1991,8 @@ const navigationMappingAdmin = {
 		href          : '/v2/list-roles',
 		as            : '/v2/list-roles',
 		type          : 'link',
-		main_apis     : ['list_auth_roles'],
-		possible_apis : apis.roles_permissions,
+		main_apis     : ['list_roles'],
+		possible_apis : apis.roleApis,
 		module_type   : 'crm',
 	},
 	vendor_rm: {
@@ -2489,6 +2481,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/chakravyuh/feedback-dashboard',
 				possible_apis : apis.pricing_trends,
 			},
+			{
+				key           : 'chakravyuh-accuracy',
+				title         : 'Pricing Accuracy Dashboard',
+				href          : '/v2/chakravyuh/accuracy-dashboard',
+				as            : '/v2/chakravyuh/accuracy-dashboard',
+				possible_apis : apis.pricing_accuracy_dashboard,
+			},
 		],
 	},
 	manager_dashboard: {
@@ -2530,6 +2529,17 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		possible_apis : apis.centralised_customer_service,
 		icon          : IcMDashboard,
+	},
+	resources: {
+		key           : 'resources',
+		title         : 'Api Resource',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : [],
+		href          : '/v2/resources',
+		as            : '/v2/resources',
+		possible_apis : apis.resourceApis,
+		icon          : IcASecureCloudStorage,
 	},
 };
 

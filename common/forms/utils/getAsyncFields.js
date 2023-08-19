@@ -120,12 +120,13 @@ function asyncFieldsPartnerUsers() {
 
 function asyncFieldsPartnerRoles() {
 	return {
-		labelKey    : 'name',
-		valueKey    : 'id',
-		endpoint    : 'list_auth_roles',
-		initialCall : true,
-		params      : {
-			filters    : { status: 'active' },
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'list_roles',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {
+			filters    : { status: true },
 			page_limit : 100,
 			sort_by    : 'short_name',
 			sort_type  : 'asc',
@@ -796,6 +797,17 @@ function asyncListShipmentServices() {
 		},
 	};
 }
+function asyncFieldsLocationsMapping() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_locations_mapping',
+		initialCall : true,
+		params      : {
+			page_limit: 20,
+		},
+	};
+}
 
 function asyncListAllManagers() {
 	return {
@@ -833,6 +845,17 @@ function asyncListExpenseCategories() {
 		initialCall  : true,
 		searchByq    : true,
 		params       : { pageSize: 10000 },
+	};
+}
+
+function asyncListResources() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'list_resources',
+		initialCall  : true,
+		microService : 'auth',
+		params       : {},
 	};
 }
 
@@ -904,4 +927,6 @@ export {
 	asyncListShipmentServices,
 	asyncListAllocationObjectives,
 	asyncIncidentSubtypeList,
+	asyncListResources,
+	asyncFieldsLocationsMapping,
 };

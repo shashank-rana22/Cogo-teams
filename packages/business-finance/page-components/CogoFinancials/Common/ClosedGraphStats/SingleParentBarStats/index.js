@@ -12,10 +12,12 @@ const GRAPHS = ['Operational Profitability', 'Revenue', 'Expense'];
 function SingleParentBarStats({
 	activeBar = '', setActiveBar = () => {}, isFullWidth = false,
 	setShowShipmentList = () => {},
+	showShipmentList = false,
 	taxType = '',
 	type = '',
 	serviceLevelData = [],
 	serviceLevelLoading = false,
+	setTableFilters = () => {},
 }) {
 	const onViewDetails = () => {
 		setShowShipmentList(true);
@@ -25,11 +27,14 @@ function SingleParentBarStats({
 			<div className={styles.header_combine}>
 				<RenderCardHeader
 					title={`${activeBar} Profitability`}
-					showInfo
 					showBack
 					onBack={() => {
 						setActiveBar('');
 						setShowShipmentList(false);
+						setTableFilters((prev) => ({
+							...prev,
+							serviceLevel: null,
+						}));
 					}}
 				/>
 				<div className={styles.graph_label_container}>
@@ -64,6 +69,7 @@ function SingleParentBarStats({
 						type={type}
 						serviceLevelData={serviceLevelData}
 						serviceLevelLoading={serviceLevelLoading}
+						showShipmentList={showShipmentList}
 					/>
 				))}
 			</div>

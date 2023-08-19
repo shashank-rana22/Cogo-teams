@@ -33,7 +33,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 		filters,
 		defaultFilters : { shipment_id },
 		defaultParams  : {
-			additional_methods : ['pagination', 'organizations', 'bill_of_ladings'],
+			additional_methods : ['pagination', 'organizations', 'bill_of_ladings', 'delivery_orders'],
 			page               : 1,
 			page_limit         : 1000,
 			sort_by            : 'created_at',
@@ -140,7 +140,8 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 		docTypes,
 		loading       : tasksLoading || documentsLoading || taskConfigLoading,
 		refetch,
-		bl_details    : uploadedShipmentDocuments?.bl_details || [],
+		bl_details    : uploadedShipmentDocuments?.bill_of_ladings || [],
+		do_details    : uploadedShipmentDocuments?.delivery_orders || [],
 	};
 };
 

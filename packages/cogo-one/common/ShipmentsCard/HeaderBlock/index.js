@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 
 const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 	{
+		key      : 'view_shipments',
 		children : 'View Shipments',
 		onClick  : (e) => {
 			e.stopPropagation();
@@ -21,6 +22,7 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 		condition: ['all_shipments', 'user_shipments'],
 	},
 	{
+		key      : 'view_documents',
 		children : 'View Documents',
 		onClick  : (e) => {
 			e.stopPropagation();
@@ -30,6 +32,7 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 		condition: ['all_shipments', 'user_shipments'],
 	},
 	{
+		key      : 'raise_ticket',
 		children : 'Raise Ticket',
 		onClick  : (e) => {
 			e.stopPropagation();

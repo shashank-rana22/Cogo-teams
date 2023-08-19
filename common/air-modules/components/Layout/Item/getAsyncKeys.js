@@ -92,7 +92,8 @@ const OPTIONS = {
 		defaultParams : {
 			page_limit: 10,
 		},
-		defaultOptions: true,
+		initialCall    : true,
+		defaultOptions : true,
 	},
 	'port-type-grouped': {
 		valueKey     : 'id',
@@ -294,11 +295,11 @@ const OPTIONS = {
 	'partner-roles': {
 		valueKey       : 'id',
 		labelKey       : 'name',
-		asyncKey       : 'list_auth_roles',
+		asyncKey       : 'list_roles',
 		defaultOptions : true,
 		defaultParams  : {
 			filters: {
-				status: 'active',
+				status: true,
 			},
 			page_limit: 200,
 		},

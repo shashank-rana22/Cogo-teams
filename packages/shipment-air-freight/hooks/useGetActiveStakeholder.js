@@ -9,7 +9,10 @@ const useGetActiveStakeholder = () => {
 	const { role_ids } = useSelector(({ profile }) => ({ role_ids: profile?.partner?.user_role_ids }));
 
 	const stakeholderMap = [
-		{ role_ids: geo.uuid.kam_ids, stakeholder: 'booking_agent' },
+		{
+			role_ids    : [...geo.uuid.kam_ids, ...geo.uuid.cogo_fx_settings_allowed_role_ids],
+			stakeholder : 'booking_agent',
+		},
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
 		{ role_ids: geo.uuid.air_so_1_manager, stakeholder: 'booking_desk_manager' },
 		{ role_ids: geo.uuid.service_ops2_role_id, stakeholder: 'document_desk' },
@@ -20,7 +23,7 @@ const useGetActiveStakeholder = () => {
 			role_ids    : [geo.uuid.admin_id, geo.uuid.corporate_owner_id, geo.uuid.corporate_owner_finance_id],
 			stakeholder : 'admin',
 		},
-		{ role_ids: geo.uuid.air_prod_process_owner, stakeholder: 'prod_process_owner' },
+		{ role_ids: [geo.uuid.air_prod_process_owner, geo.uuid.prod_process_owner], stakeholder: 'prod_process_owner' },
 		{ role_ids: geo.uuid.coe_head, stakeholder: 'coe_head' },
 		{ role_ids: [geo.uuid.coe_finance_head, geo.uuid.prod_settlement_executive], stakeholder: 'credit_control' },
 		{
