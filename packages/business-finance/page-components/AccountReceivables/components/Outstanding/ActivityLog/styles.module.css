@@ -18,3 +18,8 @@
 	font-weight: 600;
 	border: 1px solid !important;
 }
+
+.error {
+	font-size: 10px;
+	color: red;
+}

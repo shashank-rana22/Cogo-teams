@@ -25,3 +25,8 @@
 	width: 49%;
 	margin: 12px 0;
 }
+
+.errors {
+	font-size: 10px;
+	color: red;
+}

@@ -1,80 +1,104 @@
-import { Checkbox, Input, Select, Datepicker, Textarea, Button } from '@cogoport/components';
-import { AsyncSelect } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
+import {
+	AsyncSelectController,
+	CheckboxController,
+	DatepickerController,
+	InputController,
+	SelectController,
+	TextAreaController,
+} from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import FeedbackComponent from '../FeedbackComponent';
 
 import styles from './styles.module.css';
 
-// eslint-disable-next-line max-lines-per-function
+const callOptions = [
+	{ label: 'Call', value: 'call' },
+	{ label: 'Email', value: 'email' },
+	{ label: 'Meeting', value: 'meeting' },
+	{ label: 'Platform Demo', value: 'platformDemo' },
+];
+
+const communicationOptions = [
+	{ label: 'Answered', value: 'answered' },
+	{ label: 'Not Answered', value: 'not_answered' },
+	{ label: 'Wrong Number', value: 'wrong_number' },
+	{ label: 'Invalid Number', value: 'invalid_number' },
+	{ label: 'Not Reachable', value: 'not_reachable' },
+	{ label: 'Busy', value: 'Busy' },
+	{ label: 'Does not exist', value: 'Does not exist' },
+	{
+		label: 'Does not belong to this user',
+		value: 'Does not belong to this user',
+	},
+	{
+		label: 'Belongs to the user who has left the company',
+		value: 'Belongs to the user who has left the company',
+	},
+
+];
+
 function ActivityLog({
-	formData = {}, setFormData = () => {}, feedback = [], remove = () => {}, append = () => {},
-	control, setValue = () => {}, register = () => {}, watch,
+	formData = {},
+	feedback = [],
+	remove = () => { },
+	append = () => { },
+	control,
+	setValue = () => { },
+	errors = {},
+	watch,
 }) {
-	const { reminder } = formData || {};
-
-	useEffect(() => {
-		if (reminder) {
-			setFormData((p) => ({
-				...p,
-				communicationResponse : undefined,
-				startDateTime         : undefined,
-				endDateTime           : undefined,
-			}));
-		} else {
-			setFormData((p) => ({
-				...p,
-				reminderDateTime: undefined,
-			}));
-		}
-	}, [reminder, setFormData]);
-
 	return (
 		<div>
-			<Checkbox
+			<CheckboxController
 				label="Reminder?"
 				value="reminder"
 				disabled={false}
-				onChange={(e) => setFormData((p) => ({ ...p, reminder: e?.target?.checked }))}
+				name="reminder"
+				control={control}
 			/>
 			<div className={styles.single_form_row}>
 				<div className={styles.input}>
 					<div className={styles.label}>Select Reminder Type</div>
-					<Select
-						value={formData?.reminderType || 'call'}
-						options={[
-							{ label: 'Call', value: 'call' },
-							{ label: 'Email', value: 'email' },
-							{ label: 'Meeting', value: 'meeting' },
-							{ label: 'Platform Demo', value: 'platformDemo' },
-						]}
-						onChange={(val) => setFormData((prev) => ({ ...prev, reminderType: val }))}
+					<SelectController
+						options={callOptions}
+						name="reminderType"
+						control={control}
+						value="call"
 					/>
+					<div className={styles.error}>{errors?.reminderType ? '*required' : null}</div>
 				</div>
 
 				<div className={styles.input}>
 					<div className={styles.label}>Attendee from Cogoport</div>
-					<AsyncSelect
+					<AsyncSelectController
 						name="attendee"
 						asyncKey="partner_users_ids"
 						placeholder="Type to search..."
+						control={control}
 						valueKey="id"
 						initialCall={false}
-						onChange={(value) => {
-							setFormData((p) => ({ ...p, attendee: value }));
-						}}
-						value={formData?.attendee}
 						size="md"
 						isClearable
+						rules={{ required: true }}
 					/>
+					<div className={styles.error}>{errors?.attendee ? '*required' : null}</div>
 				</div>
 			</div>
 
 			<div className={styles.single_form_row}>
 				<div className={styles.input}>
 					<div className={styles.label}>Title</div>
-					<Input size="md" placeholder="Enter title" />
+					<InputController
+						name="title"
+						rules={{ required: true }}
+						size="md"
+						placeholder="Enter title"
+						control={control}
+					/>
+					<div className={styles.error}>{errors?.title ? '*required' : null}</div>
 				</div>
 
 				<div className={styles.input}>
@@ -82,42 +106,28 @@ function ActivityLog({
 						? (
 							<div>
 								<div className={styles.label}>Communication Response</div>
-								<Select
-									value={formData?.communicationResponse}
-									options={[
-										{ label: 'Answered', value: 'answered' },
-										{ label: 'Not Answered', value: 'not_answered' },
-										{ label: 'Wrong Number', value: 'wrong_number' },
-										{ label: 'Invalid Number', value: 'invalid_number' },
-										{ label: 'Not Reachable', value: 'not_reachable' },
-										{ label: 'Busy', value: 'Busy' },
-										{ label: 'Does not exist', value: 'Does not exist' },
-										{
-											label : 'Does not belong to this user',
-											value : 'Does not belong to this user',
-										},
-										{
-											label : 'Belongs to the user who has left the company',
-											value : 'Belongs to the user who has left the company',
-										},
-
-									]}
-									onChange={(val) => setFormData((prev) => ({ ...prev, communicationResponse: val }))}
+								<SelectController
+									control={control}
+									name="communicationResponse"
+									options={communicationOptions}
+									rules={{ required: true }}
 								/>
+								<div className={styles.error}>{errors?.communicationResponse ? '*required' : null}</div>
 							</div>
 						)
 						: (
 							<div>
 								<div className={styles.label}>Reminder Date and Time</div>
-								<Datepicker
+								<DatepickerController
 									placeholder="Select Date"
 									showTimeSelect
 									dateFormat="dd/MM/yyyy HH:mm"
 									name="reminderDateTime"
-									onChange={(val) => setFormData((p) => ({ ...p, reminderDateTime: val }))}
-									value={formData?.reminderDateTime}
 									isPreviousDaysAllowed
+									control={control}
+									rules={{ required: true }}
 								/>
+								<div className={styles.error}>{errors?.reminderDateTime ? '*required' : null}</div>
 							</div>
 						)}
 				</div>
@@ -129,30 +139,32 @@ function ActivityLog({
 					<div className={styles.input}>
 						<div>
 							<div className={styles.label}>Start Date and Time</div>
-							<Datepicker
+							<DatepickerController
 								placeholder="Select Date"
 								showTimeSelect
 								dateFormat="dd/MM/yyyy HH:mm"
 								name="startDateTime"
-								onChange={(val) => setFormData((p) => ({ ...p, startDateTime: val }))}
-								value={formData?.startDateTime}
 								isPreviousDaysAllowed
+								control={control}
+								rules={{ required: true }}
 							/>
+							<div className={styles.error}>{errors?.startDateTime ? '*required' : null}</div>
 						</div>
 					</div>
 
 					<div className={styles.input}>
 						<div>
 							<div className={styles.label}>End Date and Time</div>
-							<Datepicker
+							<DatepickerController
 								placeholder="Select Date"
 								showTimeSelect
 								dateFormat="dd/MM/yyyy HH:mm"
 								name="endDateTime"
-								onChange={(val) => setFormData((p) => ({ ...p, endDateTime: val }))}
-								value={formData?.endDateTime}
 								isPreviousDaysAllowed
+								control={control}
+								rules={{ required: true }}
 							/>
+							<div className={styles.error}>{errors?.endDateTime ? '*required' : null}</div>
 						</div>
 					</div>
 				</div>
@@ -161,25 +173,24 @@ function ActivityLog({
 			<div className={styles.single_form_row}>
 				<div className={styles.input}>
 					<div className={styles.label}>Primary Attendee from Organization</div>
-					<AsyncSelect
+					<AsyncSelectController
 						name="primaryAttendeeFromOrg"
 						asyncKey="list_organization_users"
 						placeholder="Type to search..."
 						valueKey="id"
 						initialCall={false}
+						control={control}
 						params={{
 							filters: {
-								status          : 'active',
-								organization_id : 'demoId',
+								status: 'active',
+								organization_id: 'demoId',
 							},
 						}}
-						onChange={(value) => {
-							setFormData((p) => ({ ...p, primaryAttendeeFromOrg: value }));
-						}}
-						value={formData?.primaryAttendeeFromOrg}
 						size="md"
 						isClearable
+						rules={{ required: true }}
 					/>
+					<div className={styles.error}>{errors?.primaryAttendeeFromOrg ? '*required' : null}</div>
 				</div>
 
 				<div className={styles.input}>
@@ -187,22 +198,19 @@ function ActivityLog({
 						Additional Attendee from Organization
 						<span style={{ color: '#f68b21' }}>(Optional)</span>
 					</div>
-					<AsyncSelect
+					<AsyncSelectController
 						name="additionalAttendeeFromOrg"
 						asyncKey="list_organization_users"
 						placeholder="Type to search..."
 						valueKey="id"
 						initialCall={false}
+						control={control}
 						params={{
 							filters: {
-								status          : 'active',
-								organization_id : 'demoId',
+								status: 'active',
+								organization_id: 'demoId',
 							},
 						}}
-						onChange={(value) => {
-							setFormData((p) => ({ ...p, additionalAttendeeFromOrg: value }));
-						}}
-						value={formData?.additionalAttendeeFromOrg}
 						size="md"
 						isClearable
 					/>
@@ -219,8 +227,8 @@ function ActivityLog({
 						remove={remove}
 						control={control}
 						setValue={setValue}
-						register={register}
 						watch={watch}
+						errors={errors}
 					/>
 				</div>
 			))}
@@ -244,13 +252,12 @@ function ActivityLog({
 					Add Summary
 					<span style={{ color: '#f68b21' }}>(Optional)</span>
 				</div>
-				<Textarea
+				<TextAreaController
 					name="summary"
 					size="md"
+					control={control}
 					placeholder="Enter Remarks..."
 					style={{ height: '100px' }}
-					value={formData?.summary}
-					onChange={(value) => setFormData((p) => ({ ...p, summary: value }))}
 				/>
 			</div>
 		</div>

@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { DatepickerController, InputController, SelectController, TextAreaController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
@@ -8,8 +7,12 @@ import React, { useEffect } from 'react';
 import styles from './styles.module.css';
 
 function FeedbackComponent({
-	feedbackData = {}, remove = () => {}, index = 0, control,
-	setValue = () => {}, register = () => {},
+	feedbackData = {},
+	remove = () => {},
+	index = 0,
+	control,
+	setValue = () => {},
+	errors,
 }) {
 	const currencyOptions = Object.values(GLOBAL_CONSTANTS.currency_code).map((item) => ({
 		label : item,
@@ -45,15 +48,17 @@ function FeedbackComponent({
 				<div>Select Feedback Type</div>
 				<SelectController
 					control={control}
-					{...register(`feedback.${index}.feedback_type`)}
+					name={`feedback.${index}.feedback_type`}
+					rules={{ required: true }}
 					options={[
 						{ label: 'General Feedback', value: 'general_feedback' },
 						{ label: 'Credit Controller Feedback', value: 'credit_controller_feedback' },
 					]}
-					onChange={(val) => {
-						setValue('feedback_type', val);
-					}}
 				/>
+				<div className={styles.errors}>
+					{errors?.feedback?.[index]?.feedback_type
+						? '*required' : null}
+				</div>
 			</div>
 
 			<div className={styles.feedback_data}>
@@ -66,15 +71,17 @@ function FeedbackComponent({
 									<SelectController
 										control={control}
 										placeholder="Positive/Negative"
-										{...register(`feedback.${index}.call_feedback`)}
+										rules={{ required: true }}
+										name={`feedback.${index}.call_feedback`}
 										options={[
 											{ label: 'Positive', value: 'positive' },
 											{ label: 'Negative', value: 'negative' },
 										]}
-										onChange={(val) => {
-											setValue('call_feedback', val);
-										}}
 									/>
+								</div>
+								<div className={styles.errors}>
+									{errors?.feedback?.[index]?.call_feedback
+										? '*required' : null}
 								</div>
 							</div>
 							<div className={styles.single_input_section}>
@@ -82,11 +89,13 @@ function FeedbackComponent({
 								<div>
 									<DatepickerController
 										control={control}
-										{...register(`feedback.${index}.reminder_date`)}
-										onChange={(val) => {
-											setValue('reminder_date', val);
-										}}
+										rules={{ required: true }}
+										name={`feedback.${index}.reminder_date`}
 									/>
+								</div>
+								<div className={styles.errors}>
+									{errors?.feedback?.[index]?.reminder_date
+										? '*required' : null}
 								</div>
 							</div>
 
@@ -96,15 +105,17 @@ function FeedbackComponent({
 									<SelectController
 										control={control}
 										placeholder="Yes/No"
-										{...register(`feedback.${index}.payment_commitment`)}
+										name={`feedback.${index}.payment_commitment`}
+										rules={{ required: true }}
 										options={[
 											{ label: 'Yes', value: 'yes' },
 											{ label: 'No', value: 'no' },
 										]}
-										onChange={(val) => {
-											setValue('payment_commitment', val);
-										}}
 									/>
+								</div>
+								<div className={styles.errors}>
+									{errors?.feedback?.[index]?.payment_commitment
+										? '*required' : null}
 								</div>
 							</div>
 
@@ -113,25 +124,39 @@ function FeedbackComponent({
 									<div className={styles.single_input_section}>
 										<h4>Commitment amount</h4>
 										<div style={{ display: 'flex' }}>
-											<SelectController
-												control={control}
-												placeholder="Currency"
-												{...register(`feedback.${index}.currency`)}
-												options={currencyOptions}
-												onChange={(val) => {
-													setValue('currency', val);
-												}}
-												style={{ width: '100px', marginRight: '8px' }}
-											/>
-											<InputController
-												control={control}
-												type="number"
-												{...register(`feedback.${index}.price`)}
-												onChange={(val) => {
-													setValue('price', val);
-												}}
-												style={{ width: '180px', marginRight: '8px' }}
-											/>
+											<div>
+												<SelectController
+													control={control}
+													placeholder="Currency"
+													name={`feedback.${index}.currency`}
+													rules={{ required: true }}
+													options={currencyOptions}
+													onChange={(val) => {
+														setValue('currency', val);
+													}}
+													style={{ width: '100px', marginRight: '8px' }}
+												/>
+												<div className={styles.errors}>
+													{errors?.feedback?.[index]?.currency
+														? '*required' : null}
+												</div>
+											</div>
+											<div>
+												<InputController
+													control={control}
+													type="number"
+													name={`feedback.${index}.price`}
+													rules={{ required: true }}
+													onChange={(val) => {
+														setValue('price', val);
+													}}
+													style={{ width: '180px', marginRight: '8px' }}
+												/>
+												<div className={styles.errors}>
+													{errors?.feedback?.[index]?.price
+														? '*required' : null}
+												</div>
+											</div>
 
 										</div>
 
@@ -141,29 +166,31 @@ function FeedbackComponent({
 										<div>
 											<DatepickerController
 												control={control}
-												{...register(`feedback.${index}.commitment_date`)}
-												onChange={(val) => {
-													setValue('commitment_date', val);
-												}}
+												name={`feedback.${index}.commitment_date`}
+												rules={{ required: true }}
 											/>
+										</div>
+										<div className={styles.errors}>
+											{errors?.feedback?.[index]?.commitment_date
+												? '*required' : null}
 										</div>
 									</div>
 								</div>
-
 							)}
-
 						</div>
 						<div>
 							<h4>Obstacles Faced</h4>
 							<TextAreaController
 								control={control}
-								{...register(`feedback.${index}.obstacle_faced`)}
+								name={`feedback.${index}.obstacle_faced`}
 								size="md"
 								style={{ height: '80px' }}
-								onChange={(e) => {
-									setValue(`feedback.${index}.obstacle_faced`, e);
-								}}
+								rules={{ required: true }}
 							/>
+							<div className={styles.errors}>
+								{errors?.feedback?.[index]?.obstacle_faced
+									? '*required' : null}
+							</div>
 						</div>
 					</div>
 				)}
@@ -172,13 +199,15 @@ function FeedbackComponent({
 						<h4>General Feedback</h4>
 						<TextAreaController
 							control={control}
-							{...register(`feedback.${index}.general_feedback_text`)}
+							name={`feedback.${index}.general_feedback_text`}
 							size="md"
 							style={{ height: '80px' }}
-							onChange={(e) => {
-								setValue(`feedback.${index}.general_feedback_text`, e);
-							}}
+							rules={{ required: true }}
 						/>
+						<div className={styles.errors}>
+							{errors?.feedback?.[index]?.general_feedback_text
+								? '*required' : null}
+						</div>
 					</div>
 				)}
 			</div>
