@@ -5,6 +5,20 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
+function RenderSelectLabel({ item = {} }) {
+	return	(
+		<div>
+			<div className={styles.agent_label}>
+				{startCase(item?.name)}
+			</div>
+
+			<div className={styles.lower_label}>
+				{startCase(item?.agent_type)}
+			</div>
+		</div>
+	);
+}
+
 function AddGroupMember({ addGroupMember = () => {} }) {
 	const [agentId, setAgentId] = useState('');
 
@@ -21,6 +35,7 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 			<div className={styles.conversation_title}>
 				Add Group Member
 			</div>
+
 			<div className={styles.container}>
 				<AsyncSelect
 					key={agentId}
@@ -31,17 +46,7 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 					onChange={setAgentId}
 					className={styles.select}
 					isClearable
-					renderLabel={(item) => (
-						<div>
-							<div className={styles.agent_label}>
-								{startCase(item.name)}
-							</div>
-
-							<div className={styles.lower_label}>
-								{startCase(item?.agent_type)}
-							</div>
-						</div>
-					)}
+					renderLabel={(item) => <RenderSelectLabel item={item} />}
 				/>
 
 				<IcMPlusInCircle

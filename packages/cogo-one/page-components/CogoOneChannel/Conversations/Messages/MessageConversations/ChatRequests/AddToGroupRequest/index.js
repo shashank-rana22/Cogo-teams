@@ -2,8 +2,8 @@ import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import useGroupChat from '../../../../../../hooks/useGroupChat';
-import useListPartnerUsers from '../../../../../../hooks/useListPartnerUsers';
+import useGroupChat from '../../../../../../../hooks/useGroupChat';
+import useListPartnerUsers from '../../../../../../../hooks/useListPartnerUsers';
 
 import styles from './styles.module.css';
 
@@ -30,7 +30,7 @@ function AddToGroupRequest({
 
 	return (
 		<div className={styles.approve_req_container}>
-			{filteredMembers.map(
+			{filteredMembers?.map(
 				(user = {}) => (
 					<div
 						className={styles.approve_req}
@@ -38,7 +38,7 @@ function AddToGroupRequest({
 					>
 						<div className={styles.agent_name}>
 							<span>
-								{user.name || 'A agent'}
+								{user?.name || 'A agent'}
 							</span>
 							has requested you to join the group.
 						</div>

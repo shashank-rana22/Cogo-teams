@@ -1,7 +1,7 @@
 import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
 import React from 'react';
 
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../constants/viewTypeMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTypeMapping';
 
 import styles from './styles.module.css';
 

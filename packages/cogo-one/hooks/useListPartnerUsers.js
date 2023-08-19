@@ -7,8 +7,6 @@ const getParams = ({ activeMessageCard }) => {
 		filters: {
 			agent_id: [...(group_members || []), ...(requested_group_members || [])],
 		},
-		rm_mappings_data_required : false,
-		partner_data_required     : false,
 	};
 };
 
