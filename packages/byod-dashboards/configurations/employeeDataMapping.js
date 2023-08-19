@@ -35,15 +35,17 @@ export const EMPLOYEE_DEVICE_DETAILS = [
 	{
 		label : 'Invoice Date',
 		key   : 'invoice_date',
+		type  : 'date',
 	},
 	{
 		label : 'Vendor Name',
 		key   : 'vendor_name',
 	},
 	{
-		label : 'Reimbursement Amount',
-		key   : 'reimbursement_amount',
-		type  : 'amount',
+		label  : 'Reimbursement Amount',
+		key    : 'reimbursement_amount',
+		prefix : 'INR',
+		type   : 'amount',
 	},
 ];
 export const EMPLOYEE_ADDON_DETAILS = [

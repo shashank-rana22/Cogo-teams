@@ -31,6 +31,7 @@ const useCreateDepartmentRole = ({
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
+		return null;
 	};
 
 	return {

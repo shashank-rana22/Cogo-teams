@@ -2,7 +2,7 @@ import { Input, Pagination, Tabs, TabPanel } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import useGetEmployees from '../../hooks/useGetEmployees';
+import useGetEmployees from '../../hooks/useListEmployeeDeviceDetails';
 import { ADMIN_TAB_OPTIONS } from '../../utils/constant';
 
 import StyledTable from './StyledTable';

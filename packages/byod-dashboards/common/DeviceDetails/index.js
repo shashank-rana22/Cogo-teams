@@ -12,11 +12,18 @@ const DEFAULT_VALUE = 1;
 
 function DeviceDetails({ data = {} }) {
 	const { employee_device_details = {} } = data || {};
-	const { device_details = [], invoice_url } = employee_device_details || [];
-	const details = device_details[device_details.length - DEFAULT_VALUE] || [];
+	const { device_details = [], invoice_url } = employee_device_details || {};
+	const details = device_details[device_details.length - DEFAULT_VALUE] || {};
 
 	const onClickOpen = (url) => {
 		window.open(url, '_blank');
+	};
+
+	const checkType = (val) => {
+		if (val.type === 'date') {
+			return details?.[val.key]?.split(' ')[GLOBAL_CONSTANTS.zeroth_index] || '-';
+		}
+		return startCase(details?.[val.key]) || '-';
 	};
 
 	return (
@@ -24,7 +31,7 @@ function DeviceDetails({ data = {} }) {
 			<div className={styles.heading}>Device Details :</div>
 			<div className={styles.item_container}>
 
-				{EMPLOYEE_DEVICE_DETAILS.map((val) => (
+				{(EMPLOYEE_DEVICE_DETAILS || []).map((val) => (
 					<div className={styles.detail} key={val.key}>
 						<div className={styles.label}>
 							{val.label}
@@ -39,7 +46,7 @@ function DeviceDetails({ data = {} }) {
 								amount   : details?.[val.key],
 								currency : GLOBAL_CONSTANTS.currency_code.INR,
 							})
-								: startCase(details?.[val.key]) || '-'}
+								: checkType(val)}
 						</div>
 					</div>
 				))}

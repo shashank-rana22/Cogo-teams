@@ -1,5 +1,4 @@
 import { Button, Modal, Textarea, Toast, Tags } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowBack } from '@cogoport/icons-react';
@@ -17,15 +16,12 @@ import Spinner from '../Spinner';
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 const DEFAULT_FIXED_VALUE = 2;
 const DEFAULT_VALUE = 1;
 
 function EmployeeDetails() {
 	const router = useRouter();
 
-	const profile = useSelector((state) => state.profile || {});
 	const { query } = useSelector(({ general }) => ({ query: general?.query || {} }));
 
 	const { id:empId = '', view_type } = query;
@@ -34,13 +30,9 @@ function EmployeeDetails() {
 	const [rejectionReason, setRejectionReason] = useState('');
 	const [refetchReimbursementList, setRefetchReimbursementList] = useState(true);
 
-	const { auth_role_data } = profile || {};
-
-	const { id : adminId } = auth_role_data;
-
-	const isAdmin = adminId === geo.uuid.hrbp_admin_role_id;
 	const id = router.query;
 	const { id : employee_id } = id || {};
+
 	const { data, loading, refetch } = useGetEmployeeDetails(employee_id);
 	const { updateDetail, loading : detailLoading } = useUpdateDetail(refetch);
 
@@ -82,15 +74,16 @@ function EmployeeDetails() {
 	}
 
 	function GetButtonType() {
-		if (isAdmin && status === 'active') {
+		if (view_type === 'admin_view' && status === 'active') {
 			return <HandleTags text="Verification pending from HRBP" color="blue" />;
 		}
 
-		if (['rejected_by_hr', 'rejected_by_admin'].includes(status)) {
+		if (['rejected'].includes(status)) {
 			return <HandleTags text={startCase(status)} color="red" />;
 		}
 
-		if (((isAdmin && status === 'approved') || (!isAdmin && ['approved', 'verified'].includes(status)))) {
+		if (((view_type === 'admin_view' && status === 'approved')
+		|| (!view_type === 'admin_view' && ['approved', 'verified'].includes(status)))) {
 			return <HandleTags text={startCase(status)} />;
 		}
 
@@ -116,7 +109,7 @@ function EmployeeDetails() {
 					size="lg"
 					style={{ marginLeft: 12 }}
 				>
-					{isAdmin ? 'Approve' : 'Verify'}
+					{(view_type === 'admin_view') ? 'Approve' : 'Verify'}
 				</Button>
 			</div>
 		);
@@ -157,9 +150,9 @@ function EmployeeDetails() {
 					height={25}
 				/>
 				<div className={styles.title}>
-					{isAdmin ? 'Admin' : 'HR Business Partner'}
+					{view_type === 'admin_view' ? 'Admin' : 'HR Business Partner'}
 					{' '}
-					Dashboard
+					Approval Dashboard
 				</div>
 			</div>
 

@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import EmployeeData from '../../common/EmployeeData';
 import Spinner from '../../common/Spinner';
 import useCreateInvoice from '../../hooks/useCreateDeviceDetail';
-import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
+import useGetEmployees from '../../hooks/useGetEmployees';
 import { VENDOR_NAME_OPTIONS } from '../../utils/constant';
 
 import styles from './styles.module.css';
@@ -30,7 +30,7 @@ function EmployeeDashboard() {
 		reset,
 	} = useForm();
 
-	const { data : employeeData, loading : employeeDataLoading } = useGetEmployeeDetails(user_id, true);
+	const { data : employeeData, loading : employeeDataLoading } = useGetEmployees(user_id);
 	const { createDeviceDetail, loading } = useCreateInvoice({ setRefetchReimbursementList, reset });
 
 	const formValues = watch();

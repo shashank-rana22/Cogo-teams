@@ -8,9 +8,12 @@ import styles from './styles.module.css';
 import useEmployeeData from './useEmployeeData';
 
 function EmployeeData({ data = {}, refetchReimbursementList = false, setRefetchReimbursementList = () => {} }) {
-	const { employee_details: detail } = data || {};
+	const { employee_details, detail } = data || {};
+
+	const finalDetail = employee_details || detail || {};
+
 	const { loading, NEW_LIST, columns } = useEmployeeData({
-		detail,
+		detail: finalDetail,
 		refetchReimbursementList,
 		setRefetchReimbursementList,
 	});
@@ -26,7 +29,7 @@ function EmployeeData({ data = {}, refetchReimbursementList = false, setRefetchR
 						</div>
 						<div className={styles.employee_detail}>
 							{(val.key === 'hrbp'
-								? detail?.[val.key]?.userEmail : startCase(detail?.[val.key])) || '-'}
+								? finalDetail?.[val.key]?.userEmail : startCase(finalDetail?.[val.key])) || '-'}
 						</div>
 					</div>
 				))}
