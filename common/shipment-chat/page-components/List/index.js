@@ -14,6 +14,12 @@ import ListBody from './ListBody';
 import ListHeader from './ListHeader';
 import styles from './styles.module.css';
 
+const STATUS_MAPPING = {
+	inactive : 'inactive',
+	active   : 'active',
+	recent   : 'active',
+};
+
 function List({
 	setShow = () => { },
 	messageContentArr = [],
@@ -37,10 +43,11 @@ function List({
 	const getListPayload = {
 		page,
 		filters: {
-			subscribe_user_id: user_id,
-			status,
+			subscribe_user_id : user_id,
+			status            : STATUS_MAPPING[status],
 			q,
 		},
+		sort_by: status === 'recent' ? 'created_at' : undefined,
 	};
 	const states = { list, setList };
 	const { listData, total_page, loading } = useGetShipmentChatList({ payload: getListPayload, states });

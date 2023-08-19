@@ -5,6 +5,21 @@ import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
+const TAB_MAPPING = [
+	{
+		label : 'Recent',
+		name  : 'recent',
+	},
+	{
+		label : 'Active',
+		name  : 'active',
+	},
+	{
+		label : 'Inactive',
+		name  : 'inactive',
+	},
+];
+
 function ListHeader({
 	status = '',
 	setStatus = () => {},
@@ -47,8 +62,11 @@ function ListHeader({
 			</div>
 
 			<Tabs activeTab={status} onChange={setStatus} themeType="secondary" fullWidth>
-				<TabPanel name="active" title="Active" />
-				<TabPanel name="inactive" title="Inactive" />
+				{(TAB_MAPPING || []).map((item) => {
+					const { name = '', label = '' } = item;
+
+					return <TabPanel key={name} name={name} title={label} />;
+				})}
 			</Tabs>
 		</div>
 	);
