@@ -9,8 +9,9 @@ function AcceptOfferModal({
 	showAcceptModal = false,
 	id = '',
 	getEmployeeDetails = () => {},
+	document_url = '',
 }) {
-	const { updateData } = useUpdateOfferLetter({ id, setShowAcceptModal, getEmployeeDetails });
+	const { updateData } = useUpdateOfferLetter({ id, setShowAcceptModal, getEmployeeDetails, document_url });
 
 	if (!showAcceptModal) return null;
 

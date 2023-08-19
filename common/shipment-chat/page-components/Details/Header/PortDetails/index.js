@@ -1,11 +1,10 @@
-import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
+import LocationDetails from './LocationDetails';
 import styles from './styles.module.css';
 
-function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
+function PortDetails({ data = {}, primary_service = {} }) {
 	const {
 		origin_main_port = {},
 		destination_main_port = {},
@@ -17,68 +16,19 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 		return null;
 	}
 
-	const handleLocationDetails = (location, icdPortInfo) => (
-		<>
-			<div className={styles.port_code}>
-				{location?.port_code || location?.postal_code ? (
-					<div className={styles.code}>
-						(
-						{location?.port_code || location?.postal_code}
-						)
-					</div>
-				) : (
-					<div style={{ height: '20px' }} />
-				)}
-
-				<div className={styles.country}>
-					{location?.country?.name}
-				</div>
-			</div>
-
-			<Tooltip
-				placement="bottom"
-				theme="light"
-				content={(
-					<div>
-						<div style={{ fontSize: '10px' }}>{location?.display_name}</div>
-
-						{!isEmpty(icdPortInfo) ? <div className={styles.icd}>{icdPortInfo?.name}</div> : null}
-					</div>
-				)}
-			>
-				<div className={styles.value}>{location?.name}</div>
-			</Tooltip>
-
-		</>
-	);
-
-	const renderLocation = () => (
-		<>
-			<div className={styles.flex_row_origin}>
-				{handleLocationDetails(origin_port, origin_main_port)}
-			</div>
-
-			{destination_port ? (
-				<div className={styles.icon_wrapper}>
-					<IcMPortArrow style={{ width: '1.2em', height: '1.2em' }} />
-				</div>
-			) : null}
-
-			{destination_port ? (
-				<div className={styles.flex_row_destination}>
-					{handleLocationDetails(destination_port, destination_main_port)}
-				</div>
-			) : null}
-		</>
-	);
-
 	return (
 		<div className={styles.container}>
-			{isShow ? (
-				<div className={styles.icons_and_service} />
-			) : null}
+			<LocationDetails location={origin_port} icdPortInfo={origin_main_port} />
 
-			{renderLocation()}
+			{destination_port ? (
+				<>
+					<div className={styles.icon_wrapper}>
+						<IcMPortArrow width="1.2em" height="1.2em" />
+					</div>
+
+					<LocationDetails location={destination_port} icdPortInfo={destination_main_port} />
+				</>
+			) : null}
 		</div>
 	);
 }

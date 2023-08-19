@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
@@ -17,32 +18,35 @@ function HeaderBar({
 	agentTimeline = () => {},
 	preferenceLoading = false,
 	timelineLoading = false,
+	userId = '',
 }) {
 	const {
-		flash_revert_logs = false,
-		toggle_agent_status = false,
+		flash_revert_logs : flashRevertLogs = false,
+		punch_in_out : isPunchPresent = false,
 	} = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions || {};
 
 	const [timePeriodValue, setTimePeriodValue] = useState('day');
-
-	const isPunchPresent = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out;
 
 	const {
 		AgentStatsLoading = false,
 		AgentStatsData = {},
 	} = useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue, viewType });
+	const configurationsToBeShown = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.configurations_to_be_shown;
 
 	return (
 		<>
 			<div className={styles.container}>
-				{flash_revert_logs ? (
+				{flashRevertLogs ? (
 					<FlashRevertLogs />
 				) : null}
-				{toggle_agent_status ? (
+
+				{!isEmpty(configurationsToBeShown) && (
 					<AgentStatusToggle
 						firestore={firestore}
+						configurationsToBeShown={configurationsToBeShown}
+						viewType={viewType}
 					/>
-				) : null}
+				)}
 			</div>
 			{isPunchPresent && (
 				<PunchInOut
@@ -57,6 +61,8 @@ function HeaderBar({
 					AgentStatsData={AgentStatsData}
 					timePeriodValue={timePeriodValue}
 					setTimePeriodValue={setTimePeriodValue}
+					firestore={firestore}
+					userId={userId}
 				/>
 			)}
 		</>

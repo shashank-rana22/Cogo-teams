@@ -21,6 +21,7 @@ const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', use
 	service        : 'user',
 	service_id     : userId,
 	sender         : payload?.sender,
+	source         : 'CogoOne:AdminPlatform',
 });
 
 const API_MAPPING = {

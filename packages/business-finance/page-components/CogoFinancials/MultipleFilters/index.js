@@ -15,9 +15,9 @@ function MultipleFilters({ filter = {}, setFilter = () => {}, entity = '' }) {
 				visible={visible}
 				render={(
 					<RenderFilters
-						filter={filter}
 						setFilter={setFilter}
 						entity={entity}
+						setVisible={setVisible}
 					/>
 				)}
 				placement="bottom"
