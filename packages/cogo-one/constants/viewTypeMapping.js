@@ -143,7 +143,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
-			show_shipment_reminder      : true,
+			show_shipment_reminder      : false,
 		},
 	},
 	sales_admin: {
@@ -184,7 +184,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
-			show_shipment_reminder      : true,
+			show_shipment_reminder      : false,
 		},
 	},
 	support: {
@@ -310,7 +310,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
-			show_shipment_reminder      : true,
+			show_shipment_reminder      : false,
 		},
 	},
 	supply_admin: {
@@ -353,7 +353,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
-			show_shipment_reminder      : true,
+			show_shipment_reminder      : false,
 		},
 	},
 	shipment_specialist: {
@@ -548,7 +548,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_shipments_home_page    : false,
 			customer_org_users          : false,
 			convert_account_to_cp       : false,
-			show_shipment_reminder      : true,
+			show_shipment_reminder      : false,
 		},
 	},
 };
