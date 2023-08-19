@@ -16,7 +16,7 @@ const useGetOrganizationComLogs = ({ orgData = {}, communication_type = 'meeting
 				filters: {
 					communication_type,
 					organization_id    : selfOrganizationId,
-					call_data_required : true,
+					call_data_required : communication_type === 'call',
 				},
 				page_limit,
 				page,

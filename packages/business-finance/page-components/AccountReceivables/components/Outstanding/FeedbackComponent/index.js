@@ -8,10 +8,10 @@ import styles from './styles.module.css';
 
 function FeedbackComponent({
 	feedbackData = {},
-	remove = () => {},
+	remove = () => { },
 	index = 0,
 	control,
-	setValue = () => {},
+	setValue = () => { },
 	errors,
 }) {
 	const currencyOptions = Object.values(GLOBAL_CONSTANTS.currency_code).map((item) => ({
@@ -99,7 +99,7 @@ function FeedbackComponent({
 								</div>
 							</div>
 
-							<div className={styles.single_input_section} style={{ width: '180px' }}>
+							<div style={{ width: '180px' }}>
 								<h4>Payment Commitment</h4>
 								<div>
 									<SelectController
@@ -121,7 +121,7 @@ function FeedbackComponent({
 
 							{feedbackData?.payment_commitment === 'yes' && (
 								<div style={{ display: 'flex' }}>
-									<div className={styles.single_input_section}>
+									<div>
 										<h4>Commitment amount</h4>
 										<div style={{ display: 'flex' }}>
 											<div>
@@ -131,9 +131,6 @@ function FeedbackComponent({
 													name={`feedback.${index}.currency`}
 													rules={{ required: true }}
 													options={currencyOptions}
-													onChange={(val) => {
-														setValue('currency', val);
-													}}
 													style={{ width: '100px', marginRight: '8px' }}
 												/>
 												<div className={styles.errors}>
@@ -147,9 +144,6 @@ function FeedbackComponent({
 													type="number"
 													name={`feedback.${index}.price`}
 													rules={{ required: true }}
-													onChange={(val) => {
-														setValue('price', val);
-													}}
 													style={{ width: '180px', marginRight: '8px' }}
 												/>
 												<div className={styles.errors}>
@@ -161,7 +155,7 @@ function FeedbackComponent({
 										</div>
 
 									</div>
-									<div className={styles.single_input_section}>
+									<div className={styles.commitmentdate}>
 										<h4>Commitment date</h4>
 										<div>
 											<DatepickerController

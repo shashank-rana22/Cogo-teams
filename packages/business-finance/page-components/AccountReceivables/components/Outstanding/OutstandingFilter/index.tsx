@@ -163,20 +163,25 @@ function Filters({
 					/>
 				</div>
 				<div className={styles.flex_wrap}>
-					<div className={styles.call}>
-						<div
-							style={{ display: 'flex', cursor: 'pointer' }}
-							onClick={() => setShowCallPriority(true)}
-							role="presentation"
-						>
-							<div className={styles.calllabel}>
-								{list?.[GLOBAL_CONSTANTS.zeroth_index]?.businessName}
-							</div>
-							<div className={styles.callpriority}>
-								Call Priority
+					{orderBy?.label === 'Call Priority' ? (
+						<div className={styles.call}>
+							<div
+								style={{ display: 'flex', cursor: 'pointer' }}
+								onClick={() => setShowCallPriority(true)}
+								role="presentation"
+							>
+								<div className={styles.calllabel}>
+									{
+										list?.[GLOBAL_CONSTANTS.zeroth_index]
+											?.businessName
+									}
+								</div>
+								<div className={styles.callpriority}>
+									Call Priority
+								</div>
 							</div>
 						</div>
-					</div>
+					) : null}
 					<div className={styles.sort_container}>
 						<Popover
 							placement="bottom"

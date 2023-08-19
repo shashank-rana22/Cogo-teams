@@ -1,15 +1,15 @@
 import { Button, Modal } from '@cogoport/components';
 import { useFieldArray, useForm } from '@cogoport/forms';
-import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import useCreateCommunicationLog from '../../../hooks/useCreateCommunicationLog';
 import ActivityLog from '../ActivityLog';
 
-function LogModal({ showLog = false, setShowLog = () => { }, organizationId = '' }) {
-	const {
-		profile,
-	} = useSelector((state) => state);
-
+function LogModal({
+	showLog = false, setShowLog = () => {},
+	organizationId = '', type = 'call', refetch = () => {},
+}) {
 	const {
 		control,
 		watch,
@@ -29,44 +29,18 @@ function LogModal({ showLog = false, setShowLog = () => { }, organizationId = ''
 		setShowLog(false);
 	};
 
+	const { createCommunicationLog, loading } = useCreateCommunicationLog({
+		formData,
+		organizationId,
+		setShowLog,
+		reset,
+		refetch,
+	});
+
 	const onSubmit = () => {
-		const {
-			reminder, reminderDateTime, reminderType, attendee, title:formTitle,
-			summary, feedback: formFeedback, primaryAttendeeFromOrg, additionalAttendeeFromOrg,
-		} = formData || {};
-
-		const payload = {
-			reminder_date         : reminderDateTime,
-			is_reminder           : reminder === 'reminder',
-			communication_type    : reminderType,
-			agent_id              : attendee,
-			title                 : formTitle,
-			user_id               : primaryAttendeeFromOrg,
-			additional_user_ids   : additionalAttendeeFromOrg,
-			communication_summary : summary,
-			organization_id       : organizationId,
-			partner_id            : profile?.partner?.id,
-			feedback              : formFeedback?.map((singleFeedback) => ({
-				feedback_type : singleFeedback?.feedback_type,
-				feedback_data : [
-					{
-						general_feedback: singleFeedback?.feedback_type === 'general_feedback'
-							? singleFeedback?.general_feedback_text : undefined,
-						call_feedback      : singleFeedback?.call_feedback || undefined,
-						payment_commitment : singleFeedback?.payment_commitment || undefined,
-						obstacle_faced     : singleFeedback?.obstacle_faced || undefined,
-						reminder_date      : singleFeedback?.reminder_date || undefined,
-						commitment_date    : singleFeedback?.commitment_date || undefined,
-						currency           : singleFeedback?.currency || undefined,
-						price              : singleFeedback?.price || undefined,
-					},
-				],
-			})),
-
-		};
-		console.log({ payload });
-		setShowLog(false);
-		reset();
+		if (isEmpty(errors)) {
+			createCommunicationLog();
+		}
 	};
 
 	return (
@@ -83,10 +57,16 @@ function LogModal({ showLog = false, setShowLog = () => { }, organizationId = ''
 					watch={watch}
 					errors={errors}
 					organizationId={organizationId}
+					type={type}
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={handleSubmit(onSubmit)}>Add Activity Log</Button>
+				<Button
+					onClick={handleSubmit(onSubmit)}
+					disabled={loading}
+				>
+					Add Activity Log
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

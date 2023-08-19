@@ -42,9 +42,9 @@ const callConfig = [
 		accessor : (item) => (
 			<div className={styles.title}>
 				{item?.communication_start_time ? formatDate({
-					date       : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					date       : item.communication_start_time,
 					formatType : 'date',
-					dateFormat : item.communication_start_time,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				}) : '-'}
 			</div>
 		),

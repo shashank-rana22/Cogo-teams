@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import meetingColumns from '../../../../../configs/meetingConfig';
 import useGetOrganizationComLogs from '../../../../../hooks/useGetOrganizationComLogs';
 import LogModal from '../../../LogModal';
 import Table from '../Table';
@@ -19,7 +20,6 @@ function Meeting({ orgData = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.buttons}>
-				<Button themeType="secondary">Show Logs</Button>
 				<Button
 					themeType="primary"
 					className={styles.feedback}
@@ -28,13 +28,20 @@ function Meeting({ orgData = {} }) {
 					Add Meeting
 				</Button>
 			</div>
-			<LogModal showLog={showLog} setShowLog={setShowLog} />
+			<LogModal
+				showLog={showLog}
+				setShowLog={setShowLog}
+				organizationId={orgData?.selfOrganizationId}
+				type="meeting"
+				refetch={refetch}
+			/>
 			<Table
 				loading={loading}
 				data={data}
 				refetch={refetch}
 				setFilters={setFilters}
 				filters={filters}
+				config={meetingColumns}
 			/>
 		</div>
 	);

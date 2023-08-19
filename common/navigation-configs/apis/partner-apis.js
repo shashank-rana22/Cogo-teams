@@ -8688,6 +8688,11 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
+			api          : 'create_organization_communication_log',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'get_sales_report_download_outstanding_list',
 			access_type : 'private',
 			module      : 'outstanding',

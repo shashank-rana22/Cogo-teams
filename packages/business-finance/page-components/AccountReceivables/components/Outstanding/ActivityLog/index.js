@@ -49,13 +49,14 @@ function ActivityLog({
 	setValue = () => { },
 	errors = {},
 	watch,
+	type,
 	organizationId = '',
 }) {
 	return (
 		<div>
 			<CheckboxController
 				label="Reminder?"
-				value="reminder"
+				value={false}
 				disabled={false}
 				name="reminder"
 				control={control}
@@ -67,7 +68,7 @@ function ActivityLog({
 						options={callOptions}
 						name="reminderType"
 						control={control}
-						value="call"
+						value={type}
 					/>
 					<div className={styles.error}>{errors?.reminderType ? '*required' : null}</div>
 				</div>

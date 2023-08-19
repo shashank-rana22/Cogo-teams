@@ -20,7 +20,6 @@ function Call({ orgData = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.buttons}>
-				<Button themeType="secondary">Show Logs</Button>
 				<Button
 					themeType="primary"
 					className={styles.feedback}
@@ -33,6 +32,8 @@ function Call({ orgData = {} }) {
 				showLog={showLog}
 				setShowLog={setShowLog}
 				organizationId={orgData?.selfOrganizationId}
+				type="call"
+				refetch={refetch}
 			/>
 			<Table
 				loading={loading}

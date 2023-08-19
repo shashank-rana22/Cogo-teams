@@ -168,6 +168,11 @@ export const SORTBY_OPTION = [
 		value : 'onAccountPaymentLedgerAmount',
 		name  : 'onAccountPaymentLedgerAmount',
 	},
+	{
+		label : 'Call Priority',
+		value : 'callPriority',
+		name  : 'callPriority',
+	},
 ];
 
 export const IRN_CANCEL_OPTIONS = [
