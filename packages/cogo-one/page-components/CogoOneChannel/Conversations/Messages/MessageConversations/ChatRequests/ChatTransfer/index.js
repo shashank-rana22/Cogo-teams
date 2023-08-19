@@ -1,7 +1,7 @@
 import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
 import React from 'react';
 
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../constants/viewTypeMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTypeMapping';
 
 import styles from './styles.module.css';
 
@@ -43,7 +43,8 @@ function ChatTransfer({
 	return (
 		<div className={styles.approve_req}>
 			<div className={styles.agent_name}>
-				{`${agent_name || 'A agent'} has requested you to transfer chat`}
+				<span>{agent_name || 'A agent'}</span>
+				has requested you to transfer chat.
 			</div>
 
 			<IcCFtick
