@@ -26,9 +26,7 @@
 }
 
 .nav > :last-child {
-	color: rgb(0 0 205);
 	text-align: right;
-	text-decoration: underline;
 	cursor: pointer;
 }
 
