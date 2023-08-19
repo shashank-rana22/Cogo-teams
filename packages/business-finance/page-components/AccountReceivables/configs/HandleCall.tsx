@@ -1,29 +1,26 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
+import { IcMCall } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import LogModal from '../components/Outstanding/LogModal';
 import DialCallModal from '../components/Outstanding/OutstandingList/Communication/DialCallModal';
 
 function HandleCall({ row }) {
 	const [showDialModal, setShowDialModal] = useState(false);
+	const [showLog, setShowLog] = useState(false);
 
 	const onClick = () => setShowDialModal(true);
 
 	return (
 		<div>
-			<Image
-				onClick={onClick}
-				src={GLOBAL_CONSTANTS.image_url.call_icon}
-				alt="call icon"
-				role="presentation"
-				height={35}
-				width={35}
-			/>
+			<IcMCall height={18} width={18} fill="#f68b21" style={{ cursor: 'pointer' }} onClick={onClick} />
 			<DialCallModal
 				setShowDialModal={setShowDialModal}
 				showDialModal={showDialModal}
 				row={row}
+				setShowLog={setShowLog}
 			/>
+
+			<LogModal showLog={showLog} setShowLog={setShowLog} />
 		</div>
 	);
 }

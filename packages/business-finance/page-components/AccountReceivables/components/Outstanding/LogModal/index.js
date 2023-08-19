@@ -1,24 +1,30 @@
 import { Button, Modal } from '@cogoport/components';
+import { useFieldArray, useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
 import ActivityLog from '../ActivityLog';
 
 function LogModal({ showLog = false, setShowLog = () => {} }) {
 	const [formData, setFormData] = useState({});
-	const [feedback, setFeedback] = useState({});
+	const {
+		control,
+		register,
+		watch,
+		setValue,
+	} = useForm();
+	const { append, remove } = useFieldArray({ control, name: 'feedback' });
+	const feedback = watch('feedback');
 
 	const title = formData?.reminder ? 'Add Reminder' : 'Add Activity Log';
 
 	const handleClose = () => {
 		setShowLog(false);
 		setFormData({});
-		setFeedback({});
 	};
 
-	const handleSubmit = () => {
+	const onSubmit = () => {
 		setShowLog(false);
 		setFormData({});
-		setFeedback({});
 	};
 
 	return (
@@ -29,11 +35,16 @@ function LogModal({ showLog = false, setShowLog = () => {} }) {
 					formData={formData}
 					setFormData={setFormData}
 					feedback={feedback}
-					setFeedback={setFeedback}
+					append={append}
+					remove={remove}
+					control={control}
+					setValue={setValue}
+					register={register}
+					watch={watch}
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={handleSubmit}>Add Activity Log</Button>
+				<Button onClick={onSubmit}>Add Activity Log</Button>
 			</Modal.Footer>
 		</Modal>
 	);

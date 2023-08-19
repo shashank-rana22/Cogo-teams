@@ -20,3 +20,8 @@
 	width: 100%;
 	padding: 8px;
 }
+
+.single_input_section {
+	width: 49%;
+	margin: 12px 0;
+}

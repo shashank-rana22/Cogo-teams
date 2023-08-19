@@ -1,5 +1,6 @@
 import { Checkbox, Input, Select, Datepicker, Textarea, Button } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import FeedbackComponent from '../FeedbackComponent';
@@ -7,10 +8,11 @@ import FeedbackComponent from '../FeedbackComponent';
 import styles from './styles.module.css';
 
 // eslint-disable-next-line max-lines-per-function
-function ActivityLog({ formData = {}, setFormData = () => {}, feedback = {}, setFeedback = () => {} }) {
+function ActivityLog({
+	formData = {}, setFormData = () => {}, feedback = [], remove = () => {}, append = () => {},
+	control, setValue = () => {}, register = () => {}, watch,
+}) {
 	const { reminder } = formData || {};
-
-	console.log({ feedback });
 
 	useEffect(() => {
 		if (reminder) {
@@ -26,7 +28,7 @@ function ActivityLog({ formData = {}, setFormData = () => {}, feedback = {}, set
 				reminderDateTime: undefined,
 			}));
 		}
-	}, [reminder, setFormData, setFeedback]);
+	}, [reminder, setFormData]);
 
 	return (
 		<div>
@@ -208,13 +210,17 @@ function ActivityLog({ formData = {}, setFormData = () => {}, feedback = {}, set
 
 			</div>
 
-			{Object.keys(feedback)?.map((index) => (
-				<div style={{ margin: '12px 0px' }} key={index}>
+			{(feedback || []).map((feedbackData, index) => (
+				<div style={{ margin: '12px 0px' }} key={feedbackData?.id}>
 
 					<FeedbackComponent
 						index={index}
-						feedback={feedback}
-						setFeedback={setFeedback}
+						feedbackData={feedbackData}
+						remove={remove}
+						control={control}
+						setValue={setValue}
+						register={register}
+						watch={watch}
 					/>
 				</div>
 			))}
@@ -222,14 +228,14 @@ function ActivityLog({ formData = {}, setFormData = () => {}, feedback = {}, set
 			<div style={{ margin: '12px 0px' }}>
 				<Button
 					themeType="secondary"
-					onClick={() => setFeedback((p) => ({
-						...p,
-						[Object.keys(feedback)?.length]: {
-							feedbackData: [{}],
-						},
-					}))}
+					onClick={() => append({})}
+					className={styles.add_feedback}
 				>
-					+ Add Feedback
+					+ Add
+					{' '}
+					{!isEmpty(feedback) ? 'more' : null}
+					{' '}
+					Feedback
 				</Button>
 			</div>
 

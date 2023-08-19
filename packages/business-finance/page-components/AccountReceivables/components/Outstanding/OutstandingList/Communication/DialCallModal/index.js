@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 const ELEMENTS_TO_BE_DELETED = 1;
 
-function DialCallModal({ showDialModal = false, setShowDialModal = () => {}, row = {} }) {
+function DialCallModal({ showDialModal = false, setShowDialModal = () => {}, row = {}, setShowLog = false }) {
 	const dispatch = useDispatch();
 	const geo = getGeoConstants();
 
@@ -47,6 +47,7 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => {}, row
 			}),
 		);
 		setShowDialModal(false);
+		setShowLog(true);
 	};
 	return (
 		<Modal
