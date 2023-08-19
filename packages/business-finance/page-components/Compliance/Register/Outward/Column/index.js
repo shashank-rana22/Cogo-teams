@@ -1,57 +1,27 @@
-import { Pill, Popover } from '@cogoport/components';
+import { Pill, Popover, Toast, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMOverflowDot, IcMRefresh } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { IcMDownload, IcMOverflowDot, IcMRefresh, IcMInfo, IcMOpenlink } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import { MAPPING_ENABLE_STATUS, MAPPING_FILE_STATUS, MAPPING_FILE_STATUS_COLOR } from '../utils';
+import {
+	MAPPING_ENABLE_STATUS, MAPPING_FILE_STATUS,
+	MAPPING_FILE_STATUS_COLOR, MAPPING_TOOLTIP_DATA_STATUS,
+} from '../utils';
 
+import ContentDotsData from './contentDotsData';
 import styles from './styles.module.css';
 
 const PERCENTAGE_FACTOR = 100;
 const DECIMAL_UPTO_SECOND_PLACE = 2;
-const Column = (refresh, deleteId) => {
-	const { push } = useRouter();
-
-	const contentData = (row) => {
-		const { fileStatus, status, fileUrl, id } = row || {};
-		return (
-			<div>
-				<div
-					className={styles.card_data}
-					onClick={() => {
-						push(
-							`/business-finance/compliance/[active_tab]/view?id=${id}`,
-							`/business-finance/compliance/register/view?id=${id}`,
-						);
-					}}
-					role="presentation"
-				>
-					View
-
-				</div>
-
-				{status === 'DISABLE' ? (
-					<div
-						className={styles.card_data}
-						onClick={() => { deleteId(id); }}
-						role="presentation"
-					>
-						Delete
-					</div>
-				)
-					: fileStatus === 'READY' && <div className={styles.card_data}>Upload</div> }
-
-				<div
-					className={styles.card_data}
-					onClick={() => { window.open(fileUrl, '_blank'); }}
-					role="presentation"
-				>
-					Download
-				</div>
-			</div>
-		);
+const DEFAULT_AMOUNT = 0;
+const STATUS_KEYS = ['PROCESSING', 'UPLOAD_IN_PROGRESS', 'ERROR'];
+const column = (refresh, deleteId, statusId, uploadId) => {
+	const handleErrorReport = (errorReportFile) => {
+		if (errorReportFile !== 'ERROR') {
+			window.open(errorReportFile, '_blank');
+		}
+		Toast.error('Error In File Upload');
 	};
 
 	return [
@@ -60,9 +30,11 @@ const Column = (refresh, deleteId) => {
 			id       : 'fileName',
 			accessor : ({ fileName }) => (
 				fileName &&	(
-					<div className={styles.fileName}>
-						{`${fileName}.XLSX`}
-					</div>
+					<Tooltip placement="top" content={`${fileName}.XLSX`} maxWidth={500}>
+						<div className={styles.fileName}>
+							{`${fileName}.XLSX`}
+						</div>
+					</Tooltip>
 				)
 			),
 		},
@@ -76,7 +48,7 @@ const Column = (refresh, deleteId) => {
 			),
 		},
 		{
-			Header   : <div>GSTIN</div>,
+			Header   : <div style={{ marginLeft: '4px' }}>GSTIN</div>,
 			id       : 'GSTIN',
 			accessor : ({ gstIn }) => (
 				<div className={styles.gstin}>
@@ -85,25 +57,70 @@ const Column = (refresh, deleteId) => {
 			),
 		},
 		{
-			Header   : <div>File Status</div>,
+			Header   : <div style={{ marginLeft: '10px' }}>File Status</div>,
 			id       : 'fileStatus',
-			accessor : ({ fileStatus }) => (
+			accessor : ({ fileStatus, id, ackNumber, errorReportFile }) => (
 				fileStatus && 	(
-					<div>
-						<Pill size="md" color={MAPPING_FILE_STATUS_COLOR[fileStatus]}>
-							{MAPPING_FILE_STATUS[fileStatus]}
-						</Pill>
+					<div style={{ display: 'flex' }}>
+						<div>
+							<Pill size="md" color={MAPPING_FILE_STATUS_COLOR[fileStatus]}>
+								{MAPPING_FILE_STATUS[fileStatus]}
+							</Pill>
+							{fileStatus === 'UPLOAD_IN_PROGRESS' && ackNumber && (
+								<div
+									className={styles.refresh}
+									onClick={() => { statusId(id); }}
+									role="presentation"
+								>
+									<IcMRefresh height="15px" width="15px" />
+								</div>
+							)}
+						</div>
+						<div style={{ marginTop: '7px' }}>
+							{STATUS_KEYS?.includes(fileStatus) ? (
+								<Tooltip
+									placement="top"
+									content={(
+										<div className={styles.tooltip_value_style}>
+											{MAPPING_TOOLTIP_DATA_STATUS[fileStatus]}
+										</div>
+									)}
+								>
+									<IcMInfo height={15} width={15} />
+								</Tooltip>
+							) : '' }
+						</div>
+						{fileStatus === 'UPLOADED' ? (
+							<div
+								className={styles.card_data}
+								onClick={() => {
+									handleErrorReport(errorReportFile);
+								}}
+								role="presentation"
+							>
+								<Tooltip
+									placement="top"
+									content={(
+										<div className={styles.tooltip_value_style}>
+											Download Report
+										</div>
+									)}
+								>
+									<IcMDownload height={15} width={15} className={styles.download_icon} />
+								</Tooltip>
+							</div>
+						) : ''}
 					</div>
 				)
 			),
 		},
 		{
-			Header   : <div>Enable Status</div>,
+			Header   : <div style={{ marginLeft: '6px' }}>Enable Status</div>,
 			id       : 'enableStatus',
 			accessor : ({ status }) => (
 				status && (
 					<div className={styles.enable_status}>
-						<Pill size="md" color={MAPPING_ENABLE_STATUS[status]}>{startCase(status)}</Pill>
+						<Pill size="md" color={MAPPING_ENABLE_STATUS[status]}>{startCase(status?.toLowerCase())}</Pill>
 					</div>
 				)
 			),
@@ -124,44 +141,51 @@ const Column = (refresh, deleteId) => {
 			),
 		},
 		{
+			Header   : <div>Filled Month Year</div>,
+			id       : 'monthYear',
+			accessor : ({ month, year }) => (
+				<div>
+					{month}
+					<span style={{ marginLeft: '4px' }}>{year}</span>
+				</div>
+			),
+		},
+		{
 			Header   : <div>IRN Summary</div>,
 			id       : 'irn',
 			accessor : ({ failureCount, successCount, status }) => {
 				const total = failureCount + successCount;
-				const successPer = isEmpty(total) ? (successCount / total) * PERCENTAGE_FACTOR : null;
-				const failurePer = isEmpty(total) ? (failureCount / total) * PERCENTAGE_FACTOR : null;
-
+				const successPer = !isEmpty(total) ? (successCount / total) * PERCENTAGE_FACTOR : null;
+				const failurePer = !isEmpty(total) ? (failureCount / total) * PERCENTAGE_FACTOR : null;
 				return (
-					isEmpty(total) ? (
+					!isEmpty(total) ? (
 						<div className={styles.main_summary}>
-							<div
-								className={styles.success}
-								style={{
-									width      : `${successPer?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}%`,
-									background : `${status === 'DISABLE' ? '#E0E0E0' : '#abcd62'}`,
-								}}
-							>
-								{ status !== 'DISABLE' && (
-									<span className={styles.tooltip_text}>
-										{`${successPer?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}%`}
-									</span>
-								)}
-							</div>
+							{ status !== 'DISABLE' ? (
+								<div>
+									{successPer === PERCENTAGE_FACTOR ? (
+										<div style={{ color: '#abcd62' }}>
+											<span>
+												{`${Number((successPer || DEFAULT_AMOUNT)?.toFixed(
+													DECIMAL_UPTO_SECOND_PLACE,
+												))}% Successful`}
+											</span>
 
-							<div
-								className={styles.failure}
-								style={{
-									width           : `${failurePer?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}%`,
-									backgroundColor : `${status === 'DISABLE' ? '#e0e0e0' : '#ee3425'}`,
-								}}
-							>
-								{	status !== 'DISABLE' && (
-									<span className={styles.tooltip_text}>
-										{ `${failurePer?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}%`}
+										</div>
+									) : (
+										<div
+											className={styles.failure}
+											style={{ color: '#ee3425' }}
+										>
+											<span>
+												{ `${Number(failurePer || DEFAULT_AMOUNT)?.toFixed(
+													DECIMAL_UPTO_SECOND_PLACE,
+												)}% Failed`}
+											</span>
 
-									</span>
-								)}
-							</div>
+										</div>
+									)}
+								</div>
+							) : '-'}
 						</div>
 					) : 'N/A'
 				);
@@ -170,11 +194,29 @@ const Column = (refresh, deleteId) => {
 		{
 			id       : 'refresh',
 			accessor : ({ status, id, fileStatus }) => (
-				fileStatus === 'READY' && status === 'ENABLE' &&	(
-					<div className={styles.refresh_icon} onClick={() => { refresh(id); }} role="presentation">
-						<IcMRefresh height="20px" width="20px" />
-					</div>
-				)
+				<div>
+					{fileStatus === 'READY' && status === 'ENABLE' &&	(
+						<div className={styles.refresh_icon} onClick={() => { refresh(id); }} role="presentation">
+							<IcMRefresh height="20px" width="20px" />
+						</div>
+					)}
+					{fileStatus === 'UPLOADED' && status === 'ENABLE' &&	(
+						<div
+							className={styles.refresh_icon}
+							onClick={() => {
+								window.open('https://uatiapp.eyasp.in/', '_blank');
+							}}
+							role="presentation"
+						>
+							<Tooltip
+								placement="top"
+								content="Redirect DigiGST Portal ->"
+							>
+								<IcMOpenlink height="20px" width="20px" />
+							</Tooltip>
+						</div>
+					)}
+				</div>
 			),
 		},
 		{
@@ -183,7 +225,17 @@ const Column = (refresh, deleteId) => {
 				const { fileStatus } = row || {};
 				return (
 					fileStatus && fileStatus !== 'PROCESSING' &&	(
-						<Popover placement="right" render={contentData(row)} caret={false}>
+						<Popover
+							placement="right"
+							render={(
+								<ContentDotsData
+									row={row}
+									deleteId={deleteId}
+									uploadId={uploadId}
+								/>
+							)}
+							caret={false}
+						>
 							<div className={styles.details}>
 								<IcMOverflowDot height="30px" width="20px" />
 							</div>
@@ -192,8 +244,6 @@ const Column = (refresh, deleteId) => {
 				);
 			},
 		},
-
 	];
 };
-
-export default Column;
+export default column;

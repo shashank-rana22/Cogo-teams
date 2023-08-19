@@ -8748,6 +8748,18 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'post_sales_outward_upload_outward_file',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_sales_outward_operation_status',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
 			api         : 'post_sales_outward_export_gstr_file',
 			module      : 'compliance',
 			feature     : 'compliance',
@@ -8761,6 +8773,12 @@ const partner = {
 		},
 		{
 			api         : 'put_sales_outward_refresh_excel_sheet',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_sales_outward_remove_invoice',
 			module      : 'compliance',
 			feature     : 'compliance',
 			access_type : 'private',
