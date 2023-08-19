@@ -5,6 +5,7 @@ import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
 import useCheckCustomerCheckoutQuotationConflict from '../../../hooks/useCheckCustomerCheckoutQuotationConflict';
+import useGetUser from '../../../hooks/useGetUser';
 import useListOmnichannelDocuments from '../../../hooks/useListOmnichannelDocuments';
 
 import RightSideNav from './RightSideNav';
@@ -34,6 +35,10 @@ function ProfileDetails({
 	);
 	const [showMore, setShowMore] = useState(false);
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
+
+	const { lead_user_id: leadUserId } = formattedMessageData || {};
+
+	const { userData, loading : getUserLoading } = useGetUser({ userId, leadUserId, customerId });
 
 	const {
 		organizationData = {},
@@ -97,6 +102,8 @@ function ProfileDetails({
 						userId={userId}
 						setActiveTab={setActiveTab}
 						mailProps={mailProps}
+						userData={userData}
+						getUserLoading={getUserLoading}
 						organizationData={organizationData}
 					/>
 				)}
@@ -115,6 +122,7 @@ function ProfileDetails({
 				quotationEmailSentAt={quotationEmailSentAt}
 				orgId={orgId}
 				viewType={viewType}
+				userData={userData}
 			/>
 		</div>
 	);

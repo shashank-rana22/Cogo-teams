@@ -111,7 +111,7 @@ const useCheckChannelPartner = ({
 	const {
 		openNewTab, hideCpButton, disableQuickActions,
 	} = formatData({
-		data,
+		data: (!orgId || loading) ? {} : data,
 		loading,
 		orgId,
 		activeConversationTab,

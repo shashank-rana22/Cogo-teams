@@ -1,4 +1,6 @@
-import HEADER from '../../constants/header';
+import { useTranslation } from 'next-i18next';
+
+import getHeader from '../../constants/header';
 import Details from '../Details';
 
 import CreateUpdateForm from './CreateUpdate';
@@ -10,10 +12,14 @@ function SideBarComponent({
 	selectedLocation = {},
 	setSelectedLocation = () => {},
 }) {
+	const { t } = useTranslation(['locations']);
+
 	const onClose = () => {
 		setSideBar('');
 		setSelectedLocation({});
 	};
+
+	const header = getHeader({ t });
 
 	const renderBody = () => {
 		switch (sideBar) {
@@ -31,7 +37,7 @@ function SideBarComponent({
 				<div role="presentation" className={styles.close} onClick={onClose}>
 					&times;
 				</div>
-				<h2>{HEADER[sideBar]}</h2>
+				<h2>{header[sideBar]}</h2>
 				<div>{renderBody()}</div>
 			</div>
 		</div>

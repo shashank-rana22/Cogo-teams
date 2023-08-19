@@ -10,6 +10,16 @@
 		.ui_text_area_container {
 			margin-top: 8px;
 		}
+
+		.react-datepicker__aria-live {
+			display: none;
+		}
+
+		.ui_time_options_container {
+			> div > div > div {
+				height: 100px;
+			}
+		}
 	}
 }
 
@@ -32,4 +42,8 @@
 .last_button {
 	width: 130px;
 	margin-left: 80px;
+}
+
+.styled_modal {
+	top: 40px !important;
 }

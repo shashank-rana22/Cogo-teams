@@ -1,4 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMAgentManagement, IcMLock } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 
 export const PLATFORM_ACTIVITY_KEYS_MAPPING = {
 	fcl_freight: {
@@ -75,13 +77,23 @@ export const PLATFORM_ACTIVITY_KEYS_MAPPING = {
 
 export const SCREEN_LOCK_MAPPING = [
 	{
-		label : 'Agent',
-		name  : 'agent',
+		label : 'Agents',
+		name  : 'list_agents',
 		icon  : <IcMAgentManagement width={40} height={40} />,
 	},
 	{
 		label : 'Lock Screen',
-		name  : 'lock_screen',
+		name  : 'lock_configuration',
 		icon  : <IcMLock width={40} height={40} />,
+	},
+	{
+		label : 'Agents Status',
+		name  : 'agents_status',
+		icon  : <Image
+			src={GLOBAL_CONSTANTS.image_url.agent_current_status}
+			height={42}
+			width={42}
+			alt="agent-status"
+		/>,
 	},
 ];
