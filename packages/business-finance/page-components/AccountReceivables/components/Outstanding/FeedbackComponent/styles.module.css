@@ -1,0 +1,22 @@
+.container {
+	position: relative;
+	border: 1px solid #dedede;
+	border-radius: 8px;
+}
+
+.delete {
+	position: absolute;
+	right: 0;
+	padding: 8px;
+	cursor: pointer;
+}
+
+.feedback_type {
+	width: 40%;
+	padding: 8px;
+}
+
+.feedback_data {
+	width: 100%;
+	padding: 8px;
+}
