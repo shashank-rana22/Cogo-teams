@@ -531,7 +531,7 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 		{
-			api          : 'get_employee_details',
+			api          : 'get_employee_device_details',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
