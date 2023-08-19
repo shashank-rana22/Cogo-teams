@@ -1,3 +1,4 @@
+// eslint-disable-next-line custom-eslint/function-name-check
 function asyncFieldsLocations2() {
 	return {
 		valueKey    : 'id',
@@ -858,6 +859,15 @@ function asyncListResources() {
 		params       : {},
 	};
 }
+function asyncListLeadOrganizationUsers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'lead_user_id',
+		endpoint    : 'list_lead_organization_users',
+		initialCall : true,
+		params      : {},
+	};
+}
 
 export {
 	asyncFieldsLocations,
@@ -929,4 +939,5 @@ export {
 	asyncIncidentSubtypeList,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListLeadOrganizationUsers,
 };

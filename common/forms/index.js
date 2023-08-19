@@ -38,4 +38,5 @@ export { default as getApiError } from './utils/getApiError';
 export { default as handleError } from './utils/handleError';
 export { default as getFormattedPrice } from './utils/get-formatted-price';
 export { default as InputNumberController } from './page-components/Controlled/InputNumberController';
+export { default as withControl }	from './page-components/Controlled/withControl';
 export * from './utils/getAsyncFields';

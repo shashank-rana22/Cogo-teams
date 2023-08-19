@@ -4,7 +4,6 @@ import styles from './styles.module.css';
 
 function Footer({ eachItem = {} }) {
 	console.log('eachItem', eachItem);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_div}>

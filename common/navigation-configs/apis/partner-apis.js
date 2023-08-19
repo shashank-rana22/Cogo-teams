@@ -12474,6 +12474,16 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'create_lead_organization_communication_log',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'create_lead_user',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'send_booking_note_on_whatsapp',
 			access_type  : 'private',
 			service_name : 'communication',
