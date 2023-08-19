@@ -1,7 +1,9 @@
 import { Button, Modal } from '@cogoport/components';
-import { AsyncSelectController, InputController, useForm } from '@cogoport/forms';
+import { InputController, SelectController, useForm } from '@cogoport/forms';
 import { IcMArrowNext } from '@cogoport/icons-react';
-import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
+
+import useUpdateRollingForecastFclFreightAllocation from '../../../../../hooks/useUpdateRollingForecastFclFreightAllocation';
 
 import styles from './styles.module.css';
 
@@ -9,17 +11,13 @@ function MoveSupplierModal({
 	showMoveSupplierModal = false,
 	setShowMoveSupplierModal = () => { },
 	item = {},
+	bucketOptions = [],
+	bucket_type = '', current_allocated_containers = '',
 }) {
-	const [{ loading },
-	] = useRequest(
-		{
-			method : 'POST',
-			url    : '/update_supplier',
-		},
-		{ manual: true },
-	);
-	const { control } = useForm({});
+	const { control, handleSubmit } = useForm({});
 
+	const { updateRollingForecastFclFreightAllocation, loading } = useUpdateRollingForecastFclFreightAllocation();
+	const onClickSubmit = (values) => { console.log('ff', values); };
 	return (
 		<Modal
 			size="md"
@@ -35,12 +33,18 @@ function MoveSupplierModal({
 					<div>
 						<div>
 							Current Bucket :
-							<div style={{ height: '32px' }}>Alaska </div>
+							<div style={{ height: '32px' }}>
+								{startCase(bucket_type)}
+								{' '}
+							</div>
 						</div>
 
 						<div>
 							Current Promised:
-							<div style={{ height: '32px' }}>Alaska </div>
+							<div style={{ height: '32px' }}>
+								{ current_allocated_containers}
+								{' '}
+							</div>
 						</div>
 					</div>
 
@@ -52,13 +56,14 @@ function MoveSupplierModal({
 
 					<div>
 						<div> New Bucket </div>
-						<AsyncSelectController
+						<SelectController
 							name="new_bucket"
 							isClearable
 							label="Select Origin SeaPort"
 							control={control}
 							placeholder="Select Below"
 							size="sm"
+							options={bucketOptions}
 						/>
 
 						<div>New Promised</div>
@@ -90,6 +95,7 @@ function MoveSupplierModal({
 						type="button"
 						className={styles.extend_button}
 						loading={loading}
+						onClick={handleSubmit(onClickSubmit)}
 					>
 						Yes, Change
 					</Button>

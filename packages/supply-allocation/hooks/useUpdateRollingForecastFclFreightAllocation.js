@@ -6,9 +6,9 @@ const useUpdateRollingForecastFclFreightAllocation = () => {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateRollingForecastFclFreightAllocation = async () => {
+	const updateRollingForecastFclFreightAllocation = async ({ payload }) => {
 		try {
-			await trigger({});
+			await trigger({ data: payload });
 		} catch (err) {
 			console.error(err);
 		}

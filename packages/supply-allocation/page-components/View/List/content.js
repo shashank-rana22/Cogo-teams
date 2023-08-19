@@ -11,6 +11,7 @@ import BucketTable from '../BucketsTable';
 function Content({
 	item = {},
 	search_id = '',
+	bucketsArray = [],
 }) {
 	const {
 		bucket_type,
@@ -27,8 +28,7 @@ function Content({
 
 	const { control, unregister, formState, handleSubmit, watch } = formProps;
 	const { dirtyFields = {} } = formState;
-	console.log('dirtyFields:', dirtyFields);
-	console.log('ff', watch());
+
 	const bucketControls = [
 		{
 			component : <IcMArrowRotateRight onClick={() => setShow((prev) => !prev)} />,
@@ -127,7 +127,9 @@ function Content({
 						control={control}
 						unregister={unregister}
 						id={search_id}
+						current_allocated_containers={current_allocated_containers}
 						bucket_type={bucket_type}
+						bucketsArray={bucketsArray}
 					/>
 				) : null}
 

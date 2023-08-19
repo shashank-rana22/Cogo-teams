@@ -32,7 +32,7 @@ const itemsArray = [
 		past_container_allocation    : ARRAY,
 	},
 ];
-function List({ bucketData = [], search_id = '' }) {
+function List({ bucketData = [], search_id = '', bucketsArray = [] }) {
 	const generateBucketTableData = bucketData.reduce((acc, curr) => {
 		const {
 			allocation_percentage,
@@ -82,6 +82,7 @@ function List({ bucketData = [], search_id = '' }) {
 					item={item}
 					index={index}
 					search_id={search_id}
+					bucketsArray={bucketsArray}
 				/>
 			))}
 

@@ -8,6 +8,7 @@ const useBulkUpdateRollingForecastFclFreightAllocation = () => {
 
 	const bulkUpdateRollingForecastFclFreightAllocation = async ({ payload }) => {
 		try {
+			console.log('payload received', payload);
 			await trigger({ data: payload });
 		} catch (err) {
 			console.error(err);

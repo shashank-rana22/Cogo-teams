@@ -18,12 +18,12 @@ function GetOrdinalNumber({ number }) {
 	);
 }
 
-const getSubBucketColumns = ({ control = {}, unregister }) => {
+const getSubBucketColumns = ({ control = {}, unregister, bucketOptions, current_allocated_containers, bucket_type }) => {
 	const subBucketColumns = [
 		{
 			id       : 'service_provider',
 			Header   : 'SERVICE PROVIDER',
-			accessor : (item) => <ServiceProvider item={item} />,
+			accessor : (item) => <ServiceProvider item={item} bucketOptions={bucketOptions} bucket_type={bucket_type} current_allocated_containers={current_allocated_containers} />,
 		},
 		{
 			id       : 'Allocated',

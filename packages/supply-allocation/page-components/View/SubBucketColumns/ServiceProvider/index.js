@@ -3,7 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import Actions from '../Actions';
 
-function ServiceProvider({ item = {} }) {
+function ServiceProvider({ item = {}, bucketOptions = [], bucket_type = '', current_allocated_containers = '' }) {
 	const {
 		service_provider, service_provider_star_rating,
 		service_provider_outstanding_currency, service_provider_outstanding_amount,
@@ -12,7 +12,12 @@ function ServiceProvider({ item = {} }) {
 	return (
 		<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
-			<Actions item={item} />
+			<Actions
+				item={item}
+				bucketOptions={bucketOptions}
+				bucket_type={bucket_type}
+				current_allocated_containers={current_allocated_containers}
+			/>
 			<div style={{ display: 'flex', flexDirection: 'column', marginRight: '10px', width: '200px' }}>
 
 				<Tooltip content={service_provider?.short_name} placement="top">
@@ -23,7 +28,6 @@ function ServiceProvider({ item = {} }) {
 					}}
 					>
 						{service_provider?.short_name}
-
 					</div>
 				</Tooltip>
 
