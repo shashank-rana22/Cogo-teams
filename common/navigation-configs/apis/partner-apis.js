@@ -12003,7 +12003,7 @@ const partner = {
 			service_name : 'allocation',
 		},
 	],
-	awb_inventory: [
+	advance_booking_manager: [
 		{
 			api          : 'list_organizations',
 			access_type  : 'private',
@@ -12033,6 +12033,14 @@ const partner = {
 			api          : 'get_airwaybill_prefix_from_airline',
 			access_type  : 'private',
 			service_name : 'operator',
+		},
+		{
+			api         : 'get_air_coe_awb_inventory_list_stock',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_awb_inventory_list',
+			access_type : 'private',
 		},
 	],
 	airline_booking_plugin: [
