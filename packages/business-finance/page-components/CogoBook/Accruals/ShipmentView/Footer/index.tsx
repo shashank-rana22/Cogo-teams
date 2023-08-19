@@ -4,8 +4,7 @@ import { IcCError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import { optionsRadio, optionsRadioData } from '../../constant';
-import { FilterInterface } from '../../interface';
+import { optionsRadio } from '../../constant';
 
 import styles from './styles.module.css';
 
@@ -18,7 +17,6 @@ interface FooterInterface {
 	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
 	addSelect?: (setOpenModal: any) => Promise<void>
 	payload?: any[]
-	filters?:FilterInterface
 	viewSelected?: boolean
 	showBtn?: boolean
 	bulkSection?:{ value?:boolean, bulkAction?:string }
@@ -28,44 +26,31 @@ interface FooterInterface {
 }
 
 function Footer({
-	checkedData,
-	payload,
-	viewSelected,
-	showBtn,
+	checkedData = [],
+	payload = [],
+	viewSelected = false,
+	showBtn = false,
 	addSelect,
 	actionConfirm = () => {},
-	shipmentLoading,
-	setCheckedRows,
-	actionConfirmedLoading,
-	setBulkSection,
-	selectedDataLoading,
+	shipmentLoading = false,
+	setCheckedRows = () => {},
+	actionConfirmedLoading = false,
+	setBulkSection = () => {},
+	selectedDataLoading = false,
 	isBookedActive = false,
-	bulkSection,
-	checkedRowsSerialId,
-	filters,
+	bulkSection = {},
+	checkedRowsSerialId = [],
 }:FooterInterface) {
-	const { push, query } = useRouter();
+	const { query } = useRouter();
 	const { sub_active:subActive, active_tab:activeTab } = query;
 	const [openModal, setOpenModal] = useState(false);
-
-	const { year = '', month = '', tradeType = '', service = '', shipmentType = '' } = filters || {};
-
-	const onSubmit = () => {
-		push(
-			`/business-finance/cogo-book/selected_invoice?year=${year
-			}&month=${month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}
-            `,
-			`/business-finance/cogo-book/selected_invoice?year=${year
-			}&month=${month}&tradeType=${tradeType}&service=${service}&shipmentType=${shipmentType}`,
-		);
-	};
 
 	const [show, setShow] = useState(false);
 	const currency = (payload || checkedData)[0]?.expenseCurrency;
 	const totalIExpense = (payload || checkedData)
-		?.reduce((acc, obj) => +acc + +obj.expenseBooked + +obj.expenseAccrued, 0);
+		?.reduce((acc, obj) => +acc + +obj.expenseBilled + +obj.expenseUnbilled, 0);
 	const totalIncome = (payload || checkedData)
-		?.reduce((acc, obj) => +acc + +obj.incomeBooked + +obj.incomeAccrued, 0);
+		?.reduce((acc, obj) => +acc + +obj.incomeBilled + +obj.incomeUnbilled, 0);
 
 	const { bulkAction, value } = bulkSection || {};
 
@@ -136,18 +121,7 @@ function Footer({
 								setOpenModal(true);
 							}}
 						>
-							Add to Selected
-						</Button>
-						<Button
-							type="submit"
-							themeType="secondary"
-							disabled={shipmentLoading || viewSelected}
-							onClick={() => {
-								onSubmit();
-								setCheckedRows({});
-							}}
-						>
-							View Selected SID
+							Accrue Shipment
 						</Button>
 					</div>
 				)}
@@ -226,46 +200,33 @@ function Footer({
 					<Modal.Body>
 						<div className={styles.flex_modal}>
 							<div className={styles.margin_not}>
-								Please Choose The Selection Mode
-							</div>
-
-							<div>
-								<RadioGroup
-									options={optionsRadioData}
-									value={bulkAction}
-									onChange={(val) => {
-										setBulkSection((prev) => ({
-											...prev,
-											bulkAction: val,
-										}));
-									}}
-								/>
-							</div>
-
-							<div className={styles.flex}>
-								<Button
-									id="cancel-modal-btn"
-									style={{ marginRight: 10 }}
-									themeType="secondary"
-									onClick={() => setOpenModal(false)}
-								>
-									Cancel
-								</Button>
-								<Button
-									id="approve-modal-btn"
-									themeType="primary"
-									loading={selectedDataLoading}
-									disabled={!bulkAction}
-									onClick={() => {
-										addSelect(setOpenModal);
-										setCheckedRows({});
-									}}
-								>
-									Confirm
-								</Button>
+								Do you want to Accrue selected shipments?
 							</div>
 						</div>
 					</Modal.Body>
+					<Modal.Footer>
+						<div className={styles.flex}>
+							<Button
+								id="cancel-modal-btn"
+								style={{ marginRight: 10 }}
+								themeType="secondary"
+								onClick={() => setOpenModal(false)}
+							>
+								No
+							</Button>
+							<Button
+								id="approve-modal-btn"
+								themeType="primary"
+								loading={selectedDataLoading}
+								onClick={() => {
+									addSelect(setOpenModal);
+									setCheckedRows({});
+								}}
+							>
+								Yes
+							</Button>
+						</div>
+					</Modal.Footer>
 				</Modal>
 			)}
 

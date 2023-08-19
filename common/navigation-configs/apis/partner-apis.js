@@ -7580,11 +7580,24 @@ const partner = {
 			feature     : 'accruals',
 		},
 		{
-			api         : 'post_pnl_accrual_add_to_selected',
+			api         : 'post_pnl_accrual_book_unbilled_shipments',
 			access_type : 'private',
 			module      : 'accruals',
 			feature     : 'accruals',
 		},
+		{
+			api         : 'get_pnl_accrual_booking_jobs_count',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'post_pnl_accrual_book_billed_shipments',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+
 		{
 			api         : 'get_pnl_accrual_view_selected',
 			access_type : 'private',

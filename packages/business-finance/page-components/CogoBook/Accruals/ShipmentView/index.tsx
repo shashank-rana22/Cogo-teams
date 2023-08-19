@@ -1,12 +1,11 @@
-import { Input, Select, Tooltip } from '@cogoport/components';
-import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { Button } from '@cogoport/components';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useShipmentView from '../../hooks/useShipmentView';
-import { CHANNEL_OPTIONS, MILESTONE_OPTIONS } from '../constant';
 
+import BookShipmentModal from './BookShipmentModal';
 import Card from './Card';
 import { accrualColumn } from './constant';
 import Footer from './Footer';
@@ -15,6 +14,7 @@ import styles from './styles.module.css';
 function ShipmentView() {
 	const [checkedRows, setCheckedRows] = useState({});
 	const [showBtn, setShowBtn] = useState(false);
+	const [showBookShipment, setShowBookShipment] = useState(false);
 	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
 	const [filters, setFilters] = useState({
 		year               : '',
@@ -45,9 +45,9 @@ function ShipmentView() {
 	const {
 		refetch,
 		shipmentLoading,
-		getTableBodyCheckbox,
+		GetTableBodyCheckbox,
 		checkedData,
-		getTableHeaderCheckbox,
+		GetTableHeaderCheckbox,
 		payload,
 		setPayload,
 		addSelect,
@@ -62,6 +62,8 @@ function ShipmentView() {
 		profit:profitData,
 		viewSelected,
 		setViewSelected,
+		setSearchValue,
+		searchValue,
 	} =	 useShipmentView({ filters, checkedRows, setBulkSection, bulkAction, setCheckedRows });
 
 	const {
@@ -75,6 +77,23 @@ function ShipmentView() {
 
 	return (
 		<div>
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Button
+					disabled={isEmpty(year) || isEmpty(month)}
+					onClick={() => setShowBookShipment(true)}
+				>
+					Book Shipment
+
+				</Button>
+			</div>
+			{showBookShipment && (
+				<BookShipmentModal
+					showBookShipment={showBookShipment}
+					setShowBookShipment={setShowBookShipment}
+					filters={filters}
+				/>
+			)}
+
 			<Card
 				refetch={refetch}
 				setPayload={setPayload}
@@ -85,6 +104,8 @@ function ShipmentView() {
 				setShowBtn={setShowBtn}
 				filters={filters}
 				isApplyEnable={isApplyEnable}
+				setSearchValue={setSearchValue}
+				searchValue={searchValue}
 			/>
 
 			<div className={styles.flex}>
@@ -121,73 +142,14 @@ function ShipmentView() {
 			</div>
 
 			<div className={styles.table_data}>
-				<div className={styles.input_data_container}>
-					<div className={styles.select_container}>
-						<Select
-							value={filters?.milestone}
-							onChange={(val) => setFilters({ ...filters, milestone: val })}
-							options={MILESTONE_OPTIONS}
-							isClearable
-							placeholder="Select Milestone"
-							className={styles.milestone}
-							size="sm"
-						/>
-
-						<div className={styles.channel_info}>
-							<Select
-								value={filters?.channel}
-								onChange={(val) => setFilters({ ...filters, channel: val })}
-								options={CHANNEL_OPTIONS}
-								isClearable
-								placeholder="Channel"
-								className={styles.milestone}
-								size="sm"
-							/>
-
-							<Tooltip
-								maxWidth={500}
-								placement="top"
-								content={(
-									<div className={styles.content_tooltip}>
-										<div>
-											<span className={styles.heading_bold}>Review Channel: </span>
-											Shipment IDs having expected profitability
-										</div>
-
-										<div>
-											<span className={styles.heading_bold}>Audit Channel: </span>
-											{' '}
-											Shipment IDs to be investigated
-										</div>
-									</div>
-								)}
-							>
-								<IcMInfo />
-							</Tooltip>
-						</div>
-
-					</div>
-
-					<div className={styles.input_container}>
-						<Input
-							size="sm"
-							value={filters?.query}
-							onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
-							placeholder="Search by SID"
-							disabled={!isApplyEnable}
-							suffix={<IcMSearchlight height="15px" width="15px" style={{ marginRight: '8px' }} />}
-							style={{ padding: '4px' }}
-						/>
-					</div>
-				</div>
 				<StyledTable
 					page={page}
 					total={totalRecords}
 					pageSize={10}
 					data={list}
 					columns={accrualColumn(
-						getTableBodyCheckbox,
-						getTableHeaderCheckbox,
+						GetTableBodyCheckbox,
+						GetTableHeaderCheckbox,
 						editProfitHandler,
 						changeProfitHandler,
 						crossProfitHandler,
@@ -208,7 +170,6 @@ function ShipmentView() {
 					checkedData={checkedData}
 					checkedRowsSerialId={checkedRowsSerialId}
 					payload={payload}
-					filters={filters}
 					bulkSection={bulkSection}
 					viewSelected={viewSelected}
 					selectedDataLoading={selectedDataLoading}

@@ -1,8 +1,17 @@
-import { Button, Select, RadioGroup, Input } from '@cogoport/components';
+import {
+	Button, RadioGroup, Pill, TabPanel, Tabs,
+} from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
 
+import {
+	JOB_TYPE_OPTIONS, SHIPMENTS_TYPES,
+	SERVICE_CATEGORY, MILESTONE_TYPES, SHIPMENT_TYPES,
+	getEntityOptions,
+} from '../../../../constants/accruals-more-filters';
 import { FilterInterface } from '../../../interface';
-import { optionsData, optionsJobData, optionsRadio } from '../../constant';
 
+import ProfitabilityContent from './ProfitabilityContent';
 import styles from './styles.module.css';
 
 interface MoreFilterInterface {
@@ -10,153 +19,142 @@ interface MoreFilterInterface {
 	setFilters: React.Dispatch<React.SetStateAction<FilterInterface>>
 	profitNumber?:string
 	setProfitNumber: React.Dispatch<React.SetStateAction<string>>
-	setMoreFilter: React.Dispatch<React.SetStateAction<boolean>>
 }
+function MoreFilter({
+	setFilters = () => {}, filters = {},
+	setProfitNumber = () => {}, profitNumber = '',
+}:MoreFilterInterface) {
+	const entityOptions = getEntityOptions();
+	const [activeFilter, setActiveFilter] = useState('jobState');
 
-function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMoreFilter }:MoreFilterInterface) {
-	const { profitType = '', range = '' } = filters || {};
-
-	const getPlaceHolder = () => {
-		if (profitType === 'percentage' && range === '<=x=<') {
-			return 'To Percentage';
-		}
-		if (profitType === 'amount' && range === '<=x=<') {
-			return 'To Amount';
-		}
-		if (profitType === 'amount') {
-			return 'Amount';
-		}
-		if (profitType === 'percentage') {
-			return 'Percentage';
-		}
-
-		return null;
+	const handleReset = () => {
+		setFilters({});
+		setActiveFilter('jobState');
 	};
-	const content = () => (
-		<div className={styles.content_container}>
-			<div className={styles.radio}>
-				<RadioGroup
-					options={optionsRadio}
-					value={profitType}
-					onChange={(item:string) => {
-						setFilters((prev) => ({ ...prev, profitType: item }));
-						setProfitNumber('');
-					}}
-				/>
-			</div>
-
-			<div>
-				<Select
-					value={range}
-					onChange={(val:string) => { setFilters((prev) => ({ ...prev, range: val })); }}
-					placeholder="All"
-					options={optionsData}
-					isClearable
-					style={{ width: '300px' }}
-					size="sm"
-				/>
-			</div>
-
-			{range === '<=x=<' &&			(
-				<div className={styles.input_container}>
-					<Input
-						className="primary md"
-						placeholder={profitType === 'amount' ? 'From Amount' : 'From Percentage'}
-						value={filters?.profitAmountUpper || filters?.profitPercentUpper || ''}
-						onChange={(e:string) => {
-							if (profitType === 'amount') {
-								setFilters((prev) => ({
-									...prev,
-									profitAmountUpper  : e,
-									profitPercentUpper : '',
-								}));
-							} else {
-								setFilters((prev) => ({
-									...prev,
-									profitPercentUpper : e,
-									profitAmountUpper  : '',
-								}));
-							}
-						}}
-						suffix={profitType === 'percentage' && '%'}
-						prefix={profitType === 'amount' && 'INR'}
-					/>
-				</div>
-			)}
-
-			<div className={styles.input_container}>
-				<Input
-					size="sm"
-					className="primary md"
-					placeholder={getPlaceHolder()}
-					value={profitNumber || ''}
-					onChange={(e:string) => {
-						setProfitNumber(e);
-						if (profitType === 'amount') {
-							setFilters((prev) => ({
-								...prev,
-								profitAmount  : e,
-								profitPercent : '',
-							}));
-						} else {
-							setFilters((prev) => ({
-								...prev,
-								profitPercent : e,
-								profitAmount  : '',
-							}));
-						}
-					}}
-					suffix={profitType === 'percentage' && '%'}
-					prefix={profitType === 'amount' && 'INR'}
-				/>
-			</div>
-
-		</div>
-	);
 
 	return (
-		<div>
-			<div className={styles.select_container}>
-				<Select
-					size="sm"
-					value={filters?.jobState}
-					onChange={(val:string) => { setFilters((prev) => ({ ...prev, jobState: val })); }}
-					placeholder="Job Type"
-					options={optionsJobData}
-					isClearable
-				/>
+		<div className={styles.container}>
+			<div className={styles.header}>
+				<div className={styles.heading_text}>Filters</div>
+				<div style={{ display: 'flex' }}>
+					<Button
+						themeType="secondary"
+						onClick={handleReset}
+						disabled={isEmpty(filters)}
+					>
+						Reset
+
+					</Button>
+				</div>
 			</div>
 
-			<div className={styles.profit_hr}>
-				{' '}
-				<div className={styles.profit}> Profitability</div>
+			<div className={styles.main_content}>
+				<div style={{ width: '100%' }}>
+					<Tabs
+						activeTab={activeFilter}
+						fullWidth
+						themeType="primary"
+						onChange={setActiveFilter}
+						className={styles.tabs_container_element}
+					>
 
-				{' '}
-				<div className={styles.hr} />
-			</div>
+						<TabPanel name="jobState" title="Job Type">
+							<RadioGroup
+								options={JOB_TYPE_OPTIONS}
+								onChange={(val) => setFilters((prev) => ({
+									...prev,
+									[activeFilter]: val,
+								}))}
+								value={filters[activeFilter]}
+								className={styles.radio_group_section}
+								style={{ flexDirection: 'column' }}
+							/>
+						</TabPanel>
+						<TabPanel name="entity" title="Entity">
+							<RadioGroup
+								options={entityOptions}
+								onChange={(val) => setFilters((prev) => ({
+									...prev,
+									[activeFilter]: val,
+								}))}
+								value={filters[activeFilter]}
+								className={styles.radio_group_section}
+								style={{ flexDirection: 'column' }}
+							/>
+						</TabPanel>
 
-			{content()}
+						<TabPanel name="service" title="Service">
+							<div className={styles.btn_group_section}>
+								{SERVICE_CATEGORY?.map((item) => (
+									<div
+										key={item?.label}
+										role="presentation"
+										onClick={() => setFilters((prev) => ({
+											...prev,
+											tradeType: item?.value,
+										}))}
+									>
+										<Pill
+											size="sm"
+											color={filters.tradeType === item?.value ? '#cfeaed'
+												: '#fff'}
+										>
+											{item?.label}
 
-			<div className={styles.button_container}>
-				<Button
-					size="md"
-					themeType="secondary"
-					onClick={() => {
-						setFilters((prev) => ({
-							...prev,
-							range         : '',
-							profitAmount  : '',
-							profitPercent : '',
-							profitType    : '',
-							jobState      : '',
-						}));
-						setProfitNumber('');
-					}}
-				>
-					Reset
+										</Pill>
+									</div>
+								))}
 
-				</Button>
-				<Button size="md" onClick={() => { setMoreFilter(false); }}>Apply</Button>
+							</div>
+							<RadioGroup
+								options={SHIPMENT_TYPES}
+								onChange={(val) => setFilters((prev) => ({
+									...prev,
+									[activeFilter]: val,
+								}))}
+								value={filters[activeFilter]}
+								className={styles.radio_group_section}
+								style={{ margin: 0 }}
+							/>
+						</TabPanel>
+						<TabPanel name="shipmentType" title="Shipment Type">
+							<RadioGroup
+								options={SHIPMENTS_TYPES}
+								onChange={(val) => setFilters((prev) => ({
+									...prev,
+									[activeFilter]: val,
+								}))}
+								value={filters[activeFilter]}
+								className={styles.radio_group_section}
+								style={{ flexDirection: 'column' }}
+							/>
+						</TabPanel>
+						<TabPanel name="milestone" title="Milestone">
+							<RadioGroup
+								options={MILESTONE_TYPES}
+								onChange={(val) => setFilters((prev) => ({
+									...prev,
+									[activeFilter]: val,
+								}))}
+								value={filters[activeFilter]}
+								className={styles.radio_group_section}
+								style={{ flexDirection: 'column' }}
+							/>
+						</TabPanel>
+						<TabPanel name="profitability" title="Profitability">
+							<div>
+								<ProfitabilityContent
+									setFilters={setFilters}
+									filters={filters}
+									setProfitNumber={setProfitNumber}
+									profitNumber={profitNumber}
+								/>
+							</div>
+						</TabPanel>
+
+					</Tabs>
+				</div>
+
 			</div>
 		</div>
 	);
