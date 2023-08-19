@@ -29,14 +29,6 @@ const getReimbursementColumns = ({ mappings, id:groupId, getEmployeeReimbursemen
 			),
 		},
 
-		// {
-		// 	Header   : 'Action',
-		// 	accessor : () => (
-		// 		<Button themeType="secondary">
-		// 			View Employees
-		// 		</Button>
-		// 	),
-		// },
 		{
 			id       : 'delete',
 			Header   : 'Actions',
