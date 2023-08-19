@@ -63,6 +63,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		CNCategoryValues,
 		isConsolidated,
 		creditNoteApprovalType,
+		level2,
 	});
 
 	const { businessName } = organization || {};

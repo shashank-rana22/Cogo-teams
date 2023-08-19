@@ -9,12 +9,14 @@ const useGetTdsData = ({
 	remark,
 	isConsolidated = false,
 	creditNoteApprovalType = '',
+	level2 = {},
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
 
 	const { CNType, CNValues, remarks } = CNCategoryValues || {};
+
 	const creditNoteRemarks = CNValues === 'revenueOthers' || CNValues === 'nonRevenueOthers'
 		? remarks
 		: CNValues;
@@ -49,7 +51,7 @@ const useGetTdsData = ({
 			: null;
 
 		if (
-			(CNType && creditNoteRemarks)
+			((CNType || level2) && (creditNoteRemarks || remark))
 			|| status === 'REJECTED'
 			|| row.type === 'TDS_APPROVAL'
 		) {
