@@ -56,13 +56,13 @@ function Dashboard() {
 	});
 
 	const {
-		expenseBookedSum = 0,
-		expenseAccruedSum = 0,
+		expenseBilledSum = 0,
+		expenseUnbilledSum = 0,
 		expenseCurrency,
-		incomeBookedSum = 0,
-		incomeAccruedSum = 0,
+		incomeBilledSum = 0,
+		incomeUnbilledSum = 0,
 		incomeCurrency,
-	} = statsData;
+	} = statsData || {};
 
 	const renderDownloadReport = (
 		reportMonth(shipmentViewData).map((item) => (
@@ -79,14 +79,14 @@ function Dashboard() {
 
 	const monthlyDataValue = (monthlyData || [{}]).map((item) => {
 		const {
-			incomeAccruedSum:incomeAccrued, incomeBookedSum:incomeBooked,
-			incomeCurrency:currencyIncome, expenseAccruedSum:expenseAccrued,
-			expenseBookedSum:expenseBooked, expenseCurrency:currencyExpense, periodName,
+			incomeUnbilledSum:incomeUnbilled, incomeBilledSum:incomeBilled,
+			incomeCurrency:currencyIncome, expenseUnbilledSum:expenseUnbilled,
+			expenseBilledSum:expenseBilled, expenseCurrency:currencyExpense, periodName,
 		} = item || {};
 		return {
 			Month    : periodName,
-			Booked   : toggle ? expenseBooked : incomeBooked,
-			Accrued  : toggle ? expenseAccrued : incomeAccrued,
+			Booked   : toggle ? expenseBilled : incomeBilled,
+			Accrued  : toggle ? expenseUnbilled : incomeUnbilled,
 			currency : toggle ? currencyExpense : currencyIncome,
 		};
 	});
@@ -134,16 +134,16 @@ function Dashboard() {
 				<div className={styles.stats_full_data}>
 					<StatsNumericData statsData={statsData} statsLoading={statsLoading} />
 					<ChartData
-						expenseBookedSum={expenseBookedSum}
-						expenseAccruedSum={expenseAccruedSum}
+						expenseBilledSum={expenseBilledSum}
+						expenseUnbilledSum={expenseUnbilledSum}
 						expenseCurrency={expenseCurrency}
-						incomeBookedSum={incomeBookedSum}
-						incomeAccruedSum={incomeAccruedSum}
+						incomeBilledSum={incomeBilledSum}
+						incomeUnbilledSum={incomeUnbilledSum}
 						incomeCurrency={incomeCurrency}
 						statsLoading={statsLoading}
 						COLORS={COLORS}
-						data={data(incomeAccruedSum, incomeBookedSum)}
-						dataExpense={dataExpense(expenseAccruedSum, expenseBookedSum)}
+						data={data(incomeUnbilledSum, incomeBilledSum)}
+						dataExpense={dataExpense(expenseUnbilledSum, expenseBilledSum)}
 					/>
 				</div>
 			</div>

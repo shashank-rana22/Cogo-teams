@@ -1,6 +1,5 @@
 import { Radio, Button } from '@cogoport/components';
 import { useForm, RadioGroupController } from '@cogoport/forms';
-import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import controls, { ASSIGN_TYPE_OPTIONS } from '../../../../../../configurations/assign-form-controls';
@@ -16,8 +15,6 @@ function AssignToForm({
 	assignLoading = false,
 	viewType = '',
 }) {
-	const { profile = {} } = useSelector((state) => state);
-
 	const [assignType, setAssignType] = useState(DEFAULT_ASSIGN_TYPE);
 
 	const {
@@ -40,7 +37,6 @@ function AssignToForm({
 
 	const { options = [] } = useGetOmnichannelAgentTypes();
 
-	const { role_functions = [] } = profile.auth_role_data;
 	const { assignChat = () => {}, support_agent_id = null, accountType = '' } = data || {};
 
 	const { allow_user } = controls;
@@ -69,18 +65,9 @@ function AssignToForm({
 					const {
 						label = '',
 						value = '',
-						agent_types = [],
 					} = eachAssignOption;
 
 					const isChecked = value === assignType;
-
-					if (
-						!(agent_types.find(
-							(roleType) => role_functions.includes(roleType),
-						))
-					) {
-						return null;
-					}
 
 					return (
 						<div key={value}>

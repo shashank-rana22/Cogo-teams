@@ -9,7 +9,6 @@ import EmptyState from '../../../../common/EmptyState';
 import { getHasAccessToEditGroup, switchUserChats } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
-import useGetUser from '../../../../hooks/useGetUser';
 import useGroupChat from '../../../../hooks/useGroupChat';
 import useListPartnerUsers from '../../../../hooks/useListPartnerUsers';
 
@@ -35,7 +34,6 @@ function AgentDetails({
 	activeTab = '',
 	activeVoiceCard = {},
 	formattedMessageData = {},
-	customerId = '',
 	setModalType = () => {},
 	activeRoomLoading = false,
 	activeSelect = '',
@@ -46,6 +44,8 @@ function AgentDetails({
 	viewType = '',
 	setActiveTab = () => {},
 	mailProps = {},
+	userData = {},
+	getUserLoading = false,
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
@@ -121,9 +121,7 @@ function AgentDetails({
 		leadOrganizationId : lead_user_details.lead_organization_id,
 	});
 
-	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
-
-	const isAddFeedBackButton = !loading && !orgId && lead_user_details?.lead_organization_id;
+	const isAddFeedBackButton = !getUserLoading && !orgId && lead_user_details?.lead_organization_id;
 
 	const handleSubmit = async () => {
 		if (!isEmpty(profileValue?.name) && !isEmpty(profileValue?.number)) {
@@ -182,11 +180,11 @@ function AgentDetails({
 				</div>
 			</div>
 
-			<Profile loading={loading} name={name} userEmail={userEmail || userData?.email} />
+			<Profile loading={getUserLoading} name={name} userEmail={userEmail || userData?.email} />
 
-			<ContactVerification leadUserId={leadUserId} userId={userId} loading={loading} userData={userData} />
+			<ContactVerification leadUserId={leadUserId} userId={userId} loading={getUserLoading} userData={userData} />
 
-			{(activeTab === 'message' && !loading && !orgLoading)
+			{(activeTab === 'message' && !getUserLoading && !orgLoading)
 			&& (
 				<AgentQuickActions
 					userEmail={userEmail}
@@ -194,7 +192,7 @@ function AgentDetails({
 					leadUserId={lead_user_id}
 					orgId={orgId}
 					mobileNumber={mobile_number}
-					userData={userData}
+					userData={getUserLoading}
 					organizationData={organizationData}
 					fetchOrganization={fetchOrganization}
 					partnerId={partnerId}
@@ -204,7 +202,7 @@ function AgentDetails({
 			{isAddFeedBackButton ? (
 				<Button size="sm" themeType="secondary" onClick={handleRoute}>Add Feedback</Button>
 			) : null}
-			{loading ? (
+			{getUserLoading ? (
 				<Placeholder
 					height="50px"
 					width="220px"
@@ -227,12 +225,14 @@ function AgentDetails({
 				approveGroupRequest={approveGroupRequest}
 				groupMembers={activeMessageCard.requested_group_members}
 				partnerUsers={partnerUsers}
+				agentId={agentId}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 			<GroupMembers
 				deleteGroupMember={deleteGroupMember}
 				groupMembers={activeMessageCard?.group_members}
 				partnerUsers={partnerUsers}
+				agentId={agentId}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 			{(mobile_no || user_number) && (
@@ -241,7 +241,7 @@ function AgentDetails({
 					<ConversationContainer
 						userData={userData}
 						noData={!leadUserId && !userId}
-						loading={loading}
+						loading={getUserLoading}
 						activeCardData={DATA_MAPPING[activeTab] || {}}
 						activeMessageCard={activeMessageCard}
 						setActiveMessage={setActiveMessage}

@@ -34,14 +34,14 @@ export const ARCHIVE_MONTH_BOOKED = [
 	},
 	{
 		Header   : 'Expense Booked',
-		accessor : 'expenseBooked',
-		id       : 'expenseBooked',
+		accessor : 'expenseBilled',
+		id       : 'expenseBilled',
 		Cell     : ({ row: { original } }) => {
-			const { expenseBooked, expenseCurrency } = original || {};
+			const { expenseBilled, expenseCurrency } = original || {};
 			return (
 				<span>
 					{formatAmount({
-						amount   :	expenseBooked,
+						amount   :	expenseBilled,
 						currency : expenseCurrency,
 						options  : {
 							style           : 'currency',
@@ -54,14 +54,14 @@ export const ARCHIVE_MONTH_BOOKED = [
 	},
 	{
 		Header   : 'Income Booked',
-		accessor : 'incomeBooked',
-		id       : 'incomeBooked',
+		accessor : 'incomeBilled',
+		id       : 'incomeBilled',
 		Cell     : ({ row: { original } }) => {
-			const { incomeBooked, incomeCurrency } = original || {};
+			const { incomeBilled, incomeCurrency } = original || {};
 			return (
 				<span>
 					{formatAmount({
-						amount   :	incomeBooked,
+						amount   :	incomeBilled,
 						currency : incomeCurrency,
 						options  : {
 							style           : 'currency',
@@ -74,9 +74,9 @@ export const ARCHIVE_MONTH_BOOKED = [
 	},
 	{
 		Header   : 'Booked Profit',
-		accessor : 'bookedProfit',
-		id       : 'bookedProfit',
-		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="bookedProfit" />,
+		accessor : 'billedProfit',
+		id       : 'billedProfit',
+		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="billedProfit" />,
 	},
 	{
 		Header   : 'Actual Profit',
@@ -90,12 +90,12 @@ export const ARCHIVE_MONTH_BOOKED = [
 		id       : 'variance',
 		Cell     : ({ row: { original } }) => {
 			const {
-				expenseBooked = 0,
+				expenseBilled = 0,
 				actualExpense = 0,
-				incomeBooked = 0,
+				incomeBilled = 0,
 				actualIncome = 0,
-				expenseAccrued = 0,
-				incomeAccrued = 0,
+				expenseUnbilled = 0,
+				incomeUnbilled = 0,
 				expenseCurrency,
 			} = original || {};
 
@@ -108,7 +108,7 @@ export const ARCHIVE_MONTH_BOOKED = [
 							{' '}
 							<span className={styles.amount}>
 								{formatAmount({
-									amount   :	(actualExpense - (expenseBooked + expenseAccrued)) as any,
+									amount   :	(actualExpense - (expenseBilled + expenseUnbilled)) as any,
 									currency : expenseCurrency,
 									options  : {
 										style           : 'currency',
@@ -126,7 +126,7 @@ export const ARCHIVE_MONTH_BOOKED = [
 							{' '}
 							<span className={styles.amount}>
 								{formatAmount({
-									amount   :	(actualIncome - (incomeBooked + incomeAccrued)) as any,
+									amount   :	(actualIncome - (incomeBilled + incomeUnbilled)) as any,
 									currency : expenseCurrency,
 									options  : {
 										style           : 'currency',
@@ -182,14 +182,14 @@ export const ARCHIVE_DECLARED = (
 	},
 	{
 		Header   : 'Expense Booked',
-		accessor : 'expenseBooked',
-		id       : 'expenseBooked',
+		accessor : 'expenseBilled',
+		id       : 'expenseBilled',
 		Cell     : ({ row: { original } }) => {
-			const { expenseBooked, expenseCurrency } = original || {};
+			const { expenseBilled, expenseCurrency } = original || {};
 			return (
 				<span>
 					{formatAmount({
-						amount   :	expenseBooked,
+						amount   :	expenseBilled,
 						currency : expenseCurrency,
 						options  : {
 							style           : 'currency',
@@ -202,14 +202,14 @@ export const ARCHIVE_DECLARED = (
 	},
 	{
 		Header   : 'Expense Accrued',
-		accessor : 'expenseAccrued',
-		id       : 'expenseAccrued',
+		accessor : 'expenseUnbilled',
+		id       : 'expenseUnbilled',
 		Cell     : ({ row: { original } }) => {
-			const { expenseAccrued, expenseCurrency } = original || {};
+			const { expenseUnbilled, expenseCurrency } = original || {};
 			return (
 				<span>
 					{formatAmount({
-						amount   :	expenseAccrued,
+						amount   :	expenseUnbilled,
 						currency : expenseCurrency,
 						options  : {
 							style           : 'currency',
@@ -222,14 +222,14 @@ export const ARCHIVE_DECLARED = (
 	},
 	{
 		Header   : 'Income Booked',
-		accessor : 'incomeBooked',
-		id       : 'incomeBooked',
+		accessor : 'incomeBilled',
+		id       : 'incomeBilled',
 		Cell     : ({ row: { original } }) => {
-			const { incomeBooked, incomeCurrency } = original || {};
+			const { incomeBilled, incomeCurrency } = original || {};
 			return (
 				<span>
 					{formatAmount({
-						amount   :	incomeBooked,
+						amount   :	incomeBilled,
 						currency : incomeCurrency,
 						options  : {
 							style           : 'currency',
@@ -243,14 +243,14 @@ export const ARCHIVE_DECLARED = (
 	},
 	{
 		Header   : 'Income Accrued',
-		accessor : 'incomeAccrued',
-		id       : 'incomeAccrued',
+		accessor : 'incomeUnbilled',
+		id       : 'incomeUnbilled',
 		Cell     : ({ row: { original } }) => {
-			const { incomeAccrued, incomeCurrency } = original || {};
+			const { incomeUnbilled, incomeCurrency } = original || {};
 			return (
 				<span>
 					{formatAmount({
-						amount   :	incomeAccrued,
+						amount   :	incomeUnbilled,
 						currency : incomeCurrency,
 						options  : {
 							style           : 'currency',
@@ -263,9 +263,9 @@ export const ARCHIVE_DECLARED = (
 	},
 	{
 		Header   : 'Booked Profit',
-		accessor : 'bookedProfit',
-		id       : 'bookedProfit',
-		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="bookedProfit" />,
+		accessor : 'billedProfit',
+		id       : 'billedProfit',
+		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="billedProfit" />,
 	},
 	{
 		Header   : 'Actual Profit',
@@ -327,14 +327,14 @@ export const ARCHIVE_MONTH_ACCRUED = [
 	},
 	{
 		Header   : 'Expense Accrued',
-		accessor : 'expenseAccrued',
-		id       : 'expenseAccrued',
+		accessor : 'expenseUnbilled',
+		id       : 'expenseUnbilled',
 		Cell     : ({ row: { original } }) => {
-			const { expenseAccrued, expenseCurrency } = original || {};
+			const { expenseUnbilled, expenseCurrency } = original || {};
 			return (
 				<span>
 					{formatAmount({
-						amount   :	expenseAccrued,
+						amount   :	expenseUnbilled,
 						currency : expenseCurrency,
 						options  : {
 							style           : 'currency',
@@ -347,14 +347,14 @@ export const ARCHIVE_MONTH_ACCRUED = [
 	},
 	{
 		Header   : 'Income Accrued',
-		accessor : 'incomeAccrued',
-		id       : 'incomeAccrued',
+		accessor : 'incomeUnbilled',
+		id       : 'incomeUnbilled',
 		Cell     : ({ row: { original } }) => {
-			const { incomeAccrued, incomeCurrency } = original || {};
+			const { incomeUnbilled, incomeCurrency } = original || {};
 			return (
 				<span>
 					{formatAmount({
-						amount   :	incomeAccrued,
+						amount   :	incomeUnbilled,
 						currency : incomeCurrency,
 						options  : {
 							style           : 'currency',
@@ -367,9 +367,9 @@ export const ARCHIVE_MONTH_ACCRUED = [
 	},
 	{
 		Header   : 'Booked Profit',
-		accessor : 'bookedProfit',
-		id       : 'bookedProfit',
-		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="bookedProfit" />,
+		accessor : 'billedProfit',
+		id       : 'billedProfit',
+		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="billedProfit" />,
 	},
 	{
 		Header   : 'Actual Profit',
@@ -383,12 +383,12 @@ export const ARCHIVE_MONTH_ACCRUED = [
 		id       : 'variance',
 		Cell     : ({ row: { original } }) => {
 			const {
-				expenseBooked = 0,
+				expenseBilled = 0,
 				actualExpense = 0,
-				incomeBooked = 0,
+				incomeBilled = 0,
 				actualIncome = 0,
-				expenseAccrued = 0,
-				incomeAccrued = 0,
+				expenseUnbilled = 0,
+				incomeUnbilled = 0,
 				expenseCurrency,
 			} = original || {};
 
@@ -403,7 +403,7 @@ export const ARCHIVE_MONTH_ACCRUED = [
 
 								{formatAmount({
 									amount:	(
-										actualExpense - (expenseBooked + expenseAccrued)) as any,
+										actualExpense - (expenseBilled + expenseUnbilled)) as any,
 									currency : expenseCurrency,
 									options  : {
 										style           : 'currency',
@@ -421,7 +421,7 @@ export const ARCHIVE_MONTH_ACCRUED = [
 							{' '}
 							<span className={styles.amount}>
 								{formatAmount({
-									amount   :	(actualIncome - (incomeBooked + incomeAccrued)) as any,
+									amount   :	(actualIncome - (incomeBilled + incomeUnbilled)) as any,
 									currency :	expenseCurrency,
 									options  : {
 										style           : 'currency',
