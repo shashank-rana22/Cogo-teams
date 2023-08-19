@@ -38,7 +38,8 @@ const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {}, setPremiu
 			setPremiumData({});
 			toastApiError(err);
 		}
-	}, [trigger, setPremiumData]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [trigger]);
 
 	useEffect(() => {
 		if (!isEmpty(cargoAmount) && !isEmpty(policyCurrency)) {
