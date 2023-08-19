@@ -18,9 +18,9 @@ const useInsuranceCheckoutAndGenerate = ({
 	const { apiTrigger: getUpdateShipmentService, apiLoading } = useUpdateShipmentService({ refetch });
 
 	const [{ loading }, trigger] = useRequestBf({
-		auth   : 'post_saas_insurance_checkout_and_generate',
-		url    : 'saas/insurance/checkout-and-generate',
-		method : 'POST',
+		authKey : 'post_saas_insurance_checkout_and_generate',
+		url     : 'saas/insurance/checkout-and-generate',
+		method  : 'POST',
 	}, { manual: true });
 
 	const generateInsurance = async ({ payload, payloadForUpdateShipment }) => {

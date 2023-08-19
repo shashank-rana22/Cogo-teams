@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 const getPayload = ({
 	premiumData = {},
 	insuranceDetails = {},
@@ -28,24 +30,24 @@ const getPayload = ({
 		...rest,
 		...restPremiumData,
 		verificationDoc: {
-			gstDoc: {
+			gstDoc: !isEmpty(gstDoc?.finalUrl) ? {
 				name    : gstDoc?.fileName,
 				url     : gstDoc?.finalUrl,
 				success : true,
 
-			},
-			panDoc: {
+			} : undefined,
+			panDoc: !isEmpty(panDoc?.finalUrl) ? {
 				name    : panDoc?.fileName,
 				url     : panDoc?.finalUrl,
 				success : true,
 
-			},
-			invoiceDoc: {
+			} : undefined,
+			invoiceDoc: !isEmpty(invoiceDoc?.finalUrl) ? {
 				name    : invoiceDoc?.fileName,
 				url     : invoiceDoc?.finalUrl,
 				success : true,
 
-			},
+			} : undefined,
 		},
 		customerConfirmationDoc : customerConfirmationDoc?.finalUrl,
 		policyForSelf,
