@@ -28,12 +28,6 @@
 .sub_label {
 	font-size: 22px;
 	color: #000;
-
-	span {
-		padding: 4px;
-		margin-left: 6px;
-		background: #fff7df;
-	}
 }
 
 .stats_content {
@@ -69,5 +63,5 @@
 }
 
 .select_section {
-	width: 100px;
+	width: 120px;
 }

@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import { RATING_ELEMENTS } from '../../../../../../../constants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTypeMapping';
 import { getFormattedNumber } from '../../../../../../../helpers/getFormattedNumber';
+import useGetAgentTimelineEscalate from '../../../../../../../hooks/useGetAgentTimelineEscalate';
 
 import styles from './styles.module.css';
 
@@ -19,10 +20,23 @@ function Stats({
 	calls = [],
 	loading = false,
 	viewType = '',
-	rating = [],
+	AgentStatsData = {},
+	timePeriodValue = '',
 }) {
 	const { chat_stats = {} } = statsData || {};
+	const {
+		rating = [],
+		avg_response_time : avgResponseTime = {}, rate_revert : rateRevert = {}, agent_msg_stats = {},
+	} = AgentStatsData || {};
+
+	const { data, escalateLoading } = useGetAgentTimelineEscalate({ viewType, timePeriodValue });
+	console.log('data:', data);
+
 	const { avg_rating: averageRating = '' } = rating || [];
+
+	const emailObj = agent_msg_stats.type === 'email' ? agent_msg_stats : undefined;
+
+	const emailCount = emailObj ? emailObj.count : undefined;
 
 	const { active = 0, escalated = 0, warning = 0 } = chat_stats || {};
 
@@ -40,10 +54,18 @@ function Stats({
 	const STATS_FEEDBACK_COUNT = {
 		no_of_bookings              : booked,
 		no_of_quotation_send        : totalQuotationSend,
-		chats_assigned              : totalChatAssigne,
-		calls_made                  : totalCallMade,
-		calls_received              : totalCallReceive,
+		chats_assigned              : totalChatAssigne, // commom
+		calls_made                  : totalCallMade, // commom
+		calls_received              : totalCallReceive, // commom
 		customer_satisfaction_score : averageRating,
+
+		// Supply:
+		no_of_rates_reverted       : rateRevert,
+		no_of_rate_sheets_received : '0',
+		avg_response_time          : avgResponseTime,
+		emails_send_count          : emailCount,
+		// escalate_chats_count
+
 	};
 
 	const STATS_FEEDBACK_MAPPING = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.stats_feedback_count;
@@ -63,7 +85,7 @@ function Stats({
 							|| RATING_ELEMENTS.default.image
 						) : null}
 						<div className={styles.count}>
-							{loading ? <Placeholder width="80px" height="40px" /> : (
+							{(loading || escalateLoading) ? <Placeholder width="80px" height="40px" /> : (
 								<div>{getFormattedNumber(STATS_FEEDBACK_COUNT[item] || MIN_COUNT)}</div>
 							)}
 						</div>

@@ -37,12 +37,12 @@ function PunchInOut({
 	timelineLoading = false,
 	preferenceLoading = false,
 	viewType = '',
-	getCogoOneDashboard = () => {},
 	AgentStatsLoading = false,
 	AgentStatsData = {},
 	timePeriodValue = '',
 	setTimePeriodValue = () => {},
 }) {
+	console.log('viewType:', viewType);
 	const { status = '' } = agentStatus || {};
 	const { list = [] } = data || {};
 
@@ -134,7 +134,6 @@ function PunchInOut({
 						status={status}
 						handlePunchIn={handlePunchIn}
 						viewType={viewType}
-						getCogoOneDashboard={getCogoOneDashboard}
 						AgentStatsLoading={AgentStatsLoading}
 						AgentStatsData={AgentStatsData}
 						timePeriodValue={timePeriodValue}

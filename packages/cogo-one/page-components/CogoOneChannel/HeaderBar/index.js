@@ -27,11 +27,10 @@ function HeaderBar({
 
 	const isPunchPresent = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out;
 
-	/// function call
 	const {
 		AgentStatsLoading = false,
 		AgentStatsData = {},
-	} = useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue });
+	} = useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue, viewType });
 
 	return (
 		<>
@@ -54,7 +53,6 @@ function HeaderBar({
 					preferenceLoading={preferenceLoading}
 					timelineLoading={timelineLoading}
 					viewType={viewType}
-					// getCogoOneDashboard={getCogoOneDashboard}
 					AgentStatsLoading={AgentStatsLoading}
 					AgentStatsData={AgentStatsData}
 					timePeriodValue={timePeriodValue}

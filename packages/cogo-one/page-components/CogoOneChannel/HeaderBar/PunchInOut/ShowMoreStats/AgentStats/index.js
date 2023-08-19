@@ -15,8 +15,6 @@ function AgentStats({
 	AgentStatsData = {}, timePeriodValue = '',
 	setTimePeriodValue = () => {},
 }) {
-	// const [value, setValue] = useState('day');
-
 	const {
 		shiplentLoading = false,
 		shipmentData = {},
@@ -24,7 +22,7 @@ function AgentStats({
 
 	const { statsData = {}, statsLoading = false } = useListAssignedChats({ value: timePeriodValue });
 
-	const { calls = [], rating = [] } = AgentStatsData || {};
+	const { calls = [] } = AgentStatsData || {};
 	const { sales_dashboard_stats = {} } = shipmentData || {};
 	const { booked = 0, total_sent = 0 } = sales_dashboard_stats || {};
 
@@ -39,8 +37,7 @@ function AgentStats({
 					,
 				</div>
 				<div className={styles.sub_label}>
-					This is how you have interacted with your clients
-					<span>Today</span>
+					This is how you have interacted with your clients.
 				</div>
 			</div>
 			<div className={styles.stats_content}>
@@ -50,9 +47,10 @@ function AgentStats({
 						booked={booked}
 						statsData={statsData}
 						calls={calls}
-						rating={rating}
 						loading={shiplentLoading || AgentStatsLoading || statsLoading}
 						viewType={viewType}
+						AgentStatsData={AgentStatsData}
+						timePeriodValue={timePeriodValue}
 					/>
 				</div>
 				<div className={styles.graph_container}>

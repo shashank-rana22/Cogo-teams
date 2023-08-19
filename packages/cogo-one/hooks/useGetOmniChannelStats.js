@@ -5,6 +5,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 import { DATE_FILTER_MAPPING } from '../configurations/time-filter-mapping';
+import { getAdditionalPayloadForViewType } from '../helpers/getAdditionalPayloadForViewType';
 
 const getDateString = ({ date }) => formatDate({
 	date,
@@ -12,13 +13,22 @@ const getDateString = ({ date }) => formatDate({
 	formatType : 'date',
 }) || '';
 
-const getParams = ({ timePeriodValue }) => ({
-	duration_type : timePeriodValue,
-	start_date    : getDateString({ date: DATE_FILTER_MAPPING[timePeriodValue]?.(new Date()) }),
-	end_date      : getDateString({ date: new Date() }),
-});
+const getParams = ({ timePeriodValue, viewType }) => {
+	const baseParams = {
+		duration_type : timePeriodValue,
+		start_date    : getDateString({ date: DATE_FILTER_MAPPING[timePeriodValue]?.(new Date()) }),
+		end_date      : getDateString({ date: new Date() }),
+	};
 
-function useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue = '' }) {
+	const additionalPayload = getAdditionalPayloadForViewType(viewType);
+
+	return {
+		...baseParams,
+		...additionalPayload,
+	};
+};
+
+function useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue = '', viewType = '' }) {
 	const { userId } = useSelector(({ profile }) => ({
 		userId: profile?.user?.id,
 	}));
@@ -31,12 +41,12 @@ function useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue = '' }) {
 	const getCogoOneDashboard = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ timePeriodValue, userId }),
+				params: getParams({ timePeriodValue, userId, viewType }),
 			});
 		} catch (error) {
 			console.error(error, 'err');
 		}
-	}, [trigger, userId, timePeriodValue]);
+	}, [trigger, timePeriodValue, userId, viewType]);
 
 	useEffect(() => {
 		if (isPunchPresent) {

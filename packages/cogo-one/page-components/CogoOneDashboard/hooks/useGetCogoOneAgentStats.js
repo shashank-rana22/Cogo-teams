@@ -9,21 +9,43 @@ const DURATION_TYPE = {
 	month : 'weeks',
 };
 
-const getParams = ({ timeline, startDate, endDate, id }) => ({
-	duration_type : DURATION_TYPE[timeline],
-	start_date    : !startDate
-		? new Date(DATE_MAPPING[timeline].startDate) : new Date(startDate),
-	end_date: !endDate
-		? new Date(DATE_MAPPING[timeline].endDate) : new Date(endDate),
-	filters: {
-		sales_agent_id: id || undefined,
-	},
-});
+const VIEW_TYPES_WITH_PAYLOAD = [
+	'Sales',
+	'Support',
+	'cp_support',
+	'Sales_admin',
+	'Support_admin',
+];
+
+const getParams = ({ timeline, startDate, endDate, id, viewType }) => {
+	const PAYLOAD = {};
+
+	if (VIEW_TYPES_WITH_PAYLOAD.some((type) => viewType.includes(type))) {
+		PAYLOAD.supplier_stats_required = false;
+		PAYLOAD.sales_stats_required = true;
+		PAYLOAD.show_agent_activity_graph = false;
+	}
+
+	return {
+		duration_type : DURATION_TYPE[timeline],
+		start_date    : !startDate
+			? new Date(DATE_MAPPING[timeline].startDate)
+			: new Date(startDate),
+		end_date: !endDate
+			? new Date(DATE_MAPPING[timeline].endDate)
+			: new Date(endDate),
+		filters: {
+			sales_agent_id: id || undefined,
+		},
+		...PAYLOAD,
+	};
+};
 
 function useGetCogoOneAgentStats({
 	timeline = '',
 	selectedDate = {},
 	id = '',
+	viewType = '',
 }) {
 	const { startDate = {}, endDate = {} } = selectedDate || {};
 
@@ -35,12 +57,12 @@ function useGetCogoOneAgentStats({
 	const getCogoOneDashboard = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ timeline, startDate, endDate, id }),
+				params: getParams({ timeline, startDate, endDate, id, viewType }),
 			});
 		} catch (error) {
 			console.error(error, 'err');
 		}
-	}, [timeline, trigger, startDate, endDate, id]);
+	}, [trigger, timeline, startDate, endDate, id, viewType]);
 
 	useEffect(() => {
 		getCogoOneDashboard();

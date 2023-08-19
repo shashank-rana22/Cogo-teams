@@ -13,7 +13,6 @@ function ShowMoreStats({
 	status = '',
 	handlePunchIn = () => {},
 	viewType = '',
-	getCogoOneDashboard = () => {},
 	AgentStatsLoading = false,
 	AgentStatsData = {},
 	timePeriodValue = '',
@@ -45,7 +44,6 @@ function ShowMoreStats({
 					showDetails={showDetails}
 					name={name}
 					viewType={viewType}
-					getCogoOneDashboard={getCogoOneDashboard}
 					AgentStatsLoading={AgentStatsLoading}
 					AgentStatsData={AgentStatsData}
 					timePeriodValue={timePeriodValue}
