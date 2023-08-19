@@ -11,6 +11,7 @@ importers:
       '@svgr/webpack': ^6.5.1
       accept-language: ^3.0.18
       axios-hooks: ^4.0.0
+      dotenv: ^16.0.3
       eslint: ^8.42.0
       eslint-plugin-custom-eslint: link:node_modules/@cogoport/eslint-config/packages/custom-eslint
       fs-extra: ^11.1.1
@@ -43,6 +44,7 @@ importers:
       '@cogoport/eslint-config': 2.0.9_eslint@8.46.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
+      dotenv: 16.3.1
       eslint: 8.46.0
       eslint-plugin-custom-eslint: link:node_modules/@cogoport/eslint-config/packages/custom-eslint
       fs-extra: 11.1.1
@@ -9189,7 +9191,6 @@ packages:
   /dotenv/16.3.1:
     resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
     engines: {node: '>=12'}
-    dev: false
 
   /draft-js-export-html/1.4.1_qnm4pu3vwlglikbjqrpcmxoiem:
     resolution: {integrity: sha512-G4VGBSalPowktIE4wp3rFbhjs+Ln9IZ2FhXeHjsZDSw0a2+h+BjKu5Enq+mcsyVb51RW740GBK8Xbf7Iic51tw==}
