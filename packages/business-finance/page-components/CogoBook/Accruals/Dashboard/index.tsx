@@ -62,7 +62,7 @@ function Dashboard() {
 		incomeBilledSum = 0,
 		incomeUnbilledSum = 0,
 		incomeCurrency,
-	} = statsData;
+	} = statsData || {};
 
 	const renderDownloadReport = (
 		reportMonth(shipmentViewData).map((item) => (
