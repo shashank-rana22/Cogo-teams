@@ -1,13 +1,13 @@
+import { Loader } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import React, { useEffect, useRef } from 'react';
 
 import useUpdateMessage from '../../../hooks/useUpdateMessage';
-import MsgLoader from '../MsgLoader';
 
 import MessageContent from './MessageContent';
 import styles from './styles.module.css';
 
-function MessageContainer({ msgContent, loadingChannel, showImpMsg }) {
+function MessageContainer({ msgContent = {}, loadingChannel = false, showImpMsg = false }) {
 	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 	const { onUpdateMessage } = useUpdateMessage();
 	const containerRef = useRef(null);
@@ -49,11 +49,14 @@ function MessageContainer({ msgContent, loadingChannel, showImpMsg }) {
 	return (
 		<div className={styles.main_container} ref={containerRef}>
 			{loadingChannel ? (
-				<MsgLoader />
+				<div className={styles.message_loader}>
+					<Loader />
+				</div>
 			) : (
 				<>
 					{(totalMessages || []).map((msg) => (
 						<MessageContent
+							key={msg?.mainKey}
 							msg={msg}
 							user_id={user_id}
 							handleClick={handleClick}

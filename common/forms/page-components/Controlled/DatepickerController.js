@@ -24,7 +24,7 @@ function DatepickerController(props) {
 					id={name}
 					onChange={(e) => {
 						onChange(e);
-						if (rest?.onChange) {
+						if (typeof rest?.onChange === 'function') {
 							rest?.onChange(e);
 						}
 					}}

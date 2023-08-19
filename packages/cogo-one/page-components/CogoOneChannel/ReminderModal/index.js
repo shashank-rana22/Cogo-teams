@@ -2,6 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
 import REMINDER_TIPS from '../../../constants/REMINDER_TIPS';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useShipmentReminder from '../../../hooks/useShipmentReminder';
 import getShipmentReminderStats from '../../../utils/getShipmentReminderStats';
 
@@ -11,7 +12,7 @@ import styles from './styles.module.css';
 
 const DEFAULT_NO_OF_CHATS_ASSIGNED = 0;
 
-function ReminderModal({ firestore = {}, agentId = '' }) {
+function ReminderModal({ firestore = {}, agentId = '', viewType = '' }) {
 	const [reminderModal, setReminderModal] = useState(false);
 
 	const {
@@ -24,17 +25,21 @@ function ReminderModal({ firestore = {}, agentId = '' }) {
 		agentId,
 	});
 
+	const hasShipmentReminderPermission = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipment_reminder;
+
 	const statsMapping = getShipmentReminderStats(shipmentData);
 
 	useEffect(() => {
-		mountReminderSnapShot();
+		if (hasShipmentReminderPermission) {
+			mountReminderSnapShot();
+		}
 		return cleanUpTimeout;
-	}, [cleanUpTimeout, mountReminderSnapShot]);
+	}, [cleanUpTimeout, hasShipmentReminderPermission, mountReminderSnapShot]);
 
 	return (
 		<Modal
 			size="md"
-			show={reminderModal}
+			show={reminderModal && hasShipmentReminderPermission}
 			className={styles.modal_styled}
 			onClickOutside={() => setReminderModal(false)}
 			placement="center"

@@ -1574,6 +1574,16 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.utm_parameters,
 			},
+			{
+				key           : 'marketing-marketing_cogo_store',
+				title         : 'CogoStore',
+				href          : '/marketing/cogo-store/[active_tab]',
+				as            : '/marketing/cogo-store/manage',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogopoints,
+				module_type   : 'crm',
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -1598,25 +1608,6 @@ const navigationMappingAdmin = {
 		module_type : 'dashboards',
 		icon        : IcCCogoassured,
 		options     : [
-			{
-				key           : 'cogo_assured-fcl_freight',
-				title         : 'FCL Freight',
-				href          : '/cogo-assured/fcl_freight',
-				as            : '/cogo-assured/fcl_freight',
-				type          : 'link',
-				possible_apis : apis.cogo_assured,
-				main_apis     : [],
-			},
-			{
-				key           : 'cogo_assured-fcl_freight_local',
-				title         : 'FCL Freight Local',
-				href          : '/cogo-assured/fcl_freight_local',
-				as            : '/cogo-assured/fcl_freight_local',
-				type          : 'link',
-				possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
-
-				main_apis: [],
-			},
 			{
 				key           : 'cogo_assured-haulage_freight',
 				title         : 'Haulage Freight',
@@ -1896,14 +1887,14 @@ const navigationMappingAdmin = {
 		as          : '/kam-monitoring',
 		main_apis   : [],
 	},
-	awb_inventory: {
-		key           : 'awb_inventory',
-		title         : 'AWB Inventory',
-		href          : '/v2/awb-inventory',
-		as            : '/v2/awb-inventory',
+	advance_booking_manager: {
+		key           : 'advance_booking_manager',
+		title         : 'Advance Booking Manager',
+		href          : '/v2/advance-booking-manager',
+		as            : '/v2/advance-booking-manager',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
-		possible_apis : apis.awb_inventory,
+		possible_apis : apis.advance_booking_manager,
 		module_type   : 'dashboards',
 	},
 	ground_ops: {

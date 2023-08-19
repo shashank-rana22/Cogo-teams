@@ -7,12 +7,12 @@ import useListKamDeskSurfaceShipment from '../../hooks/useListKamDeskSurfaceShip
 import ShipmentList from './ShipmentList';
 
 function EditSellQuotation({ activeTab = '' }) {
-	const { data, loading, filters, setFilters } = useListKamDeskSurfaceShipment();
+	const { data, loading, filters, setFilters } = useListKamDeskSurfaceShipment({});
 
 	return (
 		<div>
 			<SearchShipment
-				keyName="serial_id"
+				keyName="q"
 				isMultiSelect={false}
 				lowerLabel=""
 				placeholder="Search SID"
