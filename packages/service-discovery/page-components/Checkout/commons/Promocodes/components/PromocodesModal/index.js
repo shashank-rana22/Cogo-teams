@@ -148,6 +148,7 @@ function PromocodesModal({
 											key={promotion}
 											disableCursor={disableCursor}
 											promotion={promotion}
+											is_applicable={is_applicable}
 											setShowCoupons={setShowCoupons}
 											setCouponApplied={setCouponApplied}
 											refetch={refetch}
@@ -170,7 +171,7 @@ function PromocodesModal({
 										{...(!isEmpty(non_applicability_reasons)
 											? {
 												content:
-												<div>
+												<div className={styles.tooltip_content}>
 													{non_applicability_reasons?.
 														[GLOBAL_CONSTANTS.zeroth_index] || ''}
 

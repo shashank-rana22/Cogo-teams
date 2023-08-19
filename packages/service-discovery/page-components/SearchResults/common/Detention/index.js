@@ -1,6 +1,5 @@
 import { Button, Toast } from '@cogoport/components';
 import { CheckboxController, useForm } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import useRemoveDetentionDumurrage from '../../hooks/useRemoveDetentionDemurrage';
@@ -9,8 +8,40 @@ import useUpdateDestinationDemurrageDays from '../../hooks/useUpdateDestinationD
 import FormItem from './FormItem';
 import styles from './styles.module.css';
 
-const FORM_KEYS = ['origin_detention', 'destination_detention', 'origin_demurrage', 'destination_demurrage'];
 const DEFAULT_DAYS_VALUE = 0;
+const TOTAL_COUNT_OF_DND_SERVICES = 4;
+
+const SERVICES_MAPPING = {
+	origin_detention      : 'EDT',
+	destination_detention : 'DET',
+	origin_demurrage      : 'EDE',
+	destination_demurrage : 'DEA',
+};
+
+const getErrorMessage = (formValues = {}, alreadyAddedServicesCodes = []) => {
+	const ERROR_MAPPING = {
+		all_empty                         : 'Enter atleast one value',
+		already_added_but_changed_to_zero : 'Cannot change to 0 days',
+	};
+
+	let error = '';
+	const SERVICES_WITH_ZERO_VALUES = Object.entries(formValues).reduce((acc, [key, value]) => {
+		if (!value || !Number(value)) return [...acc, key];
+		return acc;
+	}, []);
+
+	Object.entries(SERVICES_MAPPING).forEach(([serviceName, serviceCode]) => {
+		if (alreadyAddedServicesCodes.includes(serviceCode)) {
+			if (!formValues[serviceName] || !Number(formValues[serviceName])) {
+				error = 'already_added_but_changed_to_zero';
+			}
+		}
+	});
+
+	if (SERVICES_WITH_ZERO_VALUES.length === TOTAL_COUNT_OF_DND_SERVICES) error = 'all_empty';
+
+	return ERROR_MAPPING[error] || '';
+};
 
 function Detention({
 	defaultValues = {},
@@ -58,20 +89,18 @@ function Detention({
 	};
 
 	const onClickSave = (formValues) => {
-		const fnc = SUBMIT_BUTTON_FUNCTION_MAPPING[action];
-		let isInValid = true;
-		Object.values(formValues).forEach((val) => {
-			if (val && !isEmpty(val)) isInValid = false;
-		});
-		if (isInValid) {
-			Toast.error('Enter atleast one value');
+		const errorMessage = getErrorMessage(formValues, alreadyAddedServicesCodes);
+		if (errorMessage) {
+			Toast.error(errorMessage);
 			return;
 		}
-		fnc(formValues);
+
+		const currentFunction = SUBMIT_BUTTON_FUNCTION_MAPPING[action];
+		currentFunction(formValues);
 	};
 
 	useEffect(() => {
-		FORM_KEYS.forEach((key) => setValue(key, defaultValues?.[key] || DEFAULT_DAYS_VALUE));
+		Object.keys(SERVICES_MAPPING).forEach((key) => setValue(key, defaultValues?.[key] || DEFAULT_DAYS_VALUE));
 	}, [defaultValues, setValue]);
 
 	return (
@@ -81,23 +110,17 @@ function Detention({
 			) : null}
 
 			<div className={styles.form}>
-				<FormItem
-					name="detention"
-					control={control}
-					howMuchToShowInDnD={howMuchToShowInDnD}
-					errors={errors}
-					minDays={minDays}
-					source={rest.source}
-				/>
-
-				<FormItem
-					name="demurrage"
-					control={control}
-					howMuchToShowInDnD={howMuchToShowInDnD}
-					errors={errors}
-					minDays={minDays}
-					source={rest.source}
-				/>
+				{['detention', 'demurrage'].map((name) => (
+					<FormItem
+						key={name}
+						name={name}
+						control={control}
+						howMuchToShowInDnD={howMuchToShowInDnD}
+						errors={errors}
+						minDays={minDays}
+						source={rest.source}
+					/>
+				))}
 
 				{action === 'filter' ? (
 					<CheckboxController

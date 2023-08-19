@@ -161,7 +161,7 @@ function ListRateCards({
 
 			{loading || isEmpty(cogoAssuredRates) ? null : (
 				<CogoAssuredCard
-					rates={cogoAssuredRates}
+					cogoAssuredRates={cogoAssuredRates}
 					loading={loading}
 					detail={detail}
 					setSelectedCard={setSelectedCard}

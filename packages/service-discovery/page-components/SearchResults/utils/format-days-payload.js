@@ -44,13 +44,15 @@ const specificRatePayload = (services, values) => {
 		(SUBSIDIARY_SERVICES || []).forEach((item) => {
 			const { code = '', value = '' } = item || {};
 
-			if (values?.[value]) {
+			const daysCount = Number(values?.[value]);
+
+			if (daysCount) {
 				const subsidiary_payload = {
 					code,
 					service_type        : service?.service_type,
 					status              : 'active',
 					service_id          : service?.id,
-					total_rate_quantity : Number(values?.[value]),
+					total_rate_quantity : daysCount,
 				};
 
 				SPECIFIC_RATE_PAYLOAD.push(subsidiary_payload);

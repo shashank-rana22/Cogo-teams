@@ -1,7 +1,5 @@
 import { Modal, Tooltip, cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFcrossInCircle } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -17,12 +15,6 @@ const MIN_PERCENTAGE = 25;
 const RANGE = 25;
 const TWO = 2;
 
-const format = (date) => formatDate({
-	date,
-	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-	formatType : 'date',
-});
-
 function ShippingLineModal({
 	shipping_line = {},
 	show = false,
@@ -32,36 +24,6 @@ function ShippingLineModal({
 }) {
 	const router = useRouter();
 	const [selectedCard, setSelectedCard] = useState(cogoAssuredRates?.[GLOBAL_CONSTANTS.zeroth_index]?.id);
-
-	const options = useMemo(() => cogoAssuredRates.map((rateItem) => {
-		const { id = '', freight_price_currency, freight_price_discounted = 0, schedules = {} } = rateItem;
-
-		const { validity_start, validity_end } = schedules;
-
-		return {
-			name  : id,
-			value : id,
-			label : (
-				<div className={styles.option_container}>
-					<span className={styles.sailing_week}>
-						{`${format(validity_start)} to ${format(validity_end)}`}
-					</span>
-
-					<span className={styles.freight_price}>
-						{formatAmount({
-							amount   : freight_price_discounted,
-							currency : freight_price_currency,
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'symbol',
-								maximumFractionDigits : 0,
-							},
-						})}
-					</span>
-				</div>
-			),
-		};
-	}), [cogoAssuredRates]);
 
 	const onClose = () => setShow(false);
 
@@ -177,7 +139,7 @@ function ShippingLineModal({
 					</div>
 
 					<SailingWeek
-						cogoAssuredOptions={options}
+						cogoAssuredRates={cogoAssuredRates}
 						onChange={setSelectedCard}
 						selectedCogoAssuredCard={selectedCard}
 						source="banner"
