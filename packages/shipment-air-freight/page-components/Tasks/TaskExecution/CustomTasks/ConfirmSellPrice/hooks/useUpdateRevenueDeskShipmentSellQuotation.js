@@ -43,7 +43,7 @@ const useUpdateRevenueDeskShipmentSellQuotation = ({
 			Toast.success('Sell price Successfully updated !');
 			updateShipmentPendingTask();
 		} catch (err) {
-			Toast.error(toastApiError(err?.data || 'something went wrong!'));
+			toastApiError(err);
 		}
 	};
 

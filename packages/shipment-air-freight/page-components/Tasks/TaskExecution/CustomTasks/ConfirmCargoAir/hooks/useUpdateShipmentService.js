@@ -72,7 +72,7 @@ const useUpdateShipmentService = ({
 				Toast.error(JSON.stringify(res?.data));
 			}
 		} catch (err) {
-			Toast.error(toastApiError(err) || 'something went wrong!');
+			toastApiError(err);
 		}
 	};
 

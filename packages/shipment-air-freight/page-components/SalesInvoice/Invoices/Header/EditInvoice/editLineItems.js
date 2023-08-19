@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -182,7 +183,7 @@ const useEditLineItems = ({
 			refetch();
 			onClose();
 		} catch (err) {
-			Toast.error(err?.data?.invoices);
+			toastApiError(err);
 		}
 	};
 
