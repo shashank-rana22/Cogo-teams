@@ -1,11 +1,15 @@
 import Promised from './Promised';
 import ServiceProvider from './ServiceProvider';
-import styles from './styles.module.css';
+
+const C = 100;
+const DEF = 0;
+const SUB = 20;
+const ANO_SUB = 10;
 
 function GetOrdinalNumber({ number }) {
 	const suffix = ['th', 'st', 'nd', 'rd'];
-	const quotient = number % 100;
-	const ordinal = suffix[(quotient - 20) % 10] || suffix[quotient] || suffix[0];
+	const quotient = number % C;
+	const ordinal = suffix[(quotient - SUB) % ANO_SUB] || suffix[quotient] || suffix[DEF];
 	return (
 		<>
 			<span className="black">{number}</span>
@@ -64,13 +68,13 @@ const getSubBucketColumns = ({ control = {}, unregister }) => {
 			),
 			accessor: ({ avg_deviation_from_best_rate, rolling_shipments }) => (
 				<>
-					<div className={styles.profitability_container}>
+					<div>
 						{avg_deviation_from_best_rate}
 						{' '}
 						%
 					</div>
 
-					<div className={styles.profitability_sub_container}>
+					<div>
 						(
 						{rolling_shipments}
 						{' '}
@@ -89,11 +93,11 @@ const getSubBucketColumns = ({ control = {}, unregister }) => {
 			),
 			accessor: ({ avg_rate_rank = '', profitability }) => (
 				<>
-					<div className={styles.profitability_container}>
+					<div>
 						<GetOrdinalNumber number={avg_rate_rank} />
 					</div>
 
-					<div className={styles.profitability_sub_container}>
+					<div>
 						(Profitability
 						{' '}
 						{profitability}
