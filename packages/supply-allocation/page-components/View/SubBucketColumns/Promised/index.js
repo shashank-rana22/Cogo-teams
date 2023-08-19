@@ -30,7 +30,7 @@ function Promised({ item = {}, control, unregister }) {
 					<CheckboxController
 						name={`${item?.service_provider?.id}.is_hard_limit`}
 						control={control}
-						value
+						value={item?.is_hard_limit}
 					/>
 					{' '}
 					<span> is Hard Limit</span>
