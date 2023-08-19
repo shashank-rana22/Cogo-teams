@@ -10877,6 +10877,26 @@ const partner = {
 			service_name : 'checkout',
 		},
 		{
+			api          : 'get_fcl_freight_rate',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'create_fcl_freight_rate',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'update_fcl_freight_rate',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'delete_fcl_freight_rate',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
 			api          : 'get_fcl_freight_rate_properties',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
