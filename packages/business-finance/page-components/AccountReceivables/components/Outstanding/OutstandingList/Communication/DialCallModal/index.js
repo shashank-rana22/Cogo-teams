@@ -7,18 +7,18 @@ import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
 
-import mobileNumberPads from '../../../../../configurations/number-pad';
+import mobileNumberPads from '../../../../../configs/number-pad';
 
 import styles from './styles.module.css';
 
 const ELEMENTS_TO_BE_DELETED = 1;
 
-function DialCallModal({ showDialModal = false, setShowDialModal = () => { } }) {
+function DialCallModal({ showDialModal = false, setShowDialModal = () => {}, row = {} }) {
 	const dispatch = useDispatch();
 	const geo = getGeoConstants();
 
 	const [dialNumber, setDialNumber] = useState({
-		number       : '',
+		number       : row?.mobile_number || '',
 		country_code : geo.country.mobile_country_code,
 	});
 
@@ -42,6 +42,7 @@ function DialCallModal({ showDialModal = false, setShowDialModal = () => { } }) 
 					mobile_number       : dialNumber?.number,
 					mobile_country_code : dialNumber?.country_code,
 					isUnkownUser        : true,
+					source              : 'outstanding',
 				},
 			}),
 		);

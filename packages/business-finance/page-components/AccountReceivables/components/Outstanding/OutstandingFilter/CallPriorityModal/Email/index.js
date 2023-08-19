@@ -1,6 +1,7 @@
 import { Toggle } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import emailConfig from '../../../../../configs/email_config';
 import useGetEmails from '../../../../../hooks/useGetDunningEmails';
 import Table from '../Table';
 
@@ -30,7 +31,13 @@ function Email({ orgData = {} }) {
 					value={isActive}
 				/>
 			</div>
-			<Table filters={filters} setFilters={setFilters} data={data} loading={loading} />
+			<Table
+				filters={filters}
+				setFilters={setFilters}
+				data={data}
+				loading={loading}
+				config={emailConfig}
+			/>
 		</div>
 	);
 }

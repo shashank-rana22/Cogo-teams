@@ -1,5 +1,6 @@
 import React from 'react';
 
+import callConfig from '../../../../../configs/callConfig';
 import useGetOrganizationComLogs from '../../../../../hooks/useGetOrganizationComLogs';
 import Table from '../Table';
 
@@ -21,6 +22,7 @@ function Call({ orgData = {} }) {
 				refetch={refetch}
 				setFilters={setFilters}
 				filters={filters}
+				config={callConfig}
 			/>
 		</div>
 	);
