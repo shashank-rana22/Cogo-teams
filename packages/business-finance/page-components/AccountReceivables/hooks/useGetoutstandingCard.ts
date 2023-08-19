@@ -233,7 +233,7 @@ const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 	};
 
 	useEffect(() => {
-		getOrganizationInvoices();
+		getOrganizationInvoices({});
 	}, [query, getOrganizationInvoices]);
 
 	const clearInvoiceFilters = () => {

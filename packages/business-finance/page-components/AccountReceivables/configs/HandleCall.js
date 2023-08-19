@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import DialCallModal from '../components/Outstanding/OutstandingList/Communication/DialCallModal';
 
-function HandleCall({ row }) {
+function HandleCall({ row = {} }) {
 	const [showDialModal, setShowDialModal] = useState(false);
 
 	const onClick = () => setShowDialModal(true);

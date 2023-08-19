@@ -1,6 +1,6 @@
 import { getByKey } from '@cogoport/utils';
 
-import HandleCall from './HandleCall.tsx';
+import HandleCall from './HandleCall';
 
 const emailConfig = [
 	{

@@ -9,7 +9,6 @@ import {
 } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { GenericObject } from '../../../commons/Interfaces';
 import {
 	SORTBY_OPTION,
 	getSearchOptionsLabels,
@@ -18,29 +17,6 @@ import {
 import CallPriorityModal from './CallPriorityModal';
 import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
-
-interface OrderBy {
-	key: string;
-	order: string;
-	label: string;
-}
-
-interface OutstandingFilterProps {
-	handleChange: (p: string) => void;
-	handleInputReset: () => void;
-	setOrderBy: Function;
-	orderBy: OrderBy;
-	setParams: (p: object) => void;
-	params: GenericObject;
-	formFilters: GenericObject;
-	setFormFilters: (p: object) => void;
-	clearFilter: () => void;
-	queryKey: string;
-	setQueryKey: (p: string) => void;
-	entityCode;
-	refetch: (p?: object) => void;
-	list: { businessName?: string }[];
-}
 
 function Filters({
 	handleChange = () => {},
@@ -57,7 +33,7 @@ function Filters({
 	setQueryKey = () => {},
 	refetch = () => {},
 	list = [],
-}: OutstandingFilterProps) {
+}) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 	const [showCallPriority, setShowCallPriority] = useState(false);
 	const [showSearchPopover, setShowSearchPopover] = useState(false);

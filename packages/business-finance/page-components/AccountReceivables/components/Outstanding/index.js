@@ -2,12 +2,12 @@ import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmptyState from '../../../commons/EmptyStateDocs';
-import useGetOrgOutstanding from '../../hooks/useGetOrgOutstanding';
+import EmptyState from '../../../commons/EmptyStateDocs/index.tsx';
+import useGetOrgOutstanding from '../../hooks/useGetOrgOutstanding.ts';
 
-import OutstandingFilter from './OutstandingFilter';
-import OutstandingList from './OutstandingList';
-import OrgLoader from './OutstandingList/OrgLoaders';
+import OutstandingFilter from './OutstandingFilter/index.tsx';
+import OutstandingList from './OutstandingList/index.tsx';
+import OrgLoader from './OutstandingList/OrgLoaders/index.tsx';
 import styles from './styles.module.css';
 
 function Outstanding({ entityCode = '' }) {
@@ -33,7 +33,7 @@ function Outstanding({ entityCode = '' }) {
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
 
-	const handleChange = (val:string) => {
+	const handleChange = (val) => {
 		setoutStandingFilters({ ...outStandingFilters, search: val });
 	};
 
