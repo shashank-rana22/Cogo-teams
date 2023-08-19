@@ -67,9 +67,7 @@ function StepOne({
 	useEffect(() => {
 		if (policyForSelf) {
 			setAddressId(
-				prosporerAddressType === 'billing'
-					? { organizationBillingAddressId: prosporerAddressId }
-					: { organizationAddressId: prosporerAddressId },
+				{ organizationBillingAddressId: billingId },
 			);
 		} else {
 			setAddressId(

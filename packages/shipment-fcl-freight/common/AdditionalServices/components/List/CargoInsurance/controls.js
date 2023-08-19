@@ -2,7 +2,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 const geo = getGeoConstants();
 
-const controls = [
+const controls = ({ list }) => [
 	{
 		label          : 'Commodity',
 		name           : 'cargo_insurance_commodity',
@@ -11,7 +11,7 @@ const controls = [
 		type           : 'select',
 		span           : 12,
 		defaultOptions : true,
-		options        : [],
+		options        : list,
 		placeholder    : 'Select Commodity',
 		rules          : { required: 'Commodity is required' },
 	},

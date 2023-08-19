@@ -81,10 +81,12 @@ function CargoInsurance({
 				step={step}
 				insuranceDetails={insuranceDetails}
 				shipmentData={shipment_data}
-				policyId={policyDetails?.cargo_insurance_policy_id}
+				policyDetails={policyDetails}
+				primary_service={primary_service}
 				addressId={addressId}
 				billingData={billingData}
 				formProps={formProps}
+				premiumData={premiumData}
 				setPremiumData={setPremiumData}
 			/>
 		);

@@ -1,7 +1,5 @@
-import { Button, FileSelect } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
 
 import useInsuranceCheckoutAndGenerate from '../../../../../hooks/useInsuranceCheckoutAndGenerate';
 import useSaveDraft from '../../../../../hooks/useSaveDraft';
@@ -29,8 +27,6 @@ function StepThree({
 	billingData = {},
 	premiumData = {},
 }) {
-	const [uploadProof, setUploadProof] = useState(null);
-
 	const {
 		handleSubmit = () => {},
 		control,
@@ -54,7 +50,6 @@ function StepThree({
 
 	const { loading: policyGenerationLoading, generateInsurance } =	useInsuranceCheckoutAndGenerate({
 		policyId,
-		uploadProof,
 		insuranceDetails,
 		refetch: refetchAfterApiCall,
 		shipmentData,
@@ -93,7 +88,9 @@ function StepThree({
 				addressId,
 				billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
 			});
-			const payloadForUpdateShipment = getPayloadForUpdateShipment({ insuranceDetails, primary_service, task });
+			const payloadForUpdateShipment = getPayloadForUpdateShipment(
+				{ insuranceDetails, task, shipmentData },
+			);
 
 			if (submit) {
 				generateInsurance({ payload, payloadForUpdateShipment });
@@ -110,16 +107,6 @@ function StepThree({
 				fields={invoiceControls}
 				errors={errors}
 			/>
-
-			<div>
-				<div className={styles.title}>Customer Confirmation Proof</div>
-
-				<FileSelect
-					value={uploadProof}
-					onChange={setUploadProof}
-					label="Customer Confirmation Proof"
-				/>
-			</div>
 
 			<div className={styles.button_container}>
 				<Button
@@ -151,7 +138,7 @@ function StepThree({
 				<Button
 					size="md"
 					onClick={() => handleNextStep({ submit: true })}
-					disabled={showLoading || isEmpty(uploadProof)}
+					disabled={showLoading}
 					className={styles.btn_div}
 				>
 					Generate Policy

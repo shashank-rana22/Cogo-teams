@@ -1,5 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
-
 const getPayload = ({
 	premiumData = {},
 	insuranceDetails = {},
@@ -21,37 +19,37 @@ const getPayload = ({
 		panDoc,
 		gstDoc,
 		invoiceDoc,
+		customerConfirmationDoc,
 		...rest
-	} = policyForSelf
-		? insuranceDetails
-		: { ...insuranceDetails, ...billingData };
+	} = { ...insuranceDetails, ...billingData };
 
 	payload = {
 		...addressId,
 		...rest,
 		...restPremiumData,
 		verificationDoc: {
-			gstDoc: !isEmpty(gstDoc?.finalUrl) ? {
+			gstDoc: {
 				name    : gstDoc?.fileName,
 				url     : gstDoc?.finalUrl,
 				success : true,
 
-			} : undefined,
-			panDoc: !isEmpty(panDoc?.finalUrl) ? {
+			},
+			panDoc: {
 				name    : panDoc?.fileName,
 				url     : panDoc?.finalUrl,
 				success : true,
 
-			} : undefined,
-			invoiceDoc: !isEmpty(invoiceDoc?.finalUrl) ? {
+			},
+			invoiceDoc: {
 				name    : invoiceDoc?.fileName,
 				url     : invoiceDoc?.finalUrl,
 				success : true,
 
-			} : undefined,
+			},
 		},
+		customerConfirmationDoc : customerConfirmationDoc?.finalUrl,
 		policyForSelf,
-		billingType: 'CORPORATE',
+		billingType             : 'CORPORATE',
 		policyId,
 		gstAmount,
 	};

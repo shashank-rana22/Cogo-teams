@@ -63,7 +63,7 @@ function CargoInsurance({
 		refetch                : refetchAfterApiCall,
 	});
 
-	const { list = [] } = useGetInsuranceListCommodities();
+	const { list = [], loadingCommodity } = useGetInsuranceListCommodities();
 
 	const {
 		control,
@@ -74,6 +74,7 @@ function CargoInsurance({
 	} = useForm();
 
 	const formValues = watch();
+	const newControls = controls({ list });
 
 	useEffect(() => {
 		if (!isEmpty(formValues?.cargo_value) && !isEmpty(formValues?.cargo_insurance_commodity)) {
@@ -102,18 +103,6 @@ function CargoInsurance({
 	}, [premiumRate, query]);
 
 	useEffect(() => {
-		const newList = (list || []).map((item) => ({
-			...item,
-			commodity: `${item?.commodity}(${item?.subCommodity})`,
-		}));
-		(controls || []).forEach((item, index) => {
-			if (item.name === 'cargo_insurance_commodity') {
-				controls[index].options = newList;
-			}
-		});
-	}, [list]);
-
-	useEffect(() => {
 		const optionselected = (list || []).find(
 			(option) => option.id === formValues?.cargo_insurance_commodity,
 		);
@@ -124,7 +113,7 @@ function CargoInsurance({
 		);
 	}, [formValues?.cargo_insurance_commodity, list, setValue]);
 
-	if (apiLoading) {
+	if (apiLoading || loadingCommodity) {
 		return <Loading />;
 	}
 
@@ -150,7 +139,7 @@ function CargoInsurance({
 		>
 			<Modal.Header title="Add Cargo Insurance" />
 			<Modal.Body>
-				<Layout control={control} fields={controls} errors={errors} />
+				<Layout control={control} fields={newControls} errors={errors} />
 
 				{loading ? <Loading /> : null}
 

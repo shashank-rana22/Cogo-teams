@@ -1,12 +1,10 @@
-const getPayloadForUpdateShipment = ({ insuranceDetails = {}, primary_service = {}, task = {} }) => {
+const getPayloadForUpdateShipment = ({ insuranceDetails = {}, task = {}, shipmentData }) => {
 	const {
 		billingAddress, billingCity,
 		billingPincode, billingState, gstin, partyName,
 		insuredFirstName, insuredLastName, panNumber, phoneNo,
 		email, policyForSelf, locationFrom, invoiceNo, invoiceDate, transitDate, locationTo,
 	} = insuranceDetails || {};
-
-	const { service_provider } = primary_service || {};
 
 	const { service_type, shipment_id, service_id } = task || {};
 
@@ -38,7 +36,7 @@ const getPayloadForUpdateShipment = ({ insuranceDetails = {}, primary_service = 
 				: undefined,
 		},
 		ids                 : [service_id],
-		performed_by_org_id : service_provider?.id,
+		performed_by_org_id : shipmentData?.id,
 		service_type,
 		shipment_id,
 	};

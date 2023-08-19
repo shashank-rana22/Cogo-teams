@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -7,7 +6,6 @@ import useUpdateShipmentService from './useUpdateShipmentService';
 
 const useInsuranceCheckoutAndGenerate = ({
 	policyId = '',
-	uploadProof = null,
 	refetch = () => {},
 	shipmentData = {},
 	successMessage = 'Task Completed Successfully!',
@@ -28,14 +26,13 @@ const useInsuranceCheckoutAndGenerate = ({
 			await trigger({
 				data: {
 					...payload,
-					source                  : 'SHIPMENT',
-					organizationId          : shipmentData?.importer_exporter_id,
+					source         : 'SHIPMENT',
+					organizationId : shipmentData?.importer_exporter_id,
 					userId,
-					sid                     : shipmentData?.serial_id,
-					shipmentId              : shipmentData?.id,
+					sid            : shipmentData?.serial_id,
+					shipmentId     : shipmentData?.id,
 					policyId,
-					performedBy             : userId,
-					customerConfirmationDoc : uploadProof?.[GLOBAL_CONSTANTS.zeroth_index]?.name,
+					performedBy    : userId,
 				},
 			});
 			await getUpdateShipmentService({

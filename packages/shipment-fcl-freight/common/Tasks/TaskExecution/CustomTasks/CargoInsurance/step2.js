@@ -1,7 +1,8 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Loader } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 
+import useGetInsuranceListCommodities from '../../../../../hooks/useGetInsuranceListCommodities';
 import useGetInsuranceRate from '../../../../../hooks/useGetInsuranceRate';
 import useSaveDraft from '../../../../../hooks/useSaveDraft';
 
@@ -20,12 +21,15 @@ function StepTwo({
 	step,
 	insuranceDetails = {},
 	shipmentData = {},
-	policyId = '',
+	policyDetails = {},
+	primary_service = {},
 	addressId = '',
 	billingData = {},
 	formProps = {},
+	premiumData = {},
 	setPremiumData = () => {},
 }) {
+	const { list = [], loadingCommodity } = useGetInsuranceListCommodities();
 	const {
 		handleSubmit = () => {},
 		watch,
@@ -42,9 +46,10 @@ function StepTwo({
 		}
 	};
 
-	const { premiumData, premiumLoading } = useGetInsuranceRate({
+	const { premiumLoading } = useGetInsuranceRate({
 		insuranceDetails,
 		formValues,
+		setPremiumData,
 	});
 
 	const { loading, saveData } = useSaveDraft({
@@ -53,8 +58,10 @@ function StepTwo({
 		refetch,
 	});
 
+	const fields = cargoControls({ insuranceDetails, policyDetails, primary_service, list });
+
 	const newControls = mutatedFields({
-		fields: cargoControls({ insuranceDetails }),
+		fields,
 		setValue,
 		formValues,
 		watch,
@@ -65,7 +72,7 @@ function StepTwo({
 		handleSubmit((values) => {
 			const newFormValues = { ...insuranceDetails, ...values };
 			const payload = getPayload({
-				policyId,
+				policyId         : policyDetails?.cargo_insurance_policy_id,
 				insuranceDetails : newFormValues,
 				billingData,
 				policyForSelf    : insuranceDetails?.policyForSelf,
@@ -78,53 +85,56 @@ function StepTwo({
 	};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.label_val}>Cargo Details</div>
+		loadingCommodity ? <Loader /> : (
+			<div className={styles.container}>
+				<div className={styles.label_val}>Cargo Details</div>
 
-			<div className={styles.flex_row}>
-				<div className={cl`${styles.flex_row} ${styles.flex}`}>
-					<Layout
-						control={control}
-						fields={newControls}
-						errors={errors}
+				<div className={styles.flex_row}>
+					<div className={cl`${styles.flex_row} ${styles.flex}`}>
+						<Layout
+							control={control}
+							fields={newControls}
+							errors={errors}
+							loading={loadingCommodity}
+						/>
+					</div>
+
+					<PremiumRate
+						premiumData={premiumData}
+						premiumLoading={premiumLoading}
 					/>
 				</div>
 
-				<PremiumRate
-					premiumData={premiumData}
-					premiumLoading={premiumLoading}
-				/>
+				<div className={styles.button_container}>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => setStep(BACK_STEP)}
+						disabled={loading}
+					>
+						Back
+					</Button>
+
+					<Button
+						size="md"
+						onClick={handleNextStep}
+						disabled={loading}
+						className={styles.btn_div}
+					>
+						Save As Draft
+					</Button>
+
+					<Button
+						size="md"
+						onClick={() => handleNextStep('next_step')}
+						disabled={loading || isEmpty(premiumData)}
+						className={styles.btn_div}
+					>
+						Next Step
+					</Button>
+				</div>
 			</div>
-
-			<div className={styles.button_container}>
-				<Button
-					size="md"
-					themeType="secondary"
-					onClick={() => setStep(BACK_STEP)}
-					disabled={loading}
-				>
-					Back
-				</Button>
-
-				<Button
-					size="md"
-					onClick={handleNextStep}
-					disabled={loading}
-					className={styles.btn_div}
-				>
-					Save As Draft
-				</Button>
-
-				<Button
-					size="md"
-					onClick={() => handleNextStep('next_step')}
-					disabled={loading}
-					className={styles.btn_div}
-				>
-					Next Step
-				</Button>
-			</div>
-		</div>
+		)
 	);
 }
 
