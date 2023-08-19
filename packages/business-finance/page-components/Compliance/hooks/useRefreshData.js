@@ -2,8 +2,8 @@ import { useRequestBf } from '@cogoport/request';
 
 import toastApiError from '../../commons/toastApiError.ts';
 
-const useRefreshData = () => {
-	const [{ loading:refreshLoading }, trigger] = useRequestBf(
+const useRefreshData = ({ refetch }) => {
+	const [{ loading: refreshLoading }, trigger] = useRequestBf(
 		{
 			url     : '/sales/outward/refresh-excel-sheet',
 			method  : 'put',
@@ -18,6 +18,7 @@ const useRefreshData = () => {
 					outwardId: id,
 				},
 			});
+			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}

@@ -92,7 +92,8 @@ const OPTIONS = {
 		defaultParams : {
 			page_limit: 10,
 		},
-		defaultOptions: true,
+		initialCall    : true,
+		defaultOptions : true,
 	},
 	'port-type-grouped': {
 		valueKey     : 'id',

@@ -1,8 +1,8 @@
+import advanceBookingManager from './config/advance-booking-manager';
 import airRepository from './config/air-repository';
 import airlinePluginBooking from './config/airline-booking-plugin';
 import allocations from './config/allocations';
 import authorityDesk from './config/authority-desk';
-import awbInventory from './config/awb-inventory';
 import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
@@ -124,7 +124,7 @@ const routeConfig = {
 	...so2Surface,
 	...chakravyuh,
 	...riskManagement,
-	...awbInventory,
+	...advanceBookingManager,
 	...revenueDesk,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
