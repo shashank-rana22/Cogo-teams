@@ -2,6 +2,8 @@ import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 
+import { getMobilePrefixFromCountryCode } from '../../../../../utils/getMobilePrefixFromCountryCode';
+
 import styles from './styles.module.css';
 
 const COUNTRY_CODE_PREFIX = '%2B';
@@ -11,14 +13,22 @@ function SearchSpotModal({
 	setSearchSpotmodal = () => {},
 	openNewTab = () => {},
 	loading = false,
-	userData = {},
+	formattedMessageData = {},
+	activeMessageCard = {},
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
-	const { email = '', mobile_number = '', mobile_country_code = '' } = userData || {};
+	const { email = '', lead_user_details = {} } = formattedMessageData || {};
+	const { mobile_no = '', country_code = '' } = activeMessageCard || {};
+	const mobile_country_code = getMobilePrefixFromCountryCode(country_code);
 
-	const emailParams = email ? `&email=${email}` : '';
-	const countryCodeRegex = GLOBAL_CONSTANTS.regex_patterns.mobile_country_code_format;
-	const countryCode = mobile_country_code?.replace(countryCodeRegex, COUNTRY_CODE_PREFIX);
+	const mobile_number = (
+		mobile_no.substr(GLOBAL_CONSTANTS.zeroth_index, mobile_country_code.length) === mobile_country_code
+	) ? mobile_no.substr(mobile_country_code.length) : mobile_no;
+
+	const userEmail = email || lead_user_details?.email;
+
+	const emailParams = userEmail ? `&email=${userEmail}` : '';
+	const countryCode = COUNTRY_CODE_PREFIX + mobile_country_code;
 
 	const queryParams = `?mobile=${mobile_number}&mobile_country_code=${countryCode}${emailParams}`;
 
@@ -61,7 +71,7 @@ function SearchSpotModal({
 					themeType="tertiary"
 					onClick={handleRedirecting}
 				>
-					Redirect anyway
+					Skip
 				</Button>
 
 				<Button
