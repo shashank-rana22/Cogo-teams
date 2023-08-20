@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 interface InvoiceAdditionals {
 	reqCancelReason?: string,
 	reqReplaceTo?:string,
+	reqReplaceReason?:string,
 }
 
 interface ItemData {
@@ -18,7 +19,7 @@ interface Interface {
 
 function RibbonRender({ row = {} }: Interface) {
 	const { daysLeftForAutoIrnGeneration = '', invoiceAdditionals = {} } = row;
-	const { reqCancelReason = '', reqReplaceTo = '' } = invoiceAdditionals || {};
+	const { reqCancelReason = '', reqReplaceTo = '', reqReplaceReason = '' } = invoiceAdditionals || {};
 
 	let value;
 	if ((daysLeftForAutoIrnGeneration as unknown as number) >= 0) {
@@ -33,7 +34,7 @@ function RibbonRender({ row = {} }: Interface) {
 			criteria   : (daysLeftForAutoIrnGeneration as unknown as number) >= 0,
 		},
 		{ param: reqCancelReason, displayVal: 'Cancel Approved', criteria: true },
-		{ param: reqReplaceTo, displayVal: `Replace to ${reqReplaceTo}`, criteria: true },
+		{ param: reqReplaceReason, displayVal: `Replace to ${reqReplaceTo}`, criteria: true },
 	];
 
 	return (
