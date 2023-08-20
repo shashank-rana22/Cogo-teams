@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 
 interface InvoiceAdditionals {
 	reqCancelReason?: string,
+	reqReplaceTo?:string,
 }
 
 interface ItemData {
@@ -17,41 +18,44 @@ interface Interface {
 
 function RibbonRender({ row = {} }: Interface) {
 	const { daysLeftForAutoIrnGeneration = '', invoiceAdditionals = {} } = row;
-	const { reqCancelReason = '' } = invoiceAdditionals || {};
+	const { reqCancelReason = '', reqReplaceTo = '' } = invoiceAdditionals || {};
+
 	let value;
 	if ((daysLeftForAutoIrnGeneration as unknown as number) >= 0) {
 		value = `${daysLeftForAutoIrnGeneration || '--'} days left` || '0';
 	} else {
 		value = 'Expired';
 	}
+	const properties = [
+		{
+			param      : daysLeftForAutoIrnGeneration,
+			displayVal : value || '-',
+			criteria   : (daysLeftForAutoIrnGeneration as unknown as number) >= 0,
+		},
+		{ param: reqCancelReason, displayVal: 'Cancel Approved', criteria: true },
+		{ param: reqReplaceTo, displayVal: `Replace to ${reqReplaceTo}`, criteria: true },
+	];
 
 	return (
 		<div>
-			{daysLeftForAutoIrnGeneration ? (
-				<div
-					className={styles.ribbon}
-					style={{
-						background: (daysLeftForAutoIrnGeneration as unknown as number) >= 0
-							? 'rgb(255, 213, 85)' : '#ff0000',
-					}}
-				>
-					{value || '-'}
-					{' '}
-				</div>
-			) : null}
-			{reqCancelReason
-				? (
-					<div
-						className={styles.ribbon}
-						style={{
-							background: 'rgb(255, 213, 85)',
-						}}
-					>
-						Cancel Approved
-						{' '}
-					</div>
-				)
-				: null}
+			{
+				properties.map((item) => {
+					const { param, displayVal, criteria } = item;
+
+					return (
+						param
+							? (
+								<div
+									className={styles.ribbon}
+									style={{ background: criteria ? 'rgb(255, 213, 85)' : '#ff0000' }}
+								>
+									{displayVal}
+								</div>
+							)
+							: null
+					);
+				})
+			}
 		</div>
 	);
 }
