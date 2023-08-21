@@ -22,6 +22,7 @@ const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: fals
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 const CANCEL_OPTION_ALLOWED_STATUSES = ['IRN_GENERATED'];
+const CANCEL_MODAL_OPTIONS = ['cancel_e_invoice', 'replace_e_invoice'];
 
 const INVOICE_SERIAL_ID_LESS_THAN = 8;
 
@@ -198,7 +199,7 @@ function Actions({
 					shipment_data={shipment_data}
 				/>
 			) : null}
-			{(['cancel_e_invoice', 'replace_e_invoice'].includes(showModal)) && showCancelOptions && (
+			{(CANCEL_MODAL_OPTIONS.includes(showModal)) && showCancelOptions && (
 				<CancelReplaceEInvoice
 					bfInvoice={bfInvoice}
 					show={['cancel_e_invoice', 'replace_e_invoice'].includes(showModal)}
