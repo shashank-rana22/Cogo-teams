@@ -16,3 +16,8 @@
 .border {
 	border-bottom: 2px solid var(--color-accent-orange-2);
 }
+
+.sort {
+	padding: 2px;
+	cursor: pointer;
+}

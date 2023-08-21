@@ -47,14 +47,14 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 	if (search_type === 'air_customs') {
 		if (trade_type === 'export') {
 			return [{
-				airport_id: primary_service?.origin_airport?.id,
+				airport_id     : primary_service?.origin_airport?.id,
 				...common,
-				...common2,
+				packages_count : Number(packages_count || SINGLE_PACKAGE),
 			}];
 		} return [{
-			airport_id: primary_service?.destination_airport?.id,
+			airport_id     : primary_service?.destination_airport?.id,
 			...common,
-			...common2,
+			packages_count : Number(packages_count || SINGLE_PACKAGE),
 		}];
 	}
 

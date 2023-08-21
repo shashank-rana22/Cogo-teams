@@ -165,7 +165,7 @@ export const MESSAGE_TYPE_WISE_MAPPING = {
 	image       : MediaComponent,
 	audio       : MediaComponent,
 	video       : MediaComponent,
-	contact     : CustomContacts,
+	contacts    : CustomContacts,
 	document    : CustomDocument,
 	file        : CustomDocument,
 	event       : UserActivityMessages,

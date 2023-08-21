@@ -1,18 +1,22 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 const useGetTdsData = ({
 	refetch, setShowTdsModal, row, id,
 	CNCategoryValues = { CNType: '', CNValues: '', remarks: '' },
 	remark,
 	isConsolidated = false,
+	creditNoteApprovalType = '',
+	level2 = {},
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
 
 	const { CNType, CNValues, remarks } = CNCategoryValues || {};
+
 	const creditNoteRemarks = CNValues === 'revenueOthers' || CNValues === 'nonRevenueOthers'
 		? remarks
 		: CNValues;
@@ -37,15 +41,17 @@ const useGetTdsData = ({
 				data: {
 					[payloadKey]: {
 						...row.data?.[payloadKey],
-						creditNoteType: CNType,
+						creditNoteType         : CNType,
 						creditNoteRemarks,
+						creditNoteApprovalType : isEmpty(creditNoteApprovalType) ? null : creditNoteApprovalType,
+
 					},
 				},
 			}
 			: null;
 
 		if (
-			(CNType && creditNoteRemarks)
+			((CNType || level2) && (creditNoteRemarks || remark))
 			|| status === 'REJECTED'
 			|| row.type === 'TDS_APPROVAL'
 		) {

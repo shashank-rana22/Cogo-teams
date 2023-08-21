@@ -49,6 +49,7 @@ import {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncListDepartment,
 	asyncFieldsTicketTypes,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
@@ -63,6 +64,7 @@ import {
 	asyncFieldsLeadOrganization,
 	asyncListSupplyFclSearches,
 	asyncListResources,
+	asyncFieldsLocationsMapping,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -93,6 +95,7 @@ const keyAsyncFieldsParamsMapping = {
 	partner_roles                        : asyncFieldsPartnerRoles,
 	segments                             : asyncFieldsCampaignSegments,
 	list_locations                       : asyncFieldsLocations,
+	list_locations_mapping               : asyncFieldsLocationsMapping,
 	list_operators                       : asyncFieldsListOperators,
 	list_rate_charge_codes               : asyncFieldListRateChargeCodes,
 	allot_bank                           : asyncAllotBanks,
@@ -130,6 +133,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_tribes                          : asyncListTribes,
 	list_chapters                        : asyncListChapter,
 	list_employee_roles                  : asyncListRoles,
+	list_employee_departments            : asyncListDepartment,
 	default_types                        : asyncFieldsTicketTypes,
 	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
