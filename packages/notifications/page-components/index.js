@@ -71,6 +71,9 @@ const notificationRedirect = ({ link, push, partner_id, NAVIGATION_LINKS }) => {
 
 function Notifications() {
 	const { push } = useRouter();
+
+	const { t } = useTranslation(['notifications']);
+
 	const { general } = useSelector((state) => state);
 	const [page, setPage] = useState(INITIAL_PAGE);
 	const [disabled, setDisabled] = useState(false);
@@ -129,13 +132,13 @@ function Notifications() {
 			});
 
 			if (updateRes.hasError) {
-				showErrorsInToast(updateRes.messages);
+				showErrorsInToast(updateRes.messages, t);
 				return;
 			}
 
 			trigger();
 		} catch (err) {
-			showErrorsInToast(err.data);
+			showErrorsInToast(err.data, t);
 		}
 	};
 
@@ -161,7 +164,7 @@ function Notifications() {
 			});
 
 			if (updateRes.hasError) {
-				showErrorsInToast(updateRes.messages);
+				showErrorsInToast(updateRes.messages, t);
 				return;
 			}
 
@@ -172,7 +175,7 @@ function Notifications() {
 
 			trigger();
 		} catch (err) {
-			showErrorsInToast(err.data);
+			showErrorsInToast(err.data, t);
 		} finally {
 			setDisabled(false);
 		}
