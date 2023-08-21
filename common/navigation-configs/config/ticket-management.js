@@ -7,7 +7,10 @@ const ticketManagement = {
 		navigation : 'ticket_management-super_admin',
 		isMainNav  : true,
 	},
-
+	'/[partner_id]/ticket-management/configurations': {
+		navigation : 'ticket_management-configurations',
+		isMainNav  : true,
+	},
 };
 
 export default ticketManagement;
