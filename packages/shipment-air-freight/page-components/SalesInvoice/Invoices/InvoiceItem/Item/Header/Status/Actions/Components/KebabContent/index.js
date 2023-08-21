@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
+const AUTHORIZED_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id];
+
 function Remarks({ remarks = '' }) {
 	return (
 		<div className={styles.remarkcontainer}>
@@ -105,8 +107,7 @@ function KebabContent({
 	setExchangeRate = () => {},
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorizedUser = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id
-	|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id;
+	const isAuthorizedUser = AUTHORIZED_IDS.includes(user_data?.user?.id);
 
 	const [show, setShow] = useState(false);
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
