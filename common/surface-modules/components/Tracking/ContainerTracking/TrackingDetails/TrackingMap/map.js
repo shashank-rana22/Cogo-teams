@@ -1,4 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { CogoMaps, L } from '@cogoport/maps';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import Pointer from './Pointer';
@@ -7,33 +9,39 @@ import Route from './Route';
 const LAYER = [
 	{
 		name        : 'Cogo Maps',
-		url         : `${process.env.NEXT_PUBLIC_MAPS_BASE_URL}/cogo-tiles/{z}/{x}/{y}.png`,
+		url         : `${process.env.NEXT_PUBLIC_MAPS_BASE_URL}/{z}/{x}/{y}.png`,
 		attribution : '',
 	},
 ];
 
-const lineOptions = { color: 'green' };
-const remainingRoutelineOptions = { color: 'blue' };
-const center = { lat: '28.679079', lng: '77.069710' };
+const LINE_OPTIONS = { color: 'green' };
+const REMAINING_ROUTE_LINE_OPTIONS = { color: 'blue' };
+const CENTER = { lat: '28.679079', lng: '77.069710' };
+const CORNER_1_LAT = -90;
+const CORNER_1_LNG = -200;
+const CORNER_2_LAT = 90;
+const CORNER_2_LNG = 200;
+const MAP_TIMEOUT_DELAY = 200;
+const CURVE_POINT_LAST_INDEX_CALCULATOR = 1;
 
 function MapComp({
 	remainingPoints,
 	curvePoints,
 	destination = {},
 }) {
-	const [map, setMap] = useState();
-	const corner1 = L.latLng(-90, -200);
-	const corner2 = L.latLng(90, 200);
+	const [map, setMap] = useState({});
+	const corner1 = L.latLng(CORNER_1_LAT, CORNER_1_LNG);
+	const corner2 = L.latLng(CORNER_2_LAT, CORNER_2_LNG);
 	const bounds = L.latLngBounds(corner1, corner2);
 	const curvePointLength = curvePoints?.length;
 
-	const check =		destination?.latitude !== curvePoints?.[curvePointLength - 1]?.lat
-		&& destination?.longitude !== curvePoints?.[curvePointLength - 1]?.lng;
+	const check = destination?.latitude !== curvePoints?.[curvePointLength - CURVE_POINT_LAST_INDEX_CALCULATOR]?.lat
+		&& destination?.longitude !== curvePoints?.[curvePointLength - CURVE_POINT_LAST_INDEX_CALCULATOR]?.lng;
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			if (map) map.invalidateSize(true);
-		}, 200);
+		}, MAP_TIMEOUT_DELAY);
 		return () => {
 			clearTimeout(timeout);
 		};
@@ -57,33 +65,33 @@ function MapComp({
 			baseLayer={LAYER}
 			zoom={2.9}
 			minZoom={2}
-			center={center}
+			center={CENTER}
 			setMap={setMap}
 			maxBoundsViscosity={1}
 		>
-			{curvePoints?.length > 0 && (
+			{!isEmpty(curvePoints) && (
 				<Pointer
-					lat={curvePoints?.[0]?.lat}
-					lng={curvePoints?.[0]?.lng}
+					lat={curvePoints?.[GLOBAL_CONSTANTS.zeroth_index]?.lat}
+					lng={curvePoints?.[GLOBAL_CONSTANTS.zeroth_index]?.lng}
 					iconSvg="source"
 					map={map}
 				/>
 			)}
 
-			{remainingPoints?.length > 0 && (
+			{!isEmpty(remainingPoints) && (
 				<Route
 					positions={remainingPoints}
 					map={map}
-					pathOptions={remainingRoutelineOptions}
+					pathOptions={REMAINING_ROUTE_LINE_OPTIONS}
 				/>
 			)}
-			{remainingPoints?.length === 0 && curvePoints?.length > 0 && (
-				<Route positions={curvePoints} map={map} pathOptions={lineOptions} />
+			{isEmpty(curvePoints) && isEmpty(remainingPoints) && (
+				<Route positions={curvePoints} map={map} pathOptions={LINE_OPTIONS} />
 			)}
-			{curvePoints?.length > 0 && (
+			{!isEmpty(curvePoints) && (
 				<Pointer
-					lat={curvePoints?.[curvePointLength - 1]?.lat}
-					lng={curvePoints?.[curvePointLength - 1]?.lng}
+					lat={curvePoints?.[curvePointLength - CURVE_POINT_LAST_INDEX_CALCULATOR]?.lat}
+					lng={curvePoints?.[curvePointLength - CURVE_POINT_LAST_INDEX_CALCULATOR]?.lng}
 					iconSvg={check ? 'current-location' : 'destination-icon'}
 					map={map}
 				/>
