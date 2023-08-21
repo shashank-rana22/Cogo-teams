@@ -23,7 +23,7 @@ const INVOICE_DATA_MAPPING = [
 	{ id: '3', label: 'UTR Number' },
 	{ id: '4', label: 'Cancellation Agreement' },
 ];
-function InvoiceDetails({ item, entityCode }) {
+function InvoiceDetails({ item, entityCode = '' }) {
 	const { loading, data, getInvoiceDetailsApi } = useInvoiceDetails({
 		id: item?.id,
 	});

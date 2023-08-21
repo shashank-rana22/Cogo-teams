@@ -568,8 +568,9 @@ export default {
 			partner: {
 				bookings: {
 					invoicing: {
-						request_cancel_invoice : true,
-						request_credit_note    : false,
+						request_cancel_invoice  : true,
+						request_replace_invoice : true,
+						request_credit_note     : false,
 					},
 				},
 			},
