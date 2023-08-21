@@ -5,6 +5,12 @@
 	color: #221f20;
 }
 
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .filter {
 	width: 22vw;
 	max-height: 1100px;

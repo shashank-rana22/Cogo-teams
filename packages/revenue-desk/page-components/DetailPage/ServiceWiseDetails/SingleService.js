@@ -3,11 +3,14 @@ import { useState, useEffect } from 'react';
 
 import getAvailableRatesDetails from '../../../helpers/getAvailableRatesDetails';
 import getFormatedRates from '../../../helpers/getFormatedRates';
+import getRecommendation from '../../../helpers/getRecommendation';
 import getSellRateDetailPayload from '../../../helpers/getSellRateDetailPayload';
 import getSystemFormatedRates from '../../../helpers/getSystemFormatedRates';
 import groupSimilarServices from '../../../helpers/groupSimilarServices';
 // import useGetShipmentEligibleBookingDocument from '../../../hooks/useGetShipmentEligibleBookingDocument';
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
+import useListShipmentBookingConfirmationPreferences from
+	'../../../hooks/useListShipmentBookingConfirmationPreferences';
 import { DEFAULT_INDEX, VALUE_ONE } from '../../constants';
 import CargoDetailPills from '../../List/Card/Body/CargoDetails/CargoDetailPills';
 
@@ -68,6 +71,15 @@ function SingleService({
 		shipmentData,
 		isPreferenceSet,
 	});
+
+	const {
+		data: allPreferenceCardsData,
+		loading: recommendationLoading,
+	} = useListShipmentBookingConfirmationPreferences({
+		singleServiceData,
+		shipmentData,
+		isPreferenceRequired: !isPreferenceSet && singleServiceData.service_type === 'fcl_freight_service',
+	});
 	// const { data:existingData, loading:existingDataLoading } = useGetShipmentEligibleBookingDocument({
 	// 	shipmentData,
 	// 	singleServiceData,
@@ -86,6 +98,7 @@ function SingleService({
 	const currentFormatedrates = getFormatedRates('current', ratesData?.flashed_rates, singleServiceData);
 	const systemFormatedRates = getSystemFormatedRates(ratesData?.system_rates, singleServiceData);
 	const availableRatesForRD = getAvailableRatesDetails({ currentFormatedrates, systemFormatedRates });
+
 	useEffect(() => {
 		setRateOptions({ ...rateOptions, [singleServiceData?.id]: availableRatesForRD });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -115,6 +128,20 @@ function SingleService({
 			data          : currentFormatedrates?.rows,
 		},
 	];
+
+	useEffect(() => {
+		if (!recommendationLoading) {
+			getRecommendation({
+				setSupplierPayload,
+				allPreferenceCardsData,
+				systemFormatedRates,
+				currentFormatedrates,
+				singleServiceData,
+			});
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [recommendationLoading, JSON.stringify(systemFormatedRates), JSON.stringify(currentFormatedrates)]);
+
 	return (
 		<div>
 
