@@ -30,6 +30,8 @@ function ProfileDetails({
 }) {
 	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
 
+	const customerUserId = activeTab === 'message' ? formattedMessageData?.user_id : activeVoiceCard?.user_data?.id;
+
 	const [activeSelect, setActiveSelect] = useState(
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
 	);
@@ -38,7 +40,7 @@ function ProfileDetails({
 
 	const { lead_user_id: leadUserId } = formattedMessageData || {};
 
-	const { userData, loading : getUserLoading } = useGetUser({ userId, leadUserId, customerId });
+	const { userData, loading : getUserLoading } = useGetUser({ userId: customerUserId, leadUserId, customerId });
 
 	const {
 		organizationData = {},
@@ -102,7 +104,7 @@ function ProfileDetails({
 						userId={userId}
 						setActiveTab={setActiveTab}
 						mailProps={mailProps}
-						userData={userData}
+						userData={(getUserLoading || !customerUserId) ? {} : userData}
 						getUserLoading={getUserLoading}
 						organizationData={organizationData}
 					/>

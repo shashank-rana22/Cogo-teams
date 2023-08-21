@@ -38,6 +38,13 @@ export const NON_REVENUE_DATA = [
 	'Billing Party Name Change',
 ];
 
+export const CREDIT_NOTE_APPROVAL_TYPE_OPTIONS = [
+	{ label: 'Non Revenue Impacting', value: 'NON_REVENUE_IMPACTING' },
+	{ label: 'Cancellation Invoice', value: 'CANCELLATION_INVOICE' },
+	{ label: 'Revenue Impacting', value: 'REVENUE_IMPACTING' },
+	{ label: 'Profit Impacting Cases', value: 'PROFIT_IMPACTING_CASES' },
+];
+
 export const requestCreditNoteColumns = () => [
 	{
 		Header   : 'Name',

@@ -130,7 +130,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 								onClick={() => {
 									setGlobalFilters((p) => ({
 										...p,
-										archivedStatus: 'BOOKED',
+										archivedStatus: 'BILLED',
 									}));
 									setIsBookActive(true);
 								}}
@@ -144,7 +144,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 								onClick={() => {
 									setGlobalFilters((p) => ({
 										...p,
-										archivedStatus: 'ACCRUED',
+										archivedStatus: 'UNBILLED',
 									}));
 									setIsBookActive(false);
 								}}
