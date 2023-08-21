@@ -23,7 +23,7 @@ export const getCollectionPartyDetails = () => {
 				{option?.tds_deduction_rate}
 				%
 			</div>
-		) : undefined}
+		) : null}
 	</div>,
 		registration_number: option?.registration_number,
 	}));
