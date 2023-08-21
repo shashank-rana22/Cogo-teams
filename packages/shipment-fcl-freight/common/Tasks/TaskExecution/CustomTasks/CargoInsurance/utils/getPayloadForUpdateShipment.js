@@ -36,7 +36,7 @@ const getPayloadForUpdateShipment = ({ insuranceDetails = {}, task = {}, shipmen
 				: undefined,
 		},
 		ids                 : [service_id],
-		performed_by_org_id : shipmentData?.id,
+		performed_by_org_id : shipmentData?.importer_exporter_id,
 		service_type,
 		shipment_id,
 	};

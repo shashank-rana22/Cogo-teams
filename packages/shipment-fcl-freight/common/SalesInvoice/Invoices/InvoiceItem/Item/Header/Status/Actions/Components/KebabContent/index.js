@@ -20,6 +20,12 @@ function KebabContent({
 	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
 
+	const notInsuranceService = isEmpty(
+		(invoice?.services || [])?.find(
+			(s) => s?.service_type === 'cargo_insurance_service',
+		),
+	);
+
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
 
@@ -40,7 +46,8 @@ function KebabContent({
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 			{(!disableAction || invoice.exchange_rate_document?.length)
-					&& invoice.status !== 'revoked' ? (
+					&& invoice.status !== 'revoked'
+					&& notInsuranceService ? (
 						<Popover
 							interactive
 							placement="bottom"
