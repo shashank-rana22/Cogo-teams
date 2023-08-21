@@ -2,10 +2,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const useGetRatingColumns = () => {
+const useGetRatingColumns = ({ t = () => {} }) => {
 	const columns = [
 		{
-			Header   : <div className={styles.table_text}>Rating</div>,
+			Header   : <div className={styles.table_text}>{t('managerDashboard:rating_scale_label')}</div>,
 			accessor : (item) => (
 				<div className={styles.table_text}>
 					{item?.rating_scale}
@@ -14,7 +14,7 @@ const useGetRatingColumns = () => {
 			id: 'rating_scale',
 		},
 		{
-			Header   : <div className={styles.table_text}>No. of Employee</div>,
+			Header   : <div className={styles.table_text}>{t('managerDashboard:system_rating_label')}</div>,
 			accessor : (item) => (
 				<div className={styles.table_text}>
 					{item?.count}

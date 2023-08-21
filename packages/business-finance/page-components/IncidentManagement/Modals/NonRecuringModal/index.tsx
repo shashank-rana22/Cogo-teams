@@ -153,7 +153,13 @@ function NonRecuringModal({
 							/>
 						</>
 					)}
-					<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
+
+					{
+							(level1 || level2 || level3) && (
+								<StakeHolderTimeline timeline={stakeHolderTimeLineData({ level1, level2, level3 })} />
+							)
+						}
+
 				</Modal.Body>
 				{isEditable && (
 					<Modal.Footer>
