@@ -10,7 +10,6 @@ import Loader from '../Loader';
 
 import Info from './Info';
 import ItemAdded from './ItemAdded';
-import Actions from './ItemAdded/Actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
@@ -79,18 +78,14 @@ function List({ isSeller = false, source = '' }) {
 								item={serviceListItem}
 								status={status}
 								showIp={showModal === 'ip'}
-								actionButton={Actions({
-									status,
-									serviceListItem,
-									setShowModal,
-									setItem,
-									shipment_data,
-									activeStakeholder,
-									canEditCancelService,
-								})}
+								stakeholderConfig={stakeholderConfig}
 								refetch={handleRefetch}
 								services={servicesList}
 								isSeller={isSeller}
+								serviceListItem={serviceListItem}
+								setShowModal={setShowModal}
+								setItem={setItem}
+								activeStakeholder={activeStakeholder}
 							/>
 						);
 					})}
@@ -178,6 +173,7 @@ function List({ isSeller = false, source = '' }) {
 								refetch={refetch}
 								source="add_sell_price"
 								refetchServices={refetchServices}
+
 							/>
 						</Modal.Body>
 					</Modal>
