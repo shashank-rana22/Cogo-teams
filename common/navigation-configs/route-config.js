@@ -9,6 +9,7 @@ import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
 import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
+import byodDashboard from './config/byod-dashboard';
 import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -132,6 +133,7 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...byodDashboard,
 	...employeeDashboard,
 	...managerDashboard,
 	...printingDesk,

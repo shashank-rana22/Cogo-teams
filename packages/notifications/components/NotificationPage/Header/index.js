@@ -1,5 +1,6 @@
 import { Pagination, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -14,6 +15,8 @@ function Header({
 	activeTab,
 	disabled,
 }) {
+	const { t } = useTranslation(['notifications']);
+
 	return (
 		<div className={styles.container}>
 			<p className={styles.heading}>
@@ -28,8 +31,7 @@ function Header({
 						style={disabled ? { pointerEvents: 'none' } : {}}
 						onClick={onMarkAllAsRead}
 					>
-						Mark all as read
-
+						{t('notifications:mark_all_as_read')}
 					</Button>
 					<div>
 						<Pagination
