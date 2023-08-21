@@ -2,13 +2,15 @@ import { Button, Pagination, Pill } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { startCase } from '@cogoport/utils';
-import React from 'react';
+import { isEmpty, startCase } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import { INVOICE_STATUS, INVOICE_STATUS_MAPPING } from '../../../../../../Constants';
+import useDeleteHistorySettlement from '../../../../../../hooks/useDeleteHistorySettlement';
 import usePostSettlementToSage from '../../../../../../hooks/usePostSettlementToSage';
 import Loader from '../../../../../Loader';
 
+import DeleteSettlement from './DeleteSettlement';
 import LineItemsHeader from './LineItemsHeader';
 import styles from './styles.module.css';
 
@@ -75,11 +77,21 @@ const DEFAULT_VALUE = {
 	ledCurrency            : '',
 
 };
+const DATA_DEFAULT_VALUE = {
+	list         : [],
+	pageNo       : 0,
+	totalRecords : 0,
+};
 
-function Details({ data, refetch, item = DEFAULT_VALUE, loading, onPageChange }: Props) {
+function Details({
+	data = DATA_DEFAULT_VALUE, refetch = () => {}, item = DEFAULT_VALUE,
+	loading = false, onPageChange = () => {},
+}: Props) {
+	const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
 	const { notPostedSettlementIds = [], ledCurrency = '' } = item || {};
 
 	const { loading: bulkPostToSageLoading, bulkPostToSageAction } = usePostSettlementToSage({ refetch });
+	const { deleteHistory, deleteHistoryLoading } = useDeleteHistorySettlement({ refetch });
 
 	const { list = [], pageNo = 0, totalRecords = 0 } = data || {};
 
@@ -88,6 +100,7 @@ function Details({ data, refetch, item = DEFAULT_VALUE, loading, onPageChange }:
 	if (loading) {
 		return <Loader />;
 	}
+	const disabledStatusPosted = (list || [])?.filter((val) => val.settlementStatus === 'POSTED');
 
 	return (
 		<div className={styles.details}>
@@ -101,7 +114,11 @@ function Details({ data, refetch, item = DEFAULT_VALUE, loading, onPageChange }:
 					</Button>
 				</div>
 				<div className={styles.margin_left}>
-					<Button size="sm" disabled>
+					<Button
+						size="sm"
+						disabled={!isEmpty(disabledStatusPosted)}
+						onClick={() => { setShowDeleteConfirmationModal(true); }}
+					>
 						Delete
 					</Button>
 				</div>
@@ -194,6 +211,15 @@ function Details({ data, refetch, item = DEFAULT_VALUE, loading, onPageChange }:
 				onPageChange={onPageChange}
 			/>
 
+			{showDeleteConfirmationModal && (
+				<DeleteSettlement
+					showDeleteConfirmationModal={showDeleteConfirmationModal}
+					setShowDeleteConfirmationModal={setShowDeleteConfirmationModal}
+					deleteHistoryLoading={deleteHistoryLoading}
+					deleteHistory={deleteHistory}
+					item={item}
+				/>
+			)}
 		</div>
 	);
 }
