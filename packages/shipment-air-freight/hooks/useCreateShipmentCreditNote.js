@@ -1,5 +1,5 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
-import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
@@ -25,7 +25,7 @@ const useCreateShipmentCreditNote = ({
 
 			refetch();
 		} catch (err) {
-			Toast.error(getApiError(err?.response?.data));
+			toastApiError(err);
 		}
 	};
 

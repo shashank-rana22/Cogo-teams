@@ -75,6 +75,8 @@ function List(props) {
 					closeOnOuterClick
 					showCloseIcon
 					animate
+					scroll
+					placement="top"
 				>
 					{ACTION_COMPONENT_MAPPING[showActionModal.mode]
 						?.render({ objectiveId: showActionModal.objectiveId, setShowActionModal, refetch })}

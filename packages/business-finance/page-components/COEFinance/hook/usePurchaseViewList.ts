@@ -53,7 +53,10 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 			return 'BILL';
 		} if (filters?.billType === 'REIMBURSEMENT') {
 			return 'REIMBURSEMENT';
+		} if (filters?.billType === 'EXPENSE') {
+			return 'EXPENSE';
 		}
+
 		return undefined;
 	};
 

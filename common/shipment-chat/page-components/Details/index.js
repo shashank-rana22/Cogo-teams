@@ -1,8 +1,9 @@
-import { Textarea, Popover, Toast } from '@cogoport/components';
+import { Textarea, Popover, Toast, Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSend, IcMAttach, IcMDocument } from '@cogoport/icons-react';
-import React, { useRef, useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useRef, useState } from 'react';
 
 import useCreateMessage from '../../hooks/useCreateMessage';
 import useFireBase from '../../hooks/useFireBase';
@@ -15,7 +16,7 @@ import styles from './styles.module.css';
 
 const INITIAL_STATE_ROWS = 1;
 const TOTAL_STAKEHOLDERS_LENGTH = 2;
-const TOTAL_ROWS = 5;
+const TOTAL_ROWS = 3;
 const ENTER_KEY = 13;
 const DELETE_KEY_1 = 46;
 const DELETE_KEY_2 = 8;
@@ -62,12 +63,13 @@ function Details({
 
 	const reset = () => {
 		setTextContent('');
+		setRows(INITIAL_STATE_ROWS);
 	};
 
 	// formatting Data for hooks
-	const stakeholder = stakeHolderView.split(' ');
-	const stakeholderArray = (stakeholder || []).map((item) => item.replace('@', ''));
-	const conditionArr = stakeholderArray.length && stakeholderArray[GLOBAL_CONSTANTS.zeroth_index]
+	const stakeholder = stakeHolderView?.split(' ');
+	const stakeholderArray = (stakeholder || []).map((item) => item?.replace('@', ''));
+	const conditionArr = stakeholderArray?.length && stakeholderArray?.[GLOBAL_CONSTANTS.zeroth_index]
 	!== '' ? [...stakeholderArray] : [];
 	const filteredArr = (conditionArr || []).map((item) => {
 		if (item === '') {
@@ -89,7 +91,7 @@ function Details({
 
 	visible_to_stakeholders = Array.from(new Set(visible_to_stakeholders?.filter((item) => item !== null)));
 
-	const GroupChannel = filteredArr.length
+	const GroupChannel = filteredArr?.length
 		? {
 			created_by_stakeholder : channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index],
 			source_id              : sourceId,
@@ -130,25 +132,28 @@ function Details({
 		return null;
 	}
 
-	const contentData = formValues?.message?.split('\n').length;
-	const handleClick = (e) => {
-		if (e.keyCode === ENTER_KEY && e.shiftKey && rows < TOTAL_ROWS) {
+	const handleClick = (event) => {
+		const text = formValues?.message || '';
+		const contentData = text?.split('\n').length;
+
+		if (event.keyCode === ENTER_KEY && event.shiftKey && rows < TOTAL_ROWS) {
 			setRows(contentData + INITIAL_STATE_ROWS);
 		}
-		if (e.keyCode === ENTER_KEY && !e.shiftKey) {
+		if (event.keyCode === ENTER_KEY && !event.shiftKey) {
 			onCreateMessage();
 			reset();
-			setRows(INITIAL_STATE_ROWS);
 		}
-		if (contentData > INITIAL_STATE_ROWS && (e.keyCode === DELETE_KEY_2 || e.keyCode === DELETE_KEY_1)) {
-			setRows(contentData - INITIAL_STATE_ROWS);
+		if (text?.[text.length - INITIAL_STATE_ROWS] === '\n'
+		&& (event.keyCode === DELETE_KEY_2 || event.keyCode === DELETE_KEY_1)) {
+			const maxRows = contentData - INITIAL_STATE_ROWS;
+			setRows(maxRows > TOTAL_ROWS ? TOTAL_ROWS : maxRows);
 		}
 	};
 
 	return (
 		<div className={styles.container}>
 			{loadingChannel ? (
-				<Loader />
+				<Loader setShow={setShow} />
 			) : (
 				<Header
 					channelData={channelData}
@@ -176,57 +181,63 @@ function Details({
 							isStakeholder={isStakeholder}
 						/>
 					) : (
-						<div style={{ padding: '21px' }} />
+						<div className={styles.empty_send_to} />
 					)}
 
-					<div className={styles.typing_container}>
-						<Popover
-							theme="light"
-							interactive
-							content={(
-								<div className={styles.uploader}>
-									<FileUploader
-										value={selectedFile}
-										onChange={setSelectedFile}
-										showProgress
-										draggable
-										multiple
-									/>
-								</div>
-							)}
-						>
-							<div className={styles.icon_wrap}>
-								<IcMAttach width={21} height={21} />
+					<div className={styles.text_docs_container}>
+						{!isEmpty(formValues?.file) ? (
+							<div className={styles.attached_container}>
+								{(formValues?.file || []).map((url) => (
+									<div className={styles.attached_doc} key={url}>
+										<IcMDocument className={styles.icm_doc} />
+										{decodeURIComponent(url?.split('/')?.pop())}
+									</div>
+								))}
 							</div>
-						</Popover>
+						) : null}
 
-						<div className={styles.attached_container}>
-							{(formValues?.file || []).map((url) => (
-								<div className={styles.attached_doc} key={url}>
-									<IcMDocument style={{ marginRight: '4px' }} />
-									{url?.split('/').pop()}
+						<div className={styles.typing_container}>
+							<Popover
+								theme="light"
+								interactive
+								content={(
+									<div className={styles.uploader}>
+										<FileUploader
+											value={selectedFile}
+											onChange={setSelectedFile}
+											showProgress
+											draggable
+											multiple
+										/>
+									</div>
+								)}
+							>
+								<div className={styles.icon_wrap}>
+									<IcMAttach width={21} height={21} />
 								</div>
-							))}
-						</div>
+							</Popover>
 
-						<Textarea
-							className={styles.text_area}
-							placeholder="Type your message here...."
-							value={textContent}
-							onKeyDown={(e) => handleClick(e)}
-							rows={rows}
-							onChange={(val) => {
-								setTextContent(val);
-							}}
-						/>
+							<Textarea
+								className={styles.text_area}
+								placeholder="Type your message here...."
+								value={textContent}
+								onKeyDown={(e) => handleClick(e)}
+								rows={rows}
+								onChange={(val) => {
+									setTextContent(val);
+									if (textContent === '' && val === '\n') {
+										reset();
+									}
+								}}
+							/>
 
-						<div
-							className={styles.send}
-							role="button"
-							tabIndex={0}
-							onClick={!loading ? onCreateMessage : null}
-						>
-							<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />
+							<Button
+								themeType="linkUi"
+								className={styles.send}
+								onClick={!loading ? onCreateMessage : null}
+							>
+								<IcMSend width="2.8em" height="2.8em" />
+							</Button>
 						</div>
 					</div>
 				</div>

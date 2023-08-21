@@ -5,17 +5,15 @@ const getParams = ({ activeMessageCard }) => {
 	const { group_members, requested_group_members } = activeMessageCard || {};
 	return {
 		filters: {
-			user_id: [...(group_members || []), ...(requested_group_members || [])],
+			agent_id: [...(group_members || []), ...(requested_group_members || [])],
 		},
-		rm_mappings_data_required : false,
-		partner_data_required     : false,
 	};
 };
 
 const useListPartnerUsers = ({ activeMessageCard = {} }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/list_partner_users',
+		url    : '/list_chat_agents',
 	}, { manual: true });
 
 	const fetchPartnerUsers = useCallback(() => {

@@ -29,6 +29,15 @@
 	}
 }
 
+.agent_container {
+	display: flex;
+	align-items: center;
+}
+
+.agent {
+	margin: 4px 0;
+}
+
 .pagination_container {
 	display: flex;
 	justify-content: flex-end;

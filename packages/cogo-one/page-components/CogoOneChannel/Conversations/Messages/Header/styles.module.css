@@ -129,3 +129,9 @@
 	cursor: pointer;
 	fill: #4f4f4f;
 }
+
+.chat_requests {
+	position: absolute;
+	z-index: 5;
+	width: 100%;
+}

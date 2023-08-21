@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import CARD_DATA_MAPPING from './card-data-mapping';
 import styles from './styles.module.css';
@@ -30,12 +30,8 @@ function ServiceCard(props) {
 
 				<h4 className={styles.heading}>
 					{startCase(shipment_mode)}
-					,
-					{' '}
-					{startCase(service_type || '')}
-					,
-					{' '}
-					{startCase(trade_type || '')}
+					{!isEmpty(service_type) ? `, ${startCase(service_type)}` : ''}
+					{!isEmpty(trade_type) ? `, ${startCase(trade_type)}` : ''}
 				</h4>
 			</div>
 

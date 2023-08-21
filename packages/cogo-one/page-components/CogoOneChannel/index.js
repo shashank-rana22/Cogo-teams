@@ -71,7 +71,11 @@ function CogoOne() {
 		agentId           : userId,
 	});
 
-	const { viewType, loading: workPrefernceLoading = false, userMails = [] } = useAgentWorkPrefernce();
+	const {
+		viewType,
+		loading: workPrefernceLoading = false,
+		userMails = [],
+	} = useAgentWorkPrefernce();
 
 	const {
 		fetchWorkStatus = () => {},
@@ -143,6 +147,7 @@ function CogoOne() {
 				agentTimeline={agentTimeline}
 				preferenceLoading={preferenceLoading}
 				timelineLoading={timelineLoading}
+				userId={userId}
 			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
@@ -244,6 +249,7 @@ function CogoOne() {
 				setOpenKamContacts={setOpenKamContacts}
 				setActiveTab={setActiveTab}
 				orgId={orgId}
+				viewType={viewType}
 			/>
 		</>
 	);

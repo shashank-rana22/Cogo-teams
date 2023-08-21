@@ -1,29 +1,14 @@
+.list_container {
+	display: flex;
+}
+
 .container {
 	position: relative;
-	width: 32%;
+	width: 30%;
 	overflow: hidden;
 	border-right: 1px solid #e0e0e0;
+	border-radius: 8px 0 0 8px;
 	transition: all 0.3s;
-}
-
-.list_container {
-	height: 367px;
-	overflow: auto;
-	background: #fff;
-
-	.colored {
-		background: #cfeaed;
-	}
-}
-
-.custom_loader {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 4px;
-	font-size: 16px;
-	font-weight: 500;
-	color: #f00;
 }
 
 .initial_state {
@@ -31,49 +16,17 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 68%;
-}
+	width: 70%;
 
-.card {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 12px 24px;
-	cursor: pointer;
-	border-bottom: 1px solid #e0e0e0;
-}
-
-.card_item {
-	display: flex;
-	flex-direction: column;
-}
-
-.serial_id {
-	display: flex;
-	align-items: center;
-	font-weight: 600;
-	color: #333;
-}
-
-.updated_at {
-	font-size: 10px;
-	font-weight: 500;
-	line-height: 16px;
-	color: #4f4f4f;
-}
-
-.circle {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 20px;
-	height: 18px;
-	padding: 0 2px;
-	font-size: 12px;
-	font-weight: 700;
-	color: #fef3e9;
-	background: #ee3425;
-	border-radius: 5px;
+	:global {
+		.ui_button_container {
+			min-width: fit-content;
+			height: fit-content;
+			padding: 10px;
+			font-size: var(--font-size-xl);
+			color: var(--color-primary-error-red-2);
+		}
+	}
 }
 
 .input_styles {
@@ -92,4 +45,16 @@
 .text {
 	font-size: 18px;
 	font-weight: 600;
+}
+
+.close_icon {
+	position: fixed;
+	top: 1%;
+	right: 0;
+	border-radius: 50%;
+
+	&:hover {
+		background: white;
+		box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+	}
 }
