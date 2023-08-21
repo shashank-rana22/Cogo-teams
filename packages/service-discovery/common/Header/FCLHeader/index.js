@@ -31,6 +31,7 @@ function FCLHeader({
 				<Back
 					currentScreen={rest.currentScreen}
 					heading={rest.headerHeading}
+					setCurrentScreen={rest.setCurrentScreen}
 				/>
 			) : null}
 

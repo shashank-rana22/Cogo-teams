@@ -13,10 +13,12 @@
 	0% {
 		height: auto;
 		padding: 0 20px;
+		opacity: 0.5;
 	}
 
 	100% {
 		height: auto;
 		padding: 12px 20px;
+		opacity: 1;
 	}
 }

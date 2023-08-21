@@ -9,10 +9,12 @@ import Contract from '../Contract';
 import ShareToUsers from '../ShareToUsers';
 
 import ComparisonTable from './ComparisonTable';
+import Loading from './Loading';
 import styles from './styles.module.css';
 
 const DEFAULT_FREE_DAYS_VALUE = 0;
 const ONE_VALUE = 1;
+const TIMEOUT = 1000;
 
 const SCHEDULE_TYPE_MAPPING = {
 	transhipment : 'Trans-shipment',
@@ -39,7 +41,7 @@ const STATIC_COMPARISON_KEY = {
 
 const toSnakeCase = (str) => str
 	&& str
-		.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+		.match(GLOBAL_CONSTANTS.regex_patterns.text_pattern_classifier)
 		.map((x) => x.toLowerCase())
 		.join('_');
 
@@ -88,6 +90,8 @@ function HandleBookValue({
 	setSelectedCard = () => {},
 	setShowContract = () => {},
 }) {
+	const router = useRouter();
+
 	const service_rates = Object.values(item.service_rates);
 	const primaryServiceRates = service_rates.filter(
 		(service) => service.service_type === service_type,
@@ -97,9 +101,10 @@ function HandleBookValue({
 
 	const isMultiContainer = primaryServiceRates.length > ONE_VALUE;
 
-	const router = useRouter();
-
-	const handleLockPrice = () => { setShowContract(true); setSelectedCard(item); };
+	const handleLockPrice = () => {
+		setShowContract(true);
+		setSelectedCard(item);
+	};
 
 	const handleBook = () => {
 		router.push(`/book/${router.query.spot_search_id}?rate_card_id=${item?.id}`);
@@ -215,6 +220,7 @@ function Comparison({
 	mode = 'fcl_freight',
 	comparisonRates = {},
 }) {
+	const [loading, setLoading] = useState(false);
 	const [showShare, setShowShare] = useState(false);
 	const [showContract, setShowContract] = useState(false);
 	const [selectedCard, setSelectedCard] = useState({});
@@ -263,8 +269,18 @@ function Comparison({
 	const handleBack = () => setScreen('listRateCard');
 
 	useEffect(() => {
+		setLoading(true);
+
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
+		setTimeout(() => {
+			setLoading(false);
+		}, TIMEOUT);
 	}, []);
+
+	if (loading) {
+		return <Loading />;
+	}
 
 	return (
 		<div className={styles.container}>
