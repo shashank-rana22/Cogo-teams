@@ -115,6 +115,16 @@ export default {
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
 		],
+		kam_manager_ids: [
+			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
+			'f9905d33-24d7-48ca-99cd-eeca13a90d5a', // KAM Manager - SME Demand,
+			'594be53f-e39a-45d1-a705-57660a4a4a00', // IE Owner - SME Demand,
+			'37557738-13bb-4db8-96ef-6eac4549a5ac', // CP KAM Owner,
+			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // CP KAM Manager
+			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
+
+		],
+
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',

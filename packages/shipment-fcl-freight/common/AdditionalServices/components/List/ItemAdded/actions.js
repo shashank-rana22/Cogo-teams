@@ -3,7 +3,7 @@ import React from 'react';
 
 import IP_STATE_CONDITONS from '../../../constants/IP_STATE_CONDITIONS';
 
-const actions = ({
+function Actions({
 	status = {},
 	serviceListItem,
 	addRate,
@@ -11,7 +11,7 @@ const actions = ({
 	setItem = () => {},
 	activeStakeholder = '',
 	canEditCancelService = false,
-}) => {
+}) {
 	const isSameItem = serviceListItem.id === addRate?.item?.id;
 
 	const onClickSetItem = () => setItem({ serviceListItem, status });
@@ -59,7 +59,9 @@ const actions = ({
 	}
 
 	if (
-		status.status === 'amendment_requested_by_importer_exporter' && activeStakeholder === 'booking_agent'
+		status.status === 'amendment_requested_by_importer_exporter'
+		&& ['booking_agent',
+			'booking_agent_manager', 'consignee_shipper_booking_agent'].includes(activeStakeholder)
 	) {
 		return (
 			<Button
@@ -94,6 +96,6 @@ const actions = ({
 	}
 
 	return false;
-};
+}
 
-export default actions;
+export default Actions;
