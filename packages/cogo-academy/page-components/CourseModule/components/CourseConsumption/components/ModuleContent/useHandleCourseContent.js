@@ -59,7 +59,7 @@ const useHandleCourseContent = ({
 	};
 
 	const SOURCE_MAPPING = {
-		video: chapter_content.includes('/watch?v=')
+		video: chapter_content.includes('/watch?v=') || chapter_content.includes('sharepoint')
 			? chapter_content.replace('/watch?v=', '/embed/')
 			: '',
 		presentation : `https://view.officeapps.live.com/op/embed.aspx?src=${chapter_content}`,

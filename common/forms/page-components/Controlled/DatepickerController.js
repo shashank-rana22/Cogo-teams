@@ -22,7 +22,12 @@ function DatepickerController(props) {
 					dateFormat={rest?.dateFormat}
 					key={name}
 					id={name}
-					onChange={(e) => { onChange(e); rest?.onChange(e); }}
+					onChange={(e) => {
+						onChange(e);
+						if (typeof rest?.onChange === 'function') {
+							rest?.onChange(e);
+						}
+					}}
 					value={newValue}
 					onBlur={onBlur}
 					data-test-value={value}

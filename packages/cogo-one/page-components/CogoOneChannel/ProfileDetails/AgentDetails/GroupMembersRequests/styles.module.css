@@ -18,6 +18,12 @@
 	}
 }
 
+.empty_icon {
+	width: 20px;
+	height: 20px;
+	margin-left: 4px;
+}
+
 .details {
 	display: flex;
 	flex-direction: column;

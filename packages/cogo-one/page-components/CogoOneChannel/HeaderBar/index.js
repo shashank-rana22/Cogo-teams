@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
@@ -16,11 +17,14 @@ function HeaderBar({
 	agentTimeline = () => {},
 	preferenceLoading = false,
 	timelineLoading = false,
+	userId = '',
 }) {
 	const {
 		flash_revert_logs = false,
-		toggle_agent_status = false,
+		punch_in_out = false,
 	} = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions || {};
+
+	const configurationsToBeShown = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.configurations_to_be_shown;
 
 	return (
 		<>
@@ -28,13 +32,17 @@ function HeaderBar({
 				{flash_revert_logs ? (
 					<FlashRevertLogs />
 				) : null}
-				{toggle_agent_status ? (
+
+				{!isEmpty(configurationsToBeShown) && (
 					<AgentStatusToggle
 						firestore={firestore}
+						configurationsToBeShown={configurationsToBeShown}
+						viewType={viewType}
 					/>
-				) : null}
+				)}
 			</div>
-			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.punch_in_out && (
+
+			{punch_in_out && (
 				<PunchInOut
 					fetchworkPrefernce={fetchWorkStatus}
 					agentStatus={agentStatus}
@@ -42,6 +50,8 @@ function HeaderBar({
 					agentTimeline={agentTimeline}
 					preferenceLoading={preferenceLoading}
 					timelineLoading={timelineLoading}
+					firestore={firestore}
+					userId={userId}
 				/>
 			)}
 		</>

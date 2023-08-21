@@ -11,7 +11,7 @@ const useCancelInvoice = () => {
 		{
 			url     : '/incident-management/incident',
 			method  : 'post',
-			authKey : 'create_cancel_e_invoice_incident',
+			authKey : 'post_incident_management_incident',
 		},
 		{ manual: true },
 	);
