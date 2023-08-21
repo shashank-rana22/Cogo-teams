@@ -202,7 +202,7 @@ function Actions({
 			{(CANCEL_MODAL_OPTIONS.includes(showModal)) && showCancelOptions && (
 				<CancelReplaceEInvoice
 					bfInvoice={bfInvoice}
-					show={['cancel_e_invoice', 'replace_e_invoice'].includes(showModal)}
+					show={CANCEL_MODAL_OPTIONS.includes(showModal)}
 					onClose={onModalClose}
 					invoice={invoice}
 					refetch={refetch}
