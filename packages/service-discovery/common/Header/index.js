@@ -30,9 +30,7 @@ function Header(props = {}) {
 
 	return (
 		<div className={cl`${styles.container} ${showAdditionalHeader ? styles.show : {}}`}>
-			<div className={styles.header}>
-				<ActiveHeader {...props} />
-			</div>
+			<ActiveHeader {...props} />
 
 			{showAdditionalHeader ? (
 				<ExtraHeader headerProps={headerProps} />
