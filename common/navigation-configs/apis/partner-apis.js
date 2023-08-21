@@ -6,7 +6,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -780,7 +780,7 @@ const partner = {
 	],
 	roles_permissions: [
 		{
-			api          : 'create_auth_role',
+			api          : 'create_role',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -790,27 +790,27 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'get_auth_possible_permissions',
+			api          : 'get_possible_permissions',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
-			api          : 'onboard_auth_role',
+			api          : 'onboard_role',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
-			api          : 'update_auth_role',
+			api          : 'update_role',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
-			api          : 'update_auth_role_permission_mapping',
+			api          : 'update_role_permission',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -859,7 +859,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -916,7 +916,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -1980,6 +1980,16 @@ const partner = {
 			api          : 'send_checkout_for_approval',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'get_transacting_organization_shipment_data',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_commodities_on_trade_port_pair',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
 		},
 	],
 	supply_crm: [
@@ -3282,7 +3292,7 @@ const partner = {
 	],
 	checkout_promotions: [
 		{
-			api          : 'list_checkout_applicable_promocodes',
+			api          : 'get_checkout_applicable_promocodes',
 			access_type  : 'private',
 			feature      : 'search',
 			service_name : 'checkout',
@@ -3365,7 +3375,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -5159,12 +5169,12 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
 		{
-			api          : 'get_auth_possible_permissions',
+			api          : 'get_possible_permissions',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -6179,6 +6189,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'create_spot_search_demo',
+			access_type  : 'private',
+			service_name : 'spot_search',
+		},
 	],
 	bl_desk: [
 		{
@@ -6363,7 +6378,7 @@ const partner = {
 			service_name : 'incentive',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -6650,7 +6665,7 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -7565,11 +7580,24 @@ const partner = {
 			feature     : 'accruals',
 		},
 		{
-			api         : 'post_pnl_accrual_add_to_selected',
+			api         : 'post_pnl_accrual_book_unbilled_shipments',
 			access_type : 'private',
 			module      : 'accruals',
 			feature     : 'accruals',
 		},
+		{
+			api         : 'get_pnl_accrual_booking_jobs_count',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'post_pnl_accrual_book_billed_shipments',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+
 		{
 			api         : 'get_pnl_accrual_view_selected',
 			access_type : 'private',
@@ -8733,6 +8761,18 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'post_sales_outward_upload_outward_file',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_sales_outward_operation_status',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
 			api         : 'post_sales_outward_export_gstr_file',
 			module      : 'compliance',
 			feature     : 'compliance',
@@ -8746,6 +8786,12 @@ const partner = {
 		},
 		{
 			api         : 'put_sales_outward_refresh_excel_sheet',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_sales_outward_remove_invoice',
 			module      : 'compliance',
 			feature     : 'compliance',
 			access_type : 'private',
@@ -9619,6 +9665,16 @@ const partner = {
 
 	campaign_dashboard: [
 		{
+			api          : 'list_campaign_node_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_campaign_duplicate',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
 			api          : 'get_segment_verification_stats',
 			access_type  : 'private',
 			service_name : 'segmentation',
@@ -10005,7 +10061,7 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -10154,7 +10210,7 @@ const partner = {
 	],
 	cogopoints: [
 		{
-			api          : 'list_checkout_applicable_promocodes',
+			api          : 'get_checkout_applicable_promocodes',
 			access_type  : 'private',
 			feature      : 'search',
 			service_name : 'checkout',
@@ -10424,10 +10480,25 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
+		{
+			api          : 'update_cogostore_banner',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_brand',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_vendor',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
 	],
 	communication_control: [
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -10629,7 +10700,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -10704,7 +10775,22 @@ const partner = {
 			service_name : 'promotion',
 		},
 		{
-			api          : 'deactivate_promotion_rule',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'create_promotion_agent_rule',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'update_promotion_agent_rule',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'get_promotion_rule',
 			access_type  : 'private',
 			service_name : 'promotion',
 		},
@@ -10789,6 +10875,41 @@ const partner = {
 			api          : 'get_checkout_stats',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'get_fcl_freight_rate',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'create_fcl_freight_rate',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'update_fcl_freight_rate',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'delete_fcl_freight_rate',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_fcl_freight_rate_properties',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'update_fcl_freight_rate_properties',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_cogo_assured_suggested_fcl_freight_rates',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'get_cogo_assured_suggested_rates',
@@ -11902,7 +12023,7 @@ const partner = {
 			service_name : 'allocation',
 		},
 	],
-	awb_inventory: [
+	advance_booking_manager: [
 		{
 			api          : 'list_organizations',
 			access_type  : 'private',
@@ -11932,6 +12053,14 @@ const partner = {
 			api          : 'get_airwaybill_prefix_from_airline',
 			access_type  : 'private',
 			service_name : 'operator',
+		},
+		{
+			api         : 'get_air_coe_awb_inventory_list_stock',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_awb_inventory_list',
+			access_type : 'private',
 		},
 	],
 	airline_booking_plugin: [
@@ -12119,7 +12248,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -12424,6 +12553,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'send_booking_note_on_whatsapp',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'submit_omnichannel_kyc',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -12437,6 +12571,11 @@ const partner = {
 			api          : 'list_checkouts',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'get_tickets_configuration_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
 		},
 		{
 			api          : 'get_user',
@@ -12828,6 +12967,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'list_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'sync_agent_work_preference',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -12896,7 +13045,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -12943,7 +13092,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_auth_roles',
+			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
 		},
@@ -13324,7 +13473,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rate_sheet',
 		},
-
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'bulk_reallocate_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	printing_desk: [
 		{

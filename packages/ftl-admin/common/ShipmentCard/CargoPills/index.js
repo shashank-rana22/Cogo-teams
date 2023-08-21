@@ -7,7 +7,8 @@ import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
 const KEY_FROM_ITEM = ['inco_term', 'trade_type', 'free_days_detention_destination', 'container_size', 'container_type',
-	'commodity', 'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type'];
+	'commodity', 'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type',
+	'trucks_count', 'truck_type'];
 
 const MINIMUM_COUNT_FOR_PLURAL = 1;
 

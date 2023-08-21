@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable custom-eslint/regex-check, custom-eslint/uuid-check */
 export default {
 	country: {
@@ -30,9 +31,9 @@ export default {
 		},
 	},
 	regex: {
-		PAN                                : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
-		// eslint-disable-next-line max-len
+		TAX                                : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g, // PAN Regular Expression
 		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		ECN                                : '',
 		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL                              : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		CONTAINER_NUMBER                   : /^[A-Z]{3}U[0-9]{6,7}$/,
@@ -267,8 +268,12 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
+		hrbp_admin_role_id: '5de782f6-f59d-41fc-84f4-8425dc1fa670',
 		igm_desk                     : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 		document_control_manager     : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
+		ftl_ground_ops_role_id       : 'd2275231-30ad-4df9-8451-daf03b766f8a',
+		field_service_ops_role_id    : '6ebacc3c-05c9-43fd-8a51-e7aad9751d9b',
+		kam_service_ops1_role_id     : '4c6f6036-2383-4c40-9b84-fa2b598031e1',
 		centralised_customer_support : [
 			'264a83ab-d438-48c3-8095-bb503f5b619c',	// Common Pool
 			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5', // SME
@@ -280,6 +285,7 @@ export default {
 		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
 		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
 		so1_revenue_desk         : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
+		supply_fulfillment       : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
 	},
 	options: {
 		registration_types: [
@@ -497,6 +503,18 @@ export default {
 				label : '501 Cogoport Vietnam',
 				value : '501',
 			},
+			{
+				label : '601 Cogoport Thailand',
+				value : '601',
+			},
+			{
+				label : '701 Cogoport Indonesia',
+				value : '701',
+			},
+			{
+				label : '801 Cogoport China',
+				value : '801',
+			},
 		],
 		migration_status: [
 			{ label: 'True', value: true },
@@ -661,24 +679,20 @@ export default {
 			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 			max_length : 15,
 		},
-
+		banking_code: {
+			financial_system_code : 'ifsc',
+			pattern               : /^[A-Z]{4}0[A-Z0-9]{6}$/,
+		},
+		pan_number: {
+			label   : 'PAN',
+			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
+		},
+		economic_zone: {
+			label: 'SEZ',
+		},
 		identification_number: {
 			label   : 'PAN Number',
 			pattern : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
-		},
-
-		banking_code: {
-			financial_system_code : 'ifsc',
-			pattern               : /^[A-Za-z]{4}\d{7}$/,
-		},
-
-		pan_number: {
-			label   : 'PAN',
-			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
-		},
-
-		economic_zone: {
-			label: 'SEZ',
 		},
 
 		ask_gst_details: true,
@@ -695,8 +709,9 @@ export default {
 			},
 			bookings: {
 				invoicing: {
-					is_invoice_mergeable : false,
-					disable_edit_invoice : true,
+					is_invoice_mergeable              : false,
+					disable_edit_invoice              : true,
+					stakeholder_wise_invoice_required : true,
 				},
 			},
 			business_finance: {
@@ -706,6 +721,14 @@ export default {
 							document_key : 'destinationDocumentValue',
 							irn_key      : 'destinationIrnNumber',
 						},
+					},
+				},
+			},
+			partner: {
+				bookings: {
+					invoicing: {
+						request_cancel_invoice : false,
+						request_credit_note    : true,
 					},
 				},
 			},

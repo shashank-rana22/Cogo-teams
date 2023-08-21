@@ -1,13 +1,17 @@
 import Layout from '@cogoport/air-modules/components/Layout';
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import { applyFilterValues } from '../../../helpers/applyFilterValues';
 import getFilterControls from '../../../utils/getControls';
 
 import styles from './styles.module.css';
+
+const STORAGE_KEY = 'air_booking_desk';
 
 function Filter({
 	serviceActiveTab = 'air_freight',
@@ -16,7 +20,7 @@ function Filter({
 }) {
 	const getControls = getFilterControls({ serviceActiveTab });
 
-	const { formState:{ errors }, control, reset, getValues } = useForm({ getControls });
+	const { formState:{ errors }, control, reset, getValues, setValue } = useForm({ getControls });
 
 	const handleReset = () => {
 		reset({
@@ -28,8 +32,10 @@ function Filter({
 			airport_id                 : '',
 			importer_exporter_id       : '',
 			triggered_pending_invoices : '',
+			state                      : '',
 		});
 		setFilters({});
+		sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ serviceActiveTab, filters: {} }));
 		setFilterPopover(false);
 	};
 
@@ -45,7 +51,7 @@ function Filter({
 
 		const empty_val = Object.values(data).some((item) => !isEmpty(item));
 
-		setFilters(empty_val ? {
+		const filteredFilters = (empty_val ? {
 			tags                       : tags ? [tags] : undefined,
 			fault_alarms_raised        : fault_alarms_raised || undefined,
 			importer_exporter_id       : importer_exporter_id || undefined,
@@ -59,23 +65,40 @@ function Filter({
 			},
 
 		} : {});
+		setFilters(filteredFilters);
+		sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ serviceActiveTab, filters: filteredFilters }));
 		setFilterPopover(false);
 	};
 
 	useEffect(() => {
-		reset({
-			tags                   : '',
-			fault_alarms_raised    : '',
-			origin_airport_id      : '',
-			destination_airport_id : '',
-			trade_type             : '',
-			airport_id             : '',
-			importer_exporter_id   : '',
-			state                  : '',
+		const storageData = JSON.parse(sessionStorage.getItem(STORAGE_KEY));
+		const {
+			serviceActiveTab: storageServiceActiveTab = 'air_freight',
+			filters: filter = {},
+		} = storageData || {};
 
-		});
-		setFilters({});
-	}, [serviceActiveTab, reset, setFilters]);
+		if (serviceActiveTab !== storageServiceActiveTab) {
+			reset({
+				tags                       : '',
+				fault_alarms_raised        : '',
+				origin_airport_id          : '',
+				destination_airport_id     : '',
+				trade_type                 : '',
+				airport_id                 : '',
+				importer_exporter_id       : '',
+				triggered_pending_invoices : '',
+				state                      : '',
+			});
+			setFilters({});
+			sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ serviceActiveTab, filters: {} }));
+			return;
+		}
+		const prevServiceActiveTab = serviceActiveTab.concat('_service');
+		applyFilterValues({ filter, prevServiceActiveTab, setValue });
+		setValue('tags', filter?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
+		setFilters(filter);
+		sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ serviceActiveTab, filters: filter }));
+	}, [reset, serviceActiveTab, setFilters, setValue]);
 
 	return (
 		<div className={styles.filter_container}>

@@ -2,11 +2,17 @@
 /* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useAuthRequest } from '@cogoport/request';
 import { useSelector, useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { setCookie, getCookie } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
+
+const DENOMINATOR = 1000;
+const EXPIRY_TIME = 30;
+const NEGATIVE_INDEX = -1;
+const POSITIVE_INDEX = 1;
 
 const useGetUserSessionMappings = () => {
 	const {
@@ -16,29 +22,29 @@ const useGetUserSessionMappings = () => {
 
 	const current_time = new Date().getTime();
 
-	const diff = Math.floor(current_time / 1000);
+	const diff = Math.floor(current_time / DENOMINATOR);
 
-	const sessionTime = Math.max(diff, 0);
+	const sessionTime = Math.max(diff, GLOBAL_CONSTANTS.zeroth_index);
 
 	const [timeLeft, setTimeLeft] = useState(sessionTime);
 	const [checkIfSessionExpiring, setCheckIfSessionExpiring] = useState(false);
 
-	const [{ data, mappingsloading }, trigger] = useRequest({
+	const [{ data, mappingsloading }, trigger] = useAuthRequest({
 		url    : '/get_user_session_mappings',
 		method : 'get',
 	}, { manual: true });
 
-	const [{ loading: deleteLoading }, deleteSessionTrigger] = useRequest({
+	const [{ loading: deleteLoading }, deleteSessionTrigger] = useAuthRequest({
 		url    : '/delete_user_session',
 		method : 'delete',
 	}, { manual: true });
 
-	const [{ loading: removeLoading }, removeSessionTrigger] = useRequest({
+	const [{ loading: removeLoading }, removeSessionTrigger] = useAuthRequest({
 		url    : '/remove_user_sessions',
 		method : 'delete',
 	}, { manual: true });
 
-	const [{ loading: updateLoading }, updateTrigger] = useRequest({
+	const [{ loading: updateLoading }, updateTrigger] = useAuthRequest({
 		url    : '/update_parent_and_child_user_session_mappings',
 		method : 'post',
 	}, { manual: true });
@@ -73,27 +79,27 @@ const useGetUserSessionMappings = () => {
 	}, []);
 
 	const checkSessionExpired = (users, currentTime) => {
-		const users_expire_at = [];
+		const USERS_EXPIRE_AT = [];
 		(users || []).forEach((user) => {
 			if (user?.expire_at) {
 				const expire_time = new Date(user?.expire_at).getTime();
 
-				const diff_expire = Math.floor(expire_time / 1000);
+				const diff_expire = Math.floor(expire_time / DENOMINATOR);
 
-				const sessionExpire = Math.max(diff_expire, 0);
-				users_expire_at.push(sessionExpire);
+				const sessionExpire = Math.max(diff_expire, GLOBAL_CONSTANTS.zeroth_index);
+				USERS_EXPIRE_AT.push(sessionExpire);
 			}
 		});
 
-		const user_expiry_time_bool_arr = [];
-		users_expire_at.forEach((session_expiry_time) => {
-			if (Number(currentTime) > Number(session_expiry_time - 30)) {
-				user_expiry_time_bool_arr.push(true);
+		const USER_EXPIRY_TIME_BOOL_ARR = [];
+		USERS_EXPIRE_AT.forEach((session_expiry_time) => {
+			if (Number(currentTime) > Number(session_expiry_time - EXPIRY_TIME)) {
+				USER_EXPIRY_TIME_BOOL_ARR.push(true);
 			}
 		});
 
-		if (user_expiry_time_bool_arr.includes(true)) {
-			setCheckIfSessionExpiring(true);
+		if (USER_EXPIRY_TIME_BOOL_ARR.includes(true)) {
+			USER_EXPIRY_TIME_BOOL_ARR(true);
 		} else {
 			setCheckIfSessionExpiring(false);
 		}
@@ -142,7 +148,7 @@ const useGetUserSessionMappings = () => {
 					if (activeUserCheck) {
 						if (
 							parent_token
-							&& profile?.user_session_mappings?.length > 1
+							&& profile?.user_session_mappings?.length > POSITIVE_INDEX
 						) {
 							setCookie(
 								process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME,
@@ -153,11 +159,11 @@ const useGetUserSessionMappings = () => {
 						}
 
 						if (
-							profile?.user_session_mappings?.length === 1
+							profile?.user_session_mappings?.length === POSITIVE_INDEX
 							|| !parent_token
 						) {
-							setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', -1);
-							setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
+							setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', NEGATIVE_INDEX);
+							setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', NEGATIVE_INDEX);
 							window.location.href = '/v2/login';
 						}
 					}
@@ -179,7 +185,7 @@ const useGetUserSessionMappings = () => {
 			const expire_at = user?.expire_at;
 			const expire_time = new Date(expire_at).getTime();
 
-			if (timeLeft === Math.floor(expire_time / 1000)) {
+			if (timeLeft === Math.floor(expire_time / DENOMINATOR)) {
 				removeUser(user);
 			}
 		});
@@ -187,8 +193,8 @@ const useGetUserSessionMappings = () => {
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {
-			setTimeLeft((t) => t + 1);
-		}, 1000);
+			setTimeLeft((t) => t + POSITIVE_INDEX);
+		}, DENOMINATOR);
 		return () => clearInterval(intervalId);
 	}, []);
 

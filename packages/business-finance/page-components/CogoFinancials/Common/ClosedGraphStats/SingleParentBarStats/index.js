@@ -1,5 +1,5 @@
 import { startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { LABEL_MAPPING } from '../../../constants';
 import RenderCardHeader from '../../RenderCardHeader';
@@ -12,30 +12,29 @@ const GRAPHS = ['Operational Profitability', 'Revenue', 'Expense'];
 function SingleParentBarStats({
 	activeBar = '', setActiveBar = () => {}, isFullWidth = false,
 	setShowShipmentList = () => {},
+	showShipmentList = false,
 	taxType = '',
 	type = '',
 	serviceLevelData = [],
 	serviceLevelLoading = false,
-	getServiceLevelData = () => {},
+	setTableFilters = () => {},
 }) {
 	const onViewDetails = () => {
 		setShowShipmentList(true);
 	};
-
-	useEffect(() => {
-		getServiceLevelData(activeBar);
-	}, [activeBar, getServiceLevelData]);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_combine}>
 				<RenderCardHeader
 					title={`${activeBar} Profitability`}
-					showInfo
 					showBack
 					onBack={() => {
 						setActiveBar('');
 						setShowShipmentList(false);
+						setTableFilters((prev) => ({
+							...prev,
+							serviceLevel: null,
+						}));
 					}}
 				/>
 				<div className={styles.graph_label_container}>
@@ -70,6 +69,7 @@ function SingleParentBarStats({
 						type={type}
 						serviceLevelData={serviceLevelData}
 						serviceLevelLoading={serviceLevelLoading}
+						showShipmentList={showShipmentList}
 					/>
 				))}
 			</div>

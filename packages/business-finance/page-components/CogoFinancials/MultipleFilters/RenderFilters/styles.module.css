@@ -33,7 +33,7 @@
 
 		.ui_tabs_tabpanel {
 			height: 268px;
-			overflow-y: scroll;
+			overflow-y: auto;
 		}
 	}
 }
@@ -47,12 +47,12 @@
 
 .btn_group_section {
 	display: flex;
-	min-width: 140%;
-	margin: 16px 8px;
+	min-width: 99%;
+	margin: 16px 0 -8px 4px;
 
 	:global {
 		.ui_pill_container {
-			padding: 4px;
+			padding: 3px;
 			border: 1px solid;
 		}
 	}

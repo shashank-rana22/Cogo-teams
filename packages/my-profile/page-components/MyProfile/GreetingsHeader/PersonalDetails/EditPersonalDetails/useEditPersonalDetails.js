@@ -2,6 +2,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 const getPayload = {
 	name(values) {
@@ -22,8 +23,9 @@ const useEditPersonalDetails = ({
 	partner_user_id,
 	editNameModal,
 	setEditNameModal,
-
 }) => {
+	const { t } = useTranslation(['profile']);
+
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'update_partner_user',
 		method : 'post',
@@ -45,7 +47,7 @@ const useEditPersonalDetails = ({
 
 			setShowModal(false);
 			setEditNameModal((prev) => ({ ...prev, from: 'language', state: false }));
-			Toast.success(`${startCase(editNameModal.from)} updated successfully!`);
+			Toast.success(`${startCase(editNameModal.from)} ${t('profile:updated_successfully')}`);
 		} catch (e) {
 			console.log(e);
 		}

@@ -5,24 +5,21 @@ import {
 	IcMHome,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import useTransferChat from '../../../../../hooks/useTransferChat';
+import useUpdateUserRoom from '../../../../../hooks/useUpdateUserRoom';
 
-import Assignes from './Assignes';
 import ChatControls from './ChatControls';
-import ChatTransfer from './ChatTransfer';
-import TagsPopOver from './HeaderFuncs';
+import Assignes from './HeaderFuncs/assignes';
+import ShowContent from './HeaderFuncs/showContent';
+import TagsPopOver from './HeaderFuncs/tagsPopOver';
 import RightButton from './RightButton';
-import ShowContent from './ShowContent';
 import styles from './styles.module.css';
 
 function Header({
 	setOpenModal = () => {},
 	formattedData = {},
-	setheaderTags = () => {},
-	headertags = '',
 	updateChat = () => {},
 	loading = false,
 	closeModal = () => {},
@@ -33,11 +30,9 @@ function Header({
 	filteredSpectators = [],
 	activeMessageCard = {},
 	tagOptions = [],
-	supportAgentId = null,
+	supportAgentId = '',
 	showBotMessages = false,
 	userId = '',
-	updateRoomLoading = false,
-	updateUserRoom = () => {},
 	requestForAssignChat = () => {},
 	requestAssignLoading = false,
 	canMessageOnBotSession = false,
@@ -48,9 +43,12 @@ function Header({
 	supplierLoading = false,
 	hasNoFireBaseRoom = false,
 }) {
-	const [isVisible, setIsVisible] = useState(false);
+	const {
+		updateRoomLoading = false,
+		updateUserRoom = () => {},
+	} = useUpdateUserRoom();
 
-	const { requestToJoinGroup, dissmissTransferRequest } = useTransferChat({ firestore, activeMessageCard });
+	const { requestToJoinGroup = () => {} } = useTransferChat({ firestore, activeMessageCard });
 
 	const openAssignModal = () => {
 		setOpenModal({
@@ -65,7 +63,7 @@ function Header({
 		});
 	};
 
-	const { chat_tags = [] } = activeMessageCard || {};
+	const { chat_tags = [], channel_type: channelType = '' } = activeMessageCard || {};
 
 	const {
 		mobile_no = '',
@@ -87,104 +85,90 @@ function Header({
 	const isManager = managers_ids?.includes(userId);
 
 	return (
-		<div className={styles.outer_container}>
-			<div className={styles.container}>
-				<div className={styles.flex_space_between}>
-					<div className={styles.flex}>
-						<IcMHome
-							className={styles.home_button}
-							onClick={() => setActiveTab((prev) => ({ ...prev, data: {} }))}
-						/>
-						<TagsPopOver
-							prevtags={chat_tags}
-							headertags={headertags}
-							setheaderTags={setheaderTags}
-							isVisible={isVisible}
-							setIsVisible={setIsVisible}
-							updateChat={updateChat}
-							loading={loading}
-							tagOptions={tagOptions}
-							hasPermissionToEdit={hasPermissionToEdit}
-						/>
+		<div className={styles.container}>
+			<div className={styles.flex_space_between}>
+				<div className={styles.flex}>
+					<IcMHome
+						className={styles.home_button}
+						onClick={() => setActiveTab((prev) => ({ ...prev, data: {} }))}
+					/>
+					<TagsPopOver
+						prevTags={chat_tags}
+						updateChat={updateChat}
+						loading={loading}
+						tagOptions={tagOptions}
+						hasPermissionToEdit={hasPermissionToEdit}
+					/>
 
-						<ShowContent
-							list={chat_tags}
-							showMorePlacement="right"
-							hasPermissionToEdit={hasPermissionToEdit}
-						/>
-					</div>
-
-					<div className={styles.flex}>
-						{!isEmpty(filteredSpectators) && (
-							<Assignes filteredSpectators={filteredSpectators} />
-						)}
-						{activeAgentName && (
-							<div className={styles.active_agent}>
-								<AssigneeAvatar
-									name={activeAgentName}
-									type="active"
-									key={activeAgentName}
-								/>
-							</div>
-						)}
-						<RightButton
-							assignChat={assignChat}
-							openAssignModal={openAssignModal}
-							requestToJoinGroup={requestToJoinGroup}
-							formattedData={formattedData}
-							requestForAssignChat={requestForAssignChat}
-							userId={userId}
-							assignLoading={assignLoading}
-							requestAssignLoading={requestAssignLoading}
-							showBotMessages={showBotMessages}
-							viewType={viewType}
-							supportAgentId={supportAgentId}
-							isGroupFormed={isGroupFormed}
-							accountType={account_type}
-							isPartOfGroup={isPartOfGroup}
-							isManager={isManager}
-							hasNoFireBaseRoom={hasNoFireBaseRoom}
-						/>
-
-						{channel_type === 'whatsapp' && (
-							<div
-								role="presentation"
-								className={cl`${styles.icon_div} 
-								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
-								onClick={handleUpdateUser}
-							>
-								<IcMProfile
-									className={cl`${styles.profile_icon} 
-								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
-								/>
-								<IcMRefresh className={cl`${styles.update_icon} 
-								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
-								/>
-							</div>
-						)}
-					</div>
+					<ShowContent
+						list={chat_tags}
+						showMorePlacement="right"
+						hasPermissionToEdit={hasPermissionToEdit}
+						updateChat={updateChat}
+					/>
 				</div>
 
-				<ChatControls
-					formattedData={formattedData}
-					escalateToSupplyRm={escalateToSupplyRm}
-					setOpenModal={setOpenModal}
-					updateChat={updateChat}
-					loading={loading}
-					supplierLoading={supplierLoading}
-					hasPermissionToEdit={hasPermissionToEdit}
-					canMessageOnBotSession={canMessageOnBotSession}
-				/>
+				<div className={styles.flex}>
+					{!isEmpty(filteredSpectators) && (
+						<Assignes filteredSpectators={filteredSpectators} />
+					)}
+					{activeAgentName && (
+						<div className={styles.active_agent}>
+							<AssigneeAvatar
+								name={activeAgentName}
+								type="active"
+								key={activeAgentName}
+							/>
+						</div>
+					)}
+					<RightButton
+						assignChat={assignChat}
+						openAssignModal={openAssignModal}
+						requestToJoinGroup={requestToJoinGroup}
+						formattedData={formattedData}
+						requestForAssignChat={requestForAssignChat}
+						userId={userId}
+						assignLoading={assignLoading}
+						requestAssignLoading={requestAssignLoading}
+						showBotMessages={showBotMessages}
+						viewType={viewType}
+						supportAgentId={supportAgentId}
+						isGroupFormed={isGroupFormed}
+						accountType={account_type}
+						isPartOfGroup={isPartOfGroup}
+						isManager={isManager}
+						hasNoFireBaseRoom={hasNoFireBaseRoom}
+					/>
+
+					{channel_type === 'whatsapp' && (
+						<div
+							role="presentation"
+							className={cl`${styles.icon_div} 
+								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
+							onClick={handleUpdateUser}
+						>
+							<IcMProfile
+								className={cl`${styles.profile_icon} 
+								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
+							/>
+							<IcMRefresh className={cl`${styles.update_icon} 
+								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
+							/>
+						</div>
+					)}
+				</div>
 			</div>
 
-			<ChatTransfer
-				hasRequestedBy={formattedData?.has_requested_by}
-				dissmissTransferRequest={dissmissTransferRequest}
-				viewType={viewType}
-				supportAgentId={supportAgentId}
-				userId={userId}
-				assignLoading={assignLoading}
-				assignChat={assignChat}
+			<ChatControls
+				formattedData={formattedData}
+				escalateToSupplyRm={escalateToSupplyRm}
+				setOpenModal={setOpenModal}
+				updateChat={updateChat}
+				loading={loading}
+				channelType={channelType}
+				supplierLoading={supplierLoading}
+				hasPermissionToEdit={hasPermissionToEdit}
+				canMessageOnBotSession={canMessageOnBotSession}
 			/>
 		</div>
 	);

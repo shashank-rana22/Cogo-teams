@@ -30,7 +30,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		serviceType    : '',
 		Amount         : '',
 		Percentage     : '',
-		archivedStatus : 'BOOKED',
+		archivedStatus : 'BILLED',
 		search         : '',
 		Range          : '',
 		entity         : '',

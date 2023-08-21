@@ -35,8 +35,9 @@ function CogoOne() {
 		},
 	} = useRouter();
 
-	const { userId, token, userEmailAddress } = useSelector(({ profile, general }) => ({
+	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile, general }) => ({
 		userId           : profile?.user?.id,
+		userName         : profile?.user?.name,
 		token            : general.firestoreToken,
 		userEmailAddress : profile?.user?.email,
 	}));
@@ -70,7 +71,11 @@ function CogoOne() {
 		agentId           : userId,
 	});
 
-	const { viewType, loading: workPrefernceLoading = false } = useAgentWorkPrefernce();
+	const {
+		viewType,
+		loading: workPrefernceLoading = false,
+		userMails = [],
+	} = useAgentWorkPrefernce();
 
 	const {
 		fetchWorkStatus = () => {},
@@ -96,10 +101,13 @@ function CogoOne() {
 		activeMailAddress,
 		setActiveMailAddress,
 		viewType,
+		userMails,
 		activeMail    : activeTab?.data,
 		setActiveMail : (val) => {
 			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
+		userId,
+		userName,
 	};
 
 	const commonProps = {
@@ -139,6 +147,7 @@ function CogoOne() {
 				agentTimeline={agentTimeline}
 				preferenceLoading={preferenceLoading}
 				timelineLoading={timelineLoading}
+				userId={userId}
 			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
@@ -240,6 +249,7 @@ function CogoOne() {
 				setOpenKamContacts={setOpenKamContacts}
 				setActiveTab={setActiveTab}
 				orgId={orgId}
+				viewType={viewType}
 			/>
 		</>
 	);

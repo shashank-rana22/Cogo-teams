@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
@@ -62,7 +63,7 @@ const useUpdatePendingTask = ({
 			onCancel();
 			timeLineRefetch();
 		} catch (err) {
-			Toast.error(err?.data?.base || 'Something went wrong');
+			toastApiError(err);
 		}
 	};
 
