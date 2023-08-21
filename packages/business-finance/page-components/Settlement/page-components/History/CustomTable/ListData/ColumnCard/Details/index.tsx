@@ -91,7 +91,9 @@ function Details({
 	const { notPostedSettlementIds = [], ledCurrency = '' } = item || {};
 
 	const { loading: bulkPostToSageLoading, bulkPostToSageAction } = usePostSettlementToSage({ refetch });
-	const { deleteHistory, deleteHistoryLoading } = useDeleteHistorySettlement({ refetch });
+	const { deleteHistory, deleteHistoryLoading } = 	useDeleteHistorySettlement(
+		{ refetch, setShowDeleteConfirmationModal },
+	);
 
 	const { list = [], pageNo = 0, totalRecords = 0 } = data || {};
 

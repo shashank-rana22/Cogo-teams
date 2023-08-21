@@ -7,8 +7,9 @@ interface Profile {
 }
 interface Props {
 	refetch?: Function;
+	setShowDeleteConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const useDeleteHistorySettlement = ({ refetch = () => {} }:Props) => {
+const useDeleteHistorySettlement = ({ refetch = () => {}, setShowDeleteConfirmationModal }:Props) => {
 	const { profile }:Profile = useSelector((state) => state || {});
 
 	const [{ loading: deleteHistoryLoading }, deleteHistoryTriggerApi] = useRequestBf(
@@ -20,7 +21,7 @@ const useDeleteHistorySettlement = ({ refetch = () => {} }:Props) => {
 		},
 		{ manual: true },
 	);
-	const deleteHistory = async ({ item, setShowDeleteConfirmationModal }) => {
+	const deleteHistory = async ({ item }) => {
 		const { documentNo, accountType } = item || {};
 		try {
 			await deleteHistoryTriggerApi({

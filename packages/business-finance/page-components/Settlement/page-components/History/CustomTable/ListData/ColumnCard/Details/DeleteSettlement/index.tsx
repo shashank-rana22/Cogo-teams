@@ -19,17 +19,20 @@ function DeleteSettlement({
 	deleteHistory = () => {},
 	item = {},
 }:Props) {
+	const onClose = () => {
+		setShowDeleteConfirmationModal(false);
+	};
 	return (
 		<Modal
 			size="md"
 			show={showDeleteConfirmationModal}
-			onClose={() => setShowDeleteConfirmationModal(false)}
+			onClose={onClose}
 			placement="top"
 		>
 
 			<Modal.Body>
 				<div className={styles.cross_icon}>
-					<IcMCross width={20} height={20} onClick={() => setShowDeleteConfirmationModal(false)} />
+					<IcMCross width={20} height={20} onClick={onClose} />
 				</div>
 				<div className={styles.boddy_text_style}>
 					<div className={styles.text}>Are you sure you want to do delete this?</div>
@@ -42,7 +45,7 @@ function DeleteSettlement({
 
 				<Button
 					disabled={deleteHistoryLoading}
-					onClick={() => deleteHistory({ item, setShowDeleteConfirmationModal })}
+					onClick={() => deleteHistory({ item })}
 					style={{ marginTop: '6px' }}
 				>
 					Confirm
