@@ -143,10 +143,21 @@ export default {
 			'264a83ab-d438-48c3-8095-bb503f5b619c',
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
 			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
+			'8e0c7f28-f77c-44ae-9fef-901ca85fada5', // Portfolio Team Lead
+		],
+		kam_manager_ids: [
+			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
+			'f9905d33-24d7-48ca-99cd-eeca13a90d5a', // KAM Manager - SME Demand,
+			'594be53f-e39a-45d1-a705-57660a4a4a00', // IE Owner - SME Demand,
+			'37557738-13bb-4db8-96ef-6eac4549a5ac', // CP KAM Owner,
+			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // CP KAM Manager
+			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
+
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
-		shipping_line_supply_agents      : [
+
+		shipping_line_supply_agents: [
 			'1e3ee025-88a2-43ea-abd5-08017f61f2d2',
 			'4248e4d4-59cf-441e-a4a8-83bb29c86bcf',
 			'c1d73577-f0c0-463e-ba26-6ea5b01e5f21',
