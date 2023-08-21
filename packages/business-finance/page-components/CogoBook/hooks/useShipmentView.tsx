@@ -1,4 +1,5 @@
 import { Toast, Checkbox } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -16,12 +17,23 @@ interface ShipmentInterface {
 	checkedRows?:object
 	bulkAction?:string
 }
-
-const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection, bulkAction }:ShipmentInterface) => {
+const RANGE_MAPPING = {
+	''      : '',
+	'>'     : 'gt',
+	'>='    : 'gte',
+	'<'     : 'lt',
+	'<='    : 'lte',
+	'<=x=<' : 'btw',
+};
+const useShipmentView = ({
+	filters = {}, checkedRows = {}, setCheckedRows = () => {},
+	setBulkSection = () => {},
+}:ShipmentInterface) => {
 	const didMountRef = useRef(false);
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
+	const [searchValue, setSearchValue] = useState('');
 	const [checkedRowsSerialId, setCheckedRowsSerialId] = useState([]);
 	const [viewSelected, setViewSelected] = useState(true);
 	const [tempCheckedData, setTempCheckedData] = useState([]);
@@ -33,7 +45,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 	const {
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
-		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
+		jobState = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
 		sortType = '', sortBy = '', entity = '', channel = '', milestone = '',
 	} = filters || {};
 
@@ -44,6 +56,11 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 	const { startDate, endDate } = date || {};
 
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
+	const { query = '', debounceQuery } = useDebounceQuery();
+
+	useEffect(() => {
+		debounceQuery(searchValue);
+	}, [searchValue, debounceQuery]);
 
 	const [
 		{ data:shipmentViewData, loading:shipmentLoading },
@@ -62,22 +79,14 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		addToSelectedTrigger,
 	] = useRequestBf(
 		{
-			url     : 'pnl/accrual/add-to-selected',
+			url     : '/pnl/accrual/book-unbilled-shipments',
 			method  : 'post',
-			authKey : 'post_pnl_accrual_add_to_selected',
+			authKey : 'post_pnl_accrual_book_unbilled_shipments',
 		},
 		{ manual: true },
 	);
 
 	const refetch = useCallback(async () => {
-		const rangeMapping = {
-			''      : '',
-			'>'     : 'gt',
-			'>='    : 'gte',
-			'<'     : 'lt',
-			'<='    : 'lte',
-			'<=x=<' : 'btw',
-		};
 		try {
 			const resp = await shipmentTrigger({
 				params: {
@@ -90,7 +99,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					jobType              : shipmentType || undefined,
 					entityCode           : entity || undefined,
 					entityId             : entityId || undefined,
-					profitComparisonType : rangeMapping[range] || undefined,
+					profitComparisonType : RANGE_MAPPING[range] || undefined,
 					jobState             : jobState || undefined,
 					lowerProfitMargin    : profitAmount || profitPercent || undefined,
 					profitType           : profitType || undefined,
@@ -102,6 +111,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					endDate              : (startDate && endDate) ? format(endDate, 'yyy-MM-dd') : undefined,
 					page                 : page || undefined,
 					pageLimit            : 10,
+					archiveStatus        : 'UNBILLED',
 				},
 			});
 			const data = { ...resp.data };
@@ -149,12 +159,11 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 	useEffect(() => {
 		if (didMountRef.current === false) {
 			didMountRef.current = true;
-			return;
 		}
-		if (year && month && viewSelected === false) {
+		if (query) {
 			refetch();
 		}
-	}, [refetch, query, page, sortType, sortBy, year, month, viewSelected]);
+	}, [query, refetch, page, sortType, sortBy, year, month, viewSelected]);
 
 	const {
 		pageNo: pageNos = 0,
@@ -212,7 +221,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			setPayload([]);
 		}
 	};
-	const getTableHeaderCheckbox = () => {
+	function GetTableHeaderCheckbox() {
 		const { page: pages = 0 } = paginationData;
 		const isAllRowsChecked = !isEmpty(groupListData)
 		&& (checkedRows?.[`page-${pages}`] || []).length === (groupListData || []).length;
@@ -224,7 +233,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 				onChange={onChangeTableHeaderCheckbox}
 			/>
 		);
-	};
+	}
 
 	const onChangeTableBodyCheckbox = (event, item) => {
 		const { page: pages = 0 } = paginationData;
@@ -250,7 +259,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		}
 	};
 
-	const getTableBodyCheckbox = (item) => {
+	function GetTableBodyCheckbox(item) {
 		const { page: pages = 0 } = paginationData;
 		const isChecked = (checkedRows?.[`page-${pages}`] || []).includes(
 			`${item?.jobId || ''}`,
@@ -262,28 +271,19 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 				onChange={(event) => onChangeTableBodyCheckbox(event, item)}
 			/>
 		);
-	};
+	}
 
 	const addSelect = async (setOpenModal) => {
 		const newPayload = payload.map((item) => ({
 			...item,
 		}));
 
-		const rangeMapping = {
-			''      : '',
-			'>'     : 'gt',
-			'>='    : 'gte',
-			'<'     : 'lt',
-			'<='    : 'lte',
-			'<=x=<' : 'btw',
-		};
-
 		try {
 			const res = await addToSelectedTrigger({
 				data: {
 					shipmentList   : newPayload,
 					performedBy    : userId,
-					archivedStatus : bulkAction || 'BOOK',
+					archivedStatus : 'UNBILLED',
 					selectionMode  : 'SINGLE',
 					jobListRequest : {
 						query                : query || undefined,
@@ -292,7 +292,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 						serviceType          : service || undefined,
 						tradeType            : tradeType || undefined,
 						jobType              : shipmentType || undefined,
-						profitComparisonType : rangeMapping[range] || undefined,
+						profitComparisonType : RANGE_MAPPING[range] || undefined,
 						jobState             : jobState || undefined,
 						lowerProfitMargin    : profitAmount || profitPercent || undefined,
 						upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
@@ -417,7 +417,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		changeProfitHandler,
 		crossProfitHandler,
 		tickProfitHandler,
-		getTableBodyCheckbox,
+		GetTableBodyCheckbox,
 		setPayload,
 		selectedData,
 		editProfitHandler,
@@ -428,10 +428,12 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		checkedRowsSerialId,
 		payload,
 		selectedDataLoading,
-		getTableHeaderCheckbox,
+		GetTableHeaderCheckbox,
 		checkedData,
 		viewSelected,
 		setViewSelected,
+		setSearchValue,
+		searchValue,
 	};
 };
 export default useShipmentView;

@@ -60,5 +60,6 @@ export const getCommunicationPayload = ({
 		cc_emails       : isEmpty(ccrecipients) ? undefined : ccrecipients,
 		bcc_emails      : isEmpty(bccrecipients) ? undefined : ccrecipients,
 		attachment_urls : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
+		source          : 'CogoOne:AdminPlatform',
 	};
 };

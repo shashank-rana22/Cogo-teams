@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import SideBarComponent from '../common/SideBar';
@@ -7,6 +8,8 @@ import PageView from './PageView';
 import styles from './styles.module.css';
 
 function Locations() {
+	const { t } = useTranslation(['locations']);
+
 	const [sideBar, setSideBar] = useState('');
 	const [selectedLocation, setSelectedLocation] = useState({});
 
@@ -22,8 +25,8 @@ function Locations() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<h1>Locations</h1>
-				<Button onClick={onCreateClick}>Create Location</Button>
+				<h1>{t('locations:locations_heading')}</h1>
+				<Button onClick={onCreateClick}>{t('locations:create_location')}</Button>
 			</div>
 			<PageView
 				onClickCard={onClickCard}

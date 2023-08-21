@@ -1,0 +1,20 @@
+.modal_container {
+	:global {
+		.ui_modal_body_container {
+			padding-top: 0;
+			border: 0;
+		}
+	}
+}
+
+.modal_title {
+	color: #f68b21;
+}
+
+.modal_body {
+	font-style: italic;
+}
+
+.onboard_button {
+	margin-left: 10px;
+}
