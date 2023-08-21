@@ -1,8 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
+import { getMobilePrefixFromCountryCode } from '@cogoport/forms/utils/getMobilePrefixFromCountryCode';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
-
-import { getMobilePrefixFromCountryCode } from '../../../../../utils/getMobilePrefixFromCountryCode';
 
 import styles from './styles.module.css';
 

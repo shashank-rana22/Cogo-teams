@@ -1,8 +1,8 @@
 import { Button, Pill } from '@cogoport/components';
+import { getMobilePrefixFromCountryCode } from '@cogoport/forms/utils/getMobilePrefixFromCountryCode';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import useSubmitOmniChannelKyc from '../../../../../hooks/useSubmitOmniChannelKyc';
-import { getMobilePrefixFromCountryCode } from '../../../../../utils/getMobilePrefixFromCountryCode';
 
 import styles from './styles.module.css';
 
