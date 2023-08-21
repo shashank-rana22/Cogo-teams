@@ -225,6 +225,7 @@ function SingleGraphCard({
 										maximumFractionDigits : 2,
 									},
 								})}
+								isBarClickable={!isLastView}
 							/>
 						) : (
 							<div className={styles.empty_section}>
