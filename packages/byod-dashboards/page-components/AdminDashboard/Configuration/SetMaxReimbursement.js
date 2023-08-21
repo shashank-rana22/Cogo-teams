@@ -12,9 +12,10 @@ const OPTIONS = [
 
 function SetMaxReimbursement(
 	{
-		id, setCombinedValue,
+		id,
+		setCombinedValue = () => {},
 		combinedValue,
-		setMaxReimbursementAmount,
+		setMaxReimbursementAmount = () => {},
 		maxReimbursementAmount,
 		getEmployeeReimbursementGroup = () => {},
 	},
