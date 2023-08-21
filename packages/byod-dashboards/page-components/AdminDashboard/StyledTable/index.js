@@ -10,6 +10,7 @@ function StyledTable({ columns = [], data = [], loading = false, emptyText = 'no
 	if (isEmpty(data) && !loading) {
 		<EmptyState emptyText={emptyText} />;
 	}
+
 	return (
 		<section className={styles.container}>
 			<Table columns={columns} data={data} loading={loading} />
