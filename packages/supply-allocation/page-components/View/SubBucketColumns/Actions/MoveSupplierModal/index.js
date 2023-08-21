@@ -3,7 +3,7 @@ import { InputController, SelectController, useForm } from '@cogoport/forms';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import useUpdateRollingForecastFclFreightAllocation from '../../../../../hooks/useUpdateRollingForecastFclFreightAllocation';
+import useUpdateFclFreightAllocation from '../../../../../hooks/useUpdateFclFreightAllocation';
 
 import styles from './styles.module.css';
 
@@ -20,7 +20,7 @@ function MoveSupplierModal({
 	const { service_provider = {} } = item || {};
 	const { id: service_provider_id, short_name = '' } = service_provider || {};
 
-	const { updateRollingForecastFclFreightAllocation, loading } = useUpdateRollingForecastFclFreightAllocation();
+	const { updateFclFreightAllocation, loading } = useUpdateFclFreightAllocation();
 	const onClickSubmit = (values) => {
 		const payload = {
 			service_provider_id,
@@ -28,7 +28,7 @@ function MoveSupplierModal({
 			rolling_fcl_freight_search_id: rollingFclFreightSearchId,
 			...values,
 		};
-		updateRollingForecastFclFreightAllocation({ payload });
+		updateFclFreightAllocation({ payload });
 	};
 	return (
 		<Modal

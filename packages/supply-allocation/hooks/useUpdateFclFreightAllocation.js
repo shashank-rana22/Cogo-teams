@@ -1,12 +1,12 @@
 import { useRequest } from '@cogoport/request';
 
-const useUpdateRollingForecastFclFreightAllocation = () => {
+const useUpdateFclFreightAllocation = () => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/update_rolling_forecast_fcl_freight_allocation',
 		method : 'POST',
 	}, { manual: true });
 
-	const updateRollingForecastFclFreightAllocation = async ({ payload }) => {
+	const updateFclFreightAllocation = async ({ payload }) => {
 		try {
 			await trigger({ data: payload });
 		} catch (err) {
@@ -17,8 +17,8 @@ const useUpdateRollingForecastFclFreightAllocation = () => {
 	return {
 		data,
 		loading,
-		updateRollingForecastFclFreightAllocation,
+		updateFclFreightAllocation,
 	};
 };
 
-export default useUpdateRollingForecastFclFreightAllocation;
+export default useUpdateFclFreightAllocation;

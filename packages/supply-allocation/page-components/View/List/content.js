@@ -5,7 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CustomProgressBar from '../../../commons/CustomProgressBar';
-import useBulkUpdateRollingForecastFclFreightAllocation from '../../../hooks/useBulkUpdateRollingForecastFclFreightAllocation';
+import useBulkUpdateFclFreightAllocation from '../../../hooks/useBulkUpdateFclFreightAllocation';
 import BucketTable from '../BucketsTable';
 
 function Content({
@@ -26,7 +26,7 @@ function Content({
 	const [show, setShow] = useState(false);
 	const formProps = useForm();
 
-	const { control, unregister, formState, handleSubmit, watch } = formProps;
+	const { control, unregister, formState, handleSubmit } = formProps;
 	const { dirtyFields = {} } = formState;
 
 	const bucketControls = [
@@ -71,12 +71,16 @@ function Content({
 			key       : 'past_container_allocation',
 		},
 	];
-	const { bulkUpdateRollingForecastFclFreightAllocation } = useBulkUpdateRollingForecastFclFreightAllocation();
+	const { bulkUpdateFclFreightAllocation } = useBulkUpdateFclFreightAllocation();
 
 	const onClickSaveChanges = (values) => {
-		const modifiedValues = Object.entries(values).reduce((acc, [key, obj]) => [...acc, { service_provider_id: key, ...obj }], []);
+		const modifiedValues = Object.entries(values).reduce((
+			acc,
+			[key, obj],
+		) => [...acc, { service_provider_id: key, ...obj }], []);
+
 		const payload = { rolling_fcl_freight_search_id: search_id, bucket_type, data: modifiedValues };
-		bulkUpdateRollingForecastFclFreightAllocation({ payload });
+		bulkUpdateFclFreightAllocation({ payload });
 	};
 
 	return (

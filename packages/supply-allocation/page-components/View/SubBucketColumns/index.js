@@ -1,8 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import Promised from './Promised';
 import ServiceProvider from './ServiceProvider';
 
 const C = 100;
-const DEF = 0;
+const DEF = GLOBAL_CONSTANTS.zeroth_index;
 const SUB = 20;
 const ANO_SUB = 10;
 

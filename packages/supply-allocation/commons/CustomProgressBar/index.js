@@ -8,6 +8,8 @@ const COLORS_MAPPING = {
 	past_container_allocation    : '#E0E0E0',
 };
 
+const C = 100;
+
 function CustomProgressBar({
 	id = '',
 	className = '',
@@ -16,7 +18,7 @@ function CustomProgressBar({
 	promisedCount = 0,
 	view = '',
 }) {
-	const progress = (promisedCount / allocatedCount) * 100;
+	const progress = (promisedCount / allocatedCount) * C;
 
 	return (
 		<div
