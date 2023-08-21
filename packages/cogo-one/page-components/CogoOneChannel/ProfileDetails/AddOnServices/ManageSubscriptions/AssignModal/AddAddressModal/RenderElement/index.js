@@ -13,7 +13,7 @@ function RenderElement({ item = {}, control = {}, errors = {} }) {
 	return (
 		<div className={styles.element_column} key={label}>
 			<div className={styles.form_item_styled}>
-				{type !== 'checkbox' && <div>{label}</div>}
+				{type !== 'checkbox' ? <div>{label}</div> : null}
 				<Element
 					{...item}
 					control={control}
@@ -21,7 +21,7 @@ function RenderElement({ item = {}, control = {}, errors = {} }) {
 				/>
 			</div>
 			<div className={styles.error_text}>
-				{(errors?.[name] && (errors[name]?.message || 'required'))}
+				{errors?.[name] ? (errors[name]?.message || 'required') : null}
 			</div>
 		</div>
 	);

@@ -33,6 +33,7 @@ function ManageSubscriptions(props) {
 
 	const selectedUserId = organizationData?.users?.[GLOBAL_CONSTANTS.zeroth_index]?.id || '';
 
+	const [activeTab, setActiveTab] = useState('monthly');
 	const [showAddOn, setShowAddOn] = useState(false);
 	const [isAssignModal, setIsAssignModal] = useState(false);
 	const [selectedPlan, setSelectedPlan] = useState({});
@@ -48,8 +49,6 @@ function ManageSubscriptions(props) {
 		(item) => item?.display_pricing?.monthly?.is_active_plan,
 	);
 	const monthlySubscription = isEmpty(activePlanAvailableInMonth) ? 'annual' : 'monthly';
-
-	const [activeTab, setActiveTab] = useState('monthly');
 
 	const { display_pricing = {} } = selectedPlan || {};
 	const { payment_link : paymentLink = '', checkout = {} } = display_pricing[activeTab] || {};

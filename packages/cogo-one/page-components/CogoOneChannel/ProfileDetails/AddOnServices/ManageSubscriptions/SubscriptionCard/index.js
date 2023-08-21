@@ -68,7 +68,7 @@ function SubscriptionCard(props) {
 				{plan_name?.includes('premium') ? <div className={styles.plan_tag}>Most Popular</div> : null}
 			</div>
 
-			{category === 'custom'	&& (
+			{category === 'custom'	? (
 				<div className={styles.align_content_middle}>
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.custom_plan}
@@ -78,7 +78,7 @@ function SubscriptionCard(props) {
 						className={styles.custom_plan_img}
 					/>
 				</div>
-			)}
+			) : null}
 
 			<div>
 				{(sortePlans || []).map((plan) => {

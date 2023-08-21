@@ -73,13 +73,13 @@ function AddressCard({
 										setSelectedAddress(item);
 									}}
 								>
-									{addressType && (
+									{addressType ? (
 										<div className={cl`${styles.address_type} 
 													${isChecked ? styles.checked_address_type : ''}`}
 										>
 											{startCase(addressType)}
 										</div>
-									)}
+									) : null}
 									<div className={cl`${styles.card_row} ${styles.name}`}>
 										{name}
 										{renderName({ pocDetail: organization_pocs })}

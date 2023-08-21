@@ -80,12 +80,12 @@ export const getSubscriptionColumns = (props) => {
 							/>
 						) : (
 							<div className={styles.plus_icon}>
-								{quota?.[id] && (
+								{quota?.[id] ? (
 									<>
 										<IcMPlus fill="#849E4C" width={15} height={15} />
 										<span>{quota?.[id]}</span>
 									</>
-								)}
+								) : null}
 							</div>
 						)}
 					</div>
