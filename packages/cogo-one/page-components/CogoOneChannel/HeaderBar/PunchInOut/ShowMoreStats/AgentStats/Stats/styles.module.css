@@ -32,6 +32,18 @@
 	}
 }
 
+.new_each_stats {
+	width: 24%;
+
+	&:last-child {
+		width: 24%;
+	}
+
+	&:nth-child(3) {
+		width: 24%;
+	}
+}
+
 .stat_box {
 	&:nth-child(-n+3) {
 		border-bottom: 1px dashed #dde4ea;

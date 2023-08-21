@@ -10,7 +10,7 @@ import useGetAgentTimelineEscalate from '../../../../../../../hooks/useGetAgentT
 import styles from './styles.module.css';
 
 const MIN_COUNT = 0;
-const MIN_COUNT_FOUR = 5;
+// const MIN_COUNT_FOUR = 5;
 const MIN_RATING = 3;
 const ESCALATE_DEFAULT_CHAT_COUNT = 0;
 
@@ -23,6 +23,7 @@ function Stats({
 	viewType = '',
 	AgentStatsData = {},
 	timePeriodValue = '',
+	isShowActivityGraph = false,
 }) {
 	const { chat_stats = {} } = statsData || {};
 	const {
@@ -75,9 +76,13 @@ function Stats({
 	return (
 		<div className={styles.stats_container}>
 			{(STATS_FEEDBACK_MAPPING || []).map((item) => (
+				// <div
+				// 	className={cl`${styles.each_stats_div}
+				// ${(STATS_FEEDBACK_MAPPING.length >= MIN_COUNT_FOUR) ? styles.stat_box : ''}`}
+				// 	key={item}
 				<div
-					className={cl`${styles.each_stats_div} 
-				${(STATS_FEEDBACK_MAPPING.length >= MIN_COUNT_FOUR) ? styles.stat_box : ''}`}
+					className={cl`${styles.each_stats_div}
+				 ${isShowActivityGraph ? '' : styles.new_each_stats}`}
 					key={item}
 				>
 					<div className={styles.title}>{startCase(item)}</div>

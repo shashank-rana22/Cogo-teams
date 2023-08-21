@@ -8,6 +8,12 @@
 
 .header_container {
 	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header_sub_label {
+	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
@@ -44,18 +50,27 @@
 	width: 58%;
 }
 
+.stats_non_graph {
+	width: 100%;
+}
+
 .graph_container {
 	display: flex;
 	flex-direction: column;
 	width: 40%;
 }
 
-.wrap {
+.non_graph_container {
+	width: none;
+}
+
+/* .wrap {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
 	width: 100%;
-}
+} */
 
 .title {
 	padding-left: 6px;
