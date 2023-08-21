@@ -120,6 +120,7 @@ function ViewBillingAddresses({
 					setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
 					setCurrentView={setCurrentView}
 					setActiveState={setActiveState}
+					disabledInvoicingParties={disabledInvoicingParties}
 				/>
 			))}
 		</div>

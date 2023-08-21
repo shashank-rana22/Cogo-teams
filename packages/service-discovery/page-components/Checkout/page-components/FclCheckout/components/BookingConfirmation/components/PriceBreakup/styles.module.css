@@ -14,11 +14,13 @@
 
 		.ui_accordion_header {
 			padding: 20px 24px;
+			background-color: #f3fafa;
 		}
 
 		.ui_accordion_content {
-			padding: 12px !important;
-			padding-top: 0 !important;
+			padding: 32px;
+			padding-top: 8px;
+			background-color: #fffdf2;
 		}
 
 		.ui_accordion_icon {

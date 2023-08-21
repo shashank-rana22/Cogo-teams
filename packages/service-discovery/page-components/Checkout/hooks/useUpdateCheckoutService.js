@@ -5,6 +5,7 @@ const useUpdateCheckoutService = ({
 	detail,
 	checkout_id,
 	refetch = () => {},
+	getCheckoutInvoices = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -46,6 +47,7 @@ const useUpdateCheckoutService = ({
 			await trigger({ data: payload });
 
 			Toast.success('Service deleted successfully!');
+			await getCheckoutInvoices();
 			refetch();
 		} catch (err) {
 			Toast.error('Could not delete Service!');

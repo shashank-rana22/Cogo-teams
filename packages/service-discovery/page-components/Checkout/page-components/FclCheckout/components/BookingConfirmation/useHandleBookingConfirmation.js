@@ -36,6 +36,7 @@ const useHandleBookingConfirmation = () => {
 	const [invoicingParties, setInvoicingParties] = useState([]);
 	const [isVeryRisky, setIsVeryRisky] = useState(false);
 	const [error, setError] = useState('');
+	const [noRatesPresent, setNoRatesPresent] = useState(false);
 
 	const { importer_exporter = {} } = detail;
 
@@ -109,6 +110,8 @@ const useHandleBookingConfirmation = () => {
 		error,
 		setError,
 		isAssistedBookingNotAllowed,
+		noRatesPresent,
+		setNoRatesPresent,
 	};
 };
 

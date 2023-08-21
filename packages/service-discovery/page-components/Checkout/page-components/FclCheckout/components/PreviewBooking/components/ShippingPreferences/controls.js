@@ -19,11 +19,12 @@ const getControls = ({ search_id = '' }) => [
 		styles: { flexBasis: '24%', paddingRight: '40px' },
 	},
 	{
-		label       : 'Select Date Range',
-		name        : 'sailing_range',
-		type        : 'date-picker',
-		placeholder : 'Sailing Week',
-		styles      : { flexBasis: '24%', padding: '0px 40px' },
+		label                 : 'Select Date Range',
+		name                  : 'sailing_range',
+		type                  : 'date-picker',
+		placeholder           : 'Sailing Week',
+		isPreviousDaysAllowed : false,
+		styles                : { flexBasis: '24%', padding: '0px 40px' },
 	},
 	{
 		label       : 'Price Range (Basic Freight)',

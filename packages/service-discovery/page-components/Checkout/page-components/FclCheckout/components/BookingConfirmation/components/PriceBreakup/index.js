@@ -7,13 +7,17 @@ import { CheckoutContext } from '../../../../../../context';
 
 import styles from './styles.module.css';
 
-function PriceBreakup() {
+function PriceBreakup({
+	noRatesPresent = false,
+	setNoRatesPresent = () => {},
+	getCheckoutInvoices = () => {},
+}) {
 	const { rate = {} } = useContext(CheckoutContext);
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[GLOBAL_CONSTANTS.zeroth_index];
 
 	const [rateDetails, setRateDetails] = useState([]);
-	const [noRatesPresent, setNoRatesPresent] = useState(false);
+
 	const [convenienceDetails, setConvenienceDetails] = useState(() => ({
 		convenience_rate: {
 			price    : convenience_line_item?.price,
@@ -29,6 +33,7 @@ function PriceBreakup() {
 			type="form"
 			title="View Price Breakup"
 			animate
+			isOpen
 		>
 			<BreakdownDetails
 				rateDetails={rateDetails}
@@ -38,6 +43,7 @@ function PriceBreakup() {
 				setNoRatesPresent={setNoRatesPresent}
 				noRatesPresent={noRatesPresent}
 				setConvenienceDetails={setConvenienceDetails}
+				getCheckoutInvoices={getCheckoutInvoices}
 			/>
 		</Accordion>
 	);

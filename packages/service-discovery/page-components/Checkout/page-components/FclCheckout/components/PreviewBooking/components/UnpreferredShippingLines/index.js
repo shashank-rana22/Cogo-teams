@@ -45,7 +45,6 @@ function UnpreferredShippingLines({
 					sort_by    : 'short_name',
 					sort_type  : 'asc',
 				}}
-				rules={{ required: 'This field is Required' }}
 			/>
 
 			{errors?.unpreferred_shipping_lines?.message ? (

@@ -3,18 +3,12 @@ import { useState, useContext } from 'react';
 
 import BreakdownDetails from '../../../../commons/BreakdownDetails';
 import { CheckoutContext } from '../../../../context';
-import useUpdateCheckoutService from '../../../../hooks/useUpdateCheckoutService';
 
 import AdditionalContent from './AdditionalContent';
 import styles from './styles.module.css';
 
 function EditMargin({ state = '' }) {
-	const {
-		detail = {},
-		rate,
-		getCheckout,
-		checkout_id,
-	} = useContext(CheckoutContext);
+	const { rate } = useContext(CheckoutContext);
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[GLOBAL_CONSTANTS.zeroth_index];
 
@@ -29,12 +23,6 @@ function EditMargin({ state = '' }) {
 	}));
 	const [noRatesPresent, setNoRatesPresent] = useState(false);
 
-	const { handleDeleteRate, deleteRateLoading } = useUpdateCheckoutService({
-		refetch: getCheckout,
-		detail,
-		checkout_id,
-	});
-
 	return (
 		<div>
 			<BreakdownDetails
@@ -42,8 +30,6 @@ function EditMargin({ state = '' }) {
 				setRateDetails={setRateDetails}
 				convenienceDetails={convenienceDetails}
 				setConvenienceDetails={setConvenienceDetails}
-				handleDeleteRate={handleDeleteRate}
-				deleteRateLoading={deleteRateLoading}
 				setNoRatesPresent={setNoRatesPresent}
 				source="edit_margin"
 			/>
