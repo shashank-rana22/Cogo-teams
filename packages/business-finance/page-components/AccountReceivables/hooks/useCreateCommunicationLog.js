@@ -49,7 +49,8 @@ function useCreateCommunicationLog({
 			feedback_type : singleFeedback?.feedback_type,
 			feedback_data : [
 				{
-					general_feedback   : singleFeedback?.feedback_type,
+					general_feedback: singleFeedback?.feedback_type === 'general_feedback'
+						? singleFeedback?.general_feedback_text : undefined,
 					call_feedback      : singleFeedback?.call_feedback || undefined,
 					payment_commitment : singleFeedback?.payment_commitment || undefined,
 					obstacle_faced     : singleFeedback?.obstacle_faced || undefined,
