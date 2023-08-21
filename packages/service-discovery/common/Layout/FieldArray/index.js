@@ -7,6 +7,8 @@ import React, { useEffect } from 'react';
 import Child from './child';
 import styles from './styles.module.css';
 
+const SECOND_INDEX = 2;
+
 function FieldArray({
 	name = '',
 	control = () => {},
@@ -29,6 +31,18 @@ function FieldArray({
 	const CHILD_EMPTY_VALUES = {};
 	controls.forEach((controlItem) => {
 		CHILD_EMPTY_VALUES[controlItem.name] = controlItem.value || '';
+	});
+
+	controls.forEach((controlItem) => {
+		if (controlItem.name === 'handling_type') {
+			CHILD_EMPTY_VALUES[controlItem.name] = controlItem.value || 'stackable';
+		} else if (controlItem.name === 'weight_unit') {
+			CHILD_EMPTY_VALUES[controlItem.name] = `kg_${
+				rest.selectedWeightType.split('_')[SECOND_INDEX]
+			}`;
+		} else {
+			CHILD_EMPTY_VALUES[controlItem.name] = controlItem.value;
+		}
 	});
 
 	const handleAppendChild = () => {

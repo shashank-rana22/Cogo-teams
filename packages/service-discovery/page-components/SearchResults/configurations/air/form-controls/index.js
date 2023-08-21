@@ -2,8 +2,8 @@ import { addDays, isEmpty } from '@cogoport/utils';
 
 import COMMODITY_SUBTYPE_MAPPING from '../commodity-subtype-mapping';
 
-import { GROSS_CONTROLS } from './gross-controls';
-import { PACKAGE_CONTROLS } from './package-controls';
+import { getGrossControls } from './gross-controls';
+import { getPackageControls } from './package-controls';
 
 const DATE_RANGE = 1;
 
@@ -30,8 +30,8 @@ const COMMODITY_SUBTYPE_DEFAULT_OPTIONS = [
 const COMMODITY_SUBTYPE_DEFAULT_VALUE = 'all';
 
 const CONTROLS_MAPPING = {
-	by_gross   : GROSS_CONTROLS,
-	by_package : PACKAGE_CONTROLS,
+	by_gross   : getGrossControls,
+	by_package : getPackageControls,
 };
 
 const airControls = ({
@@ -39,8 +39,16 @@ const airControls = ({
 	commoditySubtypeOptions = [],
 	setCommoditySubTypeOptions = () => {},
 	setValue = () => {},
+	selectedWeightType = '',
+	setSelectedWeightType = () => {},
 }) => {
-	const controls = CONTROLS_MAPPING[activeTab] || [];
+	const controlProps = {
+		selectedWeightType,
+		setSelectedWeightType,
+		setValue,
+	};
+
+	const controls = CONTROLS_MAPPING[activeTab]?.(controlProps) || [];
 
 	const COMMON_CONTROLS = [
 		{

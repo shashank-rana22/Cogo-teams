@@ -1,8 +1,8 @@
 import { Checkbox } from '@cogoport/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import airControls from '../../../../../../page-components/SearchResults/configurations/air/form-controls';
-import Layout from '../../../../common/Layout';
+import Layout from '../../../../../Layout';
 
 import AdditionalModals from './AdditionalModals';
 import Header from './Header';
@@ -23,12 +23,15 @@ function FormModal({
 }) {
 	const [activeTab, setActiveTab] = useState('by_gross'); // by_gross and by_package
 	const [commoditySubtypeOptions, setCommoditySubTypeOptions] = useState([]);
+	const [selectedWeightType, setSelectedWeightType] = useState('weight_by_unit');
 
 	const controls = airControls({
 		activeTab,
 		commoditySubtypeOptions,
 		setCommoditySubTypeOptions,
 		setValue,
+		selectedWeightType,
+		setSelectedWeightType,
 	});
 
 	const {
@@ -40,6 +43,16 @@ function FormModal({
 	const onChangeCheckbox = () => {
 		setShowModal('suggestion');
 	};
+
+	useEffect(() => {
+		if (activeTab === 'by_gross') return;
+
+		const weightUnit = selectedWeightType === 'weight_by_unit' ? 'kg_unit' : 'kg_total';
+		const packages = watch('packages');
+		(packages || []).forEach((_, index) => {
+			setValue(`packages[${index}].weight_unit`, weightUnit);
+		});
+	}, [selectedWeightType, setValue, activeTab, watch]);
 
 	return (
 		<div>
@@ -65,6 +78,7 @@ function FormModal({
 					errors={errors}
 					watch={watch}
 					setValue={setValue}
+					selectedWeightType={selectedWeightType}
 				/>
 			</div>
 

@@ -2,11 +2,11 @@ import { cl } from '@cogoport/components';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { isEmpty } from '@cogoport/utils';
 
-import getElementController from '../../../../configs/getElementController';
-import getErrorMessage from '../../../../configs/getErrorMessage';
-import getOptions from '../../../../page-components/SearchResults/utils/getOptions';
-import FieldArray from '../../../FieldArray';
+import getElementController from '../../configs/getElementController';
+import getErrorMessage from '../../configs/getErrorMessage';
+import getOptions from '../../page-components/SearchResults/utils/getOptions';
 
+import FieldArray from './FieldArray';
 import styles from './styles.module.css';
 
 const DEFAULT_SPAN = 12;
@@ -21,6 +21,7 @@ function Layout({
 	setValue = () => {},
 	errors = {},
 	isSubControl = false,
+	...restLayout
 }) {
 	return (
 		<div className={styles.form}>
@@ -31,7 +32,7 @@ function Layout({
 
 				const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENTAGE_FACTOR - FLEX_OFFSET;
 
-				if (type === 'field-array') {
+				if (['field-array', 'fieldArray'].includes(type)) {
 					return (
 						<div className={styles.form_item} key={`${name}_${label}`} style={{ width: `${flex}%` }}>
 							<FieldArray
@@ -41,6 +42,7 @@ function Layout({
 								handleSubmit={handleSubmit}
 								error={errors?.[name]}
 								setValue={setValue}
+								{...restLayout}
 							/>
 						</div>
 					);

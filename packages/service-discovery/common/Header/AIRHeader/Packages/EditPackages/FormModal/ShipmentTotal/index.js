@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import roundUp from '../helpers/roundUp';
 
 import styles from './styles.module.css';
@@ -9,17 +11,25 @@ function ShipmentTotal({
 	packageWeight = [],
 	packageVolume = [],
 }) {
-	const getTotal = (array = []) => {
-		const total = array.reduce((accumulator, value) => accumulator + value, INITIAL_REDUCER_VALUE);
+	const totalUnits = useMemo(() => {
+		const total = packageQuantity.reduce((accumulator, value) => accumulator + value, INITIAL_REDUCER_VALUE);
 		return roundUp(total);
-	};
+	}, [packageQuantity]);
+
+	const totalWeight = useMemo(() => {
+		const total = packageWeight.reduce((accumulator, value) => accumulator + value, INITIAL_REDUCER_VALUE);
+		return roundUp(total);
+	}, [packageWeight]);
+
+	const totalVolume = useMemo(() => {
+		const total = packageVolume.reduce((accumulator, value) => accumulator + value, INITIAL_REDUCER_VALUE);
+		return roundUp(total);
+	}, [packageVolume]);
 
 	return (
 		<div className={styles.pill_container}>
 			<div className={styles.text}>
-				{` Shipment total: ${getTotal(packageQuantity)} UNITS, ${getTotal(
-					packageWeight,
-				)} KG, ${getTotal(packageVolume)} CBM`}
+				{`Shipment total: ${totalUnits} UNITS, ${totalWeight} KG, ${totalVolume} CBM`}
 			</div>
 		</div>
 	);

@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 
-import FieldArray from '../../../../../../common/FieldArray';
+import FieldArray from '../../../../../../common/Layout/FieldArray';
 import getElementController from '../../../../../../configs/getElementController';
 import getErrorMessage from '../../../../../../configs/getErrorMessage';
 import getOptions from '../../../../utils/getOptions';
