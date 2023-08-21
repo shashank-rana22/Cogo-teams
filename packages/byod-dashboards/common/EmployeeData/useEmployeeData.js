@@ -16,11 +16,13 @@ const useEmployeeData = ({ detail, refetchReimbursementList, setRefetchReimburse
 	const fetch = useCallback(
 		async () => {
 			await trigger({
-				filters: {
-					employee_detail_id : detail?.id,
-					status             : 'active',
+				params: {
+					filters: {
+						employee_detail_id : detail?.id,
+						status             : 'active',
+					},
+					page: 1,
 				},
-				page: 1,
 			});
 
 			setRefetchReimbursementList(false);

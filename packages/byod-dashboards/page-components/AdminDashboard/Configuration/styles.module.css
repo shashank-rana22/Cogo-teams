@@ -18,12 +18,12 @@
 .reimbursement_container {
 	padding: 10px 20px;
 	margin: 10px;
-	border-bottom: 1px solid #dce2e8 ;
+	border-bottom: 1px solid #dce2e8;
 }
 
 .device_info {
-	padding-left: 20px;
 	padding-right: 20px;
+	padding-left: 20px;
 }
 
 .title {
@@ -38,6 +38,7 @@
 	align-items: normal;
 	justify-content: space-between;
 }
+
 .header_container_accessories {
 	display: flex;
 	align-items: normal;
@@ -46,14 +47,15 @@
 }
 
 .text_container_reimbursement {
-	margin: 10px 0px;
+	margin: 10px 0;
 }
+
 .text_container {
 	margin: 10px;
 }
 
 .footer_container {
-	padding: 20px 20px;
+	padding: 20px;
 	margin-top: 30px;
 	background-color: #fff;
 }
@@ -63,12 +65,12 @@
 }
 
 .modal_body {
-	height:182px;
+	height: 182px;
 }
 
 .select_categories {
 	display: flex;
-	flex-direction: column; 
+	flex-direction: column;
 	justify-content: space-between;
 	margin-bottom: 26px;
 	margin-left: 10px;
@@ -77,4 +79,3 @@
 .actions {
 	display: flex;
 }
-
