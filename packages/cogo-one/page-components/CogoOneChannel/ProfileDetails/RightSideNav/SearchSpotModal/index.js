@@ -17,20 +17,20 @@ function SearchSpotModal({
 	activeMessageCard = {},
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
-	const { email = '', lead_user_details = {} } = formattedMessageData || {};
-	const { mobile_no = '', country_code = '' } = activeMessageCard || {};
-	const mobile_country_code = getMobilePrefixFromCountryCode(country_code);
+	const { email = '', lead_user_details : leadUserDetails = {} } = formattedMessageData || {};
+	const { mobile_no : mobileNo = '', country_code : countryCode = '' } = activeMessageCard || {};
+	const mobileCountryCode = getMobilePrefixFromCountryCode({ countryCode });
 
-	const mobile_number = (
-		mobile_no.substr(GLOBAL_CONSTANTS.zeroth_index, mobile_country_code.length) === mobile_country_code
-	) ? mobile_no.substr(mobile_country_code.length) : mobile_no;
+	const mobileNumber = (
+		mobileNo.substr(GLOBAL_CONSTANTS.zeroth_index, mobileCountryCode.length) === mobileCountryCode
+	) ? mobileNo.substr(mobileCountryCode.length) : mobileNo;
 
-	const userEmail = email || lead_user_details?.email;
+	const userEmail = email || leadUserDetails?.email;
 
 	const emailParams = userEmail ? `&email=${userEmail}` : '';
-	const countryCode = COUNTRY_CODE_PREFIX + mobile_country_code;
+	const formatCountryCode = COUNTRY_CODE_PREFIX + mobileCountryCode;
 
-	const queryParams = `?mobile=${mobile_number}&mobile_country_code=${countryCode}${emailParams}`;
+	const queryParams = `?mobile=${mobileNumber}&mobile_country_code=${formatCountryCode}${emailParams}`;
 
 	const handleOnboardCustomer = () => {
 		const redirectURL = `/${partnerId}/create-importer-exporter${queryParams}`;
