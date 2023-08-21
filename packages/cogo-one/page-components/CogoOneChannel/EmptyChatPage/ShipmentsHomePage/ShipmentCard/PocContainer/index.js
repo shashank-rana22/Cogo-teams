@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import CommunicationModal from '../../../../../../common/CommunicationModal';
 import useListShipmentStakeholders from '../../../../../../hooks/useListShipmentStakeholders';
+import useListShipmentTradePartners from '../../../../../../hooks/useListShipmentTradePartners';
 
 import PocUser from './PocUser';
 import styles from './styles.module.css';
@@ -15,14 +16,18 @@ function PocContainer({
 	setActiveTab = () => {},
 }) {
 	const [modalData, setModalData] = useState({});
-	const { id } = showPocDetails;
-	const { stakeHoldersData, loading } = useListShipmentStakeholders({ shipmentId: id });
+	const { id = '' } = showPocDetails;
+	const { stakeHoldersData = [], loading } = useListShipmentStakeholders({ shipmentId: id });
+
+	const { tradePartnersLoading = false, tradePartnersData = [] } = useListShipmentTradePartners({ shipmentId: id });
 
 	const { modalType = '', userData = {} } = modalData || {};
 
 	const closeModal = () => {
 		setModalData(null);
 	};
+
+	const mergedData = stakeHoldersData.concat(tradePartnersData);
 
 	return (
 		<div className={styles.container}>
@@ -40,7 +45,7 @@ function PocContainer({
 			</div>
 
 			<div className={styles.poc_users_container}>
-				{loading
+				{(loading || tradePartnersLoading)
 					? (
 						<Image
 							src={GLOBAL_CONSTANTS.image_url.spinner_loader}
@@ -51,7 +56,7 @@ function PocContainer({
 					)
 					: (
 						<PocUser
-							stakeHoldersData={stakeHoldersData}
+							stakeHoldersData={mergedData}
 							setActiveTab={setActiveTab}
 							setModalData={setModalData}
 						/>

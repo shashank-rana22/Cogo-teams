@@ -5,6 +5,7 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import AddPrimaryPocModal from '../../../../common/AddPrimaryPocModal';
 import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
 import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
@@ -25,6 +26,9 @@ function ListShipmentCards({
 	showPocDetails = {},
 	setShowPocDetails = () => {},
 	setShowBookingNote = () => {},
+	setShowPopover = () => {},
+	showPopover = '',
+	setShowPocModal = () => {},
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -44,11 +48,14 @@ function ListShipmentCards({
 		(shipmentItem) => (
 			<ShipmentCard
 				setActiveTab={setActiveTab}
-				key={shipmentItem?.sid}
+				key={shipmentItem?.id}
 				shipmentItem={shipmentItem}
 				showPocDetails={showPocDetails}
 				setShowPocDetails={setShowPocDetails}
 				setShowBookingNote={setShowBookingNote}
+				setShowPopover={setShowPopover}
+				showPopover={showPopover}
+				setShowPocModal={setShowPocModal}
 			/>
 		),
 	);
@@ -60,6 +67,9 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
 
 	const [showBookingNote, setShowBookingNote] = useState({ show: false, data: {} });
+	const [showPopover, setShowPopover] = useState('');
+	const [showPocModal, setShowPocModal] = useState({ show: false, shipmentData: {} });
+
 	const {
 		listLoading,
 		shipmentsData,
@@ -120,6 +130,9 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 								showPocDetails={showPocDetails}
 								setShowPocDetails={setShowPocDetails}
 								setShowBookingNote={setShowBookingNote}
+								setShowPopover={setShowPopover}
+								showPopover={showPopover}
+								setShowPocModal={setShowPocModal}
 							/>
 						)}
 				</div>
@@ -139,6 +152,14 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 			</div>
 			{showBookingNote?.show
 				? <BookingNoteModal setShowBookingNote={setShowBookingNote} showBookingNote={showBookingNote} /> : null}
+
+			{showPocModal?.show
+				? (
+					<AddPrimaryPocModal
+						showPocModal={showPocModal}
+						setShowPocModal={setShowPocModal}
+					/>
+				) : null}
 		</>
 	);
 }

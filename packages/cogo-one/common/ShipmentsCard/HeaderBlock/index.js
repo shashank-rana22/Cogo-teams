@@ -10,7 +10,10 @@ import RaiseTicketModal from '../../RaiseTicketModal';
 
 import styles from './styles.module.css';
 
-const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
+const getButtonOptions = ({
+	partnerId, shipmentId, setShowRaiseTicket,
+	setShowPocModal, setShowPopover, shipmentItem,
+}) => [
 	{
 		key      : 'view_shipments',
 		children : 'View Shipments',
@@ -18,6 +21,7 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 			e.stopPropagation();
 			const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
 			window.open(shipmentDetailsPage, '_blank');
+			setShowPopover('');
 		},
 		condition: ['all_shipments', 'user_shipments'],
 	},
@@ -28,6 +32,7 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 			e.stopPropagation();
 			const shipmentDocuments = `${window.location.origin}/${partnerId}/shipments/${shipmentId}?tab=documents`;
 			window.open(shipmentDocuments, '_blank');
+			setShowPopover('');
 		},
 		condition: ['all_shipments', 'user_shipments'],
 	},
@@ -37,12 +42,27 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 		onClick  : (e) => {
 			e.stopPropagation();
 			setShowRaiseTicket(true);
+			setShowPopover('');
 		},
 		condition: ['user_shipments'],
 	},
+	{
+		key      : 'add_primary_poc',
+		children : 'Add Primary Poc',
+		onClick  : (e) => {
+			e.stopPropagation();
+			setShowPocModal({ show: true, shipmentData: shipmentItem });
+			setShowPopover('');
+		},
+		condition: ['all_shipments', 'user_shipments'],
+	},
 ];
 
-function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '' }) {
+function HeaderBlock({
+	shipmentItem = {}, setShowPocDetails = () => {},
+	type = '', setShowPopover = () => {}, showPopover = '',
+	setShowPocModal = () => {},
+}) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
 		userId    : profile.user.id,
@@ -69,7 +89,14 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 		importer_exporter_id,
 	};
 
-	const buttons = getButtonOptions({ shipmentId, partnerId, setShowRaiseTicket });
+	const buttons = getButtonOptions({
+		shipmentId,
+		partnerId,
+		setShowRaiseTicket,
+		setShowPocModal,
+		setShowPopover,
+		shipmentItem,
+	});
 
 	const filteredButtons = buttons.filter((itm) => itm?.condition.includes(type));
 
@@ -126,6 +153,7 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 				<Popover
 					placement="bottom-end"
 					caret={false}
+					visible={showPopover === shipmentId}
 					render={(
 						<ButtonGroup
 							size="sm"
@@ -136,7 +164,10 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 				>
 					<IcMOverflowDot
 						className={styles.overflow_container}
-						onClick={(e) => e.stopPropagation()}
+						onClick={(e) => {
+							e.stopPropagation();
+							setShowPopover(shipmentId);
+						}}
 					/>
 				</Popover>
 			</div>

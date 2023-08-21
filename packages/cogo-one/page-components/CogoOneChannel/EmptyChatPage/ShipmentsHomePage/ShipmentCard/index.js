@@ -43,6 +43,9 @@ function ShipmentCard({
 	setActiveTab = () => {},
 	setShowBookingNote = () => {},
 	key = '',
+	setShowPopover = () => {},
+	showPopover = '',
+	setShowPocModal = () => {},
 }) {
 	const {
 		serial_id = '',
@@ -73,6 +76,9 @@ function ShipmentCard({
 				shipmentItem={shipmentItem}
 				type="all_shipments"
 				setShowBookingNote={setShowBookingNote}
+				setShowPopover={setShowPopover}
+				showPopover={showPopover}
+				setShowPocModal={setShowPocModal}
 			/>
 		</div>
 	);

@@ -3,8 +3,8 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMAppSearch } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
+import UserCard from '../../../../../common/UserCard';
 import useListLeadOrganizationUsers from '../../../../../hooks/useListLeadOrganizationUsers';
-import UserCard from '../UserCard';
 
 import styles from './styles.module.css';
 
@@ -112,7 +112,7 @@ function Leads({
 								});
 							}}
 						>
-							<UserCard userData={userData} />
+							<UserCard userData={userData} showDirection />
 						</div>
 					);
 				}) }

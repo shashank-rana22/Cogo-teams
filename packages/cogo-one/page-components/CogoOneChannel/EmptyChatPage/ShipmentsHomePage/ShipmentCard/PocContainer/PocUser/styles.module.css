@@ -23,11 +23,6 @@
 	white-space: nowrap;
 }
 
-.user_role {
-	font-size: 12px;
-	font-weight: 400;
-}
-
 .pocusers_container {
 	display: flex;
 	flex-direction: column;
@@ -59,4 +54,21 @@
 	height: 20px;
 	cursor: pointer;
 	fill: #2f4d4f;
+}
+
+.user_work_scope {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.scope_name {
+	padding: 2px 0;
+	margin-right: 4px;
+	font-size: 12px;
+}
+
+.more_tags {
+	margin: 0 2px;
+	font-size: 10px;
 }

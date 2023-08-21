@@ -12918,6 +12918,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'list_shipment_trade_partners',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	analytics_dashboard: [
 		{

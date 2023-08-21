@@ -3,6 +3,7 @@ import { IcMEyeopen } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { getEventTitle } from '../../../../utils/getEventTitle';
+import hideDetails from '../../../../utils/hideDetails';
 
 import PreviewModal from './PreviewModal';
 import styles from './styles.module.css';
@@ -60,7 +61,7 @@ function EmailClicked({ serviceData = {}, name = '', formattedData = {}, eventNa
 				<div className={styles.sender_email}>
 					To:
 					{' '}
-					{email || lead_user_details?.email}
+					{hideDetails({ data: email || lead_user_details?.email, type: 'mail' })}
 				</div>
 
 				<div className={styles.subject_name}>

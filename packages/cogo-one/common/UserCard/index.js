@@ -2,11 +2,11 @@ import { Avatar } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import getHidedUserDetails from '../../../../../utils/getHidedUserDetails';
+import getHidedUserDetails from '../../utils/getHidedUserDetails';
 
 import styles from './styles.module.css';
 
-function UserCard({ userData = {} }) {
+function UserCard({ userData = {}, showDirection = false }) {
 	const {
 		name = '',
 		email = '',
@@ -45,7 +45,8 @@ function UserCard({ userData = {} }) {
 					</div>
 				</div>
 			</div>
-			<IcMArrowRight className={styles.arrow_icon} />
+			{showDirection ? <IcMArrowRight className={styles.arrow_icon} /> : null}
+
 		</div>
 	);
 }
