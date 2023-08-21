@@ -37,7 +37,7 @@ const useCreateKamPromotion = ({ setShowSuccessModal = () => {}, refetchStats = 
 				organization_id,
 				service_type : service[GLOBAL_CONSTANTS.zeroth_index],
 				trade_type   : checkTradeType ? 'domestic' : service[FIRST_INDEX],
-				purchased_type,
+				rate_sources : purchased_type,
 				discounts    : [
 					{
 						unit            : 'flat',
