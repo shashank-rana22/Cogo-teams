@@ -74,7 +74,77 @@
     "roles_and_permission_column_users": "ผู้ใช้งาน",
     "roles_and_permission_column_level": "ระดับ",
     "roles_and_permission_column_functions": "ฟังก์ชัน",
-    "roles_and_permission_column_sub_functions": "ฟังก์ชันย่อย"
+    "roles_and_permission_column_sub_functions": "ฟังก์ชันย่อย",
+
+    "roles_and_permission_button_back": "กลับ",
+
+    "roles_and_permission_update_role_heading": "อัปเดตบทบาท",
+    "roles_and_permission_update_role_sub_heading": "อัปเดตสิทธิ์สำหรับบทบาท",
+    "roles_and_permission_update_edit_role_heading": "แก้ไขบทบาท",
+    "roles_and_permission_update_edit_role_short_name": "ชื่อย่อบทบาท",
+    "roles_and_permission_update_edit_role_role_functions": "ฟังก์ชั่นบทบาท",
+    "roles_and_permission_update_edit_role_role_functions_sales": "การขาย",
+    "roles_and_permission_update_edit_role_role_functions_supply": "การจัดหาพื้นที่",
+    "roles_and_permission_update_edit_role_role_functions_operations": "การดำเนินงาน",
+    "roles_and_permission_update_edit_role_role_functions_finance": "การเงิน",
+    "roles_and_permission_update_edit_role_role_functions_training": "การฝึกอบรม",
+    "roles_and_permission_update_edit_role_role_functions_hr": "ทรัพยากรบุคคล",
+    "roles_and_permission_update_edit_role_role_functions_external": "ภายนอก",
+    "roles_and_permission_update_edit_role_role_functions_placeholder": "เลือกฟังก์ชั่นบทบาท",
+    "roles_and_permission_update_edit_role_sub_functions": "ฟังก์ชั่นย่อยของบทบาท",
+    "roles_and_permission_update_edit_role_sub_functions_placeholder": "เลือกฟังก์ชั่นย่อยของบทบาท",
+    "roles_and_permission_update_edit_role_hierarchy_level": "ระดับชั้นบรรยากาศ",
+    "roles_and_permission_update_edit_role_hierarchy_level_owner": "เจ้าของ",
+    "roles_and_permission_update_edit_role_hierarchy_level_manager": "ผู้จัดการ",
+    "roles_and_permission_update_edit_role_hierarchy_level_function_head": "หัวหน้าฟังก์ชั่น",
+    "roles_and_permission_update_edit_role_hierarchy_level_head": "หัวหน้า",
+    "roles_and_permission_update_edit_role_hierarchy_level_zone_head": "หัวหน้าเขต",
+    "roles_and_permission_update_edit_role_hierarchy_level_region_head": "หัวหน้าภูมิภาค",
+    "roles_and_permission_update_edit_role_hierarchy_level_cluster_head": "หัวหน้าคลัสเตอร์",
+    "roles_and_permission_update_edit_role_hierarchy_level_placeholder": "เลือกระดับชั้นบรรยากาศ",
+    "roles_and_permission_update_edit_role_remarks_description": "คำอธิบาย",
+    "roles_and_permission_update_edit_role_remarks_placeholder": "ป้อนคำอธิบายของบทบาท",
+
+    "roles_and_permission_update_role_toast_success": "อัปเดตบทบาทเรียบร้อยแล้ว ผลลัพธ์จะปรากฏในเร็ว ๆ นี้",
+    "roles_and_permission_update_role_toast_error": "ไม่สามารถแก้ไขบทบาทได้ โปรดลองอีกครั้ง!!",
+
+    "roles_and_permission_update_role_edit_button": "แก้ไข",
+    "roles_and_permission_update_role_update_button": "อัปเดตบทบาท",
+    "roles_and_permission_update_role_updateing_button": "กำลังอัปเดตบทบาท",
+
+    "roles_and_permission_update_role_role": "บทบาท",
+    "roles_and_permission_update_role_short_name": "ชื่อย่อ",
+    "roles_and_permission_update_role_partner": "พาร์ทเนอร์",
+    "roles_and_permission_update_role_role_description": "คำอธิบายบทบาท",
+
+    "roles_and_permission_title_modules": "โมดูล",
+    "roles_and_permission_sub_title_first_part_assign_modules": "กำหนดโมดูลและสิทธิ์สำหรับ",
+    "roles_and_permission_sub_title_second_part_role": "บทบาท",
+
+    "roles_and_permission_search_navigation_placeholder": "ค้นหาการนำทาง",
+    "roles_and_permission_filters_label": "ตัวกรอง",
+    "roles_and_permission_filters_navigation_status_heading": "สถานะการนำทาง",
+    "roles_and_permission_filters_children_assigned": "มอบหมายแล้ว",
+    "roles_and_permission_filters_children_not_assigned": "ไม่ได้มอบหมาย",
+    "roles_and_permission_filters_children_all_assigned": "มอบหมายทั้งหมด",
+
+    "roles_and_permission_department_description_access_type_scopes": "รูปแบบการเข้าถึง (ขอบเขต)",
+    "roles_and_permission_department_description_access_type_scopes_placeholder": "เลือกประเภท",
+    "roles_and_permission_department_description_label": "แผนก",
+    "roles_and_permission_access_type_allows_description": "รูปแบบการเข้าถึงที่ให้บทบาทนี้เห็นข้อมูลในรูปแบบที่แตกต่างกัน เช่น หากคุณเลือกทีม บทบาทจะสามารถเห็นข้อมูลสมาชิกทีมของพวกเขาในนั้น",
+    "roles_and_permission_department_description": "แผนกที่ให้บทบาทนี้เห็นข้อมูลผ่านหลักเกณฑ์ที่แตกต่างกันในขอบเขตที่เฉพาะเจาะจง เช่น หากคุณเลือกการขาย บทบาทจะสามารถเห็นข้อมูลที่พวกเขาถูกแท็กเป็นเจ้าของการขายหรือข้อมูลสมาชิกทีมของพวกเขาที่ถูกแท็กเป็นเจ้าของการขาย",
+
+    "roles_and_permission_crm_dashboard_button_edit": "แก้ไข",
+    "roles_and_permission_crm_dashboard_button_text_assign_now": "กำหนดเดี๋ยวนี้",
+    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "ยกเลิกการกำหนดเดี๋ยวนี้",
+    "roles_and_permission_crm_dashboard_btn_text_modal_next": "ถัดไป",
+    "roles_and_permission_crm_dashboard_btn_text_cancel": "ยกเลิก",
+    "roles_and_permission_crm_dashboard_btm_text_back": "กลับ",
+    "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_please_wait": "กำลังบันทึก โปรดรอสักครู่...",
+    "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "บันทึก",
+    "roles_and_permission_crm_dashboard_button_text_allow_navigation": "อนุญาตให้นำทาง",
+
+    "roles_and_permission_crm_dashboard_permission_module": "กำหนดการอนุญาตของคุณตามที่คุณต้องการและบันทึก สำหรับการแก้ไขการอนุญาตแบบจำนวนมากคลิกที่ปุ่มวงกลมข้างบน"
     
     
 }

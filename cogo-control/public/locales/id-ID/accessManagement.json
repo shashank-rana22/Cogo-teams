@@ -75,7 +75,75 @@
     "roles_and_permission_column_users": "Pengguna",
     "roles_and_permission_column_level": "Tingkat",
     "roles_and_permission_column_functions": "Fungsi",
-    "roles_and_permission_column_sub_functions": "Sub Fungsi"
-    
+    "roles_and_permission_column_sub_functions": "Sub Fungsi",
+
+    "roles_and_permission_button_back": "Kembali",
+
+    "roles_and_permission_update_role_heading": "Perbarui Peran",
+    "roles_and_permission_update_role_sub_heading": "Perbarui izin untuk peran",
+    "roles_and_permission_update_edit_role_heading": "Sunting Peran",
+    "roles_and_permission_update_edit_role_short_name": "Nama Singkat Peran",
+    "roles_and_permission_update_edit_role_role_functions": "Fungsi Peran",
+    "roles_and_permission_update_edit_role_role_functions_sales": "Penjualan",
+    "roles_and_permission_update_edit_role_role_functions_supply": "Pasokan",
+    "roles_and_permission_update_edit_role_role_functions_operations": "Operasi",
+    "roles_and_permission_update_edit_role_role_functions_finance": "Keuangan",
+    "roles_and_permission_update_edit_role_role_functions_training": "Pelatihan",
+    "roles_and_permission_update_edit_role_role_functions_hr": "SDM",
+    "roles_and_permission_update_edit_role_role_functions_external": "Eksternal",
+    "roles_and_permission_update_edit_role_role_functions_placeholder": "Pilih fungsi peran",
+    "roles_and_permission_update_edit_role_sub_functions": "Fungsi Sub Peran",
+    "roles_and_permission_update_edit_role_sub_functions_placeholder": "Pilih fungsi sub peran",
+    "roles_and_permission_update_edit_role_hierarchy_level": "Tingkat Hirarki",
+    "roles_and_permission_update_edit_role_hierarchy_level_owner": "Pemilik",
+    "roles_and_permission_update_edit_role_hierarchy_level_manager": "Manajer",
+    "roles_and_permission_update_edit_role_hierarchy_level_function_head": "Kepala Fungsi",
+    "roles_and_permission_update_edit_role_hierarchy_level_head": "Kepala",
+    "roles_and_permission_update_edit_role_hierarchy_level_zone_head": "Kepala Zona",
+    "roles_and_permission_update_edit_role_hierarchy_level_region_head": "Kepala Wilayah",
+    "roles_and_permission_update_edit_role_hierarchy_level_cluster_head": "Kepala Kluster",
+    "roles_and_permission_update_edit_role_hierarchy_level_placeholder": "Pilih Tingkat Hirarki",
+    "roles_and_permission_update_edit_role_remarks_description": "Deskripsi",
+    "roles_and_permission_update_edit_role_remarks_placeholder": "Masukkan deskripsi peran",
+
+    "roles_and_permission_update_role_toast_success": "Peran berhasil diperbarui. Hasil akan segera terlihat.",
+    "roles_and_permission_update_role_toast_error": "Tidak dapat mengedit peran. Silakan coba lagi!!",
+
+    "roles_and_permission_update_role_edit_button": "Sunting",
+    "roles_and_permission_update_role_update_button": "Perbarui Peran",
+    "roles_and_permission_update_role_updateing_button": "Memperbarui Peran",
+
+    "roles_and_permission_update_role_role": "Peran",
+    "roles_and_permission_update_role_short_name": "Nama Pendek",
+    "roles_and_permission_update_role_partner": "Mitra",
+    "roles_and_permission_update_role_role_description": "Deskripsi Peran",
+
+    "roles_and_permission_title_modules": "Modul",
+    "roles_and_permission_sub_title_first_part_assign_modules": "Tetapkan modul dan izinnya untuk",
+    "roles_and_permission_sub_title_second_part_role": "peran",
+
+    "roles_and_permission_search_navigation_placeholder": "Cari Navigasi",
+    "roles_and_permission_filters_label": "Filter",
+    "roles_and_permission_filters_navigation_status_heading": "Status Navigasi",
+    "roles_and_permission_filters_children_assigned": "Ditugaskan",
+    "roles_and_permission_filters_children_not_assigned": "Tidak Ditugaskan",
+    "roles_and_permission_filters_children_all_assigned": "Semua Ditugaskan",
+
+    "roles_and_permission_department_description_access_type_scopes": "Jenis akses (lingkup)",
+    "roles_and_permission_department_description_access_type_scopes_placeholder": "Pilih jenis",
+    "roles_and_permission_department_description_label": "Departemen",
+    "roles_and_permission_access_type_allows_description": "Jenis akses memungkinkan peran ini melihat data dalam berbagai format. Misalnya, jika Anda memilih tim, peran akan dapat melihat data anggota tim mereka dalam navigasi tersebut.",
+    "roles_and_permission_department_description": "Departemen memungkinkan peran ini melihat data melalui kriteria yang berbeda dalam lingkup tertentu. Misalnya, jika Anda telah memilih penjualan, peran akan dapat melihat data di mana mereka ditandai sebagai pemilik penjualan atau data anggota tim mereka yang ditandai sebagai pemilik penjualan.",
+    "roles_and_permission_crm_dashboard_button_edit": "Edit",
+    "roles_and_permission_crm_dashboard_button_text_assign_now": "Assign Sekarang",
+    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "Un-Assign Sekarang",
+    "roles_and_permission_crm_dashboard_btn_text_modal_next": "LANJUT",
+    "roles_and_permission_crm_dashboard_btn_text_cancel": "Batal",
+    "roles_and_permission_crm_dashboard_btm_text_back": "KEMBALI",
+    "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_please_wait": "Menyimpan, Mohon tunggu...",
+    "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "Simpan",
+    "roles_and_permission_crm_dashboard_button_text_allow_navigation": "Izinkan Navigasi",
+    "roles_and_permission_crm_dashboard_permission_module": "Konfigurasi izin Anda sesuai dengan kebutuhan Anda dan simpan. Untuk memodifikasi izin secara massal, klik tombol radio fitur di atas."
+      
       
 }

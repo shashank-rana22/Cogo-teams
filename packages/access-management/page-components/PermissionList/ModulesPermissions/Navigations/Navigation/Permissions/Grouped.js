@@ -41,6 +41,7 @@ function Grouped(props) {
 		navigation = {},
 		featureKey = '',
 		creatingNavs = false,
+		t = () => {},
 	} = props || {};
 	const { possible_apis = [], ...rest } = apiGroup || {};
 	const {
@@ -82,8 +83,7 @@ function Grouped(props) {
 			{show ? (
 				<div className={styles.accordion}>
 					<p className={styles.description}>
-						Configure your permissions according to you and save. For modifying
-						permissions in bulk click on feature radio buttons above
+						{t('accessManagement:roles_and_permission_crm_dashboard_permission_module')}
 					</p>
 					{allignAPis(possible_apis || []).map((api) => (
 						<Permission

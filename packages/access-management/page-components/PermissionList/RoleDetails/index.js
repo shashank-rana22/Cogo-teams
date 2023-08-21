@@ -15,6 +15,7 @@ function RoleDetails({
 	onImport = () => {},
 	getRole = () => {},
 	activeNavs = [],
+	t = () => {},
 }) {
 	const {
 		name = '',
@@ -25,22 +26,22 @@ function RoleDetails({
 	const details = useMemo(
 		() => [
 			{
-				title    : 'Role',
+				title    : t('accessManagement:roles_and_permission_update_role_role'),
 				data     : name || '',
 				skeleton : { width: '80%' },
 			},
 			{
-				title    : 'Short Name',
+				title    : t('accessManagement:roles_and_permission_update_role_short_name'),
 				data     : roleData?.short_name || '-',
 				skeleton : { width: '50%' },
 			},
 			{
-				title    : 'Partner',
+				title    : t('accessManagement:roles_and_permission_update_role_partner'),
 				data     : (roleData?.partner?.business_name || '-').toUpperCase(),
 				skeleton : { width: '50%' },
 			},
 			{
-				title    : 'Role Description',
+				title    : t('accessManagement:roles_and_permission_update_role_role_description'),
 				data     : descriptions || '',
 				skeleton : { width: '100%' },
 			},
@@ -78,12 +79,12 @@ function RoleDetails({
 		<section className={styles.container}>
 			<div className={styles.heading_container}>
 				<Heading
-					title="Update Role"
-					subTitle="Update permissions for the role"
+					title={t('accessManagement:roles_and_permission_update_role_heading')}
+					subTitle={t('accessManagement:roles_and_permission_update_role_sub_heading')}
 				/>
 
 				<section className={styles.permissions_container}>
-					<EditRoles roleData={roleData} getRole={getRole} />
+					<EditRoles roleData={roleData} getRole={getRole} t={t} />
 					{importPermissionsButton}
 				</section>
 

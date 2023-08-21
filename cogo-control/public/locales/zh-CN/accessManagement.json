@@ -74,5 +74,76 @@
     "roles_and_permission_column_users": "用户",
     "roles_and_permission_column_level": "级别",
     "roles_and_permission_column_functions": "功能",
-    "roles_and_permission_column_sub_functions": "子功能"
+    "roles_and_permission_column_sub_functions": "子功能",
+
+    "roles_and_permission_button_back": "后退",
+
+    "roles_and_permission_update_role_heading": "更新角色",
+    "roles_and_permission_update_role_sub_heading": "更新角色的权限",
+    "roles_and_permission_update_edit_role_heading": "编辑角色",
+    "roles_and_permission_update_edit_role_short_name": "角色简称",
+    "roles_and_permission_update_edit_role_role_functions": "角色功能",
+    "roles_and_permission_update_edit_role_role_functions_sales": "销售",
+    "roles_and_permission_update_edit_role_role_functions_supply": "供应",
+    "roles_and_permission_update_edit_role_role_functions_operations": "运营",
+    "roles_and_permission_update_edit_role_role_functions_finance": "财务",
+    "roles_and_permission_update_edit_role_role_functions_training": "培训",
+    "roles_and_permission_update_edit_role_role_functions_hr": "人力资源",
+    "roles_and_permission_update_edit_role_role_functions_external": "外部",
+    "roles_and_permission_update_edit_role_role_functions_placeholder": "选择角色功能",
+    "roles_and_permission_update_edit_role_sub_functions": "角色子功能",
+    "roles_and_permission_update_edit_role_sub_functions_placeholder": "选择角色子功能",
+    "roles_and_permission_update_edit_role_hierarchy_level": "层级",
+    "roles_and_permission_update_edit_role_hierarchy_level_owner": "所有者",
+    "roles_and_permission_update_edit_role_hierarchy_level_manager": "经理",
+    "roles_and_permission_update_edit_role_hierarchy_level_function_head": "功能负责人",
+    "roles_and_permission_update_edit_role_hierarchy_level_head": "头部",
+    "roles_and_permission_update_edit_role_hierarchy_level_zone_head": "区域负责人",
+    "roles_and_permission_update_edit_role_hierarchy_level_region_head": "区域主管",
+    "roles_and_permission_update_edit_role_hierarchy_level_cluster_head": "集群主管",
+    "roles_and_permission_update_edit_role_hierarchy_level_placeholder": "选择层级",
+    "roles_and_permission_update_edit_role_remarks_description": "描述",
+    "roles_and_permission_update_edit_role_remarks_placeholder": "输入角色描述",
+
+    "roles_and_permission_update_role_toast_success": "角色更新成功。结果将很快反映出来。",
+    "roles_and_permission_update_role_toast_error": "无法编辑角色，请重试！！",
+
+    "roles_and_permission_update_role_edit_button": "编辑",
+    "roles_and_permission_update_role_update_button": "更新角色",
+    "roles_and_permission_update_role_updateing_button": "正在更新角色",
+
+    "roles_and_permission_update_role_role": "角色",
+    "roles_and_permission_update_role_short_name": "简称",
+    "roles_and_permission_update_role_partner": "合作伙伴",
+    "roles_and_permission_update_role_role_description": "角色描述",
+
+    "roles_and_permission_title_modules": "模块",
+    "roles_and_permission_sub_title_first_part_assign_modules": "为模块分配权限，以及为",
+    "roles_and_permission_sub_title_second_part_role": "角色分配权限",
+
+    "roles_and_permission_search_navigation_placeholder": "搜索导航",
+    "roles_and_permission_filters_label": "筛选器",
+    "roles_and_permission_filters_navigation_status_heading": "导航状态",
+    "roles_and_permission_filters_children_assigned": "已分配",
+    "roles_and_permission_filters_children_not_assigned": "未分配",
+    "roles_and_permission_filters_children_all_assigned": "全部已分配",
+
+    "roles_and_permission_department_description_access_type_scopes": "访问类型（范围）",
+    "roles_and_permission_department_description_access_type_scopes_placeholder": "选择类型",
+    "roles_and_permission_department_description_label": "部门",
+    "roles_and_permission_access_type_allows_description": "访问类型允许此角色以不同的格式查看数据。例如，如果您选择团队，则角色将能够在该导航中查看其团队成员的数据。",
+    "roles_and_permission_department_description": "部门允许此角色通过特定范围的不同标准查看数据。例如，如果您选择了销售，那么角色将能够查看以其为销售负责人的数据，或查看其团队成员被标记为销售负责人的数据。",
+
+    "roles_and_permission_crm_dashboard_button_edit": "编辑",
+    "roles_and_permission_crm_dashboard_button_text_assign_now": "立即分配",
+    "roles_and_permission_crm_dashboard_button_text_un_assign_now": "取消分配",
+    "roles_and_permission_crm_dashboard_btn_text_modal_next": "下一步",
+    "roles_and_permission_crm_dashboard_btn_text_cancel": "取消",
+    "roles_and_permission_crm_dashboard_btm_text_back": "返回",
+    "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_please_wait": "保存中，请稍候...",
+    "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "保存",
+    "roles_and_permission_crm_dashboard_button_text_allow_navigation": "允许导航",
+
+    "roles_and_permission_crm_dashboard_permission_module": "根据您的需要配置权限并保存。要批量修改权限，请单击上方的功能单选按钮"
+    
 }

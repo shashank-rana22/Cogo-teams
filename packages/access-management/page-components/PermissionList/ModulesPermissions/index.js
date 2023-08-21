@@ -26,6 +26,7 @@ function ModulesPermissions(props) {
 					onChangeSearchNavigation={(value) => setSearchString(value)}
 					navStatus={navStatus}
 					setNavStatus={setNavStatus}
+					t={t}
 				/>
 			</div>
 

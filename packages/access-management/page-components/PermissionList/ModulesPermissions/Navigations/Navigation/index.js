@@ -1,6 +1,7 @@
 import { Modal, Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAuthRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useCreateRole from '../../../../../hooks/useCreateRoles';
@@ -76,6 +77,8 @@ function Navigation(props) {
 	const [selectedDepartments, setSelectedDepartments] = useState({ scopes: ['allowed'] });
 	const { createRole, loading: creatingNavs } = useCreateRole();
 
+	const { t } = useTranslation(['accessManagement', 'common']);
+
 	const navigationApis = getNavOptions(navigation.key);
 	const [{ data = {}, loading: loadingPermissions = false }, trigger] = useAuthRequest({
 		url    : 'list_role_permissions',
@@ -147,20 +150,22 @@ function Navigation(props) {
 		}
 	};
 
-	let buttonText = 'Assign Now';
+	let buttonText = t('accessManagement:roles_and_permission_crm_dashboard_button_text_assign_now');
 	let background = 'accent';
 	if (isActive) {
-		buttonText = 'Un-Assign Now';
+		buttonText = t('accessManagement:roles_and_permission_crm_dashboard_button_text_un_assign_now');
 		background = 'secondary';
 	}
 
-	let btnText = creatingNavs ? 'Saving, Please wait...' : 'Save';
+	let btnText = creatingNavs
+		? t('accessManagement:roles_and_permission_crm_dashboard_btn_text_modal_second_screen_please_wait')
+		: t('accessManagement:roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save');
 	if (show === FIRST_INDEX) {
-		btnText = 'NEXT';
+		btnText = t('accessManagement:roles_and_permission_crm_dashboard_btn_text_modal_next');
 	}
 
 	if (roleData?.isImported) {
-		buttonText = 'Allow Navigation';
+		buttonText = t('accessManagement:roles_and_permission_crm_dashboard_button_text_allow_navigation');
 		background = 'primary';
 	}
 
@@ -192,7 +197,7 @@ function Navigation(props) {
 								onClick={() => handleDepartmentToPermissions()}
 								disabled={loading}
 							>
-								Edit
+								{t('accessManagement:roles_and_permission_crm_dashboard_button_edit')}
 							</Button>
 						) : null}
 					</div>
@@ -225,6 +230,7 @@ function Navigation(props) {
 							show={show}
 							onDepartmentChange={onDepartmentChange}
 							selectedDepartments={selectedDepartments}
+							t={t}
 						/>
 					</Modal.Body>
 
@@ -243,7 +249,9 @@ function Navigation(props) {
 									}
 								}}
 							>
-								{show === FIRST_INDEX || roleData.isImported ? 'Cancel' : 'BACK'}
+								{show === FIRST_INDEX || roleData.isImported
+									? t('accessManagement:roles_and_permission_crm_dashboard_btn_text_cancel')
+									: t('accessManagement:roles_and_permission_crm_dashboard_btm_text_back')}
 							</Button>
 							<Button
 								size="md"
