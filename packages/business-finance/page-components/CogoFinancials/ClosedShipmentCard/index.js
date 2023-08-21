@@ -92,6 +92,7 @@ function ClosedShipmentCard({
 		<div
 			className={isHomeCard ? styles.financially_closed_container : styles.financially_closed_child}
 			style={{ height: isAdditonalView ? '100%' : 'auto' }}
+			data-tour={type === 'Financially' ? 'financial-closed-card-clickable' : null}
 		>
 			{showHeading && (
 				<div

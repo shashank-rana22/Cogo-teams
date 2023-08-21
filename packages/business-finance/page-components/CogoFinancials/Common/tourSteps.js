@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+import { Button } from '@cogoport/components';
+
 export const HOME_TOUR_STEPS = [
 	{
 		selector : '[data-tour="main-heading"]',
@@ -17,8 +19,9 @@ export const HOME_TOUR_STEPS = [
 		content  : 'Get details of operationally closed shipments here.',
 	},
 	{
-		selector : '[data-tour="ongoing-card"]',
-		content  : 'Click here to get more details.',
+		selector                 : '[data-tour="ongoing-card"]',
+		content                  : 'Click on highlighted area to get more details.',
+		shouldDisableInteraction : true,
 	},
 ];
 
@@ -33,13 +36,49 @@ export const ONGOING_PARENT_SERVICES_STEPS = [
 	},
 	{
 		selector : '[data-tour="single-parent-service"]',
-		content  : 'Click here',
+		content  : 'Click on highlighted area to see service wise data',
 	},
 ];
 
-export const SINGLE_SERVICE_STEPS = [
+export const getSingleServiceSteps = ({ setActiveShipmentCard = () => {}, setIsTourInitial = () => {} }) => [
 	{
 		selector : '[data-tour="single-service"]',
-		content  : 'Data here',
+		content  : () => (
+			<div>
+				<div>You can see data of single service here.</div>
+				<div style={{ display: 'flex', justifyContent: 'center', paddingTop: '12px' }}>
+					<Button
+						onClick={() => {
+							setActiveShipmentCard('');
+							setIsTourInitial(false);
+						}}
+					>
+						Let&apos;s go back to homepage !
+
+					</Button>
+				</div>
+			</div>
+		),
+	},
+];
+
+export const FINANCIAL_HOME_STEP = [
+	{
+		selector : '[data-tour="financial-closed-card-clickable"]',
+		content  : "Now let's explore data of closed shipments by clicking on it",
+	},
+];
+
+export const CLOSED_PARENT_SERVICES_STEPS = [
+	{
+		selector : '[data-tour="closed-single-parent-bar"]',
+		content  : 'Here are the details according to services. Please click on any bar to view specific data.',
+	},
+];
+
+export const BAR_GROUP_CHILDREN = [
+	{
+		selector : '[data-tour="children-bar-group"]',
+		content  : 'Here is the detailed graph of service wise data. You can click on "View Details" button(on top) to see list below the graph. Tutorial ends here...',
 	},
 ];

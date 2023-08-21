@@ -1,11 +1,19 @@
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import dynamic from 'next/dynamic';
+import React, { useContext } from 'react';
 
 import { LABEL_MAPPING } from '../../../constants';
+import { TourContext } from '../../Contexts';
 import RenderCardHeader from '../../RenderCardHeader';
 import SingleGraphCard from '../../SingleGraphCard';
+import { BAR_GROUP_CHILDREN } from '../../tourSteps';
 
 import styles from './styles.module.css';
+
+const Tour = dynamic(
+	() => import('reactour'),
+	{ ssr: false },
+);
 
 const GRAPHS = ['Operational Profitability', 'Revenue', 'Expense'];
 
@@ -19,11 +27,22 @@ function SingleParentBarStats({
 	serviceLevelLoading = false,
 	setTableFilters = () => {},
 }) {
+	const { tour, setTour } = useContext(TourContext);
 	const onViewDetails = () => {
 		setShowShipmentList(true);
 	};
 	return (
 		<div className={styles.container}>
+			{!showShipmentList && (
+				<Tour
+					steps={BAR_GROUP_CHILDREN}
+					isOpen={tour && !serviceLevelLoading}
+					onRequestClose={() => setTour(false)}
+					maskClassName={styles.tour_mask}
+					startAt={0}
+					closeWithMask={false}
+				/>
+			)}
 			<div className={styles.header_combine}>
 				<RenderCardHeader
 					title={`${activeBar} Profitability`}
@@ -57,6 +76,7 @@ function SingleParentBarStats({
 			<div
 				className={styles.graphs}
 				style={{ width: isFullWidth ? '100%' : '69%' }}
+				data-tour="children-bar-group"
 			>
 				{GRAPHS.map((cardTitle) => (
 					<SingleGraphCard

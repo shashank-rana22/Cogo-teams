@@ -144,6 +144,7 @@ function ParentServicewiseStats({
 					timeRange={timeRange}
 					filter={filter}
 					activeShipmentCard={activeShipmentCard}
+					setActiveShipmentCard={setActiveShipmentCard}
 					customDate={customDate}
 				/>
 			)}

@@ -3,6 +3,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlatformDemo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import dynamic from 'next/dynamic';
 import React, { useState, useEffect, useMemo } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
@@ -10,14 +11,19 @@ import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
 import { TourContext } from './Common/Contexts/index';
-import DemoTour from './Common/DemoTour/index';
 import StatsCard from './Common/StatsCard';
+import { FINANCIAL_HOME_STEP, HOME_TOUR_STEPS } from './Common/tourSteps';
 import { getTimeRangeOptions, INFO_CONTENT } from './constants';
 import Filters from './Filters';
 import useGetProfitabilityStats from './hooks/useGetProfitabilityStats';
 import MultipleFilters from './MultipleFilters';
 import styles from './styles.module.css';
 import TableComp from './TableComp';
+
+const Tour = dynamic(
+	() => import('reactour'),
+	{ ssr: false },
+);
 
 const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities)?.map((item) => ({
 	value : String(item),
@@ -34,6 +40,7 @@ function CogoFinancials() {
 	const [activeBar, setActiveBar] = useState('');
 	const [tableFilters, setTableFilters] = useState({});
 	const [tour, setTour] = useState(false);
+	const [isTourInitial, setIsTourInitial] = useState(true);
 
 	const geo = getGeoConstants();
 	const countryCode = geo?.country.code;
@@ -42,7 +49,6 @@ function CogoFinancials() {
 	);
 	const DEFAULT_ENTITY = DEFAULT_ENTITY_DATA[GLOBAL_CONSTANTS.zeroth_index]?.default_entity_code;
 	const [entity, setEntity] = useState(DEFAULT_ENTITY);
-
 	const taxType = isPreTax ? 'PreTax' : 'PostTax';
 
 	const {
@@ -64,6 +70,7 @@ function CogoFinancials() {
 	const getTourProps = useMemo(() => ({
 		tour,
 		setTour,
+		setIsTourInitial,
 	}), [tour]);
 
 	const handleTourClick = () => {
@@ -74,10 +81,16 @@ function CogoFinancials() {
 	return (
 		<TourContext.Provider value={getTourProps}>
 			<div>
-				<DemoTour
-					tour={tour}
-					setTour={setTour}
-					activeShipmentCard={activeShipmentCard}
+				<Tour
+					steps={isTourInitial ? HOME_TOUR_STEPS : FINANCIAL_HOME_STEP}
+					isOpen={tour && isEmpty(activeShipmentCard)}
+					onRequestClose={() => {
+						setTour(false);
+						setIsTourInitial(true);
+					}}
+					maskClassName={styles.tour_mask}
+					startAt={0}
+					closeWithMask={false}
 				/>
 				<div className={styles.header}>
 					<div
@@ -85,7 +98,6 @@ function CogoFinancials() {
 						onClick={handleClick}
 					>
 						<h2 className={styles.main_heading} data-tour="main-heading">COGO Financials</h2>
-
 					</div>
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<Button
@@ -102,9 +114,7 @@ function CogoFinancials() {
 							onLabel="Post Tax"
 							onChange={() => setIsPreTax(!isPreTax)}
 						/>
-						<div
-							className={styles.segmented_section}
-						>
+						<div className={styles.segmented_section}>
 							<SegmentedControl
 								options={getTimeRangeOptions({ customDate, setCustomDate })}
 								activeTab={timeRange}
@@ -129,12 +139,8 @@ function CogoFinancials() {
 				</div>
 
 				{isEmpty(activeShipmentCard) ? (
-					<div
-						className={styles.top_card}
-					>
-						<div
-							className={styles.left_shipments_section}
-						>
+					<div className={styles.top_card}>
+						<div className={styles.left_shipments_section}>
 							<StatsCard
 								heading="Ongoing Shipments"
 								cardId="ongoing"
@@ -188,7 +194,6 @@ function CogoFinancials() {
 							setTableFilters={setTableFilters}
 						/>
 						<div className={styles.remaining_shipment_cards}>
-
 							{activeShipmentCard !== 'ongoing' && !showShipmentList && (
 								<div className={styles.single_additional}>
 									<StatsCard
@@ -256,11 +261,9 @@ function CogoFinancials() {
 							customDate={customDate}
 							setTableFilters={setTableFilters}
 							tableFilters={tableFilters}
-							statsType={activeShipmentCard === 'financial'
-								? 'FINANCE_CLOSED' : 'OPR_CLOSED'}
+							statsType={activeShipmentCard === 'financial' ? 'FINANCE_CLOSED' : 'OPR_CLOSED'}
 							taxType={taxType}
-							type={activeShipmentCard === 'financial'
-								? 'Financially' : 'Operationally'}
+							type={activeShipmentCard === 'financial' ? 'Financially' : 'Operationally'}
 						/>
 					</div>
 				)}

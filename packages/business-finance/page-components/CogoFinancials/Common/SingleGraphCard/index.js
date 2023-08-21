@@ -2,18 +2,28 @@ import { Button, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import dynamic from 'next/dynamic';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { INFO_CONTENT, LABEL_MAPPING } from '../../constants';
+import { TourContext } from '../Contexts';
 import RenderCardHeader from '../RenderCardHeader';
 import MyResponsiveBar from '../ResponsiveBar';
+import { CLOSED_PARENT_SERVICES_STEPS } from '../tourSteps';
 
 import styles from './styles.module.css';
+
+const Tour = dynamic(
+	() => import('reactour'),
+	{ ssr: false },
+);
 
 const BOTTOM_AXIS_ROTATION = 20;
 const DEFAULT_ROTATION = 0;
 const STRAIGHT_AXIS_LIMIT = 2;
 const MINIMUM_POSITIVE = 0;
+const MID_GRAPH_INDEX = 1;
+const MAX_ANIMATION_TIME = 500;
 
 const KEY_MAPPINGS = {
 	'Operational Profitability' : 'Profitability',
@@ -42,6 +52,7 @@ const formatPercentageLabel = (value) => `${formatAmount({
 function SingleGraphCard({
 	heading = '',
 	setActiveBar = () => {},
+	activeBar = '',
 	isViewDetailsVisible = false,
 	onViewDetails = () => { },
 	taxType = '',
@@ -50,7 +61,10 @@ function SingleGraphCard({
 	serviceLevelLoading = false,
 	defaultWidth = '300',
 	showShipmentList = false,
+	graphIndex = 0,
 }) {
+	const { tour, setTour } = useContext(TourContext);
+	const [isAnimationCompleted, setIsAnimationCompleted] = useState(false);
 	const isLastView = isViewDetailsVisible; // last view of graph cards
 	const graphKey = heading;
 
@@ -88,8 +102,24 @@ function SingleGraphCard({
 		return '#f37166'; // dark red
 	};
 
+	useEffect(() => {
+		setTimeout(() => {
+			setIsAnimationCompleted(true);
+		}, MAX_ANIMATION_TIME); // waiting for animation to complete first
+	}, []);
+
 	return (
 		<div className={styles.container}>
+			{isAnimationCompleted && graphIndex === MID_GRAPH_INDEX && (
+				<Tour
+					steps={CLOSED_PARENT_SERVICES_STEPS}
+					isOpen={tour && isEmpty(activeBar)}
+					onRequestClose={() => setTour(false)}
+					maskClassName={styles.tour_mask}
+					startAt={0}
+					closeWithMask={false}
+				/>
+			)}
 			{!serviceLevelLoading && (
 				<div className={styles.flexhead}>
 					<RenderCardHeader
@@ -117,7 +147,9 @@ function SingleGraphCard({
 				className={styles.graph}
 			>
 				{!serviceLevelLoading ? (
-					<div>
+					<div data-tour={graphIndex === MID_GRAPH_INDEX
+						? 'closed-single-parent-bar' : null}
+					>
 						{!isEmpty(formattedServiceLevelData) ? (
 							<MyResponsiveBar
 								data={formattedServiceLevelData}

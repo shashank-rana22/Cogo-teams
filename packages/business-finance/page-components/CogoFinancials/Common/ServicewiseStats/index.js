@@ -1,13 +1,21 @@
 import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React from 'react';
+import dynamic from 'next/dynamic';
+import React, { useContext } from 'react';
 
 import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
+import { TourContext } from '../Contexts';
 import RenderCardHeader from '../RenderCardHeader';
+import { getSingleServiceSteps } from '../tourSteps';
 
 import getMappingCard from './getMappingCard';
 import StatCard from './statCard';
 import styles from './styles.module.css';
+
+const Tour = dynamic(
+	() => import('reactour'),
+	{ ssr: false },
+);
 
 const PLACEHOLDER_COUNT = 3;
 const SERVICE_LIMIT = 4;
@@ -20,8 +28,10 @@ function ServiceWiseStats({
 	timeRange = '',
 	filter = {},
 	activeShipmentCard = '',
+	setActiveShipmentCard = () => {},
 	customDate = new Date(),
 }) {
+	const { tour, setTour, setIsTourInitial } = useContext(TourContext);
 	const { currency, invoiceCount, jobCount } = mainCardData || {};
 
 	const { serviceLevelData:singleService, serviceLevelLoading } = useGetServiceLevelStats({
@@ -54,6 +64,18 @@ function ServiceWiseStats({
 
 	return (
 		<div className={styles.container}>
+			{!serviceLevelLoading && (
+				<Tour
+					steps={getSingleServiceSteps({ setActiveShipmentCard, setIsTourInitial })}
+					isOpen={tour && !serviceLevelLoading}
+					onRequestClose={() => {
+						setTour(false);
+					}}
+					maskClassName={styles.tour_mask}
+					startAt={0}
+					closeWithMask={false}
+				/>
+			)}
 			<div className={styles.justifiy}>
 				<div>
 					<div>
