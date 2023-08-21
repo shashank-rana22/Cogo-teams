@@ -115,6 +115,7 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'85bb3009-8cb5-453f-b87e-445d32c09635', // SME Manager - Vietnam
 			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
 			'69013c68-2d1b-4332-91fb-ada1a6471240', // business consultant
 			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5',
