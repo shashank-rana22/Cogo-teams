@@ -20,7 +20,8 @@ const TWO = 2;
 
 function SupplierApprovalDueDiligenceModal({
 	open, setOpen,
-	getOrganizationSupplierVerificationDetails, organization_id, organization_service_id,
+	getOrganizationSupplierVerificationDetails,
+	organization_id, organization_service_id,
 }) {
 	const {
 		data,
@@ -39,7 +40,6 @@ function SupplierApprovalDueDiligenceModal({
 	};
 	const handleVerify = () => {
 		UpdateOrganizationDueDiligenceStatus({ manager_approval_status: 'verified' });
-		console.log('Hii');
 	};
 	const handleReject = () => {
 		UpdateOrganizationDueDiligenceStatus({ manager_approval_status: 'rejected' });
@@ -62,7 +62,7 @@ function SupplierApprovalDueDiligenceModal({
 			<div className={styles.header} />
 			<Modal.Body className={styles.body}>
 				{
-						state === ONE
+						state === ONE && data
 						&& (
 							<>
 								<div className={styles.parent}>
@@ -135,7 +135,7 @@ function SupplierApprovalDueDiligenceModal({
 
 }
 				{
-						state === TWO
+						state === TWO && data
 						&& (
 							<>
 								<div className={styles.parent}>

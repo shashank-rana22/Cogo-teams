@@ -1,4 +1,4 @@
-import { Button, Modal, Input, Textarea } from '@cogoport/components';
+import { Button, Modal, Input, Textarea, Toast } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
 import useUpdateOrganizationEvaluationTask from '../hooks/useUpdateOrganizationEvaluationTask';
@@ -48,7 +48,7 @@ function ScoreModal({ show = null, setShow, getOrganizationEvaluationDetails }) 
 								onChange={(value) => {
 									if (value <= show?.total_score) {
 										setYourScore(value);
-									} else { alert('Value should be less than total score'); }
+									} else { Toast.error('Score should be less than Total Score'); }
 								}}
 								style={{ width: '132px', height: '32 px' }}
 								placeholder="Score"

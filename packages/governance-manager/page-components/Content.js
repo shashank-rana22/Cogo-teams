@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function Content() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [activeTab, setActiveTab] = useState('need_analysis');
-	const [approvalStats, setApprovalStats] = useState({});
+	const [approvalStats, setApprovalStats] = useState();
 	const [currentService, setCurrentService] = useState('all');
 
 	const {

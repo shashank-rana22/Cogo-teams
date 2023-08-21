@@ -1,5 +1,5 @@
 export const evaluationCriteriaDetails = {
-	fcl: [
+	fcl_freight: [
 		{
 			range : 'Above 50',
 			text  : 'Direct approval of vendor',
@@ -13,7 +13,7 @@ export const evaluationCriteriaDetails = {
 			text  : 'Reject The supplier',
 		},
 	],
-	lcl: [
+	lcl_freight: [
 		{
 			range : 'Above 60',
 			text  : 'Direct approval of vendor',
@@ -42,7 +42,7 @@ export const evaluationCriteriaDetails = {
 		},
 
 	],
-	trailer: [
+	trailer_freight: [
 		{
 			range : 'Above 50',
 			text  : 'Direct approval of vendor',

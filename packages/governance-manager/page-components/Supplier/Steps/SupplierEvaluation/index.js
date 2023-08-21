@@ -81,7 +81,7 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 					<div>
 						<table className={styles.ec_table}>
 							{
-								evaluationCriteriaDetails.fcl.map((item) => (
+								evaluationCriteriaDetails[service].map((item) => (
 									<tr className={styles.ec_tr} key={item}>
 										<td className={styles.ec_td}>{item?.range}</td>
 										<td className={styles.ec_td}>{item?.text}</td>
