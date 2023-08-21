@@ -6,7 +6,7 @@ const DEF = 0;
 const SUB = 20;
 const ANO_SUB = 10;
 
-function GetOrdinalNumber({ number }) {
+function GetOrdinalNumber({ number = 0 }) {
 	const suffix = ['th', 'st', 'nd', 'rd'];
 	const quotient = number % C;
 	const ordinal = suffix[(quotient - SUB) % ANO_SUB] || suffix[quotient] || suffix[DEF];
@@ -18,12 +18,27 @@ function GetOrdinalNumber({ number }) {
 	);
 }
 
-const getSubBucketColumns = ({ control = {}, unregister, bucketOptions, current_allocated_containers, bucket_type }) => {
+const getSubBucketColumns = ({
+	control = {},
+	unregister,
+	bucketOptions,
+	current_allocated_containers,
+	bucket_type,
+	rollingFclFreightSearchId,
+}) => {
 	const subBucketColumns = [
 		{
 			id       : 'service_provider',
 			Header   : 'SERVICE PROVIDER',
-			accessor : (item) => <ServiceProvider item={item} bucketOptions={bucketOptions} bucket_type={bucket_type} current_allocated_containers={current_allocated_containers} />,
+			accessor : (item) => (
+				<ServiceProvider
+					item={item}
+					bucketOptions={bucketOptions}
+					bucket_type={bucket_type}
+					current_allocated_containers={current_allocated_containers}
+					rollingFclFreightSearchId={rollingFclFreightSearchId}
+				/>
+			),
 		},
 		{
 			id       : 'Allocated',

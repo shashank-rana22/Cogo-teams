@@ -6,8 +6,11 @@ import MoveSupplierModal from './MoveSupplierModal';
 import styles from './styles.module.css';
 
 function Actions({
-	item = {}, bucketOptions = [], bucket_type = '',
+	item = {},
+	bucketOptions = [],
+	bucket_type = '',
 	current_allocated_containers = '',
+	rollingFclFreightSearchId = '',
 }) {
 	const [showMoveSupplierModal, setShowMoveSupplierModal] = useState(false);
 
@@ -43,6 +46,7 @@ function Actions({
 					bucketOptions={bucketOptions}
 					bucket_type={bucket_type}
 					current_allocated_containers={current_allocated_containers}
+					rollingFclFreightSearchId={rollingFclFreightSearchId}
 				/>
 			) : null}
 

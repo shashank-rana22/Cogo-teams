@@ -3,7 +3,13 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import Actions from '../Actions';
 
-function ServiceProvider({ item = {}, bucketOptions = [], bucket_type = '', current_allocated_containers = '' }) {
+function ServiceProvider({
+	item = {},
+	bucketOptions = [],
+	bucket_type = '',
+	current_allocated_containers = '',
+	rollingFclFreightSearchId = '',
+}) {
 	const {
 		service_provider, service_provider_star_rating,
 		service_provider_outstanding_currency, service_provider_outstanding_amount,
@@ -17,6 +23,7 @@ function ServiceProvider({ item = {}, bucketOptions = [], bucket_type = '', curr
 				bucketOptions={bucketOptions}
 				bucket_type={bucket_type}
 				current_allocated_containers={current_allocated_containers}
+				rollingFclFreightSearchId={rollingFclFreightSearchId}
 			/>
 			<div style={{ display: 'flex', flexDirection: 'column', marginRight: '10px', width: '200px' }}>
 

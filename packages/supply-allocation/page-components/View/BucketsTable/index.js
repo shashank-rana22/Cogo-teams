@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function BucketTable({
 	id = '', bucket_type = '', control = {}, unregister = () => { },
 	bucketsArray = [],
-	current_allocated_containers,
+	current_allocated_containers = 0,
 }) {
 	const {
 		data,
@@ -21,7 +21,14 @@ function BucketTable({
 		return [...acc, { value: bucket, label: startCase(bucket) }];
 	}, []);
 
-	const { subBucketColumns } = getSubBucketColumns({ control, unregister, bucketOptions, bucket_type, current_allocated_containers });
+	const { subBucketColumns } = getSubBucketColumns({
+		control,
+		unregister,
+		bucketOptions,
+		bucket_type,
+		current_allocated_containers,
+		rollingFclFreightSearchId: id,
+	});
 
 	return (
 		<div className={styles.container}>

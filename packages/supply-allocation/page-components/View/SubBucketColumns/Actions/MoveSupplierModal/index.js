@@ -13,11 +13,23 @@ function MoveSupplierModal({
 	item = {},
 	bucketOptions = [],
 	bucket_type = '', current_allocated_containers = '',
+	rollingFclFreightSearchId = '',
 }) {
 	const { control, handleSubmit } = useForm({});
 
+	const { service_provider = {} } = item || {};
+	const { id: service_provider_id, short_name = '' } = service_provider || {};
+
 	const { updateRollingForecastFclFreightAllocation, loading } = useUpdateRollingForecastFclFreightAllocation();
-	const onClickSubmit = (values) => { console.log('ff', values); };
+	const onClickSubmit = (values) => {
+		const payload = {
+			service_provider_id,
+			bucket_type,
+			rolling_fcl_freight_search_id: rollingFclFreightSearchId,
+			...values,
+		};
+		updateRollingForecastFclFreightAllocation({ payload });
+	};
 	return (
 		<Modal
 			size="md"
@@ -26,7 +38,7 @@ function MoveSupplierModal({
 			placement="top"
 			className={styles.modal_container}
 		>
-			<Modal.Header title={item?.service_provider?.short_name} />
+			<Modal.Header title={short_name} />
 
 			<Modal.Body>
 				<div className={styles.container}>
@@ -35,7 +47,6 @@ function MoveSupplierModal({
 							Current Bucket :
 							<div style={{ height: '32px' }}>
 								{startCase(bucket_type)}
-								{' '}
 							</div>
 						</div>
 
@@ -43,21 +54,19 @@ function MoveSupplierModal({
 							Current Promised:
 							<div style={{ height: '32px' }}>
 								{ current_allocated_containers}
-								{' '}
 							</div>
 						</div>
 					</div>
 
 					<div style={{ alignItems: 'center', display: 'flex' }}>
 						Move To
-						{' '}
 						<IcMArrowNext style={{ marginLeft: '4px' }} />
 					</div>
 
 					<div>
 						<div> New Bucket </div>
 						<SelectController
-							name="new_bucket"
+							name="new_bucket_type"
 							isClearable
 							label="Select Origin SeaPort"
 							control={control}
@@ -68,7 +77,7 @@ function MoveSupplierModal({
 
 						<div>New Promised</div>
 						<InputController
-							name="new_promised"
+							name="promised_containers"
 							isClearable
 							label="Select Origin SeaPort"
 							size="sm"
