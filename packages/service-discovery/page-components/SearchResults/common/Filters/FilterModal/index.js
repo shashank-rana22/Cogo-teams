@@ -15,6 +15,7 @@ function FilterModal({
 	loading = false,
 	DEFAULT_VALUES = {},
 	controls = [],
+	openAccordian = '',
 }) {
 	const defaultValues = { ...DEFAULT_VALUES, ...filters };
 
@@ -30,7 +31,6 @@ function FilterModal({
 		if (!isEmpty(errors)) {
 			return;
 		}
-
 		const finalValues = { ...values };
 
 		setFilters({ ...filters, ...finalValues });
@@ -55,6 +55,7 @@ function FilterModal({
 					setValue={setValue}
 					handleSubmit={handleSubmit}
 					filters={filters}
+					openAccordian={openAccordian}
 				/>
 			</Modal.Body>
 

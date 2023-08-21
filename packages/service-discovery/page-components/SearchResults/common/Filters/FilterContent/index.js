@@ -1,29 +1,31 @@
 import { Accordion } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
-import React from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import FilterItem from './FilterItem';
 import styles from './styles.module.css';
 
-const ZEROTH_INDEX = 0;
+function FilterContent(props) {
+	const {
+		controls = [],
+		control = () => {},
+		watch = () => {},
+		errors = {},
+		setValue = () => {},
+		handleSubmit = () => {},
+		filters = {},
+		openAccordian = '',
+	} = props;
 
-function FilterContent({
-	controls = [],
-	control = () => {},
-	watch = () => {},
-	errors = {},
-	setValue = () => {},
-	handleSubmit = () => {},
-	filters = {},
-}) {
 	function AccordianContent({ label = '', name = '' }) {
 		return (
 			<div className={styles.label_container}>
 				{label}
 
-				{filters[name] && typeof filters[name] !== 'object' ? (
+				{filters[name] && !isEmpty(filters[name]) ? (
 					<span className={styles.filter_value}>
-						{startCase(filters[name])}
+						{typeof filters[name] === 'object'
+							? `${filters[name].length} Selected` : startCase(filters[name])}
 					</span>
 				) : null}
 			</div>
@@ -36,13 +38,16 @@ function FilterContent({
 				{controls.map((controlItem, index) => {
 					const { label: itemLabel, controls: itemControls, name } = controlItem;
 
+					const openedAccordian = openAccordian
+						? openAccordian === name : index === GLOBAL_CONSTANTS.zeroth_index;
+
 					return (
 						<div className={styles.filter_item} key={controlItem?.label}>
 							<Accordion
 								type="text"
 								title={<AccordianContent label={itemLabel} name={name} />}
 								style={{ width: '100%' }}
-								isOpen={index === ZEROTH_INDEX}
+								isOpen={openedAccordian}
 							>
 								<FilterItem
 									controls={itemControls}

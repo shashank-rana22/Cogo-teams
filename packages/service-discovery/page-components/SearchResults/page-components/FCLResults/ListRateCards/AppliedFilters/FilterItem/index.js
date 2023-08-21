@@ -1,5 +1,5 @@
 import { IcMCross } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import { FILTERS_DEFAULT_VALUES } from '../../../../../common/Filters/FilterContent/extra-filter-controls';
 
@@ -16,14 +16,22 @@ const getLabel = (key, value) => {
 		return `Offers-${formattedValue}`;
 	}
 
+	if (key === 'shipping_line_id') {
+		return 'Preferred shipping line(s)';
+	}
+
 	return formattedValue;
 };
 
-function FilterItem({ item = [], setFilters = () => {} }) {
+function FilterItem({
+	item = [],
+	setFilters = () => {},
+	setOpenAccordian = () => {},
+	setShowFilterModal = () => {},
+}) {
 	const [key, value] = item;
 
-	const notGoingToShow = typeof value === 'object' || !value
-		|| !Object.keys(FILTERS_DEFAULT_VALUES).includes(key);
+	const notGoingToShow = !value || isEmpty(value) || !Object.keys(FILTERS_DEFAULT_VALUES).includes(key);
 
 	const label = getLabel(key, value);
 
@@ -34,11 +42,22 @@ function FilterItem({ item = [], setFilters = () => {} }) {
 		}));
 	};
 
+	const onClickLabel = () => {
+		setShowFilterModal(true);
+		setOpenAccordian(key);
+	};
+
 	if (notGoingToShow || !label) return null;
 
 	return (
 		<div className={styles.container}>
-			<span className={styles.label}>{label}</span>
+			<span
+				role="presentation"
+				className={styles.label}
+				onClick={onClickLabel}
+			>
+				{label}
+			</span>
 
 			<div className={styles.icon_container}>
 				<IcMCross className={styles.cross_icon} onClick={handleRemove} />

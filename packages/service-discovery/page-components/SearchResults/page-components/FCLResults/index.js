@@ -1,6 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
-
-import EmptyState from '../../common/EmptyState';
 import Comparison from '../../components/Comparison';
 
 import ListRateCards from './ListRateCards';
@@ -84,17 +81,6 @@ function FCLResults({
 	};
 
 	const RateCardsComponent = SCREEN_MAPPING[screen] || null;
-
-	if (!loading && isEmpty(rates) && screen === 'listRateCard') {
-		return (
-			<EmptyState
-				details={detail}
-				filters={filters}
-				setFilters={setFilters}
-				refetch={refetchSearch}
-			/>
-		);
-	}
 
 	return (
 		<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen]} />

@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React from 'react';
 
+import AppliedFilters from '../../../page-components/FCLResults/ListRateCards/AppliedFilters';
 import DetentionDemurrage from '../../D&D';
 import Filters from '../../Filters';
 
@@ -12,10 +12,46 @@ function NoRatesFound({
 	filters = {},
 	setFilters = () => {},
 	refetch = () => {},
+	filtersRef = {},
+	setOpenAccordian = () => {},
+	setShowFilterModal = () => {},
+	openAccordian = '',
+	showFilterModal = false,
 }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.left_section}>
+			<div className={styles.top_section}>
+				<div className={styles.applied_filters}>
+					<AppliedFilters
+						filtersRef={filtersRef}
+						filters={filters}
+						setFilters={setFilters}
+						setShowFilterModal={setShowFilterModal}
+						setOpenAccordian={setOpenAccordian}
+					/>
+				</div>
+
+				<div className={styles.buttons_container}>
+					<DetentionDemurrage
+						details={details}
+						refetch={refetch}
+					/>
+
+					<Filters
+						setFilters={setFilters}
+						data={details}
+						filters={filters}
+						openAccordian={openAccordian}
+						setOpenAccordian={setOpenAccordian}
+						showFilterModal={showFilterModal}
+						setShowFilterModal={setShowFilterModal}
+					/>
+
+					<Reset setFilters={setFilters} />
+				</div>
+			</div>
+
+			<div className={styles.text_section}>
 				<img
 					src={GLOBAL_CONSTANTS.image_url.no_rates_found_emoji}
 					alt="no-rates-found"
@@ -31,21 +67,6 @@ function NoRatesFound({
 						Meanwhile, please try the alternate routes.
 					</p>
 				</div>
-			</div>
-
-			<div className={styles.right_section}>
-				<DetentionDemurrage
-					details={details}
-					refetch={refetch}
-				/>
-
-				<Filters
-					setFilters={setFilters}
-					data={details}
-					filters={filters}
-				/>
-
-				<Reset setFilters={setFilters} />
 			</div>
 		</div>
 	);

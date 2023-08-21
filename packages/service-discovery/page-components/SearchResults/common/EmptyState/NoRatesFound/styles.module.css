@@ -1,19 +1,25 @@
 .container {
-	position: relative;
 	display: flex;
-	align-items: flex-start;
+	flex-direction: column;
+}
+
+.text_section {
+	display: flex;
+	align-items: center;
+	margin-top: 16px;
+}
+
+.top_section {
+	display: flex;
+	align-items: center;
 	justify-content: space-between;
 }
 
-.left_section {
-	display: flex;
-	align-items: center;
+.applied_filters {
+	display: block;
 }
 
-.right_section {
-	position: absolute;
-	top: 0;
-	right: 0;
+.buttons_container {
 	display: flex;
 	align-items: center;
 }
