@@ -1,6 +1,6 @@
 import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import { RATING_ELEMENTS } from '../../../../../../../constants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTypeMapping';
@@ -10,7 +10,6 @@ import useGetAgentTimelineEscalate from '../../../../../../../hooks/useGetAgentT
 import styles from './styles.module.css';
 
 const MIN_COUNT = 0;
-// const MIN_COUNT_FOUR = 5;
 const MIN_RATING = 3;
 const ESCALATE_DEFAULT_CHAT_COUNT = 0;
 
@@ -25,6 +24,7 @@ function Stats({
 	timePeriodValue = '',
 	isShowActivityGraph = false,
 }) {
+	console.log('viewType:', viewType);
 	const { chat_stats = {} } = statsData || {};
 	const {
 		rating = [],
@@ -87,20 +87,19 @@ function Stats({
 				>
 					<div className={styles.title}>{startCase(item)}</div>
 					<div className={styles.count_with_icon}>
-						{item === 'customer_satisfaction_score' ? (
+						{item === 'customer_satisfaction_score' && !isEmpty(averageRating) ? (
 							RATING_ELEMENTS[averageRating >= MIN_RATING ? 'happy' : 'sad'].image
-							|| RATING_ELEMENTS.default.image
 						) : null}
+
 						<div className={styles.count}>
 							{(loading || escalateLoading) ? <Placeholder width="80px" height="40px" /> : (
 								<div>{getFormattedNumber(STATS_FEEDBACK_COUNT[item] || MIN_COUNT)}</div>
 							)}
 						</div>
-						{(item === 'customer_satisfaction_score')
+						{(item === 'customer_satisfaction_score' && averageRating)
 							? (
 								<div className={styles.arrow_icon}>
-									{RATING_ELEMENTS[averageRating >= MIN_RATING ? 'happy' : 'sad'].arrow
-									|| RATING_ELEMENTS.default.arrow}
+									{RATING_ELEMENTS[averageRating >= MIN_RATING ? 'happy' : 'sad'].arrow}
 								</div>
 							) : null}
 					</div>

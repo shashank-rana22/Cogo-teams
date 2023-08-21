@@ -1,7 +1,6 @@
 import { Button, cl, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDown, IcMArrowDown } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
+import { IcMArrowDown } from '@cogoport/icons-react';
 import { useState, useEffect, useCallback } from 'react';
 
 import useGetCogoOneAgentStats from '../../../../hooks/useGetOmniChannelStats';
@@ -11,7 +10,6 @@ import ShowMoreStats from './ShowMoreStats';
 import styles from './styles.module.css';
 import TimelineContent from './TimelineContent';
 
-const MIN_FEEDBACK_SCORE = 0;
 const MIN_TIMER_VALUE = 0;
 const PUNCH_IN_TIME_HOUR = 9;
 const PUNCH_IN_TIME_MINUTE = 30;
@@ -159,9 +157,6 @@ function PunchInOut({
 				className={styles.minimize_container}
 				onClick={() => setShowDetails((prev) => !prev)}
 			>
-				<Image src={GLOBAL_CONSTANTS.image_url.sad_icon} alt="sad-emoji" width={18} height={18} />
-				<div className={styles.break_time}>{MIN_FEEDBACK_SCORE}</div>
-				<IcMDown className={styles.down_icon} />
 				{status === 'punched_out' ? (
 					<Button
 						size="xs"

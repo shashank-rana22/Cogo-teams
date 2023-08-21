@@ -9,6 +9,8 @@ import {
 	IcMVideoCall, IcMVideoCallMute,
 	IcMUp,
 	IcMDown,
+	IcCVerySad,
+	IcCHappy,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -361,32 +363,13 @@ export const MAX_WEIGHT_SLAB = 500;
 
 export const RATING_ELEMENTS = {
 	happy: {
-		image: <Image
-			src={GLOBAL_CONSTANTS.image_url.happy_icon}
-			alt="happy-emoji"
-			width={30}
-			height={30}
-		/>,
-		arrow: <IcMUp fill="#ee3425" />,
+		image : <IcCHappy width={30} height={30} />,
+		arrow : <IcMUp fill="#ee3425" />,
 
 	},
 	sad: {
-		image: <Image
-			src={GLOBAL_CONSTANTS.image_url.sad_icon}
-			alt="sad-emoji"
-			width={30}
-			height={30}
-		/>,
-		arrow: <IcMDown fill="#ee3425" />,
-	},
-	default: {
-		image: <Image
-			src={GLOBAL_CONSTANTS.image_url.sad_icon}
-			alt="sad-emoji"
-			width={30}
-			height={30}
-		/>,
-		arrow: <IcMDown fill="#ee3425" />,
+		image : <IcCVerySad width={30} height={30} />,
+		arrow : <IcMDown fill="#ee3425" />,
 	},
 };
 

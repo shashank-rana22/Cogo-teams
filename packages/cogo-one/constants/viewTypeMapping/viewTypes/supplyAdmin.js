@@ -19,6 +19,8 @@ const SUPPLY_ADMIN = {
 		all      : ['chat_tags'],
 		contacts : ['chat_tags'],
 	},
+	stats_feedback_count          : [],
+	to_show_agent_activity_graph  : false,
 	extra_side_bar_navs_access    : ['flash_shipment_bookings'],
 	accesible_agent_types_query   : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
 	get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
