@@ -21,7 +21,7 @@ const CORNER_1_LNG = -200;
 const CORNER_2_LAT = 90;
 const CORNER_2_LNG = 200;
 const MAP_TIMEOUT_DELAY = 200;
-const CURVE_POINT_LAST_INDEX_CALCULATOR = -1;
+const CURVE_POINT_LAST_INDEX_CALCULATOR = 1;
 
 function MapComp({
 	completedPoints,
