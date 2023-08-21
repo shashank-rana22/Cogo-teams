@@ -103,6 +103,9 @@ function OutstandingList({
 		organization_users: {
 			selfOrganizationId,
 		},
+		communication: {
+			orgData: item,
+		},
 	};
 
 	const content = (types, head) => (
@@ -247,7 +250,7 @@ function OutstandingList({
 											: startCase(
 												item[it.valueKey]?.name
 														|| item[it.valueKey],
-											) || it.defaultValueKey}
+											  ) || it.defaultValueKey}
 									</div>
 								</div>
 							);
