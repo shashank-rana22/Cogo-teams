@@ -268,7 +268,7 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
-		hrbp_admin_role_id: '5de782f6-f59d-41fc-84f4-8425dc1fa670',
+		hrbp_admin_role_id           : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
 		igm_desk                     : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 		document_control_manager     : 'fd65db3f-ad50-4594-8be6-7ab373e57c4f',
 		ftl_ground_ops_role_id       : 'd2275231-30ad-4df9-8451-daf03b766f8a',

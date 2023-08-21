@@ -95,6 +95,7 @@ export default {
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
 		finops_manager             : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
+		ff_cost_booking_executive  : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716', // Prod_KAM IE
@@ -177,6 +178,7 @@ export default {
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
 		],
+		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		sales_role                       : [
