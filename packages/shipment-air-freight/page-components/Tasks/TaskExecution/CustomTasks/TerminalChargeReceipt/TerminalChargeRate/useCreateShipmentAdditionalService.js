@@ -1,20 +1,24 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useCreateShipmentAdditionalService = ({ shipmentData, setIRNGenerated, lineItemDetails }) => {
+const useCreateShipmentAdditionalService = ({
+	shipmentData = {},
+	setIRNGenerated = () => {},
+	lineItemDetails = {},
+}) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_additional_service',
 		method : 'POST',
 	}, { manual: true });
 
 	const createShipmentAdditionalService = async () => {
+		const { total_tax_price = '', currency = '' } = lineItemDetails || {};
 		const { id = '', all_services = [] } = shipmentData || {};
 
-		const airFreightLocalService = all_services.filter((
+		const airFreightLocalService = all_services.find((
 			item,
 		) => item?.service_type === 'air_freight_local_service');
 
-		const { total_tax_price = '', currency = '' } = lineItemDetails;
 		const payload = {
 			name                  : 'Terminal HandlingCharges',
 			code                  : 'THC',
