@@ -2042,8 +2042,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'ticket_management-ticket_configurations',
 				title         : 'Ticket Configurations',
-				href          : '/v2/ticket-management/configurations',
-				as            : '/v2/ticket-management/configurations',
+				href          : '/ticket-management/configurations',
+				as            : '/ticket-management/configurations',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.ticket_management,
