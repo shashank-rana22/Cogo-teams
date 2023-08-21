@@ -43,7 +43,7 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 
 				{task?.assigned_stakeholder === 'system' && startCase(task?.assigned_stakeholder)}
 
-				{task?.status === 'pending' && !isEmpty(otherStakeholders) ? (
+				{task?.status === 'pending' && !isEmpty(otherStakeholders) && (
 					<div className={styles.other_stakeholders}>
 						<Tooltip
 							interactive
@@ -55,7 +55,7 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 							{otherStakeholders.length}
 						</Tooltip>
 					</div>
-				) : null }
+				)}
 			</div>
 
 			{task?.stakeholder?.mobile_number ? (
