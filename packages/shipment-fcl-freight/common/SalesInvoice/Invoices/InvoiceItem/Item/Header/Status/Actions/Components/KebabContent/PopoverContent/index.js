@@ -62,6 +62,7 @@ export default function PopoverContent({
 					themeType="tertiary"
 					className={styles.text}
 					onClick={() => handleClick('cancel_e_invoice')}
+					type="button"
 				>
 					Request Cancel E Invoice
 				</Button>
@@ -72,6 +73,7 @@ export default function PopoverContent({
 					themeType="tertiary"
 					className={styles.text}
 					onClick={() => handleClick('replace_e_invoice')}
+					type="button"
 				>
 					Request Replace E Invoice
 				</Button>
