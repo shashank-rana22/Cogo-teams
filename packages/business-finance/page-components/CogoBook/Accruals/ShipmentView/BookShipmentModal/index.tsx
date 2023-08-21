@@ -11,6 +11,8 @@ interface Props {
 	setShowBookShipment?: (p:boolean)=> void,
 }
 
+const ZERO = 0;
+
 function BookShipmentModal({ showBookShipment = false, setShowBookShipment = () => {}, filters = {} }:Props) {
 	const {
 		data, loading, bookShipmentConfirmData,
@@ -45,7 +47,7 @@ function BookShipmentModal({ showBookShipment = false, setShowBookShipment = () 
 				<Button size="md" themeType="secondary" onClick={() => setShowBookShipment(false)}>Cancel</Button>
 				<Button
 					onClick={bookShipmentConfirmData}
-					disabled={bookShipmentConfirmLoading || bookShipmentValue === 0}
+					disabled={bookShipmentConfirmLoading || (bookShipmentValue === ZERO)}
 					style={{ marginLeft: '10px' }}
 				>
 					Confirm
