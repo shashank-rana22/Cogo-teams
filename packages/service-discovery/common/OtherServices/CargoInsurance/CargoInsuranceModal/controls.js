@@ -14,7 +14,7 @@ function ConsignmentValueLabel() {
 			<div style={{ marginLeft: '4px' }}>
 				<Tooltip
 					interactive
-					placement="bottom"
+					placement="top"
 					content={<div>Consignment Value should not be greater than 5 Crores INR.</div>}
 				>
 					<IcMInfo />
