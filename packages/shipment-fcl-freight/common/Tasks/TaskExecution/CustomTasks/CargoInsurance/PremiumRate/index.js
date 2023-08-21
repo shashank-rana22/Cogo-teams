@@ -58,17 +58,33 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 
 	return (
 		<div className={styles.premium_value}>
-			{isEmpty(premiumData?.serviceChargeList)
-				? CHARGES.map((item) => GetPremiumLineItem({ amount: DEFAULT_AMOUNT, item, key: item?.displayName }))
-				: premiumData?.serviceChargeList?.map((item) => GetPremiumLineItem({
-					amount : item?.totalCharges,
-					item   : item?.displayName,
-					key    : item?.displayName,
-				}))}
+			{isEmpty(premiumData?.serviceChargeList) ? (
+				CHARGES.map((item) => (
+					<GetPremiumLineItem
+						amount={DEFAULT_AMOUNT}
+						item={item}
+						key={item?.displayName}
+					/>
+				))
+			) : (
+				premiumData?.serviceChargeList?.map((item) => (
+					<GetPremiumLineItem
+						amount={item?.totalCharges}
+						item={item?.displayName}
+						key={item?.displayName}
+					/>
+				))
+			)}
 
 			<div className={styles.line} />
-			{GetPremiumLineItem({ amount: premiumData?.totalCharges, item: 'Amount Payable', key: '' })}
+
+			<GetPremiumLineItem
+				amount={premiumData?.totalCharges}
+				item="Amount Payable"
+				key=""
+			/>
 		</div>
+
 	);
 }
 
