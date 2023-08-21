@@ -1661,8 +1661,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'forecast-supply_allocation',
 				title         : 'Supply Allocation',
-				href          : '/supply-allocation',
-				as            : '/supply-allocation',
+				href          : '/v2/supply-allocation',
+				as            : '/v2/supply-allocation',
 				type          : 'link',
 				possible_apis : apis.supply_allocation,
 
@@ -1671,8 +1671,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'forecast-demand_forecast',
 				title         : 'Demand Forecast',
-				href          : '/demand-forecast',
-				as            : '/demand-forecast',
+				href          : '/v2//demand-forecast',
+				as            : '/v2/demand-forecast',
 				type          : 'link',
 				possible_apis : apis.demand_forecast,
 
