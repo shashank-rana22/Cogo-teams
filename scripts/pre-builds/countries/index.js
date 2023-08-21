@@ -17,7 +17,7 @@ const setCountries = async () => {
 	await getCountries(
 		fs.writeFileSync,
 		countriesPath,
-		'https://api.stage.cogoport.io/',
+		'https://api.cogoport.com/',
 	);
 	// eslint-disable-next-line no-console
 	console.log('Successfully Built Countries ...');
