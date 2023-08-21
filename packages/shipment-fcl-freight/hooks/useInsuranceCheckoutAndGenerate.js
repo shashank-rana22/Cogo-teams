@@ -35,9 +35,7 @@ const useInsuranceCheckoutAndGenerate = ({
 					performedBy    : userId,
 				},
 			});
-			await getUpdateShipmentService({
-				data: payloadForUpdateShipment,
-			});
+			await getUpdateShipmentService(payloadForUpdateShipment);
 			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
