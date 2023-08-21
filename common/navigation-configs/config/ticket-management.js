@@ -7,6 +7,7 @@ const ticketManagement = {
 		navigation : 'ticket_management-super_admin',
 		isMainNav  : true,
 	},
+
 };
 
 export default ticketManagement;
