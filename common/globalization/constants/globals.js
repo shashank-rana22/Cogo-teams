@@ -397,6 +397,10 @@ const GLOBAL_CONSTANTS = {
 		default_event           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/default_event.png',
 		password_validator_tick : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick.svg',
 		password_validator_dot  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dot.svg',
+		ic_tree_multiple        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-branch.svg',
+		ic_tree_single          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic_branch_single.svg',
+		drop_down_red           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dropped-down.svg',
+
 		booking_verification_png:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/booking_verification-s2c',
 		point_of_contact_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/poc_icon_new_s2c',
@@ -558,6 +562,7 @@ const GLOBAL_CONSTANTS = {
 		gst_number                 : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 		otp                        : /[^0-9]/g,
 		hyphen_characters          : /-/g,
+		text_pattern_classifier    : /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
 	},
 	zeroth_index                 : 0,
 	milliseconds_in_one_day      : 86400000,

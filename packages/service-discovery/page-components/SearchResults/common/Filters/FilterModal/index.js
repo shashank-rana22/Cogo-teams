@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import FilterContent from '../FilterContent';
+import { FILTERS_DEFAULT_VALUES } from '../FilterContent/extra-filter-controls';
 
 import styles from './styles.module.css';
 
@@ -15,6 +16,7 @@ function FilterModal({
 	loading = false,
 	DEFAULT_VALUES = {},
 	controls = [],
+	openAccordian = '',
 }) {
 	const defaultValues = { ...DEFAULT_VALUES, ...filters };
 
@@ -30,10 +32,17 @@ function FilterModal({
 		if (!isEmpty(errors)) {
 			return;
 		}
-
 		const finalValues = { ...values };
 
 		setFilters({ ...filters, ...finalValues });
+		setShow(false);
+	};
+
+	const handleReset = (key) => {
+		setFilters((prev) => ({
+			...prev,
+			[key]: FILTERS_DEFAULT_VALUES[key],
+		}));
 		setShow(false);
 	};
 
@@ -55,6 +64,8 @@ function FilterModal({
 					setValue={setValue}
 					handleSubmit={handleSubmit}
 					filters={filters}
+					openAccordian={openAccordian}
+					handleReset={handleReset}
 				/>
 			</Modal.Body>
 

@@ -12,7 +12,6 @@ function Footer({
 	paginationProps = {},
 	selectedWeek = {},
 	setPage = () => {},
-	loading = false,
 	schedules = [],
 }) {
 	const { page, page_limit, total_count } = paginationProps;
@@ -66,7 +65,7 @@ function Footer({
 				</span>
 			</div>
 
-			{loading ? null : (
+			{isEmpty(total_count) ? null : (
 				<div className={styles.pagination}>
 					<Pagination
 						type="table"

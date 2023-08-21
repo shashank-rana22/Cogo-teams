@@ -185,7 +185,9 @@ function CargoInsuranceModal({
 
 	const activeComponent = getComponent();
 
-	const { Component: ActiveComponent, props } = COMPONENT_MAPPING[activeComponent];
+	const { Component: ActiveComponent, props = {} } = COMPONENT_MAPPING[activeComponent];
+
+	if (!ActiveComponent) return null;
 
 	return (
 		<Modal

@@ -6,7 +6,7 @@ const useGetCheckoutPromocodes = ({ checkout_id }) => {
 
 	const [{ data = {}, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/list_checkout_applicable_promocodes',
+		url    : '/get_checkout_applicable_promocodes',
 		params : { checkout_id },
 	}, { manual: false });
 

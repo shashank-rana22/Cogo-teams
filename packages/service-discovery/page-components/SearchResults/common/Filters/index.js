@@ -2,7 +2,6 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFtick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import { FILTERS_DEFAULT_VALUES } from './FilterContent/extra-filter-controls';
 import getFilterControls from './FilterContent/getControls';
@@ -31,14 +30,26 @@ const checkIfFiltersChanged = (defaultValues, finalValues) => {
 	return isApplied;
 };
 
-function Filters({ data = {}, filters = {}, setFilters = () => {}, loading = false }) {
-	const [showFilterModal, setShowFilterModal] = useState(false);
-
-	const controls = getFilterControls(data, SERVICE_KEY, false, true);
+function Filters({
+	data = {},
+	filters = {},
+	setFilters = () => {},
+	loading = false,
+	openAccordian = '',
+	setOpenAccordian = () => {},
+	showFilterModal = false,
+	setShowFilterModal = () => {},
+}) {
+	const controls = getFilterControls({ data, service_key: SERVICE_KEY });
 
 	const DEFAULT_VALUES = getDefaultValues(controls);
 
 	const filtersApplied = checkIfFiltersChanged(DEFAULT_VALUES, filters);
+
+	const onClickButton = () => {
+		setShowFilterModal(true);
+		setOpenAccordian('');
+	};
 
 	return (
 		<div className={styles.container}>
@@ -46,8 +57,9 @@ function Filters({ data = {}, filters = {}, setFilters = () => {}, loading = fal
 				type="button"
 				size="lg"
 				themeType="link"
-				onClick={() => setShowFilterModal(true)}
+				onClick={onClickButton}
 				className={styles.filter_button}
+				disabled={isEmpty(data)}
 			>
 				<img
 					src={GLOBAL_CONSTANTS.image_url.filter_icon}
@@ -70,6 +82,7 @@ function Filters({ data = {}, filters = {}, setFilters = () => {}, loading = fal
 					loading={loading}
 					DEFAULT_VALUES={DEFAULT_VALUES}
 					controls={controls}
+					openAccordian={openAccordian}
 				/>
 			) : null}
 		</div>

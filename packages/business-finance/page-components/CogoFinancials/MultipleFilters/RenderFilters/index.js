@@ -7,35 +7,47 @@ import styles from './styles.module.css';
 
 const SERVICE_CATEGORY = ['Import', 'Export', 'Local', 'Domestic'];
 
-const SHIPMENT_TYPES = GLOBAL_CONSTANTS.shipment_types;
+const SHIPMENT_TYPES_OPTIONS = GLOBAL_CONSTANTS.shipment_types.map((item) => ({
+	label : item?.label,
+	value : (item.value).toUpperCase(),
+}));
 
 const SEGMENT_OPTIONS = [
-	{ label: 'Air', value: 'air' },
-	{ label: 'Ocean', value: 'ocean' },
-	{ label: 'Surface', value: 'surface' },
-	{ label: 'Rail', value: 'rail' },
+	{ label: 'Air', value: 'AIR' },
+	{ label: 'Ocean', value: 'OCEAN' },
+	{ label: 'Surface', value: 'SURFACE' },
+	{ label: 'Rail', value: 'RAIL' },
 ];
 
 const CHANNEL_OPTIONS = [
-	{ label: 'SME', value: 'SME' },
+	{ label: 'SME', value: 'mid_size' },
 	{ label: 'Enterprise', value: 'enterprise' },
-	{ label: 'Channel Partners', value: 'channelPartners' },
-	{ label: 'Cogoverse', value: 'cogoverse' },
-	{ label: 'Longtail', value: 'longtail' },
-	{ label: 'FTL/LTL', value: 'ftl-ltl' },
-	{ label: 'Others', value: 'others' },
+	{ label: 'Channel Partners', value: 'channel_partner' },
+	{ label: 'Longtail', value: 'long_tail' },
+	{ label: 'Others', value: 'other' },
 ];
 
 function RenderFilters({
-	filter = {}, setFilter = () => {}, entity = '',
+	setFilter = () => {}, entity = '', setVisible = () => {},
 }) {
+	const [internalFilter, setInternalFilter] = useState({});
 	const [activeFilter, setActiveFilter] = useState('channel');
 
 	const DEFAULT_CURRENCY = GLOBAL_CONSTANTS.cogoport_entities[entity].currency;
 
 	const handleReset = () => {
 		setFilter({});
+		setInternalFilter({});
 		setActiveFilter('channel');
+		setVisible(false);
+	};
+
+	const handleApply = () => {
+		setFilter((prev) => ({
+			...prev,
+			...internalFilter,
+		}));
+		setVisible(false);
 	};
 
 	return (
@@ -46,9 +58,17 @@ function RenderFilters({
 					<Button
 						themeType="secondary"
 						onClick={handleReset}
-						disabled={isEmpty(filter)}
+						disabled={isEmpty(internalFilter)}
+						style={{ marginRight: '8px' }}
 					>
 						Reset
+					</Button>
+
+					<Button
+						onClick={handleApply}
+						disabled={isEmpty(internalFilter)}
+					>
+						Apply
 
 					</Button>
 
@@ -68,11 +88,11 @@ function RenderFilters({
 						<TabPanel name="channel" title="Channel">
 							<RadioGroup
 								options={CHANNEL_OPTIONS}
-								onChange={(val) => setFilter((prev) => ({
+								onChange={(val) => setInternalFilter((prev) => ({
 									...prev,
 									[activeFilter]: val,
 								}))}
-								value={filter[activeFilter]}
+								value={internalFilter[activeFilter]}
 								className={styles.radio_group_section}
 								style={{ flexDirection: 'column' }}
 							/>
@@ -84,15 +104,16 @@ function RenderFilters({
 									<div
 										key={item}
 										role="presentation"
-										onClick={() => setFilter((prev) => ({
+										onClick={() => setInternalFilter((prev) => ({
 											...prev,
 											serviceCategory: item,
 										}))}
 									>
 										<Pill
 											size="sm"
-											color={filter.serviceCategory === item ? '#cfeaed'
-												: 'white'}
+											color={internalFilter.serviceCategory === item ? '#cfeaed'
+												: '#fff'}
+											style={{ cursor: 'pointer' }}
 										>
 											{item}
 
@@ -102,12 +123,12 @@ function RenderFilters({
 
 							</div>
 							<RadioGroup
-								options={SHIPMENT_TYPES}
-								onChange={(val) => setFilter((prev) => ({
+								options={SHIPMENT_TYPES_OPTIONS}
+								onChange={(val) => setInternalFilter((prev) => ({
 									...prev,
 									[activeFilter]: val,
 								}))}
-								value={filter[activeFilter]}
+								value={internalFilter[activeFilter]}
 								className={styles.radio_group_section}
 								style={{ margin: 0 }}
 							/>
@@ -115,11 +136,11 @@ function RenderFilters({
 						<TabPanel name="segment" title="Segment">
 							<RadioGroup
 								options={SEGMENT_OPTIONS}
-								onChange={(val) => setFilter((prev) => ({
+								onChange={(val) => setInternalFilter((prev) => ({
 									...prev,
 									[activeFilter]: val,
 								}))}
-								value={filter[activeFilter]}
+								value={internalFilter[activeFilter]}
 								className={styles.radio_group_section}
 								style={{ flexDirection: 'column' }}
 							/>

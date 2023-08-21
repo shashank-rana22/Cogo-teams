@@ -27,7 +27,6 @@ function RateCardTopSection({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
-	cogoAssuredOptions = [],
 	onChange = () => {},
 	selectedCogoAssuredCard = {},
 	showGuide = false,
@@ -45,7 +44,6 @@ function RateCardTopSection({
 				infoBanner={infoBanner}
 				index={index}
 				setInfoBanner={setInfoBanner}
-				cogoAssuredOptions={cogoAssuredOptions}
 				onChange={onChange}
 				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				showGuide={showGuide}
@@ -64,7 +62,6 @@ function MiddleSection({
 	isCogoAssured = false,
 	isMultiContainer = false,
 	setScreen = () => {},
-	setMainScreen = () => {},
 }) {
 	const firstTwoRates = primaryServiceRates.slice(ZERO, TWO);
 
@@ -132,7 +129,6 @@ function MiddleSection({
 					isCogoAssured={isCogoAssured}
 					isMultiContainer={isMultiContainer}
 					setScreen={setScreen}
-					setMainScreen={setMainScreen}
 				/>
 			</div>
 		</div>
@@ -173,12 +169,10 @@ function FclCard({
 	infoBanner = {},
 	index = 0,
 	setInfoBanner = () => {},
-	cogoAssuredOptions = [],
 	onChange = () => {},
 	selectedCogoAssuredCard = {},
 	showGuide = false,
 	cogoAssuredRates = [],
-	setMainScreen = () => {},
 }) {
 	const { service_rates = {}, schedules = {}, transit_time_unit, transit_time, source } = rateCardData;
 	const primaryService = detail?.search_type;
@@ -236,7 +230,6 @@ function FclCard({
 				infoBanner={infoBanner}
 				index={index}
 				setInfoBanner={setInfoBanner}
-				cogoAssuredOptions={cogoAssuredOptions}
 				onChange={onChange}
 				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				showGuide={showGuide}
@@ -252,12 +245,11 @@ function FclCard({
 				isMultiContainer={isMultiContainer}
 				isSelectedCard={isSelectedCard}
 				setScreen={setScreen}
-				setMainScreen={setMainScreen}
 			/>
 
 			{isCogoAssured && !isSelectedCard ? (
 				<SailingWeek
-					cogoAssuredOptions={cogoAssuredOptions}
+					cogoAssuredRates={cogoAssuredRates}
 					onChange={onChange}
 					selectedCogoAssuredCard={selectedCogoAssuredCard}
 				/>

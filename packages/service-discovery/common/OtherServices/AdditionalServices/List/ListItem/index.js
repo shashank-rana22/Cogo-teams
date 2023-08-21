@@ -92,7 +92,7 @@ function ListItem({
 	};
 
 	function RenderRate() {
-		if (startingPriceLoading) {
+		if (startingPriceLoading && !isSelected) {
 			return <Placeholder height="24px" width="100px" style={{ borderRadius: 4 }} />;
 		}
 
@@ -132,7 +132,7 @@ function ListItem({
 									Remove service
 								</Button>
 							</div>
-							<span className={styles.remove_heading}>* Remove this service to continue</span>
+							<span className={styles.remove_heading}>** Remove this service to continue</span>
 						</div>
 					);
 				} return 'At Actuals';

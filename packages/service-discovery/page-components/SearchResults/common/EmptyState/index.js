@@ -25,6 +25,10 @@ function EmptyState({
 	setFilters = () => {},
 	refetch = () => {},
 	service_key = 'search_type',
+	openAccordian = '',
+	setOpenAccordian = () => {},
+	showFilterModal = false,
+	setShowFilterModal = () => {},
 }) {
 	const service_type = details[service_key];
 
@@ -35,6 +39,10 @@ function EmptyState({
 				filters={filters}
 				setFilters={setFilters}
 				refetch={refetch}
+				openAccordian={openAccordian}
+				setOpenAccordian={setOpenAccordian}
+				showFilterModal={showFilterModal}
+				setShowFilterModal={setShowFilterModal}
 			/>
 
 			{REQUEST_RATE_ALLOWED_SERVICES.includes(service_type) ? (

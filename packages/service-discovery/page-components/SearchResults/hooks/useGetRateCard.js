@@ -1,14 +1,13 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 const useGetRateCard = () => {
-	let rate_card_id;
+	const { general: { query = {} } } = useSelector((state) => state);
 
-	if (typeof window !== 'undefined') {
-		rate_card_id = new URLSearchParams(window?.location?.search)?.get('rate_card_id');
-	}
+	const { rate_card_id } = query;
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',

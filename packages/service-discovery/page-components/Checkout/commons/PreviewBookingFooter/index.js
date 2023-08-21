@@ -46,7 +46,7 @@ function PreviewBookingFooter({
 		services = {},
 	} = detail;
 
-	const { getValues } = formProps;
+	const { getValues, handleSubmit } = formProps;
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -72,7 +72,8 @@ function PreviewBookingFooter({
 
 		const {
 			sailing_range = {},
-			max_price, min_price,
+			max_price,
+			min_price,
 			agreed_for_partial_shipment = false,
 			...restValues
 		} = getValues();
@@ -136,6 +137,12 @@ function PreviewBookingFooter({
 		}
 	};
 
+	const onError = () => {
+		Toast.error('Please select shipping preferences');
+
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+	};
+
 	const onClickSaveForLater = () => {
 		updateCheckout({ values: { id, state: 'save_for_later' }, refetchRequired: false });
 
@@ -167,7 +174,7 @@ function PreviewBookingFooter({
 			disabled  : isVeryRisky || !agreeTandC || disableButton,
 			style     : { marginLeft: '16px' },
 			key       : 'place_booking',
-			onClick   : handleNextButton,
+			onClick   : () => handleSubmit(handleNextButton, onError)(),
 		},
 	];
 

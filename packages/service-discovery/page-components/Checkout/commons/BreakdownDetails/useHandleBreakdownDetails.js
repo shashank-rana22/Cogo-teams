@@ -1,14 +1,35 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
+import { CheckoutContext } from '../../context';
+import useUpdateCheckoutService from '../../hooks/useUpdateCheckoutService';
 
 const DEFAULT_VALUE = 0;
 
-const useHandleBreakdownDetails = ({ rate, setRateDetails, setNoRatesPresent = () => {} }) => {
+const useHandleBreakdownDetails = ({
+	rate,
+	setRateDetails,
+	setNoRatesPresent = () => {},
+	getCheckoutInvoices = () => {},
+}) => {
+	const {
+		detail,
+		getCheckout,
+		checkout_id,
+	} = useContext(CheckoutContext);
+
 	const [addLineItemData, setAddLineItemData] = useState({});
 	const [editLineItemData, setEditLineItemData] = useState({});
 
 	const { booking_charges = {} } = rate;
+
+	const { handleDeleteRate, deleteRateLoading } = useUpdateCheckoutService({
+		refetch: getCheckout,
+		detail,
+		checkout_id,
+		getCheckoutInvoices,
+	});
 
 	const otherCharges = Object.entries(booking_charges)
 		.filter(([key]) => key !== 'convenience_rate')
@@ -108,6 +129,8 @@ const useHandleBreakdownDetails = ({ rate, setRateDetails, setNoRatesPresent = (
 		setEditLineItemData,
 		resetMargins,
 		otherCharges,
+		handleDeleteRate,
+		deleteRateLoading,
 	};
 };
 

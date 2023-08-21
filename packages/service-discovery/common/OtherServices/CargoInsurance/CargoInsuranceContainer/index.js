@@ -27,7 +27,6 @@ function CargoInsuranceContainer({
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.left_section}>
-
 				<IcACarriageInsurancePaidTo
 					width={32}
 					height={32}

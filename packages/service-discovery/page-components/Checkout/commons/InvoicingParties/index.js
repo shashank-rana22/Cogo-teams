@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useImperativeHandle, forwardRef } from 'react';
 
 import { CheckoutContext } from '../../context';
 
@@ -10,7 +10,7 @@ import useInvoicingParties from './useInvoicingParties';
 function InvoicingParties({
 	invoicingParties = [],
 	setInvoicingParties = () => {},
-}) {
+}, ref) {
 	const {
 		rate,
 		detail = {},
@@ -42,6 +42,10 @@ function InvoicingParties({
 		loading: updateLoading,
 	} = useUpdateCheckoutInvoice({ getCheckoutInvoices, getCheckout });
 
+	useImperativeHandle(ref, () => ({
+		getCheckoutInvoices,
+	}));
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -72,4 +76,4 @@ function InvoicingParties({
 	);
 }
 
-export default InvoicingParties;
+export default forwardRef(InvoicingParties);

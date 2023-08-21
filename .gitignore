@@ -159,4 +159,4 @@ out/
 !/cogo-control/pages/v2/
 !/cogo-control/pages/v2/index.js
 
-.data-store
+# .data-store

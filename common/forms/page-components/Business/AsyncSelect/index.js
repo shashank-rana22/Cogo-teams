@@ -62,6 +62,7 @@ import {
 	asyncIncidentSubtypeList,
 	asyncFieldsLeadOrganization,
 	asyncListResources,
+	asyncFieldsLocationsMapping,
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
 } from '../../../utils/getAsyncFields';
@@ -94,6 +95,7 @@ const keyAsyncFieldsParamsMapping = {
 	partner_roles                        : asyncFieldsPartnerRoles,
 	segments                             : asyncFieldsCampaignSegments,
 	list_locations                       : asyncFieldsLocations,
+	list_locations_mapping               : asyncFieldsLocationsMapping,
 	list_operators                       : asyncFieldsListOperators,
 	list_rate_charge_codes               : asyncFieldListRateChargeCodes,
 	allot_bank                           : asyncAllotBanks,

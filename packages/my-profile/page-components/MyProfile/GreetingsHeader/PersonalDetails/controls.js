@@ -1,9 +1,11 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMUpload } from '@cogoport/icons-react';
 
-const uploadIcon = () => <IcMUpload height={20} width={20} />;
+function UploadIcon() {
+	return <IcMUpload height={20} width={20} />;
+}
 
-const getControls = (detailsData = {}) => [
+const getControls = (detailsData = {}, t = () => {}) => [
 
 	{
 		name            : 'profile_picture_url',
@@ -11,35 +13,35 @@ const getControls = (detailsData = {}) => [
 		onlyURLOnChange : true,
 		accept          : '.png, .jpeg',
 		uploadType      : 'aws',
-		validations     : [{ type: 'required', message: 'Mandatory' }],
-		label           : 'Upload profile picture',
+		validations     : [{ type: 'required', message: t('profile:profile_picture_url_validations_message') }],
+		label           : t('profile:profile_picture_url_label'),
 		drag            : true,
 		height          : 72,
-		uploadIcon,
+		uploadIcon      : UploadIcon,
 		defaultValue    : detailsData?.picture,
 		rules           : {
-			required: 'Profile Picture is required',
+			required: t('profile:profile_picture_url_rules_required'),
 		},
 	},
 	{
 		name        : 'name',
-		label       : 'Name',
+		label       : t('profile:name'),
 		type        : 'text',
-		placeholder : 'Enter name',
+		placeholder : t('profile:name_placeholder'),
 		size        : 'md',
 		value       : detailsData?.name,
 		rules       : {
-			required  : 'Please enter name',
+			required  : t('profile:name_rules_required'),
 			maxLength : {
 				value   : 40,
-				message : 'max length is 40',
+				message : t('profile:name_pattern_message'),
 			},
 		},
 	},
 	{
 		name        : 'preferred_languages',
-		label       : 'Preferred Languages',
-		placeholder : 'Choose Preferred Languages',
+		label       : t('profile:preferred_languages'),
+		placeholder : t('profile:preferred_languages_placeholder'),
 		options     : GLOBAL_CONSTANTS.languages,
 		isClearable : true,
 

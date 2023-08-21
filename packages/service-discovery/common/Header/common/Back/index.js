@@ -1,18 +1,32 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
-import React from 'react';
+import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
+const BACK_SCREENS_MAPPING = {
+	comparison: 'listRateCard',
+};
+
 function Back({
 	heading = 'Back',
+	currentScreen = '',
 	setCurrentScreen = () => {},
 }) {
-	const onBack = () => {
-		const newUrl = new URL(window.location);
-		newUrl.searchParams.delete('rate_card_id');
+	const { push, back } = useRouter();
 
-		window.history.pushState({ path: newUrl.href }, '', newUrl.href);
-		setCurrentScreen('listRateCard');
+	const onBack = () => {
+		if (currentScreen === 'listRateCard') {
+			push('/service-discovery');
+			return;
+		}
+
+		const previousScreen = BACK_SCREENS_MAPPING[currentScreen];
+		if (previousScreen) {
+			setCurrentScreen(previousScreen);
+			return;
+		}
+
+		back();
 	};
 
 	return (

@@ -18,8 +18,11 @@ function SalesDashboard({
 
 	const [activeTab, setActiveTab] = useState(allLists[GLOBAL_CONSTANTS.zeroth_index].type);
 
-	const PROPS_MAPPING = {
-		primary_service: { setLocation },
+	const PROPS_MAPPING_WITH_FUNCTION_NAME = {
+		renderPortPair: {
+			setLocation,
+			service_type,
+		},
 	};
 
 	return (
@@ -53,7 +56,7 @@ function SalesDashboard({
 
 				const updatedFields = finalFields.map((fieldItem) => ({
 					...fieldItem,
-					props: PROPS_MAPPING[fieldItem.key],
+					props: PROPS_MAPPING_WITH_FUNCTION_NAME[fieldItem.func],
 				}));
 
 				return (

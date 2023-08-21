@@ -38,8 +38,6 @@ function ShippingPreferences({
 	formProps = {},
 	primaryService = {},
 	search_id = '',
-	setIsAllShippingLinesRequired = () => {},
-	isAllShippingLinesRequired = false,
 	updateLoading = false,
 }) {
 	const {
@@ -127,8 +125,6 @@ function ShippingPreferences({
 							<ShippingLineLabel
 								name={name}
 								updateLoading={updateLoading}
-								setIsAllShippingLinesRequired={setIsAllShippingLinesRequired}
-								isAllShippingLinesRequired={isAllShippingLinesRequired}
 								label={label}
 							/>
 
