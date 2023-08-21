@@ -2,6 +2,7 @@
 import Popover from '@cogoport/components';
 import { IcMNotifications } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import getStaticPath from '../../utils/getStaticPath';
@@ -28,6 +29,8 @@ function NotificationsPopover({
 	rpaLoading,
 	handleRpaNotificationClick,
 }) {
+	const { t } = useTranslation(['notifications']);
+
 	const [show, setShow] = useState(false);
 	const [notificationType, setNotificationType] = useState('general');
 	// const { show, handlers, onOuterClick } = usePopoverTrigger('click');
@@ -52,7 +55,7 @@ function NotificationsPopover({
 		} else if (Notification.permission === 'granted') {
 			// eslint-disable-next-line no-unused-vars
 			const notification = new Notification(
-				`${formattedData?.not_seen_count} new notifications from cogoport!`,
+				`${formattedData?.not_seen_count} ${t('notifications:new_notifications')}`,
 			);
 		}
 	};
