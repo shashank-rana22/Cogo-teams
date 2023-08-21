@@ -1,22 +1,29 @@
 import { Button, Modal } from '@cogoport/components';
 import { InputController, UploadController, useForm } from '@cogoport/forms';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import useCancelInvoice from '../../../../../../../../../hooks/useCancelInvoice';
+import useCancelReplaceInvoice from '../../../../../../../../../hooks/useCancelReplaceInvoice';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function CancelEInvoice({
+const MODAL_INCIDENT_MAP = {
+	cancel_e_invoice  : 'CANCEL_INVOICE',
+	replace_e_invoice : 'REPLACE_INVOICE',
+};
+
+function CancelReplaceEInvoice({
 	bfInvoice = {},
 	show = false,
 	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
+	modalType = 'cancel_e_invoice',
 }) {
 	const { control, handleSubmit } = useForm();
 
-	const { loading, submit } = useCancelInvoice();
+	const { loading, submit } = useCancelReplaceInvoice();
 
 	const getElement = (type) => {
 		const ELEMENT_MAPPING = {
@@ -39,6 +46,7 @@ function CancelEInvoice({
 			invoiceId            : bfInvoice?.id,
 			refetch,
 			documentUrls         : getDocumentUrl(values),
+			incidentSubType      : MODAL_INCIDENT_MAP[modalType],
 		});
 	};
 
@@ -50,11 +58,11 @@ function CancelEInvoice({
 			onOuterClick={onClose}
 		>
 			<Modal.Header
-				title="Cancel E-Invoice"
+				title={startCase(modalType)}
 				className={styles.heading}
 			/>
 			<Modal.Body>
-				{controls?.map((c) => {
+				{controls({ type: modalType })?.map((c) => {
 					const Element = getElement(c?.type);
 					return (Element
 						? (
@@ -92,4 +100,4 @@ function CancelEInvoice({
 	);
 }
 
-export default CancelEInvoice;
+export default CancelReplaceEInvoice;
