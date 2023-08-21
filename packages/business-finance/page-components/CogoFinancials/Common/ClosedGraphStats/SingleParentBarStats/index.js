@@ -27,7 +27,7 @@ function SingleParentBarStats({
 	serviceLevelLoading = false,
 	setTableFilters = () => {},
 }) {
-	const { tour, setTour } = useContext(TourContext);
+	const { tour, setTour, setIsTourInitial } = useContext(TourContext);
 	const onViewDetails = () => {
 		setShowShipmentList(true);
 	};
@@ -37,7 +37,10 @@ function SingleParentBarStats({
 				<Tour
 					steps={BAR_GROUP_CHILDREN}
 					isOpen={tour && !serviceLevelLoading}
-					onRequestClose={() => setTour(false)}
+					onRequestClose={() => {
+						setTour(false);
+						setIsTourInitial(true);
+					}}
 					maskClassName={styles.tour_mask}
 					startAt={0}
 					closeWithMask={false}

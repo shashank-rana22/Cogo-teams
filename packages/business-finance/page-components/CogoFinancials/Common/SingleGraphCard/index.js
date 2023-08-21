@@ -63,7 +63,7 @@ function SingleGraphCard({
 	showShipmentList = false,
 	graphIndex = 0,
 }) {
-	const { tour, setTour } = useContext(TourContext);
+	const { tour, setTour, setIsTourInitial } = useContext(TourContext);
 	const [isAnimationCompleted, setIsAnimationCompleted] = useState(false);
 	const isLastView = isViewDetailsVisible; // last view of graph cards
 	const graphKey = heading;
@@ -114,7 +114,10 @@ function SingleGraphCard({
 				<Tour
 					steps={CLOSED_PARENT_SERVICES_STEPS}
 					isOpen={tour && isEmpty(activeBar)}
-					onRequestClose={() => setTour(false)}
+					onRequestClose={() => {
+						setTour(false);
+						setIsTourInitial(true);
+					}}
 					maskClassName={styles.tour_mask}
 					startAt={0}
 					closeWithMask={false}
