@@ -49,6 +49,7 @@ function RibbonRender({ row = {} }: Interface) {
 								<div
 									className={styles.ribbon}
 									style={{ background: criteria ? 'rgb(255, 213, 85)' : '#ff0000' }}
+									key={param}
 								>
 									{displayVal}
 								</div>
