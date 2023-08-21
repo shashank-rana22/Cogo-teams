@@ -5,21 +5,9 @@ import { useState, useCallback, useEffect } from 'react';
 
 import CONSTANTS from '../constants/constants';
 
-const getParams = (truckStatus) => {
-	let req = { truckOutStatus: false };
-
-	if (truckStatus === 'truck_in') {
-		req = {
-			...req,
-			truckInStatus: false,
-		};
-	} else {
-		req = {
-			...req,
-			truckInStatus: true,
-		};
-	}
-	return req;
+const STATUS_MAP = {
+	truck_in  : 'awaiting_truck_in',
+	truck_out : 'trucked_in',
 };
 
 const useListSchedules = ({
@@ -41,13 +29,11 @@ const useListSchedules = ({
 	);
 
 	const listAPI = useCallback(async () => {
-		const PAYLOAD = getParams(truckStatus);
-
 		try {
 			await trigger({
 				params: {
-					q: (query || '').trim() || undefined,
-					...PAYLOAD,
+					q      : (query || '').trim() || undefined,
+					status : STATUS_MAP[truckStatus] || undefined,
 				},
 			});
 		} catch (err) {

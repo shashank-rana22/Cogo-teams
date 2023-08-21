@@ -24,55 +24,116 @@ function Header({
 	date = new Date(),
 	setDate = () => {},
 	setAddNewZone = () => {},
-	selectedTimeInterval = 'daily',
-	setSelectedTimeInterval = () => {},
 	selectedWarehouseLocation = 'delhi',
 	setSelectedWarehouseLocation = () => {},
 }) {
 	const COMPONENT_MAPPING = {
 		schedules: (
-			<Tabs
-				tabIcon={<IcMProfile />}
-				themeType="tertiary"
-				activeTab={truckStatus}
-				onChange={setTruckStatus}
-			>
-				{TRUCK_STATUS_MAPPINGS.map((item) => {
-					const { key = '', label = '' } = item;
-					return (
-						<TabPanel
-							key={key}
-							name={key}
-							title={label}
+			<>
+				<Tabs
+					tabIcon={<IcMProfile />}
+					themeType="tertiary"
+					activeTab={truckStatus}
+					onChange={setTruckStatus}
+				>
+					{TRUCK_STATUS_MAPPINGS.map((item) => {
+						const { key = '', label = '' } = item;
+						return (
+							<TabPanel
+								key={key}
+								name={key}
+								title={label}
+							/>
+						);
+					})}
+				</Tabs>
+				<div className={styles.date_picker}>
+					<Datepicker
+						placeholder="Select Date"
+						showTimeSelect
+						dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
+						name="date"
+						value={date}
+						onChange={setDate}
+						isPreviousDaysAllowed
+						prefix={(
+							<IcMCalendar className={styles.calendar_icon} />
+						)}
+					/>
+
+				</div>
+				<Input
+					size="sm"
+					prefix={<IcMAppSearch />}
+					placeholder={SEARCH_BAR_PLACEHOLDER_MAPPING[activeTab]}
+					className={styles.search_text}
+					onChange={(val) => {
+						setSearchValue(val);
+					}}
+					value={searchValue}
+					suffix={(
+						<ButtonIcon
+							onClick={() => setSearchValue('')}
+							size="sm"
+							icon={<IcMCross />}
+							disabled={isEmpty(searchValue)}
 						/>
-					);
-				})}
-			</Tabs>
+					)}
+				/>
+			</>
 		),
 		inventory: (
-			<Select
-				className={styles.select_input}
-				onChange={(val) => setSelectedTimeInterval({ val })}
-				placeholder="Daily report"
-				value={selectedTimeInterval}
-				isClearable
+			<Input
 				size="sm"
+				prefix={<IcMAppSearch />}
+				placeholder={SEARCH_BAR_PLACEHOLDER_MAPPING[activeTab]}
+				className={styles.search_text}
+				onChange={(val) => {
+					setSearchValue(val);
+				}}
+				value={searchValue}
+				suffix={(
+					<ButtonIcon
+						onClick={() => setSearchValue('')}
+						size="sm"
+						icon={<IcMCross />}
+						disabled={isEmpty(searchValue)}
+					/>
+				)}
 			/>
 		),
 		configure: (
-			<Select
-				className={styles.select_input}
-				value={selectedWarehouseLocation}
-				onChange={(val) => setSelectedWarehouseLocation({ val })}
-				placeholder="Choose warehouse"
-				isClearable
-				size="sm"
-			/>
+			<>
+				<Button
+					onClick={() => setAddNewZone(true)}
+				>
+					<div className={styles.add_icon}>+</div>
+					Add New Zone
+				</Button>
+				<Input
+					size="sm"
+					prefix={<IcMAppSearch />}
+					placeholder={SEARCH_BAR_PLACEHOLDER_MAPPING[activeTab]}
+					className={styles.search_text}
+					onChange={(val) => {
+						setSearchValue(val);
+					}}
+					value={searchValue}
+					suffix={(
+						<ButtonIcon
+							onClick={() => setSearchValue('')}
+							size="sm"
+							icon={<IcMCross />}
+							disabled={isEmpty(searchValue)}
+						/>
+					)}
+				/>
+			</>
 		),
 	};
 
 	return (
-		<div>
+		<>
 			<div className={styles.header_part}>
 				<Tabs
 					themeType="tertiary"
@@ -91,56 +152,20 @@ function Header({
 					})}
 				</Tabs>
 				<div className={styles.header_search_filter}>
-					<Input
+					<Select
+						className={styles.select_input}
+						value={selectedWarehouseLocation}
+						onChange={(val) => setSelectedWarehouseLocation({ val })}
+						placeholder="Choose warehouse"
 						size="sm"
-						prefix={<IcMAppSearch />}
-						placeholder={SEARCH_BAR_PLACEHOLDER_MAPPING[activeTab]}
-						className={styles.search_text}
-						onChange={(val) => {
-							setSearchValue(val);
-						}}
-						value={searchValue}
-						suffix={(
-							<ButtonIcon
-								onClick={() => setSearchValue('')}
-								size="sm"
-								icon={<IcMCross />}
-								disabled={isEmpty(searchValue)}
-							/>
-						)}
 					/>
 				</div>
 			</div>
 			<div className={styles.header_footer_part}>
 				{COMPONENT_MAPPING[activeTab]}
-				{activeTab === 'configure'
-					? (
-						<Button
-							onClick={() => setAddNewZone(true)}
-						>
-							<div className={styles.add_icon}>+</div>
-							Add New Zone
-						</Button>
-					)
-					: undefined}
-				{activeTab === 'schedules'
-					? (
-						<div className={styles.date_picker}>
-							<Datepicker
-								placeholder="Select Date"
-								showTimeSelect
-								dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
-								name="date"
-								value={date}
-								onChange={setDate}
-								isPreviousDaysAllowed
-							/>
-							<IcMCalendar className={styles.calendar_icon} />
-						</div>
-					) : undefined}
 			</div>
 
-		</div>
+		</>
 	);
 }
 

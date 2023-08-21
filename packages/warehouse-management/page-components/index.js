@@ -10,8 +10,6 @@ function WarehouseManagement() {
 	const [truckStatus, setTruckStatus] = useState('truck_in');
 	const [date, setDate] = useState(new Date());
 
-	const [selectedTimeInterval, setSelectedTimeInterval] = useState('daily_report');
-
 	const [selectedWarehouseLocation, setSelectedWarehouseLocation] = useState('delhi');
 	const [addNewZone, setAddNewZone] = useState(false);
 
@@ -37,15 +35,12 @@ function WarehouseManagement() {
 				setSearchValue={setSearchValue}
 				date={date}
 				setDate={setDate}
-				selectedTimeInterval={selectedTimeInterval}
-				setSelectedTimeInterval={setSelectedTimeInterval}
 				selectedWarehouseLocation={selectedWarehouseLocation}
 				setSelectedWarehouseLocation={setSelectedWarehouseLocation}
 			/>
 			<WarehouseOperations
 				activeTab={activeTab}
 				truckStatus={truckStatus}
-				selectedTimeInterval={selectedTimeInterval}
 				searchValue={searchValue}
 				addNewZone={addNewZone}
 				setAddNewZone={setAddNewZone}

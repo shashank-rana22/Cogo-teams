@@ -13,7 +13,6 @@ const TABS_COMPONENT_MAPPING = {
 function WarehouseOperations({
 	activeTab = 'schedule',
 	truckStatus = 'truck_in',
-	selectedTimeInterval = 'daily',
 	searchValue = '',
 	addNewZone = false,
 	setAddNewZone = () => {},
@@ -29,7 +28,6 @@ function WarehouseOperations({
 				<ActiveTabComponent
 					activeTab={activeTab}
 					truckStatus={truckStatus}
-					selectedTimeInterval={selectedTimeInterval}
 					searchValue={searchValue}
 					addNewZone={addNewZone}
 					setAddNewZone={setAddNewZone}
