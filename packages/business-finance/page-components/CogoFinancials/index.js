@@ -62,13 +62,17 @@ function CogoFinancials() {
 
 	return (
 		<div>
-			<DemoTour tour={tour} setTour={setTour} />
+			<DemoTour
+				tour={tour}
+				setTour={setTour}
+				activeShipmentCard={activeShipmentCard}
+			/>
 			<div className={styles.header}>
 				<div
 					role="presentation"
 					onClick={handleClick}
 				>
-					<h2 className={styles.main_heading} data-tour="first-step">COGO Financials</h2>
+					<h2 className={styles.main_heading} data-tour="main-heading">COGO Financials</h2>
 
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>

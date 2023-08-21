@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { INFO_CONTENT, MAPPING_CARDS_DATA } from '../../constants';
+import { ActiveServiceContext } from '../../contexts';
 import useGetServiceLevelStats from '../../hooks/useGetServiceLevelStats';
 import RenderCardHeader from '../RenderCardHeader';
 import ServiceWiseStats from '../ServicewiseStats';
@@ -49,83 +50,85 @@ function ParentServicewiseStats({
 	const services = (serviceLevelData || []).map((item) => (item.serviceName));
 
 	return (
-		<div>
-			{isEmpty(activeService) ? (
-				<div className={styles.container}>
-					<div className={styles.justifiy}>
-						<RenderCardHeader
-							title="Ongoing Shipments"
-							showInfo
-							showBack
-							onBack={() => setActiveShipmentCard('')}
-							infoContent={INFO_CONTENT.ongoingShipments}
-						/>
-
-					</div>
-
-					<div className={styles.flex}>
-						<div className={styles.maincard}>
-							{!serviceLevelLoading ? (
-								<StatCard mappingCards={cardData} isMain />
-							) : (
-								<Placeholder
-									height={324}
-									width="100%"
-								/>
-							)}
+		<ActiveServiceContext.Provider value={activeService}>
+			<div>
+				{isEmpty(activeService) ? (
+					<div className={styles.container}>
+						<div className={styles.justifiy}>
+							<RenderCardHeader
+								title="Ongoing Shipments"
+								showInfo
+								showBack
+								onBack={() => setActiveShipmentCard('')}
+								infoContent={INFO_CONTENT.ongoingShipments}
+							/>
 
 						</div>
-						{!serviceLevelLoading ? (
-							<div className={styles.sidestats}>
-								{services.map((service) => {
-									const singleServiceData = (serviceLevelData || []).filter(
-										(item) => item.serviceName === service,
-									)?.[GLOBAL_CONSTANTS.zeroth_index];
-									return (
-										<StatCard
-											mappingCards={MAPPING_CARDS_DATA}
-											service={service}
-											key={service}
-											setActiveService={setActiveService}
-											singleServiceData={singleServiceData}
-											taxType={taxType}
-											displayAmount={displayAmount}
-										/>
-									);
-								})}
-							</div>
-						) : (
-							<div className={styles.placeholder_container}>
-								{[...Array(PLACEHOLDER_COUNT).keys()].map((item) => (
+
+						<div className={styles.flex}>
+							<div className={styles.maincard}>
+								{!serviceLevelLoading ? (
+									<StatCard mappingCards={cardData} isMain />
+								) : (
 									<Placeholder
-										key={item}
-										height={156}
-										width="49%"
+										height={324}
+										width="100%"
 									/>
-								))}
+								)}
 
 							</div>
-						)}
+							{!serviceLevelLoading ? (
+								<div className={styles.sidestats}>
+									{services.map((service) => {
+										const singleServiceData = (serviceLevelData || []).filter(
+											(item) => item.serviceName === service,
+										)?.[GLOBAL_CONSTANTS.zeroth_index];
+										return (
+											<StatCard
+												mappingCards={MAPPING_CARDS_DATA}
+												service={service}
+												key={service}
+												setActiveService={setActiveService}
+												singleServiceData={singleServiceData}
+												taxType={taxType}
+												displayAmount={displayAmount}
+											/>
+										);
+									})}
+								</div>
+							) : (
+								<div className={styles.placeholder_container}>
+									{[...Array(PLACEHOLDER_COUNT).keys()].map((item) => (
+										<Placeholder
+											key={item}
+											height={156}
+											width="49%"
+										/>
+									))}
+
+								</div>
+							)}
+						</div>
 					</div>
-				</div>
-			) : (
-				<ServiceWiseStats
-					activeService={activeService}
-					setActiveService={setActiveService}
-					mainCardData={(serviceLevelData || []).filter(
-						(item) => item.serviceName === activeService,
-					)?.[GLOBAL_CONSTANTS.zeroth_index]}
-					serviceLevelData={serviceLevelData}
-					displayAmount={displayAmount}
-					taxType={taxType}
-					entity={entity}
-					timeRange={timeRange}
-					filter={filter}
-					activeShipmentCard={activeShipmentCard}
-					customDate={customDate}
-				/>
-			)}
-		</div>
+				) : (
+					<ServiceWiseStats
+						activeService={activeService}
+						setActiveService={setActiveService}
+						mainCardData={(serviceLevelData || []).filter(
+							(item) => item.serviceName === activeService,
+						)?.[GLOBAL_CONSTANTS.zeroth_index]}
+						serviceLevelData={serviceLevelData}
+						displayAmount={displayAmount}
+						taxType={taxType}
+						entity={entity}
+						timeRange={timeRange}
+						filter={filter}
+						activeShipmentCard={activeShipmentCard}
+						customDate={customDate}
+					/>
+				)}
+			</div>
+		</ActiveServiceContext.Provider>
 	);
 }
 

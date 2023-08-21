@@ -96,7 +96,7 @@ function ClosedShipmentCard({
 			{showHeading && (
 				<div
 					style={{ padding: '16px 32px' }}
-					data-tour={type === 'Financially' ? 'third-step' : 'fourth-step'}
+					data-tour={type === 'Financially' ? 'financially-closed-heading' : 'operationally-closed-heading'}
 				>
 					<RenderCardHeader
 						title={`${type} Closed Shipments`}
