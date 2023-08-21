@@ -1576,6 +1576,16 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis     : [],
 					possible_apis : apis.utm_parameters,
 				},
+				{
+					key           : 'marketing-marketing_cogo_store',
+					title         : 'CogoStore',
+					href          : '/marketing/cogo-store/[active_tab]',
+					as            : '/marketing/cogo-store/manage',
+					type          : 'link',
+					main_apis     : [],
+					possible_apis : apis.cogopoints,
+					module_type   : 'crm',
+				},
 			],
 			module_type: 'dashboards',
 		},
@@ -1592,7 +1602,6 @@ const navigationMapping = ({ t = () => {} }) => {
 
 			module_type: 'crm',
 		},
-
 		cogo_assured: {
 			key         : 'cogo_assured',
 			title       : t('common:cogo_assured'),
@@ -1898,14 +1907,14 @@ const navigationMapping = ({ t = () => {} }) => {
 			as          : '/kam-monitoring',
 			main_apis   : [],
 		},
-		awb_inventory: {
-			key           : 'awb_inventory',
-			title         : t('common:awb_inventory'),
-			href          : '/v2/awb-inventory',
-			as            : '/v2/awb-inventory',
+		advance_booking_manager: {
+			key           : 'advance_booking_manager',
+			title         : 'Advance Booking Manager',
+			href          : '/v2/advance-booking-manager',
+			as            : '/v2/advance-booking-manager',
 			main_apis     : [],
 			icon          : IcMInvoiceApprovals,
-			possible_apis : apis.awb_inventory,
+			possible_apis : apis.advance_booking_manager,
 			module_type   : 'dashboards',
 		},
 		ground_ops: {

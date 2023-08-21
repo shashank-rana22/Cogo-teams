@@ -108,7 +108,7 @@ export default {
 			'a5c83696-0248-4846-a558-1a054360f130', // Overseas CP KAM Manager
 			'650e1fe4-2e34-43c1-abfe-ce0a443aa4a6', // Prod_KAM Trasnport Sales
 			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse KAM
-			'6bd7a08c-974c-4dd0-b163-d4c31e794fba', // Vietnam KAM
+			'52e5b6f3-f243-40b6-a9cb-689fd9f25093', // Singapore KAM
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // Shipment Specialist
 			'1d75bd83-710c-4b63-b1a6-f0eb7f16c25a', // Vietnam KAM
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
@@ -181,6 +181,7 @@ export default {
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		sales_role                       : [
+			'52e5b6f3-f243-40b6-a9cb-689fd9f25093',
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716',
 			'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',

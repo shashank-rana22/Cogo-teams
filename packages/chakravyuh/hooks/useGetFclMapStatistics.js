@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { LOCATION_KEYS } from '../constants/map_constants';
 import getFormattedPayload from '../utils/getFormattedPayload';
+import toastApiError from '../utils/toastApiError';
 
 const START_PAGE = 1;
 const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
@@ -21,7 +22,7 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 			try {
 				await trigger({ params });
 			} catch (err) {
-				// console.log(err);
+				toastApiError(err);
 			}
 		},
 		[trigger],
