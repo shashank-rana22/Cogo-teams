@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 
 function useCreateOrganizationEvaluation({
 	id, organization_id, feedback, provideBl, basisConsignee,
-	UpdateOrganizationService,
+	updateOrganizationService,
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
@@ -21,7 +21,7 @@ function useCreateOrganizationEvaluation({
 					status                  : 'active',
 				},
 			});
-			UpdateOrganizationService();
+			updateOrganizationService();
 		} catch (err) {
 			console.log(err);
 		}

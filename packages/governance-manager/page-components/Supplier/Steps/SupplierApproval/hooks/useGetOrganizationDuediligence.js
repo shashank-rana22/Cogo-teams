@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetOrganizationDueDiligence() {
+function useGetOrganizationDueDiligence({ organization_id }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_organization_due_diligence',
@@ -11,7 +11,7 @@ function useGetOrganizationDueDiligence() {
 		try {
 			await trigger({
 				params: {
-					organization_id: 'd7a6df4b-a229-4e4b-b1db-a64eaf763597',
+					organization_id,
 				},
 			});
 		} catch (err) {

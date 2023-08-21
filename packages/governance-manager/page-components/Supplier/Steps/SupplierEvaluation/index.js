@@ -9,6 +9,7 @@ import useCreateOrganizationEvaluation from './hooks/useCreateOrganizationEvalua
 import useGetOrganizationEvaluationDetails from './hooks/useGetOrganizationEvaluationDetails';
 import ScoreModal from './ScoreModal';
 import styles from './styles.module.css';
+import { evaluationCriteriaDetails } from './utils/evaluation-criteria-details';
 import { columns, filterData } from './utils/supplier-evaluation-utils';
 
 function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationService, service }) {
@@ -22,8 +23,8 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 		getOrganizationEvaluationDetails,
 	} = useGetOrganizationEvaluationDetails({ organization_id, id, setStatus, getOrganizationService });
 
-	const { UpdateOrganizationService } = useUpdateOrganizationService({
-		organization_id, stage_of_approval: 'due_dilligance', service, getOrganizationService,
+	const { updateOrganizationService } = useUpdateOrganizationService({
+		organization_id, stage_of_approval: 'organization_approval', service, getOrganizationService,
 	});
 
 	const {
@@ -34,7 +35,7 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 		feedback,
 		provideBl,
 		basisConsignee,
-		UpdateOrganizationService,
+		updateOrganizationService,
 	});
 
 	const handleSubmit = () => {
@@ -78,13 +79,16 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 						<IcMInfo width={18} height={18} style={{ marginLeft: '8px' }} />
 					</div>
 					<div>
-						<Textarea
-							className={styles.middle_right}
-							name="a4"
-							size="lg"
-							defaultValue=""
-							placeholder="A4"
-						/>
+						<table className={styles.ec_table}>
+							{
+								evaluationCriteriaDetails.fcl.map((item) => (
+									<tr className={styles.ec_tr} key={item}>
+										<td className={styles.ec_td}>{item?.range}</td>
+										<td className={styles.ec_td}>{item?.text}</td>
+									</tr>
+								))
+							}
+						</table>
 					</div>
 					<div className={styles.lower_right}>
 						Feedback
@@ -112,11 +116,9 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 					Save & Do it Later
 
 				</Button>
-				{/* <Button onClick={handleSubmit}>Submit & Next</Button> */
-					<Button onClick={() => setStatus('supplier_approval')}>
-						Submit & Next
-					</Button>
-			}
+
+				<Button onClick={handleSubmit}>Submit & Next</Button>
+
 			</div>
 		</>
 	);

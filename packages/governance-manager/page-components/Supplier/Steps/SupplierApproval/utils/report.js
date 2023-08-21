@@ -7,7 +7,7 @@ export 	const report = [{
 	type  : 'market_feedback_report',
 },
 {
-	title : 'Evaluation Paramet Report',
+	title : 'Evaluation Parameter Report',
 	type  : 'evaluation_paramenter_report',
 },
 {

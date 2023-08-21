@@ -8,7 +8,7 @@ export const filterData = (data) => {
 	return [...A, ...B];
 };
 
-export function columns({ setShow }) {
+export function columns({ setShow, isForApproval }) {
 	return [
 		{
 			id       : 'parameters',
@@ -31,7 +31,7 @@ export function columns({ setShow }) {
                 }
 					</div>
 					{
-row?.evaluation_mode === 'manual' && row?.task !== 'total_score' && (
+row?.evaluation_mode === 'manual' && row?.task !== 'total_score' && !isForApproval && (
 	<Button themeType="accent" size="sm" onClick={() => setShow(row)}>
 		Score
 	</Button>

@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useListOrganizationServices({ currentPage, activeTab, setApprovalStats }) {
+function useListOrganizationServices({ currentPage, activeTab, setApprovalStats, currentService }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_organization_services',
@@ -12,21 +12,33 @@ function useListOrganizationServices({ currentPage, activeTab, setApprovalStats 
 			await trigger({
 				params: {
 					filters: {
-						service_expertise_required : true,
-						stage_of_approval          : activeTab,
+						stage_of_approval : activeTab,
+						service           : currentService === 'all'
+							? ['fcl_cfs',
+								'fcl_customs',
+								'lcl_customs',
+								'air_customs',
+								'haulage_freight',
+								'lcl_freight'] : currentService,
+						status: 'pending_approval',
 					},
-					page: currentPage,
+					service_expertise_required : true,
+					page                       : currentPage,
 				},
 			});
-			setApprovalStats(data?.approvals_stats);
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	useEffect(() => {
+		setApprovalStats(data?.approvals_stats);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data]);
 	useEffect(() => {
 		listOrganizationServices();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentPage, activeTab]);
+	}, [currentPage, activeTab, currentService]);
 	return {
 		data       : data?.list,
 		loading,

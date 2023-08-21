@@ -1,8 +1,9 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Select } from '@cogoport/components';
 
 import styles from './styles.module.css';
+import { serviceOptions } from './utils/service-options';
 
-function StatusBar({ activeTab, setActiveTab, approvalStats }) {
+function StatusBar({ activeTab, setActiveTab, approvalStats, currentService, setCurrentService }) {
 	const status_objects = [{
 		name  : 'need_analysis',
 		title : 'Need Analysis',
@@ -19,12 +20,7 @@ function StatusBar({ activeTab, setActiveTab, approvalStats }) {
 		badge : approvalStats?.total_organization_evaluation,
 	},
 	{
-		name  : 'due_dilligance',
-		title : 'Due Dilligance',
-		badge : approvalStats?.total_due_dilligance,
-	},
-	{
-		name  : 'supplier_approval',
+		name  : 'organization_approval',
 		title : 'Supplier Approval',
 		badge : approvalStats?.total_supplier_approval,
 	},
@@ -36,6 +32,14 @@ function StatusBar({ activeTab, setActiveTab, approvalStats }) {
 
 	return (
 		<div className={styles.parent}>
+			<div className={styles.select_service}>
+				<Select
+					value={currentService}
+					onChange={setCurrentService}
+					placeholder="Select Books"
+					options={serviceOptions}
+				/>
+			</div>
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"

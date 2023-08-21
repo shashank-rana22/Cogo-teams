@@ -1,5 +1,5 @@
 import { Button, Modal, Input, Textarea } from '@cogoport/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useUpdateOrganizationEvaluationTask from '../hooks/useUpdateOrganizationEvaluationTask';
 
@@ -23,6 +23,11 @@ function ScoreModal({ show = null, setShow, getOrganizationEvaluationDetails }) 
 	const onClose = () => {
 		setShow(null);
 	};
+
+	useEffect(() => {
+		setYourScore(show?.score_received);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(show)]);
 
 	return (
 		<div style={{ padding: '20px' }}>

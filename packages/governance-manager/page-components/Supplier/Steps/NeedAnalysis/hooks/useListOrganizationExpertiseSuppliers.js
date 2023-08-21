@@ -34,6 +34,7 @@ function useListOrganizationExpertiseSuppliers({ organization_id, service_type, 
 		loading,
 		totalCount    : data?.total_count,
 		isProceedable : data?.check_proceed,
+		getOrganizationExpertiseSuppliers,
 	};
 }
 export default useListOrganizationExpertiseSuppliers;

@@ -1,34 +1,57 @@
 /* eslint-disable no-magic-numbers */
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import useUpdateOrganizationService from '../../hooks/useUpdateOrganizationService';
 
 import useCreateOrganizationMarketFeedback from './hooks/useCreateOrganizationMarketFeedback';
+import useListOrganizationMarketFeedbacks from './hooks/useListOrganizationMarketFeedbacks';
 import Layout from './Layout';
 import styles from './styles.module.css';
 import { controls, defaultValues } from './utils/email-from-controls';
 
-function MarketFeedback({ organization_id, service, getOrganizationService, id:service_id, setStatus }) {
-	const { UpdateOrganizationService } = useUpdateOrganizationService({
+function MarketFeedback({ organization_id, service, getOrganizationService, id:service_id }) {
+	const { updateOrganizationService } = useUpdateOrganizationService({
 		organization_id,
 		stage_of_approval: 'organization_evaluation',
 		service,
 		getOrganizationService,
 	});
 
-	const { createMarketFeedback } = useCreateOrganizationMarketFeedback({
-		UpdateOrganizationService,
+	const { createMarketFeedbackActive, createMarketFeedbackDraft } = useCreateOrganizationMarketFeedback({
+		updateOrganizationService,
 		service_id,
 		service_type: service,
 		organization_id,
 	});
 
+	const { data } = useListOrganizationMarketFeedbacks({
+		service_id,
+		organization_id,
+		organization_service_id: service_id,
+	});
+
+	console.log(data);
 	const {
 		control,
 		handleSubmit,
+		setValue,
 		formState:{ errors = {} },
-	} = useForm({ defaultValues });
+	} = useForm({
+		defaultValues,
+	});
+
+	useEffect(() => {
+		if (data && data.length >= 1) {
+			setValue('emails', data?.map((item) => ({
+				user_role  : item?.user_role,
+				user_name  : item?.user_name,
+				user_email : item?.user_email,
+			})));
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(data)]);
 
 	return (
 		<div className={styles.parent}>
@@ -38,19 +61,12 @@ function MarketFeedback({ organization_id, service, getOrganizationService, id:s
 			<div className={styles.flex_right}>
 				<Button
 					themeType="secondary"
-					onClick={() => UpdateOrganizationService()}
+					onClick={handleSubmit(createMarketFeedbackDraft)}
 				>
 					Save & Do it Later
 				</Button>
 
-				{
-					false
-				&& <Button onClick={handleSubmit(createMarketFeedback)}>Submit & Next</Button>
-				}
-				<Button onClick={() => setStatus('organization_evaluation')}>
-					Submit & Next
-				</Button>
-
+				<Button onClick={handleSubmit(createMarketFeedbackActive)}>Submit & Next</Button>
 			</div>
 		</div>
 	);

@@ -78,3 +78,13 @@
 	width: 100%;
 	margin-top: 16px;
 }
+
+.ec_table{
+	background-color: rgba(230, 229, 229, 0.781);
+	padding: 20px;
+	border-radius: 4px;
+}
+
+.ec_td{
+	width: 280px;
+}

@@ -8,7 +8,7 @@ import useGetOrganizationServiceSuppliers from './hooks/useListOrganizationExper
 import styles from './styles.module.css';
 import { columns } from './utils/need-analysis-utils';
 
-function NeedAnalysis({ organization_id, service, getOrganizationService, service_type, id, setStatus }) {
+function NeedAnalysis({ organization_id, service, getOrganizationService, service_type, id }) {
 	const ONE = 1;
 	const [currentPage, setCurrentPage] = useState(ONE);
 
@@ -17,6 +17,7 @@ function NeedAnalysis({ organization_id, service, getOrganizationService, servic
 		loading:loadingSE,
 		totalCount,
 		isProceedable,
+		getOrganizationExpertiseSuppliers,
 	} = useGetOrganizationServiceSuppliers(
 		{
 			organization_id,
@@ -26,7 +27,7 @@ function NeedAnalysis({ organization_id, service, getOrganizationService, servic
 		},
 	);
 
-	const { UpdateOrganizationService } = useUpdateOrganizationService({
+	const { updateOrganizationService } = useUpdateOrganizationService({
 		organization_id,
 		stage_of_approval: 'market_feedback',
 		service,
@@ -61,21 +62,18 @@ function NeedAnalysis({ organization_id, service, getOrganizationService, servic
 			</div>
 
 			<div className={styles.submit_btn}>
-				{
-					false && 				(
-						<Button onClick={() => UpdateOrganizationService()} disabled={!isProceedable}>
-							Submit & Next
-						</Button>
-					)
-
-				}
-				<Button onClick={() => setStatus('market_feedback')}>
+				<Button onClick={() => updateOrganizationService()} disabled={!isProceedable}>
 					Submit & Next
 				</Button>
-
 			</div>
 			{
-				show && <EvaluateModal show={show} setShow={setShow} />
+				show && (
+					<EvaluateModal
+						show={show}
+						setShow={setShow}
+						getOrganizationExpertiseSuppliers={getOrganizationExpertiseSuppliers}
+					/>
+				)
 
 			}
 		</>

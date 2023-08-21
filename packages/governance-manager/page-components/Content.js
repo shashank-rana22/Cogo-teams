@@ -12,6 +12,8 @@ function Content() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [activeTab, setActiveTab] = useState('need_analysis');
 	const [approvalStats, setApprovalStats] = useState({});
+	const [currentService, setCurrentService] = useState('all');
+
 	const {
 		data:supplierList,
 		loading, totalCount,
@@ -19,6 +21,7 @@ function Content() {
 		currentPage,
 		activeTab,
 		setApprovalStats,
+		currentService,
 	});
 
 	return (
@@ -29,6 +32,8 @@ function Content() {
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
 				approvalStats={approvalStats}
+				currentService={currentService}
+				setCurrentService={setCurrentService}
 			/>
 			<ListSupplier currentPage={currentPage} supplierList={supplierList} loading={loading} />
 			{

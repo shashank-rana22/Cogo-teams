@@ -6,15 +6,16 @@ import useUpdateOrganizationServiceExpertiseFeedback from '../hooks/useUpdateOrg
 
 import styles from './styles.module.css';
 
-function EvaluateModal({ show, setShow }) {
+function EvaluateModal({ show, setShow, getOrganizationExpertiseSuppliers }) {
 	const FIFTY = 50;
 	const [feedback, setFeedback] = useState('');
 	const [checkbox, setCheckbox] = useState('');
-	const { UpdateOrganizationServiceExpertiseFeedback } = useUpdateOrganizationServiceExpertiseFeedback({
+	const { updateOrganizationServiceExpertiseFeedback } = useUpdateOrganizationServiceExpertiseFeedback({
 		feedback,
 		service_requirement: checkbox,
 		show,
 		setShow,
+		getOrganizationExpertiseSuppliers,
 	});
 
 	const { data, loading } = useGetOrganizationServiceExpertises({ show });
@@ -25,10 +26,6 @@ function EvaluateModal({ show, setShow }) {
 		},
 		{ Header: 'Volume Served', accessor: 'total_teus' },
 	];
-
-	const handleSubmit = () => {
-		UpdateOrganizationServiceExpertiseFeedback();
-	};
 
 	return (
 		<div>
@@ -78,7 +75,7 @@ function EvaluateModal({ show, setShow }) {
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
-						onClick={handleSubmit}
+						onClick={() => updateOrganizationServiceExpertiseFeedback()}
 						disabled={
 						feedback?.length < FIFTY
 						|| checkbox === ''

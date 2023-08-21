@@ -94,6 +94,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
+	{
+		api          : 'list_organization_market_feedbacks',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 
 ];
 export default apis;

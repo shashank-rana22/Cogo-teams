@@ -10,7 +10,7 @@ function Item({ title, verify, setOpen, type }) {
 			<div className={styles.title}>{title}</div>
 			<div className={styles.status_button}>
 				{{
-					accepted:
+					verified:
 						(
 							<div className={styles.status_text}>
 								<IcCFtick width={20} height={20} fill="#5CAF3F" />
@@ -35,7 +35,6 @@ function Item({ title, verify, setOpen, type }) {
 
 					</div>
 				)}
-
 				<Button
 					className={styles.button}
 					size="md"
@@ -43,6 +42,7 @@ function Item({ title, verify, setOpen, type }) {
 					onClick={() => {
 						setOpen(type);
 					}}
+					disabled={verify?.[type] !== 'pending'}
 				>
 					Open
 

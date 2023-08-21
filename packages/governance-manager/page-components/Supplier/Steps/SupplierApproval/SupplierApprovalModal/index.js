@@ -1,12 +1,15 @@
 /* eslint-disable no-magic-numbers */
-import { Modal, Button, Textarea } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 
 import useUpdateOrganizationMarketFeedbackVerificationStatus
 	from '../hooks/ModalHooks/useUpdateOrganizationMarketFeedbackVerificationStatus';
 import useUpdateOrganizationServiceExpertiseManagerStatus
 	from '../hooks/ModalHooks/UseUpdateOrganizationServiceExpertiseManagerStatus';
+import useCreateOrganizationEvaluation from '../hooks/useCreateOrganizationEvaluation';
 
+import NeedAnalysisData from './NeedAnalysisData';
 import styles from './styles.module.css';
+import SupplierEvaluationData from './SupplierEvaluationData';
 
 function SupplierApprovalModal({
 	open, setOpen,
@@ -30,16 +33,24 @@ function SupplierApprovalModal({
 		setOpen,
 	});
 
+	const { createOrganizationEvaluation } = useCreateOrganizationEvaluation({
+		organization_id,
+		organization_service_id: service_id,
+		setOpen,
+		getOrganizationSupplierVerificationDetails,
+
+	});
+
 	const onClose = () => {
 		setOpen(null);
 	};
 	const handleVerify = () => {
 		if (open === 'need_analysis_report') {
-			updateOrganizationServiceExpertiseManagerStatus({ manager_approval_status: 'accepted' });
+			updateOrganizationServiceExpertiseManagerStatus({ manager_approval_status: 'verified' });
 		} else if (open === 'market_feedback_report') {
-			updateOrganizationMarketFeedbackVerificationStatus({ verification_status: 'accepted' });
+			updateOrganizationMarketFeedbackVerificationStatus({ verification_status: 'verified' });
 		} else if (open === 'evaluation_paramenter_report') {
-			console.log('ks');
+			createOrganizationEvaluation({ verification_status: 'verified' });
 		}
 	};
 	const handleReject = () => {
@@ -47,23 +58,35 @@ function SupplierApprovalModal({
 			updateOrganizationServiceExpertiseManagerStatus({ manager_approval_status: 'rejected' });
 		} else if (open === 'market_feedback_report') {
 			updateOrganizationMarketFeedbackVerificationStatus({ verification_status: 'rejected' });
+		} else if (open === 'evaluation_paramenter_report') {
+			createOrganizationEvaluation({ verification_status: 'rejected' });
 		}
 	};
 
 	return (
-		<Modal size="md" show={open} onClose={() => { onClose(); }} placement="centre">
+		<Modal size="lg" show={open} onClose={() => { onClose(); }} placement="centre">
 			<Modal.Header title="Supplier Approval" className={styles.header} />
 			<div className={styles.header} />
 			<Modal.Body className={styles.body}>
-				<div className={styles.text_middle}>Need Analysis Report</div>
-				<Textarea
-					name="a4"
-					size="md"
-					defaultValue=""
-					placeholder=""
-					rows={4}
-					style={{ height: '75%', marginBottom: '34px' }}
-				/>
+				<div className={styles.text_middle}>
+					{{
+						need_analysis_report         : 'Need Analysis Report',
+						evaluation_paramenter_report : 'Evaluation parameter Report',
+					}[open]}
+
+				</div>
+				{{
+					need_analysis_report:	<NeedAnalysisData
+						service_type={service_type}
+						organization_id={organization_id}
+						id={service_id}
+					/>,
+					evaluation_paramenter_report: <SupplierEvaluationData
+						organization_id={organization_id}
+						id={service_id}
+					/>,
+
+				}[open]}
 			</Modal.Body>
 			<Modal.Footer style={{ gap: '15px' }}>
 				<Button onClick={handleVerify} style={{ backgroundColor: '#ABCD62' }}>Verify</Button>

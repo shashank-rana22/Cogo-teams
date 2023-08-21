@@ -1,13 +1,17 @@
 import { useRequest } from '@cogoport/request';
 
-function useUpdateOrganizationServiceExpertiseFeedback({ show, feedback, service_requirement, setShow }) {
+function useUpdateOrganizationServiceExpertiseFeedback({
+	show,
+	feedback, service_requirement, setShow,
+	getOrganizationExpertiseSuppliers,
+}) {
 	const FIFTY = 50;
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_organization_service_expertise_feedback',
 	}, { manual: true });
 
-	const UpdateOrganizationServiceExpertiseFeedback = async () => {
+	const updateOrganizationServiceExpertiseFeedback = async () => {
 		try {
 			if (feedback?.length >= FIFTY && service_requirement !== '') {
 				await trigger({
@@ -18,6 +22,7 @@ function useUpdateOrganizationServiceExpertiseFeedback({ show, feedback, service
 						status: 'active',
 					},
 				});
+				getOrganizationExpertiseSuppliers();
 				setShow('');
 			}
 		} catch (err) {
@@ -27,7 +32,7 @@ function useUpdateOrganizationServiceExpertiseFeedback({ show, feedback, service
 	return {
 		data,
 		loading,
-		UpdateOrganizationServiceExpertiseFeedback,
+		updateOrganizationServiceExpertiseFeedback,
 	};
 }
 export default useUpdateOrganizationServiceExpertiseFeedback;

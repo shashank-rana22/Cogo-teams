@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 import { items } from './utils/supplier-utils';
 
 function Supplier() {
-	const [status, setStatus] = useState('supplier_approval');
+	const [status, setStatus] = useState('organization_approval');
 	const { query } = useRouter();
 	const { id } = query;
 	const { data: supplierData, getOrganizationService } = useGetOrganizationService({ id, setStatus });
@@ -28,7 +28,6 @@ function Supplier() {
 				items={items}
 				className={styles.stepper}
 			/>
-
 			{{
 				need_analysis: <NeedAnalysis
 					organization_id={supplierData?.organization_id}
@@ -52,8 +51,7 @@ function Supplier() {
 					setStatus={setStatus}
 					getOrganizationService={getOrganizationService}
 				/>,
-				due_dilligance    : <SupplierApproval setStatus={setStatus} />,
-				supplier_approval : <SupplierApproval
+				organization_approval: <SupplierApproval
 					setStatus={setStatus}
 					id={id}
 					organization_id={supplierData?.organization_id}

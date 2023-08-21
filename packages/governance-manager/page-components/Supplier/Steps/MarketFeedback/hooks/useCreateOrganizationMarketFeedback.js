@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 
 const useCreateOrganizationMarketFeedback = ({
-	UpdateOrganizationService,
+	updateOrganizationService,
 	service_id,
 	service_type,
 	organization_id,
@@ -11,19 +11,34 @@ const useCreateOrganizationMarketFeedback = ({
 		url    : '/create_organization_market_feedback',
 	}, { manual: true });
 
-	const createMarketFeedback = async (values) => {
+	const createMarketFeedbackActive = async (values) => {
 		await trigger({
 			params: {
 				service_id,
 				service_type,
-				users: values?.emails,
+				users  : values?.emails,
+				status : 'active',
 				organization_id,
 			},
 		});
-		await UpdateOrganizationService();
+		await updateOrganizationService();
 	};
+
+	const createMarketFeedbackDraft = async (values) => {
+		await trigger({
+			params: {
+				service_id,
+				service_type,
+				users  : values?.emails,
+				status : 'draft',
+				organization_id,
+			},
+		});
+	};
+
 	return {
-		createMarketFeedback,
+		createMarketFeedbackActive,
+		createMarketFeedbackDraft,
 		data,
 		loading,
 	};

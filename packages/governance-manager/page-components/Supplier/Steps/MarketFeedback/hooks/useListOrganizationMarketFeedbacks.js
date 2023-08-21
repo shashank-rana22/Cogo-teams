@@ -1,0 +1,31 @@
+import { useRequest } from '@cogoport/request';
+import { useEffect } from 'react';
+
+const useListOrganizationMarketFeedbacks = ({ organization_id, service_id }) => {
+	const [{ data, loading }, trigger] = useRequest({
+		method : 'get',
+		url    : '/list_organization_market_feedbacks',
+	}, { manual: true });
+
+	const listOrganizationMarketFeedbacks = async () => {
+		await trigger({
+			params: {
+				filters: {
+					organization_id,
+					service_id,
+					status: ['active', 'draft'],
+				},
+			},
+		});
+	};
+	useEffect(() => {
+		listOrganizationMarketFeedbacks();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+	return {
+		listOrganizationMarketFeedbacks,
+		data: data?.list,
+		loading,
+	};
+};
+export default useListOrganizationMarketFeedbacks;

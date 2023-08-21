@@ -6,7 +6,7 @@ function useUpdateOrganizationService({ organization_id, stage_of_approval, serv
 		url    : '/update_organization_service',
 	}, { manual: true });
 
-	const UpdateOrganizationService = async () => {
+	const updateOrganizationService = async () => {
 		try {
 			await trigger({
 				params: {
@@ -23,7 +23,7 @@ function useUpdateOrganizationService({ organization_id, stage_of_approval, serv
 	return {
 		data,
 		loading,
-		UpdateOrganizationService,
+		updateOrganizationService,
 	};
 }
 

@@ -1,18 +1,17 @@
 import { useRequest } from '@cogoport/request';
 
-const ZERO = 0;
-
 function useCreateOrganizationEvaluation({
 	organization_id,
 	organization_service_id,
 	setOpen,
+	getOrganizationSupplierVerificationDetails,
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/create_organization_evaluation',
 	}, { manual: true });
 
-	const CreateOrganizationEvaluation = async ({ verification_status }) => {
+	const createOrganizationEvaluation = async ({ verification_status }) => {
 		try {
 			await trigger({
 				params: {
@@ -21,7 +20,8 @@ function useCreateOrganizationEvaluation({
 					verification_status,
 				},
 			});
-			setOpen(ZERO);
+			await getOrganizationSupplierVerificationDetails();
+			setOpen(null);
 		} catch (err) {
 			console.log(err);
 		}
@@ -29,7 +29,7 @@ function useCreateOrganizationEvaluation({
 	return {
 		data,
 		loading,
-		CreateOrganizationEvaluation,
+		createOrganizationEvaluation,
 	};
 }
 

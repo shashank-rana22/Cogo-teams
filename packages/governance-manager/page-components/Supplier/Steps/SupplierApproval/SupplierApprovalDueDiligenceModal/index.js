@@ -16,7 +16,7 @@ import {
 
 const ZERO = 0;
 const ONE = 1;
-const TWO = 1;
+const TWO = 2;
 
 function SupplierApprovalDueDiligenceModal({
 	open, setOpen,
@@ -24,7 +24,7 @@ function SupplierApprovalDueDiligenceModal({
 }) {
 	const {
 		data,
-	} = useGetOrganizationDueDiligence();
+	} = useGetOrganizationDueDiligence({ organization_id });
 
 	const { UpdateOrganizationDueDiligenceStatus } = useUpdateOrganizationDueDiligence({
 		organization_due_diligence_id: data?.id,
@@ -38,7 +38,7 @@ function SupplierApprovalDueDiligenceModal({
 		setOpen(ZERO);
 	};
 	const handleVerify = () => {
-		UpdateOrganizationDueDiligenceStatus({ manager_approval_status: 'accepted' });
+		UpdateOrganizationDueDiligenceStatus({ manager_approval_status: 'verified' });
 		console.log('Hii');
 	};
 	const handleReject = () => {
@@ -214,7 +214,7 @@ function SupplierApprovalDueDiligenceModal({
 						&& (
 							<Button onClick={nextClick}>Next</Button>
 						)
-					}
+				}
 				{
 						state === TWO
 						&& (

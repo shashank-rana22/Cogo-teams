@@ -1,0 +1,29 @@
+import { Table } from '@cogoport/components';
+
+import useGetOrganizationServiceSuppliers from '../../../NeedAnalysis/hooks/useListOrganizationExpertiseSuppliers';
+import { columns } from '../../../NeedAnalysis/utils/need-analysis-utils';
+
+import styles from './styles.module.css';
+
+function NeedAnalysisData({ setShow, service_type, id, organization_id }) {
+	const {
+		data: serviceExpertiseData,
+	} = useGetOrganizationServiceSuppliers(
+		{
+			organization_id,
+			service_type,
+			page       : 1,
+			service_id : id,
+		},
+	);
+	if (serviceExpertiseData) {
+		return (
+			<Table
+				columns={columns({ setShow, service_type, isForApproval: true })}
+				data={serviceExpertiseData}
+				className={styles.table}
+			/>
+		);
+	}
+}
+export default NeedAnalysisData;
