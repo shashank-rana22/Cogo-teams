@@ -62,7 +62,6 @@ function ServiceWiseStats({
 							showBack
 							onBack={() => setActiveService('')}
 						/>
-
 					</div>
 
 				</div>

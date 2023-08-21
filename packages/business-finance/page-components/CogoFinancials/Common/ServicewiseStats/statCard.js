@@ -1,10 +1,19 @@
 import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React from 'react';
+import { isEmpty } from '@cogoport/utils';
+import dynamic from 'next/dynamic';
+import React, { useContext } from 'react';
 
 import formatCount from '../../utils/formatCount';
+import { TourContext } from '../Contexts';
+import { SINGLE_SERVICE_STEPS } from '../tourSteps';
 
 import styles from './styles.module.css';
+
+const Tour = dynamic(
+	() => import('reactour'),
+	{ ssr: false },
+);
 
 const DEFAULT_INDEX = 1;
 const MINIMUM_PROFIT = 0;
@@ -21,6 +30,7 @@ const displayAmount = (amount, currency) => formatAmount({
 });
 
 function StatCard({ mappingCards = [], service = '', isMain = false, singleServiceData = [], taxType = '' }) {
+	const { tour, setTour } = useContext(TourContext);
 	const { currency, invoiceCount, jobCount } = singleServiceData;
 
 	const getProfitColor = ({ amount, isProfit }) => {
@@ -33,7 +43,18 @@ function StatCard({ mappingCards = [], service = '', isMain = false, singleServi
 	};
 
 	return (
-		<div className={cl`${styles.statscontainer} ${!isMain && styles.border}`}>
+		<div
+			className={cl`${styles.statscontainer} ${!isMain && styles.border}`}
+			data-tour={!isMain ? 'single-service' : null}
+		>
+			<Tour
+				steps={SINGLE_SERVICE_STEPS}
+				isOpen={tour && !isEmpty(mappingCards)}
+				onRequestClose={() => setTour(false)}
+				maskClassName={styles.tour_mask}
+				startAt={0}
+				closeWithMask={false}
+			/>
 			{isMain ? null : (
 				<div className={styles.service}>
 					{service}

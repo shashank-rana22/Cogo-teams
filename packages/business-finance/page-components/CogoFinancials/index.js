@@ -3,12 +3,13 @@ import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlatformDemo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl/index.tsx';
 
 import ActiveShipmentCard from './ActiveShipmentCard/index';
 import ClosedShipmentCard from './ClosedShipmentCard/index';
+import { TourContext } from './Common/Contexts/index';
 import DemoTour from './Common/DemoTour/index';
 import StatsCard from './Common/StatsCard';
 import { getTimeRangeOptions, INFO_CONTENT } from './constants';
@@ -60,199 +61,211 @@ function CogoFinancials() {
 		if (!showShipmentList) { setTableFilters({}); }
 	}, [showShipmentList]);
 
-	return (
-		<div>
-			<DemoTour
-				tour={tour}
-				setTour={setTour}
-				activeShipmentCard={activeShipmentCard}
-			/>
-			<div className={styles.header}>
-				<div
-					role="presentation"
-					onClick={handleClick}
-				>
-					<h2 className={styles.main_heading} data-tour="main-heading">COGO Financials</h2>
+	const getTourProps = useMemo(() => ({
+		tour,
+		setTour,
+	}), [tour]);
 
-				</div>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<Button
-						onClick={() => setTour(true)}
-						className={styles.tour_btn}
-					>
-						Start Tour
-						<IcMPlatformDemo height={14} width={14} style={{ marginLeft: '8px' }} />
-					</Button>
-					<Toggle
-						name="taxType"
-						size="md"
-						offLabel="Pre Tax"
-						onLabel="Post Tax"
-						onChange={() => setIsPreTax(!isPreTax)}
-					/>
+	const handleTourClick = () => {
+		setTour(true);
+		handleClick();
+	};
+
+	return (
+		<TourContext.Provider value={getTourProps}>
+			<div>
+				<DemoTour
+					tour={tour}
+					setTour={setTour}
+					activeShipmentCard={activeShipmentCard}
+				/>
+				<div className={styles.header}>
 					<div
-						className={styles.segmented_section}
+						role="presentation"
+						onClick={handleClick}
 					>
-						<SegmentedControl
-							options={getTimeRangeOptions({ customDate, setCustomDate })}
-							activeTab={timeRange}
-							setActiveTab={setTimeRange}
-							color="#ED3726"
-							background="#FFE69D"
-							style={{ overflow: 'visible' }}
+						<h2 className={styles.main_heading} data-tour="main-heading">COGO Financials</h2>
+
+					</div>
+					<div style={{ display: 'flex', alignItems: 'center' }}>
+						<Button
+							onClick={handleTourClick}
+							className={styles.tour_btn}
+						>
+							Start Tour
+							<IcMPlatformDemo height={14} width={14} style={{ marginLeft: '8px' }} />
+						</Button>
+						<Toggle
+							name="taxType"
+							size="md"
+							offLabel="Pre Tax"
+							onLabel="Post Tax"
+							onChange={() => setIsPreTax(!isPreTax)}
+						/>
+						<div
+							className={styles.segmented_section}
+						>
+							<SegmentedControl
+								options={getTimeRangeOptions({ customDate, setCustomDate })}
+								activeTab={timeRange}
+								setActiveTab={setTimeRange}
+								color="#ED3726"
+								background="#FFE69D"
+								style={{ overflow: 'visible' }}
+							/>
+						</div>
+						<MultipleFilters
+							filter={filter}
+							setFilter={setFilter}
+							entity={entity}
+						/>
+						<Select
+							value={entity}
+							onChange={setEntity}
+							options={ENTITY_OPTIONS}
+							style={{ width: '320px' }}
 						/>
 					</div>
-					<MultipleFilters
-						filter={filter}
-						setFilter={setFilter}
-						entity={entity}
-					/>
-					<Select
-						value={entity}
-						onChange={setEntity}
-						options={ENTITY_OPTIONS}
-						style={{ width: '320px' }}
-					/>
 				</div>
-			</div>
 
-			{isEmpty(activeShipmentCard) ? (
-				<div
-					className={styles.top_card}
-				>
+				{isEmpty(activeShipmentCard) ? (
 					<div
-						className={styles.left_shipments_section}
+						className={styles.top_card}
 					>
-						<StatsCard
-							heading="Ongoing Shipments"
-							cardId="ongoing"
-							setActiveShipmentCard={setActiveShipmentCard}
-							cardData={ongoingData}
-							loading={ongoingLoading}
-							taxType={taxType}
-							infoContent={INFO_CONTENT.ongoingShipments}
-						/>
+						<div
+							className={styles.left_shipments_section}
+						>
+							<StatsCard
+								heading="Ongoing Shipments"
+								cardId="ongoing"
+								setActiveShipmentCard={setActiveShipmentCard}
+								cardData={ongoingData}
+								loading={ongoingLoading}
+								taxType={taxType}
+								infoContent={INFO_CONTENT.ongoingShipments}
+							/>
+							<ClosedShipmentCard
+								isDeviationVisible={false}
+								type="Operationally"
+								cardId="operational"
+								setActiveShipmentCard={setActiveShipmentCard}
+								cardData={operationalData}
+								loading={operationalLoading}
+								taxType={taxType}
+								infoContent={INFO_CONTENT.operationallyClosed}
+								isHomeCard
+							/>
+						</div>
 						<ClosedShipmentCard
-							isDeviationVisible={false}
-							type="Operationally"
-							cardId="operational"
+							type="Financially"
+							cardId="financial"
 							setActiveShipmentCard={setActiveShipmentCard}
-							cardData={operationalData}
-							loading={operationalLoading}
+							cardData={financialData}
+							loading={financialLoading}
 							taxType={taxType}
-							infoContent={INFO_CONTENT.operationallyClosed}
+							infoContent={INFO_CONTENT.financiallyClosed}
 							isHomeCard
 						/>
 					</div>
-					<ClosedShipmentCard
-						type="Financially"
-						cardId="financial"
-						setActiveShipmentCard={setActiveShipmentCard}
-						cardData={financialData}
-						loading={financialLoading}
-						taxType={taxType}
-						infoContent={INFO_CONTENT.financiallyClosed}
-						isHomeCard
-					/>
-				</div>
-			) : (
-				<div>
-					<ActiveShipmentCard
-						setActiveShipmentCard={setActiveShipmentCard}
-						activeShipmentCard={activeShipmentCard}
-						isPreTax={isPreTax}
-						setShowShipmentList={setShowShipmentList}
-						showShipmentList={showShipmentList}
-						entity={entity}
-						timeRange={timeRange}
-						filter={filter}
-						operationalData={operationalData}
-						financialData={financialData}
-						taxType={taxType}
-						mainCardData={ongoingData}
-						customDate={customDate}
-						activeBar={activeBar}
-						setActiveBar={setActiveBar}
-						setTableFilters={setTableFilters}
-					/>
-					<div className={styles.remaining_shipment_cards}>
+				) : (
+					<div>
+						<ActiveShipmentCard
+							setActiveShipmentCard={setActiveShipmentCard}
+							activeShipmentCard={activeShipmentCard}
+							isPreTax={isPreTax}
+							setShowShipmentList={setShowShipmentList}
+							showShipmentList={showShipmentList}
+							entity={entity}
+							timeRange={timeRange}
+							filter={filter}
+							operationalData={operationalData}
+							financialData={financialData}
+							taxType={taxType}
+							mainCardData={ongoingData}
+							customDate={customDate}
+							activeBar={activeBar}
+							setActiveBar={setActiveBar}
+							setTableFilters={setTableFilters}
+						/>
+						<div className={styles.remaining_shipment_cards}>
 
-						{activeShipmentCard !== 'ongoing' && !showShipmentList && (
-							<div className={styles.single_additional}>
-								<StatsCard
-									heading="Ongoing Shipments"
-									cardId="ongoing"
-									setActiveShipmentCard={setActiveShipmentCard}
-									cardData={ongoingData}
-									loading={ongoingLoading}
-									taxType={taxType}
-									infoContent={INFO_CONTENT.ongoingShipments}
-									isAdditonalView
-								/>
-							</div>
-						)}
+							{activeShipmentCard !== 'ongoing' && !showShipmentList && (
+								<div className={styles.single_additional}>
+									<StatsCard
+										heading="Ongoing Shipments"
+										cardId="ongoing"
+										setActiveShipmentCard={setActiveShipmentCard}
+										cardData={ongoingData}
+										loading={ongoingLoading}
+										taxType={taxType}
+										infoContent={INFO_CONTENT.ongoingShipments}
+										isAdditonalView
+									/>
+								</div>
+							)}
 
-						{activeShipmentCard !== 'operational' && !showShipmentList && (
-							<div className={styles.single_additional}>
-								<ClosedShipmentCard
-									isDeviationVisible={false}
-									type="Operationally"
-									cardId="operational"
-									setActiveShipmentCard={setActiveShipmentCard}
-									isAdditonalView
-									cardData={operationalData}
-									loading={operationalLoading}
-									taxType={taxType}
-									setActiveBar={setActiveBar}
-									infoContent={INFO_CONTENT.operationallyClosed}
-								/>
-							</div>
-						)}
+							{activeShipmentCard !== 'operational' && !showShipmentList && (
+								<div className={styles.single_additional}>
+									<ClosedShipmentCard
+										isDeviationVisible={false}
+										type="Operationally"
+										cardId="operational"
+										setActiveShipmentCard={setActiveShipmentCard}
+										isAdditonalView
+										cardData={operationalData}
+										loading={operationalLoading}
+										taxType={taxType}
+										setActiveBar={setActiveBar}
+										infoContent={INFO_CONTENT.operationallyClosed}
+									/>
+								</div>
+							)}
 
-						{activeShipmentCard !== 'financial' && !showShipmentList && (
-							<div className={styles.single_additional}>
-								<ClosedShipmentCard
-									type="Financially"
-									cardId="financial"
-									setActiveShipmentCard={setActiveShipmentCard}
-									isAdditonalView
-									cardData={financialData}
-									loading={financialLoading}
-									taxType={taxType}
-									setActiveBar={setActiveBar}
-									infoContent={INFO_CONTENT.financiallyClosed}
-								/>
-							</div>
-						)}
+							{activeShipmentCard !== 'financial' && !showShipmentList && (
+								<div className={styles.single_additional}>
+									<ClosedShipmentCard
+										type="Financially"
+										cardId="financial"
+										setActiveShipmentCard={setActiveShipmentCard}
+										isAdditonalView
+										cardData={financialData}
+										loading={financialLoading}
+										taxType={taxType}
+										setActiveBar={setActiveBar}
+										infoContent={INFO_CONTENT.financiallyClosed}
+									/>
+								</div>
+							)}
+						</div>
 					</div>
-				</div>
-			)}
+				)}
 
-			{showShipmentList && (
-				<div style={{ background: '#fff' }}>
-					<Filters
-						setTableFilters={setTableFilters}
-						tableFilters={tableFilters}
-						activeBar={activeBar}
-					/>
-					<TableComp
-						activeShipmentCard={activeShipmentCard}
-						entity={entity}
-						filter={filter}
-						activeBar={activeBar}
-						timeRange={timeRange}
-						customDate={customDate}
-						setTableFilters={setTableFilters}
-						tableFilters={tableFilters}
-						statsType={activeShipmentCard === 'financial'
-							? 'FINANCE_CLOSED' : 'OPR_CLOSED'}
-						taxType={taxType}
-						type={activeShipmentCard === 'financial'
-							? 'Financially' : 'Operationally'}
-					/>
-				</div>
-			)}
-		</div>
+				{showShipmentList && (
+					<div style={{ background: '#fff' }}>
+						<Filters
+							setTableFilters={setTableFilters}
+							tableFilters={tableFilters}
+							activeBar={activeBar}
+						/>
+						<TableComp
+							activeShipmentCard={activeShipmentCard}
+							entity={entity}
+							filter={filter}
+							activeBar={activeBar}
+							timeRange={timeRange}
+							customDate={customDate}
+							setTableFilters={setTableFilters}
+							tableFilters={tableFilters}
+							statsType={activeShipmentCard === 'financial'
+								? 'FINANCE_CLOSED' : 'OPR_CLOSED'}
+							taxType={taxType}
+							type={activeShipmentCard === 'financial'
+								? 'Financially' : 'Operationally'}
+						/>
+					</div>
+				)}
+			</div>
+		</TourContext.Provider>
 	);
 }
 
