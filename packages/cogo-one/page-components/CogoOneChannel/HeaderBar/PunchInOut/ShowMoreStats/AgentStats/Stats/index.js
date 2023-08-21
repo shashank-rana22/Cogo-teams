@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 const MIN_COUNT = 0;
 const MIN_COUNT_FOUR = 5;
 const MIN_RATING = 3;
+const ESCALATE_DEFAULT_CHAT_COUNT = 0;
 
 function Stats({
 	totalQuotationSend = 0,
@@ -26,11 +27,12 @@ function Stats({
 	const { chat_stats = {} } = statsData || {};
 	const {
 		rating = [],
-		avg_response_time : avgResponseTime = {}, rate_revert : rateRevert = {}, agent_msg_stats = {},
+		avg_response_time : avgResponseTime = {}, rate_revert : rateRevert = 0, agent_msg_stats = {},
 	} = AgentStatsData || {};
 
 	const { data, escalateLoading } = useGetAgentTimelineEscalate({ viewType, timePeriodValue });
-	console.log('data:', data);
+
+	const escalateCount = data?.total_count || ESCALATE_DEFAULT_CHAT_COUNT;
 
 	const { avg_rating: averageRating = '' } = rating || [];
 
@@ -64,7 +66,7 @@ function Stats({
 		no_of_rate_sheets_received : '0',
 		avg_response_time          : avgResponseTime,
 		emails_send_count          : emailCount,
-		// escalate_chats_count
+		escalate_chats_count       : escalateCount,
 
 	};
 

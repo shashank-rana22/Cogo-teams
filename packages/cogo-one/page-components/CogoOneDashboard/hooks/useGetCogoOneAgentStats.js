@@ -10,11 +10,12 @@ const DURATION_TYPE = {
 };
 
 const VIEW_TYPES_WITH_PAYLOAD = [
-	'Sales',
-	'Support',
+	'sales',
+	'support',
 	'cp_support',
-	'Sales_admin',
-	'Support_admin',
+	'sales_admin',
+	'support_admin',
+	'cogoone_admin',
 ];
 
 const getParams = ({ timeline, startDate, endDate, id, viewType }) => {
@@ -23,7 +24,7 @@ const getParams = ({ timeline, startDate, endDate, id, viewType }) => {
 	if (VIEW_TYPES_WITH_PAYLOAD.some((type) => viewType.includes(type))) {
 		PAYLOAD.supplier_stats_required = false;
 		PAYLOAD.sales_stats_required = true;
-		PAYLOAD.show_agent_activity_graph = false;
+		PAYLOAD.show_agent_activity_graph = true;
 	}
 
 	return {

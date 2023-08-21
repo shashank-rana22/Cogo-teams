@@ -4,6 +4,7 @@ import { IcMDown, IcMArrowDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useState, useEffect, useCallback } from 'react';
 
+import useGetCogoOneAgentStats from '../../../../hooks/useGetOmniChannelStats';
 import useUpdateAgentWorkPreferences from '../../../../hooks/UseUpdateAgentWorkPreferences';
 
 import ShowMoreStats from './ShowMoreStats';
@@ -37,12 +38,11 @@ function PunchInOut({
 	timelineLoading = false,
 	preferenceLoading = false,
 	viewType = '',
-	AgentStatsLoading = false,
-	AgentStatsData = {},
 	timePeriodValue = '',
 	setTimePeriodValue = () => {},
 	firestore = {},
 	userId = '',
+	isPunchPresent = false,
 }) {
 	const { status = '' } = agentStatus || {};
 	const { list = [] } = data || {};
@@ -65,6 +65,11 @@ function PunchInOut({
 		firestore,
 		userId,
 	});
+
+	const {
+		AgentStatsLoading = false,
+		AgentStatsData = {},
+	} = useGetCogoOneAgentStats({ isPunchPresent, timePeriodValue, viewType });
 
 	const shakeButton = () => {
 		setIsShaking(true);
