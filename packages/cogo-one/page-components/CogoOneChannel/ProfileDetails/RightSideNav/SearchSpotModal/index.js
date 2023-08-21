@@ -14,16 +14,17 @@ function SearchSpotModal({
 	openNewTab = () => {},
 	loading = false,
 	formattedMessageData = {},
-	activeMessageCard = {},
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
-	const { email = '', lead_user_details : leadUserDetails = {} } = formattedMessageData || {};
-	const { mobile_no : mobileNo = '', country_code : countryCode = '' } = activeMessageCard || {};
+	const {
+		email = '',
+		lead_user_details : leadUserDetails = {}, mobile_no : mobileNo = '', country_code : countryCode = '',
+	} = formattedMessageData || {};
 	const mobileCountryCode = getMobilePrefixFromCountryCode({ countryCode });
 
 	const mobileNumber = (
-		mobileNo.substr(GLOBAL_CONSTANTS.zeroth_index, mobileCountryCode.length) === mobileCountryCode
-	) ? mobileNo.substr(mobileCountryCode.length) : mobileNo;
+		mobileNo?.substr(GLOBAL_CONSTANTS.zeroth_index, mobileCountryCode.length) === mobileCountryCode
+	) ? mobileNo?.substr(mobileCountryCode.length) : mobileNo;
 
 	const userEmail = email || leadUserDetails?.email;
 

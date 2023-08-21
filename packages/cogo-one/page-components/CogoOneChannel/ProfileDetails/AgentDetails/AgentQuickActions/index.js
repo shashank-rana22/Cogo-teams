@@ -2,31 +2,41 @@ import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import useSubmitOmniChannelKyc from '../../../../../hooks/useSubmitOmniChannelKyc';
+import { getMobilePrefixFromCountryCode } from '../../../../../utils/getMobilePrefixFromCountryCode';
 
 import styles from './styles.module.css';
 
 const COUNTRY_CODE_PREFIX = '%2B';
 
 function AgentQuickActions({
-	userData = {},
 	orgId = '',
 	userId = '',
 	leadUserId = '',
 	organizationData = {},
 	fetchOrganization = () => {},
 	partnerId = '',
+	formattedMessageData = {},
 }) {
-	const { email = '', mobile_number = '', mobile_country_code = '' } = userData || {};
+	const {
+		email = '',
+		lead_user_details : leadUserDetails = {}, mobile_no : mobileNo = '', country_code : countryCode = '',
+	} = formattedMessageData || {};
+	const mobileCountryCode = getMobilePrefixFromCountryCode({ countryCode });
+
+	const mobileNumber = (
+		mobileNo?.substr(GLOBAL_CONSTANTS.zeroth_index, mobileCountryCode.length) === mobileCountryCode
+	) ? mobileNo?.substr(mobileCountryCode.length) : mobileNo;
+
+	const userEmail = email || leadUserDetails?.email;
 
 	const { submitKyc = () => {}, loading = false } = useSubmitOmniChannelKyc();
 
 	const { kyc_status } = organizationData || {};
 
-	const emailParams = email ? `&email=${email}` : '';
-	const countryCodeRegex = GLOBAL_CONSTANTS.regex_patterns.mobile_country_code_format;
-	const countryCode = mobile_country_code?.replace(countryCodeRegex, COUNTRY_CODE_PREFIX);
+	const emailParams = userEmail ? `&email=${userEmail}` : '';
+	const formatCountryCode = COUNTRY_CODE_PREFIX + mobileCountryCode;
 
-	const queryParams = `?mobile=${mobile_number}&mobile_country_code=${countryCode}${emailParams}`;
+	const queryParams = `?mobile=${mobileNumber}&mobile_country_code=${formatCountryCode}${emailParams}`;
 
 	const handleRoute = () => {
 		window.open(`/${partnerId}/create-importer-exporter${queryParams}`, '_blank');

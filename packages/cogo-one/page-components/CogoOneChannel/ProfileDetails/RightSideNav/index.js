@@ -129,7 +129,6 @@ function RightSideNav({
 					openNewTab={openNewTab}
 					loading={loading}
 					formattedMessageData={formattedMessageData}
-					activeMessageCard={activeMessageCard}
 				/>
 			) : null}
 		</>
