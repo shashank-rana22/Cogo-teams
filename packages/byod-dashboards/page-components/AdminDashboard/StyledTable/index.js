@@ -6,10 +6,8 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-function StyledTable({ columns = [], data = [], loading = false, emptyText = 'no data found ' }) {
-	if (isEmpty(data) && !loading) {
-		<EmptyState emptyText={emptyText} />;
-	}
+function StyledTable({ columns = [], data = [], loading = false, emptyText = 'No data found' }) {
+	if (isEmpty(data) && !loading) return <EmptyState emptyText={emptyText} />;
 
 	return (
 		<section className={styles.container}>

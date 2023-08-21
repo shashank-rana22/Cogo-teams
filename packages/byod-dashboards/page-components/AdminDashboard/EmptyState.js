@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function EmptyState({ emptyText = 'no data found' }) {
+function EmptyState({ emptyText = 'No data found' }) {
 	return (
 		<div className={styles.image_container}>
 			<img
