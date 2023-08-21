@@ -26,7 +26,7 @@ import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
-const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
+const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement', 'can_edit_params'];
 const stakeholderConfig = config({ stakeholder: 'DEFAULT_VIEW' });
 
 function Superadmin({ get = {}, activeStakeholder = '' }) {

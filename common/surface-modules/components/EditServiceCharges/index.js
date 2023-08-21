@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function EditServiceCharges(props) {
 	const {
 		controls = [], service_name = '',
-		shipment_id = '', onOptionsChange = () => {}, value, customValues = {},
+		shipment_id = '', onOptionsChange = () => {}, value = [], customValues = {},
 	} = props;
 
 	const [q, setQ] = useState('');
@@ -66,7 +66,8 @@ function EditServiceCharges(props) {
 		if (allOptions.length && onOptionsChange) {
 			onOptionsChange({ [service_name]: allOptions });
 		}
-	}, [allOptions, onOptionsChange, service_name]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [allOptions.length]);
 
 	return (
 		<div>

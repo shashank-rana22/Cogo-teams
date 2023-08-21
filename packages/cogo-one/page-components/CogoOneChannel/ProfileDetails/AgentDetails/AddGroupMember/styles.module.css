@@ -25,3 +25,14 @@
 .select {
 	width: 90%;
 }
+
+.agent_label {
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.lower_label {
+	font-size: 12px;
+	color: #838080;
+}

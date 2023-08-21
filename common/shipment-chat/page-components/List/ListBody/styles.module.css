@@ -1,0 +1,23 @@
+.list_container {
+	height: 390px;
+	overflow: auto;
+
+	:global {
+		.ui_button_container {
+			width: 100%;
+			height: fit-content;
+			padding: 12px 20px;
+			border-bottom: 1px solid #e0e0e0;
+		}
+	}
+}
+
+.custom_loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 4px;
+	font-size: var(--font-size-xl);
+	font-weight: 500;
+	color: var(--color-primary-error-red-2);
+}

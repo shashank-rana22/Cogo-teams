@@ -12,7 +12,7 @@ function getQueryFilterMapping({
 		escalation:
 			[where('chat_status', '==', appliedFilters?.escalation)],
 		chat_tags:
-			[where('chat_tags', 'array-contains', appliedFilters?.chat_tags)],
+			[where('chat_tags', 'array-contains-any', appliedFilters?.chat_tags)],
 		mobile_no:
 			[where('mobile_no', '==', appliedFilters?.mobile_no)],
 		assigned_to:

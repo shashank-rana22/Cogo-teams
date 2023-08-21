@@ -35,6 +35,7 @@ const STAKE_HOLDER_TYPES = [
 	'cost booking executive',
 	'costbooking_ops',
 	'cost booking manager',
+	'ff cost booking executive',
 	'release_desk',
 	'collection_desk',
 ];
@@ -67,6 +68,8 @@ function CollectionPartyDetails({
 
 	const uploadInvoiceAllowed = shipment_data?.stakeholders
 		?.some((ele) => STAKE_HOLDER_TYPES.includes(ele?.stakeholder_type))
+		|| shipment_data?.stakeholder_types
+			?.some((ele) => STAKE_HOLDER_TYPES.includes(ele))
 		|| [
 			geo.uuid.super_admin_id,
 			geo.uuid.admin_id,
