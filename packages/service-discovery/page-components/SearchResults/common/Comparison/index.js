@@ -5,8 +5,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
 import { useState, useEffect } from 'react';
 
-import Contract from '../../common/Contract';
-import ShareToUsers from '../../common/ShareToUsers';
+import Contract from '../Contract';
+import ShareToUsers from '../ShareToUsers';
 
 import ComparisonTable from './ComparisonTable';
 import styles from './styles.module.css';
