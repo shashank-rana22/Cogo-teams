@@ -542,6 +542,15 @@ export default {
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
 			},
+			partner: {
+				bookings: {
+					invoicing: {
+						request_cancel_invoice  : false,
+						request_replace_invoice : false,
+						request_credit_note     : false,
+					},
+				},
+			},
 		},
 	},
 };

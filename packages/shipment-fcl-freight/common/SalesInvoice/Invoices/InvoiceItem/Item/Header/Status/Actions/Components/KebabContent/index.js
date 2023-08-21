@@ -15,7 +15,7 @@ function KebabContent({
 	invoiceData = {},
 	isIRNGenerated = false,
 	setShowModal = () => {},
-	showCancel = false,
+	showCancelOptions = {},
 }) {
 	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
@@ -53,7 +53,7 @@ function KebabContent({
 									invoice={invoice}
 									commonActions={commonActions}
 									editInvoicesVisiblity={editInvoicesVisiblity}
-									showCancel={showCancel}
+									showCancelOptions={showCancelOptions}
 								/>
 							)}
 							onClickOutside={() => setShow(false)}
