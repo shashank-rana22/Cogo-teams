@@ -144,6 +144,31 @@
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "保存",
     "roles_and_permission_crm_dashboard_button_text_allow_navigation": "允许导航",
 
-    "roles_and_permission_crm_dashboard_permission_module": "根据您的需要配置权限并保存。要批量修改权限，请单击上方的功能单选按钮"
+    "roles_and_permission_crm_dashboard_permission_module": "根据您的需要配置权限并保存。要批量修改权限，请单击上方的功能单选按钮",
+
+    "roles_and_permission_create_role_modal_heading": "创建角色",
+    "roles_and_permission_create_role_modal_sub_heading": "设置角色名称和角色描述",
+    "roles_and_permission_create_role_modal_role_name": "角色名称",
+    "roles_and_permission_create_role_modal_role_name_placeholder": "输入角色名称",
+    "roles_and_permission_create_role_modal_role_name_rules_required": "角色名称不能为空",
+    "roles_and_permission_create_role_modal_role_short_name": "角色简称",
+    "roles_and_permission_create_role_modal_role_short_name_placeholder": "输入角色简称",
+    "roles_and_permission_create_role_modal_role_short_name_rules_required": "角色简称不能为空",
+    "roles_and_permission_create_role_modal_stakeholder_id_partner": "合作伙伴",
+    "roles_and_permission_create_role_modal_stakeholder_id_partner_placeholder": "选择合作伙伴",
+    "roles_and_permission_create_role_modal_stakeholder_id_partner_rules_required": "合作伙伴不能为空",
+    "roles_and_permission_create_role_modal_role_function_label": "角色功能",
+    "roles_and_permission_create_role_modal_role_function_label_placeholder": "选择角色功能",
+    "roles_and_permission_create_role_modal_role_function_rules_required": "功能不能为空",
+    "roles_and_permission_create_role_modal_role_sub_functions": "角色子功能",
+    "roles_and_permission_create_role_modal_role_sub_functions_placeholder": "选择角色子功能",
+    "roles_and_permission_create_role_modal_role_hierarchy_level_label": "层级",
+    "roles_and_permission_create_role_modal_role_hierarchy_level_placeholder": "选择层级",
+    "roles_and_permission_create_role_modal_role_hierarchy_level_rules_required": "请选择层级",
+    "roles_and_permission_create_role_modal_role_remarks_label": "描述",
+    "roles_and_permission_create_role_modal_role_remarks_placeholder": "输入角色描述",
+    "roles_and_permission_create_role_modal_role_remarks_rules_requried": "描述不能为空",
+    "roles_and_permission_crm_dashboard_btm_text_create": "创造"
+
     
 }

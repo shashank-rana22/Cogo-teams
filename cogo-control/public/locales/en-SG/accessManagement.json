@@ -142,6 +142,28 @@
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "Save",
     "roles_and_permission_crm_dashboard_button_text_allow_navigation": "Allow Navigation",
 
-    "roles_and_permission_crm_dashboard_permission_module": "Configure your permissions according to you and save. For modifying permissions in bulk click on feature radio buttons above"
-    
+    "roles_and_permission_crm_dashboard_permission_module": "Configure your permissions according to you and save. For modifying permissions in bulk click on feature radio buttons above",
+    "roles_and_permission_create_role_modal_heading": "Create Role",
+    "roles_and_permission_create_role_modal_sub_heading": "Set role name and role description",
+    "roles_and_permission_create_role_modal_role_name": "Role Name",
+    "roles_and_permission_create_role_modal_role_name_placeholder": "Enter Role Name",
+    "roles_and_permission_create_role_modal_role_name_rules_required": "Role Name is required",
+    "roles_and_permission_create_role_modal_role_short_name": "Role Short Name",
+    "roles_and_permission_create_role_modal_role_short_name_placeholder": "Enter Role Short Name",
+    "roles_and_permission_create_role_modal_role_short_name_rules_required": "Role Short Name is required",
+    "roles_and_permission_create_role_modal_stakeholder_id_partner": "Partner",
+    "roles_and_permission_create_role_modal_stakeholder_id_partner_placeholder": "Choose Partner",
+    "roles_and_permission_create_role_modal_stakeholder_id_partner_rules_required": "Partner is required",
+    "roles_and_permission_create_role_modal_role_function_label": "Role Functions",
+    "roles_and_permission_create_role_modal_role_function_label_placeholder": "Choose role functions",
+    "roles_and_permission_create_role_modal_role_function_rules_required": "Function is required",
+    "roles_and_permission_create_role_modal_role_sub_functions": "Role Sub Functions",
+    "roles_and_permission_create_role_modal_role_sub_functions_placeholder": "Choose role sub functions",
+    "roles_and_permission_create_role_modal_role_hierarchy_level_label": "Hierarchy Level",
+    "roles_and_permission_create_role_modal_role_hierarchy_level_placeholder": "Choose Hierarchy Level",
+    "roles_and_permission_create_role_modal_role_hierarchy_level_rules_required": "Choose Hierarchy Level",
+    "roles_and_permission_create_role_modal_role_remarks_label": "Description",
+    "roles_and_permission_create_role_modal_role_remarks_placeholder": "Enter role description",
+    "roles_and_permission_create_role_modal_role_remarks_rules_requried": "Description is required",
+    "roles_and_permission_crm_dashboard_btm_text_create": "Create"
 }

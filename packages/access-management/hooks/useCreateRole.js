@@ -8,6 +8,7 @@ import { controls } from '../configurations/create-controls';
 const useCreateRole = ({
 	onChangeShowCreateRoleModal = () => {},
 	redirect = () => {},
+	t = () => {},
 }) => {
 	const formProps = useForm();
 
@@ -47,7 +48,7 @@ const useCreateRole = ({
 		initialCall: false,
 	});
 
-	const modifiedControls = controls(partnerOptions);
+	const modifiedControls = controls(partnerOptions, t);
 
 	return {
 		controls      : modifiedControls,

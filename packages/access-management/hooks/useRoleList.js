@@ -225,7 +225,7 @@ const useRoleList = ({ t }) => {
 				<section>
 					<Button size="md" themeType="secondary" onClick={() => redirect(id)}>
 						<IcMEdit style={{ marginRight: 5 }} />
-						Edit
+						{t('accessManagement:roles_and_permission_update_role_edit_button')}
 					</Button>
 				</section>
 			),

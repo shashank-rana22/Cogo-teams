@@ -143,7 +143,28 @@
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_please_wait": "Menyimpan, Mohon tunggu...",
     "roles_and_permission_crm_dashboard_btn_text_modal_second_screen_save": "Simpan",
     "roles_and_permission_crm_dashboard_button_text_allow_navigation": "Izinkan Navigasi",
-    "roles_and_permission_crm_dashboard_permission_module": "Konfigurasi izin Anda sesuai dengan kebutuhan Anda dan simpan. Untuk memodifikasi izin secara massal, klik tombol radio fitur di atas."
-      
-      
+    "roles_and_permission_crm_dashboard_permission_module": "Konfigurasi izin Anda sesuai dengan kebutuhan Anda dan simpan. Untuk memodifikasi izin secara massal, klik tombol radio fitur di atas.",
+    "roles_and_permission_create_role_modal_heading": "Buat Peran",
+    "roles_and_permission_create_role_modal_sub_heading": "Tetapkan nama peran dan deskripsi peran",
+    "roles_and_permission_create_role_modal_role_name": "Nama Peran",
+    "roles_and_permission_create_role_modal_role_name_placeholder": "Masukkan Nama Peran",
+    "roles_and_permission_create_role_modal_role_name_rules_required": "Nama Peran wajib diisi",
+    "roles_and_permission_create_role_modal_role_short_name": "Nama Pendek Peran",
+    "roles_and_permission_create_role_modal_role_short_name_placeholder": "Masukkan Nama Pendek Peran",
+    "roles_and_permission_create_role_modal_role_short_name_rules_required": "Nama Pendek Peran wajib diisi",
+    "roles_and_permission_create_role_modal_stakeholder_id_partner": "Mitra",
+    "roles_and_permission_create_role_modal_stakeholder_id_partner_placeholder": "Pilih Mitra",
+    "roles_and_permission_create_role_modal_stakeholder_id_partner_rules_required": "Mitra wajib diisi",
+    "roles_and_permission_create_role_modal_role_function_label": "Fungsi Peran",
+    "roles_and_permission_create_role_modal_role_function_label_placeholder": "Pilih fungsi peran",
+    "roles_and_permission_create_role_modal_role_function_rules_required": "Fungsi wajib diisi",
+    "roles_and_permission_create_role_modal_role_sub_functions": "Sub Fungsi Peran",
+    "roles_and_permission_create_role_modal_role_sub_functions_placeholder": "Pilih sub fungsi peran",
+    "roles_and_permission_create_role_modal_role_hierarchy_level_label": "Tingkat Hirarki",
+    "roles_and_permission_create_role_modal_role_hierarchy_level_placeholder": "Pilih Tingkat Hirarki",
+    "roles_and_permission_create_role_modal_role_hierarchy_level_rules_required": "Pilih Tingkat Hirarki",
+    "roles_and_permission_create_role_modal_role_remarks_label": "Deskripsi",
+    "roles_and_permission_create_role_modal_role_remarks_placeholder": "Masukkan deskripsi peran",
+    "roles_and_permission_create_role_modal_role_remarks_rules_requried": "Deskripsi wajib diisi",
+    "roles_and_permission_crm_dashboard_btm_text_create": "Membuat"
 }

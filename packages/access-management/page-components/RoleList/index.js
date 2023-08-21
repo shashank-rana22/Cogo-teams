@@ -74,6 +74,7 @@ function RoleList() {
 				showCreateRoleModal={showCreateRoleModal}
 				onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
 				redirect={redirect}
+				t={t}
 			/>
 		</section>
 	);
