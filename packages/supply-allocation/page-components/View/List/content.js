@@ -95,8 +95,8 @@ function Content({
 							display        : 'flex',
 							justifyContent : 'center',
 							alignItems     : 'center',
-							borderBottom   : '1px solid #F9F9F9',
-							background     : ' #FFF',
+							borderBottom   : '1px solid #f9f9f9',
+							background     : ' #fff',
 						}}
 					>
 						{component}

@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
 import PieChart from '../../../../commons/PieChart';
@@ -19,43 +21,64 @@ const HEADINGS_MAPPING = {
 	persona_forecasts        : 'Persona Distribution',
 };
 
-const generateData = (data, type) => Object.keys(data || {}).reduce(
-	(acc, curr) => {
-		const { graphData, count } = acc;
-		if (type === 'weekly_forecasts') {
-			// console.log('ggg', formatDate({
-			// 	date       : curr[0],
-			// 	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			// 	timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-			// 	formatType : 'dateTime',
-			// 	separator  : ' | ',
-			// }));
-			// formatDate({
-			// 	date       : curr[1],
-			// 	dateFormat : GLOBAL_CONSTANTS.formats.date.default,
-			// });
+const generateData = (data, type) => {
+	const isWeeklyForecast = type === 'weekly_forecasts';
+
+	return Object.entries(data || {}).reduce((accumulator, [key, value], index) => {
+		const { graphData, count, legendsData } = accumulator;
+		let label;
+		let color;
+
+		if (isWeeklyForecast) {
+			const dateRange = JSON.parse(key);
+			const [startDate, endDate] = dateRange.map((date) => formatDate({
+				date       : date.split(' ')[GLOBAL_CONSTANTS.zeroth_index],
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+				formatType : 'date',
+			}));
+
+			label = `${startDate} to ${endDate} : ${value}`;
+			color = WEEKY_DISTRIBUTION_COLORS[index];
+		} else {
+			label = `${startCase(key)} ${value}`;
+			color = COLORS_MAPPING?.[type]?.[key];
 		}
+
 		return {
 			graphData: [
 				...graphData,
 				{
-					id    : curr,
-					label : `${startCase(curr)} 
-					${data[curr]}`,
-					value : data[curr],
-					color : COLORS_MAPPING?.[type]?.[curr],
+					id: key,
+					label,
+					value,
+					color,
 				},
 			],
-			count: count + data[curr],
+			legendsData: [
+				...legendsData,
+				{
+					color,
+					label,
+				},
+			],
+			count: count + value,
 		};
-	},
-	{ graphData: [], count: 0 },
-);
+	}, { graphData: [], count: 0, legendsData: [] });
+};
 
 function GraphItem({ data = {}, type = '' }) {
-	const { graphData, count } = generateData(data, type);
+	const { graphData, count, legendsData } = generateData(data, type);
+	console.log('graphData:', graphData);
 
-	return <PieChart data={graphData} count={count} type={type} heading={HEADINGS_MAPPING[type]} />;
+	return (
+		<PieChart
+			data={graphData}
+			count={count}
+			type={type}
+			heading={HEADINGS_MAPPING[type]}
+			legendsData={legendsData}
+		/>
+	);
 }
 
 export default GraphItem;

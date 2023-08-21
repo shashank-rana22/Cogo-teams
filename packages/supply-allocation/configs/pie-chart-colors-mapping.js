@@ -5,12 +5,12 @@ export const PERSONA_DISTRIBUTION_COLORS = {
 	enterprise : '#9BA0CB',
 };
 
-export const WEEKY_DISTRIBUTION_COLORS = {
-	standard  : '#EDFFFF',
-	refer     : '#ACDADF',
-	flat_rack : '#63BEC8',
-	iso_tank  : '#CFEAED',
-};
+export const WEEKY_DISTRIBUTION_COLORS = [
+	'#EDFFFF',
+	'#ACDADF',
+	'#63BEC8',
+	'#CFEAED',
+];
 
 export const CONTAINER_TYPE_DISTRIBUTION_COLORS = {
 	standard  : '#FBD1A6',

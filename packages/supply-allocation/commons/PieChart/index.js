@@ -1,9 +1,11 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 
+import styles from './styles.module.css';
+
 const BORDER_COLOR_MODIFIERS = 0.2;
 const ARC_LABELS_TEXT_COLOR_MODIFIERS = 2;
 
-function PieChart({ data = [], count = 0, heading = '' }) {
+function PieChart({ data = [], count = 0, heading = '', legendsData }) {
 	const colors = data.map((item) => item.color);
 
 	return (
@@ -11,7 +13,7 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 			display       : 'flex',
 			flexDirection : 'column',
 			flexBasis     : '33%',
-			height        : '350px',
+			height        : '450px',
 			background    : '#fff',
 			padding       : '0',
 
@@ -23,9 +25,9 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 				colors={colors}
 				data={data}
 				margin={{
-					top    : 20,
+					top    : 0,
 					right  : 110,
-					bottom : 20,
+					bottom : 140,
 					left   : 110,
 				}}
 				innerRadius={0.8}
@@ -56,11 +58,11 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 						display       : 'flex',
 						flexDirection : 'column',
 						alignItems    : 'center',
-						marginTop     : '-190px',
+						marginTop     : '-290px',
 					}}
 					>
-						<div style={{ fontSize: '10px' }}>Predicted</div>
-						<div style={{ fontSize: '16px' }}>
+						<div className={styles.predicted}>Predicted</div>
+						<div className={styles.count}>
 							{count}
 							{' '}
 							TEU
@@ -68,6 +70,26 @@ function PieChart({ data = [], count = 0, heading = '' }) {
 
 					</div>
 				) : null}
+			<div style={{ marginTop: '100px', display: 'flex', flexWrap: 'wrap' }}>
+				{legendsData.map((legend) => {
+					const { color, label } = legend;
+					return (
+						<div key={label} style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
+							<div style={{
+								width        : '12px',
+								height       : '12px',
+								borderRadius : '50%',
+								background   : `${color}`,
+								marginRight  : '4px',
+							}}
+							/>
+							{label}
+
+						</div>
+					);
+				})}
+
+			</div>
 		</div>
 	);
 }
