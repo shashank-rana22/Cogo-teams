@@ -1,25 +1,6 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 import Promised from './Promised';
 import ServiceProvider from './ServiceProvider';
-
-const C = 100;
-const DEF = GLOBAL_CONSTANTS.zeroth_index;
-const SUB = 20;
-const ANO_SUB = 10;
-
-function GetOrdinalNumber({ number = 0 }) {
-	const suffix = ['th', 'st', 'nd', 'rd'];
-	const quotient = number % C;
-	const ordinal =
-		suffix[(quotient - SUB) % ANO_SUB] || suffix[quotient] || suffix[DEF];
-	return (
-		<>
-			<span className="black">{number}</span>
-			<sup>{ordinal}</sup>
-		</>
-	);
-}
+import getOrdinalNumber from '../../../utils/getOrdinalNumber';
 
 const getSubBucketColumns = ({
 	control = {},
@@ -45,7 +26,7 @@ const getSubBucketColumns = ({
 		},
 		{
 			id: 'Allocated',
-			Header: 'Allocated',
+			Header: 'ALLOCATED',
 			accessor: (item) => (
 				<Promised item={item} control={control} unregister={unregister} />
 			),
@@ -53,7 +34,7 @@ const getSubBucketColumns = ({
 		{
 			id: 'capability',
 			Header: <div>CAPABILITY</div>,
-			accessor: (item) => item.capability,
+			accessor: (item) => <div>{item.capability} TEU</div>,
 		},
 		{
 			id: 'past_allocated',
@@ -101,9 +82,7 @@ const getSubBucketColumns = ({
 			),
 			accessor: ({ avg_rate_rank = '', profitability }) => (
 				<>
-					<div>
-						<GetOrdinalNumber number={avg_rate_rank} />
-					</div>
+					<div>{getOrdinalNumber(avg_rate_rank)}</div>
 
 					<div>
 						(Profitability {profitability}
