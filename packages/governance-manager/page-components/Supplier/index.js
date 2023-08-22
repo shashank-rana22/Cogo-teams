@@ -57,9 +57,10 @@ function Supplier() {
 					id={id}
 					organization_id={supplierData?.organization_id}
 					service_type={supplierData?.service}
+					getOrganizationService={getOrganizationService}
 
 				/>,
-				contract_sla: <ContractSla
+				contract_and_sla_updation: <ContractSla
 					setStatus={setStatus}
 					service_type={supplierData?.service}
 					organization_id={supplierData?.organization_id}

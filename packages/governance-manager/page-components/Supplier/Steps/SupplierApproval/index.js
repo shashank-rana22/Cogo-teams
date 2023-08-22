@@ -2,6 +2,8 @@ import { Button, Tooltip } from '@cogoport/components';
 import { IcMAlert } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useUpdateOrganizationService from '../../hooks/useUpdateOrganizationService';
+
 import Alert from './Alert';
 import useGetOrganizationSupplierVerificationDetails from './hooks/useGetOrganizationSupplierVerificationDetails';
 import Item from './Item';
@@ -10,7 +12,7 @@ import SupplierApprovalDueDiligenceModal from './SupplierApprovalDueDiligenceMod
 import SupplierApprovalModal from './SupplierApprovalModal';
 import { report } from './utils/report';
 
-function SupplierApproval({ setStatus, id, organization_id, service_type }) {
+function SupplierApproval({ id, organization_id, service_type, getOrganizationService }) {
 	const [verify, setVerify] = useState({
 		need_analysis_report           : null,
 		market_feedback_report         : null,
@@ -18,12 +20,22 @@ function SupplierApproval({ setStatus, id, organization_id, service_type }) {
 		financial_due_diligence_report : null,
 
 	});
+
+	const [open, setOpen] = useState(null);
+
 	const { getOrganizationSupplierVerificationDetails } =	 useGetOrganizationSupplierVerificationDetails({
 		organization_id,
 		organization_service_id: id,
 		setVerify,
 	});
-	const [open, setOpen] = useState(null);
+
+	const { updateOrganizationService } = useUpdateOrganizationService({
+		organization_id,
+		stage_of_approval : 'contract_and_sla_updation',
+		service           : service_type,
+		getOrganizationService,
+	});
+
 	return (
 		<>
 			{(open !== 'financial_due_diligence_report') && (
@@ -69,12 +81,6 @@ function SupplierApproval({ setStatus, id, organization_id, service_type }) {
 					}
 				</div>
 				<div className={styles.flex_right}>
-					<Button
-						themeType="secondary"
-						onClick={() => setStatus('contract_sla')}
-					>
-						Save & Do it Later
-					</Button>
 					<div className={styles.right_submit_btn}>
 						<div>
 							<Tooltip content={<Alert />} placement="left" className={styles.alert}>
@@ -82,7 +88,7 @@ function SupplierApproval({ setStatus, id, organization_id, service_type }) {
 							</Tooltip>
 
 						</div>
-						<Button onClick={() => setStatus('contract_sla')}>Submit</Button>
+						<Button onClick={() => updateOrganizationService()}>Submit</Button>
 					</div>
 
 				</div>

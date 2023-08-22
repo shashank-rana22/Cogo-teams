@@ -2,8 +2,8 @@ import { Button } from '@cogoport/components';
 
 export const trailerColumns = ({ setShow, service_type, isForApproval }) => {
 	const columns = [
-		{ Header: 'Origin Location', accessor: (row) => (<div>{row?.expertise_data?.origin_name}</div>) },
-		{ Header: 'Destination Location', accessor: (row) => (<div>{row?.expertise_data?.destination_name}</div>) },
+		{ Header: 'Origin ', accessor: (row) => (<div>{row?.expertise_data?.origin_name}</div>) },
+		{ Header: 'Destination', accessor: (row) => (<div>{row?.expertise_data?.destination_name}</div>) },
 		{
 			Header   : 'Current Supplier (Total Count)',
 			accessor : (row) => (<div>{row?.expertise_data?.current_supplier_count}</div>),

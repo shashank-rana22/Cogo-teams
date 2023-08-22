@@ -2,7 +2,9 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const ALL_SERVICES = ['fcl_cfs',
+const ALL_SERVICES = [
+	'fcl_freight',
+	'fcl_cfs',
 	'fcl_customs',
 	'lcl_customs',
 	'air_customs',

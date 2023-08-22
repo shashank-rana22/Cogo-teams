@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useCreateOrganizationMarketFeedback = ({
@@ -34,6 +35,7 @@ const useCreateOrganizationMarketFeedback = ({
 				organization_id,
 			},
 		});
+		Toast.success('Saved');
 	};
 
 	return {
