@@ -28,7 +28,7 @@ const useDeleteHistorySettlement = ({ refetch = () => {}, setShowDeleteConfirmat
 				params: {
 					documentNo,
 					settlementType : accountType,
-					deletedBy      : profile.user?.id,
+					deletedBy      : profile?.user?.id,
 				},
 			});
 
