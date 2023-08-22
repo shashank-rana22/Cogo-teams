@@ -124,7 +124,7 @@ function ProfileDetails({
 				quotationEmailSentAt={quotationEmailSentAt}
 				orgId={orgId}
 				viewType={viewType}
-				userData={userData}
+				formattedMessageData={formattedMessageData}
 			/>
 		</div>
 	);

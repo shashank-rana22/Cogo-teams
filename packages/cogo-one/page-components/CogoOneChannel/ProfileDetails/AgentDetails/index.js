@@ -192,10 +192,10 @@ function AgentDetails({
 					leadUserId={lead_user_id}
 					orgId={orgId}
 					mobileNumber={mobile_number}
-					userData={userData}
 					organizationData={organizationData}
 					fetchOrganization={fetchOrganization}
 					partnerId={partnerId}
+					formattedMessageData={formattedMessageData}
 				/>
 			)}
 
