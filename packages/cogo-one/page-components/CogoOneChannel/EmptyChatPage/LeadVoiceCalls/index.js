@@ -1,7 +1,10 @@
 import { Input, Pagination } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+import { useDispatch } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 
 import useListLeadOrgUsers from '../../../../hooks/useListLeadOrgUsers';
@@ -10,6 +13,8 @@ import LeadOrgCard from './LeadOrgCard';
 import styles from './styles.module.css';
 
 function LeadVoiceCalls({ setActiveTab = () => {} }) {
+	const dispatch = useDispatch();
+
 	const {
 		data,
 		loading,
@@ -19,6 +24,40 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 	} = useListLeadOrgUsers();
 
 	const { list = [], page = 1, page_limit = 6, total_count = 0 } = data || {};
+
+	const openLeadOrgModal = ({ type = '', leadOrgId = '' }) => {
+		dispatch(
+			setProfileState({
+				lead_feedback_form_data : { lead_organization_id: leadOrgId },
+				lead_feedback_form_type : type,
+			}),
+		);
+	};
+
+	const geo = getGeoConstants();
+	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
+
+	const handlePlaceCall = ({ number, code, userName, leadOrgId = '', leadUserId }) => {
+		if (!hasVoiceCallAccess || !number) {
+			return;
+		}
+
+		dispatch(
+			setProfileState({
+				is_in_voice_call          : true,
+				voice_call_recipient_data : {
+					orgId                : null,
+					userId               : null,
+					mobile_number        : number,
+					mobile_country_code  : code,
+					userName,
+					isUnkownUser         : true,
+					lead_user_id         : leadUserId,
+					lead_organization_id : leadOrgId,
+				},
+			}),
+		);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -49,6 +88,8 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 							eachItem={eachItem}
 							key={eachItem?.id}
 							setActiveTab={setActiveTab}
+							openLeadOrgModal={openLeadOrgModal}
+							handlePlaceCall={handlePlaceCall}
 						/>
 					))}
 				</div>

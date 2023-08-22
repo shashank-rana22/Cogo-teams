@@ -5,9 +5,9 @@ import { Image } from '@cogoport/next';
 import styles from './styles.module.css';
 
 function Header({ eachItem = {} }) {
-	const { lead_organization_details = {} } = eachItem || {};
+	const { lead_organization = {} } = eachItem || {};
 
-	const { serial_id = '12', business_name = 'rahu' } = lead_organization_details || {};
+	const { serial_id = '', business_name = '' } = lead_organization || {};
 
 	return (
 		<div className={styles.header}>
@@ -27,9 +27,7 @@ function Header({ eachItem = {} }) {
 				width={25}
 				alt="message"
 				className={styles.message_icon_styles}
-				onClick={(e) => {
-					e.stopPropagation();
-				}}
+				onClick={(e) => e.stopPropagation()}
 			/>
 			<IcMOverflowDot
 				className={styles.overflow_container}

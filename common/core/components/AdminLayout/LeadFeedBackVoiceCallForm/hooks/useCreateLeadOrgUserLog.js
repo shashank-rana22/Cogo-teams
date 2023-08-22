@@ -16,7 +16,9 @@ const getPayload = ({ leadOrgId = '', values = {}, partnerId = '' }) => {
 		additional_lead_user_ids = [],
 	} = values || {};
 
-	const fieldArrAdditonalLeadUserIds = added_additional_contacts?.map((eachVal) => eachVal?.additional_lead_user_id);
+	const fieldArrAdditonalLeadUserIds = added_additional_contacts?.map(
+		(eachVal) => eachVal?.field_additional_lead_user_id,
+	);
 
 	const additionalLeadUserids = [...new Set(
 		[...(additional_lead_user_ids || []), ...(fieldArrAdditonalLeadUserIds || [])],
@@ -30,7 +32,7 @@ const getPayload = ({ leadOrgId = '', values = {}, partnerId = '' }) => {
 		communication_end_time,
 		agent_id,
 		communication_summary,
-		lead_user_id             : added_primary_contacts?.pop() || lead_user_id,
+		lead_user_id             : added_primary_contacts?.pop()?.field_additional_lead_user_id || lead_user_id,
 		additional_lead_user_ids : additionalLeadUserids,
 		partner_id               : partnerId,
 	};

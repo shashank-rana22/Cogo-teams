@@ -23,14 +23,14 @@ const TAB_PANEL_MAPPING = [
 function LeadFeedBackVoiceCallForm() {
 	const {
 		leadFeedBackFormType = '',
-		lead_organization_id = '',
+		leadFeedbackFormData = {},
 		partnerId = '',
 		loggedInAgentId = '',
 	} = useSelector(({ profile }) => ({
-		lead_feedback_form_type : profile?.lead_feedback_form_type,
-		lead_organization_id    : profile?.lead_feedback_form_data?.lead_organization_id,
-		loggedInAgentId         : profile?.user?.id,
-		partnerId               : profile?.partner?.id,
+		leadFeedBackFormType : profile?.lead_feedback_form_type,
+		leadFeedbackFormData : profile?.lead_feedback_form_data,
+		loggedInAgentId      : profile?.user?.id,
+		partnerId            : profile?.partner?.id,
 	}));
 
 	const dispatch = useDispatch();
@@ -45,6 +45,8 @@ function LeadFeedBackVoiceCallForm() {
 			}),
 		);
 	};
+
+	const { lead_organization_id = '' } = leadFeedbackFormData || {};
 
 	useEffect(() => {
 		setActiveTab(leadFeedBackFormType);

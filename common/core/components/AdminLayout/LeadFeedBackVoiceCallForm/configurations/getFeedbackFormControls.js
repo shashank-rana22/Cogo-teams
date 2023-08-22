@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import AddContactsForm from '../common/AddContactsForm';
 
 const COMMUNICATION_RES_MAPPING = {
@@ -75,6 +77,8 @@ const COMMUNICATION_RES_MAPPING = {
 	],
 };
 
+const LAST_INDEX = 1;
+
 const getControls = ({ communicationType = '', lead_organization_id = '', watch }) => {
 	const {
 		communication_start_time = '',
@@ -85,9 +89,12 @@ const getControls = ({ communicationType = '', lead_organization_id = '', watch 
 		additional_lead_user_ids = [],
 	} = watch();
 
-	const primaryLeadUserId = added_primary_contacts?.pop() || lead_user_id;
+	const primaryLeadUserId = lead_user_id
+	|| added_primary_contacts?.[added_primary_contacts.length - LAST_INDEX]?.field_primary_lead_user_id;
 
-	const fieldArrAdditonalLeadUserIds = added_additional_contacts?.map((eachVal) => eachVal?.additional_lead_user_id);
+	const fieldArrAdditonalLeadUserIds = added_additional_contacts?.map(
+		(eachVal) => eachVal?.field_additional_lead_user_id,
+	);
 
 	const additionalLeadUserids = [...new Set(
 		[...(additional_lead_user_ids || []), ...(fieldArrAdditonalLeadUserIds || [])],
@@ -119,17 +126,21 @@ const getControls = ({ communicationType = '', lead_organization_id = '', watch 
 			width          : '50%',
 			placeholder    : 'Select Date-Time',
 			withTimePicker : true,
+			// eslint-disable-next-line max-len
+			dateFormat     : `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
 			maxDate        : communication_end_time,
 			rules          : { required: 'This is Required' },
 		},
 		{
 			name           : 'communication_end_time',
 			label          : 'End Time',
-			controlType    : 'datePicker',
+			controlType    : 'datepicker',
 			withTimePicker : true,
 			lowerlabel     : 'Date & Time are in your current timezone',
 			placeholder    : 'Select Date-Time',
 			width          : '50%',
+			// eslint-disable-next-line max-len
+			dateFormat     : `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
 			minDate        : communication_start_time,
 			rules          : { required: 'This is Required' },
 		},
@@ -166,15 +177,14 @@ const getControls = ({ communicationType = '', lead_organization_id = '', watch 
 		{
 			name                : 'added_primary_contacts',
 			controlType         : 'fieldArray',
-			append_empty_values : { primary_lead_user_id: '' },
+			append_empty_values : { field_primary_lead_user_id: '' },
 			width               : '100%',
 			addOnlyOnPrevFill   : true,
 			buttonText          : '+ Add New Contact',
-			titleReqWithCount   : false,
-			fieldArrayTitle     : 'New Contact',
+			customDelete        : true,
 			controls            : [
 				{
-					name            : 'primary_lead_user_id',
+					name            : 'field_primary_lead_user_id',
 					controlType     : 'withControl',
 					width           : '100%',
 					Component       : AddContactsForm,
@@ -206,15 +216,14 @@ const getControls = ({ communicationType = '', lead_organization_id = '', watch 
 		{
 			name                : 'added_additional_contacts',
 			controlType         : 'fieldArray',
-			append_empty_values : { primary_lead_user_id: '' },
+			append_empty_values : { field_additional_lead_user_id: '' },
 			width               : '100%',
 			addOnlyOnPrevFill   : true,
 			buttonText          : '+ Add New Contact',
-			titleReqWithCount   : false,
-			fieldArrayTitle     : 'New Contact',
+			customDelete        : true,
 			controls            : [
 				{
-					name            : 'additional_lead_user_id',
+					name            : 'field_additional_lead_user_id',
 					controlType     : 'withControl',
 					width           : '100%',
 					Component       : AddContactsForm,

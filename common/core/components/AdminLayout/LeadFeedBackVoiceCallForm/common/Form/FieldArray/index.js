@@ -6,7 +6,17 @@ import { isEmpty } from '@cogoport/utils';
 import EachField from './EachField';
 import styles from './styles.module.css';
 
-const isNotEmpty = (obj = {}) => Object.values(obj || {}).some((eachvalue) => !isEmpty(eachvalue));
+const LAST_INDEX = 1;
+
+const getShowAddButton = (obj = {}) => {
+	if (isEmpty(obj)) {
+		return true;
+	}
+
+	return !Object.keys(obj || {}).some(
+		(eachKey) => eachKey !== 'id' && !isEmpty(obj[eachKey]),
+	);
+};
 
 function FieldArrayController({
 	control = {},
@@ -21,8 +31,7 @@ function FieldArrayController({
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
 
-	const isPrevItemEmpty = !isNotEmpty(fields?.pop() || {});
-	console.log('isPrevItemEmpty', isPrevItemEmpty, addOnlyOnPrevFill);
+	const showAddButtonOnPrev = getShowAddButton(fields?.[fields.length - LAST_INDEX] || {});
 
 	return (
 		<div className={styles.outer_container}>
@@ -39,7 +48,7 @@ function FieldArrayController({
 					field={field}
 				/>
 			))}
-			{(!showAddButton) ? (
+			{((!showAddButton) || (addOnlyOnPrevFill && !showAddButtonOnPrev)) ? (
 				null
 			) : (
 				<Button

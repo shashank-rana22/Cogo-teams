@@ -7,8 +7,12 @@ import Form from '../Form';
 
 import styles from './styles.module.css';
 
-function AddContactsForm({ componentParams = {}, onChange = () => {}, onRemove = () => {}, value = '' }) {
-	console.log('value', value);
+function AddContactsForm({
+	componentParams = {},
+	onChange = () => {},
+	onRemove = () => {},
+	value = '',
+}) {
 	const {
 		control,
 		formState:{ errors = {} },
@@ -30,8 +34,10 @@ function AddContactsForm({ componentParams = {}, onChange = () => {}, onRemove =
 	}
 
 	return (
-		<div className={styles.container}>
-			<div>head</div>
+		<fieldset className={styles.outer_container}>
+			<legend className={styles.legend_styles}>
+				Add New Contact
+			</legend>
 			<div className={styles.form_div}>
 				<Form
 					control={control}
@@ -58,7 +64,7 @@ function AddContactsForm({ componentParams = {}, onChange = () => {}, onRemove =
 					Add Contact
 				</Button>
 			</div>
-		</div>
+		</fieldset>
 	);
 }
 export default AddContactsForm;

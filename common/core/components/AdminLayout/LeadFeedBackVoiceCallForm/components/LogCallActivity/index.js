@@ -8,7 +8,8 @@ import useCreateLeadOrgUserLog from '../../hooks/useCreateLeadOrgUserLog';
 import styles from './styles.module.css';
 
 function LogCallActivity({
-	leadOrgId = '', onCloseForm = () => {},
+	leadOrgId = '',
+	onCloseForm = () => {},
 	partnerId = '',
 	loggedInAgentId = '',
 }) {

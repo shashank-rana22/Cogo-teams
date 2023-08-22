@@ -12,6 +12,27 @@
 	overflow-y: scroll;
 
 	:global {
+		.react-datepicker {
+			bottom: 46px;
+		}
+
+		.ui_text_area_container {
+			margin-top: 8px;
+		}
+
+		.react-datepicker__aria-live {
+			display: none;
+		}
+
+		.ui_time_options_container {
+			top: unset;
+			bottom: 46px;
+
+			> div > div > div {
+				height: 100px;
+			}
+		}
+
 		.react-datepicker-wrapper {
 			width: 100%;
 		}

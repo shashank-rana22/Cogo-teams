@@ -6,7 +6,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	padding: 4px 6px;
+	padding: 12px;
 	background: #fdfbf6;
 }
 
@@ -17,4 +17,22 @@
 .form_div {
 	width: 100%;
 	padding: 0 12px;
+}
+
+.outer_container {
+	width: 100%;
+	padding: 0 !important;
+	border-color: #fbd1a6 !important;
+	border-style: solid !important;
+	border-radius: 4px;
+}
+
+.legend_styles {
+	margin-left: 8px;
+	font-size: var(--font-size-md);
+	color: var(--color-accent-orange-1);
+
+	>span {
+		margin-left: 4px;
+	}
 }
