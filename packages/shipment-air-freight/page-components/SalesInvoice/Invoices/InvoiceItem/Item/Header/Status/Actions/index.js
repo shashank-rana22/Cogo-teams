@@ -3,6 +3,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -34,6 +35,10 @@ function Actions({
 	isIRNGenerated = false,
 	bfInvoice = {},
 }) {
+	const { role_id } = useSelector(({ profile }) => ({
+		role_id: profile?.auth_role_data?.id,
+	}));
+
 	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [showExchangeRate, setExchangeRate] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
@@ -56,13 +61,15 @@ function Actions({
 	if (invoice.status === 'amendment_requested') {
 		disableAction = false;
 	}
+
 	const geo = getGeoConstants();
 
 	const showCancelOptions = CANCEL_OPTION_ALLOWED_STATUSES.includes(bfInvoice.status) ? {
-		showCancel: new Date().getMonth() === new Date(bfInvoice.invoiceDate).getMonth()
+		showCancel: (role_id === GLOBAL_CONSTANTS.uuid.vietnam_admin_id
+			? true : new Date().getMonth() === new Date(bfInvoice.invoiceDate).getMonth())
 			&& geo.others.navigations.partner.bookings.invoicing.request_cancel_invoice,
 		showReplace: geo.others.navigations.partner.bookings.invoicing.request_replace_invoice,
-	} : undefined;
+	} : {};
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
@@ -192,7 +199,7 @@ function Actions({
 			) : null}
 
 			{(showCancelModal?.showCancel || showCancelModal?.showReplace)
-			&& showCancelOptions && (
+			&& (
 				<CancelReplaceEInvoice
 					bfInvoice={bfInvoice}
 					invoice={invoice}

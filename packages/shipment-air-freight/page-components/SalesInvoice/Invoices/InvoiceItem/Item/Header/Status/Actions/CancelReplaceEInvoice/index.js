@@ -18,7 +18,7 @@ function CancelReplaceEInvoice({
 }) {
 	const { control, handleSubmit } = useForm();
 
-	const { loading, submit } = useCancelReplaceInvoice();
+	const { loading, onRevoke } = useCancelReplaceInvoice();
 
 	const modalType = ([
 		{ type: 'CANCEL_INVOICE', criteria: showCancelModal?.showCancel },
@@ -41,8 +41,8 @@ function CancelReplaceEInvoice({
 		setShowCancelModal({ showCancel: false, showReplace: false });
 	};
 
-	const handleCancel = (values) => {
-		submit({
+	const handleRevoke = (values) => {
+		onRevoke({
 			cancelReason         : values?.cancelReason,
 			proformaNumber       : bfInvoice?.proformaNumber,
 			closeModal           : handleClose,
@@ -95,7 +95,7 @@ function CancelReplaceEInvoice({
 				</Button>
 				<Button
 					className="primary md"
-					onClick={handleSubmit(handleCancel)}
+					onClick={handleSubmit(handleRevoke)}
 				>
 					{loading ? 'Submit' : 'Submiting'}
 				</Button>

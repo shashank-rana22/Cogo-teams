@@ -21,7 +21,7 @@ const useCancelReplaceInvoice = () => {
 		entity_id : profile?.partner?.id,
 	}));
 
-	const submit = async ({
+	const onRevoke = async ({
 		cancelReason = '', proformaNumber = '', closeModal = () => {},
 		invoiceId = '', invoiceCombinationId = '', refetch = () => {}, documentUrls = '',
 		incidentSubType = 'CANCEL_INVOICE',
@@ -56,7 +56,7 @@ const useCancelReplaceInvoice = () => {
 
 	return {
 		loading,
-		submit,
+		onRevoke,
 	};
 };
 
