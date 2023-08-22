@@ -9640,7 +9640,11 @@ const partner = {
 		},
 	],
 	utm_parameters: [
-
+		{
+			api          : 'create_utm_link',
+			access_type  : 'private',
+			service_name : 'attribution',
+		},
 		{
 			api          : 'create_utm',
 			access_type  : 'private',
@@ -12966,6 +12970,46 @@ const partner = {
 			api          : 'get_omnichannel_agent_stats',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'get_saas_subscription_profile',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'saas_get_active_plan_checkout_details',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_organization_billing_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_subscription_payment_link',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'create_subscription_generate_invoice',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
 		},
 		{
 			api          : 'list_roles',

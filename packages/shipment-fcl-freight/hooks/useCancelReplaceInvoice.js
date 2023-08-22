@@ -2,8 +2,9 @@ import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { startCase } from '@cogoport/utils';
 
-const useCancelInvoice = () => {
+const useCancelReplaceInvoice = () => {
 	const [
 		loading,
 		trigger,
@@ -30,13 +31,14 @@ const useCancelInvoice = () => {
 	const submit = async ({
 		cancelReason = '', proformaNumber = '', closeModal = () => {},
 		invoiceId = '', invoiceCombinationId = '', refetch = () => {}, documentUrls = '',
+		incidentSubType = 'CANCEL_INVOICE',
 	}) => {
 		try {
 			await trigger({
 				data: {
-					type            : 'REVOKE_INVOICE',
-					incidentSubType : 'CANCEL_INVOICE',
-					data            : {
+					type : 'REVOKE_INVOICE',
+					incidentSubType,
+					data : {
 						revokeInvoiceRequest: {
 							invoiceNumber        : proformaNumber || undefined,
 							documentUrls         : documentUrls || undefined,
@@ -51,11 +53,11 @@ const useCancelInvoice = () => {
 					entityId  : entity_id,
 				},
 			});
-			Toast.success('Requested Cancel E invoice');
+			Toast.success(`Requested ${startCase(incidentSubType.toLowerCase())}`);
 			closeModal();
 			refetch();
 		} catch (error) {
-			Toast.error('There was an error Cancelling E-Invoice');
+			Toast.error(`There was an error ${startCase(incidentSubType.toLowerCase())}`);
 		}
 	};
 
@@ -65,4 +67,4 @@ const useCancelInvoice = () => {
 	};
 };
 
-export default useCancelInvoice;
+export default useCancelReplaceInvoice;

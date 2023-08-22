@@ -212,6 +212,15 @@ export default {
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
 			'8c22817f-4246-43ef-a7f5-fdf77e37ca72',
 		],
+		kam_manager_ids: [
+			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
+			'f9905d33-24d7-48ca-99cd-eeca13a90d5a', // KAM Manager - SME Demand,
+			'594be53f-e39a-45d1-a705-57660a4a4a00', // IE Owner - SME Demand,
+			'37557738-13bb-4db8-96ef-6eac4549a5ac', // CP KAM Owner,
+			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // CP KAM Manager
+			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
+
+		],
 		prod_kam_ie_manager   : 'f9905d33-24d7-48ca-99cd-eeca13a90d5a',
 		prod_kam_ie           : '0bc8c199-09ed-4a85-b3a3-a855f05a2716',
 		portfolio_manager_id  : '46f33843-8f73-45c0-89c8-248aa1698bb0',
@@ -568,8 +577,9 @@ export default {
 			partner: {
 				bookings: {
 					invoicing: {
-						request_cancel_invoice : true,
-						request_credit_note    : false,
+						request_cancel_invoice  : true,
+						request_replace_invoice : true,
+						request_credit_note     : false,
 					},
 				},
 			},

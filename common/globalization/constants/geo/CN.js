@@ -97,6 +97,7 @@ export default {
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
 		finops_manager             : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
+		ff_cost_booking_executive  : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716', // Prod_KAM IE
@@ -115,6 +116,15 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+		],
+		kam_manager_ids: [
+			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
+			'f9905d33-24d7-48ca-99cd-eeca13a90d5a', // KAM Manager - SME Demand,
+			'594be53f-e39a-45d1-a705-57660a4a4a00', // IE Owner - SME Demand,
+			'37557738-13bb-4db8-96ef-6eac4549a5ac', // CP KAM Owner,
+			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // CP KAM Manager
+			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
+
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -179,6 +189,7 @@ export default {
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
 		],
+		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		sales_role                       : [
@@ -541,6 +552,15 @@ export default {
 				has_voice_call_access       : false,
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
+			},
+			partner: {
+				bookings: {
+					invoicing: {
+						request_cancel_invoice  : false,
+						request_replace_invoice : false,
+						request_credit_note     : false,
+					},
+				},
 			},
 		},
 	},

@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import tableDataColumns from '../../../constants/table-data-columns';
@@ -10,6 +11,8 @@ import Sidebar from './Sidebar';
 import styles from './styles.module.css';
 
 function Shipment() {
+	const { t } = useTranslation(['athenaDashboard']);
+
 	const [activeTab, setActiveTab] = useState('shipments');
 	const {
 		loading,
@@ -23,7 +26,7 @@ function Shipment() {
 
 	const columnsToShow = tableDataColumns.shipmentByHscode;
 
-	const COLUMNS = useGetColumns({ columnsToShow });
+	const COLUMNS = useGetColumns({ columnsToShow, t });
 
 	return (
 		<>
