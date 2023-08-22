@@ -1,5 +1,6 @@
 import { Radio, Button } from '@cogoport/components';
 import { useForm, RadioGroupController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import controls, { ASSIGN_TYPE_OPTIONS } from '../../../../../../configurations/assign-form-controls';
@@ -29,6 +30,7 @@ function AssignToForm({
 			defaultValues: {
 				allow_user       : 'observe_and_chat',
 				assign_condition : 'shipment',
+				assign_entity    : GLOBAL_CONSTANTS.country_entity_ids.IN,
 			},
 		},
 	);

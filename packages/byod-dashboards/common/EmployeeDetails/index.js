@@ -1,10 +1,8 @@
 import { Button, Modal, Textarea, Toast, Tags } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
@@ -16,7 +14,6 @@ import Spinner from '../Spinner';
 
 import styles from './styles.module.css';
 
-const DEFAULT_FIXED_VALUE = 2;
 const DEFAULT_VALUE = 1;
 
 function EmployeeDetails() {
@@ -36,28 +33,11 @@ function EmployeeDetails() {
 	const { data, loading, refetch } = useGetEmployeeDetails(employee_id);
 	const { updateDetail, loading : detailLoading } = useUpdateDetail(refetch);
 
-	const { employee_details, employee_device_details = [] } = data || {};
+	const { employee_device_details = {} } = data || {};
+	const { addon_details, status: approvalStatus } = employee_device_details || {};
 
 	const employeeDeviceData = employee_device_details[employee_device_details.length - DEFAULT_VALUE] || [];
 	const { status } = employeeDeviceData || {};
-
-	const getData = (key, type, isNumber) => {
-		const payloadType = type ? employeeDeviceData : employee_details;
-		const payloadValue = payloadType?.[key];
-
-		if (typeof payloadValue === 'string') {
-			return startCase(payloadValue || '-');
-		}
-
-		if (isNumber) {
-			return formatAmount({
-				amount   : payloadValue?.toFixed(DEFAULT_FIXED_VALUE) || GLOBAL_CONSTANTS.zeroth_index,
-				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			});
-		}
-
-		return payloadValue?.toString()?.replace(/\.?0+$/, '') || '-';
-	};
 
 	function HandleTags({ text = '', color = '' }) {
 		const options = [
@@ -74,16 +54,22 @@ function EmployeeDetails() {
 	}
 
 	function GetButtonType() {
-		if (view_type === 'admin_view' && status === 'active') {
+		if (view_type === 'admin_view' && approvalStatus === 'active') {
 			return <HandleTags text="Verification pending from HRBP" color="blue" />;
 		}
 
-		if (['rejected'].includes(status)) {
-			return <HandleTags text={startCase(status)} color="red" />;
+		if (['rejected'].includes(approvalStatus)) {
+			return <HandleTags text={startCase(approvalStatus)} color="red" />;
+		}
+		if (view_type === 'hr_view' && approvalStatus === 'verified') {
+			return <HandleTags text={startCase(approvalStatus)} color="green" />;
+		}
+		if (view_type === 'admin_view' && approvalStatus === 'approved') {
+			return <HandleTags text={startCase(approvalStatus)} color="green" />;
 		}
 
-		if (((view_type === 'admin_view' && status === 'approved')
-		|| (!view_type === 'admin_view' && ['approved', 'verified'].includes(status)))) {
+		if (((view_type === 'admin_view' && approvalStatus === 'approved')
+		|| (!view_type === 'admin_view' && ['approved', 'verified'].includes(approvalStatus)))) {
 			return <HandleTags text={startCase(status)} />;
 		}
 
@@ -163,7 +149,11 @@ function EmployeeDetails() {
 					setRefetchReimbursementList={setRefetchReimbursementList}
 				/>
 				<DeviceDetails data={data} />
-				<AddonsDetails data={data} />
+
+				{!isEmpty(addon_details) ? (
+					<AddonsDetails data={data} />
+				) : null}
+
 				<GetButtonType />
 			</div>
 			{rejectModal
