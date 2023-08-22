@@ -214,7 +214,11 @@ function List({
 							});
 						}}
 					>
-						{is_bookmarked ? <IcCBookmark /> : <IcMBookmark />}
+						{is_bookmarked ? (
+							<IcCBookmark width={16} height={16} />
+						) : (
+							<IcMBookmark width={16} height={16} />
+						)}
 					</span>
 				);
 			},
