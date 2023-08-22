@@ -14,10 +14,11 @@ import styles from './styles.module.css';
 import { items } from './utils/supplier-utils';
 
 function Supplier() {
-	const [status, setStatus] = useState('organization_approval');
+	const [status, setStatus] = useState();
 	const { query } = useRouter();
 	const { id } = query;
 	const { data: supplierData, getOrganizationService } = useGetOrganizationService({ id, setStatus });
+
 	return (
 		<div>
 			<h2>Governance Manager</h2>
@@ -64,7 +65,6 @@ function Supplier() {
 					organization_id={supplierData?.organization_id}
 				/>,
 			}[status]}
-
 		</div>
 	);
 }

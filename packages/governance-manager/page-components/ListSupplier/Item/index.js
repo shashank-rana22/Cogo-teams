@@ -1,33 +1,12 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
+import { SERVICE_NAME_MAPPING } from '../../utils/service-name-mapping';
+
 import styles from './styles.module.css';
 
 function Item({ isSupplierPage = false, item }) {
 	const { push } = useRouter();
-	const navigate = () => {
-		push(
-			'/governance-manager/[id]',
-			`/governance-manager/${item?.id}`,
-		);
-	};
-
-	const SERVICE_NAME_MAPPING = {
-		fcl_freight             : 'FCL Freight',
-		lcl_freight             : 'LCL Freight',
-		ftl_freight             : 'FTL Freight',
-		ltl_freight             : 'LTL Freight',
-		air_freight             : 'AIR Freight',
-		trailer_freight         : 'Trailer Freight',
-		haulage_freight         : 'Haulage Freight',
-		rail_domestic_freight   : 'Rail Domestic Freight',
-		fcl_freight_local_agent : 'FCL Freight Local Agent',
-		air_customs             : 'AIR Customs',
-		air_freight_local       : 'AIR Freight Local',
-		fcl_customs             : 'FCL Customs',
-		lcl_customs             : 'LCL Customs',
-		fcl_cfs                 : 'FCL CFS',
-	};
 
 	return (
 		<div className={styles.item}>
@@ -63,7 +42,13 @@ function Item({ isSupplierPage = false, item }) {
 
 			{ !isSupplierPage && (
 				<div className={styles.view_btn}>
-					<Button themeType="accent" onClick={() => navigate()}>
+					<Button
+						themeType="accent"
+						onClick={() => 	push(
+							'/governance-manager/[id]',
+							`/governance-manager/${item?.id}`,
+						)}
+					>
 						View
 					</Button>
 				</div>

@@ -1,5 +1,13 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
+
+const ALL_SERVICES = ['fcl_cfs',
+	'fcl_customs',
+	'lcl_customs',
+	'air_customs',
+	'haulage_freight',
+	'lcl_freight'];
 
 function useListOrganizationServices({ currentPage, activeTab, setApprovalStats, currentService }) {
 	const [{ data, loading }, trigger] = useRequest({
@@ -9,32 +17,23 @@ function useListOrganizationServices({ currentPage, activeTab, setApprovalStats,
 
 	const listOrganizationServices = async () => {
 		try {
-			await trigger({
+			const res = await trigger({
 				params: {
 					filters: {
 						stage_of_approval : activeTab,
-						service           : currentService === 'all'
-							? ['fcl_cfs',
-								'fcl_customs',
-								'lcl_customs',
-								'air_customs',
-								'haulage_freight',
-								'lcl_freight'] : currentService,
-						status: 'pending_approval',
+						service           : currentService === 'all' ? ALL_SERVICES : currentService,
+						status            : 'pending_approval',
 					},
 					service_expertise_required : true,
 					page                       : currentPage,
 				},
 			});
+			setApprovalStats(res?.data?.approvals_stats);
 		} catch (err) {
-			console.log(err);
+			Toast.error('Something went wrong');
 		}
 	};
 
-	useEffect(() => {
-		setApprovalStats(data?.approvals_stats);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
 	useEffect(() => {
 		listOrganizationServices();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
