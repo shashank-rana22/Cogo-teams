@@ -117,7 +117,7 @@
 .call {
 	display: flex;
 	align-items: center;
-	max-height: 40px;
+	height: 39px;
 	padding-left: 8px;
 	margin-right: 8px;
 	background-color: #fdebe9;
@@ -126,7 +126,9 @@
 }
 
 .callpriority {
-	max-height: 40px;
+	display: flex;
+	align-items: center;
+	height: 39px;
 	padding: 4px;
 	font-size: 10px;
 	font-weight: 500;
