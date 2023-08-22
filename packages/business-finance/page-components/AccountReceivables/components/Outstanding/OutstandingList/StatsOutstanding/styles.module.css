@@ -42,7 +42,6 @@
 }
 
 .count {
-	margin-left: 5px;
 	font-size: var(--font-size-md);
 	color: #356efd;
 }
@@ -120,7 +119,6 @@
 }
 
 .stats_lable {
-	width: 124px;
 	font-size: 14px;
 	font-weight: 600;
 }
