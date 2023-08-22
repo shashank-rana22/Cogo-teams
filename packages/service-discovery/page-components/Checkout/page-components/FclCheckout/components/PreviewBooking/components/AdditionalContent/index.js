@@ -57,8 +57,8 @@ function AdditionalContent({
 	infoBanner = {},
 }) {
 	const {
-		rate,
-		detail,
+		rate = {},
+		detail = {},
 		primaryService,
 		getCheckout,
 		isChannelPartner,
@@ -74,7 +74,7 @@ function AdditionalContent({
 
 	const { primary_service = '', services = {}, trade_type = '', source_id: search_id } = detail || {};
 
-	const { source = '' } = rate;
+	const { source = '' } = rate || {};
 
 	return (
 		<div className={styles.container}>
