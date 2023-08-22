@@ -1,4 +1,6 @@
+import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -35,13 +37,28 @@ function FreightPriceDetail({
 						maximumFractionDigits : 0,
 					},
 				})}
+
 				{!totalPrice ? (
-					<div className={styles.container_details}>
+					<div className={styles.text}>
 						Per ctr.
 					</div>
 				) : null}
-			</div>
 
+				{totalPrice ? (
+					<Tooltip
+						placement="top"
+						trigger="mouseenter"
+						interactive
+						content={(
+							<strong className={styles.tooltip_content}>
+								Basic freight + all other services including FCL Freight Local
+							</strong>
+						)}
+					>
+						<IcMInfo className={styles.info_icon} />
+					</Tooltip>
+				) : null}
+			</div>
 		</div>
 	);
 }

@@ -1,5 +1,6 @@
-import { Table, Pill } from '@cogoport/components';
+import { Table, Pill, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import getDetails from './getDetails';
@@ -14,15 +15,6 @@ const getPriceBreakUpColumn = [
 		id       : 'service_name',
 		accessor : ({ name = '' }) => (
 			<div className={styles.column}>{startCase(name)}</div>
-		),
-	},
-	{
-		Header   : <div style={{ fontSize: 10, fontWeight: 500 }}>Currency</div>,
-		id       : 'currency',
-		accessor : ({ currency = '' }) => (
-			<div className={styles.column}>
-				{currency}
-			</div>
 		),
 	},
 	{
@@ -75,7 +67,8 @@ const handleServicesNames = (item) => {
 	const serviceObj = { ...item };
 	const tradeType = serviceObj?.trade_type;
 	const service = serviceObj?.service_type;
-	const isSubsidiaryService = serviceObj?.code || SUBSIDIARY_SERVICES.includes(serviceObj?.code);
+	const isSubsidiaryService = serviceObj?.code;
+	const isDnd = SUBSIDIARY_SERVICES.includes(serviceObj?.code);
 
 	const TRADE_TYPE_MAPPING = {
 		export : 'Origin',
@@ -85,6 +78,10 @@ const handleServicesNames = (item) => {
 	const formattedTradeType = TRADE_TYPE_MAPPING[tradeType] || '';
 	const formattedService = startCase(service);
 	const formattedSubsidiaryServiceName = startCase(serviceObj?.service_name);
+
+	if (isDnd) {
+		return formattedSubsidiaryServiceName;
+	}
 
 	return isSubsidiaryService ? `${formattedTradeType} ${formattedSubsidiaryServiceName}`
 		: `${formattedTradeType} ${formattedService}`;
@@ -96,6 +93,8 @@ function IndividualPriceBreakup({ service = {}, service_type = '', restServiceDe
 	} = service;
 
 	const containerDetail = getDetails({ primary_service: service_type, item: restServiceDetail });
+
+	const ifRateAvailabe = !isEmpty(line_items);
 
 	return (
 		<>
@@ -114,15 +113,26 @@ function IndividualPriceBreakup({ service = {}, service_type = '', restServiceDe
 							</Pill>
 					))}
 
+					{!ifRateAvailabe ? (
+						<Tooltip
+							placement="top"
+							trigger="mouseenter"
+							interactive
+							content={<span>Rate not available</span>}
+						>
+							<IcMInfo className={styles.info_icon} />
+						</Tooltip>
+					) : null}
 				</div>
-				{isEmpty(line_items) ? (
+
+				{!ifRateAvailabe ? (
 					<span className={styles.service}>
 						No Rates
 					</span>
 				) : null}
-
 			</div>
-			{!isEmpty(line_items) ? (
+
+			{ifRateAvailabe ? (
 				<div>
 					<Table
 						className={styles.table_container}
@@ -131,7 +141,6 @@ function IndividualPriceBreakup({ service = {}, service_type = '', restServiceDe
 					/>
 				</div>
 			) : null}
-
 		</>
 	);
 }
