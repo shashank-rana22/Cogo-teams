@@ -174,6 +174,21 @@ const common_apis = {
 			service_name : 'credit',
 		},
 		{
+			api          : 'get_shipment_report_schedule',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_shipments_for_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'get_recommended_spot_searches',
 			access_type  : 'private',
 			feature      : 'search',
