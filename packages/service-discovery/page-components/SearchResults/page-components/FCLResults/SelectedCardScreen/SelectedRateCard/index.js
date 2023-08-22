@@ -1,73 +1,15 @@
-import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import AdditionalServices from '../../../../../../common/OtherServices/AdditionalServices';
-import CargoInsurance from '../../../../../../common/OtherServices/CargoInsurance';
-import SubsidiaryServices from '../../../../../../common/OtherServices/SubsidiaryServices';
 import ShippingLineModal from '../../../../../../common/ShippingLineModal';
-import getCountryCode from '../../../../../../helpers/getCountryCode';
-import DetentionDemurrage from '../../../../common/D&D';
-import Bundles from '../../../../components/Bundles';
 import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 import FclCard from '../../FclCard';
 
 import CargoModal from './CargoModal';
+import Header from './Header';
 import LoadingState from './loadingState';
+import Services from './Services';
 import styles from './styles.module.css';
-
-const ZERO_VALUE = 0;
-
-const ifToShowCargoInsurance = ({ services = {}, service_type = '', importer_exporter = {} }) => {
-	const isAlreadyPresent = Object.values(services || {}).find(
-		(item) => item.service_type === 'cargo_insurance',
-	);
-
-	const importer_exporter_country_code = getCountryCode({
-		country_id: importer_exporter?.country_id || importer_exporter?.country?.id,
-	});
-
-	const isCountrySupported = (GLOBAL_CONSTANTS.cargo_insurance[importer_exporter_country_code] || [])
-		.includes(service_type);
-
-	return !isAlreadyPresent && isCountrySupported;
-};
-
-const ifServiceValid = (rates = {}, source = '') => {
-	if (source !== 'cogo_assured_rate') return true;
-
-	let isValid = true;
-
-	Object.values(rates || {}).forEach((rate) => {
-		const { total_price_discounted, service_type } = rate;
-		if (service_type === 'fcl_freight_local') {
-			if (!total_price_discounted) isValid = false;
-		}
-	});
-
-	return isValid;
-};
-
-function TotalLandedCost({ total_price_discounted = '', total_price_currency = '' }) {
-	return (
-		<div>
-			Total landed Cost:
-			<span style={{ fontWeight: 600, fontSize: 16, marginLeft: 8 }}>
-				{formatAmount({
-					amount   : total_price_discounted || ZERO_VALUE,
-					currency : total_price_currency,
-					options  : {
-						style                 : 'currency',
-						currencyDisplay       : 'symbol',
-						maximumFractionDigits : 0,
-					},
-				})}
-			</span>
-		</div>
-	);
-}
 
 function SelectedRateCard({
 	data = {},
@@ -89,114 +31,49 @@ function SelectedRateCard({
 
 	const { source = 'cogo_assured_rate', shipping_line = {} } = rateCardData;
 
-	const { spot_search_id = '', service_details = {}, service_type = '', importer_exporter } = detail;
+	const { spot_search_id = '' } = detail;
 
 	const { handleBook = () => {}, loading: createCheckoutLoading } = useCreateCheckout({
 		rateCardData,
 		spot_search_id,
 	});
-
-	const proceedToCheckoutIsValid = ifServiceValid(rateCardData?.service_rates, source);
-
-	const handleProceedToCheckout = () => {
-		const showCargoInsurance = ifToShowCargoInsurance({
-			services: service_details,
-			service_type,
-			importer_exporter,
-		});
-
-		if (showCargoInsurance && cargoModal === 'pending') {
-			setCargoModal('progress');
-		} else handleBook();
-	};
-
 	if (loading && isEmpty(data)) return <LoadingState />;
 
 	if (isEmpty(data)) return null;
 
 	return (
-		<div className={styles.parent}>
-			<div className={styles.container}>
-				<div className={styles.heading}>
-					<span className={styles.line}>
-						Selected:
-						<span style={{ fontWeight: 'bold', marginLeft: 8 }}>
-							{source === 'cogo_assured_rate' ? 'Cogo Assured' : rateCardData?.shipping_line?.short_name}
-						</span>
-					</span>
+		<div className={styles.container}>
+			<Header
+				detail={detail}
+				rateCardData={rateCardData}
+				refetch={refetch}
+			/>
 
-					<DetentionDemurrage details={detail} refetch={refetch} />
+			<FclCard
+				rateCardData={rateCardData}
+				detail={detail}
+				isSelectedCard
+				setScreen={setScreen}
+			/>
+
+			{source === 'cogo_assured_rate' ? (
+				<div className={styles.cogo_assured_text}>
+					you will not be able to edit margin for the selected rate card
 				</div>
+			) : null}
 
-				<FclCard
-					rateCardData={rateCardData}
-					detail={detail}
-					isSelectedCard
-					setScreen={setScreen}
-				/>
-
-				{source === 'cogo_assured_rate' ? (
-					<div className={styles.cogo_assured_text}>
-						you will not be able to edit margin for the selected rate card
-					</div>
-				) : null}
-
-				<div className={styles.services}>
-					<div className={styles.service_bundling}>
-						<Bundles />
-					</div>
-
-					<div className={styles.additional_services}>
-
-						<AdditionalServices
-							rateCardData={rateCardData}
-							detail={detail}
-							setHeaderProps={setHeaderProps}
-							refetchSearch={refetch}
-							source="search-results"
-							refetchLoading={loading}
-						/>
-
-						<CargoInsurance
-							data={detail}
-							refetch={refetch}
-							rateCardData={rateCardData}
-						/>
-						<div className={styles.wrapper}>
-							<TotalLandedCost
-								total_price_discounted={rateCardData.total_price_discounted}
-								total_price_currency={rateCardData.total_price_currency}
-							/>
-
-							<div className={styles.proceed_container}>
-								<Button
-									onClick={handleProceedToCheckout}
-									size="lg"
-									themeType="accent"
-									style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 16, paddingBottom: 16 }}
-									className={styles.proceed_button}
-									loading={createCheckoutLoading}
-									disabled={!proceedToCheckoutIsValid}
-								>
-									Proceed to checkout
-								</Button>
-							</div>
-						</div>
-
-						{!isEmpty(possible_subsidiary_services) && (
-							<div className={styles.subsidiary_services}>
-								<SubsidiaryServices
-									possible_subsidiary_services={possible_subsidiary_services}
-									data={detail}
-									refetch={refetch}
-									rate_card_id={rateCardData?.id}
-									loading={loading}
-								/>
-							</div>
-						)}
-					</div>
-				</div>
-			</div>
+			<Services
+				rateCardData={rateCardData}
+				detail={detail}
+				createCheckoutLoading={createCheckoutLoading}
+				refetch={refetch}
+				loading={loading}
+				setHeaderProps={setHeaderProps}
+				possible_subsidiary_services={possible_subsidiary_services}
+				cargoModal={cargoModal}
+				setCargoModal={setCargoModal}
+				handleBook={handleBook}
+			/>
 
 			{cargoModal === 'progress' ? (
 				<CargoModal

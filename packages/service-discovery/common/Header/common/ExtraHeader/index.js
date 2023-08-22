@@ -1,6 +1,6 @@
-import EditDetailsHeader from '../../../../page-components/SearchResults/components/EditDetailsHeader';
 import AdditionalServicesForm from '../../../OtherServices/AdditionalServices/AdditionalServicesForm';
 
+import EditDetailsHeader from './components/EditDetailsHeader';
 import styles from './styles.module.css';
 
 const SUB_HEADER_COMPONENT_MAPPING = {

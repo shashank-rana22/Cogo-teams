@@ -6,6 +6,7 @@
 }
 
 .heading {
+	margin-bottom: 12px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #000;
@@ -13,9 +14,9 @@
 
 .schedule_items_container {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
-	padding: 12px 4px 20px 6px;
-	overflow-x: scroll;
+	padding: 0 6px;
 }
 
 .loading {

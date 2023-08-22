@@ -1,8 +1,9 @@
 import { Loader, Pagination, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import { useState } from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import RequestRate from '../../../common/EmptyState/RequestRate';
 import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
@@ -17,41 +18,6 @@ import styles from './styles.module.css';
 const MAXIMUM_RATE_CARDS = 5;
 
 const ONE = 1;
-
-function HeaderTop({
-	detail = {},
-	filters = {},
-	setFilters = () => {},
-	total_rates_count = 0,
-	comparisonRates = {},
-	setComparisonRates = () => {},
-	setScreen = () => {},
-	refetch = () => {},
-	loading = false,
-}) {
-	const showComparison = !isEmpty(comparisonRates);
-
-	return (
-		<div className={styles.header}>
-			<Header
-				details={detail}
-				filters={filters}
-				setFilters={setFilters}
-				total_rates_count={total_rates_count}
-				refetch={refetch}
-				loading={loading}
-			/>
-
-			{showComparison ? (
-				<ComparisonHeader
-					comparisonRates={comparisonRates}
-					setComparisonRates={setComparisonRates}
-					setScreen={setScreen}
-				/>
-			) : null}
-		</div>
-	);
-}
 
 function LoaderComponent() {
 	return (
@@ -119,31 +85,59 @@ function ListRateCards({
 	cogoAssuredRates = [],
 	marketplaceRates = [],
 }) {
-	const PrimaryService = detail?.search_type;
+	const [showFilterModal, setShowFilterModal] = useState(false);
+	const [openAccordian, setOpenAccordian] = useState('');
 
-	if (PrimaryService === undefined) {
-		return null;
-	}
+	const primary_service = detail?.search_type;
 
 	const { current = '' } = infoBanner;
 
 	const show_dim_bg = current === 'comparision_button' && rates.length > ONE;
 
+	const showComparison = !isEmpty(comparisonRates);
+
+	if (!primary_service) { return null; }
+
+	if (!loading && isEmpty(rates)) {
+		return (
+			<EmptyState
+				details={detail}
+				filters={filters}
+				setFilters={setFilters}
+				refetch={refetchSearch}
+				showFilterModal={showFilterModal}
+				setShowFilterModal={setShowFilterModal}
+				setOpenAccordian={setOpenAccordian}
+				openAccordian={openAccordian}
+			/>
+		);
+	}
+
 	return (
 		<div className={cl`${styles.container} ${show_dim_bg && styles.dim_bg}`}>
 			<div className={styles.header_wrapper}>
-				<HeaderTop
-					detail={detail}
-					filters={filters}
-					setFilters={setFilters}
-					total_rates_count={detail?.rates_count}
-					comparisonRates={comparisonRates}
-					setComparisonRates={setComparisonRates}
-					setScreen={setScreen}
-					refetch={refetchSearch}
-					cogoAssuredRates={cogoAssuredRates}
-					loading={loading}
-				/>
+				<div className={styles.header}>
+					<Header
+						details={detail}
+						filters={filters}
+						setFilters={setFilters}
+						total_rates_count={detail?.rates_count}
+						refetch={refetchSearch}
+						loading={loading}
+						showFilterModal={showFilterModal}
+						setShowFilterModal={setShowFilterModal}
+						openAccordian={openAccordian}
+						setOpenAccordian={setOpenAccordian}
+					/>
+
+					{showComparison ? (
+						<ComparisonHeader
+							comparisonRates={comparisonRates}
+							setComparisonRates={setComparisonRates}
+							setScreen={setScreen}
+						/>
+					) : null}
+				</div>
 			</div>
 
 			<Schedules
@@ -157,7 +151,12 @@ function ListRateCards({
 				loading={loading}
 			/>
 
-			<AppliedFilters filters={filters} setFilters={setFilters} />
+			<AppliedFilters
+				setShowFilterModal={setShowFilterModal}
+				setOpenAccordian={setOpenAccordian}
+				filters={filters}
+				setFilters={setFilters}
+			/>
 
 			{loading || isEmpty(cogoAssuredRates) ? null : (
 				<CogoAssuredCard
@@ -211,21 +210,19 @@ function ListRateCards({
 						/>
 					) : null}
 				</>
-
 			))}
 
 			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}
 
-			{rates.length > MAXIMUM_RATE_CARDS && !loading ? (
-				<div className={styles.pagination}>
-					<Pagination
-						type="table"
-						currentPage={paginationProps?.page}
-						totalItems={paginationProps?.total_count}
-						pageSize={paginationProps?.page_limit}
-						onPageChange={(val) => setPage(val)}
-					/>
-				</div>
+			{(rates || []).length > MAXIMUM_RATE_CARDS && !loading ? (
+				<Pagination
+					type="table"
+					currentPage={paginationProps?.page}
+					totalItems={paginationProps?.total_count}
+					pageSize={paginationProps?.page_limit}
+					onPageChange={(val) => setPage(val)}
+					className={styles.pagination}
+				/>
 			) : null}
 		</div>
 	);

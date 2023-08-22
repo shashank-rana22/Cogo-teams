@@ -24,38 +24,38 @@ const onlySingleLocation = [
 	'fcl_locals',
 ];
 
-const getLocationName = (data, pair_type, type, key) => {
-	const SUFFIX_MAPPING = {
-		lcl_freight                 : 'port',
-		fcl_freight                 : 'port',
-		air_freight                 : 'airport',
-		trailer_freight             : 'location',
-		ftl_freight                 : 'location',
-		ltl_freight                 : 'location',
-		fcl_customs                 : 'port',
-		lcl_customs                 : 'location',
-		air_customs                 : 'airport',
-		haulage_freight             : 'location',
-		domestic_air_freight        : 'airport',
-		origin_trailer_freight      : 'location',
-		destination_trailer_freight : 'location',
-		origin_ftl_freight          : 'location',
-		destination_ftl_freight     : 'location',
-		origin_ltl_freight          : 'location',
-		destination_ltl_freight     : 'location',
-		origin_fcl_customs          : 'port',
-		destination_fcl_customs     : 'port',
-		origin_lcl_customs          : 'location',
-		destination_lcl_customs     : 'location',
-		origin_air_customs          : 'airport',
-		destination_air_customs     : 'airport',
-		fcl_cfs                     : 'port',
-		origin_fcl_cfs              : 'port',
-		destination_fcl_cfs         : 'port',
-		fcl_locals                  : 'port',
-		cogo_assured                : 'port',
-	};
+const SUFFIX_MAPPING = {
+	lcl_freight                 : 'port',
+	fcl_freight                 : 'port',
+	air_freight                 : 'airport',
+	trailer_freight             : 'location',
+	ftl_freight                 : 'location',
+	ltl_freight                 : 'location',
+	fcl_customs                 : 'port',
+	lcl_customs                 : 'location',
+	air_customs                 : 'airport',
+	haulage_freight             : 'location',
+	domestic_air_freight        : 'airport',
+	origin_trailer_freight      : 'location',
+	destination_trailer_freight : 'location',
+	origin_ftl_freight          : 'location',
+	destination_ftl_freight     : 'location',
+	origin_ltl_freight          : 'location',
+	destination_ltl_freight     : 'location',
+	origin_fcl_customs          : 'port',
+	destination_fcl_customs     : 'port',
+	origin_lcl_customs          : 'location',
+	destination_lcl_customs     : 'location',
+	origin_air_customs          : 'airport',
+	destination_air_customs     : 'airport',
+	fcl_cfs                     : 'port',
+	origin_fcl_cfs              : 'port',
+	destination_fcl_cfs         : 'port',
+	fcl_locals                  : 'port',
+	cogo_assured                : 'port',
+};
 
+const getLocationName = (data, pair_type, type, key) => {
 	const suffix = SUFFIX_MAPPING[pair_type];
 	const isSingleLocation = onlySingleLocation.includes(pair_type);
 
@@ -84,7 +84,7 @@ const getLocationName = (data, pair_type, type, key) => {
 
 function PortPair({ item = {}, field = {} }) {
 	const { pair_type = 'fcl_freight', key = '-', props = {} } = field || {};
-	const { setLocation = () => {} } = props;
+	const { setLocation = () => {}, service_type:selected_service = '' } = props;
 	const service_type = item[pair_type];
 	const [origin, origin_display_name] = getLocationName(
 		item,
@@ -102,9 +102,14 @@ function PortPair({ item = {}, field = {} }) {
 	const isSingleLocation = onlySingleLocation.includes(service_type);
 
 	const handleClickLocation = () => {
+		if (service_type !== selected_service) {
+			return;
+		}
+		const locationSuffix = SUFFIX_MAPPING[service_type];
+
 		setLocation({
-			origin      : item.origin_location,
-			destination : item.destination_location,
+			origin      : item[`origin_${locationSuffix}`] || item.origin_location,
+			destination : item[`destination_${locationSuffix}`] || item.destination_location,
 		});
 	};
 

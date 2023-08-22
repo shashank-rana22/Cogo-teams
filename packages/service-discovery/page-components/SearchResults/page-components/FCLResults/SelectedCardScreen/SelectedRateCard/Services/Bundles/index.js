@@ -17,9 +17,11 @@ function Bundles() {
 		<div className={styles.container}>
 			<div className={styles.heading}>Pre-curated Offers (Coming Soon)</div>
 
-			{shuffledArray.map((item) => (
-				<OfferBundle key={item.key} data={item} />
-			))}
+			<div className={styles.bundles_container}>
+				{shuffledArray.map((item) => (
+					<OfferBundle key={item.key} data={item} />
+				))}
+			</div>
 		</div>
 	);
 }

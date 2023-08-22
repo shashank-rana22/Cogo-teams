@@ -84,7 +84,9 @@
 	align-items: center;
 }
 
-.filter_value {
+.filter_value_pill {
+	display: flex;
+	align-items: center;
 	width: max-content;
 	padding: 4px 12px;
 	margin-left: 12px;
@@ -92,5 +94,13 @@
 	font-weight: 400;
 	color: #1295a3;
 	border: 1px solid #24c7d9;
-	border-radius: 36px;
+	border-radius: 12px;
+}
+
+.cross_icon {
+	width: 14px;
+	height: 14px;
+	margin-left: 4px;
+	stroke: #1295a3;
+	stroke-width: 1.1px;
 }

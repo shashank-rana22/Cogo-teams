@@ -2,11 +2,11 @@ import { Button, Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import OrganisationForm from '../../../../common/OrganisationForm';
-import RouteForm from '../../../../common/RouteForm';
-import useCreateSearch from '../../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
-import getPrefillForm from '../../utils/getPrefillForm';
-import getLocationInfo from '../../utils/locations-search';
+import getPrefillForm from '../../../../../../page-components/SearchResults/utils/getPrefillForm';
+import getLocationInfo from '../../../../../../page-components/SearchResults/utils/locations-search';
+import useCreateSearch from '../../../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
+import OrganisationForm from '../../../../../OrganisationForm';
+import RouteForm from '../../../../../RouteForm';
 
 import styles from './styles.module.css';
 
@@ -46,10 +46,6 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, ...rest }) {
 	});
 
 	const onClickApply = async () => {
-		// if (!isEmpty(errors)) {
-		// 	return;
-		// }
-
 		const { origin:originValues = {}, destination:destinationValues = {} } = locationValues;
 
 		const { id: origin_id = '' } = originValues;

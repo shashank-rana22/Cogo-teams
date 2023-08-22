@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -19,7 +20,9 @@ const useGetInsuranceRate = (props) => {
 
 			setRateData(res?.data);
 		} catch (err) {
-			Toast.error(err?.response?.data?.message || 'Something went wrong');
+			if (err?.response?.data) {
+				Toast.error(getApiErrorString(err?.response?.data));
+			}
 			setRateData({});
 		}
 	}, [setRateData, trigger]);

@@ -6,6 +6,19 @@
 	background: #fff;
 	border-bottom: 1px solid #ebebf0;
 	box-shadow: 0 4px 8px 0 #ebebf0;
+	animation: open-animation 0.5s forwards;
+}
+
+@keyframes open-animation {
+	0% {
+		padding: 0 24px;
+		opacity: 0.5;
+	}
+
+	100% {
+		padding: 16px 24px;
+		opacity: 1;
+	}
 }
 
 .content_container {
