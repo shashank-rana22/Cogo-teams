@@ -1,21 +1,39 @@
 /* eslint-disable no-magic-numbers */
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+
+import useUpdateOrganizationService from '../../hooks/useUpdateOrganizationService';
 
 import StepOne from './ContractItem/StepOne';
 import StepTwo from './ContractItem/StepTwo';
 import useGetOrganizationContract from './hooks/useGetOrganizationContract';
+import useSendOrganizationContractForRenegotiation from './hooks/useSendOrganizationContractForRenegotiation';
 import styles from './styles.module.css';
 
-function ContractSla({ organization_id, service_type }) {
-	const [step, setStep] = useState(1);
+function ContractSla({ organization_id, service_type, id:organization_service_id }) {
+	const { push } = useRouter();
+	const [step, setStep] = useState(2);
 	const { data, id, getOrganizationContract } = useGetOrganizationContract({ organization_id, service_type, step });
 	const {
 		control,
 	} = useForm();
 
+	const { updateOrganizationService } = useUpdateOrganizationService({
+		organization_id,
+		stage_of_approval : 'contract_and_sla_approval',
+		service           : service_type,
+	});
+
 	const [negotiationIds, setNegotiationIds] = useState([]);
+	const { sendOrganizationContractForRenegotiation } = useSendOrganizationContractForRenegotiation(
+		{
+			organization_service_id,
+			negotiationIds,
+			contract_id: id,
+		},
+	);
 
 	return (
 		<div className={styles.parent}>
@@ -33,7 +51,16 @@ function ContractSla({ organization_id, service_type }) {
 				</div>
 				{
 					step === 2
-					&& <Button size="md" themeType="primary">Renegotiate</Button>
+					&& (
+						<Button
+							size="md"
+							themeType="primary"
+							disabled={negotiationIds?.length === 0}
+							onClick={() => sendOrganizationContractForRenegotiation()}
+						>
+							Renegotiate
+						</Button>
+					)
 				}
 			</div>
 			{data?.map((item, index) => (
@@ -70,8 +97,13 @@ function ContractSla({ organization_id, service_type }) {
 					{' '}
 					<Button
 						style={{ fontWeight: 600 }}
-						onClick={() => {
-							setStep(2);
+						onClick={async () => {
+							await updateOrganizationService();
+							Toast.success('Updated');
+							push(
+								'/governance-manager/',
+								'/governance-manager/',
+							);
 						}}
 					>
 						Save & Next

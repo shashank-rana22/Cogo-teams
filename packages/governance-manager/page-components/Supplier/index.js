@@ -64,6 +64,9 @@ function Supplier() {
 					setStatus={setStatus}
 					service_type={supplierData?.service}
 					organization_id={supplierData?.organization_id}
+					getOrganizationService={getOrganizationService}
+					id={id}
+
 				/>,
 			}[status]}
 		</div>

@@ -1,27 +1,33 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useRouter } from 'next/router';
 
-// this will get called in step 2
 function useSendOrganizationContractForRenegotiation({
-	organization_id,
-	stage_of_approval,
-	service,
-	getOrganizationService,
+	organization_service_id,
+	contract_id,
+	negotiationIds,
 }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/send_organization_contract_for_renegotiation',
 	}, { manual: true });
 
-	const SendOrganizationContractForRenegotiation = async () => {
+	const { push } = useRouter();
+
+	const sendOrganizationContractForRenegotiation = async () => {
 		try {
 			await trigger({
 				params: {
-					stage_of_approval,
-					organization_id,
-					service,
+					organization_service_id,
+					contract_id,
+					organization_contract_configuration_ids: negotiationIds,
 				},
 			});
-			getOrganizationService();
+			Toast.success('Negotiation sent');
+			push(
+				'/governance-manager/',
+				'/governance-manager/',
+			);
 		} catch (err) {
 			console.log(err);
 		}
@@ -29,7 +35,7 @@ function useSendOrganizationContractForRenegotiation({
 	return {
 		data,
 		loading,
-		SendOrganizationContractForRenegotiation,
+		sendOrganizationContractForRenegotiation,
 	};
 }
 
