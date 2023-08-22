@@ -14,7 +14,7 @@ const BACK_STEP = 1;
 const LAST_STEP = 3;
 const INCREMENT_FACTOR = 1;
 
-function Step2({
+function StepTwo({
 	setStep = () => {},
 	step = 0,
 	insuranceDetails = {},
@@ -124,4 +124,4 @@ function Step2({
 	);
 }
 
-export default Step2;
+export default StepTwo;

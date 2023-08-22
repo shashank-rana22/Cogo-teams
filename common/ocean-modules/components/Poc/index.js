@@ -48,7 +48,7 @@ function Poc({
 		shipment_id,
 	});
 
-	const checkForStakeholders = ['booking_agent',
+	const checkForStakeholders = ['booking_agent', 'booking_agent_manager',
 		'sales_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
 
 	const serviceProviders = getServiceProviderData(servicesList);
