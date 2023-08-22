@@ -164,7 +164,7 @@ function InvoiceTable({
 					totalItems={recordInvoiceList}
 					pageSize={invoiceFilters.pageLimit}
 					onPageChange={(val) => setinvoiceFilters({ ...invoiceFilters, page: val })}
-				/>
+				/> 
 			</div>
 			{showFilters ? (
 				<FooterCard

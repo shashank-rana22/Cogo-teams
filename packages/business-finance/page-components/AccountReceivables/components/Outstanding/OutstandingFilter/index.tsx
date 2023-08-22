@@ -158,64 +158,6 @@ function Filters({
 							</div>
 						</div>
 					) : null}
-					<div className={styles.sort_container}>
-						<Popover
-							placement="bottom"
-							render={(
-								<div className={styles.styled_row}>
-									{getSearchOptionsLabels(entityCode)?.map(
-										(item) => {
-											if (!item.label) {
-												return null;
-											}
-											return (
-												<div
-													key={item.value}
-													className={
-														styles.styled_col
-													}
-													onClick={() => {
-														setQueryKey(
-															item?.value || 'q',
-														);
-														setShowSearchPopover(
-															!showSearchPopover,
-														);
-														setParams((prev) => ({
-															...prev,
-															page: 1,
-														}));
-													}}
-													role="presentation"
-												>
-													<div
-														className={
-															styles.tile_heading
-														}
-													>
-														{item.label}
-													</div>
-												</div>
-											);
-										},
-									)}
-								</div>
-							)}
-						>
-							<div
-								style={{ display: 'flex', cursor: 'pointer' }}
-								onClick={() => setShowSearchPopover(true)}
-								role="presentation"
-							>
-								Searched By:
-								{' '}
-								<div className={styles.filter_value}>
-									{placeholder?.replace('Search By ', '')}
-									{' '}
-								</div>
-							</div>
-						</Popover>
-					</div>
 					<div className={styles.flex_wrap}>
 						<Input
 							placeholder={placeholder}

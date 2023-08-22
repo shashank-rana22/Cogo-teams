@@ -70,9 +70,9 @@ function useCreateCommunicationLog({
 				data: payload,
 			});
 			Toast.success('Saved Successfully');
-			setShowLog(false);
 			refetch();
 			reset();
+			setShowLog(false);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
 		}

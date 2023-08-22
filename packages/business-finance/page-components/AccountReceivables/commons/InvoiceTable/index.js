@@ -144,11 +144,13 @@ function InvoiceTable({
 					/>
 				</div>
 			)}
-			<StyledTable
-				data={invoiceList}
-				columns={columnsFiltered}
-				loading={invoiceLoading}
-			/>
+			<div className={styles.table}>
+				<StyledTable
+					data={invoiceList}
+					columns={columnsFiltered}
+					loading={invoiceLoading}
+				/>
+			</div>
 			<div className={cl`${styles.pagination_container} ${showFilters ? '' : styles.nomargin}`}>
 				<Pagination
 					type="table"

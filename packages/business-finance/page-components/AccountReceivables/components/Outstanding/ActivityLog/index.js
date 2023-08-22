@@ -63,7 +63,7 @@ function ActivityLog({
 			/>
 			<div className={styles.single_form_row}>
 				<div className={styles.input}>
-					<div className={styles.label}>Select Reminder Type</div>
+					<div className={styles.label}>Select Reminder Type *</div>
 					<SelectController
 						options={callOptions}
 						name="reminderType"
@@ -74,7 +74,7 @@ function ActivityLog({
 				</div>
 
 				<div className={styles.input}>
-					<div className={styles.label}>Attendee from Cogoport</div>
+					<div className={styles.label}>Attendee from Cogoport *</div>
 					<AsyncSelectController
 						name="attendee"
 						asyncKey="partner_users_ids"
@@ -92,7 +92,7 @@ function ActivityLog({
 
 			<div className={styles.single_form_row}>
 				<div className={styles.input}>
-					<div className={styles.label}>Title</div>
+					<div className={styles.label}>Title *</div>
 					<InputController
 						name="title"
 						rules={{ required: true }}
@@ -107,7 +107,7 @@ function ActivityLog({
 					{!formData?.reminder
 						? (
 							<div>
-								<div className={styles.label}>Communication Response</div>
+								<div className={styles.label}>Communication Response *</div>
 								<SelectController
 									control={control}
 									name="communicationResponse"
@@ -119,7 +119,7 @@ function ActivityLog({
 						)
 						: (
 							<div>
-								<div className={styles.label}>Reminder Date and Time</div>
+								<div className={styles.label}>Reminder Date and Time *</div>
 								<DatepickerController
 									placeholder="Select Date"
 									showTimeSelect
@@ -140,7 +140,7 @@ function ActivityLog({
 				<div className={styles.single_form_row}>
 					<div className={styles.input}>
 						<div>
-							<div className={styles.label}>Start Date and Time</div>
+							<div className={styles.label}>Start Date and Time *</div>
 							<DatepickerController
 								placeholder="Select Date"
 								showTimeSelect
@@ -156,7 +156,7 @@ function ActivityLog({
 
 					<div className={styles.input}>
 						<div>
-							<div className={styles.label}>End Date and Time</div>
+							<div className={styles.label}>End Date and Time *</div>
 							<DatepickerController
 								placeholder="Select Date"
 								showTimeSelect
@@ -174,7 +174,7 @@ function ActivityLog({
 
 			<div className={styles.single_form_row}>
 				<div className={styles.input}>
-					<div className={styles.label}>Primary Attendee from Organization</div>
+					<div className={styles.label}>Primary Attendee from Organization *</div>
 					<AsyncSelectController
 						name="primaryAttendeeFromOrg"
 						asyncKey="list_organization_users"

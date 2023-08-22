@@ -1,7 +1,6 @@
-import { DatepickerController, InputController, SelectController, TextAreaController } from '@cogoport/forms';
+import { DatepickerController, InputController, RadioGroupController, SelectController, TextAreaController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -15,8 +14,8 @@ function FeedbackComponent({
 	errors,
 }) {
 	const currencyOptions = Object.values(GLOBAL_CONSTANTS.currency_code).map((item) => ({
-		label : item,
-		value : item,
+		label: item,
+		value: item,
 	}));
 
 	useEffect(() => {
@@ -31,7 +30,7 @@ function FeedbackComponent({
 		<div
 			className={styles.container}
 			style={{
-				background: !isEmpty(feedbackData?.feedback_type) ? '#fdebe9' : 'inherit',
+				background: '#FDFBF6',
 			}}
 		>
 			<div className={styles.delete}>
@@ -45,7 +44,7 @@ function FeedbackComponent({
 			</div>
 
 			<div className={styles.feedback_type}>
-				<div>Select Feedback Type</div>
+				<div>Select Feedback Type *</div>
 				<SelectController
 					control={control}
 					name={`feedback.${index}.feedback_type`}
@@ -64,13 +63,12 @@ function FeedbackComponent({
 			<div className={styles.feedback_data}>
 				{feedbackData?.feedback_type === 'credit_controller_feedback' && (
 					<div>
-						<div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-							<div className={styles.single_input_section}>
-								<h4>Call feedback</h4>
+						<div className={styles.maincontainer}>
+							<div>
+								<div className={styles.callabel}>Call feedback *</div>
 								<div>
-									<SelectController
+									<RadioGroupController
 										control={control}
-										placeholder="Positive/Negative"
 										rules={{ required: true }}
 										name={`feedback.${index}.call_feedback`}
 										options={[
@@ -84,27 +82,11 @@ function FeedbackComponent({
 										? '*required' : null}
 								</div>
 							</div>
-							<div className={styles.single_input_section}>
-								<h4>Next follow up date</h4>
+							<div className={styles.paymentcommit}>
+								<div className={styles.callabel}>Payment Commitment *</div>
 								<div>
-									<DatepickerController
+									<RadioGroupController
 										control={control}
-										rules={{ required: true }}
-										name={`feedback.${index}.reminder_date`}
-									/>
-								</div>
-								<div className={styles.errors}>
-									{errors?.feedback?.[index]?.reminder_date
-										? '*required' : null}
-								</div>
-							</div>
-
-							<div style={{ width: '180px' }}>
-								<h4>Payment Commitment</h4>
-								<div>
-									<SelectController
-										control={control}
-										placeholder="Yes/No"
 										name={`feedback.${index}.payment_commitment`}
 										rules={{ required: true }}
 										options={[
@@ -118,11 +100,24 @@ function FeedbackComponent({
 										? '*required' : null}
 								</div>
 							</div>
-
+							<div className={styles.next}>
+								<div>Next follow up date *</div>
+								<div>
+									<DatepickerController
+										control={control}
+										rules={{ required: true }}
+										name={`feedback.${index}.reminder_date`}
+									/>
+								</div>
+								<div className={styles.errors}>
+									{errors?.feedback?.[index]?.reminder_date
+										? '*required' : null}
+								</div>
+							</div>
 							{feedbackData?.payment_commitment === 'yes' && (
 								<div style={{ display: 'flex' }}>
 									<div>
-										<h4>Commitment amount</h4>
+										<div>Commitment amount</div>
 										<div style={{ display: 'flex' }}>
 											<div>
 												<SelectController
@@ -156,7 +151,7 @@ function FeedbackComponent({
 
 									</div>
 									<div className={styles.commitmentdate}>
-										<h4>Commitment date</h4>
+										<div>Commitment date</div>
 										<div>
 											<DatepickerController
 												control={control}
@@ -172,8 +167,8 @@ function FeedbackComponent({
 								</div>
 							)}
 						</div>
-						<div>
-							<h4>Obstacles Faced</h4>
+						<div className={styles.obsticles}>
+							<div>Obstacles Faced *</div>
 							<TextAreaController
 								control={control}
 								name={`feedback.${index}.obstacle_faced`}
@@ -190,7 +185,7 @@ function FeedbackComponent({
 				)}
 				{feedbackData?.feedback_type === 'general_feedback' && (
 					<div>
-						<h4>General Feedback</h4>
+						<div>General Feedback *</div>
 						<TextAreaController
 							control={control}
 							name={`feedback.${index}.general_feedback_text`}
