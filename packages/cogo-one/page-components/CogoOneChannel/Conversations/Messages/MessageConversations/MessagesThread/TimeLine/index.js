@@ -2,12 +2,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
 
-import { CHANNEL_TYPE } from '../../../../../../constants';
-import getVoiceCallStatement from '../../../../../../utils/getVoiceCallStatement';
+import { CHANNEL_TYPE } from '../../../../../../../constants';
+import getVoiceCallStatement from '../../../../../../../utils/getVoiceCallStatement';
 
 import styles from './styles.module.css';
 
-function TimeLine({ eachMessage = {}, key = '' }) {
+function TimeLine({ eachMessage = {} }) {
 	const {
 		conversation_type = '',
 		agent_data = {},
@@ -32,26 +32,28 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 		channel,
 	});
 
+	if (!timelineText) {
+		return null;
+	}
+
 	return (
-		timelineText ? (
-			<div className={styles.container} key={key}>
-				<div className={styles.break_the_chat} />
-				<div className={styles.timeline_text}>
-					<div className={styles.timeline_container}>
-						{timelineText}
-					</div>
-					<div className={styles.timeline_container}>
-						{formatDate({
-							date       : new Date(created_at),
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
-							formatType : 'dateTime',
-							separator  : ', ',
-						})}
-					</div>
+		<div className={styles.container}>
+			<div className={styles.break_the_chat} />
+			<div className={styles.timeline_text}>
+				<div className={styles.timeline_container}>
+					{timelineText}
+				</div>
+				<div className={styles.timeline_container}>
+					{formatDate({
+						date       : new Date(created_at),
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+						formatType : 'dateTime',
+						separator  : ', ',
+					})}
 				</div>
 			</div>
-		) : null
+		</div>
 	);
 }
 

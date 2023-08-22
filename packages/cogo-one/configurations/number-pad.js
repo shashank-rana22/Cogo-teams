@@ -3,59 +3,59 @@ import { Image } from '@cogoport/next';
 
 const mobileNumberPads = [
 	{
-		key   : 1,
+		key   : 'one',
 		label : '1',
 	},
 	{
-		key        : 2,
+		key        : 'two',
 		label      : '2',
 		lowerlabel : 'ABC',
 	},
 	{
-		key        : 3,
+		key        : 'three',
 		label      : '3',
 		lowerlabel : 'DEF',
 	},
 	{
-		key        : 4,
+		key        : 'four',
 		label      : '4',
 		lowerlabel : 'GHI',
 	},
 	{
-		key        : 5,
+		key        : 'five',
 		label      : '5',
 		lowerlabel : 'JKL',
 	},
 	{
-		key        : 6,
+		key        : 'six',
 		label      : '6',
 		lowerlabel : 'MNO',
 	},
 	{
-		key        : 7,
+		key        : 'seven',
 		label      : '7',
 		lowerlabel : 'PQRS',
 	},
 	{
-		key        : 8,
+		key        : 'eight',
 		label      : '8',
 		lowerlabel : 'TUV',
 	},
 	{
-		key        : 9,
+		key        : 'nine',
 		label      : '9',
 		lowerlabel : 'WXYZ',
 	},
 	{
-		key   : 10,
+		key   : 'dummy_button',
 		label : '',
 	},
 	{
-		key   : 11,
+		key   : 'zero',
 		label : '0',
 	},
 	{
-		key   : 12,
+		key   : 'delete_icon',
 		label : '',
 		icon  : (
 			<Image

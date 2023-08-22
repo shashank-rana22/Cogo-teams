@@ -1,33 +1,54 @@
-/* eslint-disable max-len */
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function PopBody({ emojisList, updateMessage, setOnClicked = () => {} }) {
+const EMOJI_NAME_INDEX = 2;
+
+function PopBody({
+	emojisList = {},
+	updateMessage = () => {},
+	setOnClicked = () => {},
+}) {
 	return (
 		<div className={styles.container}>
-			{Object.entries(emojisList).map((group) => (
-				Object.entries(group[1]).map((subgroup) => (
-					subgroup[1].map((item) => {
-						const result = item[0].trim().split(/\s+/);
-						let emoji = '';
-						result.forEach((emojiUnicode) => {
-							emoji += String.fromCodePoint(`0x${emojiUnicode}`);
-						});
+			{Object.values(emojisList).map(
+				(group) => (
+					Object.values(group).map(
+						(subgroup) => (
+							subgroup.map(
+								(item, index) => {
+									const result = item[GLOBAL_CONSTANTS.zeroth_index]?.trim()?.split(
+										GLOBAL_CONSTANTS.regex_patterns.white_space,
+									);
 
-						return (
-							<div
-								role="presentation"
-								className={styles.emoji_button}
-								onClick={() => {
-									updateMessage(emoji);
-									setOnClicked(false);
-								}}
-							>
-								{emoji}
-							</div>
-						);
-					})))))}
+									const emojiName = item?.[EMOJI_NAME_INDEX];
+
+									let emoji = '';
+
+									result.forEach((emojiUnicode) => {
+										emoji += String.fromCodePoint(`0x${emojiUnicode}`);
+									});
+
+									return (
+										<div
+											key={emojiName || index}
+											role="presentation"
+											className={styles.emoji_button}
+											onClick={() => {
+												updateMessage(emoji);
+												setOnClicked(false);
+											}}
+										>
+											{emoji}
+										</div>
+									);
+								},
+							)
+						),
+					)
+				),
+			)}
 		</div>
 	);
 }
