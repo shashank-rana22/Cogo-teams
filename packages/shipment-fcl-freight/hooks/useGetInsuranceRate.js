@@ -16,10 +16,10 @@ const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {}, setPremiu
 	} = formValues || insuranceDetails;
 
 	const [{ loading, data }, trigger] = useRequestBf({
-		auth   : 'get_saas_insurance_rate',
-		url    : 'saas/insurance/rate',
-		method : 'GET',
-		params : {
+		authKey : 'get_saas_insurance_rate',
+		url     : 'saas/insurance/rate',
+		method  : 'GET',
+		params  : {
 			performedBy        : userId,
 			policyType         : insuranceDetails?.policyType,
 			descriptionOfCargo : cargoDescription,
