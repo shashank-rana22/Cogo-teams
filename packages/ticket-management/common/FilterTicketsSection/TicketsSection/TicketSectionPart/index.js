@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
 import useListTickets from '../../../../hooks/useListTickets';
 import useUpdateTicketActivity from '../../../../hooks/useUpdateTicketActivity';
@@ -10,6 +11,8 @@ function TicketsSectionPart({
 	label = '', status = '', searchParams = {}, spectatorType = '', refreshList = {}, setRefreshList = () => {},
 	isAdmin = false, setModalData = () => {}, isUpdated = false, setIsUpdated = () => {}, date = {},
 }) {
+	const { t } = useTranslation(['myTickets']);
+
 	const {
 		tickets = {},
 		listLoading = false,
@@ -47,7 +50,7 @@ function TicketsSectionPart({
 		<div className={cl`${styles.tickets_section_part} ${isAdmin ? styles.admin_ticket_view : ''}`}>
 			<div className={styles.status_heading}>
 				{label}
-				<div className={styles.tickets_count_label}>{`(${total} tickets)`}</div>
+				<div className={styles.tickets_count_label}>{`(${total} ${t('myTickets:tickets')})`}</div>
 			</div>
 			<TicketStructure
 				data={list}

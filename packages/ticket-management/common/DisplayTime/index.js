@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next';
+
 import getFormattedTime from '../../utils/getFormattedTime';
 
 import styles from './styles.module.css';
@@ -6,33 +8,35 @@ const MIN_SECONDS = 0;
 const NULL_RETURN = '0h 0m 0s';
 const PAD_START_COUNT = 2;
 
-const TIME_MAPPING = [
+const getTimeMapping = (t) => [
 	{
 		key   : 'days',
-		label : 'd',
+		label : `${t('myTickets:days_label')}`,
 	},
 	{
 		key   : 'hours',
-		label : 'h',
+		label : `${t('myTickets:hours_label')}`,
 	},
 	{
 		key   : 'minutes',
-		label : 'm',
+		label : `${t('myTickets:minutes_label')}`,
 	},
 	{
 		key   : 'seconds',
-		label : 's',
+		label : `${t('myTickets:seconds_label')}`,
 	},
 ];
 
 function DisplayTime({ sec = 0 }) {
+	const { t } = useTranslation(['']);
+
 	const time = getFormattedTime(sec);
 
 	if (!sec || sec === '0') { return NULL_RETURN; }
 
 	return (
 		<div className={styles.container}>
-			{TIME_MAPPING.map((item) => {
+			{getTimeMapping(t).map((item) => {
 				const { key, label } = item || {};
 
 				if (time[key] === MIN_SECONDS) return null;
