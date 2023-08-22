@@ -13,7 +13,7 @@ import getPayload from './utils/getPayload';
 const LAST_STEP = 3;
 const INCREMENT_FACTOR = 1;
 
-function Step1({
+function StepOne({
 	setStep = () => {},
 	step = 0,
 	insuranceDetails = {},
@@ -139,4 +139,4 @@ function Step1({
 		</section>
 	);
 }
-export default Step1;
+export default StepOne;
