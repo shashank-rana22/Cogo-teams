@@ -14,8 +14,7 @@ const validateFileField = (value, control) => {
 		if (!isValid) {
 			return control.rules?.required?.message || control.rules?.required || 'This field is required';
 		}
-	}
-	if (isEmpty(value?.finalUrl)) {
+	} else if (isEmpty(value?.finalUrl)) {
 		return control.rules?.required?.message || control.rules?.required || 'This field is required';
 	}
 
