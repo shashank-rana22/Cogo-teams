@@ -19,7 +19,7 @@ export const statusTabs = ({ approvalStats }) => [{
 	badge : approvalStats?.total_supplier_approval,
 },
 {
-	name  : 'contract_sla',
+	name  : 'contract_and_sla_updation',
 	title : 'Contract & SLA',
 	badge : approvalStats?.total_contract_and_sla,
 }];

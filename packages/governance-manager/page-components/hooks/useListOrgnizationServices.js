@@ -22,9 +22,11 @@ function useListOrganizationServices({ currentPage, activeTab, setApprovalStats,
 			const res = await trigger({
 				params: {
 					filters: {
-						stage_of_approval : activeTab,
-						service           : currentService === 'all' ? ALL_SERVICES : currentService,
-						status            : 'pending_approval',
+						stage_of_approval:
+						activeTab === 'contract_and_sla_updation'
+							? ['contract_and_sla_updation', 'contract_and_sla_approval'] : activeTab,
+						service : currentService === 'all' ? ALL_SERVICES : currentService,
+						status  : 'pending_approval',
 					},
 					service_expertise_required : true,
 					page                       : currentPage,

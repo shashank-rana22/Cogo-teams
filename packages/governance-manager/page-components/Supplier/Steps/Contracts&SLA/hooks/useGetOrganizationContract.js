@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetOrganizationContract = ({ organization_id, step }) => {
+const useGetOrganizationContract = ({ organization_id, step, service_type }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : 'get_organization_contract',
@@ -11,8 +11,8 @@ const useGetOrganizationContract = ({ organization_id, step }) => {
 		try {
 			await trigger({
 				params: {
-					organization_id : '03f6764a-6da8-48dd-b613-f74f42d76d78',
-					service_type    : 'fcl_freight',
+					organization_id,
+					service_type,
 				},
 			});
 		} catch (err) {
