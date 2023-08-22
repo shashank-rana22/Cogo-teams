@@ -12,6 +12,7 @@ const useRaiseTicketControls = ({
 	const ticketTypeOptions = useGetAsyncTicketOptions({
 		...asyncFieldsTicketTypes(),
 		params: {
+			Audience    : 'cogoport_user',
 			Service     : service || undefined,
 			TradeType   : trade_type || undefined,
 			Category    : watchCategory || undefined,
