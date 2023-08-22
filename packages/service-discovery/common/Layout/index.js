@@ -76,6 +76,7 @@ function Layout({
 								handleSubmit={handleSubmit}
 								setValue={setValue}
 								isSubControl
+								{...restLayout}
 							/>
 						</div>
 					);

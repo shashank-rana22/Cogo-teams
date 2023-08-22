@@ -20,8 +20,9 @@ function FormModal({
 	setShowModal = () => {},
 	handleApply = () => {},
 	reset = () => {},
+	activeTab = '',
+	setActiveTab = () => {},
 }) {
-	const [activeTab, setActiveTab] = useState('by_gross'); // by_gross and by_package
 	const [commoditySubtypeOptions, setCommoditySubTypeOptions] = useState([]);
 	const [selectedWeightType, setSelectedWeightType] = useState('weight_by_unit');
 
@@ -45,9 +46,10 @@ function FormModal({
 	};
 
 	useEffect(() => {
-		if (activeTab === 'by_gross') return;
+		if (activeTab === 'cargo_gross') return;
 
 		const weightUnit = selectedWeightType === 'weight_by_unit' ? 'kg_unit' : 'kg_total';
+
 		const packages = watch('packages');
 		(packages || []).forEach((_, index) => {
 			setValue(`packages[${index}].weight_unit`, weightUnit);
@@ -62,7 +64,7 @@ function FormModal({
 				reset={reset}
 			/>
 
-			{activeTab === 'by_package' ? (
+			{activeTab === 'cargo_per_package' ? (
 				<ShipmentTotal
 					packageWeight={packageWeight}
 					packageQuantity={packageQuantity}
@@ -82,7 +84,7 @@ function FormModal({
 				/>
 			</div>
 
-			{activeTab === 'by_gross' ? (
+			{activeTab === 'cargo_gross' ? (
 				<div className={styles.checkbox_container}>
 					<Checkbox
 						key="weight_check_checkbox"

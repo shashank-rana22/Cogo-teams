@@ -14,21 +14,23 @@ function PackageItem({
 	popoverComponentData = {},
 	setShowModal = () => {},
 	setInfoBanner = () => {},
-	isFirst = false,
 }) {
+	const { commodity = '', total_volume = 1, total_weight = 1 } = loadItem;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.load_item}>
 				<span className={styles.text}>
-					{`${loadItem.containers_count} X ${
-						['20', '40'].includes(loadItem.container_size)
-							? `${loadItem.container_size}ft`
-							: loadItem.container_size
-					}, 
-						${startCase(loadItem.container_type)}`}
+					{total_volume}
+					{' '}
+					CBM
+					{', '}
+					{total_weight}
+					{' '}
+					KG
 				</span>
 
-				{isAllowedToEdit && isFirst ? (
+				{isAllowedToEdit ? (
 					<Popover
 						placement="bottom"
 						caret
@@ -53,7 +55,7 @@ function PackageItem({
 
 			<div className={styles.load_item} style={{ margin: '0 12px' }}>
 				<span className={styles.text}>
-					{startCase(loadItem.commodity) || 'All Commodities'}
+					{startCase(commodity) || 'All Commodities'}
 				</span>
 			</div>
 		</div>

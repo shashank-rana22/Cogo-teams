@@ -3,10 +3,10 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import styles from './styles.module.css';
 
 const TAB_PANELS_MAPPING = {
-	by_gross: {
+	cargo_gross: {
 		label: 'By Shipment Total',
 	},
-	by_package: {
+	cargo_per_package: {
 		label: 'By Packing Type',
 	},
 };

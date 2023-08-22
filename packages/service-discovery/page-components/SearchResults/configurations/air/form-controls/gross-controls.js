@@ -37,7 +37,7 @@ export const getGrossControls = () => {
 			span             : 6,
 			controls         : [
 				{
-					name  : 'gross_volume',
+					name  : 'total_volume',
 					type  : 'input',
 					span  : 4,
 					value : 1,

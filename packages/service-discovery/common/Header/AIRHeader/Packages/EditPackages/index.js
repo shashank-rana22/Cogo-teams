@@ -1,7 +1,8 @@
-import { Toast, Modal, Button } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import getPrefillForm from '../../../../../page-components/SearchResults/utils/getPrefillForm';
 import getLocationInfo from '../../../../../page-components/SearchResults/utils/locations-search';
@@ -9,6 +10,44 @@ import useCreateSearch from '../../../../../page-components/ServiceDiscovery/Spo
 
 import FormModal from './FormModal';
 import styles from './styles.module.css';
+
+const DEFAULT_VALUE = 1;
+
+const getTabWisePrefilledValues = (activeTab, values = {}) => {
+	let formValues = {};
+	if (activeTab === 'cargo_gross') {
+		const { total_quantity = 1, total_volume = 1, total_weight = 1, packing_list, packages = [] } = values || {};
+
+		formValues = {
+			total_quantity : total_quantity || DEFAULT_VALUE,
+			total_weight   : total_weight || DEFAULT_VALUE,
+			total_volume   : total_volume || DEFAULT_VALUE,
+			stackability   : packages?.[GLOBAL_CONSTANTS.zeroth_index]?.handling_type || 'stackable',
+			package_type   : packages?.[GLOBAL_CONSTANTS.zeroth_index]?.packing_type || 'box',
+			packing_list,
+		};
+	}
+
+	if (activeTab === 'cargo_per_package') {
+		const { packages:packagesData = [] } = values || {};
+
+		formValues = {
+			packages: [
+				...(packagesData || []).map((packageItem) => ({
+					packages_count : packageItem.packages_count || DEFAULT_VALUE,
+					package_type   : packageItem.packing_type || 'box',
+					length         : packageItem.length || DEFAULT_VALUE,
+					width          : packageItem.width || DEFAULT_VALUE,
+					height         : packageItem.height || DEFAULT_VALUE,
+					weight         : packageItem.package_weight || DEFAULT_VALUE,
+					stackability   : packageItem.handling_type || 'stackable',
+				})),
+			],
+		};
+	}
+
+	return formValues;
+};
 
 const SERVICE_KEY = 'search_type';
 const SERVICE = 'air_freight';
@@ -25,7 +64,9 @@ function EditPackages({
 
 	const { createSearch, loading } = useCreateSearch();
 
-	const defaultValues = getPrefillForm(data, SERVICE_KEY);
+	const defaultValues = useMemo(() => getPrefillForm(data, SERVICE_KEY), [data]);
+
+	const [activeTab, setActiveTab] = useState(defaultValues?.load_selection_type); // cargo_gross and cargo_per_package
 
 	const {
 		control,
@@ -34,7 +75,7 @@ function EditPackages({
 		handleSubmit,
 		setValue,
 		reset,
-	} = useForm({ defaultValues });
+	} = useForm();
 
 	const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
 
@@ -53,16 +94,13 @@ function EditPackages({
 			return;
 		}
 
-		const hasChanges = JSON.stringify(finalValues) !== JSON.stringify(defaultValues);
-
-		if (!hasChanges) {
-			Toast.info('No Changes Found');
-			return;
-		}
-
 		const spot_search_id = await createSearch({
 			action : 'edit',
-			values : { service_type: SERVICE, ...requiredParams, formValues: finalValues },
+			values : {
+				service_type : SERVICE,
+				...requiredParams,
+				formValues   : { ...finalValues, load_selection_type: activeTab },
+			},
 		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {
@@ -74,6 +112,23 @@ function EditPackages({
 
 		setShow(false);
 	};
+
+	useEffect(() => {
+		if (activeTab !== defaultValues?.load_selection_type) {
+			reset();
+			return;
+		}
+
+		const prefillingValuesObj = getTabWisePrefilledValues(activeTab, defaultValues);
+
+		Object.entries(prefillingValuesObj).forEach(([key, value]) => {
+			setValue(key, value);
+		});
+
+		const { cargo_clearance_date = '', commodity = '' } = defaultValues;
+		setValue('cargo_clearance_date', new Date(cargo_clearance_date));
+		setValue('commodity', commodity);
+	}, [activeTab, defaultValues, reset, setValue]);
 
 	return (
 		<Modal
@@ -95,6 +150,8 @@ function EditPackages({
 					setShowModal={setShowModal}
 					handleApply={handleApply}
 					reset={reset}
+					activeTab={activeTab}
+					setActiveTab={setActiveTab}
 				/>
 			</Modal.Body>
 

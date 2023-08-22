@@ -13,7 +13,7 @@ function SuggestionModal({
 	};
 
 	const onTakeMeThere = () => {
-		setActiveTab('by_package');
+		setActiveTab('cargo_per_package');
 		setShow('');
 	};
 

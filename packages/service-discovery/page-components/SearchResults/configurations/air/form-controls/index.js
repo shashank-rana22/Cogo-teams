@@ -30,8 +30,8 @@ const COMMODITY_SUBTYPE_DEFAULT_OPTIONS = [
 const COMMODITY_SUBTYPE_DEFAULT_VALUE = 'all';
 
 const CONTROLS_MAPPING = {
-	by_gross   : getGrossControls,
-	by_package : getPackageControls,
+	cargo_gross       : getGrossControls,
+	cargo_per_package : getPackageControls,
 };
 
 const airControls = ({
@@ -52,7 +52,7 @@ const airControls = ({
 
 	const COMMON_CONTROLS = [
 		{
-			name  : 'cargo_date',
+			name  : 'cargo_clearance_date',
 			label : 'Cargo Readiness Date',
 			type  : 'datepicker',
 			value : tomorrow,

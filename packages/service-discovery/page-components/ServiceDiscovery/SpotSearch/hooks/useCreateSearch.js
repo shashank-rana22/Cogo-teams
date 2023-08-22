@@ -50,7 +50,7 @@ const useCreateSearch = () => {
 				source                      : 'platform',
 				search_type                 : service_type,
 				user_id,
-				tags                        : ['new_admin'],
+				// tags                        : ['new_admin'],
 			};
 
 			const res = await trigger({ data: payload });

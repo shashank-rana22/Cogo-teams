@@ -17,7 +17,7 @@
 		"value": "air_freight", 
 		"label": "AIR", 
 		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png",
-		"is_available": false,
+		"is_available": true,
 		"type": ["airport"] 
 	},
 	{ 

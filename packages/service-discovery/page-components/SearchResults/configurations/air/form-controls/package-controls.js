@@ -196,6 +196,7 @@ export const getPackageControls = ({
 					/>,
 					type    : 'select',
 					span    : 8,
+					value   : 'kg_unit',
 					options : WEIGHT_OPTIONS[selectedWeightType],
 					rules   : { required: 'This is required' },
 				},

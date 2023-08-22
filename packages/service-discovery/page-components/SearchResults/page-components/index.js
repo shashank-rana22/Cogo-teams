@@ -26,7 +26,8 @@ function SearchResults() {
 		partner_id : profile?.partner?.id,
 	}));
 
-	const { redirect_required = 'true' } = query;
+	// const { redirect_required = 'true' } = query;
+	const redirect_required = 'false';
 
 	const [headerProps, setHeaderProps] = useState({});
 	const [comparisonRates, setComparisonRates] = useState([]);
@@ -100,10 +101,19 @@ function SearchResults() {
 		setPage = () => {},
 	} = useGetSpotSearch({ setComparisonRates });
 
+	// const {
+	// 	spot_search_detail:detail = {},
+	// 	contract_detail = {},
+	// 	list:rates = [],
+	// 	possible_subsidiary_services = [],
+	// 	total_count,
+	// 	page_limit,
+	// } = data || {};
+
 	const {
-		spot_search_detail:detail = {},
+		detail = {},
 		contract_detail = {},
-		list:rates = [],
+		rates = [],
 		possible_subsidiary_services = [],
 		total_count,
 		page_limit,
