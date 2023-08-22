@@ -1,5 +1,5 @@
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
@@ -14,25 +14,29 @@ const useOverSeasHeader = ({ organizationId }) => {
 		{ manual: true },
 	);
 
-	const overseasHeaderData = async () => {
-		try {
-			await trigger({
-				params: {
-					organization_id: organizationId,
-				},
-			});
-		} catch (err) {
-			toastApiError(err);
-		}
-	};
+	const overseasHeaderData = useCallback(
+		async () => {
+			try {
+				await trigger({
+					params: {
+						organization_id: organizationId,
+					},
+				});
+			} catch (err) {
+				toastApiError(err);
+			}
+		},
+		[organizationId, trigger],
+	);
 
 	useEffect(() => {
 		overseasHeaderData();
-	});
+	}, [overseasHeaderData]);
 
 	return {
 		loading,
 		data,
+		overseasHeaderData,
 	};
 };
 
