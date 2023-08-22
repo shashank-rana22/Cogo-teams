@@ -39,6 +39,8 @@ function Actions({
 		role_id: profile?.auth_role_data?.id,
 	}));
 
+	const geo = getGeoConstants();
+
 	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [showExchangeRate, setExchangeRate] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
@@ -61,8 +63,6 @@ function Actions({
 	if (invoice.status === 'amendment_requested') {
 		disableAction = false;
 	}
-
-	const geo = getGeoConstants();
 
 	const showCancelOptions = CANCEL_OPTION_ALLOWED_STATUSES.includes(bfInvoice.status) ? {
 		showCancel: (role_id === GLOBAL_CONSTANTS.uuid.vietnam_admin_id
