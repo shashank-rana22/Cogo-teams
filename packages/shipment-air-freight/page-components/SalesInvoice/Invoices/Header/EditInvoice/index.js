@@ -33,6 +33,7 @@ function EditInvoice({
 		control,
 		setValue,
 		watch,
+		onError,
 		newFormValues,
 	} = editLineItems({
 		invoice,
@@ -107,7 +108,7 @@ function EditInvoice({
 
 				<Button
 					size="md"
-					onClick={handleSubmit(onCreate)}
+					onClick={handleSubmit(onCreate, onError)}
 					style={{ marginLeft: '16px' }}
 					disabled={loading}
 				>
