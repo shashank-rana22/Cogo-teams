@@ -5,14 +5,18 @@ import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
 
+const TOTAL_SPAN = 12;
+const FLEX_HUNDRED = 100;
+const FLEX_ONE = 1;
+
 function Item({
-	type,
-	control,
-	span,
-	label,
-	error,
-	heading,
-	rules,
+	type = '',
+	control = {},
+	span = 1,
+	label = '',
+	error = {},
+	heading = '',
+	rules = {},
 	...props
 }) {
 	const errorOriginal = getErrorMessage({
@@ -27,7 +31,7 @@ function Item({
 
 	const Element = getElementController(type);
 
-	const flex = ((span || 12) / 12) * 100 - 1;
+	const flex = ((span || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
 
 	return (
 		<div className={styles.element} style={{ width: `${flex}%` }}>

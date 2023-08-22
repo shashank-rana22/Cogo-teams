@@ -1,34 +1,15 @@
 import { Button, Pagination } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { Fragment, useState, useEffect, ReactFragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 import EmptyState from './EmptyState';
-import { FunctionObjects, FieldType, ListDataType, NestedObj } from './Interfaces';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
-interface Props {
-	fields: FieldType[];
-	data: ListDataType;
-	loading?: boolean;
-	page?: number;
-	setPage?: Function;
-	functions?: FunctionObjects;
-	Child?: ReactFragment;
-}
-
-interface RenderProps {
-	list: Array<NestedObj>;
-	loading?: boolean;
-	fields?: FieldType[];
-	functions?: FunctionObjects;
-	Child?: ReactFragment;
-	isMobile?: boolean;
-}
-
 const PAGE_SIZE = 10;
+const MOBILE_SCREEN_SIZE = 768;
 
 function Render({
 	list = [],
@@ -37,18 +18,15 @@ function Render({
 	functions = {},
 	Child = <div />,
 	isMobile = false,
-}:RenderProps) {
+}) {
 	const [open, setOpen] = useState('');
-
-	type TypeObject = string | number | Date | null | React.FC ;
-	const showlist:TypeObject = list.length ? list : Array(6).fill(1);
 
 	const handlePOCDetails = (itm) => {
 		setOpen(itm.id);
 	};
 
 	if (loading || !isEmpty(list)) {
-		return (showlist).map((singleitem) => (
+		return (list).map((singleitem) => (
 			<Fragment key={singleitem.id}>
 				<ListItem
 					singleitem={singleitem}
@@ -105,14 +83,14 @@ function List({
 	setPage = () => {},
 	functions = {},
 	Child = <div />,
-} :Props) {
+}) {
 	const [isMobile, setIsMobile] = useState(false);
 
 	const { list = [], total_count:totalCount } = listData;
 
 	useEffect(() => {
 		const handleResize = () => {
-			if (window.innerWidth < 768) {
+			if (window.innerWidth < MOBILE_SCREEN_SIZE) {
 				setIsMobile(true);
 			} else {
 				setIsMobile(false);
@@ -139,7 +117,7 @@ function List({
 					Child={Child}
 					isMobile={isMobile}
 				/>
-				{!loading && Number(list.length) > 0 ? (
+				{!loading && !isEmpty(list) ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}

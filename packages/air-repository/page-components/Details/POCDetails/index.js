@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { pocDetailsFields } from '../../../configurations/poc-details';
@@ -6,14 +7,7 @@ import { pocDetailsFields } from '../../../configurations/poc-details';
 import POCDetailsItem from './POCDetailsItem';
 import styles from './styles.module.css';
 
-type TypeObject = string | Array<object> | object[] | React.FC ;
-interface NestedObj {
-	[key: string]: TypeObject;
-}
-
-interface POCDetailsProps {
-	data: NestedObj;
-}
+const DEFAULT_SPAN = 1;
 
 const FUNCTIONS = {
 	handleContact: (singleItem) => (
@@ -25,8 +19,9 @@ const FUNCTIONS = {
 	),
 };
 
-function POCDetails({ data = {} }:POCDetailsProps) {
-	const { fields } = pocDetailsFields;
+function POCDetails({ data = {} }) {
+	const { t } = useTranslation(['airRepository']);
+	const { fields } = pocDetailsFields(t);
 
 	const {
 		e_booking_availability: eBooking,
@@ -38,12 +33,12 @@ function POCDetails({ data = {} }:POCDetailsProps) {
 			<div className={styles.poc_container}>
 				<div className={styles.basic_info}>
 					<div className={styles.basic_info_heading}>
-						E-Booking
+						{t('airRepository:e_booking')}
 						<span>:</span>
 					</div>
 					{eBooking === 'available' ? 'Yes' : 'No'}
 					<div className={cl`${styles.basic_info_heading} ${styles.inventory}`}>
-						Inventory
+						{t('airRepository:inventory')}
 						<span>:</span>
 					</div>
 					{availability === 'before_booking' ? 'Before' : 'After'}
@@ -53,7 +48,7 @@ function POCDetails({ data = {} }:POCDetailsProps) {
 						{fields.map((field) => (
 							<div
 								className={styles.col}
-								style={{ '--span': field.span || 1 } as React.CSSProperties}
+								style={{ '--span': field.span || DEFAULT_SPAN }}
 								key={field.key}
 							>
 								{ field.label }
