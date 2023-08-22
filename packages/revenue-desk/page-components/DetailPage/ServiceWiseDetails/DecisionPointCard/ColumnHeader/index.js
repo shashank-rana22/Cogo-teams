@@ -5,8 +5,8 @@ import { IcCFtick } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import GetTableValue from './GetTableValue';
 import styles from './styles.module.css';
-import getTableValue from './utils/getTableValue';
 
 const NUMBERS = {
 	ONE     : 1,
@@ -51,14 +51,11 @@ function ColumnHeader({ list = {}, priceData = {} }) {
 				(list[service][rowData]).map((rowItem, index) => {
 					setSumBuy((prev) => ({
 						...prev,
-						[index]: Number(prev[index] || GLOBAL_CONSTANTS.zeroth_index)
-						+ Number(rowItem?.data?.rowData?.total_price_in_preferred_currency),
+						[index]: Number(rowItem?.data?.rowData?.total_buy_price_in_preferred_currency),
 					}));
 					setSumSell((prev) => ({
 						...prev,
-						[index]: Number(prev[index] || GLOBAL_CONSTANTS.zeroth_index)
-						+ Number(priceData?.[rowData]?.[NUMBERS.ONE] || GLOBAL_CONSTANTS.zeroth_index)
-						/ (Number(priceData?.exchange_rate || NUMBERS.ONE)) || GLOBAL_CONSTANTS.zeroth_index,
+						[index]: Number(rowItem?.data?.rowData?.total_sell_price_in_preferred_currency),
 					}));
 					return null;
 				});
@@ -160,7 +157,7 @@ formatAmount({
 													style={{ color: getBackGround(key) }}
 													className={styles.rowBox}
 												>
-													{getTableValue({ key, rowItem, priceData, service_id: rowData })}
+													{GetTableValue({ key, rowItem, priceData, service_id: rowData })}
 												</div>
 											))}
 										</div>

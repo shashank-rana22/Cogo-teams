@@ -1,5 +1,3 @@
-/* eslint-disable custom-eslint/function-name-check */
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 const NUMBERS = {
@@ -7,14 +5,14 @@ const NUMBERS = {
 	ONE  : 1,
 	TWO  : 2,
 };
-function getTableValue({ key, rowItem, priceData, service_id }) {
+function GetTableValue({ key, rowItem }) {
 	if (key === 'profitability') {
 		return `${parseFloat(rowItem?.data?.rowData?.profit_percentage)
 			.toFixed(NUMBERS.TWO)}%` || '-';
 	}
 	if (key === 'buy_price') {
 		return formatAmount({
-			amount   : rowItem?.data?.rowData?.total_price_in_preferred_currency,
+			amount   : rowItem?.data?.rowData?.total_buy_price_in_preferred_currency,
 			currency : rowItem?.data?.rowData?.preferred_currency,
 			options  : {
 				style                 : 'currency',
@@ -25,10 +23,7 @@ function getTableValue({ key, rowItem, priceData, service_id }) {
 	}
 	if (key === 'sell_price') {
 		return formatAmount({
-			amount: Number(priceData?.[service_id]?.
-				[NUMBERS.ONE]
-                || GLOBAL_CONSTANTS.zeroth_index) / (Number(priceData?.exchange_rate || NUMBERS.ONE))
-                || GLOBAL_CONSTANTS.zeroth_index,
+			amount   : Number(rowItem?.data?.rowData?.total_sell_price_in_preferred_currency),
 			currency : 'USD',
 			options  : {
 				style                 : 'currency',
@@ -69,4 +64,4 @@ function getTableValue({ key, rowItem, priceData, service_id }) {
 	return null;
 }
 
-export default getTableValue;
+export default GetTableValue;

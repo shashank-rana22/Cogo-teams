@@ -152,7 +152,6 @@ function ServiceWiseDetails({
 						supplierPayload={supplierPayload}
 						shipmentData={shipmentData}
 						updateTrigger={updateTrigger}
-						priceData={priceData}
 					/>
 				) : null}
 			{modalStep === VALUE_TWO

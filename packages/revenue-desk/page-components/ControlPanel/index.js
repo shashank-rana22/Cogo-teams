@@ -13,7 +13,8 @@ function ControlPanel() {
 		<div className={styles.outerContainer}>
 			<div className={styles.headTitle}>Automation Desk</div>
 			<FilterLayout apiTrigger={apiTrigger} filter={filter} setFilter={setFilter} />
-			<TableLayout data={data} apiTrigger={apiTrigger} filter={filter} />
+			{data ? <TableLayout data={data} apiTrigger={apiTrigger} filter={filter} /> : null}
+
 		</div>
 	);
 }
