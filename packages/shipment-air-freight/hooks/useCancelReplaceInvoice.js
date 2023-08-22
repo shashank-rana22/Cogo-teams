@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -17,16 +16,10 @@ const useCancelReplaceInvoice = () => {
 		{ manual: true },
 	);
 
-	const { user_id } = useSelector(({ profile }) => ({
-		user_id: profile?.user?.id,
+	const { user_id, entity_id } = useSelector(({ profile }) => ({
+		user_id   : profile?.user?.id,
+		entity_id : profile?.partner?.id,
 	}));
-
-	const geo = getGeoConstants();
-
-	const entity_id = geo.others.navigations.partner.bookings.invoicing
-		.request_cancel_invoice
-		? geo.parent_entity_id
-		: undefined;
 
 	const submit = async ({
 		cancelReason = '', proformaNumber = '', closeModal = () => {},
