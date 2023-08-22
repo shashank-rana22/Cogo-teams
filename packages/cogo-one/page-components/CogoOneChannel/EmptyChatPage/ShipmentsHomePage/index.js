@@ -1,9 +1,11 @@
 import { Pagination, Input, Select } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+// import { ShipmentChat } from '@cogoport/shipment-chat/page-components/List';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import SHIPMENT_TYPE_OPTIONS from '../../../../constants/shipmentTypes';
 import useListShipments from '../../../../hooks/useListShipments';
@@ -13,6 +15,7 @@ import BookingNoteModal from './BookingNoteModal';
 import Filter from './Filter';
 import LoadingState from './LoadingState';
 import ShipmentCard from './ShipmentCard';
+import ShipmentChatModal from './ShipmentChatModal';
 import styles from './styles.module.css';
 
 const DEFAULT_PAGE = 1;
@@ -25,6 +28,7 @@ function ListShipmentCards({
 	showPocDetails = {},
 	setShowPocDetails = () => {},
 	setShowBookingNote = () => {},
+	setShowShipmentChat = () => {},
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -49,6 +53,7 @@ function ListShipmentCards({
 				showPocDetails={showPocDetails}
 				setShowPocDetails={setShowPocDetails}
 				setShowBookingNote={setShowBookingNote}
+				setShowShipmentChat={setShowShipmentChat}
 			/>
 		),
 	);
@@ -58,6 +63,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 	const [showPocDetails, setShowPocDetails] = useState({});
 	const [range, setRange] = useState('current_month');
 	const [dateFilters, setDateFilters] = useState({ ...getDefaultFilters({ range }) });
+	const [showShipmentChat, setShowShipmentChat] = useState(null);
 
 	const [showBookingNote, setShowBookingNote] = useState({ show: false, data: {} });
 	const {
@@ -74,6 +80,10 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 		page_limit = PAGE_LIMIT,
 		total_count = DEFAULT_SHIPMENTS_COUNT,
 	} = shipmentsData || {};
+
+	const contextValues = useMemo(() => ({
+		shipment_data: showShipmentChat,
+	}), [showShipmentChat]);
 
 	return (
 		<>
@@ -120,6 +130,7 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 								showPocDetails={showPocDetails}
 								setShowPocDetails={setShowPocDetails}
 								setShowBookingNote={setShowBookingNote}
+								setShowShipmentChat={setShowShipmentChat}
 							/>
 						)}
 				</div>
@@ -139,6 +150,13 @@ function ShipmentsHomePage({ setActiveTab = () => {} }) {
 			</div>
 			{showBookingNote?.show
 				? <BookingNoteModal setShowBookingNote={setShowBookingNote} showBookingNote={showBookingNote} /> : null}
+
+			<ShipmentDetailContext.Provider value={contextValues}>
+				<ShipmentChatModal
+					showShipmentChat={showShipmentChat}
+					setShowShipmentChat={setShowShipmentChat}
+				/>
+			</ShipmentDetailContext.Provider>
 		</>
 	);
 }

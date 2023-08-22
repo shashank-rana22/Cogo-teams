@@ -13,6 +13,7 @@ function ShipmentsCard({
 	shipmentItem = {},
 	type = '',
 	setShowBookingNote = () => {},
+	setShowShipmentChat = () => {},
 }) {
 	const {
 		shipment_type = '',
@@ -35,6 +36,7 @@ function ShipmentsCard({
 					setShowPocDetails={setShowPocDetails}
 					type={type}
 					setShowBookingNote={setShowBookingNote}
+					setShowShipmentChat={setShowShipmentChat}
 				/>
 
 				<ShippingRoute

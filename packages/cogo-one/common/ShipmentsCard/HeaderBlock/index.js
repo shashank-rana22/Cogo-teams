@@ -42,7 +42,7 @@ const getButtonOptions = ({ partnerId, shipmentId, setShowRaiseTicket }) => [
 	},
 ];
 
-function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '' }) {
+function HeaderBlock({ shipmentItem = {}, type = '', setShowShipmentChat = () => {} }) {
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
 		partnerId : profile.partner.id,
 		userId    : profile.user.id,
@@ -77,6 +77,11 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 		e.stopPropagation();
 		const shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${shipmentId}`;
 		window.open(shipmentDetailsPage, '_blank');
+	};
+
+	const handleShipmentChat = (event) => {
+		event.stopPropagation();
+		setShowShipmentChat(shipmentItem);
 	};
 
 	return (
@@ -116,10 +121,7 @@ function HeaderBlock({ shipmentItem = {}, setShowPocDetails = () => {}, type = '
 						width={25}
 						alt="message"
 						className={styles.message_icon_styles}
-						onClick={(e) => {
-							e.stopPropagation();
-							setShowPocDetails(shipmentItem);
-						}}
+						onClick={handleShipmentChat}
 					/>
 				)}
 

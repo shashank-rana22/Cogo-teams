@@ -43,6 +43,7 @@ function ShipmentCard({
 	setActiveTab = () => {},
 	setShowBookingNote = () => {},
 	key = '',
+	setShowShipmentChat = () => {},
 }) {
 	const {
 		serial_id = '',
@@ -73,6 +74,7 @@ function ShipmentCard({
 				shipmentItem={shipmentItem}
 				type="all_shipments"
 				setShowBookingNote={setShowBookingNote}
+				setShowShipmentChat={setShowShipmentChat}
 			/>
 		</div>
 	);
