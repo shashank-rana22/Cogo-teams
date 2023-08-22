@@ -10,8 +10,6 @@ import styles from './styles.module.css';
 function PayabledDetails({ organizationId, showPayableAmount, currency }) {
 	const { data } = useOverSeasHeader({ organizationId });
 
-	console.log('data', data);
-
 	const {
 		kycStatus = '',
 		organizationName,
