@@ -3,7 +3,7 @@ import { AsyncSelectController } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import RenderLabelNew from '../../../commons/RenderLabelNew';
+import ListLocations from '../../../commons/RenderLabels/ListLocations';
 import StyledSelect from '../../../commons/StyledSelect';
 
 import styles from './styles.module.css';
@@ -28,7 +28,7 @@ const commonLocationProps = {
 		includes   : { default_params_required: true },
 	},
 	labelKey    : 'display_name',
-	renderLabel : (item) => <RenderLabelNew data={item} />,
+	renderLabel : (item) => <ListLocations data={item} />,
 	initialCall : true,
 	placeholder : 'Search via port name/code...',
 };

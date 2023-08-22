@@ -28,7 +28,7 @@ const formatSubLocation = (display_name) => {
 	return dp2 ? `${subLocation}, ${dp2}` : subLocation;
 };
 
-function LocationOption({ data = {} }) {
+function ListLocations({ data = {} }) {
 	const {
 		port_code,
 		postal_code,
@@ -67,4 +67,4 @@ function LocationOption({ data = {} }) {
 	);
 }
 
-export default LocationOption;
+export default ListLocations;
