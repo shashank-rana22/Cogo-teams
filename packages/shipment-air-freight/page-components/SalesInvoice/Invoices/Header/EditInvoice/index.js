@@ -91,8 +91,6 @@ function EditInvoice({
 						customValues={newFormValues}
 						disabledProps={disabledProps}
 						shipment_id={shipment_data?.id}
-						showAddButtons={isRoleAllowed}
-						showDeleteButton={isRoleAllowed}
 					/>
 				</div>
 
