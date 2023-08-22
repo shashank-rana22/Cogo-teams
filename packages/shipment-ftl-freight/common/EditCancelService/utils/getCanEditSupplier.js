@@ -4,6 +4,7 @@ const EDIT_SUPPLIER_SERVICE_STATES = ['init',
 	'awaiting_service_provider_confirmation', 'confirmed_by_service_provider'];
 
 const serviceCompletedOrCancelled = ['completed', 'cancelled'];
+const ALLOWED_USER_IDS = [GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id, GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id];
 
 export default function getCanEditSupplier({
 	shipment_data = {},
@@ -11,7 +12,7 @@ export default function getCanEditSupplier({
 	state = '',
 	stakeholderConfig = {},
 }) {
-	if (user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
+	if (ALLOWED_USER_IDS.includes(user_data?.id)) {
 		return true;
 	}
 

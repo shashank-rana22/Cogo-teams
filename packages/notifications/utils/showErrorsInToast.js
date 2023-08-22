@@ -1,11 +1,11 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms';
 
-const showErrorsInToast = (messages) => {
+const showErrorsInToast = (messages, t = () => {}) => {
 	Toast.error(
 		getApiErrorString?.(messages || {})
 			// eslint-disable-next-line max-len
-			|| 'The application has encountered an unknown error. Our team is looking into this with the utmost urgency. Please try again after some time. If the issue persists, please contact us via chat.',
+			|| t('notifications:default_error_toast'),
 		{ hideAfter: 6 },
 	);
 };

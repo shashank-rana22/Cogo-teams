@@ -15,7 +15,7 @@ import config from '../../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
-const SERVICES_ADDTIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICES_ADDTIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement', 'can_edit_params'];
 const stakeholderConfig = config({ stakeholder: 'IGM_VIEW' });
 
 function IGMDesk({ get = {}, activeStakeholder = '' }) {

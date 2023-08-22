@@ -15,6 +15,7 @@ function CheckList({
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
 	bl_details = [],
+	do_details = [],
 }) {
 	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
 
@@ -33,6 +34,7 @@ function CheckList({
 				shipmentDocumentRefetch={shipmentDocumentRefetch}
 				activeStakeholder={activeStakeholder}
 				bl_details={bl_details}
+				do_details={do_details}
 			/>
 		</div>
 	);

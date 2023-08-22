@@ -1,4 +1,5 @@
-import { Popover, Toggle } from '@cogoport/components';
+import { Popover, Toggle, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMProfile, IcMCross } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
@@ -10,17 +11,17 @@ import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
 function Header({
-	isStakeholder,
+	isStakeholder = false,
 	channelData = {},
 	primaryService = {},
 	setShow = () => {},
-	showImpMsg,
+	showImpMsg = false,
 	setShowImpMsg = () => {},
 }) {
 	const { push } = useRouter();
 
 	const { serial_id, shipment_type, id: shipment_id } = channelData || {};
-	const shipmentType = shipment_type?.split('_')[0];
+	const shipmentType = shipment_type?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const handleClick = () => {
 		push(`/booking/${shipmentType}/[shipment_id]`, `/booking/${shipmentType}/${shipment_id}`);
@@ -28,71 +29,59 @@ function Header({
 	};
 
 	const groupChatUsers = isStakeholder
-		? stakeholderMappings[channelData?.stakeholder_types?.[0] || 'default']
+		? stakeholderMappings[channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index] || 'default']
 		|| []
 		: stakeholderMappings.default;
-
-	const content = () => (
-		<div className={styles.chat_users}>
-			{groupChatUsers?.map((item) => (
-				<div className={styles.user_name}>{startCase(item)}</div>
-			))}
-		</div>
-	);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
 				{serial_id ? (
-					<div
+					<Button
 						className={styles.serial_id}
-						role="button"
-						tabIndex={0}
+						themeType="link"
 						onClick={() => handleClick()}
 					>
-						Shipment ID
-						<span style={{ fontWeight: 700, marginLeft: '4px' }}>
-							#
-							{serial_id}
-						</span>
-					</div>
+						{`Shipment ID #${serial_id}`}
+					</Button>
 				) : null}
 
 				<PortDetails
 					data={channelData}
 					primary_service={primaryService}
-					isShow={false}
 				/>
 
 				<Popover
 					placement="bottom"
 					interactive
-					render={content()}
+					render={(
+						<div className={styles.chat_users}>
+							{(groupChatUsers || []).map((item) => (
+								<div key={item} className={styles.user_name}>{startCase(item)}</div>
+							))}
+						</div>
+					)}
 					className={styles.popover_container}
 				>
 					<div className={styles.button}>
-						<IcMProfile width={12} height={12} />
-						+
-						{' '}
-						{groupChatUsers?.length}
-						{' '}
-						others
+						<IcMProfile width={12} height={12} className={styles.profile_img} />
+						{`${groupChatUsers?.length || GLOBAL_CONSTANTS.zeroth_index} Contacts`}
 					</div>
 				</Popover>
 
-				<div
-					className={styles.close_icon}
-					role="button"
-					tabIndex={0}
-					onClick={() => setShow(false)}
-				>
-					<IcMCross />
+				<div className={styles.close_icon}>
+					<Button
+						themeType="linkUi"
+						onClick={() => setShow(false)}
+					>
+						<IcMCross />
+					</Button>
 				</div>
 			</div>
 
 			<div className={styles.filter_box}>
-				<div style={{ color: '#221F20' }}>Show Starred Messages</div>
-				<Toggle value={showImpMsg} onChange={setShowImpMsg} />
+				<div>Show Starred Messages</div>
+				<Toggle value={showImpMsg} onChange={(event) => setShowImpMsg(event?.target?.checked)} />
 			</div>
 
 		</div>

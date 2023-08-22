@@ -2,6 +2,7 @@ import { Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../common/EmptyState';
@@ -22,6 +23,8 @@ import useGetRatingColumns from './useGetRatingColumns';
 const ROUND_OFF_DIGITS = 100;
 
 function ManagerDashboard() {
+	const { t } = useTranslation(['managerDashboard']);
+
 	const [employeeId, setEmployeeId] = useState('');
 	const [openKraModal, setOpenKraModal] = useState(false);
 	const [ratingCycle, setRatingCycle] = useState('');
@@ -30,7 +33,7 @@ function ManagerDashboard() {
 	});
 	const [sortedData, setSortedData] = useState([]);
 
-	const ratingColumns = useGetRatingColumns();
+	const ratingColumns = useGetRatingColumns({ t });
 
 	const { level, loading : levelLoading } = useGetEmployeeLevels();
 
@@ -49,6 +52,7 @@ function ManagerDashboard() {
 		setOpenKraModal,
 		setSortData : setSorting,
 		sortData    : sorting,
+		t,
 	});
 
 	const { ratingOptions, loading : ratingCycleLoading } = useGetRatingCycle(setRatingCycle);
@@ -58,7 +62,7 @@ function ManagerDashboard() {
 		setEmployeeId();
 	};
 
-	const renderLabel = (item) => {
+	function RenderLabel(item) {
 		const { label } = item;
 		const splitItem = label?.split('-');
 		const [firstItem, secondItem] = splitItem || [];
@@ -69,7 +73,7 @@ function ManagerDashboard() {
 				{secondItem}
 			</div>
 		);
-	};
+	}
 
 	useEffect(() => {
 		if (sorting.sortBy) {
@@ -85,16 +89,17 @@ function ManagerDashboard() {
 		<div>
 			<div className={styles.flex}>
 				<div className={styles.header}>
-					Manager Dashboard
+					{t('managerDashboard:dashboard_heading')}
 				</div>
 				{!ratingCycleLoading && (
 					<Select
 						className={styles.rating_cycle_select}
 						options={ratingOptions}
 						value={ratingCycle}
-						renderLabel={(item) => renderLabel(item)}
+						renderLabel={(item) => RenderLabel(item)}
 						onChange={(e) => setRatingCycle(e)}
 						size="sm"
+						placeholder={t('managerDashboard:rating_cycle_select_placeholder')}
 					/>
 				)}
 			</div>
@@ -136,7 +141,7 @@ function ManagerDashboard() {
 								columns={columns}
 								data={sortedData?.list || []}
 								loading={loading || levelLoading}
-								emptyText="No Data Found"
+								emptyText={t('managerDashboard:empty_text')}
 							/>
 						)}
 					</div>
@@ -148,13 +153,13 @@ function ManagerDashboard() {
 							<StyledTable
 								columns={ratingColumns}
 								data={ratingData}
-								emptyText="No Data Found"
+								emptyText={t('managerDashboard:empty_text')}
 								loading={ratingLoading}
 							/>
 						</div>
 
 						<div className={styles.mean_value_wrapper}>
-							Organization Rating:
+							{t('managerDashboard:organization_rating')}
 							{' '}
 							{Math.round(mean_rating * ROUND_OFF_DIGITS) / ROUND_OFF_DIGITS}
 						</div>

@@ -115,6 +115,7 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'85bb3009-8cb5-453f-b87e-445d32c09635', // SME Manager - Vietnam
 			'78433553-e4dd-4871-8bd7-293f6f12e49a', // cogoone agent
 			'69013c68-2d1b-4332-91fb-ada1a6471240', // business consultant
 			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5',
@@ -211,6 +212,15 @@ export default {
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
 			'8c22817f-4246-43ef-a7f5-fdf77e37ca72',
 		],
+		kam_manager_ids: [
+			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
+			'f9905d33-24d7-48ca-99cd-eeca13a90d5a', // KAM Manager - SME Demand,
+			'594be53f-e39a-45d1-a705-57660a4a4a00', // IE Owner - SME Demand,
+			'37557738-13bb-4db8-96ef-6eac4549a5ac', // CP KAM Owner,
+			'4f7ba0b4-304b-4d5d-98e5-fb61a7c823da', // CP KAM Manager
+			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
+
+		],
 		prod_kam_ie_manager   : 'f9905d33-24d7-48ca-99cd-eeca13a90d5a',
 		prod_kam_ie           : '0bc8c199-09ed-4a85-b3a3-a855f05a2716',
 		portfolio_manager_id  : '46f33843-8f73-45c0-89c8-248aa1698bb0',
@@ -255,15 +265,16 @@ export default {
 			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 		},
-		igm_desk                   : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
-		document_control_manager   : '123951fe-78aa-4ad1-b2da-fa6191e3a876',
-		ftl_ground_ops_role_ids    : ['d2275231-30ad-4df9-8451-daf03b766f8a'],
-		field_service_ops_role_ids : ['6ebacc3c-05c9-43fd-8a51-e7aad9751d9b'],
-		kam_service_ops1_role_ids  : ['4c6f6036-2383-4c40-9b84-fa2b598031e1'],
-		document_control_lead      : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
-		finops_credit_controller   : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
-		finance_head               : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
-		so1_revenue_desk           : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
+		igm_desk                  : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager  : '123951fe-78aa-4ad1-b2da-fa6191e3a876',
+		ftl_ground_ops_role_id    : 'd2275231-30ad-4df9-8451-daf03b766f8a',
+		field_service_ops_role_id : '6ebacc3c-05c9-43fd-8a51-e7aad9751d9b',
+		kam_service_ops1_role_id  : '4c6f6036-2383-4c40-9b84-fa2b598031e1',
+		document_control_lead     : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		finops_credit_controller  : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head              : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
+		so1_revenue_desk          : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
+		supply_fulfillment        : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
 	},
 	options: {
 		registration_types: [
@@ -566,8 +577,9 @@ export default {
 			partner: {
 				bookings: {
 					invoicing: {
-						request_cancel_invoice : true,
-						request_credit_note    : false,
+						request_cancel_invoice  : true,
+						request_replace_invoice : true,
+						request_credit_note     : false,
 					},
 				},
 			},
