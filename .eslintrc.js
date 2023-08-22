@@ -3,8 +3,8 @@ module.exports = {
 	rules   : {
 		'react/no-danger' : 'off',
 		'react/jsx-key'   : 'error',
-	},
 
+	},
 	ignorePatterns : ['cogo-control/dist/**/*', '!.stylelintrc.js'],
 	root           : true,
 	env            : {
