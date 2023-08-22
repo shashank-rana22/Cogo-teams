@@ -5,6 +5,10 @@ import Controls from '../../configurations/filter';
 
 import styles from './styles.module.css';
 
+const CONSTANT_SIX_HUNDERED = 600;
+const CONSTANT_SIXTEEN = 16;
+const CONSTANT_TWENTY = 20;
+const CONSTANT_SEVEN = 7;
 function Filter({ getStats, filter = {}, setFilter = () => {}, defaultFilterData = {} }) {
 	useEffect(() => {
 		getStats(filter);
@@ -13,7 +17,7 @@ function Filter({ getStats, filter = {}, setFilter = () => {}, defaultFilterData
 	return (
 		<div className={styles.parent}>
 			<div className={styles.heading}>
-				<span style={{ fontWeight: '700', fontSize: '16px' }}>Apply Filter</span>
+				<span className={styles.apply_filters}>Apply Filter</span>
 				&nbsp;
 				(These filters will be applied throughout the page)
 				<Button
@@ -22,7 +26,12 @@ function Filter({ getStats, filter = {}, setFilter = () => {}, defaultFilterData
 					onClick={() => {
 						setFilter(defaultFilterData);
 					}}
-					style={{ float: 'right', color: '#828282', fontWeight: '600', paddingBottom: '16px' }}
+					style={{
+						float         : 'right',
+						color         : '#828282',
+						fontWeight    : CONSTANT_SIX_HUNDERED,
+						paddingBottom : CONSTANT_SIXTEEN,
+					}}
 				>
 					Clear All Filters
 				</Button>
@@ -31,8 +40,8 @@ function Filter({ getStats, filter = {}, setFilter = () => {}, defaultFilterData
 			<div className={styles.filter_container}>
 
 				{Controls().map((control) => (
-					<div key={control.name} style={{ width: control.width, marginLeft: '20px' }}>
-						<div style={{ marginBottom: '5px' }}>
+					<div key={control.name} style={{ width: control.width, marginLeft: CONSTANT_TWENTY }}>
+						<div style={{ marginBottom: CONSTANT_SEVEN }}>
 							{control.heading}
 						</div>
 						<Select
