@@ -13,6 +13,7 @@ import { RenderUrgency } from '../../InvoiceTable/RenderFunctions/RenderUrgency'
 
 import FilterContainers from './FilterContainers';
 import Footer from './Footer';
+import styles from './styles.module.css';
 
 const MORE_THAN_ZERO = 0;
 
@@ -87,7 +88,7 @@ function InvoiceSelection({
 		// goBack,
 	} = useGetInvoiceSelection({ sort });
 
-	console.log('globalFilters', invoiceData);
+	// console.log('globalFilters', invoiceData);
 
 	const { overAllValue = 0, list = [] } = invoiceData || {};
 
@@ -123,27 +124,29 @@ function InvoiceSelection({
 	const FUNCTIONS = getFunctions({ GetTableBodyCheckbox, setEditedValue });
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<FilterContainers />
 
-			<List
-				itemData={invoiceData}
-				loading={loading}
-				config={config}
-				functions={FUNCTIONS}
+			<div className={styles.list_container}>
+				<List
+					itemData={invoiceData}
+					loading={loading}
+					config={config}
+					functions={FUNCTIONS}
 				// sort={sort}
-				setSort={setSort}
+					setSort={setSort}
     // page={filters?.pageIndex || FIRST_PAGE}
-				pageSize={10}
+					pageSize={10}
 		// 		handlePageChange={(val) => setFilters({
 // ...filters,
 // pageIndex: val,
 		// 		})}
-				renderHeaderCheckbox={GetTableHeaderCheckbox}
-				rowStyle="border"
-				showPagination
-				paginationType="number"
-			/>
+					renderHeaderCheckbox={GetTableHeaderCheckbox}
+					rowStyle="border"
+					showPagination
+					paginationType="number"
+				/>
+			</div>
 
 			<Footer
 				viewSelectedInvoices={viewSelectedInvoice}
