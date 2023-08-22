@@ -73,7 +73,7 @@ function AgentDashboard({ isRolePresent = false }) {
 					</div>
 				</div>
 				<div className={styles.right_sub_container}>
-					<TotalChatsHandled agentId={id} />
+					<TotalChatsHandled agentId={id} timeline={timeline} />
 					<div className={styles.satisfaction_intent_served_box}>
 						<Statisfaction loading={loading} feedback={feedback} />
 						<MyStats
