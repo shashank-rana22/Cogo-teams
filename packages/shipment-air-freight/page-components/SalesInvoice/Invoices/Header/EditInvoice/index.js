@@ -1,6 +1,5 @@
 import { Layout } from '@cogoport/air-modules';
 import { Button, Modal } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useSelector } from '@cogoport/store';
@@ -9,8 +8,6 @@ import { useEffect } from 'react';
 import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
-
-const geo = getGeoConstants();
 
 function EditInvoice({
 	show = 'false',
@@ -22,8 +19,10 @@ function EditInvoice({
 	const { role_ids } = useSelector(({ profile }) => ({
 		role_ids: profile.partner?.user_role_ids,
 	}));
-	const isAdminSuperAdmin = [geo.uuid.admin_id, geo.uuid.super_admin_id]
-		.some((ele) => role_ids?.includes(ele));
+	const isRoleAllowed = [
+		GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+		GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id,
+	].some((ele) => role_ids?.includes(ele));
 
 	const {
 		controls,
@@ -39,13 +38,13 @@ function EditInvoice({
 		invoice,
 		onClose,
 		refetch,
-		isAdminSuperAdmin,
+		isRoleAllowed,
 		shipment_data,
 		info: <Info />,
 	});
 
 	const disabledProps = controls?.[GLOBAL_CONSTANTS.zeroth_index]?.service_name === 'air_freight_service'
-	&& !isAdminSuperAdmin && shipment_data?.serial_id > GLOBAL_CONSTANTS.serial_check_id;
+	&& !isRoleAllowed && shipment_data?.serial_id > GLOBAL_CONSTANTS.serial_check_id;
 
 	const formValues = watch();
 
@@ -92,6 +91,8 @@ function EditInvoice({
 						customValues={newFormValues}
 						disabledProps={disabledProps}
 						shipment_id={shipment_data?.id}
+						showAddButtons={isRoleAllowed}
+						showDeleteButton={isRoleAllowed}
 					/>
 				</div>
 

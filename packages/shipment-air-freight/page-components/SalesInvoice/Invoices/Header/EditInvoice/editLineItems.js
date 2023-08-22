@@ -17,7 +17,7 @@ const useEditLineItems = ({
 	invoice = {},
 	onClose = () => {},
 	refetch = () => {},
-	isAdminSuperAdmin = false,
+	isRoleAllowed = false,
 	shipment_data = {},
 	info,
 }) => {
@@ -67,7 +67,7 @@ const useEditLineItems = ({
 			handleChange,
 			service,
 			info,
-			isAdminSuperAdmin,
+			isRoleAllowed,
 			shipment_data,
 			index,
 			TRADE_MAPPING,

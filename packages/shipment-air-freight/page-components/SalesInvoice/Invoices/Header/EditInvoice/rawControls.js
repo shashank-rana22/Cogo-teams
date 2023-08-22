@@ -4,14 +4,14 @@ import { startCase } from '@cogoport/utils';
 
 const PRICE_GREATER_THAN = 0;
 
-const handleDisableCond = (charge, isAdminSuperAdmin) => charge?.service_type === 'air_freight_service'
-&& !isAdminSuperAdmin;
+const handleDisableCond = (charge, isRoleAllowed) => charge?.service_type === 'air_freight_service'
+&& !isRoleAllowed;
 
 const rawControls = (
 	handleChange,
 	charge,
 	info,
-	isAdminSuperAdmin,
+	isRoleAllowed,
 	shipment_data,
 	index,
 	TRADE_MAPPING = {},
@@ -50,7 +50,7 @@ const rawControls = (
 			handleChange,
 			placeholder : 'select line item',
 			disabled:
-				handleDisableCond(charge, isAdminSuperAdmin),
+				handleDisableCond(charge, isRoleAllowed),
 			rules: { required: 'Required' },
 		},
 		{
@@ -64,7 +64,7 @@ const rawControls = (
 				</>
 			),
 			placeholder : 'Enter alias name/code',
-			disabled    : handleDisableCond(charge, isAdminSuperAdmin),
+			disabled    : handleDisableCond(charge, isRoleAllowed),
 			span        : 2,
 		},
 		{
@@ -72,7 +72,7 @@ const rawControls = (
 			type     : 'select',
 			name     : 'unit',
 			options  : convertObjectMappingToArray(AIR_UNITS),
-			disabled : handleDisableCond(charge, isAdminSuperAdmin),
+			disabled : handleDisableCond(charge, isRoleAllowed),
 			span     : 2,
 		},
 		{
@@ -84,7 +84,7 @@ const rawControls = (
 			rules          : { required: 'currency is required' },
 			span           : 1.5,
 			disabled:
-				handleDisableCond(charge, isAdminSuperAdmin),
+				handleDisableCond(charge, isRoleAllowed),
 		},
 		{
 			label       : 'Price',
@@ -96,7 +96,6 @@ const rawControls = (
 				required : 'Price is Required',
 				validate : (v) => v > PRICE_GREATER_THAN || 'Price must be greater than 0',
 			},
-			disabled: handleDisableCond(charge, isAdminSuperAdmin),
 		},
 		{
 			label       : 'Quantity',
@@ -106,7 +105,7 @@ const rawControls = (
 			rules       : { required: 'Required', min: 1 },
 			span        : 1,
 			disabled:
-				handleDisableCond(charge, isAdminSuperAdmin),
+				handleDisableCond(charge, isRoleAllowed),
 		},
 		{
 			label  : 'Amount (Tax Excl.)',
