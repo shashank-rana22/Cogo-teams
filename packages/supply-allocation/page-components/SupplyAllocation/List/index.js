@@ -2,16 +2,36 @@ import { Button, Pagination, Tooltip } from '@cogoport/components';
 import {
 	IcCBookmark,
 	IcMArrowRight,
+	IcMAscending,
 	IcMBookmark,
+	IcMDescendingSort,
 	IcMInfo,
 	IcMPortArrow,
+	IcMDescending,
 } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-
+import { useState } from 'react';
 import StyledTable from '../../../commons/StyledTable';
 import useUpdateRollingFclFreightSearch from '../../../hooks/useUpdateRollingFclFreightSearch';
-
 import styles from './styles.module.css';
+
+const ICON_MAPPING = {
+	default: <IcMDescendingSort fill="#bdbdbd" />,
+	asc: <IcMAscending width={16} height={16} />,
+	desc: <IcMDescending width={16} height={16} />,
+};
+
+const NEXT_STAGE_MAPPING = {
+	default: 'asc',
+	asc: 'desc',
+	desc: 'default',
+};
+
+const KEY_STAGE_MAPPING = {
+	default: undefined,
+	asc: 'asc',
+	desc: 'desc',
+};
 
 function List({
 	data = [],
@@ -19,13 +39,51 @@ function List({
 	setPagination = () => {},
 	loading = false,
 	refetchListFclSearches = () => {},
+	setFilters = () => {},
 }) {
 	const { list = [], page_limit = 10, total_count = 0 } = data || {};
+
+	const [profitabilityStage, setProfitabilityStage] = useState('default');
+	const [forVolumeStage, setForVolumeStage] = useState('default');
 
 	const router = useRouter();
 	const { updateRollingFclFreightSearch } = useUpdateRollingFclFreightSearch({
 		refetchListFclSearches,
 	});
+
+	const onClickProfitabilitySort = () => {
+		const nextStage = NEXT_STAGE_MAPPING[profitabilityStage];
+		setProfitabilityStage(nextStage);
+		setForVolumeStage('default');
+		setFilters((prev) => {
+			return {
+				...prev,
+				...(nextStage !== 'default'
+					? {
+							sort_by: 'profitability',
+							sort_type: KEY_STAGE_MAPPING[nextStage],
+					  }
+					: { sort_by: undefined, sort_type: undefined }),
+			};
+		});
+	};
+
+	const onClickVolumeSort = () => {
+		const nextStage = NEXT_STAGE_MAPPING[forVolumeStage];
+		setForVolumeStage(nextStage);
+		setProfitabilityStage('default');
+		setFilters((prev) => {
+			return {
+				...prev,
+				...(nextStage !== 'default'
+					? {
+							sort_by: 'forcasted_volume',
+							sort_type: KEY_STAGE_MAPPING[nextStage],
+					  }
+					: { sort_by: undefined, sort_type: undefined }),
+			};
+		});
+	};
 
 	const columns = [
 		{
@@ -87,8 +145,22 @@ function List({
 		},
 		{
 			id: 'avg_profitability',
-
-			Header: 'AVG PROFITABILITY',
+			Header: (
+				<div style={{ display: 'flex' }}>
+					AVG PROFITABILITY{' '}
+					<span
+						role="presentation"
+						onClick={() => onClickProfitabilitySort()}
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							marginLeft: '6px',
+						}}
+					>
+						{ICON_MAPPING[profitabilityStage]}
+					</span>
+				</div>
+			),
 			accessor: (item) => item?.profitability,
 		},
 		{
@@ -106,7 +178,22 @@ function List({
 		},
 		{
 			id: 'forecasted_volume',
-			Header: 'FORECASTED VOLUME',
+			Header: (
+				<div style={{ display: 'flex' }}>
+					FORECASTED VOLUME
+					<span
+						role="presentation"
+						onClick={() => onClickVolumeSort()}
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							marginLeft: '6px',
+						}}
+					>
+						{ICON_MAPPING[forVolumeStage]}
+					</span>
+				</div>
+			),
 			accessor: (item) => item?.forecasted_volume,
 		},
 		{
