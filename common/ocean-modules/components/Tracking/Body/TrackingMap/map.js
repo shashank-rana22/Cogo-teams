@@ -29,7 +29,7 @@ function MapComp({
 	curvePoints,
 	currentMilestone,
 }) {
-	const [map, setMap] = useState({});
+	const [map, setMap] = useState(null);
 	const corner1 = L.latLng(CORNER_1_LAT, CORNER_1_LNG);
 	const corner2 = L.latLng(CORNER_2_LAT, CORNER_2_LNG);
 	const bounds = L.latLngBounds(corner1, corner2);
