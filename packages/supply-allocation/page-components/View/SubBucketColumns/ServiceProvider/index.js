@@ -11,13 +11,20 @@ function ServiceProvider({
 	rollingFclFreightSearchId = '',
 }) {
 	const {
-		service_provider, service_provider_star_rating,
-		service_provider_outstanding_currency, service_provider_outstanding_amount,
+		service_provider,
+		service_provider_star_rating,
+		service_provider_outstanding_currency,
+		service_provider_outstanding_amount,
 	} = item;
 
 	return (
-		<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-
+		<div
+			style={{
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'space-between',
+			}}
+		>
 			<Actions
 				item={item}
 				bucketOptions={bucketOptions}
@@ -25,14 +32,21 @@ function ServiceProvider({
 				current_allocated_containers={current_allocated_containers}
 				rollingFclFreightSearchId={rollingFclFreightSearchId}
 			/>
-			<div style={{ display: 'flex', flexDirection: 'column', marginRight: '10px', width: '200px' }}>
-
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					marginRight: '10px',
+					width: '200px',
+				}}
+			>
 				<Tooltip content={service_provider?.short_name} placement="top">
-					<div style={{
-						overflow     : 'hidden',
-						textOverflow : 'ellipsis',
-						whiteSpace   : 'nowrap',
-					}}
+					<div
+						style={{
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+							whiteSpace: 'nowrap',
+						}}
 					>
 						{service_provider?.short_name}
 					</div>
@@ -50,19 +64,17 @@ function ServiceProvider({
 
 				<div>
 					{formatAmount({
-						amount   : service_provider_outstanding_amount,
-						currency : service_provider_outstanding_currency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'code',
-							maximumFractionDigits : 2,
+						amount: service_provider_outstanding_amount,
+						currency: service_provider_outstanding_currency,
+						options: {
+							style: 'currency',
+							currencyDisplay: 'code',
+							maximumFractionDigits: 2,
 						},
-					})}
-					{' '}
+					})}{' '}
 					Outstanding
 				</div>
 			</div>
-
 		</div>
 	);
 }

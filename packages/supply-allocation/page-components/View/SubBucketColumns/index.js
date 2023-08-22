@@ -11,7 +11,8 @@ const ANO_SUB = 10;
 function GetOrdinalNumber({ number = 0 }) {
 	const suffix = ['th', 'st', 'nd', 'rd'];
 	const quotient = number % C;
-	const ordinal = suffix[(quotient - SUB) % ANO_SUB] || suffix[quotient] || suffix[DEF];
+	const ordinal =
+		suffix[(quotient - SUB) % ANO_SUB] || suffix[quotient] || suffix[DEF];
 	return (
 		<>
 			<span className="black">{number}</span>
@@ -30,9 +31,9 @@ const getSubBucketColumns = ({
 }) => {
 	const subBucketColumns = [
 		{
-			id       : 'service_provider',
-			Header   : 'SERVICE PROVIDER',
-			accessor : (item) => (
+			id: 'service_provider',
+			Header: 'SERVICE PROVIDER',
+			accessor: (item) => (
 				<ServiceProvider
 					item={item}
 					bucketOptions={bucketOptions}
@@ -43,41 +44,40 @@ const getSubBucketColumns = ({
 			),
 		},
 		{
-			id       : 'Allocated',
-			Header   : 'Allocated',
-			accessor : (item) => (
+			id: 'Allocated',
+			Header: 'Allocated',
+			accessor: (item) => (
 				<Promised item={item} control={control} unregister={unregister} />
 			),
 		},
 		{
-			id     : 'capability',
-			Header : (
-				<div>CAPABILITY</div>
-			),
+			id: 'capability',
+			Header: <div>CAPABILITY</div>,
 			accessor: (item) => item.capability,
 		},
 		{
-			id     : 'past_allocated',
-			Header : (
+			id: 'past_allocated',
+			Header: (
 				<>
 					<div>Past Allocated</div>
 					<div>(last 4 weeks)</div>
-				</>),
+				</>
+			),
 			accessor: ({ past_allocation = '' }) => `${past_allocation} TEU`,
 		},
 		{
 			id: 'fulfilled',
-			Header:
-				(
-					<>
-						<div>FULLFILLED</div>
-						<div>(last 4 weeks)</div>
-					</>),
+			Header: (
+				<>
+					<div>FULLFILLED</div>
+					<div>(last 4 weeks)</div>
+				</>
+			),
 			accessor: ({ allocated_containers = 0 }) => `${allocated_containers} TEU`,
 		},
 		{
-			id     : 'avg_deviation',
-			Header : (
+			id: 'avg_deviation',
+			Header: (
 				<>
 					<div>AVG DEVAITION</div>
 					<div>FROM BEST RATE</div>
@@ -85,24 +85,15 @@ const getSubBucketColumns = ({
 			),
 			accessor: ({ avg_deviation_from_best_rate, rolling_shipments }) => (
 				<>
-					<div>
-						{avg_deviation_from_best_rate}
-						{' '}
-						%
-					</div>
+					<div>{avg_deviation_from_best_rate} %</div>
 
-					<div>
-						(
-						{rolling_shipments}
-						{' '}
-						rolling shipments)
-					</div>
+					<div>({rolling_shipments} rolling shipments)</div>
 				</>
 			),
 		},
 		{
-			id     : 'avg_rank',
-			Header : (
+			id: 'avg_rank',
+			Header: (
 				<>
 					<div>Avg Rate rank</div>
 					<div> (Cogoport Profitability)</div>
@@ -115,9 +106,7 @@ const getSubBucketColumns = ({
 					</div>
 
 					<div>
-						(Profitability
-						{' '}
-						{profitability}
+						(Profitability {profitability}
 						%)
 					</div>
 				</>

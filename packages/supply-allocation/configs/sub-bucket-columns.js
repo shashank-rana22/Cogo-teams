@@ -2,19 +2,19 @@ import { IcMOverflowDot, IcMEdit } from '@cogoport/icons-react';
 
 export const columns = [
 	{
-		id       : 'actions',
-		Header   : '',
-		accessor : () => <IcMOverflowDot />,
+		id: 'actions',
+		Header: '',
+		accessor: () => <IcMOverflowDot />,
 	},
 	{
-		id       : 'service_provider',
-		Header   : 'Service Provider',
-		accessor : (item) => item.service_provider,
+		id: 'service_provider',
+		Header: 'Service Provider',
+		accessor: (item) => item.service_provider,
 	},
 	{
-		id       : 'promised',
-		Header   : 'Promised',
-		accessor : (item) => (
+		id: 'promised',
+		Header: 'Promised',
+		accessor: (item) => (
 			<>
 				{item.promised}
 				<IcMEdit />
@@ -22,8 +22,8 @@ export const columns = [
 		),
 	},
 	{
-		id     : 'capability',
-		Header : (
+		id: 'capability',
+		Header: (
 			<>
 				<div>Capability</div>
 				<div>(ON BEST RATE)</div>
@@ -32,18 +32,18 @@ export const columns = [
 		accessor: (item) => item.capability,
 	},
 	{
-		id       : 'allocated',
-		Header   : 'Allocated',
-		accessor : (item) => item.allocated,
+		id: 'allocated',
+		Header: 'Allocated',
+		accessor: (item) => item.allocated,
 	},
 	{
-		id       : 'fulfilled',
-		Header   : 'Fulfilled',
-		accessor : (item) => item.fulfilled,
+		id: 'fulfilled',
+		Header: 'Fulfilled',
+		accessor: (item) => item.fulfilled,
 	},
 	{
-		id     : 'avg_deviation',
-		Header : (
+		id: 'avg_deviation',
+		Header: (
 			<>
 				<div>Avg Deviation</div>
 				<div>from best rate</div>
@@ -52,8 +52,8 @@ export const columns = [
 		accessor: (item) => item.avg_deviation,
 	},
 	{
-		id     : 'avg_rank',
-		Header : (
+		id: 'avg_rank',
+		Header: (
 			<>
 				<div>Avg Rate rank</div>
 				<div> (Cogoport Profitability)</div>

@@ -1,16 +1,23 @@
-import { IcMPort, IcMLocation, IcMAirport, IcAWarehouse, IcMWater, IcMHaulage } from '@cogoport/icons-react';
+import {
+	IcMPort,
+	IcMLocation,
+	IcMAirport,
+	IcAWarehouse,
+	IcMWater,
+	IcMHaulage,
+} from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 const ICON_MAPPING = {
-	seaport          : <IcMPort />,
-	airport          : <IcMAirport />,
-	country          : <IcMLocation />,
-	city             : <IcMLocation />,
-	warehouse        : <IcAWarehouse />,
-	pincode          : <IcMLocation />,
-	riverport        : <IcMWater />,
-	railway_terminal : <IcMHaulage />,
+	seaport: <IcMPort />,
+	airport: <IcMAirport />,
+	country: <IcMLocation />,
+	city: <IcMLocation />,
+	warehouse: <IcAWarehouse />,
+	pincode: <IcMLocation />,
+	riverport: <IcMWater />,
+	railway_terminal: <IcMHaulage />,
 };
 
 function RenderListLocationOptions({ data = {} }) {
@@ -30,7 +37,9 @@ function RenderListLocationOptions({ data = {} }) {
 				</div>
 			</div>
 
-			<div className={styles.code}>{type === 'pincode' ? postal_code : site_code}</div>
+			<div className={styles.code}>
+				{type === 'pincode' ? postal_code : site_code}
+			</div>
 		</div>
 	);
 }

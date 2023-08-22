@@ -9,10 +9,11 @@ import styles from './styles.module.css';
 
 function MoveSupplierModal({
 	showMoveSupplierModal = false,
-	setShowMoveSupplierModal = () => { },
+	setShowMoveSupplierModal = () => {},
 	item = {},
 	bucketOptions = [],
-	bucket_type = '', current_allocated_containers = '',
+	bucket_type = '',
+	current_allocated_containers = '',
 	rollingFclFreightSearchId = '',
 }) {
 	const { control, handleSubmit } = useForm({});
@@ -20,7 +21,8 @@ function MoveSupplierModal({
 	const { service_provider = {} } = item || {};
 	const { id: service_provider_id, short_name = '' } = service_provider || {};
 
-	const { updateFclFreightAllocation, loading } = useUpdateFclFreightAllocation();
+	const { updateFclFreightAllocation, loading } =
+		useUpdateFclFreightAllocation();
 	const onClickSubmit = (values) => {
 		const payload = {
 			service_provider_id,
@@ -45,15 +47,13 @@ function MoveSupplierModal({
 					<div>
 						<div>
 							Current Bucket :
-							<div style={{ height: '32px' }}>
-								{startCase(bucket_type)}
-							</div>
+							<div style={{ height: '32px' }}>{startCase(bucket_type)}</div>
 						</div>
 
 						<div>
 							Current Promised:
 							<div style={{ height: '32px' }}>
-								{ current_allocated_containers}
+								{current_allocated_containers}
 							</div>
 						</div>
 					</div>
@@ -85,7 +85,6 @@ function MoveSupplierModal({
 							placeholder="Type Here"
 						/>
 					</div>
-
 				</div>
 			</Modal.Body>
 

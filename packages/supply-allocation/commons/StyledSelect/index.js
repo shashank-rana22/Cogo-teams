@@ -7,18 +7,21 @@ import styles from './styles.module.css';
 
 const ICON_MAPPING = {
 	sm: {
-		height : '12px',
-		width  : '12px',
+		height: '12px',
+		width: '12px',
 	},
 	lg: {
-		height : '18px',
-		width  : '18px',
+		height: '18px',
+		width: '18px',
 	},
 };
 
 function StyledSelect({
-	defaultValue = '', onChange = () => { }, options = {}, disabled = false, size = 'sm',
-
+	defaultValue = '',
+	onChange = () => {},
+	options = {},
+	disabled = false,
+	size = 'sm',
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 
@@ -26,13 +29,13 @@ function StyledSelect({
 		<Popover
 			visible={showPopover}
 			placement="bottom"
-			content={(
+			content={
 				<StyledOptions
 					setShowPopover={setShowPopover}
 					onChange={onChange}
 					options={options}
 				/>
-			)}
+			}
 			className={styles.popover}
 			onClickOutside={() => setShowPopover(false)}
 			interactive
@@ -44,16 +47,20 @@ function StyledSelect({
 					setShowPopover(!showPopover);
 				}}
 			>
-				<div className={cl`${styles.styled_text}
+				<div
+					className={cl`${styles.styled_text}
 				 ${styles[size]} ${disabled && styles.disabled}`}
 				>
 					{options[defaultValue]}
-
 				</div>
 
 				{!disabled ? (
 					<IcMArrowDown
-						style={{ margin: '2px 0px 0px 4px', cursor: 'pointer', ...ICON_MAPPING[size] }}
+						style={{
+							margin: '2px 0px 0px 4px',
+							cursor: 'pointer',
+							...ICON_MAPPING[size],
+						}}
 					/>
 				) : null}
 			</div>

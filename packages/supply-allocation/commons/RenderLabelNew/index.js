@@ -1,18 +1,25 @@
-import { IcMPort, IcMLocation, IcMAirport, IcAWarehouse, IcMWater, IcMHaulage } from '@cogoport/icons-react';
+import {
+	IcMPort,
+	IcMLocation,
+	IcMAirport,
+	IcAWarehouse,
+	IcMWater,
+	IcMHaulage,
+} from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 const ICON_MAPPING = {
-	seaport          : <IcMPort />,
-	airport          : <IcMAirport />,
-	country          : <IcMLocation />,
-	city             : <IcMLocation />,
-	warehouse        : <IcAWarehouse />,
-	pincode          : <IcMLocation />,
-	riverport        : <IcMWater />,
-	railway_terminal : <IcMHaulage />,
+	seaport: <IcMPort />,
+	airport: <IcMAirport />,
+	country: <IcMLocation />,
+	city: <IcMLocation />,
+	warehouse: <IcAWarehouse />,
+	pincode: <IcMLocation />,
+	riverport: <IcMWater />,
+	railway_terminal: <IcMHaulage />,
 };
 
 const formatSubLocation = (display_name) => {
@@ -22,7 +29,13 @@ const formatSubLocation = (display_name) => {
 };
 
 function LocationOption({ data = {} }) {
-	const { port_code, postal_code, name:locationName, type, display_name } = data;
+	const {
+		port_code,
+		postal_code,
+		name: locationName,
+		type,
+		display_name,
+	} = data;
 
 	const locationCode = port_code || postal_code;
 
@@ -36,16 +49,11 @@ function LocationOption({ data = {} }) {
 
 			<div className={styles.main}>
 				<div className={styles.SpaceBetween}>
-					<p className={styles.location_name}>
-						{locationName}
-					</p>
+					<p className={styles.location_name}>{locationName}</p>
 
 					{locationCode && (
-						<p className={styles.location_code}>
-							{locationCode}
-						</p>
+						<p className={styles.location_code}>{locationCode}</p>
 					)}
-
 				</div>
 
 				<div className={styles.space_between}>

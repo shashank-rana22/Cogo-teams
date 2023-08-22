@@ -2,11 +2,13 @@ import React from 'react';
 
 function WaveLoadingAnimation({ dotLength = 6 }) {
 	const animationDelay = (index) => {
-		const a = (-0.4) + (index - 1) * 0.2;
+		const a = -0.4 + (index - 1) * 0.2;
 		return `${a}s`;
 	};
 
-	const finalAnimationTime = `blink ${dotLength * 0.2 + 0.1}s infinite, shrink ${dotLength * 0.2 + 0.1}s infinite`;
+	const finalAnimationTime = `blink ${
+		dotLength * 0.2 + 0.1
+	}s infinite, shrink ${dotLength * 0.2 + 0.1}s infinite`;
 
 	const styles = `
     html, body {
@@ -38,13 +40,15 @@ function WaveLoadingAnimation({ dotLength = 6 }) {
     }
 
     ${Array.from({ length: dotLength })
-		.map((_, index) => `
+			.map(
+				(_, index) => `
         #wave .dot:nth-child(${index + 1}) {
             animation-delay: ${animationDelay(index)};
             background-color: #ee3425;
         }
-        `)
-		.join('\n')}
+        `,
+			)
+			.join('\n')}
       
     @keyframes blink {
         0%, 50%, 100% {

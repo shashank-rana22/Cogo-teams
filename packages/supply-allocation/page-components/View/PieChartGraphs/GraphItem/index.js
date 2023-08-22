@@ -10,60 +10,65 @@ import {
 } from '../../../../configs/pie-chart-colors-mapping';
 
 const COLORS_MAPPING = {
-	container_type_forecasts : CONTAINER_TYPE_DISTRIBUTION_COLORS,
-	weekly_forecasts         : WEEKY_DISTRIBUTION_COLORS,
-	persona_forecasts        : PERSONA_DISTRIBUTION_COLORS,
+	container_type_forecasts: CONTAINER_TYPE_DISTRIBUTION_COLORS,
+	weekly_forecasts: WEEKY_DISTRIBUTION_COLORS,
+	persona_forecasts: PERSONA_DISTRIBUTION_COLORS,
 };
 
 const HEADINGS_MAPPING = {
-	container_type_forecasts : 'Container Type Distribution',
-	weekly_forecasts         : 'Weekly Distribution',
-	persona_forecasts        : 'Persona Distribution',
+	container_type_forecasts: 'Container Type Distribution',
+	weekly_forecasts: 'Weekly Distribution',
+	persona_forecasts: 'Persona Distribution',
 };
 
 const generateData = (data, type) => {
 	const isWeeklyForecast = type === 'weekly_forecasts';
 
-	return Object.entries(data || {}).reduce((accumulator, [key, value], index) => {
-		const { graphData, count, legendsData } = accumulator;
-		let label;
-		let color;
+	return Object.entries(data || {}).reduce(
+		(accumulator, [key, value], index) => {
+			const { graphData, count, legendsData } = accumulator;
+			let label;
+			let color;
 
-		if (isWeeklyForecast) {
-			const dateRange = JSON.parse(key);
-			const [startDate, endDate] = dateRange.map((date) => formatDate({
-				date       : date.split(' ')[GLOBAL_CONSTANTS.zeroth_index],
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
-				formatType : 'date',
-			}));
+			if (isWeeklyForecast) {
+				const dateRange = JSON.parse(key);
+				const [startDate, endDate] = dateRange.map((date) =>
+					formatDate({
+						date: date.split(' ')[GLOBAL_CONSTANTS.zeroth_index],
+						dateFormat: GLOBAL_CONSTANTS.formats.date['dd MMM'],
+						formatType: 'date',
+					}),
+				);
 
-			label = `${startDate} to ${endDate} : ${value}`;
-			color = WEEKY_DISTRIBUTION_COLORS[index];
-		} else {
-			label = `${startCase(key)} ${value}`;
-			color = COLORS_MAPPING?.[type]?.[key];
-		}
+				label = `${startDate} to ${endDate} : ${value}`;
+				color = WEEKY_DISTRIBUTION_COLORS[index];
+			} else {
+				label = `${startCase(key)} ${value}`;
+				color = COLORS_MAPPING?.[type]?.[key];
+			}
 
-		return {
-			graphData: [
-				...graphData,
-				{
-					id: key,
-					label,
-					value,
-					color,
-				},
-			],
-			legendsData: [
-				...legendsData,
-				{
-					color,
-					label,
-				},
-			],
-			count: count + value,
-		};
-	}, { graphData: [], count: 0, legendsData: [] });
+			return {
+				graphData: [
+					...graphData,
+					{
+						id: key,
+						label,
+						value,
+						color,
+					},
+				],
+				legendsData: [
+					...legendsData,
+					{
+						color,
+						label,
+					},
+				],
+				count: count + value,
+			};
+		},
+		{ graphData: [], count: 0, legendsData: [] },
+	);
 };
 
 function GraphItem({ data = {}, type = '' }) {

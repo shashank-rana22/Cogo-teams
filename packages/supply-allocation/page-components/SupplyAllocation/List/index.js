@@ -1,5 +1,11 @@
 import { Button, Pagination, Tooltip } from '@cogoport/components';
-import { IcCBookmark, IcMArrowRight, IcMBookmark, IcMInfo, IcMPortArrow } from '@cogoport/icons-react';
+import {
+	IcCBookmark,
+	IcMArrowRight,
+	IcMBookmark,
+	IcMInfo,
+	IcMPortArrow,
+} from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
 import StyledTable from '../../../commons/StyledTable';
@@ -17,105 +23,96 @@ function List({
 	const { list = [], page_limit = 10, total_count = 0 } = data || {};
 
 	const router = useRouter();
-	const { updateRollingFclFreightSearch } = useUpdateRollingFclFreightSearch({ refetchListFclSearches });
+	const { updateRollingFclFreightSearch } = useUpdateRollingFclFreightSearch({
+		refetchListFclSearches,
+	});
 
 	const columns = [
 		{
-			id       : 'origin',
-			Header   : 'ORIGIN',
-			accessor : ({ origin_location }) => (
+			id: 'origin',
+			Header: 'ORIGIN',
+			accessor: ({ origin_location }) => (
 				<div className={styles.origin_container}>
 					<Tooltip
-						content={(
-							<div
-								style={{ wordBreak: 'break-word' }}
-							>
+						content={
+							<div style={{ wordBreak: 'break-word' }}>
 								Reallocation required due to a change in forecasted demand
 							</div>
-						)}
+						}
 						placement="right"
 					>
 						<div className={styles.relative_container}>
-							Attention Required!
-							{' '}
+							Attention Required!{' '}
 							<IcMInfo height={8} width={8} style={{ marginLeft: '2px' }} />
 						</div>
 					</Tooltip>
 
-					<Tooltip
-						content={origin_location.display_name}
-						placement="right"
-					>
-						<div style={{
-							overflow     : 'hidden',
-							textOverflow : 'ellipsis',
-							maxWidth     : '180px',
-							whiteSpace   : 'nowrap',
-						}}
+					<Tooltip content={origin_location.display_name} placement="right">
+						<div
+							style={{
+								overflow: 'hidden',
+								textOverflow: 'ellipsis',
+								maxWidth: '180px',
+								whiteSpace: 'nowrap',
+							}}
 						>
 							{origin_location.display_name}
-
 						</div>
 					</Tooltip>
-
 				</div>
 			),
 		},
 		{
-			id       : 'icon',
-			Header   : <IcMPortArrow width={20} height={20} />,
-			accessor : () => <IcMPortArrow width={20} height={20} />,
+			id: 'icon',
+			Header: <IcMPortArrow width={20} height={20} />,
+			accessor: () => <IcMPortArrow width={20} height={20} />,
 		},
 		{
-			id       : 'destination',
-			Header   : 'DESTINATION',
-			accessor : ({ destination_location }) => (
-				<Tooltip
-					content={destination_location?.display_name}
-					placement="right"
-				>
-					<div style={{
-						overflow     : 'hidden',
-						textOverflow : 'ellipsis',
-						maxWidth     : '180px',
-						whiteSpace   : 'nowrap',
-					}}
+			id: 'destination',
+			Header: 'DESTINATION',
+			accessor: ({ destination_location }) => (
+				<Tooltip content={destination_location?.display_name} placement="right">
+					<div
+						style={{
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+							maxWidth: '180px',
+							whiteSpace: 'nowrap',
+						}}
 					>
 						{destination_location?.display_name}
-
 					</div>
 				</Tooltip>
-
 			),
 		},
 		{
-			id       : 'avg_profitability',
-			Header   : 'AVG PROFITABILITY',
-			accessor : (item) => item?.profitability,
+			id: 'avg_profitability',
+
+			Header: 'AVG PROFITABILITY',
+			accessor: (item) => item?.profitability,
 		},
 		{
-			id     : 'percent_fulfillment',
-			Header : (
+			id: 'percent_fulfillment',
+			Header: (
 				<div>
 					% FULFILLMENT
 					<div style={{ fontSize: '10px', fontWeight: '400' }}>
 						{' '}
-						(ON BEST RATE)
-						{' '}
+						(ON BEST RATE){' '}
 					</div>
 				</div>
 			),
 			accessor: (item) => item?.fulfillment,
 		},
 		{
-			id       : 'forecasted_volume',
-			Header   : 'FORECASTED VOLUME',
-			accessor : (item) => item?.forecasted_volume,
+			id: 'forecasted_volume',
+			Header: 'FORECASTED VOLUME',
+			accessor: (item) => item?.forecasted_volume,
 		},
 		{
-			id       : 'bookmark',
-			Header   : '',
-			accessor : (item) => {
+			id: 'bookmark',
+			Header: '',
+			accessor: (item) => {
 				const { is_bookmarked = false } = item;
 				return (
 					<span
@@ -124,8 +121,8 @@ function List({
 						onClick={() => {
 							updateRollingFclFreightSearch({
 								payload: {
-									id            : item.id,
-									is_bookmarked : !is_bookmarked,
+									id: item.id,
+									is_bookmarked: !is_bookmarked,
 								},
 							});
 						}}
@@ -136,9 +133,9 @@ function List({
 			},
 		},
 		{
-			id       : 'actions',
-			Header   : '',
-			accessor : (item) => (
+			id: 'actions',
+			Header: '',
+			accessor: (item) => (
 				<Button
 					themeType="secondary"
 					onClick={() => {

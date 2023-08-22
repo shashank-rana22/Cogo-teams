@@ -9,35 +9,35 @@ import StyledSelect from '../../../commons/StyledSelect';
 import styles from './styles.module.css';
 
 const OBJECT_OPTIONS = {
-	all                : 'All Regions',
-	is_bookmarked      : 'BookMarked',
-	attention_required : 'Attention Required',
+	all: 'All Regions',
+	is_bookmarked: 'BookMarked',
+	attention_required: 'Attention Required',
 };
 
 const DEFAULT_PAGE = 1;
 
 const commonLocationProps = {
-	asyncKey : 'list_locations',
-	params   : {
+	asyncKey: 'list_locations',
+	params: {
 		filters: {
 			type: ['seaport', 'country', 'continent'],
 		},
-		page_limit : 10,
-		sort_by    : 'name',
-		sort_type  : 'asc',
-		includes   : { default_params_required: true },
+		page_limit: 10,
+		sort_by: 'name',
+		sort_type: 'asc',
+		includes: { default_params_required: true },
 	},
-	labelKey    : 'display_name',
-	renderLabel : (item) => <RenderLabelNew data={item} />,
-	initialCall : true,
-	placeholder : 'Search via port name/code...',
+	labelKey: 'display_name',
+	renderLabel: (item) => <RenderLabelNew data={item} />,
+	initialCall: true,
+	placeholder: 'Search via port name/code...',
 };
 
 function LocationSelect({
 	control = {},
-	createSupplySearch = () => { },
+	createSupplySearch = () => {},
 	locationDetails = {},
-	setLocationDetails = () => { },
+	setLocationDetails = () => {},
 	setFilters = () => {},
 	setPagination = () => {},
 }) {
@@ -50,7 +50,6 @@ function LocationSelect({
 
 	return (
 		<div className={styles.location_container}>
-
 			<div className={styles.select_controller}>
 				<div className={styles.location_label}>Origin </div>
 				<AsyncSelectController
@@ -62,8 +61,8 @@ function LocationSelect({
 					onChange={(id, item) => {
 						setLocationDetails((prev) => ({
 							...prev,
-							origin_location_id   : id,
-							origin_location_type : item?.type,
+							origin_location_id: id,
+							origin_location_type: item?.type,
 						}));
 
 						setFilters((prev) => ({
@@ -73,7 +72,6 @@ function LocationSelect({
 
 						setPagination(DEFAULT_PAGE);
 					}}
-
 				/>
 			</div>
 
@@ -92,8 +90,8 @@ function LocationSelect({
 					onChange={(id, item) => {
 						setLocationDetails((prev) => ({
 							...prev,
-							destination_location_id   : id,
-							destination_location_type : item?.type,
+							destination_location_id: id,
+							destination_location_type: item?.type,
 						}));
 						setFilters((prev) => ({
 							...prev,
@@ -104,16 +102,32 @@ function LocationSelect({
 				/>
 			</div>
 
-			<div style={{ width: 150, display: 'flex', alignItems: 'flex-end', marginTop: '36px' }}>
+			<div
+				style={{
+					width: 150,
+					display: 'flex',
+					alignItems: 'flex-end',
+					marginTop: '36px',
+				}}
+			>
 				<StyledSelect
 					defaultValue={region}
 					onChange={({ selectedValue }) => {
 						setRegion(selectedValue);
 						setFilters((prev) => {
 							const filterValues = {
-								is_bookmarked      : { is_bookmarked: true, is_attention_required: undefined },
-								attention_required : { is_bookmarked: undefined, is_attention_required: true },
-								all                : { is_bookmarked: undefined, is_attention_required: undefined },
+								is_bookmarked: {
+									is_bookmarked: true,
+									is_attention_required: undefined,
+								},
+								attention_required: {
+									is_bookmarked: undefined,
+									is_attention_required: true,
+								},
+								all: {
+									is_bookmarked: undefined,
+									is_attention_required: undefined,
+								},
 							};
 
 							return {
@@ -128,9 +142,10 @@ function LocationSelect({
 			</div>
 
 			<div className={styles.port_arrow_icon}>
-				<Button onClick={() => onClickAllocate()} themeType="accent">+ Allocation</Button>
+				<Button onClick={() => onClickAllocate()} themeType="accent">
+					+ Allocation
+				</Button>
 			</div>
-
 		</div>
 	);
 }

@@ -22,29 +22,34 @@ function View() {
 	const { list = [] } = data || {};
 	const [firstSearch = {}] = list || [];
 
-	const {
-		origin_location_id = '',
-		destination_location_id = '',
-	} = firstSearch || {};
+	const { origin_location_id = '', destination_location_id = '' } =
+		firstSearch || {};
 
 	const { data: rollingForecastData = {} } = useGetRollingForecastData({
-		origin_location_id, destination_location_id,
+		origin_location_id,
+		destination_location_id,
 	});
 
-	const { data:bucketData } = useGetRollingForecastBucketsData({ supply_fcl_freight_search_id: search_id });
+	const { data: bucketData } = useGetRollingForecastBucketsData({
+		supply_fcl_freight_search_id: search_id,
+	});
 
 	const bucketsArray = bucketData?.map((bucket) => bucket.bucket_type);
 
 	return (
 		<Fragment key={search_id}>
-			<Header
-				firstSearch={firstSearch}
-				loading={loading}
+			<Header firstSearch={firstSearch} loading={loading} />
+
+			<PieChartGraphs
+				rollingForecastData={rollingForecastData}
+				listApiLoading={loading}
 			/>
 
-			<PieChartGraphs rollingForecastData={rollingForecastData} listApiLoading={loading} />
-
-			<List bucketData={bucketData} search_id={search_id} bucketsArray={bucketsArray} />
+			<List
+				bucketData={bucketData}
+				search_id={search_id}
+				bucketsArray={bucketsArray}
+			/>
 		</Fragment>
 	);
 }

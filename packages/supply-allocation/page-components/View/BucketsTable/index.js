@@ -7,14 +7,17 @@ import getSubBucketColumns from '../SubBucketColumns';
 import styles from './styles.module.css';
 
 function BucketTable({
-	id = '', bucket_type = '', control = {}, unregister = () => { },
+	id = '',
+	bucket_type = '',
+	control = {},
+	unregister = () => {},
 	bucketsArray = [],
 	current_allocated_containers = 0,
 }) {
-	const {
-		data,
-		loading,
-	} = useGetRollingForecastBucketData({ id, bucket_type });
+	const { data, loading } = useGetRollingForecastBucketData({
+		id,
+		bucket_type,
+	});
 
 	const bucketOptions = bucketsArray.reduce((acc, bucket) => {
 		if (bucket === bucket_type) return acc;
@@ -32,7 +35,12 @@ function BucketTable({
 
 	return (
 		<div className={styles.container}>
-			<StyledTable key={bucket_type} loading={loading} columns={subBucketColumns} data={data || []} />
+			<StyledTable
+				key={bucket_type}
+				loading={loading}
+				columns={subBucketColumns}
+				data={data || []}
+			/>
 		</div>
 	);
 }

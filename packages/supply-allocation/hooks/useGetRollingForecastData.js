@@ -1,11 +1,14 @@
 import { useRequest } from '@cogoport/request';
 
 const useGetRollingForecastData = (props) => {
-	const [{ data, loading }, trigger] = useRequest({
-		url    : '/get_rolling_forecast_fcl_freight_data',
-		method : 'GET',
-		params : props,
-	}, { manual: false });
+	const [{ data, loading }, trigger] = useRequest(
+		{
+			url: '/get_rolling_forecast_fcl_freight_data',
+			method: 'GET',
+			params: props,
+		},
+		{ manual: false },
+	);
 
 	const getRollingForecastData = async ({ payload }) => {
 		try {
