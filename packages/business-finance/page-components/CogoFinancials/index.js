@@ -103,8 +103,8 @@ function CogoFinancials() {
 							onClick={handleTourClick}
 							className={styles.tour_btn}
 						>
+							<IcMPlatformDemo height={14} width={14} style={{ marginRight: '8px' }} />
 							Start Tour
-							<IcMPlatformDemo height={14} width={14} style={{ marginLeft: '8px' }} />
 						</Button>
 						<Toggle
 							name="taxType"

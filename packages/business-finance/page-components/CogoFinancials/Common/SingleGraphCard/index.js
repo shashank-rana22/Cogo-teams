@@ -135,7 +135,6 @@ function SingleGraphCard({
 							onClick={onViewDetails}
 						>
 							View Details
-
 						</Button>
 					)}
 				</div>
