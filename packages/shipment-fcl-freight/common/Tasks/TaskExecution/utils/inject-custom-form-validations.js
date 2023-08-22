@@ -4,9 +4,20 @@ const validateFileField = (value, control) => {
 	if (typeof value === 'string' && !isEmpty(value)) {
 		return true;
 	}
-	if (isEmpty(value?.finalUrl)) {
+	if (Array.isArray(value)) {
+		let isValid = true;
+		value.forEach((item) => {
+			if (isEmpty(item?.finalUrl)) {
+				isValid = false;
+			}
+		});
+		if (!isValid) {
+			return control.rules?.required?.message || control.rules?.required || 'This field is required';
+		}
+	} else if (isEmpty(value?.finalUrl)) {
 		return control.rules?.required?.message || control.rules?.required || 'This field is required';
 	}
+
 	return true;
 };
 
