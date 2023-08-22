@@ -1,11 +1,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 
-const controls = [
+const controls = ({ type = '' }) => [
 	{
-		label       : 'Cancel Reason',
+		label       : `${startCase(type)} Reason`,
 		name        : 'cancelReason',
 		type        : 'textarea',
-		placeholder : 'Enter Your Cancellation Reason Here',
+		placeholder : `Enter Your ${startCase(type)} Reason Here`,
 		span        : 12,
 		theme       : 'admin',
 		className   : 'primary md',
@@ -13,7 +14,7 @@ const controls = [
 	},
 	{
 		name       : 'documentUrls',
-		label      : 'Cancel Agreement file',
+		label      : `${startCase(type)} Agreement file`,
 		type       : 'file',
 		drag       : 'true',
 		span       : 12,

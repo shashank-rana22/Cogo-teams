@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const formatDataForDocuments = (rawValues, taskData) => {
 	let modifiedRawValues = {};
 
@@ -8,7 +10,7 @@ const formatDataForDocuments = (rawValues, taskData) => {
 
 		Object.keys(rawValues).forEach((key) => {
 			if (key?.includes('documents')) {
-				modifiedRawValues.documents.push(rawValues[key]?.[0]);
+				modifiedRawValues.documents.push(rawValues[key]?.[GLOBAL_CONSTANTS.zeroth_index]);
 			} else {
 				modifiedRawValues[key] = rawValues[key];
 			}
@@ -19,26 +21,28 @@ const formatDataForDocuments = (rawValues, taskData) => {
 
 	const finalObj = (modifiedRawValues?.documents || []).map(
 		(documentObj, index) => {
-			const formatObj = {};
+			const FORMAT_OBJ = {};
 
-			formatObj.document_type = modifiedRawValues?.document_types?.[index]
+			FORMAT_OBJ.document_type = modifiedRawValues?.document_types?.[index]
 				|| taskData?.document_type
 				|| 'authority_letter_custom';
 
-			formatObj.document_url = documentObj?.url?.finalUrl || documentObj?.url;
+			FORMAT_OBJ.document_url = documentObj?.url?.finalUrl
+				|| documentObj?.url?.[GLOBAL_CONSTANTS.zeroth_index]?.finalUrl || documentObj?.url;
 
-			formatObj.file_name = documentObj?.url?.fileName;
+			FORMAT_OBJ.file_name = documentObj?.url?.fileName
+			|| documentObj?.url?.[GLOBAL_CONSTANTS.zeroth_index]?.fileName;
 
 			Object.keys(documentObj || {}).forEach((key) => {
-				if (!Object.keys(formatObj).includes(key)) {
-					formatObj.data = {
-						...(formatObj.data || {}),
+				if (!Object.keys(FORMAT_OBJ).includes(key)) {
+					FORMAT_OBJ.data = {
+						...(FORMAT_OBJ.data || {}),
 						[key]: key === 'url' ? documentObj?.[key]?.finalUrl : documentObj?.[key],
 					};
 				}
 			});
 
-			return formatObj;
+			return FORMAT_OBJ;
 		},
 	);
 

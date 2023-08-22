@@ -7,11 +7,12 @@ import { useContext, useEffect, useCallback } from 'react';
 const SHOW_ALL_TASKS = ['manager', 'admin'];
 
 const STAKEHOLDER_MAPPINGS = {
-	booking_desk  : 'service_ops',
-	lastmile_ops  : 'lastmile_ops',
-	document_desk : 'service_ops',
-	so1_so2_ops   : 'service_ops',
-	booking_agent : 'booking_agent',
+	booking_desk          : 'service_ops',
+	lastmile_ops          : 'lastmile_ops',
+	document_desk         : 'service_ops',
+	so1_so2_ops           : 'service_ops',
+	booking_agent         : 'booking_agent',
+	booking_agent_manager : 'booking_agent',
 };
 
 function useListTasks({

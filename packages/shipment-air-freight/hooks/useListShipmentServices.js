@@ -2,6 +2,8 @@ import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
+const MAX_PAGE_LIMIT = 50;
+
 export default function useListShipmentServices({ defaultParams = {}, defaultFilters = {}, initialCall = true }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url          : '/list_shipment_services',
@@ -12,6 +14,7 @@ export default function useListShipmentServices({ defaultParams = {}, defaultFil
 				...defaultFilters,
 			},
 			...defaultParams,
+			page_limit: MAX_PAGE_LIMIT,
 		},
 	}, { manual: true });
 

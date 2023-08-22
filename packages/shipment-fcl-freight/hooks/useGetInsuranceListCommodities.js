@@ -3,15 +3,15 @@ import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 const useGetInsuranceListCommodities = () => {
-	const [{ data }, trigger] = useRequestBf({
-		auth   : 'get_saas_insurance_list_commodities',
-		url    : 'saas/insurance/list-commodities',
-		method : 'GET',
+	const [{ loading, data }, trigger] = useRequestBf({
+		authKey : 'get_saas_insurance_list_commodities',
+		url     : 'saas/insurance/list-commodities',
+		method  : 'GET',
 	}, { manual: true });
 
 	const getListCommodities = useCallback(async () => {
 		try {
-			await trigger({});
+			await trigger();
 		} catch (err) {
 			toastApiError(err);
 		}
@@ -21,6 +21,11 @@ const useGetInsuranceListCommodities = () => {
 		getListCommodities();
 	}, [getListCommodities]);
 
-	return { list: data?.list || [] };
+	const list = data?.list?.map((item) => ({
+		...item,
+		commodity: `${item?.commodity}(${item?.subCommodity})`,
+	})) || [];
+
+	return { list, loadingCommodity: loading };
 };
 export default useGetInsuranceListCommodities;

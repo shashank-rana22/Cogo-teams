@@ -1,7 +1,5 @@
-import { Button, FileSelect } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
 
 import useInsuranceCheckoutAndGenerate from '../../../../../hooks/useInsuranceCheckoutAndGenerate';
 import useSaveDraft from '../../../../../hooks/useSaveDraft';
@@ -14,7 +12,7 @@ import getPayloadForUpdateShipment from './utils/getPayloadForUpdateShipment';
 
 const BACK_STEP = 2;
 
-function Step3({
+function StepThree({
 	setStep = () => {},
 	step,
 	policyId = '',
@@ -27,9 +25,8 @@ function Step3({
 	task = {},
 	addressId = '',
 	billingData = {},
+	premiumData = {},
 }) {
-	const [uploadProof, setUploadProof] = useState(null);
-
 	const {
 		handleSubmit = () => {},
 		control,
@@ -53,7 +50,6 @@ function Step3({
 
 	const { loading: policyGenerationLoading, generateInsurance } =	useInsuranceCheckoutAndGenerate({
 		policyId,
-		uploadProof,
 		insuranceDetails,
 		refetch: refetchAfterApiCall,
 		shipmentData,
@@ -64,15 +60,23 @@ function Step3({
 	const formData = watch();
 	const showLoading =	loading || sendCustomerEmailLoading || policyGenerationLoading;
 
-	const isDisableForCustomerConfirmation = () => (
-		showLoading
-			|| isEmpty(formData.invoiceNo)
-			|| !formData.invoiceDate
-			|| isEmpty(formData.gstDoc)
-			|| isEmpty(formData.invoiceDoc)
-			|| isEmpty(formData.panDoc)
-	);
-
+	const handleMail = () => {
+		const serviceChargeList = premiumData?.serviceChargeList || [];
+		const payload = {
+			cargo_value          : formData?.cargoAmount,
+			cargo_value_currency : formData?.policyCurrency,
+			net_convenience      : serviceChargeList.find(
+				(i) => i?.serviceName === 'convenience_charges',
+			)?.netCharges,
+			net_platform: serviceChargeList.find(
+				(i) => i?.serviceName === 'platform_charges',
+			)?.netCharges,
+			net_premium: serviceChargeList.find(
+				(i) => i?.serviceName === 'premium',
+			)?.netCharges,
+		};
+		sendCustomerEmail(payload);
+	};
 	const handleNextStep = ({ submit = false }) => {
 		handleSubmit((values) => {
 			const newFormValues = { ...insuranceDetails, ...values };
@@ -84,7 +88,9 @@ function Step3({
 				addressId,
 				billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
 			});
-			const payloadForUpdateShipment = getPayloadForUpdateShipment({ insuranceDetails, primary_service, task });
+			const payloadForUpdateShipment = getPayloadForUpdateShipment(
+				{ insuranceDetails, task, shipmentData },
+			);
 
 			if (submit) {
 				generateInsurance({ payload, payloadForUpdateShipment });
@@ -102,16 +108,6 @@ function Step3({
 				errors={errors}
 			/>
 
-			<div>
-				<div className={styles.title}>Customer Confirmation Proof</div>
-
-				<FileSelect
-					value={uploadProof}
-					onChange={setUploadProof}
-					label="Customer Confirmation Proof"
-				/>
-			</div>
-
 			<div className={styles.button_container}>
 				<Button
 					size="md"
@@ -124,8 +120,7 @@ function Step3({
 
 				<Button
 					size="md"
-					onClick={sendCustomerEmail}
-					disabled={isDisableForCustomerConfirmation()}
+					onClick={handleMail}
 					className={styles.btn_div}
 				>
 					Send email for Customer confirmation
@@ -143,7 +138,7 @@ function Step3({
 				<Button
 					size="md"
 					onClick={() => handleNextStep({ submit: true })}
-					disabled={showLoading || isEmpty(uploadProof)}
+					disabled={showLoading}
 					className={styles.btn_div}
 				>
 					Generate Policy
@@ -153,4 +148,4 @@ function Step3({
 	);
 }
 
-export default Step3;
+export default StepThree;
