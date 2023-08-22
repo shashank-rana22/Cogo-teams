@@ -1,78 +1,81 @@
+/* eslint-disable max-lines-per-function */
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 
-const useGetColumns = ({ columnsToShow = [] }) => {
+const SECOND_INDEX = 2;
+
+const useGetColumns = ({ columnsToShow = [], t }) => {
 	const columns = [
 		{
-			Header   : 'Shipment Record ID',
+			Header   : t('athenaDashboard:shipment_record_id'),
 			accessor : (item) => item?.shipment_record_id || '--',
 			key      : 'shipment_record_id',
 		},
 		{
-			Header   : 'Importer Lead ID',
+			Header   : t('athenaDashboard:importer_lead_id'),
 			accessor : (item) => item?.importer_lead_id || '--',
 			key      : 'importer_lead_id',
 		},
 		{
-			Header   : 'Exporter Lead ID',
+			Header   : t('athenaDashboard:exporter_lead_id'),
 			accessor : (item) => item?.exporter_lead_id || '--',
 			key      : 'exporter_lead_id',
 		},
 		{
-			Header   : 'Shipment Mode',
+			Header   : t('athenaDashboard:shipment_mode'),
 			accessor : (item) => item?.shipment_mode || '--',
 			key      : 'shipment_mode',
 		},
 		{
-			Header   : 'Incoterm',
+			Header   : t('athenaDashboard:incoterm'),
 			accessor : (item) => item?.incoterm || '--',
 			key      : 'incoterm',
 		},
 		{
-			Header   : 'Origin Port',
+			Header   : t('athenaDashboard:origin_port'),
 			accessor : (item) => item?.origin_port || '--',
 			key      : 'origin_port',
 		},
 		{
-			Header   : 'Origin Country',
+			Header   : t('athenaDashboard:origin_country'),
 			accessor : (item) => item?.origin_country || '--',
 			key      : 'origin_country',
 		},
 		{
-			Header   : 'Destination Port',
+			Header   : t('athenaDashboard:destination_port'),
 			accessor : (item) => item?.destination_port || '--',
 			key      : 'destination_port',
 		},
 		{
-			Header   : 'Destination Country',
+			Header   : t('athenaDashboard:destination_country'),
 			accessor : (item) => item?.destination_country || '--',
 			key      : 'destination_country',
 		},
 		{
-			Header   : 'Shipment Date',
+			Header   : t('athenaDashboard:shipment_date'),
 			accessor : (item) => item?.shipment_date || '--',
 			key      : 'shipment_date',
 		},
 		{
-			Header   : 'Shipment Value',
+			Header   : t('athenaDashboard:shipment_value'),
 			accessor : (item) => item?.shipment_value || '--',
 			key      : 'shipment_value',
 		},
 		{
-			Header   : 'Importer Lead Segment',
+			Header   : t('athenaDashboard:importer_lead_segment'),
 			accessor : (item) => item?.importer_lead_segment || '--',
 			key      : 'importer_lead_segment',
 		},
 		{
-			Header   : 'Exporter Lead Segment',
+			Header   : t('athenaDashboard:exporter_lead_segment'),
 			accessor : (item) => item?.exporter_lead_segment || '--',
 			key      : 'exporter_lead_segment',
 		},
 		{
-			Header   : 'HS Code',
+			Header   : t('athenaDashboard:hscodes'),
 			accessor : (item) => (
 				<div style={{ width: '200px' }}>
 					<Tooltip
@@ -90,27 +93,27 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			key: 'hscodes',
 		},
 		{
-			Header   : 'HS CODE',
+			Header   : t('athenaDashboard:hs_code'),
 			accessor : (item) => item?.hs_code || '--',
 			key      : 'hs_code',
 		},
 		{
-			Header   : 'Description',
+			Header   : t('athenaDashboard:description'),
 			accessor : (item) => item?.category || '--',
 			key      : 'description',
 		},
 		{
-			Header   : 'Country',
+			Header   : t('athenaDashboard:country'),
 			accessor : (item) => item?.country || '--',
 			key      : 'country',
 		},
 		{
-			Header   : 'Share',
-			accessor : (item) => `${item?.percent_share.toFixed(2)}%` || '--',
+			Header   : t('athenaDashboard:share'),
+			accessor : (item) => `${item?.percent_share.toFixed(SECOND_INDEX)}%` || '--',
 			key      : 'share',
 		},
 		{
-			Header   : 'Trend',
+			Header   : t('athenaDashboard:trend'),
 			accessor : (item) => (
 				<div style={{ height: '50px', width: '70px' }}>
 					<ResponsiveLine data={[
@@ -118,52 +121,52 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 							id   : item?.country || '--',
 							data : [
 								{
-									x : 'January',
-									y : item?.January || 0,
+									x : t('athenaDashboard:january'),
+									y : item?.January || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'February',
-									y : item?.February || 0,
+									x : t('athenaDashboard:february'),
+									y : item?.February || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'March',
-									y : item?.March || 0,
+									x : t('athenaDashboard:march'),
+									y : item?.March || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'April',
-									y : item?.April || 0,
+									x : t('athenaDashboard:april'),
+									y : item?.April || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'May',
-									y : item?.May || 0,
+									x : t('athenaDashboard:may'),
+									y : item?.May || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'June',
-									y : item?.June || 0,
+									x : t('athenaDashboard:june'),
+									y : item?.June || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'July',
-									y : item?.July || 0,
+									x : t('athenaDashboard:july'),
+									y : item?.July || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'August',
-									y : item?.August || 0,
+									x : t('athenaDashboard:august'),
+									y : item?.August || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'September',
-									y : item?.September || 0,
+									x : t('athenaDashboard:september'),
+									y : item?.September || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'October',
-									y : item?.October || 0,
+									x : t('athenaDashboard:october'),
+									y : item?.October || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'November',
-									y : item?.November || 0,
+									x : t('athenaDashboard:november'),
+									y : item?.November || GLOBAL_CONSTANTS.zeroth_index,
 								},
 								{
-									x : 'December',
-									y : item?.December || 0,
+									x : t('athenaDashboard:december'),
+									y : item?.December || GLOBAL_CONSTANTS.zeroth_index,
 								},
 
 							],
@@ -175,110 +178,110 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			key: 'trend',
 		},
 		{
-			Header   : 'Jan',
+			Header   : t('athenaDashboard:january_short_label'),
 			accessor : (item) => ((!isEmpty(item.January)) ? formatAmount({
 				amount   : item.January,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'jan',
 		},
 		{
-			Header   : 'Feb',
+			Header   : t('athenaDashboard:february_short_label'),
 			accessor : (item) => ((!isEmpty(item.February)) ? formatAmount({
 				amount   : item.February,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'feb',
 		},
 		{
-			Header   : 'Mar',
+			Header   : t('athenaDashboard:march_short_label'),
 			accessor : (item) => ((!isEmpty(item.March)) ? formatAmount({
 				amount   : item.March,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'mar',
 		},
 		{
-			Header   : 'Apr',
+			Header   : t('athenaDashboard:april_short_label'),
 			accessor : (item) => ((!isEmpty(item.April)) ? formatAmount({
 				amount   : item.April,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'apr',
 		},
 		{
-			Header   : 'May',
+			Header   : t('athenaDashboard:may_short_label'),
 			accessor : (item) => ((!isEmpty(item.May)) ? formatAmount({
 				amount   : item.May,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'may',
 		},
 		{
-			Header   : 'Jun',
+			Header   : t('athenaDashboard:june_short_label'),
 			accessor : (item) => ((!isEmpty(item.June)) ? formatAmount({
 				amount   : item.June,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'jun',
 		},
 		{
-			Header   : 'July',
+			Header   : t('athenaDashboard:july_short_label'),
 			accessor : (item) => ((!isEmpty(item.July)) ? formatAmount({
 				amount   : item.July,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'july',
 		},
 		{
-			Header   : 'Aug',
+			Header   : t('athenaDashboard:august_short_label'),
 			accessor : (item) => ((!isEmpty(item.August)) ? formatAmount({
 				amount   : item.August,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'aug',
 		},
 		{
-			Header   : 'Sept',
+			Header   : t('athenaDashboard:september_short_label'),
 			accessor : (item) => ((!isEmpty(item.September)) ? formatAmount({
 				amount   : item.September,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'sept',
 		},
 		{
-			Header   : 'Oct',
+			Header   : t('athenaDashboard:october_short_label'),
 			accessor : (item) => ((!isEmpty(item.October)) ? formatAmount({
 				amount   : item.October,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'oct',
 		},
 		{
-			Header   : 'Nov',
+			Header   : t('athenaDashboard:november_short_label'),
 			accessor : (item) => ((!isEmpty(item.November)) ? formatAmount({
 				amount   : item.November,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'nov',
 		},
 		{
-			Header   : 'Dec',
+			Header   : t('athenaDashboard:december_short_label'),
 			accessor : (item) => ((!isEmpty(item.December)) ? formatAmount({
 				amount   : item.December,
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
-			}) : 0),
+			}) : GLOBAL_CONSTANTS.zeroth_index),
 			key: 'dec',
 		},
 	];
 
-	const finalColumns = [];
+	const FINAL_COLUMNS = [];
 
 	columnsToShow.forEach((item) => {
 		const column = columns.find((col) => col.key === item);
-		finalColumns.push(column);
+		FINAL_COLUMNS.push(column);
 	});
 
-	return finalColumns;
+	return FINAL_COLUMNS;
 };
 export default useGetColumns;

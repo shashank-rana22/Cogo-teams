@@ -1,15 +1,24 @@
 import { DateRangepicker } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 
-import controls from '../../../../configurations/Shipment/sidebar-controls';
+import getControls from '../../../../configurations/Shipment/sidebar-controls';
 
 import styles from './styles.module.css';
 
-function Sidebar({ date, setDate, control }) {
+function Sidebar({
+	date,
+	setDate,
+	control,
+}) {
+	const { t } = useTranslation(['athenaDashboard']);
+
+	const controls = getControls({ t });
+
 	return (
 		<div className={styles.advanced_filter_container}>
 			<div className={styles.date_range_container}>
-				Date Range
+				{t('athenaDashboard:date_range')}
 
 				<div>
 					<DateRangepicker
@@ -21,7 +30,7 @@ function Sidebar({ date, setDate, control }) {
 				</div>
 			</div>
 
-			{controls.map((item) => {
+			{(controls || []).map((item) => {
 				const el = { ...item };
 				return (
 					<div key={el.name}>
