@@ -4,21 +4,25 @@ import { useState } from 'react';
 import Header from './Header';
 
 const RESOLVE_SHIPMENT = {
-	fcl  : dynamic(() => import('./Fcl'), { ssr: false }),
-	air  : dynamic(() => import('./Air'), { ssr: false }),
-	rail : dynamic(() => import('./Rail'), { ssr: false }),
+	ocean : dynamic(() => import('./Fcl'), { ssr: false }),
+	air   : dynamic(() => import('./Air'), { ssr: false }),
+	rail  : dynamic(() => import('./Rail'), { ssr: false }),
 };
 
 function DetentionDemurrage() {
-	const [activeShipment, setActiveShipment] = useState('fcl');
+	const [activeShipment, setActiveShipment] = useState('ocean');
 
-	const Shipment = RESOLVE_SHIPMENT[activeShipment];
+	const Shipment = RESOLVE_SHIPMENT[activeShipment] || null;
 
 	return (
 		<div>
-			<Header setActiveShipment={setActiveShipment} activeShipment={activeShipment} />
+			<Header
+				setActiveShipment={setActiveShipment}
+				activeShipment={activeShipment}
+			/>
+
 			<div>
-				<Shipment />
+				{Shipment ? <Shipment /> : null}
 			</div>
 		</div>
 	);

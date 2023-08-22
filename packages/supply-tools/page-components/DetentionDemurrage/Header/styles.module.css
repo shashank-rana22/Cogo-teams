@@ -1,0 +1,13 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.header {
+	font-size: 1.72em;
+	font-weight: 600;
+}
+
+.select_container {
+	width: 20%;
+}
